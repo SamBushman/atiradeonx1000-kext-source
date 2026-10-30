@@ -22,7 +22,7 @@ int _gldReclaimContext(ctx)
 {
   int status;
   
-  FUN_0002cc10(ctx);
+  gld_submitRingIfNeeded(ctx);
   status = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0x11,0,0,0,0);
   if (status != 0) {
     _free(ctx);
@@ -36,20 +36,20 @@ int _gldReclaimContext(ctx)
   return;
 }
 
-/* FUN_00007020 @ 0x7020 (164 bytes) */
-int FUN_00007020(ctx)
+/* gld_detachDrawable @ 0x7020 (164 bytes) */
+int gld_detachDrawable(ctx)
   int *ctx;
 {
-  char useCount;
-  undefined *library;
+  char connectionUseCount;
+  undefined *rendererLibrary;
   
   if ((ctx[GLD_attachedDrawable / 4] != 0) &&
-     (ctx[GLD_attachedDrawable / 4] = 0, library = PTR_DAT_001e88ac, (ctx[GLD_drawableFlags / 4] & 0x20U) == 0)) {
-    useCount = PTR_DAT_001e88ac[*ctx + 0x98];
-    PTR_DAT_001e88ac[*ctx + 0x98] = useCount + -1;
-    if ((char)(useCount + -1) == '\0') {
-      _IOServiceClose(*(undefined4 *)(library + *ctx * 4 + 0x18));
-      *(undefined4 *)(library + *ctx * 4 + 0x18) = 0;
+     (ctx[GLD_attachedDrawable / 4] = 0, rendererLibrary = PTR_DAT_001e88ac, (ctx[GLD_drawableFlags / 4] & 0x20U) == 0)) {
+    connectionUseCount = PTR_DAT_001e88ac[*ctx + 0x98];
+    PTR_DAT_001e88ac[*ctx + 0x98] = connectionUseCount + -1;
+    if ((char)(connectionUseCount + -1) == '\0') {
+      _IOServiceClose(*(undefined4 *)(rendererLibrary + *ctx * 4 + 0x18));
+      *(undefined4 *)(rendererLibrary + *ctx * 4 + 0x18) = 0;
     }
   }
   return;
@@ -97,7 +97,7 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
     if (drawableType != 0x5a) {
       pbufferArg = (int *)0x0;
     }
-    FUN_00017160(ctx,ctx + GLD_drawableFlags / 4,pbufferArg);
+    gld_applyPbufferToRenderFlags(ctx,ctx + GLD_drawableFlags / 4,pbufferArg);
     callWords[0] = drawable[2];
     callWords[1] = 3;
     status = _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],6,callWords,1,&drawableWidth,callWords + 1);
@@ -115,7 +115,7 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
         ctx[GLD_drawableFlags / 4] = ctxFlags;
         if (ctx[GLD_boundFramebuffer / 4] == 0) {
           ctx[GLD_renderFlags / 4] = ctxFlags;
-          FUN_00017260(ctx);
+          gld_updateColorFormatIndex(ctx);
           ctxFlags = ctx[GLD_drawableFlags / 4];
         }
       }
@@ -199,7 +199,7 @@ LAB_00007320:
                 ctx[GLD_softwareBuffer / 4] = rendererIndex;
               }
             }
-            ((int (*)())FUN_00007020)(ctx);
+            ((int (*)())gld_detachDrawable)(ctx);
             ctx[GLD_attachedDrawable / 4] = (int)drawable;
             ctx[GLD_drawableIdHigh / 4] = drawableHigh;
             ctx[GLD_drawableIdLow / 4] = drawableIds & 0xff;
@@ -231,7 +231,7 @@ LAB_00007320:
       if (((ctxFlags & 0x400) != 0) || ((ctxFlags & 0x10) != 0)) {
         ctx[GLD_drawableFlags / 4] = ctxFlags & 0xffffffdf | 0x8000;
       }
-      FUN_00017160(ctx,ctx + GLD_drawableFlags / 4,0);
+      gld_applyPbufferToRenderFlags(ctx,ctx + GLD_drawableFlags / 4,0);
       rendererIndex = *ctx;
       status = rendererIndex * 4;
       if (*(int *)(PTR_DAT_001e88ac + status + 0x18) == 0) {
@@ -305,22 +305,22 @@ LAB_00007790:
 LAB_00007780:
   returnCode = 0x2715;
 LAB_000077a0:
-  ((int (*)())FUN_00007020)(ctx);
+  ((int (*)())gld_detachDrawable)(ctx);
   scalarIn1 = 0;
   scalarIn0 = 0;
   _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
   return returnCode;
 }
 
-/* FUN_00007810 @ 0x7810 (20 bytes) */
-int FUN_00007810(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* gld_latchValue178 @ 0x7810 (20 bytes) */
+int gld_latchValue178(ctx, value)
+  int ctx;
+  undefined4 value;
 {
-  if (*(int *)(param_1 + 0x178) != 0) {
+  if (*(int *)(ctx + 0x178) != 0) {
     return;
   }
-  *(undefined4 *)(param_1 + 0x178) = param_2;
+  *(undefined4 *)(ctx + 0x178) = value;
   return;
 }
 
@@ -441,7 +441,7 @@ int _gldTestObject(ctx, objectKind, object)
   int table;
   
   if (objectKind == 1) {
-    isDone = FUN_0000abf0(ctx,object);
+    isDone = gld_isTextureBackingIdle(ctx,object);
   }
   else if (objectKind == 0) {
     completed = *(byte *)(object + 1);
@@ -459,12 +459,12 @@ int _gldTestObject(ctx, objectKind, object)
     isDone = (uint)completed;
   }
   else if (objectKind == 2) {
-    isDone = FUN_0000b980(ctx,object);
+    isDone = gld_isVertexArrayBackingIdle(ctx,object);
   }
   else {
     isDone = 1;
     if (objectKind == 3) {
-      isDone = FUN_00005eb0(ctx,object);
+      isDone = gld_isBufferBackingIdle(ctx,object);
     }
   }
   return isDone;
@@ -945,7 +945,7 @@ LAB_00008798:
                 pfColorMask = capabilityMask & stencilSize & colorSize;
                 pfAccumMask = accumSize & 0xbffffffc & alphaSize;
                 pfDisplayMask = redSize;
-                pfRendererId = FUN_00017720(depthSize);
+                pfRendererId = gld_rendererStatusFlags(depthSize);
                 pfRendererId = pfRendererId | depthSize << 0x18;
                 serviceOrNewRows = gld_expandPixelFormatVariants(candidateRow,minimumPolicy,maximumPolicy);
                 if (serviceOrNewRows != 0) {
@@ -1310,7 +1310,7 @@ LAB_00008ad4:
       listCount = _io_connect_method_scalarI_scalarO(connection,3,0,0,scalarOut0,&outCount);
       if (listCount == 0) {
         *rendererInfo = 0;
-        bitOrId = FUN_00017720(rendererIndex);
+        bitOrId = gld_rendererStatusFlags(rendererIndex);
         *(undefined2 *)(rendererInfo + 8) = 0;
         *(undefined2 *)((int)rendererInfo + 0x22) = 0;
         *(undefined2 *)(rendererInfo + 9) = 0;
@@ -1650,7 +1650,7 @@ int _gldReclaimTexture(ctx, texture)
   do {
     if (texture == *(int *)(unitSlotCursor + 0x18c)) {
       *(undefined4 *)(unitSlotCursor + 0x18c) = 0;
-      FUN_000307a0(ctx,unitOrOldRefCount);
+      gld_emitUnitClearPacket(ctx,unitOrOldRefCount);
     }
     moreUnits = unitOrOldRefCount != 0xf;
     unitSlotCursor = unitSlotCursor + 4;
@@ -1794,7 +1794,7 @@ int _gldDestroyPipelineProgram(ctx, program)
     slotCursor = slotCursor + 4;
     slot = slot + 1;
   } while (moreSlots);
-  FUN_00025bf0(ctx,program);
+  gld_releaseProgramObject(ctx,program);
   _free(program);
   return 0;
 }
@@ -1848,8 +1848,8 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
 {
   uint scratchUint1;
   uint scratchUint2;
-  uint uVar3;
-  int iVar4;
+  uint operandIndexByte;
+  int stateOffset;
   
   *byteSizeOut = 4;
   switch(operandWord >> 0x10 & 0x1f) {
@@ -1889,19 +1889,19 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
       return;
     }
   case 4:
-    uVar3 = operandWord & 0xff;
+    operandIndexByte = operandWord & 0xff;
     scratchUint1 = operandWord >> 9 & 3;
     scratchUint2 = operandWord >> 8 & 1;
     if (scratchUint1 == 1) {
-      *offsetOut = scratchUint2 * 0x240 + uVar3 * 0x30 + 0x2920;
+      *offsetOut = scratchUint2 * 0x240 + operandIndexByte * 0x30 + 0x2920;
       return;
     }
     if (scratchUint1 == 2) {
-      *offsetOut = scratchUint2 * 0x240 + uVar3 * 0x30 + 0x2930;
+      *offsetOut = scratchUint2 * 0x240 + operandIndexByte * 0x30 + 0x2930;
       return;
     }
     if (scratchUint1 == 0) {
-      *offsetOut = scratchUint2 * 0x240 + uVar3 * 0x30 + 0x2910;
+      *offsetOut = scratchUint2 * 0x240 + operandIndexByte * 0x30 + 0x2910;
       return;
     }
     return;
@@ -1974,32 +1974,32 @@ int gld_decodeProgramOperandOffset(operandWord, staleArgR4, offsetOut, byteSizeO
     return;
   case 0x10:
     scratchUint2 = operandWord & 0xff;
-    iVar4 = scratchUint2 << 6;
+    stateOffset = scratchUint2 << 6;
     switch(operandWord >> 8 & 7) {
     case 0:
-      iVar4 = 0;
+      stateOffset = 0;
       break;
     case 1:
-      iVar4 = 0xc0;
+      stateOffset = 0xc0;
       break;
     case 2:
-      iVar4 = 0x80;
+      stateOffset = 0x80;
       break;
     case 3:
-      iVar4 = (scratchUint2 + 4) * 0x40;
+      stateOffset = (scratchUint2 + 4) * 0x40;
       break;
     case 4:
-      iVar4 = (scratchUint2 + 0x10) * 0x40;
+      stateOffset = (scratchUint2 + 0x10) * 0x40;
       break;
     case 5:
-      iVar4 = (scratchUint2 + 8) * 0x40;
+      stateOffset = (scratchUint2 + 8) * 0x40;
     }
     scratchUint2 = operandWord >> 0xe & 3;
     if (scratchUint2 < 2) {
-      *offsetOut = iVar4 + 0x1860;
+      *offsetOut = stateOffset + 0x1860;
     }
     else {
-      *offsetOut = iVar4 + 0x1e60;
+      *offsetOut = stateOffset + 0x1e60;
     }
     scratchUint1 = operandWord >> 0xc & 3;
     if (scratchUint2 < 3) {
@@ -2262,16 +2262,16 @@ int gld_waitQueryStamp(ctx)
   int ctx;
 {
   int gld_isStampRetiredResult;
-  int iVar2;
+  int queryRecord;
   
-  iVar2 = **(int **)(ctx + 0x234);
-  if (iVar2 != 0) {
-    if ((0x1ffff < (int)*(uint *)(iVar2 + 0x10)) || ((*(uint *)(iVar2 + 0x10) & 0xffff) != 0)) {
+  queryRecord = **(int **)(ctx + 0x234);
+  if (queryRecord != 0) {
+    if ((0x1ffff < (int)*(uint *)(queryRecord + 0x10)) || ((*(uint *)(queryRecord + 0x10) & 0xffff) != 0)) {
       _gldFlush(ctx);
     }
-    gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(iVar2 + 8));
+    gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(queryRecord + 8));
     if (gld_isStampRetiredResult == 0) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,iVar2 + 8,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,queryRecord + 8,1,0,0);
       return;
     }
   }
@@ -2501,31 +2501,31 @@ int gldFormatBitsPerPixel(formatMask)
   return -(formatMask & 0xc000000) >> 0x18 & 0x80;
 }
 
-/* FUN_0000a0f0 @ 0xa0f0 (48 bytes) */
-int FUN_0000a0f0(param_1)
-  uint param_1;
+/* gld_bitsFromRenderFlags @ 0xa0f0 (48 bytes) */
+int gld_bitsFromRenderFlags(renderFlags)
+  uint renderFlags;
 {
-  if ((param_1 & 0x1000) != 0) {
+  if ((renderFlags & 0x1000) != 0) {
     return 0x20;
   }
-  if ((param_1 & 0x800) != 0) {
+  if ((renderFlags & 0x800) != 0) {
     return 0x18;
   }
-  if ((param_1 & 0x400) != 0) {
+  if ((renderFlags & 0x400) != 0) {
     return 0x10;
   }
-  return param_1 >> 4 & 8;
+  return renderFlags >> 4 & 8;
 }
 
 /* gldFormatAlphaBits @ 0xa120 (92 bytes) */
-int gldFormatAlphaBits(formatMask, param_2, param_3, param_4, param_5, param_6, param_7)
+int gldFormatAlphaBits(formatMask, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   uint formatMask;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   if ((formatMask & 0x400) != 0) {
     return 1;

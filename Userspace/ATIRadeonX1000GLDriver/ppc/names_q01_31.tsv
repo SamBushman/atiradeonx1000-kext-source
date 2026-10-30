@@ -506,3 +506,170 @@ func	FUN_000199f0	gld_selectSampleCount	INFERRED	chooses the hardware sample cou
 func	FUN_00019ad0	gld_selectSampleGrid	INFERRED	chooses the per-axis supersample counts/scales (1.0 or 2.0) from the request, limited by the 0x1000 render size
 func	FUN_0002b740	gld_beginQuerySlot	INFERRED	resets one 0x20-byte query entry to 0xffffffff, records it as the current query and emits the begin packet
 func	FUN_00026f80	gld_reserveVertexBufferSpace	INFERRED	makes sure the vertex data ring has room (refilling it through IOConnect method 0x12) and returns the number of vertices that fit
+local	glFlush_impl_withSurfaceUpdate	param_2	passThroughArg2	INFERRED	forwarded to glFlush_impl (replaced by the callee's r4 after the IOConnect call)
+local	glFlush_impl_withSurfaceUpdate	param_3	scratchArg3	INFERRED	register-allocation scratch: argument slot reused as &scalarIn0 for the IOConnect call
+local	glFlush_impl_withSurfaceUpdate	param_4	scratchArg4	INFERRED	argument slot reused for the scalar count 4
+local	glFlush_impl_withSurfaceUpdate	param_5	scratchArg5	INFERRED	argument slot reused for 0 (IOConnect struct size)
+local	glFlush_impl_withSurfaceUpdate	param_6	scratchArg6	INFERRED	argument slot reused for 0
+local	glFlush_impl_withSurfaceUpdate	param_7	scratchArg7	INFERRED	argument slot reused for the surface id (*(ctx+0xf8)+8), also scalarIn0
+local	glFlush_impl_withSurfaceUpdate	uStack_24	scalarIn1	INFERRED	second scalar of the IOConnect call: old ctx+0x3c flags masked with 0xffff37c0
+local	FUN_0002a260	param_2	drawStateSave	INFERRED	buffer passed to FUN_000a6140 (saved internal draw state)
+local	FUN_0002a260	uVar1	pointSizeFixed	INFERRED	ring+8 point size converted through the 2^52 bias and scaled, packed as (size<<16 | size&0xffff)
+local	FUN_0002a260	dVar2	i2dBias	INFERRED	DOUBLE_001aa250 int->double conversion constant
+local	FUN_0002a260	puVar4	packet	INFERRED	0x1f-word command space after FUN_00083c90
+local	FUN_0002a260	uVar5	pointSizeWord	INFERRED	*(ring+8): point size word (also ctx+0x248 in the draw-pixels path)
+local	gld_revalidateStreamProgram	param_1	stream	INFERRED	command stream (ctx+0x240)
+local	gld_revalidateStreamProgram	param_2	streamFlag	INFERRED	0 selects the flagged revalidation path
+local	gld_revalidateStreamProgram	param_3	passThroughArg3	INFERRED	forwarded unchanged to ffvpValidateProgramForced
+local	gld_revalidateStreamProgram	param_4	passThroughArg4	INFERRED	forwarded unchanged
+local	gld_revalidateStreamProgram	param_5	passThroughArg5	INFERRED	forwarded unchanged
+local	gld_revalidateStreamProgram	param_6	passThroughArg6	INFERRED	forwarded unchanged
+local	gld_revalidateStreamProgram	param_7	scratchUint7	INFERRED	register-allocation scratch: argument slot overwritten with stream+0x1928 & 2
+local	gld_revalidateStreamProgram	uVar1	oldProgramFlags	INFERRED	stream+0x1874 before its top two bits are rewritten
+local	gld_revalidateStreamProgram	iVar2	forcedState	INFERRED	1 when the flagged path set bit 31; compared with stream+0x192c to decide on revalidation
+local	gld_emitStreamAddressRegisters	iVar3	pairCount	INFERRED	((ctx+0x26d0 & 0x1f) + 1) >> 1: number of stream address register triples
+local	gld_emitStreamAddressRegisters	iVar2	addrPairIndex	INFERRED	index into the first address array (ctx+0x26d4)
+local	gld_emitStreamAddressRegisters	iVar4	addrByteOffset	INFERRED	8-byte offset into the paired address array (ctx+0x26d8)
+local	gld_emitStreamAddressRegisters	puVar5	cursor	INFERRED	write cursor after the 0x831 header
+func	FUN_0002a260	gld_enterPointDrawState	INFERRED	enters the internal draw state (FUN_000a6140), emits the point size and stream-control registers and commits
+local	gld_emitUnitObjectPacket	iVar1	storeResult	INFERRED	result of the store-conditional on the fence word
+local	gld_emitUnitObjectPacket	piVar2	packet	INFERRED	32-byte aligned packet start in the ring
+local	gld_emitUnitObjectPacket	bVar3	fenceUpdated	INFERRED	set when the store-conditional on the fence word has run
+local	gld_emitUnitObjectPacket	uVar4	unitFlags	INFERRED	unit object +0xc8 flags: bits 22-23 select the extended packet word
+local	gld_emitUnitObjectPacket	piVar6	fenceWord	INFERRED	storage +0x10 word incremented by 0x10000 with a store-conditional
+local	gld_drawPixelsDispatch	param_5	format	INFERRED	GL pixel format forwarded to glDrawPixels_impl / gld_drawPixelsFromClientSurface
+local	gld_drawPixelsDispatch	param_6	pixelType	INFERRED	GL pixel type forwarded
+local	gld_drawPixelsDispatch	param_7	pixels	INFERRED	client pixel pointer forwarded
+local	gld_drawPixelsDispatch	param_8	rawTransfer	INFERRED	raw-transfer flag forwarded
+local	gld_drawPixelsDispatch	param_9	surfaceInfo	INFERRED	client surface info; non-zero selects gld_drawPixelsFromClientSurface
+local	gld_drawPixelsDispatch	uVar1	result	INFERRED	1 after the software path, else the client-surface path's result
+local	gldDeleteVertexShaderObject	param_1	ctx	INFERRED	GL context (+0x18 free callback)
+local	gldDeleteVertexShaderObject	param_2	shaderObject	INFERRED	vertex shader object whose five 8-byte-spaced buffers (+8,+0x10,+0x18,+0x20,+0x28) are freed before glDeleteVertexShaderEXT
+local	gld_emitQueryBeginPacket	uVar5	stampValue	INFERRED	first word of the query record stored at packet[1]
+local	gld_emitQueryBeginPacket	uVar11	accumulatedCount	INFERRED	running saturating sum of the previous slot's counters (0xffffffff on overflow)
+local	gld_emitQueryBeginPacket	bVar15	carry	INFERRED	carry flag of the saturating add
+local	FUN_0002d030	param_1	samplerState	INFERRED	texture sampler state record: +0x14 filter word, +0x18 aniso word, +0x35 clamp flag, +0x36 mip-active flag
+local	FUN_0002d030	param_2	minFilter	CONFIRMED	GL min filter enum 0x2600 NEAREST .. 0x2703 LINEAR_MIPMAP_LINEAR
+local	FUN_0002d210	param_1	samplerState	INFERRED	texture sampler state record (+0x14 filter word)
+local	FUN_0002d210	param_2	magFilter	CONFIRMED	GL mag filter enum 0x2600 NEAREST / 0x2601 LINEAR
+local	FUN_0002d210	uVar1	filterWord	INFERRED	sampler filter word (+0x14) being rebuilt
+local	FUN_00030840	param_2	streamCursor	INFERRED	command cursor advanced by gld_emitUnitObjectPacket
+local	FUN_00030840	iVar2	unitIndex	INFERRED	unit number, counting 15 down to 1
+local	FUN_00030840	iVar3	unitSlotPtr	INFERRED	ctx moved down 4 bytes per unit (+0x1c8 slot)
+local	FUN_00030840	uVar1	streamEnd	INFERRED	cursor after the unit 0 packet
+local	FUN_000341a0	param_2	textureHandle	INFERRED	texture handed to gldTextureMakeResident; deleted again on failure
+local	FUN_000341a0	param_3	passThroughArg3	INFERRED	forwarded unchanged to gldTextureMakeResident
+local	FUN_000341a0	param_4	passThroughArg4	INFERRED	forwarded unchanged
+local	FUN_000341a0	param_5	passThroughArg5	INFERRED	forwarded unchanged
+local	FUN_000341a0	param_6	passThroughArg6	INFERRED	forwarded unchanged
+local	FUN_000341a0	uVar2	connection	INFERRED	glContext+4, the driver connection
+local	FUN_0002be00	param_1	stream	INFERRED	command stream (stream+4 is the GL context)
+local	FUN_0002be00	param_2	wordCount	INFERRED	command words needed
+local	FUN_0002be00	iVar2	glContext	CONFIRMED	*(stream+4): the GL context
+local	FUN_0002be00	iVar1	writeCursor	INFERRED	ctx+0x1dc ring write cursor, re-read after a submit
+local	FUN_0002be90	param_2	unusedArg2	INFERRED	never read (param_3 is passed in both argument slots)
+local	FUN_0002be90	param_3	passThroughArg3	INFERRED	forwarded to FUN_000a3be0 twice
+local	FUN_0002be90	param_4	passThroughArg4	INFERRED	forwarded unchanged
+local	FUN_0002be90	param_5	passThroughArg5	INFERRED	forwarded unchanged
+local	FUN_0002be90	param_6	passThroughArg6	INFERRED	forwarded unchanged
+local	FUN_0002be90	param_7	passThroughArg7	INFERRED	forwarded unchanged
+local	gld_testRendererAvailable	uVar1	isAvailable	INFERRED	1 when the service opened and the scalar query succeeded
+local	gld_testRendererAvailable	local_38	connection	INFERRED	io_connect_t out of IOServiceOpen
+local	gld_testRendererAvailable	local_34	outputCount	INFERRED	output scalar count (3) for IOConnect method 3
+local	gld_testRendererAvailable	auStack_30	outputScalars	INFERRED	output scalar buffer of IOConnect method 3
+func	FUN_0002d030	gld_setSamplerMinFilter	CONFIRMED	maps the GL min filter enum onto the sampler filter word bits 11-14 (mip/no-mip, nearest/linear), with clamp/aniso adjustments
+func	FUN_0002d210	gld_setSamplerMagFilter	CONFIRMED	maps GL_NEAREST/GL_LINEAR onto the sampler filter word bits 9-10
+func	FUN_00030840	gld_emitSingleUnitBinding	INFERRED	clears unit objects 15..1 and emits the given object for unit 0
+func	FUN_000341a0	gld_makeTextureResidentOrDelete	INFERRED	gldTextureMakeResident on the connection, deleting the texture when it fails
+func	FUN_0002be00	gld_ensureRingSpace	INFERRED	submits the ring when fewer than wordCount words remain and returns the write cursor
+func	FUN_0002be90	gld_forwardToStream	INFERRED	thin wrapper calling FUN_000a3be0 on the embedded stream
+local	gld_drawVertexArray	bVar4	noAttribBitsLeft	INFERRED	scratchUint35 == 0: no further enabled-array bits to process
+local	gld_drawVertexArray	iVar22	swapHalves	INFERRED	capsBlock+0x11c: when non-zero the 16-bit halves of the copied words are swapped
+local	gld_drawVertexArray	uVar29	vertexWord3	INFERRED	packet word 3 copied with its halves swapped
+local	gld_drawVertexArray	pvVar18	indexSource	INFERRED	first element of the chunk: client index pointer or buffer offset (chunkFirst*4 + drawFlagsArg)
+local	gld_drawVertexArray	pbVar1	highIndexBytePtr	INFERRED	address of the second index byte of the pair being packed
+local	gld_drawVertexArray	bVar5	lowIndexByte	INFERRED	first index byte of the pair being packed into one word
+local	_gldUpdateDispatch	psVar13	programRecord	INFERRED	program record header; the leading short -0x7e00 marks the fixed-function program, +8/+0xc hold two words used for the dirty-bit scratch
+local	_gldUpdateDispatch	bVar27	hasProgramObject	INFERRED	true when a vertex (+0x198) or fragment (+0x18c) program object is bound in engineObjects
+local	_gldUpdateDispatch	puVar6	flushEntry	CONFIRMED	PTR__gldFlush_001e897c, the _gldFlush dispatch entry
+local	_gldUpdateDispatch	puVar7	dispatchEntryAlt	INFERRED	PTR_FUN_001e8980, alternative dispatch table entry stored at dispatch+0x58
+local	gld_updateTextureSamplerState	fVar2	borderComp24	INFERRED	float at texture-image record +0x24, one component of the border colour packed by gldPackColorForSurfaceFormat
+local	gld_updateTextureSamplerState	fVar3	borderComp28	INFERRED	float at texture-image record +0x28, next border colour component
+local	gld_reserveDrawSpace	uVar13	ringWriteCursor	INFERRED	ctx+0x1dc ring write cursor, re-read after a submit
+local	gld_reserveDrawSpace	uVar6	reserveSplit	INFERRED	quarter of the free ring words or the minimum, whichever is larger: share kept for the vertex data
+local	gld_prepareBufferBacking	uVar2	packetFillWord	INFERRED	ctx+0x1d74 word replicated into the trailing packet words
+local	gld_prepareBufferBacking	uVar5	scratchArg5	INFERRED	register-allocation scratch: size/zero value that ends up as a stale argument register of the gld_set* and gldFlushDataCacheRange calls
+local	gld_prepareBufferBacking	iVar8	backingRecord	INFERRED	*bufferObject[2]: texture backing record whose dirty masks (+0x1c/+0x28) are updated
+local	gld_bindFragmentProgramRecord	pbVar1	useIndexPtr	INFERRED	cursor+2: constant index byte of the use-list entry
+local	gld_bindFragmentProgramRecord	pbVar2	useValuePtr	INFERRED	cursor+3: compared with the literal pool entry (pool + index*0x10)
+local	gld_bindFragmentProgramRecord	bVar4	translateOk	INFERRED	translation/compile succeeded so far; cleared on failure and drives the cleanup and the program-id store
+local	gld_bindFragmentProgramRecord	iVar10	scratchInt10	INFERRED	register-allocation scratch: translator[0xd], then a stale argument register of glProgramStringARB_impl
+local	gld_bindFragmentProgramRecord	iVar12	scratchInt12	INFERRED	register-allocation scratch: program header +0xc, then a stale argument register
+local	FUN_00007810	param_1	ctx	INFERRED	GL context (+0x178 latched value)
+local	FUN_00007810	param_2	value	INFERRED	stored at ctx+0x178 only when that slot is still zero
+local	FUN_0000a0f0	param_1	renderFlags	INFERRED	render flag bits 0x1000/0x800/0x400 select 0x20/0x18/0x10; otherwise bit 7 -> 8
+func	FUN_00005eb0	gld_isBufferBackingIdle	INFERRED	kind 6/7 backing records: flushes when large (+0x10 > 0x1ffff) and returns whether the stamp at +8 / +0xc has retired; 1 when there is no backing
+func	FUN_0000abf0	gld_isTextureBackingIdle	INFERRED	same stamp-retired test on texture->0x34 backing
+func	FUN_0000b980	gld_isVertexArrayBackingIdle	INFERRED	same stamp-retired test on vertexArray+0x228 backing
+func	FUN_00007020	gld_detachDrawable	INFERRED	clears ctx attachedDrawable and drops the renderer connection use count, closing the IOService at zero
+func	FUN_00007810	gld_latchValue178	INFERRED	stores the value at ctx+0x178 only if it is still zero
+func	FUN_0000a0f0	gld_bitsFromRenderFlags	INFERRED	maps render flag bits to 0x20/0x18/0x10 or bit-7 derived 8
+func	FUN_0000b750	gld_updateCurrentVertexArray	INFERRED	prepares the engine vertex array (buffers or backing) and stores it as ctx current vertex array, restarting the packet when it was dropped
+func	FUN_00017100	gld_setContextParameter	INFERRED	CGL-style parameter set: 0xcb stores the swap-interval denominator byte, 0xde the numerator byte (only when ctx+0x2a80 is set)
+func	FUN_00017160	gld_applyPbufferToRenderFlags	CONFIRMED	maps the pbuffer target (GL_TEXTURE_1D/2D 0xde0.., TEXTURE_RECTANGLE 0x84f5, CUBE_MAP 0x8513) and level into the render flag bits 24-29 and updates the y-inverted state
+func	FUN_00017260	gld_updateColorFormatIndex	INFERRED	sets GLD_colorFormatIndex from the window mode or from the first colour attachment of the bound framebuffer
+func	FUN_00017720	gld_rendererStatusFlags	INFERRED	returns the renderer availability test result or-ed with 0x1900
+func	FUN_00017a40	gld_encodePixelFormatFlags	INFERRED	converts a pixel format record (depth mask, flags, multisample fields) into render flag bits
+func	FUN_00018090	gld_classifyTextureVariant	INFERRED	maps a texture variant code and flags to a 0/1/2 class
+func	FUN_00019db0	gld_applySampleConfiguration	INFERRED	selects the sample grid/count, rewrites the drawable sample flags and re-submits state
+func	FUN_0001a010	gld_needsMultisampleResolve	INFERRED	returns 1 when multisample render flags require a resolve before reading the given surface
+func	FUN_0001a9d0	gld_swapBuffersImpl	INFERRED	resolves multisampling if needed, submits the ring, calls the drawable swap callback and applies a pending sample-count change
+local	FUN_00020b00	param_1	ctx	CONFIRMED	GL context; the cleared fields (+0x2a6a, +0x2a6c, +0x2a70..+0x2a7c) are the notification settings gldDisplayNotificationCallback fills in
+local	FUN_0002be60	param_1	stream	INFERRED	command stream (stream+4 is the GL context)
+local	FUN_0002be60	param_2	cursor	INFERRED	new ring write cursor stored at ctx+0x1dc
+local	FUN_0002be70	param_1	stream	INFERRED	command stream
+local	FUN_0002c6c0	puVar1	stateBuffer	INFERRED	ctx+0x208 record: +0 / +4 copied from ctx+0x1d20 / +0x1cf0, +0x14 size in words, +0x20 command words from gldEmitHardwareState
+func	FUN_00020b00	gld_resetNotificationSettings	CONFIRMED	zeroes the fsaa/aniso/vsync/performance settings that gldDisplayNotificationCallback sets
+func	FUN_00024fb0	gld_initListHead	INFERRED	makes the circular list head at +0x2c empty
+func	FUN_00025bf0	gld_releaseProgramObject	INFERRED	frees the linearized/program images of a program object and deletes every per-context vertex/fragment/ARB program on its list
+func	FUN_0002be60	gld_setStreamCursor	INFERRED	stores the cursor as the context ring write cursor (ctx+0x1dc)
+func	FUN_0002be70	gld_getStreamCurrent	INFERRED	returns the stream current pointer (ctx+0x298c)
+func	FUN_0002c6c0	gld_buildHardwareStateBuffer	INFERRED	fills the ctx+0x208 state buffer with the full hardware state through gldEmitHardwareState and checks it against its capacity
+func	FUN_0002cc10	gld_submitRingIfNeeded	INFERRED	submits the ring when the write cursor passes ringMap + 0x28
+local	FUN_00030a50	param_1	stream	INFERRED	command stream (stream+4 is the driver connection)
+local	FUN_00030a50	param_2	textureHandle	INFERRED	texture deleted through _gldDeleteTexture
+local	FUN_00030f00	param_1	ctx	INFERRED	unused
+local	FUN_00030f00	param_2	texture	INFERRED	texture object; +0x38 is the hardware format index
+local	FUN_00030f00	uVar1	formatIndex	CONFIRMED	texture+0x38 index into the 0x24-byte format table
+local	FUN_0003b5b0	param_1	ctx	INFERRED	GL context
+local	FUN_0003b5b0	param_2	shaderIdPtr	INFERRED	holds the vertex shader symbol id; reserved on first use
+local	FUN_0003b5b0	iVar1	symbolId	INFERRED	EXT_vertex_shader symbol id reserved with extvsReserveSymbolIds
+func	FUN_0002ddf0	gld_buildTextureHardwareState	INFERRED	rebuilds the texture hardware state record (texture+0x3c) from the texture object when the image set or size changed
+func	FUN_000307a0	gld_emitUnitClearPacket	INFERRED	emits the 0x16000000 unit packet for packetIndex and continues with FUN_000a8320
+func	FUN_00030a50	gld_deleteTextureForStream	INFERRED	_gldDeleteTexture on the stream connection
+func	FUN_00030f00	gld_texelBytes	INFERRED	bytes per texel of the texture format (-2 for format 0xc, 1 for formats 12-15, else 1 << table bits)
+func	FUN_0003b5b0	gld_bindVertexShaderSlot	INFERRED	reserves the vertex shader symbol id on first use and binds it
+local	gld_decodeProgramOperandOffset	uVar3	operandIndexByte	INFERRED	operandWord & 0xff: record index inside the operand file
+local	gld_decodeProgramOperandOffset	iVar4	stateOffset	INFERRED	byte offset of the operand inside engine state (0x1860 / 0x1e60 based)
+local	gld_waitQueryStamp	iVar2	queryRecord	INFERRED	**(ctx+0x234): query/stamp record (+8 stamp, +0x10 flags)
+local	gldFormatAlphaBits	param_2	unusedArg2	INFERRED	never read
+local	gldFormatAlphaBits	param_3	unusedArg3	INFERRED	never read
+local	gldFormatAlphaBits	param_4	unusedArg4	INFERRED	never read
+local	gldFormatAlphaBits	param_5	unusedArg5	INFERRED	never read
+local	gldFormatAlphaBits	param_6	unusedArg6	INFERRED	never read
+local	gldFormatAlphaBits	param_7	unusedArg7	INFERRED	never read
+local	gldPixelRowBytes	iVar1	rowBytes	INFERRED	computed row bytes (unit bytes * width, or packed bit/byte forms)
+local	gldFlushDataCacheRangeSync	param_4	unusedArg4	INFERRED	never read
+local	gldFlushDataCacheRangeSync	param_5	unusedArg5	INFERRED	never read
+local	gldFlushDataCacheRangeSync	param_7	unusedArg7	INFERRED	never read
+local	powerOfTenDouble	param_2	unusedArg2	INFERRED	never read
+local	returnSecondArgument	param_1	unusedArg1	INFERRED	never read
+local	returnSecondArgument	param_2	value	INFERRED	returned unchanged
+local	gld_bindProgramObject	iVar6	sharedState	INFERRED	ctx+0xc shared state whose +0x2c word heads the program object list
+local	gldTrimVertexCountToPrimitive	iVar1	modeBitCount	INFERRED	number of set bits among the low four bits of the mode word
+local	gldTrimVertexCountToPrimitiveMin	uVar1	wholeTriangleVertices	INFERRED	count rounded down to a multiple of 3
+local	window_mode_to_ati_format	param_1	renderFlags	INFERRED	render flags; the low nibble selects the window colour mode
+local	gldCompressedImageBytes	iVar1	blockCount	INFERRED	number of 4x4 blocks: ceil(width/4) * ceil(height/4) * depth
+local	floorLog2	iVar1	log2Result	CONFIRMED	floor(log2(value)) accumulated by the shift loop
+local	gldDeleteFragmentShaderObject	param_1	ctx	INFERRED	GL context forwarded to glDeleteFragmentShaderATI_impl
+local	gldDeleteFragmentShaderObject	param_2	shaderObject	INFERRED	object whose first word is the ATI fragment shader name

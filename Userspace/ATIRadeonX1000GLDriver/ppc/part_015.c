@@ -1882,7 +1882,7 @@ int FUN_000a43f0(glContext)
   iVar1 = *(int *)(glContext + 0x2764);
   while (iVar1 != 0) {
     if (*(int *)(iVar1 + 0xbc) != 0) {
-      FUN_00030a50(glContext,*(undefined4 *)(*(int *)(iVar1 + 0xbc) + 0x7c));
+      gld_deleteTextureForStream(glContext,*(undefined4 *)(*(int *)(iVar1 + 0xbc) + 0x7c));
     }
     iVar2 = *(int *)(iVar1 + 0x138);
     (**(code **)(glContext + 0x18))(iVar1);
@@ -2018,7 +2018,7 @@ int FUN_000a4770(glContext, unusedArgR4, staleArgR5, staleArgR6, staleArgR7, sta
   glContextWord8 = *(int *)(glContext + 8);
   iVar7 = *(int *)(glContextPtr4 + 0x10);
   if (((((unsigned char *)0x00002e2d)[iVar7] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+     (glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                            staleArgR9), glContextPtr4 != 0)) {
     uVar4 = *(uint *)(((unsigned char *)0x000013e0) + glContext);
     fVar1 = *(float *)(((unsigned char *)0x00002e20) + iVar7);
@@ -2224,7 +2224,7 @@ int FUN_000a4980(glContext, unusedArgR4, staleArgR5, staleArgR6, staleArgR7)
   if ((glContextWord44 & 0x60020000) != 0x40000000) {
     glContextPtr4_2 = *(int *)(glContext + 4);
     if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4_2 + 0x10)] != '\0') && ((glContextWord44 & 0x20000) == 0)) {
-      glContextPtr4_2 = FUN_0001a010(glContextPtr4_2,*(undefined4 *)(glContextPtr4_2 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+      glContextPtr4_2 = gld_needsMultisampleResolve(glContextPtr4_2,*(undefined4 *)(glContextPtr4_2 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                             glContextWord44);
       if (glContextPtr4_2 == 0) goto LAB_000a4a50;
       glContextPtr4_2 = *(int *)(glContext + 4);
@@ -2291,7 +2291,7 @@ LAB_000a4a50:
   engineState = *(int *)(glContextPtr4_3 + 0x10);
   uVar16 = *(uint *)(glContext + 0x44) & 0x60020000 ^ 0x40000000;
   pcVar22 = (char *)-uVar16;
-  glContextPtr4_3 = FUN_0001a010(glContextPtr4_3,*(undefined4 *)(glContextPtr4_3 + 0x26a0),staleArgR5,staleArgR6,pcVar22,pcVar24,
+  glContextPtr4_3 = gld_needsMultisampleResolve(glContextPtr4_3,*(undefined4 *)(glContextPtr4_3 + 0x26a0),staleArgR5,staleArgR6,pcVar22,pcVar24,
                         glContextWord38);
   uVar47 = ((int (*)())FUN_000a36b0)(glContext,(uint)(glContextPtr4_3 == 0));
   uVar21 = (undefined4)uVar47;
@@ -2303,7 +2303,7 @@ LAB_000a4c38:
     cVar14 = '\0';
   }
   else {
-    uVar48 = FUN_0001a010(glContextPtr4_4,*(undefined4 *)(glContextPtr4_4 + 0x26a0),staleArgR5,staleArgR6,pcVar22,pcVar24,
+    uVar48 = gld_needsMultisampleResolve(glContextPtr4_4,*(undefined4 *)(glContextPtr4_4 + 0x26a0),staleArgR5,staleArgR6,pcVar22,pcVar24,
                           engineState3);
     uVar21 = (undefined4)uVar48;
     if ((int)((ulonglong)uVar48 >> 0x20) != 0) {
@@ -2395,7 +2395,7 @@ LAB_000a4e90:
   cacheEntry = (char *)(**(code **)(glContext + 0x10))(1,0x13c);
   if (cacheEntry == (char *)0x0) goto LAB_000a52dc;
   *cacheEntry = (*(uint *)(glContext + 0x44) & 0x60020000) == 0x40000000;
-  uVar47 = FUN_0001a010(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0),
+  uVar47 = gld_needsMultisampleResolve(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0),
                         staleArgR5,staleArgR6,pcVar22,pcVar24,engineState3);
   uVar21 = (undefined4)uVar47;
   cacheEntry[1] = (int)((ulonglong)uVar47 >> 0x20) == 0;
@@ -2407,7 +2407,7 @@ LAB_000a4f50:
     cVar14 = '\0';
   }
   else {
-    uVar47 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,0,pcVar24,engineState3);
+    uVar47 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,0,pcVar24,engineState3);
     uVar21 = (undefined4)uVar47;
     cVar14 = '\x01';
     if ((int)((ulonglong)uVar47 >> 0x20) != 0) goto LAB_000a4f50;
@@ -2528,7 +2528,7 @@ LAB_000a5188:
   uVar16 = (uint)uVar47;
   iVar38 = 0;
   if (maskTexture != 0) {
-    FUN_0002ddf0(glContextWord4,maskTexture);
+    gld_buildTextureHardwareState(glContextWord4,maskTexture);
     maskLevel = *(int *)(maskTexture + 0x30);
     iVar38 = maskTexture + 0x3c;
     pcVar24 = (char *)0x2600;
@@ -2860,7 +2860,7 @@ LAB_000a58ec:
 LAB_000a59f4:
       cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
-    uploadResult = FUN_000341a0(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
+    uploadResult = gld_makeTextureResidentOrDelete(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
                           levelCountClamped,entryWord14High,pcVar24);
     if (uploadResult != 0) {
       levelFormat = (uint)*(byte *)(*(int *)(cacheEntry + 0xbc) + 0x31);

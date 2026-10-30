@@ -192,20 +192,20 @@ int gldPixelRowBytes(format, pixelType, width)
   int pixelType;
   int width;
 {
-  int iVar1;
+  int rowBytes;
   
   if (pixelType == 0) {
-    iVar1 = ((int (*)())gldPixelUnitBytes)(format,0);
-    iVar1 = iVar1 * (width + 3 >> 2) >> 2;
+    rowBytes = ((int (*)())gldPixelUnitBytes)(format,0);
+    rowBytes = rowBytes * (width + 3 >> 2) >> 2;
   }
   else if (pixelType == 0x1a00) {
-    iVar1 = width + 7 >> 3;
+    rowBytes = width + 7 >> 3;
   }
   else {
-    iVar1 = ((int (*)())gldPixelUnitBytes)(format,pixelType);
-    iVar1 = iVar1 * width;
+    rowBytes = ((int (*)())gldPixelUnitBytes)(format,pixelType);
+    rowBytes = rowBytes * width;
   }
-  return iVar1;
+  return rowBytes;
 }
 
 /* gld_computePixelStoreLayout @ 0xa6e0 (292 bytes) */
@@ -403,7 +403,7 @@ int gld_textureMemoryBytes(ctx, texture)
     levelsLeft = levelsLeft + -1;
   } while (levelsLeft != 0);
   totalBytes = (uint)*(byte *)(baseLevel + 0x6c) * totalTexels;
-  bytesScale = FUN_00030f00(ctx,texture);
+  bytesScale = gld_texelBytes(ctx,texture);
   if (bytesScale < 0) {
     totalBytes = totalBytes / (uint)-bytesScale;
   }
@@ -452,8 +452,8 @@ LAB_0000abac:
   return;
 }
 
-/* FUN_0000abf0 @ 0xabf0 (184 bytes) */
-int FUN_0000abf0(ctx, texture)
+/* gld_isTextureBackingIdle @ 0xabf0 (184 bytes) */
+int gld_isTextureBackingIdle(ctx, texture)
   undefined4 ctx;
   int texture;
 {
@@ -991,14 +991,14 @@ int gldFlushDataCacheRange(ctx, address, length, unused4, unused5, unused6, unus
 }
 
 /* gldFlushDataCacheRangeSync @ 0xb670 (80 bytes) */
-int gldFlushDataCacheRangeSync(ctx, surfaceBase, byteCount, param_4, param_5, lastHeader, param_7, a7)
+int gldFlushDataCacheRangeSync(ctx, surfaceBase, byteCount, unusedArg4, unusedArg5, lastHeader, unusedArg7, a7)
   int ctx;
   uint surfaceBase;
   int byteCount;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
   undefined4 lastHeader;
-  undefined4 param_7;
+  undefined4 unusedArg7;
   undefined4 a7;
 {
   int lineOffset;
@@ -1053,8 +1053,8 @@ int _gldFlushVertexArray(ctx, unused2, flushArg2, flushArg3, doFlush, flushArg5,
   return doFlush != 0;
 }
 
-/* FUN_0000b750 @ 0xb750 (276 bytes) */
-int FUN_0000b750(ctx)
+/* gld_updateCurrentVertexArray @ 0xb750 (276 bytes) */
+int gld_updateCurrentVertexArray(ctx)
   int ctx;
 {
   int arrayState;
@@ -1128,8 +1128,8 @@ LAB_0000b93c:
   return;
 }
 
-/* FUN_0000b980 @ 0xb980 (184 bytes) */
-int FUN_0000b980(ctx, vertexArray)
+/* gld_isVertexArrayBackingIdle @ 0xb980 (184 bytes) */
+int gld_isVertexArrayBackingIdle(ctx, vertexArray)
   undefined4 ctx;
   int vertexArray;
 {
@@ -1380,7 +1380,7 @@ int gld_setVertexArrayNewTextureBacking(ctx, vertexArray, requestArg0, requestAr
 }
 
 /* powerOfTenDouble @ 0xbe70 (272 bytes) */
-double powerOfTenDouble(int exponent,undefined4 param_2,undefined4 exponentPtr,undefined4 outCapacity,undefined4 argReg7,undefined4 argReg8,undefined4 pow10Table)
+double powerOfTenDouble(int exponent,undefined4 unusedArg2,undefined4 exponentPtr,undefined4 outCapacity,undefined4 argReg7,undefined4 argReg8,undefined4 pow10Table)
 {
   int blocks;
   double result;
@@ -8422,7 +8422,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
     columns = width;
     rows = height;
     rowPtr = bitmap;
-    FUN_0002a260(ring,puStack_ac);
+    gld_enterPointDrawState(ring,puStack_ac);
     startX = _floor((double)(float)((double)*vertex - xOrigin));
     invertedRowStep = FLOAT_001aa114;
     rowStep = FLOAT_001aa0e8;
@@ -8752,8 +8752,8 @@ LAB_00017070:
   return 0;
 }
 
-/* FUN_00017100 @ 0x17100 (84 bytes) */
-int FUN_00017100(ctx, pname, values)
+/* gld_setContextParameter @ 0x17100 (84 bytes) */
+int gld_setContextParameter(ctx, pname, values)
   int ctx;
   int pname;
   undefined4 *values;
@@ -8771,8 +8771,8 @@ int FUN_00017100(ctx, pname, values)
   return 0;
 }
 
-/* FUN_00017160 @ 0x17160 (236 bytes) */
-int FUN_00017160(ctx, flagsInOut, pbuffer)
+/* gld_applyPbufferToRenderFlags @ 0x17160 (236 bytes) */
+int gld_applyPbufferToRenderFlags(ctx, flagsInOut, pbuffer)
   int ctx;
   uint *flagsInOut;
   int pbuffer;
@@ -8821,8 +8821,8 @@ int FUN_00017160(ctx, flagsInOut, pbuffer)
   return;
 }
 
-/* FUN_00017260 @ 0x17260 (168 bytes) */
-int FUN_00017260(ctx)
+/* gld_updateColorFormatIndex @ 0x17260 (168 bytes) */
+int gld_updateColorFormatIndex(ctx)
   int ctx;
 {
   int attachment;
@@ -8910,7 +8910,7 @@ int gld_setIntegerEngineParam(ctx, pname, values)
       else {
         if (pname == 0x1fe) {
           if ((*(int *)(ctx + 0xf8) != 0) && (*(int *)(ctx + 0x2a84) == 0)) {
-            returnCode = FUN_00019db0(ctx,*values,1);
+            returnCode = gld_applySampleConfiguration(ctx,*values,1);
             return returnCode;
           }
           return 0;
@@ -8999,8 +8999,8 @@ int gld_setIntegerEngineParam(ctx, pname, values)
   return returnCode;
 }
 
-/* FUN_00017720 @ 0x17720 (36 bytes) */
-int FUN_00017720(rendererIndex)
+/* gld_rendererStatusFlags @ 0x17720 (36 bytes) */
+int gld_rendererStatusFlags(rendererIndex)
   undefined4 rendererIndex;
 {
   uint gld_testRendererAvailableResult;
@@ -9067,9 +9067,9 @@ int gld_fillCapsBlock(ctx, stateBlock, pixelFormat)
   stateBlock[0x12] = (int)channelBits1;
   stateBlock[0x13] = (int)channelBits2;
   stateBlock[0x14] = (int)channelBits3;
-  depthStencilBitsValue = FUN_0000a0f0(*(undefined4 *)(pixelFormat + 0x18));
+  depthStencilBitsValue = gld_bitsFromRenderFlags(*(undefined4 *)(pixelFormat + 0x18));
   stateBlock[0xf] = depthStencilBitsValue;
-  depthStencilBitsValue = FUN_0000a0f0(*(undefined4 *)(pixelFormat + 0x1c));
+  depthStencilBitsValue = gld_bitsFromRenderFlags(*(undefined4 *)(pixelFormat + 0x1c));
   stateBlock[0x10] = depthStencilBitsValue;
   stateBlock[0x15] = (int)*(short *)(pixelFormat + 0x22);
   stateBlock[0x16] = (int)*(short *)(pixelFormat + 0x24);
@@ -9133,8 +9133,8 @@ int gld_fillCapsBlock(ctx, stateBlock, pixelFormat)
   return;
 }
 
-/* FUN_00017a40 @ 0x17a40 (200 bytes) */
-int FUN_00017a40(flagsInOut, pixelFormat, unused3, unused4, unused5, unused6, unused7)
+/* gld_encodePixelFormatFlags @ 0x17a40 (200 bytes) */
+int gld_encodePixelFormatFlags(flagsInOut, pixelFormat, unused3, unused4, unused5, unused6, unused7)
   uint *flagsInOut;
   int pixelFormat;
   undefined4 unused3;
@@ -9360,8 +9360,8 @@ int gld_printApplicationPath()
   return;
 }
 
-/* FUN_00018090 @ 0x18090 (100 bytes) */
-int FUN_00018090(variantCode, variantFlags)
+/* gld_classifyTextureVariant @ 0x18090 (100 bytes) */
+int gld_classifyTextureVariant(variantCode, variantFlags)
   uint variantCode;
   uint variantFlags;
 {
@@ -9621,7 +9621,7 @@ LAB_000185c0:
      ((scratchInt33 = *(int *)(ctx + 0x10), *(int *)(((unsigned char *)0x00002e40U) + scratchInt33) == 0 &&
       ((((((unsigned char *)0x00002e44)[scratchInt33] != '\0' && (((uint)scratchPtr42 & 0x10001) == 0)) &&
         (((uint)scratchPtr42 & 0x10) != 0)) && (*(short *)(((unsigned char *)0x00002dc4) + scratchInt33) == 0x207)))))) {
-    scratchInt33 = FUN_0001a010(ctx,4,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
+    scratchInt33 = gld_needsMultisampleResolve(ctx,4,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
     if (scratchInt33 == 0) {
       scratchInt33 = 3;
       goto LAB_00018700;
@@ -9648,9 +9648,9 @@ LAB_00018700:
   if ((srcDstOverlap) && (scratchInt33 - 2U < 2)) {
     scratchInt33 = 0;
   }
-  scratchInt24 = FUN_0001a010(ctx,scratchUint32,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
+  scratchInt24 = gld_needsMultisampleResolve(ctx,scratchUint32,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
   if (((scratchInt24 == 0) &&
-      (scratchInt34 = FUN_0001a010(ctx,*(undefined4 *)(ctx + 0x26a0),scratchInt34,scratchInt29,scratchInt38,scratchInt40,
+      (scratchInt34 = gld_needsMultisampleResolve(ctx,*(undefined4 *)(ctx + 0x26a0),scratchInt34,scratchInt29,scratchInt38,scratchInt40,
                              scratchPtr42), scratchInt34 == 0)) && (scratchInt33 != 0)) {
     scratchFloat1 = *rasterPos + FLOAT_001aa10c;
     if (scratchFloat1 < FLOAT_001aa0d4) {
@@ -10488,7 +10488,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
      ((1 < format - 0x1901U &&
       (((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 0x1ff) == 0 &&
        ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)))))) {
-    FUN_0001a010(ctx,*(undefined4 *)(ctx + 0x26a0),widthCopy,heightArg,formatArg,typeArg,ctxState);
+    gld_needsMultisampleResolve(ctx,*(undefined4 *)(ctx + 0x26a0),widthCopy,heightArg,formatArg,typeArg,ctxState);
   }
   scratchStack3e8 = 0.0;
   procFlags = 0;
@@ -10868,27 +10868,27 @@ int gld_drawPixelsAtRasterPos(ctx, rasterX, rasterY, imageWidth, imageHeight, pi
 }
 
 /* gld_drawPixelsDispatch @ 0x199a0 (68 bytes) */
-int gld_drawPixelsDispatch(ctx, rasterPos, width, height, param_5, param_6, param_7, param_8, param_9)
+int gld_drawPixelsDispatch(ctx, rasterPos, width, height, format, pixelType, pixels, rawTransfer, surfaceInfo)
   undefined4 ctx;
   undefined4 rasterPos;
   undefined4 width;
   undefined4 height;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  int param_9;
+  undefined4 format;
+  undefined4 pixelType;
+  undefined4 pixels;
+  undefined4 rawTransfer;
+  int surfaceInfo;
 {
-  undefined4 uVar1;
+  undefined4 result;
   
-  if (param_9 == 0) {
-    ((int (*)())glDrawPixels_impl)(ctx,rasterPos,width,height,param_5,param_6,param_7,param_8,0);
-    uVar1 = 1;
+  if (surfaceInfo == 0) {
+    ((int (*)())glDrawPixels_impl)(ctx,rasterPos,width,height,format,pixelType,pixels,rawTransfer,0);
+    result = 1;
   }
   else {
-    uVar1 = gld_drawPixelsFromClientSurface(ctx,rasterPos,width,height,param_5,param_6,param_7,param_8,param_9);
+    result = gld_drawPixelsFromClientSurface(ctx,rasterPos,width,height,format,pixelType,pixels,rawTransfer,surfaceInfo);
   }
-  return uVar1;
+  return result;
 }
 
 /* gld_selectSampleCount @ 0x199f0 (212 bytes) */

@@ -49,8 +49,8 @@ int gld_updateSampleConfig(ctx)
   return;
 }
 
-/* FUN_00019db0 @ 0x19db0 (544 bytes) */
-int FUN_00019db0(ctx, sampleCount, sampleModeSelector)
+/* gld_applySampleConfiguration @ 0x19db0 (544 bytes) */
+int gld_applySampleConfiguration(ctx, sampleCount, sampleModeSelector)
   int *ctx;
   undefined4 sampleCount;
   int sampleModeSelector;
@@ -134,8 +134,8 @@ LAB_00019f40:
   return 0;
 }
 
-/* FUN_0001a010 @ 0x1a010 (176 bytes) */
-int FUN_0001a010(ctx, readSurfaceCode, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+/* gld_needsMultisampleResolve @ 0x1a010 (176 bytes) */
+int gld_needsMultisampleResolve(ctx, readSurfaceCode, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
   int ctx;
   int readSurfaceCode;
   undefined4 staleArgR5;
@@ -238,7 +238,7 @@ int gld_submitRing(ctx, terminatorWord)
   *(int *)(ctx + GLD_lastHeader) = mappedBuffer + 0x1c;
   *(undefined4 **)(ctx + GLD_writeCursor) = writeCursor;
   *(undefined4 **)(ctx + GLD_streamSoftLimit) = writeCursor + 0x6000;
-  return FUN_0002c6c0(ctx);
+  return gld_buildHardwareStateBuffer(ctx);
 }
 
 /* glFlush_impl @ 0x1a280 (588 bytes) */
@@ -261,7 +261,7 @@ int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8
   uint scalarIn0;
   uint scalarIn1;
   
-  needsResolve = ((int (*)())FUN_0001a010)(ctx,0,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,0,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
     ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,0,1,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
@@ -323,25 +323,25 @@ int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8
     }
     *(uint *)(ctx + 0x2a88) = pendingSampleFlag;
     *(int *)(ctx + 0x2a84) = pendingSampleCount;
-    ((int (*)())FUN_00019db0)(ctx,pendingSampleCount,(uint)(pendingSampleFlag < 2));
+    ((int (*)())gld_applySampleConfiguration)(ctx,pendingSampleCount,(uint)(pendingSampleFlag < 2));
   }
   return;
 }
 
 /* glFlush_impl_withSurfaceUpdate @ 0x1a4e0 (212 bytes) */
-int glFlush_impl_withSurfaceUpdate(ctx, param_2, param_3, param_4, param_5, param_6, param_7)
+int glFlush_impl_withSurfaceUpdate(ctx, passThroughArg2, scratchArg3, scratchArg4, scratchArg5, scratchArg6, scratchArg7)
   int ctx;
-  undefined4 param_2;
-  undefined4 *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 passThroughArg2;
+  undefined4 *scratchArg3;
+  undefined4 scratchArg4;
+  undefined4 scratchArg5;
+  undefined4 scratchArg6;
+  undefined4 scratchArg7;
 {
   uint clearedFlags;
   undefined4 r4AfterIoCall;
   undefined4 scalarIn0;
-  uint uStack_24;
+  uint scalarIn1;
   undefined4 scalarIn2;
   undefined4 scalarIn3;
   
@@ -349,25 +349,25 @@ int glFlush_impl_withSurfaceUpdate(ctx, param_2, param_3, param_4, param_5, para
     if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
       ((int (*)())gld_submitRing)(ctx,0x1000000);
     }
-    uStack_24 = *(uint *)(ctx + 0x3c);
-    clearedFlags = uStack_24 & 0xfffff7ff;
+    scalarIn1 = *(uint *)(ctx + 0x3c);
+    clearedFlags = scalarIn1 & 0xfffff7ff;
     *(uint *)(ctx + 0x3c) = clearedFlags;
     if (*(int *)(ctx + 0x150) == 0) {
       *(uint *)(ctx + 0x154) = clearedFlags;
     }
     scalarIn2 = *(undefined4 *)(ctx + 0xfc);
     scalarIn3 = *(undefined4 *)(ctx + 0x100);
-    param_3 = &scalarIn0;
-    param_4 = 4;
-    param_5 = 0;
-    param_7 = *(undefined4 *)(*(int *)(ctx + 0xf8) + 8);
-    uStack_24 = uStack_24 & 0xffff37c0;
-    param_6 = 0;
-    scalarIn0 = param_7;
-    _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0,param_3,4,0,0);
-    param_2 = r4AfterIoCall;
+    scratchArg3 = &scalarIn0;
+    scratchArg4 = 4;
+    scratchArg5 = 0;
+    scratchArg7 = *(undefined4 *)(*(int *)(ctx + 0xf8) + 8);
+    scalarIn1 = scalarIn1 & 0xffff37c0;
+    scratchArg6 = 0;
+    scalarIn0 = scratchArg7;
+    _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0,scratchArg3,4,0,0);
+    passThroughArg2 = r4AfterIoCall;
   }
-  return ((int (*)())glFlush_impl)(ctx,param_2,param_3,param_4,param_5,param_6,param_7);
+  return ((int (*)())glFlush_impl)(ctx,passThroughArg2,scratchArg3,scratchArg4,scratchArg5,scratchArg6,scratchArg7);
 }
 
 /* _gldFlush @ 0x1a5c0 (28 bytes) */
@@ -444,7 +444,7 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
   uint scalarIn0;
   uint scalarIn1;
   
-  needsResolve = ((int (*)())FUN_0001a010)(ctx,1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
     ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
@@ -509,13 +509,13 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
     }
     *(uint *)(ctx + 0x2a88) = pendingSampleFlag;
     *(int *)(ctx + 0x2a84) = pendingSampleCount;
-    ((int (*)())FUN_00019db0)(ctx,pendingSampleCount,(uint)(pendingSampleFlag < 2));
+    ((int (*)())gld_applySampleConfiguration)(ctx,pendingSampleCount,(uint)(pendingSampleFlag < 2));
   }
   return;
 }
 
-/* FUN_0001a9d0 @ 0x1a9d0 (588 bytes) */
-int FUN_0001a9d0(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3, staleArgR8, staleArgR9)
+/* gld_swapBuffersImpl @ 0x1a9d0 (588 bytes) */
+int gld_swapBuffersImpl(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3, staleArgR8, staleArgR9)
   int ctx;
   undefined4 framebufferObj;
   undefined4 dirtyBitsArg;
@@ -534,7 +534,7 @@ int FUN_0001a9d0(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3, stale
   uint scalarIn0;
   uint scalarIn1;
   
-  needsResolve = ((int (*)())FUN_0001a010)(ctx,1,dirtyBitsArg,scratchR6,dirtyWord3,staleArgR8,staleArgR9);
+  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1,dirtyBitsArg,scratchR6,dirtyWord3,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
     ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
@@ -596,7 +596,7 @@ int FUN_0001a9d0(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3, stale
     }
     *(uint *)(ctx + 0x2a88) = pendingSampleFlag;
     *(int *)(ctx + 0x2a84) = pendingSampleCount;
-    ((int (*)())FUN_00019db0)(ctx,pendingSampleCount,(uint)(pendingSampleFlag < 2));
+    ((int (*)())gld_applySampleConfiguration)(ctx,pendingSampleCount,(uint)(pendingSampleFlag < 2));
   }
   return;
 }
@@ -2926,7 +2926,7 @@ int gld_startPacket(ctx)
   /* Ghidra dropped this tail-call's 2nd arg (bctr preserves whatever's in r4 - confirmed via stock
    * disassembly 0x1e050-0x1e078: r4 is explicitly loaded as r2+4 (== packet+1, the just-advanced
    * write pointer) right before the tail jump through the vtable slot at +0x299c, which is
-   * FUN_0002be60, the ring-buffer "set current pointer" setter (ctx, new_ptr). Without this arg,
+   * gld_setStreamCursor, the ring-buffer "set current pointer" setter (ctx, new_ptr). Without this arg,
    * whatever garbage was left in r4 (observed live: leftover "1" from this function's own earlier
    * call) got installed as the ring buffer's current write pointer, corrupting it for every
    * subsequent allocation through this object - root cause of the post-gldCreateContext GLDriver
@@ -3006,14 +3006,14 @@ int gld_prepareBufferBacking(ctx, bufferObject, mode)
   int gld_setBufferAgpRefBackingResult;
   int gld_setBufferNewTextureBackingResult;
   bool isDefaultMode;
-  undefined4 uVar2;
+  undefined4 packetFillWord;
   uint scratchUint3;
   undefined4 staleArgR6;
   int scratchInt4;
-  uint uVar5;
+  uint scratchArg5;
   uint *dirtyState;
   uint scratchUint7;
-  int iVar8;
+  int backingRecord;
   undefined4 *packetEnd;
   undefined4 *packetCursor;
   uint tailBytes;
@@ -3050,7 +3050,7 @@ LAB_0001e3b0:
       scratchUint7 = bufferDesc[1];
       tailBytes = (scratchUint7 - (scratchUint7 / chunkVerts[0]) * chunkVerts[0]) + 3 & 0xfffffffc;
     }
-    uVar5 = scratchUint7;
+    scratchArg5 = scratchUint7;
     if ((*(short *)(bufferDesc + 3) == -0x771c) && (tailMode < 0x4f)) {
       if (isDefaultMode) {
         scratchInt4 = 0;
@@ -3058,25 +3058,25 @@ LAB_0001e3b0:
       else {
         scratchInt4 = 0x49;
       }
-      uVar5 = *bufferDesc;
+      scratchArg5 = *bufferDesc;
       scratchUint3 = tailBytes + chunkVerts[0] * chunkCount;
-      gld_setBufferNewTextureBackingResult = gld_setBufferNewTextureBacking(ctx,bufferObject,scratchInt4 + (tailMode * 0x12 + 0xc) * 4,scratchUint3,uVar5,scratchUint7);
+      gld_setBufferNewTextureBackingResult = gld_setBufferNewTextureBacking(ctx,bufferObject,scratchInt4 + (tailMode * 0x12 + 0xc) * 4,scratchUint3,scratchArg5,scratchUint7);
       if (gld_setBufferNewTextureBackingResult == 0) {
-        uVar5 = bufferDesc[1];
+        scratchArg5 = bufferDesc[1];
         goto LAB_0001e440;
       }
     }
     else {
 LAB_0001e440:
       scratchUint3 = *bufferDesc;
-      gld_setBufferAgpRefBackingResult = gld_setBufferAgpRefBacking(ctx,bufferObject,scratchUint3,scratchUint3,uVar5);
+      gld_setBufferAgpRefBackingResult = gld_setBufferAgpRefBacking(ctx,bufferObject,scratchUint3,scratchUint3,scratchArg5);
       if (gld_setBufferAgpRefBackingResult == 0) {
         return 0;
       }
     }
     if (bufferObject[4] == 7) {
       scratchUint7 = *bufferDesc;
-      uVar5 = 0;
+      scratchArg5 = 0;
       *(undefined1 *)(*(int *)bufferObject[2] + 0x15) = 0;
       scratchUint7 = (scratchUint7 & 0xfff) - (scratchUint7 & 0xfe0) >> 2;
       *(undefined1 *)(*(int *)bufferObject[2] + 0x17) = 0;
@@ -3106,7 +3106,7 @@ LAB_0001e440:
                gld_emitRenderTargetPacket(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,scratchUint7,
                             chunkCount << 0x10 | chunkDwords);
       if (tailBytes != 0) {
-        uVar5 = 0;
+        scratchArg5 = 0;
         scratchUint3 = chunkVerts[0];
         packetEnd = (undefined4 *)
                  gld_emitRenderTargetPacket(packetEnd,6,chunkVerts[0],chunkVerts[0],0,scratchUint7,tailBytes >> 2 | 0x10000);
@@ -3119,12 +3119,12 @@ LAB_0001e440:
       packetEnd[1] = 5;
       packetEnd[3] = 0x10000;
       if (!isDefaultMode) {
-        uVar2 = *(undefined4 *)(ctx + 0x1d74);
+        packetFillWord = *(undefined4 *)(ctx + 0x1d74);
         packetCursor = packetEnd + 5;
         packetEnd[4] = 0x4790b1;
         scratchInt4 = 0x48;
         do {
-          *packetCursor = uVar2;
+          *packetCursor = packetFillWord;
           packetCursor = packetCursor + 1;
           scratchInt4 = scratchInt4 + -1;
         } while (scratchInt4 != 0);
@@ -3135,7 +3135,7 @@ LAB_0001e440:
     *(undefined1 *)(scratchInt4 + 0x14) = 1;
     dirtyState = (uint *)bufferObject[1];
     if (((*dirtyState & 2) == 0) || ((*(uint *)(ctx + 0x24) & 2) == 0)) goto LAB_0001e6e0;
-    gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],scratchUint3,uVar5,dirtyState,scratchInt4,packetEnd);
+    gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],scratchUint3,scratchArg5,dirtyState,scratchInt4,packetEnd);
   }
   else {
     dirtyState = (uint *)bufferObject[1];
@@ -3156,10 +3156,10 @@ LAB_0001e440:
     if ((tailBytes & 2) == 0) goto LAB_0001e6e0;
     *(undefined1 *)(scratchInt4 + 0x14) = 1;
     *(ushort *)(*(int *)bufferObject[2] + 0x1c) = *(ushort *)(*(int *)bufferObject[2] + 0x1c) | 1;
-    iVar8 = *(int *)bufferObject[2];
-    *(ushort *)(iVar8 + 0x28) = *(ushort *)(iVar8 + 0x28) & 0xfffe;
+    backingRecord = *(int *)bufferObject[2];
+    *(ushort *)(backingRecord + 0x28) = *(ushort *)(backingRecord + 0x28) & 0xfffe;
     if ((*(uint *)(ctx + 0x24) & 2) != 0) {
-      gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,scratchInt4,dirtyState,iVar8,tailBytes & 2);
+      gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,scratchInt4,dirtyState,backingRecord,tailBytes & 2);
       dirtyState = (uint *)bufferObject[1];
       goto LAB_0001e6e0;
     }
@@ -3635,11 +3635,11 @@ int gld_drawVertexArray(ctx, drawKind, primitiveMode, first, count, indexType, d
   byte *retireCounter;
   int currentProgram;
   int currentVertexArray;
-  byte *pbVar1;
+  byte *highIndexBytePtr;
   bool hasVertices;
   bool hasElements;
-  bool bVar4;
-  byte bVar5;
+  bool noAttribBitsLeft;
+  byte lowIndexByte;
   uint usesBuffers;
   uint arrayPairs;
   uint enabledArrays;
@@ -3652,18 +3652,18 @@ int gld_drawVertexArray(ctx, drawKind, primitiveMode, first, count, indexType, d
   uint *scratchPtr15;
   uint *packetPtr;
   undefined4 scratchUint17;
-  void *pvVar18;
+  void *indexSource;
   undefined *scratchPtr19;
   int elementBinding;
   uint packetStateWords;
-  int iVar22;
+  int swapHalves;
   uint scratchUint23;
   uint casResult;
   byte *indexBytes;
   int arrayStateB;
   code *arrayRecordCursor;
   int *scratchPtr28;
-  uint uVar29;
+  uint vertexWord3;
   undefined4 *drawPacket;
   int arrayState;
   undefined *chunkCount;
@@ -3991,9 +3991,9 @@ code_r0x0001f1ac:
         ringHeaderZero = drawPacket + 7;
         drawPacket[6] = (int)packetPtr + (4 - (int)drawPacket) >> 2;
         scratchUint35 = *(uint *)(ctx + 0x271c);
-        bVar4 = scratchUint35 == 0;
+        noAttribBitsLeft = scratchUint35 == 0;
         needStatePacket = keepStateCache;
-        if (!bVar4) {
+        if (!noAttribBitsLeft) {
           scratchPtr15 = packetPtr + 1;
           *packetPtr = (*(int *)(ctx + 0x2720) + -1) * 0x10000 | 0xc0001000;
           if (*(int *)(*(int *)(ctx + GLD_capsBlock) + 0x11c) == 0) {
@@ -4059,7 +4059,7 @@ code_r0x0001f1ac:
           else {
             currentProgram = *(int *)(ctx + GLD_currentProgram);
           }
-          iVar22 = *(int *)(*(int *)(ctx + GLD_capsBlock) + 0x11c);
+          swapHalves = *(int *)(*(int *)(ctx + GLD_capsBlock) + 0x11c);
           scratchInt36 = 0x16;
           packetPtr = scratchPtr15;
           if ((currentProgram == 0) || (scratchInt36 = *(int *)(*(int *)(ctx + 0x29e8) + 0x28), scratchInt36 != 0))
@@ -4070,19 +4070,19 @@ code_r0x0001f1ac:
               scratchUint13 = 1 << (casResult & 0x3f);
               if ((scratchUint35 & scratchUint13) != 0) {
                 scratchUint23 = casResult;
-                if (iVar22 != 0) {
+                if (swapHalves != 0) {
                   scratchUint23 = *scratchPtr15;
                 }
                 scratchUint35 = scratchUint35 & ~scratchUint13;
                 casResult2 = currentAttribs + scratchUint23 * 0x10;
-                bVar4 = scratchUint35 == 0;
+                noAttribBitsLeft = scratchUint35 == 0;
                 *packetPtr = *(uint *)(currentAttribs + scratchUint23 * 0x10);
                 packetPtr[1] = *(uint *)(casResult2 + 4);
                 packetPtr[2] = *(uint *)(casResult2 + 8);
                 packetPtr[3] = *(uint *)(casResult2 + 0xc);
                 packetPtr = packetPtr + 4;
               }
-              if (bVar4) break;
+              if (noAttribBitsLeft) break;
               casResult = casResult + 1;
               scratchPtr15 = scratchPtr15 + 1;
               scratchInt36 = scratchInt36 + -1;
@@ -4115,12 +4115,12 @@ code_r0x0001f7c0:
                 casResult = *packetPtr;
                 scratchUint13 = packetPtr[1];
                 scratchUint23 = packetPtr[2];
-                uVar29 = packetPtr[3];
+                vertexWord3 = packetPtr[3];
                 packetPtr = packetPtr + 4;
                 *refCountWord = casResult << 0x10 | casResult >> 0x10;
                 refCountWord[1] = scratchUint13 << 0x10 | scratchUint13 >> 0x10;
                 refCountWord[2] = scratchUint23 << 0x10 | scratchUint23 >> 0x10;
-                refCountWord[3] = uVar29 << 0x10 | uVar29 >> 0x10;
+                refCountWord[3] = vertexWord3 << 0x10 | vertexWord3 >> 0x10;
                 refCountWord = refCountWord + 4;
                 scratchUint35 = scratchUint35 - 1;
               } while (scratchUint35 != 0);
@@ -4175,7 +4175,7 @@ code_r0x0001f7c0:
       }
       else if (((unsigned char *)0x00001403) < indexType) {
         if (indexType == ((unsigned char *)0x00001405)) {
-          pvVar18 = (void *)(chunkFirst * 4 + drawFlagsArg);
+          indexSource = (void *)(chunkFirst * 4 + drawFlagsArg);
           scratchUint35 = (int)chunkCount << 0x10 | *(uint *)(primitiveMode * 4 + 0x1d91c8) & 0xf | 0x810;
           if (elementsInBuffer == 0) {
             *packetPtr = 0x82c;
@@ -4184,7 +4184,7 @@ code_r0x0001f7c0:
             packetPtr[2] = (int)chunkCount << 0x10 | 0xc0003600;
             packetPtr[3] = scratchUint35;
             packetPtr[1] = casResult;
-            _memcpy(packetPtr + 4,pvVar18,(int)chunkCount * 4);
+            _memcpy(packetPtr + 4,indexSource,(int)chunkCount * 4);
           }
           else {
             *packetPtr = 0x82c;
@@ -4197,10 +4197,10 @@ code_r0x0001f7c0:
             packetPtr[5] = 0x80000810;
             ringHeaderZero = ringHeaderZero + 1;
             if (elementBufferRecord == (undefined4 *)0x0) {
-              packetPtr[6] = (int)pvVar18 - clientDataBase;
+              packetPtr[6] = (int)indexSource - clientDataBase;
             }
             else {
-              packetPtr[6] = (int)pvVar18 - *(int *)*elementBufferRecord;
+              packetPtr[6] = (int)indexSource - *(int *)*elementBufferRecord;
             }
             refCountWord = packetPtr + 8;
             packetPtr[7] = (uint)chunkCount;
@@ -4231,11 +4231,11 @@ code_r0x0001f7c0:
           scratchUint35 = 0;
           indexBytes = (byte *)(chunkFirst + drawFlagsArg);
           do {
-            pbVar1 = indexBytes + 1;
+            highIndexBytePtr = indexBytes + 1;
             scratchUint35 = scratchUint35 + 2;
-            bVar5 = *indexBytes;
+            lowIndexByte = *indexBytes;
             indexBytes = indexBytes + 2;
-            *refCountWord = (uint)*pbVar1 << 0x10 | (uint)bVar5;
+            *refCountWord = (uint)*highIndexBytePtr << 0x10 | (uint)lowIndexByte;
             refCountWord = refCountWord + 1;
           } while (scratchUint35 < ((uint)chunkCount & 0xfffffffe));
         }
@@ -4823,16 +4823,16 @@ int gldDisplayNotificationCallback(unusedArg1, ctx, unusedArg3, staleArgR6, noti
   return;
 }
 
-/* FUN_00020b00 @ 0x20b00 (40 bytes) */
-int FUN_00020b00(param_1)
-  int param_1;
+/* gld_resetNotificationSettings @ 0x20b00 (40 bytes) */
+int gld_resetNotificationSettings(ctx)
+  int ctx;
 {
-  *(undefined4 *)(param_1 + 0x2a7c) = 0;
-  *(undefined4 *)(param_1 + 0x2a70) = 0;
-  *(undefined1 *)(param_1 + 0x2a6c) = 0;
-  *(undefined1 *)(param_1 + 0x2a6a) = 0;
-  *(undefined4 *)(param_1 + 0x2a74) = 0;
-  *(undefined4 *)(param_1 + 0x2a78) = 0;
+  *(undefined4 *)(ctx + 0x2a7c) = 0;
+  *(undefined4 *)(ctx + 0x2a70) = 0;
+  *(undefined1 *)(ctx + 0x2a6c) = 0;
+  *(undefined1 *)(ctx + 0x2a6a) = 0;
+  *(undefined4 *)(ctx + 0x2a74) = 0;
+  *(undefined4 *)(ctx + 0x2a78) = 0;
   return;
 }
 
@@ -5253,8 +5253,8 @@ uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR
   bool noUnitUpdate;
   undefined *scratchPtr4;
   undefined *scratchPtr5;
-  undefined *puVar6;
-  undefined *puVar7;
+  undefined *flushEntry;
+  undefined *dispatchEntryAlt;
   int scratchInt8;
   uint scratchUint9;
   int *framebufferObj;
@@ -5266,7 +5266,7 @@ uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR
   int *r4Out5;
   uint *dirtyBitsArg;
   undefined4 *currentProgram;
-  short *psVar13;
+  short *programRecord;
   uint target;
   uint scratchUint15;
   uint boundTexture;
@@ -5279,7 +5279,7 @@ uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR
   int unitRowOffset2;
   uint scratchUint24;
   uint *dirtyWord3Ptr;
-  bool bVar27;
+  bool hasProgramObject;
   uint scratchUint26;
   int targetsLeft2;
   double staleStackArg_ffffff78;
@@ -5333,7 +5333,7 @@ LAB_00022438:
          (result = 0xc, *(int *)(ctx + GLD_boundFramebuffer) != 0)) {
         result = 4;
       }
-      fpPassThrough1 = (double)FUN_00017260(ctx);
+      fpPassThrough1 = (double)gld_updateColorFormatIndex(ctx);
       framebufferObj = r4Out0;
     }
     dirtyWord1Ptr = dirtyBits + 1;
@@ -5342,8 +5342,8 @@ LAB_00022438:
     if (currentProgram == (undefined4 *)0x0) {
       programActive = '\0';
       if ((((unsigned char *)0x0000430c)[*(int *)(ctx + GLD_engineState)] != '\0') &&
-         ((psVar13 = (short *)**(undefined4 **)(*(int *)(ctx + GLD_engineObjects) + 400),
-          *(int *)(psVar13 + 2) == 0 || (programActive = '\x01', *psVar13 == -0x7e00)))) goto LAB_00022540;
+         ((programRecord = (short *)**(undefined4 **)(*(int *)(ctx + GLD_engineObjects) + 400),
+          *(int *)(programRecord + 2) == 0 || (programActive = '\x01', *programRecord == -0x7e00)))) goto LAB_00022540;
     }
     else if ((*(int *)((short *)*currentProgram + 2) == 0) || (*(short *)*currentProgram == -0x7e00)) {
 LAB_00022540:
@@ -5370,9 +5370,9 @@ LAB_00022580:
       if (programObject == (int *)0x0) {
         if (((((unsigned char *)0x0000430c)[*(int *)(ctx + GLD_engineState)] != '\0') &&
             (currentProgram = *(undefined4 **)(*(int *)(ctx + GLD_engineObjects) + 400),
-            currentProgram != (undefined4 *)0x0)) && (psVar13 = (short *)*currentProgram, *psVar13 != -0x7e00)) {
-          scratchUint9 = *(uint *)(psVar13 + 4);
-          scratchUint22 = *(uint *)(psVar13 + 6);
+            currentProgram != (undefined4 *)0x0)) && (programRecord = (short *)*currentProgram, *programRecord != -0x7e00)) {
+          scratchUint9 = *(uint *)(programRecord + 4);
+          scratchUint22 = *(uint *)(programRecord + 6);
           goto LAB_000225e8;
         }
         unitIndex = 0;
@@ -5489,8 +5489,8 @@ LAB_000225e8:
     mutexHeld = !noUnitUpdate;
     if ((scratchUint9 & 0x5400000) != 0) {
       if ((*(int *)(*(int *)(ctx + GLD_engineObjects) + 0x198) != 0) ||
-         (bVar27 = false, *(int *)(*(int *)(ctx + GLD_engineObjects) + 0x18c) != 0)) {
-        bVar27 = true;
+         (hasProgramObject = false, *(int *)(*(int *)(ctx + GLD_engineObjects) + 0x18c) != 0)) {
+        hasProgramObject = true;
       }
       mutexHeld = noUnitUpdate;
       if (!mutexHeld) {
@@ -5499,7 +5499,7 @@ LAB_000225e8:
       mutexHeld = mutexHeld && !noUnitUpdate;
       fpPassThrough1 = (double)gld_resolveProgramSlots(ctx);
       scratchInt8 = *(int *)(ctx + GLD_currentProgram);
-      if (bVar27 != (scratchInt8 != 0)) {
+      if (hasProgramObject != (scratchInt8 != 0)) {
         *(undefined1 *)(ctx + 0x26bd) = 1;
         scratchInt8 = *(int *)(ctx + GLD_currentProgram);
       }
@@ -5522,7 +5522,7 @@ LAB_000225e8:
         _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
         mutexHeld = false;
       }
-      fpPassThrough1 = (double)FUN_0000b750(ctx);
+      fpPassThrough1 = (double)gld_updateCurrentVertexArray(ctx);
       dirtyWord3 = *dirtyWord3Ptr;
       framebufferObj = r4Out3;
     }
@@ -5547,8 +5547,8 @@ LAB_000225e8:
       gld_validateStreamState(ctx + GLD_commandStream,dirtyBits);
       framebufferObj = r4Out5;
     }
-    puVar7 = PTR_FUN_001e8980;
-    puVar6 = PTR__gldFlush_001e897c;
+    dispatchEntryAlt = PTR_FUN_001e8980;
+    flushEntry = PTR__gldFlush_001e897c;
     scratchPtr5 = PTR__gldFinish_001e8978;
     scratchPtr4 = PTR_FUN_001e8938;
     if ((*(uint *)(GLD_updateFlags + ctx) & 2) != 0) {
@@ -5570,16 +5570,16 @@ LAB_000225e8:
         }
         else if ((renderFlags & 0x400) == 0) {
           *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8938;
-          *(undefined **)(dispatch + 0x58) = puVar7;
+          *(undefined **)(dispatch + 0x58) = dispatchEntryAlt;
           *(undefined **)(dispatch + 0x5c) = scratchPtr4;
         }
         else if ((renderFlags & 0x800) == 0) {
           *(undefined **)(dispatch + 0x58) = PTR__gldFinish_001e8978;
-          *(undefined **)(dispatch + 0x5c) = puVar6;
+          *(undefined **)(dispatch + 0x5c) = flushEntry;
           *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8934;
         }
         else if (*(int *)(ctx + 0x26a0) == 0) {
-          ((int (*)())FUN_0001a9d0)(ctx,framebufferObj,dirtyBitsArg,scratchR6,dirtyWord3,scratchUint9,renderFlags & 0x800);
+          ((int (*)())gld_swapBuffersImpl)(ctx,framebufferObj,dirtyBitsArg,scratchR6,dirtyWord3,scratchUint9,renderFlags & 0x800);
           scratchPtr4 = PTR__gldFlush_001e897c;
           *(undefined **)(dispatch + 0x58) = PTR__gldFinish_001e8978;
           *(undefined **)(dispatch + 0x5c) = scratchPtr4;
@@ -6135,11 +6135,11 @@ int gld_emitSurfaceCopyPacket(ctx, packet, readSurfaceCode, resolveFlag, srcX, s
 }
 
 /* returnSecondArgument @ 0x236f0 (8 bytes) */
-int returnSecondArgument(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int returnSecondArgument(unusedArg1, value)
+  undefined4 unusedArg1;
+  undefined4 value;
 {
-  return param_2;
+  return value;
 }
 
 /* gldEmitCurrentAttributeRegisters @ 0x23700 (360 bytes) */
@@ -6569,7 +6569,7 @@ asm(".set gld_signalFence, _gld_signalFence");
 asm(".globl glFinish_impl");
 asm(".set glFinish_impl, _glFinish_impl");
 asm(".globl FUN_0001a9d0");
-asm(".set FUN_0001a9d0, _FUN_0001a9d0");
+asm(".set FUN_0001a9d0, _gld_swapBuffersImpl");
 asm(".globl returnZero_1e270");
 asm(".set returnZero_1e270, _returnZero_1e270");
 asm(".globl gld_drawVertexArray");

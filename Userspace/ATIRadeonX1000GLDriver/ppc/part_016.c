@@ -726,7 +726,7 @@ int FUN_000a8c00(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
   streamPtr4 = *(int *)(stream + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(streamPtr4 + 0x10)] != '\0') &&
      ((*(uint *)(stream + 0x44) & 0x20000) == 0)) {
-    streamPtr4 = FUN_0001a010(streamPtr4,*(undefined4 *)(streamPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,
+    streamPtr4 = gld_needsMultisampleResolve(streamPtr4,*(undefined4 *)(streamPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,
                          staleArgR9);
     if (streamPtr4 == 0) {
       streamPtr4 = *(int *)(stream + 4);
@@ -1553,7 +1553,7 @@ LAB_000a9ffc:
         uVar10 = 0;
       }
       else {
-        streamPtr4 = FUN_0001a010(streamPtr4,*(undefined4 *)(streamPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar10,dirtyWord1
+        streamPtr4 = gld_needsMultisampleResolve(streamPtr4,*(undefined4 *)(streamPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar10,dirtyWord1
                               ,uVar20);
         puVar16 = r4AfterCall6;
         fpPassThrough1 = f1AfterCall2;
@@ -2335,7 +2335,7 @@ LAB_000ab3d0:
     uVar10 = 0;
   }
   else {
-    streamPtr4 = FUN_0001a010(streamPtr4,*(undefined4 *)(streamPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar20,uVar10,
+    streamPtr4 = gld_needsMultisampleResolve(streamPtr4,*(undefined4 *)(streamPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar20,uVar10,
                           puVar21);
     fpPassThrough1 = f1AfterCall3;
     if (streamPtr4 != 0) {
