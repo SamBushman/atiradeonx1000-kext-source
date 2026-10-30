@@ -109,3 +109,14 @@ func	FUN_00076ac0	vpStateComputeKey	INFERRED	builds the vertex-program state cac
 func	FUN_00076c60	vpStateSelectForDraw	INFERRED	looks up (vpStateCacheLookup) or creates the cached vertex-program state for the current key, refreshes fog constants / parameters and re-applies the state block through the hooks at ctx+0x12a4/+0x12b4/+0x1294
 func	FUN_00079e70	recordFindScheduleConflict	INFERRED	scans the queued records for pairs whose dependency lists overlap or whose sources are not distinct and returns a result code (6/8/9) for the conflict kind
 func	FUN_0007a1a0	recordRemapComponents	INFERRED	applies a component swizzle to a record: remaps its write mask, permutes the 3-bit source selects of each used source and fixes the consumers' selects
+func	FUN_00082c50	gldEmitProgramConstants	INFERRED	emits the program constant block: programFillStateConstants, then a 0x880 register packet with program+0x48 vec4s copied from program+0x4c (or, for the fixed-function flag program+0x58, 16 words from the state block +0x2460..0x249c)
+func	FUN_00082900	gldAllocAndUploadConstants	INFERRED	reserves a constant range (ctx+0x3cc base / +0x3d0 offset, retrying with the 0->1->2 allocation modes in ctx+0xd8) for the block at program+0x54 and emits it as 0x8a1/0x880 register packets plus the 0x1b90/0x1b94 range registers
+func	FUN_000768e0	vpStateApplyParameters	INFERRED	copies the program parameter vectors (0x54-byte entries) into the current vertex-program state record's constant slots (+0x154..), tracks the highest slot used (+0x137c) and then calls vpStateUpdateFogConstants
+func	FUN_00086930	gldLodBiasToFixed	INFERRED	converts a float bias (sum of the two double arguments plus ctx+0x284c scaled) to the clamped fixed-point value (-0x10..), 0 for zero
+func	FUN_00086a10	gldUpdateLodBiasField	INFERRED	stores gldLodBiasToFixed(record float at +0x20, optional extra bias or 1.0) into the ushort at record+0x1e
+func	FUN_00087e60	arbfpWorkAreaSizeA	INFERRED	returns the constant 0x3880 (size of the fragment work area), identical to arbfpWorkAreaSizeB
+func	FUN_00087e70	arbfpWorkAreaSizeB	INFERRED	returns the constant 0x3880 (size of the fragment work area), identical to arbfpWorkAreaSizeA
+func	FUN_00090960	gldClearHwTclFlag	INFERRED	when state object byte +0x20 is set and ctx+0x8c bit 30 is set, clears the byte and +0x1cc and calls gldEmitTclModeRegs
+func	FUN_00093390	ffvpEmitVectorLength	INFERRED	allocates one temp and emits the three-instruction length computation (dot product, reciprocal-sqrt style op, multiply) of the vector in builder slot +8 into the output temp
+func	FUN_00078990	recordFlagsPending20	INFERRED	true when the record's flag word (alloc+0x3348c+index*4) has 0x20 set and 0x100/0x1000 clear
+func	FUN_000789d0	recordFlagsPending2	INFERRED	true when the record's flag word has 0x2 set and 0x100/0x2000 clear

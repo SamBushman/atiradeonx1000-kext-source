@@ -653,7 +653,7 @@
 0x764a0	188	evsEmitMov	part_010	converted
 0x76560	524	evsEmitIndexOrMove	part_010	converted
 0x76770	352	vpStateUpdateFogConstants	part_010	converted
-0x768e0	384	FUN_000768e0	part_010	converted
+0x768e0	384	vpStateApplyParameters	part_010	converted
 0x76ac0	188	vpStateComputeKey	part_010	converted
 0x76b80	116	vpStateCacheInsert	part_010	converted
 0x76c00	4	noop_76c00	part_010	converted
@@ -687,8 +687,8 @@
 0x78700	84	recordMarkDependentsDirty	part_011	converted
 0x78760	448	recordAssignDestinationRegister	part_011	converted
 0x78950	64	recordMarkPairEmitted	part_011	converted
-0x78990	56	FUN_00078990	part_011	converted
-0x789d0	56	FUN_000789d0	part_011	converted
+0x78990	56	recordFlagsPending20	part_011	converted
+0x789d0	56	recordFlagsPending2	part_011	converted
 0x78a10	356	recordCountSourceRegisterFiles	part_011	converted
 0x78b80	560	recordRetargetDestination	part_011	converted
 0x78db0	68	regBindingClear	part_011	converted
@@ -715,8 +715,8 @@
 0x7dcd0	88	ctxTempListPush	part_011	converted
 0x7dd30	160	ctxTempListRemove	part_011	converted
 0x7dde0	3504	evsFoldConstantMoves	part_011	converted
-0x82900	812	FUN_00082900	part_011	converted
-0x82c50	760	FUN_00082c50	part_011	converted
+0x82900	812	gldAllocAndUploadConstants	part_011	converted
+0x82c50	760	gldEmitProgramConstants	part_011	converted
 0x82f60	416	interpolatorMapInit	part_011	converted
 0x83100	4	noop_83100	part_012	converted
 0x83110	856	ffvpSetupVertexOutputRouting	part_012	converted
@@ -747,8 +747,8 @@
 0x86710	152	FUN_00086710	part_012	converted
 0x867b0	140	gldSyncClipPlaneEnables	part_012	converted
 0x86840	228	gldUploadClipPlanes	part_012	converted
-0x86930	204	FUN_00086930	part_012	converted
-0x86a10	96	FUN_00086a10	part_012	converted
+0x86930	204	gldLodBiasToFixed	part_012	converted
+0x86a10	96	gldUpdateLodBiasField	part_012	converted
 0x86a80	284	gldSaveRasterState	part_012	converted
 0x86ba0	1840	gldEnterInternalDrawState	part_012	converted
 0x872e0	1296	gldLeaveInternalDrawState	part_012	converted
@@ -758,8 +758,8 @@
 0x879f0	732	arbfpInitUnitState	part_012	converted
 0x87cd0	188	arbfpUnbindWorkAreaChecked	part_012	converted
 0x87da0	172	arbfpUnbindWorkArea	part_012	converted
-0x87e60	8	FUN_00087e60	part_012	converted
-0x87e70	8	FUN_00087e70	part_012	converted
+0x87e60	8	arbfpWorkAreaSizeA	part_012	converted
+0x87e70	8	arbfpWorkAreaSizeB	part_012	converted
 0x87e80	764	arbfpCompileFragmentProgram	part_012	converted
 0x88190	740	arbfpBindFragmentProgram	part_012	converted
 0x88480	268	arbfpLookupKeyword	part_012	converted
@@ -811,7 +811,7 @@
 0x900a0	944	ffvpComputeOutputMasks	part_013	converted
 0x90470	952	gldValidateState	part_013	converted
 0x90840	264	gldEmitTclModeRegs	part_013	converted
-0x90960	48	FUN_00090960	part_013	converted
+0x90960	48	gldClearHwTclFlag	part_013	converted
 0x90990	772	gldUpdateHwTclState	part_013	converted
 0x90ca0	1240	ffvpAllocTempRegister	part_013	converted
 0x911a0	316	ffvpFreeTempRegister	part_013	converted
@@ -837,7 +837,7 @@
 0x93000	288	ffvpEmitTexCoordPassThrough	part_013	converted
 0x93130	168	ffvpEmitPointSizePassThrough	part_013	converted
 0x931e0	404	ffvpEmitFogPassThrough	part_013	converted
-0x93390	352	FUN_00093390	part_013	converted
+0x93390	352	ffvpEmitVectorLength	part_013	converted
 0x934f0	20	FUN_000934f0	part_014	converted
 0x93510	1220	ffvpEmitBlendedEyeNormal	part_014	converted
 0x939e0	52	ffvpPrepareRescaledNormal	part_014	converted

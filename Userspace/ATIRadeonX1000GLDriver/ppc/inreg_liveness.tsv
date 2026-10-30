@@ -310,8 +310,8 @@
 79e70	recordFindScheduleConflict	r7	PASS-no	79f10 bl 0x79e10
 79e70	recordFindScheduleConflict	r8	PASS-no	79f10 bl 0x79e10
 7c760	recordProgramBuildDependencies	r6	PASS-no	7c7b0 bl 0x7a060
-82900	FUN_00082900	r5	PASS-indirect	82b64 bctrl 
-82900	FUN_00082900	r6	PASS-indirect	82b64 bctrl 
+82900	gldAllocAndUploadConstants	r5	PASS-indirect	82b64 bctrl 
+82900	gldAllocAndUploadConstants	r6	PASS-indirect	82b64 bctrl 
 83470	ffvpBuildPassThroughProgram	r7	PASS-no	83498 bl 0x656b0
 83470	ffvpBuildPassThroughProgram	r8	PASS-no	83498 bl 0x656b0
 83470	ffvpBuildPassThroughProgram	r9	PASS-no	83498 bl 0x656b0

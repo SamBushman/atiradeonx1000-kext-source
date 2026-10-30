@@ -37,7 +37,7 @@
 4c544	4c55c	noop_4c540
 535c4	535f0	FUN_000534c0
 535f0	5360c	FUN_000534c0
-76a64	76ab4	FUN_000768e0
+76a64	76ab4	vpStateApplyParameters
 7a174	7a190	recordAllocFree
 7a190	7a1a0	recordAllocFree
 c6e40	c6e4c	psnReallocateTemps

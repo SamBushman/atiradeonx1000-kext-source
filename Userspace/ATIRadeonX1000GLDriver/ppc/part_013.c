@@ -4278,8 +4278,8 @@ int gldEmitTclModeRegs(param_1)
   return;
 }
 
-/* FUN_00090960 @ 0x90960 (48 bytes) */
-int FUN_00090960(param_1)
+/* gldClearHwTclFlag @ 0x90960 (48 bytes) */
+int gldClearHwTclFlag(param_1)
   int param_1;
 {
   int iVar1;
@@ -5777,8 +5777,8 @@ int ffvpEmitFogPassThrough(programBuilder)
   return status;
 }
 
-/* FUN_00093390 @ 0x93390 (352 bytes) */
-int FUN_00093390(programBuilder)
+/* ffvpEmitVectorLength @ 0x93390 (352 bytes) */
+int ffvpEmitVectorLength(programBuilder)
   int programBuilder;
 {
   undefined4 srcTempFile;

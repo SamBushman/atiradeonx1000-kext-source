@@ -1502,7 +1502,7 @@ LAB_0004e294:
               uVar13 = (*(ushort *)(unitInfoCursor + 0x46e) & 0x3ff) << 3 | uVar13 & 0xffffe007;
             }
             else {
-              uVar12 = ((int (*)())FUN_00086930)(glContext,(double)*(float *)(unitInfoCursor + 0x470),fparam_2);
+              uVar12 = ((int (*)())gldLodBiasToFixed)(glContext,(double)*(float *)(unitInfoCursor + 0x470),fparam_2);
               uVar13 = (uVar12 & 0x3ff) << 3 | uVar13 & 0xffffe007;
               fparam_1 = extraout_f1;
             }

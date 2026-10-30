@@ -5659,7 +5659,7 @@ void gld_revalidateStreamProgram(int param_1,int param_2,undefined4 param_3,unde
   if (iVar2 != *(int *)(param_1 + 0x192c)) {
     ((void (*)())ffvpValidateProgramForced)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,staleFprArg3,
                  staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffb8);
-    FUN_00090960(param_1);
+    gldClearHwTclFlag(param_1);
     *(int *)(param_1 + 0x192c) = iVar2;
   }
   *(uint *)(param_1 + 0x1928) = *(uint *)(param_1 + 0x1928) & 0xfffffffe;
@@ -5794,7 +5794,7 @@ LAB_0002c610:
       FUN_000a7d10(stream);
     }
     ffvpSelectLitProgramVariant(stream);
-    FUN_00090960(stream);
+    gldClearHwTclFlag(stream);
     scratchUint8 = *dirtyBits;
     if (((scratchUint8 & 0x20000000) != 0) || (*(char *)(engineObjects + 0x2a43) != '\0')) {
       gld_emitDirtyStatePackets(engineObjects,0);
@@ -5877,7 +5877,7 @@ LAB_0002c610:
        * a dropped-call-args bug matching the same class already fixed for arbEmitRecord2Src_op01's own
        * dispatch calls. The line right above sets up *(0x2748+stream+4) - the exact "current
        * write pointer" value the real target expects as its 2nd argument - but never actually
-       * passes it; a sibling call site to this SAME dispatch slot (FUN_00082c50, part_011.c:8826)
+       * passes it; a sibling call site to this SAME dispatch slot (gldEmitProgramConstants, part_011.c:8826)
        * shows the correct, complete shape: `(*fn)(stream, *(int*)(0x2748+stream+4));`. Live-
        * verified via a hardware watchpoint installed from the moment CGLCreateContext returns
        * (tracking the target field through ~15 legitimate updates via FUN_0002be60): on real

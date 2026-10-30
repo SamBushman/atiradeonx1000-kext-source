@@ -5689,8 +5689,8 @@ int vpStateUpdateFogConstants(ctx, param_2, vpCache)
   return;
 }
 
-/* FUN_000768e0 @ 0x768e0 (384 bytes) */
-int FUN_000768e0(ctx, vpCache)
+/* vpStateApplyParameters @ 0x768e0 (384 bytes) */
+int vpStateApplyParameters(ctx, vpCache)
   int ctx;
   int *vpCache;
 {
@@ -5921,4 +5921,4 @@ asm(".set evsEmitMov, _evsEmitMov");
 asm(".globl evsEmitIndexOrMove");
 asm(".set evsEmitIndexOrMove, _evsEmitIndexOrMove");
 asm(".globl FUN_000768e0");
-asm(".set FUN_000768e0, _FUN_000768e0");
+asm(".set FUN_000768e0, _vpStateApplyParameters");

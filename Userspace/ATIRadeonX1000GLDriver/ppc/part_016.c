@@ -937,7 +937,7 @@ int FUN_000a9070(glContextPtr4, dirtyBitsWord10)
           if (iVar10 != 0) {
             iVar10 = iVar10 + 0x4c;
           }
-          FUN_00086a10(glContextPtr4 + 0x240,puVar19,iVar10);
+          gldUpdateLodBiasField(glContextPtr4 + 0x240,puVar19,iVar10);
         }
         if ((dirtyBitsWord10 & 0x100 << (loopIndex & 0x3f)) != 0) {
           *(undefined4 *)(puVar19 + 0x16) = *puVar18;

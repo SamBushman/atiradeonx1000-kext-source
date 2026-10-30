@@ -654,7 +654,7 @@
 0x764a0	evsEmitMov	188	yes	
 0x76560	evsEmitIndexOrMove	524	no	indirect call (driver context / vtable / callback)
 0x76770	vpStateUpdateFogConstants	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x768e0	FUN_000768e0	384	no	indirect call (driver context / vtable / callback)
+0x768e0	vpStateApplyParameters	384	no	indirect call (driver context / vtable / callback)
 0x76ac0	vpStateComputeKey	188	yes	
 0x76b80	vpStateCacheInsert	116	yes	
 0x76c00	noop_76c00	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -688,8 +688,8 @@
 0x78700	recordMarkDependentsDirty	84	yes	
 0x78760	recordAssignDestinationRegister	448	yes	
 0x78950	recordMarkPairEmitted	64	yes	
-0x78990	FUN_00078990	56	yes	
-0x789d0	FUN_000789d0	56	yes	
+0x78990	recordFlagsPending20	56	yes	
+0x789d0	recordFlagsPending2	56	yes	
 0x78a10	recordCountSourceRegisterFiles	356	yes	
 0x78b80	recordRetargetDestination	560	yes	
 0x78db0	regBindingClear	68	yes	
@@ -716,8 +716,8 @@
 0x7dcd0	ctxTempListPush	88	no	indirect call (driver context / vtable / callback)
 0x7dd30	ctxTempListRemove	160	no	indirect call (driver context / vtable / callback)
 0x7dde0	evsFoldConstantMoves	14156	yes	
-0x82900	FUN_00082900	812	no	indirect call (driver context / vtable / callback)
-0x82c50	FUN_00082c50	760	no	indirect call (driver context / vtable / callback)
+0x82900	gldAllocAndUploadConstants	812	no	indirect call (driver context / vtable / callback)
+0x82c50	gldEmitProgramConstants	760	no	indirect call (driver context / vtable / callback)
 0x82f60	interpolatorMapInit	416	no	indirect call (driver context / vtable / callback)
 0x83100	noop_83100	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x83110	ffvpSetupVertexOutputRouting	856	yes	
@@ -748,8 +748,8 @@
 0x86710	FUN_00086710	152	no	indirect call (driver context / vtable / callback)
 0x867b0	gldSyncClipPlaneEnables	140	yes	
 0x86840	gldUploadClipPlanes	228	no	indirect call (driver context / vtable / callback)
-0x86930	FUN_00086930	204	yes	
-0x86a10	FUN_00086a10	96	yes	
+0x86930	gldLodBiasToFixed	204	yes	
+0x86a10	gldUpdateLodBiasField	96	yes	
 0x86a80	gldSaveRasterState	284	yes	
 0x86ba0	gldEnterInternalDrawState	1840	no	indirect call (driver context / vtable / callback)
 0x872e0	gldLeaveInternalDrawState	1296	no	indirect call (driver context / vtable / callback)
@@ -759,8 +759,8 @@
 0x879f0	arbfpInitUnitState	732	yes	
 0x87cd0	arbfpUnbindWorkAreaChecked	188	yes	
 0x87da0	arbfpUnbindWorkArea	172	yes	
-0x87e60	FUN_00087e60	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x87e70	FUN_00087e70	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x87e60	arbfpWorkAreaSizeA	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x87e70	arbfpWorkAreaSizeB	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x87e80	arbfpCompileFragmentProgram	764	yes	
 0x88190	arbfpBindFragmentProgram	740	no	indirect call (driver context / vtable / callback)
 0x88480	arbfpLookupKeyword	268	yes	
@@ -812,7 +812,7 @@
 0x900a0	ffvpComputeOutputMasks	944	no	indirect call (driver context / vtable / callback)
 0x90470	gldValidateState	952	no	indirect call (driver context / vtable / callback)
 0x90840	gldEmitTclModeRegs	264	no	indirect call (driver context / vtable / callback)
-0x90960	FUN_00090960	48	yes	
+0x90960	gldClearHwTclFlag	48	yes	
 0x90990	gldUpdateHwTclState	772	yes	
 0x90ca0	ffvpAllocTempRegister	1240	yes	
 0x911a0	ffvpFreeTempRegister	316	yes	
@@ -838,7 +838,7 @@
 0x93000	ffvpEmitTexCoordPassThrough	288	no	indirect call (driver context / vtable / callback)
 0x93130	ffvpEmitPointSizePassThrough	168	no	indirect call (driver context / vtable / callback)
 0x931e0	ffvpEmitFogPassThrough	404	no	indirect call (driver context / vtable / callback)
-0x93390	FUN_00093390	352	no	indirect call (driver context / vtable / callback)
+0x93390	ffvpEmitVectorLength	352	no	indirect call (driver context / vtable / callback)
 0x934f0	FUN_000934f0	20	yes	
 0x93510	ffvpEmitBlendedEyeNormal	1220	no	indirect call (driver context / vtable / callback)
 0x939e0	ffvpPrepareRescaledNormal	52	yes	

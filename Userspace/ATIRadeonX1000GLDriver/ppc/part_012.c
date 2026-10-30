@@ -3149,8 +3149,8 @@ int gldUploadClipPlanes(ctx)
   return;
 }
 
-/* FUN_00086930 @ 0x86930 (204 bytes) */
-int FUN_00086930(int param_1,double fparam_1,double fparam_2)
+/* gldLodBiasToFixed @ 0x86930 (204 bytes) */
+int gldLodBiasToFixed(int param_1,double fparam_1,double fparam_2)
 {
   float fVar1;
   float fVar2;
@@ -3170,8 +3170,8 @@ int FUN_00086930(int param_1,double fparam_1,double fparam_2)
   return -0x10;
 }
 
-/* FUN_00086a10 @ 0x86a10 (96 bytes) */
-int FUN_00086a10(param_1, param_2, param_3)
+/* gldUpdateLodBiasField @ 0x86a10 (96 bytes) */
+int gldUpdateLodBiasField(param_1, param_2, param_3)
   undefined4 param_1;
   int param_2;
   float *param_3;
@@ -3179,11 +3179,11 @@ int FUN_00086a10(param_1, param_2, param_3)
   undefined2 uVar1;
   
   if (param_3 == (float *)0x0) {
-    uVar1 = ((int (*)())FUN_00086930)(param_1,(double)*(float *)(param_2 + 0x20),(double)FLOAT_001aa0d4);
+    uVar1 = ((int (*)())gldLodBiasToFixed)(param_1,(double)*(float *)(param_2 + 0x20),(double)FLOAT_001aa0d4);
     *(undefined2 *)(param_2 + 0x1e) = uVar1;
   }
   else {
-    uVar1 = ((int (*)())FUN_00086930)(param_1,(double)*(float *)(param_2 + 0x20),(double)*param_3);
+    uVar1 = ((int (*)())gldLodBiasToFixed)(param_1,(double)*(float *)(param_2 + 0x20),(double)*param_3);
     *(undefined2 *)(param_2 + 0x1e) = uVar1;
   }
   return;
@@ -3930,14 +3930,14 @@ int arbfpUnbindWorkArea(glContext, param_2)
   return;
 }
 
-/* FUN_00087e60 @ 0x87e60 (8 bytes) */
-int FUN_00087e60()
+/* arbfpWorkAreaSizeA @ 0x87e60 (8 bytes) */
+int arbfpWorkAreaSizeA()
 {
   return ((unsigned char *)0x00003880U);
 }
 
-/* FUN_00087e70 @ 0x87e70 (8 bytes) */
-int FUN_00087e70()
+/* arbfpWorkAreaSizeB @ 0x87e70 (8 bytes) */
+int arbfpWorkAreaSizeB()
 {
   return ((unsigned char *)0x00003880U);
 }
@@ -5071,7 +5071,7 @@ asm(".set FUN_00087cd0, _arbfpUnbindWorkAreaChecked");
 asm(".globl FUN_00087da0");
 asm(".set FUN_00087da0, _arbfpUnbindWorkArea");
 asm(".globl FUN_00087e60");
-asm(".set FUN_00087e60, _FUN_00087e60");
+asm(".set FUN_00087e60, _arbfpWorkAreaSizeA");
 asm(".globl FUN_00087e80");
 asm(".set FUN_00087e80, _arbfpCompileFragmentProgram");
 asm(".globl FUN_00088190");

@@ -48,7 +48,7 @@ int vpStateSelectForDraw(ctx)
     }
     *(byte *)(ctx + 0x2d) = *(byte *)(ctx + 0x2d) | 3;
   }
-  FUN_000768e0(ctx,shader);
+  vpStateApplyParameters(ctx,shader);
   (**(code **)(((unsigned char *)0x000012a4) + ctx))(ctx,shader,0);
 LAB_00076dc0:
   (**(code **)(((unsigned char *)0x000012b4) + ctx))(ctx);
@@ -1202,8 +1202,8 @@ int recordMarkPairEmitted(param_1)
   return;
 }
 
-/* FUN_00078990 @ 0x78990 (56 bytes) */
-int FUN_00078990(param_1, param_2)
+/* recordFlagsPending20 @ 0x78990 (56 bytes) */
+int recordFlagsPending20(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1216,8 +1216,8 @@ int FUN_00078990(param_1, param_2)
   return 0;
 }
 
-/* FUN_000789d0 @ 0x789d0 (56 bytes) */
-int FUN_000789d0(param_1, param_2)
+/* recordFlagsPending2 @ 0x789d0 (56 bytes) */
+int recordFlagsPending2(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -8831,8 +8831,8 @@ LAB_0007e2e0:
   goto LAB_0007de3c;
 }
 
-/* FUN_00082900 @ 0x82900 (812 bytes) */
-int FUN_00082900(glContext, program)
+/* gldAllocAndUploadConstants @ 0x82900 (812 bytes) */
+int gldAllocAndUploadConstants(glContext, program)
   int glContext;
   int program;
 {
@@ -8982,8 +8982,8 @@ LAB_000829a0:
   } while( true );
 }
 
-/* FUN_00082c50 @ 0x82c50 (760 bytes) */
-int FUN_00082c50(ctx, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+/* gldEmitProgramConstants @ 0x82c50 (760 bytes) */
+int gldEmitProgramConstants(ctx, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int ctx;
   int program;
   undefined4 unusedArg3;
@@ -9222,14 +9222,14 @@ asm(".set vpStateCacheFreeAll, _vpStateCacheFreeAll");
 asm(".globl vpStateSetConstantVector");
 asm(".set vpStateSetConstantVector, _vpStateSetConstantVector");
 asm(".globl FUN_00078990");
-asm(".set FUN_00078990, _FUN_00078990");
+asm(".set FUN_00078990, _recordFlagsPending20");
 asm(".globl FUN_000789d0");
-asm(".set FUN_000789d0, _FUN_000789d0");
+asm(".set FUN_000789d0, _recordFlagsPending2");
 asm(".globl evsFoldConstantMoves");
 asm(".set evsFoldConstantMoves, _evsFoldConstantMoves");
 asm(".globl FUN_00082900");
-asm(".set FUN_00082900, _FUN_00082900");
+asm(".set FUN_00082900, _gldAllocAndUploadConstants");
 asm(".globl FUN_00082c50");
-asm(".set FUN_00082c50, _FUN_00082c50");
+asm(".set FUN_00082c50, _gldEmitProgramConstants");
 asm(".globl interpolatorMapInit");
 asm(".set interpolatorMapInit, _interpolatorMapInit");
