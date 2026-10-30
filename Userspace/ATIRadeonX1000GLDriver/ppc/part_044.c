@@ -2598,55 +2598,63 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
   int *operandVReg3;
   int *operandVReg;
   int *operandVReg4;
-  bool bVar1;
-  char cVar2;
-  bool bVar3;
-  bool bVar4;
-  code *pcVar5;
+  bool sourcesCrossMatch;
+  bool notTrackingUses;
+  char laneSelectByteB;
+  bool nodeSwapped;
+  bool partnerSwapped;
+  code *setLaneFn;
   int vcall60Result;
   int *a0;
-  int iVar7;
-  int *piVar8;
-  int *piVar9;
+  int selectWordCopy;
+  int *selectWordPtr;
+  int *nodeSource2;
+  int *newConstInstA;
   int *operandVReg2;
-  int iVar11;
+  int nodeUseCount;
+  int destSelectSaved;
   undefined4 operandSelectB;
   int vslot73Result;
-  int iVar14;
-  int *piVar15;
+  int passStampD;
+  int *partnerSource2;
+  int *newConstInstB;
   int countdown;
-  uint uVar17;
-  int iVar18;
-  int iVar19;
-  int iVar20;
-  int iVar21;
-  int iVar22;
-  int *piVar23;
-  int iVar24;
+  uint trackUsesB;
+  int savedNodeField4;
+  int savedNodeField53;
+  int savedNodeField26;
+  int savedNodeField48;
+  int savedNodeField49;
+  int *sharedSource;
+  int partnerOpcode;
+  int restoredSelectWord;
+  int partnerOutputScale;
+  int opcodeOrSourcesDifferResult;
+  int laneIdx;
   int countdownB;
-  int local_108;
-  int local_104;
-  int local_100;
+  int partnerOperand1Select;
+  int mergedDestSelectA;
+  int combinedDestSelect;
   int operandSelect;
-  int local_f8;
-  int local_f4 [3];
-  int local_e8 [5];
-  undefined4 local_d4;
-  undefined4 local_d0;
-  undefined4 local_cc;
-  undefined4 local_bc;
-  undefined4 local_b8;
-  undefined4 local_b4;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_8c;
-  undefined4 local_88;
-  int local_84;
-  undefined4 local_74;
-  int local_68;
-  int *local_64;
-  undefined *local_60;
+  int nodeOperand1Select;
+  int counterSave [3];
+  int partnerOperand2Copy [5];
+  undefined4 partnerOperand2CopyEnd;
+  undefined4 nodeOperand2Copy;
+  undefined4 nodeOperand2Copy1;
+  undefined4 nodeOperand2CopyEnd;
+  undefined4 nodeOperand1Copy;
+  undefined4 nodeOperand1Copy1;
+  undefined4 nodeOperand1CopyEnd;
+  undefined4 partnerOperand1Copy;
+  undefined4 partnerOperand1Copy1;
+  undefined4 partnerOperand1CopyEnd;
+  undefined4 lastOperandBuf0;
+  int lastOperandSourceSave;
+  undefined4 lastOperandBuf2;
+  int mergedWrittenLanes;
+  int *combinedDestSelectPtr;
+  undefined *constTablePtr;
   
   if ((node[5] & 0x200U) == 0) {
     return 0;
@@ -2658,163 +2666,163 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
   if ((*(uint *)(*(int *)(*(int *)(pass + 8) + 0x30c) + 8) & 0x100) == 0) {
     return 0;
   }
-  iVar24 = *(int *)(a0[0x22] + 8);
+  partnerOpcode = *(int *)(a0[0x22] + 8);
   if (*(int *)(node[0x22] + 8) == 0x12) {
-    if (iVar24 == 0x12) {
+    if (partnerOpcode == 0x12) {
       operandVReg = (int *)IRInst__getOperandSource(node,1);
-      piVar9 = (int *)IRInst__getOperandSource(node,2);
+      nodeSource2 = (int *)IRInst__getOperandSource(node,2);
       operandVReg2 = (int *)IRInst__getOperandSource(a0,1);
-      piVar15 = (int *)IRInst__getOperandSource(a0,2);
-      bVar1 = operandVReg == piVar15;
-      if (bVar1) {
-        bVar1 = piVar9 == operandVReg2;
+      partnerSource2 = (int *)IRInst__getOperandSource(a0,2);
+      sourcesCrossMatch = operandVReg == partnerSource2;
+      if (sourcesCrossMatch) {
+        sourcesCrossMatch = nodeSource2 == operandVReg2;
         IRInst__swapOperands(a0,1,2,*(uint *)(pass + 8));
-        bVar4 = true;
-        bVar3 = false;
-        piVar23 = operandVReg;
-        piVar15 = operandVReg2;
+        partnerSwapped = true;
+        nodeSwapped = false;
+        sharedSource = operandVReg;
+        partnerSource2 = operandVReg2;
       }
       else {
-        piVar23 = piVar9;
-        if (piVar9 == operandVReg2) {
+        sharedSource = nodeSource2;
+        if (nodeSource2 == operandVReg2) {
           IRInst__swapOperands(node,1,2,*(uint *)(pass + 8));
-          bVar4 = false;
-          bVar3 = true;
-          piVar9 = operandVReg;
+          partnerSwapped = false;
+          nodeSwapped = true;
+          nodeSource2 = operandVReg;
         }
         else {
-          bVar1 = piVar9 == piVar15;
-          if (bVar1) {
-            bVar1 = operandVReg == operandVReg2;
+          sourcesCrossMatch = nodeSource2 == partnerSource2;
+          if (sourcesCrossMatch) {
+            sourcesCrossMatch = operandVReg == operandVReg2;
             IRInst__swapOperands(a0,1,2,*(uint *)(pass + 8));
             IRInst__swapOperands(node,1,2,*(uint *)(pass + 8));
-            bVar4 = true;
-            bVar3 = true;
-            piVar15 = operandVReg2;
-            piVar9 = operandVReg;
+            partnerSwapped = true;
+            nodeSwapped = true;
+            partnerSource2 = operandVReg2;
+            nodeSource2 = operandVReg;
           }
           else {
             if (operandVReg != operandVReg2) {
               return 0;
             }
-            bVar4 = false;
-            bVar3 = false;
-            piVar23 = operandVReg2;
+            partnerSwapped = false;
+            nodeSwapped = false;
+            sharedSource = operandVReg2;
           }
         }
       }
       operandRecord2 = IRInst__getOperandRecord(node,0);
       operandSelect = *(int *)(operandRecord2 + 0x10);
       operandRecord2 = IRInst__getOperandRecord(a0,0);
-      local_100 = *(int *)(operandRecord2 + 0x10);
-      if ((((!bVar1) && (a0[0x49] == node[0x49])) && (a0[0x48] == node[0x48])) &&
+      combinedDestSelect = *(int *)(operandRecord2 + 0x10);
+      if ((((!sourcesCrossMatch) && (a0[0x49] == node[0x49])) && (a0[0x48] == node[0x48])) &&
          ((operandSelect != 0x1010100 && (*(int *)(operandRecord2 + 0x10) != 0x1010100)))) {
         newSource3 = 4;
-        local_64 = &local_100;
-        iVar24 = 0;
+        combinedDestSelectPtr = &combinedDestSelect;
+        laneIdx = 0;
         do {
-          if ((*(char *)(iVar24 + (int)&local_100) != '\x01') &&
-             (*(char *)((int)&operandSelect + iVar24) != '\x01')) goto LAB_0015d1a4;
-          iVar24 = iVar24 + 1;
+          if ((*(char *)(laneIdx + (int)&combinedDestSelect) != '\x01') &&
+             (*(char *)((int)&operandSelect + laneIdx) != '\x01')) goto LAB_0015d1a4;
+          laneIdx = laneIdx + 1;
           newSource3 = newSource3 + -1;
         } while (newSource3 != 0);
         if (((((a0[0x2e] & 1U) == (node[0x2e] & 1U)) && ((a0[0x34] & 1U) == (node[0x34] & 1U))
              ) && (((uint)a0[0x2e] >> 1 & 1) == ((uint)node[0x2e] >> 1 & 1))) &&
-           (iVar24 = Inst__opcodeOrSourcesDiffer(piVar15,piVar9), iVar24 == 0)) {
+           (opcodeOrSourcesDifferResult = Inst__opcodeOrSourcesDiffer(partnerSource2,nodeSource2), opcodeOrSourcesDifferResult == 0)) {
           *(int *)(pass + 0x280) = *(int *)(pass + 0x280) + 1;
-          SelectWord__mergeWrittenLanes(&local_68,local_100,operandSelect);
-          local_104 = local_68;
-          piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_68,piVar9,pass,*(undefined4 *)(pass + 8),1.0);
-          if (*(int *)(pass + 0x478) < piVar15[0x58]) {
-            piVar15[0x58] = piVar15[0x58] + 1;
+          SelectWord__mergeWrittenLanes(&mergedWrittenLanes,combinedDestSelect,operandSelect);
+          mergedDestSelectA = mergedWrittenLanes;
+          newConstInstA = (int *)((int (*)())IRInst__createWithConstantOperands)(2,mergedWrittenLanes,nodeSource2,pass,*(undefined4 *)(pass + 8),1.0);
+          if (*(int *)(pass + 0x478) < partnerSource2[0x58]) {
+            partnerSource2[0x58] = partnerSource2[0x58] + 1;
           }
           else {
-            piVar15[0x58] = *(int *)(pass + 0x478) + 1;
+            partnerSource2[0x58] = *(int *)(pass + 0x478) + 1;
           }
-          piVar15 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_104,piVar15,pass,*(undefined4 *)(pass + 8),1.0
+          newConstInstB = (int *)((int (*)())IRInst__createWithConstantOperands)(2,mergedDestSelectA,partnerSource2,pass,*(undefined4 *)(pass + 8),1.0
                                        );
           operandRecord2 = IRInst__getOperandRecord(node,2);
           operandSelectB = *(undefined4 *)(operandRecord2 + 0x10);
-          operandRecord2 = IRInst__getOperandRecord(piVar9,1);
+          operandRecord2 = IRInst__getOperandRecord(newConstInstA,1);
           *(undefined4 *)(operandRecord2 + 0x10) = operandSelectB;
           operandRecord2 = IRInst__getOperandRecord(a0,2);
           operandSelectB = *(undefined4 *)(operandRecord2 + 0x10);
-          operandRecord2 = IRInst__getOperandRecord(piVar15,1);
+          operandRecord2 = IRInst__getOperandRecord(newConstInstB,1);
           *(undefined4 *)(operandRecord2 + 0x10) = operandSelectB;
-          local_a0 = 0;
-          local_9c = 0;
-          local_8c = 0;
-          local_e8[0] = 0;
-          local_e8[1] = 0;
-          local_d4 = 0;
-          local_b8 = 0;
-          local_b4 = 0;
-          local_a4 = 0;
-          local_d0 = 0;
-          local_cc = 0;
-          local_bc = 0;
+          partnerOperand1Copy = 0;
+          partnerOperand1Copy1 = 0;
+          partnerOperand1CopyEnd = 0;
+          partnerOperand2Copy[0] = 0;
+          partnerOperand2Copy[1] = 0;
+          partnerOperand2CopyEnd = 0;
+          nodeOperand1Copy = 0;
+          nodeOperand1Copy1 = 0;
+          nodeOperand1CopyEnd = 0;
+          nodeOperand2Copy = 0;
+          nodeOperand2Copy1 = 0;
+          nodeOperand2CopyEnd = 0;
           operandRecord = IRInst__getOperandRecord(a0,1);
-          IROperand__copyFrom(&local_a0,operandRecord);
+          IROperand__copyFrom(&partnerOperand1Copy,operandRecord);
           operandRecord = IRInst__getOperandRecord(a0,2);
-          IROperand__copyFrom(local_e8,operandRecord);
+          IROperand__copyFrom(partnerOperand2Copy,operandRecord);
           operandRecord = IRInst__getOperandRecord(node,1);
-          IROperand__copyFrom(&local_b8,operandRecord);
+          IROperand__copyFrom(&nodeOperand1Copy,operandRecord);
           operandRecord = IRInst__getOperandRecord(node,2);
-          IROperand__copyFrom(&local_d0,operandRecord);
+          IROperand__copyFrom(&nodeOperand2Copy,operandRecord);
           operandRecord2 = IRInst__getOperandRecord(node,1);
-          local_f8 = *(int *)(operandRecord2 + 0x10);
+          nodeOperand1Select = *(int *)(operandRecord2 + 0x10);
           operandRecord2 = IRInst__getOperandRecord(a0,1);
-          local_108 = *(int *)(operandRecord2 + 0x10);
-          local_f4[0] = 0;
-          local_f4[1] = 0;
-          local_f4[2] = 0;
-          IRInst__saveCounters(node,local_f4,0xffffffff);
-          local_88 = 0;
-          local_84 = 0;
-          local_74 = 0;
+          partnerOperand1Select = *(int *)(operandRecord2 + 0x10);
+          counterSave[0] = 0;
+          counterSave[1] = 0;
+          counterSave[2] = 0;
+          IRInst__saveCounters(node,counterSave,0xffffffff);
+          lastOperandBuf0 = 0;
+          lastOperandSourceSave = 0;
+          lastOperandBuf2 = 0;
           if ((a0[5] & 0x200U) != 0) {
-            IRInst__readLastOperand(a0,&local_88);
+            IRInst__readLastOperand(a0,&lastOperandBuf0);
           }
           afterInst2 = node[1];
           DList__unlink(node);
           IRInst__reinitAsTrinary(node,0x14,*(undefined4 *)(pass + 8));
           Block__insertInstAfter(*(undefined4 *)(afterInst2 + 0x158),afterInst2,node);
-          IRInst__restoreCounters(node,local_f4);
-          iVar24 = a0[0x49];
+          IRInst__restoreCounters(node,counterSave);
+          partnerOutputScale = a0[0x49];
           node[0x48] = a0[0x48];
-          node[0x49] = iVar24;
+          node[0x49] = partnerOutputScale;
           operandRecord = IRInst__getOperandRecord(node,3);
-          IROperand__copyFrom(operandRecord,&local_b8);
+          IROperand__copyFrom(operandRecord,&nodeOperand1Copy);
           operandRecord = IRInst__getOperandRecord(node,1);
-          IROperand__copyFrom(operandRecord,&local_d0);
+          IROperand__copyFrom(operandRecord,&nodeOperand2Copy);
           operandRecord = IRInst__getOperandRecord(node,2);
-          IROperand__copyFrom(operandRecord,local_e8);
-          IRInst__setOperandSource(node,1,piVar9,0,*(undefined4 *)(pass + 8));
-          IRInst__setOperandSource(node,2,piVar15,0,*(undefined4 *)(pass + 8));
+          IROperand__copyFrom(operandRecord,partnerOperand2Copy);
+          IRInst__setOperandSource(node,1,newConstInstA,0,*(undefined4 *)(pass + 8));
+          IRInst__setOperandSource(node,2,newConstInstB,0,*(undefined4 *)(pass + 8));
           IROperand__setModifierBits(node + 0x29,1,0);
           node[0x26] = 0;
           loopIndexC = 0;
           node[0x25] = node[0x53];
-          node[0x27] = local_104;
+          node[0x27] = mergedDestSelectA;
           do {
-            if (*(char *)((int)&local_104 + loopIndexC) == '\0') {
+            if (*(char *)((int)&mergedDestSelectA + loopIndexC) == '\0') {
               (**(code **)(*node + 0x88))(node,1,loopIndexC,loopIndexC);
               (**(code **)(*node + 0x88))(node,2,loopIndexC,loopIndexC);
-              operandRecord3 = IRInst__getOperandRecord(piVar15,1);
-              cVar2 = *(char *)(loopIndexC + operandRecord3 + 0x10);
-              newSource3 = IRInst__getOperandRecord(piVar9,1);
-              if (cVar2 == '\x04') {
+              operandRecord3 = IRInst__getOperandRecord(newConstInstB,1);
+              laneSelectByteB = *(char *)(loopIndexC + operandRecord3 + 0x10);
+              newSource3 = IRInst__getOperandRecord(newConstInstA,1);
+              if (laneSelectByteB == '\x04') {
                 if (*(char *)(loopIndexC + newSource3 + 0x10) == '\x04') goto LAB_0015d5cc;
-                (**(code **)(*piVar15 + 0x88))(piVar15,2,loopIndexC,loopIndexC);
-                piVar8 = &local_f8;
-                pcVar5 = *(code **)(*node + 0x88);
+                (**(code **)(*newConstInstB + 0x88))(newConstInstB,2,loopIndexC,loopIndexC);
+                selectWordPtr = &nodeOperand1Select;
+                setLaneFn = *(code **)(*node + 0x88);
               }
               else {
-                (**(code **)(*piVar9 + 0x88))(piVar9,2,loopIndexC,loopIndexC);
-                piVar8 = &local_108;
-                pcVar5 = *(code **)(*node + 0x88);
+                (**(code **)(*newConstInstA + 0x88))(newConstInstA,2,loopIndexC,loopIndexC);
+                selectWordPtr = &partnerOperand1Select;
+                setLaneFn = *(code **)(*node + 0x88);
               }
-              (*pcVar5)(node,3,loopIndexC,*(undefined1 *)(loopIndexC + (int)piVar8));
+              (*setLaneFn)(node,3,loopIndexC,*(undefined1 *)(loopIndexC + (int)selectWordPtr));
             }
             else {
               (**(code **)(*node + 0x88))(node,1,loopIndexC,4);
@@ -2825,15 +2833,15 @@ LAB_0015d5cc:
             isLast = loopIndexC == 3;
             loopIndexC = loopIndexC + 1;
             if (isLast) {
-              Block__insertInstBefore(node[0x56],node,piVar15);
-              Block__insertInstBefore(node[0x56],node,piVar9);
-              if (local_84 != 0) {
-                IRInst__setLastOperandFromRecord(node,&local_88,0,*(undefined4 *)(pass + 8));
-                if (*(int *)(pass + 0x478) < *(int *)(local_84 + 0x160)) {
-                  *(int *)(local_84 + 0x160) = *(int *)(local_84 + 0x160) + 1;
+              Block__insertInstBefore(node[0x56],node,newConstInstB);
+              Block__insertInstBefore(node[0x56],node,newConstInstA);
+              if (lastOperandSourceSave != 0) {
+                IRInst__setLastOperandFromRecord(node,&lastOperandBuf0,0,*(undefined4 *)(pass + 8));
+                if (*(int *)(pass + 0x478) < *(int *)(lastOperandSourceSave + 0x160)) {
+                  *(int *)(lastOperandSourceSave + 0x160) = *(int *)(lastOperandSourceSave + 0x160) + 1;
                 }
                 else {
-                  *(int *)(local_84 + 0x160) = *(int *)(pass + 0x478) + 1;
+                  *(int *)(lastOperandSourceSave + 0x160) = *(int *)(pass + 0x478) + 1;
                 }
               }
               for (operandIndex2 = 1; newSource3 = (**(code **)(*a0 + 0x14))(a0), operandIndex2 <= newSource3;
@@ -2843,16 +2851,16 @@ LAB_0015d5cc:
                     (newSource3 = (**(code **)(*operandVReg + 0x5c))(operandVReg), newSource3 == 0)) ||
                    (newSource3 = IRInst__hasSingleUse(operandVReg,pass), newSource3 != 0)) {
                   newSource3 = (**(code **)(*operandVReg + 0x60))(operandVReg);
-                  if (((newSource3 != 0) && ((a0[5] & 1U) == 0)) && (piVar23 != operandVReg)) {
+                  if (((newSource3 != 0) && ((a0[5] & 1U) == 0)) && (sharedSource != operandVReg)) {
                     IRInst__dropCounterAndDeleteIfUnused(operandVReg,*(undefined4 *)(pass + 8));
                   }
                 }
                 else {
                   IRInst__hasTwoUses(operandVReg,pass);
-                  uVar17 = *(uint *)(pass + 0x30) >> 7 & 1;
-                  newSource3 = IRInst__cloneIfPresub(operandVReg,pass,uVar17);
+                  trackUsesB = *(uint *)(pass + 0x30) >> 7 & 1;
+                  newSource3 = IRInst__cloneIfPresub(operandVReg,pass,trackUsesB);
                   IRInst__setOperandSource(a0,operandIndex2,newSource3,0,*(undefined4 *)(pass + 8));
-                  if (uVar17 == 0) {
+                  if (trackUsesB == 0) {
                     if (*(int *)(pass + 0x478) < *(int *)(newSource3 + 0x160)) {
                       *(int *)(newSource3 + 0x160) = *(int *)(newSource3 + 0x160) + 1;
                     }
@@ -2863,20 +2871,20 @@ LAB_0015d5cc:
                   operandVReg[0x58] = operandVReg[0x58] + -1;
                 }
               }
-              operandVReg = (int *)IRInst__getOperandSource(piVar9,1);
+              operandVReg = (int *)IRInst__getOperandSource(newConstInstA,1);
               vcall60ResultB = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60ResultB != 0) {
-                sourceDef = IRInst__getOperandSource(piVar9,1);
-                FUN_0010c670(sourceDef,piVar9,*(undefined4 *)(pass + 8));
+                sourceDef = IRInst__getOperandSource(newConstInstA,1);
+                FUN_0010c670(sourceDef,newConstInstA,*(undefined4 *)(pass + 8));
               }
-              operandVReg3 = (int *)IRInst__getOperandSource(piVar15,1);
+              operandVReg3 = (int *)IRInst__getOperandSource(newConstInstB,1);
               vcall60ResultB = (**(code **)(*operandVReg3 + 0x60))(operandVReg3);
               if (vcall60ResultB != 0) {
-                sourceDef = IRInst__getOperandSource(piVar15,1);
-                FUN_0010c670(sourceDef,piVar15,*(undefined4 *)(pass + 8));
+                sourceDef = IRInst__getOperandSource(newConstInstB,1);
+                FUN_0010c670(sourceDef,newConstInstB,*(undefined4 *)(pass + 8));
               }
               IRInst__dropCounterAndDeleteIfUnused(a0,*(undefined4 *)(pass + 8));
-              if (bVar4) {
+              if (partnerSwapped) {
                 IRInst__swapOperands(a0,1,2,*(uint *)(pass + 8));
                 return 1;
               }
@@ -2886,10 +2894,10 @@ LAB_0015d5cc:
         }
       }
 LAB_0015d1a4:
-      if (bVar4) {
+      if (partnerSwapped) {
         IRInst__swapOperands(a0,1,2,*(uint *)(pass + 8));
       }
-      if (!bVar3) {
+      if (!nodeSwapped) {
         return 0;
       }
       IRInst__swapOperands(node,1,2,*(uint *)(pass + 8));
@@ -2906,7 +2914,7 @@ LAB_0015d1a4:
   }
   inst = node;
   inst2 = a0;
-  if (iVar24 != 0x12) {
+  if (partnerOpcode != 0x12) {
     return 0;
   }
 LAB_0015cf80:
@@ -2926,41 +2934,41 @@ LAB_0015cf80:
     operandIndex4 = 1;
   }
   operandRecord5 = IRInst__getOperandRecord(node,0);
-  local_108 = *(int *)(operandRecord5 + 0x10);
+  partnerOperand1Select = *(int *)(operandRecord5 + 0x10);
   operandRecord5 = IRInst__getOperandRecord(a0,0);
-  local_104 = *(int *)(operandRecord5 + 0x10);
+  mergedDestSelectA = *(int *)(operandRecord5 + 0x10);
   if ((a0[0x49] == node[0x49]) && (a0[0x48] == node[0x48])) {
     if (((inst[0x2e] & 1U) == (inst2[operandIndex3 * 6 + 0x28] & 1U)) &&
        (((uint)inst[0x2e] >> 1 & 1) == ((uint)inst2[operandIndex3 * 6 + 0x28] >> 1 & 1))) {
       loopIndex = 0;
       countdownB = 4;
       do {
-        if ((*(char *)((int)&local_104 + loopIndex) != '\x01') &&
-           (*(char *)((int)&local_108 + loopIndex) != '\x01')) {
+        if ((*(char *)((int)&mergedDestSelectA + loopIndex) != '\x01') &&
+           (*(char *)((int)&partnerOperand1Select + loopIndex) != '\x01')) {
           return 0;
         }
         loopIndex = loopIndex + 1;
         countdownB = countdownB + -1;
       } while (countdownB != 0);
-      if ((local_108 != 0x1010100) && (*(int *)(operandRecord5 + 0x10) != 0x1010100)) {
+      if ((partnerOperand1Select != 0x1010100) && (*(int *)(operandRecord5 + 0x10) != 0x1010100)) {
         *(int *)(pass + 0x280) = *(int *)(pass + 0x280) + 1;
-        iVar11 = node[0x58] - *(int *)(pass + 0x478);
+        nodeUseCount = node[0x58] - *(int *)(pass + 0x478);
         trackUses = *(uint *)(pass + 0x30) >> 7 & 1;
-        if (iVar11 < 0) {
-          iVar11 = 0;
+        if (nodeUseCount < 0) {
+          nodeUseCount = 0;
         }
         countdownB = 4;
-        iVar18 = node[4];
-        iVar19 = node[0x53];
-        iVar20 = node[0x26];
-        iVar21 = node[0x48];
+        savedNodeField4 = node[4];
+        savedNodeField53 = node[0x53];
+        savedNodeField26 = node[0x26];
+        savedNodeField48 = node[0x48];
         loopIndex = 0;
-        iVar22 = node[0x49];
-        local_64 = &local_100;
-        local_100 = local_108;
+        savedNodeField49 = node[0x49];
+        combinedDestSelectPtr = &combinedDestSelect;
+        combinedDestSelect = partnerOperand1Select;
         do {
-          if (*(char *)((int)&local_104 + loopIndex) != '\x01') {
-            *(char *)(loopIndex + (int)&local_100) = *(char *)((int)&local_104 + loopIndex);
+          if (*(char *)((int)&mergedDestSelectA + loopIndex) != '\x01') {
+            *(char *)(loopIndex + (int)&combinedDestSelect) = *(char *)((int)&mergedDestSelectA + loopIndex);
           }
           loopIndex = loopIndex + 1;
           countdownB = countdownB + -1;
@@ -2970,21 +2978,21 @@ LAB_0015cf80:
         operandSelect = *(int *)(operandRecord6 + 0x10);
         countdownB = 4;
         do {
-          if (*(char *)(loopIndex + (int)local_64) == '\0') {
+          if (*(char *)(loopIndex + (int)combinedDestSelectPtr) == '\0') {
             *(char *)((int)&operandSelect + loopIndex) = (char)loopIndex;
           }
           loopIndex = loopIndex + 1;
           countdownB = countdownB + -1;
         } while (countdownB != 0);
         operandRecord4 = IRInst__getOperandRecord(inst2,operandIndex3);
-        local_e8[0] = *(int *)(operandRecord4 + 0x10);
+        partnerOperand2Copy[0] = *(int *)(operandRecord4 + 0x10);
         operandRecord6 = IRInst__getOperandRecord(inst,1);
         loopIndex = 0;
-        local_f8 = *(int *)(operandRecord6 + 0x10);
+        nodeOperand1Select = *(int *)(operandRecord6 + 0x10);
         countdownB = 4;
         do {
-          if (*(char *)((int)local_e8 + loopIndex) == '\x04') {
-            *(undefined1 *)((int)local_e8 + loopIndex) = *(undefined1 *)((int)&local_f8 + loopIndex);
+          if (*(char *)((int)partnerOperand2Copy + loopIndex) == '\x04') {
+            *(undefined1 *)((int)partnerOperand2Copy + loopIndex) = *(undefined1 *)((int)&nodeOperand1Select + loopIndex);
           }
           loopIndex = loopIndex + 1;
           countdownB = countdownB + -1;
@@ -2997,7 +3005,7 @@ LAB_0015cf80:
         *(undefined4 *)(vslot73Result + 0x84) = 1;
         *(undefined4 *)(vslot73Result + 0x94) = *(undefined4 *)(vslot73Result + 0x14c);
         *(undefined4 *)(vslot73Result + 0x98) = 0x36;
-        *(int *)(vslot73Result + 0x9c) = local_100;
+        *(int *)(vslot73Result + 0x9c) = combinedDestSelect;
         IRInst__setOperandSource(vslot73Result,1,newSource,0,*(undefined4 *)(pass + 8));
         operandRecord7 = IRInst__getOperandRecord(inst2,operandIndex4);
         operandSelectB = *(undefined4 *)(operandRecord7 + 0x10);
@@ -3030,16 +3038,16 @@ LAB_0015cf80:
           FUN_0010c670(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
         }
         newSource2 = 0;
-        local_60 = &DAT_001acec0;
-        local_f4[0] = 0x4040404;
+        constTablePtr = &DAT_001acec0;
+        counterSave[0] = 0x4040404;
         if (((a0[5] & 0x200U) != 0) && (newSource2 = IRInst__getOperandSource(a0,a0[0x21]), newSource2 != 0)) {
           operandRecord8 = IRInst__getOperandRecord(node,node[0x21]);
           loopIndexB = 0;
-          local_f4[0] = *(int *)(operandRecord8 + 0x10);
+          counterSave[0] = *(int *)(operandRecord8 + 0x10);
           countdown = 4;
           do {
-            if (*(char *)(loopIndexB + (int)local_64) == '\0') {
-              *(undefined1 *)((int)local_f4 + loopIndexB) = 4;
+            if (*(char *)(loopIndexB + (int)combinedDestSelectPtr) == '\0') {
+              *(undefined1 *)((int)counterSave + loopIndexB) = 4;
             }
             loopIndexB = loopIndexB + 1;
             countdown = countdown + -1;
@@ -3057,34 +3065,34 @@ LAB_0015cf80:
             operandIndex = operandIndex + 1;
           } while (operandIndex <= node[0x21]);
         }
-        local_a4 = 0;
-        local_d0 = 0;
-        local_cc = 0;
-        local_bc = 0;
-        local_b8 = 0;
-        local_b4 = 0;
+        nodeOperand1CopyEnd = 0;
+        nodeOperand2Copy = 0;
+        nodeOperand2Copy1 = 0;
+        nodeOperand2CopyEnd = 0;
+        nodeOperand1Copy = 0;
+        nodeOperand1Copy1 = 0;
         operandRecord = IRInst__getOperandRecord(inst2,operandIndex4);
-        IROperand__copyFrom(&local_d0,operandRecord);
+        IROperand__copyFrom(&nodeOperand2Copy,operandRecord);
         operandRecord = IRInst__getOperandRecord(inst2,operandIndex3);
-        IROperand__copyFrom(&local_b8,operandRecord);
+        IROperand__copyFrom(&nodeOperand1Copy,operandRecord);
         afterInst = node[1];
         DList__unlink(node);
         IRInst__reinitAsBinary(node,0x12,*(undefined4 *)(pass + 8));
-        bVar1 = trackUses == 0;
+        notTrackingUses = trackUses == 0;
         Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,node);
-        iVar14 = *(int *)(pass + 0x478);
-        node[4] = iVar18;
-        node[0x58] = iVar11 + iVar14;
-        node[0x27] = local_100;
-        node[0x48] = iVar21;
-        node[0x49] = iVar22;
-        node[0x25] = iVar19;
-        node[0x26] = iVar20;
+        passStampD = *(int *)(pass + 0x478);
+        node[4] = savedNodeField4;
+        node[0x58] = nodeUseCount + passStampD;
+        node[0x27] = combinedDestSelect;
+        node[0x48] = savedNodeField48;
+        node[0x49] = savedNodeField49;
+        node[0x25] = savedNodeField53;
+        node[0x26] = savedNodeField26;
         operandRecord = IRInst__getOperandRecord(node,operandIndex4);
-        IROperand__copyModifiersAndSelect(operandRecord,&local_d0);
+        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand2Copy);
         IRInst__setOperandSource(node,operandIndex4,vslot73Result,0,*(undefined4 *)(pass + 8));
-        iVar11 = operandSelect;
-        if (bVar1) {
+        destSelectSaved = operandSelect;
+        if (notTrackingUses) {
           if (*(int *)(pass + 0x478) < *(int *)(vslot73Result + 0x160)) {
             *(int *)(vslot73Result + 0x160) = *(int *)(vslot73Result + 0x160) + 1;
           }
@@ -3097,13 +3105,13 @@ LAB_0015cf80:
         }
         else {
           operandRecord3 = IRInst__getOperandRecord(node,operandIndex4);
-          *(int *)(operandRecord3 + 0x10) = iVar11;
+          *(int *)(operandRecord3 + 0x10) = destSelectSaved;
         }
         operandRecord = IRInst__getOperandRecord(node,operandIndex3);
-        IROperand__copyModifiersAndSelect(operandRecord,&local_b8);
+        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand1Copy);
         IRInst__setOperandSource(node,operandIndex3,sourceDef2,0,*(undefined4 *)(pass + 8));
-        iVar7 = local_e8[0];
-        if (bVar1) {
+        selectWordCopy = partnerOperand2Copy[0];
+        if (notTrackingUses) {
           if (*(int *)(pass + 0x478) < *(int *)(sourceDef2 + 0x160)) {
             *(int *)(sourceDef2 + 0x160) = *(int *)(sourceDef2 + 0x160) + 1;
           }
@@ -3112,18 +3120,18 @@ LAB_0015cf80:
           }
         }
         if (operandIndex3 == 0) {
-          node[0x27] = local_e8[0];
+          node[0x27] = partnerOperand2Copy[0];
         }
         else {
           operandRecord2 = IRInst__getOperandRecord(node,operandIndex3);
-          *(int *)(operandRecord2 + 0x10) = iVar7;
+          *(int *)(operandRecord2 + 0x10) = selectWordCopy;
         }
-        if ((newSource2 != 0) && (local_f4[0] != *(int *)(((unsigned char *)0x00003190U) + (int)local_60))) {
+        if ((newSource2 != 0) && (counterSave[0] != *(int *)(((unsigned char *)0x00003190U) + (int)constTablePtr))) {
           IRInst__setExtraOperandSource(node,newSource2,trackUses,*(undefined4 *)(pass + 8));
-          iVar24 = local_f4[0];
+          restoredSelectWord = counterSave[0];
           operandRecord3 = IRInst__getOperandRecord(node,3);
-          *(int *)(operandRecord3 + 0x10) = iVar24;
-          if (bVar1) {
+          *(int *)(operandRecord3 + 0x10) = restoredSelectWord;
+          if (notTrackingUses) {
             if (*(int *)(pass + 0x478) < *(int *)(newSource2 + 0x160)) {
               *(int *)(newSource2 + 0x160) = *(int *)(newSource2 + 0x160) + 1;
             }

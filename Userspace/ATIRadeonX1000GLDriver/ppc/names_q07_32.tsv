@@ -2635,3 +2635,103 @@ use	Inst__collapseAlgebraic_00155a60	iVar21	useCountA	INFERRED	use count of the 
 use	Inst__collapseAlgebraic_00155a60	iVar26	hasSingleUseResult	INFERRED	IRInst__hasSingleUse(inst,pass) result	^\s*\(\(\(iVar26\ =\ FUN_0010497c\(param_1,param_2\),\ iVar26\ ==\ 0\ \|\|\ \(piVar9\[0x20\]\ ==\ 0\)\)\ \|\|$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	flagBit0Result	INFERRED	RegKind__flagBit0 result	^\s*\(\(iVar26\ =\ FUN_00126760\(piVar9\[0x26\]\),\ iVar26\ ==\ 0\ \|\|$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	vcall50Result	INFERRED	vtable +0x50 on the candidate source	^\s*\(\(\(piVar9\[5\]\ \&\ 2U\)\ !=\ 0\ \|\|\ \(iVar26\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x50\)\)\(piVar9\),\ iVar26\ !=\ 0\)\)\)\)$	+1
+use	Inst__collapseAlgebraic_0015ceb0	bVar1	sourcesCrossMatch	INFERRED	node source 1/2 equals partner source 2/1 (operands matched crosswise)	^\s*bVar1\ =\ piVar8\ ==\ piVar15;$	+3
+use	Inst__collapseAlgebraic_0015ceb0	bVar1	sourcesCrossMatch	INFERRED	node source 1/2 equals partner source 2/1 (operands matched crosswise)	^\s*bVar1\ =\ piVar9\ ==\ piVar15;$	+3
+use	Inst__collapseAlgebraic_0015ceb0	bVar1	sourcesCrossMatch	INFERRED	node source 1/2 equals partner source 2/1 (operands matched crosswise)	^\s*if\ \(\(\(\(!bVar1\)\ \&\&\ \(a0\[0x49\]\ ==\ param_1\[0x49\]\)\)\ \&\&\ \(a0\[0x48\]\ ==\ param_1\[0x48\]\)\)\ \&\&$	+2
+use	Inst__collapseAlgebraic_0015ceb0	bVar1	notTrackingUses	INFERRED	trackUses == 0	^\s*bVar1\ =\ uVar17\ ==\ 0;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	bVar1	notTrackingUses	INFERRED	trackUses == 0	^\s*if\ \(bVar1\)\ \{$@4	+1
+use	Inst__collapseAlgebraic_0015ceb0	bVar1	notTrackingUses	INFERRED	trackUses == 0	^\s*if\ \(bVar1\)\ \{$@5	+1
+use	Inst__collapseAlgebraic_0015ceb0	bVar1	notTrackingUses	INFERRED	trackUses == 0	^\s*if\ \(bVar1\)\ \{$@6	+1
+local	Inst__collapseAlgebraic_0015ceb0	bVar3	nodeSwapped	INFERRED	node operands were swapped (restored on the failure path)
+local	Inst__collapseAlgebraic_0015ceb0	bVar4	partnerSwapped	INFERRED	partner operands were swapped (restored on the failure path)
+local	Inst__collapseAlgebraic_0015ceb0	cVar2	laneSelectByteB	INFERRED	component byte of the partner source operand select
+local	Inst__collapseAlgebraic_0015ceb0	pcVar5	setLaneFn	INFERRED	vtable +0x88 of node: sets one lane of an operand select
+use	Inst__collapseAlgebraic_0015ceb0	iVar7	selectWordCopy	INFERRED	local_e8[0] copied to the operand record	^\s*iVar7\ =\ local_e8\[0\];$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar7	selectWordCopy	INFERRED	local_e8[0] copied to the operand record	^\s*\*\(int\ \*\)\(iVar24\ \+\ 0x10\)\ =\ iVar7;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar8	selectWordPtr	INFERRED	&local_f8 or &local_108: which select words feed operand 3	^\s*piVar8\ =\ \&local_f8;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar8	selectWordPtr	INFERRED	&local_f8 or &local_108: which select words feed operand 3	^\s*piVar8\ =\ \&local_108;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar8	selectWordPtr	INFERRED	&local_f8 or &local_108: which select words feed operand 3	^\s*\(\*pcVar5\)\(param_1,3,iVar24,\*\(undefined1\ \*\)\(iVar24\ \+\ \(int\)piVar8\)\);$	+1
+local	Inst__collapseAlgebraic_0015ceb0	piVar23	sharedSource	INFERRED	the source shared by node and partner
+use	Inst__collapseAlgebraic_0015ceb0	iVar11	nodeUseCount	INFERRED	node use count (field 0x58 minus pass stamp, clamped at 0)	^\s*iVar11\ =\ param_1\[0x58\]\ \-\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar11	nodeUseCount	INFERRED	node use count (field 0x58 minus pass stamp, clamped at 0)	^\s*if\ \(iVar11\ <\ 0\)\ \{$	+2
+use	Inst__collapseAlgebraic_0015ceb0	iVar11	nodeUseCount	INFERRED	node use count (field 0x58 minus pass stamp, clamped at 0)	^\s*param_1\[0x58\]\ =\ iVar11\ \+\ iVar14;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar11	destSelectSaved	INFERRED	local_fc select saved across the rebuild	^\s*iVar11\ =\ local_fc;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar11	destSelectSaved	INFERRED	local_fc select saved across the rebuild	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x10\)\ =\ iVar11;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	uVar17	trackUsesB	INFERRED	*(pass+0x30) >> 7 & 1: use tracking enabled	^\s*uVar17\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x30\)\ >>\ 7\ \&\ 1;$	+2
+use	Inst__collapseAlgebraic_0015ceb0	uVar17	trackUsesB	INFERRED	*(pass+0x30) >> 7 & 1: use tracking enabled	^\s*if\ \(uVar17\ ==\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015ceb0	uVar17	trackUses	INFERRED	*(pass+0x30) >> 7 & 1: use tracking enabled	^\s*uVar17\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x30\)\ >>\ 7\ \&\ 1;$@2	+1
+use	Inst__collapseAlgebraic_0015ceb0	uVar17	trackUses	INFERRED	*(pass+0x30) >> 7 & 1: use tracking enabled	^\s*iVar6\ =\ FUN_0010af38\(uVar12,param_2,uVar17\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	uVar17	trackUses	INFERRED	*(pass+0x30) >> 7 & 1: use tracking enabled	^\s*if\ \(uVar17\ !=\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015ceb0	uVar17	trackUses	INFERRED	*(pass+0x30) >> 7 & 1: use tracking enabled	^\s*bVar1\ =\ uVar17\ ==\ 0;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	uVar17	trackUses	INFERRED	*(pass+0x30) >> 7 & 1: use tracking enabled	^\s*FUN_00106804\(param_1,iVar6,uVar17,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
+local	Inst__collapseAlgebraic_0015ceb0	iVar18	savedNodeField4	INFERRED	node[4] saved before reinitialising
+local	Inst__collapseAlgebraic_0015ceb0	iVar19	savedNodeField53	INFERRED	node[0x53] saved before reinitialising
+local	Inst__collapseAlgebraic_0015ceb0	iVar20	savedNodeField26	INFERRED	node[0x26] saved before reinitialising
+local	Inst__collapseAlgebraic_0015ceb0	iVar21	savedNodeField48	INFERRED	node[0x48] saved before reinitialising
+local	Inst__collapseAlgebraic_0015ceb0	iVar22	savedNodeField49	INFERRED	node[0x49] saved before reinitialising
+use	Inst__collapseAlgebraic_0015ceb0	iVar14	passStampD	INFERRED	*(pass+0x478)	^\s*iVar14\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar14	passStampD	INFERRED	*(pass+0x478)	^\s*param_1\[0x58\]\ =\ iVar11\ \+\ iVar14;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*piVar9\ =\ \(int\ \*\)FUN_00105594\(param_1,2\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*bVar1\ =\ piVar9\ ==\ piVar10;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*piVar23\ =\ piVar9;$	+2
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*piVar9\ =\ piVar8;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*bVar1\ =\ piVar9\ ==\ piVar15;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*piVar9\ =\ piVar8;$@2	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*\(iVar24\ =\ FUN_00146de0\(piVar15,piVar9\),\ iVar24\ ==\ 0\)\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	nodeSource2	INFERRED	IRInst__getOperandSource(node,2), after the crosswise swaps	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_68,piVar9,param_2,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),1\.0\);$	+1	rhs	none
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*iVar24\ =\ FUN_001054ec\(piVar9,1\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*FUN_00106004\(param_1,1,piVar9,0,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*iVar7\ =\ FUN_001054ec\(piVar9,1\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*\(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x88\)\)\(piVar9,2,iVar24,iVar24\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*FUN_000e7700\(param_1\[0x56\],param_1,piVar9\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(piVar9,1\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*uVar12\ =\ FUN_00105594\(piVar9,1\);$	+2
+use	Inst__collapseAlgebraic_0015ceb0	piVar9	newConstInstA	INFERRED	IRInst__createWithConstantOperands result for node source 2: the select-by-mask inst feeding the rebuilt node	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_68,piVar9,param_2,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),1\.0\);$	+1	lhs	none
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*piVar15\ =\ \(int\ \*\)FUN_00105594\(a0,2\);$	+2
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*piVar15\ =\ piVar10;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*bVar1\ =\ piVar9\ ==\ piVar15;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*piVar15\ =\ piVar10;$@2	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*\(iVar24\ =\ FUN_00146de0\(piVar15,piVar9\),\ iVar24\ ==\ 0\)\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*if\ \(\*\(int\ \*\)\(param_2\ \+\ 0x478\)\ <\ piVar15\[0x58\]\)\ \{$	+2
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*piVar15\[0x58\]\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\)\ \+\ 1;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	partnerSource2	INFERRED	IRInst__getOperandSource(partner,2), after the crosswise swaps	^\s*piVar15\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_104,piVar15,param_2,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),1\.0$	+1	rhs	none
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*iVar24\ =\ FUN_001054ec\(piVar15,1\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*FUN_00106004\(param_1,2,piVar15,0,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*iVar7\ =\ FUN_001054ec\(piVar15,1\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*\(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x88\)\)\(piVar15,2,iVar24,iVar24\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*FUN_000e7700\(param_1\[0x56\],param_1,piVar15\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*piVar9\ =\ \(int\ \*\)FUN_00105594\(piVar15,1\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*uVar12\ =\ FUN_00105594\(piVar15,1\);$	+2
+use	Inst__collapseAlgebraic_0015ceb0	piVar15	newConstInstB	INFERRED	IRInst__createWithConstantOperands result for partner source 2	^\s*piVar15\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_104,piVar15,param_2,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),1\.0$	+1	lhs	none
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	partnerOpcode	INFERRED	opcode of the partner (*(a0[0x22]+8)): 0x12 expected	^\s*iVar24\ =\ \*\(int\ \*\)\(a0\[0x22\]\ \+\ 8\);$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	partnerOpcode	INFERRED	opcode of the partner (*(a0[0x22]+8)): 0x12 expected	^\s*if\ \(iVar24\ ==\ 0x12\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	partnerOpcode	INFERRED	opcode of the partner (*(a0[0x22]+8)): 0x12 expected	^\s*if\ \(iVar24\ !=\ 0x12\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	laneIdx	INFERRED	lane index 0..3	^\s*iVar24\ =\ 0;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	laneIdx	INFERRED	lane index 0..3	^\s*if\ \(\(\*\(char\ \*\)\(iVar24\ \+\ \(int\)\&local_100\)\ !=\ '\\x01'\)\ \&\&$	+3
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	opcodeOrSourcesDifferResult	INFERRED	Inst__opcodeOrSourcesDiffer(partnerSource2,nodeSource2) result	^\s*\(iVar24\ =\ FUN_00146de0\(piVar15,piVar9\),\ iVar24\ ==\ 0\)\)\ \{$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	partnerOutputScale	INFERRED	a0[0x49] copied to node[0x49]	^\s*iVar24\ =\ a0\[0x49\];$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	partnerOutputScale	INFERRED	a0[0x49] copied to node[0x49]	^\s*param_1\[0x49\]\ =\ iVar24;$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	restoredSelectWord	INFERRED	local_f4[0] select word stored back into the last operand record	^\s*iVar24\ =\ local_f4\[0\];$	+1
+use	Inst__collapseAlgebraic_0015ceb0	iVar24	restoredSelectWord	INFERRED	local_f4[0] select word stored back into the last operand record	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x10\)\ =\ iVar24;$	+1
+local	Inst__collapseAlgebraic_0015ceb0	local_108	partnerOperand1Select	INFERRED	select word of partner operand 1 (also node dest select in the first path)
+local	Inst__collapseAlgebraic_0015ceb0	local_104	mergedDestSelectA	INFERRED	select word built from the dest selects of both insts / the partner dest select
+local	Inst__collapseAlgebraic_0015ceb0	local_100	combinedDestSelect	INFERRED	dest select combining node and partner lanes
+local	Inst__collapseAlgebraic_0015ceb0	local_f8	nodeOperand1Select	INFERRED	select word of node operand 1
+local	Inst__collapseAlgebraic_0015ceb0	local_f4	counterSave	INFERRED	IRInst__saveCounters out buffer (3 words); word 0 is reused as the last operand select
+local	Inst__collapseAlgebraic_0015ceb0	local_e8	partnerOperand2Copy	INFERRED	IROperand copy of partner operand 2
+local	Inst__collapseAlgebraic_0015ceb0	local_d4	partnerOperand2CopyEnd	INFERRED	last word of the partner operand 2 IROperand copy
+local	Inst__collapseAlgebraic_0015ceb0	local_d0	nodeOperand2Copy	INFERRED	IROperand copy of node operand 2
+local	Inst__collapseAlgebraic_0015ceb0	local_cc	nodeOperand2Copy1	INFERRED	word 1 of the node operand 2 IROperand copy
+local	Inst__collapseAlgebraic_0015ceb0	local_bc	nodeOperand2CopyEnd	INFERRED	last word of the node operand 2 IROperand copy
+local	Inst__collapseAlgebraic_0015ceb0	local_b8	nodeOperand1Copy	INFERRED	IROperand copy of node operand 1
+local	Inst__collapseAlgebraic_0015ceb0	local_b4	nodeOperand1Copy1	INFERRED	word 1 of the node operand 1 IROperand copy
+local	Inst__collapseAlgebraic_0015ceb0	local_a4	nodeOperand1CopyEnd	INFERRED	last word of the node operand 1 IROperand copy
+local	Inst__collapseAlgebraic_0015ceb0	local_a0	partnerOperand1Copy	INFERRED	IROperand copy of partner operand 1
+local	Inst__collapseAlgebraic_0015ceb0	local_9c	partnerOperand1Copy1	INFERRED	word 1 of the partner operand 1 IROperand copy
+local	Inst__collapseAlgebraic_0015ceb0	local_8c	partnerOperand1CopyEnd	INFERRED	last word of the partner operand 1 IROperand copy
+local	Inst__collapseAlgebraic_0015ceb0	local_88	lastOperandBuf0	INFERRED	IRInst__readLastOperand out buffer word 0
+local	Inst__collapseAlgebraic_0015ceb0	local_84	lastOperandSourceSave	INFERRED	last operand source of the partner; its +0x160 counter is bumped
+local	Inst__collapseAlgebraic_0015ceb0	local_74	lastOperandBuf2	INFERRED	IRInst__readLastOperand out buffer word 2
+local	Inst__collapseAlgebraic_0015ceb0	local_68	mergedWrittenLanes	INFERRED	out of SelectWord__mergeWrittenLanes
+local	Inst__collapseAlgebraic_0015ceb0	local_64	combinedDestSelectPtr	INFERRED	&local_100
+local	Inst__collapseAlgebraic_0015ceb0	local_60	constTablePtr	INFERRED	&DAT_001acec0
