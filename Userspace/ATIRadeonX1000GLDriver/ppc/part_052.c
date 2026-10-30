@@ -198,33 +198,35 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
   int writeAlpha;
   int inst;
 {
+  int recordIndex2;
+  int recordIndex;
   int operandRecord;
   int destRegister;
-  int iVar1;
+  int maxRegister;
   undefined1 writeMask;
-  int iVar3;
-  int iVar4;
+  int currentMaxRegister;
+  int recordTable;
   undefined1 outputIndex;
   int destinationClass;
   
   destinationClass = *(int *)(inst + 0x98);
   destRegister = *(int *)(inst + 0x94);
   if (destinationClass == 9) {
-    iVar1 = destRegister + 1;
-    iVar3 = *(int *)(*(int *)(this + 0x5c) + 0x9374);
-    if (iVar1 <= iVar3) {
-      iVar1 = iVar3;
+    maxRegister = destRegister + 1;
+    currentMaxRegister = *(int *)(*(int *)(this + 0x5c) + 0x9374);
+    if (maxRegister <= currentMaxRegister) {
+      maxRegister = currentMaxRegister;
     }
-    *(int *)(*(int *)(this + 0x5c) + 0x9374) = iVar1;
+    *(int *)(*(int *)(this + 0x5c) + 0x9374) = maxRegister;
   }
   outputIndex = (undefined1)destRegister;
   if ((writeRgb != 0) && (destinationClass != 8)) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x16) = outputIndex;
-    iVar3 = *(int *)(this + 0x60);
-    iVar4 = *(int *)(this + 0x58);
+    recordIndex2 = *(int *)(this + 0x60);
+    recordTable = *(int *)(this + 0x58);
     operandRecord = IRInst__getOperandRecord(inst,0);
     writeMask = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
-    *(undefined1 *)(iVar3 * 0x48 + iVar4 + 0x15) = writeMask;
+    *(undefined1 *)(recordIndex2 * 0x48 + recordTable + 0x15) = writeMask;
   }
   if (writeAlpha != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x22) = outputIndex;
@@ -232,10 +234,10 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x23) = 1;
     }
     else {
-      iVar1 = *(int *)(this + 0x60);
-      iVar4 = *(int *)(this + 0x58);
+      recordIndex = *(int *)(this + 0x60);
+      recordTable = *(int *)(this + 0x58);
       destinationClass = IRInst__getOperandRecord(inst,0);
-      *(bool *)(iVar1 * 0x48 + iVar4 + 0x21) = *(char *)(destinationClass + 0x13) == '\0';
+      *(bool *)(recordIndex * 0x48 + recordTable + 0x21) = *(char *)(destinationClass + 0x13) == '\0';
     }
   }
   return;

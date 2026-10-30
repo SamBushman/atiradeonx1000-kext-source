@@ -1949,12 +1949,12 @@ int SchedModel__fitsConstantLimit(schedModel, instA, instB, inlineLimit, otherLi
   int loopRemaining;
   int loopIndex;
   int loopRemaining2;
-  int iVar4;
+  int seenCount;
   int operandIndex;
   int *inst;
-  int *local_58 [12];
+  int *seenConstants [12];
   
-  iVar4 = 0;
+  seenCount = 0;
   do {
     loopRemaining2 = 2;
     inst = instA;
@@ -1967,23 +1967,23 @@ int SchedModel__fitsConstantLimit(schedModel, instA, instB, inlineLimit, otherLi
 LAB_001898e0:
           loopRemaining = (**(code **)(*a0 + 0x48))(a0);
           if ((loopRemaining != 0) && (a0[0x4b] == 3)) {
-            if (iVar4 < 1) {
+            if (seenCount < 1) {
 LAB_00189934:
-              loopRemaining = iVar4 + 1;
-              local_58[iVar4] = a0;
-              iVar4 = loopRemaining;
+              loopRemaining = seenCount + 1;
+              seenConstants[seenCount] = a0;
+              seenCount = loopRemaining;
               if (inlineLimit + otherLimit < loopRemaining) {
                 return 0;
               }
             }
-            else if (local_58[0] != a0) {
+            else if (seenConstants[0] != a0) {
               loopIndex = 0;
-              loopRemaining = iVar4;
+              loopRemaining = seenCount;
               do {
                 loopIndex = loopIndex + 1;
                 loopRemaining = loopRemaining + -1;
                 if (loopRemaining == 0) goto LAB_00189934;
-              } while (a0 != local_58[loopIndex]);
+              } while (a0 != seenConstants[loopIndex]);
             }
           }
         }

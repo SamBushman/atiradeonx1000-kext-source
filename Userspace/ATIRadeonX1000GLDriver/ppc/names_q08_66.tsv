@@ -1,0 +1,40 @@
+use	R300MachineAssembler__setOutputDestination	iVar1	maxRegister	INFERRED	highest destination register so far: max(destRegister+1, output block +0x9374)	^\s*iVar1\ =\ iVar4\ \+\ 1;$	+1
+use	R300MachineAssembler__setOutputDestination	iVar1	maxRegister	INFERRED	highest destination register so far	^\s*if\ \(iVar1\ <=\ iVar3\)\ \{$	+2
+use	R300MachineAssembler__setOutputDestination	iVar1	maxRegister	INFERRED	stored to output block +0x9374	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5c\)\ \+\ 0x9374\)\ =\ iVar1;$	+1
+use	R300MachineAssembler__setOutputDestination	iVar1	recordIndex	INFERRED	this+0x60: index of the current record	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R300MachineAssembler__setOutputDestination	iVar1	recordIndex	INFERRED	this+0x60: index of the current record	^\s*\*\(bool\ \*\)\(iVar1\ \*\ 0x48\ \+\ iVar4\ \+\ 0x21\)\ =\ \*\(char\ \*\)\(iVar6\ \+\ 0x13\)\ ==\ '\\0';$	+1
+use	R300MachineAssembler__setOutputDestination	iVar3	currentMaxRegister	INFERRED	output block +0x9374: registers used so far	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x5c\)\ \+\ 0x9374\);$	+3
+use	R300MachineAssembler__setOutputDestination	iVar3	recordIndex2	INFERRED	this+0x60: index of the current record	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R300MachineAssembler__setOutputDestination	iVar3	recordIndex2	INFERRED	this+0x60: index of the current record	^\s*\*\(undefined1\ \*\)\(iVar3\ \*\ 0x48\ \+\ iVar4\ \+\ 0x15\)\ =\ uVar2;$	+1
+use	R300MachineAssembler__setOutputDestination	iVar4	recordTable	INFERRED	this+0x58: base of the record table	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+1
+use	R300MachineAssembler__setOutputDestination	iVar4	recordTable	INFERRED	this+0x58: base of the record table	^\s*\*\(undefined1\ \*\)\(iVar3\ \*\ 0x48\ \+\ iVar4\ \+\ 0x15\)\ =\ uVar2;$	+1
+use	R300MachineAssembler__setOutputDestination	iVar4	recordTable	INFERRED	this+0x58: base of the record table	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$@2	+1
+use	R300MachineAssembler__setOutputDestination	iVar4	recordTable	INFERRED	this+0x58: base of the record table	^\s*\*\(bool\ \*\)\(iVar1\ \*\ 0x48\ \+\ iVar4\ \+\ 0x21\)\ =\ \*\(char\ \*\)\(iVar6\ \+\ 0x13\)\ ==\ '\\0';$	+1
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar1	maxRegister	INFERRED	highest destination register so far: max(destinationIndex+1, output block +0x9374)	^\s*iVar1\ =\ iVar5\ \+\ 1;$	+1
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar1	maxRegister	INFERRED	highest destination register so far	^\s*if\ \(iVar1\ <=\ iVar4\)\ \{$	+2
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar1	maxRegister	INFERRED	stored to output block +0x9374	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xac\)\ \+\ 0x9374\)\ =\ iVar1;$	+1
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar1	recordIndex	INFERRED	this+0x60: index of the current record	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar1	recordIndex	INFERRED	this+0x60: index of the current record	^\s*\*\(bool\ \*\)\(iVar1\ \*\ 0x48\ \+\ iVar5\ \+\ 0x21\)\ =\ \*\(char\ \*\)\(iVar7\ \+\ 0x13\)\ ==\ '\\0';$	+1
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar4	currentMaxRegister	INFERRED	output block +0x9374: registers used so far	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xac\)\ \+\ 0x9374\);$	+3
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar4	recordIndex2	INFERRED	this+0x60: index of the current record	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R520MachineAssembler__vslot73_setOutputDestination	iVar4	recordIndex2	INFERRED	this+0x60: index of the current record	^\s*\*\(undefined1\ \*\)\(iVar4\ \*\ 0x48\ \+\ iVar5\ \+\ 0x15\)\ =\ uVar3;$	+1
+local	SchedModel__fitsConstantLimit	iVar4	seenCount	INFERRED	number of distinct constant sources recorded in seenConstants
+local	SchedModel__fitsConstantLimit	local_58	seenConstants	INFERRED	distinct constant-register sources seen so far (array of 12 pointers)
+local	R520MachineAssembler__terminateOpenBranches	piVar1	pendingSlot	INFERRED	top of the pending-record vector
+local	R520MachineAssembler__terminateOpenBranches	uVar3	pendingCount	INFERRED	size of the pending-record vector
+local	R520MachineAssembler__vslot39_appendLoopStartRecord	iVar1	recordIndex	INFERRED	this[0x18]: index of the current record
+local	R520MachineAssembler__vslot39_appendLoopStartRecord	iVar3	recordTable	INFERRED	this[0x2a]: base of the 0x48-byte record table
+use	R520MachineAssembler__writeHeaderRecord	uVar1	programKind	UNKNOWN	this+0x9c stored into header byte +0xe	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x9c\);$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar1	programKind	UNKNOWN	this+0x9c stored into header byte +0xe	^\s*\*\(char\ \*\)\(iVar5\ \+\ 0xe\)\ =\ \(char\)uVar1;$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar1	count74	UNKNOWN	this+0x74 counter	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x74\);$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar1	count74	UNKNOWN	this+0x74 counter	^\s*\*\(short\ \*\)\(iVar5\ \+\ 0x12\)\ =\ \(\(short\)uVar2\ \-\ \(short\)uVar1\)\ \+\ \-2;$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar2	recordCount	INFERRED	this+0x60: number of records written	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar2	recordCount	INFERRED	this+0x60: number of records written	^\s*\*\(short\ \*\)\(iVar5\ \+\ 0x12\)\ =\ \(\(short\)uVar2\ \-\ \(short\)uVar1\)\ \+\ \-2;$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar1	count64	UNKNOWN	this+0x64 counter	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 100\);$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar1	count64	UNKNOWN	this+0x64 counter	^\s*\*\(short\ \*\)\(iVar5\ \+\ 0x20\)\ =\ \(\(\(\(short\)uVar2\ \-\ \(short\)uVar1\)\ \-\ \(short\)uVar4\)\ \-\ \(short\)uVar3\)\ \+\ \-1;$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar2	recordCount2	INFERRED	this+0x60: number of records written	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x60\);$@2	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar2	recordCount2	INFERRED	this+0x60: number of records written	^\s*\*\(short\ \*\)\(iVar5\ \+\ 0x20\)\ =\ \(\(\(\(short\)uVar2\ \-\ \(short\)uVar1\)\ \-\ \(short\)uVar4\)\ \-\ \(short\)uVar3\)\ \+\ \-1;$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar4	count68	UNKNOWN	this+0x68 counter	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x68\);$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar4	count68	UNKNOWN	this+0x68 counter	^\s*\*\(short\ \*\)\(iVar5\ \+\ 0x20\)\ =\ \(\(\(\(short\)uVar2\ \-\ \(short\)uVar1\)\ \-\ \(short\)uVar4\)\ \-\ \(short\)uVar3\)\ \+\ \-1;$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar3	count74b	UNKNOWN	this+0x74 counter (second read)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x74\);$	+1
+use	R520MachineAssembler__writeHeaderRecord	uVar3	count74b	UNKNOWN	this+0x74 counter (second read)	^\s*\*\(short\ \*\)\(iVar5\ \+\ 0x20\)\ =\ \(\(\(\(short\)uVar2\ \-\ \(short\)uVar1\)\ \-\ \(short\)uVar4\)\ \-\ \(short\)uVar3\)\ \+\ \-1;$	+1

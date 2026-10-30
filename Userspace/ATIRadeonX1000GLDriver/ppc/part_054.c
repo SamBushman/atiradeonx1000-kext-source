@@ -4,16 +4,16 @@
 int R520MachineAssembler__terminateOpenBranches(this)
   int *this;
 {
-  int *piVar1;
+  int *pendingSlot;
   int stackVector;
-  uint uVar3;
+  uint pendingCount;
   short previousTarget;
   int branchRecord;
   
   do {
     stackVector = *(int *)(this[4] + 0x28);
-    uVar3 = *(uint *)(stackVector + 4);
-    if (uVar3 == 0) {
+    pendingCount = *(uint *)(stackVector + 4);
+    if (pendingCount == 0) {
       previousTarget = -1;
 LAB_001a1430:
       *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
@@ -26,12 +26,12 @@ LAB_001a1430:
       (**(code **)(*this + 0x15c))(this);
       return;
     }
-    piVar1 = (int *)0x0;
-    if (uVar3 - 1 < uVar3) {
-      piVar1 = (int *)((uVar3 - 1) * 4 + *(int *)(stackVector + 8));
+    pendingSlot = (int *)0x0;
+    if (pendingCount - 1 < pendingCount) {
+      pendingSlot = (int *)((pendingCount - 1) * 4 + *(int *)(stackVector + 8));
     }
-    branchRecord = *piVar1;
-    Vector__removeAt(stackVector,uVar3 - 1);
+    branchRecord = *pendingSlot;
+    Vector__removeAt(stackVector,pendingCount - 1);
     if ((*(char *)(branchRecord + 0xe) == '\x03') || (*(char *)(branchRecord + 0xe) == '\x01')) {
       previousTarget = *(short *)(branchRecord + 0xc);
       *(short *)(branchRecord + 0xc) = (short)this[0x18] - (short)this[0x1d];
@@ -292,11 +292,13 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
   int writeAlpha;
   int inst;
 {
+  int recordIndex2;
+  int recordIndex;
   int operandRecord;
-  int iVar1;
+  int maxRegister;
   byte outputFlags;
   undefined1 lanesToRgbMaskResult;
-  int iVar4;
+  int currentMaxRegister;
   int destinationIndex;
   undefined1 uVar6;
   int destinationClass;
@@ -316,21 +318,21 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
   }
   else {
     if (destinationClass == 9) {
-      iVar1 = destinationIndex + 1;
-      iVar4 = *(int *)(*(int *)(this + 0xac) + 0x9374);
-      if (iVar1 <= iVar4) {
-        iVar1 = iVar4;
+      maxRegister = destinationIndex + 1;
+      currentMaxRegister = *(int *)(*(int *)(this + 0xac) + 0x9374);
+      if (maxRegister <= currentMaxRegister) {
+        maxRegister = currentMaxRegister;
       }
-      *(int *)(*(int *)(this + 0xac) + 0x9374) = iVar1;
+      *(int *)(*(int *)(this + 0xac) + 0x9374) = maxRegister;
     }
     uVar6 = (undefined1)destinationIndex;
     if ((writeRgb != 0) && (destinationClass != 8)) {
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x16) = uVar6;
-      iVar4 = *(int *)(this + 0x60);
+      recordIndex2 = *(int *)(this + 0x60);
       destinationIndex = *(int *)(this + 0xa8);
       operandRecord = IRInst__getOperandRecord(inst,0);
       lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
-      *(undefined1 *)(iVar4 * 0x48 + destinationIndex + 0x15) = lanesToRgbMaskResult;
+      *(undefined1 *)(recordIndex2 * 0x48 + destinationIndex + 0x15) = lanesToRgbMaskResult;
     }
     if (writeAlpha != 0) {
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x22) = uVar6;
@@ -338,10 +340,10 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x23) = 1;
       }
       else {
-        iVar1 = *(int *)(this + 0x60);
+        recordIndex = *(int *)(this + 0x60);
         destinationIndex = *(int *)(this + 0xa8);
         destinationClass = IRInst__getOperandRecord(inst,0);
-        *(bool *)(iVar1 * 0x48 + destinationIndex + 0x21) = *(char *)(destinationClass + 0x13) == '\0';
+        *(bool *)(recordIndex * 0x48 + destinationIndex + 0x21) = *(char *)(destinationClass + 0x13) == '\0';
       }
     }
   }
@@ -674,13 +676,13 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   int *this;
   undefined4 loopCount;
 {
-  int iVar1;
+  int recordIndex;
   int *elementRef;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar3;
+  int recordTable;
   uint vectorFilledCount;
   uint *vector;
   
@@ -690,9 +692,9 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = (char)loopCount;
   (**(code **)(*this + 0x15c))(this,loopCount,in_r5,in_r6,in_r7,in_r8,*this);
   *(short *)(this[0x18] * 0x48 + this[0x2a] + -0x3c) = (short)this[0x18] + -1;
-  iVar1 = this[0x18];
+  recordIndex = this[0x18];
   vector = *(uint **)(this[4] + 0x28);
-  iVar3 = this[0x2a];
+  recordTable = this[0x2a];
   vectorFilledCount = vector[1];
   if (vectorFilledCount < *vector) {
     _memset(vectorFilledCount * 4 + vector[2],0,4);
@@ -702,7 +704,7 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   else {
     elementRef = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
-  *elementRef = iVar1 * 0x48 + iVar3 + -0x48;
+  *elementRef = recordIndex * 0x48 + recordTable + -0x48;
   return;
 }
 
