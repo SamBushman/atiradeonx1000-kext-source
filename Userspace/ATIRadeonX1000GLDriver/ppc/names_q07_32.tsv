@@ -2312,3 +2312,117 @@ local	FUN_001440e4	local_68	scratchPtrC4Plus2	INFERRED	local_c4 + 2
 local	FUN_001440e4	local_64	scratchPtrC4Plus3	INFERRED	local_c4 + 3
 local	FUN_001440e4	local_60	scratchPtrB4	INFERRED	&local_b4
 local	FUN_001440e4	local_5c	scratchPtrD4	INFERRED	&local_d4
+use	FUN_0015f44c	iVar6	vcall60Result	INFERRED	vtable +0x60 on the producer / node	^\s*if\ \(\(piVar17\ ==\ \(int\ \*\)0x0\)\ \|\|\ \(iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x60\)\)\(piVar17\),\ iVar6\ ==\ 0\)\)\ \{$	+4
+use	FUN_0015f44c	iVar6	passStamp	INFERRED	*(pass+0x478): pass stamp	^\s*iVar6\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x478\);$	+1
+use	FUN_0015f44c	iVar6	passStamp	INFERRED	*(pass+0x478): pass stamp	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x160\)\ =\ iVar6\ \+\ 1;$	+1
+use	FUN_0015f44c	iVar6	passStamp	INFERRED	*(pass+0x478): pass stamp	^\s*iVar6\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x478\);$@2	+1
+use	FUN_0015f44c	iVar6	passStamp	INFERRED	*(pass+0x478): pass stamp	^\s*\*\(int\ \*\)\(iVar11\ \+\ 0x160\)\ =\ iVar6\ \+\ 1;$@2	+1
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*iVar11\ =\ FUN_001084b8\(0x31,\*\(undefined4\ \*\)\(param_4\ \+\ 8\)\);$	+1
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x98\)\ =\ 0;$	+4
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x9c\)\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+5
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*iVar11\ =\ FUN_001084b8\(0x31,\*\(undefined4\ \*\)\(param_4\ \+\ 8\)\);$@2	+1
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x98\)\ =\ 0;$@2	+4
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x9c\)\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$@2	+2
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 0x14\)\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x14\)\ \|\ 0x80000000;$@2	+1
+use	FUN_0015f44c	iVar11	newMovInst	INFERRED	IRMov__new(0x31): the MOV inserted after node / its source	^\s*FUN_000e7738\(uVar12,uVar15,iVar11\);$	+2
+use	FUN_0015f44c	iVar11	newInstOperandCount	INFERRED	2 or 3: operand count passed to IRInst__createWithConstantOperands	^\s*iVar11\ =\ 2;$	+1
+use	FUN_0015f44c	iVar11	newInstOperandCount	INFERRED	2 or 3: operand count passed to IRInst__createWithConstantOperands	^\s*iVar11\ =\ 2;$@2	+1
+use	FUN_0015f44c	iVar11	newInstOperandCount	INFERRED	2 or 3: operand count passed to IRInst__createWithConstantOperands	^\s*iVar11\ =\ 3;$	+1
+use	FUN_0015f44c	iVar11	newInstOperandCount	INFERRED	2 or 3: operand count passed to IRInst__createWithConstantOperands	^\s*piVar8\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(iVar11,0x1010101,uVar13,param_4,uVar15,fparam_1\);$	+1
+use	FUN_0015f44c	iVar11	newInstOperandCount	INFERRED	2 or 3: operand count passed to IRInst__createWithConstantOperands	^\s*if\ \(\(iVar11\ ==\ 3\)\ \|\|\ \(fparam_1\ ==\ 1\.0\)\)\ \{$	+1
+use	FUN_0015f44c	iVar11	newInstOperandCount	INFERRED	2 or 3: operand count passed to IRInst__createWithConstantOperands	^\s*if\ \(iVar11\ !=\ 3\)\ goto\ LAB_0015f9e8;$	+1
+use	FUN_0015f44c	iVar11	newInstOperandCount	INFERRED	2 or 3: operand count passed to IRInst__createWithConstantOperands	^\s*\(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x88\)\)\(piVar8,iVar11,iVar19,iVar19\);$	+1
+use	FUN_0015f44c	iVar11	vcall60ResultB	INFERRED	vtable +0x60 on the new inst source	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x60\)\)\(piVar7\);$	+2
+use	FUN_0015f44c	piVar7	selectByteCursor	INFERRED	byte cursor over the local_a0 select bytes	^\s*piVar7\ =\ local_a0;$	+1
+use	FUN_0015f44c	piVar7	selectByteCursor	INFERRED	byte cursor over the local_a0 select bytes	^\s*\*\(undefined1\ \*\)piVar7\ =\ 4;$	+1
+use	FUN_0015f44c	piVar7	selectByteCursor	INFERRED	byte cursor over the local_a0 select bytes	^\s*piVar7\ =\ \(int\ \*\)\(\(int\)piVar7\ \+\ 1\);$	+1
+use	FUN_0015f44c	piVar7	newInstLaneCursor	INFERRED	walks the lane bytes of the new const inst	^\s*piVar7\ =\ piVar8;$	+1
+use	FUN_0015f44c	piVar7	newInstLaneCursor	INFERRED	walks the lane bytes of the new const inst	^\s*\*\(undefined1\ \*\)\(piVar7\ \+\ 0x27\)\ =\ 0;$	+1
+use	FUN_0015f44c	piVar7	newInstLaneCursor	INFERRED	walks the lane bytes of the new const inst	^\s*piVar7\ =\ \(int\ \*\)\(\(int\)piVar7\ \+\ 1\);$@2	+1
+use	FUN_0015f44c	piVar7	newInstLaneCursor	INFERRED	walks the lane bytes of the new const inst	^\s*piVar7\ =\ piVar8;$@2	+1
+use	FUN_0015f44c	piVar7	newInstLaneCursor	INFERRED	walks the lane bytes of the new const inst	^\s*\*\(undefined1\ \*\)\(piVar7\ \+\ 0x27\)\ =\ 0;$@2	+1
+use	FUN_0015f44c	piVar7	newInstLaneCursor	INFERRED	walks the lane bytes of the new const inst	^\s*\*\(undefined1\ \*\)\(piVar7\ \+\ 0x27\)\ =\ 0;$@3	+1
+use	FUN_0015f44c	piVar7	newInstLaneCursor	INFERRED	walks the lane bytes of the new const inst	^\s*piVar7\ =\ \(int\ \*\)\(\(int\)piVar7\ \+\ 1\);$@3	+1
+use	FUN_0015f44c	piVar7	nodeLaneCursor	INFERRED	walks the lane bytes of node	^\s*piVar7\ =\ param_3;$	+1
+use	FUN_0015f44c	piVar7	nodeLaneCursor	INFERRED	walks the lane bytes of node	^\s*\*\(undefined1\ \*\)\(piVar7\ \+\ 0x27\)\ =\ 0;$@4	+1
+use	FUN_0015f44c	piVar7	nodeLaneCursor	INFERRED	walks the lane bytes of node	^\s*piVar7\ =\ \(int\ \*\)\(\(int\)piVar7\ \+\ 1\);$@4	+1
+use	FUN_0015f44c	piVar7	nodeLaneCursor	INFERRED	walks the lane bytes of node	^\s*piVar7\ =\ param_3;$@2	+1
+use	FUN_0015f44c	piVar7	nodeLaneCursor	INFERRED	walks the lane bytes of node	^\s*\*\(undefined1\ \*\)\(piVar7\ \+\ 0x27\)\ =\ 0;$@5	+1
+use	FUN_0015f44c	piVar7	nodeLaneCursor	INFERRED	walks the lane bytes of node	^\s*piVar7\ =\ \(int\ \*\)\(\(int\)piVar7\ \+\ 1\);$@5	+1
+local	FUN_0015f44c	piVar8	newConstInst	INFERRED	IRInst__createWithConstantOperands result: the 0/1 constant selecting inst
+use	FUN_0015f44c	iVar9	firstSplatLane	INFERRED	lane whose operand is the first splat constant lane, or -1	^\s*iVar9\ =\ \-1;$	+1
+use	FUN_0015f44c	iVar9	firstSplatLane	INFERRED	lane whose operand is the first splat constant lane, or -1	^\s*if\ \(iVar9\ <\ 0\)\ \{$	+1
+use	FUN_0015f44c	iVar9	firstSplatLane	INFERRED	lane whose operand is the first splat constant lane, or -1	^\s*iVar9\ =\ iVar19;$	+1
+use	FUN_0015f44c	iVar9	firstSplatLane	INFERRED	lane whose operand is the first splat constant lane, or -1	^\s*\(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x88\)\)\(param_3,iVar16,uVar20,iVar9\);$	+1
+use	FUN_0015f44c	iVar18	secondSplatLane	INFERRED	second lane for the constant select, or -1	^\s*iVar18\ =\ \-1;$	+1
+use	FUN_0015f44c	iVar18	secondSplatLane	INFERRED	second lane for the constant select, or -1	^\s*if\ \(\-1\ <\ iVar18\)\ break;$	+1
+use	FUN_0015f44c	iVar18	secondSplatLane	INFERRED	second lane for the constant select, or -1	^\s*iVar18\ =\ iVar19;$	+1
+use	FUN_0015f44c	iVar18	secondSplatLane	INFERRED	second lane for the constant select, or -1	^\s*\(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x88\)\)\(param_3,iVar16,uVar20,iVar18\);$	+1
+use	FUN_0015f44c	iVar18	secondSplatLane	INFERRED	second lane for the constant select, or -1	^\s*\(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x88\)\)\(param_3,iVar16,uVar21,iVar18\);$	+1
+use	FUN_0015f44c	bVar1	hasNonConstSource	INFERRED	true when a node operand source is not an opcode-0x33 constant (or kind 3)	^\s*bVar1\ =\ true;$	+1
+use	FUN_0015f44c	bVar1	hasNonConstSource	INFERRED	true when a node operand source is not an opcode-0x33 constant (or kind 3)	^\s*bVar1\ =\ false;$	+1
+use	FUN_0015f44c	bVar1	hasNonConstSource	INFERRED	true when a node operand source is not an opcode-0x33 constant (or kind 3)	^\s*if\ \(!bVar1\)\ goto\ LAB_0015fd14;$	+1
+use	FUN_0015f44c	bVar1	noOneLanes	INFERRED	no lane of the producer operands is the constant 1.0	^\s*bVar1\ =\ local_a0\[4\]\ ==\ 0;$	+1
+use	FUN_0015f44c	bVar1	noOneLanes	INFERRED	no lane of the producer operands is the constant 1.0	^\s*if\ \(\(bVar1\)\ \|\|\ \(\(local_a0\[3\]\ ==\ 0\ \&\&\ \(iVar6\ ==\ 0x13\)\)\)\)\ \{$	+1
+use	FUN_0015f44c	bVar1	noOneLanes	INFERRED	no lane of the producer operands is the constant 1.0	^\s*if\ \(!bVar1\)\ \{$	+1
+use	FUN_0015f44c	bVar1	producerUnused	INFERRED	IRInst__hasNoUses(producer)	^\s*bVar1\ =\ iVar6\ !=\ 0;$	+2
+use	FUN_0015f44c	bVar1	producerUnused	INFERRED	IRInst__hasNoUses(producer)	^\s*if\ \(!bVar1\)\ \{$@2	+1
+use	FUN_0015f44c	bVar1	producerUnused	INFERRED	IRInst__hasNoUses(producer)	^\s*if\ \(!bVar1\)\ \{$@3	+1
+use	FUN_0015f44c	bVar3	hasZeroLanes	INFERRED	some producer operand lane is the constant 0.0	^\s*bVar3\ =\ local_a0\[3\]\ !=\ 0;$	+1
+use	FUN_0015f44c	bVar3	hasZeroLanes	INFERRED	some producer operand lane is the constant 0.0	^\s*if\ \(bVar3\)\ \{$	+1
+local	FUN_0015f44c	bVar4	constSelectByte	INFERRED	component byte of the producer operand select
+local	FUN_0015f44c	fVar5	constantValue	INFERRED	float constant read from the operand source (+0x20 + component*0x18)
+use	FUN_0015f44c	uVar13	zeroArgB	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*uVar13\ =\ 0;$	+1
+use	FUN_0015f44c	uVar13	zeroArgB	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1
+use	FUN_0015f44c	uVar14	nonConstLanes	INFERRED	lanes whose operand constant is neither 0.0 nor 1.0	^\s*uVar14\ =\ 0;$	+1
+use	FUN_0015f44c	uVar14	nonConstLanes	INFERRED	lanes whose operand constant is neither 0.0 nor 1.0	^\s*uVar14\ =\ uVar14\ \|\ 1\ <<\ \(uVar21\ \&\ 0x3f\);$	+1
+use	FUN_0015f44c	uVar14	nonConstLanes	INFERRED	lanes whose operand constant is neither 0.0 nor 1.0	^\s*if\ \(\(uVar14\ ==\ 0\)\ \&\&\ \(\-1\ <\ local_a0\[2\]\)\)\ \{$	+1
+use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*uVar14\ =\ 2;$	+1
+use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*iVar16\ =\ 3\ \-\ uVar14;$	+1
+use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*uVar21\ =\ local_a0\[2\]\ >>\ \(uVar14\ \&\ 0x3f\);$	+1
+use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*uVar21\ =\ local_a0\[2\]\ >>\ \(uVar14\ \&\ 0x3f\);$@2	+1
+use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*uVar14\ =\ uVar14\ \-\ 1;$	+1
+use	FUN_0015f44c	uVar15	zeroArg	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*uVar15\ =\ 0;$	+1
+use	FUN_0015f44c	uVar15	zeroArg	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1
+use	FUN_0015f44c	uVar15	producerDestSelectCopy	INFERRED	producer dest select word copied to node operand 1	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\);$	+1
+use	FUN_0015f44c	uVar15	producerDestSelectCopy	INFERRED	producer dest select word copied to node operand 1	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\)\ =\ uVar15;$	+1
+use	FUN_0015f44c	uVar21	nodeSrcModifierBits	INFERRED	node source modifier word (param_3[0x2e] / [0x3a])	^\s*uVar21\ =\ param_3\[0x2e\];$	+1
+use	FUN_0015f44c	uVar21	nodeSrcModifierBits	INFERRED	node source modifier word (param_3[0x2e] / [0x3a])	^\s*uVar21\ =\ param_3\[0x3a\];$	+1
+use	FUN_0015f44c	uVar21	nodeSrcModifierBits	INFERRED	node source modifier word (param_3[0x2e] / [0x3a])	^\s*if\ \(\(uVar21\ \&\ 1\)\ ==\ 0\)\ goto\ LAB_0015f7a8;$	+1
+use	FUN_0015f44c	uVar21	slotBits	INFERRED	local_a0[2] >> slot	^\s*uVar21\ =\ local_a0\[2\]\ >>\ \(uVar14\ \&\ 0x3f\);$	+2
+use	FUN_0015f44c	uVar21	slotBits	INFERRED	local_a0[2] >> slot	^\s*uVar21\ =\ local_a0\[2\]\ >>\ \(uVar14\ \&\ 0x3f\);$@2	+2
+use	FUN_0015f44c	uVar21	slotBits	INFERRED	local_a0[2] >> slot	^\s*if\ \(\(uVar21\ \&\ 1\)\ ==\ 0\)\ \{$@2	+1
+local	FUN_0015f44c	piVar17	producer	INFERRED	extra operand source of node: the producer folded into node
+local	FUN_0015f44c	fparam_1	selectConstant	INFERRED	0.0 or 1.0 passed as the float argument of IRInst__createWithConstantOperands
+local	FUN_0015f44c	local_c8	producerDestSelect	INFERRED	dest select word of the producer
+local	FUN_0015f44c	local_bc	nodeDestSelect	INFERRED	dest select word of node (also the operand select scratch)
+local	FUN_0015f44c	local_b0	lastOperandRecordBuf	INFERRED	IRInst__readLastOperand / IRInst__saveCounters out buffer word 0
+local	FUN_0015f44c	local_ac	lastOperandSourceSave	INFERRED	last operand source saved with the record; its +0x160 counter is bumped
+local	FUN_0015f44c	local_a8	counterSaveWord2	INFERRED	IRInst__saveCounters out buffer word 2
+local	FUN_0015f44c	local_8c	nodeDestSelectPtr	INFERRED	&local_bc
+local	FUN_0015f44c	local_88	producerDestSelectPtr	INFERRED	&local_c8
+local	FUN_0015f44c	local_84	nodeDestSelectPtrB	INFERRED	copy of &local_bc
+local	FUN_0015f44c	local_80	producerDestSelectPtrB	INFERRED	copy of &local_c8
+local	FUN_0015f44c	local_7c	nodeDestSelectPtrC	INFERRED	copy of &local_bc
+local	FUN_0015f44c	local_70	constBits	INFERRED	0 or 0x3f800000 (1.0f) marker written while classifying lanes
+local	FUN_0015f44c	local_c4	copyPropagateOut	INFERRED	out word of Inst__tryCopyPropagate, passed on to Inst__foldProducerIntoConsumer
+local	FUN_0015f44c	local_a0	foldInfo	INFERRED	5 words: [0] lane select bytes, [2] fold kind code, [3] lanes equal to 0.0, [4] lanes equal to 1.0
+use	FUN_0015f44c	iVar11	operandSourceScan	INFERRED	IRInst__getOperandSource(node,operandScanIdx): opcode 0x33 constant test	^\s*iVar11\ =\ FUN_00105594\(param_3,iVar6\);$	+3
+use	FUN_0015f44c	iVar11	flagResult	INFERRED	RegKind__flagBit0 / vtable +0x50 result on the producer source	^\s*if\ \(\(\(piVar7\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar11\ =\ FUN_00126760\(piVar7\[0x26\]\),\ iVar11\ ==\ 0\)\)\ \|\|$	+2
+use	FUN_0015f44c	iVar11	compatResult	INFERRED	FUN_00146624(producer source select, node dest select) result	^\s*iVar11\ =\ FUN_00146624\(uVar12,\*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\)\);$	+2
+use	FUN_0015f44c	iVar6	nodeOpcode	INFERRED	opcode of node (*(node[0x22]+8)): 0x12..0x14 tested	^\s*iVar6\ =\ \*\(int\ \*\)\(param_3\[0x22\]\ \+\ 8\);$	+1
+use	FUN_0015f44c	iVar6	nodeOpcode	INFERRED	opcode of node (*(node[0x22]+8)): 0x12..0x14 tested	^\s*if\ \(iVar6\ \-\ 0x12U\ <\ 3\)\ \{$	+1
+use	FUN_0015f44c	iVar6	nodeOpcode	INFERRED	opcode of node (*(node[0x22]+8)): 0x12..0x14 tested	^\s*\(\(1\ <\ iVar6\ \-\ 0x13U\ \|\|\ \(local_a0\[2\]\ =\ 6,\ \(param_3\[0x2e\]\ \&\ 1U\)\ !=\ \(param_3\[0x34\]\ \&\ 1U\)\)\)\)\)\ \{$	+2
+use	FUN_0015f44c	iVar6	nodeOpcode	INFERRED	opcode of node (*(node[0x22]+8)): 0x12..0x14 tested	^\s*if\ \(iVar6\ ==\ 0x14\)\ \{$	+1
+use	FUN_0015f44c	iVar6	nodeOpcode	INFERRED	opcode of node (*(node[0x22]+8)): 0x12..0x14 tested	^\s*if\ \(\(bVar1\)\ \|\|\ \(\(local_a0\[3\]\ ==\ 0\ \&\&\ \(iVar6\ ==\ 0x13\)\)\)\)\ \{$	+1
+use	FUN_0015f44c	iVar6	lastOperandSource	INFERRED	IRInst__getOperandSource(node,last operand)	^\s*\(iVar6\ =\ FUN_00105594\(param_3,param_3\[0x21\]\),\ \*\(int\ \*\)\(iVar6\ \+\ 300\)\ ==\ 3\)\)\ \{$	+1
+use	FUN_0015f44c	iVar6	producerRefCount	INFERRED	producer[0x58] before it is decremented	^\s*iVar6\ =\ piVar17\[0x58\];$	+1
+use	FUN_0015f44c	iVar6	producerRefCount	INFERRED	producer[0x58] before it is decremented	^\s*piVar17\[0x58\]\ =\ iVar6\ \+\ \-1;$	+1
+use	FUN_0015f44c	iVar6	hasNoUsesResult	INFERRED	IRInst__hasNoUses(producer,...) result	^\s*bVar1\ =\ iVar6\ !=\ 0;$	+1
+use	FUN_0015f44c	iVar6	hasNoUsesResult	INFERRED	IRInst__hasNoUses(producer,...) result	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1	lhs	none
+use	FUN_0015f44c	iVar6	producerRefCount	INFERRED	producer[0x58] - 1 passed as the stale last argument	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1	rhs	none
+use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied between operand records and node[0x27]	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x10\);$	+1
+use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied between operand records and node[0x27]	^\s*param_3\[0x27\]\ =\ iVar9;$	+1
+use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied between operand records and node[0x27]	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0x10\)\ =\ iVar9;$	+1
+use	FUN_0015f44c	uVar15	restoredSelectWord	INFERRED	local_bc select word stored to the operand record	^\s*uVar15\ =\ local_bc;$	+1
+use	FUN_0015f44c	uVar15	restoredSelectWord	INFERRED	local_bc select word stored to the operand record	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x10\)\ =\ uVar15;$	+1
