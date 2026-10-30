@@ -798,7 +798,7 @@ LAB_0004d2c8:
     glContextWord44 = *(uint *)(glContext + 0x44);
     if ((glContextWord44 & 0x60020000) != 0x40000000) {
       if ((((unsigned char *)0x00002e2d)[*(int *)(iVar4 + 0x10)] != '\0') && ((glContextWord44 & 0x20000) == 0)) {
-        iVar4 = FUN_0001a010(iVar4,*(undefined4 *)(iVar4 + 0x26a0),in_r5,in_r6,fgAlphaFunc,zbCntl,uVar8);
+        iVar4 = gld_needsMultisampleResolve(iVar4,*(undefined4 *)(iVar4 + 0x26a0),in_r5,in_r6,fgAlphaFunc,zbCntl,uVar8);
         if (iVar4 == 0) {
           zbCntl = *(uint *)(glContext + 0x1aa0);
           uVar8 = *(uint *)(glContext + 0x1a4c);
@@ -842,7 +842,7 @@ LAB_0004d460:
   if (*(int *)(glContext + 0x23dc) != 1) {
     uVar7 = *(uint *)(glContext + 0x1bd4);
     zbZstencilcntl = *(uint *)(glContext + 0x1aa4);
-    iVar4 = FUN_0001a010(*(undefined4 *)(glContext + 4),*(undefined4 *)(glContext + 0x2460),in_r5,in_r6,
+    iVar4 = gld_needsMultisampleResolve(*(undefined4 *)(glContext + 4),*(undefined4 *)(glContext + 0x2460),in_r5,in_r6,
                          fgAlphaFunc,zbCntl,uVar8);
     if (iVar4 == 0) {
       if ((*(uint *)(glContext + 0x1ab8) & 1) == 0) {
@@ -1761,13 +1761,13 @@ int FUN_0004eba0(glContext, param_2, param_3, param_4, param_5, param_6, param_7
   glContextWord8 = *(int *)(glContext + 8);
   if ((((((unsigned char *)0x00002e2d)[*(int *)(iVar1 + 0x10)] == '\0') ||
        ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-      (iVar1 = FUN_0001a010(iVar1,*(undefined4 *)(iVar1 + 0x26a0),param_3,param_4,param_5,param_6,
+      (iVar1 = gld_needsMultisampleResolve(iVar1,*(undefined4 *)(iVar1 + 0x26a0),param_3,param_4,param_5,param_6,
                             param_7), iVar1 != 0)) || (glContextWord2768 == 0)) {
     glState = *(int *)(glContext + 4);
     iVar1 = ((uint (*)())FUN_000a3560)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
     uVar2 = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
     *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * iVar1) >> 1);
-    iVar1 = FUN_0001a010(*(int *)(glContext + 4),uVar2,param_3,param_4,param_5,param_6,glState);
+    iVar1 = gld_needsMultisampleResolve(*(int *)(glContext + 4),uVar2,param_3,param_4,param_5,param_6,glState);
     dVar6 = extraout_f1_00;
     if (iVar1 == 0) {
       *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x20000;

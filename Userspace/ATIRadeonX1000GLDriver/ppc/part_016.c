@@ -726,7 +726,7 @@ int FUN_000a8c00(glContext, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyW
   glContextPtr4 = *(int *)(glContext + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4 + 0x10)] != '\0') &&
      ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) {
-    glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,
+    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,
                          staleArgR9);
     if (glContextPtr4 == 0) {
       glContextPtr4 = *(int *)(glContext + 4);
@@ -1514,7 +1514,7 @@ LAB_000a9de4:
             }
           }
           dirtyBitsArg = (char *)0x0;
-          fpPassThrough1 = (double)FUN_0003e320(glContext + -0x240,dirtyBits,0);
+          fpPassThrough1 = (double)gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
           puVar16 = r4AfterCall4;
           dirtyWord1 = pcVar17;
         }
@@ -1553,7 +1553,7 @@ LAB_000a9ffc:
         uVar10 = 0;
       }
       else {
-        glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar10,dirtyWord1
+        glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar10,dirtyWord1
                               ,uVar20);
         puVar16 = r4AfterCall6;
         fpPassThrough1 = f1AfterCall2;
@@ -2298,7 +2298,7 @@ LAB_000ab18c:
         }
       }
       dirtyBitsArg = (char *)0x0;
-      fpPassThrough1 = (double)FUN_0003e320(glContext + -0x240,dirtyBits,0);
+      fpPassThrough1 = (double)gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
       uVar10 = uVar12;
     }
     else if (uVar24 == 0) {
@@ -2335,7 +2335,7 @@ LAB_000ab3d0:
     uVar10 = 0;
   }
   else {
-    glContextPtr4 = FUN_0001a010(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar20,uVar10,
+    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,uVar20,uVar10,
                           puVar21);
     fpPassThrough1 = f1AfterCall3;
     if (glContextPtr4 != 0) {
@@ -2639,7 +2639,7 @@ void FUN_000abab0(int glContext,int a1,undefined4 a2,double fpPassThrough1)
   
   iVar1 = *(int *)(*(int *)(a1 + 0x74) + 0x84) * -0x10;
   *(unsigned char **)(auStack_70 + iVar1) = ((unsigned int)__builtin_frame_address(0));
-  ((double (*)())FUN_00024fe0)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
+  ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
                auStack_30 + iVar1,fpPassThrough1);
   (**(code **)(((unsigned char *)0x00001280) + glContext))
             (glContext,a2,0,0,auStack_30 + iVar1,*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84)
