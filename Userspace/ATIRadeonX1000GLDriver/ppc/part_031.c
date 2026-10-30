@@ -1768,12 +1768,13 @@ int Compare__descendingByRemappedKey(lhsRef, rhsRef)
   int *rhsRef;
 {
   int lhsKey;
-  int iVar2;
+  int rhsElement;
+  int rhsKey;
   
-  iVar2 = *rhsRef;
+  rhsElement = *rhsRef;
   lhsKey = ((int (*)())Lane__remapValue)(*(undefined4 *)(*lhsRef + 0x13c),*(undefined4 *)(*lhsRef + 0x140));
-  iVar2 = ((int (*)())Lane__remapValue)(*(undefined4 *)(iVar2 + 0x13c),*(undefined4 *)(iVar2 + 0x140));
-  return iVar2 < lhsKey;
+  rhsKey = ((int (*)())Lane__remapValue)(*(undefined4 *)(rhsElement + 0x13c),*(undefined4 *)(rhsElement + 0x140));
+  return rhsKey < lhsKey;
 }
 
 /* Compare__descendingByField140 @ 0x10e8c4 (32 bytes) */

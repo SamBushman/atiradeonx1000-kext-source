@@ -3064,9 +3064,9 @@ int ImmedConstBuffer__clone(this, targetBlock, compiler)
 }
 
 /* VertexRegister__clone @ 0x123288 (148 bytes) */
-int VertexRegister__clone(this, param_2, compiler)
+int VertexRegister__clone(this, instSink, compiler)
   int this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   int loadVertexInst;
@@ -3090,7 +3090,7 @@ int VertexRegister__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadVertexInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadVertexInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadVertexInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadVertexInst);
   return valueKey;
 }
@@ -3692,9 +3692,9 @@ int TempValue__clone(this, block, compiler)
 }
 
 /* ExportSlot__clone @ 0x1241fc (184 bytes) */
-int ExportSlot__clone(this, param_2, compiler)
+int ExportSlot__clone(this, instSink, compiler)
   undefined4 this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   undefined4 arena;
@@ -3724,15 +3724,15 @@ int ExportSlot__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
 
 /* Resource__clone @ 0x12434c (152 bytes) */
-int Resource__clone(this, param_2, compiler)
+int Resource__clone(this, instSink, compiler)
   undefined4 this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   undefined4 *allocation;
@@ -3758,15 +3758,15 @@ int Resource__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }
 
 /* FixedValue__clone @ 0x12447c (148 bytes) */
-int FixedValue__clone(this, param_2, compiler)
+int FixedValue__clone(this, instSink, compiler)
   undefined4 this;
-  int *param_2;
+  int *instSink;
   int compiler;
 {
   undefined4 *allocation;
@@ -3792,7 +3792,7 @@ int FixedValue__clone(this, param_2, compiler)
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
-  (**(code **)(*param_2 + 0xc))(param_2,loadInst);
+  (**(code **)(*instSink + 0xc))(instSink,loadInst);
   ((int (*)())IRInst__bindSourceFromValue)(this,loadInst);
   return valueKey;
 }

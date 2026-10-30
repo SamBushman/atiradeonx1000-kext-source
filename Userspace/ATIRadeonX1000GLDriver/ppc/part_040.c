@@ -3494,14 +3494,15 @@ int IRInst__findChainNodeById(inst, targetId)
   undefined4 inst;
   int targetId;
 {
-  int iVar1;
+  int chainEnd;
+  int query74;
   int *cursorInst;
   
-  iVar1 = ((int (*)())IRInst__chainLast)(inst);
-  cursorInst = *(int **)(iVar1 + 4);
+  chainEnd = ((int (*)())IRInst__chainLast)(inst);
+  cursorInst = *(int **)(chainEnd + 4);
   while( true ) {
-    iVar1 = (**(code **)(*cursorInst + 0x74))(cursorInst);
-    if (iVar1 == 0) {
+    query74 = (**(code **)(*cursorInst + 0x74))(cursorInst);
+    if (query74 == 0) {
       return (int *)0x0;
     }
     if (*(int *)(cursorInst[0x30] + 0x13c) == targetId) break;

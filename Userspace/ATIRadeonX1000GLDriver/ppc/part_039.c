@@ -273,9 +273,9 @@ int KhanPs__vslot73_seedValueNumbers(this, compiler)
 }
 
 /* KhanPs__vslot74_seedConstantValueNumbers @ 0x12839c (128 bytes) */
-int KhanPs__vslot74_seedConstantValueNumbers(this, param_2)
+int KhanPs__vslot74_seedConstantValueNumbers(this, compiler)
   undefined4 this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
   undefined4 seedExpr;
   int exprRecord;
@@ -283,7 +283,7 @@ int KhanPs__vslot74_seedConstantValueNumbers(this, param_2)
   
   seedExprCursor = &DAT_001aff68;
   do {
-    exprRecord = Compiler__valueNumberForExpr(param_2,*seedExprCursor);
+    exprRecord = Compiler__valueNumberForExpr(compiler,*seedExprCursor);
     seedExpr = *seedExprCursor;
     *(undefined4 *)(exprRecord + 0x1c) = 0;
     seedExprCursor = seedExprCursor + 1;
@@ -291,7 +291,7 @@ int KhanPs__vslot74_seedConstantValueNumbers(this, param_2)
     *(undefined1 *)(exprRecord + 8) = 1;
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
-    FUN_0017629c(exprRecord,param_2);
+    FUN_0017629c(exprRecord,compiler);
   } while (seedExprCursor != &DAT_001aff74);
   return;
 }
@@ -1193,9 +1193,9 @@ int KhanVs__vslot58_matchImmediateConstantCode(this, constants, outSelectCode, l
 }
 
 /* KhanVs__vslot74 @ 0x12998c (128 bytes) */
-int KhanVs__vslot74(this, param_2)
+int KhanVs__vslot74(this, compiler)
   undefined4 this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
   undefined4 seedExpr;
   int exprRecord;
@@ -1203,7 +1203,7 @@ int KhanVs__vslot74(this, param_2)
   
   seedExprCursor = &DAT_001affb0;
   do {
-    exprRecord = Compiler__valueNumberForExpr(param_2,*seedExprCursor);
+    exprRecord = Compiler__valueNumberForExpr(compiler,*seedExprCursor);
     seedExpr = *seedExprCursor;
     *(undefined4 *)(exprRecord + 0x1c) = 0;
     seedExprCursor = seedExprCursor + 1;
@@ -1211,7 +1211,7 @@ int KhanVs__vslot74(this, param_2)
     *(undefined1 *)(exprRecord + 8) = 1;
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
-    FUN_0017629c(exprRecord,param_2);
+    FUN_0017629c(exprRecord,compiler);
   } while (seedExprCursor != &DAT_001affb8);
   return;
 }
@@ -1936,17 +1936,18 @@ int Compiler__noteUnrollCount(compiler, unrollCount)
 int IRInst__hasOperandKindClass1(inst)
   int *inst;
 {
-  int iVar1;
+  int operandCount;
+  int kindClass;
   int loopIndex;
   
   loopIndex = 0;
   while( true ) {
-    iVar1 = (**(code **)(*inst + 0x14))(inst);
-    if (iVar1 < loopIndex) {
+    operandCount = (**(code **)(*inst + 0x14))(inst);
+    if (operandCount < loopIndex) {
       return 0;
     }
-    iVar1 = IRInst__operandKindClass(inst,loopIndex);
-    if (iVar1 == 1) break;
+    kindClass = IRInst__operandKindClass(inst,loopIndex);
+    if (kindClass == 1) break;
     loopIndex = loopIndex + 1;
   }
   return 1;
@@ -2002,17 +2003,17 @@ int Block__findLoopEntryPredecessor(targetLoop, block)
   int *predecessor;
   int *successor;
   int successorLoopInfo;
-  int *piVar2;
+  int *container;
   
-  piVar2 = (int *)block[0x4b];
+  container = (int *)block[0x4b];
   while( true ) {
     while( true ) {
       while( true ) {
         successor = (int *)Block__getSuccessor(block,0);
         successorLoopInfo = (**(code **)(*successor + 0x10))(successor);
         if ((successorLoopInfo != 0) && (*(int *)(successorLoopInfo + 300) == targetLoop)) {
-          footerQuery2c = (**(code **)(*piVar2 + 0x2c))(piVar2);
-          predecessor = (int *)Block__getPredecessor(piVar2,(uint)(footerQuery2c != 0));
+          footerQuery2c = (**(code **)(*container + 0x2c))(container);
+          predecessor = (int *)Block__getPredecessor(container,(uint)(footerQuery2c != 0));
           return predecessor;
         }
         successorQuery24 = (**(code **)(*successor + 0x24))(successor);
@@ -2033,7 +2034,7 @@ int Block__findLoopEntryPredecessor(targetLoop, block)
       }
     }
     else {
-      piVar2 = (int *)successor[0x4b];
+      container = (int *)successor[0x4b];
       block = successor;
     }
   }
