@@ -474,17 +474,17 @@ int LoopIndexedSet__ctor_126de4(ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar4;
+  undefined4 *object;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
-  puVar4 = allocation + 1;
+  object = allocation + 1;
   *allocation = arena;
-  VRegInfo__ctor_12379c(puVar4,ctorWord2,ctorWord1,ctorWord3,compiler);
+  VRegInfo__ctor_12379c(object,ctorWord2,ctorWord1,ctorWord3,compiler);
   vtable = PTR_DAT_001e90ec;
   allocation[0xd] = 0;
-  *puVar4 = vtable + 8;
-  return puVar4;
+  *object = vtable + 8;
+  return object;
 }
 
 /* ImmedConstBuffer__vslot183 @ 0x126e90 (84 bytes) */
@@ -621,18 +621,18 @@ int ConstKey__lanes2(param_1)
 }
 
 /* ConstKey__lanes3 @ 0x12727c (24 bytes) */
-int ConstKey__lanes3(param_1)
-  int param_1;
+int ConstKey__lanes3(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38) + *(int *)(key + 0x50);
 }
 
 /* ConstKey__lanes4 @ 0x127294 (32 bytes) */
-int ConstKey__lanes4(param_1)
-  int param_1;
+int ConstKey__lanes4(key)
+  int key;
 {
-  return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50) +
-         *(int *)(param_1 + 0x68);
+  return *(int *)(key + 0x20) + *(int *)(key + 0x38) + *(int *)(key + 0x50) +
+         *(int *)(key + 0x68);
 }
 
 /* Object__sumWords4And8 @ 0x1272b4 (16 bytes) */
@@ -652,24 +652,24 @@ int Object__setWord0(param_1, param_2)
 }
 
 /* VRegPool__canonicalizeKey @ 0x1272d4 (80 bytes) */
-int VRegPool__canonicalizeKey(cache, param_2, param_3)
+int VRegPool__canonicalizeKey(cache, kindRef, valueRef)
   int cache;
-  int *param_2;
-  int *param_3;
+  int *kindRef;
+  int *valueRef;
 {
-  if (*param_2 != 0x24) {
+  if (*kindRef != 0x24) {
     return;
   }
-  if (*param_3 == *(int *)(cache + 0x44)) {
-    *param_2 = 6;
-    *param_3 = 0;
+  if (*valueRef == *(int *)(cache + 0x44)) {
+    *kindRef = 6;
+    *valueRef = 0;
     return;
   }
-  if (*param_3 != *(int *)(cache + 0x48)) {
+  if (*valueRef != *(int *)(cache + 0x48)) {
     return;
   }
-  *param_2 = 7;
-  *param_3 = 0;
+  *kindRef = 7;
+  *valueRef = 0;
   return;
 }
 

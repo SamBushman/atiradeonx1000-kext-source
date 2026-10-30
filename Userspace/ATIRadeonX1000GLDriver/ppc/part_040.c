@@ -75,7 +75,7 @@ int Program__removeUnreachableBlocks(program)
   int *nextBlockLink;
   bool removedAny;
   undefined4 *successorPredVector;
-  int iVar4;
+  int predecessorBlock;
   int blockPredecessorTotal;
   int entryBlock;
   uint loopIndex;
@@ -98,15 +98,15 @@ int Program__removeUnreachableBlocks(program)
       if ((entryBlock != block) && (blockPredecessorTotal = Block__predecessorCount(block), blockPredecessorTotal == 0)) {
         blockPredecessorTotal = 0;
         for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(block + 0xd0) + 4); loopIndex = loopIndex + 1) {
-          iVar4 = *(int *)(blockPredecessorTotal + *(int *)(*(int *)(block + 0xd0) + 8));
-          if (iVar4 != 0) {
-            successorPredVector = *(undefined4 **)(iVar4 + 0xd4);
+          predecessorBlock = *(int *)(blockPredecessorTotal + *(int *)(*(int *)(block + 0xd0) + 8));
+          if (predecessorBlock != 0) {
+            successorPredVector = *(undefined4 **)(predecessorBlock + 0xd4);
             predVectorCopyArena = successorPredVector[3];
             predVectorCopyCapacity = *successorPredVector;
             predVectorCopyCount = successorPredVector[1];
             predVectorCopyData = successorPredVector[2];
             Vector__removeValue(&predVectorCopyCapacity,block);
-            predecessorCount = Block__predecessorCount(iVar4);
+            predecessorCount = Block__predecessorCount(predecessorBlock);
             if (predecessorCount == 0) {
               removedAny = true;
             }
@@ -3418,14 +3418,14 @@ int IRInst__chainEndNext(pendingInst)
 int IRInst__chainEndSkippingFlag4000000(inst)
   undefined4 inst;
 {
-  int iVar1;
+  int chainNode;
   undefined4 callResult;
   
-  iVar1 = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
-  if ((*(uint *)(iVar1 + 0x14) & 0x4000000) != 0) {
-    iVar1 = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
+  chainNode = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
+  if ((*(uint *)(chainNode + 0x14) & 0x4000000) != 0) {
+    chainNode = ((int (*)())IRInst__chainLastOfPredecessor)(inst);
   }
-  callResult = ((int (*)())IRInst__advanceToChainEnd)(iVar1);
+  callResult = ((int (*)())IRInst__advanceToChainEnd)(chainNode);
   return callResult;
 }
 

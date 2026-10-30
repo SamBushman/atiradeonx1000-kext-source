@@ -3642,7 +3642,7 @@ int InterferenceGraph__ctor_136ec4(this, ownerArg, nodeCount, ownerArg4, compile
   int allocation2;
   int loopIndex2;
   int loopIndex;
-  int iVar1;
+  int classTableByteSize;
   undefined4 *bitsetClearCursor;
   undefined4 *nodeSlotRef;
   int classArrayBytes;
@@ -3711,13 +3711,13 @@ int InterferenceGraph__ctor_136ec4(this, ownerArg, nodeCount, ownerArg4, compile
       } while (edgeBitsetWordCount != 0);
     }
     *this = (int)edgeBitsetWords;
-    iVar1 = *(int *)(*(int *)(this[0xb] + 0x30c) + 0x14) << 2;
-    classArrayBytes = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    classTableByteSize = *(int *)(*(int *)(this[0xb] + 0x30c) + 0x14) << 2;
+    classArrayBytes = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),classTableByteSize);
     this[4] = classArrayBytes;
     (**(code **)(**(int **)(this[0xb] + 0x30c) + 0x134))(*(int **)(this[0xb] + 0x30c),classArrayBytes);
-    classArrayB = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    classArrayB = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),classTableByteSize);
     this[6] = classArrayB;
-    allocation2 = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    allocation2 = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),classTableByteSize);
     compilerObj = this[0xb];
     this[5] = allocation2;
     if (0 < *(int *)(*(int *)(compilerObj + 0x30c) + 0x14)) {
@@ -3770,7 +3770,7 @@ int InterferenceGraph__ctor_13719c(this, ownerArg, nodeCount, ownerArg4, compile
   int allocation2;
   int loopIndex2;
   int loopIndex;
-  int iVar1;
+  int classTableByteSize;
   undefined4 *bitsetClearCursor;
   undefined4 *nodeSlotRef;
   int classArrayBytes;
@@ -3839,13 +3839,13 @@ int InterferenceGraph__ctor_13719c(this, ownerArg, nodeCount, ownerArg4, compile
       } while (edgeBitsetWordCount != 0);
     }
     *this = (int)edgeBitsetWords;
-    iVar1 = *(int *)(*(int *)(this[0xb] + 0x30c) + 0x14) << 2;
-    classArrayBytes = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    classTableByteSize = *(int *)(*(int *)(this[0xb] + 0x30c) + 0x14) << 2;
+    classArrayBytes = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),classTableByteSize);
     this[4] = classArrayBytes;
     (**(code **)(**(int **)(this[0xb] + 0x30c) + 0x134))(*(int **)(this[0xb] + 0x30c),classArrayBytes);
-    classArrayB = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    classArrayB = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),classTableByteSize);
     this[6] = classArrayB;
-    allocation2 = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),iVar1);
+    allocation2 = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),classTableByteSize);
     compilerObj = this[0xb];
     this[5] = allocation2;
     if (0 < *(int *)(*(int *)(compilerObj + 0x30c) + 0x14)) {

@@ -1,0 +1,2 @@
+use	IRExport__ctor_108918	uVar1	opcodeId	INFERRED	backend vslot 0x178 result passed to Opcode__getInfo	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_2\ \+\ COMP_target\)\ \+\ 0x178\)\)\(\*\(int\ \*\*\)\(param_2\ \+\ COMP_target\),param_2\);$	^\s*uVar1\ =\ DAT_001af9c8;$	lhs	none
+use	IRExport__ctor_108918	uVar1	defaultWord27	INFERRED	DAT_001af9c8 stored in this[0x27]	^\s*uVar1\ =\ DAT_001af9c8;$	^\s*param_1\[0x22\]\ =\ uVar2;$	lhs	none

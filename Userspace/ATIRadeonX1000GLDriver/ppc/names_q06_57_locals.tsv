@@ -1,0 +1,14 @@
+local	VRegPool__canonicalizeKey	param_2	kindRef	INFERRED	key kind word, 0x24 rewritten to 6/7
+local	VRegPool__canonicalizeKey	param_3	valueRef	INFERRED	key value word, cleared when remapped
+local	Compare__descendingByField140	param_1	lhsRef	INFERRED	element pointer ref, field +0x140 compared
+local	Compare__descendingByField140	param_2	rhsRef	INFERRED	element pointer ref, field +0x140 compared
+local	Program__removeUnreachableBlocks	iVar4	predecessorBlock	INFERRED	predecessor block taken from block+0xd0 vector
+local	IRInst__chainEndSkippingFlag4000000	iVar1	chainNode	INFERRED	chain end instruction from IRInst__chainLastOfPredecessor
+local	ConstKey__lanes3	param_1	key	INFERRED	constant key record, sums three lane words
+local	ConstKey__lanes4	param_1	key	INFERRED	constant key record, sums four lane words
+local	LoopIndexedSet__ctor_126de4	puVar4	object	INFERRED	allocation+1, constructed object returned
+local	IRInst__foldMovSourceSelect	iVar2	splatLane	INFERRED	SelectWord__splatComponent result
+local	ExportSlot__clone	uVar4	defaultWord28	INFERRED	DAT_001afee8 stored in the clone word 0x28
+local	InterferenceGraph__ctor_136ec4	iVar1	classTableByteSize	INFERRED	backend register class count * 4
+local	InterferenceGraph__ctor_13719c	iVar1	classTableByteSize	INFERRED	backend register class count * 4
+local	VRegPool__constructByKind	param_4	keyLast	INFERRED	forwarded to the per-kind constructor

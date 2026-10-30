@@ -2867,17 +2867,17 @@ int Program__runSsaPipeline(program)
 }
 
 /* VRegPool__constructByKind @ 0x122e90 (44 bytes) */
-int VRegPool__constructByKind(param_1, kindIndex, keyExtra, param_4)
+int VRegPool__constructByKind(param_1, kindIndex, keyExtra, keyLast)
   undefined4 param_1;
   int kindIndex;
   uint keyExtra;
-  uint param_4;
+  uint keyLast;
 {
   undefined4 callResult;
   
                     
                     
-  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(param_1,kindIndex,keyExtra,param_4);
+  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(param_1,kindIndex,keyExtra,keyLast);
   return callResult;
 }
 
@@ -3701,7 +3701,7 @@ int ExportSlot__clone(this, param_2, compiler)
   undefined4 *allocation;
   int callResult;
   undefined4 *valueKey;
-  undefined4 uVar4;
+  undefined4 defaultWord28;
   undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -3710,9 +3710,9 @@ int ExportSlot__clone(this, param_2, compiler)
   *allocation = arena;
   IRLoad__ctor_109a80(loadInst,0xfa,compiler);
   IRInst__setOperandRef(loadInst,0,this);
-  uVar4 = DAT_001afee8;
+  defaultWord28 = DAT_001afee8;
   allocation[6] = allocation[6] & 0xffff7fff;
-  allocation[0x28] = uVar4;
+  allocation[0x28] = defaultWord28;
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   valueKey = allocation + 1;

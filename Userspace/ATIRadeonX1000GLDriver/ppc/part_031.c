@@ -688,7 +688,7 @@ int IRInst__foldMovSourceSelect(outSelect, inst, operandIndex, program)
   int loopIndex;
   byte selectByte;
   int *a0;
-  int iVar2;
+  int splatLane;
   int srcRecord;
   undefined4 innerSelect;
   undefined4 trackUses;
@@ -701,10 +701,10 @@ int IRInst__foldMovSourceSelect(outSelect, inst, operandIndex, program)
   isMovLike = (**(code **)(*a0 + 0x60))(a0);
   if (isMovLike != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    iVar2 = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
+    splatLane = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
     srcRecord = IRInst__getOperandRecord(inst,operandIndex);
-    selectByte = *(byte *)(iVar2 + srcRecord + 0x10);
-    if (-1 < iVar2) {
+    selectByte = *(byte *)(splatLane + srcRecord + 0x10);
+    if (-1 < splatLane) {
       IRInst__getOperandRecord(a0,0);
     }
     for (loopIndex = 1; srcRecord = (**(code **)(*a0 + 0x14))(a0), loopIndex <= srcRecord; loopIndex = loopIndex + 1) {
@@ -1777,11 +1777,11 @@ int Compare__descendingByRemappedKey(lhsRef, rhsRef)
 }
 
 /* Compare__descendingByField140 @ 0x10e8c4 (32 bytes) */
-int Compare__descendingByField140(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int Compare__descendingByField140(lhsRef, rhsRef)
+  int *lhsRef;
+  int *rhsRef;
 {
-  return *(int *)(*param_2 + 0x140) < *(int *)(*param_1 + 0x140);
+  return *(int *)(*rhsRef + 0x140) < *(int *)(*lhsRef + 0x140);
 }
 
 /* PackEntry__assignLaneSources @ 0x10e8e4 (120 bytes) */

@@ -391,7 +391,8 @@ int IRExport__ctor_108918(this, compiler)
   undefined4 *this;
   int compiler;
 {
-  undefined4 uVar1;
+  undefined4 opcodeId;
+  undefined4 defaultWord27;
   undefined4 opcodeInfo;
   
   IRAlu__ctor_1071a8(this,0x30,compiler);
@@ -400,12 +401,12 @@ int IRExport__ctor_108918(this, compiler)
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
     Program__addInst(*(int *)(compiler + COMP_currentProgram),this);
   }
-  uVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
-  opcodeInfo = Opcode__getInfo(uVar1);
-  uVar1 = DAT_001af9c8;
+  opcodeId = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
+  opcodeInfo = Opcode__getInfo(opcodeId);
+  defaultWord27 = DAT_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
-  this[0x27] = uVar1;
+  this[0x27] = defaultWord27;
   this[0x22] = opcodeInfo;
   this[0x20] = 0;
   this[0x50] = 0;
