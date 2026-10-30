@@ -2737,7 +2737,8 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
   uint *candidateRecord;
   undefined4 *userHeadCursor;
   int candidateFits;
-  int iVar8;
+  int sourceIsFile0;
+  int remainingLanes;
   undefined4 a2;
   int a4;
   byte *a5;
@@ -2850,10 +2851,10 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
         candidateRecord = (uint *)(program + candidateIndex * 0x10);
         do {
           candidateRecord = candidateRecord + 1;
-          if (((sourceMask & 1 << (sourceIndexB & 0x3f)) != 0) && (iVar8 = ((int (*)())recordSourceFileIs0)(candidateRecord), iVar8 != 0))
+          if (((sourceMask & 1 << (sourceIndexB & 0x3f)) != 0) && (sourceIsFile0 = ((int (*)())recordSourceFileIs0)(candidateRecord), sourceIsFile0 != 0))
           {
             allOwned = true;
-            iVar8 = 4;
+            remainingLanes = 4;
             userHeadCursor = (undefined4 *)
                      (((char)(DAT_001aa760)[*candidateRecord & 0xf] * 0x100 + (*candidateRecord >> 5 & 0xff)) * 0x10
                       + ctx + 0x2a87c);
@@ -2862,8 +2863,8 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
               if ((userNode != (int *)0x0) && ((candidateIndex != *userNode || (userNode[1] != 0)))) {
                 allOwned = false;
               }
-              iVar8 = iVar8 + -1;
-              if (iVar8 == 0) {
+              remainingLanes = remainingLanes + -1;
+              if (remainingLanes == 0) {
                 if (allOwned) {
                   loopCounter = loopCounter + 1;
                 }

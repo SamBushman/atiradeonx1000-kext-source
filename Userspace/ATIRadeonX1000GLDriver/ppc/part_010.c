@@ -5704,7 +5704,8 @@ int vpStateApplyParameters(ctx, vpCache)
   int ctx;
   int *vpCache;
 {
-  int iVar1;
+  int paramEntry;
+  int constSlotIndex;
   uint paramCount;
   uint loopIndex;
   int stateRecord;
@@ -5732,16 +5733,16 @@ int vpStateApplyParameters(ctx, vpCache)
           loopIndex = 0;
           do {
             oldMaxIndex = *(int *)(((unsigned char *)0x0000137c) + currentState);
-            iVar1 = *(int *)(loopIndex * 4 + *(int *)(stateRecord + 0x114)) * 0x54 + vpCache[8];
-            srcVector = *(undefined4 **)(iVar1 + 0x38);
-            iVar1 = *(int *)(iVar1 + 4);
-            constSlotPtr = iVar1 * 0x10 + stateRecord;
+            paramEntry = *(int *)(loopIndex * 4 + *(int *)(stateRecord + 0x114)) * 0x54 + vpCache[8];
+            srcVector = *(undefined4 **)(paramEntry + 0x38);
+            constSlotIndex = *(int *)(paramEntry + 4);
+            constSlotPtr = constSlotIndex * 0x10 + stateRecord;
             *(undefined4 *)(constSlotPtr + 0x154) = *srcVector;
             *(undefined4 *)(constSlotPtr + 0x158) = srcVector[1];
             *(undefined4 *)(constSlotPtr + 0x15c) = srcVector[2];
             *(undefined4 *)(constSlotPtr + 0x160) = srcVector[3];
-            if (oldMaxIndex < iVar1) {
-              *(int *)(((unsigned char *)0x0000137c) + currentState) = iVar1;
+            if (oldMaxIndex < constSlotIndex) {
+              *(int *)(((unsigned char *)0x0000137c) + currentState) = constSlotIndex;
               paramCount = *(uint *)(stateRecord + 0x118);
             }
             loopIndex = loopIndex + 1;
