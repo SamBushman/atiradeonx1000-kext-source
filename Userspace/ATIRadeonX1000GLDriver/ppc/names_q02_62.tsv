@@ -1,0 +1,29 @@
+local	FUN_000547f0	puVar1	constData	INFERRED	symbol record +0x38: the 4-word constant vector of the local constant, overwritten by the values array
+use	FUN_000547f0	iVar2	symbolRecord	INFERRED	GL_LOCAL_CONSTANT_EXT (0x87c3) symbol record found by id in the shader symbol list	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00055a30\)\(iVar3\ \+\ 0x1c,param_2\);$	+3
+use	FUN_000547f0	iVar2	symbolRecord	INFERRED	GL_LOCAL_CONSTANT_EXT (0x87c3) symbol record found by id in the shader symbol list	^\s*\*\(undefined1\ \*\)\(iVar2\ \+\ 0x44\)\ =\ 1;$	+1
+use	FUN_000547f0	iVar2	symbolRecordAfter	INFERRED	symbol record looked up again after the constant was set (re-upload if in use)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00055a30\)\(iVar3\ \+\ 0x1c,param_2\);$@2	+3
+local	FUN_000547f0	iVar3	shader	INFERRED	current vertex shader *(glContext+0x1168)
+local	FUN_00054b20	uVar1	shaderArray	INFERRED	newly allocated array (0x7c0 bytes) of shader objects
+local	FUN_00054b20	puVar2	extvsState	INFERRED	EXT_vertex_shader state *(glContext+0x116c)
+local	FUN_00054b20	iVar3	bucketsLeft	INFERRED	countdown of the 32 state symbol hash buckets being cleared
+local	FUN_00055d00	uVar1	shaderRef	INFERRED	shader object found by extvsGetShaderById for the bound program id
+local	FUN_00055d00	iVar2	bindingEntry	INFERRED	binding list entry (stride 0x18) whose kind is 0x8620 (vertex program)
+local	FUN_00055d00	uVar3	bindingCount	INFERRED	number of entries of the binding list
+local	FUN_00055d00	iVar4	bindingList	INFERRED	binding list *(glContext+0x112c): count at +4, entries at +8
+local	FUN_00055d00	puVar6	programBinding	INFERRED	program binding record *(entry+0x14): [0] program id, [0x2a] resolved shader
+local	FUN_00055d00	iVar7	entryByteOffset	INFERRED	byte offset of the current list entry (stride 0x18)
+local	FUN_00054980	bVar1	moreBuckets	INFERRED	loop condition: bucket index != 0x1f before the increment
+local	FUN_00054980	a0	bucketEntry	INFERRED	state symbol hash chain entry being freed (next at +0xc)
+use	FUN_00054980	iVar2	shaderRecord	INFERRED	shader list entry: list + byte offset	^\s*iVar2\ =\ iVar5\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0xc\);$	+1
+use	FUN_00054980	iVar2	shaderRecord	INFERRED	shader list entry: list + byte offset	^\s*\(\(int\ \(\*\)\(\)\)FUN_00055300\)\(param_1,iVar2\);$	+1
+use	FUN_00054980	iVar2	bucketIndex	INFERRED	index of the state symbol hash bucket (0 .. 31)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00054980	iVar2	bucketIndex	INFERRED	index of the state symbol hash bucket (0 .. 31)	^\s*bVar1\ =\ iVar2\ !=\ 0x1f;$	+1
+use	FUN_00054980	iVar2	bucketIndex	INFERRED	index of the state symbol hash bucket (0 .. 31)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+local	FUN_00054980	iVar3	extvsState	INFERRED	EXT_vertex_shader state *(glContext+0x116c)
+use	FUN_00054980	iVar5	shaderByteOffset	INFERRED	byte offset of the shader list entry (stride 0x7c)	^\s*iVar5\ =\ 0;$	+1
+use	FUN_00054980	iVar5	shaderByteOffset	INFERRED	byte offset of the shader list entry (stride 0x7c)	^\s*iVar2\ =\ iVar5\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0xc\);$	+2
+use	FUN_00054980	iVar5	bucketCursor	INFERRED	cursor over the 32 hash bucket heads at extvsState+0x28	^\s*iVar5\ =\ iVar3;$	+1
+use	FUN_00054980	iVar5	bucketCursor	INFERRED	cursor over the 32 hash bucket heads at extvsState+0x28	^\s*a0\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x28\);$	+1
+use	FUN_00054980	iVar5	bucketCursor	INFERRED	cursor over the 32 hash bucket heads at extvsState+0x28	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x28\)\ =\ \*\(int\ \*\)\(a0\ \+\ 0xc\);$	+1
+use	FUN_00054980	iVar5	bucketCursor	INFERRED	cursor over the 32 hash bucket heads at extvsState+0x28	^\s*a0\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x28\);$@2	+1
+use	FUN_00054980	iVar5	bucketCursor	INFERRED	cursor over the 32 hash bucket heads at extvsState+0x28	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1

@@ -411,27 +411,28 @@ int glSetLocalConstantEXT_impl(ctx, symbolId, dataType, values)
   int dataType;
   undefined4 *values;
 {
-  undefined4 *puVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 *constData;
+  int symbolRecord;
+  int symbolRecordAfter;
+  int shader;
   
   if (dataType - 0x1400U < 0xb) {
-    iVar3 = *(int *)(((unsigned char *)0x00001168) + ctx);
+    shader = *(int *)(((unsigned char *)0x00001168) + ctx);
     if ((*(char *)(ctx + 0x31) != '\0') &&
-       (*(char *)(*(int *)(iVar3 + 4) + *(int *)(((unsigned char *)0x0000118c) + ctx)) != '\0')) {
-      ((int (*)())FUN_000546d0)(ctx,iVar3);
+       (*(char *)(*(int *)(shader + 4) + *(int *)(((unsigned char *)0x0000118c) + ctx)) != '\0')) {
+      ((int (*)())FUN_000546d0)(ctx,shader);
     }
-    iVar2 = ((int (*)())extvsSymbolListGetSymbol)(iVar3 + 0x1c,symbolId);
-    if (((iVar2 != 0) && (*(int *)(iVar2 + 0x28) == 0x87c3)) && (*(char *)(iVar2 + 0x44) == '\0')) {
-      puVar1 = *(undefined4 **)(iVar2 + 0x38);
-      *puVar1 = *values;
-      puVar1[1] = values[1];
-      puVar1[2] = values[2];
-      puVar1[3] = values[3];
-      *(undefined1 *)(iVar2 + 0x44) = 1;
-      iVar2 = ((int (*)())extvsSymbolListGetSymbol)(iVar3 + 0x1c,symbolId);
-      if ((iVar2 != 0) && (*(char *)(iVar2 + 0x3d) != '\0')) {
-        (**(code **)(*(int *)(iVar2 + 0x24) * 4 + ctx + -0x20bac))(ctx,iVar3,iVar2);
+    symbolRecord = ((int (*)())extvsSymbolListGetSymbol)(shader + 0x1c,symbolId);
+    if (((symbolRecord != 0) && (*(int *)(symbolRecord + 0x28) == 0x87c3)) && (*(char *)(symbolRecord + 0x44) == '\0')) {
+      constData = *(undefined4 **)(symbolRecord + 0x38);
+      *constData = *values;
+      constData[1] = values[1];
+      constData[2] = values[2];
+      constData[3] = values[3];
+      *(undefined1 *)(symbolRecord + 0x44) = 1;
+      symbolRecordAfter = ((int (*)())extvsSymbolListGetSymbol)(shader + 0x1c,symbolId);
+      if ((symbolRecordAfter != 0) && (*(char *)(symbolRecordAfter + 0x3d) != '\0')) {
+        (**(code **)(*(int *)(symbolRecordAfter + 0x24) * 4 + ctx + -0x20bac))(ctx,shader,symbolRecordAfter);
       }
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1000;
       *(byte *)(ctx + 0x2d) = *(byte *)(ctx + 0x2d) | 1;
@@ -459,41 +460,43 @@ int extvsBindCurrentVertexParameter(ctx, param_2)
 int extvsFreeAllShaders(ctx)
   int ctx;
 {
-  bool bVar1;
-  int a0;
-  int iVar2;
-  int iVar3;
+  bool moreBuckets;
+  int bucketEntry;
+  int shaderRecord;
+  int bucketIndex;
+  int extvsState;
   uint loopIndex;
-  int iVar5;
+  int shaderByteOffset;
+  int bucketCursor;
   
-  iVar3 = *(int *)(((unsigned char *)0x0000116c) + ctx);
-  if (*(int *)(iVar3 + 4) != 0) {
+  extvsState = *(int *)(((unsigned char *)0x0000116c) + ctx);
+  if (*(int *)(extvsState + 4) != 0) {
     loopIndex = 0;
-    iVar5 = 0;
+    shaderByteOffset = 0;
     do {
       loopIndex = loopIndex + 1;
-      iVar2 = iVar5 + *(int *)(iVar3 + 0xc);
-      iVar5 = iVar5 + 0x7c;
-      ((int (*)())extvsFreeShaderObject)(ctx,iVar2);
-    } while (loopIndex < *(uint *)(iVar3 + 4));
+      shaderRecord = shaderByteOffset + *(int *)(extvsState + 0xc);
+      shaderByteOffset = shaderByteOffset + 0x7c;
+      ((int (*)())extvsFreeShaderObject)(ctx,shaderRecord);
+    } while (loopIndex < *(uint *)(extvsState + 4));
   }
-  iVar2 = 0;
-  (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar3 + 0xc));
-  *(undefined4 *)(iVar3 + 4) = 0;
-  ((int (*)())extvsFreeSymbolData)(ctx,iVar3 + 0x14);
-  iVar5 = iVar3;
+  bucketIndex = 0;
+  (**(code **)(ctx + 0x18))(*(undefined4 *)(extvsState + 0xc));
+  *(undefined4 *)(extvsState + 4) = 0;
+  ((int (*)())extvsFreeSymbolData)(ctx,extvsState + 0x14);
+  bucketCursor = extvsState;
   do {
-    a0 = *(int *)(iVar5 + 0x28);
-    while (a0 != 0) {
-      *(int *)(iVar5 + 0x28) = *(int *)(a0 + 0xc);
-      (**(code **)(ctx + 0x18))(a0);
-      a0 = *(int *)(iVar5 + 0x28);
+    bucketEntry = *(int *)(bucketCursor + 0x28);
+    while (bucketEntry != 0) {
+      *(int *)(bucketCursor + 0x28) = *(int *)(bucketEntry + 0xc);
+      (**(code **)(ctx + 0x18))(bucketEntry);
+      bucketEntry = *(int *)(bucketCursor + 0x28);
     }
-    bVar1 = iVar2 != 0x1f;
-    iVar5 = iVar5 + 4;
-    iVar2 = iVar2 + 1;
-  } while (bVar1);
-  (**(code **)(ctx + 0x18))(iVar3);
+    moreBuckets = bucketIndex != 0x1f;
+    bucketCursor = bucketCursor + 4;
+    bucketIndex = bucketIndex + 1;
+  } while (moreBuckets);
+  (**(code **)(ctx + 0x18))(extvsState);
   *(undefined4 *)(((unsigned char *)0x0000116c) + ctx) = 0;
   return;
 }
@@ -515,20 +518,20 @@ int extvsReleaseState(ctx)
 int extvsInitState(ctx)
   int ctx;
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  undefined4 shaderArray;
+  undefined4 *extvsState;
+  int bucketsLeft;
   
-  puVar2 = *(undefined4 **)(((unsigned char *)0x0000116c) + ctx);
-  uVar1 = (**(code **)(ctx + 0xc))(0x7c0);
-  puVar2[9] = 0;
-  puVar2[3] = uVar1;
-  *puVar2 = 1;
-  puVar2[1] = 1;
-  puVar2[2] = 1;
-  puVar2[4] = 1;
-  ((int (*)())extvsInitShaderObject)(ctx,uVar1);
-  *(undefined4 *)(puVar2[3] + 8) = 0;
+  extvsState = *(undefined4 **)(((unsigned char *)0x0000116c) + ctx);
+  shaderArray = (**(code **)(ctx + 0xc))(0x7c0);
+  extvsState[9] = 0;
+  extvsState[3] = shaderArray;
+  *extvsState = 1;
+  extvsState[1] = 1;
+  extvsState[2] = 1;
+  extvsState[4] = 1;
+  ((int (*)())extvsInitShaderObject)(ctx,shaderArray);
+  *(undefined4 *)(extvsState[3] + 8) = 0;
   ((unsigned char *)0x00001170)[ctx] = 0;
   *(undefined4 *)(((unsigned char *)0x000011b4) + ctx) = 0;
   *(undefined4 *)(((unsigned char *)0x00001188) + ctx) = 0;
@@ -538,16 +541,16 @@ int extvsInitState(ctx)
   *(undefined4 *)(((unsigned char *)0x00001180) + ctx) = 0;
   *(undefined4 *)(((unsigned char *)0x00001184) + ctx) = 0;
   *(undefined4 *)(((unsigned char *)0x0000118c) + ctx) = 0;
-  *(undefined4 *)(((unsigned char *)0x00001168) + ctx) = puVar2[3];
+  *(undefined4 *)(((unsigned char *)0x00001168) + ctx) = extvsState[3];
   (**(code **)(((unsigned char *)0x000011a0) + ctx))(ctx);
-  puVar2[9] = 0;
-  ((int (*)())extvsInitSymbolListWithMVP)(ctx,puVar2 + 5);
-  iVar3 = 0x20;
+  extvsState[9] = 0;
+  ((int (*)())extvsInitSymbolListWithMVP)(ctx,extvsState + 5);
+  bucketsLeft = 0x20;
   do {
-    puVar2[10] = 0;
-    puVar2 = puVar2 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    extvsState[10] = 0;
+    extvsState = extvsState + 1;
+    bucketsLeft = bucketsLeft + -1;
+  } while (bucketsLeft != 0);
   return;
 }
 
@@ -1184,30 +1187,30 @@ int extvsInitShaderObject(ctx, shader)
 int extvsRefreshBoundVertexPrograms(glContext)
   int glContext;
 {
-  undefined4 uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
+  undefined4 shaderRef;
+  int bindingEntry;
+  uint bindingCount;
+  int bindingList;
   uint loopIndex;
-  undefined4 *puVar6;
-  int iVar7;
+  undefined4 *programBinding;
+  int entryByteOffset;
   
-  iVar4 = *(int *)(((unsigned char *)0x0000112c) + glContext);
-  uVar3 = *(uint *)(iVar4 + 4);
-  if (uVar3 != 0) {
+  bindingList = *(int *)(((unsigned char *)0x0000112c) + glContext);
+  bindingCount = *(uint *)(bindingList + 4);
+  if (bindingCount != 0) {
     loopIndex = 0;
-    iVar7 = 0;
+    entryByteOffset = 0;
     do {
-      iVar2 = iVar7 + *(int *)(iVar4 + 8);
-      if (*(int *)(iVar2 + 4) == 0x8620) {
-        puVar6 = *(undefined4 **)(iVar2 + 0x14);
-        uVar1 = extvsGetShaderById(glContext,*puVar6);
-        puVar6[0x2a] = uVar1;
-        uVar3 = *(uint *)(iVar4 + 4);
+      bindingEntry = entryByteOffset + *(int *)(bindingList + 8);
+      if (*(int *)(bindingEntry + 4) == 0x8620) {
+        programBinding = *(undefined4 **)(bindingEntry + 0x14);
+        shaderRef = extvsGetShaderById(glContext,*programBinding);
+        programBinding[0x2a] = shaderRef;
+        bindingCount = *(uint *)(bindingList + 4);
       }
       loopIndex = loopIndex + 1;
-      iVar7 = iVar7 + 0x18;
-    } while (loopIndex < uVar3);
+      entryByteOffset = entryByteOffset + 0x18;
+    } while (loopIndex < bindingCount);
   }
   return;
 }
