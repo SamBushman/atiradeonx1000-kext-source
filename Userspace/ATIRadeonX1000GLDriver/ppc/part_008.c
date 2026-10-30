@@ -258,43 +258,43 @@ int glGenSymbolsEXT_impl5(ctx, dataType, storageType, range, components)
 }
 
 /* FUN_00054470 @ 0x54470 (272 bytes) */
-int FUN_00054470(ring, param_2, param_3, registerBase)
+int FUN_00054470(ring, outConstBuffer, outRegisterCount, registerBase)
   int ring;
-  int *param_2;
-  int *param_3;
+  int *outConstBuffer;
+  int *outRegisterCount;
   int *registerBase;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
+  int constBuffer;
+  int *programState;
+  int programObj;
   
   if (*(char *)(ring + 0x1868) == '\0') {
-    piVar2 = *(int **)(*(int *)(((unsigned char *)0x0000118c) + ring) * 4 + **(int **)(((unsigned char *)0x00001168) + ring));
-    iVar3 = *piVar2;
-    *param_3 = piVar2[0x22];
-    *registerBase = *(int *)(ring + 0x2448) + *(int *)(iVar3 + 0x14);
-    iVar1 = *(int *)(iVar3 + 0x2b8);
-    if (iVar1 == 0) {
-      iVar1 = (**(code **)(ring + 0xc))(0x80c);
-      *(int *)(iVar3 + 0x2b8) = iVar1;
-      *param_2 = iVar1;
+    programState = *(int **)(*(int *)(((unsigned char *)0x0000118c) + ring) * 4 + **(int **)(((unsigned char *)0x00001168) + ring));
+    programObj = *programState;
+    *outRegisterCount = programState[0x22];
+    *registerBase = *(int *)(ring + 0x2448) + *(int *)(programObj + 0x14);
+    constBuffer = *(int *)(programObj + 0x2b8);
+    if (constBuffer == 0) {
+      constBuffer = (**(code **)(ring + 0xc))(0x80c);
+      *(int *)(programObj + 0x2b8) = constBuffer;
+      *outConstBuffer = constBuffer;
       return 1;
     }
   }
   else {
-    piVar2 = (int *)**(undefined4 **)
+    programState = (int *)**(undefined4 **)
                       (*(int *)(((unsigned char *)0x0000118c) + ring) * 4 + **(int **)(((unsigned char *)0x00001168) + ring));
-    *param_3 = piVar2[0x49];
-    *registerBase = *(int *)(ring + 0x2448) + *piVar2;
-    iVar1 = piVar2[0x4f6];
-    if (iVar1 == 0) {
-      iVar1 = (**(code **)(ring + 0xc))(0x80c);
-      piVar2[0x4f6] = iVar1;
-      *param_2 = iVar1;
+    *outRegisterCount = programState[0x49];
+    *registerBase = *(int *)(ring + 0x2448) + *programState;
+    constBuffer = programState[0x4f6];
+    if (constBuffer == 0) {
+      constBuffer = (**(code **)(ring + 0xc))(0x80c);
+      programState[0x4f6] = constBuffer;
+      *outConstBuffer = constBuffer;
       return 1;
     }
   }
-  *param_2 = iVar1;
+  *outConstBuffer = constBuffer;
   return 0;
 }
 

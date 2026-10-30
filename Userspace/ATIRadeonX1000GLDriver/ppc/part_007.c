@@ -2034,29 +2034,31 @@ LAB_0004f2c8:
 void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fparam_1)
 {
   byte colorFormatIndex;
-  short sVar2;
-  undefined *puVar3;
-  int iVar4;
-  uint uVar5;
+  short fogMode;
+  undefined *colorFormatTable;
+  int glStateBlock;
+  uint fogColorWord0;
+  uint fogColorWord2;
+  uint fogColorWord1;
   
-  puVar3 = PTR_DAT_001e88c8;
+  colorFormatTable = PTR_DAT_001e88c8;
   colorFormatIndex = *(byte *)(glContext + 0x293f);
   if ((*(uint *)(glContext + 0x44) & 0x1002000) == 0x1000000) {
-    iVar4 = *(int *)(*(int *)(glContext + 4) + 0x10);
-    sVar2 = *(short *)(((unsigned char *)0x00002e04) + iVar4);
-    if (sVar2 == 0x801) {
+    glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
+    fogMode = *(short *)(((unsigned char *)0x00002e04) + glStateBlock);
+    if (fogMode == 0x801) {
       *(undefined4 *)(glContext + 0x134) = 0;
       *(float *)(glContext + 0x138) =
-           -(*(float *)(((unsigned char *)0x00002df0) + iVar4) * *(float *)(((unsigned char *)0x00002df0) + iVar4));
+           -(*(float *)(((unsigned char *)0x00002df0) + glStateBlock) * *(float *)(((unsigned char *)0x00002df0) + glStateBlock));
     }
-    else if (sVar2 == 0x2601) {
+    else if (fogMode == 0x2601) {
       *(float *)(glContext + 0x134) =
-           *(float *)(((unsigned char *)0x00002df8) + iVar4) * *(float *)(((unsigned char *)0x00002dfc) + iVar4);
-      *(float *)(glContext + 0x138) = -*(float *)(((unsigned char *)0x00002dfc) + iVar4);
+           *(float *)(((unsigned char *)0x00002df8) + glStateBlock) * *(float *)(((unsigned char *)0x00002dfc) + glStateBlock);
+      *(float *)(glContext + 0x138) = -*(float *)(((unsigned char *)0x00002dfc) + glStateBlock);
     }
-    else if (sVar2 == 0x800) {
+    else if (fogMode == 0x800) {
       *(undefined4 *)(glContext + 0x134) = 0;
-      *(float *)(glContext + 0x138) = -*(float *)(((unsigned char *)0x00002df0) + iVar4);
+      *(float *)(glContext + 0x138) = -*(float *)(((unsigned char *)0x00002df0) + glStateBlock);
     }
     *(uint *)(glContext + 0x18a4) = *(uint *)(glContext + 0x18a4) & 0xfdffffff;
     *(uint *)(glContext + 0x1a64) = *(uint *)(glContext + 0x1a64) & 0xfffffff8 | 1;
@@ -2090,13 +2092,13 @@ void FUN_0004f2e0(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefi
   else {
     ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fparam_1);
   }
-  uVar5 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(puVar3 + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
-  *(uint *)(glContext + 0x1a54) = uVar5 & 0x3ff | *(uint *)(glContext + 0x1a54) & 0xfffffc00;
-  uVar5 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(puVar3 + (uint)colorFormatIndex * 0x24 + 0x18) >> 1 & 3);
-  *(uint *)(glContext + 0x1a58) = uVar5 & 0x3ff | *(uint *)(glContext + 0x1a58) & 0xfffffc00;
-  uVar5 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(puVar3 + (uint)colorFormatIndex * 0x24 + 0x18) >> 3 & 3);
+  fogColorWord0 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
+  *(uint *)(glContext + 0x1a54) = fogColorWord0 & 0x3ff | *(uint *)(glContext + 0x1a54) & 0xfffffc00;
+  fogColorWord1 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x18) >> 1 & 3);
+  *(uint *)(glContext + 0x1a58) = fogColorWord1 & 0x3ff | *(uint *)(glContext + 0x1a58) & 0xfffffc00;
+  fogColorWord2 = ((int (*)())FUN_0004f160)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x18) >> 3 & 3);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 1;
-  *(uint *)(glContext + 0x1a5c) = uVar5 & 0x3ff | *(uint *)(glContext + 0x1a5c) & 0xfffffc00;
+  *(uint *)(glContext + 0x1a5c) = fogColorWord2 & 0x3ff | *(uint *)(glContext + 0x1a5c) & 0xfffffc00;
   return;
 }
 
@@ -4622,27 +4624,27 @@ LAB_00053150:
 int FUN_00053190(param_1)
   int param_1;
 {
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  int unitFlagCursor;
+  uint unitsLeft;
+  uint enabledMask;
+  uint unitIndex;
   
-  iVar1 = *(int *)(((unsigned char *)0x00001168) + param_1);
-  if ((iVar1 != 0) && (uVar2 = (uint)(byte)((unsigned char *)0x000013b0)[param_1], uVar2 != 0)) {
-    uVar4 = 0;
-    uVar3 = 0;
-    if (uVar2 == 0) {
-      uVar2 = 1;
+  unitFlagCursor = *(int *)(((unsigned char *)0x00001168) + param_1);
+  if ((unitFlagCursor != 0) && (unitsLeft = (uint)(byte)((unsigned char *)0x000013b0)[param_1], unitsLeft != 0)) {
+    unitIndex = 0;
+    enabledMask = 0;
+    if (unitsLeft == 0) {
+      unitsLeft = 1;
     }
     do {
-      if (*(char *)(iVar1 + 0x71) != '\0') {
-        uVar3 = uVar3 | 1 << (uVar4 & 0x3f);
+      if (*(char *)(unitFlagCursor + 0x71) != '\0') {
+        enabledMask = enabledMask | 1 << (unitIndex & 0x3f);
       }
-      uVar4 = uVar4 + 1;
-      iVar1 = iVar1 + 1;
-      uVar2 = uVar2 - 1;
-    } while (uVar2 != 0);
-    return uVar3;
+      unitIndex = unitIndex + 1;
+      unitFlagCursor = unitFlagCursor + 1;
+      unitsLeft = unitsLeft - 1;
+    } while (unitsLeft != 0);
+    return enabledMask;
   }
   return 0;
 }
