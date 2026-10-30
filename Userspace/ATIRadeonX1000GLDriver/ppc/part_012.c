@@ -3231,54 +3231,55 @@ int gldSaveRasterState(glContext, snapshot)
 }
 
 /* gldEnterInternalDrawState @ 0x86ba0 (1840 bytes) */
-int gldEnterInternalDrawState(glContext, param_2, param_3, param_4, savedState)
+int gldEnterInternalDrawState(glContext, resetReg1af4, modeBitsB, modeBitsA, savedState)
   int glContext;
-  int param_2;
-  uint param_3;
-  uint param_4;
+  int resetReg1af4;
+  uint modeBitsB;
+  uint modeBitsA;
   undefined4 savedState;
 {
-  bool bVar1;
-  uint uVar2;
+  uint scaledXField;
+  bool modeBitsBIsZero;
+  uint reg1aa4Value;
   uint *ringFlagPtr;
   undefined4 *packet;
   uint a2;
-  undefined4 uVar5;
+  undefined4 regValue;
   undefined4 a4;
   undefined4 a5;
-  uint uVar6;
+  uint oldReg1b10;
   code *a6;
   undefined4 *packetTail;
   int stateBlock;
   undefined4 savedWord1930;
   
-  bVar1 = param_3 == 0;
-  a2 = param_3;
+  modeBitsBIsZero = modeBitsB == 0;
+  a2 = modeBitsB;
   ((int (*)())gldSaveRasterState)(glContext,savedState);
   *(undefined4 *)(glContext + 0x1c8c) = *(undefined4 *)(glContext + 0x2814);
   *(undefined4 *)(glContext + 0x1c94) = *(undefined4 *)(glContext + 0x2818);
   *(undefined4 *)(glContext + 0x23e0) = 0;
-  *(uint *)(glContext + 0x1aa0) = param_4 & 1 | (param_3 & 1) << 1 | (param_3 & 1) << 2;
+  *(uint *)(glContext + 0x1aa0) = modeBitsA & 1 | (modeBitsB & 1) << 1 | (modeBitsB & 1) << 2;
   *(uint *)(glContext + 0x1b74) = *(uint *)(glContext + 0x1b74) & 0xffff3fff | 0x1c000;
   *(uint *)(glContext + 0x1b84) = *(uint *)(glContext + 0x1b84) & 0xffffffc5 | 5;
-  if (bVar1) {
-    uVar2 = *(uint *)(glContext + 0x1aa4) & 0xfffffff8;
-    *(uint *)(glContext + 0x1aa4) = uVar2;
+  if (modeBitsBIsZero) {
+    reg1aa4Value = *(uint *)(glContext + 0x1aa4) & 0xfffffff8;
+    *(uint *)(glContext + 0x1aa4) = reg1aa4Value;
   }
   else {
-    uVar2 = *(uint *)(glContext + 0x1aa4) & 0xfffffff8 | 7;
-    *(uint *)(glContext + 0x1aa4) = uVar2;
+    reg1aa4Value = *(uint *)(glContext + 0x1aa4) & 0xfffffff8 | 7;
+    *(uint *)(glContext + 0x1aa4) = reg1aa4Value;
   }
-  if (param_4 == 0) {
-    *(uint *)(glContext + 0x1aa4) = uVar2 & 0xffffffc7;
+  if (modeBitsA == 0) {
+    *(uint *)(glContext + 0x1aa4) = reg1aa4Value & 0xffffffc7;
   }
   else {
     stateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
-    *(uint *)(glContext + 0x1aa4) = uVar2 & 0xff1c71c7 | 0x438438;
+    *(uint *)(glContext + 0x1aa4) = reg1aa4Value & 0xff1c71c7 | 0x438438;
     *(char *)(glContext + 0x1aab) = (char)*(undefined4 *)(((unsigned char *)0x00002db4) + stateBlock);
     *(char *)(glContext + 0x1aa9) = (char)*(undefined4 *)(((unsigned char *)0x00002e38) + stateBlock);
   }
-  uVar5 = 0;
+  regValue = 0;
   a5 = 2;
   a4 = 0xf;
   *(undefined4 *)(glContext + 0x1a80) = 0x20200000;
@@ -3305,30 +3306,30 @@ int gldEnterInternalDrawState(glContext, param_2, param_3, param_4, savedState)
   **(uint **)(glContext + 0x2444) = **(uint **)(glContext + 0x2444) & 0xf1ffffff | 0x6000000;
   **(uint **)(glContext + 0x2444) = **(uint **)(glContext + 0x2444) & 0xfffffff | 0xf0000000;
   if (*(int *)(glContext + 8) == 0xc) {
-    uVar6 = *(uint *)(glContext + 0x1b10);
+    oldReg1b10 = *(uint *)(glContext + 0x1b10);
     *(uint *)(glContext + 7000) = *(uint *)(glContext + 7000) & 0xfc000000;
-    uVar2 = (int)((float)((double)CONCAT44(0x43300000,
+    scaledXField = (int)((float)((double)CONCAT44(0x43300000,
                                            *(uint *)(*(int *)(glContext + 4) + 0x15c) ^ 0x80000000) -
                          4503601774854144.0) * *(float *)(glContext + 0x2814) + 0.0) & 0x1fff;
-    *(uint *)(glContext + 0x1b10) = uVar2 | uVar6 & 0xffffe000;
+    *(uint *)(glContext + 0x1b10) = scaledXField | oldReg1b10 & 0xffffe000;
     *(uint *)(glContext + 0x1b10) =
          ((int)((float)((double)CONCAT44(0x43300000,
                                          *(uint *)(*(int *)(glContext + 4) + 0x160) ^ 0x80000000) -
                        4503601774854144.0) * *(float *)(glContext + 0x2818) + 0.0) & 0x1fffU) << 0xd |
-         uVar2 | uVar6 & 0xfc000000;
+         scaledXField | oldReg1b10 & 0xfc000000;
   }
   else {
-    uVar6 = *(uint *)(glContext + 0x1b10);
+    oldReg1b10 = *(uint *)(glContext + 0x1b10);
     *(uint *)(glContext + 7000) = *(uint *)(glContext + 7000) & 0xfc000000;
-    uVar2 = (int)((float)((double)CONCAT44(0x43300000,
+    scaledXField = (int)((float)((double)CONCAT44(0x43300000,
                                            *(uint *)(*(int *)(glContext + 4) + 0x15c) ^ 0x80000000) -
                          4503601774854144.0) * *(float *)(glContext + 0x2814) + 0.0) & 0x1fff;
-    *(uint *)(glContext + 0x1b10) = uVar2 | uVar6 & 0xffffe000;
+    *(uint *)(glContext + 0x1b10) = scaledXField | oldReg1b10 & 0xffffe000;
     *(uint *)(glContext + 0x1b10) =
          ((int)((float)((double)CONCAT44(0x43300000,
                                          *(uint *)(*(int *)(glContext + 4) + 0x160) ^ 0x80000000) -
                        4503601774854144.0) * *(float *)(glContext + 0x2818) + 0.0) & 0x1fffU) << 0xd |
-         uVar2 | uVar6 & 0xfc000000;
+         scaledXField | oldReg1b10 & 0xfc000000;
   }
   *(undefined4 *)(glContext + 0x1b9c) = 3;
   *(undefined4 *)(glContext + 0x1b30) = 0;
@@ -3342,7 +3343,7 @@ int gldEnterInternalDrawState(glContext, param_2, param_3, param_4, savedState)
   *(undefined4 *)(glContext + 0x1ba0) = 0;
   *(undefined4 *)(glContext + 0x1bb0) = 0;
   *(undefined4 *)(glContext + 0x1bc0) = 0;
-  if (param_2 == 0) {
+  if (resetReg1af4 == 0) {
     *(undefined4 *)(0x00001af4 + glContext) = 0;
   }
   savedWord1930 = *(undefined4 *)(glContext + 0x1930);
@@ -3350,9 +3351,9 @@ int gldEnterInternalDrawState(glContext, param_2, param_3, param_4, savedState)
   FUN_0004b480(glContext,*(uint *)(glContext + 0x18a4) >> 6 & 0xffff);
   a6 = *(code **)(((unsigned char *)0x00001330) + glContext);
   *(uint *)(glContext + 0x1f2c) = *(uint *)(glContext + 0x1f2c) & 0xfffff800 | 0x80;
-  (*a6)(glContext,0xc0100000,a2,uVar5,a4,a5,a6);
+  (*a6)(glContext,0xc0100000,a2,regValue,a4,a5,a6);
   *(undefined4 *)(glContext + 0x1930) = savedWord1930;
-  if (!bVar1) {
+  if (!modeBitsBIsZero) {
     *(uint *)(glContext + 0x1ae0) = *(uint *)(glContext + 0x1ae0) & 0xfffffffe;
     *(uint *)(glContext + 0x1ab0) = *(uint *)(glContext + 0x1ab0) & 0xfffffffe;
   }
@@ -3360,81 +3361,81 @@ int gldEnterInternalDrawState(glContext, param_2, param_3, param_4, savedState)
   *(undefined4 **)(0x00002748 + glContext + 4) = packet;
   packetTail = packet + 0x34;
   *packet = 0x887;
-  uVar5 = *(undefined4 *)(glContext + 0x1b74);
+  regValue = *(undefined4 *)(glContext + 0x1b74);
   packet[2] = 0x82c;
-  packet[1] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1b84);
+  packet[1] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b84);
   packet[4] = ((unsigned char *)0x000010aeU);
-  packet[3] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1b30);
+  packet[3] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b30);
   packet[6] = ((unsigned char *)0x000013c0U);
-  packet[5] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1aa0);
+  packet[5] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1aa0);
   packet[8] = ((unsigned char *)0x000013c1U);
-  packet[7] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1aa4);
+  packet[7] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1aa4);
   packet[10] = ((unsigned char *)0x000013c2U);
-  packet[9] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1aa8);
+  packet[9] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1aa8);
   packet[0xc] = ((unsigned char *)0x000012f0U);
-  packet[0xb] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1aec);
+  packet[0xb] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1aec);
   packet[0xe] = ((unsigned char *)0x000012f5U);
-  packet[0xd] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1a4c);
+  packet[0xd] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1a4c);
   packet[0x10] = ((unsigned char *)0x000012f6U);
-  packet[0xf] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1a50);
+  packet[0xf] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1a50);
   packet[0x12] = ((unsigned char *)0x00001381U);
-  packet[0x11] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1a80);
+  packet[0x11] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1a80);
   packet[0x14] = ((unsigned char *)0x00001386U);
-  packet[0x13] = uVar5;
+  packet[0x13] = regValue;
   packet[0x15] = *(undefined4 *)(glContext + 0x1af8);
   packet[0x16] = 0x824;
-  uVar5 = *(undefined4 *)(glContext + 0x1b9c);
+  regValue = *(undefined4 *)(glContext + 0x1b9c);
   packet[0x18] = 0x825;
-  packet[0x17] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1ba0);
+  packet[0x17] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1ba0);
   packet[0x1a] = 0x82d;
-  packet[0x19] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x248c);
+  packet[0x19] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x248c);
   packet[0x1c] = 0x854;
-  packet[0x1b] = uVar5;
-  uVar5 = **(undefined4 **)(glContext + 0x2440);
+  packet[0x1b] = regValue;
+  regValue = **(undefined4 **)(glContext + 0x2440);
   packet[0x1e] = 0x878;
-  packet[0x1d] = uVar5;
-  uVar5 = **(undefined4 **)(glContext + 0x2444);
+  packet[0x1d] = regValue;
+  regValue = **(undefined4 **)(glContext + 0x2444);
   packet[0x20] = ((unsigned char *)0x000010f8U);
-  packet[0x1f] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 7000);
+  packet[0x1f] = regValue;
+  regValue = *(undefined4 *)(glContext + 7000);
   packet[0x22] = ((unsigned char *)0x000010f9U);
-  packet[0x21] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1b10);
+  packet[0x21] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b10);
   packet[0x24] = ((unsigned char *)0x000010a2U);
-  packet[0x23] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1b3c);
+  packet[0x23] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b3c);
   packet[0x26] = ((unsigned char *)0x00001383U);
-  packet[0x25] = uVar5;
-  uVar5 = *(undefined4 *)(0x00001af4 + glContext);
+  packet[0x25] = regValue;
+  regValue = *(undefined4 *)(0x00001af4 + glContext);
   packet[0x28] = ((unsigned char *)0x00001002U);
-  packet[0x27] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1b50);
+  packet[0x27] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b50);
   packet[0x2a] = ((unsigned char *)0x000010c0U);
-  packet[0x29] = uVar5;
+  packet[0x29] = regValue;
   packet[0x2b] = *(undefined4 *)(glContext + 0x1f2c);
   packet[0x2c] = 0x825;
-  uVar5 = *(undefined4 *)(glContext + 0x1ba0);
+  regValue = *(undefined4 *)(glContext + 0x1ba0);
   packet[0x2e] = 0x766;
-  packet[0x2d] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1c8c);
+  packet[0x2d] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1c8c);
   packet[0x30] = 0x768;
-  packet[0x2f] = uVar5;
-  uVar5 = *(undefined4 *)(glContext + 0x1c94);
+  packet[0x2f] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1c94);
   packet[0x32] = ((unsigned char *)0x000010faU);
-  packet[0x31] = uVar5;
+  packet[0x31] = regValue;
   packet[0x33] = *(undefined4 *)(glContext + 0x1b60);
-  if (!bVar1) {
+  if (!modeBitsBIsZero) {
     stateBlock = *(int *)(glContext + 4);
     ringFlagPtr = *(uint **)(stateBlock + 0x1d8);
     *ringFlagPtr = (int)packetTail - (int)ringFlagPtr >> 2 | *ringFlagPtr;
@@ -3442,15 +3443,15 @@ int gldEnterInternalDrawState(glContext, param_2, param_3, param_4, savedState)
     packetTail = packet + 0x39;
     packet[0x34] = 0x2f000000;
     packet[0x35] = ((unsigned char *)0x000010e9U);
-    uVar5 = *(undefined4 *)(glContext + 0x1ae0);
+    regValue = *(undefined4 *)(glContext + 0x1ae0);
     packet[0x37] = ((unsigned char *)0x000013c7U);
-    packet[0x36] = uVar5;
+    packet[0x36] = regValue;
     packet[0x38] = *(undefined4 *)(glContext + 0x1ab0);
   }
   *packetTail = ((unsigned char *)0x00001048U);
-  uVar5 = *(undefined4 *)(glContext + 0x1bc0);
+  regValue = *(undefined4 *)(glContext + 0x1bc0);
   packetTail[2] = ((unsigned char *)0x00001047U);
-  packetTail[1] = uVar5;
+  packetTail[1] = regValue;
   packetTail[3] = *(undefined4 *)(glContext + 0x1bb0);
   *(undefined4 **)(0x00002748 + glContext + 4) = packetTail + 4;
                     
@@ -3464,7 +3465,8 @@ int gldLeaveInternalDrawState(glContext, savedState)
   int glContext;
   undefined4 *savedState;
 {
-  char cVar1;
+  undefined4 *packet;
+  char enableFlagByte;
   undefined *flagTable;
   code *hookFn;
   uint *ringFlagPtr;
@@ -3474,13 +3476,13 @@ int gldLeaveInternalDrawState(glContext, savedState)
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  undefined4 uVar6;
-  uint uVar7;
-  undefined4 *puVar8;
+  undefined4 regValue;
+  uint regValueMasked;
+  undefined4 *drawStateWords;
   int stateObject;
   double fparam_1;
   
-  puVar8 = *(undefined4 **)(glContext + 0x2440);
+  drawStateWords = *(undefined4 **)(glContext + 0x2440);
   *(undefined4 *)(glContext + 0x1b74) = *savedState;
   *(undefined4 *)(glContext + 0x1b84) = savedState[1];
   *(undefined4 *)(glContext + 0x1b30) = savedState[2];
@@ -3497,7 +3499,7 @@ int gldLeaveInternalDrawState(glContext, savedState)
   *(undefined4 *)(glContext + 0x1b9c) = savedState[0xe];
   *(undefined4 *)(glContext + 0x1ba0) = savedState[0xf];
   *(undefined4 *)(glContext + 0x248c) = savedState[0x10];
-  *puVar8 = savedState[0x11];
+  *drawStateWords = savedState[0x11];
   **(undefined4 **)(glContext + 0x2444) = savedState[0x12];
   *(undefined4 *)(glContext + 0x1ae0) = savedState[0x15];
   *(undefined4 *)(glContext + 7000) = savedState[0x13];
@@ -3515,158 +3517,158 @@ int gldLeaveInternalDrawState(glContext, savedState)
   *(undefined4 *)(glContext + 0x1c94) = savedState[0x20];
   *(undefined4 *)(glContext + 0x1bc0) = savedState[0x21];
   hookFn = *(code **)(((unsigned char *)0x00001334) + glContext);
-  uVar6 = savedState[0x22];
-  *(undefined4 *)(glContext + 0x1bb0) = uVar6;
-  (*hookFn)(glContext,0,in_r5,in_r6,in_r7,in_r8,uVar6,puVar8);
+  regValue = savedState[0x22];
+  *(undefined4 *)(glContext + 0x1bb0) = regValue;
+  (*hookFn)(glContext,0,in_r5,in_r6,in_r7,in_r8,regValue,drawStateWords);
   if (((*(uint *)(glContext + 0x44) & 0x20000) != 0) &&
-     (puVar8 = *(undefined4 **)(glContext + 0x1e70), puVar8 != (undefined4 *)0x0)) {
+     (drawStateWords = *(undefined4 **)(glContext + 0x1e70), drawStateWords != (undefined4 *)0x0)) {
     if ((*(uint *)(glContext + 0x44) & 0x2000) == 0) {
-      cVar1 = ((unsigned char *)0x00001136)[glContext];
+      enableFlagByte = ((unsigned char *)0x00001136)[glContext];
     }
     else {
-      cVar1 = ((unsigned char *)0x000011d0)[glContext];
+      enableFlagByte = ((unsigned char *)0x000011d0)[glContext];
     }
-    if (cVar1 == '\0') goto LAB_00087474;
+    if (enableFlagByte == '\0') goto LAB_00087474;
   }
-  puVar8 = *(undefined4 **)(glContext + 0x1e5c);
+  drawStateWords = *(undefined4 **)(glContext + 0x1e5c);
 LAB_00087474:
-  *(undefined1 *)((int)puVar8 + 0x10eb) = 0;
+  *(undefined1 *)((int)drawStateWords + 0x10eb) = 0;
   if (*(int *)(glContext + 0x23e0) == 0) {
-    *puVar8 = 0;
-    puVar8[0x4c0] = 0;
+    *drawStateWords = 0;
+    drawStateWords[0x4c0] = 0;
   }
   else {
-    puVar8[7] = 0;
-    puVar8[0x54b] = 0;
+    drawStateWords[7] = 0;
+    drawStateWords[0x54b] = 0;
   }
   ((void (*)())FUN_0004a8f0)(glContext,extraout_r4,in_r5,in_r6,fparam_1);
   (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) & 0x3fefffff;
-  puVar8 = (undefined4 *)
+  packet = (undefined4 *)
            (**(code **)(glContext + 0x2758))
                      (glContext,0x55,in_r5,in_r6,in_r7,in_r8,*(code **)(glContext + 0x2758));
-  *(undefined4 **)(0x00002748 + glContext + 4) = puVar8;
-  *puVar8 = 0x887;
+  *(undefined4 **)(0x00002748 + glContext + 4) = packet;
+  *packet = 0x887;
   flagTable = PTR_DAT_001e88c8;
-  uVar6 = *(undefined4 *)(glContext + 0x1b74);
-  puVar8[2] = 0x82c;
-  puVar8[1] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1b84);
-  puVar8[4] = ((unsigned char *)0x000010aeU);
-  puVar8[3] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1b30);
-  puVar8[6] = ((unsigned char *)0x000013c0U);
-  puVar8[5] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1aa0);
-  puVar8[8] = ((unsigned char *)0x000013c1U);
-  puVar8[7] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1aa4);
-  puVar8[10] = ((unsigned char *)0x000013c2U);
-  puVar8[9] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1aa8);
-  puVar8[0xc] = ((unsigned char *)0x000012f0U);
-  puVar8[0xb] = uVar6;
-  uVar7 = *(uint *)(glContext + 0x1aec);
-  puVar8[0xd] = uVar7;
+  regValue = *(undefined4 *)(glContext + 0x1b74);
+  packet[2] = 0x82c;
+  packet[1] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b84);
+  packet[4] = ((unsigned char *)0x000010aeU);
+  packet[3] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b30);
+  packet[6] = ((unsigned char *)0x000013c0U);
+  packet[5] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1aa0);
+  packet[8] = ((unsigned char *)0x000013c1U);
+  packet[7] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1aa4);
+  packet[10] = ((unsigned char *)0x000013c2U);
+  packet[9] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1aa8);
+  packet[0xc] = ((unsigned char *)0x000012f0U);
+  packet[0xb] = regValue;
+  regValueMasked = *(uint *)(glContext + 0x1aec);
+  packet[0xd] = regValueMasked;
   if ((*(uint *)(flagTable + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x8000) == 0) {
-    puVar8[0xd] = uVar7 & 0xfffffffe;
+    packet[0xd] = regValueMasked & 0xfffffffe;
   }
-  puVar8[0xe] = ((unsigned char *)0x000012f5U);
-  uVar7 = *(uint *)(glContext + 0x1a4c);
-  puVar8[0xf] = uVar7;
+  packet[0xe] = ((unsigned char *)0x000012f5U);
+  regValueMasked = *(uint *)(glContext + 0x1a4c);
+  packet[0xf] = regValueMasked;
   if ((*(uint *)(flagTable + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x8000) == 0) {
-    puVar8[0xf] = uVar7 & 0xfffff7ff;
+    packet[0xf] = regValueMasked & 0xfffff7ff;
   }
-  puVar8[0x10] = ((unsigned char *)0x000012f6U);
-  uVar6 = *(undefined4 *)(glContext + 0x1a50);
-  puVar8[0x12] = ((unsigned char *)0x00001381U);
-  puVar8[0x11] = uVar6;
-  uVar7 = *(uint *)(glContext + 0x1a80);
-  puVar8[0x13] = uVar7;
+  packet[0x10] = ((unsigned char *)0x000012f6U);
+  regValue = *(undefined4 *)(glContext + 0x1a50);
+  packet[0x12] = ((unsigned char *)0x00001381U);
+  packet[0x11] = regValue;
+  regValueMasked = *(uint *)(glContext + 0x1a80);
+  packet[0x13] = regValueMasked;
   if ((*(uint *)(flagTable + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x4000) == 0) {
-    puVar8[0x13] = uVar7 & 0xfffffffc;
+    packet[0x13] = regValueMasked & 0xfffffffc;
   }
-  puVar8[0x14] = ((unsigned char *)0x00001386U);
-  packetTail = puVar8 + 0x34;
-  uVar6 = *(undefined4 *)(glContext + 0x1af8);
-  puVar8[0x16] = 0x824;
-  puVar8[0x15] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1b9c);
-  puVar8[0x18] = 0x825;
-  puVar8[0x17] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1ba0);
-  puVar8[0x1a] = 0x82d;
-  puVar8[0x19] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x248c);
-  puVar8[0x1c] = 0x854;
-  puVar8[0x1b] = uVar6;
-  uVar6 = **(undefined4 **)(glContext + 0x2440);
-  puVar8[0x1e] = 0x878;
-  puVar8[0x1d] = uVar6;
-  uVar6 = **(undefined4 **)(glContext + 0x2444);
-  puVar8[0x20] = ((unsigned char *)0x000010a2U);
-  puVar8[0x1f] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1b3c);
-  puVar8[0x22] = ((unsigned char *)0x00001383U);
-  puVar8[0x21] = uVar6;
-  uVar6 = *(undefined4 *)(0x00001af4 + glContext);
-  puVar8[0x24] = ((unsigned char *)0x00001002U);
-  puVar8[0x23] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1b50);
-  puVar8[0x26] = ((unsigned char *)0x000010c0U);
-  puVar8[0x25] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1f2c);
-  puVar8[0x28] = 0x825;
-  puVar8[0x27] = uVar6;
-  puVar8[0x29] = *(undefined4 *)(glContext + 0x1ba0);
-  puVar8[0x2a] = ((unsigned char *)0x00001008U);
-  uVar6 = *(undefined4 *)(glContext + 0x1a60);
-  puVar8[0x2c] = ((unsigned char *)0x00001004U);
-  puVar8[0x2b] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1a68);
-  puVar8[0x2e] = ((unsigned char *)0x00001005U);
-  puVar8[0x2d] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1a6c);
-  puVar8[0x30] = ((unsigned char *)0x000010faU);
-  puVar8[0x2f] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1b60);
-  puVar8[0x32] = ((unsigned char *)0x000013c5U);
-  puVar8[0x31] = uVar6;
-  puVar8[0x33] = *(undefined4 *)(glContext + 0x1ab8);
+  packet[0x14] = ((unsigned char *)0x00001386U);
+  packetTail = packet + 0x34;
+  regValue = *(undefined4 *)(glContext + 0x1af8);
+  packet[0x16] = 0x824;
+  packet[0x15] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b9c);
+  packet[0x18] = 0x825;
+  packet[0x17] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1ba0);
+  packet[0x1a] = 0x82d;
+  packet[0x19] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x248c);
+  packet[0x1c] = 0x854;
+  packet[0x1b] = regValue;
+  regValue = **(undefined4 **)(glContext + 0x2440);
+  packet[0x1e] = 0x878;
+  packet[0x1d] = regValue;
+  regValue = **(undefined4 **)(glContext + 0x2444);
+  packet[0x20] = ((unsigned char *)0x000010a2U);
+  packet[0x1f] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b3c);
+  packet[0x22] = ((unsigned char *)0x00001383U);
+  packet[0x21] = regValue;
+  regValue = *(undefined4 *)(0x00001af4 + glContext);
+  packet[0x24] = ((unsigned char *)0x00001002U);
+  packet[0x23] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b50);
+  packet[0x26] = ((unsigned char *)0x000010c0U);
+  packet[0x25] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1f2c);
+  packet[0x28] = 0x825;
+  packet[0x27] = regValue;
+  packet[0x29] = *(undefined4 *)(glContext + 0x1ba0);
+  packet[0x2a] = ((unsigned char *)0x00001008U);
+  regValue = *(undefined4 *)(glContext + 0x1a60);
+  packet[0x2c] = ((unsigned char *)0x00001004U);
+  packet[0x2b] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1a68);
+  packet[0x2e] = ((unsigned char *)0x00001005U);
+  packet[0x2d] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1a6c);
+  packet[0x30] = ((unsigned char *)0x000010faU);
+  packet[0x2f] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1b60);
+  packet[0x32] = ((unsigned char *)0x000013c5U);
+  packet[0x31] = regValue;
+  packet[0x33] = *(undefined4 *)(glContext + 0x1ab8);
   if ((*(uint *)(glContext + 0x2454) & 0x8000000) != 0) {
-    puVar8[0x34] = ((unsigned char *)0x000013c5U);
-    packetTail = puVar8 + 0x36;
-    puVar8[0x35] = *(undefined4 *)(glContext + 0x1ab8);
+    packet[0x34] = ((unsigned char *)0x000013c5U);
+    packetTail = packet + 0x36;
+    packet[0x35] = *(undefined4 *)(glContext + 0x1ab8);
   }
-  puVar8 = (undefined4 *)gldEmitScissorRegs(glContext,packetTail);
-  *puVar8 = 0x766;
-  uVar6 = *(undefined4 *)(glContext + 0x1c8c);
-  puVar8[2] = 0x768;
-  puVar8[1] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1c94);
-  puVar8[4] = ((unsigned char *)0x000010faU);
-  puVar8[3] = uVar6;
-  puVar8[5] = *(undefined4 *)(glContext + 0x1b60);
+  packet = (undefined4 *)gldEmitScissorRegs(glContext,packetTail);
+  *packet = 0x766;
+  regValue = *(undefined4 *)(glContext + 0x1c8c);
+  packet[2] = 0x768;
+  packet[1] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1c94);
+  packet[4] = ((unsigned char *)0x000010faU);
+  packet[3] = regValue;
+  packet[5] = *(undefined4 *)(glContext + 0x1b60);
   stateObject = *(int *)(glContext + 4);
   ringFlagPtr = *(uint **)(stateObject + 0x1d8);
-  *ringFlagPtr = (int)(puVar8 + 6) - (int)ringFlagPtr >> 2 | *ringFlagPtr;
-  *(undefined4 **)(stateObject + 0x1d8) = puVar8 + 6;
-  puVar8[6] = 0x2f000000;
-  puVar8[7] = ((unsigned char *)0x000010e9U);
-  uVar6 = *(undefined4 *)(glContext + 0x1ae0);
-  puVar8[9] = ((unsigned char *)0x000013c7U);
-  puVar8[8] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1ab0);
-  puVar8[0xb] = ((unsigned char *)0x00001048U);
-  puVar8[10] = uVar6;
-  uVar6 = *(undefined4 *)(glContext + 0x1bc0);
-  puVar8[0xd] = ((unsigned char *)0x00001047U);
-  puVar8[0xc] = uVar6;
-  puVar8[0xe] = *(undefined4 *)(glContext + 0x1bb0);
-  *(undefined4 **)(0x00002748 + glContext + 4) = puVar8 + 0xf;
+  *ringFlagPtr = (int)(packet + 6) - (int)ringFlagPtr >> 2 | *ringFlagPtr;
+  *(undefined4 **)(stateObject + 0x1d8) = packet + 6;
+  packet[6] = 0x2f000000;
+  packet[7] = ((unsigned char *)0x000010e9U);
+  regValue = *(undefined4 *)(glContext + 0x1ae0);
+  packet[9] = ((unsigned char *)0x000013c7U);
+  packet[8] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1ab0);
+  packet[0xb] = ((unsigned char *)0x00001048U);
+  packet[10] = regValue;
+  regValue = *(undefined4 *)(glContext + 0x1bc0);
+  packet[0xd] = ((unsigned char *)0x00001047U);
+  packet[0xc] = regValue;
+  packet[0xe] = *(undefined4 *)(glContext + 0x1bb0);
+  *(undefined4 **)(0x00002748 + glContext + 4) = packet + 0xf;
                     
                     
-  (**(code **)(glContext + 0x275c))(glContext,puVar8 + 0xf);
+  (**(code **)(glContext + 0x275c))(glContext,packet + 0xf);
   return;
 }
 

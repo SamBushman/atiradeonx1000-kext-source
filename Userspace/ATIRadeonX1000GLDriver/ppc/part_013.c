@@ -2176,22 +2176,33 @@ int arbfpUpdateStateForProgram(context, param_2, param_3, param_4, param_5, para
   undefined4 param_7;
   undefined4 param_8;
 {
-  uint *puVar1;
-  bool bVar2;
-  uint uVar3;
-  undefined1 uVar4;
-  uint uVar5;
+  uint stateWord48Masked;
+  uint clearedFlags;
+  uint slotCountLoop;
+  uint pendingWordC;
+  uint ctxWord3c;
+  uint maxUnits;
+  uint pendingWordB;
+  byte texUnitCount;
+  uint firstUnsetSlot;
+  uint pendingWordA;
+  uint lastUnsetSlot;
+  uint *slotFlagPtr;
+  bool fpDisabled;
+  uint liveMaskLow;
+  undefined1 slotByte;
+  uint liveMaskHigh;
   uint loopCounterB;
   undefined *programState;
   char *programObject;
-  byte bVar9;
+  byte slotCount;
   int loopIndex;
   uint dirtyFlags;
-  uint uVar12;
-  uint uVar13;
-  char *pcVar14;
-  uint uVar15;
-  undefined *puVar16;
+  uint highestLiveSlot;
+  uint lastUnsetSlotB;
+  char *objectCursor;
+  uint unitCountLoop;
+  undefined *slotCursor;
   int stateBlock;
   
   programState = ((unsigned char *)0x000011d0U) + context;
@@ -2205,76 +2216,76 @@ int arbfpUpdateStateForProgram(context, param_2, param_3, param_4, param_5, para
     *(undefined4 *)(((unsigned char *)0x00001228) + context) = 0;
     if (((unsigned char *)0x000013b1)[context] != '\0') {
       loopIndex = 0;
-      puVar16 = programState;
+      slotCursor = programState;
       do {
-        *(undefined4 *)(puVar16 + 0x5c) = 0;
+        *(undefined4 *)(slotCursor + 0x5c) = 0;
         loopIndex = loopIndex + 1;
-        puVar16 = puVar16 + 4;
+        slotCursor = slotCursor + 4;
       } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b1)[context]);
     }
-    uVar12 = 0xffffffff;
+    highestLiveSlot = 0xffffffff;
   }
   else {
-    uVar3 = *(uint *)(programObject + 8);
-    ((unsigned char *)0x000011d3)[context] = (char)uVar3;
-    uVar5 = *(uint *)(programObject + 0xc);
-    *(uint *)(((unsigned char *)0x00001228) + context) = uVar5;
-    uVar15 = (uint)(byte)((unsigned char *)0x000013b6)[context];
-    uVar12 = uVar15 - 1;
-    if (-1 < (int)uVar12) {
+    liveMaskLow = *(uint *)(programObject + 8);
+    ((unsigned char *)0x000011d3)[context] = (char)liveMaskLow;
+    liveMaskHigh = *(uint *)(programObject + 0xc);
+    *(uint *)(((unsigned char *)0x00001228) + context) = liveMaskHigh;
+    unitCountLoop = (uint)(byte)((unsigned char *)0x000013b6)[context];
+    highestLiveSlot = unitCountLoop - 1;
+    if (-1 < (int)highestLiveSlot) {
       do {
-        if (((uVar3 & 0xff | uVar5) >> (uVar12 & 0x3f) & 1) != 0) goto LAB_0008d4f8;
-        uVar12 = uVar12 - 1;
-        uVar15 = uVar15 - 1;
-      } while (uVar15 != 0);
+        if (((liveMaskLow & 0xff | liveMaskHigh) >> (highestLiveSlot & 0x3f) & 1) != 0) goto LAB_0008d4f8;
+        highestLiveSlot = highestLiveSlot - 1;
+        unitCountLoop = unitCountLoop - 1;
+      } while (unitCountLoop != 0);
     }
-    uVar12 = 0xffffffff;
+    highestLiveSlot = 0xffffffff;
 LAB_0008d4f8:
-    uVar15 = (uint)(byte)((unsigned char *)0x000013b1)[context];
-    if (uVar15 != 0) {
+    maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
+    if (maxUnits != 0) {
       loopIndex = 0;
-      pcVar14 = programObject;
-      puVar16 = programState;
+      objectCursor = programObject;
+      slotCursor = programState;
       do {
-        switch(*(undefined4 *)(pcVar14 + 0x10)) {
+        switch(*(undefined4 *)(objectCursor + 0x10)) {
         case 0:
-          *(undefined4 *)(puVar16 + 0x5c) = 0;
-          uVar15 = (uint)(byte)((unsigned char *)0x000013b1)[context];
+          *(undefined4 *)(slotCursor + 0x5c) = 0;
+          maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
           break;
         case 1:
         case 6:
-          *(undefined4 *)(puVar16 + 0x5c) = 0x10;
-          uVar15 = (uint)(byte)((unsigned char *)0x000013b1)[context];
+          *(undefined4 *)(slotCursor + 0x5c) = 0x10;
+          maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
           break;
         case 2:
         case 7:
-          *(undefined4 *)(puVar16 + 0x5c) = 8;
-          uVar15 = (uint)(byte)((unsigned char *)0x000013b1)[context];
+          *(undefined4 *)(slotCursor + 0x5c) = 8;
+          maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
           break;
         case 3:
-          *(undefined4 *)(puVar16 + 0x5c) = 2;
-          uVar15 = (uint)(byte)((unsigned char *)0x000013b1)[context];
+          *(undefined4 *)(slotCursor + 0x5c) = 2;
+          maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
           break;
         case 4:
-          *(undefined4 *)(puVar16 + 0x5c) = 1;
-          uVar15 = (uint)(byte)((unsigned char *)0x000013b1)[context];
+          *(undefined4 *)(slotCursor + 0x5c) = 1;
+          maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
           break;
         case 5:
         case 8:
-          *(undefined4 *)(puVar16 + 0x5c) = 4;
-          uVar15 = (uint)(byte)((unsigned char *)0x000013b1)[context];
+          *(undefined4 *)(slotCursor + 0x5c) = 4;
+          maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
         }
         loopIndex = loopIndex + 1;
-        pcVar14 = pcVar14 + 4;
-        puVar16 = puVar16 + 4;
-      } while (loopIndex < (int)uVar15);
+        objectCursor = objectCursor + 4;
+        slotCursor = slotCursor + 4;
+      } while (loopIndex < (int)maxUnits);
     }
   }
-  bVar2 = (dirtyFlags >> 0xd & 1) == 0;
-  if ((programObject[4] == '\0') || (bVar2)) {
+  fpDisabled = (dirtyFlags >> 0xd & 1) == 0;
+  if ((programObject[4] == '\0') || (fpDisabled)) {
     dirtyFlags = *(uint *)(context + 0x44);
     if ((dirtyFlags & 0x200) != 0) {
-      uVar15 = *(uint *)(context + 0x3c);
+      ctxWord3c = *(uint *)(context + 0x3c);
       dirtyFlags = dirtyFlags & 0xfffffdff;
       goto LAB_0008d6a4;
     }
@@ -2282,24 +2293,24 @@ LAB_0008d4f8:
   else {
     dirtyFlags = *(uint *)(context + 0x44);
     if ((dirtyFlags & 0x200) == 0) {
-      uVar15 = *(uint *)(context + 0x3c);
+      ctxWord3c = *(uint *)(context + 0x3c);
       dirtyFlags = dirtyFlags | 0x200;
 LAB_0008d6a4:
       *(uint *)(context + 0x44) = dirtyFlags;
       *(undefined1 *)(context + 0x29) = 1;
-      *(uint *)(context + 0x3c) = uVar15 | 1;
+      *(uint *)(context + 0x3c) = ctxWord3c | 1;
     }
   }
-  if ((*programObject == '\0') || (bVar2)) {
+  if ((*programObject == '\0') || (fpDisabled)) {
     if ((dirtyFlags & 0x1000) != 0) {
       dirtyFlags = dirtyFlags & 0xffffefff;
       *(uint *)(context + 0x44) = dirtyFlags;
       *(undefined1 *)(context + 0x29) = 1;
       *(uint *)(context + 0x38) = *(uint *)(context + 0x38) | 0x1000;
     }
-    if ((bVar2) && ((dirtyFlags & 0x4000) != 0)) goto joined_r0x0008d734;
+    if ((fpDisabled) && ((dirtyFlags & 0x4000) != 0)) goto joined_r0x0008d734;
     if ((dirtyFlags & 0x10000) != 0) {
-      uVar15 = *(uint *)(context + 0x38);
+      pendingWordC = *(uint *)(context + 0x38);
       dirtyFlags = dirtyFlags & 0xfffeffff;
       goto LAB_0008d760;
     }
@@ -2313,31 +2324,31 @@ LAB_0008d6a4:
     }
 joined_r0x0008d734:
     if ((dirtyFlags & 0x10000) == 0) {
-      uVar15 = *(uint *)(context + 0x38);
+      pendingWordC = *(uint *)(context + 0x38);
       dirtyFlags = dirtyFlags | 0x10000;
 LAB_0008d760:
       *(uint *)(context + 0x44) = dirtyFlags;
       *(undefined1 *)(context + 0x29) = 1;
-      *(uint *)(context + 0x38) = uVar15 | 0x20;
+      *(uint *)(context + 0x38) = pendingWordC | 0x20;
     }
   }
-  if ((programObject[3] == '\0') || (bVar2)) {
+  if ((programObject[3] == '\0') || (fpDisabled)) {
     if ((dirtyFlags & 0x100) != 0) {
-      uVar15 = *(uint *)(context + 0x38);
+      pendingWordC = *(uint *)(context + 0x38);
       dirtyFlags = dirtyFlags & 0xfffffeff;
       goto LAB_0008d7b0;
     }
   }
   else if ((dirtyFlags & 0x100) == 0) {
-    uVar15 = *(uint *)(context + 0x38);
+    pendingWordC = *(uint *)(context + 0x38);
     dirtyFlags = dirtyFlags | 0x100;
 LAB_0008d7b0:
     *(uint *)(context + 0x44) = dirtyFlags;
     *(undefined1 *)(context + 0x2a) = 1;
-    *(uint *)(context + 0x38) = uVar15 | 1;
+    *(uint *)(context + 0x38) = pendingWordC | 1;
     *(undefined1 *)(context + 0x29) = 1;
   }
-  if ((programObject[1] == '\0') || (bVar2)) {
+  if ((programObject[1] == '\0') || (fpDisabled)) {
     if ((dirtyFlags & 0x800) != 0) {
       dirtyFlags = dirtyFlags & 0xfffff7ff;
       *(uint *)(context + 0x44) = dirtyFlags;
@@ -2355,7 +2366,7 @@ LAB_0008d7b0:
     *(undefined1 *)(context + 0x29) = 1;
     *(uint *)(context + 0x38) = *(uint *)(context + 0x38) | 0x1000;
   }
-  if ((programObject[2] == '\0') || (bVar2)) {
+  if ((programObject[2] == '\0') || (fpDisabled)) {
     if ((dirtyFlags & 0x400) != 0) {
       dirtyFlags = dirtyFlags & 0xfffffbff;
       *(uint *)(context + 0x44) = dirtyFlags;
@@ -2374,56 +2385,56 @@ LAB_0008d7b0:
     *(uint *)(context + 0x38) = *(uint *)(context + 0x38) | 0x1000;
   }
   if ((dirtyFlags & 0xc00) != 0) {
-    bVar9 = ((unsigned char *)0x000013b0)[context];
-    uVar15 = (uint)bVar9;
-    if (uVar15 == 0) {
-      uVar5 = 0xffffffff;
-      uVar13 = 0xffffffff;
+    slotCount = ((unsigned char *)0x000013b0)[context];
+    slotCountLoop = (uint)slotCount;
+    if (slotCountLoop == 0) {
+      firstUnsetSlot = 0xffffffff;
+      lastUnsetSlotB = 0xffffffff;
     }
     else {
       loopCounterB = 0;
-      uVar5 = 0xffffffff;
-      uVar3 = 0xffffffff;
+      firstUnsetSlot = 0xffffffff;
+      lastUnsetSlot = 0xffffffff;
       do {
-        uVar13 = uVar3;
+        lastUnsetSlotB = lastUnsetSlot;
         if (((((int)(uint)(byte)((unsigned char *)0x000011d3)[context] >> (loopCounterB & 0x3f) & 1U) == 0) &&
-            (uVar13 = loopCounterB, uVar3 != 0xffffffff)) && (uVar13 = uVar3, uVar5 == 0xffffffff)) {
-          uVar5 = loopCounterB;
+            (lastUnsetSlotB = loopCounterB, lastUnsetSlot != 0xffffffff)) && (lastUnsetSlotB = lastUnsetSlot, firstUnsetSlot == 0xffffffff)) {
+          firstUnsetSlot = loopCounterB;
         }
         loopCounterB = loopCounterB + 1;
-        uVar15 = uVar15 - 1;
-        uVar3 = uVar13;
-      } while (uVar15 != 0);
+        slotCountLoop = slotCountLoop - 1;
+        lastUnsetSlot = lastUnsetSlotB;
+      } while (slotCountLoop != 0);
     }
     if ((dirtyFlags & 0x800) == 0) {
       if ((dirtyFlags & 0x400) != 0) {
-        if (uVar13 != 0xffffffff) {
-          bVar9 = (byte)uVar13;
+        if (lastUnsetSlotB != 0xffffffff) {
+          slotCount = (byte)lastUnsetSlotB;
         }
-        ((unsigned char *)0x000011d2)[context] = bVar9;
-        if ((int)uVar13 <= (int)uVar12) goto LAB_0008d98c;
+        ((unsigned char *)0x000011d2)[context] = slotCount;
+        if ((int)lastUnsetSlotB <= (int)highestLiveSlot) goto LAB_0008d98c;
         dirtyFlags = *(uint *)(context + 0x44);
-        uVar12 = uVar13;
+        highestLiveSlot = lastUnsetSlotB;
       }
     }
     else {
-      if (uVar13 != 0xffffffff) {
-        bVar9 = (byte)uVar13;
+      if (lastUnsetSlotB != 0xffffffff) {
+        slotCount = (byte)lastUnsetSlotB;
       }
-      ((unsigned char *)0x000011d1)[context] = bVar9;
-      if ((int)uVar12 < (int)uVar13) {
-        uVar12 = uVar13;
+      ((unsigned char *)0x000011d1)[context] = slotCount;
+      if ((int)highestLiveSlot < (int)lastUnsetSlotB) {
+        highestLiveSlot = lastUnsetSlotB;
       }
       dirtyFlags = *(uint *)(context + 0x44);
       if ((dirtyFlags & 0x400) != 0) {
-        uVar4 = (undefined1)uVar5;
-        if (uVar5 == 0xffffffff) {
-          uVar4 = ((unsigned char *)0x000013b0)[context];
+        slotByte = (undefined1)firstUnsetSlot;
+        if (firstUnsetSlot == 0xffffffff) {
+          slotByte = ((unsigned char *)0x000013b0)[context];
         }
-        ((unsigned char *)0x000011d2)[context] = uVar4;
-        if ((int)uVar12 < (int)uVar5) {
+        ((unsigned char *)0x000011d2)[context] = slotByte;
+        if ((int)highestLiveSlot < (int)firstUnsetSlot) {
           dirtyFlags = *(uint *)(context + 0x44);
-          uVar12 = uVar5;
+          highestLiveSlot = firstUnsetSlot;
         }
         else {
 LAB_0008d98c:
@@ -2432,33 +2443,33 @@ LAB_0008d98c:
       }
     }
   }
-  if ((bVar2) && (((unsigned char *)0x00002e0a)[stateBlock] != '\0')) {
+  if ((fpDisabled) && (((unsigned char *)0x00002e0a)[stateBlock] != '\0')) {
     if ((dirtyFlags & 0x1000000) == 0) {
       *(uint *)(context + 0x44) = dirtyFlags | 0x1000000;
-      uVar12 = *(uint *)(context + 0x38);
+      pendingWordB = *(uint *)(context + 0x38);
       *(uint *)(context + 0x18a4) = *(uint *)(context + 0x18a4) | 1;
       *(undefined1 *)(context + 0x29) = 1;
-      *(uint *)(context + 0x38) = uVar12 | 0x100;
+      *(uint *)(context + 0x38) = pendingWordB | 0x100;
       if ((((int)dirtyFlags < 0 || (dirtyFlags & 0x800000) != 0) || (dirtyFlags & 0x200000) != 0) ||
           (dirtyFlags & 0x10000) != 0) {
-        *(uint *)(context + 0x38) = uVar12 | 0x120;
+        *(uint *)(context + 0x38) = pendingWordB | 0x120;
       }
     }
   }
   else {
     if ((dirtyFlags & 0x1000000) != 0) {
-      uVar15 = dirtyFlags & 0xfeffffff;
-      *(uint *)(context + 0x44) = uVar15;
-      uVar3 = *(uint *)(context + 0x38);
+      clearedFlags = dirtyFlags & 0xfeffffff;
+      *(uint *)(context + 0x44) = clearedFlags;
+      pendingWordA = *(uint *)(context + 0x38);
       *(uint *)(context + 0x18a4) = *(uint *)(context + 0x18a4) & 0xfffffffe;
       *(undefined1 *)(context + 0x29) = 1;
-      *(uint *)(context + 0x38) = uVar3 | 0x100;
-      if ((((int)dirtyFlags < 0 || (uVar15 >> 0x17 & 1) != 0) || (uVar15 >> 0x15 & 1) != 0) ||
-          (uVar15 >> 0x10 & 1) != 0) {
-        *(uint *)(context + 0x38) = uVar3 | 0x120;
+      *(uint *)(context + 0x38) = pendingWordA | 0x100;
+      if ((((int)dirtyFlags < 0 || (clearedFlags >> 0x17 & 1) != 0) || (clearedFlags >> 0x15 & 1) != 0) ||
+          (clearedFlags >> 0x10 & 1) != 0) {
+        *(uint *)(context + 0x38) = pendingWordA | 0x120;
       }
     }
-    if (!bVar2) {
+    if (!fpDisabled) {
       dirtyFlags = (uint)(byte)((unsigned char *)0x000013b1)[context];
       if (dirtyFlags != 0) {
         stateBlock = context;
@@ -2466,24 +2477,24 @@ LAB_0008d98c:
           dirtyFlags = 1;
         }
         do {
-          uVar15 = *(uint *)(stateBlock + 0x48) & 0xffffffe0;
-          *(uint *)(stateBlock + 0x48) = uVar15;
-          puVar1 = (uint *)(programState + 0x5c);
+          stateWord48Masked = *(uint *)(stateBlock + 0x48) & 0xffffffe0;
+          *(uint *)(stateBlock + 0x48) = stateWord48Masked;
+          slotFlagPtr = (uint *)(programState + 0x5c);
           programState = programState + 4;
-          *(uint *)(stateBlock + 0x48) = uVar15 | *puVar1;
+          *(uint *)(stateBlock + 0x48) = stateWord48Masked | *slotFlagPtr;
           stateBlock = stateBlock + 4;
           dirtyFlags = dirtyFlags - 1;
         } while (dirtyFlags != 0);
       }
-      if ((int)(uint)*(byte *)(context + 0x2b) <= (int)uVar12) {
-        *(char *)(context + 0x2b) = (char)uVar12 + '\x01';
+      if ((int)(uint)*(byte *)(context + 0x2b) <= (int)highestLiveSlot) {
+        *(char *)(context + 0x2b) = (char)highestLiveSlot + '\x01';
       }
-      bVar9 = ((unsigned char *)0x000013b6)[context];
+      texUnitCount = ((unsigned char *)0x000013b6)[context];
       dirtyFlags = *(uint *)(context + 0x3c);
       *(byte *)(context + 0x2e) = *(byte *)(context + 0x2e) | 3;
       *(uint *)(context + 0x38) = *(uint *)(context + 0x38) | 0x2200;
       *(undefined1 *)(context + 0x29) = 1;
-      *(ushort *)(context + 0x34) = (short)(1 << (bVar9 & 0x3f)) - 1U | *(ushort *)(context + 0x34);
+      *(ushort *)(context + 0x34) = (short)(1 << (texUnitCount & 0x3f)) - 1U | *(ushort *)(context + 0x34);
       goto LAB_0008da14;
     }
   }
