@@ -424,46 +424,47 @@ int FUN_000ec8e4(param_1)
 }
 
 /* FUN_000ec920 @ 0xec920 (240 bytes) */
-int FUN_000ec920(param_1)
-  int param_1;
+int FUN_000ec920(program)
+  int program;
 {
+  int oldFlags;
   int listCount;
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int successor;
+  undefined4 *blocksArray;
+  int blockIsEntryLike;
   uint loopIndex2;
   int loopCounter;
   int loopIndex;
-  undefined4 *puVar7;
-  int *piVar8;
-  bool bVar9;
+  undefined4 *blockCursor;
+  int *block;
+  bool changed;
   
-  puVar2 = (undefined4 *)((int (*)())Program__getBlocksArray)(param_1);
+  blocksArray = (undefined4 *)((int (*)())Program__getBlocksArray)(program);
   do {
-    bVar9 = false;
+    changed = false;
     loopIndex = 1;
-    puVar7 = puVar2;
+    blockCursor = blocksArray;
     while( true ) {
-      puVar7 = puVar7 + 1;
-      listCount = DList__count(param_1 + 0x37c);
+      blockCursor = blockCursor + 1;
+      listCount = DList__count(program + 0x37c);
       if (listCount < loopIndex) break;
-      piVar8 = (int *)*puVar7;
-      iVar3 = (**(code **)(*piVar8 + 0x20))(piVar8);
-      if (iVar3 == 0) {
-        iVar3 = piVar8[3];
+      block = (int *)*blockCursor;
+      blockIsEntryLike = (**(code **)(*block + 0x20))(block);
+      if (blockIsEntryLike == 0) {
+        oldFlags = block[3];
         loopCounter = 0;
-        for (loopIndex2 = 1; loopIndex2 <= *(uint *)(piVar8[0x34] + 4); loopIndex2 = loopIndex2 + 1) {
-          iVar1 = *(int *)(*(int *)(piVar8[0x34] + 8) + loopCounter);
-          if (iVar1 != 0) {
-            piVar8[3] = *(uint *)(iVar1 + 0xc) & 3 | piVar8[3];
+        for (loopIndex2 = 1; loopIndex2 <= *(uint *)(block[0x34] + 4); loopIndex2 = loopIndex2 + 1) {
+          successor = *(int *)(*(int *)(block[0x34] + 8) + loopCounter);
+          if (successor != 0) {
+            block[3] = *(uint *)(successor + 0xc) & 3 | block[3];
           }
           loopCounter = loopCounter + 4;
         }
-        bVar9 = iVar3 != piVar8[3];
+        changed = oldFlags != block[3];
       }
       loopIndex = loopIndex + 1;
     }
-  } while (bVar9);
+  } while (changed);
   return;
 }
 

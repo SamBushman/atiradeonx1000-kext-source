@@ -790,3 +790,37 @@ local	MachineAssembler__visitIfHeaderStatic	param_4	compiler	INFERRED	compiler: 
 local	MachineAssembler__visitIfHeaderStatic	param_5	unusedArg5	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
 local	MachineAssembler__visitIfHeaderStatic	param_6	unusedArg6	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
 local	MachineAssembler__visitIfHeaderStatic	param_7	unusedArg7	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
+use	FUN_000ec920	iVar3	blockIsEntryLike	INFERRED	block vtable +0x20 query; blocks answering nonzero are skipped	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x20\)\)\(piVar8\);$	+2
+use	FUN_000ec920	iVar3	oldFlags	INFERRED	flag word block[3] before the successor flags were merged	^\s*iVar3\ =\ piVar8\[3\];$	+1
+use	FUN_000ec920	iVar3	oldFlags	INFERRED	flag word block[3] before the successor flags were merged	^\s*bVar9\ =\ iVar3\ !=\ piVar8\[3\];$	+1
+use	FUN_000ec920	iVar1	successor	INFERRED	successor block taken from the block's successor vector (block[0x34])	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(piVar8\[0x34\]\ \+\ 8\)\ \+\ iVar5\);$	+3
+use	FUN_000ec920	puVar2	blocksArray	INFERRED	array of the program's blocks (Program__getBlocksArray)	^\s*puVar2\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000ec5b8\)\(param_1\);$	+1
+use	FUN_000ec920	puVar2	blocksArray	INFERRED	array of the program's blocks (Program__getBlocksArray)	^\s*puVar7\ =\ puVar2;$	+1
+use	FUN_000ec920	puVar7	blockCursor	INFERRED	cursor over the blocks array	^\s*puVar7\ =\ puVar2;$	+1
+use	FUN_000ec920	puVar7	blockCursor	INFERRED	cursor over the blocks array	^\s*puVar7\ =\ puVar7\ \+\ 1;$	+1
+use	FUN_000ec920	puVar7	blockCursor	INFERRED	cursor over the blocks array	^\s*piVar8\ =\ \(int\ \*\)\*puVar7;$	+1
+use	FUN_000ec920	piVar8	block	INFERRED	block whose flag word is merged	^\s*piVar8\ =\ \(int\ \*\)\*puVar7;$	+2
+use	FUN_000ec920	piVar8	block	INFERRED	block whose flag word is merged	^\s*iVar3\ =\ piVar8\[3\];$	+1
+use	FUN_000ec920	piVar8	block	INFERRED	block whose flag word is merged	^\s*for\ \(uVar4\ =\ 1;\ uVar4\ <=\ \*\(uint\ \*\)\(piVar8\[0x34\]\ \+\ 4\);\ uVar4\ =\ uVar4\ \+\ 1\)\ \{$	+2
+use	FUN_000ec920	piVar8	block	INFERRED	block whose flag word is merged	^\s*piVar8\[3\]\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0xc\)\ \&\ 3\ \|\ piVar8\[3\];$	+1
+use	FUN_000ec920	piVar8	block	INFERRED	block whose flag word is merged	^\s*bVar9\ =\ iVar3\ !=\ piVar8\[3\];$	+1
+use	FUN_000ec920	bVar9	changed	INFERRED	a flag word changed in this sweep: repeat until a fixpoint	^\s*bVar9\ =\ false;$	+1
+use	FUN_000ec920	bVar9	changed	INFERRED	a flag word changed in this sweep: repeat until a fixpoint	^\s*bVar9\ =\ iVar3\ !=\ piVar8\[3\];$	+1
+use	FUN_000ec920	bVar9	changed	INFERRED	a flag word changed in this sweep: repeat until a fixpoint	^\s*\}\ while\ \(bVar9\);$	+1
+use	PostLoopFooter__ctor_eb3c8	uVar5	exitInst	INFERRED	IR instruction (opcode 0x81) created for the footer when param_4 is zero	^\s*uVar5\ =\ FUN_001043f0\(0x81,param_5\);$	+3
+use	PostLoopFooter__ctor_eb3c8	uVar5	constantSelectWord	INFERRED	select word DAT_001aa7fc stored on operand 1 of the footer instruction	^\s*uVar5\ =\ DAT_001aa7fc;$	+1
+use	PostLoopFooter__ctor_eb3c8	uVar5	constantSelectWord	INFERRED	select word DAT_001aa7fc stored on operand 1 of the footer instruction	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar5;$	+1
+use	PostLoopFooter__ctor_eb3c8	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar2\ \+\ 0x18\);$	+3
+use	PostLoopFooter__ctor_eb3c8	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*if\ \(piVar3\[1\]\ ==\ 0\)\ \{$	+3
+use	PostLoopFooter__ctor_eb3c8	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*piVar3\ =\ \(int\ \*\)piVar3\[2\];$	+1
+use	PostLoopFooter__ctor_eb3c8	piVar3	definitionVector	INFERRED	vector of definitions (virtualRegister+0x18); element 0 is fetched or created	^\s*iVar4\ =\ \*piVar3;$	+1
+use	PostLoopFooter__ctor_eb3c8	iVar4	definitionInst	INFERRED	first definition of the virtual register, marked as a constant with value -1	^\s*iVar4\ =\ \*piVar3;$	+4
+use	PostLoopFooter__ctor_eb3c8	puVar6	secondSideBlock	INFERRED	block object allocated for this[0x55] (second side block)	^\s*puVar6\ =\ puVar1\ \+\ 1;$	+1
+use	PostLoopFooter__ctor_eb3c8	puVar6	secondSideBlock	INFERRED	block object allocated for this[0x55] (second side block)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000ea148\)\(puVar6,param_5\);$	+1
+use	PostLoopFooter__ctor_eb3c8	puVar6	secondSideBlock	INFERRED	block object allocated for this[0x55] (second side block)	^\s*\*puVar6\ =\ \&PTR_FUN_001e9c68;$	+2
+use	PostLoopFooter__ctor_eb3c8	puVar6	footerInst	INFERRED	instruction (opcode 0xfd) allocated when param_4 is nonzero	^\s*puVar6\ =\ puVar1\ \+\ 1;$@2	+1
+use	PostLoopFooter__ctor_eb3c8	puVar6	footerInst	INFERRED	instruction (opcode 0xfd) allocated when param_4 is nonzero	^\s*FUN_0010502c\(puVar6,0xfd,param_5\);$	+3
+local	FUN_000ec920	param_1	program	INFERRED	program whose blocks array is walked
+local	PostLoopFooter__ctor_eb3c8	param_2	registerIndex	INFERRED	register index stored in operand 0 (+8) of the footer instruction
+local	PostLoopFooter__ctor_eb3c8	param_3	loopHeader	INFERRED	stored at this[0x53]
+local	PostLoopFooter__ctor_eb3c8	param_4	useFooterInst	INFERRED	zero builds the opcode 0x81 instruction, nonzero the opcode 0xfd one; stored at this[0x51]

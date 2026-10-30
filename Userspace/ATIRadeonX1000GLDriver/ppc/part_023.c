@@ -1140,32 +1140,34 @@ int FuncEndBlock__ctor_eb378(this, source)
 }
 
 /* PostLoopFooter__ctor_eb3c8 @ 0xeb3c8 (580 bytes) */
-int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
+int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+  undefined4 registerIndex;
+  undefined4 loopHeader;
+  int useFooterInst;
   int compiler;
 {
+  undefined4 *footerInst;
+  undefined4 constantSelectWord;
   undefined4 virtualRegisterB;
   int virtualRegister;
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  int *piVar3;
-  int iVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
+  int *definitionVector;
+  int definitionInst;
+  undefined4 exitInst;
+  undefined4 *secondSideBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x50] = 0;
   *this = &PTR_FUN_001e9bb8;
-  this[0x53] = param_3;
+  this[0x53] = loopHeader;
   this[0x4b] = 0;
   this[0x4d] = 0;
   this[0x4e] = 0;
   this[0x4f] = 0;
-  this[0x51] = param_4;
+  this[0x51] = useFooterInst;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
@@ -1175,52 +1177,52 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
   this[0x54] = allocation + 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
-  puVar6 = allocation + 1;
+  secondSideBlock = allocation + 1;
   *allocation = arena;
-  ((int (*)())Block__ctor_ea148)(puVar6,compiler);
+  ((int (*)())Block__ctor_ea148)(secondSideBlock,compiler);
   allocation[0x4c] = this;
-  *puVar6 = &PTR_FUN_001e9c68;
-  this[0x55] = puVar6;
+  *secondSideBlock = &PTR_FUN_001e9c68;
+  this[0x55] = secondSideBlock;
   Block__connect(this[0x54],this);
-  if (param_4 == 0) {
-    uVar5 = IRInst__create(0x81,compiler);
-    this[0x52] = uVar5;
-    operandRecord = IRInst__getOperandRecord(uVar5,0);
-    *(undefined4 *)(operandRecord + 8) = param_2;
+  if (useFooterInst == 0) {
+    exitInst = IRInst__create(0x81,compiler);
+    this[0x52] = exitInst;
+    operandRecord = IRInst__getOperandRecord(exitInst,0);
+    *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegisterB = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    virtualRegisterB = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegisterB);
   }
   else {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar6 = allocation + 1;
+    footerInst = allocation + 1;
     *allocation = arena;
-    IRInst__ctor_10502c(puVar6,0xfd,compiler);
-    this[0x52] = puVar6;
-    operandRecord = IRInst__getOperandRecord(puVar6,0);
-    *(undefined4 *)(operandRecord + 8) = param_2;
+    IRInst__ctor_10502c(footerInst,0xfd,compiler);
+    this[0x52] = footerInst;
+    operandRecord = IRInst__getOperandRecord(footerInst,0);
+    *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
     virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
-    piVar3 = *(int **)(virtualRegister + 0x18);
-    if (*piVar3 == 0) {
-      piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
+    definitionVector = *(int **)(virtualRegister + 0x18);
+    if (*definitionVector == 0) {
+      definitionVector = (int *)Vector__elementRefGrow(definitionVector,0);
     }
     else {
-      if (piVar3[1] == 0) {
-        *(undefined4 *)piVar3[2] = 0;
-        piVar3[1] = 1;
+      if (definitionVector[1] == 0) {
+        *(undefined4 *)definitionVector[2] = 0;
+        definitionVector[1] = 1;
       }
-      piVar3 = (int *)piVar3[2];
+      definitionVector = (int *)definitionVector[2];
     }
-    iVar4 = *piVar3;
-    *(undefined4 *)(iVar4 + 0x20) = 0xffffffff;
-    *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
-    *(undefined4 *)(iVar4 + 0x1c) = 3;
+    definitionInst = *definitionVector;
+    *(undefined4 *)(definitionInst + 0x20) = 0xffffffff;
+    *(byte *)(definitionInst + 0x15c) = *(byte *)(definitionInst + 0x15c) | 1;
+    *(undefined4 *)(definitionInst + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,virtualRegister);
-    uVar5 = DAT_001aa7fc;
+    constantSelectWord = DAT_001aa7fc;
     operandRecord = IRInst__getOperandRecord(this[0x52],1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar5;
+    *(undefined4 *)(operandRecord + 0x10) = constantSelectWord;
   }
   Block__appendInst(this,this[0x52]);
   return;
