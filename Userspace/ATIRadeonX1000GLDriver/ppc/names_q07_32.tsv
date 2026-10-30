@@ -1116,19 +1116,6 @@ use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expression
 use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00179064\(param_1,uVar7\);$	+1
 use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar8\ =\ uVar7\ ==\ 3;$	+1
 use	FUN_00174e0c	uVar7	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@2	+2
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar2\ \+\ 0x15c\)\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@3	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\),param_1\[0x8e\]\);$	+8
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@4	+2
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$	+2
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@6	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@7	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$@2	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x10\)\ !=\ 0x1010101\)\ \{$	+1
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@5	+4
-use	FUN_00174e0c	iVar2	keyInst	INFERRED	param_1[0x2c]: the ValueKey instruction (+0xb0)	^\s*iVar2\ =\ param_1\[0x2c\];$@8	+3
 use	FUN_00174e0c	iVar2	compareFloatsResult	INFERRED	evaluateCompareFloats(inst, constant, 0.0): decides which select source is taken	^\s*iVar2\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(param_1\[0x2c\],\(double\)local_30,0\.0\);$	+3
 use	FUN_00174e0c	iVar2	compareFloatsResult	INFERRED	evaluateCompareFloats(inst, constant, 0.0): decides which select source is taken	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar6\ \+\ 0x120\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x124\)\ ==\ 0\)\)\ \&\&$	+3
 use	FUN_00174e0c	iVar2	compareFloatsResult	INFERRED	evaluateCompareFloats(inst, constant, 0.0): decides which select source is taken	^\s*iVar2\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(param_1\[0x2c\],\(double\)local_30,0\.0\);$@2	+3
@@ -2426,3 +2413,25 @@ use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied betw
 use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied between operand records and node[0x27]	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0x10\)\ =\ iVar9;$	+1
 use	FUN_0015f44c	uVar15	restoredSelectWord	INFERRED	local_bc select word stored to the operand record	^\s*uVar15\ =\ local_bc;$	+1
 use	FUN_0015f44c	uVar15	restoredSelectWord	INFERRED	local_bc select word stored to the operand record	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x10\)\ =\ uVar15;$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$@2	+2
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar2\ \+\ 0x15c\)\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$@3	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$@4	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$@5	+3
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$@6	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$@7	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ param_1\[0x2c\];$@8	+3
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\),param_1\[0x8e\]\);$	+1	rhs	none
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$	+1	rhs	none
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$@2	+1	rhs	none
+use	FUN_00174e0c	iVar2	flagBit2Result	INFERRED	OpcodeTraits__flagBit2 result	^\s*iVar2\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\),param_1\[0x8e\]\);$	+1	lhs	none
+use	FUN_00174e0c	iVar2	flagBit2Result	INFERRED	OpcodeTraits__flagBit2 result	^\s*if\ \(\(\(\(iVar2\ ==\ 0\)\ \|\|$	+1
+use	FUN_00174e0c	iVar2	flagBit9Result	INFERRED	OpcodeTraits__flagBit9 result	^\s*\(iVar2\ =\ FUN_0011320c\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\[0x2c\]\ \+\ 0x88\)\ \+\ 8\),param_1\[0x8e\]\),$	+2
+use	FUN_00174e0c	iVar2	flagBit8Result	INFERRED	OpcodeTraits__flagBit8 result	^\s*\(iVar2\ =\ FUN_001131c0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\[0x2c\]\ \+\ 0x88\)\ \+\ 8\),param_1\[0x8e\]\),$	+2
+use	FUN_00174e0c	iVar2	predicateResult	INFERRED	FUN_00173a48 / FUN_0017356c results	^\s*\(\(iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00173a48\)\(param_1\[0x2c\],param_1\[0x8e\]\),\ iVar2\ ==\ 0\ \&\&$	+2
+use	FUN_00174e0c	iVar2	destRecordKey	INFERRED	IRInst__getOperandRecord(keyInst,0)	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$	+1	lhs	none
+use	FUN_00174e0c	iVar2	destRecordKey	INFERRED	IRInst__getOperandRecord(keyInst,0)	^\s*if\ \(\*\(char\ \*\)\(iVar10\ \+\ iVar2\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
+use	FUN_00174e0c	iVar2	destRecordKeyB	INFERRED	IRInst__getOperandRecord(keyInst,0)	^\s*iVar2\ =\ FUN_001054ec\(iVar2,0\);$@2	+1	lhs	none
+use	FUN_00174e0c	iVar2	destRecordKeyB	INFERRED	IRInst__getOperandRecord(keyInst,0)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x10\)\ !=\ 0x1010101\)\ \{$	+1
+use	FUN_00174e0c	iVar2	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar9\ =\ FUN_00172f24\(iVar2\);$	+1

@@ -1232,6 +1232,12 @@ int FUN_00174e0c(valueKey)
   int *laneValuePtrAt;
   int *laneValuePtr;
   int compareFloatsResult;
+  int destRecordKeyB;
+  int destRecordKey;
+  int predicateResult;
+  int flagBit8Result;
+  int flagBit9Result;
+  int flagBit2Result;
   int keyInst;
   uint loopIndex3;
   int *callResult2;
@@ -1398,14 +1404,14 @@ LAB_00174efc:
       goto LAB_001757ec;
     }
   }
-  keyInst = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(keyInst + 0x88) + 8),valueKey[0x8e]);
-  if ((((keyInst == 0) ||
-       (keyInst = OpcodeTraits__flagBit9(*(undefined4 *)(*(int *)(valueKey[0x2c] + 0x88) + 8),valueKey[0x8e]),
-       keyInst != 0)) &&
-      (keyInst = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(valueKey[0x2c] + 0x88) + 8),valueKey[0x8e]),
-      keyInst == 0)) &&
-     ((keyInst = ((int (*)())FUN_00173a48)(valueKey[0x2c],valueKey[0x8e]), keyInst == 0 &&
-      (keyInst = ((int (*)())FUN_0017356c)(valueKey), keyInst == 0)))) {
+  flagBit2Result = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(keyInst + 0x88) + 8),valueKey[0x8e]);
+  if ((((flagBit2Result == 0) ||
+       (flagBit9Result = OpcodeTraits__flagBit9(*(undefined4 *)(*(int *)(valueKey[0x2c] + 0x88) + 8),valueKey[0x8e]),
+       flagBit9Result != 0)) &&
+      (flagBit8Result = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(valueKey[0x2c] + 0x88) + 8),valueKey[0x8e]),
+      flagBit8Result == 0)) &&
+     ((predicateResult = ((int (*)())FUN_00173a48)(valueKey[0x2c],valueKey[0x8e]), predicateResult == 0 &&
+      (predicateResult = ((int (*)())FUN_0017356c)(valueKey), predicateResult == 0)))) {
     keyInst = valueKey[0x2c];
     returnZero_172f24Result = returnZero_172f24(keyInst);
     if (returnZero_172f24Result == 0) {
@@ -1414,8 +1420,8 @@ LAB_00174efc:
       laneByteOffset = 0;
       laneValuePtr = valueKey;
       do {
-        keyInst = IRInst__getOperandRecord(keyInst,0);
-        if (*(char *)(loopIndex + keyInst + 0x10) != '\x01') {
+        destRecordKey = IRInst__getOperandRecord(keyInst,0);
+        if (*(char *)(loopIndex + destRecordKey + 0x10) != '\x01') {
           keyInstPtr2 = (int *)valueKey[0x2c];
           if (*(int *)(keyInstPtr2[0x22] + 8) == 0x8e) {
             callResult = FUN_00179bbc(valueKey,loopIndex);
@@ -1516,9 +1522,9 @@ LAB_001757d8:
   else {
     keyInst = valueKey[0x2c];
   }
-  keyInst = IRInst__getOperandRecord(keyInst,0);
+  destRecordKeyB = IRInst__getOperandRecord(keyInst,0);
   laneByteOffset = 0;
-  if (*(int *)(keyInst + 0x10) != 0x1010101) {
+  if (*(int *)(destRecordKeyB + 0x10) != 0x1010101) {
     operandRecord2 = IRInst__getOperandRecord(valueKey[0x2c],0);
     laneByteOffset = SelectWord__firstWrittenComponent(*(undefined4 *)(operandRecord2 + 0x10));
   }
