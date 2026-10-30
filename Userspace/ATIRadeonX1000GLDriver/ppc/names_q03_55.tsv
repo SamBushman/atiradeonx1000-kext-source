@@ -1,0 +1,58 @@
+use	arbEmitIlMovMadMov	uVar14	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(param_9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_10\ \&\ 0xffff;$	+1
+use	arbEmitIlMovMadMov	uVar14	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ uVar14\ \|\ 0x400000;$	+1
+use	arbEmitIlMovMadMov	uVar14	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar14;$	+1
+use	arbEmitIlMovMadMov	uVar14	src1Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar14\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMovMadMov	uVar14	instrBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ uStack_84\ \&\ 0xffff;$	+1
+use	arbEmitIlMovMadMov	uVar14	instrBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar14\ \|\ 0x440000;$	+1
+use	arbEmitIlMovMadMov	uVar14	instrBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ uStack_84\ \&\ 0xffff;$@2	+1
+use	arbEmitIlMovMadMov	uVar14	instrBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar14\ \|\ 0x440000;$@2	+1
+use	arbEmitIlMovMadMov	uVar14	dstToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \(param_2\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_3\ \&\ 0xffff\ \|\ 0x400000;$	+1
+use	arbEmitIlMovMadMov	uVar14	dstToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ uVar14\ \|\ 0x400000;$@2	+1
+use	arbEmitIlMovMadMov	uVar14	dstToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ uVar14\ \|\ 0x400000;$@3	+1
+use	arbEmitIlMovMadMov	uVar14	dstToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar14;$@2	+1
+use	arbEmitIlMovMadMov	uVar14	dstToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar14\ \&\ 0x400000\)\ !=\ 0\)\ \{$@2	+1
+use	arbEmitIlMovMadMov	uVar16	src1ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ 0;$	+1
+use	arbEmitIlMovMadMov	uVar16	src1ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \(uVar5\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	arbEmitIlMovMadMov	uVar16	src1ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar16;$	+1
+use	arbEmitIlMovMadMov	uVar16	src0Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \(param_5\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_6\ \&\ 0xffff;$	+1
+use	arbEmitIlMovMadMov	uVar16	src0Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ uVar16\ \|\ 0x400000;$	+1
+use	arbEmitIlMovMadMov	uVar16	src0Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar16;$@2	+1
+use	arbEmitIlMovMadMov	uVar16	src0Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar16\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMovMadMov	uVar16	dstMaskToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ 0x40;$	+1
+use	arbEmitIlMovMadMov	uVar16	dstMaskToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ 0x55;$	+1
+use	arbEmitIlMovMadMov	uVar16	dstMaskToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \(uint\)\(iVar15\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlMovMadMov	uVar16	dstMaskToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar16;$@3	+1
+use	arbEmitIlMovMadMov	uVar1	tokenIndexNext	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \*puVar17\ \+\ 1;$	+2
+use	arbEmitIlMovMadMov	uVar1	tokenIndexNext	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar1\)\ \{$@2	+1
+use	arbEmitIlMovMadMov	uVar1	tokenIndexNext	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \*puVar17;$@3	+1
+use	arbEmitIlMovMadMov	uVar1	tokenIndexNext	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar10\ \|\ 0x440000;$	+1
+use	arbEmitIlMovMadMov	uVar1	src0ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ 0;$	+1
+use	arbEmitIlMovMadMov	uVar1	src0ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \(uVar6\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	arbEmitIlMovMadMov	uVar1	src0ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar1;$	+1
+use	arbEmitIlMovMadMov	uVar1	src2Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ \(param_13\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_14\ \&\ 0xffff;$	+1
+use	arbEmitIlMovMadMov	uVar1	src2Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar1\ =\ uVar1\ \|\ 0x400000;$	+1
+use	arbEmitIlMovMadMov	uVar1	src2Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar1;$@2	+1
+use	arbEmitIlMovMadMov	uVar1	src2Token	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar1\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMovMadMov	uVar2	src2ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ 0;$	+1
+use	arbEmitIlMovMadMov	uVar2	src2ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \(uVar7\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	arbEmitIlMovMadMov	uVar2	src2ModifierToken	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar2;$	+1
+local	arbEmitIlMovMadMov	iVar8	maskY	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbEmitIlMovMadMov	iVar3	maskZ	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbfpProgramString	uVar6	textCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \(\*\(code\ \*\)param_1\[3\]\)\(param_3\);$	+3
+use	arbfpProgramString	uVar6	savedWord50	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x50\);$	+1
+use	arbfpProgramString	uVar6	savedWord50	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(puVar16\ \+\ 0x50\)\ =\ uVar6;$	+1
+use	arbfpProgramString	uVar6	paramWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \*puVar3;$	+1
+use	arbfpProgramString	uVar6	paramWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(puVar11\ \+\ 0x10\)\ =\ uVar6;$	+1
+local	arbfpProgramString	uVar2	savedWord54	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	puVar3	paramCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar7	savedWord70	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar8	savedByte6c	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar9	savedWord68	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar10	savedWord64	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	puVar11	savedWord58	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar12	savedWord60	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar13	savedWord5c	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	puVar14	compiledInfo	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar17	oldWord70	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	uVar19	oldWord74	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpProgramString	bVar1	programFlagByte	INFERRED	role read off the function body (see notes_gld_q03.md)

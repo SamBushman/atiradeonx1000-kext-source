@@ -1,0 +1,33 @@
+local	recordAddTransitiveDependencies	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAddTransitiveDependencies	param_2	rootRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAddTransitiveDependencies	param_3	depRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAddTransitiveDependencies	param_4	componentMask	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAddTransitiveDependencies	iVar1	status	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordAddTransitiveDependencies	puVar2	depNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordFindScheduleConflict	param_2	useDistinctCheck	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordFindScheduleConflict	bVar1	checkDistinct	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordFindScheduleConflict	bVar5	opcodeClass	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordFindScheduleConflict	uVar6	opcodeBit	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordFindScheduleConflict	iVar15	queuedRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*\(int\ \*\)\(uVar13\ \*\ 4\ \+\ param_1\ \+\ 0x28878\);$	+2
+use	recordFindScheduleConflict	iVar15	queuedRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar11\ =\ \*\(int\ \*\*\)\(iVar15\ \*\ 4\ \+\ param_1\ \+\ 0xa450\);$	+1
+use	recordFindScheduleConflict	iVar15	dependencyRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*piVar11;$	+1
+use	recordFindScheduleConflict	iVar15	dependencyRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar12\ !=\ iVar15\)\ \{$	+1
+use	recordFindScheduleConflict	iVar15	dependencyRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(iVar12\ !=\ iVar15\);$	+1
+use	recordRemapComponents	uVar13	usedSourceMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar2\ \+\ param_1\ \+\ 0x6450\);$	+1
+use	recordRemapComponents	uVar13	usedSourceMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar13\ \&\ 1\ <<\ \(uVar11\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	recordRemapComponents	uVar13	readerMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ 0;$@2	+1
+use	recordRemapComponents	uVar13	readerMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar13\ =\ uVar13\ \|\ 1\ <<\ \(param_3\ >>\ \(\(uVar14\ \&\ 0xf\)\ <<\ 2\)\ \&\ 0xf\);$	+1
+use	recordRemapComponents	uVar13	readerMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar5\[1\]\ =\ uVar13;$	+1
+use	recordRemapComponents	uVar6	writeMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(puVar15\);$	+1
+use	recordRemapComponents	uVar6	writeMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar6\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	recordRemapComponents	uVar6	writeMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar6\ !=\ uVar14\)\ \{$	+1
+use	recordRemapComponents	uVar6	writeMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar6\ \&\ 1\ <<\ \(uVar8\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	recordRemapComponents	uVar6	consumerRemapMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ 0;$	+1
+use	recordRemapComponents	uVar6	consumerRemapMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ uVar6\ \|\ 1\ <<\ \(param_3\ >>\ \(\(uVar13\ \&\ 0xf\)\ <<\ 2\)\ \&\ 0xf\);$	+1
+use	recordRemapComponents	uVar6	consumerRemapMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar7\[1\]\ =\ uVar6;$	+1
+use	recordRemapComponents	uVar4	selectShiftDst	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ 0xd;$	+1
+use	recordRemapComponents	uVar4	selectShiftDst	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\[1\]\ =\ \(uVar3\ \&\ \~\(7\ <<\ \(uVar4\ \&\ 0x3f\)\)\ \|$	+3
+use	recordRemapComponents	uVar4	selectShiftDst	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ uVar4\ \+\ 3;$	+1
+use	recordRemapComponents	uVar4	consumerSourceMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar16\ \*\ 4\ \+\ param_1\ \+\ 0x6450\);$	+1
+use	recordRemapComponents	uVar4	consumerSourceMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar4\ \&\ 1\ <<\ \(uVar6\ \&\ 0x3f\)\)\ !=\ 0\)\ \&\&\ \(piVar5\ =\ \(int\ \*\)\*puVar10,\ piVar5\ !=\ \(int\ \*\)0x0\)$	+2
+local	recordAllocFree	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)

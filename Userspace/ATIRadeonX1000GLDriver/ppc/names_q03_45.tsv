@@ -1,0 +1,65 @@
+local	gldLeaveInternalDrawState	cVar1	enableFlagByte	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldLeaveInternalDrawState	uVar6	regValue	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldLeaveInternalDrawState	uVar7	regValueMasked	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	gldLeaveInternalDrawState	puVar8	drawStateWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x2440\);$	+1
+use	gldLeaveInternalDrawState	puVar8	drawStateWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar8\ =\ param_2\[0x11\];$	+1
+use	gldLeaveInternalDrawState	puVar8	drawStateWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*pcVar3\)\(param_1,0,in_r5,in_r6,in_r7,in_r8,uVar6,puVar8\);$	+3
+use	gldLeaveInternalDrawState	puVar8	drawStateWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x1e5c\);$	+1
+use	gldLeaveInternalDrawState	puVar8	drawStateWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined1\ \*\)\(\(int\)puVar8\ \+\ 0x10eb\)\ =\ 0;$	+1
+use	gldLeaveInternalDrawState	puVar8	drawStateWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar8\ =\ 0;$	+2
+use	gldLeaveInternalDrawState	puVar8	drawStateWords	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[7\]\ =\ 0;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\ =\ \(undefined4\ \*\)$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ puVar8;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[2\]\ =\ 0x82c;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[4\]\ =\ \(\(unsigned\ char\ \*\)0x000010aeU\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[6\]\ =\ \(\(unsigned\ char\ \*\)0x000013c0U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[8\]\ =\ \(\(unsigned\ char\ \*\)0x000013c1U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[10\]\ =\ \(\(unsigned\ char\ \*\)0x000013c2U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xc\]\ =\ \(\(unsigned\ char\ \*\)0x000012f0U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xd\]\ =\ uVar7;$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xd\]\ =\ uVar7\ \&\ 0xfffffffe;$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xe\]\ =\ \(\(unsigned\ char\ \*\)0x000012f5U\);$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xf\]\ =\ uVar7;$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xf\]\ =\ uVar7\ \&\ 0xfffff7ff;$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x10\]\ =\ \(\(unsigned\ char\ \*\)0x000012f6U\);$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x12\]\ =\ \(\(unsigned\ char\ \*\)0x00001381U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x13\]\ =\ uVar7;$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x13\]\ =\ uVar7\ \&\ 0xfffffffc;$	+1
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x14\]\ =\ \(\(unsigned\ char\ \*\)0x00001386U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x16\]\ =\ 0x824;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x18\]\ =\ 0x825;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x1a\]\ =\ 0x82d;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x1c\]\ =\ 0x854;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x1e\]\ =\ 0x878;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x20\]\ =\ \(\(unsigned\ char\ \*\)0x000010a2U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x22\]\ =\ \(\(unsigned\ char\ \*\)0x00001383U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x24\]\ =\ \(\(unsigned\ char\ \*\)0x00001002U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x26\]\ =\ \(\(unsigned\ char\ \*\)0x000010c0U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x28\]\ =\ 0x825;$	+4
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x2c\]\ =\ \(\(unsigned\ char\ \*\)0x00001004U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x2e\]\ =\ \(\(unsigned\ char\ \*\)0x00001005U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x30\]\ =\ \(\(unsigned\ char\ \*\)0x000010faU\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x32\]\ =\ \(\(unsigned\ char\ \*\)0x000013c5U\);$	+3
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0x34\]\ =\ \(\(unsigned\ char\ \*\)0x000013c5U\);$	+3
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_0004dd10\(param_1,puVar5\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[2\]\ =\ 0x768;$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[4\]\ =\ \(\(unsigned\ char\ \*\)0x000010faU\);$	+3
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar4\ =\ \(int\)\(puVar8\ \+\ 6\)\ \-\ \(int\)puVar4\ >>\ 2\ \|\ \*puVar4;$	+4
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[9\]\ =\ \(\(unsigned\ char\ \*\)0x000013c7U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xb\]\ =\ \(\(unsigned\ char\ \*\)0x00001048U\);$	+2
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar8\[0xd\]\ =\ \(\(unsigned\ char\ \*\)0x00001047U\);$	+4
+use	gldLeaveInternalDrawState	puVar8	packet	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x275c\)\)\(param_1,puVar8\ \+\ 0xf\);$	+1
+local	gldEnterInternalDrawState	bVar1	modeBitsBIsZero	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEnterInternalDrawState	param_3	modeBitsB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEnterInternalDrawState	param_4	modeBitsA	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEnterInternalDrawState	param_2	resetReg1af4	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	gldEnterInternalDrawState	uVar2	reg1aa4Value	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aa4\)\ \&\ 0xfffffff8;$	+2
+use	gldEnterInternalDrawState	uVar2	reg1aa4Value	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aa4\)\ \&\ 0xfffffff8\ \|\ 7;$	+2
+use	gldEnterInternalDrawState	uVar2	reg1aa4Value	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1aa4\)\ =\ uVar2\ \&\ 0xffffffc7;$	+1
+use	gldEnterInternalDrawState	uVar2	reg1aa4Value	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1aa4\)\ =\ uVar2\ \&\ 0xff1c71c7\ \|\ 0x438438;$	+1
+use	gldEnterInternalDrawState	uVar2	scaledXField	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \(int\)\(\(float\)\(\(double\)CONCAT44\(0x43300000,$	+4
+use	gldEnterInternalDrawState	uVar2	scaledXField	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ \|\ uVar6\ \&\ 0xfc000000;$	+1
+use	gldEnterInternalDrawState	uVar2	scaledXField	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \(int\)\(\(float\)\(\(double\)CONCAT44\(0x43300000,$@2	+4
+use	gldEnterInternalDrawState	uVar2	scaledXField	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ \|\ uVar6\ \&\ 0xfc000000;$@2	+1
+local	gldEnterInternalDrawState	uVar5	regValue	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldEnterInternalDrawState	uVar6	oldReg1b10	INFERRED	role read off the function body (see notes_gld_q03.md)

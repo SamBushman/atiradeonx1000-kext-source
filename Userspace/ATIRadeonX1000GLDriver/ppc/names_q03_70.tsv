@@ -1,0 +1,7 @@
+local	interpolatorMapInit	param_3	unusedArg3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	interpolatorMapInit	param_4	slotCountOut	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glGenProgramsARB_impl	piVar3	programTable	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	glGenProgramsARB_impl	iVar4	nextId	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	chunkArenaFree	param_1	arena	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	chunkArenaFree	uVar1	chunkCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	chunkArenaFree	iVar3	chunkCursor	INFERRED	role read off the function body (see notes_gld_q03.md)

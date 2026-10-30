@@ -1,0 +1,53 @@
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ true;$	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ bVar14\ !=\ 0;$	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ false;$	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(iVar23\ !=\ 0\)\ \&\&\ \(piVar21\ =\ piVar21\ \+\ 0x1d,\ !bVar35\)\);$	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ true;$@2	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ true;$@3	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ false;$@2	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ true;$@4	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(uVar18\ !=\ 0\)\ \&\&\ \(!bVar35\)\);$	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ false;$@4	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ false;$@5	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ false;$@6	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(\(\(piVar21\[2\]\ ==\ 0\)\ \|\|\ \(piVar21\[3\]\ ==\ 0\)\)\ \|\|$	+2
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ true;$@6	+1
+use	evsFoldConstantMoves	bVar35	scanDone	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(iVar23\ !=\ 0\)\ \&\&\ \(piVar21\ =\ piVar21\ \+\ 0x1d,\ !bVar35\)\);$@2	+1
+use	evsFoldConstantMoves	bVar35	sameDestination	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ iVar11\ ==\ \*\(int\ \*\)\(iVar32\ \+\ 8\);$	+2
+use	evsFoldConstantMoves	bVar35	sameDestination	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ true;$@5	+1
+use	evsFoldConstantMoves	bVar35	sameDestination	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ false;$@3	+1
+use	evsFoldConstantMoves	bVar35	sameDestination	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(uVar18\ <\ uVar16\)\ \&\&\ \(!bVar35\)\);$	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@4	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ false;$@4	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(!bVar34\)\ goto\ LAB_00080860;$	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@5	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ false;$@5	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(!bVar34\)\ goto\ LAB_00080860;$@2	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@6	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ false;$@6	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(!bVar34\)\ goto\ code_r0x00082600;$	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@7	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(\(piVar21\[\-7\]\ !=\ 2\)\ \|\|\ \(bVar34\ =\ true,\ piVar21\[\-6\]\ !=\ \*\(int\ \*\)\(iVar11\ \+\ \-0x50\)\)\)\ \{$	+2
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(iVar23\ !=\ 0\)\ \&\&\ \(piVar21\ =\ piVar21\ \+\ 0x1d,\ !bVar34\)\);$	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@8	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@9	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ false;$@8	+1
+use	evsFoldConstantMoves	bVar34	scanOk	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(uVar30\ !=\ 0\)\ \&\&\ \(iVar23\ =\ iVar23\ \+\ \-0x74,\ !bVar34\)\);$	+1
+use	evsFoldConstantMoves	bVar33	blockedFlagA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ false;$@2	+1
+use	evsFoldConstantMoves	bVar33	blockedFlagA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar33\)\ \{$@2	+1
+use	evsFoldConstantMoves	bVar33	blockedFlagA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ true;$@3	+1
+use	evsFoldConstantMoves	bVar33	blockedFlagA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ false;$@3	+1
+use	evsFoldConstantMoves	bVar33	sameDestFlag	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*\(int\ \*\)\(iVar32\ \+\ 4\)\ !=\ 2\)\ \|\|$	+3
+use	evsFoldConstantMoves	bVar33	sameDestFlag	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\(uVar25\ \+\ 1\ <\ uVar18\)\ \&\&\ \(iVar23\ =\ iVar23\ \+\ 0x74,\ uVar25\ =\ uVar25\ \+\ 1,\ !bVar33\)\);$	+1
+use	evsFoldConstantMoves	bVar33	foundFlag	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ true;$@4	+1
+use	evsFoldConstantMoves	bVar33	foundFlag	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ false;$@5	+1
+use	evsFoldConstantMoves	bVar33	foundFlag	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(!bVar33\)\ goto\ code_r0x00082770;$	+1
+use	evsFoldConstantMoves	bVar33	blockedFlagB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ false;$@6	+1
+use	evsFoldConstantMoves	bVar33	blockedFlagB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ true;$@5	+1
+use	evsFoldConstantMoves	bVar33	blockedFlagB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar33\)\ \{$@3	+1
+use	evsFoldConstantMoves	bVar1	didFold	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ true;$	+1
+use	evsFoldConstantMoves	bVar1	didFold	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ true;$@2	+1
+use	evsFoldConstantMoves	bVar1	didFold	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ true;$@3	+1
+use	evsFoldConstantMoves	bVar1	didFold	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ true;$@4	+1
+use	evsFoldConstantMoves	bVar1	didFold	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ false;$	+1
+use	evsFoldConstantMoves	bVar1	didFold	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar16\ <=\ uVar18\)\ \|\|\ \(iVar23\ =\ iVar23\ \+\ 0x74,\ bVar1\)\)\ goto\ LAB_0007e2d4;$	+1
