@@ -272,24 +272,24 @@ int IRMix__ctor_10a140(this, kind, compiler)
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 laneDefaultWord;
+  undefined4 defaultWord27;
+  int remaining;
   
   IRPseudo__ctor(this,kind,compiler);
-  uVar2 = DAT_001af9c8;
+  defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
-  uVar1 = DAT_001af9c4;
+  laneDefaultWord = DAT_001af9c4;
   *this = &PTR_FUN_001ea070;
-  iVar3 = 4;
+  remaining = 4;
   this[0x4b] = 0;
-  this[0x27] = uVar2;
+  this[0x27] = defaultWord27;
   this[0x21] = 0;
   do {
-    this[0x2d] = uVar1;
+    this[0x2d] = laneDefaultWord;
     this = this + 6;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return;
 }
 
@@ -299,24 +299,24 @@ int IRMix__ctor_10a1c0(this, kind, compiler)
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 laneDefaultWord;
+  undefined4 defaultWord27;
+  int remaining;
   
   IRPseudo__ctor(this,kind,compiler);
-  uVar2 = DAT_001af9c8;
+  defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
-  uVar1 = DAT_001af9c4;
+  laneDefaultWord = DAT_001af9c4;
   *this = &PTR_FUN_001ea070;
-  iVar3 = 4;
+  remaining = 4;
   this[0x4b] = 0;
-  this[0x27] = uVar2;
+  this[0x27] = defaultWord27;
   this[0x21] = 0;
   do {
-    this[0x2d] = uVar1;
+    this[0x2d] = laneDefaultWord;
     this = this + 6;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    remaining = remaining + -1;
+  } while (remaining != 0);
   return;
 }
 
@@ -1188,42 +1188,42 @@ int IRInst__foldCompareConstResult(outValue, inst, operandSlot, valueBits, compi
   int compiler;
 {
   float value = GH_U2F(valueBits);
-  uint uVar1;
-  float fVar2;
-  double dVar3;
+  uint instFlags;
+  float selectedValue;
+  double foldedValue;
   
-  dVar3 = (double)value;
-  (**(code **)(**(int **)(compiler + 0x30c) + 0xf0))(dVar3,*(int **)(compiler + 0x30c));
+  foldedValue = (double)value;
+  (**(code **)(**(int **)(compiler + 0x30c) + 0xf0))(foldedValue,*(int **)(compiler + 0x30c));
   switch(*(undefined4 *)(*(int *)(inst + 0x88) + 8)) {
   case 0x12:
     break;
   case 0x13:
     if (operandSlot != 1) {
-      dVar3 = (double)FLOAT_001aa0e8;
+      foldedValue = (double)FLOAT_001aa0e8;
     }
     goto LAB_0010badc;
   case 0x14:
     if (operandSlot == 2) {
       if ((*(uint *)(inst + 0xe8) & 1) == 0) {
-        fVar2 = 0.0;
+        selectedValue = 0.0;
       }
       else {
-        fVar2 = 1.0;
+        selectedValue = 1.0;
       }
       goto LAB_0010baf4;
     }
     if (operandSlot == 3) {
-      uVar1 = *(uint *)(inst + 0xe8);
+      instFlags = *(uint *)(inst + 0xe8);
       goto joined_r0x0010bad0;
     }
     if (operandSlot == 1) {
-      uVar1 = *(uint *)(inst + 0xe8);
+      instFlags = *(uint *)(inst + 0xe8);
       goto joined_r0x0010baa4;
     }
   default:
-    fVar2 = GH_U2F(0x7ffffffdU);
+    selectedValue = GH_U2F(0x7ffffffdU);
 LAB_0010baf4:
-    *outValue = fVar2;
+    *outValue = selectedValue;
     return outValue;
   case 0x16:
   case 0x17:
@@ -1233,18 +1233,18 @@ LAB_0010baf4:
     return outValue;
   }
   if (operandSlot == 1) {
-    uVar1 = *(uint *)(inst + 0xb8);
+    instFlags = *(uint *)(inst + 0xb8);
 joined_r0x0010bad0:
-    if ((uVar1 & 1) == 0) goto LAB_0010badc;
+    if ((instFlags & 1) == 0) goto LAB_0010badc;
   }
   else {
-    uVar1 = *(uint *)(inst + 0xb8);
+    instFlags = *(uint *)(inst + 0xb8);
 joined_r0x0010baa4:
-    if ((uVar1 & 1) != 0) goto LAB_0010badc;
+    if ((instFlags & 1) != 0) goto LAB_0010badc;
   }
-  dVar3 = (double)FLOAT_001aa0d4;
+  foldedValue = (double)FLOAT_001aa0d4;
 LAB_0010badc:
-  *outValue = (float)dVar3;
+  *outValue = (float)foldedValue;
   return outValue;
 }
 

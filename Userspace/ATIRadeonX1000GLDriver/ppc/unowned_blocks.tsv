@@ -16,7 +16,7 @@ start	end	kind	owner	instructions	calls
 5c48	5c74	table	_gldGetInteger	11	
 5d48	5d50	padding	_gldGetInteger	2	
 5ea4	5eb0	padding	gld_waitBufferStamp	3	
-5f68	5f70	padding	FUN_00005eb0	2	
+5f68	5f70	padding	gld_isBufferBackingIdle	2	
 6014	6020	padding	_gldFlushBuffer	3	
 605c	6060	padding	_gldGetMemoryPluginData	1	
 60c4	60d0	padding	_gldSetMemoryPluginData	3	
@@ -41,13 +41,13 @@ start	end	kind	owner	instructions	calls
 6f8c	6f90	padding	_gldDestroyShared	1	
 6fe4	6ff0	padding	_gldReclaimContext	3	
 701c	7020	padding	_gldReclaimContext	1	
-70c4	70d0	padding	FUN_00007020	3	
+70c4	70d0	padding	gld_detachDrawable	3	
 7144	7150	padding	_gldAttachDrawable	3	
 7204	7210	padding	_gldAttachDrawable	3	
 7774	7780	padding	_gldAttachDrawable	3	
 778c	7790	padding	_gldAttachDrawable	1	
 77d4	77e0	padding	_gldAttachDrawable	3	
-7824	7830	padding	FUN_00007810	3	
+7824	7830	padding	gld_latchValue178	3	
 7844	7850	padding	_gldGetError	3	
 78bc	78c0	padding	_gldCreateFence	1	
 79ec	79f0	padding	_gldCreateFence	1	
@@ -127,7 +127,7 @@ a9ac	a9b0	padding	gld_resolveBoundTextures	1
 a9e8	a9f0	padding	gld_resolveBoundTextures	2	
 aae4	aaf0	padding	gld_textureMemoryBytes	3	
 abe4	abf0	padding	gld_waitTextureStamp	3	
-aca8	acb0	padding	FUN_0000abf0	2	
+aca8	acb0	padding	gld_isTextureBackingIdle	2	
 adbc	adc0	padding	gld_ensureTextureBackingSized2	1	
 aecc	aed0	padding	gld_ensureTextureBackingSized2	1	
 aef0	aef4	millicode	gld_ensureTextureBackingSized2	1	
@@ -140,11 +140,11 @@ b4ec	b4f0	padding	gld_ensureTextureSurfaceBacking	1
 b614	b620	padding	gld_ensureTextureGlobalBacking	3	
 b668	b670	padding	gldFlushDataCacheRange	2	
 b748	b750	padding	_gldFlushVertexArray	2	
-b7c4	b7d0	padding	FUN_0000b750	3	
-b85c	b860	padding	FUN_0000b750	1	
-b874	b880	padding	FUN_0000b750	3	
+b7c4	b7d0	padding	gld_updateCurrentVertexArray	3	
+b85c	b860	padding	gld_updateCurrentVertexArray	1	
+b874	b880	padding	gld_updateCurrentVertexArray	3	
 b974	b980	padding	gld_waitVertexArrayStamp	3	
-ba38	ba40	padding	FUN_0000b980	2	
+ba38	ba40	padding	gld_isVertexArrayBackingIdle	2	
 bb38	bb40	padding	_gldModifyVertexArray	2	
 bc1c	bc20	padding	_gldReclaimVertexArray	1	
 bc58	bc60	padding	_gldDestroyVertexArray	2	
@@ -251,29 +251,29 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 17044	17050	padding	gld_bufferEnumToIndex	3	
 1706c	17070	padding	gld_bufferEnumToIndex	1	
 170f4	17100	padding	gld_bufferEnumToIndex	3	
-1711c	17120	padding	FUN_00017100	1	
-1713c	17140	padding	FUN_00017100	1	
-1715c	17160	padding	FUN_00017100	1	
-171ac	171b0	padding	FUN_00017160	1	
-171fc	17200	padding	FUN_00017160	1	
-17254	17260	padding	FUN_00017160	3	
-17308	17310	padding	FUN_00017260	2	
+1711c	17120	padding	gld_setContextParameter	1	
+1713c	17140	padding	gld_setContextParameter	1	
+1715c	17160	padding	gld_setContextParameter	1	
+171ac	171b0	padding	gld_applyPbufferToRenderFlags	1	
+171fc	17200	padding	gld_applyPbufferToRenderFlags	1	
+17254	17260	padding	gld_applyPbufferToRenderFlags	3	
+17308	17310	padding	gld_updateColorFormatIndex	2	
 1734c	17350	padding	gld_setIntegerEngineParam	1	
 17368	17370	padding	gld_setIntegerEngineParam	2	
 17674	17680	padding	gld_setIntegerEngineParam	3	
 17718	17720	padding	gld_setIntegerEngineParam	2	
-17744	17750	padding	FUN_00017720	3	
+17744	17750	padding	gld_rendererStatusFlags	3	
 17a3c	17a40	padding	gld_fillCapsBlock	1	
-17ad4	17ae0	padding	FUN_00017a40	3	
-17afc	17b00	padding	FUN_00017a40	1	
-17b18	17b20	padding	FUN_00017a40	2	
+17ad4	17ae0	padding	gld_encodePixelFormatFlags	3	
+17afc	17b00	padding	gld_encodePixelFormatFlags	1	
+17b18	17b20	padding	gld_encodePixelFormatFlags	2	
 17d5c	17d60	padding	gld_postDisplayNotification	1	
 17e08	17e10	padding	gld_postDisplayNotification	2	
 17edc	17ee0	padding	gldRemoveDisplayNotificationObserver	1	
-180b8	180c0	padding	FUN_00018090	2	
-180d4	180e0	padding	FUN_00018090	3	
-180f4	18100	padding	FUN_00018090	3	
-18114	18120	padding	FUN_00018090	3	
+180b8	180c0	padding	gld_classifyTextureVariant	2	
+180d4	180e0	padding	gld_classifyTextureVariant	3	
+180f4	18100	padding	gld_classifyTextureVariant	3	
+18114	18120	padding	gld_classifyTextureVariant	3	
 181ec	181f0	padding	glCopyPixels_impl	1	
 18214	18220	padding	glCopyPixels_impl	3	
 182bc	182c0	padding	glCopyPixels_impl	1	
@@ -295,21 +295,21 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 19934	19940	padding	gld_drawPixelsAtRasterPos	3	
 199c4	199d0	padding	gld_drawPixelsDispatch	3	
 19ac4	19ad0	padding	glCopyPixels_impl	3	
-19c24	19c30	padding	FUN_00019ad0	3	
+19c24	19c30	padding	gld_selectSampleGrid	3	
 19c44	19c50	padding	glCopyPixels_impl	3	
 19cc4	19cd0	padding	gld_updateSampleConfig	3	
 19ce8	19cf0	padding	gld_updateSampleConfig	2	
 19d18	19d20	padding	gld_updateSampleConfig	2	
 19d2c	19d30	padding	gld_updateSampleConfig	1	
 19da4	19db0	padding	glCopyPixels_impl	3	
-19e38	19e40	padding	FUN_00019db0	2	
-19e94	19ea0	padding	FUN_00019db0	3	
-19eb8	19ec0	padding	FUN_00019db0	2	
-19ed8	19ee0	padding	FUN_00019db0	2	
-19f2c	19f30	padding	FUN_00019db0	1	
-19f64	19f70	padding	FUN_00019db0	3	
+19e38	19e40	padding	gld_applySampleConfiguration	2	
+19e94	19ea0	padding	gld_applySampleConfiguration	3	
+19eb8	19ec0	padding	gld_applySampleConfiguration	2	
+19ed8	19ee0	padding	gld_applySampleConfiguration	2	
+19f2c	19f30	padding	gld_applySampleConfiguration	1	
+19f64	19f70	padding	gld_applySampleConfiguration	3	
 1a004	1a010	padding	glCopyPixels_impl	3	
-1a0a8	1a0b0	padding	FUN_0001a010	2	
+1a0a8	1a0b0	padding	gld_needsMultisampleResolve	2	
 1a0c8	1a0d0	padding	glCopyPixels_impl	2	
 1a274	1a280	padding	glCopyPixels_impl	3	
 1a338	1a340	padding	glFlush_impl	2	
@@ -319,7 +319,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 1a668	1a670	padding	glCopyPixels_impl	2	
 1a748	1a750	padding	glCopyPixels_impl	2	
 1a9cc	1a9d0	padding	glCopyPixels_impl	1	
-1aa88	1aa90	padding	FUN_0001a9d0	2	
+1aa88	1aa90	padding	gld_swapBuffersImpl	2	
 1ac24	1ac30	padding	glCopyPixels_impl	3	
 1ade4	1adf0	padding	gld_validatePixelFormat	3	
 1adf8	1ae00	padding	gld_validatePixelFormat	2	
@@ -415,22 +415,22 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 20038	20040	padding	gld_buildVertexStreamLayout	2	
 200a4	200b0	padding	gld_buildVertexStreamLayout	3	
 2018c	20190	padding	gld_buildVertexStreamLayout	1	
-202d8	202e0	padding	FUN_00020210	2	
-203f4	20400	padding	FUN_00020330	3	
-20414	20420	padding	FUN_00020330	3	
+202d8	202e0	padding	gld_updateScissorRect	2	
+203f4	20400	padding	gld_clearBuffers	3	
+20414	20420	padding	gld_clearBuffers	3	
 206dc	206e0	padding	gldDisplayNotificationCallback	1	
 20874	20880	padding	gldDisplayNotificationCallback	3	
 2090c	20910	padding	gldDisplayNotificationCallback	1	
 209a8	209b0	padding	gldDisplayNotificationCallback	2	
 209ec	209f0	padding	gldDisplayNotificationCallback	1	
 20a24	20a30	padding	gldDisplayNotificationCallback	3	
-20b28	20b30	padding	FUN_00020b00	2	
-20d9c	20da0	padding	FUN_00020b30	1	
-21534	21540	padding	FUN_00020b30	3	
-2157c	21580	padding	FUN_00020b30	1	
-215d4	215e0	padding	FUN_00020b30	3	
-21764	21770	padding	FUN_00020b30	3	
-21c6c	21c70	padding	FUN_00020b30	1	
+20b28	20b30	padding	gld_resetNotificationSettings	2	
+20d9c	20da0	padding	gld_emitCopyRectPacket	1	
+21534	21540	padding	gld_emitCopyRectPacket	3	
+2157c	21580	padding	gld_emitCopyRectPacket	1	
+215d4	215e0	padding	gld_emitCopyRectPacket	3	
+21764	21770	padding	gld_emitCopyRectPacket	3	
+21c6c	21c70	padding	gld_emitCopyRectPacket	1	
 22274	22280	padding	gld_emitCopyBlitPacket	3	
 22284	22290	padding	noop_22280	3	
 224f8	22500	padding	_gldUpdateDispatch	2	
@@ -449,7 +449,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2418c	24190	padding	gldPrimWrapperTriangles_23a24	1	
 242e8	242f0	padding	gldPrimWrapperTriangles_23a24	2	
 2434c	24350	padding	gldPrimWrapperTriangles_23a24	1	
-24364	24370	padding	FUN_00024190	3	
+24364	24370	padding	gld_emitImmediateVertexList	3	
 243cc	243d0	padding	gldPrimWrapperTriangleStrip_23a24	1	
 243e4	243f0	padding	gldPrimWrapperTriangleStrip_23a24	3	
 2444c	24450	padding	gldPrimWrapperTriangleFan_23a24	1	
@@ -477,18 +477,18 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 24fa4	24fb0	padding	gld_drawElementsImmediate	3	
 24fc4	24fd0	padding	noop_24fc0	3	
 24fd4	24fe0	padding	noop_24fd0	3	
-2529c	252b4	table	FUN_00024fe0	6	
-25448	25450	padding	FUN_00024fe0	2	
-25648	25660	table	FUN_00024fe0	6	
-2574c	25750	padding	FUN_00024fe0	1	
-25778	257c4	table	FUN_00024fe0	19	
-25818	25838	table	FUN_00024fe0	8	
-2597c	25980	padding	FUN_00024fe0	1	
-25be8	25bf0	padding	FUN_00024fe0	2	
-25ccc	25cd0	padding	FUN_00025bf0	1	
-25cec	25cf0	padding	FUN_00025bf0	1	
-25d3c	25d40	padding	FUN_00025bf0	1	
-25d94	25da0	padding	FUN_00025bf0	3	
+2529c	252b4	table	gld_gatherProgramConstants	6	
+25448	25450	padding	gld_gatherProgramConstants	2	
+25648	25660	table	gld_gatherProgramConstants	6	
+2574c	25750	padding	gld_gatherProgramConstants	1	
+25778	257c4	table	gld_gatherProgramConstants	19	
+25818	25838	table	gld_gatherProgramConstants	8	
+2597c	25980	padding	gld_gatherProgramConstants	1	
+25be8	25bf0	padding	gld_gatherProgramConstants	2	
+25ccc	25cd0	padding	gld_releaseProgramObject	1	
+25cec	25cf0	padding	gld_releaseProgramObject	1	
+25d3c	25d40	padding	gld_releaseProgramObject	1	
+25d94	25da0	padding	gld_releaseProgramObject	3	
 25e74	25e80	padding	gld_deleteContextProgramObjects	3	
 25eb4	25ec0	padding	gld_deleteContextProgramObjects	3	
 25f58	25f60	padding	gld_bindFragmentProgramRecord	2	
@@ -514,7 +514,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 26e4c	26e50	padding	gld_drawArraysDirect	1	
 26e84	26e90	padding	gld_drawArraysDirect	3	
 26f7c	26f80	padding	gld_drawArraysDirect	1	
-2714c	27150	padding	FUN_00026f80	1	
+2714c	27150	padding	gld_reserveVertexBufferSpace	1	
 271c8	271d0	padding	gld_drawArraysStream	2	
 27294	272a0	padding	gld_drawArraysStream	3	
 27398	273a0	padding	gld_drawArraysStream	2	
@@ -551,8 +551,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 293ac	293b0	padding	glReadPixels_impl	1	
 29414	29420	padding	glReadPixels_impl	3	
 29bcc	29bd0	padding	glReadPixels_impl	1	
-2a258	2a260	padding	FUN_00029c00	2	
-2a3c4	2a3d0	padding	FUN_0002a260	3	
+2a258	2a260	padding	gld_drawPixelsAsPoints	2	
+2a3c4	2a3d0	padding	gld_enterPointDrawState	3	
 2a434	2a440	padding	gld_drawPixelsFromClientSurface	3	
 2a44c	2a450	padding	gld_drawPixelsFromClientSurface	1	
 2a47c	2a480	padding	gld_drawPixelsFromClientSurface	1	
@@ -570,16 +570,16 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2b598	2b5a0	padding	gld_sumQueryCounters	2	
 2b68c	2b690	padding	_gldGetQueryInfo	1	
 2b738	2b740	padding	_gldGetQueryInfo	2	
-2b7ec	2b7f0	padding	FUN_0002b740	1	
+2b7ec	2b7f0	padding	gld_beginQuerySlot	1	
 2bbac	2bbb0	padding	gld_emitQueryBeginPacket	1	
 2bbbc	2bbc4	millicode	gld_emitQueryBeginPacket	2	
 2bdec	2bdf0	padding	FUN_0002bbc4	1	
 2bdfc	2be00	padding	FUN_0002bbc4	1	
-2be58	2be60	padding	FUN_0002be00	2	
-2be6c	2be70	padding	FUN_0002be60	1	
-2be78	2be80	padding	FUN_0002be70	2	
+2be58	2be60	padding	gld_ensureRingSpace	2	
+2be6c	2be70	padding	gld_setStreamCursor	1	
+2be78	2be80	padding	gld_getStreamCurrent	2	
 2be84	2be90	padding	noop_2be80	3	
-2be9c	2bea0	padding	FUN_0002be90	1	
+2be9c	2bea0	padding	gld_forwardToStream	1	
 2bee8	2bef0	padding	gldTrimVertexCountToPrimitive	2	
 2bf14	2bf20	padding	gldTrimVertexCountToPrimitive	3	
 2bf28	2bf30	padding	gldTrimVertexCountToPrimitive	2	
@@ -591,24 +591,24 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2c224	2c230	padding	gld_emitStreamAddressRegisters	3	
 2c604	2c610	padding	gld_validateStreamState	3	
 2c644	2c650	padding	gld_validateStreamState	3	
-2c764	2c770	padding	FUN_0002c6c0	3	
-2c784	2c790	padding	FUN_0002c6c0	3	
+2c764	2c770	padding	gld_buildHardwareStateBuffer	3	
+2c784	2c790	padding	gld_buildHardwareStateBuffer	3	
 2ca2c	2ca30	padding	gld_initContextHardwareState	1	
 2cb38	2cb40	padding	gld_initContextHardwareState	2	
 2cc08	2cc10	padding	gldContextFreeResources	2	
-2cc2c	2cc30	padding	FUN_0002cc10	1	
+2cc2c	2cc30	padding	gld_submitRingIfNeeded	1	
 2cc98	2cca0	padding	gld_prepareDrawCount	2	
 2cccc	2ccd0	padding	gld_prepareDrawCount	1	
 2ce0c	2ce10	padding	gld_emitUnitObjectPacket	1	
-2d02c	2d030	padding	FUN_0002ce40	1	
-2d07c	2d080	padding	FUN_0002d030	1	
-2d09c	2d0a0	padding	FUN_0002d030	1	
-2d0ec	2d0f0	padding	FUN_0002d030	1	
-2d12c	2d130	padding	FUN_0002d030	1	
-2d208	2d210	padding	FUN_0002d030	2	
-2d22c	2d230	padding	FUN_0002d210	1	
-2d244	2d250	padding	FUN_0002d210	3	
-2d2ac	2d2b0	padding	FUN_0002d210	1	
+2d02c	2d030	padding	gld_emitUnitObjectPackets	1	
+2d07c	2d080	padding	gld_setSamplerMinFilter	1	
+2d09c	2d0a0	padding	gld_setSamplerMinFilter	1	
+2d0ec	2d0f0	padding	gld_setSamplerMinFilter	1	
+2d12c	2d130	padding	gld_setSamplerMinFilter	1	
+2d208	2d210	padding	gld_setSamplerMinFilter	2	
+2d22c	2d230	padding	gld_setSamplerMagFilter	1	
+2d244	2d250	padding	gld_setSamplerMagFilter	3	
+2d2ac	2d2b0	padding	gld_setSamplerMagFilter	1	
 2d404	2d410	padding	gldPackColorForSurfaceFormat	3	
 2d478	2d480	padding	gldPackColorForSurfaceFormat	2	
 2d4d4	2d4e0	padding	gldPackColorForSurfaceFormat	3	
@@ -620,21 +620,21 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2dd88	2dd90	padding	gldTextureHasNonPowerOfTwoSize2	2	
 2ddac	2ddb0	padding	gldTextureHasNonPowerOfTwoSize2	1	
 2dde8	2ddf0	padding	gldTextureHasNonPowerOfTwoSize2	2	
-2e014	2e028	table	FUN_0002ddf0	5	
-2e454	2e460	padding	FUN_0002ddf0	3	
-2e4d8	2e4e0	padding	FUN_0002ddf0	2	
-2e5e4	2e5f0	padding	FUN_0002ddf0	3	
-2e674	2e680	padding	FUN_0002ddf0	3	
-2e75c	2e760	padding	FUN_0002ddf0	1	
-2e7ec	2e7f0	padding	FUN_0002ddf0	1	
-2e824	2e830	padding	FUN_0002ddf0	3	
-2e89c	2e8a0	padding	FUN_0002ddf0	1	
-2e8d4	2e8e0	padding	FUN_0002ddf0	3	
-2e934	2e940	padding	FUN_0002ddf0	3	
-2e9a8	2e9b0	padding	FUN_0002ddf0	2	
-2e9cc	2e9d0	padding	FUN_0002ddf0	1	
-2ea48	2ea50	padding	FUN_0002ddf0	2	
-2ebb8	2ebc0	padding	FUN_0002ddf0	2	
+2e014	2e028	table	gld_buildTextureHardwareState	5	
+2e454	2e460	padding	gld_buildTextureHardwareState	3	
+2e4d8	2e4e0	padding	gld_buildTextureHardwareState	2	
+2e5e4	2e5f0	padding	gld_buildTextureHardwareState	3	
+2e674	2e680	padding	gld_buildTextureHardwareState	3	
+2e75c	2e760	padding	gld_buildTextureHardwareState	1	
+2e7ec	2e7f0	padding	gld_buildTextureHardwareState	1	
+2e824	2e830	padding	gld_buildTextureHardwareState	3	
+2e89c	2e8a0	padding	gld_buildTextureHardwareState	1	
+2e8d4	2e8e0	padding	gld_buildTextureHardwareState	3	
+2e934	2e940	padding	gld_buildTextureHardwareState	3	
+2e9a8	2e9b0	padding	gld_buildTextureHardwareState	2	
+2e9cc	2e9d0	padding	gld_buildTextureHardwareState	1	
+2ea48	2ea50	padding	gld_buildTextureHardwareState	2	
+2ebb8	2ebc0	padding	gld_buildTextureHardwareState	2	
 2ec5c	2ec60	padding	gld_applyAnisotropyOverride	1	
 2ecd4	2ece0	padding	gld_applyAnisotropyOverride	3	
 2ee24	2ee30	padding	gld_applyAnisotropyOverride	3	
@@ -667,28 +667,28 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 303ac	303b0	padding	gld_selectTextureHardwareFormat	1	
 303cc	303d0	padding	gld_selectTextureHardwareFormat	1	
 30414	30420	padding	gldCompressedImageBytes	3	
-305a8	305b0	padding	FUN_00030420	2	
-3079c	307a0	padding	FUN_000305b0	1	
-30834	30840	padding	FUN_000307a0	3	
-308bc	308c0	padding	FUN_00030840	1	
-3092c	30930	padding	FUN_000308c0	1	
-30984	30990	padding	FUN_000308c0	3	
+305a8	305b0	padding	gld_buildTextureStatePacket	2	
+3079c	307a0	padding	gld_compressAlphaBlock	1	
+30834	30840	padding	gld_emitUnitClearPacket	3	
+308bc	308c0	padding	gld_emitSingleUnitBinding	1	
+3092c	30930	padding	gld_emitBoundUnitObjects	1	
+30984	30990	padding	gld_emitBoundUnitObjects	3	
 309b8	309c0	padding	floorLog2	2	
-30a48	30a50	padding	FUN_000309c0	2	
-30a58	30a60	padding	FUN_00030a50	2	
+30a48	30a50	padding	gld_bindUnitObject	2	
+30a58	30a60	padding	gld_deleteTextureForStream	2	
 30be8	30bf0	padding	gldTextureHasNonPowerOfTwoSize	2	
 30c0c	30c10	padding	gldTextureHasNonPowerOfTwoSize	1	
 30c48	30c50	padding	gldTextureHasNonPowerOfTwoSize	2	
-30efc	30f00	padding	FUN_00030c50	1	
-30f58	30f60	padding	FUN_00030f00	2	
-3101c	31020	padding	FUN_00030f60	1	
-31054	31060	padding	FUN_00030f60	3	
-31144	31150	padding	FUN_00030f60	3	
-31168	31170	padding	FUN_00030f60	2	
+30efc	30f00	padding	gld_createInternalTexture	1	
+30f58	30f60	padding	gld_texelBytes	2	
+3101c	31020	padding	gld_getTextureFormatInfo	1	
+31054	31060	padding	gld_getTextureFormatInfo	3	
+31144	31150	padding	gld_getTextureFormatInfo	3	
+31168	31170	padding	gld_getTextureFormatInfo	2	
 31214	31220	padding	gldTextureFormatLookup	3	
 31338	31340	padding	gldTextureFormatEntryForLevel	2	
-3178c	31790	padding	FUN_00031340	1	
-3188c	31890	padding	FUN_00031340	1	
+3178c	31790	padding	gld_readbackTextureLevel	1	
+3188c	31890	padding	gld_readbackTextureLevel	1	
 31b44	31b50	padding	gld_uploadTextureLevel	3	
 32178	32180	padding	gldTextureMakeResident	2	
 322a4	322b0	padding	gldTextureMakeResident	3	
@@ -701,7 +701,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 34114	34120	padding	gldTextureMakeResident	3	
 34164	34170	padding	gldTextureMakeResident	3	
 34194	341a0	padding	gldTextureMakeResident	3	
-341fc	34200	padding	FUN_000341a0	1	
+341fc	34200	padding	gld_makeTextureResidentOrDelete	1	
 34af4	34b00	padding	glGenerateMipmap_impl	3	
 34b0c	34b10	padding	glGenerateMipmap_impl	1	
 34e08	34e10	padding	glGenerateMipmap_impl	2	
@@ -734,12 +734,12 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 3ae74	3ae80	padding	gldPrimInlineLines	3	
 3b154	3b160	padding	gldPrimInlineLineLoop	3	
 3b24c	3b250	padding	FUN_0003b160	1	
-3b3d4	3b3e0	padding	FUN_0003b280	3	
-3b49c	3b4a0	padding	FUN_0003b280	1	
-3b4b4	3b4c0	padding	FUN_0003b280	3	
-3b56c	3b570	padding	FUN_0003b280	1	
-3b5a4	3b5b0	padding	FUN_0003b280	3	
-3b614	3b620	padding	FUN_0003b5b0	3	
+3b3d4	3b3e0	padding	extvsDeclareProgramVariables	3	
+3b49c	3b4a0	padding	extvsDeclareProgramVariables	1	
+3b4b4	3b4c0	padding	extvsDeclareProgramVariables	3	
+3b56c	3b570	padding	extvsDeclareProgramVariables	1	
+3b5a4	3b5b0	padding	extvsDeclareProgramVariables	3	
+3b614	3b620	padding	gld_bindVertexShaderSlot	3	
 3bc00	3bc18	table	FUN_0003b870	6	
 3bd14	3bd20	padding	FUN_0003b870	3	
 3bde4	3bdf0	padding	FUN_0003b870	3	
@@ -751,28 +751,28 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 3c178	3c180	padding	FUN_0003b870	2	
 3c304	3c310	padding	FUN_0003b870	3	
 3c3fc	3c400	padding	gldDeleteVertexShaderObject	1	
-3c79c	3c7a0	padding	FUN_0003c400	1	
-3c92c	3c948	table	FUN_0003c400	7	
-3cb24	3cb30	padding	FUN_0003c400	3	
-3cbf0	3cd14	table	FUN_0003c400	73	
-3d268	3d270	padding	FUN_0003c400	2	
-3d55c	3d560	padding	FUN_0003c400	1	
-3d584	3d590	padding	FUN_0003c400	3	
-3da24	3da3c	table	FUN_0003d590	6	
-3db38	3db40	padding	FUN_0003d590	2	
-3dc84	3dc90	padding	FUN_0003d590	3	
-3dce0	3dcf8	table	FUN_0003d590	6	
-3dde4	3ddf0	padding	FUN_0003d590	3	
-3de18	3de64	table	FUN_0003d590	19	
-3deb8	3ded8	table	FUN_0003d590	8	
-3e01c	3e020	padding	FUN_0003d590	1	
+3c79c	3c7a0	padding	extvsTranslateShaderObject	1	
+3c92c	3c948	table	extvsTranslateShaderObject	7	
+3cb24	3cb30	padding	extvsTranslateShaderObject	3	
+3cbf0	3cd14	table	extvsTranslateShaderObject	73	
+3d268	3d270	padding	extvsTranslateShaderObject	2	
+3d55c	3d560	padding	extvsTranslateShaderObject	1	
+3d584	3d590	padding	extvsTranslateShaderObject	3	
+3da24	3da3c	table	gld_emitProgramConstantUpdates	6	
+3db38	3db40	padding	gld_emitProgramConstantUpdates	2	
+3dc84	3dc90	padding	gld_emitProgramConstantUpdates	3	
+3dce0	3dcf8	table	gld_emitProgramConstantUpdates	6	
+3dde4	3ddf0	padding	gld_emitProgramConstantUpdates	3	
+3de18	3de64	table	gld_emitProgramConstantUpdates	19	
+3deb8	3ded8	table	gld_emitProgramConstantUpdates	8	
+3e01c	3e020	padding	gld_emitProgramConstantUpdates	1	
 3e22c	3e230	padding	gldUpdateTextureTargetDirtyMask	1	
-3e2b8	3e2c0	padding	FUN_0003e250	2	
-3e2d8	3e2e0	padding	FUN_0003e250	2	
-3e31c	3e320	padding	FUN_0003e250	1	
-3e398	3e3a0	padding	FUN_0003e320	2	
-3e414	3e420	padding	FUN_0003e3a0	3	
-3e488	3e490	padding	FUN_0003e420	2	
+3e2b8	3e2c0	padding	gld_updateUnitKindTable	2	
+3e2d8	3e2e0	padding	gld_updateUnitKindTable	2	
+3e31c	3e320	padding	gld_updateUnitKindTable	1	
+3e398	3e3a0	padding	gld_updateFragmentProgramState	2	
+3e414	3e420	padding	gld_bindFragmentShaderSlot	3	
+3e488	3e490	padding	gld_setFragmentShaderConstants	2	
 3e4c8	3e4d0	padding	gldDeleteFragmentShaderObject	2	
 3e548	3e550	padding	atifsReplayTextureOps	2	
 3e5c4	3e5d0	padding	atifsReplayTextureOps	3	
@@ -3118,7 +3118,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10dcfc	10dd08	other	HwLimits__vslot10_failNotSupported	3	
 10dd4c	10dd54	millicode	HwLimits__vslot20_createInstWithOwner	2	
 10ddf4	10ddfc	other	KhanPs__vslot16_getConstant0xb5	2	
-10def8	10defc	millicode	FUN_0010de6c	1	
+10def8	10defc	millicode	Program__emitLoadVertexAttr	1	
 10e0d0	10e0d4	millicode	KhanChip__ctor_10e050	1	
 10e100	10e114	eh-pad	KhanChip__ctor_10e050	5	__Unwind_Resume
 10e194	10e198	millicode	KhanChip__ctor_10e114	1	
@@ -3233,7 +3233,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 127114	127134	eh-pad	ImmedConstBuffer__vslot191	8	0x193cc0,__Unwind_Resume
 1271a0	1271c0	eh-pad	ImmedConstBuffer__vslot79	8	0x193cc0,__Unwind_Resume
 12722c	12724c	eh-pad	ImmedConstBuffer__vslot39	8	0x193cc0,__Unwind_Resume
-1272c4	1272cc	millicode	FUN_001272b4	2	
+1272c4	1272cc	millicode	Object__sumWords4And8	2	
 127abc	127ac0	millicode	VRegInfo__new_127994	1	
 127b50	127b54	millicode	VRegInfo__new_127994	1	
 127be4	127be8	millicode	VRegInfo__new_127994	1	
@@ -3257,7 +3257,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12a7e0	12a7f4	eh-pad	KhanVs__ctor_12a6c0	5	__Unwind_Resume
 12a884	12a8a8	eh-pad	FudoVs__ctor_12a808	9	__Unwind_Resume
 12a938	12a95c	eh-pad	FudoVs__ctor_12a8bc	9	__Unwind_Resume
-12ab70	12ab80	other	FUN_0012ab04	4	
+12ab70	12ab80	other	IRInst__hasOperandKindClass1	4	
 12b440	12b458	table	FUN_0012b3f8	6	
 12b5e0	12b5f8	eh-pad	FUN_0012b520	6	0x193cc0,__Unwind_Resume
 12b788	12b7a8	eh-pad	LoopInfo__convertToHardwareLoop	8	0x193cc0,__Unwind_Resume
@@ -3267,7 +3267,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12dd48	12dd58	other	FudoPs__flattenIfs	4	
 12df58	12df70	eh-pad	FUN_0012dd58	6	0x193cc0,__Unwind_Resume
 12e450	12e468	eh-pad	Program__foldConstantIfRegion	6	0x193cc0,__Unwind_Resume
-12e534	12e554	eh-pad	FUN_0012e488	8	0x193cc0,__Unwind_Resume
+12e534	12e554	eh-pad	Program__getOrCreateLandingBlock	8	0x193cc0,__Unwind_Resume
 12e658	12e674	other	IfFooter__ctor_12e56c	7	0x193cc0
 12e6cc	12e6e8	other	IfFooter__ctor_12e56c	7	0x193cc0
 12e718	12e734	other	IfFooter__ctor_12e56c	7	0x193cc0
@@ -3284,10 +3284,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12f3b0	12f3b4	millicode	FUN_0012f0f8	1	
 12fe18	12fe38	eh-pad	FUN_0012f0f8	8	0x193cc0,__Unwind_Resume
 130068	130080	eh-pad	Program__isRegionTrivial	6	0x193cc0,__Unwind_Resume
-1308dc	1308e0	millicode	FUN_001307f8	1	
-130f08	130f28	eh-pad	FUN_00130ec0	8	0x193cc0,__Unwind_Resume
-130fac	130fcc	eh-pad	FUN_00130f64	8	0x193cc0,__Unwind_Resume
-131224	131244	eh-pad	FUN_001311cc	8	0x193cc0,__Unwind_Resume
+1308dc	1308e0	millicode	IRInst__advanceToChainEnd	1	
+130f08	130f28	eh-pad	Program__appendLoadFa	8	0x193cc0,__Unwind_Resume
+130fac	130fcc	eh-pad	Program__prependLoad79	8	0x193cc0,__Unwind_Resume
+131224	131244	eh-pad	Program__insertMemLoadFbAfter	8	0x193cc0,__Unwind_Resume
 1313d8	1313f8	eh-pad	FUN_001312f4	8	0x193cc0,__Unwind_Resume
 131b68	131b88	eh-pad	FUN_00131a80	8	0x193cc0,__Unwind_Resume
 132448	13247c	eh-pad	HwLimits__buildInterferenceGraph	13	0x193cc0,__Unwind_Resume
@@ -3296,8 +3296,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 134070	134090	eh-pad	FUN_00133fe4	8	0x193cc0,__Unwind_Resume
 1348bc	1348dc	eh-pad	FUN_00134658	8	0x193cc0,__Unwind_Resume
 134ef0	134ef4	millicode	FUN_00134de8	1	
-1351a4	1351c4	eh-pad	FUN_00135110	8	0x193cc0,__Unwind_Resume
-135258	135278	eh-pad	FUN_001351c4	8	0x193cc0,__Unwind_Resume
+1351a4	1351c4	eh-pad	InterferenceNode__ctor_135110	8	0x193cc0,__Unwind_Resume
+135258	135278	eh-pad	InterferenceNode__ctor_1351c4	8	0x193cc0,__Unwind_Resume
 1361b4	1361d4	eh-pad	pass_color_graph	8	0x193cc0,__Unwind_Resume
 136f5c	136f60	millicode	FUN_00136ec4	1	
 136fac	136fcc	eh-pad	FUN_00136ec4	8	0x193cc0,__Unwind_Resume

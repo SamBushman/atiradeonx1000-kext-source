@@ -3950,8 +3950,8 @@ int FUN_00115fa0()
   return;
 }
 
-/* FUN_0011e6ec @ 0x11e6ec (8 bytes) */
-int FUN_0011e6ec(param_1)
+/* Value__lowHalfword @ 0x11e6ec (8 bytes) */
+int Value__lowHalfword(param_1)
   undefined4 param_1;
 {
   return (*(unsigned short *)((unsigned char *)&(param_1) + 2));
@@ -3962,27 +3962,27 @@ int IRPhi__getUniqueSource(inst)
   int inst;
 {
   int callResult;
-  int iVar2;
-  int iVar3;
+  int previousSource;
+  int uniqueSource;
   int loopIndex;
   
   if (*(int *)(inst + 0x84) < 1) {
 LAB_0011e764:
-    iVar3 = 0;
+    uniqueSource = 0;
   }
   else {
     loopIndex = 1;
-    iVar2 = 0;
+    previousSource = 0;
     do {
       callResult = IRInst__getOperandSource(inst,loopIndex);
-      iVar3 = iVar2;
-      if ((((callResult != 0) && (inst != callResult)) && (iVar3 = callResult, iVar2 != 0)) &&
-         (iVar3 = iVar2, iVar2 != callResult)) goto LAB_0011e764;
+      uniqueSource = previousSource;
+      if ((((callResult != 0) && (inst != callResult)) && (uniqueSource = callResult, previousSource != 0)) &&
+         (uniqueSource = previousSource, previousSource != callResult)) goto LAB_0011e764;
       loopIndex = loopIndex + 1;
-      iVar2 = iVar3;
+      previousSource = uniqueSource;
     } while (loopIndex <= *(int *)(inst + 0x84));
   }
-  return iVar3;
+  return uniqueSource;
 }
 
 /* IRInst__allSourcesDefined @ 0x11e780 (108 bytes) */

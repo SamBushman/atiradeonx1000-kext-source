@@ -103,7 +103,7 @@ int FUN_00186510(inst, sourceInstRefA, sourceInstRefB, compiler)
 LAB_00186708:
   mergedSelect = DAT_001b0220;
   if (selectsCompatible) {
-    loopIndex2 = FUN_0011379c(compiler,inst1);
+    loopIndex2 = OpcodeTraits__flag1WithoutFlag7(compiler,inst1);
     if (loopIndex2 == 0) {
       loopIndex2 = OpcodeTraits__flagBit8(*(undefined4 *)(inst1[0x22] + 8),compiler);
       if (loopIndex2 == 0) goto LAB_00186a60;
@@ -403,7 +403,7 @@ LAB_001874d4:
   destSelect = *(undefined4 *)(loopIndex2 + 0x10);
   if (*(int *)(opcodeInfo + 8) == 0x12) {
     scratchInst = (int *)IRInst__getOperandSource(inst2,1);
-    sourceRegKindIsConstant = FUN_001267b8(scratchInst[0x26]);
+    sourceRegKindIsConstant = Table1ea904__hasFlag0x11(scratchInst[0x26]);
     if (sourceRegKindIsConstant == 0) {
       if (scratchInst[0x26] == 0x33) {
         operandRecord = IRInst__getOperandRecord(inst2,1);
@@ -491,7 +491,7 @@ LAB_001874d4:
       }
     }
     constTable[1] = (int *)IRInst__getOperandSource(inst2,2);
-    loopRemaining = FUN_001267b8(constTable[1][0x26]);
+    loopRemaining = Table1ea904__hasFlag0x11(constTable[1][0x26]);
     if (loopRemaining == 0) {
       if (constTable[1][0x26] == 0x33) {
         source1Record = IRInst__getOperandRecord(inst2,2);
@@ -556,7 +556,7 @@ LAB_001874d4:
         operandSource = IRInst__getOperandSource(inst2,1);
         sourceRegKind = *(undefined4 *)(operandSource + 0x98);
       }
-      operandKindIsConstant = FUN_001267b8(sourceRegKind);
+      operandKindIsConstant = Table1ea904__hasFlag0x11(sourceRegKind);
       if ((operandKindIsConstant != 0) && ((inst2[0x2e] & 2U) == 0)) {
         operandSource2 = (int *)IRInst__getOperandSource(inst2,1);
         firstSourceIsPresub = (**(code **)(*operandSource2 + 0x5c))(operandSource2);
@@ -596,7 +596,7 @@ LAB_001872f8:
       operandSource = IRInst__getOperandSource(inst2,1);
       sourceRegKind = *(undefined4 *)(operandSource + 0x98);
     }
-    operandKindIsConstant = FUN_001267b8(sourceRegKind);
+    operandKindIsConstant = Table1ea904__hasFlag0x11(sourceRegKind);
     if (operandKindIsConstant == 0) {
       return 0;
     }
@@ -1370,7 +1370,7 @@ int Inst__movAndShiftUseVector(inst, program)
     sourceDef = IRInst__getOperandSource(inst,1);
     sourceRegister = *(undefined4 *)(sourceDef + 0x98);
   }
-  registerKindOk = FUN_001267b8(sourceRegister);
+  registerKindOk = Table1ea904__hasFlag0x11(sourceRegister);
   if (registerKindOk == 0) {
     return;
   }

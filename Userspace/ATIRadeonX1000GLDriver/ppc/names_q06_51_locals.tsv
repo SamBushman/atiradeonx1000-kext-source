@@ -1,0 +1,11 @@
+local	IRInst__reinitAsMov	iVar3	laneIndex	INFERRED	lane 0..1 loop counter
+local	IRInst__reinitAsMov	bVar1	moreLanes	INFERRED	loop continue flag
+local	FUN_0010c670	iVar4	destSwizzleWord	INFERRED	operand 0 +0x10 word stored to inst2[0x27]
+local	FUN_0010c670	uVar12	findResult	INFERRED	64-bit return of IRInst__findConstantOperandWithValue (slot in high word, operand in low)
+local	FUN_0010cb48	iVar11	operandNumber	INFERRED	operand number 2..count
+local	FUN_0011eaa0	puVar14	phiNode	INFERRED	IRPhiNode created and prepended to the frontier block
+local	LoopInfo__matchCounterStep	bVar1	moreLanes	INFERRED	loop continue flag
+local	LoopInfo__matchCounterStep	local_38	operandSwizzleBytes	INFERRED	operand +0x10 swizzle word read bytewise by counter lane
+local	FUN_00133fe4	puVar11	pendingVector	INFERRED	pending-instruction vector (allocation+1)
+local	FUN_0012eacc	puVar8	armEntryBlock	INFERRED	predecessor or newly inserted block that precedes the if header
+local	KhanVs__vslot71_canCombineSources	piVar4	seenRegCursor	INFERRED	cursor over the seenRegs tables

@@ -1607,7 +1607,7 @@ LAB_0014937c:
        (iVar5 = SelectWord__isSplat(operandSelectC), iVar5 != 0)) &&
       (((char)operandSelectC == '\x04' && (iVar5 = IRInst__hasSingleUse(operandVReg,program), iVar5 != 0)))) &&
      ((iVar5 = OpcodeTraits__flagBit6(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(program + 8)),
-      iVar5 != 0 && (iVar5 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg), iVar5 != 0)))) {
+      iVar5 != 0 && (iVar5 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg), iVar5 != 0)))) {
     *(int *)(program + 0x16c) = *(int *)(program + 0x16c) + 1;
     operandRecord = IRInst__getOperandRecord(inst,0);
     operandVReg[0x27] = *(int *)(operandRecord + 0x10);

@@ -1,12 +1,12 @@
 # owner entry	owner	call site	callee	register	value	class
 0x6700	_gldCreateContext	0x6778	malloc	r3	0x2b98 printed as &UNK_00002b98 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0xbfa0	textPrintDoubleShortest	0xc048	frexp	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-DOUBLE-SLOT
-0x16670	glBitmap_impl	0x1681c	FUN_0002a260	r10	r1+0x48 (a stack address) not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x16670	glBitmap_impl	0x1681c	gld_enterPointDrawState	r10	r1+0x48 (a stack address) not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x2c230	gld_validateStreamState	0x2c678	gld_buildVertexStreamCache	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x2c230	gld_validateStreamState	0x2c6a8	gld_buildVertexStreamLayout	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x32100	gldTextureMakeResident	0x33ad8	valloc	r8	0x1 not at argument 5 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
 0x32100	gldTextureMakeResident	0x33b18	gldTextureFormatCodeMatchesType	r7	0x1 not at argument 4 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
-0x3b280	FUN_0003b280	0x3b530	glSetLocalConstantEXT_impl	r5	0x1406 printed as &DAT_00001406 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x3b280	extvsDeclareProgramVariables	0x3b530	glSetLocalConstantEXT_impl	r5	0x1406 printed as &DAT_00001406 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x46e90	fragmentInstructionToIL	0x48528	memset	r10	r1+0x90 (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x48670	memset	r10	r1+0x6c (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x47d5c	fpilEmitInstruction	r10	0x1 not at argument 7 of any C call (23 C calls)	BENIGN-CALLEE-IGNORES
@@ -26,14 +26,14 @@
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0xa4980	FUN_000a4980	0xa523c	FUN_00030c50	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0xa4980	FUN_000a4980	0xa523c	gld_createInternalTexture	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0xa4980	FUN_000a4980	0xa56c8	FUN_000a3790	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xa4980	FUN_000a4980	0xa5760	FUN_000a3a60	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xb3630	atifsCompileCurrentShader	0xb4030	ilTokenBufPush	r9	0x3 not at argument 6 of any C call (13 C calls)	BENIGN-CALLEE-IGNORES
 0xb4400	FUN_000b4400	0xb49bc	FUN_000879f0	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0xc8e50	ilAssembleProgram	0xca130	ilEmitProjectiveDivide	r10	r1+0x7c (a stack address) not at argument 7 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0xcae90	ilRewriteForTextureState	0xcccc4	malloc	r9	r1+0x98 (a stack address) not at argument 6 of any C call (4 C calls)	BENIGN-IMPORT-ARITY
-0xed89c	FUN_000ed89c	0xed9ac	FUN_00104364	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0xed89c	FUN_000ed89c	0xed9ac	Vslot__outDefaults_0_0_4	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
 0xed89c	FUN_000ed89c	0xedcb4	IRInst__appendSource	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0xeec50	FUN_000eec50	0xed5ec	IRInst__setOperandRef	r3	incoming param_2 not at argument 0 of any C call (8 C calls)	CHECK (C arg0: iVar2; iVar2)
 0xeec50	FUN_000eec50	0xed3ec	IRInst__setOperandRef	r5	field at param_2+0xa4: 2 stock site(s), 0 C call(s) carry it at argument 2 (8 C calls)	BENIGN-REVIEWED (Ghidra inlined the tail call `b 0xed3a4` from FUN_000eec50: the callee's param_2 is the C's iVar7 = *(param_1+0x34c); stock r4 = r30 at 0xeee28)

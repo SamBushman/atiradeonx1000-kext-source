@@ -375,7 +375,7 @@ ffd5c	ffd60	FUN_000fd5c8
 12dab4	12dab8	pass_flatten_ifs
 12df58	12df70	FUN_0012dd58
 12e450	12e468	Program__foldConstantIfRegion
-12e534	12e554	FUN_0012e488
+12e534	12e554	Program__getOrCreateLandingBlock
 12e658	12e674	IfFooter__ctor_12e56c
 12e6cc	12e6e8	IfFooter__ctor_12e56c
 12e718	12e734	IfFooter__ctor_12e56c
@@ -392,9 +392,9 @@ ffd5c	ffd60	FUN_000fd5c8
 12f3b0	12f3b4	FUN_0012f0f8
 12fe18	12fe38	FUN_0012f0f8
 130068	130080	Program__isRegionTrivial
-130f08	130f28	FUN_00130ec0
-130fac	130fcc	FUN_00130f64
-131224	131244	FUN_001311cc
+130f08	130f28	Program__appendLoadFa
+130fac	130fcc	Program__prependLoad79
+131224	131244	Program__insertMemLoadFbAfter
 1313d8	1313f8	FUN_001312f4
 131b68	131b88	FUN_00131a80
 132448	13245c	HwLimits__buildInterferenceGraph
@@ -403,8 +403,8 @@ ffd5c	ffd60	FUN_000fd5c8
 133f84	133f9c	FUN_0013323c
 134070	134090	FUN_00133fe4
 1348bc	1348dc	FUN_00134658
-1351a4	1351c4	FUN_00135110
-135258	135278	FUN_001351c4
+1351a4	1351c4	InterferenceNode__ctor_135110
+135258	135278	InterferenceNode__ctor_1351c4
 1361b4	1361d4	pass_color_graph
 136f5c	136f60	?
 136fac	136fcc	FUN_00136ec8
