@@ -3599,3 +3599,12 @@ local	Inst__foldProducerIntoConsumer	local_30	writeMaskOutA	INFERRED	WriteMask__
 local	Inst__foldProducerIntoConsumer	local_2c	writeMaskOutB	INFERRED	WriteMask__fromSelectWord out
 local	Inst__foldProducerIntoConsumer	local_28	readMaskOutA	INFERRED	SelectWord__readMask out
 local	Inst__foldProducerIntoConsumer	local_24	readMaskOutB	INFERRED	SelectWord__readMask out
+local	Inst__foldProducerIntoConsumer	local_5c	maskOrSelectA	INFERRED	dest write mask of the producer, later reused for an operand select word (same slot)
+local	Inst__foldProducerIntoConsumer	local_54	readMaskOrSelectB	INFERRED	producer read mask, later the byte-swapped operand select (same slot)
+local	Inst__foldProducerIntoConsumer	local_4c	readMaskC	INFERRED	second read mask copy
+local	Inst__foldProducerIntoConsumer	auStack_38	lastOperandBuf0	INFERRED	IRInst__readLastOperand out buffer word 0
+local	Inst__foldProducerIntoConsumer	auStack_34	lastOperandBuf1	INFERRED	IRInst__readLastOperand out buffer word 1
+use	Inst__foldProducerIntoConsumer	iVar2	predicateResultG	INFERRED	operandKindClass / vtable +0x60 results tested in one condition chain	^\s*iVar2\ =\ FUN_00105dbc\(param_3,0\);$	+3
+use	Inst__foldProducerIntoConsumer	iVar2	destRegisterArg	INFERRED	register passed to RegKind__flagBit7	^\s*iVar2\ =\ param_3\[0x2c\];$	+1
+use	Inst__foldProducerIntoConsumer	iVar2	destRegisterArg	INFERRED	register passed to RegKind__flagBit7	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x98\);$	+1
+use	Inst__foldProducerIntoConsumer	iVar2	destRegisterArg	INFERRED	register passed to RegKind__flagBit7	^\s*iVar2\ =\ FUN_00126708\(iVar2\);$	+1
