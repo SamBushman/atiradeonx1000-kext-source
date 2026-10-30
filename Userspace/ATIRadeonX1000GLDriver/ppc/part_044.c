@@ -90,12 +90,12 @@ int FUN_00158b78(param_1, param_2, inst, param_4, param_5, param_6)
   undefined4 param_6;
 {
   int iVar1;
-  int iVar2;
+  int callResult;
   
   iVar1 = (**(code **)(*param_2 + 100))(param_2,param_2,inst,param_4,param_5,param_6);
   if ((((iVar1 != 0) && (param_2[0x48] == 0)) && ((param_2[5] & 0x200U) == 0)) &&
      ((iVar1 = param_2[0x49], iVar1 != 0 &&
-      (iVar2 = FUN_0015800c(param_1,inst,iVar1,param_5,param_6,param_4), iVar2 != 0)))) {
+      (callResult = FUN_0015800c(param_1,inst,iVar1,param_5,param_6,param_4), callResult != 0)))) {
     ((int (*)())FUN_00158988)(param_2,inst,iVar1,param_5,param_6,param_4);
     param_2[0x49] = 0;
   }
@@ -1719,6 +1719,7 @@ int FUN_0015b974(inst, param_2, param_3, param_4, param_5)
   int operandRecord;
   int *operandVReg;
   int iVar1;
+  int callResult;
   undefined4 operandIndex;
   int *inst1;
   undefined4 srcIndex;
@@ -1741,8 +1742,8 @@ int FUN_0015b974(inst, param_2, param_3, param_4, param_5)
       operandRecord = IRInst__getOperandRecord(inst,1);
       uVar5 = (uint)*(byte *)(operandRecord + 0x13);
       iVar7 = *(int *)(local_68[0x22] + 8);
-      iVar1 = ((int (*)())FUN_0015b8b8)(&local_68,uVar5);
-      if (iVar1 == 0) {
+      callResult = ((int (*)())FUN_0015b8b8)(&local_68,uVar5);
+      if (callResult == 0) {
         vcall64Result = (**(code **)(*local_68 + 100))(local_68);
         if (vcall64Result == 0) {
           if (iVar7 == 0x13) {
@@ -1845,8 +1846,8 @@ int FUN_0015b974(inst, param_2, param_3, param_4, param_5)
           if ((local_68[0x2e] & 2U) != 0) {
             return 0;
           }
-          iVar1 = ((int (*)())FUN_0015b8b8)(&local_64,uVar5);
-          if (iVar1 == 0) {
+          callResult = ((int (*)())FUN_0015b8b8)(&local_64,uVar5);
+          if (callResult == 0) {
             return 0;
           }
           uVar5 = 1 << (local_64[0x49] + local_68[0x49] & 0x3fU);
@@ -4467,6 +4468,7 @@ int Inst__foldProducerIntoConsumer(node, operandIndex, inst, pass, param_5)
   int operandRecord;
   uint uVar1;
   int iVar2;
+  int callResult;
   int iVar3;
   int operandVReg2;
   int countdownC;
@@ -4698,8 +4700,8 @@ LAB_001605dc:
               } while (countdownB != 0);
             }
           }
-          iVar2 = FUN_00149de4(node,operandIndex,inst,&local_58,*(undefined4 *)(pass + 8));
-          if (iVar2 != 0) goto LAB_00160e58;
+          callResult = FUN_00149de4(node,operandIndex,inst,&local_58,*(undefined4 *)(pass + 8));
+          if (callResult != 0) goto LAB_00160e58;
         }
       }
     }
@@ -5173,9 +5175,11 @@ int FUN_00161748(inst, inst2, pass)
   code *pcVar5;
   uint uVar6;
   int iVar7;
+  int callResult2;
   undefined4 uVar8;
   undefined4 uVar9;
   int iVar10;
+  int callResult;
   int iVar11;
   int *vslot73Result;
   int iVar13;
@@ -5251,8 +5255,8 @@ int FUN_00161748(inst, inst2, pass)
             if ((splitRgbAlphaEnabled == 0) || (((char)operandSelectC != '\0' && ((char)operandSelectB != '\0')))) {
               resultScaleCode = inst2[0x49];
               if ((inst[0x49] != resultScaleCode) && (iVar7 != 0)) {
-                iVar10 = FUN_00151318(inst2);
-                if (iVar10 == 0) {
+                callResult = FUN_00151318(inst2);
+                if (callResult == 0) {
                   resultScaleCode = inst2[0x49];
                 }
                 else {
@@ -5262,8 +5266,8 @@ int FUN_00161748(inst, inst2, pass)
               bVar4 = iVar7 == 0;
               saturate = inst2[0x48];
               if ((inst[0x48] != saturate) && (!bVar4)) {
-                iVar7 = FUN_00151318(inst2);
-                if (iVar7 == 0) {
+                callResult2 = FUN_00151318(inst2);
+                if (callResult2 == 0) {
                   saturate = inst2[0x48];
                 }
                 else {
@@ -5539,6 +5543,7 @@ int FUN_001621c8(inst, inst2, pass)
   float *pfVar4;
   uint source1Flags3;
   int iVar6;
+  int vcall64Result;
   int iVar7;
   int iVar8;
   int *target;
@@ -5553,7 +5558,7 @@ int FUN_001621c8(inst, inst2, pass)
   int *inst3;
   int destRegisterOffset;
   int destRegister;
-  double dVar21;
+  double outputScaleFromExponentResult;
   undefined4 operandSelectD;
   undefined4 operandSelectC;
   undefined4 operandSelectB;
@@ -5573,12 +5578,12 @@ int FUN_001621c8(inst, inst2, pass)
   undefined4 local_6c;
   undefined4 *local_68;
   
-  iVar6 = (**(code **)(*inst + 100))(inst,inst2,pass);
-  if (iVar6 == 0) {
+  vcall64Result = (**(code **)(*inst + 100))(inst,inst2,pass);
+  if (vcall64Result == 0) {
     return 0;
   }
-  iVar6 = (**(code **)(*inst2 + 100))(inst2);
-  if (iVar6 == 0) {
+  vcall64Result = (**(code **)(*inst2 + 100))(inst2);
+  if (vcall64Result == 0) {
     return 0;
   }
   sourceDef2 = IRInst__getOperandSource(inst2,1);
@@ -5756,7 +5761,7 @@ LAB_00162370:
     inst3 = inst;
     if (iVar16 != 0) {
       loopIndexB = 0;
-      dVar21 = (double)((double (*)())outputScaleFromExponent)(iVar6);
+      outputScaleFromExponentResult = (double)((double (*)())outputScaleFromExponent)(iVar6);
       pfVar4 = local_b8;
       do {
         operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -5770,7 +5775,7 @@ LAB_00162370:
           if (((int)*(char *)(sourceDef2 + 0x15c) >> (uVar13 & 0x3f) & 1U) == 0) {
             return 0;
           }
-          *pfVar4 = (float)(dVar21 * (double)*(float *)(uVar13 * 0x18 + sourceDef2 + 0x20));
+          *pfVar4 = (float)(outputScaleFromExponentResult * (double)*(float *)(uVar13 * 0x18 + sourceDef2 + 0x20));
         }
         bVar2 = loopIndexB != 3;
         pfVar4 = pfVar4 + 1;
@@ -5783,7 +5788,7 @@ LAB_00162370:
   }
   iVar16 = iVar6;
   loopIndex = 0;
-  dVar21 = (double)((double (*)())outputScaleFromExponent)(iVar16);
+  outputScaleFromExponentResult = (double)((double (*)())outputScaleFromExponent)(iVar16);
   pfVar4 = local_b8;
   do {
     operandRecord2 = IRInst__getOperandRecord(inst3,0);
@@ -5797,7 +5802,7 @@ LAB_00162370:
       if (((int)*(char *)(sourceDef + 0x15c) >> (uVar13 & 0x3f) & 1U) == 0) {
         return 0;
       }
-      *pfVar4 = (float)(dVar21 * (double)*(float *)(uVar13 * 0x18 + sourceDef + 0x20));
+      *pfVar4 = (float)(outputScaleFromExponentResult * (double)*(float *)(uVar13 * 0x18 + sourceDef + 0x20));
     }
     moreComponentsB = loopIndex != 3;
     pfVar4 = pfVar4 + 1;
@@ -5812,7 +5817,7 @@ LAB_001627ec:
     pfVar4 = pfVar4 + 1;
     countdown = countdown + -1;
   } while (countdown != 0);
-  dVar21 = (double)((double (*)())outputScaleFromExponent)(iVar16);
+  outputScaleFromExponentResult = (double)((double (*)())outputScaleFromExponent)(iVar16);
   loopIndex = 0;
   local_c4 = operandSelectD;
   countdownB = 4;
@@ -5828,7 +5833,7 @@ LAB_001627ec:
   do {
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     if (*(char *)(loopIndex + operandRecord2 + 0x10) == '\0') {
-      *pfVar4 = (float)dVar21;
+      *pfVar4 = (float)outputScaleFromExponentResult;
     }
     else {
       IRInst__getOperandRecord(inst2,0);
@@ -5997,9 +6002,19 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
   int *operandVReg;
   bool moreComponents;
   int iVar2;
+  int sourceDef2;
+  int loopIndex;
+  int operandRecord;
   int *chainedSource;
   int iVar4;
+  int vcall100Result;
+  int operandCount;
+  int loopIndex2;
+  int sourceDef3;
+  int countdown2;
+  int operandRecord2;
   int *piVar5;
+  int *target;
   uint operandModifierBits;
   undefined4 selectWordToStore;
   int operandIndex4;
@@ -6020,20 +6035,20 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
   if ((inst != 0) && (inst = *instSlot, (*(uint *)(inst + 0x14) & 0x200) != 0)) {
     chainedSource = (int *)IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
     if (*(int *)(*(int *)(*instSlot + 0x88) + 8) == *(int *)(chainedSource[0x22] + 8)) {
-      iVar2 = IRInst__getOperandRecord(*instSlot,0);
-      instDestSelect = *(undefined4 *)(iVar2 + 0x10);
-      iVar4 = IRInst__getOperandRecord(chainedSource,0);
-      iVar2 = 0;
-      chainedDestSelect = *(undefined4 *)(iVar4 + 0x10);
-      iVar4 = 4;
+      operandRecord = IRInst__getOperandRecord(*instSlot,0);
+      instDestSelect = *(undefined4 *)(operandRecord + 0x10);
+      operandRecord2 = IRInst__getOperandRecord(chainedSource,0);
+      loopIndex = 0;
+      chainedDestSelect = *(undefined4 *)(operandRecord2 + 0x10);
+      countdown2 = 4;
       do {
-        if ((*(char *)((int)&instDestSelect + iVar2) != '\x01') &&
-           (*(char *)((int)&chainedDestSelect + iVar2) != '\x01')) {
+        if ((*(char *)((int)&instDestSelect + loopIndex) != '\x01') &&
+           (*(char *)((int)&chainedDestSelect + loopIndex) != '\x01')) {
           return 0;
         }
-        iVar2 = iVar2 + 1;
-        iVar4 = iVar4 + -1;
-      } while (iVar4 != 0);
+        loopIndex = loopIndex + 1;
+        countdown2 = countdown2 + -1;
+      } while (countdown2 != 0);
       inst2 = *instSlot;
       if ((*(int *)(inst2 + 0x120) == chainedSource[0x48]) && (*(int *)(inst2 + 0x124) == chainedSource[0x49])) {
         if (skipCompatCheck == 0) {
@@ -6055,12 +6070,12 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
         inst2 = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(inst2 + 0x88) + 8),
                              *(undefined4 *)(pass + 8));
         if (inst2 != 0) {
-          iVar2 = IRInst__getOperandSource(*instSlot,1);
+          sourceDef2 = IRInst__getOperandSource(*instSlot,1);
           iVar4 = IRInst__getOperandSource(chainedSource,2);
-          if (iVar2 == iVar4) {
-            iVar2 = IRInst__getOperandSource(*instSlot,2);
+          if (sourceDef2 == iVar4) {
+            sourceDef2 = IRInst__getOperandSource(*instSlot,2);
             iVar4 = IRInst__getOperandSource(chainedSource,1);
-            if (iVar2 == iVar4) {
+            if (sourceDef2 == iVar4) {
               operandPermutation[1] = 2;
               operandPermutation[2] = 1;
             }
@@ -6068,10 +6083,10 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
         }
         for (operandIndex = 1; iVar4 = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
             operandIndex <= iVar4; operandIndex = operandIndex + 1) {
-          iVar4 = IRInst__getOperandSource(*instSlot,operandIndex);
+          sourceDef3 = IRInst__getOperandSource(*instSlot,operandIndex);
           operandIndex4 = operandPermutation[operandIndex];
           iVar11 = IRInst__getOperandSource(chainedSource,operandIndex4);
-          if (iVar4 != iVar11) {
+          if (sourceDef3 != iVar11) {
             return 0;
           }
           operandModifierBits = *(uint *)(operandIndex * 0x18 + *instSlot + 0xa0);
@@ -6084,29 +6099,29 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
           operandVReg = (int *)IRInst__getOperandSource(*instSlot,operandIndex);
           iVar4 = (**(code **)(*operandVReg + 0x48))(operandVReg);
           if (iVar4 != 0) {
-            iVar4 = IRInst__getOperandRecord(*instSlot,operandIndex);
-            instOperandSelect = *(undefined4 *)(iVar4 + 0x10);
-            iVar4 = IRInst__getOperandRecord(chainedSource,operandIndex4);
-            chainedOperandSelect = *(undefined4 *)(iVar4 + 0x10);
-            piVar5 = *(int **)(*(int *)(pass + 8) + 0x30c);
-            iVar4 = (**(code **)(*piVar5 + 0x100))(piVar5,&instOperandSelect);
+            operandRecord2 = IRInst__getOperandRecord(*instSlot,operandIndex);
+            instOperandSelect = *(undefined4 *)(operandRecord2 + 0x10);
+            operandRecord2 = IRInst__getOperandRecord(chainedSource,operandIndex4);
+            chainedOperandSelect = *(undefined4 *)(operandRecord2 + 0x10);
+            target = *(int **)(*(int *)(pass + 8) + 0x30c);
+            iVar4 = (**(code **)(*target + 0x100))(target,&instOperandSelect);
             if (iVar4 != 0) {
-              piVar5 = *(int **)(*(int *)(pass + 8) + 0x30c);
-              iVar4 = (**(code **)(*piVar5 + 0x100))(piVar5,&chainedOperandSelect);
+              target = *(int **)(*(int *)(pass + 8) + 0x30c);
+              iVar4 = (**(code **)(*target + 0x100))(target,&chainedOperandSelect);
               if (iVar4 != 0) {
-                iVar4 = 0;
+                loopIndex2 = 0;
                 mergedOperandSelect = instOperandSelect;
                 iVar11 = 4;
                 do {
-                  if (*(char *)(iVar4 + (int)&chainedOperandSelect) == '\x04') {
-                    *(undefined1 *)(iVar4 + (int)&chainedOperandSelect) =
-                         *(undefined1 *)((int)&mergedOperandSelect + iVar4);
+                  if (*(char *)(loopIndex2 + (int)&chainedOperandSelect) == '\x04') {
+                    *(undefined1 *)(loopIndex2 + (int)&chainedOperandSelect) =
+                         *(undefined1 *)((int)&mergedOperandSelect + loopIndex2);
                   }
-                  iVar4 = iVar4 + 1;
+                  loopIndex2 = loopIndex2 + 1;
                   iVar11 = iVar11 + -1;
                 } while (iVar11 != 0);
-                piVar5 = *(int **)(*(int *)(pass + 8) + 0x30c);
-                iVar4 = (**(code **)(*piVar5 + 0x100))(piVar5,&chainedOperandSelect);
+                target = *(int **)(*(int *)(pass + 8) + 0x30c);
+                iVar4 = (**(code **)(*target + 0x100))(target,&chainedOperandSelect);
                 if (iVar4 == 0) {
                   return 0;
                 }
@@ -6114,47 +6129,47 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
             }
           }
         }
-        iVar2 = IRInst__getOperandRecord(*instSlot,0);
+        operandRecord = IRInst__getOperandRecord(*instSlot,0);
         newSelectCursor = newOperandSelects;
-        newDestSelect = *(undefined4 *)(iVar2 + 0x10);
+        newDestSelect = *(undefined4 *)(operandRecord + 0x10);
         for (operandIndex2 = 1; iVar4 = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
             operandIndex2 <= iVar4; operandIndex2 = operandIndex2 + 1) {
           iVar4 = IRInst__getOperandRecord(*instSlot,operandIndex2);
           *newSelectCursor = *(undefined4 *)(iVar4 + 0x10);
           newSelectCursor = newSelectCursor + 1;
         }
-        iVar2 = 0;
+        loopIndex = 0;
         do {
-          iVar4 = IRInst__getOperandRecord(chainedSource,0);
-          if (*(char *)(iVar2 + iVar4 + 0x10) != '\x01') {
-            iVar4 = IRInst__getOperandRecord(chainedSource,0);
+          operandRecord2 = IRInst__getOperandRecord(chainedSource,0);
+          if (*(char *)(loopIndex + operandRecord2 + 0x10) != '\x01') {
+            operandRecord2 = IRInst__getOperandRecord(chainedSource,0);
             iVar11 = 1;
             piVar5 = operandPermutation;
-            *(undefined1 *)((int)&newDestSelect + iVar2) = *(undefined1 *)(iVar2 + iVar4 + 0x10);
-            newSelectBytePtr = (undefined1 *)((int)newOperandSelects + iVar2);
+            *(undefined1 *)((int)&newDestSelect + loopIndex) = *(undefined1 *)(loopIndex + operandRecord2 + 0x10);
+            newSelectBytePtr = (undefined1 *)((int)newOperandSelects + loopIndex);
             while( true ) {
               piVar5 = piVar5 + 1;
-              iVar4 = (**(code **)(*chainedSource + 0x14))(chainedSource);
-              if (iVar4 < iVar11) break;
+              operandCount = (**(code **)(*chainedSource + 0x14))(chainedSource);
+              if (operandCount < iVar11) break;
               iVar11 = iVar11 + 1;
-              iVar4 = IRInst__getOperandRecord(chainedSource,*piVar5);
-              *newSelectBytePtr = *(undefined1 *)(iVar2 + iVar4 + 0x10);
+              operandRecord2 = IRInst__getOperandRecord(chainedSource,*piVar5);
+              *newSelectBytePtr = *(undefined1 *)(loopIndex + operandRecord2 + 0x10);
               newSelectBytePtr = newSelectBytePtr + 4;
             }
           }
-          moreComponents = iVar2 != 3;
-          iVar2 = iVar2 + 1;
+          moreComponents = loopIndex != 3;
+          loopIndex = loopIndex + 1;
         } while (moreComponents);
-        iVar4 = 0;
-        iVar2 = IRInst__getOperandRecord(*instSlot,*(undefined4 *)(*instSlot + 0x84));
-        newExtraSelect = *(undefined4 *)(iVar2 + 0x10);
+        loopIndex2 = 0;
+        operandRecord = IRInst__getOperandRecord(*instSlot,*(undefined4 *)(*instSlot + 0x84));
+        newExtraSelect = *(undefined4 *)(operandRecord + 0x10);
         do {
-          iVar2 = IRInst__getOperandRecord(chainedSource,0);
-          if (*(char *)(iVar4 + iVar2 + 0x10) != '\x01') {
-            *(undefined1 *)((int)&newExtraSelect + iVar4) = 4;
+          operandRecord = IRInst__getOperandRecord(chainedSource,0);
+          if (*(char *)(loopIndex2 + operandRecord + 0x10) != '\x01') {
+            *(undefined1 *)((int)&newExtraSelect + loopIndex2) = 4;
           }
-          moreComponents = iVar4 != 3;
-          iVar4 = iVar4 + 1;
+          moreComponents = loopIndex2 != 3;
+          loopIndex2 = loopIndex2 + 1;
         } while (moreComponents);
         iVar2 = 1;
         newSelectCursor = newOperandSelects;
@@ -6195,9 +6210,9 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
             *(int *)(newSource + 0x160) = *(int *)(newSource + 0x160) + 1;
             return 1;
           }
-          piVar5 = *(int **)(*(int *)(pass + 8) + 0x30c);
-          iVar4 = (**(code **)(*piVar5 + 0x100))(piVar5,newSelectCursor);
-          if (iVar4 == 0) break;
+          target = *(int **)(*(int *)(pass + 8) + 0x30c);
+          vcall100Result = (**(code **)(*target + 0x100))(target,newSelectCursor);
+          if (vcall100Result == 0) break;
           iVar2 = iVar2 + 1;
           newSelectCursor = newSelectCursor + 1;
         }
@@ -7293,7 +7308,7 @@ int Scheduler__getDependencyLatency(scheduler, producerInst, consumerInst, opera
   int dependencyKind;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 vcall78Result;
   undefined4 modelLatency [6];
   
   if (dependencyKind == 0) {
@@ -7309,8 +7324,8 @@ int Scheduler__getDependencyLatency(scheduler, producerInst, consumerInst, opera
          (iVar1 = (**(code **)(*producerInst + 0x28))(producerInst), iVar1 == 0)))) &&
        ((iVar1 = (**(code **)(*consumerInst + 0x60))(consumerInst), iVar1 == 0 &&
         (iVar1 = IRInst__isProjectionOfClass44(producerInst), iVar1 == 0)))) {
-      uVar2 = (**(code **)(**(int **)(scheduler + 8) + 0x78))(*(int **)(scheduler + 8));
-      return uVar2;
+      vcall78Result = (**(code **)(**(int **)(scheduler + 8) + 0x78))(*(int **)(scheduler + 8));
+      return vcall78Result;
     }
   }
   else if (dependencyKind == 1) {
@@ -9253,10 +9268,10 @@ int SchedNode__getLastConsumerCycle(node, component)
   int node;
   int component;
 {
-  uint uVar1;
+  uint vectorFilledCount;
   int *piVar2;
   int edge;
-  uint uVar4;
+  uint vectorFilledCount2;
   int latestCycle;
   uint loopIndex;
   uint *successorEdges;
@@ -9264,13 +9279,13 @@ int SchedNode__getLastConsumerCycle(node, component)
   loopIndex = 0;
   successorEdges = *(uint **)(node + 0x40);
   latestCycle = *(int *)(node + 0x2c);
-  uVar4 = successorEdges[1];
-  if (0 < (int)uVar4) {
+  vectorFilledCount2 = successorEdges[1];
+  if (0 < (int)vectorFilledCount2) {
     while( true ) {
       if (loopIndex < *successorEdges) {
-        uVar1 = successorEdges[1];
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + successorEdges[2],0,(loopIndex - uVar1) * 4 + 4);
+        vectorFilledCount = successorEdges[1];
+        if (vectorFilledCount <= loopIndex) {
+          _memset(vectorFilledCount * 4 + successorEdges[2],0,(loopIndex - vectorFilledCount) * 4 + 4);
           successorEdges[1] = loopIndex + 1;
         }
         piVar2 = (int *)(loopIndex * 4 + successorEdges[2]);
@@ -9284,7 +9299,7 @@ int SchedNode__getLastConsumerCycle(node, component)
          (edge = *(int *)(*(int *)(edge + 4) + 0x2c), latestCycle < edge)) {
         latestCycle = edge;
       }
-      if (uVar4 == loopIndex) break;
+      if (vectorFilledCount2 == loopIndex) break;
       successorEdges = *(uint **)(node + 0x40);
     }
   }
@@ -9645,6 +9660,8 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
   int isExternalProducer;
   uint producerIndex;
   undefined4 uVar18;
+  undefined4 vcall20Result;
+  undefined4 getDependencyLatencyResult;
   uint *allNodes;
   undefined4 local_88;
   undefined4 coveredLanes;
@@ -9732,8 +9749,8 @@ LAB_00168844:
           edgeAlloc[6] = 0;
           edgeAlloc[8] = 0;
           edgeAlloc[2] = consumerNode;
-          uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
-          edgeAlloc[4] = uVar18;
+          getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
+          edgeAlloc[4] = getDependencyLatencyResult;
           edgeAlloc[5] = operandIndex;
           edgeAlloc[6] = subOperandIndex;
           edgeAlloc[7] = coveredLanes;
@@ -9747,8 +9764,8 @@ LAB_00168844:
             if ((isPresub != 0) && (operandVReg[0x21] != 0)) {
               maskSource = (int *)IRInst__getOperandSource(operandVReg,1);
             }
-            uVar18 = (**(code **)(*(int *)scheduler[3] + 0x20))((int *)scheduler[3],maskSource);
-            edgeAlloc[8] = uVar18;
+            vcall20Result = (**(code **)(*(int *)scheduler[3] + 0x20))((int *)scheduler[3],maskSource);
+            edgeAlloc[8] = vcall20Result;
           }
           producerSuccEdges = *(uint **)(producerNode + 0x40);
           vectorCount2 = producerSuccEdges[1];
@@ -9823,11 +9840,11 @@ LAB_00168ab0:
                   edge[5] = 0;
                   edge[6] = 0;
                   edge[8] = 0;
-                  uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(partialWriterB + 0x38),
+                  getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(partialWriterB + 0x38),
                                         *(undefined4 *)(partialWriterA + 0x38),0,0,3);
                   partialWriterB = *edgeB;
                   partialWriterA = *edgeA;
-                  edge[4] = uVar18;
+                  edge[4] = getDependencyLatencyResult;
                   edge[7] = *(uint *)(*(int *)(partialWriterA + 0x38) + 0xc) &
                                *(uint *)(*(int *)(partialWriterB + 0x38) + 0xc);
                   writerBSuccEdges = *(uint **)(edge[1] + 0x40);
@@ -9883,9 +9900,9 @@ LAB_00168ab0:
     singleEdgeAlloc[6] = 0;
     singleEdgeAlloc[8] = 0;
     singleEdgeAlloc[2] = consumerNode;
-    uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
+    getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
     singleEdgeAlloc[5] = operandIndex;
-    singleEdgeAlloc[4] = uVar18;
+    singleEdgeAlloc[4] = getDependencyLatencyResult;
     singleEdgeAlloc[6] = subOperandIndex;
     singleEdgeAlloc[7] = operandVReg[3];
   }
@@ -9907,8 +9924,8 @@ LAB_00168ab0:
     singleEdgeAlloc[5] = 0;
     singleEdgeAlloc[6] = 0;
     singleEdgeAlloc[2] = consumerNode;
-    uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,0,3);
-    singleEdgeAlloc[4] = uVar18;
+    getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,0,3);
+    singleEdgeAlloc[4] = getDependencyLatencyResult;
     singleEdgeAlloc[7] = inst[3];
   }
   producerSuccEdges = *(uint **)(producerNode + 0x40);
@@ -10917,7 +10934,7 @@ int Scheduler__buildDependencyGraph(scheduler, block)
   undefined4 *succAppendSlot;
   undefined4 *predEdgeSlot;
   int latestSlot10Node;
-  uint uVar13;
+  uint vectorFilledCount;
   int *inst;
   undefined4 *nodeAlloc;
   int sourceOperandCount;
@@ -10930,7 +10947,7 @@ int Scheduler__buildDependencyGraph(scheduler, block)
   int latestSlot11Node;
   undefined4 *schedNode;
   uint *lastWriterSet;
-  undefined4 uVar26;
+  undefined4 getDependencyLatencyResult;
   uint *nodeVector;
   /* issue #64 live-repro (crash #11, past the 0x275c dropped-arg fix): auStack_78 is declared
    * as only 8 bytes, but DListNode__init(auStack_78) - a sentinel-node doubly-linked-list
@@ -11126,9 +11143,9 @@ LAB_0016a958:
                           edgeAlloc[6] = 0;
                           edgeAlloc[8] = 0;
                           edgeAlloc[2] = loopIndexProducer;
-                          uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(operandProducer + 0x38),
+                          getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(operandProducer + 0x38),
                                                 *(undefined4 *)(loopIndexProducer + 0x38),0,0,5);
-                          edgeAlloc[4] = uVar26;
+                          edgeAlloc[4] = getDependencyLatencyResult;
                           producerSuccEdges = *(uint **)(operandProducer + 0x40);
                           edgeVectorCount = producerSuccEdges[1];
                           if (edgeVectorCount < *producerSuccEdges) {
@@ -11198,8 +11215,8 @@ LAB_0016a958:
                     edgeAlloc[6] = 0;
                     edgeAlloc[2] = schedNode;
                     edgeAlloc[3] = 1;
-                    uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,chainNodeInst,inst,0,0,1);
-                    edgeAlloc[4] = uVar26;
+                    getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,chainNodeInst,inst,0,0,1);
+                    edgeAlloc[4] = getDependencyLatencyResult;
                     chainNodeSuccEdges = *(uint **)(chainNode + 0x40);
                     elementCount = chainNodeSuccEdges[1];
                     if (elementCount < *chainNodeSuccEdges) {
@@ -11257,8 +11274,8 @@ LAB_0016a958:
                 edgeAlloc[5] = 0;
                 edgeAlloc[6] = 0;
                 edgeAlloc[2] = schedNode;
-                uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,prevNodeInst,inst,0,0,1);
-                edgeAlloc[4] = uVar26;
+                getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,prevNodeInst,inst,0,0,1);
+                edgeAlloc[4] = getDependencyLatencyResult;
                 prevNodeSuccEdges = *(uint **)(prevNode + 0x40);
                 countWord = prevNodeSuccEdges[1];
                 if (countWord < *prevNodeSuccEdges) {
@@ -11424,8 +11441,8 @@ LAB_0016b038:
               nodeAlloc[8] = 0;
               nodeAlloc[2] = laterWriterNode;
               nodeAlloc[3] = 1;
-              uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,laterWriterInst,0,0,1);
-              nodeAlloc[4] = uVar26;
+              getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,laterWriterInst,0,0,1);
+              nodeAlloc[4] = getDependencyLatencyResult;
               curSuccEdges = *(uint **)(curNode + 0x40);
               vectorCount = curSuccEdges[1];
               if (vectorCount < *curSuccEdges) {
@@ -11466,8 +11483,8 @@ LAB_0016b038:
             nodeAlloc[8] = 0;
             nodeAlloc[2] = carriedSlot10Node;
             nodeAlloc[3] = 4;
-            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot10Node + 0x38),0,0,4);
-            nodeAlloc[4] = uVar26;
+            getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot10Node + 0x38),0,0,4);
+            nodeAlloc[4] = getDependencyLatencyResult;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11505,8 +11522,8 @@ LAB_0016b038:
             nodeAlloc[8] = 0;
             nodeAlloc[2] = carriedSlot11Node;
             nodeAlloc[3] = 4;
-            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot11Node + 0x38),0,0,4);
-            nodeAlloc[4] = uVar26;
+            getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot11Node + 0x38),0,0,4);
+            nodeAlloc[4] = getDependencyLatencyResult;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11542,9 +11559,9 @@ LAB_0016b038:
                   nodeVector = (uint *)scheduler[6];
                   readerWriterIndex = readerWriterInst[0x54];
                   if (readerWriterIndex < *nodeVector) {
-                    uVar13 = nodeVector[1];
-                    if (uVar13 <= readerWriterIndex) {
-                      _memset(uVar13 * 4 + nodeVector[2],0,(readerWriterIndex - uVar13) * 4 + 4);
+                    vectorFilledCount = nodeVector[1];
+                    if (vectorFilledCount <= readerWriterIndex) {
+                      _memset(vectorFilledCount * 4 + nodeVector[2],0,(readerWriterIndex - vectorFilledCount) * 4 + 4);
                       nodeVector[1] = readerWriterIndex + 1;
                     }
                     writerNodeSlot = (int *)(readerWriterIndex * 4 + nodeVector[2]);
@@ -11564,8 +11581,8 @@ LAB_0016b038:
                   nodeAlloc[6] = 0;
                   nodeAlloc[8] = 0;
                   nodeAlloc[2] = readerWriterNode;
-                  uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,readerWriterInst,sourceNumber,0,2);
-                  nodeAlloc[4] = uVar26;
+                  getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,readerWriterInst,sourceNumber,0,2);
+                  nodeAlloc[4] = getDependencyLatencyResult;
                   curSuccEdges = *(uint **)(curNode + 0x40);
                   vectorCount = curSuccEdges[1];
                   if (vectorCount < *curSuccEdges) {
@@ -11606,8 +11623,8 @@ LAB_0016b038:
             nodeAlloc[8] = 0;
             nodeAlloc[2] = latestSlot11Node;
             nodeAlloc[3] = 4;
-            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot11Node + 0x38),0,0,4);
-            nodeAlloc[4] = uVar26;
+            getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot11Node + 0x38),0,0,4);
+            nodeAlloc[4] = getDependencyLatencyResult;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11644,8 +11661,8 @@ LAB_0016b038:
             nodeAlloc[6] = 0;
             nodeAlloc[2] = latestSlot10Node;
             nodeAlloc[3] = 4;
-            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot10Node + 0x38),0,0,4);
-            nodeAlloc[4] = uVar26;
+            getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot10Node + 0x38),0,0,4);
+            nodeAlloc[4] = getDependencyLatencyResult;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11685,8 +11702,8 @@ LAB_0016b038:
               nodeAlloc[8] = 0;
               nodeAlloc[2] = listNode;
               nodeAlloc[3] = 4;
-              uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,4);
-              nodeAlloc[4] = uVar26;
+              getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,4);
+              nodeAlloc[4] = getDependencyLatencyResult;
               curSuccEdges = *(uint **)(curNode + 0x40);
               vectorCount = curSuccEdges[1];
               if (vectorCount < *curSuccEdges) {
@@ -11733,8 +11750,8 @@ LAB_0016b038:
                 nodeAlloc[6] = 0;
                 nodeAlloc[8] = 0;
                 nodeAlloc[2] = listNode;
-                uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,2);
-                nodeAlloc[4] = uVar26;
+                getDependencyLatencyResult = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,2);
+                nodeAlloc[4] = getDependencyLatencyResult;
                 curSuccEdges = *(uint **)(curNode + 0x40);
                 vectorCount = curSuccEdges[1];
                 if (vectorCount < *curSuccEdges) {

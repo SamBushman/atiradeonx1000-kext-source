@@ -1914,7 +1914,11 @@ int Program__valueNumberInst(program, valueNumber, param_3, keyRef, param_5)
   int canonicalizeCommutativeOperandsResult;
   int valueNumberEnabled;
   int iVar1;
+  int vcall64Result;
+  int vcall68Result;
+  int callResult;
   int iVar2;
+  int callResult2;
   uint vectorFilledCount;
   undefined4 *vectorElementRef;
   undefined4 result;
@@ -1940,19 +1944,19 @@ LAB_00175e58:
         if (canonicalizeCommutativeOperandsResult != 0) {
           ((int (*)())ValueKey__rebuild)(*keyRef);
         }
-        iVar1 = ((int (*)())FUN_001758d8)(*keyRef,valueNumber,param_3,program);
+        callResult = ((int (*)())FUN_001758d8)(*keyRef,valueNumber,param_3,program);
         ((int (*)())FUN_00175b40)(*keyRef);
         ValueKey__propagateLaneValues(*keyRef);
-        iVar2 = ((int (*)())FUN_00174888)(*keyRef,valueNumber,param_3,program);
-        if (iVar2 == 0) {
+        callResult2 = ((int (*)())FUN_00174888)(*keyRef,valueNumber,param_3,program);
+        if (callResult2 == 0) {
           iVar2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 100))(*(int **)(*keyRef + 0xb0));
           if ((((iVar2 == 0) &&
                (iVar2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))
                                   (*(int **)(*keyRef + 0xb0)), iVar2 == 0)) &&
               (iVar2 = FUN_00172fb8(*keyRef), iVar2 == 0)) &&
              (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),8), iVar2 != 0)) {
-            iVar2 = ((int (*)())FUN_001747c4)(*keyRef,valueNumber,param_3,program);
-            if ((iVar2 != 0) && (iVar2 = ((int (*)())FUN_00173cdc)(*keyRef,iVar2), iVar2 != 0)) {
+            callResult2 = ((int (*)())FUN_001747c4)(*keyRef,valueNumber,param_3,program);
+            if ((callResult2 != 0) && (callResult2 = ((int (*)())FUN_00173cdc)(*keyRef,callResult2), callResult2 != 0)) {
               keyInst = *(int *)(*keyRef + 0xb0);
               currentDefinition2 = VReg__currentDefinition(*(undefined4 *)(keyInst + 0xa4),*(undefined4 *)(program + 0x3a0),
                                    *(uint *)(program + 8));
@@ -1992,16 +1996,16 @@ LAB_001760e4:
                (valueKey2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))
                                   (*(int **)(*keyRef + 0xb0)), valueKey2 == 0)) &&
               (valueKey2 = FUN_00172fb8(*keyRef), valueKey2 == 0)) &&
-             (((iVar1 != 0 && (iVar1 = ((int (*)())FUN_00173754)(*keyRef,iVar1), iVar1 != 0)) ||
-              (iVar1 = ((int (*)())FUN_0017494c)(*keyRef,valueNumber,param_3), iVar1 != 0)))) {
+             (((callResult != 0 && (callResult = ((int (*)())FUN_00173754)(*keyRef,callResult), callResult != 0)) ||
+              (callResult = ((int (*)())FUN_0017494c)(*keyRef,valueNumber,param_3), callResult != 0)))) {
             inst = *(int *)(*keyRef + 0xb0);
             currentDefinition = VReg__currentDefinition(*(undefined4 *)(inst + 0xa4),*(undefined4 *)(program + 0x3a0),
                                  *(uint *)(program + 8));
             if ((inst == *(int *)(currentDefinition + 0xb0)) &&
                (currentDefinition = Program__tryEliminateRedundantCopy(program,inst,param_5), currentDefinition != 0)) goto LAB_0017624c;
           }
-          iVar1 = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))(*(int **)(*keyRef + 0xb0));
-          if (iVar1 == 0) {
+          vcall68Result = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))(*(int **)(*keyRef + 0xb0));
+          if (vcall68Result == 0) {
             vector2 = *(uint **)(program + 0x408);
             if (valueNumber < *vector2) {
               vectorFilledCount = vector2[1];
@@ -2019,11 +2023,11 @@ LAB_001760e4:
           }
           goto LAB_00176244;
         }
-        eliminateRedundantInstResult = ((int (*)())Program__eliminateRedundantInst)(iVar2,*(undefined4 *)(*keyRef + 0xb0),param_5,program);
+        eliminateRedundantInstResult = ((int (*)())Program__eliminateRedundantInst)(callResult2,*(undefined4 *)(*keyRef + 0xb0),param_5,program);
         if (eliminateRedundantInstResult == 0) goto LAB_00176244;
-        *keyRef = iVar2;
-        iVar1 = (**(code **)(**(int **)(iVar2 + 0xb0) + 100))(*(int **)(iVar2 + 0xb0));
-        if (iVar1 == 0) {
+        *keyRef = callResult2;
+        vcall64Result = (**(code **)(**(int **)(callResult2 + 0xb0) + 100))(*(int **)(callResult2 + 0xb0));
+        if (vcall64Result == 0) {
           iVar1 = *(int *)(*keyRef + 0xb0);
           if (*(int *)(iVar1 + 0x160) <= *(int *)(program + 0x478)) {
             *(int *)(iVar1 + 0x160) = *(int *)(program + 0x478) + 1;
@@ -2365,12 +2369,13 @@ int FUN_0017672c(ctx)
   int ctx;
 {
   int iVar1;
+  int vcall14Result;
   int loopIndex;
   
   loopIndex = 1;
   while( true ) {
-    iVar1 = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0));
-    if (iVar1 < loopIndex) {
+    vcall14Result = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0));
+    if (vcall14Result < loopIndex) {
       return 1;
     }
     iVar1 = OpcodeTraits__instFlagBit2(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(ctx + 0xb0));
@@ -2389,14 +2394,15 @@ int FUN_001767d8(ctx, param_2)
   int param_2;
 {
   int iVar1;
+  int vcall14Result;
   int loopIndex;
   int *piVar3;
   
   piVar3 = (int *)(param_2 * 4 + ctx + 0x178);
   loopIndex = 1;
   while( true ) {
-    iVar1 = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0));
-    if (iVar1 < loopIndex) {
+    vcall14Result = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0));
+    if (vcall14Result < loopIndex) {
       return 1;
     }
     iVar1 = *piVar3;
@@ -2462,14 +2468,15 @@ int FUN_00176954(ctx, param_2)
   undefined4 valueNumberForExprResult;
   undefined4 uVar4;
   int iVar5;
+  int evaluateCompareFloatsResult;
   
   iVar5 = param_2 * 4 + ctx;
   if ((*(int *)(iVar5 + 0x178) < 0) && (*(int *)(iVar5 + 0x188) < 0)) {
     exprRecordForValueNumberResult = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar5 + 0x178));
     exprRecordForValueNumberResultB = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar5 + 0x188));
-    iVar5 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecordForValueNumberResult,(double)*exprRecordForValueNumberResultB);
+    evaluateCompareFloatsResult = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecordForValueNumberResult,(double)*exprRecordForValueNumberResultB);
     uVar4 = 0x3f800000;
-    if (iVar5 == 0) {
+    if (evaluateCompareFloatsResult == 0) {
       uVar4 = 0;
     }
     valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),uVar4);

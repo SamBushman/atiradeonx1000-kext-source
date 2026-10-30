@@ -98,7 +98,7 @@ int Program__moveInterpFetchesOutOfIfs(param_1)
   int *hoistTargetBlock;
   int *block;
   int *entryBlock;
-  int iVar5;
+  int isOpcodeInSet139344Result;
   int nextInst;
   int inst;
   
@@ -114,8 +114,8 @@ int Program__moveInterpFetchesOutOfIfs(param_1)
       if (instListNext != 0) {
         do {
           nextInst = instListNext;
-          iVar5 = ((int (*)())IRInst__isOpcodeInSet139344)(inst);
-          if (iVar5 != 0) {
+          isOpcodeInSet139344Result = ((int (*)())IRInst__isOpcodeInSet139344)(inst);
+          if (isOpcodeInSet139344Result != 0) {
             operandVReg = (int *)IRInst__getOperandSource(inst,1);
             vcall4cResult = (**(code **)(*operandVReg + 0x4c))(operandVReg);
             walkBlock = block;
@@ -260,7 +260,7 @@ int FUN_001398b4(inst, param_2, param_3, program)
   undefined4 opcodeInfo;
   int sourceDef;
   int operandRecord2;
-  int iVar1;
+  int sourceIsSplatConstantResult2;
   int operandVReg;
   int operandRecord;
   int operandVReg2;
@@ -282,9 +282,9 @@ int FUN_001398b4(inst, param_2, param_3, program)
   operandVReg = IRInst__getOperandSource(inst,2);
   producerOpcodeInfo = *(int *)(operandVReg + 0x88);
   if ((*(int *)(producerOpcodeInfo + 8) == 0x24) && ((*(uint *)(operandVReg + 0x14) & 0x200) == 0)) {
-    iVar1 = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(operandVReg,2,(double)FLOAT_001aa0d4);
-    if ((iVar1 == 0) ||
-       (((iVar1 = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(operandVReg,3,(double)FLOAT_001aa0e8), iVar1 == 0 ||
+    sourceIsSplatConstantResult2 = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(operandVReg,2,(double)FLOAT_001aa0d4);
+    if ((sourceIsSplatConstantResult2 == 0) ||
+       (((sourceIsSplatConstantResult2 = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(operandVReg,3,(double)FLOAT_001aa0e8), sourceIsSplatConstantResult2 == 0 ||
          ((*(uint *)(operandVReg + 0xb8) & 1) != 0)) || ((*(uint *)(operandVReg + 0xb8) & 2) != 0)))) {
       producerOpcodeInfo = *(int *)(operandVReg + 0x88);
       goto LAB_00139c2c;
@@ -387,13 +387,13 @@ int FUN_00139c78(inst, parentInst, orderKey, program)
   int program;
 {
   int vcall70Result;
-  int iVar1;
+  int callResult;
   int *target;
   
   if (((*(uint *)(inst + 0x14) & 1) != 0) &&
      ((parentInst == 0 || ((*(uint *)(parentInst + 0x14) & 1) != 0)))) {
-    iVar1 = ((int (*)())FUN_001398b4)(inst,parentInst,orderKey,program);
-    if (iVar1 != 0) {
+    callResult = ((int (*)())FUN_001398b4)(inst,parentInst,orderKey,program);
+    if (callResult != 0) {
       *(int *)(inst + 0x150) = *(int *)(program + 0x474) + -1;
     }
     target = *(int **)(*(int *)(program + 8) + 0x30c);
@@ -1968,7 +1968,7 @@ int FUN_0013c210(program)
   int slotByteOffset;
   int sourceDef;
   bool descending;
-  int iVar2;
+  int isOptionEnabledResult;
   undefined4 *stackPushSlot;
   int *stackPushSlotB;
   int callResult;
@@ -1998,10 +1998,10 @@ int FUN_0013c210(program)
   #define vec2Data (*(int *)(local_44_buf + 0x08))
   #define vec2Arena (*(undefined4 *)(local_44_buf + 0x0c))
   
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1c);
-  if ((((iVar2 == 0) && (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1d), iVar2 == 0)) &&
-      (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x39), iVar2 == 0)) &&
-     (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1b), iVar2 == 0)) {
+  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1c);
+  if ((((isOptionEnabledResult == 0) && (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1d), isOptionEnabledResult == 0)) &&
+      (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x39), isOptionEnabledResult == 0)) &&
+     (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1b), isOptionEnabledResult == 0)) {
     Compiler__logf(*(undefined4 *)(program + 8),
                  "Special : all peephole flags off -> bypass Rewrite()\n",in_r5,in_r6,in_r7,in_r8,
                  in_r9,in_r10);
@@ -2377,8 +2377,10 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   int *nextInst;
   int *scanInst;
   int iVar3;
+  int isNotAmong3Result;
   int iVar4;
   int iVar5;
+  int isNotAmong3Result2;
   undefined4 predecessorBlock;
   undefined4 operandVReg2;
   undefined4 operandVReg3;
@@ -2496,8 +2498,8 @@ LAB_0013cd68:
 LAB_0013cee8:
                   uVar9 = thenBlock;
                   in_r6 = elseBlock;
-                  iVar5 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
-                  if (iVar5 == 0) {
+                  isNotAmong3Result2 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
+                  if (isNotAmong3Result2 == 0) {
                     return;
                   }
                 }
@@ -2538,13 +2540,13 @@ LAB_0013cee8:
               if (*(int *)(joinInstB[0x22] + 8) == 0x8e) {
                 operandVReg2 = IRInst__getOperandSource(joinInstB,1);
                 operandVReg3 = IRInst__getOperandSource(joinInstB,2);
-                iVar3 = Node__isNotAmong3(operandVReg2,block,thenBlock,elseBlock);
-                if (iVar3 == 0) {
+                isNotAmong3Result = Node__isNotAmong3(operandVReg2,block,thenBlock,elseBlock);
+                if (isNotAmong3Result == 0) {
                   DList__unlink(operandVReg2);
                   Block__appendInst(predecessorBlock,operandVReg2);
                 }
-                iVar3 = Node__isNotAmong3(operandVReg3,block,thenBlock,elseBlock);
-                if (iVar3 == 0) {
+                isNotAmong3Result = Node__isNotAmong3(operandVReg3,block,thenBlock,elseBlock);
+                if (isNotAmong3Result == 0) {
                   DList__unlink(operandVReg3);
                   Block__appendInst(predecessorBlock,operandVReg3);
                 }
@@ -2575,16 +2577,17 @@ int pass_rewrite(program)
   int vcall24Result;
   int *piVar1;
   int iVar2;
+  int isOptionEnabledResult;
   int *piVar3;
   undefined4 local_28;
   undefined4 local_24;
   undefined4 local_20;
   undefined4 local_1c;
   
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x13);
-  if (iVar2 != 0) {
-    iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x17);
-    if (iVar2 != 0) {
+  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x13);
+  if (isOptionEnabledResult != 0) {
+    isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x17);
+    if (isOptionEnabledResult != 0) {
       Program__foldUselessPhis(program);
     }
     ((int (*)())Program__scanUsevectorChains)(program);
@@ -2615,8 +2618,8 @@ int pass_rewrite(program)
   piVar3 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
   (**(code **)(*piVar3 + 0x110))(piVar3,program);
   *(uint *)(program + PROG_flags) = *(uint *)(program + PROG_flags) & 0xffffff7f;
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x19);
-  if (iVar2 != 0) {
+  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x19);
+  if (isOptionEnabledResult != 0) {
     piVar3 = *(int **)(program + PROG_blockListHead);
     for (piVar1 = (int *)(*(int **)(program + PROG_blockListHead))[2]; piVar1 != (int *)0x0;
         piVar1 = (int *)piVar1[2]) {
@@ -2627,15 +2630,15 @@ int pass_rewrite(program)
       piVar3 = piVar1;
     }
   }
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x37);
-  if (iVar2 != 0) {
+  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x37);
+  if (isOptionEnabledResult != 0) {
     Program__packPsInputs(program);
   }
   ((int (*)())FUN_0013c210)(program);
   ((int (*)())Program__eliminateDeadInstsAndRecountUses)(program,0);
   Program__beginPass(program,(int)"rewrite");
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x1f);
-  if (iVar2 != 0) {
+  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x1f);
+  if (isOptionEnabledResult != 0) {
     pass_loop_trans(program);
   }
   return;
@@ -5266,7 +5269,7 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
   int iVar1;
   int operandVReg;
   undefined4 operandVReg2;
-  uint uVar4;
+  uint vectorFilledCount;
   int *piVar5;
   int iVar6;
   uint loopIndex2;
@@ -5298,13 +5301,13 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
       } while (loopIndex <= iVar1);
     }
     puVar8 = *(uint **)(inst2 + 0x10);
-    uVar4 = puVar8[1];
-    if (uVar4 != 0) {
+    vectorFilledCount = puVar8[1];
+    if (vectorFilledCount != 0) {
       loopIndex2 = 0;
       do {
         if (loopIndex2 < *puVar8) {
-          if (uVar4 <= loopIndex2) {
-            _memset(uVar4 * 4 + puVar8[2],0,(loopIndex2 - uVar4) * 4 + 4);
+          if (vectorFilledCount <= loopIndex2) {
+            _memset(vectorFilledCount * 4 + puVar8[2],0,(loopIndex2 - vectorFilledCount) * 4 + 4);
             puVar8[1] = loopIndex2 + 1;
           }
           piVar5 = (int *)(loopIndex2 * 4 + puVar8[2]);
@@ -5317,8 +5320,8 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
         }
         puVar8 = *(uint **)(inst2 + 0x10);
         loopIndex2 = loopIndex2 + 1;
-        uVar4 = puVar8[1];
-      } while (loopIndex2 < uVar4);
+        vectorFilledCount = puVar8[1];
+      } while (loopIndex2 < vectorFilledCount);
     }
   }
   else {
@@ -5363,14 +5366,14 @@ int PostPack__canPairInEitherOrder(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 *param_4;
 {
-  int iVar1;
+  int callResult;
   undefined4 uVar2;
   
-  iVar1 = ((int (*)())FUN_001416b4)(param_1,param_2,param_3,0);
-  if (iVar1 == 0) {
-    iVar1 = ((int (*)())FUN_001416b4)(param_1,param_3,param_2,0);
+  callResult = ((int (*)())FUN_001416b4)(param_1,param_2,param_3,0);
+  if (callResult == 0) {
+    callResult = ((int (*)())FUN_001416b4)(param_1,param_3,param_2,0);
     uVar2 = 0;
-    if (iVar1 != 0) {
+    if (callResult != 0) {
       uVar2 = 1;
       *param_4 = 1;
     }
@@ -6118,7 +6121,7 @@ int FUN_001427a4(param_1, param_2, inst)
   int vcall5cResult;
   undefined4 *puVar2;
   int *piVar3;
-  uint uVar4;
+  uint vectorFilledCount;
   uint uVar5;
   uint *puVar6;
   int *piVar7;
@@ -6135,14 +6138,14 @@ int FUN_001427a4(param_1, param_2, inst)
   }
   else {
     puVar6 = (uint *)inst[4];
-    uVar4 = puVar6[1];
+    vectorFilledCount = puVar6[1];
     uVar5 = DAT_001b0040;
-    if (uVar4 != 0) {
+    if (vectorFilledCount != 0) {
       loopIndex = 0;
       do {
         if (loopIndex < *puVar6) {
-          if (uVar4 <= loopIndex) {
-            _memset(uVar4 * 4 + puVar6[2],0,(loopIndex - uVar4) * 4 + 4);
+          if (vectorFilledCount <= loopIndex) {
+            _memset(vectorFilledCount * 4 + puVar6[2],0,(loopIndex - vectorFilledCount) * 4 + 4);
             puVar6[1] = loopIndex + 1;
           }
           puVar2 = (undefined4 *)(loopIndex * 4 + puVar6[2]);
@@ -6168,8 +6171,8 @@ int FUN_001427a4(param_1, param_2, inst)
           }
         }
         puVar6 = (uint *)inst[4];
-        uVar4 = puVar6[1];
-      } while (loopIndex < uVar4);
+        vectorFilledCount = puVar6[1];
+      } while (loopIndex < vectorFilledCount);
     }
     ((int (*)())FUN_00141044)(local_2c,param_2,inst);
     *param_1 = uVar5 & local_2c[0];
@@ -6202,7 +6205,7 @@ int FUN_00142974(pass, inst, fromLane, toLane)
   int *extraSourceOfUser;
   uint userIndexPlus1;
   int userByteOffset;
-  int iVar7;
+  int flag1WithoutFlag7Result;
   int iVar8;
   uint loopIndex2;
   uint loopIndex;
@@ -6337,8 +6340,8 @@ LAB_00142c3c:
     ((int (*)())FUN_00141090)(&pendingUsedLanesOut,pass,pendingInst);
     pendingUsedLanes = pendingUsedLanesOut;
     if (*(char *)((int)&pendingUsedLanes + fromLane) != '\0') {
-      iVar7 = OpcodeTraits__flag1WithoutFlag7(*pass,pendingInst);
-      if (((iVar7 == 0) || (*(char *)((int)&pendingUsedLanes + toLane) != '\0')) ||
+      flag1WithoutFlag7Result = OpcodeTraits__flag1WithoutFlag7(*pass,pendingInst);
+      if (((flag1WithoutFlag7Result == 0) || (*(char *)((int)&pendingUsedLanes + toLane) != '\0')) ||
          (*(char *)((int)&laneMaskWord + toLane) != '\0')) goto LAB_00142f88;
       pendingUserVec = *(uint **)(pendingInst + 0x10);
       if (pendingUserVec[1] != 0) {
@@ -8236,6 +8239,7 @@ int pass_post_pack_insts(param_1)
   int nextInstB;
   int iVar5;
   int iVar6;
+  int flag1WithoutFlag7Result;
   int block;
   int iVar8;
   undefined4 arenaAt378;
@@ -8308,8 +8312,8 @@ int pass_post_pack_insts(param_1)
         do {
           iVar5 = iVar6;
           if ((*(uint *)(instA + 0x14) & 1) != 0) {
-            iVar6 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),instA);
-            if (iVar6 != 0) {
+            flag1WithoutFlag7Result = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),instA);
+            if (flag1WithoutFlag7Result != 0) {
               atScanStart = true;
               iVar6 = *(int *)(param_1[1] + 900);
               for (iVar5 = *(int *)(*(int *)(param_1[1] + 900) + 8); iVar5 != 0;
@@ -9003,12 +9007,12 @@ int FUN_001467e8(param_1, param_2)
   int param_2;
 {
   int vcall24Result;
-  int iVar1;
+  int isOpcodeInSet139344Result;
   int *piVar2;
   int *piVar3;
   
-  iVar1 = ((int (*)())IRInst__isOpcodeInSet139344)(param_1);
-  if (iVar1 != 0) {
+  isOpcodeInSet139344Result = ((int (*)())IRInst__isOpcodeInSet139344)(param_1);
+  if (isOpcodeInSet139344Result != 0) {
     piVar2 = *(int **)(param_2 + 0x3a0);
     for (piVar3 = *(int **)(param_1 + 0x158); piVar2 != piVar3; piVar3 = (int *)piVar3[0x3c]) {
       vcall24Result = (**(code **)(*piVar3 + 0x24))(piVar3);
