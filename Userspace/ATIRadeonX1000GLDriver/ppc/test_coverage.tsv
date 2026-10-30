@@ -1612,12 +1612,12 @@
 0xf92fc	Program__appendInst	480	no	indirect call (driver context / vtable / callback)
 0xf94dc	FUN_000f94dc	1268	no	indirect call (driver context / vtable / callback)
 0xf9a58	FUN_000f9a58	3748	no	indirect call (driver context / vtable / callback)
-0xfa958	FUN_000fa958	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xfa958	Template__bindOperand	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xfadc4	Program__createIfBlock	448	yes	
 0xfafa4	Program__createConstantVReg	652	yes	
 0xfb230	Program__loadDefaultConstants	420	yes	
 0xfb3d4	FUN_000fb3d4	8428	no	indirect call (driver context / vtable / callback)
-0xfd50c	FUN_000fd50c	188	yes	
+0xfd50c	Template__pushCallFrame	188	yes	
 0xfd5c8	FUN_000fd5c8	24388	no	indirect call (driver context / vtable / callback)
 0x103d50	IROperand__setModifierBits	40	yes	
 0x103d78	floatToFixedSaturate	220	yes	

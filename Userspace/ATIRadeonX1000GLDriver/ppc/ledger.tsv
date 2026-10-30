@@ -1612,12 +1612,12 @@
 0xf92fc	480	Program__appendInst	part_026	converted
 0xf94dc	968	FUN_000f94dc	part_026	converted
 0xf9a58	2736	FUN_000f9a58	part_026	converted
-0xfa958	1132	FUN_000fa958	part_026	converted
+0xfa958	1132	Template__bindOperand	part_026	converted
 0xfadc4	240	Program__createIfBlock	part_026	converted
 0xfafa4	652	Program__createConstantVReg	part_026	converted
 0xfb230	420	Program__loadDefaultConstants	part_026	converted
 0xfb3d4	2560	FUN_000fb3d4	part_026	converted
-0xfd50c	188	FUN_000fd50c	part_026	converted
+0xfd50c	188	Template__pushCallFrame	part_026	converted
 0xfd5c8	408	FUN_000fd5c8	part_026	converted
 0x103d50	40	IROperand__setModifierBits	part_027	converted
 0x103d78	220	floatToFixedSaturate	part_027	converted
