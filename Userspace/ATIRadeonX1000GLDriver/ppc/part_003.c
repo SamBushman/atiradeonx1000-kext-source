@@ -4588,69 +4588,69 @@ int FUN_00020330(param_1, param_2)
 }
 
 /* gldDisplayNotificationCallback @ 0x20420 (1716 bytes) */
-int gldDisplayNotificationCallback(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  int param_5;
-  undefined4 param_6;
-  uint param_7;
-  undefined4 param_8;
+int gldDisplayNotificationCallback(unusedArg1, ctx, unusedArg3, staleArgR6, notificationDict, staleArgR8, staleArgR9, staleArgR10)
+  undefined4 unusedArg1;
+  int ctx;
+  undefined4 unusedArg3;
+  undefined4 staleArgR6;
+  int notificationDict;
+  undefined4 staleArgR8;
+  uint staleArgR9;
+  undefined4 staleArgR10;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  int keyPid;
+  int keyGlDisplayMask;
+  int keyLogNotifications;
+  int keyFsaaSamples;
+  int keyFsaaMode;
+  int keyAnisoLevel;
+  int keyVsyncMode;
+  int keyPerformanceLevel;
   int scratchInt9;
   int value2;
   int *scratchPtr11;
-  int iVar12;
-  uint uVar13;
-  int iStack_68;
-  uint uStack_64;
-  int iStack_60;
-  int iStack_5c;
-  int iStack_58;
-  int iStack_54;
-  int iStack_50;
-  int aiStack_4c [3];
+  int notificationDictCopy;
+  uint displayMaskCopy;
+  int performanceLevel;
+  uint receivedDisplayMask;
+  int logNotifications;
+  int fsaaSamples;
+  int fsaaMode;
+  int anisoLevel;
+  int vsyncMode;
+  int receivedPid [3];
   
-  iStack_68 = 0;
-  aiStack_4c[0] = 0;
-  uStack_64 = 0;
-  iStack_60 = 0;
-  iStack_5c = 0;
-  iStack_58 = 0;
-  iStack_54 = 0;
-  iStack_50 = 0;
-  if (param_5 != 0) {
-    iVar12 = param_5;
-    iVar1 = _CFStringCreateWithCString(0,"pid",0x600);
-    iVar2 = _CFStringCreateWithCString(0,"gldisplaymask",0x600);
-    iVar3 = _CFStringCreateWithCString(0,"log_notifications",0x600);
-    iVar4 = _CFStringCreateWithCString(0,"fsaa_samples",0x600);
-    iVar5 = _CFStringCreateWithCString(0,"fsaa_mode",0x600);
-    iVar6 = _CFStringCreateWithCString(0,"aniso_level",0x600);
-    iVar7 = _CFStringCreateWithCString(0,"vsync_mode",0x600);
-    iVar8 = _CFStringCreateWithCString(0,"performance_level",0x600);
-    if (iVar1 != 0) {
-      if (((((iVar2 != 0) && (iVar3 != 0)) && (iVar4 != 0)) && ((iVar6 != 0 && (iVar7 != 0)))) &&
-         (iVar8 != 0)) {
-        scratchInt9 = _CFDictionaryGetValue(param_5,iVar3);
-        if (((scratchInt9 != 0) && (scratchInt9 = _CFNumberGetValue(scratchInt9,3,&iStack_60), scratchInt9 != 0)) &&
-           (iStack_60 != 0)) {
+  performanceLevel = 0;
+  receivedPid[0] = 0;
+  receivedDisplayMask = 0;
+  logNotifications = 0;
+  fsaaSamples = 0;
+  fsaaMode = 0;
+  anisoLevel = 0;
+  vsyncMode = 0;
+  if (notificationDict != 0) {
+    notificationDictCopy = notificationDict;
+    keyPid = _CFStringCreateWithCString(0,"pid",0x600);
+    keyGlDisplayMask = _CFStringCreateWithCString(0,"gldisplaymask",0x600);
+    keyLogNotifications = _CFStringCreateWithCString(0,"log_notifications",0x600);
+    keyFsaaSamples = _CFStringCreateWithCString(0,"fsaa_samples",0x600);
+    keyFsaaMode = _CFStringCreateWithCString(0,"fsaa_mode",0x600);
+    keyAnisoLevel = _CFStringCreateWithCString(0,"aniso_level",0x600);
+    keyVsyncMode = _CFStringCreateWithCString(0,"vsync_mode",0x600);
+    keyPerformanceLevel = _CFStringCreateWithCString(0,"performance_level",0x600);
+    if (keyPid != 0) {
+      if (((((keyGlDisplayMask != 0) && (keyLogNotifications != 0)) && (keyFsaaSamples != 0)) && ((keyAnisoLevel != 0 && (keyVsyncMode != 0)))) &&
+         (keyPerformanceLevel != 0)) {
+        scratchInt9 = _CFDictionaryGetValue(notificationDict,keyLogNotifications);
+        if (((scratchInt9 != 0) && (scratchInt9 = _CFNumberGetValue(scratchInt9,3,&logNotifications), scratchInt9 != 0)) &&
+           (logNotifications != 0)) {
           _puts("\nATI R300 GL Driver Notification Callback");
-          gld_printApplicationPath(param_2);
+          gld_printApplicationPath(ctx);
         }
-        scratchInt9 = _CFDictionaryGetValue(param_5,iVar1);
-        value2 = _CFDictionaryGetValue(param_5,iVar2);
+        scratchInt9 = _CFDictionaryGetValue(notificationDict,keyPid);
+        value2 = _CFDictionaryGetValue(notificationDict,keyGlDisplayMask);
         if ((scratchInt9 == 0) || (value2 == 0)) {
-          if (iStack_60 != 0) {
+          if (logNotifications != 0) {
             if (scratchInt9 == 0) {
               _puts("  failed to extract process id from CFDictionary | expected \"pid\"");
             }
@@ -4662,133 +4662,133 @@ int gldDisplayNotificationCallback(param_1, param_2, param_3, param_4, param_5, 
           }
         }
         else {
-          scratchInt9 = _CFNumberGetValue(scratchInt9,3,aiStack_4c);
-          if ((scratchInt9 != 0) && (scratchInt9 = _CFNumberGetValue(value2,3,&uStack_64), scratchInt9 != 0)) {
-            scratchInt9 = *(int *)(param_2 + 0x2a60);
-            if ((scratchInt9 != aiStack_4c[0]) ||
-               (param_7 = uStack_64, (*(uint *)(param_2 + 0x2a64) & uStack_64) == 0)) {
-              if (iStack_60 != 0) {
-                if (scratchInt9 != aiStack_4c[0]) {
+          scratchInt9 = _CFNumberGetValue(scratchInt9,3,receivedPid);
+          if ((scratchInt9 != 0) && (scratchInt9 = _CFNumberGetValue(value2,3,&receivedDisplayMask), scratchInt9 != 0)) {
+            scratchInt9 = *(int *)(ctx + 0x2a60);
+            if ((scratchInt9 != receivedPid[0]) ||
+               (staleArgR9 = receivedDisplayMask, (*(uint *)(ctx + 0x2a64) & receivedDisplayMask) == 0)) {
+              if (logNotifications != 0) {
+                if (scratchInt9 != receivedPid[0]) {
                   printf_LDBLStub_1a337c("  process id does not match | expected %i | received %i\n",scratchInt9,
-                               aiStack_4c[0],param_4,iVar12,param_6,param_7,param_8);
+                               receivedPid[0],staleArgR6,notificationDictCopy,staleArgR8,staleArgR9,staleArgR10);
                 }
-                if ((*(uint *)(param_2 + 0x2a64) & uStack_64) == 0) {
+                if ((*(uint *)(ctx + 0x2a64) & receivedDisplayMask) == 0) {
                   printf_LDBLStub_1a337c("  gl display mask does not match | expected 0x%x | received 0x%x\n",
-                               *(uint *)(param_2 + 0x2a64),uStack_64,param_4,iVar12,param_6,param_7,
-                               param_8);
+                               *(uint *)(ctx + 0x2a64),receivedDisplayMask,staleArgR6,notificationDictCopy,staleArgR8,staleArgR9,
+                               staleArgR10);
                 }
               }
             }
             else {
-              *(undefined1 *)(param_2 + 0x2a68) = 1;
-              uVar13 = uStack_64;
-              if (iStack_60 != 0) {
-                printf_LDBLStub_1a337c("  process id [%i] and gl display mask [0x%x] match\n",aiStack_4c[0],
-                             uStack_64,param_4,iVar12,param_6,uStack_64,param_8);
+              *(undefined1 *)(ctx + 0x2a68) = 1;
+              displayMaskCopy = receivedDisplayMask;
+              if (logNotifications != 0) {
+                printf_LDBLStub_1a337c("  process id [%i] and gl display mask [0x%x] match\n",receivedPid[0],
+                             receivedDisplayMask,staleArgR6,notificationDictCopy,staleArgR8,receivedDisplayMask,staleArgR10);
               }
-              scratchInt9 = _CFDictionaryGetValue(param_5,iVar5);
+              scratchInt9 = _CFDictionaryGetValue(notificationDict,keyFsaaMode);
               if (scratchInt9 == 0) {
-                if (iStack_60 != 0) {
+                if (logNotifications != 0) {
                   _puts("  failed to extract fsaa mode from CFDictionary | expected \"fsaa_mode\"");
                 }
               }
               else {
-                scratchInt9 = _CFNumberGetValue(scratchInt9,3,&iStack_58);
-                if ((scratchInt9 != 0) && (*(int *)(param_2 + 0x2a74) = iStack_58, iStack_60 != 0)) {
-                  if (iStack_58 == 1) {
+                scratchInt9 = _CFNumberGetValue(scratchInt9,3,&fsaaMode);
+                if ((scratchInt9 != 0) && (*(int *)(ctx + 0x2a74) = fsaaMode, logNotifications != 0)) {
+                  if (fsaaMode == 1) {
                     _puts("  fsaa mode | multisampling");
                   }
-                  else if (iStack_58 == 0) {
+                  else if (fsaaMode == 0) {
                     _puts("  fsaa mode | app value");
                   }
-                  else if (iStack_58 == 2) {
+                  else if (fsaaMode == 2) {
                     _puts("  fsaa mode | supersampling");
                   }
                 }
               }
-              scratchInt9 = _CFDictionaryGetValue(param_5,iVar4);
+              scratchInt9 = _CFDictionaryGetValue(notificationDict,keyFsaaSamples);
               if (scratchInt9 == 0) {
-                if (iStack_60 != 0) {
+                if (logNotifications != 0) {
                   _puts(
                        "  failed to extract fsaa samples from CFDictionary | expected \"fsaa_samples\""
                        );
                 }
               }
               else {
-                scratchPtr11 = &iStack_5c;
+                scratchPtr11 = &fsaaSamples;
                 scratchInt9 = _CFNumberGetValue(scratchInt9,3,scratchPtr11);
-                if ((scratchInt9 != 0) && (*(int *)(param_2 + 0x2a70) = iStack_5c, iStack_60 != 0)) {
-                  if (iStack_5c == 0) {
+                if ((scratchInt9 != 0) && (*(int *)(ctx + 0x2a70) = fsaaSamples, logNotifications != 0)) {
+                  if (fsaaSamples == 0) {
                     _puts("  fsaa samples | app value");
                   }
                   else {
-                    printf_LDBLStub_1a337c("  fsaa samples | %i\n",iStack_5c,scratchPtr11,param_4,iVar12,param_6,
-                                 uVar13,param_8);
+                    printf_LDBLStub_1a337c("  fsaa samples | %i\n",fsaaSamples,scratchPtr11,staleArgR6,notificationDictCopy,staleArgR8,
+                                 displayMaskCopy,staleArgR10);
                   }
                 }
               }
-              scratchInt9 = _CFDictionaryGetValue(param_5,iVar6);
+              scratchInt9 = _CFDictionaryGetValue(notificationDict,keyAnisoLevel);
               if (scratchInt9 == 0) {
-                if (iStack_60 != 0) {
+                if (logNotifications != 0) {
                   _puts(
                        "  failed to extract anisotropic filtering samples from CFDictionary | expected \"aniso_level\""
                        );
                 }
               }
               else {
-                scratchPtr11 = &iStack_54;
+                scratchPtr11 = &anisoLevel;
                 scratchInt9 = _CFNumberGetValue(scratchInt9,3,scratchPtr11);
-                if ((scratchInt9 != 0) && (*(int *)(param_2 + 0x2a7c) = iStack_54, iStack_60 != 0)) {
-                  if (iStack_54 == 0) {
+                if ((scratchInt9 != 0) && (*(int *)(ctx + 0x2a7c) = anisoLevel, logNotifications != 0)) {
+                  if (anisoLevel == 0) {
                     _puts("  anisotropic filtering samples | app value");
                   }
                   else {
-                    printf_LDBLStub_1a337c("  anisotropic filtering samples | %i\n",iStack_54,scratchPtr11,param_4,
-                                 iVar12,param_6,uVar13,param_8);
+                    printf_LDBLStub_1a337c("  anisotropic filtering samples | %i\n",anisoLevel,scratchPtr11,staleArgR6,
+                                 notificationDictCopy,staleArgR8,displayMaskCopy,staleArgR10);
                   }
                 }
               }
-              scratchInt9 = _CFDictionaryGetValue(param_5,iVar7);
+              scratchInt9 = _CFDictionaryGetValue(notificationDict,keyVsyncMode);
               if (scratchInt9 == 0) {
-                if (iStack_60 != 0) {
+                if (logNotifications != 0) {
                   _puts(
                        "  failed to extract vertical sync mode from CFDictionary | expected \"vsync_mode\""
                        );
                 }
               }
               else {
-                scratchInt9 = _CFNumberGetValue(scratchInt9,3,&iStack_50);
-                if ((scratchInt9 != 0) && (*(char *)(param_2 + 0x2a6c) = (char)iStack_50, iStack_60 != 0))
+                scratchInt9 = _CFNumberGetValue(scratchInt9,3,&vsyncMode);
+                if ((scratchInt9 != 0) && (*(char *)(ctx + 0x2a6c) = (char)vsyncMode, logNotifications != 0))
                 {
-                  if (iStack_50 == 1) {
+                  if (vsyncMode == 1) {
                     _puts("  vsync mode | forced off");
                   }
-                  else if (iStack_50 == 0) {
+                  else if (vsyncMode == 0) {
                     _puts("  vsync mode | app value");
                   }
-                  else if (iStack_50 == 2) {
+                  else if (vsyncMode == 2) {
                     _puts("  vsync mode | forced on");
                   }
                 }
               }
-              scratchInt9 = _CFDictionaryGetValue(param_5,iVar8);
+              scratchInt9 = _CFDictionaryGetValue(notificationDict,keyPerformanceLevel);
               if (scratchInt9 == 0) {
-                if (iStack_60 != 0) {
+                if (logNotifications != 0) {
                   _puts(
                        "  failed to extract performance level from CFDictionary | expected \"performance_level\""
                        );
                 }
               }
               else {
-                scratchPtr11 = &iStack_68;
+                scratchPtr11 = &performanceLevel;
                 scratchInt9 = _CFNumberGetValue(scratchInt9,3,scratchPtr11);
-                if ((scratchInt9 != 0) && (*(int *)(param_2 + 0x2a78) = iStack_68, iStack_60 != 0)) {
-                  if (iStack_68 == 0) {
+                if ((scratchInt9 != 0) && (*(int *)(ctx + 0x2a78) = performanceLevel, logNotifications != 0)) {
+                  if (performanceLevel == 0) {
                     _puts("  performance cheats | off");
                   }
                   else {
-                    printf_LDBLStub_1a337c("  performance cheats level | %d\n",iStack_68,scratchPtr11,param_4,
-                                 iVar12,param_6,uVar13,param_8);
+                    printf_LDBLStub_1a337c("  performance cheats level | %d\n",performanceLevel,scratchPtr11,staleArgR6,
+                                 notificationDictCopy,staleArgR8,displayMaskCopy,staleArgR10);
                   }
                 }
               }
@@ -4796,28 +4796,28 @@ int gldDisplayNotificationCallback(param_1, param_2, param_3, param_4, param_5, 
           }
         }
       }
-      _CFRelease(iVar1);
+      _CFRelease(keyPid);
     }
-    if (iVar2 != 0) {
-      _CFRelease(iVar2);
+    if (keyGlDisplayMask != 0) {
+      _CFRelease(keyGlDisplayMask);
     }
-    if (iVar3 != 0) {
-      _CFRelease(iVar3);
+    if (keyLogNotifications != 0) {
+      _CFRelease(keyLogNotifications);
     }
-    if (iVar4 != 0) {
-      _CFRelease(iVar4);
+    if (keyFsaaSamples != 0) {
+      _CFRelease(keyFsaaSamples);
     }
-    if (iVar5 != 0) {
-      _CFRelease(iVar5);
+    if (keyFsaaMode != 0) {
+      _CFRelease(keyFsaaMode);
     }
-    if (iVar6 != 0) {
-      _CFRelease(iVar6);
+    if (keyAnisoLevel != 0) {
+      _CFRelease(keyAnisoLevel);
     }
-    if (iVar7 != 0) {
-      _CFRelease(iVar7);
+    if (keyVsyncMode != 0) {
+      _CFRelease(keyVsyncMode);
     }
-    if (iVar8 != 0) {
-      _CFRelease(iVar8);
+    if (keyPerformanceLevel != 0) {
+      _CFRelease(keyPerformanceLevel);
     }
   }
   return;

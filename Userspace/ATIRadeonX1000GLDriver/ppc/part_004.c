@@ -3540,7 +3540,7 @@ LAB_00029a74:
           procPitch = renderWidth * bytesPerPixel;
           renderHeight = procPitch * *(int *)(ctx + GLD_renderHeight);
           levelBuffer = _valloc((uint)sliceCount * renderHeight);
-          FUN_00031340(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
+          gld_readbackTextureLevel(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
           yOffsetBytes = rectY * procPitch;
           bytesPerPixel2 = gldPixelUnitBytes(surfaceFormat,surfaceType);
           procPixels = (int)levelBuffer + rectX * bytesPerPixel2 + attachZOffset * renderHeight + yOffsetBytes;
@@ -3957,7 +3957,7 @@ LAB_00029a74:
           scratchUint12 = surfaceType;
           ring = levelBuffer;
           scratchUint13 = procPitch;
-          FUN_00031340(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
+          gld_readbackTextureLevel(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
           ctxState = rectY * procPitch;
           bytesPerPixel = gldPixelUnitBytes(surfaceFormat,surfaceType);
           uStack_bc = levelBuffer + attachZOffset * renderHeight + ctxState + rectX * bytesPerPixel;

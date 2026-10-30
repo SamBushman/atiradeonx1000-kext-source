@@ -529,7 +529,7 @@ extern int FUN_00030f00();
 extern int FUN_00030f60();
 extern int gldTextureFormatLookup();
 extern int gldTextureFormatEntryForLevel();
-extern int FUN_00031340();
+extern int gld_readbackTextureLevel();
 extern int _gldGetTextureLevel();
 extern int gld_uploadTextureLevel();
 extern int gldTextureMakeResident();

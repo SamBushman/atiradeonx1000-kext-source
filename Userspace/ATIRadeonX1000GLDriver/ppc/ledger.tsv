@@ -322,7 +322,7 @@
 0x30f60	492	FUN_00030f60	part_005	converted
 0x31170	164	gldTextureFormatLookup	part_005	converted
 0x31220	280	gldTextureFormatEntryForLevel	part_005	converted
-0x31340	1352	FUN_00031340	part_005	converted
+0x31340	1352	gld_readbackTextureLevel	part_005	converted
 0x31890	176	_gldGetTextureLevel	part_005	converted
 0x31940	1972	gld_uploadTextureLevel	part_005	converted
 0x32100	8252	gldTextureMakeResident	part_005	converted

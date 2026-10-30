@@ -323,7 +323,7 @@
 0x30f60	FUN_00030f60	492	yes	
 0x31170	gldTextureFormatLookup	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x31220	gldTextureFormatEntryForLevel	280	yes	
-0x31340	FUN_00031340	1352	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_scalarI_structureI)
+0x31340	gld_readbackTextureLevel	1352	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_scalarI_structureI)
 0x31890	_gldGetTextureLevel	176	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x31940	gld_uploadTextureLevel	1972	no	calls an import (glgConvertType); calls an import (glgProcessPixels)
 0x32100	gldTextureMakeResident	8252	yes	

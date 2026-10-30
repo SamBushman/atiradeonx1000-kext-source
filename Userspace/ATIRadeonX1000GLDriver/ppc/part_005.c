@@ -2234,12 +2234,12 @@ int gldTextureFormatEntryForLevel(ctx, texture, faceIndex, levelIndex, modeFlag)
   return (undefined *)0x0;
 }
 
-/* FUN_00031340 @ 0x31340 (1352 bytes) */
-int FUN_00031340(ctx, param_2, param_3, param_4, surfaceFormat, surfaceType, levelBuffer, procPitch)
+/* gld_readbackTextureLevel @ 0x31340 (1352 bytes) */
+int gld_readbackTextureLevel(ctx, texture, face, mipLevel, surfaceFormat, surfaceType, levelBuffer, procPitch)
   int ctx;
-  int *param_2;
-  int param_3;
-  uint param_4;
+  int *texture;
+  int face;
+  uint mipLevel;
   undefined4 *surfaceFormat;
   undefined4 surfaceType;
   int levelBuffer;
@@ -2248,127 +2248,127 @@ int FUN_00031340(ctx, param_2, param_3, param_4, surfaceFormat, surfaceType, lev
   int gld_isStampRetiredResult;
   int loopIndex;
   int loopIndex2;
-  byte bVar1;
-  char cVar2;
+  byte formatByte;
+  char storageKind;
   int scratchInt3;
-  uint *puVar4;
-  short sVar5;
-  undefined4 *a6;
+  uint *ringTail;
+  short baseFormat;
+  undefined4 *packet;
   int scratchInt6;
-  undefined1 *puVar7;
-  undefined1 *puVar8;
-  undefined1 *puVar9;
-  undefined4 *a1;
+  undefined1 *convertOutAPtr;
+  undefined1 *convertOutBPtr;
+  undefined1 *lookupOut1Ptr;
+  undefined4 *scratchArgA1;
   undefined4 scratchUint10;
-  undefined1 *puVar11;
-  undefined4 *a7;
-  int iVar12;
+  undefined1 *lookupOut2Ptr;
+  undefined4 *scratchArgA7;
+  int blockRows;
   int scratchInt13;
   int scratchInt14;
-  int iVar15;
-  undefined4 *puVar16;
+  int levelHeight;
+  undefined4 *storage;
   uint scratchUint17;
-  undefined1 auStack_140 [4];
-  undefined1 auStack_13c [4];
-  undefined1 auStack_138 [4];
-  undefined1 auStack_134 [4];
-  undefined1 auStack_130 [4];
-  undefined1 auStack_12c [4];
-  int local_128;
-  uint local_124;
-  int local_120;
-  undefined4 local_11c;
-  int local_118;
-  undefined4 *local_114;
-  undefined1 auStack_110 [4];
-  undefined1 auStack_10c [4];
-  undefined4 local_108;
-  uint local_104;
-  undefined4 local_100;
-  int local_fc;
-  int local_f8;
-  undefined1 local_bc;
-  undefined4 local_b8;
-  uint local_b4;
-  int local_a0;
-  undefined4 local_9c;
+  undefined1 lookupOut0 [4];
+  undefined1 lookupOut1 [4];
+  undefined1 lookupOut2 [4];
+  undefined1 lookupOut3 [4];
+  undefined1 lookupOut4 [4];
+  undefined1 lookupOut5 [4];
+  int srcAddress;
+  uint srcRowStride;
+  int convertDest;
+  undefined4 convertField;
+  int destRow;
+  undefined4 *destPitch;
+  undefined1 convertOutA [4];
+  undefined1 convertOutB [4];
+  undefined4 convertMode;
+  uint convertFlags;
+  undefined4 convertMask;
+  int convertWidth;
+  int convertHeight;
+  undefined1 convertByte;
+  undefined4 requestHandle;
+  uint requestFaceLevel;
+  int destAddress;
+  undefined4 lookupField9c;
   
-  puVar16 = (undefined4 *)param_2[0xd];
-  scratchInt14 = *param_2;
-  if ((puVar16 == (undefined4 *)0x0) || (*(char *)(param_2 + 0xe) == '\0')) {
+  storage = (undefined4 *)texture[0xd];
+  scratchInt14 = *texture;
+  if ((storage == (undefined4 *)0x0) || (*(char *)(texture + 0xe) == '\0')) {
     return 0x2717;
   }
-  scratchUint17 = param_4;
-  a1 = surfaceFormat;
+  scratchUint17 = mipLevel;
+  scratchArgA1 = surfaceFormat;
   scratchUint10 = surfaceType;
-  a7 = procPitch;
-  if ((*(short *)(param_2[0xc] + 2) == 0x1902) && (*(char *)(param_2 + 0x32) == '\x01')) {
-    scratchInt13 = param_3;
-    a6 = (undefined4 *)(**(code **)(ctx + 0x2998))(ctx + 0x240,0x3fa);
-    *(undefined4 **)(ctx + 0x298c) = a6;
-    a7 = a6 + 0x3ed;
+  scratchArgA7 = procPitch;
+  if ((*(short *)(texture[0xc] + 2) == 0x1902) && (*(char *)(texture + 0x32) == '\x01')) {
+    scratchInt13 = face;
+    packet = (undefined4 *)(**(code **)(ctx + 0x2998))(ctx + 0x240,0x3fa);
+    *(undefined4 **)(ctx + 0x298c) = packet;
+    scratchArgA7 = packet + 0x3ed;
     scratchUint10 = 0x113c8;
-    a1 = a6 + 0x3f8;
-    puVar4 = *(uint **)(ctx + 0x1d8);
-    *puVar4 = (int)a6 - (int)puVar4 >> 2 | *puVar4;
-    *(undefined4 **)(ctx + 0x1d8) = a6;
-    *a6 = 0x45000000;
-    a6[1] = 0x3ed;
-    a6[2] = 0xd;
-    a6[3] = *(undefined4 *)param_2[0xd];
-    bVar1 = *(byte *)(param_2 + 0xe);
-    a6[0x3ed] = ((unsigned char *)0x000013c4U);
-    a6[4] = (uint)bVar1;
-    a6[0x3f6] = ((unsigned char *)0x000013caU);
-    a6[0x3ef] = 0x113c8;
-    a6[0x3f4] = ((unsigned char *)0x000013ccU);
-    a6[0x3f2] = ((unsigned char *)0x000013cdU);
-    *(undefined4 **)(ctx + 0x298c) = a1;
-    (**(code **)(ctx + 0x299c))(ctx + 0x240,a1,scratchInt13,scratchUint17,a1,0x113c8,a6,a7);
+    scratchArgA1 = packet + 0x3f8;
+    ringTail = *(uint **)(ctx + 0x1d8);
+    *ringTail = (int)packet - (int)ringTail >> 2 | *ringTail;
+    *(undefined4 **)(ctx + 0x1d8) = packet;
+    *packet = 0x45000000;
+    packet[1] = 0x3ed;
+    packet[2] = 0xd;
+    packet[3] = *(undefined4 *)texture[0xd];
+    formatByte = *(byte *)(texture + 0xe);
+    packet[0x3ed] = ((unsigned char *)0x000013c4U);
+    packet[4] = (uint)formatByte;
+    packet[0x3f6] = ((unsigned char *)0x000013caU);
+    packet[0x3ef] = 0x113c8;
+    packet[0x3f4] = ((unsigned char *)0x000013ccU);
+    packet[0x3f2] = ((unsigned char *)0x000013cdU);
+    *(undefined4 **)(ctx + 0x298c) = scratchArgA1;
+    (**(code **)(ctx + 0x299c))(ctx + 0x240,scratchArgA1,scratchInt13,scratchUint17,scratchArgA1,0x113c8,packet,scratchArgA7);
     if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
       gld_submitRing(ctx,0x1000000);
     }
-    *(undefined1 *)(param_2 + 0x32) = 0;
+    *(undefined1 *)(texture + 0x32) = 0;
   }
-  cVar2 = *(char *)((int)puVar16 + 0x16);
-  if ((cVar2 != '\x03') && (cVar2 != '\a')) {
-    if (cVar2 != '\x06') {
+  storageKind = *(char *)((int)storage + 0x16);
+  if ((storageKind != '\x03') && (storageKind != '\a')) {
+    if (storageKind != '\x06') {
       return 0x2717;
     }
-    if ((0x1ffff < (int)puVar16[4]) &&
+    if ((0x1ffff < (int)storage[4]) &&
        (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc))) {
       gld_submitRing(ctx,0x1000000);
     }
-    scratchInt14 = param_3 * 2;
-    scratchInt13 = scratchInt14 + (int)puVar16;
-    if ((((uint)*(ushort *)(scratchInt13 + 0x28) & ~(uint)*(ushort *)(scratchInt13 + 0x1c)) >> (param_4 & 0x3f)
+    scratchInt14 = face * 2;
+    scratchInt13 = scratchInt14 + (int)storage;
+    if ((((uint)*(ushort *)(scratchInt13 + 0x28) & ~(uint)*(ushort *)(scratchInt13 + 0x1c)) >> (mipLevel & 0x3f)
         & 1) == 0) {
       return 0;
     }
-    gld_isStampRetiredResult = gld_isStampRetired(ctx,puVar16[3]);
+    gld_isStampRetiredResult = gld_isStampRetired(ctx,storage[3]);
     if (gld_isStampRetiredResult == 0) {
       scratchUint17 = 1;
-      a1 = (undefined4 *)0x0;
+      scratchArgA1 = (undefined4 *)0x0;
       scratchUint10 = 0;
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,puVar16 + 3,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,storage + 3,1,0,0);
     }
     if ((levelBuffer != 0) && ((*(uint *)(ctx + 0x24) & 0x82) != 0)) {
-      gldFlushDataCacheRangeSync(ctx,levelBuffer,param_2[4],scratchUint17,a1,scratchUint10,scratchInt13,a7);
+      gldFlushDataCacheRangeSync(ctx,levelBuffer,texture[4],scratchUint17,scratchArgA1,scratchUint10,scratchInt13,scratchArgA7);
     }
-    *(ushort *)((int)puVar16 + scratchInt14 + 0x1c) =
-         *(ushort *)((int)puVar16 + scratchInt14 + 0x1c) | *(ushort *)((int)puVar16 + scratchInt14 + 0x28);
+    *(ushort *)((int)storage + scratchInt14 + 0x1c) =
+         *(ushort *)((int)storage + scratchInt14 + 0x1c) | *(ushort *)((int)storage + scratchInt14 + 0x28);
     return 0;
   }
-  scratchInt13 = scratchInt14 + 0x40 + (param_3 * 0xd + param_4) * 0x20;
-  if ((0x1ffff < (int)puVar16[4]) &&
+  scratchInt13 = scratchInt14 + 0x40 + (face * 0xd + mipLevel) * 0x20;
+  if ((0x1ffff < (int)storage[4]) &&
      (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc))) {
     gld_submitRing(ctx,0x1000000);
   }
-  if ((((uint)*(ushort *)((int)puVar16 + param_3 * 2 + 0x28) &
-       ~(uint)*(ushort *)((int)puVar16 + param_3 * 2 + 0x1c)) >> (param_4 & 0x3f) & 1) != 0) {
-    local_b8 = *puVar16;
-    local_b4 = param_4 | param_3 << 0x10;
-    _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xd,&local_b8,2,0,0);
+  if ((((uint)*(ushort *)((int)storage + face * 2 + 0x28) &
+       ~(uint)*(ushort *)((int)storage + face * 2 + 0x1c)) >> (mipLevel & 0x3f) & 1) != 0) {
+    requestHandle = *storage;
+    requestFaceLevel = mipLevel | face << 0x10;
+    _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xd,&requestHandle,2,0,0);
   }
   if ((*(uint *)(scratchInt14 + 0x20) & 0x10000000) != 0) {
     gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(scratchInt14 + 0x1c));
@@ -2377,77 +2377,77 @@ int FUN_00031340(ctx, param_2, param_3, param_4, surfaceFormat, surfaceType, lev
     }
     *(uint *)(scratchInt14 + 0x20) = *(uint *)(scratchInt14 + 0x20) & 0xefffffff;
   }
-  if (*(char *)((int)puVar16 + 0x16) == '\a') {
+  if (*(char *)((int)storage + 0x16) == '\a') {
     return 0;
   }
-  scratchUint17 = param_4 - *(byte *)((int)puVar16 + 0x17);
+  scratchUint17 = mipLevel - *(byte *)((int)storage + 0x17);
   scratchInt3 = (int)(uint)*(ushort *)(scratchInt14 + 0x14) >> (scratchUint17 & 0x3f);
-  iVar15 = (int)(uint)*(ushort *)(scratchInt14 + 0x16) >> (scratchUint17 & 0x3f);
-  iVar12 = (int)(uint)*(ushort *)(scratchInt14 + 0x18) >> (scratchUint17 & 0x3f);
+  levelHeight = (int)(uint)*(ushort *)(scratchInt14 + 0x16) >> (scratchUint17 & 0x3f);
+  blockRows = (int)(uint)*(ushort *)(scratchInt14 + 0x18) >> (scratchUint17 & 0x3f);
   scratchInt6 = 1;
   if (0 < scratchInt3) {
     scratchInt6 = scratchInt3;
   }
-  if (iVar15 < 1) {
-    iVar15 = 1;
+  if (levelHeight < 1) {
+    levelHeight = 1;
   }
-  if (iVar12 < 1) {
-    iVar12 = 1;
+  if (blockRows < 1) {
+    blockRows = 1;
   }
-  puVar9 = auStack_13c;
-  iVar12 = iVar12 / (int)(uint)*(ushort *)(scratchInt13 + 2);
-  puVar11 = auStack_138;
-  ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(param_2 + 0xe),param_2,&local_b8,auStack_140,puVar9,puVar11,
-               auStack_134,auStack_130,auStack_12c);
+  lookupOut1Ptr = lookupOut1;
+  blockRows = blockRows / (int)(uint)*(ushort *)(scratchInt13 + 2);
+  lookupOut2Ptr = lookupOut2;
+  ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,&requestHandle,lookupOut0,lookupOut1Ptr,lookupOut2Ptr,
+               lookupOut3,lookupOut4,lookupOut5);
   scratchUint10 = 0;
-  local_108 = 2;
-  local_120 = local_a0;
-  local_11c = local_9c;
-  local_104 = 0;
-  local_100 = 0xffffefff;
-  local_124 = *(uint *)(scratchInt14 + 0x10) >> (scratchUint17 & 0x3f);
-  if ((int)local_124 < 0x20) {
-    local_124 = 0x20;
+  convertMode = 2;
+  convertDest = destAddress;
+  convertField = lookupField9c;
+  convertFlags = 0;
+  convertMask = 0xffffefff;
+  srcRowStride = *(uint *)(scratchInt14 + 0x10) >> (scratchUint17 & 0x3f);
+  if ((int)srcRowStride < 0x20) {
+    srcRowStride = 0x20;
   }
-  local_bc = 0;
-  puVar7 = auStack_110;
-  puVar8 = auStack_10c;
-  local_118 = levelBuffer;
-  local_114 = procPitch;
-  local_fc = scratchInt6;
-  local_f8 = iVar15;
-  _glgConvertType(surfaceFormat,surfaceType,puVar7,puVar8,puVar9,puVar11,local_a0,0);
+  convertByte = 0;
+  convertOutAPtr = convertOutA;
+  convertOutBPtr = convertOutB;
+  destRow = levelBuffer;
+  destPitch = procPitch;
+  convertWidth = scratchInt6;
+  convertHeight = levelHeight;
+  _glgConvertType(surfaceFormat,surfaceType,convertOutAPtr,convertOutBPtr,lookupOut1Ptr,lookupOut2Ptr,destAddress,0);
   scratchInt14 = *(int *)(scratchInt13 + 0x1c);
   if (scratchInt14 == 0) {
     return 0x2717;
   }
-  sVar5 = *(short *)(param_2[0xc] + 2);
-  if ((sVar5 == 0x1909) || (scratchUint17 = local_104 | 0x20000, sVar5 == 0x1907)) {
-    local_104 = local_104 | 0x28000;
-    sVar5 = *(short *)(param_2[0xc] + 2);
-    scratchUint17 = local_104;
-    if (sVar5 != 0x1909) goto LAB_000316d8;
+  baseFormat = *(short *)(texture[0xc] + 2);
+  if ((baseFormat == 0x1909) || (scratchUint17 = convertFlags | 0x20000, baseFormat == 0x1907)) {
+    convertFlags = convertFlags | 0x28000;
+    baseFormat = *(short *)(texture[0xc] + 2);
+    scratchUint17 = convertFlags;
+    if (baseFormat != 0x1909) goto LAB_000316d8;
   }
   else {
 LAB_000316d8:
-    local_104 = scratchUint17;
-    if ((sVar5 != -0x7fb7) && (sVar5 != 0x190a)) goto LAB_000316fc;
+    convertFlags = scratchUint17;
+    if ((baseFormat != -0x7fb7) && (baseFormat != 0x190a)) goto LAB_000316fc;
   }
-  local_104 = local_104 | 0x40000;
+  convertFlags = convertFlags | 0x40000;
 LAB_000316fc:
   if (*(short *)(scratchInt13 + 2) != 0) {
     loopIndex = 0;
     do {
-      if (0 < iVar12) {
+      if (0 < blockRows) {
         loopIndex2 = 0;
-        local_128 = scratchInt14;
+        srcAddress = scratchInt14;
         do {
           loopIndex2 = loopIndex2 + 1;
-          _glgProcessPixels(0,&local_128,puVar7,puVar8,puVar9,puVar11,local_a0,scratchUint10);
-          local_128 = iVar15 * local_124 + local_128;
-          local_a0 = iVar15 * (int)local_114 + local_118;
-          local_118 = local_a0;
-        } while (iVar12 != loopIndex2);
+          _glgProcessPixels(0,&srcAddress,convertOutAPtr,convertOutBPtr,lookupOut1Ptr,lookupOut2Ptr,destAddress,scratchUint10);
+          srcAddress = levelHeight * srcRowStride + srcAddress;
+          destAddress = levelHeight * (int)destPitch + destRow;
+          destRow = destAddress;
+        } while (blockRows != loopIndex2);
       }
       loopIndex = loopIndex + 1;
       scratchInt14 = scratchInt14 + *(int *)(scratchInt13 + 0xc);
@@ -2474,7 +2474,7 @@ int _gldGetTextureLevel(ctx, texture, face, level)
     levelFormat = *(ushort *)(levelEntry + 0xc);
     bytesPerElement = gldPixelUnitBytes((uint)*(ushort *)(levelEntry + 0x10),(uint)*(ushort *)(levelEntry + 0x12));
     _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
-    returnCode = ((int (*)())FUN_00031340)(ctx,texture,face,level,(uint)*(ushort *)(levelEntry + 0x10),
+    returnCode = ((int (*)())gld_readbackTextureLevel)(ctx,texture,face,level,(uint)*(ushort *)(levelEntry + 0x10),
                          (uint)*(ushort *)(levelEntry + 0x12),*(undefined4 *)(levelEntry + 0x14),
                          (uint)levelFormat * bytesPerElement);
     _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));

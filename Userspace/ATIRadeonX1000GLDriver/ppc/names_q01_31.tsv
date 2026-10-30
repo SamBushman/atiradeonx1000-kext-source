@@ -1,0 +1,68 @@
+local	gldDisplayNotificationCallback	param_1	unusedArg1	INFERRED	never read
+local	gldDisplayNotificationCallback	param_2	ctx	INFERRED	GL context: +0x2a60 pid, +0x2a64 display mask, +0x2a68 match flag, +0x2a6c..0x2a7c settings
+local	gldDisplayNotificationCallback	param_3	unusedArg3	INFERRED	never read
+local	gldDisplayNotificationCallback	param_4	staleArgR6	INFERRED	only forwarded as stale argument register to printf
+local	gldDisplayNotificationCallback	param_5	notificationDict	CONFIRMED	CFDictionary queried for pid/gldisplaymask/... keys
+local	gldDisplayNotificationCallback	param_6	staleArgR8	INFERRED	only forwarded as stale argument register to printf
+local	gldDisplayNotificationCallback	param_7	staleArgR9	INFERRED	stale argument register; also reused as a copy of the display mask in the compare
+local	gldDisplayNotificationCallback	param_8	staleArgR10	INFERRED	only forwarded as stale argument register to printf
+local	gldDisplayNotificationCallback	iVar1	keyPid	CONFIRMED	CFString "pid"
+local	gldDisplayNotificationCallback	iVar2	keyGlDisplayMask	CONFIRMED	CFString "gldisplaymask"
+local	gldDisplayNotificationCallback	iVar3	keyLogNotifications	CONFIRMED	CFString "log_notifications"
+local	gldDisplayNotificationCallback	iVar4	keyFsaaSamples	CONFIRMED	CFString "fsaa_samples"
+local	gldDisplayNotificationCallback	iVar5	keyFsaaMode	CONFIRMED	CFString "fsaa_mode"
+local	gldDisplayNotificationCallback	iVar6	keyAnisoLevel	CONFIRMED	CFString "aniso_level"
+local	gldDisplayNotificationCallback	iVar7	keyVsyncMode	CONFIRMED	CFString "vsync_mode"
+local	gldDisplayNotificationCallback	iVar8	keyPerformanceLevel	CONFIRMED	CFString "performance_level"
+local	gldDisplayNotificationCallback	iVar12	notificationDictCopy	INFERRED	copy of param_5, only forwarded as stale argument register to printf
+local	gldDisplayNotificationCallback	uVar13	displayMaskCopy	INFERRED	copy of the received display mask, only forwarded as stale argument to printf
+local	gldDisplayNotificationCallback	iStack_68	performanceLevel	CONFIRMED	value of "performance_level"; stored to ctx+0x2a78
+local	gldDisplayNotificationCallback	uStack_64	receivedDisplayMask	CONFIRMED	value of "gldisplaymask"; compared with ctx+0x2a64
+local	gldDisplayNotificationCallback	iStack_60	logNotifications	CONFIRMED	value of "log_notifications"; gates the diagnostic output
+local	gldDisplayNotificationCallback	iStack_5c	fsaaSamples	CONFIRMED	value of "fsaa_samples"; stored to ctx+0x2a70
+local	gldDisplayNotificationCallback	iStack_58	fsaaMode	CONFIRMED	value of "fsaa_mode"; stored to ctx+0x2a74
+local	gldDisplayNotificationCallback	iStack_54	anisoLevel	CONFIRMED	value of "aniso_level"; stored to ctx+0x2a7c
+local	gldDisplayNotificationCallback	iStack_50	vsyncMode	CONFIRMED	value of "vsync_mode"; stored (byte) to ctx+0x2a6c
+local	gldDisplayNotificationCallback	aiStack_4c	receivedPid	CONFIRMED	value of "pid"; compared with ctx+0x2a60
+local	FUN_00031340	param_2	texture	INFERRED	texture object: [0] header, [0xc] format record (+2 = GL base format), [0xd] backing storage, [0xe] format byte
+local	FUN_00031340	param_3	face	INFERRED	index scaled by 2 into the per-face dirty-mask ushorts and by 0xd*0x20 into the level records
+local	FUN_00031340	param_4	mipLevel	INFERRED	shifted into the per-level dirty bit; level records are 13 per face
+local	FUN_00031340	puVar16	storage	INFERRED	texture->[0xd], the GPU backing store (+0xc stamp, +0x16 kind, +0x1c/+0x28 dirty masks)
+local	FUN_00031340	bVar1	formatByte	INFERRED	texture->[0xe] copied into the DMA packet
+local	FUN_00031340	cVar2	storageKind	INFERRED	storage+0x16: 3/7 = mip-chain layouts handled below, 6 = flat layout
+local	FUN_00031340	sVar5	baseFormat	CONFIRMED	GL base format of the texture (0x1902 depth, 0x1907 RGB, 0x1909 luminance, 0x190a luminance-alpha)
+local	FUN_00031340	puVar4	ringTail	INFERRED	ctx+0x1d8 command-ring tail whose link word is patched
+local	FUN_00031340	a6	packet	INFERRED	0x3fa-word packet allocated through ctx+0x2998
+local	FUN_00031340	a1	scratchArgA1	INFERRED	register-allocation scratch: holds the caller's surfaceFormat, then a packet pointer, then 0
+local	FUN_00031340	a7	scratchArgA7	INFERRED	register-allocation scratch: holds the caller's procPitch, then a packet pointer
+local	FUN_00031340	iVar12	blockRows	INFERRED	level depth (clamped to 1) divided by the block height (level record +2)
+local	FUN_00031340	iVar15	levelHeight	INFERRED	level height >> (mipLevel - base level), clamped to 1
+local	FUN_00031340	puVar7	convertOutAPtr	INFERRED	&convertOutA, output of _glgConvertType
+local	FUN_00031340	puVar8	convertOutBPtr	INFERRED	&convertOutB, output of _glgConvertType
+local	FUN_00031340	puVar9	lookupOut1Ptr	INFERRED	&lookupOut1 (gldTextureFormatLookup output)
+local	FUN_00031340	puVar11	lookupOut2Ptr	INFERRED	&lookupOut2 (gldTextureFormatLookup output)
+local	FUN_00031340	auStack_140	lookupOut0	INFERRED	gldTextureFormatLookup output 0
+local	FUN_00031340	auStack_13c	lookupOut1	INFERRED	gldTextureFormatLookup output 1
+local	FUN_00031340	auStack_138	lookupOut2	INFERRED	gldTextureFormatLookup output 2
+local	FUN_00031340	auStack_134	lookupOut3	INFERRED	gldTextureFormatLookup output 3
+local	FUN_00031340	auStack_130	lookupOut4	INFERRED	gldTextureFormatLookup output 4
+local	FUN_00031340	auStack_12c	lookupOut5	INFERRED	gldTextureFormatLookup output 5
+local	FUN_00031340	auStack_110	convertOutA	INFERRED	_glgConvertType output A
+local	FUN_00031340	auStack_10c	convertOutB	INFERRED	_glgConvertType output B
+local	FUN_00031340	local_b8	requestHandle	INFERRED	first word of the {storage handle, face<<16|level} request passed to the IOConnect method 0xd and to the format lookup
+local	FUN_00031340	local_b4	requestFaceLevel	INFERRED	face<<16 | mipLevel
+local	FUN_00031340	local_a0	destAddress	INFERRED	running destination address (advanced by height*pitch per slice)
+local	FUN_00031340	local_9c	lookupField9c	INFERRED	second field of the lookup result copied to local_11c
+local	FUN_00031340	local_128	srcAddress	INFERRED	running source address inside the texture level, advanced by rows*srcRowStride
+local	FUN_00031340	local_124	srcRowStride	INFERRED	level row stride (record +0x10 >> level), at least 0x20
+local	FUN_00031340	local_120	convertDest	INFERRED	copy of destAddress given to the converter descriptor
+local	FUN_00031340	local_11c	convertField	INFERRED	copy of lookupField9c in the converter descriptor
+local	FUN_00031340	local_118	destRow	INFERRED	destination row pointer into levelBuffer (equals destAddress after each step)
+local	FUN_00031340	local_114	destPitch	INFERRED	procPitch, destination row pitch
+local	FUN_00031340	local_108	convertMode	INFERRED	constant 2 in the converter descriptor
+local	FUN_00031340	local_104	convertFlags	INFERRED	converter flags: 0x20000/0x28000 for depth/RGB/luminance bases, 0x40000 for luminance-alpha
+local	FUN_00031340	local_100	convertMask	INFERRED	constant 0xffffefff
+local	FUN_00031340	local_fc	convertWidth	INFERRED	level width (clamped to 1)
+local	FUN_00031340	local_f8	convertHeight	INFERRED	level height (clamped to 1)
+local	FUN_00031340	local_bc	convertByte	INFERRED	zero byte in the converter descriptor
+func	FUN_00031340	gld_readbackTextureLevel	INFERRED	converts a texture level from its GPU backing store into the caller buffer levelBuffer (destination advances by procPitch per row), after waiting for the GPU stamp and flushing dirty levels
