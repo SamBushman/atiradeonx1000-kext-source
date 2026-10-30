@@ -26,7 +26,7 @@ int ffvpSetupVertexOutputRouting(ctx)
   *(undefined4 *)(ctx + 0x1ca0) = 1;
   *(undefined4 *)(ctx + 0x1ca4) = 4;
   outputMask = *(uint *)(ctx + 0x1804);
-  FUN_0004fc80(ctx,0,3,0,0,0,0,0);
+  ffvpSetOutputRoute(ctx,0,3,0,0,0,0,0);
   *(undefined4 *)(ctx + 0x1b9c) = 1;
   *(undefined4 *)(ctx + 0x1bb0) = 0;
   *(undefined4 *)(ctx + 0x1ba0) = 0;
@@ -40,13 +40,13 @@ int ffvpSetupVertexOutputRouting(ctx)
     *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 0x40000;
     *(uint *)(ctx + 0x1ca4) =
          (*(uint *)(ctx + 0x1ca4) & 0x7f) + 1 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-    FUN_0004fc80(ctx,1,0,0,1,0,0,0);
+    ffvpSetOutputRoute(ctx,1,0,0,1,0,0,0);
     *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 0x10000;
   }
   *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 4;
   *(uint *)(ctx + 0x1ca4) =
        (*(uint *)(ctx + 0x1ca4) & 0x7f) + 4 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-  FUN_0004fc80(ctx,colorSlot,3,0,colorSlot,0,0,0);
+  ffvpSetOutputRoute(ctx,colorSlot,3,0,colorSlot,0,0,0);
   *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 2;
   slotCursor = secondarySlot;
   if ((outputMask & 1) != 0) {
@@ -54,17 +54,17 @@ int ffvpSetupVertexOutputRouting(ctx)
     *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 8;
     *(uint *)(ctx + 0x1ca4) =
          (*(uint *)(ctx + 0x1ca4) & 0x7f) + 4 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-    FUN_0004fc80(ctx,secondarySlot,3,0,secondarySlot,0,0,0);
+    ffvpSetOutputRoute(ctx,secondarySlot,3,0,secondarySlot,0,0,0);
     *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 4;
   }
   if ((outputMask & 8) != 0) {
     *(uint *)(ctx + 0x1ca0) = *(uint *)(ctx + 0x1ca0) | 0x30;
     *(uint *)(ctx + 0x1ca4) =
          (*(uint *)(ctx + 0x1ca4) & 0x7f) + 7 & 0x7f | *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-    FUN_0004fc80(ctx,slotCursor,3,0,slotCursor,0,0,0);
+    ffvpSetOutputRoute(ctx,slotCursor,3,0,slotCursor,0,0,0);
     nextSlot = slotCursor + 1;
     slotCursor = slotCursor + 2;
-    FUN_0004fc80(ctx,nextSlot,2,0,nextSlot,0,0,0);
+    ffvpSetOutputRoute(ctx,nextSlot,2,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1b9c) = *(uint *)(ctx + 0x1b9c) | 0x18;
   }
   if (outputMask >> 4 != 0) {
@@ -81,7 +81,7 @@ int ffvpSetupVertexOutputRouting(ctx)
       *(uint *)(ctx + 0x1ca4) =
            (*(uint *)(ctx + 0x1ca4) & 0x7f) + 4 & 0x7f |
            *(uint *)(ctx + 0x1ca4) & 0xffffff80;
-      FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
+      ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
       *(uint *)(ctx + 0x1bb0) = texRouteWord | *(uint *)(ctx + 0x1bb0);
       *(uint *)(ctx + 0x1ba0) = texRouteWord | *(uint *)(ctx + 0x1ba0);
       nextSlot = slotCursor;
@@ -296,7 +296,7 @@ int gldEmitVertexRoutingPackets(ctx)
   streamSetCurrent = *(code **)(ctx + 0x275c);
   *(int *)(0x00002748 + ctx + 4) = cmdPos + 0x24;
   (*streamSetCurrent)(ctx,cmdPos + 0x24,in_r5,in_r6,in_r7,in_r8,a6);
-  return FUN_0004e880(ctx);
+  return gldEmitRegisterPairPacket(ctx);
 }
 
 /* ffvpValidateProgram @ 0x83870 (1012 bytes) */
@@ -441,7 +441,7 @@ LAB_00083c10:
       *(undefined1 *)(ctx + 0x2435) = 1;
       *(uint *)(ctx + 0x8c) = *(uint *)(ctx + 0x8c) | 0x40000000;
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
-      validateResult = (double)FUN_000a7d10(ctx);
+      validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x29) = 1;
       ((void (*)())gldValidateState)(ctx,extraout_r4,depRecordCopy,depElemSize,builtConstBytes,constRegCount[0],paramList,validateResult,unusedFloatArg2,
                    unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
@@ -451,7 +451,7 @@ LAB_00083c10:
       *(undefined1 *)(ctx + 0x2435) = 1;
       *(uint *)(ctx + 0x8c) = *(uint *)(ctx + 0x8c) | 0x40000000;
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
-      validateResult = (double)FUN_000a7d10(ctx);
+      validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x126) = 1;
       *(undefined1 *)(ctx + 0x29) = 1;
       ((void (*)())gldValidateState)(ctx,extraout_r4_00,unusedArg3,unusedArg4,unusedArg5,unusedArg6,programKind,validateResult,unusedFloatArg2,
@@ -3350,7 +3350,7 @@ int gldEnterInternalDrawState(glContext, resetReg1af4, modeBitsB, modeBitsA, sav
   }
   savedWord1930 = *(undefined4 *)(glContext + 0x1930);
   *(undefined4 *)(glContext + 0x1b3c) = 0;
-  FUN_0004b480(glContext,*(uint *)(glContext + 0x18a4) >> 6 & 0xffff);
+  gldClearBoundSlot(glContext,*(uint *)(glContext + 0x18a4) >> 6 & 0xffff);
   a6 = *(code **)(((unsigned char *)0x00001330) + glContext);
   *(uint *)(glContext + 0x1f2c) = *(uint *)(glContext + 0x1f2c) & 0xfffff800 | 0x80;
   (*a6)(glContext,0xc0100000,a2,regValue,a4,a5,a6);
@@ -3543,7 +3543,7 @@ LAB_00087474:
     drawStateWords[7] = 0;
     drawStateWords[0x54b] = 0;
   }
-  ((void (*)())FUN_0004a8f0)(glContext,extraout_r4,in_r5,in_r6,fparam_1);
+  ((void (*)())gldRebindCurrentProgram)(glContext,extraout_r4,in_r5,in_r6,fparam_1);
   (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) & 0x3fefffff;
   packet = (undefined4 *)
@@ -3892,7 +3892,7 @@ int arbfpUnbindWorkAreaChecked(glContext, fpState)
     if (workArea == *(int *)(glContext + 0x1e70)) {
       *(undefined4 *)(glContext + 0x1e70) = 0;
     }
-    FUN_0004b5d0(glContext,workArea);
+    gldReleaseProgramEntry(glContext,workArea);
     if (workArea == *(int *)(glContext + 0x1e64)) {
       *(undefined4 *)(glContext + 0x1e64) = 0;
     }
@@ -3900,7 +3900,7 @@ int arbfpUnbindWorkAreaChecked(glContext, fpState)
       *(undefined4 *)(((unsigned char *)0x00001488) + glContext) = 0;
     }
     if (workArea == *(int *)(glContext + 0x1e5c)) {
-      FUN_0004b480(glContext,1);
+      gldClearBoundSlot(glContext,1);
       return;
     }
   }
@@ -3918,7 +3918,7 @@ int arbfpUnbindWorkArea(glContext, fpState)
   if (workArea == *(int *)(glContext + 0x1e70)) {
     *(undefined4 *)(glContext + 0x1e70) = 0;
   }
-  FUN_0004b5d0(glContext,workArea);
+  gldReleaseProgramEntry(glContext,workArea);
   if (workArea == *(int *)(glContext + 0x1e64)) {
     *(undefined4 *)(glContext + 0x1e64) = 0;
   }
@@ -3926,7 +3926,7 @@ int arbfpUnbindWorkArea(glContext, fpState)
     *(undefined4 *)(((unsigned char *)0x00001488) + glContext) = 0;
   }
   if (workArea == *(int *)(glContext + 0x1e5c)) {
-    FUN_0004b480(glContext,1);
+    gldClearBoundSlot(glContext,1);
     return;
   }
   return;
@@ -3970,23 +3970,23 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
   int loopCounter;
   int workAreaState;
   int shaderInfo;
-  /* local_48/local_44/local_40/local_3c/local_38/local_34/local_30 are one contiguous 7-word array
-   * (&local_48 passed to FUN_000b4400, which internally indexes it keyWords[0]..keyWords[6] - and that
+  /* keyBlock0/keyBlock1/keyBlock2/keyBlock3/keyBlock4/keyBlock5/keyBlock6 are one contiguous 7-word array
+   * (&keyBlock0 passed to gld_compileILProgram, which internally indexes it keyWords[0]..keyWords[6] - and that
    * value flows straight through into ilRewriteForTextureState as its own keyWords, where keyWords[1] seeds a loop
    * counter). Declared as 7 separate scalars, they landed non-adjacent at -O0 (confirmed live: the
-   * value ilRewriteForTextureState read via keyWords[1] was heap-garbage-sized, not the small local_44 value),
+   * value ilRewriteForTextureState read via keyWords[1] was heap-garbage-sized, not the small keyBlock1 value),
    * corrupting a command-stream interpreter loop's iteration count downstream and eventually walking
    * off the end into zeroed memory, hitting the interpreter's own out-of-range-opcode safety net
    * (_exit(0), confirmed present in stock too - not itself a bug). Merged into a real array, aliased
    * back to the original names so the rest of this function's logic is unchanged (issue #64). */
   undefined4 local_48_arr[7];
-#define local_48 local_48_arr[0]
-#define local_44 local_48_arr[1]
-#define local_40 local_48_arr[2]
-#define local_3c local_48_arr[3]
-#define local_38 local_48_arr[4]
-#define local_34 local_48_arr[5]
-#define local_30 local_48_arr[6]
+#define keyBlock0 local_48_arr[0]
+#define keyBlock1 local_48_arr[1]
+#define keyBlock2 local_48_arr[2]
+#define keyBlock3 local_48_arr[3]
+#define keyBlock4 local_48_arr[4]
+#define keyBlock5 local_48_arr[5]
+#define keyBlock6 local_48_arr[6]
 
   workAreaState = workArea + 0x124;
   modeByte = ctx[0x8f8];
@@ -3996,36 +3996,36 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
     return 0;
   }
   *(int *)(((unsigned char *)0x000037e4) + workArea) = workArea;
-  local_38 = 0;
-  local_34 = 2;
-  local_30 = 0;
-  local_40 = 0;
-  local_3c = 0;
+  keyBlock4 = 0;
+  keyBlock5 = 2;
+  keyBlock6 = 0;
+  keyBlock2 = 0;
+  keyBlock3 = 0;
   keyWord1 = keyWords[1];
   keyWord2 = keyWords[2];
   altMode = ctx[0x8f8];
   *(undefined4 *)(workArea + 4) = *keyWords;
   *(undefined4 *)(workArea + 8) = keyWord1;
   *(undefined4 *)(workArea + 0xc) = keyWord2;
-  local_48 = keyWords[2];
-  local_44 = *keyWords;
+  keyBlock0 = keyWords[2];
+  keyBlock1 = *keyWords;
   if (fpRecord != 0) {
     *(undefined4 *)(((unsigned char *)0x000011fc) + workArea) = 0;
     shaderInfo = *(int *)(fpRecord + 0x74);
-    texEnumValue = FUN_000abb60(ctx);
+    texEnumValue = gld_getBoundProgramId(ctx);
     if (texEnumValue == 0x801) {
-      local_3c = local_3c | 0xc;
+      keyBlock3 = keyBlock3 | 0xc;
     }
     else if (texEnumValue == 0x2601) {
-      local_3c = local_3c | 4;
+      keyBlock3 = keyBlock3 | 4;
     }
     else if (texEnumValue == 0x800) {
-      local_3c = local_3c | 8;
+      keyBlock3 = keyBlock3 | 8;
     }
     if (*(char *)(shaderInfo + 5) != '\0') goto LAB_00088008;
   }
   else {
-    local_3c = 2;
+    keyBlock3 = 2;
     _memset(((unsigned char *)0x00003100) + workArea,0,0x100);
     remaining = 0x10;
     fillPtr = workAreaState;
@@ -4038,31 +4038,31 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
   }
   bitCount = ctx[0x917];
   if (bitCount != 0) {
-    local_38 = 0;
+    keyBlock4 = 0;
     do {
-      local_38 = local_38 << 1 | 1;
+      keyBlock4 = keyBlock4 << 1 | 1;
       bitCount = bitCount + -1;
     } while (bitCount != 0);
-    local_3c = local_3c | 0x400;
+    keyBlock3 = keyBlock3 | 0x400;
   }
 LAB_00088008:
   if (altMode != 0) {
-    local_3c = local_3c | 0x100;
+    keyBlock3 = keyBlock3 | 0x100;
     *(undefined4 *)(0x00001830 + workArea) = ctx[0x9db];
   }
-  flags = local_3c | 0x80;
+  flags = keyBlock3 | 0x80;
   if (*(char *)(workArea + 0x120) != '\0') {
-    flags = local_3c | 0x280;
+    flags = keyBlock3 | 0x280;
   }
-  local_3c = flags;
-  buildStatus = FUN_000b4400(ctx,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
-#undef local_48
-#undef local_44
-#undef local_40
-#undef local_3c
-#undef local_38
-#undef local_34
-#undef local_30
+  keyBlock3 = flags;
+  buildStatus = gld_compileILProgram(ctx,workArea + 0x18a8,workArea + 0x1784,&keyBlock0,workAreaState);
+#undef keyBlock0
+#undef keyBlock1
+#undef keyBlock2
+#undef keyBlock3
+#undef keyBlock4
+#undef keyBlock5
+#undef keyBlock6
   if (buildStatus == 1) {
     return 0xfffffffe;
   }
@@ -4171,16 +4171,16 @@ int arbfpBindFragmentProgram(ctx, fpState)
     if (fpState == *(char **)(((unsigned char *)0x00001488) + ctx)) {
       if ((fpState[0x36d7] != '\0') &&
          (((*(uint *)(ctx + 0x38) & 0x400) != 0 || ((*(uint *)(ctx + 0x3c) & 1) != 0)))) {
-        FUN_000b51a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotViewportTransforms(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
       if ((fpState[0x3748] != '\0') && ((*(uint *)(ctx + 0x38) & 0x100) != 0)) {
-        FUN_000b5320(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotTransformParams(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
       if ((*(int *)(fpState + 0x374c) != 0) &&
          (*(short *)(ctx + 0x34) != 0 || *(short *)(ctx + 0x32) != 0)) {
-        FUN_000b50a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitTextureUnitScaleParams(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
     }
@@ -4200,13 +4200,13 @@ int arbfpBindFragmentProgram(ctx, fpState)
       fpState[0x1427] = '\0';
       fpState[0x120f] = '\0';
       if (fpState[0x36d7] != '\0') {
-        FUN_000b51a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotViewportTransforms(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
       if (fpState[0x3748] != '\0') {
-        FUN_000b5320(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotTransformParams(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
       if (*(int *)(fpState + 0x374c) != 0) {
-        FUN_000b50a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitTextureUnitScaleParams(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
     }
     (**(code **)(ctx + 0x294c))(ctx,workAreaState);
@@ -4296,7 +4296,8 @@ int arbLexNumber(parser)
   double intBias;
   byte suffixChar;
   byte curChar;
-  bool bVar2;
+  bool isIntegerLiteral;
+  bool exponentNegative;
   double ten;
   double tenth;
   int exponent;
@@ -4330,20 +4331,20 @@ int arbLexNumber(parser)
       fracScale = fracScale * tenth;
       curChar = *fracCursor;
     }
-    bVar2 = false;
+    isIntegerLiteral = false;
   }
   else {
-    bVar2 = true;
+    isIntegerLiteral = true;
   }
   cursor = *(byte **)(parser + 0xc);
   if ((*cursor != 0x45) && (*cursor != 0x65)) goto LAB_0008886c;
   *(byte **)(parser + 0xc) = cursor + 1;
   if (cursor[1] == 0x2d) {
-    bVar2 = true;
+    exponentNegative = true;
     *(byte **)(parser + 0xc) = cursor + 2;
   }
   else {
-    bVar2 = false;
+    exponentNegative = false;
     if (cursor[1] == 0x2b) {
       *(byte **)(parser + 0xc) = cursor + 2;
     }
@@ -4378,11 +4379,11 @@ LAB_000887c4:
     exponentScale = DOUBLE_001aa200;
     if ((expDigit - 0x30 & 0xff) < 10) goto LAB_000887c4;
   }
-  if (bVar2) {
+  if (exponentNegative) {
     exponentScale = DOUBLE_001aa200 / exponentScale;
   }
   value = value * exponentScale;
-  bVar2 = false;
+  isIntegerLiteral = false;
 LAB_0008886c:
   suffixChar = *cursor;
   if ((((byte)(suffixChar + 0xbf) < 0x1a) || ((byte)(suffixChar + 0x9f) < 0x1a)) || (suffixChar == 0x5f)) {
@@ -4390,7 +4391,7 @@ LAB_0008886c:
   }
   *(double *)(parser + 0x1c) = value;
   *(int *)(parser + 0x18) = (int)GH_F2U((float)(value));
-  if ((bVar2) && (value == (double)CONCAT44(0x43300000,(int)value) - DOUBLE_001aa250)) {
+  if ((isIntegerLiteral) && (value == (double)CONCAT44(0x43300000,(int)value) - DOUBLE_001aa250)) {
     *(undefined4 *)(parser + 0x14) = 0xf;
   }
   else {

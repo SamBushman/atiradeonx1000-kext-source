@@ -143,49 +143,51 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   dword *constants;
   int *laneSwizzle;
 {
-  float fVar1;
-  bool bVar2;
-  int *piVar3;
+  int foundVector;
+  int *laneSwizzleArg;
+  float splatValue;
+  bool noLaneSeen;
+  int *laneSwizzleCursor;
   uint *loopPtr2;
   undefined *puVar5;
-  int iVar6;
+  int allLanesEqual;
   dword *loopPtr;
-  undefined4 uVar8;
+  undefined4 registerMap;
   int loopRemaining2;
   int loopRemaining;
-  uint local_38;
-  float local_20;
+  uint splatVec4;
+  float lastSplatStore;
   
   if (*laneSwizzle != 0x4040404) {
     puVar5 = &DAT_001b19e0;
-    fVar1 = 0.0;
+    splatValue = 0.0;
     loopRemaining2 = 4;
-    bVar2 = true;
-    iVar6 = 1;
-    piVar3 = laneSwizzle;
+    noLaneSeen = true;
+    allLanesEqual = 1;
+    laneSwizzleCursor = laneSwizzle;
     loopPtr = constants;
     do {
-      if (*(char *)piVar3 != '\x04') {
-        if (bVar2) {
-          fVar1 = (float)*loopPtr;
-          bVar2 = false;
+      if (*(char *)laneSwizzleCursor != '\x04') {
+        if (noLaneSeen) {
+          splatValue = (float)*loopPtr;
+          noLaneSeen = false;
         }
-        else if ((float)*loopPtr != fVar1) {
-          iVar6 = 0;
+        else if ((float)*loopPtr != splatValue) {
+          allLanesEqual = 0;
         }
       }
-      piVar3 = (int *)((int)piVar3 + 1);
+      laneSwizzleCursor = (int *)((int)laneSwizzleCursor + 1);
       loopPtr = loopPtr + 1;
       loopRemaining2 = loopRemaining2 + -1;
     } while (loopRemaining2 != 0);
-    piVar3 = laneSwizzle;
-    if (iVar6 == 0) {
+    laneSwizzleArg = laneSwizzle;
+    if (allLanesEqual == 0) {
       loopRemaining2 = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
       puVar5 = (undefined *)0x4;
       loopRemaining2 = 4;
-      loopPtr2 = &local_38;
+      loopPtr2 = &splatVec4;
       do {
         *loopPtr2 = 0x7ffffffe;
         loopPtr2 = loopPtr2 + 1;
@@ -195,24 +197,24 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       loopRemaining2 = 0;
       loopRemaining = 4;
       do {
-        local_20 = fVar1;
-        *(float *)(loopRemaining2 + (int)&local_38) = fVar1;
+        lastSplatStore = splatValue;
+        *(float *)(loopRemaining2 + (int)&splatVec4) = splatValue;
         loopRemaining2 = loopRemaining2 + 4;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
-      loopRemaining2 = Program__findOrCreateConstInst(program,&local_38,0x10203);
+      loopRemaining2 = Program__findOrCreateConstInst(program,&splatVec4,0x10203);
     }
     if (loopRemaining2 != 0) {
       return loopRemaining2;
     }
-    uVar8 = *(undefined4 *)(program + 0x3ac);
-    iVar6 = RegisterMap__findConstVectorExact(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopPtr);
-    if (iVar6 != 0) {
-      return iVar6;
+    registerMap = *(undefined4 *)(program + 0x3ac);
+    allLanesEqual = RegisterMap__findConstVectorExact(registerMap,constants,laneSwizzle,laneSwizzleArg,puVar5,allLanesEqual,loopPtr);
+    if (allLanesEqual != 0) {
+      return allLanesEqual;
     }
-    iVar6 = RegisterMap__findConstVector(uVar8,constants,laneSwizzle,piVar3);
-    if (iVar6 != 0) {
-      return iVar6;
+    foundVector = RegisterMap__findConstVector(registerMap,constants,laneSwizzle,laneSwizzleArg);
+    if (foundVector != 0) {
+      return foundVector;
     }
   }
   return 0;
@@ -1129,7 +1131,7 @@ LAB_00193490:
             callResult = IRInst__getOperandRecord(combinedInst,loopIndex3);
             laneByte = (uint)*(byte *)(loopIndex2 + callResult + 0x10);
             if (laneByte < 4) {
-              callResult = FUN_000f313c(newSource,laneByte);
+              callResult = IRInst__isLaneWritten(newSource,laneByte);
               if (callResult == 0) {
                 *(undefined1 *)(loopIndex + 0x9c) = 1;
               }
@@ -1216,54 +1218,54 @@ LAB_00193490:
 }
 
 /* R520SchedModel__vslot21 @ 0x193944 (112 bytes) */
-int R520SchedModel__vslot21(this, param_2, param_3, param_4)
+int R520SchedModel__vslot21(this, hwLimits, inst, latencyOut)
   undefined4 this;
-  int *param_2;
-  int param_3;
-  undefined4 *param_4;
+  int *hwLimits;
+  int inst;
+  undefined4 *latencyOut;
 {
   int callResult;
-  undefined4 uVar2;
+  undefined4 result;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar3;
+  int opcode;
   
-  iVar3 = *(int *)(*(int *)(param_3 + 0x88) + 8);
-  callResult = (**(code **)(*param_2 + 0x24))
-                    (param_2,param_2,param_3,param_4,in_r7,in_r8,*(int *)(param_3 + 0x88));
-  if ((callResult == 0) || (3 < iVar3 - 0x9eU)) {
-    uVar2 = 0;
+  opcode = *(int *)(*(int *)(inst + 0x88) + 8);
+  callResult = (**(code **)(*hwLimits + 0x24))
+                    (hwLimits,hwLimits,inst,latencyOut,in_r7,in_r8,*(int *)(inst + 0x88));
+  if ((callResult == 0) || (3 < opcode - 0x9eU)) {
+    result = 0;
   }
   else {
-    uVar2 = 1;
-    *param_4 = 2;
+    result = 1;
+    *latencyOut = 2;
   }
-  return uVar2;
+  return result;
 }
 
 /* R520SchedModel__vslot22 @ 0x1939b4 (76 bytes) */
-int R520SchedModel__vslot22(this, param_2, param_3, param_4)
+int R520SchedModel__vslot22(this, slotCount, constantCount, sourceCount)
   int this;
-  int param_2;
-  int param_3;
-  int param_4;
+  int slotCount;
+  int constantCount;
+  int sourceCount;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 limitExceeded;
+  undefined4 result;
   
   if (*(int *)(*(int *)(this + 8) + 0x6b8) != 0) {
     return 1;
   }
-  if ((param_2 < 0x18) && ((param_3 < 0x10 || (param_4 <= param_3 << 2)))) {
-    uVar1 = 0;
-    uVar2 = 0;
+  if ((slotCount < 0x18) && ((constantCount < 0x10 || (sourceCount <= constantCount << 2)))) {
+    limitExceeded = 0;
+    result = 0;
   }
   else {
-    uVar1 = 1;
-    uVar2 = 1;
+    limitExceeded = 1;
+    result = 1;
   }
-  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = uVar1;
-  return uVar2;
+  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = limitExceeded;
+  return result;
 }
 
 /* FudoPs__vslot29_convertInnerIfsToPredicates @ 0x193a00 (140 bytes) */
@@ -1271,134 +1273,135 @@ int FudoPs__vslot29_convertInnerIfsToPredicates(this, program)
   undefined4 this;
   int program;
 {
+  int isInnerIf;
   int convertInnerIfToPredEnabled;
-  int iVar1;
-  int *piVar2;
+  int nextLink;
+  int *block;
   
   convertInnerIfToPredEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x4a);
   if (convertInnerIfToPredEnabled != 0) {
-    piVar2 = *(int **)(program + 900);
-    iVar1 = piVar2[2];
-    while (iVar1 != 0) {
-      iVar1 = (**(code **)(*piVar2 + 0x24))(piVar2);
-      if (iVar1 != 0) {
-        piVar2 = (int *)Program__collapseIfRegion(program,piVar2);
+    block = *(int **)(program + 900);
+    nextLink = block[2];
+    while (nextLink != 0) {
+      isInnerIf = (**(code **)(*block + 0x24))(block);
+      if (isInnerIf != 0) {
+        block = (int *)Program__collapseIfRegion(program,block);
       }
-      piVar2 = (int *)piVar2[2];
-      iVar1 = piVar2[2];
+      block = (int *)block[2];
+      nextLink = block[2];
     }
   }
   return;
 }
 
-/* FUN_00193a8c @ 0x193a8c (88 bytes) */
-int FUN_00193a8c(param_1, param_2, param_3, param_4)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+/* TypedValueArray__init_193a8c @ 0x193a8c (88 bytes) */
+int TypedValueArray__init_193a8c(this, elementCount, typeCode, compiler)
+  int *this;
+  int elementCount;
+  int typeCode;
+  int compiler;
 {
   int allocation;
   
-  param_1[1] = param_3;
-  *param_1 = param_4;
-  param_1[2] = param_2;
-  if (param_2 < 3) {
-    param_1[5] = 0;
+  this[1] = typeCode;
+  *this = compiler;
+  this[2] = elementCount;
+  if (elementCount < 3) {
+    this[5] = 0;
   }
   else {
-    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(param_4 + 0x370),param_2 << 2);
-    param_1[5] = allocation;
+    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(compiler + 0x370),elementCount << 2);
+    this[5] = allocation;
   }
   return;
 }
 
-/* FUN_00193ae4 @ 0x193ae4 (88 bytes) */
-int FUN_00193ae4(param_1, param_2, param_3, param_4)
-  int *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+/* TypedValueArray__init @ 0x193ae4 (88 bytes) */
+int TypedValueArray__init(this, elementCount, typeCode, compiler)
+  int *this;
+  int elementCount;
+  int typeCode;
+  int compiler;
 {
   int allocation;
   
-  param_1[1] = param_3;
-  *param_1 = param_4;
-  param_1[2] = param_2;
-  if (param_2 < 3) {
-    param_1[5] = 0;
+  this[1] = typeCode;
+  *this = compiler;
+  this[2] = elementCount;
+  if (elementCount < 3) {
+    this[5] = 0;
   }
   else {
-    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(param_4 + 0x370),param_2 << 2);
-    param_1[5] = allocation;
+    allocation = ((int (*)())Arena__alloc)(*(undefined4 *)(compiler + 0x370),elementCount << 2);
+    this[5] = allocation;
   }
   return;
 }
 
-/* FUN_00193b3c @ 0x193b3c (76 bytes) */
-int FUN_00193b3c(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  int param_3;
+/* TypedValueArray__createWrapping @ 0x193b3c (76 bytes) */
+int TypedValueArray__createWrapping(owner, dataPtr, compiler)
+  undefined4 owner;
+  undefined4 dataPtr;
+  int compiler;
 {
   undefined4 *allocation;
-  undefined4 uVar2;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(param_3 + 0x370);
-  allocation = (undefined4 *)((int (*)())Arena__alloc)(uVar2,0x1c);
-  *allocation = uVar2;
-  ((int (*)())FUN_00193ae4)(allocation + 1,1,0x22,param_3);
-  allocation[4] = param_1;
+  arena = *(undefined4 *)(compiler + 0x370);
+  allocation = (undefined4 *)((int (*)())Arena__alloc)(arena,0x1c);
+  *allocation = arena;
+  ((int (*)())TypedValueArray__init)(allocation + 1,1,0x22,compiler);
+  allocation[4] = owner;
   allocation[3] = 1;
-  allocation[5] = param_2;
+  allocation[5] = dataPtr;
   return allocation + 1;
 }
 
-/* FUN_00193be8 @ 0x193be8 (24 bytes) */
-int FUN_00193be8(param_1)
-  int *param_1;
+/* ArenaObject__freeBuffer @ 0x193be8 (24 bytes) */
+int ArenaObject__freeBuffer(this)
+  int *this;
 {
-  if (param_1[5] == 0) {
+  if (this[5] == 0) {
     return;
   }
-  return ((int (*)())Arena__free)(*(undefined4 *)(*param_1 + 0x370),param_1[5]);
+  return ((int (*)())Arena__free)(*(undefined4 *)(*this + 0x370),this[5]);
 }
 
 /* FUN_00193c00 @ 0x193c00 (116 bytes) */
-int FUN_00193c00(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00193c00(typeDesc, compiler)
+  int typeDesc;
+  int compiler;
 {
-  char cVar1;
+  char kindByte;
   undefined4 *allocation;
-  int iVar3;
-  undefined4 uVar4;
+  int sizeCode;
+  undefined4 arena;
   
-  iVar3 = 4;
-  cVar1 = *(char *)(param_1 + 5);
-  if ((cVar1 != '\x01') && (iVar3 = 0x10, cVar1 != '\x02')) {
-    iVar3 = (uint)(cVar1 == '\0') << 1;
+  sizeCode = 4;
+  kindByte = *(char *)(typeDesc + 5);
+  if ((kindByte != '\x01') && (sizeCode = 0x10, kindByte != '\x02')) {
+    sizeCode = (uint)(kindByte == '\0') << 1;
   }
-  uVar4 = *(undefined4 *)(param_2 + 0x370);
-  allocation = (undefined4 *)((int (*)())Arena__alloc)(uVar4,0x1c);
-  *allocation = uVar4;
-  ((int (*)())FUN_00193ae4)(allocation + 1,1,iVar3,param_2);
-  allocation[4] = param_1;
+  arena = *(undefined4 *)(compiler + 0x370);
+  allocation = (undefined4 *)((int (*)())Arena__alloc)(arena,0x1c);
+  *allocation = arena;
+  ((int (*)())TypedValueArray__init)(allocation + 1,1,sizeCode,compiler);
+  allocation[4] = typeDesc;
   allocation[3] = 1;
   allocation[5] = 0;
   return allocation + 1;
 }
 
 /* Arena__free @ 0x193cc0 (88 bytes) */
-int Arena__free(param_1, ptr)
-  int param_1;
+int Arena__free(arena, ptr)
+  int arena;
   int ptr;
 {
   int lastAllocation;
   
-  if ((*(int *)(param_1 + 0x28) != 0) && (lastAllocation = *(int *)(param_1 + 0x14), lastAllocation == ptr)) {
-    _memset(lastAllocation,0,*(int *)(param_1 + 8) - lastAllocation);
-    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(param_1 + 0x14);
+  if ((*(int *)(arena + 0x28) != 0) && (lastAllocation = *(int *)(arena + 0x14), lastAllocation == ptr)) {
+    _memset(lastAllocation,0,*(int *)(arena + 8) - lastAllocation);
+    *(undefined4 *)(arena + 8) = *(undefined4 *)(arena + 0x14);
   }
   return;
 }
@@ -1407,14 +1410,14 @@ int Arena__free(param_1, ptr)
 int List__freeAllNodes(list)
   int *list;
 {
-  int *piVar1;
-  int iVar2;
+  int *node;
+  int nextNode;
   
-  piVar1 = (int *)list[1];
-  while (piVar1 != (int *)0x0) {
-    iVar2 = *piVar1;
-    (**(code **)(*list + 0x34c))(*(undefined4 *)(*list + 0x354),piVar1);
-    piVar1 = (int *)iVar2;
+  node = (int *)list[1];
+  while (node != (int *)0x0) {
+    nextNode = *node;
+    (**(code **)(*list + 0x34c))(*(undefined4 *)(*list + 0x354),node);
+    node = (int *)nextNode;
   }
   list[3] = 0;
   list[1] = 0;
@@ -1425,110 +1428,110 @@ int List__freeAllNodes(list)
 }
 
 /* Arena__grow @ 0x193d98 (128 bytes) */
-int Arena__grow(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+int Arena__grow(arena, requestedSize)
+  undefined4 *arena;
+  int requestedSize;
 {
-  undefined *puVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined *puVar4;
-  undefined4 uVar5;
+  undefined *alignedSize;
+  undefined4 *newChunk;
+  int chunkData;
+  undefined *chunkSize;
+  undefined4 previousChunk;
   
-  puVar1 = (undefined *)(param_2 + 3U & 0xfffffffc);
-  puVar4 = ((unsigned char *)0x00002fd8U);
-  if (0x2fd7 < (int)puVar1) {
-    puVar4 = puVar1;
+  alignedSize = (undefined *)(requestedSize + 3U & 0xfffffffc);
+  chunkSize = ((unsigned char *)0x00002fd8U);
+  if (0x2fd7 < (int)alignedSize) {
+    chunkSize = alignedSize;
   }
-  uVar5 = param_1[1];
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(*param_1,(uint)(puVar4 + 8));
-  param_1[1] = puVar2;
-  *puVar2 = uVar5;
-  *(undefined **)(param_1[1] + 4) = puVar4 + 8;
-  iVar3 = param_1[1] + 8;
-  param_1[5] = iVar3;
-  param_1[4] = puVar4 + param_1[1] + 8;
-  param_1[2] = iVar3;
+  previousChunk = arena[1];
+  newChunk = (undefined4 *)Compiler__allocateOrFail(*arena,(uint)(chunkSize + 8));
+  arena[1] = newChunk;
+  *newChunk = previousChunk;
+  *(undefined **)(arena[1] + 4) = chunkSize + 8;
+  chunkData = arena[1] + 8;
+  arena[5] = chunkData;
+  arena[4] = chunkSize + arena[1] + 8;
+  arena[2] = chunkData;
   return;
 }
 
 /* Arena__alloc @ 0x193e18 (92 bytes) */
-int Arena__alloc(param_1, size)
-  int param_1;
+int Arena__alloc(arena, size)
+  int arena;
   int size;
 {
   uint alignedSize;
   int result;
   
   alignedSize = size + 3U & 0xfffffffc;
-  if (*(uint *)(param_1 + 0x10) < alignedSize + *(int *)(param_1 + 8)) {
-    ((int (*)())Arena__grow)(param_1,alignedSize);
+  if (*(uint *)(arena + 0x10) < alignedSize + *(int *)(arena + 8)) {
+    ((int (*)())Arena__grow)(arena,alignedSize);
   }
-  result = *(int *)(param_1 + 8);
-  *(int *)(param_1 + 0x14) = result;
-  *(uint *)(param_1 + 8) = alignedSize + result;
+  result = *(int *)(arena + 8);
+  *(int *)(arena + 0x14) = result;
+  *(uint *)(arena + 8) = alignedSize + result;
   return result;
 }
 
-/* FUN_00193e74 @ 0x193e74 (68 bytes) */
-int FUN_00193e74(param_1, param_2, param_3)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
+/* Arena__allocZeroed @ 0x193e74 (68 bytes) */
+int Arena__allocZeroed(arena, count, elementSize)
+  undefined4 arena;
+  int count;
+  int elementSize;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())Arena__alloc)(param_1,param_2 * param_3);
-  _memset(callResult,0,param_2 * param_3);
+  callResult = ((int (*)())Arena__alloc)(arena,count * elementSize);
+  _memset(callResult,0,count * elementSize);
   return callResult;
 }
 
 /* Arena__bytesInUse @ 0x193eb8 (76 bytes) */
-int Arena__bytesInUse(param_1)
-  int param_1;
+int Arena__bytesInUse(arena)
+  int arena;
 {
-  int *piVar1;
-  int iVar2;
-  int *piVar3;
+  int *chunk;
+  int bytesInUse;
+  int *olderChunk;
   
-  piVar1 = *(int **)(param_1 + 4);
-  if (piVar1 == (int *)0x0) {
+  chunk = *(int **)(arena + 4);
+  if (chunk == (int *)0x0) {
     return 0;
   }
-  piVar3 = (int *)*piVar1;
-  iVar2 = piVar1[1] - (*(int *)(param_1 + 0x10) - *(int *)(param_1 + 8));
-  if (piVar3 == (int *)0x0) {
-    return iVar2;
+  olderChunk = (int *)*chunk;
+  bytesInUse = chunk[1] - (*(int *)(arena + 0x10) - *(int *)(arena + 8));
+  if (olderChunk == (int *)0x0) {
+    return bytesInUse;
   }
   do {
-    piVar1 = piVar3 + 1;
-    piVar3 = (int *)*piVar3;
-    iVar2 = iVar2 + *piVar1;
-  } while (piVar3 != (int *)0x0);
-  return iVar2;
+    chunk = olderChunk + 1;
+    olderChunk = (int *)*olderChunk;
+    bytesInUse = bytesInUse + *chunk;
+  } while (olderChunk != (int *)0x0);
+  return bytesInUse;
 }
 
 /* DList__isEmpty @ 0x193f08 (24 bytes) */
-int DList__isEmpty(param_1)
-  int param_1;
+int DList__isEmpty(list)
+  int list;
 {
-  return *(int *)(param_1 + 8) == param_1 + 0xc;
+  return *(int *)(list + 8) == list + 0xc;
 }
 
 /* DListNode__unlinkAndDelete @ 0x193f20 (36 bytes) */
 int DListNode__unlinkAndDelete(node)
   int *node;
 {
-  int iVar1;
-  int iVar2;
+  int nodeVtable;
+  int nextNode;
   
-  iVar2 = node[2];
-  iVar1 = *node;
-  *(int *)(iVar2 + 4) = node[1];
-  *(int *)(node[1] + 8) = iVar2;
+  nextNode = node[2];
+  nodeVtable = *node;
+  *(int *)(nextNode + 4) = node[1];
+  *(int *)(node[1] + 8) = nextNode;
                     
                     
-  (**(code **)(iVar1 + 4))();
+  (**(code **)(nodeVtable + 4))();
   return;
 }
 
@@ -1583,28 +1586,28 @@ int DList__pushFront(list, node)
 }
 
 /* DList__initSentinel @ 0x193fa4 (16 bytes) */
-int DList__initSentinel(param_1)
-  int param_1;
+int DList__initSentinel(list)
+  int list;
 {
-  *(int *)(param_1 + 0x10) = param_1;
-  *(int *)(param_1 + 8) = param_1 + 0xc;
+  *(int *)(list + 0x10) = list;
+  *(int *)(list + 8) = list + 0xc;
   return;
 }
 
 /* DListNode__clear @ 0x193fb4 (104 bytes) */
-int DListNode__clear(param_1)
-  int param_1;
+int DListNode__clear(list)
+  int list;
 {
-  int *piVar1;
-  int *piVar2;
+  int *node;
+  int *nextNode;
   
-  piVar1 = *(int **)(param_1 + 8);
-  while (piVar1 != (int *)(param_1 + 0xc)) {
-    piVar2 = (int *)piVar1[2];
-    (**(code **)(*piVar1 + 4))(piVar1);
-    piVar1 = piVar2;
+  node = *(int **)(list + 8);
+  while (node != (int *)(list + 0xc)) {
+    nextNode = (int *)node[2];
+    (**(code **)(*node + 4))(node);
+    node = nextNode;
   }
-  return ((int (*)())DList__initSentinel)(param_1);
+  return ((int (*)())DList__initSentinel)(list);
 }
 
 /* DList__unlink @ 0x19401c (24 bytes) */
@@ -1634,38 +1637,38 @@ int DList__count(list)
 }
 
 /* DListNode__ctor_194060 @ 0x194060 (72 bytes) */
-int DListNode__ctor_194060(param_1)
-  undefined4 *param_1;
+int DListNode__ctor_194060(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtableBase;
   
-  param_1[4] = 0;
-  puVar1 = PTR_DAT_001e8b48;
-  param_1[5] = 0;
-  param_1[5] = 0;
-  param_1[3] = puVar1 + 8;
-  param_1[2] = param_1 + 3;
-  *param_1 = puVar1 + 8;
-  param_1[1] = 0;
-  param_1[4] = param_1;
+  this[4] = 0;
+  vtableBase = PTR_DAT_001e8b48;
+  this[5] = 0;
+  this[5] = 0;
+  this[3] = vtableBase + 8;
+  this[2] = this + 3;
+  *this = vtableBase + 8;
+  this[1] = 0;
+  this[4] = this;
   return;
 }
 
 /* DListNode__init @ 0x1940a8 (72 bytes) */
-int DListNode__init(param_1)
-  undefined4 *param_1;
+int DListNode__init(this)
+  undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *vtableBase;
   
-  param_1[4] = 0;
-  puVar1 = PTR_DAT_001e8b48;
-  param_1[5] = 0;
-  param_1[5] = 0;
-  param_1[3] = puVar1 + 8;
-  param_1[2] = param_1 + 3;
-  *param_1 = puVar1 + 8;
-  param_1[1] = 0;
-  param_1[4] = param_1;
+  this[4] = 0;
+  vtableBase = PTR_DAT_001e8b48;
+  this[5] = 0;
+  this[5] = 0;
+  this[3] = vtableBase + 8;
+  this[2] = this + 3;
+  *this = vtableBase + 8;
+  this[1] = 0;
+  this[4] = this;
   return;
 }
 
@@ -1760,41 +1763,41 @@ int Vector__elementRefGrow(vector, index)
 }
 
 /* Vector__insertAt @ 0x1942d4 (160 bytes) */
-int Vector__insertAt(param_1, param_2)
-  uint *param_1;
-  uint param_2;
+int Vector__insertAt(vector, insertIndex)
+  uint *vector;
+  uint insertIndex;
 {
   int loopRemaining;
-  uint uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
+  uint growIndex;
+  int insertSlot;
+  undefined4 *writePtr;
+  undefined4 *readPtr;
   
-  uVar2 = param_1[1];
-  if (param_1[1] < param_2) {
-    uVar2 = param_2;
+  growIndex = vector[1];
+  if (vector[1] < insertIndex) {
+    growIndex = insertIndex;
   }
-  if (*param_1 < uVar2 + 1) {
-    ((int (*)())Vector__elementRefGrow)(param_1,uVar2);
+  if (*vector < growIndex + 1) {
+    ((int (*)())Vector__elementRefGrow)(vector,growIndex);
   }
   else {
-    param_1[1] = uVar2 + 1;
+    vector[1] = growIndex + 1;
   }
-  loopRemaining = (param_1[1] - param_2) + -1;
-  iVar3 = param_2 * 4 + param_1[2];
-  puVar4 = (undefined4 *)(iVar3 + loopRemaining * 4);
+  loopRemaining = (vector[1] - insertIndex) + -1;
+  insertSlot = insertIndex * 4 + vector[2];
+  writePtr = (undefined4 *)(insertSlot + loopRemaining * 4);
   if (loopRemaining != 0) {
-    loopRemaining = (param_1[1] - param_2) + -1;
-    puVar5 = puVar4;
+    loopRemaining = (vector[1] - insertIndex) + -1;
+    readPtr = writePtr;
     do {
-      puVar4 = puVar5 + -1;
-      *puVar5 = *puVar4;
+      writePtr = readPtr + -1;
+      *readPtr = *writePtr;
       loopRemaining = loopRemaining + -1;
-      puVar5 = puVar4;
+      readPtr = writePtr;
     } while (loopRemaining != 0);
   }
-  *puVar4 = 0;
-  return iVar3;
+  *writePtr = 0;
+  return insertSlot;
 }
 
 /* Vector__removeValue @ 0x194374 (124 bytes) */
@@ -1831,15 +1834,16 @@ LAB_001943c4:
 int HashTable__destroy_1943f0(table)
   uint *table;
 {
-  uint uVar1;
+  uint bucketSize;
+  uint bucketCount;
   int *slot;
   uint loopIndex;
   int elementBlock;
   uint loopIndex2;
   uint *bucket;
   
-  uVar1 = *table;
-  if (uVar1 == 0) {
+  bucketCount = *table;
+  if (bucketCount == 0) {
     loopIndex = table[2];
   }
   else {
@@ -1848,13 +1852,13 @@ int HashTable__destroy_1943f0(table)
     do {
       bucket = *(uint **)(loopIndex + loopIndex2 * 4);
       if (bucket != (uint *)0x0) {
-        uVar1 = bucket[1];
-        if (uVar1 != 0) {
+        bucketSize = bucket[1];
+        if (bucketSize != 0) {
           loopIndex = 0;
           do {
             if (loopIndex < *bucket) {
-              if (uVar1 <= loopIndex) {
-                _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+              if (bucketSize <= loopIndex) {
+                _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
                 bucket[1] = loopIndex + 1;
               }
               slot = (int *)(loopIndex * 4 + bucket[2]);
@@ -1867,16 +1871,16 @@ int HashTable__destroy_1943f0(table)
             if (elementBlock != 0) {
               ((int (*)())Arena__free)(*(undefined4 *)(elementBlock + -4),elementBlock + -4);
             }
-            uVar1 = bucket[1];
-          } while (loopIndex < uVar1);
+            bucketSize = bucket[1];
+          } while (loopIndex < bucketSize);
           loopIndex = table[2];
         }
         ((int (*)())Arena__free)(table[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
-        uVar1 = *table;
+        bucketCount = *table;
         loopIndex = table[2];
       }
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < uVar1);
+    } while (loopIndex2 < bucketCount);
   }
   return ((int (*)())Arena__free)(table[5],loopIndex);
 }
@@ -1885,15 +1889,16 @@ int HashTable__destroy_1943f0(table)
 int HashTable__destroy_194504(table)
   uint *table;
 {
-  uint uVar1;
+  uint bucketSize;
+  uint bucketCount;
   int *slot;
   uint loopIndex;
   int elementBlock;
   uint loopIndex2;
   uint *bucket;
   
-  uVar1 = *table;
-  if (uVar1 == 0) {
+  bucketCount = *table;
+  if (bucketCount == 0) {
     loopIndex = table[2];
   }
   else {
@@ -1902,13 +1907,13 @@ int HashTable__destroy_194504(table)
     do {
       bucket = *(uint **)(loopIndex + loopIndex2 * 4);
       if (bucket != (uint *)0x0) {
-        uVar1 = bucket[1];
-        if (uVar1 != 0) {
+        bucketSize = bucket[1];
+        if (bucketSize != 0) {
           loopIndex = 0;
           do {
             if (loopIndex < *bucket) {
-              if (uVar1 <= loopIndex) {
-                _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+              if (bucketSize <= loopIndex) {
+                _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
                 bucket[1] = loopIndex + 1;
               }
               slot = (int *)(loopIndex * 4 + bucket[2]);
@@ -1921,16 +1926,16 @@ int HashTable__destroy_194504(table)
             if (elementBlock != 0) {
               ((int (*)())Arena__free)(*(undefined4 *)(elementBlock + -4),elementBlock + -4);
             }
-            uVar1 = bucket[1];
-          } while (loopIndex < uVar1);
+            bucketSize = bucket[1];
+          } while (loopIndex < bucketSize);
           loopIndex = table[2];
         }
         ((int (*)())Arena__free)(table[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
-        uVar1 = *table;
+        bucketCount = *table;
         loopIndex = table[2];
       }
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < uVar1);
+    } while (loopIndex2 < bucketCount);
   }
   return ((int (*)())Arena__free)(table[5],loopIndex);
 }
@@ -1940,20 +1945,21 @@ int HashTable__findEntry(table, key)
   int *table;
   undefined4 key;
 {
-  uint uVar1;
+  uint bucketSize;
+  uint hash;
   undefined4 *slot;
   int callResult;
   uint loopIndex;
   uint *bucket;
   
-  uVar1 = (*(code *)table[4])(key,key);
-  bucket = *(uint **)((uVar1 & *table - 1U) * 4 + table[2]);
-  if ((bucket != (uint *)0x0) && (uVar1 = bucket[1], uVar1 != 0)) {
+  hash = (*(code *)table[4])(key,key);
+  bucket = *(uint **)((hash & *table - 1U) * 4 + table[2]);
+  if ((bucket != (uint *)0x0) && (bucketSize = bucket[1], bucketSize != 0)) {
     loopIndex = 0;
     do {
       if (loopIndex < *bucket) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+        if (bucketSize <= loopIndex) {
+          _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
           bucket[1] = loopIndex + 1;
         }
         slot = (undefined4 *)(loopIndex * 4 + bucket[2]);
@@ -1966,86 +1972,88 @@ int HashTable__findEntry(table, key)
       if (callResult == 0) {
   return slot;
       }
-      uVar1 = bucket[1];
+      bucketSize = bucket[1];
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar1);
+    } while (loopIndex < bucketSize);
   }
   return 0;
 }
 
-/* FUN_00194720 @ 0x194720 (276 bytes) */
-int FUN_00194720(param_1, param_2)
-  int *param_1;
-  undefined4 param_2;
+/* HashTable__remove @ 0x194720 (276 bytes) */
+int HashTable__remove(table, key)
+  int *table;
+  undefined4 key;
 {
-  uint uVar1;
-  undefined4 *puVar2;
+  uint bucketSize;
+  uint hash;
+  undefined4 *elementRef;
   int callResult;
   uint loopIndex;
-  uint *puVar5;
+  uint *bucket;
   
-  uVar1 = (*(code *)param_1[4])(param_2,param_2);
-  puVar5 = *(uint **)((*param_1 - 1U & uVar1) * 4 + param_1[2]);
-  if ((puVar5 != (uint *)0x0) && (uVar1 = puVar5[1], uVar1 != 0)) {
+  hash = (*(code *)table[4])(key,key);
+  bucket = *(uint **)((*table - 1U & hash) * 4 + table[2]);
+  if ((bucket != (uint *)0x0) && (bucketSize = bucket[1], bucketSize != 0)) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar5) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar5[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar5[1] = loopIndex + 1;
+      if (loopIndex < *bucket) {
+        if (bucketSize <= loopIndex) {
+          _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
+          bucket[1] = loopIndex + 1;
         }
-        puVar2 = (undefined4 *)(loopIndex * 4 + puVar5[2]);
+        elementRef = (undefined4 *)(loopIndex * 4 + bucket[2]);
       }
       else {
-        puVar2 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar5,loopIndex);
+        elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(bucket,loopIndex);
       }
-      callResult = (*(code *)param_1[3])(*puVar2,param_2);
+      callResult = (*(code *)table[3])(*elementRef,key);
       if (callResult == 0) {
-        ((int (*)())Vector__removeAt)(puVar5,loopIndex);
+        ((int (*)())Vector__removeAt)(bucket,loopIndex);
         return;
       }
-      uVar1 = puVar5[1];
+      bucketSize = bucket[1];
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar1);
+    } while (loopIndex < bucketSize);
   }
   return;
 }
 
 /* HashTable__find @ 0x194834 (260 bytes) */
-int HashTable__find(param_1, param_2)
-  int *param_1;
-  undefined4 param_2;
+int HashTable__find(table, key)
+  int *table;
+  undefined4 key;
 {
-  uint uVar1;
-  undefined4 *puVar2;
+  uint bucketSize;
+  uint hash;
+  undefined4 *elementRef;
   int callResult;
   uint loopIndex;
-  uint *puVar5;
-  undefined4 uVar6;
+  uint *bucket;
+  undefined4 element;
   
-  uVar1 = (*(code *)param_1[4])(param_2,param_2);
-  puVar5 = *(uint **)((*param_1 - 1U & uVar1) * 4 + param_1[2]);
-  if ((puVar5 != (uint *)0x0) && (uVar1 = puVar5[1], uVar1 != 0)) {
+  hash = (*(code *)table[4])(key,key);
+  bucket = *(uint **)((*table - 1U & hash) * 4 + table[2]);
+  if ((bucket != (uint *)0x0) && (bucketSize = bucket[1], bucketSize != 0)) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar5) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar5[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar5[1] = loopIndex + 1;
+      if (loopIndex < *bucket) {
+        if (bucketSize <= loopIndex) {
+          _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
+          bucket[1] = loopIndex + 1;
         }
-        puVar2 = (undefined4 *)(loopIndex * 4 + puVar5[2]);
+        elementRef = (undefined4 *)(loopIndex * 4 + bucket[2]);
       }
       else {
-        puVar2 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar5,loopIndex);
+        elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(bucket,loopIndex);
       }
-      uVar6 = *puVar2;
-      callResult = (*(code *)param_1[3])(uVar6,param_2);
+      element = *elementRef;
+      callResult = (*(code *)table[3])(element,key);
       if (callResult == 0) {
-        return uVar6;
+        return element;
       }
-      uVar1 = puVar5[1];
+      bucketSize = bucket[1];
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar1);
+    } while (loopIndex < bucketSize);
   }
   return 0;
 }
@@ -2107,14 +2115,14 @@ int HashTableIterator__advance(iter)
 }
 
 /* HashTableIterator__begin @ 0x194a94 (20 bytes) */
-int HashTableIterator__begin(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int HashTableIterator__begin(iter, table)
+  undefined4 *iter;
+  undefined4 table;
 {
-  *param_1 = param_2;
-  param_1[3] = 0xffffffff;
-  param_1[1] = 0xffffffff;
-  return ((int (*)())HashTableIterator__advance)(param_1);
+  *iter = table;
+  iter[3] = 0xffffffff;
+  iter[1] = 0xffffffff;
+  return ((int (*)())HashTableIterator__advance)(iter);
 }
 
 /* HashTable__grow @ 0x194aa8 (260 bytes) */
@@ -2235,39 +2243,42 @@ int HashTable__grow(table)
 }
 
 /* HashTable__insert @ 0x194d44 (184 bytes) */
-int HashTable__insert(param_1, param_2)
-  uint *param_1;
-  undefined4 param_2;
+int HashTable__insert(table, key)
+  uint *table;
+  undefined4 key;
 {
-  uint uVar1;
+  uint dataBlock;
+  uint vectorArena;
+  uint nodeArena;
+  uint hash;
   uint *allocation;
-  undefined4 *puVar3;
-  uint uVar4;
-  int iVar5;
+  undefined4 *slot;
+  uint buckets;
+  int bucketOffset;
   
-  uVar1 = (*(code *)param_1[4])(param_2,param_2);
-  uVar4 = param_1[2];
-  iVar5 = (*param_1 - 1 & uVar1) * 4;
-  if (*(int *)(iVar5 + uVar4) == 0) {
-    uVar1 = param_1[5];
-    allocation = (uint *)((int (*)())Arena__alloc)(uVar1,0x14);
-    *allocation = uVar1;
-    uVar1 = param_1[5];
+  hash = (*(code *)table[4])(key,key);
+  buckets = table[2];
+  bucketOffset = (*table - 1 & hash) * 4;
+  if (*(int *)(bucketOffset + buckets) == 0) {
+    nodeArena = table[5];
+    allocation = (uint *)((int (*)())Arena__alloc)(nodeArena,0x14);
+    *allocation = nodeArena;
+    vectorArena = table[5];
     allocation[1] = 2;
     allocation[2] = 0;
-    allocation[4] = uVar1;
-    uVar1 = ((int (*)())Arena__alloc)(uVar1,8);
-    allocation[3] = uVar1;
-    *(uint **)(iVar5 + uVar4) = allocation + 1;
-    uVar4 = param_1[2];
+    allocation[4] = vectorArena;
+    dataBlock = ((int (*)())Arena__alloc)(vectorArena,8);
+    allocation[3] = dataBlock;
+    *(uint **)(bucketOffset + buckets) = allocation + 1;
+    buckets = table[2];
   }
-  iVar5 = *(int *)(iVar5 + uVar4);
-  puVar3 = (undefined4 *)((int (*)())Vector__insertAt)(iVar5,0);
-  *puVar3 = param_2;
-  if (*param_1 < *(uint *)(iVar5 + 4)) {
-    ((int (*)())HashTable__grow)(param_1);
+  bucketOffset = *(int *)(bucketOffset + buckets);
+  slot = (undefined4 *)((int (*)())Vector__insertAt)(bucketOffset,0);
+  *slot = key;
+  if (*table < *(uint *)(bucketOffset + 4)) {
+    ((int (*)())HashTable__grow)(table);
   }
-  param_1[1] = param_1[1] + 1;
+  table[1] = table[1] + 1;
   return;
 }
 
@@ -2394,43 +2405,48 @@ int HashTable__insert_1950e0(table, key, value)
   uint key;
   uint value;
 {
+  int equalResult;
+  uint bucketSize;
+  uint entryArena;
+  uint vectorArena;
+  uint nodeArena;
   uint allocation2;
-  uint uVar1;
+  uint hash;
   uint *allocation;
   undefined4 *slot;
-  int iVar4;
+  int bucketOffset;
   uint loopIndex;
   uint *bucket;
   
-  uVar1 = (*(code *)table[4])(key,key,value);
+  hash = (*(code *)table[4])(key,key,value);
   loopIndex = table[2];
-  iVar4 = (uVar1 & *table - 1) * 4;
-  if (*(int *)(iVar4 + loopIndex) == 0) {
-    uVar1 = table[5];
-    allocation = (uint *)((int (*)())Arena__alloc)(uVar1,0x14);
-    *allocation = uVar1;
-    uVar1 = table[5];
+  bucketOffset = (hash & *table - 1) * 4;
+  if (*(int *)(bucketOffset + loopIndex) == 0) {
+    nodeArena = table[5];
+    allocation = (uint *)((int (*)())Arena__alloc)(nodeArena,0x14);
+    *allocation = nodeArena;
+    vectorArena = table[5];
     allocation[1] = 2;
     allocation[2] = 0;
-    allocation[4] = uVar1;
-    allocation2 = ((int (*)())Arena__alloc)(uVar1,8);
+    allocation[4] = vectorArena;
+    allocation2 = ((int (*)())Arena__alloc)(vectorArena,8);
     allocation[3] = allocation2;
-    *(uint **)(iVar4 + loopIndex) = allocation + 1;
+    *(uint **)(bucketOffset + loopIndex) = allocation + 1;
     loopIndex = table[2];
   }
-  uVar1 = table[5];
-  bucket = *(uint **)(iVar4 + loopIndex);
-  allocation = (uint *)((int (*)())Arena__alloc)(uVar1,0xc);
-  *allocation = uVar1;
+  entryArena = table[5];
+  bucket = *(uint **)(bucketOffset + loopIndex);
+  allocation = (uint *)((int (*)())Arena__alloc)(entryArena,0xc);
+  *allocation = entryArena;
   allocation[1] = key;
   allocation[2] = value;
-  uVar1 = bucket[1];
-  if (uVar1 != 0) {
+  bucketSize = bucket[1];
+  if (bucketSize != 0) {
     loopIndex = 0;
     do {
       if (loopIndex < *bucket) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+        if (bucketSize <= loopIndex) {
+          _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
           bucket[1] = loopIndex + 1;
         }
         slot = (undefined4 *)(loopIndex * 4 + bucket[2]);
@@ -2440,12 +2456,12 @@ int HashTable__insert_1950e0(table, key, value)
       }
       loopIndex = loopIndex + 1;
       slot = (undefined4 *)*slot;
-      iVar4 = (*(code *)table[3])(*slot,key);
-      if (((iVar4 == 0) && (value == slot[1])) && (allocation + 1 != (uint *)0x0)) {
+      equalResult = (*(code *)table[3])(*slot,key);
+      if (((equalResult == 0) && (value == slot[1])) && (allocation + 1 != (uint *)0x0)) {
         ((int (*)())Arena__free)(*allocation,allocation);
       }
-      uVar1 = bucket[1];
-    } while (loopIndex < uVar1);
+      bucketSize = bucket[1];
+    } while (loopIndex < bucketSize);
   }
   slot = (undefined4 *)((int (*)())Vector__insertAt)(bucket,0);
   *slot = allocation + 1;

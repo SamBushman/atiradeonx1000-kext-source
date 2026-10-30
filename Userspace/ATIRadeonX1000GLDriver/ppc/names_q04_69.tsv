@@ -1,0 +1,38 @@
+use	psnDecodedToProgram	sVar9	rgbRegField	INFERRED	decoded entry rgb register field (+0x80+2*i); -1 becomes 0x8000	^\s*sVar9\ =\ \*\(short\ \*\)\(iVar8\ \+\ 0x80\);$	+1
+use	psnDecodedToProgram	sVar9	rgbRegField	INFERRED	decoded entry rgb register field (+0x80+2*i); -1 becomes 0x8000	^\s*if\ \(sVar9\ ==\ \-1\)\ \{$	+2
+use	psnDecodedToProgram	sVar9	rgbRegField	INFERRED	decoded entry rgb register field (+0x80+2*i); -1 becomes 0x8000	^\s*\*\(short\ \*\)\(param_2\ \+\ 0x16\)\ =\ sVar9;$	+1
+use	psnDecodedToProgram	sVar9	rgbRegField	INFERRED	decoded entry rgb register field (+0x80+2*i); -1 becomes 0x8000	^\s*\*\(short\ \*\)\(\(int\)param_2\ \+\ 0x56\)\ =\ sVar9;$	+1
+use	psnDecodedToProgram	sVar9	rgbRegField	INFERRED	decoded entry rgb register field (+0x80+2*i); -1 becomes 0x8000	^\s*\*\(short\ \*\)\(\(int\)param_2\ \+\ 0x5a\)\ =\ sVar9;$	+1
+local	psnDecodedToProgram	sVar11	alphaRegField	INFERRED	decoded entry alpha register field (+0x86+2*i); -1 becomes 0x8000
+use	psnDecodedToProgram	uVar22	rgbSourceSelect	INFERRED	rgb source select byte looked up in the table at 0x1dc000 for source slot i	^\s*uVar22\ =\ 0;$@2	+1
+use	psnDecodedToProgram	uVar22	rgbSourceSelect	INFERRED	rgb source select byte looked up in the table at 0x1dc000 for source slot i	^\s*uVar22\ =\ \*\(undefined1\ \*\)\(uVar10\ \*\ 4\ \+\ 0x1dc000\ \+\ uVar14\);$	+1
+use	psnDecodedToProgram	uVar22	rgbSourceSelect	INFERRED	rgb source select byte looked up in the table at 0x1dc000 for source slot i	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x73\)\ =\ uVar22;$	+1
+use	psnDecodedToProgram	uVar22	rgbSourceSelect	INFERRED	rgb source select byte looked up in the table at 0x1dc000 for source slot i	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x72\)\ =\ uVar22;$	+1
+use	psnDecodedToProgram	uVar22	rgbSourceSelect	INFERRED	rgb source select byte looked up in the table at 0x1dc000 for source slot i	^\s*\*\(undefined1\ \*\)\(param_2\ \+\ 0x1d\)\ =\ uVar22;$	+1
+use	psnDecodedToProgram	uVar22	alphaSwizzleByte	INFERRED	byte from the table at 0x1dbf98 indexed by the entry word +0x28 (alpha/rgb output select)	^\s*uVar22\ =\ \*\(undefined1\ \*\)\(\(uint\)\*\(ushort\ \*\)\(iVar8\ \+\ 0x28\)\ \*\ 2\ \+\ 0x1dbf98\ \+\ iVar15\);$	+1
+use	psnDecodedToProgram	uVar22	alphaSwizzleByte	INFERRED	byte from the table at 0x1dbf98 indexed by the entry word +0x28 (alpha/rgb output select)	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x79\)\ =\ uVar22;$	+1
+use	psnDecodedToProgram	uVar22	alphaSwizzleByte	INFERRED	byte from the table at 0x1dbf98 indexed by the entry word +0x28 (alpha/rgb output select)	^\s*\*\(undefined1\ \*\)\(param_2\ \+\ 0x22\)\ =\ uVar22;$	+1
+use	psnDecodedToProgram	uVar13	rgbSourceModifier	INFERRED	bits 12-13 of the rgb source word (negate/abs modifier)	^\s*uVar13\ =\ 0;$	+1
+use	psnDecodedToProgram	uVar13	rgbSourceModifier	INFERRED	bits 12-13 of the rgb source word (negate/abs modifier)	^\s*uVar13\ =\ \(uVar6\ \&\ 0x3000\)\ >>\ 0xc;$	+1
+use	psnDecodedToProgram	uVar13	rgbSourceModifier	INFERRED	bits 12-13 of the rgb source word (negate/abs modifier)	^\s*uVar23\ =\ \(undefined1\)uVar13;$	+1
+use	psnDecodedToProgram	uVar13	outputScaleBits	INFERRED	(int)(entry float +0x2c * DOUBLE_001aa290): one-hot output scale factor	^\s*uVar13\ =\ \(uint\)\(int\)\(\(double\)\*\(float\ \*\)\(iVar8\ \+\ 0x2c\)\ \*\ DOUBLE_001aa290\);$	+3
+use	psnDecodedToProgram	uVar6	flagsBit4	INFERRED	bit 4 of the entry flag word at +0x42; non-zero raises status bit 0	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x42\)\ >>\ 4\ \&\ 1;$	+3
+use	psnDecodedToProgram	uVar6	sourceSlotWord	INFERRED	16-bit source slot word of the decoded entry (register / modifier / swizzle bits)	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar8\ \*\ 4\ \+\ iVar16\ \+\ 2\);$	+1
+use	psnDecodedToProgram	uVar6	sourceSlotWord	INFERRED	16-bit source slot word of the decoded entry (register / modifier / swizzle bits)	^\s*if\ \(\(\(uVar6\ \&\ 0x300\)\ !=\ 0x100\)\ \&\&\ \(uVar10\ =\ 5,\ \(uVar6\ \&\ 0x300\)\ !=\ 0x200\)\)\ \{$	+2
+use	psnDecodedToProgram	uVar6	sourceSlotWord	INFERRED	16-bit source slot word of the decoded entry (register / modifier / swizzle bits)	^\s*uVar13\ =\ \(uVar6\ \&\ 0x3000\)\ >>\ 0xc;$	+1
+use	psnDecodedToProgram	uVar6	sourceSlotWord	INFERRED	16-bit source slot word of the decoded entry (register / modifier / swizzle bits)	^\s*uVar18\ =\ \(uVar6\ \&\ 0x3000\)\ >>\ 0xc;$	+2
+local	psnDecodedToProgram	fVar7	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8)
+use	psnDecodedToProgram	uVar12	alphaWriteFlag	INFERRED	1 when the alpha or colour part of the entry writes anything	^\s*if\ \(\(\*\(short\ \*\)\(iVar17\ \+\ 0x42\)\ !=\ 0\ \|\|\ \*\(short\ \*\)\(iVar17\ \+\ 0x46\)\ !=\ 0\)\ \|\|$	+3
+use	psnDecodedToProgram	uVar12	alphaWriteFlag	INFERRED	1 when the alpha or colour part of the entry writes anything	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x51\)\ =\ uVar12;$	+1
+use	psnDecodedToProgram	uVar12	alphaSourceSelect	INFERRED	alpha source select byte looked up in the table at 0x1dbfb4	^\s*uVar12\ =\ 0;$	+1
+use	psnDecodedToProgram	uVar12	alphaSourceSelect	INFERRED	alpha source select byte looked up in the table at 0x1dbfb4	^\s*uVar12\ =\ \*\(undefined1\ \*\)\(\(uVar6\ \&\ 0x1f\)\ \*\ 4\ \+\ 0x1dbfb4\ \+\ uVar14\);$	+1
+use	psnDecodedToProgram	uVar12	alphaSourceSelect	INFERRED	alpha source select byte looked up in the table at 0x1dbfb4	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x82\)\ =\ uVar12;$	+1
+use	psnDecodedToProgram	uVar12	alphaSourceSelect	INFERRED	alpha source select byte looked up in the table at 0x1dbfb4	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x81\)\ =\ uVar12;$	+1
+use	psnDecodedToProgram	uVar12	alphaSourceSelect	INFERRED	alpha source select byte looked up in the table at 0x1dbfb4	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x83\)\ =\ uVar12;$	+1
+local	psnDecodedToProgram	uVar10	sourceTableIndex	INFERRED	index into the source select tables: 6 or 5 for special register classes, else the low 5 bits of the slot word
+local	psnDecodedToProgram	uVar14	channelSwizzle	INFERRED	low 2 bits of the source slot (component select)
+local	psnDecodedToProgram	iVar16	sourceSlotCursor	INFERRED	pointer to the source slot words of the entry (+8, stride 0x40 between rgb and alpha)
+local	psnDecodedToProgram	uVar18	alphaSourceModifier	INFERRED	bits 12-13 of the alpha source word
+local	psnDecodedToProgram	uVar19	alphaSourceModifierByte	INFERRED	alphaSourceModifier as a byte stored in the record
+local	psnDecodedToProgram	uVar23	rgbSourceModifierByte	INFERRED	rgbSourceModifier as a byte stored in the record
+local	psnDecodedToProgram	uStack_31	outputScaleCode	INFERRED	output scale code 0..6 mapped from the one-hot scale factor

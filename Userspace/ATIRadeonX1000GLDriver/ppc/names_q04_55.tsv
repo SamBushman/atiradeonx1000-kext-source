@@ -1,0 +1,11 @@
+local	FUN_000b57a0	uVar1	packedLimitWord	INFERRED	allocation word 0x1523: instruction count - 1 in bits 20-29, later the last texture instruction index in bits 10-19
+local	FUN_000b57a0	uVar3	lastTexInstIndex	INFERRED	index of the last instruction whose type field is 0x200/0x300 with no operand bits (texture instruction), scanned from the end
+local	FUN_000b57a0	uVar6	lastDependentInstIndex	INFERRED	index of the last instruction with a source of kind 1, scanned from the end; stored in allocation word 0x1524 bits 0-9
+local	FUN_000b57a0	iVar2	oldMaxConstIndex	INFERRED	param_2+0x1240 maximum constant index before this constant was recorded
+local	FUN_000b57a0	iVar5	status	INFERRED	return value: 0xe when no fragment program, otherwise the result of ilAssembleProgram (0 on success)
+local	FUN_000b57a0	iVar8	scanIndex	INFERRED	instruction index counting down while looking for the last texture instruction
+local	FUN_000b57a0	iVar9	constSlotCursor	INFERRED	param_2 advanced 0x10 per constant slot (constants copied to +0x18..+0x24)
+local	FUN_000b57a0	puVar7	instructionCursor	INFERRED	instruction array of the compiled program (4 words per instruction), walked backwards
+local	FUN_000b57a0	pcVar10	slotFlagCursor	INFERRED	per-constant flag byte (stride 0x14) of the compiled program
+func	FUN_000b57a0	gld_compileFragmentProgramImage	INFERRED	allocates the 0x569c-byte compiled program image, fills the header from the program object and the context, calls ilAssembleProgram, derives the last texture / last dependent instruction indices and copies the used constants into the program object
+func	FUN_000a9ac0	gld_validateDirtyState	INFERRED	processes the dirty bit words (dirtyBits[0..4]) after a state change: refreshes sample config, light direction vectors (rsqrt-normalised), scissor/viewport, point/fog/program state and calls the per-group update helpers (FUN_000a8630, a8a00, a8340, a9070, a8e20, a8d70, a7e80, a8c00, a7ea0, gld_updatePointState, gld_updateTexCombinerState)

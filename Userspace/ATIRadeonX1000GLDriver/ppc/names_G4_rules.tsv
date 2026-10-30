@@ -4,10 +4,10 @@ local	FUN_0011e780	iVar1	callResult	INFERRED	holds one call's result that is tes
 local	FUN_0011e988	param_1	ctx	INFERRED	param_1 is dereferenced at +0xb0 and +0x238 at least twice (the per-context layout used across this family)
 local	FUN_0011eec8	param_1	ctx	INFERRED	param_1 is dereferenced at +0xb0 and +0x238 at least twice (the per-context layout used across this family)
 local	FUN_00123288	iVar3	callResult	INFERRED	holds one call's result that is tested or returned
-local	FUN_001240a8	iVar3	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_001241fc	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_0012434c	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_0012447c	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001240a8	iVar3	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_00125350	uVar6	arena2	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object
 local	FUN_00125350	puVar5	allocation2	INFERRED	result of FUN_00193e18; the allocation starts with the arena word, the object is at allocation+1
 local	FUN_001257b0	uVar6	arena2	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); loaded from +0x374/+0x378 of the compiler object

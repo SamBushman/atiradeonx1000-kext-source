@@ -1,0 +1,30 @@
+use	FUN_000a4770	fVar2	modeScale	INFERRED	1.0, or FLOAT_001aa108 when the engine mode short at caps+0x2e10 equals 0x1102	^\s*fVar2\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_000a4770	fVar2	modeScale	INFERRED	1.0, or FLOAT_001aa108 when the engine mode short at caps+0x2e10 equals 0x1102	^\s*fVar2\ =\ FLOAT_001aa108;$	+1
+use	FUN_000a4770	fVar2	modeScale	INFERRED	1.0, or FLOAT_001aa108 when the engine mode short at caps+0x2e10 equals 0x1102	^\s*uVar4\ =\ \(uint\)\(int\)\(\(float\)\(\(double\)CONCAT44\(0x43300000,iVar6\)\ \-\ DOUBLE_001aa250\)\ \*\ FLOAT_001aa10c\ \*$	+2
+use	FUN_000a4770	fVar1	pointSizeRequested	INFERRED	requested point size (caps+0x2e20), tested against the integer limits ctx+0x13e0/0x13e4	^\s*fVar1\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e20\)\ \+\ iVar7\);$	+6
+use	FUN_000a4770	fVar1	pointSizeRequestedF	INFERRED	requested point size (caps+0x2e20), quantized below against ctx+0x13e8..0x13f0	^\s*fVar1\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e20\)\ \+\ iVar7\);$@2	+1
+use	FUN_000a4770	fVar1	pointSizeRequestedF	INFERRED	requested point size (caps+0x2e20), quantized below against ctx+0x13e8..0x13f0	^\s*if\ \(\(fVar2\ <\ fVar1\)\ \&\&$	+2
+use	FUN_000a4770	fVar1	pointSizeRequestedF	INFERRED	requested point size (caps+0x2e20), quantized below against ctx+0x13e8..0x13f0	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
+use	FUN_000a4770	fVar1	pointSizeClamped	INFERRED	quantized size clamped to at least 1.0	^\s*fVar1\ =\ fVar3;$	+1
+use	FUN_000a4770	fVar1	pointSizeClamped	INFERRED	quantized size clamped to at least 1.0	^\s*fVar1\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_000a4770	fVar1	pointSizeClamped	INFERRED	quantized size clamped to at least 1.0	^\s*fVar1\ =\ fVar3;$@2	+1
+use	FUN_000a4770	fVar1	pointSizeClamped	INFERRED	quantized size clamped to at least 1.0	^\s*uVar4\ =\ \(uint\)\(int\)\(\(float\)\(\(double\)CONCAT44\(0x43300000,iVar6\)\ \-\ DOUBLE_001aa250\)\ \*\ FLOAT_001aa10c\ \*$	+2
+use	FUN_000a4770	fVar3	quantizedSize	INFERRED	initial quantized size (the lower limit ctx+0x13e8)	^\s*fVar3\ =\ fVar2;$	+1
+use	FUN_000a4770	fVar3	quantizedSize	INFERRED	size snapped to the granularity ctx+0x13f0 between ctx+0x13e8 and ctx+0x13ec	^\s*if\ \(\(fVar2\ <\ fVar1\)\ \&\&$	+3
+use	FUN_000a4770	fVar3	quantizedSize	INFERRED	size snapped to the granularity ctx+0x13f0 between ctx+0x13e8 and ctx+0x13ec	^\s*fVar1\ =\ fVar3;$	+2
+use	FUN_000a4770	fVar3	quantizedSize	INFERRED	size snapped to the granularity ctx+0x13f0 between ctx+0x13e8 and ctx+0x13ec	^\s*if\ \(\-\(fVar3\ \-\ FLOAT_001aa0e8\)\ <\ 0\.0\)\ \{$	+2
+local	FUN_000a4770	uVar4	pixelSize	INFERRED	return value: rounded point size, or glContextWord8 * size / 2 scaled pixel extent
+local	FUN_000a4770	iVar7	engineCaps	INFERRED	*(engine+0x10) capability table
+local	FUN_000a3a60	fVar1	rampLengthF	INFERRED	2 * (int)(tableSize * 0.5 / (clampedSizeF + 1.0)) as float: length of the coverage ramp
+local	FUN_000a3a60	fVar2	rampPosF	INFERRED	float ramp position, loop counter converted to float
+local	FUN_000a3a60	fVar3	rampStep	INFERRED	FLOAT_001aa0f0 / rampLengthF: coverage increment per entry
+local	FUN_000a3a60	fVar4	halfF	INFERRED	constant 0.5 (FLOAT_001aa10c) added before the float->byte conversion
+local	FUN_000a3a60	dVar5	intConvBias	INFERRED	DOUBLE_001aa1e0: 2^52 bias of the integer->double idiom
+local	FUN_000a3a60	dVar7	clampedSizeF	INFERRED	max(1.0, size parameter) as float
+local	FUN_000a3a60	dVar8	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8)
+local	FUN_000a3a60	dVar9	clampScratch	INFERRED	scratch for clamping the size parameter against 1.0
+local	FUN_000a3a60	param_3	tableSize	INFERRED	size of the table in samples
+local	FUN_000a3a60	param_4	outTable	INFERRED	output byte table, one coverage byte per entry
+local	FUN_000a3a60	param_5	outCount	INFERRED	receives the number of entries written
+func	FUN_000a4770	gld_computePointSizePixels	INFERRED	quantizes the requested point size (caps+0x2e20) to the hardware granularity (ctx+0x13e8..0x13f0) or, for the smooth path, clamps it and scales it by the viewport dimension ctx+8; returns the pixel extent
+func	FUN_000a3a60	gld_buildCoverageRampTable	INFERRED	linear variant of gld_buildCoverageByteTable: fills param_4 with a coverage ramp of 2*(int)(tableSize*0.5/(size+1)) entries and a 0xff terminator, count in *param_5

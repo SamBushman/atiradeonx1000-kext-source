@@ -1,0 +1,29 @@
+local	FUN_000546d0	param_1	glContext	INFERRED	the GL context (shader teardown hooks at +0x11a4 / +0x11ac, current-state copies at +0x1174..)
+local	FUN_000546d0	param_2	shader	INFERRED	vertex shader object being made current
+local	FUN_000546d0	iVar1	symbolRecord	INFERRED	symbol record shader[8] + offset whose in-use flag (+0x3d) is cleared
+local	FUN_000546d0	iVar2	symbolByteOffset	INFERRED	byte offset of the symbol record (stride 0x54)
+local	FUN_0004d620	cVar2	wantFlag	INFERRED	flag value (1 or 0) compared with the program entry byte +0x120c to decide which entries need a refresh
+local	FUN_0004d620	iVar5	programTable	INFERRED	program table *(glContext+0x1154): entry count at +4, entry list at +0x88
+local	FUN_0004d620	iVar3	entryByteOffset	INFERRED	byte offset of the program table entry (stride 0x78)
+local	FUN_0004d620	iVar1	programEntry	INFERRED	program entry selected by glContext+0x113c from the table entry
+local	FUN_00053a90	iVar1	entryId	INFERRED	id (+0x84) of the shader list entry being compared
+local	FUN_00053a90	iVar2	shaderIndex	INFERRED	index of the shader list entry (returned when the id matches)
+local	FUN_00053a90	piVar3	idCursor	INFERRED	cursor over the id fields of the shader list entries (stride 0x7c)
+local	FUN_00053a90	iVar4	entriesLeft	INFERRED	shader list entries still to compare
+local	FUN_0004e990	uVar1	depthBufferBits	INFERRED	state flags +0x154 & 0x30000: depth buffer precision selector
+local	FUN_0004e990	iVar2	scaledDepth	INFERRED	polygon offset / depth scale converted to an integer (returned)
+local	FUN_00064720	puVar1	constWordPtr	INFERRED	pointer to the next route constant word (programState + 0x270)
+local	FUN_00064720	bVar2	unitFlagByte	INFERRED	programState+0x36: flag byte, low 2 bits copied to glContext+0x1b78
+local	FUN_00064720	iVar3	routeCount	INFERRED	programState+0x2a0: number of route words
+local	FUN_00064720	a5	programState	INFERRED	program state of the current vertex program *(*(ctx+0x118c)*4 + ...)
+local	FUN_00064720	iVar4	routeDst	INFERRED	glContext cursor over the route register pairs (+0x1be4 / +0x1c04, 4 bytes apart)
+local	FUN_00064720	iVar6	routeSrc	INFERRED	cursor over the program state route words (programState + 0x244 / +0x270)
+local	FUN_00041310	uVar2	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index
+local	FUN_00041310	uVar5	tempRegister	INFERRED	translator+0x20: temp register index
+local	FUN_00041310	uStack_54	ilInstDst	INFERRED	staged IL instruction destination word (temp register | 0x400000)
+local	FUN_00041310	uStack_50	ilInstDstMask	INFERRED	staged IL instruction destination mask (0x55)
+local	FUN_00041310	uStack_4c	ilInstSrc0	INFERRED	staged IL instruction source 0 word
+local	FUN_0005e770	iVar2	entriesLeft	INFERRED	entries remaining to shift down by one slot
+local	FUN_0005e770	puVar3	shiftCursor	INFERRED	cursor over the pointer array while shifting entries down
+local	FUN_0005e770	uVar5	nextPosition	INFERRED	index of the entry after the removed one
+local	FUN_0004e990	dVar3	depthScale	INFERRED	depth scale constant for the selected precision (DOUBLE_001aa278/280/288) times state+0x2d88, converted to the returned integer

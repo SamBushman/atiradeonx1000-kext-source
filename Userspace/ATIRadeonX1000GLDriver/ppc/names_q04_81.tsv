@@ -1,0 +1,3 @@
+local	FUN_000a3be0	param_3	unitCounter	INFERRED	incoming register image reused as the texture unit counter / enabled-unit mask of the input loops
+local	FUN_000a3be0	param_5	tableCursor	INFERRED	incoming register image reused as the primitive table entry pointer and as a per-unit word cursor
+func	FUN_000a3be0	gld_setPrimitiveInputRegisters	INFERRED	for a primitive mode change (glContext+0x277c): recomputes the vertex input register assignment of the units (words ctx+0x1ee8.., select bits ctx+0x1b50/0x1bc0, register count ctx+0x1f2c) from the primitive table and the enabled units, then emits the register packets

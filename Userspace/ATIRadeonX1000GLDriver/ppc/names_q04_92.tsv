@@ -1,0 +1,5 @@
+use	FUN_000afe40	uVar13	instOpcode	INFERRED	opcode word (record +0) of the instruction being translated	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar19\ \+\ \*\(int\ \*\)\(pcVar18\ \+\ 100\)\);$	+1
+use	FUN_000afe40	uVar13	instOpcode	INFERRED	opcode word (record +0) of the instruction being translated	^\s*if\ \(uVar13\ <\ 0x20\)\ \{$	+2
+use	FUN_000afe40	uVar13	instOpcode	INFERRED	opcode word (record +0) of the instruction being translated	^\s*\(\(int\ \(\*\)\(\)\)FUN_000ac720\)\(param_1,pcVar18,local_5c,uVar13,auStack_204,in_r8,local_64,auStack_1fc,$	+4
+use	FUN_000afe40	uVar13	instOpcode	INFERRED	opcode word (record +0) of the instruction being translated	^\s*if\ \(2\ <\ uVar13\ \-\ 0x3d\)\ goto\ LAB_000b0e20;$	+1
+use	FUN_000afe40	uVar13	instOpcode	INFERRED	opcode word (record +0) of the instruction being translated	^\s*\(\(int\ \(\*\)\(\)\)FUN_000aec40\)\(param_1,pcVar18,local_5c,uVar13,auStack_1fc,in_r8,auStack_204,local_188,$	+2

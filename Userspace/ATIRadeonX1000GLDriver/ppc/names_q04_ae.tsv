@@ -1,0 +1,34 @@
+local	ilRemapSwizzleTriple	uVar2	selectValue	INFERRED	component select written to all three of selectX/Y/Z
+local	ilEmitShadowCompare	uVar1	coordRegTypeBits	INFERRED	register type bits (low 6) of the coordinate operand halfword
+local	ilEmitShadowCompare	iVar3	compareFunc	INFERRED	texture compare function (GL enum 0x200..0x207) of the unit
+local	ilEmitShadowCompare	puVar4	compareSwizzleToken	INFERRED	swizzle token constant (0x2222 or 0x4444) chosen by the compare function
+local	ilEmitShadowCompare	uVar7	tokenWordTemp	INFERRED	coordinate token word, later the shadow register token
+local	ilCopyInstructionRemapped	uVar2	destRegKind	INFERRED	register kind field (0x3f0000) of the destination word
+local	psnDecRetargetSourceReg	uVar3	scratchBits	INFERRED	alpha-component flag first, later the source swizzle word under test
+local	ilRecordRegisterUse	param_5	hasExtraWord	INFERRED	token bit 22: a destination extension word was present
+local	ilRecordRegisterUse	iVar1	lastRegister	INFERRED	usageInfo[1]: highest register recorded
+local	gld_uploadParamConstants	iVar1	allocaOffset	INFERRED	negative size of the constant buffer allocated on the stack
+local	gld_uploadParamConstants	auStack_70	allocaBase	INFERRED	stack frame base the dynamic constant buffer is placed relative to
+local	gld_uploadParamConstants	auStack_30	constantBuffer	INFERRED	stack buffer receiving the gathered program constants
+local	gld_emitProgramStateAndConstants	param_1	glContext	INFERRED	GL context forwarded to the packet emitters
+local	gld_emitProgramStateAndConstants	param_2	programObj	INFERRED	program object forwarded to the packet emitters
+local	gld_emitProgramStateOnly	param_1	glContext	INFERRED	GL context forwarded to gld_emitProgramStatePackets
+local	gld_emitProgramStateOnly	param_2	programObj	INFERRED	program object forwarded to gld_emitProgramStatePackets
+local	gld_emitProgramConstantsOnly	param_1	glContext	INFERRED	GL context forwarded to gld_emitProgramConstants
+local	gld_emitProgramConstantsOnly	param_2	programObj	INFERRED	program object forwarded to gld_emitProgramConstants
+local	gld_compileFragmentProgramImage	param_2	programObj	INFERRED	program object: +0x14 receives the compiled image
+local	gld_scalePointSizeToPixels	param_2	addSizeBias	INFERRED	non-zero adds the antialiasing size bias to the point size
+local	scCallbackFclose	param_2	file	INFERRED	FILE* to close
+local	scCallbackFclose	iVar1	closeResult	INFERRED	_fclose result
+local	ilEmitShadowStateTokens	puVar3	returnedCursor	INFERRED	write cursor returned to the caller (tracks tokenCursor at the final checkpoints)
+local	gld_emitSlotParamIfDirty	param_4	slotIndex	INFERRED	constant slot index (< 0x100)
+local	gld_dropStaleTextureShadow	piVar1	unitSlotCursor	INFERRED	cursor over the five binding slots of the unit
+local	psnSwizzleIsAlphaSourceForm	param_1	sourceSwizzle	INFERRED	source swizzle halfword under test
+local	ilSelectorOneToThreeOrZero	uVar1	slotCode	INFERRED	selector mapped 2->2, 3->3, 1->1, else 0
+local	gld_quantizePointSizeInt	uVar1	quantizedSize	INFERRED	clamped integer point size
+local	glDeleteFragmentShaderATI_impl	iVar2	shaderEntry	INFERRED	address of the 0x78-byte shader entry being removed
+local	scShaderStateFlag	param_1	shaderState	INFERRED	shader state object (+0x4c: info block whose byte 5 is the flag)
+local	scDisassembleIL	param_4	extraArg	INFERRED	fourth argument forwarded by address to scDisassembleILImpl
+local	scCallbackAppendFormatted	auStack_118	textBuffer	INFERRED	264-byte text buffer: prefix copied in, formatted text appended
+local	ilRemapSwizzleSingle	uVar1	swizzleWord	INFERRED	swizzle code under remap
+local	gld_isPointAttenuationActive	uVar1	attenuationBit	INFERRED	point-attenuation enable bit read from the context

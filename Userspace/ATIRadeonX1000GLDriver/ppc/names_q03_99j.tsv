@@ -1,0 +1,7 @@
+local	arbfpCompileFragmentProgram	local_48	keyBlock0	INFERRED	ilRewriteForTextureState keyWords[0] (= keyWords[2] of the caller)
+local	arbfpCompileFragmentProgram	local_44	keyBlock1	INFERRED	keyWords[1] (= *keyWords of the caller; seeds a loop counter)
+local	arbfpCompileFragmentProgram	local_40	keyBlock2	INFERRED	keyWords[2], cleared
+local	arbfpCompileFragmentProgram	local_3c	keyBlock3	INFERRED	keyWords[3]: texture/fog mode flag bits (0x2,0x4,0x8,0xc,0x80,0x100,0x280,0x400)
+local	arbfpCompileFragmentProgram	local_38	keyBlock4	INFERRED	keyWords[4]: user clip plane bit mask (ctx[0x917] ones)
+local	arbfpCompileFragmentProgram	local_34	keyBlock5	INFERRED	keyWords[5], set to 2
+local	arbfpCompileFragmentProgram	local_30	keyBlock6	INFERRED	keyWords[6], cleared

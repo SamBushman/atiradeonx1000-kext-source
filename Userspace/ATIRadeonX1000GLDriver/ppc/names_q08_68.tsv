@@ -1,0 +1,17 @@
+func	FUN_00183ac8	ObjectVector__freeAllElements	INFERRED	frees every element (arena block at element-4) of the vector at +0x1c and sets its size to 0
+local	FUN_00183ac8	param_1	owner	INFERRED	object whose +0x1c is the vector of arena-allocated elements
+local	FUN_00183ac8	iVar3	element	INFERRED	vector element being freed
+func	FUN_0018413c	Block__moveProducersBefore	INFERRED	walks the single-use producer tree of beforeInst with explicit stacks and moves each producer before it, ordering sources by schedule slack and storing +0x150 slack counts
+func	FUN_001792f0	ValueKey__operandDefinitionIsFlagBit8	INFERRED	instruction vtable +100 predicate and the operand's last defining instruction has OpcodeTraits flagBit8
+local	FUN_001792f0	param_2	operandIndex	INFERRED	operand whose value-key row (+0x23 words, vector at +0x2c) is inspected
+local	FUN_001792f0	uVar3	lastElementIndex	INFERRED	vector size - 1
+local	FUN_001792f0	iVar6	definingRow	INFERRED	value-key row of the last definition of the operand
+func	FUN_00189ce0	Inst__compareForMerge	INFERRED	0 when both instructions have the same opcode, write-alpha flag and sources (1 and 2), else -1
+local	FUN_00189ce0	cVar1	alphaFlag	INFERRED	operand 0 byte +0x13 (alpha write flag) of inst
+func	FUN_00178d78	ValueKey__dotOperandSplatValue	INFERRED	for dot opcodes 0x18, 0x1c, 0x1d, 0x1e: when all components of an operand share one negative value number returns its expr record value, else 0x7ffffffe
+func	FUN_0017a8a4	ValueKey__foldCompareAgainstZero	INFERRED	per-lane constant class compared against signToCompareCode(0) via DAT_001e61e8 and the instruction's compare condition: lane results 0 / 1.0, then FUN_0017a294
+func	FUN_0017b96c	ValueKey__rewriteUniformSwizzle	INFERRED	when all used lanes of source 1 are the same value, rewrites the source select word to the 0x04040404-style canonical swizzle and returns whether it changed
+func	FUN_0017a294	ValueKey__setLiteralOperandsForOpcode	INFERRED	opcode 0x8b / 0x8c: sets operand 1 (and 2 for 0x8b) to literal vec4 constants (FUN_0017a130)
+func	FUN_0017a034	ValueKey__forwardOperandByCompareToZero	INFERRED	compares the operand constant with 0 (evaluateCompareFloats) and forwards the selected source lane when modifiers and scale are plain
+func	FUN_0017729c	ValueKey__computeLaneCompareCodes	INFERRED	per lane: compare code of the value number (signToCompareCode / ptr-set +0xc), mapped through DAT_001e61a0 when saturate is set, stored at ctx+0x80+lane*4
+func	FUN_001771b0	ValueKey__computeLaneRangeClasses	INFERRED	per lane: classifyConstantRange of the value number (or ptr-set +0x10), mapped through DAT_001e6158 when saturate is set, stored at ctx+0x50+lane*4

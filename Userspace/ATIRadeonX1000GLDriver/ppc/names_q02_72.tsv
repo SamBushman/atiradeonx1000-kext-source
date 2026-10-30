@@ -1,0 +1,17 @@
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1938\);$	+1
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*\*puVar6\ =\ \(\(unsigned\ char\ \*\)0x00001100\)\ \+\ iVar9;$	+1
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*puVar6\[2\]\ =\ \(\(unsigned\ char\ \*\)0x00001110\)\ \+\ iVar9;$	+1
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*puVar6\[4\]\ =\ \(\(unsigned\ char\ \*\)0x00001120U\)\ \+\ iVar9;$	+1
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*puVar6\[6\]\ =\ \(\(unsigned\ char\ \*\)0x00001130\)\ \+\ iVar9;$	+1
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*puVar6\[8\]\ =\ \(\(unsigned\ char\ \*\)0x00001170U\)\ \+\ iVar9;$	+1
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*puVar6\[10\]\ =\ \(\(unsigned\ char\ \*\)0x00001160\)\ \+\ iVar9;$	+2
+use	FUN_00052280	iVar9	unitCountOrIndex	INFERRED	glContext+0x1938 value, then the unit index incremented while the packet entries are written (joined: count and index share the register)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	FUN_00052280	iVar9	contextWordCursor	INFERRED	glContext, then glContext + 4 per copied word of the 8 words at glContext+0x1ee8..	^\s*iVar9\ =\ param_1;$	+1
+use	FUN_00052280	iVar9	contextWordCursor	INFERRED	glContext, then glContext + 4 per copied word of the 8 words at glContext+0x1ee8..	^\s*puVar6\ =\ \(undefined4\ \*\)\(iVar9\ \+\ 0x1ee8\);$	+2
+use	FUN_00052280	iVar10	copyByteOffset	INFERRED	byte offset into the packet words being filled (4 per word)	^\s*iVar10\ =\ 0;$	+1
+use	FUN_00052280	iVar10	copyByteOffset	INFERRED	byte offset into the packet words being filled (4 per word)	^\s*\*\(undefined4\ \*\)\(\(int\)puVar7\ \+\ iVar10\ \+\ 0x34\)\ =\ \*puVar6;$	+2
+use	FUN_00052280	iVar16	wordsLeft	INFERRED	countdown of the 8 words to copy	^\s*iVar16\ =\ 8;$	+1
+use	FUN_00052280	iVar16	wordsLeft	INFERRED	countdown of the 8 words to copy	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+2
+use	FUN_00052280	puVar5	packetCountWord	INFERRED	state word *(glState+0x1d8) updated with the packet size in dwords	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(iVar9\ \+\ 0x1d8\);$	+2
+use	FUN_00052280	puVar6	contextWordPtr	INFERRED	pointer to the glContext word being copied into the packet	^\s*puVar6\ =\ \(undefined4\ \*\)\(iVar9\ \+\ 0x1ee8\);$	+1
+use	FUN_00052280	puVar6	contextWordPtr	INFERRED	pointer to the glContext word being copied into the packet	^\s*\*\(undefined4\ \*\)\(\(int\)puVar7\ \+\ iVar10\ \+\ 0x34\)\ =\ \*puVar6;$	+1

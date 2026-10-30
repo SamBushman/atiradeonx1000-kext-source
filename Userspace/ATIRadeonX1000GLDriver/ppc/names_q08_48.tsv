@@ -1,0 +1,20 @@
+use	R300MachineAssembler__assembleBlock	iVar11	stateError	INFERRED	assembler vtable +8 check; non-zero fails the compile (Compiler__fail 5)	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 8\)\)\(param_1\);$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	compiler	INFERRED	this[3] compiler	^\s*iVar11\ =\ param_1\[3\];$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	compiler	INFERRED	this[3] compiler	^\s*iVar11\ =\ param_1\[3\];$@2	+1
+use	R300MachineAssembler__assembleBlock	iVar11	compiler	INFERRED	this[3] compiler	^\s*iVar11\ =\ param_1\[3\];$@3	+1
+use	R300MachineAssembler__assembleBlock	iVar11	compiler	INFERRED	this[3] compiler	^\s*iVar11\ =\ FUN_00106cf8\(piVar13,\*\(undefined4\ \*\)\(iVar11\ \+\ 0x6c4\)\);$	+1
+use	R300MachineAssembler__assembleBlock	iVar11	compiler	INFERRED	this[3] compiler	^\s*if\ \(\(\(\(iVar11\ ==\ 0\)\ \|\|\ \(uVar9\ =\ piVar13\[5\],\ \(uVar9\ \&\ 4\)\ !=\ 0\)\)\ \|\|\ \(\(int\)uVar9\ <\ 0\)\)\ \|\|$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	slotIndex	INFERRED	instruction +0x11c slot passed to vtable +0x13c with the first literal source value	^\s*iVar11\ =\ piVar10\[0x47\];$	+1
+use	R300MachineAssembler__assembleBlock	iVar11	slotIndex	INFERRED	instruction +0x11c slot passed to vtable +0x13c with the first literal source value	^\s*\(\*pcVar14\)\(param_1,iVar11,local_48\[0\]\);$	+1
+use	R300MachineAssembler__assembleBlock	iVar11	isSourceConstant	INFERRED	source 1 vtable +0x50 predicate	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x50\)\)\(a0\);$	+4
+use	R300MachineAssembler__assembleBlock	iVar11	isFetchInst	INFERRED	instruction vtable +0x28 predicate: texture fetch (non-zero) vs ALU	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x28\)\)\(piVar10\);$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	clauseState	INFERRED	this[0x23] clause state (0 none, 1 fetch, 2 ALU)	^\s*iVar11\ =\ param_1\[0x23\];$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	clauseState	INFERRED	this[0x23] clause state (0 none, 1 fetch, 2 ALU)	^\s*if\ \(iVar11\ !=\ 2\)\ \{$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	isFetchInst2	INFERRED	instruction vtable +0x28 predicate	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x28\)\)\(piVar10\);$@2	+2
+use	R300MachineAssembler__assembleBlock	iVar11	isFetchInst3	INFERRED	instruction vtable +0x28 predicate	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x28\)\)\(piVar10\);$@3	+2
+use	R300MachineAssembler__assembleBlock	iVar11	predicate5c	INFERRED	instruction vtable +0x5c predicate	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x5c\)\)\(piVar10\);$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	isLoadConst	INFERRED	instruction vtable +0x48 predicate	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x48\)\)\(piVar10\);$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	predicate4c	INFERRED	instruction vtable +0x4c predicate	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x4c\)\)\(piVar10\);$	+2
+use	R300MachineAssembler__assembleBlock	iVar11	predicate38	INFERRED	instruction vtable +0x38 predicate	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x38\)\)\(piVar10\);$	+2
+local	R300MachineAssembler__assembleBlock	local_88	lookaheadFlag	INFERRED	out word of FUN_000e3b88 (lookahead group result), adjacent to auStack_84 (whole variable)
+local	R300MachineAssembler__assembleBlock	local_48	firstLiteralValue	INFERRED	out of IRInst__firstLiteralSourceValue

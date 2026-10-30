@@ -1,0 +1,76 @@
+use	psnRaReleaseUse	uVar1	tempIndex	INFERRED	operand register number as an index into its temp bank (bank base subtracted for the second bank)	^\s*uVar1\ =\ \(uint\)\*param_1;$	+2
+use	psnRaReleaseUse	uVar1	tempIndex	INFERRED	operand register number as an index into its temp bank (bank base subtracted for the second bank)	^\s*uVar1\ =\ uVar1\ \-\ \*\(ushort\ \*\)\(param_2\ \+\ 2\)\ \&\ 0xffff;$	+1
+use	psnRaReleaseUse	uVar1	tempIndex	INFERRED	operand register number as an index into its temp bank (bank base subtracted for the second bank)	^\s*iVar11\ =\ iVar6\ \+\ uVar1\ \*\ 8;$	+1
+use	psnRaReleaseUse	uVar1	tempIndex	INFERRED	operand register number as an index into its temp bank (bank base subtracted for the second bank)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ uVar1\ \*\ 8\);$	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*uVar1\ =\ uVar9\ \-\ 1;$	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*if\ \(uVar1\ ==\ 0\)\ \{$	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*uVar1\ =\ 0;$	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*iVar6\ =\ uVar1\ \*\ 4;$	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*uVar12\ =\ uVar1;$	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*uVar1\ =\ uVar1\ \-\ 1;$	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*iVar6\ =\ uVar1\ \*\ 4;$@2	+1
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*if\ \(uVar1\ <\ uVar9\)\ \{$	+2
+use	psnRaReleaseUse	uVar1	insertPos	INFERRED	position in the free list (entries of 4 bytes) where the freed register is inserted or merged	^\s*if\ \(uVar9\ \-\ 1\ <\ uVar1\)\ \{$	+1
+use	psnRaReleaseUse	uVar1	freeCountU	INFERRED	free list entry count after the release	^\s*uVar1\ =\ \(uint\)uVar2;$	+1
+use	psnRaReleaseUse	uVar1	freeCountU	INFERRED	free list entry count after the release	^\s*if\ \(uVar1\ \-\ 1\ ==\ 0\)\ \{$	+1
+use	psnRaReleaseUse	uVar1	freeCountU	INFERRED	free list entry count after the release	^\s*iVar11\ =\ \(uVar1\ \-\ 2\)\ \*\ 4;$	+2
+use	psnRaReleaseUse	uVar1	freeCountU	INFERRED	free list entry count after the release	^\s*iVar7\ =\ uVar1\ \-\ 1;$	+1
+use	psnRaReleaseUse	uVar2	usedMask	INFERRED	component mask of the operand (operand[1]), reduced to the components that are in use	^\s*uVar2\ =\ param_1\[1\];$	+2
+use	psnRaReleaseUse	uVar2	usedMask	INFERRED	component mask of the operand (operand[1]), reduced to the components that are in use	^\s*uVar8\ =\ \(uVar2\ ==\ 8\)\ \+\ 7;$	+1
+use	psnRaReleaseUse	uVar2	usedMask	INFERRED	component mask of the operand (operand[1]), reduced to the components that are in use	^\s*uVar2\ =\ uVar2\ \&\ \*\(ushort\ \*\)\(iVar11\ \+\ 4\);$	+3
+use	psnRaReleaseUse	uVar2	tempAltReg	INFERRED	second register id of the temp entry (entry+2), used instead of the first for the 8-wide bank half	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar11\ \+\ 2\);$	+1
+use	psnRaReleaseUse	uVar2	tempAltReg	INFERRED	second register id of the temp entry (entry+2), used instead of the first for the 8-wide bank half	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ uVar1\ \*\ 8\);$	+1
+use	psnRaReleaseUse	uVar2	tempAltReg	INFERRED	second register id of the temp entry (entry+2), used instead of the first for the 8-wide bank half	^\s*\*param_1\ =\ uVar2;$	+1
+use	psnRaReleaseUse	uVar2	releasedReg	INFERRED	register number being released (*operand)	^\s*uVar2\ =\ \*param_1;$	+1
+use	psnRaReleaseUse	uVar2	releasedReg	INFERRED	register number being released (*operand)	^\s*if\ \(uVar2\ <=\ \*\(ushort\ \*\)\(iVar6\ \+\ iVar11\ \+\ \-4\)\)\ \{$	+1
+use	psnRaReleaseUse	uVar2	releasedReg	INFERRED	register number being released (*operand)	^\s*\}\ while\ \(uVar2\ <=\ uVar3\);$	+1
+use	psnRaReleaseUse	uVar2	releasedReg	INFERRED	register number being released (*operand)	^\s*if\ \(\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ ==\ uVar2\)\ \{$	+1
+use	psnRaReleaseUse	uVar2	releasedReg	INFERRED	register number being released (*operand)	^\s*\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ =\ uVar2;$	+1
+use	psnRaReleaseUse	uVar2	freeCount	INFERRED	free list entry count (ushort at freeList[1]) after the insert	^\s*uVar2\ =\ \*\(ushort\ \*\)\(param_3\ \+\ 1\);$	+1
+use	psnRaReleaseUse	uVar2	freeCount	INFERRED	free list entry count (ushort at freeList[1]) after the insert	^\s*uVar2\ =\ \*\(short\ \*\)\(param_3\ \+\ 1\)\ \+\ 1;$	+2
+use	psnRaReleaseUse	uVar2	freeCount	INFERRED	free list entry count (ushort at freeList[1]) after the insert	^\s*uVar1\ =\ \(uint\)uVar2;$	+1
+use	psnRaReleaseUse	uVar2	freeCount	INFERRED	free list entry count (ushort at freeList[1]) after the insert	^\s*uVar2\ =\ uVar2\ \-\ 1;$	+2
+use	psnRaReleaseUse	uVar3	remainingMask	INFERRED	temp entry used mask after the released components are cleared	^\s*uVar3\ =\ \*\(ushort\ \*\)\(iVar11\ \+\ 4\)\ \&\ \~param_1\[1\];$	+2
+use	psnRaReleaseUse	uVar3	remainingMask	INFERRED	temp entry used mask after the released components are cleared	^\s*if\ \(\(uVar8\ \&\ uVar3\)\ !=\ 0\)\ \{$	+1
+use	psnRaReleaseUse	uVar3	neighbourReg	INFERRED	register number of the free list entry compared while scanning	^\s*uVar3\ =\ \*puVar5;$	+1
+use	psnRaReleaseUse	uVar3	neighbourReg	INFERRED	register number of the free list entry compared while scanning	^\s*\}\ while\ \(uVar2\ <=\ uVar3\);$	+1
+local	psnRaReleaseUse	iVar4	shiftCount	INFERRED	number of free list entries to shift up to open the insert slot
+local	psnRaReleaseUse	puVar5	scanCursor	INFERRED	cursor over the free list register numbers while searching the insert position
+use	psnRaReleaseUse	iVar6	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*iVar6\ =\ param_2\[1\];$	+1
+use	psnRaReleaseUse	iVar6	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*iVar6\ =\ \*param_2;$	+1
+use	psnRaReleaseUse	iVar6	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*iVar11\ =\ iVar6\ \+\ uVar1\ \*\ 8;$	+1
+use	psnRaReleaseUse	iVar6	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ uVar1\ \*\ 8\);$	+1
+use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the free list	^\s*iVar6\ =\ 0;$	+1
+use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the free list	^\s*iVar6\ =\ uVar1\ \*\ 4;$	+3
+use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the free list	^\s*iVar6\ =\ iVar6\ \+\ \-4;$	+1
+use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the free list	^\s*iVar6\ =\ uVar1\ \*\ 4;$@2	+1
+use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the free list	^\s*if\ \(\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ ==\ uVar2\)\ \{$	+2
+use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the free list	^\s*\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ =\ uVar2;$	+2
+use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*iVar6\ =\ \*param_3;$	+1
+use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*sVar10\ =\ \*\(short\ \*\)\(\(uVar1\ \-\ 1\)\ \*\ 4\ \+\ iVar6\)\ \+\ \-1;$	+2
+use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*if\ \(\*\(short\ \*\)\(iVar6\ \+\ iVar11\ \+\ 2\)\ ==\ 0xf\)\ \{$	+1
+use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*if\ \(\*\(short\ \*\)\(iVar11\ \+\ iVar6\)\ !=\ sVar10\)\ break;$	+2
+use	psnRaReleaseUse	iVar7	shiftOffset	INFERRED	byte offset of the entry being shifted	^\s*iVar7\ =\ uVar9\ <<\ 2;$	+1
+use	psnRaReleaseUse	iVar7	shiftOffset	INFERRED	byte offset of the entry being shifted	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ iVar11\ \+\ \-4\);$	+2
+use	psnRaReleaseUse	iVar7	scanIndex	INFERRED	free list index for the final coalescing scan	^\s*iVar7\ =\ uVar1\ \-\ 1;$	+1
+use	psnRaReleaseUse	iVar7	scanIndex	INFERRED	free list index for the final coalescing scan	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+local	psnRaReleaseUse	uVar8	bankMaskBits	INFERRED	component bits belonging to the released half: 0xf, or 7/8 for the split bank
+local	psnRaReleaseUse	uVar9	freeCountOld	INFERRED	free list entry count before the insert
+local	psnRaReleaseUse	sVar10	expectedPrevReg	INFERRED	register number the previous free entry must have to be contiguous
+use	psnRaReleaseUse	iVar11	tempEntry	INFERRED	address of the temp table entry (8 bytes: reg, alt reg, used mask)	^\s*iVar11\ =\ iVar6\ \+\ uVar1\ \*\ 8;$	+2
+use	psnRaReleaseUse	iVar11	tempEntry	INFERRED	address of the temp table entry (8 bytes: reg, alt reg, used mask)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar11\ \+\ 2\);$	+1
+use	psnRaReleaseUse	iVar11	tempEntry	INFERRED	address of the temp table entry (8 bytes: reg, alt reg, used mask)	^\s*uVar3\ =\ \*\(ushort\ \*\)\(iVar11\ \+\ 4\)\ \&\ \~param_1\[1\];$	+2
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*iVar11\ =\ \*param_3;$	+1
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*iVar11\ =\ \*param_3;$@2	+1
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*if\ \(uVar2\ <=\ \*\(ushort\ \*\)\(iVar6\ \+\ iVar11\ \+\ \-4\)\)\ \{$	+2
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*if\ \(\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ ==\ uVar2\)\ \{$	+2
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ iVar11\ \+\ \-4\);$	+1
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*iVar11\ =\ \*param_3;$@3	+1
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*iVar11\ =\ \*param_3;$@4	+1
+use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ =\ uVar2;$	+1
+use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*iVar11\ =\ \(uVar1\ \-\ 2\)\ \*\ 4;$	+1
+use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*if\ \(\*\(short\ \*\)\(iVar6\ \+\ iVar11\)\ !=\ sVar10\)\ \{$	+1
+use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*if\ \(\*\(short\ \*\)\(iVar6\ \+\ iVar11\ \+\ 2\)\ ==\ 0xf\)\ \{$	+1
+use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*iVar11\ =\ iVar11\ \+\ \-4;$	+1
+use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*if\ \(\*\(short\ \*\)\(iVar11\ \+\ iVar6\)\ !=\ sVar10\)\ break;$	+2
+local	psnRaReleaseUse	uVar12	scanCounter	INFERRED	countdown for the backwards free list scan

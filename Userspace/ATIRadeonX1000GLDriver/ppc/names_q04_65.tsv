@@ -1,0 +1,26 @@
+local	FUN_000b5a60	bVar1	constBaseByte	INFERRED	programState+0x5497: constant register base offset added to the context constant base ctx+0x2448
+local	FUN_000b5a60	iVar2	payloadWords	INFERRED	constant count * 4: payload words of the constant upload packet
+local	FUN_000b5a60	puVar4	packet	INFERRED	command packet (header 0x8a1, then the 0x880 constant upload)
+local	FUN_000b5a60	iVar6	programState	INFERRED	*(program+0x14): program state block (count at +0x5428)
+local	FUN_000b5a60	iVar7	constCount	INFERRED	number of constants to upload: min(highest used constant + 1, programState count)
+local	FUN_000b5a60	param_2	programObj	INFERRED	program object whose constants (at +0x18, 0x10 bytes each) are uploaded
+local	FUN_000b51a0	fVar1	viewportScaleY	INFERRED	engine+0x2a58 scale applied to the rectangle height
+local	FUN_000b51a0	fVar2	viewportScaleX	INFERRED	engine+0x2a54 scale applied to the rectangle width
+local	FUN_000b51a0	uVar3	rectWidth	INFERRED	caps+0x1840 rectangle width
+local	FUN_000b51a0	uVar4	rectHeight	INFERRED	caps+0x1844 rectangle height
+local	FUN_000b51a0	iVar5	engine	INFERRED	*(glContext+4), the engine object
+local	FUN_000b51a0	puVar6	slotRecordCopy	INFERRED	slot record argument passed through to FUN_000b4f50 (stale pointer arg)
+local	FUN_000b51a0	iVar7	engineCaps	INFERRED	*(engine+0x10) capability table holding the rectangle and depth range
+local	FUN_000ab9b0	iVar1	entryKind	INFERRED	kind field (+8) of the 0x14-byte operand table entry: 1 constant, 3, 4 special
+local	FUN_000ab9b0	param_1	operandSpace	INFERRED	operand space selector: 0 direct, 1 table entry, 2 direct (second class)
+local	FUN_000ab9b0	param_2	operandIndex	INFERRED	operand index (or direct value for spaces 0 and 2)
+local	FUN_000ab9b0	param_9	operandTable	INFERRED	table of 0x14-byte operand entries
+local	FUN_000ab9b0	param_10	outOperand	INFERRED	receives the pair {value, kind code} for the operand
+use	FUN_000ab9b0	iVar2	entryAddr	INFERRED	address of the operand table entry (index * 0x14 + table)	^\s*iVar2\ =\ param_2\ \*\ 0x14\ \+\ param_9;$	+2
+use	FUN_000ab9b0	iVar2	entryAddr	INFERRED	address of the operand table entry (index * 0x14 + table)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xc\);$	+1	rhs	none
+use	FUN_000ab9b0	iVar2	entryValue	INFERRED	value field (+0xc) of the operand table entry	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xc\);$	+1	lhs	none
+use	FUN_000ab9b0	iVar2	entryValue	INFERRED	value field (+0xc) of the operand table entry	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	FUN_000ab9b0	iVar2	entryValue	INFERRED	value field (+0xc) of the operand table entry	^\s*\*param_10\ =\ iVar2;$	+1
+func	FUN_000b5a60	gld_emitProgramConstants	INFERRED	uploads the program constants (programObj+0x18, 4 words each, min of used count and state count) as the 0x8a1/0x880 register packet at the constant base ctx+0x2448 + programState+0x5497
+func	FUN_000b51a0	gld_emitSlotViewportTransforms	INFERRED	for a slot record: computes the viewport scale/offset from the rectangle (caps+0x1840..0x184c), engine scale factors (+0x2a54/0x2a58) and depth range (+0x1830/0x1838) and passes both halves to FUN_000b4f50
+func	FUN_000ab9b0	gld_classifyOperand	INFERRED	maps an operand space/index (and the 0x14-byte operand table) to an output pair {value, kind code}: kind 4 direct, 1 other direct, 0x10-0x13/0x16 table based

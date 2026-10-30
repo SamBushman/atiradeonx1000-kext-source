@@ -1,0 +1,16 @@
+local	vsOpcodeSourceCount	param_1	opcode	INFERRED	vertex shader opcode whose source operand count is returned
+local	scCheckHandle	param_1	handle	INFERRED	compiler handle: 3 when null, else 0
+local	scCallbackFree	param_2	block	INFERRED	heap block released with _free
+local	psnDecHasFreeAddressSlot	uVar1	firstFreeSlot	INFERRED	index of the first free address slot, or -1
+local	psnDecFirstFreeAddressSlot	bVar1	loopContinue	INFERRED	more address slots to check
+local	psnDecDestMatchesRegMask	bVar1	lastHalf	INFERRED	set once the second half record has been checked
+local	psnClearSinkRecord	param_1	sinkRecord	INFERRED	two-word sink record to clear
+local	psnClearSinkRecord2	param_1	sinkRecord	INFERRED	two-word sink record to clear
+local	ilAllocLowestFreeBit8	uVar1	bitMask	INFERRED	candidate bit in the allocated-register mask at programRecord+8
+local	gld_selectProgramCallback	param_1	glContext	INFERRED	GL context whose callback pointer at +0x11cc is selected by the byte at +0x1868
+local	gld_callocBytes	param_1	byteCount	INFERRED	size passed to _calloc(size, 1)
+local	glGenFragmentShadersATI_impl	iVar1	firstId	INFERRED	first generated shader id (old next-id counter)
+local	atifsUnshareShaderTable	iVar5	shaderEntry	INFERRED	address of the 0x78-byte shader entry being given its own program table
+local	scCallbackGetFlagZero	param_3	outFlag	INFERRED	flag output, always set to 0
+local	ilStoreFloat4Constant	iVar1	constantSlot	INFERRED	address of the 0x10-byte constant slot
+local	ilRecordInputSemantic	iVar1	inputSlot	INFERRED	address of the per-input semantic word (programRecord + 4*inputIndex)

@@ -1,0 +1,41 @@
+local	FUN_00053190	iVar1	unitFlagCursor	INFERRED	cursor over the per-unit input flag bytes of the current vertex shader (shader+0x71, advanced one byte per unit)
+local	FUN_00053190	uVar2	unitsLeft	INFERRED	byte glContext+0x13b0 (number of units), then the countdown of units still to test
+local	FUN_00053190	uVar3	enabledMask	INFERRED	bit mask of the units whose input flag byte is non-zero (returned)
+local	FUN_00053190	uVar4	unitIndex	INFERRED	index of the unit being tested
+local	FUN_0004f2e0	sVar2	fogMode	INFERRED	state+0x2e04 GL fog mode (0x800 EXP, 0x801 EXP2, 0x2601 LINEAR)
+local	FUN_0004f2e0	puVar3	colorFormatTable	INFERRED	colour format table PTR_DAT_001e88c8 (0x24-byte entries)
+local	FUN_0004f2e0	iVar4	glStateBlock	INFERRED	*(*(context+4)+0x10), the GL state block
+use	FUN_0004f2e0	uVar5	fogColorWord0	INFERRED	fog colour channel word from FUN_0004f160 for the first colour field of the format, stored in bits 0..9 of glContext+0x1a54	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0004f160\)\(param_1,\*\(uint\ \*\)\(puVar3\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0x1e\);$	+2
+use	FUN_0004f2e0	uVar5	fogColorWord1	INFERRED	fog colour channel word for the second colour field, stored at glContext+0x1a58	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0004f160\)\(param_1,\*\(uint\ \*\)\(puVar3\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x18\)\ >>\ 1\ \&\ 3\);$	+2
+use	FUN_0004f2e0	uVar5	fogColorWord2	INFERRED	fog colour channel word for the third colour field, stored at glContext+0x1a5c	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0004f160\)\(param_1,\*\(uint\ \*\)\(puVar3\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x18\)\ >>\ 3\ \&\ 3\);$	+1
+use	FUN_0004f2e0	uVar5	fogColorWord2	INFERRED	fog colour channel word for the third colour field, stored at glContext+0x1a5c	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1a5c\)\ =\ uVar5\ \&\ 0x3ff\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1a5c\)\ \&\ 0xfffffc00;$	+1
+local	FUN_0004c100	param_1	dstState	INFERRED	destination state object receiving the shadow copy of the current program stream setup
+local	FUN_0004c100	param_2	glContext	INFERRED	the GL context (current program entry at +0x1e64)
+local	FUN_0004c100	iVar2	programEntry	INFERRED	current program entry *(glContext+0x1e64)
+local	FUN_0004c100	puVar1	stateBlockBase	INFERRED	offset of the program state block (0x10ec, or 0x1318 when glContext+0x23e0 is set)
+local	FUN_0004c100	puVar5	streamState	INFERRED	stream state words inside the program entry (+4 or +0x20)
+local	FUN_0004c100	uVar3	streamWord2	INFERRED	stream state word 2, copied to dstState+0x220
+local	FUN_0004c100	uVar4	streamCount	INFERRED	number of streams (word at +0x36a8 / +0x36b4 of the entry)
+local	FUN_0004b520	param_2	programEntry	INFERRED	program entry to remove from the program list glContext+0x1e7c
+local	FUN_0004b520	iVar3	listCount	INFERRED	glContext+0x1e74: number of entries in the program list
+use	FUN_0004b520	iVar4	searchCountdown	INFERRED	entries of the list still to compare while searching for the program	^\s*iVar4\ =\ iVar3;$	+1
+use	FUN_0004b520	iVar4	searchCountdown	INFERRED	entries of the list still to compare while searching for the program	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_0004b520	iVar4	shiftByteOffset	INFERRED	byte offset of the list slot being overwritten while compacting the list	^\s*iVar4\ =\ iVar2\ <<\ 2;$	+1
+use	FUN_0004b520	iVar4	shiftByteOffset	INFERRED	byte offset of the list slot being overwritten while compacting the list	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \(int\)piVar1\)\ =\ \*\(undefined4\ \*\)\(\(int\)piVar1\ \+\ iVar4\ \+\ 4\);$	+2
+local	FUN_0004aa90	param_2	programEntry	INFERRED	program entry whose per-unit state words are reset to defaults
+local	FUN_0004aa90	puVar2	unitCursor	INFERRED	cursor over the per-unit state words of the entry
+local	FUN_0004aa90	puVar1	nextUnit	INFERRED	unitCursor + 1: the following state word
+local	FUN_00054470	param_2	outConstBuffer	INFERRED	receives the constant upload buffer (0x80c bytes, allocated on first use)
+local	FUN_00054470	param_3	outRegisterCount	INFERRED	receives the number of constant registers of the program
+use	FUN_00054470	iVar1	constBuffer	INFERRED	constant upload buffer pointer (existing or newly allocated 0x80c bytes)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x2b8\);$	+2
+use	FUN_00054470	iVar1	constBuffer	INFERRED	constant upload buffer pointer (existing or newly allocated 0x80c bytes)	^\s*iVar1\ =\ piVar2\[0x4f6\];$	+2
+use	FUN_00054470	iVar1	constBuffer	INFERRED	constant upload buffer pointer (existing or newly allocated 0x80c bytes)	^\s*\*param_2\ =\ iVar1;$@3	+1
+use	FUN_00054470	iVar1	constBuffer	INFERRED	constant upload buffer pointer (existing or newly allocated 0x80c bytes)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(0x80c\);$	+3
+use	FUN_00054470	iVar1	constBuffer	INFERRED	constant upload buffer pointer (existing or newly allocated 0x80c bytes)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(0x80c\);$@2	+3
+use	FUN_00054470	piVar2	programState	INFERRED	program state record of the current vertex program (or fragment program for the second path)	^\s*piVar2\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*\*\(int\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001168\)\ \+\ param_1\)\);$	+3
+use	FUN_00054470	piVar2	programState	INFERRED	program state record of the current vertex program (or fragment program for the second path)	^\s*piVar2\ =\ \(int\ \*\)\*\*\(undefined4\ \*\*\)$	+1
+use	FUN_00054470	piVar2	programState	INFERRED	program state record of the current vertex program (or fragment program for the second path)	^\s*\*param_3\ =\ piVar2\[0x49\];$	+3
+use	FUN_00054470	piVar2	programState	INFERRED	program state record of the current vertex program (or fragment program for the second path)	^\s*piVar2\[0x4f6\]\ =\ iVar1;$	+1
+local	FUN_00054470	iVar3	programObj	INFERRED	program object *programState (register base at +0x14, buffer slot at +0x2b8)
+local	FUN_0004b480	param_2	slotIndex	INFERRED	index of the glContext+0x1448 slot to clear
+local	FUN_0004b480	iVar1	slotAddr	INFERRED	glContext + slot * 4: address of the slot holding the byte pointer to clear

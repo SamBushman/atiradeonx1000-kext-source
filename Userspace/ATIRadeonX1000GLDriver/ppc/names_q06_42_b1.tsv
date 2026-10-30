@@ -47,6 +47,8 @@ local	FUN_0010e744	iVar1	query68	INFERRED	vslot 0x68 result
 local	FUN_0010e744	uVar2	result	INFERRED	returned 0/1
 local	FUN_0010e814	param_1	laneInfo	INFERRED	record: +0 source, +0x14 zero, +0x18 count, 4 lane words cleared
 local	FUN_0010e814	param_2	source	INFERRED	stored at word 0; +0x13c passed to FUN_0010e368
+local	FUN_00130a78	param_1	cursorInst	INFERRED	walked via +8 links while flags bit 4 set
+local	FUN_00130a78	param_2	referenceInst	INFERRED	+0x14c compared against cursor's +0x14c
 local	FUN_00113734	param_1	compiler	INFERRED	+0x30c backend (as in FUN_00112fe4)
 local	FUN_00122de8	piVar1	table	INFERRED	program+0x3b0 table: word 0 is the entry count, word 2 of each entry cleared
 local	FUN_00122de8	iVar2	remaining	INFERRED	entries left to clear
@@ -60,8 +62,6 @@ local	FUN_0010e690	uVar2	result	INFERRED	returned 0/1
 local	FUN_0010e6e8	param_1	inst	INFERRED	vslot 0x68 queried then word 0x4f in 0x16..0x17
 local	FUN_0010e6e8	iVar1	query68	INFERRED	vslot 0x68 result
 local	FUN_0010e6e8	uVar2	result	INFERRED	returned 0/1
-local	FUN_00130a78	param_1	cursorInst	INFERRED	walked via +8 links while flags bit 4 set
-local	FUN_00130a78	param_2	referenceInst	INFERRED	+0x14c compared against cursor's +0x14c
 local	FUN_00130bd4	param_1	allocator	INFERRED	+0x430 bitmap (data at +8) cleared by bit
 local	FUN_00130bd4	param_2	bitIndex	INFERRED	bit cleared
 local	FUN_00130bd4	iVar1	wordRef	INFERRED	bitmap word address

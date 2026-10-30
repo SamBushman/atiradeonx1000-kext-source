@@ -1,0 +1,25 @@
+local	arbEmitIlMovMadMov	auStack_88	emitRecordFrame	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbEmitIlMovMadMov	uStack_84	emitRecordWord1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	uStack_38	selectOverride0	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	uStack_34	selectOverride1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	uStack_30	selectOverride2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitLogp	uStack_2c	selectOverride3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	uStack_38	selectOverride0	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	uStack_34	selectOverride1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	uStack_30	selectOverride2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsEmitMov	uStack_2c	selectOverride3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordFindScheduleConflict	uVar17	callResultPair	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldDrawInternalRect	param_2	unusedArg2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldDrawInternalRect	param_3	passThroughArg3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldDrawInternalRect	param_5	passThroughArg5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldDrawInternalRect	uVar14	stageArgA	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldDrawInternalRect	puVar15	stageArgB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordPickNextToEmit	param_7	configFlagsArg	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbLexNumber	bVar2	isIntegerLiteral	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ false;$	+1
+use	arbLexNumber	bVar2	isIntegerLiteral	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ true;$	+1
+use	arbLexNumber	bVar2	isIntegerLiteral	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ false;$@3	+1
+use	arbLexNumber	bVar2	isIntegerLiteral	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(bVar2\)\ \&\&\ \(dVar10\ ==\ \(double\)CONCAT44\(0x43300000,\(int\)dVar10\)\ \-\ DOUBLE_001aa250\)\)\ \{$	+1
+use	arbLexNumber	bVar2	exponentNegative	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ true;$@2	+1
+use	arbLexNumber	bVar2	exponentNegative	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar2\ =\ false;$@2	+1
+use	arbLexNumber	bVar2	exponentNegative	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar2\)\ \{$	+1
+use	arbValidateProgram	iVar2	codeBuffer	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar12\ \+\ 0xc\)\)$	^\s*if\ \(local_60\ !=\ 0\)\ \{$	lhs	none

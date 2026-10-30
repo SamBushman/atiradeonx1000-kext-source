@@ -1,0 +1,16 @@
+use	R300SchedModel__legalizeInstruction	iVar8	producerSource	INFERRED	source 1 of the mov being examined	^\s*iVar8\ =\ FUN_00105594\(piVar6,1\);$	+1
+use	R300SchedModel__legalizeInstruction	iVar8	producerSource	INFERRED	source 1 of the mov being examined	^\s*iVar8\ =\ FUN_001132a4\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x88\)\ \+\ 8\),param_1\[2\]\);$	+1	rhs	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerIsFlag12	INFERRED	OpcodeTraits__flagBit12 of the mov's source opcode	^\s*iVar8\ =\ FUN_001132a4\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x88\)\ \+\ 8\),param_1\[2\]\);$	+1	lhs	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerIsFlag12	INFERRED	OpcodeTraits__flagBit12 of the mov's source opcode	^\s*if\ \(iVar8\ ==\ 0\)\ \{$@4	+1
+use	R300SchedModel__legalizeInstruction	iVar8	producerSource2	INFERRED	source 1 of the mov being examined	^\s*iVar8\ =\ FUN_00105594\(piVar6,1\);$@2	+1
+use	R300SchedModel__legalizeInstruction	iVar8	producerSource2	INFERRED	source 1 of the mov being examined	^\s*iVar8\ =\ FUN_001132f0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x88\)\ \+\ 8\),param_1\[2\]\);$	+1	rhs	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerIsFlag13	INFERRED	OpcodeTraits__flagBit13 of the mov's source opcode	^\s*iVar8\ =\ FUN_001132f0\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x88\)\ \+\ 8\),param_1\[2\]\);$	+1	lhs	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerIsFlag13	INFERRED	OpcodeTraits__flagBit13 of the mov's source opcode	^\s*if\ \(iVar8\ ==\ 0\)\ goto\ LAB_0018e6c4;$	+1
+local	R300SchedModel__legalizeInstruction	local_84	markedMovVector	INFERRED	growable vector header (capacity, count, data, arena) of the marked movs; the same frame slots hold the swizzle-group select words passed to vtable +0x68 later (fake struct, whole variable)
+local	R300SchedModel__vslot28	local_78	otherDestSelect	INFERRED	dest select word of the duplicate producer, read byte-wise to merge lanes (adjacent to mergedDestSelect, whole variable)
+local	R300SchedModel__vslot28	local_74	mergedDestSelect	INFERRED	dest select word of the kept producer merged with the duplicate's lanes; word 0 is stored to callResult[0x27]
+local	R300SchedModel__vslot28	local_68	selectWriteMask	INFERRED	out of WriteMask__fromSelectWord
+local	R300SchedModel__vslot28	local_64	maskedSelect	INFERRED	out of SelectWord__maskUnused: merged select used for sources 1 and 2
+local	R300SchedModel__vslot28	local_60	operandReadMask	INFERRED	out of FUN_000f39d0: read-lane mask of the operand select word
+local	R300SchedModel__vslot28	local_5c	hashFunctionBase	INFERRED	PC-relative base: hashAlloc[4] = base - 0x770 (hash function of the duplicate-producer table)
+local	R300SchedModel__vslot28	local_58	equalFunctionBase	INFERRED	PC-relative base: hashAlloc[5] = base - 0x82c (equality function of the table)

@@ -4003,7 +4003,7 @@ int ValueKey__maybeRefineSources(param_1)
   
   isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),9);
   if ((isOptionEnabledResult != 0) && (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),0x30), isOptionEnabledResult != 0)) {
-    FUN_0017f78c(param_1);
+    ValueKey__splitDestinationIfEligible(param_1);
     return;
   }
   return;

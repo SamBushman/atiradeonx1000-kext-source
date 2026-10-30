@@ -1,0 +1,19 @@
+use	IrAddInt__vslot5_getValueKeyTransformLevel	iVar2	foldedAddOfZero	INFERRED	FUN_0017cdbc result: non-zero when the add was already folded (level 0)	^\s*iVar2\ =\ FUN_0017cdbc\(param_2\);$	+1
+use	IrAddInt__vslot5_getValueKeyTransformLevel	iVar2	foldedAddOfZero	INFERRED	FUN_0017cdbc result: non-zero when the add was already folded (level 0)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	IrAddInt__vslot5_getValueKeyTransformLevel	iVar2	instructionCount	INFERRED	current program +0xa8 instruction count	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_4\ \+\ 0x6c4\)\ \+\ 0xa8\);$	+1
+use	IrAddInt__vslot5_getValueKeyTransformLevel	iVar2	instructionCount	INFERRED	current program +0xa8 instruction count	^\s*if\ \(iVar4\ <=\ iVar2\)\ \{$	+1
+use	IrAddFloat__vslot5_getValueKeyTransformLevel	iVar2	folded	INFERRED	result of the fold helpers: non-zero when the add was folded (level 0)	^\s*iVar2\ =\ FUN_0017d610\(param_2\);$	+4
+use	IrAddFloat__vslot5_getValueKeyTransformLevel	iVar2	instructionCount	INFERRED	current program +0xa8 instruction count	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_4\ \+\ 0x6c4\)\ \+\ 0xa8\);$	+1
+use	IrAddFloat__vslot5_getValueKeyTransformLevel	iVar2	instructionCount	INFERRED	current program +0xa8 instruction count	^\s*if\ \(iVar4\ <=\ iVar2\)\ \{$	+1
+local	IrAddInt__vslot5_getValueKeyTransformLevel	param_2	ctx	INFERRED	value-key pass context (+0xb0 instruction)
+local	IrAddInt__vslot5_getValueKeyTransformLevel	param_3	laneResultPtr	INFERRED	cursor over the per-lane results (0x7ffffffe = no replacement yet)
+local	IrAddInt__vslot5_getValueKeyTransformLevel	iVar4	instructionLimit	INFERRED	compiler +0x658 instruction budget
+local	IrAddInt__vslot5_getValueKeyTransformLevel	bVar1	notLastLane	INFERRED	lane != 3 loop continue flag
+local	IrAddFloat__vslot5_getValueKeyTransformLevel	param_2	ctx	INFERRED	value-key pass context (+0xb0 instruction)
+local	IrAddFloat__vslot5_getValueKeyTransformLevel	param_3	laneResultPtr	INFERRED	cursor over the per-lane results (0x7ffffffe = no replacement yet)
+local	IrAddFloat__vslot5_getValueKeyTransformLevel	iVar4	instructionLimit	INFERRED	compiler +0x658 instruction budget
+local	IrAddFloat__vslot5_getValueKeyTransformLevel	bVar1	notLastLane	INFERRED	lane != 3 loop continue flag
+local	IrAddInt__vslot5_getValueKeyTransformLevel	param_4	compiler	INFERRED	compiler (+0x658 limit, +0x6c4 current program)
+local	IrAddInt__vslot5_getValueKeyTransformLevel	uVar5	transformLevel	INFERRED	returned level: 0 folded, 1 lanes forwarded, 2 nothing done
+local	IrAddFloat__vslot5_getValueKeyTransformLevel	uVar6	transformLevel	INFERRED	returned level: 0 folded, 1 lanes forwarded, 2 nothing done
+func	FUN_0017cdbc	ValueKey__foldAddOfZeroSource	INFERRED	one of the two add sources has all written lanes zero: replaces the instruction by a mov of the other source

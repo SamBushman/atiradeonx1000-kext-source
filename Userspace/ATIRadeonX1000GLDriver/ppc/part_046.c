@@ -186,7 +186,7 @@ LAB_00173854:
     *(int *)(currentProgram + 0xa8) = *(int *)(currentProgram + 0xa8) + 1;
     currentProgram = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(currentProgram + 0x140) = *(int *)(currentProgram + 0x140) + 1;
-    FUN_0017d06c(ctx,inst,&DAT_001b01bc,0);
+    ValueKey__rewriteAsMovOfValueKey(ctx,inst,&DAT_001b01bc,0);
     result = 1;
   }
   return result;
@@ -441,7 +441,7 @@ int FUN_00173cdc(ctx, param_2)
     *(int *)(iVar4 + 0xa8) = *(int *)(iVar4 + 0xa8) + 1;
     iVar4 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(iVar4 + 0x13c) = *(int *)(iVar4 + 0x13c) + 1;
-    FUN_0017d06c(ctx,iVar1,local_38,0);
+    ValueKey__rewriteAsMovOfValueKey(ctx,iVar1,local_38,0);
     uVar3 = 1;
   }
   return uVar3;
@@ -841,9 +841,9 @@ int FUN_001745f0(ctx)
       ((int (*)())ValueKey__rebuild)(ctx);
     }
     do {
-      callResult = FUN_0017f7ec(ctx);
+      callResult = ValueKey__simplifyInstruction(ctx);
     } while (callResult != 0);
-    callResult = FUN_0017b96c(ctx);
+    callResult = ValueKey__rewriteUniformSwizzle(ctx);
     if (callResult != 0) {
       ((int (*)())ValueKey__rebuild)(ctx);
     }
@@ -1058,7 +1058,7 @@ int FUN_0017494c(ctx, scopeIndexHigh, scopeIndexLow)
       *(int *)(currentProgram + 0xa8) = *(int *)(currentProgram + 0xa8) + 1;
       currentProgram = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
       *(int *)(currentProgram + 0x144) = *(int *)(currentProgram + 0x144) + 1;
-      FUN_0017d06c(ctx,matchedInst,&DAT_001b01bc,0);
+      ValueKey__rewriteAsMovOfValueKey(ctx,matchedInst,&DAT_001b01bc,0);
       return 1;
     }
   }
@@ -1392,7 +1392,7 @@ LAB_00174efc:
           *laneValuePtr = *callResult2;
         }
         else {
-          callResult = FUN_00179064(valueKey,loopIndex3);
+          callResult = ValueKey__refreshExprRecordForOperand(valueKey,loopIndex3);
           *laneValuePtr = *(int *)(callResult + 4);
         }
         isLast = loopIndex3 == 3;
@@ -1424,7 +1424,7 @@ LAB_00174efc:
         if (*(char *)(loopIndex + destRecordKey + 0x10) != '\x01') {
           keyInstPtr2 = (int *)valueKey[0x2c];
           if (*(int *)(keyInstPtr2[0x22] + 8) == 0x8e) {
-            callResult = FUN_00179bbc(valueKey,loopIndex);
+            callResult = ValueKey__allOperandLanesEqual(valueKey,loopIndex);
             if (callResult == 0) {
               callResult2 = (int *)((int (*)())FUN_00174ce0)(valueKey[0x8e],loopIndex,valueKey);
               exprRecordWord = *callResult2;
@@ -1501,9 +1501,9 @@ LAB_001756ec:
                 goto LAB_001757a0;
 LAB_00175760:
                 *laneValuePtr = selectedValueNumber;
-                callResult = FUN_00176ed4(valueKey,selectedValueNumber);
+                callResult = ValueKey__compareClassForValueNumber(valueKey,selectedValueNumber);
                 laneValuePtr[0x20] = callResult;
-                callResult = FUN_00176f0c(valueKey,selectedValueNumber);
+                callResult = ValueKey__rangeClassForValueNumber(valueKey,selectedValueNumber);
                 laneValuePtr[0x14] = callResult;
               }
             }
@@ -1640,8 +1640,8 @@ LAB_00175350:
       if ((((*(int *)(keyInst + 0x120) == 0) && (*(int *)(keyInst + 0x124) == 0)) &&
           ((*(uint *)(keyInst + 0xb8) & 1) == 0)) && ((*(uint *)(keyInst + 0xb8) & 2) == 0)) {
 LAB_001753c0:
-        laneCounter = FUN_00176ed4(valueKey,valueNumber);
-        laneByteOffset = FUN_00176f0c(valueKey,valueNumber);
+        laneCounter = ValueKey__compareClassForValueNumber(valueKey,valueNumber);
+        laneByteOffset = ValueKey__rangeClassForValueNumber(valueKey,valueNumber);
       }
       else {
         FUN_00178648(valueKey,laneByteOffset);
@@ -1665,8 +1665,8 @@ LAB_001754f8:
   } while (countdown2 != 0);
 LAB_001757ec:
   ((int (*)())FUN_00173af8)(valueKey,laneFlags);
-  FUN_0017729c(valueKey);
-  FUN_001771b0(valueKey);
+  ValueKey__computeLaneCompareCodes(valueKey);
+  ValueKey__computeLaneRangeClasses(valueKey);
   return;
 }
 
@@ -1883,7 +1883,7 @@ LAB_00175ce8:
       loopPtr2[0x24] = sourceFieldA0;
       loopPtr2 = loopPtr2 + 1;
     } while (moreComponents);
-    projectionCheckResult = FUN_000f3154(valueKey[0x2c]);
+    projectionCheckResult = IRInst__writesAllLanes(valueKey[0x2c]);
     if ((projectionCheckResult == 0) && (projectionCheckResult = IRInst__isProjectionOfOpcode2a(valueKey[0x2c]), projectionCheckResult == 0)) {
       *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
            *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;

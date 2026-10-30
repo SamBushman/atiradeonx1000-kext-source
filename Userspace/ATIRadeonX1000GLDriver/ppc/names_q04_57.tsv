@@ -1,0 +1,12 @@
+local	FUN_000a8a00	fVar1	planeW	INFERRED	w coefficient of the user clip plane (caps+0x3e20+0x18)
+local	FUN_000a8a00	fVar2	planeX	INFERRED	x coefficient of the user clip plane
+local	FUN_000a8a00	fVar3	planeY	INFERRED	y coefficient of the user clip plane
+local	FUN_000a8a00	fVar4	planeZ	INFERRED	z coefficient of the user clip plane
+local	FUN_000a8a00	iVar5	planeByteOffset	INFERRED	plane index * 0x10: offset of the transformed plane at engine+0x618
+local	FUN_000a8a00	fVar6	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8): w == 1 selects the shortcut that adds the translation row
+local	FUN_000a8a00	iVar7	transformedPlanes	INFERRED	engine + 0x618: array of transformed clip planes (4 floats each)
+local	FUN_000a8a00	iVar8	engineCaps	INFERRED	*(engine+0x10) capability table; word at +0x3e28 is the enabled-plane mask
+local	FUN_000a8a00	uVar9	planeBit	INFERRED	1 << plane index
+local	FUN_000a8a00	iVar10	transformedPlane	INFERRED	address of the plane being written
+local	FUN_000a8a00	puVar11	planeCursor	INFERRED	caps+0x3e20 advanced 0x10 per plane
+func	FUN_000a8a00	gld_transformClipPlanes	INFERRED	for each of the 6 user clip planes whose dirty bit (0x1000000<<i or 8) is set and that is enabled in caps+0x3e28: multiplies the plane equation by the 4x4 matrix at engine+0x15a8..0x15e4 (w==1 shortcut) into engine+0x618 and marks the plane dirty (engine+0x276)

@@ -1,0 +1,5 @@
+local	FUN_000b4cd0	param_2	programObj	INFERRED	program object whose record (+0x74) receives the decoded summary and input/output masks
+local	FUN_000b4cd0	acStack_940	decodeBufferTail	INFERRED	tail of the decode buffer region addressed by the result-byte overlays
+local	FUN_000c6ff0	param_2	useDeviceId	INFERRED	0 selects the generic config 0x2c, otherwise the config kind is derived from the PCI device id at ctx+0x23d4
+func	FUN_000b4cd0	gld_decodeProgramInterface	INFERRED	decodes a program (FUN_000b4400) and fills the program record at +0x74 with the summary bytes, the output-enable mask (+0xc), the input-enable mask (+0x10) and the per-input kind codes (+0x14)
+func	FUN_000c6ff0	scCreateForContext	INFERRED	builds the 0x54-byte shader-compiler options struct (chip config kind from the PCI device id at ctx+0x23d4, revision ctx+0x23d8, allocation/file callbacks) and creates the compiler through FUN_000cd05c, storing the handle at ctx+0x186c and the reported version at ctx+0x1870

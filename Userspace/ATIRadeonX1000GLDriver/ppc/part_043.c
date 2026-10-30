@@ -736,7 +736,7 @@ int FUN_00147b8c(inst, operandIndex, inst2, operandIndex2, param_5, param_6, par
             if (callResult != operandVReg) {
               return 0;
             }
-            callResult3 = FUN_000f485c(inst2,operandIndex2);
+            callResult3 = IRInst__sourceLanesAllWritten_f485c(inst2,operandIndex2);
             if (callResult3 == 0) {
               return 0;
             }
@@ -757,7 +757,7 @@ int FUN_00147b8c(inst, operandIndex, inst2, operandIndex2, param_5, param_6, par
                 return 0;
               }
               inst1 = (int *)IRInst__getOperandSource(inst1,inst1[0x21]);
-            } while ((callResult2 != inst1) || (iVar3 = FUN_000f485c(inst,operandIndex), iVar3 == 0));
+            } while ((callResult2 != inst1) || (iVar3 = IRInst__sourceLanesAllWritten_f485c(inst,operandIndex), iVar3 == 0));
             if (param_6 != 0) {
               IRInst__setOperandSource(inst2,operandIndex2,callResult,0,*(undefined4 *)(param_5 + 8));
               if (*(int *)(param_5 + 0x478) < callResult[0x58]) {
@@ -1052,7 +1052,7 @@ int FUN_0014846c(inst, param_2)
   if ((inst[5] & 2U) != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     uVar2 = *(uint *)(operandRecord + 0x10);
-    iVar3 = FUN_000f2e18(uVar2);
+    iVar3 = SelectWord__hasNonzeroLaneBytes(uVar2);
     if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x31), iVar3 != 0)) {
       destRegisterOffset = inst[0x26];
       destRegister = inst[0x25];
@@ -1152,7 +1152,7 @@ int FUN_001486e8(inst, param_2)
   if ((inst[5] & 2U) != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     uVar2 = *(uint *)(operandRecord + 0x10);
-    iVar3 = FUN_000f2e18(uVar2);
+    iVar3 = SelectWord__hasNonzeroLaneBytes(uVar2);
     if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x31), iVar3 != 0)) {
       destRegisterOffset = inst[0x26];
       destRegister = inst[0x25];
@@ -1499,7 +1499,7 @@ LAB_001490f4:
             }
           }
           else {
-            if ((uVar4 != 0) || (iVar7 = FUN_000f5e8c(inst1,1), iVar7 == 0)) {
+            if ((uVar4 != 0) || (iVar7 = IRInst__operandIsNonNegativeFloatConst(inst1,1), iVar7 == 0)) {
               IROperand__setModifierBits(inst1 + 0x29,2,1);
               if (uVar4 != 0) {
                 sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(inst1,1,0.0);
@@ -9970,8 +9970,8 @@ LAB_00157cf8:
     IROperand__setModifierBits(operandIndex2 * 0x18 + sourceDef + 0x8c,1,negateFlag2);
     operandRecord4 = IRInst__getOperandRecord(sourceDef,~operandIndex2 & 3);
     operandSelectD = *(undefined4 *)(operandRecord4 + 0x10);
-    callResult2 = FUN_000f2cac(operandSelectB);
-    callResult3 = FUN_000f2cac(operandSelectD);
+    callResult2 = SelectWord__firstUsedComponent(operandSelectB);
+    callResult3 = SelectWord__firstUsedComponent(operandSelectD);
     uVar2 = DAT_001b0050 & 0xffffff;
     uVar3 = DAT_001b0050 & 0xffffff;
     operandRecord = IRInst__getOperandRecord(sourceDef,operandIndex2);

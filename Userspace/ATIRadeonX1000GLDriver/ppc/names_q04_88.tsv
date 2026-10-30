@@ -1,0 +1,76 @@
+use	FUN_000bef40	bVar1	bankFlag	INFERRED	a register >= 0x20 (second temp bank) is referenced by the program	^\s*bVar1\ =\ false;$	+1
+use	FUN_000bef40	bVar1	bankFlag	INFERRED	a register >= 0x20 (second temp bank) is referenced by the program	^\s*bVar1\ =\ true;$	+1
+use	FUN_000bef40	bVar1	bankFlag	INFERRED	a register >= 0x20 (second temp bank) is referenced by the program	^\s*bVar1\ =\ true;$@2	+1
+use	FUN_000bef40	bVar1	bankFlag	INFERRED	a register >= 0x20 (second temp bank) is referenced by the program	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_000bef40	bVar1	bankFlag	INFERRED	loop continues while the remap index is not 0x3f	^\s*bVar1\ =\ iVar7\ !=\ 0x3f;$	+1
+use	FUN_000bef40	bVar1	bankFlag	INFERRED	loop continues while the remap index is not 0x3f	^\s*\}\ while\ \(bVar1\);$	+1
+local	FUN_000bef40	bVar2	operandKindByte	INFERRED	kind byte (+0x1a) of the third operand: 1, 2 or 4 select which address fields are remapped
+local	FUN_000bef40	uVar3	regIndexField	INFERRED	register index field of a destination/source being marked as used in the remap table
+local	FUN_000bef40	dVar4	nextRecordKind	INFERRED	kind word of the next record, tested for 1 (more RS records)
+local	FUN_000bef40	iVar5	tableValueNext	INFERRED	remap table entry examined while skipping used slots
+local	FUN_000bef40	uVar6	recordKind	INFERRED	kind word of the instruction record
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	byte offset while the 64-entry remap table is initialised to -1	^\s*iVar7\ =\ 0;$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	byte offset while the 64-entry remap table is initialised to -1	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ \(int\)aiStack_148\)\ =\ 0xffffffff;$	+2
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*iVar7\ =\ 0x20;$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*aiStack_148\[iVar31\]\ =\ iVar7;$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*bVar1\ =\ iVar7\ !=\ 0x3f;$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\*pcVar26\ !=\ '\\0'\)\ \&\&\ \(iVar7\ =\ aiStack_148\[\*puVar25\],\ iVar7\ !=\ \-1\)\)$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*\*puVar25\ =\ \(ushort\)iVar7;$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\*pcVar24\ !=\ '\\0'\)\ \&\&\ \(iVar7\ =\ aiStack_148\[\*puVar23\],\ iVar7\ !=\ \-1\)\)$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*\*puVar23\ =\ \(ushort\)iVar7;$	+1
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\*pcVar17\ !=\ '\\0'\)\ \&\&$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\(\*\(ushort\ \*\)pdVar19\ \&\ 0x8000\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\(\*puVar12\ \&\ 0x8000\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\(\*puVar11\ \&\ 0x8000\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\*pcVar10\ !=\ '\\0'\)\ \&\&\ \(iVar7\ =\ aiStack_148\[\*puVar20\],\ iVar7\ !=\ \-1\)\)\ \{$	+2
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\(\*puVar30\ \&\ 0x8000\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\(\*puVar29\ \&\ 0x8000\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*if\ \(\(\(\*puVar22\ \&\ 0x8000\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	temp register id 0x20..0x3f being assigned	^\s*iVar7\ =\ aiStack_148\[\*\(ushort\ \*\)pdVar16\];$	+3
+use	FUN_000bef40	iVar7	remapIndex	INFERRED	new register number from the remap table	^\s*iVar7\ =\ aiStack_148\[\*\(ushort\ \*\)pdVar27\];$	+3
+local	FUN_000bef40	piVar8	slotScanCursor	INFERRED	cursor over the remap table while looking for the first unused slot
+local	FUN_000bef40	uVar9	limitStatus	INFERRED	0, or 0x80000012..0x80000017 for an exceeded resource limit
+local	FUN_000bef40	pcVar10	enableFlag20Ptr	INFERRED	flag byte at record+0x20 (kind 3/4), cursor advanced 0x48 per record
+local	FUN_000bef40	puVar11	regField12Ptr	INFERRED	16-bit register field at record+0x12
+local	FUN_000bef40	puVar12	regField10Ptr	INFERRED	16-bit register field at record+0x10
+local	FUN_000bef40	pdVar13	nextRecordPtr	INFERRED	record after the current one
+local	FUN_000bef40	pdVar14	recordPtr	INFERRED	current instruction record
+local	FUN_000bef40	piVar15	highTableCursor	INFERRED	cursor over the second half (entries 32..63) of the remap table
+local	FUN_000bef40	pdVar16	scanRecordPtr	INFERRED	record examined while marking used registers; afterwards a field cursor forwarded as a stale argument
+local	FUN_000bef40	pcVar17	enableFlag14Ptr	INFERRED	flag byte at record+0x14, cursor advanced 0x48 per record
+use	FUN_000bef40	pdVar19	scanNextPtr	INFERRED	next-record pointer of the marking loop	^\s*pdVar19\ =\ \(dword\ \*\)\(param_1\ \+\ 0x90\);$	+1
+use	FUN_000bef40	pdVar19	scanNextPtr	INFERRED	next-record pointer of the marking loop	^\s*pdVar27\ =\ pdVar19;$	+1
+use	FUN_000bef40	pdVar19	scanNextPtr	INFERRED	next-record pointer of the marking loop	^\s*dVar4\ =\ \*pdVar19;$	+2
+use	FUN_000bef40	pdVar19	regField0eCursor	INFERRED	16-bit register field at record+0xe	^\s*pdVar19\ =\ \(dword\ \*\)\(param_1\ \+\ 0x56\);$	+1
+use	FUN_000bef40	pdVar19	regField0eCursor	INFERRED	16-bit register field at record+0xe	^\s*pdVar16\ =\ pdVar19;$	+1
+use	FUN_000bef40	pdVar19	regField0eCursor	INFERRED	16-bit register field at record+0xe	^\s*if\ \(\(\(\*\(ushort\ \*\)pdVar19\ \&\ 0x8000\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_000bef40	pdVar19	regField0eCursor	INFERRED	16-bit register field at record+0xe	^\s*pdVar19\ =\ pdVar19\ \+\ 0x12;$@2	+1
+local	FUN_000bef40	puVar20	regField18Ptr	INFERRED	16-bit register field at record+0x18
+local	FUN_000bef40	puVar22	regField1ePtr	INFERRED	16-bit register field at record+0x1e
+local	FUN_000bef40	puVar23	regField06Ptr	INFERRED	16-bit register field at record+0x6
+local	FUN_000bef40	pcVar24	enableFlag0bPtr	INFERRED	flag byte at record+0xb
+local	FUN_000bef40	puVar25	regField04Ptr	INFERRED	16-bit register field at record+0x4
+local	FUN_000bef40	pcVar26	enableFlag09Ptr	INFERRED	flag byte at record+0x9
+use	FUN_000bef40	pdVar27	scanNextPtr2	INFERRED	second copy of the next-record pointer in the marking loop	^\s*pdVar27\ =\ pdVar19;$	+1
+use	FUN_000bef40	pdVar27	scanNextPtr2	INFERRED	second copy of the next-record pointer in the marking loop	^\s*pdVar13\ =\ pdVar27;$	+1
+use	FUN_000bef40	pdVar27	scanNextPtr2	INFERRED	second copy of the next-record pointer in the marking loop	^\s*pdVar27\ =\ pdVar13\ \+\ 0x12;$	+1
+use	FUN_000bef40	pdVar27	regField0cCursor	INFERRED	16-bit register field at record+0xc	^\s*pdVar27\ =\ param_5;$	+1
+use	FUN_000bef40	pdVar27	regField0cCursor	INFERRED	16-bit register field at record+0xc	^\s*iVar7\ =\ aiStack_148\[\*\(ushort\ \*\)pdVar27\];$	+1
+use	FUN_000bef40	pdVar27	regField0cCursor	INFERRED	16-bit register field at record+0xc	^\s*\*\(ushort\ \*\)pdVar27\ =\ \(ushort\)iVar7;$	+1
+use	FUN_000bef40	pdVar27	regField0cCursor	INFERRED	16-bit register field at record+0xc	^\s*pdVar27\ =\ pdVar27\ \+\ 0x12;$	+1
+local	FUN_000bef40	puVar28	kindField1aPtr	INFERRED	byte at record+0x1a: operand kind that selects which fields are remapped
+local	FUN_000bef40	puVar29	regField1cPtr	INFERRED	16-bit register field at record+0x1c
+local	FUN_000bef40	puVar30	regField1aPtr	INFERRED	16-bit register field at record+0x1a
+use	FUN_000bef40	iVar31	countdownIndex	INFERRED	countdown (0x40) while the remap table is initialised	^\s*iVar31\ =\ 0x40;$	+1
+use	FUN_000bef40	iVar31	countdownIndex	INFERRED	countdown (0x40) while the remap table is initialised	^\s*iVar31\ =\ iVar31\ \+\ \-1;$	+2
+use	FUN_000bef40	iVar31	countdownIndex	INFERRED	index of the first unused slot in the remap table	^\s*iVar31\ =\ 0;$	+1
+use	FUN_000bef40	iVar31	countdownIndex	INFERRED	index of the first unused slot in the remap table	^\s*if\ \(aiStack_148\[iVar31\]\ !=\ \-1\)\ \{$	+2
+use	FUN_000bef40	iVar31	countdownIndex	INFERRED	index of the first unused slot in the remap table	^\s*iVar31\ =\ iVar31\ \+\ 1;$	+1
+use	FUN_000bef40	iVar31	countdownIndex	INFERRED	index of the first unused slot in the remap table	^\s*\*piVar15\ =\ iVar31;$	+2
+local	FUN_000bef40	aiStack_148	regRemapTable	INFERRED	first half (32 ints) of the 64-entry register remap table (-1 = unmapped); indexed past its end into regRemapTableHigh
+local	FUN_000bef40	aiStack_c8	regRemapTableHigh	INFERRED	second half (entries 32..63) of the remap table
+local	FUN_000bef40	param_5	recordFieldCursor	INFERRED	record pointer / field cursor reused across the loops, finally forwarded as a stale argument
+local	FUN_000bef40	param_2	passThroughR4	INFERRED	forwarded unchanged to FUN_000be460
+local	FUN_000bef40	param_3	passThroughR5	INFERRED	forwarded unchanged to FUN_000be460
+func	FUN_000bef40	psnRemapTempRegisters	INFERRED	after the limit checks, builds a 64-entry register remap table (used registers first, then the second bank 0x20..0x3f) and rewrites the register fields of every instruction record through it before running FUN_000be460

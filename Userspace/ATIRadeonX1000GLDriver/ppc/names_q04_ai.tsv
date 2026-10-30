@@ -1,0 +1,1 @@
+func	FUN_000d183c	psnDumpPixelShader	CONFIRMED	prints the "Begin Loki NSF pixel shader dump" text: shader stats, then the RS, TEX and ALU instruction listings of a decoded pixel shader (13160 bytes)

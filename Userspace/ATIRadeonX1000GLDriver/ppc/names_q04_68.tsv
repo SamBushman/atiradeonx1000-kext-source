@@ -1,0 +1,56 @@
+local	psnRaAssignDefinition	uVar1	allocatedReg	INFERRED	register number taken from the free list entry
+use	psnRaAssignDefinition	uVar2	resultReg	INFERRED	register number written back to operand[0]; 0 when the operand has no components	^\s*uVar2\ =\ 0;$	+1
+use	psnRaAssignDefinition	uVar2	resultReg	INFERRED	register number written back to operand[0]; 0 when the operand has no components	^\s*uVar2\ =\ puVar7\[1\];$	+1
+use	psnRaAssignDefinition	uVar2	resultReg	INFERRED	register number written back to operand[0]; 0 when the operand has no components	^\s*uVar2\ =\ \*puVar7;$	+1
+use	psnRaAssignDefinition	uVar2	resultReg	INFERRED	register number written back to operand[0]; 0 when the operand has no components	^\s*\*param_1\ =\ uVar2;$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*uVar2\ =\ 8;$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*uVar2\ =\ 7;$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*uVar2\ =\ 0xf;$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*if\ \(\(uVar2\ \&\ uVar9\)\ ==\ 0\)\ \{$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*if\ \(\(uVar2\ \&\ \~uVar9\)\ ==\ 0\)\ \{$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*\}\ while\ \(\(uVar2\ \&\ \~uVar9\)\ !=\ 0\);$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*puVar10\[1\]\ =\ uVar9\ \&\ \~uVar2;$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*if\ \(\(uVar2\ \&\ 7\)\ !=\ 0\)\ \{$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*if\ \(\(uVar2\ \&\ 8\)\ !=\ 0\)\ \{$	+1
+use	psnRaAssignDefinition	uVar2	bankMaskBits	INFERRED	component bits being allocated: 8, 7 (split bank half) or 0xf	^\s*if\ \(uVar2\ ==\ 8\)\ \{$	+1
+use	psnRaAssignDefinition	uVar3	tempIndex	INFERRED	operand register number as an index into its temp bank	^\s*uVar3\ =\ \(uint\)\*param_1;$	+1
+use	psnRaAssignDefinition	uVar3	tempIndex	INFERRED	operand register number as an index into its temp bank	^\s*if\ \(uVar3\ <\ \*\(ushort\ \*\)\(param_2\ \+\ 2\)\)\ \{$	+1
+use	psnRaAssignDefinition	uVar3	tempIndex	INFERRED	operand register number as an index into its temp bank	^\s*uVar3\ =\ uVar3\ \-\ \*\(ushort\ \*\)\(param_2\ \+\ 2\)\ \&\ 0xffff;$	+1
+use	psnRaAssignDefinition	uVar3	tempIndex	INFERRED	operand register number as an index into its temp bank	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar5\ \+\ uVar3\ \*\ 8\);$	+1
+use	psnRaAssignDefinition	uVar3	tempIndex	INFERRED	operand register number as an index into its temp bank	^\s*\*\(undefined2\ \*\)\(iVar5\ \+\ uVar3\ \*\ 8\)\ =\ 0xffff;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar3\ =\ 0;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar3\ =\ 0;$@2	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar6\ =\ uVar3;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar3\ =\ uVar6\ \+\ 1;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*iVar5\ =\ uVar3\ \*\ 4;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*puVar10\ =\ puVar10\ \+\ uVar3\ \*\ 2;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar3\ =\ uVar6;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*\*\(ushort\ \*\)\(\*param_3\ \+\ uVar3\ \*\ 4\)\ =\ uVar1\ \+\ 1;$	+2
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*if\ \(\(\*\(short\ \*\)\(iVar8\ \+\ iVar5\ \+\ 2\)\ ==\ 0\)\ \&\&$	+4
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+1
+use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*if\ \(\*\(ushort\ \*\)\(param_3\ \+\ 1\)\ <=\ uVar3\)\ break;$	+1
+use	psnRaAssignDefinition	iVar5	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*iVar5\ =\ param_2\[1\];$	+1
+use	psnRaAssignDefinition	iVar5	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*iVar5\ =\ \*param_2;$	+1
+use	psnRaAssignDefinition	iVar5	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar5\ \+\ uVar3\ \*\ 8\);$	+1
+use	psnRaAssignDefinition	iVar5	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*\*\(undefined2\ \*\)\(iVar5\ \+\ uVar3\ \*\ 8\)\ =\ 0xffff;$	+1
+use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*iVar5\ =\ 0;$	+1
+use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*iVar5\ =\ uVar3\ \*\ 4;$	+1
+use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*if\ \(\*\(short\ \*\)\(iVar5\ \+\ \*param_3\ \+\ 2\)\ !=\ 0\)\ \{$	+1
+use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*if\ \(\(\*\(short\ \*\)\(iVar8\ \+\ iVar5\ \+\ 2\)\ ==\ 0\)\ \&\&$	+3
+use	psnRaAssignDefinition	iVar5	freeShiftOffset	INFERRED	byte offset used while closing the gap in the free list	^\s*iVar5\ =\ uVar3\ <<\ 2;$	+1
+use	psnRaAssignDefinition	iVar5	freeShiftOffset	INFERRED	byte offset used while closing the gap in the free list	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ iVar8\)\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ iVar8\ \+\ 4\);$	+2
+local	psnRaAssignDefinition	uVar6	freeEntryCount	INFERRED	free list position + 1: entry count needed to reach the chosen entry
+local	psnRaAssignDefinition	puVar7	tempEntry	INFERRED	address of the temp table entry (8 bytes: reg, alt reg, used mask)
+use	psnRaAssignDefinition	uVar9	requestedMask	INFERRED	component mask requested by the operand (operand[1])	^\s*uVar9\ =\ param_1\[1\];$	+1
+use	psnRaAssignDefinition	uVar9	requestedMask	INFERRED	component mask requested by the operand (operand[1])	^\s*if\ \(uVar9\ !=\ 0\)\ \{$	+1
+use	psnRaAssignDefinition	uVar9	requestedMask	INFERRED	component mask requested by the operand (operand[1])	^\s*if\ \(uVar9\ !=\ 8\)\ \{$	+1
+use	psnRaAssignDefinition	uVar9	requestedMask	INFERRED	component mask requested by the operand (operand[1])	^\s*param_1\[1\]\ =\ uVar9\ \&\ 0xfff7;$	+1
+use	psnRaAssignDefinition	uVar9	entryUsedMask	INFERRED	used component mask of the temp entry before the assignment	^\s*uVar9\ =\ puVar7\[2\];$	+2
+use	psnRaAssignDefinition	uVar9	entryUsedMask	INFERRED	used component mask of the temp entry before the assignment	^\s*puVar7\[2\]\ =\ uVar9\ \|\ param_1\[1\];$	+2
+use	psnRaAssignDefinition	uVar9	entryFreeMask	INFERRED	free component mask of the free list entry	^\s*uVar9\ =\ puVar10\[1\];$	+2
+use	psnRaAssignDefinition	uVar9	entryFreeMask	INFERRED	free component mask of the free list entry	^\s*uVar9\ =\ puVar10\[1\];$@2	+1
+use	psnRaAssignDefinition	uVar9	entryFreeMask	INFERRED	free component mask of the free list entry	^\s*puVar10\[1\]\ =\ uVar9\ \&\ \~uVar2;$	+1
+use	psnRaAssignDefinition	uVar9	scanFreeMask	INFERRED	free component mask of the entry examined while scanning	^\s*uVar9\ =\ \*puVar4;$	+1
+use	psnRaAssignDefinition	uVar9	scanFreeMask	INFERRED	free component mask of the entry examined while scanning	^\s*\}\ while\ \(\(uVar2\ \&\ \~uVar9\)\ !=\ 0\);$	+1
+local	psnRaAssignDefinition	iVar8	freeListBase	INFERRED	free list base pointer (*freeList)
+local	psnRaAssignDefinition	puVar10	freeEntry	INFERRED	free list entry {register, free component mask} being allocated from

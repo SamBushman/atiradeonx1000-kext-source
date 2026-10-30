@@ -8,6 +8,8 @@ local	ConstKey__compare2	param_1	keyA	INFERRED	compared field by field with keyB
 local	ConstKey__compare2	param_2	keyB	INFERRED	compared field by field with keyA
 local	ConstKey__compare3	param_1	keyA	INFERRED	compared field by field with keyB
 local	ConstKey__compare3	param_2	keyB	INFERRED	compared field by field with keyA
+local	FUN_0010e7b8	param_1	laneInfo	INFERRED	record: +0 source, +0x14 zero, +0x18 count, 4 lane words cleared
+local	FUN_0010e7b8	param_2	source	INFERRED	stored at word 0; +0x13c passed to FUN_0010e368
 local	FUN_00130e68	param_1	inst	INFERRED	vslot 0x28 queried, +0x88 record opcode compared with 0x93
 local	FUN_00130e68	iVar1	query28	INFERRED	vslot 0x28 result
 local	FUN_00130e68	uVar2	result	INFERRED	returned 0/1
@@ -21,8 +23,6 @@ local	FudoChip__ctor_10e1d8	iVar2	allocated	INFERRED	FudoVs / FudoPs object allo
 local	FudoChip__ctor_10e1d8	puVar3	baseVtable	INFERRED	PTR_DAT_001e8c74+8 stored first, overwritten by the derived vtable
 local	FudoChip__ctor_10e2a0	iVar2	allocated	INFERRED	FudoVs / FudoPs object allocated via Compiler__allocateOrFail
 local	FudoChip__ctor_10e2a0	puVar3	baseVtable	INFERRED	PTR_DAT_001e8c74+8 stored first, overwritten by the derived vtable
-local	FUN_0010e7b8	param_1	laneInfo	INFERRED	record: +0 source, +0x14 zero, +0x18 count, 4 lane words cleared
-local	FUN_0010e7b8	param_2	source	INFERRED	stored at word 0; +0x13c passed to FUN_0010e368
 local	OpcodeTraits__getRecordTail	param_1	opcode	INFERRED	index into 0x38-byte opcode records
 local	OpcodeTraits__getRecordTail	param_2	compiler	INFERRED	+0x30c backend vslot 0x16c returns the record table
 local	OpcodeTraits__getRecordTail	iVar1	opcodeFlagTable	INFERRED	backend vslot 0x16c result

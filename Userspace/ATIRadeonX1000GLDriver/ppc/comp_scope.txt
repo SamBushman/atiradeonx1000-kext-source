@@ -1,8 +1,8 @@
 # functions whose variable `compiler` is the shader-compiler Compiler (distinctive offsets used); fork E3
 Compiler__isOptionEnabled compiler
 Compiler__compileStages compiler
-FUN_000e33cc compiler
-FUN_000e3544 compiler
+EncoderState__init_e33cc compiler
+EncoderState__init compiler
 Block__ctor_ea020 compiler
 Block__ctor_ea148 compiler
 AnyBlock__ctor_ea3c0 compiler
@@ -148,8 +148,8 @@ FUN_00147f54 compiler
 FUN_00149de4 compiler
 Scheduler__assignBundleRegisters compiler
 FUN_001746c8 compiler
-FUN_0017a130 compiler
-FUN_0017ae28 compiler
+ValueKey__setLiteralVec4Operand compiler
+ValueKey__setOperandFromValueKey compiler
 Block__flattenAndRebuildAddMulTree compiler
 Inst__foldConstantMovIntoResultScale compiler
 PackState__tryPlaceInstructionSources compiler

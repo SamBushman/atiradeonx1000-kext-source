@@ -1,0 +1,8 @@
+local	FUN_000a4550	uVar1	objectCount	INFERRED	number of entries in the object table being walked (+4 of the table header)
+use	FUN_000a4550	iVar2	shaderSlotRecord	INFERRED	slot record of the shader object found through the per-slot table at +0x70 and ctx+0x113c; its +0x15cc flag is set	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000113c\)\ \+\ param_1\)\ \*\ 4\ \+$	+4
+local	FUN_000a8c00	uVar1	flagChange	INFERRED	old bit 4 of glContext+0x1928 xor the new flag: toggles the bit
+local	FUN_000a8c00	uVar4	programFlag	INFERRED	1 when the program feedback condition holds (caps+0x2e2d set and FUN_0001a010 returns 0), stored in bit 4
+local	FUN_000a8c00	uVar5	sampleFlag	INFERRED	1 when caps+0x2e2c is set, ctx+0x44 bit 17 is clear and the caps short at +0x2e28 is not -1, stored in bit 3
+local	FUN_000a8c00	param_2	engineCaps	INFERRED	engine capability table (+0x2e2c / +0x2e2d flags, +0x2e28 short)
+func	FUN_000a8c00	gld_updateProgramFlags	INFERRED	updates bits 3 and 4 of glContext+0x1928 from the engine capability flags (+0x2e2c/0x2e2d, +0x2e28) and the FUN_0001a010 result, clears ctx+0x2f and marks ctx+0x38 dirty
+func	FUN_000a4550	gld_markBoundObjectsDirty	INFERRED	sets the +0x15cc dirty flag on the slot records of every bound shader object and every 0x8804 object-table entry, then refreshes the point/clear state (FUN_0004b190, FUN_000a4490) and marks the context dirty

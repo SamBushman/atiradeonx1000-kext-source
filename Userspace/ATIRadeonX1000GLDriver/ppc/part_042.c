@@ -587,7 +587,7 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
           if ((bool)(coneHasFetch & coneHasInterpLoad)) {
             thenBlock = block[0x4d];
             elseBlock = block[0x4e];
-            ifHeaderCheck = FUN_000e9294(block);
+            ifHeaderCheck = IfHeader__armsAreSimple(block);
             if (ifHeaderCheck == 0) goto LAB_0013a198;
             thenBlockInst = *(int **)(thenBlock + 0x98);
             thenNextInst = (int *)(*(int **)(thenBlock + 0x98))[2];
@@ -1039,7 +1039,7 @@ int FUN_0013a8a4(pass)
   uint laneWordInsert16;
   
   blockListObject = pass + 0x37c;
-  laneTable = FUN_00193e74(*(undefined4 *)(*(int *)(pass + 8) + 0x378),
+  laneTable = Arena__allocZeroed(*(undefined4 *)(*(int *)(pass + 8) + 0x378),
                        *(int *)(*(int *)(pass + 8) + 0x324) << 2,1);
   blockCursor = *(int *)(blockListObject + 8);
   laneWordInsert1 = 0;
@@ -2407,7 +2407,7 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   undefined8 uVar18;
   
   uVar9 = compiler;
-  iVar3 = FUN_000e9294(block);
+  iVar3 = IfHeader__armsAreSimple(block);
   if (iVar3 != 0) {
     isStatic = (**(code **)(*block + 0x40))(block);
     if ((int)((ulonglong)isStatic >> 0x20) == 0) {
@@ -2615,7 +2615,7 @@ int pass_rewrite(program)
       iVar2 = piVar3[2];
     }
     iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x18);
-    if (((iVar2 != 0) && (iVar2 = FUN_000e0830(*(undefined4 *)(program + PROG_compiler),0,3), iVar2 == 0)) &&
+    if (((iVar2 != 0) && (iVar2 = Compiler__isCurrentHandle(*(undefined4 *)(program + PROG_compiler),0,3), iVar2 == 0)) &&
        ((*(uint *)(*(int *)(*(int *)(program + PROG_compiler) + COMP_target) + 8) & 0x20000) == 0)) {
       ((int (*)())Program__moveInterpFetchesOutOfIfs)(program);
       ((int (*)())Program__hoistFetchInsts)(program);
@@ -2729,7 +2729,7 @@ int FUN_0013d3b8(program)
               if (splitRgbAlphaEnabled != 0) {
                 operandRecord2 = IRInst__getOperandRecord(inst,0);
                 operandSelect = *(uint *)(operandRecord2 + 0x10);
-                selectIsFullMask = FUN_000f2e18(operandSelect);
+                selectIsFullMask = SelectWord__hasNonzeroLaneBytes(operandSelect);
                 if (selectIsFullMask == 0) {
                   cloneResult = IRInst__clone(inst,*(undefined4 *)(program + 8),0);
                   *(uint *)(cloneResult + 0x9c) = operandSelect & 0xffffff00 | 1;
@@ -3394,7 +3394,7 @@ code_r0x0013e80c:
                     defRoot = disjointSetFindRoot(inst[0x53],unionFindParents);
                     while ((candidateDef != 0 &&
                            ((candidateRoot = disjointSetFindRoot(*(undefined4 *)(candidateDef + 0x14c),unionFindParents),
-                            defRoot != candidateRoot || (candidateRoot = FUN_000f497c(candidateDef,inst), candidateRoot == 0)
+                            defRoot != candidateRoot || (candidateRoot = IRInst__writeMasksOverlap(candidateDef,inst), candidateRoot == 0)
                             )))) {
                       candidateDef = ((int (*)())FUN_0013ca84)(candidateDef);
                     }
@@ -7531,7 +7531,7 @@ LAB_00144264:
       blockSlotPtr = *(undefined4 **)(latestSourceBlock[0x34] + 8);
     }
     latestSourceBlock = (int *)*blockSlotPtr;
-    insertBefore = FUN_000e83bc(latestSourceBlock);
+    insertBefore = Block__getFirstRealInst(latestSourceBlock);
   }
   vcall2cResult = (**(code **)(*latestSourceBlock + 0x2c))(latestSourceBlock);
   insertBlock = latestSourceBlock;
@@ -7549,7 +7549,7 @@ LAB_00144264:
       }
       insertBlock = (int *)*blockSlotPtr;
     }
-    insertBefore = FUN_000e83bc(insertBlock);
+    insertBefore = Block__getFirstRealInst(insertBlock);
   }
   defaultSelectWord = DAT_001b0044;
   blockContext = insertBlock[0x2b];
@@ -9066,7 +9066,7 @@ int FUN_00146868(param_1, param_2, param_3)
     if (vcall1cResult != 0) {
       return 0;
     }
-    FUN_000ec4f0(param_3);
+    Program__getDominatorInfo(param_3);
     piVar1 = *(int **)(param_2[0x56] + 0xf0);
     if (piVar1 != (int *)param_1[0x56]) {
       do {

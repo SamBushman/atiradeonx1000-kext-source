@@ -383,7 +383,7 @@
 0x401b0	fragmentTranslateDdy	420	no	calls an import (malloc); calls an import (realloc)
 0x40370	fragmentTranslateScalarMath	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x40374	fragmentTranslateScalarMathBody	1800	no	calls an import (malloc); calls an import (realloc)
-0x40ac4	FUN_00040ac4	2096	no	calls an import (malloc); calls an import (realloc)
+0x40ac4	fragmentTranslateScalarMath2Src	2096	no	calls an import (malloc); calls an import (realloc)
 0x41310	fragmentTranslateTrig	488	no	calls an import (malloc); calls an import (realloc)
 0x41510	fragmentTranslateAngleConvert	548	no	calls an import (malloc); calls an import (realloc)
 0x41750	fragmentTranslateMod	1160	no	calls an import (malloc); calls an import (realloc)
@@ -403,73 +403,73 @@
 0x48da0	fragmentProgramToIL	6552	no	calls an import (malloc); calls an import (realloc)
 0x4a7d0	floatToFp24	80	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4a830	fp24ToFloat	40	no	tiny (40 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x4a860	FUN_0004a860	112	yes	
-0x4a8f0	FUN_0004a8f0	140	yes	
-0x4a990	FUN_0004a990	100	yes	
-0x4aa00	FUN_0004aa00	136	yes	
-0x4aa90	FUN_0004aa90	196	yes	
-0x4ab60	FUN_0004ab60	304	yes	
-0x4ac90	FUN_0004ac90	1272	no	indirect call (driver context / vtable / callback)
-0x4b190	FUN_0004b190	700	no	indirect call (driver context / vtable / callback)
-0x4b480	FUN_0004b480	148	no	indirect call (driver context / vtable / callback)
-0x4b520	FUN_0004b520	160	yes	
-0x4b5d0	FUN_0004b5d0	296	yes	
-0x4b710	FUN_0004b710	188	no	calls an import (free)
-0x4b7d0	FUN_0004b7d0	392	no	calls an import (malloc)
+0x4a860	gldReselectProgramStream	112	yes	
+0x4a8f0	gldRebindCurrentProgram	140	yes	
+0x4a990	gldResetProgramEntry	100	yes	
+0x4aa00	arbfpRebindIfOverLimit	136	yes	
+0x4aa90	gldResetProgramEntryDefaults	196	yes	
+0x4ab60	gldInitProgramCacheEntry	304	yes	
+0x4ac90	gldUploadProgramState	1272	no	indirect call (driver context / vtable / callback)
+0x4b190	gldSetProgramStreamMode	700	no	indirect call (driver context / vtable / callback)
+0x4b480	gldClearBoundSlot	148	no	indirect call (driver context / vtable / callback)
+0x4b520	gldRemoveProgramFromList	160	yes	
+0x4b5d0	gldReleaseProgramEntry	296	yes	
+0x4b710	gldFlushProgramCache	188	no	calls an import (free)
+0x4b7d0	gldMarkAllProgramsDirty	392	no	calls an import (malloc)
 0x4b980	gldGrowProgramHashTable	616	no	indirect call (driver context / vtable / callback)
 0x4bbf0	gldLookupProgramVariant	1244	yes	
-0x4c100	FUN_0004c100	336	yes	
-0x4c260	FUN_0004c260	732	yes	
+0x4c100	gldCopyProgramStreamState	336	yes	
+0x4c260	gldEmitProgramStatePacket	732	yes	
 0x4c540	noop_4c540	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x4c560	FUN_0004c560	440	no	indirect call (driver context / vtable / callback)
+0x4c560	gldSetCurrentProgramObject	440	no	indirect call (driver context / vtable / callback)
 0x4c720	gldValidateVertexStreams	1632	yes	
 0x4cde0	freeAndNullField	72	yes	
-0x4ce30	FUN_0004ce30	680	yes	
-0x4d100	FUN_0004d100	1264	no	indirect call (driver context / vtable / callback)
-0x4d620	FUN_0004d620	328	yes	
+0x4ce30	gldValidateHyperZ	680	yes	
+0x4d100	gldValidateAlphaBlendEarlyZ	1264	no	indirect call (driver context / vtable / callback)
+0x4d620	gldMarkProgramsDirtyByFlag	328	yes	
 0x4d770	gldValidateViewportPolygonOffset	840	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4dac0	gldValidateDepthTest	272	yes	
-0x4dbe0	FUN_0004dbe0	76	yes	
+0x4dbe0	gldValidateVertexOutputRouting	76	yes	
 0x4dc30	gldValidateTexEnvColor	220	yes	
 0x4dd10	gldEmitScissorRegs	40	yes	
 0x4dd40	gldEmitViewportAndGuardBand	116	yes	
-0x4ddc0	FUN_0004ddc0	104	no	indirect call (driver context / vtable / callback)
-0x4de30	FUN_0004de30	180	yes	
-0x4def0	FUN_0004def0	2428	no	indirect call (driver context / vtable / callback)
-0x4e880	FUN_0004e880	252	no	indirect call (driver context / vtable / callback)
-0x4e990	FUN_0004e990	208	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x4ddc0	gldEmitConstantFlushPacket	104	no	indirect call (driver context / vtable / callback)
+0x4de30	gldSetUnitScaleConstants	180	yes	
+0x4def0	gldValidateTextureUnits	2428	no	indirect call (driver context / vtable / callback)
+0x4e880	gldEmitRegisterPairPacket	252	no	indirect call (driver context / vtable / callback)
+0x4e990	gldDepthBiasScaledInt	208	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4ea70	gldValidatePolygonMode	260	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x4eba0	FUN_0004eba0	476	yes	
-0x4ed90	FUN_0004ed90	692	yes	
+0x4eba0	gldValidatePolygonOffset	476	yes	
+0x4ed90	gldValidatePointSize	692	yes	
 0x4f080	gldValidateCullFace	192	yes	
-0x4f160	FUN_0004f160	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x4f2e0	FUN_0004f2e0	616	no	indirect call (driver context / vtable / callback)
+0x4f160	gldFogColorChannelByte	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x4f2e0	gldValidateFog	616	no	indirect call (driver context / vtable / callback)
 0x4f550	gldValidateScissor	452	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4f720	gldInitStateDefaults	1348	yes	
-0x4fc80	FUN_0004fc80	252	yes	
+0x4fc80	ffvpSetOutputRoute	252	yes	
 0x4fd80	extvsUpdateVertexAttributeConstants	492	no	indirect call (driver context / vtable / callback)
 0x4ff70	gldValidateAlphaTest	416	yes	
-0x50140	FUN_00050140	424	yes	
+0x50140	gldValidateColorMask	424	yes	
 0x50300	gldEmitHardwareState	3048	no	indirect call (driver context / vtable / callback)
-0x50ef0	FUN_00050ef0	284	no	indirect call (driver context / vtable / callback)
+0x50ef0	gldSetVertexPacketLimits	284	no	indirect call (driver context / vtable / callback)
 0x51010	gldValidateStencil	1024	yes	
 0x51420	gldValidateBlend	3152	yes	
 0x520c0	gldValidateViewport	436	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x52280	FUN_00052280	2608	no	indirect call (driver context / vtable / callback)
-0x52cc0	FUN_00052cc0	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x52e60	FUN_00052e60	112	no	indirect call (driver context / vtable / callback)
-0x52ee0	FUN_00052ee0	128	yes	
-0x52f60	FUN_00052f60	148	yes	
-0x53000	FUN_00053000	52	yes	
-0x53040	FUN_00053040	20	yes	
+0x52280	gldEmitDirtyStatePackets	2608	no	indirect call (driver context / vtable / callback)
+0x52cc0	extvsSelectHandlerTables	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x52e60	extvsSetStreamAndValidate	112	no	indirect call (driver context / vtable / callback)
+0x52ee0	extvsGetSymbolStorageWord	128	yes	
+0x52f60	extvsGetSymbolStorageKind	148	yes	
+0x53000	extvsMarkStateDirty	52	yes	
+0x53040	extvsSelectRegisterCode	20	yes	
 0x53060	noop_53060	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x53070	extvsConstantsDirty	36	yes	
 0x530a0	extvsClearConstantsDirty	24	yes	
-0x530c0	FUN_000530c0	184	yes	
-0x53190	FUN_00053190	116	yes	
+0x530c0	extvsGetSymbolStorageInfo	184	yes	
+0x53190	extvsEnabledInputMask	116	yes	
 0x53220	extvsGetOrCreateStateSymbol	284	no	indirect call (driver context / vtable / callback)
 0x53340	glGenSymbolsEXT_impl	368	yes	
-0x534c0	FUN_000534c0	260	yes	
+0x534c0	extvsCreateVectorSymbolChain	260	yes	
 0x53610	extvsShaderOp1Explicit	136	yes	
 0x536a0	extvsShaderOp2Explicit	144	yes	
 0x53730	extvsShaderOp3Explicit	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -485,14 +485,14 @@
 0x53f00	glShaderOp1EXT_impl	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x53f80	glShaderOp2EXT_impl	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x54000	glShaderOp3EXT_impl	128	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x54080	FUN_00054080	276	yes	
+0x54080	extvsEmitSwizzleInstruction	276	yes	
 0x541a0	glWriteMaskEXT_impl	196	yes	
 0x54270	glInsertComponentEXT_impl	308	yes	
 0x543b0	glExtractComponentEXT_impl	164	yes	
 0x54460	glGenSymbolsEXT_impl5	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x54470	FUN_00054470	272	no	indirect call (driver context / vtable / callback)
-0x54590	FUN_00054590	288	yes	
-0x546d0	FUN_000546d0	284	no	indirect call (driver context / vtable / callback)
+0x54470	extvsGetConstantUploadInfo	272	no	indirect call (driver context / vtable / callback)
+0x54590	extvsCompactSymbolEntries	288	yes	
+0x546d0	extvsMakeShaderCurrent	284	no	indirect call (driver context / vtable / callback)
 0x547f0	glSetLocalConstantEXT_impl	324	no	indirect call (driver context / vtable / callback)
 0x54940	extvsBindCurrentVertexParameter	56	yes	
 0x54980	extvsFreeAllShaders	260	no	indirect call (driver context / vtable / callback)
@@ -501,7 +501,7 @@
 0x54c10	extvsAttachSharedState	388	no	indirect call (driver context / vtable / callback)
 0x54da0	extvsSymbolListGetIndex	36	yes	
 0x54dd0	extvsAppendSymbol	376	no	indirect call (driver context / vtable / callback)
-0x54f50	FUN_00054f50	380	yes	
+0x54f50	extvsResolveOperand	380	yes	
 0x550e0	extvsOperandDataType	244	yes	
 0x551f0	extvsFreeSymbolData	244	no	indirect call (driver context / vtable / callback)
 0x55300	extvsFreeShaderObject	184	yes	
@@ -561,11 +561,11 @@
 0x61eb0	vpUploadConstantsWithFog	604	no	indirect call (driver context / vtable / callback)
 0x62120	extvsComputeStateKey	252	yes	
 0x62220	extvsStateFree	272	no	indirect call (driver context / vtable / callback)
-0x62370	FUN_00062370	104	yes	
+0x62370	gldLoadUnitFlagBits	104	yes	
 0x623e0	extvsInitLimits	40	yes	
-0x62410	FUN_00062410	116	no	indirect call (driver context / vtable / callback)
-0x62490	FUN_00062490	120	no	indirect call (driver context / vtable / callback)
-0x62510	FUN_00062510	92	no	indirect call (driver context / vtable / callback)
+0x62410	gldAllocListNode	116	no	indirect call (driver context / vtable / callback)
+0x62490	gldFreeListNodes	120	no	indirect call (driver context / vtable / callback)
+0x62510	gldDestroyListObject	92	no	indirect call (driver context / vtable / callback)
 0x62570	extvsStateCacheCreate	616	no	indirect call (driver context / vtable / callback)
 0x627e4	extvsStateCacheFreeAll	328	no	indirect call (driver context / vtable / callback)
 0x62940	extvsUploadSingleConstant	276	no	indirect call (driver context / vtable / callback)
@@ -573,17 +573,17 @@
 0x62a70	extvsStateCacheInsert	116	yes	
 0x62af0	extvsBuildStreamDescriptors	5624	yes	
 0x640f0	gldCurrentAttributePacketHeader	220	yes	
-0x64230	FUN_00064230	1256	no	indirect call (driver context / vtable / callback)
-0x64720	FUN_00064720	304	no	indirect call (driver context / vtable / callback)
+0x64230	extvsBuildStreamBlock	1256	no	indirect call (driver context / vtable / callback)
+0x64720	gldCopyRouteRegisters	304	no	indirect call (driver context / vtable / callback)
 0x64850	extvsApplyStreamDescriptors	436	no	indirect call (driver context / vtable / callback)
 0x64a10	extvsUploadProgramConstants	1304	no	indirect call (driver context / vtable / callback)
 0x64f40	extvsValidateProgramState	708	no	indirect call (driver context / vtable / callback)
 0x651e0	extvsFlushConstantUploads	400	no	indirect call (driver context / vtable / callback)
 0x65370	ffvpSelectLitProgramVariant	636	no	indirect call (driver context / vtable / callback)
-0x65610	FUN_00065610	152	yes	
+0x65610	ffvpInitBuilderOutputSlots	152	yes	
 0x656b0	ffvpSelectPassThroughVariant	780	no	indirect call (driver context / vtable / callback)
 0x659d0	vpFillConstantBank	612	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x65c40	FUN_00065c40	52	yes	
+0x65c40	ffvpUploadVariantConstants	52	yes	
 0x65c80	noop_65c80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x65c90	arbEmitIlHeader	328	no	indirect call (driver context / vtable / callback)
 0x65de0	arbEmitIlEnd	192	no	indirect call (driver context / vtable / callback)
@@ -899,10 +899,10 @@
 0xa0f90	atifsInit	152	yes	
 0xa1040	FUN_000a1040	20	yes	
 0xa1060	arbProgramIsValid	44	yes	
-0xa1090	FUN_000a1090	200	yes	
-0xa1160	FUN_000a1160	48	yes	
-0xa11a0	FUN_000a11a0	64	yes	
-0xa11f0	FUN_000a11f0	192	yes	
+0xa1090	gld_setUnitTargetBits	200	yes	
+0xa1160	gld_getShaderTexUnitMask	48	yes	
+0xa11a0	gld_getFragmentShaderKind	64	yes	
+0xa11f0	gld_collectUsedTexCoordUnits	192	yes	
 0xa12b0	glGenFragmentShadersATI_impl	52	yes	
 0xa12f0	glBindFragmentShaderATI_impl	612	yes	
 0xa1570	glDeleteFragmentShaderATI_impl	312	yes	
@@ -931,61 +931,61 @@
 0xa2e90	atifsAddColorOp	708	no	indirect call (driver context / vtable / callback)
 0xa3160	atifsAddAlphaOp	804	no	indirect call (driver context / vtable / callback)
 0xa3490	atifsSetConstant	196	yes	
-0xa3560	FUN_000a3560	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3610	FUN_000a3610	88	yes	
-0xa3670	FUN_000a3670	48	yes	
-0xa36b0	FUN_000a36b0	212	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3790	FUN_000a3790	716	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3a60	FUN_000a3a60	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3be0	FUN_000a3be0	2056	yes	
-0xa43f0	FUN_000a43f0	148	no	indirect call (driver context / vtable / callback)
-0xa4490	FUN_000a4490	184	yes	
-0xa4550	FUN_000a4550	372	yes	
-0xa46d0	FUN_000a46d0	144	yes	
-0xa4760	FUN_000a4760	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xa4770	FUN_000a4770	504	yes	
-0xa4980	FUN_000a4980	4768	no	calls an import (free); indirect call (driver context / vtable / callback)
-0xa5c40	FUN_000a5c40	624	no	indirect call (driver context / vtable / callback)
-0xa5ec0	FUN_000a5ec0	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa6140	FUN_000a6140	896	no	indirect call (driver context / vtable / callback)
-0xa64d0	FUN_000a64d0	36	yes	
-0xa6500	FUN_000a6500	828	no	indirect call (driver context / vtable / callback)
-0xa6860	FUN_000a6860	1096	no	indirect call (driver context / vtable / callback)
-0xa6cb0	FUN_000a6cb0	656	no	indirect call (driver context / vtable / callback)
-0xa6f70	FUN_000a6f70	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xa3560	gld_quantizePointSizeInt	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3610	gld_roundUpToPowerOfTwo	88	yes	
+0xa3670	gld_isPointAttenuationActive	48	yes	
+0xa36b0	gld_scalePointSizeToPixels	212	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3790	gld_buildCoverageByteTable	716	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3a60	gld_buildCoverageRampTable	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3be0	gld_setPrimitiveInputRegisters	2056	yes	
+0xa43f0	gld_freePointMaskCache	148	no	indirect call (driver context / vtable / callback)
+0xa4490	gld_invalidateCachedPointMasks	184	yes	
+0xa4550	gld_markBoundObjectsDirty	372	yes	
+0xa46d0	gld_refreshActivePointMask	144	yes	
+0xa4760	gld_getActiveSampleIndex	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xa4770	gld_computePointSizePixels	504	yes	
+0xa4980	gld_buildSmoothPointMask	4768	no	calls an import (free); indirect call (driver context / vtable / callback)
+0xa5c40	gld_emitClearColorPacket	624	no	indirect call (driver context / vtable / callback)
+0xa5ec0	gld_updateSampleCoverage	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa6140	gld_resetRasterStateForInternalDraw	896	no	indirect call (driver context / vtable / callback)
+0xa64d0	gld_markFastClearFlag	36	yes	
+0xa6500	gld_emitClearFillPacket	828	no	indirect call (driver context / vtable / callback)
+0xa6860	gld_emitInternalViewportPacket	1096	no	indirect call (driver context / vtable / callback)
+0xa6cb0	gld_clearStreamBuffers	656	no	indirect call (driver context / vtable / callback)
+0xa6f70	gld_callocBytes	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xa6f80	noop_a6f80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xa6f90	FUN_000a6f90	168	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa7050	FUN_000a7050	2324	no	indirect call (driver context / vtable / callback)
+0xa6f90	gld_normalizeVec3	168	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa7050	gld_initContextDispatch	2324	no	indirect call (driver context / vtable / callback)
 0xa7970	gldFreeEngineState	240	no	indirect call (driver context / vtable / callback)
-0xa7a60	FUN_000a7a60	496	no	indirect call (driver context / vtable / callback)
+0xa7a60	gld_updateDrawBufferConfig	496	no	indirect call (driver context / vtable / callback)
 0xa7c60	gldMarkAllStateDirty	176	yes	
-0xa7d10	FUN_000a7d10	344	yes	
-0xa7e80	FUN_000a7e80	24	yes	
-0xa7ea0	FUN_000a7ea0	48	yes	
+0xa7d10	gld_buildActiveUnitList	344	yes	
+0xa7e80	gld_markDirty10	24	yes	
+0xa7ea0	gld_clearStateBit28MarkDirty	48	yes	
 0xa7ed0	noop_a7ed0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xa7ee0	FUN_000a7ee0	980	yes	
-0xa82c0	FUN_000a82c0	96	yes	
-0xa8320	FUN_000a8320	20	yes	
-0xa8340	FUN_000a8340	720	yes	
-0xa8630	FUN_000a8630	968	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa8a00	FUN_000a8a00	488	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa8c00	FUN_000a8c00	356	yes	
-0xa8d70	FUN_000a8d70	168	yes	
-0xa8e20	FUN_000a8e20	544	yes	
-0xa9070	FUN_000a9070	1476	yes	
-0xa9640	FUN_000a9640	1116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa9ac0	FUN_000a9ac0	7656	no	indirect call (driver context / vtable / callback)
-0xab900	FUN_000ab900	60	yes	
-0xab940	FUN_000ab940	96	yes	
-0xab9b0	FUN_000ab9b0	240	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xabab0	FUN_000abab0	164	no	indirect call (driver context / vtable / callback)
-0xabb60	FUN_000abb60	96	yes	
-0xabbd0	FUN_000abbd0	312	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xabd10	FUN_000abd10	1640	no	indirect call (driver context / vtable / callback)
-0xac540	FUN_000ac540	476	no	indirect call (driver context / vtable / callback)
-0xac720	FUN_000ac720	7944	no	indirect call (driver context / vtable / callback)
-0xaec40	FUN_000aec40	3872	no	indirect call (driver context / vtable / callback)
-0xafe40	FUN_000afe40	5932	no	indirect call (driver context / vtable / callback)
+0xa7ee0	gld_updateTextureUnitState	980	yes	
+0xa82c0	gld_dropStaleTextureShadow	96	yes	
+0xa8320	gld_clearPacketSlot	20	yes	
+0xa8340	gld_copyTexCombinerSources	720	yes	
+0xa8630	gld_updateInverseMatrix	968	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa8a00	gld_transformClipPlanes	488	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa8c00	gld_updateProgramFlags	356	yes	
+0xa8d70	gld_updatePolygonModeFlags	168	yes	
+0xa8e20	gld_updateLightingFlags	544	yes	
+0xa9070	gld_commitTexEnvUnits	1476	yes	
+0xa9640	gld_updatePointState	1116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa9ac0	gld_validateDirtyState	7656	no	indirect call (driver context / vtable / callback)
+0xab900	gld_selectProgramCallback	60	yes	
+0xab940	gld_convertDestOperand	96	yes	
+0xab9b0	gld_classifyOperand	240	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xabab0	gld_uploadParamConstants	164	no	indirect call (driver context / vtable / callback)
+0xabb60	gld_getBoundProgramId	96	yes	
+0xabbd0	gld_scanOperandRegisterCount	312	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xabd10	gld_scanProgramTokens	1640	no	indirect call (driver context / vtable / callback)
+0xac540	gld_emitUnitSelectTokens	476	no	indirect call (driver context / vtable / callback)
+0xac720	gld_emitFormatConvertTokens	7944	no	indirect call (driver context / vtable / callback)
+0xaec40	gld_emitInstructionTokens	3872	no	indirect call (driver context / vtable / callback)
+0xafe40	gld_compileFragmentProgram	5932	no	indirect call (driver context / vtable / callback)
 0xb15d0	ilTokenBufPush	180	no	indirect call (driver context / vtable / callback)
 0xb1690	atifsEmitFinalColorClamp	476	no	indirect call (driver context / vtable / callback)
 0xb1870	atifsEmitAddSecondaryColor	800	no	indirect call (driver context / vtable / callback)
@@ -997,39 +997,39 @@
 0xb30e0	atifsEmitInputDeclarations	1352	no	indirect call (driver context / vtable / callback)
 0xb3630	atifsCompileCurrentShader	3316	no	indirect call (driver context / vtable / callback)
 0xb43f0	noop_b43f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xb4400	FUN_000b4400	2136	no	calls an import (free)
-0xb4cd0	FUN_000b4cd0	608	yes	
-0xb4f50	FUN_000b4f50	180	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xb5010	FUN_000b5010	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xb50a0	FUN_000b50a0	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb4400	gld_compileILProgram	2136	no	calls an import (free)
+0xb4cd0	gld_decodeProgramInterface	608	yes	
+0xb4f50	gld_storeConstantVec4	180	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb5010	gld_emitSlotParamIfDirty	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb50a0	gld_emitTextureUnitScaleParams	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xb5190	noop_b5190	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xb51a0	FUN_000b51a0	376	yes	
-0xb5320	FUN_000b5320	204	yes	
+0xb51a0	gld_emitSlotViewportTransforms	376	yes	
+0xb5320	gld_emitSlotTransformParams	204	yes	
 0xb53f0	noop_b53f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xb5400	FUN_000b5400	928	yes	
-0xb57a0	FUN_000b57a0	688	no	indirect call (driver context / vtable / callback)
-0xb5a60	FUN_000b5a60	244	yes	
-0xb5b60	FUN_000b5b60	64	yes	
-0xb5ba0	FUN_000b5ba0	36	yes	
-0xb5bd0	FUN_000b5bd0	36	yes	
-0xb5c00	FUN_000b5c00	828	no	indirect call (driver context / vtable / callback)
-0xb5f40	FUN_000b5f40	100	no	calls an import (free)
-0xb5fb0	FUN_000b5fb0	100	no	indirect call (driver context / vtable / callback)
-0xb6020	FUN_000b6020	1360	yes	
-0xb6580	FUN_000b6580	2448	yes	
-0xb6f20	FUN_000b6f20	928	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb5400	gld_emitProgramStatePackets	928	yes	
+0xb57a0	gld_compileFragmentProgramImage	688	no	indirect call (driver context / vtable / callback)
+0xb5a60	gld_emitProgramConstants	244	yes	
+0xb5b60	gld_emitProgramStateAndConstants	64	yes	
+0xb5ba0	gld_emitProgramStateOnly	36	yes	
+0xb5bd0	gld_emitProgramConstantsOnly	36	yes	
+0xb5c00	gld_bindProgramStateAndEmit	828	no	indirect call (driver context / vtable / callback)
+0xb5f40	gld_freeProgramImage	100	no	calls an import (free)
+0xb5fb0	gld_destroyUnitCmdLists	100	no	indirect call (driver context / vtable / callback)
+0xb6020	gld_buildUnitSetupCmdList	1360	yes	
+0xb6580	ffpsBuildProgram	2448	yes	
+0xb6f20	gld_updateUnitBiasRegisters	928	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xb72d0	extvsInstReadsTempComponents	11108	yes	
 0xb9f10	extvsOptimizeProgram	11376	yes	
-0xbd9a0	FUN_000bd9a0	160	no	indirect call (driver context / vtable / callback)
-0xbda40	FUN_000bda40	1016	yes	
-0xbde70	FUN_000bde70	1504	no	indirect call (driver context / vtable / callback)
-0xbe460	FUN_000be460	2472	yes	
-0xbee40	FUN_000bee40	244	yes	
-0xbef40	FUN_000bef40	1192	yes	
-0xbf400	FUN_000bf400	1260	yes	
-0xbf910	FUN_000bf910	796	yes	
-0xbfcc0	FUN_000bfcc0	440	yes	
-0xbfed0	FUN_000bfed0	2464	yes	
+0xbd9a0	gld_emitLightingStatePacket	160	no	indirect call (driver context / vtable / callback)
+0xbda40	gld_updateTexCombinerState	1016	yes	
+0xbde70	psnDecDecodeFragmentProgram	1504	no	indirect call (driver context / vtable / callback)
+0xbe460	psnEncodeHwProgramPhased	2472	yes	
+0xbee40	psnCheckLimitsAndGenerate	244	yes	
+0xbef40	psnRemapTempRegisters	1192	yes	
+0xbf400	psnPlanPhases	1260	yes	
+0xbf910	ilRemapSwizzleTriple	796	yes	
+0xbfcc0	ilRemapSwizzleSingle	440	yes	
+0xbfed0	psnEncodeHwProgram	2464	yes	
 0xc0880	psnDecRecomputeSourceUsage	1832	yes	
 0xc0fd0	psnDecCanonicalizeEntry	1936	yes	
 0xc1780	psnDecDecodeHwInstruction	1416	yes	
@@ -1062,7 +1062,7 @@
 0xc57b0	psnAccumulateAlphaSelectRead	392	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xc59c0	psnRaReleaseUse	580	yes	
 0xc5c50	psnRaAssignDefinition	476	yes	
-0xc5e60	FUN_000c5e60	1524	yes	
+0xc5e60	psnAnalyzeProgram	1524	yes	
 0xc6470	psnReallocateTemps	2436	yes	
 0xc6e50	scCallbackFree	40	no	calls an import (free)
 0xc6e80	scCallbackGetFlagZero	16	yes	
@@ -1071,7 +1071,7 @@
 0xc6f60	scCallbackFclose	44	no	calls an import (fclose)
 0xc6f90	scCallbackFwrite	40	yes	
 0xc6fc0	scCallbackFread	40	yes	
-0xc6ff0	FUN_000c6ff0	464	yes	
+0xc6ff0	scCreateForContext	464	yes	
 0xc71e0	ilFreeRecordList	76	yes	
 0xc7240	ilSelectorOneToThreeOrZero	44	yes	
 0xc7270	ilRecordInputSemantic	24	yes	
@@ -1082,9 +1082,9 @@
 0xc73c0	ilPopFreeRegister	144	yes	
 0xc7460	ilEmitProjectiveDivide	468	yes	
 0xc7650	ilEmitShadowCompare	680	yes	
-0xc7930	FUN_000c7930	2004	yes	
+0xc7930	ilEmitShadowStateTokens	2004	yes	
 0xc8110	ilEmitPrologue	1252	yes	
-0xc8600	FUN_000c8600	316	yes	
+0xc8600	ilRecordRegisterUse	316	yes	
 0xc8760	ilRemapSourceOperandRegister	104	yes	
 0xc87d0	ilMarkOperandRegisterUsed	296	yes	
 0xc8910	ilMarkInstructionRegistersUsed	400	yes	
@@ -1093,16 +1093,16 @@
 0xc8e30	ilStoreFloat4Constant	28	no	tiny (28 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xc8e50	ilAssembleProgram	7396	no	calls an import (exit); calls an import (free); calls an import (malloc)
 0xcae90	ilRewriteForTextureState	7760	no	calls an import (exit); calls an import (free); calls an import (malloc)
-0xcd05c	FUN_000cd05c	244	yes	
+0xcd05c	scCreate	244	yes	
 0xcd154	scDestroy	92	no	indirect call (driver context / vtable / callback)
-0xcd1b0	FUN_000cd1b0	20	yes	
-0xcd1c4	FUN_000cd1c4	92	yes	
+0xcd1b0	scSetCallbackTablesChecked	20	yes	
+0xcd1c4	scCompile	92	yes	
 0xcd1d8	scCheckHandle	20	yes	
 0xcd1ec	scDisassembleIL	40	yes	
 0xcd214	scDumpSrcShader	40	yes	
 0xcd23c	scDumpShader	40	yes	
 0xcd264	scDumpShaderToString	40	yes	
-0xcd290	FUN_000cd290	88	yes	
+0xcd290	vsOpcodeSourceCount	88	yes	
 0xcd388	scDisassembleILImpl	28	yes	
 0xcd3a4	scLogToSink	96	yes	
 0xcd404	scDumpSrcShaderImpl	1952	yes	
@@ -1110,17 +1110,17 @@
 0xcdbe4	scDumpShaderToStringImpl	60	yes	
 0xcdc20	noop_cdc20	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xcdc24	scShaderStateFlag	24	yes	
-0xcdc3c	FUN_000cdc3c	996	yes	
+0xcdc3c	vsdisFormatFloat	996	yes	
 0xce020	vsdisClearSinkRecord	24	yes	
 0xce038	vsdisClearSinkRecord2	24	yes	
-0xce050	FUN_000ce050	248	yes	
-0xce148	FUN_000ce148	836	yes	
+0xce050	scDisasmPrintf	248	yes	
+0xce148	vsDisasmSourceOperand	836	yes	
 0xce4e4	vsdisPrintInputDx	48	yes	
 0xce514	vsdisPrintOutputMapping	864	yes	
 0xce88c	vsdisPrintShaderData	480	yes	
-0xcea6c	FUN_000cea6c	660	yes	
-0xced58	FUN_000ced58	1288	yes	
-0xcf2ec	FUN_000cf2ec	1952	yes	
+0xcea6c	vsDisasmDestOperand	660	yes	
+0xced58	vsDisasmMathOpcode	1288	yes	
+0xcf2ec	vsDisasmVectorOpcode	1952	yes	
 0xcfc94	vsdisFlowOpcodeName	144	yes	
 0xcfd24	vsdisPrintFlowInstruction	524	yes	
 0xcff30	vsDisassembleLine	252	yes	
@@ -1133,10 +1133,10 @@
 0xd0888	psnFormatAlphaSource	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd0b68	psnNormalizeProgram	1344	yes	
 0xd10a8	psnSwizzleIsAlphaSourceForm	52	yes	
-0xd10dc	FUN_000d10dc	712	yes	
-0xd13a4	FUN_000d13a4	640	yes	
-0xd1624	FUN_000d1624	536	yes	
-0xd183c	FUN_000d183c	13160	yes	
+0xd10dc	psDisasmFormatRegister	712	yes	
+0xd13a4	psDisasmFormatRgbSource	640	yes	
+0xd1624	psDisasmFormatAlphaSource	536	yes	
+0xd183c	psnDumpPixelShader	13160	yes	
 0xd4de8	psnClearSinkRecord	16	yes	
 0xd4df8	psnClearSinkRecord2	16	yes	
 0xd4e08	scDumpPixelProgramPsn	92	yes	
@@ -1144,33 +1144,33 @@
 0xd4e8c	scDumpPixelProgram	84	yes	
 0xd4ef0	ffpsBuildRgbSourceOperand	628	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd51a0	ffpsBuildAlphaSourceOperand	460	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xd5390	FUN_000d5390	548	no	indirect call (driver context / vtable / callback)
+0xd5390	ffpsEmitColorOutputMovs	548	no	indirect call (driver context / vtable / callback)
 0xd55c0	FUN_000d55c0	832	no	indirect call (driver context / vtable / callback)
 0xd5900	ffpsEmitDeclarations	2612	no	indirect call (driver context / vtable / callback)
 0xd6340	ffpsEmitTexEnvCombine	4540	no	indirect call (driver context / vtable / callback)
 0xd7520	ffpsEmitTexEnvLegacy	3832	no	indirect call (driver context / vtable / callback)
 0xd8450	FUN_000d8450	5856	no	indirect call (driver context / vtable / callback)
-0xd9b58	FUN_000d9b58	84	yes	
+0xd9b58	BitSet256__findNthSetBit	84	yes	
 0xd9bac	scStoreConstantComponent	228	yes	
 0xd9c90	ConstBank__storeIntLane	228	yes	
 0xd9d74	ConstBank__storeBoolLane	228	yes	
-0xd9e58	FUN_000d9e58	64	yes	
+0xd9e58	scStoreIntConstantComponent	64	yes	
 0xd9e98	ConstBank__addMappedEntry	156	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xd9f3c	FUN_000d9f3c	60	yes	
-0xd9f80	FUN_000d9f80	32	yes	
-0xd9fa0	FUN_000d9fa0	32	yes	
-0xd9fc0	FUN_000d9fc0	32	yes	
-0xd9fe0	FUN_000d9fe0	72	yes	
-0xda028	FUN_000da028	72	yes	
-0xda070	FUN_000da070	44	yes	
-0xda09c	FUN_000da09c	36	yes	
-0xda0c0	FUN_000da0c0	720	yes	
+0xd9f3c	CompileInput__lacksFlag0x200000	60	yes	
+0xd9f80	CompileInput__getFloatConstCount	32	yes	
+0xd9fa0	CompileInput__getIntConstCount	32	yes	
+0xd9fc0	CompileInput__getBoolConstCount	32	yes	
+0xd9fe0	CompileInput__readFloatConst	72	yes	
+0xda028	CompileInput__readIntConst	72	yes	
+0xda070	CompileInput__readBoolConst	44	yes	
+0xda09c	Compiler__bumpStatsCounter100	36	yes	
+0xda0c0	Compiler__createFromRequest_da0c0	720	yes	
 0xda394	scSetCallbackTables	68	yes	
-0xda420	FUN_000da420	24	yes	
-0xda438	FUN_000da438	32	yes	
+0xda420	Compiler__getFailureCode	24	yes	
+0xda438	Object__setThreeWords	32	yes	
 0xda458	scDestroyCompilerObject	96	yes	
 0xda4b8	Compiler__createFromRequest	720	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
-0xda78c	FUN_000da78c	244	yes	
+0xda78c	MiniFloat__decode	244	yes	
 0xda8a8	ildisInitContext	40	yes	
 0xda8d0	ildisSkipToken	16	yes	
 0xda8e0	ildisSetIndent	20	yes	
@@ -1237,11 +1237,11 @@
 0xe0794	Compiler__setOptionBit	36	yes	
 0xe07b8	Compiler__clearOptionBit	36	yes	
 0xe07dc	Compiler__isOptionEnabled	84	yes	
-0xe0830	FUN_000e0830	32	yes	
+0xe0830	Compiler__isCurrentHandle	32	yes	
 0xe0850	Compiler__setDefaultOptions	1112	yes	
 0xe0ca8	FUN_000e0ca8	28	yes	
 0xe0cc8	testBit24	8	yes	
-0xe0cd0	FUN_000e0cd0	308	yes	
+0xe0cd0	Compiler__applyRequestFlags	308	yes	
 0xe0e0c	Compiler__logf	28	yes	
 0xe0e28	FUN_000e0e28	116	yes	
 0xe0e9c	noop_e0e9c	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -1251,22 +1251,22 @@
 0xe1388	noop_e1388	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xe138c	noop_e138c	28	yes	
 0xe13a8	FUN_000e13a8	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xe13b4	FUN_000e13b4	152	yes	
+0xe13b4	Compiler__resetPerStageState	152	yes	
 0xe144c	FUN_000e144c	24	yes	
 0xe1464	Compiler__timerOutputFileName	28	yes	
 0xe1484	Compiler__releaseOutputBuffer	80	no	indirect call (driver context / vtable / callback)
 0xe14d4	Compiler__setTableEntry534	16	yes	
-0xe14e4	FUN_000e14e4	80	no	indirect call (driver context / vtable / callback)
+0xe14e4	Compiler__setQueriedTableEntry4d4	80	no	indirect call (driver context / vtable / callback)
 0xe1534	Compiler__fail	48	yes	
 0xe1564	Compiler__allocateOrFail	84	yes	
 0xe15b8	Compiler__propagateFlag5a1Bit1	36	yes	
 0xe15dc	Compiler__selectEntry534ByProgramFlags	64	yes	
-0xe161c	FUN_000e161c	156	yes	
+0xe161c	Compiler__tryRetryAfterFailure	156	yes	
 0xe16b8	Compiler__selectBlockByProgramFlags	76	yes	
 0xe1704	Compiler__setBitInSelectedBlockB8	88	yes	
 0xe175c	Compiler__setBitInSelectedBlockD8	88	yes	
 0xe17b4	Compiler__setBitInSelectedBlock98	88	yes	
-0xe180c	FUN_000e180c	124	yes	
+0xe180c	Compiler__getOrCreateSlotObject	124	yes	
 0xe1888	Compiler__resetState	152	yes	
 0xe1920	Compiler__init_e1920	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
 0xe1a48	Compiler__init_e1a48	292	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
@@ -1274,12 +1274,12 @@
 0xe1c50	Program__forwardMulOperandToUsers	916	no	indirect call (driver context / vtable / callback)
 0xe1fe4	Compiler__releaseChipAndPools	160	yes	
 0xe2094	Compiler__compileStages	1132	no	indirect call (driver context / vtable / callback)
-0xe2524	FUN_000e2524	324	no	calls an import (setjmp)
+0xe2524	Compiler__compileWithRetry	324	no	calls an import (setjmp)
 0xe2668	Compiler__compile	280	no	calls an import (setjmp)
-0xe2780	FUN_000e2780	140	yes	
+0xe2780	MachineCodeWriter__accumulateStats	140	yes	
 0xe280c	FUN_000e280c	44	yes	
-0xe2838	FUN_000e2838	20	yes	
-0xe284c	FUN_000e284c	20	yes	
+0xe2838	EncoderState__emitBlock	20	yes	
+0xe284c	EncoderState__sinkIsOverflowed	20	yes	
 0xe2860	Block__accept	36	yes	
 0xe28f0	IfFooterStatic__accept	96	no	indirect call (driver context / vtable / callback)
 0xe2a04	FUN_000e2a04	64	yes	
@@ -1288,34 +1288,34 @@
 0xe2a70	IREndCallRoutine__acceptCallPseudo	28	yes	
 0xe2a8c	IRStartMakeCall__acceptCallPseudo	28	yes	
 0xe2aa8	IREndMakeCall__acceptCallPseudo	28	yes	
-0xe2acc	FUN_000e2acc	156	no	indirect call (driver context / vtable / callback)
-0xe2b68	FUN_000e2b68	140	no	indirect call (driver context / vtable / callback)
+0xe2acc	IRInst__hasSourceWithKey	156	no	indirect call (driver context / vtable / callback)
+0xe2b68	IRInst__foldConstantSourceSwizzle	140	no	indirect call (driver context / vtable / callback)
 0xe2bf4	FUN_000e2bf4	132	no	indirect call (driver context / vtable / callback)
 0xe2c78	ConstRecord__emitStores	620	yes	
-0xe2ee4	FUN_000e2ee4	32	yes	
-0xe2f04	FUN_000e2f04	136	no	indirect call (driver context / vtable / callback)
+0xe2ee4	EncoderState__emitInstruction	32	yes	
+0xe2f04	IRInst__redirectDestThroughNewMov	136	no	indirect call (driver context / vtable / callback)
 0xe2f8c	IRInst__lastSourceKeyEquals	76	yes	
 0xe2fd8	MachineAssembler__vslot34_declareDestinationLanesByClass	360	yes	
 0xe3140	MachineAssembler__visitIfHeaderStatic	260	no	indirect call (driver context / vtable / callback)
-0xe3244	FUN_000e3244	196	no	indirect call (driver context / vtable / callback)
-0xe3308	FUN_000e3308	196	no	indirect call (driver context / vtable / callback)
-0xe33cc	FUN_000e33cc	340	no	indirect call (driver context / vtable / callback)
-0xe3544	FUN_000e3544	340	no	indirect call (driver context / vtable / callback)
+0xe3244	EncoderState__destroy_e3244	196	no	indirect call (driver context / vtable / callback)
+0xe3308	EncoderState__destroy_e3308	196	no	indirect call (driver context / vtable / callback)
+0xe33cc	EncoderState__init_e33cc	340	no	indirect call (driver context / vtable / callback)
+0xe3544	EncoderState__init	340	no	indirect call (driver context / vtable / callback)
 0xe36bc	MachineCodeWriter__encodeProgram	664	no	indirect call (driver context / vtable / callback)
 0xe3968	IRInst__createMovForDest	396	no	indirect call (driver context / vtable / callback)
-0xe3af4	FUN_000e3af4	148	yes	
-0xe3b88	FUN_000e3b88	2144	no	indirect call (driver context / vtable / callback)
+0xe3af4	IRInst__dropAppendedSources	148	yes	
+0xe3b88	Block__materializePendingMovs	2144	no	indirect call (driver context / vtable / callback)
 0xe43ec	FUN_000e43ec	20	yes	
 0xe4400	setWord30	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xe4408	ILReader__currentOpcode	8	yes	
 0xe4410	ILReader__lookupBoolConst	64	yes	
 0xe4450	ILReader__appendIntConst	116	yes	
 0xe44c4	ILReader__readFloatConst	456	yes	
-0xe468c	FUN_000e468c	132	yes	
-0xe4710	FUN_000e4710	20	yes	
+0xe468c	ILReader__lookupConstComponent	132	yes	
+0xe4710	OpcodeRecord__getOperandByteB	20	yes	
 0xe4724	ILReader__appendBoolConst	92	yes	
 0xe4780	ILReader__appendFloatConst	116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xe47f4	FUN_000e47f4	60	yes	
+0xe47f4	ILReader__topScopeOpcode	60	yes	
 0xe4830	ILReader__dtor_e4830	260	yes	
 0xe4934	ILReader__dtor_e4934	260	yes	
 0xe4a38	ILReader__fetchToken	520	yes	
@@ -1339,7 +1339,7 @@
 0xe7924	Block__nearestCommonAncestor	104	yes	
 0xe798c	Block__vectorF8NonEmpty	20	yes	
 0xe79a0	Block__hasMultipleSuccessors	24	yes	
-0xe79b8	FUN_000e79b8	24	yes	
+0xe79b8	Block__hasMultiplePredecessors	24	yes	
 0xe79d0	Block__successorCount	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xe79dc	Block__predecessorCount	12	yes	
 0xe79e8	Block__hasSuccessors	20	yes	
@@ -1350,38 +1350,38 @@
 0xe7b9c	Block__lastBlockOfChain_e7b9c	252	no	indirect call (driver context / vtable / callback)
 0xe7c98	Block__resolveRedirect	88	no	indirect call (driver context / vtable / callback)
 0xe7cf0	EntryBlock__insertInstruction	108	yes	
-0xe7d5c	FUN_000e7d5c	136	yes	
+0xe7d5c	Block__getLoopFooterRegister	136	yes	
 0xe7de4	Block__isInVectorD4Of	172	yes	
 0xe7e90	Block__findSimplePredecessor	168	no	indirect call (driver context / vtable / callback)
 0xe7f38	Block__findSimpleSuccessor	168	no	indirect call (driver context / vtable / callback)
-0xe7fe0	FUN_000e7fe0	92	yes	
+0xe7fe0	Block__successorIndex	92	yes	
 0xe803c	Block__predecessorIndex	92	yes	
 0xe8098	Block__phiOperandIndexForPredecessor	52	yes	
-0xe80cc	FUN_000e80cc	88	yes	
+0xe80cc	Block__nextUnvisitedSuccessor	88	yes	
 0xe8124	Program__allocateBitSetIndex	664	yes	
-0xe83bc	FUN_000e83bc	104	no	indirect call (driver context / vtable / callback)
-0xe8424	FUN_000e8424	216	no	indirect call (driver context / vtable / callback)
+0xe83bc	Block__getFirstRealInst	104	no	indirect call (driver context / vtable / callback)
+0xe8424	Block__insertAtStart	216	no	indirect call (driver context / vtable / callback)
 0xe84fc	Block__verify	468	no	indirect call (driver context / vtable / callback)
 0xe86f0	LoopHeader__verify	236	no	indirect call (driver context / vtable / callback)
 0xe87e4	IfHeader__canFlatten	340	no	indirect call (driver context / vtable / callback)
 0xe8938	Block__createEntryExitInsts	176	yes	
-0xe8a08	FUN_000e8a08	376	yes	
+0xe8a08	Block__initVectors	376	yes	
 0xe8bac	FUN_000e8bac	104	yes	
 0xe8c14	FUN_000e8c14	104	yes	
 0xe8c7c	FUN_000e8c7c	104	yes	
-0xe8ce4	FUN_000e8ce4	120	yes	
+0xe8ce4	Block__addDominatedChild	120	yes	
 0xe8d5c	Block__appendPredecessor	120	yes	
 0xe8dd4	Block__appendSuccessor	120	yes	
 0xe8e4c	Block__connect	96	yes	
 0xe8eac	Block__replaceRegionEdges	608	yes	
-0xe910c	FUN_000e910c	120	yes	
+0xe910c	Block__addDominanceFrontier	120	yes	
 0xe9184	Block__getPredecessor	136	yes	
 0xe920c	Block__getSuccessor	136	yes	
-0xe9294	FUN_000e9294	280	no	indirect call (driver context / vtable / callback)
+0xe9294	IfHeader__armsAreSimple	280	no	indirect call (driver context / vtable / callback)
 0xe93ac	Block__bypass	900	no	indirect call (driver context / vtable / callback)
 0xe9730	Block__bypassAndDetach	76	yes	
 0xe977c	Block__splitOutgoingEdge	404	yes	
-0xe9910	FUN_000e9910	56	yes	
+0xe9910	Block__splitEdgeAndConnect	56	yes	
 0xe9948	Block__splitIncomingEdge	404	yes	
 0xe9adc	Block__splitEdge	292	yes	
 0xe9c00	Block__recordDefinition	200	yes	
@@ -1444,7 +1444,7 @@
 0xec0c8	BreakBlock__ctor_ec0c8	88	yes	
 0xec120	ContinueBlock__ctor_ec120	88	yes	
 0xec178	ContinueBlock__ctor_ec178	88	yes	
-0xec1d0	FUN_000ec1d0	20	yes	
+0xec1d0	Program__ensureVRegType13	20	yes	
 0xec1ec	callTargetSlot25	28	yes	
 0xec208	Program__registerFileOfIlType	80	yes	
 0xec258	Program__interpSlotOfIlType	36	yes	
@@ -1454,15 +1454,15 @@
 0xec2e8	Program__freeWorkArrays	136	yes	
 0xec370	Program__insertBlockBefore	60	yes	
 0xec3ac	Program__insertBlockAfter	60	yes	
-0xec3e8	FUN_000ec3e8	68	yes	
-0xec42c	FUN_000ec42c	60	yes	
-0xec468	FUN_000ec468	136	yes	
-0xec4f0	FUN_000ec4f0	168	yes	
+0xec3e8	Program__prependBlock	68	yes	
+0xec42c	Program__appendBlock	60	yes	
+0xec468	Program__storeDominatorOrder	136	yes	
+0xec4f0	Program__getDominatorInfo	168	yes	
 0xec5b8	Program__getBlocksArray	160	yes	
-0xec658	FUN_000ec658	88	yes	
-0xec6b0	FUN_000ec6b0	120	yes	
+0xec658	Program__countInstructions	88	yes	
+0xec6b0	Program__findBranchingBlock	120	yes	
 0xec728	Program__splitMixedSourceKinds	444	yes	
-0xec8e4	FUN_000ec8e4	60	yes	
+0xec8e4	Program__freezeVRegs	60	yes	
 0xec920	FUN_000ec920	240	no	indirect call (driver context / vtable / callback)
 0xeca10	KhanVs__vslot17_isSimpleInst	192	no	indirect call (driver context / vtable / callback)
 0xecad0	KhanPs__vslot17_isSimpleInst	192	no	indirect call (driver context / vtable / callback)
@@ -1475,33 +1475,33 @@
 0xed29c	HwLimits__vslot43_prependDefaultMov	264	yes	
 0xed63c	IRInst__bindOperandRegisters	424	no	indirect call (driver context / vtable / callback)
 0xed7e4	Program__beginPass	184	no	indirect call (driver context / vtable / callback)
-0xed89c	FUN_000ed89c	1244	no	indirect call (driver context / vtable / callback)
+0xed89c	Program__groupLoadsIntoProjections	1244	no	indirect call (driver context / vtable / callback)
 0xedd98	Program__ctor_edd98	1216	yes	
 0xee29c	Program__ctor_ee29c	1216	yes	
 0xee7a0	Program__buildBlockArrayByKey	492	yes	
 0xee9ac	Program__addInst	120	yes	
 0xeea24	Program__pinInputRegisters	556	no	indirect call (driver context / vtable / callback)
-0xeec50	FUN_000eec50	1140	no	indirect call (driver context / vtable / callback)
+0xeec50	Program__emitDepthExportScale	1140	no	indirect call (driver context / vtable / callback)
 0xeee4c	FUN_000eee4c	920	no	indirect call (driver context / vtable / callback)
 0xef204	Program__splitExports	660	no	indirect call (driver context / vtable / callback)
-0xef498	FUN_000ef498	1084	no	indirect call (driver context / vtable / callback)
+0xef498	Program__initAndTranslate	1084	no	indirect call (driver context / vtable / callback)
 0xef8f8	Program__appendToVector3c8	120	yes	
 0xef970	Program__removeInst	220	yes	
-0xefa4c	FUN_000efa4c	860	yes	
+0xefa4c	Program__orderBlocksByDfs	860	yes	
 0xefde4	Program__insertExitMarkerAndFlagBlocks	888	no	indirect call (driver context / vtable / callback)
-0xf019c	FUN_000f019c	792	no	indirect call (driver context / vtable / callback)
+0xf019c	Program__trimOutputChain	792	no	indirect call (driver context / vtable / callback)
 0xf04d4	IRInst__tryFoldOutputScale	724	no	indirect call (driver context / vtable / callback)
-0xf07a8	FUN_000f07a8	3348	no	indirect call (driver context / vtable / callback)
+0xf07a8	Program__forwardMovIntoConsumers	3348	no	indirect call (driver context / vtable / callback)
 0xf14f8	FUN_000f14f8	2148	no	indirect call (driver context / vtable / callback)
-0xf1d7c	FUN_000f1d7c	3108	no	indirect call (driver context / vtable / callback)
+0xf1d7c	Program__propagateMovThroughUses	3108	no	indirect call (driver context / vtable / callback)
 0xf29f4	pass_assign_slots	488	no	indirect call (driver context / vtable / callback)
 0xf2bdc	SelectWord__compose	128	yes	
 0xf2c5c	SelectWord__isSplat	80	yes	
-0xf2cac	FUN_000f2cac	92	yes	
-0xf2d08	FUN_000f2d08	16	yes	
+0xf2cac	SelectWord__firstUsedComponent	92	yes	
+0xf2d08	Lane__isValid	16	yes	
 0xf2d18	SelectWord__areCompatible	144	yes	
 0xf2da8	SelectWord__matches	112	yes	
-0xf2e18	FUN_000f2e18	56	yes	
+0xf2e18	SelectWord__hasNonzeroLaneBytes	56	yes	
 0xf2e50	laneBytes__mapTwoThreeToOne	72	yes	
 0xf2e98	laneBytes__mergeOneAndTwo	144	yes	
 0xf2f28	SelectWord__markLanesWhereSecondIsOne	92	yes	
@@ -1511,8 +1511,8 @@
 0xf308c	laneBytes__commonSelect	72	yes	
 0xf30d4	SelectWord__firstWrittenComponent	52	yes	
 0xf3108	SelectWord__firstUnwrittenComponent	52	yes	
-0xf313c	FUN_000f313c	24	yes	
-0xf3154	FUN_000f3154	60	yes	
+0xf313c	IRInst__isLaneWritten	24	yes	
+0xf3154	IRInst__writesAllLanes	60	yes	
 0xf3190	SelectWord__isIdentity	88	yes	
 0xf31e8	IRInst__isSourceSelectIdentity	16	yes	
 0xf31f8	SelectWord__selectWhereMasked	96	yes	
@@ -1521,9 +1521,9 @@
 0xf3340	SelectWord__maskUnused	88	yes	
 0xf3398	SelectWord__readMask	96	yes	
 0xf33f8	SelectWord__fillUnusedWithFirstUsed	120	yes	
-0xf3470	FUN_000f3470	340	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xf3470	SelectWord__canonicalize	340	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xf35c4	IRInst__clearSourceSelectsOfUnwrittenComponents	168	no	indirect call (driver context / vtable / callback)
-0xf366c	FUN_000f366c	76	yes	
+0xf366c	WriteMask__fromUsedComponents	76	yes	
 0xf36b8	WriteMask__fromUsedLanes	84	yes	
 0xf370c	FUN_000f370c	88	yes	
 0xf3764	laneBytes__clearSetLanes	84	yes	
@@ -1532,25 +1532,25 @@
 0xf3884	IRInst__destIsSingleComponent	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xf388c	laneMask__fromSelectBytes	124	yes	
 0xf3908	WriteMask__fromSelectWord	96	yes	
-0xf3968	FUN_000f3968	104	yes	
-0xf39d0	FUN_000f39d0	96	yes	
+0xf3968	laneBytes__selectWhereFirstIsOne	104	yes	
+0xf39d0	laneMask__fromUsedLanes	96	yes	
 0xf3a30	IRInst__countWrittenComponents	96	yes	
 0xf3a90	FUN_000f3a90	80	yes	
-0xf3ae0	FUN_000f3ae0	48	yes	
-0xf3b10	FUN_000f3b10	88	yes	
-0xf3b68	FUN_000f3b68	88	yes	
-0xf3bc0	FUN_000f3bc0	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xf3ae0	IRInst__destSelectLane3IsX	48	yes	
+0xf3b10	IRInst__operandReadsXYZ	88	yes	
+0xf3b68	IRInst__operandReadsW	88	yes	
+0xf3bc0	IRInst__operandSelectIsNotDefault	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xf3c30	IRInst__computeSourceLaneMask	972	no	indirect call (driver context / vtable / callback)
 0xf403c	IRInst__computeSourceReadMask	1404	yes	
 0xf45f8	FUN_000f45f8	160	yes	
 0xf4698	IRInst__maskUnusedLanesOfOperand	148	yes	
-0xf472c	FUN_000f472c	124	yes	
-0xf47a8	FUN_000f47a8	180	yes	
-0xf485c	FUN_000f485c	144	yes	
+0xf472c	IRInst__storeInvertedDestMask	124	yes	
+0xf47a8	IRInst__mergeDestMasksIntoFirst	180	yes	
+0xf485c	IRInst__sourceLanesAllWritten_f485c	144	yes	
 0xf48ec	IRInst__sourceLanesAllWritten	144	yes	
-0xf497c	FUN_000f497c	168	yes	
-0xf4a24	FUN_000f4a24	56	yes	
-0xf4a5c	FUN_000f4a5c	20	yes	
+0xf497c	IRInst__writeMasksOverlap	168	yes	
+0xf4a24	ConstRecords__fillFloat4	56	yes	
+0xf4a5c	RegisterMap__nextTempIndex	20	yes	
 0xf4a70	isRegKindBelow21	20	yes	
 0xf4a84	Emitter__allocateConstantSlot	324	yes	
 0xf4bc8	floatLess	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -1561,7 +1561,7 @@
 0xf4d80	ConstRecord__findInTable	92	yes	
 0xf4ddc	ConstRecord__insertSwizzleVariants	512	yes	
 0xf4fdc	Compiler__getOrCreateLoadConstN	588	yes	
-0xf5248	FUN_000f5248	376	yes	
+0xf5248	Compiler__getOrCreateLoadConst4	376	yes	
 0xf53c0	Compiler__getOrCreateLoadConst3	396	yes	
 0xf554c	Compiler__getOrCreateLoadConst2	352	yes	
 0xf56ac	Compiler__getOrCreateLoadConst1	324	yes	
@@ -1569,7 +1569,7 @@
 0xf5a0c	IRInst__canFoldConstantSource	512	no	indirect call (driver context / vtable / callback)
 0xf5c0c	IRInst__sourceMatchesConstant	228	yes	
 0xf5cf0	IRInst__getUniformSourceConstant	412	yes	
-0xf5e8c	FUN_000f5e8c	264	no	indirect call (driver context / vtable / callback)
+0xf5e8c	IRInst__operandIsNonNegativeFloatConst	264	no	indirect call (driver context / vtable / callback)
 0xf5f94	RegisterMap__findConstVectorExact	304	yes	
 0xf60c4	Program__dumpConstantRegisters	388	no	indirect call (driver context / vtable / callback)
 0xf6248	Compiler__getOrCreateConstVectorN	532	yes	
@@ -1582,7 +1582,7 @@
 0xf771c	IRInst__makeLiteralVec4Int	340	yes	
 0xf7870	IRInst__setIntConstantOperand4	340	yes	
 0xf79c4	IRInst__makeLiteralVec4Float	332	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xf7b10	FUN_000f7b10	228	yes	
+0xf7b10	Vector__findIndexOfKeyPair	228	yes	
 0xf7bf4	DominatorTree__ctor_f7bf4	228	yes	
 0xf7cd8	DominatorTree__ctor_f7cd8	228	yes	
 0xf7dbc	DominatorTree__computeDominanceFrontiers	352	yes	
@@ -1592,33 +1592,33 @@
 0xf83cc	DominatorTree__compress	412	yes	
 0xf8588	DominatorTree__eval	72	yes	
 0xf85d0	DominatorTree__compute	740	yes	
-0xf88b4	FUN_000f88b4	140	yes	
-0xf8960	FUN_000f8960	16	yes	
-0xf8970	FUN_000f8970	16	yes	
-0xf8980	FUN_000f8980	20	yes	
-0xf8994	FUN_000f8994	16	yes	
-0xf89a4	FUN_000f89a4	16	yes	
+0xf88b4	Program__computeDominators	140	yes	
+0xf8960	OpcodeRecord__getField8	16	yes	
+0xf8970	OpcodeRecord__getOperandCount	16	yes	
+0xf8980	OpcodeRecord__getOperandByte	20	yes	
+0xf8994	OpcodeRecord__getFieldC	16	yes	
+0xf89a4	OpcodeRecord__getTranslationKind	16	yes	
 0xf89b4	tableWordOrEight	52	yes	
 0xf89e8	remapSelect1To0	36	yes	
 0xf8a0c	remapSelectSmall	36	yes	
 0xf8a30	IRInst__literalForLane	112	yes	
 0xf8aa0	Program__applySourceTokenToOperand	488	no	indirect call (driver context / vtable / callback)
 0xf8c88	FUN_000f8c88	64	yes	
-0xf8ccc	FUN_000f8ccc	132	no	indirect call (driver context / vtable / callback)
+0xf8ccc	OpcodeTemplate__lookup	132	no	indirect call (driver context / vtable / callback)
 0xf8d50	IRInst__applyDescriptorSelects	568	no	indirect call (driver context / vtable / callback)
 0xf8f88	IRInst__applyDescriptorSwizzle	176	no	indirect call (driver context / vtable / callback)
-0xf9038	FUN_000f9038	264	yes	
-0xf9140	FUN_000f9140	284	no	indirect call (driver context / vtable / callback)
+0xf9038	Program__emitClampPair	264	yes	
+0xf9140	Program__createInstForIlOpcode	284	no	indirect call (driver context / vtable / callback)
 0xf92fc	Program__appendInst	480	no	indirect call (driver context / vtable / callback)
-0xf94dc	FUN_000f94dc	1268	no	indirect call (driver context / vtable / callback)
-0xf9a58	FUN_000f9a58	3748	no	indirect call (driver context / vtable / callback)
-0xfa958	FUN_000fa958	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xf94dc	Program__emitInputMerge	1268	no	indirect call (driver context / vtable / callback)
+0xf9a58	Program__lowerDestinationToken	3748	no	indirect call (driver context / vtable / callback)
+0xfa958	Template__bindOperand	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xfadc4	Program__createIfBlock	448	yes	
 0xfafa4	Program__createConstantVReg	652	yes	
 0xfb230	Program__loadDefaultConstants	420	yes	
 0xfb3d4	FUN_000fb3d4	8428	no	indirect call (driver context / vtable / callback)
-0xfd50c	FUN_000fd50c	188	yes	
-0xfd5c8	FUN_000fd5c8	24388	no	indirect call (driver context / vtable / callback)
+0xfd50c	Template__pushCallFrame	188	yes	
+0xfd5c8	Program__translateILStream	24388	no	indirect call (driver context / vtable / callback)
 0x103d50	IROperand__setModifierBits	40	yes	
 0x103d78	floatToFixedSaturate	220	yes	
 0x103e54	constantZeroFloat	28	yes	
@@ -2819,122 +2819,122 @@
 0x176d6c	FUN_00176d6c	160	yes	
 0x176e20	FUN_00176e20	160	yes	
 0x176ec0	FUN_00176ec0	20	yes	
-0x176ed4	FUN_00176ed4	56	yes	
-0x176f0c	FUN_00176f0c	56	yes	
-0x176f44	FUN_00176f44	144	yes	
-0x176fd4	FUN_00176fd4	144	yes	
+0x176ed4	ValueKey__compareClassForValueNumber	56	yes	
+0x176f0c	ValueKey__rangeClassForValueNumber	56	yes	
+0x176f44	ValueKey__laneRelationHoldsOnWrittenLanes_176f44	144	yes	
+0x176fd4	ValueKey__laneRelationHoldsOnWrittenLanes_176fd4	144	yes	
 0x177064	Inst__writtenLanesAllMatchValue	128	yes	
-0x1770e4	FUN_001770e4	204	yes	
-0x1771b0	FUN_001771b0	236	yes	
-0x17729c	FUN_0017729c	224	yes	
-0x17737c	FUN_0017737c	144	yes	
-0x17740c	FUN_0017740c	156	yes	
-0x177548	FUN_00177548	144	yes	
-0x1775d8	FUN_001775d8	224	yes	
-0x1776b8	FUN_001776b8	144	yes	
-0x177748	FUN_00177748	408	no	indirect call (driver context / vtable / callback)
+0x1770e4	ValueKey__commonLaneValue	204	yes	
+0x1771b0	ValueKey__computeLaneRangeClasses	236	yes	
+0x17729c	ValueKey__computeLaneCompareCodes	224	yes	
+0x17737c	ValueKey__sourcesEqualOnWrittenLanes	144	yes	
+0x17740c	ValueKey__sourceIsSplatOfConstant	156	yes	
+0x177548	ValueKey__flagZeroSelectLanes	144	yes	
+0x1775d8	ValueKey__createLaneRecordsKind20	224	yes	
+0x1776b8	ValueKey__foldLaneToZeroIfSourcesCancel	144	yes	
+0x177748	ValueKey__canonicalizeCompareCondition	408	no	indirect call (driver context / vtable / callback)
 0x1778e0	FUN_001778e0	272	yes	
-0x1779f0	FUN_001779f0	224	yes	
+0x1779f0	ValueKey__createLaneRecordsKind28	224	yes	
 0x177ad0	ValueKey__cancelNegatedSourcePair	124	yes	
-0x177b4c	FUN_00177b4c	388	yes	
-0x177cd0	FUN_00177cd0	324	yes	
-0x177e14	FUN_00177e14	528	yes	
-0x178024	FUN_00178024	384	yes	
+0x177b4c	ValueKey__insertMovOfOperandLane_177b4c	388	yes	
+0x177cd0	ValueKey__insertMovOfReplacementLane	324	yes	
+0x177e14	ValueKey__insertBinaryOfOperandsLane	528	yes	
+0x178024	ValueKey__insertMovOfOperandLane	384	yes	
 0x1781a4	FUN_001781a4	404	no	indirect call (driver context / vtable / callback)
 0x178338	FUN_00178338	656	no	indirect call (driver context / vtable / callback)
 0x178648	FUN_00178648	708	no	indirect call (driver context / vtable / callback)
 0x1789d4	IRInst__isOpcode8bOr8c	28	yes	
-0x1789f0	FUN_001789f0	168	no	indirect call (driver context / vtable / callback)
+0x1789f0	ValueKey__sourcesHaveNoModifiers	168	no	indirect call (driver context / vtable / callback)
 0x178a98	FUN_00178a98	132	yes	
-0x178b1c	FUN_00178b1c	360	no	indirect call (driver context / vtable / callback)
-0x178c84	FUN_00178c84	244	no	indirect call (driver context / vtable / callback)
-0x178d78	FUN_00178d78	280	yes	
+0x178b1c	ValueKey__allDotInputsConstant	360	no	indirect call (driver context / vtable / callback)
+0x178c84	ValueKey__singleLaneValueNumber	244	no	indirect call (driver context / vtable / callback)
+0x178d78	ValueKey__dotOperandSplatValue	280	yes	
 0x178e90	ValueKey__evalLitLane	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x179064	FUN_00179064	212	no	indirect call (driver context / vtable / callback)
-0x179138	FUN_00179138	408	no	indirect call (driver context / vtable / callback)
-0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
+0x179064	ValueKey__refreshExprRecordForOperand	212	no	indirect call (driver context / vtable / callback)
+0x179138	ValueKey__insertTempCopyOfOperand	408	no	indirect call (driver context / vtable / callback)
+0x1792f0	ValueKey__operandDefinitionIsFlagBit8	232	no	indirect call (driver context / vtable / callback)
 0x1793d8	ValueKey__findLaneWithSameValue	560	yes	
-0x179608	FUN_00179608	456	yes	
-0x1797d0	FUN_001797d0	196	yes	
+0x179608	ValueKey__operandLanesEqual	456	yes	
+0x1797d0	ValueKey__forwardSource3LaneIfEqual	196	yes	
 0x179894	ValueKey__foldCompareSameSourcesValueNumber	184	yes	
-0x17994c	FUN_0017994c	232	yes	
-0x179a34	FUN_00179a34	244	yes	
+0x17994c	ValueKey__forwardSelectedSourceBySign	232	yes	
+0x179a34	ValueKey__forwardSelectedSourceByPositive	244	yes	
 0x179b28	FUN_00179b28	148	yes	
-0x179bbc	FUN_00179bbc	136	yes	
+0x179bbc	ValueKey__allOperandLanesEqual	136	yes	
 0x179c44	Inst__allWrittenLanesSatisfy	124	yes	
-0x179cc0	FUN_00179cc0	240	yes	
-0x179db0	FUN_00179db0	196	yes	
-0x179e74	FUN_00179e74	196	yes	
-0x179f38	FUN_00179f38	252	yes	
-0x17a034	FUN_0017a034	252	yes	
-0x17a130	FUN_0017a130	324	yes	
-0x17a294	FUN_0017a294	320	yes	
+0x179cc0	ValueKey__forwardOtherSourceIfZero	240	yes	
+0x179db0	ValueKey__forwardAddendIfMultiplicandZero	196	yes	
+0x179e74	ValueKey__forwardSource1LaneIfEqual	196	yes	
+0x179f38	ValueKey__forwardOtherSourceIfOne	252	yes	
+0x17a034	ValueKey__forwardOperandByCompareToZero	252	yes	
+0x17a130	ValueKey__setLiteralVec4Operand	324	yes	
+0x17a294	ValueKey__setLiteralOperandsForOpcode	320	yes	
 0x17a3d4	FUN_0017a3d4	884	no	indirect call (driver context / vtable / callback)
 0x17a748	FUN_0017a748	348	yes	
-0x17a8a4	FUN_0017a8a4	680	no	indirect call (driver context / vtable / callback)
+0x17a8a4	ValueKey__foldCompareAgainstZero	680	no	indirect call (driver context / vtable / callback)
 0x17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	472	no	indirect call (driver context / vtable / callback)
-0x17ad24	FUN_0017ad24	260	yes	
-0x17ae28	FUN_0017ae28	272	yes	
-0x17af58	FUN_0017af58	200	yes	
+0x17ad24	ValueKey__insertSplatMov	260	yes	
+0x17ae28	ValueKey__setOperandFromValueKey	272	yes	
+0x17af58	ValueKey__commonLaneValue_17af58	200	yes	
 0x17b020	FUN_0017b020	268	no	indirect call (driver context / vtable / callback)
 0x17b12c	ValueKey__mixLiteralSources	2112	no	indirect call (driver context / vtable / callback)
-0x17b96c	FUN_0017b96c	748	no	indirect call (driver context / vtable / callback)
-0x17bc58	FUN_0017bc58	288	no	indirect call (driver context / vtable / callback)
-0x17bd78	FUN_0017bd78	500	yes	
+0x17b96c	ValueKey__rewriteUniformSwizzle	748	no	indirect call (driver context / vtable / callback)
+0x17bc58	Inst__findLaneProducer	288	no	indirect call (driver context / vtable / callback)
+0x17bd78	ValueKey__rewriteAsMovOfOperandLane	500	yes	
 0x17bf70	ValueKey__foldDot3SingleLaneSource	392	no	indirect call (driver context / vtable / callback)
 0x17c0f8	ValueKey__foldDot4UnitVectorSource	332	yes	
-0x17c244	FUN_0017c244	468	yes	
+0x17c244	ValueKey__rewriteAsMovOfOperand	468	yes	
 0x17c41c	ValueKey__replaceWithSource2IfSourcesEqual23	136	yes	
 0x17c4a4	FUN_0017c4a4	316	no	indirect call (driver context / vtable / callback)
 0x17c5e0	FUN_0017c5e0	404	yes	
 0x17c774	ValueKey__foldMulByPlusMinusOne	276	yes	
 0x17c888	ValueKey__replaceWithSource1IfSourcesEqual	136	yes	
-0x17c910	FUN_0017c910	516	no	indirect call (driver context / vtable / callback)
-0x17cb14	FUN_0017cb14	516	no	indirect call (driver context / vtable / callback)
-0x17cd18	FUN_0017cd18	164	yes	
-0x17cdbc	FUN_0017cdbc	192	yes	
-0x17ce7c	FUN_0017ce7c	492	yes	
-0x17d06c	FUN_0017d06c	476	yes	
-0x17d26c	FUN_0017d26c	392	yes	
+0x17c910	ValueKey__foldMinOfConstants	516	no	indirect call (driver context / vtable / callback)
+0x17cb14	ValueKey__foldMaxOfConstants	516	no	indirect call (driver context / vtable / callback)
+0x17cd18	ValueKey__foldMadZeroMultiplicand	164	yes	
+0x17cdbc	ValueKey__foldAddOfZeroSource	192	yes	
+0x17ce7c	ValueKey__rewriteAsMovOfReplacement	492	yes	
+0x17d06c	ValueKey__rewriteAsMovOfValueKey	476	yes	
+0x17d26c	ValueKey__rewriteAsMovOfVec4Constant	392	yes	
 0x17d3f8	ValueKey__foldCompareSameSourcesToConstant	232	yes	
 0x17d4e0	ValueKey__replaceWithZeroIfSourcesEqual	156	yes	
 0x17d57c	ValueKey__foldMulByZero	148	yes	
-0x17d610	FUN_0017d610	156	yes	
+0x17d610	ValueKey__foldOppositeNegatesToZero	156	yes	
 0x17d6ac	FUN_0017d6ac	780	no	indirect call (driver context / vtable / callback)
-0x17d9b8	FUN_0017d9b8	548	yes	
+0x17d9b8	ValueKey__foldCompareOfConstants	548	yes	
 0x17dbdc	FUN_0017dbdc	1104	no	indirect call (driver context / vtable / callback)
-0x17e02c	FUN_0017e02c	452	yes	
+0x17e02c	ValueKey__rewriteAsMovOfOperandWithScale	452	yes	
 0x17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	324	no	indirect call (driver context / vtable / callback)
-0x17e338	FUN_0017e338	188	no	indirect call (driver context / vtable / callback)
-0x17e3f4	FUN_0017e3f4	608	yes	
+0x17e338	ValueKey__foldEqualSourcesIntoOutputScale	188	no	indirect call (driver context / vtable / callback)
+0x17e3f4	ValueKey__rewriteAsBinaryOfOperands	608	yes	
 0x17e658	ValueKey__foldMadZeroAddend	112	yes	
 0x17e6c8	ValueKey__foldMadByPlusMinusOne	280	yes	
 0x17e7e0	FUN_0017e7e0	972	no	indirect call (driver context / vtable / callback)
-0x17ebb0	FUN_0017ebb0	660	yes	
+0x17ebb0	ValueKey__rewriteAsAdd	660	yes	
 0x17ee68	FUN_0017ee68	908	yes	
 0x17f1f8	ValueKey__foldMulOfConstants	512	no	indirect call (driver context / vtable / callback)
 0x17f3f8	ValueKey__foldMinMaxOfNegatedPair	412	no	indirect call (driver context / vtable / callback)
 0x17f594	ValueKey__foldMaxOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x17f59c	ValueKey__foldMinOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x17f5a4	FUN_0017f5a4	488	no	indirect call (driver context / vtable / callback)
-0x17f78c	FUN_0017f78c	96	yes	
-0x17f7ec	FUN_0017f7ec	1848	no	indirect call (driver context / vtable / callback)
+0x17f5a4	ValueKey__splitDestinationToTemp	488	no	indirect call (driver context / vtable / callback)
+0x17f78c	ValueKey__splitDestinationIfEligible	96	yes	
+0x17f7ec	ValueKey__simplifyInstruction	1848	no	indirect call (driver context / vtable / callback)
 0x180154	FUN_00180154	888	yes	
 0x180250	ValueKey__canonicalizeConstantSources	1504	no	indirect call (driver context / vtable / callback)
 0x180830	ValueKey__simplifyModifiersAndAddressing	4312	no	indirect call (driver context / vtable / callback)
-0x181928	FUN_00181928	140	no	indirect call (driver context / vtable / callback)
-0x1819b4	FUN_001819b4	252	no	indirect call (driver context / vtable / callback)
-0x181ab0	FUN_00181ab0	208	yes	
+0x181928	Inst__isFoldableSingleUse	140	no	indirect call (driver context / vtable / callback)
+0x1819b4	Inst__compareScheduleSlack	252	no	indirect call (driver context / vtable / callback)
+0x181ab0	Pass__recordFlaggedInstructions	208	yes	
 0x181b80	RebuildState__computeNodeLevels	896	no	indirect call (driver context / vtable / callback)
 0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
-0x183ac8	FUN_00183ac8	212	yes	
+0x183ac8	ObjectVector__freeAllElements	212	yes	
 0x183b9c	Block__rebuildAddMulTreesWhereProfitable	1152	yes	
 0x18401c	pass_height_reduction	256	yes	
-0x18413c	FUN_0018413c	2336	no	indirect call (driver context / vtable / callback)
+0x18413c	Block__moveProducersBefore	2336	no	indirect call (driver context / vtable / callback)
 0x184ab4	pass_minreg_order	280	no	indirect call (driver context / vtable / callback)
 0x184bcc	compareIntsAscending	36	yes	
-0x184bf0	FUN_00184bf0	232	no	indirect call (driver context / vtable / callback)
-0x184cd8	FUN_00184cd8	164	no	indirect call (driver context / vtable / callback)
+0x184bf0	ObjectVector__allSatisfyPredicate24	232	no	indirect call (driver context / vtable / callback)
+0x184cd8	Inst__isMulDotWithinLimits	164	no	indirect call (driver context / vtable / callback)
 0x184d7c	Inst__splitAndMerge	372	yes	
 0x184ef0	IRInst__foldResultScaleIntoUsers	2760	no	indirect call (driver context / vtable / callback)
 0x1859bc	Inst__tryDp3Add	996	yes	
@@ -2959,12 +2959,12 @@
 0x18976c	SelectWord__matchesDefaultPattern	28	yes	
 0x189788	SelectWord__matchesAnyKnownPattern	104	yes	
 0x1897f0	KhanPs__vslot66_callHelper189788	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1897fc	FUN_001897fc	68	yes	
+0x1897fc	Inst__sourceIsConstantRegisterNotKind3	68	yes	
 0x189840	SchedModel__fitsConstantLimit	364	no	indirect call (driver context / vtable / callback)
 0x1899ac	SchedModel__assignConstantSelectors	568	no	indirect call (driver context / vtable / callback)
 0x189be4	R300SchedModel__vslot15	64	yes	
-0x189c24	FUN_00189c24	188	no	indirect call (driver context / vtable / callback)
-0x189ce0	FUN_00189ce0	276	no	indirect call (driver context / vtable / callback)
+0x189c24	Inst__computeKey	188	no	indirect call (driver context / vtable / callback)
+0x189ce0	Inst__compareForMerge	276	no	indirect call (driver context / vtable / callback)
 0x189df4	SchedModel__classifySlotUse	480	no	indirect call (driver context / vtable / callback)
 0x189fd4	R300SchedModel__vslot19	172	no	indirect call (driver context / vtable / callback)
 0x18a080	R300SchedModel__vslot34	364	no	indirect call (driver context / vtable / callback)
@@ -2977,10 +2977,10 @@
 0x18bc94	FUN_0018bc94	1332	yes	
 0x18c1c8	PackState__buildSlotTable	1440	yes	
 0x18c768	PackState__countFreeSlots	140	yes	
-0x18c7f4	FUN_0018c7f4	396	no	indirect call (driver context / vtable / callback)
+0x18c7f4	ConstantSlots__tryAddToRow	396	no	indirect call (driver context / vtable / callback)
 0x18c980	FUN_0018c980	1112	no	indirect call (driver context / vtable / callback)
-0x18cdd8	FUN_0018cdd8	1456	no	indirect call (driver context / vtable / callback)
-0x18d388	FUN_0018d388	300	no	indirect call (driver context / vtable / callback)
+0x18cdd8	ConstantSlots__tryAssignPair	1456	no	indirect call (driver context / vtable / callback)
+0x18d388	ConstantSlots__tryAssignSingle	300	no	indirect call (driver context / vtable / callback)
 0x18d4b4	PackState__tryPlaceInstructionSources	1428	yes	
 0x18da48	SchedModel__instructionFitsAlone	116	yes	
 0x18dabc	R300SchedModel__tryRewriteConsumerSelects	1708	no	indirect call (driver context / vtable / callback)
@@ -2989,7 +2989,7 @@
 0x18f55c	R520SchedModel__vslot3_canAddInstruction	280	no	indirect call (driver context / vtable / callback)
 0x18f674	R300SchedModel__vslot12	432	no	indirect call (driver context / vtable / callback)
 0x18f824	R300VSchedModel__vslot2_reset	44	yes	
-0x18f850	FUN_0018f850	200	yes	
+0x18f850	ConstantSlots__rowsCompatible	200	yes	
 0x18f918	R300VSchedModel__vslot13	108	no	indirect call (driver context / vtable / callback)
 0x18f984	R300VSchedModel__vslot28	596	no	indirect call (driver context / vtable / callback)
 0x18fbd8	R300VSchedModel__vslot14	348	no	indirect call (driver context / vtable / callback)
@@ -3015,16 +3015,16 @@
 0x193944	R520SchedModel__vslot21	112	no	indirect call (driver context / vtable / callback)
 0x1939b4	R520SchedModel__vslot22	76	yes	
 0x193a00	FudoPs__vslot29_convertInnerIfsToPredicates	140	no	indirect call (driver context / vtable / callback)
-0x193a8c	FUN_00193a8c	88	yes	
-0x193ae4	FUN_00193ae4	88	yes	
-0x193b3c	FUN_00193b3c	116	yes	
-0x193be8	FUN_00193be8	24	yes	
+0x193a8c	TypedValueArray__init_193a8c	88	yes	
+0x193ae4	TypedValueArray__init	88	yes	
+0x193b3c	TypedValueArray__createWrapping	116	yes	
+0x193be8	ArenaObject__freeBuffer	24	yes	
 0x193c00	FUN_00193c00	160	yes	
 0x193cc0	Arena__free	88	yes	
 0x193d18	List__freeAllNodes	124	yes	
 0x193d98	Arena__grow	128	yes	
 0x193e18	Arena__alloc	92	yes	
-0x193e74	FUN_00193e74	68	yes	
+0x193e74	Arena__allocZeroed	68	yes	
 0x193eb8	Arena__bytesInUse	76	yes	
 0x193f08	DList__isEmpty	24	yes	
 0x193f20	DListNode__unlinkAndDelete	36	yes	
@@ -3046,7 +3046,7 @@
 0x1943f0	HashTable__destroy_1943f0	276	yes	
 0x194504	HashTable__destroy_194504	276	yes	
 0x194618	HashTable__findEntry	264	no	indirect call (driver context / vtable / callback)
-0x194720	FUN_00194720	276	no	indirect call (driver context / vtable / callback)
+0x194720	HashTable__remove	276	no	indirect call (driver context / vtable / callback)
 0x194834	HashTable__find	260	yes	
 0x194938	HashTableIterator__advance	348	yes	
 0x194a94	HashTableIterator__begin	20	yes	
@@ -3201,7 +3201,7 @@
 0x19ecf4	ilSourceOperandWordCount	192	yes	
 0x19edb4	ilInstructionHeaderWordCount	84	yes	
 0x19ee08	ilDestinationOperandWordCount	108	yes	
-0x19ee74	FUN_0019ee74	184	yes	
+0x19ee74	Compiler__selectLimitsForShaderKind	184	yes	
 0x19ef2c	FudoPs__vslot96_installHardwareTables	32	yes	
 0x19ef50	R520MachineAssembler__vslot5_beginProgram	324	yes	
 0x19f094	R520MachineAssembler__setRsColorFields	56	yes	

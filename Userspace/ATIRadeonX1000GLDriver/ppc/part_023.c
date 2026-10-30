@@ -23,10 +23,10 @@ int Block__splitOutgoingEdge(block, successor, newBlock)
   int loopCounterB;
   int loopCounter;
   uint loopIndex;
-  int iVar1;
+  int predecessorEntry;
   int *successorSlot;
-  int iVar3;
-  uint uVar4;
+  int newBlockPredecessorEntry;
+  uint vectorSize;
   int successorPredecessors;
   int loopCounterC;
   uint loopIndex2;
@@ -39,9 +39,9 @@ int Block__splitOutgoingEdge(block, successor, newBlock)
     if (*(int *)(loopCounterB + successorVector[2]) != 0) {
       if (successor == *(int *)(loopCounterB + successorVector[2])) {
         if (loopIndex2 < *successorVector) {
-          uVar4 = successorVector[1];
-          if (uVar4 <= loopIndex2) {
-            _memset(uVar4 * 4 + successorVector[2],0,(loopIndex2 - uVar4) * 4 + 4);
+          vectorSize = successorVector[1];
+          if (vectorSize <= loopIndex2) {
+            _memset(vectorSize * 4 + successorVector[2],0,(loopIndex2 - vectorSize) * 4 + 4);
             successorVector[1] = loopIndex2 + 1;
           }
           successorSlot = (int *)(loopIndex2 * 4 + successorVector[2]);
@@ -70,16 +70,16 @@ LAB_000e9874:
           Block__appendPredecessor(newBlock,block);
           return;
         }
-        iVar3 = *(int *)(*(int *)(*(int *)(newBlock + 0xd4) + 8) + loopCounterB);
-        if ((iVar3 != 0) && (block == iVar3)) break;
+        newBlockPredecessorEntry = *(int *)(*(int *)(*(int *)(newBlock + 0xd4) + 8) + loopCounterB);
+        if ((newBlockPredecessorEntry != 0) && (block == newBlockPredecessorEntry)) break;
         loopIndex = loopIndex + 1;
         loopCounterB = loopCounterB + 4;
       }
       return;
     }
-    iVar1 = *(int *)(*(int *)(successorPredecessors + 8) + loopCounterC);
-    if (iVar1 != 0) {
-      if (block == iVar1) {
+    predecessorEntry = *(int *)(*(int *)(successorPredecessors + 8) + loopCounterC);
+    if (predecessorEntry != 0) {
+      if (block == predecessorEntry) {
         Vector__removeAt(successorPredecessors,loopCounter);
         goto LAB_000e9874;
       }
@@ -90,14 +90,14 @@ LAB_000e9874:
   } while( true );
 }
 
-/* FUN_000e9910 @ 0xe9910 (56 bytes) */
-int FUN_000e9910(param_1, toBlock, param_3, fromBlock)
-  undefined4 param_1;
+/* Block__splitEdgeAndConnect @ 0xe9910 (56 bytes) */
+int Block__splitEdgeAndConnect(block, toBlock, param_3, fromBlock)
+  undefined4 block;
   undefined4 toBlock;
   undefined4 param_3;
   undefined4 fromBlock;
 {
-  ((int (*)())Block__splitOutgoingEdge)(param_1,toBlock,param_3);
+  ((int (*)())Block__splitOutgoingEdge)(block,toBlock,param_3);
   return Block__connect(fromBlock,toBlock);
 }
 
@@ -110,10 +110,10 @@ int Block__splitIncomingEdge(block, predecessor, newBlock)
   int loopCounterB;
   int loopCounter;
   uint loopIndex;
-  int iVar1;
+  int successorEntry;
   int *predecessorSlot;
-  int iVar3;
-  uint uVar4;
+  int newBlockSuccessorEntry;
+  uint vectorSize;
   int predecessorSuccessors;
   int loopCounterC;
   uint loopIndex2;
@@ -126,9 +126,9 @@ int Block__splitIncomingEdge(block, predecessor, newBlock)
     if (*(int *)(loopCounterB + predecessorVector[2]) != 0) {
       if (predecessor == *(int *)(loopCounterB + predecessorVector[2])) {
         if (loopIndex2 < *predecessorVector) {
-          uVar4 = predecessorVector[1];
-          if (uVar4 <= loopIndex2) {
-            _memset(uVar4 * 4 + predecessorVector[2],0,(loopIndex2 - uVar4) * 4 + 4);
+          vectorSize = predecessorVector[1];
+          if (vectorSize <= loopIndex2) {
+            _memset(vectorSize * 4 + predecessorVector[2],0,(loopIndex2 - vectorSize) * 4 + 4);
             predecessorVector[1] = loopIndex2 + 1;
           }
           predecessorSlot = (int *)(loopIndex2 * 4 + predecessorVector[2]);
@@ -157,16 +157,16 @@ LAB_000e9a40:
           Block__appendSuccessor(newBlock,block);
           return;
         }
-        iVar3 = *(int *)(*(int *)(*(int *)(newBlock + 0xd0) + 8) + loopCounterB);
-        if ((iVar3 != 0) && (block == iVar3)) break;
+        newBlockSuccessorEntry = *(int *)(*(int *)(*(int *)(newBlock + 0xd0) + 8) + loopCounterB);
+        if ((newBlockSuccessorEntry != 0) && (block == newBlockSuccessorEntry)) break;
         loopIndex = loopIndex + 1;
         loopCounterB = loopCounterB + 4;
       }
       return;
     }
-    iVar1 = *(int *)(*(int *)(predecessorSuccessors + 8) + loopCounterC);
-    if (iVar1 != 0) {
-      if (block == iVar1) {
+    successorEntry = *(int *)(*(int *)(predecessorSuccessors + 8) + loopCounterC);
+    if (successorEntry != 0) {
+      if (block == successorEntry) {
         Vector__removeAt(predecessorSuccessors,loopCounter);
         goto LAB_000e9a40;
       }
@@ -191,7 +191,7 @@ int Block__splitEdge(fromBlock, toBlock, newBlock)
   undefined4 *successorSlot;
   uint *successorVector;
   
-  successorIndex = FUN_000e7fe0(fromBlock,toBlock);
+  successorIndex = Block__successorIndex(fromBlock,toBlock);
   successorVector = *(uint **)(fromBlock + 0xd0);
   if (successorIndex < *successorVector) {
     edgeVectorCount = successorVector[1];
@@ -224,66 +224,67 @@ int Block__splitEdge(fromBlock, toBlock, newBlock)
 }
 
 /* Block__recordDefinition @ 0xe9c00 (200 bytes) */
-int Block__recordDefinition(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int Block__recordDefinition(block, vreg, definition)
+  int block;
+  int vreg;
+  undefined4 definition;
 {
-  int *piVar1;
+  int *vectorSlot;
+  int *listEntry;
   uint loopIndex;
-  uint *puVar3;
-  uint uVar4;
-  uint uVar5;
+  uint *definitionList;
+  uint definitionCount;
+  uint entriesLeft;
   
-  puVar3 = *(uint **)(param_1 + 0xc4);
-  uVar4 = puVar3[1];
-  if (0 < (int)uVar4) {
+  definitionList = *(uint **)(block + 0xc4);
+  definitionCount = definitionList[1];
+  if (0 < (int)definitionCount) {
     loopIndex = 0;
-    uVar5 = uVar4;
+    entriesLeft = definitionCount;
     do {
-      piVar1 = (int *)0x0;
-      if (loopIndex < uVar4) {
-        piVar1 = (int *)(loopIndex * 4 + puVar3[2]);
+      listEntry = (int *)0x0;
+      if (loopIndex < definitionCount) {
+        listEntry = (int *)(loopIndex * 4 + definitionList[2]);
       }
-      if (param_2 == *piVar1) goto LAB_000e9ca8;
+      if (vreg == *listEntry) goto LAB_000e9ca8;
       loopIndex = loopIndex + 1;
-      uVar5 = uVar5 - 1;
-    } while (uVar5 != 0);
+      entriesLeft = entriesLeft - 1;
+    } while (entriesLeft != 0);
   }
-  if (uVar4 < *puVar3) {
-    _memset(uVar4 * 4 + puVar3[2],0,4);
-    piVar1 = (int *)(uVar4 * 4 + puVar3[2]);
-    puVar3[1] = uVar4 + 1;
+  if (definitionCount < *definitionList) {
+    _memset(definitionCount * 4 + definitionList[2],0,4);
+    vectorSlot = (int *)(definitionCount * 4 + definitionList[2]);
+    definitionList[1] = definitionCount + 1;
   }
   else {
-    piVar1 = (int *)Vector__elementRefGrow(puVar3,uVar4);
+    vectorSlot = (int *)Vector__elementRefGrow(definitionList,definitionCount);
   }
-  *piVar1 = param_2;
+  *vectorSlot = vreg;
 LAB_000e9ca8:
-  return VReg__pushDefinition(param_2,*(undefined4 *)(param_1 + 0xb0),param_3);
+  return VReg__pushDefinition(vreg,*(undefined4 *)(block + 0xb0),definition);
 }
 
 /* FUN_000e9cc8 @ 0xe9cc8 (160 bytes) */
-int FUN_000e9cc8(param_1)
-  int param_1;
+int FUN_000e9cc8(block)
+  int block;
 {
-  byte bVar1;
-  int *piVar2;
+  byte laneFlags;
+  int *firstDefSlot;
   
-  if (*(int *)(param_1 + 0x144) == 0) {
-    piVar2 = *(int **)(*(int *)(*(int *)(param_1 + 0x148) + 0xa4) + 0x18);
-    if (*piVar2 == 0) {
-      piVar2 = (int *)Vector__elementRefGrow(piVar2,0);
+  if (*(int *)(block + 0x144) == 0) {
+    firstDefSlot = *(int **)(*(int *)(*(int *)(block + 0x148) + 0xa4) + 0x18);
+    if (*firstDefSlot == 0) {
+      firstDefSlot = (int *)Vector__elementRefGrow(firstDefSlot,0);
     }
     else {
-      if (piVar2[1] == 0) {
-        *(undefined4 *)piVar2[2] = 0;
-        piVar2[1] = 1;
+      if (firstDefSlot[1] == 0) {
+        *(undefined4 *)firstDefSlot[2] = 0;
+        firstDefSlot[1] = 1;
       }
-      piVar2 = (int *)piVar2[2];
+      firstDefSlot = (int *)firstDefSlot[2];
     }
-    bVar1 = *(byte *)(*piVar2 + 0x15c);
-    if ((((bVar1 & 1) != 0) && ((bVar1 & 2) != 0)) && ((bVar1 & 4) != 0)) {
+    laneFlags = *(byte *)(*firstDefSlot + 0x15c);
+    if ((((laneFlags & 1) != 0) && ((laneFlags & 2) != 0)) && ((laneFlags & 4) != 0)) {
       return 1;
     }
   }
@@ -291,45 +292,48 @@ int FUN_000e9cc8(param_1)
 }
 
 /* Block__ctor_e9d68 @ 0xe9d68 (252 bytes) */
-int Block__ctor_e9d68(this, param_2)
+int Block__ctor_e9d68(this, owner)
   undefined4 *this;
-  int param_2;
+  int owner;
 {
-  undefined4 uVar1;
+  undefined4 bitSetIndex;
+  undefined4 ownerField0xc0;
+  undefined4 ownerField0xac;
+  undefined4 ownerField0xc;
   int compiler;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
-  undefined4 uVar3;
+  undefined4 ownerField0x110;
   int blockSerial;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 ownerField0xdc;
+  undefined4 ownerField0x10c;
   
   this[1] = 0;
   this[2] = 0;
-  uVar1 = *(undefined4 *)(param_2 + 0xc);
+  ownerField0xc = *(undefined4 *)(owner + 0xc);
   *this = &PTR_FUN_001e9b08;
-  this[3] = uVar1;
+  this[3] = ownerField0xc;
   DListNode__init(this + 0x24);
-  compiler = *(int *)(param_2 + 0xa8);
-  uVar1 = *(undefined4 *)(param_2 + 0xac);
+  compiler = *(int *)(owner + 0xa8);
+  ownerField0xac = *(undefined4 *)(owner + 0xac);
   this[0x2a] = compiler;
-  this[0x2b] = uVar1;
+  this[0x2b] = ownerField0xac;
   blockSerial = *(int *)(compiler + 0x32c);
   this[0x2c] = blockSerial;
   *(int *)(compiler + 0x32c) = blockSerial + 1;
-  uVar3 = *(undefined4 *)(param_2 + 0x110);
-  uVar1 = *(undefined4 *)(param_2 + 0xc0);
-  uVar5 = *(undefined4 *)(param_2 + 0xdc);
-  uVar6 = *(undefined4 *)(param_2 + 0x10c);
-  this[0x2e] = *(undefined4 *)(param_2 + 0xb8);
-  this[0x30] = uVar1;
-  this[0x37] = uVar5;
+  ownerField0x110 = *(undefined4 *)(owner + 0x110);
+  ownerField0xc0 = *(undefined4 *)(owner + 0xc0);
+  ownerField0xdc = *(undefined4 *)(owner + 0xdc);
+  ownerField0x10c = *(undefined4 *)(owner + 0x10c);
+  this[0x2e] = *(undefined4 *)(owner + 0xb8);
+  this[0x30] = ownerField0xc0;
+  this[0x37] = ownerField0xdc;
   this[0x3a] = 0x7fffffff;
   this[0x42] = 0;
-  this[0x43] = uVar6;
-  this[0x44] = uVar3;
+  this[0x43] = ownerField0x10c;
+  this[0x44] = ownerField0x110;
   this[0x46] = 0xffffffff;
   this[0x39] = 0x7fffffff;
   this[0x3b] = 0;
@@ -337,10 +341,10 @@ int Block__ctor_e9d68(this, param_2)
   this[0x3f] = 0;
   this[0x40] = 0;
   this[0x41] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
-  uVar1 = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,uVar3,uVar5);
-  this[0x2d] = uVar1;
+  bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
+  this[0x2d] = bitSetIndex;
   return;
 }
 
@@ -359,45 +363,48 @@ int Block__clone(this)
 }
 
 /* Block__ctor_e9f00 @ 0xe9f00 (252 bytes) */
-int Block__ctor_e9f00(this, param_2)
+int Block__ctor_e9f00(this, owner)
   undefined4 *this;
-  int param_2;
+  int owner;
 {
-  undefined4 uVar1;
+  undefined4 bitSetIndex;
+  undefined4 ownerField0xc0;
+  undefined4 ownerField0xac;
+  undefined4 ownerField0xc;
   int compiler;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
-  undefined4 uVar3;
+  undefined4 ownerField0x110;
   int blockSerial;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 ownerField0xdc;
+  undefined4 ownerField0x10c;
   
   this[1] = 0;
   this[2] = 0;
-  uVar1 = *(undefined4 *)(param_2 + 0xc);
+  ownerField0xc = *(undefined4 *)(owner + 0xc);
   *this = &PTR_FUN_001e9b08;
-  this[3] = uVar1;
+  this[3] = ownerField0xc;
   DListNode__init(this + 0x24);
-  compiler = *(int *)(param_2 + 0xa8);
-  uVar1 = *(undefined4 *)(param_2 + 0xac);
+  compiler = *(int *)(owner + 0xa8);
+  ownerField0xac = *(undefined4 *)(owner + 0xac);
   this[0x2a] = compiler;
-  this[0x2b] = uVar1;
+  this[0x2b] = ownerField0xac;
   blockSerial = *(int *)(compiler + 0x32c);
   this[0x2c] = blockSerial;
   *(int *)(compiler + 0x32c) = blockSerial + 1;
-  uVar3 = *(undefined4 *)(param_2 + 0x110);
-  uVar1 = *(undefined4 *)(param_2 + 0xc0);
-  uVar5 = *(undefined4 *)(param_2 + 0xdc);
-  uVar6 = *(undefined4 *)(param_2 + 0x10c);
-  this[0x2e] = *(undefined4 *)(param_2 + 0xb8);
-  this[0x30] = uVar1;
-  this[0x37] = uVar5;
+  ownerField0x110 = *(undefined4 *)(owner + 0x110);
+  ownerField0xc0 = *(undefined4 *)(owner + 0xc0);
+  ownerField0xdc = *(undefined4 *)(owner + 0xdc);
+  ownerField0x10c = *(undefined4 *)(owner + 0x10c);
+  this[0x2e] = *(undefined4 *)(owner + 0xb8);
+  this[0x30] = ownerField0xc0;
+  this[0x37] = ownerField0xdc;
   this[0x3a] = 0x7fffffff;
   this[0x42] = 0;
-  this[0x43] = uVar6;
-  this[0x44] = uVar3;
+  this[0x43] = ownerField0x10c;
+  this[0x44] = ownerField0x110;
   this[0x46] = 0xffffffff;
   this[0x39] = 0x7fffffff;
   this[0x3b] = 0;
@@ -405,10 +412,10 @@ int Block__ctor_e9f00(this, param_2)
   this[0x3f] = 0;
   this[0x40] = 0;
   this[0x41] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
-  uVar1 = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,uVar3,uVar5);
-  this[0x2d] = uVar1;
+  bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
+  this[0x2d] = bitSetIndex;
   return;
 }
 
@@ -418,14 +425,14 @@ int Block__ctor_ea020(this, compiler)
   int compiler;
 {
   int loopCounter;
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *clearCursor;
+  undefined4 bitSetIndex;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  int iVar3;
+  int blockSerial;
   
   this[1] = 0;
   this[2] = 0;
@@ -434,9 +441,9 @@ int Block__ctor_ea020(this, compiler)
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(compiler + COMP_nextBlockId);
-  this[0x2c] = iVar3;
-  *(int *)(compiler + COMP_nextBlockId) = iVar3 + 1;
+  blockSerial = *(int *)(compiler + COMP_nextBlockId);
+  this[0x2c] = blockSerial;
+  *(int *)(compiler + COMP_nextBlockId) = blockSerial + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
@@ -453,18 +460,18 @@ int Block__ctor_ea020(this, compiler)
   this[0x43] = 0;
   this[0x44] = 0;
   this[0x45] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
   loopCounter = 0x20;
-  puVar1 = this;
+  clearCursor = this;
   do {
-    puVar1[4] = 0;
-    puVar1 = puVar1 + 1;
+    clearCursor[4] = 0;
+    clearCursor = clearCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                        0x20);
-  this[0x2d] = uVar2;
+  this[0x2d] = bitSetIndex;
   return;
 }
 
@@ -474,14 +481,14 @@ int Block__ctor_ea148(this, compiler)
   int compiler;
 {
   int loopCounter;
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *clearCursor;
+  undefined4 bitSetIndex;
   undefined4 r4AfterCall;
   undefined4 staleArgR5;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  int iVar3;
+  int blockSerial;
   
   this[1] = 0;
   this[2] = 0;
@@ -490,9 +497,9 @@ int Block__ctor_ea148(this, compiler)
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(compiler + COMP_nextBlockId);
-  this[0x2c] = iVar3;
-  *(int *)(compiler + COMP_nextBlockId) = iVar3 + 1;
+  blockSerial = *(int *)(compiler + COMP_nextBlockId);
+  this[0x2c] = blockSerial;
+  *(int *)(compiler + COMP_nextBlockId) = blockSerial + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
@@ -509,18 +516,18 @@ int Block__ctor_ea148(this, compiler)
   this[0x43] = 0;
   this[0x44] = 0;
   this[0x45] = 0;
-  FUN_000e8a08(this);
+  Block__initVectors(this);
   Block__createEntryExitInsts(this);
   loopCounter = 0x20;
-  puVar1 = this;
+  clearCursor = this;
   do {
-    puVar1[4] = 0;
-    puVar1 = puVar1 + 1;
+    clearCursor[4] = 0;
+    clearCursor = clearCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
+  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                        0x20);
-  this[0x2d] = uVar2;
+  this[0x2d] = bitSetIndex;
   return;
 }
 
@@ -616,7 +623,7 @@ int IfHeader__ctor_ea530(this, compiler)
 {
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar3;
+  undefined4 *mergeBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = &PTR_FUN_001e9cc0;
@@ -628,11 +635,11 @@ int IfHeader__ctor_ea530(this, compiler)
   this[0x51] = 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x130);
-  puVar3 = allocation + 1;
+  mergeBlock = allocation + 1;
   *allocation = arena;
-  ((int (*)())Block__ctor_ea020)(puVar3,compiler);
-  this[0x4d] = puVar3;
-  return Block__connect(this,puVar3);
+  ((int (*)())Block__ctor_ea020)(mergeBlock,compiler);
+  this[0x4d] = mergeBlock;
+  return Block__connect(this,mergeBlock);
 }
 
 /* IfHeader__ctor_ea600 @ 0xea600 (140 bytes) */
@@ -642,7 +649,7 @@ int IfHeader__ctor_ea600(this, compiler)
 {
   undefined4 *allocation;
   undefined4 arena;
-  undefined4 *puVar3;
+  undefined4 *mergeBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = &PTR_FUN_001e9cc0;
@@ -654,35 +661,35 @@ int IfHeader__ctor_ea600(this, compiler)
   this[0x51] = 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x130);
-  puVar3 = allocation + 1;
+  mergeBlock = allocation + 1;
   *allocation = arena;
-  ((int (*)())Block__ctor_ea020)(puVar3,compiler);
-  this[0x4d] = puVar3;
-  return Block__connect(this,puVar3);
+  ((int (*)())Block__ctor_ea020)(mergeBlock,compiler);
+  this[0x4d] = mergeBlock;
+  return Block__connect(this,mergeBlock);
 }
 
 /* IfHeader__ctor_ea6d0 @ 0xea6d0 (268 bytes) */
-int IfHeader__ctor_ea6d0(this, param_2, param_3, param_4, compiler)
+int IfHeader__ctor_ea6d0(this, branchInst, value0x140, mergeBlock, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+  undefined4 branchInst;
+  undefined4 value0x140;
+  int mergeBlock;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  this[0x4c] = param_2;
+  this[0x4c] = branchInst;
   *this = &PTR_FUN_001e9cc0;
-  this[0x50] = param_3;
+  this[0x50] = value0x140;
   this[0x52] = 1;
   this[0x55] = 0;
-  this[0x4d] = param_4;
+  this[0x4d] = mergeBlock;
   this[0x4e] = 0;
   this[0x51] = 1;
   this[0x54] = 0;
-  if (param_4 == 0) {
+  if (mergeBlock == 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x130);
     *allocation = arena;
@@ -702,9 +709,9 @@ int IfHeader__ctor_ea6d0(this, param_2, param_3, param_4, compiler)
 }
 
 /* PostLoopFooter__ctor_ea828 @ 0xea828 (580 bytes) */
-int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compiler)
+int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 registerIndex;
   undefined4 enclosingLoopHeader;
   int argR6;
   int compiler;
@@ -718,8 +725,8 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
   undefined4 newInst;
   undefined4 *allocation;
   int operandRecord;
-  int *piVar3;
-  int iVar4;
+  int *definitionVector;
+  int definitionInst;
   undefined4 arenaA;
   undefined4 *blockObject;
   
@@ -752,9 +759,9 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
     newInst = IRInst__create(0x81,compiler);
     this[0x52] = newInst;
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 8) = param_2;
+    *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegister);
   }
   else {
@@ -765,24 +772,24 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
     IRInst__ctor_10502c(instObject,0xfd,compiler);
     this[0x52] = instObject;
     operandRecord2 = IRInst__getOperandRecord(instObject,0);
-    *(undefined4 *)(operandRecord2 + 8) = param_2;
+    *(undefined4 *)(operandRecord2 + 8) = registerIndex;
     *(undefined4 *)(operandRecord2 + 0xc) = 0x27;
     newVReg = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
-    piVar3 = *(int **)(newVReg + 0x18);
-    if (*piVar3 == 0) {
-      piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
+    definitionVector = *(int **)(newVReg + 0x18);
+    if (*definitionVector == 0) {
+      definitionVector = (int *)Vector__elementRefGrow(definitionVector,0);
     }
     else {
-      if (piVar3[1] == 0) {
-        *(undefined4 *)piVar3[2] = 0;
-        piVar3[1] = 1;
+      if (definitionVector[1] == 0) {
+        *(undefined4 *)definitionVector[2] = 0;
+        definitionVector[1] = 1;
       }
-      piVar3 = (int *)piVar3[2];
+      definitionVector = (int *)definitionVector[2];
     }
-    iVar4 = *piVar3;
-    *(undefined4 *)(iVar4 + 0x20) = 0xffffffff;
-    *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
-    *(undefined4 *)(iVar4 + 0x1c) = 3;
+    definitionInst = *definitionVector;
+    *(undefined4 *)(definitionInst + 0x20) = 0xffffffff;
+    *(byte *)(definitionInst + 0x15c) = *(byte *)(definitionInst + 0x15c) | 1;
+    *(undefined4 *)(definitionInst + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,newVReg);
     constantSelectWord = DAT_001aa7fc;
     operandRecord3 = IRInst__getOperandRecord(this[0x52],1);
@@ -839,15 +846,15 @@ int BreakOrContinueBlock__ctor_eac08(this, source)
   undefined4 *this;
   int source;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *vtablePtr;
+  undefined4 copiedField0x12c;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 300);
-  puVar1 = PTR_DAT_001e8b54 + 8;
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  vtablePtr = PTR_DAT_001e8b54 + 8;
   this[0x4c] = *(undefined4 *)(source + 0x130);
-  *this = puVar1;
-  this[0x4b] = uVar2;
+  *this = vtablePtr;
+  this[0x4b] = copiedField0x12c;
   return;
 }
 
@@ -856,15 +863,15 @@ int BreakOrContinueBlock__ctor_eac60(this, source)
   undefined4 *this;
   int source;
 {
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *vtablePtr;
+  undefined4 copiedField0x12c;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 300);
-  puVar1 = PTR_DAT_001e8b54 + 8;
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  vtablePtr = PTR_DAT_001e8b54 + 8;
   this[0x4c] = *(undefined4 *)(source + 0x130);
-  *this = puVar1;
-  this[0x4b] = uVar2;
+  *this = vtablePtr;
+  this[0x4b] = copiedField0x12c;
   return;
 }
 
@@ -945,28 +952,28 @@ int LoopHeader__ctor_eaee8(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x140;
+  undefined4 copiedField0x13c;
+  undefined4 copiedField0x12c;
+  undefined4 copiedField0x138;
+  undefined4 copiedField0x134;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar1 = *(undefined4 *)(source + 0x144);
-  uVar4 = *(undefined4 *)(source + 300);
-  uVar6 = *(undefined4 *)(source + 0x134);
-  uVar5 = *(undefined4 *)(source + 0x138);
-  uVar3 = *(undefined4 *)(source + 0x13c);
-  uVar2 = *(undefined4 *)(source + 0x140);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  copiedField0x134 = *(undefined4 *)(source + 0x134);
+  copiedField0x138 = *(undefined4 *)(source + 0x138);
+  copiedField0x13c = *(undefined4 *)(source + 0x13c);
+  copiedField0x140 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9bb8;
-  this[0x4b] = uVar4;
-  this[0x4d] = uVar6;
-  this[0x4e] = uVar5;
-  this[0x4f] = uVar3;
-  this[0x50] = uVar2;
-  this[0x51] = uVar1;
+  this[0x4b] = copiedField0x12c;
+  this[0x4d] = copiedField0x134;
+  this[0x4e] = copiedField0x138;
+  this[0x4f] = copiedField0x13c;
+  this[0x50] = copiedField0x140;
+  this[0x51] = copiedField0x144;
   return;
 }
 
@@ -989,28 +996,28 @@ int LoopHeader__ctor_eafe4(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x140;
+  undefined4 copiedField0x13c;
+  undefined4 copiedField0x12c;
+  undefined4 copiedField0x138;
+  undefined4 copiedField0x134;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar1 = *(undefined4 *)(source + 0x144);
-  uVar4 = *(undefined4 *)(source + 300);
-  uVar6 = *(undefined4 *)(source + 0x134);
-  uVar5 = *(undefined4 *)(source + 0x138);
-  uVar3 = *(undefined4 *)(source + 0x13c);
-  uVar2 = *(undefined4 *)(source + 0x140);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
+  copiedField0x12c = *(undefined4 *)(source + 300);
+  copiedField0x134 = *(undefined4 *)(source + 0x134);
+  copiedField0x138 = *(undefined4 *)(source + 0x138);
+  copiedField0x13c = *(undefined4 *)(source + 0x13c);
+  copiedField0x140 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
   *this = &PTR_FUN_001e9bb8;
-  this[0x4b] = uVar4;
-  this[0x4d] = uVar6;
-  this[0x4e] = uVar5;
-  this[0x4f] = uVar3;
-  this[0x50] = uVar2;
-  this[0x51] = uVar1;
+  this[0x4b] = copiedField0x12c;
+  this[0x4d] = copiedField0x134;
+  this[0x4e] = copiedField0x138;
+  this[0x4f] = copiedField0x13c;
+  this[0x50] = copiedField0x140;
+  this[0x51] = copiedField0x144;
   return;
 }
 
@@ -1053,16 +1060,16 @@ int IfHeader__ctor_eb168(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x148;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 0x148);
-  uVar1 = *(undefined4 *)(source + 0x144);
+  copiedField0x148 = *(undefined4 *)(source + 0x148);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
   *this = &PTR_FUN_001e9cc0;
-  this[0x51] = uVar1;
-  this[0x52] = uVar2;
+  this[0x51] = copiedField0x144;
+  this[0x52] = copiedField0x148;
   this[0x53] = 0;
   this[0x54] = 0;
   return;
@@ -1087,16 +1094,16 @@ int IfHeader__ctor_eb248(this, source)
   undefined4 *this;
   int source;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 copiedField0x144;
+  undefined4 copiedField0x148;
   
   ((int (*)())Block__ctor_e9f00)(this,source);
-  uVar2 = *(undefined4 *)(source + 0x148);
-  uVar1 = *(undefined4 *)(source + 0x144);
+  copiedField0x148 = *(undefined4 *)(source + 0x148);
+  copiedField0x144 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
   *this = &PTR_FUN_001e9cc0;
-  this[0x51] = uVar1;
-  this[0x52] = uVar2;
+  this[0x51] = copiedField0x144;
+  this[0x52] = copiedField0x148;
   this[0x53] = 0;
   this[0x54] = 0;
   return;
@@ -1139,32 +1146,34 @@ int FuncEndBlock__ctor_eb378(this, source)
 }
 
 /* PostLoopFooter__ctor_eb3c8 @ 0xeb3c8 (580 bytes) */
-int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
+int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+  undefined4 registerIndex;
+  undefined4 loopHeader;
+  int useFooterInst;
   int compiler;
 {
+  undefined4 *footerInst;
+  undefined4 constantSelectWord;
   undefined4 virtualRegisterB;
   int virtualRegister;
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  int *piVar3;
-  int iVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
+  int *definitionVector;
+  int definitionInst;
+  undefined4 exitInst;
+  undefined4 *secondSideBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x50] = 0;
   *this = &PTR_FUN_001e9bb8;
-  this[0x53] = param_3;
+  this[0x53] = loopHeader;
   this[0x4b] = 0;
   this[0x4d] = 0;
   this[0x4e] = 0;
   this[0x4f] = 0;
-  this[0x51] = param_4;
+  this[0x51] = useFooterInst;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
@@ -1174,79 +1183,79 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
   this[0x54] = allocation + 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
-  puVar6 = allocation + 1;
+  secondSideBlock = allocation + 1;
   *allocation = arena;
-  ((int (*)())Block__ctor_ea148)(puVar6,compiler);
+  ((int (*)())Block__ctor_ea148)(secondSideBlock,compiler);
   allocation[0x4c] = this;
-  *puVar6 = &PTR_FUN_001e9c68;
-  this[0x55] = puVar6;
+  *secondSideBlock = &PTR_FUN_001e9c68;
+  this[0x55] = secondSideBlock;
   Block__connect(this[0x54],this);
-  if (param_4 == 0) {
-    uVar5 = IRInst__create(0x81,compiler);
-    this[0x52] = uVar5;
-    operandRecord = IRInst__getOperandRecord(uVar5,0);
-    *(undefined4 *)(operandRecord + 8) = param_2;
+  if (useFooterInst == 0) {
+    exitInst = IRInst__create(0x81,compiler);
+    this[0x52] = exitInst;
+    operandRecord = IRInst__getOperandRecord(exitInst,0);
+    *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegisterB = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    virtualRegisterB = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,registerIndex,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegisterB);
   }
   else {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar6 = allocation + 1;
+    footerInst = allocation + 1;
     *allocation = arena;
-    IRInst__ctor_10502c(puVar6,0xfd,compiler);
-    this[0x52] = puVar6;
-    operandRecord = IRInst__getOperandRecord(puVar6,0);
-    *(undefined4 *)(operandRecord + 8) = param_2;
+    IRInst__ctor_10502c(footerInst,0xfd,compiler);
+    this[0x52] = footerInst;
+    operandRecord = IRInst__getOperandRecord(footerInst,0);
+    *(undefined4 *)(operandRecord + 8) = registerIndex;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
     virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
-    piVar3 = *(int **)(virtualRegister + 0x18);
-    if (*piVar3 == 0) {
-      piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
+    definitionVector = *(int **)(virtualRegister + 0x18);
+    if (*definitionVector == 0) {
+      definitionVector = (int *)Vector__elementRefGrow(definitionVector,0);
     }
     else {
-      if (piVar3[1] == 0) {
-        *(undefined4 *)piVar3[2] = 0;
-        piVar3[1] = 1;
+      if (definitionVector[1] == 0) {
+        *(undefined4 *)definitionVector[2] = 0;
+        definitionVector[1] = 1;
       }
-      piVar3 = (int *)piVar3[2];
+      definitionVector = (int *)definitionVector[2];
     }
-    iVar4 = *piVar3;
-    *(undefined4 *)(iVar4 + 0x20) = 0xffffffff;
-    *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
-    *(undefined4 *)(iVar4 + 0x1c) = 3;
+    definitionInst = *definitionVector;
+    *(undefined4 *)(definitionInst + 0x20) = 0xffffffff;
+    *(byte *)(definitionInst + 0x15c) = *(byte *)(definitionInst + 0x15c) | 1;
+    *(undefined4 *)(definitionInst + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,virtualRegister);
-    uVar5 = DAT_001aa7fc;
+    constantSelectWord = DAT_001aa7fc;
     operandRecord = IRInst__getOperandRecord(this[0x52],1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar5;
+    *(undefined4 *)(operandRecord + 0x10) = constantSelectWord;
   }
   Block__appendInst(this,this[0x52]);
   return;
 }
 
 /* IfHeader__ctor_eb688 @ 0xeb688 (268 bytes) */
-int IfHeader__ctor_eb688(this, param_2, param_3, param_4, compiler)
+int IfHeader__ctor_eb688(this, branchInst, value0x140, mergeBlock, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+  undefined4 branchInst;
+  undefined4 value0x140;
+  int mergeBlock;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  this[0x4c] = param_2;
+  this[0x4c] = branchInst;
   *this = &PTR_FUN_001e9cc0;
-  this[0x50] = param_3;
+  this[0x50] = value0x140;
   this[0x52] = 1;
   this[0x55] = 0;
-  this[0x4d] = param_4;
+  this[0x4d] = mergeBlock;
   this[0x4e] = 0;
   this[0x51] = 1;
   this[0x54] = 0;
-  if (param_4 == 0) {
+  if (mergeBlock == 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x130);
     *allocation = arena;

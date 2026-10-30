@@ -1,0 +1,4 @@
+use	vpStateApplyParameters	iVar1	paramEntry	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \*\(int\ \*\)\(uVar3\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 0x114\)\)\ \*\ 0x54\ \+\ param_2\[8\];$	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ 4\);$	all	rhs
+use	vpStateApplyParameters	iVar1	constSlotIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ 4\);$	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x118\);$	lhs	none
+use	recordPickNextToEmit	iVar8	sourceIsFile0	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar14\ \&\ 1\ <<\ \(uVar19\ \&\ 0x3f\)\)\ !=\ 0\)\ \&\&\ \(iVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_000782e0\)\(puVar5\),\ iVar8\ !=\ 0\)\)$	^\s*bVar1\ =\ true;$	all	none
+use	recordPickNextToEmit	iVar8	remainingLanes	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ true;$	^\s*iVar10\ =\ iVar10\ \+\ 1;$	all	none

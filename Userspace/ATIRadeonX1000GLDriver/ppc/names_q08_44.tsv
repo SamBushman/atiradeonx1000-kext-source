@@ -1,0 +1,26 @@
+func	FUN_0017c244	ValueKey__rewriteAsMovOfOperand	INFERRED	relinks the current instruction as a mov (0x31) of source operandIndex, keeping dest register, saturate and scale; used by the fold helpers
+func	FUN_0017a130	ValueKey__setLiteralVec4Operand	INFERRED	stores the dummy select word, builds a literal vec4 operand from 4 floats and makes sure its defining ValueKey exists; returns the defining instruction
+func	FUN_00193be8	ArenaObject__freeBuffer	INFERRED	frees buffer [5] from the compiler arena at +0x370 when set
+func	FUN_00181928	Inst__isFoldableSingleUse	INFERRED	single-use instruction in the given block that is not opcode 0x8e, has no extra source and vtable +0x68 false
+func	FUN_00176ed4	ValueKey__compareClassForValueNumber	INFERRED	ptr-set entry +0xc (compare class) of a positive value number, else 0
+func	FUN_00176f0c	ValueKey__rangeClassForValueNumber	INFERRED	ptr-set entry +0x10 (constant range class) of a positive value number, else 0
+func	FUN_0017d26c	ValueKey__rewriteAsMovOfVec4Constant	INFERRED	relinks the instruction as a mov whose operand 1 is a literal vec4 (FUN_0017a130)
+func	FUN_0017ce7c	ValueKey__rewriteAsMovOfReplacement	INFERRED	relinks the instruction as a mov of the replacement record (+0xc operand ref, +0x10 swizzle index, +0x18 negate)
+func	FUN_0017d06c	ValueKey__rewriteAsMovOfValueKey	INFERRED	relinks the instruction as a mov of the operand register of a value key with the given swizzle and negate
+func	FUN_0017ebb0	ValueKey__rewriteAsAdd	INFERRED	relinks the instruction as a binary 0x12 op of operand 0 and a value key operand with the given swizzle/negate
+func	FUN_0018c7f4	ConstantSlots__tryAddToRow	INFERRED	puts the candidate into the first free entry of a 3-entry slot row unless a compatible source is already there
+func	FUN_0018d388	ConstantSlots__tryAssignSingle	INFERRED	assigns one candidate source to a slot if empty or compatible
+func	FUN_0018cdd8	ConstantSlots__tryAssignPair	INFERRED	assigns a pair of sources to a slot if empty or compatible
+func	FUN_001770e4	ValueKey__commonLaneValue	INFERRED	when every used lane of a source has the same value number returns that expr record, else 0x7ffffffe
+func	FUN_0017af58	ValueKey__commonLaneValue_17af58	INFERRED	same as ValueKey__commonLaneValue with the write mask copied to the stack first
+func	FUN_00178c84	ValueKey__singleLaneValueNumber	INFERRED	value number of the lane for the opcode 0x32 case, else 0x7ffffffe
+func	FUN_00179e74	ValueKey__forwardSource1LaneIfEqual	INFERRED	when sources 1 and 2 agree on the lane and flags match, forwards source 1 as the lane result
+func	FUN_001797d0	ValueKey__forwardSource3LaneIfEqual	INFERRED	when sources 2 and 3 agree on the lane and flags match, forwards source 3 (ctx+0x198) as the lane result
+func	FUN_0017994c	ValueKey__forwardSelectedSourceBySign	INFERRED	forwards the lane of source index 1 - sign(constant) (source 0 or 1)
+func	FUN_00179a34	ValueKey__forwardSelectedSourceByPositive	INFERRED	forwards the lane of source 1 or 2 depending on whether the constant is positive
+func	FUN_00179f38	ValueKey__forwardOtherSourceIfOne	INFERRED	operand constant 1.0: forwards the other operand's lane value
+func	FUN_00179cc0	ValueKey__forwardOtherSourceIfZero	INFERRED	operand constant 0: forwards the other operand's lane value
+func	FUN_00179db0	ValueKey__forwardAddendIfMultiplicandZero	INFERRED	an operand constant of 0: forwards source 3 (ctx+0x198)
+func	FUN_0017cd18	ValueKey__foldMadZeroMultiplicand	INFERRED	operand 1 or 2 written lanes all zero: replaces the instruction by a mov of operand 3
+func	FUN_0017ad24	ValueKey__insertSplatMov	INFERRED	creates a mov before the instruction whose operand 1 is a splat vec4 of fillValue
+func	FUN_0017ae28	ValueKey__setOperandFromValueKey	INFERRED	sets an operand to the value key's register with the given swizzle, negate and abs

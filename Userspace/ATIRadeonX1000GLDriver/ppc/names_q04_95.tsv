@@ -1,0 +1,182 @@
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*uVar9\ =\ \(uVar12\ \&\ 0x1f\)\ <<\ 6;$	+2
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x18\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xfffc783f;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*uVar9\ =\ \(uVar12\ \&\ 0x7f\)\ <<\ 0x12;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe03f01f;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe00f01f;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*uVar9\ =\ iVar5\ <<\ 4;$	+2
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xffff0fef;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x80\)\ \&\ 0xf\)\ <<\ 0xc\ \|\ uVar9\ \|\ uVar7\ \&\ 0xffff0fef;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*uVar9\ =\ \(uint\)\(\*\(float\ \*\)\(iVar8\ \+\ 0x2c\)\ !=\ FLOAT_001aa0e8\)\ <<\ 0x1b;$	+2
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\(uint\)\(\*\(float\ \*\)\(iVar8\ \+\ 0x6c\)\ !=\ fVar4\)\ <<\ 0x19\ \|\ uVar9\ \|\ uVar7\ \&\ 0x5ffffff;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*uVar9\ =\ \(\*\(ushort\ \*\)\(iVar8\ \+\ 2\)\ \&\ 7\)\ <<\ 0x1a;$	+2
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\(\*\(ushort\ \*\)\(uVar15\ \*\ 0xa0\ \+\ uVar7\)\ \&\ 3\)\ <<\ 0x1d\ \|\ uVar9\ \|\ uVar12\ \&\ 0x83ffffff;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*uVar9\ =\ \(\*\(ushort\ \*\)\(iVar8\ \+\ 0x42\)\ \&\ 8\)\ <<\ 0x15;$	+2
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xf6ffffff;$	+1
+use	psnDecEncodeHwWords	uVar9	newFieldBits	INFERRED	bit field (shifted value) built from a decoded entry field, ORed into a hardware word	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x40\)\ \&\ 3\)\ <<\ 0x19\ \|\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xf0ffffff;$	+1
+use	psnDecEncodeHwWords	uVar9	regLowBits	INFERRED	5-bit register field (+0x80) of the entry	^\s*uVar9\ =\ \*\(ushort\ \*\)\(iVar8\ \+\ 0x80\)\ \&\ 0x1f;$	+2
+use	psnDecEncodeHwWords	uVar9	regLowBits	INFERRED	5-bit register field (+0x80) of the entry	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x18\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xfffc7fe0;$	+1
+use	psnDecEncodeHwWords	uVar9	regLowBits	INFERRED	5-bit register field (+0x80) of the entry	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x28\)\ \&\ 0xf00\)\ <<\ 3\ \|\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xfff807e0;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbRegValue	INFERRED	rgb register field value of the current source slot, 0x20 when unused	^\s*uVar9\ =\ \(uint\)uVar2;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbRegValue	INFERRED	rgb register field value of the current source slot, 0x20 when unused	^\s*if\ \(uVar9\ ==\ 0xffff\)\ \{$	+2
+use	psnDecEncodeHwWords	uVar9	rgbRegValue	INFERRED	rgb register field value of the current source slot, 0x20 when unused	^\s*uVar9\ =\ \(\(int\)\(short\)uVar2\ \&\ 0x7fffU\)\ \+\ 0x20;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbRegValue	INFERRED	rgb register field value of the current source slot, 0x20 when unused	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ \(uVar9\ \&\ 0x3f\)\ <<\ 6\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xfffff03f;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbRegValue	INFERRED	rgb register field value of the current source slot, 0x20 when unused	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ uVar9\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xffffffc0;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbRegValue	INFERRED	rgb register field value of the current source slot, 0x20 when unused	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ \(uVar9\ \&\ 0x3f\)\ <<\ 0xc\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xfffc0fff$	+1
+use	psnDecEncodeHwWords	uVar9	rgbSelectAccum	INFERRED	accumulated rgb source select bits for the three source slots	^\s*uVar9\ =\ 0;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbSelectAccum	INFERRED	accumulated rgb source select bits for the three source slots	^\s*uVar9\ =\ \(uVar2\ \&\ 0x3000\)\ >>\ 0xc;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbSelectAccum	INFERRED	accumulated rgb source select bits for the three source slots	^\s*uVar9\ <<\ 0xc\ \|\ \(uVar12\ \&\ 0x1f\)\ <<\ 7\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ \&\ 0xffffc07f;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbSelectAccum	INFERRED	accumulated rgb source select bits for the three source slots	^\s*uVar9\ <<\ 5\ \|\ uVar12\ \&\ 0x1f\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ \&\ 0xffffff80;$	+1
+use	psnDecEncodeHwWords	uVar9	rgbSelectAccum	INFERRED	accumulated rgb source select bits for the three source slots	^\s*uVar9\ <<\ 0x13\ \|\ \(uVar12\ \&\ 0x1f\)\ <<\ 0xe\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ \&\ 0xffe03fff;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ \(int\)\(dVar17\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ \(uint\)\(int\)dVar17;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*switch\(uVar9\)\ \{$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ 6;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ 5;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ 4;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ 0;$@2	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ 1;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ 2;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ 3;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ \(uVar9\ \&\ 7\)\ <<\ 0x1b;$	+2
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*\(\*\(uint\ \*\)\(iVar8\ \+\ 0x30\)\ \&\ 8\)\ <<\ 0x1b\ \|\ uVar9\ \|\ uVar7\ \&\ 0x87ffffff;$	+1
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*uVar9\ =\ \(uVar9\ \&\ 7\)\ <<\ 0x1b;$@2	+2
+use	psnDecEncodeHwWords	uVar9	scaleCode	INFERRED	one-hot output scale factor mapped to a 3-bit code	^\s*\(\*\(uint\ \*\)\(iVar8\ \+\ 0x70\)\ \&\ 8\)\ <<\ 0x1b\ \|\ uVar9\ \|\ uVar7\ \&\ 0x87ffffff;$	+1
+use	psnDecEncodeHwWords	uVar9	swizzleByte	INFERRED	swizzle byte looked up in the table at 0x1dbf98	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(\(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x28\)\ \*\ 2\ \+\ 0x1dbf98\ \+\ iVar10\);$	+1
+use	psnDecEncodeHwWords	uVar9	swizzleByte	INFERRED	swizzle byte looked up in the table at 0x1dbf98	^\s*uVar9\ =\ \(uVar9\ \&\ 0xf\)\ <<\ 0x17;$	+2
+use	psnDecEncodeHwWords	uVar9	swizzleByte	INFERRED	swizzle byte looked up in the table at 0x1dbf98	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x2a\)\ \&\ 3\)\ <<\ 0x15\ \|\ uVar9\ \|\ uVar7\ \&\ 0xf81fffff;$	+1
+use	psnDecEncodeHwWords	uVar9	swizzleByte	INFERRED	swizzle byte looked up in the table at 0x1dbf98	^\s*uVar9\ =\ \(uVar9\ \&\ 0xf\)\ <<\ 0x17;$@2	+2
+use	psnDecEncodeHwWords	uVar9	swizzleByte	INFERRED	swizzle byte looked up in the table at 0x1dbf98	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x6a\)\ \&\ 3\)\ <<\ 0x15\ \|\ uVar9\ \|\ uVar7\ \&\ 0xf81fffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x18\);$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x18\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xfffff83f;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x18\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xfffc783f;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 4\);$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xffffffef;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xffff0fef;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x80\)\ \&\ 0xf\)\ <<\ 0xc\ \|\ uVar9\ \|\ uVar7\ \&\ 0xffff0fef;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 4\)\ =\ uVar9\ \|\ uVar7\ \&\ 0x7ffffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\(uint\)\(\*\(float\ \*\)\(iVar8\ \+\ 0x6c\)\ !=\ fVar4\)\ <<\ 0x19\ \|\ uVar9\ \|\ uVar7\ \&\ 0x5ffffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0x298\);$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0x298\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xc7ffffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(uint\ \*\)\(iVar8\ \+\ 0x30\)\ \&\ 8\)\ <<\ 0x1b\ \|\ uVar9\ \|\ uVar7\ \&\ 0x87ffffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0x398\);$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0x398\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xc7ffffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(uint\ \*\)\(iVar8\ \+\ 0x70\)\ \&\ 8\)\ <<\ 0x1b\ \|\ uVar9\ \|\ uVar7\ \&\ 0x87ffffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x298\);$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x298\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xf87fffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x2a\)\ \&\ 3\)\ <<\ 0x15\ \|\ uVar9\ \|\ uVar7\ \&\ 0xf81fffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x398\);$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x398\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xf87fffff;$	+1
+use	psnDecEncodeHwWords	uVar7	oldWordValue	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x6a\)\ \&\ 3\)\ <<\ 0x15\ \|\ uVar9\ \|\ uVar7\ \&\ 0xf81fffff;$	+1
+use	psnDecEncodeHwWords	uVar7	newFieldBitsB	INFERRED	second bit field built from a decoded entry field	^\s*uVar7\ =\ \(\*\(byte\ \*\)\(iVar8\ \+\ 0x29\)\ \&\ 7\)\ <<\ 0xf;$	+2
+use	psnDecEncodeHwWords	uVar7	newFieldBitsB	INFERRED	second bit field built from a decoded entry field	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x28\)\ \&\ 0xf00\)\ <<\ 3\ \|\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xfff807e0;$	+1
+use	psnDecEncodeHwWords	uVar7	newFieldBitsB	INFERRED	second bit field built from a decoded entry field	^\s*uVar7\ =\ \(uVar2\ \&\ 0x7f\)\ <<\ 5;$	+2
+use	psnDecEncodeHwWords	uVar7	newFieldBitsB	INFERRED	second bit field built from a decoded entry field	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe00f01f;$	+1
+use	psnDecEncodeHwWords	uVar7	newFieldBitsB	INFERRED	second bit field built from a decoded entry field	^\s*uVar7\ =\ \(\*\(ushort\ \*\)\(iVar8\ \+\ 0x42\)\ \&\ 0x10\)\ <<\ 0x17;$	+2
+use	psnDecEncodeHwWords	uVar7	newFieldBitsB	INFERRED	second bit field built from a decoded entry field	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x40\)\ \&\ 3\)\ <<\ 0x19\ \|\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xf0ffffff;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaRegValue	INFERRED	alpha register field value of the current slot, 0x20 when unused	^\s*uVar7\ =\ \(uint\)uVar3;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaRegValue	INFERRED	alpha register field value of the current slot, 0x20 when unused	^\s*if\ \(uVar7\ ==\ 0xffff\)\ \{$	+2
+use	psnDecEncodeHwWords	uVar7	alphaRegValue	INFERRED	alpha register field value of the current slot, 0x20 when unused	^\s*uVar7\ =\ \(\(int\)\(short\)uVar3\ \&\ 0x7fffU\)\ \+\ 0x20;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaRegValue	INFERRED	alpha register field value of the current slot, 0x20 when unused	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ \(uVar7\ \&\ 0x3f\)\ <<\ 6\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ \&\ 0xfffff03f$	+1
+use	psnDecEncodeHwWords	uVar7	alphaRegValue	INFERRED	alpha register field value of the current slot, 0x20 when unused	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ uVar7\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ \&\ 0xffffffc0;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaRegValue	INFERRED	alpha register field value of the current slot, 0x20 when unused	^\s*\(uVar7\ \&\ 0x3f\)\ <<\ 0xc\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ \&\ 0xfffc0fff;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaSelectAccum	INFERRED	accumulated alpha source select bits for the source slots	^\s*uVar7\ =\ 0;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaSelectAccum	INFERRED	accumulated alpha source select bits for the source slots	^\s*uVar7\ =\ \(uVar2\ \&\ 0x3000\)\ >>\ 0xc;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaSelectAccum	INFERRED	accumulated alpha source select bits for the source slots	^\s*uVar7\ <<\ 0xc\ \|\ \(uVar16\ \&\ 0x1f\)\ <<\ 7\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x398\)\ \&\ 0xffffc07f;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaSelectAccum	INFERRED	accumulated alpha source select bits for the source slots	^\s*uVar7\ <<\ 5\ \|\ uVar16\ \&\ 0x1f\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x398\)\ \&\ 0xffffff80;$	+1
+use	psnDecEncodeHwWords	uVar7	alphaSelectAccum	INFERRED	accumulated alpha source select bits for the source slots	^\s*uVar7\ <<\ 0x13\ \|\ \(uVar16\ \&\ 0x1f\)\ <<\ 0xe\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x398\)\ \&\ 0xffe03fff;$	+1
+use	psnDecEncodeHwWords	iVar13	aluWordBase	INFERRED	programImage + entry record offset	^\s*iVar13\ =\ iVar6\ \+\ param_3;$	+2
+use	psnDecEncodeHwWords	iVar13	aluWordBase	INFERRED	programImage + entry record offset	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0x298\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xc7ffffff;$	+2
+use	psnDecEncodeHwWords	iVar13	aluWordBase	INFERRED	programImage + entry record offset	^\s*iVar13\ =\ iVar6\ \+\ param_3;$@2	+2
+use	psnDecEncodeHwWords	iVar13	aluWordBase	INFERRED	programImage + entry record offset	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0x398\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xc7ffffff;$	+2
+use	psnDecEncodeHwWords	iVar10	rsWordPtr	INFERRED	RS word of the hardware record in rsWords	^\s*iVar10\ =\ iVar6\ \+\ param_2;$	+2
+use	psnDecEncodeHwWords	iVar10	rsWordPtr	INFERRED	RS word of the hardware record in rsWords	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xffffffef;$	+1
+use	psnDecEncodeHwWords	iVar10	rsWordPtr	INFERRED	RS word of the hardware record in rsWords	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xffff0fef;$	+1
+use	psnDecEncodeHwWords	iVar10	rsWordPtr	INFERRED	RS word of the hardware record in rsWords	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 4\)\ =$	+1
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*iVar10\ =\ iVar6\ \+\ param_3;$	+1
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ \(uVar12\ \&\ 0x1f\)\ <<\ 0x12\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xff83ffff;$	+3
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ uVar9\ \|\ uVar12\ \&\ 0xe3ffffff;$	+2
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*uVar12\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 0x198\);$	+1
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ uVar9\ \|\ uVar12\ \&\ 0xfeffffff;$	+1
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xf6ffffff;$	+2
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =$@2	+4
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ \(uVar9\ \&\ 0x3f\)\ <<\ 6\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xfffff03f;$	+2
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ uVar9\ \&\ 0x3f\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xffffffc0;$	+2
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ \(uVar9\ \&\ 0x3f\)\ <<\ 0xc\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xfffc0fff$	+1
+use	psnDecEncodeHwWords	iVar10	aluWordPtr	INFERRED	ALU hardware word pair of the record in programImage	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =$@3	+2
+local	psnDecEncodeHwWords	bVar1	moreLoops	INFERRED	loop-continue flag
+use	psnDecEncodeHwWords	uVar2	alphaDestReg	INFERRED	alpha destination register field (+0x44)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar8\ \+\ 0x44\);$	+1
+use	psnDecEncodeHwWords	uVar2	alphaDestReg	INFERRED	alpha destination register field (+0x44)	^\s*uVar7\ =\ \(uVar2\ \&\ 0x7f\)\ <<\ 5;$	+1
+use	psnDecEncodeHwWords	uVar2	alphaDestReg	INFERRED	alpha destination register field (+0x44)	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ \(uVar2\ \&\ 0x1f\)\ <<\ 0x12\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ \&\ 0xff83ffff;$	+1
+use	psnDecEncodeHwWords	uVar2	interpModeField	INFERRED	mode field (+0x3a) selecting the RS interpolation kind	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar8\ \+\ 0x3a\);$	+2
+use	psnDecEncodeHwWords	uVar2	interpModeField	INFERRED	mode field (+0x3a) selecting the RS interpolation kind	^\s*\(uVar2\ \&\ 3\)\ <<\ 0x10\ \|\ \*\(uint\ \*\)\(iVar6\ \+\ param_2\ \+\ 4\)\ \&\ 0xfffcffff;$	+1
+use	psnDecEncodeHwWords	uVar2	interpModeField	INFERRED	mode field (+0x3a) selecting the RS interpolation kind	^\s*else\ if\ \(uVar2\ ==\ 0\)\ \{$	+1
+use	psnDecEncodeHwWords	uVar2	rgbRegField	INFERRED	rgb register field (+0x80) of the current slot	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 0x80\);$	+2
+use	psnDecEncodeHwWords	uVar2	rgbRegField	INFERRED	rgb register field (+0x80) of the current slot	^\s*else\ if\ \(\(short\)uVar2\ <\ 0\)\ \{$	+2
+use	psnDecEncodeHwWords	uVar2	sourceSlotWord	INFERRED	source slot select word (2 bytes after the slot start)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar10\ \*\ 4\ \+\ iVar14\ \+\ 2\);$	+1
+use	psnDecEncodeHwWords	uVar2	sourceSlotWord	INFERRED	source slot select word (2 bytes after the slot start)	^\s*if\ \(\(\(uVar2\ \&\ 0x300\)\ !=\ 0x100\)\ \&\&\ \(uVar12\ =\ 5,\ \(uVar2\ \&\ 0x300\)\ !=\ 0x200\)\)\ \{$	+2
+use	psnDecEncodeHwWords	uVar2	sourceSlotWord	INFERRED	source slot select word (2 bytes after the slot start)	^\s*uVar9\ =\ \(uVar2\ \&\ 0x3000\)\ >>\ 0xc;$	+1
+use	psnDecEncodeHwWords	uVar2	sourceSlotWord	INFERRED	source slot select word (2 bytes after the slot start)	^\s*uVar7\ =\ \(uVar2\ \&\ 0x3000\)\ >>\ 0xc;$	+2
+local	psnDecEncodeHwWords	uVar3	alphaRegField	INFERRED	alpha register field (+0x86) of the current slot
+local	psnDecEncodeHwWords	fVar4	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8)
+use	psnDecEncodeHwWords	iVar5	entryMode	INFERRED	entry kind (+0x8c): 0 RS, 1 texture, 2 ALU	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x8c\);$	+1
+use	psnDecEncodeHwWords	iVar5	entryMode	INFERRED	entry kind (+0x8c): 0 RS, 1 texture, 2 ALU	^\s*if\ \(iVar5\ ==\ 1\)\ \{$	+1
+use	psnDecEncodeHwWords	iVar5	entryMode	INFERRED	entry kind (+0x8c): 0 RS, 1 texture, 2 ALU	^\s*else\ if\ \(iVar5\ ==\ 0\)\ \{$	+1
+use	psnDecEncodeHwWords	iVar5	entryMode	INFERRED	entry kind (+0x8c): 0 RS, 1 texture, 2 ALU	^\s*else\ if\ \(iVar5\ ==\ 2\)\ \{$	+1
+use	psnDecEncodeHwWords	iVar5	texWordPtr	INFERRED	texture instruction word pair at programImage + record*4	^\s*iVar5\ =\ iVar6\ \*\ 4\ \+\ param_3;$	+2
+use	psnDecEncodeHwWords	iVar5	texWordPtr	INFERRED	texture instruction word pair at programImage + record*4	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x18\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xfffff83f;$	+1
+use	psnDecEncodeHwWords	iVar5	texWordPtr	INFERRED	texture instruction word pair at programImage + record*4	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x18\)\ =\ uVar9\ \|\ uVar7\ \&\ 0xfffc783f;$	+1
+use	psnDecEncodeHwWords	iVar5	texWordPtrB	INFERRED	texture instruction word pair at programImage + record*4 (second half)	^\s*iVar5\ =\ iVar6\ \+\ param_2;$	+2
+use	psnDecEncodeHwWords	iVar5	texWordPtrB	INFERRED	texture instruction word pair at programImage + record*4 (second half)	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe03f01f;$	+1
+use	psnDecEncodeHwWords	iVar5	texWordPtrB	INFERRED	texture instruction word pair at programImage + record*4 (second half)	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe00f01f;$	+1
+use	psnDecEncodeHwWords	iVar5	alphaWritten	INFERRED	1 when the alpha part of the entry writes anything	^\s*if\ \(\(\*\(short\ \*\)\(iVar8\ \+\ 0x42\)\ !=\ 0\ \|\|\ \*\(short\ \*\)\(iVar8\ \+\ 0x46\)\ !=\ 0\)\ \|\|$	+3
+use	psnDecEncodeHwWords	iVar5	alphaWritten	INFERRED	1 when the alpha part of the entry writes anything	^\s*uVar9\ =\ iVar5\ <<\ 4;$	+1
+use	psnDecEncodeHwWords	iVar5	slotCursor	INFERRED	entry advanced 2 bytes per slot (rgb register fields)	^\s*iVar5\ =\ iVar8;$	+1
+use	psnDecEncodeHwWords	iVar5	slotCursor	INFERRED	entry advanced 2 bytes per slot (rgb register fields)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 0x80\);$	+1
+use	psnDecEncodeHwWords	iVar5	slotCursor	INFERRED	entry advanced 2 bytes per slot (rgb register fields)	^\s*uVar3\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 0x86\);$	+1
+use	psnDecEncodeHwWords	iVar5	slotCursor	INFERRED	entry advanced 2 bytes per slot (rgb register fields)	^\s*iVar5\ =\ iVar5\ \+\ 2;$	+1
+use	psnDecEncodeHwWords	iVar5	aluWordBaseA	INFERRED	programImage + record offset for the source select words	^\s*iVar5\ =\ iVar6\ \+\ param_3;$	+1
+use	psnDecEncodeHwWords	iVar5	aluWordBaseA	INFERRED	programImage + record offset for the source select words	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ =$	+4
+use	psnDecEncodeHwWords	iVar5	aluWordBaseA	INFERRED	programImage + record offset for the source select words	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ =$@2	+4
+use	psnDecEncodeHwWords	iVar5	aluWordBaseA	INFERRED	programImage + record offset for the source select words	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ =$@3	+4
+use	psnDecEncodeHwWords	iVar5	halfCursorScale	INFERRED	entry advanced 0x40 per half while the output scale is encoded	^\s*iVar5\ =\ iVar8;$@2	+1
+use	psnDecEncodeHwWords	iVar5	halfCursorScale	INFERRED	entry advanced 0x40 per half while the output scale is encoded	^\s*dVar17\ =\ \(double\)\*\(float\ \*\)\(iVar5\ \+\ 0x2c\)\ \*\ DOUBLE_001aa290;$	+1
+use	psnDecEncodeHwWords	iVar5	halfCursorScale	INFERRED	entry advanced 0x40 per half while the output scale is encoded	^\s*iVar5\ =\ iVar5\ \+\ 0x40;$	+1
+use	psnDecEncodeHwWords	iVar5	halfCursorSwizzle	INFERRED	entry advanced 0x40 per half while the swizzle bytes are encoded	^\s*iVar5\ =\ iVar8;$@3	+1
+use	psnDecEncodeHwWords	iVar5	halfCursorSwizzle	INFERRED	entry advanced 0x40 per half while the swizzle bytes are encoded	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(\(uint\)\*\(ushort\ \*\)\(iVar5\ \+\ 0x28\)\ \*\ 2\ \+\ 0x1dbf98\ \+\ iVar10\);$	+1
+use	psnDecEncodeHwWords	iVar5	halfCursorSwizzle	INFERRED	entry advanced 0x40 per half while the swizzle bytes are encoded	^\s*iVar5\ =\ iVar5\ \+\ 0x40;$@2	+1
+local	psnDecEncodeHwWords	iVar6	recordIndexBytes	INFERRED	hardware record index (+0x90) * 4, later offset of the record in the hardware word arrays
+local	psnDecEncodeHwWords	iVar8	entry	INFERRED	current decoded entry (0xa0 bytes)
+local	psnDecEncodeHwWords	uVar11	swizzleSel	INFERRED	2-bit component select of the source slot
+use	psnDecEncodeHwWords	uVar12	destRegField	INFERRED	destination register field (+4) of the entry	^\s*uVar12\ =\ \(uint\)\*\(ushort\ \*\)\(iVar8\ \+\ 4\);$	+1
+use	psnDecEncodeHwWords	uVar12	destRegField	INFERRED	destination register field (+4) of the entry	^\s*uVar9\ =\ \(uVar12\ \&\ 0x1f\)\ <<\ 6;$	+1
+use	psnDecEncodeHwWords	uVar12	destRegField	INFERRED	destination register field (+4) of the entry	^\s*uVar9\ =\ \(uVar12\ \&\ 0x7f\)\ <<\ 0x12;$	+1
+use	psnDecEncodeHwWords	uVar12	destRegField	INFERRED	destination register field (+4) of the entry	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ \(uVar12\ \&\ 0x1f\)\ <<\ 0x12\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ \&\ 0xff83ffff;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*uVar12\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x18\);$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x18\)\ =\ uVar9\ \|\ uVar12\ \&\ 0xffffffe0;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x18\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xfffc7fe0;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x28\)\ \&\ 0xf00\)\ <<\ 3\ \|\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xfff807e0;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*uVar12\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 0x98\);$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x98\)\ =\ uVar9\ \|\ uVar12\ \&\ 0xe3ffffff;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(ushort\ \*\)\(uVar15\ \*\ 0xa0\ \+\ uVar7\)\ \&\ 3\)\ <<\ 0x1d\ \|\ uVar9\ \|\ uVar12\ \&\ 0x83ffffff;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*uVar12\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 0x198\);$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ uVar9\ \|\ uVar12\ \&\ 0xfeffffff;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar10\ \+\ 0x198\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xf6ffffff;$	+1
+use	psnDecEncodeHwWords	uVar12	oldWordValueB	INFERRED	hardware word value read before its fields are replaced	^\s*\(\*\(ushort\ \*\)\(iVar8\ \+\ 0x40\)\ \&\ 3\)\ <<\ 0x19\ \|\ uVar7\ \|\ uVar9\ \|\ uVar12\ \&\ 0xf0ffffff;$	+1
+use	psnDecEncodeHwWords	uVar12	rgbSourceSelect	INFERRED	rgb source select byte of slot 0 from the table at 0x1dc000	^\s*uVar12\ =\ 0;$	+1
+use	psnDecEncodeHwWords	uVar12	rgbSourceSelect	INFERRED	rgb source select byte of slot 0 from the table at 0x1dc000	^\s*if\ \(\(\(uVar2\ \&\ 0x300\)\ !=\ 0x100\)\ \&\&\ \(uVar12\ =\ 5,\ \(uVar2\ \&\ 0x300\)\ !=\ 0x200\)\)\ \{$	+2
+use	psnDecEncodeHwWords	uVar12	rgbSourceSelect	INFERRED	rgb source select byte of slot 0 from the table at 0x1dc000	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(uVar12\ \*\ 4\ \+\ 0x1dc000\ \+\ uVar11\);$	+1
+use	psnDecEncodeHwWords	uVar12	rgbSourceSelect	INFERRED	rgb source select byte of slot 0 from the table at 0x1dc000	^\s*uVar9\ <<\ 0xc\ \|\ \(uVar12\ \&\ 0x1f\)\ <<\ 7\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ \&\ 0xffffc07f;$	+1
+use	psnDecEncodeHwWords	uVar12	rgbSourceSelect	INFERRED	rgb source select byte of slot 0 from the table at 0x1dc000	^\s*uVar9\ <<\ 5\ \|\ uVar12\ \&\ 0x1f\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ \&\ 0xffffff80;$	+1
+use	psnDecEncodeHwWords	uVar12	rgbSourceSelect	INFERRED	rgb source select byte of slot 0 from the table at 0x1dc000	^\s*uVar9\ <<\ 0x13\ \|\ \(uVar12\ \&\ 0x1f\)\ <<\ 0xe\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x298\)\ \&\ 0xffe03fff;$	+1
+use	psnDecEncodeHwWords	uVar12	rgbSourceSelect	INFERRED	source kind code 6 (constant), 5 (literal) or the low 5 bits of the slot word	^\s*uVar12\ =\ 6;$	+1
+local	psnDecEncodeHwWords	iVar14	sourceSlotBase	INFERRED	entry + 8: first source slot word pair of the rgb half (stride 0x40 to the alpha half)
+use	psnDecEncodeHwWords	uVar16	oldWordValueC	INFERRED	hardware word value read before its fields are replaced	^\s*uVar16\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 4\);$	+1
+use	psnDecEncodeHwWords	uVar16	oldWordValueC	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe03f01f;$	+1
+use	psnDecEncodeHwWords	uVar16	oldWordValueC	INFERRED	hardware word value read before its fields are replaced	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe00f01f;$	+1
+use	psnDecEncodeHwWords	uVar16	alphaSourceSelect	INFERRED	alpha source select byte from the table at 0x1dbfb4	^\s*uVar16\ =\ 0;$	+1
+use	psnDecEncodeHwWords	uVar16	alphaSourceSelect	INFERRED	alpha source select byte from the table at 0x1dbfb4	^\s*uVar16\ =\ \(uint\)\*\(byte\ \*\)\(\(uVar2\ \&\ 0x1f\)\ \*\ 4\ \+\ 0x1dbfb4\ \+\ uVar11\);$	+1
+use	psnDecEncodeHwWords	uVar16	alphaSourceSelect	INFERRED	alpha source select byte from the table at 0x1dbfb4	^\s*uVar7\ <<\ 0xc\ \|\ \(uVar16\ \&\ 0x1f\)\ <<\ 7\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x398\)\ \&\ 0xffffc07f;$	+1
+use	psnDecEncodeHwWords	uVar16	alphaSourceSelect	INFERRED	alpha source select byte from the table at 0x1dbfb4	^\s*uVar7\ <<\ 5\ \|\ uVar16\ \&\ 0x1f\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x398\)\ \&\ 0xffffff80;$	+1
+use	psnDecEncodeHwWords	uVar16	alphaSourceSelect	INFERRED	alpha source select byte from the table at 0x1dbfb4	^\s*uVar7\ <<\ 0x13\ \|\ \(uVar16\ \&\ 0x1f\)\ <<\ 0xe\ \|\ \*\(uint\ \*\)\(iVar5\ \+\ 0x398\)\ \&\ 0xffe03fff;$	+1
+local	psnDecEncodeHwWords	dVar17	scaleValue	INFERRED	output scale factor float * DOUBLE_001aa290 converted to an integer

@@ -7,47 +7,51 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
   undefined4 unused;
   int compiler;
 {
+  int sourceIsNotSampled;
+  int isSampledOperand;
+  int texTargetType;
+  int texUnit;
   int *operandVReg;
   undefined2 sourceRegister;
-  int iVar2;
-  int iVar3;
+  int targetQueryResult;
+  int recordTable;
   byte texFlags;
   int irOpcode;
-  int iVar7;
+  int recordIndex;
   
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),operandVReg);
-  iVar2 = (**(code **)(**(int **)(compiler + COMP_target) + 0x7c))(*(int **)(compiler + COMP_target),inst);
-  if (iVar2 == 0) {
+  targetQueryResult = (**(code **)(**(int **)(compiler + COMP_target) + 0x7c))(*(int **)(compiler + COMP_target),inst);
+  if (targetQueryResult == 0) {
     IRInst__getOperandRecord(inst,0);
   }
   *(undefined4 *)(this[0x18] * 0x48 + this[0x16]) = 2;
   *(undefined2 *)(this[0x18] * 0x48 + this[0x16] + 0xe) = sourceRegister;
-  iVar2 = *(int *)(inst + 0x134);
+  texUnit = *(int *)(inst + 0x134);
   irOpcode = *(int *)(*(int *)(inst + 0x88) + 8);
   if (irOpcode != 0x77) {
-    *(char *)(this[0x18] * 0x48 + this[0x16] + 0x19) = (char)iVar2;
-    iVar7 = this[0x18];
-    iVar3 = this[0x16];
+    *(char *)(this[0x18] * 0x48 + this[0x16] + 0x19) = (char)texUnit;
+    recordIndex = this[0x18];
+    recordTable = this[0x16];
     sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),inst);
-    *(undefined2 *)(iVar7 * 0x48 + iVar3 + 0xc) = sourceRegister;
+    *(undefined2 *)(recordIndex * 0x48 + recordTable + 0xc) = sourceRegister;
   }
   else {
     *(undefined2 *)(this[0x18] * 0x48 + this[0x16] + 0xc) = 0;
     *(undefined4 *)(this[0x17] + 0x9370) = 1;
     *(undefined1 *)(this[0x18] * 0x48 + this[0x16] + 0x19) = 0;
   }
-  iVar3 = (**(code **)(*operandVReg + 0x80))(operandVReg);
-  if (iVar3 == 0) {
-    *(undefined4 *)(iVar2 * 4 + this[0x17] + 0x9378) = 1;
+  sourceIsNotSampled = (**(code **)(*operandVReg + 0x80))(operandVReg);
+  if (sourceIsNotSampled == 0) {
+    *(undefined4 *)(texUnit * 4 + this[0x17] + 0x9378) = 1;
   }
   if (*(int *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0xc) != -1) {
     *(char *)(this[0x18] * 0x48 + this[0x16] + 0x1a) =
          (char)*(int *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0xc);
   }
   texFlags = 0xc;
-  iVar2 = *(int *)(iVar2 * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
-  if (((iVar2 != 2) && (texFlags = 8, iVar2 != 3)) && (texFlags = 0, iVar2 == 1)) {
+  texTargetType = *(int *)(texUnit * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
+  if (((texTargetType != 2) && (texFlags = 8, texTargetType != 3)) && (texFlags = 0, texTargetType == 1)) {
     texFlags = 0xe;
   }
   if (irOpcode != 0x77) {
@@ -62,8 +66,8 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
     *(undefined1 *)(this[0x18] * 0x48 + this[0x16] + 0x1f) = 0;
   }
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
-  iVar2 = (**(code **)(*operandVReg + 0x80))(operandVReg);
-  if (iVar2 != 0) {
+  isSampledOperand = (**(code **)(*operandVReg + 0x80))(operandVReg);
+  if (isSampledOperand != 0) {
                     
                     
     (**(code **)(*this + 0x154))(this,1,inst,compiler);
@@ -194,33 +198,35 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
   int writeAlpha;
   int inst;
 {
+  int recordIndex2;
+  int recordIndex;
   int operandRecord;
   int destRegister;
-  int iVar1;
+  int maxRegister;
   undefined1 writeMask;
-  int iVar3;
-  int iVar4;
+  int currentMaxRegister;
+  int recordTable;
   undefined1 outputIndex;
   int destinationClass;
   
   destinationClass = *(int *)(inst + 0x98);
   destRegister = *(int *)(inst + 0x94);
   if (destinationClass == 9) {
-    iVar1 = destRegister + 1;
-    iVar3 = *(int *)(*(int *)(this + 0x5c) + 0x9374);
-    if (iVar1 <= iVar3) {
-      iVar1 = iVar3;
+    maxRegister = destRegister + 1;
+    currentMaxRegister = *(int *)(*(int *)(this + 0x5c) + 0x9374);
+    if (maxRegister <= currentMaxRegister) {
+      maxRegister = currentMaxRegister;
     }
-    *(int *)(*(int *)(this + 0x5c) + 0x9374) = iVar1;
+    *(int *)(*(int *)(this + 0x5c) + 0x9374) = maxRegister;
   }
   outputIndex = (undefined1)destRegister;
   if ((writeRgb != 0) && (destinationClass != 8)) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x16) = outputIndex;
-    iVar3 = *(int *)(this + 0x60);
-    iVar4 = *(int *)(this + 0x58);
+    recordIndex2 = *(int *)(this + 0x60);
+    recordTable = *(int *)(this + 0x58);
     operandRecord = IRInst__getOperandRecord(inst,0);
     writeMask = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
-    *(undefined1 *)(iVar3 * 0x48 + iVar4 + 0x15) = writeMask;
+    *(undefined1 *)(recordIndex2 * 0x48 + recordTable + 0x15) = writeMask;
   }
   if (writeAlpha != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x22) = outputIndex;
@@ -228,10 +234,10 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x23) = 1;
     }
     else {
-      iVar1 = *(int *)(this + 0x60);
-      iVar4 = *(int *)(this + 0x58);
+      recordIndex = *(int *)(this + 0x60);
+      recordTable = *(int *)(this + 0x58);
       destinationClass = IRInst__getOperandRecord(inst,0);
-      *(bool *)(iVar1 * 0x48 + iVar4 + 0x21) = *(char *)(destinationClass + 0x13) == '\0';
+      *(bool *)(recordIndex * 0x48 + recordTable + 0x21) = *(char *)(destinationClass + 0x13) == '\0';
     }
   }
   return;
@@ -1305,26 +1311,26 @@ int R300VMachineAssembler__transitionState(this, event)
 }
 
 /* R300VMachineAssembler__vslot2_exceedsLimits @ 0x19a618 (120 bytes) */
-int R300VMachineAssembler__vslot2_exceedsLimits(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int R300VMachineAssembler__vslot2_exceedsLimits(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+  int this;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
-  undefined4 uVar1;
+  undefined4 exceeds;
   
-  Compiler__logf(*(int *)(param_1 + 0xc),"next_sp = %d, max = %d\n",*(undefined4 *)(param_1 + 0x58),
-               *(undefined4 *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40),param_5,param_6,
-               param_7,param_8);
-  if ((*(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40) < *(int *)(param_1 + 0x58)) ||
-     (uVar1 = 0, 0x10 < *(int *)(param_1 + 0x5c))) {
-    uVar1 = 1;
+  Compiler__logf(*(int *)(this + 0xc),"next_sp = %d, max = %d\n",*(undefined4 *)(this + 0x58),
+               *(undefined4 *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40),unusedArg5,unusedArg6,
+               unusedArg7,unusedArg8);
+  if ((*(int *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40) < *(int *)(this + 0x58)) ||
+     (exceeds = 0, 0x10 < *(int *)(this + 0x5c))) {
+    exceeds = 1;
   }
-  return uVar1;
+  return exceeds;
 }
 
 /* R300VMachineAssembler__vslot49_advanceInstruction @ 0x19a690 (16 bytes) */
@@ -1623,7 +1629,7 @@ int R300VMachineAssembler__init(this, program, allocatorArg, compiler)
 {
   undefined4 allocation;
   int programInstructionLimit;
-  undefined4 uVar2;
+  undefined4 scratchBuffer;
   int maxInstructions;
   
   *(int *)(this + 0xc) = compiler;
@@ -1642,9 +1648,9 @@ int R300VMachineAssembler__init(this, program, allocatorArg, compiler)
   *(undefined4 *)(this + 0x54) = allocation;
   allocation = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),*(int *)(compiler + COMP_nextInstId) << 3);
   *(undefined4 *)(this + 8) = allocation;
-  uVar2 = FUN_000e14e4(compiler,0x28,allocatorArg);
-  *(undefined4 *)(this + 0x50) = uVar2;
-  _memset(uVar2,0,0x28);
+  scratchBuffer = Compiler__setQueriedTableEntry4d4(compiler,0x28,allocatorArg);
+  *(undefined4 *)(this + 0x50) = scratchBuffer;
+  _memset(scratchBuffer,0,0x28);
   **(int **)(this + 0x50) = maxInstructions;
   *(undefined4 *)(*(int *)(this + 0x50) + 4) = *(undefined4 *)(this + 0x44);
   *(undefined4 *)(*(int *)(this + 0x50) + 8) = *(undefined4 *)(this + 0x54);
@@ -1707,7 +1713,7 @@ int R300VMachineAssembler__vslot24_assembleWithTarget(this, node, block)
   
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   UNRECOVERED_JUMPTABLE = *(code **)(*this + 0x9c);
-  nodeHandle = FUN_000e7d5c(node);
+  nodeHandle = Block__getLoopFooterRegister(node);
                     
                     
   (*UNRECOVERED_JUMPTABLE)(this,nodeHandle,*(undefined4 *)(node + 0x134));
@@ -1919,56 +1925,62 @@ int R300VMachineAssembler__assembleBlock(this, block)
   int *this;
   int block;
 {
+  int *groupStart;
+  int endsGroup;
+  int isLoadConst;
+  int sourceFlag;
+  int hasSingleSourceMov;
+  int compiler;
   int *operandVReg;
   uint *flagsPtr;
   uint instFlags;
-  int iVar3;
+  int stateError;
   int *groupInst;
-  int *piVar5;
+  int *blockInst;
   int *cursorInst;
   int lookahead [9];
   
-  piVar5 = *(int **)(block + 8);
-  if (piVar5[2] == 0) {
+  blockInst = *(int **)(block + 8);
+  if (blockInst[2] == 0) {
     return;
   }
   do {
-    iVar3 = (**(code **)(*this + 8))(this);
-    if (iVar3 != 0) {
+    stateError = (**(code **)(*this + 8))(this);
+    if (stateError != 0) {
       Compiler__fail(this[3],5);
     }
-    iVar3 = this[3];
-    if (**(int **)(iVar3 + 0x6c4) == 0) {
-      groupInst = (int *)FUN_000e3b88(this[4],block,piVar5,lookahead);
+    compiler = this[3];
+    if (**(int **)(compiler + 0x6c4) == 0) {
+      groupInst = (int *)Block__materializePendingMovs(this[4],block,blockInst,lookahead);
       if ((groupInst == (int *)0x0) || (lookahead[0] == 0)) {
-        iVar3 = this[3];
+        compiler = this[3];
       }
       else {
-        iVar3 = this[3];
-        piVar5 = groupInst;
+        compiler = this[3];
+        blockInst = groupInst;
       }
     }
-    groupInst = piVar5;
-    if (**(int **)(iVar3 + 0x6c4) == 0) {
-      groupInst = (int *)((int (*)())R300VMachineAssembler__findFoldableMovePair)(this,block,piVar5,this + 0x1f);
-      iVar3 = this[3];
+    groupInst = blockInst;
+    if (**(int **)(compiler + 0x6c4) == 0) {
+      groupInst = (int *)((int (*)())R300VMachineAssembler__findFoldableMovePair)(this,block,blockInst,this + 0x1f);
+      compiler = this[3];
     }
-    iVar3 = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(iVar3 + 0x6c4));
-    if ((((iVar3 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
+    compiler = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(compiler + 0x6c4));
+    if ((((compiler == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
        ((instFlags & 0x1000) != 0)) {
       (**(code **)(*this + 0xbc))(this);
       cursorInst = groupInst;
-      piVar5 = groupInst;
+      groupStart = groupInst;
       do {
-        if (piVar5 == (int *)0x0) break;
+        if (groupStart == (int *)0x0) break;
         instFlags = cursorInst[5];
         if ((instFlags & 1) != 0) {
           if ((instFlags & 0x10000) == 0) {
-            iVar3 = (**(code **)(*cursorInst + 0x68))(cursorInst);
-            if (iVar3 != 0) {
+            hasSingleSourceMov = (**(code **)(*cursorInst + 0x68))(cursorInst);
+            if (hasSingleSourceMov != 0) {
               operandVReg = (int *)IRInst__getOperandSource(cursorInst,1);
-              iVar3 = (**(code **)(*operandVReg + 0x50))(operandVReg);
-              if ((iVar3 != 0) && (cursorInst[0x51] != 0)) {
+              sourceFlag = (**(code **)(*operandVReg + 0x50))(operandVReg);
+              if ((sourceFlag != 0) && (cursorInst[0x51] != 0)) {
                 return;
               }
             }
@@ -1976,8 +1988,8 @@ int R300VMachineAssembler__assembleBlock(this, block)
             (**(code **)(*cursorInst + 0x1c))(cursorInst,this,0,this[3]);
           }
           else {
-            iVar3 = (**(code **)(*cursorInst + 0x48))(cursorInst);
-            if (iVar3 != 0) {
+            isLoadConst = (**(code **)(*cursorInst + 0x48))(cursorInst);
+            if (isLoadConst != 0) {
               (**(code **)(*this + 0xc0))(this,cursorInst,this[3]);
             }
           }
@@ -1985,10 +1997,10 @@ int R300VMachineAssembler__assembleBlock(this, block)
           instFlags = cursorInst[5];
         }
         cursorInst = (int *)cursorInst[2];
-        piVar5 = (int *)(instFlags & 4);
+        groupStart = (int *)(instFlags & 4);
       } while (cursorInst != (int *)0x0);
-      iVar3 = (**(code **)(*groupInst + 0x24))(groupInst);
-      if (iVar3 == 0) {
+      endsGroup = (**(code **)(*groupInst + 0x24))(groupInst);
+      if (endsGroup == 0) {
         cursorInst = (int *)groupInst[2];
       }
       else {
@@ -2001,13 +2013,13 @@ int R300VMachineAssembler__assembleBlock(this, block)
       cursorInst = (int *)groupInst[2];
     }
     do {
-      piVar5 = cursorInst;
+      blockInst = cursorInst;
       flagsPtr = (uint *)(groupInst + 5);
-      if ((int *)piVar5[2] == (int *)0x0) {
+      if ((int *)blockInst[2] == (int *)0x0) {
         return;
       }
-      cursorInst = (int *)piVar5[2];
-      groupInst = piVar5;
+      cursorInst = (int *)blockInst[2];
+      groupInst = blockInst;
     } while ((*flagsPtr & 4) != 0);
   } while( true );
 }
@@ -2434,6 +2446,16 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
   int sourceNumber;
   int operandSlot;
 {
+  uint typeBits2;
+  uint swizzleField2;
+  uint swizzleField;
+  uint sourceWordOut;
+  uint swizzleXField;
+  uint negateBase;
+  uint registerIndex;
+  uint selectFieldW;
+  uint selectFieldX;
+  uint constOperandSwizzle;
   uint vsSourceSelectForConstantResult;
   uint offsetBits;
   uint src2Word;
@@ -2487,10 +2509,10 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
   undefined4 allocTable;
   undefined4 passThroughR8;
   int loopIndex2;
-  uint uVar19;
+  uint typeBits;
   uint *sourceWord;
   undefined8 swizzlePair;
-  uint local_88;
+  uint effectiveSwizzle;
   uint origSwizzle;
   int constNegated;
   uint laneSelect [4];
@@ -2513,43 +2535,43 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
     }
     else {
       savedSrcWord = *sourceWord;
-      uVar19 = *(uint *)(instructionWords + 4) & 7;
-      *sourceWord = uVar19 | savedSrcWord & 0xfffffff8;
+      typeBits = *(uint *)(instructionWords + 4) & 7;
+      *sourceWord = typeBits | savedSrcWord & 0xfffffff8;
       addrMode0Bit = *(uint *)(instructionWords + 4) & 0x10;
-      *sourceWord = addrMode0Bit | uVar19 | savedSrcWord & 0xffffffe8;
+      *sourceWord = addrMode0Bit | typeBits | savedSrcWord & 0xffffffe8;
       addrMode1Copy = *(uint *)(instructionWords + 4) & 0x80000000;
-      *sourceWord = addrMode1Copy | addrMode0Bit | uVar19 | savedSrcWord & 0x7fffffe8;
+      *sourceWord = addrMode1Copy | addrMode0Bit | typeBits | savedSrcWord & 0x7fffffe8;
       addrSelBits = *(uint *)(instructionWords + 4) & 0x60000000;
-      *sourceWord = addrSelBits | addrMode1Copy | addrMode0Bit | uVar19 | savedSrcWord & 0x1fffffe8;
+      *sourceWord = addrSelBits | addrMode1Copy | addrMode0Bit | typeBits | savedSrcWord & 0x1fffffe8;
       *sourceWord = *(uint *)(instructionWords + 4) & 0x1fe0 |
-                 addrSelBits | addrMode1Copy | addrMode0Bit | uVar19 | savedSrcWord & 0x1fffe008;
+                 addrSelBits | addrMode1Copy | addrMode0Bit | typeBits | savedSrcWord & 0x1fffe008;
     }
     sourceOperandRecord = IRInst__getOperandRecord(inst,sourceNumber);
-    uVar19 = *(uint *)(sourceOperandRecord + 0x10);
+    constOperandSwizzle = *(uint *)(sourceOperandRecord + 0x10);
     negateBase9 = *(uint *)(sourceNumber * 0x18 + inst + 0xa0) & 1;
     vsFlagBit2 = ((int (*)())opcodeInfoIsVsFlagBit2)(*(undefined4 *)(this + 0x88),inst);
     if (vsFlagBit2 != 0) {
       if (sourceNumber != 1) {
-        uVar19 = uVar19 >> 0x18;
+        constOperandSwizzle = constOperandSwizzle >> 0x18;
       }
-      constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,uVar19 & 0xff,&constNegated);
+      constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,constOperandSwizzle & 0xff,&constNegated);
       savedSrcWord = *sourceWord;
       constSelectBits = constSelectBits & 7;
-      uVar19 = constSelectBits << 0xd;
-      *sourceWord = uVar19 | savedSrcWord & 0xffff1fff;
+      selectFieldX = constSelectBits << 0xd;
+      *sourceWord = selectFieldX | savedSrcWord & 0xffff1fff;
       negateFlag = negateBase9 ^ 1;
       if (constNegated == 0) {
         negateFlag = negateBase9;
       }
-      *sourceWord = negateFlag << 0x19 | uVar19 | savedSrcWord & 0xfdff1fff;
+      *sourceWord = negateFlag << 0x19 | selectFieldX | savedSrcWord & 0xfdff1fff;
       *sourceWord = negateFlag << 0x1c |
                  constSelectBits << 0x16 |
                  negateFlag << 0x1b |
                  constSelectBits << 0x13 |
-                 negateFlag << 0x1a | constSelectBits << 0x10 | negateFlag << 0x19 | uVar19 | savedSrcWord & 0xe0001fff;
+                 negateFlag << 0x1a | constSelectBits << 0x10 | negateFlag << 0x19 | selectFieldX | savedSrcWord & 0xe0001fff;
       return;
     }
-    constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,uVar19 >> 0x18,&constNegated);
+    constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,constOperandSwizzle >> 0x18,&constNegated);
     savedSrcWord = *sourceWord;
     constSelectBits = (constSelectBits & 7) << 0xd;
     *sourceWord = constSelectBits | savedSrcWord & 0xffff1fff;
@@ -2558,7 +2580,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
       negateFlag = negateBase9;
     }
     *sourceWord = negateFlag << 0x19 | constSelectBits | savedSrcWord & 0xfdff1fff;
-    constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,uVar19 >> 0x10 & 0xff,&constNegated);
+    constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,constOperandSwizzle >> 0x10 & 0xff,&constNegated);
     savedSrcWord = *sourceWord;
     constSelectBits = (constSelectBits & 7) << 0x10;
     *sourceWord = constSelectBits | savedSrcWord & 0xfff8ffff;
@@ -2567,7 +2589,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
       negateFlag = negateBase9;
     }
     *sourceWord = negateFlag << 0x1a | constSelectBits | savedSrcWord & 0xfbf8ffff;
-    constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,uVar19 >> 8 & 0xff,&constNegated);
+    constSelectBits = ((int (*)())vsSourceSelectForConstant)(srcDefInst,constOperandSwizzle >> 8 & 0xff,&constNegated);
     savedSrcWord = *sourceWord;
     constSelectBits = (constSelectBits & 7) << 0x13;
     *sourceWord = constSelectBits | savedSrcWord & 0xffc7ffff;
@@ -2576,15 +2598,15 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
       negateFlag = negateBase9;
     }
     *sourceWord = negateFlag << 0x1b | constSelectBits | savedSrcWord & 0xf7c7ffff;
-    vsSourceSelectForConstantResult = ((int (*)())vsSourceSelectForConstant)(srcDefInst,uVar19 & 0xff,&constNegated);
+    vsSourceSelectForConstantResult = ((int (*)())vsSourceSelectForConstant)(srcDefInst,constOperandSwizzle & 0xff,&constNegated);
     savedSrcWord3 = *sourceWord;
-    uVar19 = (vsSourceSelectForConstantResult & 7) << 0x16;
-    *sourceWord = uVar19 | savedSrcWord3 & 0xfe3fffff;
+    selectFieldW = (vsSourceSelectForConstantResult & 7) << 0x16;
+    *sourceWord = selectFieldW | savedSrcWord3 & 0xfe3fffff;
     negateFlagInv = negateBase9 ^ 1;
     if (constNegated == 0) {
       negateFlagInv = negateBase9;
     }
-    *sourceWord = negateFlagInv << 0x1c | uVar19 | savedSrcWord3 & 0xee3fffff;
+    *sourceWord = negateFlagInv << 0x1c | selectFieldW | savedSrcWord3 & 0xee3fffff;
     return;
   }
   loopIndex = (**(code **)(*srcDefInst + 0x60))(srcDefInst);
@@ -2594,7 +2616,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
     allocTable = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
     regDefInst = srcDefInst;
 LAB_0019c490:
-    uVar19 = thunk_FUN_00134de8(allocTable,regDefInst);
+    registerIndex = thunk_FUN_00134de8(allocTable,regDefInst);
     *sourceWord = *(uint *)(&DAT_001b2c14 + srcRegClass * 4) & 7 | *sourceWord & 0xfffffff8;
     if (srcRegClass == 0x37) {
       *(undefined4 *)(this + 0x30) = *(undefined4 *)(this + 0x58);
@@ -2602,7 +2624,7 @@ LAB_0019c490:
     else if (srcRegClass == 1) {
       hwLimitsObj = *(int **)(*(int *)(this + 0xc) + 0x30c);
       regBias = (**(code **)(*hwLimitsObj + 0x138))(hwLimitsObj,0);
-      uVar19 = uVar19 - regBias;
+      registerIndex = registerIndex - regBias;
     }
   }
   else {
@@ -2615,7 +2637,7 @@ LAB_0019c490:
       goto LAB_0019c490;
     }
     if (sourceNumber < 2) {
-      uVar19 = 0;
+      registerIndex = 0;
       *sourceWord = *sourceWord & 0xfffffff8;
       *(undefined4 *)(this + 0x80) = 1;
     }
@@ -2624,7 +2646,7 @@ LAB_0019c490:
       srcTypeBits9 = *(uint *)(instructionWords + 4) & 7;
       *sourceWord = srcTypeBits9 | savedSrcWord & 0xfffffff8;
       addrMode0Copy = *(uint *)(instructionWords + 4) & 0x10;
-      uVar19 = *(uint *)(instructionWords + 4) >> 5 & 0xff;
+      registerIndex = *(uint *)(instructionWords + 4) >> 5 & 0xff;
       *sourceWord = addrMode0Copy | srcTypeBits9 | savedSrcWord & 0xffffffe8;
       addrMode1Bit = *(uint *)(instructionWords + 4) & 0x80000000;
       *sourceWord = addrMode1Bit | addrMode0Copy | srcTypeBits9 | savedSrcWord & 0x7fffffe8;
@@ -2644,8 +2666,8 @@ LAB_0019c490:
     }
     isTempClass = RegKind__flagBit7(isTempClass);
   }
-  if ((isTempClass != 0) && (*(uint *)(this + 0x4c) < uVar19)) {
-    *(uint *)(this + 0x4c) = uVar19;
+  if ((isTempClass != 0) && (*(uint *)(this + 0x4c) < registerIndex)) {
+    *(uint *)(this + 0x4c) = registerIndex;
   }
   if (loopIndex - 1U < 2) {
     loopIndex = (**(code **)(*srcDefInst + 0x60))(srcDefInst);
@@ -2655,7 +2677,7 @@ LAB_0019c490:
     else {
       swizzlePair = IRInst__getDefiningField128(srcDefInst,1);
     }
-    uVar19 = (uint)((ulonglong)swizzlePair >> 0x20);
+    registerIndex = (uint)((ulonglong)swizzlePair >> 0x20);
     *(undefined4 *)(this + 0x24) = 1;
     if (srcRegClass == 0x28) {
       *(undefined4 *)(this + 0x4c) = 0xff;
@@ -2710,33 +2732,33 @@ LAB_0019c70c:
     addrSelCleared = *sourceWord;
   }
 LAB_0019c710:
-  *sourceWord = (uVar19 & 0xff) << 5 | addrSelCleared & 0xffffe01f;
-  uVar19 = *(uint *)(sourceNumber * 0x18 + inst + 0xa0) & 1;
+  *sourceWord = (registerIndex & 0xff) << 5 | addrSelCleared & 0xffffe01f;
+  negateBase = *(uint *)(sourceNumber * 0x18 + inst + 0xa0) & 1;
   sourceOperandRecord = IRInst__getOperandRecord(inst,sourceNumber);
-  local_88 = *(uint *)(sourceOperandRecord + 0x10);
+  effectiveSwizzle = *(uint *)(sourceOperandRecord + 0x10);
   isMixResult = (**(code **)(*srcDefInst + 0x60))(srcDefInst);
   if (isMixResult == 0) {
-    laneSelect[0] = *(uint *)(&DAT_001b2be8 + (local_88 >> 0x18) * 4);
-    laneSelect[2] = *(uint *)(&DAT_001b2be8 + (local_88 >> 8 & 0xff) * 4);
-    laneSelect[3] = *(uint *)(&DAT_001b2be8 + (local_88 & 0xff) * 4);
-    laneSelect[1] = *(uint *)(&DAT_001b2be8 + (local_88 >> 0x10 & 0xff) * 4);
-    laneNegate[0] = uVar19;
-    laneNegate[1] = uVar19;
-    laneNegate[2] = uVar19;
-    laneNegate[3] = uVar19;
+    laneSelect[0] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle >> 0x18) * 4);
+    laneSelect[2] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle >> 8 & 0xff) * 4);
+    laneSelect[3] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle & 0xff) * 4);
+    laneSelect[1] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle >> 0x10 & 0xff) * 4);
+    laneNegate[0] = negateBase;
+    laneNegate[1] = negateBase;
+    laneNegate[2] = negateBase;
+    laneNegate[3] = negateBase;
   }
   else {
     defOperandRecord = IRInst__getOperandRecord(srcDefInst,1);
-    origSwizzle = local_88;
-    SelectWord__compose(&composedSwizzleOut,*(undefined4 *)(defOperandRecord + 0x10),local_88);
-    local_88 = composedSwizzleOut;
+    origSwizzle = effectiveSwizzle;
+    SelectWord__compose(&composedSwizzleOut,*(undefined4 *)(defOperandRecord + 0x10),effectiveSwizzle);
+    effectiveSwizzle = composedSwizzleOut;
     loopIndex2 = 0;
     laneByteOff = 0;
     laneSelectPtr = laneSelect;
     do {
       laneSelectByte = *(byte *)((int)&origSwizzle + loopIndex2);
       if (laneSelectByte != 4) {
-        if ((srcRegClass == 0x33) || (composedLaneByte = *(byte *)((int)&local_88 + loopIndex2), composedLaneByte == 4)) {
+        if ((srcRegClass == 0x33) || (composedLaneByte = *(byte *)((int)&effectiveSwizzle + loopIndex2), composedLaneByte == 4)) {
           if (0 < srcDefInst[0x21]) {
             loopIndex = 1;
             do {
@@ -2746,9 +2768,9 @@ LAB_0019c710:
                 laneSrcInst = IRInst__getOperandSource(srcDefInst,loopIndex);
                 laneSrcInst = ((int (*)())vsSourceSelectForConstant)(laneSrcInst,laneByte,&constNegated);
                 *(undefined4 *)(laneByteOff + (int)laneSelectPtr) = laneSrcInst;
-                laneNegateValue = uVar19;
+                laneNegateValue = negateBase;
                 if (constNegated != 0) {
-                  laneNegateValue = (uint)(uVar19 == 0);
+                  laneNegateValue = (uint)(negateBase == 0);
                 }
                 *(uint *)((int)laneNegate + laneByteOff) = laneNegateValue;
                 break;
@@ -2758,7 +2780,7 @@ LAB_0019c710:
           }
         }
         else {
-          *(uint *)((int)laneNegate + laneByteOff) = uVar19;
+          *(uint *)((int)laneNegate + laneByteOff) = negateBase;
           *(undefined4 *)(laneByteOff + (int)laneSelect) = *(undefined4 *)(&DAT_001b2be8 + (uint)composedLaneByte * 4)
           ;
         }
@@ -2771,66 +2793,66 @@ LAB_0019c710:
   vsFlagBit2 = ((int (*)())opcodeInfoIsVsFlagBit2)(*(undefined4 *)(this + 0x88),inst);
   if (vsFlagBit2 == 0) {
     savedSrcWord2 = *sourceWord;
-    uVar19 = (laneSelect[0] & 7) << 0xd;
-    *sourceWord = uVar19 | savedSrcWord2 & 0xffff1fff;
+    swizzleXField = (laneSelect[0] & 7) << 0xd;
+    *sourceWord = swizzleXField | savedSrcWord2 & 0xffff1fff;
     swizzleYField = (laneSelect[1] & 7) << 0x10;
-    *sourceWord = swizzleYField | uVar19 | savedSrcWord2 & 0xfff81fff;
+    *sourceWord = swizzleYField | swizzleXField | savedSrcWord2 & 0xfff81fff;
     swizzleZField = (laneSelect[2] & 7) << 0x13;
-    *sourceWord = swizzleZField | swizzleYField | uVar19 | savedSrcWord2 & 0xffc01fff;
+    *sourceWord = swizzleZField | swizzleYField | swizzleXField | savedSrcWord2 & 0xffc01fff;
     swizzleWField = (laneSelect[3] & 7) << 0x16;
-    *sourceWord = swizzleWField | swizzleZField | swizzleYField | uVar19 | savedSrcWord2 & 0xfe001fff;
+    *sourceWord = swizzleWField | swizzleZField | swizzleYField | swizzleXField | savedSrcWord2 & 0xfe001fff;
     negXField = (laneNegate[0] & 1) << 0x19;
-    *sourceWord = negXField | swizzleWField | swizzleZField | swizzleYField | uVar19 | savedSrcWord2 & 0xfc001fff;
+    *sourceWord = negXField | swizzleWField | swizzleZField | swizzleYField | swizzleXField | savedSrcWord2 & 0xfc001fff;
     negYField = (laneNegate[1] & 1) << 0x1a;
-    *sourceWord = negYField | negXField | swizzleWField | swizzleZField | swizzleYField | uVar19 | savedSrcWord2 & 0xf8001fff;
+    *sourceWord = negYField | negXField | swizzleWField | swizzleZField | swizzleYField | swizzleXField | savedSrcWord2 & 0xf8001fff;
     negZField = (laneNegate[2] & 1) << 0x1b;
-    *sourceWord = negZField | negYField | negXField | swizzleWField | swizzleZField | swizzleYField | uVar19 | savedSrcWord2 & 0xf0001fff;
-    uVar19 = (laneNegate[3] & 1) << 0x1c |
-             negZField | negYField | negXField | swizzleWField | swizzleZField | swizzleYField | uVar19 | savedSrcWord2 & 0xe0001fff;
-    *sourceWord = uVar19;
+    *sourceWord = negZField | negYField | negXField | swizzleWField | swizzleZField | swizzleYField | swizzleXField | savedSrcWord2 & 0xf0001fff;
+    sourceWordOut = (laneNegate[3] & 1) << 0x1c |
+             negZField | negYField | negXField | swizzleWField | swizzleZField | swizzleYField | swizzleXField | savedSrcWord2 & 0xe0001fff;
+    *sourceWord = sourceWordOut;
   }
   else {
     if (sourceNumber == 1) {
       savedSrcWord9 = *sourceWord;
-      uVar19 = (laneSelect[3] & 7) << 0xd;
-      *sourceWord = uVar19 | savedSrcWord9 & 0xffff1fff;
-      uVar19 = (laneNegate[3] & 1) << 0x19 | uVar19 | savedSrcWord9 & 0xfdff1fff;
-      *sourceWord = uVar19;
+      swizzleField = (laneSelect[3] & 7) << 0xd;
+      *sourceWord = swizzleField | savedSrcWord9 & 0xffff1fff;
+      sourceWordOut = (laneNegate[3] & 1) << 0x19 | swizzleField | savedSrcWord9 & 0xfdff1fff;
+      *sourceWord = sourceWordOut;
     }
     else if (sourceNumber == 2) {
       savedSrcWord9 = *sourceWord;
-      uVar19 = (laneSelect[0] & 7) << 0xd;
-      *sourceWord = uVar19 | savedSrcWord9 & 0xffff1fff;
-      uVar19 = (laneNegate[0] & 1) << 0x19 | uVar19 | savedSrcWord9 & 0xfdff1fff;
-      *sourceWord = uVar19;
+      swizzleField2 = (laneSelect[0] & 7) << 0xd;
+      *sourceWord = swizzleField2 | savedSrcWord9 & 0xffff1fff;
+      sourceWordOut = (laneNegate[0] & 1) << 0x19 | swizzleField2 | savedSrcWord9 & 0xfdff1fff;
+      *sourceWord = sourceWordOut;
     }
     else {
-      uVar19 = *sourceWord;
+      sourceWordOut = *sourceWord;
     }
-    uVar19 = (uVar19 & 0x2000000) << 3 |
-             (uVar19 & 0x2000000) << 2 |
-             (uVar19 & 0x2000000) << 1 |
-             (uVar19 & 0xe000) << 9 |
-             (uVar19 & 0xe000) << 6 | (uVar19 & 0xe000) << 3 | uVar19 & 0xe200ffff;
-    *sourceWord = uVar19;
+    sourceWordOut = (sourceWordOut & 0x2000000) << 3 |
+             (sourceWordOut & 0x2000000) << 2 |
+             (sourceWordOut & 0x2000000) << 1 |
+             (sourceWordOut & 0xe000) << 9 |
+             (sourceWordOut & 0xe000) << 6 | (sourceWordOut & 0xe000) << 3 | sourceWordOut & 0xe200ffff;
+    *sourceWord = sourceWordOut;
   }
-  if ((*(int *)(this + 0x84) != 0) && ((uVar19 & 0x80000010) == 0)) {
+  if ((*(int *)(this + 0x84) != 0) && ((sourceWordOut & 0x80000010) == 0)) {
     src2Word = *(uint *)(instructionWords + 0xc);
-    *(uint *)(instructionWords + 0xc) = uVar19 & 3 | src2Word & 0xfffffffc;
-    *(uint *)(instructionWords + 0xc) = *sourceWord & 0x1fe0 | uVar19 & 3 | src2Word & 0xffffe01c;
+    *(uint *)(instructionWords + 0xc) = sourceWordOut & 3 | src2Word & 0xfffffffc;
+    *(uint *)(instructionWords + 0xc) = *sourceWord & 0x1fe0 | sourceWordOut & 3 | src2Word & 0xffffe01c;
   }
   if ((*(int *)(this + 0x80) != 0) && (sourceNumber == 2)) {
     oldWord4 = *(uint *)(instructionWords + 4);
-    uVar19 = *sourceWord & 7;
-    *(uint *)(instructionWords + 4) = uVar19 | oldWord4 & 0xfffffff8;
+    typeBits2 = *sourceWord & 7;
+    *(uint *)(instructionWords + 4) = typeBits2 | oldWord4 & 0xfffffff8;
     offsetBits = *sourceWord & 0x1fe0;
-    *(uint *)(instructionWords + 4) = offsetBits | uVar19 | oldWord4 & 0xffffe018;
+    *(uint *)(instructionWords + 4) = offsetBits | typeBits2 | oldWord4 & 0xffffe018;
     addrMode0Copy = *sourceWord & 0x10;
-    *(uint *)(instructionWords + 4) = addrMode0Copy | offsetBits | uVar19 | oldWord4 & 0xffffe008;
+    *(uint *)(instructionWords + 4) = addrMode0Copy | offsetBits | typeBits2 | oldWord4 & 0xffffe008;
     savedSrcWord = *sourceWord;
-    *(uint *)(instructionWords + 4) = savedSrcWord & 0x80000000 | addrMode0Copy | offsetBits | uVar19 | oldWord4 & 0x7fffe008;
+    *(uint *)(instructionWords + 4) = savedSrcWord & 0x80000000 | addrMode0Copy | offsetBits | typeBits2 | oldWord4 & 0x7fffe008;
     *(uint *)(instructionWords + 4) =
-         *sourceWord & 0x60000000 | savedSrcWord & 0x80000000 | addrMode0Copy | offsetBits | uVar19 | oldWord4 & 0x1fffe008;
+         *sourceWord & 0x60000000 | savedSrcWord & 0x80000000 | addrMode0Copy | offsetBits | typeBits2 | oldWord4 & 0x1fffe008;
   }
   return;
 }

@@ -1,0 +1,39 @@
+local	ilRewriteForTextureState	local_c1ec	operandTokenD	INFERRED	operand token of the second operand pair (opcode 0x5e write sizing pass)
+local	ilRewriteForTextureState	local_c1e0	operandExtD	INFERRED	extension word of operandTokenD
+local	ilRewriteForTextureState	local_c1f0	operandTokenA	INFERRED	first operand token of an opcode 0x5d/0x5e instruction
+local	ilRewriteForTextureState	local_c1e4	operandExtA	INFERRED	extension word of operandTokenA
+local	ilRewriteForTextureState	local_c1d8	operandTokenB	INFERRED	second operand token (ext word in opcode 0x5d)
+local	ilRewriteForTextureState	local_c1cc	operandExtB	INFERRED	extension word of operandTokenB (token in opcode 0x5d)
+local	ilRewriteForTextureState	local_c1d4	operandTokenC	INFERRED	third operand token of an opcode 0x5e instruction
+local	ilRewriteForTextureState	local_c1c8	operandExtC	INFERRED	extension word of operandTokenC
+local	ilRewriteForTextureState	local_c1c0	remapTokenIn	INFERRED	operand token passed to ilRemapSourceOperandRegister / ilMarkOperandRegisterUsed
+local	ilRewriteForTextureState	auStack_c1b4	remapExtIn	INFERRED	extension block passed with remapTokenIn
+local	ilRewriteForTextureState	local_c1a8	constWord0	INFERRED	first word of the defined constant (opcode 0x1c)
+local	ilRewriteForTextureState	local_c1a4	constWord1	INFERRED	second word of the defined constant
+local	ilRewriteForTextureState	local_c1a0	constWord2	INFERRED	third word of the defined constant
+local	ilRewriteForTextureState	local_c19c	constWord3	INFERRED	fourth word of the defined constant
+local	ilRewriteForTextureState	local_c040	usesOutputKind16	INFERRED	set when an output of kind 0x16 is written (stream operand kind 0x160000)
+local	ilRewriteForTextureState	local_c02c	outputKind16Reg	INFERRED	register index of the kind 0x16 output (0x11 = none)
+local	ilRewriteForTextureState	local_c034	outputKind16OffsetA	INFERRED	offset added to param_2[0x7c7] for compileRecord[0x2e]
+local	ilRewriteForTextureState	local_c030	outputKind16OffsetB	INFERRED	offset added to param_2[0x7c7] for compileRecord[0x2f]
+local	ilRewriteForTextureState	local_c028	usesOutputKind10	INFERRED	set when an output of kind 0x10 is written (stream operand kind 0x100000)
+local	ilRewriteForTextureState	local_c024	outputKind10Reg	INFERRED	register index of the kind 0x10 output
+local	ilRewriteForTextureState	local_c020	featureReg	INFERRED	register of the feature output (compileRecord[0x45] != 0)
+local	ilRewriteForTextureState	local_c084	outputKind11Mask	INFERRED	bit mask of the colour output registers (kind 0x11) written
+local	ilRewriteForTextureState	local_9d90	featureSelector	INFERRED	compileRecord[0x45]: 2-bit feature selector (0 none, 1..3 sizes)
+local	ilRewriteForTextureState	local_9d88	featureOffsetA	INFERRED	offset added to param_2[0x7c7] for compileRecord[0x38]
+local	ilRewriteForTextureState	local_9d84	featureOffsetB	INFERRED	offset added to param_2[0x7c7] for compileRecord[0x39]
+local	ilRewriteForTextureState	local_9e60	usesToken37	INFERRED	set by opcode 0x37 (store to param_2+0x1f00 flag)
+local	ilRewriteForTextureState	local_bf14	projectedInputMask	INFERRED	mask of input units whose source kind is 2 or whose target type is 2
+local	ilRewriteForTextureState	local_9ebc	isFragmentProgram	INFERRED	compileRecord byte +0x118 is set: fragment program
+local	ilRewriteForTextureState	local_9eb8	fragmentExtra	INFERRED	compileRecord[0x2b] for fragment programs
+local	ilRewriteForTextureState	local_9eb4	activeUnitIndex	INFERRED	ctx+0x276c active unit (0 without a context)
+local	ilRewriteForTextureState	local_9dd4	unitTargetTypes	INFERRED	per-unit texture target type byte (0x30 of the bound texture) for 16 units
+local	ilRewriteForTextureState	local_9e9c	perOutputFlags	INFERRED	per-output flags that add 0xc / 0x24 words to the output size
+local	ilRewriteForTextureState	local_9cc8	declRecordCount	INFERRED	number of 0x24-byte declaration records (never populated here, set to 0)
+local	ilRewriteForTextureState	local_9cbc	declRecordsPtr	INFERRED	0x900-byte array of declaration records
+local	ilRewriteForTextureState	local_9c18	declListCount	INFERRED	number of 12-byte declaration list entries (set to 0)
+local	ilRewriteForTextureState	local_9c14	declList	INFERRED	declaration list entries (kind byte first)
+local	ilRewriteForTextureState	local_9ec4	resultCode	INFERRED	error code returned by the pass
+local	ilRewriteForTextureState	local_9d6c	textureInstCount	INFERRED	number of sample instructions seen (opcodes 0x5d / 0x5e)
+local	ilRewriteForTextureState	local_c08c	ilUsageState	INFERRED	base of the 0x2400-byte IL register usage state passed to the helpers

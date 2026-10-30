@@ -1,0 +1,12 @@
+func	FUN_001897fc	Inst__sourceIsConstantRegisterNotKind3	INFERRED	source register class (+0x98) is 0x33 (constant register) and its kind +300 is not 3
+local	FUN_001897fc	bVar2	result	INFERRED	return value
+func	FUN_00193e74	Arena__allocZeroed	INFERRED	Arena__alloc(count * size) followed by memset 0 (calloc)
+local	FUN_00193e74	param_1	arena	INFERRED	arena
+local	FUN_00193e74	param_2	count	INFERRED	element count
+local	FUN_00193e74	param_3	elementSize	INFERRED	element size in bytes
+func	FUN_00179bbc	ValueKey__allOperandLanesEqual	INFERRED	chains ValueKey__operandLanesEqual over consecutive operands (2..N) for one lane
+local	FUN_00179bbc	param_2	lane	INFERRED	lane / source index
+func	FUN_00177548	ValueKey__flagZeroSelectLanes	INFERRED	flags (inst +0x9c+lane) every lane whose operand-0 select byte is 0 and appends the extra source when flag bit 9 is clear
+local	FUN_00177548	bVar1	lastLane	INFERRED	lane == 3
+func	FUN_001789f0	ValueKey__sourcesHaveNoModifiers	INFERRED	for the opcode set 0x12.. (mask 0x800000a7) true only when no source has negate or abs modifier bits
+local	FUN_001789f0	uVar2	opcodeOffset	INFERRED	opcode minus 0x12, tested against the opcode bit mask

@@ -1,0 +1,14 @@
+use	FUN_000cd1c4	iVar1	setjmpResult	INFERRED	_setjmp result: 0 on the first pass, non-zero after a compiler error longjmp	^\s*iVar1\ =\ _setjmp\(\*\(int\ \*\*\)\(iStack00000018\ \+\ 4\)\);$	+2
+use	FUN_000cd1c4	iVar1	irModule	INFERRED	module/IR object built by FUN_00193b3c from the two source handles; freed after compilation	^\s*iVar1\ =\ FUN_00193b3c\(uStack00000020,uStack00000024,iStack00000018\);$	+1
+use	FUN_000cd1c4	iVar1	irModule	INFERRED	module/IR object built by FUN_00193b3c from the two source handles; freed after compilation	^\s*FUN_000e2094\(iStack00000018,iVar1\);$	+4
+local	FUN_000cd1c4	iVar2	retryRequested	INFERRED	non-zero when FUN_000e161c asks for the compile to be redone
+local	FUN_000cd1c4	iStack00000018	compiler	INFERRED	the compiler object at scHandle+8
+local	FUN_000cd1c4	iStack0000001c	outputProgram	INFERRED	copy of param_4: output program record (+0xf8/+0xfc set, stored at compiler+0x524)
+local	FUN_000cd1c4	uStack00000020	sourceHandle	INFERRED	param_2+0x4c, first source handle for FUN_00193b3c
+local	FUN_000cd1c4	uStack00000024	targetHandle	INFERRED	param_3+0x4c, second source handle for FUN_00193b3c
+local	FUN_000cd1c4	uStack00000028	optionsWord	INFERRED	param_2+0x54 options passed to FUN_000e0cd0
+local	FUN_000cd1c4	param_1	scHandle	INFERRED	shader compiler handle (compiler at +8, jump state, stage inputs at +0x2c..+0x3c)
+local	FUN_000cd1c4	param_2	vertexShader	INFERRED	first shader object (stored at scHandle+0x2c and +0x30)
+local	FUN_000cd1c4	param_3	fragmentShader	INFERRED	second shader object (stored at scHandle+0x34)
+local	FUN_000cd1c4	param_4	programOutput	INFERRED	output program record (stored at scHandle+0x3c)
+func	FUN_000cd1c4	scCompile	INFERRED	compiles a shader pair with the compiler object at scHandle+8: stores the inputs, then loops (setjmp / Compiler__resetState / FUN_00193b3c / Compiler__compileStages) until the error code needs no retry; returns 3 for a null handle, 2 without a compiler, else the compiler error code

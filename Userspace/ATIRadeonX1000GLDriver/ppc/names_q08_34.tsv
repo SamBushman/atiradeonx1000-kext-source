@@ -1,0 +1,33 @@
+local	R300MachineAssembler__placeInstructionConstants	local_28	readMask	INFERRED	SelectWord__readMask out: per-lane read byte mask (low byte = lanes of the first constant, upper bytes = second)
+local	evaluateConstantComparison	iVar2	gotConstant	INFERRED	IRInst__getUniformSourceConstant found a constant for the source
+local	evaluateConstantComparison	bVar3	comparisonResult	INFERRED	result of the comparison selected by inst +300
+local	evaluateConstantComparison	local_48	src1Kind	INFERRED	constant record of source 1 filled by IRInst__getUniformSourceConstant: kind word (2 = float); frame-adjacent to src1Value
+local	evaluateConstantComparison	local_44	src1Value	INFERRED	constant record of source 1: float value
+local	evaluateConstantComparison	local_30	src2Kind	INFERRED	constant record of source 2: kind word
+local	evaluateConstantComparison	local_2c	src2Value	INFERRED	constant record of source 2: float value
+use	R300MachineAssembler__placeInstructionConstants	iVar2	opcode	INFERRED	opcode of the instruction (inst[0x22] +8): 0x9e..0xa1 take the two-lane constant path	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\[0x22\]\ \+\ 8\);$	+2
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018d388\(param_3,uVar4,0\);$	+2
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018d388\(param_3,uVar4,1\);$	+2
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018c7f4\(param_3,a0,1\);$	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018c7f4\(param_3,a0,0\);$	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018c980\(param_3,a0,a0\);$	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$@4	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018d388\(param_3,uVar4,0\);$@2	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018cdd8\(param_3,uVar4,uVar7,0\);$	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$@5	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018d388\(param_3,uVar4,1\);$@2	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	placed	INFERRED	result of the constant placement helper (0 = could not place, whole function returns 0)	^\s*iVar2\ =\ FUN_0018cdd8\(param_3,uVar4,uVar7,1\);$	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	operandCount	INFERRED	instruction source count from vtable +0x14 (for-loop bound)	^\s*for\ \(;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\),\ iVar8\ <=\ iVar2;\ iVar8\ =\ iVar8\ \+\ 1\)\ \{$	+1
+use	R300MachineAssembler__placeInstructionConstants	iVar2	isConstantSource	INFERRED	vtable +0x5c predicate on the source: constant register	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0\);$	+2
+use	R300MachineAssembler__placeInstructionConstants	iVar2	sourceOperandCount	INFERRED	source count of the source instruction (1 = single-source form)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\);$	+2
+use	R300MachineAssembler__placeInstructionConstants	iVar2	sourceOperandCount2	INFERRED	source count of the source instruction (1 = single-source form)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\);$@2	+2
+local	R300MachineAssembler__vslot4_finishProgram	param_1	this	INFERRED	R300 machine assembler: [3] compiler, [0x17] output block, [0x18] / [0x1d] / [0x1e] instruction counters
+local	R300MachineAssembler__vslot4_finishProgram	uVar1	temporaryCount	INFERRED	count stored at output+0x9364 (program +0x7c plus 1)
+local	R300MachineAssembler__vslot4_finishProgram	uVar3	registerCount	INFERRED	max(program +0x80 + 1, temporaryCount)
+local	R300MachineAssembler__vslot4_finishProgram	iVar4	lastIndex	INFERRED	FUN_0013061c result minus 1 (0 when none), passed to vtable +0x144
+use	R300MachineAssembler__vslot4_finishProgram	iVar2	programRegisterLimit	INFERRED	program +0x80 value	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\[3\]\ \+\ 0x6c4\)\ \+\ 0x80\);$	+1
+use	R300MachineAssembler__vslot4_finishProgram	iVar2	programRegisterLimit	INFERRED	program +0x80 value	^\s*uVar3\ =\ iVar2\ \+\ 1;$	+1
+use	R300MachineAssembler__vslot4_finishProgram	iVar2	count	INFERRED	FUN_0013061c(program,0) result	^\s*iVar2\ =\ FUN_0013061c\(\*\(undefined4\ \*\)\(param_1\[3\]\ \+\ 0x6c4\),0\);$	+3
+local	FUN_0017cd18	param_1	ctx	INFERRED	pass context (+0xb0 instruction, +0x238 compiler)
+local	FUN_0017cd18	bVar1	notLastOperand	INFERRED	operand index != 2 loop continue flag
+local	FUN_0017cd18	uVar3	zeroValueNumber	INFERRED	value number of constant 0 (valueNumberForExpr(0)+4)

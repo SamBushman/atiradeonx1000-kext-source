@@ -19,3 +19,6 @@ local	FUN_000ab940	param_2	srcValue	INFERRED	value stored in the first output wo
 local	FUN_000ab940	param_4	outOperand	INFERRED	two-word output {value, type code 4 / 0x17 / 0x18}
 local	FUN_000ab940	param_5	outIsSpecial	INFERRED	output byte: 1 when srcKind == 3, else 0
 local	FUN_000ab940	param_6	altSrcValue	INFERRED	value stored instead of srcValue for the kind-3 / srcValue != 1 case
+local	psnRaReleaseUse	param_1	operand	INFERRED	{register number, component mask} pair (ushort[2]); register >= 0x8000 means already assigned; rewritten with the assigned register
+local	psnRaReleaseUse	param_2	tempTable	INFERRED	temp-register table: two banks of 8-byte entries (bank pointers at [0]/[1], first bank size ushort at +8); entry+4 holds the used component mask
+local	psnRaReleaseUse	param_3	freeList	INFERRED	free-register list of {register, free component mask} 4-byte entries (head pointer at [0], count at [1])

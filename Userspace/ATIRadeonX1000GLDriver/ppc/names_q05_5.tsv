@@ -2063,8 +2063,8 @@ local	BreakBlock__ctor_ebeb4	param_2	compiler	INFERRED	compiler passed to the ba
 local	ContinueBlock__ctor_ebf70	param_2	compiler	INFERRED	compiler passed to the base constructor BreakOrContinueBlock__ctor_eac60
 local	ContinueBlock__ctor_ebfb4	param_2	compiler	INFERRED	compiler passed to the base constructor BreakOrContinueBlock__ctor_eac60
 local	scDumpPixelProgram	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
-local	scStoreConstantComponent	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
-local	FUN_000da78c	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
+local	scStoreConstantComponent	fparam_1	laneValue	INFERRED	float value (first FPR argument) stored for the lane
+local	FUN_000da78c	fparam_1	unusedFprArg	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
 local	ildisPrintFixedPoint	fparam_1	staleFprArg1	INFERRED	Ghidra pseudo-register: fparam_1 (a register the function reads without having written it; no source-level role)
 local	ildisPrintFixedPoint	fparam_2	staleFprArg2	INFERRED	Ghidra pseudo-register: fparam_2 (a register the function reads without having written it; no source-level role)
 local	ildisPrintFixedPoint	fparam_3	staleFprArg3	INFERRED	Ghidra pseudo-register: fparam_3 (a register the function reads without having written it; no source-level role)
@@ -2860,3 +2860,22 @@ local	ildisPrintFixedPoint	uVar2	fractionBitIndex	INFERRED	shift amount of the b
 local	ildisPrintFixedPoint	local_28	intToDoubleHi	INFERRED	0x43300000: high word of the int-to-double conversion idiom (first use)
 local	ildisPrintFixedPoint	local_20	intToDoubleHi2	INFERRED	0x43300000: high word of the int-to-double conversion idiom (second use)
 local	ildisPrintFixedPoint	local_18	intToDoubleHi3	INFERRED	0x43300000: high word of the int-to-double conversion idiom (third use)
+local	ffpsEmitTexEnvLegacy	uVar15	argCount	INFERRED	number of source arguments emitted after the destination (0-3): selects how many of the three source tokens follow
+local	ffpsEmitTexEnvLegacy	puVar9	source0Swizzle	INFERRED	extended swizzle word emitted after colorSourceToken when its bit 0x400000 is set
+local	ffpsEmitTexEnvLegacy	uVar13	source1Token	INFERRED	IL source token of argument 1 (unit result or temp register, 0x440000 | unit)
+local	ffpsEmitTexEnvLegacy	puVar8	source1Swizzle	INFERRED	extended swizzle word emitted after source1Token when its bit 0x400000 is set
+local	ffpsEmitTexEnvLegacy	uVar10	source2Token	INFERRED	IL source token of argument 2
+local	ffpsEmitTexEnvLegacy	uVar6	source2Swizzle	INFERRED	extended swizzle word emitted after source2Token when its bit 0x400000 is set
+local	ffpsEmitTexEnvLegacy	uVar7	destModifierWord	INFERRED	word emitted right after the destination token (0 or 0x40: result modifier bits)
+local	ffpsEmitDeclarations	puVar8	countPtr	INFERRED	address of the IL builder's token count (ilBuilder + 4)
+local	ffpsEmitDeclarations	uVar4	textureUnitCount	INFERRED	byte at ctx+0x13b2: number of texture units
+local	ffpsEmitDeclarations	bVar1	hasUnitWithoutCompare	INFERRED	set when ctx flag 0x100000 is on and a texture unit's compare-mode byte (+0x71 of its state) is zero
+local	FUN_000e3b88	param_1	ctx	INFERRED	pass context: [0] compiler (+0x6c4 holds the hardware key table), [1] and [2] counters of created movs
+local	FUN_000e3b88	param_4	changedOut	INFERRED	set to 1 when the block was changed
+local	FUN_000e3b88	piVar13	scanInst	INFERRED	instruction walked forward from beforeInst
+local	FUN_000e3b88	piVar5	scanCursor	INFERRED	second instruction cursor for the forward scans
+local	FUN_000e3b88	piVar8	firstPending	INFERRED	first collected instruction (local_54[0])
+local	FUN_000e3b88	uVar4	instFlags	INFERRED	instruction flags word (+0x14): 1 live, 4 continue, 0x20/0x40 modifiers, 0x200 appended source
+local	FUN_000e3b88	local_58	writtenLanes	INFERRED	select word of the lanes written by the pending instructions
+local	FUN_000e3b88	local_54	pendingInsts	INFERRED	up to two collected instructions (followed in the frame by scratch words)
+local	FUN_000e3b88	local_44	mergedLanes	INFERRED	select word returned by SelectWord::markLanesWhereSecondIsOne

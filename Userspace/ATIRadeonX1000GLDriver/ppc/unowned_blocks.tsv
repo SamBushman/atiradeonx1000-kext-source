@@ -832,11 +832,11 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 409bc	409c0	padding	fragmentTranslateScalarMathBody	1	
 40a4c	40a50	padding	fragmentTranslateScalarMathBody	1	
 40a9c	40ac4	other	fragmentTranslateScalarMathBody	10	
-40cc8	40cd0	padding	FUN_00040ac4	2	
-40e48	40e50	padding	FUN_00040ac4	2	
-4122c	41230	padding	FUN_00040ac4	1	
-412bc	412c0	padding	FUN_00040ac4	1	
-4130c	41310	padding	FUN_00040ac4	1	
+40cc8	40cd0	padding	fragmentTranslateScalarMath2Src	2	
+40e48	40e50	padding	fragmentTranslateScalarMath2Src	2	
+4122c	41230	padding	fragmentTranslateScalarMath2Src	1	
+412bc	412c0	padding	fragmentTranslateScalarMath2Src	1	
+4130c	41310	padding	fragmentTranslateScalarMath2Src	1	
 41408	41410	padding	fragmentTranslateTrig	2	
 41498	414a0	padding	fragmentTranslateTrig	2	
 41508	41510	padding	fragmentTranslateTrig	2	
@@ -939,34 +939,34 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4a80c	4a810	padding	floatToFp24	1	
 4a824	4a830	padding	floatToFp24	3	
 4a858	4a860	padding	fp24ToFloat	2	
-4a894	4a8a0	padding	FUN_0004a860	3	
-4a8c8	4a8d0	padding	FUN_0004a860	2	
-4a8e4	4a8f0	padding	FUN_0004a860	3	
-4a938	4a940	padding	FUN_0004a8f0	2	
-4a954	4a960	padding	FUN_0004a8f0	3	
-4a9f4	4aa00	padding	FUN_0004a990	3	
-4aa68	4aa70	padding	FUN_0004aa00	2	
-4ab54	4ab60	padding	FUN_0004aa90	3	
-4b188	4b190	padding	FUN_0004ac90	2	
-4b1e4	4b1f0	padding	FUN_0004b190	3	
-4b234	4b240	padding	FUN_0004b190	3	
-4b2ec	4b2f0	padding	FUN_0004b190	1	
-4b308	4b310	padding	FUN_0004b190	2	
-4b44c	4b450	padding	FUN_0004b190	1	
-4b458	4b460	padding	FUN_0004b190	2	
-4b47c	4b480	padding	FUN_0004b190	1	
-4b514	4b520	padding	FUN_0004b480	3	
-4b53c	4b540	padding	FUN_0004b520	1	
-4b568	4b570	padding	FUN_0004b520	2	
-4b5ac	4b5b0	padding	FUN_0004b520	1	
-4b63c	4b640	padding	FUN_0004b5d0	1	
-4b668	4b670	padding	FUN_0004b5d0	2	
-4b704	4b710	padding	FUN_0004b5d0	3	
-4b7cc	4b7d0	padding	FUN_0004b710	1	
-4b84c	4b850	padding	FUN_0004b7d0	1	
-4b934	4b940	padding	FUN_0004b7d0	3	
-4b954	4b960	padding	FUN_0004b7d0	3	
-4b974	4b980	padding	FUN_0004b7d0	3	
+4a894	4a8a0	padding	gldReselectProgramStream	3	
+4a8c8	4a8d0	padding	gldReselectProgramStream	2	
+4a8e4	4a8f0	padding	gldReselectProgramStream	3	
+4a938	4a940	padding	gldRebindCurrentProgram	2	
+4a954	4a960	padding	gldRebindCurrentProgram	3	
+4a9f4	4aa00	padding	gldResetProgramEntry	3	
+4aa68	4aa70	padding	arbfpRebindIfOverLimit	2	
+4ab54	4ab60	padding	gldResetProgramEntryDefaults	3	
+4b188	4b190	padding	gldUploadProgramState	2	
+4b1e4	4b1f0	padding	gldSetProgramStreamMode	3	
+4b234	4b240	padding	gldSetProgramStreamMode	3	
+4b2ec	4b2f0	padding	gldSetProgramStreamMode	1	
+4b308	4b310	padding	gldSetProgramStreamMode	2	
+4b44c	4b450	padding	gldSetProgramStreamMode	1	
+4b458	4b460	padding	gldSetProgramStreamMode	2	
+4b47c	4b480	padding	gldSetProgramStreamMode	1	
+4b514	4b520	padding	gldClearBoundSlot	3	
+4b53c	4b540	padding	gldRemoveProgramFromList	1	
+4b568	4b570	padding	gldRemoveProgramFromList	2	
+4b5ac	4b5b0	padding	gldRemoveProgramFromList	1	
+4b63c	4b640	padding	gldReleaseProgramEntry	1	
+4b668	4b670	padding	gldReleaseProgramEntry	2	
+4b704	4b710	padding	gldReleaseProgramEntry	3	
+4b7cc	4b7d0	padding	gldFlushProgramCache	1	
+4b84c	4b850	padding	gldMarkAllProgramsDirty	1	
+4b934	4b940	padding	gldMarkAllProgramsDirty	3	
+4b954	4b960	padding	gldMarkAllProgramsDirty	3	
+4b974	4b980	padding	gldMarkAllProgramsDirty	3	
 4baec	4baf0	padding	gldGrowProgramHashTable	1	
 4bbec	4bbf0	padding	gldGrowProgramHashTable	1	
 4bd28	4bd30	padding	gldLookupProgramVariant	2	
@@ -975,12 +975,12 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4beec	4bef0	padding	gldLookupProgramVariant	1	
 4bf54	4bf60	padding	gldLookupProgramVariant	3	
 4c0f4	4c100	padding	gldLookupProgramVariant	3	
-4c128	4c130	padding	FUN_0004c100	2	
-4c1bc	4c1c0	padding	FUN_0004c100	1	
-4c25c	4c260	padding	FUN_0004c100	1	
-4c53c	4c540	padding	FUN_0004c260	1	
+4c128	4c130	padding	gldCopyProgramStreamState	2	
+4c1bc	4c1c0	padding	gldCopyProgramStreamState	1	
+4c25c	4c260	padding	gldCopyProgramStreamState	1	
+4c53c	4c540	padding	gldEmitProgramStatePacket	1	
 4c544	4c560	other	noop_4c540	7	
-4c718	4c720	padding	FUN_0004c560	2	
+4c718	4c720	padding	gldSetCurrentProgramObject	2	
 4c7a4	4c7b0	padding	gldValidateVertexStreams	3	
 4c7cc	4c7d0	padding	gldValidateVertexStreams	1	
 4c874	4c880	padding	gldValidateVertexStreams	3	
@@ -992,31 +992,31 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4cca4	4ccb0	padding	gldValidateVertexStreams	3	
 4cddc	4cde0	padding	gldValidateVertexStreams	1	
 4ce28	4ce30	padding	freeAndNullField	2	
-4cec8	4ced0	padding	FUN_0004ce30	2	
-4cf24	4cf44	table	FUN_0004ce30	8	
-4d2a8	4d2b0	padding	FUN_0004d100	2	
-4d518	4d520	padding	FUN_0004d100	2	
-4d564	4d570	padding	FUN_0004d100	3	
-4d5f8	4d600	padding	FUN_0004d100	2	
-4d614	4d620	padding	FUN_0004d100	3	
-4d738	4d740	padding	FUN_0004d620	2	
+4cec8	4ced0	padding	gldValidateHyperZ	2	
+4cf24	4cf44	table	gldValidateHyperZ	8	
+4d2a8	4d2b0	padding	gldValidateAlphaBlendEarlyZ	2	
+4d518	4d520	padding	gldValidateAlphaBlendEarlyZ	2	
+4d564	4d570	padding	gldValidateAlphaBlendEarlyZ	3	
+4d5f8	4d600	padding	gldValidateAlphaBlendEarlyZ	2	
+4d614	4d620	padding	gldValidateAlphaBlendEarlyZ	3	
+4d738	4d740	padding	gldMarkProgramsDirtyByFlag	2	
 4dab8	4dac0	padding	gldValidateViewportPolygonOffset	2	
 4db44	4db50	padding	gldValidateDepthTest	3	
 4dbdc	4dbe0	padding	gldValidateDepthTest	1	
-4dc2c	4dc30	padding	FUN_0004dbe0	1	
+4dc2c	4dc30	padding	gldValidateVertexOutputRouting	1	
 4dd0c	4dd10	padding	gldValidateTexEnvColor	1	
 4dd38	4dd40	padding	gldEmitScissorRegs	2	
 4ddb4	4ddc0	padding	gldEmitViewportAndGuardBand	3	
-4de28	4de30	padding	FUN_0004ddc0	2	
-4de58	4de60	padding	FUN_0004de30	2	
-4deec	4def0	padding	FUN_0004de30	1	
-4e2a8	4e2b0	padding	FUN_0004def0	2	
-4e4d4	4e4e0	padding	FUN_0004def0	3	
-4e968	4e970	padding	FUN_0004e880	2	
-4e984	4e990	padding	FUN_0004e880	3	
-4e9ec	4e9f0	padding	FUN_0004e990	1	
-4ea2c	4ea30	padding	FUN_0004e990	1	
-4ea68	4ea70	padding	FUN_0004e990	2	
+4de28	4de30	padding	gldEmitConstantFlushPacket	2	
+4de58	4de60	padding	gldSetUnitScaleConstants	2	
+4deec	4def0	padding	gldSetUnitScaleConstants	1	
+4e2a8	4e2b0	padding	gldValidateTextureUnits	2	
+4e4d4	4e4e0	padding	gldValidateTextureUnits	3	
+4e968	4e970	padding	gldEmitRegisterPairPacket	2	
+4e984	4e990	padding	gldEmitRegisterPairPacket	3	
+4e9ec	4e9f0	padding	gldDepthBiasScaledInt	1	
+4ea2c	4ea30	padding	gldDepthBiasScaledInt	1	
+4ea68	4ea70	padding	gldDepthBiasScaledInt	2	
 4ea9c	4eaa0	padding	gldValidatePolygonMode	1	
 4ead8	4eae0	padding	gldValidatePolygonMode	2	
 4eaec	4eaf0	padding	gldValidatePolygonMode	1	
@@ -1024,70 +1024,70 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4eb48	4eb50	padding	gldValidatePolygonMode	2	
 4eb68	4eb70	padding	gldValidatePolygonMode	2	
 4eb98	4eba0	padding	gldValidatePolygonMode	2	
-4ec24	4ec30	padding	FUN_0004eba0	3	
-4ec8c	4ec90	padding	FUN_0004eba0	1	
-4ed8c	4ed90	padding	FUN_0004eba0	1	
-4edf8	4ee00	padding	FUN_0004ed90	2	
-4ee38	4ee40	padding	FUN_0004ed90	2	
-4ef04	4ef10	padding	FUN_0004ed90	3	
-4ef64	4ef70	padding	FUN_0004ed90	3	
-4ef9c	4efa0	padding	FUN_0004ed90	1	
-4eff4	4f000	padding	FUN_0004ed90	3	
-4f04c	4f050	padding	FUN_0004ed90	1	
+4ec24	4ec30	padding	gldValidatePolygonOffset	3	
+4ec8c	4ec90	padding	gldValidatePolygonOffset	1	
+4ed8c	4ed90	padding	gldValidatePolygonOffset	1	
+4edf8	4ee00	padding	gldValidatePointSize	2	
+4ee38	4ee40	padding	gldValidatePointSize	2	
+4ef04	4ef10	padding	gldValidatePointSize	3	
+4ef64	4ef70	padding	gldValidatePointSize	3	
+4ef9c	4efa0	padding	gldValidatePointSize	1	
+4eff4	4f000	padding	gldValidatePointSize	3	
+4f04c	4f050	padding	gldValidatePointSize	1	
 4f0a4	4f0b0	padding	gldValidateCullFace	3	
 4f108	4f110	padding	gldValidateCullFace	2	
 4f13c	4f140	padding	gldValidateCullFace	1	
 4f158	4f160	padding	gldValidateCullFace	2	
-4f19c	4f1a0	padding	FUN_0004f160	1	
-4f1f8	4f200	padding	FUN_0004f160	2	
-4f258	4f260	padding	FUN_0004f160	2	
-4f2d4	4f2e0	padding	FUN_0004f160	3	
-4f49c	4f4a0	padding	FUN_0004f2e0	1	
-4f54c	4f550	padding	FUN_0004f2e0	1	
+4f19c	4f1a0	padding	gldFogColorChannelByte	1	
+4f1f8	4f200	padding	gldFogColorChannelByte	2	
+4f258	4f260	padding	gldFogColorChannelByte	2	
+4f2d4	4f2e0	padding	gldFogColorChannelByte	3	
+4f49c	4f4a0	padding	gldValidateFog	1	
+4f54c	4f550	padding	gldValidateFog	1	
 4f688	4f690	padding	gldValidateScissor	2	
 4f71c	4f720	padding	gldValidateScissor	1	
 4f97c	4f980	padding	gldInitStateDefaults	1	
 4f994	4f9a0	padding	gldInitStateDefaults	3	
 4f9b4	4f9c0	padding	gldInitStateDefaults	3	
-4fd1c	4fd20	padding	FUN_0004fc80	1	
+4fd1c	4fd20	padding	ffvpSetOutputRoute	1	
 4ff6c	4ff70	padding	extvsUpdateVertexAttributeConstants	1	
 4ffcc	4ffe8	table	gldValidateAlphaTest	7	
 4fff4	50000	padding	gldValidateAlphaTest	3	
 5010c	50110	padding	gldValidateAlphaTest	1	
 5013c	50140	padding	gldValidateAlphaTest	1	
-50274	50280	padding	FUN_00050140	3	
-502f4	50300	padding	FUN_00050140	3	
+50274	50280	padding	gldValidateColorMask	3	
+502f4	50300	padding	gldValidateColorMask	3	
 50eb8	50ec0	padding	gldEmitHardwareState	2	
-5100c	51010	padding	FUN_00050ef0	1	
+5100c	51010	padding	gldSetVertexPacketLimits	1	
 513e8	513f0	padding	gldValidateStencil	2	
 51418	51420	padding	gldValidateStencil	2	
 51f1c	51f20	padding	gldValidateBlend	1	
 51f78	51fb8	table	gldValidateBlend	16	
 52054	52060	padding	gldValidateBlend	3	
 52274	52280	padding	gldValidateViewport	3	
-52494	524a0	padding	FUN_00052280	3	
-52cbc	52cc0	padding	FUN_00052280	1	
-52d64	52d70	padding	FUN_00052cc0	3	
-52e04	52e10	padding	FUN_00052cc0	3	
-52e4c	52e60	millicode	FUN_00052cc0	5	
-52eac	52eb0	padding	FUN_00052e60	1	
-52ed4	52ee0	padding	FUN_00052e60	3	
-52ff4	53000	padding	FUN_00052f60	3	
-53034	53040	padding	FUN_00053000	3	
-53054	53060	padding	FUN_00053040	3	
+52494	524a0	padding	gldEmitDirtyStatePackets	3	
+52cbc	52cc0	padding	gldEmitDirtyStatePackets	1	
+52d64	52d70	padding	extvsSelectHandlerTables	3	
+52e04	52e10	padding	extvsSelectHandlerTables	3	
+52e4c	52e60	millicode	extvsSelectHandlerTables	5	
+52eac	52eb0	padding	extvsSetStreamAndValidate	1	
+52ed4	52ee0	padding	extvsSetStreamAndValidate	3	
+52ff4	53000	padding	extvsGetSymbolStorageKind	3	
+53034	53040	padding	extvsMarkStateDirty	3	
+53054	53060	padding	extvsSelectRegisterCode	3	
 53064	53070	padding	noop_53060	3	
 53094	530a0	padding	extvsConstantsDirty	3	
 530b8	530c0	padding	extvsClearConstantsDirty	2	
-53114	53120	padding	FUN_000530c0	3	
-5316c	53170	padding	FUN_000530c0	1	
-53188	53190	padding	FUN_000530c0	2	
-531a8	531b0	padding	FUN_00053190	2	
-531d8	531e0	padding	FUN_00053190	2	
-53214	53220	padding	FUN_00053190	3	
+53114	53120	padding	extvsGetSymbolStorageInfo	3	
+5316c	53170	padding	extvsGetSymbolStorageInfo	1	
+53188	53190	padding	extvsGetSymbolStorageInfo	2	
+531a8	531b0	padding	extvsEnabledInputMask	2	
+531d8	531e0	padding	extvsEnabledInputMask	2	
+53214	53220	padding	extvsEnabledInputMask	3	
 5333c	53340	padding	extvsGetOrCreateStateSymbol	1	
 53494	534a0	padding	glGenSymbolsEXT_impl	3	
 534bc	534c0	padding	glGenSymbolsEXT_impl	1	
-535c4	53610	other	FUN_000534c0	19	
+535c4	53610	other	extvsCreateVectorSymbolChain	19	
 53698	536a0	padding	extvsShaderOp1Explicit	2	
 537b4	537c0	padding	extvsShaderOp3Explicit	3	
 538d4	538e0	padding	glSwizzleEXT_impl	3	
@@ -1103,18 +1103,18 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 53efc	53f00	padding	glDeleteVertexShaderEXT_impl	1	
 53f7c	53f80	padding	glShaderOp1EXT_impl	1	
 53ffc	54000	padding	glShaderOp2EXT_impl	1	
-54194	541a0	padding	FUN_00054080	3	
+54194	541a0	padding	extvsEmitSwizzleInstruction	3	
 54264	54270	padding	glWriteMaskEXT_impl	3	
 543a4	543b0	padding	glInsertComponentEXT_impl	3	
 54454	54460	padding	glExtractComponentEXT_impl	3	
 54468	54470	padding	glGenSymbolsEXT_impl5	2	
-544f8	54500	padding	FUN_00054470	2	
-54588	54590	padding	FUN_00054470	2	
-545bc	545c0	padding	FUN_00054590	1	
-5463c	54640	padding	FUN_00054590	1	
-54654	54660	padding	FUN_00054590	3	
-54674	54680	padding	FUN_00054590	3	
-547ec	547f0	padding	FUN_000546d0	1	
+544f8	54500	padding	extvsGetConstantUploadInfo	2	
+54588	54590	padding	extvsGetConstantUploadInfo	2	
+545bc	545c0	padding	extvsCompactSymbolEntries	1	
+5463c	54640	padding	extvsCompactSymbolEntries	1	
+54654	54660	padding	extvsCompactSymbolEntries	3	
+54674	54680	padding	extvsCompactSymbolEntries	3	
+547ec	547f0	padding	extvsMakeShaderCurrent	1	
 54934	54940	padding	glSetLocalConstantEXT_impl	3	
 54978	54980	padding	extvsBindCurrentVertexParameter	2	
 54a0c	54a10	padding	extvsFreeAllShaders	1	
@@ -1124,9 +1124,9 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 54d94	54da0	padding	extvsAttachSharedState	3	
 54dc4	54dd0	padding	extvsSymbolListGetIndex	3	
 54f48	54f50	padding	extvsAppendSymbol	2	
-54f84	54f90	padding	FUN_00054f50	3	
-5506c	55070	padding	FUN_00054f50	1	
-550dc	550e0	padding	FUN_00054f50	1	
+54f84	54f90	padding	extvsResolveOperand	3	
+5506c	55070	padding	extvsResolveOperand	1	
+550dc	550e0	padding	extvsResolveOperand	1	
 550fc	55100	padding	extvsOperandDataType	1	
 55144	55150	padding	extvsOperandDataType	3	
 551d8	551e0	padding	extvsOperandDataType	2	
@@ -1269,7 +1269,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 62ae4	62af0	padding	extvsValidateProgramState	3	
 640e8	640f0	padding	extvsValidateProgramState	2	
 6412c	64190	table	gldCurrentAttributePacketHeader	25	
-64408	64410	padding	FUN_00064230	2	
+64408	64410	padding	extvsBuildStreamBlock	2	
 64a04	64a10	padding	extvsValidateProgramState	3	
 64c3c	64c40	padding	extvsUploadProgramConstants	1	
 64f18	64f20	padding	extvsUploadProgramConstants	2	
@@ -1281,11 +1281,11 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 6540c	65410	padding	ffvpSelectLitProgramVariant	1	
 65518	65520	padding	ffvpSelectLitProgramVariant	2	
 65604	65610	padding	ffvpSelectLitProgramVariant	3	
-656a8	656b0	padding	FUN_00065610	2	
+656a8	656b0	padding	ffvpInitBuilderOutputSlots	2	
 65964	65970	padding	ffvpSelectPassThroughVariant	3	
 659c8	659d0	padding	ffvpSelectPassThroughVariant	2	
 65c34	65c40	padding	vpFillConstantBank	3	
-65c74	65c80	padding	FUN_00065c40	3	
+65c74	65c80	padding	ffvpUploadVariantConstants	3	
 65c84	65c90	padding	noop_65c80	3	
 65dd8	65de0	padding	arbEmitIlHeader	2	
 65f54	65f60	padding	arbEmitIlDp4	3	
@@ -2191,11 +2191,11 @@ a0f84	a0f90	padding	noop_a0f80	3
 a1028	a1040	millicode	atifsInit	6	
 a1054	a1060	padding	FUN_000a1040	3	
 a108c	a1090	padding	arbProgramIsValid	1	
-a1158	a1160	padding	FUN_000a1090	2	
-a1188	a1190	padding	FUN_000a1160	2	
-a1198	a11a0	padding	FUN_000a1160	2	
-a11d8	a11e0	padding	FUN_000a11a0	2	
-a11e8	a11f0	padding	FUN_000a11a0	2	
+a1158	a1160	padding	gld_setUnitTargetBits	2	
+a1188	a1190	padding	gld_getShaderTexUnitMask	2	
+a1198	a11a0	padding	gld_getShaderTexUnitMask	2	
+a11d8	a11e0	padding	gld_getFragmentShaderKind	2	
+a11e8	a11f0	padding	gld_getFragmentShaderKind	2	
 a12dc	a12e0	padding	glGenFragmentShadersATI_impl	1	
 a12e8	a12f0	padding	glGenFragmentShadersATI_impl	2	
 a1334	a1340	padding	glBindFragmentShaderATI_impl	3	
@@ -2236,176 +2236,176 @@ a3154	a3160	padding	atifsAddColorOp	3
 a3484	a3490	padding	atifsAddAlphaOp	3	
 a350c	a3510	padding	atifsSetConstant	1	
 a3558	a3560	padding	atifsSetConstant	2	
-a3604	a3610	padding	FUN_000a3560	3	
-a3628	a3630	padding	FUN_000a3610	2	
-a368c	a3690	padding	FUN_000a3670	1	
-a36a4	a36b0	padding	FUN_000a3670	3	
-a371c	a3720	padding	FUN_000a36b0	1	
-a3738	a3740	padding	FUN_000a36b0	2	
-a388c	a3890	padding	FUN_000a3790	1	
-a3bd4	a3be0	padding	FUN_000a3a60	3	
-a43cc	a43d0	padding	FUN_000a3be0	1	
-a43ec	a43f0	padding	FUN_000a3be0	1	
-a4484	a4490	padding	FUN_000a43f0	3	
-a44f8	a4500	padding	FUN_000a4490	2	
-a46c4	a46d0	padding	FUN_000a4550	3	
-a4768	a4770	padding	FUN_000a4760	2	
-a48b8	a48c0	padding	FUN_000a4770	2	
-a4904	a4910	padding	FUN_000a4770	3	
-a497c	a4980	padding	FUN_000a4770	1	
-a4d54	a4d60	padding	FUN_000a4980	3	
-a5078	a5080	padding	FUN_000a4980	2	
-a5168	a5170	padding	FUN_000a4980	2	
-a543c	a5440	padding	FUN_000a4980	1	
-a5cfc	a5d00	padding	FUN_000a5c40	1	
-a5dc4	a5dd0	padding	FUN_000a5c40	3	
-a5f0c	a5f10	padding	FUN_000a5ec0	1	
-a5f98	a5fa0	padding	FUN_000a5ec0	2	
-a60d8	a60e0	padding	FUN_000a5ec0	2	
-a61b4	a61c0	padding	FUN_000a6140	3	
-a64cc	a64d0	padding	FUN_000a6140	1	
-a64f4	a6500	padding	FUN_000a64d0	3	
-a660c	a6610	padding	FUN_000a6500	1	
-a6618	a6620	padding	FUN_000a6500	2	
-a6738	a6740	padding	FUN_000a6500	2	
-a683c	a6840	padding	FUN_000a6500	1	
-a6854	a6860	padding	FUN_000a6500	3	
-a6adc	a6ae0	padding	FUN_000a6860	1	
-a6cac	a6cb0	padding	FUN_000a6860	1	
-a6d54	a6d60	padding	FUN_000a6cb0	3	
-a6d84	a6d90	padding	FUN_000a6cb0	3	
-a6dc4	a6dd0	padding	FUN_000a6cb0	3	
-a6e94	a6ea0	padding	FUN_000a6cb0	3	
-a6f78	a6f80	padding	FUN_000a6f70	2	
+a3604	a3610	padding	gld_quantizePointSizeInt	3	
+a3628	a3630	padding	gld_roundUpToPowerOfTwo	2	
+a368c	a3690	padding	gld_isPointAttenuationActive	1	
+a36a4	a36b0	padding	gld_isPointAttenuationActive	3	
+a371c	a3720	padding	gld_scalePointSizeToPixels	1	
+a3738	a3740	padding	gld_scalePointSizeToPixels	2	
+a388c	a3890	padding	gld_buildCoverageByteTable	1	
+a3bd4	a3be0	padding	gld_buildCoverageRampTable	3	
+a43cc	a43d0	padding	gld_setPrimitiveInputRegisters	1	
+a43ec	a43f0	padding	gld_setPrimitiveInputRegisters	1	
+a4484	a4490	padding	gld_freePointMaskCache	3	
+a44f8	a4500	padding	gld_invalidateCachedPointMasks	2	
+a46c4	a46d0	padding	gld_markBoundObjectsDirty	3	
+a4768	a4770	padding	gld_getActiveSampleIndex	2	
+a48b8	a48c0	padding	gld_computePointSizePixels	2	
+a4904	a4910	padding	gld_computePointSizePixels	3	
+a497c	a4980	padding	gld_computePointSizePixels	1	
+a4d54	a4d60	padding	gld_buildSmoothPointMask	3	
+a5078	a5080	padding	gld_buildSmoothPointMask	2	
+a5168	a5170	padding	gld_buildSmoothPointMask	2	
+a543c	a5440	padding	gld_buildSmoothPointMask	1	
+a5cfc	a5d00	padding	gld_emitClearColorPacket	1	
+a5dc4	a5dd0	padding	gld_emitClearColorPacket	3	
+a5f0c	a5f10	padding	gld_updateSampleCoverage	1	
+a5f98	a5fa0	padding	gld_updateSampleCoverage	2	
+a60d8	a60e0	padding	gld_updateSampleCoverage	2	
+a61b4	a61c0	padding	gld_resetRasterStateForInternalDraw	3	
+a64cc	a64d0	padding	gld_resetRasterStateForInternalDraw	1	
+a64f4	a6500	padding	gld_markFastClearFlag	3	
+a660c	a6610	padding	gld_emitClearFillPacket	1	
+a6618	a6620	padding	gld_emitClearFillPacket	2	
+a6738	a6740	padding	gld_emitClearFillPacket	2	
+a683c	a6840	padding	gld_emitClearFillPacket	1	
+a6854	a6860	padding	gld_emitClearFillPacket	3	
+a6adc	a6ae0	padding	gld_emitInternalViewportPacket	1	
+a6cac	a6cb0	padding	gld_emitInternalViewportPacket	1	
+a6d54	a6d60	padding	gld_clearStreamBuffers	3	
+a6d84	a6d90	padding	gld_clearStreamBuffers	3	
+a6dc4	a6dd0	padding	gld_clearStreamBuffers	3	
+a6e94	a6ea0	padding	gld_clearStreamBuffers	3	
+a6f78	a6f80	padding	gld_callocBytes	2	
 a6f84	a6f90	padding	noop_a6f80	3	
-a7014	a7020	padding	FUN_000a6f90	3	
-a7044	a7050	padding	FUN_000a6f90	3	
-a7964	a7970	padding	FUN_000a7050	3	
-a7b38	a7b40	padding	FUN_000a7a60	2	
-a7ba8	a7bb0	padding	FUN_000a7a60	2	
-a7d6c	a7d70	padding	FUN_000a7d10	1	
-a7dbc	a7dc0	padding	FUN_000a7d10	1	
-a7e38	a7e40	padding	FUN_000a7d10	2	
-a7e78	a7e80	padding	FUN_000a7d10	2	
-a7e98	a7ea0	padding	FUN_000a7e80	2	
+a7014	a7020	padding	gld_normalizeVec3	3	
+a7044	a7050	padding	gld_normalizeVec3	3	
+a7964	a7970	padding	gld_initContextDispatch	3	
+a7b38	a7b40	padding	gld_updateDrawBufferConfig	2	
+a7ba8	a7bb0	padding	gld_updateDrawBufferConfig	2	
+a7d6c	a7d70	padding	gld_buildActiveUnitList	1	
+a7dbc	a7dc0	padding	gld_buildActiveUnitList	1	
+a7e38	a7e40	padding	gld_buildActiveUnitList	2	
+a7e78	a7e80	padding	gld_buildActiveUnitList	2	
+a7e98	a7ea0	padding	gld_markDirty10	2	
 a7ed4	a7ee0	padding	noop_a7ed0	3	
-a82b4	a82c0	padding	FUN_000a7ee0	3	
-a8334	a8340	padding	FUN_000a8320	3	
-a83d8	a83e0	padding	FUN_000a8340	2	
-a8404	a8410	padding	FUN_000a8340	3	
-a8624	a8630	padding	FUN_000a8340	3	
-a89ec	a89f0	padding	FUN_000a8630	1	
-a89fc	a8a00	padding	FUN_000a8630	1	
-a8b24	a8b30	padding	FUN_000a8a00	3	
-a8bf4	a8c00	padding	FUN_000a8a00	3	
-a8d64	a8d70	padding	FUN_000a8c00	3	
-a8e18	a8e20	padding	FUN_000a8d70	2	
-a8e48	a8e50	padding	FUN_000a8e20	2	
-a8ed4	a8ee0	padding	FUN_000a8e20	3	
-a8f74	a8f80	padding	FUN_000a8e20	3	
-a8fbc	a8fc0	padding	FUN_000a8e20	1	
-a9038	a9040	padding	FUN_000a8e20	2	
-a906c	a9070	padding	FUN_000a8e20	1	
-a9634	a9640	padding	FUN_000a9070	3	
-a970c	a9710	padding	FUN_000a9640	1	
-a977c	a9780	padding	FUN_000a9640	1	
-a983c	a9840	padding	FUN_000a9640	1	
-a9938	a9940	padding	FUN_000a9640	2	
-a99a8	a99b0	padding	FUN_000a9640	2	
-a9a68	a9a70	padding	FUN_000a9640	2	
-a9c34	a9c40	padding	FUN_000a9ac0	3	
-a9e9c	a9ea0	padding	FUN_000a9ac0	1	
-aa8f4	aa900	padding	FUN_000a9ac0	3	
-aaef8	aaf00	padding	FUN_000a9ac0	2	
-aafd4	aafe0	padding	FUN_000a9ac0	3	
-ab254	ab260	padding	FUN_000a9ac0	3	
-ab6ac	ab6b0	padding	FUN_000a9ac0	1	
-ab714	ab720	padding	FUN_000a9ac0	3	
-ab8d8	ab8e0	padding	FUN_000a9ac0	2	
-ab8fc	ab900	padding	FUN_000a9ac0	1	
-ab92c	ab930	padding	FUN_000ab900	1	
-ab988	ab990	padding	FUN_000ab940	2	
-ab9a8	ab9b0	padding	FUN_000ab940	2	
-aba48	aba50	padding	FUN_000ab9b0	2	
-aba6c	aba70	padding	FUN_000ab9b0	1	
-aba8c	aba90	padding	FUN_000ab9b0	1	
-abb54	abb60	padding	FUN_000abab0	3	
-abbb8	abbc0	padding	FUN_000abb60	2	
-abbc8	abbd0	padding	FUN_000abb60	2	
-abd08	abd10	padding	FUN_000abbd0	2	
-abe20	abfb4	table	FUN_000abd10	101	
-ac1c0	ac1d4	table	FUN_000abd10	5	
-ac284	ac298	table	FUN_000abd10	5	
-ac2fc	ac300	padding	FUN_000abd10	1	
-ac538	ac540	padding	FUN_000abd10	2	
-ac71c	ac720	padding	FUN_000ac540	1	
-ac854	ac960	table	FUN_000ac720	67	
-ac9e4	aca10	table	FUN_000ac720	11	
-aca6c	aca98	table	FUN_000ac720	11	
-acaa4	acab0	padding	FUN_000ac720	3	
-acb6c	acb98	table	FUN_000ac720	11	
-acba4	acbb0	padding	FUN_000ac720	3	
-acc64	acc90	table	FUN_000ac720	11	
-acc9c	acca0	padding	FUN_000ac720	1	
-acd54	acd80	table	FUN_000ac720	11	
-acd8c	acd90	padding	FUN_000ac720	1	
-acec8	acef4	table	FUN_000ac720	11	
-acf50	acf7c	table	FUN_000ac720	11	
-acf88	acf90	padding	FUN_000ac720	2	
-ad04c	ad078	table	FUN_000ac720	11	
-ad084	ad090	padding	FUN_000ac720	3	
-ad144	ad170	table	FUN_000ac720	11	
-ad17c	ad180	padding	FUN_000ac720	1	
-ad234	ad260	table	FUN_000ac720	11	
-ad26c	ad270	padding	FUN_000ac720	1	
-ad3a8	ad3d4	table	FUN_000ac720	11	
-ad430	ad45c	table	FUN_000ac720	11	
-ad468	ad470	padding	FUN_000ac720	2	
-ad52c	ad558	table	FUN_000ac720	11	
-ad564	ad570	padding	FUN_000ac720	3	
-ad624	ad650	table	FUN_000ac720	11	
-ad65c	ad660	padding	FUN_000ac720	1	
-ad714	ad740	table	FUN_000ac720	11	
-ad74c	ad750	padding	FUN_000ac720	1	
-ad8b4	ad8e0	table	FUN_000ac720	11	
-ad93c	ad968	table	FUN_000ac720	11	
-ad974	ad980	padding	FUN_000ac720	3	
-ada2c	ada58	table	FUN_000ac720	11	
-ada64	ada70	padding	FUN_000ac720	3	
-adb1c	adb48	table	FUN_000ac720	11	
-adb54	adb60	padding	FUN_000ac720	3	
-adc0c	adc38	table	FUN_000ac720	11	
-adc44	adc50	padding	FUN_000ac720	3	
-ae344	ae448	table	FUN_000ac720	65	
-aec14	aec20	padding	FUN_000ac720	3	
-aec3c	aec40	padding	FUN_000ac720	1	
-aede4	aee10	table	FUN_000aec40	11	
-aee6c	aee98	table	FUN_000aec40	11	
-aeea4	aeeb0	padding	FUN_000aec40	3	
-aef5c	aef88	table	FUN_000aec40	11	
-aef94	aefa0	padding	FUN_000aec40	3	
-af04c	af078	table	FUN_000aec40	11	
-af084	af090	padding	FUN_000aec40	3	
-af13c	af168	table	FUN_000aec40	11	
-af174	af180	padding	FUN_000aec40	3	
-af498	af4a0	padding	FUN_000aec40	2	
-af50c	af538	table	FUN_000aec40	11	
-af598	af5c4	table	FUN_000aec40	11	
-af698	af6c4	table	FUN_000aec40	11	
-af790	af7bc	table	FUN_000aec40	11	
-af7c8	af7d0	padding	FUN_000aec40	2	
-af890	af8bc	table	FUN_000aec40	11	
-af8c8	af8d0	padding	FUN_000aec40	2	
-af9c0	afaa0	table	FUN_000aec40	56	
-afef8	aff00	padding	FUN_000afe40	2	
-b007c	b0080	padding	FUN_000afe40	1	
-b067c	b06a0	table	FUN_000afe40	9	
-b0fac	b0fb0	padding	FUN_000afe40	1	
-b1474	b1480	padding	FUN_000afe40	3	
-b1578	b1580	padding	FUN_000afe40	2	
-b1588	b1590	padding	FUN_000afe40	2	
-b15a8	b15b0	padding	FUN_000afe40	2	
-b15c4	b15d0	padding	FUN_000afe40	3	
+a82b4	a82c0	padding	gld_updateTextureUnitState	3	
+a8334	a8340	padding	gld_clearPacketSlot	3	
+a83d8	a83e0	padding	gld_copyTexCombinerSources	2	
+a8404	a8410	padding	gld_copyTexCombinerSources	3	
+a8624	a8630	padding	gld_copyTexCombinerSources	3	
+a89ec	a89f0	padding	gld_updateInverseMatrix	1	
+a89fc	a8a00	padding	gld_updateInverseMatrix	1	
+a8b24	a8b30	padding	gld_transformClipPlanes	3	
+a8bf4	a8c00	padding	gld_transformClipPlanes	3	
+a8d64	a8d70	padding	gld_updateProgramFlags	3	
+a8e18	a8e20	padding	gld_updatePolygonModeFlags	2	
+a8e48	a8e50	padding	gld_updateLightingFlags	2	
+a8ed4	a8ee0	padding	gld_updateLightingFlags	3	
+a8f74	a8f80	padding	gld_updateLightingFlags	3	
+a8fbc	a8fc0	padding	gld_updateLightingFlags	1	
+a9038	a9040	padding	gld_updateLightingFlags	2	
+a906c	a9070	padding	gld_updateLightingFlags	1	
+a9634	a9640	padding	gld_commitTexEnvUnits	3	
+a970c	a9710	padding	gld_updatePointState	1	
+a977c	a9780	padding	gld_updatePointState	1	
+a983c	a9840	padding	gld_updatePointState	1	
+a9938	a9940	padding	gld_updatePointState	2	
+a99a8	a99b0	padding	gld_updatePointState	2	
+a9a68	a9a70	padding	gld_updatePointState	2	
+a9c34	a9c40	padding	gld_validateDirtyState	3	
+a9e9c	a9ea0	padding	gld_validateDirtyState	1	
+aa8f4	aa900	padding	gld_validateDirtyState	3	
+aaef8	aaf00	padding	gld_validateDirtyState	2	
+aafd4	aafe0	padding	gld_validateDirtyState	3	
+ab254	ab260	padding	gld_validateDirtyState	3	
+ab6ac	ab6b0	padding	gld_validateDirtyState	1	
+ab714	ab720	padding	gld_validateDirtyState	3	
+ab8d8	ab8e0	padding	gld_validateDirtyState	2	
+ab8fc	ab900	padding	gld_validateDirtyState	1	
+ab92c	ab930	padding	gld_selectProgramCallback	1	
+ab988	ab990	padding	gld_convertDestOperand	2	
+ab9a8	ab9b0	padding	gld_convertDestOperand	2	
+aba48	aba50	padding	gld_classifyOperand	2	
+aba6c	aba70	padding	gld_classifyOperand	1	
+aba8c	aba90	padding	gld_classifyOperand	1	
+abb54	abb60	padding	gld_uploadParamConstants	3	
+abbb8	abbc0	padding	gld_getBoundProgramId	2	
+abbc8	abbd0	padding	gld_getBoundProgramId	2	
+abd08	abd10	padding	gld_scanOperandRegisterCount	2	
+abe20	abfb4	table	gld_scanProgramTokens	101	
+ac1c0	ac1d4	table	gld_scanProgramTokens	5	
+ac284	ac298	table	gld_scanProgramTokens	5	
+ac2fc	ac300	padding	gld_scanProgramTokens	1	
+ac538	ac540	padding	gld_scanProgramTokens	2	
+ac71c	ac720	padding	gld_emitUnitSelectTokens	1	
+ac854	ac960	table	gld_emitFormatConvertTokens	67	
+ac9e4	aca10	table	gld_emitFormatConvertTokens	11	
+aca6c	aca98	table	gld_emitFormatConvertTokens	11	
+acaa4	acab0	padding	gld_emitFormatConvertTokens	3	
+acb6c	acb98	table	gld_emitFormatConvertTokens	11	
+acba4	acbb0	padding	gld_emitFormatConvertTokens	3	
+acc64	acc90	table	gld_emitFormatConvertTokens	11	
+acc9c	acca0	padding	gld_emitFormatConvertTokens	1	
+acd54	acd80	table	gld_emitFormatConvertTokens	11	
+acd8c	acd90	padding	gld_emitFormatConvertTokens	1	
+acec8	acef4	table	gld_emitFormatConvertTokens	11	
+acf50	acf7c	table	gld_emitFormatConvertTokens	11	
+acf88	acf90	padding	gld_emitFormatConvertTokens	2	
+ad04c	ad078	table	gld_emitFormatConvertTokens	11	
+ad084	ad090	padding	gld_emitFormatConvertTokens	3	
+ad144	ad170	table	gld_emitFormatConvertTokens	11	
+ad17c	ad180	padding	gld_emitFormatConvertTokens	1	
+ad234	ad260	table	gld_emitFormatConvertTokens	11	
+ad26c	ad270	padding	gld_emitFormatConvertTokens	1	
+ad3a8	ad3d4	table	gld_emitFormatConvertTokens	11	
+ad430	ad45c	table	gld_emitFormatConvertTokens	11	
+ad468	ad470	padding	gld_emitFormatConvertTokens	2	
+ad52c	ad558	table	gld_emitFormatConvertTokens	11	
+ad564	ad570	padding	gld_emitFormatConvertTokens	3	
+ad624	ad650	table	gld_emitFormatConvertTokens	11	
+ad65c	ad660	padding	gld_emitFormatConvertTokens	1	
+ad714	ad740	table	gld_emitFormatConvertTokens	11	
+ad74c	ad750	padding	gld_emitFormatConvertTokens	1	
+ad8b4	ad8e0	table	gld_emitFormatConvertTokens	11	
+ad93c	ad968	table	gld_emitFormatConvertTokens	11	
+ad974	ad980	padding	gld_emitFormatConvertTokens	3	
+ada2c	ada58	table	gld_emitFormatConvertTokens	11	
+ada64	ada70	padding	gld_emitFormatConvertTokens	3	
+adb1c	adb48	table	gld_emitFormatConvertTokens	11	
+adb54	adb60	padding	gld_emitFormatConvertTokens	3	
+adc0c	adc38	table	gld_emitFormatConvertTokens	11	
+adc44	adc50	padding	gld_emitFormatConvertTokens	3	
+ae344	ae448	table	gld_emitFormatConvertTokens	65	
+aec14	aec20	padding	gld_emitFormatConvertTokens	3	
+aec3c	aec40	padding	gld_emitFormatConvertTokens	1	
+aede4	aee10	table	gld_emitInstructionTokens	11	
+aee6c	aee98	table	gld_emitInstructionTokens	11	
+aeea4	aeeb0	padding	gld_emitInstructionTokens	3	
+aef5c	aef88	table	gld_emitInstructionTokens	11	
+aef94	aefa0	padding	gld_emitInstructionTokens	3	
+af04c	af078	table	gld_emitInstructionTokens	11	
+af084	af090	padding	gld_emitInstructionTokens	3	
+af13c	af168	table	gld_emitInstructionTokens	11	
+af174	af180	padding	gld_emitInstructionTokens	3	
+af498	af4a0	padding	gld_emitInstructionTokens	2	
+af50c	af538	table	gld_emitInstructionTokens	11	
+af598	af5c4	table	gld_emitInstructionTokens	11	
+af698	af6c4	table	gld_emitInstructionTokens	11	
+af790	af7bc	table	gld_emitInstructionTokens	11	
+af7c8	af7d0	padding	gld_emitInstructionTokens	2	
+af890	af8bc	table	gld_emitInstructionTokens	11	
+af8c8	af8d0	padding	gld_emitInstructionTokens	2	
+af9c0	afaa0	table	gld_emitInstructionTokens	56	
+afef8	aff00	padding	gld_compileFragmentProgram	2	
+b007c	b0080	padding	gld_compileFragmentProgram	1	
+b067c	b06a0	table	gld_compileFragmentProgram	9	
+b0fac	b0fb0	padding	gld_compileFragmentProgram	1	
+b1474	b1480	padding	gld_compileFragmentProgram	3	
+b1578	b1580	padding	gld_compileFragmentProgram	2	
+b1588	b1590	padding	gld_compileFragmentProgram	2	
+b15a8	b15b0	padding	gld_compileFragmentProgram	2	
+b15c4	b15d0	padding	gld_compileFragmentProgram	3	
 b1684	b1690	padding	ilTokenBufPush	3	
 b186c	b1870	padding	atifsEmitFinalColorClamp	1	
 b1e7c	b1e80	padding	atifsEmitMoveWithWriteMask	1	
@@ -2435,34 +2435,34 @@ b3e7c	b3ea8	table	atifsCompileCurrentShader	11
 b433c	b4340	padding	atifsCompileCurrentShader	1	
 b43ec	b43f0	padding	atifsCompileCurrentShader	1	
 b43f4	b4400	padding	noop_b43f0	3	
-b4bec	b4c4c	table	FUN_000b4400	24	
-b4c64	b4c70	padding	FUN_000b4400	3	
-b4ca8	b4cb0	padding	FUN_000b4400	2	
-b4ccc	b4cd0	padding	FUN_000b4400	1	
-b4ea4	b4eb0	padding	FUN_000b4cd0	3	
-b4ed8	b4ee0	padding	FUN_000b4cd0	2	
-b4f44	b4f50	padding	FUN_000b4cd0	3	
-b4fa4	b4fb0	padding	FUN_000b4f50	3	
-b5094	b50a0	padding	FUN_000b5010	3	
-b5184	b5190	padding	FUN_000b50a0	3	
+b4bec	b4c4c	table	gld_compileILProgram	24	
+b4c64	b4c70	padding	gld_compileILProgram	3	
+b4ca8	b4cb0	padding	gld_compileILProgram	2	
+b4ccc	b4cd0	padding	gld_compileILProgram	1	
+b4ea4	b4eb0	padding	gld_decodeProgramInterface	3	
+b4ed8	b4ee0	padding	gld_decodeProgramInterface	2	
+b4f44	b4f50	padding	gld_decodeProgramInterface	3	
+b4fa4	b4fb0	padding	gld_storeConstantVec4	3	
+b5094	b50a0	padding	gld_emitSlotParamIfDirty	3	
+b5184	b5190	padding	gld_emitTextureUnitScaleParams	3	
 b5194	b51a0	padding	noop_b5190	3	
-b5318	b5320	padding	FUN_000b51a0	2	
-b53ec	b53f0	padding	FUN_000b5320	1	
+b5318	b5320	padding	gld_emitSlotViewportTransforms	2	
+b53ec	b53f0	padding	gld_emitSlotTransformParams	1	
 b53f4	b5400	padding	noop_b53f0	3	
-b58fc	b5900	padding	FUN_000b57a0	1	
-b5a54	b5a60	padding	FUN_000b57a0	3	
-b5b54	b5b60	padding	FUN_000b5a60	3	
-b5bc4	b5bd0	padding	FUN_000b5ba0	3	
-b5bf4	b5c00	padding	FUN_000b5bd0	3	
-b5f3c	b5f40	padding	FUN_000b5c00	1	
-b5fa4	b5fb0	padding	FUN_000b5f40	3	
-b6014	b6020	padding	FUN_000b5fb0	3	
-b655c	b6560	padding	FUN_000b6020	1	
-b6574	b6580	padding	FUN_000b6020	3	
-b6698	b66a0	padding	FUN_000b6580	2	
-b6f18	b6f20	padding	FUN_000b6580	2	
-b71a8	b71b0	padding	FUN_000b6f20	2	
-b72c8	b72d0	padding	FUN_000b6f20	2	
+b58fc	b5900	padding	gld_compileFragmentProgramImage	1	
+b5a54	b5a60	padding	gld_compileFragmentProgramImage	3	
+b5b54	b5b60	padding	gld_emitProgramConstants	3	
+b5bc4	b5bd0	padding	gld_emitProgramStateOnly	3	
+b5bf4	b5c00	padding	gld_emitProgramConstantsOnly	3	
+b5f3c	b5f40	padding	gld_bindProgramStateAndEmit	1	
+b5fa4	b5fb0	padding	gld_freeProgramImage	3	
+b6014	b6020	padding	gld_destroyUnitCmdLists	3	
+b655c	b6560	padding	gld_buildUnitSetupCmdList	1	
+b6574	b6580	padding	gld_buildUnitSetupCmdList	3	
+b6698	b66a0	padding	ffpsBuildProgram	2	
+b6f18	b6f20	padding	ffpsBuildProgram	2	
+b71a8	b71b0	padding	gld_updateUnitBiasRegisters	2	
+b72c8	b72d0	padding	gld_updateUnitBiasRegisters	2	
 b7344	b73c8	table	extvsInstReadsTempComponents	33	
 b7528	b7530	padding	extvsInstReadsTempComponents	2	
 b7ddc	b7de0	padding	extvsInstReadsTempComponents	1	
@@ -2570,36 +2570,36 @@ bd4fc	bd528	table	extvsOptimizeProgram	11
 bd558	bd584	table	extvsOptimizeProgram	11	
 bd5b4	bd5e0	table	extvsOptimizeProgram	11	
 bd994	bd9a0	padding	extvsOptimizeProgram	3	
-bdae4	bdaf0	padding	FUN_000bda40	3	
-bdb24	bdb30	padding	FUN_000bda40	3	
-bdb54	bdb60	padding	FUN_000bda40	3	
-bdba4	bdbb0	padding	FUN_000bda40	3	
-bdbf8	bdc00	padding	FUN_000bda40	2	
-be41c	be420	padding	FUN_000bde70	1	
-be454	be460	padding	FUN_000bde70	3	
-be498	be4a0	padding	FUN_000be460	2	
-be568	be570	padding	FUN_000be460	2	
-be66c	be670	padding	FUN_000be460	1	
-bec78	bec80	padding	FUN_000be460	2	
-bed24	bed30	padding	FUN_000be460	3	
-bed48	bed50	padding	FUN_000be460	2	
-bee38	bee40	padding	FUN_000be460	2	
-bef34	bef40	padding	FUN_000bee40	3	
-bf3d4	bf3e0	padding	FUN_000bef40	3	
-bf3f4	bf400	padding	FUN_000bef40	3	
-bf46c	bf470	padding	FUN_000bf400	1	
-bf788	bf790	padding	FUN_000bf400	2	
-bf854	bf860	padding	FUN_000bf400	3	
-bf8fc	bf900	padding	FUN_000bf400	1	
-bf908	bf910	padding	FUN_000bf400	2	
-bf938	bf940	padding	FUN_000bf910	2	
-bf964	bf9e4	table	FUN_000bf910	32	
-bfcb4	bfcc0	padding	FUN_000bf910	3	
-bfce8	bfcf0	padding	FUN_000bfcc0	2	
-bfd14	bfd60	table	FUN_000bfcc0	19	
-bfecc	bfed0	padding	FUN_000bfcc0	1	
-c00ec	c00f0	padding	FUN_000bfed0	1	
-c0874	c0880	padding	FUN_000bfed0	3	
+bdae4	bdaf0	padding	gld_updateTexCombinerState	3	
+bdb24	bdb30	padding	gld_updateTexCombinerState	3	
+bdb54	bdb60	padding	gld_updateTexCombinerState	3	
+bdba4	bdbb0	padding	gld_updateTexCombinerState	3	
+bdbf8	bdc00	padding	gld_updateTexCombinerState	2	
+be41c	be420	padding	psnDecDecodeFragmentProgram	1	
+be454	be460	padding	psnDecDecodeFragmentProgram	3	
+be498	be4a0	padding	psnEncodeHwProgramPhased	2	
+be568	be570	padding	psnEncodeHwProgramPhased	2	
+be66c	be670	padding	psnEncodeHwProgramPhased	1	
+bec78	bec80	padding	psnEncodeHwProgramPhased	2	
+bed24	bed30	padding	psnEncodeHwProgramPhased	3	
+bed48	bed50	padding	psnEncodeHwProgramPhased	2	
+bee38	bee40	padding	psnEncodeHwProgramPhased	2	
+bef34	bef40	padding	psnCheckLimitsAndGenerate	3	
+bf3d4	bf3e0	padding	psnRemapTempRegisters	3	
+bf3f4	bf400	padding	psnRemapTempRegisters	3	
+bf46c	bf470	padding	psnPlanPhases	1	
+bf788	bf790	padding	psnPlanPhases	2	
+bf854	bf860	padding	psnPlanPhases	3	
+bf8fc	bf900	padding	psnPlanPhases	1	
+bf908	bf910	padding	psnPlanPhases	2	
+bf938	bf940	padding	ilRemapSwizzleTriple	2	
+bf964	bf9e4	table	ilRemapSwizzleTriple	32	
+bfcb4	bfcc0	padding	ilRemapSwizzleTriple	3	
+bfce8	bfcf0	padding	ilRemapSwizzleSingle	2	
+bfd14	bfd60	table	ilRemapSwizzleSingle	19	
+bfecc	bfed0	padding	ilRemapSwizzleSingle	1	
+c00ec	c00f0	padding	psnEncodeHwProgram	1	
+c0874	c0880	padding	psnEncodeHwProgram	3	
 c0a9c	c0aa0	padding	psnDecRecomputeSourceUsage	1	
 c0ac4	c0ad0	padding	psnDecRecomputeSourceUsage	3	
 c0ae8	c0af0	padding	psnDecRecomputeSourceUsage	2	
@@ -2707,8 +2707,8 @@ c5da4	c5db0	padding	psnRaAssignDefinition	3
 c5e1c	c5e20	padding	psnRaAssignDefinition	1	
 c5e44	c5e50	padding	psnRaAssignDefinition	3	
 c5e5c	c5e60	padding	psnRaAssignDefinition	1	
-c5fa8	c5fc0	table	FUN_000c5e60	6	
-c646c	c6470	padding	FUN_000c5e60	1	
+c5fa8	c5fc0	table	psnAnalyzeProgram	6	
+c646c	c6470	padding	psnAnalyzeProgram	1	
 c6584	c6590	padding	psnReallocateTemps	3	
 c66bc	c66c0	padding	psnReallocateTemps	1	
 c67b4	c67c0	padding	psnReallocateTemps	3	
@@ -2724,9 +2724,9 @@ c6f58	c6f60	padding	scCallbackFopen	2
 c6f8c	c6f90	padding	scCallbackFclose	1	
 c6fb8	c6fc0	padding	scCallbackFwrite	2	
 c6fe8	c6ff0	padding	scCallbackFread	2	
-c7108	c7110	padding	FUN_000c6ff0	2	
-c7118	c7120	padding	FUN_000c6ff0	2	
-c71d0	c71e0	other	FUN_000c6ff0	4	
+c7108	c7110	padding	scCreateForContext	2	
+c7118	c7120	padding	scCreateForContext	2	
+c71d0	c71e0	other	scCreateForContext	4	
 c7218	c7220	padding	ilFreeRecordList	2	
 c7234	c7240	padding	ilFreeRecordList	3	
 c726c	c7270	padding	ilSelectorOneToThreeOrZero	1	
@@ -2746,12 +2746,12 @@ c77fc	c7800	padding	ilEmitShadowCompare	1
 c78f8	c7900	padding	ilEmitShadowCompare	2	
 c791c	c7920	padding	ilEmitShadowCompare	1	
 c7928	c7930	padding	ilEmitShadowCompare	2	
-c8104	c8110	padding	FUN_000c7930	3	
+c8104	c8110	padding	ilEmitShadowStateTokens	3	
 c85f4	c8600	padding	ilEmitPrologue	3	
-c8624	c8630	padding	FUN_000c8600	3	
-c86b8	c86c0	padding	FUN_000c8600	2	
-c86e4	c86f0	padding	FUN_000c8600	3	
-c870c	c8710	padding	FUN_000c8600	1	
+c8624	c8630	padding	ilRecordRegisterUse	3	
+c86b8	c86c0	padding	ilRecordRegisterUse	2	
+c86e4	c86f0	padding	ilRecordRegisterUse	3	
+c870c	c8710	padding	ilRecordRegisterUse	1	
 c87c8	c87d0	padding	ilRemapSourceOperandRegister	2	
 c88a4	c88b0	padding	ilMarkOperandRegisterUsed	3	
 c88fc	c8900	padding	ilMarkOperandRegisterUsed	1	
@@ -2779,44 +2779,44 @@ cc45c	cc460	padding	ilRewriteForTextureState	1
 cc86c	cc870	padding	ilRewriteForTextureState	1	
 cce54	cce8c	table	ilRewriteForTextureState	14	
 cd028	cd030	padding	ilRewriteForTextureState	2	
-cd10c	cd110	eh-pad	FUN_000cd05c	1	__Unwind_Resume
-cd28c	cd290	millicode	FUN_000cd1c4	1	
-cd2c8	cd360	table	FUN_000cd290	38	
-cd380	cd388	other	FUN_000cd1c4	2	
-ce2c8	ce2e0	table	FUN_000ce148	6	
-ce330	ce358	other	FUN_000ce148	10	_strcat
-ce41c	ce434	table	FUN_000ce148	6	
+cd10c	cd110	eh-pad	scCreate	1	__Unwind_Resume
+cd28c	cd290	millicode	scCompile	1	
+cd2c8	cd360	table	vsOpcodeSourceCount	38	
+cd380	cd388	other	scCompile	2	
+ce2c8	ce2e0	table	vsDisasmSourceOperand	6	
+ce330	ce358	other	vsDisasmSourceOperand	10	_strcat
+ce41c	ce434	table	vsDisasmSourceOperand	6	
 ce568	ce580	table	vsdisPrintOutputMapping	6	
-cead0	ceae8	table	FUN_000cea6c	6	
-cebcc	cebe4	table	FUN_000cea6c	6	
-cec34	cec5c	other	FUN_000cea6c	10	_strcat
-cede8	cee5c	table	FUN_000ced58	29	
-cf224	cf23c	table	FUN_000ced58	6	
-cf38c	cf594	table	FUN_000cf2ec	130	
+cead0	ceae8	table	vsDisasmDestOperand	6	
+cebcc	cebe4	table	vsDisasmDestOperand	6	
+cec34	cec5c	other	vsDisasmDestOperand	10	_strcat
+cede8	cee5c	table	vsDisasmMathOpcode	29	
+cf224	cf23c	table	vsDisasmMathOpcode	6	
+cf38c	cf594	table	vsDisasmVectorOpcode	130	
 d0340	d0344	eh-pad	vsDisassembleToString	1	__Unwind_Resume
 d0398	d039c	eh-pad	vsDisassembleVertexProgram	1	__Unwind_Resume
-d044c	d0450	millicode	FUN_000cd1c4	1	
+d044c	d0450	millicode	scCompile	1	
 d057c	d05fc	table	psnFormatRgbSource	32	
 d0730	d07b0	table	psnFormatRgbSource	32	
 d0974	d09c0	table	psnFormatAlphaSource	19	
 d0aa4	d0ae4	table	psnFormatAlphaSource	16	
-d1f70	d1f90	table	FUN_000d183c	8	
-d2274	d228c	table	FUN_000d183c	6	
-d2368	d2380	table	FUN_000d183c	6	
-d2464	d2498	table	FUN_000d183c	13	
-d2d34	d2d68	table	FUN_000d183c	13	
-d2efc	d2f18	table	FUN_000d183c	7	
-d3038	d3050	table	FUN_000d183c	6	
-d3250	d3290	table	FUN_000d183c	16	
-d3454	d3470	table	FUN_000d183c	7	
-d3594	d35ac	table	FUN_000d183c	6	
-d3dd8	d3dec	table	FUN_000d183c	5	
-d3ee8	d3f10	table	FUN_000d183c	10	
-d457c	d45a8	table	FUN_000d183c	11	
-d4704	d4720	table	FUN_000d183c	7	
-d48a0	d48d0	table	FUN_000d183c	12	
-d4a2c	d4a48	table	FUN_000d183c	7	
-d4b88	d4b9c	table	FUN_000d183c	5	
+d1f70	d1f90	table	psnDumpPixelShader	8	
+d2274	d228c	table	psnDumpPixelShader	6	
+d2368	d2380	table	psnDumpPixelShader	6	
+d2464	d2498	table	psnDumpPixelShader	13	
+d2d34	d2d68	table	psnDumpPixelShader	13	
+d2efc	d2f18	table	psnDumpPixelShader	7	
+d3038	d3050	table	psnDumpPixelShader	6	
+d3250	d3290	table	psnDumpPixelShader	16	
+d3454	d3470	table	psnDumpPixelShader	7	
+d3594	d35ac	table	psnDumpPixelShader	6	
+d3dd8	d3dec	table	psnDumpPixelShader	5	
+d3ee8	d3f10	table	psnDumpPixelShader	10	
+d457c	d45a8	table	psnDumpPixelShader	11	
+d4704	d4720	table	psnDumpPixelShader	7	
+d48a0	d48d0	table	psnDumpPixelShader	12	
+d4a2c	d4a48	table	psnDumpPixelShader	7	
+d4b88	d4b9c	table	psnDumpPixelShader	5	
 d4ec8	d4ecc	eh-pad	scDumpPixelProgram	1	__Unwind_Resume
 d4ee4	d4ef0	padding	scDumpPixelProgram	3	
 d4f1c	d4f20	padding	ffpsBuildRgbSourceOperand	1	
@@ -2832,8 +2832,8 @@ d51fc	d5200	padding	ffpsBuildAlphaSourceOperand	1
 d5224	d5230	padding	ffpsBuildAlphaSourceOperand	3	
 d52cc	d52d0	padding	ffpsBuildAlphaSourceOperand	1	
 d5384	d5390	padding	ffpsBuildAlphaSourceOperand	3	
-d53dc	d53e0	padding	FUN_000d5390	1	
-d55b8	d55c0	padding	FUN_000d5390	2	
+d53dc	d53e0	padding	ffpsEmitColorOutputMovs	1	
+d55b8	d55c0	padding	ffpsEmitColorOutputMovs	2	
 d5e58	d5e60	padding	ffpsEmitDeclarations	2	
 d633c	d6340	padding	ffpsEmitDeclarations	1	
 d64b8	d64c0	padding	ffpsEmitTexEnvCombine	2	
@@ -2852,10 +2852,10 @@ d934c	d9350	padding	FUN_000d8450	1
 d9808	d9810	padding	FUN_000d8450	2	
 d99d8	d99e0	padding	FUN_000d8450	2	
 d9f34	d9f3c	other	ConstBank__addMappedEntry	2	
-d9f78	d9f80	other	FUN_000d9f3c	2	
-da180	da184	eh-pad	FUN_000da0c0	1	__Unwind_Resume
+d9f78	d9f80	other	CompileInput__lacksFlag0x200000	2	
+da180	da184	eh-pad	Compiler__createFromRequest_da0c0	1	__Unwind_Resume
 da578	da57c	eh-pad	Compiler__createFromRequest	1	__Unwind_Resume
-da880	da8a8	other	FUN_000da78c	10	
+da880	da8a8	other	MiniFloat__decode	10	
 dac88	daca0	table	ildisComponentSelectChar	6	
 daec0	daedc	table	ildisPrintResultModifiers	7	
 dafb0	dafd0	table	ildisPrintElementFormat	8	
@@ -2871,7 +2871,7 @@ ddc20	ddf1c	table	ildisPrintInstruction	191
 e0120	e0138	table	ildisPrintInstruction	6	
 e0790	e0794	millicode	ildisDisassembleBody	1	
 e0cc4	e0cc8	millicode	FUN_000e0ca8	1	
-e0e04	e0e0c	millicode	FUN_000e0cd0	2	
+e0e04	e0e0c	millicode	Compiler__applyRequestFlags	2	
 e1480	e1484	millicode	Compiler__timerOutputFileName	1	
 e1a08	e1a0c	eh-pad	Compiler__init_e1920	1	__Unwind_Resume
 e1b30	e1b34	eh-pad	Compiler__init_e1a48	1	__Unwind_Resume
@@ -2883,12 +2883,12 @@ e21cc	e21ec	eh-pad	Compiler__compileStages	8	0x193cc0,__Unwind_Resume
 e2884	e28f0	other	Block__accept	27	
 e2950	e2a04	other	IfFooterStatic__accept	45	
 e2ac4	e2acc	millicode	IREndMakeCall__acceptCallPseudo	2	
-e34c8	e34cc	millicode	FUN_000e33cc	1	
-e3524	e3544	eh-pad	FUN_000e33cc	8	0x193cc0,__Unwind_Resume
-e3640	e3644	millicode	FUN_000e3544	1	
-e369c	e36bc	eh-pad	FUN_000e3544	8	0x193cc0,__Unwind_Resume
+e34c8	e34cc	millicode	EncoderState__init_e33cc	1	
+e3524	e3544	eh-pad	EncoderState__init_e33cc	8	0x193cc0,__Unwind_Resume
+e3640	e3644	millicode	EncoderState__init	1	
+e369c	e36bc	eh-pad	EncoderState__init	8	0x193cc0,__Unwind_Resume
 e3948	e395c	eh-pad	MachineCodeWriter__encodeProgram	5	0xe3308,__Unwind_Resume
-e42c0	e42c4	eh-pad	FUN_000e3b88	1	__Unwind_Resume
+e42c0	e42c4	eh-pad	Block__materializePendingMovs	1	__Unwind_Resume
 e4d2c	e4d8c	table	ILReader__decodeInstruction	24	
 e5638	e5654	other	ILReader__ctor_e5570	7	0x193cc0
 e5874	e5878	millicode	ILReader__ctor_e5570	1	
@@ -2902,10 +2902,10 @@ e7650	e7658	other	ILReader__nextInstruction	2
 e86d0	e86f0	millicode	Block__verify	8	
 e87dc	e87e4	millicode	LoopHeader__verify	2	
 e89bc	e89dc	eh-pad	Block__createEntryExitInsts	8	0x193cc0,__Unwind_Resume
-e8ad4	e8ad8	millicode	FUN_000e8a08	1	
-e8b20	e8b24	millicode	FUN_000e8a08	1	
-e8b6c	e8b70	millicode	FUN_000e8a08	1	
-e8b8c	e8bac	eh-pad	FUN_000e8a08	8	0x193cc0,__Unwind_Resume
+e8ad4	e8ad8	millicode	Block__initVectors	1	
+e8b20	e8b24	millicode	Block__initVectors	1	
+e8b6c	e8b70	millicode	Block__initVectors	1	
+e8b8c	e8bac	eh-pad	Block__initVectors	8	0x193cc0,__Unwind_Resume
 e9e64	e9e88	eh-pad	Block__ctor_e9d68	9	__Unwind_Resume
 e9ec8	e9ee8	eh-pad	Block__clone	8	0x193cc0,__Unwind_Resume
 e9ffc	ea020	eh-pad	Block__ctor_e9f00	9	__Unwind_Resume
@@ -2944,55 +2944,55 @@ ebcfc	ebd00	padding	Block__dtor	1
 ebe24	ebe40	eh-pad	Block__deleting_dtor	7	__Unwind_Resume
 ebf38	ebf58	eh-pad	BreakBlock__clone	8	0x193cc0,__Unwind_Resume
 ec038	ec058	eh-pad	ContinueBlock__clone	8	0x193cc0,__Unwind_Resume
-ec1e4	ec1ec	other	FUN_000ec1d0	2	
-ec56c	ec58c	eh-pad	FUN_000ec4f0	8	0x193cc0,__Unwind_Resume
+ec1e4	ec1ec	other	Program__ensureVRegType13	2	
+ec56c	ec58c	eh-pad	Program__getDominatorInfo	8	0x193cc0,__Unwind_Resume
 ecf5c	ecf7c	eh-pad	FUN_000eced0	8	0x193cc0,__Unwind_Resume
 ed0e4	ed0fc	eh-pad	Program__dtor_ecfac	6	__Unwind_Resume
 ed25c	ed274	eh-pad	Program__dtor_ed124	6	__Unwind_Resume
-edbf0	edc10	eh-pad	FUN_000ed89c	8	0x193cc0,__Unwind_Resume
+edbf0	edc10	eh-pad	Program__groupLoadsIntoProjections	8	0x193cc0,__Unwind_Resume
 ee114	ee118	millicode	Program__ctor_edd98	1	
 ee214	ee218	millicode	Program__ctor_edd98	1	
 ee244	ee260	other	Program__ctor_edd98	7	0x193cc0
-ee27c	ee29c	eh-pad	FUN_000eec50	8	__Unwind_Resume
+ee27c	ee29c	eh-pad	Program__emitDepthExportScale	8	__Unwind_Resume
 ee618	ee61c	millicode	Program__ctor_ee29c	1	
 ee718	ee71c	millicode	Program__ctor_ee29c	1	
 ee748	ee764	other	Program__ctor_ee29c	7	0x193cc0
-ee780	ee7a0	eh-pad	FUN_000eec50	8	__Unwind_Resume
+ee780	ee7a0	eh-pad	Program__emitDepthExportScale	8	__Unwind_Resume
 ee830	ee850	eh-pad	Program__buildBlockArrayByKey	8	0x193cc0,__Unwind_Resume
-eede8	eee08	eh-pad	FUN_000eec50	8	0x193cc0,__Unwind_Resume
+eede8	eee08	eh-pad	Program__emitDepthExportScale	8	0x193cc0,__Unwind_Resume
 ef038	ef058	eh-pad	FUN_000eee4c	8	0x193cc0,__Unwind_Resume
-ef79c	ef7a0	millicode	FUN_000ef498	1	
-ef7f8	ef818	eh-pad	FUN_000ef498	8	0x193cc0,__Unwind_Resume
-efaf0	efb2c	eh-pad	FUN_000efa4c	15	0x193cc0,__Unwind_Resume
+ef79c	ef7a0	millicode	Program__initAndTranslate	1	
+ef7f8	ef818	eh-pad	Program__initAndTranslate	8	0x193cc0,__Unwind_Resume
+efaf0	efb2c	eh-pad	Program__orderBlocksByDfs	15	0x193cc0,__Unwind_Resume
 efe3c	efe40	millicode	Program__insertExitMarkerAndFlagBlocks	1	
 efea0	efebc	other	Program__insertExitMarkerAndFlagBlocks	7	0x193cc0
 f001c	f003c	eh-pad	Program__insertExitMarkerAndFlagBlocks	8	0x193cc0,__Unwind_Resume
-f02c0	f02e0	eh-pad	FUN_000f019c	8	0x193cc0,__Unwind_Resume
-f0978	f0994	other	FUN_000f07a8	7	0x193cc0
-f09bc	f09dc	eh-pad	FUN_000f07a8	8	0x193cc0,__Unwind_Resume
+f02c0	f02e0	eh-pad	Program__trimOutputChain	8	0x193cc0,__Unwind_Resume
+f0978	f0994	other	Program__forwardMovIntoConsumers	7	0x193cc0
+f09bc	f09dc	eh-pad	Program__forwardMovIntoConsumers	8	0x193cc0,__Unwind_Resume
 f157c	f159c	eh-pad	FUN_000f14f8	8	0x193cc0,__Unwind_Resume
-f293c	f2950	other	FUN_000f1d7c	5	0x193cc0
-f2960	f2974	other	FUN_000f1d7c	5	0x193cc0
-f2984	f2998	other	FUN_000f1d7c	5	0x193cc0
-f29b8	f29d0	eh-pad	FUN_000f1d7c	6	0x193cc0,__Unwind_Resume
+f293c	f2950	other	Program__propagateMovThroughUses	5	0x193cc0
+f2960	f2974	other	Program__propagateMovThroughUses	5	0x193cc0
+f2984	f2998	other	Program__propagateMovThroughUses	5	0x193cc0
+f29b8	f29d0	eh-pad	Program__propagateMovThroughUses	6	0x193cc0,__Unwind_Resume
 f3cf8	f3d38	table	IRInst__computeSourceLaneMask	16	
 f40d4	f4114	table	IRInst__computeSourceReadMask	16	
 f513c	f515c	eh-pad	Compiler__getOrCreateLoadConstN	8	0x193cc0,__Unwind_Resume
 f6c50	f6c70	eh-pad	Program__findOrCreateConstInst	8	0x193cc0,__Unwind_Resume
 f8258	f8278	eh-pad	DominatorTree__dfsNumber	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	DominatorTree__compress	8	0x193cc0,__Unwind_Resume
-f8908	f8928	eh-pad	FUN_000f88b4	8	0x193cc0,__Unwind_Resume
+f8908	f8928	eh-pad	Program__computeDominators	8	0x193cc0,__Unwind_Resume
 f8cc8	f8ccc	millicode	FUN_000f8c88	1	
-f91e8	f9288	table	FUN_000f9140	40	
-f953c	f9550	table	FUN_000f94dc	5	
-f95e4	f9600	other	FUN_000f94dc	7	0x193cc0
-f97a8	f97c4	other	FUN_000f94dc	7	0x193cc0
-f9870	f988c	other	FUN_000f94dc	7	0x193cc0
-f990c	f992c	eh-pad	FUN_000f94dc	8	0x193cc0,__Unwind_Resume
-fa144	fa160	other	FUN_000f9a58	7	0x193cc0
-fa27c	fa298	other	FUN_000f9a58	7	0x193cc0
-fa45c	fa460	millicode	FUN_000f9a58	1	
-fa544	fa564	eh-pad	FUN_000f9a58	8	0x193cc0,__Unwind_Resume
+f91e8	f9288	table	Program__createInstForIlOpcode	40	
+f953c	f9550	table	Program__emitInputMerge	5	
+f95e4	f9600	other	Program__emitInputMerge	7	0x193cc0
+f97a8	f97c4	other	Program__emitInputMerge	7	0x193cc0
+f9870	f988c	other	Program__emitInputMerge	7	0x193cc0
+f990c	f992c	eh-pad	Program__emitInputMerge	8	0x193cc0,__Unwind_Resume
+fa144	fa160	other	Program__lowerDestinationToken	7	0x193cc0
+fa27c	fa298	other	Program__lowerDestinationToken	7	0x193cc0
+fa45c	fa460	millicode	Program__lowerDestinationToken	1	
+fa544	fa564	eh-pad	Program__lowerDestinationToken	8	0x193cc0,__Unwind_Resume
 faeb4	faed4	eh-pad	Program__createIfBlock	8	0x193cc0,__Unwind_Resume
 fb584	fb588	millicode	FUN_000fb3d4	1	
 fb690	fb694	millicode	FUN_000fb3d4	1	
@@ -3000,48 +3000,48 @@ fb77c	fb780	millicode	FUN_000fb3d4	1
 fb974	fb978	millicode	FUN_000fb3d4	1	
 fbb88	fbba4	other	FUN_000fb3d4	7	0x193cc0
 fbe00	fbe20	eh-pad	FUN_000fb3d4	8	0x193cc0,__Unwind_Resume
-fd760	fd77c	other	FUN_000fd5c8	7	0x193cc0
-fd7c4	fd7d8	other	FUN_000fd5c8	5	
-fd820	fd840	other	FUN_000fd5c8	8	0x193cc0
-fd8ac	fd8b0	millicode	FUN_000fd5c8	1	
-fd8fc	fd91c	other	FUN_000fd5c8	8	0x193cc0
-fdaf4	fdb14	table	FUN_000fd5c8	8	
-fdb44	fde84	table	FUN_000fd5c8	208	
-fdebc	fdec0	millicode	FUN_000fd5c8	1	
-fdfa4	fdfa8	millicode	FUN_000fd5c8	1	
-fe8b0	fe8b4	millicode	FUN_000fd5c8	1	
-fe910	fe92c	other	FUN_000fd5c8	7	0x193cc0
-fe9f0	fe9f4	millicode	FUN_000fd5c8	1	
-feb38	feb3c	millicode	FUN_000fd5c8	1	
-feb78	feb94	other	FUN_000fd5c8	7	0x193cc0
-ff7a0	ff7a4	millicode	FUN_000fd5c8	1	
-ff864	ff868	millicode	FUN_000fd5c8	1	
-ffcf8	ffd14	other	FUN_000fd5c8	7	0x193cc0
-ffd5c	ffd60	millicode	FUN_000fd5c8	1	
-10042c	100448	other	FUN_000fd5c8	7	0x193cc0
-1004a8	1004c4	other	FUN_000fd5c8	7	0x193cc0
-100620	1007e8	table	FUN_000fd5c8	114	
-101fb8	101fd0	table	FUN_000fd5c8	6	
-102048	102060	table	FUN_000fd5c8	6	
-102754	102758	millicode	FUN_000fd5c8	1	
-102828	10282c	millicode	FUN_000fd5c8	1	
-102a78	102a94	other	FUN_000fd5c8	7	0x193cc0
-102b04	102b08	millicode	FUN_000fd5c8	1	
-102bdc	102c20	table	FUN_000fd5c8	17	
-102c5c	102c60	millicode	FUN_000fd5c8	1	
-102cb8	102cbc	millicode	FUN_000fd5c8	1	
-102da4	102da8	millicode	FUN_000fd5c8	1	
-102e6c	102e70	millicode	FUN_000fd5c8	1	
-102f4c	102f50	millicode	FUN_000fd5c8	1	
-103014	103030	other	FUN_000fd5c8	7	0x193cc0
-103174	103190	other	FUN_000fd5c8	7	0x193cc0
-1032ec	1032f0	millicode	FUN_000fd5c8	1	
-103414	103430	other	FUN_000fd5c8	7	0x193cc0
-1034d8	1034dc	millicode	FUN_000fd5c8	1	
-10361c	103638	other	FUN_000fd5c8	7	0x193cc0
-10379c	1037b8	other	FUN_000fd5c8	7	0x193cc0
-103840	1038ec	table	FUN_000fd5c8	43	
-103cec	103cf8	eh-pad	FUN_000fd5c8	3	__Unwind_Resume
+fd760	fd77c	other	Program__translateILStream	7	0x193cc0
+fd7c4	fd7d8	other	Program__translateILStream	5	
+fd820	fd840	other	Program__translateILStream	8	0x193cc0
+fd8ac	fd8b0	millicode	Program__translateILStream	1	
+fd8fc	fd91c	other	Program__translateILStream	8	0x193cc0
+fdaf4	fdb14	table	Program__translateILStream	8	
+fdb44	fde84	table	Program__translateILStream	208	
+fdebc	fdec0	millicode	Program__translateILStream	1	
+fdfa4	fdfa8	millicode	Program__translateILStream	1	
+fe8b0	fe8b4	millicode	Program__translateILStream	1	
+fe910	fe92c	other	Program__translateILStream	7	0x193cc0
+fe9f0	fe9f4	millicode	Program__translateILStream	1	
+feb38	feb3c	millicode	Program__translateILStream	1	
+feb78	feb94	other	Program__translateILStream	7	0x193cc0
+ff7a0	ff7a4	millicode	Program__translateILStream	1	
+ff864	ff868	millicode	Program__translateILStream	1	
+ffcf8	ffd14	other	Program__translateILStream	7	0x193cc0
+ffd5c	ffd60	millicode	Program__translateILStream	1	
+10042c	100448	other	Program__translateILStream	7	0x193cc0
+1004a8	1004c4	other	Program__translateILStream	7	0x193cc0
+100620	1007e8	table	Program__translateILStream	114	
+101fb8	101fd0	table	Program__translateILStream	6	
+102048	102060	table	Program__translateILStream	6	
+102754	102758	millicode	Program__translateILStream	1	
+102828	10282c	millicode	Program__translateILStream	1	
+102a78	102a94	other	Program__translateILStream	7	0x193cc0
+102b04	102b08	millicode	Program__translateILStream	1	
+102bdc	102c20	table	Program__translateILStream	17	
+102c5c	102c60	millicode	Program__translateILStream	1	
+102cb8	102cbc	millicode	Program__translateILStream	1	
+102da4	102da8	millicode	Program__translateILStream	1	
+102e6c	102e70	millicode	Program__translateILStream	1	
+102f4c	102f50	millicode	Program__translateILStream	1	
+103014	103030	other	Program__translateILStream	7	0x193cc0
+103174	103190	other	Program__translateILStream	7	0x193cc0
+1032ec	1032f0	millicode	Program__translateILStream	1	
+103414	103430	other	Program__translateILStream	7	0x193cc0
+1034d8	1034dc	millicode	Program__translateILStream	1	
+10361c	103638	other	Program__translateILStream	7	0x193cc0
+10379c	1037b8	other	Program__translateILStream	7	0x193cc0
+103840	1038ec	table	Program__translateILStream	43	
+103cec	103cf8	eh-pad	Program__translateILStream	3	__Unwind_Resume
 103e80	103e84	millicode	isLessThan2	1	
 10451c	10453c	other	IRInst__replaceExtraData	8	
 105164	10519c	eh-pad	IRInst__ctor_10502c	14	0x193cc0,__Unwind_Resume
@@ -3402,31 +3402,31 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 176e0c	176e20	other	FUN_00176d6c	5	
 178478	1784f8	table	FUN_00178338	32	
 1787b4	17887c	table	FUN_00178648	50	
-179228	179248	eh-pad	FUN_00179138	8	0x193cc0,__Unwind_Resume
-17a24c	17a26c	eh-pad	FUN_0017a130	8	0x193cc0,__Unwind_Resume
-17aed4	17aef4	eh-pad	FUN_0017ae28	8	0x193cc0,__Unwind_Resume
-17befc	17bf00	eh-pad	FUN_0017bd78	1	__Unwind_Resume
-17c3a8	17c3ac	eh-pad	FUN_0017c244	1	__Unwind_Resume
-17cf98	17cf9c	eh-pad	FUN_0017ce7c	1	__Unwind_Resume
-17d14c	17d150	millicode	FUN_0017d06c	1	
-17d1e0	17d200	eh-pad	FUN_0017d06c	8	0x193cc0,__Unwind_Resume
-17d330	17d334	eh-pad	FUN_0017d26c	1	__Unwind_Resume
-17e138	17e13c	eh-pad	FUN_0017e02c	1	__Unwind_Resume
-17e550	17e554	eh-pad	FUN_0017e3f4	1	__Unwind_Resume
+179228	179248	eh-pad	ValueKey__insertTempCopyOfOperand	8	0x193cc0,__Unwind_Resume
+17a24c	17a26c	eh-pad	ValueKey__setLiteralVec4Operand	8	0x193cc0,__Unwind_Resume
+17aed4	17aef4	eh-pad	ValueKey__setOperandFromValueKey	8	0x193cc0,__Unwind_Resume
+17befc	17bf00	eh-pad	ValueKey__rewriteAsMovOfOperandLane	1	__Unwind_Resume
+17c3a8	17c3ac	eh-pad	ValueKey__rewriteAsMovOfOperand	1	__Unwind_Resume
+17cf98	17cf9c	eh-pad	ValueKey__rewriteAsMovOfReplacement	1	__Unwind_Resume
+17d14c	17d150	millicode	ValueKey__rewriteAsMovOfValueKey	1	
+17d1e0	17d200	eh-pad	ValueKey__rewriteAsMovOfValueKey	8	0x193cc0,__Unwind_Resume
+17d330	17d334	eh-pad	ValueKey__rewriteAsMovOfVec4Constant	1	__Unwind_Resume
+17e138	17e13c	eh-pad	ValueKey__rewriteAsMovOfOperandWithScale	1	__Unwind_Resume
+17e550	17e554	eh-pad	ValueKey__rewriteAsBinaryOfOperands	1	__Unwind_Resume
 17ea3c	17ea40	eh-pad	FUN_0017e7e0	1	__Unwind_Resume
-17ece0	17ece4	millicode	FUN_0017ebb0	1	
-17edb0	17edd0	eh-pad	FUN_0017ebb0	8	0x193cc0,__Unwind_Resume
+17ece0	17ece4	millicode	ValueKey__rewriteAsAdd	1	
+17edb0	17edd0	eh-pad	ValueKey__rewriteAsAdd	8	0x193cc0,__Unwind_Resume
 17f03c	17f040	eh-pad	FUN_0017ee68	1	__Unwind_Resume
-1801a4	1801f8	table	FUN_0017f7ec	21	
+1801a4	1801f8	table	ValueKey__simplifyInstruction	21	
 1811d8	1811f8	eh-pad	ValueKey__simplifyModifiersAndAddressing	8	0x193cc0,__Unwind_Resume
 181fdc	181ff8	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
 182010	18202c	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
 182040	182060	eh-pad	Block__flattenAndRebuildAddMulTree	8	0x193cc0,__Unwind_Resume
 183a98	183a9c	eh-pad	Block__flattenAndRebuildAddMulTree	1	__Unwind_Resume
 1840ac	1840cc	eh-pad	pass_height_reduction	8	0x193cc0,__Unwind_Resume
-18421c	184238	other	FUN_0018413c	7	0x193cc0
-184250	18426c	other	FUN_0018413c	7	0x193cc0
-184290	1842b0	eh-pad	FUN_0018413c	8	0x193cc0,__Unwind_Resume
+18421c	184238	other	Block__moveProducersBefore	7	0x193cc0
+184250	18426c	other	Block__moveProducersBefore	7	0x193cc0
+184290	1842b0	eh-pad	Block__moveProducersBefore	8	0x193cc0,__Unwind_Resume
 185878	18587c	eh-pad	IRInst__foldResultScaleIntoUsers	1	__Unwind_Resume
 185c28	185c2c	eh-pad	Inst__tryDp3Add	1	__Unwind_Resume
 187588	1875a8	other	FUN_00186a88	8	
@@ -3449,8 +3449,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 192358	192438	table	FUN_001922c4	56	
 19279c	1927a0	eh-pad	FUN_001922c4	1	__Unwind_Resume
 19323c	193240	eh-pad	FudoPs__peepholeCombine	1	__Unwind_Resume
-193b88	193ba8	eh-pad	FUN_00193b3c	8	0x193cc0,__Unwind_Resume
-193bd0	193be8	other	FUN_00193b3c	6	
+193b88	193ba8	eh-pad	TypedValueArray__createWrapping	8	0x193cc0,__Unwind_Resume
+193bd0	193be8	other	TypedValueArray__createWrapping	6	
 193c74	193c94	eh-pad	FUN_00193c00	8	0x193cc0,__Unwind_Resume
 193d94	193d98	millicode	List__freeAllNodes	1	
 193f04	193f08	millicode	Arena__bytesInUse	1	

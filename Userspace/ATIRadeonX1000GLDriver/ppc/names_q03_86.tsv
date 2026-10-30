@@ -2,16 +2,6 @@ use	evsFoldConstantMoves	bVar33	changedThisPass	INFERRED	role read off the funct
 use	evsFoldConstantMoves	bVar33	changedThisPass	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ true;$	+1
 use	evsFoldConstantMoves	bVar33	changedThisPass	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar33\ =\ true;$@2	+1
 use	evsFoldConstantMoves	bVar33	changedThisPass	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(bVar33\);$	+1
-use	evsFoldConstantMoves	bVar35	src0IsTemp	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar35\ =\ \*\(int\ \*\)\(iVar23\ \+\ \-0x54\)\ ==\ 2;$	+6
-use	evsFoldConstantMoves	bVar35	src0IsTemp	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(\(\(\(bVar35\)\ \&\&\ \(\*\(int\ \*\)\(iVar23\ \+\ \-0x50\)\ ==\ \*\(int\ \*\)\(iVar11\ \+\ \-0x6c\)\)\)\ \|\|$	+3
-use	evsFoldConstantMoves	bVar34	noReaderFound	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$	+1
-use	evsFoldConstantMoves	bVar34	noReaderFound	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ false;$	+1
-use	evsFoldConstantMoves	bVar34	noReaderFound	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(!bVar34\)\ goto\ LAB_0007e760;$	+1
-use	evsFoldConstantMoves	bVar34	foundDefinition	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ false;$@2	+1
-use	evsFoldConstantMoves	bVar34	foundDefinition	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@2	+1
-use	evsFoldConstantMoves	bVar34	foundDefinition	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ false;$@3	+1
-use	evsFoldConstantMoves	bVar34	foundDefinition	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar34\ =\ true;$@3	+1
-use	evsFoldConstantMoves	bVar34	foundDefinition	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar34\)\ \{$	+1
 use	evsFoldConstantMoves	bVar36	zIsOne	INFERRED	bVar36/bVar37 first hold constantZ==1.0 / ==0.0, later (instruction scan) the source-1/source-2 file==temp tests	^\s*bVar36\ =\ fVar5\ ==\ 1\.0;$	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x30\)\ =\ 0x87de;$	all	none
 use	evsFoldConstantMoves	bVar36	src1IsTemp	INFERRED	bVar36/bVar37 first hold constantZ==1.0 / ==0.0, later (instruction scan) the source-1/source-2 file==temp tests	^\s*\(\(bVar36\ =\ \*\(int\ \*\)\(iVar23\ \+\ \-0x38\)\ ==\ 2,\ bVar36\ \&\&$	^\s*bVar34\ =\ false;$	all	none
 use	evsFoldConstantMoves	bVar37	zIsZero	INFERRED	bVar36/bVar37 first hold constantZ==1.0 / ==0.0, later (instruction scan) the source-1/source-2 file==temp tests	^\s*bVar36\ =\ fVar5\ ==\ 1\.0;$	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x30\)\ =\ 0x87de;$	all	none

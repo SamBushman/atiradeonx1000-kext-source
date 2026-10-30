@@ -1,0 +1,65 @@
+use	FUN_000a9640	uVar11	hwMinSizeInt	INFERRED	integer word at ctx+0x13d0 (hardware point size limit), stored to ctx+0x108 when the size does not exceed it	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x000013d0U\)\ \+\ param_1\);$	+1
+use	FUN_000a9640	uVar11	hwMinSizeInt	INFERRED	integer word at ctx+0x13d0 (hardware point size limit), stored to ctx+0x108 when the size does not exceed it	^\s*if\ \(fVar3\ <=\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar11\)\ \-\ dVar13\)\)\ \{$	+2
+use	FUN_000a9640	uVar11	attenuationQuadratic	INFERRED	state+0x30d4 point distance attenuation quadratic term, copied to ctx+0x118	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x000030d4\)\ \+\ param_2\);$	+1
+use	FUN_000a9640	uVar11	attenuationQuadratic	INFERRED	state+0x30d4 point distance attenuation quadratic term, copied to ctx+0x118	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x118\)\ =\ uVar11;$	+1
+use	FUN_000a9640	uVar11	needsDerivedScale	INFERRED	0/1 stored at ctx+0x1940: point state needs the per-size derived scale (size >= 2, attenuation on or sprite)	^\s*uVar11\ =\ 0;$	+1
+use	FUN_000a9640	uVar11	needsDerivedScale	INFERRED	0/1 stored at ctx+0x1940: point state needs the per-size derived scale (size >= 2, attenuation on or sprite)	^\s*uVar11\ =\ 1;$	+1
+use	FUN_000a9640	uVar11	needsDerivedScale	INFERRED	0/1 stored at ctx+0x1940: point state needs the per-size derived scale (size >= 2, attenuation on or sprite)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x1940\)\ =\ uVar11;$	+1
+use	FUN_000a9640	fVar3	pointSizeMinState	INFERRED	state+0x30c0 minimum point size, copied to ctx+0xf4 and clamped against the hardware minimum (ctx+0x13c4)	^\s*fVar3\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000030c0\)\ \+\ param_2\);$	+1
+use	FUN_000a9640	fVar3	pointSizeMinState	INFERRED	state+0x30c0 minimum point size, copied to ctx+0xf4 and clamped against the hardware minimum (ctx+0x13c4)	^\s*\*\(float\ \*\)\(param_1\ \+\ 0xf4\)\ =\ fVar3;$	+3
+use	FUN_000a9640	fVar3	pointSizeMinState	INFERRED	state+0x30c0 minimum point size, copied to ctx+0xf4 and clamped against the hardware minimum (ctx+0x13c4)	^\s*if\ \(\-\(fVar3\ \-\ fVar4\)\ <\ 0\.0\)\ \{$	+1
+use	FUN_000a9640	fVar3	pointSizeMinState	INFERRED	state+0x30c0 minimum point size, copied to ctx+0xf4 and clamped against the hardware minimum (ctx+0x13c4)	^\s*if\ \(fVar3\ <=\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar11\)\ \-\ dVar13\)\)\ \{$	+1
+use	FUN_000a9640	fVar3	pointSizeMinState	INFERRED	state+0x30c0 minimum point size, copied to ctx+0xf4 and clamped against the hardware minimum (ctx+0x13c4)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x108\)\ =\ \(int\)fVar3;$	+1
+use	FUN_000a9640	fVar3	pointSizeMaxState	INFERRED	state+0x30c4 maximum point size, copied to ctx+0xf8 and clamped against the hardware maximum (ctx+0x13c8)	^\s*fVar3\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000030c4\)\ \+\ param_2\);$	+2
+use	FUN_000a9640	fVar3	pointSizeMaxState	INFERRED	state+0x30c4 maximum point size, copied to ctx+0xf8 and clamped against the hardware maximum (ctx+0x13c8)	^\s*if\ \(fVar3\ \-\ fVar5\ <\ 0\.0\)\ \{$	+2
+use	FUN_000a9640	fVar3	pointSizeMaxState	INFERRED	state+0x30c4 maximum point size, copied to ctx+0xf8 and clamped against the hardware maximum (ctx+0x13c8)	^\s*if\ \(\-\(fVar3\ \-\ fVar5\)\ <\ 0\.0\)\ \{$	+1
+use	FUN_000a9640	fVar3	pointSizeMaxState	INFERRED	state+0x30c4 maximum point size, copied to ctx+0xf8 and clamped against the hardware maximum (ctx+0x13c8)	^\s*if\ \(\(float\)\(\(double\)CONCAT44\(0x43300000,uVar11\)\ \-\ DOUBLE_001aa250\)\ <=\ fVar3\)\ \{$	+1
+use	FUN_000a9640	fVar3	pointSizeMaxState	INFERRED	state+0x30c4 maximum point size, copied to ctx+0xf8 and clamped against the hardware maximum (ctx+0x13c8)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x10c\)\ =\ \(int\)fVar3;$	+1
+use	FUN_000a9640	fVar3	scaledWidth	INFERRED	2 * engine+0x2a54 * state+0x1810: width scale used for the reciprocal at ctx+0x190	^\s*fVar3\ =\ \*\(float\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x2a54\);$	+1
+use	FUN_000a9640	fVar3	scaledWidth	INFERRED	2 * engine+0x2a54 * state+0x1810: width scale used for the reciprocal at ctx+0x190	^\s*fVar3\ =\ \(fVar3\ \+\ fVar3\)\ \*\ \*\(float\ \*\)\(param_2\ \+\ 0x1810\);$	+1
+use	FUN_000a9640	fVar3	scaledWidth	INFERRED	2 * engine+0x2a54 * state+0x1810: width scale used for the reciprocal at ctx+0x190	^\s*if\ \(fVar3\ ==\ FLOAT_001aa0d4\)\ \{$	+1
+use	FUN_000a9640	fVar3	scaledWidth	INFERRED	2 * engine+0x2a54 * state+0x1810: width scale used for the reciprocal at ctx+0x190	^\s*\*\(float\ \*\)\(param_1\ \+\ 400\)\ =\ FLOAT_001aa0e8\ /\ fVar3;$	+1
+use	FUN_000a9640	fVar4	scaledHeight	INFERRED	2 * engine+0x2a58 * state+0x1814: height scale used for the reciprocal at ctx+0x194	^\s*fVar4\ =\ \*\(float\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x2a58\);$	+1
+use	FUN_000a9640	fVar4	scaledHeight	INFERRED	2 * engine+0x2a58 * state+0x1814: height scale used for the reciprocal at ctx+0x194	^\s*fVar4\ =\ \(fVar4\ \+\ fVar4\)\ \*\ \*\(float\ \*\)\(param_2\ \+\ 0x1814\);$	+1
+use	FUN_000a9640	fVar4	scaledHeight	INFERRED	2 * engine+0x2a58 * state+0x1814: height scale used for the reciprocal at ctx+0x194	^\s*if\ \(fVar4\ ==\ FLOAT_001aa0d4\)\ \{$	+1
+use	FUN_000a9640	fVar4	scaledHeight	INFERRED	2 * engine+0x2a58 * state+0x1814: height scale used for the reciprocal at ctx+0x194	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x194\)\ =\ FLOAT_001aa0e8\ /\ fVar4;$	+1
+local	FUN_000a9640	bVar1	pointSmoothFlag	INFERRED	state+0x30dc low bit, stored to ctx+0x44 bit 30
+local	FUN_000a9640	bVar2	pointSpriteFlag	INFERRED	state+0x30dd low bit, stored to ctx+0x44 bit 29
+use	FUN_000a9640	fVar5	minSizeClampTemp	INFERRED	scratch of the min(pointSizeMin, hwMin) clamp	^\s*fVar5\ =\ fVar3;$	+1
+use	FUN_000a9640	fVar5	minSizeClampTemp	INFERRED	scratch of the min(pointSizeMin, hwMin) clamp	^\s*fVar5\ =\ fVar4;$	+1
+use	FUN_000a9640	fVar5	minSizeClampTemp	INFERRED	scratch of the min(pointSizeMin, hwMin) clamp	^\s*fVar6\ =\ fVar5;$	+1
+use	FUN_000a9640	fVar5	hwMaxSize	INFERRED	hardware maximum point size, ctx+0x13c8	^\s*fVar5\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013c8U\)\ \+\ param_1\);$	+3
+use	FUN_000a9640	fVar5	hwMaxSize	INFERRED	hardware maximum point size, ctx+0x13c8	^\s*if\ \(\-\(fVar3\ \-\ fVar5\)\ <\ 0\.0\)\ \{$	+2
+use	FUN_000a9640	fVar5	hwMaxSize	INFERRED	hardware maximum point size, ctx+0x13c8	^\s*if\ \(\(fVar4\ <\ fVar6\)\ \&\&\ \(fVar7\ =\ fVar5,\ fVar6\ <\ fVar5\)\)\ \{$	+1
+use	FUN_000a9640	fVar5	hwMaxSize	INFERRED	hardware maximum point size, ctx+0x13c8	^\s*if\ \(\(fVar4\ <\ fVar6\)\ \&\&\ \(fVar7\ =\ fVar5,\ fVar6\ <\ fVar5\)\)\ \{$@2	+1
+use	FUN_000a9640	fVar6	minSizeClamped	INFERRED	pointSizeMin clamped against the hardware minimum, stored to ctx+0x100	^\s*fVar6\ =\ fVar4;$	+1
+use	FUN_000a9640	fVar6	minSizeClamped	INFERRED	pointSizeMin clamped against the hardware minimum, stored to ctx+0x100	^\s*fVar6\ =\ fVar5;$	+1
+use	FUN_000a9640	fVar6	minSizeClamped	INFERRED	pointSizeMin clamped against the hardware minimum, stored to ctx+0x100	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x100\)\ =\ fVar6;$	+1
+use	FUN_000a9640	fVar6	maxSizeClamped	INFERRED	pointSizeMax clamped against the hardware maximum, stored to ctx+0x104	^\s*fVar6\ =\ fVar5;$@2	+1
+use	FUN_000a9640	fVar6	maxSizeClamped	INFERRED	pointSizeMax clamped against the hardware maximum, stored to ctx+0x104	^\s*fVar6\ =\ fVar3;$	+1
+use	FUN_000a9640	fVar6	maxSizeClamped	INFERRED	pointSizeMax clamped against the hardware maximum, stored to ctx+0x104	^\s*fVar6\ =\ fVar5;$@3	+1
+use	FUN_000a9640	fVar6	maxSizeClamped	INFERRED	pointSizeMax clamped against the hardware maximum, stored to ctx+0x104	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x104\)\ =\ fVar6;$	+1
+use	FUN_000a9640	fVar6	pointSizeState	INFERRED	state+0x30bc requested point size (first quantization)	^\s*fVar6\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000030bc\)\ \+\ param_2\);$	+1
+use	FUN_000a9640	fVar6	pointSizeState	INFERRED	state+0x30bc requested point size (first quantization)	^\s*if\ \(\(fVar4\ <\ fVar6\)\ \&\&\ \(fVar7\ =\ fVar5,\ fVar6\ <\ fVar5\)\)\ \{$	+4
+use	FUN_000a9640	fVar6	pointSizeStateInt	INFERRED	state+0x30bc requested point size (integer copy at ctx+0xe4)	^\s*fVar6\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000030bc\)\ \+\ param_2\);$@2	+1
+use	FUN_000a9640	fVar6	pointSizeStateInt	INFERRED	state+0x30bc requested point size (integer copy at ctx+0xe4)	^\s*if\ \(\(fVar4\ <\ fVar6\)\ \&\&\ \(fVar7\ =\ fVar5,\ fVar6\ <\ fVar5\)\)\ \{$@2	+4
+use	FUN_000a9640	fVar7	quantizedPointSize	INFERRED	point size snapped to the hardware granularity (ctx+0x13cc) between hardware min and max: stored to ctx+0xe0	^\s*fVar7\ =\ fVar4;$	+1
+use	FUN_000a9640	fVar7	quantizedPointSize	INFERRED	point size snapped to the hardware granularity (ctx+0x13cc) between hardware min and max: stored to ctx+0xe0	^\s*if\ \(\(fVar4\ <\ fVar6\)\ \&\&\ \(fVar7\ =\ fVar5,\ fVar6\ <\ fVar5\)\)\ \{$	+4
+use	FUN_000a9640	fVar7	quantizedPointSize	INFERRED	point size snapped to the hardware granularity (ctx+0x13cc) between hardware min and max: stored to ctx+0xe0	^\s*\*\(float\ \*\)\(param_1\ \+\ 0xe0\)\ =\ fVar7;$	+1
+use	FUN_000a9640	fVar7	quantizedPointSizeInt	INFERRED	same quantization, truncated to an integer for ctx+0xe4	^\s*fVar7\ =\ fVar4;$@2	+1
+use	FUN_000a9640	fVar7	quantizedPointSizeInt	INFERRED	same quantization, truncated to an integer for ctx+0xe4	^\s*if\ \(\(fVar4\ <\ fVar6\)\ \&\&\ \(fVar7\ =\ fVar5,\ fVar6\ <\ fVar5\)\)\ \{$@2	+4
+use	FUN_000a9640	fVar7	quantizedPointSizeInt	INFERRED	same quantization, truncated to an integer for ctx+0xe4	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xe4\)\ =\ \(int\)fVar7;$	+1
+local	FUN_000a9640	bVar8	needsScaleRecompute	INFERRED	true when the viewport reciprocal scales (ctx+0x190/0x194/0x198) must be recomputed
+local	FUN_000a9640	fVar9	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8)
+use	FUN_000a9640	uVar12	pointModeBits	INFERRED	(smooth & 1) << 30: new ctx+0x44 bits	^\s*uVar12\ =\ \(bVar1\ \&\ 1\)\ <<\ 0x1e;$	+2
+use	FUN_000a9640	uVar12	pointModeBits	INFERRED	(smooth & 1) << 30: new ctx+0x44 bits	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ \(bVar2\ \&\ 1\)\ <<\ 0x1d\ \|\ uVar12\ \|\ uVar10\ \&\ 0x9fffffff;$	+1
+use	FUN_000a9640	uVar12	pointStateWord	INFERRED	ctx+0xe8 point-state flag word (bit0 attenuated, bit3 not default mode)	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0xe8\)\ \&\ 0xfffffffe;$	+2
+use	FUN_000a9640	uVar12	pointStateWord	INFERRED	ctx+0xe8 point-state flag word (bit0 attenuated, bit3 not default mode)	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0xe8\)\ \|\ 1;$	+2
+use	FUN_000a9640	uVar12	pointStateWord	INFERRED	ctx+0xe8 point-state flag word (bit0 attenuated, bit3 not default mode)	^\s*uVar12\ =\ uVar12\ \&\ 0xfffffff7;$	+2
+use	FUN_000a9640	uVar12	pointStateWord	INFERRED	ctx+0xe8 point-state flag word (bit0 attenuated, bit3 not default mode)	^\s*uVar12\ =\ uVar12\ \|\ 8;$	+2
+use	FUN_000a9640	uVar12	pointStateWord	INFERRED	ctx+0xe8 point-state flag word (bit0 attenuated, bit3 not default mode)	^\s*if\ \(\(\*\(int\ \*\)\(param_1\ \+\ 0xe4\)\ <\ 2\)\ \&\&\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\)\ \{$	+1
+use	FUN_000a9640	dVar13	intToDoubleBias	INFERRED	DOUBLE_001aa250: 2^52 bias used to convert the unsigned word to float	^\s*dVar13\ =\ DOUBLE_001aa250;$	+1
+use	FUN_000a9640	dVar13	intToDoubleBias	INFERRED	DOUBLE_001aa250: 2^52 bias used to convert the unsigned word to float	^\s*if\ \(fVar3\ <=\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar11\)\ \-\ dVar13\)\)\ \{$	+1
+use	FUN_000a9640	dVar13	scaleLength	INFERRED	sqrt(invWidth^2 + invHeight^2), stored to ctx+0x198 and returned	^\s*dVar13\ =\ _sqrt\(\(double\)\(\*\(float\ \*\)\(param_1\ \+\ 400\)\ \*\ \*\(float\ \*\)\(param_1\ \+\ 400\)\ \+$	+4
+local	FUN_000a9640	param_2	pointState	INFERRED	GL state block holding the point parameters (+0x30bc..+0x30e4)
+func	FUN_000a9640	gld_updatePointState	INFERRED	copies the GL point parameters (size, min/max, fade threshold, attenuation, sprite/smooth flags) from the state block into the context (ctx+0xe0..0x118, ctx+0x44 bits 29/30), quantizes the size to the hardware granularity and recomputes the viewport reciprocal scales (ctx+0x190..0x198)

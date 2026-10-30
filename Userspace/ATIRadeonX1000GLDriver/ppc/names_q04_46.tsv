@@ -1,0 +1,13 @@
+use	FUN_000b6020	uVar3	cmdListOwnerArg	INFERRED	result of the context callback at +0x1284, passed with 1 to the allocator at glContext+0x10	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001284\)\ \+\ param_1\)\)\(param_1\);$	+2
+use	FUN_000b6020	uVar3	unitOpcodeWord	INFERRED	command word emitted per selected unit: 0x47, or 0xe when param_2 != 0	^\s*uVar3\ =\ 0x47;$	+1
+use	FUN_000b6020	uVar3	unitOpcodeWord	INFERRED	command word emitted per selected unit: 0x47, or 0xe when param_2 != 0	^\s*uVar3\ =\ 0xe;$	+1
+use	FUN_000b6020	uVar3	unitOpcodeWord	INFERRED	command word emitted per selected unit: 0x47, or 0xe when param_2 != 0	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 0xc\)\)\ =\ uVar3;$	+1
+local	FUN_000b6020	iVar7	cmdListSlotBase	INFERRED	glContext + 4 * unitMask: base for the cached command list pointer at +0x1448
+local	FUN_000b6020	uVar2	cmdCount	INFERRED	number of words in the command list after the last append (grow check against capacity iVar4[2])
+local	FUN_000b6020	iVar4	cmdList	INFERRED	command list object {count@+4, capacity@+8, words@+0xc} allocated and cached at glContext+0x1448+4*unitMask
+local	FUN_000b6020	puVar9	cmdCountPtr	INFERRED	&cmdList->count
+local	FUN_000b6020	bVar1	notLastUnit	INFERRED	loop continues while the unit index (0..3) is not 3
+local	FUN_000b6020	uVar6	unitSelectWord	INFERRED	0x170000 with the current unit index in the low 16 bits
+local	FUN_000b6020	param_2	variant	INFERRED	selects the per-unit opcode word (0x47 when 0, else 0xe)
+local	FUN_000b6020	param_3	unitMask	INFERRED	bitmask of units (0..3) to emit commands for; also indexes the cache slot
+func	FUN_000b6020	gld_buildUnitSetupCmdList	INFERRED	builds and caches (glContext+0x1448+4*unitMask) a growable command word list: header words 0x1, 0x10200, 0x1ff0016, 0x120000, per selected unit 0x47/0xe + 0x170000|unit + 0x120000, terminator 0x28; then hands it to the callback at +0x1288

@@ -1,0 +1,14 @@
+local	DListNode__clear	param_1	list	INFERRED	doubly linked list: +8 first node, +0xc sentinel
+local	DListNode__clear	piVar1	node	INFERRED	node being destroyed (vtable +4)
+local	DListNode__clear	piVar2	nextNode	INFERRED	next node saved before the destructor call
+local	DListNode__init	param_1	this	INFERRED	list object initialised: sentinel at +0xc, first at +8
+local	DListNode__init	puVar1	vtableBase	INFERRED	PTR_DAT_001e8b48 vtable base (+8 stored as the vtable pointer)
+local	DListNode__ctor_194060	param_1	this	INFERRED	list object initialised: sentinel at +0xc, first at +8
+local	DListNode__ctor_194060	puVar1	vtableBase	INFERRED	PTR_DAT_001e8b48 vtable base (+8 stored as the vtable pointer)
+use	MachineAssembler__dtor_19df54	iVar1	bufferB	INFERRED	this[0x26]: arena buffer freed with its header	^\s*iVar1\ =\ param_1\[0x26\];$	+1
+use	MachineAssembler__dtor_19df54	iVar1	bufferB	INFERRED	this[0x26]: arena buffer freed with its header	^\s*if\ \(iVar1\ !=\ 0\)\ \{$	+3
+use	MachineAssembler__dtor_19df54	iVar1	bufferA	INFERRED	this[0x25]: arena buffer freed with its header	^\s*iVar1\ =\ param_1\[0x25\];$	+4
+use	MachineAssembler__dtor_19deb0	iVar1	bufferB	INFERRED	this[0x26]: arena buffer freed with its header	^\s*iVar1\ =\ param_1\[0x26\];$	+1
+use	MachineAssembler__dtor_19deb0	iVar1	bufferB	INFERRED	this[0x26]: arena buffer freed with its header	^\s*if\ \(iVar1\ !=\ 0\)\ \{$	+3
+use	MachineAssembler__dtor_19deb0	iVar1	bufferA	INFERRED	this[0x25]: arena buffer freed with its header	^\s*iVar1\ =\ param_1\[0x25\];$	+4
+local	stub_getrealaddr	param_1	symbol	CONFIRMED	C symbol name to look up ("_" is prepended, "$LDBL128" appended, resolved with NSLookupAndBindSymbolWithHint libSystem)

@@ -44,3 +44,68 @@ local	FUN_000bda40	param_4	scratchR6	INFERRED	callers pass their variable `scrat
 local	FUN_000bda40	param_5	dirtyWord3	INFERRED	callers pass their variable `dirtyWord3` here (1 call site(s), e.g. in FUN_000a9ac0)
 local	FUN_000bda40	param_6	dirtyWord1	INFERRED	callers pass their variable `dirtyWord1` here (1 call site(s), e.g. in FUN_000a9ac0)
 local	FUN_000bda40	param_8	dirtyWord4	INFERRED	callers pass their variable `dirtyWord4` here (1 call site(s), e.g. in FUN_000a9ac0)
+use	FUN_000bde70	uVar6	phaseScan	INFERRED	phase index while counting the instruction records of the later phases	^\s*uVar6\ =\ uVar18;$	+1
+use	FUN_000bde70	uVar6	phaseScan	INFERRED	phase index while counting the instruction records of the later phases	^\s*uVar17\ =\ uVar17\ \+\ \(param_2\[uVar6\ \+\ 2\]\ >>\ 6\ \&\ 0x3f\)\ \+\ 1;$	+3
+use	FUN_000bde70	uVar6	phaseScan	INFERRED	phase index while counting the instruction records of the later phases	^\s*uVar6\ =\ uVar13;$	+1
+use	FUN_000bde70	uVar6	aluStart	INFERRED	first ALU instruction index of the phase (word & 0x3f)	^\s*uVar6\ =\ uVar4\ \&\ 0x3f;$	+1
+use	FUN_000bde70	uVar6	aluStart	INFERRED	first ALU instruction index of the phase (word & 0x3f)	^\s*uVar13\ =\ uVar6\ \+\ \(uVar4\ >>\ 6\ \&\ 0x3f\);$	+3
+use	FUN_000bde70	uVar6	aluStart	INFERRED	first ALU instruction index of the phase (word & 0x3f)	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+use	FUN_000bde70	uVar6	aluStart	INFERRED	first ALU instruction index of the phase (word & 0x3f)	^\s*\}\ while\ \(uVar6\ <=\ uVar13\);$	+1
+use	FUN_000bde70	uVar4	lastRsIndex	INFERRED	index of the last RS (interpolator) record copied	^\s*uVar4\ =\ uVar13;$	+1
+use	FUN_000bde70	uVar4	lastRsIndex	INFERRED	index of the last RS (interpolator) record copied	^\s*uVar13\ =\ uVar4\ \+\ 1;$	+1
+use	FUN_000bde70	uVar4	lastRsIndex	INFERRED	index of the last RS (interpolator) record copied	^\s*iVar9\ =\ uVar4\ \+\ 2;$	+1
+use	FUN_000bde70	uVar4	aluAddrWord0	INFERRED	6-bit address field 0 of ALU word programImage[8][i]	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ \&\ 0x3f;$	+3
+use	FUN_000bde70	uVar4	aluAddrWord1	INFERRED	6-bit address field 1 of ALU word programImage[8][i]	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 6\ \&\ 0x3f;$	+3
+use	FUN_000bde70	uVar4	aluAddrWord2	INFERRED	6-bit address field 2 of ALU word programImage[8][i]	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 0xc\ \&\ 0x3f;$	+3
+use	FUN_000bde70	uVar4	alphaAddrWord0	INFERRED	6-bit address field 0 of ALU word programImage[9][i]	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ \&\ 0x3f;$	+3
+use	FUN_000bde70	uVar4	alphaAddrWord1	INFERRED	6-bit address field 1 of ALU word programImage[9][i]	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ >>\ 6\ \&\ 0x3f;$	+3
+use	FUN_000bde70	uVar4	alphaAddrWord2	INFERRED	6-bit address field 2 of ALU word programImage[9][i]	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ >>\ 0xc\ \&\ 0x3f;$	+3
+local	FUN_000bde70	puVar1	texWordPtr	INFERRED	pointer to the texture instruction word programImage[7][i] after its fields were read
+local	FUN_000bde70	puVar2	aluWordPtr	INFERRED	pointer to the ALU word programImage[0xc][i] after its fields were read
+use	FUN_000bde70	bVar3	isFirstTexInst	INFERRED	true for the first texture instruction of a phase (stored in the record flag at +0x20)	^\s*bVar3\ =\ uVar11\ ==\ uVar10;$	+1
+use	FUN_000bde70	bVar3	isFirstTexInst	INFERRED	true for the first texture instruction of a phase (stored in the record flag at +0x20)	^\s*\*\(bool\ \*\)\(piVar12\ \+\ 8\)\ =\ bVar3;$	+1
+use	FUN_000bde70	bVar3	moreAluPhases	INFERRED	the phase loop continues while the phase index is not 3	^\s*bVar3\ =\ uVar18\ !=\ 3;$	+1
+use	FUN_000bde70	bVar3	moreAluPhases	INFERRED	the phase loop continues while the phase index is not 3	^\s*\}\ while\ \(bVar3\);$	+1
+local	FUN_000bde70	uVar5	texWord	INFERRED	texture instruction word programImage[7][i]
+local	FUN_000bde70	uVar7	signedRegIndex	INFERRED	6-bit register field decoded to a record: values >= 0x20 become (value - 0x20) | 0x8000 (relative/constant flag)
+local	FUN_000bde70	uVar8	status	INFERRED	return status: 0 on success, 0x80000005 invalid arguments, 0x80000006 output too small
+local	FUN_000bde70	iVar9	recordIndex	INFERRED	index of the next 0x48-byte instruction record in the output program
+local	FUN_000bde70	uVar10	texStart	INFERRED	first texture instruction index of the phase
+local	FUN_000bde70	uVar11	texIndex	INFERRED	texture instruction index being decoded
+use	FUN_000bde70	uVar13	phaseCursor	INFERRED	phase index copy used by the instruction-count loop	^\s*uVar13\ =\ uVar18;$	+1
+use	FUN_000bde70	uVar13	phaseCursor	INFERRED	phase index copy used by the instruction-count loop	^\s*uVar13\ =\ uVar6\ \+\ 1;$	+1
+use	FUN_000bde70	uVar13	phaseCursor	INFERRED	phase index copy used by the instruction-count loop	^\s*uVar17\ =\ uVar17\ \+\ \(param_2\[uVar13\ \+\ 2\]\ >>\ 0x11\ \&\ 0x1f\)\ \+\ 1;$	+2
+use	FUN_000bde70	uVar13	rsIndex	INFERRED	index of the RS record being copied	^\s*uVar13\ =\ 0;$	+1
+use	FUN_000bde70	uVar13	rsIndex	INFERRED	index of the RS record being copied	^\s*uVar4\ =\ uVar13;$	+1
+use	FUN_000bde70	uVar13	rsIndex	INFERRED	index of the RS record being copied	^\s*uVar13\ =\ uVar4\ \+\ 1;$	+1
+use	FUN_000bde70	uVar13	rsIndex	INFERRED	index of the RS record being copied	^\s*\}\ while\ \(uVar13\ <=\ \(\*param_1\ \&\ 0xf\)\);$	+1
+use	FUN_000bde70	uVar13	texCountFlag	INFERRED	programImage[0] bit 3 (phase has texture instructions), later the end index of the texture range	^\s*uVar13\ =\ \*param_2\ >>\ 3\ \&\ 1;$	+1
+use	FUN_000bde70	uVar13	texCountFlag	INFERRED	programImage[0] bit 3 (phase has texture instructions), later the end index of the texture range	^\s*if\ \(\(uVar13\ !=\ 0\)\ \&\&\ \(uVar13\ =\ uVar10\ \+\ \(uVar4\ >>\ 0x11\ \&\ 0x1f\),\ uVar10\ <=\ uVar13\)\)\ \{$	+1
+use	FUN_000bde70	uVar13	texCountFlag	INFERRED	programImage[0] bit 3 (phase has texture instructions), later the end index of the texture range	^\s*\}\ while\ \(uVar11\ <=\ uVar13\);$	+1
+use	FUN_000bde70	uVar13	texCountFlag	INFERRED	programImage[0] bit 3 (phase has texture instructions), later the end index of the texture range	^\s*uVar13\ =\ 1;$	+1
+use	FUN_000bde70	uVar13	aluEnd	INFERRED	last ALU instruction index of the phase (start + count)	^\s*uVar13\ =\ uVar6\ \+\ \(uVar4\ >>\ 6\ \&\ 0x3f\);$	+2
+use	FUN_000bde70	uVar13	aluEnd	INFERRED	last ALU instruction index of the phase (start + count)	^\s*\}\ while\ \(uVar6\ <=\ uVar13\);$	+1
+use	FUN_000bde70	iVar14	phaseBias	INFERRED	-(programImage[0] & 7): first phase offset from 0	^\s*iVar14\ =\ \-\(\*param_2\ \&\ 7\);$	+2
+use	FUN_000bde70	iVar14	phaseBias	INFERRED	-(programImage[0] & 7): first phase offset from 0	^\s*puVar15\ =\ param_2\ \+\ iVar14\ \+\ 5;$	+1
+use	FUN_000bde70	iVar14	texByteOffset	INFERRED	texture instruction index * 4	^\s*iVar14\ =\ uVar10\ <<\ 2;$	+1
+use	FUN_000bde70	iVar14	texByteOffset	INFERRED	texture instruction index * 4	^\s*\*\(byte\ \*\)\(\(int\)piVar12\ \+\ 0x19\)\ =\ \(byte\)\(\*\(uint\ \*\)\(iVar14\ \+\ param_2\[7\]\)\ >>\ 0xb\)\ \&\ 0xf;$	+2
+use	FUN_000bde70	iVar14	texByteOffset	INFERRED	texture instruction index * 4	^\s*\*\(ushort\ \*\)\(\(int\)piVar12\ \+\ 0xe\)\ =\ \(ushort\)\*\(undefined4\ \*\)\(iVar14\ \+\ param_2\[7\]\)\ \&\ 0x1f;$	+3
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*iVar14\ =\ uVar6\ <<\ 2;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\*\(byte\ \*\)\(piVar12\ \+\ 5\)\ =\ \(byte\)\(\*\(uint\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 0x17\)\ \&\ 7;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(byte\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 0x1a\)\ \&\ 7;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(byte\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 0x1d\)\ \&\ 3;$	+2
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 6\ \&\ 0x3f;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 0xc\ \&\ 0x3f;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(ushort\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[8\]\ \+\ iVar14\)\ >>\ 0x12\)\ \&\ 0x1f;$	+3
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(byte\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ >>\ 0x19\)\ \&\ 3;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(byte\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ >>\ 0x1b\)\ \&\ 1;$	+2
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ >>\ 6\ \&\ 0x3f;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ >>\ 0xc\ \&\ 0x3f;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(ushort\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[9\]\ \+\ iVar14\)\ >>\ 0x12\)\ \&\ 0x1f;$	+9
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(byte\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[0xb\]\ \+\ iVar14\)\ >>\ 0x1b\)\ \&\ 7;$	+1
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(byte\)\(\(uint\)\*\(undefined4\ \*\)\(param_2\[0xb\]\ \+\ iVar14\)\ >>\ 0x1e\)\ \&\ 1;$	+10
+use	FUN_000bde70	iVar14	aluByteOffset	INFERRED	ALU instruction index * 4	^\s*\(byte\)\(\(uint\)\*\(undefined4\ \*\)\(iVar14\ \+\ param_2\[0xc\]\)\ >>\ 0x1b\)\ \&\ 7;$	+3
+local	FUN_000bde70	piVar16	program	INFERRED	output program: header {flags, capacity@+4, count@+8}, then 0x48-byte instruction records
+local	FUN_000bde70	uVar17	recordCount	INFERRED	number of records needed (RS count + texture and ALU instructions of all phases)
+local	FUN_000bde70	uVar18	phaseIndex	INFERRED	phase being decoded, from the first phase up to 3
+func	FUN_000bde70	psnDecDecodeFragmentProgram	INFERRED	decodes an R300-style fragment program image (RS words, per-phase texture and ALU instruction words) into 0x48-byte instruction records of the output program; validates the callbacks magic (scCallbacks[0xd]) and the output capacity

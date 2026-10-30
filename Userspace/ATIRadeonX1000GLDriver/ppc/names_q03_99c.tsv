@@ -1,0 +1,6 @@
+local	recordProgramBuildDependencies	lVar7	srcWordPtr1Copy	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordProgramBuildDependencies	dVar29	srcWordPtrScratch	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordProgramBuildDependencies	puVar16	srcWordPtr0Copy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(cVar22\ ==\ 'D'\)\ \&\&$	+2
+use	recordProgramBuildDependencies	puVar16	srcWordPtr0Copy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \*puVar16;$	+1
+use	recordProgramBuildDependencies	puVar16	srcWordPtr0Copy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar16\ =\ uVar17\ \|\ uVar10\ \&\ 0xffff1fff;$	+2
+use	recordProgramBuildDependencies	puVar16	srcWordPtr0Copy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \*puVar16\ >>\ 9\ \&\ 0xe000;$	+1

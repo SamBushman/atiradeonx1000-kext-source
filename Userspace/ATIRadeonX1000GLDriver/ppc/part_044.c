@@ -4776,7 +4776,7 @@ LAB_001605dc:
   operandRecord = IRInst__getOperandRecord(inst,0);
   WriteMask__fromSelectWord(auStack_38,*(undefined4 *)(operandRecord + 0x10));
   operandRecord = IRInst__getOperandRecord(node,0);
-  FUN_000f3968(auStack_34,*(undefined4 *)(operandRecord + 0x10),0x1010101);
+  laneBytes__selectWhereFirstIsOne(auStack_34,*(undefined4 *)(operandRecord + 0x10),0x1010101);
   *(int *)(pass + 0x17c) = *(int *)(pass + 0x17c) + 1;
   hasSingleUse = IRInst__hasSingleUse(inst,pass);
   if (hasSingleUse == 0) {
@@ -5134,7 +5134,7 @@ int FUN_00160eb0(foldCtxA, foldCtxB, inst, program)
         return 1;
       }
       if (!chainEndsAtFirst) {
-        FUN_000da09c(*(undefined4 *)(*(int *)(program + 8) + 0x398),*(uint *)(program + 0x30) & 1);
+        Compiler__bumpStatsCounter100(*(undefined4 *)(*(int *)(program + 8) + 0x398),*(uint *)(program + 0x30) & 1);
       }
       return 1;
     }
@@ -9414,7 +9414,7 @@ int Scheduler__findFreeTempRegister(scheduler, registerFile, componentMask)
 LAB_00167d14:
             if (((requestedByte != '\0') && (writerNode = *(int *)(scheduler[1] + 0x38), writerNode != 0)) &&
                ((*(uint *)(writerNode + 0x94) == reg &&
-                ((((writerNode = FUN_000f313c(writerNode,componentIndex), writerNode != 0 &&
+                ((((writerNode = IRInst__isLaneWritten(writerNode,componentIndex), writerNode != 0 &&
                    (writerNode = *(int *)(hwLimits[0x4d] + regByteOffset), writerNode != 0)) &&
                   (*(int *)(writerNode + 0x38) == *(int *)(scheduler[1] + 0x38))) &&
                  (writerNode = ((int (*)())SchedNode__getLastConsumerCycle)(writerNode,componentIndex), writerNode == scheduler[0xb])))))) goto LAB_00167cf0;
@@ -11490,7 +11490,7 @@ LAB_0016b038:
                 edgeAppendSlot = (int *)Vector__elementRefGrow(laterWriterPredEdges,vectorCount);
               }
               *edgeAppendSlot = (int)(nodeAlloc + 1);
-              FUN_00194720(lastWriterSet,laterWriterInst);
+              HashTable__remove(lastWriterSet,laterWriterInst);
             }
             HashTable__insert(lastWriterSet,curInst);
           }
