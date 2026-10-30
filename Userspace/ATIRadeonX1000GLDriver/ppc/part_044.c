@@ -551,7 +551,7 @@ int FUN_00159794(inst, param_2, param_3)
         sourceDef2 = IRInst__getOperandSource(sourceDef,1);
         uVar7 = *(undefined4 *)(sourceDef2 + 0x98);
       }
-      iVar4 = FUN_001267b8(uVar7);
+      iVar4 = Table1ea904__hasFlag0x11(uVar7);
       if (iVar4 == 0) {
         operandVReg = (int *)IRInst__getOperandSource(sourceDef,1);
         iVar4 = (**(code **)(*operandVReg + 0x5c))(operandVReg);
@@ -1543,7 +1543,7 @@ int FUN_0015b4a4(inst, param_2)
       a0 = (int *)IRInst__getOperandSource(inst,1);
       iVar3 = (**(code **)(*a0 + 0x5c))(a0);
       if (((iVar3 == 0) && ((a0[5] & 0x200U) == 0)) &&
-         ((iVar3 = FUN_0011379c(*(undefined4 *)(param_2 + 8),a0), iVar3 != 0 ||
+         ((iVar3 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_2 + 8),a0), iVar3 != 0 ||
           (iVar3 = OpcodeTraits__flagBit8(*(undefined4 *)(a0[0x22] + 8),*(undefined4 *)(param_2 + 8)),
           iVar3 != 0)))) {
         operandRecord2 = IRInst__getOperandRecord(inst,1);
@@ -1599,7 +1599,7 @@ int FUN_0015b4a4(inst, param_2)
             uVar10 = (uint)bVar2;
             if ((uVar10 != 4) && (uVar10 != loopIndex)) {
               operandIndex2 = 1;
-              iVar3 = FUN_0011379c(*(undefined4 *)(param_2 + 8),a0);
+              iVar3 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_2 + 8),a0);
               if (iVar3 != 0) {
                 for (; iVar3 = (**(code **)(*a0 + 0x14))(a0), operandIndex2 <= iVar3; operandIndex2 = operandIndex2 + 1) {
                   iVar3 = IRInst__getOperandRecord(a0,operandIndex2);
@@ -2861,13 +2861,13 @@ LAB_0015d5cc:
               vcall60ResultB = (**(code **)(*operandVReg + 0x60))(operandVReg);
               if (vcall60ResultB != 0) {
                 sourceDef = IRInst__getOperandSource(piVar9,1);
-                FUN_0010c670(sourceDef,piVar9,*(undefined4 *)(pass + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,piVar9,*(undefined4 *)(pass + 8));
               }
               operandVReg3 = (int *)IRInst__getOperandSource(piVar15,1);
               vcall60ResultB = (**(code **)(*operandVReg3 + 0x60))(operandVReg3);
               if (vcall60ResultB != 0) {
                 sourceDef = IRInst__getOperandSource(piVar15,1);
-                FUN_0010c670(sourceDef,piVar15,*(undefined4 *)(pass + 8));
+                IRInst__foldConstantSourcesIntoClone(sourceDef,piVar15,*(undefined4 *)(pass + 8));
               }
               IRInst__dropCounterAndDeleteIfUnused(a0,*(undefined4 *)(pass + 8));
               if (bVar4) {
@@ -3021,7 +3021,7 @@ LAB_0015cf80:
         vcall60Result = (**(code **)(*operandVReg4 + 0x60))(operandVReg4);
         if (vcall60Result != 0) {
           sourceDef = IRInst__getOperandSource(vslot73Result,1);
-          FUN_0010c670(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
+          IRInst__foldConstantSourcesIntoClone(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
         }
         newSource2 = 0;
         local_60 = &DAT_001acec0;
@@ -4243,7 +4243,7 @@ LAB_0015fa2c:
           iVar11 = (**(code **)(*operandVReg + 0x60))(operandVReg);
           if (iVar11 != 0) {
             inst1 = IRInst__getOperandSource(piVar8,1);
-            FUN_0010c670(inst1,piVar8,compilerCtx2);
+            IRInst__foldConstantSourcesIntoClone(inst1,piVar8,compilerCtx2);
           }
           uVar14 = uVar14 - 1;
           Block__insertInstBefore(node[0x56],node,piVar8);
@@ -5408,7 +5408,7 @@ LAB_00161e24:
                   vcall60Result = (**(code **)(*operandVReg + 0x60))(operandVReg);
                   if (vcall60Result != 0) {
                     sourceDef = IRInst__getOperandSource(vslot73Result,1);
-                    FUN_0010c670(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
+                    IRInst__foldConstantSourcesIntoClone(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
                   }
                   IRInst__dropCounterAndDeleteIfUnused(inst2,*(undefined4 *)(pass + 8));
                   if ((inst2[5] & 1U) != 0) {
@@ -5975,7 +5975,7 @@ int FUN_00162dfc(param_1, param_2, param_3)
   int local_6c [6];
   undefined4 local_54 [10];
   
-  inst = FUN_0011379c(*(undefined4 *)(param_3 + 8),*param_1);
+  inst = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_3 + 8),*param_1);
   if ((inst != 0) && (inst = *param_1, (*(uint *)(inst + 0x14) & 0x200) != 0)) {
     callResult = (int *)IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
     if (*(int *)(*(int *)(*param_1 + 0x88) + 8) == *(int *)(callResult[0x22] + 8)) {

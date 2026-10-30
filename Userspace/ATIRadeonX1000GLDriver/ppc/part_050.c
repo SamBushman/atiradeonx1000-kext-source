@@ -796,7 +796,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     loopIndex3 = (**(code **)(*src1DefInst + 0x60))(src1DefInst);
     if (loopIndex3 != 0) {
       src1DefArg = IRInst__getOperandSource(inst2,1);
-      FUN_0010c670(src1DefArg,inst2,program[PROG_compiler / 4]);
+      IRInst__foldConstantSourcesIntoClone(src1DefArg,inst2,program[PROG_compiler / 4]);
     }
   }
   loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x38);
@@ -1107,7 +1107,7 @@ LAB_00193490:
     changedFlag = 1;
     combinedInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,combinedInst);
   }
-  loopIndex3 = FUN_0011379c(program[PROG_compiler / 4],combinedInst);
+  loopIndex3 = OpcodeTraits__flag1WithoutFlag7(program[PROG_compiler / 4],combinedInst);
   if ((loopIndex3 != 0) && ((combinedInst[5] & 0x200U) == 0)) {
     for (loopIndex3 = 1; loopRemaining = (**(code **)(*combinedInst + 0x14))(combinedInst), loopIndex3 <= loopRemaining; loopIndex3 = loopIndex3 + 1
         ) {
@@ -1285,7 +1285,7 @@ int FudoPs__vslot29_convertInnerIfsToPredicates(this, program)
     while (nextLink != 0) {
       isInnerIf = (**(code **)(*block + 0x24))(block);
       if (isInnerIf != 0) {
-        block = (int *)FUN_0012bb48(program,block);
+        block = (int *)Program__collapseIfRegion(program,block);
       }
       block = (int *)block[2];
       nextLink = block[2];

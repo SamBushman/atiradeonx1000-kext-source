@@ -338,7 +338,7 @@ int Compiler__setHardwareFamily(compiler, chipFamily)
       }
       *(int *)(compiler + 0x310) = iVar1;
       if (chipFamily == 2) {
-        FUN_0010dd54(*(undefined4 *)(iVar1 + 4));
+        HwLimits__installDefaults(*(undefined4 *)(iVar1 + 4));
         *(undefined4 *)(0x00001740 + *(int *)(*(int *)(compiler + 0x310) + 8)) = 2;
       }
     }
@@ -508,7 +508,7 @@ int Compiler__releaseChipAndPools(compiler, releaseChip)
   int iVar1;
   
   if ((releaseChip != 0) && (*(int *)(compiler + 0x310) != 0)) {
-    FUN_0010defc(*(int *)(compiler + 0x310),compiler);
+    ChipShaders__release(*(int *)(compiler + 0x310),compiler);
     (**(code **)(compiler + 0x34c))
               (*(undefined4 *)(compiler + 0x354),*(undefined4 *)(compiler + 0x310));
   }
@@ -567,7 +567,7 @@ int Compiler__compileStages(compiler, compileRequest)
   sourceTable = "ASSEMBLY";
   *(char **)(compiler + 0x620) = "GLOBAL_ALLOC";
   *(char **)(compiler + 0x634) = "ASSEMBLY";
-  FUN_00115fa0(compiler);
+  Compiler__initStaticLocals(compiler);
   stageIndex = *(int *)(compileRequest + 8) + -1;
   *(int *)(compiler + 0x52c) = stageIndex;
   while (-1 < stageIndex) {
@@ -609,7 +609,7 @@ int Compiler__compileStages(compiler, compileRequest)
       Arena__free(*readerAlloc,readerAlloc);
     }
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00122de8(*(undefined4 *)(compiler + COMP_currentProgram));
+    Program__runSsaPipeline(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     reduceDepEnabled = Compiler__isOptionEnabled(compiler,0xf);
     if (reduceDepEnabled != 0) {
@@ -667,9 +667,9 @@ int Compiler__compileStages(compiler, compileRequest)
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Scheduler__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00120cd4(*(undefined4 *)(compiler + COMP_currentProgram));
+    Program__eliminatePhiCopies(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_00134658(*(undefined4 *)(compiler + COMP_currentProgram));
+    RegAlloc__run(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Program__dumpConstantRegisters(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
@@ -678,7 +678,7 @@ int Compiler__compileStages(compiler, compileRequest)
     ((int (*)())MachineCodeWriter__encodeProgram)(*(undefined4 *)(compiler + COMP_currentProgram),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
                  *(int *)(compiler + 0x52c));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
-    FUN_0013061c(*(undefined4 *)(compiler + COMP_currentProgram),0);
+    RegAlloc__countUnassignedInClass(*(undefined4 *)(compiler + COMP_currentProgram),0);
     (**(code **)(**(int **)(compiler + COMP_target) + 0x38))
               (*(int **)(compiler + COMP_target),*(undefined4 *)(compiler + 0x52c),compiler);
     sourceTable = (char *)**(undefined4 **)(compiler + COMP_target);
@@ -902,7 +902,7 @@ int FUN_000e2a04(param_1, param_2)
   
   iVar1 = *(int *)(param_1 + 0x30);
   if (iVar1 < 0) {
-    iVar1 = FUN_00130690(*(undefined4 *)(param_1 + 0x34),param_2);
+    iVar1 = RegAlloc__allocateFirstFreeInClass(*(undefined4 *)(param_1 + 0x34),param_2);
     *(int *)(param_1 + 0x30) = iVar1;
   }
   return iVar1;

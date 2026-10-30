@@ -755,7 +755,7 @@ int R300MachineAssembler__vslot4_finishProgram(this)
   }
   *(uint *)(this[0x17] + 0x9364) = registerCount;
   lastIndex = 0;
-  count = FUN_0013061c(*(undefined4 *)(this[3] + 0x6c4),0);
+  count = RegAlloc__countUnassignedInClass(*(undefined4 *)(this[3] + 0x6c4),0);
   if (count != 0) {
     lastIndex = count + -1;
   }
@@ -905,7 +905,7 @@ int FUN_0019651c(assembler, inst, staleArg3)
   if ((fetchKind == 0x16) || (fetchKind == 0x17)) {
     emitSlotAFn = *(code **)(*assembler + 0xc4);
     a1 = assembler[0x25];
-    fetchArg = FUN_0010e40c(fetchKind,*(undefined4 *)(inst + 0x148));
+    fetchArg = Lane__remapValue(fetchKind,*(undefined4 *)(inst + 0x148));
     a4 = thunk_FUN_00134de8(*(undefined4 *)(assembler[3] + 0x6c4),inst);
     a3 = 1;
   }

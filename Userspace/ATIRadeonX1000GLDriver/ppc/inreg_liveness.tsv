@@ -1,14 +1,14 @@
 10b184	IRInst__findConstantOperandWithValue	r6	PASS-indirect	10b1b8 bctrl 
 10b184	IRInst__findConstantOperandWithValue	r7	PASS-indirect	10b1b8 bctrl 
-10c47c	FUN_0010c47c	r5	PASS-indirect	10c4ac bctrl 
-10c47c	FUN_0010c47c	r6	PASS-indirect	10c4ac bctrl 
-10c47c	FUN_0010c47c	r7	PASS-indirect	10c4ac bctrl 
-10c47c	FUN_0010c47c	r8	PASS-indirect	10c4ac bctrl 
-10c670	FUN_0010c670	r6	PASS-deep	10c69c bl 0x105594
-10c670	FUN_0010c670	r7	PASS-deep	10c69c bl 0x105594
-10c670	FUN_0010c670	r8	PASS-deep	10c69c bl 0x105594
-10c670	FUN_0010c670	r9	PASS-deep	10c69c bl 0x105594
-10cb48	FUN_0010cb48	r8	PASS-deep	10cb70 bl 0x105594
+10c47c	IRInst__canFoldConstantCompare	r5	PASS-indirect	10c4ac bctrl 
+10c47c	IRInst__canFoldConstantCompare	r6	PASS-indirect	10c4ac bctrl 
+10c47c	IRInst__canFoldConstantCompare	r7	PASS-indirect	10c4ac bctrl 
+10c47c	IRInst__canFoldConstantCompare	r8	PASS-indirect	10c4ac bctrl 
+10c670	IRInst__foldConstantSourcesIntoClone	r6	PASS-deep	10c69c bl 0x105594
+10c670	IRInst__foldConstantSourcesIntoClone	r7	PASS-deep	10c69c bl 0x105594
+10c670	IRInst__foldConstantSourcesIntoClone	r8	PASS-deep	10c69c bl 0x105594
+10c670	IRInst__foldConstantSourcesIntoClone	r9	PASS-deep	10c69c bl 0x105594
+10cb48	IRInst__foldCompareResultIntoCopy	r8	PASS-deep	10cb70 bl 0x105594
 10cfcc	IRInst__foldMovSourceSelect	r8	PASS-deep	10cff4 bl 0x105594
 10cfcc	IRInst__foldMovSourceSelect	r9	PASS-deep	10cff4 bl 0x105594
 10d4cc	IRInst__convertCompareToBinaryAlu	r5	PASS-deep	10d4f0 bl 0x105594
@@ -19,11 +19,11 @@
 11f2f8	Program__tryEliminateRedundantCopy	r6	PASS-no	11f31c bl 0xe07dc
 11f2f8	Program__tryEliminateRedundantCopy	r7	PASS-no	11f31c bl 0xe07dc
 11f2f8	Program__tryEliminateRedundantCopy	r8	PASS-no	11f31c bl 0xe07dc
-120cd4	FUN_00120cd4	r6	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r7	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r8	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r9	PASS-deep	120cf8 bl 0xec4f0
-120cd4	FUN_00120cd4	r10	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r6	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r7	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r8	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r9	PASS-deep	120cf8 bl 0xec4f0
+120cd4	Program__eliminatePhiCopies	r10	PASS-deep	120cf8 bl 0xec4f0
 1214fc	pass_ssa_build	r6	PASS-indirect	121544 bl 0x193e18
 1214fc	pass_ssa_build	r7	PASS-indirect	121544 bl 0x193e18
 1214fc	pass_ssa_build	r8	PASS-indirect	121544 bl 0x193e18
@@ -34,15 +34,15 @@
 12abd8	IfHeader__swapArms	r7	PASS-no	12ac08 bl 0x19401c
 12abd8	IfHeader__swapArms	r8	PASS-no	12ac08 bl 0x19401c
 12abd8	IfHeader__swapArms	r9	PASS-no	12ac08 bl 0x19401c
-12bb48	FUN_0012bb48	r5	PASS-indirect	12bb88 bctrl 
-12bb48	FUN_0012bb48	r6	PASS-indirect	12bb88 bctrl 
-12bb48	FUN_0012bb48	r7	PASS-indirect	12bb88 bctrl 
-12bb48	FUN_0012bb48	r8	PASS-indirect	12bb88 bctrl 
-12c2dc	FUN_0012c2dc	r5	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r6	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r7	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r8	PASS-deep	12c310 bl 0xe920c
-12c2dc	FUN_0012c2dc	r9	PASS-deep	12c310 bl 0xe920c
+12bb48	Program__collapseIfRegion	r5	PASS-indirect	12bb88 bctrl 
+12bb48	Program__collapseIfRegion	r6	PASS-indirect	12bb88 bctrl 
+12bb48	Program__collapseIfRegion	r7	PASS-indirect	12bb88 bctrl 
+12bb48	Program__collapseIfRegion	r8	PASS-indirect	12bb88 bctrl 
+12c2dc	Program__isTrivialBranchRegion	r5	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r6	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r7	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r8	PASS-deep	12c310 bl 0xe920c
+12c2dc	Program__isTrivialBranchRegion	r9	PASS-deep	12c310 bl 0xe920c
 12ccc0	pass_loop_trans	r5	PASS-indirect	12cd10 bctrl 
 12ccc0	pass_loop_trans	r6	PASS-indirect	12cd10 bctrl 
 12ccc0	pass_loop_trans	r7	PASS-indirect	12cd10 bctrl 
@@ -51,16 +51,16 @@
 12d2f0	pass_flatten_ifs	r6	PASS-indirect	12d334 bctrl 
 12d2f0	pass_flatten_ifs	r7	PASS-indirect	12d334 bctrl 
 12d2f0	pass_flatten_ifs	r8	PASS-indirect	12d334 bctrl 
-12dd58	FUN_0012dd58	r6	PASS-indirect	12dda4 bl 0x193e18
-12dd58	FUN_0012dd58	r7	PASS-indirect	12dda4 bl 0x193e18
-12dd58	FUN_0012dd58	r8	PASS-indirect	12dda4 bl 0x193e18
+12dd58	Program__detachRegion	r6	PASS-indirect	12dda4 bl 0x193e18
+12dd58	Program__detachRegion	r7	PASS-indirect	12dda4 bl 0x193e18
+12dd58	Program__detachRegion	r8	PASS-indirect	12dda4 bl 0x193e18
 12df90	Program__foldConstantIfRegion	r8	PASS-indirect	12dffc bl 0x193e18
 1300b0	pass_remove_empty_graphs	r6	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r7	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r8	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r9	PASS-indirect	1300f8 bctrl 
-131d08	FUN_00131d08	r8	PASS-indirect	131d4c bl 0x193e18
-131d08	FUN_00131d08	r10	PASS-indirect	131d4c bl 0x193e18
+131d08	RegAlloc__buildClassTables	r8	PASS-indirect	131d4c bl 0x193e18
+131d08	RegAlloc__buildClassTables	r10	PASS-indirect	131d4c bl 0x193e18
 139f84	Block__scanBranchConeForFetchAndInterp	r6	PASS-indirect	139fb0 bctrl 
 139f84	Block__scanBranchConeForFetchAndInterp	r7	PASS-indirect	139fb0 bctrl 
 139f84	Block__scanBranchConeForFetchAndInterp	r8	PASS-indirect	139fb0 bctrl 
@@ -232,8 +232,8 @@
 23a8	atexit_common	r6	PASS-import		
 23a8	atexit_common	r7	PASS-import		
 23a8	atexit_common	r8	PASS-import		
-24190	FUN_00024190	r7	PASS-indirect	241ec bctrl 
-24190	FUN_00024190	r8	PASS-indirect	241ec bctrl 
+24190	gld_emitImmediateVertexList	r7	PASS-indirect	241ec bctrl 
+24190	gld_emitImmediateVertexList	r8	PASS-indirect	241ec bctrl 
 25ec0	gld_bindFragmentProgramRecord	r6	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
 25ec0	gld_bindFragmentProgramRecord	r7	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
 25ec0	gld_bindFragmentProgramRecord	r8	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
@@ -245,8 +245,8 @@
 2c230	gld_validateStreamState	r7	PASS-indirect	2c2f8 bl 0x90990
 2c230	gld_validateStreamState	r8	PASS-indirect	2c2f8 bl 0x90990
 2cc30	gld_prepareDrawCount	r9	PASS-no	2ccd8 bl 0x2bf30
-2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
-2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
+2ce40	gld_emitUnitObjectPackets	r5	PASS-indirect	2cfb4 bctrl 
+2ce40	gld_emitUnitObjectPackets	r6	PASS-indirect	2cfb4 bctrl 
 34200	glGenerateMipmap_impl	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut
 48da0	fragmentProgramToIL	r4	RET	4a7cc blr 
 48da0	fragmentProgramToIL	r5	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc

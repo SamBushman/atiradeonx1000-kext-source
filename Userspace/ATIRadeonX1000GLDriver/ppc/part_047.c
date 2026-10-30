@@ -1432,8 +1432,8 @@ int ValueKey__insertTempCopyOfOperand(ctx, operandIndex)
   registerMap = *(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac);
   tempIndex = *(int *)(compiler + 0x3b0) + -1;
   *(int *)(compiler + 0x3b0) = tempIndex;
-  operandRef = FUN_00127608(registerMap,0x36,tempIndex,0);
-  FUN_0012306c(operandRef,callResult);
+  operandRef = VRegPool__findOrCreate(registerMap,0x36,tempIndex,0);
+  VReg__appendUser(operandRef,callResult);
   block = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
   blockPredicate = (**(code **)(*block + 0x24))(block);
   if (blockPredicate == 0) {
@@ -2327,7 +2327,7 @@ LAB_0017a608:
           else {
             loopIndex = loopPtr5[0x4e];
           }
-          FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),loopPtr5,loopIndex,
+          Program__removeDeadRegion(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),loopPtr5,loopIndex,
                        loopPtr5[0x4f]);
           if (branchTaken) {
             loopIndex = 2;
@@ -2510,7 +2510,7 @@ int FUN_0017a8a4(ctx)
       else {
         loopRemaining = blockRef[0x4e];
       }
-      FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),blockRef,loopRemaining,blockRef[0x4f]);
+      Program__removeDeadRegion(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),blockRef,loopRemaining,blockRef[0x4f]);
       if (foldedResult != 0.0) {
         loopRemaining = 2;
       }
@@ -3067,7 +3067,7 @@ int ValueKey__mixLiteralSources(key)
         isForwardableMov = (**(code **)(*loopPtr6 + 0x60))(loopPtr6);
         if (isForwardableMov != 0) {
           sourceDef = IRInst__getOperandSource(loopIndex,1);
-          FUN_0010c670(sourceDef,loopIndex,*(undefined4 *)(key + 0x238));
+          IRInst__foldConstantSourcesIntoClone(sourceDef,loopIndex,*(undefined4 *)(key + 0x238));
         }
       }
       loopPtr7 = loopPtr7 + 1;

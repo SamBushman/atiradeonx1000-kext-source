@@ -680,7 +680,7 @@ LAB_00199fdc:
         else {
           if ((((sourceInst[0x20] != 0) && (sourceKind = RegKind__flagBit0(sourceKind), sourceKind != 0)) &&
               ((sourceInst[5] & 2U) == 0)) && (sourceKind = (**(code **)(*sourceInst + 0x50))(sourceInst), sourceKind == 0)) {
-            sourceRegister = FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),sourceInst);
+            sourceRegister = RegAlloc__registerOfInst(*(undefined4 *)(this[3] + 0x6c4),sourceInst);
             vslot80Result = (**(code **)(*sourceInst + 0x80))(sourceInst);
             if (vslot80Result != 0) {
               stagedArg3 = (int *)this[3];
@@ -1884,7 +1884,7 @@ LAB_0019b144:
             if (numSourcesLoopBound == mathSrcOffset) {
               srcIdx2 = 1;
               movInst = (int *)IRInst__create(0x31,*(undefined4 *)(this + 0xc));
-              tempRegId = FUN_00130690(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),0);
+              tempRegId = RegAlloc__allocateFirstFreeInClass(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),0);
               operandRecord = IRInst__getOperandRecord(movInst,0);
               *(undefined4 *)(operandRecord + 0xc) = 0;
               *(undefined4 *)(operandRecord + 8) = tempRegId;
@@ -3209,7 +3209,7 @@ int R300VMachineAssembler__getOrAllocateScratchRegister(this, registerAllocator)
   undefined4 uVar1;
   
   if (*(int *)(this + 0x8c) < 0) {
-    uVar1 = FUN_00130690(registerAllocator,0);
+    uVar1 = RegAlloc__allocateFirstFreeInClass(registerAllocator,0);
     *(undefined4 *)(this + 0x8c) = uVar1;
   }
   return;
@@ -3257,7 +3257,7 @@ int R520VMachineAssembler__getOrCreateConstantZeroInst(this)
   
   zeroInst = *(int *)(this + 0x90);
   if (zeroInst == 0) {
-    zeroRegister = FUN_00130690(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),0);
+    zeroRegister = RegAlloc__allocateFirstFreeInClass(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),0);
     arenaAt378 = *(undefined4 *)(*(int *)(this + 0xc) + 0x378);
     instAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x168);
     *instAlloc = arenaAt378;

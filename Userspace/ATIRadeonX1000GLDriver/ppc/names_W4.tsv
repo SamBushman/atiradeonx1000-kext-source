@@ -548,8 +548,8 @@ local	FUN_00005db0	iVar1	retired	CONFIRMED	FUN_0001a0d0 result
 local	FUN_00005db0	uVar2	connection	CONFIRMED	io_connect_t
 local	FUN_00005db0	iVar3	pluginRecord	INFERRED	**(buffer+8); kind byte +0x16, stamps +8/+0xc, size +0x10; later the stamp slot address
 local	FUN_00007020	param_1	ctx	CONFIRMED	ctx[0x3e] attached drawable, ctx[0xf] flags, ctx[0] renderer index
-local	FUN_00007020	cVar1	useCount	CONFIRMED	library per-renderer use count byte before the decrement
-local	FUN_00007020	puVar2	library	CONFIRMED	PTR_DAT_001e88ac library record; +0x18+4*index connection closed when the count reaches 0
+local	FUN_00007020	cVar1	connectionUseCount	CONFIRMED	library per-renderer use count byte before the decrement
+local	FUN_00007020	puVar2	rendererLibrary	CONFIRMED	PTR_DAT_001e88ac library record; +0x18+4*index connection closed when the count reaches 0
 local	FUN_0000b620	param_1	ctx	INFERRED	ctx+8 byte = data-cache block size
 local	FUN_0000b620	param_2	address	CONFIRMED	start of the range to flush from the data cache
 local	FUN_0000b620	param_3	length	CONFIRMED	range length in bytes
@@ -592,7 +592,7 @@ local	FUN_0001ac30	sVar3	samples	INFERRED	short at pixelFormat+0x26 (2, 4 or 6 w
 local	FUN_0001ac30	iVar4	stencilMask	INFERRED	pixelFormat+0x1c: must be 1 or 0x80
 local	FUN_0001ac30	uVar5	displayMask	INFERRED	pixelFormat+0x30; later the allowed-bit mask for the colour/depth fields
 local	FUN_0001ac30	uVar6	surfaceFlags	INFERRED	pixelFormat+8 flags word
-local	FUN_00024fb0	param_1	list	CONFIRMED	initialises an empty circular list at +0x2c: both links point at the head
+local	FUN_00024fb0	param_1	listOwner	CONFIRMED	initialises an empty circular list at +0x2c: both links point at the head
 local	FUN_0002cc10	param_1	ctx	CONFIRMED	submits the command buffer (FUN_0001a0f0) when ctx+0x1dc write cursor is beyond the start
 local	FUN_0002cb40	param_1	ctx	CONFIRMED	context teardown: frees buffers at +0x27cc/+0x27d0, flushes, releases +0x240 sub-state and +0x2b74 vm buffer
 local	FUN_00005eb0	param_1	ctx	CONFIRMED	ctx for FUN_0001a0d0 / _gldFlush

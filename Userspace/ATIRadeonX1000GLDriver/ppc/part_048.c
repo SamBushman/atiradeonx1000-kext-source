@@ -2043,7 +2043,7 @@ int FUN_0017e7e0(ctx)
   operandRef5 = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
   loopRemaining = *(int *)(loopIndex + 0x3ac) + -1;
   *(int *)(loopIndex + 0x3ac) = loopRemaining;
-  operandRef5 = FUN_00127608(operandRef5,0,loopRemaining,0);
+  operandRef5 = VRegPool__findOrCreate(operandRef5,0,loopRemaining,0);
   IRInst__setOperandRef(member0xb0,0,operandRef5);
   IRInst__setOperandRef(member0xb0,1,operandRef3);
   loopIndex = IRInst__getOperandRecord(member0xb0,1);
@@ -2058,7 +2058,7 @@ int FUN_0017e7e0(ctx)
   *(undefined4 *)(member0xb0 + 0x94) = savedDestRegister;
   *(undefined4 *)(member0xb0 + 0x98) = savedDestRegisterOffset;
   *(int *)(member0xb0 + 0x9c) = destSelectWord;
-  FUN_0012306c(operandRef5,member0xb0);
+  VReg__appendUser(operandRef5,member0xb0);
   loopIndex = 0;
   tmpSelect[0] = DAT_001b01dc;
   loopRemaining = 4;
@@ -2082,7 +2082,7 @@ int FUN_0017e7e0(ctx)
   IROperand__setModifierBits(newInst + 0x2f,2,absFlag);
   newInst[0x48] = savedSaturate;
   newInst[0x49] = savedResultScale;
-  FUN_0012306c(operandRef4,newInst);
+  VReg__appendUser(operandRef4,newInst);
   loopIndex = 1;
   operandCursor = newInst;
   while( true ) {
@@ -2205,7 +2205,7 @@ int ValueKey__rewriteAsAdd(ctx, valueKey, src1Swizzle, negateFlag)
     savedExtraSourceRef = 0;
   }
   *(undefined4 *)(ctx + 0x21c) = savedExtraSourceRef;
-  FUN_0012306c(operandRef4,inst3);
+  VReg__appendUser(operandRef4,inst3);
   if (0 < *(int *)(inst3 + 0x84)) {
     loopIndex = 1;
     useScanPtr = inst3;
@@ -2299,8 +2299,8 @@ int FUN_0017ee68(ctx)
   newValueNumber = *(int *)(loopIndex + 0x3ac) + -1;
   operandRef2 = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
   *(int *)(loopIndex + 0x3ac) = newValueNumber;
-  operandRef2 = FUN_00127608(operandRef2,0,newValueNumber,0);
-  FUN_0012306c(operandRef2,*(undefined4 *)(ctx + 0xb0));
+  operandRef2 = VRegPool__findOrCreate(operandRef2,0,newValueNumber,0);
+  VReg__appendUser(operandRef2,*(undefined4 *)(ctx + 0xb0));
   IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),0,operandRef2);
   *(undefined4 *)(rebuiltInst + 0x94) = savedDestRegister;
   *(undefined4 *)(rebuiltInst + 0x98) = savedDestRegisterOffset;
@@ -2566,13 +2566,13 @@ int FUN_0017f5a4(ctx)
     operandRef = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
     iVar4 = *(int *)(loopIndex + 0x3ac) + -1;
     *(int *)(loopIndex + 0x3ac) = iVar4;
-    operandRef = FUN_00127608(operandRef,0,iVar4,0);
-    FUN_0012306c(operandRef,*(undefined4 *)(ctx + 0xb0));
+    operandRef = VRegPool__findOrCreate(operandRef,0,iVar4,0);
+    VReg__appendUser(operandRef,*(undefined4 *)(ctx + 0xb0));
     IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),0,operandRef);
     loopIndex = inst[0x23];
     *(undefined1 *)(*(int *)(ctx + 0xb0) + 0x9f) = 1;
     inst[0x27] = 0x1010100;
-    FUN_0012306c(loopIndex,inst);
+    VReg__appendUser(loopIndex,inst);
     loopIndex = 1;
     piVar5 = inst;
     while( true ) {
@@ -2614,7 +2614,7 @@ int FUN_0017f78c(ctx)
   int iVar1;
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x98) != 0x2c) &&
-     (iVar1 = FUN_0011379c(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), iVar1 != 0))
+     (iVar1 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(ctx + 0x238),*(int *)(ctx + 0xb0)), iVar1 != 0))
   {
     ((int (*)())FUN_0017f5a4)(ctx);
     return;
@@ -3519,10 +3519,10 @@ LAB_00180a14: ;
           }
           loopIndex2 = RegKind__flagBit7(sourceRegister);
           if (loopIndex2 == 0) {
-            operandRef2 = FUN_00127608(operandRef2,0,loopIndex5,0);
+            operandRef2 = VRegPool__findOrCreate(operandRef2,0,loopIndex5,0);
           }
           else {
-            operandRef2 = FUN_00127608(operandRef2,2,loopIndex5,0);
+            operandRef2 = VRegPool__findOrCreate(operandRef2,2,loopIndex5,0);
           }
           IRInst__setOperandRef(*(undefined4 *)(key + 0xb0),operandNumber,operandRef2);
           VReg__addUse(operandRef2,operandNumber,*(undefined4 *)(key + 0xb0));
@@ -3616,7 +3616,7 @@ LAB_00181100:
                   loopIndex = *loopPtr8;
                   Block__insertInstBefore(*(undefined4 *)(*(int *)(key + 0xb0) + 0x158),
                                *(int *)(key + 0xb0),loopIndex);
-                  FUN_0012306c(*(undefined4 *)(loopIndex + 0x8c),loopIndex);
+                  VReg__appendUser(*(undefined4 *)(loopIndex + 0x8c),loopIndex);
                   loopIndex2 = IRInst__getOperandSource(loopIndex,1);
                   VReg__addUse(*(undefined4 *)(loopIndex2 + 0x8c),1,loopIndex);
                   arena = *(undefined4 *)(*(int *)(key + 0x238) + 0x378);
@@ -3667,7 +3667,7 @@ LAB_00181100:
                   }
                   else {
                     loopIndex5 = *(int *)(*(int *)(key + 0x238) + 0x6c4);
-                    loopIndex5 = FUN_00123c08(loopIndex5,*(undefined4 *)(loopIndex5 + 0x3a0),0);
+                    loopIndex5 = ValueKey__createConstantMov(loopIndex5,*(undefined4 *)(loopIndex5 + 0x3a0),0);
                     loopIndex5 = *(int *)(loopIndex5 + 0xb0);
                     IRInst__setOperandRef(inst2,1,*(undefined4 *)(loopIndex5 + 0x8c));
                     IRInst__setOperandSource(inst2,1,loopIndex5,0,*(undefined4 *)(key + 0x238));
@@ -3691,7 +3691,7 @@ LAB_00181100:
           }
           else {
             zeroInst = *(int *)(*(int *)(key + 0x238) + 0x6c4);
-            zeroInst = FUN_00123c08(zeroInst,*(undefined4 *)(zeroInst + 0x3a0),0);
+            zeroInst = ValueKey__createConstantMov(zeroInst,*(undefined4 *)(zeroInst + 0x3a0),0);
             zeroInst = *(int *)(zeroInst + 0xb0);
             inst1 = *(undefined4 *)(key + 0xb0);
             *(int *)(keyWordPtr2 + 0x214) = zeroInst;
@@ -6614,7 +6614,7 @@ LAB_0018601c:
           operandSelectBytes[0] = *(int *)(loopIndex2 + 0x10);
           loopIndex2 = SelectWord__isSplat(operandSelectBytes[0]);
           if (loopIndex2 != 0) {
-            loopIndex2 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg);
+            loopIndex2 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg);
             if ((loopIndex2 == 0) || (loopIndex2 = IRInst__hasSingleUse(operandVReg,program), loopIndex2 == 0)) {
               sourceHandled = false;
             }
