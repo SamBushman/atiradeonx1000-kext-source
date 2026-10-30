@@ -6770,12 +6770,12 @@ int fragmentProgramToIL(translator)
   int tokenCount2;
   int translatorError;
   int tokenCount;
-  undefined **ppuVar1;
-  undefined4 *puVar2;
+  undefined **ilCopyNext;
+  undefined4 *ilCopyNext2;
   bool bVar3;
   ushort attribBinding;
   short sVar5;
-  undefined2 uVar6;
+  undefined2 tempRegisterHalf;
   short sVar7;
   double intToDoubleBias;
   uint uVar9;
@@ -6783,6 +6783,7 @@ int fragmentProgramToIL(translator)
   uint tokenCapacity2;
   int iVar12;
   int iVar13;
+  int tokensLeft;
   uint uVar14;
   undefined4 in_r4;
   undefined4 extraout_r4;
@@ -6801,17 +6802,19 @@ int fragmentProgramToIL(translator)
   undefined4 in_r6;
   undefined4 *tokenWritePtr;
   dword *tokenWord1Ptr;
-  int iVar17;
+  int wordOffset;
   uint paramKind;
-  undefined4 *puVar19;
-  undefined **ppuVar20;
+  undefined4 *ilCopyCursor2;
+  undefined **ilCopyCursor;
   int *program;
   undefined *puVar22;
+  undefined *swizzleXYZW;
   uint uVar23;
-  undefined4 uVar24;
+  undefined4 dstMaskToken;
   uint uVar25;
   undefined4 *tokenWritePtr3;
   int iVar27;
+  int unitsLeft;
   undefined4 ilInstAOpcode;
   undefined4 ilInstADst;
   uint ilInstADstMask;
@@ -7038,7 +7041,7 @@ switchD_00049180_caseD_1:
   uVar9 = translator[1];
   uVar14 = translator[2];
   tokenWritePtr2 = (undefined4 *)0x0;
-  iVar27 = 0x10;
+  unitsLeft = 0x10;
   iVar12 = 0;
   do {
     iVar13 = iVar12;
@@ -7068,13 +7071,13 @@ switchD_00049180_caseD_1:
       iVar13 = iVar12 + 1;
       tokenWritePtr[iVar12] = (int)tokenWritePtr2 << 0x10 | 0x9000019;
     }
-    iVar27 = iVar27 + -1;
+    unitsLeft = unitsLeft + -1;
     uVar23 = uVar9 << 0x1c;
     uVar9 = uVar9 >> 4;
     tokenWritePtr2 = (undefined4 *)((int)tokenWritePtr2 + 1);
     uVar14 = uVar23 | uVar14 >> 4;
     iVar12 = iVar13;
-  } while (iVar27 != 0);
+  } while (unitsLeft != 0);
   tokenCount = translator[0xb];
   tokenCapacity = translator[0xc];
   if (tokenCapacity < (uint)(iVar13 + tokenCount)) {
@@ -7118,11 +7121,11 @@ LAB_00049448:
     iVar27 = iVar27 + *tokenDataPtrAddr;
   }
   if (0 < iVar13) {
-    iVar17 = 0;
+    wordOffset = 0;
     tokenWritePtr = &ilInstAOpcode;
     do {
-      *(undefined4 *)(iVar17 + iVar27) = *(undefined4 *)(iVar17 + (int)tokenWritePtr);
-      iVar17 = iVar17 + 4;
+      *(undefined4 *)(wordOffset + iVar27) = *(undefined4 *)(wordOffset + (int)tokenWritePtr);
+      wordOffset = wordOffset + 4;
       iVar13 = iVar13 + -1;
     } while (iVar13 != 0);
   }
@@ -7243,12 +7246,12 @@ LAB_0004a55c:
   translator[0xb] = tokenCount;
   paramKind = tokenCount3 * 4 + *tokenDataPtrAddr;
   iVar27 = 0;
-  iVar13 = 0xc6;
+  tokensLeft = 0xc6;
   do {
     *(undefined4 *)(iVar27 + paramKind) = 0x4b;
     iVar27 = iVar27 + 4;
-    iVar13 = iVar13 + -1;
-  } while (iVar13 != 0);
+    tokensLeft = tokensLeft + -1;
+  } while (tokensLeft != 0);
   translatorError3 = translator[9];
   translator[7] = translator[0xb];
 LAB_0004980c:
@@ -7264,8 +7267,8 @@ LAB_0004980c:
     outputIndex = 0;
     do {
       if ((1 << (outputIndex & 0x3f) & translator[4]) != 0) {
-        uVar24 = 0x55;
-        puVar22 = ((unsigned char *)0x00003210);
+        dstMaskToken = 0x55;
+        swizzleXYZW = ((unsigned char *)0x00003210);
         uVar23 = outputIndex + *(int *)(*translator + 0x10) + 1 & 0xffff | 0x440000;
         if ((*(ushort *)outputEntry & 0xf) == 4) {
           iVar12 = translator[0xd];
@@ -7278,13 +7281,13 @@ LAB_0004980c:
           uVar25 = *outputEntry >> 1 & 7 | 0x570000;
           if ((translatorFlags & 0x18000000) != 0) {
             *(uint *)(iVar12 + 0x20) = *(uint *)(iVar12 + 0x20) | 0x2000000;
-            uVar6 = (undefined2)translator[8];
+            tempRegisterHalf = (undefined2)translator[8];
             sVar7 = ((ushort)((uint)*(undefined4 *)(translator[0xd] + 0x20) >> 0x1a) & 1) +
                     (short)*(undefined4 *)(*translator + 0x28);
             _memset(&ilInstAOpcode,0,0x24);
             sVar5 = sVar7 + 1;
             fogMode = (uint)translator[5] >> 0x1b & 3;
-            ilInstADst = CONCAT22(4,uVar6);
+            ilInstADst = CONCAT22(4,tempRegisterHalf);
             ilInstADstMask = 0x55;
             local_a0[0] = (undefined *)((uint)local_a0[0] & 0xffff0000);
             ilInstASrc0 = (undefined *)((uint)ilInstASrc0 & 0xffc0ffff | 0x500000);
@@ -7328,19 +7331,19 @@ LAB_0004a188:
                   translator[0xc] = tokenCapacity3;
                   tokenCount = translator[0xb];
                 }
-                ppuVar20 = (undefined **)&ilInstASrc0;
+                ilCopyCursor = (undefined **)&ilInstASrc0;
                 translator[0xb] = tokenCount + 9;
                 tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
                 *tokenWritePtr = ilInstAOpcode;
                 tokenWritePtr[1] = ilInstADst;
                 tokenWritePtr[2] = ilInstADstMask;
                 do {
-                  tokenWritePtr[3] = *ppuVar20;
-                  ppuVar1 = ppuVar20 + 3;
-                  ppuVar20 = ppuVar20 + 1;
-                  tokenWritePtr[4] = *ppuVar1;
+                  tokenWritePtr[3] = *ilCopyCursor;
+                  ilCopyNext = ilCopyCursor + 3;
+                  ilCopyCursor = ilCopyCursor + 1;
+                  tokenWritePtr[4] = *ilCopyNext;
                   tokenWritePtr = tokenWritePtr + 2;
-                } while (local_a0 != ppuVar20);
+                } while (local_a0 != ilCopyCursor);
                 goto LAB_0004a0d4;
               }
             }
@@ -7383,19 +7386,19 @@ LAB_00049f94:
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
-                  puVar19 = &ilInstASrc0;
+                  ilCopyCursor2 = &ilInstASrc0;
                   translator[0xb] = tokenCount + 7;
                   tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
                   *tokenWritePtr = ilInstAOpcode;
                   tokenWritePtr[1] = ilInstADst;
                   tokenWritePtr[2] = ilInstADstMask;
                   do {
-                    tokenWritePtr[3] = *puVar19;
-                    puVar2 = puVar19 + 3;
-                    puVar19 = puVar19 + 1;
-                    tokenWritePtr[4] = *puVar2;
+                    tokenWritePtr[3] = *ilCopyCursor2;
+                    ilCopyNext2 = ilCopyCursor2 + 3;
+                    ilCopyCursor2 = ilCopyCursor2 + 1;
+                    tokenWritePtr[4] = *ilCopyNext2;
                     tokenWritePtr = tokenWritePtr + 2;
-                  } while (&ilInstASrc2 != puVar19);
+                  } while (&ilInstASrc2 != ilCopyCursor2);
 LAB_00049f80:
                   translatorError = translator[9];
                 }
@@ -7435,24 +7438,24 @@ LAB_00049f80:
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
-                  puVar19 = &ilInstASrc0;
+                  ilCopyCursor2 = &ilInstASrc0;
                   translator[0xb] = tokenCount + 7;
                   tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
                   *tokenWritePtr = ilInstAOpcode;
                   tokenWritePtr[1] = ilInstADst;
                   tokenWritePtr[2] = ilInstADstMask;
                   do {
-                    tokenWritePtr[3] = *puVar19;
-                    puVar2 = puVar19 + 3;
-                    puVar19 = puVar19 + 1;
-                    tokenWritePtr[4] = *puVar2;
+                    tokenWritePtr[3] = *ilCopyCursor2;
+                    ilCopyNext2 = ilCopyCursor2 + 3;
+                    ilCopyCursor2 = ilCopyCursor2 + 1;
+                    tokenWritePtr[4] = *ilCopyNext2;
                     tokenWritePtr = tokenWritePtr + 2;
-                  } while (&ilInstASrc2 != puVar19);
+                  } while (&ilInstASrc2 != ilCopyCursor2);
                   translatorError = translator[9];
                 }
 LAB_00049e2c:
-                ilInstASrc0 = (undefined *)CONCAT22(4,uVar6);
-                ilInstASrc1 = CONCAT22(4,uVar6);
+                ilInstASrc0 = (undefined *)CONCAT22(4,tempRegisterHalf);
+                ilInstASrc1 = CONCAT22(4,tempRegisterHalf);
                 local_a0[0] = ((unsigned char *)0x00003210);
                 local_a0[1] = ((unsigned char *)0x00003210);
                 ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x49);
@@ -7481,24 +7484,24 @@ LAB_00049e2c:
                     translator[0xc] = tokenCapacity3;
                     tokenCount = translator[0xb];
                   }
-                  puVar19 = &ilInstASrc0;
+                  ilCopyCursor2 = &ilInstASrc0;
                   translator[0xb] = tokenCount + 7;
                   tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
                   *tokenWritePtr = ilInstAOpcode;
                   tokenWritePtr[1] = ilInstADst;
                   tokenWritePtr[2] = ilInstADstMask;
                   do {
-                    tokenWritePtr[3] = *puVar19;
-                    puVar2 = puVar19 + 3;
-                    puVar19 = puVar19 + 1;
-                    tokenWritePtr[4] = *puVar2;
+                    tokenWritePtr[3] = *ilCopyCursor2;
+                    ilCopyNext2 = ilCopyCursor2 + 3;
+                    ilCopyCursor2 = ilCopyCursor2 + 1;
+                    tokenWritePtr[4] = *ilCopyNext2;
                     tokenWritePtr = tokenWritePtr + 2;
-                  } while (&ilInstASrc2 != puVar19);
+                  } while (&ilInstASrc2 != ilCopyCursor2);
                   goto LAB_00049f80;
                 }
               }
 LAB_00049fa8:
-              ilInstASrc0 = (undefined *)CONCAT22(4,uVar6);
+              ilInstASrc0 = (undefined *)CONCAT22(4,tempRegisterHalf);
               ilInstADstMask = ilInstADstMask | 0x100;
               ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x2d);
               ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
@@ -7589,7 +7592,7 @@ LAB_0004a0d8:
             }
 LAB_0004a25c:
             ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),0x3f);
-            ilInstASrc0 = (undefined *)CONCAT22(4,uVar6);
+            ilInstASrc0 = (undefined *)CONCAT22(4,tempRegisterHalf);
             ilInstADstMask = 0x15;
             local_a0[0] = ((unsigned char *)0x00003210);
             ilInstADst = CONCAT22(4,sVar5 + (short)*(undefined4 *)(iVar27 + 0x10) + 1);
@@ -7629,19 +7632,19 @@ LAB_0004a25c:
                 translator[0xc] = tokenCapacity3;
                 tokenCount = translator[0xb];
               }
-              ppuVar20 = (undefined **)&ilInstASrc0;
+              ilCopyCursor = (undefined **)&ilInstASrc0;
               translator[0xb] = tokenCount + 9;
               tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
               *tokenWritePtr = ilInstAOpcode;
               tokenWritePtr[1] = ilInstADst;
               tokenWritePtr[2] = ilInstADstMask;
               do {
-                tokenWritePtr[3] = *ppuVar20;
-                ppuVar1 = ppuVar20 + 3;
-                ppuVar20 = ppuVar20 + 1;
-                tokenWritePtr[4] = *ppuVar1;
+                tokenWritePtr[3] = *ilCopyCursor;
+                ilCopyNext = ilCopyCursor + 3;
+                ilCopyCursor = ilCopyCursor + 1;
+                tokenWritePtr[4] = *ilCopyNext;
                 tokenWritePtr = tokenWritePtr + 2;
-              } while (local_a0 != ppuVar20);
+              } while (local_a0 != ilCopyCursor);
             }
           }
 LAB_0004a474:
@@ -7690,11 +7693,11 @@ LAB_0004a474:
         else {
           if ((*(ushort *)outputEntry & 0xf) != 7) goto switchD_00049180_caseD_0;
           translatorFlags = translator[5];
-          uVar24 = 0x155;
+          dstMaskToken = 0x155;
           translator[5] = translatorFlags | 0x40000000;
           uVar25 = 0x580000;
           if ((translatorFlags & 0x20000000) == 0) {
-            puVar22 = ((unsigned char *)0x00003212);
+            swizzleXYZW = ((unsigned char *)0x00003212);
           }
         }
         tokenCount = translator[0xb];
@@ -7722,9 +7725,9 @@ LAB_0004a474:
         translator[0xb] = tokenCount + 5;
         tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
         *tokenWritePtr = 0x47;
-        tokenWritePtr[4] = puVar22;
+        tokenWritePtr[4] = swizzleXYZW;
         tokenWritePtr[1] = uVar25;
-        tokenWritePtr[2] = uVar24;
+        tokenWritePtr[2] = dstMaskToken;
         tokenWritePtr[3] = uVar23;
       }
 LAB_0004a680:
