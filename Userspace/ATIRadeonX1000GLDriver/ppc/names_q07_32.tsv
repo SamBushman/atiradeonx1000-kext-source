@@ -592,3 +592,92 @@ local	FUN_0013f3d4	local_40	extraSelectWord	INFERRED	select word of the extra op
 local	FUN_00142974	local_78	laneMaskWord	INFERRED	byte array of lane flags tested at fromLane/toLane: holds the user write mask, then the needed-lanes mask of the popped inst
 local	FUN_0014375c	local_78	laneSelectBytes	INFERRED	4-byte select word of the user operand rewritten through the remap, then the user remap word (address-taken, one name)
 local	FUN_0013f3d4	local_48	destSelectWord	INFERRED	destination select word of inst, then replaced by the merged-lanes select word (address-taken, one name)
+local	Inst__collapseAlgebraic_00155a60	local_d0	constOne0	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_cc	constOne1	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_c8	constOne2	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_c4	constOne3	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_c0	constHalf0	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_bc	constHalf1	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_b8	constHalf2	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_b4	constHalf3	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_b0	constTwo0	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_ac	constTwo1	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_a8	constTwo2	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_a4	constTwo3	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
+local	Inst__collapseAlgebraic_00155a60	local_88	readMaskB	INFERRED	out of SelectWord__readMask for operand iVar3 of inst
+local	Inst__collapseAlgebraic_00155a60	local_84	writeMaskB	INFERRED	out of WriteMask__fromSelectWord for the dest select of inst3
+local	Inst__collapseAlgebraic_00155a60	local_80	readMaskC	INFERRED	out of SelectWord__readMask for operand operandIndex4
+local	Inst__collapseAlgebraic_00155a60	local_7c	writeMaskC	INFERRED	out of WriteMask__fromSelectWord for the dest select of inst1
+local	Inst__collapseAlgebraic_00155a60	local_70	readMaskA	INFERRED	out of SelectWord__readMask for operand iVar3 of inst
+local	Inst__collapseAlgebraic_00155a60	local_6c	writeMaskA	INFERRED	out of WriteMask__fromSelectWord for the dest select of inst2
+local	Inst__collapseAlgebraic_00155a60	local_78	composedSelectA	INFERRED	out of SelectWord__compose(first operand select of inst3, operand select of inst)
+local	Inst__collapseAlgebraic_00155a60	local_74	composedSelectB	INFERRED	out of SelectWord__compose(second operand select of inst3, operand select of inst)
+local	Inst__collapseAlgebraic_00155a60	local_58	negateOperand3Saved	INFERRED	*(inst+0xd0) & 1: negate bit of operand 3 saved before the inst is reinitialised
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*uVar10\ =\ 0;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*uVar10\ =\ 0;$@2	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*uVar10\ =\ 1;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@2	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@3	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@4	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@5	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@6	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@7	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@8	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@9	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@10	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@11	+1
+use	Inst__collapseAlgebraic_00155a60	uVar10	result	INFERRED	return value: 1 when the MAD was rewritten, 0 otherwise	^\s*return\ uVar10;$@12	+1
+use	Inst__collapseAlgebraic_00155a60	uVar19	savedField98	INFERRED	*(inst+0x98) saved before reinitialising	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(\(int\)param_1\ \+\ 0x98\);$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar19	savedField98	INFERRED	*(inst+0x98) saved before reinitialising	^\s*\*\(undefined4\ \*\)\(\(int\)param_1\ \+\ 0x98\)\ =\ uVar19;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar20	savedField94	INFERRED	*(inst+0x94) saved before reinitialising	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(\(int\)param_1\ \+\ 0x94\);$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar20	savedField94	INFERRED	*(inst+0x94) saved before reinitialising	^\s*\*\(undefined4\ \*\)\(\(int\)param_1\ \+\ 0x94\)\ =\ uVar20;$	+1
+local	Inst__collapseAlgebraic_00155a60	uVar25	savedField98B	INFERRED	*(inst+0x98) saved before reinitialising (second rewrite)
+local	Inst__collapseAlgebraic_00155a60	uVar28	savedField94B	INFERRED	*(inst+0x94) saved before reinitialising (second rewrite)
+use	Inst__collapseAlgebraic_00155a60	uVar17	savedField98C	INFERRED	*(inst+0x98) saved before creating the new MAD	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(\(int\)param_1\ \+\ 0x98\);$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar17	savedField98C	INFERRED	*(inst+0x98) saved before creating the new MAD	^\s*\*\(undefined4\ \*\)\(\(int\)pvVar15\ \+\ 0x98\)\ =\ uVar17;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar6	instFlagsB	INFERRED	*(inst+0x14) saved before reinitialising (second rewrite)	^\s*uVar6\ =\ \*\(uint\ \*\)\(\(int\)param_1\ \+\ 0x14\);$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar6	instFlagsB	INFERRED	*(inst+0x14) saved before reinitialising (second rewrite)	^\s*if\ \(\(uVar6\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar6	instFlagsC	INFERRED	*(inst+0x14) saved before creating the new MAD	^\s*uVar6\ =\ \*\(uint\ \*\)\(\(int\)param_1\ \+\ 0x14\);$@2	+1
+use	Inst__collapseAlgebraic_00155a60	uVar6	instFlagsC	INFERRED	*(inst+0x14) saved before creating the new MAD	^\s*if\ \(\(uVar6\ \&\ 2\)\ !=\ 0\)\ \{$@2	+1
+use	Inst__collapseAlgebraic_00155a60	uVar5	instFlagsA	INFERRED	*(inst+0x14) saved before reinitialising (first rewrite)	^\s*uVar5\ =\ \*\(uint\ \*\)\(\(int\)param_1\ \+\ 0x14\);$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar5	instFlagsA	INFERRED	*(inst+0x14) saved before reinitialising (first rewrite)	^\s*if\ \(\(uVar5\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_00155a60	bVar1	hasExtraSource	INFERRED	(inst flags & 0x200) != 0: inst has an extra operand source	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(\(int\)param_1\ \+\ 0x14\)\ \&\ 0x200\)\ !=\ 0;$	+1
+use	Inst__collapseAlgebraic_00155a60	bVar1	hasExtraSource	INFERRED	(inst flags & 0x200) != 0: inst has an extra operand source	^\s*if\ \(bVar1\)\ \{$	+1
+use	Inst__collapseAlgebraic_00155a60	bVar1	hasExtraSource	INFERRED	(inst flags & 0x200) != 0: inst has an extra operand source	^\s*if\ \(bVar1\)\ \{$@2	+1
+local	Inst__collapseAlgebraic_00155a60	piVar24	swappedInst	INFERRED	inst3 candidate swapped with inst1 when inst1 has the lower use count
+use	IfHeader__convertInnerIfToCmov	iVar3	joinBlock	INFERRED	block[0x4f]: block whose instruction list (+0x98) holds the phis (opcode 0x8e) read after the if	^\s*iVar3\ =\ param_1\[0x4f\];$	+1
+use	IfHeader__convertInnerIfToCmov	iVar3	joinBlock	INFERRED	block[0x4f]: block whose instruction list (+0x98) holds the phis (opcode 0x8e) read after the if	^\s*piVar15\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x98\);$	+1
+use	IfHeader__convertInnerIfToCmov	iVar3	joinBlock	INFERRED	block[0x4f]: block whose instruction list (+0x98) holds the phis (opcode 0x8e) read after the if	^\s*piVar1\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x98\);$	+1
+local	IfHeader__convertInnerIfToCmov	uVar14	thenBlock	INFERRED	block[0x4d]: compared with the parent block (+0x56) of phi source 1
+local	IfHeader__convertInnerIfToCmov	iVar13	elseBlock	INFERRED	block[0x4e]: compared with the parent block (+0x56) of phi source 2
+use	IfHeader__convertInnerIfToCmov	piVar15	joinInst	INFERRED	current inst of the join block list in the legality scan	^\s*piVar15\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x98\);$	+2
+use	IfHeader__convertInnerIfToCmov	piVar15	joinInst	INFERRED	current inst of the join block list in the legality scan	^\s*in_r9\ =\ \(int\ \*\)\(piVar15\[5\]\ \&\ 1\);$	+1
+use	IfHeader__convertInnerIfToCmov	piVar15	joinInst	INFERRED	current inst of the join block list in the legality scan	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x34\)\)\(piVar15\);$	+4
+use	IfHeader__convertInnerIfToCmov	piVar15	joinInst	INFERRED	current inst of the join block list in the legality scan	^\s*piVar1\ =\ \(int\ \*\)FUN_00105594\(piVar15,2\);$	+1
+use	IfHeader__convertInnerIfToCmov	piVar15	joinInst	INFERRED	current inst of the join block list in the legality scan	^\s*piVar2\ =\ \(int\ \*\)piVar15\[2\];$	+1
+use	IfHeader__convertInnerIfToCmov	piVar15	joinInst	INFERRED	current inst of the join block list in the legality scan	^\s*piVar15\ =\ piVar2;$	+1
+use	IfHeader__convertInnerIfToCmov	piVar15	nextJoinInst	INFERRED	for-loop cursor over the join block list in the rewrite loop	^\s*for\ \(piVar15\ =\ \(int\ \*\)piVar1\[2\];\ piVar15\ !=\ \(int\ \*\)0x0;\ piVar15\ =\ \(int\ \*\)piVar15\[2\]\)\ \{$	+1
+use	IfHeader__convertInnerIfToCmov	piVar15	nextJoinInst	INFERRED	for-loop cursor over the join block list in the rewrite loop	^\s*piVar1\ =\ piVar15;$	+1
+use	IfHeader__convertInnerIfToCmov	piVar1	nextInst	INFERRED	piVar15[2]: next inst of the join block list	^\s*piVar1\ =\ \(int\ \*\)piVar15\[2\];$	+2
+use	IfHeader__convertInnerIfToCmov	piVar1	nextInst	INFERRED	piVar15[2]: next inst of the join block list	^\s*piVar2\ =\ piVar1;$	+1
+use	IfHeader__convertInnerIfToCmov	piVar1	nextInst	INFERRED	piVar15[2]: next inst of the join block list	^\s*piVar1\ =\ \(int\ \*\)piVar2\[2\];$	+1
+use	IfHeader__convertInnerIfToCmov	piVar1	joinInstB	INFERRED	current inst of the join block list in the rewrite loop	^\s*piVar1\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x98\);$	+7
+use	IfHeader__convertInnerIfToCmov	piVar1	joinInstB	INFERRED	current inst of the join block list in the rewrite loop	^\s*FUN_0010d730\(piVar1,iVar11,uVar10,param_3\);$	+3
+use	IfHeader__convertInnerIfToCmov	piVar1	joinInstB	INFERRED	current inst of the join block list in the rewrite loop	^\s*FUN_000e7688\(uVar6,piVar1\);$	+1
+use	IfHeader__convertInnerIfToCmov	piVar1	joinInstB	INFERRED	current inst of the join block list in the rewrite loop	^\s*FUN_0019401c\(piVar1\);$	+2
+use	IfHeader__convertInnerIfToCmov	piVar1	joinInstB	INFERRED	current inst of the join block list in the rewrite loop	^\s*piVar1\ =\ piVar15;$	+1
+local	IfHeader__convertInnerIfToCmov	piVar2	scanInst	INFERRED	copy of the next inst while piVar15 is advanced
+use	IfHeader__convertInnerIfToCmov	iVar11	phiCount	INFERRED	number of phis (opcode 0x8e) found in the join block	^\s*iVar11\ =\ 0;$	+1
+use	IfHeader__convertInnerIfToCmov	iVar11	phiCount	INFERRED	number of phis (opcode 0x8e) found in the join block	^\s*iVar11\ =\ 0;$@2	+1
+use	IfHeader__convertInnerIfToCmov	iVar11	phiCount	INFERRED	number of phis (opcode 0x8e) found in the join block	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+1
+use	IfHeader__convertInnerIfToCmov	iVar11	phiCount	INFERRED	number of phis (opcode 0x8e) found in the join block	^\s*if\ \(\(\(iVar16\ ==\ iVar5\)\ \&\&\ \(iVar16\ =\ FUN_00194034\(iVar13\ \+\ 0x90\),\ iVar16\ ==\ iVar12\ \+\ 2\)\)\ \&\&$	+2
+local	IfHeader__convertInnerIfToCmov	iVar16	thenMovableCount	INFERRED	insts of the then block that can be hoisted, plus 2 for its branch/terminator
+use	IfHeader__convertInnerIfToCmov	bVar17	thenSourcesMovable	INFERRED	phi source 1 is hoistable or FUN_00139034 accepts it	^\s*bVar17\ =\ true;$	+1
+use	IfHeader__convertInnerIfToCmov	bVar17	thenSourcesMovable	INFERRED	phi source 1 is hoistable or FUN_00139034 accepts it	^\s*bVar17\ =\ iVar5\ !=\ 0;$	+1
+use	IfHeader__convertInnerIfToCmov	bVar17	thenSourcesMovable	INFERRED	phi source 1 is hoistable or FUN_00139034 accepts it	^\s*if\ \(!bVar17\)\ \{$	+1
+use	IfHeader__convertInnerIfToCmov	bVar17	swapCompareOperands	INFERRED	*(branchInst+300) != 7: operand 2/3 swap needed after folding	^\s*bVar17\ =\ \*\(int\ \*\)\(iVar11\ \+\ 300\)\ !=\ 7;$	+1
+use	IfHeader__convertInnerIfToCmov	bVar17	swapCompareOperands	INFERRED	*(branchInst+300) != 7: operand 2/3 swap needed after folding	^\s*bVar17\ =\ false;$	+1
+use	IfHeader__convertInnerIfToCmov	bVar17	swapCompareOperands	INFERRED	*(branchInst+300) != 7: operand 2/3 swap needed after folding	^\s*if\ \(\(\*\(int\ \*\)\(piVar1\[0x22\]\ \+\ 8\)\ !=\ 0x31\)\ \&\&\ \(bVar17\)\)\ \{$	+1
+local	IfHeader__convertInnerIfToCmov	uVar10	compareSelectWord	INFERRED	select word of operand 1 of the branch compare, passed to IRInst__foldConstantFactor
+local	IfHeader__convertInnerIfToCmov	uVar6	predecessorBlock	INFERRED	high word of Block__getPredecessor(block,0): block that receives the hoisted insts (Block__appendInst first argument)

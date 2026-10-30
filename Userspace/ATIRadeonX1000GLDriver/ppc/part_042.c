@@ -2339,19 +2339,24 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   undefined4 program;
   uint compiler;
 {
+  bool swapCompareOperands;
+  int phiCount;
+  int *joinInstB;
+  int *nextJoinInst;
+  int joinBlock;
   int operandKindClassResult;
   int countdown;
   undefined8 predecessor;
   int listCount;
   undefined8 isStatic;
   int *operandVReg;
-  int loopIndex;
-  int *piVar1;
-  int *piVar2;
+  int elseMovableCount;
+  int *nextInst;
+  int *scanInst;
   int iVar3;
   int iVar4;
   int iVar5;
-  undefined4 uVar6;
+  undefined4 predecessorBlock;
   undefined4 operandVReg2;
   undefined4 operandVReg3;
   uint uVar9;
@@ -2359,14 +2364,14 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   undefined4 in_r7;
   undefined4 in_r8;
   int *in_r9;
-  undefined4 uVar10;
+  undefined4 compareSelectWord;
   int iVar11;
   int operandRecord;
-  int iVar13;
-  uint uVar14;
-  int *piVar15;
-  int iVar16;
-  bool bVar17;
+  int elseBlock;
+  uint thenBlock;
+  int *joinInst;
+  int thenMovableCount;
+  bool thenSourcesMovable;
   undefined8 uVar18;
   
   uVar9 = compiler;
@@ -2378,30 +2383,30 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
       if ((*(int *)(*(int *)((int)((ulonglong)uVar18 >> 0x20) + 0x88) + 8) == 0x8b) ||
          (iVar3 = Block__getBranchInst(block,(int)uVar18,uVar9,in_r6,in_r7,in_r8,in_r9),
          *(int *)(*(int *)(iVar3 + 0x88) + 8) == 0x8c)) {
-        iVar3 = block[0x4f];
-        uVar14 = block[0x4d];
-        iVar13 = block[0x4e];
-        piVar15 = *(int **)(iVar3 + 0x98);
-        piVar1 = (int *)piVar15[2];
-        if (piVar1 == (int *)0x0) {
-          iVar11 = 0;
-          loopIndex = 0;
-          iVar16 = 2;
+        joinBlock = block[0x4f];
+        thenBlock = block[0x4d];
+        elseBlock = block[0x4e];
+        joinInst = *(int **)(joinBlock + 0x98);
+        nextInst = (int *)joinInst[2];
+        if (nextInst == (int *)0x0) {
+          phiCount = 0;
+          elseMovableCount = 0;
+          thenMovableCount = 2;
         }
         else {
-          iVar11 = 0;
-          iVar16 = 0;
-          loopIndex = 0;
+          phiCount = 0;
+          thenMovableCount = 0;
+          elseMovableCount = 0;
           do {
-            piVar2 = piVar1;
-            in_r9 = (int *)(piVar15[5] & 1);
+            scanInst = nextInst;
+            in_r9 = (int *)(joinInst[5] & 1);
             if (in_r9 != (int *)0x0) {
-              iVar5 = (**(code **)(*piVar15 + 0x34))(piVar15);
-              if (((iVar5 == 0) && (iVar5 = (**(code **)(*piVar15 + 0x38))(piVar15), iVar5 == 0)) &&
-                 (*(int *)(piVar15[0x22] + 8) == 0x8e)) {
-                operandVReg = (int *)IRInst__getOperandSource(piVar15,1);
-                iVar11 = iVar11 + 1;
-                if ((uVar14 == operandVReg[0x56]) &&
+              iVar5 = (**(code **)(*joinInst + 0x34))(joinInst);
+              if (((iVar5 == 0) && (iVar5 = (**(code **)(*joinInst + 0x38))(joinInst), iVar5 == 0)) &&
+                 (*(int *)(joinInst[0x22] + 8) == 0x8e)) {
+                operandVReg = (int *)IRInst__getOperandSource(joinInst,1);
+                phiCount = phiCount + 1;
+                if ((thenBlock == operandVReg[0x56]) &&
                    (iVar5 = (**(code **)(*operandVReg + 100))(operandVReg), iVar5 != 0)) {
                   for (iVar5 = 1; iVar4 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= iVar4;
                       iVar5 = iVar5 + 1) {
@@ -2426,18 +2431,18 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
                   if (((iVar5 != 0) || ((operandVReg[5] & 2U) != 0)) ||
                      ((in_r9 = (int *)(operandVReg[5] & 0x200), in_r9 != (int *)0x0 ||
                       (*(int *)(operandVReg[4] + 4) != 1)))) goto LAB_0013cd68;
-                  iVar16 = iVar16 + 1;
-                  bVar17 = true;
+                  thenMovableCount = thenMovableCount + 1;
+                  thenSourcesMovable = true;
                 }
                 else {
 LAB_0013cd68:
-                  uVar9 = uVar14;
-                  in_r6 = iVar13;
-                  iVar5 = FUN_00139034(operandVReg,block,uVar14,iVar13);
-                  bVar17 = iVar5 != 0;
+                  uVar9 = thenBlock;
+                  in_r6 = elseBlock;
+                  iVar5 = FUN_00139034(operandVReg,block,thenBlock,elseBlock);
+                  thenSourcesMovable = iVar5 != 0;
                 }
-                operandVReg = (int *)IRInst__getOperandSource(piVar15,2);
-                if ((iVar13 == operandVReg[0x56]) &&
+                operandVReg = (int *)IRInst__getOperandSource(joinInst,2);
+                if ((elseBlock == operandVReg[0x56]) &&
                    (iVar5 = (**(code **)(*operandVReg + 100))(operandVReg), iVar5 != 0)) {
                   for (iVar5 = 1; iVar4 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= iVar4;
                       iVar5 = iVar5 + 1) {
@@ -2462,76 +2467,76 @@ LAB_0013cd68:
                   if ((((operandKindClassResult != 0) || ((operandVReg[5] & 2U) != 0)) ||
                       (in_r9 = (int *)(operandVReg[5] & 0x200), in_r9 != (int *)0x0)) ||
                      (*(int *)(operandVReg[4] + 4) != 1)) goto LAB_0013cee8;
-                  loopIndex = loopIndex + 1;
+                  elseMovableCount = elseMovableCount + 1;
                 }
                 else {
 LAB_0013cee8:
-                  uVar9 = uVar14;
-                  in_r6 = iVar13;
-                  iVar5 = FUN_00139034(operandVReg,block,uVar14,iVar13);
+                  uVar9 = thenBlock;
+                  in_r6 = elseBlock;
+                  iVar5 = FUN_00139034(operandVReg,block,thenBlock,elseBlock);
                   if (iVar5 == 0) {
                     return;
                   }
                 }
-                if (!bVar17) {
+                if (!thenSourcesMovable) {
                   return;
                 }
               }
-              piVar2 = (int *)piVar15[2];
+              scanInst = (int *)joinInst[2];
             }
-            piVar1 = (int *)piVar2[2];
-            piVar15 = piVar2;
-          } while ((int *)piVar2[2] != (int *)0x0);
-          iVar16 = iVar16 + 2;
+            nextInst = (int *)scanInst[2];
+            joinInst = scanInst;
+          } while ((int *)scanInst[2] != (int *)0x0);
+          thenMovableCount = thenMovableCount + 2;
         }
-        listCount = DList__count(uVar14 + 0x90);
-        if (((iVar16 == listCount) && (iVar16 = DList__count(iVar13 + 0x90), iVar16 == loopIndex + 2)) &&
-           (iVar11 != 0)) {
+        listCount = DList__count(thenBlock + 0x90);
+        if (((thenMovableCount == listCount) && (thenMovableCount = DList__count(elseBlock + 0x90), thenMovableCount == elseMovableCount + 2)) &&
+           (phiCount != 0)) {
           predecessor = Block__getPredecessor(block,0);
-          uVar6 = (undefined4)((ulonglong)predecessor >> 0x20);
+          predecessorBlock = (undefined4)((ulonglong)predecessor >> 0x20);
           iVar11 = Block__getBranchInst(block,(int)predecessor,uVar9,in_r6,in_r7,in_r8,in_r9);
-          uVar10 = 0;
+          compareSelectWord = 0;
           if (*(int *)(*(int *)(iVar11 + 0x88) + 8) == 0x8c) {
             operandRecord = IRInst__getOperandRecord(iVar11,1);
-            uVar10 = *(undefined4 *)(operandRecord + 0x10);
+            compareSelectWord = *(undefined4 *)(operandRecord + 0x10);
             Program__removeInst(program,iVar11);
-            bVar17 = *(int *)(iVar11 + 300) != 7;
+            swapCompareOperands = *(int *)(iVar11 + 300) != 7;
             iVar11 = IRInst__getOperandSource(iVar11,1);
           }
           else {
-            bVar17 = false;
+            swapCompareOperands = false;
             IRInst__convertCompareToBinaryAlu(iVar11,compiler);
-            Block__appendInst(uVar6,iVar11);
+            Block__appendInst(predecessorBlock,iVar11);
           }
-          piVar1 = *(int **)(iVar3 + 0x98);
-          for (piVar15 = (int *)piVar1[2]; piVar15 != (int *)0x0; piVar15 = (int *)piVar15[2]) {
-            iVar3 = (**(code **)(*piVar1 + 0x34))(piVar1);
-            if ((iVar3 == 0) && (iVar3 = (**(code **)(*piVar1 + 0x38))(piVar1), iVar3 == 0)) {
-              if (*(int *)(piVar1[0x22] + 8) == 0x8e) {
-                operandVReg2 = IRInst__getOperandSource(piVar1,1);
-                operandVReg3 = IRInst__getOperandSource(piVar1,2);
-                iVar3 = FUN_00139034(operandVReg2,block,uVar14,iVar13);
+          joinInstB = *(int **)(joinBlock + 0x98);
+          for (nextJoinInst = (int *)joinInstB[2]; nextJoinInst != (int *)0x0; nextJoinInst = (int *)nextJoinInst[2]) {
+            iVar3 = (**(code **)(*joinInstB + 0x34))(joinInstB);
+            if ((iVar3 == 0) && (iVar3 = (**(code **)(*joinInstB + 0x38))(joinInstB), iVar3 == 0)) {
+              if (*(int *)(joinInstB[0x22] + 8) == 0x8e) {
+                operandVReg2 = IRInst__getOperandSource(joinInstB,1);
+                operandVReg3 = IRInst__getOperandSource(joinInstB,2);
+                iVar3 = FUN_00139034(operandVReg2,block,thenBlock,elseBlock);
                 if (iVar3 == 0) {
                   DList__unlink(operandVReg2);
-                  Block__appendInst(uVar6,operandVReg2);
+                  Block__appendInst(predecessorBlock,operandVReg2);
                 }
-                iVar3 = FUN_00139034(operandVReg3,block,uVar14,iVar13);
+                iVar3 = FUN_00139034(operandVReg3,block,thenBlock,elseBlock);
                 if (iVar3 == 0) {
                   DList__unlink(operandVReg3);
-                  Block__appendInst(uVar6,operandVReg3);
+                  Block__appendInst(predecessorBlock,operandVReg3);
                 }
-                IRInst__foldConstantFactor(piVar1,iVar11,uVar10,compiler);
-                if ((*(int *)(piVar1[0x22] + 8) != 0x31) && (bVar17)) {
-                  IRInst__swapOperands(piVar1,2,3,compiler);
+                IRInst__foldConstantFactor(joinInstB,iVar11,compareSelectWord,compiler);
+                if ((*(int *)(joinInstB[0x22] + 8) != 0x31) && (swapCompareOperands)) {
+                  IRInst__swapOperands(joinInstB,2,3,compiler);
                 }
-                Block__appendInst(uVar6,piVar1);
+                Block__appendInst(predecessorBlock,joinInstB);
               }
               else {
-                DList__unlink(piVar1);
-                Block__appendInst(uVar6,piVar1);
+                DList__unlink(joinInstB);
+                Block__appendInst(predecessorBlock,joinInstB);
               }
             }
-            piVar1 = piVar15;
+            joinInstB = nextJoinInst;
           }
         }
       }
