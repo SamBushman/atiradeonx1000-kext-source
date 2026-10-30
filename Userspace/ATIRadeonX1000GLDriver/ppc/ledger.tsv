@@ -1237,7 +1237,7 @@
 0xe0794	36	Compiler__setOptionBit	part_020	converted
 0xe07b8	36	Compiler__clearOptionBit	part_020	converted
 0xe07dc	84	Compiler__isOptionEnabled	part_020	converted
-0xe0830	32	FUN_000e0830	part_020	converted
+0xe0830	32	Compiler__isCurrentHandle	part_020	converted
 0xe0850	1112	Compiler__setDefaultOptions	part_020	converted
 0xe0ca8	28	FUN_000e0ca8	part_020	converted
 0xe0cc8	8	testBit24	part_020	converted
@@ -1278,8 +1278,8 @@
 0xe2668	280	Compiler__compile	part_021	converted
 0xe2780	140	MachineCodeWriter__accumulateStats	part_021	converted
 0xe280c	44	FUN_000e280c	part_021	converted
-0xe2838	20	FUN_000e2838	part_021	converted
-0xe284c	20	FUN_000e284c	part_021	converted
+0xe2838	20	EncoderState__emitBlock	part_021	converted
+0xe284c	20	EncoderState__sinkIsOverflowed	part_021	converted
 0xe2860	36	Block__accept	part_021	converted
 0xe28f0	96	IfFooterStatic__accept	part_021	converted
 0xe2a04	64	FUN_000e2a04	part_021	converted

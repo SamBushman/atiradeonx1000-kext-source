@@ -540,7 +540,7 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, sta
     thenHasKillTexture = ((int (*)())Program__hasKillTexture)(thenBlock);
     if ((thenHasKillTexture == 0) && (thenHasKillTexture = ((int (*)())Program__hasKillTexture)(elseBlock), thenHasKillTexture == 0)) {
       armLimitKind = 3;
-      optionResult = FUN_000e0830(optionSource,0,3);
+      optionResult = Compiler__isCurrentHandle(optionSource,0,3);
       if ((int)((ulonglong)optionResult >> 0x20) == 0) {
         if ((*(uint *)(ifHeader + 0xc) & 0x800) == 0) {
           optionResult = Block__hasInstWithQuery28(thenBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
@@ -1648,7 +1648,7 @@ int FudoPs__flattenIfs(this, flattenPass)
 {
   int callResult;
   
-  callResult = FUN_000e0830(*(undefined4 *)(flattenPass + 8),0,0);
+  callResult = Compiler__isCurrentHandle(*(undefined4 *)(flattenPass + 8),0,0);
   if (callResult == 0) {
     ((int (*)())pass_flatten_ifs)(flattenPass);
     return;

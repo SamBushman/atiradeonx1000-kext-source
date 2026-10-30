@@ -2507,20 +2507,20 @@ int CompileInput__lacksFlag0x200000(compileInput, sideSelector)
   int compileInput;
   int sideSelector;
 {
-  bool bVar1;
-  int iVar2;
+  bool result;
+  int sideObject;
   
   if (sideSelector == 0) {
-    iVar2 = *(int *)(compileInput + 0x2c);
+    sideObject = *(int *)(compileInput + 0x2c);
   }
   else {
-    iVar2 = *(int *)(compileInput + 0x30);
+    sideObject = *(int *)(compileInput + 0x30);
   }
-  bVar1 = true;
-  if (*(uint **)(iVar2 + 0x48) != (uint *)0x0) {
-    bVar1 = (**(uint **)(iVar2 + 0x48) & 0x200000) == 0;
+  result = true;
+  if (*(uint **)(sideObject + 0x48) != (uint *)0x0) {
+    result = (**(uint **)(sideObject + 0x48) & 0x200000) == 0;
   }
-  return bVar1;
+  return result;
 }
 
 /* CompileInput__getFloatConstCount @ 0xd9f80 (32 bytes) */
@@ -2564,20 +2564,20 @@ int CompileInput__readFloatConst(compileInput, sideSelector, constIndex, unusedA
   undefined4 unusedArg4;
   undefined4 *outValue;
 {
-  int iVar1;
-  int iVar2;
+  int recordAddr;
+  int tableBase;
   
   if (sideSelector == 0) {
-    iVar2 = *(int *)(*(int *)(compileInput + 0x2c) + 0x34);
+    tableBase = *(int *)(*(int *)(compileInput + 0x2c) + 0x34);
   }
   else {
-    iVar2 = *(int *)(*(int *)(compileInput + 0x30) + 0x30);
+    tableBase = *(int *)(*(int *)(compileInput + 0x30) + 0x30);
   }
-  iVar1 = iVar2 + constIndex * 0x10;
-  *outValue = *(undefined4 *)(iVar2 + constIndex * 0x10);
-  outValue[1] = *(undefined4 *)(iVar1 + 4);
-  outValue[2] = *(undefined4 *)(iVar1 + 8);
-  outValue[3] = *(undefined4 *)(iVar1 + 0xc);
+  recordAddr = tableBase + constIndex * 0x10;
+  *outValue = *(undefined4 *)(tableBase + constIndex * 0x10);
+  outValue[1] = *(undefined4 *)(recordAddr + 4);
+  outValue[2] = *(undefined4 *)(recordAddr + 8);
+  outValue[3] = *(undefined4 *)(recordAddr + 0xc);
   return;
 }
 
@@ -2589,20 +2589,20 @@ int CompileInput__readIntConst(compileInput, sideSelector, constIndex, unusedArg
   undefined4 unusedArg4;
   undefined4 *outValue;
 {
-  int iVar1;
-  int iVar2;
+  int tableBase;
+  int recordAddr;
   
   if (sideSelector == 0) {
-    iVar1 = *(int *)(*(int *)(compileInput + 0x2c) + 4);
+    tableBase = *(int *)(*(int *)(compileInput + 0x2c) + 4);
   }
   else {
-    iVar1 = **(int **)(compileInput + 0x30);
+    tableBase = **(int **)(compileInput + 0x30);
   }
-  iVar2 = iVar1 + constIndex * 0x10;
-  *outValue = *(undefined4 *)(iVar1 + constIndex * 0x10);
-  outValue[1] = *(undefined4 *)(iVar2 + 4);
-  outValue[2] = *(undefined4 *)(iVar2 + 8);
-  outValue[3] = *(undefined4 *)(iVar2 + 0xc);
+  recordAddr = tableBase + constIndex * 0x10;
+  *outValue = *(undefined4 *)(tableBase + constIndex * 0x10);
+  outValue[1] = *(undefined4 *)(recordAddr + 4);
+  outValue[2] = *(undefined4 *)(recordAddr + 8);
+  outValue[3] = *(undefined4 *)(recordAddr + 0xc);
   return;
 }
 
@@ -3037,10 +3037,10 @@ int ildisAppendIndentedf(disassembler, indentLevel, format, fmtArgR6, fmtArgR7, 
   undefined4 fmtArgR10;
 {
   unsigned int ghidra_home[8] = { disassembler, indentLevel, format, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint uVar1;
-  undefined4 uVar2;
+  uint bufferLength;
+  undefined4 unusedFormatCopy;
   int loopCounter;
-  undefined1 auStack_234 [540];
+  undefined1 lineBuffer [540];
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = fmtArgR6;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = fmtArgR7;
@@ -3049,16 +3049,16 @@ int ildisAppendIndentedf(disassembler, indentLevel, format, fmtArgR6, fmtArgR7, 
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArgR10;
   if (0 < indentLevel) {
     loopCounter = 0;
-    uVar2 = format;
+    unusedFormatCopy = format;
     do {
       loopCounter = loopCounter + 1;
-      ((int (*)())ildisAppendf)(disassembler,"    ",uVar2,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+      ((int (*)())ildisAppendf)(disassembler,"    ",unusedFormatCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     } while (indentLevel != loopCounter);
   }
-  printf_LDBLStub_1a3428(auStack_234,0x200,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-  uVar1 = _strlen(disassembler + 0x10);
-  if (uVar1 <= 0x1ff - uVar1) {
-    _strcat(disassembler + 0x10,auStack_234);
+  printf_LDBLStub_1a3428(lineBuffer,0x200,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  bufferLength = _strlen(disassembler + 0x10);
+  if (bufferLength <= 0x1ff - bufferLength) {
+    _strcat(disassembler + 0x10,lineBuffer);
   }
   return;
 }

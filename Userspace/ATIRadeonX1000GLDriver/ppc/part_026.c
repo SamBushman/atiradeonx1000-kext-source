@@ -2534,16 +2534,16 @@ int Program__applySourceTokenToOperand(program, selectWordPtr, descriptor, opera
 }
 
 /* FUN_000f8c88 @ 0xf8c88 (64 bytes) */
-int FUN_000f8c88(param_1)
-  int param_1;
+int FUN_000f8c88(ilOpcode)
+  int ilOpcode;
 {
-  int iVar1;
+  int tableIndex;
   
-  iVar1 = param_1 + -0x30;
-  if ((1 < iVar1) && (iVar1 = 2, param_1 != 0x5f)) {
-    iVar1 = param_1 + -0x74;
+  tableIndex = ilOpcode + -0x30;
+  if ((1 < tableIndex) && (tableIndex = 2, ilOpcode != 0x5f)) {
+    tableIndex = ilOpcode + -0x74;
   }
-  return *(undefined4 *)(&DAT_001aa9e4 + iVar1 * 4);
+  return *(undefined4 *)(&DAT_001aa9e4 + tableIndex * 4);
 }
 
 /* OpcodeTemplate__lookup @ 0xf8ccc (132 bytes) */
@@ -5170,8 +5170,8 @@ int Template__pushCallFrame(program, templateBase, templateCursorPtr, frameBlock
 {
   undefined4 templateCursor;
   undefined4 *allocation;
-  int *piVar2;
-  uint uVar3;
+  int *frameSlot;
+  uint frameCount;
   undefined4 arenaB;
   
   arenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
@@ -5181,16 +5181,16 @@ int Template__pushCallFrame(program, templateBase, templateCursorPtr, frameBlock
   templateCursor = *templateCursorPtr;
   allocation[3] = frameBlock;
   allocation[2] = templateCursor;
-  uVar3 = vector[1];
-  if (uVar3 < *vector) {
-    _memset(uVar3 * 4 + vector[2],0,4);
-    piVar2 = (int *)(uVar3 * 4 + vector[2]);
-    vector[1] = uVar3 + 1;
+  frameCount = vector[1];
+  if (frameCount < *vector) {
+    _memset(frameCount * 4 + vector[2],0,4);
+    frameSlot = (int *)(frameCount * 4 + vector[2]);
+    vector[1] = frameCount + 1;
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(vector,uVar3);
+    frameSlot = (int *)Vector__elementRefGrow(vector,frameCount);
   }
-  *piVar2 = (int)(allocation + 1);
+  *frameSlot = (int)(allocation + 1);
   *templateCursorPtr = 0xffffffff;
   return calleeTemplate;
 }

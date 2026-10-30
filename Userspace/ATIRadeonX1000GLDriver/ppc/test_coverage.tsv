@@ -1237,7 +1237,7 @@
 0xe0794	Compiler__setOptionBit	36	yes	
 0xe07b8	Compiler__clearOptionBit	36	yes	
 0xe07dc	Compiler__isOptionEnabled	84	yes	
-0xe0830	FUN_000e0830	32	yes	
+0xe0830	Compiler__isCurrentHandle	32	yes	
 0xe0850	Compiler__setDefaultOptions	1112	yes	
 0xe0ca8	FUN_000e0ca8	28	yes	
 0xe0cc8	testBit24	8	yes	
@@ -1278,8 +1278,8 @@
 0xe2668	Compiler__compile	280	no	calls an import (setjmp)
 0xe2780	MachineCodeWriter__accumulateStats	140	yes	
 0xe280c	FUN_000e280c	44	yes	
-0xe2838	FUN_000e2838	20	yes	
-0xe284c	FUN_000e284c	20	yes	
+0xe2838	EncoderState__emitBlock	20	yes	
+0xe284c	EncoderState__sinkIsOverflowed	20	yes	
 0xe2860	Block__accept	36	yes	
 0xe28f0	IfFooterStatic__accept	96	no	indirect call (driver context / vtable / callback)
 0xe2a04	FUN_000e2a04	64	yes	

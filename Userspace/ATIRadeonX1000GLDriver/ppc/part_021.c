@@ -846,28 +846,28 @@ int FUN_000e280c(block, encoder, sinkArg)
   return;
 }
 
-/* FUN_000e2838 @ 0xe2838 (20 bytes) */
-int FUN_000e2838(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  uint param_3;
+/* EncoderState__emitBlock @ 0xe2838 (20 bytes) */
+int EncoderState__emitBlock(encoder, block, sinkArg)
+  int encoder;
+  uint block;
+  uint sinkArg;
 {
                     
                     
-  (**(code **)(**(int **)(param_1 + 0x20) + 0x30))(*(int **)(param_1 + 0x20),param_2,param_3);
+  (**(code **)(**(int **)(encoder + 0x20) + 0x30))(*(int **)(encoder + 0x20),block,sinkArg);
   return;
 }
 
-/* FUN_000e284c @ 0xe284c (20 bytes) */
-int FUN_000e284c(param_1)
-  int param_1;
+/* EncoderState__sinkIsOverflowed @ 0xe284c (20 bytes) */
+int EncoderState__sinkIsOverflowed(encoder)
+  int encoder;
 {
-  undefined4 uVar1;
+  undefined4 result;
   
                     
                     
-  uVar1 = (**(code **)(**(int **)(param_1 + 0x20) + 8))(*(int **)(param_1 + 0x20));
-  return uVar1;
+  result = (**(code **)(**(int **)(encoder + 0x20) + 8))(*(int **)(encoder + 0x20));
+  return result;
 }
 
 /* Block__accept @ 0xe2860 (36 bytes) */
@@ -1545,7 +1545,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
           ((int (*)())EncoderState__emitInstruction)(auStack_74,firstPredecessor);
         }
       }
-      ((int (*)())FUN_000e2838)(auStack_74,(uint)block,*writer);
+      ((int (*)())EncoderState__emitBlock)(auStack_74,(uint)block,*writer);
     }
     else {
       ((int (*)())FUN_000e280c)(block,auStack_74,auStack_78);
@@ -1557,7 +1557,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   sizeBeforeCompression = (**(code **)(*local_54 + 0x20))(local_54);
   writer[1] = sizeBeforeCompression;
   ((int (*)())MachineCodeWriter__accumulateStats)(writer,auStack_74);
-  programTooLarge = ((int (*)())FUN_000e284c)(auStack_74);
+  programTooLarge = ((int (*)())EncoderState__sinkIsOverflowed)(auStack_74);
   compressEnabled = Compiler__isOptionEnabled(writer[2],0x4d);
   if (compressEnabled == 0) {
     if (programTooLarge != 0) goto LAB_000e3900;
@@ -1568,7 +1568,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
       sizeBeforeCompression = writer[1];
       (**(code **)(*local_54 + 0xc))(local_54);
       ((int (*)())MachineCodeWriter__encodeProgram)(writer,outBuffer,outSize);
-      ((int (*)())FUN_000e284c)(auStack_74);
+      ((int (*)())EncoderState__sinkIsOverflowed)(auStack_74);
       Compiler__logf(writer[2],"Compression : size reduced from %d to %d  (%%%d)\n",sizeBeforeCompression,
                    writer[1],(int)((sizeBeforeCompression - writer[1]) * 100) / (int)sizeBeforeCompression,staleArgR8,staleArgR9,staleArgR10);
       goto LAB_000e392c;
@@ -1655,22 +1655,22 @@ int IRInst__dropAppendedSources(inst, compilerCtx)
   uint inst;
   undefined4 compilerCtx;
 {
-  uint uVar1;
+  uint flagWord;
   
-  uVar1 = inst;
+  flagWord = inst;
   do {
-    if (uVar1 == 0) {
+    if (flagWord == 0) {
       return;
     }
-    uVar1 = *(uint *)(inst + 0x14);
-    if (((uVar1 & 1) != 0) && ((uVar1 & 0x200) != 0)) {
+    flagWord = *(uint *)(inst + 0x14);
+    if (((flagWord & 1) != 0) && ((flagWord & 0x200) != 0)) {
       IRInst__setOperandSource(inst,*(undefined4 *)(inst + 0x84),0,0,compilerCtx);
-      uVar1 = *(uint *)(inst + 0x14) & 0xfffffdff;
+      flagWord = *(uint *)(inst + 0x14) & 0xfffffdff;
       *(int *)(inst + 0x84) = *(int *)(inst + 0x84) + -1;
-      *(uint *)(inst + 0x14) = uVar1;
+      *(uint *)(inst + 0x14) = flagWord;
     }
     inst = *(uint *)(inst + 8);
-    uVar1 = uVar1 & 4;
+    flagWord = flagWord & 4;
   } while (inst != 0);
   return;
 }
@@ -2219,18 +2219,18 @@ void ILReader__appendFloatConst(int *ilReader,undefined4 registerIndex,double co
 int ILReader__topScopeOpcode(ilReader)
   int ilReader;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *topSlot;
+  uint stackCount;
   
-  uVar2 = *(uint *)(*(int *)(ilReader + 0x40) + 4);
-  if (uVar2 == 0) {
+  stackCount = *(uint *)(*(int *)(ilReader + 0x40) + 4);
+  if (stackCount == 0) {
     return 0xbf;
   }
-  puVar1 = (undefined4 *)0x0;
-  if (uVar2 - 1 < uVar2) {
-    puVar1 = (undefined4 *)((uVar2 - 1) * 4 + *(int *)(*(int *)(ilReader + 0x40) + 8));
+  topSlot = (undefined4 *)0x0;
+  if (stackCount - 1 < stackCount) {
+    topSlot = (undefined4 *)((stackCount - 1) * 4 + *(int *)(*(int *)(ilReader + 0x40) + 8));
   }
-  return *(undefined4 *)*puVar1;
+  return *(undefined4 *)*topSlot;
 }
 
 /* ILReader__dtor_e4830 @ 0xe4830 (260 bytes) */

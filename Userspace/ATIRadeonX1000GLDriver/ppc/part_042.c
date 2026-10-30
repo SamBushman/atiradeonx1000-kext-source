@@ -2577,7 +2577,7 @@ int pass_rewrite(program)
       iVar2 = piVar3[2];
     }
     iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x18);
-    if (((iVar2 != 0) && (iVar2 = FUN_000e0830(*(undefined4 *)(program + PROG_compiler),0,3), iVar2 == 0)) &&
+    if (((iVar2 != 0) && (iVar2 = Compiler__isCurrentHandle(*(undefined4 *)(program + PROG_compiler),0,3), iVar2 == 0)) &&
        ((*(uint *)(*(int *)(*(int *)(program + PROG_compiler) + COMP_target) + 8) & 0x20000) == 0)) {
       ((int (*)())Program__moveInterpFetchesOutOfIfs)(program);
       ((int (*)())Program__hoistFetchInsts)(program);

@@ -2756,3 +2756,38 @@ local	Compiler__selectEntry534ByProgramFlags	uVar1	programFlags	INFERRED	flag wo
 local	callTargetSlot25	param_1	program	INFERRED	program whose compiler hardware info (+0x30c) is called through vtable +100
 local	callTargetSlot25	piVar1	hardwareInfo	INFERRED	compiler+0x30c hardware-info object
 local	Program__createIfBlock	local_48	broadcastSelectWord	INFERRED	select word of the condition operand with one lane byte broadcast to all four lanes
+local	FUN_000f370c	param_1	outBytes	INFERRED	receives DAT_001aa83c with the lane index stored at every lane whose laneBytes entry is zero
+local	FUN_000f370c	pcVar1	laneCursor	INFERRED	cursor over the four lane bytes
+local	FUN_000f370c	cVar2	laneIndexByte	INFERRED	lane number 0-3 stored for zero lanes
+local	laneBytes__mapTwoThreeToOne	param_1	outBytes	INFERRED	receives the four mapped lane bytes
+local	laneBytes__mapTwoThreeToOne	pcVar1	laneCursor	INFERRED	cursor over the four lane bytes
+local	SelectWord__markLanesWhereSecondIsOne	pcVar1	laneACursor	INFERRED	cursor over the lane bytes of the first word
+local	SelectWord__markLanesWhereSecondIsOne	pcVar2	laneBCursor	INFERRED	cursor over the lane bytes of the second word
+local	laneBytes__selectWhereFirstIsOne	uVar1	laneValue	INFERRED	result byte for the lane
+local	Template__pushCallFrame	uVar3	frameCount	INFERRED	element count of the frame vector (push index)
+local	Template__pushCallFrame	piVar2	frameSlot	INFERRED	element reference of the pushed frame
+local	CompileInput__readFloatConst	iVar2	tableBase	INFERRED	float constant table of the selected side (+0x34 / +0x30)
+local	CompileInput__readFloatConst	iVar1	recordAddr	INFERRED	tableBase + index*16: the constant record
+local	CompileInput__readIntConst	iVar1	tableBase	INFERRED	int constant table of the selected side
+local	CompileInput__readIntConst	iVar2	recordAddr	INFERRED	tableBase + index*16: the constant record
+local	IRInst__dropAppendedSources	uVar1	flagWord	INFERRED	flag word (+0x14) of the instruction; flag 0x200 marks an appended last source
+local	ILReader__topScopeOpcode	uVar2	stackCount	INFERRED	element count of the scope stack
+local	ILReader__topScopeOpcode	puVar1	topSlot	INFERRED	pointer to the last scope stack element, null when empty
+local	CompileInput__lacksFlag0x200000	iVar2	sideObject	INFERRED	vertex (+0x2c) or fragment (+0x30) side object
+local	CompileInput__lacksFlag0x200000	bVar1	result	INFERRED	true unless the flag word has bit 0x200000
+local	FUN_000f8c88	param_1	ilOpcode	INFERRED	IL opcode; 0x30/0x31 and 0x5f and 0x74+ select entries of the static table DAT_001aa9e4
+local	FUN_000f8c88	iVar1	tableIndex	INFERRED	index into the word table at DAT_001aa9e4
+func	FUN_000e2838	EncoderState__emitBlock	INFERRED	calls the sink object's vtable +0x30 with (block, sinkArg)
+local	FUN_000e2838	param_1	encoder	INFERRED	encoder state (sink object at +0x20)
+local	FUN_000e2838	param_2	block	INFERRED	block passed to the sink
+local	FUN_000e2838	param_3	sinkArg	INFERRED	argument passed to the sink
+func	FUN_000e284c	EncoderState__sinkIsOverflowed	INFERRED	returns the sink object's vtable +8 query (non-zero when the encoded program does not fit)
+local	FUN_000e284c	param_1	encoder	INFERRED	encoder state (sink object at +0x20)
+local	FUN_000e284c	uVar1	result	INFERRED	sink query result
+func	FUN_000e0830	Compiler__isCurrentHandle	INFERRED	returns 1 when flag is zero and the handle equals compiler+0x64c
+local	FUN_000e0830	param_1	compiler	INFERRED	compiler
+local	FUN_000e0830	param_2	flag	INFERRED	must be zero for a match
+local	FUN_000e0830	param_3	handle	INFERRED	handle compared with compiler+0x64c
+local	ildisAppendIndentedf	uVar1	bufferLength	INFERRED	strlen of the line buffer at disassembler+0x10
+local	ildisAppendIndentedf	uVar2	unusedFormatCopy	INFERRED	copy of format passed through the indentation printf calls
+local	ildisAppendIndentedf	auStack_234	lineBuffer	INFERRED	0x200-byte buffer receiving the formatted text

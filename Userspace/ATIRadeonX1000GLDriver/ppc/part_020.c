@@ -3336,13 +3336,13 @@ int Compiler__isOptionEnabled(compiler, optionId)
   return 0;
 }
 
-/* FUN_000e0830 @ 0xe0830 (32 bytes) */
-int FUN_000e0830(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+/* Compiler__isCurrentHandle @ 0xe0830 (32 bytes) */
+int Compiler__isCurrentHandle(compiler, flag, handle)
+  int compiler;
+  int flag;
+  int handle;
 {
-  if ((param_2 == 0) && (*(int *)(param_1 + 0x64c) == param_3)) {
+  if ((flag == 0) && (*(int *)(compiler + 0x64c) == handle)) {
     return 1;
   }
   return 0;
