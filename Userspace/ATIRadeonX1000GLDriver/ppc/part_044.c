@@ -4438,12 +4438,12 @@ LAB_0015fd14:
 }
 
 /* Inst__foldProducerIntoConsumer @ 0x160320 (2960 bytes) */
-int Inst__foldProducerIntoConsumer(node, operandIndex, inst, pass, param_5)
+int Inst__foldProducerIntoConsumer(node, operandIndex, inst, pass, changedOut)
   int *node;
   int operandIndex;
   int *inst;
   int pass;
-  undefined4 *param_5;
+  undefined4 *changedOut;
 {
   int vcall50Result;
   int operandKindClassResult;
@@ -4466,31 +4466,34 @@ int Inst__foldProducerIntoConsumer(node, operandIndex, inst, pass, param_5)
   int sourceDef3;
   int sourceDef2;
   int operandRecord;
-  uint uVar1;
+  uint selectWordSwapped;
   int iVar2;
+  int passStampF;
+  int laneIdxS;
+  int predicateResultF;
   int callResult;
-  int iVar3;
+  int passStampG;
   int operandVReg2;
   int countdownC;
-  undefined4 uVar6;
+  undefined4 selectWordMerged;
   int *operandVReg;
-  int *piVar8;
+  int *laneByteCursorS;
   undefined4 operandSelectD;
   undefined4 operandSelectC;
   uint local_5c;
-  undefined4 local_58;
+  undefined4 composedSelect;
   uint local_54;
   undefined4 operandSelectB;
   undefined4 local_4c;
   uint operandSelect;
   undefined1 auStack_38 [4];
   undefined1 auStack_34 [4];
-  uint local_30;
-  uint local_2c;
-  uint local_28;
-  undefined4 local_24;
+  uint writeMaskOutA;
+  uint writeMaskOutB;
+  uint readMaskOutA;
+  undefined4 readMaskOutB;
   
-  vcall60Result = (**(code **)(*inst + 0x60))(inst,operandIndex,inst,pass,param_5);
+  vcall60Result = (**(code **)(*inst + 0x60))(inst,operandIndex,inst,pass,changedOut);
   if (vcall60Result != 0) {
     inst = (int *)IRInst__getOperandSource(inst,1);
   }
@@ -4498,21 +4501,21 @@ int Inst__foldProducerIntoConsumer(node, operandIndex, inst, pass, param_5)
   if (vcall64Result == 0) {
     return 0;
   }
-  iVar2 = RegKind__flagBit0(inst[0x26]);
-  if (iVar2 == 0) {
+  predicateResultF = RegKind__flagBit0(inst[0x26]);
+  if (predicateResultF == 0) {
     return 0;
   }
-  if (((((inst[5] & 0x200U) != 0) && (iVar2 = IRInst__isSourceSelectIdentity(inst,1), iVar2 != 0)) &&
+  if (((((inst[5] & 0x200U) != 0) && (predicateResultF = IRInst__isSourceSelectIdentity(inst,1), predicateResultF != 0)) &&
       (inst[0x48] == 0)) &&
      (((inst[0x49] == 0 && ((inst[0x2e] & 1U) == 0)) && ((inst[0x2e] & 2U) == 0)))) {
-    if (((inst[0x20] != 0) && (iVar2 = RegKind__flagBit0(inst[0x26]), iVar2 != 0)) &&
-       (((inst[5] & 2U) == 0 && (iVar2 = (**(code **)(*inst + 0x50))(inst), iVar2 == 0))))
+    if (((inst[0x20] != 0) && (predicateResultF = RegKind__flagBit0(inst[0x26]), predicateResultF != 0)) &&
+       (((inst[5] & 2U) == 0 && (predicateResultF = (**(code **)(*inst + 0x50))(inst), predicateResultF == 0))))
     {
       countdown = 4;
-      piVar8 = inst;
+      laneByteCursorS = inst;
       do {
-        if ((uint)(*(byte *)(piVar8 + 0x27) - 2) < 2) goto LAB_001605dc;
-        piVar8 = (int *)((int)piVar8 + 1);
+        if ((uint)(*(byte *)(laneByteCursorS + 0x27) - 2) < 2) goto LAB_001605dc;
+        laneByteCursorS = (int *)((int)laneByteCursorS + 1);
         countdown = countdown + -1;
       } while (countdown != 0);
     }
@@ -4522,60 +4525,60 @@ int Inst__foldProducerIntoConsumer(node, operandIndex, inst, pass, param_5)
       operandRecord = IRInst__getOperandRecord(inst,0);
       operandSelectC = *(undefined4 *)(operandRecord + 0x10);
       operandRecord3 = IRInst__getOperandRecord(operandVReg2,0);
-      iVar2 = 0;
+      laneIdxS = 0;
       operandSelectD = *(undefined4 *)(operandRecord3 + 0x10);
       countdownC = 4;
       do {
-        if ((*(char *)((int)&operandSelectC + iVar2) != '\x01') &&
-           (*(char *)((int)&operandSelectD + iVar2) != '\x01')) goto LAB_001605dc;
-        iVar2 = iVar2 + 1;
+        if ((*(char *)((int)&operandSelectC + laneIdxS) != '\x01') &&
+           (*(char *)((int)&operandSelectD + laneIdxS) != '\x01')) goto LAB_001605dc;
+        laneIdxS = laneIdxS + 1;
         countdownC = countdownC + -1;
       } while (countdownC != 0);
       if (((*(uint *)(operandVReg2 + 0x14) & 0x200) != 0) &&
-         (iVar2 = IRInst__getOperandSource(operandVReg2,*(undefined4 *)(operandVReg2 + 0x84)), sourceDef3 == iVar2)) {
+         (laneIdxS = IRInst__getOperandSource(operandVReg2,*(undefined4 *)(operandVReg2 + 0x84)), sourceDef3 == laneIdxS)) {
         *(int *)(pass + 0x17c) = *(int *)(pass + 0x17c) + 1;
         vcall14Result = (**(code **)(*node + 0x14))(node);
         if ((vcall14Result < operandIndex) &&
            (((node[5] & 0x200U) != 0 &&
-            (piVar8 = (int *)IRInst__getOperandSource(node,node[0x21]), inst == piVar8)))) {
+            (laneByteCursorS = (int *)IRInst__getOperandSource(node,node[0x21]), inst == laneByteCursorS)))) {
           IRInst__setExtraOperandSource(node,operandVReg2,0,*(undefined4 *)(pass + 8));
-          iVar3 = *(int *)(pass + 0x478);
-          iVar2 = *(int *)(operandVReg2 + 0x160);
-          if (iVar3 < iVar2) {
+          passStampG = *(int *)(pass + 0x478);
+          passStampF = *(int *)(operandVReg2 + 0x160);
+          if (passStampG < passStampF) {
 LAB_00160588:
-            *(int *)(operandVReg2 + 0x160) = iVar2 + 1;
+            *(int *)(operandVReg2 + 0x160) = passStampF + 1;
             goto LAB_00160590;
           }
         }
         else {
           IRInst__setOperandSource(node,operandIndex,operandVReg2,0,*(undefined4 *)(pass + 8));
-          iVar3 = *(int *)(pass + 0x478);
-          iVar2 = *(int *)(operandVReg2 + 0x160);
-          if (iVar3 < iVar2) goto LAB_00160588;
+          passStampG = *(int *)(pass + 0x478);
+          passStampF = *(int *)(operandVReg2 + 0x160);
+          if (passStampG < passStampF) goto LAB_00160588;
         }
-        *(int *)(operandVReg2 + 0x160) = iVar3 + 1;
+        *(int *)(operandVReg2 + 0x160) = passStampG + 1;
 LAB_00160590:
         IRInst__dropCounterAndDeleteIfUnused(inst,*(undefined4 *)(pass + 8));
-        *param_5 = 1;
+        *changedOut = 1;
         return 1;
       }
     }
   }
 LAB_001605dc:
-  iVar2 = (**(code **)(*node + 0x14))(node);
-  if (operandIndex <= iVar2) {
-    iVar2 = (**(code **)(*node + 0x14))(node);
-    if (((operandIndex <= iVar2) && (inst[0x48] == 0)) && (inst[0x49] == 0)) {
-      if (((inst[0x20] != 0) && (iVar2 = RegKind__flagBit0(inst[0x26]), iVar2 != 0)) &&
-         (((inst[5] & 2U) == 0 && (iVar2 = (**(code **)(*inst + 0x50))(inst), iVar2 == 0)))
+  predicateResultF = (**(code **)(*node + 0x14))(node);
+  if (operandIndex <= predicateResultF) {
+    predicateResultF = (**(code **)(*node + 0x14))(node);
+    if (((operandIndex <= predicateResultF) && (inst[0x48] == 0)) && (inst[0x49] == 0)) {
+      if (((inst[0x20] != 0) && (predicateResultF = RegKind__flagBit0(inst[0x26]), predicateResultF != 0)) &&
+         (((inst[5] & 2U) == 0 && (predicateResultF = (**(code **)(*inst + 0x50))(inst), predicateResultF == 0)))
          ) {
         countdown = 4;
-        piVar8 = inst;
+        laneByteCursorS = inst;
         do {
-          if ((uint)(*(byte *)(piVar8 + 0x27) - 2) < 2) {
+          if ((uint)(*(byte *)(laneByteCursorS + 0x27) - 2) < 2) {
             return 0;
           }
-          piVar8 = (int *)((int)piVar8 + 1);
+          laneByteCursorS = (int *)((int)laneByteCursorS + 1);
           countdown = countdown + -1;
         } while (countdown != 0);
       }
@@ -4610,8 +4613,8 @@ LAB_001605dc:
           sourceDef = (int *)IRInst__getOperandSource(node,operandIndex);
           if (inst == sourceDef) {
             operandRecord = IRInst__getOperandRecord(sourceDef,0);
-            WriteMask__fromSelectWord(&local_30,*(undefined4 *)(operandRecord + 0x10));
-            local_5c = local_30;
+            WriteMask__fromSelectWord(&writeMaskOutA,*(undefined4 *)(operandRecord + 0x10));
+            local_5c = writeMaskOutA;
           }
           else {
             vcall60Result = (**(code **)(*sourceDef + 0x60))(sourceDef);
@@ -4623,19 +4626,19 @@ LAB_001605dc:
               return 0;
             }
             operandRecord = IRInst__getOperandRecord(sourceDef,0);
-            WriteMask__fromSelectWord(&local_2c,*(undefined4 *)(operandRecord + 0x10));
-            local_5c = local_2c;
+            WriteMask__fromSelectWord(&writeMaskOutB,*(undefined4 *)(operandRecord + 0x10));
+            local_5c = writeMaskOutB;
           }
           operandRecord = IRInst__getOperandRecord(inst,1);
-          local_58 = *(undefined4 *)(operandRecord + 0x10);
+          composedSelect = *(undefined4 *)(operandRecord + 0x10);
           if ((inst[5] & 0x200U) == 0) {
             operandRecord = IRInst__getOperandRecord(node,operandIndex);
-            SelectWord__readMask(&local_28,*(undefined4 *)(operandRecord + 0x10));
-            local_54 = local_28;
+            SelectWord__readMask(&readMaskOutA,*(undefined4 *)(operandRecord + 0x10));
+            local_54 = readMaskOutA;
             if (((local_5c << 0x18 | (local_5c >> 8 & 0xff) << 0x10 | (local_5c >> 0x10 & 0xff) << 8
                  | local_5c >> 0x18) <
-                 (local_28 << 0x18 | (local_28 >> 8 & 0xff) << 0x10 | (local_28 >> 0x10 & 0xff) << 8
-                 | local_28 >> 0x18)) && ((node[5] & 2U) != 0)) {
+                 (readMaskOutA << 0x18 | (readMaskOutA >> 8 & 0xff) << 0x10 | (readMaskOutA >> 0x10 & 0xff) << 8
+                 | readMaskOutA >> 0x18)) && ((node[5] & 2U) != 0)) {
               operandRecord = IRInst__getOperandRecord(inst,0);
               node[0x27] = *(int *)(operandRecord + 0x10);
             }
@@ -4649,7 +4652,7 @@ LAB_001605dc:
               countdownB = 4;
               do {
                 if (*(char *)((int)&local_5c + loopIndex) == '\0') {
-                  *(undefined1 *)((int)&local_58 + loopIndex) =
+                  *(undefined1 *)((int)&composedSelect + loopIndex) =
                        *(undefined1 *)((int)&DAT_001b004c + loopIndex);
                 }
                 loopIndex = loopIndex + 1;
@@ -4683,9 +4686,9 @@ LAB_001605dc:
               operandRecord = IRInst__getOperandRecord(sourceDef,1);
               operandSelectB = *(undefined4 *)(operandRecord + 0x10);
               operandRecord = IRInst__getOperandRecord(node,operandIndex);
-              SelectWord__readMask(&local_24,*(undefined4 *)(operandRecord + 0x10));
+              SelectWord__readMask(&readMaskOutB,*(undefined4 *)(operandRecord + 0x10));
               loopIndex = 0;
-              local_4c = local_24;
+              local_4c = readMaskOutB;
               countdownB = 4;
               do {
                 if ((*(char *)((int)&local_4c + loopIndex) != '\0') &&
@@ -4693,14 +4696,14 @@ LAB_001605dc:
                   if (*(char *)((int)&local_54 + loopIndex) != '\0') {
                     return 0;
                   }
-                  *(undefined1 *)((int)&local_58 + loopIndex) = *(undefined1 *)((int)&operandSelectB + loopIndex);
+                  *(undefined1 *)((int)&composedSelect + loopIndex) = *(undefined1 *)((int)&operandSelectB + loopIndex);
                 }
                 loopIndex = loopIndex + 1;
                 countdownB = countdownB + -1;
               } while (countdownB != 0);
             }
           }
-          callResult = FUN_00149de4(node,operandIndex,inst,&local_58,*(undefined4 *)(pass + 8));
+          callResult = FUN_00149de4(node,operandIndex,inst,&composedSelect,*(undefined4 *)(pass + 8));
           if (callResult != 0) goto LAB_00160e58;
         }
       }
@@ -4729,15 +4732,15 @@ LAB_001605dc:
   if ((inst[0x2e] & 2U) != 0) {
     return 0;
   }
-  if (((inst[0x20] != 0) && (iVar2 = RegKind__flagBit0(inst[0x26]), iVar2 != 0)) &&
-     (((inst[5] & 2U) == 0 && (iVar2 = (**(code **)(*inst + 0x50))(inst), iVar2 == 0)))) {
+  if (((inst[0x20] != 0) && (predicateResultF = RegKind__flagBit0(inst[0x26]), predicateResultF != 0)) &&
+     (((inst[5] & 2U) == 0 && (predicateResultF = (**(code **)(*inst + 0x50))(inst), predicateResultF == 0)))) {
     countdown = 4;
-    piVar8 = inst;
+    laneByteCursorS = inst;
     do {
-      if ((uint)(*(byte *)(piVar8 + 0x27) - 2) < 2) {
+      if ((uint)(*(byte *)(laneByteCursorS + 0x27) - 2) < 2) {
         return 0;
       }
-      piVar8 = (int *)((int)piVar8 + 1);
+      laneByteCursorS = (int *)((int)laneByteCursorS + 1);
       countdown = countdown + -1;
     } while (countdown != 0);
   }
@@ -4806,31 +4809,31 @@ LAB_0016086c:
     if (((node[0x2e] & 1U) != (inst[0x2e] & 1U)) ||
        (((uint)node[0x2e] >> 1 & 1) != ((uint)inst[0x2e] >> 1 & 1))) goto LAB_0016086c;
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uVar1 = *(uint *)(operandRecord + 0x10);
+    selectWordSwapped = *(uint *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(node,0);
     operandSelect = *(uint *)(operandRecord + 0x10);
-    uVar1 = (uVar1 << 0x18 | (uVar1 >> 8 & 0xff) << 0x10 | (uVar1 >> 0x10 & 0xff) << 8 |
-            uVar1 >> 0x18) &
+    selectWordSwapped = (selectWordSwapped << 0x18 | (selectWordSwapped >> 8 & 0xff) << 0x10 | (selectWordSwapped >> 0x10 & 0xff) << 8 |
+            selectWordSwapped >> 0x18) &
             (operandSelect << 0x18 | (operandSelect >> 8 & 0xff) << 0x10 | (operandSelect >> 0x10 & 0xff) << 8 |
             operandSelect >> 0x18);
-    local_54 = uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
+    local_54 = selectWordSwapped << 0x18 | (selectWordSwapped & 0xff00) << 8 | selectWordSwapped >> 8 & 0xff00 | selectWordSwapped >> 0x18;
     node[0x27] = local_54;
     operandRecord = IRInst__getOperandRecord(node,1);
-    local_58 = *(undefined4 *)(operandRecord + 0x10);
+    composedSelect = *(undefined4 *)(operandRecord + 0x10);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     loopIndex = 0;
     local_5c = *(uint *)(operandRecord2 + 0x10);
     countdownB = 4;
     do {
-      if (*(char *)((int)&local_58 + loopIndex) == '\x04') {
-        *(undefined1 *)((int)&local_58 + loopIndex) = *(undefined1 *)((int)&local_5c + loopIndex);
+      if (*(char *)((int)&composedSelect + loopIndex) == '\x04') {
+        *(undefined1 *)((int)&composedSelect + loopIndex) = *(undefined1 *)((int)&local_5c + loopIndex);
       }
-      uVar6 = local_58;
+      selectWordMerged = composedSelect;
       loopIndex = loopIndex + 1;
       countdownB = countdownB + -1;
     } while (countdownB != 0);
     operandRecord = IRInst__getOperandRecord(node,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar6;
+    *(undefined4 *)(operandRecord + 0x10) = selectWordMerged;
     IRInst__setOperandSource(node,node[0x21],0,0,*(undefined4 *)(pass + 8));
     node[0x21] = node[0x21] + -1;
     node[5] = node[5] & 0xfffffdff;
@@ -4839,7 +4842,7 @@ LAB_0016086c:
   }
   (**(code **)(*inst + 0xc))(inst,0,*(undefined4 *)(pass + 8));
 LAB_00160e58:
-  *param_5 = 1;
+  *changedOut = 1;
   return 1;
 }
 
