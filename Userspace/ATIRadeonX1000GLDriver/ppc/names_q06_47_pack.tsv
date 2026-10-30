@@ -1,0 +1,2 @@
+use	Program__packPsInputs	puVar13	candidateSlotRef	INFERRED	vector element ref used to clear a merged candidate	^\s*puVar13\ =\ \(undefined4\ \*\)\(iVar26	^\s*puVar13\ =\ \(undefined4\ \*\)\w+\(uVar12,0x168\);$
+use	Program__packPsInputs	puVar13	interpAlloc	INFERRED	IRLoadInterp allocation (arena word at +0, object at +4)	^\s*puVar13\ =\ \(undefined4\ \*\)\w+\(uVar12,0x168\);$	

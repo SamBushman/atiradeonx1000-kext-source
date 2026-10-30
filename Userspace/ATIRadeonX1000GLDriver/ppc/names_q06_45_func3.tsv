@@ -1,0 +1,53 @@
+func	FUN_001135c0	OpcodeSetup__mode1	INFERRED	sets inst counts +0x84=0,+0x80=1,+0x12c=0, flags|=0x18000, mode word (param_1+4)=1
+func	FUN_001135a8	OpcodeSetup__mode6	INFERRED	sets inst counts +0x84=1,+0x80=1; mode word (param_1+4)=6
+func	FUN_0011358c	OpcodeSetup__mode9	INFERRED	sets inst counts +0x84=3,+0x80=1; mode word (param_1+4)=9
+func	FUN_001136e4	OpcodeSetup__mode3	INFERRED	counts 1/1, flags|=0x18000, mode word=3
+func	FUN_0011370c	OpcodeSetup__mode2	INFERRED	counts 0/0, flags|=0x18000, mode word=2
+func	FUN_001135ec	OpcodeSetup__mode7	INFERRED	counts 1/1, flags|=0x18, Program__addInst, mode word=7
+func	FUN_0011363c	OpcodeSetup__mode8	INFERRED	count +0x80=0,+0x84=1, flags|=0x18, Program__addInst, mode word=8
+func	FUN_00113690	OpcodeSetup__mode5	INFERRED	counts 1/1, flags|=0x18018, Program__addInst, mode word=5
+func	FUN_001307cc	IRInst__chainLastOfPredecessor	INFERRED	IRInst__chainLast of (IRInst__chainLast(inst)+4)
+func	FUN_00130904	IRInst__chainEndSkippingFlag4000000	INFERRED	chainLast, repeating via FUN_001307cc when flag 0x4000000 set, then advanceToChainEnd
+func	FUN_00139008	Mask__countSetBits4	INFERRED	counts the low 4 bits set in param_1
+func	FUN_001267b8	Table1ea904__hasFlag0x11	INFERRED	tests flags & 0x11 of the 0x10-stride table at DAT_001ea904
+func	FUN_00134db0	BitSet__clearAllWords	INFERRED	zeroes the word array of the bitset *copyState
+func	FUN_0013097c	BitSet__testAnyLane	INFERRED	true if any of the 4 lane bits of register N is set
+func	FUN_0010e4ec	Compare__ascendingByWrittenComponents	INFERRED	IRInst__countWrittenComponents(a) < (b)
+func	FUN_00130a78	IRInst__findSameClassNode	INFERRED	walks +8 links for a flagged node with the same +0x14c as the reference
+func	FUN_00130ec0	Program__appendLoadFa	INFERRED	creates IRLoad opcode 0xfa and appends it to the first block
+func	FUN_00130f64	Program__prependLoad79	INFERRED	creates IRLoad opcode 0x79 and prepends it to the first block
+func	FUN_001311cc	Program__insertMemLoadFbAfter	INFERRED	creates IRMemLoad opcode 0xfb with two sources and inserts it after afterInst
+func	FUN_00131c10	RegAlloc__getCachedLoadFa	INFERRED	allocator+0x438 cache of the opcode 0xfa load built by FUN_00130ec0
+func	FUN_0010e3b4	Array__firstIndexOfEntry	INFERRED	returns the first index whose value equals entry [position], or -1
+func	FUN_0010e690	IRInst__query68AndWord4fIs18	INFERRED	vslot 0x68 true and word 0x4f == 0x18
+func	FUN_0010e6e8	IRInst__query68AndWord4fIn16_17	INFERRED	vslot 0x68 true and word 0x4f in 0x16..0x17
+func	FUN_0010e744	IRInst__query68AndWord4fNotMasked	INFERRED	vslot 0x68 true and word 0x4f not in mask 0x1c000c0
+func	FUN_0010e634	IRInst__query68AndWord4fNotIn6_7	INFERRED	vslot 0x68 true and word 0x4f not in 6..7
+func	FUN_00130e68	IRInst__isQuery28OrOpcode93	INFERRED	vslot 0x28 true or record opcode 0x93
+func	FUN_0012b64c	Block__bridgePredecessorToSuccessor	INFERRED	clears the edge slots of the neighbours and connects predecessor to successor
+func	FUN_00134ab8	NeighbourList__locateAppendSlot	INFERRED	computes block and slot of the next free neighbour entry (7 per block)
+func	FUN_0012aa78	Loop__unrollExceedsLimits	INFERRED	returns 1 when the unroll count exceeds target / compiler limits
+func	FUN_0012ab04	IRInst__hasOperandKindClass1	INFERRED	true if any operand has IRInst__operandKindClass == 1
+func	FUN_0010e95c	PackEntry__activeLaneCount	INFERRED	counts lanes with a source or a zero write-mask byte
+func	FUN_0010e8e4	PackEntry__assignLaneSources	INFERRED	stores one source per written lane and bumps the lane count
+func	FUN_0013061c	RegAlloc__countUnassignedInClass	INFERRED	counts registers in the class range whose bit42c is clear
+func	FUN_00130594	RegAlloc__highestUnassignedInClass	INFERRED	highest register index in class whose bit42c is clear, relative to the class start
+func	FUN_0010dd54	HwLimits__installDefaults	INFERRED	stores default limits and default table pointers into the limits block at hwLimits+0xc
+func	FUN_00138240	IRInst__laneWrittenInChain	INFERRED	true if operand 0's write-mask byte for lane is 0 along the +0x200 chain
+func	FUN_0011379c	OpcodeTraits__flag1WithoutFlag7	INFERRED	opcode record flag bit 1 set and OpcodeTraits__flagBit7 clear
+func	FUN_00127850	VRegPool__countEntriesWithQuery18	INFERRED	iterates the +4 hash table counting entries whose vslot 6 is true
+func	FUN_00135010	NeighbourList__free_135010	INFERRED	frees all +8 chunks then the +0x10 side table
+func	FUN_00135090	NeighbourList__free_135090	INFERRED	identical body to NeighbourList__free_135010
+func	FUN_0012ae6c	Block__hasInstWithQuery28	INFERRED	scans block instructions for vslot 0x28
+func	FUN_0010de6c	Program__emitLoadVertexAttr	INFERRED	creates IRLoadVertex 0xa4 from a packed vertex attribute word
+func	FUN_0010e460	PackEntry__computeLaneMap	INFERRED	maps entry A's lanes to the matching lanes of entry B, 0 if unmappable
+func	FUN_00130bfc	RegAlloc__classOfInst	INFERRED	register class number of inst's allocated register from the +0x43c/+0x448 ranges
+func	FUN_00131c74	RegAlloc__setSpillSlotValue	INFERRED	stores slotValue in the record and in the allocator+0x8c slot vector
+func	FUN_00130690	RegAlloc__allocateFirstFreeInClass	INFERRED	takes the first unassigned hardware register of the class, marks it used, records it
+func	FUN_00139190	LaneStack__topFitsLaneCount	INFERRED	tests the top packed lane word against laneCount
+func	FUN_0010ea30	Program__callBackendFinish	INFERRED	calls backend vslot 0x164/0x160 or 0x15c depending on program flags
+func	FUN_0011f7fc	Program__assignVectorSlot	INFERRED	appends the block to the vector and records its slot index at +0x150
+func	FUN_00122de8	Program__runSsaPipeline	INFERRED	chain of passes including pass_ssa_build and optional hoisting
+func	FUN_00112fe4	Backend__bindingSlotsSequential	INFERRED	true when binding entries are numbered sequentially
+func	FUN_0012e488	Program__getOrCreateLandingBlock	INFERRED	returns the single successor if it is simple and small, else inserts a new block after
+func	FUN_00113734	OpcodeTraits__instFlagBit2_113734	INFERRED	opcode record flag bit 2 via backend vslot 0x16c

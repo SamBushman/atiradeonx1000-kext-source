@@ -359,8 +359,8 @@ int IRVertexFetch__initSemantics(inst)
   return;
 }
 
-/* FUN_00104364 @ 0x104364 (24 bytes) */
-int FUN_00104364(unusedArg1, outFirst, outSecond, outThird)
+/* Vslot__outDefaults_0_0_4 @ 0x104364 (24 bytes) */
+int Vslot__outDefaults_0_0_4(unusedArg1, outFirst, outSecond, outThird)
   undefined4 unusedArg1;
   undefined4 *outFirst;
   undefined4 *outSecond;

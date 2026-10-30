@@ -33,7 +33,7 @@
 0xb4400	FUN_000b4400	0xb49bc	FUN_000879f0	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0xc8e50	ilAssembleProgram	0xca130	ilEmitProjectiveDivide	r10	r1+0x7c (a stack address) not at argument 7 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0xcae90	ilRewriteForTextureState	0xcccc4	malloc	r9	r1+0x98 (a stack address) not at argument 6 of any C call (4 C calls)	BENIGN-IMPORT-ARITY
-0xed89c	FUN_000ed89c	0xed9ac	FUN_00104364	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0xed89c	FUN_000ed89c	0xed9ac	Vslot__outDefaults_0_0_4	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
 0xed89c	FUN_000ed89c	0xedcb4	IRInst__appendSource	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0xeec50	FUN_000eec50	0xed5ec	IRInst__setOperandRef	r3	incoming param_2 not at argument 0 of any C call (8 C calls)	CHECK (C arg0: iVar2; iVar2)
 0xeec50	FUN_000eec50	0xed3ec	IRInst__setOperandRef	r5	field at param_2+0xa4: 2 stock site(s), 0 C call(s) carry it at argument 2 (8 C calls)	BENIGN-REVIEWED (Ghidra inlined the tail call `b 0xed3a4` from FUN_000eec50: the callee's param_2 is the C's iVar7 = *(param_1+0x34c); stock r4 = r30 at 0xeee28)

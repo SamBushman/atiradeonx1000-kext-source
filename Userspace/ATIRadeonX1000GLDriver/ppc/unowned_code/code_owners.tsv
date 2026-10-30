@@ -68,8 +68,8 @@
 0x12841c	KhanPs__vslot74_seedConstantValueNumbers
 0x129400	KhanVs__vslot80_getLimit_0x14
 0x129ea0	KhanVs__vslot71_canCombineSources
-0x12ab70	FUN_0012ab04
-0x12ab78	FUN_0012ab04
+0x12ab70	IRInst__hasOperandKindClass1
+0x12ab78	IRInst__hasOperandKindClass1
 0x12dd48	FudoPs__flattenIfs
 0x12dd50	FudoPs__flattenIfs
 0x176e0c	FUN_00176d6c

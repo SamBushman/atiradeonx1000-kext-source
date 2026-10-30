@@ -78,9 +78,9 @@ int FUN_000ec1d0(param_1)
   int iVar2;
   
   uVar1 = *(undefined4 *)(param_1 + 0x3ac);
-  iVar2 = FUN_00127534(uVar1,0x13,0,0);
+  iVar2 = VRegPool__find(uVar1,0x13,0,0);
   if (iVar2 == 0) {
-    FUN_001275a0(uVar1,0x13,0,0);
+    VRegPool__create(uVar1,0x13,0,0);
     return;
   }
   return;
@@ -392,7 +392,7 @@ int Program__splitMixedSourceKinds(program)
                 sourceVReg = *(undefined4 *)(sourceCursor2 + 0xa4);
                 newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
                 *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
-                tempVReg = FUN_00127608(tempVReg,0,newTempIndex,0);
+                tempVReg = VRegPool__findOrCreate(tempVReg,0,newTempIndex,0);
                 IRInst__setOperandRef(inst,0,tempVReg);
                 IRInst__setOperandRef(inst,1,sourceVReg);
                 FUN_001235b8(sourceVReg,candidateInst,inst);
@@ -418,7 +418,7 @@ int Program__splitMixedSourceKinds(program)
 int FUN_000ec8e4(param_1)
   int param_1;
 {
-  FUN_0012740c(*(undefined4 *)(param_1 + 0x3ac));
+  VRegPool__destroyEntries(*(undefined4 *)(param_1 + 0x3ac));
   *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x10;
   return;
 }
@@ -511,7 +511,7 @@ int FUN_000ecb90(param_1, compiler)
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = FUN_0011379c(compiler,param_1);
+  iVar1 = OpcodeTraits__flag1WithoutFlag7(compiler,param_1);
   if (iVar1 == 0) {
     uVar2 = *(undefined4 *)(*(int *)(param_1 + 0x88) + 8);
     iVar1 = OpcodeTraits__flagBit2(uVar2,compiler);
@@ -785,17 +785,17 @@ int IRInst__bindOperandRegisters(program, inst)
   int newTempIndex;
   
   if (*(int *)(inst + 0x80) != 0) {
-    piVar1 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),*(undefined4 *)(inst + 0x98),
+    piVar1 = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),*(undefined4 *)(inst + 0x98),
                                  *(undefined4 *)(inst + 0x94),0);
     pcVar7 = *(code **)(*piVar1 + 0x28);
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     piVar3 = (int *)(*pcVar7)(piVar1,*(undefined4 *)(operandRecord2 + 0x10),program);
     if ((piVar3 == (int *)0x0) || (piVar1 == piVar3)) {
-      FUN_0012306c(piVar1,inst);
+      VReg__appendUser(piVar1,inst);
       IRInst__setOperandRef(inst,0,piVar1);
     }
     else {
-      FUN_0012306c(piVar3,inst);
+      VReg__appendUser(piVar3,inst);
       IRInst__setOperandRef(inst,0,piVar3);
       if ((*(uint *)(program + 0x30) & 0x4000) != 0) {
         Block__insertInstAfter(*(undefined4 *)(inst + 0x158),inst,piVar1[0xc]);
@@ -816,7 +816,7 @@ int IRInst__bindOperandRegisters(program, inst)
         *(undefined4 *)(operandRecord + 0xc) = uVar6;
         iVar4 = *(int *)(iVar2 + 0xb0);
       }
-      piVar1 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),iVar4,
+      piVar1 = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),iVar4,
                                    *(undefined4 *)(iVar2 + 0xac),0);
       piVar3 = (int *)(**(code **)(*piVar1 + 0x28))(piVar1,DAT_001aa80c,program);
       if (piVar3 != (int *)0x0) {
@@ -935,7 +935,7 @@ int FUN_000ed89c(param_1)
             inst[0x4d] = 1;
             operandRecord = IRInst__getOperandRecord(inst,1);
             sourceSelectWord = *(int *)(operandRecord + 0x10);
-            FUN_00104364(inst,&local_58,&local_54,local_50);
+            Vslot__outDefaults_0_0_4(inst,&local_58,&local_54,local_50);
             allocation[3] = local_54;
             allocation[4] = local_50[0];
             groupCursor = groupList;
@@ -981,7 +981,7 @@ LAB_000eda98:
       } while ((int *)followingInst[2] != (int *)0x0);
       if (!noGroupsYet) {
         do {
-          virtualRegister = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x22,0,0);
+          virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(param_1 + 0x3ac),0x22,0,0);
           splitGroupList = (int *)0x0;
           do {
             memberInstRef = groupList[3];
@@ -993,7 +993,7 @@ LAB_000eda98:
             destSelectWord = *(undefined4 *)(operandRecord + 0x10);
             IRInst__setOperandRef(groupList[7],0,virtualRegister);
             *(undefined4 *)(groupList[7] + 0x9c) = DAT_001aa800;
-            FUN_0012306c(virtualRegister,groupList[7]);
+            VReg__appendUser(virtualRegister,groupList[7]);
             arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
             allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
             *allocation = arenaAt374;
@@ -1002,7 +1002,7 @@ LAB_000eda98:
             IRInst__setOperandRef(projectionInst,0,groupSourceVReg);
             allocation[0x28] = destSelectWord;
             IRInst__setOperandRef(projectionInst,1,virtualRegister);
-            FUN_0012306c(groupSourceVReg,projectionInst);
+            VReg__appendUser(groupSourceVReg,projectionInst);
             VReg__addUse(virtualRegister,1,projectionInst);
             Block__insertInstAfter(block,groupList[7],projectionInst);
             *(undefined4 **)(groupList[7] + 0x138) = projectionInst;
@@ -1289,7 +1289,7 @@ int Program__ctor_edd98(program, compiler)
   arenaA = *(undefined4 *)(program[2] + 0x374);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x6c);
   *allocation = arenaA;
-  FUN_001272cc(allocation + 1,program[2]);
+  Object__setWord0(allocation + 1,program[2]);
   program[0xeb] = allocation + 1;
   arenaA = *(undefined4 *)(program[2] + 0x374);
   registerTableAlloc = (undefined4 *)Arena__alloc(arenaA,0x20c);
@@ -1560,7 +1560,7 @@ int Program__ctor_ee29c(program, compiler)
   arenaA = *(undefined4 *)(program[2] + 0x374);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x6c);
   *allocation = arenaA;
-  FUN_001272cc(allocation + 1,program[2]);
+  Object__setWord0(allocation + 1,program[2]);
   program[0xeb] = allocation + 1;
   arenaA = *(undefined4 *)(program[2] + 0x374);
   registerTableAlloc = (undefined4 *)Arena__alloc(arenaA,0x20c);
@@ -1766,7 +1766,7 @@ int Program__pinInputRegisters(program)
         do {
           registerMap = *(undefined4 *)(program + 0x3ac);
           registerFile5 = ((int (*)())Program__registerFileOfIlType)(program,5);
-          inputVReg = FUN_00127534(registerMap,registerFile5,registerNumber,0);
+          inputVReg = VRegPool__find(registerMap,registerFile5,registerNumber,0);
           if (inputVReg != 0) {
             loopCounter = 0;
             for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(inputVReg + 0x18) + 4); loopIndex = loopIndex + 1) {
@@ -1780,7 +1780,7 @@ int Program__pinInputRegisters(program)
             *(int *)(inputVReg + 0x10) = registerNumber + *(int *)(program + 0x3e0);
             *(uint *)(inputVReg + 0x24) = *(uint *)(inputVReg + 0x24) | 2;
             Program__markHwRegUsed(program,registerNumber + *(int *)(program + 0x3e0));
-            FUN_00130bd4(program,registerNumber + *(int *)(program + 0x3e0));
+            RegAlloc__clearBit430(program,registerNumber + *(int *)(program + 0x3e0));
           }
           registerNumber = registerNumber + 1;
         } while (registerNumber < *(int *)(program + 0x3dc));
@@ -1792,7 +1792,7 @@ int Program__pinInputRegisters(program)
         do {
           registerMap = *(undefined4 *)(program + 0x3ac);
           registerFile5 = ((int (*)())Program__registerFileOfIlType)(program,5);
-          inputVReg = FUN_00127534(registerMap,registerFile5,registerNumber,0);
+          inputVReg = VRegPool__find(registerMap,registerFile5,registerNumber,0);
           if (inputVReg != 0) {
             loopCounter = 0;
             for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(inputVReg + 0x18) + 4); loopIndex = loopIndex + 1) {
@@ -1904,7 +1904,7 @@ LAB_000eee08:
   registerMap = *(undefined4 *)(program + 0x3ac);
   madTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(program + 8) + 0x3ac) = madTempIndex;
-  madResultReg = FUN_00127608(registerMap,0,madTempIndex,0);
+  madResultReg = VRegPool__findOrCreate(registerMap,0,madTempIndex,0);
   IRInst__setOperandRef(inst,0,madResultReg);
   allComponentsSelect = DAT_001aa800;
   *(undefined4 *)(inst + 0x120) = 1;
@@ -1919,7 +1919,7 @@ LAB_000eee08:
   mulResultReg = *(undefined4 *)(program + 0x3ac);
   mulTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(program + 8) + 0x3ac) = mulTempIndex;
-  mulResultReg = FUN_00127608(mulResultReg,0,mulTempIndex,0);
+  mulResultReg = VRegPool__findOrCreate(mulResultReg,0,mulTempIndex,0);
   IRInst__setOperandRef(newInst2,0,mulResultReg);
   *(undefined4 *)(newInst2 + 0x120) = 1;
   *(undefined4 *)(newInst2 + 0x9c) = allComponentsSelect;
@@ -1935,7 +1935,7 @@ LAB_000eee08:
   finalResultReg = *(undefined4 *)(program + 0x3ac);
   finalTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(program + 8) + 0x3ac) = finalTempIndex;
-  finalResultReg = FUN_00127608(finalResultReg,0,finalTempIndex,0);
+  finalResultReg = VRegPool__findOrCreate(finalResultReg,0,finalTempIndex,0);
   IRInst__setOperandRef(newInst,0,finalResultReg);
   *(undefined4 *)(newInst + 0x120) = 0;
   *(undefined4 *)(newInst + 0x9c) = allComponentsSelect;
@@ -1993,15 +1993,15 @@ int FUN_000eee4c(program)
           isPixelShaderHw = (**(code **)(*hwDescription + 0xcc))(hwDescription);
           if (isPixelShaderHw == 0) {
             if (*(int *)(inst[0x22] + 8) == 0x77) {
-              tempVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x30,0,0);
+              tempVReg = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x30,0,0);
               IRInst__setOperandRef(inst,0,tempVReg);
               inst[5] = inst[5] | 0x10;
-              FUN_0012306c(tempVReg,inst);
+              VReg__appendUser(tempVReg,inst);
               ((int (*)())Program__addInst)(program,inst);
             }
           }
           else if ((((inst[5] & 2U) != 0) && (isPixelShaderHw = RegKind__vectorWidthKind(inst[0x26]), isPixelShaderHw == 9))
-                  && (isPixelShaderHw = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x21,0,0), isPixelShaderHw != 0))
+                  && (isPixelShaderHw = VRegPool__find(*(undefined4 *)(program + 0x3ac),0x21,0,0), isPixelShaderHw != 0))
           {
             IRInst__appendSource(inst,isPixelShaderHw);
           }
@@ -2011,7 +2011,7 @@ int FUN_000eee4c(program)
             insertAfterInst = inst;
             if (hwRegIndex < *(int *)(program + 0x3ec)) {
               do {
-                subVReg = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),
+                subVReg = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),
                                              *(undefined4 *)(program + 0x3f4),hwRegIndex,0);
                 arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
                 allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
@@ -2028,14 +2028,14 @@ int FUN_000eee4c(program)
                   *(int *)(iVar6 + 0x10) = hwRegIndex;
                   *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 2;
                   Program__markHwRegUsed(program,hwRegIndex);
-                  FUN_00130bd4(program,hwRegIndex);
+                  RegAlloc__clearBit430(program,hwRegIndex);
                 }
                 resultVRegCopy = inst[0x23];
                 IRInst__setOperandRef(projection,0,iVar6);
                 hwRegIndex = hwRegIndex + 1;
                 operandRecord2 = IRInst__getOperandRecord(inst,0);
                 allocation[0x28] = *(undefined4 *)(operandRecord2 + 0x10);
-                FUN_0012306c(iVar6,projection);
+                VReg__appendUser(iVar6,projection);
                 IRInst__setOperandRef(projection,1,resultVRegCopy);
                 VReg__addUse(resultVRegCopy,1,projection);
                 IRInst__appendSource(projection,iVar6);
@@ -3228,7 +3228,7 @@ code_r0x000f101c:
               consumer[0x27] = local_58;
               iVar15 = SelectWord__areCompatible(local_84,0x10203);
               if ((iVar15 == 0) &&
-                 (iVar15 = FUN_0011379c(*(undefined4 *)(pass + 8),consumer), iVar15 != 0)) {
+                 (iVar15 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(pass + 8),consumer), iVar15 != 0)) {
                 for (sourceIndexB = 1; iVar9 = (**(code **)(*consumer + 0x14))(consumer), sourceIndexB <= iVar9;
                     sourceIndexB = sourceIndexB + 1) {
                   operandRecord3 = IRInst__getOperandRecord(consumer,sourceIndexB);
@@ -3426,7 +3426,7 @@ int FUN_000f14f8(program, inst, inst2)
       moveSourceSelect = *(int *)(operandRecord2 + 0x10);
       hwFoldRejects = (**(code **)(**(int **)(*(int *)(program + 8) + 0x30c) + 0xb8))();
       if (((hwFoldRejects == 0) && (hwFoldRejects = (**(code **)(*moveSource + 0x7c))(moveSource), hwFoldRejects == 0)) &&
-         ((((hwFoldRejects = FUN_0011379c(*(undefined4 *)(program + 8),moveSource), hwFoldRejects != 0 &&
+         ((((hwFoldRejects = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),moveSource), hwFoldRejects != 0 &&
             ((hwFoldRejects = moveSource[0x58] - *(int *)(program + 0x478), hwFoldRejects < 0 || (hwFoldRejects < 2)))) &&
            (hwFoldRejects = (**(code **)(*moveSource + 0x28))(moveSource), hwFoldRejects == 0)) &&
           ((moveSource[0x21] != 0 && (moveSourceSelect == DAT_001aa804)))))) {
@@ -3457,7 +3457,7 @@ code_r0x000e76c4:
           moveSource[5] = moveSource[5] & 0xfffffdff;
           iVar12 = (**(code **)(iVar12 + 0x7c))(operandVReg);
           if ((((iVar12 != 0) ||
-               (iVar12 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg), iVar12 == 0)) ||
+               (iVar12 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg), iVar12 == 0)) ||
               ((iVar12 = operandVReg[0x58] - *(int *)(program + 0x478), -1 < iVar12 && (1 < iVar12)))) ||
              (((sourceBlock != operandVReg[0x56] ||
                (iVar12 = (**(code **)(*operandVReg + 0x28))(operandVReg), iVar12 != 0)) || (operandVReg[0x21] == 0)
@@ -3523,7 +3523,7 @@ code_r0x000e76c4:
               operandVReg2 = (int *)IRInst__getOperandSource(moveSource,moveSource[0x21]);
               iVar9 = (**(code **)(*operandVReg2 + 0x7c))();
               if ((((iVar9 != 0) ||
-                   (iVar9 = FUN_0011379c(*(undefined4 *)(program + 8),operandVReg2), iVar9 == 0)) ||
+                   (iVar9 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg2), iVar9 == 0)) ||
                   ((iVar9 = operandVReg2[0x58] - *(int *)(program + 0x478), -1 < iVar9 && (1 < iVar9))))
                  || (((sourceBlock != operandVReg2[0x56] ||
                       (iVar9 = (**(code **)(*operandVReg2 + 0x28))(operandVReg2), iVar9 != 0)) ||
@@ -4123,7 +4123,7 @@ int pass_assign_slots(program)
   int *nextInstB;
   int *loopInst;
   
-  FUN_0010ea30(program);
+  Program__callBackendFinish(program);
   ((int (*)())Program__beginPass)(program,(int)"assign_slots");
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   hwVtable = *hwDescription;
