@@ -476,7 +476,7 @@ int extvsEmitMov(ctx, shader, instRecord)
   int instRecord;
 {
   int instSlot;
-  uint uVar1;
+  uint swizzleWord;
   undefined4 newInstArray;
   int instCount;
   int hwProgram;
@@ -499,9 +499,9 @@ int extvsEmitMov(ctx, shader, instRecord)
   instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
   extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
   extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
-  uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
-  *(uint *)(instSlot + 0xc) = uVar1;
-  *(uint *)(instSlot + 8) = uVar1;
+  swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+  *(uint *)(instSlot + 0xc) = swizzleWord;
+  *(uint *)(instSlot + 8) = swizzleWord;
   return 1;
 }
 
@@ -799,8 +799,9 @@ int extvsEmitOp879c(ctx, shader, instRecord)
 {
   int instSlot;
   int extvsOperandDataTypeResult;
-  uint uVar1;
+  uint swizzleWord;
   undefined4 uVar2;
+  undefined4 newInstArray;
   int iVar3;
   int hwProgram;
   int dstOperand;
@@ -811,11 +812,11 @@ int extvsEmitOp879c(ctx, shader, instRecord)
     *(undefined1 *)(shader + 4) = 0;
     iVar3 = *(int *)(hwProgram + 0x18);
     if (*(uint *)(hwProgram + 0x20) < iVar3 + 1U) {
-      uVar2 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar2,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
-      *(undefined4 *)(hwProgram + 0x1c) = uVar2;
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
       iVar3 = *(int *)(hwProgram + 0x18);
       *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
@@ -833,9 +834,9 @@ int extvsEmitOp879c(ctx, shader, instRecord)
     }
     extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
     uVar2 = 1;
-    uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(instSlot + 0xc) = uVar1;
-    *(uint *)(instSlot + 8) = uVar1;
+    swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(instSlot + 0xc) = swizzleWord;
+    *(uint *)(instSlot + 8) = swizzleWord;
   }
   else {
 LAB_0005d600:
