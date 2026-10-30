@@ -936,7 +936,7 @@ int extvsEmitLit(ctx, shader, instRecord)
   int instRecord;
 {
   int instSlot;
-  uint uVar1;
+  uint swizzleWord;
   undefined4 newInstArray;
   int instCount;
   int hwProgram;
@@ -959,10 +959,10 @@ int extvsEmitLit(ctx, shader, instRecord)
   instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
   extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,4,1,0);
   extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
-  uVar1 = *(uint *)(instSlot + 4);
-  *(uint *)(instSlot + 0xc) = uVar1;
-  *(uint *)(instSlot + 4) = (uVar1 & 0x4000000) << 2 | (uVar1 & 0x70000) << 6 | uVar1 & 0xee3fffff;
-  *(uint *)(instSlot + 8) = (uVar1 & 0x2000000) << 3 | (uVar1 & 0xe000) << 9 | uVar1 & 0xee3fffff;
+  swizzleWord = *(uint *)(instSlot + 4);
+  *(uint *)(instSlot + 0xc) = swizzleWord;
+  *(uint *)(instSlot + 4) = (swizzleWord & 0x4000000) << 2 | (swizzleWord & 0x70000) << 6 | swizzleWord & 0xee3fffff;
+  *(uint *)(instSlot + 8) = (swizzleWord & 0x2000000) << 3 | (swizzleWord & 0xe000) << 9 | swizzleWord & 0xee3fffff;
   return 1;
 }
 
@@ -1932,10 +1932,10 @@ int extvsRewriteHardwareInstructions(ctx, shader)
   uint scanIndex;
   uint srcIndex1;
   int hwProgram;
-  uint uStack_38;
-  undefined4 uStack_34;
-  undefined4 uStack_30;
-  undefined4 auStack_2c [3];
+  uint rewriteInstHeader;
+  undefined4 rewriteInstWord1;
+  undefined4 rewriteInstWord2;
+  undefined4 rewriteInstWords [3];
   
   hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   if (*(char *)(shader + 4) != '\0') {
@@ -1948,28 +1948,28 @@ int extvsRewriteHardwareInstructions(ctx, shader)
     *buildJob = 0x460;
     buildJob[1] = *(undefined4 *)(hwProgram + 0x1c);
     oldInstCount = *(undefined4 *)(hwProgram + 0x18);
-    buildJob[7] = &uStack_38;
-    buildJob[10] = &uStack_34;
+    buildJob[7] = &rewriteInstHeader;
+    buildJob[10] = &rewriteInstWord1;
     buildJob[6] = newInstArray;
-    buildJob[0xb] = &uStack_30;
+    buildJob[0xb] = &rewriteInstWord2;
     buildJob[2] = oldInstCount;
-    buildJob[0xc] = auStack_2c;
+    buildJob[0xc] = rewriteInstWords;
     buildStatus = recordProgramBuildDependencies(buildJob);
     recordAllocFree(buildJob);
     (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
     *(int *)(hwProgram + 0x1c) = newInstArray;
     if (buildStatus == 0) {
-      *(uint *)(hwProgram + 0x18) = uStack_38;
-      shader[0x15] = uStack_38;
-      *(undefined4 *)(hwProgram + 8) = uStack_34;
-      *(undefined4 *)(hwProgram + 0xc) = uStack_30;
-      *(undefined4 *)(hwProgram + 0x2ac) = auStack_2c[0];
+      *(uint *)(hwProgram + 0x18) = rewriteInstHeader;
+      shader[0x15] = rewriteInstHeader;
+      *(undefined4 *)(hwProgram + 8) = rewriteInstWord1;
+      *(undefined4 *)(hwProgram + 0xc) = rewriteInstWord2;
+      *(undefined4 *)(hwProgram + 0x2ac) = rewriteInstWords[0];
     }
     else {
       *(undefined4 *)(hwProgram + 0xc) = 0;
-      if (uStack_38 != 0) {
-        scanIndex = uStack_38;
-        newInstArray = uStack_38 * 0x10 + newInstArray;
+      if (rewriteInstHeader != 0) {
+        scanIndex = rewriteInstHeader;
+        newInstArray = rewriteInstHeader * 0x10 + newInstArray;
         do {
           if ((((*(uint *)(newInstArray + -0xc) & 7) == 1) || ((*(uint *)(newInstArray + -8) & 7) == 1)) ||
              ((*(uint *)(newInstArray + -4) & 7) == 1)) {
@@ -1980,7 +1980,7 @@ int extvsRewriteHardwareInstructions(ctx, shader)
       }
     }
     instCursor = *(uint **)(hwProgram + 0x1c);
-    if (uStack_38 != 0) {
+    if (rewriteInstHeader != 0) {
       instIndex = 0;
       do {
         instWord0 = *instCursor;
@@ -2005,7 +2005,7 @@ int extvsRewriteHardwareInstructions(ctx, shader)
         }
         instIndex = instIndex + 1;
         instCursor = instCursor + 4;
-      } while (instIndex < uStack_38);
+      } while (instIndex < rewriteInstHeader);
     }
   }
   return;
@@ -4027,12 +4027,12 @@ int extvsUploadSingleConstant(glContext, shader, symbol)
   undefined4 valueW;
   undefined4 valueY;
   undefined4 valueX;
-  undefined4 uVar1;
+  undefined4 valueXOrCmdWord;
   int constantAddr;
   int slotByteOffset;
   undefined4 *cmdBuffer;
-  undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 valueYOrCmdWord;
+  undefined4 valueZOrCmdWord;
   undefined4 valueZ;
   int *hwProgramSlot;
   code *commitCallback;
@@ -4060,14 +4060,14 @@ int extvsUploadSingleConstant(glContext, shader, symbol)
   *(int *)(*(int *)(0x00002748 + glContext + 4) + 0xc) =
        *(int *)(glContext + 0x2448) + *(int *)(programState + 0x14) + *(int *)(symbol + 4);
   *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 0x10) = 0x38882;
-  uVar1 = *values;
+  valueXOrCmdWord = *values;
   cmdBase = *(int *)(0x00002748 + glContext + 4);
-  uVar5 = values[1];
-  uVar6 = values[2];
+  valueYOrCmdWord = values[1];
+  valueZOrCmdWord = values[2];
   *(undefined4 *)(cmdBase + 0x20) = values[3];
-  *(undefined4 *)(cmdBase + 0x14) = uVar1;
-  *(undefined4 *)(cmdBase + 0x18) = uVar5;
-  *(undefined4 *)(cmdBase + 0x1c) = uVar6;
+  *(undefined4 *)(cmdBase + 0x14) = valueXOrCmdWord;
+  *(undefined4 *)(cmdBase + 0x18) = valueYOrCmdWord;
+  *(undefined4 *)(cmdBase + 0x1c) = valueZOrCmdWord;
   commitCallback = *(code **)(glContext + 0x275c);
   *(int *)(0x00002748 + glContext + 4) = *(int *)(0x00002748 + glContext + 4) + 0x24;
                     
@@ -4670,16 +4670,16 @@ int FUN_00064230(ctx, shader)
   uint savedWord10;
   int inputRecordCursor;
   byte outputFlags;
-  uint uVar2;
+  uint tclStateWord;
   int inputBlock;
   uint *streamBlock;
   uint *streamFlagTable;
   int componentMask;
   bool nextStreamHighHalf;
-  int iVar8;
-  uint uVar9;
+  int componentMaskOrOutputCount;
+  uint fogParamWord;
   uint inputTypeWord;
-  int iVar11;
+  int inputIndexOrAddr;
   int streamCount;
   int programState;
   int descriptorWordIndex;
@@ -4695,7 +4695,7 @@ int FUN_00064230(ctx, shader)
   savedWord5 = streamBlock[5];
   streamBlock[3] = 0;
   streamBlock[4] = 0;
-  iVar8 = 0;
+  componentMaskOrOutputCount = 0;
   streamBlock[1] = 4;
   streamBlock[2] = 1;
   savedWord10 = streamBlock[0x10];
@@ -4704,31 +4704,31 @@ int FUN_00064230(ctx, shader)
   streamBlock[0x10] = savedWord10 & 0xfffff000 | 0x688;
   streamBlock[5] = (inputTypeWord & 0x1f) << 8 | savedWord5 & 0xffff0000 | 3;
   if (*(int *)(((unsigned char *)0x000055e8) + inputBlock) != 0x16) {
-    iVar8 = 0xf;
+    componentMaskOrOutputCount = 0xf;
   }
   *streamBlock = 1;
   descriptorWordIndex = 0;
   nextStreamHighHalf = true;
   streamBlock[0x1b] = 1;
   streamBlock[0x1d] = 1;
-  streamBlock[0x10] = iVar8 << 0xc | savedWord10 & 0xffff0000 | 0x688;
+  streamBlock[0x10] = componentMaskOrOutputCount << 0xc | savedWord10 & 0xffff0000 | 0x688;
   streamFlagTable = &DAT_001dbab8;
   streamCount = 1;
   inputsLeft = 0x15;
   inputRecordCursor = programState;
   do {
     if (0 < *(int *)(inputRecordCursor + 100)) {
-      iVar11 = *(int *)(inputRecordCursor + 0xbc);
+      inputIndexOrAddr = *(int *)(inputRecordCursor + 0xbc);
       streamBlock[1] = (streamBlock[1] & 0x7f) + 4 & 0x7f | streamBlock[1] & 0xffffff80;
       if (nextStreamHighHalf) {
         componentMask = 0;
-        iVar11 = iVar11 * 4 + inputBlock + 0x24;
+        inputIndexOrAddr = inputIndexOrAddr * 4 + inputBlock + 0x24;
         descWord = streamBlock[descriptorWordIndex + 5];
         streamBlock[descriptorWordIndex + 5] = descWord & 0xff00ffff | 0x30000;
         streamBlock[descriptorWordIndex + 5] =
-             (*(uint *)(((unsigned char *)0x000055c4) + iVar11) & 0x1f) << 0x18 | descWord & 0xffff | 0x30000;
+             (*(uint *)(((unsigned char *)0x000055c4) + inputIndexOrAddr) & 0x1f) << 0x18 | descWord & 0xffff | 0x30000;
         streamBlock[descriptorWordIndex + 0x10] = streamBlock[descriptorWordIndex + 0x10] & 0xf000ffff | 0x6880000;
-        if (*(int *)(((unsigned char *)0x000055c4) + iVar11) != 0x16) {
+        if (*(int *)(((unsigned char *)0x000055c4) + inputIndexOrAddr) != 0x16) {
           componentMask = 0xf;
         }
         nextStreamHighHalf = false;
@@ -4737,13 +4737,13 @@ int FUN_00064230(ctx, shader)
       }
       else {
         componentMask = 0;
-        iVar11 = iVar11 * 4 + inputBlock + 0x24;
+        inputIndexOrAddr = inputIndexOrAddr * 4 + inputBlock + 0x24;
         descWord = streamBlock[descriptorWordIndex + 5];
         streamBlock[descriptorWordIndex + 5] = descWord & 0xffffff00 | 3;
         streamBlock[descriptorWordIndex + 5] =
-             (*(uint *)(((unsigned char *)0x000055c4) + iVar11) & 0x1f) << 8 | descWord & 0xffff0000 | 3;
+             (*(uint *)(((unsigned char *)0x000055c4) + inputIndexOrAddr) & 0x1f) << 8 | descWord & 0xffff0000 | 3;
         streamBlock[descriptorWordIndex + 0x10] = streamBlock[descriptorWordIndex + 0x10] & 0xfffff000 | 0x688;
-        if (*(int *)(((unsigned char *)0x000055c4) + iVar11) != 0x16) {
+        if (*(int *)(((unsigned char *)0x000055c4) + inputIndexOrAddr) != 0x16) {
           componentMask = 0xf;
         }
         nextStreamHighHalf = true;
@@ -4804,11 +4804,11 @@ LAB_000644c0:
   do {
     outputFlags = *(byte *)((int)shader + 0x71);
     if (outputFlags != 0) {
-      iVar8 = 4;
+      componentMaskOrOutputCount = 4;
       if ((outputFlags & 8) == 0) {
-        iVar8 = 3 - (uint)((outputFlags & 4) == 0);
+        componentMaskOrOutputCount = 3 - (uint)((outputFlags & 4) == 0);
       }
-      fieldValue = iVar8 << (fieldShift & 0x3f);
+      fieldValue = componentMaskOrOutputCount << (fieldShift & 0x3f);
       streamBlock[3] = fieldValue | streamBlock[3];
       streamBlock[4] = fieldValue | streamBlock[4];
       streamBlock[0x1d] = streamBlock[0x1d] + 1;
@@ -4818,13 +4818,13 @@ LAB_000644c0:
     outputsLeft = outputsLeft + -1;
   } while (outputsLeft != 0);
   streamBlock[2] = *(uint *)(((unsigned char *)0x00005498) + inputBlock);
-  uVar9 = *(uint *)(((unsigned char *)0x0000549c) + inputBlock);
-  streamBlock[3] = uVar9;
-  uVar2 = *(uint *)(((unsigned char *)0x00005434) + inputBlock);
-  streamBlock[0x1d] = uVar2;
-  if (uVar2 == 1) {
+  fogParamWord = *(uint *)(((unsigned char *)0x0000549c) + inputBlock);
+  streamBlock[3] = fogParamWord;
+  tclStateWord = *(uint *)(((unsigned char *)0x00005434) + inputBlock);
+  streamBlock[0x1d] = tclStateWord;
+  if (tclStateWord == 1) {
     streamBlock[0x1d] = 2;
-    streamBlock[3] = uVar9 & 0xff1fffff | 0x800000;
+    streamBlock[3] = fogParamWord & 0xff1fffff | 0x800000;
     streamBlock[4] = streamBlock[4] & 0xff1fffff | 0x800000;
   }
   return;
@@ -4985,7 +4985,7 @@ int extvsUploadProgramConstants(glContext, shader)
   undefined8 *valueD;
   int symbolList;
   int entryD;
-  char cVar11;
+  char topSlot;
   int allocY;
   int entryC;
   uint oldWord1b90;
@@ -5072,7 +5072,7 @@ LAB_00064c00:
           ((int (*)())vpUploadConstantsWithFog)(glContext,shader,programState,in_r6,1);
         }
         oldWord1b90 = *(uint *)(glContext + 0x1b90);
-        cVar11 = '\0';
+        topSlot = '\0';
         constStartField = *(uint *)(programState + 4) & 0x3ff;
         *(uint *)(glContext + 0x1b90) = constStartField | oldWord1b90 & 0xfffffc00;
         constEndField = (*(int *)(programState + 4) + *(int *)(programState + 8)) * 0x400 & 0xffc00;
@@ -5084,9 +5084,9 @@ LAB_00064c00:
              *(uint *)(glContext + 0x1b94) & 0xfffffc00;
         *(char *)(glContext + 0x1b8f) = (char)*(undefined4 *)(programState + 0x14);
         if (*(int *)(programState + 0x5c) != 0) {
-          cVar11 = (char)*(int *)(programState + 0x5c) + -1;
+          topSlot = (char)*(int *)(programState + 0x5c) + -1;
         }
-        *(char *)(glContext + 0x1b8d) = cVar11;
+        *(char *)(glContext + 0x1b8d) = topSlot;
         cmdBuffer = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,4);
         *(undefined4 **)(0x00002748 + glContext + 4) = cmdBuffer;
         *cmdBuffer = 0x208b4;
@@ -5497,7 +5497,7 @@ int ffvpSelectPassThroughVariant(glContext)
   uint outputMask;
   int currentVariant;
   uint pointSizeOut;
-  undefined4 local_74;
+  undefined4 variantKeyWord;
   uint variantKey [2];
   undefined4 variantKeyOutputMask;
   uint variantKeyFlags;
@@ -5587,7 +5587,7 @@ int ffvpSelectPassThroughVariant(glContext)
         } while (outputMask >> 4 != loopIndex);
       }
       ffvpFinishProgram(builder);
-      variant = fpVariantCacheInsert(glContext,variantKey,builder,nextOutputReg,local_74,0,0,1);
+      variant = fpVariantCacheInsert(glContext,variantKey,builder,nextOutputReg,variantKeyWord,0,0,1);
       *(undefined4 *)(variant + 0x34) = 0;
       *(int *)(variant + 0x38) = *(int *)(*(int *)(variant + 0x54) + 0x3cc) + -1;
       currentVariant = *(int *)(glContext + 0x14c);
@@ -5606,7 +5606,7 @@ int ffvpSelectPassThroughVariant(glContext)
 }
 
 /* vpFillConstantBank @ 0x659d0 (612 bytes) */
-void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 param_7,undefined4 unusedArg8,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8,double fprF9,double fprF10,double fprF11,double fprF12,double fprF13)
+void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,undefined4 unusedArg8,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8,double fprF9,double fprF10,double fprF11,double fprF12,double fprF13)
 {
   int maskWordPtr;
   int maskWordIndex;

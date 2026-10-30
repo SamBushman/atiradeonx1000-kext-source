@@ -901,7 +901,7 @@ LAB_0004d460:
 }
 
 /* gldMarkProgramsDirtyByFlag @ 0x4d620 (328 bytes) */
-void gldMarkProgramsDirtyByFlag(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+void gldMarkProgramsDirtyByFlag(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   uint loopIndex;
   int programEntry;
@@ -1224,13 +1224,13 @@ int gldEmitViewportAndGuardBand(glContext, packet)
 int gldEmitConstantFlushPacket(glContext)
   int glContext;
 {
-  undefined4 *puVar1;
+  undefined4 *packet;
   code *UNRECOVERED_JUMPTABLE;
   
-  puVar1 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
-  *(undefined4 **)(0x00002748 + glContext + 4) = puVar1;
-  puVar1[1] = 0;
-  *puVar1 = ((unsigned char *)0x00001040U);
+  packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+  *(undefined4 **)(0x00002748 + glContext + 4) = packet;
+  packet[1] = 0;
+  *packet = ((unsigned char *)0x00001040U);
   UNRECOVERED_JUMPTABLE = *(code **)(glContext + 0x275c);
   *(int *)(0x00002748 + glContext + 4) = *(int *)(0x00002748 + glContext + 4) + 8;
                     
@@ -1324,7 +1324,7 @@ double gldValidateTextureUnits(int glContext,undefined4 unusedArg2,uint unitInde
   int unitRectCursor;
   int unitInfoCursor;
   int unitEnableCursor;
-  uint uVar26;
+  uint unitIndexCounter;
   int texRegCursor;
   double extraout_f1;
   double in_stack_ffffff28;
@@ -1338,22 +1338,22 @@ LAB_0004df78:
       *(undefined1 *)(glContext + 0x120) = 0xff;
     }
     else {
-      uVar26 = 0;
+      unitIndexCounter = 0;
       if (*(int *)(glContext + 0x48) != 0) {
-        uVar26 = 0;
+        unitIndexCounter = 0;
         unitFlagCursor = glContext;
         do {
-          uVar26 = uVar26 + 1;
+          unitIndexCounter = unitIndexCounter + 1;
           unitCountdown = unitCountdown - 1;
           if (unitCountdown == 0) goto LAB_0004df78;
           nextUnitFlagPtr = (int *)(unitFlagCursor + 0x4c);
           unitFlagCursor = unitFlagCursor + 4;
         } while (*nextUnitFlagPtr != 0);
-        uVar26 = uVar26 & 0xff;
+        unitIndexCounter = unitIndexCounter & 0xff;
       }
-      *(char *)(glContext + 0x120) = (char)uVar26;
-      *(uint *)(glContext + 0x1878) = (uVar26 & 7) << 0x15 | *(uint *)(glContext + 0x1878) & 0xff1fffff;
-      *(uint *)(glContext + 0x18a4) = (uVar26 & 7) << 0x1a | *(uint *)(glContext + 0x18a4) & 0xe3ffffff;
+      *(char *)(glContext + 0x120) = (char)unitIndexCounter;
+      *(uint *)(glContext + 0x1878) = (unitIndexCounter & 7) << 0x15 | *(uint *)(glContext + 0x1878) & 0xff1fffff;
+      *(uint *)(glContext + 0x18a4) = (unitIndexCounter & 7) << 0x1a | *(uint *)(glContext + 0x18a4) & 0xe3ffffff;
     }
   }
   glContextWord27b4 = *(int *)(glContext + 0x27b4);
@@ -1786,7 +1786,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
   int glContextWord2768;
   double extraout_f1;
   double extraout_f1_00;
-  double dVar6;
+  double fprResidualF1;
   double in_f2;
   double in_f3;
   double in_f4;
@@ -1807,7 +1807,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
     drawSurface = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
     *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * depthBiasScale) >> 1);
     resolveFlag = gld_needsMultisampleResolve(*(int *)(glContext + 4),drawSurface,staleArgR5,staleArgR6,staleArgR7,staleArgR8,glState);
-    dVar6 = extraout_f1_00;
+    fprResidualF1 = extraout_f1_00;
     if (resolveFlag == 0) {
       *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x20000;
     }
@@ -1818,7 +1818,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
   else {
     *(short *)(glContext + 0x1b42) = (short)*(undefined4 *)(glContextWord2768 + 0x18);
     *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x30000;
-    dVar6 = extraout_f1;
+    fprResidualF1 = extraout_f1;
   }
   glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00002e2c)[glStateBlock] != '\0') && ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) &&
@@ -1834,7 +1834,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
     *(undefined4 *)(glContext + 0x1b70) = *(undefined4 *)(glContextWord2768 + 0x24);
   }
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x4000;
-  ((void (*)())gldValidateViewportPolygonOffset)(glContext,dVar6,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprResidualF1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
   return;
 }
 
@@ -1845,10 +1845,10 @@ int gldValidatePointSize(glContext)
   uint registerDirty;
   float glContextWord104;
   float glContextWord100;
-  float fVar1;
-  float fVar2;
-  undefined2 uVar3;
-  int iVar4;
+  float viewportExtent;
+  float sizeScale;
+  undefined2 halfSizeFixed;
+  int sizeModeOrWidth;
   uint glContextWord44;
   int glContextWord8;
   int glContextWord2768;
@@ -1863,7 +1863,7 @@ int gldValidatePointSize(glContext)
   
   glContextWord2768 = *(int *)(glContext + 0x2768);
   glContextWord8 = *(int *)(glContext + 8);
-  iVar4 = FUN_000a3670(glContext);
+  sizeModeOrWidth = FUN_000a3670(glContext);
   glContextWord44 = *(uint *)(glContext + 0x44);
   if (((glContextWord44 & 0x60020000) == 0x40000000) && (glContextWord2768 != 0)) {
     *(short *)(glContext + 0x1ccc) = (short)*(undefined4 *)(glContextWord2768 + 4);
@@ -1872,27 +1872,27 @@ int gldValidatePointSize(glContext)
     *(undefined4 *)(glContext + 0x1cc8) = *(undefined4 *)(glContextWord2768 + 0x10);
   }
   else {
-    if (iVar4 == 0) {
-      uVar3 = (undefined2)((uint)(glContextWord8 * *(int *)(glContext + 0xe4)) >> 1);
+    if (sizeModeOrWidth == 0) {
+      halfSizeFixed = (undefined2)((uint)(glContextWord8 * *(int *)(glContext + 0xe4)) >> 1);
     }
     else {
-      uVar3 = (undefined2)((uint)(int)(glContextWord8 * (int)(*(float *)(glContext + 0xf0) + FLOAT_001aa10c)) >> 1);
+      halfSizeFixed = (undefined2)((uint)(int)(glContextWord8 * (int)(*(float *)(glContext + 0xf0) + FLOAT_001aa10c)) >> 1);
     }
-    *(undefined2 *)(glContext + 0x1cce) = uVar3;
-    *(undefined2 *)(glContext + 0x1ccc) = uVar3;
+    *(undefined2 *)(glContext + 0x1cce) = halfSizeFixed;
+    *(undefined2 *)(glContext + 0x1ccc) = halfSizeFixed;
   }
   if ((glContextWord44 & 0x60020000) == 0x40000000) {
-    if (iVar4 == 0) {
+    if (sizeModeOrWidth == 0) {
       glContextWord100 = *(float *)(glContext + 0x100) + FLOAT_001aa0e8;
       glContextWord104 = *(float *)(glContext + 0x104) + FLOAT_001aa0e8;
     }
     else {
       if ((glContextWord44 & 0x80) != 0) {
-        fVar2 = *(float *)(((unsigned char *)0x000013c4) + glContext);
-        fVar1 = (float)((double)CONCAT44(0x43300000,glContextWord8) - DOUBLE_001aa250);
+        sizeScale = *(float *)(((unsigned char *)0x000013c4) + glContext);
+        viewportExtent = (float)((double)CONCAT44(0x43300000,glContextWord8) - DOUBLE_001aa250);
         *(short *)(glContext + 0x1cd0) =
-             (short)((int)(fVar1 * *(float *)(((unsigned char *)0x000013c8U) + glContext)) >> 1);
-        *(short *)(glContext + 0x1cd2) = (short)((int)(fVar1 * fVar2) >> 1);
+             (short)((int)(viewportExtent * *(float *)(((unsigned char *)0x000013c8U) + glContext)) >> 1);
+        *(short *)(glContext + 0x1cd2) = (short)((int)(viewportExtent * sizeScale) >> 1);
         goto LAB_0004efc0;
       }
       glContextWord100 = *(float *)(glContext + 0x100);
@@ -1906,9 +1906,9 @@ int gldValidatePointSize(glContext)
     *(short *)(glContext + 0x1cd0) = (short)((uint)(glContextWord8 * *(int *)(glContext + 0x10c)) >> 1);
   }
   else {
-    iVar4 = *(int *)(((unsigned char *)0x000013d4) + glContext);
+    sizeModeOrWidth = *(int *)(((unsigned char *)0x000013d4) + glContext);
     *(short *)(glContext + 0x1cd2) = (short)(glContextWord8 * *(int *)(((unsigned char *)0x000013d0U) + glContext) >> 1);
-    *(short *)(glContext + 0x1cd0) = (short)(glContextWord8 * iVar4 >> 1);
+    *(short *)(glContext + 0x1cd0) = (short)(glContextWord8 * sizeModeOrWidth >> 1);
   }
 LAB_0004efc0:
   *(uint *)(glContext + 0x1b74) = *(uint *)(glContext + 0x1b74) & 0xffff3fff;
@@ -2032,7 +2032,7 @@ LAB_0004f2c8:
 }
 
 /* gldValidateFog @ 0x4f2e0 (616 bytes) */
-void gldValidateFog(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+void gldValidateFog(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   byte colorFormatIndex;
   short fogMode;
@@ -4397,11 +4397,11 @@ int extvsSelectHandlerTables(glContext)
 {
   undefined *handlerTemp;
   undefined *handlerTemp2;
-  undefined4 uVar3;
+  undefined4 result;
   
   handlerTemp2 = PTR_FUN_001e89b8;
   handlerTemp = PTR_FUN_001e89b0;
-  uVar3 = 0;
+  result = 0;
   if (glContext != -0x1168) {
     if (*(char *)(glContext + 0x1868) == '\0') {
       *(undefined **)(((unsigned char *)0x000011a0) + glContext) = PTR_FUN_001e89c4;
@@ -4444,9 +4444,9 @@ int extvsSelectHandlerTables(glContext)
     }
     ((unsigned char *)0x000013b0)[glContext] = 8;
     extvsInitState(glContext);
-    uVar3 = 1;
+    result = 1;
   }
-  return uVar3;
+  return result;
 }
 
 /* FUN_00052e60 @ 0x52e60 (112 bytes) */
@@ -4524,14 +4524,14 @@ int extvsMarkStateDirty(glContext, updateFlags)
   int glContext;
   uint updateFlags;
 {
-  byte bVar1;
+  byte unitMaskBits;
   
-  bVar1 = 0xc;
+  unitMaskBits = 0xc;
   if ((updateFlags & 2) == 0) {
-    bVar1 = 0;
+    unitMaskBits = 0;
   }
   *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x1000;
-  *(byte *)(glContext + 0x2d) = bVar1 | *(byte *)(glContext + 0x2d);
+  *(byte *)(glContext + 0x2d) = unitMaskBits | *(byte *)(glContext + 0x2d);
   *(undefined1 *)(glContext + 0x29) = 1;
   return;
 }

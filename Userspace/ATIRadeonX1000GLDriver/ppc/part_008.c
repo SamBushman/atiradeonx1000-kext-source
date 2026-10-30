@@ -252,10 +252,10 @@ int glGenSymbolsEXT_impl5(ctx, dataType, storageType, range, components)
   undefined4 range;
   undefined4 components;
 {
-  undefined4 uVar1;
+  undefined4 symbolId;
   
-  uVar1 = glGenSymbolsEXT_impl(ctx,dataType,storageType,range,components,0);
-  return uVar1;
+  symbolId = glGenSymbolsEXT_impl(ctx,dataType,storageType,range,components,0);
+  return symbolId;
 }
 
 /* extvsGetConstantUploadInfo @ 0x54470 (272 bytes) */

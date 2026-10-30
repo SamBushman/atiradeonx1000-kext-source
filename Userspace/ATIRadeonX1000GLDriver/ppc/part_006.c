@@ -402,7 +402,7 @@ int fpilBuildDestinationToken(translator, irDest, outToken, outMask, saturate)
   ushort irIndex;
   uint regIndex;
   uint modifier;
-  int iVar4;
+  int programTempBase;
   uint irWord;
   
   irWord = *irDest;
@@ -412,9 +412,9 @@ int fpilBuildDestinationToken(translator, irDest, outToken, outMask, saturate)
   }
   else {
     irIndex = *(ushort *)((int)irDest + 6);
-    iVar4 = *(int *)(*translator + 0x10);
+    programTempBase = *(int *)(*translator + 0x10);
     translator[4] = 1 << (irIndex & 0x3f) | translator[4];
-    regIndex = (uint)irIndex + iVar4 + 1;
+    regIndex = (uint)irIndex + programTempBase + 1;
     irWord = *irDest;
   }
   if (saturate != 0) {
@@ -2328,13 +2328,13 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
   int tokenCount;
   undefined4 tempRegister;
   int *tokenDataPtrAddr;
-  undefined4 uStack_58;
+  undefined4 ilInstOpcode;
   undefined4 ilInstDst;
   undefined4 ilInstDstMask;
   undefined4 ilInstSrc0;
-  undefined4 uStack_40;
+  undefined4 ilInstSwz0;
   
-  _memcpy(&uStack_58,ilInstr,0x24);
+  _memcpy(&ilInstOpcode,ilInstr,0x24);
   tempRegister = *(undefined4 *)(translator + 0x20);
   *(undefined4 *)(ilInstr + 0x18) = 0;
   tempRegisterHalf = (undefined2)tempRegister;
@@ -2342,7 +2342,7 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
   *(undefined2 *)(ilInstr + 0xe) = tempRegisterHalf;
   ilInstDstMask = 0x55;
   ilInstDst = CONCAT22(4,tempRegisterHalf);
-  uStack_58 = 0x4d;
+  ilInstOpcode = 0x4d;
   *(uint *)(ilInstr + 0x18) = *(uint *)(ilInstr + 0x18) & 0xffff0000 | 0x3210;
   *(uint *)(ilInstr + 0xc) = *(uint *)(ilInstr + 0xc) | 0x400000;
   ilInstDst = ilInstDst | 0x400000;
@@ -2377,11 +2377,11 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
     }
     *(int *)(translator + 0x2c) = tokenCount + 5;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = uStack_58;
+    *tokenWritePtr = ilInstOpcode;
     tokenWritePtr[1] = ilInstDst;
     tokenWritePtr[2] = ilInstDstMask;
     tokenWritePtr[3] = ilInstSrc0;
-    tokenWritePtr[4] = uStack_40;
+    tokenWritePtr[4] = ilInstSwz0;
   }
 LAB_000414c0:
   *(int *)(translator + 0x20) = *(int *)(translator + 0x20) + 1;
@@ -7887,7 +7887,7 @@ int FUN_0004a860(glContext, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unus
 }
 
 /* gldRebindCurrentProgram @ 0x4a8f0 (140 bytes) */
-void gldRebindCurrentProgram(int glContext,undefined4 param_2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+void gldRebindCurrentProgram(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
 {
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
     FUN_000b6580(glContext,0);
