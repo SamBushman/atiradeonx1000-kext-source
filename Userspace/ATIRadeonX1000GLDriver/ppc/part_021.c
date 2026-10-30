@@ -829,16 +829,16 @@ int MachineCodeWriter__accumulateStats(writer, encoderState)
 }
 
 /* FUN_000e280c @ 0xe280c (44 bytes) */
-int FUN_000e280c(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int FUN_000e280c(block, encoder, sinkArg)
+  int block;
+  int encoder;
+  undefined4 sinkArg;
 {
                     
                     
-  (**(code **)(**(int **)(param_2 + 0x20) + 0x6c))
-            (*(int **)(param_2 + 0x20),param_1,param_1 + 0x90,param_3,param_2,
-             *(undefined4 *)(param_1 + 0xa8));
+  (**(code **)(**(int **)(encoder + 0x20) + 0x6c))
+            (*(int **)(encoder + 0x20),block,block + 0x90,sinkArg,encoder,
+             *(undefined4 *)(block + 0xa8));
   return;
 }
 
@@ -1359,30 +1359,30 @@ int EncoderState__destroy_e3308(encoder)
   return;
 }
 
-/* FUN_000e33cc @ 0xe33cc (340 bytes) */
-int FUN_000e33cc(compiler, param_2, param_3)
-  int *compiler;
-  int param_2;
-  undefined4 param_3;
+/* EncoderState__init_e33cc @ 0xe33cc (340 bytes) */
+int EncoderState__init_e33cc(encoder, program, sinkArg)
+  int *encoder;
+  int program;
+  undefined4 sinkArg;
 {
+  int compilerObj;
   undefined4 arenaAt378;
-  int iVar1;
   undefined4 *vectorAlloc;
-  int *piVar3;
+  int *sinkObject;
   undefined4 allocation;
   
-  iVar1 = *(int *)(param_2 + 8);
-  compiler[0xd] = param_2;
-  compiler[0xc] = -1;
-  *compiler = iVar1;
-  compiler[1] = 0;
-  compiler[2] = 0;
-  compiler[3] = 0;
-  compiler[4] = 0;
-  compiler[5] = 0;
-  compiler[6] = 0;
-  compiler[7] = 0;
-  arenaAt378 = *(undefined4 *)(iVar1 + 0x378);
+  compilerObj = *(int *)(program + 8);
+  encoder[0xd] = program;
+  encoder[0xc] = -1;
+  *encoder = compilerObj;
+  encoder[1] = 0;
+  encoder[2] = 0;
+  encoder[3] = 0;
+  encoder[4] = 0;
+  encoder[5] = 0;
+  encoder[6] = 0;
+  encoder[7] = 0;
+  arenaAt378 = *(undefined4 *)(compilerObj + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -1390,8 +1390,8 @@ int FUN_000e33cc(compiler, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  compiler[10] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*compiler + 0x378);
+  encoder[10] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*encoder + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -1399,8 +1399,8 @@ int FUN_000e33cc(compiler, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  compiler[0xb] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*compiler + 0x378);
+  encoder[0xb] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*encoder + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -1408,13 +1408,13 @@ int FUN_000e33cc(compiler, param_2, param_3)
   vectorAlloc[4] = arenaAt378;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  compiler[9] = (int)(vectorAlloc + 1);
-  piVar3 = *(int **)(*compiler + 0x30c);
-  piVar3 = (int *)(**(code **)(*piVar3 + 0x68))(piVar3,*compiler);
-  compiler[8] = (int)piVar3;
+  encoder[9] = (int)(vectorAlloc + 1);
+  sinkObject = *(int **)(*encoder + 0x30c);
+  sinkObject = (int *)(**(code **)(*sinkObject + 0x68))(sinkObject,*encoder);
+  encoder[8] = (int)sinkObject;
                     
                     
-  (**(code **)(*piVar3 + 0x14))(piVar3,compiler,param_3,*compiler);
+  (**(code **)(*sinkObject + 0x14))(sinkObject,encoder,sinkArg,*encoder);
   return;
 }
 

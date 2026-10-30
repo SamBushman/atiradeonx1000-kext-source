@@ -10,8 +10,8 @@
 0xe1c20	Compiler__setHardwareFamily
 0xe21b8	Compiler__compileStages
 0xe21cc	Compiler__compileStages
-0xe34c8	FUN_000e33cc
-0xe3524	FUN_000e33cc
+0xe34c8	EncoderState__init_e33cc
+0xe3524	EncoderState__init_e33cc
 0xe3640	EncoderState__init
 0xe369c	EncoderState__init
 0xe3948	MachineCodeWriter__encodeProgram

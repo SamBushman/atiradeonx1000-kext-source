@@ -10,8 +10,8 @@ e1bf0	e1bf4	Compiler__setHardwareFamily
 e1c20	e1c24	Compiler__setHardwareFamily
 e21b8	e21bc	Compiler__compileStages
 e21cc	e21ec	Compiler__compileStages
-e34c8	e34cc	FUN_000e33cc
-e3524	e3544	FUN_000e33cc
+e34c8	e34cc	EncoderState__init_e33cc
+e3524	e3544	EncoderState__init_e33cc
 e3640	e3644	EncoderState__init
 e369c	e36bc	EncoderState__init
 e3948	e395c	MachineCodeWriter__encodeProgram

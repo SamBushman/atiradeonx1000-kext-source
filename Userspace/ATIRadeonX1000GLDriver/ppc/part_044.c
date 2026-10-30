@@ -5092,7 +5092,7 @@ int FUN_00160eb0(foldCtxA, foldCtxB, inst, program)
         return 1;
       }
       if (!chainEndsAtFirst) {
-        FUN_000da09c(*(undefined4 *)(*(int *)(program + 8) + 0x398),*(uint *)(program + 0x30) & 1);
+        Compiler__bumpStatsCounter100(*(undefined4 *)(*(int *)(program + 8) + 0x398),*(uint *)(program + 0x30) & 1);
       }
       return 1;
     }

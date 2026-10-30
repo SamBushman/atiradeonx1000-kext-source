@@ -2514,3 +2514,33 @@ func	FUN_000e2f04	IRInst__redirectDestThroughNewMov	INFERRED	creates a mov (opco
 local	FUN_000e2f04	param_1	inst	INFERRED	instruction whose destination register fields are overwritten
 local	FUN_000e2f04	param_2	destRegNumber	INFERRED	register number stored in the new mov and at inst+0x94
 local	FUN_000e2f04	param_3	destRegFile	INFERRED	register file stored in the new mov and at inst+0x98
+use	FUN_000ec1d0	uVar1	registerMap	INFERRED	program+0x3ac register map	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	+2
+use	FUN_000ec1d0	uVar1	registerMap	INFERRED	program+0x3ac register map	^\s*FUN_001275a0\(uVar1,0x13,0,0\);$	+1
+use	FUN_000ec1d0	iVar2	existingVReg	INFERRED	virtual register of type 0x13 if it already exists	^\s*iVar2\ =\ FUN_00127534\(uVar1,0x13,0,0\);$	+2
+use	FUN_000e80cc	iVar1	successor	INFERRED	successor block taken from the successor vector (+0xd0)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xd0\)\ \+\ 8\)\ \+\ iVar3\);$	+2
+use	FUN_000e80cc	iVar1	successor	INFERRED	successor block taken from the successor vector (+0xd0)	^\s*return\ iVar1;$	+1
+use	FUN_000da09c	iVar1	statsObject	INFERRED	object at compiler+0x38 or +0x3c selected by param_2 whose counter +0x100 is incremented	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_000da09c	iVar1	statsObject	INFERRED	object at compiler+0x38 or +0x3c selected by param_2 whose counter +0x100 is incremented	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c\);$	+1
+use	FUN_000da09c	iVar1	statsObject	INFERRED	object at compiler+0x38 or +0x3c selected by param_2 whose counter +0x100 is incremented	^\s*\*\(int\ \*\)\(iVar1\ \+\ 0x100\)\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x100\)\ \+\ 1;$	+1
+use	FUN_000e33cc	iVar1	compilerObj	INFERRED	program+8: the compiler	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+1
+use	FUN_000e33cc	iVar1	compilerObj	INFERRED	program+8: the compiler	^\s*\*param_1\ =\ iVar1;$	+1
+use	FUN_000e33cc	iVar1	compilerObj	INFERRED	program+8: the compiler	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x378\);$	+1
+use	FUN_000e33cc	piVar3	sinkObject	INFERRED	object created through hardware-info vtable +0x68; initialised with vtable +0x14 and stored at encoder[8]	^\s*piVar3\ =\ \*\(int\ \*\*\)\(\*param_1\ \+\ 0x30c\);$	+3
+use	FUN_000e33cc	piVar3	sinkObject	INFERRED	object created through hardware-info vtable +0x68; initialised with vtable +0x14 and stored at encoder[8]	^\s*\(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3,param_1,param_3,\*param_1\);$	+1
+local	FUN_000e280c	param_1	block	INFERRED	block passed to the sink callback together with its +0x90 data
+local	FUN_000e280c	param_2	encoder	INFERRED	encoder state whose sink object (+0x20) is called
+local	FUN_000e280c	param_3	sinkArg	INFERRED	argument forwarded to the sink callback (vtable +0x6c)
+local	FUN_000ec468	param_1	program	INFERRED	program whose cached array (+0x394) is replaced
+local	FUN_000ec468	param_3	elementCount	INFERRED	number of elements copied from sourceArray
+func	FUN_000ec468	Program__storeDominatorOrder	INFERRED	frees the cached array at program+0x394 and replaces it by a copy of sourceArray (elementCount+1 words)
+func	FUN_000ec1d0	Program__ensureVRegType13	INFERRED	creates the virtual register of type 0x13 (index 0) when it does not exist yet
+local	FUN_000ec1d0	param_1	program	INFERRED	program
+func	FUN_000e80cc	Block__nextUnvisitedSuccessor	INFERRED	first successor whose visit stamp (+0x118) differs from visitStamp, 0 when none
+local	FUN_000e80cc	param_1	block	INFERRED	block whose successors are scanned
+local	FUN_000e80cc	param_2	visitStamp	INFERRED	current visit stamp
+func	FUN_000da09c	Compiler__bumpStatsCounter100	INFERRED	increments the counter at +0x100 of the stats object chosen by param_2 (+0x38 when zero, else +0x3c)
+local	FUN_000da09c	param_1	compiler	INFERRED	object holding the two stats objects
+local	FUN_000da09c	param_2	selector	INFERRED	zero selects the object at +0x38
+func	FUN_000e33cc	EncoderState__init_e33cc	INFERRED	initialises the encoder state (same code as EncoderState__init_e3544): program and compiler pointers, zeroed counters, three arena vectors and the sink object
+local	FUN_000e33cc	param_2	program	INFERRED	program whose compiler (+8) is recorded
+local	FUN_000e33cc	param_3	sinkArg	INFERRED	argument forwarded to the sink object's initialiser (vtable +0x14)

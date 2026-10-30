@@ -70,17 +70,17 @@ int ContinueBlock__ctor_ec178(this, param_2, param_3, compiler)
   return;
 }
 
-/* FUN_000ec1d0 @ 0xec1d0 (20 bytes) */
-int FUN_000ec1d0(param_1)
-  int param_1;
+/* Program__ensureVRegType13 @ 0xec1d0 (20 bytes) */
+int Program__ensureVRegType13(program)
+  int program;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 registerMap;
+  int existingVReg;
   
-  uVar1 = *(undefined4 *)(param_1 + 0x3ac);
-  iVar2 = FUN_00127534(uVar1,0x13,0,0);
-  if (iVar2 == 0) {
-    FUN_001275a0(uVar1,0x13,0,0);
+  registerMap = *(undefined4 *)(program + 0x3ac);
+  existingVReg = FUN_00127534(registerMap,0x13,0,0);
+  if (existingVReg == 0) {
+    FUN_001275a0(registerMap,0x13,0,0);
     return;
   }
   return;
@@ -207,28 +207,28 @@ int FUN_000ec42c(program, node)
   return ((int (*)())Program__freeWorkArrays)(program);
 }
 
-/* FUN_000ec468 @ 0xec468 (136 bytes) */
-int FUN_000ec468(param_1, sourceArray, param_3)
-  int param_1;
+/* Program__storeDominatorOrder @ 0xec468 (136 bytes) */
+int Program__storeDominatorOrder(program, sourceArray, elementCount)
+  int program;
   int sourceArray;
-  uint param_3;
+  uint elementCount;
 {
   undefined4 allocation;
   int loopCounter;
   uint loopIndex;
   
-  if (*(int *)(param_1 + 0x394) != 0) {
-    Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),*(int *)(param_1 + 0x394));
+  if (*(int *)(program + 0x394) != 0) {
+    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(int *)(program + 0x394));
   }
-  allocation = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),param_3 * 4 + 4);
+  allocation = Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x374),elementCount * 4 + 4);
   loopIndex = 0;
-  *(undefined4 *)(param_1 + 0x394) = allocation;
+  *(undefined4 *)(program + 0x394) = allocation;
   loopCounter = 0;
   do {
     loopIndex = loopIndex + 1;
-    *(undefined4 *)(*(int *)(param_1 + 0x394) + loopCounter) = *(undefined4 *)(sourceArray + loopCounter);
+    *(undefined4 *)(*(int *)(program + 0x394) + loopCounter) = *(undefined4 *)(sourceArray + loopCounter);
     loopCounter = loopCounter + 4;
-  } while (loopIndex <= param_3);
+  } while (loopIndex <= elementCount);
   return;
 }
 
@@ -249,7 +249,7 @@ int Program__getDominatorInfo(program)
     domTree = allocation + 1;
     DominatorTree__ctor_f7cd8(domTree,program);
     DominatorTree__dfsNumber(domTree,*(undefined4 *)(program + 0x3a0));
-    ((int (*)())FUN_000ec468)(program,allocation[7],allocation[8]);
+    ((int (*)())Program__storeDominatorOrder)(program,allocation[7],allocation[8]);
     DominatorTree__free(domTree);
     if (domTree == (undefined4 *)0x0) {
       dominatorInfo = *(int *)(program + 0x394);

@@ -2092,7 +2092,7 @@ int DominatorTree__dfsNumber(domInfo, rootBlock)
   *(int *)(*(int *)(rootBlock + 0xe4) * 4 + domInfo[4]) = *(int *)(rootBlock + 0xe4);
   while( true ) {
     while( true ) {
-      nextChild = FUN_000e80cc(rootBlock,*(undefined4 *)(domInfo[8] + 0x474));
+      nextChild = Block__nextUnvisitedSuccessor(rootBlock,*(undefined4 *)(domInfo[8] + 0x474));
       if (nextChild == 0) break;
       stackSize = allocation[2];
       if (stackSize < *stackVector) {
@@ -2262,7 +2262,7 @@ int DominatorTree__compute(domInfo)
     }
   }
   ((int (*)())DominatorTree__dfsNumber)(domInfo,entryBlock);
-  FUN_000ec468(domInfo[8],domInfo[6],domInfo[7]);
+  Program__storeDominatorOrder(domInfo[8],domInfo[6],domInfo[7]);
   vertexNumber = domInfo[7];
   if (1 < vertexNumber) {
     vertexByteOffset = vertexNumber << 2;

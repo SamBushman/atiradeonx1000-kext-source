@@ -1,7 +1,7 @@
 # functions whose variable `compiler` is the shader-compiler Compiler (distinctive offsets used); fork E3
 Compiler__isOptionEnabled compiler
 Compiler__compileStages compiler
-FUN_000e33cc compiler
+EncoderState__init_e33cc compiler
 EncoderState__init compiler
 Block__ctor_ea020 compiler
 Block__ctor_ea148 compiler

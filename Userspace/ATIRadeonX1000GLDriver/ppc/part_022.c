@@ -2251,27 +2251,27 @@ int Block__phiOperandIndexForPredecessor(param_1, param_2)
   return iVar1;
 }
 
-/* FUN_000e80cc @ 0xe80cc (88 bytes) */
-int FUN_000e80cc(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Block__nextUnvisitedSuccessor @ 0xe80cc (88 bytes) */
+int Block__nextUnvisitedSuccessor(block, visitStamp)
+  int block;
+  int visitStamp;
 {
-  int iVar1;
+  int successor;
   uint loopIndex;
   int loopCounter;
   
   loopIndex = 1;
   loopCounter = 0;
   while( true ) {
-    if (*(uint *)(*(int *)(param_1 + 0xd0) + 4) < loopIndex) {
+    if (*(uint *)(*(int *)(block + 0xd0) + 4) < loopIndex) {
       return 0;
     }
-    iVar1 = *(int *)(*(int *)(*(int *)(param_1 + 0xd0) + 8) + loopCounter);
-    if ((iVar1 != 0) && (param_2 != *(int *)(iVar1 + 0x118))) break;
+    successor = *(int *)(*(int *)(*(int *)(block + 0xd0) + 8) + loopCounter);
+    if ((successor != 0) && (visitStamp != *(int *)(successor + 0x118))) break;
     loopIndex = loopIndex + 1;
     loopCounter = loopCounter + 4;
   }
-  return iVar1;
+  return successor;
 }
 
 /* Program__allocateBitSetIndex @ 0xe8124 (664 bytes) */

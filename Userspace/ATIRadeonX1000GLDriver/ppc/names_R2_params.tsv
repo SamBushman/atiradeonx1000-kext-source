@@ -5,7 +5,7 @@ local	FUN_000e2b68	param_1	inst	INFERRED	FUN_000e2b68 passes it as arg 0 of FUN_
 local	FUN_000e2f04	param_5	compiler	INFERRED	FUN_000e2f04 passes it as arg 1 of FUN_001043f0 (typed Compiler)
 local	FUN_000e2f8c	param_1	inst	INFERRED	FUN_000e2f8c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_000e2fd8	param_2	inst	INFERRED	FUN_000e2fd8 passes it as arg 0 of FUN_001054ec (typed Inst)
-local	FUN_000e33cc	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
+local	FUN_000e33cc	param_1	encoder	INFERRED	encoder state: [0] compiler, [0xd] program, [8] sink object, [9..0xb] arena vectors (corrected: not a Compiler)
 local	FUN_000e3544	param_1	encoder	INFERRED	encoder state: [0] compiler, [0xd] program, [8] sink object, [9..0xb] arena vectors (corrected: not a Compiler)
 local	FUN_000e3968	param_1	inst	INFERRED	FUN_000e3968 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000e3968	param_2	inst2	INFERRED	FUN_000e3968 passes it as arg 0 of FUN_001054ec (typed Inst)

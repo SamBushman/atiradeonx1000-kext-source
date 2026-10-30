@@ -2623,20 +2623,20 @@ int CompileInput__readBoolConst(compileInput, sideSelector, constIndex, unusedAr
   return;
 }
 
-/* FUN_000da09c @ 0xda09c (36 bytes) */
-int FUN_000da09c(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Compiler__bumpStatsCounter100 @ 0xda09c (36 bytes) */
+int Compiler__bumpStatsCounter100(compiler, selector)
+  int compiler;
+  int selector;
 {
-  int iVar1;
+  int statsObject;
   
-  if (param_2 == 0) {
-    iVar1 = *(int *)(param_1 + 0x38);
+  if (selector == 0) {
+    statsObject = *(int *)(compiler + 0x38);
   }
   else {
-    iVar1 = *(int *)(param_1 + 0x3c);
+    statsObject = *(int *)(compiler + 0x3c);
   }
-  *(int *)(iVar1 + 0x100) = *(int *)(iVar1 + 0x100) + 1;
+  *(int *)(statsObject + 0x100) = *(int *)(statsObject + 0x100) + 1;
   return;
 }
 

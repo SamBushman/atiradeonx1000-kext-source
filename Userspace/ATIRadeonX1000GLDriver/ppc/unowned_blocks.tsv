@@ -2883,8 +2883,8 @@ e21cc	e21ec	eh-pad	Compiler__compileStages	8	0x193cc0,__Unwind_Resume
 e2884	e28f0	other	Block__accept	27	
 e2950	e2a04	other	IfFooterStatic__accept	45	
 e2ac4	e2acc	millicode	IREndMakeCall__acceptCallPseudo	2	
-e34c8	e34cc	millicode	FUN_000e33cc	1	
-e3524	e3544	eh-pad	FUN_000e33cc	8	0x193cc0,__Unwind_Resume
+e34c8	e34cc	millicode	EncoderState__init_e33cc	1	
+e3524	e3544	eh-pad	EncoderState__init_e33cc	8	0x193cc0,__Unwind_Resume
 e3640	e3644	millicode	EncoderState__init	1	
 e369c	e36bc	eh-pad	EncoderState__init	8	0x193cc0,__Unwind_Resume
 e3948	e395c	eh-pad	MachineCodeWriter__encodeProgram	5	0xe3308,__Unwind_Resume
@@ -2944,7 +2944,7 @@ ebcfc	ebd00	padding	Block__dtor	1
 ebe24	ebe40	eh-pad	Block__deleting_dtor	7	__Unwind_Resume
 ebf38	ebf58	eh-pad	BreakBlock__clone	8	0x193cc0,__Unwind_Resume
 ec038	ec058	eh-pad	ContinueBlock__clone	8	0x193cc0,__Unwind_Resume
-ec1e4	ec1ec	other	FUN_000ec1d0	2	
+ec1e4	ec1ec	other	Program__ensureVRegType13	2	
 ec56c	ec58c	eh-pad	Program__getDominatorInfo	8	0x193cc0,__Unwind_Resume
 ecf5c	ecf7c	eh-pad	FUN_000eced0	8	0x193cc0,__Unwind_Resume
 ed0e4	ed0fc	eh-pad	Program__dtor_ecfac	6	__Unwind_Resume

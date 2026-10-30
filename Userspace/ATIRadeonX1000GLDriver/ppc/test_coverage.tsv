@@ -1163,7 +1163,7 @@
 0xd9fe0	CompileInput__readFloatConst	72	yes	
 0xda028	CompileInput__readIntConst	72	yes	
 0xda070	CompileInput__readBoolConst	44	yes	
-0xda09c	FUN_000da09c	36	yes	
+0xda09c	Compiler__bumpStatsCounter100	36	yes	
 0xda0c0	Compiler__createFromRequest_da0c0	720	yes	
 0xda394	scSetCallbackTables	68	yes	
 0xda420	FUN_000da420	24	yes	
@@ -1299,7 +1299,7 @@
 0xe3140	MachineAssembler__visitIfHeaderStatic	260	no	indirect call (driver context / vtable / callback)
 0xe3244	EncoderState__destroy_e3244	196	no	indirect call (driver context / vtable / callback)
 0xe3308	EncoderState__destroy_e3308	196	no	indirect call (driver context / vtable / callback)
-0xe33cc	FUN_000e33cc	340	no	indirect call (driver context / vtable / callback)
+0xe33cc	EncoderState__init_e33cc	340	no	indirect call (driver context / vtable / callback)
 0xe3544	EncoderState__init	340	no	indirect call (driver context / vtable / callback)
 0xe36bc	MachineCodeWriter__encodeProgram	664	no	indirect call (driver context / vtable / callback)
 0xe3968	IRInst__createMovForDest	396	no	indirect call (driver context / vtable / callback)
@@ -1357,7 +1357,7 @@
 0xe7fe0	FUN_000e7fe0	92	yes	
 0xe803c	Block__predecessorIndex	92	yes	
 0xe8098	Block__phiOperandIndexForPredecessor	52	yes	
-0xe80cc	FUN_000e80cc	88	yes	
+0xe80cc	Block__nextUnvisitedSuccessor	88	yes	
 0xe8124	Program__allocateBitSetIndex	664	yes	
 0xe83bc	Block__getFirstRealInst	104	no	indirect call (driver context / vtable / callback)
 0xe8424	Block__insertAtStart	216	no	indirect call (driver context / vtable / callback)
@@ -1444,7 +1444,7 @@
 0xec0c8	BreakBlock__ctor_ec0c8	88	yes	
 0xec120	ContinueBlock__ctor_ec120	88	yes	
 0xec178	ContinueBlock__ctor_ec178	88	yes	
-0xec1d0	FUN_000ec1d0	20	yes	
+0xec1d0	Program__ensureVRegType13	20	yes	
 0xec1ec	callTargetSlot25	28	yes	
 0xec208	Program__registerFileOfIlType	80	yes	
 0xec258	Program__interpSlotOfIlType	36	yes	
@@ -1456,7 +1456,7 @@
 0xec3ac	Program__insertBlockAfter	60	yes	
 0xec3e8	FUN_000ec3e8	68	yes	
 0xec42c	FUN_000ec42c	60	yes	
-0xec468	FUN_000ec468	136	yes	
+0xec468	Program__storeDominatorOrder	136	yes	
 0xec4f0	Program__getDominatorInfo	168	yes	
 0xec5b8	Program__getBlocksArray	160	yes	
 0xec658	FUN_000ec658	88	yes	
