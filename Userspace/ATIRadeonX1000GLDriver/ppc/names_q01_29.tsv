@@ -232,7 +232,7 @@ local	FUN_0003b280	uVar7	scratchUint7	INFERRED	register-allocation scratch: Ghid
 local	FUN_0003b280	puVar9	scratchPtr9	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	FUN_0003b280	iVar15	scratchInt15	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	FUN_0003b280	iVar17	scratchInt17	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
-local	FUN_0003b620	iVar1	scratchInt1	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
+local	FUN_0003b620	iVar1	entryPtr	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	FUN_0003b620	iVar3	scratchInt3	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	FUN_0003b620	puVar4	scratchPtr4	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	FUN_0003b620	uVar6	scratchUint6	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)

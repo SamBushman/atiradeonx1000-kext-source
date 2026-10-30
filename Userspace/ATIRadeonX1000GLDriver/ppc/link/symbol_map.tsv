@@ -853,14 +853,14 @@ PTR_FUN_001e8948	0x1e8948	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e894c	0x1e894c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e894c asm("PTR_FUN_001e894c");	pointer -> gldPrimWrapperTriangleFan_23a24	data.s
 PTR_FUN_001e8950	0x1e8950	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8950 asm("PTR_FUN_001e8950");	pointer -> glAccum_impl	data.s
 PTR_FUN_001e8954	0x1e8954	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8954 asm("PTR_FUN_001e8954");	pointer -> gldPrimInlinePolygon	data.s
-PTR_FUN_001e8958	0x1e8958	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8958 asm("PTR_FUN_001e8958");	pointer -> FUN_00020330	data.s
+PTR_FUN_001e8958	0x1e8958	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8958 asm("PTR_FUN_001e8958");	pointer -> gld_clearBuffers	data.s
 PTR_FUN_001e895c	0x1e895c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e895c asm("PTR_FUN_001e895c");	pointer -> gldPrimWrapperPolygon_24190	data.s
 PTR_FUN_001e8960	0x1e8960	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8960 asm("PTR_FUN_001e8960");	pointer -> gldPrimInlineTriangleStrip	data.s
 PTR_FUN_001e8964	0x1e8964	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8964 asm("PTR_FUN_001e8964");	pointer -> gld_signalFence	data.s
 PTR_FUN_001e8968	0x1e8968	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8968 asm("PTR_FUN_001e8968");	pointer -> gldPrimInlineQuadStrip	data.s
-PTR_FUN_001e896c	0x1e896c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e896c asm("PTR_FUN_001e896c");	pointer -> FUN_0002b740	data.s
+PTR_FUN_001e896c	0x1e896c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e896c asm("PTR_FUN_001e896c");	pointer -> gld_beginQuerySlot	data.s
 PTR_FUN_001e8970	0x1e8970	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8970 asm("PTR_FUN_001e8970");	pointer -> gld_drawArraysStream	data.s
-PTR_FUN_001e8974	0x1e8974	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8974 asm("PTR_FUN_001e8974");	pointer -> FUN_00026f80	data.s
+PTR_FUN_001e8974	0x1e8974	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8974 asm("PTR_FUN_001e8974");	pointer -> gld_reserveVertexBufferSpace	data.s
 PTR__gldFinish_001e8978	0x1e8978	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__gldFinish_001e8978 asm("PTR__gldFinish_001e8978");	pointer -> _gldFinish	data.s
 PTR__gldFlush_001e897c	0x1e897c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__gldFlush_001e897c asm("PTR__gldFlush_001e897c");	pointer -> _gldFlush	data.s
 PTR_FUN_001e8980	0x1e8980	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8980 asm("PTR_FUN_001e8980");	pointer -> glFinish_impl	data.s

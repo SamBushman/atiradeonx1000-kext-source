@@ -401,3 +401,108 @@ local	FUN_00030a60	param_7	colorSize	INFERRED	height << 16 | width
 func	FUN_0002ce40	gld_emitUnitObjectPackets	INFERRED	for each unit in the mask: depth-target sync packet, then one gld_emitUnitObjectPacket per unit object
 func	FUN_00030420	gld_buildTextureStatePacket	INFERRED	copies the 0x74-byte texture state template and fills pitch, tile, size and format fields from a format table entry
 func	FUN_00030a60	gld_emitRenderTargetPacket	INFERRED	writes a fixed register packet (format, pitch, block pitch, tile flags, offset, size) for a render target
+local	FUN_0003b870	fVar10	vecZPlusOne	INFERRED	z (+0x24f8) plus 1.0 of the case-6 vector, then normalised
+local	FUN_0003b870	iVar17	lightArrayBase	INFERRED	engineState+0x24c0, base of the 0x80-byte light records
+local	FUN_0003b870	iVar24	lightRecord	INFERRED	lightArrayBase + light index * 0x80
+local	FUN_0003b870	iVar18	materialRecord	INFERRED	engineState+0x28c0 + side*0x240 material record
+local	FUN_0003b870	puVar14	destVec	INFERRED	destination vec4 of the entry in the second table
+local	FUN_0003b870	dVar31	depthRangeNear	INFERRED	double at engineState+0x1830 (near)
+local	FUN_0003b870	auStack_60	registerBase	INFERRED	output of FUN_00054470 (first hardware register of the constant bank)
+local	FUN_0003e250	param_1	ctx	INFERRED	GL context (+0x18c: 16 unit objects, +0x29fc enable flag)
+local	FUN_0003e250	iVar2	unitSlotPtr	INFERRED	ctx advanced 4 bytes per unit to walk the +0x18c unit object slots
+local	FUN_0003e250	iVar3	unitIndex	INFERRED	unit number, index into unitPresent
+local	FUN_0003e250	iVar4	kindByteOffset	INFERRED	unitIndex * 4, offset into unitKind
+local	FUN_0003e250	iVar5	unitsLeft	INFERRED	remaining units of the 16
+local	FUN_0003e250	uVar1	unitFormatFlags	INFERRED	first ushort of the unit object's +0x30 record; its low nibble selects the kind
+local	FUN_0003e250	local_68	unitPresent	INFERRED	16 bytes: 1 when the unit has an object
+local	FUN_0003e250	local_58	unitKind	INFERRED	per-unit kind passed to FUN_000a1090: 2 for nibble 0, 1 for nibble 1, else 0
+local	FUN_000308c0	param_2	streamCursor	INFERRED	command cursor advanced by gld_emitUnitObjectPacket
+local	FUN_000308c0	bVar1	lastUnit	INFERRED	loopIndex == 0xf
+local	FUN_000308c0	piVar2	objectTableCursor	INFERRED	cursor through the 5-entry object table at *(ctx+0x18) for the unit
+local	FUN_000308c0	iVar3	unitObject	INFERRED	object bound to the unit; zeroed when it is not found in the table or has no storage (+0x34)
+local	FUN_000308c0	iVar4	tableByteOffset	INFERRED	unit * 0x14 offset into *(ctx+0x18)
+local	FUN_000308c0	iVar6	unitSlotPtr	INFERRED	ctx advanced 4 bytes per unit to walk the +0x18c slots
+local	FUN_000308c0	iVar7	tableEntriesLeft	INFERRED	remaining of the 5 table entries
+local	FUN_0003e420	param_1	stream	INFERRED	command stream forwarded to glSetFragmentShaderConstantATI_impl
+local	FUN_0003e420	param_2	unusedArg2	INFERRED	never read
+local	FUN_0003e420	param_3	entryCount	INFERRED	number of constant entries
+local	FUN_0003e420	param_4	entries	INFERRED	entry words: bits 0-1 kind (1 = skip), bits 12-19 vector index, bits 20-27 constant register
+local	FUN_0003e420	param_5	literalConstants	INFERRED	vec4 table used for kind-0 entries
+local	FUN_0003e420	param_6	stateConstants	INFERRED	vec4 table used for the other entries
+local	FUN_0003e420	uVar1	entryWord	INFERRED	current entry
+local	FUN_0003e420	uVar2	vectorIndex	INFERRED	entryWord bits 12-19
+local	FUN_0003e420	iVar3	constantPtr	INFERRED	address of the vec4 handed to glSetFragmentShaderConstantATI_impl (register = bits 20-27 + 0x8941)
+local	FUN_0003e320	param_1	ctx	INFERRED	GL context (+0x1d0 current fragment program)
+local	FUN_0003e320	param_3	passThroughResult	INFERRED	returned unchanged
+local	FUN_0003e320	piVar4	currentFragmentProgram	INFERRED	ctx+0x1d0
+local	FUN_0003e320	iVar1	programHeader	INFERRED	*currentFragmentProgram: +4 constant entry block, +0x18 state constants
+local	FUN_0003e320	puVar3	constantBlock	INFERRED	constant entry block; first word: bits 16-23 entry count, bits 0-15 offset to the entries
+local	FUN_0003e320	uVar2	constantBlockHeader	INFERRED	first word of the constant entry block
+local	FUN_000309c0	param_1	stream	INFERRED	command stream (stream+4 is the GL context)
+local	FUN_000309c0	param_2	unitObject	INFERRED	object to bind
+local	FUN_000309c0	param_3	unitIndex	INFERRED	texture unit slot (ctx+0x18c + unit*4)
+local	FUN_000309c0	iVar2	glContext	CONFIRMED	*(stream+4): the GL context
+local	FUN_000309c0	uVar1	streamCursor	INFERRED	allocated command space, then the cursor after the unit object packet
+local	FUN_0003e3a0	param_1	ctx	INFERRED	GL context
+local	FUN_0003e3a0	param_2	shaderIdPtr	INFERRED	holds the fragment shader name; generated on first use
+local	FUN_0003e3a0	iVar2	shaderId	INFERRED	ATI fragment shader name
+local	FUN_0003e3a0	uVar1	boundShaderState	INFERRED	result of FUN_000a11a0 stored at ctx+0x27b8
+local	FUN_00030f60	param_5	formatInfoOut	INFERRED	10-word output: [0] hardware format, [1..3] channel fields, [4] flag, [5..7] size fields, [8] compressed image bytes, [9] byte compressed flag
+local	FUN_00030f60	uVar1	hwFormatCode	INFERRED	ushort at format table entry +0x0a
+local	FUN_00030f60	sVar2	baseFormat	CONFIRMED	GL base format of the texture (0x1901 stencil index, 0x1902 depth, 0x1907 RGB)
+local	FUN_00030f60	uVar5	formatFlags	INFERRED	word at format table entry +0x10
+local	FUN_00020330	param_1	ctx	INFERRED	GL context
+local	FUN_00020330	param_2	clearMask	CONFIRMED	glClear bitfield (0x100 depth, 0x200 accum, 0x400 stencil, 0x4000 colour)
+local	FUN_00020330	iVar1	engineState	INFERRED	ctx+0x10 engine state (per-channel write enables at +0x2e40..43)
+local	FUN_00020330	uVar2	effectiveMask	INFERRED	clearMask & ctx+0x158 with colour/depth bits dropped when their write masks are off
+func	FUN_00020330	gld_clearBuffers	CONFIRMED	glClear: tests GL_COLOR_BUFFER_BIT 0x4000 (-> scissor update), GL_ACCUM 0x200 (software colour buffer clear) and depth/stencil bits 0x500
+func	FUN_000309c0	gld_bindUnitObject	INFERRED	stores the object in the unit slot and emits its unit object packet
+func	FUN_0003e3a0	gld_bindFragmentShaderSlot	INFERRED	generates the ATI fragment shader name on first use, binds it and records the bound state
+func	FUN_0003e320	gld_updateFragmentProgramState	INFERRED	re-evaluates the unit kinds and re-sets the fragment shader constants of the current fragment program
+func	FUN_0003e420	gld_setFragmentShaderConstants	INFERRED	calls glSetFragmentShaderConstantATI_impl for every constant entry
+func	FUN_000308c0	gld_emitBoundUnitObjects	INFERRED	for the 16 units emits the unit object packet when the bound object is in the object table with storage
+func	FUN_0003e250	gld_updateUnitKindTable	INFERRED	builds per-unit present/kind arrays from the unit objects and passes them to FUN_000a1090
+func	FUN_00030f60	gld_getTextureFormatInfo	INFERRED	fills formatInfoOut from the hardware format table entry of a texture level
+local	FUN_0003b620	uVar2	operandFile	INFERRED	operand bits 16-20: file (0 none, 2 / 0x11 constant files)
+local	FUN_0003b620	sVar5	operandOrdinal	INFERRED	index of the operand record, stored in the entry's state index
+local	FUN_0003b620	iVar7	entryTotal	INFERRED	running number of entries written (program+0x800/0x804/0x808 are the three section ends)
+local	FUN_0003b620	local_418	entrySymbols	INFERRED	symbol id of every entry, handed with the entry count to FUN_00054590
+local	FUN_00020330	param_1	ctx	INFERRED	GL context
+local	gld_emitVapStreamControl	param_1	ctx	INFERRED	GL context (+0x267c stream count, +0x2680/+0x2684 stream control word arrays)
+local	gld_emitVapStreamControl	param_2	cmd	INFERRED	command words written; returned advanced
+local	gld_emitVapStreamControl	puVar3	cursorA	INFERRED	write cursor after the 0x854 (VAP_PROG_STREAM_CNTL_0) header
+local	gld_emitVapStreamControl	puVar5	cursorB	INFERRED	write cursor after the 0x878 (VAP_PROG_STREAM_CNTL_EXT_0) header
+local	gld_emitVapStreamControl	uVar7	pairCount	INFERRED	(stream count + 1) >> 1: one control word per two streams
+local	gld_emitVapStreamControl	uVar1	headerCountBits	INFERRED	(pairCount-1) << 16, the register count field of both headers
+local	gld_emitVapStreamControl	uVar6	pairsLeft	INFERRED	remaining control words of the first copy loop
+local	gldUpdateTextureTargetDirtyMask	param_1	ctx	INFERRED	GL context (+0x18c unit objects, +0x29fc dirty mask, +0x2a00 per-unit last target)
+local	gldUpdateTextureTargetDirtyMask	uVar1	unitIndex	INFERRED	current unit number (bit in the dirty mask)
+local	gldUpdateTextureTargetDirtyMask	uVar2	targetKind	INFERRED	low nibble of the unit object's first ushort, 0xff when no object is bound
+local	gldUpdateTextureTargetDirtyMask	uVar3	dirtyMask	INFERRED	ctx+0x29fc: bit set for units whose target kind changed
+local	gldUpdateTextureTargetDirtyMask	iVar4	unitSlotPtr	INFERRED	ctx advanced 4 bytes per unit
+local	gldUpdateTextureTargetDirtyMask	iVar5	unitsLeft	INFERRED	remaining units of the 16
+local	FUN_00026f80	param_2	primitiveInfo	INFERRED	forwarded to FUN_0002be90 and gld_revalidateStreamProgram
+local	FUN_00026f80	param_3	vertexLimitPtr	INFERRED	in: non-zero selects the second vertex layout (+0x27d0); out: *param_3 = number of vertices that fit in the data buffer
+local	FUN_00026f80	param_4	passThroughArg4	INFERRED	forwarded unchanged to FUN_0002be90 / gld_revalidateStreamProgram
+local	FUN_00026f80	param_5	passThroughArg5	INFERRED	forwarded unchanged
+local	FUN_00026f80	param_6	passThroughArg6	INFERRED	forwarded unchanged
+local	FUN_00026f80	param_7	passThroughArg7	INFERRED	forwarded unchanged
+local	FUN_0002b740	param_2	queryIdPtr	INFERRED	*param_2 is the query slot id being started
+local	FUN_0002b740	param_3	passThroughArg3	INFERRED	forwarded unchanged to gldValidateState
+local	FUN_0002b740	param_4	passThroughArg4	INFERRED	forwarded unchanged to gldValidateState
+local	FUN_0002b740	param_5	passThroughArg5	INFERRED	forwarded unchanged to gldValidateState
+local	FUN_0002b740	param_6	passThroughArg6	INFERRED	forwarded unchanged to gldValidateState
+local	FUN_0002b740	iVar2	queryEntries	INFERRED	queryPool + 0x210: array of 0x20-byte query entries
+local	FUN_0002b740	iVar1	queryEntry	INFERRED	entry of the started query; its words are reset to 0xffffffff (+4 to 0)
+local	FUN_0002b740	puVar3	packetCursor	INFERRED	ring write position of the 2-word query packet
+local	FUN_000199f0	param_1	ctx	INFERRED	GL context (+0x2a50 sample count, +0x2a54/+0x2a58 axis scale, +0x2a5c/+0x2a5d axis counts)
+local	FUN_000199f0	param_2	requestedSamples	INFERRED	multisample count requested; selects 6, 4, 2 or 1 sample
+local	FUN_000199f0	uVar1	renderFlags	INFERRED	ctx+0x154 render flags
+local	FUN_000199f0	uVar3	sampleCount	INFERRED	chosen sample count stored at ctx+0x2a50
+local	FUN_00019ad0	param_1	ctx	INFERRED	GL context
+local	FUN_00019ad0	param_2	requestedSamples	INFERRED	multisample count requested; 4 or more = 2x2 grid, 2-3 = 2 in one axis
+local	FUN_00019ad0	uVar1	renderFlags	INFERRED	ctx+0x154 render flags
+func	FUN_000199f0	gld_selectSampleCount	INFERRED	chooses the hardware sample count (1/2/4/6) from the request and render flags and resets the axis scales to 1.0
+func	FUN_00019ad0	gld_selectSampleGrid	INFERRED	chooses the per-axis supersample counts/scales (1.0 or 2.0) from the request, limited by the 0x1000 render size
+func	FUN_0002b740	gld_beginQuerySlot	INFERRED	resets one 0x20-byte query entry to 0xffffffff, records it as the current query and emits the begin packet
+func	FUN_00026f80	gld_reserveVertexBufferSpace	INFERRED	makes sure the vertex data ring has room (refilling it through IOConnect method 0x12) and returns the number of vertices that fit

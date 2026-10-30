@@ -1514,7 +1514,7 @@ int _gldGetTextureLevelInfo(ctx, texture, face, level, pname, valueOut)
   uint infoCompressedImageSize;
   byte infoCompressed;
   
-  FUN_00030f60(ctx,texture,face,level,&infoComponents);
+  gld_getTextureFormatInfo(ctx,texture,face,level,&infoComponents);
   if ((**(ushort **)(texture + 0x30) & 0x100) != 0) {
     residentSize = gld_textureMemoryBytes(ctx,texture);
     boundSlotCursor = ctx;

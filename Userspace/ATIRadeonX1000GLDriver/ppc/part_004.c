@@ -1425,7 +1425,7 @@ LAB_0002687c:
           scratchInt4 = contextRecord[2];
         }
       }
-      scratchInt4 = FUN_0003e3a0(ctx + 0x240,contextRecord + 5);
+      scratchInt4 = gld_bindFragmentShaderSlot(ctx + 0x240,contextRecord + 5);
       if (scratchInt4 != 0) {
         if (contextRecord[3] != programObject[5]) {
           contextRecord[3] = programObject[5];
@@ -1653,8 +1653,8 @@ LAB_00026f60:
   return;
 }
 
-/* FUN_00026f80 @ 0x26f80 (460 bytes) */
-void FUN_00026f80(int ctx,uint *param_2,uint *param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gld_reserveVertexBufferSpace @ 0x26f80 (460 bytes) */
+void gld_reserveVertexBufferSpace(int ctx,uint *primitiveInfo,uint *vertexLimitPtr,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   uint refillCount;
   uint fittingVertices;
@@ -1671,16 +1671,16 @@ void FUN_00026f80(int ctx,uint *param_2,uint *param_3,undefined4 param_4,undefin
   int bufferBase;
   uint bufferSize;
   
-  activeCountPtr = param_3;
+  activeCountPtr = vertexLimitPtr;
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
-    activeCountPtr = param_2;
-    staleFprArg1 = (double)((int (*)())FUN_0002be90)(ctx,1,param_2,param_4,param_5,param_6,param_7);
+    activeCountPtr = primitiveInfo;
+    staleFprArg1 = (double)((int (*)())FUN_0002be90)(ctx,1,primitiveInfo,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,param_2,activeCountPtr,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,
+    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,primitiveInfo,activeCountPtr,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7,staleFprArg1,staleFprArg2,
                  staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
   }
-  if ((*param_3 == 0) || (*(int *)(*(int *)(ctx + 0x14) + 0x120) == 0)) {
+  if ((*vertexLimitPtr == 0) || (*(int *)(*(int *)(ctx + 0x14) + 0x120) == 0)) {
     vertexStrideWords = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + ctx) + 2);
     *(undefined1 *)(ctx + 0x27d4) = 0;
   }
@@ -1720,7 +1720,7 @@ void FUN_00026f80(int ctx,uint *param_2,uint *param_3,undefined4 param_4,undefin
   if (fittingVertices < 0x10000) {
     vertexCapacity = fittingVertices;
   }
-  *param_3 = vertexCapacity;
+  *vertexLimitPtr = vertexCapacity;
   return;
 }
 
@@ -5184,36 +5184,36 @@ int _gldGetQueryInfo(ctx, query, pname, valueOut)
   return 0;
 }
 
-/* FUN_0002b740 @ 0x2b740 (172 bytes) */
-void FUN_0002b740(int ctx,int *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gld_beginQuerySlot @ 0x2b740 (172 bytes) */
+void gld_beginQuerySlot(int ctx,int *queryIdPtr,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  int iVar1;
+  int queryEntry;
   int *r4AfterCall;
-  int iVar2;
-  undefined4 *puVar3;
+  int queryEntries;
+  undefined4 *packetCursor;
   int queryPool;
   undefined4 in_LR;
   
   queryPool = *(int *)(ctx + 0x224);
-  iVar2 = queryPool + 0x210;
-  iVar1 = iVar2 + *param_2 * 0x20;
-  *(undefined4 *)(iVar2 + *param_2 * 0x20) = 0xffffffff;
-  *(undefined4 *)(iVar1 + 0xc) = 0xffffffff;
-  *(undefined4 *)(iVar1 + 4) = 0;
-  *(undefined4 *)(iVar1 + 0x10) = 0xffffffff;
-  *(undefined4 *)(iVar1 + 8) = 0xffffffff;
-  *(int *)(queryPool + 8) = *param_2;
-  puVar3 = *(undefined4 **)(ctx + 0x1dc);
-  if (*(undefined4 **)(ctx + 0x1e0) <= puVar3 + 2) {
+  queryEntries = queryPool + 0x210;
+  queryEntry = queryEntries + *queryIdPtr * 0x20;
+  *(undefined4 *)(queryEntries + *queryIdPtr * 0x20) = 0xffffffff;
+  *(undefined4 *)(queryEntry + 0xc) = 0xffffffff;
+  *(undefined4 *)(queryEntry + 4) = 0;
+  *(undefined4 *)(queryEntry + 0x10) = 0xffffffff;
+  *(undefined4 *)(queryEntry + 8) = 0xffffffff;
+  *(int *)(queryPool + 8) = *queryIdPtr;
+  packetCursor = *(undefined4 **)(ctx + 0x1dc);
+  if (*(undefined4 **)(ctx + 0x1e0) <= packetCursor + 2) {
     staleFprArg1 = (double)gld_submitRing(ctx,0x1000000);
-    puVar3 = *(undefined4 **)(ctx + 0x1dc);
-    param_2 = r4AfterCall;
+    packetCursor = *(undefined4 **)(ctx + 0x1dc);
+    queryIdPtr = r4AfterCall;
   }
-  *(undefined4 **)(ctx + 0x1dc) = puVar3 + 2;
-  puVar3[1] = 0;
-  *puVar3 = ((unsigned char *)0x000013d6U);
+  *(undefined4 **)(ctx + 0x1dc) = packetCursor + 2;
+  packetCursor[1] = 0;
+  *packetCursor = ((unsigned char *)0x000013d6U);
   ((unsigned char *)0x00002b7e)[ctx] = 1;
-  ((void (*)())gldValidateState)(ctx + 0x240,param_2,param_3,param_4,param_5,param_6,puVar3,staleFprArg1,staleFprArg2,
+  ((void (*)())gldValidateState)(ctx + 0x240,queryIdPtr,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,packetCursor,staleFprArg1,staleFprArg2,
                staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,
                (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
   return;
@@ -5667,48 +5667,48 @@ void gld_revalidateStreamProgram(int param_1,int param_2,undefined4 param_3,unde
 }
 
 /* gld_emitVapStreamControl @ 0x2c0c0 (180 bytes) */
-int gld_emitVapStreamControl(param_1, param_2)
-  int param_1;
-  uint *param_2;
+int gld_emitVapStreamControl(ctx, cmd)
+  int ctx;
+  uint *cmd;
 {
-  uint uVar1;
+  uint headerCountBits;
   int scratchInt2;
-  uint *puVar3;
+  uint *cursorA;
   int scratchInt4;
-  uint *puVar5;
-  uint uVar6;
-  uint uVar7;
+  uint *cursorB;
+  uint pairsLeft;
+  uint pairCount;
   
-  puVar3 = param_2 + 1;
-  uVar7 = *(int *)(param_1 + 0x267c) + 1U >> 1;
-  uVar1 = (uVar7 - 1) * 0x10000;
-  *param_2 = uVar1 | 0x854;
-  if (uVar7 != 0) {
+  cursorA = cmd + 1;
+  pairCount = *(int *)(ctx + 0x267c) + 1U >> 1;
+  headerCountBits = (pairCount - 1) * 0x10000;
+  *cmd = headerCountBits | 0x854;
+  if (pairCount != 0) {
     scratchInt4 = 0;
-    uVar6 = uVar7;
+    pairsLeft = pairCount;
     do {
       scratchInt2 = scratchInt4 * 4;
       scratchInt4 = scratchInt4 + 1;
-      *puVar3 = *(uint *)(scratchInt2 + *(int *)(param_1 + 0x2680));
-      puVar3 = puVar3 + 1;
-      uVar6 = uVar6 - 1;
-    } while (uVar6 != 0);
+      *cursorA = *(uint *)(scratchInt2 + *(int *)(ctx + 0x2680));
+      cursorA = cursorA + 1;
+      pairsLeft = pairsLeft - 1;
+    } while (pairsLeft != 0);
   }
-  puVar5 = puVar3 + 1;
-  *puVar3 = uVar1 | 0x878;
-  if (uVar7 != 0) {
+  cursorB = cursorA + 1;
+  *cursorA = headerCountBits | 0x878;
+  if (pairCount != 0) {
     scratchInt4 = 0;
     do {
       scratchInt2 = scratchInt4 * 4;
       scratchInt4 = scratchInt4 + 1;
-      *puVar5 = *(uint *)(scratchInt2 + *(int *)(param_1 + 0x2684));
-      puVar5 = puVar5 + 1;
-      uVar7 = uVar7 - 1;
-    } while (uVar7 != 0);
+      *cursorB = *(uint *)(scratchInt2 + *(int *)(ctx + 0x2684));
+      cursorB = cursorB + 1;
+      pairCount = pairCount - 1;
+    } while (pairCount != 0);
   }
-  *puVar5 = 0x82d;
-  puVar5[1] = *(uint *)(0x000026c8 + param_1 + 4);
-  return puVar5 + 2;
+  *cursorB = 0x82d;
+  cursorB[1] = *(uint *)(0x000026c8 + ctx + 4);
+  return cursorB + 2;
 }
 
 /* gld_emitStreamAddressRegisters @ 0x2c180 (164 bytes) */
@@ -6779,7 +6779,7 @@ asm(".set gld_drawElementsImmediate, _gld_drawElementsImmediate");
 asm(".globl gld_drawArraysDirect");
 asm(".set gld_drawArraysDirect, _gld_drawArraysDirect");
 asm(".globl FUN_00026f80");
-asm(".set FUN_00026f80, _FUN_00026f80");
+asm(".set FUN_00026f80, _gld_reserveVertexBufferSpace");
 asm(".globl gld_drawArraysStream");
 asm(".set gld_drawArraysStream, _gld_drawArraysStream");
 asm(".globl gld_reserveDrawSpace");
@@ -6787,7 +6787,7 @@ asm(".set gld_reserveDrawSpace, _gld_reserveDrawSpace");
 asm(".globl glReadPixels_entry");
 asm(".set glReadPixels_entry, _glReadPixels_entry");
 asm(".globl FUN_0002b740");
-asm(".set FUN_0002b740, _FUN_0002b740");
+asm(".set FUN_0002b740, _gld_beginQuerySlot");
 asm(".globl FUN_0002bbc4");
 asm(".set FUN_0002bbc4, _FUN_0002bbc4");
 asm(".globl FUN_0002be00");

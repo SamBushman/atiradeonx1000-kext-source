@@ -177,8 +177,8 @@
 0x18a40	glDrawPixels_impl	3636	no	calls an import (free); calls an import (glgConvertType); calls an import (glgPixelCenters)
 0x198b0	gld_drawPixelsAtRasterPos	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x199a0	gld_drawPixelsDispatch	68	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x199f0	FUN_000199f0	212	yes	
-0x19ad0	FUN_00019ad0	360	yes	
+0x199f0	gld_selectSampleCount	212	yes	
+0x19ad0	gld_selectSampleGrid	360	yes	
 0x19c50	gld_updateSampleConfig	308	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x19db0	FUN_00019db0	544	no	calls an import (io_connect_method_scalarI_structureI)
 0x1a010	FUN_0001a010	176	yes	
@@ -222,7 +222,7 @@
 0x1ecd0	gld_drawVertexArray	3964	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1fd00	gld_buildVertexStreamLayout	1208	yes	
 0x20210	gld_updateScissorRect	280	yes	
-0x20330	FUN_00020330	216	yes	
+0x20330	gld_clearBuffers	216	yes	
 0x20420	gldDisplayNotificationCallback	1716	no	calls an import (CFDictionaryGetValue); calls an import (CFNumberGetValue); calls an import (CFRelease)
 0x20b00	FUN_00020b00	40	yes	
 0x20b30	gld_emitCopyRectPacket	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -262,7 +262,7 @@
 0x26650	gld_bindProgramObject	792	no	calls an import (calloc)
 0x269a0	gld_getProgramParameter	516	yes	
 0x26bf0	gld_drawArraysDirect	876	yes	
-0x26f80	FUN_00026f80	460	no	calls an import (io_connect_method_scalarI_scalarO)
+0x26f80	gld_reserveVertexBufferSpace	460	no	calls an import (io_connect_method_scalarI_scalarO)
 0x27150	gld_drawArraysStream	564	yes	
 0x273a0	gld_reserveDrawSpace	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x27990	gld_buildVertexStreamCache	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -275,7 +275,7 @@
 0x2b3b0	noop_2b3b0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x2b3c0	gld_sumQueryCounters	464	yes	
 0x2b5a0	_gldGetQueryInfo	404	no	calls an import (usleep)
-0x2b740	FUN_0002b740	172	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x2b740	gld_beginQuerySlot	172	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x2b7f0	gld_emitQueryBeginPacket	968	no	atomic / cache / barrier instruction
 0x2bbc4	FUN_0002bbc4	564	no	atomic / cache / barrier instruction
 0x2be00	FUN_0002be00	88	yes	
@@ -312,15 +312,15 @@
 0x305b0	gld_compressAlphaBlock	492	yes	
 0x307a0	FUN_000307a0	148	yes	
 0x30840	FUN_00030840	124	yes	
-0x308c0	FUN_000308c0	192	yes	
+0x308c0	gld_emitBoundUnitObjects	192	yes	
 0x30990	floorLog2	40	yes	
-0x309c0	FUN_000309c0	136	no	indirect call (driver context / vtable / callback)
+0x309c0	gld_bindUnitObject	136	no	indirect call (driver context / vtable / callback)
 0x30a50	FUN_00030a50	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x30a60	gld_emitRenderTargetPacket	240	yes	
 0x30b50	gldTextureHasNonPowerOfTwoSize	236	yes	
 0x30c50	gld_createInternalTexture	684	no	calls an import (free); calls an import (malloc)
 0x30f00	FUN_00030f00	88	yes	
-0x30f60	FUN_00030f60	492	yes	
+0x30f60	gld_getTextureFormatInfo	492	yes	
 0x31170	gldTextureFormatLookup	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x31220	gldTextureFormatEntryForLevel	280	yes	
 0x31340	gld_readbackTextureLevel	1352	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_scalarI_structureI)
@@ -354,10 +354,10 @@
 0x3c400	extvsTranslateShaderObject	4136	no	indirect call (driver context / vtable / callback)
 0x3d590	gld_emitProgramConstantUpdates	2944	no	calls an import (glpUniformToFloat); indirect call (driver context / vtable / callback)
 0x3e1d0	gldUpdateTextureTargetDirtyMask	124	yes	
-0x3e250	FUN_0003e250	188	yes	
-0x3e320	FUN_0003e320	120	yes	
-0x3e3a0	FUN_0003e3a0	116	yes	
-0x3e420	FUN_0003e420	152	yes	
+0x3e250	gld_updateUnitKindTable	188	yes	
+0x3e320	gld_updateFragmentProgramState	120	yes	
+0x3e3a0	gld_bindFragmentShaderSlot	116	yes	
+0x3e420	gld_setFragmentShaderConstants	152	yes	
 0x3e4c0	gldDeleteFragmentShaderObject	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x3e4d0	atifsReplayTextureOps	276	yes	
 0x3e600	atifsReplayColorAlphaOps	1352	yes	

@@ -10891,87 +10891,87 @@ int gld_drawPixelsDispatch(ctx, rasterPos, width, height, param_5, param_6, para
   return uVar1;
 }
 
-/* FUN_000199f0 @ 0x199f0 (212 bytes) */
-int FUN_000199f0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* gld_selectSampleCount @ 0x199f0 (212 bytes) */
+int gld_selectSampleCount(ctx, requestedSamples)
+  int ctx;
+  int requestedSamples;
 {
-  uint uVar1;
+  uint renderFlags;
   int gld_bufferEnumToIndexResult;
-  undefined4 uVar3;
+  undefined4 sampleCount;
   
-  if (param_1 != 0) {
-    gld_bufferEnumToIndexResult = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
-                         *(undefined4 *)(param_1 + 0x154));
-    uVar1 = *(uint *)(param_1 + 0x154);
-    if (((((uVar1 & 0x20) == 0) && (((uVar1 & 0x10) != 0 || ((uVar1 & 0x400) == 0)))) ||
-        ((gld_bufferEnumToIndexResult != 0 && ((gld_bufferEnumToIndexResult != 1 || ((uVar1 & 0x400) != 0)))))) ||
-       (((uVar1 & 0x70000000) != 0 ||
-        (((uVar3 = 6, param_2 < 6 && (uVar3 = 4, param_2 < 4)) && (uVar3 = 2, param_2 < 2)))))) {
-      uVar3 = 1;
+  if (ctx != 0) {
+    gld_bufferEnumToIndexResult = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(ctx + 0x10)),
+                         *(undefined4 *)(ctx + 0x154));
+    renderFlags = *(uint *)(ctx + 0x154);
+    if (((((renderFlags & 0x20) == 0) && (((renderFlags & 0x10) != 0 || ((renderFlags & 0x400) == 0)))) ||
+        ((gld_bufferEnumToIndexResult != 0 && ((gld_bufferEnumToIndexResult != 1 || ((renderFlags & 0x400) != 0)))))) ||
+       (((renderFlags & 0x70000000) != 0 ||
+        (((sampleCount = 6, requestedSamples < 6 && (sampleCount = 4, requestedSamples < 4)) && (sampleCount = 2, requestedSamples < 2)))))) {
+      sampleCount = 1;
     }
-    *(undefined4 *)(param_1 + 0x2a50) = uVar3;
-    *(undefined1 *)(param_1 + 0x2a5d) = 1;
-    *(undefined4 *)(param_1 + 0x2a58) = 0x3f800000;
-    *(undefined4 *)(param_1 + 0x2a54) = 0x3f800000;
-    *(undefined1 *)(param_1 + 0x2a5c) = 1;
+    *(undefined4 *)(ctx + 0x2a50) = sampleCount;
+    *(undefined1 *)(ctx + 0x2a5d) = 1;
+    *(undefined4 *)(ctx + 0x2a58) = 0x3f800000;
+    *(undefined4 *)(ctx + 0x2a54) = 0x3f800000;
+    *(undefined1 *)(ctx + 0x2a5c) = 1;
   }
   return;
 }
 
-/* FUN_00019ad0 @ 0x19ad0 (360 bytes) */
-int FUN_00019ad0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* gld_selectSampleGrid @ 0x19ad0 (360 bytes) */
+int gld_selectSampleGrid(ctx, requestedSamples)
+  int ctx;
+  int requestedSamples;
 {
-  uint uVar1;
+  uint renderFlags;
   int gld_bufferEnumToIndexResult;
   
-  if (param_1 == 0) {
+  if (ctx == 0) {
     return;
   }
-  gld_bufferEnumToIndexResult = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
-                       *(undefined4 *)(param_1 + 0x154));
-  uVar1 = *(uint *)(param_1 + 0x154);
-  if (((((uVar1 & 0x20) == 0) && (((uVar1 & 0x10) != 0 || ((uVar1 & 0x400) == 0)))) ||
-      ((gld_bufferEnumToIndexResult != 0 && ((gld_bufferEnumToIndexResult != 1 || ((uVar1 & 0x400) != 0)))))) || ((uVar1 & 0x70000000) != 0)) {
+  gld_bufferEnumToIndexResult = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(ctx + 0x10)),
+                       *(undefined4 *)(ctx + 0x154));
+  renderFlags = *(uint *)(ctx + 0x154);
+  if (((((renderFlags & 0x20) == 0) && (((renderFlags & 0x10) != 0 || ((renderFlags & 0x400) == 0)))) ||
+      ((gld_bufferEnumToIndexResult != 0 && ((gld_bufferEnumToIndexResult != 1 || ((renderFlags & 0x400) != 0)))))) || ((renderFlags & 0x70000000) != 0)) {
 LAB_00019b60:
-    *(undefined4 *)(param_1 + 0x2a58) = 0x3f800000;
-    *(undefined1 *)(param_1 + 0x2a5d) = 1;
-    *(undefined4 *)(param_1 + 0x2a54) = 0x3f800000;
-    *(undefined1 *)(param_1 + 0x2a5c) = 1;
+    *(undefined4 *)(ctx + 0x2a58) = 0x3f800000;
+    *(undefined1 *)(ctx + 0x2a5d) = 1;
+    *(undefined4 *)(ctx + 0x2a54) = 0x3f800000;
+    *(undefined1 *)(ctx + 0x2a5c) = 1;
   }
   else {
-    if (param_2 < 4) {
-      if (param_2 < 2) goto LAB_00019b60;
-      *(undefined4 *)(param_1 + 0x2a54) = 0x3f800000;
-      *(undefined1 *)(param_1 + 0x2a5c) = 1;
-      if (0x1000 < *(int *)(param_1 + 0x160) << 1) {
-        *(undefined4 *)(param_1 + 0x2a58) = 0x3f800000;
-        *(undefined1 *)(param_1 + 0x2a5d) = 1;
+    if (requestedSamples < 4) {
+      if (requestedSamples < 2) goto LAB_00019b60;
+      *(undefined4 *)(ctx + 0x2a54) = 0x3f800000;
+      *(undefined1 *)(ctx + 0x2a5c) = 1;
+      if (0x1000 < *(int *)(ctx + 0x160) << 1) {
+        *(undefined4 *)(ctx + 0x2a58) = 0x3f800000;
+        *(undefined1 *)(ctx + 0x2a5d) = 1;
         goto LAB_00019be0;
       }
     }
     else {
-      if (*(int *)(param_1 + 0x15c) << 1 < 0x1001) {
-        *(undefined4 *)(param_1 + 0x2a54) = 0x40000000;
-        *(undefined1 *)(param_1 + 0x2a5c) = 2;
+      if (*(int *)(ctx + 0x15c) << 1 < 0x1001) {
+        *(undefined4 *)(ctx + 0x2a54) = 0x40000000;
+        *(undefined1 *)(ctx + 0x2a5c) = 2;
       }
       else {
-        *(undefined4 *)(param_1 + 0x2a54) = 0x3f800000;
-        *(undefined1 *)(param_1 + 0x2a5c) = 1;
+        *(undefined4 *)(ctx + 0x2a54) = 0x3f800000;
+        *(undefined1 *)(ctx + 0x2a5c) = 1;
       }
-      if (0x1000 < *(int *)(param_1 + 0x160) << 1) {
-        *(undefined4 *)(param_1 + 0x2a58) = 0x3f800000;
-        *(undefined1 *)(param_1 + 0x2a5d) = 1;
+      if (0x1000 < *(int *)(ctx + 0x160) << 1) {
+        *(undefined4 *)(ctx + 0x2a58) = 0x3f800000;
+        *(undefined1 *)(ctx + 0x2a5d) = 1;
         goto LAB_00019be0;
       }
     }
-    *(undefined4 *)(param_1 + 0x2a58) = 0x40000000;
-    *(undefined1 *)(param_1 + 0x2a5d) = 2;
+    *(undefined4 *)(ctx + 0x2a58) = 0x40000000;
+    *(undefined1 *)(ctx + 0x2a5d) = 2;
   }
 LAB_00019be0:
-  *(undefined4 *)(param_1 + 0x2a50) = 1;
+  *(undefined4 *)(ctx + 0x2a50) = 1;
   return;
 }
 

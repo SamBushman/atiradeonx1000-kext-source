@@ -1514,7 +1514,7 @@ LAB_000a9de4:
             }
           }
           dirtyBitsArg = (char *)0x0;
-          fpPassThrough1 = (double)FUN_0003e320(stream + -0x240,dirtyBits,0);
+          fpPassThrough1 = (double)gld_updateFragmentProgramState(stream + -0x240,dirtyBits,0);
           puVar16 = r4AfterCall4;
           dirtyWord1 = pcVar17;
         }
@@ -2298,7 +2298,7 @@ LAB_000ab18c:
         }
       }
       dirtyBitsArg = (char *)0x0;
-      fpPassThrough1 = (double)FUN_0003e320(stream + -0x240,dirtyBits,0);
+      fpPassThrough1 = (double)gld_updateFragmentProgramState(stream + -0x240,dirtyBits,0);
       uVar10 = uVar12;
     }
     else if (uVar24 == 0) {

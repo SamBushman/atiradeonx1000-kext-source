@@ -18,26 +18,26 @@ int gld_updateSampleConfig(ctx)
     if (sampleModeBits == 0) {
       legacySampleBits = *(uint *)(ctx + 0x154) & 0xc0000;
       if (legacySampleBits == 0x40000) {
-        FUN_00019ad0(ctx,2);
+        gld_selectSampleGrid(ctx,2);
       }
       else if (legacySampleBits == 0x80000) {
-        FUN_00019ad0(ctx,4);
+        gld_selectSampleGrid(ctx,4);
       }
       else {
-        FUN_00019ad0(ctx,1);
+        gld_selectSampleGrid(ctx,1);
       }
     }
     else if (sampleModeBits == 0x200000) {
-      FUN_000199f0(ctx,4);
+      gld_selectSampleCount(ctx,4);
     }
     else if (sampleModeBits == 0x400000) {
-      FUN_000199f0(ctx,6);
+      gld_selectSampleCount(ctx,6);
     }
     else if (sampleModeBits == 0x100000) {
-      FUN_000199f0(ctx,2);
+      gld_selectSampleCount(ctx,2);
     }
     else {
-      FUN_000199f0(ctx,1);
+      gld_selectSampleCount(ctx,1);
     }
     *(undefined4 *)(ctx + 0x2a48) = *(undefined4 *)(ctx + 0x15c);
     *(undefined4 *)(ctx + 0x2a4c) = *(undefined4 *)(ctx + 0x160);
@@ -75,12 +75,12 @@ int FUN_00019db0(ctx, sampleCount, sampleModeSelector)
   if ((ctx[0x55] & 0xfU) == 3) {
     usesPrimaryConfig = true;
 LAB_00019e50:
-    FUN_00019ad0(ctx,sampleCount);
+    gld_selectSampleGrid(ctx,sampleCount);
   }
   else {
     usesPrimaryConfig = sampleModeSelector == 0;
     if (usesPrimaryConfig) goto LAB_00019e50;
-    FUN_000199f0(ctx,sampleCount);
+    gld_selectSampleCount(ctx,sampleCount);
   }
   newDrawableFlags = ctx[0xf] & 0xff83efff;
   ctx[0xf] = newDrawableFlags;
@@ -4556,32 +4556,32 @@ int gld_updateScissorRect(ctx)
   return;
 }
 
-/* FUN_00020330 @ 0x20330 (216 bytes) */
-int FUN_00020330(param_1, param_2)
-  int param_1;
-  uint param_2;
+/* gld_clearBuffers @ 0x20330 (216 bytes) */
+int gld_clearBuffers(ctx, clearMask)
+  int ctx;
+  uint clearMask;
 {
-  int iVar1;
-  uint uVar2;
+  int engineState;
+  uint effectiveMask;
   
-  iVar1 = *(int *)(param_1 + 0x10);
-  uVar2 = param_2 & *(uint *)(param_1 + 0x158);
-  if (((((unsigned char *)0x00002e43)[iVar1] == '\0' && ((unsigned char *)0x00002e40)[iVar1] == '\0') &&
-      ((unsigned char *)0x00002e41)[iVar1] == '\0') && ((unsigned char *)0x00002e42)[iVar1] == '\0') {
-    uVar2 = uVar2 & 0xffffbfff;
+  engineState = *(int *)(ctx + 0x10);
+  effectiveMask = clearMask & *(uint *)(ctx + 0x158);
+  if (((((unsigned char *)0x00002e43)[engineState] == '\0' && ((unsigned char *)0x00002e40)[engineState] == '\0') &&
+      ((unsigned char *)0x00002e41)[engineState] == '\0') && ((unsigned char *)0x00002e42)[engineState] == '\0') {
+    effectiveMask = effectiveMask & 0xffffbfff;
   }
-  if (((unsigned char *)0x00002e44)[iVar1] == '\0') {
-    uVar2 = uVar2 & 0xfffffeff;
+  if (((unsigned char *)0x00002e44)[engineState] == '\0') {
+    effectiveMask = effectiveMask & 0xfffffeff;
   }
-  if ((uVar2 & 0x200) != 0) {
-    gld_clearSoftwareColorBuffer(param_1,iVar1);
+  if ((effectiveMask & 0x200) != 0) {
+    gld_clearSoftwareColorBuffer(ctx,engineState);
   }
-  if ((uVar2 & 0x4000) != 0) {
-    uVar2 = uVar2 & 0xffffbfff;
-    ((int (*)())gld_updateScissorRect)(param_1);
+  if ((effectiveMask & 0x4000) != 0) {
+    effectiveMask = effectiveMask & 0xffffbfff;
+    ((int (*)())gld_updateScissorRect)(ctx);
   }
-  if ((uVar2 & 0x500) != 0) {
-    FUN_000a6cb0(param_1 + 0x240,uVar2);
+  if ((effectiveMask & 0x500) != 0) {
+    FUN_000a6cb0(ctx + 0x240,effectiveMask);
     return;
   }
   return;
@@ -6575,7 +6575,7 @@ asm(".set returnZero_1e270, _returnZero_1e270");
 asm(".globl gld_drawVertexArray");
 asm(".set gld_drawVertexArray, _gld_drawVertexArray");
 asm(".globl FUN_00020330");
-asm(".set FUN_00020330, _FUN_00020330");
+asm(".set FUN_00020330, _gld_clearBuffers");
 asm(".globl gldDisplayNotificationCallback");
 asm(".set gldDisplayNotificationCallback, _gldDisplayNotificationCallback");
 asm(".globl gldPrimWrapperTriangles_23a24");

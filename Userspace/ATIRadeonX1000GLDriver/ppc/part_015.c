@@ -1902,7 +1902,7 @@ int FUN_000a4490(glContext)
   
   for (glContextPtr2764 = *(int *)(glContext + 0x2764); glContextPtr2764 != 0; glContextPtr2764 = *(int *)(glContextPtr2764 + 0x138)) {
     if ((*(int *)(glContextPtr2764 + 0xbc) != 0) && (-1 < *(int *)(glContext + 0x276c))) {
-      FUN_000309c0(glContext,0,*(int *)(glContext + 0x276c));
+      gld_bindUnitObject(glContext,0,*(int *)(glContext + 0x276c));
     }
   }
   *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x200;
@@ -1977,7 +1977,7 @@ int FUN_000a46d0(glContext)
   int glContext;
 {
   if (*(int *)(glContext + 0x2768) != 0) {
-    FUN_000309c0(glContext,*(undefined4 *)(*(int *)(*(int *)(glContext + 0x2768) + 0xbc) + 0x7c),
+    gld_bindUnitObject(glContext,*(undefined4 *)(*(int *)(*(int *)(glContext + 0x2768) + 0xbc) + 0x7c),
                  *(undefined4 *)(glContext + 0x276c));
     *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x200;
     *(ushort *)(glContext + 0x32) =
