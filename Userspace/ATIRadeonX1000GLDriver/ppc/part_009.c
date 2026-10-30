@@ -5352,7 +5352,7 @@ int ffvpSelectLitProgramVariant(glContext)
   int variant;
   char stateDirty;
   int lightKeyB;
-  undefined4 uVar3;
+  undefined4 staleArgR4;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 in_r5;
@@ -5363,8 +5363,8 @@ int ffvpSelectLitProgramVariant(glContext)
   code *a6;
   undefined4 in_r10;
   undefined8 lookupResult;
-  undefined4 local_38;
-  undefined4 local_34 [8];
+  undefined4 variantKeyHeader;
+  undefined4 variantKeyWords [8];
   
   stateDirty = *(char *)(glContext + 0x29);
   if (*(char *)(glContext + 0x1868) == '\0') {
@@ -5401,24 +5401,24 @@ LAB_00065500:
   }
   lookupResult = fpVariantCacheLookup(glContext,glContext + 0x1874);
   variant = (int)((ulonglong)lookupResult >> 0x20);
-  uVar3 = (undefined4)lookupResult;
+  staleArgR4 = (undefined4)lookupResult;
   if (variant == 0) {
-    ffvpUpdateLightModelFlags(glContext,uVar3,in_r5,in_r6,in_r7,in_r8);
+    ffvpUpdateLightModelFlags(glContext,staleArgR4,in_r5,in_r6,in_r7,in_r8);
     paramList = paramListCreate(glContext);
     (**(code **)(((unsigned char *)0x000012b4) + glContext))(glContext);
-    in_r5 = ffvpBuildProgram(glContext,1,&local_38,local_34,paramList,in_r8,lightKeyA,in_r10);
+    in_r5 = ffvpBuildProgram(glContext,1,&variantKeyHeader,variantKeyWords,paramList,in_r8,lightKeyA,in_r10);
     in_r6 = (uint)*(byte *)(glContext + 0x131);
-    lookupResult = fpVariantCacheInsert(glContext,glContext + 0x1874,in_r5,in_r6,local_38,local_34[0],paramList,
+    lookupResult = fpVariantCacheInsert(glContext,glContext + 0x1874,in_r5,in_r6,variantKeyHeader,variantKeyWords[0],paramList,
                          (uint)*(byte *)(glContext + 0x126));
     variant = (int)((ulonglong)lookupResult >> 0x20);
-    in_r7 = local_38;
-    in_r8 = local_34[0];
+    in_r7 = variantKeyHeader;
+    in_r8 = variantKeyWords[0];
     if (*(char *)(glContext + 0x126) != '\0') {
       a6 = *(code **)(((unsigned char *)0x0000133c) + glContext);
       *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000000;
       *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x1020;
       *(undefined1 *)(glContext + 0x29) = 1;
-      (*a6)(glContext,(int)lookupResult,in_r5,in_r6,local_38,local_34[0],a6);
+      (*a6)(glContext,(int)lookupResult,in_r5,in_r6,variantKeyHeader,variantKeyWords[0],a6);
       goto LAB_00065500;
     }
   }
@@ -5427,12 +5427,12 @@ LAB_00065500:
   (**(code **)(((unsigned char *)0x000012c4) + glContext))(glContext,variant);
   if (*(int *)(variant + 0x54) + 0x750 == *(int *)(((unsigned char *)0x0000148c) + glContext)) {
     (**(code **)((int)((unsigned char *)0x000012a0) + glContext))(glContext);
-    uVar3 = extraout_r4;
+    staleArgR4 = extraout_r4;
   }
   else {
     in_r5 = *(undefined4 *)(variant + 0x3c);
     (**(code **)((int)((unsigned char *)0x00001294) + glContext))(glContext,variant,in_r5);
-    uVar3 = extraout_r4_00;
+    staleArgR4 = extraout_r4_00;
   }
   if (*(char *)(*(int *)(variant + 0x54) + 0x752) == '\0') {
     return;
@@ -5442,7 +5442,7 @@ LAB_0006559c:
   *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000000;
   *(undefined1 *)(glContext + 0x126) = 1;
   *(undefined1 *)(glContext + 0x29) = 1;
-  (**(code **)(((unsigned char *)0x0000133c) + glContext))(glContext,uVar3,in_r5,in_r6,in_r7,in_r8,1);
+  (**(code **)(((unsigned char *)0x0000133c) + glContext))(glContext,staleArgR4,in_r5,in_r6,in_r7,in_r8,1);
   (**(code **)(((unsigned char *)0x000012dc) + glContext))(glContext);
   return;
 }

@@ -4526,10 +4526,10 @@ int fragmentTranslateDsl(emitter, recordIndex)
   uint *tokenWritePtr3;
   int opRecord;
   int *bufferDataPtr;
-  undefined1 auStack_b8 [2];
-  ushort local_b6;
-  undefined1 auStack_b4 [4];
-  undefined *local_b0;
+  undefined1 dstTokenHeader [2];
+  ushort dstRegister;
+  undefined1 dstMask [4];
+  undefined *composedSwizzle;
   undefined4 ilInstAOpcode;
   undefined4 ilInstADst;
   undefined4 ilInstADstMask;
@@ -4544,15 +4544,15 @@ int fragmentTranslateDsl(emitter, recordIndex)
   undefined4 ilInstBSrc0;
   undefined4 ilInstBSrc1;
   undefined4 ilInstBSrc2;
-  undefined *local_70 [3];
+  undefined *swizzleSlots [3];
   undefined4 ilInstCOpcode;
   undefined4 ilInstCDst;
   undefined4 ilInstCDstMask;
   undefined4 ilInstCSrc0;
-  undefined1 auStack_54 [4];
+  undefined1 srcToken [4];
   uint ilInstCSrc2;
   undefined *ilInstCSwz0;
-  undefined1 auStack_48 [4];
+  undefined1 srcSwizzle [4];
   undefined *ilInstCSwz2;
   
   opRecord = *emitter;
@@ -4614,9 +4614,9 @@ int fragmentTranslateDsl(emitter, recordIndex)
     ilInstBOpcode = ilInstBOpcode & 0xc000ffff | 0x20000;
     ilInstBDst = ilInstBDst | 0x400000;
     ilInstBDstMask = 0x55;
-    local_70[0] = ((unsigned char *)0x00003210);
-    local_70[1] = ((unsigned char *)0x00004454);
-    local_70[2] = ((unsigned char *)0x00004445);
+    swizzleSlots[0] = ((unsigned char *)0x00003210);
+    swizzleSlots[1] = ((unsigned char *)0x00004454);
+    swizzleSlots[2] = ((unsigned char *)0x00004445);
     ilInstBSrc0 = (undefined *)((uint)ilInstBSrc0 | 0x400000);
     ilInstBSrc1 = 0x440000;
     ilInstBSrc2 = 0x440000;
@@ -4658,7 +4658,7 @@ int fragmentTranslateDsl(emitter, recordIndex)
       swizzleCursor = swizzleCursor + 1;
       tokenWritePtr3[4] = (uint)*recordWordNext2;
       tokenWritePtr3 = tokenWritePtr3 + 2;
-    } while (local_70 != swizzleCursor);
+    } while (swizzleSlots != swizzleCursor);
     if (1 < (*(uint *)(opRecord + 4) >> 0x1a & 3)) {
       ilInstASrc0 = CONCAT22(4,(short)emitter[8]);
       ilInstASwz0 = ((unsigned char *)0x00003210);
@@ -4702,8 +4702,8 @@ int fragmentTranslateDsl(emitter, recordIndex)
         tokenWritePtr2 = tokenWritePtr2 + 2;
       } while (&ilInstASrc2 != srcCursor);
       ilInstBSrc2 = CONCAT22(4,(short)emitter[8] + 1);
-      local_70[1] = (undefined *)((uint)local_70[1] & 0xfffff88f | 0x540);
-      local_70[2] = ((unsigned char *)0x00003210);
+      swizzleSlots[1] = (undefined *)((uint)swizzleSlots[1] & 0xfffff88f | 0x540);
+      swizzleSlots[2] = ((unsigned char *)0x00003210);
       ilInstBSrc2 = ilInstBSrc2 | 0x400000;
       if (emitter[9] != 0) {
         return emitter[9];
@@ -4742,7 +4742,7 @@ int fragmentTranslateDsl(emitter, recordIndex)
         swizzleCursor = swizzleCursor + 1;
         tokenWritePtr3[4] = (uint)*recordWordNext2;
         tokenWritePtr3 = tokenWritePtr3 + 2;
-      } while (local_70 != swizzleCursor);
+      } while (swizzleSlots != swizzleCursor);
       if ((*(uint *)(opRecord + 4) & 0xc000000) == 0xc000000) {
         if (emitter[9] != 0) {
           return emitter[9];
@@ -4781,7 +4781,7 @@ int fragmentTranslateDsl(emitter, recordIndex)
           tokenWritePtr2[4] = *recordWordNext3;
           tokenWritePtr2 = tokenWritePtr2 + 2;
         } while (&ilInstASrc2 != recordPtr);
-        local_70[1] = (undefined *)((uint)local_70[1] & 0xffff88ff | 0x5400);
+        swizzleSlots[1] = (undefined *)((uint)swizzleSlots[1] & 0xffff88ff | 0x5400);
         if (emitter[9] != 0) {
           return emitter[9];
         }
@@ -4818,7 +4818,7 @@ int fragmentTranslateDsl(emitter, recordIndex)
           recordPtr3 = recordPtr3 + 1;
           tokenWritePtr3[4] = (uint)*recordWordNext4;
           tokenWritePtr3 = tokenWritePtr3 + 2;
-        } while (local_70 != recordPtr3);
+        } while (swizzleSlots != recordPtr3);
       }
     }
     _memset(&ilInstCOpcode,0,0x24);
@@ -4829,30 +4829,30 @@ int fragmentTranslateDsl(emitter, recordIndex)
       ilInstCSrc0 = (undefined *)CONCAT22(4,(short)emitter[8] + 1);
       ilInstCSwz0 = ((unsigned char *)0x00003210);
       ilInstCSrc0 = (undefined *)((uint)ilInstCSrc0 | 0x400000);
-      bufferCount = ((int (*)())fpilTranslateSource)(emitter,opRecord + 0x10,auStack_54,auStack_48);
+      bufferCount = ((int (*)())fpilTranslateSource)(emitter,opRecord + 0x10,srcToken,srcSwizzle);
       if (bufferCount == 0) {
-        bufferCount = ((int (*)())fpilBuildDestinationToken)(emitter,opRecord + 8,auStack_b8,auStack_b4,0);
+        bufferCount = ((int (*)())fpilBuildDestinationToken)(emitter,opRecord + 8,dstTokenHeader,dstMask,0);
         if (bufferCount == 0) {
-          local_b0 = ((unsigned char *)0x00003210);
+          composedSwizzle = ((unsigned char *)0x00003210);
           capacity = *(uint *)(opRecord + 8);
           if ((capacity & 0x2000) != 0) {
-            ((int (*)())fpilSetComponentSelect)(0,capacity >> 8 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(0,capacity >> 8 & 3,&composedSwizzle);
             capacity = *(uint *)(opRecord + 8);
           }
           if ((capacity & 0x4000) != 0) {
-            ((int (*)())fpilSetComponentSelect)(1,capacity >> 6 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(1,capacity >> 6 & 3,&composedSwizzle);
             capacity = *(uint *)(opRecord + 8);
           }
           if ((capacity & 0x8000) != 0) {
-            ((int (*)())fpilSetComponentSelect)(2,capacity >> 4 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(2,capacity >> 4 & 3,&composedSwizzle);
             capacity = *(uint *)(opRecord + 8);
           }
           if ((capacity & 0x10000) != 0) {
-            ((int (*)())fpilSetComponentSelect)(3,capacity >> 2 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(3,capacity >> 2 & 3,&composedSwizzle);
           }
           bufferCount = emitter[9];
-          ilInstCSrc2 = local_b6 | 0x440000;
-          ilInstCSwz2 = local_b0;
+          ilInstCSrc2 = dstRegister | 0x440000;
+          ilInstCSwz2 = composedSwizzle;
         }
         else {
           bufferCount = emitter[9];
@@ -4935,10 +4935,10 @@ int fragmentTranslateSel(emitter, recordIndex)
   uint *srcRecordPtr;
   int *bufferDataPtr;
   int opRecord;
-  uint local_98;
-  uint local_94;
-  undefined4 local_90;
-  uint local_8c;
+  uint translatedDst;
+  uint translatedDstMask;
+  undefined4 translatedSrcToken;
+  uint translatedSrcSwizzle;
   undefined4 ilInstAOpcode;
   undefined4 ilInstADst;
   undefined4 ilInstADstMask;
@@ -4962,13 +4962,13 @@ int fragmentTranslateSel(emitter, recordIndex)
   _memset(&ilInstAOpcode,0,0x24);
   opRecord = opRecord + bufferCount * 8 + recordIndex * 8;
   _memset(&ilInstBOpcode,0,0x24);
-  bufferCount = ((int (*)())fpilTranslateDestination)(emitter,opRecord + 8,&local_98,&local_94,*(uint *)(opRecord + 4) >> 0x14 & 1);
+  bufferCount = ((int (*)())fpilTranslateDestination)(emitter,opRecord + 8,&translatedDst,&translatedDstMask,*(uint *)(opRecord + 4) >> 0x14 & 1);
   if (bufferCount != 0) {
 LAB_000458f0:
     return emitter[9];
   }
   srcRecordPtr = (uint *)(opRecord + 0x10);
-  bufferCount = ((int (*)())fpilTranslateSource)(emitter,srcRecordPtr,&local_90,&local_8c);
+  bufferCount = ((int (*)())fpilTranslateSource)(emitter,srcRecordPtr,&translatedSrcToken,&translatedSrcSwizzle);
   if (bufferCount != 0) goto LAB_000458f0;
   recordPtr = &ilInstASrc0;
   ilInstADst = CONCAT22(4,(short)emitter[8]);
@@ -5022,8 +5022,8 @@ LAB_000458f0:
   ilInstBOpcode = ilInstBOpcode & 0xc000ffff | 0x20000;
   if ((*srcRecordPtr & 0x3000) == 0x1000) {
     tempRegister = (short)emitter[8];
-    ilInstBDst = local_98;
-    ilInstBDstMask = local_94;
+    ilInstBDst = translatedDst;
+    ilInstBDstMask = translatedDstMask;
   }
   else {
     tempRegister = (short)emitter[8];
@@ -5031,23 +5031,23 @@ LAB_000458f0:
     ilInstBDstMask = 0x55;
     ilInstBDst = ilInstBDst | 0x400000;
   }
-  select1 = local_8c >> 4 & 7;
-  negate1 = local_8c >> 7 & 1;
+  select1 = translatedSrcSwizzle >> 4 & 7;
+  negate1 = translatedSrcSwizzle >> 7 & 1;
   ilInstBSrc0 = (undefined *)CONCAT22(4,tempRegister);
-  capacity = local_8c >> 3 & 1;
+  capacity = translatedSrcSwizzle >> 3 & 1;
   ilInstBSwz0 = ((unsigned char *)0x00003210);
-  ilInstBSrc2 = local_90;
+  ilInstBSrc2 = translatedSrcToken;
   ilInstBSwz2 = (undefined *)
              (capacity << 0xf |
-             (local_8c & 7) << 0xc |
+             (translatedSrcSwizzle & 7) << 0xc |
              capacity << 0xb |
-             (local_8c & 7) << 8 | capacity << 7 | (local_8c & 7) << 4 | local_8c & 0xffff000f);
-  ilInstBSrc1 = local_90;
+             (translatedSrcSwizzle & 7) << 8 | capacity << 7 | (translatedSrcSwizzle & 7) << 4 | translatedSrcSwizzle & 0xffff000f);
+  ilInstBSrc1 = translatedSrcToken;
   ilInstBSrc0 = (undefined *)((uint)ilInstBSrc0 | 0x400000);
   ilInstBSwz1 = negate1 << 0xf |
              select1 << 0xc |
              negate1 << 0xb |
-             select1 << 8 | negate1 << 7 | select1 << 4 | negate1 << 3 | local_8c & 0xffff0000 | select1;
+             select1 << 8 | negate1 << 7 | select1 << 4 | negate1 << 3 | translatedSrcSwizzle & 0xffff0000 | select1;
   if (emitter[9] != 0) {
     return emitter[9];
   }
@@ -5130,11 +5130,11 @@ LAB_000458f0:
       tokenWritePtr2 = tokenWritePtr2 + 2;
     } while (&ilInstASrc2 != srcCursor);
     if ((*srcRecordPtr & 0x3000) == 0x2000) {
-      ilInstBDst = local_98;
-      ilInstBDstMask = local_94;
+      ilInstBDst = translatedDst;
+      ilInstBDstMask = translatedDstMask;
     }
-    capacity = local_8c >> 8 & 7;
-    negate2 = local_8c >> 0xb & 1;
+    capacity = translatedSrcSwizzle >> 8 & 7;
+    negate2 = translatedSrcSwizzle >> 0xb & 1;
     ilInstBSrc2 = CONCAT22(4,(short)emitter[8] + 1);
     ilInstBSwz2 = ((unsigned char *)0x00003210);
     ilInstBSrc2 = ilInstBSrc2 | 0x400000;
@@ -5220,10 +5220,10 @@ LAB_000458f0:
       tokenWritePtr2[4] = *recordWordNext3;
       tokenWritePtr2 = tokenWritePtr2 + 2;
     } while (&ilInstASrc2 != recordPtr);
-    select3 = local_8c >> 0xc & 7;
-    capacity = local_8c >> 0xf & 1;
-    ilInstBDst = local_98;
-    ilInstBDstMask = local_94;
+    select3 = translatedSrcSwizzle >> 0xc & 7;
+    capacity = translatedSrcSwizzle >> 0xf & 1;
+    ilInstBDst = translatedDst;
+    ilInstBDstMask = translatedDstMask;
     ilInstBSwz1 = capacity << 0xf |
                select3 << 0xc |
                capacity << 0xb |
