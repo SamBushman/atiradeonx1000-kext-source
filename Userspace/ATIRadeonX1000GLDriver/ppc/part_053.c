@@ -889,28 +889,28 @@ int FUN_0019ebdc(param_1)
 }
 
 /* ilSkipRelativeAddressWords @ 0x19ec88 (108 bytes) */
-int ilSkipRelativeAddressWords(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int ilSkipRelativeAddressWords(addressMode, nestedCount, bytePtr)
+  int addressMode;
+  int nestedCount;
+  int bytePtr;
 {
-  int iVar1;
+  int nestedWordCount;
   int loopIndex;
   
-  if (param_1 == 1) {
-    param_3 = param_3 + 4;
+  if (addressMode == 1) {
+    bytePtr = bytePtr + 4;
   }
   else {
     loopIndex = 0;
-    if (-1 < param_2) {
+    if (-1 < nestedCount) {
       do {
         loopIndex = loopIndex + 1;
-        iVar1 = ((int (*)())ilSourceOperandWordCount)(param_3);
-        param_3 = param_3 + iVar1 * 4;
-      } while (loopIndex <= param_2);
+        nestedWordCount = ((int (*)())ilSourceOperandWordCount)(bytePtr);
+        bytePtr = bytePtr + nestedWordCount * 4;
+      } while (loopIndex <= nestedCount);
     }
   }
-  return param_3;
+  return bytePtr;
 }
 
 /* ilSourceOperandWordCount @ 0x19ecf4 (192 bytes) */
@@ -952,25 +952,25 @@ LAB_0019ed78:
 }
 
 /* ilInstructionHeaderWordCount @ 0x19edb4 (84 bytes) */
-int ilInstructionHeaderWordCount(param_1)
-  uint *param_1;
+int ilInstructionHeaderWordCount(instructionWords)
+  uint *instructionWords;
 {
-  uint *puVar1;
+  uint *wordPtr;
   
-  if ((short)*param_1 == 0x7d) {
+  if ((short)*instructionWords == 0x7d) {
     return 1;
   }
-  puVar1 = param_1 + 1;
-  if ((int)*param_1 < 0) {
-    puVar1 = param_1 + 2;
+  wordPtr = instructionWords + 1;
+  if ((int)*instructionWords < 0) {
+    wordPtr = instructionWords + 2;
   }
-  if ((short)*param_1 == 0x17) {
-    return (int)puVar1 - (int)param_1 >> 2;
+  if ((short)*instructionWords == 0x17) {
+    return (int)wordPtr - (int)instructionWords >> 2;
   }
-  if ((*param_1 & 0x40000000) != 0) {
-    puVar1 = puVar1 + 1;
+  if ((*instructionWords & 0x40000000) != 0) {
+    wordPtr = wordPtr + 1;
   }
-  return (int)puVar1 - (int)param_1 >> 2;
+  return (int)wordPtr - (int)instructionWords >> 2;
 }
 
 /* ilDestinationOperandWordCount @ 0x19ee08 (108 bytes) */
@@ -995,44 +995,44 @@ int ilDestinationOperandWordCount(operandWords)
   return (int)wordPtr - (int)operandWords >> 2;
 }
 
-/* FUN_0019ee74 @ 0x19ee74 (184 bytes) */
-int FUN_0019ee74(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Compiler__selectLimitsForShaderKind @ 0x19ee74 (184 bytes) */
+int Compiler__selectLimitsForShaderKind(programDesc, compiler)
+  int programDesc;
+  int compiler;
 {
-  char cVar1;
-  int *piVar2;
+  char shaderKind;
+  int *limitsSet;
   
-  cVar1 = *(char *)(param_1 + 1);
-  if (cVar1 == '\x01') {
-    *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) =
-         *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) | 0x2000;
-    piVar2 = *(int **)(param_2 + 0x310);
-    *(int *)(param_2 + 0x30c) = piVar2[2];
+  shaderKind = *(char *)(programDesc + 1);
+  if (shaderKind == '\x01') {
+    *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
+         *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x2000;
+    limitsSet = *(int **)(compiler + 0x310);
+    *(int *)(compiler + 0x30c) = limitsSet[2];
                     
                     
-    (**(code **)(*piVar2 + 8))(piVar2);
+    (**(code **)(*limitsSet + 8))(limitsSet);
     return;
   }
-  if (cVar1 != '\x02') {
-    if (cVar1 != '\0') {
+  if (shaderKind != '\x02') {
+    if (shaderKind != '\0') {
       return;
     }
-    *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) = *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) | 1;
-    piVar2 = *(int **)(param_2 + 0x310);
-    *(int *)(param_2 + 0x30c) = piVar2[1];
+    *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 1;
+    limitsSet = *(int **)(compiler + 0x310);
+    *(int *)(compiler + 0x30c) = limitsSet[1];
                     
                     
-    (**(code **)(*piVar2 + 0xc))(piVar2);
+    (**(code **)(*limitsSet + 0xc))(limitsSet);
     return;
   }
-  *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) = *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) | 0x4000
+  *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x4000
   ;
-  piVar2 = *(int **)(param_2 + 0x310);
-  *(int *)(param_2 + 0x30c) = piVar2[3];
+  limitsSet = *(int **)(compiler + 0x310);
+  *(int *)(compiler + 0x30c) = limitsSet[3];
                     
                     
-  (**(code **)(*piVar2 + 0x10))(piVar2);
+  (**(code **)(*limitsSet + 0x10))(limitsSet);
   return;
 }
 
@@ -1673,29 +1673,29 @@ int R520MachineAssembler__beginNextRecord(this)
 }
 
 /* R520MachineAssembler__vslot4_finishProgram @ 0x19fccc (292 bytes) */
-int R520MachineAssembler__vslot4_finishProgram(param_1)
-  int *param_1;
+int R520MachineAssembler__vslot4_finishProgram(this)
+  int *this;
 {
   int callResult;
-  int iVar2;
+  int lastIndex;
   
-  iVar2 = 0;
-  *(int *)(param_1[0x2b] + 0x93b8) = param_1[0x24];
-  *(int *)(param_1[0x2b] + 0x9364) = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x7c) + 1;
-  *(undefined4 *)(param_1[0x2b] + 0x9368) = *(undefined4 *)(*(int *)(param_1[3] + 0x6c4) + 0x84);
-  callResult = FUN_0013061c(*(undefined4 *)(param_1[3] + 0x6c4),0);
+  lastIndex = 0;
+  *(int *)(this[0x2b] + 0x93b8) = this[0x24];
+  *(int *)(this[0x2b] + 0x9364) = *(int *)(*(int *)(this[3] + 0x6c4) + 0x7c) + 1;
+  *(undefined4 *)(this[0x2b] + 0x9368) = *(undefined4 *)(*(int *)(this[3] + 0x6c4) + 0x84);
+  callResult = FUN_0013061c(*(undefined4 *)(this[3] + 0x6c4),0);
   if (callResult != 0) {
-    iVar2 = callResult + -1;
+    lastIndex = callResult + -1;
   }
-  if ((*(int *)(param_1[0x18] * 0x48 + param_1[0x2a] + -0x48) != 3) ||
-     (param_1[0x2d] == (param_1[0x18] - param_1[0x1d]) + -1)) {
-    (**(code **)(*param_1 + 0xbc))(param_1);
-    (**(code **)(*param_1 + 0xc0))(param_1);
-    (**(code **)(*param_1 + 0x15c))(param_1);
+  if ((*(int *)(this[0x18] * 0x48 + this[0x2a] + -0x48) != 3) ||
+     (this[0x2d] == (this[0x18] - this[0x1d]) + -1)) {
+    (**(code **)(*this + 0xbc))(this);
+    (**(code **)(*this + 0xc0))(this);
+    (**(code **)(*this + 0x15c))(this);
   }
                     
                     
-  (**(code **)(*param_1 + 0x144))(param_1,param_1[0x1e],iVar2);
+  (**(code **)(*this + 0x144))(this,this[0x1e],lastIndex);
   return;
 }
 

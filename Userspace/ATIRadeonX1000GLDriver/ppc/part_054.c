@@ -214,70 +214,72 @@ int R520MachineAssembler__vslot74_setPredicateSetDestination(this, writeRgb, wri
   int writeAlpha;
   int inst;
 {
-  int iVar1;
+  int recordPtr2;
+  int recordPtr;
+  int recordTable;
   byte invertBit;
   undefined1 uVar4;
   int operandRecord;
   undefined1 compareCode;
-  int iVar6;
-  int iVar7;
+  int predicateKind;
+  int recordIndex;
   
   switch(*(undefined4 *)(inst + 300)) {
   default:
-    iVar6 = 2;
+    predicateKind = 2;
     compareCode = 0;
     break;
   case 1:
-    iVar6 = 2;
+    predicateKind = 2;
     compareCode = 3;
     break;
   case 2:
-    iVar6 = 1;
+    predicateKind = 1;
     compareCode = 1;
     break;
   case 3:
-    iVar6 = 2;
+    predicateKind = 2;
     compareCode = 2;
     break;
   case 4:
-    iVar6 = 2;
+    predicateKind = 2;
     compareCode = 1;
     break;
   case 5:
-    iVar6 = 1;
+    predicateKind = 1;
     compareCode = 2;
   }
   invertBit = packSourceModifier(1,0);
   *(undefined4 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8)) = 4;
   if (writeRgb != 0) {
-    iVar7 = *(int *)(this + 0x60);
-    iVar1 = *(int *)(this + 0xa8);
+    recordIndex = *(int *)(this + 0x60);
+    recordTable = *(int *)(this + 0xa8);
     operandRecord = IRInst__getOperandRecord(inst,0);
     uVar4 = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
-    *(undefined1 *)(iVar7 * 0x48 + iVar1 + 0x15) = uVar4;
-    if (iVar6 == 1) {
-      iVar1 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar1 + 0x2d) = invertBit ^ *(byte *)(iVar1 + 0x2d);
+    *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x15) = uVar4;
+    if (predicateKind == 1) {
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2d) = invertBit ^ *(byte *)(recordPtr + 0x2d);
     }
     else {
-      iVar1 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar1 + 0x2e) = invertBit ^ *(byte *)(iVar1 + 0x2e);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2e) = invertBit ^ *(byte *)(recordPtr + 0x2e);
     }
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x16) = compareCode;
   }
   if (writeAlpha != 0) {
-    iVar7 = *(int *)(this + 0x60);
-    iVar1 = *(int *)(this + 0xa8);
+    recordIndex = *(int *)(this + 0x60);
+    recordTable = *(int *)(this + 0xa8);
     operandRecord = IRInst__getOperandRecord(inst,0);
-    *(bool *)(iVar7 * 0x48 + iVar1 + 0x21) = *(char *)(operandRecord + 0x13) == '\0';
+    *(bool *)(recordIndex * 0x48 + recordTable + 0x21) = *(char *)(operandRecord + 0x13) == '\0';
   }
-  if (iVar6 == 1) {
-    iVar6 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(byte *)(iVar6 + 0x3c) = invertBit ^ *(byte *)(iVar6 + 0x3c);
+  if (predicateKind == 1) {
+    recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(byte *)(recordPtr2 + 0x3c) = invertBit ^ *(byte *)(recordPtr2 + 0x3c);
   }
   else {
-    iVar6 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(byte *)(iVar6 + 0x3d) = invertBit ^ *(byte *)(iVar6 + 0x3d);
+    recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(byte *)(recordPtr2 + 0x3d) = invertBit ^ *(byte *)(recordPtr2 + 0x3d);
   }
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x22) = compareCode;
   return;
@@ -926,11 +928,12 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   int *this;
   int *node;
 {
+  int *pendingSlot;
   int *elementRef;
   uint vectorFilledCount;
-  int *piVar1;
+  int *successorHead;
   undefined4 a1;
-  uint uVar2;
+  uint pendingCount;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -946,11 +949,11 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   a1 = (undefined4)callResult;
   if ((callResult < 0x300000000) &&
      (uVar7 = Block__hasSuccessors(stackVector), a1 = (undefined4)uVar7, (int)((ulonglong)uVar7 >> 0x20) != 0)) {
-    piVar1 = (int *)0x0;
+    successorHead = (int *)0x0;
     if (*(int *)(*(int *)(stackVector + 0xd0) + 4) != 0) {
-      piVar1 = *(int **)(*(int *)(stackVector + 0xd0) + 8);
+      successorHead = *(int **)(*(int *)(stackVector + 0xd0) + 8);
     }
-    if (*piVar1 == node[0x4f]) {
+    if (*successorHead == node[0x4f]) {
       return;
     }
   }
@@ -966,14 +969,14 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   else {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0xff;
   }
-  piVar1 = (int *)0x0;
+  pendingSlot = (int *)0x0;
   stackVector = *(int *)(this[4] + 0x24);
-  uVar2 = *(uint *)(stackVector + 4);
-  if (uVar2 - 1 < uVar2) {
-    piVar1 = (int *)((uVar2 - 1) * 4 + *(int *)(stackVector + 8));
+  pendingCount = *(uint *)(stackVector + 4);
+  if (pendingCount - 1 < pendingCount) {
+    pendingSlot = (int *)((pendingCount - 1) * 4 + *(int *)(stackVector + 8));
   }
-  pendingRecord = *piVar1;
-  Vector__removeAt(stackVector,uVar2 - 1);
+  pendingRecord = *pendingSlot;
+  Vector__removeAt(stackVector,pendingCount - 1);
   *(short *)(pendingRecord * 0x48 + this[0x2a] + 0xc) = (short)this[0x18] - (short)this[0x1d];
   stackVector = this[0x18];
   vector = *(uint **)(this[4] + 0x24);

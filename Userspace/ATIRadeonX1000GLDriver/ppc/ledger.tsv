@@ -3201,7 +3201,7 @@
 0x19ecf4	192	ilSourceOperandWordCount	part_053	converted
 0x19edb4	84	ilInstructionHeaderWordCount	part_053	converted
 0x19ee08	108	ilDestinationOperandWordCount	part_053	converted
-0x19ee74	184	FUN_0019ee74	part_053	converted
+0x19ee74	184	Compiler__selectLimitsForShaderKind	part_053	converted
 0x19ef2c	32	FudoPs__vslot96_installHardwareTables	part_053	converted
 0x19ef50	324	R520MachineAssembler__vslot5_beginProgram	part_053	converted
 0x19f094	56	R520MachineAssembler__setRsColorFields	part_053	converted

@@ -2401,43 +2401,48 @@ int HashTable__insert_1950e0(table, key, value)
   uint key;
   uint value;
 {
+  int equalResult;
+  uint bucketSize;
+  uint entryArena;
+  uint vectorArena;
+  uint nodeArena;
   uint allocation2;
-  uint uVar1;
+  uint hash;
   uint *allocation;
   undefined4 *slot;
-  int iVar4;
+  int bucketOffset;
   uint loopIndex;
   uint *bucket;
   
-  uVar1 = (*(code *)table[4])(key,key,value);
+  hash = (*(code *)table[4])(key,key,value);
   loopIndex = table[2];
-  iVar4 = (uVar1 & *table - 1) * 4;
-  if (*(int *)(iVar4 + loopIndex) == 0) {
-    uVar1 = table[5];
-    allocation = (uint *)((int (*)())Arena__alloc)(uVar1,0x14);
-    *allocation = uVar1;
-    uVar1 = table[5];
+  bucketOffset = (hash & *table - 1) * 4;
+  if (*(int *)(bucketOffset + loopIndex) == 0) {
+    nodeArena = table[5];
+    allocation = (uint *)((int (*)())Arena__alloc)(nodeArena,0x14);
+    *allocation = nodeArena;
+    vectorArena = table[5];
     allocation[1] = 2;
     allocation[2] = 0;
-    allocation[4] = uVar1;
-    allocation2 = ((int (*)())Arena__alloc)(uVar1,8);
+    allocation[4] = vectorArena;
+    allocation2 = ((int (*)())Arena__alloc)(vectorArena,8);
     allocation[3] = allocation2;
-    *(uint **)(iVar4 + loopIndex) = allocation + 1;
+    *(uint **)(bucketOffset + loopIndex) = allocation + 1;
     loopIndex = table[2];
   }
-  uVar1 = table[5];
-  bucket = *(uint **)(iVar4 + loopIndex);
-  allocation = (uint *)((int (*)())Arena__alloc)(uVar1,0xc);
-  *allocation = uVar1;
+  entryArena = table[5];
+  bucket = *(uint **)(bucketOffset + loopIndex);
+  allocation = (uint *)((int (*)())Arena__alloc)(entryArena,0xc);
+  *allocation = entryArena;
   allocation[1] = key;
   allocation[2] = value;
-  uVar1 = bucket[1];
-  if (uVar1 != 0) {
+  bucketSize = bucket[1];
+  if (bucketSize != 0) {
     loopIndex = 0;
     do {
       if (loopIndex < *bucket) {
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+        if (bucketSize <= loopIndex) {
+          _memset(bucketSize * 4 + bucket[2],0,(loopIndex - bucketSize) * 4 + 4);
           bucket[1] = loopIndex + 1;
         }
         slot = (undefined4 *)(loopIndex * 4 + bucket[2]);
@@ -2447,12 +2452,12 @@ int HashTable__insert_1950e0(table, key, value)
       }
       loopIndex = loopIndex + 1;
       slot = (undefined4 *)*slot;
-      iVar4 = (*(code *)table[3])(*slot,key);
-      if (((iVar4 == 0) && (value == slot[1])) && (allocation + 1 != (uint *)0x0)) {
+      equalResult = (*(code *)table[3])(*slot,key);
+      if (((equalResult == 0) && (value == slot[1])) && (allocation + 1 != (uint *)0x0)) {
         ((int (*)())Arena__free)(*allocation,allocation);
       }
-      uVar1 = bucket[1];
-    } while (loopIndex < uVar1);
+      bucketSize = bucket[1];
+    } while (loopIndex < bucketSize);
   }
   slot = (undefined4 *)((int (*)())Vector__insertAt)(bucket,0);
   *slot = allocation + 1;

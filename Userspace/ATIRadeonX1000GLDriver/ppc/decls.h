@@ -3407,7 +3407,7 @@ extern int ilSkipRelativeAddressWords();
 extern int ilSourceOperandWordCount();
 extern int ilInstructionHeaderWordCount();
 extern int ilDestinationOperandWordCount();
-extern int FUN_0019ee74();
+extern int Compiler__selectLimitsForShaderKind();
 extern int FudoPs__vslot96_installHardwareTables();
 extern int R520MachineAssembler__vslot5_beginProgram();
 extern int R520MachineAssembler__setRsColorFields();

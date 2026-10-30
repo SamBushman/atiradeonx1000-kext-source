@@ -615,7 +615,7 @@ int ILReader__ctor_e5570(ilReader, tokenStream, compiler)
   ilReader[2] = tokenCursor;
   tokenStart = 0;
   if (tokenCursor != 0) {
-    FUN_0019ee74(tokenCursor,*ilReader);
+    Compiler__selectLimitsForShaderKind(tokenCursor,*ilReader);
     tokenStart = ilReader[9] + 4;
     ilReader[9] = tokenStart;
   }
@@ -790,7 +790,7 @@ int ILReader__ctor_e59f0(ilReader, tokenStream, compiler)
   ilReader[2] = tokenCursor;
   tokenStart = 0;
   if (tokenCursor != 0) {
-    FUN_0019ee74(tokenCursor,*ilReader);
+    Compiler__selectLimitsForShaderKind(tokenCursor,*ilReader);
     tokenStart = ilReader[9] + 4;
     ilReader[9] = tokenStart;
   }

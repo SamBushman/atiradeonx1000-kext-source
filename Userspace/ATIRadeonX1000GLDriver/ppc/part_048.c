@@ -1149,35 +1149,35 @@ int ValueKey__replaceWithZeroIfSourcesEqual(ctx)
 }
 
 /* ValueKey__foldMulByZero @ 0x17d57c (148 bytes) */
-int ValueKey__foldMulByZero(param_1)
-  int param_1;
+int ValueKey__foldMulByZero(ctx)
+  int ctx;
 {
-  bool bVar1;
+  bool notLastOperand;
   int callResult;
-  undefined4 uVar3;
+  undefined4 zeroValueNumber;
   int loopIndex;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  undefined4 local_2c;
+  undefined4 zeroVec4X;
+  undefined4 zeroVec4Y;
+  undefined4 zeroVec4Z;
+  undefined4 zeroVec4W;
   
-  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(param_1 + 0x238),0);
+  callResult = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0);
   loopIndex = 1;
-  uVar3 = *(undefined4 *)(callResult + 4);
+  zeroValueNumber = *(undefined4 *)(callResult + 4);
   do {
-    callResult = Inst__writtenLanesAllMatchValue(param_1,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(ctx,zeroValueNumber,loopIndex);
     if (callResult != 0) {
-      local_2c = 0;
-      local_38 = 0;
-      local_34 = 0;
-      local_30 = 0;
-      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(param_1,&local_38);
-      ValueKey__rebuild(param_1);
+      zeroVec4W = 0;
+      zeroVec4X = 0;
+      zeroVec4Y = 0;
+      zeroVec4Z = 0;
+      ((int (*)())ValueKey__rewriteAsMovOfVec4Constant)(ctx,&zeroVec4X);
+      ValueKey__rebuild(ctx);
       return 1;
     }
-    bVar1 = loopIndex != 2;
+    notLastOperand = loopIndex != 2;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (notLastOperand);
   return 0;
 }
 

@@ -5048,30 +5048,30 @@ int R520SchedModel__vslot3_canAddInstruction(schedModel, inst)
   int *inst;
 {
   int callResult;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined1 auStack_60 [80];
+  undefined4 modelStateWord0;
+  undefined4 modelStateWord1;
+  undefined4 modelStateWord2;
+  undefined4 modelStateWord3;
+  undefined4 freeSlotsA;
+  undefined4 freeSlotsB;
+  undefined1 packStateCopy [80];
   
   if ((inst[5] & 0x8000U) == 0) {
     callResult = (**(code **)(*inst + 0x28))(inst);
     if (callResult != 0) {
       return *(int *)(schedModel + 4) == 0;
     }
-    local_78 = *(undefined4 *)(schedModel + 0x18);
-    local_74 = *(undefined4 *)(schedModel + 0x1c);
-    local_70 = *(undefined4 *)(schedModel + 0x20);
-    local_6c = *(undefined4 *)(schedModel + 0x24);
-    ((int (*)())PackState__copy)(auStack_60,schedModel + 0x28);
-    callResult = ((int (*)())SchedModel__classifySlotUse)(inst,&local_78,&local_70);
+    modelStateWord0 = *(undefined4 *)(schedModel + 0x18);
+    modelStateWord1 = *(undefined4 *)(schedModel + 0x1c);
+    modelStateWord2 = *(undefined4 *)(schedModel + 0x20);
+    modelStateWord3 = *(undefined4 *)(schedModel + 0x24);
+    ((int (*)())PackState__copy)(packStateCopy,schedModel + 0x28);
+    callResult = ((int (*)())SchedModel__classifySlotUse)(inst,&modelStateWord0,&modelStateWord2);
     if ((((callResult == 0) ||
-         (callResult = ((int (*)())PackState__tryPlaceInstructionSources)(inst,&local_74,&local_6c,auStack_60,*(undefined4 *)(schedModel + 8)),
-         callResult == 0)) || (callResult = ((int (*)())PackState__countFreeSlots)(auStack_60,&local_68), callResult == 0)) ||
+         (callResult = ((int (*)())PackState__tryPlaceInstructionSources)(inst,&modelStateWord1,&modelStateWord3,packStateCopy,*(undefined4 *)(schedModel + 8)),
+         callResult == 0)) || (callResult = ((int (*)())PackState__countFreeSlots)(packStateCopy,&freeSlotsA), callResult == 0)) ||
        ((*(int *)(schedModel + 100) != 0 &&
-        (callResult = ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,local_68,local_64), callResult == 0
+        (callResult = ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,freeSlotsA,freeSlotsB), callResult == 0
         )))) {
       return false;
     }
