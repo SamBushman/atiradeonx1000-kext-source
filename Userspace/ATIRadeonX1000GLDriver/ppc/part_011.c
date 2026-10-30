@@ -5037,10 +5037,16 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   int movRecord;
   byte in_xer_so = 0;
   bool bVar33;
+  bool changedThisPass;
   bool bVar34;
+  bool foundDefinition;
+  bool noReaderFound;
   bool bVar35;
-  bool bVar36;
-  bool bVar37;
+  bool src0IsTemp;
+  bool zIsOne;
+  bool src1IsTemp;
+  bool zIsZero;
+  bool src2IsTemp;
   bool yIsZero;
   bool wIsZero;
   char readsX;
@@ -5075,14 +5081,14 @@ LAB_0007de3c:
       wIsOne = constantW == 1.0;
       crBitsX = (uint)(byte)((constantX == 0.0) << 2 | (constantX != 0.0) << 1 | in_xer_so & 1);
       iStack_78 = crBitsX << 0x1c;
-      bVar36 = constantZ == 1.0;
-      bVar37 = constantZ == 0.0;
+      zIsOne = constantZ == 1.0;
+      zIsZero = constantZ == 0.0;
       yIsZero = constantY == 0.0;
       wIsZero = constantW == 0.0;
       if (((((!(bool)((byte)((crBitsX << 0xc) >> 8) >> 5 & 1)) ||
             (((xIsOne || (constantX == -1.0)) || (yIsZero)))) ||
-           (((yIsOne || (constantY == -1.0)) || (bVar37)))) ||
-          (((bVar36 || (constantZ == -1.0)) || ((wIsZero || ((wIsOne || (constantW == -1.0)))))))) &&
+           (((yIsOne || (constantY == -1.0)) || (zIsZero)))) ||
+          (((zIsOne || (constantZ == -1.0)) || ((wIsZero || ((wIsOne || (constantW == -1.0)))))))) &&
          (instIndex = instructionIndex + 1, instIndex < instructionCount)) {
         movRecord = instIndex * 0x74;
         allLanesPass = false;
@@ -5102,7 +5108,7 @@ LAB_0007de3c:
                ((yIsOne || (passY = 0, constantY == -1.0)))) {
               passY = 1;
             }
-            if ((((*(int *)(laterRecord + 0x14) != 0) || (bVar37)) || (bVar36)) ||
+            if ((((*(int *)(laterRecord + 0x14) != 0) || (zIsZero)) || (zIsOne)) ||
                (passZ = 0, constantZ == -1.0)) {
               passZ = 1;
             }
@@ -5140,10 +5146,10 @@ LAB_0007de3c:
               }
               if (*(int *)(laterRecord + 0x14) == 0) {
                 *(undefined4 *)(laterRecord + 0x14) = 1;
-                if (bVar37) {
+                if (zIsZero) {
                   *(undefined4 *)(laterRecord + 0x30) = 0x87dd;
                 }
-                else if (bVar36) {
+                else if (zIsOne) {
                   *(undefined4 *)(laterRecord + 0x30) = 0x87de;
                 }
                 else {
@@ -5188,7 +5194,7 @@ LAB_0007e2bc:
 LAB_0007e330:
   instructionIndex = 0;
   do {
-    bVar33 = false;
+    changedThisPass = false;
     for (instIndex = instructionCount; 1 < instIndex; instIndex = instIndex - 1) {
       currentInstruction = instIndex * 0x74;
       instructions = *(int *)(shaderProgram + 0x18) + currentInstruction;
@@ -5207,13 +5213,13 @@ LAB_0007e330:
           laneY = 0;
           laneZ = 0;
           laneW = 0;
-          bVar34 = true;
+          noReaderFound = true;
           do {
             if (((*laterSlotCursor == 2) && (laterSlotCursor[1] == *(int *)(instructions + -0x50))) ||
                (((laterSlotCursor[7] == 2 && (laterSlotCursor[8] == *(int *)(instructions + -0x50))) ||
                 ((laterSlotCursor[0xe] == 2 && (laterSlotCursor[0xf] == *(int *)(instructions + -0x50))))))) {
               bVar35 = true;
-              bVar34 = false;
+              noReaderFound = false;
             }
             else {
               if ((laterSlotCursor[-7] == 2) && (laterSlotCursor[-6] == *(int *)(instructions + -0x50))) {
@@ -5231,7 +5237,7 @@ LAB_0007e330:
 LAB_0007e530:
             symbol = symbol + -1;
           } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar35));
-          if (!bVar34) goto LAB_0007e760;
+          if (!noReaderFound) goto LAB_0007e760;
         }
         scanIndex = instIndex - 1;
         if (scanIndex != 0) {
@@ -5239,24 +5245,24 @@ LAB_0007e530:
           writeEnableZ = 0;
           writeEnableY = 0;
           writeEnableX = 0;
-          bVar34 = false;
+          foundDefinition = false;
           do {
             symbol = *(int *)(shaderProgram + 0x18) + scanIndex * 0x74;
-            bVar35 = *(int *)(symbol + -0x54) == 2;
-            if ((((bVar35) && (*(int *)(symbol + -0x50) == *(int *)(instructions + -0x50))) ||
-                ((bVar36 = *(int *)(symbol + -0x38) == 2, bVar36 &&
+            src0IsTemp = *(int *)(symbol + -0x54) == 2;
+            if ((((src0IsTemp) && (*(int *)(symbol + -0x50) == *(int *)(instructions + -0x50))) ||
+                ((src1IsTemp = *(int *)(symbol + -0x38) == 2, src1IsTemp &&
                  (*(int *)(symbol + -0x34) == *(int *)(instructions + -0x50))))) ||
-               ((bVar37 = *(int *)(symbol + -0x1c) == 2, bVar37 &&
+               ((src2IsTemp = *(int *)(symbol + -0x1c) == 2, src2IsTemp &&
                 (*(int *)(symbol + -0x18) == *(int *)(instructions + -0x50))))) {
               instructionIndex = scanIndex - 1;
               bVar35 = true;
-              bVar34 = true;
+              foundDefinition = true;
             }
-            else if ((((bVar35) && (*(int *)(symbol + -0x50) == *(int *)(instructions + -0x6c))) ||
-                     ((bVar36 && (*(int *)(symbol + -0x34) == *(int *)(instructions + -0x6c))))) ||
-                    ((bVar37 && (*(int *)(symbol + -0x18) == *(int *)(instructions + -0x6c))))) {
+            else if ((((src0IsTemp) && (*(int *)(symbol + -0x50) == *(int *)(instructions + -0x6c))) ||
+                     ((src1IsTemp && (*(int *)(symbol + -0x34) == *(int *)(instructions + -0x6c))))) ||
+                    ((src2IsTemp && (*(int *)(symbol + -0x18) == *(int *)(instructions + -0x6c))))) {
               bVar35 = true;
-              bVar34 = false;
+              foundDefinition = false;
             }
             else {
               bVar35 = false;
@@ -5271,12 +5277,12 @@ LAB_0007e530:
               if (((*(uint *)(instructions + -0x68) <= writeEnableX) && (*(uint *)(instructions + -100) <= writeEnableY)) &&
                  ((*(uint *)(instructions + -0x60) <= writeEnableZ && (*(uint *)(instructions + -0x5c) <= writeEnableW)))) {
                 bVar35 = true;
-                bVar34 = true;
+                foundDefinition = true;
                 instructionIndex = scanIndex;
               }
             }
           } while ((scanIndex != 0) && (!bVar35));
-          if (bVar34) {
+          if (foundDefinition) {
             extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&readsX,
                          &readsY,&readsZ,acStack_85);
             if (((((readsX == '\0') || (writeEnableX != 0)) && ((readsY == '\0' || (writeEnableY != 0))))
@@ -5317,7 +5323,7 @@ LAB_0007e530:
                 } while (scanIndex < instructionCount);
               }
               instructionCount = instructionCount - 1;
-              bVar33 = true;
+              changedThisPass = true;
               *(uint *)(shaderProgram + 0x14) = instructionCount;
             }
             else {
@@ -7053,13 +7059,13 @@ code_r0x000807a8:
               instructionCount = *(uint *)(shaderProgram + 0x14);
             } while (scanIndex < instructionCount);
           }
-          bVar33 = true;
+          changedThisPass = true;
         }
 LAB_00080860:
         instIndex = instIndex + 1;
       } while (instIndex < instructionCount);
     }
-  } while (bVar33);
+  } while (changedThisPass);
   instructionIndex = 0;
   if (instructionCount != 0) {
     instructions = instructionCount * 0x74;
