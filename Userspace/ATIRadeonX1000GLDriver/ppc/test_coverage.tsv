@@ -899,10 +899,10 @@
 0xa0f90	atifsInit	152	yes	
 0xa1040	FUN_000a1040	20	yes	
 0xa1060	arbProgramIsValid	44	yes	
-0xa1090	FUN_000a1090	200	yes	
-0xa1160	FUN_000a1160	48	yes	
-0xa11a0	FUN_000a11a0	64	yes	
-0xa11f0	FUN_000a11f0	192	yes	
+0xa1090	gld_setUnitTargetBits	200	yes	
+0xa1160	gld_getShaderTexUnitMask	48	yes	
+0xa11a0	gld_getFragmentShaderKind	64	yes	
+0xa11f0	gld_collectUsedTexCoordUnits	192	yes	
 0xa12b0	glGenFragmentShadersATI_impl	52	yes	
 0xa12f0	glBindFragmentShaderATI_impl	612	yes	
 0xa1570	glDeleteFragmentShaderATI_impl	312	yes	
@@ -931,61 +931,61 @@
 0xa2e90	atifsAddColorOp	708	no	indirect call (driver context / vtable / callback)
 0xa3160	atifsAddAlphaOp	804	no	indirect call (driver context / vtable / callback)
 0xa3490	atifsSetConstant	196	yes	
-0xa3560	FUN_000a3560	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3610	FUN_000a3610	88	yes	
-0xa3670	FUN_000a3670	48	yes	
-0xa36b0	FUN_000a36b0	212	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3790	FUN_000a3790	716	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3a60	FUN_000a3a60	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa3be0	FUN_000a3be0	2056	yes	
-0xa43f0	FUN_000a43f0	148	no	indirect call (driver context / vtable / callback)
-0xa4490	FUN_000a4490	184	yes	
-0xa4550	FUN_000a4550	372	yes	
-0xa46d0	FUN_000a46d0	144	yes	
-0xa4760	FUN_000a4760	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xa4770	FUN_000a4770	504	yes	
-0xa4980	FUN_000a4980	4768	no	calls an import (free); indirect call (driver context / vtable / callback)
-0xa5c40	FUN_000a5c40	624	no	indirect call (driver context / vtable / callback)
-0xa5ec0	FUN_000a5ec0	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa6140	FUN_000a6140	896	no	indirect call (driver context / vtable / callback)
-0xa64d0	FUN_000a64d0	36	yes	
-0xa6500	FUN_000a6500	828	no	indirect call (driver context / vtable / callback)
-0xa6860	FUN_000a6860	1096	no	indirect call (driver context / vtable / callback)
-0xa6cb0	FUN_000a6cb0	656	no	indirect call (driver context / vtable / callback)
-0xa6f70	FUN_000a6f70	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xa3560	gld_quantizePointSizeInt	164	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3610	gld_roundUpToPowerOfTwo	88	yes	
+0xa3670	gld_isPointAttenuationActive	48	yes	
+0xa36b0	gld_scalePointSizeToPixels	212	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3790	gld_buildCoverageByteTable	716	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3a60	gld_buildCoverageRampTable	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa3be0	gld_setPrimitiveInputRegisters	2056	yes	
+0xa43f0	gld_freePointMaskCache	148	no	indirect call (driver context / vtable / callback)
+0xa4490	gld_invalidateCachedPointMasks	184	yes	
+0xa4550	gld_markBoundObjectsDirty	372	yes	
+0xa46d0	gld_refreshActivePointMask	144	yes	
+0xa4760	gld_getActiveSampleIndex	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xa4770	gld_computePointSizePixels	504	yes	
+0xa4980	gld_buildSmoothPointMask	4768	no	calls an import (free); indirect call (driver context / vtable / callback)
+0xa5c40	gld_emitClearColorPacket	624	no	indirect call (driver context / vtable / callback)
+0xa5ec0	gld_updateSampleCoverage	620	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa6140	gld_resetRasterStateForInternalDraw	896	no	indirect call (driver context / vtable / callback)
+0xa64d0	gld_markFastClearFlag	36	yes	
+0xa6500	gld_emitClearFillPacket	828	no	indirect call (driver context / vtable / callback)
+0xa6860	gld_emitInternalViewportPacket	1096	no	indirect call (driver context / vtable / callback)
+0xa6cb0	gld_clearStreamBuffers	656	no	indirect call (driver context / vtable / callback)
+0xa6f70	gld_callocBytes	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xa6f80	noop_a6f80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xa6f90	FUN_000a6f90	168	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa7050	FUN_000a7050	2324	no	indirect call (driver context / vtable / callback)
+0xa6f90	gld_normalizeVec3	168	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa7050	gld_initContextDispatch	2324	no	indirect call (driver context / vtable / callback)
 0xa7970	gldFreeEngineState	240	no	indirect call (driver context / vtable / callback)
-0xa7a60	FUN_000a7a60	496	no	indirect call (driver context / vtable / callback)
+0xa7a60	gld_updateDrawBufferConfig	496	no	indirect call (driver context / vtable / callback)
 0xa7c60	gldMarkAllStateDirty	176	yes	
-0xa7d10	FUN_000a7d10	344	yes	
-0xa7e80	FUN_000a7e80	24	yes	
-0xa7ea0	FUN_000a7ea0	48	yes	
+0xa7d10	gld_buildActiveUnitList	344	yes	
+0xa7e80	gld_markDirty10	24	yes	
+0xa7ea0	gld_clearStateBit28MarkDirty	48	yes	
 0xa7ed0	noop_a7ed0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xa7ee0	FUN_000a7ee0	980	yes	
-0xa82c0	FUN_000a82c0	96	yes	
-0xa8320	FUN_000a8320	20	yes	
-0xa8340	FUN_000a8340	720	yes	
-0xa8630	FUN_000a8630	968	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa8a00	FUN_000a8a00	488	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa8c00	FUN_000a8c00	356	yes	
-0xa8d70	FUN_000a8d70	168	yes	
-0xa8e20	FUN_000a8e20	544	yes	
-0xa9070	FUN_000a9070	1476	yes	
-0xa9640	FUN_000a9640	1116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa9ac0	FUN_000a9ac0	7656	no	indirect call (driver context / vtable / callback)
-0xab900	FUN_000ab900	60	yes	
-0xab940	FUN_000ab940	96	yes	
-0xab9b0	FUN_000ab9b0	240	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xabab0	FUN_000abab0	164	no	indirect call (driver context / vtable / callback)
-0xabb60	FUN_000abb60	96	yes	
-0xabbd0	FUN_000abbd0	312	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xabd10	FUN_000abd10	1640	no	indirect call (driver context / vtable / callback)
-0xac540	FUN_000ac540	476	no	indirect call (driver context / vtable / callback)
-0xac720	FUN_000ac720	7944	no	indirect call (driver context / vtable / callback)
-0xaec40	FUN_000aec40	3872	no	indirect call (driver context / vtable / callback)
-0xafe40	FUN_000afe40	5932	no	indirect call (driver context / vtable / callback)
+0xa7ee0	gld_updateTextureUnitState	980	yes	
+0xa82c0	gld_dropStaleTextureShadow	96	yes	
+0xa8320	gld_clearPacketSlot	20	yes	
+0xa8340	gld_copyTexCombinerSources	720	yes	
+0xa8630	gld_updateInverseMatrix	968	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa8a00	gld_transformClipPlanes	488	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa8c00	gld_updateProgramFlags	356	yes	
+0xa8d70	gld_updatePolygonModeFlags	168	yes	
+0xa8e20	gld_updateLightingFlags	544	yes	
+0xa9070	gld_commitTexEnvUnits	1476	yes	
+0xa9640	gld_updatePointState	1116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa9ac0	gld_validateDirtyState	7656	no	indirect call (driver context / vtable / callback)
+0xab900	gld_selectProgramCallback	60	yes	
+0xab940	gld_convertDestOperand	96	yes	
+0xab9b0	gld_classifyOperand	240	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xabab0	gld_uploadParamConstants	164	no	indirect call (driver context / vtable / callback)
+0xabb60	gld_getBoundProgramId	96	yes	
+0xabbd0	gld_scanOperandRegisterCount	312	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xabd10	gld_scanProgramTokens	1640	no	indirect call (driver context / vtable / callback)
+0xac540	gld_emitUnitSelectTokens	476	no	indirect call (driver context / vtable / callback)
+0xac720	gld_emitFormatConvertTokens	7944	no	indirect call (driver context / vtable / callback)
+0xaec40	gld_emitInstructionTokens	3872	no	indirect call (driver context / vtable / callback)
+0xafe40	gld_compileFragmentProgram	5932	no	indirect call (driver context / vtable / callback)
 0xb15d0	ilTokenBufPush	180	no	indirect call (driver context / vtable / callback)
 0xb1690	atifsEmitFinalColorClamp	476	no	indirect call (driver context / vtable / callback)
 0xb1870	atifsEmitAddSecondaryColor	800	no	indirect call (driver context / vtable / callback)
@@ -997,39 +997,39 @@
 0xb30e0	atifsEmitInputDeclarations	1352	no	indirect call (driver context / vtable / callback)
 0xb3630	atifsCompileCurrentShader	3316	no	indirect call (driver context / vtable / callback)
 0xb43f0	noop_b43f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xb4400	FUN_000b4400	2136	no	calls an import (free)
-0xb4cd0	FUN_000b4cd0	608	yes	
-0xb4f50	FUN_000b4f50	180	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xb5010	FUN_000b5010	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xb50a0	FUN_000b50a0	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb4400	gld_compileILProgram	2136	no	calls an import (free)
+0xb4cd0	gld_decodeProgramInterface	608	yes	
+0xb4f50	gld_storeConstantVec4	180	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb5010	gld_emitSlotParamIfDirty	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb50a0	gld_emitTextureUnitScaleParams	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xb5190	noop_b5190	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xb51a0	FUN_000b51a0	376	yes	
-0xb5320	FUN_000b5320	204	yes	
+0xb51a0	gld_emitSlotViewportTransforms	376	yes	
+0xb5320	gld_emitSlotTransformParams	204	yes	
 0xb53f0	noop_b53f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xb5400	FUN_000b5400	928	yes	
-0xb57a0	FUN_000b57a0	688	no	indirect call (driver context / vtable / callback)
-0xb5a60	FUN_000b5a60	244	yes	
-0xb5b60	FUN_000b5b60	64	yes	
-0xb5ba0	FUN_000b5ba0	36	yes	
-0xb5bd0	FUN_000b5bd0	36	yes	
-0xb5c00	FUN_000b5c00	828	no	indirect call (driver context / vtable / callback)
-0xb5f40	FUN_000b5f40	100	no	calls an import (free)
-0xb5fb0	FUN_000b5fb0	100	no	indirect call (driver context / vtable / callback)
-0xb6020	FUN_000b6020	1360	yes	
-0xb6580	FUN_000b6580	2448	yes	
-0xb6f20	FUN_000b6f20	928	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xb5400	gld_emitProgramStatePackets	928	yes	
+0xb57a0	gld_compileFragmentProgramImage	688	no	indirect call (driver context / vtable / callback)
+0xb5a60	gld_emitProgramConstants	244	yes	
+0xb5b60	gld_emitProgramStateAndConstants	64	yes	
+0xb5ba0	gld_emitProgramStateOnly	36	yes	
+0xb5bd0	gld_emitProgramConstantsOnly	36	yes	
+0xb5c00	gld_bindProgramStateAndEmit	828	no	indirect call (driver context / vtable / callback)
+0xb5f40	gld_freeProgramImage	100	no	calls an import (free)
+0xb5fb0	gld_destroyUnitCmdLists	100	no	indirect call (driver context / vtable / callback)
+0xb6020	gld_buildUnitSetupCmdList	1360	yes	
+0xb6580	ffpsBuildProgram	2448	yes	
+0xb6f20	gld_updateUnitBiasRegisters	928	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xb72d0	extvsInstReadsTempComponents	11108	yes	
 0xb9f10	extvsOptimizeProgram	11376	yes	
-0xbd9a0	FUN_000bd9a0	160	no	indirect call (driver context / vtable / callback)
-0xbda40	FUN_000bda40	1016	yes	
-0xbde70	FUN_000bde70	1504	no	indirect call (driver context / vtable / callback)
-0xbe460	FUN_000be460	2472	yes	
-0xbee40	FUN_000bee40	244	yes	
-0xbef40	FUN_000bef40	1192	yes	
-0xbf400	FUN_000bf400	1260	yes	
-0xbf910	FUN_000bf910	796	yes	
-0xbfcc0	FUN_000bfcc0	440	yes	
-0xbfed0	FUN_000bfed0	2464	yes	
+0xbd9a0	gld_emitLightingStatePacket	160	no	indirect call (driver context / vtable / callback)
+0xbda40	gld_updateTexCombinerState	1016	yes	
+0xbde70	psnDecDecodeFragmentProgram	1504	no	indirect call (driver context / vtable / callback)
+0xbe460	psnEncodeHwProgramPhased	2472	yes	
+0xbee40	psnCheckLimitsAndGenerate	244	yes	
+0xbef40	psnRemapTempRegisters	1192	yes	
+0xbf400	psnPlanPhases	1260	yes	
+0xbf910	ilRemapSwizzleTriple	796	yes	
+0xbfcc0	ilRemapSwizzleSingle	440	yes	
+0xbfed0	psnEncodeHwProgram	2464	yes	
 0xc0880	psnDecRecomputeSourceUsage	1832	yes	
 0xc0fd0	psnDecCanonicalizeEntry	1936	yes	
 0xc1780	psnDecDecodeHwInstruction	1416	yes	
@@ -1062,7 +1062,7 @@
 0xc57b0	psnAccumulateAlphaSelectRead	392	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xc59c0	psnRaReleaseUse	580	yes	
 0xc5c50	psnRaAssignDefinition	476	yes	
-0xc5e60	FUN_000c5e60	1524	yes	
+0xc5e60	psnAnalyzeProgram	1524	yes	
 0xc6470	psnReallocateTemps	2436	yes	
 0xc6e50	scCallbackFree	40	no	calls an import (free)
 0xc6e80	scCallbackGetFlagZero	16	yes	
@@ -1071,7 +1071,7 @@
 0xc6f60	scCallbackFclose	44	no	calls an import (fclose)
 0xc6f90	scCallbackFwrite	40	yes	
 0xc6fc0	scCallbackFread	40	yes	
-0xc6ff0	FUN_000c6ff0	464	yes	
+0xc6ff0	scCreateForContext	464	yes	
 0xc71e0	ilFreeRecordList	76	yes	
 0xc7240	ilSelectorOneToThreeOrZero	44	yes	
 0xc7270	ilRecordInputSemantic	24	yes	
@@ -1082,9 +1082,9 @@
 0xc73c0	ilPopFreeRegister	144	yes	
 0xc7460	ilEmitProjectiveDivide	468	yes	
 0xc7650	ilEmitShadowCompare	680	yes	
-0xc7930	FUN_000c7930	2004	yes	
+0xc7930	ilEmitShadowStateTokens	2004	yes	
 0xc8110	ilEmitPrologue	1252	yes	
-0xc8600	FUN_000c8600	316	yes	
+0xc8600	ilRecordRegisterUse	316	yes	
 0xc8760	ilRemapSourceOperandRegister	104	yes	
 0xc87d0	ilMarkOperandRegisterUsed	296	yes	
 0xc8910	ilMarkInstructionRegistersUsed	400	yes	
@@ -1093,16 +1093,16 @@
 0xc8e30	ilStoreFloat4Constant	28	no	tiny (28 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xc8e50	ilAssembleProgram	7396	no	calls an import (exit); calls an import (free); calls an import (malloc)
 0xcae90	ilRewriteForTextureState	7760	no	calls an import (exit); calls an import (free); calls an import (malloc)
-0xcd05c	FUN_000cd05c	244	yes	
+0xcd05c	scCreate	244	yes	
 0xcd154	scDestroy	92	no	indirect call (driver context / vtable / callback)
-0xcd1b0	FUN_000cd1b0	20	yes	
-0xcd1c4	FUN_000cd1c4	92	yes	
+0xcd1b0	scSetCallbackTablesChecked	20	yes	
+0xcd1c4	scCompile	92	yes	
 0xcd1d8	scCheckHandle	20	yes	
 0xcd1ec	scDisassembleIL	40	yes	
 0xcd214	scDumpSrcShader	40	yes	
 0xcd23c	scDumpShader	40	yes	
 0xcd264	scDumpShaderToString	40	yes	
-0xcd290	FUN_000cd290	88	yes	
+0xcd290	vsOpcodeSourceCount	88	yes	
 0xcd388	scDisassembleILImpl	28	yes	
 0xcd3a4	scLogToSink	96	yes	
 0xcd404	scDumpSrcShaderImpl	1952	yes	
@@ -1110,17 +1110,17 @@
 0xcdbe4	scDumpShaderToStringImpl	60	yes	
 0xcdc20	noop_cdc20	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xcdc24	scShaderStateFlag	24	yes	
-0xcdc3c	FUN_000cdc3c	996	yes	
+0xcdc3c	vsdisFormatFloat	996	yes	
 0xce020	vsdisClearSinkRecord	24	yes	
 0xce038	vsdisClearSinkRecord2	24	yes	
-0xce050	FUN_000ce050	248	yes	
-0xce148	FUN_000ce148	836	yes	
+0xce050	scDisasmPrintf	248	yes	
+0xce148	vsDisasmSourceOperand	836	yes	
 0xce4e4	vsdisPrintInputDx	48	yes	
 0xce514	vsdisPrintOutputMapping	864	yes	
 0xce88c	vsdisPrintShaderData	480	yes	
-0xcea6c	FUN_000cea6c	660	yes	
-0xced58	FUN_000ced58	1288	yes	
-0xcf2ec	FUN_000cf2ec	1952	yes	
+0xcea6c	vsDisasmDestOperand	660	yes	
+0xced58	vsDisasmMathOpcode	1288	yes	
+0xcf2ec	vsDisasmVectorOpcode	1952	yes	
 0xcfc94	vsdisFlowOpcodeName	144	yes	
 0xcfd24	vsdisPrintFlowInstruction	524	yes	
 0xcff30	vsDisassembleLine	252	yes	
@@ -1133,10 +1133,10 @@
 0xd0888	psnFormatAlphaSource	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd0b68	psnNormalizeProgram	1344	yes	
 0xd10a8	psnSwizzleIsAlphaSourceForm	52	yes	
-0xd10dc	FUN_000d10dc	712	yes	
-0xd13a4	FUN_000d13a4	640	yes	
-0xd1624	FUN_000d1624	536	yes	
-0xd183c	FUN_000d183c	13160	yes	
+0xd10dc	psDisasmFormatRegister	712	yes	
+0xd13a4	psDisasmFormatRgbSource	640	yes	
+0xd1624	psDisasmFormatAlphaSource	536	yes	
+0xd183c	psnDumpPixelShader	13160	yes	
 0xd4de8	psnClearSinkRecord	16	yes	
 0xd4df8	psnClearSinkRecord2	16	yes	
 0xd4e08	scDumpPixelProgramPsn	92	yes	

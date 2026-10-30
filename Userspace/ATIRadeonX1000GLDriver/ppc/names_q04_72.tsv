@@ -1,0 +1,36 @@
+use	psnDecReplaceSourceAddress	iVar18	scanHalfCursor	INFERRED	entry advanced 0x40 per half while collecting which address slots the other sources use	^\s*iVar18\ =\ param_1;$	+1
+use	psnDecReplaceSourceAddress	iVar18	scanHalfCursor	INFERRED	entry advanced 0x40 per half while collecting which address slots the other sources use	^\s*puVar19\ =\ \(ushort\ \*\)\(iVar18\ \+\ 8\);$	+1
+use	psnDecReplaceSourceAddress	iVar18	scanHalfCursor	INFERRED	entry advanced 0x40 per half while collecting which address slots the other sources use	^\s*iVar18\ =\ iVar18\ \+\ 0x40;$	+1
+use	psnDecReplaceSourceAddress	iVar15	selectBankOffset	INFERRED	0 or 3: offset into the six address slot ids (rgb / alpha) chosen by the select bits 0x300	^\s*if\ \(\(\(uVar10\ <\ 3\)\ \&\&\ \(\(puVar6\[1\]\ \&\ 0x1f\)\ ==\ param_6\)\)\ \&\&$	+3
+use	psnDecReplaceSourceAddress	iVar15	selectBankOffset	INFERRED	0 or 3: offset into the six address slot ids (rgb / alpha) chosen by the select bits 0x300	^\s*\*\(short\ \*\)\(\(iVar15\ \+\ uVar10\)\ \*\ 2\ \+\ param_1\ \+\ 0x80\)\ =\ \(short\)param_2;$	+1
+use	psnDecReplaceSourceAddress	iVar12	scanHalfCursorB	INFERRED	entry advanced 0x40 per half, base for the +0x2a source operand test	^\s*iVar12\ =\ param_1;$	+1
+use	psnDecReplaceSourceAddress	iVar12	scanHalfCursorB	INFERRED	entry advanced 0x40 per half, base for the +0x2a source operand test	^\s*if\ \(\(\(uVar4\ \&\ 0x100\)\ !=\ 0\)\ \&\&$	+2
+use	psnDecReplaceSourceAddress	iVar12	scanHalfCursorB	INFERRED	entry advanced 0x40 per half, base for the +0x2a source operand test	^\s*if\ \(\(\(uVar4\ \&\ 0x200\)\ !=\ 0\)\ \&\&$	+2
+use	psnDecReplaceSourceAddress	iVar12	scanHalfCursorB	INFERRED	entry advanced 0x40 per half, base for the +0x2a source operand test	^\s*iVar12\ =\ iVar12\ \+\ 0x40;$	+1
+use	psnDecReplaceSourceAddress	iVar12	addrSlotScanCursor	INFERRED	entry advanced 2 per address slot while looking for a free or equal slot	^\s*iVar12\ =\ param_1;$@2	+5
+use	psnDecReplaceSourceAddress	iVar12	addrSlotScanCursor	INFERRED	entry advanced 2 per address slot while looking for a free or equal slot	^\s*iVar12\ =\ iVar12\ \+\ 2;$	+1
+use	psnDecReplaceSourceAddress	bVar1	slotLoopContinue	INFERRED	loop-continue flag of the first loop	^\s*bVar1\ =\ iVar15\ !=\ 2;$	+1
+use	psnDecReplaceSourceAddress	bVar1	slotLoopContinue	INFERRED	loop-continue flag of the first loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecReplaceSourceAddress	bVar1	replaceAlpha	INFERRED	alpha address slots (select bit 0x200) are being replaced	^\s*bVar1\ =\ uVar20\ >>\ 9\ !=\ 0;$	+1
+use	psnDecReplaceSourceAddress	bVar1	replaceAlpha	INFERRED	alpha address slots (select bit 0x200) are being replaced	^\s*while\ \(\(\(\(bVar2\ \&\&\ \(\*\(ushort\ \*\)\(iVar12\ \+\ 0x80\)\ !=\ 0xffff\)\)\ \&\&$	+4
+use	psnDecReplaceSourceAddress	bVar1	replaceAlpha	INFERRED	alpha address slots (select bit 0x200) are being replaced	^\s*if\ \(bVar1\)\ \{$	+1
+local	psnDecReplaceSourceAddress	bVar2	replaceRgb	INFERRED	rgb address slots (select bit 0x100) are being replaced
+local	psnDecReplaceSourceAddress	bVar3	loopContinue	INFERRED	loop-continue flag shared by the clearing and scanning loops
+local	psnDecReplaceSourceAddress	uVar4	sourceSelectWord	INFERRED	source select word of the slot being scanned (bits 8-9 usage, bits 0-1 address slot)
+local	psnDecReplaceSourceAddress	uVar5	newOffsetShort	INFERRED	the 16-bit new address offset (low half of param_5)
+local	psnDecReplaceSourceAddress	puVar6	sourceSlotPtr	INFERRED	pointer to the source slot pair {select word, register word} of the half being rewritten
+local	psnDecReplaceSourceAddress	puVar7	usageClearCursor	INFERRED	cursor over the usage flag array while it is cleared
+local	psnDecReplaceSourceAddress	uVar8	slotAddrSel	INFERRED	address slot number (select word & 3) used as index into the usage flags
+local	psnDecReplaceSourceAddress	piVar9	usageFlagCursor	INFERRED	cursor over the usage flag array (3 rgb flags, 3 alpha flags)
+local	psnDecReplaceSourceAddress	uVar10	sourceAddrSel	INFERRED	address slot number (select word & 3) of the source being rewritten
+local	psnDecReplaceSourceAddress	uVar11	halfIndex	INFERRED	1 when the replacement targets the alpha half (param_4 == 8), else 0
+local	psnDecReplaceSourceAddress	uVar14	sourceIndex	INFERRED	index (0..2) of the source slot being examined; also left in r8 as a stale argument
+local	psnDecReplaceSourceAddress	puVar17	addrSlotClearPtr	INFERRED	cursor over the address slot words (+0x80) whose usage flag is clear
+local	psnDecReplaceSourceAddress	puVar19	scanSlotPtr	INFERRED	cursor over the source slots of a half while collecting usage
+local	psnDecReplaceSourceAddress	uVar20	replaceSelectBits	INFERRED	(oldAddressOffset & 8) << 6 | 0x100 when the low bits are set: bit 8 rgb, bit 9 alpha
+local	psnDecReplaceSourceAddress	aiStack_58	addressUsageFlags	INFERRED	2 x 3 ints (+ padding): which of the three rgb / three alpha address slots are used by the other sources
+local	psnDecReplaceSourceAddress	param_2	oldAddrWord	INFERRED	address slot value being replaced
+local	psnDecReplaceSourceAddress	param_3	newAddrWord	INFERRED	address slot value to store
+local	psnDecReplaceSourceAddress	param_4	halfSelect	INFERRED	8 selects the alpha half; reused afterwards as a byte offset into the usage flags
+local	psnDecReplaceSourceAddress	param_6	sourceReg	INFERRED	5-bit source register number to match, later also used as the starting source index
+local	psnDecReplaceSourceAddress	param_8	freeSlotIndex	INFERRED	index of the address slot found for the new value; also left in r10 as a stale argument

@@ -1,0 +1,31 @@
+local	FUN_000abbd0	iVar1	registerCount	INFERRED	(operand word & 0xffff) + 1: highest register index + 1 used by the operand; raises the program record's count at +0x84
+local	FUN_000abbd0	puVar2	nextWordCursor	INFERRED	cursor after the current operand word and its optional extension word
+local	FUN_000abbd0	puVar3	operandCursor	INFERRED	cursor over the packed operand words (one word, or two when bit 22 is set)
+local	FUN_000abbd0	uVar4	operandWord	INFERRED	current operand word: bits 16-21 kind, bit 22 extension flag, bits 0-15 register index
+local	FUN_000abbd0	param_1	packet	INFERRED	packet whose word 1 (and 2) are optional header words followed by the operand words
+local	FUN_000abbd0	param_2	hasHeaderWord	INFERRED	nonzero when a header word precedes the operands
+local	FUN_000abbd0	param_3	operandCount	INFERRED	number of operand words to scan (up to 3)
+local	FUN_000a7d10	bVar1	unitCount	INFERRED	byte at glContext+0x2b: number of texture units
+local	FUN_000a7d10	iVar2	listByteOffset	INFERRED	index * 4 into the active-unit list at glContext+0x1824
+local	FUN_000a7d10	iVar3	activeUnitCount	INFERRED	number of active units found (later scaled by 16 for the size estimate)
+local	FUN_000a7d10	uVar4	unitsLeftMasked	INFERRED	countdown over the unit count byte at +0x13b0 (mask-driven loop)
+local	FUN_000a7d10	iVar5	baseCost	INFERRED	0 / 1 / 5: fixed cost of the current mode (1 for the chip variant or special bits, 5 when bit 24 is set)
+use	FUN_000a7d10	uVar6	ctx44Word	INFERRED	glContext+0x44 state word (bits 13, 17, 23, 24 select the paths)	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+4
+use	FUN_000a7d10	uVar6	ctx44Word	INFERRED	glContext+0x44 state word (bits 13, 17, 23, 24 select the paths)	^\s*if\ \(\(uVar6\ \&\ 0x1000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a7d10	uVar6	ctx44Word	INFERRED	glContext+0x44 state word (bits 13, 17, 23, 24 select the paths)	^\s*if\ \(\(uVar6\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000a7d10	uVar6	ctx44Word	INFERRED	glContext+0x44 state word (bits 13, 17, 23, 24 select the paths)	^\s*if\ \(\(uVar6\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000a7d10	uVar6	ctx44Word	INFERRED	glContext+0x44 state word (bits 13, 17, 23, 24 select the paths)	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+1
+use	FUN_000a7d10	uVar6	unitsLeft	INFERRED	countdown over the unit count byte at +0x2b	^\s*uVar6\ =\ \(uint\)bVar1;$	+1
+use	FUN_000a7d10	uVar6	unitsLeft	INFERRED	countdown over the unit count byte at +0x2b	^\s*if\ \(\(bVar1\ ==\ 0\)\ \|\|\ \(uVar6\ ==\ 0x80000000\)\)\ \{$	+2
+use	FUN_000a7d10	uVar6	unitsLeft	INFERRED	countdown over the unit count byte at +0x2b	^\s*uVar6\ =\ uVar6\ \-\ 1;$	+2
+use	FUN_000a7d10	uVar6	enabledUnitBits	INFERRED	per-unit enable byte shifted right by the unit index	^\s*uVar6\ =\ \(int\)\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00001135\)\[param_1\]\ >>\ \(uVar9\ \&\ 0x3f\);$	+1
+use	FUN_000a7d10	uVar6	enabledUnitBits	INFERRED	per-unit enable byte shifted right by the unit index	^\s*uVar6\ =\ \(int\)\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000011d3\)\[param_1\]\ >>\ \(uVar9\ \&\ 0x3f\);$	+1
+use	FUN_000a7d10	uVar6	enabledUnitBits	INFERRED	per-unit enable byte shifted right by the unit index	^\s*if\ \(\(uVar6\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a7d10	iVar8	unitShadowCursor	INFERRED	glContext advanced 4 per unit (bound texture shadows at +0x13f8)	^\s*iVar8\ =\ param_1;$	+1
+use	FUN_000a7d10	iVar8	unitShadowCursor	INFERRED	glContext advanced 4 per unit (bound texture shadows at +0x13f8)	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar8\)\ !=\ 0\)\ \{$	+1
+use	FUN_000a7d10	iVar8	unitShadowCursor	INFERRED	glContext advanced 4 per unit (bound texture shadows at +0x13f8)	^\s*iVar8\ =\ iVar8\ \+\ 4;$	+1
+use	FUN_000a7d10	iVar8	listByteOffsetMasked	INFERRED	index * 4 into the active-unit list (mask-driven loop)	^\s*iVar8\ =\ iVar3\ \*\ 4;$	+1
+use	FUN_000a7d10	iVar8	listByteOffsetMasked	INFERRED	index * 4 into the active-unit list (mask-driven loop)	^\s*\*\(uint\ \*\)\(iVar8\ \+\ param_1\ \+\ 0x1824\)\ =\ uVar9;$	+1
+local	FUN_000a7d10	param_1	glContext	INFERRED	the embedded stream object (+0x44 state word, +0x1804 cost)
+func	FUN_000abbd0	gld_scanOperandRegisterCount	INFERRED	scans up to three packed operand words after the packet header and raises the register count at programRecord+0x84; returns the cursor after the last word
+func	FUN_000a7d10	gld_buildActiveUnitList	INFERRED	builds the list of active texture units (glContext+0x1824) from the bound-texture shadows or the enabled-unit mask and stores baseCost + count*16 at glContext+0x1804

@@ -1,0 +1,48 @@
+func	FUN_000ce050	scDisasmPrintf	INFERRED	formats a disassembly line into a 152-byte buffer, trims trailing "?", spaces, commas and tabs, and passes it to the output callback at disasmCtx+8
+func	FUN_000b4f50	gld_storeConstantVec4	INFERRED	stores four doubles as 4 floats (or as fp24 words when param_7 == 0) at slot+0x8c..0x98 of the constant table entry param_2
+func	FUN_000a6f70	gld_callocBytes	INFERRED	calloc(n, 1): the allocator installed at ctx+0x24c
+func	FUN_000ab940	gld_convertDestOperand	INFERRED	maps a destination operand kind/value to {value, kind code 4/0x17/0x18} and a special flag
+func	FUN_000bf910	ilRemapSwizzleTriple	INFERRED	maps a swizzle code to three component selects {x, y, z} and a reduced code
+func	FUN_000bfcc0	ilRemapSwizzleSingle	INFERRED	maps a swizzle code to one component select and a reduced code
+func	FUN_000c8600	ilRecordRegisterUse	INFERRED	records the use of a register index/kind (0x10..0x18) in the register usage tables of the IL state (min/max range, per-kind flag arrays)
+func	FUN_000b5b60	gld_emitProgramStateAndConstants	INFERRED	emits both the program state packets and the program constants
+func	FUN_000b5ba0	gld_emitProgramStateOnly	INFERRED	emits only the program state packets (gld_emitProgramStatePackets)
+func	FUN_000b5bd0	gld_emitProgramConstantsOnly	INFERRED	emits only the program constants (gld_emitProgramConstants)
+func	FUN_000a7ea0	gld_clearStateBit28MarkDirty	INFERRED	clears ctx+0x44 bit 28 and marks the draw state dirty (+0x38 |= 0x400, +0x3c |= 0x1018)
+func	FUN_000a7e80	gld_markDirty10	INFERRED	sets the change flag and ctx+0x38 bit 4
+func	FUN_000a36b0	gld_scalePointSizeToPixels	INFERRED	viewport dimension (ctx+8) * 0.5 * (point size + optional offset): size in pixels
+func	FUN_000cd1b0	scSetCallbackTablesChecked	INFERRED	scSetCallbackTables with a null-handle check (returns 3)
+func	FUN_000a11f0	gld_collectUsedTexCoordUnits	INFERRED	builds the mask of texture coordinate units (0x84c0..) referenced by the shader instructions into ctx+0x1135
+func	FUN_000a4490	gld_invalidateCachedPointMasks	INFERRED	marks every cached point mask entry stale and flags the active unit dirty
+func	FUN_000a8d70	gld_updatePolygonModeFlags	INFERRED	updates bit 2 of ctx+0x1928 from the front/back polygon mode (GL_FILL) and marks state dirty
+func	FUN_000a43f0	gld_freePointMaskCache	INFERRED	frees every entry of the point mask cache list and its textures, resets the cache pointers
+func	FUN_000b5f40	gld_freeProgramImage	INFERRED	frees the compiled program image (record list +0x5648) hanging off the program object
+func	FUN_000ab900	gld_selectProgramCallback	INFERRED	selects the program dispatch callback (PTR_FUN_001e8b40 / 001e8b3c) from the ctx+0x1868 flag
+func	FUN_000ac540	gld_emitUnitSelectTokens	INFERRED	appends the opcode 0xe token and the unit select token (0x170000 | unit) to the token vector
+func	FUN_000ce148	vsDisasmSourceOperand	INFERRED	disassembles a vertex shader source operand word into text (register, swizzle, modifiers)
+func	FUN_000cea6c	vsDisasmDestOperand	INFERRED	disassembles a vertex shader destination operand word into text (with _sat)
+func	FUN_000ced58	vsDisasmMathOpcode	INFERRED	mnemonic table (NOPme, EXPP, LOGP, ...) and operands of a vertex shader math instruction
+func	FUN_000cdc3c	vsdisFormatFloat	INFERRED	formats a double with the given number of significant digits into outText
+func	FUN_000d10dc	psDisasmFormatRegister	INFERRED	formats a pixel shader register reference (r%02u, c%02u, r[AL+%02u], (%s))
+func	FUN_000d13a4	psDisasmFormatRgbSource	INFERRED	formats an rgb source operand with its modifier (neg/abs/nab), select and swizzle
+func	FUN_000d1624	psDisasmFormatAlphaSource	INFERRED	formats an alpha source operand with its modifier, select and component
+func	FUN_000cf2ec	vsDisasmVectorOpcode	INFERRED	mnemonic table (NOPve, DP4, MULve, ADD, MAD, DST ...) and operand counts of a vertex shader vector instruction
+func	FUN_000cd05c	scCreate	INFERRED	creates the shader compiler from the options struct (callbacks) and the create-info, returns the handle
+func	FUN_000cd290	vsOpcodeSourceCount	INFERRED	number of source operands (0..3) of a vertex shader opcode
+func	FUN_000abab0	gld_uploadParamConstants	INFERRED	evaluates the program parameters (FUN_00024fe0) into a stack array and uploads them through the callback at ctx+0x1280
+func	FUN_000abb60	gld_getBoundProgramId	INFERRED	returns the id (+8) of the program record of the bound fragment program, or 0
+func	FUN_000a46d0	gld_refreshActivePointMask	INFERRED	re-uploads the active point mask (FUN_000309c0) and marks the unit dirty
+func	FUN_000a11a0	gld_getFragmentShaderKind	INFERRED	0 none, 1 shader bound, 3 shader bound with a dependent texture read (+0x6c)
+func	FUN_000a3670	gld_isPointAttenuationActive	INFERRED	non-zero when point attenuation is on (ctx+0xe8 bit 0, or ctx+0x44 bit 7 in the program path)
+func	FUN_000a1160	gld_getShaderTexUnitMask	INFERRED	returns the texture unit mask (ctx+0x1135) when a shader program is bound, else 0
+func	FUN_000a64d0	gld_markFastClearFlag	INFERRED	sets the fast-clear flag (+0xc5) on the draw surface record
+func	FUN_000a8320	gld_clearPacketSlot	INFERRED	zeroes one packet slot word (ctx+0x1638 + 4*index)
+func	FUN_000a1090	gld_setUnitTargetBits	INFERRED	writes per-unit texture target bits (2, 1 or 8) into ctx+0x48+4*unit for the enabled units
+func	FUN_000a3560	gld_quantizePointSizeInt	INFERRED	clamps/rounds a point size to the integer limits ctx+0x13e0/0x13e4
+func	FUN_000b5010	gld_emitSlotParamIfDirty	INFERRED	if the slot is valid and not yet sent, stores the four parameter doubles through gld_storeConstantVec4
+func	FUN_000a82c0	gld_dropStaleTextureShadow	INFERRED	clears the unit texture shadow when the bound texture is not among the five attachment entries
+func	FUN_000a4760	gld_getActiveSampleIndex	INFERRED	returns ctx+0x29ac
+func	FUN_000c6e40	scCallbackAlloc	INFERRED	allocator callback of the shader compiler options: calloc(n, 1)
+func	FUN_000b5fb0	gld_destroyUnitCmdLists	INFERRED	destroys the four cached unit command lists (ctx+0x1448..) through the destroy callback at ctx+0x1224
+func	FUN_000bd9a0	gld_emitLightingStatePacket	INFERRED	emits the lighting state register (0x860) packet, analyzes the light state and builds the light key, then runs FUN_0004d620
+func	FUN_000a6f90	gld_normalizeVec3	INFERRED	normalises a 3-float vector with sqrt, zero vector stays zero

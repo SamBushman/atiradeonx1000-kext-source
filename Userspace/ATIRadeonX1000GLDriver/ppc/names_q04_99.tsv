@@ -1,0 +1,62 @@
+use	FUN_000a9070	fVar2	envDstFloat24	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*fVar2\ =\ \*\(float\ \*\)\(puVar19\ \+\ 0x12\);$	+1
+use	FUN_000a9070	fVar2	envDstFloat24	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(fVar1\ !=\ fVar2\)\ \{$	+1
+use	FUN_000a9070	fVar4	envDstFloat28	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*fVar4\ =\ \*\(float\ \*\)\(puVar19\ \+\ 0x14\);$	+1
+use	FUN_000a9070	fVar4	envDstFloat28	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(fVar3\ !=\ fVar4\)\ \{$	+1
+use	FUN_000a9070	uVar5	envSrcShort14	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(puVar18\ \+\ 5\);$	+1
+use	FUN_000a9070	uVar5	envSrcShort14	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*\(\(\(uint\)uVar5\ \*\ 0x3b\ >>\ 0xd\ \&\ 1\ \|\ \(uint\)uVar5\ \*\ 0x107\ >>\ 10\ \&\ 2\ \|\ uVar5\ >>\ 3\ \&\ 4\)\ \^\ 1$	+2
+use	FUN_000a9070	uVar5	envSrcShort1a	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(\(int\)puVar18\ \+\ 0x1a\);$	+2
+use	FUN_000a9070	uVar5	envSrcShort1a	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*puVar19\[1\]\ =\ uVar5;$	+1
+use	FUN_000a9070	uVar5	envSrcShort22	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(\(int\)puVar18\ \+\ 0x22\);$	+2
+use	FUN_000a9070	uVar5	envSrcShort22	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*puVar19\[6\]\ =\ uVar5;$	+1
+use	FUN_000a9070	uVar5	envSrcShort2e	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(\(int\)puVar18\ \+\ 0x2e\);$	+1
+use	FUN_000a9070	uVar5	envSrcShort2e	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar5\ !=\ \(uint\)uVar6\)\ \{$	+2
+use	FUN_000a9070	uVar5	envSrcShort2e	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*\(uVar5\ \&\ 1\)\ <<\ 0x1a\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ \&\ 0xfbffffff;$	+1
+use	FUN_000a9070	uVar5	envSrcShort24	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(puVar18\ \+\ 9\);$	+2
+use	FUN_000a9070	uVar5	envSrcShort24	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*puVar19\[7\]\ =\ uVar5;$	+1
+use	FUN_000a9070	uVar5	envSrcShort30	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(puVar18\ \+\ 0xc\);$	+1
+use	FUN_000a9070	uVar5	envSrcShort30	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar5\ !=\ \(uint\)uVar6\)\ \{$@2	+2
+use	FUN_000a9070	uVar5	envSrcShort30	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*\(uVar5\ \&\ 1\)\ <<\ 0x1b\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ \&\ 0xf7ffffff;$	+1
+use	FUN_000a9070	uVar5	envSrcShort26	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(\(int\)puVar18\ \+\ 0x26\);$	+2
+use	FUN_000a9070	uVar5	envSrcShort26	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*puVar19\[8\]\ =\ uVar5;$	+1
+use	FUN_000a9070	uVar5	envSrcShort32	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar5\ =\ \*\(ushort\ \*\)\(\(int\)puVar18\ \+\ 0x32\);$	+1
+use	FUN_000a9070	uVar5	envSrcShort32	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar5\ !=\ \(uint\)uVar6\)\ \{$@3	+3
+use	FUN_000a9070	uVar6	envDstShort2	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar6\ =\ puVar19\[1\];$	+1
+use	FUN_000a9070	uVar6	envDstShort2	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(uVar12\ !=\ uVar6\)\ \{$	+1
+use	FUN_000a9070	uVar6	envDstShortc	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar6\ =\ puVar19\[6\];$	+1
+use	FUN_000a9070	uVar6	envDstShortc	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(uVar12\ !=\ uVar6\)\ \{$@2	+1
+use	FUN_000a9070	uVar6	envDstShort18	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar6\ =\ puVar19\[0xc\];$	+1
+use	FUN_000a9070	uVar6	envDstShort18	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar5\ !=\ \(uint\)uVar6\)\ \{$	+1
+use	FUN_000a9070	uVar6	envDstShorte	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar6\ =\ puVar19\[7\];$	+1
+use	FUN_000a9070	uVar6	envDstShorte	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(uVar12\ !=\ uVar6\)\ \{$@3	+1
+use	FUN_000a9070	uVar6	envDstShort1a	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar6\ =\ puVar19\[0xd\];$	+1
+use	FUN_000a9070	uVar6	envDstShort1a	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar5\ !=\ \(uint\)uVar6\)\ \{$@2	+1
+use	FUN_000a9070	uVar6	envDstShort10	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar6\ =\ puVar19\[8\];$	+1
+use	FUN_000a9070	uVar6	envDstShort10	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(uVar12\ !=\ uVar6\)\ \{$@4	+1
+use	FUN_000a9070	uVar6	envDstShort1c	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar6\ =\ puVar19\[0xe\];$	+1
+use	FUN_000a9070	uVar6	envDstShort1c	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar5\ !=\ \(uint\)uVar6\)\ \{$@3	+1
+use	FUN_000a9070	uVar7	envDstShort6	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar7\ =\ puVar19\[3\];$	+1
+use	FUN_000a9070	uVar7	envDstShort6	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(uVar13\ !=\ uVar7\)\ \{$	+1
+use	FUN_000a9070	uVar7	envSrcShort28	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar7\ =\ \*\(ushort\ \*\)\(puVar18\ \+\ 10\);$	+1
+use	FUN_000a9070	uVar7	envSrcShort28	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar7\ !=\ \(uint\)uVar8\)\ \{$	+2
+use	FUN_000a9070	uVar7	envSrcShort28	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*\(uVar7\ \&\ 3\)\ <<\ 0x14\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ \&\ 0xffcfffff;$	+1
+use	FUN_000a9070	uVar7	envDstShort8	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar7\ =\ puVar19\[4\];$	+1
+use	FUN_000a9070	uVar7	envDstShort8	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(uVar13\ !=\ uVar7\)\ \{$@2	+1
+use	FUN_000a9070	uVar7	envDstShort14	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar7\ =\ puVar19\[10\];$	+1
+use	FUN_000a9070	uVar7	envDstShort14	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar8\ !=\ \(uint\)uVar7\)\ \{$	+1
+use	FUN_000a9070	uVar7	envDstShorta	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar7\ =\ puVar19\[5\];$	+1
+use	FUN_000a9070	uVar7	envDstShorta	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(uVar13\ !=\ uVar7\)\ \{$@3	+1
+use	FUN_000a9070	uVar7	envDstShort16	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar7\ =\ puVar19\[0xb\];$	+1
+use	FUN_000a9070	uVar7	envDstShort16	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar8\ !=\ \(uint\)uVar7\)\ \{$@2	+1
+use	FUN_000a9070	uVar8	envSrcShort1c	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar8\ =\ \*\(ushort\ \*\)\(puVar18\ \+\ 7\);$	+2
+use	FUN_000a9070	uVar8	envSrcShort1c	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*puVar19\[3\]\ =\ uVar8;$	+1
+use	FUN_000a9070	uVar8	envDstShort12	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar8\ =\ puVar19\[9\];$	+1
+use	FUN_000a9070	uVar8	envDstShort12	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar7\ !=\ \(uint\)uVar8\)\ \{$	+1
+use	FUN_000a9070	uVar8	envSrcShort1e	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar8\ =\ \*\(ushort\ \*\)\(\(int\)puVar18\ \+\ 0x1e\);$	+2
+use	FUN_000a9070	uVar8	envSrcShort1e	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*puVar19\[4\]\ =\ uVar8;$	+1
+use	FUN_000a9070	uVar8	envSrcShort2a	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar8\ =\ \*\(ushort\ \*\)\(\(int\)puVar18\ \+\ 0x2a\);$	+1
+use	FUN_000a9070	uVar8	envSrcShort2a	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar8\ !=\ \(uint\)uVar7\)\ \{$	+2
+use	FUN_000a9070	uVar8	envSrcShort2a	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*\(uVar8\ \&\ 3\)\ <<\ 0x16\ \|\ \*\(uint\ \*\)\(iVar10\ \+\ iVar17\)\ \&\ 0xff3fffff;$	+1
+use	FUN_000a9070	uVar8	envSrcShort20	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar8\ =\ \*\(ushort\ \*\)\(puVar18\ \+\ 8\);$	+2
+use	FUN_000a9070	uVar8	envSrcShort20	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*puVar19\[5\]\ =\ uVar8;$	+1
+use	FUN_000a9070	uVar8	envSrcShort2c	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*uVar8\ =\ \*\(ushort\ \*\)\(puVar18\ \+\ 0xb\);$	+1
+use	FUN_000a9070	uVar8	envSrcShort2c	INFERRED	load of one record field: base record, type and byte offset are in the name	^\s*if\ \(\(uint\)uVar8\ !=\ \(uint\)uVar7\)\ \{$@2	+3

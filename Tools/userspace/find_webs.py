@@ -250,6 +250,7 @@ def facts(nodes, var):
         t = A.strip_strings(n.text)
         for m in pa.finditer(t):                           # `a & var` is a bit-and, not an address-of: look at what precedes the `&`
             before = t[:m.start()].rstrip()
+            if before.endswith('&'): continue              # `a && var`: logical and
             if not before or not (before[-1].isalnum() or before[-1] in '_)]'):
                 raise SystemExit('%s: address taken in "%s"' % (var, n.text))
         occ = [m.start() for m in ident.finditer(t)]

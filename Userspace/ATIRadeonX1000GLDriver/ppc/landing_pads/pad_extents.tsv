@@ -1,4 +1,4 @@
-cd10c	cd110	FUN_000cd05c
+cd10c	cd110	scCreate
 d0340	d0344	vsDisassembleToString
 d0398	d039c	vsDisassembleVertexProgram
 d4ec8	d4ecc	scDumpPixelProgram

@@ -25,13 +25,15 @@ local	Table1ea904__hasFlag0x11	param_1	rowIndex	INFERRED	row of the 0x10-stride 
 local	Record__field98IsBelow2	param_1	record	INFERRED	record whose +0x98 is tested
 local	Object__sumWords4And8	param_1	object	INFERRED	words +4 and +8 summed
 local	Mask__countSetBits4	param_1	mask	INFERRED	low 4 bits counted
+local	NeighbourList__free_135010	param_1	neighbourList	INFERRED	list whose +8 chunk chain and +0x10 side table are freed
+local	BitSet__testAnyLane	param_2	registerIndex	INFERRED	register whose 4 lane bits are tested
+local	IRInst__findLaneDefinition	param_2	lane	INFERRED	lane whose defining instruction is searched
 local	ConstKey__lanes1	param_1	key	INFERRED	constant key record whose lane words are summed
 local	ConstKey__lanes2	param_1	key	INFERRED	constant key record whose lane words are summed
 local	ConstKey__lanes4	param_1	key	INFERRED	constant key record whose lane words are summed
 local	InterferenceNode__getSpillSlot	param_1	node	INFERRED	node whose +0x14 spill slot is accessed
 local	InterferenceNode__setSpillSlot	param_1	node	INFERRED	node whose +0x14 spill slot is accessed
 local	Program__hasKillTexture	param_1	program	INFERRED	program whose +0x98 instruction list is scanned for opcode 0x77
-local	NeighbourList__free_135010	param_1	neighbourList	INFERRED	list whose +8 chunk chain and +0x10 side table are freed
 local	KhanPs__ctor_128fd0	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
 local	KhanPs__ctor_129130	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
 local	KhanVs__ctor_12a578	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
@@ -39,7 +41,6 @@ local	KhanVs__ctor_12a6c0	param_3	createSchedModels	INFERRED	when nonzero the co
 local	FudoVs__ctor_12a808	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
 local	FudoVs__ctor_12a8bc	param_3	createSchedModels	INFERRED	when nonzero the constructor also calls createSchedModels
 local	LoopInfo__matchCounterInit	local_28	operandSwizzleBytes	INFERRED	operand +0x10 swizzle word read bytewise by the counter lane
-local	BitSet__testAnyLane	param_2	registerIndex	INFERRED	register whose 4 lane bits are tested
 local	IRInst__laneWrittenInChain	param_2	lane	INFERRED	lane whose write-mask byte is tested
 local	Program__assignVectorSlot	param_2	block	INFERRED	block whose +0x150 slot index is set
 local	OpcodeTraits__flag1WithoutFlag7	param_2	inst	INFERRED	instruction whose +0x88 record opcode indexes the table
@@ -49,7 +50,6 @@ local	Program__renumberExportInsts	param_2	unusedArg2	INFERRED	unused argument
 local	VRegPool__constructByKind	param_1	arg0	INFERRED	forwarded to the per-kind constructor
 local	KhanPs__vslot62_lookupTableEntry	param_2	entryIndex	INFERRED	index into the table at PTR_PTR_001e910c
 local	storeAfterLocate	param_2	value	INFERRED	stored in the located neighbour slot
-local	IRInst__findLaneDefinition	param_2	lane	INFERRED	lane whose defining instruction is searched
 local	IRCmp2__ctor_1080e0	param_2	unusedArg2	INFERRED	unused constructor argument
 local	IRLoopStart__ctor_10a474	param_2	unusedArg2	INFERRED	unused constructor argument
 local	IRLoopStart__ctor_10a50c	param_2	unusedArg2	INFERRED	unused constructor argument

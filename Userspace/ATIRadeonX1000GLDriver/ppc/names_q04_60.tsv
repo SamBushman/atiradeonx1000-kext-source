@@ -1,0 +1,21 @@
+local	FUN_000a6cb0	uVar9	useFastClear	INFERRED	argument of gld_emitClearFillPacket: 1 when the fast (fill) clear path is used, else 0
+use	FUN_000a6cb0	iVar6	clearPacketHeader	INFERRED	3000-word command packet allocated for the clear; words +0x10/+0x14 receive the sizes of the fill and viewport parts	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,3000\);$	+1
+use	FUN_000a6cb0	iVar6	clearPacketHeader	INFERRED	3000-word command packet allocated for the clear; words +0x10/+0x14 receive the sizes of the fill and viewport parts	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar6;$	+2
+use	FUN_000a6cb0	iVar6	clearPacketHeader	INFERRED	3000-word command packet allocated for the clear; words +0x10/+0x14 receive the sizes of the fill and viewport parts	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x10\)\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \-\ iVar10\ >>\ 2;$	+1
+use	FUN_000a6cb0	iVar6	clearPacketHeader	INFERRED	3000-word command packet allocated for the clear; words +0x10/+0x14 receive the sizes of the fill and viewport parts	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x14\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2794\)\ \-\ iVar10\ >>\ 2;$	+1
+local	FUN_000a6cb0	bVar1	colorClearNotRequested	INFERRED	bit 8 of the clear mask is clear
+local	FUN_000a6cb0	puVar3	prevPacketLink	INFERRED	engine+0x1d8 previous packet: its word receives the word distance to the new packet
+local	FUN_000a6cb0	puVar4	trailerPacket	INFERRED	5-word packet (0x2f000000) emitted after the clear
+local	FUN_000a6cb0	cVar5	scissorActive	INFERRED	scissor box flag (caps+0x3190), cleared when the box covers the whole drawable
+local	FUN_000a6cb0	uVar7	surfaceFlags	INFERRED	engine+0x154 surface flag word (bit 6 colour, bit 7 depth, 0x30000 layout, 0x1000)
+local	FUN_000a6cb0	uVar8	depthClearBit	INFERRED	bit 10 of the clear mask, or'd into ctx+0x8c bit 29
+use	FUN_000a6cb0	iVar10	surfaceRecord	INFERRED	engine+0x150 surface record, or engine+0x30 when none: byte flags +0xc4/+0xc5 mark fast-clear state	^\s*iVar10\ =\ iVar6\ \+\ 0x30;$	+1
+use	FUN_000a6cb0	iVar10	surfaceRecord	INFERRED	engine+0x150 surface record, or engine+0x30 when none: byte flags +0xc4/+0xc5 mark fast-clear state	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x150\);$	+1
+use	FUN_000a6cb0	iVar10	surfaceRecord	INFERRED	engine+0x150 surface record, or engine+0x30 when none: byte flags +0xc4/+0xc5 mark fast-clear state	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ 0xc5\)\ =\ 1;$	+1
+use	FUN_000a6cb0	iVar10	surfaceRecord	INFERRED	engine+0x150 surface record, or engine+0x30 when none: byte flags +0xc4/+0xc5 mark fast-clear state	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ 0xc5\)\ =\ 0;$	+2
+use	FUN_000a6cb0	iVar10	surfaceRecord	INFERRED	engine+0x150 surface record, or engine+0x30 when none: byte flags +0xc4/+0xc5 mark fast-clear state	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ 0xc5\)\ =\ 1;$@2	+1
+use	FUN_000a6cb0	iVar10	streamStart	INFERRED	stream write pointer before the fill packet, used to compute the packet sizes	^\s*iVar10\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_000a6cb0	iVar10	streamStart	INFERRED	stream write pointer before the fill packet, used to compute the packet sizes	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x10\)\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \-\ iVar10\ >>\ 2;$	+1
+use	FUN_000a6cb0	iVar10	streamStart	INFERRED	stream write pointer before the fill packet, used to compute the packet sizes	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x14\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2794\)\ \-\ iVar10\ >>\ 2;$	+1
+local	FUN_000a6cb0	param_2	clearMask	INFERRED	GL clear mask bits (bit 8 colour, bit 10 depth)
+func	FUN_000a6cb0	gld_clearStreamBuffers	INFERRED	clear path: decides between the fast fill clear (gld_emitClearFillPacket) and the viewport quad (gld_emitInternalViewportPacket) from the surface flags, scissor and clear mask, then emits the 0x2f000000 trailer packet

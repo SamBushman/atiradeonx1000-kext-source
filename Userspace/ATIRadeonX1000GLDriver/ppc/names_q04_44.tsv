@@ -1,0 +1,3 @@
+local	FUN_000b5400	uVar12	pairRemaining	INFERRED	countdown for the first stream table copy (pairCount entries)
+func	FUN_000b5c00	gld_bindProgramStateAndEmit	INFERRED	makes a program object current (glContext+0x148c): copies its 0x16 state words and register values into the context (+0x1864, +0x1b8c..), derives the texture-unit use bits at +0x1ca0, updates output slots (ffvpAssignOutputSlots) and emits the state packets (FUN_000b5400, FUN_000b5a60)
+func	FUN_000b5400	gld_emitProgramStatePackets	INFERRED	writes the register-write packets for a program state block into the command stream: 0x8a1, 0x208b4, 0x8b7, the constant upload at 0x880, the 0x15-word state packet and the two stream-table packets 0x854/0x878

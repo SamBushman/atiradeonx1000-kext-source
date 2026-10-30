@@ -1,0 +1,57 @@
+local	FUN_000afe40	local_1e0	dstWord1	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +4, destination operand word 1
+local	FUN_000afe40	local_1dc	dstWord2	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +8, destination operand word 2
+local	FUN_000afe40	local_1d8	dstWord3Copy	INFERRED	copy of the destination operand word 3
+local	FUN_000afe40	local_190	src0Word0	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x10, first source operand word 0
+local	FUN_000afe40	local_18c	src0Word1	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x14, first source operand word 1
+local	FUN_000afe40	local_188	src0Word2	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x18, first source operand word 2
+local	FUN_000afe40	local_184	src0Word3	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x1c, first source operand word 3
+local	FUN_000afe40	local_180	src0Word4	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x20, first source operand word 4
+local	FUN_000afe40	local_17c	src0Word5	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x24, first source operand word 5
+local	FUN_000afe40	local_174	src0Word7	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x2c, first source operand word 7
+local	FUN_000afe40	uVar6	src0Word6	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x28, first source operand word 6 (top byte = modifier)
+local	FUN_000afe40	local_178	src0Word6Mod	INFERRED	stack copy of src0Word6 whose top byte is rewritten before the call
+local	FUN_000afe40	bVar3	src0ModifierByte	INFERRED	top byte of src0Word6
+local	FUN_000afe40	uVar16	src0ModifierBits	INFERRED	src0ModifierByte as an unsigned argument
+local	FUN_000afe40	local_1b0	src1Word0	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x30, second source operand word 0
+local	FUN_000afe40	local_1ac	src1Word1	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x34, second source operand word 1
+local	FUN_000afe40	local_1a8	src1Word2	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x38, second source operand word 2
+local	FUN_000afe40	local_1a4	src1Word3	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x3c, second source operand word 3
+local	FUN_000afe40	local_1a0	src1Word4	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x40, second source operand word 4
+local	FUN_000afe40	local_19c	src1Word5	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x44, second source operand word 5
+local	FUN_000afe40	uVar7	src1Word6	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x48, second source operand word 6 (top byte = modifier)
+local	FUN_000afe40	local_198	src1Word6Mod	INFERRED	stack copy of src1Word6 whose top byte is rewritten before the call
+local	FUN_000afe40	uVar14	src1Word7	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x4c, second source operand word 7
+local	FUN_000afe40	local_194	src1Word7Copy	INFERRED	stack copy of src1Word7
+local	FUN_000afe40	bVar2	src1ModifierByte	INFERRED	top byte of src1Word6
+use	FUN_000afe40	uVar8	src1ModifierBits	INFERRED	src1ModifierByte as an unsigned argument	^\s*uVar8\ =\ \(uint\)\(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)\&\(local_198\)\ \+\ 0\)\);$	+1
+use	FUN_000afe40	uVar8	src1ModifierBits	INFERRED	src1ModifierByte as an unsigned argument	^\s*\(\(int\ \(\*\)\(\)\)FUN_000ac720\)\(param_1,pcVar18,local_5c,uVar13,auStack_204,in_r8,local_64,auStack_1fc,$	+4
+local	FUN_000afe40	local_1d0	src2Word0	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x50, third source operand word 0
+local	FUN_000afe40	local_1cc	src2Word1	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x54, third source operand word 1
+local	FUN_000afe40	local_1c8	src2Word2	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x58, third source operand word 2
+local	FUN_000afe40	local_1c4	src2Word3	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x5c, third source operand word 3
+local	FUN_000afe40	local_1c0	src2Word4	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x60, third source operand word 4
+local	FUN_000afe40	local_1bc	src2Word5	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x64, third source operand word 5
+use	FUN_000afe40	uVar4	src2Word6	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x68, third source operand word 6 (top byte = modifier)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x68\);$	+1
+use	FUN_000afe40	uVar4	src2Word6	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x68, third source operand word 6 (top byte = modifier)	^\s*\(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)\&\(local_1b8\)\ \+\ 0\)\)\ =\ \(byte\)\(\(uint\)uVar4\ >>\ 0x18\);$	+1
+use	FUN_000afe40	uVar4	src2Word6	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x68, third source operand word 6 (top byte = modifier)	^\s*local_1b8\ =\ uVar4;$	+1
+local	FUN_000afe40	local_1b8	src2Word6Mod	INFERRED	stack copy of src2Word6 whose top byte is rewritten before the call
+local	FUN_000afe40	uVar10	src2Word7	INFERRED	field of the 0x70-byte IL instruction record (iVar15): +0x6c, third source operand word 7
+local	FUN_000afe40	local_1b4	src2Word7Copy	INFERRED	stack copy of src2Word7
+local	FUN_000afe40	bVar1	src2ModifierByte	INFERRED	top byte of src2Word6
+use	FUN_000afe40	uVar5	src2ModifierBits	INFERRED	src2ModifierByte as an unsigned argument	^\s*uVar5\ =\ \(uint\)\(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)\&\(local_1b8\)\ \+\ 0\)\);$	+1
+use	FUN_000afe40	uVar5	src2ModifierBits	INFERRED	src2ModifierByte as an unsigned argument	^\s*\(\(int\ \(\*\)\(\)\)FUN_000ac720\)\(param_1,pcVar18,local_5c,uVar13,auStack_204,in_r8,local_64,auStack_1fc,$	+4
+local	FUN_000afe40	auStack_204	dstOperandOut	INFERRED	destination operand converted by FUN_000ab940
+local	FUN_000afe40	auStack_1fc	src1OperandOut	INFERRED	second source operand classified by gld_classifyOperand
+local	FUN_000afe40	auStack_1f4	src0OperandOut	INFERRED	first source operand classified by gld_classifyOperand
+local	FUN_000afe40	auStack_170	src2OperandOut	INFERRED	third source operand classified by gld_classifyOperand
+local	FUN_000afe40	local_208	dstFlags	INFERRED	flag byte filled by FUN_000ab940 (non-zero when the destination is written)
+local	FUN_000afe40	local_64	src0OperandOutPtr	INFERRED	pointer to src0OperandOut
+local	FUN_000afe40	local_60	src2OperandOutPtr	INFERRED	pointer to src2OperandOut
+local	FUN_000afe40	local_5c	tokenVecPtr	INFERRED	pointer to the token vector triple {count, capacity, words}
+local	FUN_000afe40	local_68	anyDstWritten	INFERRED	non-zero when some instruction wrote its destination
+use	FUN_000afe40	uVar13	inputBit	INFERRED	1 << input index while the input declarations are emitted	^\s*uVar13\ =\ 1\ <<\ \(uVar16\ \&\ 0x3f\);$	+2
+use	FUN_000afe40	uVar13	inputBit	INFERRED	1 << input index while the input declarations are emitted	^\s*if\ \(\(\(int\)uVar16\ <\ \(int\)\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\]\)\ \&\&$	+2
+use	FUN_000afe40	iVar15	instRecord	INFERRED	current 0x70-byte instruction record (table base + offset)	^\s*iVar15\ =\ iVar19\ \+\ \*\(int\ \*\)\(pcVar18\ \+\ 100\);$	+1
+use	FUN_000afe40	iVar15	instRecord	INFERRED	current 0x70-byte instruction record (table base + offset)	^\s*local_1e0\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 4\);$	+15
+use	FUN_000afe40	iVar15	instRecord	INFERRED	current 0x70-byte instruction record (table base + offset)	^\s*local_1a0\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x40\);$	+8
+use	FUN_000afe40	iVar15	instRecord	INFERRED	current 0x70-byte instruction record (table base + offset)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x68\);$	+4

@@ -1757,7 +1757,7 @@ int gld_emitUnitClearPacket(ctx, packetIndex)
   *headerWord = (int)cursor - (int)headerWord >> 2 | *headerWord;
   *(int **)(ctx + GLD_lastHeader) = cursor;
   *cursor = packetIndex * 0x1000000 + 0x16000000;
-  return FUN_000a8320(ctx,packetIndex);
+  return gld_clearPacketSlot(ctx,packetIndex);
 }
 
 /* gld_emitSingleUnitBinding @ 0x30840 (124 bytes) */
@@ -10424,7 +10424,7 @@ int gld_updateUnitKindTable(ctx)
       unitSlotPtr = unitSlotPtr + 4;
       unitsLeft = unitsLeft + -1;
     } while (unitsLeft != 0);
-    FUN_000a1090(ctx + 0x240,unitPresent,unitKind);
+    gld_setUnitTargetBits(ctx + 0x240,unitPresent,unitKind);
   }
   return;
 }
@@ -10470,7 +10470,7 @@ int gld_bindFragmentShaderSlot(ctx, shaderIdPtr)
     }
   }
   glBindFragmentShaderATI_impl(ctx,shaderId);
-  boundShaderState = FUN_000a11a0(ctx);
+  boundShaderState = gld_getFragmentShaderKind(ctx);
   *(undefined4 *)(ctx + 0x27b8) = boundShaderState;
   return 1;
 }

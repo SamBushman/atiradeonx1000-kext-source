@@ -3713,7 +3713,7 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   }
   else {
     recordCommands = true;
-    FUN_000a5c40(ctx);
+    gld_emitClearColorPacket(ctx);
     recordBase = *(int *)(0x00002748 + ctx + 4);
   }
   uVar14 = 0;
@@ -4137,7 +4137,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
   }
   dirtyMask2 = *(uint *)(glContext + 0x1808) & 0x20000000;
   if (dirtyMask2 != 0) {
-    forwardedFloatArg1 = (double)FUN_000a4980(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5);
+    forwardedFloatArg1 = (double)gld_buildSmoothPointMask(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5);
     forwardedArg2 = extraout_r4;
   }
   dirtyMask = *(uint *)(glContext + 0x38);
@@ -4194,7 +4194,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
         forwardedArg2 = extraout_r4_09;
       }
       if ((dirtyMask & 0x20) != 0) {
-        ((void (*)())FUN_000bd9a0)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+        ((void (*)())gld_emitLightingStatePacket)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
         dirtyMask = *(uint *)(glContext + 0x38);
         forwardedArg2 = extraout_r4_10;
       }
@@ -4250,7 +4250,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       dirtyMask2 = *(uint *)(glContext + 0x3c);
     }
     if ((dirtyMask2 & 0x1000) != 0) {
-      FUN_000a5ec0(glContext);
+      gld_updateSampleCoverage(glContext);
     }
   }
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {

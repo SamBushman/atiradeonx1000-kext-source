@@ -13,7 +13,7 @@ int scDumpPixelProgramPsn(sinkRecord, shaderState, optionsArg, argR6, argR7, arg
 {
   DAT_001fa61c = *sinkRecord;
   DAT_001fa618 = sinkRecord[1];
-  FUN_000d183c(shaderState + 0x64c,"SC Generated Shader",0,argR6,argR7,argR8,DAT_001fa618,argR10)
+  psnDumpPixelShader(shaderState + 0x64c,"SC Generated Shader",0,argR6,argR7,argR8,DAT_001fa618,argR10)
   ;
   return 1;
 }
@@ -2687,7 +2687,7 @@ int Compiler__createFromRequest_da0c0(param_1, param_2)
     stateOutHome[10] = requestHome[2];
   }
   else {
-    requestOwner = FUN_000cd290(stateOutHome[3]);
+    requestOwner = vsOpcodeSourceCount(stateOutHome[3]);
     stateOutHome[10] = requestOwner;
   }
   hardwareKind = stateOutHome[10];
@@ -2848,7 +2848,7 @@ int Compiler__createFromRequest(state, request)
     stateOutHome[10] = requestHome[2];
   }
   else {
-    requestOwner = FUN_000cd290(stateOutHome[3]);
+    requestOwner = vsOpcodeSourceCount(stateOutHome[3]);
     stateOutHome[10] = requestOwner;
   }
   hardwareKind = stateOutHome[10];
@@ -3617,7 +3617,7 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
   }
   intToDoubleHi3 = 0x43300000;
   textBufferPtr = textBuffer;
-  ((char * (*)())FUN_000cdc3c)(disassembler,10,textBufferPtr,
+  ((char * (*)())vsdisFormatFloat)(disassembler,10,textBufferPtr,
                (double)((float)(DOUBLE_001aa200 /
                                ((double)CONCAT44(0x43300000,fractionScale) - DOUBLE_001aa250)) *
                         (float)((double)CONCAT44(0x43300000,fractionField) - DOUBLE_001aa250) + integerPart));

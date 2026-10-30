@@ -1,0 +1,60 @@
+use	FUN_000c5e60	puVar3	returnCursor	INFERRED	pointer returned to the caller (psnProgram)	^\s*puVar3\ =\ param_1;$@2	+1
+use	FUN_000c5e60	puVar3	returnCursor	INFERRED	pointer returned to the caller (psnProgram)	^\s*\*\(char\ \*\)\(\(int\)puVar3\ \+\ 0x2a\)\ =\ \(char\)uVar11;$	+1
+use	FUN_000c5e60	puVar3	returnCursor	INFERRED	pointer returned to the caller (psnProgram)	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(int\)puVar3\ \+\ 1\);$	+1
+use	FUN_000c5e60	iVar8	wordIndex	INFERRED	byte flag * 2: offset into the 16-entry per-file clamp table	^\s*iVar8\ =\ \(uint\)\*pbVar14\ \*\ 2;$	+2
+use	FUN_000c5e60	uVar12	fileUseSum	INFERRED	(count + count + count) & 0xffff: sum of the per-file use counts checked against the limits	^\s*uVar12\ =\ \(local_68\ \+\ local_78\ \&\ 0xffff\)\ \+\ local_74\ \&\ 0xffff;$	+3
+use	FUN_000c5e60	uVar12	fileUseSum	INFERRED	(count + count + count) & 0xffff: sum of the per-file use counts checked against the limits	^\s*if\ \(uVar12\ <\ local_6c\)\ \{$	+2
+use	FUN_000c5e60	uVar12	fileUseSum	INFERRED	(count + count + count) & 0xffff: sum of the per-file use counts checked against the limits	^\s*if\ \(uVar12\ <\ uVar29\)\ \{$	+2
+use	FUN_000c5e60	uVar12	fileUseSum	INFERRED	(count + count + count) & 0xffff: sum of the per-file use counts checked against the limits	^\s*\*\(short\ \*\)\(\(int\)param_1\ \+\ 0x26\)\ =\ \(short\)uVar12;$	+1
+use	FUN_000c5e60	uVar1	usedBit	INFERRED	1 << register file index of the instruction operand	^\s*uVar1\ =\ 1\ <<\ \(\(int\)\(char\)\*\(byte\ \*\)puVar21\ \&\ 0x3fU\);$	+4
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ \*puVar20;$	+1
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ uVar11;$	+1
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*if\ \(\*puVar24\ <=\ uVar2\)\ \{$	+2
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ \*puVar5;$	+4
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*else\ if\ \(local_60\ <\ \(uVar2\ \&\ 0x7fff\)\)\ \{$	+2
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ \*puVar4;$	+4
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*else\ if\ \(local_60\ <\ \(uVar2\ \&\ 0x7fff\)\)\ \{$@2	+2
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ \*puVar25;$	+4
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*else\ if\ \(local_60\ <\ \(uVar2\ \&\ 0x7fff\)\)\ \{$@3	+2
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ \*puVar22;$	+4
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*else\ if\ \(local_60\ <\ \(uVar2\ \&\ 0x7fff\)\)\ \{$@4	+2
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ \*puVar18;$	+4
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*else\ if\ \(local_60\ <\ \(uVar2\ \&\ 0x7fff\)\)\ \{$@5	+2
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*uVar2\ =\ \*puVar17;$	+4
+use	FUN_000c5e60	uVar2	regFieldValue	INFERRED	16-bit register field read through one of the record field cursors	^\s*else\ if\ \(local_60\ <\ \(uVar2\ \&\ 0x7fff\)\)\ \{$@6	+2
+use	FUN_000c5e60	local_7c	alreadyAnalysed	INFERRED	psnProgram+0x14 (analysis done flag): non-zero returns immediately	^\s*local_7c\ =\ \(uint\)\*\(ushort\ \*\)\(param_1\ \+\ 5\);$	+2
+use	FUN_000c5e60	local_7c	alreadyAnalysed	INFERRED	psnProgram+0x14 (analysis done flag): non-zero returns immediately	^\s*local_98_arr\[0\]\ =\ local_7c;$	+8
+use	FUN_000c5e60	local_58	instructionCount	INFERRED	psnProgram[2]: number of instruction records	^\s*local_58\ =\ param_1\[2\];$	+1
+use	FUN_000c5e60	local_58	instructionCount	INFERRED	psnProgram[2]: number of instruction records	^\s*if\ \(local_58\ ==\ 0\)\ \{$	+5
+use	FUN_000c5e60	local_58	instructionCount	INFERRED	psnProgram[2]: number of instruction records	^\s*local_68\ =\ local_58;$	+2
+use	FUN_000c5e60	local_58	instructionCount	INFERRED	psnProgram[2]: number of instruction records	^\s*\}\ while\ \(uVar12\ <=\ local_58\);$	+1
+use	FUN_000c5e60	local_5c	fileCount0	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_5c\ =\ local_58;$	+1
+use	FUN_000c5e60	local_5c	fileCount0	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_5c\ =\ 0;$	+1
+use	FUN_000c5e60	local_5c	fileCount0	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_5c\ =\ local_5c\ \+\ 1\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_5c	fileCount0	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_5c\ =\ local_5c\ \+\ 1\ \&\ 0xffff;$@2	+1
+use	FUN_000c5e60	local_5c	fileCount0	INFERRED	running count of a register file, initialised from the instruction count	^\s*if\ \(local_5c\ ==\ 0\)\ \{$	+2
+use	FUN_000c5e60	local_5c	fileCount0	INFERRED	running count of a register file, initialised from the instruction count	^\s*if\ \(local_5c\ ==\ 0\)\ \{$@2	+2
+use	FUN_000c5e60	local_5c	fileCount0	INFERRED	running count of a register file, initialised from the instruction count	^\s*\*\(short\ \*\)\(\(int\)param_1\ \+\ 0x16\)\ =\ \(short\)local_5c;$	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_68\ =\ local_58;$	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_68\ =\ 0;$	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_68\ =\ local_68\ \+\ 1\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_68\ =\ 1;$	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_68\ =\ local_68\ \+\ 1\ \&\ 0xffff;$@2	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*uVar12\ =\ \(local_68\ \+\ local_78\ \&\ 0xffff\)\ \+\ local_74\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*\*\(short\ \*\)\(\(int\)param_1\ \+\ 0x1e\)\ =\ \(short\)\(local_68\ \+\ local_78\);$	+1
+use	FUN_000c5e60	local_68	fileCount1	INFERRED	running count of a register file, initialised from the instruction count	^\s*\*\(short\ \*\)\(param_1\ \+\ 7\)\ =\ \(short\)local_68;$	+1
+use	FUN_000c5e60	local_6c	fileCount2	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_6c\ =\ local_58;$	+1
+use	FUN_000c5e60	local_6c	fileCount2	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_6c\ =\ 0;$	+1
+use	FUN_000c5e60	local_6c	fileCount2	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_6c\ =\ local_6c\ \+\ 1\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_6c	fileCount2	INFERRED	running count of a register file, initialised from the instruction count	^\s*if\ \(uVar12\ <\ local_6c\)\ \{$	+2
+use	FUN_000c5e60	local_6c	fileCount2	INFERRED	running count of a register file, initialised from the instruction count	^\s*\*\(short\ \*\)\(param_1\ \+\ 8\)\ =\ \(short\)local_6c;$	+1
+use	FUN_000c5e60	local_74	fileCount3	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_74\ =\ local_58;$	+1
+use	FUN_000c5e60	local_74	fileCount3	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_74\ =\ 0;$	+1
+use	FUN_000c5e60	local_74	fileCount3	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_74\ =\ local_74\ \+\ 1\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_74	fileCount3	INFERRED	running count of a register file, initialised from the instruction count	^\s*uVar12\ =\ \(local_68\ \+\ local_78\ \&\ 0xffff\)\ \+\ local_74\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_78	fileCount4	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_78\ =\ local_58;$	+1
+use	FUN_000c5e60	local_78	fileCount4	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_78\ =\ 0;$	+1
+use	FUN_000c5e60	local_78	fileCount4	INFERRED	running count of a register file, initialised from the instruction count	^\s*local_78\ =\ local_78\ \+\ 1\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_78	fileCount4	INFERRED	running count of a register file, initialised from the instruction count	^\s*uVar12\ =\ \(local_68\ \+\ local_78\ \&\ 0xffff\)\ \+\ local_74\ \&\ 0xffff;$	+1
+use	FUN_000c5e60	local_78	fileCount4	INFERRED	running count of a register file, initialised from the instruction count	^\s*\*\(short\ \*\)\(\(int\)param_1\ \+\ 0x1e\)\ =\ \(short\)\(local_68\ \+\ local_78\);$	+1
+func	FUN_000c5e60	psnAnalyzeProgram	INFERRED	walks the decoded instruction records (RS, texture and ALU kinds), tracks the highest register per file and the use counts and stores the totals in the program header (+0x16..+0x28); returns immediately when already analysed (+0x14)

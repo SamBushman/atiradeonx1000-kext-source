@@ -1,0 +1,31 @@
+use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is the flag recomputed here, bit 24 the sprite/fog flag)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is the flag recomputed here, bit 24 the sprite/fog flag)	^\s*uVar4\ =\ uVar2\ <<\ 0x18\ \|\ uVar3\ \&\ 0xfeffffff;$	+2
+use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is the flag recomputed here, bit 24 the sprite/fog flag)	^\s*if\ \(\(uVar4\ >>\ 0x17\ \&\ 1\)\ !=\ uVar2\)\ \{$	+1
+use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is the flag recomputed here, bit 24 the sprite/fog flag)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ \(uVar2\ \&\ 1\)\ <<\ 0x17\ \|\ uVar4\ \&\ 0xff7fffff;$	+1
+use	FUN_000a8e20	uVar4	chipVariantBit	INFERRED	(engine-caps short at +0x2d48 == -0x7e06) << 2 merged into glContext+0x18a4	^\s*uVar4\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ param_2\)\ ==\ \-0x7e06\)\ <<\ 2;$	+2
+use	FUN_000a8e20	uVar4	chipVariantBit	INFERRED	(engine-caps short at +0x2d48 == -0x7e06) << 2 merged into glContext+0x18a4	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[param_2\ \+\ 4\]\ \&\ 1\)\ <<\ 1\ \|\ uVar4\ \|\ uVar2\ \&\ 0xfffffff9;$	+1
+use	FUN_000a8e20	uVar2	capsFlag2e0b	INFERRED	byte at caps+0x2e0b: wanted value of bit 23	^\s*uVar2\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002e0b\)\[param_2\];$	+1
+use	FUN_000a8e20	uVar2	capsFlag2e0b	INFERRED	byte at caps+0x2e0b: wanted value of bit 23	^\s*uVar2\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002e0b\)\[param_2\];$@2	+1
+use	FUN_000a8e20	uVar2	capsFlag2e0b	INFERRED	byte at caps+0x2e0b: wanted value of bit 23	^\s*uVar2\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002e0b\)\[param_2\];$@3	+1
+use	FUN_000a8e20	uVar2	capsFlag2e0b	INFERRED	byte at caps+0x2e0b: wanted value of bit 23	^\s*if\ \(\(uVar4\ >>\ 0x17\ \&\ 1\)\ !=\ uVar2\)\ \{$	+1
+use	FUN_000a8e20	uVar2	capsFlag2e0b	INFERRED	byte at caps+0x2e0b: wanted value of bit 23	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ \(uVar2\ \&\ 1\)\ <<\ 0x17\ \|\ uVar4\ \&\ 0xff7fffff;$	+1
+use	FUN_000a8e20	uVar2	bit24Value	INFERRED	new value of ctx+0x44 bit 24: caps byte +0x2e0a set and ctx+0x44 bit 13 clear	^\s*uVar2\ =\ 0;$	+1
+use	FUN_000a8e20	uVar2	bit24Value	INFERRED	new value of ctx+0x44 bit 24: caps byte +0x2e0a set and ctx+0x44 bit 13 clear	^\s*uVar2\ =\ 1;$	+1
+use	FUN_000a8e20	uVar2	bit24Value	INFERRED	new value of ctx+0x44 bit 24: caps byte +0x2e0a set and ctx+0x44 bit 13 clear	^\s*uVar4\ =\ uVar2\ <<\ 0x18\ \|\ uVar3\ \&\ 0xfeffffff;$	+1
+use	FUN_000a8e20	uVar2	bit24Value	INFERRED	new value of ctx+0x44 bit 24: caps byte +0x2e0a set and ctx+0x44 bit 13 clear	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ =\ uVar2\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x18a4\)\ \&\ 0xfffffffe;$	+1
+local	FUN_000a8e20	param_2	engineCaps	INFERRED	engine capability table (+0x2d48 mode bytes, +0x2e0a/0x2e0b flags, +0x4304)
+local	FUN_000a8e20	param_3	dirtyMask	INFERRED	dirty bits: 0x1000 recompute bit 24, 0x800 refresh dirty flags
+local	FUN_000b5320	puVar1	slotRecordCopy	INFERRED	slot record argument kept for the second FUN_000b4f50 call (stale pointer arg)
+local	FUN_000b5320	iVar2	engineCaps	INFERRED	*(*(glContext+4)+0x10) capability table with the transform floats at +0x2de0..0x2dfc
+local	FUN_000b5320	param_1	glContext	INFERRED	the embedded stream object
+local	FUN_000b5320	param_2	engineState	INFERRED	state block (+0x1ea0 enable byte, +0x1f1c base offset)
+local	FUN_000b5320	param_3	slotRecord	INFERRED	slot record: word 0 = unit, +0xe0/0xe4 = slot offsets
+local	FUN_000b50a0	fVar1	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8)
+local	FUN_000b50a0	piVar2	slotRecordCopy	INFERRED	slot record argument kept for the FUN_000b4f50 call (stale pointer arg)
+local	FUN_000b50a0	iVar3	boundTexture	INFERRED	texture object bound to the unit (ctx+0x13f8 shadow), 0 when unbound
+local	FUN_000b50a0	iVar5	unitShadowCursor	INFERRED	glContext advanced 4 per unit (bound texture shadows at +0x13f8)
+local	FUN_000b50a0	iVar6	unitSlotCursor	INFERRED	engineState advanced 4 per unit (slot offsets at +0x1ea8)
+local	FUN_000b50a0	iVar7	unitFlagCursor	INFERRED	engineState advanced 1 per unit (enable bytes at +0x1618)
+func	FUN_000a8e20	gld_updateLightingFlags	INFERRED	recomputes ctx+0x44 bit 24 and bit 23 from the capability bytes (+0x2e0a/0x2e0b) when the dirty mask has 0x1000, refreshes dependent dirty flags and the +0x18a4 chip bits, and marks programs dirty for 0x800
+func	FUN_000b5320	gld_emitSlotTransformParams	INFERRED	if the slot is enabled (state+0x1ea0): sends two parameter vectors (negated/scaled engine floats caps+0x2df0..0x2dfc, then caps+0x2de0..0x2de8) through FUN_000b4f50 for the slot offsets +0xe0 and +0xe4
+func	FUN_000b50a0	gld_emitTextureUnitScaleParams	INFERRED	for each texture unit with an enabled slot: emits 1/width, 1/height, the texture parameter at +0x50 and the per-unit value from slotRecord[0]+0x1620 via FUN_000b4f50

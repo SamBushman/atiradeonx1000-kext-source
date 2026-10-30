@@ -1,0 +1,60 @@
+use	FUN_000b5c00	iVar7	engineCaps	INFERRED	*(*(glContext+4)+0x10): engine capability table (byte flags at +0x2d48+3, +0x4301, short at +0x2e06)	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	FUN_000b5c00	iVar7	engineCaps	INFERRED	*(*(glContext+4)+0x10): engine capability table (byte flags at +0x2d48+3, +0x4301, short at +0x2e06)	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar7\ \+\ 3\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_000b5c00	iVar7	engineCaps	INFERRED	*(*(glContext+4)+0x10): engine capability table (byte flags at +0x2d48+3, +0x4301, short at +0x2e06)	^\s*if\ \(\(\(uVar8\ \&\ 0x1000800\)\ !=\ 0\)\ \&\&\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e06\)\ \+\ iVar7\)\ ==\ \-0x7baf\)\)\ \{$	+1
+use	FUN_000b5c00	iVar7	engineCaps	INFERRED	*(*(glContext+4)+0x10): engine capability table (byte flags at +0x2d48+3, +0x4301, short at +0x2e06)	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00004301\)\[iVar7\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_000b5c00	iVar7	unitEnabledCursor	INFERRED	glContext advanced one byte per texture unit: byte flags at +0x1438 mark enabled units	^\s*iVar7\ =\ param_1;$	+1
+use	FUN_000b5c00	iVar7	unitEnabledCursor	INFERRED	glContext advanced one byte per texture unit: byte flags at +0x1438 mark enabled units	^\s*if\ \(\(\(\(unsigned\ char\ \*\)0x00001438\)\[iVar7\]\ !=\ '\\0'\)\ \&\&\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar11\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000b5c00	iVar7	unitEnabledCursor	INFERRED	glContext advanced one byte per texture unit: byte flags at +0x1438 mark enabled units	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	FUN_000b5c00	iVar11	unitShadowCursor	INFERRED	glContext advanced 4 per texture unit: pointer shadows at +0x13f8	^\s*iVar11\ =\ param_1;$	+1
+use	FUN_000b5c00	iVar11	unitShadowCursor	INFERRED	glContext advanced 4 per texture unit: pointer shadows at +0x13f8	^\s*if\ \(\(\(\(unsigned\ char\ \*\)0x00001438\)\[iVar7\]\ !=\ '\\0'\)\ \&\&\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar11\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000b5c00	iVar11	unitShadowCursor	INFERRED	glContext advanced 4 per texture unit: pointer shadows at +0x13f8	^\s*iVar11\ =\ iVar11\ \+\ 4;$	+1
+use	FUN_000b5c00	uVar8	unitsToScan	INFERRED	min(texture unit count byte at +0x13b0, byte at ctx+0x2b): units whose bound-texture bit is merged into +0x1ca0	^\s*uVar8\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$	+1
+use	FUN_000b5c00	uVar8	unitsToScan	INFERRED	min(texture unit count byte at +0x13b0, byte at ctx+0x2b): units whose bound-texture bit is merged into +0x1ca0	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x2b\);$	+1
+use	FUN_000b5c00	uVar8	unitsToScan	INFERRED	min(texture unit count byte at +0x13b0, byte at ctx+0x2b): units whose bound-texture bit is merged into +0x1ca0	^\s*if\ \(uVar8\ !=\ 0\)\ \{$	+1
+use	FUN_000b5c00	uVar8	unitsToScan	INFERRED	min(texture unit count byte at +0x13b0, byte at ctx+0x2b): units whose bound-texture bit is merged into +0x1ca0	^\s*uVar8\ =\ uVar8\ \-\ 1;$	+2
+use	FUN_000b5c00	uVar8	unitsToScanMasked	INFERRED	texture unit count byte at +0x13b0 for the mask-driven loop	^\s*uVar8\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$@2	+2
+use	FUN_000b5c00	uVar8	unitsToScanMasked	INFERRED	texture unit count byte at +0x13b0 for the mask-driven loop	^\s*if\ \(uVar8\ ==\ 0\)\ \{$	+2
+use	FUN_000b5c00	uVar8	unitsToScanMasked	INFERRED	texture unit count byte at +0x13b0 for the mask-driven loop	^\s*uVar8\ =\ uVar8\ \-\ 1;$@2	+2
+local	FUN_000b5c00	bVar2	unitEnableMask	INFERRED	per-unit enable bitmask byte selected by ctx+0x44 bit 13 (+0x11d3 or +0x1135)
+use	FUN_000b5c00	uVar4	result	INFERRED	return value: 0 on success, 1 when nothing to do, 0 if the program object has no state	^\s*uVar4\ =\ 0;$	+1
+use	FUN_000b5c00	uVar4	result	INFERRED	return value: 0 on success, 1 when nothing to do, 0 if the program object has no state	^\s*uVar4\ =\ 1;$	+1
+use	FUN_000b5c00	uVar4	result	INFERRED	return value: 0 on success, 1 when nothing to do, 0 if the program object has no state	^\s*uVar4\ =\ 0;$@2	+1
+use	FUN_000b5c00	uVar4	result	INFERRED	return value: 0 on success, 1 when nothing to do, 0 if the program object has no state	^\s*return\ uVar4;$	+1
+use	FUN_000b5c00	uVar4	copiedWord	INFERRED	word copied from the program state block into the context array at +0x1864	^\s*uVar4\ =\ \*puVar5;$	+1
+use	FUN_000b5c00	uVar4	copiedWord	INFERRED	word copied from the program state block into the context array at +0x1864	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x1864\)\ \+\ iVar7\)\ =\ uVar4;$	+1
+local	FUN_000b5c00	puVar5	stateWordCursor	INFERRED	read cursor over the 0x16 program state words at programState+0x55e8
+local	FUN_000b5c00	uVar6	unitUseBits	INFERRED	value of glContext+0x1ca0: base flags plus one bit per texture unit (bit 10+unit)
+local	FUN_000b5c00	uVar10	programState	INFERRED	param_2[5]: program state block (copied out at +0x548c..+0x55e8)
+local	FUN_000b5c00	param_2	programObj	INFERRED	program object being made current (stored at glContext+0x148c)
+local	FUN_000b5c00	param_3	updateArg	INFERRED	forwarded unchanged to FUN_00050ef0
+use	FUN_000b5400	iVar9	programState	INFERRED	*(program+0x14): program state block (constant count at +0x4024, constants at +0x24)	^\s*iVar9\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x14\);$	+2
+use	FUN_000b5400	iVar9	programState	INFERRED	*(program+0x14): program state block (constant count at +0x4024, constants at +0x24)	^\s*uVar3\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x0000548c\)\ \+\ iVar9\);$	+1
+use	FUN_000b5400	iVar9	programState	INFERRED	*(program+0x14): program state block (constant count at +0x4024, constants at +0x24)	^\s*_memcpy\(puVar5\ \+\ 3,iVar9\ \+\ 0x24,\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00004024\)\ \+\ iVar9\)\ <<\ 4\);$	+1
+local	FUN_000b5400	iVar10	constCount	INFERRED	number of 4-word constants (programState+0x4024)
+use	FUN_000b5400	iVar11	constWords	INFERRED	constCount * 4: payload words of the constant upload packet	^\s*iVar11\ =\ iVar10\ \*\ 4;$	+1
+use	FUN_000b5400	iVar11	constWords	INFERRED	constCount * 4: payload words of the constant upload packet	^\s*puVar5\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,iVar11\ \+\ 3\);$	+1
+use	FUN_000b5400	iVar11	constWords	INFERRED	constCount * 4: payload words of the constant upload packet	^\s*puVar5\[2\]\ =\ \(iVar11\ \+\ \-1\)\ \*\ 0x10000\ \|\ 0x8882;$	+1
+use	FUN_000b5400	iVar11	packetEnd	INFERRED	command stream write pointer after the constant upload packet	^\s*iVar11\ =\ iVar10\ \*\ 0x10\ \+\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 0xc;$	+3
+use	FUN_000b5400	iVar11	packetEndFixed	INFERRED	command stream write pointer after the 0x15-word state packet	^\s*iVar11\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_000b5400	iVar11	packetEndFixed	INFERRED	command stream write pointer after the 0x15-word state packet	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar11\ \+\ 0x54;$	+2
+local	FUN_000b5400	puVar1	srcWordPtr	INFERRED	pointer into the context words at +0x1ee8 copied into the packet
+local	FUN_000b5400	uVar2	pairCount	INFERRED	(stream count + 1) / 2: number of 32-bit register pairs for the two stream tables
+use	FUN_000b5400	uVar3	constStartIndex	INFERRED	programState+0x548c & 0x3ff: first constant register index	^\s*uVar3\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x0000548c\)\ \+\ iVar9\);$	+1
+use	FUN_000b5400	uVar3	constStartIndex	INFERRED	programState+0x548c & 0x3ff: first constant register index	^\s*puVar5\[1\]\ =\ uVar3\ \&\ 0x3ff;$	+1
+use	FUN_000b5400	uVar3	registerHeader	INFERRED	(pairCount - 1) << 16, count field of the register-write headers 0x854/0x878	^\s*uVar3\ =\ \(uVar2\ \-\ 1\)\ \*\ 0x10000;$	+2
+use	FUN_000b5400	uVar3	registerHeader	INFERRED	(pairCount - 1) << 16, count field of the register-write headers 0x854/0x878	^\s*\*puVar8\ =\ uVar3\ \|\ 0x878;$	+1
+use	FUN_000b5400	uVar3	copyRemaining	INFERRED	countdown for the second table copy	^\s*uVar3\ =\ uVar2;$	+1
+use	FUN_000b5400	uVar3	copyRemaining	INFERRED	countdown for the second table copy	^\s*uVar3\ =\ uVar3\ \-\ 1;$	+2
+use	FUN_000b5400	iVar4	packetStart	INFERRED	current stream write pointer, advanced by the packet size	^\s*iVar4\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_000b5400	iVar4	packetStart	INFERRED	current stream write pointer, advanced by the packet size	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar4\ \+\ 8;$	+2
+use	FUN_000b5400	iVar4	packetStart2	INFERRED	current stream write pointer, advanced by the packet size	^\s*iVar4\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$@2	+1
+use	FUN_000b5400	iVar4	packetStart2	INFERRED	current stream write pointer, advanced by the packet size	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar4\ \+\ 0x18;$	+2
+use	FUN_000b5400	iVar4	packetStart3	INFERRED	current stream write pointer, advanced by the packet size	^\s*iVar4\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$@3	+1
+use	FUN_000b5400	iVar4	packetStart3	INFERRED	current stream write pointer, advanced by the packet size	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar4\ \+\ 8;$@2	+2
+use	FUN_000b5400	iVar4	ctxWordCursor	INFERRED	glContext advanced 4 per word copied into the state packet	^\s*iVar4\ =\ param_1;$	+1
+use	FUN_000b5400	iVar4	ctxWordCursor	INFERRED	glContext advanced 4 per word copied into the state packet	^\s*puVar1\ =\ \(undefined4\ \*\)\(iVar4\ \+\ 0x1ee8\);$	+2
+use	FUN_000b5400	iVar4	tableByteOffset	INFERRED	loop index * 4 into the first stream table	^\s*iVar4\ =\ iVar11\ \*\ 4;$	+1
+use	FUN_000b5400	iVar4	tableByteOffset	INFERRED	loop index * 4 into the first stream table	^\s*\*puVar8\ =\ \*\(uint\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x2440\)\);$	+1
+local	FUN_000b5400	puVar5	packet	INFERRED	command packet being filled (header word 0, then register values)
+local	FUN_000b5400	puVar6	pairPacket	INFERRED	command packet for the two register-pair tables
+local	FUN_000b5400	param_2	programObj	INFERRED	program object whose state block is emitted

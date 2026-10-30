@@ -1,0 +1,43 @@
+local	psnReallocateTemps	uVar4	destRegCopy	INFERRED	register field (+0xe) of the destination operand of the instruction
+local	psnReallocateTemps	uVar3	destRegBeforeAssign	INFERRED	register field (+0xe) of the destination operand read before the new assignment
+use	psnReallocateTemps	bVar9	sourceUseFlags	INFERRED	OR of the source use bytes (+0x14/+0x2c...) of the instruction	^\s*bVar9\ =\ \*\(byte\ \*\)\(puVar14\ \+\ 5\)\ \|\ \*\(byte\ \*\)\(\(int\)puVar14\ \+\ 0x15\);$	+2
+use	psnReallocateTemps	bVar9	sourceUseFlags	INFERRED	OR of the source use bytes (+0x14/+0x2c...) of the instruction	^\s*uVar6\ =\ uVar6\ \&\ \(bVar9\ \|\ 8\);$	+1
+use	psnReallocateTemps	bVar9	sourceUseByteB	INFERRED	source use byte at +0x2c	^\s*bVar9\ =\ \*\(byte\ \*\)\(puVar14\ \+\ 0xb\);$	+1
+use	psnReallocateTemps	bVar9	sourceUseByteB	INFERRED	source use byte at +0x2c	^\s*bVar9\ =\ \*\(byte\ \*\)\(\(int\)puVar14\ \+\ 0x2b\);$	+1
+use	psnReallocateTemps	bVar9	sourceUseByteB	INFERRED	source use byte at +0x2c	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c5460\)\(\(uint\)bVar9,uVar6,\(uint\)\*\(byte\ \*\)\(puVar14\ \+\ 0xc\),param_4,param_5,param_6\);$	+1
+use	psnReallocateTemps	bVar9	destMaskByte	INFERRED	byte +0x3a of the instruction: write mask / slot index	^\s*bVar9\ =\ \*\(byte\ \*\)\(\(int\)puVar14\ \+\ 0x3a\);$	+1
+use	psnReallocateTemps	bVar9	destMaskByte	INFERRED	byte +0x3a of the instruction: write mask / slot index	^\s*bVar9\ =\ \*\(byte\ \*\)\(\(int\)puVar14\ \+\ 0x3b\);$	+1
+use	psnReallocateTemps	bVar9	destMaskByte	INFERRED	byte +0x3a of the instruction: write mask / slot index	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c57b0\)\(\(uint\)bVar9,uVar6,\(uint\)\*\(byte\ \*\)\(puVar14\ \+\ 0xc\),param_4,\&uStack_87c,param_6\);$	+1
+local	psnReallocateTemps	uVar5	lowComponentBit	INFERRED	1 << component index of the first written component
+use	psnReallocateTemps	bVar1	pastLastEntry	INFERRED	scan index is not below the collected entry count	^\s*bVar1\ =\ uVar10\ <\ uVar5;$	+1
+use	psnReallocateTemps	bVar1	pastLastEntry	INFERRED	scan index is not below the collected entry count	^\s*if\ \(bVar1\)\ goto\ LAB_000c6e10;$	+1
+use	psnReallocateTemps	bVar1	notLastSlot	INFERRED	loop continues while the slot index is not 2	^\s*bVar1\ =\ iVar7\ !=\ 2;$	+1
+use	psnReallocateTemps	bVar1	notLastSlot	INFERRED	loop continues while the slot index is not 2	^\s*\}\ while\ \(bVar1\);$	+1
+local	psnReallocateTemps	bVar2	srcSelectByte	INFERRED	byte +0x31 of the instruction: source select
+local	psnReallocateTemps	uVar6	workMask	INFERRED	component mask / register working value (0xf, 7, destination register or computed mask)
+local	psnReallocateTemps	uVar8	collectedEntry	INFERRED	entry of the collected register list compared with the destination
+local	psnReallocateTemps	auStack_8b8	zeroedOperandBlock	INFERRED	8 bytes of zeros at the start of the on-stack psnRa state block (4 ushorts)
+local	psnReallocateTemps	uStack_8b0	zeroedOperandWord0	INFERRED	zeroed word of the on-stack state block
+local	psnReallocateTemps	uStack_8ac	zeroedOperandWord1	INFERRED	zeroed word of the on-stack state block
+local	psnReallocateTemps	puStack_8a8	freeListBase	INFERRED	free list {base pointer, count at +4} passed to psnRaReleaseUse / psnRaAssignDefinition: the base pointer
+local	psnReallocateTemps	uStack_8a4	freeListCount	INFERRED	free list entry count (the second field of the free list struct)
+local	psnReallocateTemps	uStack_8a0	releaseOperandReg	INFERRED	register half of the operand {reg, mask} passed to psnRaReleaseUse
+local	psnReallocateTemps	uStack_89e	releaseOperandMask	INFERRED	component mask half of the release operand
+local	psnReallocateTemps	uStack_89c	secondOperandReg	INFERRED	register half of the second operand pair on the stack
+local	psnReallocateTemps	uStack_89a	secondOperandMask	INFERRED	component mask half of the second operand pair on the stack
+local	psnReallocateTemps	puStack_898	tempTableBank0	INFERRED	temp table {bank0 pointer, bank1 pointer, split at +8}: first bank pointer (also the struct address)
+local	psnReallocateTemps	puStack_894	tempTableBank1	INFERRED	second bank pointer of the temp table (0 when only one bank is used)
+local	psnReallocateTemps	uStack_890	tempTableSplit	INFERRED	register number where the second bank starts (low half of param_3)
+local	psnReallocateTemps	uStack_88c	tempTablePad	INFERRED	padding word following the temp table struct
+local	psnReallocateTemps	uStack_888	zeroWordA	INFERRED	zero word of the on-stack state block
+local	psnReallocateTemps	uStack_884	zeroWordB	INFERRED	zero word of the on-stack state block
+local	psnReallocateTemps	uStack_880	zeroWordC	INFERRED	zero word of the on-stack state block
+local	psnReallocateTemps	uStack_87c	defOperand	INFERRED	operand {register, mask ^ 0xf} passed to psnRaAssignDefinition
+local	psnReallocateTemps	uStack_878	defOperandPad0	INFERRED	padding of the definition operand struct
+local	psnReallocateTemps	uStack_874	defOperandPad1	INFERRED	padding of the definition operand struct
+local	psnReallocateTemps	uStack_870	defOperandPad2	INFERRED	padding of the definition operand struct
+local	psnReallocateTemps	uStack_86c	defOperandPad3	INFERRED	padding of the definition operand struct
+local	psnReallocateTemps	uStack_868	defOperandPad4	INFERRED	padding of the definition operand struct
+local	psnReallocateTemps	auStack_864	collectedRegs	INFERRED	519 words: list of registers collected for the current instruction group
+local	psnReallocateTemps	param_8	scanIndex	INFERRED	list index while scanning collectedRegs; also forwarded as a stale argument
+local	psnReallocateTemps	param_3	useSecondBank	INFERRED	non-zero when a second temp bank is used (its low half is the split register)

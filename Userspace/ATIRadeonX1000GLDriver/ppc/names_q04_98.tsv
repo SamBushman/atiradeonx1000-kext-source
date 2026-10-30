@@ -1,0 +1,115 @@
+local	FUN_000a8630	fVar11	m00	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1920), row-major
+use	FUN_000a8630	fVar13	m01	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1924), row-major	^\s*fVar13\ =\ \*\(float\ \*\)\(param_2\ \+\ 0x1924\);$	+1
+use	FUN_000a8630	fVar13	m01	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1924), row-major	^\s*fVar20\ =\ fVar15\ \*\ fVar3\ \+\ \(fVar13\ \*\ fVar4\ \-\ fVar12\ \*\ fVar2\);$	+1
+use	FUN_000a8630	fVar13	m01	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1924), row-major	^\s*dVar28\ =\ \(double\)\(fVar11\ \*\ fVar14\ \-\ fVar13\ \*\ fVar16\);$	+3
+use	FUN_000a8630	fVar13	m01	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1924), row-major	^\s*dVar33\ =\ \(double\)\(fVar11\ \*\ fVar15\ \-\ fVar13\ \*\ fVar17\);$	+1
+use	FUN_000a8630	fVar13	m01	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1924), row-major	^\s*dVar31\ =\ \(double\)\(fVar11\ \*\ fVar12\ \-\ fVar13\ \*\ fVar18\);$	+1
+use	FUN_000a8630	dVar38	m02	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1928), row-major	^\s*dVar38\ =\ \(double\)\*\(float\ \*\)\(param_2\ \+\ 0x1928\);$	+1
+use	FUN_000a8630	dVar38	m02	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1928), row-major	^\s*fVar2\ =\ \(float\)\(dVar38\ \*\ dVar35\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar36\)\);$	+2
+use	FUN_000a8630	dVar38	m02	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1928), row-major	^\s*fVar5\ =\ \(float\)\(dVar38\ \*\ dVar30\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar39\)\);$	+1
+use	FUN_000a8630	dVar38	m02	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1928), row-major	^\s*dVar9\ =\ fparam_8\ \*\ dVar38;$	+3
+use	FUN_000a8630	dVar38	m02	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1928), row-major	^\s*fparam_1\ =\ \(double\)\(float\)\(dVar28\ \*\ dVar36\ \+$	+2
+use	FUN_000a8630	dVar34	m03	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x192c), row-major	^\s*dVar34\ =\ \(double\)\*\(float\ \*\)\(param_2\ \+\ 0x192c\);$	+1
+use	FUN_000a8630	dVar34	m03	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x192c), row-major	^\s*fVar2\ =\ \(float\)\(dVar38\ \*\ dVar35\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar36\)\);$	+2
+use	FUN_000a8630	dVar34	m03	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x192c), row-major	^\s*fVar5\ =\ \(float\)\(dVar38\ \*\ dVar30\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar39\)\);$	+1
+use	FUN_000a8630	dVar34	m03	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x192c), row-major	^\s*dVar1\ =\ fparam_8\ \*\ dVar34;$	+1
+use	FUN_000a8630	dVar34	m03	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x192c), row-major	^\s*dVar10\ =\ fparam_3\ \*\ dVar34;$	+1
+use	FUN_000a8630	dVar34	m03	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x192c), row-major	^\s*fparam_2\ =\ \-\(double\)\(float\)\(dVar32\ \*\ dVar34\ \-\ fparam_6\);$	+1
+local	FUN_000a8630	fVar18	m10	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1930), row-major
+use	FUN_000a8630	fVar12	m11	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1934), row-major	^\s*fVar12\ =\ \*\(float\ \*\)\(param_2\ \+\ 0x1934\);$	+1
+use	FUN_000a8630	fVar12	m11	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1934), row-major	^\s*fVar20\ =\ fVar15\ \*\ fVar3\ \+\ \(fVar13\ \*\ fVar4\ \-\ fVar12\ \*\ fVar2\);$	+1
+use	FUN_000a8630	fVar12	m11	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1934), row-major	^\s*fVar22\ =\ \-\(fVar13\ \*\ fVar6\ \-\ \(fVar12\ \*\ fVar5\ \-\ fVar14\ \*\ fVar3\)\);$	+1
+use	FUN_000a8630	fVar12	m11	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1934), row-major	^\s*fVar19\ =\ fVar15\ \*\ fVar6\ \+\ \(fVar12\ \*\ fVar7\ \-\ fVar14\ \*\ fVar4\);$	+1
+use	FUN_000a8630	fVar12	m11	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1934), row-major	^\s*fparam_8\ =\ \(double\)\(fVar18\ \*\ fVar15\ \-\ fVar12\ \*\ fVar17\);$	+3
+local	FUN_000a8630	dVar37	m12	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1938), row-major
+local	FUN_000a8630	dVar29	m13	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x193c), row-major
+local	FUN_000a8630	fVar16	m20	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1940), row-major
+use	FUN_000a8630	fVar14	m21	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1944), row-major	^\s*fVar14\ =\ \*\(float\ \*\)\(param_2\ \+\ 0x1944\);$	+1
+use	FUN_000a8630	fVar14	m21	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1944), row-major	^\s*dVar28\ =\ \(double\)\(fVar11\ \*\ fVar14\ \-\ fVar13\ \*\ fVar16\);$	+3
+use	FUN_000a8630	fVar14	m21	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1944), row-major	^\s*fVar19\ =\ fVar15\ \*\ fVar6\ \+\ \(fVar12\ \*\ fVar7\ \-\ fVar14\ \*\ fVar4\);$	+1
+use	FUN_000a8630	fVar14	m21	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1944), row-major	^\s*fparam_3\ =\ \(double\)\(fVar18\ \*\ fVar14\ \-\ fVar12\ \*\ fVar16\);$	+1
+use	FUN_000a8630	fVar14	m21	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1944), row-major	^\s*dVar32\ =\ \(double\)\(fVar16\ \*\ fVar15\ \-\ fVar14\ \*\ fVar17\);$	+1
+use	FUN_000a8630	dVar39	m22	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1948), row-major	^\s*dVar39\ =\ \(double\)\*\(float\ \*\)\(param_2\ \+\ 0x1948\);$	+1
+use	FUN_000a8630	dVar39	m22	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1948), row-major	^\s*fVar5\ =\ \(float\)\(dVar38\ \*\ dVar30\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar39\)\);$	+1
+use	FUN_000a8630	dVar39	m22	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1948), row-major	^\s*fVar6\ =\ \(float\)\(dVar37\ \*\ dVar30\ \-\ \(double\)\(float\)\(dVar29\ \*\ dVar39\)\);$	+2
+use	FUN_000a8630	dVar39	m22	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1948), row-major	^\s*fparam_7\ =\ \(double\)\(float\)\(dVar31\ \*\ dVar39\ \+$	+2
+use	FUN_000a8630	dVar39	m22	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1948), row-major	^\s*fparam_4\ =\ \-\(double\)\(float\)\(dVar32\ \*\ dVar37\ \-$	+3
+use	FUN_000a8630	dVar39	m22	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1948), row-major	^\s*fparam_1\ =\ \(double\)\(float\)\(dVar28\ \*\ dVar36\ \+$	+2
+local	FUN_000a8630	dVar30	m23	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x194c), row-major
+local	FUN_000a8630	fVar17	m30	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1950), row-major
+local	FUN_000a8630	fVar15	m31	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1954), row-major
+local	FUN_000a8630	dVar36	m32	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x1958), row-major
+local	FUN_000a8630	dVar35	m33	INFERRED	element of the 4x4 matrix at engineState+0x1920 (offset 0x195c), row-major
+use	FUN_000a8630	fVar2	minorA	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar2\ =\ \(float\)\(dVar38\ \*\ dVar35\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar36\)\);$	+1
+use	FUN_000a8630	fVar2	minorA	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar20\ =\ fVar15\ \*\ fVar3\ \+\ \(fVar13\ \*\ fVar4\ \-\ fVar12\ \*\ fVar2\);$	+1
+use	FUN_000a8630	fVar2	minorA	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar21\ =\ \-\(fVar13\ \*\ fVar7\ \-\ \(fVar14\ \*\ fVar2\ \-\ fVar15\ \*\ fVar5\)\);$	+1
+use	FUN_000a8630	fVar2	minorA	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \(double\)\(fVar17\ \*\ fVar5\ \+\ \(fVar11\ \*\ fVar7\ \-\ fVar16\ \*\ fVar2\)\)\);$	+1
+use	FUN_000a8630	fVar2	minorA	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \-\(double\)\(fVar11\ \*\ fVar4\ \-\ \(fVar18\ \*\ fVar2\ \-\ fVar17\ \*\ fVar3\)\)\);$	+1
+use	FUN_000a8630	fVar3	minorB	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar3\ =\ \(float\)\(dVar38\ \*\ dVar29\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar37\)\);$	+1
+use	FUN_000a8630	fVar3	minorB	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar20\ =\ fVar15\ \*\ fVar3\ \+\ \(fVar13\ \*\ fVar4\ \-\ fVar12\ \*\ fVar2\);$	+1
+use	FUN_000a8630	fVar3	minorB	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar22\ =\ \-\(fVar13\ \*\ fVar6\ \-\ \(fVar12\ \*\ fVar5\ \-\ fVar14\ \*\ fVar3\)\);$	+1
+use	FUN_000a8630	fVar3	minorB	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \-\(double\)\(fVar11\ \*\ fVar4\ \-\ \(fVar18\ \*\ fVar2\ \-\ fVar17\ \*\ fVar3\)\)\);$	+1
+use	FUN_000a8630	fVar3	minorB	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \(double\)\(fVar16\ \*\ fVar3\ \+\ \(fVar11\ \*\ fVar6\ \-\ fVar18\ \*\ fVar5\)\)\);$	+1
+use	FUN_000a8630	fVar4	minorC	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar4\ =\ \(float\)\(dVar37\ \*\ dVar35\ \-\ \(double\)\(float\)\(dVar29\ \*\ dVar36\)\);$	+1
+use	FUN_000a8630	fVar4	minorC	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar20\ =\ fVar15\ \*\ fVar3\ \+\ \(fVar13\ \*\ fVar4\ \-\ fVar12\ \*\ fVar2\);$	+1
+use	FUN_000a8630	fVar4	minorC	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar19\ =\ fVar15\ \*\ fVar6\ \+\ \(fVar12\ \*\ fVar7\ \-\ fVar14\ \*\ fVar4\);$	+1
+use	FUN_000a8630	fVar4	minorC	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \-\(double\)\(fVar18\ \*\ fVar7\ \-\ \(fVar16\ \*\ fVar4\ \-\ fVar17\ \*\ fVar6\)\)\);$	+1
+use	FUN_000a8630	fVar4	minorC	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \-\(double\)\(fVar11\ \*\ fVar4\ \-\ \(fVar18\ \*\ fVar2\ \-\ fVar17\ \*\ fVar3\)\)\);$	+1
+use	FUN_000a8630	fVar5	minorD	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar5\ =\ \(float\)\(dVar38\ \*\ dVar30\ \-\ \(double\)\(float\)\(dVar34\ \*\ dVar39\)\);$	+1
+use	FUN_000a8630	fVar5	minorD	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar22\ =\ \-\(fVar13\ \*\ fVar6\ \-\ \(fVar12\ \*\ fVar5\ \-\ fVar14\ \*\ fVar3\)\);$	+2
+use	FUN_000a8630	fVar5	minorD	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \(double\)\(fVar17\ \*\ fVar5\ \+\ \(fVar11\ \*\ fVar7\ \-\ fVar16\ \*\ fVar2\)\)\);$	+1
+use	FUN_000a8630	fVar5	minorD	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \(double\)\(fVar16\ \*\ fVar3\ \+\ \(fVar11\ \*\ fVar6\ \-\ fVar18\ \*\ fVar5\)\)\);$	+1
+use	FUN_000a8630	fVar6	minorE	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar6\ =\ \(float\)\(dVar37\ \*\ dVar30\ \-\ \(double\)\(float\)\(dVar29\ \*\ dVar39\)\);$	+1
+use	FUN_000a8630	fVar6	minorE	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar22\ =\ \-\(fVar13\ \*\ fVar6\ \-\ \(fVar12\ \*\ fVar5\ \-\ fVar14\ \*\ fVar3\)\);$	+1
+use	FUN_000a8630	fVar6	minorE	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar19\ =\ fVar15\ \*\ fVar6\ \+\ \(fVar12\ \*\ fVar7\ \-\ fVar14\ \*\ fVar4\);$	+1
+use	FUN_000a8630	fVar6	minorE	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \-\(double\)\(fVar18\ \*\ fVar7\ \-\ \(fVar16\ \*\ fVar4\ \-\ fVar17\ \*\ fVar6\)\)\);$	+1
+use	FUN_000a8630	fVar6	minorE	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \(double\)\(fVar16\ \*\ fVar3\ \+\ \(fVar11\ \*\ fVar6\ \-\ fVar18\ \*\ fVar5\)\)\);$	+1
+use	FUN_000a8630	fVar7	minorF	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar7\ =\ \(float\)\(dVar39\ \*\ dVar35\ \-\ \(double\)\(float\)\(dVar30\ \*\ dVar36\)\);$	+1
+use	FUN_000a8630	fVar7	minorF	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar21\ =\ \-\(fVar13\ \*\ fVar7\ \-\ \(fVar14\ \*\ fVar2\ \-\ fVar15\ \*\ fVar5\)\);$	+1
+use	FUN_000a8630	fVar7	minorF	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*fVar19\ =\ fVar15\ \*\ fVar6\ \+\ \(fVar12\ \*\ fVar7\ \-\ fVar14\ \*\ fVar4\);$	+1
+use	FUN_000a8630	fVar7	minorF	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \-\(double\)\(fVar18\ \*\ fVar7\ \-\ \(fVar16\ \*\ fVar4\ \-\ fVar17\ \*\ fVar6\)\)\);$	+1
+use	FUN_000a8630	fVar7	minorF	INFERRED	2x2 sub-determinant used by the cofactor expansion of the matrix inverse	^\s*\(float\)\(dVar27\ \*\ \(double\)\(fVar17\ \*\ fVar5\ \+\ \(fVar11\ \*\ fVar7\ \-\ fVar16\ \*\ fVar2\)\)\);$	+1
+local	FUN_000a8630	dVar28	minorG	INFERRED	m00*m21 - m01*m20
+local	FUN_000a8630	dVar31	minorH	INFERRED	m00*m11 - m01*m10
+use	FUN_000a8630	dVar32	minorI	INFERRED	m20*m31 - m21*m30	^\s*dVar32\ =\ \(double\)\(fVar16\ \*\ fVar15\ \-\ fVar14\ \*\ fVar17\);$	+1
+use	FUN_000a8630	dVar32	minorI	INFERRED	m20*m31 - m21*m30	^\s*fparam_4\ =\ \-\(double\)\(float\)\(dVar32\ \*\ dVar37\ \-$	+5
+use	FUN_000a8630	dVar32	minorI	INFERRED	m20*m31 - m21*m30	^\s*fparam_1\ =\ \(double\)\(float\)\(dVar28\ \*\ dVar36\ \+$	+3
+local	FUN_000a8630	dVar33	minorJ	INFERRED	m00*m31 - m01*m30
+local	FUN_000a8630	fVar19	cofactor0	INFERRED	first cofactor of column 0 (multiplies m00 in the determinant)
+local	FUN_000a8630	fVar21	cofactor1	INFERRED	second cofactor (multiplies m10)
+local	FUN_000a8630	fVar22	cofactor2	INFERRED	third cofactor (multiplies m20)
+local	FUN_000a8630	fVar20	cofactor3	INFERRED	fourth cofactor (multiplies m30)
+use	FUN_000a8630	fVar12	determinant	INFERRED	m00*cofactor0 + m10*cofactor1 + m20*cofactor2 + m30*cofactor3	^\s*fVar12\ =\ fVar11\ \*\ fVar19\ \+\ fVar18\ \*\ fVar21\ \+\ fVar17\ \*\ fVar22\ \+\ fVar16\ \*\ fVar20;$	+1
+use	FUN_000a8630	fVar12	determinant	INFERRED	m00*cofactor0 + m10*cofactor1 + m20*cofactor2 + m30*cofactor3	^\s*if\ \(\(fVar12\ <\ FLOAT_001aa198\)\ \|\|\ \(uVar26\ =\ 0,\ FLOAT_001aa19c\ <\ fVar12\)\)\ \{$	+1
+use	FUN_000a8630	fVar12	determinant	INFERRED	m00*cofactor0 + m10*cofactor1 + m20*cofactor2 + m30*cofactor3	^\s*dVar27\ =\ \(double\)\(FLOAT_001aa0e8\ /\ fVar12\);$	+1
+local	FUN_000a8630	dVar27	inverseDeterminant	INFERRED	1.0 / determinant
+local	FUN_000a8630	uVar26	inverseValid	INFERRED	1 when |determinant| is outside the tolerance range and the inverse was stored
+use	FUN_000a8630	fVar12	scaledCofactor3	INFERRED	cofactor3 * 1/determinant	^\s*fVar12\ =\ \(float\)\(\(double\)fVar20\ \*\ dVar27\);$	+2
+use	FUN_000a8630	fVar12	scaledCofactor3	INFERRED	cofactor3 * 1/determinant	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00001388\)\ \+\ param_1\)\ =\ fVar12;$	+1
+use	FUN_000a8630	fVar13	scaledCofactor0	INFERRED	cofactor0 * 1/determinant	^\s*fVar13\ =\ \(float\)\(\(double\)fVar19\ \*\ dVar27\);$	+2
+use	FUN_000a8630	fVar13	scaledCofactor0	INFERRED	cofactor0 * 1/determinant	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00001368\)\ \+\ param_1\)\ =\ fVar13;$	+1
+use	FUN_000a8630	fVar14	scaledCofactor1	INFERRED	cofactor1 * 1/determinant	^\s*fVar14\ =\ \(float\)\(\(double\)fVar21\ \*\ dVar27\);$	+2
+use	FUN_000a8630	fVar14	scaledCofactor1	INFERRED	cofactor1 * 1/determinant	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00001378\)\ \+\ param_1\)\ =\ fVar14;$	+1
+use	FUN_000a8630	fVar2	scaledCofactor2	INFERRED	cofactor2 * 1/determinant	^\s*fVar2\ =\ \(float\)\(\(double\)fVar22\ \*\ dVar27\);$	+3
+use	FUN_000a8630	dVar32	scaledMinorA	INFERRED	inverse element scaled by 1/determinant	^\s*dVar32\ =\ fparam_7\ \*\ dVar27;$	+1
+use	FUN_000a8630	dVar32	scaledMinorA	INFERRED	inverse element scaled by 1/determinant	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a4\)\ \+\ param_1\)\ =\ \(float\)dVar32;$	+1
+use	FUN_000a8630	dVar34	scaledMinorB	INFERRED	inverse element scaled by 1/determinant	^\s*dVar34\ =\ fparam_5\ \*\ dVar27;$	+2
+use	FUN_000a8630	dVar34	scaledMinorB	INFERRED	inverse element scaled by 1/determinant	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00001370\)\ \+\ param_1\)\ =\ \(float\)dVar34;$	+1
+use	FUN_000a8630	dVar38	scaledMinorC	INFERRED	inverse element scaled by 1/determinant	^\s*dVar38\ =\ fparam_4\ \*\ dVar27;$	+2
+use	FUN_000a8630	dVar38	scaledMinorC	INFERRED	inverse element scaled by 1/determinant	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00001374\)\ \+\ param_1\)\ =\ \(float\)dVar38;$	+1
+use	FUN_000a8630	dVar39	scaledMinorD	INFERRED	inverse element scaled by 1/determinant	^\s*dVar39\ =\ fparam_2\ \*\ dVar27;$	+2
+use	FUN_000a8630	dVar39	scaledMinorD	INFERRED	inverse element scaled by 1/determinant	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00001380\)\ \+\ param_1\)\ =\ \(float\)dVar39;$	+1
+local	FUN_000a8630	dVar8	scaledMinorE	INFERRED	inverse element scaled by 1/determinant
+local	FUN_000a8630	dVar1	productM03	INFERRED	partial product used in an inverse element
+local	FUN_000a8630	dVar9	productM02	INFERRED	partial product used in an inverse element
+local	FUN_000a8630	dVar10	productM03B	INFERRED	partial product used in an inverse element
+use	FUN_000a8630	uVar23	ctxWord40	INFERRED	glContext+0x40 dirty flag word	^\s*uVar23\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x40\);$	+1
+use	FUN_000a8630	uVar23	ctxWord40	INFERRED	glContext+0x40 dirty flag word	^\s*uVar23\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x40\)\ \|\ 0x10000;$	+2
+use	FUN_000a8630	uVar23	ctxWord40	INFERRED	glContext+0x40 dirty flag word	^\s*uVar23\ =\ uVar23\ \|\ 0x10000;$	+2
+use	FUN_000a8630	uVar23	ctxWord40	INFERRED	glContext+0x40 dirty flag word	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x40\)\ =\ uVar23\ \|\ 0x30000;$	+1
+use	FUN_000a8630	uVar24	unitCount	INFERRED	min(unit count in the caps (+0x4300), ctx limit byte +0x13b4)	^\s*uVar24\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00004300\)\[param_2\];$	+1
+use	FUN_000a8630	uVar24	unitCount	INFERRED	min(unit count in the caps (+0x4300), ctx limit byte +0x13b4)	^\s*uVar24\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b4\)\[param_1\];$	+1
+use	FUN_000a8630	uVar24	unitCount	INFERRED	min(unit count in the caps (+0x4300), ctx limit byte +0x13b4)	^\s*if\ \(1\ <\ uVar24\)\ \{$	+1
+use	FUN_000a8630	uVar24	unitCount	INFERRED	min(unit count in the caps (+0x4300), ctx limit byte +0x13b4)	^\s*iVar25\ =\ uVar24\ \-\ 1;$	+1
+local	FUN_000a8630	iVar25	unitsLeft	INFERRED	countdown over the units above the first when looking for a dirty unit
+func	FUN_000a8630	gld_updateInverseMatrix	INFERRED	inverts the 4x4 matrix at engineState+0x1920 by cofactor expansion (determinant tolerance test FLOAT_001aa198/19c), stores the inverse at ctx+0x1368..0x13a4 and marks the dependent state dirty

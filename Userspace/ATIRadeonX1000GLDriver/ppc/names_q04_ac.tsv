@@ -1,0 +1,1 @@
+use	ilAssembleProgram	uVar33	scratchWord	INFERRED	scratch word reused as operand/size/loop value across both passes; the size-accumulation webs share it (definitions inside conditions defeat web splitting)	*		all	none

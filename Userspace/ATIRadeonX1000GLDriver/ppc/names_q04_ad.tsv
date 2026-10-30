@@ -1,0 +1,79 @@
+local	scCallbackFopen	param_2	path	INFERRED	file name handed to _fopen
+local	scCallbackFopen	param_3	mode	INFERRED	1 = read, 2 = write, 3 = read/write: selects the fopen mode string
+local	scCallbackFopen	uVar1	file	INFERRED	FILE* returned by _fopen
+local	ilPopFreeRegister	iVar1	wordPtr	INFERRED	cursor over the free-register bit words, then the word being cleared
+local	ilPopFreeRegister	uVar4	freeBits	INFERRED	free-register bit word under test
+local	ilPopFreeRegister	uVar5	clearMask	INFERRED	mask that clears the lowest set bit of freeBits
+local	scDestroy	param_1	compiler	INFERRED	shader compiler object: [0] free callback, [1] allocator user data
+local	scDestroy	uVar1	result	INFERRED	3 for a null object, 0 after destroying; also holds the allocator user data in between
+local	scDestroy	pcVar2	freeCallback	INFERRED	allocator free callback read from compiler[0]
+local	gld_storeConstantVec4	param_1	constantBank	INFERRED	base of the constant table (slots of 0x10 bytes at +0x8c)
+local	gld_storeConstantVec4	param_2	constantIndex	INFERRED	constant slot index
+local	gld_storeConstantVec4	param_7	storeRawFloat	INFERRED	nonzero: store the four floats raw; zero: convert each with floatToFp24
+local	gld_storeConstantVec4	iVar1	constantSlot	INFERRED	address of the selected 0x10-byte slot
+local	gld_storeConstantVec4	uVar2	fp24Value	INFERRED	component converted by floatToFp24
+local	gld_normalizeVec3	fVar1	scale	INFERRED	zero for a null vector, else 1/length
+local	gld_normalizeVec3	fVar2	inX	INFERRED	input X component
+local	gld_normalizeVec3	dVar3	lengthSquared	INFERRED	x*x+y*y+z*z, then its square root
+local	gld_emitLightingStatePacket	param_2	passArgR4	INFERRED	forwarded unchanged to FUN_0004d620 (refreshed from r4 after the packet is emitted)
+local	gld_emitLightingStatePacket	param_3	passArgR5	INFERRED	forwarded unchanged to FUN_0004d620
+local	gld_emitLightingStatePacket	param_4	passArgR6	INFERRED	forwarded unchanged to FUN_0004d620
+local	gld_emitLightingStatePacket	iVar2	packetPtr	INFERRED	command packet address (write cursor) read back from glContext+0x274c
+local	gld_emitLightingStatePacket	puVar3	packetStart	INFERRED	packet buffer returned by the reserve hook at glContext+0x2758
+local	scCallbackFwrite	param_2	file	INFERRED	FILE* (0 = nothing written)
+local	scCallbackFwrite	param_3	buffer	INFERRED	source bytes
+local	scCallbackFwrite	param_4	byteCount	INFERRED	number of bytes written
+local	scCallbackFwrite	uVar1	written	INFERRED	_fwrite result
+local	scCallbackFread	param_2	file	INFERRED	FILE* (0 = nothing read)
+local	scCallbackFread	param_3	buffer	INFERRED	destination bytes
+local	scCallbackFread	param_4	byteCount	INFERRED	number of bytes read
+local	scCallbackFread	uVar1	readCount	INFERRED	_fread result
+local	gld_getBoundProgramId	param_1	glContext	INFERRED	GL context
+local	gld_getBoundProgramId	iVar1	programRecord	INFERRED	bound program record (+0x74 object, +8 id)
+local	psnAccumulateRgbSelectRead	uVar1	currentUsageBits	INFERRED	usage word of the selected source slot, kept for the final OR
+local	psnAccumulateRgbSelectRead	iVar2	sourceUsageEntry	INFERRED	usage entry of the primary source (sourceUsage + offset)
+local	psnAccumulateRgbSelectRead	iVar3	secondUsageEntry	INFERRED	matching usage entry of the second record (passThroughR8 + offset)
+local	psnAccumulateAlphaSelectRead	iVar1	sourceUsageEntry	INFERRED	usage entry of the primary source (sourceUsage + offset)
+local	psnAccumulateAlphaSelectRead	uVar2	componentBits	INFERRED	component bit (1,2,4,8) read by the selected alpha source
+local	psnAccumulateAlphaSelectRead	iVar3	secondUsageEntry	INFERRED	matching usage entry of the second record (passThroughR8 + offset)
+local	gld_updatePolygonModeFlags	param_2	stateRecord	INFERRED	state record whose table at +0x3178 says polygon mode state is tracked
+local	gld_updatePolygonModeFlags	iVar1	currentStateRecord	INFERRED	state record reached through glContext+4
+local	gld_updatePolygonModeFlags	uVar2	lineModeFlag	INFERRED	1 when either face polygon mode is GL_LINE (0x1b02)
+local	gldMarkAllStateDirty	iVar1	unitCursor	INFERRED	byte cursor over the per-unit dirty bytes
+local	gldMarkAllStateDirty	uVar2	unitCount	INFERRED	byte at glContext+0x13b5: number of units
+local	gld_markFastClearFlag	param_1	glContext	INFERRED	GL context
+local	gld_markFastClearFlag	iVar1	boundRecord	INFERRED	record at state+0x150 (0 = use the inline one)
+local	gld_markFastClearFlag	iVar2	targetRecord	INFERRED	record whose byte +0xc5 is set
+local	gld_freeProgramImage	param_2	programRecord	INFERRED	program record: +0x14 is the compiled image
+local	gld_freeProgramImage	iVar1	imageBlock	INFERRED	compiled program image block
+local	gld_freePointMaskCache	iVar1	cacheEntry	INFERRED	entry of the point-mask cache list
+local	gld_freePointMaskCache	iVar2	nextEntry	INFERRED	next entry (+0x138)
+local	gld_emitUnitSelectTokens	param_3	kind4Index	INFERRED	low 16 bits of the token of kind 0x04
+local	gld_emitUnitSelectTokens	param_4	kind17Index	INFERRED	low 16 bits of the token of kind 0x17
+local	gld_emitUnitSelectTokens	uVar1	wordCount	INFERRED	vector word count after each push
+local	ilMarkOperandRegisterUsed	iVar2	bitWordCursor	INFERRED	word index of the register, then a cursor over the 8 bit words
+local	ilMarkOperandRegisterUsed	iVar5	bitWordPtr	INFERRED	address of the bit word holding the register
+local	vsdisPrintOutputMapping	iVar5	letterX	INFERRED	component letter printed for destination X ('_' when masked off)
+local	vsdisPrintOutputMapping	acStack_1f3	semanticNameBytes5to7	INFERRED	bytes 5..7 of the semantic name text buffer
+local	vsdisPrintOutputMapping	acStack_1ef	semanticNameBytes9to11	INFERRED	bytes 9..11 of the semantic name text buffer
+local	ilRecordDefinedConstantSecondary	iVar1	bitWordIndex	INFERRED	constantIndex / 32: which defined-constant bit word
+local	ilRecordDefinedConstantSecondary	uVar3	definedBits	INFERRED	defined-constant bit word before the new bit is set
+local	ilRecordDefinedConstantSecondary	iVar4	bitWordPtr	INFERRED	address of the bit word (programRecord + 4*bitWordIndex)
+local	ilRecordDefinedConstantSecondary	iVar5	constantSlot	INFERRED	address of the 0x10-byte constant slot (secondary bank)
+local	ilRecordDefinedConstantPrimary	iVar2	bitWordIndex	INFERRED	constantIndex / 32: which defined-constant bit word
+local	ilRecordDefinedConstantPrimary	iVar3	constantSlot	INFERRED	address of the 0x10-byte constant slot (primary bank)
+local	ilRecordDefinedConstantPrimary	uVar4	definedBits	INFERRED	defined-constant bit word before the new bit is set
+local	ilRecordDefinedConstantPrimary	iVar5	bitWordPtr	INFERRED	address of the bit word (programRecord + 4*bitWordIndex)
+local	gld_destroyUnitCmdLists	iVar2	slotCursor	INFERRED	pointer to the current of four consecutive slots
+local	gld_destroyUnitCmdLists	iVar3	slotObject	INFERRED	object held by the slot (0 = empty)
+local	scSetCallbackTablesChecked	param_2	callbackTableA	INFERRED	first callback table
+local	scSetCallbackTablesChecked	param_3	callbackTableB	INFERRED	second callback table
+local	scSetCallbackTablesChecked	uVar1	status	INFERRED	scSetCallbackTables result
+local	psnDecRangeHasConflict	iVar10	conflictFlag	INFERRED	result of the read/destination-match test on the scanned entry
+local	gldFreeEngineState	iVar1	engineState	INFERRED	engine state block at ctx+0x240
+local	scCreate	param_2	enableFlag	INFERRED	must be non-zero for an object to be created
+local	scCreate	iVar1	initStatus	INFERRED	non-zero when the compiler object initialisation fails
+local	psnMaskIsSingleComponent	param_1	writeMask	INFERRED	write mask word: bits 0..3 of the halfword at +2
+local	psnMaskIsSingleComponent	uVar1	maskBits	INFERRED	low four mask bits
+local	psnDecCanFoldIntoSlot	bVar1	loopContinue	INFERRED	three source slots still to check
+local	psnDecCanFoldIntoSlot	puVar2	sourceSelectPtr	INFERRED	cursor over the source select halfwords

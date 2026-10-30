@@ -1,0 +1,12 @@
+use	ilEmitPrologue	iVar9	regTableCursor	INFERRED	programRecord advanced 4 per input bit: table of registers popped for the used inputs at +0xb8	^\s*iVar9\ =\ param_2;$	+1
+use	ilEmitPrologue	iVar9	regTableCursor	INFERRED	programRecord advanced 4 per input bit: table of registers popped for the used inputs at +0xb8	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0xb8\)\ =\ uVar3;$	+1
+use	ilEmitPrologue	iVar9	regTableCursor	INFERRED	programRecord advanced 4 per input bit: table of registers popped for the used inputs at +0xb8	^\s*iVar9\ =\ iVar9\ \+\ 4;$	+1
+use	ilEmitPrologue	iVar9	counterTableCursor	INFERRED	programRecord advanced 4 per entry: counter values stored at +0x17c	^\s*iVar9\ =\ param_2;$@2	+1
+use	ilEmitPrologue	iVar9	counterTableCursor	INFERRED	programRecord advanced 4 per entry: counter values stored at +0x17c	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x17c\)\ =\ uVar3;$	+2
+use	ilEmitPrologue	iVar9	slotMapCursor	INFERRED	programRecord advanced 4 per slot: identity map 0..15 written at +0x232c	^\s*iVar9\ =\ param_2;$@3	+1
+use	ilEmitPrologue	iVar9	slotMapCursor	INFERRED	programRecord advanced 4 per slot: identity map 0..15 written at +0x232c	^\s*\*\(int\ \*\)\(iVar9\ \+\ 0x232c\)\ =\ iVar5;$	+1
+use	ilEmitPrologue	iVar9	slotMapCursor	INFERRED	programRecord advanced 4 per slot: identity map 0..15 written at +0x232c	^\s*iVar9\ =\ iVar9\ \+\ 4;$@3	+1
+local	ilEmitPrologue	bVar1	notLastBit	INFERRED	loop continues while the input bit index is not 0xf
+local	ilEmitPrologue	puVar4	freeSlotMapCursor	INFERRED	cursor over the +0x232c slot map, receiving the slot numbers not used by the mask at record+8
+local	ilEmitPrologue	uVar7	counterCount	INFERRED	number of counter values needed for the inputs: 1 when any input is used, 2 when an input is also in the second mask (+0x74)
+local	ilEmitPrologue	uVar10	inputBit	INFERRED	1 << input index

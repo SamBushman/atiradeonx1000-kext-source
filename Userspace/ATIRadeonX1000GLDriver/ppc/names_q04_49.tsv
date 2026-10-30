@@ -1,0 +1,33 @@
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*uVar3\ =\ FUN_0004e990\(param_1\);$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1ae4\)\ =\ uVar3\ \|\ uVar3\ <<\ 0x10;$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1ae4\)\ =\ uVar3\ <<\ 8;$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*uVar3\ =\ uVar3\ >>\ \(iVar10\ \-\ 8U\ \&\ 0x3f\);$	+2
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*if\ \(\(uVar3\ <\ 0xffffff\)\ \&\&\ \(uVar8\ =\ 0,\ uVar3\ !=\ 0\)\)\ \{$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*for\ \(;\ \(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar3\ \*\ uVar2\)\ !=\ 0;\ uVar8\ =\ uVar8\ \-\ 1\)\ \{$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*for\ \(;\ \(uVar3\ \*\ uVar2\ \&\ 1\ <<\ \(uVar8\ \&\ 0x3f\)\)\ ==\ 0;\ uVar8\ =\ uVar8\ \-\ 1\)\ \{$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*uVar3\ =\ uVar3\ \*\ uVar2;$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*uVar3\ =\ uVar3\ \*\ 2;$	+1
+use	FUN_000a6500	uVar3	clearValue	INFERRED	raw clear value returned by FUN_0004e990(glContext); shifted into ctx+0x1ae4 and expanded into the fill pattern	^\s*uVar8\ =\ \(uVar3\ \&\ \~\(\(1\ <<\ \(uVar2\ \&\ 0x3f\)\)\ \+\ \-1\ <<\ \(iVar10\ \-\ uVar2\ \&\ 0x3f\)\)\)\ >>$	+1
+use	FUN_000a6500	uVar3	clearByte	INFERRED	low byte of the packed fill pattern, replicated into the other byte lanes	^\s*uVar3\ =\ uVar8\ \&\ 0xff;$	+2
+local	FUN_000a6500	puVar1	prevPacketLink	INFERRED	engine+0x1d8 previous packet pointer: its word receives the word distance to the new packet
+local	FUN_000a6500	uVar2	fieldMask	INFERRED	(1 << fieldWidth) - 1
+local	FUN_000a6500	uVar5	fieldWidth	INFERRED	bits 12-14 of ctx+0x1ab0 (width of the packed field)
+local	FUN_000a6500	puVar4	packet	INFERRED	command packet allocated through the context callback at +0x2758 (0x1a words)
+local	FUN_000a6500	puVar7	writeCursor	INFERRED	end of the filled part of the packet
+use	FUN_000a6500	uVar8	surfaceFormatBits	INFERRED	engine+0x154 & 0x30000: selects 0x18 / 0x10 / 0 bit channel layout	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x154\)\ \&\ 0x30000;$	+2
+use	FUN_000a6500	uVar8	surfaceFormatBits	INFERRED	engine+0x154 & 0x30000: selects 0x18 / 0x10 / 0 bit channel layout	^\s*if\ \(uVar8\ ==\ 0x10000\)\ \{$	+1
+use	FUN_000a6500	uVar8	surfaceModeWord	INFERRED	engine caps +0x2db4 word ORed into ctx+0x1ae4	^\s*uVar8\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00002db4\)\ \+\ iVar11\);$	+3
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	32-bit pattern written into the fill packet word 3 (clear value replicated across the byte lanes or packed through the field mask)	^\s*uVar8\ =\ uVar3\ \|\ uVar3\ <<\ 0x18\ \|\ uVar3\ <<\ 0x10\ \|\ uVar3\ <<\ 8;$	+1
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	32-bit pattern written into the fill packet word 3 (clear value replicated across the byte lanes or packed through the field mask)	^\s*if\ \(\(uVar3\ <\ 0xffffff\)\ \&\&\ \(uVar8\ =\ 0,\ uVar3\ !=\ 0\)\)\ \{$	+1
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	32-bit pattern written into the fill packet word 3 (clear value replicated across the byte lanes or packed through the field mask)	^\s*uVar8\ =\ \(uVar3\ \&\ \~\(\(1\ <<\ \(uVar2\ \&\ 0x3f\)\)\ \+\ \-1\ <<\ \(iVar10\ \-\ uVar2\ \&\ 0x3f\)\)\)\ >>$	+1
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	32-bit pattern written into the fill packet word 3 (clear value replicated across the byte lanes or packed through the field mask)	^\s*uVar3\ =\ uVar8\ \&\ 0xff;$	+2
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	32-bit pattern written into the fill packet word 3 (clear value replicated across the byte lanes or packed through the field mask)	^\s*puVar9\[3\]\ =\ uVar8;$	+1
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	0xffffffff default of the pattern when the clear value is saturated	^\s*uVar8\ =\ 0xffffffff;$	+1
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	bit position scanned from the top of the channel layout	^\s*uVar8\ =\ iVar10\ \-\ 1;$	+1
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	bit position scanned from the top of the channel layout	^\s*for\ \(;\ \(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar3\ \*\ uVar2\)\ !=\ 0;\ uVar8\ =\ uVar8\ \-\ 1\)\ \{$	+1
+use	FUN_000a6500	uVar8	fillPattern	INFERRED	bit position scanned from the top of the channel layout	^\s*for\ \(;\ \(uVar3\ \*\ uVar2\ \&\ 1\ <<\ \(uVar8\ \&\ 0x3f\)\)\ ==\ 0;\ uVar8\ =\ uVar8\ \-\ 1\)\ \{$	+1
+local	FUN_000a6500	puVar9	fillCursor	INFERRED	cursor of the optional fill sub-packet (0xc0023700)
+local	FUN_000a6500	iVar10	channelBits	INFERRED	bit width of the channel layout: 0x18, 0x10 or 0 from surfaceFormatBits
+local	FUN_000a6500	iVar11	engineCaps	INFERRED	engine+0x10 capability table (word at +0x2db4)
+local	FUN_000a6500	param_2	emitFill	INFERRED	nonzero adds the fill sub-packet(s); also stored at packet word 1
+func	FUN_000a6500	gld_emitClearFillPacket	INFERRED	allocates a 0x1a-word command packet (header 0x5000000, 0xc0023200/0xc0023700 sub-packets), expands the clear value from FUN_0004e990 into the surface-format fill pattern and links the packet into the engine packet chain (engine+0x1d8)

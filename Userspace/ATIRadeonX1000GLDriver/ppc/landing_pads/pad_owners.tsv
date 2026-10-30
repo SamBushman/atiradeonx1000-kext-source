@@ -1,4 +1,4 @@
-0xcd10c	FUN_000cd05c
+0xcd10c	scCreate
 0xd0340	vsDisassembleToString
 0xd0398	vsDisassembleVertexProgram
 0xd4ec8	scDumpPixelProgram

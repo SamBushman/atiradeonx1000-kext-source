@@ -1,0 +1,47 @@
+use	FUN_000a7ee0	uVar7	samplerModeBits	INFERRED	bits 22-23 of boundTexture+200; stored to stream+0x21+unit and into bits 2-3 of the unit register word +0x18a8	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar10\ \+\ 200\)\ >>\ 0x16\ \&\ 3;$	+1
+use	FUN_000a7ee0	uVar7	samplerModeBits	INFERRED	bits 22-23 of boundTexture+200; stored to stream+0x21+unit and into bits 2-3 of the unit register word +0x18a8	^\s*if\ \(\(uVar14\ <\ 8\)\ \&\&\ \(uVar7\ !=\ 0\)\)\ \{$	+1
+use	FUN_000a7ee0	uVar7	samplerModeBits	INFERRED	bits 22-23 of boundTexture+200; stored to stream+0x21+unit and into bits 2-3 of the unit register word +0x18a8	^\s*\*\(char\ \*\)\(uVar14\ \+\ iVar15\ \+\ 0x21\)\ =\ \(char\)uVar7;$	+1
+use	FUN_000a7ee0	uVar7	samplerModeBits	INFERRED	bits 22-23 of boundTexture+200; stored to stream+0x21+unit and into bits 2-3 of the unit register word +0x18a8	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x18a8\)\ =\ uVar7\ <<\ 2\ \|\ \*\(uint\ \*\)\(iVar6\ \+\ 0x18a8\)\ \&\ 0xfffffff3;$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar13\ \+\ 0x18c\);$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*if\ \(iVar10\ ==\ 0\)\ \{$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar10\ \+\ 0x6b\);$	+6
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\ \+\ iVar15\)\ =\ iVar10\ \+\ 0x3c;$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\(uint\)\*\(byte\ \*\)\(iVar10\ \+\ 0x6c\)\ <<\ 0x1d\ \|\ \*\(uint\ \*\)\(iVar6\ \+\ 0x18a8\)\ \&\ 0x1fffffff;$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x88\)\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x30\)\ \+\ 0x38\);$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*if\ \(\*\(short\ \*\)\(iVar10\ \+\ 0x74\)\ ==\ 0x1902\)\ \{$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*if\ \(\(\*\*\(ushort\ \*\*\)\(iVar10\ \+\ 0x30\)\ \&\ 0xf\)\ ==\ 2\)\ \{$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*if\ \(\*\(float\ \*\)\(iVar10\ \+\ 0x88\)\ !=\ FLOAT_001aa0d4\)\ \{$	+1
+use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x2854\)\ =\ \(uint\)\*\(ushort\ \*\)\(iVar10\ \+\ 0xd0\);$	+3
+local	FUN_000a7ee0	bVar1	texField6b	INFERRED	byte at boundTexture+0x6b, packed (&7) << 4 into the unit register word +0x18ac
+local	FUN_000a7ee0	bVar2	texField6a	INFERRED	byte at boundTexture+0x6a, packed (&1) << 0x13 into +0x18ac
+local	FUN_000a7ee0	bVar3	texField69	INFERRED	byte at boundTexture+0x69, packed (&7) << 0x15 into +0x18ac
+local	FUN_000a7ee0	bVar4	texField68	INFERRED	byte at boundTexture+0x68, packed (&1) << 0x14 into +0x18ac
+local	FUN_000a7ee0	bVar5	unitBit8	INFERRED	1 << unit as a byte, mask for ctx+0x260 (units with a sampler enabled)
+use	FUN_000a7ee0	iVar6	unitWordOffset	INFERRED	unit * 4: offset into the per-unit word arrays of the stream	^\s*iVar6\ =\ uVar14\ \*\ 4;$	+1
+use	FUN_000a7ee0	iVar6	unitWordOffset	INFERRED	unit * 4: offset into the per-unit word arrays of the stream	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar6\ \+\ iVar15\ \+\ 0x48\);$	+1
+use	FUN_000a7ee0	iVar6	unitWordOffset	INFERRED	unit * 4: offset into the per-unit word arrays of the stream	^\s*\*\(uint\ \*\)\(iVar6\ \+\ iVar15\ \+\ 0x48\)\ =\ uVar8;$	+1
+use	FUN_000a7ee0	iVar6	unitWordOffset	INFERRED	unit * 4: offset into the per-unit word arrays of the stream	^\s*\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\ \+\ iVar15\)\ =\ 0;$	+1
+use	FUN_000a7ee0	iVar6	unitWordOffset	INFERRED	unit * 4: offset into the per-unit word arrays of the stream	^\s*iVar11\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\ \+\ iVar15\);$	+1
+use	FUN_000a7ee0	iVar6	unitWordOffset	INFERRED	unit * 4: offset into the per-unit word arrays of the stream	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\ \+\ iVar15\)\ =\ iVar10\ \+\ 0x3c;$	+1
+use	FUN_000a7ee0	iVar6	unitRegBase8	INFERRED	stream + unit * 8, base of the unit register pair at +0x18a8/+0x18ac	^\s*iVar6\ =\ uVar14\ \*\ 8\ \+\ iVar15;$	+1
+use	FUN_000a7ee0	iVar6	unitRegBase8	INFERRED	stream + unit * 8, base of the unit register pair at +0x18a8/+0x18ac	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x18ac\)\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x18ac\)\ \&\ 0xfffffffe;$	+1
+use	FUN_000a7ee0	iVar6	unitRegBase8Bound	INFERRED	same unit*8 register-pair base, recomputed for the bound-texture path	^\s*iVar6\ =\ uVar14\ \*\ 8\ \+\ iVar15;$@2	+1
+use	FUN_000a7ee0	iVar6	unitRegBase8Bound	INFERRED	same unit*8 register-pair base, recomputed for the bound-texture path	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x18ac\)\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x18ac\)\ \|\ 1;$	+3
+use	FUN_000a7ee0	iVar6	unitRegBase8Bound	INFERRED	same unit*8 register-pair base, recomputed for the bound-texture path	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x18ac\)\ =$	+1
+use	FUN_000a7ee0	iVar6	unitRegBase8Bound	INFERRED	same unit*8 register-pair base, recomputed for the bound-texture path	^\s*\(bVar2\ \&\ 1\)\ <<\ 0x13\ \|\ \(bVar1\ \&\ 7\)\ <<\ 4\ \|\ \*\(uint\ \*\)\(iVar6\ \+\ 0x18ac\)\ \&\ 0xff07ff8f;$	+1
+use	FUN_000a7ee0	iVar6	unitRegBase12	INFERRED	stream + unit * 12: base of the three-word texture size/depth registers at +0x2854..0x285c	^\s*iVar6\ =\ uVar14\ \*\ 0xc\ \+\ iVar15;$	+4
+use	FUN_000a7ee0	iVar6	unitRegBase8Final	INFERRED	unit*8 register-pair base for the final +0x18a8 mode-bits update	^\s*iVar6\ =\ uVar14\ \*\ 8\ \+\ iVar15;$@3	+2
+local	FUN_000a7ee0	uVar8	newUnitWord48	INFERRED	unit word +0x48 with its low 5 bits replaced from the per-unit table entry
+local	FUN_000a7ee0	uVar9	oldUnitWord48	INFERRED	current value of the unit word at stream+0x48+unit*4
+use	FUN_000a7ee0	iVar11	unitBit	INFERRED	1 << unit	^\s*iVar11\ =\ 1\ <<\ \(uVar14\ \&\ 0x3f\);$	+1
+use	FUN_000a7ee0	iVar11	unitBit	INFERRED	1 << unit	^\s*uVar12\ =\ \(ushort\)iVar11;$	+1
+use	FUN_000a7ee0	iVar11	unitBit	INFERRED	1 << unit	^\s*bVar5\ =\ \(byte\)iVar11;$	+1
+use	FUN_000a7ee0	iVar11	unitHalfOffset	INFERRED	stream + unit * 2, base of the 16-bit unit flags at +0x187c (unbound path)	^\s*iVar11\ =\ uVar14\ \*\ 2\ \+\ iVar15;$	+1
+use	FUN_000a7ee0	iVar11	unitHalfOffset	INFERRED	stream + unit * 2, base of the 16-bit unit flags at +0x187c (unbound path)	^\s*\*\(ushort\ \*\)\(iVar11\ \+\ 0x187c\)\ =\ \*\(ushort\ \*\)\(iVar11\ \+\ 0x187c\)\ \&\ 0x7fff;$	+1
+use	FUN_000a7ee0	iVar11	oldTexShadow	INFERRED	previous texture pointer shadowed at stream+0x13f8+unit*4	^\s*iVar11\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\ \+\ iVar15\);$	+1
+use	FUN_000a7ee0	iVar11	oldTexShadow	INFERRED	previous texture pointer shadowed at stream+0x13f8+unit*4	^\s*if\ \(\(iVar10\ \+\ 0x3c\ !=\ iVar11\)\ \&\&\ \(\*\(undefined1\ \*\)\(param_1\ \+\ 0x269\)\ =\ 1,\ iVar11\ ==\ 0\)\)\ \{$	+1
+use	FUN_000a7ee0	iVar11	unitHalfOffsetBound	INFERRED	stream + unit * 2, base of the 16-bit unit flags at +0x187c (bound path)	^\s*iVar11\ =\ uVar14\ \*\ 2\ \+\ iVar15;$@2	+1
+use	FUN_000a7ee0	iVar11	unitHalfOffsetBound	INFERRED	stream + unit * 2, base of the 16-bit unit flags at +0x187c (bound path)	^\s*\*\(ushort\ \*\)\(iVar11\ \+\ 0x187c\)\ =\ \*\(ushort\ \*\)\(iVar11\ \+\ 0x187c\)\ \|\ 0x8000;$	+1
+local	FUN_000a7ee0	uVar12	unitBit16	INFERRED	(ushort)(1 << unit): bit set in the dirty-unit mask ctx+0x272/+0x274
+local	FUN_000a7ee0	iVar13	ctxUnitCursor	INFERRED	ctx advanced by 4 per unit, so +0x18c reads the bound texture of the current unit
+local	FUN_000a7ee0	iVar15	streamBase	INFERRED	ctx + 0x240, the embedded stream object that holds the per-unit register shadows

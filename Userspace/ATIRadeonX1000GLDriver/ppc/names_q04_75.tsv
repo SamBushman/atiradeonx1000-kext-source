@@ -1,0 +1,11 @@
+local	FUN_000bee40	uVar1	limitStatus	INFERRED	0 when all program resource counts are within the limits, else 0x80000011..0x80000017 identifying the exceeded limit
+local	FUN_000bee40	param_2	passThroughR4	INFERRED	forwarded unchanged to FUN_000be460
+local	FUN_000bee40	param_3	passThroughR5	INFERRED	forwarded unchanged to FUN_000be460
+local	FUN_000bee40	param_5	passThroughR7	INFERRED	forwarded unchanged to FUN_000be460
+local	FUN_000bee40	param_6	passThroughR8	INFERRED	forwarded unchanged to FUN_000be460
+local	FUN_000bee40	param_7	passThroughR9	INFERRED	forwarded unchanged to FUN_000be460
+local	FUN_000a3610	uVar1	powerOfTwo	INFERRED	candidate power of two (1 << bit), walked down from the context maximum until it is <= the value
+local	FUN_000a3610	iVar2	bitsLeft	INFERRED	countdown limiting the downward scan
+local	FUN_000a3610	param_2	value	INFERRED	value to round up to a power of two
+func	FUN_000bee40	psnCheckLimitsAndGenerate	INFERRED	calls FUN_000c5e60 on the program, checks the resource counts (+0x16..+0x24) against the hardware limits (5, 0x11, 0x21, 0x41, 0, 0x20, 0x20) returning 0x80000011..0x80000017 on overflow, else runs FUN_000be460
+func	FUN_000a3610	gld_roundUpToPowerOfTwo	INFERRED	returns the smallest power of two >= value, searching down from 1 << ctx byte at +0x13b7 (the maximum level)
