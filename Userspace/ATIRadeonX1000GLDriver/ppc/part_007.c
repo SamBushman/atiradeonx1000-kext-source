@@ -3990,18 +3990,19 @@ int FUN_00052280(glContext)
   undefined4 unitShadowValue0;
   code *streamSetCurrent;
   uint dirtyUnitMask;
-  uint *puVar5;
-  undefined4 *puVar6;
+  uint *packetCountWord;
+  undefined4 *contextWordPtr;
   undefined4 *texUnitShadowPtr4;
   undefined4 *texUnitShadowPtr5;
-  int iVar9;
-  int iVar10;
+  int unitCountOrIndex;
+  int contextWordCursor;
+  int copyByteOffset;
   undefined4 *texUnitShadowPtr3;
   uint dirtyBits;
   undefined4 *texUnitShadowPtr0;
   undefined4 *texUnitShadowPtr1;
   undefined4 *texUnitShadowPtr2;
-  int iVar16;
+  int wordsLeft;
   
   dirtyBits = *(uint *)(glContext + 0x1930);
   dirtyUnitMask = *(uint *)(glContext + 0x1934) & *(uint *)(glContext + 0x27b0);
@@ -4011,36 +4012,36 @@ int FUN_00052280(glContext)
     texUnitShadowPtr1 = (undefined4 *)(glContext + 0x1d1c);
     texUnitShadowPtr2 = (undefined4 *)(glContext + 0x1d5c);
     packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0xe0);
-    iVar9 = *(int *)(glContext + 0x1938);
+    unitCountOrIndex = *(int *)(glContext + 0x1938);
     texUnitShadowPtr3 = (undefined4 *)(glContext + 0x1d9c);
     texUnitShadowPtr4 = (undefined4 *)(glContext + 0x1ddc);
     *(undefined4 **)(0x00002748 + glContext + 4) = packet;
     texUnitShadowPtr5 = (undefined4 *)(glContext + 0x1e1c);
     do {
       if ((dirtyUnitMask & 1) != 0) {
-        *packet = ((unsigned char *)0x00001100) + iVar9;
+        *packet = ((unsigned char *)0x00001100) + unitCountOrIndex;
         unitShadowValue0 = *texUnitShadowPtr0;
-        packet[2] = ((unsigned char *)0x00001110) + iVar9;
+        packet[2] = ((unsigned char *)0x00001110) + unitCountOrIndex;
         packet[1] = unitShadowValue0;
         unitShadowValue1 = *texUnitShadowPtr1;
-        packet[4] = ((unsigned char *)0x00001120U) + iVar9;
+        packet[4] = ((unsigned char *)0x00001120U) + unitCountOrIndex;
         packet[3] = unitShadowValue1;
         unitShadowValue2 = *texUnitShadowPtr2;
-        packet[6] = ((unsigned char *)0x00001130) + iVar9;
+        packet[6] = ((unsigned char *)0x00001130) + unitCountOrIndex;
         packet[5] = unitShadowValue2;
         unitShadowValue3 = *texUnitShadowPtr3;
-        packet[8] = ((unsigned char *)0x00001170U) + iVar9;
+        packet[8] = ((unsigned char *)0x00001170U) + unitCountOrIndex;
         packet[7] = unitShadowValue3;
         unitShadowValue5 = *texUnitShadowPtr5;
-        packet[10] = ((unsigned char *)0x00001160) + iVar9;
-        packet[0xc] = ((unsigned char *)0x00001140) + iVar9;
+        packet[10] = ((unsigned char *)0x00001160) + unitCountOrIndex;
+        packet[0xc] = ((unsigned char *)0x00001140) + unitCountOrIndex;
         packet[0xb] = 0;
         packet[9] = unitShadowValue5;
         packet[0xd] = *texUnitShadowPtr4;
         packet = packet + 0xe;
       }
       dirtyUnitMask = dirtyUnitMask >> 1;
-      iVar9 = iVar9 + 1;
+      unitCountOrIndex = unitCountOrIndex + 1;
       texUnitShadowPtr0 = texUnitShadowPtr0 + 1;
       texUnitShadowPtr1 = texUnitShadowPtr1 + 1;
       texUnitShadowPtr2 = texUnitShadowPtr2 + 1;
@@ -4177,8 +4178,8 @@ int FUN_00052280(glContext)
     }
     if ((dirtyBits & 0x1000) != 0) {
       glState = *(int *)(glContext + 4);
-      puVar5 = *(uint **)(glState + 0x1d8);
-      *puVar5 = (int)nextPacket - (int)puVar5 >> 2 | *puVar5;
+      packetCountWord = *(uint **)(glState + 0x1d8);
+      *packetCountWord = (int)nextPacket - (int)packetCountWord >> 2 | *packetCountWord;
       *(undefined4 **)(glState + 0x1d8) = nextPacket;
       *nextPacket = 0x2f000000;
       nextPacket[1] = ((unsigned char *)0x000010e9U);
@@ -4299,19 +4300,19 @@ int FUN_00052280(glContext)
       nextPacket[7] = vapOutVtxFmt1;
       nextPacket[9] = *(undefined4 *)(glContext + 0x1bb0);
       if ((-1 < (int)dirtyBits) || (*(char *)(glContext + 0x1868) != '\0')) {
-        iVar16 = 8;
+        wordsLeft = 8;
         nextPacket[10] = ((unsigned char *)0x000010c0U);
-        iVar10 = 0;
+        copyByteOffset = 0;
         nextPacket[0xb] = *(undefined4 *)(glContext + 0x1f2c);
         nextPacket[0xc] = *(uint *)(glContext + 0x1f28) | 0x70000;
-        iVar9 = glContext;
+        contextWordCursor = glContext;
         do {
-          puVar6 = (undefined4 *)(iVar9 + 0x1ee8);
-          iVar9 = iVar9 + 4;
-          *(undefined4 *)((int)nextPacket + iVar10 + 0x34) = *puVar6;
-          iVar10 = iVar10 + 4;
-          iVar16 = iVar16 + -1;
-        } while (iVar16 != 0);
+          contextWordPtr = (undefined4 *)(contextWordCursor + 0x1ee8);
+          contextWordCursor = contextWordCursor + 4;
+          *(undefined4 *)((int)nextPacket + copyByteOffset + 0x34) = *contextWordPtr;
+          copyByteOffset = copyByteOffset + 4;
+          wordsLeft = wordsLeft + -1;
+        } while (wordsLeft != 0);
         packet = nextPacket + 0x15;
       }
     }
