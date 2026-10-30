@@ -3303,34 +3303,49 @@ LAB_00051404:
 int gldValidateBlend(glContext)
   int glContext;
 {
-  ushort equationRgb;
+  double blendBlueScaled;
+  double blendGreenScaled;
+  double blendRedScaled;
+  undefined2 blendHalfGreen;
+  undefined2 blendHalfBlue;
+  undefined2 blendHalfAlpha;
+  int readsDestinationFlag;
+  uint newLogicOpWord;
+  uint blendColorBlueByte;
+  int blendColorAlphaByte;
+  int blendColorRedByte;
+  int blendColorGreenByte;
+  ushort dstFactorAlpha;
+  ushort dstFactorRgb;
   ushort srcFactorRgb;
-  ushort uVar3;
+  ushort equationRgb;
+  ushort equationAlpha;
+  ushort srcFactorAlpha;
   bool usesDestinationColor;
   bool usesDestinationAlpha;
-  float fVar6;
-  float fVar7;
+  float fixedPointRound;
+  float fixedPointScale;
+  int hwSrcFactorAlpha;
+  int hwDstFactorAlpha;
+  uint oldBlendWord0;
+  int blendFuncKey;
+  uint oldDirtyBits1930;
+  int hwEquationAlpha;
+  undefined2 blendHalfRed;
   int hwSrcFactorRgb;
   int hwDstFactorRgb;
-  uint uVar10;
-  int iVar11;
-  uint uVar12;
-  int iVar13;
-  undefined2 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
-  int iVar18;
-  int iVar19;
-  uint uVar20;
+  uint oldBlendWord0Saved;
+  int blendFastPathMode;
+  int hwEquationRgb;
+  uint oldLogicOpWord;
   int glState;
-  double dVar22;
-  double dVar23;
+  double blendColorScale;
+  double intRangeBias;
   
-  uVar17 = *(uint *)(glContext + 0x1a80);
-  uVar20 = *(uint *)(0x00001af4 + glContext + 4);
+  oldBlendWord0Saved = *(uint *)(glContext + 0x1a80);
+  oldLogicOpWord = *(uint *)(0x00001af4 + glContext + 4);
   glState = *(int *)(*(int *)(glContext + 4) + 0x10);
-  *(uint *)(glContext + 0x1a80) = uVar17 & 0x3ffffffe;
+  *(uint *)(glContext + 0x1a80) = oldBlendWord0Saved & 0x3ffffffe;
   if (((((unsigned char *)0x00002d84)[glState] == '\0') || (((unsigned char *)0x00002e33)[glState] != '\0')) ||
      ((*(int *)(((unsigned char *)0x00002d80) + glState) == -0x7ff97ffa &&
       ((((*(short *)(((unsigned char *)0x00002d68) + glState) == 1 && (*(short *)(((unsigned char *)0x00002d6c) + glState) == 1)) &&
@@ -3339,408 +3354,408 @@ int gldValidateBlend(glContext)
   equationRgb = *(ushort *)(((unsigned char *)0x00002d80) + glState);
   if (equationRgb == 0x8008) {
     usesDestinationColor = true;
-    iVar19 = 5;
+    hwEquationRgb = 5;
   }
   else if (equationRgb < 0x8009) {
     if (equationRgb == 0x8007) {
       usesDestinationColor = true;
-      iVar19 = 4;
+      hwEquationRgb = 4;
     }
     else {
 LAB_000514ec:
       usesDestinationColor = false;
-      iVar19 = 0;
+      hwEquationRgb = 0;
     }
   }
   else if (equationRgb == 0x800a) {
     usesDestinationColor = false;
-    iVar19 = 2;
+    hwEquationRgb = 2;
   }
   else {
     if (equationRgb != 0x800b) goto LAB_000514ec;
     usesDestinationColor = false;
-    iVar19 = 6;
+    hwEquationRgb = 6;
   }
-  srcFactorRgb = *(ushort *)(((unsigned char *)0x00002d82) + glState);
-  if (srcFactorRgb == 0x8008) {
+  equationAlpha = *(ushort *)(((unsigned char *)0x00002d82) + glState);
+  if (equationAlpha == 0x8008) {
     usesDestinationAlpha = true;
-    iVar13 = 5;
+    hwEquationAlpha = 5;
   }
-  else if (srcFactorRgb < 0x8009) {
-    if (srcFactorRgb == 0x8007) {
+  else if (equationAlpha < 0x8009) {
+    if (equationAlpha == 0x8007) {
       usesDestinationAlpha = true;
-      iVar13 = 4;
+      hwEquationAlpha = 4;
     }
     else {
 LAB_0005157c:
       usesDestinationAlpha = false;
-      iVar13 = 0;
+      hwEquationAlpha = 0;
     }
   }
-  else if (srcFactorRgb == 0x800a) {
+  else if (equationAlpha == 0x800a) {
     usesDestinationAlpha = false;
-    iVar13 = 2;
+    hwEquationAlpha = 2;
   }
   else {
-    if (srcFactorRgb != 0x800b) goto LAB_0005157c;
+    if (equationAlpha != 0x800b) goto LAB_0005157c;
     usesDestinationAlpha = false;
-    iVar13 = 6;
+    hwEquationAlpha = 6;
   }
   srcFactorRgb = *(ushort *)(((unsigned char *)0x00002d68) + glState);
   if (srcFactorRgb == 0x305) {
-    hwSrcFactorRgb = 0x29;
+    hwSrcFactorAlpha = 0x29;
     usesDestinationColor = true;
-    iVar15 = 0x29;
+    hwSrcFactorRgb = 0x29;
   }
   else if (srcFactorRgb < 0x306) {
     if (srcFactorRgb == 0x301) {
+      hwSrcFactorAlpha = 0x23;
       hwSrcFactorRgb = 0x23;
-      iVar15 = 0x23;
     }
     else if (srcFactorRgb < 0x302) {
       if (srcFactorRgb == 0) {
+        hwSrcFactorAlpha = 0x20;
         hwSrcFactorRgb = 0x20;
-        iVar15 = 0x20;
       }
       else {
         if (srcFactorRgb != 0x300) goto LAB_00051614;
+        hwSrcFactorAlpha = 0x22;
         hwSrcFactorRgb = 0x22;
-        iVar15 = 0x22;
       }
     }
     else if (srcFactorRgb == 0x303) {
+      hwSrcFactorAlpha = 0x27;
       hwSrcFactorRgb = 0x27;
-      iVar15 = 0x27;
     }
     else if (srcFactorRgb < 0x304) {
+      hwSrcFactorAlpha = 0x26;
       hwSrcFactorRgb = 0x26;
-      iVar15 = 0x26;
     }
     else {
-      hwSrcFactorRgb = 0x28;
+      hwSrcFactorAlpha = 0x28;
       usesDestinationColor = true;
-      iVar15 = 0x28;
+      hwSrcFactorRgb = 0x28;
     }
   }
   else if (srcFactorRgb == 0x8001) {
+    hwSrcFactorAlpha = 0x2b;
     hwSrcFactorRgb = 0x2b;
-    iVar15 = 0x2b;
   }
   else if (srcFactorRgb < 0x8002) {
     if (srcFactorRgb == 0x307) {
-      hwSrcFactorRgb = 0x25;
+      hwSrcFactorAlpha = 0x25;
       usesDestinationColor = true;
-      iVar15 = 0x25;
+      hwSrcFactorRgb = 0x25;
     }
     else if (srcFactorRgb < 0x307) {
-      hwSrcFactorRgb = 0x24;
+      hwSrcFactorAlpha = 0x24;
       usesDestinationColor = true;
-      iVar15 = 0x24;
+      hwSrcFactorRgb = 0x24;
     }
     else if (srcFactorRgb == 0x308) {
-      hwSrcFactorRgb = 0x2a;
+      hwSrcFactorAlpha = 0x2a;
       usesDestinationColor = true;
-      iVar15 = 0x2a;
+      hwSrcFactorRgb = 0x2a;
     }
     else {
 LAB_00051614:
+      hwSrcFactorAlpha = 0x21;
       hwSrcFactorRgb = 0x21;
-      iVar15 = 0x21;
     }
   }
   else if (srcFactorRgb == 0x8003) {
-    iVar15 = 0x2d;
     hwSrcFactorRgb = 0x2d;
+    hwSrcFactorAlpha = 0x2d;
   }
   else if (srcFactorRgb < 0x8003) {
+    hwSrcFactorAlpha = 0x2c;
     hwSrcFactorRgb = 0x2c;
-    iVar15 = 0x2c;
   }
   else {
     if (srcFactorRgb != 0x8004) goto LAB_00051614;
+    hwSrcFactorAlpha = 0x2e;
     hwSrcFactorRgb = 0x2e;
-    iVar15 = 0x2e;
   }
-  uVar3 = *(ushort *)(((unsigned char *)0x00002d6c) + glState);
-  if (srcFactorRgb != uVar3) {
-    if (uVar3 == 0x305) {
+  srcFactorAlpha = *(ushort *)(((unsigned char *)0x00002d6c) + glState);
+  if (srcFactorRgb != srcFactorAlpha) {
+    if (srcFactorAlpha == 0x305) {
       usesDestinationAlpha = true;
-      hwSrcFactorRgb = 0x29;
+      hwSrcFactorAlpha = 0x29;
     }
-    else if (uVar3 < 0x306) {
-      hwSrcFactorRgb = 0x23;
-      if (uVar3 != 0x301) {
-        if (uVar3 < 0x302) {
-          hwSrcFactorRgb = 0x20;
-          if ((uVar3 != 0) && (hwSrcFactorRgb = 0x22, uVar3 != 0x300)) goto LAB_0005179c;
+    else if (srcFactorAlpha < 0x306) {
+      hwSrcFactorAlpha = 0x23;
+      if (srcFactorAlpha != 0x301) {
+        if (srcFactorAlpha < 0x302) {
+          hwSrcFactorAlpha = 0x20;
+          if ((srcFactorAlpha != 0) && (hwSrcFactorAlpha = 0x22, srcFactorAlpha != 0x300)) goto LAB_0005179c;
         }
         else {
-          hwSrcFactorRgb = 0x27;
-          if ((uVar3 != 0x303) && (hwSrcFactorRgb = 0x26, 0x303 < uVar3)) {
+          hwSrcFactorAlpha = 0x27;
+          if ((srcFactorAlpha != 0x303) && (hwSrcFactorAlpha = 0x26, 0x303 < srcFactorAlpha)) {
             usesDestinationAlpha = true;
-            hwSrcFactorRgb = 0x28;
+            hwSrcFactorAlpha = 0x28;
           }
         }
       }
     }
     else {
-      hwSrcFactorRgb = 0x2b;
-      if (uVar3 != 0x8001) {
-        if (uVar3 < 0x8002) {
-          if (uVar3 == 0x307) {
+      hwSrcFactorAlpha = 0x2b;
+      if (srcFactorAlpha != 0x8001) {
+        if (srcFactorAlpha < 0x8002) {
+          if (srcFactorAlpha == 0x307) {
             usesDestinationAlpha = true;
-            hwSrcFactorRgb = 0x25;
+            hwSrcFactorAlpha = 0x25;
           }
-          else if (uVar3 < 0x307) {
+          else if (srcFactorAlpha < 0x307) {
             usesDestinationAlpha = true;
-            hwSrcFactorRgb = 0x24;
+            hwSrcFactorAlpha = 0x24;
           }
           else {
-            if (uVar3 != 0x308) goto LAB_0005179c;
+            if (srcFactorAlpha != 0x308) goto LAB_0005179c;
             usesDestinationAlpha = true;
-            hwSrcFactorRgb = 0x2a;
+            hwSrcFactorAlpha = 0x2a;
           }
         }
         else {
-          hwSrcFactorRgb = 0x2d;
-          if (((uVar3 != 0x8003) && (hwSrcFactorRgb = 0x2c, 0x8002 < uVar3)) &&
-             (hwSrcFactorRgb = 0x2e, uVar3 != 0x8004)) {
+          hwSrcFactorAlpha = 0x2d;
+          if (((srcFactorAlpha != 0x8003) && (hwSrcFactorAlpha = 0x2c, 0x8002 < srcFactorAlpha)) &&
+             (hwSrcFactorAlpha = 0x2e, srcFactorAlpha != 0x8004)) {
 LAB_0005179c:
-            hwSrcFactorRgb = 0x21;
+            hwSrcFactorAlpha = 0x21;
           }
         }
       }
     }
   }
-  srcFactorRgb = *(ushort *)(((unsigned char *)0x00002d6a) + glState);
-  if (srcFactorRgb == 0x305) {
-    hwDstFactorRgb = 0x29;
+  dstFactorRgb = *(ushort *)(((unsigned char *)0x00002d6a) + glState);
+  if (dstFactorRgb == 0x305) {
+    hwDstFactorAlpha = 0x29;
     usesDestinationColor = true;
-    iVar16 = 0x29;
+    hwDstFactorRgb = 0x29;
   }
-  else if (srcFactorRgb < 0x306) {
-    if (srcFactorRgb == 0x301) {
-      hwDstFactorRgb = 0x23;
+  else if (dstFactorRgb < 0x306) {
+    if (dstFactorRgb == 0x301) {
+      hwDstFactorAlpha = 0x23;
       usesDestinationColor = true;
-      iVar16 = 0x23;
+      hwDstFactorRgb = 0x23;
     }
-    else if (srcFactorRgb < 0x302) {
-      if (srcFactorRgb == 1) {
-        hwDstFactorRgb = 0x21;
+    else if (dstFactorRgb < 0x302) {
+      if (dstFactorRgb == 1) {
+        hwDstFactorAlpha = 0x21;
         usesDestinationColor = true;
-        iVar16 = 0x21;
+        hwDstFactorRgb = 0x21;
       }
       else {
-        if (srcFactorRgb != 0x300) goto LAB_000518a4;
-        hwDstFactorRgb = 0x22;
+        if (dstFactorRgb != 0x300) goto LAB_000518a4;
+        hwDstFactorAlpha = 0x22;
         usesDestinationColor = true;
-        iVar16 = 0x22;
+        hwDstFactorRgb = 0x22;
       }
     }
-    else if (srcFactorRgb == 0x303) {
+    else if (dstFactorRgb == 0x303) {
+      hwDstFactorAlpha = 0x27;
+      usesDestinationColor = true;
       hwDstFactorRgb = 0x27;
-      usesDestinationColor = true;
-      iVar16 = 0x27;
     }
-    else if (srcFactorRgb < 0x304) {
-      hwDstFactorRgb = 0x26;
+    else if (dstFactorRgb < 0x304) {
+      hwDstFactorAlpha = 0x26;
       usesDestinationColor = true;
-      iVar16 = 0x26;
+      hwDstFactorRgb = 0x26;
     }
     else {
+      hwDstFactorAlpha = 0x28;
+      usesDestinationColor = true;
       hwDstFactorRgb = 0x28;
-      usesDestinationColor = true;
-      iVar16 = 0x28;
     }
   }
-  else if (srcFactorRgb == 0x8001) {
-    hwDstFactorRgb = 0x2b;
+  else if (dstFactorRgb == 0x8001) {
+    hwDstFactorAlpha = 0x2b;
     usesDestinationColor = true;
-    iVar16 = 0x2b;
+    hwDstFactorRgb = 0x2b;
   }
-  else if (srcFactorRgb < 0x8002) {
-    if (srcFactorRgb == 0x306) {
+  else if (dstFactorRgb < 0x8002) {
+    if (dstFactorRgb == 0x306) {
+      hwDstFactorAlpha = 0x24;
+      usesDestinationColor = true;
       hwDstFactorRgb = 0x24;
-      usesDestinationColor = true;
-      iVar16 = 0x24;
     }
-    else if (srcFactorRgb == 0x307) {
-      hwDstFactorRgb = 0x25;
+    else if (dstFactorRgb == 0x307) {
+      hwDstFactorAlpha = 0x25;
       usesDestinationColor = true;
-      iVar16 = 0x25;
+      hwDstFactorRgb = 0x25;
     }
     else {
 LAB_000518a4:
+      hwDstFactorAlpha = 0x20;
       hwDstFactorRgb = 0x20;
-      iVar16 = 0x20;
     }
   }
-  else if (srcFactorRgb == 0x8003) {
+  else if (dstFactorRgb == 0x8003) {
+    hwDstFactorAlpha = 0x2d;
+    usesDestinationColor = true;
     hwDstFactorRgb = 0x2d;
-    usesDestinationColor = true;
-    iVar16 = 0x2d;
   }
-  else if (srcFactorRgb < 0x8003) {
-    hwDstFactorRgb = 0x2c;
+  else if (dstFactorRgb < 0x8003) {
+    hwDstFactorAlpha = 0x2c;
     usesDestinationColor = true;
-    iVar16 = 0x2c;
+    hwDstFactorRgb = 0x2c;
   }
   else {
-    if (srcFactorRgb != 0x8004) goto LAB_000518a4;
-    hwDstFactorRgb = 0x2e;
+    if (dstFactorRgb != 0x8004) goto LAB_000518a4;
+    hwDstFactorAlpha = 0x2e;
     usesDestinationColor = true;
-    iVar16 = 0x2e;
+    hwDstFactorRgb = 0x2e;
   }
-  uVar3 = *(ushort *)(((unsigned char *)0x00002d6e) + glState);
-  if (srcFactorRgb != uVar3) {
-    if (uVar3 == 0x305) {
+  dstFactorAlpha = *(ushort *)(((unsigned char *)0x00002d6e) + glState);
+  if (dstFactorRgb != dstFactorAlpha) {
+    if (dstFactorAlpha == 0x305) {
       usesDestinationAlpha = true;
-      hwDstFactorRgb = 0x29;
+      hwDstFactorAlpha = 0x29;
     }
-    else if (uVar3 < 0x306) {
-      if (uVar3 == 0x301) {
+    else if (dstFactorAlpha < 0x306) {
+      if (dstFactorAlpha == 0x301) {
         usesDestinationAlpha = true;
-        hwDstFactorRgb = 0x23;
+        hwDstFactorAlpha = 0x23;
       }
-      else if (uVar3 < 0x302) {
-        if (uVar3 == 1) {
+      else if (dstFactorAlpha < 0x302) {
+        if (dstFactorAlpha == 1) {
           usesDestinationAlpha = true;
-          hwDstFactorRgb = 0x21;
+          hwDstFactorAlpha = 0x21;
         }
         else {
-          if (uVar3 != 0x300) goto LAB_00051a20;
+          if (dstFactorAlpha != 0x300) goto LAB_00051a20;
           usesDestinationAlpha = true;
-          hwDstFactorRgb = 0x22;
+          hwDstFactorAlpha = 0x22;
         }
       }
-      else if (uVar3 == 0x303) {
+      else if (dstFactorAlpha == 0x303) {
         usesDestinationAlpha = true;
-        hwDstFactorRgb = 0x27;
+        hwDstFactorAlpha = 0x27;
       }
-      else if (uVar3 < 0x304) {
+      else if (dstFactorAlpha < 0x304) {
         usesDestinationAlpha = true;
-        hwDstFactorRgb = 0x26;
+        hwDstFactorAlpha = 0x26;
       }
       else {
         usesDestinationAlpha = true;
-        hwDstFactorRgb = 0x28;
+        hwDstFactorAlpha = 0x28;
       }
     }
-    else if (uVar3 == 0x8001) {
+    else if (dstFactorAlpha == 0x8001) {
       usesDestinationAlpha = true;
-      hwDstFactorRgb = 0x2b;
+      hwDstFactorAlpha = 0x2b;
     }
-    else if (uVar3 < 0x8002) {
-      if (uVar3 == 0x306) {
+    else if (dstFactorAlpha < 0x8002) {
+      if (dstFactorAlpha == 0x306) {
         usesDestinationAlpha = true;
-        hwDstFactorRgb = 0x24;
+        hwDstFactorAlpha = 0x24;
       }
-      else if (uVar3 == 0x307) {
+      else if (dstFactorAlpha == 0x307) {
         usesDestinationAlpha = true;
-        hwDstFactorRgb = 0x25;
+        hwDstFactorAlpha = 0x25;
       }
       else {
 LAB_00051a20:
-        hwDstFactorRgb = 0x20;
+        hwDstFactorAlpha = 0x20;
       }
     }
-    else if (uVar3 == 0x8003) {
+    else if (dstFactorAlpha == 0x8003) {
       usesDestinationAlpha = true;
-      hwDstFactorRgb = 0x2d;
+      hwDstFactorAlpha = 0x2d;
     }
-    else if (uVar3 < 0x8003) {
+    else if (dstFactorAlpha < 0x8003) {
       usesDestinationAlpha = true;
-      hwDstFactorRgb = 0x2c;
+      hwDstFactorAlpha = 0x2c;
     }
     else {
-      if (uVar3 != 0x8004) goto LAB_00051a20;
+      if (dstFactorAlpha != 0x8004) goto LAB_00051a20;
       usesDestinationAlpha = true;
-      hwDstFactorRgb = 0x2e;
+      hwDstFactorAlpha = 0x2e;
     }
   }
   if ((equationRgb == 0x8006) &&
-     (iVar11 = *(int *)(((unsigned char *)0x00002d68) + glState), iVar11 == *(int *)(((unsigned char *)0x00002d6c) + glState))) {
-    if ((iVar11 == 0x3020303) || ((iVar11 == 0x3020001 || (iVar11 == 0x303)))) {
-      iVar18 = 1;
+     (blendFuncKey = *(int *)(((unsigned char *)0x00002d68) + glState), blendFuncKey == *(int *)(((unsigned char *)0x00002d6c) + glState))) {
+    if ((blendFuncKey == 0x3020303) || ((blendFuncKey == 0x3020001 || (blendFuncKey == 0x303)))) {
+      blendFastPathMode = 1;
     }
-    else if ((((iVar11 == 0x301) || (iVar11 == 0x10001)) || (iVar11 == 0x3060001)) ||
-            (iVar11 == 0x3040001)) {
-      iVar18 = 2;
+    else if ((((blendFuncKey == 0x301) || (blendFuncKey == 0x10001)) || (blendFuncKey == 0x3060001)) ||
+            (blendFuncKey == 0x3040001)) {
+      blendFastPathMode = 2;
       if ((*(uint *)(glContext + 0x8c) & 0x400000) == 0) goto LAB_00051c10;
     }
-    else if (iVar11 == 0x3070001) {
+    else if (blendFuncKey == 0x3070001) {
 LAB_00051c10:
-      iVar18 = 3;
+      blendFastPathMode = 3;
     }
     else {
-      iVar18 = 4;
-      if ((iVar11 != 0x3030001) && (iVar18 = 6, iVar11 != 0x3060000)) goto LAB_00051c00;
+      blendFastPathMode = 4;
+      if ((blendFuncKey != 0x3030001) && (blendFastPathMode = 6, blendFuncKey != 0x3060000)) goto LAB_00051c00;
     }
   }
   else {
 LAB_00051c00:
-    iVar18 = 0;
+    blendFastPathMode = 0;
   }
-  uVar10 = *(uint *)(glContext + 0x1a80);
-  *(uint *)(glContext + 0x1a80) = uVar10 | 3;
-  dVar22 = DOUBLE_001aa258;
-  dVar23 = DOUBLE_001aa1e8;
-  if ((usesDestinationColor) || (iVar11 = 0, usesDestinationAlpha)) {
-    iVar11 = 1;
+  oldBlendWord0 = *(uint *)(glContext + 0x1a80);
+  *(uint *)(glContext + 0x1a80) = oldBlendWord0 | 3;
+  blendColorScale = DOUBLE_001aa258;
+  intRangeBias = DOUBLE_001aa1e8;
+  if ((usesDestinationColor) || (readsDestinationFlag = 0, usesDestinationAlpha)) {
+    readsDestinationFlag = 1;
   }
   *(uint *)(glContext + 0x1a84) =
-       hwDstFactorRgb << 0x18 | hwSrcFactorRgb << 0x10 | iVar13 << 0xc | *(uint *)(glContext + 0x1a84) & 0xc0c08fff;
+       hwDstFactorAlpha << 0x18 | hwSrcFactorAlpha << 0x10 | hwEquationAlpha << 0xc | *(uint *)(glContext + 0x1a84) & 0xc0c08fff;
   *(uint *)(glContext + 0x1a80) =
-       iVar16 << 0x18 |
-       iVar15 << 0x10 | iVar19 << 0xc | iVar18 << 3 | iVar11 << 2 | uVar10 & 0xc0c08fc3 | 3;
-  dVar22 = (double)*(float *)(((unsigned char *)0x00002d7c) + glState) * dVar22;
-  if (dVar23 <= dVar22) {
-    iVar19 = (int)(dVar22 - dVar23) + -0x80000000;
+       hwDstFactorRgb << 0x18 |
+       hwSrcFactorRgb << 0x10 | hwEquationRgb << 0xc | blendFastPathMode << 3 | readsDestinationFlag << 2 | oldBlendWord0 & 0xc0c08fc3 | 3;
+  blendColorScale = (double)*(float *)(((unsigned char *)0x00002d7c) + glState) * blendColorScale;
+  if (intRangeBias <= blendColorScale) {
+    blendColorAlphaByte = (int)(blendColorScale - intRangeBias) + -0x80000000;
   }
   else {
-    iVar19 = (int)dVar22;
+    blendColorAlphaByte = (int)blendColorScale;
   }
-  dVar23 = (double)*(float *)(((unsigned char *)0x00002d70) + glState) * DOUBLE_001aa258;
-  if (DOUBLE_001aa1e8 <= dVar23) {
-    iVar13 = (int)(dVar23 - DOUBLE_001aa1e8) + -0x80000000;
-  }
-  else {
-    iVar13 = (int)dVar23;
-  }
-  dVar23 = (double)*(float *)(((unsigned char *)0x00002d74) + glState) * DOUBLE_001aa258;
-  if (DOUBLE_001aa1e8 <= dVar23) {
-    hwSrcFactorRgb = (int)(dVar23 - DOUBLE_001aa1e8) + -0x80000000;
+  blendRedScaled = (double)*(float *)(((unsigned char *)0x00002d70) + glState) * DOUBLE_001aa258;
+  if (DOUBLE_001aa1e8 <= blendRedScaled) {
+    blendColorRedByte = (int)(blendRedScaled - DOUBLE_001aa1e8) + -0x80000000;
   }
   else {
-    hwSrcFactorRgb = (int)dVar23;
+    blendColorRedByte = (int)blendRedScaled;
   }
-  dVar23 = (double)*(float *)(((unsigned char *)0x00002d78) + glState) * DOUBLE_001aa258;
-  if (DOUBLE_001aa1e8 <= dVar23) {
-    uVar10 = (int)(dVar23 - DOUBLE_001aa1e8) + 0x80000000;
+  blendGreenScaled = (double)*(float *)(((unsigned char *)0x00002d74) + glState) * DOUBLE_001aa258;
+  if (DOUBLE_001aa1e8 <= blendGreenScaled) {
+    blendColorGreenByte = (int)(blendGreenScaled - DOUBLE_001aa1e8) + -0x80000000;
   }
   else {
-    uVar10 = (uint)(int)dVar23;
+    blendColorGreenByte = (int)blendGreenScaled;
   }
-  *(uint *)(glContext + 0x1a88) = iVar19 << 0x18 | iVar13 << 0x10 | hwSrcFactorRgb << 8 | uVar10;
-  fVar7 = FLOAT_001aa154;
-  fVar6 = FLOAT_001aa10c;
+  blendBlueScaled = (double)*(float *)(((unsigned char *)0x00002d78) + glState) * DOUBLE_001aa258;
+  if (DOUBLE_001aa1e8 <= blendBlueScaled) {
+    blendColorBlueByte = (int)(blendBlueScaled - DOUBLE_001aa1e8) + 0x80000000;
+  }
+  else {
+    blendColorBlueByte = (uint)(int)blendBlueScaled;
+  }
+  *(uint *)(glContext + 0x1a88) = blendColorAlphaByte << 0x18 | blendColorRedByte << 0x10 | blendColorGreenByte << 8 | blendColorBlueByte;
+  fixedPointScale = FLOAT_001aa154;
+  fixedPointRound = FLOAT_001aa10c;
   if ((*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x3c00) ==
       0x2800) {
-    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d70) + glState));
-    *(undefined2 *)(glContext + 0x1a8e) = uVar14;
-    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d7c) + glState));
-    *(undefined2 *)(glContext + 0x1a8c) = uVar14;
-    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d78) + glState));
-    *(undefined2 *)(glContext + 0x1a92) = uVar14;
-    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d74) + glState));
-    *(undefined2 *)(glContext + 0x1a90) = uVar14;
+    blendHalfRed = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d70) + glState));
+    *(undefined2 *)(glContext + 0x1a8e) = blendHalfRed;
+    blendHalfAlpha = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d7c) + glState));
+    *(undefined2 *)(glContext + 0x1a8c) = blendHalfAlpha;
+    blendHalfBlue = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d78) + glState));
+    *(undefined2 *)(glContext + 0x1a92) = blendHalfBlue;
+    blendHalfGreen = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d74) + glState));
+    *(undefined2 *)(glContext + 0x1a90) = blendHalfGreen;
   }
   else {
     *(short *)(glContext + 0x1a8e) =
          (short)(int)(*(float *)(((unsigned char *)0x00002d70) + glState) * FLOAT_001aa154 + FLOAT_001aa10c);
-    *(short *)(glContext + 0x1a8c) = (short)(int)(*(float *)(((unsigned char *)0x00002d7c) + glState) * fVar7 + fVar6);
-    *(short *)(glContext + 0x1a92) = (short)(int)(*(float *)(((unsigned char *)0x00002d78) + glState) * fVar7 + fVar6);
-    *(short *)(glContext + 0x1a90) = (short)(int)(*(float *)(((unsigned char *)0x00002d74) + glState) * fVar7 + fVar6);
+    *(short *)(glContext + 0x1a8c) = (short)(int)(*(float *)(((unsigned char *)0x00002d7c) + glState) * fixedPointScale + fixedPointRound);
+    *(short *)(glContext + 0x1a92) = (short)(int)(*(float *)(((unsigned char *)0x00002d78) + glState) * fixedPointScale + fixedPointRound);
+    *(short *)(glContext + 0x1a90) = (short)(int)(*(float *)(((unsigned char *)0x00002d74) + glState) * fixedPointScale + fixedPointRound);
   }
 LAB_00051ee0:
   if ((((unsigned char *)0x00002ddc)[glState] == '\0') || ((*(uint *)(*(int *)(glContext + 4) + 0x154) & 0xf) != 3))
@@ -3751,8 +3766,8 @@ LAB_00051ee0:
     *(uint *)(glContext + 0x1af0) = *(uint *)(glContext + 0x1af0) & 0xfffffff0 | 6;
   }
   if ((((unsigned char *)0x00002e33)[glState] == '\0') || (((unsigned char *)0x00001492)[glContext] != '\0')) {
-    uVar10 = *(uint *)(0x00001af4 + glContext + 4) & 0xfffffffb;
-    *(uint *)(0x00001af4 + glContext + 4) = uVar10;
+    newLogicOpWord = *(uint *)(0x00001af4 + glContext + 4) & 0xfffffffb;
+    *(uint *)(0x00001af4 + glContext + 4) = newLogicOpWord;
   }
   else {
     switch(*(undefined2 *)(((unsigned char *)0x00002e30) + glState)) {
@@ -3804,15 +3819,15 @@ LAB_00051ee0:
     case 0x150f:
       glState = 0xf;
     }
-    uVar10 = glState << 8 | *(uint *)(0x00001af4 + glContext + 4) & 0xfffff0ff | 4;
-    *(uint *)(0x00001af4 + glContext + 4) = uVar10;
+    newLogicOpWord = glState << 8 | *(uint *)(0x00001af4 + glContext + 4) & 0xfffff0ff | 4;
+    *(uint *)(0x00001af4 + glContext + 4) = newLogicOpWord;
   }
-  uVar12 = *(uint *)(glContext + 0x1930);
-  *(uint *)(glContext + 0x1930) = uVar12 | 4;
-  if (uVar20 != uVar10) {
-    *(uint *)(glContext + 0x1930) = uVar12 | 0x10004;
+  oldDirtyBits1930 = *(uint *)(glContext + 0x1930);
+  *(uint *)(glContext + 0x1930) = oldDirtyBits1930 | 4;
+  if (oldLogicOpWord != newLogicOpWord) {
+    *(uint *)(glContext + 0x1930) = oldDirtyBits1930 | 0x10004;
   }
-  if (((uVar17 & 1) == 0) && ((*(uint *)(glContext + 0x1a80) & 1) != 0)) {
+  if (((oldBlendWord0Saved & 1) == 0) && ((*(uint *)(glContext + 0x1a80) & 1) != 0)) {
     *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x100;
   }
   return;
