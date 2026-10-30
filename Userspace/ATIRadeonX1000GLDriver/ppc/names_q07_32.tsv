@@ -738,3 +738,182 @@ local	FUN_00162dfc	puVar10	newSelectCursor	INFERRED	walks newOperandSelects (loc
 local	FUN_00162dfc	puVar9	newSelectBytePtr	INFERRED	byte pointer into newOperandSelects for the current lane
 local	FUN_00162dfc	uVar6	operandModifierBits	INFERRED	*(inst + operand*0x18 + 0xa0): negate/abs bits compared with the chained inst operand
 local	FUN_00162dfc	uVar7	selectWordToStore	INFERRED	select word written to the operand record +0x10
+use	FUN_0013fc38	iVar9	isWrappedFirst	INFERRED	vtable +0x60 result on the first inst unshared operand: when set the real source is operand 1 of it	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x60\)\)\(piVar5\);$	+2
+use	FUN_0013fc38	iVar9	isWrappedSecond	INFERRED	vtable +0x60 result on the second inst unshared operand	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar31\ \+\ 0x60\)\)\(piVar31\);$	+2
+use	FUN_0013fc38	iVar9	lanesLeft	INFERRED	4 - uVar18: lanes still to scan while searching the next free compact lane	^\s*iVar9\ =\ 4\ \-\ uVar18;$	+1
+use	FUN_0013fc38	iVar9	lanesLeft	INFERRED	4 - uVar18: lanes still to scan while searching the next free compact lane	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	FUN_0013fc38	iVar9	operandIdx	INFERRED	for-loop operand index 1..operandCount	^\s*for\ \(iVar9\ =\ 1;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\),\ iVar9\ <=\ iVar13;$	+3
+use	FUN_0013fc38	uVar18	candidateCountB	INFERRED	allocation[2] re-read before the lane compaction	^\s*uVar18\ =\ puVar7\[2\];$	+3
+use	FUN_0013fc38	uVar18	nextFreeLane	INFERRED	next compact lane whose bit is set in freeLaneMask	^\s*uVar18\ =\ 0;$	+1
+use	FUN_0013fc38	uVar18	nextFreeLane	INFERRED	next compact lane whose bit is set in freeLaneMask	^\s*if\ \(\(\(\(int\)\(uVar26\ \&\ uVar29\)\ >>\ \(uVar35\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(\(int\)uVar18\ <\ 4\)\)\ \{$	+4
+use	FUN_0013fc38	uVar18	nextFreeLane	INFERRED	next compact lane whose bit is set in freeLaneMask	^\s*uVar18\ =\ uVar18\ \+\ 1;$	+1
+use	FUN_0013fc38	uVar18	nextFreeLane	INFERRED	next compact lane whose bit is set in freeLaneMask	^\s*uVar24\ =\ uVar18;$@2	+2
+use	FUN_0013fc38	uVar18	nextFreeLane	INFERRED	next compact lane whose bit is set in freeLaneMask	^\s*uVar18\ =\ uVar24\ \+\ 1;$	+1
+local	FUN_0013fc38	uVar24	chosenLane	INFERRED	compact lane chosen for the current source lane (uVar24 = uVar18)
+use	FUN_0013fc38	uVar26	userTopIndex	INFERRED	users vector count - 1: iterated from the end	^\s*uVar26\ =\ uVar32\ \-\ 1;$	+3
+use	FUN_0013fc38	uVar26	userTopIndex	INFERRED	users vector count - 1: iterated from the end	^\s*if\ \(uVar26\ <\ \*puVar10\)\ \{$	+1
+use	FUN_0013fc38	uVar26	userTopIndex	INFERRED	users vector count - 1: iterated from the end	^\s*if\ \(uVar35\ <=\ uVar26\)\ \{$	+3
+use	FUN_0013fc38	uVar26	userTopIndex	INFERRED	users vector count - 1: iterated from the end	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar26\);$	+1
+use	FUN_0013fc38	uVar26	userTopIndex	INFERRED	users vector count - 1: iterated from the end	^\s*uVar26\ =\ uVar26\ \-\ 1;$	+1
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*uVar35\ =\ uVar32\ \-\ 1;$	+4
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar35\);$	+1
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*if\ \(uVar35\ <\ local_78\)\ \{$	+3
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*puVar10\ =\ \(uint\ \*\)FUN_0019423c\(\&local_78,uVar35\);$	+1
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*if\ \(uVar35\ <\ \*puVar28\)\ \{$@2	+1
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*if\ \(uVar18\ <=\ uVar35\)\ \{$	+2
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*puVar12\ =\ \(undefined4\ \*\)\(uVar35\ \*\ 4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_0013fc38	uVar35	secondCandidateIndex	INFERRED	uVar32 - 1: index of the later candidate in the candidate and mask vectors	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar35\);$@2	+1
+use	FUN_0013fc38	uVar35	userCountB	INFERRED	users vector element count (puVar10[1])	^\s*uVar35\ =\ puVar10\[1\];$	+3
+use	FUN_0013fc38	uVar35	userCountB	INFERRED	users vector element count (puVar10[1])	^\s*uVar35\ =\ puVar10\[1\];$@2	+3
+use	FUN_0013fc38	uVar35	remappedComponent	INFERRED	component byte read from the operand select through compactToSourceLane	^\s*uVar35\ =\ \(uint\)\*\(byte\ \*\)\(iVar14\ \+\ iVar21\ \+\ 0x10\);$	+2
+use	FUN_0013fc38	uVar35	remappedComponent	INFERRED	component byte read from the operand select through compactToSourceLane	^\s*\(piVar15,iVar13,iVar14,\*\(undefined1\ \*\)\(\(int\)\&local_88\ \+\ uVar35\)\);$	+1
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*uVar32\ =\ puVar10\[1\];$	+2
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*if\ \(uVar32\ <=\ uVar35\)\ \{$	+2
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*uVar32\ =\ puVar10\[1\];$@2	+1
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*\}\ while\ \(\(int\)uVar35\ <\ \(int\)uVar32\);$	+1
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*uVar32\ =\ puVar10\[1\];$@3	+5
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*puVar19\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar32\);$	+1
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*uVar32\ =\ puVar10\[1\];$@4	+2
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*if\ \(uVar32\ ==\ uVar29\)\ break;$	+1
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*uVar32\ =\ puVar10\[1\];$@5	+2
+use	FUN_0013fc38	uVar32	userVecCount	INFERRED	users vector element count (puVar10[1])	^\s*if\ \(uVar32\ ==\ uVar29\)\ break;$@2	+1
+use	FUN_0013fc38	uVar32	firstCompactLane	INFERRED	local_84 & 0xff: first entry of compactToSourceLane	^\s*uVar32\ =\ local_84\ \&\ 0xff;$	+1
+use	FUN_0013fc38	uVar32	firstCompactLane	INFERRED	local_84 & 0xff: first entry of compactToSourceLane	^\s*\(piVar5,iVar9,3,\*\(undefined1\ \*\)\(\(int\)\&local_7c\ \+\ uVar32\)\);$	+1
+use	FUN_0013fc38	uVar32	candidateCountScan	INFERRED	allocation[2]: candidate count re-read for the duplicate scan	^\s*uVar32\ =\ puVar7\[2\];$	+1
+use	FUN_0013fc38	uVar32	candidateCountScan	INFERRED	allocation[2]: candidate count re-read for the duplicate scan	^\s*if\ \(uVar32\ !=\ 0\)\ \{$	+1
+use	FUN_0013fc38	uVar32	candidateCountScan	INFERRED	allocation[2]: candidate count re-read for the duplicate scan	^\s*if\ \(uVar32\ <=\ uVar26\)\ \{$	+2
+use	FUN_0013fc38	uVar32	candidateCountScan	INFERRED	allocation[2]: candidate count re-read for the duplicate scan	^\s*uVar32\ =\ puVar7\[2\];$@3	+1
+use	FUN_0013fc38	uVar32	candidateCountScan	INFERRED	allocation[2]: candidate count re-read for the duplicate scan	^\s*\}\ while\ \(uVar26\ <\ uVar32\);$	+1
+use	FUN_0013fc38	uVar32	candidateCountScan	INFERRED	allocation[2]: candidate count re-read for the duplicate scan	^\s*uVar32\ =\ puVar7\[2\];$@2	+5
+use	FUN_0013fc38	uVar32	candidateCountScan	INFERRED	allocation[2]: candidate count re-read for the duplicate scan	^\s*puVar12\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar28,uVar32\);$	+1
+use	FUN_0013fc38	puVar19	userSlotPtr	INFERRED	address of a users vector slot	^\s*puVar19\ =\ \(undefined4\ \*\)\(uVar32\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	FUN_0013fc38	puVar19	userSlotPtr	INFERRED	address of a users vector slot	^\s*puVar19\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar10,uVar32\);$	+1
+use	FUN_0013fc38	puVar19	userSlotPtr	INFERRED	address of a users vector slot	^\s*\*puVar19\ =\ piVar5;$	+1
+use	FUN_0013fc38	uVar30	storedSelectFirst	INFERRED	local_58 folded select word of the second inst	^\s*uVar30\ =\ local_58;$	+1
+use	FUN_0013fc38	uVar30	storedSelectFirst	INFERRED	local_58 folded select word of the second inst	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar30;$	+1
+use	FUN_0013fc38	uVar30	storedSelectSecond	INFERRED	local_54[0] folded select word of the cloned inst	^\s*uVar30\ =\ local_54\[0\];$	+1
+use	FUN_0013fc38	uVar30	storedSelectSecond	INFERRED	local_54[0] folded select word of the cloned inst	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar30;$@2	+1
+use	FUN_0013fc38	piVar15	unsharedBSource	INFERRED	copy of the unshared operand of the second inst	^\s*piVar15\ =\ piVar31;$	+1
+use	FUN_0013fc38	piVar15	unsharedBSource	INFERRED	copy of the unshared operand of the second inst	^\s*piVar15\ =\ \(int\ \*\)FUN_00105594\(piVar31,1\);$	+1
+use	FUN_0013fc38	piVar15	unsharedBSource	INFERRED	copy of the unshared operand of the second inst	^\s*if\ \(\(\(\(iVar9\ ==\ 0\)\ \&\&\ \(iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x48\)\)\(piVar15\),\ iVar9\ ==\ 0\)\)\ \&\&$	+4
+use	FUN_0013fc38	piVar15	userInstB	INFERRED	user inst of the second inst read from its users vector	^\s*piVar15\ =\ \(int\ \*\)\*puVar12;$	+1
+use	FUN_0013fc38	piVar15	userInstB	INFERRED	user inst of the second inst read from its users vector	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x14\)\)\(piVar15\);$	+1
+use	FUN_0013fc38	piVar15	userInstB	INFERRED	user inst of the second inst read from its users vector	^\s*piVar16\ =\ \(int\ \*\)FUN_00105594\(piVar15,iVar13\);$	+1
+use	FUN_0013fc38	piVar15	userInstB	INFERRED	user inst of the second inst read from its users vector	^\s*FUN_00106004\(piVar15,iVar13,piVar5,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0013fc38	piVar15	userInstB	INFERRED	user inst of the second inst read from its users vector	^\s*iVar21\ =\ FUN_001054ec\(piVar15,iVar13\);$	+1
+use	FUN_0013fc38	piVar15	userInstB	INFERRED	user inst of the second inst read from its users vector	^\s*\(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x88\)\)$	+2
+local	FUN_0013fc38	piVar31	unsharedBWrapper	INFERRED	operand of the second inst that is not shared with the first (or null)
+use	FUN_0013fc38	piVar5	nextBlockInst	INFERRED	for-loop cursor over the block instruction list (next of the current inst)	^\s*for\ \(piVar5\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar25\ \+\ 0x98\)\)\[2\];\ piVar5\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0013fc38	piVar5	nextBlockInst	INFERRED	for-loop cursor over the block instruction list (next of the current inst)	^\s*piVar5\ =\ \(int\ \*\)piVar11\[2\];$	+1
+use	FUN_0013fc38	piVar5	nextBlockInst	INFERRED	for-loop cursor over the block instruction list (next of the current inst)	^\s*piVar5\ =\ \(int\ \*\)piVar11\[2\];$@2	+1
+use	FUN_0013fc38	piVar5	nextBlockInst	INFERRED	for-loop cursor over the block instruction list (next of the current inst)	^\s*piVar11\ =\ piVar5;$	+1
+use	FUN_0013fc38	piVar5	firstSlotPtr	INFERRED	address of a candidate element in the scan	^\s*piVar5\ =\ \(int\ \*\)\(uVar26\ \*\ 4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_0013fc38	piVar5	firstSlotPtr	INFERRED	address of a candidate element in the scan	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar26\);$	+1
+use	FUN_0013fc38	piVar5	firstSlotPtr	INFERRED	address of a candidate element in the scan	^\s*iVar4\ =\ \*piVar5;$	+1
+use	FUN_0013fc38	piVar5	laterSlotPtr	INFERRED	address of a candidate element in the later-index lookup	^\s*piVar5\ =\ \(int\ \*\)\(uVar32\ \*\ 4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_0013fc38	piVar5	laterSlotPtr	INFERRED	address of a candidate element in the later-index lookup	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar32\);$	+1
+use	FUN_0013fc38	piVar5	laterSlotPtr	INFERRED	address of a candidate element in the later-index lookup	^\s*\*piVar5\ =\ \(int\)piVar11;$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*piVar5\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*piVar5\ =\ \(int\ \*\)FUN_0010445c\(piVar11,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),0\);$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*piVar5\[4\]\ =\ \(int\)\(puVar19\ \+\ 1\);$	+2
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*piVar5\[0x27\]\ =\ 0x1010100;$	+4
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*\(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x88\)\)\(piVar5,piVar5\[0x21\],uVar32,uVar32\);$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*\(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x88\)\)\(piVar5,piVar5\[0x21\],cVar1,cVar1\);$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*iVar14\ =\ piVar5\[0x53\];$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*iVar9\ =\ FUN_001054ec\(piVar5,0\);$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*for\ \(iVar9\ =\ 1;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\),\ iVar9\ <=\ iVar13;$	+3
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*\*puVar19\ =\ piVar5;$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*if\ \(\(piVar5\ ==\ \(int\ \*\)0x0\)\ \|\|\ \(iVar21\ !=\ 3\)\)\ \{$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*\(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x88\)\)$	+2
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*if\ \(piVar5\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*if\ \(piVar5\ !=\ \(int\ \*\)0x0\)\ \{$@2	+2
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*iVar13\ =\ FUN_001054ec\(piVar5,iVar9\);$	+1
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*if\ \(piVar5\ !=\ \(int\ \*\)0x0\)\ \{$@3	+2
+use	FUN_0013fc38	piVar5	cloneInst	INFERRED	clone created for the remaining lanes, or null	^\s*if\ \(piVar5\ !=\ \(int\ \*\)0x0\)\ \{$@4	+2
+use	FUN_0013fc38	piVar5	userSlotPtrB	INFERRED	address of a users vector slot of the second inst	^\s*piVar5\ =\ \(int\ \*\)\(uVar35\ \*\ 4\ \+\ puVar10\[2\]\);$	+1
+use	FUN_0013fc38	piVar5	userSlotPtrB	INFERRED	address of a users vector slot of the second inst	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar35\);$	+1
+use	FUN_0013fc38	piVar5	userSlotPtrB	INFERRED	address of a users vector slot of the second inst	^\s*if\ \(\(int\ \*\)\*piVar5\ ==\ piVar11\)\ \{$	+1
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*piVar11\ =\ \*\(int\ \*\*\)\(iVar25\ \+\ 0x98\);$	+1
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*if\ \(\(piVar11\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+2
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*if\ \(\(\(\*\(int\ \*\)\(piVar11\[0x22\]\ \+\ 8\)\ ==\ 0x12\)\ \&\&$	+2
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*for\ \(iVar9\ =\ 1;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar9\ <=\ iVar13;$	+3
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*uVar34\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a644\)\(piVar11\);$	+1
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*\*piVar5\ =\ \(int\)piVar11;$	+1
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*piVar5\ =\ \(int\ \*\)piVar11\[2\];$	+1
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*piVar5\ =\ \(int\ \*\)piVar11\[2\];$@2	+1
+use	FUN_0013fc38	piVar11	blockInst	INFERRED	current inst of the block list scan	^\s*piVar11\ =\ piVar5;$	+1
+use	FUN_0013fc38	piVar11	firstCandidateSlot	INFERRED	address of the first candidate element	^\s*piVar11\ =\ \(int\ \*\)\(uVar32\ \*\ 4\ \+\ puVar7\[3\]\);$	+1
+use	FUN_0013fc38	piVar11	firstCandidateSlot	INFERRED	address of the first candidate element	^\s*piVar11\ =\ \(int\ \*\)FUN_0019423c\(puVar28,uVar32\);$	+1
+use	FUN_0013fc38	piVar11	firstCandidateSlot	INFERRED	address of the first candidate element	^\s*iVar4\ =\ \*piVar11;$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*piVar11\ =\ \(int\ \*\)\*puVar12;$	+2
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*piVar16\ =\ \(int\ \*\)FUN_00105594\(piVar11,1\);$	+2
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*iVar21\ =\ \(\(uint\)piVar11\[0x2e\]\ >>\ 1\ \&\ 1\)\ \+\ \(piVar11\[0x2e\]\ \&\ 1U\)\ \*\ 2;$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*iVar14\ =\ \(\(uint\)piVar11\[0x34\]\ >>\ 1\ \&\ 1\)\ \+\ \(piVar11\[0x34\]\ \&\ 1U\)\ \*\ 2;$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*if\ \(\(\(\(iVar9\ ==\ 0\)\ \&\&\ \(iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x48\)\)\(piVar15\),\ iVar9\ ==\ 0\)\)\ \&\&$	+4
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*FUN_00106804\(piVar11,iVar4,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+3
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*iVar9\ =\ FUN_001054ec\(piVar11,0\);$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*FUN_00106804\(piVar11,iVar4,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@2	+2
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\)\)\(piVar11,piVar11\[0x21\],uVar32,uVar32\);$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*piVar11\[0x27\]\ =\ local_80;$	+2
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\)\)$	+3
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*iVar9\ =\ FUN_00105594\(piVar11,piVar11\[0x21\]\);$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*if\ \(\(int\ \*\)\*piVar5\ ==\ piVar11\)\ \{$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*iVar9\ =\ FUN_00105594\(piVar11,piVar11\[0x21\]\);$@2	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*FUN_00106004\(piVar11,piVar11\[0x21\],0,1,puVar12\);$	+5
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*piVar5\ =\ \(int\ \*\)FUN_0010445c\(piVar11,\*\(undefined4\ \*\)\(param_1\ \+\ 8\),0\);$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*FUN_00106804\(piVar11,iVar4,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@3	+2
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*\*\(undefined1\ \*\)\(\(int\)piVar11\ \+\ 0x9f\)\ =\ 1;$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*FUN_000e7738\(piVar11\[0x56\],piVar11,piVar5\);$	+2
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*iVar13\ =\ piVar11\[0x26\];$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*for\ \(iVar9\ =\ 1;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar9\ <=\ iVar13;$@2	+3
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\)\)$@2	+5
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\)\)\(piVar11,iVar9,3,4\);$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\)\)\(piVar11,iVar9,iVar21,4\);$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*FUN_0010cfcc\(\&local_58,piVar11,iVar9,param_1\);$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*iVar13\ =\ FUN_001054ec\(piVar11,iVar9\);$@2	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*puVar10\ =\ \(uint\ \*\)piVar11\[4\];$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*if\ \(piVar16\ !=\ piVar11\)\ goto\ LAB_00140c00;$	+1
+use	FUN_0013fc38	piVar11	secondInst	INFERRED	later candidate merged into the first inst	^\s*puVar10\ =\ \(uint\ \*\)piVar11\[4\];$@2	+1
+use	FUN_0013fc38	piVar11	secondInstUser	INFERRED	user inst of the first inst in the final rewrite loop	^\s*piVar11\ =\ \(int\ \*\)\*puVar12;$@2	+4
+use	FUN_0013fc38	piVar11	secondInstUser	INFERRED	user inst of the first inst in the final rewrite loop	^\s*FUN_00106004\(piVar11,iVar13,piVar5,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*iVar4\ =\ \*piVar11;$	+2
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*piVar15\ =\ \(int\ \*\)FUN_00105594\(iVar4,1\);$	+2
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*iVar13\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xb8\)\ >>\ 1\ \&\ 1\)\ \+\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xb8\)\ \&\ 1\)\ \*\ 2;$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*iVar23\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xd0\)\ >>\ 1\ \&\ 1\)\ \+\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xd0\)\ \&\ 1\)\ \*\ 2;$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*if\ \(\(\(\(iVar9\ ==\ 0\)\ \&\&\ \(iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x48\)\)\(piVar15\),\ iVar9\ ==\ 0\)\)\ \&\&$	+4
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*FUN_00106804\(piVar11,iVar4,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x158\),iVar4,piVar11\);$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x158\),iVar4,piVar31\);$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*FUN_00106804\(piVar11,iVar4,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@2	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*FUN_00106804\(piVar11,iVar4,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@3	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar4\ \+\ 0x10\);$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*if\ \(iVar4\ ==\ iVar14\)\ \{$	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar4\ \+\ 0x10\);$@2	+1
+use	FUN_0013fc38	iVar4	nextBlock	INFERRED	*(currentBlock + 8): next block of the list, loop ends when 0	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar25\ \+\ 8\);$@2	+1
+use	FUN_0013fc38	iVar4	existingCandidate	INFERRED	candidate already in the vector, compared with the operands of the new inst	^\s*iVar4\ =\ \*piVar5;$	+1
+use	FUN_0013fc38	iVar4	existingCandidate	INFERRED	candidate already in the vector, compared with the operands of the new inst	^\s*if\ \(iVar4\ ==\ iVar13\)\ \{$	+1
+use	FUN_0013fc38	iVar4	maskByteOffset	INFERRED	vecCount * 4 byte offset of the pushed mask slot	^\s*iVar4\ =\ local_74\ \*\ 4;$	+2
+use	FUN_0013fc38	iVar4	maskByteOffset	INFERRED	vecCount * 4 byte offset of the pushed mask slot	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar4\ \+\ local_70\);$	+1
+use	FUN_0013fc38	iVar4	maskByteOffset	INFERRED	vecCount * 4 byte offset of the pushed mask slot	^\s*iVar4\ =\ local_74\ \*\ 4;$@2	+1
+use	FUN_0013fc38	iVar4	maskByteOffset	INFERRED	vecCount * 4 byte offset of the pushed mask slot	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ local_70\)\ =\ 0;$@2	+2
+use	FUN_0013fc38	piVar5	unsharedAWrapper	INFERRED	piVar5 = second source of the first inst, or the first inst operand picked by the crosswise match chain; one value, read after the match tests	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(iVar4,2\);$	+1
+use	FUN_0013fc38	piVar5	unsharedAWrapper	INFERRED	piVar5 = second source of the first inst, or the first inst operand picked by the crosswise match chain; one value, read after the match tests	^\s*if\ \(\(piVar5\ !=\ piVar16\)\ \|\|\ \(bVar22\ =\ true,\ iVar23\ !=\ iVar21\)\)\ \{$	+1
+use	FUN_0013fc38	piVar5	unsharedAWrapper	INFERRED	piVar5 = second source of the first inst, or the first inst operand picked by the crosswise match chain; one value, read after the match tests	^\s*if\ \(\(piVar5\ !=\ piVar17\)\ \|\|\ \(bVar3\ =\ true,\ iVar23\ !=\ iVar14\)\)\ \{$	+1
+use	FUN_0013fc38	piVar5	unsharedAWrapper	INFERRED	piVar5 = second source of the first inst, or the first inst operand picked by the crosswise match chain; one value, read after the match tests	^\s*if\ \(\(\(\(!bVar20\)\ \&\&\ \(piVar31\ =\ piVar16,\ !bVar2\)\)\ \&\&$	+4
+use	FUN_0013fc38	piVar5	unsharedAWrapper	INFERRED	piVar5 = second source of the first inst, or the first inst operand picked by the crosswise match chain; one value, read after the match tests	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(piVar5,1\);$	+1
+use	FUN_0013fc38	piVar5	unsharedAWrapper	INFERRED	piVar5 = second source of the first inst, or the first inst operand picked by the crosswise match chain; one value, read after the match tests	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x48\)\)\(piVar5\);$	+5
+use	FUN_0013a38c	uVar6	orderKeyToPush	INFERRED	local_48: packed operand order pushed onto the vector	^\s*uVar6\ =\ local_48;$	+1
+use	FUN_0013a38c	uVar6	orderKeyToPush	INFERRED	local_48: packed operand order pushed onto the vector	^\s*\*puVar5\ =\ uVar6;$	+1
+local	FUN_0013a38c	uVar1	orderByteB	INFERRED	order byte of the neighbouring operand, swapped in the bubble sort
+local	FUN_0013a38c	uVar2	orderByteA	INFERRED	order byte of the current operand, swapped in the bubble sort
+local	FUN_0013a38c	bVar3	swapped	INFERRED	set when a bubble-sort pass swapped two entries
+local	FUN_0013a38c	puVar5	pushSlot	INFERRED	address of the vector slot the key is stored in (grow or in place)
+local	FUN_0013a38c	iVar8	useCountA	INFERRED	*piVar9: use count of the current operand source
+local	FUN_0013a38c	piVar9	useCountCursor	INFERRED	walks the useCounts array in the bubble sort
+local	FUN_0013a38c	iVar10	operandCount	INFERRED	*(inst+0x84): operand count (1 and >4 handled separately)
+local	FUN_0013a38c	uVar11	vectorCount	INFERRED	vector[1]: element count before the push
+local	FUN_0013a38c	iVar12	pairsRemaining	INFERRED	countdown over the neighbouring pairs of the bubble sort
+local	FUN_0013a38c	local_48	orderKey	INFERRED	packed per-operand order bytes (0xffffffff default, 0x1ffffff for one operand); address-taken byte access
+local	FUN_0013a38c	local_44	useCounts	INFERRED	use count of each operand source (IRInst__useCount), indexed from 0; the bytes just below hold the order
