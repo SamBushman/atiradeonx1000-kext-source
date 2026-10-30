@@ -1,0 +1,130 @@
+use	ffvpEmitLight	iVar4	specularRegField	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x2c\);$	+1
+use	ffvpEmitLight	iVar4	specularRegField	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x34\);$	+1
+use	ffvpEmitLight	iVar4	specularRegField	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar4\ ==\ \-1\)\ \{$	+1
+use	ffvpEmitLight	iVar4	ctxCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3d4\);$	+3
+use	ffvpEmitLight	iVar4	ctxCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar9\ =\ FUN_000913e0\(param_1,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x290\),auStack_224,auStack_220,$	+2
+use	ffvpEmitLight	iVar4	ctxCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
+use	ffvpEmitLight	iVar4	lightRecCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ iVar16;$	+1
+use	ffvpEmitLight	iVar4	lightRecCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*\(int\ \*\)\(iVar4\ \+\ 0x18\)\ ==\ \-1\)\ \&\&\ \(\*\(int\ \*\)\(iVar16\ \+\ 0x14\)\ ==\ \-1\)\)\ \{$	+1
+use	ffvpEmitLight	iVar4	lightRecCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ iVar4\ \+\ 4;$@2	+1
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,1,local_84\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,1,local_7c\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,2,local_70\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,2,auStack_120\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,2,auStack_1c0\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,2,auStack_170\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,1,puVar23\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,2,local_7c\);$	+2
+use	ffvpEmitLight	iVar4	allocStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ FUN_00090ca0\(param_1,2,local_78\);$	+2
+use	ffvpEmitLight	iVar4	eyePositionReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3f8\);$	+2
+use	ffvpEmitLight	iVar4	eyePositionReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3f8\);$@2	+2
+use	ffvpEmitLight	iVar4	eyePositionReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_1e4,auStack_1e0,a4,iVar4,\&DAT_001dbcd4,\&DAT_001fa5e8,iVarS11,iVarS12,iVarS13,\&DAT_001fa5e8\);$	+1
+use	ffvpEmitLight	iVar4	eyePositionReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_1e4,auStack_1e0,a4,iVar4,\&DAT_001dbcd4,\&DAT_001fa5e8,iVarS52,iVarS53,iVarS54,\&DAT_001fa5e8,a4,iVar4,iVarS54,iVarS55\);$	+1
+use	ffvpEmitLight	iVar4	builderCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ param_1;$	+1
+use	ffvpEmitLight	iVar4	builderCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x5b0\);$	+2
+use	ffvpEmitLight	iVar4	builderCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,uVar22,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\),$	+2
+use	ffvpEmitLight	iVar4	builderCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\);$	+1
+use	ffvpEmitLight	iVar4	builderCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\);$@2	+1
+use	ffvpEmitLight	iVar4	builderCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_194,\&DAT_001dbd24,uVar22,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\),$	+2
+use	ffvpEmitLight	iVar4	builderCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ iVar4\ \+\ 0x28;$	+1
+use	ffvpEmitLight	iVar4	sideOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ uVar20\ \*\ 0x28;$	+1
+use	ffvpEmitLight	iVar4	sideOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,\*puVar12,local_68\ \+\ iVar4\ \+\ 8,a4,local_144,\&DAT_001dbd34,$	+2
+use	ffvpEmitLight	iVar4	sideOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ uVar20\ \*\ 0x28;$@2	+1
+use	ffvpEmitLight	iVar4	sideOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,\*puVar10,local_68\ \+\ iVar4\ \+\ 8,a4,local_194,auStack_180,pcVar21,a4,iVarS71,iVarS72,pcVar21,iVarS73,iVarS74,iVarS75,iVarS76\);$	+1
+use	ffvpEmitLight	iVar4	lightRecCursorD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ iVar9;$	+1
+use	ffvpEmitLight	iVar4	lightRecCursorD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_000912f0\(param_1,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x288\),3,\&local_228,\&local_21c\);$	+1
+use	ffvpEmitLight	iVar4	lightRecCursorD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_000912f0\(param_1,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x280\),2,\&local_228,\&local_21c\);$	+1
+use	ffvpEmitLight	iVar4	lightRecCursorD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_000912f0\(param_1,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x280\),2,\&local_228,\&local_21c\);$@2	+1
+use	ffvpEmitLight	iVar4	lightRecCursorD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ iVar4\ \+\ 4;$@3	+1
+use	ffvpEmitLight	iVar5	sideCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar17\ \+\ 4\]\ \+\ 1;$	+1
+use	ffvpEmitLight	iVar5	sideCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	ffvpEmitLight	iVar5	normalReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x448\);$	+1
+use	ffvpEmitLight	iVar5	normalReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x470\);$	+1
+use	ffvpEmitLight	iVar5	normalReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x498\);$	+1
+use	ffvpEmitLight	iVar5	normalReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar5\ ==\ \-1\)\ \{$	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar5\ =\ \(\*\(int\ \*\*\)\(param_1\ \+\ 0x3ec\)\)\[2\];$	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_1e4,auStack_1e0,iVar5,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x24\),\&DAT_001dbcd4,$	+2
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_11c,auStack_118,iVar5,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x2c\),\&DAT_001dbd74,pcVar21,iVarS89,iVarS90,iVarS91,pcVar21\);$	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_11c,auStack_118,iVar5,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x34\),$	+2
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_1bc,auStack_1b8,iVar5,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x28\),\(\(unsigned\ char\ \*\)0x00003860\)\ \+\ \(int\)local_74,pcVar21,iVarS92,iVarS93,\(\(unsigned\ char\ \*\)0x00003860\)\ \+\ \(int\)local_74,pcVar21\);$	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar5\ ==\ local_228\)\ \{$	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_194,\&DAT_001dbd84,iVar5,local_21c,\&DAT_001dbd14,$	+2
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$@2	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_194,\&DAT_001dbd84,iVar5,$	+2
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$@3	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(param_9\ ==\ 1\)\ \|\|$	+2
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar5\ ==\ local_228\)\ \{$@2	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_194,puVar19,iVar5,local_21c,\&DAT_001dbd14,$	+2
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$@4	+1
+use	ffvpEmitLight	iVar5	srcInputReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_194,puVar19,iVar5,\*\(undefined4\ \*\)\(iVar16\ \+\ 8\),$	+2
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ local_228;$	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\(\(unsigned\ char\ \*\)0x00003870\)\ \+\ \(int\)local_98,iVar6,iVar8,$	+2
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$@3	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\(\(unsigned\ char\ \*\)0x00003870\)\ \+\ \(int\)local_98,iVar6,iVar8,$@2	+2
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ a4;$@2	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,iVar6,uVar22,puVar10,\&DAT_001fa5e8,\(\*\(int\ \*\)\(\(int\)\*\(int\ \*\)\(\(int\)param_1\ \+\ 1004\)\ \+\ 0\)\),\(local_194\),\&DAT_001dbd14,\&DAT_001fa5e8,\(\*\(int\ \*\)\(\(int\)\*\(int\ \*\)\(\(int\)param_1\ \+\ 1004\)\ \+\ 0\)\),uVar18,\&DAT_001dbd14,\&DAT_001fa5e8\)$	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$@2	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,iVar6,uVar22,puVar10,\&DAT_001fa5e8,\(\*\(int\ \*\)\(\(int\)\*\(int\ \*\)\(\(int\)param_1\ \+\ 1004\)\ \+\ 0\)\),\(local_194\),\&DAT_001dbd14,\&DAT_001fa5e8\)$	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ a4;$	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ local_228;$@2	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(param_9\ ==\ 1\)\ \|\|$	+2
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar22,uVar18,puVar19,iVar6,iVar8,local_60\ \+\ 0x3800,$	+2
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ iVar5;$@4	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ a4;$@3	+1
+use	ffvpEmitLight	iVar6	srcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar22,uVar18,puVar19,iVar6,uVar7,puVar11,\&DAT_001fa5e8,iVarS84,iVarS85,\&DAT_001dbd14,\&DAT_001fa5e8,iVarS84,iVarS86,\&DAT_001dbd74,\&DAT_001fa5e8\);$	+1
+use	ffvpEmitLight	iVar6	allocStatusB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ FUN_00090ca0\(param_1,1,local_7c\);$	+2
+use	ffvpEmitLight	iVar6	allocStatusB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar6\ =\ FUN_00090ca0\(param_1,0,local_7c\);$	+2
+local	ffvpEmitLight	iVar8	srcReg	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	ffvpEmitLight	iVar17	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	ffvpEmitLight	uVar22	colorSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x64c\);$	+1
+use	ffvpEmitLight	uVar22	colorSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,uVar22,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\),$	+2
+use	ffvpEmitLight	uVar22	colorSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,uVar22,uVar7,\&DAT_001dbd14,pcVar21,iVarSw0,iVarSw1,iVarSw2,pcVar21,a4,uVar18,\&DAT_001dbd14,pcVar21\);$	+1
+use	ffvpEmitLight	uVar22	colorSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_194,\&DAT_001dbd24,uVar22,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\),$	+2
+use	ffvpEmitLight	uVar22	lightSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x14\);$	+1
+use	ffvpEmitLight	uVar22	lightSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*puVar12;$@2	+1
+use	ffvpEmitLight	uVar22	lightSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,iVar6,uVar22,puVar10,\&DAT_001fa5e8,\(\*\(int\ \*\)\(\(int\)\*\(int\ \*\)\(\(int\)param_1\ \+\ 1004\)\ \+\ 0\)\),\(local_194\),\&DAT_001dbd14,\&DAT_001fa5e8,\(\*\(int\ \*\)\(\(int\)\*\(int\ \*\)\(\(int\)param_1\ \+\ 1004\)\ \+\ 0\)\),uVar18,\&DAT_001dbd14,\&DAT_001fa5e8\)$	+1
+use	ffvpEmitLight	uVar22	lightSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x14\);$@2	+1
+use	ffvpEmitLight	uVar22	lightSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,iVar6,uVar22,puVar10,\&DAT_001fa5e8,\(\*\(int\ \*\)\(\(int\)\*\(int\ \*\)\(\(int\)param_1\ \+\ 1004\)\ \+\ 0\)\),\(local_194\),\&DAT_001dbd14,\&DAT_001fa5e8\)$	+1
+use	ffvpEmitLight	uVar22	lightSrcFile	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*puVar12;$	+1
+use	ffvpEmitLight	uVar22	outputFileC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0x74\);$	+1
+use	ffvpEmitLight	uVar22	outputFileC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar7,uVar22,\(\(unsigned\ char\ \*\)0x00003810\)\ \+\ \(int\)local_90,a4,uVar18,$	+2
+use	ffvpEmitLight	uVar22	outputFileD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x3f0\);$	+1
+use	ffvpEmitLight	uVar22	outputFileD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3f0\)\ \+\ 0xc\);$	+1
+use	ffvpEmitLight	uVar22	outputFileD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar22,uVar18,puVar19,iVar6,iVar8,local_60\ \+\ 0x3800,$	+2
+use	ffvpEmitLight	uVar22	outputFileD	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar22,uVar18,puVar19,iVar6,uVar7,puVar11,\&DAT_001fa5e8,iVarS84,iVarS85,\&DAT_001dbd14,\&DAT_001fa5e8,iVarS84,iVarS86,\&DAT_001dbd74,\&DAT_001fa5e8\);$	+1
+use	ffvpEmitLight	uVar7	colorSrcReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\);$	+1
+use	ffvpEmitLight	uVar7	colorSrcReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\&DAT_001dbd84,uVar22,uVar7,\&DAT_001dbd14,pcVar21,iVarSw0,iVarSw1,iVarSw2,pcVar21,a4,uVar18,\&DAT_001dbd14,pcVar21\);$	+1
+use	ffvpEmitLight	uVar7	colorSrcReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x650\);$@2	+1
+use	ffvpEmitLight	uVar7	outputRegC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3f0\)\ \+\ 0xc\);$	+1
+use	ffvpEmitLight	uVar7	outputRegC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar7,uVar22,\(\(unsigned\ char\ \*\)0x00003810\)\ \+\ \(int\)local_90,a4,uVar18,$	+2
+use	ffvpEmitLight	uVar7	lightSrcReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 8\);$	+1
+use	ffvpEmitLight	uVar7	lightSrcReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*puVar12;$	+1
+use	ffvpEmitLight	uVar7	lightSrcReg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar22,uVar18,puVar19,iVar6,uVar7,puVar11,\&DAT_001fa5e8,iVarS84,iVarS85,\&DAT_001dbd14,\&DAT_001fa5e8,iVarS84,iVarS86,\&DAT_001dbd74,\&DAT_001fa5e8\);$	+1
+use	ffvpEmitLight	puVar12	tempRegCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \&local_f4;$	+1
+use	ffvpEmitLight	puVar12	tempRegCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,\*puVar12,local_68\ \+\ iVar4\ \+\ 8,a4,local_144,\&DAT_001dbd34,$	+2
+use	ffvpEmitLight	puVar12	tempRegCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ puVar12\ \+\ 10;$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar9\ \+\ 0x290\);$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_000913e0\(param_1,\*puVar12,\&local_228,\&local_21c,\&local_208\);$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \&local_f4;$@2	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,\*puVar12,puVar23,a4,\*\(undefined4\ \*\)\(local_a0\ \+\ 4\),$	+2
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVarS28\ =\ \*\(int\ \*\)\(\(int\)puVar12\ \+\ 0\);$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,uVar18,\(\(unsigned\ char\ \*\)0x00003870\)\ \+\ \(int\)local_98,iVar6,iVar8,$	+2
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVarS31\ =\ \*\(int\ \*\)\(\(int\)puVar12\ \+\ 0\);$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*puVar12;$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar22\ =\ \*puVar12;$@2	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVarS80\ =\ \*\(int\ \*\)\(\(int\)puVar12\ \+\ 0\);$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVarS43\ =\ \*\(int\ \*\)\(\(int\)puVar12\ \+\ 0\);$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \*puVar12;$	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ puVar12\ \+\ 10;$@2	+1
+use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ puVar12\ \+\ 1;$	+1
+use	ffvpEmitLight	bVar1	needsSpecular	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ param_5\ !=\ 0;$	+2
+use	ffvpEmitLight	bVar1	needsSpecular	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(bVar1\)\ \&\&\ \(param_6\ ==\ 0\)\)\ \{$	+1
+use	ffvpEmitLight	bVar1	needsSpecular	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	ffvpEmitLight	bVar1	needsSpecular	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	ffvpEmitLight	bVar1	noSpecularTemp	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ local_a4\ ==\ 0;$	+1
+use	ffvpEmitLight	bVar1	noSpecularTemp	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@4	+1
+use	ffvpEmitLight	bVar1	noSpecularTemp	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@5	+1
+use	ffvpEmitLight	bVar1	hasSpecularTempB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ local_a4\ !=\ 0;$	+1
+use	ffvpEmitLight	bVar1	hasSpecularTempB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@6	+1

@@ -1,0 +1,82 @@
+use	recordRetireBindings	bVar1	bindingEmptied	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ false;$	+1
+use	recordRetireBindings	bVar1	bindingEmptied	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ false;$@2	+1
+use	recordRetireBindings	bVar1	bindingEmptied	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ true;$	+1
+use	recordRetireBindings	bVar1	bindingEmptied	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$	+1
+use	recordRetireBindings	bVar1	haveValueIds	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ false;$@3	+1
+use	recordRetireBindings	bVar1	haveValueIds	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	recordRetireBindings	bVar1	haveValueIds	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar1\ =\ 0\ <\ iVar22\ \+\ 1;$	+1
+use	recordRetireBindings	bVar1	haveValueIds	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	recordRetireBindings	bVar1	haveValueIds	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(bVar1\)\ \{$@4	+1
+local	recordRetireBindings	bVar2	listEmpty	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordRetireBindings	iVar22	seenCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar22\ =\ 0;$	+1
+use	recordRetireBindings	iVar22	seenCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar23\ =\ iVar22;$	+1
+use	recordRetireBindings	iVar22	seenCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_78\[iVar22\]\ =\ iVar12;$	+3
+use	recordRetireBindings	iVar22	seenCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(iVar12\ !=\ iVar22\);$	+1
+use	recordRetireBindings	iVar22	seenCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(iVar12\ !=\ iVar22\);$@2	+1
+use	recordRetireBindings	iVar22	seenCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar14\ !=\ uVar8\)\ \&\&\ \(\(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar16\)\ !=\ 0\)\)\ \&\&$	+3
+use	recordRetireBindings	iVar22	seenCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ uVar16\)\ !=\ 0\)\ \&\&$	+3
+local	recordRetireBindings	iVar23	seenCountdown	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordRetireBindings	piVar4	seenSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordRetireBindings	local_78	seenValueIds	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	recordRetireBindings	piVar18	seenCursorA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar18\ =\ local_78;$	+1
+use	recordRetireBindings	piVar18	seenCursorA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar9\ =\ \*piVar18;$	+2
+use	recordRetireBindings	piVar18	seenCursorB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar18\ =\ local_78;$@2	+1
+use	recordRetireBindings	piVar18	seenCursorB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar9\ =\ \*piVar18;$@2	+2
+use	recordRetireBindings	iVar9	valueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar9\ =\ \*piVar18;$	+1
+use	recordRetireBindings	iVar9	valueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar9\ !=\ \-1\)\ \{$	+3
+use	recordRetireBindings	iVar9	valueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar9\ =\ \*piVar18;$@2	+1
+use	recordRetireBindings	iVar9	valueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar9\ !=\ \-1\)\ \{$@2	+3
+use	recordRetireBindings	iVar12	fileIs2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078ef0\)\(puVar6\);$	+2
+use	recordRetireBindings	iVar12	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar18;$	+1
+use	recordRetireBindings	iVar12	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*piVar4\ !=\ iVar12\)\ goto\ LAB_00079508;$	+1
+use	recordRetireBindings	iVar12	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(\*piVar4\ !=\ iVar12\);$	+1
+use	recordRetireBindings	iVar12	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar18;$@2	+1
+use	recordRetireBindings	iVar12	candidateValueId	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_78\[iVar22\]\ =\ iVar12;$	+1
+use	recordRetireBindings	iVar12	valueLoopIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ 0;$	+1
+use	recordRetireBindings	iVar12	valueLoopIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+2
+use	recordRetireBindings	iVar12	valueLoopIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(uVar16\ !=\ uVar8\)\ \&\&\ \(\(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar14\)\ !=\ 0\)\)\ \&\&$	+3
+use	recordRetireBindings	iVar12	valueLoopIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ uVar14\)\ !=\ 0\)\ \&\&$	+3
+use	recordRetireBindings	uVar14	earliestMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ 0;$@3	+1
+use	recordRetireBindings	uVar14	earliestMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar10\ \&\ uVar14\)\ ==\ 0\)\ \{$	+1
+use	recordRetireBindings	uVar14	earliestMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ uVar14\ \|\ uVar10;$	+1
+use	recordRetireBindings	uVar14	earliestMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+1
+use	recordRetireBindings	uVar14	earliestMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(1\ <<\ \(uVar16\ \&\ 0x3f\)\ \&\ uVar14\)\ !=\ 0\)\ \{$	+1
+use	recordRetireBindings	uVar14	earliestMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(uVar16\ !=\ uVar8\)\ \&\&\ \(\(1\ <<\ \(uVar8\ \&\ 0x3f\)\ \&\ uVar14\)\ !=\ 0\)\)\ \&\&$	+3
+use	recordRetireBindings	uVar14	earliestMask	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar8\ \&\ uVar14\)\ !=\ 0\)\ \&\&$	+2
+use	recordRetireBindings	uVar14	bindingRecordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \*puVar6;$	+2
+use	recordRetireBindings	uVar14	bindingRecordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar7\ =\ uVar14;$	+1
+use	recordRetireBindings	uVar14	bindingRecordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(uVar14\ <\ \*puVar7\)\ \{$	+2
+use	recordRetireBindings	uVar8	headWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ 0;$	+1
+use	recordRetireBindings	uVar8	headWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \*puVar6;$	+1
+use	recordRetireBindings	uVar8	headWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar8\ ==\ 0\)\ \{$	+1
+use	recordRetireBindings	uVar8	headWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ 0;$@2	+1
+use	recordRetireBindings	uVar8	headWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \*puVar6;$@2	+1
+use	recordRetireBindings	uVar8	headWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar8\ ==\ 0\)\ \{$@2	+1
+use	recordRetireBindings	uVar8	useRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \*puVar6;$@3	+2
+use	recordRetireBindings	uVar8	useRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar7\ =\ uVar8;$	+1
+use	recordRetireBindings	uVar8	useRecord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(uVar8\ <\ \*puVar7\)\ \{$	+2
+use	recordRetireBindings	uVar8	useMaskWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ puVar6\[1\];$	+1
+use	recordRetireBindings	uVar8	useMaskWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar8\ \&\ uVar15\ \&\ \~\(int\)cVar3\)\ !=\ 0\)\ \{$	+1
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar7\ =\ \(uint\ \*\)\*puVar6;$	+1
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(puVar7\ !=\ \(uint\ \*\)0x0\)\ \{$	+1
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*puVar7\ \&\ 0x4000\)\ ==\ 0\)\ goto\ LAB_00079318;$	+4
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*while\ \(puVar13\ =\ puVar7,\ puVar7\ =\ \(uint\ \*\)puVar13\[1\],\ puVar7\ !=\ \(uint\ \*\)0x0\)\ \{$	+4
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar7\ =\ \(uint\ \*\)\*puVar6;$@2	+1
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(puVar7\ !=\ \(uint\ \*\)0x0\)\ \{$@2	+1
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*puVar7\ \&\ 0x4000\)\ ==\ 0\)\ goto\ LAB_00079258;$	+4
+use	recordRetireBindings	puVar7	bindingCur	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*while\ \(puVar13\ =\ puVar7,\ puVar7\ =\ \(uint\ \*\)puVar13\[1\],\ puVar7\ !=\ \(uint\ \*\)0x0\)\ \{$@2	+4
+use	recordRetireBindings	puVar7	bindingScan	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*while\ \(puVar7\ =\ puVar6,\ uVar5\ ==\ param_2\)\ \{$	+1
+use	recordRetireBindings	puVar7	bindingScan	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*while\ \(puVar13\ =\ puVar7,\ puVar7\ =\ \(uint\ \*\)puVar13\[1\],\ puVar7\ !=\ \(uint\ \*\)0x0\)\ \{$@3	+4
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar7\ =\ local_68;$	+1
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar7\ =\ uVar8;$	+1
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(uVar8\ <\ \*puVar7\)\ \{$	+2
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar7\ =\ puVar7\ \+\ 1;$	+1
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar7\ =\ local_68;$@2	+1
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*puVar7\ =\ uVar14;$	+1
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(uVar14\ <\ \*puVar7\)\ \{$	+2
+use	recordRetireBindings	puVar7	earliestWriterPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar7\ =\ puVar7\ \+\ 1;$@2	+1
+use	recordRetireBindings	uVar16	srcWord0	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \*\(uint\ \*\)\*param_3;$	+2
+use	recordRetireBindings	uVar16	srcWord0	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(1\ <<\ \(uVar16\ >>\ 0xd\ \&\ 7\)\ \|\ 1\ <<\ \(uVar16\ >>\ 0x10\ \&\ 7\)\ \|\ 1\ <<\ \(uVar16\ >>\ 0x13\ \&\ 7\)\ \|$	+2
+local	recordRetireBindings	uVar15	componentBitD	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordRetireBindings	local_68	earliestWriter	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	recordRetireBindings	local_58	earliestWriterBase	INFERRED	role read off the function body (see notes_gld_q03.md)

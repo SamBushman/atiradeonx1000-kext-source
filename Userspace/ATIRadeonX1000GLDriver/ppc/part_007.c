@@ -1536,7 +1536,7 @@ LAB_0004e294:
               texFilterWord = (*(ushort *)(unitInfoCursor + 0x46e) & 0x3ff) << 3 | texFilterWord & 0xffffe007;
             }
             else {
-              lodBiasField = ((int (*)())FUN_00086930)(glContext,(double)*(float *)(unitInfoCursor + 0x470),fprF2);
+              lodBiasField = ((int (*)())gldLodBiasToFixed)(glContext,(double)*(float *)(unitInfoCursor + 0x470),fprF2);
               texFilterWord = (lodBiasField & 0x3ff) << 3 | texFilterWord & 0xffffe007;
               fprF1 = extraout_f1;
             }
@@ -4381,7 +4381,7 @@ int FUN_00052280(glContext)
       registerDirty = *(uint *)(glContext + 0x1930);
     }
     if ((registerDirty & 0x1000000) != 0) {
-      FUN_00086840(glContext);
+      gldUploadClipPlanes(glContext);
     }
     *(undefined4 *)(glContext + 0x1934) = 0;
     *(undefined4 *)(glContext + 0x1930) = 0;

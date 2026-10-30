@@ -1,0 +1,2 @@
+local	evsAllocLocalConstantRegisters	bVar1	noFreeRegisterYet	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	evsAllocLocalConstantRegisters	uVar9	allocatedFlag	INFERRED	role read off the function body (see notes_gld_q03.md)

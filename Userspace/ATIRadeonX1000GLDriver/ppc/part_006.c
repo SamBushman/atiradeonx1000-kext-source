@@ -7943,7 +7943,7 @@ int FUN_0004aa00(ctx, param_2)
       *puVar2 = 0;
       *(undefined4 *)(((unsigned char *)0x00001488) + ctx) = 0;
     }
-    FUN_00088190(ctx,puVar2);
+    arbfpBindFragmentProgram(ctx,puVar2);
     uVar1 = 1;
   }
   return uVar1;
@@ -8314,7 +8314,7 @@ LAB_0004b200:
       ((unsigned char *)0x000010e9)[programEntry] = 0;
       ((unsigned char *)0x000010ea)[programEntry] = 0;
 LAB_0004b42c:
-      FUN_00088190(glContext,*(undefined4 *)(((unsigned char *)0x000036c0) + programEntry));
+      arbfpBindFragmentProgram(glContext,*(undefined4 *)(((unsigned char *)0x000036c0) + programEntry));
       return;
     }
     glContextWord1e5c = *(int *)(glContext + 0x1e5c);
@@ -8330,7 +8330,7 @@ LAB_0004b42c:
 LAB_0004b2f8:
       if (needsUpdate == '\0') {
         if (useSecondary) {
-          FUN_00087e80(glContext,0,programStatePtr,programStatePtr + 4);
+          arbfpCompileFragmentProgram(glContext,0,programStatePtr,programStatePtr + 4);
         }
         else {
           FUN_000b6580(glContext,1);
