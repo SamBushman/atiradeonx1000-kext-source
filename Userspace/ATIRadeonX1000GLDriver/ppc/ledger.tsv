@@ -1136,7 +1136,7 @@
 0xd10dc	712	psDisasmFormatRegister	part_018	converted
 0xd13a4	640	psDisasmFormatRgbSource	part_018	converted
 0xd1624	536	psDisasmFormatAlphaSource	part_018	converted
-0xd183c	13160	FUN_000d183c	part_018	converted
+0xd183c	13160	psnDumpPixelShader	part_018	converted
 0xd4de8	16	psnClearSinkRecord	part_018	converted
 0xd4df8	16	psnClearSinkRecord2	part_018	converted
 0xd4e08	92	scDumpPixelProgramPsn	part_019	converted

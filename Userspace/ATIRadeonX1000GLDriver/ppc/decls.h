@@ -1342,7 +1342,7 @@ extern int psnSwizzleIsAlphaSourceForm();
 extern double psDisasmFormatRegister(undefined4 param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1);
 extern int psDisasmFormatRgbSource();
 extern int psDisasmFormatAlphaSource();
-extern int FUN_000d183c();
+extern int psnDumpPixelShader();
 extern int psnClearSinkRecord();
 extern int psnClearSinkRecord2();
 extern int scDumpPixelProgramPsn();

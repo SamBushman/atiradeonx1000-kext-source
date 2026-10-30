@@ -13,7 +13,7 @@ int scDumpPixelProgramPsn(sinkRecord, shaderState, optionsArg, argR6, argR7, arg
 {
   DAT_001fa61c = *sinkRecord;
   DAT_001fa618 = sinkRecord[1];
-  FUN_000d183c(shaderState + 0x64c,"SC Generated Shader",0,argR6,argR7,argR8,DAT_001fa618,argR10)
+  psnDumpPixelShader(shaderState + 0x64c,"SC Generated Shader",0,argR6,argR7,argR8,DAT_001fa618,argR10)
   ;
   return 1;
 }

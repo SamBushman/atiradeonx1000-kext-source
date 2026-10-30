@@ -14,3 +14,19 @@ Written during the Oct 29-30 q04 round. Every entry says why the name could not 
 * find_webs pitfall (psnDecEncodeHwWords): a definition inside a condition expression (`(x = 5, ...)`) is not seen as a definition, so such a variable's webs are split wrongly (DATAFLOW). Merge the affected webs under one name (rgbSourceSelect).
 * FUN_000bef40 (psnRemapTempRegisters): scalar webs of bools and ints next to the address-taken remap table failed ADDRESS-TAKEN splits; merged (bankFlag, remapIndex, countdownIndex). gld_compileILProgram (FUN_000b4400): local renames only (iVar8 loopCounter, iVar10 regLoopValue, ... multi-role); splitting gave ADDRESS-TAKEN/CODE failures even with USE_DECL=beside.
 * ilRewriteForTextureState and ilAssembleProgram: not named (about 1900 uses): ~100 stack locals of an IL token interpreter whose roles overlap across two passes.
+
+## Late additions (ilAssembleProgram / extvsInstReadsTempComponents)
+
+- ilAssembleProgram `uVar33`: its size-accumulation webs are defined inside conditions
+  (`if (cond && (x = y + 0xc, flag))`), so web splitting yields DATAFLOW garbage, and the older gT_B4/B5
+  anchored rows depend on the raw `uVar33` text. It is named as ONE variable (`scratchWord`) by a trailing
+  `use ... *` row (`names_q04_ac.tsv`); the already-split `sizeBytes*` webs keep their names.
+- ilAssembleProgram `pppppppuVar20`/`pppppppuVar25` carry a stale call argument across unrelated code and are
+  named `scratchCursorA/B` (neutral).
+- extvsInstReadsTempComponents `bVar1..bVar16`: each holds a different operand/component test in different opcode
+  cases and every definition sits inside a comma expression, so no semantic split is possible; they get the neutral
+  `componentReadFlag<N>` (N = original decompiler index).
+- Remaining placeholders in parts 015-018 (24) are call-site references to callees whose bodies live in
+  other forks' parts (FUN_0004b190, FUN_00064720, FUN_0004e990, FUN_0004ce30, FUN_0004ab60, FUN_0004b710,
+  FUN_0003b160, FUN_00050ef0, FUN_0004d620, FUN_0004ac90, FUN_000d8450/55c0/5390, FUN_000da0c0/420/78c,
+  FUN_000e0ca8/0cd0/0e28/161c, FUN_00193b3c/be8); they resolve when the owning fork names the callee.

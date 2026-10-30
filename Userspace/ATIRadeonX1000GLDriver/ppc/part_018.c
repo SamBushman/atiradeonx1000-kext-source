@@ -7294,8 +7294,8 @@ LAB_000d1780:
   return;
 }
 
-/* FUN_000d183c @ 0xd183c (13160 bytes) */
-int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, argR10)
+/* psnDumpPixelShader @ 0xd183c (13160 bytes) */
+int psnDumpPixelShader(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, argR10)
   uint *pixelShader;
   uint dumpLabel;
   uint *dumpId;
