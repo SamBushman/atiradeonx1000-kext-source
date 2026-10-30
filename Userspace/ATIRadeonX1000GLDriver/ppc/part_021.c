@@ -745,7 +745,7 @@ int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileI
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
       ((int (*)())Compiler__compileStages)(iStack00000018,parsedRequest);
       if (parsedRequest != 0) {
-        FUN_00193be8(parsedRequest);
+        ArenaObject__freeBuffer(parsedRequest);
         Arena__free(*(undefined4 *)(parsedRequest + -4),parsedRequest + -4);
       }
     }
@@ -792,14 +792,14 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
     if (setjmpResult == 0) {
       ((int (*)())Compiler__resetState)(iStack00000018);
       Compiler__applyRequestFlags(iStack00000018,uStack00000028);
-      parsedRequest = FUN_00193b3c(uStack00000020,uStack00000024,iStack00000018);
+      parsedRequest = TypedValueArray__createWrapping(uStack00000020,uStack00000024,iStack00000018);
       *(int *)(iStack00000018 + 0x524) = iStack0000001c;
       *(undefined4 *)(iStack0000001c + 0xf8) = 0;
       *(undefined4 *)(iStack0000001c + 0xfc) =
            *(undefined4 *)(*(int *)(iStack00000018 + 0x398) + 0x28);
       ((int (*)())Compiler__compileStages)(iStack00000018,parsedRequest);
       if (parsedRequest != 0) {
-        FUN_00193be8(parsedRequest);
+        ArenaObject__freeBuffer(parsedRequest);
         Arena__free(*(undefined4 *)(parsedRequest + -4),parsedRequest + -4);
       }
     }

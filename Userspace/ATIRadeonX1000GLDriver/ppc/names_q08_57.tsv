@@ -1,0 +1,36 @@
+local	FUN_00193ae4	param_1	this	INFERRED	object initialised: [0] compiler, [1] type code, [2] element count, [5] arena array when more than 2 elements
+local	FUN_00193ae4	param_2	elementCount	INFERRED	number of 4-byte elements; more than 2 allocates the array from the compiler arena (+0x370)
+local	FUN_00193ae4	param_3	typeCode	INFERRED	type code stored at [1]
+local	FUN_00193ae4	param_4	compiler	INFERRED	compiler (+0x370 arena)
+local	FUN_00193a8c	param_1	this	INFERRED	object initialised: [0] compiler, [1] type code, [2] element count, [5] arena array when more than 2 elements
+local	FUN_00193a8c	param_2	elementCount	INFERRED	number of 4-byte elements; more than 2 allocates the array from the compiler arena (+0x370)
+local	FUN_00193a8c	param_3	typeCode	INFERRED	type code stored at [1]
+local	FUN_00193a8c	param_4	compiler	INFERRED	compiler (+0x370 arena)
+func	FUN_00193ae4	TypedValueArray__init	INFERRED	stores compiler/type/count and allocates an arena array of 4-byte elements when the count exceeds 2
+func	FUN_00193a8c	TypedValueArray__init_193a8c	INFERRED	identical to TypedValueArray__init (duplicate copy)
+local	FUN_00193b3c	param_1	owner	INFERRED	stored at [4] of the new array object
+local	FUN_00193b3c	param_2	dataPtr	INFERRED	stored at [5] of the new array object
+local	FUN_00193b3c	param_3	compiler	INFERRED	compiler (+0x370 arena)
+local	FUN_00193b3c	uVar2	arena	INFERRED	compiler arena at +0x370, stored as the allocation header
+func	FUN_00193b3c	TypedValueArray__createWrapping	INFERRED	allocates a 0x1c byte array object (type 0x22, one element) wrapping owner and dataPtr
+func	FUN_0017e338	ValueKey__foldEqualSourcesIntoOutputScale	INFERRED	sources 1 and 2 agree on all written lanes with equal modifiers and the hardware accepts scale code + 1: replaces the instruction by a mov of operand 2 with that scale
+use	FUN_0017e338	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+3
+use	FUN_0017e338	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*a1\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x124\)\ \+\ 1;$	+1
+use	FUN_0017e338	iVar1	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0xfc\)\)\(a0,a1,iVar1,in_r6,in_r7,in_r8,\*\(int\ \*\)\(iVar1\ \+\ 0x124\)\);$	+1	rhs	none
+use	FUN_0017e338	iVar1	limitAccepted	INFERRED	hardware-limits vtable +0xfc accepted scale code + 1	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0xfc\)\)\(a0,a1,iVar1,in_r6,in_r7,in_r8,\*\(int\ \*\)\(iVar1\ \+\ 0x124\)\);$	+1	lhs	none
+use	FUN_0017e338	iVar1	limitAccepted	INFERRED	hardware-limits vtable +0xfc accepted scale code + 1	^\s*if\ \(iVar1\ !=\ 0\)\ \{$@2	+1
+local	FUN_0017d610	uVar1	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	FUN_0017d610	uVar3	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	FUN_0017d610	local_28	zeroVec4X	INFERRED	vec4 {0,0,0,0} handed to the mov rewrite (frame-adjacent, whole variables)
+local	FUN_0017d610	local_24	zeroVec4Y	INFERRED	see zeroVec4X
+local	FUN_0017d610	local_20	zeroVec4Z	INFERRED	see zeroVec4X
+local	FUN_0017d610	local_1c	zeroVec4W	INFERRED	see zeroVec4X
+func	FUN_0017d610	ValueKey__foldOppositeNegatesToZero	INFERRED	sources 1 and 2 agree on the written lanes with differing negate bit and equal abs bit: replaces the instruction by a mov of vec4 zero
+local	FUN_001819b4	iVar1	componentsA	INFERRED	written component count of inst when it is a plain register source, else 0
+local	FUN_001819b4	iVar2	componentsB	INFERRED	written component count of inst2 when it is a plain register source, else 0
+func	FUN_001819b4	Inst__compareScheduleSlack	INFERRED	true when inst2's +0x150 slack minus its component count is smaller than inst's
+local	FUN_0017bc58	param_2	laneMask	INFERRED	lane mask tested against each producer's write mask (WriteMask__fromSelectWord)
+local	FUN_0017bc58	param_3	relinkFlag	INFERRED	non-zero: set the found producer as source 1 of inst
+local	FUN_0017bc58	uVar4	producerSelectWord	INFERRED	select word of the producer's destination (operand record 0)
+local	FUN_0017bc58	piVar2	source1	INFERRED	current source 1 of inst
+func	FUN_0017bc58	Inst__findLaneProducer	INFERRED	walks the chain of source-3 producers from source 1 until one that is a load or writes lanes in the mask; optionally relinks source 1 to it

@@ -127,50 +127,51 @@ int OpcodeInfo__deleting_dtor(this)
 }
 
 /* IrAddFloat__vslot5_getValueKeyTransformLevel @ 0x1d0278 (288 bytes) */
-int IrAddFloat__vslot5_getValueKeyTransformLevel(this, param_2, param_3, compiler)
+int IrAddFloat__vslot5_getValueKeyTransformLevel(this, ctx, laneResultPtr, compiler)
   undefined4 this;
-  int param_2;
-  int *param_3;
+  int ctx;
+  int *laneResultPtr;
   int compiler;
 {
-  bool bVar1;
-  int iVar2;
+  int instructionCount;
+  bool notLastLane;
+  int folded;
   int operandRecord;
-  int iVar4;
+  int instructionLimit;
   undefined4 inst;
-  undefined4 uVar6;
+  undefined4 transformLevel;
   int loopIndex;
   
-  iVar2 = FUN_0017d610(param_2);
-  if (((iVar2 == 0) && (iVar2 = FUN_0017cdbc(param_2), iVar2 == 0)) &&
-     ((iVar2 = Compiler__isOptionEnabled(compiler,0xc), iVar2 == 0 || (iVar2 = FUN_0017e338(param_2), iVar2 == 0))
+  folded = ValueKey__foldOppositeNegatesToZero(ctx);
+  if (((folded == 0) && (folded = ValueKey__foldAddOfZeroSource(ctx), folded == 0)) &&
+     ((folded = Compiler__isOptionEnabled(compiler,0xc), folded == 0 || (folded = ValueKey__foldEqualSourcesIntoOutputScale(ctx), folded == 0))
      )) {
-    iVar4 = *(int *)(compiler + 0x658);
-    iVar2 = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);
-    inst = *(undefined4 *)(param_2 + 0xb0);
-    uVar6 = 2;
+    instructionLimit = *(int *)(compiler + 0x658);
+    instructionCount = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);
+    inst = *(undefined4 *)(ctx + 0xb0);
+    transformLevel = 2;
     loopIndex = 0;
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-        if (iVar4 <= iVar2) {
-          return uVar6;
+        if (instructionLimit <= instructionCount) {
+          return transformLevel;
         }
-        if ((*param_3 == 0x7ffffffe) &&
-           ((operandRecord = FUN_00179b28(param_2,loopIndex), operandRecord != 0 ||
-            (operandRecord = FUN_00179cc0(param_2,loopIndex), operandRecord != 0)))) {
-          uVar6 = 1;
+        if ((*laneResultPtr == 0x7ffffffe) &&
+           ((operandRecord = FUN_00179b28(ctx,loopIndex), operandRecord != 0 ||
+            (operandRecord = ValueKey__forwardOtherSourceIfZero(ctx,loopIndex), operandRecord != 0)))) {
+          transformLevel = 1;
         }
       }
-      bVar1 = loopIndex != 3;
-      param_3 = param_3 + 1;
+      notLastLane = loopIndex != 3;
+      laneResultPtr = laneResultPtr + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (notLastLane);
   }
   else {
-    uVar6 = 0;
+    transformLevel = 0;
   }
-  return uVar6;
+  return transformLevel;
 }
 
 /* IrCos__fold @ 0x1d05b0 (144 bytes) */
@@ -508,44 +509,45 @@ int IrSetGTFloat__fold(this, result, operands)
 }
 
 /* IrAddInt__vslot5_getValueKeyTransformLevel @ 0x1d0e0c (212 bytes) */
-int IrAddInt__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
+int IrAddInt__vslot5_getValueKeyTransformLevel(this, ctx, laneResultPtr, compiler)
   undefined4 this;
-  int param_2;
-  int *param_3;
-  int param_4;
+  int ctx;
+  int *laneResultPtr;
+  int compiler;
 {
-  bool bVar1;
-  int iVar2;
+  int instructionCount;
+  bool notLastLane;
+  int foldedAddOfZero;
   int operandRecord;
-  int iVar4;
-  undefined4 uVar5;
+  int instructionLimit;
+  undefined4 transformLevel;
   undefined4 inst;
   int loopIndex;
   
-  iVar2 = FUN_0017cdbc(param_2);
-  uVar5 = 0;
-  if (iVar2 == 0) {
-    iVar4 = *(int *)(param_4 + 0x658);
-    iVar2 = *(int *)(*(int *)(param_4 + 0x6c4) + 0xa8);
-    inst = *(undefined4 *)(param_2 + 0xb0);
-    uVar5 = 2;
+  foldedAddOfZero = ValueKey__foldAddOfZeroSource(ctx);
+  transformLevel = 0;
+  if (foldedAddOfZero == 0) {
+    instructionLimit = *(int *)(compiler + 0x658);
+    instructionCount = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);
+    inst = *(undefined4 *)(ctx + 0xb0);
+    transformLevel = 2;
     loopIndex = 0;
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-        if (iVar4 <= iVar2) {
-          return uVar5;
+        if (instructionLimit <= instructionCount) {
+          return transformLevel;
         }
-        if ((*param_3 == 0x7ffffffe) && (operandRecord = FUN_00179cc0(param_2,loopIndex), operandRecord != 0)) {
-          uVar5 = 1;
+        if ((*laneResultPtr == 0x7ffffffe) && (operandRecord = ValueKey__forwardOtherSourceIfZero(ctx,loopIndex), operandRecord != 0)) {
+          transformLevel = 1;
         }
       }
-      bVar1 = loopIndex != 3;
-      param_3 = param_3 + 1;
+      notLastLane = loopIndex != 3;
+      laneResultPtr = laneResultPtr + 1;
       loopIndex = loopIndex + 1;
-    } while (bVar1);
+    } while (notLastLane);
   }
-  return uVar5;
+  return transformLevel;
 }
 
 /* IrMulFloat__fold @ 0x1d0ee0 (72 bytes) */
@@ -567,14 +569,14 @@ int IrMulFloat__fold(this, result, operands)
 int IrRecipSqrtClamp__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d9c;
+  baseVtableBase1 = PTR_DAT_001e8d9c;
   *this = PTR_DAT_001e8e28 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -582,14 +584,14 @@ int IrRecipSqrtClamp__deleting_dtor(this)
 int IrRecipSqrtClamp__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d9c;
+  baseVtableBase1 = PTR_DAT_001e8d9c;
   *this = PTR_DAT_001e8e28 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -597,14 +599,14 @@ int IrRecipSqrtClamp__dtor(this)
 int IrRecipSqrtFF__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d9c;
+  baseVtableBase1 = PTR_DAT_001e8d9c;
   *this = PTR_DAT_001e904c + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -612,14 +614,14 @@ int IrRecipSqrtFF__deleting_dtor(this)
 int IrRecipSqrtFF__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d9c;
+  baseVtableBase1 = PTR_DAT_001e8d9c;
   *this = PTR_DAT_001e904c + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -627,14 +629,14 @@ int IrRecipSqrtFF__dtor(this)
 int IrRecipSqrtIEEE__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d9c;
+  baseVtableBase1 = PTR_DAT_001e8d9c;
   *this = PTR_DAT_001e8f0c + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -642,14 +644,14 @@ int IrRecipSqrtIEEE__deleting_dtor(this)
 int IrRecipSqrtIEEE__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d9c;
+  baseVtableBase1 = PTR_DAT_001e8d9c;
   *this = PTR_DAT_001e8f0c + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -657,14 +659,14 @@ int IrRecipSqrtIEEE__dtor(this)
 int IrRecipClamp__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d88;
+  baseVtableBase1 = PTR_DAT_001e8d88;
   *this = PTR_DAT_001e8fe4 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -672,14 +674,14 @@ int IrRecipClamp__deleting_dtor(this)
 int IrRecipClamp__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d88;
+  baseVtableBase1 = PTR_DAT_001e8d88;
   *this = PTR_DAT_001e8fe4 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -687,14 +689,14 @@ int IrRecipClamp__dtor(this)
 int IrRecipFF__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d88;
+  baseVtableBase1 = PTR_DAT_001e8d88;
   *this = PTR_DAT_001e8f8c + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -702,14 +704,14 @@ int IrRecipFF__deleting_dtor(this)
 int IrRecipFF__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d88;
+  baseVtableBase1 = PTR_DAT_001e8d88;
   *this = PTR_DAT_001e8f8c + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -717,14 +719,14 @@ int IrRecipFF__dtor(this)
 int IrRecipIEEE__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d88;
+  baseVtableBase1 = PTR_DAT_001e8d88;
   *this = PTR_DAT_001e8fec + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -732,14 +734,14 @@ int IrRecipIEEE__deleting_dtor(this)
 int IrRecipIEEE__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8d88;
+  baseVtableBase1 = PTR_DAT_001e8d88;
   *this = PTR_DAT_001e8fec + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -747,14 +749,14 @@ int IrRecipIEEE__dtor(this)
 int IrMulFloat__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8dd8;
+  baseVtableBase1 = PTR_DAT_001e8dd8;
   *this = PTR_DAT_001e8fb8 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -762,14 +764,14 @@ int IrMulFloat__deleting_dtor(this)
 int IrMulFloat__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8dd8;
+  baseVtableBase1 = PTR_DAT_001e8dd8;
   *this = PTR_DAT_001e8fb8 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -777,14 +779,14 @@ int IrMulFloat__dtor(this)
 int IrMul__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8dd8;
+  baseVtableBase1 = PTR_DAT_001e8dd8;
   *this = PTR_DAT_001e8e90 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -792,14 +794,14 @@ int IrMul__deleting_dtor(this)
 int IrMul__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8dd8;
+  baseVtableBase1 = PTR_DAT_001e8dd8;
   *this = PTR_DAT_001e8e90 + 8;
-  puVar2 = PTR_DAT_001e8f28;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8f28;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -807,14 +809,14 @@ int IrMul__dtor(this)
 int IrLogClamp__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e9038;
+  baseVtableBase2 = PTR_DAT_001e9038;
   *this = PTR_DAT_001e8d2c + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return operator_delete(this);
 }
 
@@ -822,14 +824,14 @@ int IrLogClamp__deleting_dtor(this)
 int IrLogClamp__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e9038;
+  baseVtableBase2 = PTR_DAT_001e9038;
   *this = PTR_DAT_001e8d2c + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -837,14 +839,14 @@ int IrLogClamp__dtor(this)
 int IrLogIEEE__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e9038;
+  baseVtableBase2 = PTR_DAT_001e9038;
   *this = PTR_DAT_001e8cd8 + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return operator_delete(this);
 }
 
@@ -852,14 +854,14 @@ int IrLogIEEE__deleting_dtor(this)
 int IrLogIEEE__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e9038;
+  baseVtableBase2 = PTR_DAT_001e9038;
   *this = PTR_DAT_001e8cd8 + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -867,14 +869,14 @@ int IrLogIEEE__dtor(this)
 int IrDot2Add__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e8f94;
+  baseVtableBase2 = PTR_DAT_001e8f94;
   *this = PTR_DAT_001e9070 + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return operator_delete(this);
 }
 
@@ -882,14 +884,14 @@ int IrDot2Add__deleting_dtor(this)
 int IrDot2Add__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e8f94;
+  baseVtableBase2 = PTR_DAT_001e8f94;
   *this = PTR_DAT_001e9070 + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -897,14 +899,14 @@ int IrDot2Add__dtor(this)
 int IrAdd__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e907c;
+  baseVtableBase2 = PTR_DAT_001e907c;
   *this = PTR_DAT_001e8cb8 + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return operator_delete(this);
 }
 
@@ -912,14 +914,14 @@ int IrAdd__deleting_dtor(this)
 int IrAdd__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e907c;
+  baseVtableBase2 = PTR_DAT_001e907c;
   *this = PTR_DAT_001e8cb8 + 8;
-  puVar1 = PTR_DAT_001e8f28;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8f28;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 

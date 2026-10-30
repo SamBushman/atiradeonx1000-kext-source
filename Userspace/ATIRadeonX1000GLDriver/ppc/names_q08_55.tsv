@@ -1,0 +1,33 @@
+local	FUN_0019ee74	param_1	programDesc	INFERRED	program descriptor: byte +1 is the shader kind (0, 1 or 2)
+local	FUN_0019ee74	param_2	compiler	INFERRED	compiler: +0x6c4 current program (+0x30 kind flags), +0x30c active limits, +0x310 limits set
+local	FUN_0019ee74	cVar1	shaderKind	INFERRED	0 sets program flag 1, 1 sets 0x2000, 2 sets 0x4000 and picks limits set entry kind+1
+local	FUN_0019ee74	piVar2	limitsSet	INFERRED	compiler +0x310: hardware limits objects per shader kind ([1] kind 0, [2] kind 1, [3] kind 2); the matching vtable +8/+0xc/+0x10 is called
+func	FUN_0019ee74	Compiler__selectLimitsForShaderKind	INFERRED	sets the program kind flag and activates the hardware limits object for the shader kind
+local	ilSkipRelativeAddressWords	param_1	addressMode	INFERRED	relative address mode field: 1 = one extra word, otherwise nested source operands
+local	ilSkipRelativeAddressWords	param_2	nestedCount	INFERRED	index of the last nested source operand to skip
+local	ilSkipRelativeAddressWords	param_3	bytePtr	INFERRED	pointer into the token stream, returned advanced
+local	ilSkipRelativeAddressWords	iVar1	nestedWordCount	INFERRED	words of one nested source operand
+local	ilInstructionHeaderWordCount	param_1	instructionWords	INFERRED	IL instruction token words: low 16 bits opcode, bit 31 extra word, bit 30 trailing word
+local	ilInstructionHeaderWordCount	puVar1	wordPtr	INFERRED	cursor past the header words
+use	R520MachineAssembler__vslot37_closeBranch	piVar1	successorHead	INFERRED	first successor of the branch block's list (NULL when empty)	^\s*piVar1\ =\ \(int\ \*\)0x0;$	+1
+use	R520MachineAssembler__vslot37_closeBranch	piVar1	successorHead	INFERRED	first successor of the branch block's list (NULL when empty)	^\s*piVar1\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0xd0\)\ \+\ 8\);$	+1
+use	R520MachineAssembler__vslot37_closeBranch	piVar1	successorHead	INFERRED	first successor of the branch block's list (NULL when empty)	^\s*if\ \(\*piVar1\ ==\ param_2\[0x4f\]\)\ \{$	+1
+use	R520MachineAssembler__vslot37_closeBranch	piVar1	pendingSlot	INFERRED	top of the pending-record vector (loop/branch stack)	^\s*piVar1\ =\ \(int\ \*\)0x0;$@2	+1
+use	R520MachineAssembler__vslot37_closeBranch	piVar1	pendingSlot	INFERRED	top of the pending-record vector (loop/branch stack)	^\s*piVar1\ =\ \(int\ \*\)\(\(uVar2\ \-\ 1\)\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\);$	+1
+use	R520MachineAssembler__vslot37_closeBranch	piVar1	pendingSlot	INFERRED	top of the pending-record vector (loop/branch stack)	^\s*iVar3\ =\ \*piVar1;$	+1
+use	R520MachineAssembler__vslot37_closeBranch	uVar2	pendingCount	INFERRED	size of the pending-record vector	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 4\);$	+3
+use	R520MachineAssembler__vslot37_closeBranch	uVar2	pendingCount	INFERRED	size of the pending-record vector	^\s*FUN_00194208\(iVar4,uVar2\ \-\ 1\);$	+1
+use	HashTable__insert_1950e0	uVar1	hash	INFERRED	hash of key from table[4]	^\s*uVar1\ =\ \(\*\(code\ \*\)param_1\[4\]\)\(param_2,param_2,param_3\);$	+1
+use	HashTable__insert_1950e0	uVar1	hash	INFERRED	hash of key from table[4]	^\s*iVar4\ =\ \(uVar1\ \&\ \*param_1\ \-\ 1\)\ \*\ 4;$	+1
+use	HashTable__insert_1950e0	uVar1	nodeArena	INFERRED	table arena table[5], stored as the vector header's arena	^\s*uVar1\ =\ param_1\[5\];$	+3
+use	HashTable__insert_1950e0	uVar1	vectorArena	INFERRED	table arena table[5], stored in the vector and used for the 8-byte data allocation	^\s*uVar1\ =\ param_1\[5\];$@2	+1
+use	HashTable__insert_1950e0	uVar1	vectorArena	INFERRED	table arena table[5], stored in the vector and used for the 8-byte data allocation	^\s*puVar2\[4\]\ =\ uVar1;$	+3
+use	HashTable__insert_1950e0	uVar1	entryArena	INFERRED	table arena table[5] for the 0xc-byte entry {arena, key, value}	^\s*uVar1\ =\ param_1\[5\];$@3	+1
+use	HashTable__insert_1950e0	uVar1	entryArena	INFERRED	table arena table[5] for the 0xc-byte entry {arena, key, value}	^\s*puVar2\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00193e18\)\(uVar1,0xc\);$	+2
+use	HashTable__insert_1950e0	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*uVar1\ =\ puVar6\[1\];$	+2
+use	HashTable__insert_1950e0	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*if\ \(uVar1\ <=\ uVar5\)\ \{$	+2
+use	HashTable__insert_1950e0	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*uVar1\ =\ puVar6\[1\];$@2	+2
+use	HashTable__insert_1950e0	iVar4	bucketOffset	INFERRED	(hash & (bucketCount-1)) * 4	^\s*iVar4\ =\ \(uVar1\ \&\ \*param_1\ \-\ 1\)\ \*\ 4;$	+2
+use	HashTable__insert_1950e0	iVar4	bucketOffset	INFERRED	(hash & (bucketCount-1)) * 4	^\s*\*\(uint\ \*\*\)\(iVar4\ \+\ uVar5\)\ =\ puVar2\ \+\ 1;$	+1
+use	HashTable__insert_1950e0	iVar4	bucketOffset	INFERRED	(hash & (bucketCount-1)) * 4	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(iVar4\ \+\ uVar5\);$	+1
+use	HashTable__insert_1950e0	iVar4	equalResult	INFERRED	equality fn result (0 = same key)	^\s*iVar4\ =\ \(\*\(code\ \*\)param_1\[3\]\)\(\*puVar3,param_2\);$	+2

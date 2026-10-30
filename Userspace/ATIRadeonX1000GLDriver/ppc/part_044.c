@@ -11407,7 +11407,7 @@ LAB_0016b038:
                 edgeAppendSlot = (int *)Vector__elementRefGrow(laterWriterPredEdges,vectorCount);
               }
               *edgeAppendSlot = (int)(nodeAlloc + 1);
-              FUN_00194720(lastWriterSet,laterWriterInst);
+              HashTable__remove(lastWriterSet,laterWriterInst);
             }
             HashTable__insert(lastWriterSet,curInst);
           }

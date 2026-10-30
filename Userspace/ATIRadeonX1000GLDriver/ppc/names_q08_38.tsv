@@ -1,0 +1,12 @@
+local	R520SchedModel__vslot21	param_2	hwLimits	INFERRED	object whose vtable +0x24 is the opcode legality predicate
+local	R520SchedModel__vslot21	param_3	inst	INFERRED	instruction (+0x88 -> +8 opcode)
+local	R520SchedModel__vslot21	param_4	latencyOut	INFERRED	out: set to 2 for opcodes 0x9e..0xa1
+local	R520SchedModel__vslot21	iVar3	opcode	INFERRED	opcode of the instruction
+local	R520SchedModel__vslot21	uVar2	result	INFERRED	1 when legal and the opcode is 0x9e..0xa1
+local	SchedModel__instructionFitsAlone	param_1	schedModel	INFERRED	scheduling model
+local	SchedModel__instructionFitsAlone	param_2	inst	INFERRED	instruction tested
+local	SchedModel__instructionFitsAlone	uVar2	freeSlots	INFERRED	PackState__countFreeSlots result, 0 when the sources cannot be placed
+local	SchedModel__instructionFitsAlone	local_68	placedSlotA	INFERRED	out of PackState__tryPlaceInstructionSources, preset -1 (adjacent to placedSlotB, whole variables)
+local	SchedModel__instructionFitsAlone	local_64	placedSlotB	INFERRED	out of PackState__tryPlaceInstructionSources, preset -1
+local	SchedModel__instructionFitsAlone	auStack_58	packState	INFERRED	72-byte PackState (PackState__reset / tryPlace / countFreeSlots)
+local	SchedModel__instructionFitsAlone	auStack_60	freeSlotCounts	INFERRED	8-byte out of PackState__countFreeSlots

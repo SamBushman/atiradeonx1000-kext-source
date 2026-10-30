@@ -62,14 +62,14 @@ int R300VSchedModel__deleting_dtor(this)
 int FudoChip__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8c74;
+  baseVtableBase1 = PTR_DAT_001e8c74;
   *this = &PTR_FUN_001eb5e8;
-  puVar2 = PTR_DAT_001e8c88;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8c88;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return operator_delete(this);
 }
 
@@ -77,14 +77,14 @@ int FudoChip__deleting_dtor(this)
 int FudoPs__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e9144;
+  baseVtableBase2 = PTR_DAT_001e9144;
   *this = &PTR_FUN_001eb450;
-  puVar1 = PTR_DAT_001e9108;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e9108;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return operator_delete(this);
 }
 
@@ -92,14 +92,14 @@ int FudoPs__deleting_dtor(this)
 int FudoChip__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e8c74;
+  baseVtableBase1 = PTR_DAT_001e8c74;
   *this = &PTR_FUN_001eb5e8;
-  puVar2 = PTR_DAT_001e8c88;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e8c88;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -107,14 +107,14 @@ int FudoChip__dtor(this)
 int FudoPs__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e9144;
+  baseVtableBase2 = PTR_DAT_001e9144;
   *this = &PTR_FUN_001eb450;
-  puVar1 = PTR_DAT_001e9108;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e9108;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -122,14 +122,14 @@ int FudoPs__dtor(this)
 int R520SchedModel__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90f4;
+  baseVtableBase1 = PTR_DAT_001e90f4;
   *this = &PTR_FUN_001eb608;
-  puVar2 = PTR_DAT_001e90fc;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90fc;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -140,14 +140,14 @@ int R520SchedModel__deleting_dtor(this)
 int R520SchedModel__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90f4;
+  baseVtableBase1 = PTR_DAT_001e90f4;
   *this = &PTR_FUN_001eb608;
-  puVar2 = PTR_DAT_001e90fc;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90fc;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 

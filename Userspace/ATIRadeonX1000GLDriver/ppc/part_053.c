@@ -239,18 +239,19 @@ int R520VMachineAssembler__create(unusedThis, compiler)
 int MachineAssembler__dtor_19deb0(this)
   undefined4 *this;
 {
-  int iVar1;
+  int bufferA;
+  int bufferB;
   
-  iVar1 = this[0x26];
+  bufferB = this[0x26];
   *this = &PTR_FUN_001eb8d8;
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  if (bufferB != 0) {
+    Arena__free(*(undefined4 *)(bufferB + 0xc),*(undefined4 *)(bufferB + 8));
+    Arena__free(*(undefined4 *)(bufferB + -4),bufferB + -4);
   }
-  iVar1 = this[0x25];
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  bufferA = this[0x25];
+  if (bufferA != 0) {
+    Arena__free(*(undefined4 *)(bufferA + 0xc),*(undefined4 *)(bufferA + 8));
+    Arena__free(*(undefined4 *)(bufferA + -4),bufferA + -4);
   }
   *this = &PTR_FUN_001eb808;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
@@ -265,18 +266,19 @@ int MachineAssembler__dtor_19deb0(this)
 int MachineAssembler__dtor_19df54(this)
   undefined4 *this;
 {
-  int iVar1;
+  int bufferA;
+  int bufferB;
   
-  iVar1 = this[0x26];
+  bufferB = this[0x26];
   *this = &PTR_FUN_001eb8d8;
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  if (bufferB != 0) {
+    Arena__free(*(undefined4 *)(bufferB + 0xc),*(undefined4 *)(bufferB + 8));
+    Arena__free(*(undefined4 *)(bufferB + -4),bufferB + -4);
   }
-  iVar1 = this[0x25];
-  if (iVar1 != 0) {
-    Arena__free(*(undefined4 *)(iVar1 + 0xc),*(undefined4 *)(iVar1 + 8));
-    Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+  bufferA = this[0x25];
+  if (bufferA != 0) {
+    Arena__free(*(undefined4 *)(bufferA + 0xc),*(undefined4 *)(bufferA + 8));
+    Arena__free(*(undefined4 *)(bufferA + -4),bufferA + -4);
   }
   *this = &PTR_FUN_001eb808;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
@@ -418,11 +420,11 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   int *topKindSlot;
   undefined4 sourceDef;
   bool moreLanes;
-  uint uVar2;
+  uint topKindIndex;
   uint predKindCount;
   int loopIndex;
   int *branchInst;
-  undefined4 uVar5;
+  undefined4 sourceSelectKind;
   int operandRecord;
   undefined4 *pushedSlot;
   int *program;
@@ -436,9 +438,9 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   (**(code **)(*branchInst + 0x14))(branchInst);
   topKindSlot = (int *)0x0;
   predKindCount = *(uint *)(this[0x25] + 4);
-  uVar2 = predKindCount - 1;
-  if (uVar2 < predKindCount) {
-    topKindSlot = (int *)(uVar2 * 4 + *(int *)(this[0x25] + 8));
+  topKindIndex = predKindCount - 1;
+  if (topKindIndex < predKindCount) {
+    topKindSlot = (int *)(topKindIndex * 4 + *(int *)(this[0x25] + 8));
   }
   loopIndex = branchInst[0x4b];
   unpredicated = *topKindSlot == 0;
@@ -512,13 +514,13 @@ LAB_0019e3d4:
   do {
     setSourceSelect = *(code **)(*predSetInst + 0x88);
     if (unpredicated) {
-      uVar5 = 1;
+      sourceSelectKind = 1;
     }
     else {
-      uVar5 = 2;
+      sourceSelectKind = 2;
     }
     operandRecord = IRInst__getOperandRecord(branchInst,1);
-    (*setSourceSelect)(predSetInst,uVar5,loopIndex,*(undefined1 *)(operandRecord + 0x13));
+    (*setSourceSelect)(predSetInst,sourceSelectKind,loopIndex,*(undefined1 *)(operandRecord + 0x13));
     moreLanes = loopIndex != 3;
     loopIndex = loopIndex + 1;
   } while (moreLanes);
@@ -753,14 +755,14 @@ int psnPackedLaneSource(descriptor, lane)
 }
 
 /* psnPackedNegateMask @ 0x19eaa4 (32 bytes) */
-int psnPackedNegateMask(descriptor, param_2, param_3, param_4, param_5, param_6, param_7)
+int psnPackedNegateMask(descriptor, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   uint *descriptor;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   if ((*descriptor & 0x400000) == 0) {
     return 0;
@@ -795,18 +797,18 @@ int psnPackedLaneNegate(descriptor, lane)
 }
 
 /* FUN_0019eb30 @ 0x19eb30 (172 bytes) */
-int FUN_0019eb30(param_1)
-  uint *param_1;
+int FUN_0019eb30(tokenWords)
+  uint *tokenWords;
 {
-  uint uVar1;
+  uint componentWord;
   int loopIndex;
   int loopRemaining;
   
-  if ((*param_1 & 0x400000) == 0) {
+  if ((*tokenWords & 0x400000) == 0) {
     return 0;
   }
-  uVar1 = param_1[1];
-  if (1 < (uVar1 & 3) - 2) {
+  componentWord = tokenWords[1];
+  if (1 < (componentWord & 3) - 2) {
     loopRemaining = 4;
     loopIndex = 0;
     do {
@@ -819,40 +821,40 @@ int FUN_0019eb30(param_1)
               return 0;
             }
             if (loopIndex != 1) break;
-            if ((uVar1 & 0xc) == 8) {
+            if ((componentWord & 0xc) == 8) {
               return 1;
             }
-            if ((uVar1 & 0xc) == 0xc) {
+            if ((componentWord & 0xc) == 0xc) {
               return 1;
             }
           }
         } while (loopIndex < 2);
         if (loopIndex != 2) break;
-        if ((uVar1 & 0x30) == 0x20) {
+        if ((componentWord & 0x30) == 0x20) {
           return 1;
         }
-        if ((uVar1 & 0x30) == 0x30) {
+        if ((componentWord & 0x30) == 0x30) {
           return 1;
         }
       }
-    } while ((loopIndex != 3) || (((uVar1 & 0xc0) != 0x80 && ((uVar1 & 0xc0) != 0xc0))));
+    } while ((loopIndex != 3) || (((componentWord & 0xc0) != 0x80 && ((componentWord & 0xc0) != 0xc0))));
   }
   return 1;
 }
 
 /* FUN_0019ebdc @ 0x19ebdc (172 bytes) */
-int FUN_0019ebdc(param_1)
-  uint *param_1;
+int FUN_0019ebdc(tokenWords)
+  uint *tokenWords;
 {
-  uint uVar1;
+  uint componentWord;
   int loopIndex;
   int loopRemaining;
   
-  if ((*param_1 & 0x400000) == 0) {
+  if ((*tokenWords & 0x400000) == 0) {
     return 0;
   }
-  uVar1 = param_1[1];
-  if (1 < (uVar1 & 7) - 4) {
+  componentWord = tokenWords[1];
+  if (1 < (componentWord & 7) - 4) {
     loopRemaining = 4;
     loopIndex = 0;
     do {
@@ -865,174 +867,174 @@ int FUN_0019ebdc(param_1)
               return 0;
             }
             if (loopIndex != 1) break;
-            if ((uVar1 & 0x70) == 0x40) {
+            if ((componentWord & 0x70) == 0x40) {
               return 1;
             }
-            if ((uVar1 & 0x70) == 0x50) {
+            if ((componentWord & 0x70) == 0x50) {
               return 1;
             }
           }
         } while (loopIndex < 2);
         if (loopIndex != 2) break;
-        if ((uVar1 & 0x700) == 0x400) {
+        if ((componentWord & 0x700) == 0x400) {
           return 1;
         }
-        if ((uVar1 & 0x700) == 0x500) {
+        if ((componentWord & 0x700) == 0x500) {
           return 1;
         }
       }
     } while ((loopIndex != 3) ||
-            (((undefined *)(uVar1 & 0x7000) != (undefined *)0x4000 &&
-             ((undefined *)(uVar1 & 0x7000) != ((unsigned char *)0x00005000)))));
+            (((undefined *)(componentWord & 0x7000) != (undefined *)0x4000 &&
+             ((undefined *)(componentWord & 0x7000) != ((unsigned char *)0x00005000)))));
   }
   return 1;
 }
 
 /* ilSkipRelativeAddressWords @ 0x19ec88 (108 bytes) */
-int ilSkipRelativeAddressWords(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int ilSkipRelativeAddressWords(addressMode, nestedCount, bytePtr)
+  int addressMode;
+  int nestedCount;
+  int bytePtr;
 {
-  int iVar1;
+  int nestedWordCount;
   int loopIndex;
   
-  if (param_1 == 1) {
-    param_3 = param_3 + 4;
+  if (addressMode == 1) {
+    bytePtr = bytePtr + 4;
   }
   else {
     loopIndex = 0;
-    if (-1 < param_2) {
+    if (-1 < nestedCount) {
       do {
         loopIndex = loopIndex + 1;
-        iVar1 = ((int (*)())ilSourceOperandWordCount)(param_3);
-        param_3 = param_3 + iVar1 * 4;
-      } while (loopIndex <= param_2);
+        nestedWordCount = ((int (*)())ilSourceOperandWordCount)(bytePtr);
+        bytePtr = bytePtr + nestedWordCount * 4;
+      } while (loopIndex <= nestedCount);
     }
   }
-  return param_3;
+  return bytePtr;
 }
 
 /* ilSourceOperandWordCount @ 0x19ecf4 (192 bytes) */
-int ilSourceOperandWordCount(param_1)
-  uint *param_1;
+int ilSourceOperandWordCount(operandWords)
+  uint *operandWords;
 {
-  uint uVar1;
-  int iVar2;
+  uint header;
+  int nestedWordCount;
   uint *loopPtr;
   uint loopIndex2;
   
-  loopPtr = param_1 + 1;
-  uVar1 = *param_1;
-  if ((uVar1 & 0x400000) != 0) {
-    loopPtr = param_1 + 2;
+  loopPtr = operandWords + 1;
+  header = *operandWords;
+  if ((header & 0x400000) != 0) {
+    loopPtr = operandWords + 2;
   }
-  if ((uVar1 & 0x1800000) == 0) {
+  if ((header & 0x1800000) == 0) {
     loopIndex2 = 0;
-    if ((uVar1 & 0x2000000) == 0) {
-      uVar1 = *param_1;
+    if ((header & 0x2000000) == 0) {
+      header = *operandWords;
     }
     else {
       do {
         loopIndex2 = loopIndex2 + 1;
-        iVar2 = ((int (*)())ilSourceOperandWordCount)(loopPtr);
-        uVar1 = *param_1;
-        loopPtr = loopPtr + iVar2;
-      } while (loopIndex2 < (uVar1 >> 0x19 & 1));
+        nestedWordCount = ((int (*)())ilSourceOperandWordCount)(loopPtr);
+        header = *operandWords;
+        loopPtr = loopPtr + nestedWordCount;
+      } while (loopIndex2 < (header >> 0x19 & 1));
     }
-    if ((uVar1 & 0x1800000) == 0) goto LAB_0019ed78;
+    if ((header & 0x1800000) == 0) goto LAB_0019ed78;
   }
-  loopPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopPtr);
-  uVar1 = *param_1;
+  loopPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(header >> 0x17 & 3,header >> 0x19 & 1,loopPtr);
+  header = *operandWords;
 LAB_0019ed78:
-  if ((uVar1 & 0x4000000) != 0) {
+  if ((header & 0x4000000) != 0) {
     loopPtr = loopPtr + 1;
   }
-  return (int)loopPtr - (int)param_1 >> 2;
+  return (int)loopPtr - (int)operandWords >> 2;
 }
 
 /* ilInstructionHeaderWordCount @ 0x19edb4 (84 bytes) */
-int ilInstructionHeaderWordCount(param_1)
-  uint *param_1;
+int ilInstructionHeaderWordCount(instructionWords)
+  uint *instructionWords;
 {
-  uint *puVar1;
+  uint *wordPtr;
   
-  if ((short)*param_1 == 0x7d) {
+  if ((short)*instructionWords == 0x7d) {
     return 1;
   }
-  puVar1 = param_1 + 1;
-  if ((int)*param_1 < 0) {
-    puVar1 = param_1 + 2;
+  wordPtr = instructionWords + 1;
+  if ((int)*instructionWords < 0) {
+    wordPtr = instructionWords + 2;
   }
-  if ((short)*param_1 == 0x17) {
-    return (int)puVar1 - (int)param_1 >> 2;
+  if ((short)*instructionWords == 0x17) {
+    return (int)wordPtr - (int)instructionWords >> 2;
   }
-  if ((*param_1 & 0x40000000) != 0) {
-    puVar1 = puVar1 + 1;
+  if ((*instructionWords & 0x40000000) != 0) {
+    wordPtr = wordPtr + 1;
   }
-  return (int)puVar1 - (int)param_1 >> 2;
+  return (int)wordPtr - (int)instructionWords >> 2;
 }
 
 /* ilDestinationOperandWordCount @ 0x19ee08 (108 bytes) */
-int ilDestinationOperandWordCount(param_1)
-  uint *param_1;
+int ilDestinationOperandWordCount(operandWords)
+  uint *operandWords;
 {
-  uint uVar1;
-  uint *puVar2;
+  uint header;
+  uint *wordPtr;
   
-  puVar2 = param_1 + 1;
-  uVar1 = *param_1;
-  if ((uVar1 & 0x400000) != 0) {
-    puVar2 = param_1 + 2;
+  wordPtr = operandWords + 1;
+  header = *operandWords;
+  if ((header & 0x400000) != 0) {
+    wordPtr = operandWords + 2;
   }
-  if ((uVar1 & 0x1800000) != 0) {
-    puVar2 = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,puVar2);
-    uVar1 = *param_1;
+  if ((header & 0x1800000) != 0) {
+    wordPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(header >> 0x17 & 3,header >> 0x19 & 1,wordPtr);
+    header = *operandWords;
   }
-  if ((uVar1 & 0x4000000) != 0) {
-    puVar2 = puVar2 + 1;
+  if ((header & 0x4000000) != 0) {
+    wordPtr = wordPtr + 1;
   }
-  return (int)puVar2 - (int)param_1 >> 2;
+  return (int)wordPtr - (int)operandWords >> 2;
 }
 
-/* FUN_0019ee74 @ 0x19ee74 (184 bytes) */
-int FUN_0019ee74(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Compiler__selectLimitsForShaderKind @ 0x19ee74 (184 bytes) */
+int Compiler__selectLimitsForShaderKind(programDesc, compiler)
+  int programDesc;
+  int compiler;
 {
-  char cVar1;
-  int *piVar2;
+  char shaderKind;
+  int *limitsSet;
   
-  cVar1 = *(char *)(param_1 + 1);
-  if (cVar1 == '\x01') {
-    *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) =
-         *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) | 0x2000;
-    piVar2 = *(int **)(param_2 + 0x310);
-    *(int *)(param_2 + 0x30c) = piVar2[2];
+  shaderKind = *(char *)(programDesc + 1);
+  if (shaderKind == '\x01') {
+    *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
+         *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x2000;
+    limitsSet = *(int **)(compiler + 0x310);
+    *(int *)(compiler + 0x30c) = limitsSet[2];
                     
                     
-    (**(code **)(*piVar2 + 8))(piVar2);
+    (**(code **)(*limitsSet + 8))(limitsSet);
     return;
   }
-  if (cVar1 != '\x02') {
-    if (cVar1 != '\0') {
+  if (shaderKind != '\x02') {
+    if (shaderKind != '\0') {
       return;
     }
-    *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) = *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) | 1;
-    piVar2 = *(int **)(param_2 + 0x310);
-    *(int *)(param_2 + 0x30c) = piVar2[1];
+    *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 1;
+    limitsSet = *(int **)(compiler + 0x310);
+    *(int *)(compiler + 0x30c) = limitsSet[1];
                     
                     
-    (**(code **)(*piVar2 + 0xc))(piVar2);
+    (**(code **)(*limitsSet + 0xc))(limitsSet);
     return;
   }
-  *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) = *(uint *)(*(int *)(param_2 + 0x6c4) + 0x30) | 0x4000
+  *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x4000
   ;
-  piVar2 = *(int **)(param_2 + 0x310);
-  *(int *)(param_2 + 0x30c) = piVar2[3];
+  limitsSet = *(int **)(compiler + 0x310);
+  *(int *)(compiler + 0x30c) = limitsSet[3];
                     
                     
-  (**(code **)(*piVar2 + 0x10))(piVar2);
+  (**(code **)(*limitsSet + 0x10))(limitsSet);
   return;
 }
 
@@ -1366,23 +1368,25 @@ int R520MachineAssembler__setAlphaOpcode(this, hardwareOpcode, irOpcode, irInst)
   int irOpcode;
   int irInst;
 {
-  undefined1 uVar1;
-  undefined1 uVar2;
-  int iVar3;
+  int recordIndex;
+  int recordTable;
+  undefined1 savedByte3c;
+  undefined1 savedByte36;
+  int recordPtr;
   undefined1 alphaOpcode;
-  int iVar5;
+  int recordPtr2;
   
   alphaOpcode = (undefined1)hardwareOpcode;
   if (hardwareOpcode != -1) goto LAB_0019f708;
   if (irOpcode == 0x34) {
 LAB_0019f51c:
     alphaOpcode = 0;
-    iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(undefined1 *)(iVar3 + 0x3b) = *(undefined1 *)(iVar3 + 0x3a);
-    iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(undefined1 *)(iVar3 + 0x3e) = *(undefined1 *)(iVar3 + 0x3d);
-    iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-    *(undefined1 *)(iVar3 + 0x38) = *(undefined1 *)(iVar3 + 0x37);
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(undefined1 *)(recordPtr + 0x3b) = *(undefined1 *)(recordPtr + 0x3a);
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(undefined1 *)(recordPtr + 0x3e) = *(undefined1 *)(recordPtr + 0x3d);
+    recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+    *(undefined1 *)(recordPtr + 0x38) = *(undefined1 *)(recordPtr + 0x37);
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x37) = 6;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3d) = 0;
   }
@@ -1400,26 +1404,26 @@ LAB_0019f4fc:
       else {
         if (irOpcode == 0x25) {
 LAB_0019f5f0:
-          iVar5 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          alphaOpcode = *(undefined1 *)(iVar5 + 0x39);
-          *(undefined1 *)(iVar5 + 0x39) = *(undefined1 *)(iVar5 + 0x3a);
-          uVar1 = *(undefined1 *)(iVar5 + 0x3c);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          uVar2 = *(undefined1 *)(iVar5 + 0x36);
-          *(undefined1 *)(iVar3 + 0x3c) = *(undefined1 *)(iVar3 + 0x3d);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(undefined1 *)(iVar3 + 0x36) = *(undefined1 *)(iVar3 + 0x37);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(undefined1 *)(iVar3 + 0x3a) = *(undefined1 *)(iVar3 + 0x3b);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(undefined1 *)(iVar3 + 0x3d) = *(undefined1 *)(iVar3 + 0x3e);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(undefined1 *)(iVar3 + 0x37) = *(undefined1 *)(iVar3 + 0x38);
+          recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          alphaOpcode = *(undefined1 *)(recordPtr2 + 0x39);
+          *(undefined1 *)(recordPtr2 + 0x39) = *(undefined1 *)(recordPtr2 + 0x3a);
+          savedByte3c = *(undefined1 *)(recordPtr2 + 0x3c);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          savedByte36 = *(undefined1 *)(recordPtr2 + 0x36);
+          *(undefined1 *)(recordPtr + 0x3c) = *(undefined1 *)(recordPtr + 0x3d);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(undefined1 *)(recordPtr + 0x36) = *(undefined1 *)(recordPtr + 0x37);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(undefined1 *)(recordPtr + 0x3a) = *(undefined1 *)(recordPtr + 0x3b);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(undefined1 *)(recordPtr + 0x3d) = *(undefined1 *)(recordPtr + 0x3e);
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(undefined1 *)(recordPtr + 0x37) = *(undefined1 *)(recordPtr + 0x38);
           *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3b) = alphaOpcode
           ;
-          *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3e) = uVar1
+          *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3e) = savedByte3c
           ;
-          *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x38) = uVar2
+          *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x38) = savedByte36
           ;
           if (irOpcode == 0x9d) {
             alphaOpcode = 5;
@@ -1461,10 +1465,10 @@ LAB_0019f708:
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x42) = 1;
   }
-  iVar5 = *(int *)(this + 0x60);
-  iVar3 = *(int *)(this + 0xa8);
+  recordIndex = *(int *)(this + 0x60);
+  recordTable = *(int *)(this + 0xa8);
   alphaOpcode = psnOutputScaleCode(*(undefined4 *)(irInst + 0x124));
-  *(undefined1 *)(iVar5 * 0x48 + iVar3 + 0x41) = alphaOpcode;
+  *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x41) = alphaOpcode;
   return;
 }
 
@@ -1485,46 +1489,49 @@ int R520MachineAssembler__writeHeaderRecord(this, highestConstant, pixelSize)
   undefined4 highestConstant;
   undefined4 pixelSize;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
+  undefined4 recordCount2;
+  undefined4 count64;
+  undefined4 count74;
+  undefined4 programKind;
+  undefined4 recordCount;
+  undefined4 count74b;
+  undefined4 count68;
   int header;
   
   *(undefined2 *)(*(int *)(this + 0xa8) + 0x24) = (*(unsigned short *)((unsigned char *)&(highestConstant) + 2));
   header = *(int *)(this + 0xa8);
   *(int *)(header + 8) = *(int *)(this + 0x60) + -1;
-  uVar1 = *(undefined4 *)(this + 0x9c);
+  programKind = *(undefined4 *)(this + 0x9c);
   *(undefined1 *)(header + 0xd) = 6;
-  *(char *)(header + 0xe) = (char)uVar1;
+  *(char *)(header + 0xe) = (char)programKind;
   *(undefined1 *)(header + 0xf) = 0;
   *(undefined2 *)(header + 0x10) = 0;
   *(undefined1 *)(header + 0xc) = 0;
-  uVar1 = *(undefined4 *)(this + 0x74);
-  uVar2 = *(undefined4 *)(this + 0x60);
+  count74 = *(undefined4 *)(this + 0x74);
+  recordCount = *(undefined4 *)(this + 0x60);
   *(undefined2 *)(header + 0x14) = 1;
   *(undefined2 *)(header + 0x16) = 1;
-  *(short *)(header + 0x12) = ((short)uVar2 - (short)uVar1) + -2;
+  *(short *)(header + 0x12) = ((short)recordCount - (short)count74) + -2;
   *(short *)(header + 0x18) = (short)*(undefined4 *)(this + 0x74);
   *(short *)(header + 0x1a) = (short)*(undefined4 *)(this + 0x68);
   *(short *)(header + 0x1c) = (short)*(undefined4 *)(this + 100);
   *(short *)(header + 0x1e) = (short)*(undefined4 *)(this + 100);
-  uVar1 = *(undefined4 *)(this + 100);
-  uVar2 = *(undefined4 *)(this + 0x60);
-  uVar4 = *(undefined4 *)(this + 0x68);
-  uVar3 = *(undefined4 *)(this + 0x74);
+  count64 = *(undefined4 *)(this + 100);
+  recordCount2 = *(undefined4 *)(this + 0x60);
+  count68 = *(undefined4 *)(this + 0x68);
+  count74b = *(undefined4 *)(this + 0x74);
   *(undefined2 *)(header + 0x22) = (*(unsigned short *)((unsigned char *)&(pixelSize) + 2));
-  *(short *)(header + 0x20) = ((((short)uVar2 - (short)uVar1) - (short)uVar4) - (short)uVar3) + -1;
+  *(short *)(header + 0x20) = ((((short)recordCount2 - (short)count64) - (short)count68) - (short)count74b) + -1;
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + -0x3e) = 1;
   return;
 }
 
 /* R520MachineAssembler__vslot9_getRecordWordsUsed @ 0x19f860 (32 bytes) */
-int R520MachineAssembler__vslot9_getRecordWordsUsed(param_1, param_2)
-  int param_1;
-  int *param_2;
+int R520MachineAssembler__vslot9_getRecordWordsUsed(this, wordsOut)
+  int this;
+  int *wordsOut;
 {
-  *param_2 = *(int *)(param_1 + 0x60) * 0x48 >> 2;
+  *wordsOut = *(int *)(this + 0x60) * 0x48 >> 2;
   return;
 }
 
@@ -1562,41 +1569,42 @@ int R520MachineAssembler__vslot80_setRecordByte9(this)
 }
 
 /* R520MachineAssembler__vslot55_tryEncodeImmediateLiteral @ 0x19f98c (204 bytes) */
-int R520MachineAssembler__vslot55_tryEncodeImmediateLiteral(this, node, immediateOut, param_4, param_5, param_6, param_7, param_8)
+int R520MachineAssembler__vslot55_tryEncodeImmediateLiteral(this, node, immediateOut, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
   int this;
   int node;
   uint *immediateOut;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
+  int encoded;
   float literalValue;
   uint loopIndex;
-  int iVar3;
+  int operandCursor;
   int loopRemaining;
-  int local_28;
-  uint local_24 [7];
+  int immediateHigh;
+  uint immediateLow [7];
   
   if (*(int *)(node + 300) == 3) {
     loopIndex = 0;
     loopRemaining = 4;
-    iVar3 = node;
+    operandCursor = node;
     do {
       if ((((int)*(char *)(node + 0x15c) >> (loopIndex & 0x3f) & 1U) != 0) &&
-         (*(int *)(iVar3 + 0x1c) == 2)) {
+         (*(int *)(operandCursor + 0x1c) == 2)) {
         literalValue = *(float *)(loopIndex * 0x18 + node + 0x20);
         break;
       }
       loopIndex = loopIndex + 1;
-      iVar3 = iVar3 + 0x18;
+      operandCursor = operandCursor + 0x18;
       loopRemaining = loopRemaining + -1;
       literalValue = FLOAT_001aa0d4;
     } while (loopRemaining != 0);
-    iVar3 = ((undefined4 (*)())FudoPs__encodeImmediateFloat)(*(undefined4 *)(this + 0xa4),node,&local_28,local_24,(double)literalValue);
-    if (iVar3 != 0) {
-      *immediateOut = local_24[0] | local_28 << 3 | 0x2000;
+    encoded = ((undefined4 (*)())FudoPs__encodeImmediateFloat)(*(undefined4 *)(this + 0xa4),node,&immediateHigh,immediateLow,(double)literalValue);
+    if (encoded != 0) {
+      *immediateOut = immediateLow[0] | immediateHigh << 3 | 0x2000;
       return 1;
     }
   }
@@ -1673,29 +1681,29 @@ int R520MachineAssembler__beginNextRecord(this)
 }
 
 /* R520MachineAssembler__vslot4_finishProgram @ 0x19fccc (292 bytes) */
-int R520MachineAssembler__vslot4_finishProgram(param_1)
-  int *param_1;
+int R520MachineAssembler__vslot4_finishProgram(this)
+  int *this;
 {
   int callResult;
-  int iVar2;
+  int lastIndex;
   
-  iVar2 = 0;
-  *(int *)(param_1[0x2b] + 0x93b8) = param_1[0x24];
-  *(int *)(param_1[0x2b] + 0x9364) = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x7c) + 1;
-  *(undefined4 *)(param_1[0x2b] + 0x9368) = *(undefined4 *)(*(int *)(param_1[3] + 0x6c4) + 0x84);
-  callResult = RegAlloc__countUnassignedInClass(*(undefined4 *)(param_1[3] + 0x6c4),0);
+  lastIndex = 0;
+  *(int *)(this[0x2b] + 0x93b8) = this[0x24];
+  *(int *)(this[0x2b] + 0x9364) = *(int *)(*(int *)(this[3] + 0x6c4) + 0x7c) + 1;
+  *(undefined4 *)(this[0x2b] + 0x9368) = *(undefined4 *)(*(int *)(this[3] + 0x6c4) + 0x84);
+  callResult = RegAlloc__countUnassignedInClass(*(undefined4 *)(this[3] + 0x6c4),0);
   if (callResult != 0) {
-    iVar2 = callResult + -1;
+    lastIndex = callResult + -1;
   }
-  if ((*(int *)(param_1[0x18] * 0x48 + param_1[0x2a] + -0x48) != 3) ||
-     (param_1[0x2d] == (param_1[0x18] - param_1[0x1d]) + -1)) {
-    (**(code **)(*param_1 + 0xbc))(param_1);
-    (**(code **)(*param_1 + 0xc0))(param_1);
-    (**(code **)(*param_1 + 0x15c))(param_1);
+  if ((*(int *)(this[0x18] * 0x48 + this[0x2a] + -0x48) != 3) ||
+     (this[0x2d] == (this[0x18] - this[0x1d]) + -1)) {
+    (**(code **)(*this + 0xbc))(this);
+    (**(code **)(*this + 0xc0))(this);
+    (**(code **)(*this + 0x15c))(this);
   }
                     
                     
-  (**(code **)(*param_1 + 0x144))(param_1,param_1[0x1e],iVar2);
+  (**(code **)(*this + 0x144))(this,this[0x1e],lastIndex);
   return;
 }
 
@@ -1788,12 +1796,12 @@ int R520MachineAssembler__vslot24_assembleWithTarget(this, node, block)
   undefined4 block;
 {
   bool emittedNothing;
-  undefined4 uVar2;
+  undefined4 targetId;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   int recordIndexBefore;
-  code *pcVar4;
+  code *slotFunction;
   
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))
@@ -1802,9 +1810,9 @@ int R520MachineAssembler__vslot24_assembleWithTarget(this, node, block)
   if ((*(int *)(node + 0xdc) == 0) || (emittedNothing = true, recordIndexBefore != this[0x18])) {
     emittedNothing = false;
   }
-  pcVar4 = *(code **)(*this + 0x9c);
-  uVar2 = Block__getLoopFooterRegister(node);
-  (*pcVar4)(this,uVar2,*(undefined4 *)(node + 0x134));
+  slotFunction = *(code **)(*this + 0x9c);
+  targetId = Block__getLoopFooterRegister(node);
+  (*slotFunction)(this,targetId,*(undefined4 *)(node + 0x134));
   if (emittedNothing) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }
@@ -1989,18 +1997,19 @@ int R520MachineAssembler__vslot86_resolveSourceRegister(this, inst, sourceIndex,
   undefined4 sourceIndex;
   int compiler;
 {
+  int definingField;
   int *callResult;
-  int iVar2;
+  int predicateResult;
   uint registerWord;
   
   callResult = (int *)IRInst__getOperandSource(inst,sourceIndex);
-  if (((((callResult[0x20] == 0) || (iVar2 = RegKind__flagBit0(callResult[0x26]), iVar2 == 0)) ||
-       ((callResult[5] & 2U) != 0)) || (iVar2 = (**(code **)(*callResult + 0x50))(callResult), iVar2 != 0)) &&
-     (iVar2 = (**(code **)(*callResult + 0x50))(callResult), iVar2 == 0)) {
+  if (((((callResult[0x20] == 0) || (predicateResult = RegKind__flagBit0(callResult[0x26]), predicateResult == 0)) ||
+       ((callResult[5] & 2U) != 0)) || (predicateResult = (**(code **)(*callResult + 0x50))(callResult), predicateResult != 0)) &&
+     (predicateResult = (**(code **)(*callResult + 0x50))(callResult), predicateResult == 0)) {
     registerWord = 0;
     if (callResult[0x26] == 0x29) {
-      iVar2 = IRInst__getDefiningField128(inst,sourceIndex);
-      registerWord = iVar2 + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3f0) | 0x4000;
+      definingField = IRInst__getDefiningField128(inst,sourceIndex);
+      registerWord = definingField + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3f0) | 0x4000;
     }
     return registerWord;
   }
@@ -2009,10 +2018,10 @@ int R520MachineAssembler__vslot86_resolveSourceRegister(this, inst, sourceIndex,
 }
 
 /* R520MachineAssembler__vslot53_selectBitsForLiteralFloat @ 0x1a07c0 (304 bytes) */
-int R520MachineAssembler__vslot53_selectBitsForLiteralFloat(this, sourceIndex, param_3, selectBase, inst)
+int R520MachineAssembler__vslot53_selectBitsForLiteralFloat(this, sourceIndex, unusedArg3, selectBase, inst)
   undefined4 this;
   int sourceIndex;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   int selectBase;
   undefined4 inst;
 {
@@ -2110,16 +2119,16 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
   undefined4 laneSelectors;
 {
   unsigned int ghidra_home[8] = { this, sourceIndex, packedBase, inst, laneSelectors, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
-  byte bVar2;
+  bool notLastGroup;
+  byte laneSelector;
   float callResult;
-  uint uVar4;
+  uint sourceComponent;
   int *a0;
   int operandRecord;
   uint *packedWord;
   byte *loopPtr2;
   int loopIndex;
-  uint uVar9;
+  uint bitShift;
   
   if (1 < *(int *)(inst + 0x84)) {
     loopIndex = 2;
@@ -2129,29 +2138,29 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
       a0 = (int *)IRInst__getOperandSource(inst,loopIndex);
       if ((a0 != (int *)0x0) && (operandRecord = (**(code **)(*a0 + 0x48))(a0), operandRecord != 0)) {
         loopPtr2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 16));
-        uVar9 = 0;
+        bitShift = 0;
         do {
-          bVar2 = *loopPtr2;
-          if (bVar2 < 4) {
+          laneSelector = *loopPtr2;
+          if (laneSelector < 4) {
             operandRecord = IRInst__getOperandRecord(inst,loopIndex);
-            uVar4 = (uint)*(byte *)((uint)bVar2 + operandRecord + 0x10);
-            if (uVar4 < 4) {
-              callResult = GH_U2F((unsigned int)(a0[uVar4 * 6 + 8]));
+            sourceComponent = (uint)*(byte *)((uint)laneSelector + operandRecord + 0x10);
+            if (sourceComponent < 4) {
+              callResult = GH_U2F((unsigned int)(a0[sourceComponent * 6 + 8]));
               if (callResult == 0.0) {
-                *packedWord = *packedWord & ~(7 << (uVar9 & 0x3f)) | 4 << (uVar9 & 0x3f);
+                *packedWord = *packedWord & ~(7 << (bitShift & 0x3f)) | 4 << (bitShift & 0x3f);
               }
               else if (callResult == 0.5) {
-                *packedWord = *packedWord & ~(7 << (uVar9 & 0x3f)) | 5 << (uVar9 & 0x3f);
+                *packedWord = *packedWord & ~(7 << (bitShift & 0x3f)) | 5 << (bitShift & 0x3f);
               }
               else if (callResult == 1.0) {
-                *packedWord = *packedWord & ~(7 << (uVar9 & 0x3f)) | 6 << (uVar9 & 0x3f);
+                *packedWord = *packedWord & ~(7 << (bitShift & 0x3f)) | 6 << (bitShift & 0x3f);
               }
             }
           }
-          bVar1 = uVar9 != 6;
+          notLastGroup = bitShift != 6;
           loopPtr2 = loopPtr2 + 1;
-          uVar9 = uVar9 + 3;
-        } while (bVar1);
+          bitShift = bitShift + 3;
+        } while (notLastGroup);
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex <= *(int *)(inst + 0x84));
@@ -2172,7 +2181,7 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
 {
   bool writeRgbFlag;
   bool writeAlphaFlag;
-  int iVar3;
+  int recordPtr;
   int sourceCount;
   undefined1 modifierBits;
   int loopIndex;
@@ -2209,18 +2218,18 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
     }
     loopIndex = 1;
     while( true ) {
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x2a) = *(byte *)(iVar3 + 0x2a) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x39) = *(byte *)(iVar3 + 0x39) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x2b) = *(byte *)(iVar3 + 0x2b) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x3a) = *(byte *)(iVar3 + 0x3a) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x2c) = *(byte *)(iVar3 + 0x2c) | 0x80;
-      iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-      *(byte *)(iVar3 + 0x3b) = *(byte *)(iVar3 + 0x3b) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2a) = *(byte *)(recordPtr + 0x2a) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x39) = *(byte *)(recordPtr + 0x39) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2b) = *(byte *)(recordPtr + 0x2b) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x3a) = *(byte *)(recordPtr + 0x3a) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x2c) = *(byte *)(recordPtr + 0x2c) | 0x80;
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+      *(byte *)(recordPtr + 0x3b) = *(byte *)(recordPtr + 0x3b) | 0x80;
       modifierBits = packSourceModifier(irInst[loopIndex * 6 + 0x28] & 1,(uint)irInst[loopIndex * 6 + 0x28] >> 1 & 1);
       if (writeAlphaFlag) {
         if (loopIndex == 1) {
@@ -2259,15 +2268,15 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
         if (writeRgbFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2b) =
                (char)*(undefined4 *)(rgbSelects + 8);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x24) =
-               (*(uint *)(rgbPacked + 8) & 7) << 0xd | *(uint *)(iVar3 + 0x24) & 0xffff1fff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x24) =
-               (*(uint *)(rgbPacked + 8) & 0x38) << 7 | *(uint *)(iVar3 + 0x24) & 0xffffe3ff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x24) =
-               (*(uint *)(rgbPacked + 8) & 0x1c0) << 1 | *(uint *)(iVar3 + 0x24) & 0xfffffc7f;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               (*(uint *)(rgbPacked + 8) & 7) << 0xd | *(uint *)(recordPtr + 0x24) & 0xffff1fff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               (*(uint *)(rgbPacked + 8) & 0x38) << 7 | *(uint *)(recordPtr + 0x24) & 0xffffe3ff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x24) =
+               (*(uint *)(rgbPacked + 8) & 0x1c0) << 1 | *(uint *)(recordPtr + 0x24) & 0xfffffc7f;
         }
         if (writeAlphaFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3a) =
@@ -2280,15 +2289,15 @@ int R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers(this, irInst, 
         if (writeRgbFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x2c) =
                (char)*(undefined4 *)(rgbSelects + 0xc);
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x28) =
-               *(int *)(rgbPacked + 0xc) << 0x1d | *(uint *)(iVar3 + 0x28) & 0x1fffffff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x28) =
-               (*(uint *)(rgbPacked + 0xc) & 0x38) << 0x17 | *(uint *)(iVar3 + 0x28) & 0xe3ffffff;
-          iVar3 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
-          *(uint *)(iVar3 + 0x28) =
-               (*(uint *)(rgbPacked + 0xc) & 0x1c0) << 0x11 | *(uint *)(iVar3 + 0x28) & 0xfc7fffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) =
+               *(int *)(rgbPacked + 0xc) << 0x1d | *(uint *)(recordPtr + 0x28) & 0x1fffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) =
+               (*(uint *)(rgbPacked + 0xc) & 0x38) << 0x17 | *(uint *)(recordPtr + 0x28) & 0xe3ffffff;
+          recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
+          *(uint *)(recordPtr + 0x28) =
+               (*(uint *)(rgbPacked + 0xc) & 0x1c0) << 0x11 | *(uint *)(recordPtr + 0x28) & 0xfc7fffff;
         }
         if (writeAlphaFlag) {
           *(char *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x3b) =
@@ -2307,44 +2316,44 @@ int evaluateConstantComparison(inst, resultKnownOut)
   undefined4 *resultKnownOut;
 {
   undefined4 laneMask;
-  int iVar2;
-  bool bVar3;
-  int local_48;
-  float local_44;
-  int local_30;
-  float local_2c;
+  int gotConstant;
+  bool comparisonResult;
+  int src1Kind;
+  float src1Value;
+  int src2Kind;
+  float src2Value;
   
   laneMask = DAT_001b2d70;
-  iVar2 = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&local_48);
-  if ((((iVar2 == 0) || (local_48 != 2)) ||
-      (iVar2 = IRInst__getUniformSourceConstant(inst,2,laneMask,&local_30), iVar2 == 0)) || (local_30 != 2)) {
-    bVar3 = false;
+  gotConstant = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&src1Kind);
+  if ((((gotConstant == 0) || (src1Kind != 2)) ||
+      (gotConstant = IRInst__getUniformSourceConstant(inst,2,laneMask,&src2Kind), gotConstant == 0)) || (src2Kind != 2)) {
+    comparisonResult = false;
     *resultKnownOut = 0;
   }
   else {
-    bVar3 = false;
+    comparisonResult = false;
     switch(*(undefined4 *)(inst + 300)) {
     case 0:
-      bVar3 = local_44 == local_2c;
+      comparisonResult = src1Value == src2Value;
       break;
     case 1:
-      bVar3 = local_44 != local_2c;
+      comparisonResult = src1Value != src2Value;
       break;
     case 2:
-      bVar3 = local_2c < local_44;
+      comparisonResult = src2Value < src1Value;
       break;
     case 3:
-      bVar3 = local_2c <= local_44;
+      comparisonResult = src2Value <= src1Value;
       break;
     case 4:
-      bVar3 = local_44 < local_2c;
+      comparisonResult = src1Value < src2Value;
       break;
     case 5:
-      bVar3 = local_44 <= local_2c;
+      comparisonResult = src1Value <= src2Value;
     }
     *resultKnownOut = 1;
   }
-  return bVar3;
+  return comparisonResult;
 }
 
 /* R520MachineAssembler__vslot29_patchBranchTarget @ 0x1a1160 (144 bytes) */
@@ -2353,16 +2362,16 @@ int R520MachineAssembler__vslot29_patchBranchTarget(this)
 {
   int stackVector;
   uint stackCount;
-  int *piVar3;
+  int *topSlot;
   int popped;
   
-  piVar3 = (int *)0x0;
+  topSlot = (int *)0x0;
   stackVector = *(int *)(*(int *)(this + 0x10) + 0x24);
   stackCount = *(uint *)(stackVector + 4);
   if (stackCount - 1 < stackCount) {
-    piVar3 = (int *)((stackCount - 1) * 4 + *(int *)(stackVector + 8));
+    topSlot = (int *)((stackCount - 1) * 4 + *(int *)(stackVector + 8));
   }
-  popped = *piVar3;
+  popped = *topSlot;
   Vector__removeAt(stackVector,stackCount - 1);
   *(short *)(popped * 0x48 + *(int *)(this + 0xa8) + 0xc) =
        ((short)*(undefined4 *)(this + 0x60) - (short)*(undefined4 *)(this + 0x74)) + -1;
@@ -2371,42 +2380,43 @@ int R520MachineAssembler__vslot29_patchBranchTarget(this)
 }
 
 /* R520MachineAssembler__vslot26_assembleThenAppendRecord @ 0x1a11f0 (328 bytes) */
-int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, compiler, param_5, param_6, param_7)
+int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, compiler, unusedArg5, unusedArg6, unusedArg7)
   int *this;
   int node;
   undefined4 block;
   int compiler;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
+  undefined4 recordId;
   int inst;
   undefined4 sourceDef;
-  bool bVar1;
-  int iVar2;
+  bool flagPrevRecord;
+  int branchKind;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 registerIndex;
   undefined4 *elementRef;
   int a3;
   uint vectorFilledCount;
-  undefined4 uVar7;
+  undefined4 program;
   uint *vector;
   
   a3 = compiler;
-  inst = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
-  uVar7 = *(undefined4 *)(compiler + COMP_currentProgram);
-  iVar2 = *(int *)(inst + 300);
+  inst = Block__getBranchInst(node,node,block,compiler,unusedArg5,unusedArg6,unusedArg7);
+  program = *(undefined4 *)(compiler + COMP_currentProgram);
+  branchKind = *(int *)(inst + 300);
   sourceDef = IRInst__getOperandSource(inst,1);
-  uVar4 = thunk_FUN_00134de8(uVar7,sourceDef);
+  registerIndex = thunk_FUN_00134de8(program,sourceDef);
   iVar3 = this[0x18];
   (**(code **)(*this + 0x34))
-            (this,block,*(undefined4 *)(node + 0xdc),a3,param_5,param_6,
+            (this,block,*(undefined4 *)(node + 0xdc),a3,unusedArg5,unusedArg6,
              *(code **)(*this + 0x34));
-  if ((*(int *)(node + 0xdc) == 0) || (bVar1 = true, iVar3 != this[0x18])) {
-    bVar1 = false;
+  if ((*(int *)(node + 0xdc) == 0) || (flagPrevRecord = true, iVar3 != this[0x18])) {
+    flagPrevRecord = false;
   }
-  uVar4 = (**(code **)(*this + 0x98))(this,iVar2 != 1,uVar4,0);
-  if (bVar1) {
+  recordId = (**(code **)(*this + 0x98))(this,branchKind != 1,registerIndex,0);
+  if (flagPrevRecord) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }
   vector = *(uint **)(this[4] + 0x24);
@@ -2419,7 +2429,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   else {
     elementRef = (undefined4 *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
-  *elementRef = uVar4;
+  *elementRef = recordId;
   return;
 }
 

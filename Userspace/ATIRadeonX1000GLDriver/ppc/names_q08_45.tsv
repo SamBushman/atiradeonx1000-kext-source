@@ -1,0 +1,26 @@
+func	FUN_0017e02c	ValueKey__rewriteAsMovOfOperandWithScale	INFERRED	like ValueKey__rewriteAsMovOfOperand but stores the given result scale code
+func	FUN_0017bd78	ValueKey__rewriteAsMovOfOperandLane	INFERRED	relinks the instruction as a mov of source operandIndex with the swizzle table entry selected by the operand's select byte for the given lane, and the given scale code
+func	FUN_0017e3f4	ValueKey__rewriteAsBinaryOfOperands	INFERRED	relinks the instruction as binary opcode newOpcode of source operands operandIndex and operandIndex2, keeping dest register, saturate and scale
+func	FUN_0018f850	ConstantSlots__rowsCompatible	INFERRED	tests whether two 3-entry constant slot rows can be merged (strict flag changes the all-zero case)
+local	FUN_0017c244	bVar1	noExtraSource	INFERRED	flag bit 9 clear: no extra source
+local	FUN_0017c244	uVar2	operandFlags	INFERRED	modifier word of the replaced-in operand (bit0 negate, bit1 abs)
+local	FUN_0017c244	uVar9	operandValueNumber	INFERRED	value number of the operand from ctx+0x210
+local	FUN_0017c244	uVar10	destSelectWord	INFERRED	select word of operand record 0
+local	FUN_0017c244	uVar15	operandSelectWord	INFERRED	select word of the operand record
+local	FUN_0017c244	local_58	extraValueNumber	INFERRED	extra-source value number saved from ctx+0x210
+local	FUN_0017bd78	param_3	lane	INFERRED	lane whose select byte picks the swizzle table entry
+local	FUN_0017bd78	param_4	resultScaleCode	INFERRED	scale code stored at inst +0x124
+local	FUN_0017bd78	bVar1	noExtraSource	INFERRED	flag bit 9 clear: no extra source
+local	FUN_0017bd78	bVar2	laneSelectByte	INFERRED	select byte of the operand record for the lane
+local	FUN_0017bd78	uVar3	operandFlags	INFERRED	modifier word of the operand (bit0 negate, bit1 abs)
+local	FUN_0017bd78	uVar10	operandValueNumber	INFERRED	value number of the operand from ctx+0x210
+local	FUN_0017bd78	local_58	extraValueNumber	INFERRED	extra-source value number saved from ctx+0x210
+use	FUN_0017bd78	uVar11	destSelectWord	INFERRED	select word of operand record 0	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	FUN_0017bd78	uVar11	destSelectWord	INFERRED	select word of operand record 0	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x9c\)\ =\ uVar11;$	+1
+use	FUN_0017bd78	uVar11	operandSelectWord	INFERRED	swizzle table entry for the lane select byte	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uint\)bVar2\ \*\ 4\);$	+1
+use	FUN_0017bd78	uVar11	operandSelectWord	INFERRED	swizzle table entry for the lane select byte	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\ =\ uVar11;$	+1
+func	FUN_00184cd8	Inst__isMulDotWithinLimits	INFERRED	vtable +0x24 predicate and hardware-limits vtable +0xfc accept, and the opcode is 0x13, 0x1c or 0x1d
+func	FUN_00181ab0	Pass__recordFlaggedInstructions	INFERRED	walks the instruction list at block+0x98 and for each instruction with flag bit 0 sets +0x150 to a running number and appends an arena record to the pass vector
+func	FUN_0017c910	ValueKey__foldMinOfConstants	INFERRED	opcode 0x19 case: per-lane constant classes looked up in DAT_001e6014, rewrites to a mov of source 1 or 2
+func	FUN_0017cb14	ValueKey__foldMaxOfConstants	INFERRED	opcode 0x17 case: same as foldMinOfConstants with the DAT_001e60a4 table
+func	FUN_0017d9b8	ValueKey__foldCompareOfConstants	INFERRED	opcodes 0x27..0x2a: per-lane constant classes and compare condition select 1.0 / 0 results

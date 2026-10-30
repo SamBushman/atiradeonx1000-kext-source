@@ -3402,31 +3402,31 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 176e0c	176e20	other	FUN_00176d6c	5	
 178478	1784f8	table	FUN_00178338	32	
 1787b4	17887c	table	FUN_00178648	50	
-179228	179248	eh-pad	FUN_00179138	8	0x193cc0,__Unwind_Resume
-17a24c	17a26c	eh-pad	FUN_0017a130	8	0x193cc0,__Unwind_Resume
-17aed4	17aef4	eh-pad	FUN_0017ae28	8	0x193cc0,__Unwind_Resume
-17befc	17bf00	eh-pad	FUN_0017bd78	1	__Unwind_Resume
-17c3a8	17c3ac	eh-pad	FUN_0017c244	1	__Unwind_Resume
-17cf98	17cf9c	eh-pad	FUN_0017ce7c	1	__Unwind_Resume
-17d14c	17d150	millicode	FUN_0017d06c	1	
-17d1e0	17d200	eh-pad	FUN_0017d06c	8	0x193cc0,__Unwind_Resume
-17d330	17d334	eh-pad	FUN_0017d26c	1	__Unwind_Resume
-17e138	17e13c	eh-pad	FUN_0017e02c	1	__Unwind_Resume
-17e550	17e554	eh-pad	FUN_0017e3f4	1	__Unwind_Resume
+179228	179248	eh-pad	ValueKey__insertTempCopyOfOperand	8	0x193cc0,__Unwind_Resume
+17a24c	17a26c	eh-pad	ValueKey__setLiteralVec4Operand	8	0x193cc0,__Unwind_Resume
+17aed4	17aef4	eh-pad	ValueKey__setOperandFromValueKey	8	0x193cc0,__Unwind_Resume
+17befc	17bf00	eh-pad	ValueKey__rewriteAsMovOfOperandLane	1	__Unwind_Resume
+17c3a8	17c3ac	eh-pad	ValueKey__rewriteAsMovOfOperand	1	__Unwind_Resume
+17cf98	17cf9c	eh-pad	ValueKey__rewriteAsMovOfReplacement	1	__Unwind_Resume
+17d14c	17d150	millicode	ValueKey__rewriteAsMovOfValueKey	1	
+17d1e0	17d200	eh-pad	ValueKey__rewriteAsMovOfValueKey	8	0x193cc0,__Unwind_Resume
+17d330	17d334	eh-pad	ValueKey__rewriteAsMovOfVec4Constant	1	__Unwind_Resume
+17e138	17e13c	eh-pad	ValueKey__rewriteAsMovOfOperandWithScale	1	__Unwind_Resume
+17e550	17e554	eh-pad	ValueKey__rewriteAsBinaryOfOperands	1	__Unwind_Resume
 17ea3c	17ea40	eh-pad	FUN_0017e7e0	1	__Unwind_Resume
-17ece0	17ece4	millicode	FUN_0017ebb0	1	
-17edb0	17edd0	eh-pad	FUN_0017ebb0	8	0x193cc0,__Unwind_Resume
+17ece0	17ece4	millicode	ValueKey__rewriteAsAdd	1	
+17edb0	17edd0	eh-pad	ValueKey__rewriteAsAdd	8	0x193cc0,__Unwind_Resume
 17f03c	17f040	eh-pad	FUN_0017ee68	1	__Unwind_Resume
-1801a4	1801f8	table	FUN_0017f7ec	21	
+1801a4	1801f8	table	ValueKey__simplifyInstruction	21	
 1811d8	1811f8	eh-pad	ValueKey__simplifyModifiersAndAddressing	8	0x193cc0,__Unwind_Resume
 181fdc	181ff8	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
 182010	18202c	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
 182040	182060	eh-pad	Block__flattenAndRebuildAddMulTree	8	0x193cc0,__Unwind_Resume
 183a98	183a9c	eh-pad	Block__flattenAndRebuildAddMulTree	1	__Unwind_Resume
 1840ac	1840cc	eh-pad	pass_height_reduction	8	0x193cc0,__Unwind_Resume
-18421c	184238	other	FUN_0018413c	7	0x193cc0
-184250	18426c	other	FUN_0018413c	7	0x193cc0
-184290	1842b0	eh-pad	FUN_0018413c	8	0x193cc0,__Unwind_Resume
+18421c	184238	other	Block__moveProducersBefore	7	0x193cc0
+184250	18426c	other	Block__moveProducersBefore	7	0x193cc0
+184290	1842b0	eh-pad	Block__moveProducersBefore	8	0x193cc0,__Unwind_Resume
 185878	18587c	eh-pad	IRInst__foldResultScaleIntoUsers	1	__Unwind_Resume
 185c28	185c2c	eh-pad	Inst__tryDp3Add	1	__Unwind_Resume
 187588	1875a8	other	FUN_00186a88	8	
@@ -3449,8 +3449,8 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 192358	192438	table	FUN_001922c4	56	
 19279c	1927a0	eh-pad	FUN_001922c4	1	__Unwind_Resume
 19323c	193240	eh-pad	FudoPs__peepholeCombine	1	__Unwind_Resume
-193b88	193ba8	eh-pad	FUN_00193b3c	8	0x193cc0,__Unwind_Resume
-193bd0	193be8	other	FUN_00193b3c	6	
+193b88	193ba8	eh-pad	TypedValueArray__createWrapping	8	0x193cc0,__Unwind_Resume
+193bd0	193be8	other	TypedValueArray__createWrapping	6	
 193c74	193c94	eh-pad	FUN_00193c00	8	0x193cc0,__Unwind_Resume
 193d94	193d98	millicode	List__freeAllNodes	1	
 193f04	193f08	millicode	Arena__bytesInUse	1	

@@ -1023,7 +1023,7 @@ int FUN_0013a8a4(pass)
   uint laneWordInsert16;
   
   blockListObject = pass + 0x37c;
-  laneTable = FUN_00193e74(*(undefined4 *)(*(int *)(pass + 8) + 0x378),
+  laneTable = Arena__allocZeroed(*(undefined4 *)(*(int *)(pass + 8) + 0x378),
                        *(int *)(*(int *)(pass + 8) + 0x324) << 2,1);
   blockCursor = *(int *)(blockListObject + 8);
   laneWordInsert1 = 0;

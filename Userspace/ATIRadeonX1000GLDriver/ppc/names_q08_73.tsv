@@ -1,0 +1,21 @@
+local	ValueKey__foldCompareSameSourcesToConstant	param_1	ctx	INFERRED	pass context (+0xb0 instruction)
+local	ValueKey__foldCompareSameSourcesToConstant	uVar3	resultBits	INFERRED	IEEE bits of the compare result: 0x3f800000 (1.0) or 0, replicated into resultVec4
+local	ValueKey__foldCompareSameSourcesToConstant	local_28	resultVec4	INFERRED	vec4 {result,..} passed to ValueKey__rewriteAsMovOfVec4Constant (address-taken array, whole variable)
+local	R520MachineAssembler__vslot24_assembleWithTarget	pcVar4	slotFunction	INFERRED	assembler vtable +0x9c function
+local	R520MachineAssembler__vslot24_assembleWithTarget	uVar2	targetId	INFERRED	FUN_000e7d5c(node): id passed to the slot function with node +0x134
+use	ValueKey__forwardOperandByCompareToZero	iVar5	compareHolds	INFERRED	evaluateCompareFloats(inst, constant, 0)	^\s*iVar5\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),\(double\)\*pfVar3,\(double\)\*pfVar4\);$	+1
+use	ValueKey__forwardOperandByCompareToZero	iVar5	compareHolds	INFERRED	evaluateCompareFloats(inst, constant, 0)	^\s*iVar5\ =\ \(iVar5\ ==\ 0\)\ \+\ 2;$	+1	rhs	none
+use	ValueKey__forwardOperandByCompareToZero	iVar5	selectedOperand	INFERRED	operand index 2 or 3 chosen by the compare result	^\s*iVar5\ =\ \(iVar5\ ==\ 0\)\ \+\ 2;$	+1	lhs	none
+use	ValueKey__forwardOperandByCompareToZero	iVar5	selectedOperand	INFERRED	operand index 2 or 3 chosen by the compare result	^\s*\(uVar2\ =\ \*\(uint\ \*\)\(iVar5\ \*\ 0x18\ \+\ iVar6\ \+\ 0xa0\),\ \(uVar2\ \&\ 1\)\ ==\ 0\)\)\ \&\&\ \(\(uVar2\ \&\ 2\)\ ==\ 0\)\)\ \{$	+1
+use	ValueKey__forwardOperandByCompareToZero	iVar5	selectedOperand	INFERRED	operand index 2 or 3 chosen by the compare result	^\s*iVar5\ =\ \*\(int\ \*\)\(\(iVar5\ \*\ 4\ \+\ param_2\)\ \*\ 4\ \+\ param_1\ \+\ 0x168\);$	+1	rhs	none
+use	ValueKey__forwardOperandByCompareToZero	iVar5	selectedValueNumber	INFERRED	value number of the selected operand's lane	^\s*iVar5\ =\ \*\(int\ \*\)\(\(iVar5\ \*\ 4\ \+\ param_2\)\ \*\ 4\ \+\ param_1\ \+\ 0x168\);$	+1	lhs	none
+use	ValueKey__forwardOperandByCompareToZero	iVar5	selectedValueNumber	INFERRED	value number of the selected operand's lane	^\s*if\ \(iVar5\ <\ 0\)\ \{$	+1
+use	ValueKey__forwardOperandByCompareToZero	iVar5	selectedValueNumber	INFERRED	value number of the selected operand's lane	^\s*uVar1\ =\ FUN_00173360\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar5\);$	+1
+use	ValueKey__forwardOperandByCompareToZero	iVar5	selectedValueNumber	INFERRED	value number of the selected operand's lane	^\s*uVar1\ =\ FUN_00173330\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar5\);$	+1
+use	ValueKey__foldMadByPlusMinusOne	uVar3	plusOneValueNumber	INFERRED	value number of constant 1.0 (valueNumberForExpr+4)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	ValueKey__foldMadByPlusMinusOne	uVar3	plusOneValueNumber	INFERRED	value number of constant 1.0	^\s*iVar2\ =\ FUN_00177064\(param_1,uVar3,iVar4\);$	+1
+use	ValueKey__foldMadByPlusMinusOne	uVar3	minusOneValueNumber	INFERRED	value number of constant -1.0	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 4\);$@2	+1
+use	ValueKey__foldMadByPlusMinusOne	uVar3	minusOneValueNumber	INFERRED	value number of constant -1.0	^\s*iVar2\ =\ FUN_00177064\(param_1,uVar3,iVar4\);$@2	+1
+local	ValueKey__foldMadByPlusMinusOne	bVar1	notLastOperand	INFERRED	operand index != 2 loop continue flag
+local	ValueKey__replaceWithSource2IfSourcesEqual23	uVar1	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	ValueKey__replaceWithSource2IfSourcesEqual23	uVar3	word0xe8Flags	INFERRED	inst +0xe8 modifier word

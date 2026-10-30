@@ -1,0 +1,39 @@
+local	FUN_00194720	param_1	table	INFERRED	hash table: [0] bucket count, [2] bucket array, [3] equality fn (returns 0 on match), [4] hash fn
+local	FUN_00194720	param_2	key	INFERRED	key of the element removed
+local	FUN_00194720	puVar5	bucket	INFERRED	bucket vector (NULL when empty): [0] capacity, [1] size, [2] data
+local	FUN_00194720	puVar2	elementRef	INFERRED	address of the bucket element
+local	FUN_00180154	bVar1	loopContinue	INFERRED	do-while continue flag (lane != 3 / operand != 2)
+local	FUN_00180154	uVar2	inst0xb8Flags	INFERRED	inst +0xb8 modifier word; bits 0 and 1 compared with +0xd0
+local	FUN_00180154	uVar4	inst0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	FUN_0017d06c	param_2	valueKey	INFERRED	value key whose instruction supplies operand 1 (+0x8c reg ref, +0x158 block)
+local	FUN_0017d06c	param_3	src1SwizzlePtr	INFERRED	pointer to the swizzle word written to operand record 1 +0x10
+local	FUN_0017d06c	uVar2	oldFlags	INFERRED	old instruction flag word (+0x14); bit 21 re-applied at the end
+local	FUN_0017d06c	bVar1	hasNoExtraSource	INFERRED	flag bit 9 clear
+local	FUN_0017d06c	uVar5	savedExtraSourceRef	INFERRED	extra-source slot saved from ctx+0x210 table (0 when none)
+local	FUN_0017d06c	uVar10	destRegisterOffset	INFERRED	inst +0x98
+local	FUN_0017d06c	uVar12	destRegister	INFERRED	inst +0x94
+local	FUN_0017d06c	puVar4	newValueKey	INFERRED	arena-allocated (0x240 bytes) ValueKey for the operand's defining instruction
+local	FUN_00179608	param_2	lane	INFERRED	lane selecting a byte of the operand swizzle and the per-lane value-number words
+local	FUN_00179608	iVar3	firstValue	INFERRED	value of operandIndex for the lane (value-key row entry when the value number is an expr)
+local	FUN_00179608	iVar4	secondValue	INFERRED	value of operandIndex2 for the lane
+local	FUN_00179608	uVar6	lastElementIndex	INFERRED	vector size - 1
+local	FUN_00179608	uVar7	lastElementIndex2	INFERRED	vector size - 1 for the second lookup
+use	FUN_00180154	iVar3	laneRecord	INFERRED	record for the lane from ctx+0x40 or FUN_00174ce0	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x40\);$	+4
+use	FUN_00180154	iVar3	laneRecord	INFERRED	record for the lane from ctx+0x40 or FUN_00174ce0	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ 4;$	+1
+use	FUN_00180154	iVar3	operandsMatch	INFERRED	FUN_00179608 result (0 = operands differ)	^\s*iVar3\ =\ FUN_00179608\(param_1,iVar6,1,2\);$	+2
+use	FUN_00180154	iVar3	operandsMatch2	INFERRED	FUN_00179608 result (0 = operands differ)	^\s*iVar3\ =\ FUN_00179608\(param_1,iVar6,1,2\);$@2	+2
+use	FUN_0017d06c	uVar9	src0Swizzle	INFERRED	swizzle of old operand 0, restored at +0x9c	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	FUN_0017d06c	uVar9	src0Swizzle	INFERRED	swizzle of old operand 0, restored at +0x9c	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x9c\)\ =\ uVar9;$	+1
+use	FUN_0017d06c	uVar9	src1Swizzle	INFERRED	*param_3 stored in operand record 1 +0x10	^\s*uVar9\ =\ \*param_3;$	+1
+use	FUN_0017d06c	uVar9	src1Swizzle	INFERRED	*param_3 stored in operand record 1 +0x10	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar9;$	+1
+use	FUN_00179608	bVar1	laneSelect	INFERRED	swizzle byte of operandIndex for the lane	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_2\ \+\ iVar3\ \+\ 0x10\);$	+1
+use	FUN_00179608	bVar1	laneSelect	INFERRED	swizzle byte of operandIndex for the lane	^\s*iVar3\ =\ \*\(int\ \*\)\(\(uint\)bVar1\ \*\ 4\ \+\ \*piVar2\ \+\ 0x20\);$	+1
+use	FUN_00179608	bVar1	laneSelect2	INFERRED	swizzle byte of operandIndex2 for the lane	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_2\ \+\ iVar4\ \+\ 0x10\);$	+1
+use	FUN_00179608	bVar1	laneSelect2	INFERRED	swizzle byte of operandIndex2 for the lane	^\s*iVar4\ =\ \*\(int\ \*\)\(\(uint\)bVar1\ \*\ 4\ \+\ \*piVar2\ \+\ 0x20\);$	+1
+use	FUN_00194720	uVar1	hash	INFERRED	hash of key from table[4]	^\s*uVar1\ =\ \(\*\(code\ \*\)param_1\[4\]\)\(param_2,param_2\);$	+2
+use	FUN_00194720	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*if\ \(\(puVar5\ !=\ \(uint\ \*\)0x0\)\ \&\&\ \(uVar1\ =\ puVar5\[1\],\ uVar1\ !=\ 0\)\)\ \{$	+1
+use	FUN_00194720	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*if\ \(uVar1\ <=\ uVar4\)\ \{$	+2
+use	FUN_00194720	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*uVar1\ =\ puVar5\[1\];$	+1
+use	FUN_00194720	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*\}\ while\ \(uVar4\ <\ uVar1\);$	+1
+func	FUN_00194720	HashTable__remove	INFERRED	hashes the key, scans the bucket with the table equality fn and Vector__removeAt the first match
+func	FUN_00179608	ValueKey__operandLanesEqual	INFERRED	compares the value of two operands for one lane (Ptr__equalNonNull of their value numbers / value-key row entries)

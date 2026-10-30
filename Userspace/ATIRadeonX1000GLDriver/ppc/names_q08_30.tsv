@@ -1,0 +1,37 @@
+local	HashTable__insert	param_1	table	INFERRED	hash table: [0] bucket count (power of two), [1] element count, [2] bucket array, [3] equality fn, [4] hash fn, [5] arena
+local	HashTable__insert	param_2	key	INFERRED	element inserted (also passed to the hash function)
+local	HashTable__insert	uVar4	buckets	INFERRED	table[2] bucket array
+local	HashTable__insert	iVar5	bucketOffset	INFERRED	(bucketCount-1 & hash) * 4
+local	HashTable__insert	puVar3	slot	INFERRED	new slot returned by Vector__insertAt(bucket,0)
+local	HashTable__find	param_1	table	INFERRED	hash table: [0] bucket count, [2] bucket array, [3] equality fn (returns 0 on match), [4] hash fn
+local	HashTable__find	param_2	key	INFERRED	lookup key
+local	HashTable__find	puVar5	bucket	INFERRED	bucket vector (NULL when empty): [0] capacity, [1] size, [2] data
+local	HashTable__find	puVar2	elementRef	INFERRED	address of the bucket element
+local	HashTable__find	uVar6	element	INFERRED	bucket element tested against key
+local	HashTable__find	iVar3	callResult	INFERRED	equality fn result (0 = match)
+local	Vector__insertAt	param_1	vector	INFERRED	vector: [0] capacity, [1] size, [2] data
+local	Vector__insertAt	param_2	insertIndex	INFERRED	insertion index
+local	Vector__insertAt	uVar2	growIndex	INFERRED	max(size,index): highest index needed
+local	Vector__insertAt	iVar3	insertSlot	INFERRED	address of data[index]
+local	Vector__insertAt	puVar4	writePtr	INFERRED	destination of the backwards shift; ends at the cleared slot
+local	Vector__insertAt	puVar5	readPtr	INFERRED	cursor of the backwards shift
+local	Arena__grow	param_1	arena	INFERRED	arena: [0] compiler, [1] chunk list head, [2] cursor, [4] end, [5] chunk data
+local	Arena__grow	param_2	requestedSize	INFERRED	bytes needed
+local	Arena__grow	puVar1	alignedSize	INFERRED	requestedSize rounded up to 4
+local	Arena__grow	puVar4	chunkSize	INFERRED	max(alignedSize, 0x2fd8)
+local	Arena__grow	uVar5	previousChunk	INFERRED	old chunk head, linked from the new chunk
+local	Arena__grow	puVar2	newChunk	INFERRED	chunk allocated through Compiler__allocateOrFail: [0] next, [1] size, data at +8
+local	Arena__grow	iVar3	chunkData	INFERRED	newChunk + 8
+use	HashTable__find	uVar1	hash	INFERRED	hash of key from table[4]	^\s*uVar1\ =\ \(\*\(code\ \*\)param_1\[4\]\)\(param_2,param_2\);$	+2
+use	HashTable__find	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*if\ \(\(puVar5\ !=\ \(uint\ \*\)0x0\)\ \&\&\ \(uVar1\ =\ puVar5\[1\],\ uVar1\ !=\ 0\)\)\ \{$	+1
+use	HashTable__find	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*if\ \(uVar1\ <=\ uVar4\)\ \{$	+2
+use	HashTable__find	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*uVar1\ =\ puVar5\[1\];$	+1
+use	HashTable__find	uVar1	bucketSize	INFERRED	bucket[1] element count (loop bound)	^\s*\}\ while\ \(uVar4\ <\ uVar1\);$	+1
+use	HashTable__insert	uVar1	hash	INFERRED	hash of key from table[4]	^\s*uVar1\ =\ \(\*\(code\ \*\)param_1\[4\]\)\(param_2,param_2\);$	+1
+use	HashTable__insert	uVar1	hash	INFERRED	hash of key from table[4]	^\s*iVar5\ =\ \(\*param_1\ \-\ 1\ \&\ uVar1\)\ \*\ 4;$	+1
+use	HashTable__insert	uVar1	nodeArena	INFERRED	table arena table[5], stored as the vector header's arena	^\s*uVar1\ =\ param_1\[5\];$	+3
+use	HashTable__insert	uVar1	vectorArena	INFERRED	table arena table[5], stored in the vector (+0x10) and used for the 8-byte data allocation	^\s*uVar1\ =\ param_1\[5\];$@2	+1
+use	HashTable__insert	uVar1	vectorArena	INFERRED	table arena table[5], stored in the vector (+0x10) and used for the 8-byte data allocation	^\s*puVar2\[4\]\ =\ uVar1;$	+1
+use	HashTable__insert	uVar1	vectorArena	INFERRED	table arena table[5], stored in the vector (+0x10) and used for the 8-byte data allocation	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00193e18\)\(uVar1,8\);$	+1	rhs	none
+use	HashTable__insert	uVar1	dataBlock	INFERRED	initial 2-element data block of the new bucket vector	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00193e18\)\(uVar1,8\);$	+1	lhs	none
+use	HashTable__insert	uVar1	dataBlock	INFERRED	initial 2-element data block of the new bucket vector	^\s*puVar2\[3\]\ =\ uVar1;$	+1

@@ -2819,122 +2819,122 @@
 0x176d6c	FUN_00176d6c	160	yes	
 0x176e20	FUN_00176e20	160	yes	
 0x176ec0	FUN_00176ec0	20	yes	
-0x176ed4	FUN_00176ed4	56	yes	
-0x176f0c	FUN_00176f0c	56	yes	
-0x176f44	FUN_00176f44	144	yes	
-0x176fd4	FUN_00176fd4	144	yes	
+0x176ed4	ValueKey__compareClassForValueNumber	56	yes	
+0x176f0c	ValueKey__rangeClassForValueNumber	56	yes	
+0x176f44	ValueKey__laneRelationHoldsOnWrittenLanes_176f44	144	yes	
+0x176fd4	ValueKey__laneRelationHoldsOnWrittenLanes_176fd4	144	yes	
 0x177064	Inst__writtenLanesAllMatchValue	128	yes	
-0x1770e4	FUN_001770e4	204	yes	
-0x1771b0	FUN_001771b0	236	yes	
-0x17729c	FUN_0017729c	224	yes	
-0x17737c	FUN_0017737c	144	yes	
-0x17740c	FUN_0017740c	156	yes	
-0x177548	FUN_00177548	144	yes	
-0x1775d8	FUN_001775d8	224	yes	
-0x1776b8	FUN_001776b8	144	yes	
-0x177748	FUN_00177748	408	no	indirect call (driver context / vtable / callback)
+0x1770e4	ValueKey__commonLaneValue	204	yes	
+0x1771b0	ValueKey__computeLaneRangeClasses	236	yes	
+0x17729c	ValueKey__computeLaneCompareCodes	224	yes	
+0x17737c	ValueKey__sourcesEqualOnWrittenLanes	144	yes	
+0x17740c	ValueKey__sourceIsSplatOfConstant	156	yes	
+0x177548	ValueKey__flagZeroSelectLanes	144	yes	
+0x1775d8	ValueKey__createLaneRecordsKind20	224	yes	
+0x1776b8	ValueKey__foldLaneToZeroIfSourcesCancel	144	yes	
+0x177748	ValueKey__canonicalizeCompareCondition	408	no	indirect call (driver context / vtable / callback)
 0x1778e0	FUN_001778e0	272	yes	
-0x1779f0	FUN_001779f0	224	yes	
+0x1779f0	ValueKey__createLaneRecordsKind28	224	yes	
 0x177ad0	ValueKey__cancelNegatedSourcePair	124	yes	
-0x177b4c	FUN_00177b4c	388	yes	
-0x177cd0	FUN_00177cd0	324	yes	
-0x177e14	FUN_00177e14	528	yes	
-0x178024	FUN_00178024	384	yes	
+0x177b4c	ValueKey__insertMovOfOperandLane_177b4c	388	yes	
+0x177cd0	ValueKey__insertMovOfReplacementLane	324	yes	
+0x177e14	ValueKey__insertBinaryOfOperandsLane	528	yes	
+0x178024	ValueKey__insertMovOfOperandLane	384	yes	
 0x1781a4	FUN_001781a4	404	no	indirect call (driver context / vtable / callback)
 0x178338	FUN_00178338	656	no	indirect call (driver context / vtable / callback)
 0x178648	FUN_00178648	708	no	indirect call (driver context / vtable / callback)
 0x1789d4	IRInst__isOpcode8bOr8c	28	yes	
-0x1789f0	FUN_001789f0	168	no	indirect call (driver context / vtable / callback)
+0x1789f0	ValueKey__sourcesHaveNoModifiers	168	no	indirect call (driver context / vtable / callback)
 0x178a98	FUN_00178a98	132	yes	
-0x178b1c	FUN_00178b1c	360	no	indirect call (driver context / vtable / callback)
-0x178c84	FUN_00178c84	244	no	indirect call (driver context / vtable / callback)
-0x178d78	FUN_00178d78	280	yes	
+0x178b1c	ValueKey__allDotInputsConstant	360	no	indirect call (driver context / vtable / callback)
+0x178c84	ValueKey__singleLaneValueNumber	244	no	indirect call (driver context / vtable / callback)
+0x178d78	ValueKey__dotOperandSplatValue	280	yes	
 0x178e90	ValueKey__evalLitLane	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x179064	FUN_00179064	212	no	indirect call (driver context / vtable / callback)
-0x179138	FUN_00179138	408	no	indirect call (driver context / vtable / callback)
-0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
+0x179064	ValueKey__refreshExprRecordForOperand	212	no	indirect call (driver context / vtable / callback)
+0x179138	ValueKey__insertTempCopyOfOperand	408	no	indirect call (driver context / vtable / callback)
+0x1792f0	ValueKey__operandDefinitionIsFlagBit8	232	no	indirect call (driver context / vtable / callback)
 0x1793d8	ValueKey__findLaneWithSameValue	560	yes	
-0x179608	FUN_00179608	456	yes	
-0x1797d0	FUN_001797d0	196	yes	
+0x179608	ValueKey__operandLanesEqual	456	yes	
+0x1797d0	ValueKey__forwardSource3LaneIfEqual	196	yes	
 0x179894	ValueKey__foldCompareSameSourcesValueNumber	184	yes	
-0x17994c	FUN_0017994c	232	yes	
-0x179a34	FUN_00179a34	244	yes	
+0x17994c	ValueKey__forwardSelectedSourceBySign	232	yes	
+0x179a34	ValueKey__forwardSelectedSourceByPositive	244	yes	
 0x179b28	FUN_00179b28	148	yes	
-0x179bbc	FUN_00179bbc	136	yes	
+0x179bbc	ValueKey__allOperandLanesEqual	136	yes	
 0x179c44	Inst__allWrittenLanesSatisfy	124	yes	
-0x179cc0	FUN_00179cc0	240	yes	
-0x179db0	FUN_00179db0	196	yes	
-0x179e74	FUN_00179e74	196	yes	
-0x179f38	FUN_00179f38	252	yes	
-0x17a034	FUN_0017a034	252	yes	
-0x17a130	FUN_0017a130	324	yes	
-0x17a294	FUN_0017a294	320	yes	
+0x179cc0	ValueKey__forwardOtherSourceIfZero	240	yes	
+0x179db0	ValueKey__forwardAddendIfMultiplicandZero	196	yes	
+0x179e74	ValueKey__forwardSource1LaneIfEqual	196	yes	
+0x179f38	ValueKey__forwardOtherSourceIfOne	252	yes	
+0x17a034	ValueKey__forwardOperandByCompareToZero	252	yes	
+0x17a130	ValueKey__setLiteralVec4Operand	324	yes	
+0x17a294	ValueKey__setLiteralOperandsForOpcode	320	yes	
 0x17a3d4	FUN_0017a3d4	884	no	indirect call (driver context / vtable / callback)
 0x17a748	FUN_0017a748	348	yes	
-0x17a8a4	FUN_0017a8a4	680	no	indirect call (driver context / vtable / callback)
+0x17a8a4	ValueKey__foldCompareAgainstZero	680	no	indirect call (driver context / vtable / callback)
 0x17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	472	no	indirect call (driver context / vtable / callback)
-0x17ad24	FUN_0017ad24	260	yes	
-0x17ae28	FUN_0017ae28	272	yes	
-0x17af58	FUN_0017af58	200	yes	
+0x17ad24	ValueKey__insertSplatMov	260	yes	
+0x17ae28	ValueKey__setOperandFromValueKey	272	yes	
+0x17af58	ValueKey__commonLaneValue_17af58	200	yes	
 0x17b020	FUN_0017b020	268	no	indirect call (driver context / vtable / callback)
 0x17b12c	ValueKey__mixLiteralSources	2112	no	indirect call (driver context / vtable / callback)
-0x17b96c	FUN_0017b96c	748	no	indirect call (driver context / vtable / callback)
-0x17bc58	FUN_0017bc58	288	no	indirect call (driver context / vtable / callback)
-0x17bd78	FUN_0017bd78	500	yes	
+0x17b96c	ValueKey__rewriteUniformSwizzle	748	no	indirect call (driver context / vtable / callback)
+0x17bc58	Inst__findLaneProducer	288	no	indirect call (driver context / vtable / callback)
+0x17bd78	ValueKey__rewriteAsMovOfOperandLane	500	yes	
 0x17bf70	ValueKey__foldDot3SingleLaneSource	392	no	indirect call (driver context / vtable / callback)
 0x17c0f8	ValueKey__foldDot4UnitVectorSource	332	yes	
-0x17c244	FUN_0017c244	468	yes	
+0x17c244	ValueKey__rewriteAsMovOfOperand	468	yes	
 0x17c41c	ValueKey__replaceWithSource2IfSourcesEqual23	136	yes	
 0x17c4a4	FUN_0017c4a4	316	no	indirect call (driver context / vtable / callback)
 0x17c5e0	FUN_0017c5e0	404	yes	
 0x17c774	ValueKey__foldMulByPlusMinusOne	276	yes	
 0x17c888	ValueKey__replaceWithSource1IfSourcesEqual	136	yes	
-0x17c910	FUN_0017c910	516	no	indirect call (driver context / vtable / callback)
-0x17cb14	FUN_0017cb14	516	no	indirect call (driver context / vtable / callback)
-0x17cd18	FUN_0017cd18	164	yes	
-0x17cdbc	FUN_0017cdbc	192	yes	
-0x17ce7c	FUN_0017ce7c	492	yes	
-0x17d06c	FUN_0017d06c	476	yes	
-0x17d26c	FUN_0017d26c	392	yes	
+0x17c910	ValueKey__foldMinOfConstants	516	no	indirect call (driver context / vtable / callback)
+0x17cb14	ValueKey__foldMaxOfConstants	516	no	indirect call (driver context / vtable / callback)
+0x17cd18	ValueKey__foldMadZeroMultiplicand	164	yes	
+0x17cdbc	ValueKey__foldAddOfZeroSource	192	yes	
+0x17ce7c	ValueKey__rewriteAsMovOfReplacement	492	yes	
+0x17d06c	ValueKey__rewriteAsMovOfValueKey	476	yes	
+0x17d26c	ValueKey__rewriteAsMovOfVec4Constant	392	yes	
 0x17d3f8	ValueKey__foldCompareSameSourcesToConstant	232	yes	
 0x17d4e0	ValueKey__replaceWithZeroIfSourcesEqual	156	yes	
 0x17d57c	ValueKey__foldMulByZero	148	yes	
-0x17d610	FUN_0017d610	156	yes	
+0x17d610	ValueKey__foldOppositeNegatesToZero	156	yes	
 0x17d6ac	FUN_0017d6ac	780	no	indirect call (driver context / vtable / callback)
-0x17d9b8	FUN_0017d9b8	548	yes	
+0x17d9b8	ValueKey__foldCompareOfConstants	548	yes	
 0x17dbdc	FUN_0017dbdc	1104	no	indirect call (driver context / vtable / callback)
-0x17e02c	FUN_0017e02c	452	yes	
+0x17e02c	ValueKey__rewriteAsMovOfOperandWithScale	452	yes	
 0x17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	324	no	indirect call (driver context / vtable / callback)
-0x17e338	FUN_0017e338	188	no	indirect call (driver context / vtable / callback)
-0x17e3f4	FUN_0017e3f4	608	yes	
+0x17e338	ValueKey__foldEqualSourcesIntoOutputScale	188	no	indirect call (driver context / vtable / callback)
+0x17e3f4	ValueKey__rewriteAsBinaryOfOperands	608	yes	
 0x17e658	ValueKey__foldMadZeroAddend	112	yes	
 0x17e6c8	ValueKey__foldMadByPlusMinusOne	280	yes	
 0x17e7e0	FUN_0017e7e0	972	no	indirect call (driver context / vtable / callback)
-0x17ebb0	FUN_0017ebb0	660	yes	
+0x17ebb0	ValueKey__rewriteAsAdd	660	yes	
 0x17ee68	FUN_0017ee68	908	yes	
 0x17f1f8	ValueKey__foldMulOfConstants	512	no	indirect call (driver context / vtable / callback)
 0x17f3f8	ValueKey__foldMinMaxOfNegatedPair	412	no	indirect call (driver context / vtable / callback)
 0x17f594	ValueKey__foldMaxOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x17f59c	ValueKey__foldMinOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x17f5a4	FUN_0017f5a4	488	no	indirect call (driver context / vtable / callback)
-0x17f78c	FUN_0017f78c	96	yes	
-0x17f7ec	FUN_0017f7ec	1848	no	indirect call (driver context / vtable / callback)
+0x17f5a4	ValueKey__splitDestinationToTemp	488	no	indirect call (driver context / vtable / callback)
+0x17f78c	ValueKey__splitDestinationIfEligible	96	yes	
+0x17f7ec	ValueKey__simplifyInstruction	1848	no	indirect call (driver context / vtable / callback)
 0x180154	FUN_00180154	888	yes	
 0x180250	ValueKey__canonicalizeConstantSources	1504	no	indirect call (driver context / vtable / callback)
 0x180830	ValueKey__simplifyModifiersAndAddressing	4312	no	indirect call (driver context / vtable / callback)
-0x181928	FUN_00181928	140	no	indirect call (driver context / vtable / callback)
-0x1819b4	FUN_001819b4	252	no	indirect call (driver context / vtable / callback)
-0x181ab0	FUN_00181ab0	208	yes	
+0x181928	Inst__isFoldableSingleUse	140	no	indirect call (driver context / vtable / callback)
+0x1819b4	Inst__compareScheduleSlack	252	no	indirect call (driver context / vtable / callback)
+0x181ab0	Pass__recordFlaggedInstructions	208	yes	
 0x181b80	RebuildState__computeNodeLevels	896	no	indirect call (driver context / vtable / callback)
 0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
-0x183ac8	FUN_00183ac8	212	yes	
+0x183ac8	ObjectVector__freeAllElements	212	yes	
 0x183b9c	Block__rebuildAddMulTreesWhereProfitable	1152	yes	
 0x18401c	pass_height_reduction	256	yes	
-0x18413c	FUN_0018413c	2336	no	indirect call (driver context / vtable / callback)
+0x18413c	Block__moveProducersBefore	2336	no	indirect call (driver context / vtable / callback)
 0x184ab4	pass_minreg_order	280	no	indirect call (driver context / vtable / callback)
 0x184bcc	compareIntsAscending	36	yes	
-0x184bf0	FUN_00184bf0	232	no	indirect call (driver context / vtable / callback)
-0x184cd8	FUN_00184cd8	164	no	indirect call (driver context / vtable / callback)
+0x184bf0	ObjectVector__allSatisfyPredicate24	232	no	indirect call (driver context / vtable / callback)
+0x184cd8	Inst__isMulDotWithinLimits	164	no	indirect call (driver context / vtable / callback)
 0x184d7c	Inst__splitAndMerge	372	yes	
 0x184ef0	IRInst__foldResultScaleIntoUsers	2760	no	indirect call (driver context / vtable / callback)
 0x1859bc	Inst__tryDp3Add	996	yes	
@@ -2959,12 +2959,12 @@
 0x18976c	SelectWord__matchesDefaultPattern	28	yes	
 0x189788	SelectWord__matchesAnyKnownPattern	104	yes	
 0x1897f0	KhanPs__vslot66_callHelper189788	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1897fc	FUN_001897fc	68	yes	
+0x1897fc	Inst__sourceIsConstantRegisterNotKind3	68	yes	
 0x189840	SchedModel__fitsConstantLimit	364	no	indirect call (driver context / vtable / callback)
 0x1899ac	SchedModel__assignConstantSelectors	568	no	indirect call (driver context / vtable / callback)
 0x189be4	R300SchedModel__vslot15	64	yes	
-0x189c24	FUN_00189c24	188	no	indirect call (driver context / vtable / callback)
-0x189ce0	FUN_00189ce0	276	no	indirect call (driver context / vtable / callback)
+0x189c24	Inst__computeKey	188	no	indirect call (driver context / vtable / callback)
+0x189ce0	Inst__compareForMerge	276	no	indirect call (driver context / vtable / callback)
 0x189df4	SchedModel__classifySlotUse	480	no	indirect call (driver context / vtable / callback)
 0x189fd4	R300SchedModel__vslot19	172	no	indirect call (driver context / vtable / callback)
 0x18a080	R300SchedModel__vslot34	364	no	indirect call (driver context / vtable / callback)
@@ -2977,10 +2977,10 @@
 0x18bc94	FUN_0018bc94	1332	yes	
 0x18c1c8	PackState__buildSlotTable	1440	yes	
 0x18c768	PackState__countFreeSlots	140	yes	
-0x18c7f4	FUN_0018c7f4	396	no	indirect call (driver context / vtable / callback)
+0x18c7f4	ConstantSlots__tryAddToRow	396	no	indirect call (driver context / vtable / callback)
 0x18c980	FUN_0018c980	1112	no	indirect call (driver context / vtable / callback)
-0x18cdd8	FUN_0018cdd8	1456	no	indirect call (driver context / vtable / callback)
-0x18d388	FUN_0018d388	300	no	indirect call (driver context / vtable / callback)
+0x18cdd8	ConstantSlots__tryAssignPair	1456	no	indirect call (driver context / vtable / callback)
+0x18d388	ConstantSlots__tryAssignSingle	300	no	indirect call (driver context / vtable / callback)
 0x18d4b4	PackState__tryPlaceInstructionSources	1428	yes	
 0x18da48	SchedModel__instructionFitsAlone	116	yes	
 0x18dabc	R300SchedModel__tryRewriteConsumerSelects	1708	no	indirect call (driver context / vtable / callback)
@@ -2989,7 +2989,7 @@
 0x18f55c	R520SchedModel__vslot3_canAddInstruction	280	no	indirect call (driver context / vtable / callback)
 0x18f674	R300SchedModel__vslot12	432	no	indirect call (driver context / vtable / callback)
 0x18f824	R300VSchedModel__vslot2_reset	44	yes	
-0x18f850	FUN_0018f850	200	yes	
+0x18f850	ConstantSlots__rowsCompatible	200	yes	
 0x18f918	R300VSchedModel__vslot13	108	no	indirect call (driver context / vtable / callback)
 0x18f984	R300VSchedModel__vslot28	596	no	indirect call (driver context / vtable / callback)
 0x18fbd8	R300VSchedModel__vslot14	348	no	indirect call (driver context / vtable / callback)
@@ -3015,16 +3015,16 @@
 0x193944	R520SchedModel__vslot21	112	no	indirect call (driver context / vtable / callback)
 0x1939b4	R520SchedModel__vslot22	76	yes	
 0x193a00	FudoPs__vslot29_convertInnerIfsToPredicates	140	no	indirect call (driver context / vtable / callback)
-0x193a8c	FUN_00193a8c	88	yes	
-0x193ae4	FUN_00193ae4	88	yes	
-0x193b3c	FUN_00193b3c	116	yes	
-0x193be8	FUN_00193be8	24	yes	
+0x193a8c	TypedValueArray__init_193a8c	88	yes	
+0x193ae4	TypedValueArray__init	88	yes	
+0x193b3c	TypedValueArray__createWrapping	116	yes	
+0x193be8	ArenaObject__freeBuffer	24	yes	
 0x193c00	FUN_00193c00	160	yes	
 0x193cc0	Arena__free	88	yes	
 0x193d18	List__freeAllNodes	124	yes	
 0x193d98	Arena__grow	128	yes	
 0x193e18	Arena__alloc	92	yes	
-0x193e74	FUN_00193e74	68	yes	
+0x193e74	Arena__allocZeroed	68	yes	
 0x193eb8	Arena__bytesInUse	76	yes	
 0x193f08	DList__isEmpty	24	yes	
 0x193f20	DListNode__unlinkAndDelete	36	yes	
@@ -3046,7 +3046,7 @@
 0x1943f0	HashTable__destroy_1943f0	276	yes	
 0x194504	HashTable__destroy_194504	276	yes	
 0x194618	HashTable__findEntry	264	no	indirect call (driver context / vtable / callback)
-0x194720	FUN_00194720	276	no	indirect call (driver context / vtable / callback)
+0x194720	HashTable__remove	276	no	indirect call (driver context / vtable / callback)
 0x194834	HashTable__find	260	yes	
 0x194938	HashTableIterator__advance	348	yes	
 0x194a94	HashTableIterator__begin	20	yes	
@@ -3201,7 +3201,7 @@
 0x19ecf4	ilSourceOperandWordCount	192	yes	
 0x19edb4	ilInstructionHeaderWordCount	84	yes	
 0x19ee08	ilDestinationOperandWordCount	108	yes	
-0x19ee74	FUN_0019ee74	184	yes	
+0x19ee74	Compiler__selectLimitsForShaderKind	184	yes	
 0x19ef2c	FudoPs__vslot96_installHardwareTables	32	yes	
 0x19ef50	R520MachineAssembler__vslot5_beginProgram	324	yes	
 0x19f094	R520MachineAssembler__setRsColorFields	56	yes	

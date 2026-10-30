@@ -126,9 +126,9 @@
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r6	PASS-deep	GARBAGE	
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r7	PASS-deep	GARBAGE	
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r8	PASS-deep	GARBAGE	
-17e338	FUN_0017e338	r6	PASS-deep	GARBAGE	
-17e338	FUN_0017e338	r7	PASS-deep	GARBAGE	
-17e338	FUN_0017e338	r8	PASS-deep	GARBAGE	
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r6	PASS-deep	GARBAGE	
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r7	PASS-deep	GARBAGE	
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r8	PASS-deep	GARBAGE	
 17f1f8	ValueKey__foldMulOfConstants	r7	PASS-deep	GARBAGE	
 17f1f8	ValueKey__foldMulOfConstants	r8	PASS-deep	GARBAGE	
 18ad08	R300SchedModel__vslot16	r7	PASS-indirect	GARBAGE	
