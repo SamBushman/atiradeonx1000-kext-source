@@ -845,8 +845,8 @@ int arbEmitRecord2Src_op01(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
 }
 
 /* arbEmitRecord1Src_op02 @ 0x84300 (472 bytes) */
-int arbEmitRecord1Src_op02(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
-  int param_1;
+int arbEmitRecord1Src_op02(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
+  int ctx;
   uint dstFile;
   uint dstIndex;
   uint *dstMask;
@@ -868,47 +868,48 @@ int arbEmitRecord1Src_op02(param_1, dstFile, dstIndex, dstMask, src0File, src0In
   uint dstMaskYBits;
   uint dstMaskZBits;
   uint src0NegateZBits;
-  int iVar7;
+  int recordOffset;
   uint src0FileField;
   uint src0IndexBits;
   uint src0IndexBitsB;
   uint oldWord0;
   uint oldWord1;
   undefined4 allocation;
-  int iVar14;
-  int iVar15;
+  int recordCount;
+  int oldBytes;
+  int recordArray;
   
-  iVar14 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar14 + 1U) {
-    iVar14 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    allocation = _calloc(iVar14 + 0x200,1);
-    if (iVar14 != 0) {
-      _memcpy(allocation,*(undefined4 *)(param_1 + 0x3c8),iVar14);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  recordCount = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < recordCount + 1U) {
+    oldBytes = *(uint *)(ctx + 0x3e0) * 0x10;
+    allocation = _calloc(oldBytes + 0x200,1);
+    if (oldBytes != 0) {
+      _memcpy(allocation,*(undefined4 *)(ctx + 0x3c8),oldBytes);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = allocation;
-    iVar14 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = allocation;
+    recordCount = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar15 = *(int *)(param_1 + 0x3c8);
-  iVar7 = iVar14 * 0x10;
+  recordArray = *(int *)(ctx + 0x3c8);
+  recordOffset = recordCount * 0x10;
   src0FileField = src0File & 0xf;
-  *(int *)(param_1 + 0x3cc) = iVar14 + 1;
-  instr = iVar7 + iVar15;
-  *(int *)(param_1 + 0x3dc) = instr;
-  *(undefined4 *)(iVar7 + iVar15) = 0;
+  *(int *)(ctx + 0x3cc) = recordCount + 1;
+  instr = recordOffset + recordArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(recordOffset + recordArray) = 0;
   *(undefined1 *)(instr + 3) = 2;
-  oldWord0 = *(uint *)(iVar7 + iVar15);
+  oldWord0 = *(uint *)(recordOffset + recordArray);
   dstFileBits = (dstFile & 0xf) << 8;
   dstIndexBits = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(iVar7 + iVar15) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  *(uint *)(recordOffset + recordArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
   dstMaskXBits = (*dstMask & 1) << 0x14;
-  *(uint *)(iVar7 + iVar15) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  *(uint *)(recordOffset + recordArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
   dstMaskYBits = (dstMask[1] & 1) << 0x15;
-  *(uint *)(iVar7 + iVar15) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  *(uint *)(recordOffset + recordArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
   dstMaskZBits = (dstMask[2] & 1) << 0x16;
-  *(uint *)(iVar7 + iVar15) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
-  *(uint *)(iVar7 + iVar15) =
+  *(uint *)(recordOffset + recordArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
+  *(uint *)(recordOffset + recordArray) =
        (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   src0IndexBitsB = (src0Index & 0xff) << 5;
@@ -937,7 +938,7 @@ int arbEmitRecord1Src_op02(param_1, dstFile, dstIndex, dstMask, src0File, src0In
        src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField;
   *(uint *)(instr + 8) = src0IndexBits;
   *(uint *)(instr + 0xc) = src0IndexBits;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
