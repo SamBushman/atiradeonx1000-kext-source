@@ -1,0 +1,38 @@
+local	FUN_000a7a60	uVar4	formatWordB	INFERRED	word at +0x1c of the 0x24-byte format record selected by the colour format byte ctx+0x2b7f; its top bits go to bits 12-15 of the packed format word
+local	FUN_000a7a60	puVar1	formatTable	INFERRED	PTR_DAT_001e88c8: table of 0x24-byte colour format records indexed by ctx+0x2b7f
+use	FUN_000a7a60	uVar2	packedFormatBits	INFERRED	word at +0x18 of the format record (channel mask / swizzle bits)	^\s*uVar2\ =\ \*\(uint\ \*\)\(puVar1\ \+\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002b7f\)\[param_1\]\ \*\ 0x24\ \+\ 0x18\);$	+1
+use	FUN_000a7a60	uVar2	packedFormatBits	INFERRED	format record bits repacked into the per-attachment register value stored at stream+0x233c+4*i	^\s*uVar2\ =\ uVar4\ >>\ 0xe\ \&\ 0xc000\ \|$	+2
+use	FUN_000a7a60	uVar2	packedFormatBits	INFERRED	format record bits repacked into the per-attachment register value stored at stream+0x233c+4*i	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x233c\)\ =\ uVar2;$	+1
+use	FUN_000a7a60	uVar2	packedFormatBits	INFERRED	format record bits repacked into the per-attachment register value stored at stream+0x233c+4*i	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x233c\)\ =\ uVar2;$@2	+1
+use	FUN_000a7a60	uVar2	drawBufferMask	INFERRED	ctx+0x1ae4 >> 6 & 0xffff: mask of attachments in use	^\s*uVar2\ =\ uVar4\ >>\ 6\ \&\ 0xffff;$	+3
+local	FUN_000a7a60	piVar3	drawFramebuffer	INFERRED	*(*(ctx+0x18)+0x1a0): bound draw framebuffer object (attachment flags at +0x90 relative to its first word); 0 when rendering to the window
+use	FUN_000a7a60	iVar6	attachmentRegCursor	INFERRED	stream advanced 4 per attachment (window path)	^\s*iVar6\ =\ iVar7;$	+1
+use	FUN_000a7a60	iVar6	attachmentRegCursor	INFERRED	stream advanced 4 per attachment (window path)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x233c\)\ =\ 0xf;$	+1
+use	FUN_000a7a60	iVar6	attachmentRegCursor	INFERRED	stream advanced 4 per attachment (window path)	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x233c\)\ =\ uVar2;$	+1
+use	FUN_000a7a60	iVar6	attachmentRegCursor	INFERRED	stream advanced 4 per attachment (window path)	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
+use	FUN_000a7a60	iVar6	attachmentRegCursorFbo	INFERRED	stream advanced 4 per attachment (framebuffer object path)	^\s*iVar6\ =\ iVar7;$@2	+1
+use	FUN_000a7a60	iVar6	attachmentRegCursorFbo	INFERRED	stream advanced 4 per attachment (framebuffer object path)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x233c\)\ =\ 0xf;$@2	+1
+use	FUN_000a7a60	iVar6	attachmentRegCursorFbo	INFERRED	stream advanced 4 per attachment (framebuffer object path)	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x233c\)\ =\ uVar2;$@2	+1
+use	FUN_000a7a60	iVar6	attachmentRegCursorFbo	INFERRED	stream advanced 4 per attachment (framebuffer object path)	^\s*iVar6\ =\ iVar6\ \+\ 4;$@2	+1
+local	FUN_000a7a60	iVar7	streamBase	INFERRED	ctx + 0x240, the embedded stream object
+use	psnProgramToDecoded	uVar6	sourceSelectWord	INFERRED	16-bit word combining the source kind byte and the second control byte of the record	^\s*uVar6\ =\ \(ushort\)bVar2;$	+1
+use	psnProgramToDecoded	uVar6	sourceSelectWord	INFERRED	16-bit word combining the source kind byte and the second control byte of the record	^\s*uVar6\ =\ \(ushort\)\*\(byte\ \*\)puVar23;$	+1
+use	psnProgramToDecoded	uVar6	sourceSelectWord	INFERRED	16-bit word combining the source kind byte and the second control byte of the record	^\s*uVar6\ =\ \(ushort\)\*\(byte\ \*\)puVar23;$@2	+1
+use	psnProgramToDecoded	uVar6	sourceSelectWord	INFERRED	16-bit word combining the source kind byte and the second control byte of the record	^\s*puVar29\[0x14\]\ =\ \(ushort\)bVar2\ <<\ 8\ \|\ uVar6;$	+1
+use	psnProgramToDecoded	uVar6	sourceRegWord1	INFERRED	16-bit register field of the first source copied into the decoded entry	^\s*uVar6\ =\ \*puVar9;$	+1
+use	psnProgramToDecoded	uVar6	sourceRegWord1	INFERRED	16-bit register field of the first source copied into the decoded entry	^\s*puVar29\[0x40\]\ =\ uVar6;$	+1
+use	psnProgramToDecoded	uVar6	sourceRegWord2	INFERRED	16-bit register field of the second source copied into the decoded entry	^\s*uVar6\ =\ \*puStack_80;$	+1
+use	psnProgramToDecoded	uVar6	sourceRegWord2	INFERRED	16-bit register field of the second source copied into the decoded entry	^\s*puVar29\[2\]\ =\ uVar6;$	+1
+use	psnProgramToDecoded	uVar6	sourceRegWord3	INFERRED	16-bit register field of the third source copied into the decoded entry	^\s*uVar6\ =\ \*\(ushort\ \*\)puStack_70;$	+1
+use	psnProgramToDecoded	uVar6	sourceRegWord3	INFERRED	16-bit register field of the third source copied into the decoded entry	^\s*puVar29\[0x22\]\ =\ uVar6;$	+1
+use	psnProgramToDecoded	bVar2	opKindByte	INFERRED	instruction kind byte of the record (1, 2: select path; 3, 4: texture path)	^\s*bVar2\ =\ \*\(byte\ \*\)puVar23;$	+3
+use	psnProgramToDecoded	bVar2	opKindByte	INFERRED	instruction kind byte of the record (1, 2: select path; 3, 4: texture path)	^\s*else\ if\ \(bVar2\ <\ 3\)\ \{$	+2
+use	psnProgramToDecoded	bVar2	opKindByte	INFERRED	instruction kind byte of the record (1, 2: select path; 3, 4: texture path)	^\s*else\ if\ \(bVar2\ <\ 5\)\ goto\ LAB_000c46e8;$	+1
+use	psnProgramToDecoded	bVar2	selectByte	INFERRED	select control byte used for the packed word at entry+0x28	^\s*bVar2\ =\ \*pbStack_68;$	+1
+use	psnProgramToDecoded	bVar2	selectByte	INFERRED	select control byte used for the packed word at entry+0x28	^\s*puVar29\[0x14\]\ =\ \(ushort\)bVar2\ <<\ 8\ \|\ uVar6;$	+1
+use	psnProgramToDecoded	bVar2	controlByte	INFERRED	control byte shifted into the high half of the decoded word	^\s*bVar2\ =\ \*pbStack_8c;$	+3
+local	psnProgramToDecoded	puVar7	staleArgR5	INFERRED	r5 value left from the alpha source setup, forwarded to psnDecCanonicalizeEntry
+local	psnProgramToDecoded	pbVar8	staleArgR6	INFERRED	r6 value left from the alpha setup, forwarded to psnDecCanonicalizeEntry
+local	psnProgramToDecoded	pcVar10	staleArgR7	INFERRED	r7 value left from the alpha setup, forwarded to psnDecCanonicalizeEntry
+local	psnProgramToDecoded	pbVar12	staleArgR9	INFERRED	r9 value left from the alpha setup, forwarded to psnDecCanonicalizeEntry
+func	FUN_000a7a60	gld_updateDrawBufferConfig	INFERRED	derives the per-attachment colour register value from the format table (ctx+0x2b7f), enables the attachments that exist in the draw framebuffer (or the window), updates ctx+0x1ae4 and rebuilds the unit setup cmd list when the attachment mask changes

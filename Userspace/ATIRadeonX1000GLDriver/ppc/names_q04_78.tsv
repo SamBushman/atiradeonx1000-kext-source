@@ -1,0 +1,66 @@
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*fVar6\ =\ \*pfVar10;$	+2
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*uVar2\ =\ \(uint\)GH_F2U\(fVar6\)\ >>\ 0x10\ \&\ 0xff;$	+1
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*1\ <<\ \(\(uint\)GH_F2U\(fVar6\)\ >>\ 0x10\ \&\ 0x3f\)\ \|\ \*\(uint\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x10\);$	+2
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*if\ \(\(\(uint\)GH_F2U\(fVar6\)\ \&\ 0x18000000\)\ !=\ 0x10000000\)\ \{$	+1
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*if\ \(\(int\)GH_F2U\(fVar6\)\ <\ 0\)\ \{$	+1
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*if\ \(\(\(uint\)GH_F2U\(fVar6\)\ \&\ 0x40000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*if\ \(\(int\)GH_F2U\(fVar6\)\ <\ 0\)\ \{$@2	+1
+use	FUN_000abd10	fVar6	tokenWord	INFERRED	current program token (raw 32-bit word read through a float pointer); its low 16 bits are the opcode	^\s*if\ \(\(\(uint\)GH_F2U\(fVar6\)\ \&\ 0x40000000\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_000abd10	fVar6	constToken	INFERRED	token word at tokenCursor+1 of opcode 0x1c: constant kind (bits 16-21) and register index	^\s*fVar6\ =\ pfVar10\[1\];$	+2
+use	FUN_000abd10	fVar6	constToken	INFERRED	token word at tokenCursor+1 of opcode 0x1c: constant kind (bits 16-21) and register index	^\s*\(param_1,a1,\(uint\)GH_F2U\(fVar6\)\ \&\ 0xffff,\(uint\)GH_F2U\(fVar6\)\ \&\ 0xffff,pfVar10\ \+\ 2,1,0\);$	+1
+use	FUN_000abd10	fVar6	constToken	INFERRED	token word at tokenCursor+1 of opcode 0x1c: constant kind (bits 16-21) and register index	^\s*\(param_1,a1,\(uint\)GH_F2U\(fVar6\)\ \&\ 0xffff,\(uint\)GH_F2U\(fVar6\)\ \&\ 0xffff,\&local_58,1,0,$	+2
+use	FUN_000abd10	fVar6	constToken	INFERRED	token word at tokenCursor+1 of opcode 0x1c: constant kind (bits 16-21) and register index	^\s*iVar8\ =\ \(\(uint\)GH_F2U\(fVar6\)\ \&\ 0xffff\)\ \+\ 1;$	+1
+use	FUN_000abd10	uVar2	tokenCount	INFERRED	(program size - 10) / 4: number of tokens, stored at param_3[0] (+1 at param_3[1])	^\s*uVar2\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x5c\)\ \-\ 10U\ >>\ 2;$	+3
+use	FUN_000abd10	uVar2	outputKind	INFERRED	bits 16-21 of the opcode 0x16 operand: 0x10 depth, 0x11 colour output n, 0x13, 0x16 flags	^\s*uVar2\ =\ \(uint\)GH_F2U\(\*pfVar4\)\ >>\ 0x10\ \&\ 0x3f;$	+2
+use	FUN_000abd10	uVar2	outputKind	INFERRED	bits 16-21 of the opcode 0x16 operand: 0x10 depth, 0x11 colour output n, 0x13, 0x16 flags	^\s*else\ if\ \(uVar2\ <\ 0x12\)\ \{$	+2
+use	FUN_000abd10	uVar2	outputKind	INFERRED	bits 16-21 of the opcode 0x16 operand: 0x10 depth, 0x11 colour output n, 0x13, 0x16 flags	^\s*else\ if\ \(uVar2\ ==\ 0x13\)\ \{$	+1
+use	FUN_000abd10	uVar2	outputKind	INFERRED	bits 16-21 of the opcode 0x16 operand: 0x10 depth, 0x11 colour output n, 0x13, 0x16 flags	^\s*else\ if\ \(uVar2\ ==\ 0x16\)\ \{$	+1
+use	FUN_000abd10	uVar2	inputIndex	INFERRED	bits 16-23 of the opcode 0x19 token: texture/input unit index	^\s*uVar2\ =\ \(uint\)GH_F2U\(fVar6\)\ >>\ 0x10\ \&\ 0xff;$	+1
+use	FUN_000abd10	uVar2	inputIndex	INFERRED	bits 16-23 of the opcode 0x19 token: texture/input unit index	^\s*iVar8\ =\ uVar2\ \*\ 4;$	+1
+use	FUN_000abd10	uVar2	inputIndex	INFERRED	bits 16-23 of the opcode 0x19 token: texture/input unit index	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 1;$	+1
+use	FUN_000abd10	uVar2	inputIndex	INFERRED	bits 16-23 of the opcode 0x19 token: texture/input unit index	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ uVar1;$	+1
+use	FUN_000abd10	uVar2	inputIndex	INFERRED	bits 16-23 of the opcode 0x19 token: texture/input unit index	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 3;$	+1
+use	FUN_000abd10	uVar2	inputIndex	INFERRED	bits 16-23 of the opcode 0x19 token: texture/input unit index	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 4;$	+1
+use	FUN_000abd10	uVar2	constKind	INFERRED	bits 16-21 of the opcode 0x1c token: 1 literal vector (4 words), 2 negated vector	^\s*uVar2\ =\ \(uint\)GH_F2U\(fVar6\)\ >>\ 0x10\ \&\ 0x3f;$	+2
+use	FUN_000abd10	uVar2	constKind	INFERRED	bits 16-21 of the opcode 0x1c token: 1 literal vector (4 words), 2 negated vector	^\s*if\ \(uVar2\ ==\ 2\)\ \{$	+1
+use	FUN_000abd10	pfVar4	outputOperandPtr	INFERRED	tokenCursor + 1 of opcode 0x16 (the output operand word)	^\s*pfVar4\ =\ pfVar10\ \+\ 1;$	+1
+use	FUN_000abd10	pfVar4	outputOperandPtr	INFERRED	tokenCursor + 1 of opcode 0x16 (the output operand word)	^\s*uVar2\ =\ \(uint\)GH_F2U\(\*pfVar4\)\ >>\ 0x10\ \&\ 0x3f;$	+1
+use	FUN_000abd10	pfVar4	outputOperandPtr	INFERRED	tokenCursor + 1 of opcode 0x16 (the output operand word)	^\s*1\ <<\ \(\(uint\)GH_F2U\(\*pfVar4\)\ \&\ 0x3f\)\ \|\ \*\(uint\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0xc\);$	+1
+use	FUN_000abd10	pfVar4	afterConstCursor	INFERRED	cursor after the constant of opcode 0x1c	^\s*pfVar4\ =\ pfVar10\ \+\ 6;$	+1
+use	FUN_000abd10	pfVar4	afterConstCursor	INFERRED	cursor after the constant of opcode 0x1c	^\s*pfVar4\ =\ pfVar10\ \+\ 1;$@2	+1
+use	FUN_000abd10	pfVar4	afterConstCursor	INFERRED	cursor after the constant of opcode 0x1c	^\s*pfVar4\ =\ pfVar10\ \+\ 6;$@2	+1
+use	FUN_000abd10	pfVar4	afterConstCursor	INFERRED	cursor after the constant of opcode 0x1c	^\s*pfVar10\ =\ pfVar4;$	+1
+use	FUN_000abd10	pfVar4	afterOperandCursor	INFERRED	cursor after the second operand of opcode 0x5e	^\s*pfVar4\ =\ pfVar10\ \+\ 1;$@5	+1
+use	FUN_000abd10	pfVar4	afterOperandCursor	INFERRED	cursor after the second operand of opcode 0x5e	^\s*pfVar4\ =\ pfVar10\ \+\ 2;$@3	+1
+use	FUN_000abd10	pfVar4	afterOperandCursor	INFERRED	cursor after the second operand of opcode 0x5e	^\s*local_54\ =\ \*pfVar4;$	+2
+use	FUN_000abd10	pfVar4	afterOperandCursor	INFERRED	cursor after the second operand of opcode 0x5e	^\s*pfVar10\ =\ pfVar4\ \+\ 2;$@2	+1
+use	FUN_000abd10	iVar8	inputByteOffset	INFERRED	input index * 4 into the per-input kind array of the program record (+0x14)	^\s*iVar8\ =\ uVar2\ \*\ 4;$	+2
+use	FUN_000abd10	iVar8	inputByteOffset	INFERRED	input index * 4 into the per-input kind array of the program record (+0x14)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 1;$	+1
+use	FUN_000abd10	iVar8	inputByteOffset	INFERRED	input index * 4 into the per-input kind array of the program record (+0x14)	^\s*switch\(\*\(undefined1\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar8\ \+\ param_1\)\ \+\ 0x30\)\)\ \{$	+1
+use	FUN_000abd10	iVar8	inputByteOffset	INFERRED	input index * 4 into the per-input kind array of the program record (+0x14)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 4;$	+1
+use	FUN_000abd10	iVar8	inputByteOffset	INFERRED	input index * 4 into the per-input kind array of the program record (+0x14)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 3;$	+1
+use	FUN_000abd10	iVar8	inputByteOffset	INFERRED	input index * 4 into the per-input kind array of the program record (+0x14)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 5;$	+1
+use	FUN_000abd10	iVar8	inputByteOffset	INFERRED	input index * 4 into the per-input kind array of the program record (+0x14)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ 2;$	+1
+use	FUN_000abd10	iVar8	constRegCount	INFERRED	highest constant register index + 1 (opcode 0x1c)	^\s*iVar8\ =\ \(\(uint\)GH_F2U\(fVar6\)\ \&\ 0xffff\)\ \+\ 1;$	+3
+use	FUN_000abd10	iVar8	operandRegCount	INFERRED	register index + 1 of an operand of opcode 0x5d/0x5e	^\s*iVar8\ =\ \(\(uint\)GH_F2U\(local_58\)\ \&\ 0xffff\)\ \+\ 1;$	+2
+use	FUN_000abd10	iVar8	operandRegCount	INFERRED	register index + 1 of an operand of opcode 0x5d/0x5e	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x84\)\ =\ iVar8;$	+1
+use	FUN_000abd10	iVar8	operandRegCount	INFERRED	register index + 1 of an operand of opcode 0x5d/0x5e	^\s*iVar8\ =\ \(\(uint\)GH_F2U\(local_54\)\ \&\ 0xffff\)\ \+\ 1;$	+2
+use	FUN_000abd10	iVar8	operandRegCountB	INFERRED	register index + 1 of the third operand of opcode 0x5e	^\s*iVar8\ =\ \(\(uint\)GH_F2U\(local_58\)\ \&\ 0xffff\)\ \+\ 1;$@2	+3
+local	FUN_000abd10	uVar1	samplerKindCode	INFERRED	input kind code (5 or 2) chosen from bits 27-28 of the token
+local	FUN_000abd10	uVar3	tokenBase	INFERRED	address of the copied token array (param_3[2])
+local	FUN_000abd10	pfVar7	secondOperandPtr	INFERRED	pointer to the second operand word of opcode 0x5d
+local	FUN_000abd10	a1	slotRecord	INFERRED	slot record of the unit (*(ctx+0x1130)*4 + record+0x70): destination of the constant callback at ctx+0x1280
+local	FUN_000abd10	iVar9	tokenBytes	INFERRED	program size - 10: byte length of the token array
+local	FUN_000abd10	pfVar10	tokenCursor	INFERRED	cursor over the program tokens (4 bytes each)
+local	FUN_000abd10	local_54	operandScratch1	INFERRED	second float of the 4-float vector passed by address to the callback at ctx+0x1280 (negated constant); plain token temporary in opcode 0x5e
+local	FUN_000abd10	local_50	operandScratch2	INFERRED	third float of the 4-float vector passed to the callback at ctx+0x1280
+local	FUN_000abd10	local_4c	operandScratch3	INFERRED	fourth float of the 4-float vector passed to the callback at ctx+0x1280
+local	FUN_000abd10	local_48	i2dHi0	INFERRED	0x43300000 high word of an int->double conversion pair
+local	FUN_000abd10	fStack_44	negConstLo0	INFERRED	negated constant word 0 (low word of the conversion pair)
+local	FUN_000abd10	local_40	i2dHi1	INFERRED	0x43300000 high word of an int->double conversion pair
+local	FUN_000abd10	fStack_3c	negConstLo1	INFERRED	negated constant word 1
+local	FUN_000abd10	local_38	i2dHi2	INFERRED	0x43300000 high word of an int->double conversion pair
+local	FUN_000abd10	fStack_34	negConstLo2	INFERRED	negated constant word 2
+local	FUN_000abd10	local_30	i2dHi3	INFERRED	0x43300000 high word of an int->double conversion pair
+local	FUN_000abd10	fStack_2c	negConstLo3	INFERRED	negated constant word 3
+local	FUN_000abd10	param_3	tokenInfo	INFERRED	output record {token count, count + 1, token array pointer}

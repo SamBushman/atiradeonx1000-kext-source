@@ -26,25 +26,25 @@
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0xa4980	FUN_000a4980	0xa523c	gld_createInternalTexture	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
-0xa4980	FUN_000a4980	0xa56c8	FUN_000a3790	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0xa4980	FUN_000a4980	0xa5760	FUN_000a3a60	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0xa4980	gld_buildSmoothPointMask	0xa523c	gld_createInternalTexture	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0xa4980	gld_buildSmoothPointMask	0xa56c8	gld_buildCoverageByteTable	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0xa4980	gld_buildSmoothPointMask	0xa5760	gld_buildCoverageRampTable	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xb3630	atifsCompileCurrentShader	0xb4030	ilTokenBufPush	r9	0x3 not at argument 6 of any C call (13 C calls)	BENIGN-CALLEE-IGNORES
-0xb4400	FUN_000b4400	0xb49bc	arbfpInitUnitState	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0xb4400	gld_compileILProgram	0xb49bc	arbfpInitUnitState	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0xc8e50	ilAssembleProgram	0xca130	ilEmitProjectiveDivide	r10	r1+0x7c (a stack address) not at argument 7 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0xcae90	ilRewriteForTextureState	0xcccc4	malloc	r9	r1+0x98 (a stack address) not at argument 6 of any C call (4 C calls)	BENIGN-IMPORT-ARITY
-0xed89c	FUN_000ed89c	0xed9ac	Vslot__outDefaults_0_0_4	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
-0xed89c	FUN_000ed89c	0xedcb4	IRInst__appendSource	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
-0xeec50	FUN_000eec50	0xed5ec	IRInst__setOperandRef	r3	incoming param_2 not at argument 0 of any C call (8 C calls)	CHECK (C arg0: iVar2; iVar2)
-0xeec50	FUN_000eec50	0xed3ec	IRInst__setOperandRef	r5	field at param_2+0xa4: 2 stock site(s), 0 C call(s) carry it at argument 2 (8 C calls)	BENIGN-REVIEWED (Ghidra inlined the tail call `b 0xed3a4` from FUN_000eec50: the callee's param_2 is the C's iVar7 = *(param_1+0x34c); stock r4 = r30 at 0xeee28)
-0xeec50	FUN_000eec50	0xed3fc	IRInst__getOperandRecord	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
-0xeec50	FUN_000eec50	0xed4b0	IRInst__getOperandRecord	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
-0xeec50	FUN_000eec50	0xed600	Block__insertInstBefore	r4	incoming param_2 not at argument 1 of any C call (3 C calls)	CHECK (C arg1: iVar7; iVar5)
+0xed89c	Program__groupLoadsIntoProjections	0xed9ac	Vslot__outDefaults_0_0_4	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0xed89c	Program__groupLoadsIntoProjections	0xedcb4	IRInst__appendSource	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
+0xeec50	Program__emitDepthExportScale	0xed5ec	IRInst__setOperandRef	r3	incoming param_2 not at argument 0 of any C call (8 C calls)	CHECK (C arg0: iVar2; iVar2)
+0xeec50	Program__emitDepthExportScale	0xed3ec	IRInst__setOperandRef	r5	field at param_2+0xa4: 2 stock site(s), 0 C call(s) carry it at argument 2 (8 C calls)	BENIGN-REVIEWED (Ghidra inlined the tail call `b 0xed3a4` from Program__emitDepthExportScale: the callee's param_2 is the C's iVar7 = *(param_1+0x34c); stock r4 = r30 at 0xeee28)
+0xeec50	Program__emitDepthExportScale	0xed3fc	IRInst__getOperandRecord	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
+0xeec50	Program__emitDepthExportScale	0xed4b0	IRInst__getOperandRecord	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
+0xeec50	Program__emitDepthExportScale	0xed600	Block__insertInstBefore	r4	incoming param_2 not at argument 1 of any C call (3 C calls)	CHECK (C arg1: iVar7; iVar5)
 0xeee4c	FUN_000eee4c	0xeeef4	IRInst__appendSource	r5	field at param_1+0x8: 3 stock site(s), 0 C call(s) carry it at argument 2 (3 C calls)	BENIGN-CALLEE-IGNORES
 0xf4698	IRInst__maskUnusedLanesOfOperand	0xf46f0	SelectWord__maskUnused	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	CHECK (C arg2: local_18)
-0xf94dc	FUN_000f94dc	0xf9a34	IRInst__appendSource	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
-0xfd5c8	FUN_000fd5c8	0xfe0c0	Program__applySourceTokenToOperand	r10	r1+0x58 (a stack address) not at argument 7 of any C call (8 C calls)	CHECK-indirect (C arg7: -; -)
-0xfd5c8	FUN_000fd5c8	0xfffdc	SelectWord__firstWrittenComponent	r9	r1+0x48 (a stack address) not at argument 6 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
+0xf94dc	Program__emitInputMerge	0xf9a34	IRInst__appendSource	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
+0xfd5c8	Program__translateILStream	0xfe0c0	Program__applySourceTokenToOperand	r10	r1+0x58 (a stack address) not at argument 7 of any C call (8 C calls)	CHECK-indirect (C arg7: -; -)
+0xfd5c8	Program__translateILStream	0xfffdc	SelectWord__firstWrittenComponent	r9	r1+0x48 (a stack address) not at argument 6 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0x11ff7c	Program__sequentializeParallelCopies	0x120ba4	Block__getPredecessor	r4	0x0 not at argument 1 of any C call (6 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x120cd4	Program__eliminatePhiCopies	0x120f10	Program__sequentializeParallelCopies	r10	r1+0x38 (a stack address) not at argument 7 of any C call (1 C calls)	CHECK (C arg7: in_r10)
 0x133fe4	RegAlloc__insertPendingReloads	0x1341ac	RegAlloc__markReloadModifiers	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
@@ -55,14 +55,14 @@
 0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r6	incoming param_5 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
-0x177b4c	FUN_00177b4c	0x177c74	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x177cd0	FUN_00177cd0	0x177db8	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x177e14	FUN_00177e14	0x177fc8	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x178024	FUN_00178024	0x178148	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x17ad24	FUN_0017ad24	0x17adcc	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x17ce7c	FUN_0017ce7c	0x17d00c	IRInst__appendSource	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
+0x177b4c	ValueKey__insertMovOfOperandLane_177b4c	0x177c74	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x177cd0	ValueKey__insertMovOfReplacementLane	0x177db8	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x177e14	ValueKey__insertBinaryOfOperandsLane	0x177fc8	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x178024	ValueKey__insertMovOfOperandLane	0x178148	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x17ad24	ValueKey__insertSplatMov	0x17adcc	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x17ce7c	ValueKey__rewriteAsMovOfReplacement	0x17d00c	IRInst__appendSource	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x17e7e0	FUN_0017e7e0	0x17eb44	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x17f5a4	FUN_0017f5a4	0x17f6b0	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x17f5a4	ValueKey__splitDestinationToTemp	0x17f6b0	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x180830	ValueKey__simplifyModifiersAndAddressing	0x180fa0	IRInst__appendSource	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x186a88	FUN_00186a88	0x1874f0	IRInst__create	r3	0x9b not at argument 0 of any C call (5 C calls)	CHECK (C arg0: 0x9c; 0x99)
 0x18843c	KhanPs__peepholeCombine	0x18885c	Inst__foldProducerIntoConsumer	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)

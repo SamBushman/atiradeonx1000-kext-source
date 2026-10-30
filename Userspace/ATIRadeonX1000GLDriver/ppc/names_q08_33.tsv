@@ -1,0 +1,29 @@
+local	ValueKey__foldMulPowerOfTwoIntoOutputScale	fparam_1	magnitude	INFERRED	absolute value of the operand constant (double)
+local	ValueKey__foldMulPowerOfTwoIntoOutputScale	local_38	operandValue	INFERRED	constant value of the operand (FUN_001770e4 out, 0x7fff0000 = none)
+local	ValueKey__foldMinMaxOfNegatedPair	bVar1	lastLane	INFERRED	lane == 3
+local	ValueKey__foldMinMaxOfNegatedPair	bVar2	signNotSeen	INFERRED	true until the first constant lane's sign was read
+local	ValueKey__foldMinMaxOfNegatedPair	uVar5	signBit	INFERRED	sign bit shared by all constant lanes
+local	ValueKey__foldMinMaxOfNegatedPair	local_38	writeMaskWord	INFERRED	operand 0 swizzle/write-mask bytes copied to the stack (0 = lane written)
+local	ValueKey__foldMinMaxOfNegatedPair	param_2	signFlag	INFERRED	expected sign / which operand to negate (0 or 1)
+local	ValueKey__foldDot3SingleLaneSource	bVar1	notLastTriple	INFERRED	loop continue flag (triple index != 2)
+local	ValueKey__foldDot3SingleLaneSource	iVar2	zeroValueNumber	INFERRED	value number of constant 0 (valueNumberForExpr(0)+4)
+local	ValueKey__foldDot3SingleLaneSource	iVar5	scaleAccepted	INFERRED	hardware-limit predicate (vtable +0xfc) accepted the scale exponent
+local	ValueKey__foldDot3SingleLaneSource	iVar6	scaleExponent	INFERRED	output scale exponent: 0 / outputScaleExponent of the constant, plus inst +0x124
+local	ValueKey__foldDot3SingleLaneSource	piVar9	laneTriplePtr	INFERRED	walks the DAT_001e6134 table of 3-lane index triples
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	bVar1	isPositive	INFERRED	operand constant is non-negative	^\s*bVar1\ =\ \-1\ <\ \(int\)GH_F2U\(local_38\[0\]\);$	+2
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	bVar1	isPositive	INFERRED	operand constant is non-negative	^\s*if\ \(!bVar1\)\ \{$	+1
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	bVar1	notLastOperand	INFERRED	operand index != 2 loop continue	^\s*bVar1\ =\ iVar4\ !=\ 2;$	+1
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	bVar1	notLastOperand	INFERRED	operand index != 2 loop continue	^\s*\}\ while\ \(bVar1\);$	+1
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	iVar2	isOutputScale	INFERRED	isOutputScaleValue(magnitude)	^\s*iVar2\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_0010aafc\)\(fparam_1\);$	+2
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	iVar2	scaleExponent	INFERRED	outputScaleExponent plus inst +0x124 result scale code	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010ab40\)\(fparam_1\);$	+1
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	iVar2	scaleExponent	INFERRED	outputScaleExponent plus inst +0x124 result scale code	^\s*iVar2\ =\ iVar2\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x124\);$	+2
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	iVar2	scaleExponent	INFERRED	outputScaleExponent plus inst +0x124 result scale code	^\s*\(\(int\ \(\*\)\(\)\)FUN_0017e02c\)\(param_1,iVar4,iVar2\);$	+1
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	iVar3	scaleAccepted	INFERRED	hardware-limit predicate (vtable +0xfc) accepted the exponent	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0xfc\)\)\(a0,iVar2,\*\(int\ \*\)\(param_1\ \+\ 0xb0\),in_r6,in_r7,in_r8,a0\);$	+2
+use	ValueKey__foldMulPowerOfTwoIntoOutputScale	iVar3	operandBase	INFERRED	address of the operand slot (inst + index*0x18 + 0x80)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar4\ \*\ 0x18\ \+\ 0x80;$	+2
+use	ValueKey__foldMinMaxOfNegatedPair	iVar3	laneWordPtr	INFERRED	walks ctx + lane*4 (value-number words)	^\s*iVar3\ =\ param_1;$	+1
+use	ValueKey__foldMinMaxOfNegatedPair	iVar3	laneWordPtr	INFERRED	walks ctx + lane*4 (value-number words)	^\s*if\ \(\-1\ <\ \*\(int\ \*\)\(iVar3\ \+\ 0x178\)\)\ \{$	+1
+use	ValueKey__foldMinMaxOfNegatedPair	iVar3	laneWordPtr	INFERRED	walks ctx + lane*4 (value-number words)	^\s*puVar4\ =\ \(uint\ \*\)FUN_00173360\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),\*\(int\ \*\)\(iVar3\ \+\ 0x178\)\);$	+1
+use	ValueKey__foldMinMaxOfNegatedPair	iVar3	laneWordPtr	INFERRED	walks ctx + lane*4 (value-number words)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	ValueKey__foldMinMaxOfNegatedPair	iVar3	hwPredicateResult	INFERRED	compiler hardware-limits vtable +0x88 predicate	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0\);$	+2
+use	ValueKey__foldDot3SingleLaneSource	iVar3	operandRowOffset	INFERRED	operand index * 4 added to the triple's lane indices	^\s*iVar3\ =\ iVar7\ \*\ 4;$	+1
+use	ValueKey__foldDot3SingleLaneSource	iVar3	operandRowOffset	INFERRED	operand index * 4 added to the triple's lane indices	^\s*if\ \(\(iVar2\ ==\ \*\(int\ \*\)\(\(iVar3\ \+\ \*piVar9\)\ \*\ 4\ \+\ param_1\ \+\ 0x168\)\)\ \&\&$	+4

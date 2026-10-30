@@ -512,14 +512,14 @@ int ImmedConstBuffer__dtor(this)
 int LoopIndexedConstSet__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90ec;
+  baseVtableBase1 = PTR_DAT_001e90ec;
   *this = PTR_DAT_001e90e4 + 8;
-  puVar2 = PTR_DAT_001e90f0;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90f0;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -527,14 +527,14 @@ int LoopIndexedConstSet__dtor(this)
 int LoopIndexedConstSet__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90ec;
+  baseVtableBase1 = PTR_DAT_001e90ec;
   *this = PTR_DAT_001e90e4 + 8;
-  puVar2 = PTR_DAT_001e90f0;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90f0;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -545,14 +545,14 @@ int LoopIndexedConstSet__deleting_dtor(this)
 int LoopIndexedInputSet__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90ec;
+  baseVtableBase1 = PTR_DAT_001e90ec;
   *this = PTR_DAT_001e90d4 + 8;
-  puVar2 = PTR_DAT_001e90f0;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90f0;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -560,14 +560,14 @@ int LoopIndexedInputSet__dtor(this)
 int LoopIndexedInputSet__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90ec;
+  baseVtableBase1 = PTR_DAT_001e90ec;
   *this = PTR_DAT_001e90d4 + 8;
-  puVar2 = PTR_DAT_001e90f0;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90f0;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -578,14 +578,14 @@ int LoopIndexedInputSet__deleting_dtor(this)
 int LoopIndexedOutputSet__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90ec;
+  baseVtableBase1 = PTR_DAT_001e90ec;
   *this = PTR_DAT_001e90dc + 8;
-  puVar2 = PTR_DAT_001e90f0;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90f0;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   return;
 }
 
@@ -593,14 +593,14 @@ int LoopIndexedOutputSet__dtor(this)
 int LoopIndexedOutputSet__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar1 = PTR_DAT_001e90ec;
+  baseVtableBase1 = PTR_DAT_001e90ec;
   *this = PTR_DAT_001e90dc + 8;
-  puVar2 = PTR_DAT_001e90f0;
-  *this = puVar1 + 8;
-  *this = puVar2 + 8;
+  baseVtableBase2 = PTR_DAT_001e90f0;
+  *this = baseVtableBase1 + 8;
+  *this = baseVtableBase2 + 8;
   if (this == (undefined4 *)0x0) {
     return;
   }

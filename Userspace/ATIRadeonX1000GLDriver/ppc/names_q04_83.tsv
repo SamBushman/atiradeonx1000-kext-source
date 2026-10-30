@@ -1,0 +1,290 @@
+use	FUN_000ac720	uVar18	extraFlagBits	INFERRED	0x100 for formats 0x21-0x3f in the mask 0x8fffffff or destination kind 0x18, ORed into the last operand token	^\s*uVar18\ =\ 0;$	+1
+use	FUN_000ac720	uVar18	extraFlagBits	INFERRED	0x100 for formats 0x21-0x3f in the mask 0x8fffffff or destination kind 0x18, ORed into the last operand token	^\s*uVar18\ =\ 0x100;$	+1
+use	FUN_000ac720	uVar18	extraFlagBits	INFERRED	0x100 for formats 0x21-0x3f in the mask 0x8fffffff or destination kind 0x18, ORed into the last operand token	^\s*uVar18\ =\ 0x100;$@2	+1
+use	FUN_000ac720	uVar18	extraFlagBits	INFERRED	0x100 for formats 0x21-0x3f in the mask 0x8fffffff or destination kind 0x18, ORed into the last operand token	^\s*uVar19\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ param_6\ \&\ 1\ \|\ uVar18;$	+1
+use	FUN_000ac720	uVar18	extraFlagBits	INFERRED	0x100 for formats 0x21-0x3f in the mask 0x8fffffff or destination kind 0x18, ORed into the last operand token	^\s*uVar19\ =\ uVar12\ \|\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar18;$	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*uVar18\ =\ \*param_3\ \+\ 1;$	+3
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*uVar18\ =\ \*param_3;$@3	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar16;$	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*uVar18\ =\ \*param_3\ \+\ 1;$@2	+2
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar18\)\ \{$@3	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*uVar18\ =\ \*param_3;$@4	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar19;$	+3
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar18\)\ \{$@4	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*uVar18\ =\ \*param_3;$@5	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*\*\(undefined4\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar13;$@2	+3
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar18\)\ \{$@5	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*uVar18\ =\ \*param_3;$@6	+1
+use	FUN_000ac720	uVar18	tokenCountC	INFERRED	token count after an append	^\s*\*\(undefined4\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar13;$@3	+3
+use	FUN_000ac720	uVar11	operandRegBase	INFERRED	max register + 2 & 0xffff used as the destination register base	^\s*uVar11\ =\ uVar8\ \&\ 0xffff;$	+1
+use	FUN_000ac720	uVar11	operandRegBase	INFERRED	max register + 2 & 0xffff used as the destination register base	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x40000;$	+1
+use	FUN_000ac720	uVar11	operandRegBase	INFERRED	max register + 2 & 0xffff used as the destination register base	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x440000;$	+1
+use	FUN_000ac720	uVar11	operandRegBase	INFERRED	max register + 2 & 0xffff used as the destination register base	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x40000;$	+1
+use	FUN_000ac720	uVar11	operandRegBase	INFERRED	max register + 2 & 0xffff used as the destination register base	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x40000;$@2	+1
+use	FUN_000ac720	uVar11	operandRegBase	INFERRED	max register + 2 & 0xffff used as the destination register base	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x440000;$@2	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3\ \+\ 1;$	+3
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3;$	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*\*\(undefined\ \*\*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =\ \(\(unsigned\ char\ \*\)0x00004444\);$	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3\ \+\ 1;$@2	+2
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar11\)\ \{$@3	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3;$@4	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =\ iVar15\ \+\ 1U\ \&\ 0xffff\ \|\ 0x40000;$	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3\ \+\ 1;$@3	+3
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3;$@5	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar6;$	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3\ \+\ 1;$@4	+2
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar11\)\ \{$@5	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*uVar11\ =\ \*param_3;$@6	+1
+use	FUN_000ac720	uVar11	tokenCountD	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar8;$	+1
+use	FUN_000ac720	uVar10	tokenCountE	INFERRED	token count after an append	^\s*uVar10\ =\ \*param_3\ \+\ 1;$	+3
+use	FUN_000ac720	uVar10	tokenCountE	INFERRED	token count after an append	^\s*uVar10\ =\ \*param_3;$@3	+1
+use	FUN_000ac720	uVar10	tokenCountE	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x40000;$	+1
+use	FUN_000ac720	uVar10	tokenCountE	INFERRED	token count after an append	^\s*uVar10\ =\ \*param_3\ \+\ 1;$@2	+3
+use	FUN_000ac720	uVar10	tokenCountE	INFERRED	token count after an append	^\s*uVar10\ =\ \*param_3;$@4	+1
+use	FUN_000ac720	uVar10	tokenCountE	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ param_3\[2\]\)\ =\ \(uVar9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ uVar6\ \&\ 0xffff\ \|\ 0x400000;$	+1
+use	FUN_000ac720	uVar6	src0Reg	INFERRED	register word *param_7 of the first source operand	^\s*uVar6\ =\ \*param_7;$	+1
+use	FUN_000ac720	uVar6	src0Reg	INFERRED	register word *param_7 of the first source operand	^\s*\*\(uint\ \*\)\(uVar10\ \*\ 4\ \+\ param_3\[2\]\)\ =\ \(uVar9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ uVar6\ \&\ 0xffff\ \|\ 0x400000;$	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3\ \+\ 1;$	+3
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3;$	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar7;$	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3\ \+\ 1;$@2	+3
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3;$@2	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*\*\(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ 0x2000d;$	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3\ \+\ 1;$@3	+3
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3;$@3	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x440000;$	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3\ \+\ 1;$@4	+3
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3;$@4	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*\*\(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ 4;$	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3\ \+\ 1;$@5	+3
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3;$@5	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x40000;$	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3\ \+\ 1;$@6	+3
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3;$@6	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x40000;$@2	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3\ \+\ 1;$@7	+3
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*uVar6\ =\ \*param_3;$@7	+1
+use	FUN_000ac720	uVar6	tokenCountF	INFERRED	token count after an append	^\s*\*\(uint\ \*\)\(uVar6\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x440000;$@2	+1
+use	FUN_000ac720	uVar6	swizzleTokenCopy	INFERRED	copy of the opcode token (local_88) used for the last token	^\s*uVar6\ =\ local_88;$	+1
+use	FUN_000ac720	uVar6	swizzleTokenCopy	INFERRED	copy of the opcode token (local_88) used for the last token	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar6;$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@2	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 4;$@2	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@3	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@2	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@2	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@2	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@2	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*local_7c\[1\]\ =\ iVar15\ <<\ 4\ \|\ local_7c\[1\];$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@4	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@3	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@3	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@3	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 4;$@3	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@3	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@5	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@4	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@4	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@4	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@4	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*local_7c\[1\]\ =\ iVar15\ <<\ 8\ \|\ local_7c\[1\];$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@6	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@5	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@5	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@5	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 4;$@4	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@5	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@7	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@6	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@6	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@6	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@6	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*local_7c\[1\]\ =\ iVar15\ <<\ 0xc\ \|\ local_7c\[1\];$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@8	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@7	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@7	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@7	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 4;$@6	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@7	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@9	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@8	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@8	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@8	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@8	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*local_7c\[0\]\ =\ iVar15\ <<\ 4\ \|\ local_7c\[0\];$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@10	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@9	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@9	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@9	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 4;$@7	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@9	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@11	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@10	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@10	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@10	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@10	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*local_7c\[0\]\ =\ iVar15\ <<\ 8\ \|\ local_7c\[0\];$	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@12	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@11	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@11	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@11	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 4;$@8	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@11	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 0;$@13	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 1;$@12	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 2;$@12	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 3;$@12	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*iVar15\ =\ 5;$@12	+1
+use	FUN_000ac720	iVar15	swizzleCodeB	INFERRED	3-bit component select decoded from the swizzle code (second pass)	^\s*local_7c\[0\]\ =\ iVar15\ <<\ 0xc\ \|\ local_7c\[0\];$	+1
+use	FUN_000ac720	iVar15	swizzleTokenCount	INFERRED	number of swizzle tokens following the operands	^\s*iVar15\ =\ iVar14;$	+1
+use	FUN_000ac720	iVar15	swizzleTokenCount	INFERRED	number of swizzle tokens following the operands	^\s*iVar15\ =\ iVar15\ \+\ \-1;$@3	+2
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@3	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 4;$@2	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@2	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@4	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@2	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@2	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@2	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*local_7c\[2\]\ =\ iVar14\ <<\ 4\ \|\ local_7c\[2\];$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@3	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@5	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@3	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@3	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 4;$@3	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@3	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@4	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@6	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@4	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@4	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@4	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*local_7c\[2\]\ =\ iVar14\ <<\ 8\ \|\ local_7c\[2\];$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@5	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@7	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@5	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@5	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 4;$@4	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@5	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@6	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@8	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@6	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@6	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@6	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*local_7c\[2\]\ =\ iVar14\ <<\ 0xc\ \|\ local_7c\[2\];$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@8	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@9	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@8	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@7	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 4;$@6	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@7	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@9	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@10	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@9	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@8	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@8	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*uVar7\ =\ iVar14\ <<\ 4\ \|\ uVar7;$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@10	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@11	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@10	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@9	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 4;$@7	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@9	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@11	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@12	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@11	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@10	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@10	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*uVar7\ =\ iVar14\ <<\ 8\ \|\ uVar7;$	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@12	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@13	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@12	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@11	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 4;$@8	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@11	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 0;$@13	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 1;$@14	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 2;$@13	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 3;$@12	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*iVar14\ =\ 5;$@12	+1
+use	FUN_000ac720	iVar14	swizzleCodeA	INFERRED	3-bit component select decoded from the swizzle code (first pass)	^\s*uVar7\ =\ iVar14\ <<\ 0xc\ \|\ uVar7;$	+1
+local	FUN_000ac720	bVar1	negateBit	INFERRED	true for swizzle codes 6-10: the component is negated
+local	FUN_000ac720	uVar2	writeMaskBit1Packed	INFERRED	(writeMask bit 1) << 2
+local	FUN_000ac720	uVar3	writeMaskBit2Packed	INFERRED	(writeMask bit 2) << 4
+local	FUN_000ac720	uVar4	writeMaskBit3Packed	INFERRED	(writeMask bit 3) << 6
+local	FUN_000ac720	uVar12	writeMaskBit2	INFERRED	writeMask bit 2
+use	FUN_000ac720	uVar19	writeMaskPacked	INFERRED	write mask repacked to one bit per nibble | extraFlagBits	^\s*uVar19\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ param_6\ \&\ 1\ \|\ uVar18;$	+1
+use	FUN_000ac720	uVar19	writeMaskPacked	INFERRED	write mask repacked to one bit per nibble | extraFlagBits	^\s*uVar19\ =\ uVar12\ \|\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar18;$	+1
+use	FUN_000ac720	uVar19	writeMaskPacked	INFERRED	write mask repacked to one bit per nibble | extraFlagBits	^\s*\*\(uint\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar19;$	+1
+use	FUN_000ac720	uVar19	tokenWordCopy	INFERRED	token word read from the local operand list	^\s*uVar19\ =\ local_7c\[iVar20\];$	+2
+local	FUN_000ac720	uVar5	packedSwizzle	INFERRED	swizzle selects packed in nibbles of one operand group
+local	FUN_000ac720	uVar7	swizzleAccum	INFERRED	accumulator of swizzle components for the current group
+use	FUN_000ac720	uVar8	maxRegisterPlus2	INFERRED	program record max register + 2	^\s*uVar8\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x88\)\ \+\ 2;$	+2
+use	FUN_000ac720	uVar8	maxRegisterPlus2	INFERRED	program record max register + 2	^\s*local_88\ =\ CONCAT22\(\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_88\)\ \+\ 0\)\),\(short\)uVar8\);$	+1
+use	FUN_000ac720	uVar8	swizzleWord1	INFERRED	first swizzle token word (local_7c[0]) of the last group	^\s*uVar8\ =\ local_7c\[0\];$	+1
+use	FUN_000ac720	uVar8	swizzleWord1	INFERRED	first swizzle token word (local_7c[0]) of the last group	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar8;$	+1
+local	FUN_000ac720	uVar9	src0Kind	INFERRED	kind field of the first source operand
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 1;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 3;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x5000d;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x12;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x22;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x23;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x23;$@2	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x24;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x2d;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x30;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x31;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x3c;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x39;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x3f;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x40;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x41;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x44;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x47;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x49;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x4e;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x51;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x55;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x59;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x20056;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x58;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x50056;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x5b;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*uVar13\ =\ 0x13;$	+1
+use	FUN_000ac720	uVar13	staleArgR8	INFERRED	zero kept in r8 as a stale argument	^\s*\*\(undefined4\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar13;$	+1
+use	FUN_000ac720	uVar13	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar20\ \+\ \(int\)\&local_88\);$	+1
+use	FUN_000ac720	uVar13	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*\*\(undefined4\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar13;$@2	+1
+use	FUN_000ac720	uVar13	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(\(int\)local_7c\ \+\ iVar20\);$	+1
+use	FUN_000ac720	uVar13	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*\*\(undefined4\ \*\)\(uVar18\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar13;$@3	+1
+local	FUN_000ac720	uVar16	destOperandWord	INFERRED	destination operand token: kind (bits 16-21), register, | 0x400000
+local	FUN_000ac720	local_84	operandToken1	INFERRED	second operand token assembled on the stack
+local	FUN_000ac720	local_80	operandToken2	INFERRED	third operand token assembled on the stack
+local	FUN_000ac720	local_7c	swizzleTokens	INFERRED	stack words after the operand tokens: swizzle tokens and the swizzle select codes
+local	FUN_000ac720	local_58	stackArgCtx	INFERRED	copy of param_2 kept in a stack slot
+local	FUN_000ac720	local_54	stackArgPrecision	INFERRED	copy of param_25 kept in a stack slot
+local	FUN_000ac720	param_25	precisionMode	INFERRED	precision selector, copied to the stack
+local	FUN_000ac720	param_24	src2Swizzle0	INFERRED	swizzle select code 0 of the third source group
+local	FUN_000ac720	param_23	src2Swizzle1	INFERRED	swizzle select code 1 of the third source group
+local	FUN_000ac720	param_22	src2Swizzle2	INFERRED	swizzle select code 2 of the third source group
+local	FUN_000ac720	param_21	src2Swizzle3	INFERRED	swizzle select code 3 of the third source group
+local	FUN_000ac720	param_20	src1Swizzle0	INFERRED	swizzle select code 0 of the second source group
+local	FUN_000ac720	param_19	src1Swizzle1	INFERRED	swizzle select code 1 of the second source group
+local	FUN_000ac720	param_18	src1Swizzle2	INFERRED	swizzle select code 2 of the second source group
+local	FUN_000ac720	param_17	src1Swizzle3	INFERRED	swizzle select code 3 of the second source group
+local	FUN_000ac720	param_16	src0Swizzle0	INFERRED	swizzle select code 0 of the first source group
+local	FUN_000ac720	param_15	src0Swizzle1	INFERRED	swizzle select code 1 of the first source group
+local	FUN_000ac720	param_14	src0Swizzle2	INFERRED	swizzle select code 2 of the first source group
+local	FUN_000ac720	param_13	src0Swizzle3	INFERRED	swizzle select code 3 of the first source group
+local	FUN_000ac720	param_12	src2Invert	INFERRED	nonzero inverts the negate bits of the third source group
+local	FUN_000ac720	param_11	src1Invert	INFERRED	nonzero inverts the negate bits of the second source group
+local	FUN_000ac720	param_10	src0Invert	INFERRED	nonzero inverts the negate bits of the first source group
+local	FUN_000ac720	param_8	src1Operand	INFERRED	second source operand {register, kind}
+local	FUN_000ac720	param_7	src0Operand	INFERRED	first source operand {register, kind}
+func	FUN_000ac720	gld_emitFormatConvertTokens	INFERRED	like gld_emitInstructionTokens for the format-conversion instructions: a switch over the format code (0-0x40) selecting the operand layouts, up to three source groups with four swizzle selects each, appended to the token vector

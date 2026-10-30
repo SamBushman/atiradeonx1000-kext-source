@@ -1,0 +1,13 @@
+local	FUN_000a9ac0	local_64	stackWord64	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_60	stackWord60	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_5c	stackWord5c	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_58	stackWord58	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_54	stackWord54	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_50	stackWord50	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_4c	stackWord4c	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_48	stackWord48	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_44	stackWord44	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_40	stackFloat40	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_3c	stackWord3c	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_38	stackWord38	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name
+local	FUN_000a9ac0	local_34	stackWord34	INFERRED	stack slot read by the 4x4 identity-matrix comparison (words compared with 0 / 1.0f); its value comes from the caller frame, offset in the name

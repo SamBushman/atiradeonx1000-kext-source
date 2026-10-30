@@ -246,6 +246,8 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             at = di + 1
             if os.environ.get('USE_DECL', 'first') == 'first':     # frame offsets count from the bottom: declarations placed first sit at the top and move nothing else
                 at = d0
+            elif os.environ.get('USE_DECL', 'first') == 'before':    # directly before old's declaration: old (typically the lowest slot, anchor of folded address arithmetic) keeps its slot
+                at = di
             elif os.environ.get('USE_DECL', 'first') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
                 at = max(i for i in range(d0, d1) if re.match(DECL2, lines[i])) + 1
             lines.insert(at, '%s%s%s;' % (m.group(1), re.sub(r'(\*) $', r'\1', m.group(2)), new)); e += 1     # `T * x;` -> `T *x;`: the first form is not a declaration for declblock(), so inserting it at the top would shift every #N anchor of the function

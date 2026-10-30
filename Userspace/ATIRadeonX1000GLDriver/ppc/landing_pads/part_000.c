@@ -170,7 +170,7 @@ int eh_pad_e3948(param_1)
 {
   undefined4 unaff_r26;
   
-  FUN_000e3308(unaff_r26);
+  EncoderState__destroy_e3308(unaff_r26);
                     
   __Unwind_Resume(param_1);
 }

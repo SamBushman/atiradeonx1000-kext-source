@@ -1,0 +1,21 @@
+local	R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers	iVar3	recordPtr	INFERRED	current 0x48-byte record: this+0xa8 table + this+0x60 index * 0x48
+local	ValueKey__setLiteralVec4Operand	param_2	vec4Constant	INFERRED	4-float constant for the literal operand
+local	ValueKey__setLiteralVec4Operand	uVar4	dummySelectWord	INFERRED	DAT_001b01d8 select word stored in the operand record / inst +0x9c before the literal is built
+local	ValueKey__setLiteralVec4Operand	puVar6	newValueKey	INFERRED	arena-allocated (0x240 bytes) ValueKey for the literal's defining instruction
+local	FudoPs__vslot29_convertInnerIfsToPredicates	piVar2	block	INFERRED	block in the program's block list (program+900 first, linked through +8)
+use	FudoPs__vslot29_convertInnerIfsToPredicates	iVar1	nextLink	INFERRED	block +8 link: loop continues while non-zero	^\s*iVar1\ =\ piVar2\[2\];$	+2
+use	FudoPs__vslot29_convertInnerIfsToPredicates	iVar1	nextLink	INFERRED	block +8 link: loop continues while non-zero	^\s*iVar1\ =\ piVar2\[2\];$@2	+1
+use	FudoPs__vslot29_convertInnerIfsToPredicates	iVar1	isInnerIf	INFERRED	block vtable +0x24 predicate: inner if block converted to predicates	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x24\)\)\(piVar2\);$	+2
+local	KhanPs__vslot65_isEncodableSourceSwizzle	param_2	unusedArg2	INFERRED	unused argument
+local	KhanPs__vslot65_isEncodableSourceSwizzle	param_3	unusedArg3	INFERRED	unused argument
+local	KhanPs__vslot65_isEncodableSourceSwizzle	param_4	swizzlePtr	INFERRED	pointer to the source select word (0x10304 is special-cased)
+local	KhanPs__vslot65_isEncodableSourceSwizzle	param_5	sourceInst	INFERRED	producer of the source (vtable +0x4c predicate)
+local	KhanPs__vslot65_isEncodableSourceSwizzle	iVar1	predicate4c	INFERRED	source instruction vtable +0x4c predicate
+local	R520MachineAssembler__vslot66_selectBitsForLiteralLanes	bVar1	notLastGroup	INFERRED	bit shift != 6 loop continue flag (groups of 3 bits)
+local	R520MachineAssembler__vslot66_selectBitsForLiteralLanes	bVar2	laneSelector	INFERRED	lane selector byte (< 4 = a real lane)
+local	R520MachineAssembler__vslot66_selectBitsForLiteralLanes	uVar4	sourceComponent	INFERRED	component index read from the operand record
+local	R520MachineAssembler__vslot66_selectBitsForLiteralLanes	uVar9	bitShift	INFERRED	bit offset of the 3-bit field in the packed word (0, 3, 6)
+local	FUN_0017a748	bVar1	notLastLane	INFERRED	lane != 3 loop continue flag
+local	FUN_0017a748	uVar2	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	FUN_0017a748	uVar6	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	FUN_0017a748	local_38	replacementVec4	INFERRED	vec4 built lane by lane and passed to FUN_0017a294 (address-taken array, whole variable)

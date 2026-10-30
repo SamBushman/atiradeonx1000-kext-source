@@ -1,0 +1,47 @@
+use	FUN_000bda40	uVar14	unitEnableBits	INFERRED	ctx+0x44+4*unit word & 0x1f, or the enabled-unit mask bit when ctx+0x44 bit 17 is set: nonzero (sign test of -x) means the unit is active	^\s*uVar14\ =\ \*\(uint\ \*\)\(iVar16\ \+\ 4\)\ \&\ 0x1f;$	+1
+use	FUN_000bda40	uVar14	unitEnableBits	INFERRED	ctx+0x44+4*unit word & 0x1f, or the enabled-unit mask bit when ctx+0x44 bit 17 is set: nonzero (sign test of -x) means the unit is active	^\s*uVar14\ =\ uVar21\ \&\ 1\ <<\ \(uVar9\ \&\ 0x3f\);$	+1
+use	FUN_000bda40	uVar14	unitEnableBits	INFERRED	ctx+0x44+4*unit word & 0x1f, or the enabled-unit mask bit when ctx+0x44 bit 17 is set: nonzero (sign test of -x) means the unit is active	^\s*if\ \(\(int\)\-uVar14\ <\ 0\)\ \{$	+1
+use	FUN_000bda40	uVar14	texCombineStateWord	INFERRED	accumulates the ctx+0x8c combiner state bits (0x1a-0x1b, 0x19, 0x18, 0x17) built for the active unit; also holds the per-slot enable bit before it is overwritten	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+1
+use	FUN_000bda40	uVar14	texCombineStateWord	INFERRED	accumulates the ctx+0x8c combiner state bits (0x1a-0x1b, 0x19, 0x18, 0x17) built for the active unit; also holds the per-slot enable bit before it is overwritten	^\s*uVar14\ =\ uVar6\ >>\ 5\ \&\ 1;$	+1
+use	FUN_000bda40	uVar14	texCombineStateWord	INFERRED	accumulates the ctx+0x8c combiner state bits (0x1a-0x1b, 0x19, 0x18, 0x17) built for the active unit; also holds the per-slot enable bit before it is overwritten	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+1
+use	FUN_000bda40	uVar14	texCombineStateWord	INFERRED	accumulates the ctx+0x8c combiner state bits (0x1a-0x1b, 0x19, 0x18, 0x17) built for the active unit; also holds the per-slot enable bit before it is overwritten	^\s*uVar14\ =\ \(\(uVar11\ \&\ 0x2000000\)\ >>\ 0x19\ \|$	+5
+use	FUN_000bda40	uVar14	texCombineStateWord	INFERRED	accumulates the ctx+0x8c combiner state bits (0x1a-0x1b, 0x19, 0x18, 0x17) built for the active unit; also holds the per-slot enable bit before it is overwritten	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x8c\)\ =\ uVar14;$	+1
+use	FUN_000bda40	uVar14	texCombineStateWord	INFERRED	accumulates the ctx+0x8c combiner state bits (0x1a-0x1b, 0x19, 0x18, 0x17) built for the active unit; also holds the per-slot enable bit before it is overwritten	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x8c\)\ =\ uVar14\ \|\ 0x800000;$	+1
+use	FUN_000bda40	uVar14	texCombineStateWord	INFERRED	accumulates the ctx+0x8c combiner state bits (0x1a-0x1b, 0x19, 0x18, 0x17) built for the active unit; also holds the per-slot enable bit before it is overwritten	^\s*\(uint\)\(0\ <\ \(int\)uVar9\)\ <<\ 0x18\ \|\ uVar14\ \&\ 0xfeffffff\ \|\ 0x800000;$	+1
+use	FUN_000bda40	bVar1	enabledUnitMask	INFERRED	per-unit enable byte selected by ctx+0x44 bit 13 (+0x11d3 or +0x1135), also stored at ctx+0x1878	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x00001135\)\[param_1\];$	+1
+use	FUN_000bda40	bVar1	enabledUnitMask	INFERRED	per-unit enable byte selected by ctx+0x44 bit 13 (+0x11d3 or +0x1135), also stored at ctx+0x1878	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x000011d3\)\[param_1\];$	+1
+use	FUN_000bda40	bVar1	enabledUnitMask	INFERRED	per-unit enable byte selected by ctx+0x44 bit 13 (+0x11d3 or +0x1135), also stored at ctx+0x1878	^\s*uVar21\ =\ \(uint\)bVar1;$	+2
+local	FUN_000bda40	uVar2	oldUnitFlags	INFERRED	previous 16-bit unit flags at ctx+unit*2+0x187c
+local	FUN_000bda40	sVar3	envSlot1Code	INFERRED	16-bit code at unit env block +0x60 (second of four per-unit slots, stride 0x24)
+local	FUN_000bda40	uVar4	slotUses2402	INFERRED	1 when slot 0 or slot 1 code equals 0x2402
+local	FUN_000bda40	bVar5	unitDisabledByte	INFERRED	true when the byte at ctx+0x2784+unit is zero; stored at ctx+0x150 and bit 14 of the unit flags
+local	FUN_000bda40	uVar6	slotEnableBits	INFERRED	unit word & 0x1e0: enable bits of the four combiner slots (bits 5..8)
+local	FUN_000bda40	uVar7	disabledBit14	INFERRED	disabled flag shifted to bit 14 of the unit flags
+local	FUN_000bda40	iVar8	ctxUnitCursor	INFERRED	glContext advanced 4 per unit (ctx+0x150 + 4*unit)
+use	FUN_000bda40	iVar10	unitEnvBlock	INFERRED	glContext + 0x450 + unit*0xcc: per-unit environment block	^\s*iVar10\ =\ param_1\ \+\ 0x450\ \+\ uVar9\ \*\ 0xcc;$	+1
+use	FUN_000bda40	iVar10	unitEnvBlock	INFERRED	glContext + 0x450 + unit*0xcc: per-unit environment block	^\s*sVar3\ =\ \*\(short\ \*\)\(iVar10\ \+\ 0x60\);$	+1
+use	FUN_000bda40	iVar10	unitEnvBlock	INFERRED	glContext + 0x450 + unit*0xcc: per-unit environment block	^\s*if\ \(\(uVar19\ ==\ 0\)\ \|\|\ \(uVar17\ =\ 1,\ 1\ <\ \(ushort\)\(\*\(short\ \*\)\(iVar10\ \+\ 0x84\)\ \+\ 0x7aefU\)\)\)\ \{$	+1
+use	FUN_000bda40	iVar10	unitEnvBlock	INFERRED	glContext + 0x450 + unit*0xcc: per-unit environment block	^\s*uVar17\ =\ \(\(\(ushort\)\(\*\(short\ \*\)\(iVar10\ \+\ 0x3c\)\ \+\ 0x7aefU\)\ <\ 2\ \|\|\ sVar3\ ==\ \-0x7aee\)\ \|\|$	+3
+use	FUN_000bda40	iVar10	unitEnvBlock	INFERRED	glContext + 0x450 + unit*0xcc: per-unit environment block	^\s*uVar14\ =\ \(\(uVar11\ \&\ 0x2000000\)\ >>\ 0x19\ \|$	+5
+use	FUN_000bda40	iVar10	activeListOffset	INFERRED	index * 4 into the active-unit list at ctx+0x98	^\s*iVar10\ =\ iVar18\ \*\ 4;$	+1
+use	FUN_000bda40	iVar10	activeListOffset	INFERRED	index * 4 into the active-unit list at ctx+0x98	^\s*\*\(uint\ \*\)\(iVar10\ \+\ param_1\ \+\ 0x98\)\ =\ uVar9;$	+1
+use	FUN_000bda40	iVar10	unitFlagsAddrInactive	INFERRED	glContext + unit*2 for inactive units	^\s*iVar10\ =\ uVar9\ \*\ 2\ \+\ param_1;$	+2
+use	FUN_000bda40	uVar12	slotCodeBits	INFERRED	3-bit codes looked up from DAT_001dbf70 for each enabled slot, packed at bits 0, 3, 6, 9	^\s*uVar12\ =\ 0;$	+1
+use	FUN_000bda40	uVar12	slotCodeBits	INFERRED	3-bit codes looked up from DAT_001dbf70 for each enabled slot, packed at bits 0, 3, 6, 9	^\s*uVar12\ =\ \*\(uint\ \*\)\(\&DAT_001dbf70\ \+$	+3
+use	FUN_000bda40	uVar12	slotCodeBits	INFERRED	3-bit codes looked up from DAT_001dbf70 for each enabled slot, packed at bits 0, 3, 6, 9	^\s*uVar12\ =\ uVar12\ \|\ \*\(int\ \*\)\(\&DAT_001dbf70\ \+$	+3
+use	FUN_000bda40	uVar12	slotCodeBits	INFERRED	3-bit codes looked up from DAT_001dbf70 for each enabled slot, packed at bits 0, 3, 6, 9	^\s*uVar12\ =\ uVar12\ \|\ \*\(int\ \*\)\(\&DAT_001dbf70\ \+$@2	+3
+use	FUN_000bda40	uVar12	slotCodeBits	INFERRED	3-bit codes looked up from DAT_001dbf70 for each enabled slot, packed at bits 0, 3, 6, 9	^\s*uVar12\ =\ uVar12\ \|\ \*\(int\ \*\)\(\&DAT_001dbf70\ \+$@3	+3
+use	FUN_000bda40	uVar12	slotCodeBits	INFERRED	3-bit codes looked up from DAT_001dbf70 for each enabled slot, packed at bits 0, 3, 6, 9	^\s*\*\(ushort\ \*\)\(iVar15\ \+\ 0x187c\)\ \&\ 0xc003\ \|\ \(ushort\)\(uVar12\ <<\ 2\)\ \&\ 0x3ffc;$	+1
+use	FUN_000bda40	uVar12	combineBits26	INFERRED	bit 26 of the combiner word: slot uses 0x2402 or previous bit	^\s*uVar12\ =\ \(uVar4\ \|\ \(uVar11\ \&\ 0xf7ffffff\)\ >>\ 0x1a\ \&\ 1\)\ <<\ 0x1a;$	+2
+use	FUN_000bda40	uVar12	combineBits26	INFERRED	bit 26 of the combiner word: slot uses 0x2402 or previous bit	^\s*uVar12\ \|\ uVar17\ \|\ uVar11\ \&\ 0xf1ffffff;$	+1
+local	FUN_000bda40	uVar13	slotUsesSpecial	INFERRED	slot0/1 uses a special (0x2402 or -0x7aee/-0x7aef) source
+local	FUN_000bda40	iVar15	unitFlagsAddr	INFERRED	glContext + unit*2: 16-bit flags at +0x187c
+local	FUN_000bda40	iVar16	unitWordCursor	INFERRED	glContext + 0x44 advanced 4 per unit
+local	FUN_000bda40	uVar17	slotUsesSpecialSrc	INFERRED	flag for slot 2 source codes in the range 0x7aef.. and slot 1 codes -0x7aee/-0x7aef
+local	FUN_000bda40	uVar19	slot2Enabled	INFERRED	slot enable bit 7
+local	FUN_000bda40	uVar20	slot1Enabled	INFERRED	slot enable bit 6
+local	FUN_000bda40	uVar21	enabledUnitBits	INFERRED	copy of the enabled-unit mask (0 when ctx+0x44 bit 17 is clear)
+local	FUN_000bda40	iVar22	envBlockCursor	INFERRED	glContext advanced 0xcc per unit (stride of the per-unit environment blocks)
+local	FUN_000bda40	iVar23	unitByteCursor	INFERRED	glContext advanced 1 per unit (byte table at +0x2784)
+local	FUN_000bda40	uVar24	unitsToScan	INFERRED	min(unit count byte at +0x13b0, byte at ctx+0x2b)
+func	FUN_000bda40	gld_updateTexCombinerState	INFERRED	per active texture unit: derives the 16-bit unit flags (+0x187c), the slot-code bits from DAT_001dbf70, the combiner state bits of ctx+0x8c/+0x1874 and builds the active-unit list at ctx+0x98 (count at ctx+0x94)

@@ -1,0 +1,21 @@
+use	psnDecAllocateTempsAndCompact	uVar11	tempRegisterCount	INFERRED	psnState+0x30 temp register count (forced to 0x80 when the RS words are re-encoded); number of free temp ids pushed on the free stack	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x30\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar11	tempRegisterCount	INFERRED	psnState+0x30 temp register count (forced to 0x80 when the RS words are re-encoded); number of free temp ids pushed on the free stack	^\s*psVar21\ =\ \(short\ \*\)\(uVar24\ \+\ uVar11\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar11	tempRegisterCount	INFERRED	psnState+0x30 temp register count (forced to 0x80 when the RS words are re-encoded); number of free temp ids pushed on the free stack	^\s*uVar11\ =\ 0x80;$	+1
+use	psnDecAllocateTempsAndCompact	uVar11	tempRegisterCount	INFERRED	psnState+0x30 temp register count (forced to 0x80 when the RS words are re-encoded); number of free temp ids pushed on the free stack	^\s*if\ \(uVar11\ !=\ 0\)\ \{$	+2
+use	psnDecAllocateTempsAndCompact	uVar11	tempRegisterCount	INFERRED	psnState+0x30 temp register count (forced to 0x80 when the RS words are re-encoded); number of free temp ids pushed on the free stack	^\s*uVar11\ =\ uVar11\ \-\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	uVar11	tempRegisterCount	INFERRED	psnState+0x30 temp register count (forced to 0x80 when the RS words are re-encoded); number of free temp ids pushed on the free stack	^\s*\}\ while\ \(uVar11\ !=\ 0\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar7	staleArgR7	INFERRED	0xffffffff left in r7 while rewriting the address slots, forwarded to psnDecCanonicalizeEntry	^\s*uVar7\ =\ 0xffffffff;$	+1
+use	psnDecAllocateTempsAndCompact	uVar7	staleArgR7	INFERRED	0xffffffff left in r7 while rewriting the address slots, forwarded to psnDecCanonicalizeEntry	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(iVar25,extraout_r4,iVar4,iVar5,uVar7,iVar2,psVar12,iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar7	returnStatus	INFERRED	0 on success, 0x80000004 when no entry survives the compaction	^\s*uVar7\ =\ 0x80000004;$	+1
+use	psnDecAllocateTempsAndCompact	uVar7	returnStatus	INFERRED	0 on success, 0x80000004 when no entry survives the compaction	^\s*uVar7\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	uVar7	returnStatus	INFERRED	0 on success, 0x80000004 when no entry survives the compaction	^\s*return\ uVar7;$	+1
+use	psnDecAllocateTempsAndCompact	psVar12	targetInitCursor	INFERRED	cursor over the four render-target live records while they are initialised	^\s*psVar12\ =\ psVar21;$	+1
+use	psnDecAllocateTempsAndCompact	psVar12	targetInitCursor	INFERRED	cursor over the four render-target live records while they are initialised	^\s*\*psVar12\ =\ sVar13;$	+2
+use	psnDecAllocateTempsAndCompact	psVar12	targetInitCursor	INFERRED	cursor over the four render-target live records while they are initialised	^\s*psVar12\ =\ psVar12\ \+\ 2;$	+1
+use	psnDecAllocateTempsAndCompact	psVar12	usageWordCursor	INFERRED	cursor over the address-slot usage words of a group while remapping their temp ids	^\s*psVar12\ =\ \(short\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	psVar12	usageWordCursor	INFERRED	cursor over the address-slot usage words of a group while remapping their temp ids	^\s*if\ \(\*psVar12\ ==\ 0\ \&\&\ psVar12\[0x20\]\ ==\ 0\)\ \{$	+2
+use	psnDecAllocateTempsAndCompact	psVar12	usageWordCursor	INFERRED	cursor over the address-slot usage words of a group while remapping their temp ids	^\s*else\ if\ \(\(psVar12\[0x36\]\ \&\ 0x8000U\)\ ==\ 0\)\ \{$	+2
+use	psnDecAllocateTempsAndCompact	psVar12	usageWordCursor	INFERRED	cursor over the address-slot usage words of a group while remapping their temp ids	^\s*psVar12\ =\ psVar12\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	psVar12	usageWordCursor	INFERRED	cursor over the address-slot usage words of a group while remapping their temp ids	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(iVar25,extraout_r4,iVar4,iVar5,uVar7,iVar2,psVar12,iVar6\);$	+1
+local	psnDecAllocateTempsAndCompact	psStack_60	freeTempList	INFERRED	free temp id stack storage (targetLiveTable + 8): ids are popped from the top as new temps are needed
+local	psnDecAllocateTempsAndCompact	uStack_50	constOneBits	INFERRED	0x3f800000 (1.0f) kept in a stack slot for the multiply-by-one test

@@ -1462,7 +1462,7 @@ int gld_getProgramParameter(ctx, programObject, pname, params)
   _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
   if (((programObject != (int *)0x0) && (*programObject != 0)) && (*(int *)(*programObject + 4) != 0)) {
     gld_resolveBoundTextures(ctx,0xffff,pnameCopy,paramsCopy,staleArgR7,staleArgR8);
-    FUN_000a7ee0(ctx,0xffff);
+    gld_updateTextureUnitState(ctx,0xffff);
     ((int (*)())gld_bindProgramObject)(ctx,programObject);
     programHeader = (short *)*programObject;
     if (programHeader[1] == 0) {
@@ -4071,7 +4071,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
       scratchPtr13 = internalDrawStateSave;
       scratchInt9 = procHeight;
       scratchPtr14 = srcRowBytes;
-      FUN_000a6140(commandStream,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
+      gld_resetRasterStateForInternalDraw(commandStream,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
                    scratchPtr13);
       gldClearBoundSlot(commandStream,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
       *(uint *)(ctx + 0x216c) = *(uint *)(ctx + 0x216c) & 0xfffff800 | 0x80;
@@ -4263,7 +4263,7 @@ int gld_enterPointDrawState(ring, drawStateSave)
   undefined4 pointSizeWord;
   
   pointSizeWord = *(undefined4 *)(ring + 8);
-  FUN_000a6140(ring,(*(uint *)(ring + 0x1ab8) ^ 1) & 1,drawStateSave);
+  gld_resetRasterStateForInternalDraw(ring,(*(uint *)(ring + 0x1ab8) ^ 1) & 1,drawStateSave);
   gldClearBoundSlot(ring,*(uint *)(ring + 0x18a4) >> 6 & 0xffff);
   scratchUint3 = (**(code **)(ring + 0x2758))(ring,0x1f);
   *(undefined4 *)(0x00002748 + ring + 4) = scratchUint3;
@@ -5559,7 +5559,7 @@ int gld_forwardToStream(ctx, unusedArg2, passThroughArg3, passThroughArg4, passT
   undefined4 passThroughArg6;
   undefined4 passThroughArg7;
 {
-  return FUN_000a3be0(ctx + 0x240,passThroughArg3,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
+  return gld_setPrimitiveInputRegisters(ctx + 0x240,passThroughArg3,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
 }
 
 /* gldTrimVertexCountToPrimitive @ 0x2bea0 (116 bytes) */
@@ -5791,7 +5791,7 @@ LAB_0002c610:
       gldEmitTclModeRegs(stream);
     }
     if (*(char *)(engineObjects + 0x20) == '\0') {
-      FUN_000a7d10(stream);
+      gld_buildActiveUnitList(stream);
     }
     ffvpSelectLitProgramVariant(stream);
     gldClearHwTclFlag(stream);
@@ -6030,7 +6030,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(scratchInt8 + 0x1c) = 0;
   *(undefined4 *)(ctx + 0x1ec) = 0;
   *(undefined4 *)(ctx + 0x1f0) = 0;
-  FUN_000a7050(ctx);
+  gld_initContextDispatch(ctx);
   atifsInit(engineBase);
   staleFprArg1 = (double)extvsSelectHandlerTables(engineBase);
   *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
@@ -6103,7 +6103,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   initParam4 = DAT_001aa4f8;
   initParam2 = DAT_001aa4f0;
   initParam3 = DAT_001aa4f4;
-  ((void (*)())FUN_000a9ac0)(engineBase,&initParam0,scratchUint5,vectorConstTable,permuteIndex,DAT_001aa4f8,DAT_001aa4e8,DAT_001aa4f4,staleFprArg1,
+  ((void (*)())gld_validateDirtyState)(engineBase,&initParam0,scratchUint5,vectorConstTable,permuteIndex,DAT_001aa4f8,DAT_001aa4e8,DAT_001aa4f4,staleFprArg1,
                staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff78,staleStackArg_ffffff80,
                staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
   ((int (*)())gld_buildHardwareStateBuffer)(ctx);
@@ -6195,7 +6195,7 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
   }
 LAB_0002cce8:
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
-    staleFprArg1 = (double)FUN_000a3be0(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
+    staleFprArg1 = (double)gld_setPrimitiveInputRegisters(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
     ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit,staleFprArg1,staleFprArg2,

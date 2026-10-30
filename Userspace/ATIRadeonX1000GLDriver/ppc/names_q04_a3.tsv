@@ -1,0 +1,11 @@
+local	gld_compileILProgram	iVar2	tableByteOffset	INFERRED	index * 4 or * 0x10 into the slot / register tables
+local	gld_compileILProgram	piVar4	wordCursor	INFERRED	compileOutput / compileRecord advanced one word per entry while arrays are cleared
+local	gld_compileILProgram	piVar7	outputByteCursor	INFERRED	compileOutput advanced one byte per entry while the byte arrays are cleared
+local	gld_compileILProgram	piVar9	outputQuadCursor	INFERRED	compileOutput advanced 4 words per unit while the register order is initialised
+local	gld_compileILProgram	uVar6	scratchResult	INFERRED	allocation size of the hardware records, then the return value (0 success, 3..0xc mapped from the encoder status)
+local	gld_compileILProgram	uVar3	featureBits	INFERRED	ilSource[3] bits 2-3: feature selector stored at compileRecord[0x45]
+local	gld_compileILProgram	puVar5	programHeader	INFERRED	0x48000-byte program header buffer allocated for the compile
+local	gld_compileILProgram	bVar1	notLastUnit	INFERRED	loop continues while the unit index is not 2
+local	gld_compileILProgram	iVar10	regLoopValue	INFERRED	countdown or register index of the successive loops, finally the hardware output block pointer
+local	gld_compileILProgram	local_38	ilFlagBytes	INFERRED	8 flag bytes passed to FUN_000879f0 (zeroed by the loop)
+use	gld_compileILProgram	iVar8	loopCounter	INFERRED	loop counter / pointer base reused by the successive clearing loops and for the layout and encode results (multi-role: parameters of a long initialisation sequence)	*		all	none

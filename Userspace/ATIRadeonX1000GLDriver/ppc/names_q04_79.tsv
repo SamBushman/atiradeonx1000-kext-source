@@ -1,0 +1,2 @@
+local	FUN_000abd10	local_58	operandScratch0	INFERRED	first float of the 4-float vector passed by address to the callback at ctx+0x1280 (negated constant); plain token temporary in opcodes 0x5d/0x5e
+func	FUN_000abd10	gld_scanProgramTokens	INFERRED	copies a program token array into param_3 and walks it opcode by opcode: records the used outputs/inputs/constants in the program record at +0x74 (flags +0..+5, masks +0xc/+0x10, input kinds +0x14, register count +0x84) and sends literal constants through the callback at ctx+0x1280

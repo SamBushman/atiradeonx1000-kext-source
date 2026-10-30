@@ -1,0 +1,39 @@
+local	FUN_000b4cd0	iVar2	decodeStatus	INFERRED	result of FUN_000b4400: 0 decoded, 1 not decodable (return 0), other failure (return 1)
+local	FUN_000b4cd0	cVar1	outputEnabled	INFERRED	flag byte of one of the 8 decoded outputs
+use	FUN_000b4cd0	uVar3	inputKindCode	INFERRED	kind stored for an enabled input: 5 or 2 for kind 2, depending on the flag byte at +0x50	^\s*uVar3\ =\ 5;$	+1
+use	FUN_000b4cd0	uVar3	inputKindCode	INFERRED	kind stored for an enabled input: 5 or 2 for kind 2, depending on the flag byte at +0x50	^\s*uVar3\ =\ 2;$	+1
+use	FUN_000b4cd0	uVar3	inputKindCode	INFERRED	kind stored for an enabled input: 5 or 2 for kind 2, depending on the flag byte at +0x50	^\s*\*\(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x74\)\ \+\ 0x14\)\ =\ uVar3;$	+1
+use	FUN_000b4cd0	uVar3	resultCode	INFERRED	return value: 1 decoded or failed, 0 when FUN_000b4400 returned 1	^\s*uVar3\ =\ 1;$	+1
+use	FUN_000b4cd0	uVar3	resultCode	INFERRED	return value: 1 decoded or failed, 0 when FUN_000b4400 returned 1	^\s*uVar3\ =\ 0;$	+1
+use	FUN_000b4cd0	uVar3	resultCode	INFERRED	return value: 1 decoded or failed, 0 when FUN_000b4400 returned 1	^\s*uVar3\ =\ 1;$@2	+1
+use	FUN_000b4cd0	uVar3	resultCode	INFERRED	return value: 1 decoded or failed, 0 when FUN_000b4400 returned 1	^\s*return\ uVar3;$	+1
+local	FUN_000b4cd0	iStack_2088	rangeStart	INFERRED	start of the program code range (programRecord+0x58 + 10), first word of the 4-word range struct passed to FUN_000b4400
+local	FUN_000b4cd0	iStack_2084	rangeWords	INFERRED	size of the code range in words ((programRecord+0x5c - 10) >> 2)
+local	FUN_000b4cd0	uStack_2080	rangeReserved0	INFERRED	zero, third word of the range struct
+local	FUN_000b4cd0	uStack_207c	rangeReserved1	INFERRED	zero, fourth word of the range struct
+local	FUN_000b4cd0	auStack_206c	decodeInfo	INFERRED	176-byte info block filled by FUN_000b4400
+local	FUN_000b4cd0	acStack_1fbc	outputEnableFlags	INFERRED	8 flag bytes: which outputs the decoded program writes
+local	FUN_000b4cd0	auStack_1f48	decodeBuffer	INFERRED	5560-byte decode output buffer of FUN_000b4400
+local	FUN_000b4cd0	acStack_990	inputEnableFlags	INFERRED	16 flag bytes: which inputs the decoded program reads
+local	FUN_000b4cd0	auStack_980	inputKinds	INFERRED	16 words: kind code of each input
+local	FUN_000b4cd0	uStack_11b	resultByte0	INFERRED	decoded summary byte copied to programRecord->info[0]
+local	FUN_000b4cd0	uStack_11a	resultByte1	INFERRED	decoded summary byte copied to info[1]
+local	FUN_000b4cd0	uStack_119	resultByte2	INFERRED	decoded summary byte copied to info[2]
+local	FUN_000b4cd0	uStack_44	resultByte3	INFERRED	decoded summary byte copied to info[3]
+local	FUN_000b4cd0	uStack_4b	resultByte4	INFERRED	decoded summary byte copied to info[4]
+local	FUN_000c6ff0	uVar2	compilerHandle	INFERRED	handle returned by FUN_000cd05c (stored at ctx+0x186c)
+local	FUN_000c6ff0	local_88	createInfoWord0	INFERRED	zero, first word of the 3-word create-info struct passed to FUN_000cd05c
+local	FUN_000c6ff0	local_84	createInfoVersion	INFERRED	0x7b on entry, replaced by the version FUN_000cd05c reports; stored at ctx+0x1870
+local	FUN_000c6ff0	local_80	createInfoWord2	INFERRED	zero, third word of the create-info struct
+local	FUN_000c6ff0	local_7c	chipConfigKind	INFERRED	first word of the 0x54-byte options struct: 0x2c without a device id, 0x3c or 0x3e by PCI device id (ctx+0x23d4)
+local	FUN_000c6ff0	local_78	chipRevision	INFERRED	options word 1: ctx+0x23d8
+local	FUN_000c6ff0	local_54	optionsVersion	INFERRED	options word at +0x28, constant 2
+local	FUN_000c6ff0	local_50	compilerHandleOut	INFERRED	options word at +0x2c: where the created compiler handle is stored (ctx+0x186c)
+local	FUN_000c6ff0	local_4c	allocCallback	INFERRED	options callback at +0x30: FUN_000c6e40
+local	FUN_000c6ff0	local_48	freeCallback	INFERRED	options callback at +0x34: scCallbackFree
+local	FUN_000c6ff0	local_44	getFlagCallback	INFERRED	options callback at +0x38: scCallbackGetFlagZero
+local	FUN_000c6ff0	local_40	appendFormattedCallback	INFERRED	options callback at +0x3c: scCallbackAppendFormatted
+local	FUN_000c6ff0	local_3c	fopenCallback	INFERRED	options callback at +0x40: scCallbackFopen
+local	FUN_000c6ff0	local_38	fcloseCallback	INFERRED	options callback at +0x44: scCallbackFclose
+local	FUN_000c6ff0	local_34	fwriteCallback	INFERRED	options callback at +0x48: scCallbackFwrite
+local	FUN_000c6ff0	local_30	freadCallback	INFERRED	options callback at +0x4c: scCallbackFread

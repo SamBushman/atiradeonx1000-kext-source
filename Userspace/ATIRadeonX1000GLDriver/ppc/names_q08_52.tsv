@@ -1,0 +1,24 @@
+use	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar4	registerIndex	INFERRED	hardware register index of branch source 1	^\s*uVar4\ =\ thunk_FUN_00134de8\(uVar7,uVar4\);$	+1
+use	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar4	registerIndex	INFERRED	hardware register index of branch source 1	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar2\ !=\ 1,uVar4,0\);$	+1	rhs	none
+use	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar4	recordId	INFERRED	id returned by vtable +0x98 (record appended to the vector)	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar2\ !=\ 1,uVar4,0\);$	+1	lhs	none
+use	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar4	recordId	INFERRED	id returned by vtable +0x98 (record appended to the vector)	^\s*\*puVar5\ =\ uVar4;$	+1
+use	FUN_00177e14	uVar4	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b64\ \+\ param_5\ \*\ 4\);$	+1
+use	FUN_00177e14	uVar4	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x9c\)\ =\ uVar4;$	+1
+use	FUN_00177e14	uVar4	src1SelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for source 1's lane byte	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uint\)\*\(byte\ \*\)\(param_5\ \+\ iVar3\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_00177e14	uVar4	src1SelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for source 1's lane byte	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	FUN_00177e14	uVar4	src2SelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for source 2's lane byte	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(puVar1\ \+\ \(uint\)\*\(byte\ \*\)\(param_5\ \+\ iVar3\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_00177e14	uVar4	src2SelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for source 2's lane byte	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar4;$@2	+1
+use	FUN_00177e14	iVar6	src1OperandOffset	INFERRED	operandIndex * 0x18 + 0x80	^\s*iVar6\ =\ param_3\ \*\ 0x18\ \+\ 0x80;$	+1
+use	FUN_00177e14	iVar6	src1OperandOffset	INFERRED	operandIndex * 0x18 + 0x80	^\s*FUN_00103d50\(iVar2\ \+\ 0xa4,2,\*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar6\ \+\ 0x20\)\ >>\ 1\ \&\ 1\);$	+2
+use	FUN_00177e14	iVar6	src2OperandOffset	INFERRED	operandIndex2 * 0x18 + 0x80	^\s*iVar6\ =\ param_4\ \*\ 0x18\ \+\ 0x80;$	+1
+use	FUN_00177e14	iVar6	src2OperandOffset	INFERRED	operandIndex2 * 0x18 + 0x80	^\s*FUN_00103d50\(iVar2\ \+\ 0xbc,2,\*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar6\ \+\ 0x20\)\ >>\ 1\ \&\ 1\);$	+2
+local	R520MachineAssembler__vslot26_assembleThenAppendRecord	param_5	unusedArg5	INFERRED	stale argument forwarded to Block__getBranchInst and vtable +0x34
+local	R520MachineAssembler__vslot26_assembleThenAppendRecord	param_6	unusedArg6	INFERRED	stale argument forwarded to vtable +0x34
+local	R520MachineAssembler__vslot26_assembleThenAppendRecord	param_7	unusedArg7	INFERRED	stale argument forwarded to Block__getBranchInst
+local	R520MachineAssembler__vslot26_assembleThenAppendRecord	iVar2	branchKind	INFERRED	branch instruction +300 (1 = loop-back kind)
+local	R520MachineAssembler__vslot26_assembleThenAppendRecord	bVar1	flagPrevRecord	INFERRED	node has a successor and the record index did not change
+local	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar7	program	INFERRED	compiler current program
+local	FUN_00177e14	param_5	lane	INFERRED	lane whose select byte picks the table entries and which operand flag is set at inst +0x9c
+local	FUN_00177e14	puVar1	selectTable	INFERRED	PTR_DAT_001e8b8c: select word per lane byte
+local	FUN_00177e14	iVar3	inst	INFERRED	current instruction ctx+0xb0
+func	FUN_00177e14	ValueKey__insertBinaryOfOperandsLane	INFERRED	creates a binary instruction of the given opcode from source operands operandIndex and operandIndex2 for one lane, marks the lane in the old instruction and inserts it after

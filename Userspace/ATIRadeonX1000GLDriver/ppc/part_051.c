@@ -21,24 +21,26 @@ int R300MachineAssembler__vslot12_assembleNodeAndMarkChildren(this, node)
   int *this;
   int *node;
 {
+  int childList;
+  int recordIndexBefore;
   int child;
-  int iVar2;
+  int predicateResult;
   uint loopIndex;
   int childByteOffset;
   
-  iVar2 = (**(code **)(*node + 0x14))(node,node);
-  if (iVar2 != 0) {
+  predicateResult = (**(code **)(*node + 0x14))(node,node);
+  if (predicateResult != 0) {
     this[6] = 1;
   }
-  iVar2 = this[0x18];
+  recordIndexBefore = this[0x18];
   (**(code **)(*node + 0x44))(node,this[4]);
   this[6] = 0;
   if (node[0x37] != 0) {
-    if (iVar2 == this[0x18]) {
-      iVar2 = node[0x34];
+    if (recordIndexBefore == this[0x18]) {
+      childList = node[0x34];
       childByteOffset = 0;
-      for (loopIndex = 1; loopIndex <= *(uint *)(iVar2 + 4); loopIndex = loopIndex + 1) {
-        child = *(int *)(*(int *)(iVar2 + 8) + childByteOffset);
+      for (loopIndex = 1; loopIndex <= *(uint *)(childList + 4); loopIndex = loopIndex + 1) {
+        child = *(int *)(*(int *)(childList + 8) + childByteOffset);
         if (child != 0) {
           *(undefined4 *)(child + 0xdc) = 1;
         }
@@ -569,10 +571,12 @@ int R300MachineAssembler__setAlphaOpcode(this, hardwareOpcode, irOpcode, irInst)
   int irOpcode;
   int irInst;
 {
+  int recordIndex;
+  int recordTable;
   undefined1 savedModifier;
-  int iVar2;
+  int recordPtr;
   undefined1 alphaOpcode;
-  int iVar4;
+  int recordPtr2;
   
   alphaOpcode = (undefined1)hardwareOpcode;
   *(undefined4 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58)) = 3;
@@ -588,16 +592,16 @@ LAB_00195e0c:
     if (irOpcode != 0x13) {
       if (irOpcode == 0x25) {
 LAB_00195e48:
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        alphaOpcode = *(undefined1 *)(iVar2 + 0x39);
-        *(undefined1 *)(iVar2 + 0x39) = *(undefined1 *)(iVar2 + 0x3a);
-        iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        savedModifier = *(undefined1 *)(iVar2 + 0x3c);
-        *(undefined1 *)(iVar4 + 0x3c) = *(undefined1 *)(iVar4 + 0x3d);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x3a) = *(undefined1 *)(iVar2 + 0x3b);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x3d) = *(undefined1 *)(iVar2 + 0x3e);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        alphaOpcode = *(undefined1 *)(recordPtr + 0x39);
+        *(undefined1 *)(recordPtr + 0x39) = *(undefined1 *)(recordPtr + 0x3a);
+        recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        savedModifier = *(undefined1 *)(recordPtr + 0x3c);
+        *(undefined1 *)(recordPtr2 + 0x3c) = *(undefined1 *)(recordPtr2 + 0x3d);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x3a) = *(undefined1 *)(recordPtr + 0x3b);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x3d) = *(undefined1 *)(recordPtr + 0x3e);
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3b) = alphaOpcode;
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3e) = savedModifier;
         if (irOpcode == 0x9d) {
@@ -611,10 +615,10 @@ LAB_00195e48:
       if (irOpcode != 0x12) goto LAB_00195d6c;
 LAB_00195d94:
       alphaOpcode = 0;
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x3b) = *(undefined1 *)(iVar2 + 0x3a);
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x3e) = *(undefined1 *)(iVar2 + 0x3d);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x3b) = *(undefined1 *)(recordPtr + 0x3a);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x3e) = *(undefined1 *)(recordPtr + 0x3d);
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3a) = 0x11;
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3d) = 0;
       goto LAB_00195f08;
@@ -639,10 +643,10 @@ LAB_00195f08:
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x42) = 1;
   }
-  iVar4 = *(int *)(this + 0x60);
-  iVar2 = *(int *)(this + 0x58);
+  recordIndex = *(int *)(this + 0x60);
+  recordTable = *(int *)(this + 0x58);
   alphaOpcode = psnOutputScaleCode(*(undefined4 *)(irInst + 0x124));
-  *(undefined1 *)(iVar4 * 0x48 + iVar2 + 0x41) = alphaOpcode;
+  *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x41) = alphaOpcode;
   return;
 }
 
@@ -733,37 +737,38 @@ int R300MachineAssembler__beginNextRecord(this)
 }
 
 /* R300MachineAssembler__vslot4_finishProgram @ 0x1961c8 (296 bytes) */
-int R300MachineAssembler__vslot4_finishProgram(param_1)
-  int *param_1;
+int R300MachineAssembler__vslot4_finishProgram(this)
+  int *this;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
+  int count;
+  uint temporaryCount;
+  int programRegisterLimit;
+  uint registerCount;
+  int lastIndex;
   
-  *(int *)(param_1[0x17] + 0x93b8) = param_1[0x24];
-  *(int *)(param_1[0x17] + 0x9364) = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x7c) + 1;
-  iVar2 = *(int *)(*(int *)(param_1[3] + 0x6c4) + 0x80);
-  *(undefined4 *)(param_1[0x17] + 0x9368) = *(undefined4 *)(*(int *)(param_1[3] + 0x6c4) + 0x84);
-  uVar3 = iVar2 + 1;
-  uVar1 = *(uint *)(param_1[0x17] + 0x9364);
-  if (uVar3 < uVar1) {
-    uVar3 = uVar1;
+  *(int *)(this[0x17] + 0x93b8) = this[0x24];
+  *(int *)(this[0x17] + 0x9364) = *(int *)(*(int *)(this[3] + 0x6c4) + 0x7c) + 1;
+  programRegisterLimit = *(int *)(*(int *)(this[3] + 0x6c4) + 0x80);
+  *(undefined4 *)(this[0x17] + 0x9368) = *(undefined4 *)(*(int *)(this[3] + 0x6c4) + 0x84);
+  registerCount = programRegisterLimit + 1;
+  temporaryCount = *(uint *)(this[0x17] + 0x9364);
+  if (registerCount < temporaryCount) {
+    registerCount = temporaryCount;
   }
-  *(uint *)(param_1[0x17] + 0x9364) = uVar3;
-  iVar4 = 0;
-  iVar2 = RegAlloc__countUnassignedInClass(*(undefined4 *)(param_1[3] + 0x6c4),0);
-  if (iVar2 != 0) {
-    iVar4 = iVar2 + -1;
+  *(uint *)(this[0x17] + 0x9364) = registerCount;
+  lastIndex = 0;
+  count = RegAlloc__countUnassignedInClass(*(undefined4 *)(this[3] + 0x6c4),0);
+  if (count != 0) {
+    lastIndex = count + -1;
   }
-  if (param_1[0x18] == param_1[0x1d] + 1) {
-    (**(code **)(*param_1 + 0xbc))(param_1);
-    (**(code **)(*param_1 + 0xc0))(param_1);
-    (**(code **)(*param_1 + 0x15c))(param_1);
+  if (this[0x18] == this[0x1d] + 1) {
+    (**(code **)(*this + 0xbc))(this);
+    (**(code **)(*this + 0xc0))(this);
+    (**(code **)(*this + 0x15c))(this);
   }
                     
                     
-  (**(code **)(*param_1 + 0x144))(param_1,param_1[0x1e],iVar4);
+  (**(code **)(*this + 0x144))(this,this[0x1e],lastIndex);
   return;
 }
 
@@ -809,41 +814,41 @@ int R300MachineAssembler__trackMaxLevelAndAssemble(this, registerIndex, node)
 }
 
 /* R300MachineAssembler__vslot5_beginProgram @ 0x1963b0 (236 bytes) */
-int R300MachineAssembler__vslot5_beginProgram(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+int R300MachineAssembler__vslot5_beginProgram(this, programOwner, allocTag, compiler)
+  int this;
+  undefined4 programOwner;
+  undefined4 allocTag;
+  int compiler;
 {
-  undefined4 uVar1;
+  undefined4 outputBlock;
   
-  *(undefined4 *)(param_1 + 0xa4) = *(undefined4 *)(param_4 + 0x30c);
-  uVar1 = FUN_000e14e4(param_4,0x963c,param_3);
-  *(undefined4 *)(param_1 + 0x5c) = uVar1;
-  _memset(uVar1,0,0x963c);
-  *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_1 + 0x5c);
-  *(undefined4 *)(param_1 + 0x54) = 3;
-  *(undefined4 *)(param_1 + 0x10) = param_2;
-  *(undefined4 *)(param_1 + 0x60) = 1;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(undefined4 *)(param_1 + 0x68) = 0;
-  *(undefined4 *)(param_1 + 0x6c) = 0;
-  *(undefined4 *)(param_1 + 0x70) = 0;
-  *(undefined4 *)(param_1 + 0x9c) = 0;
-  *(undefined4 *)(param_1 + 0x88) = 0;
-  *(undefined4 *)(param_1 + 0x78) = 0;
-  *(undefined4 *)(param_1 + 0x7c) = 0;
-  *(undefined4 *)(param_1 + 0x80) = 1;
-  *(undefined4 *)(param_1 + 0x84) = 1;
-  *(int *)(param_1 + 0xc) = param_4;
-  *(undefined4 *)(param_1 + 0xa0) = 0;
-  *(undefined4 *)(param_1 + 0x90) = 0;
-  *(undefined4 *)(param_1 + 0x8c) = 0;
-  *(undefined4 *)(param_1 + 0x14) = param_3;
-  **(undefined4 **)(param_1 + 0x58) = 0;
-  *(int *)(*(int *)(param_1 + 0x58) + 4) = *(int *)(*(int *)(param_4 + 0x30c) + 0x40) + 1;
-  *(undefined4 *)(param_1 + 0x98) = 1;
-  *(undefined4 *)(param_1 + 0x94) = 1;
+  *(undefined4 *)(this + 0xa4) = *(undefined4 *)(compiler + 0x30c);
+  outputBlock = Compiler__setQueriedTableEntry4d4(compiler,0x963c,allocTag);
+  *(undefined4 *)(this + 0x5c) = outputBlock;
+  _memset(outputBlock,0,0x963c);
+  *(undefined4 *)(this + 0x58) = *(undefined4 *)(this + 0x5c);
+  *(undefined4 *)(this + 0x54) = 3;
+  *(undefined4 *)(this + 0x10) = programOwner;
+  *(undefined4 *)(this + 0x60) = 1;
+  *(undefined4 *)(this + 100) = 0;
+  *(undefined4 *)(this + 0x68) = 0;
+  *(undefined4 *)(this + 0x6c) = 0;
+  *(undefined4 *)(this + 0x70) = 0;
+  *(undefined4 *)(this + 0x9c) = 0;
+  *(undefined4 *)(this + 0x88) = 0;
+  *(undefined4 *)(this + 0x78) = 0;
+  *(undefined4 *)(this + 0x7c) = 0;
+  *(undefined4 *)(this + 0x80) = 1;
+  *(undefined4 *)(this + 0x84) = 1;
+  *(int *)(this + 0xc) = compiler;
+  *(undefined4 *)(this + 0xa0) = 0;
+  *(undefined4 *)(this + 0x90) = 0;
+  *(undefined4 *)(this + 0x8c) = 0;
+  *(undefined4 *)(this + 0x14) = allocTag;
+  **(undefined4 **)(this + 0x58) = 0;
+  *(int *)(*(int *)(this + 0x58) + 4) = *(int *)(*(int *)(compiler + 0x30c) + 0x40) + 1;
+  *(undefined4 *)(this + 0x98) = 1;
+  *(undefined4 *)(this + 0x94) = 1;
   return;
 }
 
@@ -911,7 +916,7 @@ int FUN_0019651c(assembler, inst, staleArg3)
     emitSlotAFn = *(code **)(*assembler + 0xc4);
     a1 = assembler[0x25];
     fetchArg = *(undefined4 *)(inst + 0x148);
-    testResult = FUN_000d9f3c(*(undefined4 *)(assembler[3] + 0x398),0);
+    testResult = CompileInput__lacksFlag0x200000(*(undefined4 *)(assembler[3] + 0x398),0);
     if (testResult == 0) {
       a3 = 3;
     }
@@ -1080,10 +1085,12 @@ int R300MachineAssembler__setRgbOpcode(this, hardwareOpcode, irOpcode, irInst)
   int irOpcode;
   int irInst;
 {
+  int recordIndex;
+  int recordTable;
   undefined1 savedModifier;
-  int iVar2;
+  int recordPtr;
   undefined1 rgbOpcode;
-  int iVar4;
+  int recordPtr2;
   
   rgbOpcode = (undefined1)hardwareOpcode;
   *(undefined4 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58)) = 3;
@@ -1099,16 +1106,16 @@ LAB_00196bf8:
     if (irOpcode != 0x13) {
       if (irOpcode == 0x25) {
 LAB_00196c34:
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        rgbOpcode = *(undefined1 *)(iVar2 + 0x2a);
-        *(undefined1 *)(iVar2 + 0x2a) = *(undefined1 *)(iVar2 + 0x2b);
-        iVar4 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        savedModifier = *(undefined1 *)(iVar2 + 0x2d);
-        *(undefined1 *)(iVar4 + 0x2d) = *(undefined1 *)(iVar4 + 0x2e);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x2b) = *(undefined1 *)(iVar2 + 0x2c);
-        iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-        *(undefined1 *)(iVar2 + 0x2e) = *(undefined1 *)(iVar2 + 0x2f);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        rgbOpcode = *(undefined1 *)(recordPtr + 0x2a);
+        *(undefined1 *)(recordPtr + 0x2a) = *(undefined1 *)(recordPtr + 0x2b);
+        recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        savedModifier = *(undefined1 *)(recordPtr + 0x2d);
+        *(undefined1 *)(recordPtr2 + 0x2d) = *(undefined1 *)(recordPtr2 + 0x2e);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x2b) = *(undefined1 *)(recordPtr + 0x2c);
+        recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+        *(undefined1 *)(recordPtr + 0x2e) = *(undefined1 *)(recordPtr + 0x2f);
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2c) = rgbOpcode;
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2f) = savedModifier;
         if (irOpcode == 0x9d) {
@@ -1122,10 +1129,10 @@ LAB_00196c34:
       if (irOpcode != 0x12) goto LAB_00196b58;
 LAB_00196b80:
       rgbOpcode = 0;
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x2c) = *(undefined1 *)(iVar2 + 0x2b);
-      iVar2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
-      *(undefined1 *)(iVar2 + 0x2f) = *(undefined1 *)(iVar2 + 0x2e);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x2c) = *(undefined1 *)(recordPtr + 0x2b);
+      recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
+      *(undefined1 *)(recordPtr + 0x2f) = *(undefined1 *)(recordPtr + 0x2e);
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2b) = 0x15;
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2e) = 0;
       goto LAB_00196cf4;
@@ -1150,10 +1157,10 @@ LAB_00196cf4:
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x33) = 1;
   }
-  iVar4 = *(int *)(this + 0x60);
-  iVar2 = *(int *)(this + 0x58);
+  recordIndex = *(int *)(this + 0x60);
+  recordTable = *(int *)(this + 0x58);
   rgbOpcode = psnOutputScaleCode(*(undefined4 *)(irInst + 0x124));
-  *(undefined1 *)(iVar4 * 0x48 + iVar2 + 0x32) = rgbOpcode;
+  *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x32) = rgbOpcode;
   return;
 }
 
@@ -1177,13 +1184,13 @@ int R300MachineAssembler__create(unusedThis, compiler)
 int R300MachineAssembler__dtor_196dbc(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e914c;
+  baseVtableBase1 = PTR_DAT_001e914c;
   this[0x16] = 0;
   *this = &PTR_FUN_001eb6a0;
   this[0x17] = 0;
-  *this = puVar1 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -1191,13 +1198,13 @@ int R300MachineAssembler__dtor_196dbc(this)
 int R300MachineAssembler__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e914c;
+  baseVtableBase1 = PTR_DAT_001e914c;
   this[0x16] = 0;
   *this = &PTR_FUN_001eb6a0;
   this[0x17] = 0;
-  *this = puVar1 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -1221,10 +1228,15 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
   int *inst;
   undefined4 constantAllocator;
 {
+  int sourceOperandCount2;
+  int sourceOperandCount;
+  int isConstantSource;
+  int operandCount;
+  int placed;
   int operandRecord;
   int operandIndex;
   uint sourceLaneWord;
-  int iVar2;
+  int opcode;
   int *inst1;
   undefined4 operandVReg;
   int *a0;
@@ -1232,31 +1244,31 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
   int *operandVReg2;
   undefined4 operandVReg3;
   int operandIndex2;
-  uint local_28 [3];
+  uint readMask [3];
   
-  iVar2 = *(int *)(inst[0x22] + 8);
-  if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) || (operandIndex2 = 1, iVar2 == 0xa1)) {
+  opcode = *(int *)(inst[0x22] + 8);
+  if ((((opcode == 0x9e) || (opcode == 0xa0)) || (opcode == 0x9f)) || (operandIndex2 = 1, opcode == 0xa1)) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (((*(char *)(operandRecord + 0x10) == '\0') ||
         (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x11) == '\0')) ||
        (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(operandRecord + 0x12) == '\0')) {
       operandVReg = IRInst__getOperandSource(inst,1);
-      iVar2 = FUN_0018d388(constantAllocator,operandVReg,0);
-      if (iVar2 == 0) {
+      placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,0);
+      if (placed == 0) {
         return 0;
       }
     }
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(char *)(operandRecord + 0x13) == '\0') {
       operandVReg = IRInst__getOperandSource(inst,1);
-      iVar2 = FUN_0018d388(constantAllocator,operandVReg,1);
-      if (iVar2 == 0) {
+      placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,1);
+      if (placed == 0) {
         return 0;
       }
     }
   }
   else {
-    for (; iVar2 = (**(code **)(*inst + 0x14))(inst), operandIndex2 <= iVar2; operandIndex2 = operandIndex2 + 1) {
+    for (; operandCount = (**(code **)(*inst + 0x14))(inst), operandIndex2 <= operandCount; operandIndex2 = operandIndex2 + 1) {
       a0 = (int *)IRInst__getOperandSource(inst,operandIndex2);
       callResult = (**(code **)(*a0 + 0x60))(a0);
       inst1 = inst;
@@ -1268,53 +1280,53 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
         a0 = operandVReg2;
       }
       operandIndex = IRInst__getOperandRecord(inst1,operandIndex);
-      SelectWord__readMask(local_28,*(undefined4 *)(operandIndex + 0x10));
-      sourceLaneWord = local_28[0];
-      iVar2 = (**(code **)(*a0 + 0x5c))(a0);
-      if (iVar2 == 0) {
+      SelectWord__readMask(readMask,*(undefined4 *)(operandIndex + 0x10));
+      sourceLaneWord = readMask[0];
+      isConstantSource = (**(code **)(*a0 + 0x5c))(a0);
+      if (isConstantSource == 0) {
         if ((a0[0x26] != 0x33) || (a0[0x4b] == 3)) {
           if ((sourceLaneWord & 0xffffff00) == 0) {
             if ((sourceLaneWord & 0xff) == 0) goto LAB_001971a8;
-            iVar2 = FUN_0018c7f4(constantAllocator,a0,1);
+            placed = ConstantSlots__tryAddToRow(constantAllocator,a0,1);
           }
           else if ((sourceLaneWord & 0xff) == 0) {
-            iVar2 = FUN_0018c7f4(constantAllocator,a0,0);
+            placed = ConstantSlots__tryAddToRow(constantAllocator,a0,0);
           }
           else {
-            iVar2 = FUN_0018c980(constantAllocator,a0,a0);
+            placed = FUN_0018c980(constantAllocator,a0,a0);
           }
 joined_r0x00197160:
-          if (iVar2 == 0) {
+          if (placed == 0) {
             return 0;
           }
         }
       }
       else {
         if ((sourceLaneWord & 0xffffff00) != 0) {
-          iVar2 = (**(code **)(*a0 + 0x14))(a0);
-          if (iVar2 == 1) {
+          sourceOperandCount = (**(code **)(*a0 + 0x14))(a0);
+          if (sourceOperandCount == 1) {
             operandVReg = IRInst__getOperandSource(a0,1);
-            iVar2 = FUN_0018d388(constantAllocator,operandVReg,0);
+            placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,0);
           }
           else {
             operandVReg = IRInst__getOperandSource(a0,1);
             operandVReg3 = IRInst__getOperandSource(a0,2);
-            iVar2 = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,0);
+            placed = ConstantSlots__tryAssignPair(constantAllocator,operandVReg,operandVReg3,0);
           }
-          if (iVar2 == 0) {
+          if (placed == 0) {
             return 0;
           }
         }
         if ((sourceLaneWord & 0xff) != 0) {
-          iVar2 = (**(code **)(*a0 + 0x14))(a0);
-          if (iVar2 == 1) {
+          sourceOperandCount2 = (**(code **)(*a0 + 0x14))(a0);
+          if (sourceOperandCount2 == 1) {
             operandVReg = IRInst__getOperandSource(a0,1);
-            iVar2 = FUN_0018d388(constantAllocator,operandVReg,1);
+            placed = ConstantSlots__tryAssignSingle(constantAllocator,operandVReg,1);
           }
           else {
             operandVReg = IRInst__getOperandSource(a0,1);
             operandVReg3 = IRInst__getOperandSource(a0,2);
-            iVar2 = FUN_0018cdd8(constantAllocator,operandVReg,operandVReg3,1);
+            placed = ConstantSlots__tryAssignPair(constantAllocator,operandVReg,operandVReg3,1);
           }
           goto joined_r0x00197160;
         }
@@ -1331,6 +1343,17 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
   int block;
   int startOfShaderFlag;
 {
+  int predicate38;
+  int predicate4c;
+  int isLoadConst;
+  int predicate5c;
+  int isFetchInst3;
+  int isFetchInst2;
+  int clauseState;
+  int isFetchInst;
+  int isSourceConstant;
+  int slotIndex;
+  int compiler;
   uint *flagsPtr;
   bool aluClauseOpened;
   bool prevEndedAluClause;
@@ -1341,14 +1364,14 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
   bool groupHasPresub;
   uint instFlags;
   int *cursorInst;
-  int iVar11;
+  int stateError;
   int *prevInst;
   int *src1Inst;
   int *groupInst;
   code *visitSlot;
-  int local_88;
+  int lookaheadFlag;
   undefined1 packState [60];
-  undefined4 local_48 [2];
+  undefined4 firstLiteralValue [2];
   
   groupInst = *(int **)(block + 8);
   prevEndedAluClause = false;
@@ -1356,24 +1379,24 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
     return;
   }
   do {
-    iVar11 = (**(code **)(*this + 8))(this);
-    if (iVar11 != 0) {
+    stateError = (**(code **)(*this + 8))(this);
+    if (stateError != 0) {
       Compiler__fail(this[3],5);
     }
-    iVar11 = this[3];
-    if (**(int **)(iVar11 + 0x6c4) == 0) {
-      prevInst = (int *)FUN_000e3b88(this[4],block,groupInst,&local_88);
-      if ((prevInst == (int *)0x0) || (local_88 == 0)) {
-        iVar11 = this[3];
+    compiler = this[3];
+    if (**(int **)(compiler + 0x6c4) == 0) {
+      prevInst = (int *)Block__materializePendingMovs(this[4],block,groupInst,&lookaheadFlag);
+      if ((prevInst == (int *)0x0) || (lookaheadFlag == 0)) {
+        compiler = this[3];
       }
       else {
-        iVar11 = this[3];
+        compiler = this[3];
         groupInst = prevInst;
       }
     }
-    iVar11 = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(iVar11 + 0x6c4));
+    compiler = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(compiler + 0x6c4));
     prevInst = groupInst;
-    if ((((iVar11 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
+    if ((((compiler == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
        ((instFlags & 0x1000) != 0)) {
       PackState__reset(packState);
       if (groupInst == (int *)0x0) {
@@ -1410,20 +1433,20 @@ LAB_00197808:
         do {
           instFlags = cursorInst[5];
           if ((instFlags & 1) != 0) {
-            iVar11 = cursorInst[0x47];
+            slotIndex = cursorInst[0x47];
             visitSlot = *(code **)(*this + 0x13c);
-            IRInst__firstLiteralSourceValue(local_48,cursorInst);
-            (*visitSlot)(this,iVar11,local_48[0]);
+            IRInst__firstLiteralSourceValue(firstLiteralValue,cursorInst);
+            (*visitSlot)(this,slotIndex,firstLiteralValue[0]);
             if ((cursorInst[5] & 0x10000U) == 0) {
               if ((cursorInst[5] & 2U) != 0) {
                 src1Inst = (int *)IRInst__getOperandSource(cursorInst,1);
-                iVar11 = (**(code **)(*src1Inst + 0x50))(src1Inst);
-                if ((iVar11 != 0) &&
-                   (iVar11 = IRInst__getOperandRecord(cursorInst,0), *(int *)(iVar11 + 0x10) == 0x1010100))
+                isSourceConstant = (**(code **)(*src1Inst + 0x50))(src1Inst);
+                if ((isSourceConstant != 0) &&
+                   (isSourceConstant = IRInst__getOperandRecord(cursorInst,0), *(int *)(isSourceConstant + 0x10) == 0x1010100))
                 goto LAB_00197784;
               }
-              iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
-              if (iVar11 == 0) {
+              isFetchInst = (**(code **)(*cursorInst + 0x28))(cursorInst);
+              if (isFetchInst == 0) {
                 if (!aluClauseOpened) {
                   aluClauseOpened = true;
                   (**(code **)(*this + 0xc0))(this);
@@ -1444,14 +1467,14 @@ LAB_00197808:
                 groupHasAlu = true;
               }
               else {
-                iVar11 = this[0x23];
-                if (iVar11 == 0) {
+                clauseState = this[0x23];
+                if (clauseState == 0) {
                   this[0x23] = 1;
                   (**(code **)(*this + 0x134))(this);
                 }
                 else {
-                  if (iVar11 != 2) {
-                    if ((iVar11 != 1) || ((cursorInst[5] & 0x1000U) == 0)) goto LAB_0019752c;
+                  if (clauseState != 2) {
+                    if ((clauseState != 1) || ((cursorInst[5] & 0x1000U) == 0)) goto LAB_0019752c;
                     (**(code **)(*this + 0x148))(this);
                   }
                   this[0x23] = 1;
@@ -1471,8 +1494,8 @@ LAB_00197624:
               if (startsNewWord) {
                 if ((((cursorInst[5] & 0x1000U) != 0) || (startOfShaderFlag != 0)) || ((cursorInst[5] & 2U) != 0)) {
                   (**(code **)(*this + 0x14c))(this);
-                  iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
-                  if (iVar11 == 0) {
+                  isFetchInst2 = (**(code **)(*cursorInst + 0x28))(cursorInst);
+                  if (isFetchInst2 == 0) {
                     prevEndedAluClause = true;
                     startOfShaderFlag = 0;
                     goto LAB_001976d0;
@@ -1489,8 +1512,8 @@ LAB_001976d0:
                 (**(code **)(*this + 0x140))(this);
               }
               (**(code **)(*cursorInst + 0x20))(cursorInst,this,0,this[3]);
-              iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
-              if (iVar11 != 0) {
+              isFetchInst3 = (**(code **)(*cursorInst + 0x28))(cursorInst);
+              if (isFetchInst3 != 0) {
                 this[0x1a] = this[0x1a] + 1;
                 (**(code **)(*this + 0x15c))(this);
                 instFlags = cursorInst[5];
@@ -1498,20 +1521,20 @@ LAB_001976d0:
               }
             }
             else {
-              iVar11 = (**(code **)(*cursorInst + 0x5c))(cursorInst);
-              if (iVar11 != 0) {
+              predicate5c = (**(code **)(*cursorInst + 0x5c))(cursorInst);
+              if (predicate5c != 0) {
                 groupHasPresub = true;
               }
-              iVar11 = (**(code **)(*cursorInst + 0x48))(cursorInst);
-              if (iVar11 != 0) {
+              isLoadConst = (**(code **)(*cursorInst + 0x48))(cursorInst);
+              if (isLoadConst != 0) {
                 ((int (*)())R300MachineAssembler__callSlot65)(this,(uint)cursorInst,this[3]);
               }
-              iVar11 = (**(code **)(*cursorInst + 0x4c))(cursorInst);
-              if (iVar11 != 0) {
+              predicate4c = (**(code **)(*cursorInst + 0x4c))(cursorInst);
+              if (predicate4c != 0) {
                 ((int (*)())FUN_0019651c)(this,cursorInst,this[3]);
               }
-              iVar11 = (**(code **)(*cursorInst + 0x38))(cursorInst);
-              if ((iVar11 != 0) && (this[0x23] == 1)) {
+              predicate38 = (**(code **)(*cursorInst + 0x38))(cursorInst);
+              if ((predicate38 != 0) && (this[0x23] == 1)) {
                 (**(code **)(*this + 0x148))(this);
                 instFlags = cursorInst[5];
                 goto LAB_00197788;

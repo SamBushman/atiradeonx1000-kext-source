@@ -163,9 +163,9 @@
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r6	PASS-deep	17e22c bl 0x1770e4
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r7	PASS-deep	17e22c bl 0x1770e4
 17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	r8	PASS-deep	17e22c bl 0x1770e4
-17e338	FUN_0017e338	r6	PASS-deep	17e354 bl 0x179c44
-17e338	FUN_0017e338	r7	PASS-deep	17e354 bl 0x179c44
-17e338	FUN_0017e338	r8	PASS-deep	17e354 bl 0x179c44
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r6	PASS-deep	17e354 bl 0x179c44
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r7	PASS-deep	17e354 bl 0x179c44
+17e338	ValueKey__foldEqualSourcesIntoOutputScale	r8	PASS-deep	17e354 bl 0x179c44
 17ee0	gld_printApplicationPath	r6	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	gld_printApplicationPath	r7	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	gld_printApplicationPath	r8	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
@@ -356,55 +356,55 @@ a0380	glBindProgramARB_impl	r10	PASS-no	a03c8 bl 0xa0290
 a0d70	glDeleteProgramsARB_impl	r6	PASS-no	a0dac bl 0xa0290
 a0d70	glDeleteProgramsARB_impl	r7	PASS-no	a0dac bl 0xa0290
 a0d70	glDeleteProgramsARB_impl	r8	PASS-no	a0dac bl 0xa0290
-a4980	FUN_000a4980	r8	PASS-no	a4994 bl 0x1a3258
-a5c40	FUN_000a5c40	r5	PASS-indirect	a5e14 bctrl 
-a5c40	FUN_000a5c40	r6	PASS-indirect	a5e14 bctrl 
-a5c40	FUN_000a5c40	r7	PASS-indirect	a5e14 bctrl 
-a5c40	FUN_000a5c40	r8	PASS-indirect	a5e14 bctrl 
-a6500	FUN_000a6500	r5	PASS-no	a6524 bl 0x4e990
-a6500	FUN_000a6500	r6	PASS-no	a6524 bl 0x4e990
-a6500	FUN_000a6500	r7	PASS-no	a6524 bl 0x4e990
-a6500	FUN_000a6500	r8	PASS-no	a6524 bl 0x4e990
-a7050	FUN_000a7050	r5	PASS-indirect	a721c bctrl 
-a7050	FUN_000a7050	r6	PASS-indirect	a721c bctrl 
-afe40	FUN_000afe40	r7	PASS-indirect	afed8 bctrl 
-afe40	FUN_000afe40	r8	PASS-indirect	afed8 bctrl 
+a4980	gld_buildSmoothPointMask	r8	PASS-no	a4994 bl 0x1a3258
+a5c40	gld_emitClearColorPacket	r5	PASS-indirect	a5e14 bctrl 
+a5c40	gld_emitClearColorPacket	r6	PASS-indirect	a5e14 bctrl 
+a5c40	gld_emitClearColorPacket	r7	PASS-indirect	a5e14 bctrl 
+a5c40	gld_emitClearColorPacket	r8	PASS-indirect	a5e14 bctrl 
+a6500	gld_emitClearFillPacket	r5	PASS-no	a6524 bl 0x4e990
+a6500	gld_emitClearFillPacket	r6	PASS-no	a6524 bl 0x4e990
+a6500	gld_emitClearFillPacket	r7	PASS-no	a6524 bl 0x4e990
+a6500	gld_emitClearFillPacket	r8	PASS-no	a6524 bl 0x4e990
+a7050	gld_initContextDispatch	r5	PASS-indirect	a721c bctrl 
+a7050	gld_initContextDispatch	r6	PASS-indirect	a721c bctrl 
+afe40	gld_compileFragmentProgram	r7	PASS-indirect	afed8 bctrl 
+afe40	gld_compileFragmentProgram	r8	PASS-indirect	afed8 bctrl 
 b3630	atifsCompileCurrentShader	r6	PASS-indirect	b3764 bl 0xb15d0
 b3630	atifsCompileCurrentShader	r7	PASS-indirect	b3764 bl 0xb15d0
 b3630	atifsCompileCurrentShader	r8	PASS-indirect	b3764 bl 0xb15d0
-b5010	FUN_000b5010	r7	PASS-no	b5068 bl 0xb4f50
-b5010	FUN_000b5010	r8	PASS-no	b5068 bl 0xb4f50
-b50a0	FUN_000b50a0	r6	PASS-no	b5144 bl 0xb4f50
-b50a0	FUN_000b50a0	r7	PASS-no	b5144 bl 0xb4f50
-b50a0	FUN_000b50a0	r8	PASS-no	b5144 bl 0xb4f50
-b51a0	FUN_000b51a0	r6	PASS-no	b51b4 bl 0x1a3260
-b51a0	FUN_000b51a0	r7	PASS-no	b51b4 bl 0x1a3260
-b51a0	FUN_000b51a0	r8	PASS-no	b51b4 bl 0x1a3260
-b5320	FUN_000b5320	r6	PASS-no	b53a0 bl 0xb4f50
-b5320	FUN_000b5320	r7	PASS-no	b53a0 bl 0xb4f50
-b5320	FUN_000b5320	r8	PASS-no	b53a0 bl 0xb4f50
-b5400	FUN_000b5400	r5	PASS-indirect	b5438 bctrl 
-b5400	FUN_000b5400	r6	PASS-indirect	b5438 bctrl 
-b5400	FUN_000b5400	r7	PASS-indirect	b5438 bctrl 
-b5400	FUN_000b5400	r8	PASS-indirect	b5438 bctrl 
-b6580	FUN_000b6580	r5	PASS-indirect	b65b8 bl 0x4bbf0
-b6580	FUN_000b6580	r6	PASS-indirect	b65b8 bl 0x4bbf0
-b6580	FUN_000b6580	r7	PASS-indirect	b65b8 bl 0x4bbf0
-b6580	FUN_000b6580	r8	PASS-indirect	b65b8 bl 0x4bbf0
-bd9a0	FUN_000bd9a0	r7	PASS-indirect	bd9d8 bctrl 
-bd9a0	FUN_000bd9a0	r8	PASS-indirect	bd9d8 bctrl 
+b5010	gld_emitSlotParamIfDirty	r7	PASS-no	b5068 bl 0xb4f50
+b5010	gld_emitSlotParamIfDirty	r8	PASS-no	b5068 bl 0xb4f50
+b50a0	gld_emitTextureUnitScaleParams	r6	PASS-no	b5144 bl 0xb4f50
+b50a0	gld_emitTextureUnitScaleParams	r7	PASS-no	b5144 bl 0xb4f50
+b50a0	gld_emitTextureUnitScaleParams	r8	PASS-no	b5144 bl 0xb4f50
+b51a0	gld_emitSlotViewportTransforms	r6	PASS-no	b51b4 bl 0x1a3260
+b51a0	gld_emitSlotViewportTransforms	r7	PASS-no	b51b4 bl 0x1a3260
+b51a0	gld_emitSlotViewportTransforms	r8	PASS-no	b51b4 bl 0x1a3260
+b5320	gld_emitSlotTransformParams	r6	PASS-no	b53a0 bl 0xb4f50
+b5320	gld_emitSlotTransformParams	r7	PASS-no	b53a0 bl 0xb4f50
+b5320	gld_emitSlotTransformParams	r8	PASS-no	b53a0 bl 0xb4f50
+b5400	gld_emitProgramStatePackets	r5	PASS-indirect	b5438 bctrl 
+b5400	gld_emitProgramStatePackets	r6	PASS-indirect	b5438 bctrl 
+b5400	gld_emitProgramStatePackets	r7	PASS-indirect	b5438 bctrl 
+b5400	gld_emitProgramStatePackets	r8	PASS-indirect	b5438 bctrl 
+b6580	ffpsBuildProgram	r5	PASS-indirect	b65b8 bl 0x4bbf0
+b6580	ffpsBuildProgram	r6	PASS-indirect	b65b8 bl 0x4bbf0
+b6580	ffpsBuildProgram	r7	PASS-indirect	b65b8 bl 0x4bbf0
+b6580	ffpsBuildProgram	r8	PASS-indirect	b65b8 bl 0x4bbf0
+bd9a0	gld_emitLightingStatePacket	r7	PASS-indirect	bd9d8 bctrl 
+bd9a0	gld_emitLightingStatePacket	r8	PASS-indirect	bd9d8 bctrl 
 bfa0	textPrintDoubleShortest	r7	PASS-no	bfac bl 0x1a3264
 bfa0	textPrintDoubleShortest	r8	PASS-no	bfac bl 0x1a3264
-bfed0	FUN_000bfed0	r6	PASS-no	bfeec bl 0xc5e60
-bfed0	FUN_000bfed0	r7	PASS-no	bfeec bl 0xc5e60
-bfed0	FUN_000bfed0	r8	PASS-no	bfeec bl 0xc5e60
+bfed0	psnEncodeHwProgram	r6	PASS-no	bfeec bl 0xc5e60
+bfed0	psnEncodeHwProgram	r7	PASS-no	bfeec bl 0xc5e60
+bfed0	psnEncodeHwProgram	r8	PASS-no	bfeec bl 0xc5e60
 cae90	ilRewriteForTextureState	r8	PASS-no	caf14 bl 0x1a3660	; symbol stub for: _malloc
-ce148	FUN_000ce148	r6	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
-ce148	FUN_000ce148	r7	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
-ce148	FUN_000ce148	r8	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
-ce148	FUN_000ce148	r10	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
-ced58	FUN_000ced58	r8	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
-ced58	FUN_000ced58	r10	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
+ce148	vsDisasmSourceOperand	r6	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
+ce148	vsDisasmSourceOperand	r7	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
+ce148	vsDisasmSourceOperand	r8	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
+ce148	vsDisasmSourceOperand	r10	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
+ced58	vsDisasmMathOpcode	r8	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
+ced58	vsDisasmMathOpcode	r10	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
 d0304	vsDisassembleToString	r10	PASS-no	d0324 bl 0xce038
 d035c	vsDisassembleVertexProgram	r10	PASS-no	d037c bl 0xce038
 d4e8c	scDumpPixelProgram	r10	PASS-no	d4eac bl 0xd4df8
@@ -440,9 +440,9 @@ ea148	Block__ctor_ea148	r5	PASS-no	ea194 bl 0x1940a8
 ea148	Block__ctor_ea148	r6	PASS-no	ea194 bl 0x1940a8
 ea148	Block__ctor_ea148	r7	PASS-no	ea194 bl 0x1940a8
 ea148	Block__ctor_ea148	r8	PASS-no	ea194 bl 0x1940a8
-f1d7c	FUN_000f1d7c	r6	PASS-indirect	f1dd8 bl 0x193e18
-f1d7c	FUN_000f1d7c	r7	PASS-indirect	f1dd8 bl 0x193e18
-f1d7c	FUN_000f1d7c	r8	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	Program__propagateMovThroughUses	r6	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	Program__propagateMovThroughUses	r7	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	Program__propagateMovThroughUses	r8	PASS-indirect	f1dd8 bl 0x193e18
 f29f4	pass_assign_slots	r5	PASS-indirect	f2a10 bl 0x10ea30
 f29f4	pass_assign_slots	r6	PASS-indirect	f2a10 bl 0x10ea30
 f29f4	pass_assign_slots	r7	PASS-indirect	f2a10 bl 0x10ea30
@@ -454,9 +454,9 @@ f620	arbProgramIrToText	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	arbProgramIrToText	r10	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f8aa0	Program__applySourceTokenToOperand	r8	PASS-indirect	f8b7c bl 0x19e9fc
-f9140	FUN_000f9140	r6	PASS-indirect	f918c bctrl 
-f9140	FUN_000f9140	r7	PASS-indirect	f918c bctrl 
-f9140	FUN_000f9140	r8	PASS-indirect	f918c bctrl 
-fd5c8	FUN_000fd5c8	r6	PASS-indirect	fd640 bl 0x193e18
-fd5c8	FUN_000fd5c8	r7	PASS-indirect	fd640 bl 0x193e18
-fd5c8	FUN_000fd5c8	r8	PASS-indirect	fd640 bl 0x193e18
+f9140	Program__createInstForIlOpcode	r6	PASS-indirect	f918c bctrl 
+f9140	Program__createInstForIlOpcode	r7	PASS-indirect	f918c bctrl 
+f9140	Program__createInstForIlOpcode	r8	PASS-indirect	f918c bctrl 
+fd5c8	Program__translateILStream	r6	PASS-indirect	fd640 bl 0x193e18
+fd5c8	Program__translateILStream	r7	PASS-indirect	fd640 bl 0x193e18
+fd5c8	Program__translateILStream	r8	PASS-indirect	fd640 bl 0x193e18

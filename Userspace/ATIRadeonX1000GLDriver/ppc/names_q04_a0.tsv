@@ -1,0 +1,76 @@
+use	FUN_000b6580	uVar9	r4Stale	INFERRED	r4 left by a helper call, forwarded as a stale argument	^\s*uVar9\ =\ extraout_r4_00;$	+1
+use	FUN_000b6580	uVar9	r4Stale	INFERRED	r4 left by a helper call, forwarded as a stale argument	^\s*uVar9\ =\ extraout_r4_01;$	+1
+use	FUN_000b6580	uVar9	r4Stale	INFERRED	r4 left by a helper call, forwarded as a stale argument	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(0x200,uVar9,in_r5,in_r6,in_r7,in_r8,0\);$	+1
+use	FUN_000b6580	uVar9	firstEnabledUnit	INFERRED	1 until the first enabled texture unit has been emitted, then 0	^\s*uVar9\ =\ 1;$	+1
+use	FUN_000b6580	uVar9	firstEnabledUnit	INFERRED	1 until the first enabled texture unit has been emitted, then 0	^\s*uVar9\ =\ 1;$@2	+1
+use	FUN_000b6580	uVar9	firstEnabledUnit	INFERRED	1 until the first enabled texture unit has been emitted, then 0	^\s*FUN_000d6340\(param_1,puVar7,\(uint\)\*\(ushort\ \*\)\(iVar10\ \+\ 0x38\),uVar15,iVar10,uVar9,uVar12\)$	+1
+use	FUN_000b6580	uVar9	firstEnabledUnit	INFERRED	1 until the first enabled texture unit has been emitted, then 0	^\s*uVar9\ =\ 0;$	+1
+use	FUN_000b6580	uVar9	firstEnabledUnit	INFERRED	1 until the first enabled texture unit has been emitted, then 0	^\s*FUN_000d7520\(param_1,puVar7,\(uint\)\*\(ushort\ \*\)\(iVar10\ \+\ 0x38\),$	+3
+use	FUN_000b6580	uVar9	firstEnabledUnit	INFERRED	1 until the first enabled texture unit has been emitted, then 0	^\s*FUN_000d55c0\(param_1,puVar14,uVar9,uVar12\);$	+1
+use	FUN_000b6580	iVar4	tokenCountBefore	INFERRED	token count of the program before the texture environment tokens: compared afterwards to detect that nothing was emitted	^\s*iVar4\ =\ \*\(int\ \*\)\(puVar7\ \+\ 4\);$	+3
+use	FUN_000b6580	iVar4	tokenCountBefore	INFERRED	token count of the program before the texture environment tokens: compared afterwards to detect that nothing was emitted	^\s*iVar4\ =\ \*\(int\ \*\)\(puVar7\ \+\ 4\);$@2	+1
+use	FUN_000b6580	iVar4	tokenCountBefore	INFERRED	token count of the program before the texture environment tokens: compared afterwards to detect that nothing was emitted	^\s*if\ \(iVar4\ ==\ \*\(int\ \*\)\(puVar7\ \+\ 4\)\)\ \{$	+1
+use	FUN_000b6580	iVar8	oldTokenWords	INFERRED	token word array of the previously cached program, freed when replaced	^\s*iVar8\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000036c0\)\ \+\ iVar4\)\ \+\ 0xc\);$	+3
+use	FUN_000b6580	iVar8	ctxUnitCursor	INFERRED	glContext advanced 0xcc per unit (texture environment mode at +0x450)	^\s*iVar8\ =\ param_1;$	+1
+use	FUN_000b6580	iVar8	ctxUnitCursor	INFERRED	glContext advanced 0xcc per unit (texture environment mode at +0x450)	^\s*if\ \(\*\(ushort\ \*\)\(iVar8\ \+\ 0x450\)\ ==\ 0x8570\)\ \{$	+1
+use	FUN_000b6580	iVar8	ctxUnitCursor	INFERRED	glContext advanced 0xcc per unit (texture environment mode at +0x450)	^\s*FUN_000d7520\(param_1,puVar7,\(uint\)\*\(ushort\ \*\)\(iVar10\ \+\ 0x38\),$	+2
+use	FUN_000b6580	iVar8	ctxUnitCursor	INFERRED	glContext advanced 0xcc per unit (texture environment mode at +0x450)	^\s*iVar8\ =\ iVar8\ \+\ 0xcc;$	+1
+use	FUN_000b6580	uVar5	unitCount	INFERRED	min(texture unit count, programmable unit limit)	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x2b\);$	+1
+use	FUN_000b6580	uVar5	unitCount	INFERRED	min(texture unit count, programmable unit limit)	^\s*uVar5\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b2\)\[param_1\];$	+1
+use	FUN_000b6580	uVar5	unitCount	INFERRED	min(texture unit count, programmable unit limit)	^\s*if\ \(uVar5\ ==\ 0\)\ \{$	+1
+use	FUN_000b6580	uVar5	unitCount	INFERRED	min(texture unit count, programmable unit limit)	^\s*\}\ while\ \(uVar5\ !=\ uVar15\);$	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14;$	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*if\ \(\*\(uint\ \*\)\(puVar7\ \+\ 8\)\ <=\ uVar5\)\ \{$	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14;$@2	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*\*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(puVar7\ \+\ 0xc\)\)\ =\ 0x47;$	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14\ \+\ 1;$@3	+2
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14;$@5	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*if\ \(\*\(uint\ \*\)\(puVar7\ \+\ 8\)\ <=\ uVar5\)\ \{$@4	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14;$@6	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*\*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(puVar7\ \+\ 0xc\)\)\ =\ 0x28;$	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14\ \+\ 1;$	+3
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14;$@3	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(puVar7\ \+\ 0xc\)\)\ =\ uVar12;$	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14\ \+\ 1;$@2	+3
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*uVar5\ =\ \*puVar14;$@4	+1
+use	FUN_000b6580	uVar5	tokenCountLocal	INFERRED	token count (*tokenCountPtr + n) of the program being built	^\s*\*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(puVar7\ \+\ 0xc\)\)\ =\ 0x120000;$	+1
+local	FUN_000b6580	iVar11	engineCaps	INFERRED	*(*(glContext+4)+0x10) capability table (fog mode short at +0x2e04)
+local	FUN_000b6580	bVar1	noCachedProgram	INFERRED	true when param_2 == 0: a new program is built instead of rebuilding the cached one
+use	FUN_000b6580	bVar2	needsFogTokens	INFERRED	fog / colour-sum tokens must be appended (FUN_000d55c0)	^\s*if\ \(\(\(\(int\)uVar5\ <\ 0\)\ \&\&$	+4
+use	FUN_000b6580	bVar2	needsFogTokens	INFERRED	fog / colour-sum tokens must be appended (FUN_000d55c0)	^\s*else\ if\ \(\(\(uVar5\ \&\ 0x800000\)\ ==\ 0\)\ \|\|$	+3
+use	FUN_000b6580	bVar2	needsFogTokens	INFERRED	fog / colour-sum tokens must be appended (FUN_000d55c0)	^\s*if\ \(\(bVar2\)\ \|\|\ \(\(uVar5\ \&\ 0x200000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000b6580	bVar2	notLastRow	INFERRED	loop continues while the row index is not 3	^\s*bVar2\ =\ uVar15\ !=\ 3;$	+1
+use	FUN_000b6580	bVar2	notLastRow	INFERRED	loop continues while the row index is not 3	^\s*\}\ while\ \(bVar2\);$	+1
+local	FUN_000b6580	sVar3	fogMode	INFERRED	GL fog mode from the capability table (0x801 EXP2, 0x2601 LINEAR, 0x800 EXP)
+use	FUN_000b6580	iVar6	stateSlot	INFERRED	index + glContext+0x1e5c shadow state base: byte flag slot	^\s*iVar6\ =\ iVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x1e5c\);$	+1
+use	FUN_000b6580	iVar6	stateSlot	INFERRED	index + glContext+0x1e5c shadow state base: byte flag slot	^\s*\(\(unsigned\ char\ \*\)0x00002ddc\)\[iVar6\]\ =\ 1;$	+1
+use	FUN_000b6580	iVar6	stateSlot	INFERRED	index + glContext+0x1e5c shadow state base: byte flag slot	^\s*iVar6\ =\ iVar4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x1e5c\);$@2	+1
+use	FUN_000b6580	iVar6	stateSlot	INFERRED	index + glContext+0x1e5c shadow state base: byte flag slot	^\s*\(\(unsigned\ char\ \*\)0x00002fdc\)\[iVar6\]\ =\ 1;$	+1
+use	FUN_000b6580	iVar6	ctxShadowCursor	INFERRED	glContext advanced 4 per unit (bound texture shadows at +0x13f8)	^\s*iVar6\ =\ param_1;$	+1
+use	FUN_000b6580	iVar6	ctxShadowCursor	INFERRED	glContext advanced 4 per unit (bound texture shadows at +0x13f8)	^\s*iVar10\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\);$	+1
+use	FUN_000b6580	iVar6	ctxShadowCursor	INFERRED	glContext advanced 4 per unit (bound texture shadows at +0x13f8)	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
+local	FUN_000b6580	iVar10	boundTexture	INFERRED	texture object bound to the unit
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*uVar12\ =\ 0;$	+1
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*uVar12\ =\ 0;$@2	+1
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*FUN_000d6340\(param_1,puVar7,\(uint\)\*\(ushort\ \*\)\(iVar10\ \+\ 0x38\),uVar15,iVar10,uVar9,uVar12\)$	+1
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*uVar12\ =\ uVar15;$	+1
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*FUN_000d7520\(param_1,puVar7,\(uint\)\*\(ushort\ \*\)\(iVar10\ \+\ 0x38\),$	+2
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*uVar12\ =\ uVar15;$@2	+1
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*FUN_000d55c0\(param_1,puVar14,uVar9,uVar12\);$	+1
+use	FUN_000b6580	uVar12	lastTexUnit	INFERRED	index of the previously emitted texture unit	^\s*FUN_000d5390\(param_1,puVar14,0,uVar12,\*\(uint\ \*\)\(puVar7\ \+\ 0x1668\)\ >>\ 6\ \&\ 0xffff\);$	+1
+use	FUN_000b6580	uVar12	unitSelectToken	INFERRED	0x170000 | unit: unit select token word	^\s*uVar12\ =\ 0x170000;$	+1
+use	FUN_000b6580	uVar12	unitSelectToken	INFERRED	0x170000 | unit: unit select token word	^\s*uVar12\ =\ uVar15\ \&\ 0xffff\ \|\ uVar12\ \&\ 0xffff0000;$	+1
+use	FUN_000b6580	uVar12	unitSelectToken	INFERRED	0x170000 | unit: unit select token word	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(puVar7\ \+\ 0xc\)\)\ =\ uVar12;$	+1
+local	FUN_000b6580	psVar13	texEnvModeCursor	INFERRED	pointer to the texture environment mode short of the current unit (+0x454, stride 0xcc)
+local	FUN_000b6580	puVar7	ffpsProgram	INFERRED	fixed-function pixel shader program object (token vector: count +4, capacity +8, words +0xc)
+local	FUN_000b6580	puVar14	tokenCountPtr	INFERRED	&ffpsProgram->count
+local	FUN_000b6580	uVar16	allocPair	INFERRED	64-bit result of FUN_0004bbf0 (cached program lookup)
+local	FUN_000b6580	param_2	cachedProgram	INFERRED	cached program pointer returned by FUN_0004bbf0 (0 = rebuild from scratch)
+local	FUN_000b6580	local_68	ilTokens	INFERRED	IL source struct word 0: token array
+local	FUN_000b6580	local_64	ilTokenCount	INFERRED	IL source struct word 1: token count
+local	FUN_000b6580	local_60	ilReserved	INFERRED	IL source struct word 2: zero
+local	FUN_000b6580	local_5c	ilFlags	INFERRED	IL source struct word 3: flags (0x83, 0x100 shadow, 0xc/4/8 fog mode, 0x400 clip planes)
+local	FUN_000b6580	local_58	ilClipPlaneMask	INFERRED	IL source struct word 4: user clip plane mask
+local	FUN_000b6580	local_54	ilVersion	INFERRED	IL source struct word 5: constant 2
+local	FUN_000b6580	local_50	ilScHandle	INFERRED	IL source struct word 6: shader compiler handle (0)
+func	FUN_000b6580	ffpsBuildProgram	INFERRED	builds the fixed-function pixel shader as an IL token program: declarations (ffpsEmitDeclarations), per-unit texture environment tokens (ffpsEmitTexEnvCombine / Legacy), fog/colour-sum tokens, unit select tokens and the end token, then compiles it with gld_compileILProgram and caches it in the shader state at ctx+0x1e5c

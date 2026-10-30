@@ -1,2 +1,29 @@
 local	FUN_000a4490	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in FUN_000a4550)
 local	FUN_000ac540	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in FUN_000ac720)
+local	FUN_000a7050	uVar8	chipClassBits	INFERRED	engine+0x24 & 0x7ff00000: hardware class selector (0x800000/0x100000/0x200000/0x400000 pick the register layout constants)
+use	FUN_000a7050	iVar5	zeroCursor	INFERRED	pointer into the 16 per-slot words at stream+0x98 cleared to 0	^\s*iVar5\ =\ iVar9;$	+1
+use	FUN_000a7050	iVar5	zeroCursor	INFERRED	pointer into the 16 per-slot words at stream+0x98 cleared to 0	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x98\)\ =\ 0;$	+2
+use	FUN_000a7050	iVar5	idTableBytes	INFERRED	byte size (count * 2) of the 0xffff-filled id table at ctx+0x1354	^\s*iVar5\ =\ \(uint\)\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x00001350\)\ \+\ param_1\)\ <<\ 1;$	+2
+use	FUN_000a7050	iVar5	idTableBytes	INFERRED	byte size (count * 2) of the 0xffff-filled id table at ctx+0x1354	^\s*uVar6\ =\ \(\*pcVar4\)\(0x40,a1,iVar5,in_r6,a4,uVar6,pcVar4\);$	+1
+local	FUN_000a7050	puVar2	dispatchEntry	INFERRED	scratch holding a callback pointer loaded from the PTR_ table before it is stored into the context dispatch table
+local	FUN_000a7050	puVar3	dispatchEntry2	INFERRED	second scratch holding a callback pointer loaded from the PTR_ table before it is stored into the context dispatch table
+use	FUN_000a7050	uVar6	allocResultA8	INFERRED	result of the 0xa8-byte allocation (stored at ctx+0x13ac)	^\s*uVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_000a6f70\)\(0xa8\);$	+1
+use	FUN_000a7050	uVar6	allocResultA8	INFERRED	result of the 0xa8-byte allocation (stored at ctx+0x13ac)	^\s*\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x000013ac\)\ \+\ param_1\)\ =\ uVar6;$	+1
+use	FUN_000a7050	uVar6	allocResult14	INFERRED	result of the 0x14-byte allocation (stored at ctx+0x136c)	^\s*uVar6\ =\ \(\*pcVar4\)\(0x14,\(int\)uVar11,in_r5,in_r6,a4,uVar7,pcVar4\);$	+1
+use	FUN_000a7050	uVar6	allocResult14	INFERRED	result of the 0x14-byte allocation (stored at ctx+0x136c)	^\s*\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x0000136c\)\ \+\ param_1\)\ =\ uVar6;$	+1
+use	FUN_000a7050	uVar6	staleArgR8	INFERRED	zero kept in a register and forwarded as a stale argument of later allocator calls	^\s*uVar6\ =\ 0;$	+1
+use	FUN_000a7050	uVar6	staleArgR8	INFERRED	zero kept in a register and forwarded as a stale argument of later allocator calls	^\s*uVar7\ =\ \(\*pcVar4\)\(1,\(\(unsigned\ char\ \*\)0x00003754U\),uVar7,in_r6,a4,uVar6,0\);$	+1
+use	FUN_000a7050	uVar6	staleArgR8	INFERRED	zero kept in a register and forwarded as a stale argument of later allocator calls	^\s*uVar6\ =\ \(\*pcVar4\)\(0x40,a1,iVar5,in_r6,a4,uVar6,pcVar4\);$	+2
+local	FUN_000a7050	a1	staleArgR4	INFERRED	stale register forwarded to the 0x40-byte allocation
+local	FUN_000a7050	a4	allocatorFn	INFERRED	FUN_000a6f70, the allocator installed at ctx+0x24c
+use	FUN_000a7050	uVar7	floatEighthBits	INFERRED	0x3e000000 (0.125f) kept as a stale argument of the allocator calls	^\s*uVar7\ =\ 0x3e000000;$	+1
+use	FUN_000a7050	uVar7	floatEighthBits	INFERRED	0x3e000000 (0.125f) kept as a stale argument of the allocator calls	^\s*uVar6\ =\ \(\*pcVar4\)\(0x14,\(int\)uVar11,in_r5,in_r6,a4,uVar7,pcVar4\);$	+1
+use	FUN_000a7050	uVar7	zeroArgForAlloc	INFERRED	zero forwarded to the allocator call for ctx+0x20a0	^\s*uVar7\ =\ 0;$	+1
+use	FUN_000a7050	uVar7	zeroArgForAlloc	INFERRED	zero forwarded to the allocator call for ctx+0x20a0	^\s*uVar7\ =\ \(\*pcVar4\)\(1,\(\(unsigned\ char\ \*\)0x00003754U\),uVar7,in_r6,a4,uVar6,0\);$	+2
+use	FUN_000a7050	uVar7	idTableObject	INFERRED	0x14-byte object allocated for ctx+0x1358	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x250\)\)\(1,0x14\);$	+1
+use	FUN_000a7050	uVar7	idTableObject	INFERRED	0x14-byte object allocated for ctx+0x1358	^\s*\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x00001358\)\ \+\ param_1\)\ =\ uVar7;$	+1
+use	FUN_000a7050	uVar7	idTableWords	INFERRED	10-byte id array allocated at ctx+0x1354 (memset to 0xff)	^\s*uVar7\ =\ \(\*pcVar4\)\(10\);$	+2
+use	FUN_000a7050	uVar7	idTableWords	INFERRED	10-byte id array allocated at ctx+0x1354 (memset to 0xff)	^\s*_memset\(uVar7,0xff,iVar5\);$	+1
+local	FUN_000a7050	uVar11	allocResult90	INFERRED	result of the 0x90-byte allocation (high word stored at ctx+0x1394)
+local	FUN_000a7050	iVar9	streamBase	INFERRED	ctx + 0x240, the embedded stream object
+func	FUN_000a7050	gld_initContextDispatch	INFERRED	initialises a freshly created GL context: installs the allocator (FUN_000a6f70) and the callback/dispatch tables, per-slot state defaults, hardware-class register constants (chipClassBits), the unit setup cmd list, id tables and shader tables (atifsCreateShaderTable, arbfpLoadDefaultProgram)

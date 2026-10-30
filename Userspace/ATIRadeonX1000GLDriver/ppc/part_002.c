@@ -8817,7 +8817,7 @@ int gld_applyPbufferToRenderFlags(ctx, flagsInOut, pbuffer)
       ((unsigned char *)GLD_yInverted)[ctx] = 0;
     }
   }
-  FUN_000a7a60(ctx);
+  gld_updateDrawBufferConfig(ctx);
   return;
 }
 
@@ -8850,7 +8850,7 @@ int gld_updateColorFormatIndex(ctx)
       attachLeft = attachLeft + -1;
     } while (attachLeft != 0);
   }
-  return FUN_000a7a60(ctx);
+  return gld_updateDrawBufferConfig(ctx);
 }
 
 /* gld_setIntegerEngineParam @ 0x17310 (1008 bytes) */
@@ -9560,14 +9560,14 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
   else {
     *(uint *)(ctx + 0x26b0) = scratchUint41 | 0x40;
   }
-  if (((((((*(int *)(ctx + 0x18c) == 0) || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 0)) &&
-         ((*(int *)(ctx + 400) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 1)))) &&
-        ((*(int *)(ctx + 0x194) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 2)))) &&
-       ((*(int *)(ctx + 0x198) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 3)))) &&
-      ((((*(int *)(ctx + 0x19c) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 4)) &&
-        ((*(int *)(ctx + 0x1a0) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 5)))) &&
-       ((*(int *)(ctx + 0x1a4) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 6)))))) &&
-     ((*(int *)(ctx + 0x1a8) == 0 || (scratchInt33 = FUN_000a4760(ctx), scratchInt33 == 7)))) {
+  if (((((((*(int *)(ctx + 0x18c) == 0) || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 0)) &&
+         ((*(int *)(ctx + 400) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 1)))) &&
+        ((*(int *)(ctx + 0x194) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 2)))) &&
+       ((*(int *)(ctx + 0x198) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 3)))) &&
+      ((((*(int *)(ctx + 0x19c) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 4)) &&
+        ((*(int *)(ctx + 0x1a0) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 5)))) &&
+       ((*(int *)(ctx + 0x1a4) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 6)))))) &&
+     ((*(int *)(ctx + 0x1a8) == 0 || (scratchInt33 = gld_getActiveSampleIndex(ctx), scratchInt33 == 7)))) {
     scratchUint41 = *(uint *)(ctx + 0x26b0) & 0xfffdffff;
     *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
@@ -10426,14 +10426,14 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   formatArg = format;
   typeArg = pixelType;
   rasterPosArg = rasterPos;
-  if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 0)) &&
-         ((*(int *)(ctx + GLD_unitObject1) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 1)))) &&
-        ((*(int *)(ctx + GLD_unitObject2) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 2)))) &&
-       ((*(int *)(ctx + GLD_unitObject3) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 3)))) &&
-      (((*(int *)(ctx + GLD_unitObject4) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 4)) &&
-       ((*(int *)(ctx + GLD_unitObject5) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 5)))))) &&
-     (((*(int *)(ctx + GLD_unitObject6) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 6)) &&
-      ((*(int *)(ctx + GLD_unitObject7) == 0 || (scratchInt11 = FUN_000a4760(ctx), scratchInt11 == 7)))))) {
+  if (((((((*(int *)(ctx + GLD_unitObject0) == 0) || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 0)) &&
+         ((*(int *)(ctx + GLD_unitObject1) == 0 || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 1)))) &&
+        ((*(int *)(ctx + GLD_unitObject2) == 0 || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 2)))) &&
+       ((*(int *)(ctx + GLD_unitObject3) == 0 || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 3)))) &&
+      (((*(int *)(ctx + GLD_unitObject4) == 0 || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 4)) &&
+       ((*(int *)(ctx + GLD_unitObject5) == 0 || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 5)))))) &&
+     (((*(int *)(ctx + GLD_unitObject6) == 0 || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 6)) &&
+      ((*(int *)(ctx + GLD_unitObject7) == 0 || (scratchInt11 = gld_getActiveSampleIndex(ctx), scratchInt11 == 7)))))) {
     pathFlagsB = *(uint *)(ctx + GLD_drawPixelsFlags) & 0xfffdffff;
     *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlagsB;
   }

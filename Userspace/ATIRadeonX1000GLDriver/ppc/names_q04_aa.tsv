@@ -1,0 +1,200 @@
+use	ilAssembleProgram	uVar21	defRecordLimit	INFERRED	loop bound: copy of the definition-record count (local_2a08) in the def-record pass	^\s*uVar21\ =\ local_2a08;$	+1
+use	ilAssembleProgram	uVar21	defRecordLimit	INFERRED	loop bound: copy of the definition-record count (local_2a08) in the def-record pass	^\s*uVar21\ =\ local_2a08;$@2	+1
+use	ilAssembleProgram	uVar21	defRecordLimit	INFERRED	loop bound: copy of the definition-record count (local_2a08) in the def-record pass	^\s*\}\ while\ \(uVar33\ <\ uVar21\);$	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*uint\ \*puVar19;$@2	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*puVar19\ =\ puVar26;$	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*if\ \(puVar31\ \+\ iVar38\ <=\ puVar19\)\ \{$	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar19;$	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*puVar26\ =\ puVar19;$	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@2	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 1;$	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 2;$	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb8\[1\]\ =\ \(uint\ \*\*\*\*\*\*\)puVar19\[1\];$@2	+3
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@3	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 2;$@2	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb8\[1\]\ =\ \(uint\ \*\*\*\*\*\*\)puVar19\[1\];$@3	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*for\ \(uVar32\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar19\ \+\ 6\);\ puVar26\ =\ local_2bb4,\ uVar32\ !=\ 0;$	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 1;$@2	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 1;$@3	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 2;$@3	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 1;$@4	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*if\ \(\(puVar19\[1\]\ >>\ 0x10\ \&\ 0x3f\)\ \-\ 1\ <\ 2\)\ \{$	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb8\[2\]\ =\ \(uint\ \*\*\*\*\*\*\)puVar19\[2\];$@2	+5
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 1;$@5	+1
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7930\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,local_2bb4,pppppppuVar20,$	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 2;$@4	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@4	+3
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar19;$@2	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*puVar26\ =\ puVar19\ \+\ 2;$	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@5	+3
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar19;$@3	+2
+use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*puVar26\ =\ puVar19\ \+\ 2;$@2	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*puVar29\ =\ puVar31;$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 2;$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*puVar29\ =\ puVar26;$	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*puVar29\ =\ \(uint\ \*\)0x0;$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*puVar29\ =\ \(uint\ \*\)_malloc\(uVar33\ \+\ 0x10\);$	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*puVar29\[1\]\ =\ puVar31\[1\];$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*pppppppuVar30\ =\ \(uint\ \*\*\*\*\*\*\*\)\(puVar29\ \+\ 2\);$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*pppppppuVar18\ =\ \(uint\ \*\*\*\*\*\*\*\)\*puVar29;$	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 1;$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000c8910\)\(puVar29,uVar9,2,\&local_23e8\);$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 2;$@2	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 3;$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000c8910\)\(puVar29,1,3,\&local_23e8\);$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ \*\(ushort\ \*\)\(\(int\)puVar29\ \+\ 6\)\ \+\ 2;$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 3;$@2	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 1;$@2	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*uVar33\ =\ puVar29\[1\];$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 1;$@3	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 2;$@3	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 1;$@4	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2b68\ =\ \(uint\ \*\*\*\*\*\*\)puVar29\[2\];$	+5
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2b68\ =\ \(uint\ \*\*\*\*\*\*\)puVar29\[2\];$@2	+5
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000c8910\)\(puVar29,1,2,\&local_23e8\);$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 2;$@4	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000c8910\)\(puVar29,0,1,\&local_23e8\);$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 2;$@5	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*uVar33\ =\ puVar29\[1\];$@2	+6
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2374\ =\ 1\ <<\ \(\*\(byte\ \*\)\(\(int\)puVar29\ \+\ 1\)\ \&\ 0x3f\)\ \|\ local_2374;$	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 3;$@3	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*if\ \(\(1\ <<\ \(\*\(byte\ \*\)\(\(int\)puVar29\ \+\ 1\)\ \&\ 0x3f\)\ \&\ local_2378\)\ !=\ 0\)\ \{$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 2;$@6	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*uVar33\ =\ puVar29\[1\];$@3	+6
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2374\ =\ 1\ <<\ \(\*\(byte\ \*\)\(\(int\)puVar29\ \+\ 1\)\ \&\ 0x3f\)\ \|\ local_2374;$@2	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ puVar29\ \+\ 3;$@4	+2
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*if\ \(\(1\ <<\ \(\*\(byte\ \*\)\(\(int\)puVar29\ \+\ 1\)\ \&\ 0x3f\)\ \&\ local_2378\)\ !=\ 0\)\ \{$@2	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2bb4\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000c8910\)\(puVar29,uVar9,1,\&local_23e8\);$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*local_2acc\ =\ puVar29;$	+1
+use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*if\ \(puVar29\ !=\ \(uint\ \*\)0x0\)\ \{$	+2
+local	ilAssembleProgram	pbVar2	outputEntryNumberPtr	INFERRED	points at byte 1 (output number) of a 12-byte output entry
+local	ilAssembleProgram	pbVar5	outputEntryTypePtr	INFERRED	points at byte 4 (output type) of the same entry
+local	ilAssembleProgram	puVar6	registerKindBits	INFERRED	uVar33 & 0x3f0000: register kind field of a declaration token
+local	ilAssembleProgram	pppppppuVar20	scratchCursorA	INFERRED	carried 6th argument of ilEmitPrologue / ilEmitShadowStateTokens
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*uint\ \*\*\*\*\*\*\*pppppppuVar25;$@2	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ local_220;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ pppppppuVar18\ \+\ 1;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar26;$	+3
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\*\(undefined1\ \*\)\(pppppppuVar25\ \+\ 4\)\ =\ 1;$	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ pppppppuVar25\ \+\ 5;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@2	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ local_2bb8\ \+\ 3;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@3	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ pppppppuVar30;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ local_2bb8\ \+\ 5;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@4	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\*\)\(\(uint\)local_2b74\ \&\ 0x400000\);$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*if\ \(pppppppuVar25\ !=\ \(uint\ \*\*\*\*\*\*\*\)0x0\)\ \{$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7650\)\(\&local_23e8,local_70,pppppppuVar18,\&local_2bb0,uVar22,pppppppuVar30,$	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@5	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\*\)\(\(uint\)local_2b98\ \&\ 0x400000\);$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*if\ \(pppppppuVar25\ !=\ \(uint\ \*\*\*\*\*\*\*\)0x0\)\ \{$@2	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*if\ \(\(\(uVar7\ ==\ 0x4000000\)\ \|\|\ \(\(uVar7\ ==\ 0x8000000\ \&\&\ \(\(uVar34\ \&\ local_2374\)\ !=\ 0\)\)\)\)\ \&\&$@2	+3
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7650\)\(\&local_23e8,\&local_2b98,pppppppuVar18,\&local_2bb0,uVar22,$	+2
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ local_2ba4;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\*\)\(\(uint\)local_2ba4\ \|\ 0x400000\);$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\*pppppppuVar20\ =\ \(uint\ \*\*\*\*\*\*\)pppppppuVar25;$	+1
+use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*local_2bb8\[3\]\ =\ \(uint\ \*\*\*\*\*\*\)\(\(uint\)pppppppuVar25\ \&\ 0x3fffff\);$	+1
+local	ilAssembleProgram	local_2bb0	operandWord2bb0	INFERRED	operand token or extension word slot (role depends on opcode 0x5d/0x5e)
+local	ilAssembleProgram	local_2bac	operandWord2bac	INFERRED	operand token slot of the second operand pair (opcode 0x5e)
+local	ilAssembleProgram	local_2ba4	operandWord2ba4	INFERRED	first operand token (pass 2) / extension slot (pass 1)
+local	ilAssembleProgram	local_2ba0	operandWord2ba0	INFERRED	extension of the second operand pair (opcode 0x5e)
+local	ilAssembleProgram	local_2b98	operandWord2b98	INFERRED	operand token or extension word slot
+local	ilAssembleProgram	local_2b94	operandWord2b94	INFERRED	third operand token of opcode 0x5e
+local	ilAssembleProgram	local_2b8c	remapTokenIn	INFERRED	operand token passed to ilMarkOperandRegisterUsed / ilRemapSourceOperandRegister
+local	ilAssembleProgram	auStack_2b80	remapExtIn	INFERRED	extension block passed with remapTokenIn
+local	ilAssembleProgram	local_2b74	operandWord2b74	INFERRED	operand token or extension word slot
+local	ilAssembleProgram	local_2b70	operandWord2b70	INFERRED	extension of the third operand token of opcode 0x5e
+local	ilAssembleProgram	local_2b68	constWord0	INFERRED	first word of the defined constant (opcode 0x1c)
+local	ilAssembleProgram	local_2b64	constWord1	INFERRED	second word of the defined constant
+local	ilAssembleProgram	local_2b60	constWord2	INFERRED	third word of the defined constant
+local	ilAssembleProgram	local_2b5c	constWord3	INFERRED	fourth word of the defined constant
+local	ilAssembleProgram	local_2b58	initRegsB	INFERRED	8-word register-state array (first 4 words), filled with 0xffffffff then copied to initRegsDstB
+local	ilAssembleProgram	local_2b48	initRegsBWord4	INFERRED	word 4 of initRegsB (adjacent stack slot)
+local	ilAssembleProgram	local_2b44	initRegsBWord5	INFERRED	word 5 of initRegsB
+local	ilAssembleProgram	local_2b40	initRegsBWord6	INFERRED	word 6 of initRegsB
+local	ilAssembleProgram	local_2b3c	initRegsBWord7	INFERRED	word 7 of initRegsB
+local	ilAssembleProgram	local_2b38	initRegsA	INFERRED	8-word register-state array (first 4 words), filled with 0xffffffff then copied to initRegsDst
+local	ilAssembleProgram	local_2b28	initRegsAWord4	INFERRED	word 4 of initRegsA
+local	ilAssembleProgram	local_2b24	initRegsAWord5	INFERRED	word 5 of initRegsA
+local	ilAssembleProgram	local_2b20	initRegsAWord6	INFERRED	word 6 of initRegsA
+local	ilAssembleProgram	local_2b1c	initRegsAWord7	INFERRED	word 7 of initRegsA
+local	ilAssembleProgram	auStack_2b18	scCallbackTableA	INFERRED	first callback table block passed to scSetCallbackTablesChecked (memset to 0xbc)
+local	ilAssembleProgram	local_2acc	ilOutputBuffer	INFERRED	assembled IL output stream handed to the shader compiler
+local	ilAssembleProgram	local_2ac8	ilOutputBytes	INFERRED	byte size of ilOutputBuffer (word count << 2)
+local	ilAssembleProgram	local_2ac0	compileMaskLow	INFERRED	copy of the low half of the register mask words handed to the shader compiler
+local	ilAssembleProgram	local_2aa0	compileMaskHigh	INFERRED	copy of the high half of the register mask words
+local	ilAssembleProgram	local_2a60	scratchAllocationCopy	INFERRED	scratch allocation obtained from the context allocator hook (ctx+0xc)
+local	ilAssembleProgram	auStack_2a5c	scCallbackTableB	INFERRED	second callback table block passed to scSetCallbackTablesChecked (memset to 0x674)
+local	ilAssembleProgram	local_2a14	defRecordCapacity	INFERRED	capacity (0x40 records) of defRecords
+local	ilAssembleProgram	local_2a10	dclRecordCapacity	INFERRED	capacity (0x40 records) of dclRecords
+local	ilAssembleProgram	local_2a08	defRecordCount	INFERRED	number of 0x24-byte definition records
+local	ilAssembleProgram	local_2a04	dclRecordCount	INFERRED	number of 0x24-byte declaration records
+local	ilAssembleProgram	local_29fc	defRecords	INFERRED	malloc(0x900) table of 0x24-byte definition records
+local	ilAssembleProgram	local_29f8	dclRecords	INFERRED	malloc(0x900) table of 0x24-byte declaration records
+local	ilAssembleProgram	local_2958	outputEntryCount	INFERRED	count of 12-byte output entries, stored to programBody[0x1503]
+local	ilAssembleProgram	uStack_2954	outputEntryTable	INFERRED	base byte (entry 0, byte 0) of the 0x40 12-byte output entries
+local	ilAssembleProgram	local_2953	outputEntryNumbers	INFERRED	byte 1 of each output entry: output number, initialised 0..0x3f
+local	ilAssembleProgram	abStack_2950	outputEntryTypes	INFERRED	byte 4 of each output entry: output type
+local	ilAssembleProgram	local_2654	outputKindCount	INFERRED	count of 12-byte output kind entries, stored to programBody[0x1504]
+local	ilAssembleProgram	local_2650	outputKindEntries	INFERRED	array of 12-byte output kind entries (kind byte, argument byte)
+local	ilAssembleProgram	local_2410	hwWordCapacity	INFERRED	0x400: capacity of hwWordBuffer in quads
+local	ilAssembleProgram	local_240c	hwWordBuffer	INFERRED	malloc(0x40000) buffer of compiled hardware words copied into programBody
+local	ilAssembleProgram	local_2408	outputMapTable	INFERRED	malloc(0x40000) table: [0]=entry count then 7-word entries
+local	ilAssembleProgram	local_2400	hwWordQuadCount	INFERRED	number of 4-word groups in hwWordBuffer (stored to programBody[0x1000])
+local	ilAssembleProgram	local_23fc	compileResultWord23fc	INFERRED	compiler result word stored to programBody[0x1505]
+local	ilAssembleProgram	local_23ec	maxUsedRegister	INFERRED	highest register index reported by the compiler (compared with programBody[0x1502])
+local	ilAssembleProgram	local_23e4	scanStateWord23e4	INFERRED	scan-state word initialised to 0xffff
+local	ilAssembleProgram	local_23dc	initRegsDst	INFERRED	scan-state copy of initRegsA (first 4 words)
+local	ilAssembleProgram	local_23cc	initRegsDstWord4	INFERRED	word 4 of initRegsDst
+local	ilAssembleProgram	local_23c8	initRegsDstWord5	INFERRED	word 5 of initRegsDst
+local	ilAssembleProgram	local_23c4	initRegsDstWord6	INFERRED	word 6 of initRegsDst
+local	ilAssembleProgram	local_23c0	initRegsDstWord7	INFERRED	word 7 of initRegsDst
+local	ilAssembleProgram	local_23bc	initRegsDstB	INFERRED	scan-state copy of initRegsB (first 4 words)
+local	ilAssembleProgram	local_23ac	initRegsDstBWord4	INFERRED	word 4 of initRegsDstB
+local	ilAssembleProgram	local_23a8	initRegsDstBWord5	INFERRED	word 5 of initRegsDstB
+local	ilAssembleProgram	local_23a4	initRegsDstBWord6	INFERRED	word 6 of initRegsDstB
+local	ilAssembleProgram	local_23a0	initRegsDstBWord7	INFERRED	word 7 of initRegsDstB
+local	ilAssembleProgram	local_239c	usesOutputKind16	INFERRED	set when a declaration of register kind 0x160000 is seen
+local	ilAssembleProgram	local_2398	scanStateSnapshot	INFERRED	copy of scanState taken after the scan
+local	ilAssembleProgram	local_2384	usesOutputKind10	INFERRED	set when a declaration of register kind 0x100000 is seen
+local	ilAssembleProgram	local_2378	shadowCompareUnitMask	INFERRED	texture units that need a shadow compare
+local	ilAssembleProgram	local_2374	shadowDoneUnitMask	INFERRED	texture units already counted for shadow-compare words
+local	ilAssembleProgram	aiStack_22f0	unitTexFormats	INFERRED	per-unit texture base format (0x1906 alpha, 0x1909 luminance)
+local	ilAssembleProgram	local_2270	projectedInputMask	INFERRED	mask of inputs whose semantic kind is 2
+local	ilAssembleProgram	local_2260	inputMaskWords	INFERRED	8 input-usage bit mask words (zeroed before the scan)
+local	ilAssembleProgram	auStack_2248	dclTableHead	INFERRED	8-byte head of the 4 x 0x200-byte declaration value table
+local	ilAssembleProgram	local_2240	dclValueTable	INFERRED	float declaration values, 4 per register
+local	ilAssembleProgram	local_1240	dclValueTableTail	INFERRED	tail of the declaration value table
+local	ilAssembleProgram	aiStack_1220	intConstTable	INFERRED	integer copy of the declaration values, 4 per register
+local	ilAssembleProgram	local_220	errorResult	INFERRED	non-zero error returned instead of the assembled program
+local	ilAssembleProgram	local_218	neverSetPrologueFlag	INFERRED	never set; gates the optional +0x14 / +0x24 prologue sizes
+local	ilAssembleProgram	local_1f8	perOutputFlags	INFERRED	four per-output flags (each adds 0xc/0x24 bytes)
+local	ilAssembleProgram	local_1e4	ctxFeatureFlag	INFERRED	ctx word 0x44 bit 0x18 or 0xb depending on bit 0xd
+local	ilAssembleProgram	local_1dc	neverSetFlag1dc	INFERRED	never set
+local	ilAssembleProgram	local_1d8	ctxUnitSelector	INFERRED	0xffff or the byte at ctx+0x11d1
+local	ilAssembleProgram	local_1d4	neverSetFlag1d4	INFERRED	never set
+local	ilAssembleProgram	local_1d0	neverSetFlag1d0	INFERRED	never set
+local	ilAssembleProgram	local_1cc	neverSetFlag1cc	INFERRED	never set
+local	ilAssembleProgram	local_1c8	neverSetFlag1c8	INFERRED	never set
+local	ilAssembleProgram	local_1c4	neverSetWord1c4	INFERRED	never set
+local	ilAssembleProgram	local_1c0	neverSetWord1c0	INFERRED	never set
+local	ilAssembleProgram	local_1bc	usesToken37	INFERRED	set by opcode 0x37
+local	ilAssembleProgram	local_1b8	neverSetWord1b8	INFERRED	never set
+local	ilAssembleProgram	local_1b4	neverSetPointer1b4	INFERRED	never set
+local	ilAssembleProgram	local_1b0	maskScratchA	INFERRED	16 words zeroed before the scan
+local	ilAssembleProgram	local_170	maskScratchB	INFERRED	16 words zeroed before the scan
+local	ilAssembleProgram	auStack_130	inputKindTable	INFERRED	per-input kind table (2 = projected)
+local	ilAssembleProgram	local_ec	featureSelector	INFERRED	0 none, 1..3 selects the extra feature word sizes
+local	ilAssembleProgram	local_d8	ctxBit10Flag	INFERRED	ctx word 0x44 bit 10
+local	ilAssembleProgram	local_d4	ctxByte11d2	INFERRED	byte at ctx+0x11d2
+local	ilAssembleProgram	local_cc	neverSetWord0cc	INFERRED	never set
+local	ilAssembleProgram	local_c8	texInstructionCount	INFERRED	count of opcode 0x5d/0x5e instructions
+local	ilAssembleProgram	local_c4	headerWord6Zero	INFERRED	programHeader[6] == 0
+local	ilAssembleProgram	local_7c	neverSetWord7c	INFERRED	never set
+local	ilAssembleProgram	local_78	convertedConstant	INFERRED	declaration float converted to int
+local	ilAssembleProgram	local_70	operandPtrA	INFERRED	pointer to the first remap operand token
+local	ilAssembleProgram	local_6c	inputMaskWordsPtr	INFERRED	pointer to inputMaskWords
+local	ilAssembleProgram	local_60	operandPtrB	INFERRED	pointer to the second remap operand extension

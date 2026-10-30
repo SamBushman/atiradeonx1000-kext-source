@@ -358,6 +358,8 @@ local	gld_buildVertexStreamCache	uVar11	swizzleSelectY	INFERRED	3-bit swizzle se
 local	gld_buildVertexStreamCache	uVar13	swizzleSelectZ	INFERRED	3-bit swizzle select for component Z
 local	gld_buildVertexStreamCache	uVar28	swizzleSelectW	INFERRED	3-bit swizzle select for component W
 local	gld_buildVertexStreamCache	uVar15	extWordBits	INFERRED	low 7 bits merged into the +0x26e4 per-stream extension words (even and odd stream halves)
+local	gldDeleteFragmentShaderObject	param_1	ctx	INFERRED	GL context forwarded to glDeleteFragmentShaderATI_impl
+local	gldDeleteFragmentShaderObject	param_2	shaderObject	INFERRED	object whose first word is the ATI fragment shader name
 local	glReadPixels_entry	puVar11	convertOutAPtr	INFERRED	&convertOutA
 local	glReadPixels_entry	puVar12	convertOutBPtr	INFERRED	&convertOutB
 local	glReadPixels_entry	puVar13	layoutRowBytesPtr	INFERRED	&layoutRowBytes
@@ -671,8 +673,6 @@ local	gldTrimVertexCountToPrimitiveMin	uVar1	wholeTriangleVertices	INFERRED	coun
 local	window_mode_to_ati_format	param_1	renderFlags	INFERRED	render flags; the low nibble selects the window colour mode
 local	gldCompressedImageBytes	iVar1	blockCount	INFERRED	number of 4x4 blocks: ceil(width/4) * ceil(height/4) * depth
 local	floorLog2	iVar1	log2Result	CONFIRMED	floor(log2(value)) accumulated by the shift loop
-local	gldDeleteFragmentShaderObject	param_1	ctx	INFERRED	GL context forwarded to glDeleteFragmentShaderATI_impl
-local	gldDeleteFragmentShaderObject	param_2	shaderObject	INFERRED	object whose first word is the ATI fragment shader name
 local	glBitmap_impl	auStack_178	internalDrawStateSave	INFERRED	buffer saved by gld_enterPointDrawState and restored by gldLeaveInternalDrawState
 local	glBitmap_impl	puStack_ac	internalDrawStateSavePtr	INFERRED	&internalDrawStateSave
 local	gld_postDisplayNotification	local_48	dictKeyPid	INFERRED	first element of the 2-key array passed to _CFDictionaryCreate: the "pid" key

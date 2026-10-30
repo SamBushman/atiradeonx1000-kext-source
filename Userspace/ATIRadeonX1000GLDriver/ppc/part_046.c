@@ -183,7 +183,7 @@ LAB_00173854:
     *(int *)(loopIndex + 0xa8) = *(int *)(loopIndex + 0xa8) + 1;
     loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(loopIndex + 0x140) = *(int *)(loopIndex + 0x140) + 1;
-    FUN_0017d06c(ctx,inst,&DAT_001b01bc,0);
+    ValueKey__rewriteAsMovOfValueKey(ctx,inst,&DAT_001b01bc,0);
     uVar4 = 1;
   }
   return uVar4;
@@ -436,7 +436,7 @@ int FUN_00173cdc(ctx, param_2)
     *(int *)(iVar4 + 0xa8) = *(int *)(iVar4 + 0xa8) + 1;
     iVar4 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(iVar4 + 0x13c) = *(int *)(iVar4 + 0x13c) + 1;
-    FUN_0017d06c(ctx,iVar1,local_38,0);
+    ValueKey__rewriteAsMovOfValueKey(ctx,iVar1,local_38,0);
     uVar3 = 1;
   }
   return uVar3;
@@ -801,9 +801,9 @@ int FUN_001745f0(ctx)
       ((int (*)())ValueKey__rebuild)(ctx);
     }
     do {
-      callResult = FUN_0017f7ec(ctx);
+      callResult = ValueKey__simplifyInstruction(ctx);
     } while (callResult != 0);
-    callResult = FUN_0017b96c(ctx);
+    callResult = ValueKey__rewriteUniformSwizzle(ctx);
     if (callResult != 0) {
       ((int (*)())ValueKey__rebuild)(ctx);
     }
@@ -1013,7 +1013,7 @@ int FUN_0017494c(ctx, param_2, param_3)
       *(int *)(loopIndex + 0xa8) = *(int *)(loopIndex + 0xa8) + 1;
       loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
       *(int *)(loopIndex + 0x144) = *(int *)(loopIndex + 0x144) + 1;
-      FUN_0017d06c(ctx,iVar2,&DAT_001b01bc,0);
+      ValueKey__rewriteAsMovOfValueKey(ctx,iVar2,&DAT_001b01bc,0);
       return 1;
     }
   }
@@ -1309,7 +1309,7 @@ LAB_00174efc:
           *loopPtr3 = *loopPtr4;
         }
         else {
-          loopIndex2 = FUN_00179064(valueKey,loopIndex5);
+          loopIndex2 = ValueKey__refreshExprRecordForOperand(valueKey,loopIndex5);
           *loopPtr3 = *(int *)(loopIndex2 + 4);
         }
         isLast = loopIndex5 == 3;
@@ -1341,7 +1341,7 @@ LAB_00174efc:
         if (*(char *)(loopIndex + loopIndex2 + 0x10) != '\x01') {
           loopPtr4 = (int *)valueKey[0x2c];
           if (*(int *)(loopPtr4[0x22] + 8) == 0x8e) {
-            loopIndex2 = FUN_00179bbc(valueKey,loopIndex);
+            loopIndex2 = ValueKey__allOperandLanesEqual(valueKey,loopIndex);
             if (loopIndex2 == 0) {
               loopPtr4 = (int *)((int (*)())FUN_00174ce0)(valueKey[0x8e],loopIndex,valueKey);
               loopIndex2 = *loopPtr4;
@@ -1418,9 +1418,9 @@ LAB_001756ec:
                 goto LAB_001757a0;
 LAB_00175760:
                 *loopPtr3 = loopRemaining;
-                loopIndex2 = FUN_00176ed4(valueKey,loopRemaining);
+                loopIndex2 = ValueKey__compareClassForValueNumber(valueKey,loopRemaining);
                 loopPtr3[0x20] = loopIndex2;
-                loopIndex2 = FUN_00176f0c(valueKey,loopRemaining);
+                loopIndex2 = ValueKey__rangeClassForValueNumber(valueKey,loopRemaining);
                 loopPtr3[0x14] = loopIndex2;
               }
             }
@@ -1557,8 +1557,8 @@ LAB_00175350:
       if ((((*(int *)(loopIndex2 + 0x120) == 0) && (*(int *)(loopIndex2 + 0x124) == 0)) &&
           ((*(uint *)(loopIndex2 + 0xb8) & 1) == 0)) && ((*(uint *)(loopIndex2 + 0xb8) & 2) == 0)) {
 LAB_001753c0:
-        loopIndex2 = FUN_00176ed4(valueKey,loopIndex);
-        iVar9 = FUN_00176f0c(valueKey,loopIndex);
+        loopIndex2 = ValueKey__compareClassForValueNumber(valueKey,loopIndex);
+        iVar9 = ValueKey__rangeClassForValueNumber(valueKey,loopIndex);
       }
       else {
         FUN_00178648(valueKey,iVar9);
@@ -1582,8 +1582,8 @@ LAB_001754f8:
   } while (loopRemaining != 0);
 LAB_001757ec:
   ((int (*)())FUN_00173af8)(valueKey,local_68);
-  FUN_0017729c(valueKey);
-  FUN_001771b0(valueKey);
+  ValueKey__computeLaneCompareCodes(valueKey);
+  ValueKey__computeLaneRangeClasses(valueKey);
   return;
 }
 
@@ -1788,7 +1788,7 @@ LAB_00175ce8:
       loopPtr2[0x24] = uVar3;
       loopPtr2 = loopPtr2 + 1;
     } while (bVar1);
-    loopRemaining = FUN_000f3154(valueKey[0x2c]);
+    loopRemaining = IRInst__writesAllLanes(valueKey[0x2c]);
     if ((loopRemaining == 0) && (loopRemaining = IRInst__isProjectionOfOpcode2a(valueKey[0x2c]), loopRemaining == 0)) {
       *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
            *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;

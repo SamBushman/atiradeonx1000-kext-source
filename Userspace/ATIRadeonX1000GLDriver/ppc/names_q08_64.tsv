@@ -1,0 +1,51 @@
+local	ValueKey__compareClassForValueNumber	param_1	ctx	INFERRED	pass context (+0x238 compiler)
+local	ValueKey__compareClassForValueNumber	param_2	valueNumber	INFERRED	value number looked up in the compiler pointer set
+local	ValueKey__compareClassForValueNumber	uVar1	result	INFERRED	class value, 0 when the value number is not positive
+local	ValueKey__rangeClassForValueNumber	param_1	ctx	INFERRED	pass context (+0x238 compiler)
+local	ValueKey__rangeClassForValueNumber	param_2	valueNumber	INFERRED	value number looked up in the compiler pointer set
+local	ValueKey__rangeClassForValueNumber	uVar1	result	INFERRED	class value, 0 when the value number is not positive
+local	FUN_00176f44	param_2	sourceA	INFERRED	first source whose per-lane value numbers (ctx+0x168+src*0x10) are related
+local	FUN_00176f44	param_3	sourceB	INFERRED	second source
+local	FUN_00176f44	bVar1	lastLane	INFERRED	lane == 3
+func	FUN_00176f44	ValueKey__laneRelationHoldsOnWrittenLanes_176f44	INFERRED	true when FUN_00176d6c relates the two sources' value numbers on every lane the instruction writes
+local	FUN_00176fd4	param_2	sourceA	INFERRED	first source whose per-lane value numbers (ctx+0x168+src*0x10) are related
+local	FUN_00176fd4	param_3	sourceB	INFERRED	second source
+local	FUN_00176fd4	bVar1	lastLane	INFERRED	lane == 3
+func	FUN_00176fd4	ValueKey__laneRelationHoldsOnWrittenLanes_176fd4	INFERRED	true when FUN_00176e20 relates the two sources' value numbers on every lane the instruction writes
+local	FUN_001775d8	bVar1	lastLane	INFERRED	lane == 3
+local	FUN_001775d8	iVar2	laneRecord	INFERRED	lane info record (FUN_00174ce0) stored at ctx+0x40+lane*4
+local	FUN_001775d8	iVar4	laneWordPtr	INFERRED	walks ctx + lane*4
+func	FUN_001775d8	ValueKey__createLaneRecordsKind20	INFERRED	for every written lane with no value yet creates/reuses a lane record and sets kind word +0x20 to 1 with the source 1 lane value
+local	FUN_001779f0	bVar1	lastLane	INFERRED	lane == 3
+local	FUN_001779f0	iVar2	laneRecord	INFERRED	lane info record (FUN_00174ce0) stored at ctx+0x40+lane*4
+local	FUN_001779f0	iVar4	laneWordPtr	INFERRED	walks ctx + lane*4
+func	FUN_001779f0	ValueKey__createLaneRecordsKind28	INFERRED	for every written lane with no value yet creates/reuses a lane record and sets kind word +0x28 to 1 with the source 1 lane value
+use	FUN_00176f44	iVar2	operandRecord	INFERRED	operand record 0 of the instruction (swizzle bytes: 1 = lane unused)	^\s*while\ \(\(iVar2\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),0\),$	+2
+use	FUN_00176f44	iVar2	laneRelation	INFERRED	FUN_00176d6c relation of the two lane value numbers	^\s*\(iVar2\ =\ FUN_00176d6c\(\*puVar4,\*puVar5,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\)\),\ iVar2\ !=\ 0\)\)\)\ \{$	+1
+use	FUN_00176fd4	iVar2	operandRecord	INFERRED	operand record 0 of the instruction (swizzle bytes: 1 = lane unused)	^\s*while\ \(\(iVar2\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),0\),$	+2
+use	FUN_00176fd4	iVar2	laneRelation	INFERRED	FUN_00176e20 relation of the two lane value numbers	^\s*\(iVar2\ =\ FUN_00176e20\(\*puVar4,\*puVar5,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\)\),\ iVar2\ !=\ 0\)\)\)\ \{$	+1
+local	FUN_0017740c	param_2	sourceIndex	INFERRED	source whose per-lane value numbers (ctx+0x168+src*0x10) are compared with the constant's value number
+local	FUN_0017740c	fparam_1	constantValue	INFERRED	float constant (FPR argument) the lanes are compared with
+local	FUN_0017740c	iVar3	operandRecord	INFERRED	operand record 0 of the instruction (swizzle bytes: 1 = lane unused)
+local	FUN_0017740c	bVar1	lastLane	INFERRED	lane == 3
+func	FUN_0017740c	ValueKey__sourceIsSplatOfConstant	INFERRED	true when every written lane of the source has the value number of the given float constant
+local	FUN_00178a98	param_1	ctx	INFERRED	pass context (+0x178.. value numbers of source 1)
+local	FUN_00178a98	param_2	queriedComponent	INFERRED	component / mode 0..3 queried for opcode 0x32
+local	FUN_00179b28	param_2	lane	INFERRED	lane / source index
+local	FUN_00179b28	uVar1	word0xb8Flags	INFERRED	inst +0xb8 modifier word
+local	FUN_00179b28	uVar4	word0xd0Flags	INFERRED	inst +0xd0 modifier word
+local	FUN_00178b1c	bVar1	moreComponents	INFERRED	component loop continue flag
+local	FUN_00178b1c	uVar4	result	INFERRED	1 when every input component is a constant (negative value number)
+func	FUN_00178b1c	ValueKey__allDotInputsConstant	INFERRED	for the dot-product opcodes 0x18, 0x1c, 0x1d, 0x1e: true when all input value numbers of the used components are expr records (negative)
+local	Inst__isFoldableSingleUse	param_1	inst	INFERRED	instruction tested
+local	Inst__isFoldableSingleUse	param_2	block	INFERRED	block the instruction must belong to (inst +0x158)
+local	Inst__isFoldableSingleUse	uVar2	result	INFERRED	1 when single-use, no extra source, vtable +0x68 false, opcode != 0x8e and in the block
+local	FUN_0019eb30	param_1	tokenWords	INFERRED	IL token words: word 0 bit 22 = extra word present, word 1 = per-component field word
+local	FUN_0019eb30	uVar1	componentWord	INFERRED	token word 1 (2-bit / 3-bit per-component fields)
+local	FUN_0019ebdc	param_1	tokenWords	INFERRED	IL token words: word 0 bit 22 = extra word present, word 1 = per-component field word
+local	FUN_0019ebdc	uVar1	componentWord	INFERRED	token word 1 (2-bit / 3-bit per-component fields)
+local	FUN_00189c24	iVar1	sourceCount	INFERRED	instruction source count from vtable +0x14
+local	FUN_00189c24	uVar2	src2Register	INFERRED	low 12 bits of source 2's register word (+0x94), 0 when only one source
+local	FUN_00189c24	uVar3	src1Register	INFERRED	source 1's register word (+0x94)
+local	FUN_00189c24	iVar4	opcode	INFERRED	instruction opcode, placed in bits 25.. of the key
+func	FUN_00189c24	Inst__computeKey	INFERRED	packs opcode, a write-alpha bit and the two source register numbers into one 32-bit key

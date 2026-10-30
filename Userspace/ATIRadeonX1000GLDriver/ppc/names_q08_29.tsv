@@ -1,0 +1,51 @@
+local	FUN_0017ce7c	param_2	replacement	INFERRED	replacement record: +0xc operand ref, +0x10 swizzle table index, +0x18 negate flag
+local	FUN_0017ce7c	uVar2	oldFlags	INFERRED	old instruction flag word (+0x14); bit 21 re-applied at the end
+local	FUN_0017ce7c	bVar1	hasNoExtraSource	INFERRED	flag bit 9 clear
+local	FUN_0017ce7c	uVar6	savedExtraSourceRef	INFERRED	extra-source slot saved from ctx+0x210 table (0 when none)
+local	FUN_0017ce7c	uVar10	saturate	INFERRED	inst +0x120 saturate/clamp word
+local	FUN_0017ce7c	uVar11	resultScaleCode	INFERRED	inst +0x124 output scale code
+local	FUN_0017ce7c	uVar14	destRegister	INFERRED	inst +0x94
+local	FUN_0017ce7c	uVar15	destRegisterOffset	INFERRED	inst +0x98
+local	FUN_0017ce7c	puVar5	elementRef	INFERRED	element 0 of the definition vector
+local	FUN_0017af58	param_1	resultOut	INFERRED	out: common lane value or 0x7ffffffe
+local	FUN_0017af58	param_2	ctx	INFERRED	pass context
+local	FUN_0017af58	param_3	sourceIndex	INFERRED	source slot selecting the 4 per-lane value numbers at ctx+0x168+index*0x10
+local	FUN_0017af58	bVar1	commonIsExpr	INFERRED	common value number is negative (an expr record id)
+local	FUN_0017af58	bVar2	noLaneSeen	INFERRED	true until the first used lane has been read
+local	FUN_0017af58	iVar6	commonValueNumber	INFERRED	value number shared by every used lane
+local	FUN_0017af58	local_28	writeMaskWord	INFERRED	operand 0 swizzle/write-mask bytes (0x1 = unused lane), indexed by lane
+local	FUN_001770e4	param_1	resultOut	INFERRED	out: common lane value or 0x7ffffffe
+local	FUN_001770e4	param_2	ctx	INFERRED	pass context
+local	FUN_001770e4	param_3	sourceIndex	INFERRED	source slot selecting the 4 per-lane value numbers
+local	FUN_001770e4	bVar1	commonIsExpr	INFERRED	common value number is negative
+local	FUN_001770e4	bVar2	noLaneSeen	INFERRED	true until the first used lane has been read
+local	FUN_001770e4	bVar3	notLastLane	INFERRED	loop continue flag
+local	FUN_001770e4	iVar6	commonValueNumber	INFERRED	value number shared by every used lane
+local	FUN_001771b0	param_1	ctx	INFERRED	pass context
+local	FUN_001771b0	bVar1	lastLane	INFERRED	lane == 3
+local	FUN_001771b0	iVar2	rangeClass	INFERRED	classifyConstantRange result / table value for the lane (or 0)
+local	FUN_001771b0	iVar4	ptrSetEntry	INFERRED	Compiler__findInPtrSet entry
+use	FUN_0017ce7c	uVar12	src0Swizzle	INFERRED	swizzle of old operand 0, restored at +0x9c	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	FUN_0017ce7c	uVar12	src0Swizzle	INFERRED	swizzle of old operand 0, restored at +0x9c	^\s*\*\(undefined4\ \*\)\(iVar16\ \+\ 0x9c\)\ =\ uVar12;$	+1
+use	FUN_0017ce7c	uVar12	replacementSwizzle	INFERRED	swizzle from the table indexed by replacement+0x10	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_0017ce7c	uVar12	replacementSwizzle	INFERRED	swizzle from the table indexed by replacement+0x10	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar12;$	+1
+local	FUN_0017c4a4	uVar1	word0xe8Bit0	INFERRED	bit 0 of inst +0xe8 (operand 3 modifier word)
+local	FUN_0017c4a4	uVar2	word0xd0Bit0	INFERRED	bit 0 of inst +0xd0 (operand 2 modifier word)
+local	FUN_0017c4a4	iVar3	inst	INFERRED	current instruction ctx+0xb0 (first holds the compiler option predicate result)
+local	FUN_0017d26c	param_2	vec4Constant	INFERRED	vec4 constant handed to FUN_0017a130 for operand 1
+local	FUN_0017d26c	uVar2	oldFlags	INFERRED	old instruction flag word (+0x14); bit 21 re-applied at the end
+local	FUN_0017d26c	uVar5	savedExtraSourceRef	INFERRED	extra-source slot saved from ctx+0x210 table (0 when none)
+local	FUN_0017d26c	uVar12	destRegister	INFERRED	inst +0x94
+local	FUN_0017d26c	uVar14	destRegisterOffset	INFERRED	inst +0x98
+local	FUN_0017d26c	iVar3	laneWordPtr	INFERRED	walks ctx + lane*4; the +0x30 words are zeroed for unused lanes
+local	FUN_0017a034	param_2	lane	INFERRED	lane / source slot index
+local	FUN_0017a034	iVar7	laneBase	INFERRED	ctx + lane*4, base of the per-lane value-number words
+local	FUN_0017a034	uVar1	result	INFERRED	return value: 0 unless the compare could not be folded
+local	FUN_0017a034	uVar2	selectedOperandFlags	INFERRED	modifier word of the operand chosen by the compare result
+use	FUN_0017d26c	uVar9	src0Swizzle	INFERRED	swizzle of old operand 0, restored at +0x9c	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	FUN_0017d26c	uVar9	src0Swizzle	INFERRED	swizzle of old operand 0, restored at +0x9c	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x9c\)\ =\ uVar9;$	+1
+use	FUN_0017d26c	uVar9	operandValueNumber	INFERRED	value number returned by FUN_0017a130, stored at ctx+0x214	^\s*uVar9\ =\ FUN_0017a130\(1,param_2,iVar11,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\)\);$	+2
+use	FUN_0017d26c	bVar1	hasNoExtraSource	INFERRED	flag bit 9 clear	^\s*bVar1\ =\ \(uVar2\ >>\ 9\ \&\ 1\)\ ==\ 0;$	+2
+use	FUN_0017d26c	bVar1	hasNoExtraSource	INFERRED	flag bit 9 clear	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_0017d26c	bVar1	notLastLane	INFERRED	lane != 3 loop continue	^\s*bVar1\ =\ iVar13\ !=\ 3;$	+1
+use	FUN_0017d26c	bVar1	notLastLane	INFERRED	lane != 3 loop continue	^\s*\}\ while\ \(bVar1\);$	+1

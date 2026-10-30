@@ -386,8 +386,8 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     if ((((((*(uint *)(program + 0x30) & 0x100) != 0) && (GH_U2F((unsigned int)(*constants)) == 0.0)) &&
          (GH_U2F((unsigned int)(constants[1])) == 1.0)) && ((GH_U2F((unsigned int)(constants[2])) == 0.0 && (GH_U2F((unsigned int)(constants[3])) == 0.0))))
        && (*laneSwizzle == 0x10203)) {
-      FUN_000f4a24(constants,&constVec0);
-      foundExact = FUN_000f5248(constantPool,constVec0,constVec1,constVec2,constVec3,constVec4,constVec5,constVec6);
+      ConstRecords__fillFloat4(constants,&constVec0);
+      foundExact = Compiler__getOrCreateLoadConst4(constantPool,constVec0,constVec1,constVec2,constVec3,constVec4,constVec5,constVec6);
       return foundExact;
     }
     candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle,laneSwizzleArg);
@@ -561,7 +561,7 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
         }
         listByteOffset = listByteOffset + 4;
       }
-      canCombine = FUN_000d9f3c(*(undefined4 *)(compiler + 0x398),0);
+      canCombine = CompileInput__lacksFlag0x200000(*(undefined4 *)(compiler + 0x398),0);
       if (canCombine == 0) {
         newInst = (int *)IRInst__create(0x14,compiler);
         IRInst__setOperandRef(newInst,0,newRegister);

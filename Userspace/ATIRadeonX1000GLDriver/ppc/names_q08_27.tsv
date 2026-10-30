@@ -1,0 +1,49 @@
+use	FUN_0017c5e0	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*if\ \(\(iVar7\ !=\ \-1\)\ \&\&\ \(bVar1\ =\ iVar6\ !=\ iVar7,\ iVar6\ =\ iVar7,\ bVar1\)\)\ \{$	+1
+use	FUN_0017c5e0	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*bVar1\ =\ iVar8\ ==\ 3;$	+1
+use	FUN_0017c5e0	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0017c5e0	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*bVar2\ =\ false;$	+1
+use	FUN_0017c5e0	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*bVar2\ =\ true;$	+1
+use	FUN_0017c5e0	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_0017c5e0	iVar6	laneResult	INFERRED	result class of the current lane (kept from the previous lane when equal)	^\s*iVar6\ =\ iVar7;$	+1
+use	FUN_0017c5e0	iVar6	laneResult	INFERRED	result class of the current lane (kept from the previous lane when equal)	^\s*iVar6\ =\ 2;$	+1
+use	FUN_0017c5e0	iVar6	laneResult	INFERRED	result class of the current lane (kept from the previous lane when equal)	^\s*iVar6\ =\ 3;$	+1
+use	FUN_0017c5e0	iVar6	laneResult	INFERRED	result class of the current lane (kept from the previous lane when equal)	^\s*iVar6\ =\ 0;$	+1
+use	FUN_0017c5e0	iVar6	laneResult	INFERRED	result class of the current lane (kept from the previous lane when equal)	^\s*if\ \(\(iVar7\ !=\ \-1\)\ \&\&\ \(bVar1\ =\ iVar6\ !=\ iVar7,\ iVar6\ =\ iVar7,\ bVar1\)\)\ \{$	+1
+use	FUN_0017c5e0	iVar6	laneResult	INFERRED	result class of the current lane (kept from the previous lane when equal)	^\s*iVar7\ =\ iVar6;$	+1
+use	FUN_0017c5e0	iVar6	laneResult	INFERRED	result class of the current lane (kept from the previous lane when equal)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0017c244\)\(param_1,iVar6\);$	+1
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x178\);$	+4
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*if\ \(iVar6\ <\ 1\)\ \{$	+1
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*iVar6\ =\ FUN_00173330\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar6\);$	+1
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0xc\);$	+1
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*iVar6\ =\ \(DAT_001e61d0\)\[iVar6\];$	+1
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*iVar6\ =\ \*\(int\ \*\)\(\&DAT_001e61b8\ \+\ iVar6\ \*\ 4\);$	+1
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*iVar6\ =\ \*\(int\ \*\)\(\&DAT_001e61e8\ \+\ \(iVar4\ \*\ 6\ \+\ iVar6\ \*\ 0x30\ \+\ iVar3\)\ \*\ 4\);$	+2
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*else\ if\ \(iVar6\ ==\ 2\)\ \{$	+1
+use	FUN_0017c5e0	iVar6	operandClass	INFERRED	operand class / compare table result (0 fail, 1, 2)	^\s*if\ \(iVar6\ ==\ 0\)\ \{$	+1
+use	FUN_0017c5e0	iVar7	prevLaneResult	INFERRED	result of the previous lane (-1 = none yet)	^\s*iVar7\ =\ \-1;$	+1
+use	FUN_0017c5e0	iVar7	prevLaneResult	INFERRED	result of the previous lane (-1 = none yet)	^\s*iVar6\ =\ iVar7;$	+1
+use	FUN_0017c5e0	iVar7	prevLaneResult	INFERRED	result of the previous lane (-1 = none yet)	^\s*if\ \(\(iVar7\ !=\ \-1\)\ \&\&\ \(bVar1\ =\ iVar6\ !=\ iVar7,\ iVar6\ =\ iVar7,\ bVar1\)\)\ \{$	+1
+use	FUN_0017c5e0	iVar7	prevLaneResult	INFERRED	result of the previous lane (-1 = none yet)	^\s*iVar7\ =\ iVar6;$	+1
+use	FUN_0017c5e0	iVar7	currentProgram	INFERRED	compiler->+0x6c4: the Program being compiled	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+2
+use	FUN_0017c5e0	iVar9	laneEntryPtr	INFERRED	address of the lane entry (ctx, step 4)	^\s*iVar9\ =\ param_1;$	+1
+use	FUN_0017c5e0	iVar9	laneEntryPtr	INFERRED	address of the lane entry (ctx, step 4)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x178\);$	+1
+use	FUN_0017c5e0	iVar9	laneEntryPtr	INFERRED	address of the lane entry (ctx, step 4)	^\s*iVar9\ =\ iVar9\ \+\ 4;$	+1
+local	FUN_0018f850	param_1	staleArg1	INFERRED	unused stale argument register
+local	FUN_0018f850	param_2	slotsA	INFERRED	three slot values of the first set: [0], [1], [2]
+local	FUN_0018f850	param_3	slotsB	INFERRED	three slot values of the second set
+local	FUN_0018f850	param_4	strict	INFERRED	zero: tolerate the mismatch when slotsA[1] is zero
+use	FUN_0018f850	bVar1	b0DiffersB1	INFERRED	slotsB[0] != slotsB[1]	^\s*bVar1\ =\ iVar3\ !=\ param_3\[1\];$	+2
+use	FUN_0018f850	bVar1	b0DiffersB1	INFERRED	slotsB[0] != slotsB[1]	^\s*if\ \(\(\(\(param_4\ ==\ 0\)\ \&\&\ \(bVar1\)\)\ \&\&\ \(iVar3\ !=\ param_3\[2\]\)\)\ \&\&\ \(param_3\[1\]\ !=\ param_3\[2\]\)\)\ \{$	+1
+use	FUN_0018f850	bVar1	b0DiffersB1	INFERRED	slotsB[0] != slotsB[1]	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0018f850	iVar2	slotA1	INFERRED	slotsA[1]	^\s*iVar2\ =\ param_2\[1\];$	+2
+use	FUN_0018f850	iVar2	slotA1	INFERRED	slotsA[1]	^\s*if\ \(\(bVar1\)\ \&\&\ \(iVar2\ !=\ 0\)\)\ \{$	+1
+use	FUN_0018f850	iVar2	slotA1	INFERRED	slotsA[1]	^\s*if\ \(iVar2\ ==\ param_2\[2\]\)\ \{$	+2
+use	FUN_0018f850	iVar2	slotA1	INFERRED	slotsA[1]	^\s*if\ \(iVar2\ !=\ iVar3\)\ \{$	+1
+use	FUN_0018f850	iVar2	slotA1	INFERRED	slotsA[1]	^\s*iVar3\ =\ iVar2;$	+1
+use	FUN_0018f850	iVar3	slotB0	INFERRED	slotsB[0]	^\s*iVar3\ =\ \*param_3;$	+2
+use	FUN_0018f850	iVar3	slotB0	INFERRED	slotsB[0]	^\s*if\ \(\(\(\(param_4\ ==\ 0\)\ \&\&\ \(bVar1\)\)\ \&\&\ \(iVar3\ !=\ param_3\[2\]\)\)\ \&\&\ \(param_3\[1\]\ !=\ param_3\[2\]\)\)\ \{$	+1
+use	FUN_0018f850	iVar3	slotB0	INFERRED	slotsB[0]	^\s*if\ \(iVar3\ !=\ param_3\[2\]\)\ \{$	+1
+use	FUN_0018f850	iVar3	slotACommon	INFERRED	slotsA[2] (or slotsA[1] when [0] == [2])	^\s*iVar3\ =\ param_2\[2\];$	+2
+use	FUN_0018f850	iVar3	slotACommon	INFERRED	slotsA[2] (or slotsA[1] when [0] == [2])	^\s*if\ \(iVar2\ !=\ iVar3\)\ \{$	+1
+use	FUN_0018f850	iVar3	slotACommon	INFERRED	slotsA[2] (or slotsA[1] when [0] == [2])	^\s*iVar3\ =\ iVar2;$	+1
+use	FUN_0018f850	iVar3	slotACommon	INFERRED	slotsA[2] (or slotsA[1] when [0] == [2])	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1

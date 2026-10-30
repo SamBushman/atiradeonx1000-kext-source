@@ -1,0 +1,17 @@
+use	psnDecCanonicalizeEntry	uVar13	savedRestrictMask	INFERRED	copy of lastRestrictMask restored around the restrict-mask walk	^\s*uVar13\ =\ uVar16;$	+1
+use	psnDecCanonicalizeEntry	uVar13	savedRestrictMask	INFERRED	copy of lastRestrictMask restored around the restrict-mask walk	^\s*uVar16\ =\ uVar13;$	+1
+use	psnDecCanonicalizeEntry	uVar13	savedRestrictMask	INFERRED	copy of lastRestrictMask restored around the restrict-mask walk	^\s*uVar16\ =\ uVar13;$@2	+1
+use	psnDecCanonicalizeEntry	uVar13	savedRestrictMask	INFERRED	copy of lastRestrictMask restored around the restrict-mask walk	^\s*uVar16\ =\ uVar13;$@3	+1
+use	psnDecCanonicalizeEntry	uVar13	savedRestrictMask	INFERRED	copy of lastRestrictMask restored around the restrict-mask walk	^\s*uVar13\ =\ uVar16;$@2	+1
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*uVar19\ =\ 0;$	+1
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*uVar12\ =\ \*\(ushort\ \*\)\(iVar25\ \+\ 8\ \+\ uVar19\ \*\ 4\);$	+2
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*uVar21\ =\ \(1\ <\ uVar19\)\ \+\ 3;$	+1
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*if\ \(\(iVar27\ ==\ 1\)\ \&\&\ \(uVar19\ ==\ 2\)\)\ \{$	+1
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*bVar2\ =\ uVar19\ !=\ 2;$	+1
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*uVar19\ =\ uVar19\ \+\ 1;$	+1
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*if\ \(\(\*\(short\ \*\)\(\(int\)puVar24\ \+\ \-0x12\)\ ==\ 0\ \&\&\ \*\(short\ \*\)\(\(int\)puVar24\ \+\ \-0xe\)\ ==\ 0\)\ \&\&$	+2
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*puVar24\[7\]\ =\ uVar19\ \&\ 0xfffffff7;$	+1
+use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*puVar24\[7\]\ =\ uVar19\ \&\ 0xffffffe5;$	+1
+use	psnDecRecomputeSourceUsage	uVar9	usageFlags	INFERRED	usageCursor[7] flag word read before its bits are cleared	^\s*\(uVar9\ =\ puVar21\[7\],\ \(uVar9\ \&\ 1\)\ ==\ 0\)\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar9	usageFlags	INFERRED	usageCursor[7] flag word read before its bits are cleared	^\s*puVar21\[7\]\ =\ uVar9\ \&\ 0xfffffff7;$	+1
+use	psnDecRecomputeSourceUsage	uVar9	usageFlags	INFERRED	usageCursor[7] flag word read before its bits are cleared	^\s*puVar21\[7\]\ =\ uVar9\ \&\ 0xffffffe5;$	+1

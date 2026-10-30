@@ -578,7 +578,7 @@ int freeAndNullField(fieldPtr)
   /* issue #74 / #79: this is the stock's plain free-and-null helper again. It used to carry a
    * malloc_size() guard because the bad values it freed on CGLDestroyContext teardown (0x84c1,
    * 0x110001 in #74; 0x24 in gldReleaseProgramEntry, #79) looked like table entries - the guard hid a
-   * real bug instead of fixing it: FUN_000b5fb0 dropped the object it hands the destroy
+   * real bug instead of fixing it: gld_destroyUnitCmdLists dropped the object it hands the destroy
    * callback (`lwz r4,0x1448(r30)`, loaded before the branch, so its indirect-call argument
    * count missed it) and the destructor ran on whatever r4 held. With that fixed, cgl_probe
    * runs clean on real hardware WITHOUT the guard (5 runs, zero malloc warnings). */
@@ -794,7 +794,7 @@ LAB_0004d260:
     *(uint *)(glContext + 0x18a4) = *(uint *)(glContext + 0x18a4) | 0x10;
     if ((*(uint *)(((unsigned char *)0x00001544) + glContextWord1e5c) & 0x10) == 0) {
 LAB_0004d2c8:
-      FUN_000b6580(glContext,0);
+      ffpsBuildProgram(glContext,0);
       (**(code **)(((unsigned char *)0x00001334) + glContext))(glContext,0);
       (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
     }
@@ -912,14 +912,14 @@ void gldMarkProgramsDirtyByFlag(int glContext,undefined4 unusedArg2,undefined4 u
   
   glContextWord44 = *(uint *)(glContext + 0x44);
   if ((glContextWord44 & 0x20000) == 0) {
-    FUN_000b6580(glContext,0);
+    ffpsBuildProgram(glContext,0);
                     
                     
     (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
     return;
   }
   if ((glContextWord44 & 0x2000) != 0) {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fprF1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused,fprF1);
     return;
   }
   if ((glContextWord44 & 0x80100000) == 0x80000000) {
@@ -1391,7 +1391,7 @@ LAB_0004df78:
                  (*(ushort *)(unitInfoCursor + 0x46e) & 0x3ff) << 3 | *(uint *)(texObj + 0x18) & 0xffffe007;
             unitFormatArg = *(undefined4 *)(&DAT_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
             unitIndexArg = loopIndex;
-            fprF1 = (double)((double (*)())FUN_000b6f20)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3
+            fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3
                                             ,fprF4,fprF5,fprF6,fprF7,fprF8,
                                             in_stack_ffffff28);
           }
@@ -1544,7 +1544,7 @@ LAB_0004e294:
           *(uint *)(texRegCursor + 0x1d1c) = texFilterWord;
           unitFormatArg = *(undefined4 *)(&DAT_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
           unitIndexArg = loopIndex;
-          fprF1 = (double)((double (*)())FUN_000b6f20)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3,
+          fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3,
                                           fprF4,fprF5,fprF6,fprF7,fprF8,
                                           in_stack_ffffff28);
           texFormatWord = *(uint *)(texObj + 0x14);
@@ -1638,7 +1638,7 @@ LAB_0004e760:
     glContextWord44 = *(uint *)(glContext + 0x44);
   }
   if ((glContextWord44 & 0x20000) == 0) {
-    FUN_000b6580(glContext,0);
+    ffpsBuildProgram(glContext,0);
                     
                     
     (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
@@ -1648,7 +1648,7 @@ LAB_0004e760:
     atifsCompileCurrentShader(glContext);
     return;
   }
-  ((undefined4 (*)())FUN_000afe40)(glContext,0,unitIndexArg,unitFormatArg,fprF1);
+  ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unitIndexArg,unitFormatArg,fprF1);
   return;
 }
 
@@ -1803,7 +1803,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
       (glContextWord4 = gld_needsMultisampleResolve(glContextWord4,*(undefined4 *)(glContextWord4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                             staleArgR9), glContextWord4 != 0)) || (glContextWord2768 == 0)) {
     glState = *(int *)(glContext + 4);
-    depthBiasScale = ((uint (*)())FUN_000a3560)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
+    depthBiasScale = ((uint (*)())gld_quantizePointSizeInt)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
     drawSurface = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
     *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * depthBiasScale) >> 1);
     resolveFlag = gld_needsMultisampleResolve(*(int *)(glContext + 4),drawSurface,staleArgR5,staleArgR6,staleArgR7,staleArgR8,glState);
@@ -1863,7 +1863,7 @@ int gldValidatePointSize(glContext)
   
   glContextWord2768 = *(int *)(glContext + 0x2768);
   glContextWord8 = *(int *)(glContext + 8);
-  sizeModeOrWidth = FUN_000a3670(glContext);
+  sizeModeOrWidth = gld_isPointAttenuationActive(glContext);
   glContextWord44 = *(uint *)(glContext + 0x44);
   if (((glContextWord44 & 0x60020000) == 0x40000000) && (glContextWord2768 != 0)) {
     *(short *)(glContext + 0x1ccc) = (short)*(undefined4 *)(glContextWord2768 + 4);
@@ -2084,14 +2084,14 @@ void gldValidateFog(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,u
     }
   }
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
-    FUN_000b6580(glContext,0);
+    ffpsBuildProgram(glContext,0);
     (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e5c));
   }
   else if ((*(uint *)(glContext + 0x44) & 0x2000) == 0) {
     atifsCompileCurrentShader(glContext);
   }
   else {
-    ((undefined4 (*)())FUN_000afe40)(glContext,0,unusedArgR5,unused,fprF1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused,fprF1);
   }
   fogColorWord0 = ((int (*)())gldFogColorChannelByte)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
   *(uint *)(glContext + 0x1a54) = fogColorWord0 & 0x3ff | *(uint *)(glContext + 0x1a54) & 0xfffffc00;
@@ -5061,8 +5061,8 @@ asm(".globl gldValidateVertexStreams");
 asm(".set gldValidateVertexStreams, _gldValidateVertexStreams");
 asm(".globl FUN_0004dbe0");
 asm(".set FUN_0004dbe0, _FUN_0004dbe0");
-asm(".globl FUN_0004de30");
-asm(".set FUN_0004de30, _gldSetUnitScaleConstants");
+asm(".globl gldSetUnitScaleConstants");
+asm(".set gldSetUnitScaleConstants, _gldSetUnitScaleConstants");
 
 /* issue #75 (follow-up #3): Ghidra recognized this as a THUNK - a pure trampoline stub that
  * just branches straight to the real function below, no different behavior or arguments - but

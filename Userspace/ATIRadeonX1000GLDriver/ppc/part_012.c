@@ -441,7 +441,7 @@ LAB_00083c10:
       *(undefined1 *)(ctx + 0x2435) = 1;
       *(uint *)(ctx + 0x8c) = *(uint *)(ctx + 0x8c) | 0x40000000;
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
-      validateResult = (double)FUN_000a7d10(ctx);
+      validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x29) = 1;
       ((void (*)())gldValidateState)(ctx,extraout_r4,depRecordCopy,depElemSize,builtConstBytes,constRegCount[0],paramList,validateResult,unusedFloatArg2,
                    unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
@@ -451,7 +451,7 @@ LAB_00083c10:
       *(undefined1 *)(ctx + 0x2435) = 1;
       *(uint *)(ctx + 0x8c) = *(uint *)(ctx + 0x8c) | 0x40000000;
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
-      validateResult = (double)FUN_000a7d10(ctx);
+      validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x126) = 1;
       *(undefined1 *)(ctx + 0x29) = 1;
       ((void (*)())gldValidateState)(ctx,extraout_r4_00,unusedArg3,unusedArg4,unusedArg5,unusedArg6,programKind,validateResult,unusedFloatArg2,
@@ -3971,7 +3971,7 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
   int workAreaState;
   int shaderInfo;
   /* local_48/local_44/local_40/local_3c/local_38/local_34/local_30 are one contiguous 7-word array
-   * (&local_48 passed to FUN_000b4400, which internally indexes it keyWords[0]..keyWords[6] - and that
+   * (&local_48 passed to gld_compileILProgram, which internally indexes it keyWords[0]..keyWords[6] - and that
    * value flows straight through into ilRewriteForTextureState as its own keyWords, where keyWords[1] seeds a loop
    * counter). Declared as 7 separate scalars, they landed non-adjacent at -O0 (confirmed live: the
    * value ilRewriteForTextureState read via keyWords[1] was heap-garbage-sized, not the small local_44 value),
@@ -4012,7 +4012,7 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
   if (fpRecord != 0) {
     *(undefined4 *)(((unsigned char *)0x000011fc) + workArea) = 0;
     shaderInfo = *(int *)(fpRecord + 0x74);
-    texEnumValue = FUN_000abb60(ctx);
+    texEnumValue = gld_getBoundProgramId(ctx);
     if (texEnumValue == 0x801) {
       local_3c = local_3c | 0xc;
     }
@@ -4055,7 +4055,7 @@ LAB_00088008:
     flags = local_3c | 0x280;
   }
   local_3c = flags;
-  buildStatus = FUN_000b4400(ctx,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
+  buildStatus = gld_compileILProgram(ctx,workArea + 0x18a8,workArea + 0x1784,&local_48,workAreaState);
 #undef local_48
 #undef local_44
 #undef local_40
@@ -4171,16 +4171,16 @@ int arbfpBindFragmentProgram(ctx, fpState)
     if (fpState == *(char **)(((unsigned char *)0x00001488) + ctx)) {
       if ((fpState[0x36d7] != '\0') &&
          (((*(uint *)(ctx + 0x38) & 0x400) != 0 || ((*(uint *)(ctx + 0x3c) & 1) != 0)))) {
-        FUN_000b51a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotViewportTransforms(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
       if ((fpState[0x3748] != '\0') && ((*(uint *)(ctx + 0x38) & 0x100) != 0)) {
-        FUN_000b5320(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotTransformParams(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
       if ((*(int *)(fpState + 0x374c) != 0) &&
          (*(short *)(ctx + 0x34) != 0 || *(short *)(ctx + 0x32) != 0)) {
-        FUN_000b50a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitTextureUnitScaleParams(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }
     }
@@ -4200,13 +4200,13 @@ int arbfpBindFragmentProgram(ctx, fpState)
       fpState[0x1427] = '\0';
       fpState[0x120f] = '\0';
       if (fpState[0x36d7] != '\0') {
-        FUN_000b51a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotViewportTransforms(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
       if (fpState[0x3748] != '\0') {
-        FUN_000b5320(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitSlotTransformParams(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
       if (*(int *)(fpState + 0x374c) != 0) {
-        FUN_000b50a0(ctx,fpState + 0x18a8,fpState + 0x1784);
+        gld_emitTextureUnitScaleParams(ctx,fpState + 0x18a8,fpState + 0x1784);
       }
     }
     (**(code **)(ctx + 0x294c))(ctx,workAreaState);

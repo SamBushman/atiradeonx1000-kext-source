@@ -1,0 +1,150 @@
+local	FUN_000aec40	uVar8	tokenCount	INFERRED	new token count (*wordVector + 1) after an append; compared with the capacity wordVector[1] before the next append
+use	FUN_000aec40	uVar2	srcRegWord	INFERRED	register word *param_7 of the source operand	^\s*uVar2\ =\ \*param_7;$	+1
+use	FUN_000aec40	uVar2	srcRegWord	INFERRED	register word *param_7 of the source operand	^\s*\*\(uint\ \*\)\(uVar8\ \*\ 4\ \+\ param_3\[2\]\)\ =\ \(uVar6\ \&\ 0x3f\)\ <<\ 0x10\ \|\ uVar2\ \&\ 0xffff\ \|\ 0x400000;$	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3\ \+\ 1;$	+3
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*\*\(uint\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =$	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3\ \+\ 1;$@2	+2
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@2	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@3	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@4	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@5	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@6	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar2\)\ \{$@2	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@7	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*\*\(uint\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =\ local_88;$	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3\ \+\ 1;$@3	+2
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar2\)\ \{$@3	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@8	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*\*\(uint\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x400000;$	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3\ \+\ 1;$@4	+2
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar2\)\ \{$@4	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@9	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar3;$	+3
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*if\ \(param_3\[1\]\ <=\ uVar2\)\ \{$@5	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*uVar2\ =\ \*param_3;$@10	+1
+use	FUN_000aec40	uVar2	tokenCountA	INFERRED	token count (*wordVector + 1) after an append	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar3;$@2	+3
+local	FUN_000aec40	uVar12	extraFlagBits	INFERRED	0x100 for opcodes 0x3d-0x3f or destination kind 0x18, ORed into the last operand token
+use	FUN_000aec40	uVar11	destOperandWord	INFERRED	destination operand token: kind (bits 16-21) and register (low 16 bits), or the max-register word | 0x40000 for kind 0x17	^\s*uVar11\ =\ \(uVar9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ \*param_5\ \&\ 0xffff;$	+1
+use	FUN_000aec40	uVar11	destOperandWord	INFERRED	destination operand token: kind (bits 16-21) and register (low 16 bits), or the max-register word | 0x40000 for kind 0x17	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x88\)\ \&\ 0xffff\ \|\ 0x40000;$	+1
+use	FUN_000aec40	uVar11	destOperandWord	INFERRED	destination operand token: kind (bits 16-21) and register (low 16 bits), or the max-register word | 0x40000 for kind 0x17	^\s*\*\(uint\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar11\ \|\ 0x400000;$	+1
+use	FUN_000aec40	uVar11	tokenCountB	INFERRED	token count after the destination operand was appended	^\s*uVar11\ =\ \*param_3\ \+\ 1;$	+3
+use	FUN_000aec40	uVar11	tokenCountB	INFERRED	token count after the destination operand was appended	^\s*uVar11\ =\ \*param_3;$	+1
+use	FUN_000aec40	uVar11	tokenCountB	INFERRED	token count after the destination operand was appended	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ param_3\[2\]\)\ =$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 4;$@2	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@2	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@2	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@2	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@2	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@2	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*uVar4\ =\ iVar7\ <<\ 4\ \|\ uVar4;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@3	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@3	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@3	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@3	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 4;$@3	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@3	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@4	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@4	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@4	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@4	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@4	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*uVar4\ =\ iVar7\ <<\ 8\ \|\ uVar4;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@5	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@5	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@5	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@5	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 4;$@4	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@5	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@6	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@6	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@6	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@6	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@6	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*uVar4\ =\ iVar7\ <<\ 0xc\ \|\ uVar4;$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@7	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@8	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@7	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@7	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 4;$@6	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@7	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@8	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@9	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@8	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@8	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@8	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*local_7c\[0\]\ =\ iVar7\ <<\ 4\ \|\ local_7c\[0\];$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@9	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@10	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@9	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@9	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 4;$@7	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@9	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@10	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@11	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@10	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@10	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@10	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*local_7c\[0\]\ =\ iVar7\ <<\ 8\ \|\ local_7c\[0\];$	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@11	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@12	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@11	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@11	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 4;$@8	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@11	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 0;$@12	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 1;$@13	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 2;$@12	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 3;$@12	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*iVar7\ =\ 5;$@12	+1
+use	FUN_000aec40	iVar7	swizzleCode	INFERRED	3-bit component select decoded from the operand swizzle code (0-5; 6-10 map to the same with a negate bit)	^\s*local_7c\[0\]\ =\ iVar7\ <<\ 0xc\ \|\ local_7c\[0\];$	+1
+use	FUN_000aec40	iVar7	swizzleTokenCount	INFERRED	number of swizzle/modifier tokens that follow the operands (0 or 1)	^\s*iVar7\ =\ 1;$@7	+1
+use	FUN_000aec40	iVar7	swizzleTokenCount	INFERRED	number of swizzle/modifier tokens that follow the operands (0 or 1)	^\s*iVar7\ =\ 1;$@14	+1
+use	FUN_000aec40	iVar7	swizzleTokenCount	INFERRED	number of swizzle/modifier tokens that follow the operands (0 or 1)	^\s*iVar7\ =\ 0;$@13	+1
+use	FUN_000aec40	iVar7	swizzleTokenCount	INFERRED	number of swizzle/modifier tokens that follow the operands (0 or 1)	^\s*iVar7\ =\ 1;$@15	+1
+use	FUN_000aec40	iVar7	swizzleTokenCount	INFERRED	number of swizzle/modifier tokens that follow the operands (0 or 1)	^\s*iVar7\ =\ 2;$@13	+1
+use	FUN_000aec40	iVar7	swizzleTokenCount	INFERRED	number of swizzle/modifier tokens that follow the operands (0 or 1)	^\s*if\ \(iVar7\ !=\ 0\)\ \{$	+1
+use	FUN_000aec40	iVar7	swizzleTokenCount	INFERRED	number of swizzle/modifier tokens that follow the operands (0 or 1)	^\s*\}\ while\ \(iVar7\ !=\ iVar10\);$	+1
+local	FUN_000aec40	bVar1	negateBit	INFERRED	true for swizzle codes 6-10: the component is negated
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 0;$	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 4;$	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 5;$	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 6;$	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 10;$	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*\*\(undefined4\ \*\)\(\(int\)local_7c\ \+\ iVar10\ \+\ 8\)\ =\ uVar3;$	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 0;$@2	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 4;$@2	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 5;$@2	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 6;$@2	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*uVar3\ =\ 10;$@2	+1
+use	FUN_000aec40	uVar3	remappedSwizzle	INFERRED	swizzle code remapped for kind 0x10 operands (1,2,4,7,8 -> 4; 3,5 -> 5; 6 -> 6; 9,10 -> 10)	^\s*\*\(undefined4\ \*\)\(\(int\)local_7c\ \+\ iVar10\ \+\ 8\)\ =\ uVar3;$@2	+1
+use	FUN_000aec40	uVar3	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(\(int\)\&local_84\ \+\ iVar13\);$	+1
+use	FUN_000aec40	uVar3	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar3;$	+1
+use	FUN_000aec40	uVar3	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(\(int\)local_7c\ \+\ iVar13\);$	+1
+use	FUN_000aec40	uVar3	operandTokenWord	INFERRED	operand token copied from the local operand list to the output	^\s*\*\(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ param_3\[2\]\)\ =\ uVar3;$@2	+1
+local	FUN_000aec40	uVar4	packedSwizzle	INFERRED	4 swizzle selects packed in nibbles (bit 3 of each nibble is the negate bit)
+local	FUN_000aec40	uVar5	maxRegisterPlusOne	INFERRED	a1Ptr74+0x88 + 1: register count of the program record
+local	FUN_000aec40	uVar6	srcKind	INFERRED	kind field of the source operand (param_7[1])
+local	FUN_000aec40	uVar9	destKind	INFERRED	kind field of the destination operand (param_5[1])
+local	FUN_000aec40	local_88	opcodeToken	INFERRED	instruction opcode token assembled on the stack (0x5d, 0x5e, 0x37 plus modifier bits)
+local	FUN_000aec40	local_84	operandToken0	INFERRED	first source operand token assembled on the stack
+local	FUN_000aec40	local_80	operandToken1	INFERRED	second operand token (copy of the first for opcode 0x5e)
+local	FUN_000aec40	local_7c	swizzleTokens	INFERRED	stack words following the operand tokens: swizzle token 0/1 and the four swizzle select codes
+local	FUN_000aec40	uStack00000034	stackArgSwizzle0	INFERRED	copy of the first swizzle select argument (param_8)
+local	FUN_000aec40	param_4	opcode	INFERRED	instruction opcode selector (0xb, 0x1f, 0x37, 0x3d-0x3f, 0x5d, 0x5e ...)
+local	FUN_000aec40	param_5	destOperand	INFERRED	destination operand {register, kind}
+local	FUN_000aec40	param_6	writeMask	INFERRED	4-bit component write mask
+local	FUN_000aec40	param_7	srcOperand	INFERRED	source operand {register, kind}
+local	FUN_000aec40	param_8	swizzleSelect0	INFERRED	swizzle select code for component 0
+local	FUN_000aec40	param_9	swizzleSelect1	INFERRED	swizzle select code for component 1
+local	FUN_000aec40	param_10	swizzleSelect2	INFERRED	swizzle select code for component 2
+local	FUN_000aec40	param_11	swizzleSelect3	INFERRED	swizzle select code for component 3
+local	FUN_000aec40	param_12	invertNegate	INFERRED	nonzero inverts the negate bits of the packed swizzle
+local	FUN_000aec40	param_13	modifierBits	INFERRED	instruction modifier bits (& 0x33ff) placed in bits 16-29 of the opcode token
+local	FUN_000aec40	param_14	precisionMode	INFERRED	6-8 selects the half-precision flag (bit 26) of the opcode token
+func	FUN_000aec40	gld_emitInstructionTokens	INFERRED	encodes one instruction (opcode, destination, source operand with four swizzle selects, modifiers) as tokens and appends them to a growable token vector (wordVector: count, capacity, words), growing it by 0x80 words as needed

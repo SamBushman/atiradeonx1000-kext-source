@@ -4581,7 +4581,7 @@ int gld_clearBuffers(ctx, clearMask)
     ((int (*)())gld_updateScissorRect)(ctx);
   }
   if ((effectiveMask & 0x500) != 0) {
-    FUN_000a6cb0(ctx + 0x240,effectiveMask);
+    gld_clearStreamBuffers(ctx + 0x240,effectiveMask);
     return;
   }
   return;
@@ -5460,7 +5460,7 @@ LAB_000225e8:
           scratchInt8 = scratchInt8 + 4;
         } while (unitBitsLeft != 0);
       }
-      fpPassThrough1 = (double)FUN_000a7ee0(ctx,unitMask);
+      fpPassThrough1 = (double)gld_updateTextureUnitState(ctx,unitMask);
       pendingTextureMask = *(uint *)(ctx + GLD_pendingTextureMask);
       if (pendingTextureMask != 0) {
         scratchInt8 = 0;
@@ -5537,7 +5537,7 @@ LAB_000225e8:
        ) {
       dirtyBits[2] = dirtyWord2;
       *dirtyWord3Ptr = scratchUint26;
-      ((void (*)())FUN_000a9ac0)(ctx + GLD_commandStream,dirtyBits,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,scratchUint24,dirtyWord4,fpPassThrough1,
+      ((void (*)())gld_validateDirtyState)(ctx + GLD_commandStream,dirtyBits,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,scratchUint24,dirtyWord4,fpPassThrough1,
                    fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,staleStackArg_ffffff78,
                    staleStackArg_ffffff80,staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
       framebufferObj = r4Out4;
@@ -5726,7 +5726,7 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   savedState[5] = word1;
   *(undefined4 **)(ctx + GLD_dispatchTable) = dispatch;
   do {
-    staleFprArg1 = (double)FUN_000a82c0(ctx,unit);
+    staleFprArg1 = (double)gld_dropStaleTextureShadow(ctx,unit);
     entry = PTR_FUN_001e8950;
     moreUnits = unit != 0xf;
     unit = unit + 1;
@@ -5778,7 +5778,7 @@ int gld_emitDirtyStatePackets(ctx, packet)
   int commandStream;
   
   commandStream = ctx + 0x240;
-  FUN_000a5ec0(commandStream);
+  gld_updateSampleCoverage(commandStream);
   allocatedHere = packet == (undefined4 *)0x0;
   if (allocatedHere) {
     packet = (undefined4 *)(**(code **)(ctx + 0x2998))(commandStream,0x23);

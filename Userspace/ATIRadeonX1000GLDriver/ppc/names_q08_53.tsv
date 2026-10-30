@@ -1,0 +1,17 @@
+use	FUN_00178024	uVar3	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b64\ \+\ param_3\ \*\ 4\);$	+1
+use	FUN_00178024	uVar3	destSelectWord	INFERRED	select word from PTR_DAT_001e8b64 for the lane, stored at new inst +0x9c	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0x9c\)\ =\ uVar3;$	+1
+use	FUN_00178024	uVar3	srcSelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for the operand's lane byte	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uint\)\*\(byte\ \*\)\(param_3\ \+\ iVar2\ \+\ 0x10\)\ \*\ 4\);$	+1
+use	FUN_00178024	uVar3	srcSelectWord	INFERRED	select word from the PTR_DAT_001e8b8c table for the operand's lane byte	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	FUN_00178024	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+1
+use	FUN_00178024	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0x120\)\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x120\);$	+1
+use	FUN_00178024	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$@2	+4
+use	FUN_00178024	iVar2	inst	INFERRED	current instruction ctx+0xb0	^\s*FUN_000e7738\(uVar4,iVar2,iVar1\);$	+1
+local	FUN_00178024	param_3	lane	INFERRED	lane whose select byte picks the table entries; flagged at inst +0x9c
+local	FUN_00178024	param_4	resultScaleCode	INFERRED	scale code stored at the new instruction +0x124
+local	FUN_00178024	iVar5	operandOffset	INFERRED	operandIndex * 0x18 + 0x80
+func	FUN_00178024	ValueKey__insertMovOfOperandLane	INFERRED	creates a mov (0x31) of one operand for one lane before/after the instruction and marks the lane in the old instruction
+local	FUN_00184bf0	param_1	owner	INFERRED	object whose +0x10 is a vector of objects with a vtable +0x24 predicate
+local	FUN_00184bf0	puVar3	elementRef	INFERRED	address of the vector element
+local	FUN_00184bf0	uVar7	elementIndex	INFERRED	index walked from size-1 down to 0
+local	FUN_00184bf0	iVar6	elementOffset	INFERRED	elementIndex * 4
+func	FUN_00184bf0	ObjectVector__allSatisfyPredicate24	INFERRED	walks the vector backwards and returns 0 at the first element whose vtable +0x24 predicate is false
