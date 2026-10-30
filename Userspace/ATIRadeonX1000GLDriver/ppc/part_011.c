@@ -5008,7 +5008,7 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   bool allLanesPass;
   byte passW;
   float *constantValue;
-  undefined4 uVar9;
+  undefined4 instWord1;
   byte crBitsByte;
   int instructions;
   byte passX;
@@ -5017,11 +5017,13 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   uint instructionIndex;
   uint instructionCount;
   undefined4 *selectorBase;
-  uint uVar18;
-  undefined4 uVar19;
-  undefined4 uVar20;
+  uint scanIndex;
+  uint instructionCountCopy;
+  uint instWord5Copy;
+  undefined4 instWord5;
+  undefined4 instWord2;
   int *laterSlotCursor;
-  undefined4 uVar22;
+  undefined4 instWord4;
   int symbol;
   undefined4 selectorEnumerant;
   uint writeEnableX;
@@ -5083,7 +5085,7 @@ LAB_0007de3c:
          (uVar30 = instructionIndex + 1, uVar30 < instructionCount)) {
         movRecord = uVar30 * 0x74;
         allLanesPass = false;
-        uVar18 = uVar30;
+        scanIndex = uVar30;
         symbol = movRecord;
         do {
           laterRecord = symbol + instructions;
@@ -5174,8 +5176,8 @@ LAB_0007de3c:
             bVar1 = false;
           }
 LAB_0007e2bc:
-          uVar18 = uVar18 + 1;
-          if ((instructionCount <= uVar18) || (symbol = symbol + 0x74, bVar1)) goto LAB_0007e2d4;
+          scanIndex = scanIndex + 1;
+          if ((instructionCount <= scanIndex) || (symbol = symbol + 0x74, bVar1)) goto LAB_0007e2d4;
           instructions = *(int *)(shaderProgram + 0x18);
         } while( true );
       }
@@ -5230,22 +5232,22 @@ LAB_0007e530:
           } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !bVar35));
           if (!bVar34) goto LAB_0007e760;
         }
-        uVar18 = uVar30 - 1;
-        if (uVar18 != 0) {
+        scanIndex = uVar30 - 1;
+        if (scanIndex != 0) {
           writeEnableW = 0;
           writeEnableZ = 0;
           writeEnableY = 0;
           writeEnableX = 0;
           bVar34 = false;
           do {
-            symbol = *(int *)(shaderProgram + 0x18) + uVar18 * 0x74;
+            symbol = *(int *)(shaderProgram + 0x18) + scanIndex * 0x74;
             bVar35 = *(int *)(symbol + -0x54) == 2;
             if ((((bVar35) && (*(int *)(symbol + -0x50) == *(int *)(instructions + -0x50))) ||
                 ((bVar36 = *(int *)(symbol + -0x38) == 2, bVar36 &&
                  (*(int *)(symbol + -0x34) == *(int *)(instructions + -0x50))))) ||
                ((bVar37 = *(int *)(symbol + -0x1c) == 2, bVar37 &&
                 (*(int *)(symbol + -0x18) == *(int *)(instructions + -0x50))))) {
-              instructionIndex = uVar18 - 1;
+              instructionIndex = scanIndex - 1;
               bVar35 = true;
               bVar34 = true;
             }
@@ -5258,7 +5260,7 @@ LAB_0007e530:
             else {
               bVar35 = false;
             }
-            uVar18 = uVar18 - 1;
+            scanIndex = scanIndex - 1;
             if (((*(int *)(symbol + -0x74) != 0x879c) && (*(int *)(symbol + -0x70) == 2)) &&
                (*(int *)(symbol + -0x6c) == *(int *)(instructions + -0x50))) {
               writeEnableX = writeEnableX | *(byte *)(symbol + -0x65);
@@ -5269,10 +5271,10 @@ LAB_0007e530:
                  ((*(uint *)(instructions + -0x60) <= writeEnableZ && (*(uint *)(instructions + -0x5c) <= writeEnableW)))) {
                 bVar35 = true;
                 bVar34 = true;
-                instructionIndex = uVar18;
+                instructionIndex = scanIndex;
               }
             }
-          } while ((uVar18 != 0) && (!bVar35));
+          } while ((scanIndex != 0) && (!bVar35));
           if (bVar34) {
             extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&readsX,
                          &readsY,&readsZ,acStack_85);
@@ -5292,10 +5294,10 @@ LAB_0007e530:
                     *(undefined4 *)(laterRecord + 8) = selectorEnumerant;
                     instructionCount = *(uint *)(instructions + -0x5c);
                     writeEnableX = *(uint *)(instructions + -100);
-                    uVar18 = *(uint *)(instructions + -0x60);
+                    instWord5Copy = *(uint *)(instructions + -0x60);
                     *(uint *)(laterRecord + 0xc) = *(uint *)(laterRecord + 0xc) & *(uint *)(instructions + -0x68);
                     *(uint *)(laterRecord + 0x10) = *(uint *)(laterRecord + 0x10) & writeEnableX;
-                    *(uint *)(laterRecord + 0x14) = *(uint *)(laterRecord + 0x14) & uVar18;
+                    *(uint *)(laterRecord + 0x14) = *(uint *)(laterRecord + 0x14) & instWord5Copy;
                     *(uint *)(laterRecord + 0x18) = *(uint *)(laterRecord + 0x18) & instructionCount;
                   }
                   movRecord = movRecord + 0x74;
@@ -5303,15 +5305,15 @@ LAB_0007e530:
                 } while (symbol != 0);
               }
               instructionCount = *(uint *)(shaderProgram + 0x14);
-              uVar18 = uVar30;
+              scanIndex = uVar30;
               if (uVar30 < instructionCount) {
                 do {
-                  uVar18 = uVar18 + 1;
+                  scanIndex = scanIndex + 1;
                   instructions = currentInstruction + *(int *)(shaderProgram + 0x18);
                   currentInstruction = currentInstruction + 0x74;
                   _memcpy(instructions + -0x74,instructions,0x74);
                   instructionCount = *(uint *)(shaderProgram + 0x14);
-                } while (uVar18 < instructionCount);
+                } while (scanIndex < instructionCount);
               }
               instructionCount = instructionCount - 1;
               bVar33 = true;
@@ -5339,17 +5341,17 @@ LAB_0007e760: ;
             && ((((*(int *)(movRecord + 0xc) != 0 && (*(int *)(movRecord + 0x10) != 0)) &&
                  (*(int *)(movRecord + 0x14) != 0)) && (*(int *)(movRecord + 0x18) != 0)))))) {
           writeEnableX = uVar30 + 1;
-          uVar18 = writeEnableX;
+          scanIndex = writeEnableX;
           instructionIndex = instructionCount;
           if (writeEnableX < instructionCount) {
             bVar34 = true;
             do {
-              instructions = currentInstruction + uVar18 * 0x74;
+              instructions = currentInstruction + scanIndex * 0x74;
               if (*(int *)(instructions + 4) == 2) {
                 instructions = *(int *)(instructions + 8);
                 bVar35 = instructions == *(int *)(movRecord + 8);
                 if (bVar35) {
-                  instructionIndex = uVar18 + 1;
+                  instructionIndex = scanIndex + 1;
                 }
                 if (*(int *)(movRecord + 0x24) == instructions) {
                   bVar35 = true;
@@ -5359,19 +5361,19 @@ LAB_0007e760: ;
               else {
                 bVar35 = false;
               }
-              uVar18 = uVar18 + 1;
-            } while ((uVar18 < instructionCount) && (!bVar35));
+              scanIndex = scanIndex + 1;
+            } while ((scanIndex < instructionCount) && (!bVar35));
             if (!bVar34) goto LAB_00080860;
           }
           bVar34 = true;
-          instructions = currentInstruction + uVar18 * 0x74;
+          instructions = currentInstruction + scanIndex * 0x74;
           laneWLoaded = *(byte *)(instructions + -0x59);
           laneXLoaded = *(byte *)(instructions + -0x65);
           laneYLoaded = *(byte *)(instructions + -0x61);
           laneZLoaded = *(byte *)(instructions + -0x5d);
           if (instructionIndex < instructionCount) {
             instructions = instructionIndex * 0x74;
-            uVar18 = instructionIndex;
+            scanIndex = instructionIndex;
             while( true ) {
               currentInstruction = instructions + currentInstruction;
               if ((((*(int *)(currentInstruction + 0x20) == 2) &&
@@ -5398,9 +5400,9 @@ LAB_0007e760: ;
                 laneYLoaded = laneYLoaded | *(byte *)(currentInstruction + 0x13);
                 laneZLoaded = laneZLoaded | *(byte *)(currentInstruction + 0x17);
               }
-              uVar18 = uVar18 + 1;
+              scanIndex = scanIndex + 1;
               instructions = instructions + 0x74;
-              if (instructionCount <= uVar18) break;
+              if (instructionCount <= scanIndex) break;
               currentInstruction = *(int *)(shaderProgram + 0x18);
             }
             if (!bVar34) goto LAB_00080860;
@@ -7040,15 +7042,15 @@ code_r0x000807a8:
           }
           instructionCount = instructionCount - 1;
           *(uint *)(shaderProgram + 0x14) = instructionCount;
-          uVar18 = uVar30;
+          scanIndex = uVar30;
           if (uVar30 < instructionCount) {
             do {
-              uVar18 = uVar18 + 1;
+              scanIndex = scanIndex + 1;
               instructions = symbol + *(int *)(shaderProgram + 0x18);
               symbol = symbol + 0x74;
               _memcpy(instructions,instructions + 0x74,0x74);
               instructionCount = *(uint *)(shaderProgram + 0x14);
-            } while (uVar18 < instructionCount);
+            } while (scanIndex < instructionCount);
           }
           bVar33 = true;
         }
@@ -7066,9 +7068,9 @@ LAB_00080860:
       currentInstruction = instructions + *(int *)(shaderProgram + 0x18);
       if (((*(int *)(currentInstruction + -0x74) == 0x879d) && (*(int *)(currentInstruction + -0x70) == 2)) &&
          (symbol = extvsOperandDataType(shaderProgram + 0x1c,currentInstruction + -0x54), symbol == 0x87bf)) {
-        uVar18 = *(uint *)(shaderProgram + 0x14);
-        if (uVar30 < uVar18) {
-          symbol = uVar18 - uVar30;
+        instructionCountCopy = *(uint *)(shaderProgram + 0x14);
+        if (uVar30 < instructionCountCopy) {
+          symbol = instructionCountCopy - uVar30;
           bVar34 = true;
           bVar33 = false;
           laterSlotCursor = (int *)(instructions + *(int *)(shaderProgram + 0x18) + 4);
@@ -7135,7 +7137,7 @@ code_r0x00080a54:
         }
         symbol = instructions;
         writeEnableX = uVar30;
-        if (uVar30 < uVar18) {
+        if (uVar30 < instructionCountCopy) {
           do {
             movRecord = symbol + *(int *)(shaderProgram + 0x18);
             if ((*(int *)(movRecord + 0x20) != 2) ||
@@ -8726,20 +8728,20 @@ code_r0x00082578:
                (bVar33 = true, *(int *)(movRecord + 8) != *(int *)(currentInstruction + -0x6c))) {
               bVar33 = false;
             }
-            uVar18 = *(uint *)(shaderProgram + 0x14);
-          } while ((writeEnableX + 1 < uVar18) && (symbol = symbol + 0x74, writeEnableX = writeEnableX + 1, !bVar33));
+            instructionCountCopy = *(uint *)(shaderProgram + 0x14);
+          } while ((writeEnableX + 1 < instructionCountCopy) && (symbol = symbol + 0x74, writeEnableX = writeEnableX + 1, !bVar33));
           currentInstruction = instructions;
-          if (uVar30 < uVar18) {
+          if (uVar30 < instructionCountCopy) {
             do {
               uVar30 = uVar30 + 1;
               symbol = currentInstruction + *(int *)(shaderProgram + 0x18);
               _memcpy(symbol + -0x74,symbol,0x74);
-              uVar18 = *(uint *)(shaderProgram + 0x14);
+              instructionCountCopy = *(uint *)(shaderProgram + 0x14);
               currentInstruction = currentInstruction + 0x74;
-            } while (uVar30 < uVar18);
+            } while (uVar30 < instructionCountCopy);
           }
         }
-        *(uint *)(shaderProgram + 0x14) = uVar18 - 1;
+        *(uint *)(shaderProgram + 0x14) = instructionCountCopy - 1;
       }
 code_r0x00082600:
       instructionIndex = instructionIndex + 1;
@@ -8792,19 +8794,19 @@ code_r0x0008286c:
             bVar34 = true;
           }
           else {
-            uVar22 = *(undefined4 *)(instructions + -100);
+            instWord4 = *(undefined4 *)(instructions + -100);
             bVar34 = true;
             bVar33 = true;
-            uVar19 = *(undefined4 *)(instructions + -0x60);
+            instWord5 = *(undefined4 *)(instructions + -0x60);
             selectorEnumerant = *(undefined4 *)(instructions + -0x5c);
-            uVar9 = *(undefined4 *)(instructions + -0x70);
-            uVar20 = *(undefined4 *)(instructions + -0x6c);
+            instWord1 = *(undefined4 *)(instructions + -0x70);
+            instWord2 = *(undefined4 *)(instructions + -0x6c);
             *(undefined4 *)(movRecord + -0x68) = *(undefined4 *)(instructions + -0x68);
-            *(undefined4 *)(movRecord + -100) = uVar22;
+            *(undefined4 *)(movRecord + -100) = instWord4;
             *(undefined4 *)(movRecord + -0x5c) = selectorEnumerant;
-            *(undefined4 *)(movRecord + -0x60) = uVar19;
-            *(undefined4 *)(movRecord + -0x70) = uVar9;
-            *(undefined4 *)(movRecord + -0x6c) = uVar20;
+            *(undefined4 *)(movRecord + -0x60) = instWord5;
+            *(undefined4 *)(movRecord + -0x70) = instWord1;
+            *(undefined4 *)(movRecord + -0x6c) = instWord2;
           }
         }
         else {
