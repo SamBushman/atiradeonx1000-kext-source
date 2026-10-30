@@ -1098,7 +1098,7 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   uint calleeSavedR21;
   uint *ilTokens;
   uint scanTokenCopy;
-  uint uVar33;
+  uint scratchWord;
   uint unitBit;
   int recordRegister;
   int extraWords;
@@ -1315,7 +1315,7 @@ switchD_000c90cc_caseD_18:
   if (streamPtr < ilTokens + ilWordCount) goto code_r0x000c90a4;
   if (errorResult != (uint *******)0x0) {
     streamPtr = (uint *)0x0;
-    uVar33 = 0;
+    scratchWord = 0;
     goto LAB_000ca6bc;
   }
   extraWords = (extraWords + ilWordCount) * 4;
@@ -1323,22 +1323,22 @@ switchD_000c90cc_caseD_18:
   if (usesOutputKind16 != 0) {
     extraWords = extraWords + 0x48;
   }
-  uVar33 = extraWords + texExtraWords * 4;
+  scratchWord = extraWords + texExtraWords * 4;
   extraPrologue = neverSetPrologueFlag != 0;
   if (extraPrologue) {
-    uVar33 = uVar33 + 0x14;
+    scratchWord = scratchWord + 0x14;
   }
-  sizeBytes2 = uVar33;
-  if ((perOutputFlags[0] != 0) && (sizeBytes2 = uVar33 + 0xc, extraPrologue)) {
-    sizeBytes2 = uVar33 + 0x24;
+  sizeBytes2 = scratchWord;
+  if ((perOutputFlags[0] != 0) && (sizeBytes2 = scratchWord + 0xc, extraPrologue)) {
+    sizeBytes2 = scratchWord + 0x24;
   }
-  uVar33 = sizeBytes2;
-  if ((perOutputFlags[1] != 0) && (uVar33 = sizeBytes2 + 0xc, extraPrologue)) {
-    uVar33 = sizeBytes2 + 0x24;
+  scratchWord = sizeBytes2;
+  if ((perOutputFlags[1] != 0) && (scratchWord = sizeBytes2 + 0xc, extraPrologue)) {
+    scratchWord = sizeBytes2 + 0x24;
   }
-  sizeBytes2 = uVar33;
-  if ((perOutputFlags[2] != 0) && (sizeBytes2 = uVar33 + 0xc, extraPrologue)) {
-    sizeBytes2 = uVar33 + 0x24;
+  sizeBytes2 = scratchWord;
+  if ((perOutputFlags[2] != 0) && (sizeBytes2 = scratchWord + 0xc, extraPrologue)) {
+    sizeBytes2 = scratchWord + 0x24;
   }
   sizeBytes3 = sizeBytes2;
   if ((perOutputFlags[3] != 0) && (sizeBytes3 = sizeBytes2 + 0xc, extraPrologue)) {
@@ -1368,19 +1368,19 @@ switchD_000c90cc_caseD_18:
     countdown = countdown + -1;
   } while (countdown != 0);
 LAB_000c99d4:
-  if (((neverSetFlag1d0 != 0) || (neverSetFlag1c8 != 0)) || (uVar33 = sizeBytes3, neverSetPointer1b4 == (uint *******)0x0)) {
+  if (((neverSetFlag1d0 != 0) || (neverSetFlag1c8 != 0)) || (scratchWord = sizeBytes3, neverSetPointer1b4 == (uint *******)0x0)) {
     if ((neverSetFlag1d4 == 0) && (neverSetFlag1cc != 0)) {
       sizeBytes3 = sizeBytes3 + 0xc;
     }
-    uVar33 = sizeBytes3;
-    if ((neverSetPointer1b4 == (uint *******)0x0) && (uVar33 = sizeBytes3 + 0xc, ctxBit10Flag != 0)) {
-      uVar33 = sizeBytes3 + 0x18;
+    scratchWord = sizeBytes3;
+    if ((neverSetPointer1b4 == (uint *******)0x0) && (scratchWord = sizeBytes3 + 0xc, ctxBit10Flag != 0)) {
+      scratchWord = sizeBytes3 + 0x18;
     }
   }
   prologuePending = true;
   scratchCursorA = neverSetPointer1b4;
   scratchCursorB = errorResult;
-  streamPtr = (uint *)_malloc(uVar33 + 0x10);
+  streamPtr = (uint *)_malloc(scratchWord + 0x10);
   *streamPtr = *ilTokens;
   srcCursor = ilTokens + 2;
   streamPtr[1] = ilTokens[1];
@@ -1506,17 +1506,17 @@ LAB_000c9340:
   case 0x16:
     srcCursor = streamPtr + 1;
     scanTokenWord = &scanState;
-    uVar33 = streamPtr[1];
-    registerKindBits = (undefined *)(uVar33 & 0x3f0000);
-    ((int (*)())ilRecordRegisterUse)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,0,0);
+    scratchWord = streamPtr[1];
+    registerKindBits = (undefined *)(scratchWord & 0x3f0000);
+    ((int (*)())ilRecordRegisterUse)(scratchWord & 0xffff,scratchWord >> 0x10 & 0x3f,scanTokenWord,0,0);
     if (registerKindBits == ((unsigned char *)0x00160000U)) {
       usesOutputKind16 = 1;
     }
     else if (registerKindBits == (undefined *)0x110000) {
-      usedTexcoordMask = 1 << (uVar33 & 0x3f) | usedTexcoordMask;
+      usedTexcoordMask = 1 << (scratchWord & 0x3f) | usedTexcoordMask;
     }
     else if (registerKindBits == (undefined *)0xf0000) {
-      usedBits = usedBits | 1 << (uVar33 & 0x3f);
+      usedBits = usedBits | 1 << (scratchWord & 0x3f);
     }
     else if (registerKindBits == (undefined *)0x100000) {
       usesOutputKind10 = 1;
@@ -1526,12 +1526,12 @@ LAB_000c9340:
     goto switchD_000c90cc_caseD_18;
   case 0x19:
     scanTokenCopy = (uint)scanTokenWord >> 0x1b & 3;
-    uVar33 = (uint)scanTokenWord >> 0x10 & 0xff;
-    if ((scanTokenCopy == 2) || ((scanTokenCopy == 0 && (inputKindTable[uVar33] == 2)))) {
+    scratchWord = (uint)scanTokenWord >> 0x10 & 0xff;
+    if ((scanTokenCopy == 2) || ((scanTokenCopy == 0 && (inputKindTable[scratchWord] == 2)))) {
       projectedInputMask = 1 << ((uint)scanTokenWord >> 0x10 & 0x3f) | projectedInputMask;
     }
     scanTokenWord = (uint *******)((uint)scanTokenWord >> 0x18 & 7);
-    ilRecordInputSemantic(&scanState,uVar33,scanTokenWord);
+    ilRecordInputSemantic(&scanState,scratchWord,scanTokenWord);
     srcCursor = srcCursor + 1;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
@@ -1547,8 +1547,8 @@ LAB_000c9564:
   case 0x1c:
     srcCursor = streamPtr + 1;
     scanTokenCopy = streamPtr[1];
-    uVar33 = scanTokenCopy >> 0x10 & 0x3f;
-    if (uVar33 == 1) {
+    scratchWord = scanTokenCopy >> 0x10 & 0x3f;
+    if (scratchWord == 1) {
       scanTokenWord = &constWord0;
       constWord0 = (uint ******)streamPtr[2];
       constWord1 = streamPtr[3];
@@ -1560,7 +1560,7 @@ LAB_000c9564:
     }
     else {
       tokenCursor = srcCursor;
-      if (uVar33 == 2) {
+      if (scratchWord == 2) {
         scanTokenWord = &constWord0;
         constWord0 = (uint ******)streamPtr[2];
         constWord1 = streamPtr[3];
@@ -1597,7 +1597,7 @@ LAB_000c9564:
   case 0x5d:
     srcCursor = streamPtr + 2;
     texInstructionCount = texInstructionCount + 1;
-    uVar33 = streamPtr[1];
+    scratchWord = streamPtr[1];
     scanTokenCopy = *streamPtr;
     if ((((scanTokenCopy & 0xc000000) == 0x4000000) ||
         (((scanTokenCopy & 0xc000000) == 0x8000000 &&
@@ -1614,12 +1614,12 @@ LAB_000c9564:
     if ((scanTokenCopy & 0x40000000) != 0) {
       srcCursor = srcCursor + 1;
     }
-    if ((uVar33 & 0x400000) != 0) {
+    if ((scratchWord & 0x400000) != 0) {
       calleeSavedR21 = *srcCursor;
       srcCursor = srcCursor + 1;
     }
     scanTokenWord = &scanState;
-    ((int (*)())ilRecordRegisterUse)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,calleeSavedR21,uVar33 >> 0x16 & 1);
+    ((int (*)())ilRecordRegisterUse)(scratchWord & 0xffff,scratchWord >> 0x10 & 0x3f,scanTokenWord,calleeSavedR21,scratchWord >> 0x16 & 1);
     if ((1 << (*(byte *)((int)streamPtr + 1) & 0x3f) & shadowCompareUnitMask) != 0) {
       texExtraWords = texExtraWords + 4;
     }
@@ -1636,7 +1636,7 @@ LAB_000c9564:
   case 0x5e:
     srcCursor = streamPtr + 2;
     texInstructionCount = texInstructionCount + 1;
-    uVar33 = streamPtr[1];
+    scratchWord = streamPtr[1];
     scanTokenCopy = *streamPtr;
     if ((((scanTokenCopy & 0xc000000) == 0x4000000) ||
         (((scanTokenCopy & 0xc000000) == 0x8000000 &&
@@ -1653,12 +1653,12 @@ LAB_000c9564:
     if ((scanTokenCopy & 0x40000000) != 0) {
       srcCursor = srcCursor + 1;
     }
-    if ((uVar33 & 0x400000) != 0) {
+    if ((scratchWord & 0x400000) != 0) {
       calleeSavedR20 = *srcCursor;
       srcCursor = srcCursor + 1;
     }
     scanTokenWord = &scanState;
-    ((int (*)())ilRecordRegisterUse)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,scanTokenWord,calleeSavedR20,uVar33 >> 0x16 & 1);
+    ((int (*)())ilRecordRegisterUse)(scratchWord & 0xffff,scratchWord >> 0x10 & 0x3f,scanTokenWord,calleeSavedR20,scratchWord >> 0x16 & 1);
     if ((1 << (*(byte *)((int)streamPtr + 1) & 0x3f) & shadowCompareUnitMask) != 0) {
       texExtraWords = texExtraWords + 4;
     }
@@ -1688,7 +1688,7 @@ switchD_000c9ab8_caseD_18:
   readToken = tokenCursor;
   dstCursorCarry = dstCursor;
   if (ilTokens + ilWordCount <= readToken) {
-    uVar33 = uVar33 >> 2;
+    scratchWord = scratchWord >> 2;
     usedTexcoordMask = usedBits | usedTexcoordMask;
 LAB_000ca6bc:
     if (errorResult != (uint *******)0x0) {
@@ -1742,7 +1742,7 @@ LAB_000ca6bc:
     _memset(scCallbackTableA,0,0xbc);
     _memset(scCallbackTableB,0,0x674);
     scratchAllocation = (**(code **)(ctx + 0xc))(*(undefined4 *)(ctx + 0x1870));
-    ilOutputBytes = uVar33 << 2;
+    ilOutputBytes = scratchWord << 2;
     cursor3 = initRegsDst;
     maskCopyDst = compileMaskLow;
     countdown = 8;
@@ -1819,7 +1819,7 @@ LAB_000ca6bc:
       programBody[0x1501] = (uint ******)0x100;
     }
     if (dclRecordCount == 0) goto LAB_000caa4c;
-    uVar33 = 0;
+    scratchWord = 0;
     recordOffset = 0;
     usedBits = dclRecordCount;
     do {
@@ -1839,9 +1839,9 @@ LAB_000caa2c:
         ((int (*)())ilPushDclRecord)(programBody + 0x1589,dclRecord);
         usedBits = dclRecordCount;
       }
-      uVar33 = uVar33 + 1;
+      scratchWord = scratchWord + 1;
       recordOffset = recordOffset + 0x24;
-      if (usedBits <= uVar33) {
+      if (usedBits <= scratchWord) {
 LAB_000caa4c:
         if (defRecordCount != 0) {
           loopIndex2 = 0;
