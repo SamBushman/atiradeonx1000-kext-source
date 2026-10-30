@@ -268,7 +268,7 @@
 0x28350	3820	gld_readPixelsViaBlit	part_004	converted
 0x29290	4	glReadPixels_entry	part_004	converted
 0x29294	2376	glReadPixels_impl	part_004	converted
-0x29c00	1624	FUN_00029c00	part_004	converted
+0x29c00	1624	gld_drawPixelsAsPoints	part_004	converted
 0x2a260	356	FUN_0002a260	part_004	converted
 0x2a3d0	3968	gld_drawPixelsFromClientSurface	part_004	converted
 0x2b3b0	4	noop_2b3b0	part_004	converted

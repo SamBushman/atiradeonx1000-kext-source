@@ -475,7 +475,7 @@ extern int gld_buildVertexStreamCache();
 extern int gld_readPixelsViaBlit();
 extern int glReadPixels_entry();
 extern int glReadPixels_impl();
-extern int FUN_00029c00();
+extern int gld_drawPixelsAsPoints();
 extern int FUN_0002a260();
 extern int gld_drawPixelsFromClientSurface();
 extern int noop_2b3b0();

@@ -551,7 +551,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 293ac	293b0	padding	glReadPixels_impl	1	
 29414	29420	padding	glReadPixels_impl	3	
 29bcc	29bd0	padding	glReadPixels_impl	1	
-2a258	2a260	padding	FUN_00029c00	2	
+2a258	2a260	padding	gld_drawPixelsAsPoints	2	
 2a3c4	2a3d0	padding	FUN_0002a260	3	
 2a434	2a440	padding	gld_drawPixelsFromClientSurface	3	
 2a44c	2a450	padding	gld_drawPixelsFromClientSurface	1	

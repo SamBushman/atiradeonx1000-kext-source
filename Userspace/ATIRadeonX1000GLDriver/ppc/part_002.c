@@ -10815,7 +10815,7 @@ LAB_000194f4:
             }
             local_420 = local_420 + convBuffer;
             tileColumn = tileColumn + 1;
-            FUN_00029c00(ctx,local_420,procWidth,procHeight,srcRowBytes,bytesPerPixel,
+            gld_drawPixelsAsPoints(ctx,local_420,procWidth,procHeight,srcRowBytes,bytesPerPixel,
                          ctxState + xDir * tileX,windowY + iVar10,pfStack0000001c,format,transferMode8);
           } while (tileColumns != tileColumn);
         }

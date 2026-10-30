@@ -269,7 +269,7 @@
 0x28350	gld_readPixelsViaBlit	3820	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x29290	glReadPixels_entry	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x29294	glReadPixels_impl	2376	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_structureI_structureO)
-0x29c00	FUN_00029c00	1624	no	indirect call (driver context / vtable / callback)
+0x29c00	gld_drawPixelsAsPoints	1624	no	indirect call (driver context / vtable / callback)
 0x2a260	FUN_0002a260	356	no	indirect call (driver context / vtable / callback)
 0x2a3d0	gld_drawPixelsFromClientSurface	3968	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x2b3b0	noop_2b3b0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises

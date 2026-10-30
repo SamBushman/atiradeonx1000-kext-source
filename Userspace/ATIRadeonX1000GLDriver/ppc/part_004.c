@@ -3981,52 +3981,52 @@ LAB_00029bd0:
   return result;
 }
 
-/* FUN_00029c00 @ 0x29c00 (1624 bytes) */
-int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel, param_7, param_8, pfStack0000001c, format, transferMode8)
+/* gld_drawPixelsAsPoints @ 0x29c00 (1624 bytes) */
+int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, bytesPerPixel, rasterX, rasterY, currentAttribs, format, transferMode8)
   int ctx;
-  float *param_2;
+  float *srcPixels;
   int procWidth;
   int procHeight;
   float *srcRowBytes;
   int bytesPerPixel;
-  uint param_7;
-  uint param_8;
-  int pfStack0000001c;
+  uint rasterX;
+  uint rasterY;
+  int currentAttribs;
   int format;
   undefined4 transferMode8;
 {
   int loopIndex;
   uint scratchUint1;
-  byte bVar2;
-  float fVar3;
-  float fVar4;
+  byte alphaByte;
+  float stepX;
+  float stepY;
   float fVar5;
   double scratchDouble6;
   double dVar7;
   float fVar8;
   int scratchInt9;
-  undefined4 *puVar10;
-  undefined4 *puVar11;
+  undefined4 *packetAlloc;
+  undefined4 *packetCursor;
   int scratchInt12;
   undefined4 r4AfterCall;
   float *pfVar13;
   float *pfVar14;
-  float *pfVar15;
+  float *vertexCursor;
   float *pfVar16;
-  float *pfVar17;
+  float *srcCursor;
   float scratchFloat18;
-  undefined4 uVar19;
+  undefined4 pointSizeWord;
   int scratchInt20;
-  int iVar21;
-  float local_168;
-  float scratchStack164;
-  float local_160;
-  float scratchStack15c;
+  int commandStream;
+  float colorA;
+  float windowX;
+  float windowY;
+  float depthZ;
   undefined4 local_158;
-  float scratchStack154;
-  float scratchStack150;
-  float scratchStack14c;
-  float afStack_148 [36];
+  float colorR;
+  float colorG;
+  float colorB;
+  float internalDrawStateSave [36];
   undefined4 local_b8;
   undefined4 uStack_b4;
   longlong local_b0;
@@ -4048,107 +4048,107 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
   undefined4 local_68;
   uint uStack_64;
   
-  iVar21 = ctx + 0x240;
+  commandStream = ctx + 0x240;
   scratchInt20 = procWidth * procHeight;
-  uVar19 = *(undefined4 *)(ctx + 0x248);
+  pointSizeWord = *(undefined4 *)(ctx + 0x248);
   scratchInt9 = *(int *)(*(int *)(ctx + 0x244) + 0x10);
-  fVar4 = FLOAT_001aa0e8;
+  stepY = FLOAT_001aa0e8;
   if (*(float *)(((unsigned char *)0x00002e4c) + scratchInt9) < 0.0) {
-    fVar4 = FLOAT_001aa114;
+    stepY = FLOAT_001aa114;
   }
-  fVar3 = FLOAT_001aa0e8;
+  stepX = FLOAT_001aa0e8;
   if (*(float *)(((unsigned char *)0x00002e48) + scratchInt9) < 0.0) {
-    fVar3 = FLOAT_001aa114;
+    stepX = FLOAT_001aa114;
   }
   if (-*(float *)(((unsigned char *)0x00002e4c) + scratchInt9) < 0.0) {
-    fVar4 = FLOAT_001aa0e8;
+    stepY = FLOAT_001aa0e8;
   }
   if (-*(float *)(((unsigned char *)0x00002e48) + scratchInt9) < 0.0) {
-    fVar3 = FLOAT_001aa0e8;
+    stepX = FLOAT_001aa0e8;
   }
   if (format != 0x1901) {
     if ((char)transferMode8 == '\0') {
-      pfVar13 = afStack_148;
+      pfVar13 = internalDrawStateSave;
       scratchInt9 = procHeight;
       pfVar14 = srcRowBytes;
-      FUN_000a6140(iVar21,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
+      FUN_000a6140(commandStream,(*(uint *)(ctx + 0x1cf8) ^ 1) & 1 | (uint)(format == 0x1902) << 0xc,
                    pfVar13);
-      FUN_0004b480(iVar21,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
+      FUN_0004b480(commandStream,*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff);
       *(uint *)(ctx + 0x216c) = *(uint *)(ctx + 0x216c) & 0xfffff800 | 0x80;
     }
     else {
-      pfVar14 = afStack_148;
+      pfVar14 = internalDrawStateSave;
       pfVar13 = (float *)0x0;
       scratchInt9 = 0;
-      gldEnterInternalDrawState(iVar21,1,0,0,pfVar14);
+      gldEnterInternalDrawState(commandStream,1,0,0,pfVar14);
     }
     scratchInt12 = scratchInt20 * 8 + 0x1b;
   }
   else {
-    pfVar14 = afStack_148;
+    pfVar14 = internalDrawStateSave;
     pfVar13 = (float *)0x0;
     scratchInt9 = 1;
-    gldEnterInternalDrawState(iVar21,0,0,1,pfVar14);
+    gldEnterInternalDrawState(commandStream,0,0,1,pfVar14);
     scratchInt12 = scratchInt20 * 0x10 + 0x19;
   }
   if (*(char *)(ctx + 0x2a42) == '\0') {
     scratchInt12 = scratchInt12 + 2;
   }
-  puVar10 = (undefined4 *)(**(code **)(ctx + 0x2998))(iVar21,scratchInt12);
-  *(undefined4 **)(ctx + 0x298c) = puVar10;
-  puVar11 = puVar10;
+  packetAlloc = (undefined4 *)(**(code **)(ctx + 0x2998))(commandStream,scratchInt12);
+  *(undefined4 **)(ctx + 0x298c) = packetAlloc;
+  packetCursor = packetAlloc;
   if (*(char *)(ctx + 0x2a42) == '\0') {
-    puVar11 = puVar10 + 2;
-    *puVar10 = 0x5c8;
-    puVar10[1] = 0x10000000;
+    packetCursor = packetAlloc + 2;
+    *packetAlloc = 0x5c8;
+    packetAlloc[1] = 0x10000000;
     *(undefined1 *)(ctx + 0x2a42) = 1;
   }
-  *puVar11 = ((unsigned char *)0x000010c0U);
-  puVar11[1] = *(undefined4 *)(ctx + 0x216c);
-  puVar11 = (undefined4 *)FUN_00083c90(iVar21,puVar11 + 2);
+  *packetCursor = ((unsigned char *)0x000010c0U);
+  packetCursor[1] = *(undefined4 *)(ctx + 0x216c);
+  packetCursor = (undefined4 *)FUN_00083c90(commandStream,packetCursor + 2);
   scratchDouble6 = DOUBLE_001aa1e0;
   fVar5 = FLOAT_001aa10c;
-  pfStack_a4 = (float *)(param_8 ^ 0x80000000);
+  pfStack_a4 = (float *)(rasterY ^ 0x80000000);
   local_b8 = 0x43300000;
-  pfVar15 = (float *)(puVar11 + 2);
-  scratchUint1 = (uint)(((double)CONCAT44(0x43300000,uVar19) - DOUBLE_001aa250) * DOUBLE_001aa240);
+  vertexCursor = (float *)(packetCursor + 2);
+  scratchUint1 = (uint)(((double)CONCAT44(0x43300000,pointSizeWord) - DOUBLE_001aa250) * DOUBLE_001aa240);
   local_b0 = (longlong)(int)scratchUint1;
-  *puVar11 = ((unsigned char *)0x00001087U);
-  puVar11[1] = scratchUint1 << 0x10 | scratchUint1 & 0xffff;
+  *packetCursor = ((unsigned char *)0x00001087U);
+  packetCursor[1] = scratchUint1 << 0x10 | scratchUint1 & 0xffff;
   local_158 = 0x3f800000;
   local_a8 = 0x43300000;
-  local_160 = fVar5 / *(float *)(ctx + 0x2a58) +
+  windowY = fVar5 / *(float *)(ctx + 0x2a58) +
               (float)((double)CONCAT44(0x43300000,pfStack_a4) - scratchDouble6);
   if (format != 0x1901) {
     pfVar16 = (float *)0xc0003500;
-    pfVar15 = (float *)(puVar11 + 4);
-    puVar11[2] = scratchInt20 * 0x80000 | 0xc0003500;
-    puVar11[3] = scratchInt20 * 0x10000 | 0x31;
+    vertexCursor = (float *)(packetCursor + 4);
+    packetCursor[2] = scratchInt20 * 0x80000 | 0xc0003500;
+    packetCursor[3] = scratchInt20 * 0x10000 | 0x31;
     if (procHeight != 0) {
-      i2dLo1 = param_7 ^ 0x80000000;
+      i2dLo1 = rasterX ^ 0x80000000;
       i2dHi1 = 0x43300000;
       scratchInt9 = 0;
-      pfVar13 = &local_168;
+      pfVar13 = &colorA;
       fVar5 = (float)((double)CONCAT44(0x43300000,i2dLo1) - scratchDouble6) + fVar5;
       do {
         scratchDouble6 = DOUBLE_001aa250;
         scratchFloat18 = FLOAT_001aa0f0;
-        scratchStack164 = fVar5;
+        windowX = fVar5;
         if (procWidth != 0) {
           pfVar14 = (float *)0x43300000;
-          pfVar17 = param_2;
+          srcCursor = srcPixels;
           scratchInt20 = procWidth;
           do {
             if (format == 0x1902) {
-              scratchStack15c = *pfVar17;
-              scratchStack154 = *(float *)(pfStack0000001c + 0x30);
-              scratchStack150 = *(float *)(pfStack0000001c + 0x34);
-              scratchStack14c = *(float *)(pfStack0000001c + 0x38);
-              local_168 = *(float *)(pfStack0000001c + 0x3c);
+              depthZ = *srcCursor;
+              colorR = *(float *)(currentAttribs + 0x30);
+              colorG = *(float *)(currentAttribs + 0x34);
+              colorB = *(float *)(currentAttribs + 0x38);
+              colorA = *(float *)(currentAttribs + 0x3c);
             }
             else {
-              scratchStack15c = *(float *)(pfStack0000001c + 8);
-              fVar8 = *pfVar17;
+              depthZ = *(float *)(currentAttribs + 8);
+              fVar8 = *srcCursor;
               local_80 = 0x43300000;
               local_78 = 0x43300000;
               local_70 = 0x43300000;
@@ -4157,29 +4157,29 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
               uStack_7c = (uint)(int)fVar8 >> 0x18;
               pfVar16 = (float *)((uint)(int)fVar8 >> 0x10 & 0xff);
               uStack_6c = (uint)(int)fVar8 >> 8 & 0xff;
-              local_168 = (float)((double)CONCAT44(0x43300000,uStack_7c) - scratchDouble6) / scratchFloat18;
-              scratchStack14c = (float)((double)CONCAT44(0x43300000,uStack_64) - scratchDouble6) / scratchFloat18;
-              scratchStack154 = (float)((double)CONCAT44(0x43300000,pfVar16) - scratchDouble6) / scratchFloat18;
-              scratchStack150 = (float)((double)CONCAT44(0x43300000,uStack_6c) - scratchDouble6) / scratchFloat18;
+              colorA = (float)((double)CONCAT44(0x43300000,uStack_7c) - scratchDouble6) / scratchFloat18;
+              colorB = (float)((double)CONCAT44(0x43300000,uStack_64) - scratchDouble6) / scratchFloat18;
+              colorR = (float)((double)CONCAT44(0x43300000,pfVar16) - scratchDouble6) / scratchFloat18;
+              colorG = (float)((double)CONCAT44(0x43300000,uStack_6c) - scratchDouble6) / scratchFloat18;
               pfStack_74 = pfVar16;
             }
-            pfVar17 = (float *)((int)pfVar17 + bytesPerPixel);
-            *pfVar15 = scratchStack164;
-            pfVar15[1] = local_160;
-            pfVar15[2] = scratchStack15c;
-            pfVar15[3] = 1.0;
-            pfVar15[4] = scratchStack154;
-            pfVar15[5] = scratchStack150;
-            pfVar15[6] = scratchStack14c;
-            pfVar15[7] = local_168;
-            pfVar15 = pfVar15 + 8;
-            scratchStack164 = fVar3 + scratchStack164;
+            srcCursor = (float *)((int)srcCursor + bytesPerPixel);
+            *vertexCursor = windowX;
+            vertexCursor[1] = windowY;
+            vertexCursor[2] = depthZ;
+            vertexCursor[3] = 1.0;
+            vertexCursor[4] = colorR;
+            vertexCursor[5] = colorG;
+            vertexCursor[6] = colorB;
+            vertexCursor[7] = colorA;
+            vertexCursor = vertexCursor + 8;
+            windowX = stepX + windowX;
             scratchInt20 = scratchInt20 + -1;
           } while (scratchInt20 != 0);
         }
         scratchInt9 = scratchInt9 + 1;
-        param_2 = (float *)((int)param_2 + (int)srcRowBytes);
-        local_160 = fVar4 + local_160;
+        srcPixels = (float *)((int)srcPixels + (int)srcRowBytes);
+        windowY = stepY + windowY;
       } while (scratchInt9 != procHeight);
     }
   }
@@ -4187,7 +4187,7 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
     scratchFloat18 = GH_U2F((unsigned int)((*(uint *)(ctx + 0x1ce8) & 0xffff00ff | 0xff00)));
     pfVar16 = pfStack_a4;
     if (procHeight != 0) {
-      i2dLo2 = param_7 ^ 0x80000000;
+      i2dLo2 = rasterX ^ 0x80000000;
       i2dHi2 = 0x43300000;
       loopIndex = 0;
       fVar5 = fVar5 / *(float *)(ctx + 0x2a54) +
@@ -4195,60 +4195,60 @@ int FUN_00029c00(ctx, param_2, procWidth, procHeight, srcRowBytes, bytesPerPixel
       do {
         dVar7 = DOUBLE_001aa250;
         scratchDouble6 = DOUBLE_001aa240;
-        scratchStack164 = fVar5;
+        windowX = fVar5;
         if (procWidth != 0) {
           scratchInt9 = 1;
           pfVar14 = (float *)((unsigned char *)0x00001087U);
           pfVar13 = (float *)0x3f800000;
-          pfVar16 = param_2;
+          pfVar16 = srcPixels;
           scratchInt12 = procWidth;
           do {
-            scratchStack15c = *(float *)(pfStack0000001c + 8);
-            scratchStack154 = *(float *)(pfStack0000001c + 0x30);
-            scratchStack150 = *(float *)(pfStack0000001c + 0x34);
-            scratchStack14c = *(float *)(pfStack0000001c + 0x38);
-            local_168 = *(float *)(pfStack0000001c + 0x3c);
-            bVar2 = *(byte *)pfVar16;
-            *pfVar15 = GH_U2F((unsigned int)(((unsigned char *)0x000013c2U)));
+            depthZ = *(float *)(currentAttribs + 8);
+            colorR = *(float *)(currentAttribs + 0x30);
+            colorG = *(float *)(currentAttribs + 0x34);
+            colorB = *(float *)(currentAttribs + 0x38);
+            colorA = *(float *)(currentAttribs + 0x3c);
+            alphaByte = *(byte *)pfVar16;
+            *vertexCursor = GH_U2F((unsigned int)(((unsigned char *)0x000013c2U)));
             pfVar16 = (float *)((int)pfVar16 + bytesPerPixel);
-            scratchFloat18 = GH_U2F((unsigned int)(((uint)bVar2 | (uint)(int)scratchFloat18 & 0xffffff00)));
-            pfVar15[1] = scratchFloat18;
+            scratchFloat18 = GH_U2F((unsigned int)(((uint)alphaByte | (uint)(int)scratchFloat18 & 0xffffff00)));
+            vertexCursor[1] = scratchFloat18;
             uStack_94 = *(undefined4 *)(ctx + 0x248);
             local_98 = 0x43300000;
             scratchUint1 = (uint)(((double)CONCAT44(0x43300000,uStack_94) - dVar7) * scratchDouble6);
             local_90 = (longlong)(int)scratchUint1;
-            pfVar15[5] = 9.19042e-41;
-            pfVar15[6] = scratchStack164;
-            pfVar15[7] = local_160;
-            pfVar15[8] = scratchStack15c;
-            pfVar15[2] = GH_U2F((unsigned int)(((unsigned char *)0x00001087U)));
-            pfVar15[4] = -2.1282349;
-            pfVar15[3] = GH_U2F((unsigned int)((scratchUint1 << 0x10 | scratchUint1 & 0xffff)));
-            pfVar15[9] = 1.0;
-            pfVar15[10] = scratchStack154;
-            pfVar15[0xb] = scratchStack150;
-            pfVar15[0xc] = scratchStack14c;
-            pfVar15[0xd] = local_168;
-            pfVar15[0xe] = GH_U2F((unsigned int)(((unsigned char *)0x00001087U)));
-            pfVar15[0xf] = *(float *)(ctx + 0x1f0c);
-            pfVar15 = pfVar15 + 0x10;
-            scratchStack164 = fVar3 + scratchStack164;
+            vertexCursor[5] = 9.19042e-41;
+            vertexCursor[6] = windowX;
+            vertexCursor[7] = windowY;
+            vertexCursor[8] = depthZ;
+            vertexCursor[2] = GH_U2F((unsigned int)(((unsigned char *)0x00001087U)));
+            vertexCursor[4] = -2.1282349;
+            vertexCursor[3] = GH_U2F((unsigned int)((scratchUint1 << 0x10 | scratchUint1 & 0xffff)));
+            vertexCursor[9] = 1.0;
+            vertexCursor[10] = colorR;
+            vertexCursor[0xb] = colorG;
+            vertexCursor[0xc] = colorB;
+            vertexCursor[0xd] = colorA;
+            vertexCursor[0xe] = GH_U2F((unsigned int)(((unsigned char *)0x00001087U)));
+            vertexCursor[0xf] = *(float *)(ctx + 0x1f0c);
+            vertexCursor = vertexCursor + 0x10;
+            windowX = stepX + windowX;
             scratchInt12 = scratchInt12 + -1;
           } while (scratchInt12 != 0);
         }
         loopIndex = loopIndex + 1;
-        param_2 = (float *)((int)param_2 + (int)srcRowBytes);
-        local_160 = fVar4 + local_160;
+        srcPixels = (float *)((int)srcPixels + (int)srcRowBytes);
+        windowY = stepY + windowY;
       } while (procHeight != loopIndex);
     }
   }
-  *pfVar15 = GH_U2F((unsigned int)(((unsigned char *)0x00001087U)));
-  pfVar15[1] = *(float *)(ctx + 0x1f0c);
-  *(float **)(ctx + 0x298c) = pfVar15 + 2;
-  uStack_b4 = uVar19;
-  (**(code **)(ctx + 0x299c))(iVar21,pfVar15 + 2);
-  FUN_0009d3b0(iVar21,r4AfterCall,pfVar13,scratchInt9,pfVar14,pfVar15,pfVar16);
-  return gldLeaveInternalDrawState(iVar21,afStack_148);
+  *vertexCursor = GH_U2F((unsigned int)(((unsigned char *)0x00001087U)));
+  vertexCursor[1] = *(float *)(ctx + 0x1f0c);
+  *(float **)(ctx + 0x298c) = vertexCursor + 2;
+  uStack_b4 = pointSizeWord;
+  (**(code **)(ctx + 0x299c))(commandStream,vertexCursor + 2);
+  FUN_0009d3b0(commandStream,r4AfterCall,pfVar13,scratchInt9,pfVar14,vertexCursor,pfVar16);
+  return gldLeaveInternalDrawState(commandStream,internalDrawStateSave);
 }
 
 /* FUN_0002a260 @ 0x2a260 (356 bytes) */

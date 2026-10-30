@@ -1,0 +1,16 @@
+func	FUN_00029c00	gld_drawPixelsAsPoints	INFERRED	software glDrawPixels path: draws every source pixel as a point vertex record (position, depth, colour) inside an internal draw state, for colour, depth and luminance formats
+local	FUN_00029c00	param_2	srcPixels	CONFIRMED	source pixels (float or packed colour per pixel); advanced by srcRowBytes per row
+local	FUN_00029c00	param_7	rasterX	INFERRED	raster position x (window coordinates) the first pixel is drawn at
+local	FUN_00029c00	param_8	rasterY	INFERRED	raster position y the first row is drawn at
+local	FUN_00029c00	fVar3	stepX	INFERRED	+1.0 or -1.0: window x increment per pixel (sign of the pixel-zoom x)
+local	FUN_00029c00	fVar4	stepY	INFERRED	+1.0 or -1.0: window y increment per row
+local	FUN_00029c00	puVar10	packetAlloc	INFERRED	command-stream slot returned by the allocate callback
+local	FUN_00029c00	puVar11	packetCursor	INFERRED	write cursor through the register pairs that precede the vertex records
+local	FUN_00029c00	pfVar15	vertexCursor	INFERRED	write cursor through the 8- or 16-word point records
+local	FUN_00029c00	pfVar17	srcCursor	INFERRED	read cursor through the current source row
+local	FUN_00029c00	iVar21	commandStream	INFERRED	ctx+0x240, the embedded command stream
+local	FUN_00029c00	uVar19	pointSizeWord	INFERRED	stream+8 word used to derive the GA_POINT_SIZE value (width = height)
+local	FUN_00029c00	bVar2	alphaByte	INFERRED	one byte of the source pixel loaded for the indexed/alpha path
+local	FUN_00029c00	local_168	colorA	INFERRED	alpha component of the point colour
+local	FUN_00029c00	local_160	windowY	INFERRED	window y of the current row (advanced by stepY)
+local	FUN_00029c00	afStack_148	internalDrawStateSave	INFERRED	buffer saved by gldEnterInternalDrawState and restored by gldLeaveInternalDrawState
