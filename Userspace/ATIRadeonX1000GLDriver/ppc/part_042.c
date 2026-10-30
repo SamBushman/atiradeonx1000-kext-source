@@ -384,7 +384,7 @@ int FUN_00139c78(inst, param_2, param_3, program)
 {
   int vcall70Result;
   int iVar1;
-  int *piVar2;
+  int *target;
   
   if (((*(uint *)(inst + 0x14) & 1) != 0) &&
      ((param_2 == 0 || ((*(uint *)(param_2 + 0x14) & 1) != 0)))) {
@@ -392,8 +392,8 @@ int FUN_00139c78(inst, param_2, param_3, program)
     if (iVar1 != 0) {
       *(int *)(inst + 0x150) = *(int *)(program + 0x474) + -1;
     }
-    piVar2 = *(int **)(*(int *)(program + 8) + 0x30c);
-    vcall70Result = (**(code **)(*piVar2 + 0x70))(piVar2,param_2,param_3,inst,program);
+    target = *(int **)(*(int *)(program + 8) + 0x30c);
+    vcall70Result = (**(code **)(*target + 0x70))(target,param_2,param_3,inst,program);
     if (vcall70Result != 0) {
       *(int *)(inst + 0x150) = *(int *)(program + 0x474) + -1;
     }
