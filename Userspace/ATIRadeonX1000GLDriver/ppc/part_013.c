@@ -98,7 +98,7 @@ int arbParseParamBinding(parser, variable, allowRange, isArrayElement)
   int tokenValue;
   int paramNumber;
   int matrixRowNumber;
-  bool bVar1;
+  bool notRangeToken;
   uint tokenBit;
   undefined4 *binding;
   undefined4 stateKind;
@@ -110,9 +110,9 @@ int arbParseParamBinding(parser, variable, allowRange, isArrayElement)
   undefined4 elementField8;
   undefined4 elementField12;
   double constantValue;
-  float local_28;
-  float local_24;
-  float local_20;
+  float constVecX;
+  float constVecY;
+  float constVecZ;
   
   if (0x1a < (uint)parser[5]) {
 LAB_0008aaa0:
@@ -451,19 +451,19 @@ switchD_00089f14_caseD_0:
           tokenValue = parser[6];
           if (tokenValue == 0x10) {
             arbNextToken(parser);
-            bVar1 = parser[5] != 0x11;
-            if (!bVar1) {
+            notRangeToken = parser[5] != 0x11;
+            if (!notRangeToken) {
               arbNextToken(parser);
             }
             binding[4] = 3;
 LAB_0008a838:
-            if (bVar1) goto LAB_0008a960;
+            if (notRangeToken) goto LAB_0008a960;
           }
           else {
             if (tokenValue == 0x2b) {
               arbNextToken(parser);
-              bVar1 = parser[5] != 0x11;
-              if (!bVar1) {
+              notRangeToken = parser[5] != 0x11;
+              if (!notRangeToken) {
                 arbNextToken(parser);
               }
               binding[4] = 2;
@@ -471,8 +471,8 @@ LAB_0008a838:
             }
             if (tokenValue == 0xf) {
               arbNextToken(parser);
-              bVar1 = parser[5] != 0x11;
-              if (!bVar1) {
+              notRangeToken = parser[5] != 0x11;
+              if (!notRangeToken) {
                 arbNextToken(parser);
               }
               binding[4] = 1;
@@ -570,27 +570,27 @@ LAB_000898c0:
   tokenBit = 1 << (parser[5] & 0x3fU);
   if ((tokenBit & 0x6018000) != 0) {
     constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-    local_28 = (float)constantValue;
-    local_24 = local_28;
-    local_20 = local_28;
-    stateKind = arbInternConstant(parser,&local_28);
+    constVecX = (float)constantValue;
+    constVecY = constVecX;
+    constVecZ = constVecX;
+    stateKind = arbInternConstant(parser,&constVecX);
     binding[3] = stateKind;
     return;
   }
   if ((tokenBit & 0x800000) == 0) goto LAB_000898c0;
   arbNextToken(parser);
-  local_20 = 0.0;
-  local_24 = 0.0;
+  constVecZ = 0.0;
+  constVecY = 0.0;
   constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-  local_28 = (float)constantValue;
+  constVecX = (float)constantValue;
   if (parser[5] == 0x13) {
     arbNextToken(parser);
     constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-    local_24 = (float)constantValue;
+    constVecY = (float)constantValue;
     if (parser[5] == 0x13) {
       arbNextToken(parser);
       constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-      local_20 = (float)constantValue;
+      constVecZ = (float)constantValue;
       if (parser[5] == 0x13) {
         arbNextToken(parser);
         ((double (*)())arbParseFloatConstant)(parser);
@@ -606,7 +606,7 @@ LAB_000898c0:
   }
 LAB_000899e0:
   arbExpectToken(parser,0x18);
-  stateKind = arbInternConstant(parser,&local_28);
+  stateKind = arbInternConstant(parser,&constVecX);
   binding[3] = stateKind;
   return;
 }
@@ -2570,12 +2570,12 @@ int arbfpBindProgram(context, programSlot, param_3, param_4, param_5, param_6, p
 }
 
 /* gldCallHook1278 @ 0x8dc40 (12 bytes) */
-int gldCallHook1278(param_1)
-  int param_1;
+int gldCallHook1278(ctx)
+  int ctx;
 {
                     
                     
-  (**(code **)(((unsigned char *)0x00001278) + param_1))();
+  (**(code **)(((unsigned char *)0x00001278) + ctx))();
   return;
 }
 
@@ -2585,7 +2585,7 @@ int arbfpProgramObjectInit(context, programObject)
   undefined1 *programObject;
 {
   int loopIndex;
-  undefined1 *puVar1;
+  undefined1 *unitSlotPtr;
   undefined4 instanceTable;
   undefined4 in_r5;
   undefined4 in_r6;
@@ -2604,11 +2604,11 @@ int arbfpProgramObjectInit(context, programObject)
   programObject[3] = 0;
   if (((unsigned char *)0x000013b1)[context] != '\0') {
     loopIndex = 0;
-    puVar1 = programObject;
+    unitSlotPtr = programObject;
     do {
-      *(undefined4 *)(puVar1 + 0x10) = 0;
+      *(undefined4 *)(unitSlotPtr + 0x10) = 0;
       loopIndex = loopIndex + 1;
-      puVar1 = puVar1 + 4;
+      unitSlotPtr = unitSlotPtr + 4;
     } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b1)[context]);
   }
   instanceTable = (**(code **)(context + 0x10))(*(undefined4 *)(*(int *)(((unsigned char *)0x0000112c) + context) + 0x10),4)
@@ -2650,7 +2650,7 @@ int arbfpProgramObjectFree(context, programObject)
 {
   int loopIndex2;
   int instanceCount;
-  undefined1 *puVar2;
+  undefined1 *unitSlotPtr;
   int instanceTable;
   int stateHolder;
   int loopIndex;
@@ -2665,11 +2665,11 @@ int arbfpProgramObjectFree(context, programObject)
   programObject[3] = 0;
   if (((unsigned char *)0x000013b1)[context] != '\0') {
     loopIndex2 = 0;
-    puVar2 = programObject;
+    unitSlotPtr = programObject;
     do {
-      *(undefined4 *)(puVar2 + 0x10) = 0;
+      *(undefined4 *)(unitSlotPtr + 0x10) = 0;
       loopIndex2 = loopIndex2 + 1;
-      puVar2 = puVar2 + 4;
+      unitSlotPtr = unitSlotPtr + 4;
     } while (loopIndex2 < (int)(uint)(byte)((unsigned char *)0x000013b1)[context]);
   }
   instanceTable = *(int *)(programObject + 0x70);
@@ -2852,20 +2852,20 @@ int arbfpProgramStringIL(context, unused, wordCount, words)
   undefined4 words;
 {
   int byteCount;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  char cVar4;
+  undefined4 headerWord1;
+  undefined4 headerWord2;
+  char headerLastByte;
   char *allocation;
   
   byteCount = wordCount * 4;
   allocation = (char *)_malloc(byteCount + 0xd);
-  cVar4 = s___ILfs1_0_001a5d2c[0xc];
-  uVar3 = (*(unsigned int *)((unsigned char *)&(s___ILfs1_0_001a5d2c) + 8));
-  uVar2 = (*(unsigned int *)((unsigned char *)&(s___ILfs1_0_001a5d2c) + 4));
+  headerLastByte = s___ILfs1_0_001a5d2c[0xc];
+  headerWord2 = (*(unsigned int *)((unsigned char *)&(s___ILfs1_0_001a5d2c) + 8));
+  headerWord1 = (*(unsigned int *)((unsigned char *)&(s___ILfs1_0_001a5d2c) + 4));
   *(undefined4 *)allocation = (*(unsigned int *)((unsigned char *)&(s___ILfs1_0_001a5d2c) + 0));
-  *(undefined4 *)(allocation + 4) = uVar2;
-  allocation[0xc] = cVar4;
-  *(undefined4 *)(allocation + 8) = uVar3;
+  *(undefined4 *)(allocation + 4) = headerWord1;
+  allocation[0xc] = headerLastByte;
+  *(undefined4 *)(allocation + 8) = headerWord2;
   _memcpy(allocation + 10,words,byteCount);
   allocation[byteCount + 0xc] = '\0';
   ((int (*)())arbfpProgramString)(context,0x8875,byteCount + 0xc,allocation);
@@ -2921,7 +2921,8 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
   float materialAmbientG;
   float materialAmbientR;
   float materialShininess;
-  float fVar1;
+  float oneF;
+  float stateFloat28cc;
   float workRowAElem1;
   float eliminationFactor;
   int copyByteOffset;
@@ -2975,7 +2976,7 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
   float augRow3Elem6;
   undefined4 augRow3Elem7;
   
-  fVar1 = FLOAT_001aa0e8;
+  oneF = FLOAT_001aa0e8;
   kind = *(int *)(element + 8);
   stateOwner = *(int *)(context + 4);
   lightOrFace = *(int *)(element + 0xc);
@@ -3090,14 +3091,14 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     *outValue = lightDirX;
     lightDirY = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f4);
     outValue[1] = lightDirY;
-    halfVectorZ = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f8) + fVar1;
+    halfVectorZ = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f8) + oneF;
     outValue[2] = halfVectorZ;
     length = _sqrt((double)(halfVectorZ * halfVectorZ + lightDirX * lightDirX + lightDirY * lightDirY));
-    outValue[3] = fVar1;
-    fVar1 = fVar1 / (float)length;
-    outValue[2] = halfVectorZ * fVar1;
-    *outValue = fVar1 * lightDirX;
-    outValue[1] = lightDirY * fVar1;
+    outValue[3] = oneF;
+    oneF = oneF / (float)length;
+    outValue[2] = halfVectorZ * oneF;
+    *outValue = oneF * lightDirX;
+    outValue[1] = lightDirY * oneF;
     break;
   case 0x11:
     *outValue = *(float *)(stateBlock + 0x24b0);
@@ -3148,10 +3149,10 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     }
     outValue[2] = materialAmbientB * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24c8);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28cc);
+      stateFloat28cc = *(float *)(stateBlock + 0x28cc);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b0c);
+      stateFloat28cc = *(float *)(stateBlock + 0x2b0c);
     }
     goto LAB_0008f398;
   case 0x14:
@@ -3177,10 +3178,10 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     }
     outValue[2] = materialDiffuseB * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24d8);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28dc);
+      stateFloat28cc = *(float *)(stateBlock + 0x28dc);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b1c);
+      stateFloat28cc = *(float *)(stateBlock + 0x2b1c);
     }
     goto LAB_0008f398;
   case 0x15:
@@ -3206,10 +3207,10 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     }
     outValue[2] = materialSpecularB * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24e8);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28ec);
+      stateFloat28cc = *(float *)(stateBlock + 0x28ec);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b2c);
+      stateFloat28cc = *(float *)(stateBlock + 0x2b2c);
     }
     goto LAB_0008f398;
   case 0x16:
@@ -3238,9 +3239,9 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
                            );
     outValue[2] = *(float *)(((unsigned char *)0x000031cc) + *(int *)(element + 0xc) * 0x7c + *(int *)(stateOwner + 0x10)
                            );
-    fVar1 = *(float *)(((unsigned char *)0x000031d0) + *(int *)(element + 0xc) * 0x7c + *(int *)(stateOwner + 0x10));
+    stateFloat28cc = *(float *)(((unsigned char *)0x000031d0) + *(int *)(element + 0xc) * 0x7c + *(int *)(stateOwner + 0x10));
 LAB_0008f398:
-    outValue[3] = fVar1;
+    outValue[3] = stateFloat28cc;
     break;
   case 0x1a:
   case 0x1b:
@@ -3552,7 +3553,7 @@ int arbfpInitProgramState(context)
   int context;
 {
   int loopIndex;
-  undefined4 uVar1;
+  undefined4 programObject;
   undefined4 in_r4;
   undefined4 a1;
   undefined4 a1_00;
@@ -3563,9 +3564,9 @@ int arbfpInitProgramState(context)
   int slotIndex;
   int slotTable;
   int stateHolder;
-  undefined *puVar5;
+  undefined *unitSlotPtr;
   
-  puVar5 = ((unsigned char *)0x000011d0U) + context;
+  unitSlotPtr = ((unsigned char *)0x000011d0U) + context;
   stateHolder = *(int *)(((unsigned char *)0x0000112c) + context);
   *(undefined4 *)(((unsigned char *)0x0000126c) + context) = 1;
   *(undefined4 *)(((unsigned char *)0x00001220) + context) = 2;
@@ -3576,9 +3577,9 @@ int arbfpInitProgramState(context)
   if (((unsigned char *)0x000013b1)[context] != '\0') {
     loopIndex = 0;
     do {
-      *(undefined4 *)(puVar5 + 0x5c) = 0;
+      *(undefined4 *)(unitSlotPtr + 0x5c) = 0;
       loopIndex = loopIndex + 1;
-      puVar5 = puVar5 + 4;
+      unitSlotPtr = unitSlotPtr + 4;
     } while (loopIndex < (int)(uint)(byte)((unsigned char *)0x000013b1)[context]);
   }
   arbProgramEntryInit(context,*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8));
@@ -3586,8 +3587,8 @@ int arbfpInitProgramState(context)
   *(undefined4 *)(*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8)) = 0;
   slotIndex = *(int *)(((unsigned char *)0x0000126c) + context);
   slotTable = *(int *)(stateHolder + 8);
-  uVar1 = (**(code **)(context + 0xc))(0x78,a1,in_r5,in_r6,in_r7,in_r8,slotTable);
-  *(undefined4 *)(slotIndex * 0x18 + slotTable + 0x14) = uVar1;
+  programObject = (**(code **)(context + 0xc))(0x78,a1,in_r5,in_r6,in_r7,in_r8,slotTable);
+  *(undefined4 *)(slotIndex * 0x18 + slotTable + 0x14) = programObject;
   ((int (*)())arbfpProgramObjectInit)(context,*(undefined4 *)
                         (*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8) + 0x14));
   arbProgramEntryInit(context,*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8));
@@ -3595,8 +3596,8 @@ int arbfpInitProgramState(context)
   *(undefined4 *)(*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8)) = 0;
   slotIndex = *(int *)(((unsigned char *)0x00001220) + context);
   slotTable = *(int *)(stateHolder + 8);
-  uVar1 = (**(code **)(context + 0xc))(0x78,a1_00,in_r5,in_r6,in_r7,in_r8,slotTable);
-  *(undefined4 *)(slotIndex * 0x18 + slotTable + 0x14) = uVar1;
+  programObject = (**(code **)(context + 0xc))(0x78,a1_00,in_r5,in_r6,in_r7,in_r8,slotTable);
+  *(undefined4 *)(slotIndex * 0x18 + slotTable + 0x14) = programObject;
   return ((int (*)())arbfpProgramObjectInit)(context,*(undefined4 *)
                         (*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8) + 0x14));
 }
@@ -3625,14 +3626,14 @@ int arbfpGrowInstanceTable(context, programObject)
 int arbfpLoadDefaultProgram(context)
   int context;
 {
-  undefined4 uVar1;
+  undefined4 defaultLength;
   char *defaultText;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar3;
+  int stateHolder;
   undefined4 in_r10;
   
-  uVar1 = 0xf;
+  defaultLength = 0xf;
   ((unsigned char *)0x000011d0)[context] = 1;
   defaultText = "!!ARBfp1.0\nEND\n";
   *(int *)(((unsigned char *)0x00001270) + context) = *(int *)(((unsigned char *)0x0000126c) + context);
@@ -3640,11 +3641,11 @@ int arbfpLoadDefaultProgram(context)
        *(undefined4 *)
         (*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(*(int *)(((unsigned char *)0x0000112c) + context) + 8)
         + 0x14);
-  iVar3 = *(int *)(((unsigned char *)0x0000112c) + context);
+  stateHolder = *(int *)(((unsigned char *)0x0000112c) + context);
   ((int (*)())arbValidateProgram)(context,*(undefined4 *)
-                        (*(int *)(*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(iVar3 + 8) +
+                        (*(int *)(*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8) +
                                  0x14) + 0x74),0xf,"!!ARBfp1.0\nEND\n");
-  return ((int (*)())arbfpBindProgram)(context,*(undefined4 *)(((unsigned char *)0x0000126c) + context),uVar1,defaultText,in_r7,in_r8,iVar3,
+  return ((int (*)())arbfpBindProgram)(context,*(undefined4 *)(((unsigned char *)0x0000126c) + context),defaultLength,defaultText,in_r7,in_r8,stateHolder,
                in_r10);
 }
 
@@ -3695,8 +3696,8 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   uint i2dLo1;
   undefined4 i2dHi5;
   undefined4 drawableHeightInt;
-  longlong local_40;
-  longlong local_38;
+  longlong scaledHeightLL;
+  longlong scaledWidthLL;
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   a3 = rect;
@@ -3759,9 +3760,9 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
   rectX0 = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
   drawableHeight = (float)((double)CONCAT44(0x43300000,drawableHeightInt) - 4503599627370496.0);
   a6 = (uint)(int)(*(float *)(ctx + 0x2818) * 0.5 * drawableHeight * (rectY1 - rectY0));
-  local_40 = (longlong)(int)a6;
+  scaledHeightLL = (longlong)(int)a6;
   scaledWidth = (int)(drawableHeight * *(float *)(ctx + 0x2814) * 0.5 * (rectX1 - rectX0));
-  local_38 = (longlong)scaledWidth;
+  scaledWidthLL = (longlong)scaledWidth;
   packet[2] = 0x82c;
   *packet = ((unsigned char *)0x00001087U);
   packet[1] = scaledWidth << 0x10 | a6 & 0xffff;
@@ -3793,16 +3794,16 @@ int gldDrawInternalRect(ctx, param_2, param_3, rect, param_5)
 int gldFlushProgramStateForDraw(ctx)
   int ctx;
 {
-  int iVar1;
+  int stateRecord;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar2;
+  int reg1b7cBefore;
   
   if (*(int *)(((unsigned char *)0x00003e28) + *(int *)(*(int *)(ctx + 4) + 0x10)) != 0) {
     gldUploadClipPlanes(ctx);
   }
-  iVar2 = *(int *)(ctx + 0x1b7c);
+  reg1b7cBefore = *(int *)(ctx + 0x1b7c);
   *(undefined1 *)(ctx + 0x23ec) = 1;
   if (*(char *)(ctx + 0x1868) == '\0') {
     if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
@@ -3810,13 +3811,13 @@ int gldFlushProgramStateForDraw(ctx)
     }
   }
   else if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
-    iVar1 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + **(int **)(((unsigned char *)0x00001168) + ctx));
+    stateRecord = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + **(int **)(((unsigned char *)0x00001168) + ctx));
     (**(code **)((int)((unsigned char *)0x00001294) + ctx))
-              (ctx,iVar1 + 0x13c,*(undefined4 *)(iVar1 + 0x130),in_r6,in_r7,in_r8,
+              (ctx,stateRecord + 0x13c,*(undefined4 *)(stateRecord + 0x130),in_r6,in_r7,in_r8,
                *(int *)(((unsigned char *)0x0000118c) + ctx) * 4);
   }
   ffvpRunStateHook(ctx);
-  *(char *)(ctx + 0x23ec) = '\x01' - (iVar2 == *(int *)(ctx + 0x1b7c));
+  *(char *)(ctx + 0x23ec) = '\x01' - (reg1b7cBefore == *(int *)(ctx + 0x1b7c));
   return;
 }
 
@@ -3830,8 +3831,9 @@ int ffvpAssignOutputSlots(ctx)
   uint ctxFlags44;
   int stateBlock;
   uint nextSlot;
-  undefined4 uVar6;
-  int iVar7;
+  undefined4 colorSlot;
+  int slotBase;
+  int unitCursor;
   int enableCursor;
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
@@ -3855,25 +3857,25 @@ int ffvpAssignOutputSlots(ctx)
   else {
     nextSlot = *(uint *)(ctx + 0x8c);
     if (((nextSlot >> 0x14 & 1) == 0 && (nextSlot >> 0x1a & 1) == 0) && (nextSlot >> 0x1b & 1) == 0) {
-      iVar7 = 1;
-      uVar6 = 1;
+      slotBase = 1;
+      colorSlot = 1;
       nextSlot = 2;
     }
     else {
-      iVar7 = 2;
+      slotBase = 2;
       nextSlot = 3;
       FUN_0004fc80(ctx,1,3,0,1,0,0,0);
-      uVar6 = 2;
+      colorSlot = 2;
       *(undefined4 *)(ctx + 0x1a0) = 1;
     }
-    FUN_0004fc80(ctx,uVar6,3,0,uVar6,0,0,0);
+    FUN_0004fc80(ctx,colorSlot,3,0,colorSlot,0,0,0);
     ctxFlags44 = *(uint *)(ctx + 0x44);
-    *(undefined4 *)(ctx + 0x1a8) = uVar6;
+    *(undefined4 *)(ctx + 0x1a8) = colorSlot;
     if ((ctxFlags44 & 0xa10000) != 0) {
       FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
       ctxFlags44 = *(uint *)(ctx + 0x44);
       *(uint *)(ctx + 0x1ac) = nextSlot;
-      nextSlot = iVar7 + 2;
+      nextSlot = slotBase + 2;
     }
   }
   if ((ctxFlags44 & 0x20000) == 0) {
@@ -3883,17 +3885,17 @@ int ffvpAssignOutputSlots(ctx)
     }
     if (texUnitCount == 0) goto LAB_0008ff78;
     loopIndex = 0;
-    iVar7 = ctx;
+    unitCursor = ctx;
     enableCursor = ctx;
     do {
-      if ((((unsigned char *)0x00001438)[enableCursor] != '\0') && (*(int *)(((unsigned char *)0x000013f8) + iVar7) != 0)) {
+      if ((((unsigned char *)0x00001438)[enableCursor] != '\0') && (*(int *)(((unsigned char *)0x000013f8) + unitCursor) != 0)) {
         FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
-        *(uint *)(iVar7 + 0x1c8) = nextSlot;
+        *(uint *)(unitCursor + 0x1c8) = nextSlot;
         nextSlot = nextSlot + 1;
       }
       loopIndex = loopIndex + 1;
       enableCursor = enableCursor + 1;
-      iVar7 = iVar7 + 4;
+      unitCursor = unitCursor + 4;
     } while (loopIndex != texUnitCount);
   }
   else {
@@ -3906,16 +3908,16 @@ int ffvpAssignOutputSlots(ctx)
     texUnitCount = (uint)(byte)((unsigned char *)0x000013b0)[ctx];
     if (texUnitCount == 0) goto LAB_0008ff78;
     loopIndex = 0;
-    iVar7 = ctx;
+    unitCursor = ctx;
     do {
       if (((uint)texEnableMask & 1 << (loopIndex & 0x3f)) != 0) {
         FUN_0004fc80(ctx,nextSlot,3,0,nextSlot,0,0,0);
         texUnitCount = (uint)(byte)((unsigned char *)0x000013b0)[ctx];
-        *(uint *)(iVar7 + 0x1c8) = nextSlot;
+        *(uint *)(unitCursor + 0x1c8) = nextSlot;
         nextSlot = nextSlot + 1;
       }
       loopIndex = loopIndex + 1;
-      iVar7 = iVar7 + 4;
+      unitCursor = unitCursor + 4;
     } while ((int)loopIndex < (int)texUnitCount);
   }
   ctxFlags44 = *(uint *)(ctx + 0x44);
@@ -4317,21 +4319,21 @@ int gldEmitTclModeRegs(ctx)
 }
 
 /* gldClearHwTclFlag @ 0x90960 (48 bytes) */
-int gldClearHwTclFlag(param_1)
-  int param_1;
+int gldClearHwTclFlag(ctx)
+  int ctx;
 {
-  int iVar1;
+  int stateObject;
   
-  iVar1 = *(int *)(param_1 + 4);
-  if (*(char *)(iVar1 + 0x20) == '\0') {
+  stateObject = *(int *)(ctx + 4);
+  if (*(char *)(stateObject + 0x20) == '\0') {
     return;
   }
-  if ((*(uint *)(param_1 + 0x8c) & 0x40000000) == 0) {
+  if ((*(uint *)(ctx + 0x8c) & 0x40000000) == 0) {
     return;
   }
-  *(undefined1 *)(iVar1 + 0x20) = 0;
-  *(undefined4 *)(iVar1 + 0x1cc) = 0;
-  return ((int (*)())gldEmitTclModeRegs)(param_1);
+  *(undefined1 *)(stateObject + 0x20) = 0;
+  *(undefined4 *)(stateObject + 0x1cc) = 0;
+  return ((int (*)())gldEmitTclModeRegs)(ctx);
 }
 
 /* gldUpdateHwTclState @ 0x90990 (772 bytes) */
@@ -4465,8 +4467,8 @@ int ffvpAllocTempRegister(allocState, componentCount, resultOperand)
   int resultWord4Staged;
   int resultWord8Staged;
   int resultWord9Staged;
-  char *pcVar1;
-  char cVar2;
+  char *flagPtr;
+  char flagByte;
   int resultWord5Staged;
   int regFlags;
   int flagCursor;
@@ -4625,18 +4627,18 @@ LAB_00091070:
         }
       }
       else {
-        cVar2 = *(char *)(allocState + 0x6c7);
+        flagByte = *(char *)(allocState + 0x6c7);
         flagCursor = allocState;
-        while (cVar2 != '\0') {
+        while (flagByte != '\0') {
           loopIndex = loopIndex + 1;
           regCountdown = regCountdown + -1;
           if (regCountdown == 0) goto LAB_00091090;
           if (*(char *)(flagCursor + 0x6c8) == '\0') goto LAB_00090e7c;
           if (*(char *)(flagCursor + 0x6c9) == '\0') goto LAB_00090efc;
           if (*(char *)(flagCursor + 0x6ca) == '\0') goto LAB_00090f7c;
-          pcVar1 = (char *)(flagCursor + 0x6cb);
+          flagPtr = (char *)(flagCursor + 0x6cb);
           flagCursor = flagCursor + 4;
-          cVar2 = *pcVar1;
+          flagByte = *flagPtr;
         }
         resultOperand[1] = loopIndex;
         resultWord5Staged = DAT_001dbd50;

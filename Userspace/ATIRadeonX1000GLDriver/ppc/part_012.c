@@ -264,39 +264,39 @@ int ffvpBuildPassThroughProgram(ctx)
 }
 
 /* gldEmitVertexRoutingPackets @ 0x837b0 (188 bytes) */
-int gldEmitVertexRoutingPackets(param_1)
-  int param_1;
+int gldEmitVertexRoutingPackets(ctx)
+  int ctx;
 {
   undefined4 *a6;
-  int iVar1;
+  int cmdPos;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  undefined4 uVar2;
-  code *pcVar3;
+  undefined4 regValue;
+  code *streamSetCurrent;
   
-  ((int (*)())ffvpBuildPassThroughProgram)(param_1);
-  ((int (*)())ffvpSetupVertexOutputRouting)(param_1);
-  a6 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,9);
-  *(undefined4 **)(0x00002748 + param_1 + 4) = a6;
+  ((int (*)())ffvpBuildPassThroughProgram)(ctx);
+  ((int (*)())ffvpSetupVertexOutputRouting)(ctx);
+  a6 = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,9);
+  *(undefined4 **)(0x00002748 + ctx + 4) = a6;
   *a6 = 0x861;
-  uVar2 = *(undefined4 *)(param_1 + 0x1ca0);
+  regValue = *(undefined4 *)(ctx + 0x1ca0);
   a6[2] = 0x10824;
-  a6[1] = uVar2;
-  a6[3] = *(undefined4 *)(param_1 + 0x1b9c);
-  uVar2 = *(undefined4 *)(param_1 + 0x1ba0);
+  a6[1] = regValue;
+  a6[3] = *(undefined4 *)(ctx + 0x1b9c);
+  regValue = *(undefined4 *)(ctx + 0x1ba0);
   a6[5] = 0x82d;
-  a6[4] = uVar2;
-  uVar2 = *(undefined4 *)(param_1 + 0x1ca4);
+  a6[4] = regValue;
+  regValue = *(undefined4 *)(ctx + 0x1ca4);
   a6[7] = ((unsigned char *)0x00001047U);
-  a6[6] = uVar2;
-  a6[8] = *(undefined4 *)(param_1 + 0x1bb0);
-  iVar1 = *(int *)(0x00002748 + param_1 + 4);
-  pcVar3 = *(code **)(param_1 + 0x275c);
-  *(int *)(0x00002748 + param_1 + 4) = iVar1 + 0x24;
-  (*pcVar3)(param_1,iVar1 + 0x24,in_r5,in_r6,in_r7,in_r8,a6);
-  return FUN_0004e880(param_1);
+  a6[6] = regValue;
+  a6[8] = *(undefined4 *)(ctx + 0x1bb0);
+  cmdPos = *(int *)(0x00002748 + ctx + 4);
+  streamSetCurrent = *(code **)(ctx + 0x275c);
+  *(int *)(0x00002748 + ctx + 4) = cmdPos + 0x24;
+  (*streamSetCurrent)(ctx,cmdPos + 0x24,in_r5,in_r6,in_r7,in_r8,a6);
+  return FUN_0004e880(ctx);
 }
 
 /* ffvpValidateProgram @ 0x83870 (1012 bytes) */
@@ -3047,62 +3047,62 @@ int arbEmitRecord2Src_op4f(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
 }
 
 /* FUN_00086710 @ 0x86710 (152 bytes) */
-int FUN_00086710(param_1)
-  int param_1;
+int FUN_00086710(ctx)
+  int ctx;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
-  code *UNRECOVERED_JUMPTABLE;
+  undefined4 *packet;
+  undefined4 regBase;
+  code *streamSetCurrent;
   
-  puVar1 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,7);
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar1;
-  *puVar1 = 0x880;
-  uVar2 = *(undefined4 *)(param_1 + 0x244c);
-  puVar1[2] = 0x38882;
-  puVar1[1] = uVar2;
-  puVar1[3] = *(undefined4 *)(param_1 + 400);
-  puVar1[4] = *(undefined4 *)(param_1 + 0x194);
-  puVar1[5] = *(undefined4 *)(param_1 + 0xf0);
-  puVar1[6] = *(undefined4 *)(param_1 + 0x198);
-  UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x275c);
-  *(int *)(0x00002748 + param_1 + 4) = *(int *)(0x00002748 + param_1 + 4) + 0x1c;
+  packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,7);
+  *(undefined4 **)(0x00002748 + ctx + 4) = packet;
+  *packet = 0x880;
+  regBase = *(undefined4 *)(ctx + 0x244c);
+  packet[2] = 0x38882;
+  packet[1] = regBase;
+  packet[3] = *(undefined4 *)(ctx + 400);
+  packet[4] = *(undefined4 *)(ctx + 0x194);
+  packet[5] = *(undefined4 *)(ctx + 0xf0);
+  packet[6] = *(undefined4 *)(ctx + 0x198);
+  streamSetCurrent = *(code **)(ctx + 0x275c);
+  *(int *)(0x00002748 + ctx + 4) = *(int *)(0x00002748 + ctx + 4) + 0x1c;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
+  (*streamSetCurrent)(ctx,*(int *)(0x00002748 + ctx + 4));
   return;
 }
 
 /* gldSyncClipPlaneEnables @ 0x867b0 (140 bytes) */
-int gldSyncClipPlaneEnables(param_1)
-  int param_1;
+int gldSyncClipPlaneEnables(ctx)
+  int ctx;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
+  uint planeBit;
+  uint enableMask;
+  uint dirtyWord;
   uint loopCounter;
   int remaining;
   
-  uVar3 = *(uint *)(param_1 + 0x1930);
+  dirtyWord = *(uint *)(ctx + 0x1930);
   loopCounter = 0;
   remaining = 6;
-  uVar2 = *(uint *)(((unsigned char *)0x00003e28) + *(int *)(*(int *)(param_1 + 4) + 0x10));
+  enableMask = *(uint *)(((unsigned char *)0x00003e28) + *(int *)(*(int *)(ctx + 4) + 0x10));
   do {
-    if (((int)(uint)*(ushort *)(param_1 + 0x36) >> (loopCounter & 0x3f) & 1U) != 0) {
-      uVar1 = 1 << (loopCounter & 0x3f);
-      if ((uVar2 & uVar1) == 0) {
-        *(uint *)(param_1 + 0x1b74) = *(uint *)(param_1 + 0x1b74) & ~uVar1;
+    if (((int)(uint)*(ushort *)(ctx + 0x36) >> (loopCounter & 0x3f) & 1U) != 0) {
+      planeBit = 1 << (loopCounter & 0x3f);
+      if ((enableMask & planeBit) == 0) {
+        *(uint *)(ctx + 0x1b74) = *(uint *)(ctx + 0x1b74) & ~planeBit;
       }
       else {
-        uVar3 = uVar3 | 0x1000000;
-        *(uint *)(param_1 + 0x1930) = uVar3;
-        *(uint *)(param_1 + 0x1b74) = uVar1 | *(uint *)(param_1 + 0x1b74);
+        dirtyWord = dirtyWord | 0x1000000;
+        *(uint *)(ctx + 0x1930) = dirtyWord;
+        *(uint *)(ctx + 0x1b74) = planeBit | *(uint *)(ctx + 0x1b74);
       }
     }
     loopCounter = loopCounter + 1;
     remaining = remaining + -1;
   } while (remaining != 0);
-  *(uint *)(param_1 + 0x1930) = uVar3 | 0x400000;
-  *(undefined2 *)(param_1 + 0x36) = 0;
+  *(uint *)(ctx + 0x1930) = dirtyWord | 0x400000;
+  *(undefined2 *)(ctx + 0x36) = 0;
   return;
 }
 
@@ -3151,41 +3151,41 @@ int gldUploadClipPlanes(ctx)
 }
 
 /* gldLodBiasToFixed @ 0x86930 (204 bytes) */
-int gldLodBiasToFixed(int param_1,double fparam_1,double fparam_2)
+int gldLodBiasToFixed(int ctx,double fparam_1,double fparam_2)
 {
-  float fVar1;
-  float fVar2;
+  float biasSum;
+  float fixedResult;
   
-  fVar1 = (float)((double)CONCAT44(0x43300000,*(undefined4 *)(param_1 + 0x284c)) - DOUBLE_001aa250)
+  biasSum = (float)((double)CONCAT44(0x43300000,*(undefined4 *)(ctx + 0x284c)) - DOUBLE_001aa250)
           * FLOAT_001aa170 + (float)(fparam_1 + fparam_2);
-  if (fVar1 == FLOAT_001aa0d4) {
+  if (biasSum == FLOAT_001aa0d4) {
     return 0;
   }
-  if (fVar1 != FLOAT_001aa174) {
-    fVar2 = FLOAT_001aa17c;
-    if ((FLOAT_001aa178 <= fVar1) && (fVar2 = FLOAT_001aa184, fVar1 <= FLOAT_001aa180)) {
-      fVar2 = fVar1 * FLOAT_001aa0f8;
+  if (biasSum != FLOAT_001aa174) {
+    fixedResult = FLOAT_001aa17c;
+    if ((FLOAT_001aa178 <= biasSum) && (fixedResult = FLOAT_001aa184, biasSum <= FLOAT_001aa180)) {
+      fixedResult = biasSum * FLOAT_001aa0f8;
     }
-    return (int)fVar2;
+    return (int)fixedResult;
   }
   return -0x10;
 }
 
 /* gldUpdateLodBiasField @ 0x86a10 (96 bytes) */
-int gldUpdateLodBiasField(param_1, param_2, param_3)
-  undefined4 param_1;
-  int param_2;
-  float *param_3;
+int gldUpdateLodBiasField(ctx, texRecord, extraBias)
+  undefined4 ctx;
+  int texRecord;
+  float *extraBias;
 {
-  undefined2 uVar1;
+  undefined2 lodFixed;
   
-  if (param_3 == (float *)0x0) {
-    uVar1 = ((int (*)())gldLodBiasToFixed)(param_1,(double)*(float *)(param_2 + 0x20),(double)FLOAT_001aa0d4);
-    *(undefined2 *)(param_2 + 0x1e) = uVar1;
+  if (extraBias == (float *)0x0) {
+    lodFixed = ((int (*)())gldLodBiasToFixed)(ctx,(double)*(float *)(texRecord + 0x20),(double)FLOAT_001aa0d4);
+    *(undefined2 *)(texRecord + 0x1e) = lodFixed;
   }
   else {
-    uVar1 = ((int (*)())gldLodBiasToFixed)(param_1,(double)*(float *)(param_2 + 0x20),(double)*param_3);
-    *(undefined2 *)(param_2 + 0x1e) = uVar1;
+    lodFixed = ((int (*)())gldLodBiasToFixed)(ctx,(double)*(float *)(texRecord + 0x20),(double)*extraBias);
+    *(undefined2 *)(texRecord + 0x1e) = lodFixed;
   }
   return;
 }
@@ -3764,9 +3764,9 @@ int noop_879e0()
 }
 
 /* arbfpInitUnitState @ 0x879f0 (732 bytes) */
-int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnabled, hasFogOrSecondary)
+int arbfpInitUnitState(ctx, unusedArg2, compileInfo, hwState, unitState, unitEnabled, hasFogOrSecondary)
   int ctx;
-  undefined4 param_2;
+  undefined4 unusedArg2;
   int compileInfo;
   int hwState;
   undefined4 *unitState;
@@ -3776,16 +3776,16 @@ int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnable
   undefined4 uVar1;
   uint regBase;
   int hwCursorA;
-  uint uVar4;
+  uint fieldBits;
   int hwCursorB;
   undefined4 *unitCursor;
   int loopCounter;
-  int iVar8;
+  int baseUnit;
   int remaining;
   
-  iVar8 = 0;
+  baseUnit = 0;
   if (ctx != 0) {
-    iVar8 = *(int *)(ctx + 0x276c);
+    baseUnit = *(int *)(ctx + 0x276c);
   }
   _memset(unitState,0,0x80);
   loopCounter = 0;
@@ -3822,7 +3822,7 @@ int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnable
   if (*(char *)(compileInfo + 0x118) != '\0') {
     *(undefined1 *)((int)unitState + 0x24f) = 0;
     *(undefined1 *)((int)unitState + 0x24b) = 0;
-    regBase = iVar8 * 4;
+    regBase = baseUnit * 4;
     *(undefined1 *)((int)unitState + 0x24a) = 0;
     *(undefined1 *)((int)unitState + 0x24d) = 0;
     *(undefined1 *)((int)unitState + 0x24e) = 0;
@@ -3835,16 +3835,16 @@ int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnable
       hwCursorA = 2;
     }
     hwCursorB = regBase + hwState;
-    uVar4 = 0x3e;
+    fieldBits = 0x3e;
     *(uint *)(hwCursorB + 0x88) = hwCursorA << 0x13 | *(uint *)(hwCursorB + 0x88) & 0xfe07ffff | 0x1400000;
     *(uint *)(hwCursorB + 200) =
          ((char)regBase + 1) * 0x40 & 0xfc0U | regBase & 0x3c | *(uint *)(hwCursorB + 200) & 0xfffff000;
     if (*(int *)(hwState + 0x210) != 2) {
-      uVar4 = (int)(char)regBase + 2U & 0x3e;
+      fieldBits = (int)(char)regBase + 2U & 0x3e;
     }
     *(uint *)(regBase + hwState + 200) =
-         uVar4 << 0xc | *(uint *)(regBase + hwState + 200) & 0xff000fff | 0xfc0000;
-    *(char *)(unitState + 0x92) = (char)iVar8;
+         fieldBits << 0xc | *(uint *)(regBase + hwState + 200) & 0xff000fff | 0xfc0000;
+    *(char *)(unitState + 0x92) = (char)baseUnit;
     uVar1 = *(undefined4 *)(compileInfo + 0x108);
     *(undefined1 *)(unitState + 0x93) = 0;
     *(short *)(unitState + 0x91) = (short)uVar1;
@@ -3857,7 +3857,7 @@ int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnable
   *(uint *)(hwState + 200) = *(uint *)(hwState + 200) & 0x80ffffff;
   if (hasFogOrSecondary == 0) {
     uVar1 = 1;
-    iVar8 = 1;
+    baseUnit = 1;
   }
   else {
     uVar1 = 2;
@@ -3865,14 +3865,14 @@ int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnable
     *(undefined1 *)((int)unitState + 0x53) = 1;
     *(undefined1 *)((int)unitState + 0x52) = 1;
     *(undefined2 *)((int)unitState + 0x4e) = 1;
-    iVar8 = 2;
+    baseUnit = 2;
     *(uint *)(hwState + 0x8c) = *(uint *)(hwState + 0x8c) & 0xffffe03f | 0x40;
     *(uint *)(hwState + 0xcc) = *(uint *)(hwState + 0xcc) & 0x80ffffff | 0x1000000;
   }
   *(undefined4 *)(hwState + 0x20c) = uVar1;
   hwCursorA = 0x48;
   *(undefined4 *)(hwState + 0x214) = 0;
-  *(uint *)(hwState + 0x208) = iVar8 << 7 | *(uint *)(hwState + 0x208) & 0xfffff87f;
+  *(uint *)(hwState + 0x208) = baseUnit << 7 | *(uint *)(hwState + 0x208) & 0xfffff87f;
   if (*(char *)(compileInfo + 0x118) == '\0') {
     hwCursorA = 0;
   }
@@ -3880,25 +3880,25 @@ int arbfpInitUnitState(ctx, param_2, compileInfo, hwState, unitState, unitEnable
 }
 
 /* arbfpUnbindWorkAreaChecked @ 0x87cd0 (188 bytes) */
-int arbfpUnbindWorkAreaChecked(glContext, param_2)
+int arbfpUnbindWorkAreaChecked(glContext, fpState)
   int glContext;
-  int param_2;
+  int fpState;
 {
-  int iVar1;
+  int workArea;
   
-  iVar1 = param_2 + 0x124;
-  if (param_2 != 0) {
-    if (iVar1 == *(int *)(glContext + 0x1e70)) {
+  workArea = fpState + 0x124;
+  if (fpState != 0) {
+    if (workArea == *(int *)(glContext + 0x1e70)) {
       *(undefined4 *)(glContext + 0x1e70) = 0;
     }
-    FUN_0004b5d0(glContext,iVar1);
-    if (iVar1 == *(int *)(glContext + 0x1e64)) {
+    FUN_0004b5d0(glContext,workArea);
+    if (workArea == *(int *)(glContext + 0x1e64)) {
       *(undefined4 *)(glContext + 0x1e64) = 0;
     }
-    if (*(int *)(((unsigned char *)0x00001488) + glContext) == param_2) {
+    if (*(int *)(((unsigned char *)0x00001488) + glContext) == fpState) {
       *(undefined4 *)(((unsigned char *)0x00001488) + glContext) = 0;
     }
-    if (iVar1 == *(int *)(glContext + 0x1e5c)) {
+    if (workArea == *(int *)(glContext + 0x1e5c)) {
       FUN_0004b480(glContext,1);
       return;
     }
@@ -3907,24 +3907,24 @@ int arbfpUnbindWorkAreaChecked(glContext, param_2)
 }
 
 /* arbfpUnbindWorkArea @ 0x87da0 (172 bytes) */
-int arbfpUnbindWorkArea(glContext, param_2)
+int arbfpUnbindWorkArea(glContext, fpState)
   int glContext;
-  int param_2;
+  int fpState;
 {
-  int iVar1;
+  int workArea;
   
-  iVar1 = param_2 + 0x124;
-  if (iVar1 == *(int *)(glContext + 0x1e70)) {
+  workArea = fpState + 0x124;
+  if (workArea == *(int *)(glContext + 0x1e70)) {
     *(undefined4 *)(glContext + 0x1e70) = 0;
   }
-  FUN_0004b5d0(glContext,iVar1);
-  if (iVar1 == *(int *)(glContext + 0x1e64)) {
+  FUN_0004b5d0(glContext,workArea);
+  if (workArea == *(int *)(glContext + 0x1e64)) {
     *(undefined4 *)(glContext + 0x1e64) = 0;
   }
-  if (*(int *)(((unsigned char *)0x00001488) + glContext) == param_2) {
+  if (*(int *)(((unsigned char *)0x00001488) + glContext) == fpState) {
     *(undefined4 *)(((unsigned char *)0x00001488) + glContext) = 0;
   }
-  if (iVar1 == *(int *)(glContext + 0x1e5c)) {
+  if (workArea == *(int *)(glContext + 0x1e5c)) {
     FUN_0004b480(glContext,1);
     return;
   }

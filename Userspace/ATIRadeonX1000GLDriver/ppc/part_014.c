@@ -277,28 +277,28 @@ LAB_00093754:
 int ffvpPrepareRescaledNormal(programBuilder)
   int programBuilder;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
-  uVar1 = 1;
+  status = 1;
   if (programBuilder != 0) {
     if ((*(int *)(programBuilder + 4) != -1) && (*(int *)(programBuilder + 0x344) != -1)) {
-      uVar1 = ffvpEmitRescaledNormal(programBuilder);
-      return uVar1;
+      status = ffvpEmitRescaledNormal(programBuilder);
+      return status;
     }
-    uVar1 = 2;
+    status = 2;
   }
-  return uVar1;
+  return status;
 }
 
 /* ffvpPrepareNormalizedNormal @ 0x93a20 (24 bytes) */
 int ffvpPrepareNormalizedNormal(programBuilder)
   int programBuilder;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
   if (*(int *)(programBuilder + 4) != -1) {
-    uVar1 = ffvpEmitNormalizedNormal(programBuilder);
-    return uVar1;
+    status = ffvpEmitNormalizedNormal(programBuilder);
+    return status;
   }
   return 2;
 }
@@ -1255,14 +1255,14 @@ int ffvpPrepareBlendWeights(programBuilder, weightCount, implicitLastWeight)
   undefined4 weightCount;
   undefined4 implicitLastWeight;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
-  uVar1 = 1;
-  if ((programBuilder != 0) && (uVar1 = 2, *(int *)(programBuilder + 0x5c) != -1)) {
-    uVar1 = ffvpEmitBlendWeights(programBuilder,weightCount,implicitLastWeight);
-    return uVar1;
+  status = 1;
+  if ((programBuilder != 0) && (status = 2, *(int *)(programBuilder + 0x5c) != -1)) {
+    status = ffvpEmitBlendWeights(programBuilder,weightCount,implicitLastWeight);
+    return status;
   }
-  return uVar1;
+  return status;
 }
 
 /* ffvpEmitProjectedPosition @ 0x95610 (1840 bytes) */
@@ -1776,27 +1776,27 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
 int ffvpPrepareEyeNormal(programBuilder)
   int programBuilder;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
-  uVar1 = 1;
+  status = 1;
   if (programBuilder != 0) {
     if ((*(int *)(programBuilder + 0xc4) != -1) && (*(int *)(programBuilder + 4) != -1)) {
-      uVar1 = ffvpEmitEyeNormal(programBuilder);
-      return uVar1;
+      status = ffvpEmitEyeNormal(programBuilder);
+      return status;
     }
-    uVar1 = 2;
+    status = 2;
   }
-  return uVar1;
+  return status;
 }
 
 /* ffvpPrepareFogExp2 @ 0x96540 (172 bytes) */
 int ffvpPrepareFogExp2(programBuilder)
   int programBuilder;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 status;
+  int fogReg;
   
-  if ((*(int *)(programBuilder + 0x330) == -1) || (iVar2 = *(int *)(programBuilder + 0x70), iVar2 == -1)) {
+  if ((*(int *)(programBuilder + 0x330) == -1) || (fogReg = *(int *)(programBuilder + 0x70), fogReg == -1)) {
     return 2;
   }
   if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) ==
@@ -1808,14 +1808,14 @@ int ffvpPrepareFogExp2(programBuilder)
       return 3;
     }
   }
-  if ((((*(int *)(programBuilder + 0x3d8) == 0) && (iVar2 != *(int *)(programBuilder + 0x74))) &&
-      (iVar2 != *(int *)(programBuilder + 0x78))) &&
-     ((iVar2 != *(int *)(programBuilder + 0x7c) && (iVar2 != *(int *)(programBuilder + 0x80))))) {
+  if ((((*(int *)(programBuilder + 0x3d8) == 0) && (fogReg != *(int *)(programBuilder + 0x74))) &&
+      (fogReg != *(int *)(programBuilder + 0x78))) &&
+     ((fogReg != *(int *)(programBuilder + 0x7c) && (fogReg != *(int *)(programBuilder + 0x80))))) {
     return 3;
   }
   *(undefined1 *)(*(int *)(programBuilder + 0x3d4) + 0x12e) = 0;
-  uVar1 = ffvpEmitFogExp2(programBuilder);
-  return uVar1;
+  status = ffvpEmitFogExp2(programBuilder);
+  return status;
 }
 
 /* ffvpEmitTexCoordGen @ 0x96600 (1872 bytes) */
@@ -4138,19 +4138,19 @@ int ffvpEmitFogDistance(programBuilder)
 }
 
 /* ffvpFinishProgram @ 0x9a910 (120 bytes) */
-int ffvpFinishProgram(param_1)
-  int param_1;
+int ffvpFinishProgram(programBuilder)
+  int programBuilder;
 {
-  undefined4 uVar1;
+  undefined4 status;
   
-  if (*(code **)(((unsigned char *)0x000012d8) + *(int *)(param_1 + 0x3d4)) != (code *)0x0) {
-    (**(code **)(((unsigned char *)0x000012d8) + *(int *)(param_1 + 0x3d4)))(*(int *)(param_1 + 0x3d4),param_1);
+  if (*(code **)(((unsigned char *)0x000012d8) + *(int *)(programBuilder + 0x3d4)) != (code *)0x0) {
+    (**(code **)(((unsigned char *)0x000012d8) + *(int *)(programBuilder + 0x3d4)))(*(int *)(programBuilder + 0x3d4),programBuilder);
   }
-  if ((*(int *)(param_1 + 0x3d8) != 0) ||
-     (uVar1 = 6, *(uint *)(param_1 + 0x3cc) <= *(uint *)(param_1 + 0x3e4))) {
-    uVar1 = 0;
+  if ((*(int *)(programBuilder + 0x3d8) != 0) ||
+     (status = 6, *(uint *)(programBuilder + 0x3cc) <= *(uint *)(programBuilder + 0x3e4))) {
+    status = 0;
   }
-  return uVar1;
+  return status;
 }
 
 /* fpVariantProgramFree @ 0x9a990 (104 bytes) */
@@ -4353,10 +4353,10 @@ int ffvpEmitFogLinear(programBuilder)
 int ffvpPrepareFogLinear(programBuilder)
   int programBuilder;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 status;
+  int fogReg;
   
-  if ((*(int *)(programBuilder + 0x330) == -1) || (iVar2 = *(int *)(programBuilder + 0x70), iVar2 == -1)) {
+  if ((*(int *)(programBuilder + 0x330) == -1) || (fogReg = *(int *)(programBuilder + 0x70), fogReg == -1)) {
     return 2;
   }
   if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) ==
@@ -4368,14 +4368,14 @@ int ffvpPrepareFogLinear(programBuilder)
       return 3;
     }
   }
-  if ((((*(int *)(programBuilder + 0x3d8) == 0) && (iVar2 != *(int *)(programBuilder + 0x74))) &&
-      (iVar2 != *(int *)(programBuilder + 0x78))) &&
-     ((iVar2 != *(int *)(programBuilder + 0x7c) && (iVar2 != *(int *)(programBuilder + 0x80))))) {
+  if ((((*(int *)(programBuilder + 0x3d8) == 0) && (fogReg != *(int *)(programBuilder + 0x74))) &&
+      (fogReg != *(int *)(programBuilder + 0x78))) &&
+     ((fogReg != *(int *)(programBuilder + 0x7c) && (fogReg != *(int *)(programBuilder + 0x80))))) {
     return 3;
   }
   *(undefined1 *)(*(int *)(programBuilder + 0x3d4) + 0x12e) = 0;
-  uVar1 = ((int (*)())ffvpEmitFogLinear)(programBuilder);
-  return uVar1;
+  status = ((int (*)())ffvpEmitFogLinear)(programBuilder);
+  return status;
 }
 
 /* ffvpEmitFogExp @ 0x9afc0 (1084 bytes) */
@@ -4666,10 +4666,10 @@ int ffvpEmitColorOutputs(programBuilder, noLights)
 int ffvpPrepareFogExp(programBuilder)
   int programBuilder;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 status;
+  int fogReg;
   
-  if ((*(int *)(programBuilder + 0x330) == -1) || (iVar2 = *(int *)(programBuilder + 0x70), iVar2 == -1)) {
+  if ((*(int *)(programBuilder + 0x330) == -1) || (fogReg = *(int *)(programBuilder + 0x70), fogReg == -1)) {
     return 2;
   }
   if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) ==
@@ -4681,14 +4681,14 @@ int ffvpPrepareFogExp(programBuilder)
       return 3;
     }
   }
-  if ((((*(int *)(programBuilder + 0x3d8) == 0) && (iVar2 != *(int *)(programBuilder + 0x74))) &&
-      (iVar2 != *(int *)(programBuilder + 0x78))) &&
-     ((iVar2 != *(int *)(programBuilder + 0x7c) && (iVar2 != *(int *)(programBuilder + 0x80))))) {
+  if ((((*(int *)(programBuilder + 0x3d8) == 0) && (fogReg != *(int *)(programBuilder + 0x74))) &&
+      (fogReg != *(int *)(programBuilder + 0x78))) &&
+     ((fogReg != *(int *)(programBuilder + 0x7c) && (fogReg != *(int *)(programBuilder + 0x80))))) {
     return 3;
   }
   *(undefined1 *)(*(int *)(programBuilder + 0x3d4) + 0x12e) = 0;
-  uVar1 = ((int (*)())ffvpEmitFogExp)(programBuilder);
-  return uVar1;
+  status = ((int (*)())ffvpEmitFogExp)(programBuilder);
+  return status;
 }
 
 /* ffvpEmitFogTexCoord @ 0x9b850 (892 bytes) */
@@ -4804,16 +4804,16 @@ LAB_0009bbb0:
 }
 
 /* vec4StoreAtIndex @ 0x9bbf0 (28 bytes) */
-int vec4StoreAtIndex(param_1, param_2, param_3)
-  int param_1;
-  undefined8 *param_2;
-  int param_3;
+int vec4StoreAtIndex(array, src, slot)
+  int array;
+  undefined8 *src;
+  int slot;
 {
-  undefined8 uVar1;
+  undefined8 hiHalf;
   
-  uVar1 = param_2[1];
-  *(undefined8 *)(param_3 * 0x10 + param_1) = *param_2;
-  *(undefined8 *)(param_3 * 0x10 + param_1 + 8) = uVar1;
+  hiHalf = src[1];
+  *(undefined8 *)(slot * 0x10 + array) = *src;
+  *(undefined8 *)(slot * 0x10 + array + 8) = hiHalf;
   return;
 }
 

@@ -1,0 +1,27 @@
+use	arbfpFetchParameterValue	fVar1	oneF	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ FLOAT_001aa0e8;$	+1
+use	arbfpFetchParameterValue	fVar1	oneF	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar5\ =\ \*\(float\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0xc\)\ \*\ 0x80\ \+\ iVar16\ \+\ 0x24f8\)\ \+\ fVar1;$	+1
+use	arbfpFetchParameterValue	fVar1	oneF	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_3\[3\]\ =\ fVar1;$	+5
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar16\ \+\ 0x28cc\);$	+1
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar16\ \+\ 0x2b0c\);$	+1
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar16\ \+\ 0x28dc\);$	+1
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar16\ \+\ 0x2b1c\);$	+1
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar16\ \+\ 0x28ec\);$	+1
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ \*\(float\ \*\)\(iVar16\ \+\ 0x2b2c\);$	+1
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*fVar1\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000031d0\)\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0xc\)\ \*\ 0x7c\ \+\ \*\(int\ \*\)\(iVar13\ \+\ 0x10\)\);$	+1
+use	arbfpFetchParameterValue	fVar1	stateFloat28cc	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*param_3\[3\]\ =\ fVar1;$@2	+1
+local	gldLodBiasToFixed	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldLodBiasToFixed	fVar1	biasSum	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldLodBiasToFixed	fVar2	fixedResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldUpdateLodBiasField	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldUpdateLodBiasField	param_2	texRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldUpdateLodBiasField	param_3	extraBias	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldUpdateLodBiasField	uVar1	lodFixed	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUnbindWorkArea	param_2	fpState	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUnbindWorkArea	iVar1	workArea	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUnbindWorkAreaChecked	param_2	fpState	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbfpUnbindWorkAreaChecked	iVar1	workArea	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldCallHook1278	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldClearHwTclFlag	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldClearHwTclFlag	iVar1	stateObject	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldFlushProgramStateForDraw	iVar1	stateRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	gldFlushProgramStateForDraw	iVar2	reg1b7cBefore	INFERRED	role read off the function body (see notes_gld_q03.md)
