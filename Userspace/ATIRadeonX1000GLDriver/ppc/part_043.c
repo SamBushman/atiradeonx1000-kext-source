@@ -1666,7 +1666,10 @@ int FUN_001494dc(inst, program, changedOut)
   int *a0;
   undefined4 selectWordA;
   undefined4 selectWordB;
-  int iVar5;
+  int operandCountChain;
+  int operandRecordSrc;
+  int operandCountSource;
+  int identityResult;
   int instField3;
   int *piVar6;
   int *laneByteCursorB;
@@ -1726,10 +1729,10 @@ LAB_00149704:
               IRInst__replaceBodyKeepLinks(inst,a0,program);
               vcall64ResultB = (**(code **)(*a0 + 100))(a0);
               if (vcall64ResultB != 0) {
-                for (operandIdxB = 1; iVar5 = (**(code **)(*a0 + 0x14))(a0), operandIdxB <= iVar5;
+                for (operandIdxB = 1; operandCountChain = (**(code **)(*a0 + 0x14))(a0), operandIdxB <= operandCountChain;
                     operandIdxB = operandIdxB + 1) {
                   if ((((a0[operandIdxB * 6 + 0x28] & 1U) != 0) || ((a0[operandIdxB * 6 + 0x28] & 2U) != 0)) ||
-                     (iVar5 = IRInst__isSourceSelectIdentity(a0,operandIdxB), iVar5 == 0)) goto LAB_001499ec;
+                     (identityResult = IRInst__isSourceSelectIdentity(a0,operandIdxB), identityResult == 0)) goto LAB_001499ec;
                 }
                 if ((a0[0x48] == 0) && (a0[0x49] == 0)) {
                   if ((a0[0x20] != 0) &&
@@ -1853,12 +1856,12 @@ LAB_00149a40:
             firstWrittenComponentResult = SelectWord__firstWrittenComponent(*(undefined4 *)(operandRecord2 + 0x10));
             operandRecord = IRInst__getOperandRecord(inst,0);
             firstWrittenComponentResult2 = SelectWord__firstWrittenComponent(*(undefined4 *)(operandRecord + 0x10));
-            for (operandIndex = 1; iVar5 = (**(code **)(*sourceDef + 0x14))(sourceDef), operandIndex <= iVar5;
+            for (operandIndex = 1; operandCountSource = (**(code **)(*sourceDef + 0x14))(sourceDef), operandIndex <= operandCountSource;
                 operandIndex = operandIndex + 1) {
               operandRecord3 = IRInst__getOperandRecord(sourceDef,operandIndex);
               selectByteD = *(char *)(firstWrittenComponentResult + operandRecord3 + 0x10);
-              iVar5 = IRInst__getOperandRecord(sourceDef,operandIndex);
-              *(undefined4 *)(iVar5 + 0x10) = 0x4040404;
+              operandRecordSrc = IRInst__getOperandRecord(sourceDef,operandIndex);
+              *(undefined4 *)(operandRecordSrc + 0x10) = 0x4040404;
               if (selectByteD != '\x04') {
                 (**(code **)(*sourceDef + 0x88))(sourceDef,operandIndex,firstWrittenComponentResult2,selectByteD);
               }

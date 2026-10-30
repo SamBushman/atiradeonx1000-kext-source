@@ -3561,3 +3561,7 @@ local	FUN_001494dc	local_58	lastOperandSourceSave	INFERRED	last operand source (
 local	FUN_001494dc	local_48	lastOperandBuf2	INFERRED	IRInst__readLastOperand out word 2
 local	FUN_001494dc	local_4c	chainDestSelect	INFERRED	dest select word of the chain inst
 local	FUN_001494dc	local_38	usedLanesOut	INFERRED	out of WriteMask__fromUsedLanes
+use	FUN_001494dc	iVar5	operandCountChain	INFERRED	vtable +0x14 operand count of the chain inst	^\s*for\ \(iVar3\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\),\ iVar3\ <=\ iVar5;$	+1
+use	FUN_001494dc	iVar5	identityResult	INFERRED	IRInst__isSourceSelectIdentity result	^\s*\(iVar5\ =\ FUN_000f31e8\(a0,iVar3\),\ iVar5\ ==\ 0\)\)\ goto\ LAB_001499ec;$	+1
+use	FUN_001494dc	iVar5	operandCountSource	INFERRED	vtable +0x14 operand count of the source inst	^\s*for\ \(iVar3\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x14\)\)\(piVar6\),\ iVar3\ <=\ iVar5;$	+1
+use	FUN_001494dc	iVar5	operandRecordSrc	INFERRED	IRInst__getOperandRecord(source,operand)	^\s*iVar5\ =\ FUN_001054ec\(piVar6,iVar3\);$@2	+2
