@@ -818,7 +818,7 @@ int R300MachineAssembler__vslot5_beginProgram(param_1, param_2, param_3, param_4
   undefined4 uVar1;
   
   *(undefined4 *)(param_1 + 0xa4) = *(undefined4 *)(param_4 + 0x30c);
-  uVar1 = FUN_000e14e4(param_4,0x963c,param_3);
+  uVar1 = Compiler__setQueriedTableEntry4d4(param_4,0x963c,param_3);
   *(undefined4 *)(param_1 + 0x5c) = uVar1;
   _memset(uVar1,0,0x963c);
   *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_1 + 0x5c);

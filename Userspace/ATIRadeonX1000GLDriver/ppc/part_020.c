@@ -3891,17 +3891,17 @@ int Compiler__setTableEntry534(compiler, entryIndex, entryValue)
   return;
 }
 
-/* FUN_000e14e4 @ 0xe14e4 (80 bytes) */
-int FUN_000e14e4(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+/* Compiler__setQueriedTableEntry4d4 @ 0xe14e4 (80 bytes) */
+int Compiler__setQueriedTableEntry4d4(compiler, queryArg, tableIndex)
+  int compiler;
+  undefined4 queryArg;
+  int tableIndex;
 {
-  undefined4 uVar1;
+  undefined4 queryResult;
   
-  uVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x174))
-                    (*(int **)(param_1 + 0x30c),param_2,param_3,param_1);
-  *(undefined4 *)(param_3 * 4 + param_1 + 0x4d4) = uVar1;
+  queryResult = (**(code **)(**(int **)(compiler + 0x30c) + 0x174))
+                    (*(int **)(compiler + 0x30c),queryArg,tableIndex,compiler);
+  *(undefined4 *)(tableIndex * 4 + compiler + 0x4d4) = queryResult;
   return;
 }
 

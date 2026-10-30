@@ -2047,28 +2047,28 @@ int EntryBlock__insertInstruction(this, inst)
   return;
 }
 
-/* FUN_000e7d5c @ 0xe7d5c (136 bytes) */
-int FUN_000e7d5c(param_1)
-  int param_1;
+/* Block__getLoopFooterRegister @ 0xe7d5c (136 bytes) */
+int Block__getLoopFooterRegister(block)
+  int block;
 {
   int sourceDef;
-  int iVar1;
-  int iVar2;
+  int scanInst;
+  int nextInstLink;
   
-  iVar1 = *(int *)(param_1 + 0x98);
-  iVar2 = *(int *)(*(int *)(param_1 + 0x98) + 8);
+  scanInst = *(int *)(block + 0x98);
+  nextInstLink = *(int *)(*(int *)(block + 0x98) + 8);
   while( true ) {
-    if (iVar2 == 0) {
+    if (nextInstLink == 0) {
       return 0;
     }
-    if (((*(uint *)(iVar1 + 0x14) & 1) != 0) && (*(int *)(*(int *)(iVar1 + 0x88) + 8) == 0x81))
+    if (((*(uint *)(scanInst + 0x14) & 1) != 0) && (*(int *)(*(int *)(scanInst + 0x88) + 8) == 0x81))
     break;
-    iVar1 = iVar2;
-    iVar2 = *(int *)(iVar2 + 8);
+    scanInst = nextInstLink;
+    nextInstLink = *(int *)(nextInstLink + 8);
   }
-  sourceDef = IRInst__getOperandSource(iVar1,1);
+  sourceDef = IRInst__getOperandSource(scanInst,1);
   if (sourceDef == 0) {
-    return *(undefined4 *)(iVar1 + 0xac);
+    return *(undefined4 *)(scanInst + 0xac);
   }
   return *(undefined4 *)(sourceDef + 0x94);
 }
@@ -2695,63 +2695,63 @@ int FUN_000e8a08(block)
 }
 
 /* FUN_000e8bac @ 0xe8bac (104 bytes) */
-int FUN_000e8bac(param_1)
-  int param_1;
+int FUN_000e8bac(block)
+  int block;
 {
-  int *piVar1;
+  int *definitionSlot;
   
-  piVar1 = *(int **)(*(int *)(*(int *)(param_1 + 0x148) + 0xa4) + 0x18);
-  if (*piVar1 == 0) {
-    piVar1 = (int *)Vector__elementRefGrow(piVar1,0);
+  definitionSlot = *(int **)(*(int *)(*(int *)(block + 0x148) + 0xa4) + 0x18);
+  if (*definitionSlot == 0) {
+    definitionSlot = (int *)Vector__elementRefGrow(definitionSlot,0);
   }
   else {
-    if (piVar1[1] == 0) {
-      *(undefined4 *)piVar1[2] = 0;
-      piVar1[1] = 1;
+    if (definitionSlot[1] == 0) {
+      *(undefined4 *)definitionSlot[2] = 0;
+      definitionSlot[1] = 1;
     }
-    piVar1 = (int *)piVar1[2];
+    definitionSlot = (int *)definitionSlot[2];
   }
-  return *(undefined4 *)(*piVar1 + 0x50);
+  return *(undefined4 *)(*definitionSlot + 0x50);
 }
 
 /* FUN_000e8c14 @ 0xe8c14 (104 bytes) */
-int FUN_000e8c14(param_1)
-  int param_1;
+int FUN_000e8c14(block)
+  int block;
 {
-  int *piVar1;
+  int *definitionSlot;
   
-  piVar1 = *(int **)(*(int *)(*(int *)(param_1 + 0x148) + 0xa4) + 0x18);
-  if (*piVar1 == 0) {
-    piVar1 = (int *)Vector__elementRefGrow(piVar1,0);
+  definitionSlot = *(int **)(*(int *)(*(int *)(block + 0x148) + 0xa4) + 0x18);
+  if (*definitionSlot == 0) {
+    definitionSlot = (int *)Vector__elementRefGrow(definitionSlot,0);
   }
   else {
-    if (piVar1[1] == 0) {
-      *(undefined4 *)piVar1[2] = 0;
-      piVar1[1] = 1;
+    if (definitionSlot[1] == 0) {
+      *(undefined4 *)definitionSlot[2] = 0;
+      definitionSlot[1] = 1;
     }
-    piVar1 = (int *)piVar1[2];
+    definitionSlot = (int *)definitionSlot[2];
   }
-  return *(undefined4 *)(*piVar1 + 0x38);
+  return *(undefined4 *)(*definitionSlot + 0x38);
 }
 
 /* FUN_000e8c7c @ 0xe8c7c (104 bytes) */
-int FUN_000e8c7c(param_1)
-  int param_1;
+int FUN_000e8c7c(block)
+  int block;
 {
-  int *piVar1;
+  int *definitionSlot;
   
-  piVar1 = *(int **)(*(int *)(*(int *)(param_1 + 0x148) + 0xa4) + 0x18);
-  if (*piVar1 == 0) {
-    piVar1 = (int *)Vector__elementRefGrow(piVar1,0);
+  definitionSlot = *(int **)(*(int *)(*(int *)(block + 0x148) + 0xa4) + 0x18);
+  if (*definitionSlot == 0) {
+    definitionSlot = (int *)Vector__elementRefGrow(definitionSlot,0);
   }
   else {
-    if (piVar1[1] == 0) {
-      *(undefined4 *)piVar1[2] = 0;
-      piVar1[1] = 1;
+    if (definitionSlot[1] == 0) {
+      *(undefined4 *)definitionSlot[2] = 0;
+      definitionSlot[1] = 1;
     }
-    piVar1 = (int *)piVar1[2];
+    definitionSlot = (int *)definitionSlot[2];
   }
-  return *(undefined4 *)(*piVar1 + 0x20);
+  return *(undefined4 *)(*definitionSlot + 0x20);
 }
 
 /* Block__addDominatedChild @ 0xe8ce4 (120 bytes) */

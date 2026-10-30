@@ -322,14 +322,14 @@ int FUN_000f3154(param_1)
 }
 
 /* SelectWord__isIdentity @ 0xf3190 (88 bytes) */
-int SelectWord__isIdentity(param_1)
-  uint param_1;
+int SelectWord__isIdentity(selectWord)
+  uint selectWord;
 {
-  uint uVar1;
+  uint laneByte;
   
-  if ((((param_1 >> 0x18 == 4) || (param_1 >> 0x18 == 0)) &&
-      ((uVar1 = param_1 >> 0x10 & 0xff, uVar1 == 4 || (uVar1 == 1)))) &&
-     (((uVar1 = param_1 >> 8 & 0xff, uVar1 == 4 || (uVar1 == 2)) && ((param_1 - 3 & 0xff) < 2)))) {
+  if ((((selectWord >> 0x18 == 4) || (selectWord >> 0x18 == 0)) &&
+      ((laneByte = selectWord >> 0x10 & 0xff, laneByte == 4 || (laneByte == 1)))) &&
+     (((laneByte = selectWord >> 8 & 0xff, laneByte == 4 || (laneByte == 2)) && ((selectWord - 3 & 0xff) < 2)))) {
     return 1;
   }
   return 0;
@@ -1632,19 +1632,19 @@ int FUN_000f497c(inst, inst2)
   return (local_28 & local_24) != 0;
 }
 
-/* FUN_000f4a24 @ 0xf4a24 (56 bytes) */
-int FUN_000f4a24(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+/* ConstRecords__fillFloat4 @ 0xf4a24 (56 bytes) */
+int ConstRecords__fillFloat4(floatWords, constRecords)
+  undefined4 *floatWords;
+  undefined4 *constRecords;
 {
-  param_2[0x12] = 2;
-  *param_2 = 2;
-  param_2[6] = 2;
-  param_2[0xc] = 2;
-  param_2[1] = *param_1;
-  param_2[7] = param_1[1];
-  param_2[0xd] = param_1[2];
-  param_2[0x13] = param_1[3];
+  constRecords[0x12] = 2;
+  *constRecords = 2;
+  constRecords[6] = 2;
+  constRecords[0xc] = 2;
+  constRecords[1] = *floatWords;
+  constRecords[7] = floatWords[1];
+  constRecords[0xd] = floatWords[2];
+  constRecords[0x13] = floatWords[3];
   return;
 }
 

@@ -1101,7 +1101,7 @@ int Program__findOrCreateConstInst(program, constWords, selectWord)
   encodable = (**(code **)(**(int **)(compiler + 0x30c) + 0xe8))
                     (*(int **)(compiler + 0x30c),constWords,&constKey,selectWord,compiler);
   if (encodable != 0) {
-    FUN_000f4a24(constWords,localConstRecords);
+    ConstRecords__fillFloat4(constWords,localConstRecords);
     registerMap = *(int *)(program + 0x3ac);
     loopCounterE = 0;
     cachedInstCount = *(uint *)(*(int *)(registerMap + 0x18) + 4);
@@ -4167,7 +4167,7 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
       }
       iVar20 = *stackTopEntry;
       *(undefined4 *)(iVar20 + 0x140) = 1;
-      virtualRegister = FUN_000e7d5c(iVar20);
+      virtualRegister = Block__getLoopFooterRegister(iVar20);
       virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x27,virtualRegister,0);
       if (registerType == 1) {
         pdVar18 = (dword *)0x0;

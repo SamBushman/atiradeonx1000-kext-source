@@ -909,18 +909,18 @@ int FUN_000e2a04(param_1, param_2)
 }
 
 /* moduloDifference @ 0xe2a44 (16 bytes) */
-int moduloDifference(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int moduloDifference(minuend, subtrahend, modulus)
+  int minuend;
+  int subtrahend;
+  int modulus;
 {
-  int iVar1;
+  int difference;
   
-  iVar1 = param_1 - param_2;
-  if (-1 < iVar1) {
-    return iVar1;
+  difference = minuend - subtrahend;
+  if (-1 < difference) {
+    return difference;
   }
-  return iVar1 + param_3;
+  return difference + modulus;
 }
 
 /* IRStartCallRoutine__acceptCallPseudo @ 0xe2a54 (28 bytes) */
@@ -967,25 +967,26 @@ int IREndMakeCall__acceptCallPseudo(this, visitor)
   return;
 }
 
-/* FUN_000e2acc @ 0xe2acc (156 bytes) */
-int FUN_000e2acc(inst, param_2, param_3)
+/* IRInst__hasSourceWithKey @ 0xe2acc (156 bytes) */
+int IRInst__hasSourceWithKey(inst, wantedKey, compiler)
   int *inst;
-  int param_2;
-  int param_3;
+  int wantedKey;
+  int compiler;
 {
-  int iVar1;
-  int iVar2;
+  int sourceVReg;
+  int sourceKey;
+  int sourceCount;
   int loopIndex;
   
   loopIndex = 1;
   while( true ) {
-    iVar2 = (**(code **)(*inst + 0x14))(inst);
-    if (iVar2 < loopIndex) {
+    sourceCount = (**(code **)(*inst + 0x14))(inst);
+    if (sourceCount < loopIndex) {
       return 0;
     }
-    iVar2 = IRInst__getOperandSource(inst,loopIndex);
-    iVar1 = thunk_FUN_00134de8(*(undefined4 *)(param_3 + 0x6c4),iVar2);
-    if ((iVar1 == param_2) && (iVar2 = RegKind__flagBit7(*(undefined4 *)(iVar2 + 0x98)), iVar2 == 0))
+    sourceVReg = IRInst__getOperandSource(inst,loopIndex);
+    sourceKey = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),sourceVReg);
+    if ((sourceKey == wantedKey) && (sourceVReg = RegKind__flagBit7(*(undefined4 *)(sourceVReg + 0x98)), sourceVReg == 0))
     break;
     loopIndex = loopIndex + 1;
   }
@@ -1168,23 +1169,23 @@ int FUN_000e2ee4(param_1, param_2)
   return;
 }
 
-/* FUN_000e2f04 @ 0xe2f04 (136 bytes) */
-int FUN_000e2f04(param_1, param_2, param_3, newSource, compiler)
-  int param_1;
-  int param_2;
-  int param_3;
+/* IRInst__redirectDestThroughNewMov @ 0xe2f04 (136 bytes) */
+int IRInst__redirectDestThroughNewMov(inst, destRegNumber, destRegFile, newSource, compiler)
+  int inst;
+  int destRegNumber;
+  int destRegFile;
   undefined4 newSource;
   undefined4 compiler;
 {
   int *newInst;
   
   newInst = (int *)IRInst__create(0x31,compiler);
-  newInst[0x25] = param_2;
-  newInst[0x26] = param_3;
+  newInst[0x25] = destRegNumber;
+  newInst[0x26] = destRegFile;
   IRInst__setOperandSource(newInst,1,newSource,0,compiler);
-  *(int *)(param_1 + 0x94) = param_2;
-  *(int *)(param_1 + 0x98) = param_3;
-  (**(code **)(*newInst + 0x84))(newInst,*(undefined4 *)(param_1 + 0x11c));
+  *(int *)(inst + 0x94) = destRegNumber;
+  *(int *)(inst + 0x98) = destRegFile;
+  (**(code **)(*newInst + 0x84))(newInst,*(undefined4 *)(inst + 0x11c));
   return newInst;
 }
 
@@ -1827,7 +1828,7 @@ LAB_000e4140:
           savedRegisterFile = firstPending[0x26];
           savedRegisterNumber = firstPending[0x25];
           slotId = ((int (*)())FUN_000e2a04)(ctx,(uint)(savedRegisterFile != 0));
-          iVar14 = ((int (*)())FUN_000e2f04)(firstPending,slotId,savedRegisterFile,sourceDef,*ctx);
+          iVar14 = ((int (*)())IRInst__redirectDestThroughNewMov)(firstPending,slotId,savedRegisterFile,sourceDef,*ctx);
           Block__insertInstBefore(beforeInst[0x56],beforeInst,iVar14);
           insertAfterInst = scanInst;
           if (hasTwoPending) {
@@ -1915,7 +1916,7 @@ LAB_000e4140:
           do {
             instFlags = scanCursor[5];
             if ((instFlags & 1) != 0) {
-              moveBlocked = ((int (*)())FUN_000e2acc)(scanCursor,iVar14,*ctx);
+              moveBlocked = ((int (*)())IRInst__hasSourceWithKey)(scanCursor,iVar14,*ctx);
               if (moveBlocked != 0) {
 LAB_000e413c:
                 hasTwoPending = false;

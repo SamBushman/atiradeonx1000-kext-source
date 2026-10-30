@@ -1256,7 +1256,7 @@
 0xe1464	28	Compiler__timerOutputFileName	part_020	converted
 0xe1484	80	Compiler__releaseOutputBuffer	part_020	converted
 0xe14d4	16	Compiler__setTableEntry534	part_020	converted
-0xe14e4	80	FUN_000e14e4	part_020	converted
+0xe14e4	80	Compiler__setQueriedTableEntry4d4	part_020	converted
 0xe1534	48	Compiler__fail	part_020	converted
 0xe1564	84	Compiler__allocateOrFail	part_020	converted
 0xe15b8	36	Compiler__propagateFlag5a1Bit1	part_021	converted
@@ -1288,12 +1288,12 @@
 0xe2a70	28	IREndCallRoutine__acceptCallPseudo	part_021	converted
 0xe2a8c	28	IRStartMakeCall__acceptCallPseudo	part_021	converted
 0xe2aa8	28	IREndMakeCall__acceptCallPseudo	part_021	converted
-0xe2acc	156	FUN_000e2acc	part_021	converted
+0xe2acc	156	IRInst__hasSourceWithKey	part_021	converted
 0xe2b68	140	FUN_000e2b68	part_021	converted
 0xe2bf4	132	FUN_000e2bf4	part_021	converted
 0xe2c78	620	ConstRecord__emitStores	part_021	converted
 0xe2ee4	32	FUN_000e2ee4	part_021	converted
-0xe2f04	136	FUN_000e2f04	part_021	converted
+0xe2f04	136	IRInst__redirectDestThroughNewMov	part_021	converted
 0xe2f8c	76	IRInst__lastSourceKeyEquals	part_021	converted
 0xe2fd8	360	MachineAssembler__vslot34_declareDestinationLanesByClass	part_021	converted
 0xe3140	260	MachineAssembler__visitIfHeaderStatic	part_021	converted
@@ -1350,7 +1350,7 @@
 0xe7b9c	252	Block__lastBlockOfChain_e7b9c	part_022	converted
 0xe7c98	88	Block__resolveRedirect	part_022	converted
 0xe7cf0	108	EntryBlock__insertInstruction	part_022	converted
-0xe7d5c	136	FUN_000e7d5c	part_022	converted
+0xe7d5c	136	Block__getLoopFooterRegister	part_022	converted
 0xe7de4	172	Block__isInVectorD4Of	part_022	converted
 0xe7e90	168	Block__findSimplePredecessor	part_022	converted
 0xe7f38	168	Block__findSimpleSuccessor	part_022	converted
@@ -1549,7 +1549,7 @@
 0xf485c	144	FUN_000f485c	part_025	converted
 0xf48ec	144	IRInst__sourceLanesAllWritten	part_025	converted
 0xf497c	168	FUN_000f497c	part_025	converted
-0xf4a24	56	FUN_000f4a24	part_025	converted
+0xf4a24	56	ConstRecords__fillFloat4	part_025	converted
 0xf4a5c	20	FUN_000f4a5c	part_025	converted
 0xf4a70	20	isRegKindBelow21	part_025	converted
 0xf4a84	324	Emitter__allocateConstantSlot	part_025	converted

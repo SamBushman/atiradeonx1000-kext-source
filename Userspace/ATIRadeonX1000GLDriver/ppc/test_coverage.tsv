@@ -1256,7 +1256,7 @@
 0xe1464	Compiler__timerOutputFileName	28	yes	
 0xe1484	Compiler__releaseOutputBuffer	80	no	indirect call (driver context / vtable / callback)
 0xe14d4	Compiler__setTableEntry534	16	yes	
-0xe14e4	FUN_000e14e4	80	no	indirect call (driver context / vtable / callback)
+0xe14e4	Compiler__setQueriedTableEntry4d4	80	no	indirect call (driver context / vtable / callback)
 0xe1534	Compiler__fail	48	yes	
 0xe1564	Compiler__allocateOrFail	84	yes	
 0xe15b8	Compiler__propagateFlag5a1Bit1	36	yes	
@@ -1288,12 +1288,12 @@
 0xe2a70	IREndCallRoutine__acceptCallPseudo	28	yes	
 0xe2a8c	IRStartMakeCall__acceptCallPseudo	28	yes	
 0xe2aa8	IREndMakeCall__acceptCallPseudo	28	yes	
-0xe2acc	FUN_000e2acc	156	no	indirect call (driver context / vtable / callback)
+0xe2acc	IRInst__hasSourceWithKey	156	no	indirect call (driver context / vtable / callback)
 0xe2b68	FUN_000e2b68	140	no	indirect call (driver context / vtable / callback)
 0xe2bf4	FUN_000e2bf4	132	no	indirect call (driver context / vtable / callback)
 0xe2c78	ConstRecord__emitStores	620	yes	
 0xe2ee4	FUN_000e2ee4	32	yes	
-0xe2f04	FUN_000e2f04	136	no	indirect call (driver context / vtable / callback)
+0xe2f04	IRInst__redirectDestThroughNewMov	136	no	indirect call (driver context / vtable / callback)
 0xe2f8c	IRInst__lastSourceKeyEquals	76	yes	
 0xe2fd8	MachineAssembler__vslot34_declareDestinationLanesByClass	360	yes	
 0xe3140	MachineAssembler__visitIfHeaderStatic	260	no	indirect call (driver context / vtable / callback)
@@ -1350,7 +1350,7 @@
 0xe7b9c	Block__lastBlockOfChain_e7b9c	252	no	indirect call (driver context / vtable / callback)
 0xe7c98	Block__resolveRedirect	88	no	indirect call (driver context / vtable / callback)
 0xe7cf0	EntryBlock__insertInstruction	108	yes	
-0xe7d5c	FUN_000e7d5c	136	yes	
+0xe7d5c	Block__getLoopFooterRegister	136	yes	
 0xe7de4	Block__isInVectorD4Of	172	yes	
 0xe7e90	Block__findSimplePredecessor	168	no	indirect call (driver context / vtable / callback)
 0xe7f38	Block__findSimpleSuccessor	168	no	indirect call (driver context / vtable / callback)
@@ -1549,7 +1549,7 @@
 0xf485c	FUN_000f485c	144	yes	
 0xf48ec	IRInst__sourceLanesAllWritten	144	yes	
 0xf497c	FUN_000f497c	168	yes	
-0xf4a24	FUN_000f4a24	56	yes	
+0xf4a24	ConstRecords__fillFloat4	56	yes	
 0xf4a5c	FUN_000f4a5c	20	yes	
 0xf4a70	isRegKindBelow21	20	yes	
 0xf4a84	Emitter__allocateConstantSlot	324	yes	
