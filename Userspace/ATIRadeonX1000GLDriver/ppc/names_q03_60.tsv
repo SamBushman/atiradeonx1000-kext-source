@@ -1,0 +1,189 @@
+use	arbValidateProgram	iVar12	sourceCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(\(undefined\ \*\)\(\(int\)param_3\ \+\ 1\)\);$	+2
+use	arbValidateProgram	iVar12	sourceCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*_memcpy\(iVar12,param_4,param_3\);$	+3
+use	arbValidateProgram	iVar12	sourceCopy	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar9\[1\]\ =\ iVar12;$	+3
+use	arbValidateProgram	iVar12	parseResult	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_0008b9f0\)\(piVar9\);$	+2
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar9;$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0008c490\)\(piVar9,piVar9\ \+\ 0x9117,a2,$	+2
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000011dc\)\ \+\ iVar12\)\ \-\ \(int\)local_8c\ <=\ piVar9\[0x928b\]\)\ \{$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_0008c490\)\(piVar9,local_68,local_64,$	+2
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar13\ =\ \*\(int\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000011d4\)\ \+\ iVar12\);$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar16\ <=\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001204\)\ \+\ iVar12\)\ \+\ \-3\)\ \{$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001204\)\ \+\ iVar12\)\ \+\ \-4\ <\ iVar16\)\ goto\ LAB_0008cab4;$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001204\)\ \+\ iVar12\)\ \+\ \-2\ <\ iVar16\)\ goto\ LAB_0008cab4;$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[iVar12\];$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000120cU\)\ \+\ iVar12\)\ <\ iVar22\)\ \{$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar12\ \+\ 0xc\)\)$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(unsigned\ char\ \*\)0x000013b1\)\[iVar12\]\ !=\ '\\0'\)\ \{$	+1
+use	arbValidateProgram	iVar12	limits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(iVar2\ <\ \(int\)\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[iVar12\]\);$	+1
+use	arbValidateProgram	iVar12	secondListBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ piVar9\[0x9149\]\ \*\ 0x14\ \+\ iVar2;$	+2
+use	arbValidateProgram	iVar12	secondListBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_2\ \+\ 0x8c\)\ =\ piVar9\[0x928a\]\ \*\ 0x14\ \+\ iVar12;$	+1
+use	arbValidateProgram	iVar12	tempCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ piVar9\[0x928b\];$	+1
+use	arbValidateProgram	iVar12	tempCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_2\ \+\ 0x88\)\ =\ iVar12;$	+1
+use	arbValidateProgram	iVar12	srcByteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ 0;$@3	+1
+use	arbValidateProgram	iVar12	srcByteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r7\ =\ \(int\ \*\)\(\(int\)local_5c\ \+\ iVar12\);$	+1
+use	arbValidateProgram	iVar12	srcByteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(\(int\)local_5c\ \+\ iVar12\);$	+1
+use	arbValidateProgram	iVar12	srcByteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ iVar12\ \+\ 0x60;$	+1
+use	arbValidateProgram	iVar12	msgLen	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ _strlen\(piVar9\[0xc\]\);$	+2
+use	arbValidateProgram	iVar12	nextNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar15;$	+1
+use	arbValidateProgram	iVar12	nextNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ \(int\ \*\)iVar12;$	+1
+use	arbValidateProgram	iVar12	nextNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar15;$@2	+1
+use	arbValidateProgram	iVar12	nextNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ \(int\ \*\)iVar12;$@2	+1
+use	arbValidateProgram	iVar12	nextNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar15;$@3	+1
+use	arbValidateProgram	iVar12	nextNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ \(int\ \*\)iVar12;$@3	+1
+use	arbValidateProgram	iVar11	fogBias	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ 0;$	+1
+use	arbValidateProgram	iVar11	fogBias	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ 2;$	+1
+use	arbValidateProgram	iVar11	fogBias	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_0008c490\)\(piVar9,local_68,local_64,$	+3
+use	arbValidateProgram	iVar11	hasKill	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ 0;$@2	+1
+use	arbValidateProgram	iVar11	hasKill	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ 0;$@3	+1
+use	arbValidateProgram	iVar11	hasKill	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ 1;$	+1
+use	arbValidateProgram	iVar11	hasKill	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ 1;$@2	+1
+use	arbValidateProgram	iVar11	hasKill	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_60\ =\ iVar11;$	+1
+use	arbValidateProgram	iVar11	hasKill	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(iVar2\ \*\ 0x70\ \+\ \(int\)\(piVar9\[0x9149\]\ \+\ \(int\)piVar13\)\ \*\ 0x14\ \+$	+2
+use	arbValidateProgram	iVar11	outInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ \*\(int\ \*\)\(param_2\ \+\ 100\);$	+1
+use	arbValidateProgram	iVar11	outInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar20\ =\ \(uint\ \*\)\(iVar2\ \+\ iVar11\);$	+1
+use	arbValidateProgram	iVar11	outInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(\(int\)local_5c\ \+\ iVar12\);$	+1
+use	arbValidateProgram	iVar11	srcRec	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar11\ =\ in_r7\[1\];$	+1
+use	arbValidateProgram	iVar11	srcRec	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar11\ !=\ 0\)\ \{$	+3
+use	arbValidateProgram	iVar11	srcRec	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(iVar11\ \+\ 0x18\)\ ==\ 3\)\ \{$	+2
+use	arbValidateProgram	iVar11	srcRec	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(\*\(int\ \*\)\(iVar11\ \+\ 0x1c\)\ ==\ 0\)\ \{$	+1
+use	arbValidateProgram	iVar11	srcRec	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(char\)\*\(undefined4\ \*\)\(iVar11\ \+\ 0x24\);$	+1
+use	arbValidateProgram	iVar2	declKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ piVar21\[6\];$	+2
+use	arbValidateProgram	iVar2	declKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	arbValidateProgram	iVar2	declKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar2\ ==\ 2\)\ \{$	+1
+use	arbValidateProgram	iVar2	declKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar2\ !=\ 3\)\ \{$	+1
+use	arbValidateProgram	iVar2	internStatus	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0008c490\)\(piVar9,piVar9\ \+\ 0x9117,a2,$	+3
+use	arbValidateProgram	iVar2	arrayCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ piVar21\[3\];$	+1
+use	arbValidateProgram	iVar2	arrayCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(iVar2\ ==\ 0\)\ \|\|\ \(local_90\ =\ iVar2,\ 0\ <\ iVar2\)\)\ \{$	+1
+use	arbValidateProgram	iVar2	totalInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ iVar16\ \+\ piVar9\[0x9015\];$	+2
+use	arbValidateProgram	iVar2	totalInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)\(\(int\)piVar13\ \+\ \-3\)\ <\ iVar2\)\ goto\ LAB_0008cad4;$	+1
+use	arbValidateProgram	iVar2	totalInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)\(piVar13\ \+\ \-1\)\ <\ iVar2\)\ goto\ LAB_0008cad4;$	+1
+use	arbValidateProgram	iVar2	totalInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)\(\(int\)piVar13\ \+\ \-2\)\ <\ iVar2\)\ goto\ LAB_0008cad4;$	+1
+use	arbValidateProgram	iVar2	totalInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar2\ <\ 1\)\ \{$	+1
+use	arbValidateProgram	iVar2	totalInsts	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ iVar2;$	+1
+use	arbValidateProgram	iVar2	paramBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ \(piVar9\[0x9014\]\ \+\ piVar9\[0x9015\]\)\ \*\ 0x70\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x60\)\ \+\ 0x70$	+1
+use	arbValidateProgram	iVar2	paramBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_2\ \+\ 0x78\)\ =\ iVar2;$	+1
+use	arbValidateProgram	iVar2	paramBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ piVar9\[0x9149\]\ \*\ 0x14\ \+\ iVar2;$	+1
+use	arbValidateProgram	iVar2	paramBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*_memcpy\(iVar2,piVar9\ \+\ 0x9117,piVar9\[0x9149\]\ \*\ 0x14\);$	+1
+use	arbValidateProgram	iVar2	outInstOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ 0;$@3	+1
+use	arbValidateProgram	iVar2	outInstOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar20\ =\ \(uint\ \*\)\(iVar2\ \+\ iVar11\);$	+1
+use	arbValidateProgram	iVar2	outInstOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(\(int\)local_5c\ \+\ iVar12\);$	+1
+use	arbValidateProgram	iVar2	outInstOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ iVar2\ \+\ 0x70;$	+1
+use	arbValidateProgram	iVar16	byteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ 0;$	+1
+use	arbValidateProgram	iVar16	byteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\ =\ \(uint\ \*\)\(iVar16\ \+\ piVar21\[5\]\);$	+1
+use	arbValidateProgram	iVar16	byteOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ iVar16\ \+\ 0x14;$	+1
+use	arbValidateProgram	iVar16	aluCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ piVar9\[0x9014\];$	+1
+use	arbValidateProgram	iVar16	aluCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar2\ =\ iVar16\ \+\ piVar9\[0x9015\];$	+1
+use	arbValidateProgram	iVar16	aluCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(iVar16\ <=\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001204\)\ \+\ iVar12\)\ \+\ \-3\)\ \{$	+1
+use	arbValidateProgram	iVar16	aluCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001204\)\ \+\ iVar12\)\ \+\ \-4\ <\ iVar16\)\ goto\ LAB_0008cab4;$	+1
+use	arbValidateProgram	iVar16	aluCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001204\)\ \+\ iVar12\)\ \+\ \-2\ <\ iVar16\)\ goto\ LAB_0008cab4;$	+1
+use	arbValidateProgram	iVar16	instsLeft	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ iVar2;$	+1
+use	arbValidateProgram	iVar16	instsLeft	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+2
+use	arbValidateProgram	iVar16	nextVal	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar16\ =\ \*piVar13;$	+1
+use	arbValidateProgram	iVar16	nextVal	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(puVar3\ \+\ 0x14\)\ =\ iVar16;$	+1
+use	arbValidateProgram	iVar22	symbolRef	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar22\ =\ in_r7\[3\];$	+2
+use	arbValidateProgram	iVar22	symbolRef	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(iVar22\ \+\ 0xc\)\ ==\ 0\)\ \{$	+3
+use	arbValidateProgram	iVar22	symbolRef	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(uint\ \*\)\(in_r7\[9\]\ \*\ 0x14\ \+\ \*\(int\ \*\)\(iVar22\ \+\ 0x14\)\);$	+2
+use	arbValidateProgram	iVar22	paramEntryType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar22\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$	+2
+use	arbValidateProgram	iVar22	paramEntryType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar22\ ==\ 2\)\ \{$	+1
+use	arbValidateProgram	iVar22	paramEntryType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar22\ ==\ 3\)\ \{$	+1
+use	arbValidateProgram	iVar22	paramEntryType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(iVar22\ ==\ 4\)\ \{$	+1
+local	arbValidateProgram	bVar1	noFogOption	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	puVar3	unitSlotPtr	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbValidateProgram	piVar4	flagCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ piVar9;$	+1
+use	arbValidateProgram	piVar4	flagCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined1\ \*\)\(piVar4\ \+\ 0xd\)\ =\ 0;$	+2
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ \(int\ \*\)\-uVar5;$	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ piVar15;$	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ piVar4;$	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ \(int\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1\);$	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ local_7c;$	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ \(int\ \*\)\(1\ <<\ \(piVar13\[7\]\ \&\ 0x3fU\)\);$	+2
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ piVar15;$@2	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ \(int\ \*\)\(uVar19\ \&\ 1\);$	+2
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ piVar4;$@2	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ piVar4;$@3	+1
+use	arbValidateProgram	piVar4	precisionCountNeg	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ piVar4;$@4	+1
+local	arbValidateProgram	bVar8	optionCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbValidateProgram	uVar5	notPrecisionHint	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(byte\ \*\)\(\(int\)piVar9\ \+\ 0x37\)\ \^\ 1;$	+3
+use	arbValidateProgram	uVar5	unitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b1\)\[iVar12\];$	+2
+use	arbValidateProgram	uVar5	unitCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ uVar5\ \-\ 1;$	+2
+use	arbValidateProgram	uVar5	writtenLo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ 0;$	+1
+use	arbValidateProgram	uVar5	writtenLo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ uVar5\ \|\ local_78;$	+1
+use	arbValidateProgram	uVar5	writtenLo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ \(uVar5\ <<\ 1\)\ <<\ \(0x1fU\ \-\ \(int\)piVar13\ \&\ 0x3f\)\ \|$	+1
+use	arbValidateProgram	uVar5	writtenLo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ uVar5\ >>\ \(\(uint\)\(piVar13\ \+\ \-8\)\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	uVar5	writtenLo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ 0;$@2	+1
+use	arbValidateProgram	uVar5	writtenLo	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ 0;$@3	+1
+use	arbValidateProgram	uVar5	dstIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x1c\);$	+1
+use	arbValidateProgram	uVar5	dstIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar20\[2\]\ =\ uVar5;$	+1
+use	arbValidateProgram	uVar5	opcodeWord	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*puVar20;$	+4
+use	arbValidateProgram	uVar5	symIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar22\ \+\ 0x1c\);$	+1
+use	arbValidateProgram	uVar5	symIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\[5\]\ =\ uVar5;$	+1
+use	arbValidateProgram	uVar5	entryType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \*\(uint\ \*\)\(in_r7\[9\]\ \*\ 0x14\ \+\ \*\(int\ \*\)\(iVar22\ \+\ 0x14\)\);$	+1
+use	arbValidateProgram	uVar5	entryType	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\[4\]\ =\ uVar5;$	+1
+use	arbValidateProgram	uVar5	swizzleA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ in_r7\[5\];$	+1
+use	arbValidateProgram	uVar5	swizzleA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\[7\]\ =\ uVar5;$	+1
+local	arbValidateProgram	uVar6	maskBit	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbValidateProgram	iVar7	srcSym1	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x28\);$	+3
+use	arbValidateProgram	iVar7	srcSym1	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ 1\ <<\ \(\*\(uint\ \*\)\(iVar7\ \+\ 0x1c\)\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	iVar7	srcSym2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ \*\(int\ \*\)\(puVar17\ \+\ 0x44\);$	+3
+use	arbValidateProgram	iVar7	srcSym2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ 1\ <<\ \(\*\(uint\ \*\)\(iVar7\ \+\ 0x1c\)\ \&\ 0x3f\);$@2	+1
+use	arbValidateProgram	iVar7	paramEntry	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ in_r8\[5\]\ \*\ 0x14\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x78\);$	+2
+use	arbValidateProgram	iVar7	paramEntry	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(int\ \*\)\(iVar7\ \+\ 0xc\)\ ==\ 1\)\ \{$	+1
+use	arbValidateProgram	iVar7	paramEntry	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*1\ <<\ \(\*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ \&\ 0x3f\)\ \|\ \*\(uint\ \*\)\(param_2\ \+\ 0xc\);$	+1
+local	arbValidateProgram	uVar10	errorMsgBuf	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbValidateProgram	uVar14	writtenHi	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ 0;$	+1
+use	arbValidateProgram	uVar14	writtenHi	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ uVar14\ \|\ \(uint\)local_74;$	+1
+use	arbValidateProgram	uVar14	writtenHi	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ >>\ \(\(uint\)piVar13\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	uVar14	writtenHi	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ 0;$@2	+1
+use	arbValidateProgram	uVar14	writtenHi	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ 0;$@3	+1
+use	arbValidateProgram	uVar14	entryFieldA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ \*\(uint\ \*\)\(iVar22\ \+\ 0x18\);$	+1
+use	arbValidateProgram	uVar14	entryFieldA	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\[4\]\ =\ uVar14;$	+1
+use	arbValidateProgram	uVar14	swizzleB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar14\ =\ in_r7\[6\];$	+1
+use	arbValidateProgram	uVar14	swizzleB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\[8\]\ =\ uVar14;$	+1
+use	arbValidateProgram	piVar15	paramListNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ \(int\ \*\)piVar9\[0xf\];$	+4
+use	arbValidateProgram	piVar15	paramListNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar15;$	+3
+use	arbValidateProgram	piVar15	attribListNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ \(int\ \*\)piVar9\[0x11\];$	+4
+use	arbValidateProgram	piVar15	attribListNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar12\ =\ \*piVar15;$@2	+3
+use	arbValidateProgram	piVar15	outputListNode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar15\ =\ \(int\ \*\)piVar9\[0x13\];$	+5
+local	arbValidateProgram	puVar17	inst	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbValidateProgram	uVar18	opcode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(\(int\)a2\ \+\ \(int\)\(piVar9\ \+\ 0x14\)\);$	+1
+use	arbValidateProgram	uVar18	opcode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar18\ <\ 0x20\)\ \{$	+2
+use	arbValidateProgram	uVar18	opcode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar18\ ==\ 0xb\)\ goto\ LAB_0008ce38;$	+1
+use	arbValidateProgram	uVar18	opcode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(2\ <\ uVar18\ \-\ 0x3d\)\ goto\ LAB_0008cb70;$	+1
+use	arbValidateProgram	uVar18	opcode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar18\ !=\ 0xb\)\ \{$	+1
+use	arbValidateProgram	uVar18	opcode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(uVar18\ !=\ 0xb\)\ \{$@2	+1
+use	arbValidateProgram	uVar18	bitOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ piVar13\[7\]\ \-\ 0x20;$	+2
+use	arbValidateProgram	uVar18	bitOffset	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_78\ =\ 1\ <<\ \(uVar18\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	uVar18	swizzleC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ in_r7\[7\];$	+1
+use	arbValidateProgram	uVar18	swizzleC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\[9\]\ =\ uVar18;$	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(puVar17\ \+\ 0xc\)\ \+\ 0x1c\);$	+2
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ 1\ <<\ \(uVar19\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ 0;$	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r8\ =\ \(uint\ \*\)\(\(uint\)in_r8\ \|\ uVar19\);$	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x1c\)\ \-\ 0x20;$	+2
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ 0;$@2	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ 1\ <<\ \(uVar19\ \&\ 0x3f\);$@2	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r7\ =\ \(int\ \*\)\(\(uint\)in_r7\ \|\ uVar19\);$	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x1c\)\ \-\ 0x20;$@2	+3
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ 1\ <<\ \(uVar19\ \&\ 0x3f\);$@3	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*in_r7\ =\ \(int\ \*\)\(\(uint\)in_r7\ \|\ uVar19\);$@2	+1
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ piVar13\[7\]\ \-\ 0x20;$	+2
+use	arbValidateProgram	uVar19	bitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*local_80\ =\ 1\ <<\ \(uVar19\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	uVar19	shiftedBits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ \(uVar5\ <<\ 1\)\ <<\ \(0x1fU\ \-\ \(int\)piVar13\ \&\ 0x3f\)\ \|$	+1
+use	arbValidateProgram	uVar19	shiftedBits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ uVar5\ >>\ \(\(uint\)\(piVar13\ \+\ \-8\)\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	uVar19	shiftedBits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar13\ =\ \(int\ \*\)\(uVar19\ \&\ 1\);$	+1
+use	arbValidateProgram	uVar19	shiftedBits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ \(\(int\)in_r7\ <<\ 1\)\ <<\ \(0x1fU\ \-\ \(int\)piVar13\ \&\ 0x3f\)\ \|$	+1
+use	arbValidateProgram	uVar19	shiftedBits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar19\ =\ \(uint\)in_r7\ >>\ \(\(uint\)\(piVar13\ \+\ \-8\)\ \&\ 0x3f\);$	+1
+use	arbValidateProgram	uVar19	shiftedBits	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*piVar4\ =\ \(int\ \*\)\(uVar19\ \&\ 1\);$	+1
+local	arbValidateProgram	puVar20	outInst	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	piVar21	declNode	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_90	arrayLen	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_8c	fogOptionCopy	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_68	paramListBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_64	attrListBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_80	maskLoTmp	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_7c	maskHiTmp	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_78	maskLoTmpB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_74	maskHiTmpB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_60	hasKillFlag	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	arbValidateProgram	local_5c	instBase	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	arbValidateProgram	iVar2	totalInsts	INFERRED	stale rhs uses of the instruction total inside the iVar2 = alloc(iVar2*0x70 + ..., iVar2) statement	^\s*\(iVar2\ \*\ 0x70\ \+\ \(int\)\(piVar9\[0x9149\]\ \+\ \(int\)piVar13\)\ \*\ 0x14\ \+$	+2

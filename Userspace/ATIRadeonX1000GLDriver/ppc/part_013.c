@@ -1509,6 +1509,44 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   int *sourceLength;
   undefined4 sourceText;
 {
+  uint shiftedBits;
+  uint swizzleC;
+  uint bitOffset;
+  int *outputListNode;
+  int *attribListNode;
+  int *paramListNode;
+  uint swizzleB;
+  uint entryFieldA;
+  int paramEntry;
+  int srcSym2;
+  uint swizzleA;
+  uint entryType;
+  uint symIndex;
+  uint opcodeWord;
+  uint dstIndex;
+  uint writtenLo;
+  uint unitCount;
+  int *precisionCountNeg;
+  int paramEntryType;
+  int nextVal;
+  int instsLeft;
+  int aluCount;
+  int outInstOffset;
+  int paramBlock;
+  int iVar2;
+  int totalInsts;
+  int arrayCount;
+  int internStatus;
+  int srcRec;
+  int outInsts;
+  int hasKill;
+  int nextNode;
+  int msgLen;
+  int srcByteOffset;
+  int tempCount;
+  int secondListBase;
+  int limits;
+  int parseResult;
   int loopCounterD;
   int loopCounterC;
   int remaining;
@@ -1516,55 +1554,55 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   int sourceIndex;
   int loopCounter;
   bool moreSources;
-  bool bVar1;
-  int iVar2;
-  undefined1 *puVar3;
-  int *piVar4;
-  byte bVar8;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
+  bool noFogOption;
+  int declKind;
+  undefined1 *unitSlotPtr;
+  int *flagCursor;
+  byte optionCount;
+  uint notPrecisionHint;
+  uint maskBit;
+  int srcSym1;
   int *workArea;
-  undefined4 uVar10;
-  int iVar11;
+  undefined4 errorMsgBuf;
+  int fogBias;
   int *a2;
   int *in_r7;
   uint *in_r8;
-  int iVar12;
+  int sourceCopy;
   int *piVar13;
-  uint uVar14;
+  uint writtenHi;
   int *piVar15;
-  int iVar16;
-  undefined *puVar17;
-  uint uVar18;
-  uint uVar19;
-  uint *puVar20;
-  int *piVar21;
-  int iVar22;
+  int byteOffset;
+  undefined *inst;
+  uint opcode;
+  uint bitIndex;
+  uint *outInst;
+  int *declNode;
+  int symbolRef;
   int unitTarget [16];
   int *hasFogOption;
   int loopCounterE;
-  int local_90;
-  int *local_8c;
+  int arrayLen;
+  int *fogOptionCopy;
   int *local_88;
-  uint local_80;
-  int *local_7c;
-  uint local_78;
-  int *local_74;
+  uint maskLoTmp;
+  int *maskHiTmp;
+  uint maskLoTmpB;
+  int *maskHiTmpB;
   int *local_70;
   int *local_6c;
-  int *local_68;
-  int *local_64;
-  int local_60;
-  int *local_5c;
+  int *paramListBase;
+  int *attrListBase;
+  int hasKillFlag;
+  int *instBase;
   
   workArea = (int *)(**(code **)(callbacks + 0xc))(0x24a30,program,sourceLength,sourceText);
   piVar15 = (int *)0x0;
   program[0x54] = 0;
-  local_80 = 0;
-  local_7c = (int *)0x0;
-  local_78 = 0;
-  local_74 = (int *)0x0;
+  maskLoTmp = 0;
+  maskHiTmp = (int *)0x0;
+  maskLoTmpB = 0;
+  maskHiTmpB = (int *)0x0;
   if (*(int *)(program + 0x60) != 0) {
     (**(code **)(callbacks + 0x18))(*(int *)(program + 0x60));
     *(undefined4 *)(program + 0x60) = 0;
@@ -1591,11 +1629,11 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   *(undefined4 *)(program + 0xc) = 0;
   if (((unsigned char *)0x000013b1)[callbacks] != '\0') {
     loopCounterB = 0;
-    puVar3 = program;
+    unitSlotPtr = program;
     do {
-      *(undefined4 *)(puVar3 + 0x14) = 0;
+      *(undefined4 *)(unitSlotPtr + 0x14) = 0;
       loopCounterB = loopCounterB + 1;
-      puVar3 = puVar3 + 4;
+      unitSlotPtr = unitSlotPtr + 4;
     } while (loopCounterB < (int)(uint)(byte)((unsigned char *)0x000013b1)[callbacks]);
   }
   if (0 < *(int *)(((unsigned char *)0x000011d4) + callbacks)) {
@@ -1605,29 +1643,29 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
       loopCounterB = loopCounterB + 1;
     } while (loopCounterB < *(int *)(((unsigned char *)0x000011d4) + callbacks));
   }
-  iVar12 = (**(code **)(callbacks + 0xc))((undefined *)((int)sourceLength + 1));
-  if (iVar12 == 0) {
+  sourceCopy = (**(code **)(callbacks + 0xc))((undefined *)((int)sourceLength + 1));
+  if (sourceCopy == 0) {
     _free(workArea);
     return;
   }
   a2 = sourceLength;
-  _memcpy(iVar12,sourceText,sourceLength);
-  *(undefined1 *)(iVar12 + (int)sourceLength) = 0;
-  workArea[3] = iVar12;
+  _memcpy(sourceCopy,sourceText,sourceLength);
+  *(undefined1 *)(sourceCopy + (int)sourceLength) = 0;
+  workArea[3] = sourceCopy;
   *workArea = callbacks;
-  workArea[1] = iVar12;
-  workArea[2] = iVar12;
-  workArea[4] = (int)(iVar12 + (int)sourceLength);
+  workArea[1] = sourceCopy;
+  workArea[2] = sourceCopy;
+  workArea[4] = (int)(sourceCopy + (int)sourceLength);
   workArea[0xb] = -1;
   workArea[10] = -1;
   workArea[9] = 1;
   piVar13 = (int *)((int)((unsigned char *)0x4) + 3);
   remaining = 7;
   workArea[0xc] = (int)"";
-  piVar4 = workArea;
+  flagCursor = workArea;
   do {
-    *(undefined1 *)(piVar4 + 0xd) = 0;
-    piVar4 = (int *)((int)piVar4 + 1);
+    *(undefined1 *)(flagCursor + 0xd) = 0;
+    flagCursor = (int *)((int)flagCursor + 1);
     remaining = remaining + -1;
   } while (remaining != 0);
   workArea[0xf] = 0;
@@ -1641,316 +1679,316 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   workArea[0x9116] = 0;
   workArea[0x9149] = 0;
   workArea[0x928a] = 0;
-  iVar12 = ((int (*)())arbParseProgramText)(workArea);
-  if (iVar12 != 0) {
-    iVar12 = *workArea;
-    bVar8 = *(char *)(workArea + 0xd) == '\x01';
+  parseResult = ((int (*)())arbParseProgramText)(workArea);
+  if (parseResult != 0) {
+    limits = *workArea;
+    optionCount = *(char *)(workArea + 0xd) == '\x01';
     if (*(char *)((int)workArea + 0x35) == '\x01') {
-      bVar8 = bVar8 + 1;
+      optionCount = optionCount + 1;
     }
     if (*(char *)((int)workArea + 0x36) == '\x01') {
-      bVar8 = bVar8 + 1;
+      optionCount = optionCount + 1;
     }
-    if (bVar8 < 2) {
-      piVar13 = (int *)(uint)(bVar8 == 1);
-      uVar5 = *(byte *)((int)workArea + 0x37) ^ 1;
-      bVar8 = uVar5 == 0;
-      piVar4 = (int *)-uVar5;
+    if (optionCount < 2) {
+      piVar13 = (int *)(uint)(optionCount == 1);
+      notPrecisionHint = *(byte *)((int)workArea + 0x37) ^ 1;
+      optionCount = notPrecisionHint == 0;
+      precisionCountNeg = (int *)-notPrecisionHint;
       if (*(char *)(workArea + 0xe) == '\x01') {
-        bVar8 = bVar8 + 1;
+        optionCount = optionCount + 1;
       }
       hasFogOption = piVar13;
-      if (bVar8 < 2) {
+      if (optionCount < 2) {
 LAB_0008c88c:
-        piVar21 = (int *)workArea[0xf];
+        declNode = (int *)workArea[0xf];
         loopCounterE = 0;
         do {
-          if (piVar21 != (int *)0x0) {
+          if (declNode != (int *)0x0) {
             piVar13 = workArea + 0x914a;
             local_6c = (int *)&DAT_001ac5a4;
-            bVar1 = hasFogOption == (int *)0x0;
-            local_8c = hasFogOption;
+            noFogOption = hasFogOption == (int *)0x0;
+            fogOptionCopy = hasFogOption;
             piVar15 = workArea + 0x928a;
             local_88 = (int *)&DAT_001ac5a4;
-            local_68 = piVar13;
-            local_64 = piVar15;
+            paramListBase = piVar13;
+            attrListBase = piVar15;
             do {
-              iVar2 = piVar21[6];
-              if (iVar2 == 1) {
+              declKind = declNode[6];
+              if (declKind == 1) {
                 a2 = workArea + 0x9149;
-                in_r8 = (uint *)(piVar21 + 6);
+                in_r8 = (uint *)(declNode + 6);
                 in_r7 = local_88 + -0x1a48;
-                piVar13 = local_8c;
+                piVar13 = fogOptionCopy;
                 piVar15 = local_88;
-                iVar2 = ((int (*)())arbfpInternParameter)(workArea,workArea + 0x9117,a2,
-                                     *(int *)(((unsigned char *)0x000011ec) + iVar12) - (int)local_8c,in_r7,in_r8);
-                if (iVar2 < 0) goto LAB_0008d2d0;
+                internStatus = ((int (*)())arbfpInternParameter)(workArea,workArea + 0x9117,a2,
+                                     *(int *)(((unsigned char *)0x000011ec) + limits) - (int)fogOptionCopy,in_r7,in_r8);
+                if (internStatus < 0) goto LAB_0008d2d0;
               }
-              else if (iVar2 == 0) {
-                if (*(int *)(((unsigned char *)0x000011dc) + iVar12) - (int)local_8c <= workArea[0x928b]) {
-                  piVar13 = local_8c;
+              else if (declKind == 0) {
+                if (*(int *)(((unsigned char *)0x000011dc) + limits) - (int)fogOptionCopy <= workArea[0x928b]) {
+                  piVar13 = fogOptionCopy;
                   arbSetError(workArea,"too many temporaries");
                   goto LAB_0008d2d0;
                 }
-                piVar21[7] = workArea[0x928b];
+                declNode[7] = workArea[0x928b];
                 workArea[0x928b] = workArea[0x928b] + 1;
-                piVar13 = local_8c;
+                piVar13 = fogOptionCopy;
               }
-              else if (iVar2 == 2) {
-                iVar2 = piVar21[3];
-                local_90 = 1;
-                if ((iVar2 == 0) || (local_90 = iVar2, 0 < iVar2)) {
+              else if (declKind == 2) {
+                arrayCount = declNode[3];
+                arrayLen = 1;
+                if ((arrayCount == 0) || (arrayLen = arrayCount, 0 < arrayCount)) {
                   loopCounter = 0;
-                  iVar16 = 0;
+                  byteOffset = 0;
                   do {
-                    if (bVar1) {
-                      iVar11 = 0;
+                    if (noFogOption) {
+                      fogBias = 0;
                     }
                     else {
-                      iVar11 = 2;
+                      fogBias = 2;
                     }
-                    in_r8 = (uint *)(iVar16 + piVar21[5]);
+                    in_r8 = (uint *)(byteOffset + declNode[5]);
                     in_r7 = local_6c + -0x1a4f;
-                    a2 = local_64;
+                    a2 = attrListBase;
                     piVar15 = local_6c;
-                    iVar11 = ((int (*)())arbfpInternParameter)(workArea,local_68,local_64,
-                                          *(int *)(((unsigned char *)0x000011e4) + iVar12) - iVar11,in_r7,in_r8);
-                    if (iVar11 < 0) goto LAB_0008d2d0;
+                    fogBias = ((int (*)())arbfpInternParameter)(workArea,paramListBase,attrListBase,
+                                          *(int *)(((unsigned char *)0x000011e4) + limits) - fogBias,in_r7,in_r8);
+                    if (fogBias < 0) goto LAB_0008d2d0;
                     loopCounter = loopCounter + 1;
-                    iVar16 = iVar16 + 0x14;
-                  } while (local_90 != loopCounter);
+                    byteOffset = byteOffset + 0x14;
+                  } while (arrayLen != loopCounter);
                 }
               }
-              else if (iVar2 != 3) {
+              else if (declKind != 3) {
                 arbErrorInternal(workArea);
                 goto LAB_0008d2d0;
               }
-              piVar21 = (int *)*piVar21;
-              piVar4 = piVar15;
-            } while (piVar21 != (int *)0x0);
+              declNode = (int *)*declNode;
+              precisionCountNeg = piVar15;
+            } while (declNode != (int *)0x0);
           }
           loopCounterE = loopCounterE + 1;
           if (1 < loopCounterE) {
-            iVar16 = workArea[0x9014];
-            piVar13 = *(int **)(((unsigned char *)0x000011d4) + iVar12);
-            iVar2 = iVar16 + workArea[0x9015];
-            if (iVar2 <= (int)piVar13) {
-              bVar1 = hasFogOption == (int *)0x0;
-              if (!bVar1) {
+            aluCount = workArea[0x9014];
+            piVar13 = *(int **)(((unsigned char *)0x000011d4) + limits);
+            totalInsts = aluCount + workArea[0x9015];
+            if (totalInsts <= (int)piVar13) {
+              noFogOption = hasFogOption == (int *)0x0;
+              if (!noFogOption) {
                 if (*(char *)(workArea + 0xd) == '\x01') {
-                  if (iVar16 <= *(int *)(((unsigned char *)0x00001204) + iVar12) + -3) {
-                    if ((int)((int)piVar13 + -3) < iVar2) goto LAB_0008cad4;
+                  if (aluCount <= *(int *)(((unsigned char *)0x00001204) + limits) + -3) {
+                    if ((int)((int)piVar13 + -3) < totalInsts) goto LAB_0008cad4;
                     goto LAB_0008ca70;
                   }
 LAB_0008cab4:
                   arbSetError(workArea,"too many ALU instructions");
-                  piVar15 = piVar4;
+                  piVar15 = precisionCountNeg;
                   goto LAB_0008d2d0;
                 }
 LAB_0008ca70:
                 if (*(char *)((int)workArea + 0x35) == '\x01') {
-                  if (*(int *)(((unsigned char *)0x00001204) + iVar12) + -4 < iVar16) goto LAB_0008cab4;
-                  if ((int)(piVar13 + -1) < iVar2) goto LAB_0008cad4;
+                  if (*(int *)(((unsigned char *)0x00001204) + limits) + -4 < aluCount) goto LAB_0008cab4;
+                  if ((int)(piVar13 + -1) < totalInsts) goto LAB_0008cad4;
                 }
                 if (*(char *)((int)workArea + 0x36) == '\x01') {
-                  if (*(int *)(((unsigned char *)0x00001204) + iVar12) + -2 < iVar16) goto LAB_0008cab4;
-                  if ((int)((int)piVar13 + -2) < iVar2) goto LAB_0008cad4;
+                  if (*(int *)(((unsigned char *)0x00001204) + limits) + -2 < aluCount) goto LAB_0008cab4;
+                  if ((int)((int)piVar13 + -2) < totalInsts) goto LAB_0008cad4;
                 }
               }
-              uVar5 = (uint)(byte)((unsigned char *)0x000013b1)[iVar12];
-              if (uVar5 != 0) {
+              unitCount = (uint)(byte)((unsigned char *)0x000013b1)[limits];
+              if (unitCount != 0) {
                 piVar15 = unitTarget;
                 do {
                   *piVar15 = 0;
                   piVar15 = piVar15 + 1;
-                  uVar5 = uVar5 - 1;
-                } while (uVar5 != 0);
+                  unitCount = unitCount - 1;
+                } while (unitCount != 0);
               }
-              if (iVar2 < 1) {
-                iVar11 = 0;
+              if (totalInsts < 1) {
+                hasKill = 0;
                 loopCounterD = 1;
               }
               else {
                 piVar15 = unitTarget;
-                uVar5 = 0;
-                uVar14 = 0;
+                writtenLo = 0;
+                writtenHi = 0;
                 in_r7 = (int *)0x0;
                 in_r8 = (uint *)0x0;
-                iVar11 = 0;
+                hasKill = 0;
                 loopCounterD = 1;
                 a2 = (int *)0x0;
-                iVar16 = iVar2;
+                instsLeft = totalInsts;
                 do {
-                  uVar18 = *(uint *)((int)a2 + (int)(workArea + 0x14));
-                  puVar17 = (undefined *)((int)a2 + (int)(workArea + 0x14));
+                  opcode = *(uint *)((int)a2 + (int)(workArea + 0x14));
+                  inst = (undefined *)((int)a2 + (int)(workArea + 0x14));
                   local_70 = piVar15;
-                  if (uVar18 < 0x20) {
-                    if ((0x1c < uVar18) || (uVar18 == 0xb)) goto LAB_0008cb94;
+                  if (opcode < 0x20) {
+                    if ((0x1c < opcode) || (opcode == 0xb)) goto LAB_0008cb94;
 LAB_0008cb70:
-                    if (*(int *)(*(int *)(puVar17 + 0xc) + 0x18) == 0) {
-                      uVar19 = *(uint *)(*(int *)(puVar17 + 0xc) + 0x1c);
-                      uVar6 = uVar19 - 0x20;
-                      if ((int)uVar6 < 0) {
-                        uVar6 = 0;
-                        uVar19 = 1 << (uVar19 & 0x3f);
+                    if (*(int *)(*(int *)(inst + 0xc) + 0x18) == 0) {
+                      bitIndex = *(uint *)(*(int *)(inst + 0xc) + 0x1c);
+                      maskBit = bitIndex - 0x20;
+                      if ((int)maskBit < 0) {
+                        maskBit = 0;
+                        bitIndex = 1 << (bitIndex & 0x3f);
                       }
                       else {
-                        uVar19 = 0;
-                        uVar6 = 1 << (uVar6 & 0x3f);
+                        bitIndex = 0;
+                        maskBit = 1 << (maskBit & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | uVar6);
-                      in_r8 = (uint *)((uint)in_r8 | uVar19);
+                      in_r7 = (int *)((uint)in_r7 | maskBit);
+                      in_r8 = (uint *)((uint)in_r8 | bitIndex);
                     }
-                    iVar7 = *(int *)(puVar17 + 0x28);
-                    if ((iVar7 != 0) && (*(int *)(iVar7 + 0x18) == 0)) {
-                      uVar19 = *(uint *)(iVar7 + 0x1c) - 0x20;
-                      if ((int)uVar19 < 0) {
-                        piVar4 = (int *)((int)((unsigned char *)0x0) + 1);
-                        uVar19 = 0;
-                        uVar6 = 1 << (*(uint *)(iVar7 + 0x1c) & 0x3f);
+                    srcSym1 = *(int *)(inst + 0x28);
+                    if ((srcSym1 != 0) && (*(int *)(srcSym1 + 0x18) == 0)) {
+                      bitIndex = *(uint *)(srcSym1 + 0x1c) - 0x20;
+                      if ((int)bitIndex < 0) {
+                        precisionCountNeg = (int *)((int)((unsigned char *)0x0) + 1);
+                        bitIndex = 0;
+                        maskBit = 1 << (*(uint *)(srcSym1 + 0x1c) & 0x3f);
                       }
                       else {
-                        uVar6 = 0;
-                        uVar19 = 1 << (uVar19 & 0x3f);
+                        maskBit = 0;
+                        bitIndex = 1 << (bitIndex & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | uVar19);
-                      in_r8 = (uint *)((uint)in_r8 | uVar6);
+                      in_r7 = (int *)((uint)in_r7 | bitIndex);
+                      in_r8 = (uint *)((uint)in_r8 | maskBit);
                     }
-                    iVar7 = *(int *)(puVar17 + 0x44);
-                    if ((iVar7 != 0) && (*(int *)(iVar7 + 0x18) == 0)) {
-                      uVar19 = *(uint *)(iVar7 + 0x1c) - 0x20;
-                      if ((int)uVar19 < 0) {
-                        uVar19 = 0;
-                        uVar6 = 1 << (*(uint *)(iVar7 + 0x1c) & 0x3f);
+                    srcSym2 = *(int *)(inst + 0x44);
+                    if ((srcSym2 != 0) && (*(int *)(srcSym2 + 0x18) == 0)) {
+                      bitIndex = *(uint *)(srcSym2 + 0x1c) - 0x20;
+                      if ((int)bitIndex < 0) {
+                        bitIndex = 0;
+                        maskBit = 1 << (*(uint *)(srcSym2 + 0x1c) & 0x3f);
                       }
                       else {
-                        uVar6 = 0;
-                        uVar19 = 1 << (uVar19 & 0x3f);
+                        maskBit = 0;
+                        bitIndex = 1 << (bitIndex & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | uVar19);
-                      in_r8 = (uint *)((uint)in_r8 | uVar6);
+                      in_r7 = (int *)((uint)in_r7 | bitIndex);
+                      in_r8 = (uint *)((uint)in_r8 | maskBit);
                     }
-                    piVar13 = *(int **)(puVar17 + 4);
+                    piVar13 = *(int **)(inst + 4);
                     if (piVar13[6] == 0) {
-                      uVar19 = piVar13[7] - 0x20;
-                      if ((int)uVar19 < 0) {
-                        local_80 = 0;
-                        local_7c = (int *)(1 << (piVar13[7] & 0x3fU));
+                      bitIndex = piVar13[7] - 0x20;
+                      if ((int)bitIndex < 0) {
+                        maskLoTmp = 0;
+                        maskHiTmp = (int *)(1 << (piVar13[7] & 0x3fU));
                       }
                       else {
-                        local_7c = (int *)0x0;
-                        local_80 = 1 << (uVar19 & 0x3f);
+                        maskHiTmp = (int *)0x0;
+                        maskLoTmp = 1 << (bitIndex & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | local_80);
-                      in_r8 = (uint *)((uint)in_r8 | (uint)local_7c);
-                      piVar4 = local_7c;
+                      in_r7 = (int *)((uint)in_r7 | maskLoTmp);
+                      in_r8 = (uint *)((uint)in_r8 | (uint)maskHiTmp);
+                      precisionCountNeg = maskHiTmp;
                     }
-                    if (uVar18 == 0xb) goto LAB_0008ce38;
+                    if (opcode == 0xb) goto LAB_0008ce38;
 LAB_0008cddc:
                     if (piVar13[6] == 0) {
-                      uVar18 = piVar13[7] - 0x20;
-                      if ((int)uVar18 < 0) {
-                        local_78 = 0;
-                        piVar4 = (int *)(1 << (piVar13[7] & 0x3fU));
-                        local_74 = piVar4;
+                      bitOffset = piVar13[7] - 0x20;
+                      if ((int)bitOffset < 0) {
+                        maskLoTmpB = 0;
+                        precisionCountNeg = (int *)(1 << (piVar13[7] & 0x3fU));
+                        maskHiTmpB = precisionCountNeg;
                       }
                       else {
-                        local_78 = 1 << (uVar18 & 0x3f);
-                        local_74 = (int *)0x0;
+                        maskLoTmpB = 1 << (bitOffset & 0x3f);
+                        maskHiTmpB = (int *)0x0;
                       }
-                      uVar5 = uVar5 | local_78;
-                      uVar14 = uVar14 | (uint)local_74;
-                      piVar13 = local_74;
+                      writtenLo = writtenLo | maskLoTmpB;
+                      writtenHi = writtenHi | (uint)maskHiTmpB;
+                      piVar13 = maskHiTmpB;
                     }
                   }
                   else {
-                    if (2 < uVar18 - 0x3d) goto LAB_0008cb70;
+                    if (2 < opcode - 0x3d) goto LAB_0008cb70;
 LAB_0008cb94:
-                    piVar13 = *(int **)(*(int *)(puVar17 + 0xc) + 0x1c);
-                    if (*(int *)(*(int *)(puVar17 + 0xc) + 0x18) == 0) {
+                    piVar13 = *(int **)(*(int *)(inst + 0xc) + 0x1c);
+                    if (*(int *)(*(int *)(inst + 0xc) + 0x18) == 0) {
                       if ((int)(piVar13 + -8) < 0) {
-                        uVar19 = (uVar5 << 1) << (0x1fU - (int)piVar13 & 0x3f) |
-                                 uVar14 >> ((uint)piVar13 & 0x3f);
+                        shiftedBits = (writtenLo << 1) << (0x1fU - (int)piVar13 & 0x3f) |
+                                 writtenHi >> ((uint)piVar13 & 0x3f);
                       }
                       else {
-                        uVar19 = uVar5 >> ((uint)(piVar13 + -8) & 0x3f);
+                        shiftedBits = writtenLo >> ((uint)(piVar13 + -8) & 0x3f);
                       }
-                      piVar13 = (int *)(uVar19 & 1);
+                      piVar13 = (int *)(shiftedBits & 1);
                       if (piVar13 == (int *)0x0) goto LAB_0008cbd4;
 LAB_0008cc20:
                       loopCounterD = loopCounterD + 1;
-                      if (uVar18 != 0xb) {
-                        uVar5 = 0;
-                        uVar14 = 0;
+                      if (opcode != 0xb) {
+                        writtenLo = 0;
+                        writtenHi = 0;
                         in_r7 = (int *)0x0;
                         in_r8 = (uint *)0x0;
 LAB_0008cc50:
-                        piVar13 = (int *)(*(int *)(puVar17 + 0x40) * 4);
-                        piVar4 = piVar15;
+                        piVar13 = (int *)(*(int *)(inst + 0x40) * 4);
+                        precisionCountNeg = piVar15;
                         if (*(int *)((int)piVar13 + (int)piVar15) == 0) {
-                          *(int *)((int)piVar13 + (int)piVar15) = *(int *)(puVar17 + 0x5c);
-                          piVar13 = *(int **)(puVar17 + 4);
+                          *(int *)((int)piVar13 + (int)piVar15) = *(int *)(inst + 0x5c);
+                          piVar13 = *(int **)(inst + 4);
                         }
                         else {
-                          if (*(int *)((int)piVar13 + (int)piVar15) != *(int *)(puVar17 + 0x5c)) {
+                          if (*(int *)((int)piVar13 + (int)piVar15) != *(int *)(inst + 0x5c)) {
                             arbSetError(workArea,"multiple targets on texture context");
                             goto LAB_0008d2d0;
                           }
-                          piVar13 = *(int **)(puVar17 + 4);
+                          piVar13 = *(int **)(inst + 4);
                         }
                         goto LAB_0008cddc;
                       }
-                      uVar5 = 0;
-                      uVar14 = 0;
-                      iVar11 = 1;
+                      writtenLo = 0;
+                      writtenHi = 0;
+                      hasKill = 1;
                       in_r7 = (int *)0x0;
                       in_r8 = (uint *)0x0;
                     }
                     else {
 LAB_0008cbd4:
-                      if (uVar18 != 0xb) {
-                        if (*(int *)(*(int *)(puVar17 + 4) + 0x18) == 0) {
-                          piVar13 = *(int **)(*(int *)(puVar17 + 4) + 0x1c);
+                      if (opcode != 0xb) {
+                        if (*(int *)(*(int *)(inst + 4) + 0x18) == 0) {
+                          piVar13 = *(int **)(*(int *)(inst + 4) + 0x1c);
                           if ((int)(piVar13 + -8) < 0) {
-                            uVar19 = ((int)in_r7 << 1) << (0x1fU - (int)piVar13 & 0x3f) |
+                            shiftedBits = ((int)in_r7 << 1) << (0x1fU - (int)piVar13 & 0x3f) |
                                      (uint)in_r8 >> ((uint)piVar13 & 0x3f);
                           }
                           else {
-                            uVar19 = (uint)in_r7 >> ((uint)(piVar13 + -8) & 0x3f);
+                            shiftedBits = (uint)in_r7 >> ((uint)(piVar13 + -8) & 0x3f);
                           }
-                          piVar4 = (int *)(uVar19 & 1);
-                          if (piVar4 != (int *)0x0) goto LAB_0008cc20;
+                          precisionCountNeg = (int *)(shiftedBits & 1);
+                          if (precisionCountNeg != (int *)0x0) goto LAB_0008cc20;
                         }
                         goto LAB_0008cc50;
                       }
-                      iVar11 = 1;
+                      hasKill = 1;
                     }
                   }
 LAB_0008ce38:
                   a2 = a2 + 0x18;
-                  iVar16 = iVar16 + -1;
-                } while (iVar16 != 0);
+                  instsLeft = instsLeft + -1;
+                } while (instsLeft != 0);
               }
-              piVar15 = piVar4;
-              if (*(int *)(((unsigned char *)0x0000120cU) + iVar12) < loopCounterD) {
+              piVar15 = precisionCountNeg;
+              if (*(int *)(((unsigned char *)0x0000120cU) + limits) < loopCounterD) {
                 arbSetError(workArea,"too many indirections");
               }
               else {
                 piVar13 = (int *)workArea[0x928a];
-                local_60 = iVar11;
-                iVar2 = (**(code **)(iVar12 + 0xc))
-                                  (iVar2 * 0x70 + (int)(workArea[0x9149] + (int)piVar13) * 0x14 +
-                                   workArea[0x9116] * 0x10 + 0x70,iVar11,a2,iVar2,in_r7,in_r8,piVar13)
+                hasKillFlag = hasKill;
+                iVar2 = (**(code **)(limits + 0xc))
+                                  (totalInsts * 0x70 + (int)(workArea[0x9149] + (int)piVar13) * 0x14 +
+                                   workArea[0x9116] * 0x10 + 0x70,hasKill,a2,totalInsts,in_r7,in_r8,piVar13)
                 ;
                 *(int *)(program + 0x60) = iVar2;
                 if (iVar2 != 0) {
-                  if (local_60 != 0) {
+                  if (hasKillFlag != 0) {
                     program[3] = 1;
                   }
                   if (*(char *)((int)workArea + 0x3a) == '\x01') {
                     program[5] = 1;
                   }
-                  if (bVar1) {
+                  if (noFogOption) {
                     *(int **)(program + 8) = hasFogOption;
                   }
                   else {
@@ -1968,120 +2006,120 @@ LAB_0008ce38:
                       *(undefined4 *)(program + 8) = 0;
                     }
                   }
-                  if (((unsigned char *)0x000013b1)[iVar12] != '\0') {
+                  if (((unsigned char *)0x000013b1)[limits] != '\0') {
                     loopCounter = 0;
                     piVar13 = unitTarget;
-                    puVar3 = program;
+                    unitSlotPtr = program;
                     do {
-                      iVar16 = *piVar13;
+                      nextVal = *piVar13;
                       loopCounter = loopCounter + 1;
                       piVar13 = piVar13 + 1;
-                      *(int *)(puVar3 + 0x14) = iVar16;
-                      puVar3 = puVar3 + 4;
-                    } while (loopCounter < (int)(uint)(byte)((unsigned char *)0x000013b1)[iVar12]);
+                      *(int *)(unitSlotPtr + 0x14) = nextVal;
+                      unitSlotPtr = unitSlotPtr + 4;
+                    } while (loopCounter < (int)(uint)(byte)((unsigned char *)0x000013b1)[limits]);
                   }
                   *(int *)(program + 100) = *(int *)(program + 0x60);
                   *(int *)(program + 0x68) = workArea[0x9014] + workArea[0x9015];
                   *(int *)(program + 0x6c) = workArea[0x9014];
                   *(int *)(program + 0x70) = workArea[0x9015];
-                  iVar2 = (workArea[0x9014] + workArea[0x9015]) * 0x70 + *(int *)(program + 0x60) + 0x70
+                  paramBlock = (workArea[0x9014] + workArea[0x9015]) * 0x70 + *(int *)(program + 0x60) + 0x70
                   ;
-                  *(int *)(program + 0x78) = iVar2;
+                  *(int *)(program + 0x78) = paramBlock;
                   *(int *)(program + 0x7c) = workArea[0x9149];
-                  iVar12 = workArea[0x9149] * 0x14 + iVar2;
-                  *(int *)(program + 0x80) = iVar12;
+                  secondListBase = workArea[0x9149] * 0x14 + paramBlock;
+                  *(int *)(program + 0x80) = secondListBase;
                   *(int *)(program + 0x84) = workArea[0x928a];
-                  *(int *)(program + 0x8c) = workArea[0x928a] * 0x14 + iVar12;
+                  *(int *)(program + 0x8c) = workArea[0x928a] * 0x14 + secondListBase;
                   *(int *)(program + 0x90) = workArea[0x9116];
-                  iVar12 = workArea[0x928b];
+                  tempCount = workArea[0x928b];
                   *(int *)(program + 0x74) = loopCounterD;
                   loopCounterC = 0;
-                  *(int *)(program + 0x88) = iVar12;
-                  _memcpy(iVar2,workArea + 0x9117,workArea[0x9149] * 0x14);
+                  *(int *)(program + 0x88) = tempCount;
+                  _memcpy(paramBlock,workArea + 0x9117,workArea[0x9149] * 0x14);
                   _memcpy(*(undefined4 *)(program + 0x80),workArea + 0x914a,workArea[0x928a] * 0x14);
                   _memcpy(*(undefined4 *)(program + 0x8c),workArea + 0x9016,workArea[0x9116] << 4);
                   if (0 < workArea[0x9014] + workArea[0x9015]) {
                     loopCounterC = 0;
-                    local_5c = workArea + 0x14;
-                    iVar2 = 0;
-                    iVar12 = 0;
+                    instBase = workArea + 0x14;
+                    outInstOffset = 0;
+                    srcByteOffset = 0;
                     do {
-                      iVar11 = *(int *)(program + 100);
-                      in_r7 = (int *)((int)local_5c + iVar12);
-                      puVar20 = (uint *)(iVar2 + iVar11);
-                      _memset(puVar20,0,0x70);
-                      *(undefined4 *)(iVar2 + iVar11) = *(undefined4 *)((int)local_5c + iVar12);
-                      iVar11 = in_r7[1];
+                      outInsts = *(int *)(program + 100);
+                      in_r7 = (int *)((int)instBase + srcByteOffset);
+                      outInst = (uint *)(outInstOffset + outInsts);
+                      _memset(outInst,0,0x70);
+                      *(undefined4 *)(outInstOffset + outInsts) = *(undefined4 *)((int)instBase + srcByteOffset);
+                      srcRec = in_r7[1];
                       *(undefined1 *)(loopCounterC + *(int *)(program + 0x94)) = 0;
-                      if (iVar11 != 0) {
-                        uVar5 = *(uint *)(iVar11 + 0x1c);
-                        puVar20[1] = *(uint *)(iVar11 + 0x18);
-                        puVar20[2] = uVar5;
-                        if (*(int *)(iVar11 + 0x18) == 3) {
-                          if (*(int *)(iVar11 + 0x1c) == 1) {
+                      if (srcRec != 0) {
+                        dstIndex = *(uint *)(srcRec + 0x1c);
+                        outInst[1] = *(uint *)(srcRec + 0x18);
+                        outInst[2] = dstIndex;
+                        if (*(int *)(srcRec + 0x18) == 3) {
+                          if (*(int *)(srcRec + 0x1c) == 1) {
                             program[4] = 1;
                           }
-                          else if (*(int *)(iVar11 + 0x1c) == 0) {
+                          else if (*(int *)(srcRec + 0x1c) == 0) {
                             *(char *)(loopCounterC + *(int *)(program + 0x94)) =
-                                 (char)*(undefined4 *)(iVar11 + 0x24);
+                                 (char)*(undefined4 *)(srcRec + 0x24);
                           }
                         }
                       }
                       sourceIndex = 0;
-                      puVar20[3] = in_r7[2];
-                      in_r8 = puVar20;
+                      outInst[3] = in_r7[2];
+                      in_r8 = outInst;
                       do {
-                        iVar22 = in_r7[3];
-                        if (iVar22 == 0) {
-                          uVar5 = *puVar20;
-                          if ((0x1c < uVar5) &&
-                             (((uVar5 < 0x20 || (uVar5 - 0x3d < 3)) &&
+                        symbolRef = in_r7[3];
+                        if (symbolRef == 0) {
+                          opcodeWord = *outInst;
+                          if ((0x1c < opcodeWord) &&
+                             (((opcodeWord < 0x20 || (opcodeWord - 0x3d < 3)) &&
                               (in_r8[0xb] = in_r7[9], sourceIndex == 1)))) {
                             *(uint *)(program + 0x10) =
-                                 1 << (puVar20[0x13] & 0x3f) | *(uint *)(program + 0x10);
+                                 1 << (outInst[0x13] & 0x3f) | *(uint *)(program + 0x10);
                           }
                         }
                         else {
-                          if (*(int *)(iVar22 + 0xc) == 0) {
-                            uVar5 = *(uint *)(iVar22 + 0x1c);
-                            uVar14 = *(uint *)(iVar22 + 0x18);
+                          if (*(int *)(symbolRef + 0xc) == 0) {
+                            symIndex = *(uint *)(symbolRef + 0x1c);
+                            entryFieldA = *(uint *)(symbolRef + 0x18);
                             in_r8[0xb] = 0;
-                            in_r8[5] = uVar5;
-                            in_r8[4] = uVar14;
+                            in_r8[5] = symIndex;
+                            in_r8[4] = entryFieldA;
                           }
                           else {
-                            uVar5 = *(uint *)(in_r7[9] * 0x14 + *(int *)(iVar22 + 0x14));
-                            piVar15 = *(int **)(in_r7[9] * 0x14 + *(int *)(iVar22 + 0x14) + 4);
+                            entryType = *(uint *)(in_r7[9] * 0x14 + *(int *)(symbolRef + 0x14));
+                            piVar15 = *(int **)(in_r7[9] * 0x14 + *(int *)(symbolRef + 0x14) + 4);
                             in_r8[0xb] = 0;
-                            in_r8[4] = uVar5;
+                            in_r8[4] = entryType;
                             in_r8[5] = (uint)piVar15;
                           }
                           if (in_r8[4] == 1) {
-                            iVar7 = in_r8[5] * 0x14 + *(int *)(program + 0x78);
-                            iVar22 = *(int *)(iVar7 + 8);
-                            if (iVar22 == 1) {
-                              if (*(int *)(iVar7 + 0xc) == 1) {
+                            paramEntry = in_r8[5] * 0x14 + *(int *)(program + 0x78);
+                            paramEntryType = *(int *)(paramEntry + 8);
+                            if (paramEntryType == 1) {
+                              if (*(int *)(paramEntry + 0xc) == 1) {
                                 *program = 1;
                               }
                             }
-                            else if (iVar22 == 2) {
+                            else if (paramEntryType == 2) {
                               *(uint *)(program + 0xc) =
-                                   1 << (*(uint *)(iVar7 + 0xc) & 0x3f) | *(uint *)(program + 0xc);
+                                   1 << (*(uint *)(paramEntry + 0xc) & 0x3f) | *(uint *)(program + 0xc);
                             }
-                            else if (iVar22 == 3) {
+                            else if (paramEntryType == 3) {
                               program[1] = 1;
                             }
-                            else if (iVar22 == 4) {
+                            else if (paramEntryType == 4) {
                               program[2] = 1;
                             }
                           }
-                          uVar5 = in_r7[5];
-                          uVar14 = in_r7[6];
-                          uVar18 = in_r7[7];
+                          swizzleA = in_r7[5];
+                          swizzleB = in_r7[6];
+                          swizzleC = in_r7[7];
                           in_r8[6] = in_r7[4];
-                          in_r8[7] = uVar5;
-                          in_r8[8] = uVar14;
-                          in_r8[9] = uVar18;
+                          in_r8[7] = swizzleA;
+                          in_r8[8] = swizzleB;
+                          in_r8[9] = swizzleC;
                           *(undefined1 *)(in_r8 + 10) = *(undefined1 *)(in_r7 + 8);
                         }
                         moreSources = sourceIndex != 2;
@@ -2090,8 +2128,8 @@ LAB_0008ce38:
                         sourceIndex = sourceIndex + 1;
                       } while (moreSources);
                       loopCounterC = loopCounterC + 1;
-                      iVar12 = iVar12 + 0x60;
-                      iVar2 = iVar2 + 0x70;
+                      srcByteOffset = srcByteOffset + 0x60;
+                      outInstOffset = outInstOffset + 0x70;
                     } while (loopCounterC < workArea[0x9014] + workArea[0x9015]);
                   }
                   _memset(loopCounterC * 0x70 + *(int *)(program + 100),0,0x70);
@@ -2104,15 +2142,15 @@ LAB_0008ce38:
             }
 LAB_0008cad4:
             arbSetError(workArea,"too many total instructions");
-            piVar15 = piVar4;
+            piVar15 = precisionCountNeg;
             goto LAB_0008d2d0;
           }
           if (loopCounterE == 0) goto LAB_0008c88c;
-          piVar21 = (int *)workArea[0x11];
+          declNode = (int *)workArea[0x11];
         } while( true );
       }
       arbSetError(workArea,"more than one precision hint option");
-      piVar15 = piVar4;
+      piVar15 = precisionCountNeg;
     }
     else {
       arbSetError(workArea,"more than one fog option");
@@ -2123,41 +2161,41 @@ LAB_0008d2d0:
   if (*(int *)(((unsigned char *)0x00001128) + callbacks) != 0) {
     (**(code **)(callbacks + 0x18))(*(int *)(((unsigned char *)0x00001128) + callbacks));
   }
-  iVar12 = _strlen(workArea[0xc]);
-  uVar10 = (**(code **)(callbacks + 0xc))(iVar12 + 0xb);
-  *(undefined4 *)(((unsigned char *)0x00001128) + callbacks) = uVar10;
+  msgLen = _strlen(workArea[0xc]);
+  errorMsgBuf = (**(code **)(callbacks + 0xc))(msgLen + 0xb);
+  *(undefined4 *)(((unsigned char *)0x00001128) + callbacks) = errorMsgBuf;
   if ((uint)workArea[0xb] < 10000) {
-    printf_LDBLStub_1a32d0(uVar10,"line %d: %s",workArea[0xb],workArea[0xc],in_r7,in_r8,piVar13,piVar15);
+    printf_LDBLStub_1a32d0(errorMsgBuf,"line %d: %s",workArea[0xb],workArea[0xc],in_r7,in_r8,piVar13,piVar15);
   }
   else {
-    _strcpy(uVar10,workArea[0xc]);
+    _strcpy(errorMsgBuf,workArea[0xc]);
   }
   if (workArea[1] != 0) {
     (**(code **)(callbacks + 0x18))(workArea[1]);
   }
-  piVar15 = (int *)workArea[0xf];
-  while (piVar15 != (int *)0x0) {
-    if ((int *)piVar15[5] != piVar15 + 6) {
-      (**(code **)(callbacks + 0x18))(piVar15[5]);
+  paramListNode = (int *)workArea[0xf];
+  while (paramListNode != (int *)0x0) {
+    if ((int *)paramListNode[5] != paramListNode + 6) {
+      (**(code **)(callbacks + 0x18))(paramListNode[5]);
     }
-    iVar12 = *piVar15;
-    (**(code **)(callbacks + 0x18))(piVar15);
-    piVar15 = (int *)iVar12;
+    nextNode = *paramListNode;
+    (**(code **)(callbacks + 0x18))(paramListNode);
+    paramListNode = (int *)nextNode;
   }
-  piVar15 = (int *)workArea[0x11];
-  while (piVar15 != (int *)0x0) {
-    if ((int *)piVar15[5] != piVar15 + 6) {
-      (**(code **)(callbacks + 0x18))(piVar15[5]);
+  attribListNode = (int *)workArea[0x11];
+  while (attribListNode != (int *)0x0) {
+    if ((int *)attribListNode[5] != attribListNode + 6) {
+      (**(code **)(callbacks + 0x18))(attribListNode[5]);
     }
-    iVar12 = *piVar15;
-    (**(code **)(callbacks + 0x18))(piVar15);
-    piVar15 = (int *)iVar12;
+    nextNode = *attribListNode;
+    (**(code **)(callbacks + 0x18))(attribListNode);
+    attribListNode = (int *)nextNode;
   }
-  piVar15 = (int *)workArea[0x13];
-  while (piVar15 != (int *)0x0) {
-    iVar12 = *piVar15;
-    (**(code **)(callbacks + 0x18))(piVar15);
-    piVar15 = (int *)iVar12;
+  outputListNode = (int *)workArea[0x13];
+  while (outputListNode != (int *)0x0) {
+    nextNode = *outputListNode;
+    (**(code **)(callbacks + 0x18))(outputListNode);
+    outputListNode = (int *)nextNode;
   }
                     
                     
