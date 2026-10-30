@@ -806,7 +806,7 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
   uint laneBit;
   uint writerWriteMask;
   uint loopCounterD;
-  uint uVar10;
+  uint earlierWriterMask;
   int *valueIdCursor;
   uint boundMask;
   uint writerRecord;
@@ -895,7 +895,7 @@ LAB_00077f68:
     } while (moreComponents);
     if (conflict) {
       loopIndex2 = 0;
-      uVar10 = 0;
+      earlierWriterMask = 0;
       valueIdCursor = seenValueIds;
       do {
         valueId = *valueIdCursor;
@@ -912,9 +912,9 @@ LAB_00077f68:
               do {
                 laneBit = 1 << (loopCounterD & 0x3f);
                 if ((writerWriteMask & laneBit & ~boundMask) != 0) {
-                  if ((laneBit & uVar10) == 0) {
+                  if ((laneBit & earlierWriterMask) == 0) {
                     *earliestPtr = writerRecord;
-                    uVar10 = uVar10 | laneBit;
+                    earlierWriterMask = earlierWriterMask | laneBit;
                   }
                   else if (writerRecord < *earliestPtr) {
                     *earliestPtr = writerRecord;
@@ -929,14 +929,14 @@ LAB_00077f68:
         }
         loopIndex2 = loopIndex2 + 1;
       } while (loopIndex2 != loopIndex);
-      if (uVar10 != 0) {
+      if (earlierWriterMask != 0) {
         loopCounterG = 0;
         earliestWriterPtr = earliestWriter;
         remainingB = 4;
         do {
           laneBitG = 1 << (loopCounterG & 0x3f);
-          if (((laneBitG & uVar10) != 0) && (recordIndex == *earliestWriterPtr)) {
-            uVar10 = uVar10 & ~laneBitG;
+          if (((laneBitG & earlierWriterMask) != 0) && (recordIndex == *earliestWriterPtr)) {
+            earlierWriterMask = earlierWriterMask & ~laneBitG;
           }
           loopCounterG = loopCounterG + 1;
           earliestWriterPtr = earliestWriterPtr + 1;
@@ -946,12 +946,12 @@ LAB_00077f68:
       goto LAB_000780d4;
     }
   }
-  uVar10 = 0;
+  earlierWriterMask = 0;
 LAB_000780d4:
-  if (((usedValueMask & boundMask) == 0) && ((uVar10 & usedValueMask) != 0)) {
+  if (((usedValueMask & boundMask) == 0) && ((earlierWriterMask & usedValueMask) != 0)) {
     return 1;
   }
-  boundMask = usedValueMask & (uVar10 | boundMask);
+  boundMask = usedValueMask & (earlierWriterMask | boundMask);
   if (boundMask != 0) {
     componentIndex = 0;
     valueIdPtr = (uint *)(regOffset + ctx + 0x2d87c);
@@ -2762,7 +2762,7 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
   int haveChoice;
   uint chosenKeepFlag;
   int queueBase;
-  undefined4 *local_58;
+  undefined4 *candidateRegValuePtr;
   
   *keepFlag = 0;
   candidateKeepFlag = 0;
@@ -2813,7 +2813,7 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
   chosenRecord = 0;
   if (*(int *)(ctx + 0x28874) != 0) {
     queueBase = ctx + 0x20000;
-    local_58 = &candidateRegValue;
+    candidateRegValuePtr = &candidateRegValue;
     bestScore = -1;
     queueCursor = (int *)(ctx + 0x26874);
     chosenKeepFlag = 0;
@@ -2831,7 +2831,7 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
       a5 = &candidateKeepFlag;
       a2 = laterPass;
       registerCountArg = registerCount;
-      candidateFits = ((int (*)())recordPlanDestination)(ctx,program,laterPass,registerCount,a4,a5,local_58);
+      candidateFits = ((int (*)())recordPlanDestination)(ctx,program,laterPass,registerCount,a4,a5,candidateRegValuePtr);
       if (candidateFits != 0) {
         score = 100;
         if (uStack00000020 <= (uint)queueCursor[-0x1001]) {
@@ -4058,18 +4058,22 @@ int recordProgramBuildDependencies(alloc)
   dword *outRecordPtr;
   uint inputWord2;
   uint *puVar27;
-  uint uVar28;
+  uint sourceWordValue;
   dword dVar29;
-  undefined1 *puVar30;
+  undefined1 *scanPtr;
   int *piVar31;
   int *edgeNode;
   int *piVar32;
   int *sourceDepNode;
   int componentIndex;
-  uint *puVar34;
+  uint *srcWordPtr;
+  uint *recordPtrAlias;
   byte in_xer_so = 0;
   int remainingB;
   int iVar36;
+  int predResult;
+  int edgeStatus;
+  int wordIndex;
   undefined8 uVar37;
   uint recordCopyWord;
   uint *local_b4;
@@ -4327,13 +4331,13 @@ LAB_0007cc7c:
           goto LAB_0007cc7c;
         }
       }
-      iVar36 = 0;
+      wordIndex = 0;
       recordPtrC = records + recordWordOffset;
       do {
         recordPtrC = recordPtrC + 1;
-        moreWords = iVar36 != 8;
-        *(uint **)(iVar36 + (int)srcWordPtrFrameBase) = recordPtrC;
-        iVar36 = iVar36 + 4;
+        moreWords = wordIndex != 8;
+        *(uint **)(wordIndex + (int)srcWordPtrFrameBase) = recordPtrC;
+        wordIndex = wordIndex + 4;
       } while (moreWords);
       local_b0.current_version = (dword)(records + recordWordOffset);
       recordWriteMask = (dword *)((int (*)())recordGetWriteMask)(record);
@@ -4366,9 +4370,9 @@ LAB_0007ceb8:
             }
             pdVar15 = recordIndex;
             in_r6 = recordWriteMask;
-            iVar36 = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
-            if (iVar36 != 0) {
-              return iVar36;
+            edgeStatus = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
+            if (edgeStatus != 0) {
+              return edgeStatus;
             }
 LAB_0007ceb4:
             configFlagsPtr = (uint *)alloc[0xd];
@@ -4400,17 +4404,17 @@ LAB_0007ceb4:
         }
         pdVar15 = recordIndex;
         in_r6 = recordWriteMask;
-        iVar36 = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
-        if (iVar36 != 0) {
-          return iVar36;
+        edgeStatus = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
+        if (edgeStatus != 0) {
+          return edgeStatus;
         }
         if ((*record & 0xf00) != 0x300) goto LAB_0007ceb4;
         configFlagsPtr = (uint *)alloc[0xd];
         recordIsSpecialWrite = 1;
       }
       configBit6 = *configFlagsPtr >> 6 & 1;
-      iVar36 = ((int (*)())recordDestFileIs0Or45)(record,configBit6);
-      if (((iVar36 != 0) || (iVar36 = ((int (*)())recordDestFileIs3Or1)(record,configBit6), iVar36 != 0)) &&
+      predResult = ((int (*)())recordDestFileIs0Or45)(record,configBit6);
+      if (((predResult != 0) || (predResult = ((int (*)())recordDestFileIs3Or1)(record,configBit6), predResult != 0)) &&
          (piVar32 = (*(int * *)(recordFlagPtr + (0x1000))), piVar32 != (int *)0x0)) {
         pdVar20 = (dword *)((int)((unsigned char *)0x0) + 1);
         do {
@@ -4423,8 +4427,8 @@ LAB_0007ceb4:
         configFlagsPtr = (uint *)alloc[0xd];
       }
       configBit6 = *configFlagsPtr >> 6 & 1;
-      iVar36 = ((int (*)())recordDestFileIs0Or45)(record,configBit6);
-      if ((iVar36 != 0) || (iVar36 = ((int (*)())recordDestFileIs3Or1)(record,configBit6), iVar36 != 0)) {
+      predResult = ((int (*)())recordDestFileIs0Or45)(record,configBit6);
+      if ((predResult != 0) || (predResult = ((int (*)())recordDestFileIs3Or1)(record,configBit6), predResult != 0)) {
         usedMaskAccum = (uint *)0x0;
         for (configBit6 = recordFlagPtr[0x1000]; configBit6 != 0; configBit6 = *(uint *)(configBit6 + 0x10)) {
           usedMaskAccum = (uint *)((uint)usedMaskAccum | *(uint *)(configBit6 + 4));
@@ -4440,16 +4444,16 @@ LAB_0007ceb4:
       {
         usedBits = 0;
         do {
-          puVar34 = (uint *)(configBit6 + 4);
+          srcWordPtr = (uint *)(configBit6 + 4);
           configBit6 = *(uint *)(configBit6 + 0x10);
-          usedBits = usedBits | *puVar34;
+          usedBits = usedBits | *srcWordPtr;
         } while (configBit6 != 0);
         if ((usedBits & 7) == 2) {
           *(undefined1 *)((int)record + 3) = 6;
           pdVar15 = (dword *)((int (*)())recordGetSourceSelect)(local_b4,3);
           ((int (*)())recordSetSourceSelect)(srcWordPtr0,1,pdVar15);
           if (!noOutputRecords) {
-            iVar36 = 4;
+            predResult = 4;
             outRecordCopyPtr = outRecordsOut + recordWordOffset;
             outRecordSrc = (uint *)local_b0.current_version;
             do {
@@ -4457,22 +4461,22 @@ LAB_0007ceb4:
               outRecordSrc = outRecordSrc + 1;
               *outRecordCopyPtr = configFlagsValue;
               outRecordCopyPtr = outRecordCopyPtr + 1;
-              iVar36 = iVar36 + -1;
-            } while (iVar36 != 0);
+              predResult = predResult + -1;
+            } while (predResult != 0);
           }
           configFlagsPtr = (uint *)alloc[0xd];
           opcodeByte = (char)*record;
         }
       }
       if ((opcodeByte == 'D') &&
-         (iVar36 = ((int (*)())recordDestFileIs0Or45)(record,*configFlagsPtr >> 6 & 1), puVar16 = local_b4, iVar36 != 0)) {
+         (predResult = ((int (*)())recordDestFileIs0Or45)(record,*configFlagsPtr >> 6 & 1), puVar16 = local_b4, predResult != 0)) {
         pdVar20 = (dword *)(*record & 0xff7fffff);
         *record = *record & 0xff6fffff;
         configFlagsPtr = (uint *)alloc[0xd];
         if ((((*configFlagsPtr >> 6 & 1) != 0) &&
-            ((iVar36 = ((int (*)())recordSourceFileIs0)(local_b4), lVar7.offset = local_b0.name.offset, iVar36 != 0 &&
-             (iVar36 = ((int (*)())recordSourceFileIs0)(local_b0.name.offset), dVar29 = local_b0.timestamp, iVar36 != 0)
-             ))) && (iVar36 = ((int (*)())recordSourceFileIs0)(local_b0.timestamp), iVar36 != 0)) {
+            ((predResult = ((int (*)())recordSourceFileIs0)(local_b4), lVar7.offset = local_b0.name.offset, predResult != 0 &&
+             (predResult = ((int (*)())recordSourceFileIs0)(local_b0.name.offset), dVar29 = local_b0.timestamp, predResult != 0)
+             ))) && (predResult = ((int (*)())recordSourceFileIs0)(local_b0.timestamp), predResult != 0)) {
           srcWord0 = *puVar16;
           if (((srcWord0 & 0x1fe0) == (*(uint *)lVar7.offset & 0x1fe0)) &&
              ((srcWord0 & 0x1fe0) == (*(uint *)dVar29 & 0x1fe0))) {
@@ -4527,9 +4531,9 @@ LAB_0007ceb4:
           goto LAB_0007da08;
         }
         configFlagsPtrB = (uint *)alloc[0xd];
-        uVar28 = **(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase);
+        sourceWordValue = **(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase);
         configBit6B = *configFlagsPtrB >> 6;
-        srcFileField = uVar28 & 0xf;
+        srcFileField = sourceWordValue & 0xf;
         if ((srcFileField == 0) || (((srcFileField == 3 || (srcFileField == 1)) && ((configBit6B & 1) != 0)))) {
           sourceIsRegisterFile = true;
         }
@@ -4540,17 +4544,17 @@ LAB_0007ceb4:
           uVar37 = ((int (*)())recordSourceFileIs2)(*(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase));
           puVar27 = (uint *)uVar37;
           if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-            srcSpecialBit = uVar28 >> 4 & 1;
+            srcSpecialBit = sourceWordValue >> 4 & 1;
             if ((configBit6B & 1) != 0) {
-              srcSpecialBit = uVar28 >> 0x1e & 2 | uVar28 >> 4 & 1;
+              srcSpecialBit = sourceWordValue >> 0x1e & 2 | sourceWordValue >> 4 & 1;
             }
-            if ((srcSpecialBit == 1) && (srcSelectBits = uVar28 >> 0x1d & 3, -1 < (int)lastRecordIndex)) {
-              puVar30 = (undefined1 *)0x0;
+            if ((srcSpecialBit == 1) && (srcSelectBits = sourceWordValue >> 0x1d & 3, -1 < (int)lastRecordIndex)) {
+              scanPtr = (undefined1 *)0x0;
               dependentsBase = (int)alloc + iVar36 + 0x450;
-              puVar34 = record;
+              recordPtrAlias = record;
               do {
-                puVar34 = puVar34 + -4;
-                recordCopyWord = *puVar34;
+                recordPtrAlias = recordPtrAlias + -4;
+                recordCopyWord = *recordPtrAlias;
                 uVar37 = ((int (*)())recordDestFileIs3Or1)(&recordCopyWord,*configFlagsPtrB >> 6 & 1);
                 puVar27 = (uint *)uVar37;
                 if ((int)((ulonglong)uVar37 >> 0x20) == 0) {
@@ -4561,13 +4565,13 @@ LAB_0007d968:
                   uVar37 = ((int (*)())recordGetWriteEnable)(&recordCopyWord,srcSelectBits);
                   puVar27 = (uint *)uVar37;
                   if ((int)((ulonglong)uVar37 >> 0x20) == 0) goto LAB_0007d968;
-                  pdVar15 = (dword *)(lastRecordIndex + -(int)puVar30);
+                  pdVar15 = (dword *)(lastRecordIndex + -(int)scanPtr);
                   in_r6 = (dword *)(1 << (srcSelectBits & 0x3f));
                   ((int (*)())depListAddEdge)(alloc,dependentsBase,pdVar15,in_r6,0,0,arena);
                   sourceIsRegisterFile = true;
                   puVar27 = extraout_r4_13;
                 }
-                if ((puVar30 == lastRecordIndex) || (puVar30 = puVar30 + 1, sourceIsRegisterFile)) break;
+                if ((scanPtr == lastRecordIndex) || (scanPtr = scanPtr + 1, sourceIsRegisterFile)) break;
                 configFlagsPtrB = (uint *)alloc[0xd];
               } while( true );
             }

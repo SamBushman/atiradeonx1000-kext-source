@@ -2113,7 +2113,7 @@ int evsAllocLocalConstantRegisters(ctx, shader, programState, symbol)
   int rowsLeft;
   int registerRecordPtr;
   bool noFreeRecordYet;
-  bool bVar1;
+  bool noFreeRegisterYet;
   int registerNumber;
   int registerNumberB;
   int symbolStorage;
@@ -2121,7 +2121,7 @@ int evsAllocLocalConstantRegisters(ctx, shader, programState, symbol)
   undefined1 growFlagValue;
   uint loopIndex;
   int registerRecordOffset;
-  undefined4 uVar9;
+  undefined4 allocatedFlag;
   int rowsLeftB;
   
   symbolStorage = *(int *)(symbol + 0x28);
@@ -2211,16 +2211,16 @@ LAB_000703cc:
     if (dataType != 0x87be) {
       return 1;
     }
-    uVar9 = 0;
+    allocatedFlag = 0;
     loopIndex = 0;
     recordByteOffset = 0;
-    bVar1 = true;
+    noFreeRegisterYet = true;
     *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
     while (loopIndex < *(uint *)(programState + 0x48)) {
-      if (!bVar1) goto LAB_000701ac;
+      if (!noFreeRegisterYet) goto LAB_000701ac;
       if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
-        uVar9 = 1;
-        bVar1 = false;
+        allocatedFlag = 1;
+        noFreeRegisterYet = false;
       }
       else {
         loopIndex = loopIndex + 1;
@@ -2281,19 +2281,19 @@ LAB_000702bc:
     if (dataType == 0x87c0) {
       loopIndex = 0;
       recordByteOffset = 0;
-      bVar1 = true;
+      noFreeRegisterYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 4;
       while (loopIndex < *(int *)(programState + 0x48) - 3U) {
-        if (!bVar1) goto LAB_0006ffbc;
+        if (!noFreeRegisterYet) goto LAB_0006ffbc;
         if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
-          bVar1 = false;
+          noFreeRegisterYet = false;
         }
         else {
           loopIndex = loopIndex + 1;
           recordByteOffset = recordByteOffset + 0x28;
         }
       }
-      if (!bVar1) {
+      if (!noFreeRegisterYet) {
 LAB_0006ffbc:
         registerRecordOffset = loopIndex * 0x28;
         registerRecordPtrC = registerRecordOffset + *(int *)(programState + 0x44);
@@ -2340,16 +2340,16 @@ LAB_0006ffbc:
     if (dataType != 0x87be) {
       return 1;
     }
-    uVar9 = 0;
+    allocatedFlag = 0;
     loopIndex = 0;
     recordByteOffset = 0;
-    bVar1 = true;
+    noFreeRegisterYet = true;
     *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
     while (loopIndex < *(uint *)(programState + 0x48)) {
-      if (!bVar1) goto LAB_000701ac;
+      if (!noFreeRegisterYet) goto LAB_000701ac;
       if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
-        uVar9 = 1;
-        bVar1 = false;
+        allocatedFlag = 1;
+        noFreeRegisterYet = false;
       }
       else {
         loopIndex = loopIndex + 1;
@@ -2357,14 +2357,14 @@ LAB_0006ffbc:
       }
     }
   }
-  if (!bVar1) {
+  if (!noFreeRegisterYet) {
 LAB_000701ac:
     *(uint *)(symbol + 4) = loopIndex;
     *(undefined4 *)(symbol + 8) = 0;
     *(undefined1 *)(loopIndex * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
     return 0;
   }
-  *(char *)(shader + 0x10) = (char)uVar9;
+  *(char *)(shader + 0x10) = (char)allocatedFlag;
   tableSize = *(int *)(programState + 0x48);
   newRegisterTable = (**(code **)(ctx + 0x10))(tableSize + 0x40,0x28);
   (**(code **)(((unsigned char *)0x00001344) + ctx))
@@ -2372,7 +2372,7 @@ LAB_000701ac:
   (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x44));
   *(undefined4 *)(programState + 0x44) = newRegisterTable;
   *(int *)(programState + 0x48) = *(int *)(programState + 0x48) + 0x40;
-  *(undefined4 *)(symbol + 8) = uVar9;
+  *(undefined4 *)(symbol + 8) = allocatedFlag;
 LAB_00070350:
   *(int *)(symbol + 4) = tableSize;
   *(undefined1 *)(tableSize * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
