@@ -508,6 +508,11 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
   uint *vector;
   int coneStamp;
 {
+  int *elseNextInst;
+  int *elseBlockInst;
+  int *thenBlockInst;
+  int ifHeaderCheck;
+  int coneInst;
   int vcall28ResultB;
   int vcall4cResult;
   int vcall28Result;
@@ -516,20 +521,20 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
   int loopIndex;
   byte coneHasInterpLoad;
   byte coneHasFetch;
-  int *piVar3;
-  int *piVar4;
-  int iVar5;
+  int *thenNextInst;
+  int *elseNextInstB;
+  int elseBlock;
   undefined4 branchInst;
-  undefined4 *puVar7;
-  int *piVar8;
-  int iVar9;
+  undefined4 *stackPushSlot;
+  int *stackTopSlot;
+  int thenBlock;
   undefined4 extraout_r4;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
   int iVar10;
-  uint uVar11;
+  uint stackCount;
   
   iVar10 = coneStamp;
   vcall40Result = (**(code **)(*block + 0x40))(block,vector,coneStamp);
@@ -537,30 +542,30 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
     return;
   }
   branchInst = Block__getBranchInst(block,extraout_r4,iVar10,in_r6,in_r7,in_r8,in_r9);
-  uVar11 = vector[1];
-  if (uVar11 < *vector) {
-    _memset(uVar11 * 4 + vector[2],0,4);
-    puVar7 = (undefined4 *)(uVar11 * 4 + vector[2]);
-    vector[1] = uVar11 + 1;
+  stackCount = vector[1];
+  if (stackCount < *vector) {
+    _memset(stackCount * 4 + vector[2],0,4);
+    stackPushSlot = (undefined4 *)(stackCount * 4 + vector[2]);
+    vector[1] = stackCount + 1;
   }
   else {
-    puVar7 = (undefined4 *)Vector__elementRefGrow(vector,uVar11);
+    stackPushSlot = (undefined4 *)Vector__elementRefGrow(vector,stackCount);
   }
-  *puVar7 = branchInst;
+  *stackPushSlot = branchInst;
   coneHasInterpLoad = 0;
-  uVar11 = vector[1];
+  stackCount = vector[1];
   coneHasFetch = 0;
   do {
-    piVar8 = (int *)0x0;
-    if (uVar11 - 1 < vector[1]) {
-      piVar8 = (int *)((uVar11 - 1) * 4 + vector[2]);
+    stackTopSlot = (int *)0x0;
+    if (stackCount - 1 < vector[1]) {
+      stackTopSlot = (int *)((stackCount - 1) * 4 + vector[2]);
     }
-    iVar10 = *piVar8;
+    coneInst = *stackTopSlot;
     Vector__removeAt(vector,vector[1] - 1);
-    if (0 < *(int *)(iVar10 + 0x84)) {
+    if (0 < *(int *)(coneInst + 0x84)) {
       loopIndex = 1;
       do {
-        operandVReg = (int *)IRInst__getOperandSource(iVar10,loopIndex);
+        operandVReg = (int *)IRInst__getOperandSource(coneInst,loopIndex);
         if (operandVReg != (int *)0x0) {
           vcall28Result = (**(code **)(*operandVReg + 0x28))(operandVReg);
           if (vcall28Result == 0) {
@@ -573,63 +578,63 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
             coneHasFetch = 1;
           }
           if ((bool)(coneHasFetch & coneHasInterpLoad)) {
-            iVar9 = block[0x4d];
-            iVar5 = block[0x4e];
-            iVar10 = FUN_000e9294(block);
-            if (iVar10 == 0) goto LAB_0013a198;
-            piVar8 = *(int **)(iVar9 + 0x98);
-            piVar3 = (int *)(*(int **)(iVar9 + 0x98))[2];
+            thenBlock = block[0x4d];
+            elseBlock = block[0x4e];
+            ifHeaderCheck = FUN_000e9294(block);
+            if (ifHeaderCheck == 0) goto LAB_0013a198;
+            thenBlockInst = *(int **)(thenBlock + 0x98);
+            thenNextInst = (int *)(*(int **)(thenBlock + 0x98))[2];
             goto joined_r0x0013a104;
           }
           if (coneStamp != operandVReg[0x54]) {
             operandVReg[0x54] = coneStamp;
-            uVar11 = vector[1];
-            if (uVar11 < *vector) {
-              _memset(uVar11 * 4 + vector[2],0,4);
-              puVar7 = (undefined4 *)(uVar11 * 4 + vector[2]);
-              vector[1] = uVar11 + 1;
+            stackCount = vector[1];
+            if (stackCount < *vector) {
+              _memset(stackCount * 4 + vector[2],0,4);
+              stackPushSlot = (undefined4 *)(stackCount * 4 + vector[2]);
+              vector[1] = stackCount + 1;
             }
             else {
-              puVar7 = (undefined4 *)Vector__elementRefGrow(vector,uVar11);
+              stackPushSlot = (undefined4 *)Vector__elementRefGrow(vector,stackCount);
             }
-            *puVar7 = operandVReg;
+            *stackPushSlot = operandVReg;
           }
         }
         loopIndex = loopIndex + 1;
-      } while (loopIndex <= *(int *)(iVar10 + 0x84));
+      } while (loopIndex <= *(int *)(coneInst + 0x84));
     }
-    uVar11 = vector[1];
-  } while (uVar11 != 0);
+    stackCount = vector[1];
+  } while (stackCount != 0);
 LAB_0013a220:
   block[3] = block[3] | 0x400;
   return;
 joined_r0x0013a104:
-  if (piVar3 == (int *)0x0) goto LAB_0013a148;
-  if ((piVar8[5] & 1U) != 0) {
-    vcall28ResultB = (**(code **)(*piVar8 + 0x28))(piVar8);
+  if (thenNextInst == (int *)0x0) goto LAB_0013a148;
+  if ((thenBlockInst[5] & 1U) != 0) {
+    vcall28ResultB = (**(code **)(*thenBlockInst + 0x28))(thenBlockInst);
     if (vcall28ResultB != 0) goto LAB_0013a220;
-    piVar3 = (int *)piVar8[2];
+    thenNextInst = (int *)thenBlockInst[2];
   }
-  piVar8 = piVar3;
-  piVar3 = (int *)piVar3[2];
+  thenBlockInst = thenNextInst;
+  thenNextInst = (int *)thenNextInst[2];
   goto joined_r0x0013a104;
 LAB_0013a148:
-  piVar8 = *(int **)(iVar5 + 0x98);
-  piVar3 = (int *)piVar8[2];
+  elseBlockInst = *(int **)(elseBlock + 0x98);
+  elseNextInst = (int *)elseBlockInst[2];
   do {
-    piVar4 = piVar3;
-    if (piVar4 == (int *)0x0) {
+    elseNextInstB = elseNextInst;
+    if (elseNextInstB == (int *)0x0) {
 LAB_0013a198:
       block[3] = block[3] | 0x800;
       return;
     }
-    if ((piVar8[5] & 1U) != 0) {
-      vcall28ResultB = (**(code **)(*piVar8 + 0x28))(piVar8);
+    if ((elseBlockInst[5] & 1U) != 0) {
+      vcall28ResultB = (**(code **)(*elseBlockInst + 0x28))(elseBlockInst);
       if (vcall28ResultB != 0) goto LAB_0013a220;
-      piVar4 = (int *)piVar8[2];
+      elseNextInstB = (int *)elseBlockInst[2];
     }
-    piVar3 = (int *)piVar4[2];
-    piVar8 = piVar4;
+    elseNextInst = (int *)elseNextInstB[2];
+    elseBlockInst = elseNextInstB;
   } while( true );
 }
 
@@ -878,71 +883,72 @@ int FUN_0013a644(param_1)
 }
 
 /* FUN_0013a774 @ 0x13a774 (304 bytes) */
-int FUN_0013a774(param_1, param_2, param_3)
-  int *param_1;
-  uint param_2;
-  uint param_3;
+int FUN_0013a774(inst, laneMask, clearLength)
+  int *inst;
+  uint laneMask;
+  uint clearLength;
 {
+  uint usedComponent;
   undefined8 operandRecord;
   undefined8 sourceDef;
   bool moreComponents;
-  uint uVar2;
-  int iVar3;
+  uint userCount;
+  int operandCount;
   uint extraout_r4;
   undefined4 a1;
   uint extraout_r4_00;
   uint loopIndex;
-  uint uVar5;
-  undefined4 uVar6;
-  uint *puVar7;
-  int iVar8;
+  uint remainingMask;
+  undefined4 user;
+  uint *usersVec;
+  int operandIndex;
   undefined8 uVar9;
   
-  puVar7 = (uint *)param_1[4];
-  uVar2 = puVar7[1];
-  uVar5 = param_2;
-  if (uVar2 != 0) {
+  usersVec = (uint *)inst[4];
+  userCount = usersVec[1];
+  remainingMask = laneMask;
+  if (userCount != 0) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar7) {
-        if (uVar2 <= loopIndex) {
-          param_3 = (loopIndex - uVar2) * 4 + 4;
-          _memset(uVar2 * 4 + puVar7[2],0,param_3);
-          puVar7[1] = loopIndex + 1;
-          param_2 = extraout_r4;
+      if (loopIndex < *usersVec) {
+        if (userCount <= loopIndex) {
+          clearLength = (loopIndex - userCount) * 4 + 4;
+          _memset(userCount * 4 + usersVec[2],0,clearLength);
+          usersVec[1] = loopIndex + 1;
+          laneMask = extraout_r4;
         }
-        uVar9 = CONCAT44(loopIndex * 4 + puVar7[2],param_2);
+        uVar9 = CONCAT44(loopIndex * 4 + usersVec[2],laneMask);
       }
       else {
-        uVar9 = Vector__elementRefGrow(puVar7,loopIndex);
+        uVar9 = Vector__elementRefGrow(usersVec,loopIndex);
       }
       a1 = (undefined4)uVar9;
-      uVar6 = *(undefined4 *)((ulonglong)uVar9 >> 0x20);
-      for (iVar8 = 1; iVar3 = (**(code **)(*param_1 + 0x14))(param_1,a1,param_3), iVar8 <= iVar3;
-          iVar8 = iVar8 + 1) {
-        sourceDef = IRInst__getOperandSource(uVar6,iVar8);
+      user = *(undefined4 *)((ulonglong)uVar9 >> 0x20);
+      for (operandIndex = 1; operandCount = (**(code **)(*inst + 0x14))(inst,a1,clearLength), operandIndex <= operandCount;
+          operandIndex = operandIndex + 1) {
+        sourceDef = IRInst__getOperandSource(user,operandIndex);
         a1 = (undefined4)sourceDef;
-        if (param_1 == (int *)((ulonglong)sourceDef >> 0x20)) {
-          iVar3 = 0;
+        if (inst == (int *)((ulonglong)sourceDef >> 0x20)) {
+          operandCount = 0;
           do {
-            operandRecord = IRInst__getOperandRecord(uVar6,iVar8);
+            operandRecord = IRInst__getOperandRecord(user,operandIndex);
             a1 = (undefined4)operandRecord;
-            uVar2 = (uint)*(byte *)(iVar3 + (int)((ulonglong)operandRecord >> 0x20) + 0x10);
-            if ((uVar2 != 4) && (uVar5 = uVar5 & ~(1 << (uVar2 & 0x3f)), uVar5 == 0)) {
+            usedComponent = (uint)*(byte *)(operandCount + (int)((ulonglong)operandRecord >> 0x20) + 0x10);
+            if ((usedComponent != 4) && (remainingMask = remainingMask & ~(1 << (usedComponent & 0x3f)), remainingMask == 0)) {
               return 0;
             }
-            moreComponents = iVar3 != 3;
-            iVar3 = iVar3 + 1;
+            moreComponents = operandCount != 3;
+            operandCount = operandCount + 1;
           } while (moreComponents);
         }
       }
-      puVar7 = (uint *)param_1[4];
+      usersVec = (uint *)inst[4];
       loopIndex = loopIndex + 1;
-      uVar2 = puVar7[1];
-      param_2 = extraout_r4_00;
-    } while (loopIndex < uVar2);
+      userCount = usersVec[1];
+      laneMask = extraout_r4_00;
+    } while (loopIndex < userCount);
   }
-  return uVar5;
+  return remainingMask;
 }
 
 /* FUN_0013a8a4 @ 0x13a8a4 (2372 bytes) */
@@ -1942,24 +1948,31 @@ LAB_0013c188:
 int FUN_0013c210(program)
   int program;
 {
+  undefined4 firstOperandIndex;
+  int *stackTopSlotC;
+  undefined4 *stackTopSlotB;
+  undefined4 *stackTopSlot;
+  undefined4 *orderPushSlot;
+  int stackTopInst;
+  int rootVec;
   int slotByteOffset;
   int sourceDef;
-  bool bVar1;
+  bool descending;
   int iVar2;
-  undefined4 *puVar3;
-  int *piVar4;
+  undefined4 *stackPushSlot;
+  int *stackPushSlotB;
   int callResult;
-  undefined4 uVar6;
-  uint uVar7;
+  undefined4 popKey;
+  uint stackTopIndex;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
   undefined4 in_r10;
-  int iVar8;
+  int rootByteOffset;
   uint loopIndex;
-  undefined4 uVar10;
+  undefined4 keyAtTop;
   uint countBefore;
   int local_58;
   /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
@@ -1992,117 +2005,117 @@ int FUN_0013c210(program)
   vec2Capacity = 2;
   vec2Count = 0;
   vec2Data = Arena__alloc(vec2Arena,8);
-  iVar2 = *(int *)(program + 0x3c4);
+  rootVec = *(int *)(program + 0x3c4);
   loopIndex = 1;
-  iVar8 = 0;
+  rootByteOffset = 0;
   do {
     countBefore = vecCount;
-    if (*(uint *)(iVar2 + 4) < loopIndex) {
+    if (*(uint *)(rootVec + 4) < loopIndex) {
       Arena__free(vec2Arena,vec2Data);
       Arena__free(vecArena,vecData);
       return;
     }
-    local_58 = *(int *)(*(int *)(iVar2 + 8) + iVar8);
+    local_58 = *(int *)(*(int *)(rootVec + 8) + rootByteOffset);
     if ((*(uint *)(local_58 + 0x14) & 1) != 0) {
       if (vecCount < vecCapacity) {
         slotByteOffset = vecCount * 4;
         _memset(slotByteOffset + vecData,0,4);
         vecCount = countBefore + 1;
-        puVar3 = (undefined4 *)(slotByteOffset + vecData);
+        stackPushSlot = (undefined4 *)(slotByteOffset + vecData);
       }
       else {
-        puVar3 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+        stackPushSlot = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
       }
       countBefore = vec2Count;
-      *puVar3 = 0;
+      *stackPushSlot = 0;
       if (vec2Count < vec2Capacity) {
         slotByteOffset = vec2Count * 4;
         _memset(slotByteOffset + vec2Data,0,4);
         vec2Count = countBefore + 1;
-        puVar3 = (undefined4 *)(slotByteOffset + vec2Data);
+        orderPushSlot = (undefined4 *)(slotByteOffset + vec2Data);
       }
       else {
-        puVar3 = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
+        orderPushSlot = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
       }
-      *puVar3 = 0;
-      bVar1 = true;
+      *orderPushSlot = 0;
+      descending = true;
       countBefore = vecCount;
       while (countBefore != 0) {
-        if (bVar1) {
+        if (descending) {
           if ((local_58 == 0) || (*(int *)(program + 0x474) == *(int *)(local_58 + 0x150))) {
-            bVar1 = false;
+            descending = false;
           }
           else {
             *(int *)(local_58 + 0x150) = *(int *)(program + 0x474);
             sourceDef = IRInst__getOperandSource(local_58,1);
             countBefore = vecCount;
             if (sourceDef == 0) {
-              puVar3 = (undefined4 *)0x0;
+              stackTopSlot = (undefined4 *)0x0;
               if (vecCount - 1 < vecCount) {
-                puVar3 = (undefined4 *)((vecCount - 1) * 4 + vecData);
+                stackTopSlot = (undefined4 *)((vecCount - 1) * 4 + vecData);
               }
-              uVar10 = *puVar3;
+              keyAtTop = *stackTopSlot;
 LAB_0013c528:
-              uVar6 = ((int (*)())FUN_0013922c)(&vec2Capacity);
-              ((int (*)())FUN_00139c78)(local_58,uVar10,uVar6,program);
+              popKey = ((int (*)())FUN_0013922c)(&vec2Capacity);
+              ((int (*)())FUN_00139c78)(local_58,keyAtTop,popKey,program);
               goto LAB_0013c540;
             }
             if (vecCount < vecCapacity) {
               slotByteOffset = vecCount * 4;
               _memset(slotByteOffset + vecData,0,4);
               vecCount = countBefore + 1;
-              piVar4 = (int *)(slotByteOffset + vecData);
+              stackPushSlotB = (int *)(slotByteOffset + vecData);
             }
             else {
-              piVar4 = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
+              stackPushSlotB = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
             }
-            *piVar4 = local_58;
-            uVar10 = ((int (*)())FUN_0013a38c)(local_58,&vec2Capacity,program);
+            *stackPushSlotB = local_58;
+            firstOperandIndex = ((int (*)())FUN_0013a38c)(local_58,&vec2Capacity,program);
 LAB_0013c54c:
-            local_58 = IRInst__getOperandSource(local_58,uVar10);
-            bVar1 = true;
+            local_58 = IRInst__getOperandSource(local_58,firstOperandIndex);
+            descending = true;
             countBefore = vecCount;
           }
         }
         else {
-          uVar7 = countBefore - 1;
-          piVar4 = (int *)0x0;
-          if (uVar7 < countBefore) {
-            piVar4 = (int *)(uVar7 * 4 + vecData);
+          stackTopIndex = countBefore - 1;
+          stackTopSlotC = (int *)0x0;
+          if (stackTopIndex < countBefore) {
+            stackTopSlotC = (int *)(stackTopIndex * 4 + vecData);
           }
-          iVar2 = *piVar4;
-          if (iVar2 != 0) {
+          stackTopInst = *stackTopSlotC;
+          if (stackTopInst != 0) {
             if (local_58 != 0) {
-              callResult = FUN_00139190(&vec2Capacity,*(undefined4 *)(iVar2 + 0x84));
+              callResult = FUN_00139190(&vec2Capacity,*(undefined4 *)(stackTopInst + 0x84));
               countBefore = vecCount;
               if (callResult == 0) {
-                uVar10 = ((int (*)())FUN_0013a240)(&vec2Capacity);
-                local_58 = iVar2;
+                firstOperandIndex = ((int (*)())FUN_0013a240)(&vec2Capacity);
+                local_58 = stackTopInst;
                 goto LAB_0013c54c;
               }
             }
             Vector__removeAt(&vecCapacity,countBefore - 1);
             Vector__removeAt(&vec2Capacity,vec2Count - 1);
-            puVar3 = (undefined4 *)0x0;
+            stackTopSlotB = (undefined4 *)0x0;
             if (vecCount - 1 < vecCount) {
-              puVar3 = (undefined4 *)((vecCount - 1) * 4 + vecData);
+              stackTopSlotB = (undefined4 *)((vecCount - 1) * 4 + vecData);
             }
-            uVar10 = *puVar3;
-            local_58 = iVar2;
+            keyAtTop = *stackTopSlotB;
+            local_58 = stackTopInst;
             goto LAB_0013c528;
           }
-          Vector__removeAt(&vecCapacity,uVar7);
+          Vector__removeAt(&vecCapacity,stackTopIndex);
           Vector__removeAt(&vec2Capacity,vec2Count - 1);
-          local_58 = iVar2;
+          local_58 = stackTopInst;
 LAB_0013c540:
-          bVar1 = false;
+          descending = false;
           countBefore = vecCount;
         }
       }
-      iVar2 = *(int *)(program + 0x3c4);
+      rootVec = *(int *)(program + 0x3c4);
     }
     loopIndex = loopIndex + 1;
-    iVar8 = iVar8 + 4;
+    rootByteOffset = rootByteOffset + 4;
   } while( true );
 }
 #undef vecCapacity
@@ -4946,12 +4959,13 @@ int FUN_00141100(param_1, inst, param_3, inst2, param_5)
 }
 
 /* FUN_001411dc @ 0x1411dc (636 bytes) */
-int FUN_001411dc(param_1, inst, inst2, param_4)
-  undefined4 *param_1;
+int FUN_001411dc(pass, inst, inst2, laneMap)
+  undefined4 *pass;
   int inst;
   int inst2;
-  undefined4 param_4;
+  undefined4 laneMap;
 {
+  int operandIdx;
   undefined4 operandSelect;
   int operandRecordB;
   int operandRecord;
@@ -4959,116 +4973,116 @@ int FUN_001411dc(param_1, inst, inst2, param_4)
   int countdownB;
   int countdown;
   int loopIndex;
-  unsigned int ghidra_home[8] = { param_1, inst, inst2, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
-  undefined4 uVar2;
-  int iVar3;
-  byte *pbVar4;
-  byte *pbVar5;
-  int iVar6;
-  int iVar7;
+  unsigned int ghidra_home[8] = { pass, inst, inst2, laneMap, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  bool sameInst;
+  undefined4 selectWordToStore;
+  int normalOperandCount;
+  byte *laneMapCursor;
+  byte *laneMapBase;
+  int lastOperandIndex;
+  int nextOperandIdx;
   int countdownC;
   undefined4 operandSelectB;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44 [7];
+  undefined4 instWriteMask;
+  undefined4 inst2WriteMask;
+  undefined4 operandSelectScratch;
+  undefined4 instOperandSelect;
+  undefined4 newDestSelect [7];
   
-  bVar1 = inst == inst2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  FUN_0011379c(*param_1,inst);
-  FUN_0011379c(*param_1,inst2);
+  sameInst = inst == inst2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = laneMap;
+  FUN_0011379c(*pass,inst);
+  FUN_0011379c(*pass,inst2);
   operandRecord = IRInst__getOperandRecord(inst,0);
-  local_44[0] = *(undefined4 *)(operandRecord + 0x10);
+  newDestSelect[0] = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst2,0);
   operandSelectB = *(undefined4 *)(operandRecord + 0x10);
-  if (bVar1) {
-    local_44[0] = DAT_001b0044;
+  if (sameInst) {
+    newDestSelect[0] = DAT_001b0044;
   }
-  pbVar5 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
+  laneMapBase = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   countdown = 4;
   loopIndex = 0;
-  pbVar4 = pbVar5;
+  laneMapCursor = laneMapBase;
   do {
     if (*(char *)((int)&operandSelectB + loopIndex) != '\x01') {
-      *(char *)((int)local_44 + (uint)*pbVar4) = *(char *)((int)&operandSelectB + loopIndex);
+      *(char *)((int)newDestSelect + (uint)*laneMapCursor) = *(char *)((int)&operandSelectB + loopIndex);
     }
     loopIndex = loopIndex + 1;
-    pbVar4 = pbVar4 + 1;
+    laneMapCursor = laneMapCursor + 1;
     countdown = countdown + -1;
   } while (countdown != 0);
-  *(undefined4 *)(inst + 0x9c) = local_44[0];
-  iVar6 = *(int *)(inst2 + 0x84);
-  iVar3 = iVar6;
+  *(undefined4 *)(inst + 0x9c) = newDestSelect[0];
+  lastOperandIndex = *(int *)(inst2 + 0x84);
+  normalOperandCount = lastOperandIndex;
   if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
-    operandRecord = IRInst__getOperandRecord(inst,iVar6);
-    local_4c = *(undefined4 *)(operandRecord + 0x10);
-    operandRecord = IRInst__getOperandRecord(inst2,iVar6);
+    operandRecord = IRInst__getOperandRecord(inst,lastOperandIndex);
+    operandSelectScratch = *(undefined4 *)(operandRecord + 0x10);
+    operandRecord = IRInst__getOperandRecord(inst2,lastOperandIndex);
     operandSelect = *(undefined4 *)(operandRecord + 0x10);
-    if (bVar1) {
-      local_4c = DAT_001b0038;
+    if (sameInst) {
+      operandSelectScratch = DAT_001b0038;
     }
     loopIndex = 0;
     countdownB = 4;
-    pbVar4 = pbVar5;
+    laneMapCursor = laneMapBase;
     do {
-      if (*(char *)((int)local_44 + loopIndex + -4) != '\x04') {
-        *(byte *)((int)&local_4c + (uint)*pbVar4) = *pbVar4;
+      if (*(char *)((int)newDestSelect + loopIndex + -4) != '\x04') {
+        *(byte *)((int)&operandSelectScratch + (uint)*laneMapCursor) = *laneMapCursor;
       }
-      uVar2 = local_4c;
+      selectWordToStore = operandSelectScratch;
       loopIndex = loopIndex + 1;
-      pbVar4 = pbVar4 + 1;
+      laneMapCursor = laneMapCursor + 1;
       countdownB = countdownB + -1;
     } while (countdownB != 0);
-    iVar3 = iVar6 + -1;
-    iVar6 = IRInst__getOperandRecord(inst,iVar6);
-    *(undefined4 *)(iVar6 + 0x10) = uVar2;
+    normalOperandCount = lastOperandIndex + -1;
+    lastOperandIndex = IRInst__getOperandRecord(inst,lastOperandIndex);
+    *(undefined4 *)(lastOperandIndex + 0x10) = selectWordToStore;
   }
-  if (0 < iVar3) {
-    iVar6 = 1;
+  if (0 < normalOperandCount) {
+    operandIdx = 1;
     do {
-      operandRecordB = IRInst__getOperandRecord(inst,iVar6);
-      local_48 = *(undefined4 *)(operandRecordB + 0x10);
-      operandRecordB = IRInst__getOperandRecord(inst2,iVar6);
-      local_4c = *(undefined4 *)(operandRecordB + 0x10);
-      if (bVar1) {
-        local_48 = DAT_001b0038;
+      operandRecordB = IRInst__getOperandRecord(inst,operandIdx);
+      instOperandSelect = *(undefined4 *)(operandRecordB + 0x10);
+      operandRecordB = IRInst__getOperandRecord(inst2,operandIdx);
+      operandSelectScratch = *(undefined4 *)(operandRecordB + 0x10);
+      if (sameInst) {
+        instOperandSelect = DAT_001b0038;
       }
       loopIndexB = 0;
       countdownC = 4;
-      pbVar4 = pbVar5;
+      laneMapCursor = laneMapBase;
       do {
         if (*(char *)((int)&operandSelectB + loopIndexB) != '\x01') {
-          *(undefined1 *)((int)local_44 + (*pbVar4 - 4)) = *(undefined1 *)((int)&local_4c + loopIndexB);
+          *(undefined1 *)((int)newDestSelect + (*laneMapCursor - 4)) = *(undefined1 *)((int)&operandSelectScratch + loopIndexB);
         }
-        uVar2 = local_48;
+        selectWordToStore = instOperandSelect;
         loopIndexB = loopIndexB + 1;
-        pbVar4 = pbVar4 + 1;
+        laneMapCursor = laneMapCursor + 1;
         countdownC = countdownC + -1;
       } while (countdownC != 0);
-      iVar7 = iVar6 + 1;
-      iVar6 = IRInst__getOperandRecord(inst,iVar6);
-      *(undefined4 *)(iVar6 + 0x10) = uVar2;
-      iVar6 = iVar7;
-    } while (iVar7 <= iVar3);
+      nextOperandIdx = operandIdx + 1;
+      operandIdx = IRInst__getOperandRecord(inst,operandIdx);
+      *(undefined4 *)(operandIdx + 0x10) = selectWordToStore;
+      operandIdx = nextOperandIdx;
+    } while (nextOperandIdx <= normalOperandCount);
   }
-  local_50 = *(undefined4 *)(inst2 + 0xc);
-  local_54 = *(undefined4 *)(inst + 0xc);
-  if (bVar1) {
-    local_54 = DAT_001b0040;
+  inst2WriteMask = *(undefined4 *)(inst2 + 0xc);
+  instWriteMask = *(undefined4 *)(inst + 0xc);
+  if (sameInst) {
+    instWriteMask = DAT_001b0040;
   }
   countdown = 4;
   loopIndex = 0;
   do {
-    if (*(char *)((int)&local_50 + loopIndex) != '\0') {
-      *(undefined1 *)((int)&local_54 + (uint)*pbVar5) = 1;
+    if (*(char *)((int)&inst2WriteMask + loopIndex) != '\0') {
+      *(undefined1 *)((int)&instWriteMask + (uint)*laneMapBase) = 1;
     }
     loopIndex = loopIndex + 1;
-    pbVar5 = pbVar5 + 1;
+    laneMapBase = laneMapBase + 1;
     countdown = countdown + -1;
   } while (countdown != 0);
-  *(undefined4 *)(inst + 0xc) = local_54;
+  *(undefined4 *)(inst + 0xc) = instWriteMask;
   return;
 }
 

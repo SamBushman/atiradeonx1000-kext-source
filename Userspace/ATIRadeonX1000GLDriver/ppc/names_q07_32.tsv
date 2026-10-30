@@ -917,3 +917,157 @@ local	FUN_0013a38c	uVar11	vectorCount	INFERRED	vector[1]: element count before t
 local	FUN_0013a38c	iVar12	pairsRemaining	INFERRED	countdown over the neighbouring pairs of the bubble sort
 local	FUN_0013a38c	local_48	orderKey	INFERRED	packed per-operand order bytes (0xffffffff default, 0x1ffffff for one operand); address-taken byte access
 local	FUN_0013a38c	local_44	useCounts	INFERRED	use count of each operand source (IRInst__useCount), indexed from 0; the bytes just below hold the order
+use	FUN_0013c210	iVar2	rootVec	INFERRED	*(program+0x3c4): vector header of the root insts (element count at +4, data at +8) walked by the outer loop	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c4\);$	+1
+use	FUN_0013c210	iVar2	rootVec	INFERRED	*(program+0x3c4): vector header of the root insts (element count at +4, data at +8) walked by the outer loop	^\s*if\ \(\*\(uint\ \*\)\(iVar2\ \+\ 4\)\ <\ uVar9\)\ \{$	+1
+use	FUN_0013c210	iVar2	rootVec	INFERRED	*(program+0x3c4): vector header of the root insts (element count at +4, data at +8) walked by the outer loop	^\s*local_58\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ \+\ iVar8\);$	+1
+use	FUN_0013c210	iVar2	rootVec	INFERRED	*(program+0x3c4): vector header of the root insts (element count at +4, data at +8) walked by the outer loop	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3c4\);$@2	+1
+use	FUN_0013c210	iVar2	stackTopInst	INFERRED	inst read from the top of the DFS stack (vecData)	^\s*iVar2\ =\ \*piVar4;$	+2
+use	FUN_0013c210	iVar2	stackTopInst	INFERRED	inst read from the top of the DFS stack (vecData)	^\s*iVar5\ =\ FUN_00139190\(\&local_44,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x84\)\);$	+1
+use	FUN_0013c210	iVar2	stackTopInst	INFERRED	inst read from the top of the DFS stack (vecData)	^\s*local_58\ =\ iVar2;$	+1
+use	FUN_0013c210	iVar2	stackTopInst	INFERRED	inst read from the top of the DFS stack (vecData)	^\s*local_58\ =\ iVar2;$@2	+1
+use	FUN_0013c210	iVar2	stackTopInst	INFERRED	inst read from the top of the DFS stack (vecData)	^\s*local_58\ =\ iVar2;$@3	+1
+local	FUN_0013c210	iVar8	rootByteOffset	INFERRED	byte offset (index*4) of the current root inst in the root vector
+local	FUN_0013c210	bVar1	descending	INFERRED	true while walking down into operands (push), false while unwinding the stack
+use	FUN_0013c210	puVar3	stackPushSlot	INFERRED	address of the pushed DFS stack slot	^\s*puVar3\ =\ \(undefined4\ \*\)\(iVar2\ \+\ local_4c\);$	+1
+use	FUN_0013c210	puVar3	stackPushSlot	INFERRED	address of the pushed DFS stack slot	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_54,local_50\);$	+1
+use	FUN_0013c210	puVar3	stackPushSlot	INFERRED	address of the pushed DFS stack slot	^\s*\*puVar3\ =\ 0;$	+1
+use	FUN_0013c210	puVar3	orderPushSlot	INFERRED	address of the pushed operand-order slot (vec2Data)	^\s*puVar3\ =\ \(undefined4\ \*\)\(iVar2\ \+\ local_3c\);$	+1
+use	FUN_0013c210	puVar3	orderPushSlot	INFERRED	address of the pushed operand-order slot (vec2Data)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,local_40\);$	+1
+use	FUN_0013c210	puVar3	orderPushSlot	INFERRED	address of the pushed operand-order slot (vec2Data)	^\s*\*puVar3\ =\ 0;$@2	+1
+use	FUN_0013c210	puVar3	stackTopSlot	INFERRED	address of the top DFS stack entry (null when empty)	^\s*puVar3\ =\ \(undefined4\ \*\)0x0;$	+1
+use	FUN_0013c210	puVar3	stackTopSlot	INFERRED	address of the top DFS stack entry (null when empty)	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(local_50\ \-\ 1\)\ \*\ 4\ \+\ local_4c\);$	+1
+use	FUN_0013c210	puVar3	stackTopSlot	INFERRED	address of the top DFS stack entry (null when empty)	^\s*uVar10\ =\ \*puVar3;$	+1
+use	FUN_0013c210	puVar3	stackTopSlotB	INFERRED	address of the top DFS stack entry read for the visit order key	^\s*puVar3\ =\ \(undefined4\ \*\)0x0;$@2	+1
+use	FUN_0013c210	puVar3	stackTopSlotB	INFERRED	address of the top DFS stack entry read for the visit order key	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(local_50\ \-\ 1\)\ \*\ 4\ \+\ local_4c\);$@2	+1
+use	FUN_0013c210	puVar3	stackTopSlotB	INFERRED	address of the top DFS stack entry read for the visit order key	^\s*uVar10\ =\ \*puVar3;$@2	+1
+use	FUN_0013c210	piVar4	stackPushSlotB	INFERRED	address of the DFS stack slot written with the current inst	^\s*piVar4\ =\ \(int\ \*\)\(iVar2\ \+\ local_4c\);$	+1
+use	FUN_0013c210	piVar4	stackPushSlotB	INFERRED	address of the DFS stack slot written with the current inst	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(\&local_54,local_50\);$	+1
+use	FUN_0013c210	piVar4	stackPushSlotB	INFERRED	address of the DFS stack slot written with the current inst	^\s*\*piVar4\ =\ local_58;$	+1
+use	FUN_0013c210	piVar4	stackTopSlotC	INFERRED	address of the top DFS stack entry (null when empty) on the unwind path	^\s*piVar4\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0013c210	piVar4	stackTopSlotC	INFERRED	address of the top DFS stack entry (null when empty) on the unwind path	^\s*piVar4\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ local_4c\);$	+1
+use	FUN_0013c210	piVar4	stackTopSlotC	INFERRED	address of the top DFS stack entry (null when empty) on the unwind path	^\s*iVar2\ =\ \*piVar4;$	+1
+local	FUN_0013c210	uVar6	popKey	INFERRED	FUN_0013922c(&vec2): visit-order key popped from the order vector
+local	FUN_0013c210	uVar7	stackTopIndex	INFERRED	vecCount - 1: index of the DFS stack top
+use	FUN_0013c210	uVar10	keyAtTop	INFERRED	top stack entry passed to FUN_00139c78 with the popped key	^\s*uVar10\ =\ \*puVar3;$	+1
+use	FUN_0013c210	uVar10	keyAtTop	INFERRED	top stack entry passed to FUN_00139c78 with the popped key	^\s*\(\(int\ \(\*\)\(\)\)FUN_00139c78\)\(local_58,uVar10,uVar6,param_1\);$	+1
+use	FUN_0013c210	uVar10	keyAtTop	INFERRED	top stack entry passed to FUN_00139c78 with the popped key	^\s*uVar10\ =\ \*puVar3;$@2	+1
+use	FUN_0013c210	uVar10	firstOperandIndex	INFERRED	FUN_0013a38c result: first operand index to descend into	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a38c\)\(local_58,\&local_44,param_1\);$	+1
+use	FUN_0013c210	uVar10	firstOperandIndex	INFERRED	FUN_0013a38c result: first operand index to descend into	^\s*local_58\ =\ FUN_00105594\(local_58,uVar10\);$	+1
+use	FUN_0013c210	uVar10	firstOperandIndex	INFERRED	FUN_0013a38c result: first operand index to descend into	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_0013a240\)\(\&local_44\);$	+1
+local	FUN_0013a774	param_1	inst	INFERRED	users of this inst are scanned (its vtable +0x14 operand count is used for the users, +0x10 field is its users vector)
+local	FUN_0013a774	param_2	laneMask	INFERRED	initial lane mask; lanes used by users are cleared from it
+local	FUN_0013a774	param_3	clearLength	INFERRED	byte length of the _memset that extends the users vector (stale argument of later calls)
+local	FUN_0013a774	uVar5	remainingMask	INFERRED	laneMask minus the components read by users of inst; returns 0 as soon as nothing is left
+local	FUN_0013a774	uVar6	user	INFERRED	user inst read from the users vector
+local	FUN_0013a774	puVar7	usersVec	INFERRED	inst[4]: users vector header
+use	FUN_0013a774	uVar2	userCount	INFERRED	users vector element count	^\s*uVar2\ =\ puVar7\[1\];$	+1
+use	FUN_0013a774	uVar2	userCount	INFERRED	users vector element count	^\s*if\ \(uVar2\ !=\ 0\)\ \{$	+1
+use	FUN_0013a774	uVar2	userCount	INFERRED	users vector element count	^\s*if\ \(uVar2\ <=\ uVar4\)\ \{$	+3
+use	FUN_0013a774	uVar2	userCount	INFERRED	users vector element count	^\s*uVar2\ =\ puVar7\[1\];$@2	+1
+use	FUN_0013a774	uVar2	userCount	INFERRED	users vector element count	^\s*\}\ while\ \(uVar4\ <\ uVar2\);$	+1
+use	FUN_0013a774	uVar2	usedComponent	INFERRED	component byte of the user operand select, 4 = unused	^\s*uVar2\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ \(int\)\(\(ulonglong\)uVar9\ >>\ 0x20\)\ \+\ 0x10\);$	+2
+local	FUN_0013a774	iVar3	operandCount	INFERRED	vtable +0x14 operand count of the inst (loop bound)
+local	FUN_0013a774	iVar8	operandIndex	INFERRED	user operand index 1..operandCount
+local	FUN_001411dc	param_1	pass	INFERRED	*param_1 is the compiler passed to FUN_0011379c, like pass in the sibling lane helpers
+local	FUN_001411dc	param_4	laneMap	INFERRED	4-byte lane map (spilled to ghidra_home+12): byte i is the destination lane of lane i of inst2
+use	FUN_001411dc	bVar1	sameInst	INFERRED	inst == inst2: select words are replaced by identity constants	^\s*bVar1\ =\ param_2\ ==\ param_3;$	+1
+use	FUN_001411dc	bVar1	sameInst	INFERRED	inst == inst2: select words are replaced by identity constants	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_001411dc	bVar1	sameInst	INFERRED	inst == inst2: select words are replaced by identity constants	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_001411dc	bVar1	sameInst	INFERRED	inst == inst2: select words are replaced by identity constants	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	FUN_001411dc	bVar1	sameInst	INFERRED	inst == inst2: select words are replaced by identity constants	^\s*if\ \(bVar1\)\ \{$@4	+1
+use	FUN_001411dc	pbVar5	laneMapBase	INFERRED	byte pointer to laneMap	^\s*pbVar5\ =\ \(byte\ \*\)\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 12\)\);$	+1
+use	FUN_001411dc	pbVar5	laneMapBase	INFERRED	byte pointer to laneMap	^\s*pbVar4\ =\ pbVar5;$	+1
+use	FUN_001411dc	pbVar5	laneMapBase	INFERRED	byte pointer to laneMap	^\s*pbVar4\ =\ pbVar5;$@2	+1
+use	FUN_001411dc	pbVar5	laneMapBase	INFERRED	byte pointer to laneMap	^\s*pbVar4\ =\ pbVar5;$@3	+1
+use	FUN_001411dc	pbVar5	laneMapBase	INFERRED	byte pointer to laneMap	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_54\ \+\ \(uint\)\*pbVar5\)\ =\ 1;$	+1
+use	FUN_001411dc	pbVar5	laneMapBase	INFERRED	byte pointer to laneMap	^\s*pbVar5\ =\ pbVar5\ \+\ 1;$	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*pbVar4\ =\ pbVar5;$	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*\*\(char\ \*\)\(\(int\)local_44\ \+\ \(uint\)\*pbVar4\)\ =\ \*\(char\ \*\)\(\(int\)\&local_58\ \+\ iVar3\);$	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*pbVar4\ =\ pbVar4\ \+\ 1;$	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*pbVar4\ =\ pbVar5;$@2	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*\*\(byte\ \*\)\(\(int\)\&local_4c\ \+\ \(uint\)\*pbVar4\)\ =\ \*pbVar4;$	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*pbVar4\ =\ pbVar4\ \+\ 1;$@2	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*pbVar4\ =\ pbVar5;$@3	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*\*\(undefined1\ \*\)\(\(int\)local_44\ \+\ \(\*pbVar4\ \-\ 4\)\)\ =\ \*\(undefined1\ \*\)\(\(int\)\&local_4c\ \+\ iVar7\);$	+1
+use	FUN_001411dc	pbVar4	laneMapCursor	INFERRED	walks laneMap one lane at a time	^\s*pbVar4\ =\ pbVar4\ \+\ 1;$@3	+1
+use	FUN_001411dc	iVar6	lastOperandIndex	INFERRED	*(inst2+0x84): index of the last operand (the extra source when flag 0x200 is set)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x84\);$	+2
+use	FUN_001411dc	iVar6	lastOperandIndex	INFERRED	*(inst2+0x84): index of the last operand (the extra source when flag 0x200 is set)	^\s*iVar3\ =\ FUN_001054ec\(param_2,iVar6\);$	+1
+use	FUN_001411dc	iVar6	lastOperandIndex	INFERRED	*(inst2+0x84): index of the last operand (the extra source when flag 0x200 is set)	^\s*iVar3\ =\ FUN_001054ec\(param_3,iVar6\);$	+1
+use	FUN_001411dc	iVar6	lastOperandIndex	INFERRED	*(inst2+0x84): index of the last operand (the extra source when flag 0x200 is set)	^\s*iVar3\ =\ iVar6\ \+\ \-1;$	+3
+use	FUN_001411dc	iVar6	operandIdx	INFERRED	operand index 1..operand limit	^\s*iVar6\ =\ 1;$	+1
+use	FUN_001411dc	iVar6	operandIdx	INFERRED	operand index 1..operand limit	^\s*iVar7\ =\ FUN_001054ec\(param_2,iVar6\);$	+1
+use	FUN_001411dc	iVar6	operandIdx	INFERRED	operand index 1..operand limit	^\s*iVar7\ =\ FUN_001054ec\(param_3,iVar6\);$	+1
+use	FUN_001411dc	iVar6	operandIdx	INFERRED	operand index 1..operand limit	^\s*iVar7\ =\ iVar6\ \+\ 1;$	+4
+use	FUN_001411dc	iVar3	normalOperandCount	INFERRED	number of ordinary operands: the last operand index, minus one when an extra source exists	^\s*iVar3\ =\ iVar6;$	+1
+use	FUN_001411dc	iVar3	normalOperandCount	INFERRED	number of ordinary operands: the last operand index, minus one when an extra source exists	^\s*iVar3\ =\ iVar6\ \+\ \-1;$	+1
+use	FUN_001411dc	iVar3	normalOperandCount	INFERRED	number of ordinary operands: the last operand index, minus one when an extra source exists	^\s*if\ \(0\ <\ iVar3\)\ \{$	+1
+use	FUN_001411dc	iVar3	normalOperandCount	INFERRED	number of ordinary operands: the last operand index, minus one when an extra source exists	^\s*\}\ while\ \(iVar7\ <=\ iVar3\);$	+1
+use	FUN_001411dc	iVar7	nextOperandIdx	INFERRED	operandIdx + 1 kept for the loop test	^\s*iVar7\ =\ iVar6\ \+\ 1;$	+1
+use	FUN_001411dc	iVar7	nextOperandIdx	INFERRED	operandIdx + 1 kept for the loop test	^\s*iVar6\ =\ iVar7;$	+2
+use	FUN_001411dc	uVar2	selectWordToStore	INFERRED	merged select word stored into the operand record +0x10	^\s*uVar2\ =\ local_4c;$	+1
+use	FUN_001411dc	uVar2	selectWordToStore	INFERRED	merged select word stored into the operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar2;$	+1
+use	FUN_001411dc	uVar2	selectWordToStore	INFERRED	merged select word stored into the operand record +0x10	^\s*uVar2\ =\ local_48;$	+1
+use	FUN_001411dc	uVar2	selectWordToStore	INFERRED	merged select word stored into the operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar2;$@2	+1
+local	FUN_001411dc	local_54	instWriteMask	INFERRED	write mask word of inst (+0xc), lanes of inst2 marked 1 through laneMap
+local	FUN_001411dc	local_50	inst2WriteMask	INFERRED	write mask word of inst2 (+0xc)
+local	FUN_001411dc	local_4c	operandSelectScratch	INFERRED	select word of the last operand of inst, then of the current operand of inst2
+local	FUN_001411dc	local_48	instOperandSelect	INFERRED	select word of operand iVar6 of inst, merged and stored back
+local	FUN_001411dc	local_44	newDestSelect	INFERRED	destination select of inst merged with inst2 through laneMap (word 0); the bytes below hold the per-operand merge
+use	Block__scanBranchConeForFetchAndInterp	iVar10	coneInst	INFERRED	inst popped from the cone stack	^\s*iVar10\ =\ \*piVar8;$	+1
+use	Block__scanBranchConeForFetchAndInterp	iVar10	coneInst	INFERRED	inst popped from the cone stack	^\s*if\ \(0\ <\ \*\(int\ \*\)\(iVar10\ \+\ 0x84\)\)\ \{$	+1
+use	Block__scanBranchConeForFetchAndInterp	iVar10	coneInst	INFERRED	inst popped from the cone stack	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(iVar10,iVar5\);$	+1
+use	Block__scanBranchConeForFetchAndInterp	iVar10	coneInst	INFERRED	inst popped from the cone stack	^\s*\}\ while\ \(iVar5\ <=\ \*\(int\ \*\)\(iVar10\ \+\ 0x84\)\);$	+1
+use	Block__scanBranchConeForFetchAndInterp	iVar10	ifHeaderCheck	INFERRED	FUN_000e9294(block): nonzero when block is an if header with then/else blocks	^\s*iVar10\ =\ FUN_000e9294\(param_1\);$	+2
+use	Block__scanBranchConeForFetchAndInterp	iVar9	thenBlock	INFERRED	block[0x4d]: then block	^\s*iVar9\ =\ param_1\[0x4d\];$	+1
+use	Block__scanBranchConeForFetchAndInterp	iVar9	thenBlock	INFERRED	block[0x4d]: then block	^\s*piVar8\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x98\);$	+2
+use	Block__scanBranchConeForFetchAndInterp	iVar5	elseBlock	INFERRED	block[0x4e]: else block	^\s*iVar5\ =\ param_1\[0x4e\];$	+1
+use	Block__scanBranchConeForFetchAndInterp	iVar5	elseBlock	INFERRED	block[0x4e]: else block	^\s*piVar8\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 0x98\);$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	stackTopSlot	INFERRED	address of the top cone stack entry (null when empty)	^\s*piVar8\ =\ \(int\ \*\)0x0;$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	stackTopSlot	INFERRED	address of the top cone stack entry (null when empty)	^\s*piVar8\ =\ \(int\ \*\)\(\(uVar11\ \-\ 1\)\ \*\ 4\ \+\ param_2\[2\]\);$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	stackTopSlot	INFERRED	address of the top cone stack entry (null when empty)	^\s*iVar10\ =\ \*piVar8;$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	thenBlockInst	INFERRED	inst cursor over the then block list (+0x98)	^\s*piVar8\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x98\);$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	thenBlockInst	INFERRED	inst cursor over the then block list (+0x98)	^\s*if\ \(\(piVar8\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+2
+use	Block__scanBranchConeForFetchAndInterp	piVar8	thenBlockInst	INFERRED	inst cursor over the then block list (+0x98)	^\s*piVar3\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	thenBlockInst	INFERRED	inst cursor over the then block list (+0x98)	^\s*piVar8\ =\ piVar3;$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	elseBlockInst	INFERRED	inst cursor over the else block list (+0x98)	^\s*piVar8\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 0x98\);$	+2
+use	Block__scanBranchConeForFetchAndInterp	piVar8	elseBlockInst	INFERRED	inst cursor over the else block list (+0x98)	^\s*if\ \(\(piVar8\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$@2	+2
+use	Block__scanBranchConeForFetchAndInterp	piVar8	elseBlockInst	INFERRED	inst cursor over the else block list (+0x98)	^\s*piVar4\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar8	elseBlockInst	INFERRED	inst cursor over the else block list (+0x98)	^\s*piVar8\ =\ piVar4;$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar3	thenNextInst	INFERRED	next inst of the then block list	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar9\ \+\ 0x98\)\)\[2\];$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar3	thenNextInst	INFERRED	next inst of the then block list	^\s*if\ \(piVar3\ ==\ \(int\ \*\)0x0\)\ goto\ LAB_0013a148;$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar3	thenNextInst	INFERRED	next inst of the then block list	^\s*piVar3\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar3	thenNextInst	INFERRED	next inst of the then block list	^\s*piVar8\ =\ piVar3;$	+2
+use	Block__scanBranchConeForFetchAndInterp	piVar3	elseNextInst	INFERRED	next inst of the else block list	^\s*piVar3\ =\ \(int\ \*\)piVar8\[2\];$@2	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar3	elseNextInst	INFERRED	next inst of the else block list	^\s*piVar4\ =\ piVar3;$	+1
+use	Block__scanBranchConeForFetchAndInterp	piVar3	elseNextInst	INFERRED	next inst of the else block list	^\s*piVar3\ =\ \(int\ \*\)piVar4\[2\];$	+1
+local	Block__scanBranchConeForFetchAndInterp	piVar4	elseNextInstB	INFERRED	candidate next inst in the else block scan
+local	Block__scanBranchConeForFetchAndInterp	puVar7	stackPushSlot	INFERRED	address of the pushed cone stack slot
+local	Block__scanBranchConeForFetchAndInterp	uVar11	stackCount	INFERRED	cone stack element count before the push / pop
+local	KeyLaneTable__eqKeys	param_1	keyA	INFERRED	first table key: +4 = key record, +8 = lane index
+local	KeyLaneTable__eqKeys	param_2	keyB	INFERRED	second table key: +4 = key record, +8 = lane index
+local	KeyLaneTable__eqKeys	iVar12	recordA	INFERRED	*(keyA+4): key record of the first key
+use	KeyLaneTable__eqKeys	iVar10	recordB	INFERRED	*(keyB+4): key record of the second key	^\s*iVar10\ =\ \*\(int\ \*\)\(param_2\ \+\ 4\);$	+1
+use	KeyLaneTable__eqKeys	iVar10	recordB	INFERRED	*(keyB+4): key record of the second key	^\s*iVar6\ =\ iVar10\ \+\ 0xb4;$	+4
+use	KeyLaneTable__eqKeys	iVar10	cursorB	INFERRED	per-operand entry cursor of the second key (starts at slot +0x14, step 0x20)	^\s*iVar10\ =\ iVar3\ \+\ 0x14;$	+1
+use	KeyLaneTable__eqKeys	iVar10	cursorB	INFERRED	per-operand entry cursor of the second key (starts at slot +0x14, step 0x20)	^\s*if\ \(\(\(iVar7\ ==\ 0\)\ \|\|\ \(\*\(int\ \*\)\(iVar5\ \+\ 0x108\)\ !=\ \*\(int\ \*\)\(iVar6\ \+\ 0x108\)\)\)\ \|\|$	+2
+use	KeyLaneTable__eqKeys	iVar10	cursorB	INFERRED	per-operand entry cursor of the second key (starts at slot +0x14, step 0x20)	^\s*piVar2\ =\ \(int\ \*\)\(iVar10\ \+\ 0x30\);$	+1
+use	KeyLaneTable__eqKeys	iVar10	cursorB	INFERRED	per-operand entry cursor of the second key (starts at slot +0x14, step 0x20)	^\s*iVar10\ =\ iVar10\ \+\ 0x20;$	+1
+use	KeyLaneTable__eqKeys	iVar8	laneB	INFERRED	*(keyB+8): lane index of the second key	^\s*iVar8\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+1
+use	KeyLaneTable__eqKeys	iVar8	laneB	INFERRED	*(keyB+8): lane index of the second key	^\s*iVar3\ =\ iVar8\ \*\ 4\ \+\ iVar6;$	+1
+use	KeyLaneTable__eqKeys	iVar8	cursorA	INFERRED	per-operand entry cursor of the first key (starts at slot +0x14, step 0x20)	^\s*iVar8\ =\ iVar7\ \+\ 0x14;$	+1
+use	KeyLaneTable__eqKeys	iVar8	cursorA	INFERRED	per-operand entry cursor of the first key (starts at slot +0x14, step 0x20)	^\s*if\ \(\(\(iVar7\ ==\ 0\)\ \|\|\ \(\*\(int\ \*\)\(iVar5\ \+\ 0x108\)\ !=\ \*\(int\ \*\)\(iVar6\ \+\ 0x108\)\)\)\ \|\|$	+3
+use	KeyLaneTable__eqKeys	iVar8	cursorA	INFERRED	per-operand entry cursor of the first key (starts at slot +0x14, step 0x20)	^\s*iVar8\ =\ iVar8\ \+\ 0x20;$	+1
+local	KeyLaneTable__eqKeys	piVar9	keyInst	INFERRED	*(recordA+0xb0): inst whose operand count (vtable +0x14) bounds the per-operand compare
+local	KeyLaneTable__eqKeys	iVar5	fieldsA	INFERRED	recordA + 0xb4: key fields of the first record
+local	KeyLaneTable__eqKeys	iVar6	fieldsB	INFERRED	recordB + 0xb4: key fields of the second record
+use	KeyLaneTable__eqKeys	iVar3	opcodeCheck	INFERRED	FUN_0011379c(recordA+0x238, keyInst): the opcode accepts keyed lanes	^\s*iVar3\ =\ FUN_0011379c\(\*\(undefined4\ \*\)\(iVar12\ \+\ 0x238\),piVar9\);$	+1
+use	KeyLaneTable__eqKeys	iVar3	opcodeCheck	INFERRED	FUN_0011379c(recordA+0x238, keyInst): the opcode accepts keyed lanes	^\s*if\ \(\(\(\(iVar3\ ==\ 0\)\ \|\|\ \(\*\(int\ \*\)\(iVar12\ \+\ 0xb4\)\ !=\ \*\(int\ \*\)\(iVar10\ \+\ 0xb4\)\)\)\ \|\|$	+3
+use	KeyLaneTable__eqKeys	iVar3	laneSlotB	INFERRED	laneB * 4 + fieldsB	^\s*iVar3\ =\ iVar8\ \*\ 4\ \+\ iVar6;$	+1
+use	KeyLaneTable__eqKeys	iVar3	laneSlotB	INFERRED	laneB * 4 + fieldsB	^\s*iVar10\ =\ iVar3\ \+\ 0x14;$	+1
+use	KeyLaneTable__eqKeys	iVar3	laneSlotB	INFERRED	laneB * 4 + fieldsB	^\s*puVar13\ =\ \(undefined4\ \*\)\(iVar3\ \+\ 0xc4\);$	+1
+use	KeyLaneTable__eqKeys	iVar3	operandIdx	INFERRED	compare loop operand index 1..operand count	^\s*for\ \(iVar3\ =\ 1;\ iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ iVar3\ <=\ iVar7;\ iVar3\ =\ iVar3\ \+\ 1$	+2
+local	KeyLaneTable__eqKeys	puVar11	selectCursorA	INFERRED	per-operand select words of the first key (slot + 0xc4, step 0x10)
+local	KeyLaneTable__eqKeys	puVar13	selectCursorB	INFERRED	per-operand select words of the second key (slot + 0xc4, step 0x10)
+local	KeyLaneTable__eqKeys	piVar1	laneFieldPtrA	INFERRED	per-operand field at +0x30 of the first key entry
+local	KeyLaneTable__eqKeys	piVar2	laneFieldPtrB	INFERRED	per-operand field at +0x30 of the second key entry
+local	KeyLaneTable__eqKeys	uVar4	result	INFERRED	0 when the keys are equal, 0xffffffff otherwise

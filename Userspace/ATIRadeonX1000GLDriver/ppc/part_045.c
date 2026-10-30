@@ -4074,63 +4074,67 @@ int KeyLaneTable__hashByOpcode(param_1)
 }
 
 /* KeyLaneTable__eqKeys @ 0x172bd0 (332 bytes) */
-int KeyLaneTable__eqKeys(param_1, param_2)
-  int param_1;
-  int param_2;
+int KeyLaneTable__eqKeys(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  int iVar6;
+  int operandIdx;
+  int laneSlotB;
+  int cursorA;
+  int cursorB;
+  int *laneFieldPtrA;
+  int *laneFieldPtrB;
+  int opcodeCheck;
+  undefined4 result;
+  int fieldsA;
+  int fieldsB;
   int iVar7;
-  int iVar8;
-  int *piVar9;
-  int iVar10;
-  undefined4 *puVar11;
-  int iVar12;
-  undefined4 *puVar13;
+  int laneB;
+  int *keyInst;
+  int recordB;
+  undefined4 *selectCursorA;
+  int recordA;
+  undefined4 *selectCursorB;
   
-  iVar12 = *(int *)(param_1 + 4);
-  iVar10 = *(int *)(param_2 + 4);
-  piVar9 = *(int **)(iVar12 + 0xb0);
-  iVar7 = *(int *)(param_1 + 8);
-  iVar8 = *(int *)(param_2 + 8);
-  iVar3 = FUN_0011379c(*(undefined4 *)(iVar12 + 0x238),piVar9);
-  iVar5 = iVar12 + 0xb4;
-  iVar6 = iVar10 + 0xb4;
-  if ((((iVar3 == 0) || (*(int *)(iVar12 + 0xb4) != *(int *)(iVar10 + 0xb4))) ||
-      (*(int *)(iVar12 + 0xc0) != *(int *)(iVar10 + 0xc0))) ||
-     (*(int *)(iVar12 + 0xc4) != *(int *)(iVar10 + 0xc4))) {
+  recordA = *(int *)(keyA + 4);
+  recordB = *(int *)(keyB + 4);
+  keyInst = *(int **)(recordA + 0xb0);
+  iVar7 = *(int *)(keyA + 8);
+  laneB = *(int *)(keyB + 8);
+  opcodeCheck = FUN_0011379c(*(undefined4 *)(recordA + 0x238),keyInst);
+  fieldsA = recordA + 0xb4;
+  fieldsB = recordB + 0xb4;
+  if ((((opcodeCheck == 0) || (*(int *)(recordA + 0xb4) != *(int *)(recordB + 0xb4))) ||
+      (*(int *)(recordA + 0xc0) != *(int *)(recordB + 0xc0))) ||
+     (*(int *)(recordA + 0xc4) != *(int *)(recordB + 0xc4))) {
 LAB_00172d04:
-    uVar4 = 0xffffffff;
+    result = 0xffffffff;
   }
   else {
-    iVar7 = iVar7 * 4 + iVar5;
-    iVar3 = iVar8 * 4 + iVar6;
-    iVar8 = iVar7 + 0x14;
-    iVar10 = iVar3 + 0x14;
-    puVar11 = (undefined4 *)(iVar7 + 0xc4);
-    puVar13 = (undefined4 *)(iVar3 + 0xc4);
-    for (iVar3 = 1; iVar7 = (**(code **)(*piVar9 + 0x14))(piVar9), iVar3 <= iVar7; iVar3 = iVar3 + 1
+    iVar7 = iVar7 * 4 + fieldsA;
+    laneSlotB = laneB * 4 + fieldsB;
+    cursorA = iVar7 + 0x14;
+    cursorB = laneSlotB + 0x14;
+    selectCursorA = (undefined4 *)(iVar7 + 0xc4);
+    selectCursorB = (undefined4 *)(laneSlotB + 0xc4);
+    for (operandIdx = 1; iVar7 = (**(code **)(*keyInst + 0x14))(keyInst), operandIdx <= iVar7; operandIdx = operandIdx + 1
         ) {
-      iVar7 = Ptr__equalNonNull(*puVar11,*puVar13);
-      if (((iVar7 == 0) || (*(int *)(iVar5 + 0x108) != *(int *)(iVar6 + 0x108))) ||
-         (*(int *)(iVar8 + 0x20) != *(int *)(iVar10 + 0x20))) goto LAB_00172d04;
-      piVar1 = (int *)(iVar8 + 0x30);
-      iVar5 = iVar5 + 4;
-      piVar2 = (int *)(iVar10 + 0x30);
-      iVar8 = iVar8 + 0x20;
-      iVar10 = iVar10 + 0x20;
-      iVar6 = iVar6 + 4;
-      puVar11 = puVar11 + 4;
-      puVar13 = puVar13 + 4;
-      if (*piVar1 != *piVar2) goto LAB_00172d04;
+      iVar7 = Ptr__equalNonNull(*selectCursorA,*selectCursorB);
+      if (((iVar7 == 0) || (*(int *)(fieldsA + 0x108) != *(int *)(fieldsB + 0x108))) ||
+         (*(int *)(cursorA + 0x20) != *(int *)(cursorB + 0x20))) goto LAB_00172d04;
+      laneFieldPtrA = (int *)(cursorA + 0x30);
+      fieldsA = fieldsA + 4;
+      laneFieldPtrB = (int *)(cursorB + 0x30);
+      cursorA = cursorA + 0x20;
+      cursorB = cursorB + 0x20;
+      fieldsB = fieldsB + 4;
+      selectCursorA = selectCursorA + 4;
+      selectCursorB = selectCursorB + 4;
+      if (*laneFieldPtrA != *laneFieldPtrB) goto LAB_00172d04;
     }
-    uVar4 = 0;
+    result = 0;
   }
-  return uVar4;
+  return result;
 }
 
 /* ScopedExprTable__hashKey @ 0x172d1c (168 bytes) */
