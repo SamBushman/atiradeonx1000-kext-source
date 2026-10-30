@@ -107,8 +107,8 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
   undefined4 callResult;
   int loopRemaining;
   double commonValue;
-  undefined1 auStack_28 [4];
-  undefined1 auStack_24 [32];
+  undefined1 immediateHighOut [4];
+  undefined1 immediateLowOut [32];
   
   haveFirstValue = false;
   loopRemaining = 4;
@@ -132,7 +132,7 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
     values = values + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  callResult = ((undefined4 (*)())FudoPs__encodeImmediateFloat)(this,values,auStack_28,auStack_24,commonValue);
+  callResult = ((undefined4 (*)())FudoPs__encodeImmediateFloat)(this,values,immediateHighOut,immediateLowOut,commonValue);
   return callResult;
 }
 
@@ -149,7 +149,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   bool noLaneSeen;
   int *laneSwizzleCursor;
   uint *loopPtr2;
-  undefined *puVar5;
+  undefined *staleArg5;
   int allLanesEqual;
   dword *loopPtr;
   undefined4 registerMap;
@@ -159,7 +159,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   float lastSplatStore;
   
   if (*laneSwizzle != 0x4040404) {
-    puVar5 = &DAT_001b19e0;
+    staleArg5 = &DAT_001b19e0;
     splatValue = 0.0;
     loopRemaining2 = 4;
     noLaneSeen = true;
@@ -185,7 +185,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       loopRemaining2 = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
-      puVar5 = (undefined *)0x4;
+      staleArg5 = (undefined *)0x4;
       loopRemaining2 = 4;
       loopPtr2 = &splatVec4;
       do {
@@ -208,7 +208,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       return loopRemaining2;
     }
     registerMap = *(undefined4 *)(program + 0x3ac);
-    allLanesEqual = RegisterMap__findConstVectorExact(registerMap,constants,laneSwizzle,laneSwizzleArg,puVar5,allLanesEqual,loopPtr);
+    allLanesEqual = RegisterMap__findConstVectorExact(registerMap,constants,laneSwizzle,laneSwizzleArg,staleArg5,allLanesEqual,loopPtr);
     if (allLanesEqual != 0) {
       return allLanesEqual;
     }
@@ -367,27 +367,28 @@ int FudoPs__createSchedModels(this, compiler)
   int this;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *schedModelVtableBaseB;
+  undefined *schedModelVtableBaseA;
   undefined4 *modelAllocation;
-  undefined *puVar3;
+  undefined *rootVtableBasePlus8;
   
   modelAllocation = (undefined4 *)Compiler__allocateOrFail(compiler,0x6c);
-  puVar1 = PTR_DAT_001e90f4;
-  puVar3 = PTR_DAT_001e90fc + 8;
+  schedModelVtableBaseA = PTR_DAT_001e90f4;
+  rootVtableBasePlus8 = PTR_DAT_001e90fc + 8;
   modelAllocation[2] = compiler;
-  *modelAllocation = puVar3;
+  *modelAllocation = rootVtableBasePlus8;
   modelAllocation[1] = 0;
-  *modelAllocation = puVar1 + 8;
+  *modelAllocation = schedModelVtableBaseA + 8;
   PackState__reset(modelAllocation + 10);
   R520SchedModel__vslot2_reset(modelAllocation);
   modelAllocation[0x1a] = 0;
   *modelAllocation = PTR_DAT_001e9148 + 8;
   *(undefined4 **)(this + 0x60) = modelAllocation;
   modelAllocation = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
-  puVar1 = PTR_DAT_001e9100;
+  schedModelVtableBaseB = PTR_DAT_001e9100;
   modelAllocation[1] = 1;
   modelAllocation[2] = 0;
-  *modelAllocation = puVar1 + 8;
+  *modelAllocation = schedModelVtableBaseB + 8;
   *(undefined4 **)(this + 100) = modelAllocation;
   return;
 }
@@ -580,8 +581,8 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   return;
 }
 
-/* FUN_001922c4 @ 0x1922c4 (1016 bytes) */
-int FUN_001922c4(staleArg1, staleArg2, inst, program)
+/* Inst__rewriteSetOpcodesWithLiterals @ 0x1922c4 (1016 bytes) */
+int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
   undefined4 staleArg1;
   undefined4 staleArg2;
   int *inst;
@@ -1101,7 +1102,7 @@ LAB_00193490:
       curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst);
     }
   }
-  combinedInst = (int *)((int (*)())FUN_001922c4)(inst,consumerSrcIndex,curInst,program);
+  combinedInst = (int *)((int (*)())Inst__rewriteSetOpcodesWithLiterals)(inst,consumerSrcIndex,curInst,program);
   loopIndex3 = FUN_00159b58(combinedInst,1,program);
   if (loopIndex3 != 0) {
     changedFlag = 1;

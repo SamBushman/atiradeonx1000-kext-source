@@ -218,7 +218,7 @@ int R520MachineAssembler__vslot74_setPredicateSetDestination(this, writeRgb, wri
   int recordPtr;
   int recordTable;
   byte invertBit;
-  undefined1 uVar4;
+  undefined1 rgbMask;
   int operandRecord;
   undefined1 compareCode;
   int predicateKind;
@@ -255,8 +255,8 @@ int R520MachineAssembler__vslot74_setPredicateSetDestination(this, writeRgb, wri
     recordIndex = *(int *)(this + 0x60);
     recordTable = *(int *)(this + 0xa8);
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uVar4 = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
-    *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x15) = uVar4;
+    rgbMask = lanesToRgbMask(*(undefined4 *)(operandRecord + 0x10));
+    *(undefined1 *)(recordIndex * 0x48 + recordTable + 0x15) = rgbMask;
     if (predicateKind == 1) {
       recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
       *(byte *)(recordPtr + 0x2d) = invertBit ^ *(byte *)(recordPtr + 0x2d);
@@ -300,7 +300,7 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
   undefined1 lanesToRgbMaskResult;
   int currentMaxRegister;
   int destinationIndex;
-  undefined1 uVar6;
+  undefined1 destinationByte;
   int destinationClass;
   
   destinationClass = *(int *)(inst + 0x98);
@@ -325,9 +325,9 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
       }
       *(int *)(*(int *)(this + 0xac) + 0x9374) = maxRegister;
     }
-    uVar6 = (undefined1)destinationIndex;
+    destinationByte = (undefined1)destinationIndex;
     if ((writeRgb != 0) && (destinationClass != 8)) {
-      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x16) = uVar6;
+      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x16) = destinationByte;
       recordIndex2 = *(int *)(this + 0x60);
       destinationIndex = *(int *)(this + 0xa8);
       operandRecord = IRInst__getOperandRecord(inst,0);
@@ -335,7 +335,7 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
       *(undefined1 *)(recordIndex2 * 0x48 + destinationIndex + 0x15) = lanesToRgbMaskResult;
     }
     if (writeAlpha != 0) {
-      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x22) = uVar6;
+      *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x22) = destinationByte;
       if (destinationClass == 8) {
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x23) = 1;
       }
@@ -602,7 +602,7 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   undefined4 a3;
   int operandRecord2;
   undefined1 compareCode;
-  undefined1 auStack_48 [40];
+  undefined1 predicateInstList [40];
   
   inst2 = IRInst__create(0x12,this[3]);
   newSource = IRInst__getOperandSource(inst,1);
@@ -660,9 +660,9 @@ LAB_001a27a4:
     compareCode = 2;
     IROperand__setModifierBits(operandRecord1,1,modifierWordToInvert & 1 ^ 1);
   }
-  DListNode__init(auStack_48);
-  DList__pushBack(auStack_48,inst2);
-  (**(code **)(*this + 0x34))(this,auStack_48,blockArg,a3);
+  DListNode__init(predicateInstList);
+  DList__pushBack(predicateInstList,inst2);
+  (**(code **)(*this + 0x34))(this,predicateInstList,blockArg,a3);
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -5) = 0;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -4) = compareCode;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x34) = 0;
@@ -764,11 +764,11 @@ int R520MachineAssembler__emitConditionalBranch(this, branchCount, inst, variant
 {
   int callResult;
   uint predecessor;
-  int local_38 [7];
+  int comparisonKnown [7];
   
-  local_38[0] = 0;
-  callResult = evaluateConstantComparison(inst,local_38);
-  if (local_38[0] == 0) {
+  comparisonKnown[0] = 0;
+  callResult = evaluateConstantComparison(inst,comparisonKnown);
+  if (comparisonKnown[0] == 0) {
     predecessor = Block__getPredecessor(parentNode,0);
     ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,inst,blockFlag,predecessor);
     ((int (*)())R520MachineAssembler__appendBranchEndRecord)(this,branchCount + -1,variant);
@@ -794,7 +794,7 @@ int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, 
   int thenBlock;
   int successorList;
   int *a0;
-  int *piVar2;
+  int *firstSuccessorRef;
   undefined4 emittedAny;
   int recordIndexBefore;
   
@@ -804,12 +804,12 @@ int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, 
   *(undefined4 *)(node + 0x130) = 0;
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
-  piVar2 = (int *)0x0;
+  firstSuccessorRef = (int *)0x0;
   successorList = *(int *)(*(int *)(node + 0x134) + 0xd0);
   if (*(int *)(successorList + 4) != 0) {
-    piVar2 = *(int **)(successorList + 8);
+    firstSuccessorRef = *(int **)(successorList + 8);
   }
-  thenBlock = *piVar2;
+  thenBlock = *firstSuccessorRef;
   (**(code **)(*this + 0x34))
             (this,thenBlock + 0x90,*(undefined4 *)(thenBlock + 0xdc),extra1,extra2,extra3,
              *(code **)(*this + 0x34));
@@ -853,7 +853,7 @@ int R520MachineAssembler__appendLoopRecord(this, hasSecondCondition)
   int *this;
   int hasSecondCondition;
 {
-  int *piVar1;
+  int *elementRef;
   int recordIndex;
   uint stackCount;
   uint *stackVector;
@@ -871,13 +871,13 @@ int R520MachineAssembler__appendLoopRecord(this, hasSecondCondition)
   stackCount = stackVector[1];
   if (stackCount < *stackVector) {
     _memset(stackCount * 4 + stackVector[2],0,4);
-    piVar1 = (int *)(stackCount * 4 + stackVector[2]);
+    elementRef = (int *)(stackCount * 4 + stackVector[2]);
     stackVector[1] = stackCount + 1;
   }
   else {
-    piVar1 = (int *)Vector__elementRefGrow(stackVector,stackCount);
+    elementRef = (int *)Vector__elementRefGrow(stackVector,stackCount);
   }
-  *piVar1 = recordIndex;
+  *elementRef = recordIndex;
   (**(code **)(*this + 0x15c))(this);
   this[0x2e] = this[0x2e] + 1;
   return;
@@ -1138,7 +1138,7 @@ int stub_getrealaddr(symbol)
   undefined4 symbol;
 {
   int length;
-  int iVar1;
+  int unusedLocal;
   int callResult;
   undefined4 callResult2;
   /* issue #76 (same defect class as issue #64's stack-split fixes elsewhere in this corpus):
@@ -1146,7 +1146,7 @@ int stub_getrealaddr(symbol)
    * (-0x58, -0x54, -0x50 - no gaps), meant to be ONE 72-byte buffer: code builds a symbol name
    * by strcpy'ing into symbolName+1 (needing far more than symbolName's own declared 4 bytes) and
    * then appends a literal string constant across all three via raw word-sized stores
-   * (`*(undefined4*)(symbolName+iVar1)`, `symbolNameWord2[iVar1]`, `*(undefined4*)(symbolNameWord1+iVar1)`).
+   * (`*(undefined4*)(symbolName+unusedLocal)`, `symbolNameWord2[unusedLocal]`, `*(undefined4*)(symbolNameWord1+unusedLocal)`).
    * -O0 doesn't lay separately-declared locals out contiguously, so this crashed writing/reading
    * through whatever unrelated stack content followed the undersized symbolName on its own.
    * Merged into one real buffer with offset-preserving aliases, per the established pattern. */

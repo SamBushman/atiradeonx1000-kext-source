@@ -181,7 +181,7 @@ int KhanPs__vslot67(param_1, param_2, param_3, param_4, param_5, param_6, param_
   undefined4 param_7;
   undefined4 param_8;
 {
-  FUN_00186a88(param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  Inst__foldSourceProducerIntoConsumer(param_2,param_3,param_4,param_5,param_6,param_7,param_8);
   return;
 }
 

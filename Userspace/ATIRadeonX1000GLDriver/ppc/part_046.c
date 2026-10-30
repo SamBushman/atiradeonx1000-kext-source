@@ -1382,8 +1382,8 @@ LAB_00174efc:
                    ((loopIndex5 & 2) == 0)) goto LAB_00175760;
               }
 LAB_001757a0:
-              FUN_00178648(valueKey,loopIndex);
-              FUN_00178338(valueKey,loopIndex,local_68);
+              ValueKey__classifyLaneCompareClass(valueKey,loopIndex);
+              ValueKey__classifyLaneRangeClass(valueKey,loopIndex,local_68);
               loopPtr4 = (int *)loopPtr3[0x10];
               *loopPtr3 = *loopPtr4;
               loopPtr3[0x20] = loopPtr4[3];
@@ -1457,8 +1457,8 @@ LAB_0017547c:
         iVar9 = 0;
         goto LAB_001754f8;
       }
-      FUN_00178648(valueKey,iVar9);
-      FUN_00178338(valueKey,iVar9,local_68);
+      ValueKey__classifyLaneCompareClass(valueKey,iVar9);
+      ValueKey__classifyLaneRangeClass(valueKey,iVar9,local_68);
       loopIndex = 4;
       loopIndex2 = 0;
       loopPtr3 = valueKey;
@@ -1491,8 +1491,8 @@ LAB_0017547c:
         if (((*(int *)(loopRemaining + 0x120) == 0) && (*(int *)(loopRemaining + 0x124) == 0)) &&
            ((loopIndex5 = *(uint *)(loopIndex2 * 0x18 + loopRemaining + 0xa0), (loopIndex5 & 1) == 0 && ((loopIndex5 & 2) == 0)
             ))) goto LAB_001753c0;
-        FUN_00178648(valueKey,iVar9);
-        FUN_00178338(valueKey,iVar9,local_68);
+        ValueKey__classifyLaneCompareClass(valueKey,iVar9);
+        ValueKey__classifyLaneRangeClass(valueKey,iVar9,local_68);
         loopIndex2 = 4;
         loopIndex = 0;
         loopPtr3 = valueKey;
@@ -1507,8 +1507,8 @@ LAB_0017547c:
       else {
         loopIndex2 = loopPtr3[0xc];
         if (loopIndex2 != 0) goto LAB_0017547c;
-        FUN_00178648(valueKey,iVar9);
-        FUN_00178338(valueKey,iVar9,local_68);
+        ValueKey__classifyLaneCompareClass(valueKey,iVar9);
+        ValueKey__classifyLaneRangeClass(valueKey,iVar9,local_68);
         loopIndex = 4;
         loopIndex2 = 0;
         loopPtr4 = valueKey;
@@ -1561,8 +1561,8 @@ LAB_001753c0:
         iVar9 = ValueKey__rangeClassForValueNumber(valueKey,loopIndex);
       }
       else {
-        FUN_00178648(valueKey,iVar9);
-        FUN_00178338(valueKey,iVar9,local_68);
+        ValueKey__classifyLaneCompareClass(valueKey,iVar9);
+        ValueKey__classifyLaneRangeClass(valueKey,iVar9,local_68);
         loopPtr3 = (int *)valueKey[iVar9 + 0x10];
         iVar9 = loopPtr3[4];
         loopIndex = *loopPtr3;
@@ -1840,7 +1840,7 @@ LAB_00176244:
 LAB_00175e58:
       valueKey = ((int (*)())FUN_00173638)(valueKey);
       if (valueKey == 0) {
-        FUN_00180154(*keyRef);
+        ValueKey__createLaneRecordsByOpcode(*keyRef);
         canonicalizeCommutativeOperandsResult = ((int (*)())ValueKey__canonicalizeCommutativeOperands)(*keyRef);
         if (canonicalizeCommutativeOperandsResult != 0) {
           ((int (*)())ValueKey__rebuild)(*keyRef);
