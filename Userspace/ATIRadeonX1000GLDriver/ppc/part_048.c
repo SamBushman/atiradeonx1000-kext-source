@@ -2032,7 +2032,7 @@ int FUN_0017e7e0(ctx)
   operandRef5 = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
   loopRemaining = *(int *)(loopIndex + 0x3ac) + -1;
   *(int *)(loopIndex + 0x3ac) = loopRemaining;
-  operandRef5 = InternCache__findOrCreate(operandRef5,0,loopRemaining,0);
+  operandRef5 = VRegPool__findOrCreate(operandRef5,0,loopRemaining,0);
   IRInst__setOperandRef(member0xb0,0,operandRef5);
   IRInst__setOperandRef(member0xb0,1,operandRef3);
   loopIndex = IRInst__getOperandRecord(member0xb0,1);
@@ -2288,7 +2288,7 @@ int FUN_0017ee68(ctx)
   newValueNumber = *(int *)(loopIndex + 0x3ac) + -1;
   operandRef2 = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
   *(int *)(loopIndex + 0x3ac) = newValueNumber;
-  operandRef2 = InternCache__findOrCreate(operandRef2,0,newValueNumber,0);
+  operandRef2 = VRegPool__findOrCreate(operandRef2,0,newValueNumber,0);
   VReg__appendUser(operandRef2,*(undefined4 *)(ctx + 0xb0));
   IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),0,operandRef2);
   *(undefined4 *)(rebuiltInst + 0x94) = savedDestRegister;
@@ -2554,7 +2554,7 @@ int FUN_0017f5a4(ctx)
     operandRef = *(undefined4 *)(*(int *)(loopIndex + 0x6c4) + 0x3ac);
     iVar4 = *(int *)(loopIndex + 0x3ac) + -1;
     *(int *)(loopIndex + 0x3ac) = iVar4;
-    operandRef = InternCache__findOrCreate(operandRef,0,iVar4,0);
+    operandRef = VRegPool__findOrCreate(operandRef,0,iVar4,0);
     VReg__appendUser(operandRef,*(undefined4 *)(ctx + 0xb0));
     IRInst__setOperandRef(*(undefined4 *)(ctx + 0xb0),0,operandRef);
     loopIndex = inst[0x23];
@@ -3505,10 +3505,10 @@ LAB_00180a14: ;
           }
           loopIndex2 = RegKind__flagBit7(sourceRegister);
           if (loopIndex2 == 0) {
-            operandRef2 = InternCache__findOrCreate(operandRef2,0,loopIndex5,0);
+            operandRef2 = VRegPool__findOrCreate(operandRef2,0,loopIndex5,0);
           }
           else {
-            operandRef2 = InternCache__findOrCreate(operandRef2,2,loopIndex5,0);
+            operandRef2 = VRegPool__findOrCreate(operandRef2,2,loopIndex5,0);
           }
           IRInst__setOperandRef(*(undefined4 *)(key + 0xb0),operandNumber,operandRef2);
           VReg__addUse(operandRef2,operandNumber,*(undefined4 *)(key + 0xb0));

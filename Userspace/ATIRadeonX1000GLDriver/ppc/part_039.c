@@ -541,14 +541,14 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
   
   if (registerKind == 1) {
     program = *(int *)(compiler + COMP_currentProgram);
-    callResult = InternCache__find(*(undefined4 *)(program + 0x3ac),0x1b,0,0);
+    callResult = VRegPool__find(*(undefined4 *)(program + 0x3ac),0x1b,0,0);
     if (callResult != 0) {
       IRLoadInterp__setLane(*(undefined4 *)(callResult + 0x38),3,3,8,0);
       constantPool = *(undefined4 *)(program + 0x3ac);
       nextRegNumber = *(int *)(compiler + 0x3ac) + -1;
       *(int *)(compiler + 0x3ac) = nextRegNumber;
       listByteOffset = 0;
-      newRegister = InternCache__create(constantPool,0,nextRegNumber,0);
+      newRegister = VRegPool__create(constantPool,0,nextRegNumber,0);
       for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(callResult + 0x14) + 4); loopIndex = loopIndex + 1) {
         userInst = *(int *)(listByteOffset + *(int *)(*(int *)(callResult + 0x14) + 8));
         if (((*(uint *)(userInst + 0x14) & 1) != 0) && (operandIndex = 1, 0 < *(int *)(userInst + 0x84))) {
@@ -1493,16 +1493,16 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
 }
 
 /* KhanVs__vslot9_createCompareInst @ 0x12a00c (480 bytes) */
-int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, src2Register, param_6, param_7, param_8, param_9, compiler)
+int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, src1IlType, src2Register, src2IlType, sourceTokenWord, sourceTokens, insertAfter, compiler)
   undefined4 this;
   undefined4 compareKind;
   undefined4 src1Register;
-  undefined4 param_4;
+  undefined4 src1IlType;
   undefined4 src2Register;
-  undefined4 param_6;
-  undefined4 param_7;
-  int param_8;
-  undefined4 param_9;
+  undefined4 src2IlType;
+  undefined4 sourceTokenWord;
+  int sourceTokens;
+  undefined4 insertAfter;
   int compiler;
 {
   undefined4 arena;
@@ -1512,7 +1512,7 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   undefined4 operandIndexA;
   bool sourcesInOrder;
   undefined4 compareInst;
-  unsigned int ghidra_home[8] = { this, compareKind, src1Register, param_4, src2Register, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, compareKind, src1Register, src1IlType, src2Register, src2IlType, sourceTokenWord, sourceTokens };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool swapRequested;
   undefined4 opcode;
   undefined4 aux1;
@@ -1520,12 +1520,12 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   undefined4 aux2;
   undefined4 *allocation;
   int compilerCopy;
-  undefined4 uVar8;
+  undefined4 program;
   undefined4 *loadInst;
   int newRegNumber;
   
   compilerCopy = compiler;
-  uVar8 = *(undefined4 *)(compiler + COMP_currentProgram);
+  program = *(undefined4 *)(compiler + COMP_currentProgram);
   switch(compareKind) {
   case 0:
     opcode = 0x27;
@@ -1556,9 +1556,9 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
     swapRequested = false;
   }
   sourcesInOrder = !swapRequested;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = sourceTokenWord;
   compareInst = IRInst__create(opcode,compiler);
-  aux1 = Program__registerFileOfIlType(uVar8,param_4);
+  aux1 = Program__registerFileOfIlType(program,src1IlType);
   operandRecord = IRInst__getOperandRecord(compareInst,2 - (uint)sourcesInOrder);
   *(undefined4 *)(operandRecord + 0xc) = aux1;
   *(undefined4 *)(operandRecord + 8) = src1Register;
@@ -1568,7 +1568,7 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   else {
     operandIndexA = 1;
   }
-  aux2 = Program__registerFileOfIlType(uVar8,param_6);
+  aux2 = Program__registerFileOfIlType(program,src2IlType);
   operandRecord = IRInst__getOperandRecord(compareInst,operandIndexA);
   *(undefined4 *)(operandRecord + 0xc) = aux2;
   *(undefined4 *)(operandRecord + 8) = src2Register;
@@ -1578,20 +1578,20 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   else {
     operandIndexB = 2;
   }
-  Program__applySourceTokenToOperand(uVar8,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),operandIndexB,compareInst);
+  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(sourceTokens + 0x6c),operandIndexB,compareInst);
   if (sourcesInOrder) {
     operandIndexC = 2;
   }
   else {
     operandIndexC = 1;
   }
-  Program__applySourceTokenToOperand(uVar8,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),operandIndexC,compareInst);
+  Program__applySourceTokenToOperand(program,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(sourceTokens + 0x6c) + 4),operandIndexC,compareInst);
   newRegNumber = *(int *)(compilerCopy + 0x3ac) + -1;
   *(int *)(compilerCopy + 0x3ac) = newRegNumber;
   operandRecord = IRInst__getOperandRecord(compareInst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(int *)(operandRecord + 8) = newRegNumber;
-  Program__appendInst(uVar8,compareInst,param_9);
+  Program__appendInst(program,compareInst,insertAfter);
   arena = *(undefined4 *)(compilerCopy + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   loadInst = allocation + 1;

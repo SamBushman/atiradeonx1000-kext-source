@@ -2742,8 +2742,8 @@ int FUN_0011370c(param_1, param_2)
 }
 
 /* FUN_00113734 @ 0x113734 (104 bytes) */
-int FUN_00113734(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
+int FUN_00113734(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
+  int compiler;
   int param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2756,7 +2756,7 @@ int FUN_00113734(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int opcodeFlagTable;
   
   flagBit2 = 0;
-  targetObject = *(int **)(param_1 + 0x30c);
+  targetObject = *(int **)(compiler + 0x30c);
   if ((targetObject[2] & 0x10U) != 0) {
     opcodeFlagTable = (**(code **)(*targetObject + 0x16c))(targetObject);
     flagBit2 = *(uint *)(opcodeFlagTable + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;

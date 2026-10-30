@@ -655,7 +655,7 @@ int FUN_0012c3d0(inst, registerBase, program)
       if ((instQuery18 == 1) && (instQuery18 = IRInst__operandKindClass(inst,0), instQuery18 == 1)) {
         vregListB = *(undefined4 *)(program + 0x3ac);
         definingField128 = IRInst__getDefiningField128(inst,0);
-        newDestVReg = (int *)InternCache__findOrCreate(vregListB,0x24,definingField128 + registerBase,0);
+        newDestVReg = (int *)VRegPool__findOrCreate(vregListB,0x24,definingField128 + registerBase,0);
         destRebaseFn = *(code **)(*newDestVReg + 0x28);
         operandRecord = IRInst__getOperandRecord(inst,0);
         rebasedDestRef = (*destRebaseFn)(newDestVReg,*(undefined4 *)(operandRecord + 0x10),program);
@@ -687,7 +687,7 @@ int FUN_0012c3d0(inst, registerBase, program)
           vregList = *(undefined4 *)(program + 0x3ac);
         }
       }
-      registerFileKind = InternCache__findOrCreate(vregList,registerFileKind,registerBase + definingField1282,0);
+      registerFileKind = VRegPool__findOrCreate(vregList,registerFileKind,registerBase + definingField1282,0);
       IRInst__setOperandRef(inst,operandNumber,registerFileKind);
     }
 LAB_0012c498:
@@ -2180,7 +2180,7 @@ int FUN_0012eacc(program)
   int conditionKey;
   undefined4 headerWordB8;
   undefined4 *puVar8;
-  undefined4 *puVar9;
+  undefined4 *armBlock;
   undefined4 *ifHeaderAlloc;
   uint pendingCount;
   int *blockCursor;
@@ -2385,16 +2385,16 @@ LAB_0012ed24:
       arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
       blockAlloc2 = (undefined4 *)Arena__alloc(arenaAt374,0x130);
       *blockAlloc2 = arenaAt374;
-      puVar9 = blockAlloc2 + 1;
-      Block__ctor_ea020(puVar9,*(undefined4 *)(program + 8));
-      ifHeaderAlloc[0x4f] = puVar9;
-      Program__insertBlockAfter(program,predecessor2,puVar9);
+      armBlock = blockAlloc2 + 1;
+      Block__ctor_ea020(armBlock,*(undefined4 *)(program + 8));
+      ifHeaderAlloc[0x4f] = armBlock;
+      Program__insertBlockAfter(program,predecessor2,armBlock);
       ifFooterBlock = ifHeaderAlloc[0x50];
-      Program__insertBlockAfter(program,puVar9,ifFooterBlock);
+      Program__insertBlockAfter(program,armBlock,ifFooterBlock);
       Block__setField0xb8AndChildren(ifHeader,headerWordB8);
-      Block__connect(ifHeader,puVar9);
+      Block__connect(ifHeader,armBlock);
       Block__splitOutgoingEdge(puVar8,movDestOperand,ifHeader);
-      Block__connect(puVar9,ifFooterBlock);
+      Block__connect(armBlock,ifFooterBlock);
       Block__splitOutgoingEdge(predecessor2,pendingEntry,ifFooterBlock);
       Block__connect(ifFooterBlock,pendingEntry);
       IRInst__bindOperandRegisters(program,branchInst);
@@ -3437,15 +3437,15 @@ int FUN_00130944(param_1)
 }
 
 /* FUN_00130958 @ 0x130958 (36 bytes) */
-int FUN_00130958(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int FUN_00130958(bitSet, registerIndex, lane)
+  int bitSet;
+  int registerIndex;
+  int lane;
 {
-  uint uVar1;
+  uint bitIndex;
   
-  uVar1 = param_2 * 4 + param_3;
-  return *(uint *)((uVar1 >> 3 & 0x1ffffffc) + param_1 + 8) >> (uVar1 & 0x1f) & 1;
+  bitIndex = registerIndex * 4 + lane;
+  return *(uint *)((bitIndex >> 3 & 0x1ffffffc) + bitSet + 8) >> (bitIndex & 0x1f) & 1;
 }
 
 /* FUN_0013097c @ 0x13097c (64 bytes) */
@@ -3511,27 +3511,27 @@ int FUN_00130a08(inst, targetId)
 }
 
 /* FUN_00130a78 @ 0x130a78 (68 bytes) */
-int FUN_00130a78(param_1, param_2)
-  uint param_1;
-  int param_2;
+int FUN_00130a78(cursorInst, referenceInst)
+  uint cursorInst;
+  int referenceInst;
 {
   uint *nodeFlags;
   uint continueFlag;
   
-  continueFlag = param_1;
+  continueFlag = cursorInst;
   while( true ) {
     if (continueFlag == 0) {
       return 0;
     }
-    nodeFlags = (uint *)(param_1 + 0x14);
-    if (((*nodeFlags & 1) != 0) && (*(int *)(param_1 + 0x14c) == *(int *)(param_2 + 0x14c))) break;
-    param_1 = *(uint *)(param_1 + 8);
+    nodeFlags = (uint *)(cursorInst + 0x14);
+    if (((*nodeFlags & 1) != 0) && (*(int *)(cursorInst + 0x14c) == *(int *)(referenceInst + 0x14c))) break;
+    cursorInst = *(uint *)(cursorInst + 8);
     continueFlag = *nodeFlags & 4;
-    if (param_1 == 0) {
+    if (cursorInst == 0) {
       return 0;
     }
   }
-  return param_1;
+  return cursorInst;
 }
 
 /* FUN_00130abc @ 0x130abc (280 bytes) */
@@ -3594,15 +3594,15 @@ int FUN_00130abc(spillInfo, param_2, markFlag)
 }
 
 /* FUN_00130bd4 @ 0x130bd4 (40 bytes) */
-int FUN_00130bd4(param_1, param_2)
-  int param_1;
-  uint param_2;
+int FUN_00130bd4(allocator, bitIndex)
+  int allocator;
+  uint bitIndex;
 {
-  int iVar1;
+  int wordRef;
   
-  iVar1 = (param_2 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 0x430);
-  *(uint *)(iVar1 + 8) =
-       (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f)) & *(uint *)(iVar1 + 8);
+  wordRef = (bitIndex >> 3 & 0x1ffffffc) + *(int *)(allocator + 0x430);
+  *(uint *)(wordRef + 8) =
+       (-2 << (bitIndex & 0x1f) | 0xfffffffeU >> 0x20 - (bitIndex & 0x1f)) & *(uint *)(wordRef + 8);
   return;
 }
 

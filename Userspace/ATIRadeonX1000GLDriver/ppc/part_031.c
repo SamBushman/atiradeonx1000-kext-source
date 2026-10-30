@@ -1316,7 +1316,7 @@ int FUN_0010de6c(param_1, program, param_3, vertexAttrWord, param_5, insertRef)
   vregList = *(undefined4 *)(program + 0x3ac);
   compiler = *(undefined4 *)(program + 8);
   loadVReg = Program__registerFileOfIlType(program,*vertexAttrWord >> 0x10 & 0x3f);
-  loadVReg = InternCache__findOrCreate(vregList,loadVReg,(int)(short)attrWordCopy,0);
+  loadVReg = VRegPool__findOrCreate(vregList,loadVReg,(int)(short)attrWordCopy,0);
   loadVertexInst = IRLoadVertex__new_109810(0xa4,compiler);
   IRInst__setOperandRef(loadVertexInst,0,loadVReg);
   *(int *)(loadVertexInst + 300) = (int)(short)attrWordCopy;
@@ -1525,27 +1525,27 @@ int FUN_0010e3b4(valueTable, position)
 }
 
 /* FUN_0010e40c @ 0x10e40c (84 bytes) */
-int FUN_0010e40c(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0010e40c(kind, value)
+  int kind;
+  int value;
 {
-  if (param_1 != 0x16) {
-    if (param_1 != 0x17) {
-      return param_2;
+  if (kind != 0x16) {
+    if (kind != 0x17) {
+      return value;
     }
-    if (param_2 == 0) {
+    if (value == 0) {
       return 1;
     }
-    if (param_2 != 1) {
-      return param_2;
+    if (value != 1) {
+      return value;
     }
     return 3;
   }
-  if (param_2 == 0) {
-    return param_2;
+  if (value == 0) {
+    return value;
   }
-  if (param_2 != 1) {
-    return param_2;
+  if (value != 1) {
+    return value;
   }
   return 2;
 }
@@ -1673,49 +1673,49 @@ int FUN_0010e634(param_1)
 }
 
 /* FUN_0010e690 @ 0x10e690 (88 bytes) */
-int FUN_0010e690(param_1)
-  int *param_1;
+int FUN_0010e690(inst)
+  int *inst;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int query68;
+  undefined4 result;
   
-  iVar1 = (**(code **)(*param_1 + 0x68))(param_1);
-  if ((iVar1 == 0) || (uVar2 = 1, param_1[0x4f] != 0x18)) {
-    uVar2 = 0;
+  query68 = (**(code **)(*inst + 0x68))(inst);
+  if ((query68 == 0) || (result = 1, inst[0x4f] != 0x18)) {
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_0010e6e8 @ 0x10e6e8 (92 bytes) */
-int FUN_0010e6e8(param_1)
-  int *param_1;
+int FUN_0010e6e8(inst)
+  int *inst;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int query68;
+  undefined4 result;
   
-  iVar1 = (**(code **)(*param_1 + 0x68))(param_1);
-  if ((iVar1 == 0) || (uVar2 = 1, 1 < param_1[0x4f] - 0x16U)) {
-    uVar2 = 0;
+  query68 = (**(code **)(*inst + 0x68))(inst);
+  if ((query68 == 0) || (result = 1, 1 < inst[0x4f] - 0x16U)) {
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_0010e744 @ 0x10e744 (116 bytes) */
-int FUN_0010e744(param_1)
-  int *param_1;
+int FUN_0010e744(inst)
+  int *inst;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int query68;
+  undefined4 result;
   
-  iVar1 = (**(code **)(*param_1 + 0x68))(param_1);
-  if ((iVar1 == 0) ||
-     (((uint)param_1[0x4f] < 0x19 && ((1 << (param_1[0x4f] & 0x3fU) & 0x1c000c0U) != 0)))) {
-    uVar2 = 0;
+  query68 = (**(code **)(*inst + 0x68))(inst);
+  if ((query68 == 0) ||
+     (((uint)inst[0x4f] < 0x19 && ((1 << (inst[0x4f] & 0x3fU) & 0x1c000c0U) != 0)))) {
+    result = 0;
   }
   else {
-    uVar2 = 1;
+    result = 1;
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_0010e7b8 @ 0x10e7b8 (92 bytes) */
@@ -1741,22 +1741,22 @@ int FUN_0010e7b8(param_1, param_2)
 }
 
 /* FUN_0010e814 @ 0x10e814 (92 bytes) */
-int FUN_0010e814(param_1, param_2)
-  int *param_1;
-  int param_2;
+int FUN_0010e814(laneInfo, source)
+  int *laneInfo;
+  int source;
 {
   int laneSourceCount;
   int remainingLanes;
   
-  param_1[5] = 0;
-  *param_1 = param_2;
-  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(param_2 + 0x13c));
+  laneInfo[5] = 0;
+  *laneInfo = source;
+  laneSourceCount = ((int (*)())FUN_0010e368)(*(undefined4 *)(source + 0x13c));
   remainingLanes = 4;
-  param_1[6] = laneSourceCount;
+  laneInfo[6] = laneSourceCount;
   do {
-    param_1[1] = 0;
-    param_1[7] = 0;
-    param_1 = param_1 + 1;
+    laneInfo[1] = 0;
+    laneInfo[7] = 0;
+    laneInfo = laneInfo + 1;
     remainingLanes = remainingLanes + -1;
   } while (remainingLanes != 0);
   return;

@@ -2837,8 +2837,8 @@ int FUN_00122de8(program)
   int program;
 {
   int hoistInstructionsEnabled;
-  int *piVar1;
-  int iVar2;
+  int *table;
+  int remaining;
   
   FUN_0012b520(program);
   FUN_000f88b4(program);
@@ -2850,23 +2850,23 @@ int FUN_00122de8(program)
     ((int (*)())FUN_00121000)(program);
   }
   FUN_000ec8e4(program);
-  piVar1 = *(int **)(program + 0x3b0);
-  iVar2 = *piVar1;
-  if (iVar2 != 0) {
-    if (iVar2 == 0) {
-      iVar2 = 1;
+  table = *(int **)(program + 0x3b0);
+  remaining = *table;
+  if (remaining != 0) {
+    if (remaining == 0) {
+      remaining = 1;
     }
     do {
-      piVar1[2] = 0;
-      piVar1 = piVar1 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      table[2] = 0;
+      table = table + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return FUN_000f019c(program);
 }
 
-/* InternCache__constructByKind @ 0x122e90 (44 bytes) */
-int InternCache__constructByKind(param_1, kindIndex, param_3, param_4)
+/* VRegPool__constructByKind @ 0x122e90 (44 bytes) */
+int VRegPool__constructByKind(param_1, kindIndex, param_3, param_4)
   undefined4 param_1;
   int kindIndex;
   uint param_3;
@@ -2892,28 +2892,28 @@ int VReg__popDefinition(param_1)
 }
 
 /* ExportValue__vslot10 @ 0x122ed8 (80 bytes) */
-int ExportValue__vslot10(this, param_2)
+int ExportValue__vslot10(this, laneMask)
   int this;
-  undefined4 param_2;
+  undefined4 laneMask;
 {
-  unsigned int ghidra_home[8] = { this, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
-  int iVar2;
-  int iVar3;
+  unsigned int ghidra_home[8] = { this, laneMask, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char *maskCursor;
+  int laneIndex;
+  int remaining;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = laneMask;
   if (*(int *)(*(int *)(this + 0x30) + 0x98) != 8) {
-    iVar2 = 0;
-    iVar3 = 4;
-    pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+    laneIndex = 0;
+    remaining = 4;
+    maskCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
     do {
-      if (*pcVar1 == '\0') {
-        *(undefined1 *)(iVar2 + *(int *)(this + 0x30) + 0x9c) = 0;
+      if (*maskCursor == '\0') {
+        *(undefined1 *)(laneIndex + *(int *)(this + 0x30) + 0x9c) = 0;
       }
-      iVar2 = iVar2 + 1;
-      pcVar1 = pcVar1 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      laneIndex = laneIndex + 1;
+      maskCursor = maskCursor + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
   return *(undefined4 *)(this + 0x34);
 }
@@ -3397,23 +3397,23 @@ int VRegInfo__ctor_1238e8(this, ctorWord2, ctorWord1, ctorWord3, compiler)
 }
 
 /* Interpolator__vslot10 @ 0x123a34 (296 bytes) */
-int Interpolator__vslot10(this, param_2, param_3)
+int Interpolator__vslot10(this, laneMask, program)
   int this;
-  undefined4 param_2;
-  int param_3;
+  undefined4 laneMask;
+  int program;
 {
   undefined4 arena;
-  unsigned int ghidra_home[8] = { this, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, laneMask, program, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 *allocation;
-  undefined4 uVar2;
+  undefined4 specialRegister;
   int iVar3;
-  char *pcVar4;
+  char *maskCursor;
   int iVar5;
   undefined4 uVar6;
-  undefined4 *puVar7;
+  undefined4 *exportInst;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  if ((*(uint *)(param_3 + 0x30) & 0x4000) == 0) {
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = laneMask;
+  if ((*(uint *)(program + 0x30) & 0x4000) == 0) {
     if (*(int *)(this + 0x30) == 0) {
       iVar3 = *(int *)(this + 0x3c);
       if (*(int *)(this + 0x3c) == 0) {
@@ -3424,16 +3424,16 @@ int Interpolator__vslot10(this, param_2, param_3)
       if (*(int *)(*(int *)(this + 0x30) + 0x98) != 0x18) {
         iVar3 = 0;
         iVar5 = 4;
-        pcVar4 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+        maskCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
         do {
-          if (*pcVar4 == '\0') {
+          if (*maskCursor == '\0') {
             *(undefined1 *)(iVar3 + *(int *)(this + 0x30) + 0x9c) = 0;
             if (*(int *)(this + 0x34) != 0) {
               *(undefined1 *)(iVar3 + *(int *)(this + 0x34) + 0x9c) = 0;
             }
           }
           iVar3 = iVar3 + 1;
-          pcVar4 = pcVar4 + 1;
+          maskCursor = maskCursor + 1;
           iVar5 = iVar5 + -1;
         } while (iVar5 != 0);
       }
@@ -3441,31 +3441,31 @@ int Interpolator__vslot10(this, param_2, param_3)
     }
   }
   else {
-    iVar5 = *(int *)(param_3 + 8);
+    iVar5 = *(int *)(program + 8);
     arena = *(undefined4 *)(iVar5 + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar7 = allocation + 1;
+    exportInst = allocation + 1;
     *allocation = arena;
-    IRGeomExport__ctor_108770(puVar7,iVar5);
+    IRGeomExport__ctor_108770(exportInst,iVar5);
     allocation[0x28] = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
     allocation[0x51] = *(undefined4 *)(this + 8);
     allocation[0x50] = *(undefined4 *)(this + 4);
-    uVar2 = InternCache__findOrCreate(*(undefined4 *)(param_3 + 0x3ac),0x2c,0,0);
-    IRInst__setOperandRef(puVar7,0,uVar2);
-    IRInst__setOperandRef(puVar7,2,uVar2);
+    specialRegister = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
+    IRInst__setOperandRef(exportInst,0,specialRegister);
+    IRInst__setOperandRef(exportInst,2,specialRegister);
     uVar6 = DAT_001afeec;
-    iVar3 = IRInst__getOperandRecord(puVar7,2);
+    iVar3 = IRInst__getOperandRecord(exportInst,2);
     *(undefined4 *)(iVar3 + 0x10) = uVar6;
-    ((int (*)())VReg__appendUser)(uVar2,puVar7);
-    uVar6 = *(undefined4 *)(param_3 + 0x3ac);
+    ((int (*)())VReg__appendUser)(specialRegister,exportInst);
+    uVar6 = *(undefined4 *)(program + 0x3ac);
     iVar3 = *(int *)(iVar5 + 0x3ac) + -1;
     *(int *)(iVar5 + 0x3ac) = iVar3;
-    uVar6 = InternCache__create(uVar6,0,iVar3,0);
+    uVar6 = VRegPool__create(uVar6,0,iVar3,0);
     *(undefined4 *)(this + 0x3c) = uVar6;
-    IRInst__setOperandRef(puVar7,1,uVar6);
-    ((int (*)())VReg__addUse)(*(undefined4 *)(this + 0x3c),1,puVar7);
-    ((int (*)())VReg__addUse)(uVar2,2,puVar7);
-    *(undefined4 **)(this + 0x30) = puVar7;
+    IRInst__setOperandRef(exportInst,1,uVar6);
+    ((int (*)())VReg__addUse)(*(undefined4 *)(this + 0x3c),1,exportInst);
+    ((int (*)())VReg__addUse)(specialRegister,2,exportInst);
+    *(undefined4 **)(this + 0x30) = exportInst;
     iVar3 = *(int *)(this + 0x3c);
   }
   return iVar3;
@@ -3585,7 +3585,7 @@ int FUN_00123c08(compiler, block, param_3)
       (**(code **)(**(int **)(compiler + 0x3a0) + 0xc))(*(int **)(compiler + 0x3a0),undefInst,constMoveRegA);
       newVRegId = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(compiler + 8) + 0x3ac) = newVRegId;
-      undefVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0,newVRegId,0);
+      undefVReg = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0,newVRegId,0);
       allocation[0x24] = undefVReg;
       operandRecord = IRInst__getOperandRecord(undefInst,0);
       *(int *)(operandRecord + 8) = newVRegId;
@@ -3614,7 +3614,7 @@ int FUN_00123c08(compiler, block, param_3)
     *(undefined4 *)(operandRecord + 8) = constMoveDestReg;
     newVRegIdB = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
     *(int *)(*(int *)(compiler + 8) + 0x3ac) = newVRegIdB;
-    movResultVReg = InternCache__findOrCreate(*(undefined4 *)(compiler + 0x3ac),0,newVRegIdB,0);
+    movResultVReg = VRegPool__findOrCreate(*(undefined4 *)(compiler + 0x3ac),0,newVRegIdB,0);
     *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x8c) = movResultVReg;
     ((int (*)())VReg__appendUser)(movResultVReg,*(undefined4 *)(compiler + COMP_arenaB));
     (**(code **)(*block + 0xc))(block,*(undefined4 *)(compiler + COMP_arenaB),newVRegIdB);
@@ -3949,7 +3949,7 @@ int PrimitiveIndex__ctor_12499c(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   program = *(int *)(compiler + COMP_currentProgram);
   tempVReg = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
                     (*(int **)(compiler + COMP_target),identitySwizzleWord,compiler,baseCtorArg4,compilerCopy,staleArg8,0x10203);
-  tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
+  tempVReg = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   loadTempInst = allocation + 1;
@@ -3990,7 +3990,7 @@ int StandardIndex__ctor_124b24(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   program = *(int *)(compiler + COMP_currentProgram);
   cachedLoadInst = *(int *)(tempIndex * 4 + program + 0x38);
   if (cachedLoadInst == 0) {
-    tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
+    tempVReg = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     loadTempInst = allocation + 1;
@@ -4033,7 +4033,7 @@ int StandardIndex__ctor_124c94(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   program = *(int *)(compiler + COMP_currentProgram);
   cachedLoadInst = *(int *)(tempIndex * 4 + program + 0x38);
   if (cachedLoadInst == 0) {
-    tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
+    tempVReg = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempIndex,0);
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     loadTempInst = allocation + 1;
@@ -4128,7 +4128,7 @@ int ExportValue__ctor_124e68(this, indexValue, interpolatorKind, baseCtorArg4, c
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = InternCache__create(vregList,0,newVRegId,0);
+  vregList = VRegPool__create(vregList,0,newVRegId,0);
   this[0xd] = vregList;
   IRInst__setOperandRef(exportInst,1,vregList);
   ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
@@ -4208,7 +4208,7 @@ int ExportValue__ctor_1250dc(this, indexValue, interpolatorKind, baseCtorArg4, c
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = InternCache__create(vregList,0,newVRegId,0);
+  vregList = VRegPool__create(vregList,0,newVRegId,0);
   this[0xd] = vregList;
   IRInst__setOperandRef(exportInst,1,vregList);
   ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
@@ -4314,7 +4314,7 @@ int Interpolator__ctor_125350(this, indexValue, interpolatorKind, baseCtorArg4, 
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = InternCache__create(vregList,0,newVRegId,0);
+  vregList = VRegPool__create(vregList,0,newVRegId,0);
   this[0xf] = vregList;
   targetQuery120 = (**(code **)(**(int **)(compiler + COMP_target) + 0x120))
                     (*(int **)(compiler + COMP_target),program,compiler);
@@ -4337,7 +4337,7 @@ LAB_00125578:
       if ((mappedKind != 0x40) && (exportLaneKind = 0xc, mappedKind != 0x41)) goto LAB_00125578;
     }
   }
-  mappedVReg = InternCache__create(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
+  mappedVReg = VRegPool__create(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
   arena2 = *(undefined4 *)(compiler + COMP_arenaA);
   allocation2 = (undefined4 *)Arena__alloc(arena2,0x168);
   mappedExportInst = allocation2 + 1;
@@ -4461,7 +4461,7 @@ int Interpolator__ctor_1257b0(this, indexValue, interpolatorKind, baseCtorArg4, 
   vregList = *(undefined4 *)(program + 0x3ac);
   newVRegId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = newVRegId;
-  vregList = InternCache__create(vregList,0,newVRegId,0);
+  vregList = VRegPool__create(vregList,0,newVRegId,0);
   this[0xf] = vregList;
   targetQuery120 = (**(code **)(**(int **)(compiler + COMP_target) + 0x120))
                     (*(int **)(compiler + COMP_target),program,compiler);
@@ -4484,7 +4484,7 @@ LAB_001259d8:
       if ((mappedKind != 0x40) && (exportLaneKind = 0xc, mappedKind != 0x41)) goto LAB_001259d8;
     }
   }
-  mappedVReg = InternCache__create(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
+  mappedVReg = VRegPool__create(*(undefined4 *)(program + 0x3ac),mappedKind,mappedIndexSlot[0],0);
   arena2 = *(undefined4 *)(compiler + COMP_arenaA);
   allocation2 = (undefined4 *)Arena__alloc(arena2,0x168);
   mappedExportInst = allocation2 + 1;
@@ -4616,7 +4616,7 @@ int PrimitiveIndex__ctor_125db8(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   program = *(int *)(compiler + COMP_currentProgram);
   tempVReg = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
                     (*(int **)(compiler + COMP_target),identitySwizzleWord,compiler,baseCtorArg4,compilerCopy,staleArg8,0x10203);
-  tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
+  tempVReg = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x10,tempVReg,0);
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   loadTempInst = allocation + 1;

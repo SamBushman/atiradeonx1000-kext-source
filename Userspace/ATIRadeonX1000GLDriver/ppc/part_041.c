@@ -4286,24 +4286,24 @@ int BitSet__testRegisterLane(param_1, param_2, param_3)
 }
 
 /* FUN_00137e98 @ 0x137e98 (124 bytes) */
-int FUN_00137e98(inst, operandIndex, param_3)
+int FUN_00137e98(inst, operandIndex, cursorInst)
   undefined4 inst;
   undefined4 operandIndex;
-  uint param_3;
+  uint cursorInst;
 {
-  uint uVar1;
+  uint linkFlags;
   uint operandVReg;
   
   operandVReg = IRInst__getOperandSource(inst,operandIndex);
-  uVar1 = param_3;
+  linkFlags = cursorInst;
   while( true ) {
-    if (uVar1 == 0) {
+    if (linkFlags == 0) {
       return 0;
     }
-    if (((*(uint *)(param_3 + 0x14) & 1) != 0) && (param_3 == operandVReg)) break;
-    param_3 = *(uint *)(param_3 + 4);
-    uVar1 = *(uint *)(param_3 + 0x14) & 4;
-    if (param_3 == 0) {
+    if (((*(uint *)(cursorInst + 0x14) & 1) != 0) && (cursorInst == operandVReg)) break;
+    cursorInst = *(uint *)(cursorInst + 4);
+    linkFlags = *(uint *)(cursorInst + 0x14) & 4;
+    if (cursorInst == 0) {
       return 0;
     }
   }
@@ -5084,31 +5084,31 @@ int FUN_00139034(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_0013905c @ 0x13905c (308 bytes) */
-int FUN_0013905c(param_1, inst)
-  int *param_1;
+int FUN_0013905c(endInst, inst)
+  int *endInst;
   int *inst;
 {
   int *operandVReg;
-  int iVar2;
+  int query;
   int *operandVReg2;
   
   (**(code **)(*inst + 0x14))(inst,inst);
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
-  while (iVar2 = (**(code **)(*operandVReg + 0x60))(operandVReg), iVar2 != 0) {
+  while (query = (**(code **)(*operandVReg + 0x60))(operandVReg), query != 0) {
     operandVReg = (int *)IRInst__getOperandSource(operandVReg,1);
   }
   operandVReg2 = (int *)IRInst__getOperandSource(inst,2);
-  while (iVar2 = (**(code **)(*operandVReg2 + 0x60))(operandVReg2), iVar2 != 0) {
+  while (query = (**(code **)(*operandVReg2 + 0x60))(operandVReg2), query != 0) {
     operandVReg2 = (int *)IRInst__getOperandSource(operandVReg2,1);
   }
   while( true ) {
     do {
       inst = (int *)inst[1];
-      iVar2 = (**(code **)(*inst + 0x60))(inst);
-    } while (iVar2 != 0);
-    if (param_1 == inst) break;
+      query = (**(code **)(*inst + 0x60))(inst);
+    } while (query != 0);
+    if (endInst == inst) break;
     if (((inst == operandVReg) || (inst == operandVReg2)) ||
-       (iVar2 = (**(code **)(*inst + 0x34))(inst), iVar2 != 0)) {
+       (query = (**(code **)(*inst + 0x34))(inst), query != 0)) {
       return 0;
     }
   }

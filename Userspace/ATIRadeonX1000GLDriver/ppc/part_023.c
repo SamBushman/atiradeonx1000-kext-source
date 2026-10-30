@@ -754,7 +754,7 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
     operandRecord = IRInst__getOperandRecord(newInst,0);
     *(undefined4 *)(operandRecord + 8) = param_2;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegister = InternCache__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegister);
   }
   else {
@@ -767,7 +767,7 @@ int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compil
     operandRecord2 = IRInst__getOperandRecord(instObject,0);
     *(undefined4 *)(operandRecord2 + 8) = param_2;
     *(undefined4 *)(operandRecord2 + 0xc) = 0x27;
-    newVReg = InternCache__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
+    newVReg = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
     piVar3 = *(int **)(newVReg + 0x18);
     if (*piVar3 == 0) {
       piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
@@ -1187,7 +1187,7 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
     operandRecord = IRInst__getOperandRecord(uVar5,0);
     *(undefined4 *)(operandRecord + 8) = param_2;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegisterB = InternCache__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    virtualRegisterB = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
     IRInst__setOperandRef(this[0x52],1,virtualRegisterB);
   }
   else {
@@ -1200,7 +1200,7 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
     operandRecord = IRInst__getOperandRecord(puVar6,0);
     *(undefined4 *)(operandRecord + 8) = param_2;
     *(undefined4 *)(operandRecord + 0xc) = 0x27;
-    virtualRegister = InternCache__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
+    virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
     piVar3 = *(int **)(virtualRegister + 0x18);
     if (*piVar3 == 0) {
       piVar3 = (int *)Vector__elementRefGrow(piVar3,0);

@@ -2235,7 +2235,7 @@
 0x121000	1160	FUN_00121000	part_037	converted
 0x1214fc	6188	pass_ssa_build	part_037	converted
 0x122de8	168	FUN_00122de8	part_037	converted
-0x122e90	44	InternCache__constructByKind	part_037	converted
+0x122e90	44	VRegPool__constructByKind	part_037	converted
 0x122ebc	28	VReg__popDefinition	part_037	converted
 0x122ed8	80	ExportValue__vslot10	part_037	converted
 0x122f28	124	IRInst__bindSourceFromValue	part_037	converted
@@ -2326,9 +2326,9 @@
 0x127324	232	FUN_00127324	part_038	converted
 0x12740c	100	FUN_0012740c	part_038	converted
 0x127470	196	FUN_00127470	part_038	converted
-0x127534	108	InternCache__find	part_038	converted
-0x1275a0	104	InternCache__create	part_038	converted
-0x127608	100	InternCache__findOrCreate	part_038	converted
+0x127534	108	VRegPool__find	part_038	converted
+0x1275a0	104	VRegPool__create	part_038	converted
+0x127608	100	VRegPool__findOrCreate	part_038	converted
 0x12766c	52	ConstKey__compare1	part_038	converted
 0x1276a0	92	ConstKey__compare2	part_038	converted
 0x1276fc	124	ConstKey__compare3	part_038	converted

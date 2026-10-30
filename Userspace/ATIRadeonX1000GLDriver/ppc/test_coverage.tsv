@@ -2235,7 +2235,7 @@
 0x121000	FUN_00121000	1232	no	indirect call (driver context / vtable / callback)
 0x1214fc	pass_ssa_build	6188	no	indirect call (driver context / vtable / callback)
 0x122de8	FUN_00122de8	168	yes	
-0x122e90	InternCache__constructByKind	44	yes	
+0x122e90	VRegPool__constructByKind	44	yes	
 0x122ebc	VReg__popDefinition	28	yes	
 0x122ed8	ExportValue__vslot10	80	yes	
 0x122f28	IRInst__bindSourceFromValue	124	no	indirect call (driver context / vtable / callback)
@@ -2326,9 +2326,9 @@
 0x127324	FUN_00127324	232	yes	
 0x12740c	FUN_0012740c	100	yes	
 0x127470	FUN_00127470	196	yes	
-0x127534	InternCache__find	108	yes	
-0x1275a0	InternCache__create	104	yes	
-0x127608	InternCache__findOrCreate	100	yes	
+0x127534	VRegPool__find	108	yes	
+0x1275a0	VRegPool__create	104	yes	
+0x127608	VRegPool__findOrCreate	100	yes	
 0x12766c	ConstKey__compare1	52	yes	
 0x1276a0	ConstKey__compare2	92	yes	
 0x1276fc	ConstKey__compare3	124	yes	

@@ -78,9 +78,9 @@ int FUN_000ec1d0(param_1)
   int iVar2;
   
   uVar1 = *(undefined4 *)(param_1 + 0x3ac);
-  iVar2 = InternCache__find(uVar1,0x13,0,0);
+  iVar2 = VRegPool__find(uVar1,0x13,0,0);
   if (iVar2 == 0) {
-    InternCache__create(uVar1,0x13,0,0);
+    VRegPool__create(uVar1,0x13,0,0);
     return;
   }
   return;
@@ -392,7 +392,7 @@ int Program__splitMixedSourceKinds(program)
                 sourceVReg = *(undefined4 *)(sourceCursor2 + 0xa4);
                 newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
                 *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
-                tempVReg = InternCache__findOrCreate(tempVReg,0,newTempIndex,0);
+                tempVReg = VRegPool__findOrCreate(tempVReg,0,newTempIndex,0);
                 IRInst__setOperandRef(inst,0,tempVReg);
                 IRInst__setOperandRef(inst,1,sourceVReg);
                 FUN_001235b8(sourceVReg,candidateInst,inst);
@@ -785,7 +785,7 @@ int IRInst__bindOperandRegisters(program, inst)
   int newTempIndex;
   
   if (*(int *)(inst + 0x80) != 0) {
-    piVar1 = (int *)InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),*(undefined4 *)(inst + 0x98),
+    piVar1 = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),*(undefined4 *)(inst + 0x98),
                                  *(undefined4 *)(inst + 0x94),0);
     pcVar7 = *(code **)(*piVar1 + 0x28);
     operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -816,7 +816,7 @@ int IRInst__bindOperandRegisters(program, inst)
         *(undefined4 *)(operandRecord + 0xc) = uVar6;
         iVar4 = *(int *)(iVar2 + 0xb0);
       }
-      piVar1 = (int *)InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),iVar4,
+      piVar1 = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),iVar4,
                                    *(undefined4 *)(iVar2 + 0xac),0);
       piVar3 = (int *)(**(code **)(*piVar1 + 0x28))(piVar1,DAT_001aa80c,program);
       if (piVar3 != (int *)0x0) {
@@ -981,7 +981,7 @@ LAB_000eda98:
       } while ((int *)followingInst[2] != (int *)0x0);
       if (!noGroupsYet) {
         do {
-          virtualRegister = InternCache__findOrCreate(*(undefined4 *)(param_1 + 0x3ac),0x22,0,0);
+          virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(param_1 + 0x3ac),0x22,0,0);
           splitGroupList = (int *)0x0;
           do {
             memberInstRef = groupList[3];
@@ -1766,7 +1766,7 @@ int Program__pinInputRegisters(program)
         do {
           registerMap = *(undefined4 *)(program + 0x3ac);
           registerFile5 = ((int (*)())Program__registerFileOfIlType)(program,5);
-          inputVReg = InternCache__find(registerMap,registerFile5,registerNumber,0);
+          inputVReg = VRegPool__find(registerMap,registerFile5,registerNumber,0);
           if (inputVReg != 0) {
             loopCounter = 0;
             for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(inputVReg + 0x18) + 4); loopIndex = loopIndex + 1) {
@@ -1792,7 +1792,7 @@ int Program__pinInputRegisters(program)
         do {
           registerMap = *(undefined4 *)(program + 0x3ac);
           registerFile5 = ((int (*)())Program__registerFileOfIlType)(program,5);
-          inputVReg = InternCache__find(registerMap,registerFile5,registerNumber,0);
+          inputVReg = VRegPool__find(registerMap,registerFile5,registerNumber,0);
           if (inputVReg != 0) {
             loopCounter = 0;
             for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(inputVReg + 0x18) + 4); loopIndex = loopIndex + 1) {
@@ -1904,7 +1904,7 @@ LAB_000eee08:
   registerMap = *(undefined4 *)(program + 0x3ac);
   madTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(program + 8) + 0x3ac) = madTempIndex;
-  madResultReg = InternCache__findOrCreate(registerMap,0,madTempIndex,0);
+  madResultReg = VRegPool__findOrCreate(registerMap,0,madTempIndex,0);
   IRInst__setOperandRef(inst,0,madResultReg);
   allComponentsSelect = DAT_001aa800;
   *(undefined4 *)(inst + 0x120) = 1;
@@ -1919,7 +1919,7 @@ LAB_000eee08:
   mulResultReg = *(undefined4 *)(program + 0x3ac);
   mulTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(program + 8) + 0x3ac) = mulTempIndex;
-  mulResultReg = InternCache__findOrCreate(mulResultReg,0,mulTempIndex,0);
+  mulResultReg = VRegPool__findOrCreate(mulResultReg,0,mulTempIndex,0);
   IRInst__setOperandRef(newInst2,0,mulResultReg);
   *(undefined4 *)(newInst2 + 0x120) = 1;
   *(undefined4 *)(newInst2 + 0x9c) = allComponentsSelect;
@@ -1935,7 +1935,7 @@ LAB_000eee08:
   finalResultReg = *(undefined4 *)(program + 0x3ac);
   finalTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(program + 8) + 0x3ac) = finalTempIndex;
-  finalResultReg = InternCache__findOrCreate(finalResultReg,0,finalTempIndex,0);
+  finalResultReg = VRegPool__findOrCreate(finalResultReg,0,finalTempIndex,0);
   IRInst__setOperandRef(newInst,0,finalResultReg);
   *(undefined4 *)(newInst + 0x120) = 0;
   *(undefined4 *)(newInst + 0x9c) = allComponentsSelect;
@@ -1993,7 +1993,7 @@ int FUN_000eee4c(program)
           isPixelShaderHw = (**(code **)(*hwDescription + 0xcc))(hwDescription);
           if (isPixelShaderHw == 0) {
             if (*(int *)(inst[0x22] + 8) == 0x77) {
-              tempVReg = InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),0x30,0,0);
+              tempVReg = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x30,0,0);
               IRInst__setOperandRef(inst,0,tempVReg);
               inst[5] = inst[5] | 0x10;
               VReg__appendUser(tempVReg,inst);
@@ -2001,7 +2001,7 @@ int FUN_000eee4c(program)
             }
           }
           else if ((((inst[5] & 2U) != 0) && (isPixelShaderHw = RegKind__vectorWidthKind(inst[0x26]), isPixelShaderHw == 9))
-                  && (isPixelShaderHw = InternCache__find(*(undefined4 *)(program + 0x3ac),0x21,0,0), isPixelShaderHw != 0))
+                  && (isPixelShaderHw = VRegPool__find(*(undefined4 *)(program + 0x3ac),0x21,0,0), isPixelShaderHw != 0))
           {
             IRInst__appendSource(inst,isPixelShaderHw);
           }
@@ -2011,7 +2011,7 @@ int FUN_000eee4c(program)
             insertAfterInst = inst;
             if (hwRegIndex < *(int *)(program + 0x3ec)) {
               do {
-                subVReg = (int *)InternCache__findOrCreate(*(undefined4 *)(program + 0x3ac),
+                subVReg = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),
                                              *(undefined4 *)(program + 0x3f4),hwRegIndex,0);
                 arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
                 allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
