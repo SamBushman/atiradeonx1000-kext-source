@@ -1591,3 +1591,57 @@ use	FUN_000fd5c8	puVar12	declVectorSlot	INFERRED	element reference of the declar
 use	FUN_000fd5c8	pppppuVar15	textureStageIndex	INFERRED	texture stage number used as the index into the 0xc-byte declaration records (rhs of the remap statement)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f89e8\)\(\*\(undefined4\ \*\)\(\(int\)pppppuVar15\ \*\ 0xc\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x78\)\)\)$	^\s*;$	all	none
 use	FUN_000fd5c8	pppppuVar15	remappedKindValue	INFERRED	remapSelect1To0 result for the declaration record kind	^\s*pppppuVar15\ =\ \(uint\ \*\*\*\*\*\)$@4	+1	lhs	none
 use	FUN_000fd5c8	pppppuVar15	remappedKindValue	INFERRED	remapSelect1To0 result for the declaration record kind	^\s*ppppppuVar38\[0x4e\]\ =\ pppppuVar15;$	^\s*break;$	all	none
+use	FUN_000fd5c8	pvVar16	createdInstB	INFERRED	instruction created for opcode 0x85 and filled through its operand records (select word 0x10101 at +0x9c)	^\s*pvVar16\ =\ FUN_001043f0\(\*\(undefined4\ \*\)$	+3
+use	FUN_000fd5c8	pvVar16	createdInstB	INFERRED	instruction created for opcode 0x85 and filled through its operand records (select word 0x10101 at +0x9c)	^\s*\*\(undefined4\ \*\)\(\(int\)pvVar16\ \+\ 0x9c\)\ =\ 0x10101;$	+2
+use	FUN_000fd5c8	pvVar16	createdInstB	INFERRED	instruction created for opcode 0x85 and filled through its operand records (select word 0x10101 at +0x9c)	^\s*iVar34\ =\ FUN_001054ec\(pvVar16,1\);$@2	+1
+use	FUN_000fd5c8	pvVar16	createdInstB	INFERRED	instruction created for opcode 0x85 and filled through its operand records (select word 0x10101 at +0x9c)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f92fc\)\(param_1,pvVar16,local_180\);$	+1
+use	FUN_000fd5c8	puVar32	listAllocation	INFERRED	arena allocation (0x10 bytes) of a small list header	^\s*puVar32\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar46,0x10\);$	+3
+use	FUN_000fd5c8	puVar32	ifCondInstAlloc	INFERRED	IR instruction (opcode 0x8c) allocated in the arena for the if condition; +0x12c holds the comparison kind	^\s*puVar32\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar46,0x168\);$	+4
+use	FUN_000fd5c8	puVar32	ifCondInstAlloc	INFERRED	IR instruction (opcode 0x8c) allocated in the arena for the if condition; +0x12c holds the comparison kind	^\s*puVar32\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar46,0x168\);$@2	+4
+use	FUN_000fd5c8	puVar32	ifCondInstAlloc	INFERRED	IR instruction (opcode 0x8c) allocated in the arena for the if condition; +0x12c holds the comparison kind	^\s*puVar32\[0x4b\]\ =\ uVar46;$	+1
+use	FUN_000fd5c8	puVar32	ifCondInstAlloc	INFERRED	IR instruction (opcode 0x8c) allocated in the arena for the if condition; +0x12c holds the comparison kind	^\s*\(\(int\ \(\*\)\(\)\)FUN_000fadc4\)\(param_1,puVar32,local_188,ppppppuVar48,local_a8,ppppppuVar37,$	+2
+use	FUN_000fd5c8	dVar54	literalValue	INFERRED	float literal widened to double and passed to IRInst__makeLiteralVec4Float for all four components	^\s*dVar54\ =\ \(double\)fVar5;$	+2
+use	FUN_000fd5c8	dVar54	literalValue	INFERRED	float literal widened to double and passed to IRInst__makeLiteralVec4Float for all four components	^\s*dVar54\ =\ \(double\)fVar5;$@2	+2
+use	FUN_000fd5c8	dVar54	literalValue	INFERRED	float literal widened to double and passed to IRInst__makeLiteralVec4Float for all four components	^\s*dVar54\ =\ \(double\)\*\(float\ \*\)\(iVar47\ \+\ \(int\)local_17c\ \*\ 4\);$	+2
+use	FUN_000fd5c8	pppuVar42	firstSourceToken	INFERRED	token word at destTokenPtr[firstSourceWordIndex] stored into the declaration vector	^\s*pppuVar42\ =\ ppppuVar45\[iVar34\];$	+1
+use	FUN_000fd5c8	pppuVar42	firstSourceToken	INFERRED	token word at destTokenPtr[firstSourceWordIndex] stored into the declaration vector	^\s*\*puVar12\ =\ \(uint\)pppuVar42;$	+1
+use	FUN_000fd5c8	pppuVar42	firstSourceToken	INFERRED	token word at destTokenPtr[firstSourceWordIndex] stored into the declaration vector	^\s*puVar14\[0x4c\]\ =\ pppuVar42;$	+1
+use	FUN_000fd5c8	pppuVar42	scopeEndBlock	INFERRED	scopeBlock[0x4f]: end target block of the closed scope	^\s*pppuVar42\ =\ ppppuVar45\[0x4f\];$	+3
+use	FUN_000fd5c8	pppuVar42	scopeEndBlock	INFERRED	scopeBlock[0x4f]: end target block of the closed scope	^\s*FUN_000e8e4c\(piVar18,pppuVar42\);$	+1
+use	FUN_000fd5c8	pppuVar42	scopeEndBlock	INFERRED	scopeBlock[0x4f]: end target block of the closed scope	^\s*FUN_000e8e4c\(ppppuVar51,pppuVar42\);$	+1
+use	FUN_000fd5c8	pppuVar42	scopeEndBlock	INFERRED	scopeBlock[0x4f]: end target block of the closed scope	^\s*FUN_000ec3ac\(param_1,pppuVar42,ppppppuVar48\);$	+2
+use	FUN_000fd5c8	pppuVar42	sourceToken0Word	INFERRED	first word of the first source token	^\s*pppuVar42\ =\ \*ppppuVar45;$	+1
+use	FUN_000fd5c8	pppuVar42	sourceToken0Word	INFERRED	first word of the first source token	^\s*if\ \(\(\(\(uint\)pppuVar42\ \&\ 0x3f0000\)\ ==\ 0x100000\)\ \&\&\ \(iVar43\ !=\ 0\)\)\ \{$	+1
+use	FUN_000fd5c8	pppuVar42	sourceToken0Word	INFERRED	first word of the first source token	^\s*\(piVar18,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 7,iVar20,$	+2
+use	FUN_000fd5c8	piVar36	vectorSlotC	INFERRED	element reference in the condition/pending vector	^\s*piVar36\ =\ \(int\ \*\)\(uVar10\ \*\ 4\ \+\ local_b0\[2\]\);$	+1
+use	FUN_000fd5c8	piVar36	vectorSlotC	INFERRED	element reference in the condition/pending vector	^\s*piVar36\ =\ \(int\ \*\)FUN_0019423c\(local_b0,uVar10\);$	+1
+use	FUN_000fd5c8	piVar36	vectorSlotC	INFERRED	element reference in the condition/pending vector	^\s*piVar36\ =\ \(int\ \*\)\(uVar10\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_000fd5c8	piVar36	vectorSlotC	INFERRED	element reference in the condition/pending vector	^\s*piVar36\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$	+1
+use	FUN_000fd5c8	piVar36	vectorSlotC	INFERRED	element reference in the condition/pending vector	^\s*\*piVar36\ =\ \(int\)piVar18;$	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*piVar36\ =\ local_17c;$	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*piVar36\ =\ \(int\ \*\)\(\(int\)local_17c\ \+\ 1\);$	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*local_17c\ =\ \(int\ \*\)\(\(int\)piVar36\ \+\ 1\);$	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*local_17c\ =\ piVar36;$	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*piVar36\ =\ local_17c;$@2	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*piVar36\ =\ \(int\ \*\)\(\(int\)local_17c\ \+\ 1\);$@2	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*local_17c\ =\ \(int\ \*\)\(\(int\)piVar36\ \+\ 1\);$@2	+1
+use	FUN_000fd5c8	piVar36	cursorNext	INFERRED	templateCursor + 1 (word after the current template opcode), committed back to templateCursor	^\s*local_17c\ =\ piVar36;$@2	+1
+use	FUN_000fd5c8	uVar50	virtualRegisterC	INFERRED	virtual register for temp newTempIndex (FUN_00127608) used as operand of the mov and the resource inst	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	+1
+use	FUN_000fd5c8	uVar50	virtualRegisterC	INFERRED	virtual register for temp newTempIndex (FUN_00127608) used as operand of the mov and the resource inst	^\s*uVar50\ =\ FUN_00127608\(uVar50,0,iVar34,0\);$	+1
+use	FUN_000fd5c8	uVar50	virtualRegisterC	INFERRED	virtual register for temp newTempIndex (FUN_00127608) used as operand of the mov and the resource inst	^\s*FUN_001046c8\(pvVar16,0,uVar50\);$	+1
+use	FUN_000fd5c8	uVar50	virtualRegisterC	INFERRED	virtual register for temp newTempIndex (FUN_00127608) used as operand of the mov and the resource inst	^\s*FUN_001046c8\(pvVar16,1,uVar50\);$	+1
+use	FUN_000fd5c8	uVar50	resourceOperandWord	INFERRED	word copied from the table into operand record +0x10	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(puVar9\ \+\ iVar34\);$	+1
+use	FUN_000fd5c8	uVar50	resourceOperandWord	INFERRED	word copied from the table into operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar43\ \+\ 0x10\)\ =\ uVar50;$	+1
+use	FUN_000fd5c8	uVar50	registerMapB	INFERRED	program+0x3ac register map used for the virtual register lookup	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$@5	+1
+use	FUN_000fd5c8	uVar50	registerMapB	INFERRED	program+0x3ac register map used for the virtual register lookup	^\s*iVar43\ =\ FUN_00127608\(uVar50,uVar46,\(int\)sVar6,0\);$	+1
+use	FUN_000fd5c8	uVar50	freedStorage	INFERRED	vector storage element freed with Arena__free	^\s*uVar50\ =\ \*puVar32;$	+1
+use	FUN_000fd5c8	uVar50	freedStorage	INFERRED	vector storage element freed with Arena__free	^\s*FUN_00193cc0\(uVar46,uVar50\);$	+1
+use	FUN_000fd5c8	uVar17	movVectorSizeB	INFERRED	logical size of the mov vector before zero-fill	^\s*uVar17\ =\ local_13c\[1\];$	+3
+use	FUN_000fd5c8	uVar17	modifierBit9	INFERRED	bit 9 of the extension token word	^\s*uVar17\ =\ \(uint\)pppppuVar15\ >>\ 9\ \&\ 1;$	+1
+use	FUN_000fd5c8	uVar17	modifierBit9	INFERRED	bit 9 of the extension token word	^\s*uVar17\ =\ 0;$	+1
+use	FUN_000fd5c8	uVar17	modifierBit9	INFERRED	bit 9 of the extension token word	^\s*if\ \(uVar17\ !=\ 0\)\ \{$	+1
+use	FUN_000fd5c8	uVar17	declVectorSize	INFERRED	logical size of the declaration vector before zero-fill	^\s*uVar17\ =\ puVar12\[1\];$	+3
+local	FUN_000fd5c8	local_124	templateModeWord	INFERRED	mode/select word handed to FUN_000fa958 and IRInst__applyDescriptorSelects (1, 0x1010100, table values); frame overlay also used as the DListNode header at +0
+local	FUN_000fd5c8	local_bc	opcodeFallthrough	INFERRED	cleared by every handled opcode case, set to 1 on the default path after the switch; nonzero jumps to the end-of-opcode code
+local	FUN_000fd5c8	local_104	tempIndexCache	INFERRED	nine-word table initialised from UNK_001aaa2c and indexed by (templateToken - 0x55): temp register index cached per template token (also used as a staged select word at +0)
+local	FUN_000fd5c8	local_60	constantsBase	INFERRED	base address (DAT_001ad5d8) of the constant select-word area addressed at -0x2c30 / -0x2bfc
