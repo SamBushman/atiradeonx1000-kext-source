@@ -3872,27 +3872,27 @@ LAB_00051ee0:
   return;
 }
 
-/* FUN_000520c0 @ 0x520c0 (436 bytes) */
-double FUN_000520c0(int glContext,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+/* gldValidateViewport @ 0x520c0 (436 bytes) */
+double gldValidateViewport(int glContext,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8)
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  double dVar6;
-  uint uVar7;
+  float yPixelScale;
+  float xPixelScale;
+  float halfHeight;
+  float halfWidth;
+  float centerY;
+  double intToDoubleBias;
+  uint viewportX;
   int glState;
   int glContextWord1c98;
   int glContextWord1c9c;
   int glContextWord1c90;
   int glContextWord1c94;
   int glContextWord1c88;
-  int iVar14;
+  int glStateBlock;
   int glContextWord1c8c;
   
-  dVar6 = DOUBLE_001aa1e0;
-  fVar4 = FLOAT_001aa10c;
+  intToDoubleBias = DOUBLE_001aa1e0;
+  halfWidth = FLOAT_001aa10c;
   glState = *(int *)(glContext + 4);
   glContextWord1c9c = *(int *)(glContext + 0x1c9c);
   glContextWord1c98 = *(int *)(glContext + 0x1c98);
@@ -3900,28 +3900,28 @@ double FUN_000520c0(int glContext,double fparam_1,double fparam_2,double fparam_
   glContextWord1c94 = *(int *)(glContext + 0x1c94);
   glContextWord1c90 = *(int *)(glContext + 0x1c90);
   glContextWord1c8c = *(int *)(glContext + 0x1c8c);
-  iVar14 = *(int *)(glState + 0x10);
-  fVar1 = *(float *)(glState + 0x2a58);
-  fVar2 = *(float *)(glState + 0x2a54);
-  *(undefined4 *)(glContext + 0x1c9c) = *(undefined4 *)(iVar14 + 0x1818);
-  *(undefined4 *)(glContext + 0x1c98) = *(undefined4 *)(iVar14 + 0x1828);
-  uVar7 = *(uint *)(iVar14 + 0x1840);
-  fVar3 = fVar1 * (float)((double)CONCAT44(0x43300000,*(uint *)(iVar14 + 0x184c) ^ 0x80000000) -
-                         dVar6) * fVar4;
-  fVar5 = fVar1 * (float)((double)CONCAT44(0x43300000,*(uint *)(iVar14 + 0x1844) ^ 0x80000000) -
-                         dVar6) + fVar3;
-  fVar4 = fVar2 * (float)((double)CONCAT44(0x43300000,*(uint *)(iVar14 + 0x1848) ^ 0x80000000) -
-                         dVar6) * fVar4;
+  glStateBlock = *(int *)(glState + 0x10);
+  yPixelScale = *(float *)(glState + 0x2a58);
+  xPixelScale = *(float *)(glState + 0x2a54);
+  *(undefined4 *)(glContext + 0x1c9c) = *(undefined4 *)(glStateBlock + 0x1818);
+  *(undefined4 *)(glContext + 0x1c98) = *(undefined4 *)(glStateBlock + 0x1828);
+  viewportX = *(uint *)(glStateBlock + 0x1840);
+  halfHeight = yPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glStateBlock + 0x184c) ^ 0x80000000) -
+                         intToDoubleBias) * halfWidth;
+  centerY = yPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glStateBlock + 0x1844) ^ 0x80000000) -
+                         intToDoubleBias) + halfHeight;
+  halfWidth = xPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glStateBlock + 0x1848) ^ 0x80000000) -
+                         intToDoubleBias) * halfWidth;
   if (*(char *)(glContext + 0x293c) != '\0') {
-    fVar5 = fVar1 * (float)((double)CONCAT44(0x43300000,*(uint *)(glState + 0x160) ^ 0x80000000) -
-                           dVar6) - fVar5;
-    fVar3 = -fVar3;
+    centerY = yPixelScale * (float)((double)CONCAT44(0x43300000,*(uint *)(glState + 0x160) ^ 0x80000000) -
+                           intToDoubleBias) - centerY;
+    halfHeight = -halfHeight;
   }
-  *(float *)(glContext + 0x1c8c) = fVar4;
+  *(float *)(glContext + 0x1c8c) = halfWidth;
   *(float *)(glContext + 0x1c88) =
-       fVar2 * (float)((double)CONCAT44(0x43300000,uVar7 ^ 0x80000000) - dVar6) + fVar4;
-  *(float *)(glContext + 0x1c94) = fVar3;
-  *(float *)(glContext + 0x1c90) = fVar5;
+       xPixelScale * (float)((double)CONCAT44(0x43300000,viewportX ^ 0x80000000) - intToDoubleBias) + halfWidth;
+  *(float *)(glContext + 0x1c94) = halfHeight;
+  *(float *)(glContext + 0x1c90) = centerY;
   if (*(char *)(glContext + 0x124) != '\0') {
     *(undefined4 *)(glContext + 0x1c8c) = *(undefined4 *)(glContext + 0x2814);
     *(undefined4 *)(glContext + 0x1c94) = *(undefined4 *)(glContext + 0x2818);
@@ -4813,35 +4813,35 @@ int extvsShaderOp3Explicit(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* glSwizzleEXT_impl @ 0x537c0 (276 bytes) */
-int glSwizzleEXT_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  int param_5;
-  uint param_6;
-  uint param_7;
-  uint param_8;
+int glSwizzleEXT_impl(glContext, res, inId, inSwizzleArg, outX, outY, outZ, outW)
+  int glContext;
+  int res;
+  undefined4 inId;
+  undefined4 inSwizzleArg;
+  int outX;
+  uint outY;
+  uint outZ;
+  uint outW;
 {
-  int iVar1;
-  int iVar2;
-  int iStack_38;
-  uint uStack_34;
-  uint uStack_30;
-  uint uStack_2c;
+  int appendResult;
+  int extvsState;
+  int outSelectX;
+  uint outSelectY;
+  uint outSelectZ;
+  uint outSelectW;
   
-  if (((((((unsigned char *)0x00001170)[param_1] != '\0') && (param_5 - 0x87d5U < 0xb)) && (0x87d4 < param_6)) &&
-      ((param_6 < 0x87e0 && (0x87d4 < param_7)))) &&
-     ((param_7 < 0x87e0 && ((0x87d4 < param_8 && (param_8 < 0x87e0)))))) {
-    iVar2 = *(int *)(((unsigned char *)0x00001168) + param_1);
-    iStack_38 = param_5;
-    uStack_34 = param_6;
-    uStack_30 = param_7;
-    uStack_2c = param_8;
-    iVar1 = extvsAppendInstruction(param_1,iVar2,0x879a,param_2,param_3,param_4,&iStack_38,0,&DAT_001db998,0,
+  if (((((((unsigned char *)0x00001170)[glContext] != '\0') && (outX - 0x87d5U < 0xb)) && (0x87d4 < outY)) &&
+      ((outY < 0x87e0 && (0x87d4 < outZ)))) &&
+     ((outZ < 0x87e0 && ((0x87d4 < outW && (outW < 0x87e0)))))) {
+    extvsState = *(int *)(((unsigned char *)0x00001168) + glContext);
+    outSelectX = outX;
+    outSelectY = outY;
+    outSelectZ = outZ;
+    outSelectW = outW;
+    appendResult = extvsAppendInstruction(glContext,extvsState,0x879a,res,inId,inSwizzleArg,&outSelectX,0,&DAT_001db998,0,
                          &DAT_001db998);
-    if ((iVar1 != 0) && (param_2 - 0x879dU < 0x10)) {
-      *(undefined1 *)((param_2 - 0x879dU) + iVar2 + 0x44) = 1;
+    if ((appendResult != 0) && (res - 0x879dU < 0x10)) {
+      *(undefined1 *)((res - 0x879dU) + extvsState + 0x44) = 1;
     }
   }
   return;

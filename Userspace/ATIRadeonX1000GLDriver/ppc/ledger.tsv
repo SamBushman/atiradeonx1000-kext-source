@@ -453,7 +453,7 @@
 0x50ef0	284	FUN_00050ef0	part_007	converted
 0x51010	1024	gldValidateStencil	part_007	converted
 0x51420	3152	gldValidateBlend	part_007	converted
-0x520c0	436	FUN_000520c0	part_007	converted
+0x520c0	436	gldValidateViewport	part_007	converted
 0x52280	2608	FUN_00052280	part_007	converted
 0x52cc0	372	FUN_00052cc0	part_007	converted
 0x52e60	112	FUN_00052e60	part_007	converted

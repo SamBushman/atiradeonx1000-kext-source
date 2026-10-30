@@ -454,7 +454,7 @@
 0x50ef0	FUN_00050ef0	284	no	indirect call (driver context / vtable / callback)
 0x51010	gldValidateStencil	1024	yes	
 0x51420	gldValidateBlend	3152	yes	
-0x520c0	FUN_000520c0	436	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x520c0	gldValidateViewport	436	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x52280	FUN_00052280	2608	no	indirect call (driver context / vtable / callback)
 0x52cc0	FUN_00052cc0	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x52e60	FUN_00052e60	112	no	indirect call (driver context / vtable / callback)

@@ -660,7 +660,7 @@ extern int gldEmitHardwareState();
 extern int FUN_00050ef0();
 extern int gldValidateStencil();
 extern int gldValidateBlend();
-extern double FUN_000520c0(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);
+extern double gldValidateViewport(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);
 extern int FUN_00052280();
 extern int FUN_00052cc0();
 extern int FUN_00052e60();
