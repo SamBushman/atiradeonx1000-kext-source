@@ -123,7 +123,7 @@ int ffvpBuildPassThroughProgram(ctx)
   uint loopIndex;
   uint hasBackColors;
   code *hookFn;
-  int iVar3;
+  int memcmpResult;
   int variant;
   undefined4 *builder;
   undefined4 colorInputIndex;
@@ -138,20 +138,20 @@ int ffvpBuildPassThroughProgram(ctx)
   uint hasPointSize;
   int colorOutSlotB;
   uint variantKey [2];
-  undefined4 local_60;
-  uint local_5c;
+  undefined4 variantKeyWord2;
+  uint variantKeyWord3;
   
   if (*(char *)(ctx + 0x1868) == '\0') {
     _memset(variantKey,0,0x30);
     ctxFlags44 = *(uint *)(ctx + 0x44);
-    local_60 = *(undefined4 *)(ctx + 0x1804);
+    variantKeyWord2 = *(undefined4 *)(ctx + 0x1804);
     variantKey[0] = variantKey[0] | 8;
     if ((ctxFlags44 & 0xc00) != 0) {
       extraSlotCount = ctxFlags44 >> 9 & 2;
-      local_5c = ctxFlags44 >> 0xb & 1 | extraSlotCount | (uint)(byte)((unsigned char *)0x000011d3)[ctx] << 2;
+      variantKeyWord3 = ctxFlags44 >> 0xb & 1 | extraSlotCount | (uint)(byte)((unsigned char *)0x000011d3)[ctx] << 2;
     }
     currentVariant = *(int *)(ctx + 0x14c);
-    if ((currentVariant == 0) || (iVar3 = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, iVar3 != 0)) {
+    if ((currentVariant == 0) || (memcmpResult = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, memcmpResult != 0)) {
       variant = fpVariantCacheLookup(ctx,variantKey);
       if (variant == 0) {
         outputMask = *(uint *)(ctx + 0x1804);
@@ -3733,27 +3733,27 @@ int arbfpUpdateConstantsFp24(context, fpProgram, unusedArg3, unusedArg4)
 }
 
 /* arbfpInitResourceLimits @ 0x87960 (120 bytes) */
-int arbfpInitResourceLimits(param_1)
-  int param_1;
+int arbfpInitResourceLimits(ctx)
+  int ctx;
 {
-  *(undefined4 *)(((unsigned char *)0x0000120cU) + param_1) = 0x1ff;
-  *(undefined4 *)(((unsigned char *)0x00001200) + param_1) = 0x40;
-  *(undefined4 *)(((unsigned char *)0x000011e0) + param_1) = 0x40;
-  *(undefined4 *)(((unsigned char *)0x00001204) + param_1) = 0x400;
-  *(undefined4 *)(((unsigned char *)0x00001214) + param_1) = 0x200;
-  *(undefined4 *)(((unsigned char *)0x000011f0) + param_1) = 10;
-  *(undefined4 *)(((unsigned char *)0x000011d8) + param_1) = 0x400;
-  *(undefined4 *)(((unsigned char *)0x000011e4) + param_1) = 0x40;
-  *(undefined4 *)(((unsigned char *)0x000011e8) + param_1) = 0x40;
-  *(undefined4 *)(((unsigned char *)0x000011ec) + param_1) = 10;
-  *(undefined4 *)(((unsigned char *)0x000011fc) + param_1) = 0x40;
-  *(undefined4 *)(((unsigned char *)0x00001210) + param_1) = 0x200;
-  *(undefined4 *)(((unsigned char *)0x00001208) + param_1) = 0x200;
-  *(undefined4 *)(((unsigned char *)0x000011f8) + param_1) = 0;
-  *(undefined4 *)(((unsigned char *)0x000011dc) + param_1) = 0x8000;
-  *(undefined4 *)(((unsigned char *)0x00001218) + param_1) = 4;
-  *(undefined4 *)(((unsigned char *)0x000011d4) + param_1) = 0x600;
-  *(undefined4 *)(((unsigned char *)0x000011f4) + param_1) = 0;
+  *(undefined4 *)(((unsigned char *)0x0000120cU) + ctx) = 0x1ff;
+  *(undefined4 *)(((unsigned char *)0x00001200) + ctx) = 0x40;
+  *(undefined4 *)(((unsigned char *)0x000011e0) + ctx) = 0x40;
+  *(undefined4 *)(((unsigned char *)0x00001204) + ctx) = 0x400;
+  *(undefined4 *)(((unsigned char *)0x00001214) + ctx) = 0x200;
+  *(undefined4 *)(((unsigned char *)0x000011f0) + ctx) = 10;
+  *(undefined4 *)(((unsigned char *)0x000011d8) + ctx) = 0x400;
+  *(undefined4 *)(((unsigned char *)0x000011e4) + ctx) = 0x40;
+  *(undefined4 *)(((unsigned char *)0x000011e8) + ctx) = 0x40;
+  *(undefined4 *)(((unsigned char *)0x000011ec) + ctx) = 10;
+  *(undefined4 *)(((unsigned char *)0x000011fc) + ctx) = 0x40;
+  *(undefined4 *)(((unsigned char *)0x00001210) + ctx) = 0x200;
+  *(undefined4 *)(((unsigned char *)0x00001208) + ctx) = 0x200;
+  *(undefined4 *)(((unsigned char *)0x000011f8) + ctx) = 0;
+  *(undefined4 *)(((unsigned char *)0x000011dc) + ctx) = 0x8000;
+  *(undefined4 *)(((unsigned char *)0x00001218) + ctx) = 4;
+  *(undefined4 *)(((unsigned char *)0x000011d4) + ctx) = 0x600;
+  *(undefined4 *)(((unsigned char *)0x000011f4) + ctx) = 0;
   return;
 }
 
@@ -3773,7 +3773,8 @@ int arbfpInitUnitState(ctx, unusedArg2, compileInfo, hwState, unitState, unitEna
   int unitEnabled;
   int hasFogOrSecondary;
 {
-  undefined4 uVar1;
+  undefined4 compileField108;
+  undefined4 fogUnitCount;
   uint regBase;
   int hwCursorA;
   uint fieldBits;
@@ -3845,9 +3846,9 @@ int arbfpInitUnitState(ctx, unusedArg2, compileInfo, hwState, unitState, unitEna
     *(uint *)(regBase + hwState + 200) =
          fieldBits << 0xc | *(uint *)(regBase + hwState + 200) & 0xff000fff | 0xfc0000;
     *(char *)(unitState + 0x92) = (char)baseUnit;
-    uVar1 = *(undefined4 *)(compileInfo + 0x108);
+    compileField108 = *(undefined4 *)(compileInfo + 0x108);
     *(undefined1 *)(unitState + 0x93) = 0;
-    *(short *)(unitState + 0x91) = (short)uVar1;
+    *(short *)(unitState + 0x91) = (short)compileField108;
   }
   *(undefined1 *)((int)unitState + 10) = 0;
   *(undefined2 *)((int)unitState + 6) = 0;
@@ -3856,11 +3857,11 @@ int arbfpInitUnitState(ctx, unusedArg2, compileInfo, hwState, unitState, unitEna
   *(uint *)(hwState + 0x88) = *(uint *)(hwState + 0x88) & 0xffffe03f;
   *(uint *)(hwState + 200) = *(uint *)(hwState + 200) & 0x80ffffff;
   if (hasFogOrSecondary == 0) {
-    uVar1 = 1;
+    fogUnitCount = 1;
     baseUnit = 1;
   }
   else {
-    uVar1 = 2;
+    fogUnitCount = 2;
     *(undefined1 *)((int)unitState + 0x55) = 0;
     *(undefined1 *)((int)unitState + 0x53) = 1;
     *(undefined1 *)((int)unitState + 0x52) = 1;
@@ -3869,7 +3870,7 @@ int arbfpInitUnitState(ctx, unusedArg2, compileInfo, hwState, unitState, unitEna
     *(uint *)(hwState + 0x8c) = *(uint *)(hwState + 0x8c) & 0xffffe03f | 0x40;
     *(uint *)(hwState + 0xcc) = *(uint *)(hwState + 0xcc) & 0x80ffffff | 0x1000000;
   }
-  *(undefined4 *)(hwState + 0x20c) = uVar1;
+  *(undefined4 *)(hwState + 0x20c) = fogUnitCount;
   hwCursorA = 0x48;
   *(undefined4 *)(hwState + 0x214) = 0;
   *(uint *)(hwState + 0x208) = baseUnit << 7 | *(uint *)(hwState + 0x208) & 0xfffff87f;

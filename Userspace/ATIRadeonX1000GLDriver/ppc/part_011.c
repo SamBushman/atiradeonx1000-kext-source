@@ -1312,7 +1312,8 @@ int recordRetargetDestination(ctx, recordIndex, newRegId)
   int consumerIndex;
   int *readerNode;
   uint oldSourceWord;
-  uint uVar5;
+  uint destWord;
+  uint consumerSourceMask;
   uint newFile;
   int programBase;
   uint newFileIndex;
@@ -1324,11 +1325,11 @@ int recordRetargetDestination(ctx, recordIndex, newRegId)
   int sourceWordAddrs [9];
   
   programBase = ctx + 0x1286c;
-  uVar5 = *(uint *)(programBase + recordIndex * 0x10);
+  destWord = *(uint *)(programBase + recordIndex * 0x10);
   newFileIndex = (uint)(char)(DAT_001aa764)[newRegId >> 8];
-  if ((char)(DAT_001aa758)[uVar5 >> 8 & 0xf] * 0x100 + (uVar5 >> 0xd & 0x7f) != newRegId) {
+  if ((char)(DAT_001aa758)[destWord >> 8 & 0xf] * 0x100 + (destWord >> 0xd & 0x7f) != newRegId) {
     *(uint *)(programBase + recordIndex * 0x10) =
-         (newRegId & 0x7f) << 0xd | (newFileIndex & 0xf) << 8 | uVar5 & 0xfff010ff;
+         (newRegId & 0x7f) << 0xd | (newFileIndex & 0xf) << 8 | destWord & 0xfff010ff;
     consumerNode = *(int **)(recordIndex * 4 + ctx + 0xa450);
     if (consumerNode != (int *)0x0) {
       do {
@@ -1336,13 +1337,13 @@ int recordRetargetDestination(ctx, recordIndex, newRegId)
         sourceIndex = 0;
         sourceWordAddrCursor = sourceWordAddrs;
         consumerRecord = consumerIndex * 0x10 + programBase;
-        uVar5 = *(uint *)(consumerIndex * 4 + ctx + 0x6450);
+        consumerSourceMask = *(uint *)(consumerIndex * 4 + ctx + 0x6450);
         sourceWordAddrs[0] = consumerRecord + 4;
         sourceWordAddrs[1] = consumerRecord + 8;
         sourceWordAddrs[2] = consumerRecord + 0xc;
         listCursor = (undefined4 *)(consumerIndex * 0xc + ctx + 0x450);
         do {
-          if (((uVar5 & 1 << (sourceIndex & 0x3f)) != 0) &&
+          if (((consumerSourceMask & 1 << (sourceIndex & 0x3f)) != 0) &&
              (readerNode = (int *)*listCursor, readerNode != (int *)0x0)) {
             referencesRecord = false;
             do {
@@ -2263,11 +2264,11 @@ LAB_00079ffc:
 }
 
 /* chunkArenaResetCursor @ 0x7a060 (16 bytes) */
-int chunkArenaResetCursor(param_1)
-  int param_1;
+int chunkArenaResetCursor(arena)
+  int arena;
 {
-  *(undefined4 *)(param_1 + 0x410) = 0;
-  *(undefined4 *)(param_1 + 0x414) = 0;
+  *(undefined4 *)(arena + 0x410) = 0;
+  *(undefined4 *)(arena + 0x414) = 0;
   return;
 }
 

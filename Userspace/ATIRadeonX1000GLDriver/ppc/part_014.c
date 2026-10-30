@@ -7788,7 +7788,7 @@ int glGenProgramsARB_impl(ctx, count, ids)
   int count;
   int ids;
 {
-  int iVar1;
+  int foundIndex;
   int loopIndex;
   int *programTable;
   int nextId;
@@ -7798,12 +7798,12 @@ int glGenProgramsARB_impl(ctx, count, ids)
     loopIndex = 0;
     nextId = *programTable;
     do {
-      while (iVar1 = ((int (*)())arbProgramFindIndex)(ctx,programTable,nextId), iVar1 != 0) {
+      while (foundIndex = ((int (*)())arbProgramFindIndex)(ctx,programTable,nextId), foundIndex != 0) {
         nextId = nextId + 1;
       }
-      iVar1 = loopIndex * 4;
+      foundIndex = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(int *)(ids + iVar1) = nextId;
+      *(int *)(ids + foundIndex) = nextId;
       nextId = nextId + 1;
     } while (count != loopIndex);
     *programTable = nextId;
@@ -7819,47 +7819,47 @@ int glGetProgramivARB_impl(ctx, target, pname, params)
   uint *params;
 {
   int programTable;
-  int iVar2;
+  int entrySlot;
   
   if (target == 0x8620) {
-    iVar2 = *(int *)(((unsigned char *)0x000014a0) + ctx);
+    entrySlot = *(int *)(((unsigned char *)0x000014a0) + ctx);
   }
   else {
     if (target != 0x8804) {
       return;
     }
-    iVar2 = *(int *)(((unsigned char *)0x00001270) + ctx);
+    entrySlot = *(int *)(((unsigned char *)0x00001270) + ctx);
   }
   programTable = *(int *)(((unsigned char *)0x0000112c) + ctx);
   if (pname == 0x8627) {
-    *params = *(uint *)(iVar2 * 0x18 + *(int *)(programTable + 8) + 0xc);
+    *params = *(uint *)(entrySlot * 0x18 + *(int *)(programTable + 8) + 0xc);
     return;
   }
   if (pname == 0x8876) {
-    *params = *(uint *)(iVar2 * 0x18 + *(int *)(programTable + 8) + 8);
+    *params = *(uint *)(entrySlot * 0x18 + *(int *)(programTable + 8) + 8);
     return;
   }
   if (pname != 0x8677) {
     if (target == 0x8804) {
-      iVar2 = *(int *)(iVar2 * 0x18 + *(int *)(programTable + 8) + 0x14);
+      entrySlot = *(int *)(entrySlot * 0x18 + *(int *)(programTable + 8) + 0x14);
       switch(pname) {
       case 0x8805:
-        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x6c);
+        *params = *(uint *)(*(int *)(entrySlot + 0x74) + 0x6c);
         return;
       case 0x8806:
-        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x70);
+        *params = *(uint *)(*(int *)(entrySlot + 0x74) + 0x70);
         return;
       case 0x8807:
-        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x74);
+        *params = *(uint *)(*(int *)(entrySlot + 0x74) + 0x74);
         return;
       case 0x8808:
-        *params = *(uint *)(iVar2 + 0x54);
+        *params = *(uint *)(entrySlot + 0x54);
         return;
       case 0x8809:
-        *params = *(uint *)(iVar2 + 0x58);
+        *params = *(uint *)(entrySlot + 0x58);
         return;
       case 0x880a:
-        *params = *(uint *)(iVar2 + 0x5c);
+        *params = *(uint *)(entrySlot + 0x5c);
 switchD_000a0718_caseD_8811:
         return;
       case 0x880b:
@@ -8025,49 +8025,49 @@ switchD_000a0718_caseD_8811:
       case 0x889f:
         goto switchD_000a0718_caseD_8811;
       case 0x88a0:
-        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x68);
+        *params = *(uint *)(*(int *)(entrySlot + 0x74) + 0x68);
         return;
       case 0x88a1:
         *params = *(uint *)(((unsigned char *)0x000011d4) + ctx);
         return;
       case 0x88a2:
-        *params = *(uint *)(iVar2 + 0x50);
+        *params = *(uint *)(entrySlot + 0x50);
         return;
       case 0x88a3:
         *params = *(uint *)(((unsigned char *)0x000011d8) + ctx);
         return;
       case 0x88a4:
-        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x88);
+        *params = *(uint *)(*(int *)(entrySlot + 0x74) + 0x88);
         return;
       case 0x88a5:
         *params = *(uint *)(((unsigned char *)0x000011dc) + ctx);
         return;
       case 0x88a6:
-        *params = *(uint *)(iVar2 + 0x68);
+        *params = *(uint *)(entrySlot + 0x68);
         return;
       case 0x88a7:
         *params = *(uint *)(((unsigned char *)0x000011e0) + ctx);
         return;
       case 0x88a8:
-        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x84);
+        *params = *(uint *)(*(int *)(entrySlot + 0x74) + 0x84);
         return;
       case 0x88a9:
         *params = *(uint *)(((unsigned char *)0x000011e4) + ctx);
         return;
       case 0x88aa:
-        *params = *(uint *)(iVar2 + 100);
+        *params = *(uint *)(entrySlot + 100);
         return;
       case 0x88ab:
         *params = *(uint *)(((unsigned char *)0x000011e8) + ctx);
         return;
       case 0x88ac:
-        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x7c);
+        *params = *(uint *)(*(int *)(entrySlot + 0x74) + 0x7c);
         return;
       case 0x88ad:
         *params = *(uint *)(((unsigned char *)0x000011ec) + ctx);
         return;
       case 0x88ae:
-        *params = *(uint *)(iVar2 + 0x60);
+        *params = *(uint *)(entrySlot + 0x60);
         return;
       case 0x88af:
         *params = *(uint *)(((unsigned char *)0x000011f0) + ctx);
@@ -8089,7 +8089,7 @@ switchD_000a0718_caseD_8811:
         *params = *(uint *)(((unsigned char *)0x00001200) + ctx);
         return;
       case 0x88b6:
-        *params = (uint)*(byte *)(iVar2 + 0x6c);
+        *params = (uint)*(byte *)(entrySlot + 0x6c);
         return;
       default:
         return;
@@ -8097,7 +8097,7 @@ switchD_000a0718_caseD_8811:
     }
     return;
   }
-  *params = *(uint *)(iVar2 * 0x18 + *(int *)(programTable + 8));
+  *params = *(uint *)(entrySlot * 0x18 + *(int *)(programTable + 8));
   return;
 }
 
@@ -8290,11 +8290,11 @@ int FUN_000a1040(unusedArg1, flag)
 }
 
 /* arbProgramIsValid @ 0xa1060 (44 bytes) */
-int arbProgramIsValid(param_1)
-  int param_1;
+int arbProgramIsValid(ctx)
+  int ctx;
 {
-  if (((param_1 != -0x1134) && (*(int *)(((unsigned char *)0x00001144) + param_1) != 0)) &&
-     (*(char *)(*(int *)(((unsigned char *)0x00001144) + param_1) + 0x74) != '\0')) {
+  if (((ctx != -0x1134) && (*(int *)(((unsigned char *)0x00001144) + ctx) != 0)) &&
+     (*(char *)(*(int *)(((unsigned char *)0x00001144) + ctx) + 0x74) != '\0')) {
     return 1;
   }
   return 0;

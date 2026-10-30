@@ -4179,7 +4179,7 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
   uint symbolWord;
   uint overrideZ;
   uint registerWord;
-  undefined4 uVar3;
+  undefined4 encodeOk;
   int symbol;
   uint overrideW;
   uint overrideY;
@@ -4460,7 +4460,7 @@ LAB_00074014:
         tokenIndex = *instructionArray;
         instructionArray[1] = instructionArray[1] + 0x80;
       }
-      uVar3 = 1;
+      encodeOk = 1;
       *(uint *)(tokenIndex * 4 + instructionArray[2]) = registerWord;
       *instructionArray = *instructionArray + 1;
     }
@@ -4489,7 +4489,7 @@ LAB_00074014:
         registerWord = *instructionArray;
         instructionArray[1] = instructionArray[1] + 0x80;
       }
-      uVar3 = 2;
+      encodeOk = 2;
       *(undefined4 *)(registerWord * 4 + instructionArray[2]) = 0;
       *instructionArray = *instructionArray + 1;
     }
@@ -4519,7 +4519,7 @@ LAB_00074014:
       registerWord = *instructionArray;
       instructionArray[1] = instructionArray[1] + 0x80;
     }
-    uVar3 = 2;
+    encodeOk = 2;
     *(undefined **)(registerWord * 4 + instructionArray[2]) = finalSwizzle;
     *instructionArray = *instructionArray + 1;
   }
@@ -4561,11 +4561,11 @@ LAB_00074014:
       registerWord = *instructionArray;
       instructionArray[1] = instructionArray[1] + 0x80;
     }
-    uVar3 = 3;
+    encodeOk = 3;
     *(undefined4 *)(registerWord * 4 + instructionArray[2]) = 0;
     *instructionArray = *instructionArray + 1;
   }
-  return uVar3;
+  return encodeOk;
 }
 
 /* evsEncodeDestination @ 0x744d0 (1412 bytes) */
@@ -4577,7 +4577,8 @@ int evsEncodeDestination(compiler, instructionArray, compileState, destination, 
   int asSource;
 {
   undefined4 encodeResult;
-  int iVar2;
+  int symbolDataType;
+  int symbolField8;
   int writeEnableY;
   uint symbolKind;
   int stateBlock;
@@ -4675,31 +4676,31 @@ int evsEncodeDestination(compiler, instructionArray, compileState, destination, 
       return 0;
     }
     stateBlock = destination[1] * 0x54 + compileState[8];
-    iVar2 = *(int *)(stateBlock + 0x24);
+    symbolDataType = *(int *)(stateBlock + 0x24);
     if (*(int *)(stateBlock + 0x28) == 0x87c4) {
-      if (iVar2 == 0x87bf) {
+      if (symbolDataType == 0x87bf) {
         registerWord = *(uint *)(stateBlock + 4) & 0xffff | 0x40000;
       }
-      else if (iVar2 == 0x87c0) {
+      else if (symbolDataType == 0x87c0) {
         registerWord = *(uint *)(stateBlock + 0x10) & 0xffff | 0x40000;
       }
       else {
-        if (iVar2 != 0x87be) {
+        if (symbolDataType != 0x87be) {
           return 0;
         }
-        iVar2 = *(int *)(stateBlock + 8);
+        symbolField8 = *(int *)(stateBlock + 8);
         registerWord = *(uint *)(stateBlock + 4) & 0xffff | 0x40000;
-        if (iVar2 == 1) {
+        if (symbolField8 == 1) {
           maskBits = maskBits & 0xffffff0c;
         }
-        else if (iVar2 == 0) {
+        else if (symbolField8 == 0) {
           maskBits = maskBits & 0xffffff03;
         }
-        else if (iVar2 == 2) {
+        else if (symbolField8 == 2) {
           maskBits = maskBits & 0xffffff30;
         }
         else {
-          if (iVar2 != 3) {
+          if (symbolField8 != 3) {
             return 0;
           }
           maskBits = maskBits & 0xffffffc0;
