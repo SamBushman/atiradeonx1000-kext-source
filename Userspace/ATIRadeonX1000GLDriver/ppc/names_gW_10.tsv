@@ -15,12 +15,6 @@ use	FUN_001507d0	uVar11	vectorFilledCount	INFERRED	web passed only as callee par
 use	FUN_001507d0	uVar5	vectorFilledCount2	INFERRED	web passed only as callee parameter vectorFilledCount (1 uses, unanimous)	^\s*uVar5\ =\ puVar16\[1\];$	+4
 use	Inst__takeOutCommonFactor	uVar6	vectorFilledCount	INFERRED	web passed only as callee parameter vectorFilledCount (1 uses, unanimous)	^\s*uVar6\ =\ puVar25\[1\];$	+3
 use	Inst__takeOutCommonFactor	uVar6	vectorFilledCount2	INFERRED	web passed only as callee parameter vectorFilledCount (1 uses, unanimous)	^\s*uVar6\ =\ puVar25\[1\];$@2	+3
-use	FUN_0015b4a4	uVar8	vectorFilledCount	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*uVar8\ =\ puVar11\[1\];$	+2
-use	FUN_0015b4a4	uVar8	vectorFilledCount	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*if\ \(uVar8\ <=\ uVar10\)\ \{$	+2
-use	FUN_0015b4a4	uVar8	vectorFilledCount	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*uVar8\ =\ puVar11\[1\];$@2	+2
-use	FUN_0015b4a4	uVar8	vectorFilledCount2	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*uVar8\ =\ puVar11\[1\];$@3	+2
-use	FUN_0015b4a4	uVar8	vectorFilledCount2	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*if\ \(uVar8\ <=\ uVar10\)\ \{$@2	+2
-use	FUN_0015b4a4	uVar8	vectorFilledCount2	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*uVar8\ =\ puVar11\[1\];$@4	+2
 use	Inst__collapseAlgebraic_0015c6d4	uVar7	vectorFilledCount	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*uVar7\ =\ puVar18\[1\];$	+2
 use	Inst__collapseAlgebraic_0015c6d4	uVar7	vectorFilledCount	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*if\ \(uVar7\ <=\ uVar16\)\ \{$	+2
 use	Inst__collapseAlgebraic_0015c6d4	uVar7	vectorFilledCount	INFERRED	web passed only as callee parameter vectorFilledCount (2 uses, unanimous)	^\s*uVar7\ =\ puVar18\[1\];$@2	+1

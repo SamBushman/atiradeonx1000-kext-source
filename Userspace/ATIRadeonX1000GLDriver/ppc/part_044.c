@@ -1512,17 +1512,18 @@ int FUN_0015b4a4(inst, param_2)
   int inst;
   int param_2;
 {
+  uint vectorFilledCount2;
+  uint loopIndex2;
+  uint vectorFilledCount;
+  uint loopIndex;
   uint loopIndex3;
   int operandRecord3;
-  uint vectorFilledCount2;
-  uint vectorFilledCount;
   uint *vector2;
   int *inst2;
   int operandIndex;
   int inst1;
   int isIdentity;
   int operandRecord2;
-  uint loopIndex;
   bool moreComponents;
   byte bVar2;
   int iVar3;
@@ -1531,7 +1532,6 @@ int FUN_0015b4a4(inst, param_2)
   undefined4 *puVar5;
   int *operandVReg;
   int operandRecord;
-  uint loopIndex2;
   int operandIndex2;
   uint uVar10;
   uint *vector;
@@ -1550,17 +1550,17 @@ int FUN_0015b4a4(inst, param_2)
           (iVar3 = OpcodeTraits__flagBit8(*(undefined4 *)(a0[0x22] + 8),*(undefined4 *)(param_2 + 8)),
           iVar3 != 0)))) {
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        loopIndex2 = 0;
+        loopIndex = 0;
         operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
         do {
           operandRecord3 = IRInst__getOperandRecord(inst,0);
-          if ((((*(char *)(loopIndex2 + operandRecord3 + 0x10) != '\x01') &&
-               (uVar10 = (uint)local_44[loopIndex2 - 4], uVar10 != 4)) && (loopIndex2 != uVar10)) &&
+          if ((((*(char *)(loopIndex + operandRecord3 + 0x10) != '\x01') &&
+               (uVar10 = (uint)local_44[loopIndex - 4], uVar10 != 4)) && (loopIndex != uVar10)) &&
              (operandRecord3 = IRInst__getOperandRecord(a0,0), *(char *)(uVar10 + operandRecord3 + 0x10) != '\x01')) {
             return;
           }
-          moreComponents = loopIndex2 != 3;
-          loopIndex2 = loopIndex2 + 1;
+          moreComponents = loopIndex != 3;
+          loopIndex = loopIndex + 1;
         } while (moreComponents);
         vector = (uint *)a0[4];
         loopIndex3 = 0;
@@ -1592,33 +1592,33 @@ int FUN_0015b4a4(inst, param_2)
         local_44[1] = 4;
         local_44[2] = 4;
         local_44[3] = 4;
-        loopIndex = 0;
+        loopIndex2 = 0;
         IRInst__getOperandRecord(a0,0);
         piVar4 = a0;
         do {
           operandRecord2 = IRInst__getOperandRecord(inst,0);
-          if (*(char *)(loopIndex + operandRecord2 + 0x10) != '\x01') {
-            bVar2 = local_44[loopIndex - 4];
+          if (*(char *)(loopIndex2 + operandRecord2 + 0x10) != '\x01') {
+            bVar2 = local_44[loopIndex2 - 4];
             uVar10 = (uint)bVar2;
-            if ((uVar10 != 4) && (uVar10 != loopIndex)) {
+            if ((uVar10 != 4) && (uVar10 != loopIndex2)) {
               operandIndex2 = 1;
               iVar3 = FUN_0011379c(*(undefined4 *)(param_2 + 8),a0);
               if (iVar3 != 0) {
                 for (; iVar3 = (**(code **)(*a0 + 0x14))(a0), operandIndex2 <= iVar3; operandIndex2 = operandIndex2 + 1) {
                   iVar3 = IRInst__getOperandRecord(a0,operandIndex2);
-                  (**(code **)(*a0 + 0x88))(a0,operandIndex2,loopIndex,*(undefined1 *)(uVar10 + iVar3 + 0x10));
+                  (**(code **)(*a0 + 0x88))(a0,operandIndex2,loopIndex2,*(undefined1 *)(uVar10 + iVar3 + 0x10));
                 }
               }
               operandRecord2 = IRInst__getOperandRecord(a0,0);
-              if (*(char *)(loopIndex + operandRecord2 + 0x10) != '\0') {
+              if (*(char *)(loopIndex2 + operandRecord2 + 0x10) != '\0') {
                 *(undefined1 *)(piVar4 + 0x27) = 0;
               }
-              local_44[loopIndex] = bVar2;
+              local_44[loopIndex2] = bVar2;
             }
           }
-          moreComponents = loopIndex != 3;
+          moreComponents = loopIndex2 != 3;
           piVar4 = (int *)((int)piVar4 + 1);
-          loopIndex = loopIndex + 1;
+          loopIndex2 = loopIndex2 + 1;
         } while (moreComponents);
         vector2 = (uint *)a0[4];
         loopIndex3 = 0;

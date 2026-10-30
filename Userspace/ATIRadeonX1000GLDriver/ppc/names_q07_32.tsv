@@ -1408,3 +1408,219 @@ use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value di
 use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value differs from the scaled value	^\s*bVar8\ =\ false;$@2	+1
 use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value differs from the scaled value	^\s*bVar8\ =\ true;$	+1
 use	FUN_00174e0c	bVar8	laneClamped	INFERRED	false, set when the clamped value differs from the scaled value	^\s*if\ \(\(\*\(int\ \*\)\(param_1\[0x2c\]\ \+\ 0x120\)\ ==\ 0\)\ \|\|\ \(bVar8\)\)\ \{$	+1
+use	FUN_00173754	iVar2	operandRecord	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_001054ec\(iVar1,0\);$	+2
+use	FUN_00173754	iVar2	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00173754	iVar2	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\(\*\(char\ \*\)\(\(int\)local_24\ \+\ iVar2\)\ ==\ '\\0'\)\ \&\&$	+3
+use	FUN_00173754	iVar3	operandRecord2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar3\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),0\);$	+1
+use	FUN_00173754	iVar3	operandRecord2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*local_24\[0\]\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	FUN_00173754	iVar3	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar3\ =\ 4;$	+1
+use	FUN_00173754	iVar3	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	FUN_00173af8	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x120\)\ !=\ 0\)\ \&\&$	+2
+use	FUN_00173af8	iVar2	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00173af8	iVar2	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\(\*\(char\ \*\)\(\(int\)local_38\ \+\ iVar2\)\ ==\ '\\0'\)\ \&\&\ \(\*param_2\ !=\ 0\)\)\ \{$	+1
+use	FUN_00173af8	iVar2	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+1
+use	FUN_00173af8	iVar2	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	FUN_0017494c	iVar6	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar6\ =\ 0;$	+1
+use	FUN_0017494c	iVar6	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar6\ \+\ iVar4\ \+\ 0x10\)\ ==\ '\\x01'\)\ \{$	+1
+use	FUN_0017494c	iVar6	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*bVar1\ =\ iVar6\ !=\ 3;$	+1
+use	FUN_0017494c	iVar6	loopIndex	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	ValueKey__fillSourceLaneUsage	iVar2	callResult2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_0011e780\(uVar1\);$	+2
+use	FUN_00176c40	iVar5	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar5\ =\ 5;$	+1
+use	FUN_00176c40	iVar5	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	FUN_001758d8	iVar7	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar7\ =\ 4;$	+1
+use	FUN_001758d8	iVar7	countdown	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+local	FUN_00175b40	bVar1	moreComponents	INFERRED	loopIndex != 3 continue flag
+local	FUN_00175b40	uVar2	sourceField70	INFERRED	*(sourceKey+0x70): per-lane field copied to this key (+0x60)
+local	FUN_00175b40	uVar3	sourceFieldA0	INFERRED	*(sourceKey+0xa0): per-lane field copied to this key (+0x90)
+local	FUN_00175b40	uVar7	sourceLaneValue	INFERRED	*(sourceKey+0x20): lane value number of the source key, copied to this key
+local	FUN_00175b40	iVar11	sourceKey	INFERRED	top element of the extra source users vector: the ValueKey of the extra operand source, walked lane by lane
+local	FUN_00175b40	piVar5	topSlot	INFERRED	address of the top vector element
+local	FUN_00175b40	uVar8	topIndex	INFERRED	vector count - 1
+local	FUN_00175b40	iVar6	keyOpcodeInfo	INFERRED	*(keyInst+0x88): opcode info
+local	FUN_00175b40	local_38	destSelect	INFERRED	dest select word of keyInst (byte per lane)
+use	ValueKey__fill	iVar5	operandCountLoop	INFERRED	vtable +0x14 operand count (loop bound)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x14\)\)\(piVar13\);$	+2
+use	ValueKey__fill	iVar5	operandSlot	INFERRED	key inst + operand*0x18 + 0x80: operand slot	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ \(int\)pdVar11\ \*\ 0x18\ \+\ 0x80;$	+3
+use	ValueKey__fill	iVar5	laneIdxB	INFERRED	lane index 0..3	^\s*iVar5\ =\ 0;$	+1
+use	ValueKey__fill	iVar5	laneIdxB	INFERRED	lane index 0..3	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(iVar5\ \+\ iVar7\ \+\ 0x10\);$	+1
+use	ValueKey__fill	iVar5	laneIdxB	INFERRED	lane index 0..3	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+1
+use	ValueKey__fill	iVar5	laneIdxB	INFERRED	lane index 0..3	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	ValueKey__fill	iVar5	countdown	INFERRED	countdown from 4	^\s*iVar5\ =\ 4;$	+1
+use	ValueKey__fill	iVar5	countdown	INFERRED	countdown from 4	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	ValueKey__fill	iVar5	laneByteOffset	INFERRED	lane index * 4	^\s*iVar5\ =\ 0;$@2	+1
+use	ValueKey__fill	iVar5	laneByteOffset	INFERRED	lane index * 4	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(iVar9\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x138\)\)\);$	+2
+use	ValueKey__fill	iVar5	instWord4c	INFERRED	piVar13[0x4c]: inst word copied to ctx+0x1d0	^\s*iVar5\ =\ piVar13\[0x4c\];$	+1
+use	ValueKey__fill	iVar5	instWord4c	INFERRED	piVar13[0x4c]: inst word copied to ctx+0x1d0	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1d0\)\ =\ iVar5;$	+1
+use	ValueKey__fill	iVar5	instWord4f	INFERRED	piVar13[0x4f]: inst word copied to ctx+0x1dc	^\s*iVar5\ =\ piVar13\[0x4f\];$	+1
+use	ValueKey__fill	iVar5	instWord4f	INFERRED	piVar13[0x4f]: inst word copied to ctx+0x1dc	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1dc\)\ =\ iVar5;$	+1
+use	ValueKey__fill	iVar7	operandRecord	INFERRED	IRInst__getOperandRecord(keyInst, operand)	^\s*iVar7\ =\ FUN_001054ec\(piVar13,pdVar11\);$	+2
+use	ValueKey__fill	iVar7	sourceValueNumber	INFERRED	value number of the source lane (*(sourceKey+0x20+component*4)); negative = expression record	^\s*iVar7\ =\ \*\(int\ \*\)\(uVar12\ \*\ 4\ \+\ iVar9\ \+\ 0x20\);$	+3
+use	ValueKey__fill	iVar7	sourceValueNumber	INFERRED	value number of the source lane (*(sourceKey+0x20+component*4)); negative = expression record	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_00173e10\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),local_3c\[0\]\);$	+1
+use	ValueKey__fill	iVar7	sourceValueNumber	INFERRED	value number of the source lane (*(sourceKey+0x20+component*4)); negative = expression record	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar7\ \+\ 4\);$	+1
+use	ValueKey__fill	iVar7	sourceValueNumber	INFERRED	value number of the source lane (*(sourceKey+0x20+component*4)); negative = expression record	^\s*\*piVar6\ =\ iVar7;$	+1
+use	ValueKey__fill	iVar7	countdownB	INFERRED	countdown from 4	^\s*iVar7\ =\ 4;$	+1
+use	ValueKey__fill	iVar7	countdownB	INFERRED	countdown from 4	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	ValueKey__fill	iVar9	laneKeyBase	INFERRED	ctx: base of the 4 lane words	^\s*iVar9\ =\ param_1;$	+1
+use	ValueKey__fill	iVar9	laneKeyBase	INFERRED	ctx: base of the 4 lane words	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x1bc\)\ =\ uVar4;$	+1
+use	ValueKey__fill	iVar9	laneKeyBase	INFERRED	ctx: base of the 4 lane words	^\s*iVar9\ =\ iVar9\ \+\ 4;$	+1
+use	ValueKey__fill	iVar9	valueNumber	INFERRED	value number of the lane (source value number, or the folded one)	^\s*iVar9\ =\ \*\(int\ \*\)\(\(uint\)\*\(byte\ \*\)\(\(int\)local_58\ \+\ iVar3\)\ \*\ 4\ \+\ dVar10\ \+\ 0x20\);$	+3
+use	ValueKey__fill	iVar9	valueNumber	INFERRED	value number of the lane (source value number, or the folded one)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)FUN_00173e10\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),local_44\);$	+2
+use	ValueKey__fill	iVar9	valueNumber	INFERRED	value number of the lane (source value number, or the folded one)	^\s*\*piVar13\ =\ iVar9;$	+1
+use	ValueKey__fill	iVar9	sourceKey	INFERRED	top element of the source def vector: ValueKey of the operand source	^\s*iVar9\ =\ \*piVar6;$	+1
+use	ValueKey__fill	iVar9	sourceKey	INFERRED	top element of the source def vector: ValueKey of the operand source	^\s*iVar7\ =\ \*\(int\ \*\)\(uVar12\ \*\ 4\ \+\ iVar9\ \+\ 0x20\);$	+1
+use	ValueKey__fill	iVar9	operandIdx	INFERRED	operand index 1..operand count	^\s*iVar9\ =\ 1;$	+1
+use	ValueKey__fill	iVar9	operandIdx	INFERRED	operand index 1..operand count	^\s*uVar17\ =\ FUN_00105594\(iVar3,iVar9\);$	+1
+use	ValueKey__fill	iVar9	operandIdx	INFERRED	operand index 1..operand count	^\s*puVar8\ =\ \(undefined4\ \*\)\(iVar9\ \*\ 0x10\ \+\ param_1\ \+\ 0x168\);$	+1
+use	ValueKey__fill	iVar9	operandIdx	INFERRED	operand index 1..operand count	^\s*puVar8\ =\ \(undefined4\ \*\)\(iVar9\ \*\ 0x10\ \+\ param_1\ \+\ 0x168\);$@2	+1
+use	ValueKey__fill	iVar9	operandIdx	INFERRED	operand index 1..operand count	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(iVar9\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x138\)\)\);$	+1
+use	ValueKey__fill	iVar9	operandIdx	INFERRED	operand index 1..operand count	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+use	ValueKey__fill	iVar9	instWord4d	INFERRED	piVar13[0x4d]: inst word copied to ctx+0x1d4	^\s*iVar9\ =\ piVar13\[0x4d\];$	+1
+use	ValueKey__fill	iVar9	instWord4d	INFERRED	piVar13[0x4d]: inst word copied to ctx+0x1d4	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1d4\)\ =\ iVar9;$	+1
+use	ValueKey__fill	iVar9	instWord50	INFERRED	piVar13[0x50]: inst word copied to ctx+0x1e0	^\s*iVar9\ =\ piVar13\[0x50\];$	+1
+use	ValueKey__fill	iVar9	instWord50	INFERRED	piVar13[0x50]: inst word copied to ctx+0x1e0	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1e0\)\ =\ iVar9;$	+1
+use	ValueKey__fill	iVar9	instWord50	INFERRED	piVar13[0x50]: inst word copied to ctx+0x1e0	^\s*\(piVar13,uVar4,in_r5,in_r6,in_r7,iVar3,param_1\ \+\ 0x1cc,iVar9\);$	+1
+use	ValueKey__fill	puVar8	exprRecord	INFERRED	Compiler__exprRecordForValueNumber result	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_00173360\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar9\);$	+2
+use	ValueKey__fill	puVar8	exprRecord	INFERRED	Compiler__exprRecordForValueNumber result	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_00173360\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar7\);$	+2
+use	ValueKey__fill	puVar8	operandLaneValues	INFERRED	ctx + operand*0x10 + 0x168: per-operand lane value numbers	^\s*puVar8\ =\ \(undefined4\ \*\)\(iVar9\ \*\ 0x10\ \+\ param_1\ \+\ 0x168\);$	+1
+use	ValueKey__fill	puVar8	operandLaneValues	INFERRED	ctx + operand*0x10 + 0x168: per-operand lane value numbers	^\s*\*puVar8\ =\ 0;$	+2
+use	ValueKey__fill	puVar8	operandLaneValues	INFERRED	ctx + operand*0x10 + 0x168: per-operand lane value numbers	^\s*puVar8\ =\ \(undefined4\ \*\)\(iVar9\ \*\ 0x10\ \+\ param_1\ \+\ 0x168\);$@2	+1
+use	ValueKey__fill	puVar8	operandLaneValues	INFERRED	ctx + operand*0x10 + 0x168: per-operand lane value numbers	^\s*\*puVar8\ =\ \*puVar2;$	+2
+use	ValueKey__fill	piVar6	topSlot	INFERRED	address of the top element of the source def vector	^\s*piVar6\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar15\[2\]\);$	+1
+use	ValueKey__fill	piVar6	topSlot	INFERRED	address of the top element of the source def vector	^\s*piVar6\ =\ \(int\ \*\)FUN_0019423c\(puVar15,uVar12\);$	+1
+use	ValueKey__fill	piVar6	topSlot	INFERRED	address of the top element of the source def vector	^\s*iVar9\ =\ \*piVar6;$	+1
+use	ValueKey__fill	piVar6	laneValueCursor2	INFERRED	ctx + operand*0x10 + 0x168 advanced per lane	^\s*piVar6\ =\ \(int\ \*\)\(\(int\)pdVar11\ \*\ 0x10\ \+\ param_1\ \+\ 0x168\);$	+1
+use	ValueKey__fill	piVar6	laneValueCursor2	INFERRED	ctx + operand*0x10 + 0x168 advanced per lane	^\s*\*piVar6\ =\ iVar7;$	+1
+use	ValueKey__fill	piVar6	laneValueCursor2	INFERRED	ctx + operand*0x10 + 0x168 advanced per lane	^\s*piVar6\ =\ piVar6\ \+\ 1;$	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$	+7
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@3	+2
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xbc\)\ =\ piVar13\[0x25\];$	+2
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*\*\(int\ \*\)\(param_1\ \+\ 0xc0\)\ =\ piVar13\[0x48\];$	+2
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x14\)\)\(piVar13\);$	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@4	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@5	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x14\)\)\(piVar13\);$	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@6	+2
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@7	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@8	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar7\ =\ FUN_001054ec\(piVar13,pdVar11\);$	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@9	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@10	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@11	+3
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@12	+5
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar5\ =\ piVar13\[0x4f\];$	+4
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x30\)\)$	+2
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@13	+3
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@14	+2
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@15	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*piVar13\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@16	+1
+use	ValueKey__fill	piVar13	keyInstPtr	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x74\)\)\(piVar13\);$	+1
+use	ValueKey__fill	piVar13	laneValueCursor	INFERRED	ctx + operand*0x10 + 0x168 advanced per lane	^\s*piVar13\ =\ \(int\ \*\)\(\(int\)pdVar11\ \*\ 0x10\ \+\ param_1\ \+\ 0x168\);$	+1
+use	ValueKey__fill	piVar13	laneValueCursor	INFERRED	ctx + operand*0x10 + 0x168 advanced per lane	^\s*\*piVar13\ =\ iVar9;$	+1
+use	ValueKey__fill	piVar13	laneValueCursor	INFERRED	ctx + operand*0x10 + 0x168 advanced per lane	^\s*piVar13\ =\ piVar13\ \+\ 1;$	+1
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(\*\(int\ \*\)\(\(int\)pdVar11\ \*\ 0x18\ \+\ iVar3\ \+\ 0x8c\)\ \+\ 0x2c\);$	+2
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*if\ \(uVar14\ <\ \*puVar15\)\ \{$	+1
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*_memset\(uVar12\ \*\ 4\ \+\ puVar15\[2\],0,\(uVar14\ \-\ uVar12\)\ \*\ 4\ \+\ 4\);$	+2
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*in_r5\ =\ \(dword\ \*\)\(uVar14\ \*\ 4\ \+\ puVar15\[2\]\);$	+1
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*in_r5\ =\ \(dword\ \*\)FUN_0019423c\(puVar15,uVar14\);$	+1
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(piVar13\[\(int\)pdVar11\ \*\ 6\ \+\ 0x23\]\ \+\ 0x2c\);$	+2
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*if\ \(uVar12\ <\ \*puVar15\)\ \{$	+1
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*_memset\(uVar14\ \*\ 4\ \+\ puVar15\[2\],0,in_r5\);$	+2
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*piVar6\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar15\[2\]\);$	+1
+use	ValueKey__fill	puVar15	sourceKeyVec	INFERRED	def vector of the operand source (*(source+0x2c))	^\s*piVar6\ =\ \(int\ \*\)FUN_0019423c\(puVar15,uVar12\);$	+1
+use	ValueKey__fill	puVar15	modifierWords	INFERRED	ctx + operand*0x20 + 200: per-lane negate/abs words	^\s*puVar15\ =\ \(uint\ \*\)\(\(int\)pdVar11\ \*\ 0x20\ \+\ param_1\ \+\ 200\);$	+1
+use	ValueKey__fill	puVar15	modifierWords	INFERRED	ctx + operand*0x20 + 200: per-lane negate/abs words	^\s*\*puVar15\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x20\)\ \&\ 1;$	+2
+use	ValueKey__fill	puVar15	modifierWords	INFERRED	ctx + operand*0x20 + 200: per-lane negate/abs words	^\s*puVar15\ =\ puVar15\ \+\ 1;$	+1
+use	ValueKey__fill	puVar15	modifierWords	INFERRED	ctx + operand*0x20 + 200: per-lane negate/abs words	^\s*puVar15\ =\ \(uint\ \*\)\(\(int\)pdVar11\ \*\ 0x20\ \+\ param_1\ \+\ 200\);$@2	+1
+use	ValueKey__fill	puVar15	modifierWords	INFERRED	ctx + operand*0x20 + 200: per-lane negate/abs words	^\s*\*puVar15\ =\ piVar13\[\(int\)pdVar11\ \*\ 6\ \+\ 0x28\]\ \&\ 1;$	+2
+use	ValueKey__fill	puVar15	modifierWords	INFERRED	ctx + operand*0x20 + 200: per-lane negate/abs words	^\s*puVar15\ =\ puVar15\ \+\ 1;$@2	+1
+use	ValueKey__fill	uVar12	vecCount	INFERRED	def vector element count	^\s*uVar12\ =\ puVar15\[1\];$	+2
+use	ValueKey__fill	uVar12	vecCount	INFERRED	def vector element count	^\s*if\ \(uVar12\ <=\ uVar14\)\ \{$	+3
+use	ValueKey__fill	uVar12	topIndex	INFERRED	def vector count - 1	^\s*uVar12\ =\ uVar14\ \-\ 1;$	+4
+use	ValueKey__fill	uVar12	topIndex	INFERRED	def vector count - 1	^\s*piVar6\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar15\[2\]\);$	+1
+use	ValueKey__fill	uVar12	topIndex	INFERRED	def vector count - 1	^\s*piVar6\ =\ \(int\ \*\)FUN_0019423c\(puVar15,uVar12\);$	+1
+use	ValueKey__fill	uVar12	sourceComponent	INFERRED	component byte of the operand select	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(iVar5\ \+\ iVar7\ \+\ 0x10\);$	+2
+use	ValueKey__fill	uVar12	sourceComponent	INFERRED	component byte of the operand select	^\s*iVar7\ =\ \*\(int\ \*\)\(uVar12\ \*\ 4\ \+\ iVar9\ \+\ 0x20\);$	+1
+use	ValueKey__fill	uVar14	topIndexB	INFERRED	def vector count - 1	^\s*uVar14\ =\ uVar12\ \-\ 1;$	+4
+use	ValueKey__fill	uVar14	topIndexB	INFERRED	def vector count - 1	^\s*in_r5\ =\ \(dword\ \*\)\(uVar14\ \*\ 4\ \+\ puVar15\[2\]\);$	+1
+use	ValueKey__fill	uVar14	topIndexB	INFERRED	def vector count - 1	^\s*in_r5\ =\ \(dword\ \*\)FUN_0019423c\(puVar15,uVar14\);$	+1
+use	ValueKey__fill	uVar14	vecCountB	INFERRED	def vector element count	^\s*uVar14\ =\ puVar15\[1\];$	+2
+use	ValueKey__fill	uVar14	vecCountB	INFERRED	def vector element count	^\s*if\ \(uVar14\ <=\ uVar12\)\ \{$	+4
+local	ValueKey__fill	dVar10	sourceKeyB	INFERRED	top element of the def vector: ValueKey of the operand source
+local	ValueKey__fill	pcVar16	laneActiveFlagPtr	INFERRED	ctx + operand*4 + 0x224: per-lane flag bytes
+use	ValueKey__fill	bVar1	moreLanes	INFERRED	lane != 3	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+1
+use	ValueKey__fill	bVar1	moreLanes	INFERRED	lane != 3	^\s*\}\ while\ \(bVar1\);$@2	+1
+local	ValueKey__fill	puVar2	sourceLanePtr	INFERRED	address of the source key lane word copied into the operand lane values
+local	ValueKey__fill	local_58	destSelect	INFERRED	dest select word of the key inst
+local	ValueKey__fill	local_48	absApplied	INFERRED	IRInst__applyAbsModifier out
+local	ValueKey__fill	local_44	negApplied	INFERRED	IRInst__applyNegateModifier out
+local	ValueKey__fill	local_40	absAppliedB	INFERRED	IRInst__applyAbsModifier out
+local	ValueKey__fill	local_3c	negAppliedB	INFERRED	IRInst__applyNegateModifier out
+use	FUN_0015b4a4	uVar8	loopIndex	INFERRED	counter	^\s*uVar8\ =\ 0;$	+1
+use	FUN_0015b4a4	uVar8	loopIndex	INFERRED	counter	^\s*if\ \(\(\(\(\*\(char\ \*\)\(uVar8\ \+\ iVar3\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&$	+3
+use	FUN_0015b4a4	uVar8	loopIndex	INFERRED	counter	^\s*bVar1\ =\ uVar8\ !=\ 3;$	+2
+use	FUN_0015b4a4	uVar8	vectorFilledCount	INFERRED	vector[1]	^\s*uVar8\ =\ puVar11\[1\];$	+2
+use	FUN_0015b4a4	uVar8	vectorFilledCount	INFERRED	vector[1]	^\s*if\ \(uVar8\ <=\ uVar10\)\ \{$	+2
+use	FUN_0015b4a4	uVar8	vectorFilledCount	INFERRED	vector[1]	^\s*uVar8\ =\ puVar11\[1\];$@2	+2
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*uVar8\ =\ 0;$@2	+1
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*if\ \(\*\(char\ \*\)\(uVar8\ \+\ iVar3\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+2
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*if\ \(\(uVar10\ !=\ 4\)\ \&\&\ \(uVar10\ !=\ uVar8\)\)\ \{$	+1
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,iVar9,uVar8,\*\(undefined1\ \*\)\(uVar10\ \+\ iVar3\ \+\ 0x10\)\);$	+1
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*if\ \(\*\(char\ \*\)\(uVar8\ \+\ iVar3\ \+\ 0x10\)\ !=\ '\\0'\)\ \{$	+1
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*local_44\[uVar8\]\ =\ bVar2;$	+1
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*bVar1\ =\ uVar8\ !=\ 3;$@2	+1
+use	FUN_0015b4a4	uVar8	loopIndex2	INFERRED	counter	^\s*uVar8\ =\ uVar8\ \+\ 1;$@2	+1
+use	FUN_0015b4a4	uVar8	vectorFilledCount2	INFERRED	vector2[1]	^\s*uVar8\ =\ puVar11\[1\];$@3	+2
+use	FUN_0015b4a4	uVar8	vectorFilledCount2	INFERRED	vector2[1]	^\s*if\ \(uVar8\ <=\ uVar10\)\ \{$@2	+2
+use	FUN_0015b4a4	uVar8	vectorFilledCount2	INFERRED	vector2[1]	^\s*uVar8\ =\ puVar11\[1\];$@4	+2
+use	FUN_00175b40	iVar4	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar4\ =\ param_1\[0x2c\];$	+2
+use	FUN_00175b40	iVar4	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*puVar12\ =\ \*\(uint\ \*\*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x84\)\ \*\ 0x18\ \+\ iVar4\ \+\ 0x8c\)\ \+\ 0x2c\);$	+1
+use	FUN_00175b40	iVar4	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar4\ =\ param_1\[0x2c\];$@2	+1
+use	FUN_00175b40	iVar4	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar4\ =\ param_1\[0x2c\];$@3	+1
+use	FUN_00175b40	iVar4	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar4\ =\ param_1\[0x2c\];$@4	+4
+use	FUN_00175b40	iVar4	countdown	INFERRED	countdown from 4 (fill loop)	^\s*iVar4\ =\ 4;$	+1
+use	FUN_00175b40	iVar4	countdown	INFERRED	countdown from 4 (fill loop)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_00175b40	iVar4	destOperandRecord	INFERRED	IRInst__getOperandRecord(keyInst,0): its +0x10 is the dest select word	^\s*iVar4\ =\ FUN_001054ec\(iVar4,0\);$	+1	lhs	none
+use	FUN_00175b40	iVar4	ptrEqualResult	INFERRED	Ptr__equalNonNull(lane key, source key) result	^\s*\(iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00176264\)\(\*puVar13,uVar7\),\ iVar4\ !=\ 0\)\)\ \&\&$	+1
+use	FUN_00175b40	iVar4	vcall64Result	INFERRED	vtable +0x64 on the key inst	^\s*\(iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[0x2c\]\ \+\ 100\)\)\(\(int\ \*\)param_1\[0x2c\]\),\ iVar4\ ==\ 0\)\)\ \{$	+1
+use	FUN_00175b40	iVar4	flagBit2Result	INFERRED	OpcodeTraits__flagBit2 result	^\s*iVar4\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\[0x2c\]\ \+\ 0x88\)\ \+\ 8\),param_1\[0x8e\]\);$	+2
+use	FUN_00175b40	iVar4	flagBit8Result	INFERRED	OpcodeTraits__flagBit8 result	^\s*iVar4\ =\ FUN_001131c0\(\*\(undefined4\ \*\)\(iVar6\ \+\ 8\),param_1\[0x8e\]\);$	+2
+use	FUN_00175b40	iVar4	flagBit9Result	INFERRED	OpcodeTraits__flagBit9 result	^\s*iVar4\ =\ FUN_0011320c\(\*\(undefined4\ \*\)\(iVar6\ \+\ 8\),param_1\[0x8e\]\);$	+2
+use	FUN_00175b40	iVar4	splitRgbAlphaEnabled	INFERRED	Compiler__isOptionEnabled(compiler,0x30) result	^\s*iVar4\ =\ FUN_000e07dc\(param_1\[0x8e\],0x30\);$	+2
+use	FUN_00175b40	iVar4	fun113734Result	INFERRED	FUN_00113734 result: nonzero keeps the lane	^\s*\(iVar4\ =\ FUN_00113734\(param_1\[0x8e\],param_1\[0x2c\],piVar5,in_r6,in_r7,in_r8,iVar6\),$	+2
+use	FUN_00175b40	iVar4	projectionCheckResult	INFERRED	FUN_000f3154 / IRInst__isProjectionOfOpcode2a results	^\s*iVar4\ =\ FUN_000f3154\(param_1\[0x2c\]\);$	+2
+use	FUN_00175b40	iVar4	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar4\ =\ FUN_001054ec\(iVar4,0\);$	+1	rhs	none
+use	FUN_00175b40	iVar4	destOperandRecord	INFERRED	IRInst__getOperandRecord(keyInst,0): its +0x10 is the dest select word	^\s*local_38\[0\]\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+1
+use	ValueKey__fill	iVar3	flagBit0Result	INFERRED	RegKind__flagBit0(dest reg kind)	^\s*iVar3\ =\ FUN_00126760\(piVar13\[0x26\]\);$	+3
+use	ValueKey__fill	iVar3	defFieldIndex	INFERRED	operand index 1..count of the getDefiningField128 loop	^\s*iVar3\ =\ 1;$	+1
+use	ValueKey__fill	iVar3	defFieldIndex	INFERRED	operand index 1..count of the getDefiningField128 loop	^\s*if\ \(iVar5\ <\ iVar3\)\ break;$	+2
+use	ValueKey__fill	iVar3	defFieldIndex	INFERRED	operand index 1..count of the getDefiningField128 loop	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	ValueKey__fill	iVar3	vcall7cResult	INFERRED	vtable +0x7c on the key inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x7c\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\);$	+2
+use	ValueKey__fill	iVar3	vcall7cResult	INFERRED	vtable +0x7c on the key inst	^\s*if\ \(0\ <\ \*\(int\ \*\)\(iVar3\ \+\ 0x84\)\)\ \{$	+1
+use	ValueKey__fill	iVar3	vcall7cResult	INFERRED	vtable +0x7c on the key inst	^\s*uVar17\ =\ FUN_00105594\(iVar3,iVar9\);$	+1
+use	ValueKey__fill	iVar3	vcall7cResult	INFERRED	vtable +0x7c on the key inst	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(iVar9\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 0x138\)\)\);$	+1
+use	ValueKey__fill	iVar3	vcall7cResult	INFERRED	vtable +0x7c on the key inst	^\s*\}\ while\ \(iVar9\ <=\ \*\(int\ \*\)\(iVar3\ \+\ 0x84\)\);$	+1
+use	ValueKey__fill	iVar3	flagBit2Result	INFERRED	OpcodeTraits__flagBit2 result	^\s*iVar3\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x88\)\ \+\ 8\),$	+3
+use	ValueKey__fill	iVar3	flagBit9Result	INFERRED	OpcodeTraits__flagBit9 result	^\s*iVar3\ =\ FUN_0011320c\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x88\)\ \+\ 8\),$	+3
+use	ValueKey__fill	iVar3	operandCountCall	INFERRED	vtable +0x14 operand count of the key inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x14\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\);$	+1
+use	ValueKey__fill	iVar3	operandCountCall	INFERRED	vtable +0x14 operand count of the key inst	^\s*if\ \(iVar3\ <\ \(int\)pdVar11\)\ break;$	+1
+use	ValueKey__fill	iVar3	keyInst	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+2
+use	ValueKey__fill	iVar3	keyInst	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$@2	+1
+use	ValueKey__fill	iVar3	keyInst	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$@3	+1
+use	ValueKey__fill	iVar3	keyInst	INFERRED	*(ctx+0xb0): the key instruction	^\s*iVar3\ =\ FUN_001054ec\(iVar3,pdVar11\);$	+2
+use	ValueKey__fill	iVar3	laneIdx	INFERRED	lane index 0..3	^\s*iVar3\ =\ 0;$	+1
+use	ValueKey__fill	iVar3	laneIdx	INFERRED	lane index 0..3	^\s*if\ \(\*\(byte\ \*\)\(\(int\)local_58\ \+\ iVar3\)\ !=\ 4\)\ \{$	+2
+use	ValueKey__fill	iVar3	laneIdx	INFERRED	lane index 0..3	^\s*bVar1\ =\ iVar3\ !=\ 3;$	+1
+use	ValueKey__fill	iVar3	laneIdx	INFERRED	lane index 0..3	^\s*iVar3\ =\ iVar3\ \+\ 1;$@2	+1
+use	ValueKey__fill	iVar3	laneWordCursor	INFERRED	ctx advanced one 4-byte lane word at a time	^\s*iVar3\ =\ param_1;$	+1
+use	ValueKey__fill	iVar3	laneWordCursor	INFERRED	ctx advanced one 4-byte lane word at a time	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x30\)\ =\ 0;$	+2
+use	ValueKey__fill	iVar3	laneWordCursor	INFERRED	ctx advanced one 4-byte lane word at a time	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	ValueKey__fill	iVar3	instWord4e	INFERRED	piVar13[0x4e]: inst word copied to ctx+0x1d8	^\s*iVar3\ =\ piVar13\[0x4e\];$	+1
+use	ValueKey__fill	iVar3	instWord4e	INFERRED	piVar13[0x4e]: inst word copied to ctx+0x1d8	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1d8\)\ =\ iVar3;$	+1
+use	ValueKey__fill	iVar3	vcall5cResult	INFERRED	vtable +0x5c on the key inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x5c\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\);$	+2
+use	ValueKey__fill	iVar3	fun172fb8Result	INFERRED	FUN_00172fb8(ctx) result	^\s*iVar3\ =\ FUN_00172fb8\(param_1\);$	+2
+use	ValueKey__fill	iVar3	vcall74Result	INFERRED	vtable +0x74 on the key inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x74\)\)\(piVar13\);$	+2
+use	ValueKey__fill	iVar3	vcall78Result	INFERRED	vtable +0x78 on the key inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x78\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0xb0\)\);$	+2
+use	ValueKey__fill	iVar3	instWord51	INFERRED	piVar13[0x51]: inst word copied to ctx+0x1e4; also the stale argument of the vtable +0x30 call	^\s*iVar3\ =\ piVar13\[0x51\];$	+1
+use	ValueKey__fill	iVar3	instWord51	INFERRED	piVar13[0x51]: inst word copied to ctx+0x1e4; also the stale argument of the vtable +0x30 call	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1e4\)\ =\ iVar3;$	+1
+use	ValueKey__fill	iVar3	instWord51	INFERRED	piVar13[0x51]: inst word copied to ctx+0x1e4; also the stale argument of the vtable +0x30 call	^\s*\(piVar13,uVar4,in_r5,in_r6,in_r7,iVar3,param_1\ \+\ 0x1cc,iVar9\);$	+1
+use	ValueKey__fill	iVar3	vcall30Result	INFERRED	vtable +0x30 on the key inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x30\)\)$	+1
+use	ValueKey__fill	iVar3	vcall30Result	INFERRED	vtable +0x30 on the key inst	^\s*if\ \(iVar3\ ==\ 0\)\ \{$@3	+1

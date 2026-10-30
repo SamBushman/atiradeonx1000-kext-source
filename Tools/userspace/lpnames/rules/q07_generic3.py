@@ -16,6 +16,7 @@ def name(var, k, defs, lines, ctx):
         if steps and all(s == -1 for s in steps) and starts: return 'countdown'
         if steps and all(s == 1 for s in steps) and starts and all(s == 0 for s in starts): return 'loopIndex'
         return None
+    if all(re.match(r'^[A-Za-z_]\w*\[1\]$', d) for d in ds): return 'vectorFilledCount'
     if all(re.match(r'^FUN_001054ec\(', d) for d in ds): return 'operandRecord'
     if all(re.match(r'^FUN_00105594\(', d) for d in ds): return 'operandVReg' if var.startswith('p') else 'sourceDef'
     if all(re.match(r'^\(\*\*\(code \*\*\)\(\*%s \+ 0x14\)\)\(%s\)$' % (ID, ID), d) for d in ds): return 'operandCount'
