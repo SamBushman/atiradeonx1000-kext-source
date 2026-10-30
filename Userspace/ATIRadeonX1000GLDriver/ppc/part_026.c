@@ -1916,42 +1916,43 @@ int DominatorTree__ctor_f7cd8(domInfo, program)
 int DominatorTree__computeDominanceFrontiers(domInfo)
   int domInfo;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
+  int domChild;
+  int childFrontierBlock;
+  int *blockCursor;
+  int successor;
   uint loopIndex;
-  int iVar5;
-  int iVar6;
+  int blockDfsNumber;
+  int block;
   int loopCounter;
   int loopCounterB;
   uint loopIndex2;
-  uint uVar10;
+  uint childFrontierIndex;
   
-  piVar2 = (int *)Program__getBlocksArray(*(undefined4 *)(domInfo + 0x20));
+  blockCursor = (int *)Program__getBlocksArray(*(undefined4 *)(domInfo + 0x20));
   if (*(int *)(domInfo + 0x1c) != 0) {
     loopIndex = 1;
     do {
-      piVar2 = piVar2 + 1;
-      iVar6 = *piVar2;
-      iVar5 = *(int *)(iVar6 + 0xe4);
+      blockCursor = blockCursor + 1;
+      block = *blockCursor;
+      blockDfsNumber = *(int *)(block + 0xe4);
       loopCounter = 0;
-      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
-        iVar3 = *(int *)(loopCounter + *(int *)(*(int *)(iVar6 + 0xd0) + 8));
-        if ((iVar3 != 0) && (iVar5 != *(int *)(*(int *)(iVar3 + 0xe4) * 4 + *(int *)(domInfo + 8))))
+      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(block + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
+        successor = *(int *)(loopCounter + *(int *)(*(int *)(block + 0xd0) + 8));
+        if ((successor != 0) && (blockDfsNumber != *(int *)(*(int *)(successor + 0xe4) * 4 + *(int *)(domInfo + 8))))
         {
-          FUN_000e910c(iVar6,iVar3);
+          FUN_000e910c(block,successor);
         }
         loopCounter = loopCounter + 4;
       }
       loopCounter = 0;
-      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xf4) + 4); loopIndex2 = loopIndex2 + 1) {
+      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(block + 0xf4) + 4); loopIndex2 = loopIndex2 + 1) {
         loopCounterB = 0;
-        iVar3 = *(int *)(loopCounter + *(int *)(*(int *)(iVar6 + 0xf4) + 8));
-        for (uVar10 = 1; iVar1 = *(int *)(iVar3 + 0xf8), uVar10 <= *(uint *)(iVar1 + 4);
-            uVar10 = uVar10 + 1) {
-          iVar1 = *(int *)(loopCounterB + *(int *)(iVar1 + 8));
-          if (iVar5 != *(int *)(*(int *)(iVar1 + 0xe4) * 4 + *(int *)(domInfo + 8))) {
-            FUN_000e910c(iVar6,iVar1);
+        domChild = *(int *)(loopCounter + *(int *)(*(int *)(block + 0xf4) + 8));
+        for (childFrontierIndex = 1; childFrontierBlock = *(int *)(domChild + 0xf8), childFrontierIndex <= *(uint *)(childFrontierBlock + 4);
+            childFrontierIndex = childFrontierIndex + 1) {
+          childFrontierBlock = *(int *)(loopCounterB + *(int *)(childFrontierBlock + 8));
+          if (blockDfsNumber != *(int *)(*(int *)(childFrontierBlock + 0xe4) * 4 + *(int *)(domInfo + 8))) {
+            FUN_000e910c(block,childFrontierBlock);
           }
           loopCounterB = loopCounterB + 4;
         }
@@ -2049,18 +2050,18 @@ int DominatorTree__dfsNumber(domInfo, rootBlock)
   int loopCounter;
   int vectorData;
   int arena;
-  int iVar1;
+  int slotOffset;
   int *allocation;
-  int *piVar3;
-  int iVar4;
-  uint *puVar5;
-  int iVar6;
-  uint uVar7;
+  int *stackSlot;
+  int nextChild;
+  uint *stackVector;
+  int arenaObj;
+  uint stackSize;
   
   *(int *)(domInfo[8] + 0x474) = *(int *)(domInfo[8] + 0x474) + 1;
   arena = *(int *)(domInfo[9] + 0x378);
   allocation = (int *)Arena__alloc(arena,0x14);
-  puVar5 = (uint *)(allocation + 1);
+  stackVector = (uint *)(allocation + 1);
   *allocation = arena;
   allocation[1] = 2;
   allocation[4] = arena;
@@ -2070,58 +2071,58 @@ int DominatorTree__dfsNumber(domInfo, rootBlock)
   *(undefined4 *)(rootBlock + 0xe4) = 1;
   *(undefined4 *)(*domInfo + 4) = 0;
   *(int *)(*(int *)(rootBlock + 0xe4) * 4 + domInfo[6]) = rootBlock;
-  uVar7 = allocation[2];
-  if (uVar7 < (uint)allocation[1]) {
-    _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
-    allocation[2] = uVar7 + 1;
-    piVar3 = (int *)(uVar7 * 4 + allocation[3]);
+  stackSize = allocation[2];
+  if (stackSize < (uint)allocation[1]) {
+    _memset((void *)(stackSize * 4 + allocation[3]),0,4);
+    allocation[2] = stackSize + 1;
+    stackSlot = (int *)(stackSize * 4 + allocation[3]);
   }
   else {
-    piVar3 = (int *)Vector__elementRefGrow(puVar5,uVar7);
+    stackSlot = (int *)Vector__elementRefGrow(stackVector,stackSize);
   }
-  *piVar3 = rootBlock;
+  *stackSlot = rootBlock;
   loopCounter = 2;
   *(int *)(*(int *)(rootBlock + 0xe4) * 4 + domInfo[1]) = *(int *)(rootBlock + 0xe4);
   *(int *)(*(int *)(rootBlock + 0xe4) * 4 + domInfo[4]) = *(int *)(rootBlock + 0xe4);
   while( true ) {
     while( true ) {
-      iVar4 = FUN_000e80cc(rootBlock,*(undefined4 *)(domInfo[8] + 0x474));
-      if (iVar4 == 0) break;
-      uVar7 = allocation[2];
-      if (uVar7 < *puVar5) {
-        _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
-        allocation[2] = uVar7 + 1;
-        piVar3 = (int *)(uVar7 * 4 + allocation[3]);
+      nextChild = FUN_000e80cc(rootBlock,*(undefined4 *)(domInfo[8] + 0x474));
+      if (nextChild == 0) break;
+      stackSize = allocation[2];
+      if (stackSize < *stackVector) {
+        _memset((void *)(stackSize * 4 + allocation[3]),0,4);
+        allocation[2] = stackSize + 1;
+        stackSlot = (int *)(stackSize * 4 + allocation[3]);
       }
       else {
-        piVar3 = (int *)Vector__elementRefGrow(puVar5,uVar7);
+        stackSlot = (int *)Vector__elementRefGrow(stackVector,stackSize);
       }
-      *piVar3 = iVar4;
-      iVar1 = loopCounter * 4;
-      *(int *)(iVar4 + 0xe4) = loopCounter;
+      *stackSlot = nextChild;
+      slotOffset = loopCounter * 4;
+      *(int *)(nextChild + 0xe4) = loopCounter;
       loopCounter = loopCounter + 1;
-      *(undefined4 *)(iVar1 + *domInfo) = *(undefined4 *)(rootBlock + 0xe4);
-      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + domInfo[6]) = iVar4;
-      *(undefined4 *)(iVar4 + 0x118) = *(undefined4 *)(domInfo[8] + 0x474);
-      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + domInfo[1]) = *(int *)(iVar4 + 0xe4);
-      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + domInfo[4]) = *(int *)(iVar4 + 0xe4);
-      rootBlock = iVar4;
+      *(undefined4 *)(slotOffset + *domInfo) = *(undefined4 *)(rootBlock + 0xe4);
+      *(int *)(*(int *)(nextChild + 0xe4) * 4 + domInfo[6]) = nextChild;
+      *(undefined4 *)(nextChild + 0x118) = *(undefined4 *)(domInfo[8] + 0x474);
+      *(int *)(*(int *)(nextChild + 0xe4) * 4 + domInfo[1]) = *(int *)(nextChild + 0xe4);
+      *(int *)(*(int *)(nextChild + 0xe4) * 4 + domInfo[4]) = *(int *)(nextChild + 0xe4);
+      rootBlock = nextChild;
     }
-    uVar7 = allocation[2];
-    if (uVar7 == 0) break;
-    piVar3 = (int *)0x0;
-    if (uVar7 - 1 < uVar7) {
-      piVar3 = (int *)((uVar7 - 1) * 4 + allocation[3]);
+    stackSize = allocation[2];
+    if (stackSize == 0) break;
+    stackSlot = (int *)0x0;
+    if (stackSize - 1 < stackSize) {
+      stackSlot = (int *)((stackSize - 1) * 4 + allocation[3]);
     }
-    rootBlock = *piVar3;
-    Vector__removeAt(puVar5,uVar7 - 1);
+    rootBlock = *stackSlot;
+    Vector__removeAt(stackVector,stackSize - 1);
   }
-  if (puVar5 != (uint *)0x0) {
+  if (stackVector != (uint *)0x0) {
     Arena__free(allocation[4],allocation[3]);
-    iVar6 = *allocation;
-    if ((*(int *)(iVar6 + 0x28) != 0) && (piVar3 = *(int **)(iVar6 + 0x14), piVar3 == allocation)) {
-      _memset(piVar3,0,*(int *)(iVar6 + 8) - (int)piVar3);
-      *(undefined4 *)(iVar6 + 8) = *(undefined4 *)(iVar6 + 0x14);
+    arenaObj = *allocation;
+    if ((*(int *)(arenaObj + 0x28) != 0) && (stackSlot = *(int **)(arenaObj + 0x14), stackSlot == allocation)) {
+      _memset(stackSlot,0,*(int *)(arenaObj + 8) - (int)stackSlot);
+      *(undefined4 *)(arenaObj + 8) = *(undefined4 *)(arenaObj + 0x14);
     }
     return;
   }
@@ -2133,70 +2134,73 @@ int DominatorTree__compress(domInfo, vertex)
   int domInfo;
   int vertex;
 {
+  uint stackTopIndex;
+  int arenaObj;
+  int vertexOffset;
   int vectorData;
   int arena;
-  int iVar1;
-  uint uVar2;
+  int ancestorOffset;
+  uint stackSize;
   int *allocation;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  uint *puVar8;
-  int iVar9;
+  int *stackSlot;
+  int ancestorLabel;
+  int ancestorArrayB;
+  int labelArray;
+  uint *stackVector;
+  int ancestorArray;
   
   arena = *(int *)(*(int *)(domInfo + 0x24) + 0x378);
   allocation = (int *)Arena__alloc(arena,0x14);
-  puVar8 = (uint *)(allocation + 1);
+  stackVector = (uint *)(allocation + 1);
   *allocation = arena;
   allocation[1] = 2;
   allocation[2] = 0;
   allocation[4] = arena;
   vectorData = Arena__alloc(arena,8);
   allocation[3] = vectorData;
-  iVar9 = *(int *)(domInfo + 0xc);
-  while (*(int *)(*(int *)(vertex * 4 + iVar9) * 4 + iVar9) != 0) {
-    uVar2 = allocation[2];
-    if (uVar2 < *puVar8) {
-      _memset((void *)(uVar2 * 4 + allocation[3]),0,4);
-      piVar4 = (int *)(uVar2 * 4 + allocation[3]);
-      allocation[2] = uVar2 + 1;
+  ancestorArray = *(int *)(domInfo + 0xc);
+  while (*(int *)(*(int *)(vertex * 4 + ancestorArray) * 4 + ancestorArray) != 0) {
+    stackSize = allocation[2];
+    if (stackSize < *stackVector) {
+      _memset((void *)(stackSize * 4 + allocation[3]),0,4);
+      stackSlot = (int *)(stackSize * 4 + allocation[3]);
+      allocation[2] = stackSize + 1;
     }
     else {
-      piVar4 = (int *)Vector__elementRefGrow(puVar8,uVar2);
+      stackSlot = (int *)Vector__elementRefGrow(stackVector,stackSize);
     }
-    *piVar4 = vertex;
-    iVar9 = *(int *)(domInfo + 0xc);
-    vertex = *(int *)(vertex * 4 + iVar9);
+    *stackSlot = vertex;
+    ancestorArray = *(int *)(domInfo + 0xc);
+    vertex = *(int *)(vertex * 4 + ancestorArray);
   }
   while (allocation[2] != 0) {
-    uVar2 = allocation[2] - 1;
-    piVar4 = (int *)0x0;
-    if (uVar2 < (uint)allocation[2]) {
-      piVar4 = (int *)(uVar2 * 4 + allocation[3]);
+    stackTopIndex = allocation[2] - 1;
+    stackSlot = (int *)0x0;
+    if (stackTopIndex < (uint)allocation[2]) {
+      stackSlot = (int *)(stackTopIndex * 4 + allocation[3]);
     }
-    iVar9 = *piVar4;
-    Vector__removeAt(puVar8,allocation[2] - 1);
-    iVar6 = *(int *)(domInfo + 0xc);
-    iVar9 = iVar9 * 4;
-    iVar7 = *(int *)(domInfo + 0x10);
-    iVar1 = *(int *)(iVar6 + iVar9) * 4;
-    iVar5 = *(int *)(iVar7 + iVar1);
-    if (*(uint *)(iVar5 * 4 + *(int *)(domInfo + 4)) <
-        *(uint *)(*(int *)(iVar9 + iVar7) * 4 + *(int *)(domInfo + 4))) {
-      *(int *)(iVar9 + iVar7) = iVar5;
-      iVar6 = *(int *)(domInfo + 0xc);
+    vertexOffset = *stackSlot;
+    Vector__removeAt(stackVector,allocation[2] - 1);
+    ancestorArrayB = *(int *)(domInfo + 0xc);
+    vertexOffset = vertexOffset * 4;
+    labelArray = *(int *)(domInfo + 0x10);
+    ancestorOffset = *(int *)(ancestorArrayB + vertexOffset) * 4;
+    ancestorLabel = *(int *)(labelArray + ancestorOffset);
+    if (*(uint *)(ancestorLabel * 4 + *(int *)(domInfo + 4)) <
+        *(uint *)(*(int *)(vertexOffset + labelArray) * 4 + *(int *)(domInfo + 4))) {
+      *(int *)(vertexOffset + labelArray) = ancestorLabel;
+      ancestorArrayB = *(int *)(domInfo + 0xc);
     }
-    *(undefined4 *)(iVar9 + iVar6) = *(undefined4 *)(iVar1 + iVar6);
+    *(undefined4 *)(vertexOffset + ancestorArrayB) = *(undefined4 *)(ancestorOffset + ancestorArrayB);
   }
-  if (puVar8 == (uint *)0x0) {
+  if (stackVector == (uint *)0x0) {
     return;
   }
   Arena__free(allocation[4],allocation[3]);
-  iVar9 = *allocation;
-  if ((*(int *)(iVar9 + 0x28) != 0) && (piVar4 = *(int **)(iVar9 + 0x14), piVar4 == allocation)) {
-    _memset(piVar4,0,*(int *)(iVar9 + 8) - (int)piVar4);
-    *(undefined4 *)(iVar9 + 8) = *(undefined4 *)(iVar9 + 0x14);
+  arenaObj = *allocation;
+  if ((*(int *)(arenaObj + 0x28) != 0) && (stackSlot = *(int **)(arenaObj + 0x14), stackSlot == allocation)) {
+    _memset(stackSlot,0,*(int *)(arenaObj + 8) - (int)stackSlot);
+    *(undefined4 *)(arenaObj + 8) = *(undefined4 *)(arenaObj + 0x14);
   }
   return;
 }

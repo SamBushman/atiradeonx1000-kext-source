@@ -2469,57 +2469,58 @@ int Block__verify(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
-  bool bVar1;
-  int *piVar2;
-  int *piVar3;
+  int compiler;
+  bool isFirstFlagged;
+  int *nextInstLookahead;
+  int *nextInst;
   int loopCounter;
   uint loopIndex;
-  int iVar6;
+  int neighborBlock;
   uint loopIndex2;
-  int *piVar8;
+  int *currentInst;
   
   loopCounter = 0;
   for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(this + 0xd4) + 4); loopIndex = loopIndex + 1) {
-    iVar6 = *(int *)(loopCounter + *(int *)(*(int *)(this + 0xd4) + 8));
-    if (iVar6 != 0) {
-      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
+    neighborBlock = *(int *)(loopCounter + *(int *)(*(int *)(this + 0xd4) + 8));
+    if (neighborBlock != 0) {
+      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(neighborBlock + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
       }
     }
     loopCounter = loopCounter + 4;
   }
   loopCounter = 0;
   for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(this + 0xd0) + 4); loopIndex = loopIndex + 1) {
-    iVar6 = *(int *)(loopCounter + *(int *)(*(int *)(this + 0xd0) + 8));
-    if (iVar6 != 0) {
-      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xd4) + 4); loopIndex2 = loopIndex2 + 1) {
+    neighborBlock = *(int *)(loopCounter + *(int *)(*(int *)(this + 0xd0) + 8));
+    if (neighborBlock != 0) {
+      for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(neighborBlock + 0xd4) + 4); loopIndex2 = loopIndex2 + 1) {
       }
     }
     loopCounter = loopCounter + 4;
   }
-  piVar2 = (int *)(*(int **)(this + 0x98))[2];
-  if (piVar2 != (int *)0x0) {
+  nextInstLookahead = (int *)(*(int **)(this + 0x98))[2];
+  if (nextInstLookahead != (int *)0x0) {
     loopCounter = 0;
-    piVar8 = *(int **)(this + 0x98);
+    currentInst = *(int **)(this + 0x98);
     do {
-      piVar3 = piVar2;
-      if ((piVar8[5] & 1U) != 0) {
-        bVar1 = loopCounter == 0;
+      nextInst = nextInstLookahead;
+      if ((currentInst[5] & 1U) != 0) {
+        isFirstFlagged = loopCounter == 0;
         loopCounter = loopCounter + 1;
-        if (bVar1) {
-          (**(code **)(*piVar8 + 0x34))(piVar8);
+        if (isFirstFlagged) {
+          (**(code **)(*currentInst + 0x34))(currentInst);
         }
-        iVar6 = *(int *)(this + 0xa8);
-        if (((*(uint *)(*(int *)(iVar6 + 0x6c4) + 0x30) & 4) != 0) &&
-           (*(int *)(piVar8[0x22] + 8) == 0x8e)) {
-          (**(code **)(*(int *)piVar8[1] + 0x34))((int *)piVar8[1]);
-          iVar6 = *(int *)(this + 0xa8);
+        compiler = *(int *)(this + 0xa8);
+        if (((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 4) != 0) &&
+           (*(int *)(currentInst[0x22] + 8) == 0x8e)) {
+          (**(code **)(*(int *)currentInst[1] + 0x34))((int *)currentInst[1]);
+          compiler = *(int *)(this + 0xa8);
         }
-        (**(code **)(*piVar8 + 8))(piVar8,iVar6);
-        piVar3 = (int *)piVar8[2];
+        (**(code **)(*currentInst + 8))(currentInst,compiler);
+        nextInst = (int *)currentInst[2];
       }
-      piVar2 = (int *)piVar3[2];
-      piVar8 = piVar3;
-    } while ((int *)piVar3[2] != (int *)0x0);
+      nextInstLookahead = (int *)nextInst[2];
+      currentInst = nextInst;
+    } while ((int *)nextInst[2] != (int *)0x0);
   }
   return 1;
 }

@@ -431,3 +431,94 @@ use	LoopHeader__verify	piVar2	nextInst	INFERRED	next instruction of the list	^\s
 use	LoopHeader__verify	piVar2	nextInst	INFERRED	next instruction of the list	^\s*piVar2\ =\ \(int\ \*\)piVar1\[2\];$@2	+1
 use	LoopHeader__verify	piVar2	nextInst	INFERRED	next instruction of the list	^\s*piVar1\ =\ piVar2;$	+1
 use	LoopHeader__verify	uVar3	queryResult	INFERRED	64-bit return pair of the instruction vtable queries (+0x34, +0x38, +0x78)	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x34\)\)\(piVar1\);$	+7
+use	DominatorTree__compress	iVar9	ancestorArray	INFERRED	domInfo+0xc: Lengauer-Tarjan ancestor array	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc\);$	+2
+use	DominatorTree__compress	iVar9	ancestorArray	INFERRED	domInfo+0xc: Lengauer-Tarjan ancestor array	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc\);$@2	+2
+use	DominatorTree__compress	iVar9	vertexOffset	INFERRED	popped vertex * 4, byte offset into the arrays	^\s*iVar9\ =\ \*piVar4;$	+1
+use	DominatorTree__compress	iVar9	vertexOffset	INFERRED	popped vertex * 4, byte offset into the arrays	^\s*iVar9\ =\ iVar9\ \*\ 4;$	+1
+use	DominatorTree__compress	iVar9	vertexOffset	INFERRED	popped vertex * 4, byte offset into the arrays	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar6\ \+\ iVar9\)\ \*\ 4;$	+1
+use	DominatorTree__compress	iVar9	vertexOffset	INFERRED	popped vertex * 4, byte offset into the arrays	^\s*if\ \(\*\(uint\ \*\)\(iVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 4\)\)\ <$	+3
+use	DominatorTree__compress	iVar9	vertexOffset	INFERRED	popped vertex * 4, byte offset into the arrays	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ iVar6\)\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar6\);$	+1
+use	DominatorTree__compress	iVar9	arenaObj	INFERRED	arena object owning the stack vector, released at the end	^\s*iVar9\ =\ \*piVar3;$	+4
+use	DominatorTree__compress	iVar1	ancestorOffset	INFERRED	ancestor[vertex] * 4	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar6\ \+\ iVar9\)\ \*\ 4;$	+2
+use	DominatorTree__compress	iVar1	ancestorOffset	INFERRED	ancestor[vertex] * 4	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ iVar6\)\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar6\);$	+1
+use	DominatorTree__compress	uVar2	stackSize	INFERRED	vertex stack element count (push index)	^\s*uVar2\ =\ piVar3\[2\];$	+5
+use	DominatorTree__compress	uVar2	stackSize	INFERRED	vertex stack element count (push index)	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	DominatorTree__compress	uVar2	stackTopIndex	INFERRED	index of the stack top	^\s*uVar2\ =\ piVar3\[2\]\ \-\ 1;$	+1
+use	DominatorTree__compress	uVar2	stackTopIndex	INFERRED	index of the stack top	^\s*if\ \(uVar2\ <\ \(uint\)piVar3\[2\]\)\ \{$	+2
+use	DominatorTree__compress	piVar4	stackSlot	INFERRED	element reference in the vertex stack	^\s*piVar4\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ piVar3\[3\]\);$	+1
+use	DominatorTree__compress	piVar4	stackSlot	INFERRED	element reference in the vertex stack	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	DominatorTree__compress	piVar4	stackSlot	INFERRED	element reference in the vertex stack	^\s*\*piVar4\ =\ param_2;$	+1
+use	DominatorTree__compress	piVar4	stackSlot	INFERRED	element reference in the vertex stack	^\s*piVar4\ =\ \(int\ \*\)0x0;$	+1
+use	DominatorTree__compress	piVar4	stackSlot	INFERRED	element reference in the vertex stack	^\s*piVar4\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ piVar3\[3\]\);$@2	+1
+use	DominatorTree__compress	piVar4	stackSlot	INFERRED	element reference in the vertex stack	^\s*iVar9\ =\ \*piVar4;$	+1
+use	DominatorTree__compress	piVar4	stackSlot	INFERRED	element reference in the vertex stack	^\s*if\ \(\(\*\(int\ \*\)\(iVar9\ \+\ 0x28\)\ !=\ 0\)\ \&\&\ \(piVar4\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x14\),\ piVar4\ ==\ piVar3\)\)\ \{$	+2
+use	DominatorTree__compress	iVar5	ancestorLabel	INFERRED	label[ancestor[vertex]]	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar7\ \+\ iVar1\);$	+4
+use	DominatorTree__compress	iVar6	ancestorArrayB	INFERRED	domInfo+0xc re-read after the label update	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc\);$	+1
+use	DominatorTree__compress	iVar6	ancestorArrayB	INFERRED	domInfo+0xc re-read after the label update	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar6\ \+\ iVar9\)\ \*\ 4;$	+1
+use	DominatorTree__compress	iVar6	ancestorArrayB	INFERRED	domInfo+0xc re-read after the label update	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc\);$@2	+1
+use	DominatorTree__compress	iVar6	ancestorArrayB	INFERRED	domInfo+0xc re-read after the label update	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ iVar6\)\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar6\);$	+1
+use	DominatorTree__compress	iVar7	labelArray	INFERRED	domInfo+0x10: Lengauer-Tarjan label array	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x10\);$	+1
+use	DominatorTree__compress	iVar7	labelArray	INFERRED	domInfo+0x10: Lengauer-Tarjan label array	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar7\ \+\ iVar1\);$	+4
+use	DominatorTree__compress	puVar8	stackVector	INFERRED	header of the vertex stack vector inside the arena allocation	^\s*puVar8\ =\ \(uint\ \*\)\(piVar3\ \+\ 1\);$	+1
+use	DominatorTree__compress	puVar8	stackVector	INFERRED	header of the vertex stack vector inside the arena allocation	^\s*if\ \(uVar2\ <\ \*puVar8\)\ \{$	+1
+use	DominatorTree__compress	puVar8	stackVector	INFERRED	header of the vertex stack vector inside the arena allocation	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	DominatorTree__compress	puVar8	stackVector	INFERRED	header of the vertex stack vector inside the arena allocation	^\s*FUN_00194208\(puVar8,piVar3\[2\]\ \-\ 1\);$	+1
+use	DominatorTree__compress	puVar8	stackVector	INFERRED	header of the vertex stack vector inside the arena allocation	^\s*if\ \(puVar8\ ==\ \(uint\ \*\)0x0\)\ \{$	+1
+use	DominatorTree__dfsNumber	iVar6	arenaObj	INFERRED	arena object owning the stack vector, released at the end	^\s*iVar6\ =\ \*piVar2;$	+4
+use	DominatorTree__dfsNumber	iVar1	slotOffset	INFERRED	dfs number * 4: byte offset into the parent array	^\s*iVar1\ =\ iVar6\ \*\ 4;$	+1
+use	DominatorTree__dfsNumber	iVar1	slotOffset	INFERRED	dfs number * 4: byte offset into the parent array	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \*param_1\)\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xe4\);$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*piVar3\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ piVar2\[3\]\);$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*\*piVar3\ =\ param_2;$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*piVar3\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ piVar2\[3\]\);$@2	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar7\);$@2	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*\*piVar3\ =\ iVar4;$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*piVar3\ =\ \(int\ \*\)0x0;$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*piVar3\ =\ \(int\ \*\)\(\(uVar7\ \-\ 1\)\ \*\ 4\ \+\ piVar2\[3\]\);$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*param_2\ =\ \*piVar3;$	+1
+use	DominatorTree__dfsNumber	piVar3	stackSlot	INFERRED	element reference in the block stack	^\s*if\ \(\(\*\(int\ \*\)\(iVar6\ \+\ 0x28\)\ !=\ 0\)\ \&\&\ \(piVar3\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 0x14\),\ piVar3\ ==\ piVar2\)\)\ \{$	+2
+use	DominatorTree__dfsNumber	iVar4	nextChild	INFERRED	next unvisited successor of the current block (0 when none)	^\s*iVar4\ =\ FUN_000e80cc\(param_2,\*\(undefined4\ \*\)\(param_1\[8\]\ \+\ 0x474\)\);$	+2
+use	DominatorTree__dfsNumber	iVar4	nextChild	INFERRED	next unvisited successor of the current block (0 when none)	^\s*\*piVar3\ =\ iVar4;$	+1
+use	DominatorTree__dfsNumber	iVar4	nextChild	INFERRED	next unvisited successor of the current block (0 when none)	^\s*\*\(int\ \*\)\(iVar4\ \+\ 0xe4\)\ =\ iVar6;$	+1
+use	DominatorTree__dfsNumber	iVar4	nextChild	INFERRED	next unvisited successor of the current block (0 when none)	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0xe4\)\ \*\ 4\ \+\ param_1\[6\]\)\ =\ iVar4;$	+5
+use	DominatorTree__dfsNumber	puVar5	stackVector	INFERRED	header of the block stack vector inside the arena allocation	^\s*puVar5\ =\ \(uint\ \*\)\(piVar2\ \+\ 1\);$	+1
+use	DominatorTree__dfsNumber	puVar5	stackVector	INFERRED	header of the block stack vector inside the arena allocation	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	DominatorTree__dfsNumber	puVar5	stackVector	INFERRED	header of the block stack vector inside the arena allocation	^\s*if\ \(uVar7\ <\ \*puVar5\)\ \{$	+1
+use	DominatorTree__dfsNumber	puVar5	stackVector	INFERRED	header of the block stack vector inside the arena allocation	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar7\);$@2	+1
+use	DominatorTree__dfsNumber	puVar5	stackVector	INFERRED	header of the block stack vector inside the arena allocation	^\s*FUN_00194208\(puVar5,uVar7\ \-\ 1\);$	+1
+use	DominatorTree__dfsNumber	puVar5	stackVector	INFERRED	header of the block stack vector inside the arena allocation	^\s*if\ \(puVar5\ !=\ \(uint\ \*\)0x0\)\ \{$	+1
+use	DominatorTree__dfsNumber	uVar7	stackSize	INFERRED	block stack element count	^\s*uVar7\ =\ piVar2\[2\];$	+5
+use	DominatorTree__dfsNumber	uVar7	stackSize	INFERRED	block stack element count	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	DominatorTree__dfsNumber	uVar7	stackSize	INFERRED	block stack element count	^\s*uVar7\ =\ piVar2\[2\];$@2	+5
+use	DominatorTree__dfsNumber	uVar7	stackSize	INFERRED	block stack element count	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar5,uVar7\);$@2	+1
+use	DominatorTree__dfsNumber	uVar7	stackSize	INFERRED	block stack element count	^\s*uVar7\ =\ piVar2\[2\];$@3	+2
+use	DominatorTree__dfsNumber	uVar7	stackSize	INFERRED	block stack element count	^\s*if\ \(uVar7\ \-\ 1\ <\ uVar7\)\ \{$	+2
+use	DominatorTree__dfsNumber	uVar7	stackSize	INFERRED	block stack element count	^\s*FUN_00194208\(puVar5,uVar7\ \-\ 1\);$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar1	childFrontierBlock	INFERRED	block in the dominance frontier vector (+0xf8) of a dominator-tree child	^\s*for\ \(uVar10\ =\ 1;\ iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0xf8\),\ uVar10\ <=\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$	+5
+use	DominatorTree__computeDominanceFrontiers	piVar2	blockCursor	INFERRED	cursor over the blocks array	^\s*piVar2\ =\ \(int\ \*\)FUN_000ec5b8\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x20\)\);$	+1
+use	DominatorTree__computeDominanceFrontiers	piVar2	blockCursor	INFERRED	cursor over the blocks array	^\s*piVar2\ =\ piVar2\ \+\ 1;$	+2
+use	DominatorTree__computeDominanceFrontiers	iVar3	successor	INFERRED	successor of the block (vector at +0xd0)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd0\)\ \+\ 8\)\);$	+2
+use	DominatorTree__computeDominanceFrontiers	iVar3	successor	INFERRED	successor of the block (vector at +0xd0)	^\s*FUN_000e910c\(iVar6,iVar3\);$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar3	domChild	INFERRED	child of the block in the dominator tree (vector at +0xf4)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xf4\)\ \+\ 8\)\);$	+3
+use	DominatorTree__computeDominanceFrontiers	iVar5	blockDfsNumber	INFERRED	dfs number of the block (+0xe4)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0xe4\);$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar5	blockDfsNumber	INFERRED	dfs number of the block (+0xe4)	^\s*if\ \(\(iVar3\ !=\ 0\)\ \&\&\ \(iVar5\ !=\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0xe4\)\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 8\)\)\)\)$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar5	blockDfsNumber	INFERRED	dfs number of the block (+0xe4)	^\s*if\ \(iVar5\ !=\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0xe4\)\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 8\)\)\)\ \{$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar6	block	INFERRED	block whose dominance frontier is computed	^\s*iVar6\ =\ \*piVar2;$	+2
+use	DominatorTree__computeDominanceFrontiers	iVar6	block	INFERRED	block whose dominance frontier is computed	^\s*for\ \(uVar9\ =\ 1;\ uVar9\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd0\)\ \+\ 4\);\ uVar9\ =\ uVar9\ \+\ 1\)\ \{$	+2
+use	DominatorTree__computeDominanceFrontiers	iVar6	block	INFERRED	block whose dominance frontier is computed	^\s*FUN_000e910c\(iVar6,iVar3\);$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar6	block	INFERRED	block whose dominance frontier is computed	^\s*for\ \(uVar9\ =\ 1;\ uVar9\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xf4\)\ \+\ 4\);\ uVar9\ =\ uVar9\ \+\ 1\)\ \{$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar6	block	INFERRED	block whose dominance frontier is computed	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xf4\)\ \+\ 8\)\);$	+1
+use	DominatorTree__computeDominanceFrontiers	iVar6	block	INFERRED	block whose dominance frontier is computed	^\s*FUN_000e910c\(iVar6,iVar1\);$	+1
+use	DominatorTree__computeDominanceFrontiers	uVar10	childFrontierIndex	INFERRED	1-based index into the child's frontier vector	^\s*for\ \(uVar10\ =\ 1;\ iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0xf8\),\ uVar10\ <=\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$	+2
+use	MachineCodeWriter__encodeProgram	iVar2	blockIsIfHeader	INFERRED	block vtable +0x24 query, then IfHeader__canFlatten	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x24\)\)\(piVar1\);$	^\s*iVar2\ =\ FUN_000e79dc\(piVar1\);$	all	none
+use	MachineCodeWriter__encodeProgram	iVar2	predecessorCount	INFERRED	Block__predecessorCount(block)	^\s*iVar2\ =\ FUN_000e79dc\(piVar1\);$	^\s*piVar4\ =\ \(int\ \*\)piVar1\[0x35\];$	all	none
+use	MachineCodeWriter__encodeProgram	iVar2	predecessorQueryResult	INFERRED	predecessor vtable +0x24 query	^\s*if\ \(\(\(piVar4\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x24\)\)\(piVar4\),\ iVar2\ !=\ 0\)\)$	^\s*\}$	all	none
+use	MachineCodeWriter__encodeProgram	iVar2	programTooLarge	INFERRED	FUN_000e284c result: nonzero fails with Compiler__fail(...,5) unless compression is enabled and succeeds	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e284c\)\(auStack_74\);$	^\s*\(\*\*\(code\ \*\*\)\(\*local_54\ \+\ 0x24\)\)\(local_54,param_2,param_3\);$	all	none
+use	MachineCodeWriter__encodeProgram	piVar4	predecessorVector	INFERRED	block[0x35] predecessor vector	^\s*piVar4\ =\ \(int\ \*\)piVar1\[0x35\];$	^\s*piVar4\ =\ \(int\ \*\)\*puVar5;$	all	none
+use	MachineCodeWriter__encodeProgram	piVar4	firstPredecessor	INFERRED	first predecessor of the block	^\s*piVar4\ =\ \(int\ \*\)\*puVar5;$	^\s*\}$	all	none
+use	Block__verify	iVar6	neighborBlock	INFERRED	predecessor/successor block checked by the (empty) consistency loops	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xd4\)\ \+\ 8\)\);$	^\s*piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x98\)\)\[2\];$	all	none
+use	Block__verify	iVar6	compiler	INFERRED	this+0xa8: compiler object (+0x6c4 current program, flags +0x30)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$	^\s*piVar3\ =\ \(int\ \*\)piVar8\[2\];$	all	none
+local	Block__verify	piVar2	nextInstLookahead	INFERRED	next-next link of the instruction list, loop condition
+local	Block__verify	piVar3	nextInst	INFERRED	next instruction after currentInst
+local	Block__verify	piVar8	currentInst	INFERRED	instruction in the block list (this+0x98) being verified
+local	Block__verify	bVar1	isFirstFlagged	INFERRED	loopCounter == 0 before increment: first flagged instruction (vtable +0x34 called once)

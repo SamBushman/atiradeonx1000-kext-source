@@ -1477,10 +1477,14 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   undefined4 outBuffer;
   undefined4 outSize;
 {
+  int *firstPredecessor;
+  int programTooLarge;
+  int predecessorQueryResult;
+  int predecessorCount;
   int *block;
-  int iVar2;
+  int blockIsIfHeader;
   int *nextBlock;
-  int *piVar4;
+  int *predecessorVector;
   undefined4 *predecessorSlot;
   uint sizeBeforeCompression;
   int compressEnabled;
@@ -1510,25 +1514,25 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   (**(code **)(*local_54 + 0x18))(local_54,*writer);
   block = (int *)writer[0xe1];
   for (nextBlock = (int *)((int *)writer[0xe1])[2]; nextBlock != (int *)0x0; nextBlock = (int *)nextBlock[2]) {
-    iVar2 = (**(code **)(*block + 0x24))(block);
-    if ((iVar2 == 0) || (iVar2 = IfHeader__canFlatten(block,auStack_78), iVar2 == 0)) {
-      iVar2 = Block__predecessorCount(block);
-      if (0 < iVar2) {
-        piVar4 = (int *)block[0x35];
-        if (*piVar4 == 0) {
-          predecessorSlot = (undefined4 *)Vector__elementRefGrow(piVar4,0);
+    blockIsIfHeader = (**(code **)(*block + 0x24))(block);
+    if ((blockIsIfHeader == 0) || (blockIsIfHeader = IfHeader__canFlatten(block,auStack_78), blockIsIfHeader == 0)) {
+      predecessorCount = Block__predecessorCount(block);
+      if (0 < predecessorCount) {
+        predecessorVector = (int *)block[0x35];
+        if (*predecessorVector == 0) {
+          predecessorSlot = (undefined4 *)Vector__elementRefGrow(predecessorVector,0);
         }
         else {
-          if (piVar4[1] == 0) {
-            *(undefined4 *)piVar4[2] = 0;
-            piVar4[1] = 1;
+          if (predecessorVector[1] == 0) {
+            *(undefined4 *)predecessorVector[2] = 0;
+            predecessorVector[1] = 1;
           }
-          predecessorSlot = (undefined4 *)piVar4[2];
+          predecessorSlot = (undefined4 *)predecessorVector[2];
         }
-        piVar4 = (int *)*predecessorSlot;
-        if (((piVar4 != (int *)0x0) && (iVar2 = (**(code **)(*piVar4 + 0x24))(piVar4), iVar2 != 0))
-           && (block == (int *)piVar4[0x4e])) {
-          ((int (*)())FUN_000e2ee4)(auStack_74,piVar4);
+        firstPredecessor = (int *)*predecessorSlot;
+        if (((firstPredecessor != (int *)0x0) && (predecessorQueryResult = (**(code **)(*firstPredecessor + 0x24))(firstPredecessor), predecessorQueryResult != 0))
+           && (block == (int *)firstPredecessor[0x4e])) {
+          ((int (*)())FUN_000e2ee4)(auStack_74,firstPredecessor);
         }
       }
       ((int (*)())FUN_000e2838)(auStack_74,(uint)block,*writer);
@@ -1543,12 +1547,12 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   sizeBeforeCompression = (**(code **)(*local_54 + 0x20))(local_54);
   writer[1] = sizeBeforeCompression;
   ((int (*)())FUN_000e2780)(writer,auStack_74);
-  iVar2 = ((int (*)())FUN_000e284c)(auStack_74);
+  programTooLarge = ((int (*)())FUN_000e284c)(auStack_74);
   compressEnabled = Compiler__isOptionEnabled(writer[2],0x4d);
   if (compressEnabled == 0) {
-    if (iVar2 != 0) goto LAB_000e3900;
+    if (programTooLarge != 0) goto LAB_000e3900;
   }
-  else if (iVar2 != 0) {
+  else if (programTooLarge != 0) {
     if (*writer == 0) {
       *writer = 1;
       sizeBeforeCompression = writer[1];
