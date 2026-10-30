@@ -1,6 +1,6 @@
 # q08 (GLDriver parts 047-067): what is left, and why
 
-State after the last q08 gate: 4317 -> ~185 placeholders (wide regex over non-comment lines); every remaining item is one of:
+State after the last q08 gate: 4317 -> 150 placeholders (81 of them in_rN) (wide regex over non-comment lines); every remaining item is one of:
 
 1. `in_r5..in_r8` (81 occurrences): Ghidra register-argument artifacts of indirect calls (`(**(code **)(*this + 0x15c))(this,a,in_r6,in_r7,in_r8,...)`). They are not variables of the original program; deliberately not named.
 2. `FUN_xxxxxxxx` calls to functions DEFINED in other forks' ranges (renaming them from q08 would collide with that fork's own `func` rows):
