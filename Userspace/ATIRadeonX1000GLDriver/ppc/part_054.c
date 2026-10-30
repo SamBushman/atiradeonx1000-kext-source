@@ -479,7 +479,7 @@ LAB_001a20b4:
   *(undefined1 *)(recordPtr + 0x1c) = flag1c;
 LAB_001a20d4:
   operandRecord = IRInst__getOperandRecord(inst,1);
-  FUN_000f3470(&srcSelectScratch,*(undefined4 *)(operandRecord + 0x10));
+  SelectWord__canonicalize(&srcSelectScratch,*(undefined4 *)(operandRecord + 0x10));
   recordPtr = this[0x18] * 0x48 + this[0x2a];
   *(uint *)(recordPtr + 0x14) = srcSelectScratch >> 2 & 0xc00000 | *(uint *)(recordPtr + 0x14) & 0xff3fffff;
   recordPtr = this[0x18] * 0x48 + this[0x2a];
@@ -488,7 +488,7 @@ LAB_001a20d4:
   *(uint *)(recordPtr + 0x14) = (srcSelectScratch & 0x300) << 10 | *(uint *)(recordPtr + 0x14) & 0xfff3ffff;
   recordPtr = this[0x18] * 0x48 + this[0x2a];
   *(uint *)(recordPtr + 0x14) = (srcSelectScratch & 3) << 0x10 | *(uint *)(recordPtr + 0x14) & 0xfffcffff;
-  FUN_000f3470(texSelectScratch,*(undefined4 *)(inst + 0x140));
+  SelectWord__canonicalize(texSelectScratch,*(undefined4 *)(inst + 0x140));
   recordPtr = this[0x18] * 0x48 + this[0x2a];
   *(uint *)(recordPtr + 0x14) = (texSelectScratch[0] & 0x3000000) << 6 | *(uint *)(recordPtr + 0x14) & 0x3fffffff;
   recordPtr = this[0x18] * 0x48 + this[0x2a];

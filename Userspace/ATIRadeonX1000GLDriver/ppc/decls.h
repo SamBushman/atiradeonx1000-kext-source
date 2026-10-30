@@ -1727,7 +1727,7 @@ extern int FUN_000f32cc();
 extern int SelectWord__maskUnused();
 extern int SelectWord__readMask();
 extern int SelectWord__fillUnusedWithFirstUsed();
-extern int FUN_000f3470();
+extern int SelectWord__canonicalize();
 extern int IRInst__clearSourceSelectsOfUnwrittenComponents();
 extern int FUN_000f366c();
 extern int WriteMask__fromUsedLanes();

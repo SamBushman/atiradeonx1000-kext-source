@@ -1521,7 +1521,7 @@
 0xf3340	SelectWord__maskUnused	88	yes	
 0xf3398	SelectWord__readMask	96	yes	
 0xf33f8	SelectWord__fillUnusedWithFirstUsed	120	yes	
-0xf3470	FUN_000f3470	340	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xf3470	SelectWord__canonicalize	340	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xf35c4	IRInst__clearSourceSelectsOfUnwrittenComponents	168	no	indirect call (driver context / vtable / callback)
 0xf366c	FUN_000f366c	76	yes	
 0xf36b8	WriteMask__fromUsedLanes	84	yes	

@@ -1521,7 +1521,7 @@
 0xf3340	88	SelectWord__maskUnused	part_025	converted
 0xf3398	96	SelectWord__readMask	part_025	converted
 0xf33f8	120	SelectWord__fillUnusedWithFirstUsed	part_025	converted
-0xf3470	340	FUN_000f3470	part_025	converted
+0xf3470	340	SelectWord__canonicalize	part_025	converted
 0xf35c4	168	IRInst__clearSourceSelectsOfUnwrittenComponents	part_025	converted
 0xf366c	76	FUN_000f366c	part_025	converted
 0xf36b8	84	WriteMask__fromUsedLanes	part_025	converted

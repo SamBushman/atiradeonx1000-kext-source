@@ -510,72 +510,74 @@ int SelectWord__fillUnusedWithFirstUsed(result, selectWord)
   return;
 }
 
-/* FUN_000f3470 @ 0xf3470 (340 bytes) */
-int FUN_000f3470(outSelect, selectWord)
+/* SelectWord__canonicalize @ 0xf3470 (340 bytes) */
+int SelectWord__canonicalize(outSelect, selectWord)
   uint *outSelect;
   uint selectWord;
 {
+  byte *laneCursor;
+  bool lane0Unused;
   int loopCounter;
   unsigned int ghidra_home[8] = { outSelect, selectWord, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
-  bool bVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
-  byte *pbVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
+  bool hasUnusedLane;
+  bool usedLanesAgree;
+  uint lane0Byte;
+  uint splatComponent;
+  int lanesLeft;
+  byte *laterLaneCursor;
+  uint laneComponent;
+  int laneIndex;
+  int nextLane;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord;
-  uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
+  lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   (*(byte *)((unsigned char *)ghidra_home + 4)) = (byte)(selectWord >> 0x18);
-  uVar4 = (uint)(*(byte *)((unsigned char *)ghidra_home + 4));
-  if (uVar4 == 4) {
-    bVar2 = true;
-    iVar8 = 1;
+  splatComponent = (uint)(*(byte *)((unsigned char *)ghidra_home + 4));
+  if (splatComponent == 4) {
+    usedLanesAgree = true;
+    laneIndex = 1;
     do {
-      uVar7 = (uint)(&(*(unsigned int *)((unsigned char *)ghidra_home + 4)))[iVar8];
-      iVar9 = iVar8;
-      if ((uVar7 != 4) && (iVar9 = iVar8 + 1, uVar4 = uVar7, iVar9 < 4)) {
-        iVar5 = 4 - iVar9;
-        pbVar6 = (byte *)(&(*(unsigned int *)((unsigned char *)ghidra_home + 5)) + iVar8);
+      laneComponent = (uint)(&(*(unsigned int *)((unsigned char *)ghidra_home + 4)))[laneIndex];
+      nextLane = laneIndex;
+      if ((laneComponent != 4) && (nextLane = laneIndex + 1, splatComponent = laneComponent, nextLane < 4)) {
+        lanesLeft = 4 - nextLane;
+        laterLaneCursor = (byte *)(&(*(unsigned int *)((unsigned char *)ghidra_home + 5)) + laneIndex);
         do {
-          if ((*pbVar6 != 4) && (uVar7 != *pbVar6)) {
-            bVar2 = false;
+          if ((*laterLaneCursor != 4) && (laneComponent != *laterLaneCursor)) {
+            usedLanesAgree = false;
           }
-          iVar9 = iVar9 + 1;
-          pbVar6 = pbVar6 + 1;
-          iVar5 = iVar5 + -1;
-        } while (iVar5 != 0);
+          nextLane = nextLane + 1;
+          laterLaneCursor = laterLaneCursor + 1;
+          lanesLeft = lanesLeft + -1;
+        } while (lanesLeft != 0);
       }
-      iVar8 = iVar9 + 1;
-    } while (iVar8 < 4);
+      laneIndex = nextLane + 1;
+    } while (laneIndex < 4);
   }
   else {
-    bVar1 = false;
+    hasUnusedLane = false;
     loopCounter = 4;
-    bVar2 = true;
-    pbVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+    usedLanesAgree = true;
+    laneCursor = &(*(unsigned int *)((unsigned char *)ghidra_home + 4));
     do {
-      if (*pbVar6 == 4) {
-        bVar1 = true;
+      if (*laneCursor == 4) {
+        hasUnusedLane = true;
       }
-      else if (uVar4 != *pbVar6) {
-        bVar2 = false;
+      else if (splatComponent != *laneCursor) {
+        usedLanesAgree = false;
       }
-      pbVar6 = pbVar6 + 1;
+      laneCursor = laneCursor + 1;
       loopCounter = loopCounter + -1;
     } while (loopCounter != 0);
-    if (!bVar1) goto LAB_000f35b4;
+    if (!hasUnusedLane) goto LAB_000f35b4;
   }
-  if (bVar2) {
-    *outSelect = (DAT_001aa818)[uVar4];
+  if (usedLanesAgree) {
+    *outSelect = (DAT_001aa818)[splatComponent];
     return;
   }
-  bVar1 = (*(byte *)((unsigned char *)ghidra_home + 4)) == 4;
-  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
-  if (bVar1) {
+  lane0Unused = (*(byte *)((unsigned char *)ghidra_home + 4)) == 4;
+  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = lane0Byte;
+  if (lane0Unused) {
     (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord & 0xffffff;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 5)) == '\x04') {
@@ -584,13 +586,13 @@ int FUN_000f3470(outSelect, selectWord)
   if ((*(char *)((unsigned char *)ghidra_home + 6)) == '\x04') {
     (*(char *)((unsigned char *)ghidra_home + 6)) = CONCAT11(2,(*(char *)((unsigned char *)ghidra_home + 7)));
   }
-  uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
+  lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   if ((*(char *)((unsigned char *)ghidra_home + 7)) == '\x04') {
     (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = CONCAT31((*(unsigned char *)((unsigned char *)ghidra_home + 4)),3);
-    uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
+    lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   }
 LAB_000f35b4:
-  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
+  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = lane0Byte;
   *outSelect = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   return;
 }

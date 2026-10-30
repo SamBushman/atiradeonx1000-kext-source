@@ -2375,3 +2375,42 @@ use	FUN_000e3b88	iVar6	firstKeyEqualResult	INFERRED	IRInst__lastSourceKeyEquals 
 local	ILReader__nextInstruction	local_68	tokenCount	INFERRED	out parameter of ILReader__decodeInstruction: number of operand tokens of the decoded instruction (used as stack depth/offset later)
 local	ILReader__nextInstruction	local_64	leftConstant	INFERRED	left float constant read by ILReader__readFloatConst for the comparison; also receives the staged call-argument stores of the replay calls
 local	ILReader__nextInstruction	local_54	rightConstant	INFERRED	right float constant array read by ILReader__readFloatConst
+use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*iVar8\ =\ 1;$	+1
+use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*uVar7\ =\ \(uint\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\)\[iVar8\];$	+3
+use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*pbVar6\ =\ \(byte\ \*\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 5\)\)\ \+\ iVar8\);$	+1
+use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*iVar8\ =\ iVar9\ \+\ 1;$	+2
+use	FUN_000f3470	iVar9	nextLane	INFERRED	lane index after the inner scan	^\s*iVar9\ =\ iVar8;$	+3
+use	FUN_000f3470	iVar9	nextLane	INFERRED	lane index after the inner scan	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	FUN_000f3470	iVar9	nextLane	INFERRED	lane index after the inner scan	^\s*iVar8\ =\ iVar9\ \+\ 1;$	+1
+use	FUN_000f3470	bVar1	hasUnusedLane	INFERRED	set when some select byte is 4 (unused)	^\s*bVar1\ =\ false;$	+1
+use	FUN_000f3470	bVar1	hasUnusedLane	INFERRED	set when some select byte is 4 (unused)	^\s*bVar1\ =\ true;$	+1
+use	FUN_000f3470	bVar1	hasUnusedLane	INFERRED	set when some select byte is 4 (unused)	^\s*if\ \(!bVar1\)\ goto\ LAB_000f35b4;$	+1
+use	FUN_000f3470	bVar1	lane0Unused	INFERRED	lane 0 byte of the select word equals 4	^\s*bVar1\ =\ \(\*\(byte\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\ ==\ 4;$	+1
+use	FUN_000f3470	bVar1	lane0Unused	INFERRED	lane 0 byte of the select word equals 4	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ true;$	+1
+use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ false;$	+1
+use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ true;$@2	+1
+use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ false;$@2	+1
+use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*uVar3\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+1
+use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*\(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\ =\ uVar3;$	+1
+use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*uVar3\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$@2	+1
+use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*uVar3\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$@3	+1
+use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*\(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\ =\ uVar3;$@2	+1
+use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*uVar4\ =\ \(uint\)\(\*\(byte\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+2
+use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*if\ \(\(uVar7\ !=\ 4\)\ \&\&\ \(iVar9\ =\ iVar8\ \+\ 1,\ uVar4\ =\ uVar7,\ iVar9\ <\ 4\)\)\ \{$	+1
+use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*else\ if\ \(uVar4\ !=\ \*pbVar6\)\ \{$	+1
+use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*\*param_1\ =\ \(DAT_001aa818\)\[uVar4\];$	+1
+use	FUN_000f3470	iVar5	lanesLeft	INFERRED	lanes still to compare	^\s*iVar5\ =\ 4\ \-\ iVar9;$	+1
+use	FUN_000f3470	iVar5	lanesLeft	INFERRED	lanes still to compare	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	FUN_000f3470	pbVar6	laterLaneCursor	INFERRED	cursor over the select bytes after the first used lane	^\s*pbVar6\ =\ \(byte\ \*\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 5\)\)\ \+\ iVar8\);$	+1
+use	FUN_000f3470	pbVar6	laterLaneCursor	INFERRED	cursor over the select bytes after the first used lane	^\s*if\ \(\(\*pbVar6\ !=\ 4\)\ \&\&\ \(uVar7\ !=\ \*pbVar6\)\)\ \{$	+1
+use	FUN_000f3470	pbVar6	laterLaneCursor	INFERRED	cursor over the select bytes after the first used lane	^\s*pbVar6\ =\ pbVar6\ \+\ 1;$	+1
+use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*pbVar6\ =\ \&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+1
+use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*if\ \(\*pbVar6\ ==\ 4\)\ \{$	+1
+use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*else\ if\ \(uVar4\ !=\ \*pbVar6\)\ \{$	+1
+use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*pbVar6\ =\ pbVar6\ \+\ 1;$@2	+1
+use	FUN_000f3470	uVar7	laneComponent	INFERRED	component selected by the lane being examined	^\s*uVar7\ =\ \(uint\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\)\[iVar8\];$	+1
+use	FUN_000f3470	uVar7	laneComponent	INFERRED	component selected by the lane being examined	^\s*if\ \(\(uVar7\ !=\ 4\)\ \&\&\ \(iVar9\ =\ iVar8\ \+\ 1,\ uVar4\ =\ uVar7,\ iVar9\ <\ 4\)\)\ \{$	+1
+use	FUN_000f3470	uVar7	laneComponent	INFERRED	component selected by the lane being examined	^\s*if\ \(\(\*pbVar6\ !=\ 4\)\ \&\&\ \(uVar7\ !=\ \*pbVar6\)\)\ \{$	+1
+func	FUN_000f3470	SelectWord__canonicalize	INFERRED	if all used lanes (byte != 4) select the same component the result is that splat (DAT_001aa818 table), otherwise every unused lane byte is replaced by its own lane index
