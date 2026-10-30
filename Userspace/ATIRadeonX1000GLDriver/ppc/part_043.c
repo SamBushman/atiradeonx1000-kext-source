@@ -1938,7 +1938,6 @@ int FUN_00149de4(inst, operandIndex8, inst2, composeSelectPtr, compiler)
   bool moreComponents;
   byte componentUnused;
   char selectByteC;
-  int iVar4;
   int staleArg5;
   int instLastOperandIdx;
   int operandCountInst2;

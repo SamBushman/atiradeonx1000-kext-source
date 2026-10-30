@@ -3443,3 +3443,88 @@ use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values l
 use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*\(piVar6,1,iVar8,\(uint\)\*\(byte\ \*\)\(\(int\)local_64\ \+\ uVar16\),iVar4,in_r8,$	+2
 use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*iVar4\ =\ param_5;$	+1
 use	FUN_00149de4	iVar4	staleArg5	INFERRED	inst2 source 1 then compiler: values left in r7 as the 5th (stale) argument of the target check and of later vcalls; one register, not splittable	^\s*\(piVar7,1,iVar8,4,iVar4,in_r8,\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\);$	+1
+use	Program__hoistFetchInsts	piVar8	blockParentWalk	INFERRED	block walked up through its parent link (+0xf0 / +0xf0 chain) from the hoist target	^\s*piVar8\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ 0xf0\);$	+4
+use	Program__hoistFetchInsts	piVar8	blockParentWalk	INFERRED	block walked up through its parent link (+0xf0 / +0xf0 chain) from the hoist target	^\s*piVar8\ =\ \(int\ \*\)piVar8\[0x3c\];$	+1
+use	Program__hoistFetchInsts	piVar8	blockParentWalk	INFERRED	block walked up through its parent link (+0xf0 / +0xf0 chain) from the hoist target	^\s*uVar24\ =\ piVar8\[3\];$@2	+1
+use	Program__hoistFetchInsts	piVar8	hoistedSlotPtr	INFERRED	address of an element of the hoisted instruction vector	^\s*piVar8\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar5\[3\]\);$	+1
+use	Program__hoistFetchInsts	piVar8	hoistedSlotPtr	INFERRED	address of an element of the hoisted instruction vector	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar24\);$	+1
+use	Program__hoistFetchInsts	piVar8	hoistedSlotPtr	INFERRED	address of an element of the hoisted instruction vector	^\s*\*piVar8\ =\ iVar3;$	+1
+use	Program__hoistFetchInsts	piVar8	hoistedSlotPtr	INFERRED	address of an element of the hoisted instruction vector	^\s*piVar8\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ puVar5\[3\]\);$	+1
+use	Program__hoistFetchInsts	piVar8	hoistedSlotPtr	INFERRED	address of an element of the hoisted instruction vector	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar13\);$	+1
+use	Program__hoistFetchInsts	piVar8	hoistedSlotPtr	INFERRED	address of an element of the hoisted instruction vector	^\s*iVar23\ =\ \*piVar8;$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar9\[3\]\);$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar24\);$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*\*puVar10\ =\ uVar21;$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)\(uVar11\ \*\ 4\ \+\ puVar9\[3\]\);$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar11\);$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*piVar20\ =\ \(int\ \*\)\*puVar10;$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar25\[2\]\);$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar25,uVar24\);$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*\*puVar10\ =\ piVar20;$	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar9\[3\]\);$@2	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar24\);$@2	+1
+use	Program__hoistFetchInsts	puVar10	vecSlotPtr	INFERRED	address of a vector element (index*4 + data, or Vector__elementRefGrow)	^\s*\*puVar10\ =\ uVar21;$@2	+1
+use	Program__hoistFetchInsts	puVar25	blockInstVec	INFERRED	piVar22[0x4b]: vector of instructions of the new block	^\s*puVar25\ =\ \(uint\ \*\)piVar22\[0x4b\];$	+6
+use	Program__hoistFetchInsts	puVar25	blockInstVec	INFERRED	piVar22[0x4b]: vector of instructions of the new block	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar25,uVar24\);$	+1
+use	Program__hoistFetchInsts	puVar25	instUsersVec	INFERRED	piVar20[4]: users vector of the instruction	^\s*puVar25\ =\ \(uint\ \*\)piVar20\[4\];$	+3
+use	Program__hoistFetchInsts	puVar25	instUsersVec	INFERRED	piVar20[4]: users vector of the instruction	^\s*_memset\(\(void\ \*\)\(uVar11\ \*\ 4\ \+\ puVar25\[2\]\),0,\(uVar24\ \-\ uVar11\)\ \*\ 4\ \+\ 4\);$	+2
+use	Program__hoistFetchInsts	puVar25	instUsersVec	INFERRED	piVar20[4]: users vector of the instruction	^\s*piVar12\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar25\[2\]\);$	+1
+use	Program__hoistFetchInsts	puVar25	instUsersVec	INFERRED	piVar20[4]: users vector of the instruction	^\s*piVar12\ =\ \(int\ \*\)FUN_0019423c\(puVar25,uVar24\);$	+1
+use	Program__hoistFetchInsts	piVar12	lastWalkBlock	INFERRED	block reached by the walk towards the loop exit (or 0)	^\s*piVar12\ =\ \(int\ \*\)0x0;$	+1
+use	Program__hoistFetchInsts	piVar12	lastWalkBlock	INFERRED	block reached by the walk towards the loop exit (or 0)	^\s*piVar12\ =\ \(int\ \*\)0x0;$@2	+1
+use	Program__hoistFetchInsts	piVar12	lastWalkBlock	INFERRED	block reached by the walk towards the loop exit (or 0)	^\s*piVar12\ =\ piVar22;$	+1
+use	Program__hoistFetchInsts	piVar12	lastWalkBlock	INFERRED	block reached by the walk towards the loop exit (or 0)	^\s*if\ \(piVar12\ ==\ \(int\ \*\)piVar20\[0x4e\]\)\ \{$	+1
+use	Program__hoistFetchInsts	piVar12	lastWalkBlock	INFERRED	block reached by the walk towards the loop exit (or 0)	^\s*FUN_000ec370\(param_1,piVar12,piVar22\);$	+3
+use	Program__hoistFetchInsts	piVar12	exitBlock	INFERRED	block where the walk ended / successor of the walk block	^\s*piVar12\ =\ piVar8;$	+1
+use	Program__hoistFetchInsts	piVar12	exitBlock	INFERRED	block where the walk ended / successor of the walk block	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x28\)\)\(piVar12\);$	+2
+use	Program__hoistFetchInsts	piVar12	exitBlock	INFERRED	block where the walk ended / successor of the walk block	^\s*for\ \(uVar24\ =\ 1;\ uVar24\ <=\ \*\(uint\ \*\)\(piVar12\[0x35\]\ \+\ 4\);\ uVar24\ =\ uVar24\ \+\ 1\)\ \{$	+2
+use	Program__hoistFetchInsts	piVar12	exitBlock	INFERRED	block where the walk ended / successor of the walk block	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x24\)\)\(piVar12\);$	+2
+use	Program__hoistFetchInsts	piVar12	exitBlock	INFERRED	block where the walk ended / successor of the walk block	^\s*piVar20\ =\ \(int\ \*\)FUN_000e920c\(piVar12\[0x4f\],0\);$	+1
+use	Program__hoistFetchInsts	piVar12	exitBlock	INFERRED	block where the walk ended / successor of the walk block	^\s*piVar20\ =\ piVar12;$@2	+2
+use	Program__hoistFetchInsts	piVar12	exitBlock	INFERRED	block where the walk ended / successor of the walk block	^\s*FUN_000e9948\(piVar12,piVar2,puVar10\);$	+1
+use	Program__hoistFetchInsts	piVar12	userSlotPtr	INFERRED	address of a user element of the instruction	^\s*piVar12\ =\ \(int\ \*\)\(uVar24\ \*\ 4\ \+\ puVar25\[2\]\);$	+1
+use	Program__hoistFetchInsts	piVar12	userSlotPtr	INFERRED	address of a user element of the instruction	^\s*piVar12\ =\ \(int\ \*\)FUN_0019423c\(puVar25,uVar24\);$	+1
+use	Program__hoistFetchInsts	piVar12	userSlotPtr	INFERRED	address of a user element of the instruction	^\s*if\ \(\(piVar22\ !=\ \*\(int\ \*\*\)\(\*piVar12\ \+\ 0x158\)\)\ \&\&$	+2
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar20\ =\ \(int\ \*\)0x0;$	+1
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar20\ =\ piVar22;$	+1
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar20\ =\ \(int\ \*\)FUN_000e9184\(piVar22,0\);$	+1
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar20\ =\ \(int\ \*\)FUN_000e7e90\(piVar22\);$	+1
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar20\ =\ \(int\ \*\)FUN_000e7e90\(piVar22\);$@2	+1
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar20\ =\ \(int\ \*\)FUN_000e9184\(piVar22,0\);$@2	+1
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar22\ =\ piVar20;$	+2
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*if\ \(piVar12\ ==\ \(int\ \*\)piVar20\[0x4e\]\)\ \{$	+2
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*FUN_000e977c\(piVar20,piVar12,piVar22\);$	+1
+use	Program__hoistFetchInsts	piVar20	walkNextBlock	INFERRED	predecessor / next block of the upward walk from the home block	^\s*piVar19\ =\ \(int\ \*\)piVar20\[0x4f\];$	+1
+use	Program__hoistFetchInsts	piVar20	walkBlockB	INFERRED	walk block copy	^\s*piVar20\ =\ piVar8;$	+1
+use	Program__hoistFetchInsts	piVar20	walkBlockB	INFERRED	walk block copy	^\s*if\ \(\(piVar2\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar20\ !=\ piVar2\)\)\ goto\ code_r0x0013b8e4;$	+1
+use	Program__hoistFetchInsts	piVar20	walkBlockB	INFERRED	walk block copy	^\s*piVar20\ =\ piVar12;$@2	+1
+use	Program__hoistFetchInsts	piVar20	loopExitWalk	INFERRED	block cursor of the second walk to the loop exit	^\s*piVar20\ =\ piVar12;$	+1
+use	Program__hoistFetchInsts	piVar20	loopExitWalk	INFERRED	block cursor of the second walk to the loop exit	^\s*piVar20\ =\ \(int\ \*\)FUN_000e920c\(piVar12\[0x4f\],0\);$	+1
+use	Program__hoistFetchInsts	piVar20	loopExitWalk	INFERRED	block cursor of the second walk to the loop exit	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x2c\)\)\(piVar20\);$	+1
+use	Program__hoistFetchInsts	piVar20	loopExitWalk	INFERRED	block cursor of the second walk to the loop exit	^\s*piVar20\ =\ \(int\ \*\)piVar20\[0x55\];$	+1
+use	Program__hoistFetchInsts	piVar20	loopExitWalk	INFERRED	block cursor of the second walk to the loop exit	^\s*piVar2\ =\ \(int\ \*\)FUN_000e920c\(piVar20,0\);$	+1
+use	Program__hoistFetchInsts	piVar20	worklistInst	INFERRED	inst popped from the hoist worklist	^\s*piVar20\ =\ \(int\ \*\)\*puVar10;$	+2
+use	Program__hoistFetchInsts	piVar20	worklistInst	INFERRED	inst popped from the hoist worklist	^\s*\*puVar10\ =\ piVar20;$	+1
+use	Program__hoistFetchInsts	piVar20	worklistInst	INFERRED	inst popped from the hoist worklist	^\s*if\ \(\(\(\(piVar20\[5\]\ \&\ 8U\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(piVar20\[0x22\]\ \+\ 8\)\ !=\ 0x8e\)\)\ \&\&$	+2
+use	Program__hoistFetchInsts	piVar20	worklistInst	INFERRED	inst popped from the hoist worklist	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x50\)\)\(piVar20\);$	+1
+use	Program__hoistFetchInsts	piVar20	worklistInst	INFERRED	inst popped from the hoist worklist	^\s*for\ \(;\ iVar23\ =\ FUN_00104054\(piVar20,param_1\),\ \(int\)uVar24\ <\ iVar23;\ uVar24\ =\ uVar24\ \+\ 1$	+3
+use	Program__hoistFetchInsts	piVar20	worklistInst	INFERRED	inst popped from the hoist worklist	^\s*FUN_0010401c\(piVar20\);$	+6
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar22\ =\ piVar8;$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar22\ \+\ 0x14\)\)\(piVar22\);$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar22\ \+\ 0x24\)\)\(piVar22\);$	+2
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar22\ \+\ 0x28\)\)\(piVar22\);$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar22\ \+\ 0x34\)\)\(piVar22\);$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar22\ \+\ 0x2c\)\)\(piVar22\);$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar20\ =\ \(int\ \*\)FUN_000e9184\(piVar22,0\);$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar20\ =\ \(int\ \*\)FUN_000e7e90\(piVar22\);$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar22\ =\ \(int\ \*\)piVar22\[0x4b\];$	+2
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar22\ =\ \(int\ \*\)piVar22\[0x4b\];$@2	+2
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar12\ =\ piVar22;$	+2
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar22\ =\ puVar9\ \+\ 1;$	+2
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*piVar20\[0x4e\]\ =\ \(int\)piVar22;$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*FUN_000ec370\(param_1,piVar12,piVar22\);$	+3
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*puVar9\[0x4c\]\ =\ piVar22;$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*if\ \(\(int\ \*\)piVar20\[0x56\]\ !=\ piVar22\)\ \{$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*puVar25\ =\ \(uint\ \*\)piVar22\[0x4b\];$	+1
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*if\ \(\(piVar22\ !=\ \*\(int\ \*\*\)\(\*piVar12\ \+\ 0x158\)\)\ \&\&$	+2
+use	Program__hoistFetchInsts	piVar22	blockCursorOrNewBlock	INFERRED	block cursor of the upward walk, then the newly allocated block (same register, not splittable)	^\s*FUN_000e76c4\(piVar22,piVar20\);$	+1
