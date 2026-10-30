@@ -455,7 +455,7 @@
 0x51010	gldValidateStencil	1024	yes	
 0x51420	gldValidateBlend	3152	yes	
 0x520c0	gldValidateViewport	436	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x52280	FUN_00052280	2608	no	indirect call (driver context / vtable / callback)
+0x52280	gldEmitDirtyStatePackets	2608	no	indirect call (driver context / vtable / callback)
 0x52cc0	extvsSelectHandlerTables	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x52e60	extvsSetStreamAndValidate	112	no	indirect call (driver context / vtable / callback)
 0x52ee0	extvsGetSymbolStorageWord	128	yes	

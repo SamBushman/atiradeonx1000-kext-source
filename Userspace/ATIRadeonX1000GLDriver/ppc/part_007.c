@@ -3947,8 +3947,8 @@ double gldValidateViewport(int glContext,double fprF1,double fprF2,double fprF3,
   return;
 }
 
-/* FUN_00052280 @ 0x52280 (2608 bytes) */
-int FUN_00052280(glContext)
+/* gldEmitDirtyStatePackets @ 0x52280 (2608 bytes) */
+int gldEmitDirtyStatePackets(glContext)
   int glContext;
 {
   uint padCountdown;

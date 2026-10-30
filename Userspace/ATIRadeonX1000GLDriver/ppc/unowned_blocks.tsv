@@ -1065,8 +1065,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 51f78	51fb8	table	gldValidateBlend	16	
 52054	52060	padding	gldValidateBlend	3	
 52274	52280	padding	gldValidateViewport	3	
-52494	524a0	padding	FUN_00052280	3	
-52cbc	52cc0	padding	FUN_00052280	1	
+52494	524a0	padding	gldEmitDirtyStatePackets	3	
+52cbc	52cc0	padding	gldEmitDirtyStatePackets	1	
 52d64	52d70	padding	extvsSelectHandlerTables	3	
 52e04	52e10	padding	extvsSelectHandlerTables	3	
 52e4c	52e60	millicode	extvsSelectHandlerTables	5	

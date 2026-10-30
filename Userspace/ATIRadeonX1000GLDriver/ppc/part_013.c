@@ -4265,7 +4265,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
     }
   }
   gldValidateAlphaBlendEarlyZ(glContext);
-  FUN_00052280(glContext);
+  gldEmitDirtyStatePackets(glContext);
   *(undefined1 *)(glContext + 0x2e) = 0;
   *(undefined1 *)(glContext + 0x29) = 0;
   *(undefined2 *)(glContext + 0x32) = 0;

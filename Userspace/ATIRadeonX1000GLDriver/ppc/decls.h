@@ -661,7 +661,7 @@ extern int gldSetVertexPacketLimits();
 extern int gldValidateStencil();
 extern int gldValidateBlend();
 extern double gldValidateViewport(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);
-extern int FUN_00052280();
+extern int gldEmitDirtyStatePackets();
 extern int extvsSelectHandlerTables();
 extern int extvsSetStreamAndValidate();
 extern int extvsGetSymbolStorageWord();
