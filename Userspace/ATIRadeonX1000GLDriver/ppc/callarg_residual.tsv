@@ -1,12 +1,12 @@
 # owner entry	owner	call site	callee	register	value	class
 0x6700	_gldCreateContext	0x6778	malloc	r3	0x2b98 printed as &UNK_00002b98 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0xbfa0	textPrintDoubleShortest	0xc048	frexp	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-DOUBLE-SLOT
-0x16670	glBitmap_impl	0x1681c	FUN_0002a260	r10	r1+0x48 (a stack address) not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x16670	glBitmap_impl	0x1681c	gld_enterPointDrawState	r10	r1+0x48 (a stack address) not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x2c230	gld_validateStreamState	0x2c678	gld_buildVertexStreamCache	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x2c230	gld_validateStreamState	0x2c6a8	gld_buildVertexStreamLayout	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x32100	gldTextureMakeResident	0x33ad8	valloc	r8	0x1 not at argument 5 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
 0x32100	gldTextureMakeResident	0x33b18	gldTextureFormatCodeMatchesType	r7	0x1 not at argument 4 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
-0x3b280	FUN_0003b280	0x3b530	glSetLocalConstantEXT_impl	r5	0x1406 printed as &DAT_00001406 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x3b280	extvsDeclareProgramVariables	0x3b530	glSetLocalConstantEXT_impl	r5	0x1406 printed as &DAT_00001406 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x46e90	fragmentInstructionToIL	0x48528	memset	r10	r1+0x90 (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x48670	memset	r10	r1+0x6c (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
 0x46e90	fragmentInstructionToIL	0x47d5c	fpilEmitInstruction	r10	0x1 not at argument 7 of any C call (23 C calls)	BENIGN-CALLEE-IGNORES
@@ -26,7 +26,7 @@
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0xa4980	FUN_000a4980	0xa523c	FUN_00030c50	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0xa4980	FUN_000a4980	0xa523c	gld_createInternalTexture	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0xa4980	FUN_000a4980	0xa56c8	FUN_000a3790	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xa4980	FUN_000a4980	0xa5760	FUN_000a3a60	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0xb3630	atifsCompileCurrentShader	0xb4030	ilTokenBufPush	r9	0x3 not at argument 6 of any C call (13 C calls)	BENIGN-CALLEE-IGNORES

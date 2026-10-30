@@ -2611,7 +2611,7 @@ int _gldSetInteger(ctx, pname, values)
   if (values == (uint *)0x0) {
     return 0x271e;
   }
-  statusOrObject = FUN_00017100(ctx,pname,values);
+  statusOrObject = gld_setContextParameter(ctx,pname,values);
   if (statusOrObject != 0) {
     return 0;
   }
@@ -2949,8 +2949,8 @@ LAB_00005e6c:
   return;
 }
 
-/* FUN_00005eb0 @ 0x5eb0 (184 bytes) */
-int FUN_00005eb0(ctx, buffer)
+/* gld_isBufferBackingIdle @ 0x5eb0 (184 bytes) */
+int gld_isBufferBackingIdle(ctx, buffer)
   undefined4 ctx;
   int buffer;
 {
@@ -3565,7 +3565,7 @@ LAB_00006798:
                 if (0 < *(short *)(pixelFormat + 0x24)) {
                   ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x1000;
                 }
-                FUN_00017a40(ctx + GLD_drawableFlags / 4,pixelFormat,scratch2,fenceTablePtr,fenceTableSize,mapOptions,scratch1);
+                gld_encodePixelFormatFlags(ctx + GLD_drawableFlags / 4,pixelFormat,scratch2,fenceTablePtr,fenceTableSize,mapOptions,scratch1);
                 scratch2 = ctx[GLD_drawableFlags / 4];
                 ctx[0xe] = 0x4000;
                 if ((scratch2 & 0x40) != 0) {
@@ -3658,7 +3658,7 @@ int _gldDestroyContext(ctx)
   
   returnCode = 0x2714;
   if (ctx != 0) {
-    FUN_00007020(ctx);
+    gld_detachDrawable(ctx);
     gldContextFreeResources(ctx);
     _IOServiceClose(*(undefined4 *)(ctx + GLD_connect));
     if (DAT_001f65e0 != (int *)0x0) {
@@ -3705,7 +3705,7 @@ int _gldCreateShared(sharedOut)
       _pthread_mutexattr_init(mutexAttr);
       _pthread_mutexattr_settype(mutexAttr,2);
       _pthread_mutex_init(shared,mutexAttr);
-      FUN_00024fb0(shared);
+      gld_initListHead(shared);
       *sharedOut = shared;
       returnCode = 0;
     }
