@@ -1,0 +1,18 @@
+local	Arena__alloc	param_1	arena	INFERRED	arena: +8 cursor, +0x10 chunk end, +0x14 last allocation
+local	Arena__free	param_1	arena	INFERRED	arena: +8 cursor, +0x14 last allocation, +0x28 reclaim flag
+local	ArenaObject__freeBuffer	param_1	this	INFERRED	object: [0] compiler, [5] arena buffer
+local	DList__isEmpty	param_1	list	INFERRED	list: +8 first, +0xc sentinel
+local	DList__initSentinel	param_1	list	INFERRED	list: +8 first, +0xc sentinel, +0x10 last
+local	compareIntsAscending	param_1	left	INFERRED	first value (unsigned compare)
+local	compareIntsAscending	param_2	right	INFERRED	second value
+local	IRInst__isOpcode8bOr8c	param_1	inst	INFERRED	instruction (+0x88 -> +8 opcode)
+local	SelectWord__matchesDefaultPattern	param_1	selectWord	INFERRED	select word compared with DAT_001b2a64
+local	R520SchedModel__vslot2_reset	param_1	schedModel	INFERRED	R520 scheduling model: PackState at +0x28 reset, slot ids (-1 = free) at +0x18..+0x24
+local	R300VSchedModel__vslot2_reset	param_1	schedModel	INFERRED	R300 vertex scheduling model: slot ids (-1 = free) and counters reset
+local	SelectWord__isDefaultAfterCanonicalise	param_1	selectWord	INFERRED	4 select bytes (x,y,z,w values 0..4) packed into one word, looked up as ((w*125+z*25+y*5+x)*16)
+local	SelectWord__matchesAnyKnownPattern	param_1	selectWord	INFERRED	select word compared (SelectWord__areCompatible) with each known pattern
+local	KhanPs__vslot66_callHelper189788	param_2	selectWordPtr	INFERRED	pointer to the select word tested
+local	HashTableIterator__begin	param_1	iter	INFERRED	hash table iterator: [0] table, [1] bucket index, [3] element index
+local	HashTableIterator__begin	param_2	table	INFERRED	hash table iterated
+local	R520MachineAssembler__vslot9_getRecordWordsUsed	param_1	this	INFERRED	R520 machine assembler: +0x60 record count
+local	R520MachineAssembler__vslot9_getRecordWordsUsed	param_2	wordsOut	INFERRED	out: record count * 0x48 / 4 words

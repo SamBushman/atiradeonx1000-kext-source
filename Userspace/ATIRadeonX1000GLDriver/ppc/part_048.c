@@ -5864,14 +5864,14 @@ int pass_minreg_order(scheduler, program)
 }
 
 /* compareIntsAscending @ 0x184bcc (36 bytes) */
-int compareIntsAscending(param_1, param_2)
-  uint param_1;
-  uint param_2;
+int compareIntsAscending(left, right)
+  uint left;
+  uint right;
 {
-  if (param_1 == param_2) {
+  if (left == right) {
     return 0;
   }
-  if (param_2 < param_1) {
+  if (right < left) {
     return 1;
   }
   return 0xffffffff;

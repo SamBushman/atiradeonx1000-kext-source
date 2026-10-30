@@ -1182,13 +1182,13 @@ int R300MachineAssembler__create(unusedThis, compiler)
 int R300MachineAssembler__dtor_196dbc(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e914c;
+  baseVtableBase1 = PTR_DAT_001e914c;
   this[0x16] = 0;
   *this = &PTR_FUN_001eb6a0;
   this[0x17] = 0;
-  *this = puVar1 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -1196,13 +1196,13 @@ int R300MachineAssembler__dtor_196dbc(this)
 int R300MachineAssembler__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e914c;
+  baseVtableBase1 = PTR_DAT_001e914c;
   this[0x16] = 0;
   *this = &PTR_FUN_001eb6a0;
   this[0x17] = 0;
-  *this = puVar1 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 

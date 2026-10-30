@@ -1830,16 +1830,16 @@ int PackState__copy(dest, source)
 }
 
 /* R520SchedModel__vslot2_reset @ 0x189604 (40 bytes) */
-int R520SchedModel__vslot2_reset(param_1)
-  int param_1;
+int R520SchedModel__vslot2_reset(schedModel)
+  int schedModel;
 {
-  *(undefined4 *)(param_1 + 0x24) = 0xffffffff;
-  *(undefined4 *)(param_1 + 100) = 0;
-  *(undefined4 *)(param_1 + 4) = 0;
-  *(undefined4 *)(param_1 + 0x18) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x1c) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x20) = 0xffffffff;
-  return ((int (*)())PackState__reset)(param_1 + 0x28);
+  *(undefined4 *)(schedModel + 0x24) = 0xffffffff;
+  *(undefined4 *)(schedModel + 100) = 0;
+  *(undefined4 *)(schedModel + 4) = 0;
+  *(undefined4 *)(schedModel + 0x18) = 0xffffffff;
+  *(undefined4 *)(schedModel + 0x1c) = 0xffffffff;
+  *(undefined4 *)(schedModel + 0x20) = 0xffffffff;
+  return ((int (*)())PackState__reset)(schedModel + 0x28);
 }
 
 /* KhanPs__vslot31_isNotTextureFetch @ 0x18962c (52 bytes) */
@@ -1875,36 +1875,36 @@ int KhanPs__vslot65_isEncodableSourceSwizzle(this, unusedArg2, unusedArg3, swizz
 }
 
 /* SelectWord__isDefaultAfterCanonicalise @ 0x1896f8 (108 bytes) */
-int SelectWord__isDefaultAfterCanonicalise(param_1)
-  uint param_1;
+int SelectWord__isDefaultAfterCanonicalise(selectWord)
+  uint selectWord;
 {
   return *(uint *)(&DAT_001b0244 +
-                  ((param_1 >> 0x18) * 0x7d + (param_1 >> 0x10 & 0xff) * 0x19 +
-                   (param_1 >> 8 & 0xff) * 5 + (param_1 & 0xff)) * 0x10) ==
+                  ((selectWord >> 0x18) * 0x7d + (selectWord >> 0x10 & 0xff) * 0x19 +
+                   (selectWord >> 8 & 0xff) * 5 + (selectWord & 0xff)) * 0x10) ==
          ((uint)(byte)DAT_001b2a68 << 0x18 | (uint)(*(unsigned char *)((unsigned char *)&(DAT_001b2a68) + 2)) << 0x10 |
           (uint)(*(unsigned char *)((unsigned char *)&(DAT_001b2a68) + 1)) << 8 | (uint)(*(unsigned char *)((unsigned char *)&(DAT_001b2a68) + 0)));
 }
 
 /* SelectWord__matchesDefaultPattern @ 0x18976c (28 bytes) */
-int SelectWord__matchesDefaultPattern(param_1)
-  undefined4 param_1;
+int SelectWord__matchesDefaultPattern(selectWord)
+  undefined4 selectWord;
 {
   undefined4 callResult;
   
-  callResult = SelectWord__areCompatible(param_1,DAT_001b2a64);
+  callResult = SelectWord__areCompatible(selectWord,DAT_001b2a64);
   return callResult;
 }
 
 /* SelectWord__matchesAnyKnownPattern @ 0x189788 (104 bytes) */
-int SelectWord__matchesAnyKnownPattern(param_1)
-  undefined4 param_1;
+int SelectWord__matchesAnyKnownPattern(selectWord)
+  undefined4 selectWord;
 {
   int callResult;
   undefined4 *loopPtr;
   
   loopPtr = &DAT_001b2994;
   do {
-    callResult = SelectWord__areCompatible(*loopPtr,param_1);
+    callResult = SelectWord__areCompatible(*loopPtr,selectWord);
     if (callResult != 0) {
       return 1;
     }
@@ -1914,11 +1914,11 @@ int SelectWord__matchesAnyKnownPattern(param_1)
 }
 
 /* KhanPs__vslot66_callHelper189788 @ 0x1897f0 (8 bytes) */
-int KhanPs__vslot66_callHelper189788(this, param_2)
+int KhanPs__vslot66_callHelper189788(this, selectWordPtr)
   undefined4 this;
-  undefined4 *param_2;
+  undefined4 *selectWordPtr;
 {
-  return ((int (*)())SelectWord__matchesAnyKnownPattern)(*param_2);
+  return ((int (*)())SelectWord__matchesAnyKnownPattern)(*selectWordPtr);
 }
 
 /* Inst__sourceIsConstantRegisterNotKind3 @ 0x1897fc (68 bytes) */
@@ -2259,14 +2259,14 @@ LAB_00189fb4:
 }
 
 /* R300SchedModel__vslot19 @ 0x189fd4 (172 bytes) */
-int R300SchedModel__vslot19(this, inst, param_3, param_4, param_5, param_6, param_7)
+int R300SchedModel__vslot19(this, inst, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   undefined4 this;
   int *inst;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int callResult;
   undefined4 resourceClass;
@@ -2850,8 +2850,8 @@ LAB_0018b190:
 }
 
 /* FUN_0018b1bc @ 0x18b1bc (1176 bytes) */
-int FUN_0018b1bc(param_1, packNode, rangeLo, rangeHi, targetSlot)
-  undefined4 param_1;
+int FUN_0018b1bc(unusedArg1, packNode, rangeLo, rangeHi, targetSlot)
+  undefined4 unusedArg1;
   int packNode;
   int rangeLo;
   int rangeHi;
@@ -5125,17 +5125,17 @@ int R300SchedModel__vslot12(this, inst)
 }
 
 /* R300VSchedModel__vslot2_reset @ 0x18f824 (44 bytes) */
-int R300VSchedModel__vslot2_reset(param_1)
-  int param_1;
+int R300VSchedModel__vslot2_reset(schedModel)
+  int schedModel;
 {
-  *(undefined4 *)(param_1 + 0x34) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x28) = 4;
-  *(undefined4 *)(param_1 + 0x18) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x1c) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x20) = 4;
-  *(undefined4 *)(param_1 + 0x24) = 4;
-  *(undefined4 *)(param_1 + 0x2c) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x30) = 0xffffffff;
+  *(undefined4 *)(schedModel + 0x34) = 0xffffffff;
+  *(undefined4 *)(schedModel + 0x28) = 4;
+  *(undefined4 *)(schedModel + 0x18) = 0xffffffff;
+  *(undefined4 *)(schedModel + 0x1c) = 0xffffffff;
+  *(undefined4 *)(schedModel + 0x20) = 4;
+  *(undefined4 *)(schedModel + 0x24) = 4;
+  *(undefined4 *)(schedModel + 0x2c) = 0xffffffff;
+  *(undefined4 *)(schedModel + 0x30) = 0xffffffff;
   return;
 }
 
@@ -5217,14 +5217,14 @@ int R300VSchedModel__vslot13(this, param_2)
 }
 
 /* R300VSchedModel__vslot28 @ 0x18f984 (596 bytes) */
-int R300VSchedModel__vslot28(this, program, param_3, param_4, param_5, param_6, param_7)
+int R300VSchedModel__vslot28(this, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   int *this;
   int program;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   int numSources;
   int slot12Result;

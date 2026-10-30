@@ -1358,13 +1358,13 @@ int TypedValueArray__createWrapping(owner, dataPtr, compiler)
 }
 
 /* ArenaObject__freeBuffer @ 0x193be8 (24 bytes) */
-int ArenaObject__freeBuffer(param_1)
-  int *param_1;
+int ArenaObject__freeBuffer(this)
+  int *this;
 {
-  if (param_1[5] == 0) {
+  if (this[5] == 0) {
     return;
   }
-  return ((int (*)())Arena__free)(*(undefined4 *)(*param_1 + 0x370),param_1[5]);
+  return ((int (*)())Arena__free)(*(undefined4 *)(*this + 0x370),this[5]);
 }
 
 /* FUN_00193c00 @ 0x193c00 (116 bytes) */
@@ -1393,15 +1393,15 @@ int FUN_00193c00(typeDesc, compiler)
 }
 
 /* Arena__free @ 0x193cc0 (88 bytes) */
-int Arena__free(param_1, ptr)
-  int param_1;
+int Arena__free(arena, ptr)
+  int arena;
   int ptr;
 {
   int lastAllocation;
   
-  if ((*(int *)(param_1 + 0x28) != 0) && (lastAllocation = *(int *)(param_1 + 0x14), lastAllocation == ptr)) {
-    _memset(lastAllocation,0,*(int *)(param_1 + 8) - lastAllocation);
-    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(param_1 + 0x14);
+  if ((*(int *)(arena + 0x28) != 0) && (lastAllocation = *(int *)(arena + 0x14), lastAllocation == ptr)) {
+    _memset(lastAllocation,0,*(int *)(arena + 8) - lastAllocation);
+    *(undefined4 *)(arena + 8) = *(undefined4 *)(arena + 0x14);
   }
   return;
 }
@@ -1456,20 +1456,20 @@ int Arena__grow(arena, requestedSize)
 }
 
 /* Arena__alloc @ 0x193e18 (92 bytes) */
-int Arena__alloc(param_1, size)
-  int param_1;
+int Arena__alloc(arena, size)
+  int arena;
   int size;
 {
   uint alignedSize;
   int result;
   
   alignedSize = size + 3U & 0xfffffffc;
-  if (*(uint *)(param_1 + 0x10) < alignedSize + *(int *)(param_1 + 8)) {
-    ((int (*)())Arena__grow)(param_1,alignedSize);
+  if (*(uint *)(arena + 0x10) < alignedSize + *(int *)(arena + 8)) {
+    ((int (*)())Arena__grow)(arena,alignedSize);
   }
-  result = *(int *)(param_1 + 8);
-  *(int *)(param_1 + 0x14) = result;
-  *(uint *)(param_1 + 8) = alignedSize + result;
+  result = *(int *)(arena + 8);
+  *(int *)(arena + 0x14) = result;
+  *(uint *)(arena + 8) = alignedSize + result;
   return result;
 }
 
@@ -1512,10 +1512,10 @@ int Arena__bytesInUse(arena)
 }
 
 /* DList__isEmpty @ 0x193f08 (24 bytes) */
-int DList__isEmpty(param_1)
-  int param_1;
+int DList__isEmpty(list)
+  int list;
 {
-  return *(int *)(param_1 + 8) == param_1 + 0xc;
+  return *(int *)(list + 8) == list + 0xc;
 }
 
 /* DListNode__unlinkAndDelete @ 0x193f20 (36 bytes) */
@@ -1586,11 +1586,11 @@ int DList__pushFront(list, node)
 }
 
 /* DList__initSentinel @ 0x193fa4 (16 bytes) */
-int DList__initSentinel(param_1)
-  int param_1;
+int DList__initSentinel(list)
+  int list;
 {
-  *(int *)(param_1 + 0x10) = param_1;
-  *(int *)(param_1 + 8) = param_1 + 0xc;
+  *(int *)(list + 0x10) = list;
+  *(int *)(list + 8) = list + 0xc;
   return;
 }
 
@@ -2112,14 +2112,14 @@ int HashTableIterator__advance(iter)
 }
 
 /* HashTableIterator__begin @ 0x194a94 (20 bytes) */
-int HashTableIterator__begin(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int HashTableIterator__begin(iter, table)
+  undefined4 *iter;
+  undefined4 table;
 {
-  *param_1 = param_2;
-  param_1[3] = 0xffffffff;
-  param_1[1] = 0xffffffff;
-  return ((int (*)())HashTableIterator__advance)(param_1);
+  *iter = table;
+  iter[3] = 0xffffffff;
+  iter[1] = 0xffffffff;
+  return ((int (*)())HashTableIterator__advance)(iter);
 }
 
 /* HashTable__grow @ 0x194aa8 (260 bytes) */

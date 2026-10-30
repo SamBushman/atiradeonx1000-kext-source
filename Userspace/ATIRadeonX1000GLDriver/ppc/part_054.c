@@ -1206,14 +1206,14 @@ int DListNode__deleting_dtor(this)
 int IRPseudo__dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e8b4c;
+  baseVtableBase2 = PTR_DAT_001e8b4c;
   *this = PTR_DAT_001e8b50 + 8;
-  puVar1 = PTR_DAT_001e8b48;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b48;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   return;
 }
 
@@ -1221,14 +1221,14 @@ int IRPseudo__dtor(this)
 int IRPseudo__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *baseVtableBase1;
+  undefined *baseVtableBase2;
   
-  puVar2 = PTR_DAT_001e8b4c;
+  baseVtableBase2 = PTR_DAT_001e8b4c;
   *this = PTR_DAT_001e8b50 + 8;
-  puVar1 = PTR_DAT_001e8b48;
-  *this = puVar2 + 8;
-  *this = puVar1 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b48;
+  *this = baseVtableBase2 + 8;
+  *this = baseVtableBase1 + 8;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -1239,14 +1239,14 @@ int IRPseudo__deleting_dtor(this)
 int IRInst__dtor_1cd908(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e9998;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -1257,14 +1257,14 @@ int IRInst__dtor_1cd908(this)
 int IRInst__dtor_1cd970(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e97a0;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   return;
 }
 
@@ -1272,14 +1272,14 @@ int IRInst__dtor_1cd970(this)
 int IRInst__dtor_1cd9c4(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e97a0;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -1290,14 +1290,14 @@ int IRInst__dtor_1cd9c4(this)
 int IRInst__dtor_1cda2c(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e9848;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   return;
 }
 
@@ -1305,14 +1305,14 @@ int IRInst__dtor_1cda2c(this)
 int IRInst__dtor_1cda80(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e9848;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -1323,14 +1323,14 @@ int IRInst__dtor_1cda80(this)
 int IRInst__dtor_1cdae8(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e98f0;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   return;
 }
 
@@ -1338,14 +1338,14 @@ int IRInst__dtor_1cdae8(this)
 int IRInst__dtor_1cdb3c(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e98f0;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -1356,14 +1356,14 @@ int IRInst__dtor_1cdb3c(this)
 int IRInst__dtor_1cdba4(this)
   undefined4 *this;
 {
-  undefined *puVar1;
+  undefined *baseVtableBase1;
   
-  puVar1 = PTR_DAT_001e8b50 + 8;
+  baseVtableBase1 = PTR_DAT_001e8b50 + 8;
   *this = &PTR_FUN_001e9998;
-  *this = puVar1;
-  puVar1 = PTR_DAT_001e8b48 + 8;
+  *this = baseVtableBase1;
+  baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
-  *this = puVar1;
+  *this = baseVtableBase1;
   return;
 }
 

@@ -755,14 +755,14 @@ int psnPackedLaneSource(descriptor, lane)
 }
 
 /* psnPackedNegateMask @ 0x19eaa4 (32 bytes) */
-int psnPackedNegateMask(descriptor, param_2, param_3, param_4, param_5, param_6, param_7)
+int psnPackedNegateMask(descriptor, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   uint *descriptor;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   if ((*descriptor & 0x400000) == 0) {
     return 0;
@@ -1527,11 +1527,11 @@ int R520MachineAssembler__writeHeaderRecord(this, highestConstant, pixelSize)
 }
 
 /* R520MachineAssembler__vslot9_getRecordWordsUsed @ 0x19f860 (32 bytes) */
-int R520MachineAssembler__vslot9_getRecordWordsUsed(param_1, param_2)
-  int param_1;
-  int *param_2;
+int R520MachineAssembler__vslot9_getRecordWordsUsed(this, wordsOut)
+  int this;
+  int *wordsOut;
 {
-  *param_2 = *(int *)(param_1 + 0x60) * 0x48 >> 2;
+  *wordsOut = *(int *)(this + 0x60) * 0x48 >> 2;
   return;
 }
 
@@ -2017,10 +2017,10 @@ int R520MachineAssembler__vslot86_resolveSourceRegister(this, inst, sourceIndex,
 }
 
 /* R520MachineAssembler__vslot53_selectBitsForLiteralFloat @ 0x1a07c0 (304 bytes) */
-int R520MachineAssembler__vslot53_selectBitsForLiteralFloat(this, sourceIndex, param_3, selectBase, inst)
+int R520MachineAssembler__vslot53_selectBitsForLiteralFloat(this, sourceIndex, unusedArg3, selectBase, inst)
   undefined4 this;
   int sourceIndex;
-  undefined4 param_3;
+  undefined4 unusedArg3;
   int selectBase;
   undefined4 inst;
 {

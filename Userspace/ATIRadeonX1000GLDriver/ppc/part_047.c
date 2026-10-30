@@ -1064,10 +1064,10 @@ int FUN_00178648(ctx, lane)
 }
 
 /* IRInst__isOpcode8bOr8c @ 0x1789d4 (28 bytes) */
-int IRInst__isOpcode8bOr8c(param_1)
-  int param_1;
+int IRInst__isOpcode8bOr8c(inst)
+  int inst;
 {
-  return *(int *)(*(int *)(param_1 + 0x88) + 8) - 0x8bU < 2;
+  return *(int *)(*(int *)(inst + 0x88) + 8) - 0x8bU < 2;
 }
 
 /* ValueKey__sourcesHaveNoModifiers @ 0x1789f0 (168 bytes) */
