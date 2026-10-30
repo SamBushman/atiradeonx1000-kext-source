@@ -3032,3 +3032,99 @@ use	Use__negationParityEqual	uVar5	vectorFilledCount	INFERRED	vector[1]	^\s*if\ 
 use	Use__negationParityEqual	uVar5	vectorFilledCount2	INFERRED	vector[1]	^\s*uVar5\ =\ param_2\[1\];$	+1
 use	Use__negationParityEqual	uVar5	vectorFilledCount2	INFERRED	vector[1]	^\s*if\ \(\(\*\(uint\ \*\)\(uVar5\ \*\ 0x18\ \+\ \*param_2\ \+\ 0xa0\)\ \&\ 1\)\ ==\ 0\)\ \{$	+1
 use	Use__negationParityEqual	uVar5	vectorFilledCount2	INFERRED	vector[1]	^\s*if\ \(\(\*\(uint\ \*\)\(\(uVar5\ \+\ \(\(\(int\)uVar5\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar5\ <\ 0\ \&\&\ \(uVar5\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@2	+2
+use	FUN_00161748	bVar1	instSrcNotHwConst	INFERRED	inst source 1 is not made of hardware constants	^\s*bVar1\ =\ iVar7\ ==\ 0;$	+1
+use	FUN_00161748	bVar1	instSrcNotHwConst	INFERRED	inst source 1 is not made of hardware constants	^\s*if\ \(\(!bVar1\)\ \|\|\ \(iVar7\ !=\ 0\)\)\ \{$	+1
+use	FUN_00161748	bVar1	instSrcNotHwConst	INFERRED	inst source 1 is not made of hardware constants	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_00161748	bVar1	instSrcNotHwConst	INFERRED	inst source 1 is not made of hardware constants	^\s*if\ \(\(\(\(param_2\[0x48\]\ ==\ param_1\[0x48\]\)\ \|\|\ \(\(param_2\[0x48\]\ !=\ 0\ \&\&\ \(iVar7\ !=\ 0\)\)\)\)\ \|\|$	+5
+use	FUN_00161748	bVar1	instSrcNotHwConst	INFERRED	inst source 1 is not made of hardware constants	^\s*if\ \(\(bVar1\)\ \|\|\ \(iVar11\ =\ FUN_00151318\(param_1\),\ iVar11\ ==\ 0\)\)\ \{$	+1
+use	FUN_00161748	bVar1	instSrcNotHwConst	INFERRED	inst source 1 is not made of hardware constants	^\s*if\ \(\(\(uVar17\ !=\ uVar6\)\ \&\&\ \(uVar15\ =\ uVar17,\ bVar4\)\)\ \&\&\ \(uVar15\ =\ uVar6,\ bVar1\)\)\ \{$	+1
+use	FUN_00161748	bVar1	instSrcNotHwConst	INFERRED	inst source 1 is not made of hardware constants	^\s*if\ \(\(\*\(char\ \*\)\(iVar11\ \+\ iVar13\ \+\ 0x10\)\ !=\ '\\0'\)\ \|\|\ \(\(!bVar1\ \&\&\ \(bVar4\)\)\)\)\ \{$	+1
+local	FUN_00161748	bVar4	inst2SrcNotHwConst	INFERRED	inst2 source 1 is not made of hardware constants
+local	FUN_00161748	pcVar5	setLaneFn	INFERRED	vtable +0x88 of inst: set one lane
+local	FUN_00161748	local_78	mergedSelectBuf	INFERRED	[0] merged dest select of the two insts; [1..2] last operand record buffer
+local	FUN_00161748	local_60	lastOperandBuf3	INFERRED	IRInst__readLastOperand buffer word 3
+local	FUN_00161748	local_58	mergedLanesOut	INFERRED	out of SelectWord__mergeWrittenLanes
+use	FUN_00161748	iVar7	instSrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst source 1,...) result	^\s*iVar7\ =\ FUN_0010453c\(uVar8,uVar9,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\),in_r6,in_r7,in_r8,in_r9\);$	+1
+use	FUN_00161748	iVar7	instSrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst source 1,...) result	^\s*bVar1\ =\ iVar7\ ==\ 0;$	+1
+use	FUN_00161748	iVar7	inst2SrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst2 source 1,...) result	^\s*iVar7\ =\ FUN_0010453c\(uVar8,uVar9,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\),in_r6,in_r7,in_r8,in_r9\);$@2	+2
+use	FUN_00161748	iVar7	inst2SrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst2 source 1,...) result	^\s*\(\(iVar7\ ==\ 0\ \|\|\ \(iVar10\ =\ FUN_00151318\(param_2\),\ iVar10\ ==\ 0\)\)\)\)\ \{$	+1
+use	FUN_00161748	iVar7	inst2SrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst2 source 1,...) result	^\s*\(\(\(\(param_1\[0x2e\]\ \&\ 2U\)\ ==\ 0\ \|\|\ \(iVar7\ ==\ 0\)\)\ \&\&\ \(\(param_2\[0x2e\]\ \&\ 2U\)\ ==\ 0\)\)\)\)\ \{$	+1
+use	FUN_00161748	iVar7	inst2SrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst2 source 1,...) result	^\s*if\ \(\(\(\(param_2\[0x48\]\ ==\ param_1\[0x48\]\)\ \|\|\ \(\(param_2\[0x48\]\ !=\ 0\ \&\&\ \(iVar7\ !=\ 0\)\)\)\)\ \|\|$	+1
+use	FUN_00161748	iVar7	inst2SrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst2 source 1,...) result	^\s*\(\(iVar7\ !=\ 0\ \&\&\ \(iVar10\ =\ FUN_00151318\(param_2\),\ iVar10\ !=\ 0\)\)\)\)\ \|\|$	+1
+use	FUN_00161748	iVar7	inst2SrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst2 source 1,...) result	^\s*if\ \(\(param_1\[0x49\]\ !=\ iVar10\)\ \&\&\ \(iVar7\ !=\ 0\)\)\ \{$	+1
+use	FUN_00161748	iVar7	inst2SrcHwConst	INFERRED	IRInst__allSelectsAreHwConstants(inst2 source 1,...) result	^\s*bVar4\ =\ iVar7\ ==\ 0;$	+1
+use	FUN_00161748	iVar10	inst2Source1B	INFERRED	IRInst__getOperandSource(inst2,1)	^\s*iVar10\ =\ FUN_00105594\(param_2,1\);$	+2
+use	FUN_00161748	iVar10	fun151318Result	INFERRED	FUN_00151318(inst or inst2) result	^\s*\(\(iVar7\ ==\ 0\ \|\|\ \(iVar10\ =\ FUN_00151318\(param_2\),\ iVar10\ ==\ 0\)\)\)\)\ \{$	+1
+use	FUN_00161748	iVar10	fun151318Result	INFERRED	FUN_00151318(inst or inst2) result	^\s*iVar10\ =\ FUN_00151318\(param_1\);$	+2
+use	FUN_00161748	iVar10	fun151318Result	INFERRED	FUN_00151318(inst or inst2) result	^\s*\(\(iVar7\ !=\ 0\ \&\&\ \(iVar10\ =\ FUN_00151318\(param_2\),\ iVar10\ !=\ 0\)\)\)\)\ \|\|$	+2
+use	FUN_00161748	iVar11	countdownLanesB	INFERRED	countdown from 4	^\s*iVar11\ =\ 4;$	+1
+use	FUN_00161748	iVar11	countdownLanesB	INFERRED	countdown from 4	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2
+use	FUN_00161748	iVar11	fun151318ResultB	INFERRED	FUN_00151318(inst2 / inst) result	^\s*if\ \(\(bVar4\)\ \|\|\ \(iVar11\ =\ FUN_00151318\(param_2\),\ iVar11\ ==\ 0\)\)\ \{$	+2
+use	FUN_00161748	iVar11	passStampE	INFERRED	*(pass+0x478): pass stamp	^\s*iVar11\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x478\);$	+1
+use	FUN_00161748	iVar11	passStampE	INFERRED	*(pass+0x478): pass stamp	^\s*iVar13\ =\ iVar11\ \+\ 1;$	+1
+use	FUN_00161748	iVar11	passStampE	INFERRED	*(pass+0x478): pass stamp	^\s*if\ \(iVar11\ <\ \*\(int\ \*\)\(iVar10\ \+\ 0x160\)\)\ \{$	+1
+use	FUN_00161748	iVar11	passStampE	INFERRED	*(pass+0x478): pass stamp	^\s*if\ \(iVar11\ <\ \*\(int\ \*\)\(iVar10\ \+\ 0x160\)\)\ \{$@2	+1
+use	FUN_00161748	iVar13	destRecordInst	INFERRED	IRInst__getOperandRecord(inst,0)	^\s*iVar13\ =\ FUN_001054ec\(param_1,0\);$	+2
+use	FUN_00161748	iVar13	destRecordInst2	INFERRED	IRInst__getOperandRecord(inst2,0)	^\s*iVar13\ =\ FUN_001054ec\(param_2,0\);$	+2
+use	FUN_00161748	iVar13	src1Record	INFERRED	IRInst__getOperandRecord(inst,1)	^\s*\(iVar13\ =\ FUN_001054ec\(param_1,1\),$	+2
+use	FUN_00161748	iVar13	selectLane	INFERRED	free lane (0..3) of the new select chosen for the leftover lane	^\s*iVar13\ =\ 0;$	+1
+use	FUN_00161748	iVar13	selectLane	INFERRED	free lane (0..3) of the new select chosen for the leftover lane	^\s*iVar13\ =\ 1;$	+1
+use	FUN_00161748	iVar13	selectLane	INFERRED	free lane (0..3) of the new select chosen for the leftover lane	^\s*iVar13\ =\ 2;$	+1
+use	FUN_00161748	iVar13	selectLane	INFERRED	free lane (0..3) of the new select chosen for the leftover lane	^\s*iVar13\ =\ 3;$	+1
+use	FUN_00161748	iVar13	selectLane	INFERRED	free lane (0..3) of the new select chosen for the leftover lane	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x88\)\)\(param_1,1,iVar11,iVar13\);$	+1
+use	FUN_00161748	iVar13	selectLane	INFERRED	free lane (0..3) of the new select chosen for the leftover lane	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x88\)\)\(piVar12,2,iVar13,uVar3\);$	+2
+use	FUN_00161748	iVar13	passStampPlus1	INFERRED	pass stamp + 1	^\s*iVar13\ =\ iVar11\ \+\ 1;$	+1
+use	FUN_00161748	iVar13	passStampPlus1	INFERRED	pass stamp + 1	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x160\)\ =\ iVar13;$	+1
+use	FUN_00161748	iVar13	passStampPlus1	INFERRED	pass stamp + 1	^\s*\*\(int\ \*\)\(iVar10\ \+\ 0x160\)\ =\ iVar13;$	+1
+use	FUN_00161748	iVar13	passStampPlus1	INFERRED	pass stamp + 1	^\s*\*\(int\ \*\)\(iVar10\ \+\ 0x160\)\ =\ iVar13;$@2	+1
+use	FUN_00161748	uVar6	source1ModBit	INFERRED	inst2 source 1 abs bit	^\s*uVar6\ =\ uVar15\ >>\ 1\ \&\ 1;$	+1
+use	FUN_00161748	uVar6	source1ModBit	INFERRED	inst2 source 1 abs bit	^\s*uVar15\ =\ uVar6;$	+1
+use	FUN_00161748	uVar6	sourceLane	INFERRED	component byte of the merged select for this lane	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_7c\ \+\ iVar11\);$	+4
+use	FUN_00161748	uVar6	sourceLane	INFERRED	component byte of the merged select for this lane	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_80\ \+\ iVar11\);$	+4
+use	FUN_00161748	uVar6	sourceLane	INFERRED	component byte of the merged select for this lane	^\s*uVar17\ =\ uVar17\ \|\ 1\ <<\ \(uVar6\ \&\ 0x3f\);$	+2
+use	FUN_00161748	uVar6	laneBit	INFERRED	bit of the free lane (1,2,4 or 0)	^\s*uVar6\ =\ 1;$	+1
+use	FUN_00161748	uVar6	laneBit	INFERRED	bit of the free lane (1,2,4 or 0)	^\s*uVar6\ =\ 2;$	+1
+use	FUN_00161748	uVar6	laneBit	INFERRED	bit of the free lane (1,2,4 or 0)	^\s*uVar6\ =\ 4;$	+1
+use	FUN_00161748	uVar6	laneBit	INFERRED	bit of the free lane (1,2,4 or 0)	^\s*uVar6\ =\ 0;$	+1
+use	FUN_00161748	uVar6	laneBit	INFERRED	bit of the free lane (1,2,4 or 0)	^\s*uVar17\ =\ uVar17\ \^\ uVar6;$	+1
+use	FUN_00161748	uVar9	compilerForCalls	INFERRED	*(pass+8): compiler	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 8\);$	+1
+use	FUN_00161748	uVar9	compilerForCalls	INFERRED	*(pass+8): compiler	^\s*iVar7\ =\ FUN_0010453c\(uVar8,uVar9,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\),in_r6,in_r7,in_r8,in_r9\);$	+1
+use	FUN_00161748	uVar9	compilerForCalls	INFERRED	*(pass+8): compiler	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 8\);$@2	+1
+use	FUN_00161748	uVar9	compilerForCalls	INFERRED	*(pass+8): compiler	^\s*iVar7\ =\ FUN_0010453c\(uVar8,uVar9,\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\),in_r6,in_r7,in_r8,in_r9\);$@2	+1
+use	FUN_00161748	uVar9	setOperandIdxA	INFERRED	operand index (1 or 2) of the new select inst written by vtable +0x88	^\s*uVar9\ =\ 1;$	+1
+use	FUN_00161748	uVar9	setOperandIdxA	INFERRED	operand index (1 or 2) of the new select inst written by vtable +0x88	^\s*uVar9\ =\ 2;$	+1
+use	FUN_00161748	uVar9	setOperandIdxA	INFERRED	operand index (1 or 2) of the new select inst written by vtable +0x88	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x88\)\)\(piVar12,uVar9,uVar6,uVar6\);$	+1
+use	FUN_00161748	uVar9	setOperandIdxA	INFERRED	operand index (1 or 2) of the new select inst written by vtable +0x88	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x88\)\)\(piVar12,uVar9,uVar6,4\);$	+1
+use	FUN_00161748	uVar8	setOperandIdxB	INFERRED	operand index (2 or 1) of the new select inst written by vtable +0x88	^\s*uVar8\ =\ 2;$	+1
+use	FUN_00161748	uVar8	setOperandIdxB	INFERRED	operand index (2 or 1) of the new select inst written by vtable +0x88	^\s*uVar8\ =\ 1;$	+1
+use	FUN_00161748	uVar8	setOperandIdxB	INFERRED	operand index (2 or 1) of the new select inst written by vtable +0x88	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x88\)\)\(piVar12,uVar8,uVar6,4\);$	+1
+use	FUN_00161748	uVar8	setOperandIdxB	INFERRED	operand index (2 or 1) of the new select inst written by vtable +0x88	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x88\)\)\(piVar12,uVar8,uVar6,uVar6\);$	+1
+use	FUN_00161748	uVar9	blockOfSource	INFERRED	*(source+0x158): block of the cloned source	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar10\ \+\ 0x158\);$	+1
+use	FUN_00161748	uVar9	blockOfSource	INFERRED	*(source+0x158): block of the cloned source	^\s*FUN_000e7738\(uVar9,uVar8,iVar7\);$	+1
+use	FUN_00161748	uVar15	absModifier	INFERRED	abs bit of the merged operand	^\s*uVar15\ =\ uVar6;$	+3
+use	FUN_00161748	uVar15	absModifier	INFERRED	abs bit of the merged operand	^\s*FUN_00103d50\(param_1\ \+\ 0x29,2,uVar15\);$	+1
+use	FUN_00161748	uVar16	negModifier	INFERRED	negate bit of the merged operand	^\s*uVar16\ =\ uVar17\ \&\ 1;$	+2
+use	FUN_00161748	uVar16	negModifier	INFERRED	negate bit of the merged operand	^\s*uVar16\ =\ 0;$	+1
+use	FUN_00161748	uVar16	negModifier	INFERRED	negate bit of the merged operand	^\s*uVar16\ =\ uVar15\ \&\ 1;$	+1
+use	FUN_00161748	uVar16	negModifier	INFERRED	negate bit of the merged operand	^\s*uVar16\ =\ uVar17\ \&\ 1;$@2	+1
+use	FUN_00161748	uVar16	negModifier	INFERRED	negate bit of the merged operand	^\s*FUN_00103d50\(param_1\ \+\ 0x29,1,uVar16\);$	+1
+use	FUN_00161748	uVar16	inst2Flags	INFERRED	inst2[5]: flags, 0x200 = has extra source	^\s*uVar16\ =\ param_2\[5\];$	+1
+use	FUN_00161748	uVar16	inst2Flags	INFERRED	inst2[5]: flags, 0x200 = has extra source	^\s*if\ \(\(uVar16\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*uVar17\ =\ param_1\[0x2e\];$	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*uVar16\ =\ uVar17\ \&\ 1;$	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*uVar17\ =\ param_1\[0x2e\];$@2	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*uVar17\ =\ param_1\[0x2e\];$@3	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*uVar17\ =\ param_1\[0x2e\];$@4	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*uVar16\ =\ uVar17\ \&\ 1;$@2	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*uVar17\ =\ uVar17\ >>\ 1\ \&\ 1;$	+1
+use	FUN_00161748	uVar17	instSrcFlags	INFERRED	inst source modifier word (inst[0x2e]), then its abs bit	^\s*if\ \(\(\(uVar17\ !=\ uVar6\)\ \&\&\ \(uVar15\ =\ uVar17,\ bVar4\)\)\ \&\&\ \(uVar15\ =\ uVar6,\ bVar1\)\)\ \{$	+1
+use	FUN_00161748	uVar17	usedLaneMask	INFERRED	bit mask of source lanes already used	^\s*uVar17\ =\ 0;$	+1
+use	FUN_00161748	uVar17	usedLaneMask	INFERRED	bit mask of source lanes already used	^\s*uVar17\ =\ uVar17\ \|\ 1\ <<\ \(uVar6\ \&\ 0x3f\);$	+1
+use	FUN_00161748	uVar17	usedLaneMask	INFERRED	bit mask of source lanes already used	^\s*if\ \(\(uVar17\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_00161748	uVar17	usedLaneMask	INFERRED	bit mask of source lanes already used	^\s*else\ if\ \(\(uVar17\ \&\ 2\)\ ==\ 0\)\ \{$	+1
+use	FUN_00161748	uVar17	usedLaneMask	INFERRED	bit mask of source lanes already used	^\s*else\ if\ \(\(uVar17\ \&\ 4\)\ ==\ 0\)\ \{$	+1
+use	FUN_00161748	uVar17	usedLaneMask	INFERRED	bit mask of source lanes already used	^\s*uVar17\ =\ uVar17\ \^\ uVar6;$	+1
+use	FUN_00161748	uVar3	laneByte	INFERRED	component byte stored for the leftover lane	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(\(int\)\&local_80\ \+\ iVar11\);$	+1
+use	FUN_00161748	uVar3	laneByte	INFERRED	component byte stored for the leftover lane	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(\(int\)\&local_7c\ \+\ iVar11\);$	+1
+use	FUN_00161748	uVar3	laneByte	INFERRED	component byte stored for the leftover lane	^\s*\(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x88\)\)\(piVar12,2,iVar13,uVar3\);$	+1
+use	FUN_00161748	uVar6	source1ModBit	INFERRED	inst2 source 1 abs bit	^\s*if\ \(\(\(uVar17\ !=\ uVar6\)\ \&\&\ \(uVar15\ =\ uVar17,\ bVar4\)\)\ \&\&\ \(uVar15\ =\ uVar6,\ bVar1\)\)\ \{$	+1

@@ -5168,36 +5168,50 @@ int FUN_00161748(inst, inst2, pass)
   int operandRecord;
   int sourceDef2;
   int operandRecord3;
-  bool bVar1;
+  bool instSrcNotHwConst;
   bool isLast;
-  undefined1 uVar3;
-  bool bVar4;
-  code *pcVar5;
-  uint uVar6;
-  int iVar7;
+  undefined1 laneByte;
+  bool inst2SrcNotHwConst;
+  code *setLaneFn;
+  uint laneBit;
+  uint sourceLane;
+  uint source1ModBit;
+  int instSrcHwConst;
+  int inst2SrcHwConst;
   int callResult2;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  int iVar10;
+  undefined4 setOperandIdxB;
+  undefined4 compilerForCalls;
+  undefined4 blockOfSource;
+  undefined4 setOperandIdxA;
+  int inst2Source1B;
+  int fun151318Result;
   int callResult;
-  int iVar11;
+  int countdownLanesB;
+  int passStampE;
+  int fun151318ResultB;
   int *vslot73Result;
-  int iVar13;
+  int destRecordInst;
+  int passStampPlus1;
+  int selectLane;
+  int src1Record;
+  int destRecordInst2;
   int *operandVReg;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
-  uint uVar15;
-  uint uVar16;
-  uint uVar17;
+  uint absModifier;
+  uint negModifier;
+  uint inst2Flags;
+  uint instSrcFlags;
+  uint usedLaneMask;
   undefined4 operandSelectC;
   undefined4 operandSelectB;
   undefined4 operandSelect;
   undefined4 operandSelectD;
-  int local_78 [6];
-  undefined4 local_60;
-  int local_58 [5];
+  int mergedSelectBuf [6];
+  undefined4 lastOperandBuf3;
+  int mergedLanesOut [5];
   
   vcall64Result = (**(code **)(*inst + 100))(inst,inst2,pass);
   if ((vcall64Result != 0) && (vcall64Result = (**(code **)(*inst2 + 100))(inst2), vcall64Result != 0)) {
@@ -5206,55 +5220,55 @@ int FUN_00161748(inst, inst2, pass)
     opcodeOrSourcesDifferResult = Inst__opcodeOrSourcesDiffer(sourceDef,sourceDef5);
     if (opcodeOrSourcesDifferResult == 0) {
       sourceDef4 = IRInst__getOperandSource(inst,1);
-      iVar10 = IRInst__getOperandSource(inst2,1);
-      if (sourceDef4 != iVar10) {
+      inst2Source1B = IRInst__getOperandSource(inst2,1);
+      if (sourceDef4 != inst2Source1B) {
         sourceDef = IRInst__getOperandSource(inst,1);
-        uVar9 = *(undefined4 *)(pass + 8);
+        compilerForCalls = *(undefined4 *)(pass + 8);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        iVar7 = IRInst__allSelectsAreHwConstants(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        instSrcHwConst = IRInst__allSelectsAreHwConstants(sourceDef,compilerForCalls,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
         sourceDef = IRInst__getOperandSource(inst2,1);
-        uVar9 = *(undefined4 *)(pass + 8);
-        bVar1 = iVar7 == 0;
+        compilerForCalls = *(undefined4 *)(pass + 8);
+        instSrcNotHwConst = instSrcHwConst == 0;
         operandRecord2 = IRInst__getOperandRecord(inst2,1);
-        iVar7 = IRInst__allSelectsAreHwConstants(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
-        if ((!bVar1) || (iVar7 != 0)) {
+        inst2SrcHwConst = IRInst__allSelectsAreHwConstants(sourceDef,compilerForCalls,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        if ((!instSrcNotHwConst) || (inst2SrcHwConst != 0)) {
           if (((inst[0x2e] & 1U) != (inst2[0x2e] & 1U)) &&
-             ((iVar7 == 0 || (iVar10 = FUN_00151318(inst2), iVar10 == 0)))) {
-            if (bVar1) {
+             ((inst2SrcHwConst == 0 || (fun151318Result = FUN_00151318(inst2), fun151318Result == 0)))) {
+            if (instSrcNotHwConst) {
               return 0;
             }
-            iVar10 = FUN_00151318(inst);
-            if (iVar10 == 0) {
+            fun151318Result = FUN_00151318(inst);
+            if (fun151318Result == 0) {
               return 0;
             }
             if ((((uint)inst[0x2e] >> 1 & 1) != ((uint)inst2[0x2e] >> 1 & 1)) &&
-               ((((inst[0x2e] & 2U) == 0 || (iVar7 == 0)) && ((inst2[0x2e] & 2U) == 0)))) {
+               ((((inst[0x2e] & 2U) == 0 || (inst2SrcHwConst == 0)) && ((inst2[0x2e] & 2U) == 0)))) {
               return 0;
             }
           }
-          if ((((inst2[0x48] == inst[0x48]) || ((inst2[0x48] != 0 && (iVar7 != 0)))) ||
-              ((inst[0x48] != 0 && (!bVar1)))) &&
+          if ((((inst2[0x48] == inst[0x48]) || ((inst2[0x48] != 0 && (inst2SrcHwConst != 0)))) ||
+              ((inst[0x48] != 0 && (!instSrcNotHwConst)))) &&
              (((inst[0x49] == inst2[0x49] ||
-               ((iVar7 != 0 && (iVar10 = FUN_00151318(inst2), iVar10 != 0)))) ||
-              ((!bVar1 && (iVar10 = FUN_00151318(inst), iVar10 != 0)))))) {
+               ((inst2SrcHwConst != 0 && (fun151318Result = FUN_00151318(inst2), fun151318Result != 0)))) ||
+              ((!instSrcNotHwConst && (fun151318Result = FUN_00151318(inst), fun151318Result != 0)))))) {
             operandRecord3 = IRInst__getOperandRecord(inst,0);
             operandSelectC = *(undefined4 *)(operandRecord3 + 0x10);
             operandRecord = IRInst__getOperandRecord(inst2,0);
             loopIndex = 0;
             operandSelectB = *(undefined4 *)(operandRecord + 0x10);
-            iVar11 = 4;
+            countdownLanesB = 4;
             do {
               if ((*(char *)((int)&operandSelectC + loopIndex) != '\x01') &&
                  (*(char *)((int)&operandSelectB + loopIndex) != '\x01')) {
                 return 0;
               }
               loopIndex = loopIndex + 1;
-              iVar11 = iVar11 + -1;
-            } while (iVar11 != 0);
+              countdownLanesB = countdownLanesB + -1;
+            } while (countdownLanesB != 0);
             splitRgbAlphaEnabled = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),0x30);
             if ((splitRgbAlphaEnabled == 0) || (((char)operandSelectC != '\0' && ((char)operandSelectB != '\0')))) {
               resultScaleCode = inst2[0x49];
-              if ((inst[0x49] != resultScaleCode) && (iVar7 != 0)) {
+              if ((inst[0x49] != resultScaleCode) && (inst2SrcHwConst != 0)) {
                 callResult = FUN_00151318(inst2);
                 if (callResult == 0) {
                   resultScaleCode = inst2[0x49];
@@ -5263,9 +5277,9 @@ int FUN_00161748(inst, inst2, pass)
                   resultScaleCode = inst[0x49];
                 }
               }
-              bVar4 = iVar7 == 0;
+              inst2SrcNotHwConst = inst2SrcHwConst == 0;
               saturate = inst2[0x48];
-              if ((inst[0x48] != saturate) && (!bVar4)) {
+              if ((inst[0x48] != saturate) && (!inst2SrcNotHwConst)) {
                 callResult2 = FUN_00151318(inst2);
                 if (callResult2 == 0) {
                   saturate = inst2[0x48];
@@ -5274,45 +5288,45 @@ int FUN_00161748(inst, inst2, pass)
                   saturate = inst[0x48];
                 }
               }
-              uVar17 = inst[0x2e];
+              instSrcFlags = inst[0x2e];
               source1Flags = inst2[0x2e];
-              uVar16 = uVar17 & 1;
-              if (uVar16 != (source1Flags & 1)) {
-                if ((bVar4) || (iVar11 = FUN_00151318(inst2), iVar11 == 0)) {
-                  if ((bVar1) || (iVar11 = FUN_00151318(inst), iVar11 == 0)) {
-                    uVar17 = inst[0x2e];
-                    uVar16 = 0;
+              negModifier = instSrcFlags & 1;
+              if (negModifier != (source1Flags & 1)) {
+                if ((inst2SrcNotHwConst) || (fun151318ResultB = FUN_00151318(inst2), fun151318ResultB == 0)) {
+                  if ((instSrcNotHwConst) || (fun151318ResultB = FUN_00151318(inst), fun151318ResultB == 0)) {
+                    instSrcFlags = inst[0x2e];
+                    negModifier = 0;
                     source1Flags = inst2[0x2e];
                   }
                   else {
                     source1Flags = inst2[0x2e];
-                    uVar17 = inst[0x2e];
-                    uVar16 = source1Flags & 1;
+                    instSrcFlags = inst[0x2e];
+                    negModifier = source1Flags & 1;
                   }
                 }
                 else {
-                  uVar17 = inst[0x2e];
+                  instSrcFlags = inst[0x2e];
                   source1Flags = inst2[0x2e];
-                  uVar16 = uVar17 & 1;
+                  negModifier = instSrcFlags & 1;
                 }
               }
-              uVar6 = source1Flags >> 1 & 1;
-              uVar17 = uVar17 >> 1 & 1;
-              uVar15 = uVar6;
-              if (((uVar17 != uVar6) && (uVar15 = uVar17, bVar4)) && (uVar15 = uVar6, bVar1)) {
-                uVar15 = 0;
+              source1ModBit = source1Flags >> 1 & 1;
+              instSrcFlags = instSrcFlags >> 1 & 1;
+              absModifier = source1ModBit;
+              if (((instSrcFlags != source1ModBit) && (absModifier = instSrcFlags, inst2SrcNotHwConst)) && (absModifier = source1ModBit, instSrcNotHwConst)) {
+                absModifier = 0;
               }
               operandRecord = IRInst__getOperandRecord(inst,1);
               operandSelect = *(undefined4 *)(operandRecord + 0x10);
               operandRecord = IRInst__getOperandRecord(inst2,1);
               operandSelectD = *(undefined4 *)(operandRecord + 0x10);
-              SelectWord__mergeWrittenLanes(local_58,operandSelectB,operandSelectC);
-              local_78[0] = local_58[0];
+              SelectWord__mergeWrittenLanes(mergedLanesOut,operandSelectB,operandSelectC);
+              mergedSelectBuf[0] = mergedLanesOut[0];
               vslot73Result = (int *)IRLoadConst__vslot73(0xa2,*(undefined4 *)(pass + 8));
               vslot73Result[0x26] = 0x36;
               vslot73Result[0x25] = vslot73Result[0x53];
               vslot73Result[0x21] = 2;
-              if (bVar4) {
+              if (inst2SrcNotHwConst) {
                 sourceDef = IRInst__getOperandSource(inst2,1);
               }
               else {
@@ -5326,7 +5340,7 @@ int FUN_00161748(inst, inst2, pass)
               else {
                 *(int *)(sourceDef3 + 0x160) = *(int *)(pass + 0x478) + 1;
               }
-              if (bVar4) {
+              if (inst2SrcNotHwConst) {
                 sourceDef = IRInst__getOperandSource(inst,1);
               }
               else {
@@ -5351,96 +5365,96 @@ int FUN_00161748(inst, inst2, pass)
               *(undefined4 *)(operandRecord + 0x10) = 0x10203;
               operandRecord = IRInst__getOperandRecord(inst,1);
               *(undefined4 *)(operandRecord + 0x10) = 0x4040404;
-              if (bVar4) {
-                uVar9 = 1;
-                uVar8 = 2;
+              if (inst2SrcNotHwConst) {
+                setOperandIdxA = 1;
+                setOperandIdxB = 2;
               }
               else {
-                uVar9 = 2;
-                uVar8 = 1;
+                setOperandIdxA = 2;
+                setOperandIdxB = 1;
               }
-              uVar17 = 0;
+              usedLaneMask = 0;
               loopIndexB = 0;
               do {
-                iVar13 = IRInst__getOperandRecord(inst,0);
-                if ((*(char *)(loopIndexB + iVar13 + 0x10) != '\0') || ((!bVar1 && (bVar4)))) {
-                  iVar13 = IRInst__getOperandRecord(inst2,0);
-                  if ((*(char *)(loopIndexB + iVar13 + 0x10) == '\0') && (bVar4)) {
-                    uVar6 = (uint)*(byte *)((int)&operandSelectD + loopIndexB);
-                    (**(code **)(*vslot73Result + 0x88))(vslot73Result,uVar9,uVar6,uVar6);
-                    (**(code **)(*vslot73Result + 0x88))(vslot73Result,uVar8,uVar6,4);
-                    *(undefined1 *)((int)vslot73Result + uVar6 + 0x9c) = 0;
-                    pcVar5 = *(code **)(*inst + 0x88);
+                destRecordInst = IRInst__getOperandRecord(inst,0);
+                if ((*(char *)(loopIndexB + destRecordInst + 0x10) != '\0') || ((!instSrcNotHwConst && (inst2SrcNotHwConst)))) {
+                  destRecordInst2 = IRInst__getOperandRecord(inst2,0);
+                  if ((*(char *)(loopIndexB + destRecordInst2 + 0x10) == '\0') && (inst2SrcNotHwConst)) {
+                    sourceLane = (uint)*(byte *)((int)&operandSelectD + loopIndexB);
+                    (**(code **)(*vslot73Result + 0x88))(vslot73Result,setOperandIdxA,sourceLane,sourceLane);
+                    (**(code **)(*vslot73Result + 0x88))(vslot73Result,setOperandIdxB,sourceLane,4);
+                    *(undefined1 *)((int)vslot73Result + sourceLane + 0x9c) = 0;
+                    setLaneFn = *(code **)(*inst + 0x88);
                     goto LAB_00161e24;
                   }
                   (**(code **)(*vslot73Result + 0x88))(vslot73Result,2,loopIndexB,4);
                 }
                 else {
                   IRInst__getOperandRecord(inst2,0);
-                  uVar6 = (uint)*(byte *)((int)&operandSelect + loopIndexB);
-                  (**(code **)(*vslot73Result + 0x88))(vslot73Result,uVar8,uVar6,uVar6);
-                  *(undefined1 *)((int)vslot73Result + uVar6 + 0x9c) = 0;
-                  (**(code **)(*vslot73Result + 0x88))(vslot73Result,uVar9,uVar6,4);
-                  pcVar5 = *(code **)(*inst + 0x88);
+                  sourceLane = (uint)*(byte *)((int)&operandSelect + loopIndexB);
+                  (**(code **)(*vslot73Result + 0x88))(vslot73Result,setOperandIdxB,sourceLane,sourceLane);
+                  *(undefined1 *)((int)vslot73Result + sourceLane + 0x9c) = 0;
+                  (**(code **)(*vslot73Result + 0x88))(vslot73Result,setOperandIdxA,sourceLane,4);
+                  setLaneFn = *(code **)(*inst + 0x88);
 LAB_00161e24:
-                  uVar17 = uVar17 | 1 << (uVar6 & 0x3f);
-                  (*pcVar5)(inst,1,loopIndexB,uVar6);
+                  usedLaneMask = usedLaneMask | 1 << (sourceLane & 0x3f);
+                  (*setLaneFn)(inst,1,loopIndexB,sourceLane);
                 }
                 isLast = loopIndexB == 3;
                 loopIndexB = loopIndexB + 1;
                 if (isLast) {
                   loopIndexB = 0;
                   do {
-                    if ((*(char *)((int)local_78 + loopIndexB) == '\0') &&
-                       (iVar13 = IRInst__getOperandRecord(inst,1),
-                       *(char *)(loopIndexB + iVar13 + 0x10) == '\x04')) {
-                      if ((uVar17 & 1) == 0) {
-                        iVar13 = 0;
-                        uVar6 = 1;
+                    if ((*(char *)((int)mergedSelectBuf + loopIndexB) == '\0') &&
+                       (src1Record = IRInst__getOperandRecord(inst,1),
+                       *(char *)(loopIndexB + src1Record + 0x10) == '\x04')) {
+                      if ((usedLaneMask & 1) == 0) {
+                        selectLane = 0;
+                        laneBit = 1;
                       }
-                      else if ((uVar17 & 2) == 0) {
-                        iVar13 = 1;
-                        uVar6 = 2;
+                      else if ((usedLaneMask & 2) == 0) {
+                        selectLane = 1;
+                        laneBit = 2;
                       }
-                      else if ((uVar17 & 4) == 0) {
-                        iVar13 = 2;
-                        uVar6 = 4;
-                      }
-                      else {
-                        iVar13 = 3;
-                        uVar6 = 0;
-                      }
-                      uVar17 = uVar17 ^ uVar6;
-                      (**(code **)(*inst + 0x88))(inst,1,loopIndexB,iVar13);
-                      if (bVar4) {
-                        uVar3 = *(undefined1 *)((int)&operandSelect + loopIndexB);
+                      else if ((usedLaneMask & 4) == 0) {
+                        selectLane = 2;
+                        laneBit = 4;
                       }
                       else {
-                        uVar3 = *(undefined1 *)((int)&operandSelectD + loopIndexB);
+                        selectLane = 3;
+                        laneBit = 0;
                       }
-                      (**(code **)(*vslot73Result + 0x88))(vslot73Result,2,iVar13,uVar3);
-                      *(undefined1 *)((int)vslot73Result + iVar13 + 0x9c) = 0;
+                      usedLaneMask = usedLaneMask ^ laneBit;
+                      (**(code **)(*inst + 0x88))(inst,1,loopIndexB,selectLane);
+                      if (inst2SrcNotHwConst) {
+                        laneByte = *(undefined1 *)((int)&operandSelect + loopIndexB);
+                      }
+                      else {
+                        laneByte = *(undefined1 *)((int)&operandSelectD + loopIndexB);
+                      }
+                      (**(code **)(*vslot73Result + 0x88))(vslot73Result,2,selectLane,laneByte);
+                      *(undefined1 *)((int)vslot73Result + selectLane + 0x9c) = 0;
                     }
                     moreComponents = loopIndexB != 3;
                     loopIndexB = loopIndexB + 1;
                   } while (moreComponents);
                   Block__insertInstBefore(inst[0x56],inst,vslot73Result);
-                  inst[0x27] = local_78[0];
-                  IROperand__setModifierBits(inst + 0x29,1,uVar16);
-                  IROperand__setModifierBits(inst + 0x29,2,uVar15);
+                  inst[0x27] = mergedSelectBuf[0];
+                  IROperand__setModifierBits(inst + 0x29,1,negModifier);
+                  IROperand__setModifierBits(inst + 0x29,2,absModifier);
                   inst[0x49] = resultScaleCode;
                   inst[0x48] = saturate;
                   IRInst__setOperandSource(inst,inst[0x21],0,0,*(undefined4 *)(pass + 8));
                   inst[5] = inst[5] & 0xfffffdff;
-                  uVar16 = inst2[5];
+                  inst2Flags = inst2[5];
                   inst[0x21] = inst[0x21] + -1;
-                  if ((uVar16 & 0x200) != 0) {
+                  if ((inst2Flags & 0x200) != 0) {
                     sourceDef4 = IRInst__getOperandSource(inst2,inst2[0x21]);
-                    local_60 = 0;
-                    local_78[1] = 0;
-                    local_78[2] = 0;
-                    IRInst__readLastOperand(inst2,local_78 + 1);
-                    IRInst__setLastOperandFromRecord(inst,local_78 + 1,0,*(undefined4 *)(pass + 8));
+                    lastOperandBuf3 = 0;
+                    mergedSelectBuf[1] = 0;
+                    mergedSelectBuf[2] = 0;
+                    IRInst__readLastOperand(inst2,mergedSelectBuf + 1);
+                    IRInst__setLastOperandFromRecord(inst,mergedSelectBuf + 1,0,*(undefined4 *)(pass + 8));
                     if (*(int *)(pass + 0x478) < *(int *)(sourceDef4 + 0x160)) {
                       *(int *)(sourceDef4 + 0x160) = *(int *)(sourceDef4 + 0x160) + 1;
                     }
@@ -5461,31 +5475,31 @@ LAB_00161e24:
                     if (vcall5cResult != 0) {
                       sourceDef = IRInst__getOperandSource(vslot73Result,1);
                       cloneResult = IRInst__clone(sourceDef,*(undefined4 *)(pass + 8),0);
-                      iVar11 = *(int *)(pass + 0x478);
+                      passStampE = *(int *)(pass + 0x478);
                       *(undefined4 *)(cloneResult + 0x94) = *(undefined4 *)(cloneResult + 0x14c);
                       *(undefined4 *)(cloneResult + 0x98) = 0x31;
                       sourceDef2 = IRInst__getOperandSource(vslot73Result,1);
-                      uVar9 = *(undefined4 *)(sourceDef2 + 0x158);
+                      blockOfSource = *(undefined4 *)(sourceDef2 + 0x158);
                       sourceDef = IRInst__getOperandSource(vslot73Result,1);
-                      iVar13 = iVar11 + 1;
-                      Block__insertInstAfter(uVar9,sourceDef,cloneResult);
-                      *(int *)(cloneResult + 0x160) = iVar13;
+                      passStampPlus1 = passStampE + 1;
+                      Block__insertInstAfter(blockOfSource,sourceDef,cloneResult);
+                      *(int *)(cloneResult + 0x160) = passStampPlus1;
                       sourceDef2 = IRInst__getOperandSource(vslot73Result,1);
                       *(int *)(sourceDef2 + 0x160) = *(int *)(sourceDef2 + 0x160) + -1;
                       sourceDef2 = IRInst__getOperandSource(cloneResult,1);
-                      if (iVar11 < *(int *)(sourceDef2 + 0x160)) {
+                      if (passStampE < *(int *)(sourceDef2 + 0x160)) {
                         *(int *)(sourceDef2 + 0x160) = *(int *)(sourceDef2 + 0x160) + 1;
                       }
                       else {
-                        *(int *)(sourceDef2 + 0x160) = iVar13;
+                        *(int *)(sourceDef2 + 0x160) = passStampPlus1;
                       }
                       if (1 < *(int *)(cloneResult + 0x84)) {
                         sourceDef2 = IRInst__getOperandSource(cloneResult,2);
-                        if (iVar11 < *(int *)(sourceDef2 + 0x160)) {
+                        if (passStampE < *(int *)(sourceDef2 + 0x160)) {
                           *(int *)(sourceDef2 + 0x160) = *(int *)(sourceDef2 + 0x160) + 1;
                         }
                         else {
-                          *(int *)(sourceDef2 + 0x160) = iVar13;
+                          *(int *)(sourceDef2 + 0x160) = passStampPlus1;
                         }
                       }
                       IRInst__setOperandSource(vslot73Result,1,cloneResult,0,*(undefined4 *)(pass + 8));
