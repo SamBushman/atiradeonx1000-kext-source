@@ -565,7 +565,7 @@ int Block__dtor_ea270(this)
     Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
   DListNode__clear(this + 0x24);
-  baseVtable = PTR_DAT_001e8b48 + 8;
+  baseVtable = ptrTo_DListNode__vtable_001e8b48 + 8;
   this[0x24] = baseVtable;
   this[0x27] = baseVtable;
   *this = baseVtable;
@@ -581,7 +581,7 @@ int AnyBlock__ctor_ea3c0(this, compiler)
   undefined4 arena;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  *this = PTR_DAT_001e8b58 + 8;
+  *this = ptrTo_AnyBlock__vtable_001e8b58 + 8;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   allocation[1] = 2;
@@ -603,7 +603,7 @@ int AnyBlock__ctor_ea478(this, compiler)
   undefined4 arena;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  *this = PTR_DAT_001e8b58 + 8;
+  *this = ptrTo_AnyBlock__vtable_001e8b58 + 8;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   allocation[1] = 2;
@@ -851,7 +851,7 @@ int BreakOrContinueBlock__ctor_eac08(this, source)
   
   ((int (*)())Block__ctor_e9f00)(this,source);
   copiedField0x12c = *(undefined4 *)(source + 300);
-  vtablePtr = PTR_DAT_001e8b54 + 8;
+  vtablePtr = ptrTo_BreakOrContinueBlock__vtable_001e8b54 + 8;
   this[0x4c] = *(undefined4 *)(source + 0x130);
   *this = vtablePtr;
   this[0x4b] = copiedField0x12c;
@@ -868,7 +868,7 @@ int BreakOrContinueBlock__ctor_eac60(this, source)
   
   ((int (*)())Block__ctor_e9f00)(this,source);
   copiedField0x12c = *(undefined4 *)(source + 300);
-  vtablePtr = PTR_DAT_001e8b54 + 8;
+  vtablePtr = ptrTo_BreakOrContinueBlock__vtable_001e8b54 + 8;
   this[0x4c] = *(undefined4 *)(source + 0x130);
   *this = vtablePtr;
   this[0x4b] = copiedField0x12c;
@@ -1426,7 +1426,7 @@ int Block__dtor(this)
     Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
   DListNode__clear(this + 0x24);
-  baseVtable = PTR_DAT_001e8b48 + 8;
+  baseVtable = ptrTo_DListNode__vtable_001e8b48 + 8;
   this[0x24] = baseVtable;
   this[0x27] = baseVtable;
   *this = baseVtable;
@@ -1468,7 +1468,7 @@ int Block__deleting_dtor(this)
     Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
   }
   DListNode__clear(this + 0x24);
-  baseVtable = PTR_DAT_001e8b48 + 8;
+  baseVtable = ptrTo_DListNode__vtable_001e8b48 + 8;
   this[0x27] = baseVtable;
   *this = baseVtable;
   this[0x24] = baseVtable;

@@ -4144,7 +4144,7 @@ int gld_updateDrawBufferConfig(ctx)
   int streamBase;
   int remaining;
   
-  formatTable = PTR_DAT_001e88c8;
+  formatTable = ptrTo_textureFormatTable_001e88c8;
   streamBase = ctx + 0x240;
   ((unsigned char *)0x000015f8)[ctx] = ((unsigned char *)0x00002b7c)[ctx];
   ctxWord1ae4_2 = *(uint *)(ctx + 0x1ae4);

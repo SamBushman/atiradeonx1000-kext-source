@@ -3119,7 +3119,7 @@ int R300SchedModel__vslot11(this, node, writerArrays)
   *(undefined1 *)((int)nodeInst + loopIndex + 0x9c) = 0;
   loopRemaining = nodeInst[0x22];
   *(undefined1 *)((int)nodeInst + loopIndex + 0xc) = 1;
-  if (*(int *)(PTR_DAT_001e913c + *(int *)(loopRemaining + 8) * 0x38 + 0x34) == 0) {
+  if (*(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + *(int *)(loopRemaining + 8) * 0x38 + 0x34) == 0) {
     for (; loopRemaining = (**(code **)(*nodeInst + 0x14))(nodeInst), sourceNumber <= loopRemaining; sourceNumber = sourceNumber + 1) {
       loopRemaining = IRInst__getOperandRecord(nodeInst,sourceNumber);
       laneSelect = *(undefined1 *)(targetLane + loopRemaining + 0x10);
@@ -3135,7 +3135,7 @@ int R300SchedModel__vslot11(this, node, writerArrays)
     *(undefined1 *)((int)nodeInst + loopIndex + 0x9c) = 1;
     loopRemaining = nodeInst[0x22];
     *(undefined1 *)((int)nodeInst + loopIndex + 0xc) = 0;
-    if (*(int *)(PTR_DAT_001e913c + *(int *)(loopRemaining + 8) * 0x38 + 0x34) == 0) {
+    if (*(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + *(int *)(loopRemaining + 8) * 0x38 + 0x34) == 0) {
       for (; loopRemaining = (**(code **)(*nodeInst + 0x14))(nodeInst), sourceNumber <= loopRemaining; sourceNumber = sourceNumber + 1) {
         loopRemaining = IRInst__getOperandRecord(nodeInst,sourceNumber);
         laneSelect = *(undefined1 *)(loopIndex + loopRemaining + 0x10);
@@ -3188,7 +3188,7 @@ int R300SchedModel__vslot14(this, node)
   if (((instFlags & 2) == 0) && (flagBit0Result = (**(code **)(*nodeInst + 0x5c))(nodeInst), flagBit0Result == 0)) {
     (**(code **)(*nodeInst + 0x28))(nodeInst);
   }
-  opcodeCategory = *(int *)(PTR_DAT_001e913c + *(int *)(nodeInst[0x22] + 8) * 0x38 + 0x34);
+  opcodeCategory = *(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + *(int *)(nodeInst[0x22] + 8) * 0x38 + 0x34);
   destRecord = IRInst__getOperandRecord(nodeInst,0);
   if (*(char *)(destRecord + 0x13) == '\0') {
     if ((opcodeCategory == 0) && (destRecord = IRInst__countWrittenComponents(nodeInst), 1 < destRecord)) {
@@ -4195,7 +4195,7 @@ int R300SchedModel__tryRewriteConsumerSelects(this, node)
   inst = *(int *)(node + 0x38);
   traitsClass = (**(code **)(*this + 0x30))(this,inst);
   if ((traitsClass == 0) ||
-     ((traitsClass = *(int *)(PTR_DAT_001e913c + *(int *)(*(int *)(inst + 0x88) + 8) * 0x38 + 0x34),
+     ((traitsClass = *(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + *(int *)(*(int *)(inst + 0x88) + 8) * 0x38 + 0x34),
       *(int *)(node + 0x60) != 0 && (writtenComponentCount = IRInst__countWrittenComponents(inst), writtenComponentCount != 1)))) {
     failedFlag = 0;
   }
@@ -5104,7 +5104,7 @@ int R300SchedModel__vslot12(this, inst)
         (((instFlags & 2) == 0 && (callResult = (**(code **)(*inst + 0x5c))(inst), callResult == 0)))))) &&
       (callResult = (**(code **)(*inst + 0x28))(inst), callResult == 0)) &&
      ((((callResult = *(int *)(inst[0x22] + 8), callResult != 0x9e && (callResult != 0xa0)) && (callResult != 0x9f))
-      && (((callResult != 0xa1 && (callResult = *(int *)(PTR_DAT_001e913c + callResult * 0x38 + 0x34), callResult != 3))
+      && (((callResult != 0xa1 && (callResult = *(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + callResult * 0x38 + 0x34), callResult != 3))
           && (callResult != 8)))))) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(char *)(operandRecord + 0x13) == '\0') {
@@ -5409,7 +5409,7 @@ int R300VSchedModel__vslot17(this, node)
       (((nodeInst[5] & 2U) == 0 && (isUndefined = (**(code **)(*nodeInst + 0x50))(nodeInst), isUndefined == 0))))
      && ((instFlags = nodeInst[5], (instFlags & 0x20) == 0 && (((instFlags & 0x40) == 0 && ((instFlags & 2) == 0)))))
      ) {
-    opcodeCategory = *(int *)(PTR_DAT_001e9140 + *(int *)(nodeInst[0x22] + 8) * 0x38 + 0x34);
+    opcodeCategory = *(int *)(ptrTo_KhanVsOpcodeTraits_001e9140 + *(int *)(nodeInst[0x22] + 8) * 0x38 + 0x34);
     if ((opcodeCategory == 0) ||
        ((((opcodeCategory == 5 || (opcodeCategory == 1)) || (opcodeCategory == 2)) || ((opcodeCategory == 3 || (opcodeCategory == 8)))))) {
       multipleWritten = false;

@@ -22,7 +22,7 @@ int R300SchedModel__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e90fc + 8;
+  vtable = ptrTo_R300SchedModel__vtable_001e90fc + 8;
   *this = &ptrTo_R300SchedModel__dtor_1d8910_001eb328;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
@@ -37,7 +37,7 @@ int R300VSchedModel__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e90fc + 8;
+  vtable = ptrTo_R300SchedModel__vtable_001e90fc + 8;
   *this = &ptrTo_R300VSchedModel__dtor_001eb3c0;
   *this = vtable;
   return;
@@ -49,7 +49,7 @@ int R300VSchedModel__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e90fc + 8;
+  vtable = ptrTo_R300SchedModel__vtable_001e90fc + 8;
   *this = &ptrTo_R300VSchedModel__dtor_001eb3c0;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
@@ -65,9 +65,9 @@ int FudoChip__deleting_dtor(this)
   undefined *baseVtableBase1;
   undefined *baseVtableBase2;
   
-  baseVtableBase1 = PTR_DAT_001e8c74;
+  baseVtableBase1 = ptrTo_KhanChip__vtable_001e8c74;
   *this = &ptrTo_FudoChip__dtor_001eb5e8;
-  baseVtableBase2 = PTR_DAT_001e8c88;
+  baseVtableBase2 = ptrTo_HwChip__vtable_001e8c88;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
   return operator_delete(this);
@@ -95,9 +95,9 @@ int FudoChip__dtor(this)
   undefined *baseVtableBase1;
   undefined *baseVtableBase2;
   
-  baseVtableBase1 = PTR_DAT_001e8c74;
+  baseVtableBase1 = ptrTo_KhanChip__vtable_001e8c74;
   *this = &ptrTo_FudoChip__dtor_001eb5e8;
-  baseVtableBase2 = PTR_DAT_001e8c88;
+  baseVtableBase2 = ptrTo_HwChip__vtable_001e8c88;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
   return;
@@ -125,9 +125,9 @@ int R520SchedModel__deleting_dtor(this)
   undefined *baseVtableBase1;
   undefined *baseVtableBase2;
   
-  baseVtableBase1 = PTR_DAT_001e90f4;
+  baseVtableBase1 = ptrTo_R520SchedModel__vtable_001e90f4;
   *this = &ptrTo_R520SchedModel__dtor_001eb608;
-  baseVtableBase2 = PTR_DAT_001e90fc;
+  baseVtableBase2 = ptrTo_R300SchedModel__vtable_001e90fc;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
   if (this == (undefined4 *)0x0) {
@@ -143,9 +143,9 @@ int R520SchedModel__dtor(this)
   undefined *baseVtableBase1;
   undefined *baseVtableBase2;
   
-  baseVtableBase1 = PTR_DAT_001e90f4;
+  baseVtableBase1 = ptrTo_R520SchedModel__vtable_001e90f4;
   *this = &ptrTo_R520SchedModel__dtor_001eb608;
-  baseVtableBase2 = PTR_DAT_001e90fc;
+  baseVtableBase2 = ptrTo_R300SchedModel__vtable_001e90fc;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
   return;

@@ -2145,11 +2145,11 @@ setStatus:
           }
           *(undefined4 *)(sideBuilderCursor + 0x64c) = srcTempFile;
           maskPtrC = PTR_DAT_001e9778;
-          maskPtrB = PTR_DAT_001e9774;
-          maskPtrA = PTR_DAT_001e9770;
+          maskPtrB = ptrTo_swizzleWordsXYZW_001dbd14_001e9774;
+          maskPtrA = ptrTo_swizzleWordsYYYX_001dbd84_001e9770;
           (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                    (programBuilder,dstTempFile,*(undefined4 *)(sideBuilderCursor + 0x650),PTR_DAT_001e9770,constFile,
-                     *(undefined4 *)(sideWordOffsetB + (int)ambientRegs),PTR_DAT_001e9774,PTR_DAT_001e9778);
+                    (programBuilder,dstTempFile,*(undefined4 *)(sideBuilderCursor + 0x650),ptrTo_swizzleWordsYYYX_001dbd84_001e9770,constFile,
+                     *(undefined4 *)(sideWordOffsetB + (int)ambientRegs),ptrTo_swizzleWordsXYZW_001dbd14_001e9774,PTR_DAT_001e9778);
           ffvpResolveMaterialSource(programBuilder,*(undefined4 *)(ctxWordCursorB + 0x270),0,&fetchedFile,&fetchedReg);
           if (constFile == fetchedFile) {
             fetchedReg = *(undefined4 *)(builderSideCursor + 0x2f8);
@@ -2164,8 +2164,8 @@ setStatus:
             emit3Src2File = fetchedFile;
             emit3Src2Index = fetchedReg;
             (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                      (programBuilder,dstTempFile,primaryReg,PTR_DAT_001e9770,srcTempFile,*(undefined4 *)(sideBuilderCursor + 0x650)
-                       ,PTR_DAT_001e9774,PTR_DAT_001e9778,emit3Src1File,emit3Src1Index,emit3Src1Select,emit3Src1Negate,emit3Src2File,emit3Src2Index,emit3Src1Select,emit3Src1Negate);
+                      (programBuilder,dstTempFile,primaryReg,ptrTo_swizzleWordsYYYX_001dbd84_001e9770,srcTempFile,*(undefined4 *)(sideBuilderCursor + 0x650)
+                       ,ptrTo_swizzleWordsXYZW_001dbd14_001e9774,PTR_DAT_001e9778,emit3Src1File,emit3Src1Index,emit3Src1Select,emit3Src1Negate,emit3Src2File,emit3Src2Index,emit3Src1Select,emit3Src1Negate);
           }
           if (*(int *)(programBuilder + 0x32c) != -1) {
             src0Reg = *(undefined4 *)(sideBuilderCursor + 0x650);
@@ -2173,7 +2173,7 @@ setStatus:
             alphaTableBase = alphaTableBaseA;
 LAB_00097360:
             (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                      (programBuilder,dstTempFile,primaryReg,((unsigned char *)0x00004ff4) + alphaTableBase,src1Reg,src0Reg,PTR_DAT_001e9774,
+                      (programBuilder,dstTempFile,primaryReg,((unsigned char *)0x00004ff4) + alphaTableBase,src1Reg,src0Reg,ptrTo_swizzleWordsXYZW_001dbd14_001e9774,
                        PTR_DAT_001e9778,(*(int *)((int)*(int *)((int)programBuilder + 1004) + 8)),*(int *)(programBuilder + 0x32c),&swizzleWordsXYZW_001dbd14,&DAT_001fa5e8,srcTempFile,primaryReg,&swizzleWordsXYZW_001dbd14,&DAT_001fa5e8);
           }
         }
@@ -2184,13 +2184,13 @@ LAB_00097360:
           *(undefined4 *)(sideBuilderCursor + 0x650) = src1Reg;
           if (((sidesDiffer) || (loopIndex == 0)) &&
              ((**(code **)(((unsigned char *)0x000012ec) + glCtx))
-                        (programBuilder,dstTempFile,primaryReg,PTR_DAT_001e9770,ambientSrcReg,src1Reg,PTR_DAT_001e9774,
-                         PTR_DAT_001e9778,(*(int *)((int)*(int *)((int)programBuilder + 1004) + 8)),(*(int *)((int)programBuilder + 808)),PTR_DAT_001e9774,PTR_DAT_001e9778), sidesDiffer)) {
+                        (programBuilder,dstTempFile,primaryReg,ptrTo_swizzleWordsYYYX_001dbd84_001e9770,ambientSrcReg,src1Reg,ptrTo_swizzleWordsXYZW_001dbd14_001e9774,
+                         PTR_DAT_001e9778,(*(int *)((int)*(int *)((int)programBuilder + 1004) + 8)),(*(int *)((int)programBuilder + 808)),ptrTo_swizzleWordsXYZW_001dbd14_001e9774,PTR_DAT_001e9778), sidesDiffer)) {
             ffvpResolveMaterialSource(programBuilder,*(undefined4 *)(ctxWordCursorB + 0x270),0,&fetchedFile,&fetchedReg);
             dstReg = primaryReg;
 LAB_000972c8:
             (**(code **)(((unsigned char *)0x000012f0) + glCtx))
-                      (programBuilder,dstTempFile,dstReg,PTR_DAT_001e9770,srcTempFile,dstReg,PTR_DAT_001e9774,
+                      (programBuilder,dstTempFile,dstReg,ptrTo_swizzleWordsYYYX_001dbd84_001e9770,srcTempFile,dstReg,ptrTo_swizzleWordsXYZW_001dbd14_001e9774,
                        PTR_DAT_001e9778,fetchedFile,fetchedReg,&swizzleWordsXYZW_001dbd14,&DAT_001fa5e8);
           }
           else if (loopIndex == 1) {
@@ -2201,8 +2201,8 @@ LAB_000972c8:
             emit7Src1Select = &swizzleWordsXYZW_001dbd14;
             emit7Src1Negate = &DAT_001fa5e8;
             (**(code **)(((unsigned char *)0x000012f0) + glCtx))
-                      (programBuilder,dstTempFile,sideColorRegs[1],PTR_DAT_001e9770,srcTempFile,sideColorRegs[0],
-                       PTR_DAT_001e9774,PTR_DAT_001e9778,emit7Src1File,emit7Src1Index,emit7Src1Select,emit7Src1Negate);
+                      (programBuilder,dstTempFile,sideColorRegs[1],ptrTo_swizzleWordsYYYX_001dbd84_001e9770,srcTempFile,sideColorRegs[0],
+                       ptrTo_swizzleWordsXYZW_001dbd14_001e9774,PTR_DAT_001e9778,emit7Src1File,emit7Src1Index,emit7Src1Select,emit7Src1Negate);
             ffvpResolveMaterialSource(programBuilder,*(undefined4 *)(glCtx + 0x270),0,fetchFileOutPtr,&fetchedReg);
             goto LAB_000972c8;
           }

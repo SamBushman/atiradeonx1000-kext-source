@@ -3551,7 +3551,7 @@ storeDrawStateWords:
                      (glContext,0x55,in_r5,in_r6,in_r7,in_r8,*(code **)(glContext + 0x2758));
   *(undefined4 **)(0x00002748 + glContext + 4) = packet;
   *packet = 0x887;
-  flagTable = PTR_DAT_001e88c8;
+  flagTable = ptrTo_textureFormatTable_001e88c8;
   regValue = *(undefined4 *)(glContext + 0x1b74);
   packet[2] = 0x82c;
   packet[1] = regValue;

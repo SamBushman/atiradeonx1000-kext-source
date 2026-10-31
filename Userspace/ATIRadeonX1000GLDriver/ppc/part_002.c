@@ -9632,7 +9632,7 @@ setSrcDstOverlap:
       (((*(uint *)(((unsigned char *)0x000030b0) + *(int *)(ctx + 0x10)) & 0x1ff) != 0 ||
        ((*(uint *)(((unsigned char *)0x000030b4) + *(int *)(ctx + 0x10)) & 0xff0000) != 0)))) ||
      (((((uint)scratchPtr42 & 0x10073) == 0 &&
-       (scratchPtr42 = PTR_DAT_001e88c8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24,
+       (scratchPtr42 = ptrTo_textureFormatTable_001e88c8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24,
        (*(uint *)(scratchPtr42 + 0x14) & 7) < 3)) &&
       ((srcDstOverlap && ((*(uint *)(ctx + 0x154) & 0x20) != 0)))))) {
     scratchInt33 = 0;
@@ -9793,7 +9793,7 @@ checkCtx:
           packetAlloc[1] = 0x10000000;
           *(undefined1 *)(ctx + 0x2a42) = 1;
         }
-        scratchPtr42 = PTR_DAT_001e88d0;
+        scratchPtr42 = ptrTo_hwContextStateTemplate_001e88d0;
         previousHeader = *(uint **)(ctx + 0x1d8);
         *previousHeader = (int)packetBase - (int)previousHeader >> 2 | *previousHeader;
         *(undefined4 **)(ctx + 0x1d8) = packetBase;
@@ -10034,7 +10034,7 @@ checkCtx:
         packetCursor[0x28] = vap_out_vtx_fmt_1;
         packetCursor[0x2a] = *(uint *)(0x000026c8 + ctx + 4);
         packetCursor[0x2b] = 0x854;
-        scratchPtr42 = PTR_DAT_001e88c8;
+        scratchPtr42 = ptrTo_textureFormatTable_001e88c8;
         scratchUint41 = **(uint **)(ctx + 0x2680);
         packetCursor[0x2d] = 0x878;
         packetCursor[0x2c] = scratchUint41;
@@ -10049,7 +10049,7 @@ checkCtx:
         {
           packetCursor[0x32] = packetCursor[0x32] & 0xfffffffe;
         }
-        scratchPtr42 = PTR_DAT_001e88c8;
+        scratchPtr42 = ptrTo_textureFormatTable_001e88c8;
         packetCursor[0x33] = (uint)((unsigned char *)0x000012f5U);
         fg_alpha_func = *(uint *)(ctx + 0x1c8c);
         packetCursor[0x34] = fg_alpha_func;

@@ -3386,12 +3386,12 @@ int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateB
   }
   *contextOut = 0;
   status = gld_validatePixelFormat(pixelFormat);
-  libraryOrTaskPtr = PTR_DAT_001e88ac;
+  libraryOrTaskPtr = ptrTo_rendererLibraryState_001e88ac;
   if (status != 0) {
     return status;
   }
-  if (((*(uint *)(pixelFormat + 0x30) & *(uint *)PTR_DAT_001e88ac) == 0) ||
-     ((*(uint *)(pixelFormat + 0x30) & ~*(uint *)PTR_DAT_001e88ac) != 0)) {
+  if (((*(uint *)(pixelFormat + 0x30) & *(uint *)ptrTo_rendererLibraryState_001e88ac) == 0) ||
+     ((*(uint *)(pixelFormat + 0x30) & ~*(uint *)ptrTo_rendererLibraryState_001e88ac) != 0)) {
     return 0x2716;
   }
   ctx = (uint *)_malloc(((unsigned char *)0x00002b98U));
@@ -3400,7 +3400,7 @@ int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateB
     if ((*(uint *)(pixelFormat + 0x30) & 1) == 0) {
       do {
         scalarOut[0] = scalarOut[0] + 1;
-        if (*(uint *)(PTR_DAT_001e88ac + 4) <= scalarOut[0]) break;
+        if (*(uint *)(ptrTo_rendererLibraryState_001e88ac + 4) <= scalarOut[0]) break;
       } while ((1 << (scalarOut[0] & 0x3f) & *(uint *)(pixelFormat + 0x30)) == 0);
       goto storeCtx;
     }
@@ -3408,7 +3408,7 @@ int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateB
   scalarOut[0] = 0;
 storeCtx:
   *ctx = scalarOut[0];
-  libraryOrTaskPtr = PTR_DAT_001e88ac;
+  libraryOrTaskPtr = ptrTo_rendererLibraryState_001e88ac;
   ctx[GLD_connect / 4] = 0;
   status = _IOServiceOpen(*(undefined4 *)(scalarOut[0] * 4 + *(int *)(libraryOrTaskPtr + 8)),
                          *(undefined4 *)ptrTo_machTaskSelf_001e88b4,1,ctx + GLD_connect / 4);

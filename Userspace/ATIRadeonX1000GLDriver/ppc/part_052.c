@@ -45,9 +45,9 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
   if (sourceIsNotSampled == 0) {
     *(undefined4 *)(texUnit * 4 + this[0x17] + 0x9378) = 1;
   }
-  if (*(int *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0xc) != -1) {
+  if (*(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + irOpcode * 0x38 + 0xc) != -1) {
     *(char *)(this[0x18] * 0x48 + this[0x16] + 0x1a) =
-         (char)*(int *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0xc);
+         (char)*(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + irOpcode * 0x38 + 0xc);
   }
   texFlags = 0xc;
   texTargetType = *(int *)(texUnit * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
@@ -782,15 +782,15 @@ setSelectSrcIdx2:
           if (!swizzleHighClear) {
             this[0x20] = sourceWidth * 4 - 2U | this[0x20];
             (**(code **)(*this + 0xe4))
-                      (this,*(undefined4 *)(PTR_DAT_001e913c + srcOpcode * 0x38 + 0xc),stagedArg2,
-                       stagedArg3,stagedArg4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + srcOpcode * 0x38);
+                      (this,*(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + srcOpcode * 0x38 + 0xc),stagedArg2,
+                       stagedArg3,stagedArg4,alphaHardwareOpcodeOut,ptrTo_KhanPsOpcodeTraits_001e913c + srcOpcode * 0x38);
           }
           maskByteNonZero = -1 < (int)-swizzleLowByte;
           if (!maskByteNonZero) {
             this[0x21] = sourceWidth * 4 - 2U | this[0x21];
             (**(code **)(*this + 0xe8))
-                      (this,*(undefined4 *)(PTR_DAT_001e913c + srcOpcode * 0x38 + 0xc),stagedArg2,
-                       stagedArg3,stagedArg4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + srcOpcode * 0x38);
+                      (this,*(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + srcOpcode * 0x38 + 0xc),stagedArg2,
+                       stagedArg3,stagedArg4,alphaHardwareOpcodeOut,ptrTo_KhanPsOpcodeTraits_001e913c + srcOpcode * 0x38);
           }
           if (sourceWidth < 2) {
             if (sourceWidth != 1) goto checkSourceReplaced;
@@ -1271,7 +1271,7 @@ int opcodeInfoIsVsFlagBit2(unusedThis, irInst)
   undefined4 unusedThis;
   int irInst;
 {
-  return *(uint *)(PTR_DAT_001e9140 + *(int *)(*(int *)(irInst + 0x88) + 8) * 0x38) >> 2 & 1;
+  return *(uint *)(ptrTo_KhanVsOpcodeTraits_001e9140 + *(int *)(*(int *)(irInst + 0x88) + 8) * 0x38) >> 2 & 1;
 }
 
 /* R300VMachineAssembler__transitionState @ 0x19a568 (176 bytes) */
@@ -2151,7 +2151,7 @@ int MachineAssembler__dtor_19b91c(this)
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
   this[0x11] = 0;
-  *this = PTR_DAT_001e914c + 8;
+  *this = ptrTo_R300MachineAssembler__vtable_001e914c + 8;
   return;
 }
 
@@ -2164,7 +2164,7 @@ int MachineAssembler__dtor_19b9ac(this)
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
   this[0x11] = 0;
-  *this = PTR_DAT_001e914c + 8;
+  *this = ptrTo_R300MachineAssembler__vtable_001e914c + 8;
   return;
 }
 
@@ -2180,7 +2180,7 @@ int R300VMachineAssembler__deleting_dtor(this)
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
-  baseVtable = PTR_DAT_001e914c;
+  baseVtable = ptrTo_R300MachineAssembler__vtable_001e914c;
   this[0x11] = 0;
   *this = baseVtable + 8;
   if (this == (undefined4 *)0x0) {

@@ -1,0 +1,25 @@
+# round r09: GLDriver nl_symbol_ptr slots to anonymous data (tables/templates/globals) whose role the using code states; targets stay LD_
+data	PTR_DAT_001e88ac	ptrTo_rendererLibraryState_001e88ac	INFERRED	connection use-counts at [*ctx+0x98], attach callback +0x14, service list +8 (gld attach/detach/create)
+data	PTR_DAT_001e88cc	ptrTo_copyIndicesScratchBufferPtr_001e88cc	INFERRED	deref gives the aligned scratch base the 16-byte-misalignment fixups of the copyIndices16Swapped paths index
+data	PTR_DAT_001e8994	ptrTo_hwVectorConstArea_001e8994	INFERRED	local `vectorConstArea` in gld_initContextHardwareState
+data	PTR_DAT_001e8998	ptrTo_textureStatePacketTemplate_001e8998	INFERRED	memcpy 0x74 bytes into the packet in gld_buildTextureStatePacket
+data	PTR_DAT_001e899c	ptrTo_textureStateBlockTemplate_001e899c	INFERRED	memcpy 0x23c bytes to backing+0x2a0 in gld_uploadTextureLevel/gldTextureMakeResident
+data	PTR_DAT_001e88d0	ptrTo_hwContextStateTemplate_001e88d0	INFERRED	memcpy 0x2f4 bytes into the packet (locals hwContextTemplate/stateTemplate)
+data	PTR_DAT_001e88c8	ptrTo_textureFormatTable_001e88c8	INFERRED	target is named textureFormatTable_001d9f34
+data	PTR_DAT_001e8b5c	ptrTo_ilTypeToInterpSlotTable_001e8b5c	INFERRED	indexed by ilType*4 in Program__interpSlotOfIlType
+data	PTR_DAT_001e8b60	ptrTo_interpolatorKindToCodeTable_001e8b60	INFERRED	indexed by kind*4 in Table__interpolatorKindToCode
+data	PTR_DAT_001e8b6c	ptrTo_interpSlotToLaneKindTable_001e8b6c	INFERRED	indexed by interpSlot*4 in Program__laneKindOfInterpSlot
+data	PTR_DAT_001e8c70	ptrTo_compareConditionToBinaryOpcodeTable_001e8c70	INFERRED	indexed by compare condition*4 giving newOpcode in IRInst__convertCompareToBinaryAlu
+data	PTR_DAT_001e8c6c	ptrTo_compareConditionOperandOrderTable_001e8c6c	INFERRED	indexed by compare condition*4; zero selects the direct operand order in IRInst__convertCompareToBinaryAlu
+data	PTR_DAT_001e912c	ptrTo_compareConditionInvertTable_001e912c	INFERRED	indexed by compare condition*4 after IfHeader__swapArms swaps the arms
+data	PTR_DAT_001e90f8	ptrTo_compareConditionMapTable_001e90f8	INFERRED	compare condition*4 -> condition fed to IRInst__setCompareCondition (KhanPs createCompareInst, pass_flatten_ifs, foldCompareChain)
+data	PTR_DAT_001e8b88	ptrTo_opcodeOperandSlotInfoTable_001e8b88	INFERRED	indexed by opcodeIndex*4 in Template__bindOperand
+data	PTR_DAT_001e913c	ptrTo_KhanPsOpcodeTraits_001e913c	INFERRED	target is named KhanPsOpcodeTraits_001dca64
+data	PTR_DAT_001e9140	ptrTo_KhanVsOpcodeTraits_001e9140	INFERRED	target is named KhanVsOpcodeTraits_001df1fc
+data	PTR_DAT_001e9770	ptrTo_swizzleWordsYYYX_001dbd84_001e9770	CONFIRMED	__const slot holding the address of swizzleWordsYYYX_001dbd84
+data	PTR_DAT_001e9774	ptrTo_swizzleWordsXYZW_001dbd14_001e9774	CONFIRMED	__const slot holding the address of swizzleWordsXYZW_001dbd14
+data	PTR_DAT_001e977c	ptrTo_swizzleWordsXYZW_001dbd14_001e977c	CONFIRMED	__const slot holding the address of swizzleWordsXYZW_001dbd14
+data	PTR_DAT_001e9780	ptrTo_swizzleWordsYYYX_001dbd84_001e9780	CONFIRMED	__const slot holding the address of swizzleWordsYYYX_001dbd84
+data	PTR_DAT_001e9788	ptrTo_swizzleWordsXYZW_001dbd14_001e9788	CONFIRMED	__const slot holding the address of swizzleWordsXYZW_001dbd14
+data	PTR_DAT_001e978c	ptrTo_swizzleWordsYYYX_001dbd84_001e978c	CONFIRMED	__const slot holding the address of swizzleWordsYYYX_001dbd84
+data	PTR_DAT_001e9110	ptrTo_R300VSchedModel__vtable_001e9110	INFERRED	vtable of the vertex sched model allocated (0x3c bytes, R300VSchedModel__vslot2_reset) by FudoVs/KhanVs createSchedModels; target an anonymous object in the const data

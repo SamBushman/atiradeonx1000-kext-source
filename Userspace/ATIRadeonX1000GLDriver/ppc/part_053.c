@@ -258,7 +258,7 @@ int MachineAssembler__dtor_19deb0(this)
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
   this[0x11] = 0;
-  *this = PTR_DAT_001e914c + 8;
+  *this = ptrTo_R300MachineAssembler__vtable_001e914c + 8;
   return;
 }
 
@@ -285,7 +285,7 @@ int MachineAssembler__dtor_19df54(this)
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
   this[0x11] = 0;
-  *this = PTR_DAT_001e914c + 8;
+  *this = ptrTo_R300MachineAssembler__vtable_001e914c + 8;
   return;
 }
 
@@ -1085,7 +1085,7 @@ int R520MachineAssembler__vslot5_beginProgram(this, programArg, allocArg, compil
   *(undefined4 *)(this + 0x98) = 1;
   *(undefined4 *)(this + 0x94) = 1;
   **(undefined4 **)(this + 0xa8) = 0;
-  opcodeTable = PTR_DAT_001e913c;
+  opcodeTable = ptrTo_KhanPsOpcodeTraits_001e913c;
   *(int *)(*(int *)(this + 0xa8) + 4) = registerLimit + 1;
   *(undefined4 *)(opcodeTable + 0x2654) = 7;
   *(undefined4 *)(opcodeTable + 0x10e4) = 0xd;

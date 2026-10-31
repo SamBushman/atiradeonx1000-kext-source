@@ -39,7 +39,7 @@ int IRBinary__ctor_107eec(inst, opcode, compiler)
   undefined *vtable;
   
   IRAlu__ctor_1071a8(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8bec;
+  vtable = ptrTo_IRBinary__vtable_001e8bec;
   inst[0x21] = 2;
   *inst = vtable + 8;
   return;
@@ -54,7 +54,7 @@ int IRKill2__ctor_107f38(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRBinary__ctor_107eec)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c30 + 8;
+  vtable = ptrTo_IRKill2__vtable_001e8c30 + 8;
   this[0x20] = 1;
   *this = vtable;
   this[5] = this[5] | 0x18;
@@ -71,7 +71,7 @@ int IRCmp2__ctor_107fd0(this, unusedArg2, compiler)
   undefined *vtable;
   
   ((int (*)())IRBinary__ctor_107eec)(this,0x8b,compiler);
-  vtable = PTR_DAT_001e8be4;
+  vtable = ptrTo_IRCmp2__vtable_001e8be4;
   this[0x20] = 0;
   this[5] = this[5] | 0x18;
   *this = vtable + 8;
@@ -102,7 +102,7 @@ int IRCmp2__ctor_1080e0(this, unusedArg2, compiler)
   undefined *vtable;
   
   ((int (*)())IRBinary__ctor_107eec)(this,0x8b,compiler);
-  vtable = PTR_DAT_001e8be4;
+  vtable = ptrTo_IRCmp2__vtable_001e8be4;
   this[0x20] = 0;
   this[5] = this[5] | 0x18;
   *this = vtable + 8;
@@ -118,7 +118,7 @@ int IRInst__reinitAsBinary(inst, opcode, compiler)
   undefined *vtable;
   
   IRAlu__ctor_1071a8(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8bec;
+  vtable = ptrTo_IRBinary__vtable_001e8bec;
   inst[0x21] = 2;
   *inst = vtable + 8;
   return;
@@ -163,7 +163,7 @@ int IRTrinary__ctor_1082b8(inst, opcode, compiler)
   undefined *vtable;
   
   IRAlu__ctor_1071a8(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8c24;
+  vtable = ptrTo_IRTrinary__vtable_001e8c24;
   inst[0x21] = 3;
   *inst = vtable + 8;
   return;
@@ -178,7 +178,7 @@ int IRInst__reinitAsTrinary(inst, opcode, compiler)
   undefined *vtable;
   
   IRAlu__ctor_1071a8(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8c24;
+  vtable = ptrTo_IRTrinary__vtable_001e8c24;
   inst[0x21] = 3;
   *inst = vtable + 8;
   return;
@@ -225,7 +225,7 @@ int IRInst__reinitAsMov(this, opcode, compiler)
   int laneIndex;
   
   IRUnary__ctor_107cec(this,opcode,compiler);
-  vtable = PTR_DAT_001e8bf0;
+  vtable = ptrTo_IRMov__vtable_001e8bf0;
   this[0x20] = 1;
   *this = vtable + 8;
   laneIndex = 0;
@@ -311,7 +311,7 @@ int IRGeomExport__ctor_1086e8(this, opcode, compiler)
   undefined4 opcodeInfo;
   
   ((int (*)())IRExport__ctor_1085b0)(this,compiler);
-  vtable = PTR_DAT_001e8bfc;
+  vtable = ptrTo_IRGeomExport__vtable_001e8bfc;
   this[0x21] = 1;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -329,7 +329,7 @@ int IRGeomExport__ctor_108770(this, compiler)
   undefined4 opcodeInfo;
   
   ((int (*)())IRExport__ctor_1085b0)(this,compiler);
-  vtable = PTR_DAT_001e8bfc;
+  vtable = ptrTo_IRGeomExport__vtable_001e8bfc;
   this[0x21] = 1;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -347,7 +347,7 @@ int IRGeomExport__ctor_1087f0(this, compiler)
   undefined4 opcodeInfo;
   
   ((int (*)())IRExport__ctor_1085b0)(this,compiler);
-  vtable = PTR_DAT_001e8bfc;
+  vtable = ptrTo_IRGeomExport__vtable_001e8bfc;
   this[0x21] = 1;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -364,7 +364,7 @@ int IRExportColorAndFog__ctor_108870(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRExport__ctor_1085b0)(this,compiler);
-  vtable = PTR_DAT_001e8c28;
+  vtable = ptrTo_IRExportColorAndFog__vtable_001e8c28;
   this[0x21] = 2;
   this[0x26] = 0x16;
   *this = vtable + 8;
@@ -379,7 +379,7 @@ int IRExportColorAndFog__ctor_1088c4(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRExport__ctor_1085b0)(this,compiler);
-  vtable = PTR_DAT_001e8c28;
+  vtable = ptrTo_IRExportColorAndFog__vtable_001e8c28;
   this[0x21] = 2;
   this[0x26] = 0x16;
   *this = vtable + 8;
@@ -428,7 +428,7 @@ int IRGeomExport__ctor_108a50(this, opcode, compiler)
   undefined4 opcodeInfo;
   
   ((int (*)())IRExport__ctor_1085b0)(this,compiler);
-  vtable = PTR_DAT_001e8bfc;
+  vtable = ptrTo_IRGeomExport__vtable_001e8bfc;
   this[0x21] = 1;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -461,7 +461,7 @@ int IRKill2__ctor_108b54(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRBinary__ctor_107eec)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c30 + 8;
+  vtable = ptrTo_IRKill2__vtable_001e8c30 + 8;
   this[0x20] = 1;
   *this = vtable;
   this[5] = this[5] | 0x18;
@@ -492,7 +492,7 @@ int IRHeader__ctor_108c68(this, compiler)
   undefined *vtable;
   
   IRPseudo__ctor(this,0x86,compiler);
-  vtable = PTR_DAT_001e8bf4;
+  vtable = ptrTo_IRHeader__vtable_001e8bf4;
   this[0x4b] = 0;
   *this = vtable + 8;
   return;
@@ -506,7 +506,7 @@ int IRHeader__ctor_108cbc(this, compiler)
   undefined *vtable;
   
   IRPseudo__ctor(this,0x86,compiler);
-  vtable = PTR_DAT_001e8bf4;
+  vtable = ptrTo_IRHeader__vtable_001e8bf4;
   this[0x4b] = 0;
   *this = vtable + 8;
   return;
@@ -518,7 +518,7 @@ int IREntry__ctor_108d10(this, compiler)
   undefined4 compiler;
 {
   IRPseudo__ctor(this,0x87,compiler);
-  *this = PTR_DAT_001e8c44 + 8;
+  *this = ptrTo_IREntry__vtable_001e8c44 + 8;
   return;
 }
 
@@ -528,7 +528,7 @@ int IREntry__ctor_108d5c(this, compiler)
   undefined4 compiler;
 {
   IRPseudo__ctor(this,0x87,compiler);
-  *this = PTR_DAT_001e8c44 + 8;
+  *this = ptrTo_IREntry__vtable_001e8c44 + 8;
   return;
 }
 
@@ -538,7 +538,7 @@ int IRExit__ctor_108da8(this, compiler)
   undefined4 compiler;
 {
   IRPseudo__ctor(this,0x88,compiler);
-  *this = PTR_DAT_001e8c5c + 8;
+  *this = ptrTo_IRExit__vtable_001e8c5c + 8;
   return;
 }
 
@@ -548,7 +548,7 @@ int IRExit__ctor_108df4(this, compiler)
   undefined4 compiler;
 {
   IRPseudo__ctor(this,0x88,compiler);
-  *this = PTR_DAT_001e8c5c + 8;
+  *this = ptrTo_IRExit__vtable_001e8c5c + 8;
   return;
 }
 
@@ -561,7 +561,7 @@ int IRLoad__ctor_108e40(this, kind, compiler)
   undefined *vtable;
   
   IRPseudo__ctor(this,kind,compiler);
-  vtable = PTR_DAT_001e8c54;
+  vtable = ptrTo_IRLoad__vtable_001e8c54;
   this[0x20] = 1;
   *this = vtable + 8;
   return;
@@ -576,7 +576,7 @@ int IRUndefined__ctor_108e8c(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c14;
+  vtable = ptrTo_IRUndefined__vtable_001e8c14;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -607,7 +607,7 @@ int IRUndefined__ctor_108f5c(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c14;
+  vtable = ptrTo_IRUndefined__vtable_001e8c14;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -622,7 +622,7 @@ int IRUndefined__ctor_108fb0(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x85,compiler);
-  vtable = PTR_DAT_001e8c14;
+  vtable = ptrTo_IRUndefined__vtable_001e8c14;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -637,7 +637,7 @@ int IRUndefined__ctor_10900c(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x85,compiler);
-  vtable = PTR_DAT_001e8c14;
+  vtable = ptrTo_IRUndefined__vtable_001e8c14;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -650,7 +650,7 @@ int IRLoadMemBufferIndex__ctor_109068(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
-  *this = PTR_DAT_001e8bf8 + 8;
+  *this = ptrTo_IRLoadMemBufferIndex__vtable_001e8bf8 + 8;
   return;
 }
 
@@ -660,7 +660,7 @@ int IRLoadMemBufferIndex__ctor_1090b4(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
-  *this = PTR_DAT_001e8bf8 + 8;
+  *this = ptrTo_IRLoadMemBufferIndex__vtable_001e8bf8 + 8;
   return;
 }
 
@@ -670,7 +670,7 @@ int IRLoadMemBuffer__ctor_109100(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IRLoad__ctor_108e40)(this,0xfa,compiler);
-  *this = PTR_DAT_001e8c34 + 8;
+  *this = ptrTo_IRLoadMemBuffer__vtable_001e8c34 + 8;
   return;
 }
 
@@ -680,7 +680,7 @@ int IRLoadMemBuffer__ctor_10914c(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IRLoad__ctor_108e40)(this,0xfa,compiler);
-  *this = PTR_DAT_001e8c34 + 8;
+  *this = ptrTo_IRLoadMemBuffer__vtable_001e8c34 + 8;
   return;
 }
 
@@ -692,7 +692,7 @@ int IRLoadInterp__ctor_109198(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7e,compiler);
-  vtable = PTR_DAT_001e8c3c + 8;
+  vtable = ptrTo_IRLoadInterp__vtable_001e8c3c + 8;
   this[0x20] = 1;
   *this = vtable;
   this[5] = this[5] | 0x40;
@@ -715,7 +715,7 @@ int IRLoadInterp__ctor_109270(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7e,compiler);
-  vtable = PTR_DAT_001e8c3c + 8;
+  vtable = ptrTo_IRLoadInterp__vtable_001e8c3c + 8;
   this[0x20] = 1;
   *this = vtable;
   this[5] = this[5] | 0x40;
@@ -740,7 +740,7 @@ int IRLoadTemp__ctor_109348(this, sourceRecord, compiler)
   undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7a,compiler);
-  vtable = PTR_DAT_001e8c20;
+  vtable = ptrTo_IRLoadTemp__vtable_001e8c20;
   this[0x20] = 1;
   *this = vtable + 8;
   this[0x26] = *(undefined4 *)(sourceRecord + 4);
@@ -761,7 +761,7 @@ int IRLoadTemp__ctor_1093b8(this, sourceRecord, compiler)
   undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7a,compiler);
-  vtable = PTR_DAT_001e8c20;
+  vtable = ptrTo_IRLoadTemp__vtable_001e8c20;
   this[0x20] = 1;
   *this = vtable + 8;
   this[0x26] = *(undefined4 *)(sourceRecord + 4);
@@ -781,7 +781,7 @@ int IRLoadTemp__ctor_109428(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c20;
+  vtable = ptrTo_IRLoadTemp__vtable_001e8c20;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -813,7 +813,7 @@ int IRLoadTemp__ctor_1094fc(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c20;
+  vtable = ptrTo_IRLoadTemp__vtable_001e8c20;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -829,7 +829,7 @@ int IRLoadTemp__ctor_109554(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7a,compiler);
-  vtable = PTR_DAT_001e8c20;
+  vtable = ptrTo_IRLoadTemp__vtable_001e8c20;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -845,7 +845,7 @@ int IRLoadTemp__ctor_1095b4(this, compiler)
   undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7a,compiler);
-  vtable = PTR_DAT_001e8c20;
+  vtable = ptrTo_IRLoadTemp__vtable_001e8c20;
   this[0x21] = 0;
   this[0x20] = 1;
   *this = vtable + 8;
@@ -901,7 +901,7 @@ int IRLoadVertex__ctor_109764(this, opcode, compiler)
   int preserveVertexInputsEnabled;
   
   ((int (*)())IRLoad__ctor_108e40)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8bdc;
+  vtable = ptrTo_IRLoadVertex__vtable_001e8bdc;
   this[0x21] = 0;
   this[0x26] = 0x1a;
   *this = vtable + 8;
@@ -939,7 +939,7 @@ int IRLoadVertex__ctor_10988c(this, opcode, compiler)
   int preserveVertexInputsEnabled;
   
   ((int (*)())IRLoad__ctor_108e40)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8bdc;
+  vtable = ptrTo_IRLoadVertex__vtable_001e8bdc;
   this[0x21] = 0;
   this[0x26] = 0x1a;
   *this = vtable + 8;

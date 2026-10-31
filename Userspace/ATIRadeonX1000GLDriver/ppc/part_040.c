@@ -1499,7 +1499,7 @@ int pass_flatten_ifs(flattenPass)
               conditionNegate = branchInst[0x34] & 1;
               conditionAbs = (uint)branchInst[0x34] >> 1 & 1;
               compareCondition = IRInst__getCompareCondition(branchInst);
-              IRInst__setCompareCondition(branchInst,*(undefined4 *)(PTR_DAT_001e90f8 + compareCondition * 4));
+              IRInst__setCompareCondition(branchInst,*(undefined4 *)(ptrTo_compareConditionMapTable_001e90f8 + compareCondition * 4));
             }
           }
           else {
@@ -2060,7 +2060,7 @@ int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
     *ifFooterAlloc = arenaAt3742;
     Block__ctor_ea148(ifFooter,compiler);
     ifFooterAlloc[0x4c] = ifHeader;
-    *ifFooter = PTR_DAT_001e9130 + 8;
+    *ifFooter = ptrTo_IfFooter__vtable_001e9130 + 8;
     allocation[0x4e] = thenBlock;
     allocation[0x4f] = breakBlock;
     allocation[0x50] = ifFooter;

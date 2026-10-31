@@ -3445,7 +3445,7 @@ code_r0x00171ba0:
   } while (componentArrayCursor != nextComponentCursor);
   bundleRecord = scheduler[0xc];
   if (bundleRecord != 0) {
-    deadVtable = PTR_DAT_001e8b48 + 8;
+    deadVtable = ptrTo_DListNode__vtable_001e8b48 + 8;
     *(undefined **)(bundleRecord + 0x14) = deadVtable;
     *(undefined **)(bundleRecord + 0x20) = deadVtable;
     Arena__free(*(undefined4 *)(bundleRecord + -4),bundleRecord + -4);
@@ -3527,8 +3527,8 @@ int Scheduler__run(program)
   sentinelCursorBack = &sentinelTableEnd;
   do {
     sentinelNode = sentinelCursorBack + -6;
-    *sentinelNode = PTR_DAT_001e8b48 + 8;
-    sentinelCursorBack[-3] = PTR_DAT_001e8b48 + 8;
+    *sentinelNode = ptrTo_DListNode__vtable_001e8b48 + 8;
+    sentinelCursorBack[-3] = ptrTo_DListNode__vtable_001e8b48 + 8;
     sentinelCursorBack = sentinelNode;
   } while (sentinelNode != sentinelTable);
   return;

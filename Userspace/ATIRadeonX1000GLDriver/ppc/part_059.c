@@ -6,8 +6,8 @@ int IrFetchShaderCall__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8ef4 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrFetchShaderCall__vtable_001e8ef4 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -18,8 +18,8 @@ int IrScatter__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9008 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrScatter__vtable_001e9008 + 8;
   *this = vtable;
   return;
 }
@@ -30,8 +30,8 @@ int IrScatter__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9008 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrScatter__vtable_001e9008 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -42,8 +42,8 @@ int IrCmovNE__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8d20 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovNE__vtable_001e8d20 + 8;
   *this = vtable;
   return;
 }
@@ -54,8 +54,8 @@ int IrCmovNE__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8d20 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovNE__vtable_001e8d20 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -66,8 +66,8 @@ int IrCmovGT__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8eb8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovGT__vtable_001e8eb8 + 8;
   *this = vtable;
   return;
 }
@@ -78,8 +78,8 @@ int IrCmovGT__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8eb8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovGT__vtable_001e8eb8 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -90,8 +90,8 @@ int IrCmovGE__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fac + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovGE__vtable_001e8fac + 8;
   *this = vtable;
   return;
 }
@@ -102,8 +102,8 @@ int IrCmovGE__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fac + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovGE__vtable_001e8fac + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -114,8 +114,8 @@ int IrCmovEQ__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8c9c + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovEQ__vtable_001e8c9c + 8;
   *this = vtable;
   return;
 }
@@ -126,8 +126,8 @@ int IrCmovEQ__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8c9c + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCmovEQ__vtable_001e8c9c + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -138,8 +138,8 @@ int IrFetchTextureUncached__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f30 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrFetchTextureUncached__vtable_001e8f30 + 8;
   *this = vtable;
   return;
 }
@@ -150,8 +150,8 @@ int IrFetchTextureUncached__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f30 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrFetchTextureUncached__vtable_001e8f30 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -162,8 +162,8 @@ int IrFetchTextureLOD__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9084 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrFetchTextureLOD__vtable_001e9084 + 8;
   *this = vtable;
   return;
 }
@@ -174,8 +174,8 @@ int IrFetchTextureLOD__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9084 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrFetchTextureLOD__vtable_001e9084 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -186,8 +186,8 @@ int IrCndGEInt__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8ef0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGEInt__vtable_001e8ef0 + 8;
   *this = vtable;
   return;
 }
@@ -198,8 +198,8 @@ int IrCndGEInt__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8ef0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGEInt__vtable_001e8ef0 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -210,8 +210,8 @@ int IrCndGE1__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8d58 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGE1__vtable_001e8d58 + 8;
   *this = vtable;
   return;
 }
@@ -222,8 +222,8 @@ int IrCndGE1__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8d58 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGE1__vtable_001e8d58 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -234,8 +234,8 @@ int IrCndGE__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fa8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGE__vtable_001e8fa8 + 8;
   *this = vtable;
   return;
 }
@@ -246,8 +246,8 @@ int IrCndGE__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fa8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGE__vtable_001e8fa8 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -258,8 +258,8 @@ int IrCndGEFloat__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f24 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGEFloat__vtable_001e8f24 + 8;
   *this = vtable;
   return;
 }
@@ -270,8 +270,8 @@ int IrCndGEFloat__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f24 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCndGEFloat__vtable_001e8f24 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -282,8 +282,8 @@ int IrMad__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f74 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrMad__vtable_001e8f74 + 8;
   *this = vtable;
   return;
 }
@@ -294,8 +294,8 @@ int IrMad__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f74 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrMad__vtable_001e8f74 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -306,8 +306,8 @@ int IrR300ExpBaseE__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f18 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrR300ExpBaseE__vtable_001e8f18 + 8;
   *this = vtable;
   return;
 }
@@ -318,8 +318,8 @@ int IrR300ExpBaseE__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f18 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrR300ExpBaseE__vtable_001e8f18 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -330,8 +330,8 @@ int IrDxLogp__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8d28 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDxLogp__vtable_001e8d28 + 8;
   *this = vtable;
   return;
 }
@@ -342,8 +342,8 @@ int IrDxLogp__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8d28 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDxLogp__vtable_001e8d28 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -354,8 +354,8 @@ int IrR300Expp__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8e14 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrR300Expp__vtable_001e8e14 + 8;
   *this = vtable;
   return;
 }
@@ -366,8 +366,8 @@ int IrR300Expp__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8e14 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrR300Expp__vtable_001e8e14 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -378,8 +378,8 @@ int IrPow__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8cf0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPow__vtable_001e8cf0 + 8;
   *this = vtable;
   return;
 }
@@ -390,8 +390,8 @@ int IrPow__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8cf0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPow__vtable_001e8cf0 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -402,8 +402,8 @@ int IrLoad__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8de4 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrLoad__vtable_001e8de4 + 8;
   *this = vtable;
   return;
 }
@@ -414,8 +414,8 @@ int IrLoad__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8de4 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrLoad__vtable_001e8de4 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -426,8 +426,8 @@ int IrDp3Add__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f98 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDp3Add__vtable_001e8f98 + 8;
   *this = vtable;
   return;
 }
@@ -438,8 +438,8 @@ int IrDp3Add__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f98 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDp3Add__vtable_001e8f98 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -450,8 +450,8 @@ int IrMix__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8de8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrMix__vtable_001e8de8 + 8;
   *this = vtable;
   return;
 }
@@ -462,8 +462,8 @@ int IrMix__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8de8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrMix__vtable_001e8de8 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -474,8 +474,8 @@ int IrDsy1__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fd4 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsy1__vtable_001e8fd4 + 8;
   *this = vtable;
   return;
 }
@@ -486,8 +486,8 @@ int IrDsy1__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fd4 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsy1__vtable_001e8fd4 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -498,8 +498,8 @@ int IrDsy__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9050 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsy__vtable_001e9050 + 8;
   *this = vtable;
   return;
 }
@@ -510,8 +510,8 @@ int IrDsy__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9050 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsy__vtable_001e9050 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -522,8 +522,8 @@ int IrDsx1__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9074 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsx1__vtable_001e9074 + 8;
   *this = vtable;
   return;
 }
@@ -534,8 +534,8 @@ int IrDsx1__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e9074 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsx1__vtable_001e9074 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -546,8 +546,8 @@ int IrDsx__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8cc8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsx__vtable_001e8cc8 + 8;
   *this = vtable;
   return;
 }
@@ -558,8 +558,8 @@ int IrDsx__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8cc8 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrDsx__vtable_001e8cc8 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -570,8 +570,8 @@ int IrCnd05__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f34 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCnd05__vtable_001e8f34 + 8;
   *this = vtable;
   return;
 }
@@ -582,8 +582,8 @@ int IrCnd05__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f34 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrCnd05__vtable_001e8f34 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -594,8 +594,8 @@ int IrPresubInvert__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8e48 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubInvert__vtable_001e8e48 + 8;
   *this = vtable;
   return;
 }
@@ -606,8 +606,8 @@ int IrPresubInvert__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8e48 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubInvert__vtable_001e8e48 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -618,8 +618,8 @@ int IrPresubAdd__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f2c + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubAdd__vtable_001e8f2c + 8;
   *this = vtable;
   return;
 }
@@ -630,8 +630,8 @@ int IrPresubAdd__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8f2c + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubAdd__vtable_001e8f2c + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -642,8 +642,8 @@ int IrPresubSub__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fd0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubSub__vtable_001e8fd0 + 8;
   *this = vtable;
   return;
 }
@@ -654,8 +654,8 @@ int IrPresubSub__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8fd0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubSub__vtable_001e8fd0 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -666,8 +666,8 @@ int IrPresubBX2Neg__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8c90 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubBX2Neg__vtable_001e8c90 + 8;
   *this = vtable;
   return;
 }
@@ -678,8 +678,8 @@ int IrPresubBX2Neg__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8c90 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrPresubBX2Neg__vtable_001e8c90 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -690,8 +690,8 @@ int IrOpSop__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8eb0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrOpSop__vtable_001e8eb0 + 8;
   *this = vtable;
   return;
 }
@@ -702,8 +702,8 @@ int IrOpSop__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this = PTR_DAT_001e8eb0 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this = ptrTo_IrOpSop__vtable_001e8eb0 + 8;
   *this = vtable;
   return operator_delete(this);
 }
@@ -714,8 +714,8 @@ int IrOpDp__dtor(this2)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e8f28 + 8;
-  *this2 = PTR_DAT_001e9058 + 8;
+  vtable = ptrTo_OpcodeInfo__vtable_001e8f28 + 8;
+  *this2 = ptrTo_IrOpDp__vtable_001e9058 + 8;
   *this2 = vtable;
   return;
 }

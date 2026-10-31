@@ -118,7 +118,7 @@ int Program__interpSlotOfIlType(program, ilType)
   undefined4 program;
   int ilType;
 {
-  return *(undefined4 *)(PTR_DAT_001e8b5c + ilType * 4);
+  return *(undefined4 *)(ptrTo_ilTypeToInterpSlotTable_001e8b5c + ilType * 4);
 }
 
 /* Program__lookupTable8b68 @ 0xec27c (36 bytes) */
@@ -134,7 +134,7 @@ int Program__laneKindOfInterpSlot(program, interpSlot)
   undefined4 program;
   int interpSlot;
 {
-  return *(undefined4 *)(PTR_DAT_001e8b6c + interpSlot * 4);
+  return *(undefined4 *)(ptrTo_interpSlotToLaneKindTable_001e8b6c + interpSlot * 4);
 }
 
 /* Table__interpolatorKindToCode @ 0xec2c4 (36 bytes) */
@@ -142,7 +142,7 @@ int Table__interpolatorKindToCode(unusedArg1, kind)
   undefined4 unusedArg1;
   int kind;
 {
-  return *(undefined4 *)(PTR_DAT_001e8b60 + kind * 4);
+  return *(undefined4 *)(ptrTo_interpolatorKindToCodeTable_001e8b60 + kind * 4);
 }
 
 /* Program__freeWorkArrays @ 0xec2e8 (136 bytes) */
@@ -680,7 +680,7 @@ int Program__dtor_ecfac(program)
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x398));
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x39c));
   DListNode__clear((undefined4 *)(program + 0x37c));
-  baseVtable = PTR_DAT_001e8b48 + 8;
+  baseVtable = ptrTo_DListNode__vtable_001e8b48 + 8;
   *(undefined4 *)(program + 0x37c) = baseVtable;
   *(undefined **)(program + 0x388) = baseVtable;
   return;
@@ -723,7 +723,7 @@ int Program__dtor_ed124(program)
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x398));
   Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(undefined4 *)(program + 0x39c));
   DListNode__clear((undefined4 *)(program + 0x37c));
-  baseVtable = PTR_DAT_001e8b48 + 8;
+  baseVtable = ptrTo_DListNode__vtable_001e8b48 + 8;
   *(undefined4 *)(program + 0x37c) = baseVtable;
   *(undefined **)(program + 0x388) = baseVtable;
   return;

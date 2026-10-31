@@ -1648,7 +1648,7 @@ code_r0x0013b8e4:
   *newBlockAllocB = arena;
   newBlock = newBlockAllocB + 1;
   Block__ctor_ea148(newBlock,*(undefined4 *)(program + 8));
-  blockVtable = PTR_DAT_001e9134;
+  blockVtable = ptrTo_MirrorBlock__vtable_001e9134;
   newBlockAllocB[0x4c] = blockCursorOrNewBlock;
   newBlockAllocB[1] = blockVtable + 8;
   Program__insertBlockAfter(program,otherPred,newBlock);

@@ -119,7 +119,7 @@ checkCtx:
     ctx[0x55] = newDrawableFlags;
   }
   if ((newDrawableFlags & 0x20) == 0) {
-    scalarIn0 = ~(uint)*(byte *)(*(int *)(PTR_DAT_001e88ac + 0xc) + *ctx);
+    scalarIn0 = ~(uint)*(byte *)(*(int *)(ptrTo_rendererLibraryState_001e88ac + 0xc) + *ctx);
   }
   else {
     scalarIn0 = *(uint *)(ctx[0x3e] + 8);
@@ -270,11 +270,11 @@ int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8
   if ((*(uint *)(*(int *)(ctx + 0x1e4) + 0x14) & 2) != 0) {
     drawable = *(undefined4 **)(ctx + 0xf8);
     if (*(char *)(ctx + 0x144) == '\0') {
-      (**(code **)(PTR_DAT_001e88ac + 0x10))
+      (**(code **)(ptrTo_rendererLibraryState_001e88ac + 0x10))
                 (*drawable,drawable[1],drawable[2],0,0,-(uint)*(byte *)(ctx + 0x142) >> 0x1f);
     }
     else {
-      (**(code **)(PTR_DAT_001e88ac + 0x10))
+      (**(code **)(ptrTo_rendererLibraryState_001e88ac + 0x10))
                 (*drawable,drawable[1],drawable[2],ctx + 0x124,*(undefined4 *)(ctx + 0x108),
                  -(uint)*(byte *)(ctx + 0x142) >> 0x1f);
     }
@@ -453,11 +453,11 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
   if ((*(uint *)(*(int *)(ctx + 0x1e4) + 0x14) & 2) != 0) {
     drawable = *(undefined4 **)(ctx + 0xf8);
     if (*(char *)(ctx + 0x144) == '\0') {
-      (**(code **)(PTR_DAT_001e88ac + 0x10))
+      (**(code **)(ptrTo_rendererLibraryState_001e88ac + 0x10))
                 (*drawable,drawable[1],drawable[2],0,0,-(uint)*(byte *)(ctx + 0x142) >> 0x1f);
     }
     else {
-      (**(code **)(PTR_DAT_001e88ac + 0x10))
+      (**(code **)(ptrTo_rendererLibraryState_001e88ac + 0x10))
                 (*drawable,drawable[1],drawable[2],ctx + 0x124,*(undefined4 *)(ctx + 0x108),
                  -(uint)*(byte *)(ctx + 0x142) >> 0x1f);
     }
@@ -543,11 +543,11 @@ int gld_swapBuffersImpl(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3
   if ((*(uint *)(*(int *)(ctx + 0x1e4) + 0x14) & 2) != 0) {
     drawable = *(undefined4 **)(ctx + 0xf8);
     if (*(char *)(ctx + 0x144) == '\0') {
-      (**(code **)(PTR_DAT_001e88ac + 0x10))
+      (**(code **)(ptrTo_rendererLibraryState_001e88ac + 0x10))
                 (*drawable,drawable[1],drawable[2],0,0,-(uint)*(byte *)(ctx + 0x142) >> 0x1f);
     }
     else {
-      (**(code **)(PTR_DAT_001e88ac + 0x10))
+      (**(code **)(ptrTo_rendererLibraryState_001e88ac + 0x10))
                 (*drawable,drawable[1],drawable[2],ctx + 0x124,*(undefined4 *)(ctx + 0x108),
                  -(uint)*(byte *)(ctx + 0x142) >> 0x1f);
     }
@@ -616,7 +616,7 @@ int gld_validatePixelFormat(pixelFormat)
     return 0x271e;
   }
   displayMask = *(uint *)(pixelFormat + 0x30);
-  if ((displayMask == 0) || ((displayMask & ~*(uint *)PTR_DAT_001e88ac) != 0)) {
+  if ((displayMask == 0) || ((displayMask & ~*(uint *)ptrTo_rendererLibraryState_001e88ac) != 0)) {
     return 0x2716;
   }
   surfaceFlags = *(uint *)(pixelFormat + 8);
@@ -1089,7 +1089,7 @@ int gld_validateFramebuffer(ctx, framebufferObj, staleArgR5, staleArgR6, staleAr
       }
       attachments = (int *)framebufferObj[1];
     }
-    colorFormatTable = PTR_DAT_001e88c8;
+    colorFormatTable = ptrTo_textureFormatTable_001e88c8;
     moreSlots = loopIndex != 5;
     loopIndex = loopIndex + 1;
   } while (moreSlots);
@@ -1102,7 +1102,7 @@ int gld_validateFramebuffer(ctx, framebufferObj, staleArgR5, staleArgR6, staleAr
   }
   else {
     formatIndex = *(byte *)(colorTexture + 0x38);
-    framebufferObj[6] = *(ushort *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) & 0x3f;
+    framebufferObj[6] = *(ushort *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) & 0x3f;
     framebufferObj[7] = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10) >> 10 & 0x3f;
     framebufferObj[8] = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10) >> 4 & 0x3f;
     formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10);
@@ -1126,7 +1126,7 @@ loopStoreFramebufferObj:
     framebufferObj[10] = 0;
   }
   else {
-    framebufferObj[10] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(depthTexture + 0x38) * 0x24 + 0x14) >> 8 &
+    framebufferObj[10] = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)*(byte *)(depthTexture + 0x38) * 0x24 + 0x14) >> 8 &
                   0x3f;
     if ((*(char *)(depthTexture + 0x38) != '\x10') && (*(char *)(depthTexture + 0x38) != ')'))
     goto storeAttachments;
@@ -1136,7 +1136,7 @@ loopStoreFramebufferObj:
     framebufferObj[0xb] = 0;
   }
   else {
-    framebufferObj[0xb] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(stencilTexture + 0x38) * 0x24 + 0x14) >> 4 &
+    framebufferObj[0xb] = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)*(byte *)(stencilTexture + 0x38) * 0x24 + 0x14) >> 4 &
                    0xf;
     if ((*(char *)(stencilTexture + 0x38) != ')') || ((depthTexture != 0 && (depthTexture != stencilTexture)))) {
 storeAttachments:
@@ -1153,7 +1153,7 @@ storeAttachments:
     if (attachmentTexture != 0) {
       fbWordCursor[0x13] = *(int *)(attachmentTexture + 0x34);
     }
-    colorFormatTable = PTR_DAT_001e88c8;
+    colorFormatTable = ptrTo_textureFormatTable_001e88c8;
     fbWordCursor = fbWordCursor + 1;
     attachLeft = attachLeft + -1;
   } while (attachLeft != 0);
@@ -3260,7 +3260,7 @@ int copyIndices16Swapped_prefetch_entry(dst, src, count)
   }
   carryVec = *(vec16 *)((uint)src & 0xfffffff0);
   alignPermute = *(vec16 *)
-            (((uint)src & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
+            (((uint)src & 0xf) * 0x10 + *(int *)ptrTo_copyIndicesScratchBufferPtr_001e88cc & 0xfffffff0);
   for (prefetchCursor = src; prefetchCursor < src + 0x38; prefetchCursor = prefetchCursor + 8) {
     dataCacheBlockTouch(prefetchCursor);
   }
@@ -3358,7 +3358,7 @@ int copyIndices16Swapped_prefetch(dst, src, count)
   }
   carryVec = *(vec16 *)((uint)src & 0xfffffff0);
   alignPermute = *(vec16 *)
-            (((uint)src & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
+            (((uint)src & 0xf) * 0x10 + *(int *)ptrTo_copyIndicesScratchBufferPtr_001e88cc & 0xfffffff0);
   for (prefetchCursor = src; prefetchCursor < src + 0x38; prefetchCursor = prefetchCursor + 8) {
     dataCacheBlockTouch(prefetchCursor);
   }
@@ -3460,7 +3460,7 @@ int copyIndices16Swapped_dcbz_entry(dst, src, count)
   dstCursor = (uint *)(dst - dstMisalign);
   srcCursor = (uint *)(src - dstMisalign);
   alignPermute = *(vec16 *)
-             (*(int *)PTR_DAT_001e88cc + ((int)srcCursor * 0x10 & 0xf0U) & 0xfffffff0);
+             (*(int *)ptrTo_copyIndicesScratchBufferPtr_001e88cc + ((int)srcCursor * 0x10 & 0xf0U) & 0xfffffff0);
   carryVec = *(vec16 *)(src & 0xfffffff0);
   if (dstMisalign != 0) {
     carryVec = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
@@ -3469,7 +3469,7 @@ int copyIndices16Swapped_dcbz_entry(dst, src, count)
     tempVec = vectorConditionalSelect
                        (*(vec16 *)((uint)dstCursor & 0xfffffff0),tempVec,
                         *(vec16 *)
-                         (*(int *)PTR_DAT_001e88cc + dstMisalign * 0x10 + 0x100 & 0xfffffff0));
+                         (*(int *)ptrTo_copyIndicesScratchBufferPtr_001e88cc + dstMisalign * 0x10 + 0x100 & 0xfffffff0));
     *(vec16 *)((uint)dstCursor & 0xfffffff0) = tempVec;
     dstCursor = dstCursor + 4;
   }
@@ -3552,7 +3552,7 @@ int copyIndices16Swapped_dcbz(dst, src, count)
   dstCursor = (uint *)(dst - dstMisalign);
   srcCursor = (uint *)(src - dstMisalign);
   alignPermute = *(vec16 *)
-             (*(int *)PTR_DAT_001e88cc + ((int)srcCursor * 0x10 & 0xf0U) & 0xfffffff0);
+             (*(int *)ptrTo_copyIndicesScratchBufferPtr_001e88cc + ((int)srcCursor * 0x10 & 0xf0U) & 0xfffffff0);
   carryVec = *(vec16 *)(src & 0xfffffff0);
   if (dstMisalign != 0) {
     carryVec = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
@@ -3561,7 +3561,7 @@ int copyIndices16Swapped_dcbz(dst, src, count)
     tempVec = vectorConditionalSelect
                        (*(vec16 *)((uint)dstCursor & 0xfffffff0),tempVec,
                         *(vec16 *)
-                         (*(int *)PTR_DAT_001e88cc + dstMisalign * 0x10 + 0x100 & 0xfffffff0));
+                         (*(int *)ptrTo_copyIndicesScratchBufferPtr_001e88cc + dstMisalign * 0x10 + 0x100 & 0xfffffff0));
     *(vec16 *)((uint)dstCursor & 0xfffffff0) = tempVec;
     dstCursor = dstCursor + 4;
   }
@@ -5084,7 +5084,7 @@ int gld_emitCopyBlitPacket(ctx, srcX, srcY, width, height, destX, destY, destEnd
   packetBody[0x26] = vap_out_vtx_fmt_0;
   packetBody[0x28] = *(undefined4 *)(ctx + 0x1de0);
   packetBody[0x29] = 0x82d;
-  colorFormatTable = PTR_DAT_001e88c8;
+  colorFormatTable = ptrTo_textureFormatTable_001e88c8;
   scratchUint3 = *(undefined4 *)(0x000026c8 + ctx + 4);
   packetBody[0x2b] = 0x854;
   packetBody[0x2a] = scratchUint3;
@@ -5663,9 +5663,9 @@ setScratchUint24:
   else {
     attachFormat = *(byte *)(scratchInt8 + 0x38);
     if (((((unsigned char *)0x00002d84)[*(int *)(ctx + GLD_engineState)] == '\0') ||
-        ((*(uint *)(PTR_DAT_001e88c8 + (uint)attachFormat * 0x24 + 0x18) & 0x4000) != 0)) &&
+        ((*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)attachFormat * 0x24 + 0x18) & 0x4000) != 0)) &&
        ((((unsigned char *)0x00002e0a)[*(int *)(ctx + GLD_engineState)] == '\0' ||
-        ((*(uint *)(PTR_DAT_001e88c8 + (uint)attachFormat * 0x24 + 0x18) & 0x8000) != 0))))
+        ((*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)attachFormat * 0x24 + 0x18) & 0x8000) != 0))))
     goto loopSetResult;
 setResult:
     result = 0;
@@ -5995,7 +5995,7 @@ int gld_emitSurfaceCopyPacket(ctx, packet, readSurfaceCode, resolveFlag, srcX, s
     packetBase[0x120] = vap_out_vtx_fmt_0;
     packetBase[0x122] = *(undefined4 *)(ctx + 0x1de0);
     packetBase[0x123] = 0x82d;
-    colorFormatTable = PTR_DAT_001e88c8;
+    colorFormatTable = ptrTo_textureFormatTable_001e88c8;
     registerValue = *(undefined4 *)(0x000026c8 + ctx + 4);
     packetBase[0x125] = 0x854;
     packetBase[0x124] = registerValue;

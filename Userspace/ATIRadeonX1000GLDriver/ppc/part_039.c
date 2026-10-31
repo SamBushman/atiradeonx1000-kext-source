@@ -23,8 +23,8 @@ int KhanPs__createSchedModels(this, compiler)
   undefined *baseModelVtable;
   
   schedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0x6c);
-  vtable = PTR_DAT_001e90f4;
-  baseModelVtable = PTR_DAT_001e90fc + 8;
+  vtable = ptrTo_R520SchedModel__vtable_001e90f4;
+  baseModelVtable = ptrTo_R300SchedModel__vtable_001e90fc + 8;
   schedModel[2] = compiler;
   *schedModel = baseModelVtable;
   schedModel[1] = 0;
@@ -507,7 +507,7 @@ int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, sr
         if (src1SelectWord == *(int *)(operandRecord + 0x10)) {
           if ((*(uint *)(callResult + 0xb8) & 1) != 0) {
             IROperand__setModifierBits(callResult + 0xa4,1,0);
-            compareCondition = *(int *)(PTR_DAT_001e90f8 + compareCondition * 4);
+            compareCondition = *(int *)(ptrTo_compareConditionMapTable_001e90f8 + compareCondition * 4);
           }
           IRInst__setIntConstantOperand4(callResult,program,2,0,0,0,0);
         }
@@ -792,8 +792,8 @@ int FudoVs__createSchedModels(this, compiler)
   undefined *vertexSchedVtable;
   
   vertexSchedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0x3c);
-  vtable = PTR_DAT_001e9110;
-  vertexSchedVtable = PTR_DAT_001e90fc + 8;
+  vtable = ptrTo_R300VSchedModel__vtable_001e9110;
+  vertexSchedVtable = ptrTo_R300SchedModel__vtable_001e90fc + 8;
   vertexSchedModel[2] = compiler;
   *vertexSchedModel = vertexSchedVtable;
   vertexSchedModel[1] = 0;
@@ -1712,8 +1712,8 @@ int KhanVs__createSchedModels(this, compiler)
   undefined *baseModelVtable;
   
   schedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0x3c);
-  vtable = PTR_DAT_001e9110;
-  baseModelVtable = PTR_DAT_001e90fc + 8;
+  vtable = ptrTo_R300VSchedModel__vtable_001e9110;
+  baseModelVtable = ptrTo_R300SchedModel__vtable_001e90fc + 8;
   schedModel[2] = compiler;
   *schedModel = baseModelVtable;
   schedModel[1] = 0;
@@ -1985,7 +1985,7 @@ int IfHeader__swapArms(program, ifHeader)
   DList__insertBefore(branchInst,*(undefined4 *)(ifHeader + 0x13c));
   branchInst = Block__getBranchInst(ifHeader,extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
   condition = IRInst__getCompareCondition(branchInst);
-  IRInst__setCompareCondition(branchInst,*(undefined4 *)(PTR_DAT_001e912c + condition * 4));
+  IRInst__setCompareCondition(branchInst,*(undefined4 *)(ptrTo_compareConditionInvertTable_001e912c + condition * 4));
   return ifHeader;
 }
 

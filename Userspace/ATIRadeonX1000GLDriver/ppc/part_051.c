@@ -198,13 +198,13 @@ int opcodeInfoRgbHwOpcode(unusedThis, irOpcode)
   int entryByteOffset;
   
   entryByteOffset = irOpcode * 0x38;
-  if ((*(uint *)(PTR_DAT_001e913c + entryByteOffset) & 2) != 0) {
-    return *(undefined4 *)(PTR_DAT_001e913c + entryByteOffset + 0xc);
+  if ((*(uint *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset) & 2) != 0) {
+    return *(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 0xc);
   }
-  if (*(int *)(PTR_DAT_001e913c + entryByteOffset + 4) == 0) {
-    return *(undefined4 *)(PTR_DAT_001e913c + entryByteOffset + 0xc);
+  if (*(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 4) == 0) {
+    return *(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 0xc);
   }
-  return *(undefined4 *)(PTR_DAT_001e913c + *(int *)(PTR_DAT_001e913c + entryByteOffset + 4) * 0x38 + 0xc);
+  return *(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + *(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 4) * 0x38 + 0xc);
 }
 
 /* opcodeInfoAlphaHwOpcode @ 0x19569c (76 bytes) */
@@ -215,13 +215,13 @@ int opcodeInfoAlphaHwOpcode(unusedThis, irOpcode)
   int entryByteOffset;
   
   entryByteOffset = irOpcode * 0x38;
-  if ((*(uint *)(PTR_DAT_001e913c + entryByteOffset) & 2) == 0) {
-    return *(undefined4 *)(PTR_DAT_001e913c + entryByteOffset + 0xc);
+  if ((*(uint *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset) & 2) == 0) {
+    return *(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 0xc);
   }
-  if (*(int *)(PTR_DAT_001e913c + entryByteOffset + 4) == 0) {
-    return *(undefined4 *)(PTR_DAT_001e913c + entryByteOffset + 0xc);
+  if (*(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 4) == 0) {
+    return *(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 0xc);
   }
-  return *(undefined4 *)(PTR_DAT_001e913c + *(int *)(PTR_DAT_001e913c + entryByteOffset + 4) * 0x38 + 0xc);
+  return *(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + *(int *)(ptrTo_KhanPsOpcodeTraits_001e913c + entryByteOffset + 4) * 0x38 + 0xc);
 }
 
 /* R300MachineAssembler__callSlot14 @ 0x1956e8 (16 bytes) */
@@ -1186,7 +1186,7 @@ int R300MachineAssembler__dtor_196dbc(this)
 {
   undefined *baseVtableBase1;
   
-  baseVtableBase1 = PTR_DAT_001e914c;
+  baseVtableBase1 = ptrTo_R300MachineAssembler__vtable_001e914c;
   this[0x16] = 0;
   *this = &ptrTo_R300MachineAssembler__dtor_001eb6a0;
   this[0x17] = 0;
@@ -1200,7 +1200,7 @@ int R300MachineAssembler__dtor(this)
 {
   undefined *baseVtableBase1;
   
-  baseVtableBase1 = PTR_DAT_001e914c;
+  baseVtableBase1 = ptrTo_R300MachineAssembler__vtable_001e914c;
   this[0x16] = 0;
   *this = &ptrTo_R300MachineAssembler__dtor_001eb6a0;
   this[0x17] = 0;
@@ -1215,7 +1215,7 @@ int MachineAssembler__dtor_196e3c(this)
   this[0x16] = 0;
   this[0x17] = 0;
   *this = &ptrTo_R300MachineAssembler__dtor_001eb6a0;
-  *this = PTR_DAT_001e914c + 8;
+  *this = ptrTo_R300MachineAssembler__vtable_001e914c + 8;
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -1605,7 +1605,7 @@ int R300MachineAssembler__classifyAluOperation(this, rgbLaneBytes, alphaLaneByte
     irOpcode = 0x34;
     *(undefined4 *)(irInst + 0x88) = opcodeInfo;
   }
-  opcodeClass = *(undefined4 *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0x34);
+  opcodeClass = *(undefined4 *)(ptrTo_KhanPsOpcodeTraits_001e913c + irOpcode * 0x38 + 0x34);
   rgbHardwareOpcode = ((int (*)())opcodeInfoRgbHwOpcode)(this[0x29],irOpcode);
   *rgbHardwareOpcodeOut = rgbHardwareOpcode;
   alphaHardwareOpcode = ((int (*)())opcodeInfoAlphaHwOpcode)(this[0x29],irOpcode);

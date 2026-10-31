@@ -373,8 +373,8 @@ int FudoPs__createSchedModels(this, compiler)
   undefined *rootVtableBasePlus8;
   
   modelAllocation = (undefined4 *)Compiler__allocateOrFail(compiler,0x6c);
-  schedModelVtableBaseA = PTR_DAT_001e90f4;
-  rootVtableBasePlus8 = PTR_DAT_001e90fc + 8;
+  schedModelVtableBaseA = ptrTo_R520SchedModel__vtable_001e90f4;
+  rootVtableBasePlus8 = ptrTo_R300SchedModel__vtable_001e90fc + 8;
   modelAllocation[2] = compiler;
   *modelAllocation = rootVtableBasePlus8;
   modelAllocation[1] = 0;
@@ -1644,7 +1644,7 @@ int DListNode__ctor_194060(this)
   undefined *vtableBase;
   
   this[4] = 0;
-  vtableBase = PTR_DAT_001e8b48;
+  vtableBase = ptrTo_DListNode__vtable_001e8b48;
   this[5] = 0;
   this[5] = 0;
   this[3] = vtableBase + 8;
@@ -1662,7 +1662,7 @@ int DListNode__init(this)
   undefined *vtableBase;
   
   this[4] = 0;
-  vtableBase = PTR_DAT_001e8b48;
+  vtableBase = ptrTo_DListNode__vtable_001e8b48;
   this[5] = 0;
   this[5] = 0;
   this[3] = vtableBase + 8;

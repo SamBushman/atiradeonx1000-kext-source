@@ -918,8 +918,8 @@ int IRInst__convertCompareToBinaryAlu(inst, compiler)
   }
   DList__unlink(inst);
   compareCondition = IRInst__getCompareCondition(inst);
-  newOpcode = *(undefined4 *)(PTR_DAT_001e8c70 + compareCondition * 4);
-  iVar5 = *(int *)(PTR_DAT_001e8c6c + compareCondition * 4);
+  newOpcode = *(undefined4 *)(ptrTo_compareConditionToBinaryOpcodeTable_001e8c70 + compareCondition * 4);
+  iVar5 = *(int *)(ptrTo_compareConditionOperandOrderTable_001e8c6c + compareCondition * 4);
   *(int *)(*(int *)(compiler + 0x6c4) + 0x21c) = *(int *)(*(int *)(compiler + 0x6c4) + 0x21c) + 1;
   IRInst__reinitAsBinary(inst,newOpcode,compiler);
   *(undefined4 *)(inst + 0x94) = instId;
@@ -1378,10 +1378,10 @@ int KhanChip__ctor_10e050(this, allocContext)
   int limitsObject;
   
   this[2] = 0;
-  vtable = PTR_DAT_001e8c88;
+  vtable = ptrTo_HwChip__vtable_001e8c88;
   this[1] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e8c74 + 8;
+  *this = ptrTo_KhanChip__vtable_001e8c74 + 8;
   limitsObject = Compiler__allocateOrFail(allocContext,0x1740);
   if (limitsObject != 0) {
     KhanVs__ctor_12a578(limitsObject,allocContext,1);
@@ -1404,10 +1404,10 @@ int KhanChip__ctor_10e114(this, allocContext)
   int limitsObject;
   
   this[2] = 0;
-  vtable = PTR_DAT_001e8c88;
+  vtable = ptrTo_HwChip__vtable_001e8c88;
   this[1] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e8c74 + 8;
+  *this = ptrTo_KhanChip__vtable_001e8c74 + 8;
   limitsObject = Compiler__allocateOrFail(allocContext,0x1740);
   if (limitsObject != 0) {
     KhanVs__ctor_12a578(limitsObject,allocContext,1);
@@ -1430,8 +1430,8 @@ int FudoChip__ctor_10e1d8(this, allocContext)
   int allocated;
   undefined *baseVtable;
   
-  vtable = PTR_DAT_001e8c80;
-  baseVtable = PTR_DAT_001e8c74 + 8;
+  vtable = ptrTo_FudoChip__vtable_001e8c80;
+  baseVtable = ptrTo_KhanChip__vtable_001e8c74 + 8;
   this[2] = 0;
   *this = baseVtable;
   this[1] = 0;
@@ -1458,8 +1458,8 @@ int FudoChip__ctor_10e2a0(this, allocContext)
   int allocated;
   undefined *baseVtable;
   
-  vtable = PTR_DAT_001e8c80;
-  baseVtable = PTR_DAT_001e8c74 + 8;
+  vtable = ptrTo_FudoChip__vtable_001e8c80;
+  baseVtable = ptrTo_KhanChip__vtable_001e8c74 + 8;
   this[2] = 0;
   *this = baseVtable;
   this[1] = 0;

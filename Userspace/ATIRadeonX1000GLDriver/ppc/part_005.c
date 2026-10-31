@@ -272,7 +272,7 @@ int gld_buildTextureHardwareState(ctxSaved, texture)
              ((scratchUint22 & 0xffff) - 1) * 0x10 & 0x8000 | scratchUint18 - 1 & 0x3fff;
     texture[0x17] = scratchUint14 & 0xfffffe1f;
     texture[0x18] = scratchUint23;
-    scratchPtr13 = PTR_DAT_001e88c8;
+    scratchPtr13 = ptrTo_textureFormatTable_001e88c8;
     texture[0x16] =
          -scratchUint18 & 0x80000000 |
          (scratchUint17 & 0xf) << 0x16 |
@@ -1605,7 +1605,7 @@ int gld_buildTextureStatePacket(packet, formatEntry, pitchBytes, blockPitchBytes
   uint oldWord0c;
   uint scratchUint6;
   
-  _memcpy(packet,PTR_DAT_001e8998,0x74);
+  _memcpy(packet,ptrTo_textureStatePacketTemplate_001e8998,0x74);
   i2dBias = DOUBLE_001aa250;
   half = FLOAT_001aa10c;
   oldWord0c = *(uint *)(packet + 0xc);
@@ -2695,7 +2695,7 @@ setFormatEntry:
       formatEntry = &textureFormatEntry8_001da054;
     }
   }
-  _memcpy(backing + 0x2a0,PTR_DAT_001e899c,0x23c);
+  _memcpy(backing + 0x2a0,ptrTo_textureStateBlockTemplate_001e899c,0x23c);
   scratchUint8 = backing[0x306];
   oldSamplerWord31c = backing[0x31c];
   backing[0x2ab] = 0;
@@ -3186,7 +3186,7 @@ setFormatInfo:
               formatInfo = &textureFormatEntry8_001da054;
             }
           }
-          _memcpy(scratchPtr34 + 0x2a0,PTR_DAT_001e899c,0x23c);
+          _memcpy(scratchPtr34 + 0x2a0,ptrTo_textureStateBlockTemplate_001e899c,0x23c);
           scratchUint9 = scratchPtr34[0x306];
           scratchUint10 = scratchPtr34[0x31c];
           scratchPtr34[0x2ab] = 0;
@@ -3534,7 +3534,7 @@ loopSetScratchInt11:
             if (scratchUint30 >> 5 == 0) {
               scratchStack84[4] = 0x20;
             }
-            formatInfo = PTR_DAT_001e899c;
+            formatInfo = ptrTo_textureStateBlockTemplate_001e899c;
             scratchStack84[8] = (uint)scratchFlag40 << 0x1f | scratchUint28 & 0x4fffffff | 0x40000000;
             scratchStack8c = scratchStack84 + 0x280;
             scratchPtr14 = scratchStack8c + scratchStack84[1];
@@ -4280,7 +4280,7 @@ setDrawWords:
                      (a0,drawWords + levelCountPlus1 + 0x340,depthLevelCount,scratchUint12,scratchUint20,staleArgR8,a6);
   *(undefined4 *)(ctx + GLD_streamCurrent) = scratchUint20;
   packet = (undefined4 *)((int (*)())gld_emitSingleUnitBinding)(ctx,scratchUint20,texture);
-  stateTemplate = PTR_DAT_001e88d0;
+  stateTemplate = ptrTo_hwContextStateTemplate_001e88d0;
   lastHeader = *(uint **)(ctx + GLD_lastHeader);
   tailCursor = packet + 4 + scratchUint13;
   *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
@@ -5157,7 +5157,7 @@ loopCallPthreadMutexUnlock:
     *(undefined4 *)(scratchInt37 + 0xc) = scratchUint39;
   }
   *(uint *)(scratchInt37 + 0x14) = scratchUint52;
-  scratchPtr26 = PTR_DAT_001e88d0;
+  scratchPtr26 = ptrTo_hwContextStateTemplate_001e88d0;
   *(uint *)(scratchInt37 + 0x10) = level | face << 0x10;
   *(uint *)(scratchInt37 + 0x18) = CONCAT22(scratchUint10,scratchUint9);
   scratchPtr30 = (uint *)(scratchInt37 + 0x310);
@@ -6859,7 +6859,7 @@ loopCallPthreadMutexUnlock:
       *surfaceRefPtr = scratchInt20;
       scratchFlag46 = 2;
     }
-    hwContextTemplate = PTR_DAT_001e88d0;
+    hwContextTemplate = ptrTo_hwContextStateTemplate_001e88d0;
   } while (!(bool)(scratchFlag46 >> 1 & 1));
   texPacket[2] = *surfaceObjectRef;
   scratchInt20 = *(int *)*sourceSurface;
@@ -7223,7 +7223,7 @@ int gld_testRendererAvailable(rendererIndex)
   
   connection = 0;
   outputCount = 3;
-  scratchInt2 = _IOServiceOpen(*(undefined4 *)(rendererIndex * 4 + *(int *)(PTR_DAT_001e88ac + 8)),
+  scratchInt2 = _IOServiceOpen(*(undefined4 *)(rendererIndex * 4 + *(int *)(ptrTo_rendererLibraryState_001e88ac + 8)),
                          *(undefined4 *)ptrTo_machTaskSelf_001e88b4,1,&connection);
   isAvailable = 0;
   if (scratchInt2 == 0) {
@@ -7253,7 +7253,7 @@ int _gldGetVersion(majorOut, minorOut, patchOut, buildOut)
   undefined4 *patchOut;
   undefined4 *buildOut;
 {
-  if (*(int *)PTR_DAT_001e88ac == 0) {
+  if (*(int *)ptrTo_rendererLibraryState_001e88ac == 0) {
     return 0;
   }
   *majorOut = 2;

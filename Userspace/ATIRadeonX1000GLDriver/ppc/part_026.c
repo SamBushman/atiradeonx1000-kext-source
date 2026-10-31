@@ -3598,7 +3598,7 @@ int Template__bindOperand(program, opcodeIndex, operandIndex, translateState, in
   undefined4 destSelectWord;
   undefined4 descriptorCopy;
   
-  operandSlotInfo = *(uint *)(PTR_DAT_001e8b88 + opcodeIndex * 4);
+  operandSlotInfo = *(uint *)(ptrTo_opcodeOperandSlotInfoTable_001e8b88 + opcodeIndex * 4);
   if (operandIndex != 0) {
     useDestTable = operandSlotInfo >> 0x1c & 1;
 loopCheckUseDestTable:
@@ -6024,7 +6024,7 @@ code_r0x000fed00:
         pendingInst = flushNode;
         nextListNode = *(int *)(flushNode + 8);
       }
-      templateModeWord = (uint *****)(PTR_DAT_001e8b48 + 8);
+      templateModeWord = (uint *****)(ptrTo_DListNode__vtable_001e8b48 + 8);
       local_118 = (uint ****)templateModeWord;
       goto readNextInstruction;
     case 0x1b:

@@ -2827,7 +2827,7 @@ checkX1000:
     return 1;
   }
   if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = gld_prepareBufferBacking(ctx,surfaceInfo,1), prepareResult == 0)) ||
-       ((formatTable = PTR_DAT_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
+       ((formatTable = ptrTo_textureFormatTable_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
         ((prepareResult = *(int *)surfaceInfo[2], prepareResult == 0 ||
          (surfaceBase = *(uint *)*surfaceInfo, dstAddress != surfaceBase)))))) ||
       ((*(char *)(prepareResult + 0x16) != '\x06' && ((format != 0x1908 || (pixelType != ((unsigned char *)0x00001406)))))))
@@ -2873,7 +2873,7 @@ checkX1000:
   readSurfaceCode = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + GLD_engineState)),
                         *(undefined4 *)(ctx + GLD_renderFlags));
   packet[4] = readSurfaceCode;
-  _memcpy(packet + 5,PTR_DAT_001e88d0,0x2f4);
+  _memcpy(packet + 5,ptrTo_hwContextStateTemplate_001e88d0,0x2f4);
   packet[0x23] = 0;
   packet[0x9f] = 0;
   oldColorFormatWord = packet[0x8f];
@@ -2996,7 +2996,7 @@ checkX1000:
   packet[0xfc] = vap_prog_stream_cntl_ext_0_ptr;
   zb_cntl = *(undefined4 *)(ctx + GLD_zb_cntl);
   packet[0xff] = ((unsigned char *)0x000012f0U);
-  formatTable = PTR_DAT_001e88c8;
+  formatTable = ptrTo_textureFormatTable_001e88c8;
   packet[0xfe] = zb_cntl;
   fg_fog_blend = *(uint *)(ctx + GLD_fg_fog_blend);
   packet[0x100] = fg_fog_blend;
@@ -3463,10 +3463,10 @@ loopSetRequestPitch:
             }
             formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
             renderFlags = *(uint *)(ctx + GLD_renderFlags);
-            procPitch = (width << (*(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
+            procPitch = (width << (*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
-            procChannelSize = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
-            procChannelFormat = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
+            procChannelSize = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
+            procChannelFormat = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
             requestFormat = readSurfaceCode;
             goto loopCheckSendAttachments;
           }
@@ -3876,10 +3876,10 @@ loopSetScratchUint122:
             }
             formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
             flags = *(uint *)(ctx + GLD_renderFlags);
-            procPitch = (width << (*(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
+            procPitch = (width << (*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
-            targetFormatB = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
-            targetFormatA = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
+            targetFormatB = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
+            targetFormatA = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
             requestSurfaceCode = readSurfaceCode;
             goto loopSetScratchUint12;
           }
@@ -4633,7 +4633,7 @@ callPthreadMutexLock:
     scratchFloat4 = -rasterY + (FLOAT_001aa0d4 - (scratchFloat3 + scratchFloat4));
     if ((clipLeft < clipRight) && (scratchFloat3 < scratchFloat11)) {
       if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = gld_prepareBufferBacking(ctx,surfaceInfo,1), prepareResult == 0))
-           || ((formatTable = PTR_DAT_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
+           || ((formatTable = ptrTo_textureFormatTable_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
                (prepareResult = *(int *)surfaceInfo[2], prepareResult == 0)))) ||
           ((*(char *)(prepareResult + 0x16) != '\x06' &&
            ((format != 0x1908 || ((pixelType != ((unsigned char *)0x00001406) && (pixelType != (undefined *)0x8366)))))
@@ -4667,7 +4667,7 @@ callPthreadMutexLock:
           *surfaceRefPtr = storeResult;
           scratchFlag35 = 2;
         }
-        hwContextTemplate = PTR_DAT_001e88d0;
+        hwContextTemplate = ptrTo_hwContextStateTemplate_001e88d0;
       } while (!(bool)(scratchFlag35 >> 1 & 1));
       packet[2] = *surfaceObject;
       packet[3] = dstAddress - *(int *)*surfaceInfo;
@@ -4709,7 +4709,7 @@ callPthreadMutexLock:
       packet[0xac] =
            scratchUint20 >> 7 & 0x1f | scratchUint28 >> 3 & 0x400000 | (scratchUint20 & 0x70) << 5 |
            (scratchUint20 & 0xe) << 0xb | scratchUint28 >> 0xe & 0x38000 | scratchUint28 >> 8 & 0x1c0000;
-      formatTableB = PTR_DAT_001e88c8;
+      formatTableB = ptrTo_textureFormatTable_001e88c8;
       if (unsignedConvBias <= quadWidthD) {
         scratchInt22 = (int)(quadWidthD - unsignedConvBias);
         fctiwzSlot5 = (longlong)scratchInt22;
@@ -6045,14 +6045,14 @@ int gld_initContextHardwareState(ctx, pixelFormat)
     scratchInt11 = scratchInt11 + -1;
   } while (scratchInt11 != 0);
   ((unsigned char *)0x00002b82)[ctx] = 0;
-  vectorConstArea = PTR_DAT_001e8994;
+  vectorConstArea = ptrTo_hwVectorConstArea_001e8994;
   *(undefined4 *)(0x000026c8 + ctx) = 7;
   permuteIndex = 0;
   *(undefined1 *)(ctx + 0x2a43) = 1;
   *(undefined1 *)(ctx + 0x26bd) = 1;
   scratchInt8 = 0x10;
   vectorConstTable = (int *)((uint)(vectorConstArea + 0xc) & 0xfffffff3);
-  *(int **)PTR_DAT_001e88cc = vectorConstTable;
+  *(int **)ptrTo_copyIndicesScratchBufferPtr_001e88cc = vectorConstTable;
   scratchPtr4 = vectorConstTable;
   do {
     scratchUint3 = permuteIndex << 8 | permuteIndex;

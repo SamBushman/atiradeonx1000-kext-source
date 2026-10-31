@@ -11,7 +11,7 @@ int ExportAddress__ctor_1260f4(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90d0;
+  vtable = ptrTo_ExportAddress__vtable_001e90d0;
   this[4] = 0x20;
   this[9] = this[9] | 2;
   *this = vtable + 8;
@@ -29,7 +29,7 @@ int ExportAddress__ctor_12614c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90d0;
+  vtable = ptrTo_ExportAddress__vtable_001e90d0;
   this[4] = 0x20;
   this[9] = this[9] | 2;
   *this = vtable + 8;
@@ -149,10 +149,10 @@ int LoopIndexedConstSet__ctor_1264c4(this, ctorWord2, ctorWord1, ctorWord3, comp
   undefined *vtable;
   
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90ec;
+  vtable = ptrTo_LoopIndexedSet__vtable_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e90e4 + 8;
+  *this = ptrTo_LoopIndexedConstSet__vtable_001e90e4 + 8;
   this[4] = *(undefined4 *)(compiler + 0x33c);
   *(int *)(compiler + 0x33c) = *(int *)(compiler + 0x33c) + 1;
   return;
@@ -169,10 +169,10 @@ int LoopIndexedConstSet__ctor_126538(this, ctorWord2, ctorWord1, ctorWord3, comp
   undefined *vtable;
   
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90ec;
+  vtable = ptrTo_LoopIndexedSet__vtable_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e90e4 + 8;
+  *this = ptrTo_LoopIndexedConstSet__vtable_001e90e4 + 8;
   this[4] = *(undefined4 *)(compiler + 0x33c);
   *(int *)(compiler + 0x33c) = *(int *)(compiler + 0x33c) + 1;
   return;
@@ -189,10 +189,10 @@ int LoopIndexedInputSet__ctor_1265ac(this, ctorWord2, ctorWord1, ctorWord3, comp
   undefined *vtable;
   
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90ec;
+  vtable = ptrTo_LoopIndexedSet__vtable_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e90d4 + 8;
+  *this = ptrTo_LoopIndexedInputSet__vtable_001e90d4 + 8;
   this[4] = *(undefined4 *)(compiler + 0x340);
   *(int *)(compiler + 0x340) = *(int *)(compiler + 0x340) + 1;
   return;
@@ -209,10 +209,10 @@ int LoopIndexedInputSet__ctor_126620(this, ctorWord2, ctorWord1, ctorWord3, comp
   undefined *vtable;
   
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90ec;
+  vtable = ptrTo_LoopIndexedSet__vtable_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e90d4 + 8;
+  *this = ptrTo_LoopIndexedInputSet__vtable_001e90d4 + 8;
   this[4] = *(undefined4 *)(compiler + 0x340);
   *(int *)(compiler + 0x340) = *(int *)(compiler + 0x340) + 1;
   return;
@@ -229,10 +229,10 @@ int LoopIndexedOutputSet__ctor_126694(this, ctorWord2, ctorWord1, ctorWord3, com
   undefined *vtable;
   
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90ec;
+  vtable = ptrTo_LoopIndexedSet__vtable_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e90dc + 8;
+  *this = ptrTo_LoopIndexedOutputSet__vtable_001e90dc + 8;
   this[4] = *(undefined4 *)(compiler + 0x344);
   *(int *)(compiler + 0x344) = *(int *)(compiler + 0x344) + 1;
   return;
@@ -481,7 +481,7 @@ int LoopIndexedSet__ctor_126de4(ctorWord2, ctorWord1, ctorWord3, compiler)
   object = allocation + 1;
   *allocation = arena;
   VRegInfo__ctor_12379c(object,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90ec;
+  vtable = ptrTo_LoopIndexedSet__vtable_001e90ec;
   allocation[0xd] = 0;
   *object = vtable + 8;
   return object;

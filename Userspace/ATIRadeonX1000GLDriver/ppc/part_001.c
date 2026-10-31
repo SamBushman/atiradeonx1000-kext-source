@@ -44,9 +44,9 @@ int gld_detachDrawable(ctx)
   undefined *rendererLibrary;
   
   if ((ctx[GLD_attachedDrawable / 4] != 0) &&
-     (ctx[GLD_attachedDrawable / 4] = 0, rendererLibrary = PTR_DAT_001e88ac, (ctx[GLD_drawableFlags / 4] & 0x20U) == 0)) {
-    connectionUseCount = PTR_DAT_001e88ac[*ctx + 0x98];
-    PTR_DAT_001e88ac[*ctx + 0x98] = connectionUseCount + -1;
+     (ctx[GLD_attachedDrawable / 4] = 0, rendererLibrary = ptrTo_rendererLibraryState_001e88ac, (ctx[GLD_drawableFlags / 4] & 0x20U) == 0)) {
+    connectionUseCount = ptrTo_rendererLibraryState_001e88ac[*ctx + 0x98];
+    ptrTo_rendererLibraryState_001e88ac[*ctx + 0x98] = connectionUseCount + -1;
     if ((char)(connectionUseCount + -1) == '\0') {
       _IOServiceClose(*(undefined4 *)(rendererLibrary + *ctx * 4 + 0x18));
       *(undefined4 *)(rendererLibrary + *ctx * 4 + 0x18) = 0;
@@ -127,15 +127,15 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
       ownRendererIndex = *ctx;
       status = *drawable;
       rendererIndex = drawable[1];
-      attachCallback = *(code **)(PTR_DAT_001e88ac + 0x14);
-      serviceList = *(int *)(PTR_DAT_001e88ac + 8);
+      attachCallback = *(code **)(ptrTo_rendererLibraryState_001e88ac + 0x14);
+      serviceList = *(int *)(ptrTo_rendererLibraryState_001e88ac + 8);
     }
     else {
       ownRendererIndex = *ctx;
       status = 0;
       rendererIndex = 0;
-      attachCallback = *(code **)(PTR_DAT_001e88ac + 0x14);
-      serviceList = *(int *)(PTR_DAT_001e88ac + 8);
+      attachCallback = *(code **)(ptrTo_rendererLibraryState_001e88ac + 0x14);
+      serviceList = *(int *)(ptrTo_rendererLibraryState_001e88ac + 8);
     }
     status = (*attachCallback)(status,rendererIndex,drawable[2],ctxFlags & 0x803f,*(undefined4 *)(ownRendererIndex * 4 + serviceList));
     if (status == 0) {
@@ -234,15 +234,15 @@ loopSetOutCount:
       gld_applyPbufferToRenderFlags(ctx,ctx + GLD_drawableFlags / 4,0);
       rendererIndex = *ctx;
       status = rendererIndex * 4;
-      if (*(int *)(PTR_DAT_001e88ac + status + 0x18) == 0) {
-        status = _IOServiceOpen(*(undefined4 *)(*(int *)(PTR_DAT_001e88ac + 8) + status),
-                               *(undefined4 *)ptrTo_machTaskSelf_001e88b4,0,PTR_DAT_001e88ac + status + 0x18);
+      if (*(int *)(ptrTo_rendererLibraryState_001e88ac + status + 0x18) == 0) {
+        status = _IOServiceOpen(*(undefined4 *)(*(int *)(ptrTo_rendererLibraryState_001e88ac + 8) + status),
+                               *(undefined4 *)ptrTo_machTaskSelf_001e88b4,0,ptrTo_rendererLibraryState_001e88ac + status + 0x18);
         if (status != 0) goto returnCode2;
         rendererIndex = *ctx;
       }
-      library = PTR_DAT_001e88ac;
-      status = *(int *)(PTR_DAT_001e88ac + 0xc);
-      PTR_DAT_001e88ac[rendererIndex + 0x98] = PTR_DAT_001e88ac[rendererIndex + 0x98] + '\x01';
+      library = ptrTo_rendererLibraryState_001e88ac;
+      status = *(int *)(ptrTo_rendererLibraryState_001e88ac + 0xc);
+      ptrTo_rendererLibraryState_001e88ac[rendererIndex + 0x98] = ptrTo_rendererLibraryState_001e88ac[rendererIndex + 0x98] + '\x01';
       scalarIn0 = (uint)*(byte *)(status + *ctx);
       callWords[0] = 0;
       scalarIn1 = ctx[GLD_drawableFlags / 4] & 0x803f;
@@ -851,7 +851,7 @@ int _gldChoosePixelFormat(formatListOut, attribList)
   antialiasMode = 0;
   samples = 0;
   sampleBuffers = 0;
-  screenMask = *(uint *)PTR_DAT_001e88ac;
+  screenMask = *(uint *)ptrTo_rendererLibraryState_001e88ac;
   auxBuffers = 0;
   alphaSize = 0;
   level = 0;
@@ -887,7 +887,7 @@ int _gldChoosePixelFormat(formatListOut, attribList)
       colorSize = ((int (*)())gldAlphaBitsToFormatMask)(alphaSize);
       accumSize = ((int (*)())gldColorBitsToFormatMask)(accumSize);
       alphaSize = ((int (*)())gldAlphaBitsToFormatMask)(accumAlphaSize);
-      library = PTR_DAT_001e88ac;
+      library = ptrTo_rendererLibraryState_001e88ac;
       if (CONCAT22((short)sampleBuffers,(short)samples) == 0) {
         sampleAlpha = 0;
         antialiasMode = 0;
@@ -895,7 +895,7 @@ int _gldChoosePixelFormat(formatListOut, attribList)
       if (((surfaceFlags & 2) == 0) && ((surfaceFlags & 4) == 0)) {
         surfaceFlags = surfaceFlags | 1;
       }
-      accumAlphaSize = *(uint *)(PTR_DAT_001e88ac + 4);
+      accumAlphaSize = *(uint *)(ptrTo_rendererLibraryState_001e88ac + 4);
       formatList = (int *)0x0;
       if (accumAlphaSize != 0) {
         candidateRow = &pfNext;
@@ -1267,12 +1267,12 @@ int _gldGetRendererInfo(rendererInfo, rendererMask, unused3, unused4, unused5, u
   undefined4 scalarOut1;
   undefined4 scalarOut2;
   
-  if (((*(uint *)PTR_DAT_001e88ac & rendererMask) == 0) || ((rendererMask & ~*(uint *)PTR_DAT_001e88ac) != 0))
+  if (((*(uint *)ptrTo_rendererLibraryState_001e88ac & rendererMask) == 0) || ((rendererMask & ~*(uint *)ptrTo_rendererLibraryState_001e88ac) != 0))
   {
     returnCode = 0x2719;
   }
   else {
-    listCount = *(int *)(PTR_DAT_001e88ac + 4);
+    listCount = *(int *)(ptrTo_rendererLibraryState_001e88ac + 4);
     if ((listCount == 0) || ((rendererMask & 1) != 0)) {
       offsetOrService = 0;
     }
@@ -1290,7 +1290,7 @@ int _gldGetRendererInfo(rendererInfo, rendererMask, unused3, unused4, unused5, u
       offsetOrService = bitOrId * 4;
     }
 setServiceList:
-    serviceList = *(int **)(PTR_DAT_001e88ac + 8);
+    serviceList = *(int **)(ptrTo_rendererLibraryState_001e88ac + 8);
     offsetOrService = *(int *)((int)serviceList + offsetOrService);
     if ((listCount == 0) || (offsetOrService == *serviceList)) {
       rendererIndex = 0;
@@ -1353,9 +1353,9 @@ int _gldInitializeLibrary(libArg0, libArg1, displayMask, libArg3, attachCallback
   uint bitIndex;
   undefined4 *slotCursor;
   
-  library = PTR_DAT_001e88ac;
+  library = ptrTo_rendererLibraryState_001e88ac;
   bitIndex = 0;
-  *(undefined4 *)(PTR_DAT_001e88ac + 0xc) = libArg1;
+  *(undefined4 *)(ptrTo_rendererLibraryState_001e88ac + 0xc) = libArg1;
   *(undefined4 *)(library + 8) = libArg0;
   *(undefined4 *)(library + 4) = 0;
   *(uint *)library = displayMask;
@@ -1366,11 +1366,11 @@ int _gldInitializeLibrary(libArg0, libArg1, displayMask, libArg3, attachCallback
     if ((1 << (bitIndex & 0x3f) & displayMask) != 0) {
       *(uint *)(library + 4) = bitIndex + 1;
     }
-    libraryAlias = PTR_DAT_001e88ac;
+    libraryAlias = ptrTo_rendererLibraryState_001e88ac;
     slotCursor = slotCursor + 1;
     bitIndex = bitIndex + 1;
   } while ((int)bitIndex < 0x20);
-  *(undefined4 *)(PTR_DAT_001e88ac + 0x14) = attachCallback;
+  *(undefined4 *)(ptrTo_rendererLibraryState_001e88ac + 0x14) = attachCallback;
   *(undefined4 *)(libraryAlias + 0x10) = libArg3;
   return;
 }
@@ -1380,8 +1380,8 @@ int _gldTerminateLibrary()
 {
   undefined *library;
   
-  library = PTR_DAT_001e88ac;
-  *(undefined4 *)(PTR_DAT_001e88ac + 0x14) = 0;
+  library = ptrTo_rendererLibraryState_001e88ac;
+  *(undefined4 *)(ptrTo_rendererLibraryState_001e88ac + 0x14) = 0;
   *(undefined4 *)(library + 8) = 0;
   *(undefined4 *)(library + 0xc) = 0;
   *(undefined4 *)library = 0;

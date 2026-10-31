@@ -811,7 +811,7 @@ int Inst__foldCompareChain_00159b58(node, allowFold, pass)
           return 0;
         }
         IRInst__swapOperands(node,1,2,compiler);
-        compareKind = *(int *)(PTR_DAT_001e90f8 + compareKind * 4);
+        compareKind = *(int *)(ptrTo_compareConditionMapTable_001e90f8 + compareKind * 4);
         *(int *)(node + 300) = compareKind;
       }
       sourceDef = IRInst__getOperandSource(node,1);
@@ -7991,9 +7991,9 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   *(undefined4 *)(inst + 0x150) = nodeIndex;
   arena = *(undefined4 *)(*scheduler + 0x378);
   nodeAlloc = (undefined4 *)Arena__alloc(arena,0x74);
-  nodeVtableBase = PTR_DAT_001e9138;
+  nodeVtableBase = ptrTo_SchedNode__vtable_001e9138;
   node = nodeAlloc + 1;
-  nodeVtableTemp = PTR_DAT_001e8b48 + 8;
+  nodeVtableTemp = ptrTo_DListNode__vtable_001e8b48 + 8;
   *nodeAlloc = arena;
   nodeAlloc[1] = nodeVtableTemp;
   nodeAlloc[0xc] = 0xffffffff;
@@ -8140,9 +8140,9 @@ int Scheduler__findOrCreateExternalNode(scheduler, inst)
   }
   arena = *(undefined4 *)(*scheduler + 0x378);
   nodeAlloc = (undefined4 *)Arena__alloc(arena,0x74);
-  nodeVtableBase = PTR_DAT_001e9138;
+  nodeVtableBase = ptrTo_SchedNode__vtable_001e9138;
   node = nodeAlloc + 1;
-  nodeVtableTemp = PTR_DAT_001e8b48 + 8;
+  nodeVtableTemp = ptrTo_DListNode__vtable_001e8b48 + 8;
   *nodeAlloc = arena;
   nodeAlloc[1] = nodeVtableTemp;
   nodeAlloc[0xc] = 0xffffffff;
@@ -11042,9 +11042,9 @@ int Scheduler__buildDependencyGraph(scheduler, block)
             inst[0x54] = nodeIndex;
             arena = *(undefined4 *)(*scheduler + 0x378);
             nodeAlloc = (undefined4 *)Arena__alloc(arena,0x74);
-            nodeVtableBase = PTR_DAT_001e9138;
+            nodeVtableBase = ptrTo_SchedNode__vtable_001e9138;
             schedNode = nodeAlloc + 1;
-            nodeVtableTemp = PTR_DAT_001e8b48 + 8;
+            nodeVtableTemp = ptrTo_DListNode__vtable_001e8b48 + 8;
             *nodeAlloc = arena;
             nodeAlloc[1] = nodeVtableTemp;
             nodeAlloc[0xc] = 0xffffffff;

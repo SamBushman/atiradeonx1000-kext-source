@@ -1064,7 +1064,7 @@ int IRFetch__ctor_106ffc(inst, opcode, compiler)
   undefined *vtable;
   
   IRInst__ctor_1051b0(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8c64;
+  vtable = ptrTo_IRFetch__vtable_001e8c64;
   inst[0x20] = 1;
   inst[0x21] = 1;
   *inst = vtable + 8;
@@ -1080,7 +1080,7 @@ int IRFetch__ctor_10704c(inst, opcode, compiler)
   undefined *vtable;
   
   IRInst__ctor_1051b0(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8c64;
+  vtable = ptrTo_IRFetch__vtable_001e8c64;
   inst[0x20] = 1;
   inst[0x21] = 1;
   *inst = vtable + 8;
@@ -1096,7 +1096,7 @@ int IRPseudo__ctor_10709c(inst, opcode, compiler)
   undefined *vtable;
   
   IRInst__ctor_1051b0(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8b50;
+  vtable = ptrTo_IRPseudo__vtable_001e8b50;
   inst[5] = inst[5] | 0x18000;
   *inst = vtable + 8;
   inst[0x20] = 0;
@@ -1112,7 +1112,7 @@ int IRPseudo__ctor(inst, opcode, compiler)
   undefined *vtable;
   
   IRInst__ctor_1051b0(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8b50;
+  vtable = ptrTo_IRPseudo__vtable_001e8b50;
   inst[5] = inst[5] | 0x18000;
   *inst = vtable + 8;
   inst[0x20] = 0;
@@ -1128,7 +1128,7 @@ int IRAlu__ctor_107154(inst, opcode, compiler)
   undefined *vtable;
   
   IRInst__ctor_1051b0(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8c58;
+  vtable = ptrTo_IRAlu__vtable_001e8c58;
   inst[0x4b] = 0;
   inst[0x20] = 1;
   *inst = vtable + 8;
@@ -1144,7 +1144,7 @@ int IRAlu__ctor_1071a8(inst, opcode, compiler)
   undefined *vtable;
   
   IRInst__ctor_1051b0(inst,opcode,compiler);
-  vtable = PTR_DAT_001e8c58;
+  vtable = ptrTo_IRAlu__vtable_001e8c58;
   inst[0x4b] = 0;
   inst[0x20] = 1;
   *inst = vtable + 8;
@@ -1160,7 +1160,7 @@ int IRMemStore__ctor_1071fc(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c10;
+  vtable = ptrTo_IRMemStore__vtable_001e8c10;
   this[0x4b] = 0;
   this[0x21] = 2;
   *this = vtable + 8;
@@ -1180,7 +1180,7 @@ int IRVertexFetch__ctor_107250(this, opcode, compiler, vertexArg4, vertexArg5)
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
   defaultWord = swizzleXYZW_001af9bc;
-  vtable = PTR_DAT_001e8c08 + 8;
+  vtable = ptrTo_IRVertexFetch__vtable_001e8c08 + 8;
   this[0x4b] = vertexArg5;
   *this = vtable;
   this[0x4f] = 0;
@@ -1204,7 +1204,7 @@ int IRVertexFetch__ctor_1072d0(this, opcode, compiler, vertexArg4, vertexArg5)
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
   defaultWord = swizzleXYZW_001af9bc;
-  vtable = PTR_DAT_001e8c08 + 8;
+  vtable = ptrTo_IRVertexFetch__vtable_001e8c08 + 8;
   this[0x4b] = vertexArg5;
   *this = vtable;
   this[0x4f] = 0;
@@ -1239,7 +1239,7 @@ int IRVertexFetch__ctor_1073dc(this, opcode, compiler)
   undefined4 compiler;
 {
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  *this = PTR_DAT_001e8c08 + 8;
+  *this = ptrTo_IRVertexFetch__vtable_001e8c08 + 8;
   return;
 }
 
@@ -1250,7 +1250,7 @@ int IRVertexFetch__ctor_107420(this, opcode, compiler)
   undefined4 compiler;
 {
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  *this = PTR_DAT_001e8c08 + 8;
+  *this = ptrTo_IRVertexFetch__vtable_001e8c08 + 8;
   return;
 }
 
@@ -1280,7 +1280,7 @@ int IRTextureFetch__ctor_1074e0(this, opcode, compiler)
   undefined2 *fetchStateBlock;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c0c;
+  vtable = ptrTo_IRTextureFetch__vtable_001e8c0c;
   this[0x4c] = 0;
   this[0x4d] = 0xffffffff;
   *this = vtable + 8;
@@ -1324,7 +1324,7 @@ int IRTextureFetchGradients__ctor_107600(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRTextureFetch__ctor_1074e0)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c48;
+  vtable = ptrTo_IRTextureFetchGradients__vtable_001e8c48;
   this[0x21] = 3;
   *this = vtable + 8;
   return;
@@ -1341,7 +1341,7 @@ int IRTextureFetch__ctor_10764c(this, opcode, compiler)
   undefined2 *fetchStateBlock;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c0c;
+  vtable = ptrTo_IRTextureFetch__vtable_001e8c0c;
   this[0x4c] = 0;
   this[0x4d] = 0xffffffff;
   *this = vtable + 8;
@@ -1415,7 +1415,7 @@ int IRTextureFetchGradients__ctor_107864(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRTextureFetch__ctor_1074e0)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c48;
+  vtable = ptrTo_IRTextureFetchGradients__vtable_001e8c48;
   this[0x21] = 3;
   *this = vtable + 8;
   return;
@@ -1445,7 +1445,7 @@ int IRMemLoad__ctor_10792c(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c50;
+  vtable = ptrTo_IRMemLoad__vtable_001e8c50;
   this[0x4b] = 0;
   this[0x21] = 2;
   *this = vtable + 8;
@@ -1461,7 +1461,7 @@ int IRMemLoad__ctor_107980(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c50;
+  vtable = ptrTo_IRMemLoad__vtable_001e8c50;
   this[0x4b] = 0;
   this[0x21] = 2;
   *this = vtable + 8;
@@ -1477,7 +1477,7 @@ int IRMemStore__ctor_1079d4(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c10;
+  vtable = ptrTo_IRMemStore__vtable_001e8c10;
   this[0x4b] = 0;
   this[0x21] = 2;
   *this = vtable + 8;
@@ -1493,7 +1493,7 @@ int IRZeroary__ctor_107a28(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c2c;
+  vtable = ptrTo_IRZeroary__vtable_001e8c2c;
   this[0x21] = 0;
   *this = vtable + 8;
   return;
@@ -1510,7 +1510,7 @@ int IRNop__ctor_107a74(this, opcode, compiler)
   
   ((int (*)())IRZeroary__ctor_107a28)(this,opcode,compiler);
   defaultWord = DAT_001af9c8;
-  vtable = PTR_DAT_001e8be8 + 8;
+  vtable = ptrTo_IRNop__vtable_001e8be8 + 8;
   this[0x20] = 0;
   *this = vtable;
   this[0x27] = defaultWord;
@@ -1544,7 +1544,7 @@ int IRNop__ctor_107b4c(this, opcode, compiler)
   
   ((int (*)())IRZeroary__ctor_107a28)(this,opcode,compiler);
   defaultWord = DAT_001af9c8;
-  vtable = PTR_DAT_001e8be8 + 8;
+  vtable = ptrTo_IRNop__vtable_001e8be8 + 8;
   this[0x20] = 0;
   *this = vtable;
   this[0x27] = defaultWord;
@@ -1561,7 +1561,7 @@ int IRZeroary__ctor_107ba8(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c2c;
+  vtable = ptrTo_IRZeroary__vtable_001e8c2c;
   this[0x21] = 0;
   *this = vtable + 8;
   return;
@@ -1606,7 +1606,7 @@ int IRUnary__ctor_107cec(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c68;
+  vtable = ptrTo_IRUnary__vtable_001e8c68;
   this[0x21] = 1;
   *this = vtable + 8;
   return;
@@ -1623,7 +1623,7 @@ int IRMov__ctor_107d38(this, opcode, compiler)
   int loopIndex;
   
   ((int (*)())IRUnary__ctor_107cec)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8bf0;
+  vtable = ptrTo_IRMov__vtable_001e8bf0;
   this[0x20] = 1;
   *this = vtable + 8;
   loopIndex = 0;
@@ -1646,7 +1646,7 @@ int IRInst__reinitAsUnary(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
-  vtable = PTR_DAT_001e8c68;
+  vtable = ptrTo_IRUnary__vtable_001e8c68;
   this[0x21] = 1;
   *this = vtable + 8;
   return;

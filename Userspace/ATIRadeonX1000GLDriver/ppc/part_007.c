@@ -2042,7 +2042,7 @@ void gldValidateFog(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,u
   uint fogColorWord2;
   uint fogColorWord1;
   
-  colorFormatTable = PTR_DAT_001e88c8;
+  colorFormatTable = ptrTo_textureFormatTable_001e88c8;
   colorFormatIndex = *(byte *)(glContext + 0x293f);
   if ((*(uint *)(glContext + 0x44) & 0x1002000) == 0x1000000) {
     glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
@@ -2540,7 +2540,7 @@ int gldValidateAlphaTest(glContext)
       alphaRefByte = (undefined1)(int)(*(float *)(((unsigned char *)0x00002d60) + glState) * alphaScale);
     }
     *(undefined1 *)(glContext + 0x1a4f) = alphaRefByte;
-    if ((*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x3c00) ==
+    if ((*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x3c00) ==
         0x2800) {
       alphaRef16 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d60) + glState));
       *(undefined2 *)(glContext + 0x1bde) = alphaRef16;
@@ -2571,7 +2571,7 @@ int gldValidateColorMask(glContext, unusedArg2, unusedArg3, unusedArg4, unusedAr
   uint colorMaskBits;
   int glStateBlock;
   
-  colorFormatTable = PTR_DAT_001e88c8;
+  colorFormatTable = ptrTo_textureFormatTable_001e88c8;
   colorFormatIndex = *(byte *)(glContext + 0x293f);
   glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if ((*(uint *)(glContext + 0x18a4) & 0x3fffc0) == 0) {
@@ -2579,7 +2579,7 @@ int gldValidateColorMask(glContext, unusedArg2, unusedArg3, unusedArg4, unusedAr
   }
   else {
     colorMaskBits = (uint)(((unsigned char *)0x00002e40)[glStateBlock] == '\x01') *
-            ((byte)PTR_DAT_001e88c8[(uint)colorFormatIndex * 0x24 + 0x1c] & 0xf);
+            ((byte)ptrTo_textureFormatTable_001e88c8[(uint)colorFormatIndex * 0x24 + 0x1c] & 0xf);
     *(uint *)(0x00001af4 + glContext) = colorMaskBits;
     colorMaskBits = colorMaskBits | (uint)(((unsigned char *)0x00002e41)[glStateBlock] == '\x01') *
                     (*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x14 & 0xf);
@@ -2972,7 +2972,7 @@ setStreamSetCurrent:
     packetCursor[8] = *(undefined4 *)(glContext + 0x1b20);
   }
   packet = (undefined4 *)((int (*)())gldEmitScissorRegs)(glContext,packet);
-  engineCapsEntry = PTR_DAT_001e88c8;
+  engineCapsEntry = ptrTo_textureFormatTable_001e88c8;
   *packet = 0x112f5;
   fgAlphaFunc = *(uint *)(glContext + 0x1a4c);
   packet[1] = fgAlphaFunc;
@@ -3787,7 +3787,7 @@ setBlendFastPathMode2:
   *(uint *)(glContext + 0x1a88) = blendColorAlphaByte << 0x18 | blendColorRedByte << 0x10 | blendColorGreenByte << 8 | blendColorBlueByte;
   fixedPointScale = FLOAT_001aa154;
   fixedPointRound = FLOAT_001aa10c;
-  if ((*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x3c00) ==
+  if ((*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x3c00) ==
       0x2800) {
     blendHalfRed = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d70) + glState));
     *(undefined2 *)(glContext + 0x1a8e) = blendHalfRed;
@@ -4093,7 +4093,7 @@ int gldEmitDirtyStatePackets(glContext)
       *packet = 0x212f2;
       packet[1] = *(undefined4 *)(glContext + 0x1a54);
       packet[2] = *(undefined4 *)(glContext + 0x1a58);
-      engineCapsEntry = PTR_DAT_001e88c8;
+      engineCapsEntry = ptrTo_textureFormatTable_001e88c8;
       fgFogColorB = *(undefined4 *)(glContext + 0x1a5c);
       packet[4] = ((unsigned char *)0x000012f0U);
       packet[3] = fgFogColorB;
@@ -4110,7 +4110,7 @@ int gldEmitDirtyStatePackets(glContext)
       packet[10] = *(undefined4 *)(glContext + 0x1a64);
       packet = packet + 0xb;
     }
-    engineCapsEntry = PTR_DAT_001e88c8;
+    engineCapsEntry = ptrTo_textureFormatTable_001e88c8;
     if ((dirtyBits & 4) != 0) {
       *packet = 0x11381;
       rb3dBlendcntl = *(uint *)(glContext + 0x1a80);
@@ -4140,7 +4140,7 @@ int gldEmitDirtyStatePackets(glContext)
     }
     if ((dirtyBits & 0x200) != 0) {
       *packet = ((unsigned char *)0x000012f5U);
-      engineCapsEntry = PTR_DAT_001e88c8;
+      engineCapsEntry = ptrTo_textureFormatTable_001e88c8;
       fgAlphaFunc = *(uint *)(glContext + 0x1a4c);
       packet[1] = fgAlphaFunc;
       if ((*(uint *)(engineCapsEntry + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x8000) == 0) {

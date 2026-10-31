@@ -3301,7 +3301,7 @@ int VRegInfo__ctor_12379c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 arena;
   
   this[2] = ctorWord2;
-  vtable = PTR_DAT_001e90f0;
+  vtable = ptrTo_VRegInfo__vtable_001e90f0;
   this[1] = ctorWord1;
   this[3] = ctorWord3;
   *this = vtable + 8;
@@ -3356,7 +3356,7 @@ int VRegInfo__ctor_1238e8(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined4 arena;
   
   this[2] = ctorWord2;
-  vtable = PTR_DAT_001e90f0;
+  vtable = ptrTo_VRegInfo__vtable_001e90f0;
   this[1] = ctorWord1;
   this[3] = ctorWord3;
   *this = vtable + 8;
@@ -3951,7 +3951,7 @@ int PrimitiveIndex__ctor_12499c(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   
   compilerCopy = compiler;
   ((int (*)())TempValue__ctor_124938)(this,baseCtorArg2,baseCtorArg3,baseCtorArg4,compiler);
-  *this = PTR_DAT_001e90c8 + 8;
+  *this = ptrTo_PrimitiveIndex__vtable_001e90c8 + 8;
   identitySwizzleWord[0] = 0x10203;
   program = *(int *)(compiler + COMP_currentProgram);
   tempVReg = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
@@ -3993,7 +3993,7 @@ int StandardIndex__ctor_124b24(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   undefined4 *loadTempInst;
   
   ((int (*)())TempValue__ctor_124938)(this,tempIndex,baseCtorArg3,baseCtorArg4,compiler);
-  *this = PTR_DAT_001e90e0 + 8;
+  *this = ptrTo_StandardIndex__vtable_001e90e0 + 8;
   program = *(int *)(compiler + COMP_currentProgram);
   cachedLoadInst = *(int *)(tempIndex * 4 + program + 0x38);
   if (cachedLoadInst == 0) {
@@ -4036,7 +4036,7 @@ int StandardIndex__ctor_124c94(this, tempIndex, baseCtorArg3, baseCtorArg4, comp
   undefined4 *loadTempInst;
   
   ((int (*)())TempValue__ctor_124938)(this,tempIndex,baseCtorArg3,baseCtorArg4,compiler);
-  *this = PTR_DAT_001e90e0 + 8;
+  *this = ptrTo_StandardIndex__vtable_001e90e0 + 8;
   program = *(int *)(compiler + COMP_currentProgram);
   cachedLoadInst = *(int *)(tempIndex * 4 + program + 0x38);
   if (cachedLoadInst == 0) {
@@ -4545,7 +4545,7 @@ int Physical__ctor_125c10(this, hwReg, ctorWord1, ctorWord3, compiler)
   int compiler;
 {
   ((int (*)())VRegInfo__ctor_12379c)(this,hwReg,ctorWord1,ctorWord3,compiler);
-  *this = PTR_DAT_001e90d8 + 8;
+  *this = ptrTo_Physical__vtable_001e90d8 + 8;
   Program__markHwRegUsed(*(undefined4 *)(compiler + 0x6c4),hwReg);
   this[4] = hwReg;
   this[9] = this[9] | 2;
@@ -4561,7 +4561,7 @@ int Physical__ctor_125c8c(this, hwReg, ctorWord1, ctorWord3, compiler)
   int compiler;
 {
   ((int (*)())VRegInfo__ctor_12379c)(this,hwReg,ctorWord1,ctorWord3,compiler);
-  *this = PTR_DAT_001e90d8 + 8;
+  *this = ptrTo_Physical__vtable_001e90d8 + 8;
   Program__markHwRegUsed(*(undefined4 *)(compiler + 0x6c4),hwReg);
   this[4] = hwReg;
   this[9] = this[9] | 2;
@@ -4618,7 +4618,7 @@ int PrimitiveIndex__ctor_125db8(this, baseCtorArg2, baseCtorArg3, baseCtorArg4, 
   
   compilerCopy = compiler;
   ((int (*)())TempValue__ctor_124938)(this,baseCtorArg2,baseCtorArg3,baseCtorArg4,compiler);
-  *this = PTR_DAT_001e90c8 + 8;
+  *this = ptrTo_PrimitiveIndex__vtable_001e90c8 + 8;
   identitySwizzleWord[0] = 0x10203;
   program = *(int *)(compiler + COMP_currentProgram);
   tempVReg = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
@@ -4654,7 +4654,7 @@ int AddrIndexedSet__ctor_125f40(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90cc;
+  vtable = ptrTo_AddrIndexedSet__vtable_001e90cc;
   this[0xc] = 0;
   this[4] = ctorWord2;
   *this = vtable + 8;
@@ -4672,7 +4672,7 @@ int AddrIndexedSet__ctor_125f94(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90cc;
+  vtable = ptrTo_AddrIndexedSet__vtable_001e90cc;
   this[0xc] = 0;
   this[4] = ctorWord2;
   *this = vtable + 8;
@@ -4690,7 +4690,7 @@ int LoopRegister__ctor_125fe8(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90e8;
+  vtable = ptrTo_LoopRegister__vtable_001e90e8;
   this[4] = ctorWord2;
   *this = vtable + 8;
   return;
@@ -4707,7 +4707,7 @@ int LoopRegister__ctor_126034(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   undefined *vtable;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90e8;
+  vtable = ptrTo_LoopRegister__vtable_001e90e8;
   this[4] = ctorWord2;
   *this = vtable + 8;
   return;
@@ -4724,10 +4724,10 @@ int LoopIndexedOutputSet__ctor_126080(this, ctorWord2, ctorWord1, ctorWord3, com
   undefined *vtable;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  vtable = PTR_DAT_001e90ec;
+  vtable = ptrTo_LoopIndexedSet__vtable_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
-  *this = PTR_DAT_001e90dc + 8;
+  *this = ptrTo_LoopIndexedOutputSet__vtable_001e90dc + 8;
   this[4] = *(undefined4 *)(compiler + 0x344);
   *(int *)(compiler + 0x344) = *(int *)(compiler + 0x344) + 1;
   return;
