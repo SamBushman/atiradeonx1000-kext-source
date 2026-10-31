@@ -5229,49 +5229,49 @@ int FUN_00141458(packCtx, inst, laneA, laneB)
 }
 
 /* FUN_001415a4 @ 0x1415a4 (272 bytes) */
-int FUN_001415a4(param_1, param_2, newSource)
-  undefined4 *param_1;
-  int *param_2;
+int FUN_001415a4(packCtx, inst, newSource)
+  undefined4 *packCtx;
+  int *inst;
   undefined4 newSource;
 {
   int loopIndex;
-  int *piVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int *usersVectorOrSource;
+  int userInst;
+  int userOperandCount;
+  int normalOperandLimit;
   
-  while (piVar1 = (int *)param_2[4], piVar1[1] != 0) {
-    if (*piVar1 == 0) {
-      piVar1 = (int *)Vector__elementRefGrow(piVar1,0);
+  while (usersVectorOrSource = (int *)inst[4], usersVectorOrSource[1] != 0) {
+    if (*usersVectorOrSource == 0) {
+      usersVectorOrSource = (int *)Vector__elementRefGrow(usersVectorOrSource,0);
     }
     else {
-      piVar1 = (int *)piVar1[2];
+      usersVectorOrSource = (int *)usersVectorOrSource[2];
     }
-    iVar2 = *piVar1;
-    iVar3 = *(int *)(iVar2 + 0x84);
-    iVar4 = iVar3;
-    if ((*(uint *)(iVar2 + 0x14) & 0x200) != 0) {
-      iVar4 = iVar3 + -1;
-      piVar1 = (int *)IRInst__getOperandSource(iVar2,iVar3);
-      if (param_2 == piVar1) {
-        IRInst__setExtraOperandSource(iVar2,newSource,1,*param_1);
+    userInst = *usersVectorOrSource;
+    userOperandCount = *(int *)(userInst + 0x84);
+    normalOperandLimit = userOperandCount;
+    if ((*(uint *)(userInst + 0x14) & 0x200) != 0) {
+      normalOperandLimit = userOperandCount + -1;
+      usersVectorOrSource = (int *)IRInst__getOperandSource(userInst,userOperandCount);
+      if (inst == usersVectorOrSource) {
+        IRInst__setExtraOperandSource(userInst,newSource,1,*packCtx);
       }
     }
-    if (0 < iVar4) {
+    if (0 < normalOperandLimit) {
       loopIndex = 1;
       do {
-        piVar1 = (int *)IRInst__getOperandSource(iVar2,loopIndex);
-        if (param_2 == piVar1) {
-          IRInst__setOperandSource(iVar2,loopIndex,newSource,1,*param_1);
+        usersVectorOrSource = (int *)IRInst__getOperandSource(userInst,loopIndex);
+        if (inst == usersVectorOrSource) {
+          IRInst__setOperandSource(userInst,loopIndex,newSource,1,*packCtx);
         }
         loopIndex = loopIndex + 1;
-      } while (loopIndex <= iVar4);
+      } while (loopIndex <= normalOperandLimit);
     }
   }
-  *(int *)(param_1[1] + 0x1b4) = *(int *)(param_1[1] + 0x1b4) + 1;
+  *(int *)(packCtx[1] + 0x1b4) = *(int *)(packCtx[1] + 0x1b4) + 1;
                     
                     
-  (**(code **)(*param_2 + 0xc))(param_2,1,*param_1);
+  (**(code **)(*inst + 0xc))(inst,1,*packCtx);
   return;
 }
 

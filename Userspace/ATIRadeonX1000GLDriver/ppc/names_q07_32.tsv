@@ -4154,3 +4154,24 @@ local	pass_rewrite	local_28	coneVecCapacity	INFERRED	capacity word of the growab
 local	pass_rewrite	local_24	coneVecCount	INFERRED	count word of the cone vector header (zero)
 local	pass_rewrite	local_20	coneVecData	INFERRED	data pointer of the cone vector header, 8 bytes from the arena
 local	pass_rewrite	local_1c	coneVecArena	INFERRED	arena the cone vector draws from (compiler +COMP_arenaB)
+local	FUN_00174ce0	param_1	compiler	INFERRED	compiler owning the expression hash tables (+0x3ec, +0x3f4 scratch key)
+local	FUN_00174ce0	param_2	keyValueB	INFERRED	key word stored at +8 of the scratch key and at +0xc of the new record
+local	FUN_00174ce0	param_3	keyValueA	INFERRED	key word stored at +4 of the scratch key and at +8 of the new record
+local	FUN_00174ce0	puVar1	exprRecord	INFERRED	found or newly created expression record (allocation + 4)
+local	FUN_00174ce0	puVar2	exprAllocation	INFERRED	0x34-byte arena allocation whose first word is the arena
+local	FUN_00174ce0	piVar3	recordVectorSlot	INFERRED	vector slot receiving the new record
+local	FUN_001415a4	param_1	packCtx	INFERRED	pack context: *param_1 compiler, param_1[1] pass counters
+local	FUN_001415a4	param_2	inst	INFERRED	inst whose users are rewired to newSource
+local	FUN_001415a4	piVar1	usersVectorOrSource	INFERRED	one register: users vector, its first slot and operand sources
+local	FUN_001415a4	iVar2	userInst	INFERRED	first user of inst
+use	FUN_001415a4	iVar3	userOperandCount	INFERRED	operand count of the user	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x84\);$	+2
+use	FUN_001415a4	iVar3	userOperandCount	INFERRED	operand count of the user	^\s*iVar4\ =\ iVar3\ \+\ \-1;$	+2
+local	FUN_001415a4	iVar4	normalOperandLimit	INFERRED	operand count minus the extra operand
+local	FUN_001486e8	param_2	pass	INFERRED	*(param_2+8) is the compiler; +0x3c4 candidate vector, +0x168 counts rewrites
+local	FUN_001486e8	uVar1	rewrittenSelect	INFERRED	select word stored back into the operand record
+local	FUN_001486e8	uVar2	selectWordWork	INFERRED	select word of the dest record, byte-swapped in place while matching candidates
+use	FUN_001486e8	iVar3	optionEnabled	INFERRED	compiler option 0x31 test result	^\s*iVar3\ =\ FUN_000f2e18\(uVar2\);$	+2
+local	FUN_001486e8	puVar5	candidateSlot	INFERRED	address of the candidate element
+local	FUN_001486e8	iVar7	producerCheck	INFERRED	vtable +0x30 / +0x40 results on the operand source
+use	FUN_001486e8	iVar9	laneCountdown	INFERRED	four-lane countdown while the source is not a constant	^\s*for\ \(iVar9\ =\ 4;$	+4
+local	FUN_001486e8	local_48	selectScratch	INFERRED	select word scratch whose bytes are patched; the lane map precedes it at -4

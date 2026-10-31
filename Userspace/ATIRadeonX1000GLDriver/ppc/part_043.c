@@ -1123,9 +1123,9 @@ int FUN_0014846c(inst, param_2)
 }
 
 /* FUN_001486e8 @ 0x1486e8 (664 bytes) */
-int FUN_001486e8(inst, param_2)
+int FUN_001486e8(inst, pass)
   int *inst;
-  int param_2;
+  int pass;
 {
   int countdown;
   int loopIndex2;
@@ -1133,35 +1133,35 @@ int FUN_001486e8(inst, param_2)
   uint vectorFilledCount;
   int operandRecord2;
   int operandRecord;
-  undefined4 uVar1;
-  uint uVar2;
-  int iVar3;
+  undefined4 rewrittenSelect;
+  uint selectWordWork;
+  int optionEnabled;
   int *operandVReg;
-  undefined4 *puVar5;
+  undefined4 *candidateSlot;
   int *operandSource;
-  int iVar7;
+  int producerCheck;
   uint operandSelectB;
-  int iVar9;
+  int laneCountdown;
   int destRegisterOffset;
   uint loopIndex;
   uint *vector;
   int *inst1;
   undefined4 operandSelect;
-  undefined4 local_48 [8];
+  undefined4 selectScratch [8];
   
   if ((inst[5] & 2U) != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uVar2 = *(uint *)(operandRecord + 0x10);
-    iVar3 = SelectWord__hasNonzeroLaneBytes(uVar2);
-    if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x31), iVar3 != 0)) {
+    selectWordWork = *(uint *)(operandRecord + 0x10);
+    optionEnabled = SelectWord__hasNonzeroLaneBytes(selectWordWork);
+    if ((optionEnabled != 0) && (optionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),0x31), optionEnabled != 0)) {
       destRegisterOffset = inst[0x26];
       destRegister = inst[0x25];
       operandVReg = (int *)IRInst__getOperandSource(inst,1);
-      for (iVar9 = 4;
-          ((iVar7 = (**(code **)(*operandVReg + 0x30))(operandVReg), iVar7 == 0 &&
-           (iVar7 = (**(code **)(*operandVReg + 0x40))(operandVReg), iVar7 == 0)) && (iVar9 != 0));
-          iVar9 = iVar9 + -1) {
-        vector = *(uint **)(param_2 + 0x3c4);
+      for (laneCountdown = 4;
+          ((producerCheck = (**(code **)(*operandVReg + 0x30))(operandVReg), producerCheck == 0 &&
+           (producerCheck = (**(code **)(*operandVReg + 0x40))(operandVReg), producerCheck == 0)) && (laneCountdown != 0));
+          laneCountdown = laneCountdown + -1) {
+        vector = *(uint **)(pass + 0x3c4);
         loopIndex = 0;
         vectorFilledCount = vector[1];
         if (0 < (int)vectorFilledCount) {
@@ -1171,46 +1171,46 @@ int FUN_001486e8(inst, param_2)
                 _memset(vectorFilledCount * 4 + vector[2],0,(loopIndex - vectorFilledCount) * 4 + 4);
                 vector[1] = loopIndex + 1;
               }
-              puVar5 = (undefined4 *)(loopIndex * 4 + vector[2]);
+              candidateSlot = (undefined4 *)(loopIndex * 4 + vector[2]);
             }
             else {
-              puVar5 = (undefined4 *)Vector__elementRefGrow(vector,loopIndex);
+              candidateSlot = (undefined4 *)Vector__elementRefGrow(vector,loopIndex);
             }
-            inst1 = (int *)*puVar5;
+            inst1 = (int *)*candidateSlot;
             if (((inst != inst1) && (destRegisterOffset == inst1[0x26])) &&
                ((destRegister == inst1[0x25] &&
                 (operandSource = (int *)IRInst__getOperandSource(inst1,1), operandVReg == operandSource)))) {
-              *(int *)(param_2 + 0x168) = *(int *)(param_2 + 0x168) + 1;
+              *(int *)(pass + 0x168) = *(int *)(pass + 0x168) + 1;
               operandRecord = IRInst__getOperandRecord(inst1,0);
               operandSelectB = *(uint *)(operandRecord + 0x10);
-              uVar2 = (uVar2 << 0x18 | (uVar2 >> 8 & 0xff) << 0x10 | (uVar2 >> 0x10 & 0xff) << 8 |
-                      uVar2 >> 0x18) &
+              selectWordWork = (selectWordWork << 0x18 | (selectWordWork >> 8 & 0xff) << 0x10 | (selectWordWork >> 0x10 & 0xff) << 8 |
+                      selectWordWork >> 0x18) &
                       (operandSelectB << 0x18 | (operandSelectB >> 8 & 0xff) << 0x10 | (operandSelectB >> 0x10 & 0xff) << 8 |
                       operandSelectB >> 0x18);
               inst[0x27] =
-                   uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+                   selectWordWork << 0x18 | (selectWordWork & 0xff00) << 8 | selectWordWork >> 8 & 0xff00 | selectWordWork >> 0x18;
               operandRecord = IRInst__getOperandRecord(inst,1);
               operandSelect = *(undefined4 *)(operandRecord + 0x10);
               operandRecord2 = IRInst__getOperandRecord(inst1,1);
               loopIndex2 = 0;
-              local_48[0] = *(undefined4 *)(operandRecord2 + 0x10);
+              selectScratch[0] = *(undefined4 *)(operandRecord2 + 0x10);
               countdown = 4;
               do {
-                if (*(char *)((int)local_48 + loopIndex2 + -4) == '\x04') {
-                  *(undefined1 *)((int)local_48 + loopIndex2 + -4) =
-                       *(undefined1 *)((int)local_48 + loopIndex2);
+                if (*(char *)((int)selectScratch + loopIndex2 + -4) == '\x04') {
+                  *(undefined1 *)((int)selectScratch + loopIndex2 + -4) =
+                       *(undefined1 *)((int)selectScratch + loopIndex2);
                 }
-                uVar1 = operandSelect;
+                rewrittenSelect = operandSelect;
                 loopIndex2 = loopIndex2 + 1;
                 countdown = countdown + -1;
               } while (countdown != 0);
               operandRecord = IRInst__getOperandRecord(inst,1);
-              *(undefined4 *)(operandRecord + 0x10) = uVar1;
-              (**(code **)(*inst1 + 0xc))(inst1,0,*(undefined4 *)(param_2 + 8));
+              *(undefined4 *)(operandRecord + 0x10) = rewrittenSelect;
+              (**(code **)(*inst1 + 0xc))(inst1,0,*(undefined4 *)(pass + 8));
               operandVReg[0x58] = operandVReg[0x58] + -1;
               return;
             }
-            vector = *(uint **)(param_2 + 0x3c4);
+            vector = *(uint **)(pass + 0x3c4);
             loopIndex = loopIndex + 1;
             vectorFilledCount = vector[1];
           } while ((int)loopIndex < (int)vectorFilledCount);

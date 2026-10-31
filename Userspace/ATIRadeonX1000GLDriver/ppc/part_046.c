@@ -1158,59 +1158,59 @@ LAB_00174ca8:
 }
 
 /* FUN_00174ce0 @ 0x174ce0 (300 bytes) */
-int FUN_00174ce0(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int FUN_00174ce0(compiler, keyValueB, keyValueA)
+  int compiler;
+  undefined4 keyValueB;
+  undefined4 keyValueA;
 {
   undefined4 arenaAt378;
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  int *piVar3;
+  undefined4 *exprRecord;
+  undefined4 *exprAllocation;
+  int *recordVectorSlot;
   undefined4 nextValueNumberResult;
   uint vectorFilledCount;
   uint *vector;
   
-  *(undefined4 *)(*(int *)(param_1 + 0x3f4) + 4) = param_3;
-  *(undefined4 *)(*(int *)(param_1 + 0x3f4) + 8) = param_2;
-  puVar1 = (undefined4 *)
-           HashTable__find(*(undefined4 *)(param_1 + 0x3ec),*(undefined4 *)(param_1 + 0x3f4));
-  if (puVar1 == (undefined4 *)0x0) {
-    arenaAt378 = *(undefined4 *)(param_1 + 0x378);
-    puVar2 = (undefined4 *)Arena__alloc(arenaAt378,0x34);
-    puVar1 = puVar2 + 1;
-    *puVar2 = arenaAt378;
-    puVar2[3] = 0xffffffff;
-    puVar2[8] = 0;
-    puVar2[1] = 0;
-    puVar2[0xc] = 0;
-    puVar2[2] = 0;
-    puVar2[4] = 0;
-    puVar2[5] = 0;
-    puVar2[6] = 0;
-    puVar2[7] = 0;
-    puVar2[9] = 0;
-    puVar2[10] = 0;
-    puVar2[0xb] = 0;
-    nextValueNumberResult = Compiler__nextValueNumber(param_1);
-    puVar2[2] = param_3;
-    puVar2[1] = nextValueNumberResult;
-    puVar2[3] = param_2;
-    HashTable__insert(*(undefined4 *)(param_1 + 1000),puVar1);
-    HashTable__insert(*(undefined4 *)(param_1 + 0x3ec),puVar1);
-    vector = *(uint **)(param_1 + 0x3dc);
+  *(undefined4 *)(*(int *)(compiler + 0x3f4) + 4) = keyValueA;
+  *(undefined4 *)(*(int *)(compiler + 0x3f4) + 8) = keyValueB;
+  exprRecord = (undefined4 *)
+           HashTable__find(*(undefined4 *)(compiler + 0x3ec),*(undefined4 *)(compiler + 0x3f4));
+  if (exprRecord == (undefined4 *)0x0) {
+    arenaAt378 = *(undefined4 *)(compiler + 0x378);
+    exprAllocation = (undefined4 *)Arena__alloc(arenaAt378,0x34);
+    exprRecord = exprAllocation + 1;
+    *exprAllocation = arenaAt378;
+    exprAllocation[3] = 0xffffffff;
+    exprAllocation[8] = 0;
+    exprAllocation[1] = 0;
+    exprAllocation[0xc] = 0;
+    exprAllocation[2] = 0;
+    exprAllocation[4] = 0;
+    exprAllocation[5] = 0;
+    exprAllocation[6] = 0;
+    exprAllocation[7] = 0;
+    exprAllocation[9] = 0;
+    exprAllocation[10] = 0;
+    exprAllocation[0xb] = 0;
+    nextValueNumberResult = Compiler__nextValueNumber(compiler);
+    exprAllocation[2] = keyValueA;
+    exprAllocation[1] = nextValueNumberResult;
+    exprAllocation[3] = keyValueB;
+    HashTable__insert(*(undefined4 *)(compiler + 1000),exprRecord);
+    HashTable__insert(*(undefined4 *)(compiler + 0x3ec),exprRecord);
+    vector = *(uint **)(compiler + 0x3dc);
     vectorFilledCount = vector[1];
     if (vectorFilledCount < *vector) {
       _memset(vectorFilledCount * 4 + vector[2],0,4);
-      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      recordVectorSlot = (int *)(vectorFilledCount * 4 + vector[2]);
       vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
+      recordVectorSlot = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
-    *piVar3 = (int)puVar1;
+    *recordVectorSlot = (int)exprRecord;
   }
-  return puVar1;
+  return exprRecord;
 }
 
 /* FUN_00174e0c @ 0x174e0c (2764 bytes) */
