@@ -1399,22 +1399,24 @@ int FUN_00148d8c(inst, program)
   int operandRecord2;
   int operandRecord;
   bool moreComponents;
-  char cVar2;
-  byte bVar3;
-  uint uVar4;
-  int iVar5;
+  char laneSelectByte;
+  byte laneSourceLane;
+  uint operandNegateBit;
+  int checkResult;
   int *operandVReg;
-  int iVar7;
+  int producerCheck;
+  int operandCountResult;
+  int countdown;
   int isOpcodeInSet147398Result;
   int *inst1;
-  uint uVar9;
-  int *piVar10;
-  int iVar11;
+  uint operandAbsBit;
+  int *operandModifierCursor;
+  int producerOpcode;
   int *operandRecord1;
   undefined4 operandSelectC;
   undefined4 operandSelectB;
   undefined4 operandSelect;
-  int *local_4c [7];
+  int *laneProducerInsts [7];
   
   operandRecord = IRInst__getOperandRecord(inst,1);
   operandSelectC = *(undefined4 *)(operandRecord + 0x10);
@@ -1423,23 +1425,23 @@ int FUN_00148d8c(inst, program)
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   if (((inst[0x2e] & 1U) != 0) || ((inst[0x2e] & 2U) != 0)) {
     loopIndex = 0;
-    local_4c[0] = (int *)0x0;
-    local_4c[1] = (int *)0x0;
-    local_4c[2] = (int *)0x0;
-    local_4c[3] = (int *)0x0;
+    laneProducerInsts[0] = (int *)0x0;
+    laneProducerInsts[1] = (int *)0x0;
+    laneProducerInsts[2] = (int *)0x0;
+    laneProducerInsts[3] = (int *)0x0;
     do {
       if (*(char *)((int)&operandSelectB + loopIndex) == '\0') {
-        iVar7 = (**(code **)(*operandVReg + 0x24))(operandVReg);
-        if ((((iVar7 == 0) || (iVar7 = IRInst__hasSingleUse(operandVReg,program), iVar7 == 0)) ||
-            (operandVReg[0x48] != 0)) || (iVar7 = ((int (*)())IRInst__isOpcodeInSet147398)(operandVReg), iVar7 == 0)) {
+        producerCheck = (**(code **)(*operandVReg + 0x24))(operandVReg);
+        if ((((producerCheck == 0) || (producerCheck = IRInst__hasSingleUse(operandVReg,program), producerCheck == 0)) ||
+            (operandVReg[0x48] != 0)) || (producerCheck = ((int (*)())IRInst__isOpcodeInSet147398)(operandVReg), producerCheck == 0)) {
           return 0;
         }
         operandRecord2 = IRInst__getOperandRecord(operandVReg,0);
-        bVar3 = *(byte *)((int)&operandSelectC + loopIndex);
+        laneSourceLane = *(byte *)((int)&operandSelectC + loopIndex);
         operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
-        cVar2 = *(char *)((int)&operandSelect + (uint)bVar3);
+        laneSelectByte = *(char *)((int)&operandSelect + (uint)laneSourceLane);
         inst1 = operandVReg;
-        while (cVar2 == '\x01') {
+        while (laneSelectByte == '\x01') {
           inst1 = (int *)IRInst__getOperandSource(inst1,inst1[0x21]);
           vcall24Result = (**(code **)(*inst1 + 0x24))(inst1);
           if (vcall24Result == 0) {
@@ -1458,38 +1460,38 @@ int FUN_00148d8c(inst, program)
           }
           operandRecord2 = IRInst__getOperandRecord(inst1,0);
           operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
-          cVar2 = *(char *)((int)&operandSelect + (uint)bVar3);
+          laneSelectByte = *(char *)((int)&operandSelect + (uint)laneSourceLane);
         }
         if (loopIndex < 1) {
 LAB_00148f68:
-          local_4c[loopIndex] = inst1;
+          laneProducerInsts[loopIndex] = inst1;
         }
-        else if (local_4c[0] != inst1) {
+        else if (laneProducerInsts[0] != inst1) {
           loopIndexC = 0;
-          iVar7 = loopIndex;
+          countdown = loopIndex;
           do {
             loopIndexC = loopIndexC + 1;
-            iVar7 = iVar7 + -1;
-            if (iVar7 == 0) goto LAB_00148f68;
-          } while (local_4c[loopIndexC] != inst1);
+            countdown = countdown + -1;
+            if (countdown == 0) goto LAB_00148f68;
+          } while (laneProducerInsts[loopIndexC] != inst1);
         }
       }
       moreComponents = loopIndex != 3;
       loopIndex = loopIndex + 1;
     } while (moreComponents);
     loopIndex2 = 0;
-    uVar4 = inst[0x2e] & 1;
-    uVar9 = (uint)inst[0x2e] >> 1 & 1;
+    operandNegateBit = inst[0x2e] & 1;
+    operandAbsBit = (uint)inst[0x2e] >> 1 & 1;
     do {
       if ((*(char *)((int)&operandSelectB + loopIndex2) == '\0') &&
-         (inst1 = local_4c[loopIndex2], inst1 != (int *)0x0)) {
+         (inst1 = laneProducerInsts[loopIndex2], inst1 != (int *)0x0)) {
         *(int *)(program + 0x16c) = *(int *)(program + 0x16c) + 1;
-        iVar11 = *(int *)(inst1[0x22] + 8);
-        iVar7 = (**(code **)(*inst1 + 0x14))(inst1);
-        if (iVar7 == 1) {
-          if (uVar9 == 0) {
+        producerOpcode = *(int *)(inst1[0x22] + 8);
+        operandCountResult = (**(code **)(*inst1 + 0x14))(inst1);
+        if (operandCountResult == 1) {
+          if (operandAbsBit == 0) {
 LAB_001490f4:
-            if (uVar4 != 0) {
+            if (operandNegateBit != 0) {
               if ((inst1[0x2e] & 1U) == 0) {
                 sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(inst1,1,0.0);
                 if (sourceIsSplatConstantResult == 0) {
@@ -1502,9 +1504,9 @@ LAB_001490f4:
             }
           }
           else {
-            if ((uVar4 != 0) || (iVar7 = IRInst__operandIsNonNegativeFloatConst(inst1,1), iVar7 == 0)) {
+            if ((operandNegateBit != 0) || (operandCountResult = IRInst__operandIsNonNegativeFloatConst(inst1,1), operandCountResult == 0)) {
               IROperand__setModifierBits(inst1 + 0x29,2,1);
-              if (uVar4 != 0) {
+              if (operandNegateBit != 0) {
                 sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(inst1,1,0.0);
                 if (sourceIsSplatConstantResult == 0) {
                   IROperand__setModifierBits(inst1 + 0x29,1,1);
@@ -1515,11 +1517,11 @@ LAB_001490f4:
             IROperand__setModifierBits(inst1 + 0x29,1,0);
           }
         }
-        else if (iVar11 == 0x13) {
-          if (uVar9 == 0) goto LAB_001490f4;
+        else if (producerOpcode == 0x13) {
+          if (operandAbsBit == 0) goto LAB_001490f4;
           IROperand__setModifierBits(inst1 + 0x29,2,1);
           IROperand__setModifierBits(inst1 + 0x2f,2,1);
-          if (uVar4 == 0) {
+          if (operandNegateBit == 0) {
 LAB_001491e8:
             IROperand__setModifierBits(inst1 + 0x29,1,0);
           }
@@ -1531,9 +1533,9 @@ LAB_001491e8:
           }
           IROperand__setModifierBits(inst1 + 0x2f,1,0);
         }
-        else if (iVar11 == 0x12) {
-          if (uVar9 == 0) {
-            if (uVar4 != 0) {
+        else if (producerOpcode == 0x12) {
+          if (operandAbsBit == 0) {
+            if (operandNegateBit != 0) {
               if ((inst1[0x2e] & 1U) == 0) {
                 sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(inst1,1,0.0);
                 if (sourceIsSplatConstantResult == 0) {
@@ -1557,7 +1559,7 @@ LAB_001491e8:
           else {
             IROperand__setModifierBits(inst1 + 0x29,2,1);
             IROperand__setModifierBits(inst1 + 0x2f,2,1);
-            if (uVar4 == 0) goto LAB_001491e8;
+            if (operandNegateBit == 0) goto LAB_001491e8;
             sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(inst1,1,0.0);
             if (sourceIsSplatConstantResult == 0) {
               IROperand__setModifierBits(inst1 + 0x29,1,1);
@@ -1568,23 +1570,23 @@ LAB_001491e8:
             }
           }
         }
-        else if (iVar11 - 0x24U < 3) {
+        else if (producerOpcode - 0x24U < 3) {
           loopIndexB = 2;
-          piVar10 = inst1 + 0x2c;
+          operandModifierCursor = inst1 + 0x2c;
           operandRecord1 = inst1 + 0x2f;
           do {
-            if (uVar9 == 0) {
-              if (uVar4 != 0) {
-                if ((piVar10[8] & 1U) != 0) goto LAB_00149328;
+            if (operandAbsBit == 0) {
+              if (operandNegateBit != 0) {
+                if ((operandModifierCursor[8] & 1U) != 0) goto LAB_00149328;
                 sourceIsSplatConstantResult2 = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(inst1,loopIndexB,0.0);
                 if (sourceIsSplatConstantResult2 == 0) {
-                  IROperand__setModifierBits(piVar10 + 3,1,1);
+                  IROperand__setModifierBits(operandModifierCursor + 3,1,1);
                 }
               }
             }
             else {
               IROperand__setModifierBits(operandRecord1,2,1);
-              if (uVar4 == 0) {
+              if (operandNegateBit == 0) {
 LAB_00149328:
                 IROperand__setModifierBits(operandRecord1,1,0);
               }
@@ -1597,7 +1599,7 @@ LAB_00149328:
             }
             moreComponents = loopIndexB != 3;
             operandRecord1 = operandRecord1 + 6;
-            piVar10 = piVar10 + 6;
+            operandModifierCursor = operandModifierCursor + 6;
             loopIndexB = loopIndexB + 1;
           } while (moreComponents);
         }
@@ -1610,12 +1612,12 @@ LAB_0014937c:
     IROperand__setModifierBits(inst + 0x29,2,0);
     IROperand__setModifierBits(inst + 0x29,1,0);
   }
-  iVar5 = SelectWord__isSingleComponentConstant(operandSelectB);
-  if (((((iVar5 == 0) || (iVar5 = IRInst__isSourceSelectIdentity(inst,1), iVar5 == 0)) &&
-       (iVar5 = SelectWord__isSplat(operandSelectC), iVar5 != 0)) &&
-      (((char)operandSelectC == '\x04' && (iVar5 = IRInst__hasSingleUse(operandVReg,program), iVar5 != 0)))) &&
-     ((iVar5 = OpcodeTraits__flagBit6(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(program + 8)),
-      iVar5 != 0 && (iVar5 = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg), iVar5 != 0)))) {
+  checkResult = SelectWord__isSingleComponentConstant(operandSelectB);
+  if (((((checkResult == 0) || (checkResult = IRInst__isSourceSelectIdentity(inst,1), checkResult == 0)) &&
+       (checkResult = SelectWord__isSplat(operandSelectC), checkResult != 0)) &&
+      (((char)operandSelectC == '\x04' && (checkResult = IRInst__hasSingleUse(operandVReg,program), checkResult != 0)))) &&
+     ((checkResult = OpcodeTraits__flagBit6(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(program + 8)),
+      checkResult != 0 && (checkResult = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),operandVReg), checkResult != 0)))) {
     *(int *)(program + 0x16c) = *(int *)(program + 0x16c) + 1;
     operandRecord = IRInst__getOperandRecord(inst,0);
     operandVReg[0x27] = *(int *)(operandRecord + 0x10);

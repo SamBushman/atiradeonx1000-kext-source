@@ -1066,91 +1066,94 @@ int FUN_0017494c(ctx, scopeIndexHigh, scopeIndexLow)
 }
 
 /* FUN_00174b04 @ 0x174b04 (476 bytes) */
-int FUN_00174b04(ctx, param_2, param_3)
+int FUN_00174b04(ctx, startBlockIndex, endBlockIndex)
   int ctx;
-  uint param_2;
-  int param_3;
+  uint startBlockIndex;
+  int endBlockIndex;
 {
   int vcall18Result;
   int vcall14Result;
   uint vectorFilledCount;
-  int *piVar1;
-  int *piVar2;
-  uint uVar3;
-  int *piVar4;
-  int iVar5;
+  int *useSlot;
+  int *currentInst;
+  int *operandSourceInst;
+  uint useCount;
+  int *blockSlot;
+  int blockByteOffset;
+  int operandRecordBase;
+  int targetState;
   uint loopIndex2;
-  int iVar7;
-  uint uVar8;
-  int iVar9;
+  int blockUseVector;
+  uint sourceBitIndex;
+  int operandByteOffset;
   int loopIndex;
   uint *vector;
-  uint uVar12;
-  uint uVar13;
+  uint blockIndex;
+  uint usesLeft;
   
   loopIndex = 1;
-  iVar9 = 0x18;
-  piVar2 = *(int **)(ctx + 0xb0);
+  operandByteOffset = 0x18;
+  currentInst = *(int **)(ctx + 0xb0);
   vector = *(uint **)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0x410);
   do {
-    vcall14Result = (**(code **)(*piVar2 + 0x14))(piVar2);
+    vcall14Result = (**(code **)(*currentInst + 0x14))(currentInst);
     if (vcall14Result < loopIndex) {
       return;
     }
-    piVar2 = *(int **)(iVar9 + *(int *)(ctx + 0xb0) + 0x8c);
-    vcall18Result = (**(code **)(*piVar2 + 0x18))(piVar2);
-    if ((vcall18Result != 0) && (uVar8 = piVar2[7], param_3 <= (int)param_2)) {
-      iVar5 = param_2 << 2;
-      uVar12 = param_2;
+    operandSourceInst = *(int **)(operandByteOffset + *(int *)(ctx + 0xb0) + 0x8c);
+    vcall18Result = (**(code **)(*operandSourceInst + 0x18))(operandSourceInst);
+    if ((vcall18Result != 0) && (sourceBitIndex = operandSourceInst[7], endBlockIndex <= (int)startBlockIndex)) {
+      blockByteOffset = startBlockIndex << 2;
+      blockIndex = startBlockIndex;
       do {
-        if (uVar12 < *vector) {
+        if (blockIndex < *vector) {
           vectorFilledCount = vector[1];
-          if (vectorFilledCount <= uVar12) {
-            _memset(vectorFilledCount * 4 + vector[2],0,(uVar12 - vectorFilledCount) * 4 + 4);
-            vector[1] = uVar12 + 1;
+          if (vectorFilledCount <= blockIndex) {
+            _memset(vectorFilledCount * 4 + vector[2],0,(blockIndex - vectorFilledCount) * 4 + 4);
+            vector[1] = blockIndex + 1;
           }
-          piVar4 = (int *)(iVar5 + vector[2]);
+          blockSlot = (int *)(blockByteOffset + vector[2]);
         }
         else {
-          piVar4 = (int *)Vector__elementRefGrow(vector,uVar12);
+          blockSlot = (int *)Vector__elementRefGrow(vector,blockIndex);
         }
-        iVar7 = *(int *)(*piVar4 + 0xc4);
-        uVar3 = *(uint *)(iVar7 + 4);
-        if (0 < (int)uVar3) {
+        blockUseVector = *(int *)(*blockSlot + 0xc4);
+        useCount = *(uint *)(blockUseVector + 4);
+        if (0 < (int)useCount) {
           loopIndex2 = 0;
-          uVar13 = uVar3;
+          usesLeft = useCount;
           do {
-            piVar1 = (int *)0x0;
-            if (loopIndex2 < uVar3) {
-              piVar1 = (int *)(loopIndex2 * 4 + *(int *)(iVar7 + 8));
+            useSlot = (int *)0x0;
+            if (loopIndex2 < useCount) {
+              useSlot = (int *)(loopIndex2 * 4 + *(int *)(blockUseVector + 8));
             }
-            if (piVar2 == (int *)*piVar1) {
-              if ((*(uint *)((uVar8 >> 3 & 0x1ffffffc) + *(int *)(*piVar4 + 0x128) + 8) >>
-                   (uVar8 & 0x1f) & 1) != 0) {
-                piVar2 = *(int **)(ctx + 0xb0);
-                if ((*(uint *)((int)piVar2 + iVar9 + 0xa0) & 2) == 0) {
-                  iVar5 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
-                  *(int *)(iVar5 + 0xa8) = *(int *)(iVar5 + 0xa8) + 1;
-                  iVar5 = *(int *)(ctx + 0xb0) + iVar9 + 0x80;
-                  IROperand__setModifierBits(iVar5 + 0xc,1,*(uint *)(iVar5 + 0x20) & 1 ^ 1);
-                  piVar2 = *(int **)(ctx + 0xb0);
+            if (operandSourceInst == (int *)*useSlot) {
+              if ((*(uint *)((sourceBitIndex >> 3 & 0x1ffffffc) + *(int *)(*blockSlot + 0x128) + 8) >>
+                   (sourceBitIndex & 0x1f) & 1) != 0) {
+                currentInst = *(int **)(ctx + 0xb0);
+                if ((*(uint *)((int)currentInst + operandByteOffset + 0xa0) & 2) == 0) {
+                  targetState = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
+                  *(int *)(targetState + 0xa8) = *(int *)(targetState + 0xa8) + 1;
+                  operandRecordBase = *(int *)(ctx + 0xb0) + operandByteOffset + 0x80;
+                  IROperand__setModifierBits(operandRecordBase + 0xc,1,*(uint *)(operandRecordBase + 0x20) & 1 ^ 1);
+                  currentInst = *(int **)(ctx + 0xb0);
                 }
                 goto LAB_00174ca8;
               }
               break;
             }
             loopIndex2 = loopIndex2 + 1;
-            uVar13 = uVar13 - 1;
-          } while (uVar13 != 0);
+            usesLeft = usesLeft - 1;
+          } while (usesLeft != 0);
         }
-        uVar12 = uVar12 - 1;
-        iVar5 = iVar5 + -4;
-      } while (param_3 <= (int)uVar12);
+        blockIndex = blockIndex - 1;
+        blockByteOffset = blockByteOffset + -4;
+      } while (endBlockIndex <= (int)blockIndex);
     }
-    piVar2 = *(int **)(ctx + 0xb0);
+    currentInst = *(int **)(ctx + 0xb0);
 LAB_00174ca8:
     loopIndex = loopIndex + 1;
-    iVar9 = iVar9 + 0x18;
+    operandByteOffset = operandByteOffset + 0x18;
   } while( true );
 }
 

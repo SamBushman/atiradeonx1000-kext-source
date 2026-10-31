@@ -3820,3 +3820,44 @@ use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over t
 use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*iVar17\ =\ local_70;$@2	+1
 use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*iVar17\ =\ local_70;$@3	+1
 use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*if\ \(\(int\)uVar18\ <=\ iVar17\)\ \{$	+1
+local	FUN_00174b04	param_2	startBlockIndex	INFERRED	block index the descending scan starts from
+local	FUN_00174b04	param_3	endBlockIndex	INFERRED	scan stops once the block index drops below this
+local	FUN_00174b04	piVar1	useSlot	INFERRED	address of an element of the block's use vector, or null
+use	FUN_00174b04	piVar2	currentInst	INFERRED	inst at ctx+0xb0 being processed	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$	+1
+use	FUN_00174b04	piVar2	currentInst	INFERRED	inst at ctx+0xb0 being processed	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\);$	+1
+use	FUN_00174b04	piVar2	currentInst	INFERRED	inst at ctx+0xb0 being processed	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@2	+2
+use	FUN_00174b04	piVar2	currentInst	INFERRED	inst at ctx+0xb0 being processed	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@3	+1
+use	FUN_00174b04	piVar2	currentInst	INFERRED	inst at ctx+0xb0 being processed	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0xb0\);$@4	+1
+use	FUN_00174b04	piVar2	operandSourceInst	INFERRED	source inst of the current operand	^\s*piVar2\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x8c\);$	+3
+use	FUN_00174b04	piVar2	operandSourceInst	INFERRED	source inst of the current operand	^\s*if\ \(piVar2\ ==\ \(int\ \*\)\*piVar1\)\ \{$	+1
+use	FUN_00174b04	uVar3	vectorFilledCount	INFERRED	block list vector element count	^\s*uVar3\ =\ puVar11\[1\];$	+3
+use	FUN_00174b04	uVar3	useCount	INFERRED	element count of the block's use vector	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 4\);$	+2
+use	FUN_00174b04	uVar3	useCount	INFERRED	element count of the block's use vector	^\s*uVar13\ =\ uVar3;$	+1
+use	FUN_00174b04	uVar3	useCount	INFERRED	element count of the block's use vector	^\s*if\ \(uVar6\ <\ uVar3\)\ \{$	+1
+local	FUN_00174b04	piVar4	blockSlot	INFERRED	address of the block pointer at the scan index
+use	FUN_00174b04	iVar5	blockByteOffset	INFERRED	scan index * 4	^\s*iVar5\ =\ param_2\ <<\ 2;$	+1
+use	FUN_00174b04	iVar5	blockByteOffset	INFERRED	scan index * 4	^\s*piVar4\ =\ \(int\ \*\)\(iVar5\ \+\ puVar11\[2\]\);$	+1
+use	FUN_00174b04	iVar5	blockByteOffset	INFERRED	scan index * 4	^\s*iVar5\ =\ iVar5\ \+\ \-4;$	+1
+use	FUN_00174b04	iVar5	targetState	INFERRED	state record at target +0x6c4 whose counter at +0xa8 is incremented	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+2
+use	FUN_00174b04	iVar5	operandRecordBase	INFERRED	operand record address inside currentInst	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar9\ \+\ 0x80;$	+2
+local	FUN_00174b04	iVar7	blockUseVector	INFERRED	use vector of the block at +0xc4
+local	FUN_00174b04	uVar8	sourceBitIndex	INFERRED	bit index (piVar2[7]) tested in the block bit vector
+local	FUN_00174b04	iVar9	operandByteOffset	INFERRED	0x18-stride byte offset of the current operand
+local	FUN_00174b04	uVar12	blockIndex	INFERRED	descending block scan index
+local	FUN_00174b04	uVar13	usesLeft	INFERRED	countdown over the block's use vector
+local	FUN_00148d8c	cVar2	laneSelectByte	INFERRED	select byte read for the current lane
+local	FUN_00148d8c	bVar3	laneSourceLane	INFERRED	source lane byte from the operand select
+local	FUN_00148d8c	uVar4	operandNegateBit	INFERRED	bit 0 of the inst operand modifier word (+0xb8)
+local	FUN_00148d8c	uVar9	operandAbsBit	INFERRED	bit 1 of the inst operand modifier word (+0xb8)
+use	FUN_00148d8c	iVar5	checkResult	INFERRED	condition chain results: select tests and FUN_0010497c	^\s*iVar5\ =\ FUN_000f3824\(local_54\);$	+6
+use	FUN_00148d8c	iVar7	producerCheck	INFERRED	one register: vtable +0x24, FUN_0010497c and FUN_00147398 results in one condition chain	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x24\)\)\(piVar6\);$	+3
+use	FUN_00148d8c	iVar7	countdown	INFERRED	lane countdown while searching for the producer	^\s*iVar7\ =\ iVar5;$	+1
+use	FUN_00148d8c	iVar7	countdown	INFERRED	lane countdown while searching for the producer	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
+use	FUN_00148d8c	iVar7	operandCountResult	INFERRED	vtable +0x14 operand count of the producer	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x14\)\)\(piVar8\);$	+2
+use	FUN_00148d8c	iVar7	operandCountResult	INFERRED	vtable +0x14 operand count of the producer	^\s*if\ \(\(uVar4\ !=\ 0\)\ \|\|\ \(iVar7\ =\ FUN_000f5e8c\(piVar8,1\),\ iVar7\ ==\ 0\)\)\ \{$	+1
+local	FUN_00148d8c	piVar10	operandModifierCursor	INFERRED	walks the operand modifier words of the producer (stride 6 words)
+use	FUN_00148d8c	iVar11	producerOpcode	INFERRED	opcode of the producer	^\s*iVar11\ =\ \*\(int\ \*\)\(piVar8\[0x22\]\ \+\ 8\);$	+1
+use	FUN_00148d8c	iVar11	producerOpcode	INFERRED	opcode of the producer	^\s*else\ if\ \(iVar11\ ==\ 0x13\)\ \{$	+1
+use	FUN_00148d8c	iVar11	producerOpcode	INFERRED	opcode of the producer	^\s*else\ if\ \(iVar11\ ==\ 0x12\)\ \{$	+1
+use	FUN_00148d8c	iVar11	producerOpcode	INFERRED	opcode of the producer	^\s*else\ if\ \(iVar11\ \-\ 0x24U\ <\ 3\)\ \{$	+1
+local	FUN_00148d8c	local_4c	laneProducerInsts	INFERRED	producer inst of each of the four lanes (or null)
