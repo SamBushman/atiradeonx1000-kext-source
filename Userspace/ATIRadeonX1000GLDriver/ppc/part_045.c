@@ -4352,53 +4352,56 @@ int FUN_00173018(ctx)
   int ctx;
 {
   int operandRecord;
-  int *piVar1;
-  undefined4 uVar2;
-  char cVar3;
-  int iVar4;
+  int *keyPtr;
+  undefined4 laneMapValue;
+  char firstEqualLane;
+  int innerKeyCursor;
+  int lanesLeft;
+  int producerInst;
   undefined4 inst;
   int loopIndex;
-  int iVar7;
-  int iVar8;
-  undefined4 local_28;
+  int programStats;
+  int outerKeyCursor;
+  int innerCountdown;
+  undefined4 laneMapWord;
   
-  local_28 = DAT_001b01bc;
+  laneMapWord = DAT_001b01bc;
   loopIndex = 1;
-  iVar7 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
-  *(int *)(iVar7 + 0xa8) = *(int *)(iVar7 + 0xa8) + 1;
-  iVar7 = ctx;
+  programStats = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
+  *(int *)(programStats + 0xa8) = *(int *)(programStats + 0xa8) + 1;
+  outerKeyCursor = ctx;
   do {
-    if (*(int *)(ctx + 0x20) == *(int *)(iVar7 + 0x24)) {
-      cVar3 = '\0';
+    if (*(int *)(ctx + 0x20) == *(int *)(outerKeyCursor + 0x24)) {
+      firstEqualLane = '\0';
     }
     else {
-      cVar3 = '\0';
-      iVar4 = ctx;
-      iVar8 = loopIndex;
+      firstEqualLane = '\0';
+      innerKeyCursor = ctx;
+      innerCountdown = loopIndex;
       do {
-        cVar3 = cVar3 + '\x01';
-        iVar8 = iVar8 + -1;
-        if (iVar8 == 0) goto LAB_001730b4;
-        piVar1 = (int *)(iVar4 + 0x24);
-        iVar4 = iVar4 + 4;
-      } while (*piVar1 != *(int *)(iVar7 + 0x24));
+        firstEqualLane = firstEqualLane + '\x01';
+        innerCountdown = innerCountdown + -1;
+        if (innerCountdown == 0) goto LAB_001730b4;
+        keyPtr = (int *)(innerKeyCursor + 0x24);
+        innerKeyCursor = innerKeyCursor + 4;
+      } while (*keyPtr != *(int *)(outerKeyCursor + 0x24));
     }
-    iVar4 = *(int *)(ctx + 0xb0);
-    *(char *)((int)&local_28 + loopIndex) = cVar3;
-    *(undefined1 *)(loopIndex + iVar4 + 0x9c) = 1;
+    producerInst = *(int *)(ctx + 0xb0);
+    *(char *)((int)&laneMapWord + loopIndex) = firstEqualLane;
+    *(undefined1 *)(loopIndex + producerInst + 0x9c) = 1;
 LAB_001730b4:
-    iVar4 = 4 - loopIndex;
+    lanesLeft = 4 - loopIndex;
     do {
       loopIndex = loopIndex + 1;
-      iVar7 = iVar7 + 4;
-      iVar4 = iVar4 + -1;
-      if (iVar4 == 0) {
+      outerKeyCursor = outerKeyCursor + 4;
+      lanesLeft = lanesLeft + -1;
+      if (lanesLeft == 0) {
         inst = IRMov__new_1084b8(0x31,*(undefined4 *)(ctx + 0x238));
         IRInst__setOperandRef(inst,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
         IRInst__setOperandRef(inst,1,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-        uVar2 = local_28;
+        laneMapValue = laneMapWord;
         operandRecord = IRInst__getOperandRecord(inst,1);
-        *(undefined4 *)(operandRecord + 0x10) = uVar2;
+        *(undefined4 *)(operandRecord + 0x10) = laneMapValue;
         Block__insertInstAfter(*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158),*(int *)(ctx + 0xb0),
                      inst);
         IRInst__bindOperandRegisters(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),inst);

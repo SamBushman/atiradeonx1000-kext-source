@@ -5276,25 +5276,27 @@ int FUN_001415a4(packCtx, inst, newSource)
 }
 
 /* FUN_001416b4 @ 0x1416b4 (508 bytes) */
-int FUN_001416b4(param_1, inst, inst2, param_4)
-  undefined4 param_1;
+int FUN_001416b4(packCtx, inst, inst2, checkExtraSource)
+  undefined4 packCtx;
   int inst;
   int inst2;
-  int param_4;
+  int checkExtraSource;
 {
   int isBeforeOrSameResultB;
   int isBeforeOrSameResult;
   int operandIndex;
   int sourceDef;
   int loopIndex;
-  int iVar1;
+  int operandLimitA;
+  int operandLimitB;
   int operandVReg;
   undefined4 operandVReg2;
   uint vectorFilledCount;
-  int *piVar5;
-  int iVar6;
+  int *userSlot;
+  int operandCountA;
+  int operandCountB;
   uint loopIndex2;
-  uint *puVar8;
+  uint *usersVector;
   
   isBeforeOrSameResult = Inst__isBeforeOrSame(inst,inst2);
   if (isBeforeOrSameResult == 0) {
@@ -5302,16 +5304,16 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
     if (isBeforeOrSameResult == 0) {
       return 0;
     }
-    iVar6 = *(int *)(inst + 0x84);
-    iVar1 = iVar6;
+    operandCountA = *(int *)(inst + 0x84);
+    operandLimitA = operandCountA;
     if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
-      iVar1 = iVar6 + -1;
-      sourceDef = IRInst__getOperandSource(inst,iVar6);
-      if ((param_4 != 0) && (inst2 == sourceDef)) {
+      operandLimitA = operandCountA + -1;
+      sourceDef = IRInst__getOperandSource(inst,operandCountA);
+      if ((checkExtraSource != 0) && (inst2 == sourceDef)) {
         return 0;
       }
     }
-    if (0 < iVar1) {
+    if (0 < operandLimitA) {
       loopIndex = 1;
       do {
         operandVReg = IRInst__getOperandSource(inst,loopIndex);
@@ -5319,43 +5321,43 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
           return 0;
         }
         loopIndex = loopIndex + 1;
-      } while (loopIndex <= iVar1);
+      } while (loopIndex <= operandLimitA);
     }
-    puVar8 = *(uint **)(inst2 + 0x10);
-    vectorFilledCount = puVar8[1];
+    usersVector = *(uint **)(inst2 + 0x10);
+    vectorFilledCount = usersVector[1];
     if (vectorFilledCount != 0) {
       loopIndex2 = 0;
       do {
-        if (loopIndex2 < *puVar8) {
+        if (loopIndex2 < *usersVector) {
           if (vectorFilledCount <= loopIndex2) {
-            _memset(vectorFilledCount * 4 + puVar8[2],0,(loopIndex2 - vectorFilledCount) * 4 + 4);
-            puVar8[1] = loopIndex2 + 1;
+            _memset(vectorFilledCount * 4 + usersVector[2],0,(loopIndex2 - vectorFilledCount) * 4 + 4);
+            usersVector[1] = loopIndex2 + 1;
           }
-          piVar5 = (int *)(loopIndex2 * 4 + puVar8[2]);
+          userSlot = (int *)(loopIndex2 * 4 + usersVector[2]);
         }
         else {
-          piVar5 = (int *)Vector__elementRefGrow(puVar8,loopIndex2);
+          userSlot = (int *)Vector__elementRefGrow(usersVector,loopIndex2);
         }
-        if ((*piVar5 != 0) && (iVar1 = Inst__isBeforeOrSame(inst,*piVar5), iVar1 == 0)) {
+        if ((*userSlot != 0) && (operandLimitA = Inst__isBeforeOrSame(inst,*userSlot), operandLimitA == 0)) {
           return 0;
         }
-        puVar8 = *(uint **)(inst2 + 0x10);
+        usersVector = *(uint **)(inst2 + 0x10);
         loopIndex2 = loopIndex2 + 1;
-        vectorFilledCount = puVar8[1];
+        vectorFilledCount = usersVector[1];
       } while (loopIndex2 < vectorFilledCount);
     }
   }
   else {
-    iVar6 = *(int *)(inst2 + 0x84);
-    iVar1 = iVar6;
+    operandCountB = *(int *)(inst2 + 0x84);
+    operandLimitB = operandCountB;
     if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
-      iVar1 = iVar6 + -1;
-      sourceDef = IRInst__getOperandSource(inst2,iVar6);
-      if ((param_4 != 0) && (inst == sourceDef)) {
+      operandLimitB = operandCountB + -1;
+      sourceDef = IRInst__getOperandSource(inst2,operandCountB);
+      if ((checkExtraSource != 0) && (inst == sourceDef)) {
         return 0;
       }
     }
-    if (0 < iVar1) {
+    if (0 < operandLimitB) {
       loopIndex = 1;
       do {
         operandVReg = IRInst__getOperandSource(inst2,loopIndex);
@@ -5363,7 +5365,7 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
           return 0;
         }
         loopIndex = loopIndex + 1;
-      } while (loopIndex <= iVar1);
+      } while (loopIndex <= operandLimitB);
     }
     if (0 < *(int *)(inst2 + 0x84)) {
       operandIndex = 1;
@@ -6794,21 +6796,21 @@ int FUN_00143664(param_1, inst, inst2, param_4, param_5)
 }
 
 /* PostPack__buildCandidate @ 0x1436b4 (168 bytes) */
-int PostPack__buildCandidate(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 *param_4;
+int PostPack__buildCandidate(packCtx, inst, inst2, candidate)
+  undefined4 packCtx;
+  undefined4 inst;
+  undefined4 inst2;
+  undefined4 *candidate;
 {
-  int iVar1;
+  int stepResult;
   
-  *param_4 = param_2;
-  param_4[1] = param_3;
-  iVar1 = ((int (*)())FUN_00140e7c)(param_1,param_2,param_3);
-  if ((((iVar1 != 0) &&
-       (iVar1 = ((int (*)())FUN_00143664)(param_1,param_2,param_3,param_4 + 2,param_4 + 3), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())PostPack__canPairInEitherOrder)(param_1,param_2,param_3,param_4 + 4), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_00141930)(param_1,param_2,param_3,param_4 + 5), iVar1 != 0)) {
+  *candidate = inst;
+  candidate[1] = inst2;
+  stepResult = ((int (*)())FUN_00140e7c)(packCtx,inst,inst2);
+  if ((((stepResult != 0) &&
+       (stepResult = ((int (*)())FUN_00143664)(packCtx,inst,inst2,candidate + 2,candidate + 3), stepResult != 0)) &&
+      (stepResult = ((int (*)())PostPack__canPairInEitherOrder)(packCtx,inst,inst2,candidate + 4), stepResult != 0)) &&
+     (stepResult = ((int (*)())FUN_00141930)(packCtx,inst,inst2,candidate + 5), stepResult != 0)) {
     return 1;
   }
   return 0;

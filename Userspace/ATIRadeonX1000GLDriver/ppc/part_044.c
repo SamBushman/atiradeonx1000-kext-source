@@ -82,23 +82,23 @@ LAB_00158b3c:
 }
 
 /* FUN_00158b78 @ 0x158b78 (196 bytes) */
-int FUN_00158b78(param_1, param_2, inst, param_4, param_5, param_6)
-  undefined4 param_1;
-  int *param_2;
+int FUN_00158b78(ctx, producer, inst, program, unusedArg, laneMask)
+  undefined4 ctx;
+  int *producer;
   undefined4 inst;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 program;
+  undefined4 unusedArg;
+  undefined4 laneMask;
 {
-  int iVar1;
+  int vcall64OrDelta;
   int callResult;
   
-  iVar1 = (**(code **)(*param_2 + 100))(param_2,param_2,inst,param_4,param_5,param_6);
-  if ((((iVar1 != 0) && (param_2[0x48] == 0)) && ((param_2[5] & 0x200U) == 0)) &&
-     ((iVar1 = param_2[0x49], iVar1 != 0 &&
-      (callResult = FUN_0015800c(param_1,inst,iVar1,param_5,param_6,param_4), callResult != 0)))) {
-    ((int (*)())FUN_00158988)(param_2,inst,iVar1,param_5,param_6,param_4);
-    param_2[0x49] = 0;
+  vcall64OrDelta = (**(code **)(*producer + 100))(producer,producer,inst,program,unusedArg,laneMask);
+  if ((((vcall64OrDelta != 0) && (producer[0x48] == 0)) && ((producer[5] & 0x200U) == 0)) &&
+     ((vcall64OrDelta = producer[0x49], vcall64OrDelta != 0 &&
+      (callResult = FUN_0015800c(ctx,inst,vcall64OrDelta,unusedArg,laneMask,program), callResult != 0)))) {
+    ((int (*)())FUN_00158988)(producer,inst,vcall64OrDelta,unusedArg,laneMask,program);
+    producer[0x49] = 0;
   }
   return;
 }
@@ -7422,14 +7422,16 @@ int Scheduler__computeBlockRegisterSets(scheduler)
   uint *setWord2;
   bool changed;
   uint registerId;
-  int *piVar5;
+  int *liveInCursorCopy;
   int program;
   undefined4 *allocation;
-  int iVar8;
+  int programOrCount;
+  int nextBlockLink;
   int operandIndex2;
   int *followingInst;
-  int iVar11;
-  int iVar12;
+  int vcall5cResultB;
+  int liveOutWordCursor;
+  int wordsLeftCopy;
   int isPhi3;
   undefined4 *bitSet;
   int *predBlockRef;
@@ -7488,12 +7490,12 @@ int Scheduler__computeBlockRegisterSets(scheduler)
     program = scheduler[1];
   }
   *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
-  iVar8 = scheduler[1];
-  nextBlock = *(int *)(*(int *)(iVar8 + 900) + 8);
-  block = *(int *)(iVar8 + 900);
+  programOrCount = scheduler[1];
+  nextBlock = *(int *)(*(int *)(programOrCount + 900) + 8);
+  block = *(int *)(programOrCount + 900);
   if (nextBlock != 0) {
     do {
-      iVar8 = nextBlock;
+      nextBlockLink = nextBlock;
       nextInst = (int *)(*(int **)(block + 0x98))[2];
       inst = *(int **)(block + 0x98);
       if (nextInst != (int *)0x0) {
@@ -7512,10 +7514,10 @@ int Scheduler__computeBlockRegisterSets(scheduler)
                   operandIndex2 = 1;
                   do {
                     mixSource = (int *)IRInst__getOperandSource(sourceDef,operandIndex2);
-                    iVar11 = (**(code **)(*mixSource + 0x5c))(mixSource);
-                    if (iVar11 == 0) {
+                    vcall5cResultB = (**(code **)(*mixSource + 0x5c))(mixSource);
+                    if (vcall5cResultB == 0) {
                       if (((mixSource[5] & 0x40U) != 0) &&
-                         (iVar11 = RegKind__flagBit0(mixSource[0x26]), iVar11 != 0)) {
+                         (vcall5cResultB = RegKind__flagBit0(mixSource[0x26]), vcall5cResultB != 0)) {
                         isPhi2 = (**(code **)(*inst + 0x7c))(inst);
                         if (isPhi2 == 0) {
                           registerId = mixSource[0x25];
@@ -7585,21 +7587,21 @@ int Scheduler__computeBlockRegisterSets(scheduler)
           nextInst = (int *)followingInst[2];
           inst = followingInst;
         } while ((int *)followingInst[2] != (int *)0x0);
-        iVar8 = *(int *)(block + 8);
+        nextBlockLink = *(int *)(block + 8);
       }
-      nextBlock = *(int *)(iVar8 + 8);
-      block = iVar8;
-    } while (*(int *)(iVar8 + 8) != 0);
-    iVar8 = scheduler[1];
+      nextBlock = *(int *)(nextBlockLink + 8);
+      block = nextBlockLink;
+    } while (*(int *)(nextBlockLink + 8) != 0);
+    programOrCount = scheduler[1];
   }
-  blockArray = Program__getBlocksArray(iVar8);
+  blockArray = Program__getBlocksArray(programOrCount);
   do {
     changed = false;
-    for (blockNumber = 1; iVar8 = DList__count(scheduler[1] + 0x37c), blockNumber <= iVar8; blockNumber = blockNumber + 1)
+    for (blockNumber = 1; programOrCount = DList__count(scheduler[1] + 0x37c), blockNumber <= programOrCount; blockNumber = blockNumber + 1)
     {
       blockRecord = *(int **)(blockArray + blockNumber * 4);
-      iVar8 = (**(code **)(*blockRecord + 0x20))(blockRecord);
-      if (iVar8 == 0) {
+      programOrCount = (**(code **)(*blockRecord + 0x20))(blockRecord);
+      if (programOrCount == 0) {
         successorByteOffset = 0;
         for (successorNumber = 1; successorNumber <= *(uint *)(blockRecord[0x34] + 4); successorNumber = successorNumber + 1) {
           successorBlock = *(int *)(*(int *)(blockRecord[0x34] + 8) + successorByteOffset);
@@ -7623,20 +7625,20 @@ int Scheduler__computeBlockRegisterSets(scheduler)
           successorByteOffset = successorByteOffset + 4;
         }
         liveInCursor = (int *)blockRecord[0x40];
-        iVar8 = blockRecord[0x41];
+        programOrCount = blockRecord[0x41];
         wordsLeft = *liveInCursor;
         if (wordsLeft != 0) {
-          iVar11 = iVar8;
-          piVar5 = liveInCursor;
-          iVar12 = wordsLeft;
-          if ((liveInCursor[2] | *(uint *)(iVar8 + 8)) == liveInCursor[2]) {
+          liveOutWordCursor = programOrCount;
+          liveInCursorCopy = liveInCursor;
+          wordsLeftCopy = wordsLeft;
+          if ((liveInCursor[2] | *(uint *)(programOrCount + 8)) == liveInCursor[2]) {
             do {
-              if (iVar12 + -1 == 0) goto LAB_001655a8;
-              setWord = (uint *)(piVar5 + 3);
-              setWord2 = (uint *)(iVar11 + 0xc);
-              iVar11 = iVar11 + 4;
-              piVar5 = piVar5 + 1;
-              iVar12 = iVar12 + -1;
+              if (wordsLeftCopy + -1 == 0) goto LAB_001655a8;
+              setWord = (uint *)(liveInCursorCopy + 3);
+              setWord2 = (uint *)(liveOutWordCursor + 0xc);
+              liveOutWordCursor = liveOutWordCursor + 4;
+              liveInCursorCopy = liveInCursorCopy + 1;
+              wordsLeftCopy = wordsLeftCopy + -1;
             } while ((*setWord | *setWord2) == *setWord);
           }
           if (wordsLeft != 0) {
@@ -7644,8 +7646,8 @@ int Scheduler__computeBlockRegisterSets(scheduler)
               wordsLeft = 1;
             }
             do {
-              setWord = (uint *)(iVar8 + 8);
-              iVar8 = iVar8 + 4;
+              setWord = (uint *)(programOrCount + 8);
+              programOrCount = programOrCount + 4;
               liveInCursor[2] = liveInCursor[2] | *setWord;
               liveInCursor = liveInCursor + 1;
               wordsLeft = wordsLeft + -1;
