@@ -1689,7 +1689,7 @@ dispatchOpcodeCase53:
 checkX14:
   if (*(int *)(iVar4 + 0x14) != 0) {
 switchD_000e61ac_caseD_a:
-    DAT_001fa620 = tokenCount;
+    ilReaderTokenCount_001fa620 = tokenCount;
     ilReader[0xd] = ilReader[0xd] + 1;
     return 1;
   }

@@ -9225,15 +9225,15 @@ int gld_postDisplayNotification(ctx)
   driverNotificationObject = _CFStringCreateWithCString(0,"com.ati.ati_gl_driver",0x600);
   if (displaysNotificationName == 0) goto checkDisplaysNotificationObject;
   if ((((displaysNotificationObject != 0) && (pidKey != 0)) && (displayMaskKey != 0)) && ((driverNotificationName != 0 && (driverNotificationObject != 0)))) {
-    _CFNotificationCenterAddObserver(distributedCenter,ctx,PTR_FUN_001e88c4,displaysNotificationName,displaysNotificationObject,2);
+    _CFNotificationCenterAddObserver(distributedCenter,ctx,ptrTo_gldDisplayNotificationCallback_001e88c4,displaysNotificationName,displaysNotificationObject,2);
     dictKeyPid = pidKey;
     dictValuePid = _CFNumberCreate(0,3,ctx + 0x2a60);
     scratchStack44 = displayMaskKey;
     scratchStack3c = _CFNumberCreate(0,3,ctx + 0x2a64);
     if (dictValuePid != 0) {
       if (scratchStack3c != 0) {
-        userInfo = _CFDictionaryCreate(*(undefined4 *)PTR_001e88c0,&dictKeyPid,&dictValuePid,2,PTR_001e88b8,
-                                    PTR_001e88bc);
+        userInfo = _CFDictionaryCreate(*(undefined4 *)ptrTo_kCFAllocatorDefault_001e88c0,&dictKeyPid,&dictValuePid,2,ptrTo_kCFCopyStringDictionaryKeyCallBacks_001e88b8,
+                                    ptrTo_kCFTypeDictionaryValueCallBacks_001e88bc);
         if (userInfo != 0) {
           _CFNotificationCenterPostNotification(distributedCenter,driverNotificationName,driverNotificationObject,userInfo,1);
           _CFRelease(userInfo);
@@ -10215,7 +10215,7 @@ checkCtx:
       ((int (*)())gld_drawPixelsDispatch)(ctx,rasterPos,width,height,scratchUint32,scratchPtr42,scratchInt34,1,0);
                     
                     
-      (*(code *)PTR_FUN_001e8754)(scratchInt34);
+      (*(code *)lazyPtrTo_free_001e8754)(scratchInt34);
       return;
     }
   }

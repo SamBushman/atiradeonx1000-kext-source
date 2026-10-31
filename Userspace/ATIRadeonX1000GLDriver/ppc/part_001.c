@@ -236,7 +236,7 @@ loopSetOutCount:
       status = rendererIndex * 4;
       if (*(int *)(PTR_DAT_001e88ac + status + 0x18) == 0) {
         status = _IOServiceOpen(*(undefined4 *)(*(int *)(PTR_DAT_001e88ac + 8) + status),
-                               *(undefined4 *)PTR_001e88b4,0,PTR_DAT_001e88ac + status + 0x18);
+                               *(undefined4 *)ptrTo_machTaskSelf_001e88b4,0,PTR_DAT_001e88ac + status + 0x18);
         if (status != 0) goto returnCode2;
         rendererIndex = *ctx;
       }
@@ -354,7 +354,7 @@ int _gldCreateFence(ctx, fenceOut)
   fence = (int *)_malloc(8);
   fence[1] = 0;
   *fence = 0;
-  taskPtr = PTR_001e88b4;
+  taskPtr = ptrTo_machTaskSelf_001e88b4;
   do {
     scanCounter = *(uint *)(ctx + GLD_statusRegionSize) >> 8;
     if (scanCounter != 0) {
@@ -1303,7 +1303,7 @@ setServiceList:
         if (listCount == 0) break;
       } while (offsetOrService != serviceList[rendererIndex]);
     }
-    listCount = _IOServiceOpen(offsetOrService,*(undefined4 *)PTR_001e88b4,1,&connection);
+    listCount = _IOServiceOpen(offsetOrService,*(undefined4 *)ptrTo_machTaskSelf_001e88b4,1,&connection);
     returnCode = 0x271f;
     if (listCount == 0) {
       outCount = 3;

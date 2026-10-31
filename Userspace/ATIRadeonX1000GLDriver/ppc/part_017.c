@@ -3088,22 +3088,22 @@ int gld_updateTexCombinerState(glContext, unusedArgR4, dirtyBitsArg, scratchR6, 
             }
             slotCodeBits = 0;
             if (texCombineStateWord != 0) {
-              slotCodeBits = *(uint *)(&DAT_001dbf70 +
+              slotCodeBits = *(uint *)(&texCombinerSlotCodeTable_001dbf70 +
                                 (*(ushort *)(envBlockCursor + 0x48c) >> 2 & 4 |
                                 *(ushort *)(envBlockCursor + 0x48c) & 3) * 4);
             }
             if (slot1Enabled != 0) {
-              slotCodeBits = slotCodeBits | *(int *)(&DAT_001dbf70 +
+              slotCodeBits = slotCodeBits | *(int *)(&texCombinerSlotCodeTable_001dbf70 +
                                         (*(ushort *)(envBlockCursor + 0x4b0) >> 2 & 4 |
                                         *(ushort *)(envBlockCursor + 0x4b0) & 3) * 4) << 3;
             }
             if (slot2Enabled != 0) {
-              slotCodeBits = slotCodeBits | *(int *)(&DAT_001dbf70 +
+              slotCodeBits = slotCodeBits | *(int *)(&texCombinerSlotCodeTable_001dbf70 +
                                         (*(ushort *)(envBlockCursor + 0x4d4) >> 2 & 4 |
                                         *(ushort *)(envBlockCursor + 0x4d4) & 3) * 4) << 6;
             }
             if (slotEnableBits >> 8 != 0) {
-              slotCodeBits = slotCodeBits | *(int *)(&DAT_001dbf70 +
+              slotCodeBits = slotCodeBits | *(int *)(&texCombinerSlotCodeTable_001dbf70 +
                                         (*(ushort *)(envBlockCursor + 0x4f8) >> 2 & 4 |
                                         *(ushort *)(envBlockCursor + 0x4f8) & 3) * 4) << 9;
             }

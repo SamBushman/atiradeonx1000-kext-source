@@ -2411,9 +2411,9 @@ int R300SchedModel__vslot26(this, inst, operandNumber, selectsOut, groupCount)
   if (selectIsNative == 0) {
     tableRow = ((selectWord >> 0x18) * 0x7d + (selectWord >> 0x10 & 0xff) * 0x19 + (selectWord >> 8 & 0xff) * 5 +
             (selectWord & 0xff)) * 4;
-    for (tableEntry = *(int *)(&DAT_001b0240 + (tableRow + *groupCount) * 4); tableEntry != 0x4040404;
-        tableEntry = *(int *)(&DAT_001b0240 + (tableRow + tableEntry + 1) * 4)) {
-      entryWord = *(uint *)(&DAT_001b0240 + (tableRow + *groupCount) * 4);
+    for (tableEntry = *(int *)(&r300SchedGroupTable_001b0240 + (tableRow + *groupCount) * 4); tableEntry != 0x4040404;
+        tableEntry = *(int *)(&r300SchedGroupTable_001b0240 + (tableRow + tableEntry + 1) * 4)) {
+      entryWord = *(uint *)(&r300SchedGroupTable_001b0240 + (tableRow + *groupCount) * 4);
       *(uint *)(*groupCount * 4 + selectsOut) =
            entryWord << 0x18 | (entryWord & 0xff00) << 8 | entryWord >> 8 & 0xff00 | entryWord >> 0x18;
       tableEntry = *groupCount;

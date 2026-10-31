@@ -1,0 +1,210 @@
+# round r07: GLDriver data labels whose role the code states - table families (texture format, fragment opcode info, state defaults, vertex type tables, R300 assembler tables, ValueKey class tables), copied constants named by the local they initialise, ffvp 4-word swizzle arrays (swizzleWords<lanes>_<addr>, lane words _laneN) and the remaining bss/dyld words
+data	DAT_001aa4b0	dispatchDefaultState0_001aa4b0	INFERRED	copied into `defaultState0` by _gldInitDispatch
+data	DAT_001aa4b4	dispatchDefaultState1_001aa4b4	INFERRED	copied into `defaultState1` by _gldInitDispatch
+data	DAT_001aa4b8	dispatchDefaultState2_001aa4b8	INFERRED	copied into `defaultState2` by _gldInitDispatch
+data	DAT_001aa4bc	dispatchDefaultState3_001aa4bc	INFERRED	copied into `defaultState3` by _gldInitDispatch
+data	DAT_001aa4c0	dispatchDefaultState4_001aa4c0	INFERRED	copied into `defaultState4` by _gldInitDispatch
+data	DAT_001aa4e8	contextInitParam0_001aa4e8	INFERRED	copied into `initParam0` by gld_initContextHardwareState (the block passed to gld_validateDirtyState)
+data	DAT_001aa4ec	contextInitParam1_001aa4ec	INFERRED	copied into `initParam1` by gld_initContextHardwareState (the block passed to gld_validateDirtyState)
+data	DAT_001aa4f0	contextInitParam2_001aa4f0	INFERRED	copied into `initParam2` by gld_initContextHardwareState (the block passed to gld_validateDirtyState)
+data	DAT_001aa4f4	contextInitParam3_001aa4f4	INFERRED	copied into `initParam3` by gld_initContextHardwareState (the block passed to gld_validateDirtyState)
+data	DAT_001aa4f8	contextInitParam4_001aa4f8	INFERRED	copied into `initParam4` by gld_initContextHardwareState (the block passed to gld_validateDirtyState)
+data	DAT_001aa4fc	queryResultInit0_001aa4fc	INFERRED	zero word copied into `queryResult0` by gld_initContextHardwareState
+data	DAT_001aa500	queryResultInit1_001aa500	INFERRED	zero word copied into `queryResult1` by gld_initContextHardwareState
+data	DAT_001aa504	queryResultInit2_001aa504	INFERRED	zero word copied into `queryResult2` by gld_initContextHardwareState
+data	DAT_001aa508	queryResultInit3_001aa508	INFERRED	zero word copied into `queryResult3` by gld_initContextHardwareState
+data	DAT_001aa50c	queryResultInit4_001aa50c	INFERRED	zero word copied into `queryResult4` by gld_initContextHardwareState
+data	DAT_001aa510	samplerAnisotropyBitsTable_001aa510	INFERRED	word table indexed by an anisotropy level (`*(int *)(ctx + 0x2a90)`), masked with & 7 and shifted << 0x15 into the sampler word by gld_applyAnisotropyOverride; also read by gld_buildTextureHardwareState and gld_updateTextureSamplerState
+data	DAT_001aa554	alphaIndexRemapEntry0_001aa554	CONFIRMED	copied into `indexRemapTable[0]` by gld_compressAlphaBlock
+data	DAT_001aa558	alphaIndexRemapEntry1_001aa558	CONFIRMED	copied into `indexRemapTable[1]` by gld_compressAlphaBlock
+data	DAT_001aa55c	alphaIndexRemapEntry2_001aa55c	CONFIRMED	copied into `indexRemapTable[2]` by gld_compressAlphaBlock
+data	DAT_001aa560	alphaIndexRemapEntry3_001aa560	CONFIRMED	copied into `indexRemapTable[3]` by gld_compressAlphaBlock
+data	DAT_001aa564	alphaIndexRemapEntry4_001aa564	CONFIRMED	copied into `indexRemapTable[4]` by gld_compressAlphaBlock
+data	DAT_001aa568	alphaIndexRemapEntry5_001aa568	CONFIRMED	copied into `indexRemapTable[5]` by gld_compressAlphaBlock
+data	DAT_001aa56c	alphaIndexRemapEntry6_001aa56c	CONFIRMED	copied into `indexRemapTable[6]` by gld_compressAlphaBlock
+data	DAT_001aa570	alphaIndexRemapEntry7_001aa570	CONFIRMED	copied into `indexRemapTable[7]` by gld_compressAlphaBlock
+data	DAT_001aa584	extvsStorageClassEntry0_001aa584	CONFIRMED	copied into `storageClassTable[0]` by extvsCreateVectorSymbolChain
+data	DAT_001aa588	extvsStorageClassEntry1_001aa588	CONFIRMED	copied into `storageClassTable[1]` by extvsCreateVectorSymbolChain
+data	DAT_001aa58c	extvsStorageClassEntry2_001aa58c	CONFIRMED	copied into `storageClassTable[2]` by extvsCreateVectorSymbolChain
+data	DAT_001aa5f0	recordOpcodeInfoTable_001aa5f0	INFERRED	word 0 of the record read as `*(int *)(&DAT_001aa5f0 + opcodeInfoOffset)` by recordProgramAllocateAndEmit; the following words (0x1aa5f4..0x1aa600) are read with the same opcodeInfoOffset
+data	DAT_001aa5f4	recordOpcodeInfoTable_word1_001aa5f4	INFERRED	word 1 of the recordOpcodeInfoTable record (compared with 1 and 2 in recordProgramAllocateAndEmit)
+data	DAT_001aa5f8	recordOpcodeInfoTable_srcOperandIndexA_001aa5f8	CONFIRMED	`srcOperandIndexA = *(uint *)(&DAT_001aa5f8 + opcodeInfoOffset)` in recordProgramBuildDependencies; also the first source operand index of recordProgramAllocateAndEmit
+data	DAT_001aa5fc	recordOpcodeInfoTable_srcOperandIndexB_001aa5fc	CONFIRMED	`srcOperandIndexB = *(uint *)(&DAT_001aa5fc + opcodeInfoOffset)` in recordProgramBuildDependencies
+data	DAT_001aa600	recordOpcodeInfoTable_word4_001aa600	INFERRED	byte flag read as `(DAT_001aa600)[opcodeInfoOffset] == 0` by recordProgramAllocateAndEmit
+data	DAT_001aa758	destRegisterFileByType_001aa758	INFERRED	byte table indexed by the destination type nibble (`recordWord0 >> 8 & 0xf`); the result times 0x100 plus the register index forms the register key in recordAssignDestinationRegister / recordRetargetDestination
+data	DAT_001aa760	srcRegisterFileByType_001aa760	INFERRED	byte table indexed by the source type nibble (`*record & 0xf`); the result times 0x100 plus the register index forms the register key in recordCountSourceRegisterFiles / recordRetireBindings
+data	DAT_001aa764	registerFileByRegIdHighByte_001aa764	INFERRED	byte table indexed by `newRegId >> 8` to give `newFileIndex` in recordRetargetDestination
+data	DAT_001aa7a8	primitiveInputRegisterTable_001aa7a8	INFERRED	word table indexed by `primitiveMode * 4` giving `primitiveTableWord` in gld_setPrimitiveInputRegisters
+data	DAT_001aa7d0	sampleCoverageTable_001aa7d0	INFERRED	read at `sampleTableOffset` into glContext + 0x1a6c by gld_updateSampleCoverage
+data	DAT_001aa7dc	samplePositionTable_001aa7dc	INFERRED	read at `sampleTableOffset` into `samplePositionWord` by gld_updateSampleCoverage
+data	DAT_001aa7e8	samplePatternTable_001aa7e8	INFERRED	read at `sampleTableOffset` into `samplePatternWord` by gld_updateSampleCoverage
+data	DAT_001aa86c	swizzleVariantStartTable_001aa86c	INFERRED	word table indexed by `(4 - variantStart) * 4`; an entry < 0xf selects the first variantTable row in ConstRecord__insertSwizzleVariants
+data	DAT_001aa87c	swizzleVariantTemplate_001aa87c	CONFIRMED	300-byte block copied into `variantTable` by `_memcpy(variantTable,&DAT_001aa87c,300)` in ConstRecord__insertSwizzleVariants
+data	DAT_001aa9e4	ilOpcodeTemplateOffsetTable_001aa9e4	CONFIRMED	`return *(undefined4 *)(&DAT_001aa9e4 + tableIndex * 4)` in OpcodeTemplate__tableOffsetForIlOpcode
+data	DAT_001aa9fc	setupLiteralFloatTable_001aa9fc	INFERRED	float table indexed by `setupLiteralIndex` (read as `*(float *)(&DAT_001aa9fc + setupLiteralIndex * 4)`) in Program__lowerDestinationToken
+data	DAT_001ac5a4	arbTypeTagTable_001ac5a4	INFERRED	table whose address is held as `typeTagTable` / `typeTagTableB` by arbValidateProgram
+data	DAT_001af9e0	outputScaleTable_001af9e0	INFERRED	float table (first entry 0.125) held as `scaleTablePtr` by isOutputScaleValue / outputScaleExponent
+data	DAT_001af9ec	outputScaleByExponent_001af9ec	CONFIRMED	`return (double)*(float *)(&DAT_001af9ec + exponent * 4)` in outputScaleFromExponent (entry 0 = 1.0)
+data	DAT_001aff4c	immediateConstantMultiples_001aff4c	INFERRED	float table (0.125, 0.25 ...) walked by `multipleCursor` in KhanPs__vslot75_registerConstantMultiples
+data	DAT_001affcc	laneWeightInit0_001affcc	CONFIRMED	copied into `laneWeights[0]` by KhanVs__vslot58_matchImmediateConstantCode
+data	DAT_001affc8	laneWeightInit1_001affc8	CONFIRMED	copied into `laneWeights[1]` by KhanVs__vslot58_matchImmediateConstantCode
+data	DAT_001affc4	laneWeightInit2_001affc4	CONFIRMED	copied into `laneWeights[2]` by KhanVs__vslot58_matchImmediateConstantCode
+data	DAT_001affc0	laneWeightInit3_001affc0	CONFIRMED	copied into `laneWeights[3]` by KhanVs__vslot58_matchImmediateConstantCode
+data	DAT_001b0160	componentToSelectWordTable_001b0160	INFERRED	word table indexed by `maskComponent` giving `maskSelect` in Inst__mergeComponentMovsIntoCnd
+data	DAT_001b0240	r300SchedGroupTable_001b0240	INFERRED	word table walked by `tableRow`/`tableEntry` until the 0x04040404 terminator in R300SchedModel__vslot26
+data	DAT_001b2ad0	r300DestRegTypeBitsTable_001b2ad0	INFERRED	word table indexed by `destRegType`; `& 0xf` goes into bits 8-11 of the instruction word in R300VMachineAssembler__encodeDestinationWord
+data	DAT_001b2be8	r300SwizzleLaneSelectTable_001b2be8	INFERRED	word table indexed by each swizzle byte (`effectiveSwizzle >> 0x18`, `>> 8 & 0xff`, `& 0xff`) giving `laneSelect[i]` in R300VMachineAssembler__encodeSourceOperand
+data	DAT_001b2c14	r300SrcRegClassBitsTable_001b2c14	INFERRED	word table indexed by `srcRegClass`; `& 7` goes into the low bits of the source word (also indexed by `loopIndex` with & 3 for the dual-math word) in R300VMachineAssembler
+data	DAT_001d91f0	vertexAttribBitTable_001d91f0	INFERRED	word table indexed by attribute index; `attrBit` / `(attrControlWord & table[hwAttrId])` in gld_validateVertexArrayStreams, gld_prepareVertexArrayBuffers and gld_buildVertexStreamLayout
+data	DAT_001d9dd8	vertexAttribBitTableCopy_001d9dd8	INFERRED	same indexing as vertexAttribBitTable (`scratchUint33 & *(uint *)(&DAT_001d9dd8 + hwAttrId * 4)`) in gld_buildVertexStreamCache
+data	DAT_001d9568	vertexTypeSignedTable_001d9568	INFERRED	word table indexed by vertex type; read as `signedFlag` in gld_validateVertexArrayStreams
+data	DAT_001d9594	vertexTypeFlagsTable_001d9594	INFERRED	word table indexed by type size offset; read as `typeFlags` in gld_validateVertexArrayStreams
+data	DAT_001d96f4	vertexTypeSupportedTable_001d96f4	INFERRED	word table indexed by vertex type (< 0xb); an entry of 1 is the precondition tested in gld_validateVertexArrayStreams
+data	DAT_001d9778	vertexAttrControlToHwAttrTable_001d9778	INFERRED	word table indexed by `attrControlWord >> 0xe & 0x3c`, giving `hwAttrId` in gld_buildVertexStreamLayout
+data	DAT_001d9eb0	vertexAttrControlToHwAttrTableCopy_001d9eb0	INFERRED	same indexing as vertexAttrControlToHwAttrTable, giving `attrsLeft` / `hwAttrId` in gld_buildVertexStreamCache
+data	DAT_001d9888	primitiveModeFlagsTable_001d9888	CONFIRMED	`primFlags = *(uint *)(&DAT_001d9888 + primitiveMode * 4)` in gld_drawArraysDirect / gld_drawArraysStream
+data	DAT_001d98b0	vertexTypeSwizzleSelectWTable_001d98b0	CONFIRMED	word table indexed by type size offset giving `swizzleSelectW` (& 0xff) in gld_buildVertexStreamCache
+data	DAT_001d9960	vertexTypeSwizzleSelectZTable_001d9960	CONFIRMED	word table indexed by type size offset giving `swizzleSelectZ` (& 0xff) in gld_buildVertexStreamCache
+data	DAT_001d9a10	vertexTypeSwizzleSelectYTable_001d9a10	CONFIRMED	word table indexed by type size offset giving `swizzleSelectY` (& 0xff) in gld_buildVertexStreamCache
+data	DAT_001d9ac0	vertexTypeSwizzleSelectXTable_001d9ac0	CONFIRMED	word table indexed by type size offset giving `swizzleSelectX` (& 0xff) in gld_buildVertexStreamCache
+data	DAT_001d9f34	textureFormatTable_001d9f34	CONFIRMED	base of the texture format table: records of 0x24 bytes, addressed as `&DAT_001d9f34 + formatEntryOffset` (gldTextureFormatEntryForLevel, gld_uploadTextureLevel, gldTextureMakeResident); `formatIndex * 0x24` in gld_texelBytes
+data	DAT_001d9f3c	textureFormatTable_field08_001d9f3c	INFERRED	field at record offset 0x08 of the 0x24-byte texture format record: ushort read by gld_getTextureFormatInfo (`formatInfoOut`)
+data	DAT_001d9f3e	textureFormatTable_field0A_001d9f3e	INFERRED	field at record offset 0x0a of the 0x24-byte texture format record: ushort read as `hwFormatCode` by gld_getTextureFormatInfo
+data	DAT_001d9f40	textureFormatTable_field0C_001d9f40	INFERRED	field at record offset 0x0c of the 0x24-byte texture format record: mask ANDed into outDesc+0x24 by gldTextureFormatLookup
+data	DAT_001d9f44	textureFormatTable_field10_001d9f44	INFERRED	field at record offset 0x10 of the 0x24-byte texture format record: `formatFlags` of gld_getTextureFormatInfo (bits 0x3f0 tested, & 0x3f / >> 10 & 0x3f copied out)
+data	DAT_001d9f48	textureFormatTable_field14_001d9f48	CONFIRMED	field at record offset 0x14 of the 0x24-byte texture format record: texel size field: `1 << (*(uint *)(&DAT_001d9f48 + formatIndex * 0x24) & 7)` is the texel byte count returned by gld_texelBytes
+data	DAT_001d9f4c	textureFormatTable_field18_001d9f4c	INFERRED	field at record offset 0x18 of the 0x24-byte texture format record: bit fields (>> 0x17 & 0x1f, >> 0x1e, >> 0x14 & 7) unpacked by gldTextureFormatLookup
+data	DAT_001d9f50	textureFormatTable_field1C_001d9f50	INFERRED	field at record offset 0x1c of the 0x24-byte texture format record: read by glTexSubImage_impl (`scratchUint24`)
+data	DAT_001d9f54	textureFormatTable_field20_001d9f54	INFERRED	field at record offset 0x20 of the 0x24-byte texture format record: flag word (bit 0x1000000 tested) read by gldTextureFormatEntryForLevel and glTexSubImage_impl
+data	DAT_001d9fa0	textureFormatEntry3_001d9fa0	CONFIRMED	record 3 of the texture format table (0x1d9fa0 = base + 3 * 0x24), used as `formatEntry`/`formatInfo` by gld_uploadTextureLevel and gldTextureMakeResident
+data	DAT_001da00c	textureFormatEntry6_001da00c	CONFIRMED	record 6 of the texture format table (0x1da00c = base + 6 * 0x24), used as `formatEntry`/`formatInfo` by gld_uploadTextureLevel and gldTextureMakeResident
+data	DAT_001da054	textureFormatEntry8_001da054	CONFIRMED	record 8 of the texture format table (0x1da054 = base + 8 * 0x24), used as `formatEntry`/`formatInfo` by gld_uploadTextureLevel and gldTextureMakeResident
+data	DAT_001da1bc	textureFormatEntry18_001da1bc	CONFIRMED	record 18 of the texture format table (0x1da1bc = base + 18 * 0x24), used as `formatEntry`/`formatInfo` by gld_uploadTextureLevel and gldTextureMakeResident
+data	DAT_001da36c	textureFormatEntry30_001da36c	CONFIRMED	record 30 of the texture format table (0x1da36c = base + 30 * 0x24), used as `formatEntry`/`formatInfo` by gld_uploadTextureLevel and gldTextureMakeResident
+data	DAT_001dac00	fpilSwizzleComponentTable_001dac00	INFERRED	byte table indexed by each 3-bit component of `ilSwizzle` (`(byte)(DAT_001dac00)[ilSwizzle >> 0xc & 7] & 7`) in fpilTranslateSource
+data	DAT_001dac08	fpilSourceInfoTable_001dac08	INFERRED	word table indexed by source type bits (`srcWord >> 0x13 & 0xc`); bits >> 0x19 & 7 = component select, >> 0x18 & 1 = negate in fpilTranslateSource
+data	DAT_001dac34	fragmentOpcodeInfoTable_001dac34	CONFIRMED	base of the fragment opcode info table: records of 0x10 bytes addressed by `opcodeInfoOffset` in fragmentInstructionToIL; word 0 holds `opClass` (>> 0x11 & 0xf) and the IL opcode
+data	DAT_001dac38	fragmentOpcodeInfoTable_word1_001dac38	CONFIRMED	record word 1: `opcodeInfoWord1`; `>> 0x13` is the IL opcode of the second instruction in fragmentInstructionToIL
+data	DAT_001dac3c	fragmentOpcodeInfoTable_handler_001dac3c	CONFIRMED	record word 2 is called as a function: `(**(code **)(&DAT_001dac3c + opcodeInfoOffset))(translator,recordIndex,ilInstBPtr)` in fragmentInstructionToIL
+data	DAT_001dac40	fragmentOpcodeInfoTable_word3_001dac40	CONFIRMED	record word 3: flag bits (>> 0x1c, ^ 0x20000000 >> 0x1d & 1 = hasDestination) tested in fragmentInstructionToIL and fragmentTranslateSimpleOp
+data	DAT_001db348	stencilFuncBitsTable_001db348	CONFIRMED	`frontFuncBits` / `backFuncBits` = table[(stencil func) & 7] in gldValidateStencil
+data	DAT_001db368	depthFuncBitsTable_001db368	CONFIRMED	`table[(depthFunc & 7)] & 7` is merged into the depth test word in gldValidateDepthTest
+data	DAT_001db98c	textureUnitFormatArgTable_001db98c	INFERRED	word table indexed by the byte at glContext + 0x2941, giving `unitFormatArg` in gldValidateTextureUnits
+data	DAT_001dbea4	ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4	INFERRED	word table indexed by `programMode`, copied to ffvp builder + 1000 (0x3e8) by ffvpCreateBuilder
+data	DAT_001dbeac	ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac	INFERRED	word table indexed by `programMode`, copied to ffvp builder + 0x3e4 by ffvpCreateBuilder
+data	DAT_001dbf2c	unitBiasFieldBitsTable_001dbf2c	INFERRED	word table indexed by `field21Count`; `& 7` shifted << 0x15 into the unit bias register in gld_updateUnitBiasRegisters
+data	DAT_001dbf70	texCombinerSlotCodeTable_001dbf70	INFERRED	word table read into `slotCodeBits` by gld_updateTexCombinerState
+data	DAT_001dc58c	irClassMaskTable_001dc58c	INFERRED	word table with two words per class: `classComponentMask = DAT_001dc58c[registerClassIndex * 2]` (IRInst__computeSourceLaneMask) and `resultFlags = DAT_001dc58c[opcodeClassIndex * 2]` (IRInst__computeSourceReadMask)
+data	DAT_001dca64	KhanPsOpcodeTraits_001dca64	CONFIRMED	returned by KhanPs__getOpcodeTraits
+data	DAT_001df1fc	KhanVsOpcodeTraits_001df1fc	CONFIRMED	returned by KhanVs__getOpcodeTraits
+data	DAT_001e1994	vsHardwareTable_001e1994	INFERRED	stored at this + 0xc by both KhanVs__vslot96_installHardwareTables and FudoVs__vslot96_installHardwareTables
+data	DAT_001e39a4	KhanPsHardwareTable_001e39a4	CONFIRMED	stored at this + 0xc by KhanPs__vslot96_installHardwareTables
+data	DAT_001e6730	FudoPsHardwareTable_001e6730	CONFIRMED	stored at this + 0xc by FudoPs__vslot96_installHardwareTables
+data	DAT_001e59b4	laneRangeClassTable_001e59b4	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (the last one by operandClass[1]/[2]) in ValueKey__classifyLaneRangeClass
+data	DAT_001e5a44	laneRangeClassTable_001e5a44	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (the last one by operandClass[1]/[2]) in ValueKey__classifyLaneRangeClass
+data	DAT_001e5ad4	laneRangeClassTable_001e5ad4	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (the last one by operandClass[1]/[2]) in ValueKey__classifyLaneRangeClass
+data	DAT_001e5b64	laneRangeClassTable_001e5b64	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (the last one by operandClass[1]/[2]) in ValueKey__classifyLaneRangeClass
+data	DAT_001e5bf4	laneRangeClassTable_001e5bf4	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (the last one by operandClass[1]/[2]) in ValueKey__classifyLaneRangeClass
+data	DAT_001e5c84	laneCompareClassTable_001e5c84	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (one by operandClass[1]/[2]) in ValueKey__classifyLaneCompareClass
+data	DAT_001e5d14	laneCompareClassTable_001e5d14	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (one by operandClass[1]/[2]) in ValueKey__classifyLaneCompareClass
+data	DAT_001e5da4	laneCompareClassTable_001e5da4	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (one by operandClass[1]/[2]) in ValueKey__classifyLaneCompareClass
+data	DAT_001e5e34	laneCompareClassTable_001e5e34	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (one by operandClass[1]/[2]) in ValueKey__classifyLaneCompareClass
+data	DAT_001e5ec4	laneCompareClassTable_001e5ec4	INFERRED	6x6 word table indexed by `(operandClass[0] * 6 + operandClass[1]) * 4` (one by operandClass[1]/[2]) in ValueKey__classifyLaneCompareClass
+data	DAT_001e5f54	fudoPsClassTable6x6_001e5f54	CONFIRMED	`return *(undefined4 *)(&DAT_001e5f54 + (row * 6 + column) * 4)` in FudoPs__vslot12_lookupTable6x
+data	DAT_001e6014	foldMinClassTable_001e6014	INFERRED	6x6 table giving `laneResult` from operandClasses in ValueKey__foldMinOfConstants
+data	DAT_001e60a4	foldMaxClassTable_001e60a4	INFERRED	6x6 table giving `laneResult` from operandClasses in ValueKey__foldMaxOfConstants
+data	DAT_001e8740	dyldStubBindingHelperPtr_001e8740	CONFIRMED	__dyld section word (value 0x8fe01000, filled by dyld) called as `(*DAT_001e8740)();` by dyld_stub_binding_helper
+data	DAT_001e8744	dyldFuncLookupPtr_001e8744	CONFIRMED	__dyld section word (value 0x8fe01008, filled by dyld) called as `(*DAT_001e8744)(symbolName,addressOut)` by dyld_func_lookup_stub
+data	DAT_001f65e0	gldContextListHead_001f65e0	INFERRED	set to `ctx + GLD_listSelf / 4` by _gldCreateContext and tested non-null by _gldDestroyContext
+data	DAT_001f65e4	dxtBlockPixelByte0_001f65e4	INFERRED	byte 0 of the 4-byte pixel scratch written per source pixel (`srcPixels[i + 0]`) in dxtCompressImage; 0x1f65e7 is the scratch base
+data	DAT_001f65e5	dxtBlockPixelByte1_001f65e5	INFERRED	byte 1 of the 4-byte pixel scratch written per source pixel (`srcPixels[i + 1]`) in dxtCompressImage; 0x1f65e7 is the scratch base
+data	DAT_001f65e6	dxtBlockPixelByte2_001f65e6	INFERRED	byte 2 of the 4-byte pixel scratch written per source pixel (`srcPixels[i + 2]`) in dxtCompressImage; 0x1f65e7 is the scratch base
+data	DAT_001fa618	psnSinkContext_001fa618	INFERRED	`DAT_001fa618 = sinkRecord[1]` in scDumpPixelProgramPsn, passed as first argument of the sink callback by psnReportError
+data	DAT_001fa61c	psnSinkCallbacks_001fa61c	INFERRED	`DAT_001fa61c = *sinkRecord`; psnReportError calls `(*(code *)*DAT_001fa61c)(DAT_001fa618, ...)` when non-null
+data	DAT_001fa620	ilReaderTokenCount_001fa620	INFERRED	`DAT_001fa620 = tokenCount` in ILReader__nextInstruction
+data	DAT_001fc1d4	resolvedSprintf_001fc1d4	CONFIRMED	lazily bound by `stub_getrealaddr("sprintf")` in the printf_LDBLStub function and then called through this slot
+data	DAT_001fc1d8	resolvedPrintf_001fc1d8	CONFIRMED	lazily bound by `stub_getrealaddr("printf")` in the printf_LDBLStub function and then called through this slot
+data	DAT_001fc1dc	resolvedVsnprintf_001fc1dc	CONFIRMED	lazily bound by `stub_getrealaddr("vsnprintf")` in the printf_LDBLStub function and then called through this slot
+data	DAT_001fc1e0	resolvedVsprintf_001fc1e0	CONFIRMED	lazily bound by `stub_getrealaddr("vsprintf")` in the printf_LDBLStub function and then called through this slot
+data	DAT_001dbcb0	drawSetupPacketWord5_001dbcb0	CONFIRMED	copied into `packet[5]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbcb4	drawSetupPacketWord6_001dbcb4	CONFIRMED	copied into `packet[6]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbcb8	drawSetupPacketWord7_001dbcb8	CONFIRMED	copied into `packet[7]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbcbc	drawSetupPacketWord8_001dbcbc	CONFIRMED	copied into `packet[8]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbcc0	drawSetupPacketWord9_001dbcc0	CONFIRMED	copied into `packet[9]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbcc4	drawSetupPacketWord10_001dbcc4	CONFIRMED	copied into `packet[10]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbcc8	drawSetupPacketWord11_001dbcc8	CONFIRMED	copied into `packet[11]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbcac	drawSetupPacketWord14_001dbcac	CONFIRMED	copied into `packet[14]` by gldEmitInternalDrawSetupPackets
+data	DAT_001fa5e4	drawSetupPacketWord15_001fa5e4	CONFIRMED	copied into `packet[15]` by gldEmitInternalDrawSetupPackets
+data	DAT_001dbccc	drawSetupPacketRegWord_001dbccc	INFERRED	read into `regWord` after packet[0xb] by gldEmitInternalDrawSetupPackets
+data	DAT_001dbca8	drawSetupPackedWord_001dbca8	INFERRED	read as `packedValue` after its low 10 bits are rewritten with `heightMinus1 & 0x3ff` by gldEmitInternalDrawSetupPackets
+data	DAT_001db928	stateDefaultAt2360_001db928	CONFIRMED	copied to glContext + 0x2360 by gldInitStateDefaults
+data	DAT_001db92c	stateDefaultAt2364_001db92c	CONFIRMED	copied to glContext + 0x2364 by gldInitStateDefaults
+data	DAT_001db934	stateDefaultAt236C_001db934	CONFIRMED	copied to glContext + 0x236c by gldInitStateDefaults
+data	DAT_001db930	stateDefaultAt2368_001db930	CONFIRMED	copied to glContext + 0x2368 by gldInitStateDefaults
+data	DAT_001db938	stateDefaultAt2370_001db938	CONFIRMED	copied to glContext + 0x2370 by gldInitStateDefaults
+data	DAT_001db5b8	perUnitStateDefaultAt2374_001db5b8	CONFIRMED	copied from `&DAT_001db5b8 + unitByteOffset` to glContext + 0x2374 by gldInitStateDefaults
+data	DAT_001db5c0	perUnitStateDefaultAt237C_001db5c0	CONFIRMED	copied from `&DAT_001db5c0 + unitByteOffset` to glContext + 0x237c by gldInitStateDefaults
+data	DAT_001db5bc	perUnitStateDefaultAt2378_001db5bc	CONFIRMED	copied from `&DAT_001db5bc + unitByteOffset` to glContext + 0x2378 by gldInitStateDefaults
+data	DAT_001db5c4	perUnitStateDefaultAt2380_001db5c4	CONFIRMED	copied from `&DAT_001db5c4 + unitByteOffset` to glContext + 0x2380 by gldInitStateDefaults
+data	DAT_001db2d4	perUnitStateDefaultAt2384_001db2d4	CONFIRMED	copied from `&DAT_001db2d4 + unitByteOffset` to glContext + 0x2384 by gldInitStateDefaults
+data	DAT_001db2d8	perUnitStateDefaultAt2388_001db2d8	CONFIRMED	copied from `&DAT_001db2d8 + unitByteOffset` to glContext + 0x2388 by gldInitStateDefaults
+data	DAT_001db2e0	perUnitStateDefaultAt2398_001db2e0	CONFIRMED	copied from `&DAT_001db2e0 + unitByteOffset` to glContext + 0x2398 by gldInitStateDefaults
+data	DAT_001db2e4	perUnitStateDefaultAt239C_001db2e4	CONFIRMED	copied from `&DAT_001db2e4 + unitByteOffset` to glContext + 0x239c by gldInitStateDefaults
+data	DAT_001db2e8	perUnitStateDefaultAt2390_001db2e8	CONFIRMED	copied from `&DAT_001db2e8 + unitByteOffset` to glContext + 0x2390 by gldInitStateDefaults
+data	DAT_001db2f0	perUnitStateDefaultAt23A0_001db2f0	CONFIRMED	copied from `&DAT_001db2f0 + unitByteOffset` to glContext + 0x23a0 by gldInitStateDefaults
+data	DAT_001dbcd4	swizzleWordsWWWW_001dbcd4	INFERRED	4-word lane select array (words [3, 3, 3, 3]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbcd4`; one name per array, lane words are named with _laneN
+data	DAT_001dbcd8	swizzleWordsWWWW_001dbcd4_lane1_001dbcd8	INFERRED	lane 1 word of the 4-word select array swizzleWordsWWWW_001dbcd4
+data	DAT_001dbcdc	swizzleWordsWWWW_001dbcd4_lane2_001dbcdc	INFERRED	lane 2 word of the 4-word select array swizzleWordsWWWW_001dbcd4
+data	DAT_001dbce0	swizzleWordsWWWW_001dbcd4_lane3_001dbce0	INFERRED	lane 3 word of the 4-word select array swizzleWordsWWWW_001dbcd4
+data	DAT_001dbce4	swizzleWordsYYYY_001dbce4	INFERRED	4-word lane select array (words [1, 1, 1, 1]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbce4`; one name per array, lane words are named with _laneN
+data	DAT_001dbce8	swizzleWordsYYYY_001dbce4_lane1_001dbce8	INFERRED	lane 1 word of the 4-word select array swizzleWordsYYYY_001dbce4
+data	DAT_001dbcec	swizzleWordsYYYY_001dbce4_lane2_001dbcec	INFERRED	lane 2 word of the 4-word select array swizzleWordsYYYY_001dbce4
+data	DAT_001dbcf0	swizzleWordsYYYY_001dbce4_lane3_001dbcf0	INFERRED	lane 3 word of the 4-word select array swizzleWordsYYYY_001dbce4
+data	DAT_001dbcf4	swizzleWordsZZZZ_001dbcf4	INFERRED	4-word lane select array (words [2, 2, 2, 2]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbcf4`; one name per array, lane words are named with _laneN
+data	DAT_001dbcf8	swizzleWordsZZZZ_001dbcf4_lane1_001dbcf8	INFERRED	lane 1 word of the 4-word select array swizzleWordsZZZZ_001dbcf4
+data	DAT_001dbcfc	swizzleWordsZZZZ_001dbcf4_lane2_001dbcfc	INFERRED	lane 2 word of the 4-word select array swizzleWordsZZZZ_001dbcf4
+data	DAT_001dbd00	swizzleWordsZZZZ_001dbcf4_lane3_001dbd00	INFERRED	lane 3 word of the 4-word select array swizzleWordsZZZZ_001dbcf4
+data	DAT_001dbd04	swizzleWordsYXXX_001dbd04	INFERRED	4-word lane select array (words [1, 0, 0, 0]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd04`; one name per array, lane words are named with _laneN
+data	DAT_001dbd08	swizzleWordsYXXX_001dbd04_lane1_001dbd08	INFERRED	lane 1 word of the 4-word select array swizzleWordsYXXX_001dbd04
+data	DAT_001dbd0c	swizzleWordsYXXX_001dbd04_lane2_001dbd0c	INFERRED	lane 2 word of the 4-word select array swizzleWordsYXXX_001dbd04
+data	DAT_001dbd10	swizzleWordsYXXX_001dbd04_lane3_001dbd10	INFERRED	lane 3 word of the 4-word select array swizzleWordsYXXX_001dbd04
+data	DAT_001dbd14	swizzleWordsXYZW_001dbd14	INFERRED	4-word lane select array (words [0, 1, 2, 3]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd14`; one name per array, lane words are named with _laneN
+data	DAT_001dbd18	swizzleWordsXYZW_001dbd14_lane1_001dbd18	INFERRED	lane 1 word of the 4-word select array swizzleWordsXYZW_001dbd14
+data	DAT_001dbd1c	swizzleWordsXYZW_001dbd14_lane2_001dbd1c	INFERRED	lane 2 word of the 4-word select array swizzleWordsXYZW_001dbd14
+data	DAT_001dbd20	swizzleWordsXYZW_001dbd14_lane3_001dbd20	INFERRED	lane 3 word of the 4-word select array swizzleWordsXYZW_001dbd14
+data	DAT_001dbd24	swizzleWordsYYYY_001dbd24	INFERRED	4-word lane select array (words [1, 1, 1, 1]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd24`; one name per array, lane words are named with _laneN
+data	DAT_001dbd28	swizzleWordsYYYY_001dbd24_lane1_001dbd28	INFERRED	lane 1 word of the 4-word select array swizzleWordsYYYY_001dbd24
+data	DAT_001dbd2c	swizzleWordsYYYY_001dbd24_lane2_001dbd2c	INFERRED	lane 2 word of the 4-word select array swizzleWordsYYYY_001dbd24
+data	DAT_001dbd30	swizzleWordsYYYY_001dbd24_lane3_001dbd30	INFERRED	lane 3 word of the 4-word select array swizzleWordsYYYY_001dbd24
+data	DAT_001dbd34	swizzleWords4444_001dbd34	INFERRED	4-word lane select array (words [4, 4, 4, 4]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd34`; one name per array, lane words are named with _laneN
+data	DAT_001dbd38	swizzleWords4444_001dbd34_lane1_001dbd38	INFERRED	lane 1 word of the 4-word select array swizzleWords4444_001dbd34
+data	DAT_001dbd3c	swizzleWords4444_001dbd34_lane2_001dbd3c	INFERRED	lane 2 word of the 4-word select array swizzleWords4444_001dbd34
+data	DAT_001dbd40	swizzleWords4444_001dbd34_lane3_001dbd40	INFERRED	lane 3 word of the 4-word select array swizzleWords4444_001dbd34
+data	DAT_001dbd44	swizzleWordsXXXY_001dbd44	INFERRED	4-word lane select array (words [0, 0, 0, 1]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd44`; one name per array, lane words are named with _laneN
+data	DAT_001dbd48	swizzleWordsXXXY_001dbd44_lane1_001dbd48	INFERRED	lane 1 word of the 4-word select array swizzleWordsXXXY_001dbd44
+data	DAT_001dbd4c	swizzleWordsXXXY_001dbd44_lane2_001dbd4c	INFERRED	lane 2 word of the 4-word select array swizzleWordsXXXY_001dbd44
+data	DAT_001dbd50	swizzleWordsXXXY_001dbd44_lane3_001dbd50	INFERRED	lane 3 word of the 4-word select array swizzleWordsXXXY_001dbd44
+data	DAT_001dbd54	swizzleWordsXXYX_001dbd54	INFERRED	4-word lane select array (words [0, 0, 1, 0]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd54`; one name per array, lane words are named with _laneN
+data	DAT_001dbd58	swizzleWordsXXYX_001dbd54_lane1_001dbd58	INFERRED	lane 1 word of the 4-word select array swizzleWordsXXYX_001dbd54
+data	DAT_001dbd5c	swizzleWordsXXYX_001dbd54_lane2_001dbd5c	INFERRED	lane 2 word of the 4-word select array swizzleWordsXXYX_001dbd54
+data	DAT_001dbd60	swizzleWordsXXYX_001dbd54_lane3_001dbd60	INFERRED	lane 3 word of the 4-word select array swizzleWordsXXYX_001dbd54
+data	DAT_001dbd64	swizzleWordsXYXX_001dbd64	INFERRED	4-word lane select array (words [0, 1, 0, 0]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd64`; one name per array, lane words are named with _laneN
+data	DAT_001dbd68	swizzleWordsXYXX_001dbd64_lane1_001dbd68	INFERRED	lane 1 word of the 4-word select array swizzleWordsXYXX_001dbd64
+data	DAT_001dbd6c	swizzleWordsXYXX_001dbd64_lane2_001dbd6c	INFERRED	lane 2 word of the 4-word select array swizzleWordsXYXX_001dbd64
+data	DAT_001dbd70	swizzleWordsXYXX_001dbd64_lane3_001dbd70	INFERRED	lane 3 word of the 4-word select array swizzleWordsXYXX_001dbd64
+data	DAT_001dbd74	swizzleWordsXYZ4_001dbd74	INFERRED	4-word lane select array (words [0, 1, 2, 4]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd74`; one name per array, lane words are named with _laneN
+data	DAT_001dbd78	swizzleWordsXYZ4_001dbd74_lane1_001dbd78	INFERRED	lane 1 word of the 4-word select array swizzleWordsXYZ4_001dbd74
+data	DAT_001dbd7c	swizzleWordsXYZ4_001dbd74_lane2_001dbd7c	INFERRED	lane 2 word of the 4-word select array swizzleWordsXYZ4_001dbd74
+data	DAT_001dbd80	swizzleWordsXYZ4_001dbd74_lane3_001dbd80	INFERRED	lane 3 word of the 4-word select array swizzleWordsXYZ4_001dbd74
+data	DAT_001dbd84	swizzleWordsYYYX_001dbd84	INFERRED	4-word lane select array (words [1, 1, 1, 0]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbd84`; one name per array, lane words are named with _laneN
+data	DAT_001dbd88	swizzleWordsYYYX_001dbd84_lane1_001dbd88	INFERRED	lane 1 word of the 4-word select array swizzleWordsYYYX_001dbd84
+data	DAT_001dbd8c	swizzleWordsYYYX_001dbd84_lane2_001dbd8c	INFERRED	lane 2 word of the 4-word select array swizzleWordsYYYX_001dbd84
+data	DAT_001dbd90	swizzleWordsYYYX_001dbd84_lane3_001dbd90	INFERRED	lane 3 word of the 4-word select array swizzleWordsYYYX_001dbd84
+data	DAT_001dbda4	swizzleWords4445_001dbda4	INFERRED	4-word lane select array (words [4, 4, 4, 5]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbda4`; one name per array, lane words are named with _laneN
+data	DAT_001dbda8	swizzleWords4445_001dbda4_lane1_001dbda8	INFERRED	lane 1 word of the 4-word select array swizzleWords4445_001dbda4
+data	DAT_001dbdac	swizzleWords4445_001dbda4_lane2_001dbdac	INFERRED	lane 2 word of the 4-word select array swizzleWords4445_001dbda4
+data	DAT_001dbdb0	swizzleWords4445_001dbda4_lane3_001dbdb0	INFERRED	lane 3 word of the 4-word select array swizzleWords4445_001dbda4
+data	DAT_001dbdb4	swizzleWords5555_001dbdb4	INFERRED	4-word lane select array (words [5, 5, 5, 5]) passed by address as the swizzle/select argument of the ffvpEmit* functions, e.g. `&DAT_001dbdb4`; one name per array, lane words are named with _laneN
+data	DAT_001dbdb8	swizzleWords5555_001dbdb4_lane1_001dbdb8	INFERRED	lane 1 word of the 4-word select array swizzleWords5555_001dbdb4
+data	DAT_001dbdbc	swizzleWords5555_001dbdb4_lane2_001dbdbc	INFERRED	lane 2 word of the 4-word select array swizzleWords5555_001dbdb4
+data	DAT_001dbdc0	swizzleWords5555_001dbdb4_lane3_001dbdc0	INFERRED	lane 3 word of the 4-word select array swizzleWords5555_001dbdb4

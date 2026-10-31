@@ -625,7 +625,7 @@ int ValueKey__foldMinOfConstants(ctx)
         valueNumberPtr = valueNumberPtr + 4;
       }
       if ((operandClasses[0] != 3) || (operandClasses[1] != 3)) {
-        laneResult = *(int *)(&DAT_001e6014 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
+        laneResult = *(int *)(&foldMinClassTable_001e6014 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
         if (laneResult == 1) {
           laneResult = 1;
         }
@@ -726,7 +726,7 @@ int ValueKey__foldMaxOfConstants(ctx)
         valueNumberPtr = valueNumberPtr + 4;
       }
       if ((operandClasses[0] != 3) || (operandClasses[1] != 3)) {
-        laneResult = *(int *)(&DAT_001e60a4 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
+        laneResult = *(int *)(&foldMaxClassTable_001e60a4 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
         if (laneResult == 1) {
           laneResult = 1;
         }

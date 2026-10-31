@@ -4,7 +4,7 @@
 int ThreadModel__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001eb2f0;
+  *this = &ptrTo_ThreadModel__dtor_001eb2f0;
   return;
 }
 
@@ -12,7 +12,7 @@ int ThreadModel__dtor(this)
 int ResourceModel__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001eb260;
+  *this = &ptrTo_ResourceModel__dtor_001eb260;
   return;
 }
 
@@ -23,7 +23,7 @@ int R300SchedModel__dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e90fc + 8;
-  *this = &PTR_DAT_001eb328;
+  *this = &ptrTo_R300SchedModel__dtor_1d8910_001eb328;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -38,7 +38,7 @@ int R300VSchedModel__dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e90fc + 8;
-  *this = &PTR_FUN_001eb3c0;
+  *this = &ptrTo_R300VSchedModel__dtor_001eb3c0;
   *this = vtable;
   return;
 }
@@ -50,7 +50,7 @@ int R300VSchedModel__deleting_dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e90fc + 8;
-  *this = &PTR_FUN_001eb3c0;
+  *this = &ptrTo_R300VSchedModel__dtor_001eb3c0;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -66,7 +66,7 @@ int FudoChip__deleting_dtor(this)
   undefined *baseVtableBase2;
   
   baseVtableBase1 = PTR_DAT_001e8c74;
-  *this = &PTR_FUN_001eb5e8;
+  *this = &ptrTo_FudoChip__dtor_001eb5e8;
   baseVtableBase2 = PTR_DAT_001e8c88;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
@@ -81,7 +81,7 @@ int FudoPs__deleting_dtor(this)
   undefined *baseVtableBase2;
   
   baseVtableBase2 = PTR_DAT_001e9144;
-  *this = &PTR_FUN_001eb450;
+  *this = &ptrTo_FudoPs__dtor_001eb450;
   baseVtableBase1 = PTR_DAT_001e9108;
   *this = baseVtableBase2 + 8;
   *this = baseVtableBase1 + 8;
@@ -96,7 +96,7 @@ int FudoChip__dtor(this)
   undefined *baseVtableBase2;
   
   baseVtableBase1 = PTR_DAT_001e8c74;
-  *this = &PTR_FUN_001eb5e8;
+  *this = &ptrTo_FudoChip__dtor_001eb5e8;
   baseVtableBase2 = PTR_DAT_001e8c88;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
@@ -111,7 +111,7 @@ int FudoPs__dtor(this)
   undefined *baseVtableBase2;
   
   baseVtableBase2 = PTR_DAT_001e9144;
-  *this = &PTR_FUN_001eb450;
+  *this = &ptrTo_FudoPs__dtor_001eb450;
   baseVtableBase1 = PTR_DAT_001e9108;
   *this = baseVtableBase2 + 8;
   *this = baseVtableBase1 + 8;
@@ -126,7 +126,7 @@ int R520SchedModel__deleting_dtor(this)
   undefined *baseVtableBase2;
   
   baseVtableBase1 = PTR_DAT_001e90f4;
-  *this = &PTR_FUN_001eb608;
+  *this = &ptrTo_R520SchedModel__dtor_001eb608;
   baseVtableBase2 = PTR_DAT_001e90fc;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
@@ -144,7 +144,7 @@ int R520SchedModel__dtor(this)
   undefined *baseVtableBase2;
   
   baseVtableBase1 = PTR_DAT_001e90f4;
-  *this = &PTR_FUN_001eb608;
+  *this = &ptrTo_R520SchedModel__dtor_001eb608;
   baseVtableBase2 = PTR_DAT_001e90fc;
   *this = baseVtableBase1 + 8;
   *this = baseVtableBase2 + 8;
@@ -155,7 +155,7 @@ int R520SchedModel__dtor(this)
 int R520MachineAssembler__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001eb9a8;
+  *this = &ptrTo_R520MachineAssembler__dtor_001eb9a8;
   R300MachineAssembler__dtor_196dbc(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -168,7 +168,7 @@ int R520MachineAssembler__deleting_dtor(this)
 int R520MachineAssembler__dtor(this2)
   undefined4 *this2;
 {
-  *this2 = &PTR_FUN_001eb9a8;
+  *this2 = &ptrTo_R520MachineAssembler__dtor_001eb9a8;
   return R300MachineAssembler__dtor_196dbc(this2);
 }
 

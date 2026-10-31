@@ -7,7 +7,7 @@ int IRInst__dtor_1cfeac(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -19,7 +19,7 @@ int IRInst__dtor_1cfee0(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -34,7 +34,7 @@ int IRInst__dtor_1cff28(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -46,7 +46,7 @@ int IRInst__dtor_1cff5c(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -58,7 +58,7 @@ int IRInst__dtor_1cff5c(this)
 int HwLimits__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001ea5b0;
+  *this = &ptrTo_HwLimits__dtor_001ea5b0;
   return;
 }
 
@@ -66,7 +66,7 @@ int HwLimits__dtor(this)
 int HwLimits__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001ea5b0;
+  *this = &ptrTo_HwLimits__dtor_001ea5b0;
   return operator_delete(this);
 }
 

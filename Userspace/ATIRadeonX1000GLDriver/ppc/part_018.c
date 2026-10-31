@@ -6336,7 +6336,7 @@ int psnReportError(severity, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5
   unsigned int ghidra_home[8] = { severity, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5, fmtArg6 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined1 lineBuffer [280];
   
-  if (DAT_001fa61c != (undefined4 *)0x0) {
+  if (psnSinkCallbacks_001fa61c != (undefined4 *)0x0) {
     (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = fmtArg1;
     (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = fmtArg2;
     (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = fmtArg3;
@@ -6344,7 +6344,7 @@ int psnReportError(severity, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5
     (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArg5;
     (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArg6;
     printf_LDBLStub_1a34d4(lineBuffer,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
-    (*(code *)*DAT_001fa61c)(DAT_001fa618,"",lineBuffer,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+    (*(code *)*psnSinkCallbacks_001fa61c)(psnSinkContext_001fa618,"",lineBuffer,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   }
   return;
 }

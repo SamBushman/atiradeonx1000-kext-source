@@ -24,7 +24,7 @@ int BreakBlock__ctor_ec070(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   return;
 }
 
@@ -38,7 +38,7 @@ int BreakBlock__ctor_ec0c8(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   return;
 }
 
@@ -52,7 +52,7 @@ int ContinueBlock__ctor_ec120(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   return;
 }
 
@@ -66,7 +66,7 @@ int ContinueBlock__ctor_ec178(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   return;
 }
 

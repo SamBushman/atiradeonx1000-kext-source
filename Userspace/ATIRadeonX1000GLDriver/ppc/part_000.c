@@ -5,7 +5,7 @@ int dyld_stub_binding_helper()
 {
                     
                     
-  (*DAT_001e8740)();
+  (*dyldStubBindingHelperPtr_001e8740)();
   return;
 }
 
@@ -16,7 +16,7 @@ int dyld_func_lookup_stub(symbolName, addressOut)
 {
                     
                     
-  (*DAT_001e8744)(symbolName,addressOut);
+  (*dyldFuncLookupPtr_001e8744)(symbolName,addressOut);
   return;
 }
 
@@ -143,7 +143,7 @@ int dyld_func_lookup_stub_00001b14()
 {
                     
                     
-  (*DAT_001e8744)();
+  (*dyldFuncLookupPtr_001e8744)();
   return;
 }
 
@@ -342,7 +342,7 @@ int add_routine(atexit_globals, routine)
     *node = *(undefined4 *)(globalsHome + 4);
     *(undefined4 **)(globalsHome + 4) = node;
     unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
-    if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+    if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
       status = 0;
     }
     else {
@@ -609,7 +609,7 @@ int atexit_common(atexit_entry, dsoHandle)
     if (*(byte *)(atexit_globals + 3) < 0x10) {
       registerFn = *(code **)(atexit_globals + 8);
       atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (atexit_globals == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (atexit_globals == 0)) {
         entryCopy = (undefined4 *)_malloc(0xc);
         if (entryCopy == (undefined4 *)0x0) {
           result = 0xffffffff;
@@ -630,7 +630,7 @@ int atexit_common(atexit_entry, dsoHandle)
     else if (entryHome[1] == 0) {
       registerFn = *(code **)(atexit_globals + 0x10);
       atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (atexit_globals == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (atexit_globals == 0)) {
         result = (*registerFn)(*entryHome);
       }
       else {
@@ -640,7 +640,7 @@ int atexit_common(atexit_entry, dsoHandle)
     else {
       registerFn = *(code **)(atexit_globals + 8);
       atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (atexit_globals == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (atexit_globals == 0)) {
         result = (*registerFn)(*entryHome,entryHome[2],dsoHandleHome,staleArgR6,staleArgR7,staleArgR8,
                              *entryHome);
       }
@@ -700,7 +700,7 @@ int add_routine_stub_00002688(atexit_globals, routine)
     *allocation = *(undefined4 *)(globalsHome + 4);
     *(undefined4 **)(globalsHome + 4) = allocation;
     unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
-    if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+    if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
       status = 0;
     }
     else {
@@ -814,7 +814,7 @@ int atexit_common_stub_00002728(atexit_entry, dsoHandle)
     if (*(byte *)(exceptionGlobals + 3) < 0x10) {
       registerFn = *(code **)(exceptionGlobals + 8);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
         allocation = _malloc(0xc);
         if (allocation == (undefined4 *)0x0) {
           result = 0xffffffff;
@@ -835,7 +835,7 @@ int atexit_common_stub_00002728(atexit_entry, dsoHandle)
     else if (entryHome[1] == 0) {
       registerFn = *(code **)(exceptionGlobals + 0x10);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome);
       }
       else {
@@ -845,7 +845,7 @@ int atexit_common_stub_00002728(atexit_entry, dsoHandle)
     else {
       registerFn = *(code **)(exceptionGlobals + 8);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome,entryHome[2],dsoHandleHome);
       }
       else {
@@ -871,7 +871,7 @@ int atexit(atexit_function)
   entryKind = 0;
   uStack00000018 = atexit_function;
   entryFunction = atexit_function;
-  result = ((int (*)())atexit_common)(&entryFunction,PTR_001e88a8);
+  result = ((int (*)())atexit_common)(&entryFunction,ptrTo_0x0_001e88a8);
   return result;
 }
 
@@ -900,7 +900,7 @@ int atexit_common_stub_000027a4(atexit_entry, dsoHandle)
     if (*(byte *)(exceptionGlobals + 3) < 0x10) {
       registerFn = *(code **)(exceptionGlobals + 8);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
         allocation = _malloc(0xc);
         if (allocation == (undefined4 *)0x0) {
           result = 0xffffffff;
@@ -921,7 +921,7 @@ int atexit_common_stub_000027a4(atexit_entry, dsoHandle)
     else if (entryHome[1] == 0) {
       registerFn = *(code **)(exceptionGlobals + 0x10);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome);
       }
       else {
@@ -931,7 +931,7 @@ int atexit_common_stub_000027a4(atexit_entry, dsoHandle)
     else {
       registerFn = *(code **)(exceptionGlobals + 8);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
-      if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_001e88a4 + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome,entryHome[2],dsoHandleHome);
       }
       else {
@@ -1733,7 +1733,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
 code_r0x00003264:
                     
                     
-    (*(code *)PTR_FUN_001e8754)(readbackPixels);
+    (*(code *)lazyPtrTo_free_001e8754)(readbackPixels);
     return;
   case 0x102:
     if ((*(uint *)(glContext + 0x154) & 3) == 0) {
@@ -3411,15 +3411,15 @@ storeCtx:
   libraryOrTaskPtr = PTR_DAT_001e88ac;
   ctx[GLD_connect / 4] = 0;
   status = _IOServiceOpen(*(undefined4 *)(scalarOut[0] * 4 + *(int *)(libraryOrTaskPtr + 8)),
-                         *(undefined4 *)PTR_001e88b4,1,ctx + GLD_connect / 4);
+                         *(undefined4 *)ptrTo_machTaskSelf_001e88b4,1,ctx + GLD_connect / 4);
   if (status == 0) {
     if ((shareContext == 0) ||
        (status = _IOConnectAddClient(ctx[GLD_connect / 4],*(undefined4 *)(shareContext + 4)), status == 0)) {
       scalarOut[0] = 3;
       status = _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],3,0,0,ctx + GLD_hwConfig0 / 4,scalarOut);
-      libraryOrTaskPtr = PTR_001e88b4;
+      libraryOrTaskPtr = ptrTo_machTaskSelf_001e88b4;
       if (status == 0) {
-        task = *(undefined4 *)PTR_001e88b4;
+        task = *(undefined4 *)ptrTo_machTaskSelf_001e88b4;
         ctx[GLD_retireCounter / 4] = 0;
         status = _IOConnectMapMemory(ctx[GLD_connect / 4],0,task,ctx + GLD_retireCounter / 4,scalarOut,0x101);
         if (status == 0) {
@@ -3451,7 +3451,7 @@ storeCtx:
                 ctx[GLD_queryPool / 4] = 0;
                 ctx[GLD_queryPoolBytes / 4] = 0;
                 ctx[GLD_queryBitmap / 4] = 0;
-                scratch0 = *(uint *)PTR_001e88b0;
+                scratch0 = *(uint *)ptrTo_cpuCapabilities_001e88b0;
                 ctx[GLD_queryCapacity / 4] = 0;
                 if ((scratch0 & 8) == 0) {
                   if ((scratch0 & 0x10) == 0) {
@@ -3464,9 +3464,9 @@ storeCtx:
                 else {
                   *(undefined1 *)(ctx + GLD_cacheLineSize / 4) = 0x40;
                 }
-                scratch0 = (uint)DAT_001f65e0;
+                scratch0 = (uint)gldContextListHead_001f65e0;
                 ctx[GLD_submitEpoch / 4] = 0;
-                DAT_001f65e0 = ctx + GLD_listSelf / 4;
+                gldContextListHead_001f65e0 = ctx + GLD_listSelf / 4;
                 ctx[GLD_listSelf / 4] = (uint)ctx;
                 ctx[GLD_listNext / 4] = scratch0;
                 ctx[GLD_mutex / 4] = contextArg3;
@@ -3661,10 +3661,10 @@ int _gldDestroyContext(ctx)
     gld_detachDrawable(ctx);
     gldContextFreeResources(ctx);
     _IOServiceClose(*(undefined4 *)(ctx + GLD_connect));
-    if (DAT_001f65e0 != (int *)0x0) {
-      listNode = DAT_001f65e0;
-      if (ctx == *DAT_001f65e0) {
-        DAT_001f65e0 = (int *)DAT_001f65e0[1];
+    if (gldContextListHead_001f65e0 != (int *)0x0) {
+      listNode = gldContextListHead_001f65e0;
+      if (ctx == *gldContextListHead_001f65e0) {
+        gldContextListHead_001f65e0 = (int *)gldContextListHead_001f65e0[1];
       }
       else {
         do {

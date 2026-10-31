@@ -2303,7 +2303,7 @@ int FudoPs__vslot12_lookupTable6x(this, row, column)
   int row;
   int column;
 {
-  return *(undefined4 *)(&DAT_001e5f54 + (row * 6 + column) * 4);
+  return *(undefined4 *)(&fudoPsClassTable6x6_001e5f54 + (row * 6 + column) * 4);
 }
 
 /* FudoPs__vslot11_isNotType2Or5 @ 0x176610 (28 bytes) */

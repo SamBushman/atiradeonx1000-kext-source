@@ -8243,7 +8243,7 @@ int Inst__mergeComponentMovsIntoCnd(inst, program)
               maskComponent = lastSplatComponent;
             }
             if (maskSelect == 0x10203) {
-              maskSelect = *(int *)(&DAT_001b0160 + maskComponent * 4);
+              maskSelect = *(int *)(&componentToSelectWordTable_001b0160 + maskComponent * 4);
             }
             else if (maskComponent == 0) {
               maskWordTop = (uint)maskSelect >> 0x18;

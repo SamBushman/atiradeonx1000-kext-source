@@ -161,7 +161,7 @@ int R520VMachineAssembler__deleting_dtor(this)
   int savedPredStack;
   
   savedPredStack = this[0x26];
-  *this = &PTR_FUN_001eb8d8;
+  *this = &ptrTo_MachineAssembler__dtor_19df54_001eb8d8;
   if (savedPredStack != 0) {
     Arena__free(*(undefined4 *)(savedPredStack + 0xc),*(undefined4 *)(savedPredStack + 8));
     Arena__free(*(undefined4 *)(savedPredStack + -4),savedPredStack + -4);
@@ -230,7 +230,7 @@ int R520VMachineAssembler__create(unusedThis, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0xa0);
   *allocation = arena;
-  allocation[1] = &PTR_FUN_001eb8d8;
+  allocation[1] = &ptrTo_MachineAssembler__dtor_19df54_001eb8d8;
   allocation[7] = 0;
   return allocation + 1;
 }
@@ -243,7 +243,7 @@ int MachineAssembler__dtor_19deb0(this)
   int bufferB;
   
   bufferB = this[0x26];
-  *this = &PTR_FUN_001eb8d8;
+  *this = &ptrTo_MachineAssembler__dtor_19df54_001eb8d8;
   if (bufferB != 0) {
     Arena__free(*(undefined4 *)(bufferB + 0xc),*(undefined4 *)(bufferB + 8));
     Arena__free(*(undefined4 *)(bufferB + -4),bufferB + -4);
@@ -253,7 +253,7 @@ int MachineAssembler__dtor_19deb0(this)
     Arena__free(*(undefined4 *)(bufferA + 0xc),*(undefined4 *)(bufferA + 8));
     Arena__free(*(undefined4 *)(bufferA + -4),bufferA + -4);
   }
-  *this = &PTR_FUN_001eb808;
+  *this = &ptrTo_MachineAssembler__dtor_19b9ac_001eb808;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
@@ -270,7 +270,7 @@ int MachineAssembler__dtor_19df54(this)
   int bufferB;
   
   bufferB = this[0x26];
-  *this = &PTR_FUN_001eb8d8;
+  *this = &ptrTo_MachineAssembler__dtor_19df54_001eb8d8;
   if (bufferB != 0) {
     Arena__free(*(undefined4 *)(bufferB + 0xc),*(undefined4 *)(bufferB + 8));
     Arena__free(*(undefined4 *)(bufferB + -4),bufferB + -4);
@@ -280,7 +280,7 @@ int MachineAssembler__dtor_19df54(this)
     Arena__free(*(undefined4 *)(bufferA + 0xc),*(undefined4 *)(bufferA + 8));
     Arena__free(*(undefined4 *)(bufferA + -4),bufferA + -4);
   }
-  *this = &PTR_FUN_001eb808;
+  *this = &ptrTo_MachineAssembler__dtor_19b9ac_001eb808;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
@@ -1042,7 +1042,7 @@ int Compiler__selectLimitsForShaderKind(programDesc, compiler)
 int FudoPs__vslot96_installHardwareTables(this)
   int this;
 {
-  *(undefined **)(this + 0xc) = &DAT_001e6730;
+  *(undefined **)(this + 0xc) = &FudoPsHardwareTable_001e6730;
   return;
 }
 
@@ -2444,7 +2444,7 @@ int R520MachineAssembler__create(unusedThis, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,((unsigned char *)0x000010c4U));
   *allocation = arena;
-  allocation[1] = &PTR_FUN_001eb9a8;
+  allocation[1] = &ptrTo_R520MachineAssembler__dtor_001eb9a8;
   allocation[7] = 0;
   return allocation + 1;
 }

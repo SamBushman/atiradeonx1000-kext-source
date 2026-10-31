@@ -147,7 +147,7 @@ int IRProjection__ctor_109dcc(this, kind, compiler)
 {
   IRPseudo__ctor(this,kind,compiler);
   this[0x4c] = 0;
-  *this = &PTR_FUN_001ea3b8;
+  *this = &ptrTo_IRInst__dtor_1cfeac_001ea3b8;
   this[0x21] = 1;
   this[0x20] = 1;
   this[0x4b] = 0;
@@ -162,7 +162,7 @@ int IRProjection__ctor_109e28(this, kind, compiler)
 {
   IRPseudo__ctor(this,kind,compiler);
   this[0x4c] = 0;
-  *this = &PTR_FUN_001ea3b8;
+  *this = &ptrTo_IRInst__dtor_1cfeac_001ea3b8;
   this[0x21] = 1;
   this[0x20] = 1;
   this[0x4b] = 0;
@@ -192,7 +192,7 @@ int IRPresub1__ctor_109f00(this, kind, compiler)
 {
   IRPseudo__ctor(this,kind,compiler);
   this[0x21] = 1;
-  *this = &PTR_FUN_001ea268;
+  *this = &ptrTo_IRInst__dtor_1cfdb4_001ea268;
   this[0x20] = 1;
   return;
 }
@@ -205,7 +205,7 @@ int IRPresub1__ctor_109f50(this, kind, compiler)
 {
   IRPseudo__ctor(this,kind,compiler);
   this[0x21] = 1;
-  *this = &PTR_FUN_001ea268;
+  *this = &ptrTo_IRInst__dtor_1cfdb4_001ea268;
   this[0x20] = 1;
   return;
 }
@@ -233,7 +233,7 @@ int IRPresub2__ctor_10a01c(this, kind, compiler)
 {
   IRPseudo__ctor(this,kind,compiler);
   this[0x21] = 2;
-  *this = &PTR_FUN_001ea310;
+  *this = &ptrTo_IRInst__dtor_1cfe30_001ea310;
   this[0x20] = 1;
   return;
 }
@@ -246,7 +246,7 @@ int IRPresub2__ctor_10a070(this, kind, compiler)
 {
   IRPseudo__ctor(this,kind,compiler);
   this[0x21] = 2;
-  *this = &PTR_FUN_001ea310;
+  *this = &ptrTo_IRInst__dtor_1cfe30_001ea310;
   this[0x20] = 1;
   return;
 }
@@ -280,7 +280,7 @@ int IRMix__ctor_10a140(this, kind, compiler)
   defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
   laneDefaultWord = swizzleAllUnused_001af9c4;
-  *this = &PTR_FUN_001ea070;
+  *this = &ptrTo_IRInst__dtor_1cfcbc_001ea070;
   remaining = 4;
   this[0x4b] = 0;
   this[0x27] = defaultWord27;
@@ -307,7 +307,7 @@ int IRMix__ctor_10a1c0(this, kind, compiler)
   defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
   laneDefaultWord = swizzleAllUnused_001af9c4;
-  *this = &PTR_FUN_001ea070;
+  *this = &ptrTo_IRInst__dtor_1cfcbc_001ea070;
   remaining = 4;
   this[0x4b] = 0;
   this[0x27] = defaultWord27;
@@ -349,7 +349,7 @@ int IRPhiNode__ctor_10a2bc(this, compiler)
   
   IRPseudo__ctor(this,0x8e,compiler);
   this[0x20] = 1;
-  *this = &PTR_FUN_001ea1c0;
+  *this = &ptrTo_IRInst__dtor_1cfd38_001ea1c0;
   rowTable = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x84);
   rowByteOffset = 0;
   do {
@@ -384,7 +384,7 @@ int IRPhiNode__ctor_10a398(this, compiler)
   
   IRPseudo__ctor(this,0x8e,compiler);
   this[0x20] = 1;
-  *this = &PTR_FUN_001ea1c0;
+  *this = &ptrTo_IRInst__dtor_1cfd38_001ea1c0;
   rowTable = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),0x84);
   rowByteOffset = 0;
   do {
@@ -634,7 +634,7 @@ int IREndCallRoutine__ctor_10aa7c(this, compiler)
 /* outputScaleFromExponent @ 0x10aad4 (40 bytes) */
 double outputScaleFromExponent(int exponent)
 {
-  return (double)*(float *)(&DAT_001af9ec + exponent * 4);
+  return (double)*(float *)(&outputScaleByExponent_001af9ec + exponent * 4);
 }
 
 /* isOutputScaleValue @ 0x10aafc (68 bytes) */
@@ -643,7 +643,7 @@ undefined4 isOutputScaleValue(double scale)
   float *scaleTablePtr;
   int remaining;
   
-  scaleTablePtr = (float *)&DAT_001af9e0;
+  scaleTablePtr = (float *)&outputScaleTable_001af9e0;
   remaining = 7;
   do {
     if ((double)*scaleTablePtr == scale) {
@@ -663,7 +663,7 @@ int outputScaleExponent(double scale)
   int remaining;
   
   tableIndex = 0;
-  scaleTablePtr = (float *)&DAT_001af9e0;
+  scaleTablePtr = (float *)&outputScaleTable_001af9e0;
   remaining = 7;
   do {
     if ((double)*scaleTablePtr == scale) {

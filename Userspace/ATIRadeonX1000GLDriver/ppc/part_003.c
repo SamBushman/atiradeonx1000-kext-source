@@ -215,7 +215,7 @@ int gld_submitRing(ctx, terminatorWord)
   *(int *)(*(int *)(ctx + GLD_ringMap) + 0x10) =
        (*(int *)(ctx + GLD_ringLimit) - (int)writeCursor >> 2) +
        (*(int *)(ctx + GLD_reserveEnd) - *(int *)(ctx + GLD_reserveStart) >> 2) + 0x25;
-  taskPtr = PTR_001e88b4;
+  taskPtr = ptrTo_machTaskSelf_001e88b4;
   *headerWord = (int)writeCursor - (int)headerWord >> 2 | *headerWord;
   *writeCursor = terminatorWord;
   _IOConnectMapMemory(*(undefined4 *)(ctx + GLD_connect),1,*(undefined4 *)taskPtr,ctx + GLD_ringMap,
@@ -1778,9 +1778,9 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
           scratchInt32 = width * (scratchInt50 - (scratchInt50 / height) * height) +
                    (scratchInt25 - (scratchInt25 / width) * width);
           scratchInt16 = scratchInt47 * scratchInt32;
-          (DAT_001f65e4)[scratchInt42] = srcPixels[scratchInt16];
-          (DAT_001f65e5)[scratchInt42] = srcPixels[scratchInt16 + 1];
-          (DAT_001f65e6)[scratchInt42] = srcPixels[scratchInt16 + 2];
+          (dxtBlockPixelByte0_001f65e4)[scratchInt42] = srcPixels[scratchInt16];
+          (dxtBlockPixelByte1_001f65e5)[scratchInt42] = srcPixels[scratchInt16 + 1];
+          (dxtBlockPixelByte2_001f65e6)[scratchInt42] = srcPixels[scratchInt16 + 2];
           if (scratchInt47 == 4) {
             *scratchPtr28 = srcPixels[scratchInt32 * 4 + 3];
           }
@@ -1792,7 +1792,7 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
       scratchInt50 = scratchInt50 + 1;
       scratchInt49 = scratchInt49 + scratchInt48;
     } while (scratchStack70 != scratchInt50);
-    srcPixels = DAT_001f65e4;
+    srcPixels = dxtBlockPixelByte0_001f65e4;
     width = scratchInt48;
   }
   else {
@@ -2677,7 +2677,7 @@ LAB_0001dae4:
       nothingPending = pendingMask == 0;
       attrIndex = 0x10;
     }
-    attrBit = *(uint *)(&DAT_001d91f0 + attrIndex * 4);
+    attrBit = *(uint *)(&vertexAttribBitTable_001d91f0 + attrIndex * 4);
     if ((pendingMask & attrBit) != 0) {
       pendingMask = pendingMask & ~attrBit;
       attrEnabledFlag = (undefined1 *)((int)vertexArray + attrIndex + 8);
@@ -2694,7 +2694,7 @@ LAB_0001dae4:
         if (((!isBaseMode) || (((dataBase <= attrAddress && (attrAddress < dataSize + dataBase)) && ((attrAddress & 3) == 0)))
             ) && ((fetchElementCount < 5 && (attrStride < 0x200)))) {
           if ((attrStride & 3) == 0) {
-            if ((typeIndex < 0xb) && (typeOffset = typeIndex * 4, *(int *)(&DAT_001d96f4 + typeOffset) == 1)) {
+            if ((typeIndex < 0xb) && (typeOffset = typeIndex * 4, *(int *)(&vertexTypeSupportedTable_001d96f4 + typeOffset) == 1)) {
               if (attrStride != 0) {
                 fetchElementCount = attrStride >> 2;
               }
@@ -2704,8 +2704,8 @@ LAB_0001dae4:
                    *(uint *)(&DAT_001d9644 + typeSizeOffset) & 0x7f |
                    (fetchElementCount & 0x7f) << 8 | vertexArray[attrIndex + 10] & 0xffff8080U;
               vertexArray[attrIndex + 0x2a] = attrAddress - dataBase;
-              signedFlag = *(uint *)(&DAT_001d9568 + typeOffset);
-              typeFlags = *(uint *)(&DAT_001d9594 + typeSizeOffset);
+              signedFlag = *(uint *)(&vertexTypeSignedTable_001d9568 + typeOffset);
+              typeFlags = *(uint *)(&vertexTypeFlagsTable_001d9594 + typeSizeOffset);
               rawTypeWord = *(short *)(entryOffset + arrayDesc + 8);
               vertexArray[attrIndex + 0x6a] =
                    (*(uint *)(&DAT_001d92a8 + typeSizeOffset) & 7) << 9 |
@@ -3202,7 +3202,7 @@ int gld_prepareVertexArrayBuffers(ctx, vertexArray)
     nonePending = pendingMask == 0;
     while( true ) {
       while (!nonePending) {
-        attrBit = *(uint *)(&DAT_001d91f0 + attrIndex * 4);
+        attrBit = *(uint *)(&vertexAttribBitTable_001d91f0 + attrIndex * 4);
         if ((pendingMask & attrBit) != 0) {
           scratchInt4 = *(int *)(attrIndex * 4 + dirtyState);
           if ((scratchInt4 == 0) || (scratchInt4 = ((int (*)())gld_prepareBufferBacking)(ctx,scratchInt4,0), scratchInt4 == 0))
@@ -4387,7 +4387,7 @@ checkProgramVertexInfo:
         }
         else {
           attrControlWord = *inputDescriptor;
-          hwAttrId = *(uint *)(&DAT_001d9778 + (attrControlWord >> 0xe & 0x3c));
+          hwAttrId = *(uint *)(&vertexAttrControlToHwAttrTable_001d9778 + (attrControlWord >> 0xe & 0x3c));
           if (hwAttrId == 8) {
             hwAttrId = (attrControlWord & 0x1f) + 8;
           }
@@ -4423,7 +4423,7 @@ checkProgramVertexInfo:
         else {
           attrControlWord = *(uint *)(arrayDesc + 0x300);
         }
-        if ((attrControlWord & *(uint *)(&DAT_001d91f0 + hwAttrId * 4)) == 0) {
+        if ((attrControlWord & *(uint *)(&vertexAttribBitTable_001d91f0 + hwAttrId * 4)) == 0) {
           *(int *)(glContext + 0x24e0) = *(int *)(glContext + 0x24e0) + 4;
           *(uint *)(glContext + 0x24dc) = 1 << (loopIndex2 & 0x3f) | *(uint *)(glContext + 0x24dc);
           if (lowMaskUnset && highMaskUnset) {
@@ -5547,10 +5547,10 @@ setScratchUint24:
       gld_validateStreamState(ctx + GLD_commandStream,dirtyBits);
       framebufferObj = r4Out5;
     }
-    dispatchEntryAlt = PTR_FUN_001e8980;
-    flushEntry = PTR__gldFlush_001e897c;
-    scratchPtr5 = PTR__gldFinish_001e8978;
-    scratchPtr4 = PTR_FUN_001e8938;
+    dispatchEntryAlt = ptrTo_glFinish_impl_001e8980;
+    flushEntry = ptrTo_gldFlush_001e897c;
+    scratchPtr5 = ptrTo_gldFinish_001e8978;
+    scratchPtr4 = ptrTo_gld_swapBuffersImpl_001e8938;
     if ((*(uint *)(GLD_updateFlags + ctx) & 2) != 0) {
       result = result | 2;
     }
@@ -5562,63 +5562,63 @@ setScratchUint24:
             *(code **)(dispatch + 0x60) = noop_22280;
           }
           else {
-            *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8934;
+            *(undefined **)(dispatch + 0x60) = ptrTo_glFlush_impl_001e8934;
           }
-          scratchPtr4 = PTR__gldFlush_001e897c;
-          *(undefined **)(dispatch + 0x58) = PTR__gldFinish_001e8978;
+          scratchPtr4 = ptrTo_gldFlush_001e897c;
+          *(undefined **)(dispatch + 0x58) = ptrTo_gldFinish_001e8978;
           *(undefined **)(dispatch + 0x5c) = scratchPtr4;
         }
         else if ((renderFlags & 0x400) == 0) {
-          *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8938;
+          *(undefined **)(dispatch + 0x60) = ptrTo_gld_swapBuffersImpl_001e8938;
           *(undefined **)(dispatch + 0x58) = dispatchEntryAlt;
           *(undefined **)(dispatch + 0x5c) = scratchPtr4;
         }
         else if ((renderFlags & 0x800) == 0) {
-          *(undefined **)(dispatch + 0x58) = PTR__gldFinish_001e8978;
+          *(undefined **)(dispatch + 0x58) = ptrTo_gldFinish_001e8978;
           *(undefined **)(dispatch + 0x5c) = flushEntry;
-          *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8934;
+          *(undefined **)(dispatch + 0x60) = ptrTo_glFlush_impl_001e8934;
         }
         else if (*(int *)(ctx + 0x26a0) == 0) {
           ((int (*)())gld_swapBuffersImpl)(ctx,framebufferObj,dirtyBitsArg,scratchR6,dirtyWord3,scratchUint9,renderFlags & 0x800);
-          scratchPtr4 = PTR__gldFlush_001e897c;
-          *(undefined **)(dispatch + 0x58) = PTR__gldFinish_001e8978;
+          scratchPtr4 = ptrTo_gldFlush_001e897c;
+          *(undefined **)(dispatch + 0x58) = ptrTo_gldFinish_001e8978;
           *(undefined **)(dispatch + 0x5c) = scratchPtr4;
-          *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8948;
+          *(undefined **)(dispatch + 0x60) = ptrTo_glFlush_impl_withSurfaceUpdate_001e8948;
         }
         else {
-          *(undefined **)(dispatch + 0x58) = PTR_FUN_001e8980;
+          *(undefined **)(dispatch + 0x58) = ptrTo_glFinish_impl_001e8980;
           *(undefined **)(dispatch + 0x5c) = scratchPtr4;
-          *(undefined **)(dispatch + 0x60) = PTR_FUN_001e8948;
+          *(undefined **)(dispatch + 0x60) = ptrTo_glFlush_impl_withSurfaceUpdate_001e8948;
         }
       }
       else {
         *(code **)(dispatch + 0x60) = noop_22280;
         *(undefined **)(dispatch + 0x58) = scratchPtr5;
-        *(undefined **)(dispatch + 0x5c) = PTR__gldFlush_001e897c;
+        *(undefined **)(dispatch + 0x5c) = ptrTo_gldFlush_001e897c;
       }
     }
-    scratchPtr5 = PTR_FUN_001e8910;
-    scratchPtr4 = PTR_FUN_001e88ec;
+    scratchPtr5 = ptrTo_gldPrimWrapperLines_23a24_001e8910;
+    scratchPtr4 = ptrTo_gldPrimInlineLines_001e88ec;
     if ((*(char *)(ctx + 0x20) == '\0') || (*(int *)(ctx + GLD_currentProgram) == 0)) {
-      *(undefined **)(dispatch + 0x18) = PTR_FUN_001e8944;
+      *(undefined **)(dispatch + 0x18) = ptrTo_gldPrimWrapperPoints_23a24_001e8944;
       *(undefined **)(dispatch + 0x1c) = scratchPtr5;
-      scratchPtr4 = PTR_FUN_001e88d4;
-      *(undefined **)(dispatch + 0x24) = PTR_FUN_001e891c;
+      scratchPtr4 = ptrTo_gldPrimWrapperLineStrip_23a24_001e88d4;
+      *(undefined **)(dispatch + 0x24) = ptrTo_gldPrimWrapperLineLoop_23a24_001e891c;
       *(undefined **)(dispatch + 0x20) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e88e0;
-      *(undefined **)(dispatch + 0x2c) = PTR_FUN_001e8940;
+      scratchPtr4 = ptrTo_gldPrimWrapperTriangleStrip_23a24_001e88e0;
+      *(undefined **)(dispatch + 0x2c) = ptrTo_gldPrimWrapperTriangles_23a24_001e8940;
       *(undefined **)(dispatch + 0x34) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e88e4;
-      *(undefined **)(dispatch + 0x30) = PTR_FUN_001e894c;
+      scratchPtr4 = ptrTo_gldPrimWrapperQuads_23a24_001e88e4;
+      *(undefined **)(dispatch + 0x30) = ptrTo_gldPrimWrapperTriangleFan_23a24_001e894c;
       *(undefined **)(dispatch + 0x38) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e8914;
-      *(undefined **)(dispatch + 0x3c) = PTR_FUN_001e893c;
+      scratchPtr4 = ptrTo_gldPrimWrapperPolygon_23a24_001e8914;
+      *(undefined **)(dispatch + 0x3c) = ptrTo_gldPrimWrapperQuadStrip_23a24_001e893c;
       *(undefined **)(dispatch + 0x28) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e8990;
+      scratchPtr4 = ptrTo_gldPrimWrapperLines_24190_001e8990;
       if (*(char *)(ctx + 0x20) == '\0') {
-        *(undefined **)(dispatch + 0x40) = PTR_FUN_001e88f8;
+        *(undefined **)(dispatch + 0x40) = ptrTo_gldPrimWrapperPoints_24190_001e88f8;
         *(undefined **)(dispatch + 0x44) = scratchPtr4;
-        *(undefined **)(dispatch + 0x48) = PTR_FUN_001e895c;
+        *(undefined **)(dispatch + 0x48) = ptrTo_gldPrimWrapperPolygon_24190_001e895c;
       }
       else {
         *(code **)(dispatch + 0x48) = noop_22280;
@@ -5627,19 +5627,19 @@ setScratchUint24:
       }
     }
     else {
-      *(undefined **)(dispatch + 0x18) = PTR_FUN_001e8918;
+      *(undefined **)(dispatch + 0x18) = ptrTo_gldPrimInlinePoints_001e8918;
       *(undefined **)(dispatch + 0x1c) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e8954;
-      *(undefined **)(dispatch + 0x24) = PTR_FUN_001e8908;
+      scratchPtr4 = ptrTo_gldPrimInlinePolygon_001e8954;
+      *(undefined **)(dispatch + 0x24) = ptrTo_gldPrimInlineLineLoop_001e8908;
       *(undefined **)(dispatch + 0x28) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e88f4;
-      *(undefined **)(dispatch + 0x20) = PTR_FUN_001e8930;
+      scratchPtr4 = ptrTo_gldPrimInlineTriangles_001e88f4;
+      *(undefined **)(dispatch + 0x20) = ptrTo_gldPrimInlineLineStrip_001e8930;
       *(undefined **)(dispatch + 0x2c) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e8924;
-      *(undefined **)(dispatch + 0x34) = PTR_FUN_001e8960;
+      scratchPtr4 = ptrTo_gldPrimInlineTriangleFan_001e8924;
+      *(undefined **)(dispatch + 0x34) = ptrTo_gldPrimInlineTriangleStrip_001e8960;
       *(undefined **)(dispatch + 0x30) = scratchPtr4;
-      scratchPtr4 = PTR_FUN_001e8968;
-      *(undefined **)(dispatch + 0x38) = PTR_FUN_001e892c;
+      scratchPtr4 = ptrTo_gldPrimInlineQuadStrip_001e8968;
+      *(undefined **)(dispatch + 0x38) = ptrTo_gldPrimInlineQuads_001e892c;
       *(undefined **)(dispatch + 0x3c) = scratchPtr4;
     }
     scratchUint20 = *(uint *)(GLD_updateFlags + ctx);
@@ -5715,53 +5715,53 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   savedState[1] = word1;
   *savedState = word0;
   savedState[3] = word2;
-  word0 = DAT_001aa4c0;
-  defaultState0 = DAT_001aa4b0;
-  defaultState1 = DAT_001aa4b4;
-  defaultState2 = DAT_001aa4b8;
+  word0 = dispatchDefaultState4_001aa4c0;
+  defaultState0 = dispatchDefaultState0_001aa4b0;
+  defaultState1 = dispatchDefaultState1_001aa4b4;
+  defaultState2 = dispatchDefaultState2_001aa4b8;
   word1 = *(undefined4 *)(ctx + 0x118);
-  defaultState3 = DAT_001aa4bc;
-  defaultState4 = DAT_001aa4c0;
+  defaultState3 = dispatchDefaultState3_001aa4bc;
+  defaultState4 = dispatchDefaultState4_001aa4c0;
   savedState[4] = *(undefined4 *)(ctx + 0x114);
   savedState[5] = word1;
   *(undefined4 **)(ctx + GLD_dispatchTable) = dispatch;
   do {
     staleFprArg1 = (double)gld_dropStaleTextureShadow(ctx,unit);
-    entry = PTR_FUN_001e8950;
+    entry = ptrTo_glAccum_impl_001e8950;
     moreUnits = unit != 0xf;
     unit = unit + 1;
   } while (moreUnits);
-  dispatch[5] = PTR_FUN_001e88dc;
+  dispatch[5] = ptrTo_glBitmap_impl_001e88dc;
   *dispatch = entry;
-  entry = PTR_FUN_001e898c;
-  dispatch[4] = PTR_FUN_001e8988;
+  entry = ptrTo_glReadPixels_entry_001e898c;
+  dispatch[4] = ptrTo_glCopyPixels_impl_001e8988;
   dispatch[2] = entry;
-  entry = PTR_FUN_001e8958;
-  dispatch[3] = PTR_FUN_001e8900;
+  entry = ptrTo_gld_clearStreamBuffers_001e8958;
+  dispatch[3] = ptrTo_gld_drawPixelsDispatch_001e8900;
   dispatch[1] = entry;
-  entry = PTR_FUN_001e890c;
-  dispatch[0x19] = PTR_FUN_001e8964;
+  entry = ptrTo_glCopyTexSubImage_impl_001e890c;
+  dispatch[0x19] = ptrTo_gld_signalFence_001e8964;
   dispatch[0x1d] = entry;
-  entry = PTR_FUN_001e88f0;
-  dispatch[0x1e] = PTR_FUN_001e88fc;
+  entry = ptrTo_glGenerateMipmap_impl_001e88f0;
+  dispatch[0x1e] = ptrTo_glTexSubImage_impl_001e88fc;
   dispatch[0x1f] = entry;
-  altEntry = PTR_FUN_001e8970;
-  entry = PTR_FUN_001e8920;
+  altEntry = ptrTo_gld_drawArraysStream_001e8970;
+  entry = ptrTo_gld_drawArraysDirect_001e8920;
   if (((unsigned char *)0x00002b82)[ctx] == '\0') {
-    dispatch[0x14] = PTR_FUN_001e88e8;
+    dispatch[0x14] = ptrTo_gld_reserveDrawSpace_001e88e8;
     dispatch[0x15] = entry;
   }
   else {
-    dispatch[0x14] = PTR_FUN_001e8974;
+    dispatch[0x14] = ptrTo_gld_reserveVertexBufferSpace_001e8974;
     dispatch[0x15] = altEntry;
   }
-  entry = PTR_FUN_001e8928;
-  dispatch[0x1c] = PTR_FUN_001e8984;
+  entry = ptrTo_gld_drawElementsImmediate_001e8928;
+  dispatch[0x1c] = ptrTo_gld_drawVertexArray_001e8984;
   dispatch[0x13] = entry;
-  entry = PTR_LAB_001e8904;
-  dispatch[0x1a] = PTR_FUN_001e896c;
+  entry = ptrTo_rawEntry2bbc0_001e8904;
+  dispatch[0x1a] = ptrTo_gld_beginQuerySlot_001e896c;
   dispatch[0x1b] = entry;
-  dispatch[0x20] = PTR_FUN_001e88d8;
+  dispatch[0x20] = ptrTo_returnZero_1e270_001e88d8;
   return ((uint (*)())_gldUpdateDispatch)(ctx,dispatch,&defaultState0,updateArg3,updateArg4,word0,staleFprArg1,staleFpr2,staleFpr3,staleFpr4,
                      staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff98,staleStackArg_ffffffa0,staleStackArg_ffffffa8,
                      staleStackArg_ffffffb0,staleStackArg_ffffffb8);

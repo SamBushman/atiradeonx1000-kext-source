@@ -488,9 +488,9 @@ int gldEmitInternalDrawSetupPackets(ctx, packet)
   *(undefined1 *)(ctx + 0x3d4) = 1;
   heightMinus2 = *(int *)(((unsigned char *)0x000013f4) + ctx) - 2;
   heightMinus1 = *(int *)(((unsigned char *)0x000013f4) + ctx) - 1;
-  DAT_001dbca8 = heightMinus1 & 0x3ff | DAT_001dbca8 & 0xfffffc00;
-  DAT_001dbcac = (heightMinus1 & 0x3ff) << 0x14 |
-                 (heightMinus2 & 0x3ff) << 10 | heightMinus2 & 0x3ff | DAT_001dbcac & 0xc0000000;
+  drawSetupPackedWord_001dbca8 = heightMinus1 & 0x3ff | drawSetupPackedWord_001dbca8 & 0xfffffc00;
+  drawSetupPacketWord14_001dbcac = (heightMinus1 & 0x3ff) << 0x14 |
+                 (heightMinus2 & 0x3ff) << 10 | heightMinus2 & 0x3ff | drawSetupPacketWord14_001dbcac & 0xc0000000;
   ctxFlags8c = *(uint *)(ctx + 0x8c);
   if ((ctxFlags8c & 0x8000) != 0) {
     if (*(int *)(ctx + 0xd8) == 2) {
@@ -512,19 +512,19 @@ int gldEmitInternalDrawSetupPackets(ctx, packet)
   *packet = 0x8a1;
   packet[2] = 0x880;
   packet[4] = 0x78882;
-  packet[5] = DAT_001dbcb0;
-  packet[6] = DAT_001dbcb4;
-  packet[7] = DAT_001dbcb8;
-  packet[8] = DAT_001dbcbc;
-  packet[9] = DAT_001dbcc0;
-  packet[10] = DAT_001dbcc4;
-  packet[0xb] = DAT_001dbcc8;
-  regWord = DAT_001dbccc;
+  packet[5] = drawSetupPacketWord5_001dbcb0;
+  packet[6] = drawSetupPacketWord6_001dbcb4;
+  packet[7] = drawSetupPacketWord7_001dbcb8;
+  packet[8] = drawSetupPacketWord8_001dbcbc;
+  packet[9] = drawSetupPacketWord9_001dbcc0;
+  packet[10] = drawSetupPacketWord10_001dbcc4;
+  packet[0xb] = drawSetupPacketWord11_001dbcc8;
+  regWord = drawSetupPacketRegWord_001dbccc;
   packet[0xd] = 0x208b4;
   packet[0xc] = regWord;
-  packet[0xe] = DAT_001dbcac;
-  packet[0xf] = DAT_001fa5e4;
-  packedValue = DAT_001dbca8;
+  packet[0xe] = drawSetupPacketWord14_001dbcac;
+  packet[0xf] = drawSetupPacketWord15_001fa5e4;
+  packedValue = drawSetupPackedWord_001dbca8;
   packet[0x11] = 0x8b7;
   packet[0x12] = 0;
   packet[0x10] = packedValue;

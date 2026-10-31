@@ -240,7 +240,7 @@ int MachineAssembler__deleting_dtor(param_1)
   undefined4 *puVar1;
   int iVar2;
   
-  *param_1 = &PTR_FUN_001e9a40;
+  *param_1 = &ptrTo_MachineAssembler__dtor_1cd7ec_001e9a40;
   if (param_1 == (undefined4 *)0x0) {
     return;
   }

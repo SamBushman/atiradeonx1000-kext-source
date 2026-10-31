@@ -3357,7 +3357,7 @@ setSlotScanIndex2X:
           maxTempsUsed = shader[0x19];
         }
         opIndex = *(int *)(instrByteOffset + shader[6]) + -0x8782;
-        symbolRecordOrCallResult = (*(code *)(PTR_FUN_001db9b8)[opIndex])(ctx,shader,instrByteOffset + shader[6]);
+        symbolRecordOrCallResult = (*(code *)(ptrTo_extvsEmitIndex_001db9b8)[opIndex])(ctx,shader,instrByteOffset + shader[6]);
         if (symbolRecordOrCallResult < 0) {
           success = 0;
           goto loopStoreShader;
@@ -3375,7 +3375,7 @@ setSlotScanIndex2X:
             tempInstrDstMaskW = 0;
             tempInstrDstId = fogCopyUnit + 0x879d;
             tempInstrDstMaskX = dstOperandKind;
-            symbolRecordOrCallResult = (*(code *)(PTR_FUN_001db9b8)[opIndex])(ctx,shader,tempInstr);
+            symbolRecordOrCallResult = (*(code *)(ptrTo_extvsEmitIndex_001db9b8)[opIndex])(ctx,shader,tempInstr);
             hwInstrCountCopy = *(int *)(programState + 0x18);
             *(int *)(programState + 0x18) = symbolRecordOrCallResult + hwInstrCountCopy;
             tempInstrSrc0SwizzleW = 0x87de;
@@ -3387,7 +3387,7 @@ setSlotScanIndex2X:
             tempInstrDstMaskY = dstOperandKind;
             tempInstrDstMaskZ = dstOperandKind;
             tempInstrDstMaskW = dstOperandKind;
-            symbolRecordOrCallResult = (*(code *)PTR_FUN_001dba14)
+            symbolRecordOrCallResult = (*(code *)ptrTo_extvsEmitMov_001dba14)
                                (ctx,shader,tempInstr,recordOrOffsetScratch,in_r7,in_r8,hwInstrCountCopy);
             *(int *)(programState + 0x18) = symbolRecordOrCallResult + *(int *)(programState + 0x18);
             glContextWord44 = *(uint *)(ctx + 0x44);
@@ -3397,9 +3397,9 @@ setSlotScanIndex2X:
            (*(int *)(symbolRecordOrCallResult + 8) == 0x879a)) {
           _memcpy(tempInstr,symbolRecordOrCallResult,0x74);
           tempInstrDstId = (byte)((unsigned char *)0x000011d2)[ctx] + 0x879d;
-          recordOrOffsetScratch = (*(code *)(PTR_FUN_001db9b8)[opIndex])
+          recordOrOffsetScratch = (*(code *)(ptrTo_extvsEmitIndex_001db9b8)[opIndex])
                              (ctx,shader,tempInstr,recordOrOffsetScratch,in_r7,in_r8,
-                              (PTR_FUN_001db9b8)[opIndex]);
+                              (ptrTo_extvsEmitIndex_001db9b8)[opIndex]);
           *(int *)(programState + 0x18) = recordOrOffsetScratch + *(int *)(programState + 0x18);
         }
         if (*(char *)((int)shader + 0x7b) == '\0') {

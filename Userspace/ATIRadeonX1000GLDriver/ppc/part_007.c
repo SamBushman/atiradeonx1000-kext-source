@@ -1104,7 +1104,7 @@ int gldValidateDepthTest(glContext)
       ;
     }
     *(uint *)(glContext + 0x1aa4) =
-         *(uint *)(&DAT_001db368 + (depthFunc & 7) * 4) & 7 | *(uint *)(glContext + 0x1aa4) & 0xfffffff8;
+         *(uint *)(&depthFuncBitsTable_001db368 + (depthFunc & 7) * 4) & 7 | *(uint *)(glContext + 0x1aa4) & 0xfffffff8;
     if ((*(uint *)(glContext + 0x44) & 0x200) == 0) {
       depthControl = oldZControl & 0xfffffffe;
       *(uint *)(glContext + 0x1a50) = depthControl;
@@ -1389,7 +1389,7 @@ loopStoreGlContext:
             *(uint *)(texRegCursor + 0x1cdc) = hwUnitIndex << 0x1c | *(uint *)(texObj + 0x14) & 0xfffffff;
             *(uint *)(texRegCursor + 0x1d1c) =
                  (*(ushort *)(unitInfoCursor + 0x46e) & 0x3ff) << 3 | *(uint *)(texObj + 0x18) & 0xffffe007;
-            unitFormatArg = *(undefined4 *)(&DAT_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
+            unitFormatArg = *(undefined4 *)(&textureUnitFormatArgTable_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
             unitIndexArg = loopIndex;
             fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3
                                             ,fprF4,fprF5,fprF6,fprF7,fprF8,
@@ -1542,7 +1542,7 @@ loopSetLodBiasFromProgram:
             }
           }
           *(uint *)(texRegCursor + 0x1d1c) = texFilterWord;
-          unitFormatArg = *(undefined4 *)(&DAT_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
+          unitFormatArg = *(undefined4 *)(&textureUnitFormatArgTable_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
           unitIndexArg = loopIndex;
           fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3,
                                           fprF4,fprF5,fprF6,fprF7,fprF8,
@@ -2310,23 +2310,23 @@ int gldInitStateDefaults(glContext)
   *(undefined4 *)(0x00001b34 + glContext) = 0;
   glContextWord23d0 = *(int *)(glContext + 0x23d0);
   unitByteOffset = glContextWord23d0 * 0xb4;
-  *(undefined4 *)(glContext + 0x2360) = DAT_001db928;
-  *(undefined4 *)(glContext + 0x2364) = DAT_001db92c;
-  *(undefined4 *)(glContext + 0x236c) = DAT_001db934;
-  *(undefined4 *)(0x00002368 + glContext) = DAT_001db930;
-  *(undefined4 *)(glContext + 0x2370) = DAT_001db938;
-  *(undefined4 *)(glContext + 0x2374) = *(undefined4 *)(&DAT_001db5b8 + unitByteOffset);
-  *(undefined4 *)(glContext + 0x237c) = *(undefined4 *)(&DAT_001db5c0 + unitByteOffset);
-  *(undefined4 *)(glContext + 0x2378) = *(undefined4 *)(&DAT_001db5bc + unitByteOffset);
-  *(undefined4 *)(glContext + 0x2380) = *(undefined4 *)(&DAT_001db5c4 + unitByteOffset);
-  *(undefined4 *)(glContext + 0x2384) = *(undefined4 *)(&DAT_001db2d4 + unitByteOffset);
-  *(undefined4 *)(0x00002388 + glContext) = *(undefined4 *)(&DAT_001db2d8 + unitByteOffset);
-  *(undefined4 *)(glContext + 0x2398) = *(undefined4 *)(&DAT_001db2e0 + unitByteOffset);
-  *(undefined **)(glContext + 0x238c) = (PTR_FUN_001db2dc)[glContextWord23d0 * 0x2d];
-  *(undefined4 *)(glContext + 0x239c) = *(undefined4 *)(&DAT_001db2e4 + unitByteOffset);
-  *(undefined4 *)(glContext + 0x2390) = *(undefined4 *)(&DAT_001db2e8 + unitByteOffset);
-  *(undefined4 *)(glContext + 0x23a0) = *(undefined4 *)(&DAT_001db2f0 + unitByteOffset);
-  *(undefined **)(glContext + 0x2394) = (PTR_FUN_001db2ec)[glContextWord23d0 * 0x2d];
+  *(undefined4 *)(glContext + 0x2360) = stateDefaultAt2360_001db928;
+  *(undefined4 *)(glContext + 0x2364) = stateDefaultAt2364_001db92c;
+  *(undefined4 *)(glContext + 0x236c) = stateDefaultAt236C_001db934;
+  *(undefined4 *)(0x00002368 + glContext) = stateDefaultAt2368_001db930;
+  *(undefined4 *)(glContext + 0x2370) = stateDefaultAt2370_001db938;
+  *(undefined4 *)(glContext + 0x2374) = *(undefined4 *)(&perUnitStateDefaultAt2374_001db5b8 + unitByteOffset);
+  *(undefined4 *)(glContext + 0x237c) = *(undefined4 *)(&perUnitStateDefaultAt237C_001db5c0 + unitByteOffset);
+  *(undefined4 *)(glContext + 0x2378) = *(undefined4 *)(&perUnitStateDefaultAt2378_001db5bc + unitByteOffset);
+  *(undefined4 *)(glContext + 0x2380) = *(undefined4 *)(&perUnitStateDefaultAt2380_001db5c4 + unitByteOffset);
+  *(undefined4 *)(glContext + 0x2384) = *(undefined4 *)(&perUnitStateDefaultAt2384_001db2d4 + unitByteOffset);
+  *(undefined4 *)(0x00002388 + glContext) = *(undefined4 *)(&perUnitStateDefaultAt2388_001db2d8 + unitByteOffset);
+  *(undefined4 *)(glContext + 0x2398) = *(undefined4 *)(&perUnitStateDefaultAt2398_001db2e0 + unitByteOffset);
+  *(undefined **)(glContext + 0x238c) = (ptrTo_fragmentTranslateWhile_001db2dc)[glContextWord23d0 * 0x2d];
+  *(undefined4 *)(glContext + 0x239c) = *(undefined4 *)(&perUnitStateDefaultAt239C_001db2e4 + unitByteOffset);
+  *(undefined4 *)(glContext + 0x2390) = *(undefined4 *)(&perUnitStateDefaultAt2390_001db2e8 + unitByteOffset);
+  *(undefined4 *)(glContext + 0x23a0) = *(undefined4 *)(&perUnitStateDefaultAt23A0_001db2f0 + unitByteOffset);
+  *(undefined **)(glContext + 0x2394) = (ptrTo_fragmentTranslateSimpleOp_001db2ec)[glContextWord23d0 * 0x2d];
   defaultWord = *(undefined4 *)(&DAT_001db2f4 + unitByteOffset);
   *(undefined4 *)(glContext + 0x23c4) = 0;
   *(undefined4 *)(glContext + 0x23c8) = 0;
@@ -3217,7 +3217,7 @@ int gldValidateStencil(glContext)
   hwFrontFailOp = 3;
   *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x20000000;
   frontFailOp = *(ushort *)(((unsigned char *)0x000031a2) + glState);
-  frontFuncBits = *(uint *)(&DAT_001db348 + (*(ushort *)(((unsigned char *)0x000031a0) + glState) & 7) * 4);
+  frontFuncBits = *(uint *)(&stencilFuncBitsTable_001db348 + (*(ushort *)(((unsigned char *)0x000031a0) + glState) & 7) * 4);
   if (frontFailOp != 0x1e02) {
     if (frontFailOp < 0x1e03) {
       hwFrontFailOp = 5;
@@ -3275,7 +3275,7 @@ loopSetHwFrontZfailOp:
   *(char *)(glContext + 0x1aaa) = (char)*(undefined4 *)(((unsigned char *)0x00003198) + glState);
   *(char *)(glContext + 0x1aa9) = (char)*(undefined4 *)(((unsigned char *)0x00002e38) + glState);
   backFailOp = *(ushort *)(((unsigned char *)0x000031ba) + glState);
-  backFuncBits = *(uint *)(&DAT_001db348 + (*(ushort *)(((unsigned char *)0x000031b8) + glState) & 7) * 4);
+  backFuncBits = *(uint *)(&stencilFuncBitsTable_001db348 + (*(ushort *)(((unsigned char *)0x000031b8) + glState) & 7) * 4);
   if (backFailOp != 0x1e02) {
     if (backFailOp < 0x1e03) {
       hwBackFailOp = 5;
@@ -4399,43 +4399,43 @@ int extvsSelectHandlerTables(glContext)
   undefined *handlerTemp2;
   undefined4 result;
   
-  handlerTemp2 = PTR_FUN_001e89b8;
-  handlerTemp = PTR_FUN_001e89b0;
+  handlerTemp2 = ptrTo_gldDestroyListObject_001e89b8;
+  handlerTemp = ptrTo_ctxTempListFree_001e89b0;
   result = 0;
   if (glContext != -0x1168) {
     if (*(char *)(glContext + 0x1868) == '\0') {
-      *(undefined **)(((unsigned char *)0x000011a0) + glContext) = PTR_FUN_001e89c4;
+      *(undefined **)(((unsigned char *)0x000011a0) + glContext) = ptrTo_gldAllocListNode_001e89c4;
       *(undefined **)(((unsigned char *)0x000011a8) + glContext) = handlerTemp2;
-      handlerTemp = PTR_FUN_001e89d8;
-      *(undefined **)(((unsigned char *)0x000011a4) + glContext) = PTR_FUN_001e89c8;
+      handlerTemp = ptrTo_extvsInitLimits_001e89d8;
+      *(undefined **)(((unsigned char *)0x000011a4) + glContext) = ptrTo_extvsStateCacheCreate_001e89c8;
       *(undefined **)(((unsigned char *)0x000011b0) + glContext) = handlerTemp;
-      handlerTemp = PTR_FUN_001e89a8;
-      *(undefined **)(((unsigned char *)0x000011ac) + glContext) = PTR_LAB_001e89cc;
+      handlerTemp = ptrTo_evsFoldConstantMoves_001e89a8;
+      *(undefined **)(((unsigned char *)0x000011ac) + glContext) = ptrTo_rawEntry627e0_001e89cc;
       *(undefined **)(((unsigned char *)0x00001190) + glContext) = handlerTemp;
-      handlerTemp = PTR_FUN_001e89e8;
-      *(undefined **)(((unsigned char *)0x00001194) + glContext) = PTR_FUN_001e89b4;
+      handlerTemp = ptrTo_extvsRewriteHardwareInstructions_001e89e8;
+      *(undefined **)(((unsigned char *)0x00001194) + glContext) = ptrTo_extvsPrepareHardwareProgram_001e89b4;
       *(undefined **)(((unsigned char *)0x0000119c) + glContext) = handlerTemp;
-      *(undefined **)(((unsigned char *)0x00001198) + glContext) = PTR_FUN_001e89a4;
+      *(undefined **)(((unsigned char *)0x00001198) + glContext) = ptrTo_extvsUploadProgramConstants_001e89a4;
     }
     else {
-      *(undefined **)(((unsigned char *)0x000011a0) + glContext) = PTR_FUN_001e89bc;
+      *(undefined **)(((unsigned char *)0x000011a0) + glContext) = ptrTo_ctxTempListCreate_001e89bc;
       *(undefined **)(((unsigned char *)0x000011a8) + glContext) = handlerTemp;
-      handlerTemp = PTR_FUN_001e89d8;
-      *(undefined **)(((unsigned char *)0x000011a4) + glContext) = PTR_FUN_001e89d0;
+      handlerTemp = ptrTo_extvsInitLimits_001e89d8;
+      *(undefined **)(((unsigned char *)0x000011a4) + glContext) = ptrTo_vpStateCacheCreate_001e89d0;
       *(undefined **)(((unsigned char *)0x000011b0) + glContext) = handlerTemp;
-      handlerTemp = PTR_FUN_001e89a0;
-      *(undefined **)(((unsigned char *)0x000011ac) + glContext) = PTR_LAB_001e89d4;
+      handlerTemp = ptrTo_noop70c50_001e89a0;
+      *(undefined **)(((unsigned char *)0x000011ac) + glContext) = ptrTo_rawEntry772f0_001e89d4;
       *(undefined **)(((unsigned char *)0x00001190) + glContext) = handlerTemp;
-      handlerTemp = PTR_FUN_001e89dc;
-      *(undefined **)(((unsigned char *)0x00001194) + glContext) = PTR_FUN_001e89e4;
+      handlerTemp = ptrTo_noop70c60_001e89dc;
+      *(undefined **)(((unsigned char *)0x00001194) + glContext) = ptrTo_evsAssignVertexInputs_001e89e4;
       *(undefined **)(((unsigned char *)0x0000119c) + glContext) = handlerTemp;
-      *(undefined **)(((unsigned char *)0x00001198) + glContext) = PTR_FUN_001e89c0;
+      *(undefined **)(((unsigned char *)0x00001198) + glContext) = ptrTo_vpStateApplyParameters_001e89c0;
     }
-    handlerTemp = PTR_FUN_001e89ac;
+    handlerTemp = ptrTo_vpStateSetConstantVector_001e89ac;
     if (*(char *)(glContext + 0x1868) == '\0') {
       *(undefined4 *)(((unsigned char *)0x00001354) + glContext) = 0;
       *(undefined4 *)(((unsigned char *)0x0000134c) + glContext) = 0;
-      *(undefined **)(((unsigned char *)0x00001350) + glContext) = PTR_FUN_001e89e0;
+      *(undefined **)(((unsigned char *)0x00001350) + glContext) = ptrTo_extvsUploadSingleConstant_001e89e0;
     }
     else {
       *(undefined4 *)(((unsigned char *)0x00001354) + glContext) = 0;
@@ -4750,9 +4750,9 @@ int extvsCreateVectorSymbolChain(ctx, elementCount, kindArray, elementValues, sy
   uint nextElementIndex;
   undefined4 storageClassTable [8];
   
-  storageClassTable[0] = DAT_001aa584;
-  storageClassTable[2] = DAT_001aa58c;
-  storageClassTable[1] = DAT_001aa588;
+  storageClassTable[0] = extvsStorageClassEntry0_001aa584;
+  storageClassTable[2] = extvsStorageClassEntry2_001aa58c;
+  storageClassTable[1] = extvsStorageClassEntry1_001aa588;
   extvsState = *(int *)(((unsigned char *)0x00001168) + ctx);
   createdSymbol = extvsCreateSymbol(ctx,extvsState + 0x1c,0x87bf,storageClassTable[*kindArray],0x87e1,0,elementCount,*elementValues);
   *symbolOut = createdSymbol;

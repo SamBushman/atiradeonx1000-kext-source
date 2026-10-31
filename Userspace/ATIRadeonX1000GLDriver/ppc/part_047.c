@@ -902,24 +902,24 @@ int ValueKey__classifyLaneRangeClass(ctx, lane, clampFlagsOut)
     keyInst = *(int *)(ctx + 0xb0);
     switch(*(undefined4 *)(*(int *)(keyInst + 0x88) + 8)) {
     case 0x12:
-      operandClass[0] = *(int *)(&DAT_001e5bf4 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      operandClass[0] = *(int *)(&laneRangeClassTable_001e5bf4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x13:
-      operandClass[0] = *(int *)(&DAT_001e5ad4 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      operandClass[0] = *(int *)(&laneRangeClassTable_001e5ad4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     default:
       operandClass[0] = 0;
       break;
     case 0x17:
-      operandClass[0] = *(int *)(&DAT_001e5a44 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      operandClass[0] = *(int *)(&laneRangeClassTable_001e5a44 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x19:
-      operandClass[0] = *(int *)(&DAT_001e59b4 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      operandClass[0] = *(int *)(&laneRangeClassTable_001e59b4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x24:
     case 0x25:
     case 0x26:
-      operandClass[0] = *(int *)(&DAT_001e5b64 + (operandClass[1] * 6 + operandClass[2]) * 4);
+      operandClass[0] = *(int *)(&laneRangeClassTable_001e5b64 + (operandClass[1] * 6 + operandClass[2]) * 4);
       break;
     case 0x31: ;
     }
@@ -1016,29 +1016,29 @@ int ValueKey__classifyLaneCompareClass(ctx, lane)
     }
     switch(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8)) {
     case 0x12:
-      resultClass = *(int *)(&DAT_001e5ec4 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      resultClass = *(int *)(&laneCompareClassTable_001e5ec4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x13:
-      resultClass = *(int *)(&DAT_001e5c84 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      resultClass = *(int *)(&laneCompareClassTable_001e5c84 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x14:
-      resultClass = *(int *)(&DAT_001e5ec4 +
-                      (*(int *)(&DAT_001e5c84 + (operandClass[0] * 6 + operandClass[1]) * 4) * 6 +
+      resultClass = *(int *)(&laneCompareClassTable_001e5ec4 +
+                      (*(int *)(&laneCompareClassTable_001e5c84 + (operandClass[0] * 6 + operandClass[1]) * 4) * 6 +
                       operandClass[2]) * 4);
       break;
     default:
       resultClass = 0;
       break;
     case 0x17:
-      resultClass = *(int *)(&DAT_001e5da4 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      resultClass = *(int *)(&laneCompareClassTable_001e5da4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x19:
-      resultClass = *(int *)(&DAT_001e5d14 + (operandClass[0] * 6 + operandClass[1]) * 4);
+      resultClass = *(int *)(&laneCompareClassTable_001e5d14 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x24:
     case 0x25:
     case 0x26:
-      resultClass = *(int *)(&DAT_001e5e34 + (operandClass[1] * 6 + operandClass[2]) * 4);
+      resultClass = *(int *)(&laneCompareClassTable_001e5e34 + (operandClass[1] * 6 + operandClass[2]) * 4);
       break;
     case 0x31:
     case 0x3e:

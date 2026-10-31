@@ -27,7 +27,7 @@ int ConstRecord__insertSwizzleVariants(constTables, variantStart, constRecord)
   int variantTable [75];
   int variantTableEnd [3];
   
-  _memcpy(variantTable,&DAT_001aa87c,300);
+  _memcpy(variantTable,&swizzleVariantTemplate_001aa87c,300);
   usedMask = *(char *)(constRecord + 0x15c);
   savedLaneRead = savedLanes;
   savedFlagRead = savedUsedFlags;
@@ -52,8 +52,8 @@ int ConstRecord__insertSwizzleVariants(constTables, variantStart, constRecord)
   hashTables[1] = *(undefined4 *)(constTables + 0xc);
   hashTables[2] = *(undefined4 *)(constTables + 0x10);
   hashTables[3] = *(undefined4 *)(constTables + 0x14);
-  if (*(int *)(&DAT_001aa86c + (4 - variantStart) * 4) < 0xf) {
-    variantEntry = variantTable + *(int *)(&DAT_001aa86c + (4 - variantStart) * 4) * 5;
+  if (*(int *)(&swizzleVariantStartTable_001aa86c + (4 - variantStart) * 4) < 0xf) {
+    variantEntry = variantTable + *(int *)(&swizzleVariantStartTable_001aa86c + (4 - variantStart) * 4) * 5;
     do {
       loopCounter = 4;
       loopCounterB = 0;
@@ -2543,7 +2543,7 @@ int OpcodeTemplate__tableOffsetForIlOpcode(ilOpcode)
   if ((1 < tableIndex) && (tableIndex = 2, ilOpcode != 0x5f)) {
     tableIndex = ilOpcode + -0x74;
   }
-  return *(undefined4 *)(&DAT_001aa9e4 + tableIndex * 4);
+  return *(undefined4 *)(&ilOpcodeTemplateOffsetTable_001aa9e4 + tableIndex * 4);
 }
 
 /* OpcodeTemplate__lookup @ 0xf8ccc (132 bytes) */
@@ -3118,7 +3118,7 @@ int Program__lowerDestinationToken(pass, list, descriptor, unusedArg4, modeSelec
     *(int *)(operandRecord2 + 8) = laneIndex;
     operandRecord2 = IRInst__getOperandRecord(setupInst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    staleFprArg1 = (double)*(float *)(&DAT_001aa9fc + setupLiteralIndex * 4);
+    staleFprArg1 = (double)*(float *)(&setupLiteralFloatTable_001aa9fc + setupLiteralIndex * 4);
     *(int *)(operandRecord2 + 8) = laneIndex;
     ((void (*)())IRInst__makeLiteralVec4Float)(setupInst,pass,2,staleFprArg1,staleFprArg1,staleFprArg1,staleFprArg1);
     DList__pushBack(list,setupInst);

@@ -2661,10 +2661,10 @@ int gld_selectProgramCallback(glContext)
   int glContext;
 {
   if (*(char *)(glContext + 0x1868) != '\0') {
-    *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = PTR_FUN_001e8b40;
+    *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = ptrTo_vpStateSelectForDraw_001e8b40;
     return;
   }
-  *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = PTR_FUN_001e8b3c;
+  *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = ptrTo_extvsValidateProgramState_001e8b3c;
   return;
 }
 
@@ -9406,7 +9406,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
 setUnitRegAddrFinal:
   unitRegAddrFinal = unitWordOffset + glContext;
   *(uint *)(unitRegAddrFinal + 0x1cdc) =
-       (*(uint *)(&DAT_001dbf2c + field21Count * 4) & 7) << 0x15 | *(uint *)(unitRegAddrFinal + 0x1cdc) & 0xff1fffff;
+       (*(uint *)(&unitBiasFieldBitsTable_001dbf2c + field21Count * 4) & 7) << 0x15 | *(uint *)(unitRegAddrFinal + 0x1cdc) & 0xff1fffff;
   *(uint *)(unitRegAddrFinal + 0x1d1c) = (field15Bits & 3) << 0xf | *(uint *)(unitRegAddrFinal + 0x1d1c) & 0xfffe7fff;
   if (unsignedConvLimit <= scaledBiasD) {
     field23Bits = (int)(scaledBiasD - unsignedConvLimit) + 0x80000000;

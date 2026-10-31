@@ -1071,7 +1071,7 @@ int HwLimits__dtor_10dad8(this)
   this[0x19] = 0;
   this[2] = 0;
   this[6] = 0;
-  *this = &PTR_FUN_001ea5b0;
+  *this = &ptrTo_HwLimits__dtor_001ea5b0;
   this[9] = 0;
   this[10] = 0;
   this[0xb] = 0;
@@ -1100,7 +1100,7 @@ int HwLimits__dtor_10db58(this)
   this[0x19] = 0;
   this[2] = 0;
   this[6] = 0;
-  *this = &PTR_FUN_001ea5b0;
+  *this = &ptrTo_HwLimits__dtor_001ea5b0;
   this[9] = 0;
   this[10] = 0;
   this[0xb] = 0;
@@ -1231,7 +1231,7 @@ int HwLimits__installDefaults(hwLimits)
   *(undefined4 *)(limitsBlock + 0xc78) = 0;
   *(undefined4 *)(limitsBlock + 0x2a0) = 0;
   defaultDataB = PTR_DAT_001e8c84;
-  defaultFunction = PTR_FUN_001e8c7c;
+  defaultFunction = ptrTo_IRUnary__new_107df4_001e8c7c;
   defaultDataA = PTR_DAT_001e8c78;
   *(undefined4 *)(limitsBlock + 0xc60) = 0x4c;
   *(undefined **)(limitsBlock + 0xd08) = defaultDataA;

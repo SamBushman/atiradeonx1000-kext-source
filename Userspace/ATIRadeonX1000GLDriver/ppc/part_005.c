@@ -334,7 +334,7 @@ int gld_buildTextureHardwareState(ctxSaved, texture)
     else {
       scratchInt28 = (int)*(float *)(scratchInt26 + 0x2c);
     }
-    scratchUint15 = *(uint *)(&DAT_001aa510 + scratchInt28 * 4);
+    scratchUint15 = *(uint *)(&samplerAnisotropyBitsTable_001aa510 + scratchInt28 * 4);
     if (((uint)texture[0x14] >> 0x15 & 7) != scratchUint15) {
       *(undefined2 *)((int)texture + 0xa2) = 0xffff;
       *(undefined2 *)(texture + 0x28) = 0xffff;
@@ -522,7 +522,7 @@ int gld_applyAnisotropyOverride(ctx, unitIndex)
          (filterKind = *(short *)(*(int *)(texture + 0x30) + 0x16), filterKind != 0x2600)) && (filterKind != 0x2702))
        && (filterKind != 0x2700)) {
       *(uint *)(texture + 0x50) =
-           (*(uint *)(&DAT_001aa510 + *(int *)(ctx + 0x2a90) * 4) & 7) << 0x15 |
+           (*(uint *)(&samplerAnisotropyBitsTable_001aa510 + *(int *)(ctx + 0x2a90) * 4) & 7) << 0x15 |
            *(uint *)(texture + 0x50) & 0xff1fffff;
       if (3 < *(uint *)(ctx + 0x2a8c)) {
         if (filterWord == 0x2703) {
@@ -637,7 +637,7 @@ int gld_updateTextureSamplerState(ctxSaved, texture)
     else {
       scratchInt8 = (int)*(float *)(texImages + 0x2c);
     }
-    scratchUint7 = *(uint *)(&DAT_001aa510 + scratchInt8 * 4);
+    scratchUint7 = *(uint *)(&samplerAnisotropyBitsTable_001aa510 + scratchInt8 * 4);
     if ((*(uint *)(texture + 0x50) >> 0x15 & 7) != scratchUint7) {
       *(undefined2 *)(texture + 0xa2) = 0xffff;
       *(undefined2 *)(texture + 0xa0) = 0xffff;
@@ -1702,14 +1702,14 @@ int gld_compressAlphaBlock(dstBlock, srcPixels, pixelStride, rowStride)
   }
   blockRow = 0;
   scratchUint4 = 0x10;
-  indexRemapTable[0] = DAT_001aa554;
-  indexRemapTable[1] = DAT_001aa558;
-  indexRemapTable7 = DAT_001aa570;
-  indexRemapTable[2] = DAT_001aa55c;
-  indexRemapTable[3] = DAT_001aa560;
-  indexRemapTable4 = DAT_001aa564;
-  indexRemapTable5 = DAT_001aa568;
-  indexRemapTable6 = DAT_001aa56c;
+  indexRemapTable[0] = alphaIndexRemapEntry0_001aa554;
+  indexRemapTable[1] = alphaIndexRemapEntry1_001aa558;
+  indexRemapTable7 = alphaIndexRemapEntry7_001aa570;
+  indexRemapTable[2] = alphaIndexRemapEntry2_001aa55c;
+  indexRemapTable[3] = alphaIndexRemapEntry3_001aa560;
+  indexRemapTable4 = alphaIndexRemapEntry4_001aa564;
+  indexRemapTable5 = alphaIndexRemapEntry5_001aa568;
+  indexRemapTable6 = alphaIndexRemapEntry6_001aa56c;
   do {
     blockColumn = 4;
     scratchPtr10 = srcPixels;
@@ -2051,7 +2051,7 @@ int gld_createInternalTexture(glContext, width, height, depth, enumParam5, forma
     texDesc[0x38] = 1;
     *(char *)(texDesc + 0x37) = (dimension == 3) << 1;
     *(char *)((int)texDesc + 0x6f) = (dimension == 1) << 1;
-    scratchInt2 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)(byte)formatIndex * 0x24) & 7);
+    scratchInt2 = 1 << (*(uint *)(&textureFormatTable_field14_001d9f48 + (uint)(byte)formatIndex * 0x24) & 7);
     texelStorage = _malloc(scratchInt2 * depth * width * height);
     if (texelStorage != 0) {
       *(int *)(texDesc + 0x5a) = texelStorage;
@@ -2090,7 +2090,7 @@ int gld_texelBytes(ctx, texture)
   if ((0xb < formatIndex) && (formatIndex < 0x10)) {
     return 1;
   }
-  return 1 << (*(uint *)(&DAT_001d9f48 + formatIndex * 0x24) & 7);
+  return 1 << (*(uint *)(&textureFormatTable_field14_001d9f48 + formatIndex * 0x24) & 7);
 }
 
 /* gld_getTextureFormatInfo @ 0x30f60 (492 bytes) */
@@ -2113,15 +2113,15 @@ int gld_getTextureFormatInfo(ctx, texture, face, level, formatInfoOut)
     scratchUint3 = (uint)*(byte *)(texture + 0x38);
   }
   scratchInt4 = scratchUint3 * 0x24;
-  formatFlags = *(uint *)(&DAT_001d9f44 + scratchInt4);
+  formatFlags = *(uint *)(&textureFormatTable_field10_001d9f44 + scratchInt4);
   if ((formatFlags & 0x3f0000) != 0) {
     if ((formatFlags & 0xfc00) != 0) {
-      if ((((formatFlags & 0x3f0) != 0) && (*(uint *)(&DAT_001d9f48 + scratchInt4) >> 0x1a != 0)) &&
+      if ((((formatFlags & 0x3f0) != 0) && (*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 0x1a != 0)) &&
          (*(short *)(*(int *)(texture + 0x30) + 2) == 0x1907)) {
-        hwFormatCode = *(ushort *)(&DAT_001d9f3e + scratchInt4);
+        hwFormatCode = *(ushort *)(&textureFormatTable_field0A_001d9f3e + scratchInt4);
         formatInfoOut[4] = 0;
         *formatInfoOut = (uint)hwFormatCode;
-        formatInfoOut[7] = *(uint *)(&DAT_001d9f48 + scratchInt4) >> 8 & 0x3f;
+        formatInfoOut[7] = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 8 & 0x3f;
         goto storeFormatInfoOut;
       }
     }
@@ -2143,17 +2143,17 @@ int gld_getTextureFormatInfo(ctx, texture, face, level, formatInfoOut)
     formatInfoOut[4] = 0;
   }
   else {
-    *formatInfoOut = (uint)*(ushort *)(&DAT_001d9f3c + scratchInt4);
-    formatInfoOut[4] = *(uint *)(&DAT_001d9f48 + scratchInt4) >> 0x1a;
-    formatInfoOut[7] = *(uint *)(&DAT_001d9f48 + scratchInt4) >> 8 & 0x3f;
+    *formatInfoOut = (uint)*(ushort *)(&textureFormatTable_field08_001d9f3c + scratchInt4);
+    formatInfoOut[4] = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 0x1a;
+    formatInfoOut[7] = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 8 & 0x3f;
   }
 storeFormatInfoOut:
-  formatInfoOut[1] = *(ushort *)(&DAT_001d9f44 + scratchInt4) & 0x3f;
-  formatInfoOut[2] = *(uint *)(&DAT_001d9f44 + scratchInt4) >> 10 & 0x3f;
-  formatInfoOut[3] = *(uint *)(&DAT_001d9f44 + scratchInt4) >> 4 & 0x3f;
-  formatInfoOut[5] = *(uint *)(&DAT_001d9f48 + scratchInt4) >> 0x14 & 0x3f;
-  formatInfoOut[6] = *(uint *)(&DAT_001d9f48 + scratchInt4) >> 0xe & 0x3f;
-  scratchUint3 = *(uint *)(&DAT_001d9f48 + scratchInt4) >> 3 & 1;
+  formatInfoOut[1] = *(ushort *)(&textureFormatTable_field10_001d9f44 + scratchInt4) & 0x3f;
+  formatInfoOut[2] = *(uint *)(&textureFormatTable_field10_001d9f44 + scratchInt4) >> 10 & 0x3f;
+  formatInfoOut[3] = *(uint *)(&textureFormatTable_field10_001d9f44 + scratchInt4) >> 4 & 0x3f;
+  formatInfoOut[5] = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 0x14 & 0x3f;
+  formatInfoOut[6] = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 0xe & 0x3f;
+  scratchUint3 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 3 & 1;
   *(char *)(formatInfoOut + 9) = (char)scratchUint3;
   if (scratchUint3 == 0) {
     formatInfoOut[8] = 0;
@@ -2182,15 +2182,15 @@ int gldTextureFormatLookup(formatIndex, unusedArg2, outDesc, outSizeLog2, outBit
   int entryOffset;
   
   entryOffset = (formatIndex & 0xff) * 0x24;
-  *(uint *)(outDesc + 0x18) = *(uint *)(&DAT_001d9f44 + entryOffset) >> 0x1b;
-  *(uint *)(outDesc + 0x1c) = *(uint *)(&DAT_001d9f44 + entryOffset) >> 0x16 & 0x1f;
-  *outBits23 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x17 & 0x1f;
-  *outBits30 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x1e;
-  *outSizeLog2 = *(uint *)(&DAT_001d9f48 + entryOffset) & 7;
-  *outBits20 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x14 & 7;
-  *outBits17 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x11 & 7;
-  *outBytesPerTexel = 1 << (*(uint *)(&DAT_001d9f48 + entryOffset) & 7);
-  *(uint *)(outDesc + 0x24) = *(uint *)(outDesc + 0x24) & *(uint *)(&DAT_001d9f40 + entryOffset);
+  *(uint *)(outDesc + 0x18) = *(uint *)(&textureFormatTable_field10_001d9f44 + entryOffset) >> 0x1b;
+  *(uint *)(outDesc + 0x1c) = *(uint *)(&textureFormatTable_field10_001d9f44 + entryOffset) >> 0x16 & 0x1f;
+  *outBits23 = *(uint *)(&textureFormatTable_field18_001d9f4c + entryOffset) >> 0x17 & 0x1f;
+  *outBits30 = *(uint *)(&textureFormatTable_field18_001d9f4c + entryOffset) >> 0x1e;
+  *outSizeLog2 = *(uint *)(&textureFormatTable_field14_001d9f48 + entryOffset) & 7;
+  *outBits20 = *(uint *)(&textureFormatTable_field18_001d9f4c + entryOffset) >> 0x14 & 7;
+  *outBits17 = *(uint *)(&textureFormatTable_field18_001d9f4c + entryOffset) >> 0x11 & 7;
+  *outBytesPerTexel = 1 << (*(uint *)(&textureFormatTable_field14_001d9f48 + entryOffset) & 7);
+  *(uint *)(outDesc + 0x24) = *(uint *)(outDesc + 0x24) & *(uint *)(&textureFormatTable_field0C_001d9f40 + entryOffset);
   return;
 }
 
@@ -2220,14 +2220,14 @@ int gldTextureFormatEntryForLevel(ctx, texture, faceIndex, levelIndex, modeFlag)
       ((*(char *)(texImages + faceIndex * 0xb4 + levelIndex * 0xc + 0x55) == '\0' &&
        (imagesFlags = *texImages, (imagesFlags & 0xf) != 4)))) && ((!modeFlagIsZero || ((imagesFlags & 0x400) == 0)))) {
     formatEntryOffset = (uint)*(byte *)(texture + 0x38) * 0x24;
-    formatEntry = &DAT_001d9f34 + formatEntryOffset;
+    formatEntry = &textureFormatTable_001d9f34 + formatEntryOffset;
     if (((*(uint *)(*(int *)(texture + 0x30) + 0x48) & 0x8000) == 0) && (modeFlagIsZero)) {
       return formatEntry;
     }
     if (levelIndex != *(byte *)(*(int *)(texture + 0x30) + 0x5e)) {
       return formatEntry;
     }
-    if ((*(uint *)(&DAT_001d9f54 + formatEntryOffset) & 0x1000000) != 0) {
+    if ((*(uint *)(&textureFormatTable_field20_001d9f54 + formatEntryOffset) & 0x1000000) != 0) {
       return formatEntry;
     }
   }
@@ -2547,7 +2547,7 @@ int gld_uploadTextureLevel(ctxSaved, texture)
   dirtyLevelMask = *(ushort *)(scratchInt9 + 0x7c);
   formatLookupBlockPtr = &descSrc;
   levelRecord = scratchInt9 + 0xa0 + levelNumber * 0x18;
-  scratchUint23 = (uint)((*(uint *)(&DAT_001d9f48 + scratchInt7) & 7) == 4);
+  scratchUint23 = (uint)((*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt7) & 7) == 4);
   scratchInt9 = gldPixelUnitBytes((uint)*(ushort *)(levelRecord + 0x10),(uint)*(ushort *)(levelRecord + 0x12));
   outputBlockPtr = lookupOutScratch;
   scratchInt26 = scratchInt9 * (uint)*(ushort *)(levelRecord + 0xc);
@@ -2565,7 +2565,7 @@ int gld_uploadTextureLevel(ctxSaved, texture)
   }
   descZeroC0 = 0;
   if (scratchUint23 == 0) {
-    scratchUint17 = *(uint *)(&DAT_001d9f4c + scratchInt7) >> 0x1c & 3;
+    scratchUint17 = *(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt7) >> 0x1c & 3;
     if (scratchUint17 == 0) {
       tileBitsZero = 1;
       scratchUint18 = 0;
@@ -2580,8 +2580,8 @@ int gld_uploadTextureLevel(ctxSaved, texture)
     tileBitsZero = 0;
     scratchUint18 = 0;
   }
-  if (((scratchUint23 != 0) || ((*(uint *)(&DAT_001d9f4c + scratchInt7) & 0x30000000) != 0x20000000)) ||
-     (packedFormatFlag = 1, (*(uint *)(&DAT_001d9f48 + scratchInt7) & 7) != 1)) {
+  if (((scratchUint23 != 0) || ((*(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt7) & 0x30000000) != 0x20000000)) ||
+     (packedFormatFlag = 1, (*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt7) & 7) != 1)) {
     packedFormatFlag = 0;
   }
   scratchUint18 = 8 << scratchUint18;
@@ -2668,31 +2668,31 @@ int gld_uploadTextureLevel(ctxSaved, texture)
   backing[4] = alignedRowBytes;
   *(char *)((int)backing + 0x1b) = (char)hwFormatCode;
   scratchInt9 = (uint)*(byte *)(texture + 0xe) * 0x24;
-  formatEntry = &DAT_001d9f34 + scratchInt9;
-  if ((*(uint *)(&DAT_001d9f4c + scratchInt9) & 0x10000) == 0) {
-    if ((*(uint *)(&DAT_001d9f48 + scratchInt9) & 8) == 0) {
-      scratchUint18 = *(uint *)(&DAT_001d9f48 + scratchInt9) & 7;
+  formatEntry = &textureFormatTable_001d9f34 + scratchInt9;
+  if ((*(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt9) & 0x10000) == 0) {
+    if ((*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt9) & 8) == 0) {
+      scratchUint18 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt9) & 7;
       if (scratchUint18 == 1) {
-        formatEntry = &DAT_001da00c;
+        formatEntry = &textureFormatEntry6_001da00c;
       }
       else if (scratchUint18 < 2) {
         if (scratchUint18 == 0) {
-          formatEntry = &DAT_001d9fa0;
+          formatEntry = &textureFormatEntry3_001d9fa0;
         }
         else {
 loopSetFormatEntry:
-          formatEntry = &DAT_001da1bc;
+          formatEntry = &textureFormatEntry18_001da1bc;
         }
       }
       else {
         if (scratchUint18 == 2) goto setFormatEntry;
         if (scratchUint18 != 3) goto loopSetFormatEntry;
-        formatEntry = &DAT_001da36c;
+        formatEntry = &textureFormatEntry30_001da36c;
       }
     }
     else {
 setFormatEntry:
-      formatEntry = &DAT_001da054;
+      formatEntry = &textureFormatEntry8_001da054;
     }
   }
   _memcpy(backing + 0x2a0,PTR_DAT_001e899c,0x23c);
@@ -3031,7 +3031,7 @@ setScratchFlag412:
         return 0;
       }
       if (*(char *)((int)texImages + 0x6d) != '\0') {
-        scratchUint22 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
+        scratchUint22 = 1 << (*(uint *)(&textureFormatTable_field14_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
         *(short *)((int)texture + 0x3e) =
              (short)((scratchUint22 * ((uint)texImages[0x52] + (uint)*(byte *)(texImages + 0x55) * -2) + 0x1f &
                      0xffffffe0) / scratchUint22);
@@ -3159,31 +3159,31 @@ setScratchFlag412:
           scratchPtr34[4] = scratchUint28;
           *(char *)((int)scratchPtr34 + 0x1b) = (char)scratchStack20c;
           scratchInt25 = (uint)*(byte *)(texture + 0xe) * 0x24;
-          formatInfo = &DAT_001d9f34 + scratchInt25;
-          if ((*(uint *)(&DAT_001d9f4c + scratchInt25) & 0x10000) == 0) {
-            if ((*(uint *)(&DAT_001d9f48 + scratchInt25) & 8) == 0) {
-              scratchUint8 = *(uint *)(&DAT_001d9f48 + scratchInt25) & 7;
+          formatInfo = &textureFormatTable_001d9f34 + scratchInt25;
+          if ((*(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt25) & 0x10000) == 0) {
+            if ((*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt25) & 8) == 0) {
+              scratchUint8 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt25) & 7;
               if (scratchUint8 == 1) {
-                formatInfo = &DAT_001da00c;
+                formatInfo = &textureFormatEntry6_001da00c;
               }
               else if (scratchUint8 < 2) {
                 if (scratchUint8 == 0) {
-                  formatInfo = &DAT_001d9fa0;
+                  formatInfo = &textureFormatEntry3_001d9fa0;
                 }
                 else {
 loopSetFormatInfo:
-                  formatInfo = &DAT_001da1bc;
+                  formatInfo = &textureFormatEntry18_001da1bc;
                 }
               }
               else {
                 if (scratchUint8 == 2) goto setFormatInfo;
                 if (scratchUint8 != 3) goto loopSetFormatInfo;
-                formatInfo = &DAT_001da36c;
+                formatInfo = &textureFormatEntry30_001da36c;
               }
             }
             else {
 setFormatInfo:
-              formatInfo = &DAT_001da054;
+              formatInfo = &textureFormatEntry8_001da054;
             }
           }
           _memcpy(scratchPtr34 + 0x2a0,PTR_DAT_001e899c,0x23c);
@@ -3234,31 +3234,31 @@ setFormatInfo:
           *(short *)(scratchPtr34 + scratchUint30 * 8 + 0x16) =
                (short)((int)(scratchPtr34 + 0x32f) - (int)scratchPtr14 >> 2) - (short)scratchInt25;
           scratchInt25 = (uint)*(byte *)(texture + 0xe) * 0x24;
-          formatInfo = &DAT_001d9f34 + scratchInt25;
-          if ((*(uint *)(&DAT_001d9f4c + scratchInt25) & 0x10000) == 0) {
-            if ((*(uint *)(&DAT_001d9f48 + scratchInt25) & 8) == 0) {
-              scratchUint32 = *(uint *)(&DAT_001d9f48 + scratchInt25) & 7;
+          formatInfo = &textureFormatTable_001d9f34 + scratchInt25;
+          if ((*(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt25) & 0x10000) == 0) {
+            if ((*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt25) & 8) == 0) {
+              scratchUint32 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt25) & 7;
               if (scratchUint32 == 1) {
-                formatInfo = &DAT_001da00c;
+                formatInfo = &textureFormatEntry6_001da00c;
               }
               else if (scratchUint32 < 2) {
                 if (scratchUint32 == 0) {
-                  formatInfo = &DAT_001d9fa0;
+                  formatInfo = &textureFormatEntry3_001d9fa0;
                 }
                 else {
 loopSetFormatInfo2:
-                  formatInfo = &DAT_001da1bc;
+                  formatInfo = &textureFormatEntry18_001da1bc;
                 }
               }
               else {
                 if (scratchUint32 == 2) goto setFormatInfo2;
                 if (scratchUint32 != 3) goto loopSetFormatInfo2;
-                formatInfo = &DAT_001da36c;
+                formatInfo = &textureFormatEntry30_001da36c;
               }
             }
             else {
 setFormatInfo2:
-              formatInfo = &DAT_001da054;
+              formatInfo = &textureFormatEntry8_001da054;
             }
           }
           scratchPtr12 = (undefined4 *)
@@ -3329,8 +3329,8 @@ LAB_00032e78:
           ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,scratchStack64,&scratchStack214,&scratchStack208,
                        &scratchStack204,&scratchStack218,&scratchStack210,&scratchStack20c);
           scratchInt11 = (uint)*(byte *)(texture + 0xe) * 0x24;
-          formatInfo = &DAT_001d9f34 + scratchInt11;
-          scratchUint22 = *(uint *)(&DAT_001d9f48 + scratchInt11) & 7;
+          formatInfo = &textureFormatTable_001d9f34 + scratchInt11;
+          scratchUint22 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt11) & 7;
           if (scratchUint22 == 4) {
             scratchInt25 = 0;
             scratchFlag39 = false;
@@ -3346,7 +3346,7 @@ loopSetScratchInt11:
             scratchInt11 = 0;
           }
           else {
-            scratchStacka4 = *(uint *)(&DAT_001d9f4c + scratchInt11) >> 0x1c & 3;
+            scratchStacka4 = *(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt11) >> 0x1c & 3;
             scratchFlag42 = (scratchStacka4 != 0) << 2 | (scratchStacka4 == 0) << 1 | xerSummaryOverflow & 1;
             scratchFlag39 = scratchStacka4 != 0;
             if (scratchFlag39) {
@@ -3365,7 +3365,7 @@ loopSetScratchInt11:
             }
             scratchInt25 = 1;
             scratchFlag39 = !scratchFlag39;
-            if (((*(uint *)(&DAT_001d9f4c + scratchInt11) & 0x30000000) != 0x20000000) ||
+            if (((*(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt11) & 0x30000000) != 0x20000000) ||
                (scratchInt11 = 1, scratchUint22 != 1)) goto loopSetScratchInt11;
           }
           scratchUint28 = *(byte *)(scratchStack74 + 0x62) - scratchStack7c;
@@ -3541,31 +3541,31 @@ loopSetScratchInt11:
             scratchStacke8 = scratchPtr14 + 0x8f;
             _memcpy(scratchPtr14,formatInfo,0x23c);
             scratchInt25 = (uint)*(byte *)(texture + 0xe) * 0x24;
-            formatInfo = &DAT_001d9f34 + scratchInt25;
-            if ((*(uint *)(&DAT_001d9f4c + scratchInt25) & 0x10000) == 0) {
-              if ((*(uint *)(&DAT_001d9f48 + scratchInt25) & 8) == 0) {
-                scratchUint28 = *(uint *)(&DAT_001d9f48 + scratchInt25) & 7;
+            formatInfo = &textureFormatTable_001d9f34 + scratchInt25;
+            if ((*(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt25) & 0x10000) == 0) {
+              if ((*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt25) & 8) == 0) {
+                scratchUint28 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt25) & 7;
                 if (scratchUint28 == 1) {
-                  formatInfo = &DAT_001da00c;
+                  formatInfo = &textureFormatEntry6_001da00c;
                 }
                 else if (scratchUint28 < 2) {
                   if (scratchUint28 == 0) {
-                    formatInfo = &DAT_001d9fa0;
+                    formatInfo = &textureFormatEntry3_001d9fa0;
                   }
                   else {
 loopSetFormatInfo3:
-                    formatInfo = &DAT_001da1bc;
+                    formatInfo = &textureFormatEntry18_001da1bc;
                   }
                 }
                 else {
                   if (scratchUint28 == 2) goto setFormatInfo3;
                   if (scratchUint28 != 3) goto loopSetFormatInfo3;
-                  formatInfo = &DAT_001da36c;
+                  formatInfo = &textureFormatEntry30_001da36c;
                 }
               }
               else {
 setFormatInfo3:
-                formatInfo = &DAT_001da054;
+                formatInfo = &textureFormatEntry8_001da054;
               }
             }
             scratchUint8 = scratchPtr14[0x66];
@@ -4014,7 +4014,7 @@ loopSetScratchUint162:
     else {
       scratchUint22 = (uint)texImages[0x52];
     }
-    scratchUint28 = 1 << (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
+    scratchUint28 = 1 << (*(uint *)(&textureFormatTable_field14_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7);
     *(short *)((int)texture + 0x3e) =
          (short)((scratchUint28 * (scratchUint22 + (uint)*(byte *)(texImages + 0x55) * -2) + 0xff & 0xffffff00) /
                 scratchUint28);
@@ -4048,7 +4048,7 @@ checkTexImages2:
       if ((*(ushort *)texture[0xc] & 0x400) == 0) {
         texture[0x33] =
              ((*(ushort *)((int)texture + 0x3e) * scratchUint22 <<
-              (*(uint *)(&DAT_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7)) >> 5) << 2 |
+              (*(uint *)(&textureFormatTable_field14_001d9f48 + (uint)*(byte *)(texture + 0xe) * 0x24) & 7)) >> 5) << 2 |
              texture[0x33] & 3U;
       }
       else {
@@ -4351,7 +4351,7 @@ setDrawWords:
     pitchAlign = 0x20;
   }
   else {
-    pitchAlign = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
+    pitchAlign = 0x20 / (1 << (*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
                           & 3));
   }
   pitchAlign = pitchAlign >> (*(uint *)(levelRecord + 0x14) & 7);
@@ -4389,7 +4389,7 @@ loopSetScratchInt30:
         scratchInt30 = 0x100;
       }
       else {
-        scratchInt25 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c & 3)
+        scratchInt25 = 1 << (*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c & 3)
         ;
         scratchInt30 = 0x20 / scratchInt25 << 3;
       }
@@ -4560,7 +4560,7 @@ loopSetScratchInt25:
           scratchInt25 = 0x100;
         }
         else {
-          texelBytes = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c &
+          texelBytes = 1 << (*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c &
                         3);
           scratchInt25 = 0x20 / texelBytes << 3;
         }
@@ -4656,13 +4656,13 @@ loopSetScratchInt25:
   tailCursor[0x30] = zb_cntl;
   baseLevel = *(uint *)(ctx + GLD_fg_fog_blend);
   tailCursor[0x32] = baseLevel;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x8000) == 0) {
+  if ((*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x8000) == 0) {
     tailCursor[0x32] = baseLevel & 0xfffffffe;
   }
   tailCursor[0x33] = (int)((unsigned char *)0x000012f5U);
   baseLevel = *(uint *)(ctx + GLD_fg_alpha_func);
   tailCursor[0x34] = baseLevel;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x8000) == 0) {
+  if ((*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x8000) == 0) {
     tailCursor[0x34] = baseLevel & 0xfffff7ff;
   }
   tailCursor[0x35] = (int)((unsigned char *)0x000010a2U);
@@ -4671,7 +4671,7 @@ loopSetScratchInt25:
   tailCursor[0x36] = ga_poly_mode;
   baseLevel = *(uint *)(ctx + GLD_rb3d_blendcntl);
   tailCursor[0x38] = baseLevel;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x4000) == 0) {
+  if ((*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)(byte)((unsigned char *)GLD_colorFormatIndex)[ctx] * 0x24) & 0x4000) == 0) {
     tailCursor[0x38] = baseLevel & 0xfffffffc;
   }
   tailCursor[0x39] = (int)((unsigned char *)0x0000109eU);
@@ -5183,7 +5183,7 @@ loopCallPthreadMutexUnlock:
     scratchInt34 = 0x20;
   }
   else {
-    scratchInt34 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
+    scratchInt34 = 0x20 / (1 << (*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
                           & 3));
   }
   scratchInt34 = scratchInt34 >> (*(uint *)(scratchInt32 + 0x14) & 7);
@@ -5211,7 +5211,7 @@ loopCallPthreadMutexUnlock:
       scratchInt34 = 0x100;
     }
     else {
-      scratchInt33 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c & 3);
+      scratchInt33 = 1 << (*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c & 3);
       scratchInt34 = 0x20 / scratchInt33 << 3;
     }
     if ((scratchInt34 <= *(int *)(*texture + 0xc) >> (scratchUint40 & 0x3f)) &&
@@ -5486,13 +5486,13 @@ checkScratchInt35:
   scratchPtr30[0x30] = zb_cntl;
   fg_fog_blend = *(uint *)(ctx + 0x1d2c);
   scratchPtr30[0x32] = fg_fog_blend;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
+  if ((*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
     scratchPtr30[0x32] = fg_fog_blend & 0xfffffffe;
   }
   scratchPtr30[0x33] = (uint)((unsigned char *)0x000012f5U);
   fg_alpha_func = *(uint *)(ctx + 0x1c8c);
   scratchPtr30[0x34] = fg_alpha_func;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
+  if ((*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x8000) == 0) {
     scratchPtr30[0x34] = fg_alpha_func & 0xfffff7ff;
   }
   scratchPtr30[0x35] = (uint)((unsigned char *)0x000010a2U);
@@ -5501,7 +5501,7 @@ checkScratchInt35:
   scratchPtr30[0x36] = ga_poly_mode;
   rb3d_blendcntl = *(uint *)(ctx + 0x1cc0);
   scratchPtr30[0x38] = rb3d_blendcntl;
-  if ((*(uint *)(&DAT_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x4000) == 0) {
+  if ((*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24) & 0x4000) == 0) {
     scratchPtr30[0x38] = rb3d_blendcntl & 0xfffffffc;
   }
   scratchPtr30[0x39] = (uint)((unsigned char *)0x0000109eU);
@@ -6221,7 +6221,7 @@ setSwapMode:
                     scratchInt22 = 0x20;
                   }
                   else {
-                    scratchInt22 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c +
+                    scratchInt22 = 0x20 / (1 << (*(uint *)(&textureFormatTable_field18_001d9f4c +
                                                     (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c &
                                           3));
                   }
@@ -6247,7 +6247,7 @@ setSwapMode:
                       scratchInt22 = 0x100;
                     }
                     else {
-                      scratchInt45 = 1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24
+                      scratchInt45 = 1 << (*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24
                                               ) >> 0x1c & 3);
                       scratchInt22 = 0x20 / scratchInt45 << 3;
                     }
@@ -6871,7 +6871,7 @@ loopCallPthreadMutexUnlock:
     scratchInt34 = 0x20;
   }
   else {
-    scratchInt34 = 0x20 / (1 << (*(uint *)(&DAT_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
+    scratchInt34 = 0x20 / (1 << (*(uint *)(&textureFormatTable_field18_001d9f4c + (uint)*(byte *)(texture + 0xe) * 0x24) >> 0x1c
                           & 3));
   }
   scratchInt34 = scratchInt34 >> (*(uint *)(levelRecordB + 0x14) & 7);
@@ -6888,7 +6888,7 @@ loopCallPthreadMutexUnlock:
   scratchFloat4 = (scratchFloat13 + xoffsetF) - scratchFloat15;
   scratchFloat5 = (scratchFloat14 + yoffsetF) - scratchFloat16;
   scratchFloat17 = scratchFloat4 - 1.0;
-  texPacket[0xa5] = *(uint *)(&DAT_001d9f4c + scratchInt22) >> 0x1e | texPacket[0xa5] & 0xfffffffc;
+  texPacket[0xa5] = *(uint *)(&textureFormatTable_field18_001d9f4c + scratchInt22) >> 0x1e | texPacket[0xa5] & 0xfffffffc;
   if (2.1474836e+09 <= scratchFloat17) {
     fctiwzSlot1 = (longlong)(int)(scratchFloat17 - 2.1474836e+09);
     scratchUint24 = (int)(scratchFloat17 - 2.1474836e+09) + 0x80000000;
@@ -6907,12 +6907,12 @@ loopCallPthreadMutexUnlock:
     fctiwzSlot2 = (longlong)(int)scratchUint35;
   }
   texPacket[0xab] = scratchUint24 & 0x7ff | (scratchUint35 & 0x7ff) << 0xb | 0x80000000;
-  scratchUint24 = *(uint *)(&DAT_001d9f50 + scratchInt22);
-  scratchUint35 = *(uint *)(&DAT_001d9f54 + scratchInt22);
+  scratchUint24 = *(uint *)(&textureFormatTable_field1C_001d9f50 + scratchInt22);
+  scratchUint35 = *(uint *)(&textureFormatTable_field20_001d9f54 + scratchInt22);
   texPacket[0xad] =
        scratchUint24 >> 7 & 0x1f | scratchUint35 >> 3 & 0x400000 | (scratchUint24 & 0x70) << 5 | (scratchUint24 & 0xe) << 0xb |
        scratchUint35 >> 0xe & 0x38000 | scratchUint35 >> 8 & 0x1c0000;
-  scratchUint24 = *(uint *)(&DAT_001d9f48 + scratchInt22);
+  scratchUint24 = *(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt22);
   if (2.1474836e+09 <= scratchFloat4) {
     fctiwzSlot5 = (longlong)(int)(scratchFloat4 - 2.1474836e+09);
     scratchInt22 = (int)(scratchFloat4 - 2.1474836e+09) + -0x80000000;
@@ -7224,7 +7224,7 @@ int gld_testRendererAvailable(rendererIndex)
   connection = 0;
   outputCount = 3;
   scratchInt2 = _IOServiceOpen(*(undefined4 *)(rendererIndex * 4 + *(int *)(PTR_DAT_001e88ac + 8)),
-                         *(undefined4 *)PTR_001e88b4,1,&connection);
+                         *(undefined4 *)ptrTo_machTaskSelf_001e88b4,1,&connection);
   isAvailable = 0;
   if (scratchInt2 == 0) {
     scratchInt2 = _io_connect_method_scalarI_scalarO(connection,3,0,0,outputScalars,&outputCount);
