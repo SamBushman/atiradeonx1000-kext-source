@@ -355,44 +355,44 @@ int FUN_00173af8(ctx, laneFlags)
 }
 
 /* Program__eliminateRedundantInst @ 0x173b98 (324 bytes) */
-int Program__eliminateRedundantInst(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int *param_2;
-  undefined4 param_3;
-  int param_4;
+int Program__eliminateRedundantInst(program, inst, block, pass)
+  undefined4 program;
+  int *inst;
+  undefined4 block;
+  int pass;
 {
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 removed;
+  int registerCheck;
+  int staleArg4;
   undefined4 in_r7;
   undefined4 in_r8;
   
-  if (*(int *)(param_2[0x22] + 8) == 0x8e) {
-    iVar3 = param_4;
-    Block__recordDefinition(param_3,param_2[0x23],param_1);
-    (**(code **)(*param_2 + 0xc))
-              (param_2,0,*(undefined4 *)(param_4 + 8),iVar3,in_r7,in_r8,*(code **)(*param_2 + 0xc));
-    uVar1 = 1;
-    param_2[5] = param_2[5] | 0x400;
-    *(int *)(param_4 + 0x150) = *(int *)(param_4 + 0x150) + 1;
+  if (*(int *)(inst[0x22] + 8) == 0x8e) {
+    staleArg4 = pass;
+    Block__recordDefinition(block,inst[0x23],program);
+    (**(code **)(*inst + 0xc))
+              (inst,0,*(undefined4 *)(pass + 8),staleArg4,in_r7,in_r8,*(code **)(*inst + 0xc));
+    removed = 1;
+    inst[5] = inst[5] | 0x400;
+    *(int *)(pass + 0x150) = *(int *)(pass + 0x150) + 1;
   }
-  else if (((param_2[5] & 8U) == 0) && ((param_2[5] & 0x10U) == 0)) {
-    iVar3 = param_4;
-    if ((((param_2[0x20] != 0) && (iVar2 = RegKind__flagBit0(param_2[0x26]), iVar2 != 0)) &&
-        ((param_2[5] & 2U) == 0)) && (iVar2 = (**(code **)(*param_2 + 0x50))(param_2), iVar2 == 0))
+  else if (((inst[5] & 8U) == 0) && ((inst[5] & 0x10U) == 0)) {
+    staleArg4 = pass;
+    if ((((inst[0x20] != 0) && (registerCheck = RegKind__flagBit0(inst[0x26]), registerCheck != 0)) &&
+        ((inst[5] & 2U) == 0)) && (registerCheck = (**(code **)(*inst + 0x50))(inst), registerCheck == 0))
     {
-      Block__recordDefinition(param_3,param_2[0x23],param_1);
+      Block__recordDefinition(block,inst[0x23],program);
     }
-    (**(code **)(*param_2 + 0xc))
-              (param_2,0,*(undefined4 *)(param_4 + 8),iVar3,in_r7,in_r8,*(code **)(*param_2 + 0xc));
-    uVar1 = 1;
-    param_2[5] = param_2[5] | 0x400;
-    *(int *)(param_4 + 0x14c) = *(int *)(param_4 + 0x14c) + 1;
+    (**(code **)(*inst + 0xc))
+              (inst,0,*(undefined4 *)(pass + 8),staleArg4,in_r7,in_r8,*(code **)(*inst + 0xc));
+    removed = 1;
+    inst[5] = inst[5] | 0x400;
+    *(int *)(pass + 0x14c) = *(int *)(pass + 0x14c) + 1;
   }
   else {
-    uVar1 = 0;
+    removed = 0;
   }
-  return uVar1;
+  return removed;
 }
 
 /* FUN_00173cdc @ 0x173cdc (308 bytes) */

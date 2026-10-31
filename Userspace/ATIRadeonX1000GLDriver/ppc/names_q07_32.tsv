@@ -3861,3 +3861,108 @@ use	FUN_00148d8c	iVar11	producerOpcode	INFERRED	opcode of the producer	^\s*else\
 use	FUN_00148d8c	iVar11	producerOpcode	INFERRED	opcode of the producer	^\s*else\ if\ \(iVar11\ ==\ 0x12\)\ \{$	+1
 use	FUN_00148d8c	iVar11	producerOpcode	INFERRED	opcode of the producer	^\s*else\ if\ \(iVar11\ \-\ 0x24U\ <\ 3\)\ \{$	+1
 local	FUN_00148d8c	local_4c	laneProducerInsts	INFERRED	producer inst of each of the four lanes (or null)
+local	FUN_00140e7c	param_1	packCtx	INFERRED	pack context; *param_1 is the target for the opcode traits test
+local	FUN_00140e7c	param_2	inst	INFERRED	first inst of the pair compared for packing
+local	FUN_00140e7c	param_3	inst2	INFERRED	second inst of the pair
+use	FUN_00140e7c	iVar1	checkResult	INFERRED	one register for the traits/vtable/register-kind results in the condition chain	^\s*if\ \(\(\(\(\(\(\*\(int\ \*\)\(param_2\[0x22\]\ \+\ 8\)\ ==\ \*\(int\ \*\)\(param_3\[0x22\]\ \+\ 8\)\)\ \&\&$	+9
+use	FUN_00140e7c	iVar1	operandLimit	INFERRED	operand count of inst, minus one when it has an extra operand	^\s*iVar1\ =\ param_2\[0x21\];$	+1
+use	FUN_00140e7c	iVar1	operandLimit	INFERRED	operand count of inst, minus one when it has an extra operand	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+1
+use	FUN_00140e7c	iVar1	operandLimit	INFERRED	operand count of inst, minus one when it has an extra operand	^\s*if\ \(iVar1\ <\ 1\)\ \{$	+1
+use	FUN_00140e7c	iVar1	operandLimit	INFERRED	operand count of inst, minus one when it has an extra operand	^\s*if\ \(iVar1\ <\ iVar2\)\ \{$	+1
+local	FUN_00140e7c	iVar2	operandIndex	INFERRED	operand loop index comparing negate/abs bits of both insts
+local	FUN_00147704	param_4	pass	INFERRED	*(param_4+8) is the compiler passed to delete/drop helpers
+use	FUN_00147704	iVar1	sourceOpcode	INFERRED	opcode of the source inst	^\s*iVar1\ =\ \*\(int\ \*\)\(a0\[0x22\]\ \+\ 8\);$	+2
+use	FUN_00147704	iVar1	sourceOpcode	INFERRED	opcode of the source inst	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$@2	+1
+use	FUN_00147704	iVar1	sourceOpcode	INFERRED	opcode of the source inst	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+2
+use	FUN_00147704	iVar1	sourceOpcode	INFERRED	opcode of the source inst	^\s*if\ \(\(iVar1\ ==\ 0x12\)\ \|\|\ \(iVar1\ ==\ 0x9b\)\)\ \{$	+1
+use	FUN_00147704	iVar1	vcall64Result	INFERRED	vtable +100 result on the source inst	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 100\)\)\(a0\);$	+2
+use	FUN_00147704	iVar1	vcall48Result	INFERRED	vtable +0x48 result on an operand source	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x48\)\)\(piVar3\);$	+2
+local	FUN_00147704	iVar2	opcodeInfo	INFERRED	opcode info record (+0x88) of the source inst
+local	FUN_00147704	iVar5	distinctSourceCount	INFERRED	number of distinct operand-1 sources among the three insts (1..3)
+local	FUN_00147704	piVar7	sourceCursor	INFERRED	walks distinctSources
+local	FUN_00147704	bVar8	firstTwoSourcesEqual	INFERRED	operand-1 sources of the first two insts are the same
+local	FUN_00147704	local_38	distinctSources	INFERRED	operand-1 sources of the three insts, the first slots holding distinct ones
+use	Inst__reassociate_14e6e4	iVar1	instOpcode	INFERRED	opcode of the inst (0x12 add or 0x13 mul)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$	+2
+use	Inst__reassociate_14e6e4	iVar1	useCheck	INFERRED	single-use / no-use / FUN_0010497c results in the guard chain	^\s*iVar1\ =\ FUN_0010497c\(uVar7,param_2\);$	+5
+use	Inst__reassociate_14e6e4	iVar1	candidateInst	INFERRED	inst popped from the work vector	^\s*iVar1\ =\ \*piVar4;$	+1
+use	Inst__reassociate_14e6e4	iVar1	candidateInst	INFERRED	inst popped from the work vector	^\s*if\ \(\(\*\(uint\ \*\)\(iVar1\ \+\ 0x14\)\ \&\ 1\)\ !=\ 0\)\ \{$	+2
+use	Inst__reassociate_14e6e4	uVar2	vectorFilledCount	INFERRED	users vector element count	^\s*uVar2\ =\ puVar13\[1\];$	+2
+use	Inst__reassociate_14e6e4	uVar2	vectorFilledCount	INFERRED	users vector element count	^\s*if\ \(uVar10\ ==\ uVar2\)\ break;$	+1
+use	Inst__reassociate_14e6e4	uVar2	workTopIndex	INFERRED	work vector count - 1	^\s*uVar2\ =\ local_44\ \-\ 1;$	+1
+use	Inst__reassociate_14e6e4	uVar2	workTopIndex	INFERRED	work vector count - 1	^\s*if\ \(uVar2\ <\ local_44\)\ \{$	+2
+use	Inst__reassociate_14e6e4	uVar2	workTopIndex	INFERRED	work vector count - 1	^\s*FUN_00194208\(\&local_48,uVar2\);$	+1
+use	Inst__reassociate_14e6e4	piVar4	userSlot	INFERRED	address of the user element at the scan index	^\s*piVar4\ =\ \(int\ \*\)\(iVar11\ \+\ puVar13\[2\]\);$	+1
+use	Inst__reassociate_14e6e4	piVar4	userSlot	INFERRED	address of the user element at the scan index	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar13,uVar14\);$	+1
+use	Inst__reassociate_14e6e4	piVar4	userSlot	INFERRED	address of the user element at the scan index	^\s*iVar12\ =\ \*piVar4;$	+1
+use	Inst__reassociate_14e6e4	piVar4	workPushSlot	INFERRED	address of the work vector slot being pushed	^\s*piVar4\ =\ \(int\ \*\)\(iVar5\ \+\ local_40\);$	+1
+use	Inst__reassociate_14e6e4	piVar4	workPushSlot	INFERRED	address of the work vector slot being pushed	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(\&local_48,local_44\);$	+1
+use	Inst__reassociate_14e6e4	piVar4	workPushSlot	INFERRED	address of the work vector slot being pushed	^\s*\*piVar4\ =\ iVar12;$	+1
+use	Inst__reassociate_14e6e4	piVar4	workTopSlot	INFERRED	address of the work vector top element	^\s*piVar4\ =\ \(int\ \*\)0x0;$	+1
+use	Inst__reassociate_14e6e4	piVar4	workTopSlot	INFERRED	address of the work vector top element	^\s*piVar4\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ local_40\);$	+1
+use	Inst__reassociate_14e6e4	piVar4	workTopSlot	INFERRED	address of the work vector top element	^\s*iVar1\ =\ \*piVar4;$	+1
+local	Inst__reassociate_14e6e4	iVar9	instOpcodeB	INFERRED	opcode of the inst compared against each user
+local	Inst__reassociate_14e6e4	iVar11	userByteOffset	INFERRED	user scan index * 4
+local	Inst__reassociate_14e6e4	uVar14	userIndexDown	INFERRED	descending index over the users vector
+local	FUN_00146b0c	param_2	depth	INFERRED	current chain depth; incremented for each nested level
+local	FUN_00146b0c	param_3	chainOpcode	INFERRED	opcode the chain must keep (0x14 is rewritten to 0x13 at depth 0)
+local	FUN_00146b0c	param_4	pass	INFERRED	pass passed to FUN_00146788
+local	FUN_00146b0c	param_5	outDeepestInst	INFERRED	receives the inst at the deepest chain level
+local	FUN_00146b0c	param_6	outDeepestDepth	INFERRED	receives/holds the deepest depth reached
+use	FUN_00146b0c	iVar1	secondDepth	INFERRED	depth returned by the recursion on operand 2	^\s*iVar1\ =\ iVar5;$	+1
+use	FUN_00146b0c	iVar1	secondDepth	INFERRED	depth returned by the recursion on operand 2	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00146b0c\)\(iVar2,iVar5,param_3,param_4,param_5,param_6\);$	+1
+use	FUN_00146b0c	iVar1	secondDepth	INFERRED	depth returned by the recursion on operand 2	^\s*if\ \(\(iVar5\ !=\ iVar4\)\ \|\|\ \(iVar5\ !=\ iVar1\)\)\ \{$	+2
+use	FUN_00146b0c	iVar1	secondDepth	INFERRED	depth returned by the recursion on operand 2	^\s*return\ iVar1;$	+1
+local	FUN_00146b0c	iVar3	checkResult	INFERRED	chain-condition results (FUN_00146788, FUN_00105c5c)
+local	FUN_00146b0c	iVar4	firstDepth	INFERRED	depth returned by the recursion on operand 1
+local	FUN_00146b0c	iVar5	nextDepth	INFERRED	depth + 1: depth of the operands
+local	Program__scanUsevectorChains	puVar3	indexTopSlot	INFERRED	address of the top element of the operand-index stack, or null
+use	Program__scanUsevectorChains	puVar4	instStackSlot	INFERRED	address of the inst stack slot being pushed	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_4c\);$	+1
+use	Program__scanUsevectorChains	puVar4	instStackSlot	INFERRED	address of the inst stack slot being pushed	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_54,local_50\);$	+1
+use	Program__scanUsevectorChains	puVar4	instStackSlot	INFERRED	address of the inst stack slot being pushed	^\s*\*puVar4\ =\ 0;$	+1
+use	Program__scanUsevectorChains	puVar4	indexStackSlot	INFERRED	address of the operand-index stack slot being pushed	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_3c\);$	+1
+use	Program__scanUsevectorChains	puVar4	indexStackSlot	INFERRED	address of the operand-index stack slot being pushed	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,local_40\);$	+1
+use	Program__scanUsevectorChains	puVar4	indexStackSlot	INFERRED	address of the operand-index stack slot being pushed	^\s*\*puVar4\ =\ 0;$@2	+1
+use	Program__scanUsevectorChains	puVar4	indexStackSlot	INFERRED	address of the operand-index stack slot being pushed	^\s*puVar4\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_3c\);$@2	+1
+use	Program__scanUsevectorChains	puVar4	indexStackSlot	INFERRED	address of the operand-index stack slot being pushed	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,local_40\);$@2	+1
+use	Program__scanUsevectorChains	puVar4	indexStackSlot	INFERRED	address of the operand-index stack slot being pushed	^\s*\*puVar4\ =\ 1;$	+1
+use	Program__scanUsevectorChains	puVar4	instTopSlot	INFERRED	address of the top element of the inst stack, or null	^\s*puVar4\ =\ \(undefined4\ \*\)0x0;$	+1
+use	Program__scanUsevectorChains	puVar4	instTopSlot	INFERRED	address of the top element of the inst stack, or null	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(local_50\ \-\ 1\)\ \*\ 4\ \+\ local_4c\);$	+1
+use	Program__scanUsevectorChains	puVar4	instTopSlot	INFERRED	address of the top element of the inst stack, or null	^\s*FUN_00138fb4\(local_58,\*puVar4,\*puVar3,param_1\);$	+1
+use	Program__scanUsevectorChains	piVar5	instStackSlotB	INFERRED	address of the inst stack slot being pushed	^\s*piVar5\ =\ \(int\ \*\)\(iVar8\ \+\ local_4c\);$	+1
+use	Program__scanUsevectorChains	piVar5	instStackSlotB	INFERRED	address of the inst stack slot being pushed	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(\&local_54,local_50\);$	+1
+use	Program__scanUsevectorChains	piVar5	instStackSlotB	INFERRED	address of the inst stack slot being pushed	^\s*\*piVar5\ =\ local_58;$	+1
+use	Program__scanUsevectorChains	piVar5	instTopSlotB	INFERRED	address of the top inst stack element	^\s*piVar5\ =\ \(int\ \*\)0x0;$	+1
+use	Program__scanUsevectorChains	piVar5	instTopSlotB	INFERRED	address of the top inst stack element	^\s*piVar5\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ local_4c\);$	+1
+use	Program__scanUsevectorChains	piVar5	instTopSlotB	INFERRED	address of the top inst stack element	^\s*iVar8\ =\ \*piVar5;$	+1
+use	Program__scanUsevectorChains	piVar5	indexTopSlotB	INFERRED	address of the top operand-index stack element	^\s*piVar5\ =\ \(int\ \*\)0x0;$@2	+1
+use	Program__scanUsevectorChains	piVar5	indexTopSlotB	INFERRED	address of the top operand-index stack element	^\s*piVar5\ =\ \(int\ \*\)\(uVar6\ \*\ 4\ \+\ local_3c\);$	+1
+use	Program__scanUsevectorChains	piVar5	indexTopSlotB	INFERRED	address of the top operand-index stack element	^\s*if\ \(\*piVar5\ !=\ \*\(int\ \*\)\(iVar8\ \+\ 0x84\)\)\ \{$	+1
+use	Program__scanUsevectorChains	piVar5	indexTopSlotB	INFERRED	address of the top operand-index stack element	^\s*piVar5\ =\ \(int\ \*\)0x0;$@3	+1
+use	Program__scanUsevectorChains	piVar5	indexTopSlotB	INFERRED	address of the top operand-index stack element	^\s*piVar5\ =\ \(int\ \*\)\(uVar6\ \*\ 4\ \+\ local_3c\);$@2	+1
+use	Program__scanUsevectorChains	piVar5	indexTopSlotB	INFERRED	address of the top operand-index stack element	^\s*iVar11\ =\ \*piVar5;$	+1
+use	Program__scanUsevectorChains	piVar5	indexStackSlotC	INFERRED	address of the operand-index stack slot being pushed	^\s*piVar5\ =\ \(int\ \*\)\(iVar1\ \+\ local_3c\);$	+1
+use	Program__scanUsevectorChains	piVar5	indexStackSlotC	INFERRED	address of the operand-index stack slot being pushed	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(\&local_44,local_40\);$	+1
+use	Program__scanUsevectorChains	piVar5	indexStackSlotC	INFERRED	address of the operand-index stack slot being pushed	^\s*\*piVar5\ =\ iVar11\ \+\ 1;$	+1
+use	Program__scanUsevectorChains	uVar6	indexTopIndex	INFERRED	operand-index stack count - 1	^\s*uVar6\ =\ local_40\ \-\ 1;$	+3
+use	Program__scanUsevectorChains	uVar6	indexTopIndex	INFERRED	operand-index stack count - 1	^\s*if\ \(uVar6\ <\ local_40\)\ \{$@2	+2
+use	Program__scanUsevectorChains	uVar6	indexTopIndex	INFERRED	operand-index stack count - 1	^\s*FUN_00194208\(\&local_44,uVar6\);$	+1
+local	Program__scanUsevectorChains	uVar7	instTopIndex	INFERRED	inst stack count - 1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*if\ \(\*\(uint\ \*\)\(iVar8\ \+\ 4\)\ <\ uVar10\)\ \{$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*local_58\ =\ \*\(int\ \*\)\(iVar9\ \+\ \*\(int\ \*\)\(iVar8\ \+\ 8\)\);$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*iVar8\ =\ FUN_00105594\(local_58,1\);$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*if\ \(iVar8\ ==\ 0\)\ goto\ LAB_0013c8f0;$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*iVar8\ =\ \*piVar5;$	+2
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*local_58\ =\ iVar8;$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*if\ \(\*piVar5\ !=\ \*\(int\ \*\)\(iVar8\ \+\ 0x84\)\)\ \{$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*local_58\ =\ FUN_00105594\(iVar8,iVar11\ \+\ 1\);$	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*local_58\ =\ iVar8;$@2	+1
+use	Program__scanUsevectorChains	iVar8	instOrVectorBase	INFERRED	one register: instruction vector, operand source and top-of-stack inst	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@2	+1
+local	Program__scanUsevectorChains	iVar11	operandIndexTop	INFERRED	operand index popped from the operand-index stack
+local	Program__eliminateRedundantInst	param_1	program	INFERRED	program recorded with the block definition
+local	Program__eliminateRedundantInst	param_2	inst	INFERRED	the possibly redundant inst
+local	Program__eliminateRedundantInst	param_3	block	INFERRED	block whose definition record is updated
+local	Program__eliminateRedundantInst	param_4	pass	INFERRED	*(param_4+8) is the compiler; +0x14c / +0x150 count removals
+local	Program__eliminateRedundantInst	uVar1	removed	INFERRED	1 when the inst was removed
+local	Program__eliminateRedundantInst	iVar2	registerCheck	INFERRED	register-kind / vtable +0x50 results in the guard chain
+local	Program__eliminateRedundantInst	iVar3	staleArg4	INFERRED	copy of pass left in r6 as an extra argument of the vtable +0xc call
