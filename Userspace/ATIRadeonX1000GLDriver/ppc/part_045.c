@@ -3485,52 +3485,52 @@ int Scheduler__run(program)
   /* NOTE (issue #64, ROOT CAUSE of the DList__count crash): these 9 locals were declared as separate
    * adjacent stack scalars/arrays, but this function's own code treats them as ONE contiguous 0x1c0-byte
    * region - confirmed three independent ways: (1) their own names encode consecutive stock frame
-   * offsets with no gaps (0x1d8-0x1a4=0x34=auStack_1d8's real size, ... down to local_e0 starting at
+   * offsets with no gaps (0x1d8-0x1a4=0x34=schedulerObj's real size, ... down to schedListLast starting at
    * exactly 0xf8 bytes in); (2) the backward-walking loop a few lines down decrements by exactly 6 words
-   * (24 bytes) per step through auStack_144/15c/174/18c/1a4, expecting them contiguous; (3) empirically -
+   * (24 bytes) per step through schedList4/15c/174/18c/1a4, expecting them contiguous; (3) empirically -
    * this IS the original crash: Scheduler__scheduleBlock reads *(this_object + 0x3e words) = +0xf8 bytes, which lands
-   * exactly on local_e0's real position in stock (a real DListNode__init sentinel list), but on -O0-scattered
+   * exactly on schedListLast's real position in stock (a real DListNode__init sentinel list), but on -O0-scattered
    * garbage in the rebuild, since nothing guarantees these 9 separate locals land in this order or even
    * adjacently. Traced from the crash back to here across two long sessions (issue #64) - fixing by
    * forcing one real contiguous buffer with aliases at the exact offsets stock's own naming confirms. */
   undefined1 auStack_1e68_combined [0x1c0];
-#define auStack_1d8 (auStack_1e68_combined + 0x0)
-#define auStack_1a4 (auStack_1e68_combined + 0x34)
-#define auStack_18c (auStack_1e68_combined + 0x4c)
-#define auStack_174 (auStack_1e68_combined + 0x64)
-#define auStack_15c (auStack_1e68_combined + 0x7c)
-#define auStack_144 (auStack_1e68_combined + 0x94)
-#define auStack_12c ((undefined4 *)(auStack_1e68_combined + 0xac))
-#define uStack_e4 (*(undefined4 *)(auStack_1e68_combined + 0xf4))
-#define local_e0 (auStack_1e68_combined + 0xf8)
+#define schedulerObj (auStack_1e68_combined + 0x0)
+#define schedList0 (auStack_1e68_combined + 0x34)
+#define schedList1 (auStack_1e68_combined + 0x4c)
+#define schedList2 (auStack_1e68_combined + 0x64)
+#define schedList3 (auStack_1e68_combined + 0x7c)
+#define schedList4 (auStack_1e68_combined + 0x94)
+#define sentinelTable ((undefined4 *)(auStack_1e68_combined + 0xac))
+#define sentinelTableEnd (*(undefined4 *)(auStack_1e68_combined + 0xf4))
+#define schedListLast (auStack_1e68_combined + 0xf8)
   undefined4 *puVar3;
   
-  DListNode__init(auStack_1a4);
-  DListNode__init(auStack_18c);
-  DListNode__init(auStack_174);
-  DListNode__init(auStack_15c);
-  DListNode__init(auStack_144);
+  DListNode__init(schedList0);
+  DListNode__init(schedList1);
+  DListNode__init(schedList2);
+  DListNode__init(schedList3);
+  DListNode__init(schedList4);
   sentinelsLeft = 1;
-  sentinelCursor = auStack_12c;
+  sentinelCursor = sentinelTable;
   do {
     DListNode__init(sentinelCursor);
     moreSentinels = sentinelsLeft != -1;
     sentinelCursor = sentinelCursor + 6;
     sentinelsLeft = sentinelsLeft + -1;
   } while (moreSentinels);
-  DListNode__init(local_e0);
+  DListNode__init(schedListLast);
   heightReductionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x42);
   if (heightReductionEnabled != 0) {
-    pass_height_reduction(auStack_1d8,program,in_r5,in_r6,in_r7,in_r8,in_r9);
+    pass_height_reduction(schedulerObj,program,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
-  ((int (*)())pass_sched_preprocess_and_schedule_inst)(auStack_1d8,program);
-  sentinelCursorBack = &uStack_e4;
+  ((int (*)())pass_sched_preprocess_and_schedule_inst)(schedulerObj,program);
+  sentinelCursorBack = &sentinelTableEnd;
   do {
     puVar3 = sentinelCursorBack + -6;
     *puVar3 = PTR_DAT_001e8b48 + 8;
     sentinelCursorBack[-3] = PTR_DAT_001e8b48 + 8;
     sentinelCursorBack = puVar3;
-  } while (puVar3 != auStack_12c);
+  } while (puVar3 != sentinelTable);
   return;
 }
 

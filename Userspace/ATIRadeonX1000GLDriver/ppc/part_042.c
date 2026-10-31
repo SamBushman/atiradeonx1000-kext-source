@@ -8199,8 +8199,8 @@ int FUN_0014532c(pass, pair)
 }
 
 /* pass_post_pack_insts @ 0x145670 (3828 bytes) */
-int pass_post_pack_insts(param_1)
-  int *param_1;
+int pass_post_pack_insts(packCtx)
+  int *packCtx;
 {
   uint lastScanIndex;
   uint minCapacityB;
@@ -8267,14 +8267,14 @@ int pass_post_pack_insts(param_1)
   int allocation;
   int operandRecord;
   bool atScanStart;
-  int iVar2;
+  int blockWalkNode;
   uint laneIndex;
   int nextInstB;
-  int iVar5;
-  int iVar6;
+  int instWalkNode;
+  int walkNextLink;
   int flag1WithoutFlag7Result;
   int block;
-  int iVar8;
+  int walkNextInstLink;
   undefined4 arenaAt378;
   uint candidateCount;
   uint vecSize;
@@ -8282,36 +8282,36 @@ int pass_post_pack_insts(param_1)
   uint newVecSize;
   uint recordIndex;
   uint uVar15;
-  uint uVar16;
+  uint pairVecSizeB;
   int candidateByteOffset;
   int inst;
   uint copyIndexF;
-  uint uVar20;
+  uint pairVecSizeA;
   int instA;
   int *arenaPtr;
   undefined4 packedWriteMask;
-  undefined4 local_64 [3];
+  undefined4 selectScratch [3];
   undefined4 packResult;
   int replacementInst;
   
-  block = *(int *)(param_1[1] + 900);
-  for (nextBlock = *(int *)(*(int *)(param_1[1] + 900) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
+  block = *(int *)(packCtx[1] + 900);
+  for (nextBlock = *(int *)(*(int *)(packCtx[1] + 900) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
     lookaheadInst = *(int *)(*(int *)(block + 0x98) + 8);
     inst = *(int *)(block + 0x98);
     if (lookaheadInst != 0) {
       do {
         nextInst = lookaheadInst;
         if ((*(uint *)(inst + 0x14) & 1) != 0) {
-          ((int (*)())FUN_00141044)(&packResult,param_1,inst);
+          ((int (*)())FUN_00141044)(&packResult,packCtx,inst);
           packedWriteMask = packResult;
           if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
             operandRecord = IRInst__getOperandRecord(inst,*(undefined4 *)(inst + 0x84));
             laneIndex = 0;
-            local_64[0] = *(undefined4 *)(operandRecord + 0x10);
+            selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
             laneCountdown = 4;
             do {
-              if (*(byte *)((int)local_64 + laneIndex) == laneIndex) {
-                *(undefined1 *)((int)local_64 + (laneIndex - 4)) = 1;
+              if (*(byte *)((int)selectScratch + laneIndex) == laneIndex) {
+                *(undefined1 *)((int)selectScratch + (laneIndex - 4)) = 1;
               }
               laneIndex = laneIndex + 1;
               laneCountdown = laneCountdown + -1;
@@ -8327,46 +8327,46 @@ int pass_post_pack_insts(param_1)
     }
     block = nextBlock;
   }
-  arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+  arenaAt378 = *(undefined4 *)(*packCtx + 0x378);
   vecData = Arena__alloc(arenaAt378,0x2c0);
-  iVar2 = param_1[1];
-  iVar6 = *(int *)(*(int *)(iVar2 + 900) + 8);
-  if (iVar6 != 0) {
+  blockWalkNode = packCtx[1];
+  walkNextLink = *(int *)(*(int *)(blockWalkNode + 900) + 8);
+  if (walkNextLink != 0) {
     candidateCount = 0;
     candidateTotal = 0;
     vecCapacity = 0x10;
     vecSize = 0;
-    iVar2 = *(int *)(iVar2 + 900);
+    blockWalkNode = *(int *)(blockWalkNode + 900);
     do {
-      iVar5 = iVar6;
-      iVar6 = *(int *)(*(int *)(iVar2 + 0x98) + 8);
-      instA = *(int *)(iVar2 + 0x98);
-      if (iVar6 != 0) {
+      instWalkNode = walkNextLink;
+      walkNextLink = *(int *)(*(int *)(blockWalkNode + 0x98) + 8);
+      instA = *(int *)(blockWalkNode + 0x98);
+      if (walkNextLink != 0) {
         do {
-          iVar5 = iVar6;
+          instWalkNode = walkNextLink;
           if ((*(uint *)(instA + 0x14) & 1) != 0) {
-            flag1WithoutFlag7Result = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),instA);
+            flag1WithoutFlag7Result = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(packCtx[1] + 8),instA);
             if (flag1WithoutFlag7Result != 0) {
               atScanStart = true;
-              iVar6 = *(int *)(param_1[1] + 900);
-              for (iVar5 = *(int *)(*(int *)(param_1[1] + 900) + 8); iVar5 != 0;
-                  iVar5 = *(int *)(iVar5 + 8)) {
-                iVar8 = *(int *)(*(int *)(iVar6 + 0x98) + 8);
-                if (iVar8 != 0) {
+              walkNextLink = *(int *)(packCtx[1] + 900);
+              for (instWalkNode = *(int *)(*(int *)(packCtx[1] + 900) + 8); instWalkNode != 0;
+                  instWalkNode = *(int *)(instWalkNode + 8)) {
+                walkNextInstLink = *(int *)(*(int *)(walkNextLink + 0x98) + 8);
+                if (walkNextInstLink != 0) {
                   candidateByteOffset = candidateCount * 0x2c;
-                  iVar5 = *(int *)(iVar6 + 0x98);
+                  instWalkNode = *(int *)(walkNextLink + 0x98);
                   do {
-                    nextInstB = iVar8;
-                    if ((*(uint *)(iVar5 + 0x14) & 1) != 0) {
+                    nextInstB = walkNextInstLink;
+                    if ((*(uint *)(instWalkNode + 0x14) & 1) != 0) {
                       if (atScanStart) {
                         nextInstB = *(int *)(instA + 8);
                         atScanStart = false;
-                        iVar6 = iVar2;
+                        walkNextLink = blockWalkNode;
                       }
                       else {
-                        packable = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(param_1[1] + 8),iVar5);
+                        packable = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(packCtx[1] + 8),instWalkNode);
                         if (packable == 0) {
-                          nextInstB = *(int *)(iVar5 + 8);
+                          nextInstB = *(int *)(instWalkNode + 8);
                         }
                         else {
                           candidateLimitHit = 0x3ff < candidateTotal;
@@ -8391,15 +8391,15 @@ int pass_post_pack_insts(param_1)
                             }
                             Arena__free(arenaAt378,vecData);
                           }
-                          buildResult = ((int (*)())PostPack__buildCandidate)(param_1,instA,iVar5,grownDataC + candidateByteOffset);
+                          buildResult = ((int (*)())PostPack__buildCandidate)(packCtx,instA,instWalkNode,grownDataC + candidateByteOffset);
                           vecSize = newVecSize;
                           vecData = grownDataC;
                           if (buildResult == 0) {
-                            nextInstB = *(int *)(iVar5 + 8);
+                            nextInstB = *(int *)(instWalkNode + 8);
                             atScanStart = false;
                           }
                           else {
-                            nextInstB = *(int *)(iVar5 + 8);
+                            nextInstB = *(int *)(instWalkNode + 8);
                             candidateCount = candidateCount + 1;
                             candidateByteOffset = candidateByteOffset + 0x2c;
                             atScanStart = false;
@@ -8407,24 +8407,24 @@ int pass_post_pack_insts(param_1)
                         }
                       }
                     }
-                    iVar8 = *(int *)(nextInstB + 8);
-                    iVar5 = nextInstB;
+                    walkNextInstLink = *(int *)(nextInstB + 8);
+                    instWalkNode = nextInstB;
                   } while (*(int *)(nextInstB + 8) != 0);
-                  iVar5 = *(int *)(iVar6 + 8);
+                  instWalkNode = *(int *)(walkNextLink + 8);
                 }
-                iVar6 = iVar5;
+                walkNextLink = instWalkNode;
               }
             }
-            iVar5 = *(int *)(instA + 8);
+            instWalkNode = *(int *)(instA + 8);
           }
-          iVar6 = *(int *)(iVar5 + 8);
-          instA = iVar5;
-        } while (*(int *)(iVar5 + 8) != 0);
-        iVar5 = *(int *)(iVar2 + 8);
+          walkNextLink = *(int *)(instWalkNode + 8);
+          instA = instWalkNode;
+        } while (*(int *)(instWalkNode + 8) != 0);
+        instWalkNode = *(int *)(blockWalkNode + 8);
       }
-      iVar6 = *(int *)(iVar5 + 8);
-      iVar2 = iVar5;
-    } while (*(int *)(iVar5 + 8) != 0);
+      walkNextLink = *(int *)(instWalkNode + 8);
+      blockWalkNode = instWalkNode;
+    } while (*(int *)(instWalkNode + 8) != 0);
 LAB_00146530:
     do {
       if ((int)candidateCount < 1) goto LAB_00146538;
@@ -8453,7 +8453,7 @@ LAB_00146530:
           }
           Arena__free(arenaAt378,scanData);
         }
-        candidateScore = ((int (*)())FUN_00143e40)(param_1,vecData + scoreOffset);
+        candidateScore = ((int (*)())FUN_00143e40)(packCtx,vecData + scoreOffset);
         if ((bestIndex == 0xffffffff) || (bestScore < candidateScore)) {
           bestIndex = scoreIndex;
           bestScore = candidateScore;
@@ -8483,11 +8483,11 @@ LAB_00146530:
       }
       bestOffset = bestIndex * 0x2c;
       bestCandidate = (int *)(vecData + bestOffset);
-      ((int (*)())FUN_0014532c)(param_1,bestCandidate);
-      if (0x17 < param_1[2]) goto LAB_00146538;
-      arenaPtr = param_1 + 3;
+      ((int (*)())FUN_0014532c)(packCtx,bestCandidate);
+      if (0x17 < packCtx[2]) goto LAB_00146538;
+      arenaPtr = packCtx + 3;
       keptCountB = 0;
-      recordCount = param_1[4];
+      recordCount = packCtx[4];
       if (recordCount != 0) {
         recordIndex = 0;
         curCount = recordCount;
@@ -8495,120 +8495,120 @@ LAB_00146530:
         while( true ) {
           if (curCount <= recordIndex) {
             minCapacity = recordIndex + 1;
-            if ((uint)param_1[5] < minCapacity) {
-              grownCapacityC = (uint)(param_1[5] << 4) / 10;
-              param_1[5] = grownCapacityC;
+            if ((uint)packCtx[5] < minCapacity) {
+              grownCapacityC = (uint)(packCtx[5] << 4) / 10;
+              packCtx[5] = grownCapacityC;
               if (grownCapacityC < minCapacity) {
-                param_1[5] = minCapacity;
+                packCtx[5] = minCapacity;
               }
-              oldData = param_1[6];
-              allocation = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
-              param_1[6] = allocation;
-              if (param_1[4] != 0) {
+              oldData = packCtx[6];
+              allocation = Arena__alloc(*arenaPtr,packCtx[5] * 0x2c);
+              packCtx[6] = allocation;
+              if (packCtx[4] != 0) {
                 copyIndexG = 0;
                 copyOffset = 0;
                 do {
                   copySource = oldData + copyOffset;
                   copyIndexG = copyIndexG + 1;
-                  copyDestB = param_1[6] + copyOffset;
+                  copyDestB = packCtx[6] + copyOffset;
                   copyOffset = copyOffset + 0x2c;
                   _memcpy(copyDestB,copySource,0x2c);
-                } while (copyIndexG < (uint)param_1[4]);
+                } while (copyIndexG < (uint)packCtx[4]);
               }
               Arena__free(*arenaPtr,oldData);
             }
-            param_1[4] = minCapacity;
+            packCtx[4] = minCapacity;
           }
-          resultData = param_1[6];
+          resultData = packCtx[6];
           resultElement = recordIndex * 0x2c + resultData;
           keptCountB = keptCount;
           if ((*(int *)(resultElement + 0x24) != 0) && (keptCountB = keptCount + 1, keptCount < recordIndex)) {
-            if ((uint)param_1[4] <= keptCount) {
-              if ((uint)param_1[5] < keptCountB) {
-                grownCapacityC = (uint)(param_1[5] << 4) / 10;
-                param_1[5] = grownCapacityC;
+            if ((uint)packCtx[4] <= keptCount) {
+              if ((uint)packCtx[5] < keptCountB) {
+                grownCapacityC = (uint)(packCtx[5] << 4) / 10;
+                packCtx[5] = grownCapacityC;
                 if (grownCapacityC < keptCountB) {
-                  param_1[5] = keptCountB;
+                  packCtx[5] = keptCountB;
                 }
-                allocation3 = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
-                param_1[6] = allocation3;
-                if (param_1[4] != 0) {
+                allocation3 = Arena__alloc(*arenaPtr,packCtx[5] * 0x2c);
+                packCtx[6] = allocation3;
+                if (packCtx[4] != 0) {
                   copyIndexG = 0;
                   copyOffsetG = 0;
                   do {
                     copySourceB = resultData + copyOffsetG;
                     copyIndexG = copyIndexG + 1;
-                    copyDest = param_1[6] + copyOffsetG;
+                    copyDest = packCtx[6] + copyOffsetG;
                     copyOffsetG = copyOffsetG + 0x2c;
                     _memcpy(copyDest,copySourceB,0x2c);
-                  } while (copyIndexG < (uint)param_1[4]);
+                  } while (copyIndexG < (uint)packCtx[4]);
                 }
                 Arena__free(*arenaPtr,resultData);
-                resultData = param_1[6];
+                resultData = packCtx[6];
               }
-              param_1[4] = keptCountB;
+              packCtx[4] = keptCountB;
             }
             _memcpy(keptCount * 0x2c + resultData,resultElement,0x2c);
           }
           recordIndex = recordIndex + 1;
           if (recordCount == recordIndex) break;
-          curCount = param_1[4];
+          curCount = packCtx[4];
           keptCount = keptCountB;
         }
       }
-      if ((uint)param_1[5] < keptCountB) {
-        grownCapacity = (uint)(param_1[5] << 4) / 10;
-        param_1[5] = grownCapacity;
+      if ((uint)packCtx[5] < keptCountB) {
+        grownCapacity = (uint)(packCtx[5] << 4) / 10;
+        packCtx[5] = grownCapacity;
         if (grownCapacity < keptCountB) {
-          param_1[5] = keptCountB;
+          packCtx[5] = keptCountB;
         }
-        oldData = param_1[6];
-        allocation = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
-        param_1[6] = allocation;
-        if (param_1[4] != 0) {
+        oldData = packCtx[6];
+        allocation = Arena__alloc(*arenaPtr,packCtx[5] * 0x2c);
+        packCtx[6] = allocation;
+        if (packCtx[4] != 0) {
           copyIndexD = 0;
           copyOffset = 0;
           do {
             copySource = oldData + copyOffset;
             copyIndexD = copyIndexD + 1;
-            copyDestB = param_1[6] + copyOffset;
+            copyDestB = packCtx[6] + copyOffset;
             copyOffset = copyOffset + 0x2c;
             _memcpy(copyDestB,copySource,0x2c);
-          } while (copyIndexD < (uint)param_1[4]);
+          } while (copyIndexD < (uint)packCtx[4]);
         }
         Arena__free(*arenaPtr,oldData);
       }
-      param_1[4] = keptCountB;
+      packCtx[4] = keptCountB;
       if (keptCountB != 0) {
         uVar15 = 0;
         do {
           minCapacityB = uVar15 + 1;
-          if ((uint)param_1[4] <= uVar15) {
-            if ((uint)param_1[5] < minCapacityB) {
-              grownCapacityB = (uint)(param_1[5] << 4) / 10;
-              param_1[5] = grownCapacityB;
+          if ((uint)packCtx[4] <= uVar15) {
+            if ((uint)packCtx[5] < minCapacityB) {
+              grownCapacityB = (uint)(packCtx[5] << 4) / 10;
+              packCtx[5] = grownCapacityB;
               if (grownCapacityB < minCapacityB) {
-                param_1[5] = minCapacityB;
+                packCtx[5] = minCapacityB;
               }
-              oldData = param_1[6];
-              allocation = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
-              param_1[6] = allocation;
-              if (param_1[4] != 0) {
+              oldData = packCtx[6];
+              allocation = Arena__alloc(*arenaPtr,packCtx[5] * 0x2c);
+              packCtx[6] = allocation;
+              if (packCtx[4] != 0) {
                 copyIndexE = 0;
                 copyOffset = 0;
                 do {
                   copySource = oldData + copyOffset;
                   copyIndexE = copyIndexE + 1;
-                  copyDestB = param_1[6] + copyOffset;
+                  copyDestB = packCtx[6] + copyOffset;
                   copyOffset = copyOffset + 0x2c;
                   _memcpy(copyDestB,copySource,0x2c);
-                } while (copyIndexE < (uint)param_1[4]);
+                } while (copyIndexE < (uint)packCtx[4]);
               }
               Arena__free(*arenaPtr,oldData);
             }
-            param_1[4] = minCapacityB;
+            packCtx[4] = minCapacityB;
           }
-          *(undefined4 *)(uVar15 * 0x2c + param_1[6] + 0x28) = 0;
+          *(undefined4 *)(uVar15 * 0x2c + packCtx[6] + 0x28) = 0;
           uVar15 = minCapacityB;
         } while (minCapacityB < keptCountB);
       }
@@ -8786,9 +8786,9 @@ LAB_00146530:
         candidateOffset = scanIndex * 0x2c;
         candidateRecord = grownData + candidateOffset;
         candInstA = *(int *)(grownData + candidateOffset);
-        uVar20 = candidateCount;
+        pairVecSizeA = candidateCount;
         grownDataD = grownData;
-        if ((candidateCount <= scanIndex) && (uVar20 = nextPairIndex, vecCapacity < nextPairIndex)) {
+        if ((candidateCount <= scanIndex) && (pairVecSizeA = nextPairIndex, vecCapacity < nextPairIndex)) {
           vecCapacity = (vecCapacity << 4) / 10;
           if (vecCapacity < nextPairIndex) {
             vecCapacity = nextPairIndex;
@@ -8809,82 +8809,82 @@ LAB_00146530:
         if (replacedInst == candInstA) {
           candInstA = replacementInst;
         }
-        iVar2 = *(int *)(candidateRecord + 4);
+        blockWalkNode = *(int *)(candidateRecord + 4);
         if (replacedInst == *(int *)(candidateRecord + 4)) {
-          iVar2 = replacementInst;
+          blockWalkNode = replacementInst;
         }
-        vecSize = uVar20;
+        vecSize = pairVecSizeA;
         vecData = grownDataD;
-        if (candInstA == iVar2) {
+        if (candInstA == blockWalkNode) {
 LAB_001463fc:
           lastScanIndex = scanIndex - 1;
           nextPairIndex = nextPairIndex - 1;
-          uVar16 = vecSize;
-          iVar2 = vecData;
-          if ((vecSize <= scanIndex) && (uVar16 = scanIndex + 1, vecCapacity < uVar16)) {
+          pairVecSizeB = vecSize;
+          blockWalkNode = vecData;
+          if ((vecSize <= scanIndex) && (pairVecSizeB = scanIndex + 1, vecCapacity < pairVecSizeB)) {
             vecCapacity = (vecCapacity << 4) / 10;
-            if (vecCapacity < uVar16) {
-              vecCapacity = uVar16;
+            if (vecCapacity < pairVecSizeB) {
+              vecCapacity = pairVecSizeB;
             }
-            iVar2 = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+            blockWalkNode = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
             if (vecSize != 0) {
               copyIndex = 0;
               copyOffsetG = 0;
               do {
                 copyIndex = copyIndex + 1;
-                _memcpy(iVar2 + copyOffsetG,vecData + copyOffsetG,0x2c);
+                _memcpy(blockWalkNode + copyOffsetG,vecData + copyOffsetG,0x2c);
                 copyOffsetG = copyOffsetG + 0x2c;
               } while (copyIndex != vecSize);
             }
             Arena__free(arenaAt378,vecData);
-            candidateRecord = iVar2 + candidateOffset;
+            candidateRecord = blockWalkNode + candidateOffset;
           }
           candidateCount = lastIndex - 1;
           lastOffset = lastOffset + -0x2c;
-          vecSize = uVar16;
-          vecData = iVar2;
-          if ((uVar16 <= candidateCount) && (vecSize = lastIndex, vecCapacity < lastIndex)) {
+          vecSize = pairVecSizeB;
+          vecData = blockWalkNode;
+          if ((pairVecSizeB <= candidateCount) && (vecSize = lastIndex, vecCapacity < lastIndex)) {
             vecCapacity = (vecCapacity << 4) / 10;
             if (vecCapacity < lastIndex) {
               vecCapacity = lastIndex;
             }
             vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
-            if (uVar16 != 0) {
+            if (pairVecSizeB != 0) {
               copyIndexC = 0;
               copyOffsetG = 0;
               do {
                 copyIndexC = copyIndexC + 1;
-                _memcpy(vecData + copyOffsetG,iVar2 + copyOffsetG,0x2c);
+                _memcpy(vecData + copyOffsetG,blockWalkNode + copyOffsetG,0x2c);
                 copyOffsetG = copyOffsetG + 0x2c;
-              } while (copyIndexC != uVar16);
+              } while (copyIndexC != pairVecSizeB);
             }
-            Arena__free(arenaAt378,iVar2);
+            Arena__free(arenaAt378,blockWalkNode);
           }
           _memcpy(candidateRecord,lastOffset + vecData,0x2c);
         }
         else {
-          if ((uVar20 <= scanIndex) && (vecSize = nextPairIndex, vecCapacity < nextPairIndex)) {
+          if ((pairVecSizeA <= scanIndex) && (vecSize = nextPairIndex, vecCapacity < nextPairIndex)) {
             vecCapacity = (vecCapacity << 4) / 10;
             if (vecCapacity < nextPairIndex) {
               vecCapacity = nextPairIndex;
             }
             vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
-            if (uVar20 != 0) {
+            if (pairVecSizeA != 0) {
               copyIndex = 0;
               copyOffsetE = 0;
               do {
                 copyIndex = copyIndex + 1;
                 _memcpy(vecData + copyOffsetE,grownDataD + copyOffsetE,0x2c);
                 copyOffsetE = copyOffsetE + 0x2c;
-              } while (copyIndex != uVar20);
+              } while (copyIndex != pairVecSizeA);
             }
             Arena__free(arenaAt378,grownDataD);
             candidateRecord = vecData + candidateOffset;
           }
-          iVar2 = ((int (*)())PostPack__buildCandidate)(param_1,candInstA,iVar2,candidateRecord);
+          blockWalkNode = ((int (*)())PostPack__buildCandidate)(packCtx,candInstA,blockWalkNode,candidateRecord);
           candidateCount = lastIndex;
           lastScanIndex = scanIndex;
-          if (iVar2 == 0) goto LAB_001463fc;
+          if (blockWalkNode == 0) goto LAB_001463fc;
         }
         scanIndex = lastScanIndex + 1;
         nextPairIndex = nextPairIndex + 1;
@@ -8893,11 +8893,11 @@ LAB_001463fc:
     } while( true );
   }
 LAB_0014653c:
-  Program__beginPass(iVar2,(int)"post_pack_insts");
+  Program__beginPass(blockWalkNode,(int)"post_pack_insts");
   Arena__free(arenaAt378,vecData);
   return;
 LAB_00146538:
-  iVar2 = param_1[1];
+  blockWalkNode = packCtx[1];
   goto LAB_0014653c;
 }
 

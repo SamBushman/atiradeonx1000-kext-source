@@ -4753,3 +4753,20 @@ local	FUN_00162dfc	iVar2	operandLoopIndexC	INFERRED	operand loop index 1..operan
 local	FUN_00162dfc	iVar4	initIndexOrResult	INFERRED	one register: permutation initialiser, operand sources, vtable results and operand records
 local	FUN_00162dfc	iVar11	countdownOrIndex	INFERRED	one register: init/lane countdowns, operand index and operand sources; adjacent to the operandPermutation array, so not split
 local	FUN_00162dfc	piVar5	permutationOrSelectCursor	INFERRED	one register: cursor over operandPermutation and over the new select words
+local	pass_post_pack_insts	param_1	packCtx	INFERRED	pack pass context: [0] compiler, [1] program, [2..6] candidate record vector (count, arena, size, capacity, data)
+local	pass_post_pack_insts	iVar2	blockWalkNode	INFERRED	one register: program, block list node and its link in the block walks
+local	pass_post_pack_insts	iVar5	instWalkNode	INFERRED	one register: block / inst list node being walked and the second candidate inst
+local	pass_post_pack_insts	iVar6	walkNextLink	INFERRED	one register: next block link, block list head and inst list head
+local	pass_post_pack_insts	iVar8	walkNextInstLink	INFERRED	next link of the inst list in the candidate scan
+local	pass_post_pack_insts	uVar16	pairVecSizeB	INFERRED	grown size of the pair vector in the second copy (scan index + 1)
+local	pass_post_pack_insts	uVar20	pairVecSizeA	INFERRED	grown size of the pair vector in the first copy
+local	pass_post_pack_insts	local_64	selectScratch	INFERRED	select word scratch whose lane bytes are tested; the used-lane flags precede it at -4
+local	Scheduler__run	auStack_1d8	schedulerObj	INFERRED	the Scheduler object on the stack; its lists follow at fixed offsets within the combined frame
+local	Scheduler__run	auStack_1a4	schedList0	INFERRED	first sentinel-node list initialised with DListNode__init
+local	Scheduler__run	auStack_18c	schedList1	INFERRED	second sentinel-node list
+local	Scheduler__run	auStack_174	schedList2	INFERRED	third sentinel-node list
+local	Scheduler__run	auStack_15c	schedList3	INFERRED	fourth sentinel-node list
+local	Scheduler__run	auStack_144	schedList4	INFERRED	fifth sentinel-node list
+local	Scheduler__run	auStack_12c	sentinelTable	INFERRED	array of 24-byte sentinel nodes torn down from the end back to this base
+local	Scheduler__run	uStack_e4	sentinelTableEnd	INFERRED	word just past sentinelTable, the walk-back start
+local	Scheduler__run	local_e0	schedListLast	INFERRED	last sentinel-node list initialised with DListNode__init
