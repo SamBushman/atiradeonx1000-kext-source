@@ -3362,7 +3362,7 @@ int Inst__collapseClampToSaturate(inst, program)
   int operandRecord;
   int operandVReg2;
   undefined4 allocatedRegister;
-  undefined4 in_r5;
+  undefined4 staleArg5;
   int nextNode;
   int extraSource;
   int depthBasePlusOne;
@@ -3381,16 +3381,16 @@ int Inst__collapseClampToSaturate(inst, program)
   if (hwSupport == 0) {
     return 0;
   }
-  middleInst = ((undefined4 (*)())IRInst__getOtherOperandIfConstant)(inst,0x17,in_r5,compiler,0.0);
+  middleInst = ((undefined4 (*)())IRInst__getOtherOperandIfConstant)(inst,0x17,staleArg5,compiler,0.0);
   if (middleInst == 0) {
-    middleInst = ((undefined4 (*)())IRInst__getOtherOperandIfConstant)(inst,0x19,in_r5,compiler,1.0);
+    middleInst = ((undefined4 (*)())IRInst__getOtherOperandIfConstant)(inst,0x19,staleArg5,compiler,1.0);
     if (middleInst == 0) {
       return 0;
     }
-    clampedValue = (int *)((undefined4 (*)())IRInst__getOtherOperandIfConstant)(middleInst,0x17,in_r5,compiler,0.0);
+    clampedValue = (int *)((undefined4 (*)())IRInst__getOtherOperandIfConstant)(middleInst,0x17,staleArg5,compiler,0.0);
   }
   else {
-    clampedValue = (int *)((undefined4 (*)())IRInst__getOtherOperandIfConstant)(middleInst,0x19,in_r5,compiler,1.0);
+    clampedValue = (int *)((undefined4 (*)())IRInst__getOtherOperandIfConstant)(middleInst,0x19,staleArg5,compiler,1.0);
   }
   if (clampedValue == (int *)0x0) {
     return 0;
@@ -7665,8 +7665,8 @@ LAB_001655a8: ;
 }
 
 /* FUN_00165604 @ 0x165604 (388 bytes) */
-int FUN_00165604(param_1, inst)
-  int param_1;
+int FUN_00165604(slotTable, inst)
+  int slotTable;
   int *inst;
 {
   int vcall14Result;
@@ -7675,7 +7675,7 @@ int FUN_00165604(param_1, inst)
   int sourceDef2;
   int operandRecord;
   int loopIndex;
-  int iVar1;
+  int slotAddress;
   int operandSelect;
   int loopIndex2;
   int operandSelectB;
@@ -7683,10 +7683,10 @@ int FUN_00165604(param_1, inst)
   
   loopIndex2 = 0;
   do {
-    iVar1 = loopIndex2 * 4 + param_1;
-    inst1 = *(int **)(iVar1 + 0x10);
+    slotAddress = loopIndex2 * 4 + slotTable;
+    inst1 = *(int **)(slotAddress + 0x10);
     if (inst1 == (int *)0x0) {
-      *(int **)(iVar1 + 0x10) = inst;
+      *(int **)(slotAddress + 0x10) = inst;
       return inst;
     }
     if (((*(int *)(inst1[0x22] + 8) == *(int *)(inst[0x22] + 8)) &&
@@ -8561,8 +8561,8 @@ int Scheduler__copyFetchInEdge(scheduler, fromNode, toNode)
 }
 
 /* Scheduler__hasOtherFlaggedProducer @ 0x166a0c (412 bytes) */
-int Scheduler__hasOtherFlaggedProducer(param_1, node)
-  undefined4 param_1;
+int Scheduler__hasOtherFlaggedProducer(scheduler, node)
+  undefined4 scheduler;
   int node;
 {
   uint consumerPredCount;
@@ -8638,7 +8638,7 @@ int Scheduler__isNodeReady(scheduler, node)
   int scheduler;
   int node;
 {
-  int iVar1;
+  int checkOrProducerEdge;
   uint vectorCount;
   undefined4 *edgeSlot;
   int producerIsFetchClass;
@@ -8653,9 +8653,9 @@ LAB_00166ce4:
     isReady = 0;
   }
   else {
-    iVar1 = (**(code **)(**(int **)(scheduler + 0xc) + 0x20))
+    checkOrProducerEdge = (**(code **)(**(int **)(scheduler + 0xc) + 0x20))
                       (*(int **)(scheduler + 0xc),*(undefined4 *)(node + 0x38));
-    if (iVar1 != 0) {
+    if (checkOrProducerEdge != 0) {
       predecessorEdges = *(uint **)(node + 0x44);
       edgeIndex = 0;
       predEdgeCount = predecessorEdges[1];
@@ -8674,11 +8674,11 @@ LAB_00166ce4:
           }
           edge = (int *)*edgeSlot;
           if ((((edge[2] == 0) &&
-               (iVar1 = *edge,
-               *(int *)(*(int *)(iVar1 + 0x38) + 0x158) == *(int *)(scheduler + 0x10))) &&
+               (checkOrProducerEdge = *edge,
+               *(int *)(*(int *)(checkOrProducerEdge + 0x38) + 0x158) == *(int *)(scheduler + 0x10))) &&
               (producerIsFetchClass = (**(code **)(**(int **)(scheduler + 0xc) + 0x20))(*(int **)(scheduler + 0xc)),
               producerIsFetchClass != 0)) &&
-             ((edge[7] != 0 && (*(int *)(scheduler + 0x124) <= *(int *)(iVar1 + 0x2c)))))
+             ((edge[7] != 0 && (*(int *)(scheduler + 0x124) <= *(int *)(checkOrProducerEdge + 0x2c)))))
           goto LAB_00166ce4;
           edgeIndex = edgeIndex + 1;
           if (predEdgeCount == edgeIndex) break;
@@ -9311,7 +9311,7 @@ int SchedNode__getLastConsumerCycle(node, component)
   int component;
 {
   uint vectorFilledCount;
-  int *piVar2;
+  int *edgeSlot;
   int edge;
   uint vectorFilledCount2;
   int latestCycle;
@@ -9330,13 +9330,13 @@ int SchedNode__getLastConsumerCycle(node, component)
           _memset(vectorFilledCount * 4 + successorEdges[2],0,(loopIndex - vectorFilledCount) * 4 + 4);
           successorEdges[1] = loopIndex + 1;
         }
-        piVar2 = (int *)(loopIndex * 4 + successorEdges[2]);
+        edgeSlot = (int *)(loopIndex * 4 + successorEdges[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(successorEdges,loopIndex);
+        edgeSlot = (int *)Vector__elementRefGrow(successorEdges,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      edge = *piVar2;
+      edge = *edgeSlot;
       if (((*(int *)(edge + 8) == 0) && (*(char *)(component + edge + 0x18) != '\0')) &&
          (edge = *(int *)(*(int *)(edge + 4) + 0x2c), latestCycle < edge)) {
         latestCycle = edge;

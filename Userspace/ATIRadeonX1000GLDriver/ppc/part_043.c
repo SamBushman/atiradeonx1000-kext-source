@@ -372,17 +372,17 @@ LAB_0014736c:
 }
 
 /* IRInst__isOpcodeInSet147398 @ 0x147398 (120 bytes) */
-int IRInst__isOpcodeInSet147398(param_1)
-  int param_1;
+int IRInst__isOpcodeInSet147398(inst)
+  int inst;
 {
   int callResult;
   
-  callResult = ((int (*)())FUN_00147238)(param_1);
+  callResult = ((int (*)())FUN_00147238)(inst);
   if (callResult != 0) {
 LAB_001474b4:
     return 1;
   }
-  switch(*(undefined4 *)(*(int *)(param_1 + 0x88) + 8)) {
+  switch(*(undefined4 *)(*(int *)(inst + 0x88) + 8)) {
   case 0x13:
   case 0x24:
   case 0x25:
@@ -2296,13 +2296,13 @@ int FUN_0014a898(inst, inst2)
   bool isLast;
   int operandRecord;
   int loopIndex;
-  undefined4 local_28 [6];
+  undefined4 selectScratch [6];
   
   loopIndex = 0;
   operandRecord = IRInst__getOperandRecord(inst,*(undefined4 *)(inst + 0x84));
-  local_28[0] = *(undefined4 *)(operandRecord + 0x10);
+  selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
   while ((operandRecord = IRInst__getOperandRecord(inst2,0), *(char *)(loopIndex + operandRecord + 0x10) == '\x01' ||
-         (*(char *)((int)local_28 + loopIndex) != '\x04'))) {
+         (*(char *)((int)selectScratch + loopIndex) != '\x04'))) {
     isLast = loopIndex == 3;
     loopIndex = loopIndex + 1;
     if (isLast) {
@@ -6131,7 +6131,7 @@ int FUN_00151370(inst, inst2, program)
   undefined4 operandCopyWord5;
   undefined4 readSelectOut;
   int selectWhereOut;
-  int local_50 [5];
+  int mergedLanesOut [5];
   
   vcall64Result = (**(code **)(*inst + 100))(inst,inst2,program);
   if ((vcall64Result != 0) && (vcall64Result = (**(code **)(*inst2 + 100))(inst2), vcall64Result != 0)) {
@@ -6164,8 +6164,8 @@ int FUN_00151370(inst, inst2, program)
         if ((selectWhereOut != 0x1010101) &&
            ((checkIndex = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x30), checkIndex == 0 ||
             (((char)operandSelectC != '\0' && ((char)destSelectInst2 != '\0')))))) {
-          SelectWord__mergeWrittenLanes(local_50,destSelectInst2,operandSelectC);
-          mergedLanes = local_50[0];
+          SelectWord__mergeWrittenLanes(mergedLanesOut,destSelectInst2,operandSelectC);
+          mergedLanes = mergedLanesOut[0];
           operandRecord = IRInst__getOperandRecord(inst,1);
           operandSelectB = *(undefined4 *)(operandRecord + 0x10);
           operandRecord = IRInst__getOperandRecord(inst2,1);

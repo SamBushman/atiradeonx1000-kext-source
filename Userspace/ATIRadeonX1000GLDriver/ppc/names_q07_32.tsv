@@ -4633,3 +4633,70 @@ local	FUN_00141044	param_1	outWriteMask	INFERRED	receives the write mask of inst
 local	FUN_00141044	param_2	packCtx	INFERRED	pack context
 local	FUN_00141044	local_18	writeMaskOut	INFERRED	WriteMask__fromSelectWord out value
 local	Scheduler__insertOperandCopy	local_44	copyReadMaskOut	INFERRED	SelectWord__readMask out value passed to the dependency edge
+local	ValueKey__sourceKindIs4	param_1	key	INFERRED	value key with per-source kind words at +0xa0
+local	ValueKey__sourceKindIs4	param_2	sourceIndex	INFERRED	source whose kind is tested against 4
+local	ValueKey__sourceKindIs1	param_1	key	INFERRED	value key with per-source kind words at +0xa0
+local	ValueKey__sourceKindIs1	param_2	sourceIndex	INFERRED	source whose kind is tested against 1
+local	ScopedExprTable__eqKeys	param_1	keyA	INFERRED	first key; the compared region is +0xb4 for 0x15c bytes
+local	ScopedExprTable__eqKeys	param_2	keyB	INFERRED	second key
+local	PtrSet__eqNonNullPtr	param_1	slotA	INFERRED	address of the first pointer
+local	PtrSet__eqNonNullPtr	param_2	slotB	INFERRED	address of the second pointer
+local	Scheduler__issueNode	iVar1	cycleOrCheck	INFERRED	one register: current cycle stored on the node, then resource model check results
+local	IRInst__markOpcode13After12	param_1	inst	INFERRED	opcode 0x13 inst that is flagged (0x20000) when it follows an opcode 0x12 inst
+local	IRInst__markOpcode13After12	param_2	prevInst	INFERRED	inst tested for opcode 0x12
+local	FudoPs__vslot12_lookupTable6x	param_2	row	INFERRED	table row (stride 6 entries)
+local	FudoPs__vslot12_lookupTable6x	param_3	column	INFERRED	table column
+local	FUN_001766bc	iVar1	producerInst	INFERRED	inst at ctx+0xb0 whose opcode info is replaced
+local	FUN_001766bc	uVar2	changed	INFERRED	return value: 1 when the opcode was replaced
+local	FUN_00176574	param_1	opcode	INFERRED	opcode classified by the range tests
+local	FUN_001764e0	param_1	key	INFERRED	value key with per-source words at +0x70
+local	FUN_001764e0	param_2	sourceIndex	INFERRED	source whose word is tested against 4
+local	FUN_00165604	param_1	slotTable	INFERRED	table of inst slots (+0x10) searched for an equivalent inst
+local	FUN_00165604	iVar1	slotAddress	INFERRED	address of the slot at the loop index
+local	FUN_00140e70	param_1	outReadMask	INFERRED	receives the read mask word (inst +0xc)
+local	FUN_00140e70	param_2	packCtx	INFERRED	pack context
+local	FUN_00140e70	param_3	inst	INFERRED	inst whose read mask is returned
+local	ValueKey__maybeRefineSources	param_1	key	INFERRED	value key whose destination is split when the compiler options allow
+local	Scheduler__isNodeReady	iVar1	checkOrProducerEdge	INFERRED	one register: resource model check, then the producer node of the edge
+local	Program__moveInterpFetchesOutOfIfs	param_1	program	INFERRED	program whose block list (+900) and entry block (+0x3a0) are walked
+local	Inst__collapseClampToSaturate	in_r5	staleArg5	INFERRED	r7 argument register carried through the IRInst__getOtherOperandIfConstant calls
+local	FUN_001745f0	uVar2	result	INFERRED	return value
+local	SchedNode__getLastConsumerCycle	piVar2	edgeSlot	INFERRED	address of the successor edge element at the loop index
+local	IROperand__copyRegisterAndSelect	uVar1	registerKindByte	INFERRED	register kind byte (+8) copied between operand records
+local	IROperand__copyRegisterAndSelect	uVar2	selectWord	INFERRED	select word (+0xc) copied between operand records
+local	IRInst__isOpcodeInSet147398	param_1	inst	INFERRED	inst whose opcode is tested against the set
+local	FUN_00172fb8	uVar2	result	INFERRED	return value: 1 when the key inst is flagged and its field +0xb0 is 0x2a
+local	Scheduler__tryReuseLoopIndexLoad	uVar14	defaultSelect	INFERRED	DAT_001b0194 default select word stored into the new load
+local	PtrSet__hashPtr	param_1	slot	INFERRED	address of the pointer being hashed
+local	KeyLaneTable__hashByOpcode	param_1	entry	INFERRED	table entry whose key record (+4) opcode word (+0xb4) is hashed
+local	IRInst__isOpcodeInSet139344	param_1	inst	INFERRED	inst whose opcode is tested
+local	IRInst__isCndFloatOp	param_1	inst	INFERRED	inst whose opcode is tested against 0x24..0x26
+local	IRInst__getOperandSourceOrDefault	param_3	defaultSource	INFERRED	returned when the operand index is out of range
+local	FUN_00176564	param_1	opcode	INFERRED	opcode tested against 0xf9
+local	FUN_001762c0	param_1	compiler	INFERRED	compiler whose pointer sets are filled through FUN_001746c8
+local	FUN_00151370	local_50	mergedLanesOut	INFERRED	SelectWord__mergeWrittenLanes out value
+local	FUN_0014a898	local_28	selectScratch	INFERRED	select word scratch whose lane bytes are tested against 4
+local	FUN_00143e40	local_24	writeMaskOut	INFERRED	FUN_00141044 write mask out value
+local	ExprRecordTable__hashByValueNumber	param_1	record	INFERRED	expression record whose value number (+4) is hashed
+local	ExprRecordTable__hashByExpr	param_1	record	INFERRED	expression record whose first word is hashed
+local	Compiler__peekValueNumber	param_1	compiler	INFERRED	compiler whose value number counter (+0x3c8) is read
+local	Scheduler__hasOtherFlaggedProducer	param_1	scheduler	INFERRED	scheduler owning the node
+local	SchedModel__resetCounters	param_1	model	INFERRED	resource model whose counters at +0xc..+0x14 are cleared
+local	KhanPs__vslot56_scaleFloat	fparam_1	value	INFERRED	float scaled by FLOAT_001aa1cc
+local	Compiler__resetValueNumbers	param_1	compiler	INFERRED	compiler whose value number counters are reset
+local	Compiler__nextValueNumber	param_1	compiler	INFERRED	compiler whose value number counter (+0x3c8) is incremented
+local	Compiler__nextValueNumber	iVar1	valueNumber	INFERRED	the new value number
+local	Compiler__nextNegativeValueNumber	param_1	compiler	INFERRED	compiler whose negative value number counter (+0x3cc) is decremented
+local	Compiler__nextNegativeValueNumber	iVar1	valueNumber	INFERRED	the new negative value number
+local	Compiler__findInPtrSet	param_1	compiler	INFERRED	compiler owning the pointer set (+1000) and scratch key (+0x3f4)
+local	Compiler__findInPtrSet	param_2	pointer	INFERRED	pointer looked up in the set
+local	Compiler__exprRecordForValueNumber	param_1	compiler	INFERRED	compiler owning the expression table (+0x3e0) and scratch key (+0x3f0)
+local	Compiler__exprRecordForValueNumber	param_2	valueNumber	INFERRED	value number looked up
+local	ExprRecordTable__eqByValueNumber	param_1	recordA	INFERRED	first expression record
+local	ExprRecordTable__eqByValueNumber	param_2	recordB	INFERRED	second expression record
+local	ExprRecordTable__eqByExpr	param_1	recordA	INFERRED	first expression record
+local	ExprRecordTable__eqByExpr	param_2	recordB	INFERRED	second expression record
+local	FUN_00146788	uVar2	result	INFERRED	return value: 1 when obj has a single plain use
+local	FUN_00140e5c	param_1	packCtx	INFERRED	pack context being initialised
+local	FUN_00140e5c	param_2	program	INFERRED	program stored at packCtx +4
+local	FUN_0013ca84	uVar1	result	INFERRED	phi source or 0

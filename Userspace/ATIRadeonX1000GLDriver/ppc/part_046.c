@@ -99,10 +99,10 @@ int FUN_0017356c(ctx)
 }
 
 /* IRInst__isCndFloatOp @ 0x17361c (28 bytes) */
-int IRInst__isCndFloatOp(param_1)
-  int param_1;
+int IRInst__isCndFloatOp(inst)
+  int inst;
 {
-  return *(int *)(*(int *)(param_1 + 0x88) + 8) - 0x24U < 3;
+  return *(int *)(*(int *)(inst + 0x88) + 8) - 0x24U < 3;
 }
 
 /* FUN_00173638 @ 0x173638 (284 bytes) */
@@ -831,10 +831,10 @@ int FUN_001745f0(ctx)
   int ctx;
 {
   int callResult;
-  undefined4 uVar2;
+  undefined4 result;
   
   callResult = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
-  uVar2 = 0;
+  result = 0;
   if (callResult != 0) {
     callResult = ValueKey__canonicalizeConstantSources(ctx);
     if (callResult != 0) {
@@ -852,13 +852,13 @@ int FUN_001745f0(ctx)
       ((int (*)())ValueKey__rebuild)(ctx);
     }
     callResult = ValueKey__simplifyModifiersAndAddressing(ctx);
-    uVar2 = 1;
+    result = 1;
     if (callResult != 0) {
       ((int (*)())ValueKey__rebuild)(ctx);
-      uVar2 = 1;
+      result = 1;
     }
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_001746c8 @ 0x1746c8 (252 bytes) */
@@ -2071,14 +2071,14 @@ int IROperand__copyRegisterAndSelect(dstRecord, srcRecord)
   int dstRecord;
   int srcRecord;
 {
-  undefined1 uVar1;
-  undefined4 uVar2;
+  undefined1 registerKindByte;
+  undefined4 selectWord;
   
-  uVar1 = *(undefined1 *)(srcRecord + 8);
-  uVar2 = *(undefined4 *)(srcRecord + 0xc);
+  registerKindByte = *(undefined1 *)(srcRecord + 8);
+  selectWord = *(undefined4 *)(srcRecord + 0xc);
   *(undefined4 *)(dstRecord + 0x10) = *(undefined4 *)(srcRecord + 0x10);
-  *(undefined1 *)(dstRecord + 8) = uVar1;
-  *(undefined4 *)(dstRecord + 0xc) = uVar2;
+  *(undefined1 *)(dstRecord + 8) = registerKindByte;
+  *(undefined4 *)(dstRecord + 0xc) = selectWord;
   return;
 }
 
@@ -2100,15 +2100,15 @@ int noop_1762bc()
 }
 
 /* FUN_001762c0 @ 0x1762c0 (68 bytes) */
-int FUN_001762c0(param_1)
-  undefined4 param_1;
+int FUN_001762c0(compiler)
+  undefined4 compiler;
 {
   bool moreComponents;
   int loopIndex;
   
   loopIndex = 1;
   do {
-    ((int (*)())FUN_001746c8)(param_1,loopIndex);
+    ((int (*)())FUN_001746c8)(compiler,loopIndex);
     moreComponents = loopIndex != 3;
     loopIndex = loopIndex + 1;
   } while (moreComponents);
@@ -2116,9 +2116,9 @@ int FUN_001762c0(param_1)
 }
 
 /* KhanPs__vslot56_scaleFloat @ 0x176304 (32 bytes) */
-double KhanPs__vslot56_scaleFloat(double fparam_1)
+double KhanPs__vslot56_scaleFloat(double value)
 {
-  return (double)(float)(fparam_1 * (double)FLOAT_001aa1cc);
+  return (double)(float)(value * (double)FLOAT_001aa1cc);
 }
 
 /* signToCompareCode @ 0x176324 (44 bytes) */
@@ -2222,27 +2222,27 @@ int ValueKey__findOrInsertLiteral(undefined4 unusedArg1,int key,int row,double l
 }
 
 /* FUN_001764e0 @ 0x1764e0 (28 bytes) */
-int FUN_001764e0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_001764e0(key, sourceIndex)
+  int key;
+  int sourceIndex;
 {
-  return *(int *)(param_2 * 4 + param_1 + 0x70) == 4;
+  return *(int *)(sourceIndex * 4 + key + 0x70) == 4;
 }
 
 /* ValueKey__sourceKindIs1 @ 0x1764fc (28 bytes) */
-int ValueKey__sourceKindIs1(param_1, param_2)
-  int param_1;
-  int param_2;
+int ValueKey__sourceKindIs1(key, sourceIndex)
+  int key;
+  int sourceIndex;
 {
-  return *(int *)(param_2 * 4 + param_1 + 0xa0) == 1;
+  return *(int *)(sourceIndex * 4 + key + 0xa0) == 1;
 }
 
 /* ValueKey__sourceKindIs4 @ 0x176518 (28 bytes) */
-int ValueKey__sourceKindIs4(param_1, param_2)
-  int param_1;
-  int param_2;
+int ValueKey__sourceKindIs4(key, sourceIndex)
+  int key;
+  int sourceIndex;
 {
-  return *(int *)(param_2 * 4 + param_1 + 0xa0) == 4;
+  return *(int *)(sourceIndex * 4 + key + 0xa0) == 4;
 }
 
 /* FUN_00176534 @ 0x176534 (48 bytes) */
@@ -2260,25 +2260,25 @@ int FUN_00176534(keyA, keyB)
 }
 
 /* FUN_00176564 @ 0x176564 (16 bytes) */
-int FUN_00176564(param_1)
-  int param_1;
+int FUN_00176564(opcode)
+  int opcode;
 {
-  return param_1 == 0xf9;
+  return opcode == 0xf9;
 }
 
 /* FUN_00176574 @ 0x176574 (48 bytes) */
-int FUN_00176574(param_1)
-  int param_1;
+int FUN_00176574(opcode)
+  int opcode;
 {
-  if (param_1 == 0x32) {
+  if (opcode == 0x32) {
     return 1;
   }
-  if (param_1 < 0x33) {
-    if (param_1 == 0x1f) {
+  if (opcode < 0x33) {
+    if (opcode == 0x1f) {
       return 1;
     }
   }
-  else if (param_1 - 0xa7U < 2) {
+  else if (opcode - 0xa7U < 2) {
     return 1;
   }
   return 0;
@@ -2298,12 +2298,12 @@ int FUN_001765a4(key, literalValue, row)
 }
 
 /* FudoPs__vslot12_lookupTable6x @ 0x1765e4 (44 bytes) */
-int FudoPs__vslot12_lookupTable6x(this, param_2, param_3)
+int FudoPs__vslot12_lookupTable6x(this, row, column)
   undefined4 this;
-  int param_2;
-  int param_3;
+  int row;
+  int column;
 {
-  return *(undefined4 *)(&DAT_001e5f54 + (param_2 * 6 + param_3) * 4);
+  return *(undefined4 *)(&DAT_001e5f54 + (row * 6 + column) * 4);
 }
 
 /* FudoPs__vslot11_isNotType2Or5 @ 0x176610 (28 bytes) */
@@ -2352,19 +2352,19 @@ int FUN_001766bc(ctx)
 {
   int valueNumberForExprResult;
   undefined4 opcodeInfo;
-  int iVar1;
-  undefined4 uVar2;
+  int producerInst;
+  undefined4 changed;
   
   valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),0);
   if ((*(int *)(valueNumberForExprResult + 4) == *(int *)(ctx + 0x184)) ||
-     (uVar2 = 0, *(int *)(valueNumberForExprResult + 4) == *(int *)(ctx + 0x194))) {
-    iVar1 = *(int *)(ctx + 0xb0);
+     (changed = 0, *(int *)(valueNumberForExprResult + 4) == *(int *)(ctx + 0x194))) {
+    producerInst = *(int *)(ctx + 0xb0);
     opcodeInfo = Opcode__getInfo(0x1c);
-    *(undefined4 *)(iVar1 + 0x88) = opcodeInfo;
+    *(undefined4 *)(producerInst + 0x88) = opcodeInfo;
     ((int (*)())ValueKey__rebuild)(ctx);
-    uVar2 = 1;
+    changed = 1;
   }
-  return uVar2;
+  return changed;
 }
 
 /* FUN_0017672c @ 0x17672c (172 bytes) */

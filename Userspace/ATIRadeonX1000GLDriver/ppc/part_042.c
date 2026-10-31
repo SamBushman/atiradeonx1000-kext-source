@@ -61,10 +61,10 @@ LAB_0013932c:
 }
 
 /* IRInst__isOpcodeInSet139344 @ 0x139344 (80 bytes) */
-int IRInst__isOpcodeInSet139344(param_1)
-  int param_1;
+int IRInst__isOpcodeInSet139344(inst)
+  int inst;
 {
-  switch(*(undefined4 *)(*(int *)(param_1 + 0x88) + 8)) {
+  switch(*(undefined4 *)(*(int *)(inst + 0x88) + 8)) {
   case 0x69:
   case 0x6b:
   case 0x75:
@@ -81,8 +81,8 @@ int IRInst__isOpcodeInSet139344(param_1)
 }
 
 /* Program__moveInterpFetchesOutOfIfs @ 0x1394b0 (496 bytes) */
-int Program__moveInterpFetchesOutOfIfs(param_1)
-  int param_1;
+int Program__moveInterpFetchesOutOfIfs(program)
+  int program;
 {
   int instListNext;
   int *walkBlock;
@@ -102,11 +102,11 @@ int Program__moveInterpFetchesOutOfIfs(param_1)
   int nextInst;
   int inst;
   
-  entryBlock = *(int **)(param_1 + 0x3a0);
-  nextListBlock = (int *)(*(int **)(param_1 + 900))[2];
+  entryBlock = *(int **)(program + 0x3a0);
+  nextListBlock = (int *)(*(int **)(program + 900))[2];
   if (nextListBlock != (int *)0x0) {
     hoistTargetBlock = (int *)0x0;
-    block = *(int **)(param_1 + 900);
+    block = *(int **)(program + 900);
     do {
       nextBlock = nextListBlock;
       instListNext = *(int *)(block[0x26] + 8);
@@ -169,17 +169,17 @@ LAB_00139654:
 }
 
 /* IRInst__markOpcode13After12 @ 0x1396a0 (48 bytes) */
-int IRInst__markOpcode13After12(param_1, param_2)
-  int param_1;
-  int param_2;
+int IRInst__markOpcode13After12(inst, prevInst)
+  int inst;
+  int prevInst;
 {
-  if (*(int *)(*(int *)(param_1 + 0x88) + 8) != 0x13) {
+  if (*(int *)(*(int *)(inst + 0x88) + 8) != 0x13) {
     return;
   }
-  if (*(int *)(*(int *)(param_2 + 0x88) + 8) == 0x12) {
+  if (*(int *)(*(int *)(prevInst + 0x88) + 8) == 0x12) {
     return;
   }
-  *(uint *)(param_1 + 0x14) = *(uint *)(param_1 + 0x14) | 0x20000;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x20000;
   return;
 }
 
@@ -2351,21 +2351,21 @@ int FUN_0013ca84(inst)
   int *inst;
 {
   undefined4 sourceDef;
-  undefined4 uVar1;
+  undefined4 result;
   int vcall7cResult;
   
   if (*(int *)(inst[0x22] + 8) == 0x8e) {
     vcall7cResult = (**(code **)(*inst + 0x7c))(inst);
-    uVar1 = *(undefined4 *)(vcall7cResult + 300);
+    result = *(undefined4 *)(vcall7cResult + 300);
   }
   else {
-    uVar1 = 0;
+    result = 0;
     if ((inst[5] & 0x200U) != 0) {
       sourceDef = IRInst__getOperandSource(inst,inst[0x21]);
       return sourceDef;
     }
   }
-  return uVar1;
+  return result;
 }
 
 /* IfHeader__convertInnerIfToCmov @ 0x13caf4 (1644 bytes) */
@@ -4896,23 +4896,23 @@ LAB_00140c00:
 #undef vecArena
 
 /* FUN_00140e5c @ 0x140e5c (20 bytes) */
-int FUN_00140e5c(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int FUN_00140e5c(packCtx, program)
+  int packCtx;
+  undefined4 program;
 {
-  *(undefined4 *)(param_1 + 4) = param_2;
-  *(undefined4 *)(param_1 + 0x10) = 0;
-  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(packCtx + 4) = program;
+  *(undefined4 *)(packCtx + 0x10) = 0;
+  *(undefined4 *)(packCtx + 8) = 0;
   return;
 }
 
 /* FUN_00140e70 @ 0x140e70 (12 bytes) */
-int FUN_00140e70(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  int param_3;
+int FUN_00140e70(outReadMask, packCtx, inst)
+  undefined4 *outReadMask;
+  undefined4 packCtx;
+  int inst;
 {
-  *param_1 = *(undefined4 *)(param_3 + 0xc);
+  *outReadMask = *(undefined4 *)(inst + 0xc);
   return;
 }
 
@@ -7175,7 +7175,7 @@ int FUN_00143e40(pass, pair)
   uint loopIndex2;
   uint *userVec;
   int writeMaskFirst;
-  int local_24 [2];
+  int writeMaskOut [2];
   
   entryPtr = pair + 5;
   firstInst = *pair;
@@ -7187,7 +7187,7 @@ int FUN_00143e40(pass, pair)
   splitRgbAlphaEnabled = Compiler__isOptionEnabled(*pass,0x30);
   if ((splitRgbAlphaEnabled == 0) ||
      ((((int (*)())FUN_00141044)(&writeMaskFirst,pass,firstInst), writeMaskFirst != 1 &&
-      (((int (*)())FUN_00141044)(local_24,pass,secondInst), local_24[0] != 1)))) {
+      (((int (*)())FUN_00141044)(writeMaskOut,pass,secondInst), writeMaskOut[0] != 1)))) {
     userVec = *(uint **)(firstInst + 0x10);
     userCount = userVec[1];
     if (userCount != 0) {
@@ -8922,10 +8922,10 @@ int FUN_0014657c(program)
 }
 
 /* IRInst__getOperandSourceOrDefault @ 0x146610 (20 bytes) */
-int IRInst__getOperandSourceOrDefault(inst, operandIndex, param_3)
+int IRInst__getOperandSourceOrDefault(inst, operandIndex, defaultSource)
   int inst;
   undefined4 operandIndex;
-  undefined4 param_3;
+  undefined4 defaultSource;
 {
   undefined4 callResult;
   
@@ -8933,7 +8933,7 @@ int IRInst__getOperandSourceOrDefault(inst, operandIndex, param_3)
     callResult = IRInst__getOperandSource(inst,operandIndex);
     return callResult;
   }
-  return param_3;
+  return defaultSource;
 }
 
 /* FUN_00146624 @ 0x146624 (76 bytes) */
@@ -9024,14 +9024,14 @@ int FUN_00146788(obj, program)
   undefined4 program;
 {
   int callResult;
-  undefined4 uVar2;
+  undefined4 result;
   
   callResult = IRInst__hasSingleUse(obj,program);
   if ((((callResult == 0) || (*(int *)(obj + 0x120) != 0)) || (*(int *)(obj + 0x124) != 0)) ||
-     (uVar2 = 1, (*(uint *)(obj + 0x14) & 0x200) != 0)) {
-    uVar2 = 0;
+     (result = 1, (*(uint *)(obj + 0x14) & 0x200) != 0)) {
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_001467e8 @ 0x1467e8 (128 bytes) */

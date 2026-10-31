@@ -392,7 +392,7 @@ int Scheduler__issueNode(scheduler, node)
   int *scheduler;
   int node;
 {
-  int iVar1;
+  int cycleOrCheck;
   int vcalld4Result;
   int vcall5cResult;
   
@@ -403,9 +403,9 @@ int Scheduler__issueNode(scheduler, node)
   else {
     DList__pushBack(scheduler + 0x25,node);
   }
-  iVar1 = scheduler[0xb];
-  *(int *)(node + 0x2c) = iVar1;
-  *(int *)(node + 0x30) = iVar1;
+  cycleOrCheck = scheduler[0xb];
+  *(int *)(node + 0x2c) = cycleOrCheck;
+  *(int *)(node + 0x30) = cycleOrCheck;
   (**(code **)(*(int *)scheduler[2] + 0x10))((int *)scheduler[2],*(undefined4 *)(node + 0x38));
   ((int (*)())SchedModel__uncountNode)(scheduler[2],node);
   (**(code **)(*(int *)scheduler[3] + 0x10))((int *)scheduler[3],node);
@@ -415,11 +415,11 @@ int Scheduler__issueNode(scheduler, node)
     ((int (*)())Scheduler__splitAddressRegisterUses)(scheduler);
   }
   ((int (*)())Scheduler__updateSuccessorsAfterIssue)(scheduler,node);
-  iVar1 = (**(code **)(*(int *)scheduler[3] + 0x20))
+  cycleOrCheck = (**(code **)(*(int *)scheduler[3] + 0x20))
                     ((int *)scheduler[3],*(undefined4 *)(node + 0x38));
-  if (((iVar1 != 0) ||
-      (iVar1 = (**(code **)(*(int *)scheduler[3] + 0x24))
-                         ((int *)scheduler[3],*(undefined4 *)(node + 0x38)), iVar1 != 0)) &&
+  if (((cycleOrCheck != 0) ||
+      (cycleOrCheck = (**(code **)(*(int *)scheduler[3] + 0x24))
+                         ((int *)scheduler[3],*(undefined4 *)(node + 0x38)), cycleOrCheck != 0)) &&
      (scheduler[0x4a] <= *(int *)(node + 0xc))) {
     scheduler[0x4b] = scheduler[0x4b] + 1;
   }
@@ -761,7 +761,7 @@ int Scheduler__tryReuseLoopIndexLoad(scheduler, node)
   int *loadSlotCursor;
   undefined4 *newLoadInst;
   int loadBaseReg;
-  undefined4 uVar14;
+  undefined4 defaultSelect;
   code *setSourceFn;
   int loadInst;
   
@@ -818,11 +818,11 @@ LAB_0016ddd8:
           allocation[0x27] = 0x45;
           allocation[0x26] = loopIndex;
           sourceDef = IRInst__getOperandSource(inst,1);
-          uVar14 = DAT_001b0194;
+          defaultSelect = DAT_001b0194;
           allocation[0x4d] = *(undefined4 *)(sourceDef + 0x94);
           allocation[0x4c] = 0x10;
           allocation[0x4e] = (((int)requestedIndex2 >> 4) + (uint)((int)requestedIndex2 < 0 && (requestedIndex2 & 0xf) != 0)) * 0x10;
-          allocation[4] = uVar14;
+          allocation[4] = defaultSelect;
           setSourceFn = *(code **)(allocation[1] + 0x94);
           operandSource = IRInst__getOperandSource(inst,1);
           (*setSourceFn)(newLoadInst,operandSource,*scheduler);
@@ -3535,12 +3535,12 @@ int Scheduler__run(program)
 }
 
 /* SchedModel__resetCounters @ 0x172000 (20 bytes) */
-int SchedModel__resetCounters(param_1)
-  int param_1;
+int SchedModel__resetCounters(model)
+  int model;
 {
-  *(undefined4 *)(param_1 + 0x14) = 0;
-  *(undefined4 *)(param_1 + 0xc) = 0;
-  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(model + 0x14) = 0;
+  *(undefined4 *)(model + 0xc) = 0;
+  *(undefined4 *)(model + 0x10) = 0;
   return;
 }
 
@@ -3997,14 +3997,14 @@ int FUN_001729bc(key)
 }
 
 /* ValueKey__maybeRefineSources @ 0x172a28 (104 bytes) */
-int ValueKey__maybeRefineSources(param_1)
-  int param_1;
+int ValueKey__maybeRefineSources(key)
+  int key;
 {
   int isOptionEnabledResult;
   
-  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),9);
-  if ((isOptionEnabledResult != 0) && (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 0x238),0x30), isOptionEnabledResult != 0)) {
-    ValueKey__splitDestinationIfEligible(param_1);
+  isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(key + 0x238),9);
+  if ((isOptionEnabledResult != 0) && (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(key + 0x238),0x30), isOptionEnabledResult != 0)) {
+    ValueKey__splitDestinationIfEligible(key);
     return;
   }
   return;
@@ -4025,58 +4025,58 @@ int ValueKey__swapSources12(inst, key, compiler)
 }
 
 /* ExprRecordTable__hashByValueNumber @ 0x172ab0 (40 bytes) */
-int ExprRecordTable__hashByValueNumber(param_1)
-  int param_1;
+int ExprRecordTable__hashByValueNumber(record)
+  int record;
 {
-  return *(int *)(param_1 + 4) % 0x65;
+  return *(int *)(record + 4) % 0x65;
 }
 
 /* ExprRecordTable__eqByValueNumber @ 0x172ad8 (28 bytes) */
-int ExprRecordTable__eqByValueNumber(param_1, param_2)
-  int param_1;
-  int param_2;
+int ExprRecordTable__eqByValueNumber(recordA, recordB)
+  int recordA;
+  int recordB;
 {
-  return -(uint)(*(int *)(param_1 + 4) != *(int *)(param_2 + 4));
+  return -(uint)(*(int *)(recordA + 4) != *(int *)(recordB + 4));
 }
 
 /* ExprRecordTable__hashByExpr @ 0x172af4 (56 bytes) */
-int ExprRecordTable__hashByExpr(param_1)
-  int *param_1;
+int ExprRecordTable__hashByExpr(record)
+  int *record;
 {
-  return (*param_1 * 0x25) % 0x65;
+  return (*record * 0x25) % 0x65;
 }
 
 /* ExprRecordTable__eqByExpr @ 0x172b2c (28 bytes) */
-int ExprRecordTable__eqByExpr(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int ExprRecordTable__eqByExpr(recordA, recordB)
+  int *recordA;
+  int *recordB;
 {
-  return -(uint)(*param_1 != *param_2);
+  return -(uint)(*recordA != *recordB);
 }
 
 /* PtrSet__hashPtr @ 0x172b48 (40 bytes) */
-int PtrSet__hashPtr(param_1)
-  int *param_1;
+int PtrSet__hashPtr(slot)
+  int *slot;
 {
-  return *param_1 % 0x65;
+  return *slot % 0x65;
 }
 
 /* PtrSet__eqNonNullPtr @ 0x172b70 (48 bytes) */
-int PtrSet__eqNonNullPtr(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+int PtrSet__eqNonNullPtr(slotA, slotB)
+  undefined4 *slotA;
+  undefined4 *slotB;
 {
   int callResult;
   
-  callResult = Ptr__equalNonNull(*param_1,*param_2);
+  callResult = Ptr__equalNonNull(*slotA,*slotB);
   return -(uint)(callResult == 0);
 }
 
 /* KeyLaneTable__hashByOpcode @ 0x172ba0 (48 bytes) */
-int KeyLaneTable__hashByOpcode(param_1)
-  int param_1;
+int KeyLaneTable__hashByOpcode(entry)
+  int entry;
 {
-  return *(uint *)(*(int *)(param_1 + 4) + 0xb4) % 0x65;
+  return *(uint *)(*(int *)(entry + 4) + 0xb4) % 0x65;
 }
 
 /* KeyLaneTable__eqKeys @ 0x172bd0 (332 bytes) */
@@ -4170,13 +4170,13 @@ int ScopedExprTable__hashKey(key)
 }
 
 /* ScopedExprTable__eqKeys @ 0x172dc4 (56 bytes) */
-int ScopedExprTable__eqKeys(param_1, param_2)
-  int param_1;
-  int param_2;
+int ScopedExprTable__eqKeys(keyA, keyB)
+  int keyA;
+  int keyB;
 {
   int compareResult;
   
-  compareResult = _memcmp(param_1 + 0xb4,param_2 + 0xb4,0x15c);
+  compareResult = _memcmp(keyA + 0xb4,keyB + 0xb4,0x15c);
   return (compareResult == 0) - 1;
 }
 
@@ -4251,40 +4251,40 @@ int SwizzleTable__hashKey(key)
 }
 
 /* Compiler__nextValueNumber @ 0x172ed4 (20 bytes) */
-int Compiler__nextValueNumber(param_1)
-  int param_1;
+int Compiler__nextValueNumber(compiler)
+  int compiler;
 {
-  int iVar1;
+  int valueNumber;
   
-  iVar1 = *(int *)(param_1 + 0x3c8) + 1;
-  *(int *)(param_1 + 0x3c8) = iVar1;
-  return iVar1;
+  valueNumber = *(int *)(compiler + 0x3c8) + 1;
+  *(int *)(compiler + 0x3c8) = valueNumber;
+  return valueNumber;
 }
 
 /* Compiler__nextNegativeValueNumber @ 0x172ee8 (20 bytes) */
-int Compiler__nextNegativeValueNumber(param_1)
-  int param_1;
+int Compiler__nextNegativeValueNumber(compiler)
+  int compiler;
 {
-  int iVar1;
+  int valueNumber;
 
-  iVar1 = *(int *)(param_1 + 0x3cc) + -1;
-  *(int *)(param_1 + 0x3cc) = iVar1;
-  return iVar1;
+  valueNumber = *(int *)(compiler + 0x3cc) + -1;
+  *(int *)(compiler + 0x3cc) = valueNumber;
+  return valueNumber;
 }
 
 /* Compiler__peekValueNumber @ 0x172efc (8 bytes) */
-int Compiler__peekValueNumber(param_1)
-  int param_1;
+int Compiler__peekValueNumber(compiler)
+  int compiler;
 {
-  return *(undefined4 *)(param_1 + 0x3c8);
+  return *(undefined4 *)(compiler + 0x3c8);
 }
 
 /* Compiler__resetValueNumbers @ 0x172f0c (20 bytes) */
-int Compiler__resetValueNumbers(param_1)
-  int param_1;
+int Compiler__resetValueNumbers(compiler)
+  int compiler;
 {
-  *(undefined4 *)(param_1 + 0x3cc) = 0xfffffffe;
-  *(undefined4 *)(param_1 + 0x3c8) = 4;
+  *(undefined4 *)(compiler + 0x3cc) = 0xfffffffe;
+  *(undefined4 *)(compiler + 0x3c8) = 4;
   return;
 }
 
@@ -4339,13 +4339,13 @@ int FUN_00172fb8(valueKey)
   int valueKey;
 {
   int vcall54Result;
-  undefined4 uVar2;
+  undefined4 result;
   
   vcall54Result = (**(code **)(**(int **)(valueKey + 0xb0) + 0x54))(*(int **)(valueKey + 0xb0));
-  if ((vcall54Result == 0) || (uVar2 = 1, *(int *)(*(int *)(valueKey + 0xb0) + 0xb0) != 0x2a)) {
-    uVar2 = 0;
+  if ((vcall54Result == 0) || (result = 1, *(int *)(*(int *)(valueKey + 0xb0) + 0xb0) != 0x2a)) {
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_00173018 @ 0x173018 (332 bytes) */
@@ -4501,27 +4501,27 @@ int ValueKey__propagateLaneValues(key)
 }
 
 /* Compiler__findInPtrSet @ 0x173330 (48 bytes) */
-int Compiler__findInPtrSet(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int Compiler__findInPtrSet(compiler, pointer)
+  int compiler;
+  undefined4 pointer;
 {
   undefined4 callResult;
   
-  **(undefined4 **)(param_1 + 0x3f4) = param_2;
-  callResult = HashTable__find(*(undefined4 *)(param_1 + 1000),*(undefined4 *)(param_1 + 0x3f4));
+  **(undefined4 **)(compiler + 0x3f4) = pointer;
+  callResult = HashTable__find(*(undefined4 *)(compiler + 1000),*(undefined4 *)(compiler + 0x3f4));
   return callResult;
 }
 
 /* Compiler__exprRecordForValueNumber @ 0x173360 (64 bytes) */
-int Compiler__exprRecordForValueNumber(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int Compiler__exprRecordForValueNumber(compiler, valueNumber)
+  int compiler;
+  undefined4 valueNumber;
 {
   undefined4 callResult;
   
-  *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 4) = param_2;
-  **(undefined4 **)(param_1 + 0x3f0) = 0x7ffffffe;
-  callResult = HashTable__find(*(undefined4 *)(param_1 + 0x3e0),*(undefined4 *)(param_1 + 0x3f0));
+  *(undefined4 *)(*(int *)(compiler + 0x3f0) + 4) = valueNumber;
+  **(undefined4 **)(compiler + 0x3f0) = 0x7ffffffe;
+  callResult = HashTable__find(*(undefined4 *)(compiler + 0x3e0),*(undefined4 *)(compiler + 0x3f0));
   return callResult;
 }
 
