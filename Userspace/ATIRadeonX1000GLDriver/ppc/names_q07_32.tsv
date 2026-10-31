@@ -4739,3 +4739,17 @@ local	FUN_00147f54	iVar2	sourceMatchResult	INFERRED	IRInst__sourceMatchesConstan
 local	FUN_00147f54	iVar4	scaleResult	INFERRED	one register: tryOutputScaleExponent result and compiler/program values
 local	FUN_00147f54	local_a8	scaleFrame	INFERRED	[0] output scale code, [1..4] the vec4 constant filled with 2.0 (0x40000000) for the match
 local	FUN_00147f54	auStack_94	constantRecord	INFERRED	IRInst__getUniformSourceConstant out record; the float value follows
+local	IfHeader__convertInnerIfToCmov	iVar5	checkOrOperandIndex	INFERRED	one register: vtable results, operand loop index, kind class and node tests through the whole function
+local	IfHeader__convertInnerIfToCmov	in_r6	staleArg6	INFERRED	r6 left as an extra argument of Block__getBranchInst
+local	IfHeader__convertInnerIfToCmov	in_r7	staleArg7	INFERRED	r7 left as an extra argument of Block__getBranchInst
+local	IfHeader__convertInnerIfToCmov	in_r8	staleArg8	INFERRED	r8 left as an extra argument of Block__getBranchInst
+local	IfHeader__convertInnerIfToCmov	in_r9	staleScratch9	INFERRED	r9 reused as scratch (flag masks, select byte cursor) and as an extra argument of Block__getBranchInst
+local	IfHeader__convertInnerIfToCmov	iVar11	branchInstOrRef	INFERRED	one register: branch inst of the predecessor, then its compare source and converted inst
+local	IfHeader__convertInnerIfToCmov	uVar18	branchInstPair	INFERRED	packed pair returned by Block__getBranchInst
+local	FUN_0016c1fc	iVar4	nodeOrTable	INFERRED	one register: scheduler node record, node table (compiler[0xc]) and temp register number
+local	FUN_0016c1fc	iVar5	registerOrCheck	INFERRED	one register: temp register number, byte offsets, register-kind and vtable check results
+local	FUN_0016c1fc	iVar12	operandNode	INFERRED	scheduler node of the operand at the loop index
+local	FUN_00162dfc	iVar2	operandLoopIndexC	INFERRED	operand loop index 1..operandCount in the select rewrite
+local	FUN_00162dfc	iVar4	initIndexOrResult	INFERRED	one register: permutation initialiser, operand sources, vtable results and operand records
+local	FUN_00162dfc	iVar11	countdownOrIndex	INFERRED	one register: init/lane countdowns, operand index and operand sources; adjacent to the operandPermutation array, so not split
+local	FUN_00162dfc	piVar5	permutationOrSelectCursor	INFERRED	one register: cursor over operandPermutation and over the new select words

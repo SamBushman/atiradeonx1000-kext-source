@@ -2394,34 +2394,34 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   int isNotAmong3Result;
   int operandCountIf;
   int identityResultIf;
-  int iVar5;
+  int checkOrOperandIndex;
   int isNotAmong3Result2;
   undefined4 predecessorBlock;
   undefined4 operandVReg2;
   undefined4 operandVReg3;
   uint staleArg3;
-  int in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int *in_r9;
+  int staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  int *staleScratch9;
   undefined4 compareSelectWord;
-  int iVar11;
+  int branchInstOrRef;
   int operandRecord;
   int elseBlock;
   uint thenBlock;
   int *joinInst;
   int thenMovableCount;
   bool thenSourcesMovable;
-  undefined8 uVar18;
+  undefined8 branchInstPair;
   
   staleArg3 = compiler;
   armsSimpleResult = IfHeader__armsAreSimple(block);
   if (armsSimpleResult != 0) {
     isStatic = (**(code **)(*block + 0x40))(block);
     if ((int)((ulonglong)isStatic >> 0x20) == 0) {
-      uVar18 = Block__getBranchInst(block,(int)isStatic,staleArg3,in_r6,in_r7,in_r8,in_r9);
-      if ((*(int *)(*(int *)((int)((ulonglong)uVar18 >> 0x20) + 0x88) + 8) == 0x8b) ||
-         (branchInstB = Block__getBranchInst(block,(int)uVar18,staleArg3,in_r6,in_r7,in_r8,in_r9),
+      branchInstPair = Block__getBranchInst(block,(int)isStatic,staleArg3,staleArg6,staleArg7,staleArg8,staleScratch9);
+      if ((*(int *)(*(int *)((int)((ulonglong)branchInstPair >> 0x20) + 0x88) + 8) == 0x8b) ||
+         (branchInstB = Block__getBranchInst(block,(int)branchInstPair,staleArg3,staleArg6,staleArg7,staleArg8,staleScratch9),
          *(int *)(*(int *)(branchInstB + 0x88) + 8) == 0x8c)) {
         joinBlock = block[0x4f];
         thenBlock = block[0x4d];
@@ -2439,37 +2439,37 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
           elseMovableCount = 0;
           do {
             scanInst = nextInst;
-            in_r9 = (int *)(joinInst[5] & 1);
-            if (in_r9 != (int *)0x0) {
-              iVar5 = (**(code **)(*joinInst + 0x34))(joinInst);
-              if (((iVar5 == 0) && (iVar5 = (**(code **)(*joinInst + 0x38))(joinInst), iVar5 == 0)) &&
+            staleScratch9 = (int *)(joinInst[5] & 1);
+            if (staleScratch9 != (int *)0x0) {
+              checkOrOperandIndex = (**(code **)(*joinInst + 0x34))(joinInst);
+              if (((checkOrOperandIndex == 0) && (checkOrOperandIndex = (**(code **)(*joinInst + 0x38))(joinInst), checkOrOperandIndex == 0)) &&
                  (*(int *)(joinInst[0x22] + 8) == 0x8e)) {
                 operandVReg = (int *)IRInst__getOperandSource(joinInst,1);
                 phiCount = phiCount + 1;
                 if ((thenBlock == operandVReg[0x56]) &&
-                   (iVar5 = (**(code **)(*operandVReg + 100))(operandVReg), iVar5 != 0)) {
-                  for (iVar5 = 1; operandCountIf = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= operandCountIf;
-                      iVar5 = iVar5 + 1) {
-                    if ((((operandVReg[iVar5 * 6 + 0x28] & 1U) != 0) ||
-                        (in_r9 = (int *)(operandVReg[iVar5 * 6 + 0x28] & 2), in_r9 != (int *)0x0)) ||
-                       (identityResultIf = IRInst__isSourceSelectIdentity(operandVReg,iVar5), identityResultIf == 0)) goto LAB_0013cd68;
+                   (checkOrOperandIndex = (**(code **)(*operandVReg + 100))(operandVReg), checkOrOperandIndex != 0)) {
+                  for (checkOrOperandIndex = 1; operandCountIf = (**(code **)(*operandVReg + 0x14))(operandVReg), checkOrOperandIndex <= operandCountIf;
+                      checkOrOperandIndex = checkOrOperandIndex + 1) {
+                    if ((((operandVReg[checkOrOperandIndex * 6 + 0x28] & 1U) != 0) ||
+                        (staleScratch9 = (int *)(operandVReg[checkOrOperandIndex * 6 + 0x28] & 2), staleScratch9 != (int *)0x0)) ||
+                       (identityResultIf = IRInst__isSourceSelectIdentity(operandVReg,checkOrOperandIndex), identityResultIf == 0)) goto LAB_0013cd68;
                   }
                   if ((operandVReg[0x48] != 0) || (operandVReg[0x49] != 0)) goto LAB_0013cd68;
                   if ((operandVReg[0x20] != 0) &&
-                     (((iVar5 = RegKind__flagBit0(operandVReg[0x26]), iVar5 != 0 && ((operandVReg[5] & 2U) == 0))
-                      && (iVar5 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar5 == 0)))) {
+                     (((checkOrOperandIndex = RegKind__flagBit0(operandVReg[0x26]), checkOrOperandIndex != 0 && ((operandVReg[5] & 2U) == 0))
+                      && (checkOrOperandIndex = (**(code **)(*operandVReg + 0x50))(operandVReg), checkOrOperandIndex == 0)))) {
                     countdown = 4;
-                    in_r9 = operandVReg;
+                    staleScratch9 = operandVReg;
                     do {
-                      if ((uint)(*(byte *)(in_r9 + 0x27) - 2) < 2) goto LAB_0013cd68;
-                      in_r9 = (int *)((int)in_r9 + 1);
+                      if ((uint)(*(byte *)(staleScratch9 + 0x27) - 2) < 2) goto LAB_0013cd68;
+                      staleScratch9 = (int *)((int)staleScratch9 + 1);
                       countdown = countdown + -1;
                     } while (countdown != 0);
                   }
                   IRInst__getOperandRecord(operandVReg,0);
-                  iVar5 = IRInst__operandKindClass(operandVReg,0);
-                  if (((iVar5 != 0) || ((operandVReg[5] & 2U) != 0)) ||
-                     ((in_r9 = (int *)(operandVReg[5] & 0x200), in_r9 != (int *)0x0 ||
+                  checkOrOperandIndex = IRInst__operandKindClass(operandVReg,0);
+                  if (((checkOrOperandIndex != 0) || ((operandVReg[5] & 2U) != 0)) ||
+                     ((staleScratch9 = (int *)(operandVReg[5] & 0x200), staleScratch9 != (int *)0x0 ||
                       (*(int *)(operandVReg[4] + 4) != 1)))) goto LAB_0013cd68;
                   thenMovableCount = thenMovableCount + 1;
                   thenSourcesMovable = true;
@@ -2477,42 +2477,42 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
                 else {
 LAB_0013cd68:
                   staleArg3 = thenBlock;
-                  in_r6 = elseBlock;
-                  iVar5 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
-                  thenSourcesMovable = iVar5 != 0;
+                  staleArg6 = elseBlock;
+                  checkOrOperandIndex = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
+                  thenSourcesMovable = checkOrOperandIndex != 0;
                 }
                 operandVReg = (int *)IRInst__getOperandSource(joinInst,2);
                 if ((elseBlock == operandVReg[0x56]) &&
-                   (iVar5 = (**(code **)(*operandVReg + 100))(operandVReg), iVar5 != 0)) {
-                  for (iVar5 = 1; operandCountIf = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar5 <= operandCountIf;
-                      iVar5 = iVar5 + 1) {
-                    if ((((operandVReg[iVar5 * 6 + 0x28] & 1U) != 0) ||
-                        (in_r9 = (int *)(operandVReg[iVar5 * 6 + 0x28] & 2), in_r9 != (int *)0x0)) ||
-                       (identityResultIf = IRInst__isSourceSelectIdentity(operandVReg,iVar5), identityResultIf == 0)) goto LAB_0013cee8;
+                   (checkOrOperandIndex = (**(code **)(*operandVReg + 100))(operandVReg), checkOrOperandIndex != 0)) {
+                  for (checkOrOperandIndex = 1; operandCountIf = (**(code **)(*operandVReg + 0x14))(operandVReg), checkOrOperandIndex <= operandCountIf;
+                      checkOrOperandIndex = checkOrOperandIndex + 1) {
+                    if ((((operandVReg[checkOrOperandIndex * 6 + 0x28] & 1U) != 0) ||
+                        (staleScratch9 = (int *)(operandVReg[checkOrOperandIndex * 6 + 0x28] & 2), staleScratch9 != (int *)0x0)) ||
+                       (identityResultIf = IRInst__isSourceSelectIdentity(operandVReg,checkOrOperandIndex), identityResultIf == 0)) goto LAB_0013cee8;
                   }
                   if ((operandVReg[0x48] != 0) || (operandVReg[0x49] != 0)) goto LAB_0013cee8;
                   if (((operandVReg[0x20] != 0) &&
-                      ((iVar5 = RegKind__flagBit0(operandVReg[0x26]), iVar5 != 0 && ((operandVReg[5] & 2U) == 0))))
-                     && (iVar5 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar5 == 0)) {
+                      ((checkOrOperandIndex = RegKind__flagBit0(operandVReg[0x26]), checkOrOperandIndex != 0 && ((operandVReg[5] & 2U) == 0))))
+                     && (checkOrOperandIndex = (**(code **)(*operandVReg + 0x50))(operandVReg), checkOrOperandIndex == 0)) {
                     countdown = 4;
-                    in_r9 = operandVReg;
+                    staleScratch9 = operandVReg;
                     do {
-                      if ((uint)(*(byte *)(in_r9 + 0x27) - 2) < 2) goto LAB_0013cee8;
-                      in_r9 = (int *)((int)in_r9 + 1);
+                      if ((uint)(*(byte *)(staleScratch9 + 0x27) - 2) < 2) goto LAB_0013cee8;
+                      staleScratch9 = (int *)((int)staleScratch9 + 1);
                       countdown = countdown + -1;
                     } while (countdown != 0);
                   }
                   IRInst__getOperandRecord(operandVReg,0);
                   operandKindClassResult = IRInst__operandKindClass(operandVReg,0);
                   if ((((operandKindClassResult != 0) || ((operandVReg[5] & 2U) != 0)) ||
-                      (in_r9 = (int *)(operandVReg[5] & 0x200), in_r9 != (int *)0x0)) ||
+                      (staleScratch9 = (int *)(operandVReg[5] & 0x200), staleScratch9 != (int *)0x0)) ||
                      (*(int *)(operandVReg[4] + 4) != 1)) goto LAB_0013cee8;
                   elseMovableCount = elseMovableCount + 1;
                 }
                 else {
 LAB_0013cee8:
                   staleArg3 = thenBlock;
-                  in_r6 = elseBlock;
+                  staleArg6 = elseBlock;
                   isNotAmong3Result2 = Node__isNotAmong3(operandVReg,block,thenBlock,elseBlock);
                   if (isNotAmong3Result2 == 0) {
                     return;
@@ -2534,19 +2534,19 @@ LAB_0013cee8:
            (phiCount != 0)) {
           predecessor = Block__getPredecessor(block,0);
           predecessorBlock = (undefined4)((ulonglong)predecessor >> 0x20);
-          iVar11 = Block__getBranchInst(block,(int)predecessor,staleArg3,in_r6,in_r7,in_r8,in_r9);
+          branchInstOrRef = Block__getBranchInst(block,(int)predecessor,staleArg3,staleArg6,staleArg7,staleArg8,staleScratch9);
           compareSelectWord = 0;
-          if (*(int *)(*(int *)(iVar11 + 0x88) + 8) == 0x8c) {
-            operandRecord = IRInst__getOperandRecord(iVar11,1);
+          if (*(int *)(*(int *)(branchInstOrRef + 0x88) + 8) == 0x8c) {
+            operandRecord = IRInst__getOperandRecord(branchInstOrRef,1);
             compareSelectWord = *(undefined4 *)(operandRecord + 0x10);
-            Program__removeInst(program,iVar11);
-            swapCompareOperands = *(int *)(iVar11 + 300) != 7;
-            iVar11 = IRInst__getOperandSource(iVar11,1);
+            Program__removeInst(program,branchInstOrRef);
+            swapCompareOperands = *(int *)(branchInstOrRef + 300) != 7;
+            branchInstOrRef = IRInst__getOperandSource(branchInstOrRef,1);
           }
           else {
             swapCompareOperands = false;
-            IRInst__convertCompareToBinaryAlu(iVar11,compiler);
-            Block__appendInst(predecessorBlock,iVar11);
+            IRInst__convertCompareToBinaryAlu(branchInstOrRef,compiler);
+            Block__appendInst(predecessorBlock,branchInstOrRef);
           }
           joinInstB = *(int **)(joinBlock + 0x98);
           for (nextJoinInst = (int *)joinInstB[2]; nextJoinInst != (int *)0x0; nextJoinInst = (int *)nextJoinInst[2]) {
@@ -2565,7 +2565,7 @@ LAB_0013cee8:
                   DList__unlink(operandVReg3);
                   Block__appendInst(predecessorBlock,operandVReg3);
                 }
-                IRInst__foldConstantFactor(joinInstB,iVar11,compareSelectWord,compiler);
+                IRInst__foldConstantFactor(joinInstB,branchInstOrRef,compareSelectWord,compiler);
                 if ((*(int *)(joinInstB[0x22] + 8) != 0x31) && (swapCompareOperands)) {
                   IRInst__swapOperands(joinInstB,2,3,compiler);
                 }

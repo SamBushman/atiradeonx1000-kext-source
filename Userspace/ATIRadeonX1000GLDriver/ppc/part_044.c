@@ -6041,26 +6041,26 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
   int inst;
   int *operandVReg;
   bool moreComponents;
-  int iVar2;
+  int operandLoopIndexC;
   int sourceDef2;
   int loopIndex;
   int operandRecord;
   int *chainedSource;
-  int iVar4;
+  int initIndexOrResult;
   int vcall100Result;
   int operandCount;
   int loopIndex2;
   int sourceDef3;
   int countdown2;
   int operandRecord2;
-  int *piVar5;
+  int *permutationOrSelectCursor;
   int *target;
   uint operandModifierBits;
   undefined4 selectWordToStore;
   int operandIndex4;
   undefined1 *newSelectBytePtr;
   undefined4 *newSelectCursor;
-  int iVar11;
+  int countdownOrIndex;
   undefined4 chainedDestSelect;
   undefined4 instDestSelect;
   undefined4 chainedOperandSelect;
@@ -6098,35 +6098,35 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
           }
           inst2 = *instSlot;
         }
-        iVar11 = 5;
-        iVar4 = 0;
-        piVar5 = operandPermutation;
+        countdownOrIndex = 5;
+        initIndexOrResult = 0;
+        permutationOrSelectCursor = operandPermutation;
         do {
-          *piVar5 = iVar4;
-          piVar5 = piVar5 + 1;
-          iVar4 = iVar4 + 1;
-          iVar11 = iVar11 + -1;
-        } while (iVar11 != 0);
+          *permutationOrSelectCursor = initIndexOrResult;
+          permutationOrSelectCursor = permutationOrSelectCursor + 1;
+          initIndexOrResult = initIndexOrResult + 1;
+          countdownOrIndex = countdownOrIndex + -1;
+        } while (countdownOrIndex != 0);
         inst2 = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(inst2 + 0x88) + 8),
                              *(undefined4 *)(pass + 8));
         if (inst2 != 0) {
           sourceDef2 = IRInst__getOperandSource(*instSlot,1);
-          iVar4 = IRInst__getOperandSource(chainedSource,2);
-          if (sourceDef2 == iVar4) {
+          initIndexOrResult = IRInst__getOperandSource(chainedSource,2);
+          if (sourceDef2 == initIndexOrResult) {
             sourceDef2 = IRInst__getOperandSource(*instSlot,2);
-            iVar4 = IRInst__getOperandSource(chainedSource,1);
-            if (sourceDef2 == iVar4) {
+            initIndexOrResult = IRInst__getOperandSource(chainedSource,1);
+            if (sourceDef2 == initIndexOrResult) {
               operandPermutation[1] = 2;
               operandPermutation[2] = 1;
             }
           }
         }
-        for (operandIndex = 1; iVar4 = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
-            operandIndex <= iVar4; operandIndex = operandIndex + 1) {
+        for (operandIndex = 1; initIndexOrResult = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
+            operandIndex <= initIndexOrResult; operandIndex = operandIndex + 1) {
           sourceDef3 = IRInst__getOperandSource(*instSlot,operandIndex);
           operandIndex4 = operandPermutation[operandIndex];
-          iVar11 = IRInst__getOperandSource(chainedSource,operandIndex4);
-          if (sourceDef3 != iVar11) {
+          countdownOrIndex = IRInst__getOperandSource(chainedSource,operandIndex4);
+          if (sourceDef3 != countdownOrIndex) {
             return 0;
           }
           operandModifierBits = *(uint *)(operandIndex * 0x18 + *instSlot + 0xa0);
@@ -6137,32 +6137,32 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
             return 0;
           }
           operandVReg = (int *)IRInst__getOperandSource(*instSlot,operandIndex);
-          iVar4 = (**(code **)(*operandVReg + 0x48))(operandVReg);
-          if (iVar4 != 0) {
+          initIndexOrResult = (**(code **)(*operandVReg + 0x48))(operandVReg);
+          if (initIndexOrResult != 0) {
             operandRecord2 = IRInst__getOperandRecord(*instSlot,operandIndex);
             instOperandSelect = *(undefined4 *)(operandRecord2 + 0x10);
             operandRecord2 = IRInst__getOperandRecord(chainedSource,operandIndex4);
             chainedOperandSelect = *(undefined4 *)(operandRecord2 + 0x10);
             target = *(int **)(*(int *)(pass + 8) + 0x30c);
-            iVar4 = (**(code **)(*target + 0x100))(target,&instOperandSelect);
-            if (iVar4 != 0) {
+            initIndexOrResult = (**(code **)(*target + 0x100))(target,&instOperandSelect);
+            if (initIndexOrResult != 0) {
               target = *(int **)(*(int *)(pass + 8) + 0x30c);
-              iVar4 = (**(code **)(*target + 0x100))(target,&chainedOperandSelect);
-              if (iVar4 != 0) {
+              initIndexOrResult = (**(code **)(*target + 0x100))(target,&chainedOperandSelect);
+              if (initIndexOrResult != 0) {
                 loopIndex2 = 0;
                 mergedOperandSelect = instOperandSelect;
-                iVar11 = 4;
+                countdownOrIndex = 4;
                 do {
                   if (*(char *)(loopIndex2 + (int)&chainedOperandSelect) == '\x04') {
                     *(undefined1 *)(loopIndex2 + (int)&chainedOperandSelect) =
                          *(undefined1 *)((int)&mergedOperandSelect + loopIndex2);
                   }
                   loopIndex2 = loopIndex2 + 1;
-                  iVar11 = iVar11 + -1;
-                } while (iVar11 != 0);
+                  countdownOrIndex = countdownOrIndex + -1;
+                } while (countdownOrIndex != 0);
                 target = *(int **)(*(int *)(pass + 8) + 0x30c);
-                iVar4 = (**(code **)(*target + 0x100))(target,&chainedOperandSelect);
-                if (iVar4 == 0) {
+                initIndexOrResult = (**(code **)(*target + 0x100))(target,&chainedOperandSelect);
+                if (initIndexOrResult == 0) {
                   return 0;
                 }
               }
@@ -6172,10 +6172,10 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
         operandRecord = IRInst__getOperandRecord(*instSlot,0);
         newSelectCursor = newOperandSelects;
         newDestSelect = *(undefined4 *)(operandRecord + 0x10);
-        for (operandIndex2 = 1; iVar4 = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
-            operandIndex2 <= iVar4; operandIndex2 = operandIndex2 + 1) {
-          iVar4 = IRInst__getOperandRecord(*instSlot,operandIndex2);
-          *newSelectCursor = *(undefined4 *)(iVar4 + 0x10);
+        for (operandIndex2 = 1; initIndexOrResult = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
+            operandIndex2 <= initIndexOrResult; operandIndex2 = operandIndex2 + 1) {
+          initIndexOrResult = IRInst__getOperandRecord(*instSlot,operandIndex2);
+          *newSelectCursor = *(undefined4 *)(initIndexOrResult + 0x10);
           newSelectCursor = newSelectCursor + 1;
         }
         loopIndex = 0;
@@ -6183,16 +6183,16 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
           operandRecord2 = IRInst__getOperandRecord(chainedSource,0);
           if (*(char *)(loopIndex + operandRecord2 + 0x10) != '\x01') {
             operandRecord2 = IRInst__getOperandRecord(chainedSource,0);
-            iVar11 = 1;
-            piVar5 = operandPermutation;
+            countdownOrIndex = 1;
+            permutationOrSelectCursor = operandPermutation;
             *(undefined1 *)((int)&newDestSelect + loopIndex) = *(undefined1 *)(loopIndex + operandRecord2 + 0x10);
             newSelectBytePtr = (undefined1 *)((int)newOperandSelects + loopIndex);
             while( true ) {
-              piVar5 = piVar5 + 1;
+              permutationOrSelectCursor = permutationOrSelectCursor + 1;
               operandCount = (**(code **)(*chainedSource + 0x14))(chainedSource);
-              if (operandCount < iVar11) break;
-              iVar11 = iVar11 + 1;
-              operandRecord2 = IRInst__getOperandRecord(chainedSource,*piVar5);
+              if (operandCount < countdownOrIndex) break;
+              countdownOrIndex = countdownOrIndex + 1;
+              operandRecord2 = IRInst__getOperandRecord(chainedSource,*permutationOrSelectCursor);
               *newSelectBytePtr = *(undefined1 *)(loopIndex + operandRecord2 + 0x10);
               newSelectBytePtr = newSelectBytePtr + 4;
             }
@@ -6211,19 +6211,19 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
           moreComponents = loopIndex2 != 3;
           loopIndex2 = loopIndex2 + 1;
         } while (moreComponents);
-        iVar2 = 1;
+        operandLoopIndexC = 1;
         newSelectCursor = newOperandSelects;
         while( true ) {
-          iVar4 = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot);
-          if (iVar4 < iVar2) {
+          initIndexOrResult = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot);
+          if (initIndexOrResult < operandLoopIndexC) {
             newSelectCursor = newOperandSelects;
             *(undefined4 *)(*instSlot + 0x9c) = newDestSelect;
-            for (operandIndex3 = 1; iVar4 = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
-                operandIndex3 <= iVar4; operandIndex3 = operandIndex3 + 1) {
+            for (operandIndex3 = 1; initIndexOrResult = (**(code **)(*(int *)*instSlot + 0x14))((int *)*instSlot),
+                operandIndex3 <= initIndexOrResult; operandIndex3 = operandIndex3 + 1) {
               selectWordToStore = *newSelectCursor;
-              iVar4 = IRInst__getOperandRecord(*instSlot,operandIndex3);
+              initIndexOrResult = IRInst__getOperandRecord(*instSlot,operandIndex3);
               newSelectCursor = newSelectCursor + 1;
-              *(undefined4 *)(iVar4 + 0x10) = selectWordToStore;
+              *(undefined4 *)(initIndexOrResult + 0x10) = selectWordToStore;
             }
             if ((chainedSource[5] & 0x200U) == 0) {
               inst3 = *instSlot;
@@ -6253,7 +6253,7 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
           target = *(int **)(*(int *)(pass + 8) + 0x30c);
           vcall100Result = (**(code **)(*target + 0x100))(target,newSelectCursor);
           if (vcall100Result == 0) break;
-          iVar2 = iVar2 + 1;
+          operandLoopIndexC = operandLoopIndexC + 1;
           newSelectCursor = newSelectCursor + 1;
         }
       }
@@ -12083,8 +12083,8 @@ int FUN_0016c1fc(compiler)
   int *tableSlotPtr;
   bool moreComponents;
   uint instFlags;
-  int iVar4;
-  int iVar5;
+  int nodeOrTable;
+  int registerOrCheck;
   int countdown;
   int oldCapacity;
   int *inst;
@@ -12093,35 +12093,35 @@ int FUN_0016c1fc(compiler)
   int slotByteOffset;
   int tableCapacity;
   int oldTableData;
-  int iVar12;
+  int operandNode;
   
   inst = (int *)compiler[0xc];
-  iVar4 = *inst;
-  if (iVar4 == 0) {
-    iVar4 = inst[1];
-    if (iVar4 == 0) goto LAB_0016c27c;
+  nodeOrTable = *inst;
+  if (nodeOrTable == 0) {
+    nodeOrTable = inst[1];
+    if (nodeOrTable == 0) goto LAB_0016c27c;
   }
   else if (inst[1] != 0) goto LAB_0016c27c;
-  if (((*(int *)(iVar4 + 100) == 0) && (*(int *)(iVar4 + 0x60) == 0)) &&
-     (*(int *)(*(int *)(iVar4 + 0x38) + 0x98) == 1)) {
-    *(undefined4 *)(*(int *)(iVar4 + 0x38) + 0x98) = 0;
+  if (((*(int *)(nodeOrTable + 100) == 0) && (*(int *)(nodeOrTable + 0x60) == 0)) &&
+     (*(int *)(*(int *)(nodeOrTable + 0x38) + 0x98) == 1)) {
+    *(undefined4 *)(*(int *)(nodeOrTable + 0x38) + 0x98) = 0;
     inst = (int *)compiler[0xc];
   }
 LAB_0016c27c:
   loopIndex2 = 0;
   while( true ) {
-    iVar12 = inst[loopIndex2];
-    if ((((iVar12 != 0) && (inst = *(int **)(iVar12 + 0x38), inst[0x20] != 0)) &&
-        ((iVar5 = RegKind__flagBit0(inst[0x26]), iVar5 != 0 &&
-         (((inst[5] & 2U) == 0 && (iVar5 = (**(code **)(*inst + 0x50))(inst), iVar5 == 0))))))
+    operandNode = inst[loopIndex2];
+    if ((((operandNode != 0) && (inst = *(int **)(operandNode + 0x38), inst[0x20] != 0)) &&
+        ((registerOrCheck = RegKind__flagBit0(inst[0x26]), registerOrCheck != 0 &&
+         (((inst[5] & 2U) == 0 && (registerOrCheck = (**(code **)(*inst + 0x50))(inst), registerOrCheck == 0))))))
        && ((inst[5] & 0x40U) != 0)) {
-      iVar5 = inst[0x25];
+      registerOrCheck = inst[0x25];
       loopIndexC = 0;
       tableCursor = compiler;
       do {
         operandRecord = IRInst__getOperandRecord(inst,0);
         if (*(char *)(loopIndexC + operandRecord + 0x10) != '\x01') {
-          *(int *)(tableCursor[0x4d] + iVar5 * 4) = iVar12;
+          *(int *)(tableCursor[0x4d] + registerOrCheck * 4) = operandNode;
         }
         moreComponents = loopIndexC != 3;
         tableCursor = tableCursor + 1;
@@ -12132,45 +12132,45 @@ LAB_0016c27c:
     inst = (int *)compiler[0xc];
     loopIndex2 = loopIndex2 + 1;
   }
-  iVar4 = compiler[0xc];
+  nodeOrTable = compiler[0xc];
   loopIndex = 0;
   do {
-    iVar5 = loopIndex * 4;
+    registerOrCheck = loopIndex * 4;
     loopIndex = loopIndex + 1;
-    iVar4 = *(int *)(iVar5 + iVar4);
-    if (iVar4 != 0) {
-      inst2 = *(int **)(iVar4 + 0x38);
+    nodeOrTable = *(int *)(registerOrCheck + nodeOrTable);
+    if (nodeOrTable != 0) {
+      inst2 = *(int **)(nodeOrTable + 0x38);
       schedulerAllocRegEnabled2 = Compiler__isOptionEnabled(*compiler,0x25);
       if (schedulerAllocRegEnabled2 == 0) {
 LAB_0016c3e0:
-        iVar5 = inst2[0x20];
+        registerOrCheck = inst2[0x20];
       }
       else {
-        iVar5 = 0;
+        registerOrCheck = 0;
         if (inst2[0x20] != 0) {
-          iVar5 = RegKind__flagBit0(inst2[0x26]);
-          if ((((iVar5 != 0) && ((inst2[5] & 2U) == 0)) &&
-              (iVar5 = (**(code **)(*inst2 + 0x50))(inst2), iVar5 == 0)) &&
+          registerOrCheck = RegKind__flagBit0(inst2[0x26]);
+          if ((((registerOrCheck != 0) && ((inst2[5] & 2U) == 0)) &&
+              (registerOrCheck = (**(code **)(*inst2 + 0x50))(inst2), registerOrCheck == 0)) &&
              (((inst2[5] & 0x40U) == 0 && ((inst2[5] & 0x20U) == 0)))) {
-            if ((*(int *)(iVar4 + 0x60) == 0) ||
-               (iVar5 = *(int *)(*(int *)(iVar4 + 0x60) + 4), iVar5 < 0)) {
+            if ((*(int *)(nodeOrTable + 0x60) == 0) ||
+               (registerOrCheck = *(int *)(*(int *)(nodeOrTable + 0x60) + 4), registerOrCheck < 0)) {
               vcall7cResult = (**(code **)(**(int **)(*compiler + 0x30c) + 0x7c))
                                  (*(int **)(*compiler + 0x30c),inst2);
-              iVar5 = DAT_001b0194;
+              registerOrCheck = DAT_001b0194;
               if (vcall7cResult != 0) {
-                if (*(int **)(iVar4 + 0x60) == (int *)0x0) {
-                  iVar5 = inst2[3];
+                if (*(int **)(nodeOrTable + 0x60) == (int *)0x0) {
+                  registerOrCheck = inst2[3];
                 }
                 else {
-                  iVar5 = **(int **)(iVar4 + 0x60);
+                  registerOrCheck = **(int **)(nodeOrTable + 0x60);
                 }
               }
-              iVar5 = ((int (*)())Scheduler__findFreeTempRegister)(compiler,inst2[0x26],iVar5);
-              if (iVar5 < 0) {
-                iVar5 = compiler[0x52];
+              registerOrCheck = ((int (*)())Scheduler__findFreeTempRegister)(compiler,inst2[0x26],registerOrCheck);
+              if (registerOrCheck < 0) {
+                registerOrCheck = compiler[0x52];
                 tableCapacity = compiler[0x53];
-                compiler[0x52] = iVar5 + 1;
-                if (tableCapacity < iVar5 + 1) {
+                compiler[0x52] = registerOrCheck + 1;
+                if (tableCapacity < registerOrCheck + 1) {
                   tableCursor = compiler;
                   do {
                     oldTableData = tableCursor[0x4d];
@@ -12183,7 +12183,7 @@ LAB_0016c3e0:
                   } while (tableCursor != compiler + 4);
                   compiler[0x53] = tableCapacity << 1;
                 }
-                slotByteOffset = iVar5 * 4;
+                slotByteOffset = registerOrCheck * 4;
                 countdown = 4;
                 tableCursor = compiler;
                 do {
@@ -12194,21 +12194,21 @@ LAB_0016c3e0:
                 } while (countdown != 0);
               }
               else {
-                slotByteOffset = iVar5 << 2;
+                slotByteOffset = registerOrCheck << 2;
               }
               loopIndexB = 0;
               tableCursor = compiler;
               do {
                 operandRecord2 = IRInst__getOperandRecord(inst2,0);
                 if (*(char *)(loopIndexB + operandRecord2 + 0x10) != '\x01') {
-                  *(int *)(tableCursor[0x4d] + slotByteOffset) = iVar4;
+                  *(int *)(tableCursor[0x4d] + slotByteOffset) = nodeOrTable;
                 }
                 moreComponents = loopIndexB != 3;
                 tableCursor = tableCursor + 1;
                 loopIndexB = loopIndexB + 1;
               } while (moreComponents);
-              if (*(int *)(iVar4 + 0x60) != 0) {
-                *(int *)(*(int *)(iVar4 + 0x60) + 4) = iVar5;
+              if (*(int *)(nodeOrTable + 0x60) != 0) {
+                *(int *)(*(int *)(nodeOrTable + 0x60) + 4) = registerOrCheck;
               }
             }
             else {
@@ -12217,22 +12217,22 @@ LAB_0016c3e0:
               do {
                 operandRecord = IRInst__getOperandRecord(inst2,0);
                 if (*(char *)(loopIndexC + operandRecord + 0x10) != '\x01') {
-                  *(int *)(tableCursor[0x4d] + iVar5 * 4) = iVar4;
+                  *(int *)(tableCursor[0x4d] + registerOrCheck * 4) = nodeOrTable;
                 }
                 moreComponents = loopIndexC != 3;
                 tableCursor = tableCursor + 1;
                 loopIndexC = loopIndexC + 1;
               } while (moreComponents);
             }
-            inst2[0x25] = iVar5;
+            inst2[0x25] = registerOrCheck;
             inst2[5] = inst2[5] | 0x40;
             goto LAB_0016c620;
           }
           goto LAB_0016c3e0;
         }
       }
-      if (((iVar5 != 0) && (iVar4 = RegKind__flagBit0(inst2[0x26]), iVar4 != 0)) &&
-         (((inst2[5] & 2U) == 0 && (iVar4 = (**(code **)(*inst2 + 0x50))(inst2), iVar4 == 0)))) {
+      if (((registerOrCheck != 0) && (nodeOrTable = RegKind__flagBit0(inst2[0x26]), nodeOrTable != 0)) &&
+         (((inst2[5] & 2U) == 0 && (nodeOrTable = (**(code **)(*inst2 + 0x50))(inst2), nodeOrTable == 0)))) {
         instFlags = inst2[5];
         if ((instFlags & 0x20) == 0) {
           schedulerAllocRegEnabled = Compiler__isOptionEnabled(*compiler,0x25);
@@ -12240,9 +12240,9 @@ LAB_0016c3e0:
           instFlags = inst2[5];
         }
         if ((instFlags & 0x40) == 0) {
-          iVar4 = *(int *)(*compiler + 0x3c4) + 1;
-          *(int *)(*compiler + 0x3c4) = iVar4;
-          inst2[0x25] = iVar4;
+          nodeOrTable = *(int *)(*compiler + 0x3c4) + 1;
+          *(int *)(*compiler + 0x3c4) = nodeOrTable;
+          inst2[0x25] = nodeOrTable;
         }
       }
     }
@@ -12250,7 +12250,7 @@ LAB_0016c620:
     if (4 < loopIndex) {
       return;
     }
-    iVar4 = compiler[0xc];
+    nodeOrTable = compiler[0xc];
   } while( true );
 }
 
