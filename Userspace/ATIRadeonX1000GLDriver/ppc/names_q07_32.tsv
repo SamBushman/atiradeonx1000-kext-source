@@ -3966,3 +3966,99 @@ local	Program__eliminateRedundantInst	param_4	pass	INFERRED	*(param_4+8) is the 
 local	Program__eliminateRedundantInst	uVar1	removed	INFERRED	1 when the inst was removed
 local	Program__eliminateRedundantInst	iVar2	registerCheck	INFERRED	register-kind / vtable +0x50 results in the guard chain
 local	Program__eliminateRedundantInst	iVar3	staleArg4	INFERRED	copy of pass left in r6 as an extra argument of the vtable +0xc call
+local	FUN_001474c8	param_1	ctx	INFERRED	unused first argument
+local	FUN_001474c8	param_3	scheduleCtx	INFERRED	passed to the target hook (vtable +0x68, +0x2c)
+local	FUN_001474c8	piVar1	blockWalkNext	INFERRED	parent block of the current block in the block walk
+local	FUN_001474c8	piVar2	blockWalkCur	INFERRED	block being tested against the operand definition blocks
+use	FUN_001474c8	iVar3	operandCount	INFERRED	inst +0x84 operand count	^\s*iVar3\ =\ param_2\[0x21\];$	+2
+use	FUN_001474c8	iVar3	operandCount	INFERRED	inst +0x84 operand count	^\s*if\ \(0\ <\ iVar3\)\ \{$	+1
+use	FUN_001474c8	iVar3	operandCount	INFERRED	inst +0x84 operand count	^\s*iVar3\ =\ param_2\[0x21\];$@2	+2
+use	FUN_001474c8	iVar3	operandCount	INFERRED	inst +0x84 operand count	^\s*if\ \(0\ <\ iVar3\)\ \{$@2	+1
+use	FUN_001474c8	iVar3	operandCount	INFERRED	inst +0x84 operand count	^\s*if\ \(iVar3\ <\ iVar4\)\ goto\ LAB_001475b8;$	+1
+use	FUN_001474c8	iVar3	nextInstLink	INFERRED	next link of the block inst list	^\s*iVar3\ =\ \*\(int\ \*\)\(a0\[0x28\]\ \+\ 4\);$	+2
+use	FUN_001474c8	iVar3	nextInstLink	INFERRED	next link of the block inst list	^\s*iVar5\ =\ iVar3;$	+1
+use	FUN_001474c8	iVar3	nextInstLink	INFERRED	next link of the block inst list	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar5\ \+\ 4\);$	+1
+use	FUN_001474c8	iVar3	nextInstLink	INFERRED	next link of the block inst list	^\s*\}\ while\ \(iVar3\ !=\ 0\);$	+1
+use	FUN_001474c8	iVar4	operandIndexReg	INFERRED	one register: stale r4, matching operand index and operand loop index	^\s*iVar4\ =\ extraout_r4;$	+1
+use	FUN_001474c8	iVar4	operandIndexReg	INFERRED	one register: stale r4, matching operand index and operand loop index	^\s*iVar4\ =\ \(int\)uVar9;$	+1
+use	FUN_001474c8	iVar4	operandIndexReg	INFERRED	one register: stale r4, matching operand index and operand loop index	^\s*iVar4\ =\ 1;$	+1
+use	FUN_001474c8	iVar4	operandIndexReg	INFERRED	one register: stale r4, matching operand index and operand loop index	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+4
+use	FUN_001474c8	iVar4	operandIndexReg	INFERRED	one register: stale r4, matching operand index and operand loop index	^\s*iVar7\ =\ iVar4;$	+2
+use	FUN_001474c8	iVar4	operandIndexReg	INFERRED	one register: stale r4, matching operand index and operand loop index	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x2c\)\)\(a0,iVar4,param_3\);$	+1
+local	FUN_001474c8	iVar5	nextInstCursor	INFERRED	next inst of the block list while scanning for the insertion point
+use	FUN_001474c8	iVar7	operandByteOffset	INFERRED	operand index * 4 into the operand block array	^\s*iVar7\ =\ 4;$	+1
+use	FUN_001474c8	iVar7	operandByteOffset	INFERRED	operand index * 4 into the operand block array	^\s*iVar7\ =\ iVar4\ \*\ 4;$	+1
+use	FUN_001474c8	iVar7	operandByteOffset	INFERRED	operand index * 4 into the operand block array	^\s*a0\ =\ \*\(int\ \*\*\)\(\(int\)\&iStack_48\ \+\ iVar7\);$	+1
+local	FUN_001474c8	ppiVar6	operandBlockCursor	INFERRED	walks operandBlocks while filling it
+local	FUN_001474c8	iStack_48	operandBlockPad	INFERRED	slot 0 of the operand block array; operands start at operandBlocks
+local	FUN_001474c8	local_44	operandBlocks	INFERRED	defining block of each operand (array indexed from 1 through operandBlockPad)
+local	FUN_00159794	param_2	allowFold	INFERRED	non-zero lets the mad-with-add producer be folded into inst
+local	FUN_00159794	param_3	pass	INFERRED	*(param_3+0x6c4) is the program, *(param_3+8) the compiler
+local	FUN_00159794	uVar1	negateBit	INFERRED	negate bit (+0xb8 & 1) of inst compared with the producer operand
+use	FUN_00159794	uVar3	changed	INFERRED	return value: 1 when inst was rewritten	^\s*uVar3\ =\ 1;$	+1
+use	FUN_00159794	uVar3	changed	INFERRED	return value: 1 when inst was rewritten	^\s*uVar3\ =\ 0;$	+1
+use	FUN_00159794	uVar3	changed	INFERRED	return value: 1 when inst was rewritten	^\s*uVar3\ =\ 1;$@2	+1
+use	FUN_00159794	uVar3	changed	INFERRED	return value: 1 when inst was rewritten	^\s*return\ uVar3;$	+1
+use	FUN_00159794	uVar3	changed	INFERRED	return value: 1 when inst was rewritten	^\s*uVar3\ =\ 1;$@3	+1
+use	FUN_00159794	uVar3	changed	INFERRED	return value: 1 when inst was rewritten	^\s*return\ uVar3;$@2	+1
+use	FUN_00159794	iVar4	checkResult	INFERRED	register-kind flag, vtable +0x5c and constant-match results	^\s*iVar4\ =\ FUN_001267b8\(uVar7\);$	+2
+use	FUN_00159794	iVar4	checkResult	INFERRED	register-kind flag, vtable +0x5c and constant-match results	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x5c\)\)\(piVar5\);$	+2
+use	FUN_00159794	iVar4	checkResult	INFERRED	register-kind flag, vtable +0x5c and constant-match results	^\s*if\ \(\(\(\(\(\*\(uint\ \*\)\(iVar2\ \+\ 0xb8\)\ \&\ 2\)\ ==\ 0\)\ \&\&$	+4
+use	FUN_00159794	iVar4	singleUseCheck	INFERRED	vtable +0x5c / single use result	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x5c\)\)\(piVar5\);$@2	+2
+local	FUN_00159794	uVar7	producerSourceRegKind	INFERRED	register kind (+0x98) of the producer's operand 1 source, or 0
+local	FUN_00159794	iVar8	passStamp	INFERRED	*(program+0x478) stamp before the stamp bumps
+local	FUN_00159794	local_38	halfConstantX	INFERRED	out record for IRInst__sourceMatchesConstant, initialised to 0.5
+local	FUN_00159794	local_34	halfConstantY	INFERRED	0.5 initialiser of the constant out record (second word)
+local	FUN_00159794	local_30	halfConstantZ	INFERRED	0.5 initialiser of the constant out record (third word)
+local	FUN_00159794	local_2c	halfConstantW	INFERRED	0.5 initialiser of the constant out record (fourth word)
+local	FUN_00159794	local_28	composedSelectOut	INFERRED	SelectWord__compose output
+local	FUN_001427a4	param_1	outNeededMask	INFERRED	receives the lane mask the users of inst need (first write mask when no users)
+local	FUN_001427a4	param_2	packCtx	INFERRED	pack context passed to the mask helpers
+local	FUN_001427a4	puVar2	userSlot	INFERRED	address of the user element at the loop index
+local	FUN_001427a4	piVar3	extraSource	INFERRED	extra (last) operand source of the user, or null
+local	FUN_001427a4	uVar5	neededMask	INFERRED	accumulated lane mask, starting at DAT_001b0040
+local	FUN_001427a4	puVar6	usersVector	INFERRED	users vector of inst
+local	FUN_001427a4	piVar7	userInst	INFERRED	the user inst at the loop index
+local	FUN_001427a4	local_38	writeMaskOut	INFERRED	out record of FUN_00141044 for inst, copied to *outNeededMask
+local	FUN_001427a4	local_34	userWriteMaskOut	INFERRED	out record of FUN_00141044 for a user without a vtable +0x5c source
+local	FUN_001427a4	local_30	userReadMaskOut	INFERRED	out record of FUN_00141090 for a user whose extra source is inst
+local	FUN_001427a4	local_2c	instWriteMaskOut	INFERRED	out record of FUN_00141044 for inst, ANDed into the result
+local	FUN_00141458	param_1	packCtx	INFERRED	pack context; *param_1 is the target for the opcode traits call
+local	FUN_00141458	param_3	laneA	INFERRED	first lane swapped
+local	FUN_00141458	param_4	laneB	INFERRED	second lane swapped
+local	FUN_00141458	uVar1	swapByte	INFERRED	byte held while two lane bytes are swapped
+local	FUN_00141458	uVar2	swappedSelect	INFERRED	select word after swapping lane bytes, stored back at +0x10
+local	FUN_00141458	uVar3	instFlags	INFERRED	inst flags word (+0x14); 0x200 marks an extra operand
+use	FUN_00141458	iVar4	swapOperandLimit	INFERRED	operand count (minus the extra operand) bounding the swap loop	^\s*iVar4\ =\ iVar6;$	+1
+use	FUN_00141458	iVar4	swapOperandLimit	INFERRED	operand count (minus the extra operand) bounding the swap loop	^\s*iVar4\ =\ iVar6\ \+\ \-1;$	+1
+use	FUN_00141458	iVar4	swapOperandLimit	INFERRED	operand count (minus the extra operand) bounding the swap loop	^\s*if\ \(0\ <\ iVar4\)\ \{$	+1
+use	FUN_00141458	iVar4	swapOperandLimit	INFERRED	operand count (minus the extra operand) bounding the swap loop	^\s*\}\ while\ \(iVar7\ <=\ iVar4\);$	+1
+use	FUN_00141458	iVar6	extraOperandIndex	INFERRED	operand count: index of the extra operand	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x84\);$	+1
+use	FUN_00141458	iVar6	extraOperandIndex	INFERRED	operand count: index of the extra operand	^\s*iVar4\ =\ iVar6;$	+1
+use	FUN_00141458	iVar6	extraOperandIndex	INFERRED	operand count: index of the extra operand	^\s*iVar4\ =\ FUN_001054ec\(param_2,iVar6\);$	+1
+use	FUN_00141458	iVar6	extraOperandIndex	INFERRED	operand count: index of the extra operand	^\s*iVar4\ =\ iVar6\ \+\ \-1;$	+3
+use	FUN_00141458	iVar6	operandIndex	INFERRED	operand loop index 1..swapOperandLimit	^\s*iVar6\ =\ 1;$	+1
+use	FUN_00141458	iVar6	operandIndex	INFERRED	operand loop index 1..swapOperandLimit	^\s*iVar5\ =\ FUN_001054ec\(param_2,iVar6\);$	+2
+use	FUN_00141458	iVar6	operandIndex	INFERRED	operand loop index 1..swapOperandLimit	^\s*iVar6\ =\ FUN_001054ec\(param_2,iVar6\);$@2	+3
+local	FUN_00141458	iVar7	nextOperandIndex	INFERRED	operandIndex + 1
+local	FUN_00141458	local_44	selectScratch	INFERRED	select word scratch whose bytes are swapped; the lane map precedes it at -4
+local	FUN_00157b78	param_3	pass	INFERRED	*(param_3+8) is the compiler; +0x1c0 counts the swaps
+use	FUN_00157b78	uVar2	selectLowBitsA	INFERRED	DAT_001b0050 & 0xffffff base of a rebuilt select word	^\s*uVar2\ =\ DAT_001b0050\ \&\ 0xffffff;$	+1
+use	FUN_00157b78	uVar2	selectLowBitsA	INFERRED	DAT_001b0050 & 0xffffff base of a rebuilt select word	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0x10\)\ =\ iVar12\ <<\ 0x18\ \|\ uVar2;$	+1
+use	FUN_00157b78	uVar3	selectLowBitsB	INFERRED	DAT_001b0050 & 0xffffff base of a rebuilt select word	^\s*uVar3\ =\ DAT_001b0050\ \&\ 0xffffff;$	+1
+use	FUN_00157b78	uVar3	selectLowBitsB	INFERRED	DAT_001b0050 & 0xffffff base of a rebuilt select word	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x10\)\ =\ iVar14\ <<\ 0x18\ \|\ uVar3;$	+1
+local	FUN_00157b78	uVar5	laneMapWord	INFERRED	rebuilt lane map (local_5c[0]) stored to the operand record
+local	FUN_00157b78	piVar7	chosenSource	INFERRED	the splat producer operand moved onto the other operand slot
+use	FUN_00157b78	iVar10	vcall48Or4cResult	INFERRED	vtable +0x48 / +0x4c result on a source	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x48\)\)\(piVar8\);$	+3
+use	FUN_00157b78	iVar10	vcall48Or4cResult	INFERRED	vtable +0x48 / +0x4c result on a source	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x48\)\)\(piVar7\);$	+2
+use	FUN_00157b78	iVar10	vcall48Or4cResult	INFERRED	vtable +0x48 / +0x4c result on a source	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x48\)\)\(piVar9\);$	+2
+use	FUN_00157b78	iVar11	otherOperandRecordBase	INFERRED	address of the other operand record inside inst	^\s*iVar11\ =\ param_1\ \+\ uVar2\ \*\ 0x18\ \+\ 0x80;$	+1
+use	FUN_00157b78	iVar11	otherOperandRecordBase	INFERRED	address of the other operand record inside inst	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x20\)\ \&\ 1;$	+1
+use	FUN_00157b78	iVar11	otherOperandRecordBase	INFERRED	address of the other operand record inside inst	^\s*FUN_00103d50\(iVar11\ \+\ 0xc,1,uVar3\);$	+1
+use	FUN_00157b78	uVar19	selectBytesValue	INFERRED	value of the rebuilt select bytes (local_68)	^\s*uVar19\ =\ local_68;$	+1
+use	FUN_00157b78	uVar19	selectBytesValue	INFERRED	value of the rebuilt select bytes (local_68)	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\)\ =\ uVar19;$	+1
+use	FUN_00157b78	uVar19	producerSelectConst	INFERRED	DAT_001b0058 stored at producer +0x9c	^\s*uVar19\ =\ DAT_001b0058;$	+1
+use	FUN_00157b78	uVar19	producerSelectConst	INFERRED	DAT_001b0058 stored at producer +0x9c	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x9c\)\ =\ uVar19;$	+1
+local	FUN_00157b78	local_68	selectBytes	INFERRED	select bytes being rebuilt lane by lane; also the second operand select
+local	FUN_00157b78	local_60	selectBytesCopy	INFERRED	copy of selectBytes taken before the rebuild
+local	FUN_00157b78	local_5c	laneMapBytes	INFERRED	rebuilt lane map bytes; operand-select-indexed reads start four bytes below

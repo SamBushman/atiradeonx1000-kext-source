@@ -5157,69 +5157,70 @@ int FUN_001411dc(pass, inst, inst2, laneMap)
 }
 
 /* FUN_00141458 @ 0x141458 (332 bytes) */
-int FUN_00141458(param_1, inst, param_3, param_4)
-  undefined4 *param_1;
+int FUN_00141458(packCtx, inst, laneA, laneB)
+  undefined4 *packCtx;
   int inst;
-  int param_3;
-  int param_4;
+  int laneA;
+  int laneB;
 {
   int operandRecord3;
   int operandRecord2;
-  undefined1 uVar1;
-  undefined4 uVar2;
-  uint uVar3;
-  int iVar4;
+  undefined1 swapByte;
+  undefined4 swappedSelect;
+  uint instFlags;
+  int swapOperandLimit;
   int operandRecord;
-  int iVar6;
-  int iVar7;
+  int extraOperandIndex;
+  int operandIndex;
+  int nextOperandIndex;
   undefined4 operandSelect;
-  undefined4 local_44 [8];
+  undefined4 selectScratch [8];
   
-  OpcodeTraits__flag1WithoutFlag7(*param_1,inst);
+  OpcodeTraits__flag1WithoutFlag7(*packCtx,inst);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   operandSelect = *(undefined4 *)(operandRecord2 + 0x10);
-  uVar3 = *(uint *)(inst + 0x14);
-  uVar1 = *(undefined1 *)((int)local_44 + param_3 + -4);
-  *(undefined1 *)((int)local_44 + param_3 + -4) = *(undefined1 *)((int)local_44 + param_4 + -4);
-  *(undefined1 *)((int)local_44 + param_4 + -4) = uVar1;
-  iVar6 = *(int *)(inst + 0x84);
+  instFlags = *(uint *)(inst + 0x14);
+  swapByte = *(undefined1 *)((int)selectScratch + laneA + -4);
+  *(undefined1 *)((int)selectScratch + laneA + -4) = *(undefined1 *)((int)selectScratch + laneB + -4);
+  *(undefined1 *)((int)selectScratch + laneB + -4) = swapByte;
+  extraOperandIndex = *(int *)(inst + 0x84);
   *(undefined4 *)(inst + 0x9c) = operandSelect;
-  iVar4 = iVar6;
-  if ((uVar3 & 0x200) != 0) {
-    operandRecord2 = IRInst__getOperandRecord(inst,iVar6);
-    local_44[0] = *(undefined4 *)(operandRecord2 + 0x10);
-    uVar1 = *(undefined1 *)((int)local_44 + param_3);
-    *(undefined1 *)((int)local_44 + param_3) = *(undefined1 *)((int)local_44 + param_4);
-    *(undefined1 *)((int)local_44 + param_4) = uVar1;
-    if (*(char *)((int)local_44 + param_3) != '\x04') {
-      *(char *)((int)local_44 + param_3) = (char)param_3;
+  swapOperandLimit = extraOperandIndex;
+  if ((instFlags & 0x200) != 0) {
+    operandRecord2 = IRInst__getOperandRecord(inst,extraOperandIndex);
+    selectScratch[0] = *(undefined4 *)(operandRecord2 + 0x10);
+    swapByte = *(undefined1 *)((int)selectScratch + laneA);
+    *(undefined1 *)((int)selectScratch + laneA) = *(undefined1 *)((int)selectScratch + laneB);
+    *(undefined1 *)((int)selectScratch + laneB) = swapByte;
+    if (*(char *)((int)selectScratch + laneA) != '\x04') {
+      *(char *)((int)selectScratch + laneA) = (char)laneA;
     }
-    if (*(char *)((int)local_44 + param_4) != '\x04') {
-      *(char *)((int)local_44 + param_4) = (char)param_4;
+    if (*(char *)((int)selectScratch + laneB) != '\x04') {
+      *(char *)((int)selectScratch + laneB) = (char)laneB;
     }
-    uVar2 = local_44[0];
-    iVar4 = iVar6 + -1;
-    operandRecord3 = IRInst__getOperandRecord(inst,iVar6);
-    *(undefined4 *)(operandRecord3 + 0x10) = uVar2;
+    swappedSelect = selectScratch[0];
+    swapOperandLimit = extraOperandIndex + -1;
+    operandRecord3 = IRInst__getOperandRecord(inst,extraOperandIndex);
+    *(undefined4 *)(operandRecord3 + 0x10) = swappedSelect;
   }
-  if (0 < iVar4) {
-    iVar6 = 1;
+  if (0 < swapOperandLimit) {
+    operandIndex = 1;
     do {
-      operandRecord = IRInst__getOperandRecord(inst,iVar6);
-      iVar7 = iVar6 + 1;
-      local_44[0] = *(undefined4 *)(operandRecord + 0x10);
-      uVar1 = *(undefined1 *)((int)local_44 + param_3);
-      *(undefined1 *)((int)local_44 + param_3) = *(undefined1 *)((int)local_44 + param_4);
-      *(undefined1 *)((int)local_44 + param_4) = uVar1;
-      uVar2 = local_44[0];
-      operandRecord3 = IRInst__getOperandRecord(inst,iVar6);
-      *(undefined4 *)(operandRecord3 + 0x10) = uVar2;
-      iVar6 = iVar7;
-    } while (iVar7 <= iVar4);
+      operandRecord = IRInst__getOperandRecord(inst,operandIndex);
+      nextOperandIndex = operandIndex + 1;
+      selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
+      swapByte = *(undefined1 *)((int)selectScratch + laneA);
+      *(undefined1 *)((int)selectScratch + laneA) = *(undefined1 *)((int)selectScratch + laneB);
+      *(undefined1 *)((int)selectScratch + laneB) = swapByte;
+      swappedSelect = selectScratch[0];
+      operandRecord3 = IRInst__getOperandRecord(inst,operandIndex);
+      *(undefined4 *)(operandRecord3 + 0x10) = swappedSelect;
+      operandIndex = nextOperandIndex;
+    } while (nextOperandIndex <= swapOperandLimit);
   }
-  uVar1 = *(undefined1 *)(inst + param_3 + 0xc);
-  *(undefined1 *)(inst + param_3 + 0xc) = *(undefined1 *)(inst + param_4 + 0xc);
-  *(undefined1 *)(inst + param_4 + 0xc) = uVar1;
+  swapByte = *(undefined1 *)(inst + laneA + 0xc);
+  *(undefined1 *)(inst + laneA + 0xc) = *(undefined1 *)(inst + laneB + 0xc);
+  *(undefined1 *)(inst + laneB + 0xc) = swapByte;
   return;
 }
 
@@ -6139,71 +6140,71 @@ LAB_001426b8:
 }
 
 /* FUN_001427a4 @ 0x1427a4 (464 bytes) */
-int FUN_001427a4(param_1, param_2, inst)
-  uint *param_1;
-  undefined4 param_2;
+int FUN_001427a4(outNeededMask, packCtx, inst)
+  uint *outNeededMask;
+  undefined4 packCtx;
   int *inst;
 {
   int vcall5cResult;
-  undefined4 *puVar2;
-  int *piVar3;
+  undefined4 *userSlot;
+  int *extraSource;
   uint vectorFilledCount;
-  uint uVar5;
-  uint *puVar6;
-  int *piVar7;
+  uint neededMask;
+  uint *usersVector;
+  int *userInst;
   uint loopIndex;
-  uint local_38;
-  uint local_34;
-  uint local_30;
-  uint local_2c [3];
+  uint writeMaskOut;
+  uint userWriteMaskOut;
+  uint userReadMaskOut;
+  uint instWriteMaskOut [3];
   
   if ((*(int *)(inst[0x22] + 8) == 0x8e) ||
      (vcall5cResult = (**(code **)(*inst + 0x5c))(inst), vcall5cResult != 0)) {
-    ((int (*)())FUN_00141044)(&local_38,param_2,inst);
-    *param_1 = local_38;
+    ((int (*)())FUN_00141044)(&writeMaskOut,packCtx,inst);
+    *outNeededMask = writeMaskOut;
   }
   else {
-    puVar6 = (uint *)inst[4];
-    vectorFilledCount = puVar6[1];
-    uVar5 = DAT_001b0040;
+    usersVector = (uint *)inst[4];
+    vectorFilledCount = usersVector[1];
+    neededMask = DAT_001b0040;
     if (vectorFilledCount != 0) {
       loopIndex = 0;
       do {
-        if (loopIndex < *puVar6) {
+        if (loopIndex < *usersVector) {
           if (vectorFilledCount <= loopIndex) {
-            _memset(vectorFilledCount * 4 + puVar6[2],0,(loopIndex - vectorFilledCount) * 4 + 4);
-            puVar6[1] = loopIndex + 1;
+            _memset(vectorFilledCount * 4 + usersVector[2],0,(loopIndex - vectorFilledCount) * 4 + 4);
+            usersVector[1] = loopIndex + 1;
           }
-          puVar2 = (undefined4 *)(loopIndex * 4 + puVar6[2]);
+          userSlot = (undefined4 *)(loopIndex * 4 + usersVector[2]);
         }
         else {
-          puVar2 = (undefined4 *)Vector__elementRefGrow(puVar6,loopIndex);
+          userSlot = (undefined4 *)Vector__elementRefGrow(usersVector,loopIndex);
         }
         loopIndex = loopIndex + 1;
-        piVar7 = (int *)*puVar2;
-        if (piVar7 != (int *)0x0) {
-          if ((*(int *)(piVar7[0x22] + 8) == 0x8e) ||
-             (vcall5cResult = (**(code **)(*piVar7 + 0x5c))(piVar7), vcall5cResult != 0)) {
-            ((int (*)())FUN_00141044)(&local_34,param_2,piVar7);
-            uVar5 = uVar5 | local_34;
+        userInst = (int *)*userSlot;
+        if (userInst != (int *)0x0) {
+          if ((*(int *)(userInst[0x22] + 8) == 0x8e) ||
+             (vcall5cResult = (**(code **)(*userInst + 0x5c))(userInst), vcall5cResult != 0)) {
+            ((int (*)())FUN_00141044)(&userWriteMaskOut,packCtx,userInst);
+            neededMask = neededMask | userWriteMaskOut;
           }
-          piVar3 = (int *)0x0;
-          if ((piVar7[5] & 0x200U) != 0) {
-            piVar3 = (int *)IRInst__getOperandSource(piVar7,piVar7[0x21]);
+          extraSource = (int *)0x0;
+          if ((userInst[5] & 0x200U) != 0) {
+            extraSource = (int *)IRInst__getOperandSource(userInst,userInst[0x21]);
           }
-          if (piVar3 == inst) {
-            ((int (*)())FUN_00141090)(&local_30,param_2,piVar7);
-            uVar5 = uVar5 | local_30;
+          if (extraSource == inst) {
+            ((int (*)())FUN_00141090)(&userReadMaskOut,packCtx,userInst);
+            neededMask = neededMask | userReadMaskOut;
           }
         }
-        puVar6 = (uint *)inst[4];
-        vectorFilledCount = puVar6[1];
+        usersVector = (uint *)inst[4];
+        vectorFilledCount = usersVector[1];
       } while (loopIndex < vectorFilledCount);
     }
-    ((int (*)())FUN_00141044)(local_2c,param_2,inst);
-    *param_1 = uVar5 & local_2c[0];
+    ((int (*)())FUN_00141044)(instWriteMaskOut,packCtx,inst);
+    *outNeededMask = neededMask & instWriteMaskOut[0];
   }
-  return param_1;
+  return outNeededMask;
 }
 
 /* FUN_00142974 @ 0x142974 (1532 bytes) */
