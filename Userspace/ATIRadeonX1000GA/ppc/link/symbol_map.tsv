@@ -12,21 +12,21 @@ FLOAT_0000d000	0xd000	__TEXT,__literal4	float	4	extern float FLOAT_0000d000 asm(
 FLOAT_0000d004	0xd004	__TEXT,__literal4	float	4	extern float FLOAT_0000d004 asm("FLOAT_0000d004");	0x45800000	data.s
 FLOAT_0000d008	0xd008	__TEXT,__literal4	float	4	extern float FLOAT_0000d008 asm("FLOAT_0000d008");	0x00000000	data.s
 FLOAT_0000d00c	0xd00c	__TEXT,__literal4	float	4	extern float FLOAT_0000d00c asm("FLOAT_0000d00c");	0x41000000	data.s
-DAT_0000e018	0xe018	__DATA,__data	-	-	extern unsigned char DAT_0000e018 asm("DAT_0000e018");	0x18000000	data.s
+surfaceFormatInfoTable_0000e018	0xe018	__DATA,__data	-	-	extern unsigned char surfaceFormatInfoTable_0000e018 asm("surfaceFormatInfoTable_0000e018");	0x18000000	data.s
 _radeonGAInterface	0xe544	__DATA,__data	-	-		0x00000000	data.s
 dyld_lazy_symbol_binding_entry_point	0xe600	__DATA,__dyld	undefined4	4		0x8fe01000	toolchain (crt/dyld data)
 dyld_func_lookup_pointer	0xe604	__DATA,__dyld	undefined4	4		0x8fe01008	toolchain (crt/dyld data)
-PTR_dyld_stub_binding_helper_0000e608	0xe608	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e608)() asm("PTR_dyld_stub_binding_helper_0000e608");	pointer -> _dlopen	data.s
-PTR_dyld_stub_binding_helper_0000e60c	0xe60c	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e60c)() asm("PTR_dyld_stub_binding_helper_0000e60c");	pointer -> _malloc	data.s
-PTR_dyld_stub_binding_helper_0000e610	0xe610	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e610)() asm("PTR_dyld_stub_binding_helper_0000e610");	pointer -> __keymgr_get_and_lock_processwide_ptr	data.s
-PTR_dyld_stub_binding_helper_0000e614	0xe614	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e614)() asm("PTR_dyld_stub_binding_helper_0000e614");	pointer -> _free	data.s
-PTR_dyld_stub_binding_helper_0000e618	0xe618	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e618)() asm("PTR_dyld_stub_binding_helper_0000e618");	pointer -> __keymgr_set_and_unlock_processwide_ptr	data.s
-PTR_dyld_stub_binding_helper_0000e61c	0xe61c	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e61c)() asm("PTR_dyld_stub_binding_helper_0000e61c");	pointer -> _dlsym	data.s
-PTR_dyld_stub_binding_helper_0000e620	0xe620	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e620)() asm("PTR_dyld_stub_binding_helper_0000e620");	pointer -> _calloc	data.s
-PTR_0000e68c	0xe68c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e68c asm("PTR_0000e68c");	pointer -> ___keymgr_global	data.s
-PTR_0000e690	0xe690	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e690 asm("PTR_0000e690");	pointer -> 0x0	data.s
-PTR_0000e694	0xe694	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e694 asm("PTR_0000e694");	pointer -> _mach_task_self_	data.s
-PTR_0000e698	0xe698	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e698 asm("PTR_0000e698");	pointer -> _kCFBooleanTrue	data.s
+lazyPtrTo_dlopen_0000e608	0xe608	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_dlopen_0000e608)() asm("lazyPtrTo_dlopen_0000e608");	pointer -> _dlopen	data.s
+lazyPtrTo_malloc_0000e60c	0xe60c	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_malloc_0000e60c)() asm("lazyPtrTo_malloc_0000e60c");	pointer -> _malloc	data.s
+lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000e610	0xe610	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000e610)() asm("lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000e610");	pointer -> __keymgr_get_and_lock_processwide_ptr	data.s
+lazyPtrTo_free_0000e614	0xe614	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_free_0000e614)() asm("lazyPtrTo_free_0000e614");	pointer -> _free	data.s
+lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000e618	0xe618	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000e618)() asm("lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000e618");	pointer -> __keymgr_set_and_unlock_processwide_ptr	data.s
+lazyPtrTo_dlsym_0000e61c	0xe61c	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_dlsym_0000e61c)() asm("lazyPtrTo_dlsym_0000e61c");	pointer -> _dlsym	data.s
+lazyPtrTo_calloc_0000e620	0xe620	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_calloc_0000e620)() asm("lazyPtrTo_calloc_0000e620");	pointer -> _calloc	data.s
+ptrTo_keymgrGlobal_0000e68c	0xe68c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_keymgrGlobal_0000e68c asm("ptrTo_keymgrGlobal_0000e68c");	pointer -> ___keymgr_global	data.s
+atexitDsoHandle_0000e690	0xe690	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *atexitDsoHandle_0000e690 asm("atexitDsoHandle_0000e690");	pointer -> 0x0	data.s
+ptrTo_machTaskSelf_0000e694	0xe694	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_machTaskSelf_0000e694 asm("ptrTo_machTaskSelf_0000e694");	pointer -> _mach_task_self_	data.s
+ptrTo_kCFBooleanTrue_0000e698	0xe698	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_kCFBooleanTrue_0000e698 asm("ptrTo_kCFBooleanTrue_0000e698");	pointer -> _kCFBooleanTrue	data.s
 _textureBufferSize	0xe69c	__DATA,__bss	undefined4	4			data.s
 _textureBufferHeight	0xe6a0	__DATA,__bss	undefined4	4			data.s
 _textureBufferWidth	0xe6a4	__DATA,__bss	undefined4	4			data.s
@@ -36,15 +36,15 @@ _offscreenBufferHeight	0xe6b0	__DATA,__bss	undefined4	4			data.s
 _offscreenBufferWidth	0xe6b4	__DATA,__bss	undefined4	4			data.s
 _offscreenBufferBytes	0xe6b8	__DATA,__bss	undefined4	4			data.s
 _offscreenBuffer	0xe6bc	__DATA,__bss	undefined4	4			data.s
-DAT_0000e6c0	0xe6c0	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6c0 asm("DAT_0000e6c0");		data.s
-DAT_0000e6cc	0xe6cc	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6cc asm("DAT_0000e6cc");		data.s
-DAT_0000e6d0	0xe6d0	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6d0 asm("DAT_0000e6d0");		data.s
-DAT_0000e6d4	0xe6d4	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6d4 asm("DAT_0000e6d4");		data.s
-DAT_0000e6e4	0xe6e4	__DATA,__bss	undefined4	4	extern unsigned char *DAT_0000e6e4 asm("DAT_0000e6e4");		data.s
+offscreenBufferPixelFormat_0000e6c0	0xe6c0	__DATA,__bss	undefined4	4	extern unsigned int offscreenBufferPixelFormat_0000e6c0 asm("offscreenBufferPixelFormat_0000e6c0");		data.s
+offscreenBufferAlignedWidth_0000e6cc	0xe6cc	__DATA,__bss	undefined4	4	extern unsigned int offscreenBufferAlignedWidth_0000e6cc asm("offscreenBufferAlignedWidth_0000e6cc");		data.s
+offscreenBufferAlignedHeight_0000e6d0	0xe6d0	__DATA,__bss	undefined4	4	extern unsigned int offscreenBufferAlignedHeight_0000e6d0 asm("offscreenBufferAlignedHeight_0000e6d0");		data.s
+offscreenBufferRowBytes_0000e6d4	0xe6d4	__DATA,__bss	undefined4	4	extern unsigned int offscreenBufferRowBytes_0000e6d4 asm("offscreenBufferRowBytes_0000e6d4");		data.s
+offscreenBufferSurfaceInfo_0000e6e4	0xe6e4	__DATA,__bss	undefined4	4	extern unsigned char *offscreenBufferSurfaceInfo_0000e6e4 asm("offscreenBufferSurfaceInfo_0000e6e4");		data.s
 _textureBuffer	0xe720	__DATA,__bss	undefined4	4			data.s
-DAT_0000e724	0xe724	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e724 asm("DAT_0000e724");		data.s
-DAT_0000e730	0xe730	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e730 asm("DAT_0000e730");		data.s
-DAT_0000e734	0xe734	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e734 asm("DAT_0000e734");		data.s
-DAT_0000e738	0xe738	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e738 asm("DAT_0000e738");		data.s
-DAT_0000e748	0xe748	__DATA,__bss	undefined4	4	extern unsigned char *DAT_0000e748 asm("DAT_0000e748");		data.s
+textureBufferPixelFormat_0000e724	0xe724	__DATA,__bss	undefined4	4	extern unsigned int textureBufferPixelFormat_0000e724 asm("textureBufferPixelFormat_0000e724");		data.s
+textureBufferAlignedWidth_0000e730	0xe730	__DATA,__bss	undefined4	4	extern unsigned int textureBufferAlignedWidth_0000e730 asm("textureBufferAlignedWidth_0000e730");		data.s
+textureBufferAlignedHeight_0000e734	0xe734	__DATA,__bss	undefined4	4	extern unsigned int textureBufferAlignedHeight_0000e734 asm("textureBufferAlignedHeight_0000e734");		data.s
+textureBufferRowBytes_0000e738	0xe738	__DATA,__bss	undefined4	4	extern unsigned int textureBufferRowBytes_0000e738 asm("textureBufferRowBytes_0000e738");		data.s
+textureBufferSurfaceInfo_0000e748	0xe748	__DATA,__bss	undefined4	4	extern unsigned char *textureBufferSurfaceInfo_0000e748 asm("textureBufferSurfaceInfo_0000e748");		data.s
 _funcptr	0xe784	__DATA,__bss	undefined4	4			data.s

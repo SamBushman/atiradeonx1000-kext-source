@@ -256,7 +256,7 @@ int _radeon3DCopySetup(accel, cmdBuf, dstDesc, dstFormat, useMask, cmdIndex, wid
     }
   }
   else {
-    hwFormat = *(uint *)(&DAT_0000e018 + (*(uint *)(dstDesc + 0x2c) & 0xff) * 0x1c) >> 0x13 & 0x1f;
+    hwFormat = *(uint *)(&surfaceFormatInfoTable_0000e018 + (*(uint *)(dstDesc + 0x2c) & 0xff) * 0x1c) >> 0x13 & 0x1f;
     formatBias = hwFormat - 0x13;
   }
   *(undefined4 *)(cmdBuf + cmdIndex * 4) = 0x10ea;
@@ -580,7 +580,7 @@ int __Flush(accel, flushFlags)
       *(undefined4 *)(accel + 0x94) = 0;
     }
     cmdWrite[padWordsOrMapSize] = 0x1000000;
-    taskPtr = PTR_0000e694;
+    taskPtr = ptrTo_machTaskSelf_0000e694;
     lastHeader = *(uint **)(accel + 0x7c);
     *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + padWordsOrMapSize | *lastHeader;
     mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,mapAddr,
@@ -673,15 +673,15 @@ int _createTextureBuffer(accel, width, height, is16bpp)
     goto LAB_00004194;
   }
   if (is16bpp == 0) {
-    if (DAT_0000e724 == 0x42475241) goto LAB_000040bc;
+    if (textureBufferPixelFormat_0000e724 == 0x42475241) goto LAB_000040bc;
   }
-  else if (DAT_0000e724 == 0x10) {
+  else if (textureBufferPixelFormat_0000e724 == 0x10) {
 LAB_000040bc:
     alignedWidth = width + 0x20U & 0xffffffe0;
     if ((alignedWidth == _textureBufferWidth) &&
        (alignedHeight = height + 0x20U & 0xffffffe0, alignedHeight == _textureBufferHeight)) {
       status = _io_connect_method_scalarI_structureI
-                        (*(undefined4 *)(accel + 0xc),0xc,*DAT_0000e748,1,0,0);
+                        (*(undefined4 *)(accel + 0xc),0xc,*textureBufferSurfaceInfo_0000e748,1,0,0);
       if (status == 0) {
         return 1;
       }
@@ -696,19 +696,19 @@ LAB_000040bc:
   _textureBufferBytes = 0;
 LAB_00004194:
   if (is16bpp == 0) {
-    DAT_0000e738 = alignedWidth << 2;
-    DAT_0000e724 = 0x42475241;
+    textureBufferRowBytes_0000e738 = alignedWidth << 2;
+    textureBufferPixelFormat_0000e724 = 0x42475241;
     _textureBufferSize = alignedWidth * alignedHeight * 4;
   }
   else {
-    DAT_0000e738 = alignedWidth << 1;
+    textureBufferRowBytes_0000e738 = alignedWidth << 1;
     _textureBufferSize = alignedWidth * alignedHeight * 2;
-    DAT_0000e724 = 0x10;
+    textureBufferPixelFormat_0000e724 = 0x10;
   }
   _textureBufferHeight = alignedHeight;
   _textureBufferWidth = alignedWidth;
-  DAT_0000e730 = alignedWidth;
-  DAT_0000e734 = alignedHeight;
+  textureBufferAlignedWidth_0000e730 = alignedWidth;
+  textureBufferAlignedHeight_0000e734 = alignedHeight;
   _textureBufferBytes = _malloc(_textureBufferSize);
   result = 0;
   if (_textureBufferBytes != 0) {
@@ -738,14 +738,14 @@ int _createOffscreenBuffer(accel, rect, is16bpp)
   
   if (_offscreenBufferBytes == 0) goto LAB_000043f0;
   if (is16bpp == 0) {
-    if (DAT_0000e6c0 == 0x42475241) goto LAB_0000430c;
+    if (offscreenBufferPixelFormat_0000e6c0 == 0x42475241) goto LAB_0000430c;
   }
-  else if (DAT_0000e6c0 == 0x10) {
+  else if (offscreenBufferPixelFormat_0000e6c0 == 0x10) {
 LAB_0000430c:
     if ((((int)*(short *)(rect + 4) + 0x20U & 0xffffffe0) == _offscreenBufferWidth) &&
        (((int)*(short *)(rect + 6) + 0x20U & 0xffffffe0) == _offscreenBufferHeight)) {
       status = _io_connect_method_scalarI_structureI
-                        (*(undefined4 *)(accel + 0xc),0xc,*DAT_0000e6e4,1,0,0);
+                        (*(undefined4 *)(accel + 0xc),0xc,*offscreenBufferSurfaceInfo_0000e6e4,1,0,0);
       if (status == 0) {
         return 1;
       }
@@ -760,17 +760,17 @@ LAB_000043f0:
   _offscreenBufferWidth = (int)*(short *)(rect + 4) + 0x20U & 0xffffffe0;
   _offscreenBufferHeight = (int)*(short *)(rect + 6) + 0x20U & 0xffffffe0;
   if (is16bpp == 0) {
-    DAT_0000e6d4 = _offscreenBufferWidth << 2;
-    DAT_0000e6c0 = 0x42475241;
+    offscreenBufferRowBytes_0000e6d4 = _offscreenBufferWidth << 2;
+    offscreenBufferPixelFormat_0000e6c0 = 0x42475241;
     _offscreenBufferSize = _offscreenBufferWidth * _offscreenBufferHeight * 4;
   }
   else {
-    DAT_0000e6d4 = _offscreenBufferWidth << 1;
+    offscreenBufferRowBytes_0000e6d4 = _offscreenBufferWidth << 1;
     _offscreenBufferSize = _offscreenBufferWidth * _offscreenBufferHeight * 2;
-    DAT_0000e6c0 = 0x10;
+    offscreenBufferPixelFormat_0000e6c0 = 0x10;
   }
-  DAT_0000e6cc = _offscreenBufferWidth;
-  DAT_0000e6d0 = _offscreenBufferHeight;
+  offscreenBufferAlignedWidth_0000e6cc = _offscreenBufferWidth;
+  offscreenBufferAlignedHeight_0000e6d0 = _offscreenBufferHeight;
   _offscreenBufferBytes = _malloc(_offscreenBufferSize);
   result = 0;
   if (_offscreenBufferBytes != 0) {
@@ -976,14 +976,14 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
     createResult = ((int (*)())_createOffscreenBuffer)(accel,accel + 0x4c,0);
     if (createResult != 0) {
       screenFormat = *(uint *)(accel + 0x70);
-      offscreenDesc = DAT_0000e6e4 + 3;
+      offscreenDesc = offscreenBufferSurfaceInfo_0000e6e4 + 3;
       if (screenFormat == 3) {
         screenFormat = 0xb;
       }
       else if (screenFormat == 6) {
         screenFormat = 0xc;
       }
-      offscreenFormat = DAT_0000e6e4[0xc];
+      offscreenFormat = offscreenBufferSurfaceInfo_0000e6e4[0xc];
       if (offscreenFormat == 3) {
         offscreenFormat = 0xb;
       }
@@ -1065,7 +1065,7 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
               lastHeader = *(uint **)(accel + 0x7c);
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord3 | *lastHeader;
               mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                          *(undefined4 *)PTR_0000e694,scratchWord0Ptr,scratchWord3Ptr,1);
+                                          *(undefined4 *)ptrTo_machTaskSelf_0000e694,scratchWord0Ptr,scratchWord3Ptr,1);
               if (mapResult == 0) {
                 needsSetup = true;
                 *(undefined4 *)(scratchWord0 + 0x1c) = 0;
@@ -1117,7 +1117,7 @@ LAB_00004b14:
             cmdWrite[scratchWord0] = 0x1000000;
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
-            mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)PTR_0000e694
+            mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)ptrTo_machTaskSelf_0000e694
                                         ,scratchWord3Ptr,&scratchWord0,1);
             if (mapResult != 0) goto LAB_00004b14;
             needsSetup = true;
@@ -1151,8 +1151,8 @@ LAB_00004b14:
           *lastHeader = (int)pass1Word2 - (int)lastHeader >> 2 | *lastHeader;
           *(dword **)(accel + 0x7c) = pass1Word2;
           *pass1Word2 = 0x10000000;
-          *pass1Word3 = *(dword *)*DAT_0000e6e4;
-          *pass1Word4 = DAT_0000e6e4[7];
+          *pass1Word3 = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
+          *pass1Word4 = offscreenBufferSurfaceInfo_0000e6e4[7];
           *pass1Word5 = 6;
           if (needsSetup) {
             pass1SetupWords = ((int (*)())_radeon3DCopySetup)(accel,streamCursor,accel + 0x4c,screenFormat,0,0,0,0);
@@ -1269,7 +1269,7 @@ LAB_00004b14:
               *(undefined4 *)(accel + 0x94) = 0;
             }
             streamCursor[scratchWord2] = 0x1000000;
-            taskPtr = PTR_0000e694;
+            taskPtr = ptrTo_machTaskSelf_0000e694;
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)streamCursor - (int)lastHeader >> 2) + scratchWord2 | *lastHeader;
             mapResultPass2 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,
@@ -1321,7 +1321,7 @@ LAB_00004b14:
           *lastHeader = (int)pass2Word4 - (int)lastHeader >> 2 | *lastHeader;
           *(dword **)(accel + 0x7c) = pass2Word4;
           *pass2Word4 = 0x4000000;
-          *pass2Word5 = *(dword *)*DAT_0000e6e4;
+          *pass2Word5 = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
           if (needsSetup) {
             pass2SetupWords = ((int (*)())_radeon3DCopySetup)(accel,cmdWrite,offscreenDesc,offscreenFormat,0,0,0,0);
             pass2QuadRectTLIdx = pass2SetupWords + 1;
@@ -1869,7 +1869,7 @@ LAB_000056ac:
         srcDesc = srcQueryBlock + 2;
       }
     }
-    taskPtr = PTR_0000e694;
+    taskPtr = ptrTo_machTaskSelf_0000e694;
     regionFirstRect = regionRect + 3;
     if (regionCount == 0) {
       regionFirstRect = regionRect + 1;
@@ -1950,8 +1950,8 @@ LAB_000056ac:
     if (((isScreenCopy) || (blitKind == 0)) && (*(int *)(accel + 0x8c) == 0)) {
       offscreenResult = ((int (*)())_createOffscreenBuffer)(accel,srcDesc,0);
       if (offscreenResult == 0) goto LAB_000081e0;
-      offscreenDesc = DAT_0000e6e4 + 3;
-      offscreenFormat = DAT_0000e6e4[0xc];
+      offscreenDesc = offscreenBufferSurfaceInfo_0000e6e4 + 3;
+      offscreenFormat = offscreenBufferSurfaceInfo_0000e6e4[0xc];
       if (offscreenFormat == 3) {
         offscreenFormat = 0xb;
       }
@@ -2033,7 +2033,7 @@ LAB_000056ac:
               lastHeader = *(uint **)(accel + 0x7c);
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
               mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                           *(undefined4 *)PTR_0000e694,scratchWord1Ptr,scratchWord0Ptr,1);
+                                           *(undefined4 *)ptrTo_machTaskSelf_0000e694,scratchWord1Ptr,scratchWord0Ptr,1);
               if (mapResult == 0) {
                 *(undefined4 *)(scratchWord1 + 0x1c) = 0;
                 cmdWrite = (dword *)(scratchWord1 + 0x20);
@@ -2071,7 +2071,7 @@ LAB_00005e7c:
               lastHeader = *(uint **)(accel + 0x7c);
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
               mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                           *(undefined4 *)PTR_0000e694,scratchWord0Ptr,scratchWord1Ptr,1);
+                                           *(undefined4 *)ptrTo_machTaskSelf_0000e694,scratchWord0Ptr,scratchWord1Ptr,1);
               if (mapResult != 0) goto LAB_00005e40;
               *(undefined4 *)(scratchWord0 + 0x1c) = 0;
               *(uint *)(accel + 0x18) = scratchWord0;
@@ -2101,8 +2101,8 @@ LAB_00005e7c:
           *lastHeader = (int)(cmdWord1 + 1) - (int)lastHeader >> 2 | *lastHeader;
           *(dword **)(accel + 0x7c) = cmdWord1 + 1;
           cmdWord1[1] = 0x10000000;
-          cmdWord1[2] = *(dword *)*DAT_0000e6e4;
-          offscreenField7 = DAT_0000e6e4[7];
+          cmdWord1[2] = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
+          offscreenField7 = offscreenBufferSurfaceInfo_0000e6e4[7];
           cmdWord1[4] = 6;
           cmdWord1[3] = offscreenField7;
           if (needsSetup) {
@@ -2222,7 +2222,7 @@ LAB_00005e7c:
               cmdWrite[1] = flushWaitWord3;
               *(undefined4 *)(accel + 0x94) = 0;
             }
-            taskPtr = PTR_0000e694;
+            taskPtr = ptrTo_machTaskSelf_0000e694;
             cmdWrite[scratchWord3] = 0x1000000;
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord3 | *lastHeader;
@@ -2268,7 +2268,7 @@ LAB_00005e7c:
           *lastHeader = (int)(cmdWord1 + 3) - (int)lastHeader >> 2 | *lastHeader;
           *(dword **)(accel + 0x7c) = cmdWord1 + 3;
           cmdWord1[3] = 0x4000000;
-          cmdWord1[4] = *(dword *)*DAT_0000e6e4;
+          cmdWord1[4] = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
           if (needsSetup) {
             setupWords2 = ((int (*)())_radeon3DCopySetup)(accel,cmdWrite,offscreenDesc,offscreenFormat,0,0,0,0);
             dstQuadDrawHeaderIdx = setupWords2 + 4;
@@ -2446,7 +2446,7 @@ LAB_00005e7c:
                 *(undefined4 *)(accel + 0x94) = 0;
               }
               cmdWrite[scratchWord0] = 0x1000000;
-              taskPtr = PTR_0000e694;
+              taskPtr = ptrTo_machTaskSelf_0000e694;
               lastHeader = *(uint **)(accel + 0x7c);
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
               mapResult2 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,
@@ -2534,7 +2534,7 @@ LAB_00006d28:
                 *(undefined4 *)(accel + 0x94) = 0;
               }
               cmdWrite[scratchWord1] = 0x1000000;
-              taskPtr = PTR_0000e694;
+              taskPtr = ptrTo_machTaskSelf_0000e694;
               lastHeader = *(uint **)(accel + 0x7c);
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
               mapResult2 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,
@@ -2635,7 +2635,7 @@ LAB_00006d28:
                 *(undefined4 *)(accel + 0x94) = 0;
               }
               cmdWrite[scratchWord2] = 0x1000000;
-              taskPtr = PTR_0000e694;
+              taskPtr = ptrTo_machTaskSelf_0000e694;
               lastHeader = *(uint **)(accel + 0x7c);
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord2 | *lastHeader;
               mapResult3 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,
@@ -2803,7 +2803,7 @@ LAB_00006d28:
                 lastHeader = *(uint **)(accel + 0x7c);
                 *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
                 mapResult4 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                             *(undefined4 *)PTR_0000e694,&scratchWord1,&scratchWord0,1);
+                                             *(undefined4 *)ptrTo_machTaskSelf_0000e694,&scratchWord1,&scratchWord0,1);
                 if (mapResult4 == 0) {
                   *(undefined4 *)(scratchWord1 + 0x1c) = 0;
                   *(uint *)(accel + 0x18) = scratchWord1;
@@ -2890,7 +2890,7 @@ LAB_0000789c:
                 lastHeader = *(uint **)(accel + 0x7c);
                 *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
                 mapResult4 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                             *(undefined4 *)PTR_0000e694,&scratchWord0,&scratchWord1,1);
+                                             *(undefined4 *)ptrTo_machTaskSelf_0000e694,&scratchWord0,&scratchWord1,1);
                 if (mapResult4 == 0) {
                   *(undefined4 *)(scratchWord0 + 0x1c) = 0;
                   *(uint *)(accel + 0x18) = scratchWord0;
@@ -3057,7 +3057,7 @@ LAB_0000789c:
                 lastHeader = *(uint **)(accel + 0x7c);
                 *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord3 | *lastHeader;
                 mapResult4 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                             *(undefined4 *)PTR_0000e694,&scratchWord2,&scratchWord3,1);
+                                             *(undefined4 *)ptrTo_machTaskSelf_0000e694,&scratchWord2,&scratchWord3,1);
                 if (mapResult4 == 0) {
                   *(undefined4 *)(scratchWord2 + 0x1c) = 0;
                   *(uint *)(accel + 0x18) = scratchWord2;
@@ -3144,7 +3144,7 @@ LAB_00007ff0:
                 lastHeader = *(uint **)(accel + 0x7c);
                 *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord2 | *lastHeader;
                 mapResult4 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                             *(undefined4 *)PTR_0000e694,&scratchWord3,&scratchWord2,1);
+                                             *(undefined4 *)ptrTo_machTaskSelf_0000e694,&scratchWord3,&scratchWord2,1);
                 if (mapResult4 == 0) {
                   *(undefined4 *)(scratchWord3 + 0x1c) = 0;
                   *(uint *)(accel + 0x18) = scratchWord3;
@@ -3523,7 +3523,7 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
         (offscreenResult = ((int (*)())_createTextureBuffer)(accel,0x40,0x40,(uint)(*(int *)(accel + 0x70) == 3)),
         offscreenResult != 0)))) {
       picOffset = 0x8284;
-      textureDesc = DAT_0000e748 + 0xc;
+      textureDesc = textureBufferSurfaceInfo_0000e748 + 0xc;
       if (fillKind != 0x6000) {
         _fillTextureWithPattern(patternBuf,fillKind,*fillReq,fillReq[1]);
       }
@@ -3600,7 +3600,7 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                     *(undefined4 *)(accel + 0x94) = 0;
                   }
                   cmdWrite[scratchWord1] = 0x1000000;
-                  taskPtr = PTR_0000e694;
+                  taskPtr = ptrTo_machTaskSelf_0000e694;
                   lastHeader = *(uint **)(accel + 0x7c);
                   *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
                   mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
@@ -3687,9 +3687,9 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                   *lastHeader = (int)tileWord2 - (int)lastHeader >> 2 | *lastHeader;
                   *(dword **)(accel + 0x7c) = tileWord2;
                   *tileWord2 = 0x10000000;
-                  *tileWord3 = *(dword *)*DAT_0000e6e4;
-                  *tileWord4 = DAT_0000e6e4[7];
-                  if (DAT_0000e6c0 == 0x10) {
+                  *tileWord3 = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
+                  *tileWord4 = offscreenBufferSurfaceInfo_0000e6e4[7];
+                  if (offscreenBufferPixelFormat_0000e6c0 == 0x10) {
                     *tileWord5 = 3;
                   }
                   else {
@@ -4208,7 +4208,7 @@ LAB_00008bec:
                     *(undefined4 *)(accel + 0x94) = 0;
                   }
                   cmdWrite[scratchWord0] = 0x1000000;
-                  taskPtr = PTR_0000e694;
+                  taskPtr = ptrTo_machTaskSelf_0000e694;
                   lastHeader = *(uint **)(accel + 0x7c);
                   *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
                   mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
@@ -4265,7 +4265,7 @@ LAB_0000a09c:
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
             mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                         *(undefined4 *)PTR_0000e694,&scratchWord0,&scratchWord1,1);
+                                         *(undefined4 *)ptrTo_machTaskSelf_0000e694,&scratchWord0,&scratchWord1,1);
             if (mapResult == 0) {
               *(undefined4 *)(scratchWord0 + 0x1c) = 0;
               *(uint *)(accel + 0x18) = scratchWord0;
@@ -4311,16 +4311,16 @@ LAB_0000a09c:
           *lastHeader = (int)finalWord4 - (int)lastHeader >> 2 | *lastHeader;
           *(dword **)(accel + 0x7c) = finalWord4;
           *finalWord4 = 0x4000000;
-          *finalWord5 = *(dword *)*DAT_0000e6e4;
-          patternDesc = DAT_0000e6e4;
-          pass2Format = DAT_0000e6e4[0xc];
+          *finalWord5 = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
+          patternDesc = offscreenBufferSurfaceInfo_0000e6e4;
+          pass2Format = offscreenBufferSurfaceInfo_0000e6e4[0xc];
           if (pass2Format == 3) {
             pass2Format = 0xb;
           }
           else if (pass2Format == 6) {
             pass2Format = 0xc;
           }
-          pass2SetupWords = ((int (*)())_radeon3DCopySetup)(accel,finalCursor,DAT_0000e6e4 + 3,pass2Format,0,0,0,0);
+          pass2SetupWords = ((int (*)())_radeon3DCopySetup)(accel,finalCursor,offscreenBufferSurfaceInfo_0000e6e4 + 3,pass2Format,0,0,0,0);
           dstLeftSpill = dstLeft;
           dstTopSpill = dstTop;
           dstRightSpill = dstRight;
@@ -4407,7 +4407,7 @@ LAB_0000a09c:
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)fastCmdWrite - (int)lastHeader >> 2) + scratchWord2 | *lastHeader;
             mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                         *(undefined4 *)PTR_0000e694,&quadSlot3,&scratchWord2,1);
+                                         *(undefined4 *)ptrTo_machTaskSelf_0000e694,&quadSlot3,&scratchWord2,1);
             cmdWordsLeft = cmdCapacityFast;
             if (mapResult == 0) {
               *(undefined4 *)(quadSlot3 + 0x1c) = 0;
@@ -4705,7 +4705,7 @@ int _radeonHighlight(accel, unusedArg2, unusedArg3, unusedArg4, fillReq, highlig
           cmdWrite[scratchWord1] = 0x1000000;
           lastHeader = *(uint **)(accel + 0x7c);
           *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
-          mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)PTR_0000e694,
+          mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)ptrTo_machTaskSelf_0000e694,
                                        scratchWord0Ptr,scratchWord1Ptr,1);
           cmdWordsLeft = cmdCapacity;
           if (mapResult == 0) {
@@ -4749,9 +4749,9 @@ int _radeonHighlight(accel, unusedArg2, unusedArg3, unusedArg4, fillReq, highlig
         *lastHeader = (int)pass1Word2 - (int)lastHeader >> 2 | *lastHeader;
         *(dword **)(accel + 0x7c) = pass1Word2;
         *pass1Word2 = 0x10000000;
-        *pass1Word3 = *(dword *)*DAT_0000e6e4;
-        *pass1Word4 = DAT_0000e6e4[7];
-        if (DAT_0000e6c0 == 0x10) {
+        *pass1Word3 = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
+        *pass1Word4 = offscreenBufferSurfaceInfo_0000e6e4[7];
+        if (offscreenBufferPixelFormat_0000e6c0 == 0x10) {
           *pass1Word5 = 3;
         }
         else {
@@ -5076,7 +5076,7 @@ int _radeonHighlight(accel, unusedArg2, unusedArg3, unusedArg4, fillReq, highlig
           pass2Start[scratchWord0] = 0x1000000;
           lastHeader = *(uint **)(accel + 0x7c);
           *lastHeader = ((int)pass2Start - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
-          mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)PTR_0000e694,
+          mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)ptrTo_machTaskSelf_0000e694,
                                        scratchWord1Ptr,scratchWord0Ptr,1);
           cmdWordsLeft = cmdCapacity;
           if (mapResult == 0) {
@@ -5123,16 +5123,16 @@ int _radeonHighlight(accel, unusedArg2, unusedArg3, unusedArg4, fillReq, highlig
         *lastHeader = (int)pass2Word4 - (int)lastHeader >> 2 | *lastHeader;
         *(dword **)(accel + 0x7c) = pass2Word4;
         *pass2Word4 = 0x4000000;
-        *streamCursor = *(dword *)*DAT_0000e6e4;
-        patternDesc = DAT_0000e6e4;
-        pass2Format = DAT_0000e6e4[0xc];
+        *streamCursor = *(dword *)*offscreenBufferSurfaceInfo_0000e6e4;
+        patternDesc = offscreenBufferSurfaceInfo_0000e6e4;
+        pass2Format = offscreenBufferSurfaceInfo_0000e6e4[0xc];
         if (pass2Format == 3) {
           pass2Format = 0xb;
         }
         else if (pass2Format == 6) {
           pass2Format = 0xc;
         }
-        pass2SetupWords = ((int (*)())_radeon3DCopySetup)(accel,cmdWrite,DAT_0000e6e4 + 3,pass2Format,0,0,0,0);
+        pass2SetupWords = ((int (*)())_radeon3DCopySetup)(accel,cmdWrite,offscreenBufferSurfaceInfo_0000e6e4 + 3,pass2Format,0,0,0,0);
         i2dHi22 = 0x43300000;
         i2dHi23 = 0x43300000;
         i2dHi24 = 0x43300000;
@@ -5323,7 +5323,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
           *(undefined4 *)(accel + 0x94) = 0;
         }
         cmdPtr[scratchWord1] = 0x1000000;
-        taskPtr = PTR_0000e694;
+        taskPtr = ptrTo_machTaskSelf_0000e694;
         lastHeader = *(uint **)(accel + 0x7c);
         *lastHeader = ((int)cmdPtr - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
         scratchWord0 = cmdBufferBase;
@@ -5459,7 +5459,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                     *(undefined4 *)(accel + 0x94) = 0;
                   }
                   cmdWrite[scratchWord1] = 0x1000000;
-                  taskPtr = PTR_0000e694;
+                  taskPtr = ptrTo_machTaskSelf_0000e694;
                   lastHeader = *(uint **)(accel + 0x7c);
                   *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
                   mapResult2 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
@@ -5685,7 +5685,7 @@ LAB_0000c1c8:
                     *(undefined4 *)(accel + 0x94) = 0;
                   }
                   cmdWrite[scratchWord0] = 0x1000000;
-                  taskPtr = PTR_0000e694;
+                  taskPtr = ptrTo_machTaskSelf_0000e694;
                   lastHeader = *(uint **)(accel + 0x7c);
                   *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
                   mapResult2 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,

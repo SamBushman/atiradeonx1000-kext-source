@@ -232,7 +232,7 @@ int _dlsym_island_c44()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e61c)();
+  (*(code *)lazyPtrTo_dlsym_0000e61c)();
   return;
 }
 
@@ -285,7 +285,7 @@ int _dlopen_island_c84()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e608)();
+  (*(code *)lazyPtrTo_dlopen_0000e608)();
   return;
 }
 
@@ -294,7 +294,7 @@ int _calloc_island_ca4()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e620)();
+  (*(code *)lazyPtrTo_calloc_0000e620)();
   return;
 }
 
@@ -303,7 +303,7 @@ int __keymgr_get_and_lock_processwide_ptr_island_cc4()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e610)();
+  (*(code *)lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000e610)();
   return;
 }
 
@@ -337,7 +337,7 @@ int _add_routine(globals, routine)
     *node = *(undefined4 *)(globalsHome + 4);
     *(undefined4 **)(globalsHome + 4) = node;
     unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
-    if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
+    if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
       status = 0;
     }
     else {
@@ -360,7 +360,7 @@ int _malloc_island_e10()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e60c)();
+  (*(code *)lazyPtrTo_malloc_0000e60c)();
   return;
 }
 
@@ -422,7 +422,7 @@ int _free_island_f74()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e614)();
+  (*(code *)lazyPtrTo_free_0000e614)();
   return;
 }
 
@@ -431,7 +431,7 @@ int __keymgr_set_and_unlock_processwide_ptr_island_f94()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e618)();
+  (*(code *)lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000e618)();
   return;
 }
 
@@ -529,7 +529,7 @@ int __keymgr_set_and_unlock_processwide_ptr_island_110c()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e618)();
+  (*(code *)lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000e618)();
   return;
 }
 
@@ -538,7 +538,7 @@ int __keymgr_get_and_lock_processwide_ptr_island_112c()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e610)();
+  (*(code *)lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000e610)();
   return;
 }
 
@@ -614,7 +614,7 @@ int __keymgr_get_and_lock_processwide_ptr_island_1248()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e610)();
+  (*(code *)lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000e610)();
   return;
 }
 
@@ -646,7 +646,7 @@ int _atexit_common(entry, dsoHandle)
     if (*(byte *)(globals + 3) < 0x10) {
       registerFn = *(code **)(globals + 8);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
-      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
         entryCopy = (undefined4 *)_malloc(0xc);
         if (entryCopy == (undefined4 *)0x0) {
           result = 0xffffffff;
@@ -667,7 +667,7 @@ int _atexit_common(entry, dsoHandle)
     else if (entryHome[1] == 0) {
       registerFn = *(code **)(globals + 0x10);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
-      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome);
       }
       else {
@@ -677,7 +677,7 @@ int _atexit_common(entry, dsoHandle)
     else {
       registerFn = *(code **)(globals + 8);
       unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
-      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome,entryHome[2],dsoHandleHome,fwdReg6,fwdReg7,fwdReg8,
                              *entryHome);
       }
@@ -705,7 +705,7 @@ int __keymgr_set_and_unlock_processwide_ptr_island_1528()
 {
                     
                     
-  (*(code *)PTR_dyld_stub_binding_helper_0000e618)();
+  (*(code *)lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000e618)();
   return;
 }
 
@@ -739,7 +739,7 @@ int _add_routine_island_1548(globals, routine)
     *node = *(undefined4 *)(globalsHome + 4);
     *(undefined4 **)(globalsHome + 4) = node;
     unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
-    if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
+    if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
       status = 0;
     }
     else {
@@ -849,7 +849,7 @@ int _atexit(function)
   entryKind = 0;
   functionHome = function;
   entryFunction = function;
-  result = ((int (*)())_atexit_common)(&entryFunction,PTR_0000e690);
+  result = ((int (*)())_atexit_common)(&entryFunction,atexitDsoHandle_0000e690);
   return result;
 }
 
@@ -1243,7 +1243,7 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
     patternWord0 = patternWord0 >> 0x18 | patternWord0 >> 8 & 0xff00 | (patternWord0 & 0xff00) << 8 | patternWord0 << 0x18;
     patternWord1 = patternWord1 >> 0x18 | patternWord1 >> 8 & 0xff00 | (patternWord1 & 0xff00) << 8 | patternWord1 << 0x18;
   }
-  if (DAT_0000e724 == 0x10) {
+  if (textureBufferPixelFormat_0000e724 == 0x10) {
     column = 0;
     bitsLeft = 0x20;
     bitCursor = 0x80000000;
@@ -1378,7 +1378,7 @@ int __GetCapabilities(accel, capabilityTag, outCaps)
       return 0xe00002c7;
     }
   }
-  *outCaps = *(undefined4 *)PTR_0000e698;
+  *outCaps = *(undefined4 *)ptrTo_kCFBooleanTrue_0000e698;
   return 0;
 }
 
@@ -1544,7 +1544,7 @@ int __Reset(accel)
     result = 0xe00002d8;
   }
   else {
-    status = _IOConnectMapMemory(*(int *)(accel + 0xc),1,*(undefined4 *)PTR_0000e694,sharedAddr,
+    status = _IOConnectMapMemory(*(int *)(accel + 0xc),1,*(undefined4 *)ptrTo_machTaskSelf_0000e694,sharedAddr,
                                 &mapSize,1);
     if ((status == 0) && (sharedAddr[0] != 0)) {
       *(int *)(accel + 0x14) = sharedAddr[0];
@@ -1557,7 +1557,7 @@ int __Reset(accel)
       lastHeader = *(uint **)(accel + 0x7c);
       *lastHeader = *(int *)(accel + 0x80) - (int)lastHeader >> 2 | *lastHeader;
     }
-    status = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)PTR_0000e694,
+    status = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)ptrTo_machTaskSelf_0000e694,
                                 &cmdBufferAddr,&mapSize,1);
     if ((status == 0) && (cmdBufferAddr != 0)) {
       *(int *)(accel + 0x18) = cmdBufferAddr;
@@ -1610,7 +1610,7 @@ int __Start(accel, unusedArg2, displayID, unusedArg4, unusedArg5, unusedArg6, un
       }
     }
     else {
-      status = _IOServiceOpen(service,*(undefined4 *)PTR_0000e694,2,connectAndCount);
+      status = _IOServiceOpen(service,*(undefined4 *)ptrTo_machTaskSelf_0000e694,2,connectAndCount);
       if (status == 0) {
         *(int *)(accel + 0x10) = service;
         *(int *)(accel + 0xc) = connectAndCount[0];

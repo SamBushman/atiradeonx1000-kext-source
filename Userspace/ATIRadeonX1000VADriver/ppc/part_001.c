@@ -144,7 +144,7 @@ int ava_acquire_image(ctx, syncId)
   char reservationHeld;
   byte condReg0;
   
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   cmdWrite = *(int **)(ctx + 0x34);
   if (*(int **)(ctx + 0x38) <= cmdWrite + 8) {
     lastHeader = *(uint **)(ctx + 0x30);
@@ -229,7 +229,7 @@ switchD_00003e00_default:
   mapBaseOrCount = 6;
   do {
     *fillCursor = -0x80000000;
-    taskPortPtr = PTR_0000f1a0;
+    taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
     fillCursor = fillCursor + 1;
     mapBaseOrCount = mapBaseOrCount + -1;
   } while (mapBaseOrCount != 0);
@@ -633,7 +633,7 @@ LAB_000048e0:
   }
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
   **(undefined4 **)(ctx + 0x34) = 0x2000000;
   _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
@@ -723,7 +723,7 @@ int ava_display_refresh(ctx)
   int mapAddrPtr;
   uint surfaceIndex;
   
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   if (*(int *)(ctx + 0x54) != 0) {
     surfaceIndex = 0;
     mapAddrPtr = ctx + 0x40;
@@ -824,7 +824,7 @@ int ava_display_refresh(ctx)
       surfaceIndex = surfaceIndex + 1;
     } while (surfaceIndex < *(uint *)(ctx + 0x54));
   }
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -1008,7 +1008,7 @@ int ava_display_subpicture(ctx, subpicture, unused1, unused2, unused3)
   int rectRightOrCount;
   uint rectAndPalette [10];
   
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   subpicIndex = *subpicture;
   if (*(int *)(ctx + 0x558) != (int)(char)subpicIndex) {
     cmdWriteOrDst = *(undefined4 **)(ctx + 0x34);
@@ -1033,7 +1033,7 @@ int ava_display_subpicture(ctx, subpicture, unused1, unused2, unused3)
     *cmdWriteOrDst = 0xd000000;
     cmdWriteOrDst[1] = 2;
     cmdWriteOrDst[2] = 1;
-    taskPortPtr = PTR_0000f1a0;
+    taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
     lastHeaderOrPalette = *(uint **)(ctx + 0x30);
     *lastHeaderOrPalette = *(int *)(ctx + 0x34) - (int)lastHeaderOrPalette >> 2 | *lastHeaderOrPalette;
     *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -1083,9 +1083,9 @@ int ava_display_subpicture(ctx, subpicture, unused1, unused2, unused3)
     packedPalette = 0;
     wordsBase = rectAndPalette;
     mapBaseOrRectLeft = 0x10;
-    DAT_0000f1ac = (DAT_0000f1ac + 1U) -
-                   ((DAT_0000f1ac + 1U) / *(uint *)(ctx + 0x5c)) * *(uint *)(ctx + 0x5c);
-    cmdWriteOrDst = (undefined4 *)((*(int *)(ctx + 0x1b0) + 0xffU & 0xffffff00) + DAT_0000f1ac * 0x80)
+    subpictureSlotIndex_0000f1ac = (subpictureSlotIndex_0000f1ac + 1U) -
+                   ((subpictureSlotIndex_0000f1ac + 1U) / *(uint *)(ctx + 0x5c)) * *(uint *)(ctx + 0x5c);
+    cmdWriteOrDst = (undefined4 *)((*(int *)(ctx + 0x1b0) + 0xffU & 0xffffff00) + subpictureSlotIndex_0000f1ac * 0x80)
     ;
     do {
       destEntry = cmdWriteOrDst;
@@ -1102,7 +1102,7 @@ int ava_display_subpicture(ctx, subpicture, unused1, unused2, unused3)
     ((int (*)())ava_dcache_flush_range)(ctx,*(undefined4 *)((char)*subpicture * 4 + ctx + 0x6c),
                  *(int *)(ctx + 100) * 0xc0,lastHeaderOrPalette,status,wordsBase,wordsCursor,packedPalette);
     ((int (*)())ava_acquire_image)(ctx,*subpicture + 4 & 0xff);
-    ((int (*)())ava_render_subpicture_pass)(ctx,rectAndPalette[0],rectAndPalette[1],(char)*subpicture + 4,DAT_0000f1ac);
+    ((int (*)())ava_render_subpicture_pass)(ctx,rectAndPalette[0],rectAndPalette[1],(char)*subpicture + 4,subpictureSlotIndex_0000f1ac);
     ava_release_image(ctx,*subpicture + 4 & 0xff);
     status = 0;
   }
@@ -1119,7 +1119,7 @@ int ava_dvd_ext_emit_packet_0d(ctx, slotId)
   int mapBase;
   undefined4 *cmdWrite;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   if (slotId == *(int *)(ctx + 0x558)) {
     cmdWrite = *(undefined4 **)(ctx + 0x34);
     if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x10) {
@@ -1146,7 +1146,7 @@ int ava_dvd_ext_emit_packet_0d(ctx, slotId)
     cmdWrite[3] = *(undefined4 *)(ctx + 0x60);
     cmdWrite[4] = *(undefined4 *)(ctx + 100);
     cmdWrite[5] = *(undefined4 *)(ctx + 0x68);
-    mapMemoryType = PTR_0000f1a0;
+    mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
     lastHeader = *(uint **)(ctx + 0x30);
     *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
     *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -1515,7 +1515,7 @@ int ava_submit_idct_list_and_remap(ctx, listSelect)
   
   submitResult = ((int (*)())ava_submit_idct_list)(ctx,listSelect);
   if (listSelect == 0) {
-    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),4,*(undefined4 *)PTR_0000f1a0,
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),4,*(undefined4 *)ptrTo_machTaskSelf_0000f1a0,
                         ctx + 0x14554,ctx + 0x14558,1);
     mappedBase = *(int *)(ctx + 0x14554);
     bufferStart = mappedBase + 0x20;
@@ -1526,7 +1526,7 @@ int ava_submit_idct_list_and_remap(ctx, listSelect)
     ;
   }
   else {
-    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),5,*(undefined4 *)PTR_0000f1a0,
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),5,*(undefined4 *)ptrTo_machTaskSelf_0000f1a0,
                         ctx + 0x1455c,ctx + 0x14560,1);
     bufferStart = *(int *)(ctx + 0x1455c) + 0x20;
     *(int *)(ctx + 0x15140) = bufferStart;
@@ -2224,7 +2224,7 @@ int ava_emit_picture_setup_packet(ctx, ringWords)
   if (*(undefined4 **)(ctx + 0x38) <= header14 + 0xe) {
     lastHeader = *(uint **)(ctx + 0x30);
     *lastHeader = (int)header14 - (int)lastHeader >> 2 | *lastHeader;
-    taskPortPtr = PTR_0000f1a0;
+    taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
     *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
     **(undefined4 **)(ctx + 0x34) = 0x1000000;
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,ctx + 0x40,
@@ -2280,7 +2280,7 @@ LAB_00007998:
   if (ringLimit <= cmdWriteB + 2) {
     lastHeader = *(uint **)(ctx + 0x30);
     *lastHeader = (int)cmdWriteB - (int)lastHeader >> 2 | *lastHeader;
-    taskPortPtr = PTR_0000f1a0;
+    taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
     *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
     **(undefined4 **)(ctx + 0x34) = 0x1000000;
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,ctx + 0x40,
@@ -2300,7 +2300,7 @@ LAB_00007998:
   if (ringLimit <= programStart + ringWords) {
     lastHeader = *(uint **)(ctx + 0x30);
     *lastHeader = (int)programStart - (int)lastHeader >> 2 | *lastHeader;
-    taskPortPtr = PTR_0000f1a0;
+    taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
     *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
     **(undefined4 **)(ctx + 0x34) = 0x1000000;
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,ctx + 0x40,
@@ -2496,7 +2496,7 @@ int ava_end_picture(ctx)
     programRingOrPitch = *(int *)(ctx + 0x15164);
     *(undefined4 *)(programRingOrPitch + -8) = 0x5c8;
     *(undefined4 *)(programRingOrPitch + -4) = 0x8000000;
-    taskPortPtr = PTR_0000f1a0;
+    taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
     cmdWriteB = *(undefined4 **)(ctx + 0x34);
     ringLimit = *(undefined4 **)(ctx + 0x38);
     if (ringLimit <= cmdWriteB + 2) {
@@ -2520,7 +2520,7 @@ int ava_end_picture(ctx)
     *cmdWriteB = 0x7eb;
     cmdWriteB[1] = 0x4000;
   }
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   planeIndex = ctx + 0x44;
   programRingOrPitch = ctx + 0x40;
   if (ringLimit <= cmdWrite + 4) {
@@ -2559,7 +2559,7 @@ int ava_end_picture(ctx)
     planeIndex = planeIndex + 1;
   } while (notLast);
 LAB_000082e0:
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -3441,7 +3441,7 @@ int ava_render_hue_saturation_pass(ctx, headerWord, enableFlag)
   int fillCount;
   int pitchWordsMinus1;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   cmdWrite = *(undefined4 **)(ctx + 0x34);
   pitchBytes = *(uint *)(ctx + 0x588);
   quadWidth = *(uint *)(ctx + 0x578) >> 2;
@@ -3505,19 +3505,19 @@ int ava_render_hue_saturation_pass(ctx, headerWord, enableFlag)
   contrast = *(float *)(ctx + 0x130);
   cosHue = _cos((double)hueAngle);
   sinHue = _sin((double)hueAngle);
-  DAT_0000f004 = (float)(cosHue * (double)saturation * (double)contrast);
-  DAT_0000f024 = (float)((double)contrast * (double)saturation * -sinHue);
-  DAT_0000f028 = -DAT_0000f024;
-  DAT_0000f018 = ((DAT_0000f024 + (1.0 - DAT_0000f004)) * 128.0) / 255.0;
-  DAT_0000f014 = (((1.0 - DAT_0000f004) - DAT_0000f024) * 128.0) / 255.0;
-  DAT_0000f008 = DAT_0000f004;
-  DAT_0000f00c = DAT_0000f004;
-  DAT_0000f010 = DAT_0000f004;
-  DAT_0000f01c = DAT_0000f014;
-  DAT_0000f020 = DAT_0000f018;
-  DAT_0000f02c = DAT_0000f024;
-  DAT_0000f030 = DAT_0000f028;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000ea9c,4,&DAT_0000f004,3,3);
+  hueSaturationConstReg0X_0000f004 = (float)(cosHue * (double)saturation * (double)contrast);
+  hueSaturationConstReg2X_0000f024 = (float)((double)contrast * (double)saturation * -sinHue);
+  hueSaturationConstReg2Y_0000f028 = -hueSaturationConstReg2X_0000f024;
+  hueSaturationConstReg1Y_0000f018 = ((hueSaturationConstReg2X_0000f024 + (1.0 - hueSaturationConstReg0X_0000f004)) * 128.0) / 255.0;
+  hueSaturationConstReg1X_0000f014 = (((1.0 - hueSaturationConstReg0X_0000f004) - hueSaturationConstReg2X_0000f024) * 128.0) / 255.0;
+  hueSaturationConstReg0Y_0000f008 = hueSaturationConstReg0X_0000f004;
+  hueSaturationConstReg0Z_0000f00c = hueSaturationConstReg0X_0000f004;
+  hueSaturationConstReg0W_0000f010 = hueSaturationConstReg0X_0000f004;
+  hueSaturationConstReg1Z_0000f01c = hueSaturationConstReg1X_0000f014;
+  hueSaturationConstReg1W_0000f020 = hueSaturationConstReg1Y_0000f018;
+  hueSaturationConstReg2Z_0000f02c = hueSaturationConstReg2X_0000f024;
+  hueSaturationConstReg2W_0000f030 = hueSaturationConstReg2Y_0000f028;
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&hueSaturationShaderProgram_0000ea9c,4,&hueSaturationConstReg0X_0000f004,3,3);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -3535,7 +3535,7 @@ int ava_render_hue_saturation_pass(ctx, headerWord, enableFlag)
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,0,&dstLeft,quadWidth,halfHeight);
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -3574,7 +3574,7 @@ int ava_render_brightness_contrast_pass(ctx, headerWord, enableFlag)
   int mapBase;
   int fillCount;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   cmdWrite = *(undefined4 **)(ctx + 0x34);
   pitchBytes = *(uint *)(ctx + 0x588);
   surfaceHeight = *(uint *)(ctx + 0x57c);
@@ -3621,16 +3621,16 @@ int ava_render_brightness_contrast_pass(ctx, headerWord, enableFlag)
   cmdWrite[9] = 0xa60c;
   cmdWrite[10] = 0x1140;
   cmdWrite[0xb] = (pitchBytes >> 2) - 1;
-  DAT_0000f034 = *(undefined4 *)(ctx + 0x138);
-  DAT_0000f044 = ((1.0 - *(float *)(ctx + 0x138)) * 128.0) / 255.0 + *(float *)(ctx + 0x134)
+  brightnessContrastConstReg0X_0000f034 = *(undefined4 *)(ctx + 0x138);
+  brightnessContrastConstReg1X_0000f044 = ((1.0 - *(float *)(ctx + 0x138)) * 128.0) / 255.0 + *(float *)(ctx + 0x134)
   ;
-  DAT_0000f038 = DAT_0000f034;
-  DAT_0000f03c = DAT_0000f034;
-  DAT_0000f040 = DAT_0000f034;
-  DAT_0000f048 = DAT_0000f044;
-  DAT_0000f04c = DAT_0000f044;
-  DAT_0000f050 = DAT_0000f044;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0xc,&DAT_0000eafc,2,&DAT_0000f034,2,2);
+  brightnessContrastConstReg0Y_0000f038 = brightnessContrastConstReg0X_0000f034;
+  brightnessContrastConstReg0Z_0000f03c = brightnessContrastConstReg0X_0000f034;
+  brightnessContrastConstReg0W_0000f040 = brightnessContrastConstReg0X_0000f034;
+  brightnessContrastConstReg1Y_0000f048 = brightnessContrastConstReg1X_0000f044;
+  brightnessContrastConstReg1Z_0000f04c = brightnessContrastConstReg1X_0000f044;
+  brightnessContrastConstReg1W_0000f050 = brightnessContrastConstReg1X_0000f044;
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0xc,&brightnessContrastShaderProgram_0000eafc,2,&brightnessContrastConstReg0X_0000f034,2,2);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -3648,7 +3648,7 @@ int ava_render_brightness_contrast_pass(ctx, headerWord, enableFlag)
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,0,&dstLeft,quadWidth,surfaceHeight);
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -3688,7 +3688,7 @@ int ava_render_convert_frame(ctx, slotIndex, pixelDesc)
   int fillCount;
   int formatCode;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   cmdWrite = *(undefined4 **)(ctx + 0x34);
   if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0xb0) {
     lastHeader = *(uint **)(ctx + 0x30);
@@ -3747,7 +3747,7 @@ int ava_render_convert_frame(ctx, slotIndex, pixelDesc)
   cmdWrite[0x13] = (pitchBytes >> 1) - 1;
   cmdWrite[0x14] = ((unsigned char *)0x00001041U);
   cmdWrite[0x15] = 3;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&convertAndSourceRectShaderProgram_0000eb7c,7,&convertAndSourceRectShaderConstants_0000eb2c,5,3);
   formatCode = *(int *)(pixelDesc + 0xc);
   if (((formatCode == 0x61726762) || (formatCode == 0x61723135)) || (formatCode != 0x72676261)) {
     *cmdWrite = 0x11a9;
@@ -3784,7 +3784,7 @@ int ava_render_convert_frame(ctx, slotIndex, pixelDesc)
   cmdWrite = (undefined4 *)((int (*)())ava_emit_textured_quad)(cmdWrite + 0xc,0,&dstLeft,i2dLo1,i2dLo2);
   *cmdWrite = 0x5c8;
   cmdWrite[1] = 0x10030000;
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -3826,7 +3826,7 @@ int ava_render_convert_frame_yuv2(ctx, slotIndex, pixelDesc)
   int fillCount;
   int pitchWordsMinus1;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   cmdWrite = *(undefined4 **)(ctx + 0x34);
   pitchBytes = *(uint *)(ctx + 0x588);
   surfaceHeight = *(uint *)(ctx + 0x57c);
@@ -3888,7 +3888,7 @@ int ava_render_convert_frame_yuv2(ctx, slotIndex, pixelDesc)
   cmdWrite[0x13] = 0x1810c003;
   cmdWrite[0x14] = 0x1141;
   cmdWrite[0x15] = pitchWordsMinus1;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000ec24,4,0,0,3);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&convertFrameYuv2ShaderProgram_0000ec24,4,0,0,3);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -3912,7 +3912,7 @@ int ava_render_convert_frame_yuv2(ctx, slotIndex, pixelDesc)
   cmdWrite = (undefined4 *)((int (*)())ava_emit_textured_quad)(cmdWrite + 0xc,0,&dstLeft,halfWidth,surfaceHeight);
   *cmdWrite = 0x5c8;
   cmdWrite[1] = 0x10030000;
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -4258,7 +4258,7 @@ LAB_0000b2b8:
   if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x70) {
     lastHeader = *(uint **)(ctx + 0x30);
     *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
-    mapMemoryType = PTR_0000f1a0;
+    mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
     *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
     **(undefined4 **)(ctx + 0x34) = 0x1000000;
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
@@ -4300,7 +4300,7 @@ LAB_0000b2b8:
   cmdWrite[9] = *(int *)(ctx + 0x68) + -1;
   cmdWrite[10] = ((unsigned char *)0x00001041U);
   cmdWrite[0xb] = 1;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0xc,&DAT_0000ec84,2,0,0,1);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0xc,&scalePassShaderProgram_0000ec84,2,0,0,1);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -4360,7 +4360,7 @@ int ava_render_source_rect_pass(ctx, headerWord, enableFlag)
   if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0xb0) {
     lastHeader = *(uint **)(ctx + 0x30);
     *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
-    mapMemoryType = PTR_0000f1a0;
+    mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
     *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
     **(undefined4 **)(ctx + 0x34) = 0x1000000;
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
@@ -4409,7 +4409,7 @@ int ava_render_source_rect_pass(ctx, headerWord, enableFlag)
   cmdWrite[0xf] = 0x18044803;
   cmdWrite[0x10] = ((unsigned char *)0x00001041U);
   cmdWrite[0x11] = 3;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x12,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x12,&convertAndSourceRectShaderProgram_0000eb7c,7,&convertAndSourceRectShaderConstants_0000eb2c,5,3);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -4468,7 +4468,7 @@ int ava_render_pass_47(ctx, headerWord, secondWord, widthPixels, height, bytesPe
   int mapBase;
   int fillCount;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   if (bytesPerPixel < 5) {
     wholeWords = widthPixels / (4 / bytesPerPixel);
     widthWords = wholeWords + (uint)(widthPixels != wholeWords * (4 / bytesPerPixel));
@@ -4517,7 +4517,7 @@ int ava_render_pass_47(ctx, headerWord, secondWord, widthPixels, height, bytesPe
   cmdWrite[7] = 0xa60c;
   cmdWrite[8] = ((unsigned char *)0x00001041U);
   cmdWrite[9] = 1;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 10,&DAT_0000ecb4,2,0,0,1);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 10,&renderPass47ShaderProgram_0000ecb4,2,0,0,1);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -4535,7 +4535,7 @@ int ava_render_pass_47(ctx, headerWord, secondWord, widthPixels, height, bytesPe
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,0,&dstLeft,widthWords,height);
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -4617,7 +4617,7 @@ int ava_emit_deint_enable_packet(ctx)
   undefined4 *cmdWrite;
   int mapBase;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   cmdWrite = *(undefined4 **)(ctx + 0x34);
   if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x10) {
     lastHeader = *(uint **)(ctx + 0x30);
@@ -4639,7 +4639,7 @@ int ava_emit_deint_enable_packet(ctx)
   *(undefined4 **)(ctx + 0x30) = cmdWrite;
   *cmdWrite = 0x15000000;
   cmdWrite[1] = 0x20202020;
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -4769,7 +4769,7 @@ int ava_render_deinterlace_pass(ctx, frameInfo, unused1, frameArg)
   uint planeIndex;
   undefined4 *packet;
   
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   packet = *(undefined4 **)(ctx + 0x34);
   if (*(undefined4 **)(ctx + 0x38) <= packet + 0x188) {
     lastHeader = *(uint **)(ctx + 0x30);
@@ -4864,23 +4864,23 @@ int ava_render_deinterlace_pass(ctx, frameInfo, unused1, frameArg)
   programEntry[0x21] = 0x3800a60c;
   programEntry[0x22] = ((unsigned char *)0x00001041U);
   programEntry[0x23] = 0x1f;
-  DAT_0000f054 = 0.5647059;
-  DAT_0000f060 = 0.5647059;
-  DAT_0000f070 = 0.047058824;
-  DAT_0000f090 = 0.1254902;
-  DAT_0000f058 = 0.5647059;
-  DAT_0000f05c = 0.5647059;
-  DAT_0000f064 = 0.047058824;
-  DAT_0000f068 = 0.047058824;
-  DAT_0000f06c = 0.047058824;
-  DAT_0000f074 = 0.1254902;
-  DAT_0000f078 = 0.1254902;
-  DAT_0000f07c = 0.1254902;
-  DAT_0000f080 = 0.1254902;
-  DAT_0000f084 = 0.1254902;
-  DAT_0000f088 = 0.1254902;
-  DAT_0000f08c = 0.1254902;
-  programCursor = (undefined4 *)((int (*)())ava_emit_shader_constants)(programEntry + 0x24,&DAT_0000ece4,0x16,&DAT_0000f054,6,9);
+  deinterlaceConstReg0X_0000f054 = 0.5647059;
+  deinterlaceConstReg0W_0000f060 = 0.5647059;
+  deinterlaceConstReg1W_0000f070 = 0.047058824;
+  deinterlaceConstReg3W_0000f090 = 0.1254902;
+  deinterlaceConstReg0Y_0000f058 = 0.5647059;
+  deinterlaceConstReg0Z_0000f05c = 0.5647059;
+  deinterlaceConstReg1X_0000f064 = 0.047058824;
+  deinterlaceConstReg1Y_0000f068 = 0.047058824;
+  deinterlaceConstReg1Z_0000f06c = 0.047058824;
+  deinterlaceConstReg2X_0000f074 = 0.1254902;
+  deinterlaceConstReg2Y_0000f078 = 0.1254902;
+  deinterlaceConstReg2Z_0000f07c = 0.1254902;
+  deinterlaceConstReg2W_0000f080 = 0.1254902;
+  deinterlaceConstReg3X_0000f084 = 0.1254902;
+  deinterlaceConstReg3Y_0000f088 = 0.1254902;
+  deinterlaceConstReg3Z_0000f08c = 0.1254902;
+  programCursor = (undefined4 *)((int (*)())ava_emit_shader_constants)(programEntry + 0x24,&deinterlaceShaderProgram_0000ece4,0x16,&deinterlaceConstReg0X_0000f054,6,9);
   *programCursor = 0x11a9;
   programCursor[1] = 0x1b00;
   programCursor[2] = 0x11aa;
@@ -4893,7 +4893,7 @@ int ava_render_deinterlace_pass(ctx, frameInfo, unused1, frameArg)
   mapBaseOrProgramEnd = ((int (*)())ava_emit_deint_field_quad)(ctx,programCursor + 8,frameInfo,1,frameArg);
   packet[6] = mapBaseOrProgramEnd - (int)packet >> 2;
   ((int (*)())ava_emit_deint_field_quad)(ctx,mapBaseOrProgramEnd,frameInfo,2,frameArg);
-  taskPortPtr = PTR_0000f1a0;
+  taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
@@ -4961,7 +4961,7 @@ int ava_render_subpicture_pass(ctx, srcPosPacked, srcSizePacked, headerWord, sec
   int srcHeight;
   int closingMapBase;
   
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   i2dHi4 = 0x43300000;
   i2dHi2 = 0x43300000;
   i2dHi1 = 0x43300000;
@@ -5042,12 +5042,12 @@ int ava_render_subpicture_pass(ctx, srcPosPacked, srcSizePacked, headerWord, sec
   cmdWrite[0x14] = ((unsigned char *)0x00001041U);
   cmdWrite[0x15] = 3;
   i2dHi5 = 0x43300000;
-  DAT_0000f0b4 = (float)((double)CONCAT44(0x43300000,halfWidth) - 4503599627370496.0);
-  DAT_0000f0b8 = DAT_0000f0b4;
-  DAT_0000f0bc = DAT_0000f0b4;
-  DAT_0000f0c0 = DAT_0000f0b4;
+  subpictureConstReg0X_0000f0b4 = (float)((double)CONCAT44(0x43300000,halfWidth) - 4503599627370496.0);
+  subpictureConstReg0Y_0000f0b8 = subpictureConstReg0X_0000f0b4;
+  subpictureConstReg0Z_0000f0bc = subpictureConstReg0X_0000f0b4;
+  subpictureConstReg0W_0000f0c0 = subpictureConstReg0X_0000f0b4;
   i2dLo5 = halfWidth;
-  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000eef4,9,&DAT_0000f0b4,1,4);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&subpictureShaderProgram_0000eef4,9,&subpictureConstReg0X_0000f0b4,1,4);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b05;
   cmdWrite[2] = 0x11aa;
@@ -5057,7 +5057,7 @@ int ava_render_subpicture_pass(ctx, srcPosPacked, srcSizePacked, headerWord, sec
   cmdWrite[6] = 0x11ac;
   cmdWrite[7] = 0xf;
   ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,&srcLeft,&dstLeft,halfWidth,srcHeight);
-  mapMemoryType = PTR_0000f1a0;
+  mapMemoryType = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
   *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);

@@ -5,7 +5,7 @@ int dyld_stub_binding_helper()
 {
                     
                     
-  (*DAT_0000f0c4)();
+  (*dyldStubBindingHelperPtr_0000f0c4)();
   return;
 }
 
@@ -14,7 +14,7 @@ int __dyld_func_lookup()
 {
                     
                     
-  (*DAT_0000f0c8)();
+  (*dyldFuncLookupPtr_0000f0c8)();
   return;
 }
 
@@ -127,7 +127,7 @@ int pic_jump_dyld_func_lookup_1444()
 {
                     
                     
-  (*DAT_0000f0c8)();
+  (*dyldFuncLookupPtr_0000f0c8)();
   return;
 }
 
@@ -227,7 +227,7 @@ int pic_jump_dlsym_16b4()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0e0)();
+  (*(code *)lazyPtrTo_dlsym_0000f0e0)();
   return;
 }
 
@@ -278,7 +278,7 @@ int pic_jump_dlopen_16f4()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0cc)();
+  (*(code *)lazyPtrTo_dlopen_0000f0cc)();
   return;
 }
 
@@ -287,7 +287,7 @@ int pic_jump_calloc_1714()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0e4)();
+  (*(code *)lazyPtrTo_calloc_0000f0e4)();
   return;
 }
 
@@ -296,7 +296,7 @@ int pic_jump_keymgr_get_and_lock_processwide_ptr_1734()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0d4)();
+  (*(code *)lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000f0d4)();
   return;
 }
 
@@ -330,7 +330,7 @@ int _add_routine(globals, routine)
     *node = *(undefined4 *)(globalsHome + 4);
     *(undefined4 **)(globalsHome + 4) = node;
     unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
-    if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (unlockResult == 0)) {
+    if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000f124 + 8) + 4) < 4) || (unlockResult == 0)) {
       status = 0;
     }
     else {
@@ -353,7 +353,7 @@ int pic_jump_malloc_1880()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0d0)();
+  (*(code *)lazyPtrTo_malloc_0000f0d0)();
   return;
 }
 
@@ -415,7 +415,7 @@ int pic_jump_free_19e4()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0d8)();
+  (*(code *)lazyPtrTo_free_0000f0d8)();
   return;
 }
 
@@ -424,7 +424,7 @@ int pic_jump_keymgr_set_and_unlock_processwide_ptr_1a04()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0dc)();
+  (*(code *)lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000f0dc)();
   return;
 }
 
@@ -491,7 +491,7 @@ int pic_jump_keymgr_set_and_unlock_processwide_ptr_1b7c()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0dc)();
+  (*(code *)lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000f0dc)();
   return;
 }
 
@@ -500,7 +500,7 @@ int pic_jump_keymgr_get_and_lock_processwide_ptr_1b9c()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0d4)();
+  (*(code *)lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000f0d4)();
   return;
 }
 
@@ -576,7 +576,7 @@ int pic_jump_keymgr_get_and_lock_processwide_ptr_1cb8()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0d4)();
+  (*(code *)lazyPtrTo_keymgrGetAndLockProcesswidePtr_0000f0d4)();
   return;
 }
 
@@ -607,7 +607,7 @@ int _atexit_common(atexit_entry, dsoHandle)
     if (*(byte *)(atexit_globals + 3) < 0x10) {
       registerFn = *(code **)(atexit_globals + 8);
       atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
-      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
         entryCopy = (undefined4 *)_malloc(0xc);
         if (entryCopy == (undefined4 *)0x0) {
           result = 0xffffffff;
@@ -628,7 +628,7 @@ int _atexit_common(atexit_entry, dsoHandle)
     else if (entryHome[1] == 0) {
       registerFn = *(code **)(atexit_globals + 0x10);
       atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
-      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
         result = (*registerFn)(*entryHome);
       }
       else {
@@ -638,7 +638,7 @@ int _atexit_common(atexit_entry, dsoHandle)
     else {
       registerFn = *(code **)(atexit_globals + 8);
       atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
-      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
+      if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
         result = (*registerFn)(*entryHome,entryHome[2],dsoHandleHome,passThroughR6,passThroughR7,passThroughR8,
                              *entryHome);
       }
@@ -666,7 +666,7 @@ int pic_jump_keymgr_set_and_unlock_processwide_ptr_1f98()
 {
                     
                     
-  (*(code *)PTR_FUN_0000f0dc)();
+  (*(code *)lazyPtrTo_keymgrSetAndUnlockProcesswidePtr_0000f0dc)();
   return;
 }
 
@@ -700,7 +700,7 @@ int pic_jump_add_routine_1fb8(globals, entry)
     *node = *(undefined4 *)(globalsHome + 4);
     *(undefined4 **)(globalsHome + 4) = node;
     unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
-    if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (unlockResult == 0)) {
+    if ((*(ushort *)(*(int *)(ptrTo_keymgrGlobal_0000f124 + 8) + 4) < 4) || (unlockResult == 0)) {
       status = 0;
     }
     else {
@@ -810,7 +810,7 @@ int _atexit(atexit_function)
   entryKind = 0;
   atexitFunctionHome = atexit_function;
   entryFunction = atexit_function;
-  result = ((int (*)())_atexit_common)(&entryFunction,PTR_0000f128);
+  result = ((int (*)())_atexit_common)(&entryFunction,atexitDsoHandle_0000f128);
   return result;
 }
 
@@ -862,35 +862,35 @@ int _AVACreateRenderer(outRenderer, driverInfo, rendererInfo)
           if ((1 << (bit & 0x3f) & *(uint *)renderer[3]) != 0) {
             ((uint *)renderer[3])[1] = bit + 1;
           }
-          fnTableB = PTR_FUN_0000f190;
-          fnTableA = PTR_FUN_0000f168;
+          fnTableB = ptrTo_ava_create_context_0000f190;
+          fnTableA = ptrTo_ava_destroy_context_0000f168;
           bit = bit + 1;
         } while ((int)bit < 0x20);
         renderer[0xc] = 0;
         renderer[4] = fnTableB;
         renderer[5] = fnTableA;
-        fnTableA = PTR_FUN_0000f15c;
-        renderer[6] = PTR_FUN_0000f180;
+        fnTableA = ptrTo_ava_wait_for_stamps_0000f15c;
+        renderer[6] = ptrTo_ava_check_stamps_0000f180;
         renderer[7] = fnTableA;
-        fnTableA = PTR_FUN_0000f130;
-        renderer[8] = PTR_FUN_0000f198;
+        fnTableA = ptrTo_ava_set_property_0000f130;
+        renderer[8] = ptrTo_ava_get_property_0000f198;
         renderer[9] = fnTableA;
-        fnTableA = PTR_FUN_0000f188;
-        renderer[10] = PTR_FUN_0000f178;
+        fnTableA = ptrTo_ava_set_attribute_0000f188;
+        renderer[10] = ptrTo_ava_get_attribute_0000f178;
         renderer[0xb] = fnTableA;
-        fnTableA = PTR_FUN_0000f174;
-        renderer[0xd] = PTR_FUN_0000f144;
+        fnTableA = ptrTo_ava_queue_display_0000f174;
+        renderer[0xd] = ptrTo_ava_decode_picture_0000f144;
         renderer[0xe] = fnTableA;
-        fnTableA = PTR_FUN_0000f158;
-        renderer[0xf] = PTR_FUN_0000f138;
+        fnTableA = ptrTo_ava_declare_surface_images_0000f158;
+        renderer[0xf] = ptrTo_ava_setup_decode_0000f138;
         renderer[0x10] = fnTableA;
-        fnTableA = PTR_FUN_0000f170;
-        renderer[0x11] = PTR_FUN_0000f14c;
+        fnTableA = ptrTo_ava_get_image_descs_0000f170;
+        renderer[0x11] = ptrTo_ava_get_surface_descs_0000f14c;
         renderer[0x12] = fnTableA;
-        fnTableA = PTR_FUN_0000f17c;
-        renderer[0x13] = PTR_FUN_0000f134;
+        fnTableA = ptrTo_ava_slot20_enqueue_0000f17c;
+        renderer[0x13] = ptrTo_ava_new_handle_0000f134;
         renderer[0x14] = fnTableA;
-        renderer[0x15] = PTR_FUN_0000f18c;
+        renderer[0x15] = ptrTo_ava_get_frame_0000f18c;
         renderer[0x16] = ava_destroy_renderer;
         *outRenderer = renderer;
         return 0;
@@ -909,8 +909,8 @@ int ava_destroy_renderer(renderer)
   
   status = 0xfffffff9;
   if (renderer != 0) {
-    _free(*(undefined4 *)PTR_DAT_0000f13c);
-    _free(*(undefined4 *)PTR_DAT_0000f184);
+    _free(*(undefined4 *)ptrTo_dvdExtGlobal_0000f13c);
+    _free(*(undefined4 *)ptrTo_displayExtGlobal_0000f184);
     _free(*(undefined4 *)(renderer + 0xc));
     _free(renderer);
     status = 0;
@@ -929,19 +929,19 @@ int _AVACreateRendererDisplayExt(outExt)
   undefined4 *ext;
   
   ext = (undefined4 *)_calloc(1,0x1c);
-  fnTmp2 = PTR_FUN_0000f160;
+  fnTmp2 = ptrTo_ava_display_refresh_0000f160;
   status = 0xfffffffd;
   if (ext != (undefined4 *)0x0) {
     ext[1] = 0;
     *ext = 0x1020000;
-    fnTmp1 = PTR_FUN_0000f12c;
+    fnTmp1 = ptrTo_ava_render_slot_0000f12c;
     status = 0;
     ext[2] = fnTmp2;
-    fnTmp3 = PTR_FUN_0000f154;
+    fnTmp3 = ptrTo_ava_noop_49f0_0000f154;
     ext[3] = fnTmp1;
-    fnTmp2 = PTR_FUN_0000f148;
+    fnTmp2 = ptrTo_ava_noop_4a00_0000f148;
     ext[4] = fnTmp3;
-    fnTmp1 = PTR_DAT_0000f184;
+    fnTmp1 = ptrTo_displayExtGlobal_0000f184;
     ext[5] = fnTmp2;
     *(undefined4 **)fnTmp1 = ext;
     *outExt = ext;
@@ -959,20 +959,20 @@ int _AVACreateRendererDVDExt(outExt)
   undefined4 *ext;
   
   ext = (undefined4 *)_calloc(1,0x20);
-  fnTmp2 = PTR_FUN_0000f194;
-  fnTmp1 = PTR_FUN_0000f16c;
+  fnTmp2 = ptrTo_ava_setup_subpicture_0000f194;
+  fnTmp1 = ptrTo_ava_dvd_ext_emit_packet_0d_0000f16c;
   status = 0xfffffffd;
   if (ext != (undefined4 *)0x0) {
     *ext = 0x1020000;
     status = 0;
     ext[2] = fnTmp2;
     ext[4] = fnTmp1;
-    fnTmp1 = PTR_FUN_0000f164;
-    ext[3] = PTR_FUN_0000f140;
+    fnTmp1 = ptrTo_ava_set_macrovision_0000f164;
+    ext[3] = ptrTo_ava_display_subpicture_0000f140;
     ext[6] = fnTmp1;
-    ext[5] = PTR_FUN_0000f150;
+    ext[5] = ptrTo_ava_release_subpicture_0000f150;
     *outExt = ext;
-    *(undefined4 **)PTR_DAT_0000f13c = ext;
+    *(undefined4 **)ptrTo_dvdExtGlobal_0000f13c = ext;
   }
   return status;
 }
@@ -1017,7 +1017,7 @@ int ava_create_context(renderer, outContext, createInfo)
       return 0xfffffffb;
     }
     ctx = (uint *)_calloc(1,0x15408);
-    kernelTask = PTR_0000f1a0;
+    kernelTask = ptrTo_machTaskSelf_0000f1a0;
     if (ctx != (uint *)0x0) {
       status = *(int *)(*(int *)(renderer + 0xc) + 4);
       if ((status == 0) || ((displayMask & 1) != 0)) {
@@ -1074,8 +1074,8 @@ int ava_create_context(renderer, outContext, createInfo)
                   scalarIn1 = ctx[6] & 0xffff4000;
                   status = _io_connect_method_scalarI_structureI(ctx[5],0,&scalarIn0,3,0,0);
                   if (status == 0) {
-                    if ((*(uint *)PTR_0000f19c & 8) == 0) {
-                      if ((*(uint *)PTR_0000f19c & 0x10) == 0) {
+                    if ((*(uint *)ptrTo_cpuCapabilities_0000f19c & 8) == 0) {
+                      if ((*(uint *)ptrTo_cpuCapabilities_0000f19c & 0x10) == 0) {
                         ctx[0x51] = 0x20;
                       }
                       else {
@@ -1158,7 +1158,7 @@ int ava_release_image(ctx, opcodeIndex)
   int count;
   int *writePtr;
   
-  kernelTask = PTR_0000f1a0;
+  kernelTask = ptrTo_machTaskSelf_0000f1a0;
   writePtr = *(int **)(ctx + 0x34);
   if (*(int **)(ctx + 0x38) <= writePtr + 8) {
     lastHeader = *(uint **)(ctx + 0x30);
@@ -1183,7 +1183,7 @@ int ava_release_image(ctx, opcodeIndex)
   do {
     writePtr = writePtr + 1;
     *writePtr = -0x80000000;
-    kernelTask = PTR_0000f1a0;
+    kernelTask = ptrTo_machTaskSelf_0000f1a0;
     count = count + -1;
   } while (count != 0);
   lastHeader = *(uint **)(ctx + 0x30);
