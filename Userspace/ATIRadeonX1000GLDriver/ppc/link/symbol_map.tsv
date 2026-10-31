@@ -794,10 +794,10 @@ fudoPsClassTable6x6_001e5f54	0x1e5f54	__DATA,__data	-	-	extern unsigned char fud
 foldMinClassTable_001e6014	0x1e6014	__DATA,__data	-	-	extern unsigned char foldMinClassTable_001e6014 asm("foldMinClassTable_001e6014");	0x00000000	data.s
 foldMaxClassTable_001e60a4	0x1e60a4	__DATA,__data	-	-	extern unsigned char foldMaxClassTable_001e60a4 asm("foldMaxClassTable_001e60a4");	0x00000000	data.s
 liveLaneTripleTable_001e6134	0x1e6134	__DATA,__data	undefined4	4	extern unsigned int liveLaneTripleTable_001e6134 asm("liveLaneTripleTable_001e6134");	0x00000001	data.s
-rangeClassAfterClampTable_001e6158	0x1e6158	__DATA,__data	undefined4	4	extern unsigned char rangeClassAfterClampTable_001e6158[] asm("rangeClassAfterClampTable_001e6158");	0x00000004	data.s
+rangeClassAfterSaturateTable_001e6158	0x1e6158	__DATA,__data	undefined4	4	extern unsigned char rangeClassAfterSaturateTable_001e6158[] asm("rangeClassAfterSaturateTable_001e6158");	0x00000004	data.s
 rangeClassNegateTable_001e6170	0x1e6170	__DATA,__data	-	-	extern unsigned char rangeClassNegateTable_001e6170 asm("rangeClassNegateTable_001e6170");	0x00000000	data.s
 rangeClassAbsTable_001e6188	0x1e6188	__DATA,__data	-	-	extern unsigned char rangeClassAbsTable_001e6188 asm("rangeClassAbsTable_001e6188");	0x00000000	data.s
-compareClassAbsTable_001e61a0	0x1e61a0	__DATA,__data	undefined4	4	extern unsigned char compareClassAbsTable_001e61a0[] asm("compareClassAbsTable_001e61a0");	0x00000004	data.s
+compareClassAfterSaturateTable_001e61a0	0x1e61a0	__DATA,__data	undefined4	4	extern unsigned char compareClassAfterSaturateTable_001e61a0[] asm("compareClassAfterSaturateTable_001e61a0");	0x00000004	data.s
 compareClassNegateTable_001e61b8	0x1e61b8	__DATA,__data	-	-	extern unsigned char compareClassNegateTable_001e61b8 asm("compareClassNegateTable_001e61b8");	0x00000000	data.s
 compareClassAbsTable_001e61d0	0x1e61d0	__DATA,__data	undefined4	4	extern unsigned char compareClassAbsTable_001e61d0[] asm("compareClassAbsTable_001e61d0");	0x00000004	data.s
 compareFoldResultTable_001e61e8	0x1e61e8	__DATA,__data	-	-	extern unsigned char compareFoldResultTable_001e61e8 asm("compareFoldResultTable_001e61e8");	0x00000000	data.s
@@ -1343,11 +1343,11 @@ ptrTo_R520SchedModel__vtable_001e90f4	0x1e90f4	__DATA,__nl_symbol_ptr	pointer	4	
 ptrTo_compareConditionMapTable_001e90f8	0x1e90f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_compareConditionMapTable_001e90f8 asm("ptrTo_compareConditionMapTable_001e90f8");	pointer -> LD_1dc840	data.s
 ptrTo_R300SchedModel__vtable_001e90fc	0x1e90fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_R300SchedModel__vtable_001e90fc asm("ptrTo_R300SchedModel__vtable_001e90fc");	pointer -> LD_1eb258	data.s
 ptrTo_ThreadModel__vtable_001e9100	0x1e9100	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ThreadModel__vtable_001e9100 asm("ptrTo_ThreadModel__vtable_001e9100");	pointer -> LD_1eb2e8	data.s
-ptrTo_KhanPsHwLimitsTable_001e9104	0x1e9104	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanPsHwLimitsTable_001e9104 asm("ptrTo_KhanPsHwLimitsTable_001e9104");	pointer -> LD_1afdac	data.s
+ptrTo_KhanPsIlTypeToRegisterFileTable_001e9104	0x1e9104	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanPsIlTypeToRegisterFileTable_001e9104 asm("ptrTo_KhanPsIlTypeToRegisterFileTable_001e9104");	pointer -> LD_1afdac	data.s
 ptrTo_HwLimits__vtable_001e9108	0x1e9108	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_HwLimits__vtable_001e9108 asm("ptrTo_HwLimits__vtable_001e9108");	pointer -> LD_1ea5a8	data.s
 ptrTo_KhanPsEntryTable_001e910c	0x1e910c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanPsEntryTable_001e910c asm("ptrTo_KhanPsEntryTable_001e910c");	pointer -> LD_1dc64c	data.s
 ptrTo_R300VSchedModel__vtable_001e9110	0x1e9110	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_R300VSchedModel__vtable_001e9110 asm("ptrTo_R300VSchedModel__vtable_001e9110");	pointer -> LD_1eb3b8	data.s
-ptrTo_KhanVsHwLimitsTable_001e9114	0x1e9114	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanVsHwLimitsTable_001e9114 asm("ptrTo_KhanVsHwLimitsTable_001e9114");	pointer -> LD_1afa1c	data.s
+ptrTo_KhanVsIlTypeToRegisterFileTable_001e9114	0x1e9114	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanVsIlTypeToRegisterFileTable_001e9114 asm("ptrTo_KhanVsIlTypeToRegisterFileTable_001e9114");	pointer -> LD_1afa1c	data.s
 ptrTo_vsHardwareTableField0C9CInit_001e9118	0x1e9118	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField0C9CInit_001e9118 asm("ptrTo_vsHardwareTableField0C9CInit_001e9118");	pointer -> LD_1af548	data.s
 ptrTo_vsHardwareTableField0C78Init_001e911c	0x1e911c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField0C78Init_001e911c asm("ptrTo_vsHardwareTableField0C78Init_001e911c");	pointer -> LD_1adf48	data.s
 ptrTo_vsHardwareTableField0E28Init_001e9120	0x1e9120	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField0E28Init_001e9120 asm("ptrTo_vsHardwareTableField0E28Init_001e9120");	pointer -> LD_1af3c8	data.s
