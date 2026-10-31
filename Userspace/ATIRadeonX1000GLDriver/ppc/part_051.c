@@ -1175,7 +1175,7 @@ int R300MachineAssembler__create(unusedThis, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0xac);
   *allocation = arena;
-  allocation[1] = &PTR_FUN_001eb6a0;
+  allocation[1] = &ptrTo_R300MachineAssembler__dtor_001eb6a0;
   allocation[7] = 0;
   return allocation + 1;
 }
@@ -1188,7 +1188,7 @@ int R300MachineAssembler__dtor_196dbc(this)
   
   baseVtableBase1 = PTR_DAT_001e914c;
   this[0x16] = 0;
-  *this = &PTR_FUN_001eb6a0;
+  *this = &ptrTo_R300MachineAssembler__dtor_001eb6a0;
   this[0x17] = 0;
   *this = baseVtableBase1 + 8;
   return;
@@ -1202,7 +1202,7 @@ int R300MachineAssembler__dtor(this)
   
   baseVtableBase1 = PTR_DAT_001e914c;
   this[0x16] = 0;
-  *this = &PTR_FUN_001eb6a0;
+  *this = &ptrTo_R300MachineAssembler__dtor_001eb6a0;
   this[0x17] = 0;
   *this = baseVtableBase1 + 8;
   return;
@@ -1214,7 +1214,7 @@ int MachineAssembler__dtor_196e3c(this)
 {
   this[0x16] = 0;
   this[0x17] = 0;
-  *this = &PTR_FUN_001eb6a0;
+  *this = &ptrTo_R300MachineAssembler__dtor_001eb6a0;
   *this = PTR_DAT_001e914c + 8;
   if (this == (undefined4 *)0x0) {
     return;
@@ -1286,7 +1286,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
       if (isConstantSource == 0) {
         if ((a0[0x26] != 0x33) || (a0[0x4b] == 3)) {
           if ((sourceLaneWord & 0xffffff00) == 0) {
-            if ((sourceLaneWord & 0xff) == 0) goto LAB_001971a8;
+            if ((sourceLaneWord & 0xff) == 0) goto returnOneAfterLoop;
             placed = ConstantSlots__tryAddToRow(constantAllocator,a0,1);
           }
           else if ((sourceLaneWord & 0xff) == 0) {
@@ -1331,7 +1331,7 @@ joined_r0x00197160:
           goto joined_r0x00197160;
         }
       }
-LAB_001971a8: ;
+returnOneAfterLoop: ;
     }
   }
   return 1;

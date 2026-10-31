@@ -9,7 +9,7 @@ int gld_textureVariantClass(variantCode, variantFlags)
   case 0x400:
   case 0x404:
   case 0x406:
-    goto switchD_0000a324_caseD_400;
+    goto returnOne;
   case 0x401:
   case 0x407:
     if ((variantFlags & 0x10) == 0) {
@@ -42,7 +42,7 @@ int gld_textureVariantClass(variantCode, variantFlags)
   if ((variantFlags & 0x400) != 0) {
     return 0;
   }
-switchD_0000a324_caseD_400:
+returnOne:
   return 1;
 }
 
@@ -2701,10 +2701,10 @@ loopSetRegisterFile:
     }
     break;
   default:
-    goto switchD_0000dc3c_default;
+    goto printDestinationWriteMask;
   }
   outCursor = outCursor + written;
-switchD_0000dc3c_default:
+printDestinationWriteMask:
   if ((int)registerFile < 0) {
     *outCursor = 0x31;
     outCursor = outCursor + 1;
@@ -2960,7 +2960,7 @@ int arbIrPrintSourceOperand(instrTable, outCursor, nameTable3, nameTable4, nameT
         goto setOperandWord;
       }
     }
-    goto switchD_0000e310_default;
+    goto checkRelativeAddressing;
   case 2:
     written = 0;
     if (s_prm_001a44ec[0] != '\0') {
@@ -3012,7 +3012,7 @@ setOperandWord:
         operandWord = *operandEntry;
         outCursor = srcCursor + written;
       }
-      goto switchD_0000e310_default;
+      goto checkRelativeAddressing;
     }
     goto setWritten;
   case 3:
@@ -3044,12 +3044,12 @@ setOperandWord:
     }
     break;
   default:
-    goto switchD_0000e310_default;
+    goto checkRelativeAddressing;
   }
   nameLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,(uint)*(ushort *)((int)operandEntry + 6));
   operandWord = *operandEntry;
   outCursor = outCursor + written + nameLength;
-switchD_0000e310_default:
+checkRelativeAddressing:
   if ((int)operandWord < 0) {
 setWritten:
     written = 0;
@@ -3354,10 +3354,10 @@ loopSwitchOperandWord:
         }
         break;
       default:
-        goto switchD_0000ebf8_default;
+        goto advanceComponent;
       }
       outCursor = outCursor + nameLength;
-switchD_0000ebf8_default:
+advanceComponent:
       lastComponent = written == 3;
       written = written + 1;
       if (lastComponent) {
@@ -3664,10 +3664,10 @@ int arbIrPrintTextureOperand(instrTable, outCursor, nameTable3, nameTable4, name
     }
     break;
   default:
-    goto switchD_0000f394_default;
+    goto returnCursor;
   }
   cursor = cursor + targetEntryOffset;
-switchD_0000f394_default:
+returnCursor:
   return cursor;
 }
 
@@ -4116,10 +4116,10 @@ loopCheckS_Unkown_Target__error__001a45a8:
         }
         break;
       default:
-        goto switchD_0000f958_default;
+        goto emitStatementTerminator_0000f958;
       }
       outCursor = outCursor + emitLength;
-switchD_0000f958_default:
+emitStatementTerminator_0000f958:
       emitLength = 0;
       if (s___001a46fc[0] != '\0') {
         srcCursor = ";\n";
@@ -4631,7 +4631,7 @@ loopSetEmitLength2:
         }
         switch(entryHalfword & 0xf) {
         default:
-          goto switchD_000109e4_caseD_0;
+          goto emitStatementTerminator_000109e4;
         case 1:
           emitLength = 0;
           if (s_position_001a4760[0] != '\0') {
@@ -4919,7 +4919,7 @@ loopSetOutCursor4:
             }
             break;
           default:
-            goto switchD_000109e4_caseD_0;
+            goto emitStatementTerminator_000109e4;
           }
           break;
         case 0xb:
@@ -4936,7 +4936,7 @@ loopSetOutCursor4:
           }
         }
         outCursor = outCursor + emitLength;
-switchD_000109e4_caseD_0:
+emitStatementTerminator_000109e4:
         emitLength = 0;
         if (s___001a46fc[0] != '\0') {
           srcCursor = ";\n";
@@ -5213,7 +5213,7 @@ loopSetOutCursor5:
           } while (copyChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-switchD_000118c8_caseD_11:
+loadConstantVector:
         constantVector = (float *)(program + program[0x1b] * 2 + (uint)(ushort)*paramEntry * 4);
         switch(*paramEntry >> 0x1a & 7) {
         case 0:
@@ -5395,7 +5395,7 @@ switchD_000118c8_caseD_11:
           }
           goto setOutCursor3;
         }
-        goto switchD_000118c8_caseD_0;
+        goto checkParamGroupState;
       }
 checkS_state__001a4858:
       if (s_state__001a4858[0] == '\0') {
@@ -5416,7 +5416,7 @@ setOutCursor:
       outCursor = outCursor + emitLength3;
       switch(paramKind) {
       default:
-        goto switchD_000118c8_caseD_0;
+        goto checkParamGroupState;
       case 1:
         emitLength3 = 0;
         if (s_local__001a4860[0] != '\0') {
@@ -5603,7 +5603,7 @@ setOutCursor:
           }
           break;
         default:
-          goto switchD_000118c8_caseD_0;
+          goto checkParamGroupState;
         }
         break;
       case 4:
@@ -5694,7 +5694,7 @@ loopSetOutCursor6:
           }
         }
         else {
-          if (lightColorKind != 0) goto switchD_000118c8_caseD_0;
+          if (lightColorKind != 0) goto checkParamGroupState;
           emitLength3 = 0;
           if (s_ambient_001a47f4[0] != '\0') {
             srcCursor = "ambient";
@@ -5852,7 +5852,7 @@ loopSetOutCursor7:
           }
           break;
         default:
-          goto switchD_000118c8_caseD_0;
+          goto checkParamGroupState;
         }
         break;
       case 6:
@@ -5909,7 +5909,7 @@ loopSetOutCursor7:
           }
         }
         else if (texgenComponent < 2) {
-          if (texgenComponent != 0) goto switchD_000118c8_caseD_0;
+          if (texgenComponent != 0) goto checkParamGroupState;
           emitLength3 = 0;
           if (s_s_001a48f4[0] != '\0') {
             srcCursor = "s";
@@ -5936,7 +5936,7 @@ loopSetOutCursor7:
           }
         }
         else {
-          if (texgenComponent != 3) goto switchD_000118c8_caseD_0;
+          if (texgenComponent != 3) goto checkParamGroupState;
           emitLength3 = 0;
           if (s_q_001a4900[0] != '\0') {
             srcCursor = "q";
@@ -5991,7 +5991,7 @@ loopSetOutCursor7:
           }
         }
         else if (texgenComponent < 2) {
-          if (texgenComponent != 0) goto switchD_000118c8_caseD_0;
+          if (texgenComponent != 0) goto checkParamGroupState;
           emitLength3 = 0;
           if (s_s_001a48f4[0] != '\0') {
             srcCursor = "s";
@@ -6018,7 +6018,7 @@ loopSetOutCursor7:
           }
         }
         else {
-          if (texgenComponent != 3) goto switchD_000118c8_caseD_0;
+          if (texgenComponent != 3) goto checkParamGroupState;
           emitLength3 = 0;
           if (s_q_001a4900[0] != '\0') {
             srcCursor = "q";
@@ -6383,7 +6383,7 @@ loopSetOutCursor8:
         }
         break;
       case 0x11:
-        goto switchD_000118c8_caseD_11;
+        goto loadConstantVector;
       case 0x12:
         emitLength3 = 0;
         if (s_normalscale_001a4a18[0] != '\0') {
@@ -6399,7 +6399,7 @@ loopSetOutCursor8:
       }
 setOutCursor3:
       outCursor = outCursor + emitLength3;
-switchD_000118c8_caseD_0:
+checkParamGroupState:
       if (paramGroupState[*(ushort *)((int)paramEntry + 6)] == 0xffffffff) {
         emitLength3 = 0;
         if (s___001a46fc[0] != '\0') {
@@ -6540,7 +6540,7 @@ loopSetOutCursor9:
       outCursor = outCursor + emitLength;
       switch(entryWord) {
       default:
-        goto switchD_00013960_caseD_0;
+        goto emitStatementTerminator_00013960;
       case 1:
         groupElementIndex = 0;
         if (s_result_position_001a4a60[0] != '\0') {
@@ -6608,7 +6608,7 @@ loopSetOutCursor9:
             }
           }
           else {
-            if ((*outputEntry & 1) != 1) goto switchD_00013960_caseD_0;
+            if ((*outputEntry & 1) != 1) goto emitStatementTerminator_00013960;
             groupElementIndex = 0;
             if (s__back_primary_001a4ab4[0] != '\0') {
               srcCursor = ".back.primary";
@@ -6624,7 +6624,7 @@ loopSetOutCursor9:
         }
         else {
           if (((programTarget != 0x8804) && (programTarget != 0x8b30)) || (entryWord = *outputEntry, (entryWord >> 1 & 7) < 2)
-             ) goto switchD_00013960_caseD_0;
+             ) goto emitStatementTerminator_00013960;
           emitLength = 0;
           if (s___001a4464[0] != '\0') {
             srcCursor = "[";
@@ -6681,7 +6681,7 @@ loopSetOutCursor9:
             }
           }
           else {
-            if ((*outputEntry & 1) != 1) goto switchD_00013960_caseD_0;
+            if ((*outputEntry & 1) != 1) goto emitStatementTerminator_00013960;
             groupElementIndex = 0;
             if (s__back_secondary_001a4ad8[0] != '\0') {
               srcCursor = ".back.secondary";
@@ -6696,7 +6696,7 @@ loopSetOutCursor9:
           }
           break;
         }
-        goto switchD_00013960_caseD_0;
+        goto emitStatementTerminator_00013960;
       case 6:
         emitLength = 0;
         if (s_result_texcoord__001a4ae8[0] != '\0') {
@@ -6791,7 +6791,7 @@ loopSetOutCursor9:
         }
       }
       outCursor = outCursor + groupElementIndex;
-switchD_00013960_caseD_0:
+emitStatementTerminator_00013960:
       emitLength = 0;
       if (s___001a46fc[0] != '\0') {
         srcCursor = ";\n";
@@ -9225,24 +9225,24 @@ int gld_postDisplayNotification(ctx)
   driverNotificationObject = _CFStringCreateWithCString(0,"com.ati.ati_gl_driver",0x600);
   if (displaysNotificationName == 0) goto checkDisplaysNotificationObject;
   if ((((displaysNotificationObject != 0) && (pidKey != 0)) && (displayMaskKey != 0)) && ((driverNotificationName != 0 && (driverNotificationObject != 0)))) {
-    _CFNotificationCenterAddObserver(distributedCenter,ctx,PTR_FUN_001e88c4,displaysNotificationName,displaysNotificationObject,2);
+    _CFNotificationCenterAddObserver(distributedCenter,ctx,ptrTo_gldDisplayNotificationCallback_001e88c4,displaysNotificationName,displaysNotificationObject,2);
     dictKeyPid = pidKey;
     dictValuePid = _CFNumberCreate(0,3,ctx + 0x2a60);
     scratchStack44 = displayMaskKey;
     scratchStack3c = _CFNumberCreate(0,3,ctx + 0x2a64);
     if (dictValuePid != 0) {
       if (scratchStack3c != 0) {
-        userInfo = _CFDictionaryCreate(*(undefined4 *)PTR_001e88c0,&dictKeyPid,&dictValuePid,2,PTR_001e88b8,
-                                    PTR_001e88bc);
+        userInfo = _CFDictionaryCreate(*(undefined4 *)ptrTo_kCFAllocatorDefault_001e88c0,&dictKeyPid,&dictValuePid,2,ptrTo_kCFCopyStringDictionaryKeyCallBacks_001e88b8,
+                                    ptrTo_kCFTypeDictionaryValueCallBacks_001e88bc);
         if (userInfo != 0) {
           _CFNotificationCenterPostNotification(distributedCenter,driverNotificationName,driverNotificationObject,userInfo,1);
           _CFRelease(userInfo);
         }
-        if (dictValuePid == 0) goto LAB_00017cfc;
+        if (dictValuePid == 0) goto releaseStack3cObject;
       }
       _CFRelease(dictValuePid);
     }
-LAB_00017cfc:
+releaseStack3cObject:
     if (scratchStack3c != 0) {
       _CFRelease(scratchStack3c);
     }
@@ -10215,7 +10215,7 @@ checkCtx:
       ((int (*)())gld_drawPixelsDispatch)(ctx,rasterPos,width,height,scratchUint32,scratchPtr42,scratchInt34,1,0);
                     
                     
-      (*(code *)PTR_FUN_001e8754)(scratchInt34);
+      (*(code *)lazyPtrTo_free_001e8754)(scratchInt34);
       return;
     }
   }

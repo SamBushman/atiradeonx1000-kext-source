@@ -1064,12 +1064,12 @@ int printf_LDBLStub_1a32d0(buffer, format, variadicArg3, variadicArg4, variadicA
 {
   undefined4 result;
   
-  if (DAT_001fc1d4 == (code *)0x0) {
-    DAT_001fc1d4 = (code *)((int (*)())stub_getrealaddr)("sprintf");
+  if (resolvedSprintf_001fc1d4 == (code *)0x0) {
+    resolvedSprintf_001fc1d4 = (code *)((int (*)())stub_getrealaddr)("sprintf");
   }
                     
                     
-  result = (*DAT_001fc1d4)(buffer,format,variadicArg3,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
+  result = (*resolvedSprintf_001fc1d4)(buffer,format,variadicArg3,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
   return result;
 }
 
@@ -1084,12 +1084,12 @@ int printf_LDBLStub_1a337c(format, variadicArg2, variadicArg3, variadicArg4, var
   undefined4 variadicArg7;
   undefined4 variadicArg8;
 {
-  if (DAT_001fc1d8 == (code *)0x0) {
-    DAT_001fc1d8 = (code *)((int (*)())stub_getrealaddr)("printf");
+  if (resolvedPrintf_001fc1d8 == (code *)0x0) {
+    resolvedPrintf_001fc1d8 = (code *)((int (*)())stub_getrealaddr)("printf");
   }
                     
                     
-  (*DAT_001fc1d8)(format,variadicArg2,variadicArg3,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
+  (*resolvedPrintf_001fc1d8)(format,variadicArg2,variadicArg3,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
   return;
 }
 
@@ -1104,12 +1104,12 @@ int printf_LDBLStub_1a3428(buffer, bufferSize, format, argList, variadicArg5, va
   undefined4 variadicArg7;
   undefined4 variadicArg8;
 {
-  if (DAT_001fc1dc == (code *)0x0) {
-    DAT_001fc1dc = (code *)((int (*)())stub_getrealaddr)("vsnprintf");
+  if (resolvedVsnprintf_001fc1dc == (code *)0x0) {
+    resolvedVsnprintf_001fc1dc = (code *)((int (*)())stub_getrealaddr)("vsnprintf");
   }
                     
                     
-  (*DAT_001fc1dc)(buffer,bufferSize,format,argList,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
+  (*resolvedVsnprintf_001fc1dc)(buffer,bufferSize,format,argList,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
   return;
 }
 
@@ -1124,12 +1124,12 @@ int printf_LDBLStub_1a34d4(buffer, format, argList, variadicArg4, variadicArg5, 
   undefined4 variadicArg7;
   undefined4 variadicArg8;
 {
-  if (DAT_001fc1e0 == (code *)0x0) {
-    DAT_001fc1e0 = (code *)((int (*)())stub_getrealaddr)("vsprintf");
+  if (resolvedVsprintf_001fc1e0 == (code *)0x0) {
+    resolvedVsprintf_001fc1e0 = (code *)((int (*)())stub_getrealaddr)("vsprintf");
   }
                     
                     
-  (*DAT_001fc1e0)(buffer,format,argList,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
+  (*resolvedVsprintf_001fc1e0)(buffer,format,argList,variadicArg4,variadicArg5,variadicArg6,variadicArg7,variadicArg8);
   return;
 }
 
@@ -1180,7 +1180,7 @@ int IRPseudo__getKindName()
 int MachineAssembler__dtor_1cd7ec(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9a40;
+  *this = &ptrTo_MachineAssembler__dtor_1cd7ec_001e9a40;
   return;
 }
 
@@ -1243,7 +1243,7 @@ int IRInst__dtor_1cd908(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e9998;
+  *this = &ptrTo_IRInst__dtor_1cdba4_001e9998;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1261,7 +1261,7 @@ int IRInst__dtor_1cd970(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e97a0;
+  *this = &ptrTo_IRInst__dtor_1cd970_001e97a0;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1276,7 +1276,7 @@ int IRInst__dtor_1cd9c4(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e97a0;
+  *this = &ptrTo_IRInst__dtor_1cd970_001e97a0;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1294,7 +1294,7 @@ int IRInst__dtor_1cda2c(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e9848;
+  *this = &ptrTo_IRInst__dtor_1cda2c_001e9848;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1309,7 +1309,7 @@ int IRInst__dtor_1cda80(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e9848;
+  *this = &ptrTo_IRInst__dtor_1cda2c_001e9848;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1327,7 +1327,7 @@ int IRInst__dtor_1cdae8(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e98f0;
+  *this = &ptrTo_IRInst__dtor_1cdae8_001e98f0;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1342,7 +1342,7 @@ int IRInst__dtor_1cdb3c(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e98f0;
+  *this = &ptrTo_IRInst__dtor_1cdae8_001e98f0;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1360,7 +1360,7 @@ int IRInst__dtor_1cdba4(this)
   undefined *baseVtableBase1;
   
   baseVtableBase1 = PTR_DAT_001e8b50 + 8;
-  *this = &PTR_FUN_001e9998;
+  *this = &ptrTo_IRInst__dtor_1cdba4_001e9998;
   *this = baseVtableBase1;
   baseVtableBase1 = PTR_DAT_001e8b48 + 8;
   *this = PTR_DAT_001e8b4c + 8;
@@ -1450,7 +1450,7 @@ int FuncEndBlock__getKindName()
 int EntryBlock__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9f28;
+  *this = &ptrTo_EntryBlock__dtor_001e9f28;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -1484,7 +1484,7 @@ int AnyBlock__deleting_dtor(this)
 int FuncEndBlock__dtor(this2)
   undefined4 *this2;
 {
-  *this2 = &PTR_FUN_001e9b60;
+  *this2 = &ptrTo_FuncEndBlock__dtor_001e9b60;
   return Block__dtor_ea270(this2);
 }
 

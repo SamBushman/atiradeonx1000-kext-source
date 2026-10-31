@@ -625,7 +625,7 @@ int ValueKey__foldMinOfConstants(ctx)
         valueNumberPtr = valueNumberPtr + 4;
       }
       if ((operandClasses[0] != 3) || (operandClasses[1] != 3)) {
-        laneResult = *(int *)(&DAT_001e6014 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
+        laneResult = *(int *)(&foldMinClassTable_001e6014 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
         if (laneResult == 1) {
           laneResult = 1;
         }
@@ -726,7 +726,7 @@ int ValueKey__foldMaxOfConstants(ctx)
         valueNumberPtr = valueNumberPtr + 4;
       }
       if ((operandClasses[0] != 3) || (operandClasses[1] != 3)) {
-        laneResult = *(int *)(&DAT_001e60a4 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
+        laneResult = *(int *)(&foldMaxClassTable_001e60a4 + (operandClasses[0] * 6 + operandClasses[1]) * 4);
         if (laneResult == 1) {
           laneResult = 1;
         }
@@ -3441,7 +3441,7 @@ int ValueKey__simplifyModifiersAndAddressing(key)
             if ((sourceKindTest == 0) || (!negateAbsIsNoOp)) {
 loopSetLoopPtr8:
               loopPtr8 = *(int **)(key + 0xb0);
-              goto LAB_00180a14;
+              goto endOfLoopBody;
             }
             loopPtr8 = *(int **)(key + 0xb0);
             absIsNoOp = false;
@@ -3468,7 +3468,7 @@ loopSetLoopPtr8:
         loopPtr8 = *(int **)(key + 0xb0);
       }
     }
-LAB_00180a14: ;
+endOfLoopBody: ;
   }
   optionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(key + 0x238),10);
   if (optionEnabled != 0) {

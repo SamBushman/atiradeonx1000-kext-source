@@ -569,7 +569,7 @@ int SelectWord__canonicalize(outSelect, selectWord)
       laneCursor = laneCursor + 1;
       loopCounter = loopCounter + -1;
     } while (loopCounter != 0);
-    if (!hasUnusedLane) goto LAB_000f35b4;
+    if (!hasUnusedLane) goto storeLane0;
   }
   if (usedLanesAgree) {
     *outSelect = (DAT_001aa818)[splatComponent];
@@ -591,7 +591,7 @@ int SelectWord__canonicalize(outSelect, selectWord)
     (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = CONCAT31((*(unsigned char *)((unsigned char *)ghidra_home + 4)),3);
     lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   }
-LAB_000f35b4:
+storeLane0:
   (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = lane0Byte;
   *outSelect = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   return;
@@ -1082,7 +1082,7 @@ resultModeCase4:
     if (-1 < inst[0x4d]) {
       registerClassIndex = *(int *)(inst[0x4d] * 0xc + *(int *)(program + 0x78) + 4);
     }
-    classComponentMask = (DAT_001dc58c)[registerClassIndex * 2];
+    classComponentMask = (irClassMaskTable_001dc58c)[registerClassIndex * 2];
     if ((classComponentMask & 1) != 0) {
       *laneMask = 1;
     }
@@ -1293,7 +1293,7 @@ resultModeCase2:
       opcodeClassIndex = *(int *)(inst[0x4d] * 0xc + *(int *)(program + 0x78) + 4);
       laneIndex = opcodeClassIndex - 10;
     }
-    resultFlags = (DAT_001dc58c)[opcodeClassIndex * 2];
+    resultFlags = (irClassMaskTable_001dc58c)[opcodeClassIndex * 2];
     if ((laneIndex < 2) && ((char)sourceSelect == '\x04')) {
       resultFlags = resultFlags & 7;
     }

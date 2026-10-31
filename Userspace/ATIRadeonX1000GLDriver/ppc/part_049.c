@@ -2411,9 +2411,9 @@ int R300SchedModel__vslot26(this, inst, operandNumber, selectsOut, groupCount)
   if (selectIsNative == 0) {
     tableRow = ((selectWord >> 0x18) * 0x7d + (selectWord >> 0x10 & 0xff) * 0x19 + (selectWord >> 8 & 0xff) * 5 +
             (selectWord & 0xff)) * 4;
-    for (tableEntry = *(int *)(&DAT_001b0240 + (tableRow + *groupCount) * 4); tableEntry != 0x4040404;
-        tableEntry = *(int *)(&DAT_001b0240 + (tableRow + tableEntry + 1) * 4)) {
-      entryWord = *(uint *)(&DAT_001b0240 + (tableRow + *groupCount) * 4);
+    for (tableEntry = *(int *)(&r300SchedGroupTable_001b0240 + (tableRow + *groupCount) * 4); tableEntry != 0x4040404;
+        tableEntry = *(int *)(&r300SchedGroupTable_001b0240 + (tableRow + tableEntry + 1) * 4)) {
+      entryWord = *(uint *)(&r300SchedGroupTable_001b0240 + (tableRow + *groupCount) * 4);
       *(uint *)(*groupCount * 4 + selectsOut) =
            entryWord << 0x18 | (entryWord & 0xff00) << 8 | entryWord >> 8 & 0xff00 | entryWord >> 0x18;
       tableEntry = *groupCount;
@@ -2806,7 +2806,7 @@ int R300SchedModel__vslot16(this, inst, trialSelect, resultLane)
         return newInst;
       }
       newInstVtable = *newInst;
-      goto LAB_0018b190;
+      goto callNewInstVfn4;
     }
     newInst = IRInst__create(0x14,this[2]);
     newInst[0x25] = newInst[0x53];
@@ -2849,7 +2849,7 @@ int R300SchedModel__vslot16(this, inst, trialSelect, resultLane)
     } while (-1 < trialSelectNext + -1);
   }
   newInstVtable = *newInst;
-LAB_0018b190:
+callNewInstVfn4:
   (**(code **)(newInstVtable + 4))(newInst);
   return (int *)0x0;
 }
@@ -3478,7 +3478,7 @@ int PackState__buildSlotTable(packState, slotTable)
     loopPtr3 = packState;
     loopRemaining = packState;
     if ((packState[2] == 0) || (packState[3] == 0)) {
-LAB_0018c498:
+placeSourcesLoop:
       do {
         if ((packState[4] == 0) || (packState[5] == 0)) {
 loopSetCallResult:
@@ -3566,7 +3566,7 @@ loopSetCallResult:
         slotUseCounts[0] = slotUseCounts[0] + 1;
         slotUseCounts[1] = slotUseCounts[1] + 1;
         slotTable[1] = loopPtr[2];
-        goto LAB_0018c498;
+        goto placeSourcesLoop;
       }
     }
     loopPtr2 = loopPtr2 + -1;
@@ -4047,7 +4047,7 @@ loopSetVslot5cResult2:
           operandIndex2 = IRInst__getOperandRecord(inst1,operandIndex2);
           SelectWord__readMask(readMaskScratch,*(undefined4 *)(operandIndex2 + 0x10));
           if ((readMaskScratch[0] & 0xffffff00) == 0) {
-            if ((readMaskScratch[0] & 0xff) == 0) goto LAB_0018da08;
+            if ((readMaskScratch[0] & 0xff) == 0) goto endOfLoopBody;
             laneMask = (int *)((int)((unsigned char *)0x0) + 1);
             operandIndex2 = ((int (*)())ConstantSlots__tryAddToRow)(packState,a0,1);
           }
@@ -4091,7 +4091,7 @@ loopSetIsMovOfNonConstant:
           goto loopSetIsMovOfNonConstant;
         }
       }
-LAB_0018da08: ;
+endOfLoopBody: ;
     }
   }
   return 1;

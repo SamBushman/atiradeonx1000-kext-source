@@ -1684,7 +1684,7 @@ int orph_da880(param_1)
   param_1[0x86] = 0;
                     
                     
-  (*(code *)PTR_FUN_001e876c)(param_1 + 4,0,0x200);
+  (*(code *)lazyPtrTo_memset_001e876c)(param_1 + 4,0,0x200);
   return;
 }
 

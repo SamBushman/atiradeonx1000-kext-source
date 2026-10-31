@@ -2661,10 +2661,10 @@ int gld_selectProgramCallback(glContext)
   int glContext;
 {
   if (*(char *)(glContext + 0x1868) != '\0') {
-    *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = PTR_FUN_001e8b40;
+    *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = ptrTo_vpStateSelectForDraw_001e8b40;
     return;
   }
-  *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = PTR_FUN_001e8b3c;
+  *(undefined **)((int)((unsigned char *)0x000011cc) + glContext) = ptrTo_extvsValidateProgramState_001e8b3c;
   return;
 }
 
@@ -2932,7 +2932,7 @@ int gld_scanProgramTokens(glContext, a12, tokenInfo)
     tokenWord = *tokenCursor;
     switch((uint)GH_F2U(tokenWord) & 0xffff) {
     default:
-      goto switchD_000abe1c_caseD_0;
+      goto returnOne;
     case 1:
     case 2:
     case 4:
@@ -3037,7 +3037,7 @@ int gld_scanProgramTokens(glContext, a12, tokenInfo)
       case 0:
         inputByteOffset = inputIndex * 4;
         if (*(int *)(((unsigned char *)0x000013f8) + inputByteOffset + glContext) == 0) {
-switchD_000ac280_caseD_4:
+setInputKindDefault:
           *(undefined4 *)(inputByteOffset + *(int *)(a12 + 0x74) + 0x14) = 1;
         }
         else {
@@ -3055,7 +3055,7 @@ switchD_000ac280_caseD_4:
             *(undefined4 *)(inputByteOffset + *(int *)(a12 + 0x74) + 0x14) = 2;
             break;
           case 4:
-            goto switchD_000ac280_caseD_4;
+            goto setInputKindDefault;
           }
         }
         break;
@@ -3187,7 +3187,7 @@ loopStoreA12Ptr74:
       }
     }
   }
-switchD_000abe1c_caseD_0:
+returnOne:
   return 1;
 }
 
@@ -6163,7 +6163,7 @@ callGldConvertDestOperand:
         a1Word70 = *(int *)(boundProgram + 0x70);
       }
       *(undefined4 *)(glContextWord1130_2 * 4 + a1Word70) = 0;
-LAB_000b1448:
+callCompileFailureCallback:
       (**(code **)(((unsigned char *)0x00001224) + glContext))(glContext,failedInstance);
       return 0;
     }
@@ -6189,7 +6189,7 @@ LAB_000b1448:
       if (compileResult == -2) {
         failedInstance = *(undefined4 *)(*(int *)(((unsigned char *)0x00001130) + glContext) * 4 + *(int *)(boundProgram + 0x70));
         *(undefined4 *)(*(int *)(((unsigned char *)0x00001130) + glContext) * 4 + *(int *)(boundProgram + 0x70)) = 0;
-        goto LAB_000b1448;
+        goto callCompileFailureCallback;
       }
       *(undefined1 *)(boundProgram + 0x6c) = 1;
     }
@@ -7322,7 +7322,7 @@ checkColorOp:
           }
           redirectedToScratch = false;
           savedColorDst = 0;
-          goto switchD_000b3adc_caseD_8962;
+          goto checkAlphaOp;
         }
         savedColorDst = colorOp[1];
         redirectedToScratch = true;
@@ -7335,7 +7335,7 @@ setHaveAlphaOp:
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,colorOp + 1,0,1,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 5,0,1,regWritten);
         default:
-          goto switchD_000b3adc_caseD_8962;
+          goto checkAlphaOp;
         case 0x8963:
           ilOpcode = 3;
           break;
@@ -7370,7 +7370,7 @@ setIlOpcodeWord:
 loopCallAtifsEmitSourceOperand:
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 9,0,1,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 0xd,0,1,regWritten);
-          goto switchD_000b3adc_caseD_8962;
+          goto checkAlphaOp;
         case 0x896a:
           ilCndOpcodeBase = 0x3000d;
           ilCndModeBit = 1;
@@ -7398,8 +7398,8 @@ callIlTokenBufPush:
 callAtifsEmitSourceOperand:
         ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 5,0,1,regWritten);
         ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 9,0,1,regWritten);
-switchD_000b3adc_caseD_8962:
-        if (alphaOp == (int *)0x0) goto switchD_000b3e78_caseD_8962;
+checkAlphaOp:
+        if (alphaOp == (int *)0x0) goto flushRedirectedColorDst;
         switch(*alphaOp) {
         case 0x8961:
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,0x47);
@@ -7446,7 +7446,7 @@ setIlOpcodeWord3:
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,alphaOp + 0xd,0,0,regWritten);
           goto loopCallAtifsEmitSourceOperand2;
         }
-switchD_000b3e78_caseD_8962:
+flushRedirectedColorDst:
         if (redirectedToScratch) {
           ((int (*)())atifsEmitMoveWithWriteMask)(ctx,&tokenCount,savedColorDst,colorOp[1],colorOp[2]);
           colorOp[1] = savedColorDst;
@@ -7501,13 +7501,13 @@ setConstantIndex:
       if (*(char *)(constantOffset + *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc)) != '\0') {
         setConstantFn = *(code **)(((unsigned char *)0x00001280) + ctx);
         constantFloats = (undefined1 *)(constantOffset + *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc) + 4);
-        goto LAB_000b4370;
+        goto callSetConstantFn;
       }
     }
     else {
       setConstantFn = *(code **)(((unsigned char *)0x00001280) + ctx);
       constantFloats = programConstantPtr;
-LAB_000b4370:
+callSetConstantFn:
       (*setConstantFn)(ctx,compiledProgram,constantIndex,constantIndex,constantFloats,1,0);
     }
     isLastConstant = constantIndex == 7;
@@ -7884,7 +7884,7 @@ int gld_compileILProgram(glContext, compileOutput, compileRecord, ilSource, glCo
     return 6;
   }
   if (loopCounter == 0) {
-switchD_000b4be8_caseD_80000007:
+clearScratchResult:
     scratchResult = 0;
   }
   else {
@@ -7914,7 +7914,7 @@ switchD_000b4be8_caseD_80000007:
       scratchResult = 8;
       break;
     default:
-      goto switchD_000b4be8_caseD_80000007;
+      goto clearScratchResult;
     case -0x7fffffed:
       scratchResult = 5;
       break;
@@ -9406,7 +9406,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
 setUnitRegAddrFinal:
   unitRegAddrFinal = unitWordOffset + glContext;
   *(uint *)(unitRegAddrFinal + 0x1cdc) =
-       (*(uint *)(&DAT_001dbf2c + field21Count * 4) & 7) << 0x15 | *(uint *)(unitRegAddrFinal + 0x1cdc) & 0xff1fffff;
+       (*(uint *)(&unitBiasFieldBitsTable_001dbf2c + field21Count * 4) & 7) << 0x15 | *(uint *)(unitRegAddrFinal + 0x1cdc) & 0xff1fffff;
   *(uint *)(unitRegAddrFinal + 0x1d1c) = (field15Bits & 3) << 0xf | *(uint *)(unitRegAddrFinal + 0x1d1c) & 0xfffe7fff;
   if (unsignedConvLimit <= scaledBiasD) {
     field23Bits = (int)(scaledBiasD - unsignedConvLimit) + 0x80000000;

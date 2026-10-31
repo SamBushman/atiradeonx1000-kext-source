@@ -677,9 +677,9 @@ programCase0:
   srcNegate = srcWord >> 0x1b & 1;
   select0 = 4;
   if (componentCount != 0) {
-    select0 = *(uint *)(&DAT_001dac08 + (srcWord >> 0x13 & 0xc)) >> 0x19 & 7;
+    select0 = *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0x13 & 0xc)) >> 0x19 & 7;
   }
-  negate0 = srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0x13 & 0xc)) >> 0x18 & 1;
+  negate0 = srcNegate ^ *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0x13 & 0xc)) >> 0x18 & 1;
   comp0Bits = negate0 << 3 | select0;
   if (componentCount < 2) {
     ilSwizzle = negate0 << 0xf |
@@ -688,24 +688,24 @@ programCase0:
   else {
     select2 = 4;
     if (2 < componentCount) {
-      select2 = *(uint *)(&DAT_001dac08 + (srcWord >> 0xf & 0xc)) >> 0x19 & 7;
+      select2 = *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0xf & 0xc)) >> 0x19 & 7;
     }
     select3 = 4;
     if (3 < componentCount) {
-      select3 = *(uint *)(&DAT_001dac08 + (srcWord >> 0xd & 0xc)) >> 0x19 & 7;
+      select3 = *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0xd & 0xc)) >> 0x19 & 7;
     }
-    ilSwizzle = (srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0xd & 0xc)) >> 0x18 & 1) << 0xf |
+    ilSwizzle = (srcNegate ^ *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0xd & 0xc)) >> 0x18 & 1) << 0xf |
             select3 << 0xc |
-            (srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0xf & 0xc)) >> 0x18 & 1) << 0xb |
+            (srcNegate ^ *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0xf & 0xc)) >> 0x18 & 1) << 0xb |
             select2 << 8 |
-            (srcNegate ^ *(uint *)(&DAT_001dac08 + (srcWord >> 0x11 & 0xc)) >> 0x18 & 1) << 7 |
-            *(uint *)(&DAT_001dac08 + (srcWord >> 0x11 & 0xc)) >> 0x15 & 0x70 | comp0Bits;
+            (srcNegate ^ *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0x11 & 0xc)) >> 0x18 & 1) << 7 |
+            *(uint *)(&fpilSourceInfoTable_001dac08 + (srcWord >> 0x11 & 0xc)) >> 0x15 & 0x70 | comp0Bits;
   }
   if (remapSwizzle) {
-    ilSwizzle = ((byte)(DAT_001dac00)[ilSwizzle >> 0xc & 7] & 7) << 0xc |
-            ((byte)(DAT_001dac00)[ilSwizzle >> 8 & 7] & 7) << 8 |
-            ((byte)(DAT_001dac00)[ilSwizzle >> 4 & 7] & 7) << 4 |
-            (byte)(DAT_001dac00)[ilSwizzle & 7] & 7 | ilSwizzle & 0xffff8888;
+    ilSwizzle = ((byte)(fpilSwizzleComponentTable_001dac00)[ilSwizzle >> 0xc & 7] & 7) << 0xc |
+            ((byte)(fpilSwizzleComponentTable_001dac00)[ilSwizzle >> 8 & 7] & 7) << 8 |
+            ((byte)(fpilSwizzleComponentTable_001dac00)[ilSwizzle >> 4 & 7] & 7) << 4 |
+            (byte)(fpilSwizzleComponentTable_001dac00)[ilSwizzle & 7] & 7 | ilSwizzle & 0xffff8888;
   }
   *outToken = (uint)ilSourceToken | 0x400000;
   *outSwizzle = ilSwizzle;
@@ -736,10 +736,10 @@ int fpilTranslateSourceWithSwizzle(translator, irSource, outToken, outSwizzle, s
     selectWord = *selectWordPtr;
     result = 0;
     srcNegate = *irSource >> 0x1b & 1;
-    compEntry3 = *(uint *)(&DAT_001dac08 + (selectWord >> 10 & 0x3c));
-    compEntry1 = *(uint *)(&DAT_001dac08 + (selectWord >> 6 & 0x3c));
-    compEntry2 = *(uint *)(&DAT_001dac08 + (selectWord >> 2 & 0x3c));
-    compEntry0 = *(uint *)(&DAT_001dac08 + (selectWord & 0xf) * 4);
+    compEntry3 = *(uint *)(&fpilSourceInfoTable_001dac08 + (selectWord >> 10 & 0x3c));
+    compEntry1 = *(uint *)(&fpilSourceInfoTable_001dac08 + (selectWord >> 6 & 0x3c));
+    compEntry2 = *(uint *)(&fpilSourceInfoTable_001dac08 + (selectWord >> 2 & 0x3c));
+    compEntry0 = *(uint *)(&fpilSourceInfoTable_001dac08 + (selectWord & 0xf) * 4);
     *outToken = ilToken;
     *outSwizzle = (srcNegate ^ compEntry0 >> 0x18 & 1) << 0xf |
                compEntry0 >> 0xd & 0x7000 |
@@ -960,10 +960,10 @@ int fpilEmitMoveFromTemp(translator, irDest, destFlag)
   tokenDataPtrAddr = translator + 10;
   tokenCount = translator[0xb];
   tokenCapacity = translator[0xc];
-  compEntry3 = *(uint *)(&DAT_001dac08 + (destWord >> 6 & 0xc));
-  compEntry2 = *(uint *)(&DAT_001dac08 + (destWord >> 4 & 0xc));
-  compEntry1 = *(uint *)(&DAT_001dac08 + (destWord >> 2 & 0xc));
-  compEntry0 = *(uint *)(&DAT_001dac08 + (destWord & 0xc));
+  compEntry3 = *(uint *)(&fpilSourceInfoTable_001dac08 + (destWord >> 6 & 0xc));
+  compEntry2 = *(uint *)(&fpilSourceInfoTable_001dac08 + (destWord >> 4 & 0xc));
+  compEntry1 = *(uint *)(&fpilSourceInfoTable_001dac08 + (destWord >> 2 & 0xc));
+  compEntry0 = *(uint *)(&fpilSourceInfoTable_001dac08 + (destWord & 0xc));
   tempBase = *(uint *)(*translator + 0x10);
   if (tokenCapacity < tokenCount + 5U) {
     if (tokenCapacity == 0) {
@@ -1128,7 +1128,7 @@ int fragmentTranslateSimpleOp(translator, slot, ilInstr)
   
   opWord = *(uint *)(*translator + *(int *)(*translator + 0x54) * 8 + slot * 8);
   srcCount = opWord >> 0x1d;
-  hasDestination = (*(uint *)(&DAT_001dac40 + (opWord >> 0xe & 0xff0)) ^ 0x20000000) >> 0x1d & 1;
+  hasDestination = (*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + (opWord >> 0xe & 0xff0)) ^ 0x20000000) >> 0x1d & 1;
   if (translator[9] != 0) {
     return translator[9];
   }
@@ -5663,8 +5663,8 @@ int fragmentTranslateArithmetic(translator, slot)
     extraCopies = *(uint *)(opRecord + 4) >> 0x1a & 3;
   }
   opcodeTableOffset = opcodeIndex * 0x10;
-  ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),(short)(*(uint *)(&DAT_001dac34 + opcodeTableOffset) >> 1));
-  ilInstAOpcode = (*(uint *)(&DAT_001dac38 + opcodeTableOffset) >> 0x13) << 0x10 | ilInstAOpcode & 0xc000ffff;
+  ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),(short)(*(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeTableOffset) >> 1));
+  ilInstAOpcode = (*(uint *)(&fragmentOpcodeInfoTable_word1_001dac38 + opcodeTableOffset) >> 0x13) << 0x10 | ilInstAOpcode & 0xc000ffff;
   destResult = ((int (*)())fpilTranslateDestination)(translator,opRecord + 8,&ilInstADst,&ilInstADstMask,*(uint *)(opRecord + 4) >> 0x14 & 1);
   if (destResult == 0) {
     srcResult = ((int (*)())fpilTranslateSource)(translator,opRecord + 0x10,&ilInstASrc0,&ilInstASwz0);
@@ -5944,8 +5944,8 @@ loopReturnCode:
   else {
     opcode = *(uint *)(program + instructionBlockOffset) >> 0x12 & 0xff;
     opcodeInfoOffset = opcode * 0x10;
-    opClass = *(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
-    if ((opClass != 0) && ((*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) == 0)) {
+    opClass = *(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
+    if ((opClass != 0) && ((*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) == 0)) {
       instructionIndex = 0;
       recordIndex = 0;
       recordByteOffset = 0;
@@ -5965,7 +5965,7 @@ loopReturnCode:
           ilInstAPtr = &ilInstAOpcode;
           opRecord = instructionBlock + recordByteOffset;
           _memset(ilInstAPtr,0,0x24);
-          ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),(short)(*(uint *)(&DAT_001dac34 + opcode2 * 0x10) >> 1))
+          ilInstAOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstAOpcode) + 0)),(short)(*(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcode2 * 0x10) >> 1))
           ;
           ((int (*)())fpilTranslateDestination)(translator,opRecord + 8,&ilInstADst,&ilInstADstMask,
                        *(uint *)(recordByteOffset + instructionBlock + 4) >> 0x14 & 1);
@@ -6013,7 +6013,7 @@ loopReturnCode:
 loopCheckOpcode:
           if (opcode != 0x4d) {
 loopCheckOpcodeInfoOffset:
-            if ((((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) != 3) &&
+            if ((((*(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) != 3) &&
                 ((translator[5] & 0x20000000U) != 0)) &&
                (((((dstFlagWord = *(uint *)((int)instructionRecords + recordByteOffset + 8), (dstFlagWord & 0x2000) != 0 &&
                    ((dstFlagWord & 0x300) != 0)) ||
@@ -6029,11 +6029,11 @@ loopCheckOpcodeInfoOffset:
             if (opClass == 5) {
               ilInstBPtr = &ilInstBOpcode;
               _memset(ilInstBPtr,0,0x24);
-              ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),(short)(*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 1));
-              ilInstBOpcode = (*(uint *)(&DAT_001dac38 + opcodeInfoOffset) >> 0x13) << 0x10 | ilInstBOpcode & 0xc000ffff;
-              if ((*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & 2) == 0) {
+              ilInstBOpcode = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstBOpcode) + 0)),(short)(*(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 1));
+              ilInstBOpcode = (*(uint *)(&fragmentOpcodeInfoTable_word1_001dac38 + opcodeInfoOffset) >> 0x13) << 0x10 | ilInstBOpcode & 0xc000ffff;
+              if ((*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & 2) == 0) {
                 if (((currentRecord[1] & 0x100000) != 0) ||
-                   (saturate = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & 1) != 0)) {
+                   (saturate = 0, (*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & 1) != 0)) {
                   saturate = 1;
                 }
                 ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&ilInstBDst,&ilInstBDstMask,saturate);
@@ -6049,15 +6049,15 @@ loopCheckOpcodeInfoOffset:
                   sourceRecordCursor = sourceRecordCursor + 2;
                 } while (operandCount != srcIndex);
               }
-              (**(code **)(&DAT_001dac3c + opcodeInfoOffset))(translator,recordIndex,ilInstBPtr);
+              (**(code **)(&fragmentOpcodeInfoTable_handler_001dac3c + opcodeInfoOffset))(translator,recordIndex,ilInstBPtr);
 checkTranslator:
               if (translator[9] != 0) {
                 return translator[9];
               }
             }
             else {
-              opcodeInfoWord0 = *(uint *)(&DAT_001dac34 + opcodeInfoOffset);
-              opcodeInfoWord1 = *(uint *)(&DAT_001dac38 + opcodeInfoOffset);
+              opcodeInfoWord0 = *(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset);
+              opcodeInfoWord1 = *(uint *)(&fragmentOpcodeInfoTable_word1_001dac38 + opcodeInfoOffset);
               if (opClass == 4) {
                 operandCount = operandCount - 1;
               }
@@ -6068,9 +6068,9 @@ checkTranslator:
               tokenWordCount = ((int (*)())fpilReserveTokens)(translator,tokenWordCount,&reservedTokens);
               if (tokenWordCount != 0) goto loopReturnTranslator;
               *reservedTokens = (opcodeInfoWord1 >> 0x13) << 0x10 | opcodeInfoWord0 >> 1 & 0xffff;
-              if ((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) != 3) {
+              if ((*(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) != 3) {
                 if (((currentRecord[1] & 0x100000) != 0) ||
-                   (saturate = 0, (*(uint *)(&DAT_001dac40 + opcodeInfoOffset) & 0x10000000) != 0)) {
+                   (saturate = 0, (*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) & 0x10000000) != 0)) {
                   saturate = 1;
                 }
                 dstStatus = ((int (*)())fpilTranslateDestination)(translator,(int)instructionRecords + recordByteOffset + 8,&dstToken,&dstMask,saturate);
@@ -6078,7 +6078,7 @@ checkTranslator:
                 reservedTokens[1] = dstToken;
                 reservedTokens[2] = dstMask;
               }
-              if ((*(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) == 4) {
+              if ((*(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf) == 4) {
                 srcSwizzleStatus = ((int (*)())fpilTranslateSourceWithSwizzle)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle,
                                      (int)instructionRecords + recordByteOffset + 0x18);
               }
@@ -6086,7 +6086,7 @@ checkTranslator:
                 srcSwizzleStatus = ((int (*)())fpilTranslateSource)(translator,(int)instructionRecords + recordByteOffset + 0x10,&srcToken,&srcSwizzle);
               }
               if (srcSwizzleStatus != 0) goto loopReturnTranslator;
-              opClass = *(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
+              opClass = *(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
               if (opClass == 6) {
                 srcSwizzle = srcSwizzle & 0xffff0fff | 0x5000;
               }
@@ -6748,8 +6748,8 @@ joined_r0x0004802c:
         currentRecord = instructionRecords + recordIndex * 2;
         opcode = instructionRecords[recordIndex * 2] >> 0x12 & 0xff;
         opcodeInfoOffset = opcode * 0x10;
-        opClass = *(uint *)(&DAT_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
-        if ((opClass == 0) || ((*(uint *)(&DAT_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) != 0))
+        opClass = *(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
+        if ((opClass == 0) || ((*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) != 0))
         break;
       } while( true );
     }
@@ -6883,7 +6883,7 @@ int fragmentProgramToIL(translator)
   translator[8] = program[4] + program[0xc] + 1;
   programKind = *program;
   if ((programKind != 0x8804) && (programKind != 0x8b30)) {
-switchD_00049180_caseD_0:
+returnTranslatorStatus:
     if (translator[9] != 0) {
       return translator[9];
     }
@@ -7047,16 +7047,16 @@ loopCheckTranslator:
       attribBinding = *(ushort *)attribEntry;
       if ((attribBinding & 0xf) == 1) {
         *tokenWritePtr = 0x3ff0016;
-switchD_00049180_caseD_1:
+setAttribSourceToken:
         attribSourceToken = ((unsigned char *)0x00160000);
       }
       else {
         *tokenWritePtr = 0x1ff0016;
         switch(attribBinding & 0xf) {
         default:
-          goto switchD_00049180_caseD_0;
+          goto returnTranslatorStatus;
         case 1:
-          goto switchD_00049180_caseD_1;
+          goto setAttribSourceToken;
         case 2:
           attribSourceToken = (undefined *)0x120000;
           break;
@@ -7732,7 +7732,7 @@ setChannelIndex:
           }
         }
         else {
-          if ((*(ushort *)outputEntry & 0xf) != 7) goto switchD_00049180_caseD_0;
+          if ((*(ushort *)outputEntry & 0xf) != 7) goto returnTranslatorStatus;
           translatorFlags = translator[5];
           dstMaskToken = 0x155;
           translator[5] = translatorFlags | 0x40000000;
@@ -8477,7 +8477,7 @@ int gldReleaseProgramEntry(glContext, programEntry)
         do {
           loopIndex = loopIndex + 1;
           searchCountdown = searchCountdown + -1;
-          if (searchCountdown == 0) goto LAB_0004b6a8;
+          if (searchCountdown == 0) goto callProgramEntryReleaseCallback;
         } while (glContextWord1e7c[loopIndex] != programEntry);
       }
       listCount = listCount + -1;
@@ -8495,7 +8495,7 @@ int gldReleaseProgramEntry(glContext, programEntry)
         }
       }
     }
-LAB_0004b6a8:
+callProgramEntryReleaseCallback:
     (**(code **)(glContext + 0x18))(*(undefined4 *)(((unsigned char *)0x000036c0) + programEntry));
     if (programEntry != stateBlock + 0x124) {
       *(undefined4 *)(((unsigned char *)0x000036c0) + programEntry) = 0;

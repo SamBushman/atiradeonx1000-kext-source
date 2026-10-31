@@ -1307,10 +1307,10 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   texExtraWords = 0;
   usedBits = 0;
   streamPtr = ilTokens;
-switchD_000c90cc_caseD_15:
+restartTokenScan:
   srcCursor = streamPtr + 2;
   tokenCursor = srcCursor;
-switchD_000c90cc_caseD_18:
+nextToken:
   streamPtr = tokenCursor;
   if (streamPtr < ilTokens + ilWordCount) goto code_r0x000c90a4;
   if (errorResult != (uint *******)0x0) {
@@ -1386,13 +1386,13 @@ checkNeverSetFlag1d0:
   streamPtr[1] = ilTokens[1];
   tokenCursor = srcCursor;
   dstCursorCarry = (uint *******)(streamPtr + 2);
-  goto switchD_000c9ab8_caseD_18;
+  goto nextTokenSecondPass;
 code_r0x000c90a4:
   scanTokenWord = (uint *******)*streamPtr;
   tokenCursor = streamPtr;
   switch((uint)scanTokenWord & 0xffff) {
   default:
-    goto switchD_000c90cc_caseD_0;
+    goto exitOnInvalidOpcode;
   case 1:
   case 2:
   case 4:
@@ -1462,7 +1462,7 @@ code_r0x000c90a4:
   case 0x53:
     srcCursor = streamPtr + 1;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 7:
   case 0x11:
   case 0x34:
@@ -1471,17 +1471,17 @@ setScanTokenWord:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 2);
     srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,hasDestination,2,&scanState);
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 8:
   case 0x32:
     srcCursor = streamPtr + 2;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 9:
   case 0x1d:
     srcCursor = streamPtr + 3;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 10:
   case 0xd:
   case 0x21:
@@ -1492,17 +1492,17 @@ setScanTokenWord:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 3);
     srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,1,3,&scanState);
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0xf:
     srcCursor = streamPtr + *(ushort *)((int)streamPtr + 6) + 2;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x14:
     srcCursor = streamPtr + 3;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x15:
-    goto switchD_000c90cc_caseD_15;
+    goto restartTokenScan;
   case 0x16:
     srcCursor = streamPtr + 1;
     scanTokenWord = &scanState;
@@ -1523,7 +1523,7 @@ setScanTokenWord:
     }
     goto setSrcCursor;
   case 0x18:
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x19:
     scanTokenCopy = (uint)scanTokenWord >> 0x1b & 3;
     scratchWord = (uint)scanTokenWord >> 0x10 & 0xff;
@@ -1534,7 +1534,7 @@ setScanTokenWord:
     ilRecordInputSemantic(&scanState,scratchWord,scanTokenWord);
     srcCursor = srcCursor + 1;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x1a:
     srcCursor = streamPtr + 1;
     if ((int)scanTokenWord < 0) {
@@ -1543,7 +1543,7 @@ setScanTokenWord:
 setSrcCursor:
     srcCursor = srcCursor + 1;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x1c:
     srcCursor = streamPtr + 1;
     scanTokenCopy = streamPtr[1];
@@ -1571,26 +1571,26 @@ setSrcCursor:
         tokenCursor = srcCursor;
       }
     }
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x24:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 2);
     extraWords = extraWords + 5;
     srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,1,2,&scanState);
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x35:
     scanTokenWord = &scanState;
     srcCursor = streamPtr + 2;
     remapTokenIn[0] = (uint ******)streamPtr[1];
     ((int (*)())ilMarkOperandRegisterUsed)(remapTokenIn,remapExtIn,scanTokenWord);
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x37:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
     srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,0,1,&scanState);
     usesToken37 = 1;
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x3e:
     hasDestination = 0;
     break;
@@ -1632,7 +1632,7 @@ setSrcCursor:
     srcCursor = operandTokenPtr;
     ((int (*)())ilMarkOperandRegisterUsed)(&operandWord2b74,&operandWord2bb0,scanTokenWord);
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   case 0x5e:
     srcCursor = streamPtr + 2;
     texInstructionCount = texInstructionCount + 1;
@@ -1677,13 +1677,13 @@ setSrcCursor:
     ((int (*)())ilMarkOperandRegisterUsed)(&operandWord2bb0,&operandWord2ba4,scanTokenWord);
     ((int (*)())ilMarkOperandRegisterUsed)(operandWord2bac,operandWord2ba0,scanTokenWord);
     tokenCursor = srcCursor;
-    goto switchD_000c90cc_caseD_18;
+    goto nextToken;
   }
   scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
   srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,hasDestination,1,&scanState);
   tokenCursor = srcCursor;
-  goto switchD_000c90cc_caseD_18;
-switchD_000c9ab8_caseD_18:
+  goto nextToken;
+nextTokenSecondPass:
   dstCursor = dstCursorCarry;
   readToken = tokenCursor;
   dstCursorCarry = dstCursor;
@@ -2019,7 +2019,7 @@ checkDefRecordCount:
   tokenWord = (uint ******)*readToken;
   scanTokenCopy = (uint)tokenWord & 0xffff;
   if (100 < scanTokenCopy) {
-switchD_000c90cc_caseD_0:
+exitOnInvalidOpcode:
                     
     _exit(0);
   }
@@ -2036,7 +2036,7 @@ switchD_000c90cc_caseD_0:
   case 0x5f:
   case 0x60:
   case 0x61:
-    goto switchD_000c90cc_caseD_0;
+    goto exitOnInvalidOpcode;
   default:
     if (prologuePending) {
       prologuePending = false;
@@ -2048,7 +2048,7 @@ switchD_000c90cc_caseD_0:
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,1,&scanState);
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 3:
   case 0xc:
   case 0x13:
@@ -2076,7 +2076,7 @@ switchD_000c90cc_caseD_0:
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,2,&scanState);
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 6:
   case 0x10:
   case 0x27:
@@ -2089,7 +2089,7 @@ switchD_000c90cc_caseD_0:
     *dstCursor = tokenWord;
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor + 1;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 7:
   case 0x11:
   case 0x34:
@@ -2097,7 +2097,7 @@ switchD_000c90cc_caseD_0:
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,0,2,&scanState);
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 8:
   case 0x15:
   case 0x16:
@@ -2107,7 +2107,7 @@ switchD_000c90cc_caseD_0:
     dstCursor[1] = (uint ******)readToken[1];
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor + 2;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 9:
   case 0x14:
   case 0x1d:
@@ -2118,7 +2118,7 @@ switchD_000c90cc_caseD_0:
     tokenCursor = srcCursor;
     scratchCursorB = dstCursor + 3;
     dstCursorCarry = dstCursor + 3;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 10:
   case 0xd:
   case 0x21:
@@ -2136,7 +2136,7 @@ switchD_000c90cc_caseD_0:
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,3,&scanState);
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 0xf:
     srcCursor = readToken + 2;
     *dstCursor = tokenWord;
@@ -2150,7 +2150,7 @@ switchD_000c90cc_caseD_0:
       dstCursorCarry = dstCursorCarry + 1;
     }
   case 0x18:
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 0x19:
     srcCursor = readToken + 1;
     if (((uint)tokenWord & 0x18000000) == 0) {
@@ -2163,7 +2163,7 @@ switchD_000c90cc_caseD_0:
     *dstCursor = tokenWord;
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor + 1;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 0x1a:
     srcCursor = readToken + 1;
     *dstCursor = tokenWord;
@@ -2181,7 +2181,7 @@ switchD_000c90cc_caseD_0:
     tokenCursor = srcCursor;
     scratchCursorB = dstCursorCarry;
     dstCursorCarry = dstCursor + 1;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 0x1c:
     srcCursor = readToken + 1;
     scanTokenWord = dstCursor + 1;
@@ -2200,7 +2200,7 @@ switchD_000c90cc_caseD_0:
       scratchCursorB = dstCursor + 5;
       dstCursorCarry = scratchCursorA;
     }
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 0x28:
     srcCursor = readToken + 1;
     prologueDst = (undefined4 *)
@@ -2209,7 +2209,7 @@ switchD_000c90cc_caseD_0:
     *prologueDst = tokenWord;
     tokenCursor = srcCursor;
     dstCursorCarry = (uint *******)(prologueDst + 1);
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 0x35:
     scanTokenWord = &scanState;
     *dstCursor = tokenWord;
@@ -2220,7 +2220,7 @@ switchD_000c90cc_caseD_0:
     *dstCursor = remapTokenIn[0];
     tokenCursor = srcCursor;
     dstCursorCarry = dstCursor + 1;
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   case 0x37:
   case 0x3e:
     scanTokenWord = (uint *******)0x0;
@@ -2491,12 +2491,12 @@ joined_r0x000ca538:
       dstCursor[3] = (uint ******)((uint)scratchCursorB & 0x3fffff);
       dstCursorCarry = dstCursor + 4;
     }
-    goto switchD_000c9ab8_caseD_18;
+    goto nextTokenSecondPass;
   }
   srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,scanTokenWord,1,&scanState);
   tokenCursor = srcCursor;
   dstCursorCarry = dstCursor;
-  goto switchD_000c9ab8_caseD_18;
+  goto nextTokenSecondPass;
 }
 
 /* ilRewriteForTextureState @ 0xcae90 (7760 bytes) */
@@ -2853,10 +2853,10 @@ int ilRewriteForTextureState(ctx, compileOutput, compileRecord, ilSource, scHand
   shadowExtraWords = 0;
   accumBits = 0;
   scanCursor = ilTokens;
-switchD_000cb23c_caseD_15:
+restartTokenScan:
   readCursor = scanCursor + 2;
   readCursorB = readCursor;
-switchD_000cb23c_caseD_18:
+nextToken:
   scanCursor = readCursorB;
   if (scanCursor < ilTokens + ilWordCount) goto code_r0x000cb214;
   if (resultCode != 0) {
@@ -2932,13 +2932,13 @@ checkNeverSetFlagD:
   scanCursor[1] = ilTokens[1];
   readCursorB = readCursor;
   writeCursorNext = (uint *******)(scanCursor + 2);
-  goto switchD_000cbc48_caseD_18;
+  goto nextTokenSecondPass;
 code_r0x000cb214:
   compileRecordAlias = (uint *******)*scanCursor;
   readCursorB = scanCursor;
   switch((uint)compileRecordAlias & 0xffff) {
   default:
-    goto switchD_000cb23c_caseD_0;
+    goto exitOnInvalidOpcode;
   case 1:
   case 2:
   case 4:
@@ -3007,7 +3007,7 @@ code_r0x000cb214:
   case 0x53:
     readCursor = scanCursor + 1;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   /* issue #64 live-repro (crash #3, use-after-free): opcode 0x28 was lumped in with the
    * trivial single-word opcodes above in THIS sizing pass, contributing nothing extra to
    * extraOutputWords (the buffer's extra-output-words budget). But the WRITE pass's real case 0x28
@@ -3030,7 +3030,7 @@ code_r0x000cb214:
     extraOutputWords = extraOutputWords + 110;
     readCursor = scanCursor + 1;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 7:
   case 0x11:
   case 0x34:
@@ -3039,17 +3039,17 @@ setCompileRecordAlias:
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 2);
     readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(scanCursor,calleeArg,2,&ilUsageState);
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 8:
   case 0x32:
     readCursor = scanCursor + 2;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 9:
   case 0x1d:
     readCursor = scanCursor + 3;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 10:
   case 0xd:
   case 0x21:
@@ -3060,17 +3060,17 @@ setCompileRecordAlias:
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 3);
     readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(scanCursor,1,3,&ilUsageState);
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0xf:
     readCursor = scanCursor + *(ushort *)((int)scanCursor + 6) + 2;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x14:
     readCursor = scanCursor + 3;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x15:
-    goto switchD_000cb23c_caseD_15;
+    goto restartTokenScan;
   case 0x16:
     readCursor = scanCursor + 1;
     compileRecordAlias = &ilUsageState;
@@ -3091,7 +3091,7 @@ setCompileRecordAlias:
     }
     goto setReadCursor;
   case 0x18:
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x19:
     scratchWord = (uint)compileRecordAlias >> 0x1b & 3;
     sizeBytes = (uint)compileRecordAlias >> 0x10 & 0xff;
@@ -3102,7 +3102,7 @@ setCompileRecordAlias:
     ilRecordInputSemantic(&ilUsageState,sizeBytes,compileRecordAlias);
     readCursor = readCursor + 1;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x1a:
     readCursor = scanCursor + 1;
     if ((int)compileRecordAlias < 0) {
@@ -3111,7 +3111,7 @@ setCompileRecordAlias:
 setReadCursor:
     readCursor = readCursor + 1;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x1c:
     readCursor = scanCursor + 1;
     scratchWord = scanCursor[1];
@@ -3139,26 +3139,26 @@ setReadCursor:
         readCursorB = readCursor;
       }
     }
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x24:
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 2);
     extraOutputWords = extraOutputWords + 5;
     readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(scanCursor,1,2,&ilUsageState);
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x35:
     compileRecordAlias = &ilUsageState;
     readCursor = scanCursor + 2;
     remapTokenIn[0] = (uint ******)scanCursor[1];
     ((int (*)())ilMarkOperandRegisterUsed)(remapTokenIn,remapExtIn,compileRecordAlias);
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x37:
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 1);
     readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(scanCursor,0,1,&ilUsageState);
     usesToken37 = 1;
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x3e:
     calleeArg = 0;
     break;
@@ -3201,7 +3201,7 @@ setReadCursor:
     compileRecordAlias = ilUsageStatePtr;
     ((int (*)())ilMarkOperandRegisterUsed)(&operandExtA,&operandTokenA,ilUsageStatePtr);
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   case 0x5e:
     readCursor = scanCursor + 2;
     textureInstCount = textureInstCount + 1;
@@ -3247,13 +3247,13 @@ setReadCursor:
     compileRecordAlias = ilUsageStatePtr;
     ((int (*)())ilMarkOperandRegisterUsed)(operandTokenD,operandExtD,ilUsageStatePtr);
     readCursorB = readCursor;
-    goto switchD_000cb23c_caseD_18;
+    goto nextToken;
   }
   compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 1);
   readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(scanCursor,calleeArg,1,&ilUsageState);
   readCursorB = readCursor;
-  goto switchD_000cb23c_caseD_18;
-switchD_000cbc48_caseD_18:
+  goto nextToken;
+nextTokenSecondPass:
   writeCursor = writeCursorNext;
   secondReadCursor = readCursorB;
   writeCursorNext = writeCursor;
@@ -3606,7 +3606,7 @@ setLoopIndexU:
   tokenWord = (uint ******)*secondReadCursor;
   scratchWord = (uint)tokenWord & 0xffff;
   if (100 < scratchWord) {
-switchD_000cb23c_caseD_0:
+exitOnInvalidOpcode:
                     
     _exit(0);
   }
@@ -3622,7 +3622,7 @@ switchD_000cb23c_caseD_0:
   case 0x5f:
   case 0x60:
   case 0x61:
-    goto switchD_000cb23c_caseD_0;
+    goto exitOnInvalidOpcode;
   default:
     ilUsageStatePtr = &ilUsageState;
     if (prologuePending) {
@@ -3635,7 +3635,7 @@ switchD_000cb23c_caseD_0:
     readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,1,ilUsageStatePtr);
     readCursorB = readCursor;
     writeCursorNext = writeCursor;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 3:
   case 0xc:
   case 0x13:
@@ -3664,7 +3664,7 @@ switchD_000cb23c_caseD_0:
     readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,2,ilUsageStatePtr);
     readCursorB = readCursor;
     writeCursorNext = writeCursor;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 6:
   case 0x10:
   case 0x27:
@@ -3677,7 +3677,7 @@ switchD_000cb23c_caseD_0:
     *writeCursor = tokenWord;
     readCursorB = readCursor;
     writeCursorNext = writeCursor + 1;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 7:
   case 0x11:
   case 0x34:
@@ -3685,7 +3685,7 @@ switchD_000cb23c_caseD_0:
     readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,0,2,&ilUsageState);
     readCursorB = readCursor;
     writeCursorNext = writeCursor;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 8:
   case 0x15:
   case 0x16:
@@ -3695,7 +3695,7 @@ switchD_000cb23c_caseD_0:
     writeCursor[1] = (uint ******)secondReadCursor[1];
     readCursorB = readCursor;
     writeCursorNext = writeCursor + 2;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 9:
   case 0x14:
   case 0x1d:
@@ -3706,7 +3706,7 @@ switchD_000cb23c_caseD_0:
     readCursorB = readCursor;
     savedWriteCursor = writeCursor + 3;
     writeCursorNext = writeCursor + 3;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 10:
   case 0xd:
   case 0x21:
@@ -3725,7 +3725,7 @@ switchD_000cb23c_caseD_0:
     readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,3,ilUsageStatePtr);
     readCursorB = readCursor;
     writeCursorNext = writeCursor;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 0xf:
     readCursor = secondReadCursor + 2;
     *writeCursor = tokenWord;
@@ -3739,7 +3739,7 @@ switchD_000cb23c_caseD_0:
       writeCursorNext = writeCursorNext + 1;
     }
   case 0x18:
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 0x19:
     readCursor = secondReadCursor + 1;
     if (((uint)tokenWord & 0x18000000) == 0) {
@@ -3752,7 +3752,7 @@ switchD_000cb23c_caseD_0:
     *writeCursor = tokenWord;
     readCursorB = readCursor;
     writeCursorNext = writeCursor + 1;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 0x1a:
     readCursor = secondReadCursor + 1;
     *writeCursor = tokenWord;
@@ -3770,7 +3770,7 @@ switchD_000cb23c_caseD_0:
     readCursorB = readCursor;
     savedWriteCursor = writeCursorNext;
     writeCursorNext = writeCursor + 1;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 0x1c:
     readCursor = secondReadCursor + 1;
     compileRecordAlias = writeCursor + 1;
@@ -3789,7 +3789,7 @@ switchD_000cb23c_caseD_0:
       savedWriteCursor = writeCursor + 5;
       writeCursorNext = staleArgR8;
     }
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 0x28:
     readCursor = secondReadCursor + 1;
     constRecordPtr = (undefined4 *)
@@ -3798,7 +3798,7 @@ switchD_000cb23c_caseD_0:
     *constRecordPtr = tokenWord;
     readCursorB = readCursor;
     writeCursorNext = (uint *******)(constRecordPtr + 1);
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 0x35:
     compileRecordAlias = &ilUsageState;
     *writeCursor = tokenWord;
@@ -3809,7 +3809,7 @@ switchD_000cb23c_caseD_0:
     *writeCursor = remapTokenIn[0];
     readCursorB = readCursor;
     writeCursorNext = writeCursor + 1;
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   case 0x37:
   case 0x3e:
     compileRecordAlias = (uint *******)0x0;
@@ -4080,12 +4080,12 @@ joined_r0x000cc708:
       writeCursor[3] = (uint ******)((uint)savedWriteCursor & 0x3fffff);
       writeCursorNext = writeCursor + 4;
     }
-    goto switchD_000cbc48_caseD_18;
+    goto nextTokenSecondPass;
   }
   readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,compileRecordAlias,1,&ilUsageState);
   readCursorB = readCursor;
   writeCursorNext = writeCursor;
-  goto switchD_000cbc48_caseD_18;
+  goto nextTokenSecondPass;
 }
 #undef ilUsageState
 #undef initRegsDst
@@ -6336,7 +6336,7 @@ int psnReportError(severity, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5
   unsigned int ghidra_home[8] = { severity, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5, fmtArg6 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined1 lineBuffer [280];
   
-  if (DAT_001fa61c != (undefined4 *)0x0) {
+  if (psnSinkCallbacks_001fa61c != (undefined4 *)0x0) {
     (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = fmtArg1;
     (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = fmtArg2;
     (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = fmtArg3;
@@ -6344,7 +6344,7 @@ int psnReportError(severity, format, fmtArg1, fmtArg2, fmtArg3, fmtArg4, fmtArg5
     (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArg5;
     (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArg6;
     printf_LDBLStub_1a34d4(lineBuffer,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),fmtArg2,fmtArg3,fmtArg4,fmtArg5,fmtArg6);
-    (*(code *)*DAT_001fa61c)(DAT_001fa618,"",lineBuffer,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+    (*(code *)*psnSinkCallbacks_001fa61c)(psnSinkContext_001fa618,"",lineBuffer,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   }
   return;
 }
@@ -7961,7 +7961,7 @@ checkRsRecord:
               ((int (*)())psnReportError)(0,"max(%s, %s)",operandText2Ptr,operandText3Ptr,alphaAddrAFmt1,argR8,argR9,argR10);
               break;
             case 6:
-              goto switchD_000d4578_caseD_6;
+              goto reportUnknownRgbOp;
             case 7:
               rgbAddrBFmt1 = operandText2Ptr;
               rgbAddrCFmt1 = operandText3Ptr;
@@ -7983,7 +7983,7 @@ checkRsRecord:
             }
           }
           else {
-switchD_000d4578_caseD_6:
+reportUnknownRgbOp:
             ((int (*)())psnReportError)(0,"???()",rgbAddrBFmt1,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
           }
           rgbOutputScaleByte = *(byte *)((int)instructionRecord + 0x32);
@@ -8063,7 +8063,7 @@ switchD_000d4578_caseD_6:
               operandText0Ptr = alphaAddrAFmt1;
               break;
             case 4:
-              goto switchD_000d489c_caseD_4;
+              goto reportUnknownAlphaOp;
             case 5:
               ((int (*)())psnReportError)(0,"cnd(%s, %s, %s)",operandText5PtrFmt1,dumpIdArg,operandText0Ptr,argR8,argR9,argR10);
               break;
@@ -8097,7 +8097,7 @@ switchD_000d4578_caseD_6:
             }
           }
           else {
-switchD_000d489c_caseD_4:
+reportUnknownAlphaOp:
             ((int (*)())psnReportError)(0,"???()",alphaOutIndexArg,rgbAddrCFmt1,alphaAddrAFmt1,argR8,argR9,argR10);
             operandText5PtrFmt1 = alphaOutIndexArg;
             dumpIdArg = rgbAddrCFmt1;
@@ -9032,7 +9032,7 @@ loopCallPsnReportError3:
               operandText5Ptr = alphaAddrA;
               break;
             case 6:
-              goto switchD_000d2d30_caseD_6;
+              goto reportUnknownRgbOpSecond;
             case 7:
               ((int (*)())psnReportError)(0,"cnd(%s, %s, %s)",operandText1Ptr,argR6,operandText5Ptr,argR8,argR9,alphaSelectCBaseArg);
               break;
@@ -9060,7 +9060,7 @@ loopCallPsnReportError3:
             }
           }
           else {
-switchD_000d2d30_caseD_6:
+reportUnknownRgbOpSecond:
             ((int (*)())psnReportError)(0,"???()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,alphaSelectCBaseArg);
             operandText1Ptr = rgbAddrB;
             argR6 = (char *)rgbAddrC;
@@ -9201,7 +9201,7 @@ switchD_000d2d30_caseD_6:
               ((int (*)())psnReportError)(0,"max(%s, %s)",operandText4Ptr,operandText3Ptr,operandText5Ptr,argR8,argR9,argR10);
               break;
             case 4:
-              goto switchD_000d324c_caseD_4;
+              goto reportUnknownAlphaOpSecond;
             case 5:
               neutralLineArg0 = operandText4Ptr;
               argR6 = (char *)operandText3Ptr;
@@ -9254,7 +9254,7 @@ switchD_000d2d30_caseD_6:
             }
           }
           else {
-switchD_000d324c_caseD_4:
+reportUnknownAlphaOpSecond:
             ((int (*)())psnReportError)(0,"???()",neutralLineArg0,argR6,operandText5Ptr,argR8,argR9,argR10);
           }
           alphaOutputScaleByte2 = *(byte *)((int)instructionRecord2 + 0x41);

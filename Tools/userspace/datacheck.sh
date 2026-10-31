@@ -13,5 +13,7 @@ python3 $H/funcmap.py $D > $T/map.tsv; python3 $H/funcmap.py $T/base/$D > $T/map
 [ -s $T/map.base.tsv ] && python3 $H/unmap_names.py $T/map.base.tsv $T/lk_base/*
 [ -s $T/map.tsv ] && python3 $H/unmap_names.py $T/map.tsv $T/lk_cand/*
 for f in base cand; do grep -h "data labels emitted\|typed data decls" $T/$f.log | sed 's/^[^:]*: //'; done
+# symbol_map.tsv rows come out in name order within an address group, so a rename can reorder a row; compare its CONTENT (sorted), not the row order
+for d in lk_base lk_cand; do sort -o $T/$d/symbol_map.tsv $T/$d/symbol_map.tsv; done
 if diff -r -q $T/lk_base $T/lk_cand > $T/diff.txt; then echo "DATA-IDENTICAL ($(ls $T/lk_cand | wc -l) link files, $(wc -l < $T/lk_cand/symbol_map.tsv) symbols)"
 else echo DATA-DIFFERENT; head -20 $T/diff.txt; exit 1; fi

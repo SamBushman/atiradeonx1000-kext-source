@@ -24,7 +24,7 @@ int BreakBlock__ctor_ec070(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   return;
 }
 
@@ -38,7 +38,7 @@ int BreakBlock__ctor_ec0c8(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   return;
 }
 
@@ -52,7 +52,7 @@ int ContinueBlock__ctor_ec120(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   return;
 }
 
@@ -66,7 +66,7 @@ int ContinueBlock__ctor_ec178(this, scope, scopeField0x12c, compiler)
   Block__ctor_ea148(this,compiler);
   this[0x4b] = scope;
   this[0x4c] = scopeField0x12c;
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   return;
 }
 
@@ -3438,7 +3438,7 @@ int Program__foldKind6IntoKind7Inst(program, inst, inst2)
         UNRECOVERED_JUMPTABLE = *(code **)(*inst2 + 0x94);
         placementInst = *(undefined4 *)(program + 0x340);
         inst = inst2;
-        goto LAB_000f1940;
+        goto callPlacementVfn;
       }
     }
   }
@@ -3591,7 +3591,7 @@ code_r0x000e76c4:
       placementInst = *(undefined4 *)(program + 0x340);
       inst = inst2;
     }
-LAB_000f1940:
+callPlacementVfn:
                     
                     
     (*UNRECOVERED_JUMPTABLE)(inst,placementInst,compiler);
@@ -3744,7 +3744,7 @@ int Program__propagateMovThroughUses(pass, afterInst, inst)
   node = (int *)IRInst__getOperandSource(inst,1);
   walking = true;
   walkInstCount = vec4Count;
-LAB_000f26b0:
+walkUsesLoop:
   do {
     while( true ) {
       if (walkInstCount == 0) {
@@ -4078,7 +4078,7 @@ checkNode:
 loopSetWalking3:
       walking = false;
       walkInstCount = vec4Count;
-      goto LAB_000f26b0;
+      goto walkUsesLoop;
     }
     a2 = destRegisterOffset;
     argR6 = destRegister;

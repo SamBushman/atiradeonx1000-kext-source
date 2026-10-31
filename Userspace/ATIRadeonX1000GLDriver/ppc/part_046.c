@@ -124,7 +124,7 @@ int ValueKey__eliminateTrivialInst(ctx)
       producerInst = *(int **)(ctx + 0xb0);
       compilerRef = *(int *)(ctx + 0x238);
       removeFn = *(code **)(*producerInst + 0xc);
-      goto LAB_00173718;
+      goto callRemoveFn;
     }
     inst = *(int *)(ctx + 0xb0);
   }
@@ -140,7 +140,7 @@ int ValueKey__eliminateTrivialInst(ctx)
   }
   producerInst = *(int **)(ctx + 0xb0);
   removeFn = *(code **)(*producerInst + 0xc);
-LAB_00173718:
+callRemoveFn:
   (*removeFn)(producerInst,0,compilerRef);
   *(uint *)(*(int *)(ctx + 0xb0) + 0x14) = *(uint *)(*(int *)(ctx + 0xb0) + 0x14) | 0x400;
   return 1;
@@ -2303,7 +2303,7 @@ int FudoPs__vslot12_lookupTable6x(this, row, column)
   int row;
   int column;
 {
-  return *(undefined4 *)(&DAT_001e5f54 + (row * 6 + column) * 4);
+  return *(undefined4 *)(&fudoPsClassTable6x6_001e5f54 + (row * 6 + column) * 4);
 }
 
 /* FudoPs__vslot11_isNotType2Or5 @ 0x176610 (28 bytes) */

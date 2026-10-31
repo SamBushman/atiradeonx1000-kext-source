@@ -415,7 +415,7 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   KhanPs__ctor_128fd0(this,compiler,0);
   this[7] = 0;
   this[0x10] = 0x200;
-  *this = &PTR_FUN_001eb450;
+  *this = &ptrTo_FudoPs__dtor_001eb450;
   this[0xb] = 0x100;
   this[8] = 0x7fffffff;
   this[0x13] = 4;
@@ -509,7 +509,7 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   KhanPs__ctor_128fd0(this,compiler,0);
   this[7] = 0;
   this[0x10] = 0x200;
-  *this = &PTR_FUN_001eb450;
+  *this = &ptrTo_FudoPs__dtor_001eb450;
   this[0xb] = 0x100;
   this[8] = 0x7fffffff;
   this[0x13] = 4;

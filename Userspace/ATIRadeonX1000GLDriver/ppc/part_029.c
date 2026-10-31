@@ -280,7 +280,7 @@ int IRExport__ctor_1085b0(this, compiler)
   
   IRAlu__ctor_1071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
-  *this = &PTR_FUN_001ea118;
+  *this = &ptrTo_IRInst__dtor_1cf608_001ea118;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
     Program__addInst(*(int *)(compiler + COMP_currentProgram),this);
   }
@@ -397,7 +397,7 @@ int IRExport__ctor_108918(this, compiler)
   
   IRAlu__ctor_1071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
-  *this = &PTR_FUN_001ea118;
+  *this = &ptrTo_IRInst__dtor_1cf608_001ea118;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
     Program__addInst(*(int *)(compiler + COMP_currentProgram),this);
   }
@@ -862,7 +862,7 @@ int IRLoadConst__ctor_109614(this, sourceRecord, compiler)
   undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
-  *this = &PTR_FUN_001ea460;
+  *this = &ptrTo_IRInst__dtor_1cf63c_001ea460;
   this[0x26] = *(undefined4 *)(sourceRecord + 4);
   sourceWord8 = *(undefined4 *)(sourceRecord + 8);
   this[0x23] = sourceRecord;
@@ -881,7 +881,7 @@ int IRLoadConst__ctor_1096bc(this, sourceRecord, compiler)
   undefined4 sourceWord8;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
-  *this = &PTR_FUN_001ea460;
+  *this = &ptrTo_IRInst__dtor_1cf63c_001ea460;
   this[0x26] = *(undefined4 *)(sourceRecord + 4);
   sourceWord8 = *(undefined4 *)(sourceRecord + 8);
   this[0x23] = sourceRecord;
@@ -959,7 +959,7 @@ int IRLoadConst__ctor_109938(this, compiler)
 {
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
   this[0x26] = 2;
-  *this = &PTR_FUN_001ea460;
+  *this = &ptrTo_IRInst__dtor_1cf63c_001ea460;
   this[0x20] = 1;
   this[0x21] = 0;
   this[0x4b] = 0xffffffff;
@@ -973,7 +973,7 @@ int IRLoadConst__ctor_1099dc(this, compiler)
 {
   ((int (*)())IRLoad__ctor_108e40)(this,0x79,compiler);
   this[0x26] = 2;
-  *this = &PTR_FUN_001ea460;
+  *this = &ptrTo_IRInst__dtor_1cf63c_001ea460;
   this[0x20] = 1;
   this[0x21] = 0;
   this[0x4b] = 0xffffffff;

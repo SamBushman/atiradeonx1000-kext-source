@@ -11,9 +11,9 @@ int scDumpPixelProgramPsn(sinkRecord, shaderState, optionsArg, argR6, argR7, arg
   undefined4 unusedArg7;
   undefined4 argR10;
 {
-  DAT_001fa61c = *sinkRecord;
-  DAT_001fa618 = sinkRecord[1];
-  psnDumpPixelShader(shaderState + 0x64c,"SC Generated Shader",0,argR6,argR7,argR8,DAT_001fa618,argR10)
+  psnSinkCallbacks_001fa61c = *sinkRecord;
+  psnSinkContext_001fa618 = sinkRecord[1];
+  psnDumpPixelShader(shaderState + 0x64c,"SC Generated Shader",0,argR6,argR7,argR8,psnSinkContext_001fa618,argR10)
   ;
   return 1;
 }
@@ -3245,7 +3245,7 @@ int ildisPrintResultModifiers(disassembler, resultModifierWord, passThroughR5, f
     fmtArgR9 = 0;
     switch(shiftCode) {
     case 0:
-      goto switchD_000daebc_caseD_0;
+      goto printInvalidShift;
     case 1:
       suffixText = "_x2";
       break;
@@ -3266,7 +3266,7 @@ int ildisPrintResultModifiers(disassembler, resultModifierWord, passThroughR5, f
     }
   }
   else {
-switchD_000daebc_caseD_0:
+printInvalidShift:
     suffixText = "!!!invalidShift!!!";
     *disassembler = *disassembler + 1;
   }

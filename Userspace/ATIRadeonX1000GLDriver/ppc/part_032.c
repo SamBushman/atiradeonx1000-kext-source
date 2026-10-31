@@ -1452,11 +1452,11 @@ loopSetNotLastLane:
               requiredLanes = packEntry[2] + -1;
               groupIndex = 1;
             }
-            goto LAB_001116f4;
+            goto endOfLoopBody;
           }
 loopSetGroupIndex:
           groupIndex = groupIndex + 1;
-LAB_001116f4: ;
+endOfLoopBody: ;
         } while ((int)groupIndex < (int)groupVectorCount);
       }
       requiredLanes = requiredLanes + 1;

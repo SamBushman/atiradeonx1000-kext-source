@@ -313,7 +313,7 @@ int Block__ctor_e9d68(this, owner)
   this[1] = 0;
   this[2] = 0;
   ownerField0xc = *(undefined4 *)(owner + 0xc);
-  *this = &PTR_FUN_001e9b08;
+  *this = &ptrTo_Block__dtor_001e9b08;
   this[3] = ownerField0xc;
   DListNode__init(this + 0x24);
   compiler = *(int *)(owner + 0xa8);
@@ -384,7 +384,7 @@ int Block__ctor_e9f00(this, owner)
   this[1] = 0;
   this[2] = 0;
   ownerField0xc = *(undefined4 *)(owner + 0xc);
-  *this = &PTR_FUN_001e9b08;
+  *this = &ptrTo_Block__dtor_001e9b08;
   this[3] = ownerField0xc;
   DListNode__init(this + 0x24);
   compiler = *(int *)(owner + 0xa8);
@@ -437,7 +437,7 @@ int Block__ctor_ea020(this, compiler)
   this[1] = 0;
   this[2] = 0;
   this[3] = 0;
-  *this = &PTR_FUN_001e9b08;
+  *this = &ptrTo_Block__dtor_001e9b08;
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
@@ -493,7 +493,7 @@ int Block__ctor_ea148(this, compiler)
   this[1] = 0;
   this[2] = 0;
   this[3] = 0;
-  *this = &PTR_FUN_001e9b08;
+  *this = &ptrTo_Block__dtor_001e9b08;
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
@@ -539,7 +539,7 @@ int Block__dtor_ea270(this)
   int vectorHeader;
   
   vectorHeader = this[0x35];
-  *this = &PTR_FUN_001e9b08;
+  *this = &ptrTo_Block__dtor_001e9b08;
   if (vectorHeader != 0) {
     Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
     Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
@@ -626,7 +626,7 @@ int IfHeader__ctor_ea530(this, compiler)
   undefined4 *mergeBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   this[0x50] = 0;
   this[0x52] = 1;
   this[0x4c] = 0;
@@ -652,7 +652,7 @@ int IfHeader__ctor_ea600(this, compiler)
   undefined4 *mergeBlock;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   this[0x50] = 0;
   this[0x52] = 1;
   this[0x4c] = 0;
@@ -681,7 +681,7 @@ int IfHeader__ctor_ea6d0(this, branchInst, value0x140, mergeBlock, compiler)
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x4c] = branchInst;
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   this[0x50] = value0x140;
   this[0x52] = 1;
   this[0x55] = 0;
@@ -703,7 +703,7 @@ int IfHeader__ctor_ea6d0(this, branchInst, value0x140, mergeBlock, compiler)
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
-  allocation[1] = &PTR_FUN_001e9d70;
+  allocation[1] = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   this[0x4f] = allocation + 1;
   return;
 }
@@ -732,7 +732,7 @@ int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, 
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x50] = 0;
-  *this = &PTR_FUN_001e9bb8;
+  *this = &ptrTo_LoopHeader__dtor_001e9bb8;
   this[0x53] = enclosingLoopHeader;
   this[0x4b] = 0;
   this[0x4d] = 0;
@@ -744,7 +744,7 @@ int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, 
   *allocation = arenaA;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
-  allocation[1] = &PTR_FUN_001e9c10;
+  allocation[1] = &ptrTo_LoopFooter__dtor_001e9c10;
   this[0x54] = allocation + 1;
   arenaA = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arenaA,0x134);
@@ -752,7 +752,7 @@ int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, 
   *allocation = arenaA;
   ((int (*)())Block__ctor_ea148)(blockObject,compiler);
   allocation[0x4c] = this;
-  *blockObject = &PTR_FUN_001e9c68;
+  *blockObject = &ptrTo_PostLoopFooter__dtor_001e9c68;
   this[0x55] = blockObject;
   Block__connect(this[0x54],this);
   if (argR6 == 0) {
@@ -805,7 +805,7 @@ int ExitBlock__ctor_eaae8(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  *this = &PTR_FUN_001e9ed0;
+  *this = &ptrTo_ExitBlock__dtor_001e9ed0;
   return;
 }
 
@@ -815,7 +815,7 @@ int ExitBlock__ctor_eab2c(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())Block__ctor_ea148)(this,compiler);
-  *this = &PTR_FUN_001e9ed0;
+  *this = &ptrTo_ExitBlock__dtor_001e9ed0;
   return;
 }
 
@@ -826,7 +826,7 @@ int EntryBlock__ctor_eab70(this, compiler)
 {
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x4b] = this[0x32];
-  *this = &PTR_FUN_001e9f28;
+  *this = &ptrTo_EntryBlock__dtor_001e9f28;
   return;
 }
 
@@ -837,7 +837,7 @@ int EntryBlock__ctor_eabbc(this, compiler)
 {
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x4b] = this[0x32];
-  *this = &PTR_FUN_001e9f28;
+  *this = &ptrTo_EntryBlock__dtor_001e9f28;
   return;
 }
 
@@ -882,7 +882,7 @@ int PostLoopFooter__ctor_eacb8(this, source)
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
-  *this = &PTR_FUN_001e9c68;
+  *this = &ptrTo_PostLoopFooter__dtor_001e9c68;
   return;
 }
 
@@ -907,7 +907,7 @@ int PostLoopFooter__ctor_ead80(this, source)
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
-  *this = &PTR_FUN_001e9c68;
+  *this = &ptrTo_PostLoopFooter__dtor_001e9c68;
   return;
 }
 
@@ -918,7 +918,7 @@ int LoopFooter__ctor_eadd0(this, source)
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
-  *this = &PTR_FUN_001e9c10;
+  *this = &ptrTo_LoopFooter__dtor_001e9c10;
   return;
 }
 
@@ -943,7 +943,7 @@ int LoopFooter__ctor_eae98(this, source)
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
   this[3] = this[3] | 0x20;
-  *this = &PTR_FUN_001e9c10;
+  *this = &ptrTo_LoopFooter__dtor_001e9c10;
   return;
 }
 
@@ -967,7 +967,7 @@ int LoopHeader__ctor_eaee8(this, source)
   copiedField0x13c = *(undefined4 *)(source + 0x13c);
   copiedField0x140 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
-  *this = &PTR_FUN_001e9bb8;
+  *this = &ptrTo_LoopHeader__dtor_001e9bb8;
   this[0x4b] = copiedField0x12c;
   this[0x4d] = copiedField0x134;
   this[0x4e] = copiedField0x138;
@@ -1011,7 +1011,7 @@ int LoopHeader__ctor_eafe4(this, source)
   copiedField0x13c = *(undefined4 *)(source + 0x13c);
   copiedField0x140 = *(undefined4 *)(source + 0x140);
   this[3] = this[3] | 0x20;
-  *this = &PTR_FUN_001e9bb8;
+  *this = &ptrTo_LoopHeader__dtor_001e9bb8;
   this[0x4b] = copiedField0x12c;
   this[0x4d] = copiedField0x134;
   this[0x4e] = copiedField0x138;
@@ -1027,7 +1027,7 @@ int IfFooter__ctor_eb068(this, source)
   undefined4 source;
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
-  *this = &PTR_FUN_001e9d70;
+  *this = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   return;
 }
 
@@ -1051,7 +1051,7 @@ int IfFooter__ctor_eb124(this, source)
   undefined4 source;
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
-  *this = &PTR_FUN_001e9d70;
+  *this = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   return;
 }
 
@@ -1067,7 +1067,7 @@ int IfHeader__ctor_eb168(this, source)
   copiedField0x148 = *(undefined4 *)(source + 0x148);
   copiedField0x144 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   this[0x51] = copiedField0x144;
   this[0x52] = copiedField0x148;
   this[0x53] = 0;
@@ -1101,7 +1101,7 @@ int IfHeader__ctor_eb248(this, source)
   copiedField0x148 = *(undefined4 *)(source + 0x148);
   copiedField0x144 = *(undefined4 *)(source + 0x144);
   this[0x55] = 0;
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   this[0x51] = copiedField0x144;
   this[0x52] = copiedField0x148;
   this[0x53] = 0;
@@ -1116,7 +1116,7 @@ int FuncEndBlock__ctor_eb2b0(this, source)
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
   this[0x4b] = *(undefined4 *)(source + 300);
-  *this = &PTR_FUN_001e9b60;
+  *this = &ptrTo_FuncEndBlock__dtor_001e9b60;
   return;
 }
 
@@ -1141,7 +1141,7 @@ int FuncEndBlock__ctor_eb378(this, source)
 {
   ((int (*)())Block__ctor_e9f00)(this,source);
   this[0x4b] = *(undefined4 *)(source + 300);
-  *this = &PTR_FUN_001e9b60;
+  *this = &ptrTo_FuncEndBlock__dtor_001e9b60;
   return;
 }
 
@@ -1167,7 +1167,7 @@ int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, c
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x50] = 0;
-  *this = &PTR_FUN_001e9bb8;
+  *this = &ptrTo_LoopHeader__dtor_001e9bb8;
   this[0x53] = loopHeader;
   this[0x4b] = 0;
   this[0x4d] = 0;
@@ -1179,7 +1179,7 @@ int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, c
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
-  allocation[1] = &PTR_FUN_001e9c10;
+  allocation[1] = &ptrTo_LoopFooter__dtor_001e9c10;
   this[0x54] = allocation + 1;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
@@ -1187,7 +1187,7 @@ int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, c
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(secondSideBlock,compiler);
   allocation[0x4c] = this;
-  *secondSideBlock = &PTR_FUN_001e9c68;
+  *secondSideBlock = &ptrTo_PostLoopFooter__dtor_001e9c68;
   this[0x55] = secondSideBlock;
   Block__connect(this[0x54],this);
   if (useFooterInst == 0) {
@@ -1247,7 +1247,7 @@ int IfHeader__ctor_eb688(this, branchInst, value0x140, mergeBlock, compiler)
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x4c] = branchInst;
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   this[0x50] = value0x140;
   this[0x52] = 1;
   this[0x55] = 0;
@@ -1269,7 +1269,7 @@ int IfHeader__ctor_eb688(this, branchInst, value0x140, mergeBlock, compiler)
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
-  allocation[1] = &PTR_FUN_001e9d70;
+  allocation[1] = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   this[0x4f] = allocation + 1;
   return;
 }
@@ -1280,7 +1280,7 @@ int IfFooterStatic__ctor_eb7e0(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IfFooter__ctor_eb124)(this,compiler);
-  *this = &PTR_FUN_001e9dc8;
+  *this = &ptrTo_IfFooter__dtor_1ce2fc_001e9dc8;
   return;
 }
 
@@ -1290,7 +1290,7 @@ int IfFooterStatic__ctor_eb824(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IfFooter__ctor_eb124)(this,compiler);
-  *this = &PTR_FUN_001e9dc8;
+  *this = &ptrTo_IfFooter__dtor_1ce2fc_001e9dc8;
   return;
 }
 
@@ -1314,7 +1314,7 @@ int IfHeaderStatic__ctor_eb8e0(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IfHeader__ctor_eb248)(this,compiler);
-  *this = &PTR_FUN_001e9d18;
+  *this = &ptrTo_IfHeader__dtor_1ce1e4_001e9d18;
   return;
 }
 
@@ -1324,7 +1324,7 @@ int IfHeaderStatic__ctor_eb924(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())IfHeader__ctor_eb248)(this,compiler);
-  *this = &PTR_FUN_001e9d18;
+  *this = &ptrTo_IfHeader__dtor_1ce1e4_001e9d18;
   return;
 }
 
@@ -1354,7 +1354,7 @@ int IfHeaderStatic__ctor_eb9e0(this, inst, param_3, compiler)
   
   ((int (*)())IfHeader__ctor_ea600)(this,compiler);
   this[0x4c] = inst;
-  *this = &PTR_FUN_001e9d18;
+  *this = &ptrTo_IfHeader__dtor_1ce1e4_001e9d18;
   Block__appendInst(this,inst);
   this[0x50] = param_3;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -1362,7 +1362,7 @@ int IfHeaderStatic__ctor_eb9e0(this, inst, param_3, compiler)
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
-  allocation[1] = &PTR_FUN_001e9dc8;
+  allocation[1] = &ptrTo_IfFooter__dtor_1ce2fc_001e9dc8;
   this[0x4f] = allocation + 1;
   return;
 }
@@ -1379,7 +1379,7 @@ int IfHeaderStatic__ctor_ebac8(this, inst, param_3, compiler)
   
   ((int (*)())IfHeader__ctor_ea600)(this,compiler);
   this[0x4c] = inst;
-  *this = &PTR_FUN_001e9d18;
+  *this = &ptrTo_IfHeader__dtor_1ce1e4_001e9d18;
   Block__appendInst(this,inst);
   this[0x50] = param_3;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -1387,7 +1387,7 @@ int IfHeaderStatic__ctor_ebac8(this, inst, param_3, compiler)
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
-  allocation[1] = &PTR_FUN_001e9dc8;
+  allocation[1] = &ptrTo_IfFooter__dtor_1ce2fc_001e9dc8;
   this[0x4f] = allocation + 1;
   return;
 }
@@ -1400,7 +1400,7 @@ int Block__dtor(this)
   int vectorHeader;
   
   vectorHeader = this[0x35];
-  *this = &PTR_FUN_001e9b08;
+  *this = &ptrTo_Block__dtor_001e9b08;
   if (vectorHeader != 0) {
     Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
     Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
@@ -1442,7 +1442,7 @@ int Block__deleting_dtor(this)
   int vectorHeader;
   
   vectorHeader = this[0x35];
-  *this = &PTR_FUN_001e9b08;
+  *this = &ptrTo_Block__dtor_001e9b08;
   if (vectorHeader != 0) {
     Arena__free(*(undefined4 *)(vectorHeader + 0xc),*(undefined4 *)(vectorHeader + 8));
     Arena__free(*(undefined4 *)(vectorHeader + -4),vectorHeader + -4);
@@ -1490,7 +1490,7 @@ int BreakBlock__ctor_ebe70(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   return;
 }
 
@@ -1500,7 +1500,7 @@ int BreakBlock__ctor_ebeb4(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   return;
 }
 
@@ -1524,7 +1524,7 @@ int ContinueBlock__ctor_ebf70(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   return;
 }
 
@@ -1534,7 +1534,7 @@ int ContinueBlock__ctor_ebfb4(this, compiler)
   undefined4 compiler;
 {
   ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,compiler);
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   return;
 }
 

@@ -1441,13 +1441,13 @@ setInst:
                   successorOffset = successorOffset + 4;
                 }
               }
-              goto LAB_00133348;
+              goto endOfLoopBody;
             }
             prevInst = instListHead;
           } while ((*prevFlagsPtr & 4) != 0);
         } while( true );
       }
-LAB_00133348: ;
+endOfLoopBody: ;
     }
     roundCount = *(int *)(pass + 0x248) + 1;
     *(int *)(pass + 0x248) = roundCount;
@@ -1486,13 +1486,13 @@ loopCheckVec2Count:
       do {
         blockArray = (**(code **)(*chainSource + 0x50))(chainSource);
         if (blockArray != 0) {
-LAB_00133bd0:
+callDeferredInstVfnC:
           (**(code **)(*deferredInst + 0xc))(deferredInst,0,*(undefined4 *)(pass + 8));
           break;
         }
         blockArray = ((int (*)())InterferenceGraph__resolveNode)(copyState,chainSource[0x25],0);
         if ((chainSource[5] & 0x200U) == 0) {
-          if (destRoot == blockArray) goto LAB_00133bd0;
+          if (destRoot == blockArray) goto callDeferredInstVfnC;
           break;
         }
         chainSource = (int *)IRInst__getOperandSource(chainSource,chainSource[0x21]);
@@ -4506,7 +4506,7 @@ int IRInst__findLaneDefinition(inst, lane, laneDefOut)
   uint laneIndexBefore;
   
   *laneDefOut = lane;
-LAB_001382d4:
+findLaneLoop:
   do {
     laneIndexBefore = *laneDefOut;
     operandRecord = IRInst__getOperandRecord(inst,0);
@@ -4515,7 +4515,7 @@ LAB_001382d4:
         return inst;
       }
       vtableQueryResult = (**(code **)(*inst + 100))(inst);
-      if (vtableQueryResult == 0) goto LAB_001382d4;
+      if (vtableQueryResult == 0) goto findLaneLoop;
       laneIndexAfter = *laneDefOut;
       operandRecord = IRInst__getOperandRecord(inst,1);
       *laneDefOut = (uint)*(byte *)(laneIndexAfter + operandRecord + 0x10);
@@ -5007,7 +5007,7 @@ loopSetInstFlags:
                 goto loopSetInstFlags;
               }
             }
-            if ((instFlags & 0x200) == 0) goto LAB_00138d24;
+            if ((instFlags & 0x200) == 0) goto endOfLoopBody;
             lastSourceInst = (int *)IRInst__getOperandSource(scanInst,scanInst[0x21]);
             if (((lastSourceInst[0x20] != 0) && (predicateResult = RegKind__flagBit0(lastSourceInst[0x26]), predicateResult != 0)) &&
                (((lastSourceInst[5] & 2U) == 0 &&
@@ -5028,7 +5028,7 @@ loopSetInstFlags:
           }
           instFlags = scanInst[5];
         }
-LAB_00138d24: ;
+endOfLoopBody: ;
       } while (((int *)scanInst[2] != (int *)0x0) && (scanInst = (int *)scanInst[2], (instFlags & 4) != 0));
     }
     nextInst = (int *)headInst[2];

@@ -31,7 +31,7 @@ int vpStateSelectForDraw(ctx)
       if ((*(byte *)(ctx + 0x2d) & 3) != 0) {
         vpStateUpdateFogConstants(ctx,stateRecord + 0x13c,shader);
       }
-      goto LAB_00076dc0;
+      goto callDrawStateCallback;
     }
     noState = stateRecord == 0;
   }
@@ -50,7 +50,7 @@ int vpStateSelectForDraw(ctx)
   }
   vpStateApplyParameters(ctx,shader);
   (**(code **)(((unsigned char *)0x000012a4) + ctx))(ctx,shader,0);
-LAB_00076dc0:
+callDrawStateCallback:
   (**(code **)(((unsigned char *)0x000012b4) + ctx))(ctx);
   if ((!noState) && (currentStateBlock != stateRecord + 0x13c)) {
                     
@@ -586,7 +586,7 @@ int recordIsSchedulable(alloc, records, liveIndex, modeFlag)
       usageMaskPtr = (uint *)(alloc + 0x30ba0 + (*recordPtr >> 0xb & 0x1fc));
       break;
     default:
-      goto switchD_000778cc_caseD_1;
+      goto clearUsageMaskPtr;
     case 3:
       usageMaskPtr = (uint *)(alloc + 0x30c20 + (*recordPtr >> 0xb & 0x1fc));
       break;
@@ -624,7 +624,7 @@ int recordIsSchedulable(alloc, records, liveIndex, modeFlag)
         goto setFlagResult;
       }
     }
-switchD_000778cc_caseD_1:
+clearUsageMaskPtr:
     usageMaskPtr = (uint *)0x0;
   }
 setFlagResult:
@@ -1090,13 +1090,13 @@ opcodeCase4:
       case 'O':
         return 5;
       default:
-        goto switchD_000785b4_caseD_46;
+        goto returnAllOnes;
       case 'J':
         goto opcodeCase1;
       }
     }
     if ((7 < (byte)(opcode + 0xbdU)) || ((1 << ((int)(char)(opcode + -0x43) & 0x3fU) & 0x87U) == 0)) {
-switchD_000785b4_caseD_46:
+returnAllOnes:
       return 0xffffffff;
     }
 opcodeCase6:
@@ -1150,7 +1150,7 @@ int recordAssignDestinationRegister(ctx, program, recordIndex, keepFlag, chosenR
   recordWord0 = *(uint *)(recordIndex * 0x10 + program);
   if ((recordWord0 & 0xf00) == 0x400) {
     assignable = ((int (*)())recordRegisterIsAssignable)(ctx,program,
-                         (char)(DAT_001aa758)[recordWord0 >> 8 & 0xf] * 0x100 + (recordWord0 >> 0xd & 0x7f),
+                         (char)(destRegisterFileByType_001aa758)[recordWord0 >> 8 & 0xf] * 0x100 + (recordWord0 >> 0xd & 0x7f),
                          combinedMask,recordIndex,writeMask);
     if (assignable == 0) {
       *keepFlag = '\0';
@@ -1180,7 +1180,7 @@ int recordAssignDestinationRegister(ctx, program, recordIndex, keepFlag, chosenR
   }
   else {
     recordWord0 = *record;
-    *keepFlag = '\x01' - ((char)(DAT_001aa758)[recordWord0 >> 8 & 0xf] * 0x100 + (recordWord0 >> 0xd & 0x7f) ==
+    *keepFlag = '\x01' - ((char)(destRegisterFileByType_001aa758)[recordWord0 >> 8 & 0xf] * 0x100 + (recordWord0 >> 0xd & 0x7f) ==
                         freeReg);
   }
   return freeReg != -1;
@@ -1261,7 +1261,7 @@ int recordCountSourceRegisterFiles(ctx, outCounts, record)
       *seenSlot = 0x501;
     }
     else {
-      fileAndIndex = (char)(DAT_001aa760)[*record & 0xf] * 0x100 + (*record >> 5 & 0xff);
+      fileAndIndex = (char)(srcRegisterFileByType_001aa760)[*record & 0xf] * 0x100 + (*record >> 5 & 0xff);
       *seenSlot = fileAndIndex;
       if (loopIndex != 0) {
         isNewKey = true;
@@ -1326,8 +1326,8 @@ int recordRetargetDestination(ctx, recordIndex, newRegId)
   
   programBase = ctx + 0x1286c;
   destWord = *(uint *)(programBase + recordIndex * 0x10);
-  newFileIndex = (uint)(char)(DAT_001aa764)[newRegId >> 8];
-  if ((char)(DAT_001aa758)[destWord >> 8 & 0xf] * 0x100 + (destWord >> 0xd & 0x7f) != newRegId) {
+  newFileIndex = (uint)(char)(registerFileByRegIdHighByte_001aa764)[newRegId >> 8];
+  if ((char)(destRegisterFileByType_001aa758)[destWord >> 8 & 0xf] * 0x100 + (destWord >> 0xd & 0x7f) != newRegId) {
     *(uint *)(programBase + recordIndex * 0x10) =
          (newRegId & 0x7f) << 0xd | (newFileIndex & 0xf) << 8 | destWord & 0xfff010ff;
     consumerNode = *(int **)(recordIndex * 4 + ctx + 0xa450);
@@ -1555,7 +1555,7 @@ int recordRetireBindings(alloc, recordIndex, sourceWordPtrs, unusedArg4, unusedA
           componentIndexC = 0;
           do {
             if ((1 << (componentIndexC & 0x3f) & *(uint *)(depNode + 4)) != 0) {
-              bindingNode = *(uint **)((((char)(DAT_001aa760)[*(uint *)*sourceCursor & 0xf] * 0x100 +
+              bindingNode = *(uint **)((((char)(srcRegisterFileByType_001aa760)[*(uint *)*sourceCursor & 0xf] * 0x100 +
                                    (*(uint *)*sourceCursor >> 5 & 0xff)) * 4 + componentIndexC) * 4 + alloc +
                                  0x2a87c);
               while( true ) {
@@ -1605,7 +1605,7 @@ loopCheckUsedSourceMask:
   if ((usedSourceMask & 1 << (sourceIndex & 0x3f)) != 0) {
     bindingNode = (uint *)*sourceWordPtrs;
     depNode = *sourceListHead;
-    registerKey = (char)(DAT_001aa760)[*bindingNode & 0xf] * 0x100 + (*bindingNode >> 5 & 0xff);
+    registerKey = (char)(srcRegisterFileByType_001aa760)[*bindingNode & 0xf] * 0x100 + (*bindingNode >> 5 & 0xff);
     if (depNode != 0) {
       bindingEmptied = false;
 loopSetFileIs2:
@@ -2649,7 +2649,7 @@ loopSetResult:
     if (callResult == 0) {
       recordWord0 = *record;
 loopSetRegFileBase:
-      regFileBase = (DAT_001aa758)[recordWord0 >> 8 & 0xf];
+      regFileBase = (destRegisterFileByType_001aa758)[recordWord0 >> 8 & 0xf];
       destWriteMask = ((int (*)())recordGetWriteMask)(record);
       callResult = ((int (*)())recordRegisterIsAssignable)(ctx,program,regFileBase * 0x100 + (recordWord0 >> 0xd & 0x7f),result,recordIndex,
                            destWriteMask);
@@ -2856,7 +2856,7 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
             allOwned = true;
             remainingLanes = 4;
             userHeadCursor = (undefined4 *)
-                     (((char)(DAT_001aa760)[*candidateRecord & 0xf] * 0x100 + (*candidateRecord >> 5 & 0xff)) * 0x10
+                     (((char)(srcRegisterFileByType_001aa760)[*candidateRecord & 0xf] * 0x100 + (*candidateRecord >> 5 & 0xff)) * 0x10
                       + ctx + 0x2a87c);
             do {
               userNode = (int *)*userHeadCursor;
@@ -2894,8 +2894,8 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
       chosenRecordPtr = (uint *)(program + chosenRecord * 0x10);
       chosenUnitByte = (byte)*chosenRecordPtr >> 6;
       chosenUnit = chosenUnitByte & 1;
-      unitAllowed = (*(code *)(PTR_FUN_001e9150)[chosenUnit])
-                        (ctx,chosenRecord,a2,registerCountArg,a4,a5,&PTR_FUN_001e9150);
+      unitAllowed = (*(code *)(ptrTo_recordFlagsPending20_001e9150)[chosenUnit])
+                        (ctx,chosenRecord,a2,registerCountArg,a4,a5,&ptrTo_recordFlagsPending20_001e9150);
       if (unitAllowed == 0) {
         return chosenRecord;
       }
@@ -2910,8 +2910,8 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
         otherIndex = *queueCursor;
         otherRecord = (uint *)(program + otherIndex * 0x10);
         otherUnit = (byte)((byte)*otherRecord >> 6) & 1;
-        otherAllowed = (*(code *)(PTR_FUN_001e9150)[otherUnit])
-                           (ctx,otherIndex,a2,registerCountArg,a4,a5,&PTR_FUN_001e9150);
+        otherAllowed = (*(code *)(ptrTo_recordFlagsPending20_001e9150)[otherUnit])
+                           (ctx,otherIndex,a2,registerCountArg,a4,a5,&ptrTo_recordFlagsPending20_001e9150);
         if ((otherAllowed != 0) && (chosenUnit != otherUnit)) {
           otherAllowed = affinityBase + otherIndex * 4;
           if ((*chosenRecordPtr & 0x40) == 0) {
@@ -3170,15 +3170,15 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
         writeMask = ((int (*)())recordGetWriteMask)(recordPtrB);
         if ((((((writeMask - 1 & writeMask) == 0) &&
               (opcodeInfoOffset = ((byte)recordPtrB[3] & 0xffffffbf) * 0x14,
-              *(int *)(&DAT_001aa5f0 + opcodeInfoOffset) != 0)) &&
-             (((DAT_001aa600)[opcodeInfoOffset] == '\0' || ((configFlags >> 0xd & 1) != 0)))) &&
+              *(int *)(&recordOpcodeInfoTable_001aa5f0 + opcodeInfoOffset) != 0)) &&
+             (((recordOpcodeInfoTable_word4_001aa600)[opcodeInfoOffset] == '\0' || ((configFlags >> 0xd & 1) != 0)))) &&
             (((*(uint *)(records + loopIndex * 0x10) & 0xf00) != 0x200 &&
              ((*(uint *)(records + loopIndex * 0x10) & 0xf00) != 0x300)))) &&
-           ((*(int *)(&DAT_001aa5f4 + opcodeInfoOffset) == 1 ||
-            ((*(int *)(&DAT_001aa5f4 + opcodeInfoOffset) == 2 &&
+           ((*(int *)(&recordOpcodeInfoTable_word1_001aa5f4 + opcodeInfoOffset) == 1 ||
+            ((*(int *)(&recordOpcodeInfoTable_word1_001aa5f4 + opcodeInfoOffset) == 2 &&
              (scratchArg6 = recordPtrB + 4,
-             (*(uint *)(scratchArg6 + *(int *)(&DAT_001aa5f8 + opcodeInfoOffset) * 4) & 0x60001fff) ==
-             (*(uint *)(scratchArg6 + *(int *)(&DAT_001aa5fc + opcodeInfoOffset) * 4) & 0x60001fff))))))) {
+             (*(uint *)(scratchArg6 + *(int *)(&recordOpcodeInfoTable_srcOperandIndexA_001aa5f8 + opcodeInfoOffset) * 4) & 0x60001fff) ==
+             (*(uint *)(scratchArg6 + *(int *)(&recordOpcodeInfoTable_srcOperandIndexB_001aa5fc + opcodeInfoOffset) * 4) & 0x60001fff))))))) {
           *(uint *)(flagOffset + recordFlagsBase) = recordFlagsBefore | 3;
           dependencyListHead = (int *)*dependencyListCursor;
           *(uint *)(flagOffset + recordFlagsBase) = recordFlagsBefore | 0x1003;
@@ -3272,7 +3272,7 @@ setLiveCountSnapshot:
         sourceMaskCopy = *recordSlotPtr;
         if ((recordWord0 & 0xf00) == 0x500) {
           configBit6Arg = (code *)(recordWord0 >> 0xd & 0x7f);
-          registerSlot = configBit6Arg + (char)(DAT_001aa758)[recordWord0 >> 8 & 0xf] * 0x100;
+          registerSlot = configBit6Arg + (char)(destRegisterFileByType_001aa758)[recordWord0 >> 8 & 0xf] * 0x100;
           if ((recordWord0 & 0x100000) != 0) {
             scratchArg3 = (code *)0x0;
             ((int (*)())regBindingClear)(alloc,registerSlot,0);
@@ -3506,7 +3506,7 @@ setChainSource:
       }
     }
     else {
-      scratchArg3 = (code *)((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+      scratchArg3 = (code *)((char)(destRegisterFileByType_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
                         (*recordPtr >> 0xd & 0x7f));
       componentMask = ((int (*)())recordGetWriteMask)(recordPtr);
       scratchArg5 = (int *)((int)((unsigned char *)0x0) + 1);
@@ -3547,7 +3547,7 @@ setChainSource:
         scratchArg4 = (code *)(1 << (componentLoopB & 0x3f));
         if ((componentsSeen & (uint)scratchArg4) != 0) {
           scratchArg5 = (int *)0x0;
-          scratchArg3 = (code *)((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+          scratchArg3 = (code *)((char)(destRegisterFileByType_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
                             (*recordPtr >> 0xd & 0x7f));
           calleeStatus = ((int (*)())regBindingSet)(alloc,*bestRecordCursor,scratchArg3,scratchArg4,0);
           if (calleeStatus != 0) {
@@ -3562,13 +3562,13 @@ setChainSource:
           dependencyNodeB = (undefined4 *)dependencyNodeB[4]) {
         scratchArg5 = (int *)0x0;
         scratchArg4 = (code *)dependencyNodeB[1];
-        scratchArg3 = (code *)((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+        scratchArg3 = (code *)((char)(destRegisterFileByType_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
                           (*recordPtr >> 0xd & 0x7f));
         ((int (*)())regBindingSet)(alloc,*dependencyNodeB,scratchArg3,scratchArg4,0);
       }
       componentCounter = 0;
       dependencyNode = *(int **)(recordOffset4 + allocPlus38 + 0xa418);
-      bindingListSlot = (int *)(((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+      bindingListSlot = (int *)(((char)(destRegisterFileByType_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
                         (*recordPtr >> 0xd & 0x7f)) * 0x10 + alloc + 0x2a87c);
       do {
         if (dependencyNode != (int *)0x0) {
@@ -3803,7 +3803,7 @@ loopSetHasFile1SourceFirst:
           *(uint *)word3Ptr = opcodeFlagBit | opcodeBits | destModeBits | word3Before & 0xe607fffb | 0x18000000;
         }
         opcodeInfoOffsetB = ((byte)opcodeByte & 0x1f) * 0x14;
-        sourceOperandIndex = *(uint *)(&DAT_001aa5f8 + opcodeInfoOffsetB);
+        sourceOperandIndex = *(uint *)(&recordOpcodeInfoTable_srcOperandIndexA_001aa5f8 + opcodeInfoOffsetB);
         if (sourceOperandIndex < 3) {
           word3BeforeB = *(uint *)word3Ptr;
           srcFileBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 3;
@@ -3820,7 +3820,7 @@ loopSetHasFile1SourceFirst:
                *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) >> 9 & 0xe000 |
                srcBit13 | srcTopBits | srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0x9dff000c;
         }
-        sourceOperandIndex = *(uint *)(&DAT_001aa5fc + opcodeInfoOffsetB);
+        sourceOperandIndex = *(uint *)(&recordOpcodeInfoTable_srcOperandIndexB_001aa5fc + opcodeInfoOffsetB);
         if (sourceOperandIndex < 3) {
           word3BeforeB = *(uint *)word3Ptr;
           srcFileBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 3;
@@ -4236,7 +4236,7 @@ int recordProgramBuildDependencies(alloc)
             scratchArg3[outputIndexPlus1 * 4] = outputWordOldB | 0x800000;
           }
           *in_r6 = *in_r6 & 0xefffffff;
-          srcOperandIndexA = *(uint *)(&DAT_001aa5f8 + opcodeInfoOffset);
+          srcOperandIndexA = *(uint *)(&recordOpcodeInfoTable_srcOperandIndexA_001aa5f8 + opcodeInfoOffset);
           if (srcOperandIndexA < 3) {
             outputWordOld = in_r6[srcOperandIndexA + 1];
             srcFileBitsC = *inputWord3Ptr & 3;
@@ -4253,7 +4253,7 @@ int recordProgramBuildDependencies(alloc)
                  (*inputWord3Ptr & 0xe000) << 9 |
                  srcBitsShifted | srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x8e3fe000;
           }
-          srcOperandIndexB = *(uint *)(&DAT_001aa5fc + opcodeInfoOffset);
+          srcOperandIndexB = *(uint *)(&recordOpcodeInfoTable_srcOperandIndexB_001aa5fc + opcodeInfoOffset);
           if (srcOperandIndexB < 3) {
             outputWordOld = in_r6[srcOperandIndexB + 1];
             srcFileBitsC = *inputWord3Ptr & 3;
@@ -4579,7 +4579,7 @@ loopSetSourceIsRegisterFile:
               } while( true );
             }
           }
-          goto switchD_0007d27c_caseD_0;
+          goto addSourceDependencyEdges;
         }
         switch((char)*record) {
         case '\x01':
@@ -4728,7 +4728,7 @@ loopSetCallResultPair:
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
                 scratchArg2 = extraout_r4_01;
-                if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
+                if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (componentIndex == 2);
             } while( true );
           }
@@ -4748,7 +4748,7 @@ loopSetCallResultPair:
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
                 scratchArg2 = extraout_r4_02;
-                if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
+                if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (componentIndex == 2);
             } while( true );
           }
@@ -4771,7 +4771,7 @@ loopSetCallResultPair:
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
                 scratchArg2 = extraout_r4_03;
-                if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
+                if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (((componentIndex == 1) && ((char)*record != '\r')) && ((char)*record != '\x0e'));
             } while( true );
           }
@@ -4793,7 +4793,7 @@ recordCase41:
             scratchArg2 = extraout_r4_05;
           } while (moreComponentsB);
         }
-switchD_0007d27c_caseD_0:
+addSourceDependencyEdges:
         for (sourceDepNode = (int *)*perSourceDepHead; sourceDepNode != (int *)0x0;
             sourceDepNode = *(int **)((int)sourceDepNode + 0x10)) {
           in_r6 = *(dword **)((int)sourceDepNode + 4);
@@ -5254,7 +5254,7 @@ loopSetInstructionIndex:
 setSymbol:
             symbol = symbol + -1;
           } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !readerScanStop));
-          if (!srcDeadAfterMov) goto LAB_0007e760;
+          if (!srcDeadAfterMov) goto startInstructionScan;
         }
         scanIndex = instIndex - 1;
         if (scanIndex != 0) {
@@ -5349,7 +5349,7 @@ setSymbol:
           }
         }
       }
-LAB_0007e760: ;
+startInstructionScan: ;
     }
     if (instructionCount != 0) {
       instIndex = 0;
@@ -8969,9 +8969,9 @@ loopSetOldBase:
       newBase = *(uint *)(constBlock + 0x3e4) >> 1;
       availableConsts = newBase - 2;
       newOffset = availableCount;
-      goto LAB_000829e0;
+      goto checkConstantAllocFit;
     }
-    if (allocMode != 2) goto LAB_000829e0;
+    if (allocMode != 2) goto checkConstantAllocFit;
     while( true ) {
       availableConsts = *(uint *)(constBlock + 0x3e4);
       availableCount = (uint)*(ushort *)(((unsigned char *)0x000013be) + glContext);
@@ -8979,7 +8979,7 @@ loopSetOldBase:
       ctxFlags = ctxFlags | 0x18000;
       *(uint *)(glContext + 0x8c) = ctxFlags;
       newOffset = 0;
-LAB_000829e0:
+checkConstantAllocFit:
       while( true ) {
         if ((constCount <= availableConsts) && (*(uint *)(program + 0x48) <= availableCount)) {
           *(uint *)(glContext + 0x3d0) = newOffset;

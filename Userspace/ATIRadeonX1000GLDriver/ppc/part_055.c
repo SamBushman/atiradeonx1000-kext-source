@@ -4,7 +4,7 @@
 int FuncEndBlock__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9b60;
+  *this = &ptrTo_FuncEndBlock__dtor_001e9b60;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -17,7 +17,7 @@ int FuncEndBlock__deleting_dtor(this)
 int LoopHeader__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9bb8;
+  *this = &ptrTo_LoopHeader__dtor_001e9bb8;
   return Block__dtor_ea270(this);
 }
 
@@ -25,7 +25,7 @@ int LoopHeader__dtor(this)
 int LoopHeader__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9bb8;
+  *this = &ptrTo_LoopHeader__dtor_001e9bb8;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -38,7 +38,7 @@ int LoopHeader__deleting_dtor(this)
 int LoopFooter__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9c10;
+  *this = &ptrTo_LoopFooter__dtor_001e9c10;
   return Block__dtor_ea270(this);
 }
 
@@ -46,7 +46,7 @@ int LoopFooter__dtor(this)
 int LoopFooter__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9c10;
+  *this = &ptrTo_LoopFooter__dtor_001e9c10;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -59,7 +59,7 @@ int LoopFooter__deleting_dtor(this)
 int PostLoopFooter__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9c68;
+  *this = &ptrTo_PostLoopFooter__dtor_001e9c68;
   return Block__dtor_ea270(this);
 }
 
@@ -67,7 +67,7 @@ int PostLoopFooter__dtor(this)
 int PostLoopFooter__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9c68;
+  *this = &ptrTo_PostLoopFooter__dtor_001e9c68;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -80,7 +80,7 @@ int PostLoopFooter__deleting_dtor(this)
 int IfHeader__dtor_1ce158(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   return Block__dtor_ea270(this);
 }
 
@@ -88,7 +88,7 @@ int IfHeader__dtor_1ce158(this)
 int IfHeader__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -101,7 +101,7 @@ int IfHeader__deleting_dtor(this)
 int IfHeader__dtor_1ce1e4(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   return Block__dtor_ea270(this);
 }
 
@@ -109,7 +109,7 @@ int IfHeader__dtor_1ce1e4(this)
 int IfHeader__dtor_1ce208(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9cc0;
+  *this = &ptrTo_IfHeader__dtor_1ce158_001e9cc0;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -122,7 +122,7 @@ int IfHeader__dtor_1ce208(this)
 int IfFooter__dtor_1ce270(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9d70;
+  *this = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   return Block__dtor_ea270(this);
 }
 
@@ -130,7 +130,7 @@ int IfFooter__dtor_1ce270(this)
 int IfFooter__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9d70;
+  *this = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -143,7 +143,7 @@ int IfFooter__deleting_dtor(this)
 int IfFooter__dtor_1ce2fc(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9d70;
+  *this = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   return Block__dtor_ea270(this);
 }
 
@@ -151,7 +151,7 @@ int IfFooter__dtor_1ce2fc(this)
 int IfFooter__dtor_1ce320(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9d70;
+  *this = &ptrTo_IfFooter__dtor_1ce270_001e9d70;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -188,7 +188,7 @@ int ContinueBlock__deleting_dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b54 + 8;
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   *this = vtable;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
@@ -202,7 +202,7 @@ int ContinueBlock__deleting_dtor(this)
 int ExitBlock__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9ed0;
+  *this = &ptrTo_ExitBlock__dtor_001e9ed0;
   return Block__dtor_ea270(this);
 }
 
@@ -210,7 +210,7 @@ int ExitBlock__dtor(this)
 int ExitBlock__deleting_dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9ed0;
+  *this = &ptrTo_ExitBlock__dtor_001e9ed0;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
     Arena__free(this[-1],this + -1);
@@ -223,7 +223,7 @@ int ExitBlock__deleting_dtor(this)
 int EntryBlock__dtor(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001e9f28;
+  *this = &ptrTo_EntryBlock__dtor_001e9f28;
   return Block__dtor_ea270(this);
 }
 
@@ -234,7 +234,7 @@ int BreakBlock__dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b54 + 8;
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   *this = vtable;
   return Block__dtor_ea270(this);
 }
@@ -246,7 +246,7 @@ int BreakBlock__deleting_dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b54 + 8;
-  *this = &PTR_FUN_001e9e20;
+  *this = &ptrTo_BreakBlock__dtor_001e9e20;
   *this = vtable;
   Block__dtor_ea270(this);
   if (this != (undefined4 *)0x0) {
@@ -263,7 +263,7 @@ int ContinueBlock__dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b54 + 8;
-  *this = &PTR_FUN_001e9e78;
+  *this = &ptrTo_ContinueBlock__dtor_001e9e78;
   *this = vtable;
   return Block__dtor_ea270(this);
 }
@@ -407,7 +407,7 @@ int IRInst__dtor_1cecc0(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -419,7 +419,7 @@ int IRInst__dtor_1cecf4(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -434,7 +434,7 @@ int IRInst__dtor_1ced3c(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -446,7 +446,7 @@ int IRInst__deleting_dtor(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -461,7 +461,7 @@ int IRInst__dtor_1cedb8(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -473,7 +473,7 @@ int IRInst__dtor_1cedec(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -488,7 +488,7 @@ int IRInst__dtor_1cee34(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -503,7 +503,7 @@ int IRInst__dtor_1cee7c(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -518,7 +518,7 @@ int IRInst__dtor_1ceec4(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -533,7 +533,7 @@ int IRInst__dtor_1cef0c(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -545,7 +545,7 @@ int IRInst__dtor_1cef40(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -557,7 +557,7 @@ int IRInst__dtor_1cef74(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   if (this == (undefined4 *)0x0) {
     return;
@@ -572,7 +572,7 @@ int IRInst__dtor_1cefbc(this)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this = vtable;
   return;
 }
@@ -584,7 +584,7 @@ int IRInst__dtor_1ceff0(this2)
   undefined *vtable;
   
   vtable = PTR_DAT_001e8b48 + 8;
-  *this2 = &PTR_FUN_001e9fc8;
+  *this2 = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   *this2 = vtable;
   if (this2 == (undefined4 *)0x0) {
     return;

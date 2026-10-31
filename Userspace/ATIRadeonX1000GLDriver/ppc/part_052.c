@@ -540,7 +540,7 @@ setSelectMethod2:
                     this[0x20] = slotIndex | rgbUsedMaskOld;
                     this[0x21] = slotIndex | usedMaskOld;
                     slotIter[0xe] = sourceRegister;
-                    goto LAB_001999e8;
+                    goto callSelectSourceVfnF4;
                   }
                   moreSlots = slotIndex != 3;
                   slotWordPtr = slotWordPtr + 1;
@@ -548,7 +548,7 @@ setSelectMethod2:
                   slotIter = slotIter + 1;
                 } while (moreSlots);
                 stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
-LAB_001999e8:
+callSelectSourceVfnF4:
                 (**(code **)(*this + 0xf4))(this,srcIdx,rgbSelect,rgbMod,stagedArg4,swizzle);
                 selectMethod = *(code **)(*this + 0xf8);
 joined_r0x00199c90:
@@ -2137,7 +2137,7 @@ int R300VMachineAssembler__create(unusedThis, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x90);
   *allocation = arena;
-  allocation[1] = &PTR_FUN_001eb808;
+  allocation[1] = &ptrTo_MachineAssembler__dtor_19b9ac_001eb808;
   allocation[7] = 0;
   return allocation + 1;
 }
@@ -2146,7 +2146,7 @@ int R300VMachineAssembler__create(unusedThis, compiler)
 int MachineAssembler__dtor_19b91c(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001eb808;
+  *this = &ptrTo_MachineAssembler__dtor_19b9ac_001eb808;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
@@ -2159,7 +2159,7 @@ int MachineAssembler__dtor_19b91c(this)
 int MachineAssembler__dtor_19b9ac(this)
   undefined4 *this;
 {
-  *this = &PTR_FUN_001eb808;
+  *this = &ptrTo_MachineAssembler__dtor_19b9ac_001eb808;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
@@ -2176,7 +2176,7 @@ int R300VMachineAssembler__deleting_dtor(this)
   undefined4 *blockStart;
   int arenaHeader;
   
-  *this = &PTR_FUN_001eb808;
+  *this = &ptrTo_MachineAssembler__dtor_19b9ac_001eb808;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[2]);
   this[2] = 0;
   Arena__free(*(undefined4 *)(this[3] + 0x374),this[0x18]);
@@ -2371,7 +2371,7 @@ setFlagBit2:
     *(undefined4 *)(this + 0x2c) = *(undefined4 *)(this + 0x58);
     destRegType = inst[0x26];
   }
-  *instructionWords = (*(uint *)(&DAT_001b2ad0 + destRegType * 4) & 0xf) << 8 | *instructionWords & 0xfffff0ff;
+  *instructionWords = (*(uint *)(&r300DestRegTypeBitsTable_001b2ad0 + destRegType * 4) & 0xf) << 8 | *instructionWords & 0xfffff0ff;
   destAddrMode = IRInst__operandKindClass(inst,0);
   if (destAddrMode == 1) {
     *(undefined4 *)(this + 0x24) = 1;
@@ -2617,7 +2617,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
     regDefInst = srcDefInst;
 loopSetRegisterIndex:
     registerIndex = thunk_FUN_00134de8(allocTable,regDefInst);
-    *sourceWord = *(uint *)(&DAT_001b2c14 + srcRegClass * 4) & 7 | *sourceWord & 0xfffffff8;
+    *sourceWord = *(uint *)(&r300SrcRegClassBitsTable_001b2c14 + srcRegClass * 4) & 7 | *sourceWord & 0xfffffff8;
     if (srcRegClass == 0x37) {
       *(undefined4 *)(this + 0x30) = *(undefined4 *)(this + 0x58);
     }
@@ -2738,10 +2738,10 @@ storeSourceWord:
   effectiveSwizzle = *(uint *)(sourceOperandRecord + 0x10);
   isMixResult = (**(code **)(*srcDefInst + 0x60))(srcDefInst);
   if (isMixResult == 0) {
-    laneSelect[0] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle >> 0x18) * 4);
-    laneSelect[2] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle >> 8 & 0xff) * 4);
-    laneSelect[3] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle & 0xff) * 4);
-    laneSelect[1] = *(uint *)(&DAT_001b2be8 + (effectiveSwizzle >> 0x10 & 0xff) * 4);
+    laneSelect[0] = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (effectiveSwizzle >> 0x18) * 4);
+    laneSelect[2] = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (effectiveSwizzle >> 8 & 0xff) * 4);
+    laneSelect[3] = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (effectiveSwizzle & 0xff) * 4);
+    laneSelect[1] = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (effectiveSwizzle >> 0x10 & 0xff) * 4);
     laneNegate[0] = negateBase;
     laneNegate[1] = negateBase;
     laneNegate[2] = negateBase;
@@ -2781,7 +2781,7 @@ storeSourceWord:
         }
         else {
           *(uint *)((int)laneNegate + laneByteOff) = negateBase;
-          *(undefined4 *)(laneByteOff + (int)laneSelect) = *(undefined4 *)(&DAT_001b2be8 + (uint)composedLaneByte * 4)
+          *(undefined4 *)(laneByteOff + (int)laneSelect) = *(undefined4 *)(&r300SwizzleLaneSelectTable_001b2be8 + (uint)composedLaneByte * 4)
           ;
         }
       }
@@ -3008,7 +3008,7 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
     }
     goto setHwLimits;
   }
-  *dualMathWord = *(uint *)(&DAT_001b2c14 + loopIndex * 4) & 3 | dualMathFlags & 0xfffffffc;
+  *dualMathWord = *(uint *)(&r300SrcRegClassBitsTable_001b2c14 + loopIndex * 4) & 3 | dualMathFlags & 0xfffffffc;
   loopIndex = (**(code **)(*operandVReg + 0x60))(operandVReg,(int)srcOffsetPair,a2,passThroughR6,passThroughR7,passThroughR8,loopIndex * 4);
   if (loopIndex == 0) {
     loopIndex = RegKind__flagBit7(operandVReg[0x26]);
@@ -3033,12 +3033,12 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   if (loopIndex == 0) {
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (loopIndex < 2) {
-      selectWord1 = *(uint *)(&DAT_001b2be8 + (selectWord1 & 0xff) * 4);
+      selectWord1 = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (selectWord1 & 0xff) * 4);
       selectWord2 = selectWord1;
     }
     else {
-      selectWord1 = *(uint *)(&DAT_001b2be8 + (selectWord1 & 0xff) * 4);
-      selectWord2 = *(uint *)(&DAT_001b2be8 + (selectWord2 >> 0x16 & 0x3fc));
+      selectWord1 = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (selectWord1 & 0xff) * 4);
+      selectWord2 = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (selectWord2 >> 0x16 & 0x3fc));
     }
   }
   else {
@@ -3062,14 +3062,14 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
       selectWord1 = 0;
     }
     else {
-      selectWord1 = *(uint *)(&DAT_001b2be8 + (composedSwizzle1 & 0xff) * 4);
+      selectWord1 = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (composedSwizzle1 & 0xff) * 4);
     }
 setLoopIndex:
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (1 < loopIndex) {
       SelectWord__compose(composedSwizzle2,srcSelectWord,selectWord2);
       if ((selectWord2 >> 0x18 != 4) && (composedSwizzle2[0] >> 0x18 != 4)) {
-        selectWord2 = *(uint *)(&DAT_001b2be8 + (composedSwizzle2[0] >> 0x18) * 4);
+        selectWord2 = *(uint *)(&r300SwizzleLaneSelectTable_001b2be8 + (composedSwizzle2[0] >> 0x18) * 4);
         goto storeDualMathWord;
       }
       loopIndex = 1;

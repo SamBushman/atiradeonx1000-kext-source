@@ -1078,7 +1078,7 @@ int IRInst__ctor_10502c(this, opcode, compiler)
   this[0x1f] = 0;
   this[1] = 0;
   this[2] = 0;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   operandCountdown = 5;
   operandRecordCursor = this + 0x23;
   do {
@@ -1142,7 +1142,7 @@ int IRInst__ctor_1051b0(this, opcode, compiler)
   this[0x1f] = 0;
   this[1] = 0;
   this[2] = 0;
-  *this = &PTR_FUN_001e9fc8;
+  *this = &ptrTo_IRInst__dtor_1ced3c_001e9fc8;
   operandCountdown = 5;
   operandRecordCursor = this + 0x23;
   do {

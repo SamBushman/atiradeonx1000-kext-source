@@ -76,7 +76,7 @@ int KhanPs__vslot90_isProgramKind1(this, unusedArg2, program)
 /* KhanPs__getOpcodeTraits @ 0x128030 (28 bytes) */
 int KhanPs__getOpcodeTraits()
 {
-  return &DAT_001dca64;
+  return &KhanPsOpcodeTraits_001dca64;
 }
 
 /* KhanPs__vslot35_publishLimitsAndBindingTables @ 0x12804c (356 bytes) */
@@ -651,7 +651,7 @@ int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler, unuse
   }
 setMultiple:
   multiple = -3;
-  multipleCursor = (float *)&DAT_001aff4c;
+  multipleCursor = (float *)&immediateConstantMultiples_001aff4c;
   do {
     exprRecord = Compiler__valueNumberForExpr(compiler,GH_F2U(*constRecord * *multipleCursor));
     if (*(char *)(exprRecord + 8) == '\0') {
@@ -677,7 +677,7 @@ loopCheckKindFlags:
     multipleCursor = multipleCursor + 1;
     multiple = multiple + 1;
     if (isLastMultiple) {
-      multipleCursor = (float *)&DAT_001aff4c;
+      multipleCursor = (float *)&immediateConstantMultiples_001aff4c;
       multiple = -3;
       do {
         exprRecord = Compiler__valueNumberForExpr(compiler,GH_F2U(-*constRecord * *multipleCursor));
@@ -714,7 +714,7 @@ int KhanPs__ctor_128fd0(this, compiler, createSchedModels)
   this[0x10] = 0x60;
   this[1] = vtable;
   this[0x15] = 4;
-  *this = &PTR_FUN_001ead88;
+  *this = &ptrTo_KhanPs__dtor_001ead88;
   this[8] = 0x7fffffff;
   this[0xf] = 0x10;
   this[0x14] = 0x20;
@@ -755,7 +755,7 @@ int KhanPs__ctor_129130(this, compiler, createSchedModels)
   this[0x10] = 0x60;
   this[1] = vtable;
   this[0x15] = 4;
-  *this = &PTR_FUN_001ead88;
+  *this = &ptrTo_KhanPs__dtor_001ead88;
   this[8] = 0x7fffffff;
   this[0xf] = 0x10;
   this[0x14] = 0x20;
@@ -994,7 +994,7 @@ int KhanVs__vslot35_publishLimitsAndBindingTables(this, compiler, limitsBlob)
 /* KhanVs__getOpcodeTraits @ 0x129678 (28 bytes) */
 int KhanVs__getOpcodeTraits()
 {
-  return &DAT_001df1fc;
+  return &KhanVsOpcodeTraits_001df1fc;
 }
 
 /* FudoVs__vslot8_failNotSupported @ 0x129694 (56 bytes) */
@@ -1164,16 +1164,16 @@ int KhanVs__vslot58_matchImmediateConstantCode(this, constants, outSelectCode, l
         if (*laneByteBase == '\x04') {
           *fillCursor = 0.0;
         }
-        laneWeights[3] = DAT_001affcc;
-        laneWeights[2] = DAT_001affc8;
+        laneWeights[3] = laneWeightInit0_001affcc;
+        laneWeights[2] = laneWeightInit1_001affc8;
         laneByteBase = laneByteBase + 1;
         fillCursor = fillCursor + 1;
         lanesLeft2 = lanesLeft2 + -1;
       } while (lanesLeft2 != 0);
       codeAccum = 0;
       weightOffset = 0;
-      laneWeights[1] = DAT_001affc4;
-      laneWeights[0] = DAT_001affc0;
+      laneWeights[1] = laneWeightInit2_001affc4;
+      laneWeights[0] = laneWeightInit3_001affc0;
       lanesLeft3 = 4;
       *outSelectCode = 0;
       do {
@@ -1341,7 +1341,7 @@ loopSwitchRegClass:
           seenRegCursor = seenRegCursor + 1;
           if (tableEntry == -1) break;
           if ((regNumber == tableEntry) || (slotsFull = slotIndex == 2, slotIndex = slotIndex + 1, slotsFull))
-          goto switchD_00129ce4_caseD_0;
+          goto nextSourceSlot;
         }
         loopIndex3 = loopIndex3 + 1;
         seenRegs[slotIndex] = regNumber;
@@ -1355,7 +1355,7 @@ loopSwitchRegClass:
           seenRegCursor = seenRegCursor + 1;
           if (tableEntry == -1) break;
           if ((regNumber == tableEntry) || (slotsFull = slotIndex == 2, slotIndex = slotIndex + 1, slotsFull))
-          goto switchD_00129ce4_caseD_0;
+          goto nextSourceSlot;
         }
         loopIndex2 = loopIndex2 + 1;
         seenRegs[slotIndex + 3] = regNumber;
@@ -1397,7 +1397,7 @@ loopSwitchRegClass:
         goto loopSwitchRegClass;
       }
     }
-switchD_00129ce4_caseD_0:
+nextSourceSlot:
     if ((1 < loopIndex3) || (inst3 = inst3 + 6, 1 < loopIndex2)) {
       return 0;
     }
@@ -1746,7 +1746,7 @@ int KhanVs__ctor_12a578(this, compiler, createSchedModels)
   this[6] = 0x48;
   this[5] = 2;
   this[0x12] = 0x3ff;
-  *this = &PTR_FUN_001eaf20;
+  *this = &ptrTo_KhanVs__dtor_1d84e0_001eaf20;
   this[8] = 0x7fffffff;
   this[0xf] = 0x10;
   this[0x10] = 0x100;
@@ -1789,7 +1789,7 @@ int KhanVs__ctor_12a6c0(this, compiler, createSchedModels)
   this[6] = 0x48;
   this[5] = 2;
   this[0x12] = 0x3ff;
-  *this = &PTR_FUN_001eaf20;
+  *this = &ptrTo_KhanVs__dtor_1d84e0_001eaf20;
   this[8] = 0x7fffffff;
   this[0xf] = 0x10;
   this[0x10] = 0x100;
@@ -1824,7 +1824,7 @@ int FudoVs__ctor_12a808(this, allocContext, createSchedModels)
   int createSchedModels;
 {
   ((int (*)())KhanVs__ctor_12a6c0)(this,allocContext,0);
-  *this = &PTR_FUN_001eb0c0;
+  *this = &ptrTo_KhanVs__dtor_1d8548_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
@@ -1842,7 +1842,7 @@ int FudoVs__ctor_12a8bc(this, allocContext, createSchedModels)
   int createSchedModels;
 {
   ((int (*)())KhanVs__ctor_12a6c0)(this,allocContext,0);
-  *this = &PTR_FUN_001eb0c0;
+  *this = &ptrTo_KhanVs__dtor_1d8548_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
@@ -1858,7 +1858,7 @@ int KhanVs__vslot96_installHardwareTables(this)
   int this;
 {
   PTR_DAT_001e27bc = PTR_DAT_001e9120;
-  *(undefined **)(this + 0xc) = &DAT_001e1994;
+  *(undefined **)(this + 0xc) = &vsHardwareTable_001e1994;
   PTR_DAT_001e260c = PTR_DAT_001e911c;
   PTR_DAT_001e1c34 = PTR_DAT_001e9128;
   DAT_001e1c2c = 5;
@@ -1874,16 +1874,16 @@ int KhanVs__vslot96_installHardwareTables(this)
 int FudoVs__vslot96_installHardwareTables(this)
   int this;
 {
-  *(undefined **)(this + 0xc) = &DAT_001e1994;
+  *(undefined **)(this + 0xc) = &vsHardwareTable_001e1994;
   DAT_001e25f4 = 0x4c;
   PTR_DAT_001e27bc = PTR_DAT_001e8c84;
   DAT_001e1c2c = 4;
-  DAT_001e1c30 = PTR_FUN_001e8c7c;
+  DAT_001e1c30 = ptrTo_IRUnary__new_107df4_001e8c7c;
   PTR_DAT_001e1c34 = (undefined *)0x0;
   DAT_001e1c1c = 0x4d;
   PTR_DAT_001e269c = PTR_DAT_001e8c78;
   DAT_001e2604 = 4;
-  DAT_001e2608 = PTR_FUN_001e8c7c;
+  DAT_001e2608 = ptrTo_IRUnary__new_107df4_001e8c7c;
   PTR_DAT_001e260c = (undefined *)0x0;
   PTR_DAT_001e2630 = PTR_DAT_001e8c84;
   return;
@@ -1893,7 +1893,7 @@ int FudoVs__vslot96_installHardwareTables(this)
 int KhanPs__vslot96_installHardwareTables(this)
   int this;
 {
-  *(undefined **)(this + 0xc) = &DAT_001e39a4;
+  *(undefined **)(this + 0xc) = &KhanPsHardwareTable_001e39a4;
   return;
 }
 

@@ -45,7 +45,7 @@ int ImmedConstBuffer__ctor_1261a4(this, ctorWord2, ctorWord1, ctorWord3, compile
   undefined4 compiler;
 {
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  *this = &PTR_FUN_001ea8d0;
+  *this = &ptrTo_ImmedConstBuffer__dtor_001ea8d0;
   return;
 }
 
@@ -58,7 +58,7 @@ int ImmedConstBuffer__ctor_1261e8(this, ctorWord2, ctorWord1, ctorWord3, compile
   undefined4 compiler;
 {
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  *this = &PTR_FUN_001ea8d0;
+  *this = &ptrTo_ImmedConstBuffer__dtor_001ea8d0;
   return;
 }
 
@@ -79,7 +79,7 @@ int ExportSlot__ctor_12622c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   this[4] = ctorWord2;
   this[9] = this[9] | 2;
-  *this = &PTR_FUN_001ea7f0;
+  *this = &ptrTo_ExportSlot__dtor_001ea7f0;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
@@ -117,7 +117,7 @@ int ExportSlot__ctor_126378(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   VRegInfo__ctor_12379c(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   this[4] = ctorWord2;
   this[9] = this[9] | 2;
-  *this = &PTR_FUN_001ea7f0;
+  *this = &ptrTo_ExportSlot__dtor_001ea7f0;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);

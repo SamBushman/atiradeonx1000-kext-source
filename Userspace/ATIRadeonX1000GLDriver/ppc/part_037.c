@@ -1448,13 +1448,13 @@ setTargetBlockForCopy:
     predecessor = (int *)Block__getPredecessor(block,0);
     predQuery2c = (**(code **)(*predecessor + 0x2c))(predecessor);
     if (predQuery2c == 0) {
-LAB_00120cb8:
+callBlockVfn38:
       (**(code **)(*block + 0x38))(block);
     }
     else {
       successor = (int *)Block__getSuccessor(block,0);
       successorQuery34 = (**(code **)(*successor + 0x34))(successor);
-      if (successorQuery34 == 0) goto LAB_00120cb8;
+      if (successorQuery34 == 0) goto callBlockVfn38;
     }
     ((int (*)())Block__appendCopyForDest)(vector5,newTempId,&DAT_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
                  ,cycleDstId);
@@ -2007,8 +2007,8 @@ int pass_ssa_build(program)
     compiler = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(compiler + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
-    eqByValueNumberFn = PTR_FUN_001e90b8;
-    hashByValueNumberFn = PTR_FUN_001e9098;
+    eqByValueNumberFn = ptrTo_ExprRecordTable__eqByValueNumber_001e90b8;
+    hashByValueNumberFn = ptrTo_ExprRecordTable__hashByValueNumber_001e9098;
     valueNumberTable = allocation + 1;
     bucketCount = 1;
     *allocation = arena;
@@ -2031,8 +2031,8 @@ int pass_ssa_build(program)
     compiler = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(compiler + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
-    hashByExprFn = PTR_FUN_001e90bc;
-    eqByExprFn = PTR_FUN_001e9090;
+    hashByExprFn = ptrTo_ExprRecordTable__hashByExpr_001e90bc;
+    eqByExprFn = ptrTo_ExprRecordTable__eqByExpr_001e9090;
     exprHashTable = allocation + 1;
     bucketCount = 1;
     *allocation = arena;
@@ -2055,8 +2055,8 @@ int pass_ssa_build(program)
     compiler = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(compiler + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
-    ptrEqFn = PTR_FUN_001e90ac;
-    ptrHashFn = PTR_FUN_001e90a8;
+    ptrEqFn = ptrTo_PtrSet__eqNonNullPtr_001e90ac;
+    ptrHashFn = ptrTo_PtrSet__hashPtr_001e90a8;
     ptrHashTable = allocation + 1;
     bucketCount = 1;
     *allocation = arena;
@@ -2079,8 +2079,8 @@ int pass_ssa_build(program)
     compiler = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(compiler + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
-    keyLaneHashFn = PTR_FUN_001e90b4;
-    keyLaneEqFn = PTR_FUN_001e90a0;
+    keyLaneHashFn = ptrTo_KeyLaneTable__hashByOpcode_001e90b4;
+    keyLaneEqFn = ptrTo_KeyLaneTable__eqKeys_001e90a0;
     keyLaneTable = allocation + 1;
     bucketCount = 1;
     *allocation = arena;
@@ -2227,8 +2227,8 @@ int pass_ssa_build(program)
     if (option7Enabled != 0) {
       arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
-      scopedHashFn = PTR_FUN_001e90c4;
-      scopedEqFn = PTR_FUN_001e90b0;
+      scopedHashFn = ptrTo_ScopedExprTable__hashKey_001e90c4;
+      scopedEqFn = ptrTo_ScopedExprTable__eqKeys_001e90b0;
       exprTable = allocation + 1;
       bucketCount = 1;
       *allocation = arena;
@@ -2260,8 +2260,8 @@ int pass_ssa_build(program)
       *scopeExprSlotRef = exprTable;
       arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
-      laneMatchEqFn = PTR_FUN_001e90c0;
-      laneMatchHashFn = PTR_FUN_001e9094;
+      laneMatchEqFn = ptrTo_LaneMatchTable__eqKeys_001e90c0;
+      laneMatchHashFn = ptrTo_returnZero_172dfc_001e9094;
       laneMatchTable = allocation + 1;
       bucketCount = 1;
       *allocation = arena;
@@ -2293,8 +2293,8 @@ int pass_ssa_build(program)
       *scopeLaneMatchSlotRef = laneMatchTable;
       arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
-      swizzleHashFn = PTR_FUN_001e90a4;
-      swizzleEqFn = PTR_FUN_001e909c;
+      swizzleHashFn = ptrTo_SwizzleTable__hashKey_001e90a4;
+      swizzleEqFn = ptrTo_SwizzleTable__eqKeys_001e909c;
       swizzleTable = allocation + 1;
       bucketCount = 1;
       *allocation = arena;
@@ -3812,7 +3812,7 @@ int FixedValue__ctor_1245a8(this, registerIndex, registerFile, baseCtorArg4, com
   
   ((int (*)())VRegInfo__ctor_12379c)(this,registerIndex,registerFile,baseCtorArg4,compiler);
   this[4] = registerIndex;
-  *this = &PTR_FUN_001ea898;
+  *this = &ptrTo_FixedValue__dtor_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
   if (registerFile == 3) {
     if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= registerIndex) {
@@ -3854,7 +3854,7 @@ int FixedValue__ctor_124724(this, registerIndex, registerFile, baseCtorArg4, com
   
   ((int (*)())VRegInfo__ctor_12379c)(this,registerIndex,registerFile,baseCtorArg4,compiler);
   this[4] = registerIndex;
-  *this = &PTR_FUN_001ea898;
+  *this = &ptrTo_FixedValue__dtor_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
   if (registerFile == 3) {
     if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= registerIndex) {
@@ -3891,7 +3891,7 @@ int VertexRegister__ctor_1248a0(this, ctorWord2, ctorWord1, ctorWord3, compiler)
 {
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   this[4] = ctorWord2;
-  *this = &PTR_FUN_001ea860;
+  *this = &ptrTo_VertexRegister__dtor_001ea860;
   return;
 }
 
@@ -3905,7 +3905,7 @@ int VertexRegister__ctor_1248ec(this, ctorWord2, ctorWord1, ctorWord3, compiler)
 {
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   this[4] = ctorWord2;
-  *this = &PTR_FUN_001ea860;
+  *this = &ptrTo_VertexRegister__dtor_001ea860;
   return;
 }
 
@@ -3920,7 +3920,7 @@ int TempValue__ctor_124938(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   int streamCounter;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  *this = &PTR_FUN_001ea7b8;
+  *this = &ptrTo_TempValue__dtor_1d7e50_001ea7b8;
   streamCounter = *(int *)(compiler + 0x334);
   this[4] = streamCounter;
   this[7] = streamCounter;
@@ -4073,7 +4073,7 @@ int TempValue__ctor_124e04(this, ctorWord2, ctorWord1, ctorWord3, compiler)
   int streamCounter;
   
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
-  *this = &PTR_FUN_001ea7b8;
+  *this = &ptrTo_TempValue__dtor_1d7e50_001ea7b8;
   streamCounter = *(int *)(compiler + 0x334);
   this[4] = streamCounter;
   this[7] = streamCounter;
@@ -4106,7 +4106,7 @@ int ExportValue__ctor_124e68(this, indexValue, interpolatorKind, baseCtorArg4, c
   
   ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,interpolatorKind,baseCtorArg4,compiler);
   this[0xd] = 0;
-  *this = &PTR_FUN_001ea748;
+  *this = &ptrTo_ExportValue__dtor_001ea748;
   this[0xc] = 0;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
@@ -4186,7 +4186,7 @@ int ExportValue__ctor_1250dc(this, indexValue, interpolatorKind, baseCtorArg4, c
   
   ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,interpolatorKind,baseCtorArg4,compiler);
   this[0xd] = 0;
-  *this = &PTR_FUN_001ea748;
+  *this = &ptrTo_ExportValue__dtor_001ea748;
   this[0xc] = 0;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
@@ -4280,7 +4280,7 @@ int Interpolator__ctor_125350(this, indexValue, interpolatorKind, baseCtorArg4, 
   
   ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,interpolatorKind,baseCtorArg4,compiler);
   this[0xf] = 0;
-  *this = &PTR_FUN_001ea780;
+  *this = &ptrTo_Interpolator__dtor_001ea780;
   this[0xc] = 0;
   this[0xd] = 0;
   this[0xe] = 0;
@@ -4427,7 +4427,7 @@ int Interpolator__ctor_1257b0(this, indexValue, interpolatorKind, baseCtorArg4, 
   
   ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,interpolatorKind,baseCtorArg4,compiler);
   this[0xf] = 0;
-  *this = &PTR_FUN_001ea780;
+  *this = &ptrTo_Interpolator__dtor_001ea780;
   this[0xc] = 0;
   this[0xd] = 0;
   this[0xe] = 0;
@@ -4578,7 +4578,7 @@ int Resource__ctor_125d08(this, ctorWord2, ctorWord1, ctorWord3, compiler)
 {
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   this[4] = ctorWord2 + ctorWord1 * 0x10000;
-  *this = &PTR_FUN_001ea828;
+  *this = &ptrTo_Resource__dtor_001ea828;
   return;
 }
 
@@ -4592,7 +4592,7 @@ int Resource__ctor_125d60(this, ctorWord2, ctorWord1, ctorWord3, compiler)
 {
   ((int (*)())VRegInfo__ctor_12379c)(this,ctorWord2,ctorWord1,ctorWord3,compiler);
   this[4] = ctorWord2 + ctorWord1 * 0x10000;
-  *this = &PTR_FUN_001ea828;
+  *this = &ptrTo_Resource__dtor_001ea828;
   return;
 }
 

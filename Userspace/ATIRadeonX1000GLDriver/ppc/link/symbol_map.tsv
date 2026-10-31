@@ -315,52 +315,52 @@ DOUBLE_001aa298	0x1aa298	__TEXT,__literal8	double	8	extern double DOUBLE_001aa29
 DOUBLE_001aa2a0	0x1aa2a0	__TEXT,__literal8	double	8	extern double DOUBLE_001aa2a0 asm("DOUBLE_001aa2a0");	0x40000000	data.s
 DOUBLE_001aa2a8	0x1aa2a8	__TEXT,__literal8	double	8	extern double DOUBLE_001aa2a8[] asm("DOUBLE_001aa2a8");	0x401c0000	data.s
 powerOfTenDoubleTable	0x1aa3a8	__TEXT,__const	-	-	extern unsigned char powerOfTenDoubleTable asm("powerOfTenDoubleTable");	0x3949f623	data.s
-DAT_001aa4b0	0x1aa4b0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4b0 asm("DAT_001aa4b0");	0xffffffff	data.s
-DAT_001aa4b4	0x1aa4b4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4b4 asm("DAT_001aa4b4");	0x03ffffff	data.s
-DAT_001aa4b8	0x1aa4b8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4b8 asm("DAT_001aa4b8");	0xfffffffd	data.s
-DAT_001aa4bc	0x1aa4bc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4bc asm("DAT_001aa4bc");	0x07ffffff	data.s
-DAT_001aa4c0	0x1aa4c0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4c0 asm("DAT_001aa4c0");	0xffffffff	data.s
+dispatchDefaultState0_001aa4b0	0x1aa4b0	__TEXT,__const	undefined4	4	extern unsigned int dispatchDefaultState0_001aa4b0 asm("dispatchDefaultState0_001aa4b0");	0xffffffff	data.s
+dispatchDefaultState1_001aa4b4	0x1aa4b4	__TEXT,__const	undefined4	4	extern unsigned int dispatchDefaultState1_001aa4b4 asm("dispatchDefaultState1_001aa4b4");	0x03ffffff	data.s
+dispatchDefaultState2_001aa4b8	0x1aa4b8	__TEXT,__const	undefined4	4	extern unsigned int dispatchDefaultState2_001aa4b8 asm("dispatchDefaultState2_001aa4b8");	0xfffffffd	data.s
+dispatchDefaultState3_001aa4bc	0x1aa4bc	__TEXT,__const	undefined4	4	extern unsigned int dispatchDefaultState3_001aa4bc asm("dispatchDefaultState3_001aa4bc");	0x07ffffff	data.s
+dispatchDefaultState4_001aa4c0	0x1aa4c0	__TEXT,__const	undefined4	4	extern unsigned int dispatchDefaultState4_001aa4c0 asm("dispatchDefaultState4_001aa4c0");	0xffffffff	data.s
 programRecordSizeByType	0x1aa4c4	__TEXT,__const	-	-	extern unsigned char programRecordSizeByType asm("programRecordSizeByType");	0x00000000	data.s
-DAT_001aa4e8	0x1aa4e8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4e8 asm("DAT_001aa4e8");	0xffffffff	data.s
-DAT_001aa4ec	0x1aa4ec	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4ec asm("DAT_001aa4ec");	0x03ffffff	data.s
-DAT_001aa4f0	0x1aa4f0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4f0 asm("DAT_001aa4f0");	0xfffffffd	data.s
-DAT_001aa4f4	0x1aa4f4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4f4 asm("DAT_001aa4f4");	0x07ffffff	data.s
-DAT_001aa4f8	0x1aa4f8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4f8 asm("DAT_001aa4f8");	0xffffffff	data.s
-DAT_001aa4fc	0x1aa4fc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4fc asm("DAT_001aa4fc");	0x00000000	data.s
-DAT_001aa500	0x1aa500	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa500 asm("DAT_001aa500");	0x00000000	data.s
-DAT_001aa504	0x1aa504	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa504 asm("DAT_001aa504");	0x00000000	data.s
-DAT_001aa508	0x1aa508	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa508 asm("DAT_001aa508");	0x00000000	data.s
-DAT_001aa50c	0x1aa50c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa50c asm("DAT_001aa50c");	0x00000000	data.s
-DAT_001aa510	0x1aa510	__TEXT,__const	-	-	extern unsigned char DAT_001aa510 asm("DAT_001aa510");	0x00000000	data.s
-DAT_001aa554	0x1aa554	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa554 asm("DAT_001aa554");	0x00000001	data.s
-DAT_001aa558	0x1aa558	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa558 asm("DAT_001aa558");	0x00000007	data.s
-DAT_001aa55c	0x1aa55c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa55c asm("DAT_001aa55c");	0x00000006	data.s
-DAT_001aa560	0x1aa560	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa560 asm("DAT_001aa560");	0x00000005	data.s
-DAT_001aa564	0x1aa564	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa564 asm("DAT_001aa564");	0x00000004	data.s
-DAT_001aa568	0x1aa568	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa568 asm("DAT_001aa568");	0x00000003	data.s
-DAT_001aa56c	0x1aa56c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa56c asm("DAT_001aa56c");	0x00000002	data.s
-DAT_001aa570	0x1aa570	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa570 asm("DAT_001aa570");	0x00000000	data.s
+contextInitParam0_001aa4e8	0x1aa4e8	__TEXT,__const	undefined4	4	extern unsigned int contextInitParam0_001aa4e8 asm("contextInitParam0_001aa4e8");	0xffffffff	data.s
+contextInitParam1_001aa4ec	0x1aa4ec	__TEXT,__const	undefined4	4	extern unsigned int contextInitParam1_001aa4ec asm("contextInitParam1_001aa4ec");	0x03ffffff	data.s
+contextInitParam2_001aa4f0	0x1aa4f0	__TEXT,__const	undefined4	4	extern unsigned int contextInitParam2_001aa4f0 asm("contextInitParam2_001aa4f0");	0xfffffffd	data.s
+contextInitParam3_001aa4f4	0x1aa4f4	__TEXT,__const	undefined4	4	extern unsigned int contextInitParam3_001aa4f4 asm("contextInitParam3_001aa4f4");	0x07ffffff	data.s
+contextInitParam4_001aa4f8	0x1aa4f8	__TEXT,__const	undefined4	4	extern unsigned int contextInitParam4_001aa4f8 asm("contextInitParam4_001aa4f8");	0xffffffff	data.s
+queryResultInit0_001aa4fc	0x1aa4fc	__TEXT,__const	undefined4	4	extern unsigned int queryResultInit0_001aa4fc asm("queryResultInit0_001aa4fc");	0x00000000	data.s
+queryResultInit1_001aa500	0x1aa500	__TEXT,__const	undefined4	4	extern unsigned int queryResultInit1_001aa500 asm("queryResultInit1_001aa500");	0x00000000	data.s
+queryResultInit2_001aa504	0x1aa504	__TEXT,__const	undefined4	4	extern unsigned int queryResultInit2_001aa504 asm("queryResultInit2_001aa504");	0x00000000	data.s
+queryResultInit3_001aa508	0x1aa508	__TEXT,__const	undefined4	4	extern unsigned int queryResultInit3_001aa508 asm("queryResultInit3_001aa508");	0x00000000	data.s
+queryResultInit4_001aa50c	0x1aa50c	__TEXT,__const	undefined4	4	extern unsigned int queryResultInit4_001aa50c asm("queryResultInit4_001aa50c");	0x00000000	data.s
+samplerAnisotropyBitsTable_001aa510	0x1aa510	__TEXT,__const	-	-	extern unsigned char samplerAnisotropyBitsTable_001aa510 asm("samplerAnisotropyBitsTable_001aa510");	0x00000000	data.s
+alphaIndexRemapEntry0_001aa554	0x1aa554	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry0_001aa554 asm("alphaIndexRemapEntry0_001aa554");	0x00000001	data.s
+alphaIndexRemapEntry1_001aa558	0x1aa558	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry1_001aa558 asm("alphaIndexRemapEntry1_001aa558");	0x00000007	data.s
+alphaIndexRemapEntry2_001aa55c	0x1aa55c	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry2_001aa55c asm("alphaIndexRemapEntry2_001aa55c");	0x00000006	data.s
+alphaIndexRemapEntry3_001aa560	0x1aa560	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry3_001aa560 asm("alphaIndexRemapEntry3_001aa560");	0x00000005	data.s
+alphaIndexRemapEntry4_001aa564	0x1aa564	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry4_001aa564 asm("alphaIndexRemapEntry4_001aa564");	0x00000004	data.s
+alphaIndexRemapEntry5_001aa568	0x1aa568	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry5_001aa568 asm("alphaIndexRemapEntry5_001aa568");	0x00000003	data.s
+alphaIndexRemapEntry6_001aa56c	0x1aa56c	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry6_001aa56c asm("alphaIndexRemapEntry6_001aa56c");	0x00000002	data.s
+alphaIndexRemapEntry7_001aa570	0x1aa570	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry7_001aa570 asm("alphaIndexRemapEntry7_001aa570");	0x00000000	data.s
 UNK_001aa574	0x1aa574	__TEXT,__const	-	-	extern unsigned char UNK_001aa574 asm("UNK_001aa574");	0x00000000	data.s
-DAT_001aa584	0x1aa584	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa584 asm("DAT_001aa584");	0xfffffffd	data.s
-DAT_001aa588	0x1aa588	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa588 asm("DAT_001aa588");	0x000087c3	data.s
-DAT_001aa58c	0x1aa58c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa58c asm("DAT_001aa58c");	0x000087c2	data.s
-DAT_001aa5f0	0x1aa5f0	__TEXT,__const	-	-	extern unsigned char DAT_001aa5f0 asm("DAT_001aa5f0");	0x00000000	data.s
-DAT_001aa5f4	0x1aa5f4	__TEXT,__const	-	-	extern unsigned char DAT_001aa5f4 asm("DAT_001aa5f4");	0x00000000	data.s
-DAT_001aa5f8	0x1aa5f8	__TEXT,__const	-	-	extern unsigned char DAT_001aa5f8 asm("DAT_001aa5f8");	0x00000003	data.s
-DAT_001aa5fc	0x1aa5fc	__TEXT,__const	-	-	extern unsigned char DAT_001aa5fc asm("DAT_001aa5fc");	0x00000003	data.s
-DAT_001aa600	0x1aa600	__TEXT,__const	-	-	extern unsigned char DAT_001aa600[] asm("DAT_001aa600");	0x00000000	data.s
-DAT_001aa758	0x1aa758	__TEXT,__const	-	-	extern unsigned char DAT_001aa758[] asm("DAT_001aa758");	0x00050505	data.s
-DAT_001aa760	0x1aa760	__TEXT,__const	-	-	extern unsigned char DAT_001aa760[] asm("DAT_001aa760");	0x00010402	data.s
+extvsStorageClassEntry0_001aa584	0x1aa584	__TEXT,__const	undefined4	4	extern unsigned int extvsStorageClassEntry0_001aa584 asm("extvsStorageClassEntry0_001aa584");	0xfffffffd	data.s
+extvsStorageClassEntry1_001aa588	0x1aa588	__TEXT,__const	undefined4	4	extern unsigned int extvsStorageClassEntry1_001aa588 asm("extvsStorageClassEntry1_001aa588");	0x000087c3	data.s
+extvsStorageClassEntry2_001aa58c	0x1aa58c	__TEXT,__const	undefined4	4	extern unsigned int extvsStorageClassEntry2_001aa58c asm("extvsStorageClassEntry2_001aa58c");	0x000087c2	data.s
+recordOpcodeInfoTable_001aa5f0	0x1aa5f0	__TEXT,__const	-	-	extern unsigned char recordOpcodeInfoTable_001aa5f0 asm("recordOpcodeInfoTable_001aa5f0");	0x00000000	data.s
+recordOpcodeInfoTable_word1_001aa5f4	0x1aa5f4	__TEXT,__const	-	-	extern unsigned char recordOpcodeInfoTable_word1_001aa5f4 asm("recordOpcodeInfoTable_word1_001aa5f4");	0x00000000	data.s
+recordOpcodeInfoTable_srcOperandIndexA_001aa5f8	0x1aa5f8	__TEXT,__const	-	-	extern unsigned char recordOpcodeInfoTable_srcOperandIndexA_001aa5f8 asm("recordOpcodeInfoTable_srcOperandIndexA_001aa5f8");	0x00000003	data.s
+recordOpcodeInfoTable_srcOperandIndexB_001aa5fc	0x1aa5fc	__TEXT,__const	-	-	extern unsigned char recordOpcodeInfoTable_srcOperandIndexB_001aa5fc asm("recordOpcodeInfoTable_srcOperandIndexB_001aa5fc");	0x00000003	data.s
+recordOpcodeInfoTable_word4_001aa600	0x1aa600	__TEXT,__const	-	-	extern unsigned char recordOpcodeInfoTable_word4_001aa600[] asm("recordOpcodeInfoTable_word4_001aa600");	0x00000000	data.s
+destRegisterFileByType_001aa758	0x1aa758	__TEXT,__const	-	-	extern unsigned char destRegisterFileByType_001aa758[] asm("destRegisterFileByType_001aa758");	0x00050505	data.s
+srcRegisterFileByType_001aa760	0x1aa760	__TEXT,__const	-	-	extern unsigned char srcRegisterFileByType_001aa760[] asm("srcRegisterFileByType_001aa760");	0x00010402	data.s
 DAT_001aa761	0x1aa761	__TEXT,__const	undefined1	1	extern unsigned char DAT_001aa761 asm("DAT_001aa761");	0x01040200	data.s
-DAT_001aa764	0x1aa764	__TEXT,__const	-	-	extern unsigned char DAT_001aa764[] asm("DAT_001aa764");	0x00050410	data.s
+registerFileByRegIdHighByte_001aa764	0x1aa764	__TEXT,__const	-	-	extern unsigned char registerFileByRegIdHighByte_001aa764[] asm("registerFileByRegIdHighByte_001aa764");	0x00050410	data.s
 DAT_001aa798	0x1aa798	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa798 asm("DAT_001aa798");	0x00000004	data.s
 DAT_001aa79c	0x1aa79c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa79c asm("DAT_001aa79c");	0x00000004	data.s
 DAT_001aa7a0	0x1aa7a0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa7a0 asm("DAT_001aa7a0");	0x00000005	data.s
 DAT_001aa7a4	0x1aa7a4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa7a4 asm("DAT_001aa7a4");	0x00000004	data.s
-DAT_001aa7a8	0x1aa7a8	__TEXT,__const	-	-	extern unsigned char DAT_001aa7a8 asm("DAT_001aa7a8");	0x00000000	data.s
-DAT_001aa7d0	0x1aa7d0	__TEXT,__const	-	-	extern unsigned char DAT_001aa7d0 asm("DAT_001aa7d0");	0x03393939	data.s
-DAT_001aa7dc	0x1aa7dc	__TEXT,__const	-	-	extern unsigned char DAT_001aa7dc asm("DAT_001aa7dc");	0x33393993	data.s
-DAT_001aa7e8	0x1aa7e8	__TEXT,__const	-	-	extern unsigned char DAT_001aa7e8 asm("DAT_001aa7e8");	0x00000000	data.s
+primitiveInputRegisterTable_001aa7a8	0x1aa7a8	__TEXT,__const	-	-	extern unsigned char primitiveInputRegisterTable_001aa7a8 asm("primitiveInputRegisterTable_001aa7a8");	0x00000000	data.s
+sampleCoverageTable_001aa7d0	0x1aa7d0	__TEXT,__const	-	-	extern unsigned char sampleCoverageTable_001aa7d0 asm("sampleCoverageTable_001aa7d0");	0x03393939	data.s
+samplePositionTable_001aa7dc	0x1aa7dc	__TEXT,__const	-	-	extern unsigned char samplePositionTable_001aa7dc asm("samplePositionTable_001aa7dc");	0x33393993	data.s
+samplePatternTable_001aa7e8	0x1aa7e8	__TEXT,__const	-	-	extern unsigned char samplePatternTable_001aa7e8 asm("samplePatternTable_001aa7e8");	0x00000000	data.s
 _UNK_001aa7f4	0x1aa7f4	__TEXT,__const	-	-	extern unsigned char _UNK_001aa7f4 asm("_UNK_001aa7f4");	0x00000100	data.s
 _UNK_001aa7f8	0x1aa7f8	__TEXT,__const	-	-	extern unsigned char _UNK_001aa7f8 asm("_UNK_001aa7f8");	0x00000200	data.s
 swizzleXXXX_001aa7fc	0x1aa7fc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa7fc asm("swizzleXXXX_001aa7fc");	0x00000000	data.s
@@ -383,8 +383,8 @@ swizzleYXYY_001aa858	0x1aa858	__TEXT,__const	undefined4	4	extern unsigned int sw
 swizzleXYYY_001aa85c	0x1aa85c	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001aa85c asm("swizzleXYYY_001aa85c");	0x00010101	data.s
 swizzleXXXX_001aa860	0x1aa860	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa860 asm("swizzleXXXX_001aa860");	0x00000000	data.s
 swizzleXYZW_001aa868	0x1aa868	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001aa868 asm("swizzleXYZW_001aa868");	0x00010203	data.s
-DAT_001aa86c	0x1aa86c	__TEXT,__const	-	-	extern unsigned char DAT_001aa86c asm("DAT_001aa86c");	0x00000000	data.s
-DAT_001aa87c	0x1aa87c	__TEXT,__const	-	-	extern unsigned char DAT_001aa87c asm("DAT_001aa87c");	0x00000003	data.s
+swizzleVariantStartTable_001aa86c	0x1aa86c	__TEXT,__const	-	-	extern unsigned char swizzleVariantStartTable_001aa86c asm("swizzleVariantStartTable_001aa86c");	0x00000000	data.s
+swizzleVariantTemplate_001aa87c	0x1aa87c	__TEXT,__const	-	-	extern unsigned char swizzleVariantTemplate_001aa87c asm("swizzleVariantTemplate_001aa87c");	0x00000003	data.s
 swizzleXYZW_001aa9a8	0x1aa9a8	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001aa9a8 asm("swizzleXYZW_001aa9a8");	0x00010203	data.s
 UNK_001aa9ac	0x1aa9ac	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9ac asm("UNK_001aa9ac");	0x01000101	data.s
 UNK_001aa9b0	0x1aa9b0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9b0 asm("UNK_001aa9b0");	0x01010101	data.s
@@ -400,8 +400,8 @@ UNK_001aa9d4	0x1aa9d4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9
 UNK_001aa9d8	0x1aa9d8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9d8 asm("UNK_001aa9d8");	0x02020202	data.s
 swizzleXXXX_001aa9dc	0x1aa9dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa9dc asm("swizzleXXXX_001aa9dc");	0x00000000	data.s
 DAT_001aa9e0	0x1aa9e0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa9e0 asm("DAT_001aa9e0");	0x01010101	data.s
-DAT_001aa9e4	0x1aa9e4	__TEXT,__const	-	-	extern unsigned char DAT_001aa9e4 asm("DAT_001aa9e4");	0x00000002	data.s
-DAT_001aa9fc	0x1aa9fc	__TEXT,__const	-	-	extern unsigned char DAT_001aa9fc asm("DAT_001aa9fc");	0x00000006	data.s
+ilOpcodeTemplateOffsetTable_001aa9e4	0x1aa9e4	__TEXT,__const	-	-	extern unsigned char ilOpcodeTemplateOffsetTable_001aa9e4 asm("ilOpcodeTemplateOffsetTable_001aa9e4");	0x00000002	data.s
+setupLiteralFloatTable_001aa9fc	0x1aa9fc	__TEXT,__const	-	-	extern unsigned char setupLiteralFloatTable_001aa9fc asm("setupLiteralFloatTable_001aa9fc");	0x00000006	data.s
 UNK_001aaa18	0x1aaa18	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa18 asm("UNK_001aaa18");	0x01010100	data.s
 UNK_001aaa1c	0x1aaa1c	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa1c asm("UNK_001aaa1c");	0x00000001	data.s
 DAT_001aaa20	0x1aaa20	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aaa20 asm("DAT_001aaa20");	0x01010000	data.s
@@ -410,7 +410,7 @@ UNK_001aaa28	0x1aaa28	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa
 UNK_001aaa2c	0x1aaa2c	__TEXT,__const	-	-	extern unsigned char UNK_001aaa2c asm("UNK_001aaa2c");	0x00000000	data.s
 DAT_001ab134	0x1ab134	__TEXT,__const	-	-	extern unsigned char DAT_001ab134 asm("DAT_001ab134");	0x00000000	data.s
 textPrintDoubleShortest_pow10Table	0x1abfb4	__TEXT,__const	-	-	extern unsigned char textPrintDoubleShortest_pow10Table asm("textPrintDoubleShortest_pow10Table");	0x00000055	data.s
-DAT_001ac5a4	0x1ac5a4	__TEXT,__const	-	-	extern unsigned char DAT_001ac5a4 asm("DAT_001ac5a4");	0x00000056	data.s
+arbTypeTagTable_001ac5a4	0x1ac5a4	__TEXT,__const	-	-	extern unsigned char arbTypeTagTable_001ac5a4 asm("arbTypeTagTable_001ac5a4");	0x00000056	data.s
 DAT_001acec0	0x1acec0	__TEXT,__const	-	-	extern unsigned char DAT_001acec0 asm("DAT_001acec0");	0x00000055	data.s
 DAT_001ad5d8	0x1ad5d8	__TEXT,__const	-	-	extern unsigned char DAT_001ad5d8 asm("DAT_001ad5d8");	0x0000001f	data.s
 UNK_001ada48	0x1ada48	__TEXT,__const	-	-	extern unsigned char UNK_001ada48 asm("UNK_001ada48");	0x00000031	data.s
@@ -423,8 +423,8 @@ DAT_001af9d0	0x1af9d0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9
 UNK_001af9d4	0x1af9d4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001af9d4 asm("UNK_001af9d4");	0x03030303	data.s
 _UNK_001af9d8	0x1af9d8	__TEXT,__const	-	-	extern unsigned char _UNK_001af9d8 asm("_UNK_001af9d8");	0x01010100	data.s
 swizzleXYYY_001af9dc	0x1af9dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001af9dc asm("swizzleXYYY_001af9dc");	0x00010101	data.s
-DAT_001af9e0	0x1af9e0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9e0 asm("DAT_001af9e0");	0x3e000000	data.s
-DAT_001af9ec	0x1af9ec	__TEXT,__const	-	-	extern unsigned char DAT_001af9ec asm("DAT_001af9ec");	0x3f800000	data.s
+outputScaleTable_001af9e0	0x1af9e0	__TEXT,__const	undefined4	4	extern unsigned int outputScaleTable_001af9e0 asm("outputScaleTable_001af9e0");	0x3e000000	data.s
+outputScaleByExponent_001af9ec	0x1af9ec	__TEXT,__const	-	-	extern unsigned char outputScaleByExponent_001af9ec asm("outputScaleByExponent_001af9ec");	0x3f800000	data.s
 swizzleAllUnused_001af9fc	0x1af9fc	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001af9fc asm("swizzleAllUnused_001af9fc");	0x04040404	data.s
 DAT_001afa00	0x1afa00	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa00 asm("DAT_001afa00");	0x00010203	data.s
 DAT_001afa04	0x1afa04	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa04 asm("DAT_001afa04");	0x01010100	data.s
@@ -443,7 +443,7 @@ DAT_001afef8	0x1afef8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afe
 DAT_001aff08	0x1aff08	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff08 asm("DAT_001aff08");	0x00000000	data.s
 DAT_001aff0c	0x1aff0c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff0c asm("DAT_001aff0c");	0x00000000	data.s
 swizzleXXXX_001aff48	0x1aff48	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aff48 asm("swizzleXXXX_001aff48");	0x00000000	data.s
-DAT_001aff4c	0x1aff4c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff4c asm("DAT_001aff4c");	0x3e000000	data.s
+immediateConstantMultiples_001aff4c	0x1aff4c	__TEXT,__const	undefined4	4	extern unsigned int immediateConstantMultiples_001aff4c asm("immediateConstantMultiples_001aff4c");	0x3e000000	data.s
 DAT_001aff50	0x1aff50	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff50 asm("DAT_001aff50");	0x3e800000	data.s
 UNK_001aff54	0x1aff54	__TEXT,__const	-	-	extern unsigned char UNK_001aff54 asm("UNK_001aff54");	0x3f000000	data.s
 DAT_001aff68	0x1aff68	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff68 asm("DAT_001aff68");	0x00000000	data.s
@@ -454,10 +454,10 @@ swizzleWWWW_001affa4	0x1affa4	__TEXT,__const	undefined4	4	extern unsigned int sw
 DAT_001affb0	0x1affb0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affb0 asm("DAT_001affb0");	0x00000000	data.s
 DAT_001affb8	0x1affb8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affb8 asm("DAT_001affb8");	0x00010203	data.s
 DAT_001affbc	0x1affbc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affbc asm("DAT_001affbc");	0x04040404	data.s
-DAT_001affc0	0x1affc0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affc0 asm("DAT_001affc0");	0x0000001b	data.s
-DAT_001affc4	0x1affc4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affc4 asm("DAT_001affc4");	0x00000009	data.s
-DAT_001affc8	0x1affc8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affc8 asm("DAT_001affc8");	0x00000003	data.s
-DAT_001affcc	0x1affcc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affcc asm("DAT_001affcc");	0x00000028	data.s
+laneWeightInit3_001affc0	0x1affc0	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit3_001affc0 asm("laneWeightInit3_001affc0");	0x0000001b	data.s
+laneWeightInit2_001affc4	0x1affc4	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit2_001affc4 asm("laneWeightInit2_001affc4");	0x00000009	data.s
+laneWeightInit1_001affc8	0x1affc8	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit1_001affc8 asm("laneWeightInit1_001affc8");	0x00000003	data.s
+laneWeightInit0_001affcc	0x1affcc	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit0_001affcc asm("laneWeightInit0_001affcc");	0x00000028	data.s
 DAT_001affd0	0x1affd0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affd0 asm("DAT_001affd0");	0x04040404	data.s
 UNK_001affd4	0x1affd4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001affd4 asm("UNK_001affd4");	0x00000000	data.s
 DAT_001affd8	0x1affd8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affd8 asm("DAT_001affd8");	0x00010203	data.s
@@ -495,7 +495,7 @@ swizzleYYYX_001b0054	0x1b0054	__TEXT,__const	undefined4	4	extern unsigned int sw
 swizzleXYYY_001b0058	0x1b0058	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001b0058 asm("swizzleXYYY_001b0058");	0x00010101	data.s
 swizzleXXXX_001b005c	0x1b005c	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001b005c asm("swizzleXXXX_001b005c");	0x00000000	data.s
 DAT_001b0060	0x1b0060	__TEXT,__const	-	-	extern unsigned char DAT_001b0060 asm("DAT_001b0060");	0x00000000	data.s
-DAT_001b0160	0x1b0160	__TEXT,__const	-	-	extern unsigned char DAT_001b0160 asm("DAT_001b0160");	0x01020003	data.s
+componentToSelectWordTable_001b0160	0x1b0160	__TEXT,__const	-	-	extern unsigned char componentToSelectWordTable_001b0160 asm("componentToSelectWordTable_001b0160");	0x01020003	data.s
 DAT_001b0170	0x1b0170	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0170 asm("DAT_001b0170");	0x00000000	data.s
 DAT_001b0174	0x1b0174	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0174 asm("DAT_001b0174");	0x01010101	data.s
 DAT_001b017c	0x1b017c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b017c asm("DAT_001b017c");	0x01010101	data.s
@@ -543,7 +543,7 @@ swizzleXYZW_001b0220	0x1b0220	__TEXT,__const	undefined4	4	extern unsigned int sw
 swizzleAllUnused_001b0224	0x1b0224	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0224 asm("swizzleAllUnused_001b0224");	0x04040404	data.s
 DAT_001b0228	0x1b0228	__TEXT,__const	undefined1	1	extern unsigned char DAT_001b0228 asm("DAT_001b0228");	0x00010203	data.s
 DAT_001b023c	0x1b023c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b023c asm("DAT_001b023c");	0x01010100	data.s
-DAT_001b0240	0x1b0240	__TEXT,__const	-	-	extern unsigned char DAT_001b0240 asm("DAT_001b0240");	0x00000000	data.s
+r300SchedGroupTable_001b0240	0x1b0240	__TEXT,__const	-	-	extern unsigned char r300SchedGroupTable_001b0240 asm("r300SchedGroupTable_001b0240");	0x00000000	data.s
 DAT_001b0244	0x1b0244	__TEXT,__const	-	-	extern unsigned char DAT_001b0244 asm("DAT_001b0244");	0x04040404	data.s
 DAT_001b02ec	0x1b02ec	__TEXT,__const	-	-	extern unsigned char DAT_001b02ec asm("DAT_001b02ec");	0x04040404	data.s
 DAT_001b19e0	0x1b19e0	__TEXT,__const	-	-	extern unsigned char DAT_001b19e0 asm("DAT_001b19e0");	0x03000004	data.s
@@ -573,13 +573,13 @@ swizzleXXXX_001b2abc	0x1b2abc	__TEXT,__const	undefined4	4	extern unsigned int sw
 swizzleXYZW_001b2ac0	0x1b2ac0	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b2ac0 asm("swizzleXYZW_001b2ac0");	0x00010203	data.s
 swizzleWWWW_001b2ac4	0x1b2ac4	__TEXT,__const	undefined4	4	extern unsigned int swizzleWWWW_001b2ac4 asm("swizzleWWWW_001b2ac4");	0x03030303	data.s
 DAT_001b2acc	0x1b2acc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2acc asm("DAT_001b2acc");	0x01010100	data.s
-DAT_001b2ad0	0x1b2ad0	__TEXT,__const	-	-	extern unsigned char DAT_001b2ad0 asm("DAT_001b2ad0");	0x00000000	data.s
-DAT_001b2be8	0x1b2be8	__TEXT,__const	-	-	extern unsigned char DAT_001b2be8 asm("DAT_001b2be8");	0x00000000	data.s
+r300DestRegTypeBitsTable_001b2ad0	0x1b2ad0	__TEXT,__const	-	-	extern unsigned char r300DestRegTypeBitsTable_001b2ad0 asm("r300DestRegTypeBitsTable_001b2ad0");	0x00000000	data.s
+r300SwizzleLaneSelectTable_001b2be8	0x1b2be8	__TEXT,__const	-	-	extern unsigned char r300SwizzleLaneSelectTable_001b2be8 asm("r300SwizzleLaneSelectTable_001b2be8");	0x00000000	data.s
 DAT_001b2c04	0x1b2c04	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c04 asm("DAT_001b2c04");	0x01010100	data.s
 DAT_001b2c08	0x1b2c08	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c08 asm("DAT_001b2c08");	0x01010001	data.s
 DAT_001b2c0c	0x1b2c0c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c0c asm("DAT_001b2c0c");	0x01000101	data.s
 DAT_001b2c10	0x1b2c10	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c10 asm("DAT_001b2c10");	0x00010101	data.s
-DAT_001b2c14	0x1b2c14	__TEXT,__const	-	-	extern unsigned char DAT_001b2c14 asm("DAT_001b2c14");	0x00000000	data.s
+r300SrcRegClassBitsTable_001b2c14	0x1b2c14	__TEXT,__const	-	-	extern unsigned char r300SrcRegClassBitsTable_001b2c14 asm("r300SrcRegClassBitsTable_001b2c14");	0x00000000	data.s
 DAT_001b2d2c	0x1b2d2c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d2c asm("DAT_001b2d2c");	0x03030303	data.s
 DAT_001b2d30	0x1b2d30	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d30 asm("DAT_001b2d30");	0x02020202	data.s
 DAT_001b2d34	0x1b2d34	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d34 asm("DAT_001b2d34");	0x01010101	data.s
@@ -599,173 +599,173 @@ DAT_001b40f0	0x1b40f0	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b40f0 as
 DAT_001b81b8	0x1b81b8	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b81b8 asm("DAT_001b81b8");	0x00000014	data.s
 DAT_001b9d04	0x1b9d04	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b9d04 asm("DAT_001b9d04");	0x00040000	data.s
 UNK_001ba4e4	0x1ba4e4	__TEXT,__eh_frame	-	-	extern unsigned char UNK_001ba4e4 asm("UNK_001ba4e4");	0x000024e0	unused (referenced only by dropped toolchain code)
-DAT_001d91f0	0x1d91f0	__DATA,__data	-	-	extern unsigned char DAT_001d91f0 asm("DAT_001d91f0");	0x00010000	data.s
+vertexAttribBitTable_001d91f0	0x1d91f0	__DATA,__data	-	-	extern unsigned char vertexAttribBitTable_001d91f0 asm("vertexAttribBitTable_001d91f0");	0x00010000	data.s
 DAT_001d92a8	0x1d92a8	__DATA,__data	-	-	extern unsigned char DAT_001d92a8 asm("DAT_001d92a8");	0x00000005	data.s
 DAT_001d9358	0x1d9358	__DATA,__data	-	-	extern unsigned char DAT_001d9358 asm("DAT_001d9358");	0x00000004	data.s
 DAT_001d9408	0x1d9408	__DATA,__data	-	-	extern unsigned char DAT_001d9408 asm("DAT_001d9408");	0x00000004	data.s
 DAT_001d94b8	0x1d94b8	__DATA,__data	-	-	extern unsigned char DAT_001d94b8 asm("DAT_001d94b8");	0x00000003	data.s
-DAT_001d9568	0x1d9568	__DATA,__data	-	-	extern unsigned char DAT_001d9568 asm("DAT_001d9568");	0x00000001	data.s
-DAT_001d9594	0x1d9594	__DATA,__data	-	-	extern unsigned char DAT_001d9594 asm("DAT_001d9594");	0x00000004	data.s
+vertexTypeSignedTable_001d9568	0x1d9568	__DATA,__data	-	-	extern unsigned char vertexTypeSignedTable_001d9568 asm("vertexTypeSignedTable_001d9568");	0x00000001	data.s
+vertexTypeFlagsTable_001d9594	0x1d9594	__DATA,__data	-	-	extern unsigned char vertexTypeFlagsTable_001d9594 asm("vertexTypeFlagsTable_001d9594");	0x00000004	data.s
 DAT_001d9644	0x1d9644	__DATA,__data	-	-	extern unsigned char DAT_001d9644 asm("DAT_001d9644");	0x00000001	data.s
-DAT_001d96f4	0x1d96f4	__DATA,__data	-	-	extern unsigned char DAT_001d96f4 asm("DAT_001d96f4");	0x00000001	data.s
-DAT_001d9778	0x1d9778	__DATA,__data	-	-	extern unsigned char DAT_001d9778 asm("DAT_001d9778");	0x00000030	data.s
-DAT_001d9888	0x1d9888	__DATA,__data	-	-	extern unsigned char DAT_001d9888 asm("DAT_001d9888");	0x00000001	data.s
-DAT_001d98b0	0x1d98b0	__DATA,__data	-	-	extern unsigned char DAT_001d98b0 asm("DAT_001d98b0");	0x00000005	data.s
-DAT_001d9960	0x1d9960	__DATA,__data	-	-	extern unsigned char DAT_001d9960 asm("DAT_001d9960");	0x00000004	data.s
-DAT_001d9a10	0x1d9a10	__DATA,__data	-	-	extern unsigned char DAT_001d9a10 asm("DAT_001d9a10");	0x00000004	data.s
-DAT_001d9ac0	0x1d9ac0	__DATA,__data	-	-	extern unsigned char DAT_001d9ac0 asm("DAT_001d9ac0");	0x00000003	data.s
+vertexTypeSupportedTable_001d96f4	0x1d96f4	__DATA,__data	-	-	extern unsigned char vertexTypeSupportedTable_001d96f4 asm("vertexTypeSupportedTable_001d96f4");	0x00000001	data.s
+vertexAttrControlToHwAttrTable_001d9778	0x1d9778	__DATA,__data	-	-	extern unsigned char vertexAttrControlToHwAttrTable_001d9778 asm("vertexAttrControlToHwAttrTable_001d9778");	0x00000030	data.s
+primitiveModeFlagsTable_001d9888	0x1d9888	__DATA,__data	-	-	extern unsigned char primitiveModeFlagsTable_001d9888 asm("primitiveModeFlagsTable_001d9888");	0x00000001	data.s
+vertexTypeSwizzleSelectWTable_001d98b0	0x1d98b0	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleSelectWTable_001d98b0 asm("vertexTypeSwizzleSelectWTable_001d98b0");	0x00000005	data.s
+vertexTypeSwizzleSelectZTable_001d9960	0x1d9960	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleSelectZTable_001d9960 asm("vertexTypeSwizzleSelectZTable_001d9960");	0x00000004	data.s
+vertexTypeSwizzleSelectYTable_001d9a10	0x1d9a10	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleSelectYTable_001d9a10 asm("vertexTypeSwizzleSelectYTable_001d9a10");	0x00000004	data.s
+vertexTypeSwizzleSelectXTable_001d9ac0	0x1d9ac0	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleSelectXTable_001d9ac0 asm("vertexTypeSwizzleSelectXTable_001d9ac0");	0x00000003	data.s
 DAT_001d9b70	0x1d9b70	__DATA,__data	-	-	extern unsigned char DAT_001d9b70 asm("DAT_001d9b70");	0x00000001	data.s
 DAT_001d9b9c	0x1d9b9c	__DATA,__data	-	-	extern unsigned char DAT_001d9b9c asm("DAT_001d9b9c");	0x00000004	data.s
 DAT_001d9c4c	0x1d9c4c	__DATA,__data	-	-	extern unsigned char DAT_001d9c4c asm("DAT_001d9c4c");	0x00000001	data.s
 DAT_001d9cfc	0x1d9cfc	__DATA,__data	-	-	extern unsigned char DAT_001d9cfc asm("DAT_001d9cfc");	0x00000000	data.s
 DAT_001d9dac	0x1d9dac	__DATA,__data	-	-	extern unsigned char DAT_001d9dac asm("DAT_001d9dac");	0x00000001	data.s
-DAT_001d9dd8	0x1d9dd8	__DATA,__data	-	-	extern unsigned char DAT_001d9dd8 asm("DAT_001d9dd8");	0x00010000	data.s
-DAT_001d9eb0	0x1d9eb0	__DATA,__data	-	-	extern unsigned char DAT_001d9eb0 asm("DAT_001d9eb0");	0x00000030	data.s
-DAT_001d9f34	0x1d9f34	__DATA,__data	-	-	extern unsigned char DAT_001d9f34 asm("DAT_001d9f34");	0x00000000	data.s
-DAT_001d9f3c	0x1d9f3c	__DATA,__data	-	-	extern unsigned char DAT_001d9f3c asm("DAT_001d9f3c");	0x00000000	data.s
-DAT_001d9f3e	0x1d9f3e	__DATA,__data	-	-	extern unsigned char DAT_001d9f3e asm("DAT_001d9f3e");	0x00000000	data.s
-DAT_001d9f40	0x1d9f40	__DATA,__data	-	-	extern unsigned char DAT_001d9f40 asm("DAT_001d9f40");	0x00000000	data.s
-DAT_001d9f44	0x1d9f44	__DATA,__data	-	-	extern unsigned char DAT_001d9f44 asm("DAT_001d9f44");	0x00000000	data.s
-DAT_001d9f48	0x1d9f48	__DATA,__data	-	-	extern unsigned char DAT_001d9f48 asm("DAT_001d9f48");	0x00000000	data.s
-DAT_001d9f4c	0x1d9f4c	__DATA,__data	-	-	extern unsigned char DAT_001d9f4c asm("DAT_001d9f4c");	0x00000000	data.s
-DAT_001d9f50	0x1d9f50	__DATA,__data	-	-	extern unsigned char DAT_001d9f50 asm("DAT_001d9f50");	0x04218000	data.s
-DAT_001d9f54	0x1d9f54	__DATA,__data	-	-	extern unsigned char DAT_001d9f54 asm("DAT_001d9f54");	0x003fc000	data.s
-DAT_001d9fa0	0x1d9fa0	__DATA,__data	-	-	extern unsigned char DAT_001d9fa0 asm("DAT_001d9fa0");	0x03000000	data.s
-DAT_001da00c	0x1da00c	__DATA,__data	-	-	extern unsigned char DAT_001da00c asm("DAT_001da00c");	0x06000000	data.s
-DAT_001da054	0x1da054	__DATA,__data	-	-	extern unsigned char DAT_001da054 asm("DAT_001da054");	0x08000000	data.s
-DAT_001da1bc	0x1da1bc	__DATA,__data	-	-	extern unsigned char DAT_001da1bc asm("DAT_001da1bc");	0x12000000	data.s
-DAT_001da36c	0x1da36c	__DATA,__data	-	-	extern unsigned char DAT_001da36c asm("DAT_001da36c");	0x1e000000	data.s
+vertexAttribBitTableCopy_001d9dd8	0x1d9dd8	__DATA,__data	-	-	extern unsigned char vertexAttribBitTableCopy_001d9dd8 asm("vertexAttribBitTableCopy_001d9dd8");	0x00010000	data.s
+vertexAttrControlToHwAttrTableCopy_001d9eb0	0x1d9eb0	__DATA,__data	-	-	extern unsigned char vertexAttrControlToHwAttrTableCopy_001d9eb0 asm("vertexAttrControlToHwAttrTableCopy_001d9eb0");	0x00000030	data.s
+textureFormatTable_001d9f34	0x1d9f34	__DATA,__data	-	-	extern unsigned char textureFormatTable_001d9f34 asm("textureFormatTable_001d9f34");	0x00000000	data.s
+textureFormatTable_field08_001d9f3c	0x1d9f3c	__DATA,__data	-	-	extern unsigned char textureFormatTable_field08_001d9f3c asm("textureFormatTable_field08_001d9f3c");	0x00000000	data.s
+textureFormatTable_field0A_001d9f3e	0x1d9f3e	__DATA,__data	-	-	extern unsigned char textureFormatTable_field0A_001d9f3e asm("textureFormatTable_field0A_001d9f3e");	0x00000000	data.s
+textureFormatTable_field0C_001d9f40	0x1d9f40	__DATA,__data	-	-	extern unsigned char textureFormatTable_field0C_001d9f40 asm("textureFormatTable_field0C_001d9f40");	0x00000000	data.s
+textureFormatTable_field10_001d9f44	0x1d9f44	__DATA,__data	-	-	extern unsigned char textureFormatTable_field10_001d9f44 asm("textureFormatTable_field10_001d9f44");	0x00000000	data.s
+textureFormatTable_field14_001d9f48	0x1d9f48	__DATA,__data	-	-	extern unsigned char textureFormatTable_field14_001d9f48 asm("textureFormatTable_field14_001d9f48");	0x00000000	data.s
+textureFormatTable_field18_001d9f4c	0x1d9f4c	__DATA,__data	-	-	extern unsigned char textureFormatTable_field18_001d9f4c asm("textureFormatTable_field18_001d9f4c");	0x00000000	data.s
+textureFormatTable_field1C_001d9f50	0x1d9f50	__DATA,__data	-	-	extern unsigned char textureFormatTable_field1C_001d9f50 asm("textureFormatTable_field1C_001d9f50");	0x04218000	data.s
+textureFormatTable_field20_001d9f54	0x1d9f54	__DATA,__data	-	-	extern unsigned char textureFormatTable_field20_001d9f54 asm("textureFormatTable_field20_001d9f54");	0x003fc000	data.s
+textureFormatEntry3_001d9fa0	0x1d9fa0	__DATA,__data	-	-	extern unsigned char textureFormatEntry3_001d9fa0 asm("textureFormatEntry3_001d9fa0");	0x03000000	data.s
+textureFormatEntry6_001da00c	0x1da00c	__DATA,__data	-	-	extern unsigned char textureFormatEntry6_001da00c asm("textureFormatEntry6_001da00c");	0x06000000	data.s
+textureFormatEntry8_001da054	0x1da054	__DATA,__data	-	-	extern unsigned char textureFormatEntry8_001da054 asm("textureFormatEntry8_001da054");	0x08000000	data.s
+textureFormatEntry18_001da1bc	0x1da1bc	__DATA,__data	-	-	extern unsigned char textureFormatEntry18_001da1bc asm("textureFormatEntry18_001da1bc");	0x12000000	data.s
+textureFormatEntry30_001da36c	0x1da36c	__DATA,__data	-	-	extern unsigned char textureFormatEntry30_001da36c asm("textureFormatEntry30_001da36c");	0x1e000000	data.s
 DAT_001da630	0x1da630	__DATA,__data	-	-	extern unsigned char DAT_001da630 asm("DAT_001da630");	0x000087d5	data.s
-DAT_001dac00	0x1dac00	__DATA,__data	-	-	extern unsigned char DAT_001dac00[] asm("DAT_001dac00");	0x00142435	data.s
-DAT_001dac08	0x1dac08	__DATA,__data	-	-	extern unsigned char DAT_001dac08 asm("DAT_001dac08");	0x00000000	data.s
-DAT_001dac34	0x1dac34	__DATA,__data	-	-	extern unsigned char DAT_001dac34 asm("DAT_001dac34");	0x006e0000	data.s
-DAT_001dac38	0x1dac38	__DATA,__data	-	-	extern unsigned char DAT_001dac38 asm("DAT_001dac38");	0x00000000	data.s
-DAT_001dac3c	0x1dac3c	__DATA,__data	-	-	extern unsigned char DAT_001dac3c asm("DAT_001dac3c");	0x00000000	data.s
-DAT_001dac40	0x1dac40	__DATA,__data	-	-	extern unsigned char DAT_001dac40 asm("DAT_001dac40");	0x00000000	data.s
-DAT_001db2d4	0x1db2d4	__DATA,__data	-	-	extern unsigned char DAT_001db2d4 asm("DAT_001db2d4");	0x6a4a007c	data.s
-DAT_001db2d8	0x1db2d8	__DATA,__data	-	-	extern unsigned char DAT_001db2d8 asm("DAT_001db2d8");	0x00080000	data.s
-PTR_FUN_001db2dc	0x1db2dc	__DATA,__data	pointer	4	extern unsigned char *PTR_FUN_001db2dc[] asm("PTR_FUN_001db2dc");	pointer -> fragmentTranslateWhile	data.s
-DAT_001db2e0	0x1db2e0	__DATA,__data	-	-	extern unsigned char DAT_001db2e0 asm("DAT_001db2e0");	0x20000000	data.s
-DAT_001db2e4	0x1db2e4	__DATA,__data	-	-	extern unsigned char DAT_001db2e4 asm("DAT_001db2e4");	0x6b4a0054	data.s
-DAT_001db2e8	0x1db2e8	__DATA,__data	-	-	extern unsigned char DAT_001db2e8 asm("DAT_001db2e8");	0x00000000	data.s
-PTR_FUN_001db2ec	0x1db2ec	__DATA,__data	pointer	4	extern unsigned char *PTR_FUN_001db2ec[] asm("PTR_FUN_001db2ec");	pointer -> fragmentTranslateSimpleOp	data.s
-DAT_001db2f0	0x1db2f0	__DATA,__data	-	-	extern unsigned char DAT_001db2f0 asm("DAT_001db2f0");	0x20000000	data.s
+fpilSwizzleComponentTable_001dac00	0x1dac00	__DATA,__data	-	-	extern unsigned char fpilSwizzleComponentTable_001dac00[] asm("fpilSwizzleComponentTable_001dac00");	0x00142435	data.s
+fpilSourceInfoTable_001dac08	0x1dac08	__DATA,__data	-	-	extern unsigned char fpilSourceInfoTable_001dac08 asm("fpilSourceInfoTable_001dac08");	0x00000000	data.s
+fragmentOpcodeInfoTable_001dac34	0x1dac34	__DATA,__data	-	-	extern unsigned char fragmentOpcodeInfoTable_001dac34 asm("fragmentOpcodeInfoTable_001dac34");	0x006e0000	data.s
+fragmentOpcodeInfoTable_word1_001dac38	0x1dac38	__DATA,__data	-	-	extern unsigned char fragmentOpcodeInfoTable_word1_001dac38 asm("fragmentOpcodeInfoTable_word1_001dac38");	0x00000000	data.s
+fragmentOpcodeInfoTable_handler_001dac3c	0x1dac3c	__DATA,__data	-	-	extern unsigned char fragmentOpcodeInfoTable_handler_001dac3c asm("fragmentOpcodeInfoTable_handler_001dac3c");	0x00000000	data.s
+fragmentOpcodeInfoTable_word3_001dac40	0x1dac40	__DATA,__data	-	-	extern unsigned char fragmentOpcodeInfoTable_word3_001dac40 asm("fragmentOpcodeInfoTable_word3_001dac40");	0x00000000	data.s
+perUnitStateDefaultAt2384_001db2d4	0x1db2d4	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2384_001db2d4 asm("perUnitStateDefaultAt2384_001db2d4");	0x6a4a007c	data.s
+perUnitStateDefaultAt2388_001db2d8	0x1db2d8	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2388_001db2d8 asm("perUnitStateDefaultAt2388_001db2d8");	0x00080000	data.s
+ptrTo_fragmentTranslateWhile_001db2dc	0x1db2dc	__DATA,__data	pointer	4	extern unsigned char *ptrTo_fragmentTranslateWhile_001db2dc[] asm("ptrTo_fragmentTranslateWhile_001db2dc");	pointer -> fragmentTranslateWhile	data.s
+perUnitStateDefaultAt2398_001db2e0	0x1db2e0	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2398_001db2e0 asm("perUnitStateDefaultAt2398_001db2e0");	0x20000000	data.s
+perUnitStateDefaultAt239C_001db2e4	0x1db2e4	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt239C_001db2e4 asm("perUnitStateDefaultAt239C_001db2e4");	0x6b4a0054	data.s
+perUnitStateDefaultAt2390_001db2e8	0x1db2e8	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2390_001db2e8 asm("perUnitStateDefaultAt2390_001db2e8");	0x00000000	data.s
+ptrTo_fragmentTranslateSimpleOp_001db2ec	0x1db2ec	__DATA,__data	pointer	4	extern unsigned char *ptrTo_fragmentTranslateSimpleOp_001db2ec[] asm("ptrTo_fragmentTranslateSimpleOp_001db2ec");	pointer -> fragmentTranslateSimpleOp	data.s
+perUnitStateDefaultAt23A0_001db2f0	0x1db2f0	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt23A0_001db2f0 asm("perUnitStateDefaultAt23A0_001db2f0");	0x20000000	data.s
 DAT_001db2f4	0x1db2f4	__DATA,__data	-	-	extern unsigned char DAT_001db2f4 asm("DAT_001db2f4");	0x6c6e0000	data.s
 DAT_001db344	0x1db344	__DATA,__data	undefined4	4	extern unsigned int DAT_001db344 asm("DAT_001db344");	0x00000008	data.s
-DAT_001db348	0x1db348	__DATA,__data	-	-	extern unsigned char DAT_001db348 asm("DAT_001db348");	0x00000000	data.s
-DAT_001db368	0x1db368	__DATA,__data	-	-	extern unsigned char DAT_001db368 asm("DAT_001db368");	0x00000000	data.s
+stencilFuncBitsTable_001db348	0x1db348	__DATA,__data	-	-	extern unsigned char stencilFuncBitsTable_001db348 asm("stencilFuncBitsTable_001db348");	0x00000000	data.s
+depthFuncBitsTable_001db368	0x1db368	__DATA,__data	-	-	extern unsigned char depthFuncBitsTable_001db368 asm("depthFuncBitsTable_001db368");	0x00000000	data.s
 DAT_001db440	0x1db440	__DATA,__data	-	-	extern unsigned char DAT_001db440 asm("DAT_001db440");	0x00000000	data.s
-DAT_001db5b8	0x1db5b8	__DATA,__data	-	-	extern unsigned char DAT_001db5b8 asm("DAT_001db5b8");	0x00000000	data.s
-DAT_001db5bc	0x1db5bc	__DATA,__data	-	-	extern unsigned char DAT_001db5bc asm("DAT_001db5bc");	0x00000000	data.s
-DAT_001db5c0	0x1db5c0	__DATA,__data	-	-	extern unsigned char DAT_001db5c0 asm("DAT_001db5c0");	0x00000000	data.s
-DAT_001db5c4	0x1db5c4	__DATA,__data	-	-	extern unsigned char DAT_001db5c4 asm("DAT_001db5c4");	0x00000000	data.s
-DAT_001db928	0x1db928	__DATA,__data	undefined4	4	extern unsigned int DAT_001db928 asm("DAT_001db928");	0x00000000	data.s
-DAT_001db92c	0x1db92c	__DATA,__data	undefined4	4	extern unsigned int DAT_001db92c asm("DAT_001db92c");	0x00000000	data.s
-DAT_001db930	0x1db930	__DATA,__data	undefined4	4	extern unsigned int DAT_001db930 asm("DAT_001db930");	0x00000000	data.s
-DAT_001db934	0x1db934	__DATA,__data	undefined4	4	extern unsigned int DAT_001db934 asm("DAT_001db934");	0x00000000	data.s
-DAT_001db938	0x1db938	__DATA,__data	undefined4	4	extern unsigned int DAT_001db938 asm("DAT_001db938");	0x00000000	data.s
-DAT_001db98c	0x1db98c	__DATA,__data	-	-	extern unsigned char DAT_001db98c asm("DAT_001db98c");	0x00000000	data.s
+perUnitStateDefaultAt2374_001db5b8	0x1db5b8	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2374_001db5b8 asm("perUnitStateDefaultAt2374_001db5b8");	0x00000000	data.s
+perUnitStateDefaultAt2378_001db5bc	0x1db5bc	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2378_001db5bc asm("perUnitStateDefaultAt2378_001db5bc");	0x00000000	data.s
+perUnitStateDefaultAt237C_001db5c0	0x1db5c0	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt237C_001db5c0 asm("perUnitStateDefaultAt237C_001db5c0");	0x00000000	data.s
+perUnitStateDefaultAt2380_001db5c4	0x1db5c4	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2380_001db5c4 asm("perUnitStateDefaultAt2380_001db5c4");	0x00000000	data.s
+stateDefaultAt2360_001db928	0x1db928	__DATA,__data	undefined4	4	extern unsigned int stateDefaultAt2360_001db928 asm("stateDefaultAt2360_001db928");	0x00000000	data.s
+stateDefaultAt2364_001db92c	0x1db92c	__DATA,__data	undefined4	4	extern unsigned int stateDefaultAt2364_001db92c asm("stateDefaultAt2364_001db92c");	0x00000000	data.s
+stateDefaultAt2368_001db930	0x1db930	__DATA,__data	undefined4	4	extern unsigned int stateDefaultAt2368_001db930 asm("stateDefaultAt2368_001db930");	0x00000000	data.s
+stateDefaultAt236C_001db934	0x1db934	__DATA,__data	undefined4	4	extern unsigned int stateDefaultAt236C_001db934 asm("stateDefaultAt236C_001db934");	0x00000000	data.s
+stateDefaultAt2370_001db938	0x1db938	__DATA,__data	undefined4	4	extern unsigned int stateDefaultAt2370_001db938 asm("stateDefaultAt2370_001db938");	0x00000000	data.s
+textureUnitFormatArgTable_001db98c	0x1db98c	__DATA,__data	-	-	extern unsigned char textureUnitFormatArgTable_001db98c asm("textureUnitFormatArgTable_001db98c");	0x00000000	data.s
 DAT_001db998	0x1db998	__DATA,__data	-	-	extern unsigned char DAT_001db998 asm("DAT_001db998");	0x000087d5	data.s
 DAT_001db9a8	0x1db9a8	__DATA,__data	-	-	extern unsigned char DAT_001db9a8 asm("DAT_001db9a8");	0x00000001	data.s
-PTR_FUN_001db9b8	0x1db9b8	__DATA,__data	undefined *	4	extern unsigned char *PTR_FUN_001db9b8[] asm("PTR_FUN_001db9b8");	pointer -> extvsEmitIndex	data.s
-PTR_FUN_001dba14	0x1dba14	__DATA,__data	undefined *	4	extern int (*PTR_FUN_001dba14)() asm("PTR_FUN_001dba14");	pointer -> extvsEmitMov	data.s
+ptrTo_extvsEmitIndex_001db9b8	0x1db9b8	__DATA,__data	undefined *	4	extern unsigned char *ptrTo_extvsEmitIndex_001db9b8[] asm("ptrTo_extvsEmitIndex_001db9b8");	pointer -> extvsEmitIndex	data.s
+ptrTo_extvsEmitMov_001dba14	0x1dba14	__DATA,__data	undefined *	4	extern int (*ptrTo_extvsEmitMov_001dba14)() asm("ptrTo_extvsEmitMov_001dba14");	pointer -> extvsEmitMov	data.s
 DAT_001dba44	0x1dba44	__DATA,__data	undefined4	4	extern unsigned int DAT_001dba44 asm("DAT_001dba44");	0x000308c8	data.s
 DAT_001dba98	0x1dba98	__DATA,__data	undefined4	4	extern unsigned int DAT_001dba98 asm("DAT_001dba98");	0x00000004	data.s
 DAT_001dbab8	0x1dbab8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbab8 asm("DAT_001dbab8");	0x00000002	data.s
-DAT_001dbca8	0x1dbca8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbca8 asm("DAT_001dbca8");	0x000000ff	data.s
-DAT_001dbcac	0x1dbcac	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcac asm("DAT_001dbcac");	0x0ff3f8fe	data.s
-DAT_001dbcb0	0x1dbcb0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcb0 asm("DAT_001dbcb0");	0x00f00202	data.s
-DAT_001dbcb4	0x1dbcb4	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcb4 asm("DAT_001dbcb4");	0x00d10001	data.s
-DAT_001dbcb8	0x1dbcb8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcb8 asm("DAT_001dbcb8");	0x016da001	data.s
-DAT_001dbcbc	0x1dbcbc	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcbc asm("DAT_001dbcbc");	0x016da001	data.s
-DAT_001dbcc0	0x1dbcc0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcc0 asm("DAT_001dbcc0");	0x00f02202	data.s
-DAT_001dbcc4	0x1dbcc4	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcc4 asm("DAT_001dbcc4");	0x00d10021	data.s
-DAT_001dbcc8	0x1dbcc8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcc8 asm("DAT_001dbcc8");	0x016da021	data.s
-DAT_001dbccc	0x1dbccc	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbccc asm("DAT_001dbccc");	0x016da021	data.s
+drawSetupPackedWord_001dbca8	0x1dbca8	__DATA,__data	undefined4	4	extern unsigned int drawSetupPackedWord_001dbca8 asm("drawSetupPackedWord_001dbca8");	0x000000ff	data.s
+drawSetupPacketWord14_001dbcac	0x1dbcac	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord14_001dbcac asm("drawSetupPacketWord14_001dbcac");	0x0ff3f8fe	data.s
+drawSetupPacketWord5_001dbcb0	0x1dbcb0	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord5_001dbcb0 asm("drawSetupPacketWord5_001dbcb0");	0x00f00202	data.s
+drawSetupPacketWord6_001dbcb4	0x1dbcb4	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord6_001dbcb4 asm("drawSetupPacketWord6_001dbcb4");	0x00d10001	data.s
+drawSetupPacketWord7_001dbcb8	0x1dbcb8	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord7_001dbcb8 asm("drawSetupPacketWord7_001dbcb8");	0x016da001	data.s
+drawSetupPacketWord8_001dbcbc	0x1dbcbc	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord8_001dbcbc asm("drawSetupPacketWord8_001dbcbc");	0x016da001	data.s
+drawSetupPacketWord9_001dbcc0	0x1dbcc0	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord9_001dbcc0 asm("drawSetupPacketWord9_001dbcc0");	0x00f02202	data.s
+drawSetupPacketWord10_001dbcc4	0x1dbcc4	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord10_001dbcc4 asm("drawSetupPacketWord10_001dbcc4");	0x00d10021	data.s
+drawSetupPacketWord11_001dbcc8	0x1dbcc8	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord11_001dbcc8 asm("drawSetupPacketWord11_001dbcc8");	0x016da021	data.s
+drawSetupPacketRegWord_001dbccc	0x1dbccc	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketRegWord_001dbccc asm("drawSetupPacketRegWord_001dbccc");	0x016da021	data.s
 DAT_001dbcd0	0x1dbcd0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcd0 asm("DAT_001dbcd0");	0x00000082	data.s
-DAT_001dbcd4	0x1dbcd4	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcd4 asm("DAT_001dbcd4");	0x00000003	data.s
-DAT_001dbcd8	0x1dbcd8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcd8 asm("DAT_001dbcd8");	0x00000003	data.s
-DAT_001dbcdc	0x1dbcdc	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcdc asm("DAT_001dbcdc");	0x00000003	data.s
-DAT_001dbce0	0x1dbce0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbce0 asm("DAT_001dbce0");	0x00000003	data.s
-DAT_001dbce4	0x1dbce4	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbce4 asm("DAT_001dbce4");	0x00000001	data.s
-DAT_001dbce8	0x1dbce8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbce8 asm("DAT_001dbce8");	0x00000001	data.s
-DAT_001dbcec	0x1dbcec	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcec asm("DAT_001dbcec");	0x00000001	data.s
-DAT_001dbcf0	0x1dbcf0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcf0 asm("DAT_001dbcf0");	0x00000001	data.s
-DAT_001dbcf4	0x1dbcf4	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcf4 asm("DAT_001dbcf4");	0x00000002	data.s
-DAT_001dbcf8	0x1dbcf8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcf8 asm("DAT_001dbcf8");	0x00000002	data.s
-DAT_001dbcfc	0x1dbcfc	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcfc asm("DAT_001dbcfc");	0x00000002	data.s
-DAT_001dbd00	0x1dbd00	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd00 asm("DAT_001dbd00");	0x00000002	data.s
-DAT_001dbd04	0x1dbd04	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd04 asm("DAT_001dbd04");	0x00000001	data.s
-DAT_001dbd08	0x1dbd08	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd08 asm("DAT_001dbd08");	0x00000000	data.s
-DAT_001dbd0c	0x1dbd0c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd0c asm("DAT_001dbd0c");	0x00000000	data.s
-DAT_001dbd10	0x1dbd10	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd10 asm("DAT_001dbd10");	0x00000000	data.s
-DAT_001dbd14	0x1dbd14	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd14 asm("DAT_001dbd14");	0x00000000	data.s
-DAT_001dbd18	0x1dbd18	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd18 asm("DAT_001dbd18");	0x00000001	data.s
-DAT_001dbd1c	0x1dbd1c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd1c asm("DAT_001dbd1c");	0x00000002	data.s
-DAT_001dbd20	0x1dbd20	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd20 asm("DAT_001dbd20");	0x00000003	data.s
-DAT_001dbd24	0x1dbd24	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd24 asm("DAT_001dbd24");	0x00000001	data.s
-DAT_001dbd28	0x1dbd28	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd28 asm("DAT_001dbd28");	0x00000001	data.s
-DAT_001dbd2c	0x1dbd2c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd2c asm("DAT_001dbd2c");	0x00000001	data.s
-DAT_001dbd30	0x1dbd30	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd30 asm("DAT_001dbd30");	0x00000001	data.s
-DAT_001dbd34	0x1dbd34	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd34 asm("DAT_001dbd34");	0x00000004	data.s
-DAT_001dbd38	0x1dbd38	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd38 asm("DAT_001dbd38");	0x00000004	data.s
-DAT_001dbd3c	0x1dbd3c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd3c asm("DAT_001dbd3c");	0x00000004	data.s
-DAT_001dbd40	0x1dbd40	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd40 asm("DAT_001dbd40");	0x00000004	data.s
-DAT_001dbd44	0x1dbd44	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd44 asm("DAT_001dbd44");	0x00000000	data.s
-DAT_001dbd48	0x1dbd48	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd48 asm("DAT_001dbd48");	0x00000000	data.s
-DAT_001dbd4c	0x1dbd4c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd4c asm("DAT_001dbd4c");	0x00000000	data.s
-DAT_001dbd50	0x1dbd50	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd50 asm("DAT_001dbd50");	0x00000001	data.s
-DAT_001dbd54	0x1dbd54	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd54 asm("DAT_001dbd54");	0x00000000	data.s
-DAT_001dbd58	0x1dbd58	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd58 asm("DAT_001dbd58");	0x00000000	data.s
-DAT_001dbd5c	0x1dbd5c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd5c asm("DAT_001dbd5c");	0x00000001	data.s
-DAT_001dbd60	0x1dbd60	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd60 asm("DAT_001dbd60");	0x00000000	data.s
-DAT_001dbd64	0x1dbd64	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd64 asm("DAT_001dbd64");	0x00000000	data.s
-DAT_001dbd68	0x1dbd68	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd68 asm("DAT_001dbd68");	0x00000001	data.s
-DAT_001dbd6c	0x1dbd6c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd6c asm("DAT_001dbd6c");	0x00000000	data.s
-DAT_001dbd70	0x1dbd70	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd70 asm("DAT_001dbd70");	0x00000000	data.s
-DAT_001dbd74	0x1dbd74	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd74 asm("DAT_001dbd74");	0x00000000	data.s
-DAT_001dbd78	0x1dbd78	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd78 asm("DAT_001dbd78");	0x00000001	data.s
-DAT_001dbd7c	0x1dbd7c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd7c asm("DAT_001dbd7c");	0x00000002	data.s
-DAT_001dbd80	0x1dbd80	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd80 asm("DAT_001dbd80");	0x00000004	data.s
-DAT_001dbd84	0x1dbd84	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd84 asm("DAT_001dbd84");	0x00000001	data.s
-DAT_001dbd88	0x1dbd88	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd88 asm("DAT_001dbd88");	0x00000001	data.s
-DAT_001dbd8c	0x1dbd8c	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd8c asm("DAT_001dbd8c");	0x00000001	data.s
-DAT_001dbd90	0x1dbd90	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbd90 asm("DAT_001dbd90");	0x00000000	data.s
+swizzleWordsWWWW_001dbcd4	0x1dbcd4	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsWWWW_001dbcd4 asm("swizzleWordsWWWW_001dbcd4");	0x00000003	data.s
+swizzleWordsWWWW_001dbcd4_lane1_001dbcd8	0x1dbcd8	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsWWWW_001dbcd4_lane1_001dbcd8 asm("swizzleWordsWWWW_001dbcd4_lane1_001dbcd8");	0x00000003	data.s
+swizzleWordsWWWW_001dbcd4_lane2_001dbcdc	0x1dbcdc	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsWWWW_001dbcd4_lane2_001dbcdc asm("swizzleWordsWWWW_001dbcd4_lane2_001dbcdc");	0x00000003	data.s
+swizzleWordsWWWW_001dbcd4_lane3_001dbce0	0x1dbce0	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsWWWW_001dbcd4_lane3_001dbce0 asm("swizzleWordsWWWW_001dbcd4_lane3_001dbce0");	0x00000003	data.s
+swizzleWordsYYYY_001dbce4	0x1dbce4	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbce4 asm("swizzleWordsYYYY_001dbce4");	0x00000001	data.s
+swizzleWordsYYYY_001dbce4_lane1_001dbce8	0x1dbce8	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbce4_lane1_001dbce8 asm("swizzleWordsYYYY_001dbce4_lane1_001dbce8");	0x00000001	data.s
+swizzleWordsYYYY_001dbce4_lane2_001dbcec	0x1dbcec	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbce4_lane2_001dbcec asm("swizzleWordsYYYY_001dbce4_lane2_001dbcec");	0x00000001	data.s
+swizzleWordsYYYY_001dbce4_lane3_001dbcf0	0x1dbcf0	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbce4_lane3_001dbcf0 asm("swizzleWordsYYYY_001dbce4_lane3_001dbcf0");	0x00000001	data.s
+swizzleWordsZZZZ_001dbcf4	0x1dbcf4	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsZZZZ_001dbcf4 asm("swizzleWordsZZZZ_001dbcf4");	0x00000002	data.s
+swizzleWordsZZZZ_001dbcf4_lane1_001dbcf8	0x1dbcf8	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsZZZZ_001dbcf4_lane1_001dbcf8 asm("swizzleWordsZZZZ_001dbcf4_lane1_001dbcf8");	0x00000002	data.s
+swizzleWordsZZZZ_001dbcf4_lane2_001dbcfc	0x1dbcfc	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsZZZZ_001dbcf4_lane2_001dbcfc asm("swizzleWordsZZZZ_001dbcf4_lane2_001dbcfc");	0x00000002	data.s
+swizzleWordsZZZZ_001dbcf4_lane3_001dbd00	0x1dbd00	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsZZZZ_001dbcf4_lane3_001dbd00 asm("swizzleWordsZZZZ_001dbcf4_lane3_001dbd00");	0x00000002	data.s
+swizzleWordsYXXX_001dbd04	0x1dbd04	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYXXX_001dbd04 asm("swizzleWordsYXXX_001dbd04");	0x00000001	data.s
+swizzleWordsYXXX_001dbd04_lane1_001dbd08	0x1dbd08	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYXXX_001dbd04_lane1_001dbd08 asm("swizzleWordsYXXX_001dbd04_lane1_001dbd08");	0x00000000	data.s
+swizzleWordsYXXX_001dbd04_lane2_001dbd0c	0x1dbd0c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYXXX_001dbd04_lane2_001dbd0c asm("swizzleWordsYXXX_001dbd04_lane2_001dbd0c");	0x00000000	data.s
+swizzleWordsYXXX_001dbd04_lane3_001dbd10	0x1dbd10	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYXXX_001dbd04_lane3_001dbd10 asm("swizzleWordsYXXX_001dbd04_lane3_001dbd10");	0x00000000	data.s
+swizzleWordsXYZW_001dbd14	0x1dbd14	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZW_001dbd14 asm("swizzleWordsXYZW_001dbd14");	0x00000000	data.s
+swizzleWordsXYZW_001dbd14_lane1_001dbd18	0x1dbd18	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZW_001dbd14_lane1_001dbd18 asm("swizzleWordsXYZW_001dbd14_lane1_001dbd18");	0x00000001	data.s
+swizzleWordsXYZW_001dbd14_lane2_001dbd1c	0x1dbd1c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZW_001dbd14_lane2_001dbd1c asm("swizzleWordsXYZW_001dbd14_lane2_001dbd1c");	0x00000002	data.s
+swizzleWordsXYZW_001dbd14_lane3_001dbd20	0x1dbd20	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZW_001dbd14_lane3_001dbd20 asm("swizzleWordsXYZW_001dbd14_lane3_001dbd20");	0x00000003	data.s
+swizzleWordsYYYY_001dbd24	0x1dbd24	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbd24 asm("swizzleWordsYYYY_001dbd24");	0x00000001	data.s
+swizzleWordsYYYY_001dbd24_lane1_001dbd28	0x1dbd28	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbd24_lane1_001dbd28 asm("swizzleWordsYYYY_001dbd24_lane1_001dbd28");	0x00000001	data.s
+swizzleWordsYYYY_001dbd24_lane2_001dbd2c	0x1dbd2c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbd24_lane2_001dbd2c asm("swizzleWordsYYYY_001dbd24_lane2_001dbd2c");	0x00000001	data.s
+swizzleWordsYYYY_001dbd24_lane3_001dbd30	0x1dbd30	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYY_001dbd24_lane3_001dbd30 asm("swizzleWordsYYYY_001dbd24_lane3_001dbd30");	0x00000001	data.s
+swizzleWords4444_001dbd34	0x1dbd34	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4444_001dbd34 asm("swizzleWords4444_001dbd34");	0x00000004	data.s
+swizzleWords4444_001dbd34_lane1_001dbd38	0x1dbd38	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4444_001dbd34_lane1_001dbd38 asm("swizzleWords4444_001dbd34_lane1_001dbd38");	0x00000004	data.s
+swizzleWords4444_001dbd34_lane2_001dbd3c	0x1dbd3c	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4444_001dbd34_lane2_001dbd3c asm("swizzleWords4444_001dbd34_lane2_001dbd3c");	0x00000004	data.s
+swizzleWords4444_001dbd34_lane3_001dbd40	0x1dbd40	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4444_001dbd34_lane3_001dbd40 asm("swizzleWords4444_001dbd34_lane3_001dbd40");	0x00000004	data.s
+swizzleWordsXXXY_001dbd44	0x1dbd44	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXXY_001dbd44 asm("swizzleWordsXXXY_001dbd44");	0x00000000	data.s
+swizzleWordsXXXY_001dbd44_lane1_001dbd48	0x1dbd48	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXXY_001dbd44_lane1_001dbd48 asm("swizzleWordsXXXY_001dbd44_lane1_001dbd48");	0x00000000	data.s
+swizzleWordsXXXY_001dbd44_lane2_001dbd4c	0x1dbd4c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXXY_001dbd44_lane2_001dbd4c asm("swizzleWordsXXXY_001dbd44_lane2_001dbd4c");	0x00000000	data.s
+swizzleWordsXXXY_001dbd44_lane3_001dbd50	0x1dbd50	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXXY_001dbd44_lane3_001dbd50 asm("swizzleWordsXXXY_001dbd44_lane3_001dbd50");	0x00000001	data.s
+swizzleWordsXXYX_001dbd54	0x1dbd54	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXYX_001dbd54 asm("swizzleWordsXXYX_001dbd54");	0x00000000	data.s
+swizzleWordsXXYX_001dbd54_lane1_001dbd58	0x1dbd58	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXYX_001dbd54_lane1_001dbd58 asm("swizzleWordsXXYX_001dbd54_lane1_001dbd58");	0x00000000	data.s
+swizzleWordsXXYX_001dbd54_lane2_001dbd5c	0x1dbd5c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXYX_001dbd54_lane2_001dbd5c asm("swizzleWordsXXYX_001dbd54_lane2_001dbd5c");	0x00000001	data.s
+swizzleWordsXXYX_001dbd54_lane3_001dbd60	0x1dbd60	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXXYX_001dbd54_lane3_001dbd60 asm("swizzleWordsXXYX_001dbd54_lane3_001dbd60");	0x00000000	data.s
+swizzleWordsXYXX_001dbd64	0x1dbd64	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYXX_001dbd64 asm("swizzleWordsXYXX_001dbd64");	0x00000000	data.s
+swizzleWordsXYXX_001dbd64_lane1_001dbd68	0x1dbd68	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYXX_001dbd64_lane1_001dbd68 asm("swizzleWordsXYXX_001dbd64_lane1_001dbd68");	0x00000001	data.s
+swizzleWordsXYXX_001dbd64_lane2_001dbd6c	0x1dbd6c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYXX_001dbd64_lane2_001dbd6c asm("swizzleWordsXYXX_001dbd64_lane2_001dbd6c");	0x00000000	data.s
+swizzleWordsXYXX_001dbd64_lane3_001dbd70	0x1dbd70	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYXX_001dbd64_lane3_001dbd70 asm("swizzleWordsXYXX_001dbd64_lane3_001dbd70");	0x00000000	data.s
+swizzleWordsXYZ4_001dbd74	0x1dbd74	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZ4_001dbd74 asm("swizzleWordsXYZ4_001dbd74");	0x00000000	data.s
+swizzleWordsXYZ4_001dbd74_lane1_001dbd78	0x1dbd78	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZ4_001dbd74_lane1_001dbd78 asm("swizzleWordsXYZ4_001dbd74_lane1_001dbd78");	0x00000001	data.s
+swizzleWordsXYZ4_001dbd74_lane2_001dbd7c	0x1dbd7c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZ4_001dbd74_lane2_001dbd7c asm("swizzleWordsXYZ4_001dbd74_lane2_001dbd7c");	0x00000002	data.s
+swizzleWordsXYZ4_001dbd74_lane3_001dbd80	0x1dbd80	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsXYZ4_001dbd74_lane3_001dbd80 asm("swizzleWordsXYZ4_001dbd74_lane3_001dbd80");	0x00000004	data.s
+swizzleWordsYYYX_001dbd84	0x1dbd84	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYX_001dbd84 asm("swizzleWordsYYYX_001dbd84");	0x00000001	data.s
+swizzleWordsYYYX_001dbd84_lane1_001dbd88	0x1dbd88	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYX_001dbd84_lane1_001dbd88 asm("swizzleWordsYYYX_001dbd84_lane1_001dbd88");	0x00000001	data.s
+swizzleWordsYYYX_001dbd84_lane2_001dbd8c	0x1dbd8c	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYX_001dbd84_lane2_001dbd8c asm("swizzleWordsYYYX_001dbd84_lane2_001dbd8c");	0x00000001	data.s
+swizzleWordsYYYX_001dbd84_lane3_001dbd90	0x1dbd90	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsYYYX_001dbd84_lane3_001dbd90 asm("swizzleWordsYYYX_001dbd84_lane3_001dbd90");	0x00000000	data.s
 DAT_001dbd94	0x1dbd94	__DATA,__data	-	-	extern unsigned char DAT_001dbd94 asm("DAT_001dbd94");	0x00000001	data.s
-DAT_001dbda4	0x1dbda4	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbda4 asm("DAT_001dbda4");	0x00000004	data.s
-DAT_001dbda8	0x1dbda8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbda8 asm("DAT_001dbda8");	0x00000004	data.s
-DAT_001dbdac	0x1dbdac	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbdac asm("DAT_001dbdac");	0x00000004	data.s
-DAT_001dbdb0	0x1dbdb0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbdb0 asm("DAT_001dbdb0");	0x00000005	data.s
-DAT_001dbdb4	0x1dbdb4	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbdb4 asm("DAT_001dbdb4");	0x00000005	data.s
-DAT_001dbdb8	0x1dbdb8	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbdb8 asm("DAT_001dbdb8");	0x00000005	data.s
-DAT_001dbdbc	0x1dbdbc	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbdbc asm("DAT_001dbdbc");	0x00000005	data.s
-DAT_001dbdc0	0x1dbdc0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbdc0 asm("DAT_001dbdc0");	0x00000005	data.s
+swizzleWords4445_001dbda4	0x1dbda4	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4445_001dbda4 asm("swizzleWords4445_001dbda4");	0x00000004	data.s
+swizzleWords4445_001dbda4_lane1_001dbda8	0x1dbda8	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4445_001dbda4_lane1_001dbda8 asm("swizzleWords4445_001dbda4_lane1_001dbda8");	0x00000004	data.s
+swizzleWords4445_001dbda4_lane2_001dbdac	0x1dbdac	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4445_001dbda4_lane2_001dbdac asm("swizzleWords4445_001dbda4_lane2_001dbdac");	0x00000004	data.s
+swizzleWords4445_001dbda4_lane3_001dbdb0	0x1dbdb0	__DATA,__data	undefined4	4	extern unsigned int swizzleWords4445_001dbda4_lane3_001dbdb0 asm("swizzleWords4445_001dbda4_lane3_001dbdb0");	0x00000005	data.s
+swizzleWords5555_001dbdb4	0x1dbdb4	__DATA,__data	undefined4	4	extern unsigned int swizzleWords5555_001dbdb4 asm("swizzleWords5555_001dbdb4");	0x00000005	data.s
+swizzleWords5555_001dbdb4_lane1_001dbdb8	0x1dbdb8	__DATA,__data	undefined4	4	extern unsigned int swizzleWords5555_001dbdb4_lane1_001dbdb8 asm("swizzleWords5555_001dbdb4_lane1_001dbdb8");	0x00000005	data.s
+swizzleWords5555_001dbdb4_lane2_001dbdbc	0x1dbdbc	__DATA,__data	undefined4	4	extern unsigned int swizzleWords5555_001dbdb4_lane2_001dbdbc asm("swizzleWords5555_001dbdb4_lane2_001dbdbc");	0x00000005	data.s
+swizzleWords5555_001dbdb4_lane3_001dbdc0	0x1dbdc0	__DATA,__data	undefined4	4	extern unsigned int swizzleWords5555_001dbdb4_lane3_001dbdc0 asm("swizzleWords5555_001dbdb4_lane3_001dbdc0");	0x00000005	data.s
 PTR_DAT_001dbdd4	0x1dbdd4	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001dbdd4[] asm("PTR_DAT_001dbdd4");	pointer -> LD_1dbde4	data.s
 DAT_001dbdfc	0x1dbdfc	__DATA,__data	-	-	extern unsigned char DAT_001dbdfc asm("DAT_001dbdfc");	0x00000001	data.s
 PTR_DAT_001dbe3c	0x1dbe3c	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001dbe3c[] asm("PTR_DAT_001dbe3c");	pointer -> LD_1dbe64	data.s
 PTR_DAT_001dbe84	0x1dbe84	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001dbe84[] asm("PTR_DAT_001dbe84");	pointer -> LD_1dbe98	data.s
-DAT_001dbea4	0x1dbea4	__DATA,__data	-	-	extern unsigned char DAT_001dbea4 asm("DAT_001dbea4");	0x00000020	data.s
-DAT_001dbeac	0x1dbeac	__DATA,__data	-	-	extern unsigned char DAT_001dbeac asm("DAT_001dbeac");	0x00000100	data.s
+ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4	0x1dbea4	__DATA,__data	-	-	extern unsigned char ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4 asm("ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4");	0x00000020	data.s
+ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac	0x1dbeac	__DATA,__data	-	-	extern unsigned char ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac asm("ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac");	0x00000100	data.s
 DAT_001dbec4	0x1dbec4	__DATA,__data	-	-	extern unsigned char DAT_001dbec4 asm("DAT_001dbec4");	0x00000000	data.s
 DAT_001dbed4	0x1dbed4	__DATA,__data	-	-	extern unsigned char DAT_001dbed4 asm("DAT_001dbed4");	0x99998888	data.s
-DAT_001dbf2c	0x1dbf2c	__DATA,__data	-	-	extern unsigned char DAT_001dbf2c asm("DAT_001dbf2c");	0x00000000	data.s
-DAT_001dbf70	0x1dbf70	__DATA,__data	-	-	extern unsigned char DAT_001dbf70 asm("DAT_001dbf70");	0x00000001	data.s
+unitBiasFieldBitsTable_001dbf2c	0x1dbf2c	__DATA,__data	-	-	extern unsigned char unitBiasFieldBitsTable_001dbf2c asm("unitBiasFieldBitsTable_001dbf2c");	0x00000000	data.s
+texCombinerSlotCodeTable_001dbf70	0x1dbf70	__DATA,__data	-	-	extern unsigned char texCombinerSlotCodeTable_001dbf70 asm("texCombinerSlotCodeTable_001dbf70");	0x00000001	data.s
 PTR_s_IF_b_001dc2cc	0x1dc2cc	__DATA,__data	pointer	4	extern unsigned char *PTR_s_IF_b_001dc2cc[] asm("PTR_s_IF_b_001dc2cc");	pointer -> LD_1a6a00	data.s
 PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0	0x1dc2d0	__DATA,__data	pointer	4	extern unsigned char *PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0 asm("PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0");	pointer -> LD_1a6a0c	data.s
 PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8	0x1dc2d8	__DATA,__data	undefined *	4	extern unsigned char PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8[] asm("PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8");	pointer -> LD_1a6a38	data.s
 PTR_s__position_001dc3f4	0x1dc3f4	__DATA,__data	undefined *	4	extern unsigned char *PTR_s__position_001dc3f4[] asm("PTR_s__position_001dc3f4");	pointer -> LD_1a7d8c	data.s
 PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444	0x1dc444	__DATA,__data	pointer	4	extern unsigned char *PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444 asm("PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444");	pointer -> LD_1a8d5c	data.s
-DAT_001dc58c	0x1dc58c	__DATA,__data	undefined4	4	extern unsigned char DAT_001dc58c[] asm("DAT_001dc58c");	0x0000000f	data.s
+irClassMaskTable_001dc58c	0x1dc58c	__DATA,__data	undefined4	4	extern unsigned char irClassMaskTable_001dc58c[] asm("irClassMaskTable_001dc58c");	0x0000000f	data.s
 UNK_001dc660	0x1dc660	__DATA,__data	undefined4	4	extern unsigned int UNK_001dc660 asm("UNK_001dc660");	0x0000008a	data.s
 UNK_001dc66c	0x1dc66c	__DATA,__data	undefined4	4	extern unsigned int UNK_001dc66c asm("UNK_001dc66c");	0x00000089	data.s
 PTR_DAT_001dc75c	0x1dc75c	__DATA,__data	undefined *	4	extern unsigned char PTR_DAT_001dc75c[] asm("PTR_DAT_001dc75c");	pointer -> LD_1ae874	data.s
 PTR_DAT_001dc76c	0x1dc76c	__DATA,__data	undefined *	4	extern unsigned char *PTR_DAT_001dc76c[] asm("PTR_DAT_001dc76c");	pointer -> LD_1ad470	data.s
 PTR_DAT_001dc77c	0x1dc77c	__DATA,__data	undefined *	4	extern unsigned char *PTR_DAT_001dc77c[] asm("PTR_DAT_001dc77c");	pointer -> LD_1ad020	data.s
 PTR_DAT_001dc78c	0x1dc78c	__DATA,__data	undefined *	4	extern unsigned char *PTR_DAT_001dc78c[] asm("PTR_DAT_001dc78c");	pointer -> LD_1ad1a0	data.s
-DAT_001dca64	0x1dca64	__DATA,__data	-	-	extern unsigned char DAT_001dca64 asm("DAT_001dca64");	0x00000008	data.s
-DAT_001df1fc	0x1df1fc	__DATA,__data	-	-	extern unsigned char DAT_001df1fc asm("DAT_001df1fc");	0x00000008	data.s
+KhanPsOpcodeTraits_001dca64	0x1dca64	__DATA,__data	-	-	extern unsigned char KhanPsOpcodeTraits_001dca64 asm("KhanPsOpcodeTraits_001dca64");	0x00000008	data.s
+KhanVsOpcodeTraits_001df1fc	0x1df1fc	__DATA,__data	-	-	extern unsigned char KhanVsOpcodeTraits_001df1fc asm("KhanVsOpcodeTraits_001df1fc");	0x00000008	data.s
 s_MUL_V_001df634	0x1df634	__DATA,__data	string	6	extern char s_MUL_V_001df634[] asm("s_MUL_V_001df634");	0x4d554c5f	data.s
-DAT_001e1994	0x1e1994	__DATA,__data	-	-	extern unsigned char DAT_001e1994 asm("DAT_001e1994");	0x00000000	data.s
+vsHardwareTable_001e1994	0x1e1994	__DATA,__data	-	-	extern unsigned char vsHardwareTable_001e1994 asm("vsHardwareTable_001e1994");	0x00000000	data.s
 DAT_001e1c1c	0x1e1c1c	__DATA,__data	undefined4	4	extern unsigned int DAT_001e1c1c asm("DAT_001e1c1c");	0x00000000	data.s
 DAT_001e1c2c	0x1e1c2c	__DATA,__data	undefined4	4	extern unsigned int DAT_001e1c2c asm("DAT_001e1c2c");	0x00000005	data.s
 DAT_001e1c30	0x1e1c30	__DATA,__data	undefined4	4	extern unsigned int DAT_001e1c30 asm("DAT_001e1c30");	0x00000000	data.s
@@ -778,21 +778,21 @@ PTR_DAT_001e2630	0x1e2630	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_
 PTR_DAT_001e269c	0x1e269c	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001e269c asm("PTR_DAT_001e269c");	pointer -> LD_1ab8ac	data.s
 PTR_DAT_001e27bc	0x1e27bc	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001e27bc asm("PTR_DAT_001e27bc");	pointer -> LD_1af3c8	data.s
 DAT_001e3520	0x1e3520	__DATA,__data	-	-	extern unsigned char DAT_001e3520 asm("DAT_001e3520");	0x000000c3	data.s
-DAT_001e39a4	0x1e39a4	__DATA,__data	-	-	extern unsigned char DAT_001e39a4 asm("DAT_001e39a4");	0x00000000	data.s
+KhanPsHardwareTable_001e39a4	0x1e39a4	__DATA,__data	-	-	extern unsigned char KhanPsHardwareTable_001e39a4 asm("KhanPsHardwareTable_001e39a4");	0x00000000	data.s
 DAT_001e3a54	0x1e3a54	__DATA,__data	-	-	extern unsigned char DAT_001e3a54 asm("DAT_001e3a54");	0x00000004	data.s
-DAT_001e59b4	0x1e59b4	__DATA,__data	-	-	extern unsigned char DAT_001e59b4 asm("DAT_001e59b4");	0x00000000	data.s
-DAT_001e5a44	0x1e5a44	__DATA,__data	-	-	extern unsigned char DAT_001e5a44 asm("DAT_001e5a44");	0x00000000	data.s
-DAT_001e5ad4	0x1e5ad4	__DATA,__data	-	-	extern unsigned char DAT_001e5ad4 asm("DAT_001e5ad4");	0x00000000	data.s
-DAT_001e5b64	0x1e5b64	__DATA,__data	-	-	extern unsigned char DAT_001e5b64 asm("DAT_001e5b64");	0x00000000	data.s
-DAT_001e5bf4	0x1e5bf4	__DATA,__data	-	-	extern unsigned char DAT_001e5bf4 asm("DAT_001e5bf4");	0x00000000	data.s
-DAT_001e5c84	0x1e5c84	__DATA,__data	-	-	extern unsigned char DAT_001e5c84 asm("DAT_001e5c84");	0x00000000	data.s
-DAT_001e5d14	0x1e5d14	__DATA,__data	-	-	extern unsigned char DAT_001e5d14 asm("DAT_001e5d14");	0x00000000	data.s
-DAT_001e5da4	0x1e5da4	__DATA,__data	-	-	extern unsigned char DAT_001e5da4 asm("DAT_001e5da4");	0x00000000	data.s
-DAT_001e5e34	0x1e5e34	__DATA,__data	-	-	extern unsigned char DAT_001e5e34 asm("DAT_001e5e34");	0x00000000	data.s
-DAT_001e5ec4	0x1e5ec4	__DATA,__data	-	-	extern unsigned char DAT_001e5ec4 asm("DAT_001e5ec4");	0x00000000	data.s
-DAT_001e5f54	0x1e5f54	__DATA,__data	-	-	extern unsigned char DAT_001e5f54 asm("DAT_001e5f54");	0x00000000	data.s
-DAT_001e6014	0x1e6014	__DATA,__data	-	-	extern unsigned char DAT_001e6014 asm("DAT_001e6014");	0x00000000	data.s
-DAT_001e60a4	0x1e60a4	__DATA,__data	-	-	extern unsigned char DAT_001e60a4 asm("DAT_001e60a4");	0x00000000	data.s
+laneRangeClassTable_001e59b4	0x1e59b4	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e59b4 asm("laneRangeClassTable_001e59b4");	0x00000000	data.s
+laneRangeClassTable_001e5a44	0x1e5a44	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e5a44 asm("laneRangeClassTable_001e5a44");	0x00000000	data.s
+laneRangeClassTable_001e5ad4	0x1e5ad4	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e5ad4 asm("laneRangeClassTable_001e5ad4");	0x00000000	data.s
+laneRangeClassTable_001e5b64	0x1e5b64	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e5b64 asm("laneRangeClassTable_001e5b64");	0x00000000	data.s
+laneRangeClassTable_001e5bf4	0x1e5bf4	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e5bf4 asm("laneRangeClassTable_001e5bf4");	0x00000000	data.s
+laneCompareClassTable_001e5c84	0x1e5c84	__DATA,__data	-	-	extern unsigned char laneCompareClassTable_001e5c84 asm("laneCompareClassTable_001e5c84");	0x00000000	data.s
+laneCompareClassTable_001e5d14	0x1e5d14	__DATA,__data	-	-	extern unsigned char laneCompareClassTable_001e5d14 asm("laneCompareClassTable_001e5d14");	0x00000000	data.s
+laneCompareClassTable_001e5da4	0x1e5da4	__DATA,__data	-	-	extern unsigned char laneCompareClassTable_001e5da4 asm("laneCompareClassTable_001e5da4");	0x00000000	data.s
+laneCompareClassTable_001e5e34	0x1e5e34	__DATA,__data	-	-	extern unsigned char laneCompareClassTable_001e5e34 asm("laneCompareClassTable_001e5e34");	0x00000000	data.s
+laneCompareClassTable_001e5ec4	0x1e5ec4	__DATA,__data	-	-	extern unsigned char laneCompareClassTable_001e5ec4 asm("laneCompareClassTable_001e5ec4");	0x00000000	data.s
+fudoPsClassTable6x6_001e5f54	0x1e5f54	__DATA,__data	-	-	extern unsigned char fudoPsClassTable6x6_001e5f54 asm("fudoPsClassTable6x6_001e5f54");	0x00000000	data.s
+foldMinClassTable_001e6014	0x1e6014	__DATA,__data	-	-	extern unsigned char foldMinClassTable_001e6014 asm("foldMinClassTable_001e6014");	0x00000000	data.s
+foldMaxClassTable_001e60a4	0x1e60a4	__DATA,__data	-	-	extern unsigned char foldMaxClassTable_001e60a4 asm("foldMaxClassTable_001e60a4");	0x00000000	data.s
 DAT_001e6134	0x1e6134	__DATA,__data	undefined4	4	extern unsigned int DAT_001e6134 asm("DAT_001e6134");	0x00000001	data.s
 DAT_001e6158	0x1e6158	__DATA,__data	undefined4	4	extern unsigned char DAT_001e6158[] asm("DAT_001e6158");	0x00000004	data.s
 DAT_001e6170	0x1e6170	__DATA,__data	-	-	extern unsigned char DAT_001e6170 asm("DAT_001e6170");	0x00000000	data.s
@@ -803,179 +803,179 @@ DAT_001e61d0	0x1e61d0	__DATA,__data	undefined4	4	extern unsigned char DAT_001e61
 DAT_001e61e8	0x1e61e8	__DATA,__data	-	-	extern unsigned char DAT_001e61e8 asm("DAT_001e61e8");	0x00000000	data.s
 DAT_001e6668	0x1e6668	__DATA,__data	-	-	extern unsigned char DAT_001e6668 asm("DAT_001e6668");	0xffffffff	data.s
 DAT_001e66cc	0x1e66cc	__DATA,__data	-	-	extern unsigned char DAT_001e66cc asm("DAT_001e66cc");	0x00000000	data.s
-DAT_001e6730	0x1e6730	__DATA,__data	-	-	extern unsigned char DAT_001e6730 asm("DAT_001e6730");	0x00000000	data.s
-DAT_001e8740	0x1e8740	__DATA,__dyld	undefined4	4	extern int (*DAT_001e8740)() asm("DAT_001e8740");	0x8fe01000	unused (referenced only by dropped toolchain code)
-DAT_001e8744	0x1e8744	__DATA,__dyld	undefined4	4	extern int (*DAT_001e8744)() asm("DAT_001e8744");	0x8fe01008	unused (referenced only by dropped toolchain code)
-PTR_FUN_001e8754	0x1e8754	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_001e8754)() asm("PTR_FUN_001e8754");	pointer -> _free	data.s
-PTR_FUN_001e876c	0x1e876c	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_001e876c)() asm("PTR_FUN_001e876c");	pointer -> _memset	data.s
-PTR_001e88a4	0x1e88a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88a4 asm("PTR_001e88a4");	pointer -> ___keymgr_global	data.s
-PTR_001e88a8	0x1e88a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88a8 asm("PTR_001e88a8");	pointer -> 0x0	data.s
+FudoPsHardwareTable_001e6730	0x1e6730	__DATA,__data	-	-	extern unsigned char FudoPsHardwareTable_001e6730 asm("FudoPsHardwareTable_001e6730");	0x00000000	data.s
+dyldStubBindingHelperPtr_001e8740	0x1e8740	__DATA,__dyld	undefined4	4	extern int (*dyldStubBindingHelperPtr_001e8740)() asm("dyldStubBindingHelperPtr_001e8740");	0x8fe01000	unused (referenced only by dropped toolchain code)
+dyldFuncLookupPtr_001e8744	0x1e8744	__DATA,__dyld	undefined4	4	extern int (*dyldFuncLookupPtr_001e8744)() asm("dyldFuncLookupPtr_001e8744");	0x8fe01008	unused (referenced only by dropped toolchain code)
+lazyPtrTo_free_001e8754	0x1e8754	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_free_001e8754)() asm("lazyPtrTo_free_001e8754");	pointer -> _free	data.s
+lazyPtrTo_memset_001e876c	0x1e876c	__DATA,__la_symbol_ptr	pointer	4	extern int (*lazyPtrTo_memset_001e876c)() asm("lazyPtrTo_memset_001e876c");	pointer -> _memset	data.s
+ptrTo_keymgrGlobal_001e88a4	0x1e88a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_keymgrGlobal_001e88a4 asm("ptrTo_keymgrGlobal_001e88a4");	pointer -> ___keymgr_global	data.s
+ptrTo_0x0_001e88a8	0x1e88a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_0x0_001e88a8 asm("ptrTo_0x0_001e88a8");	pointer -> 0x0	data.s
 PTR_DAT_001e88ac	0x1e88ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e88ac asm("PTR_DAT_001e88ac");	pointer -> LD_1fc6e0	data.s
-PTR_001e88b0	0x1e88b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88b0 asm("PTR_001e88b0");	pointer -> __cpu_capabilities	data.s
-PTR_001e88b4	0x1e88b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88b4 asm("PTR_001e88b4");	pointer -> _mach_task_self_	data.s
-PTR_001e88b8	0x1e88b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88b8 asm("PTR_001e88b8");	pointer -> _kCFCopyStringDictionaryKeyCallBacks	data.s
-PTR_001e88bc	0x1e88bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88bc asm("PTR_001e88bc");	pointer -> _kCFTypeDictionaryValueCallBacks	data.s
-PTR_001e88c0	0x1e88c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88c0 asm("PTR_001e88c0");	pointer -> _kCFAllocatorDefault	data.s
-PTR_FUN_001e88c4	0x1e88c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88c4 asm("PTR_FUN_001e88c4");	pointer -> gldDisplayNotificationCallback	data.s
+ptrTo_cpuCapabilities_001e88b0	0x1e88b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_cpuCapabilities_001e88b0 asm("ptrTo_cpuCapabilities_001e88b0");	pointer -> __cpu_capabilities	data.s
+ptrTo_machTaskSelf_001e88b4	0x1e88b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_machTaskSelf_001e88b4 asm("ptrTo_machTaskSelf_001e88b4");	pointer -> _mach_task_self_	data.s
+ptrTo_kCFCopyStringDictionaryKeyCallBacks_001e88b8	0x1e88b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_kCFCopyStringDictionaryKeyCallBacks_001e88b8 asm("ptrTo_kCFCopyStringDictionaryKeyCallBacks_001e88b8");	pointer -> _kCFCopyStringDictionaryKeyCallBacks	data.s
+ptrTo_kCFTypeDictionaryValueCallBacks_001e88bc	0x1e88bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_kCFTypeDictionaryValueCallBacks_001e88bc asm("ptrTo_kCFTypeDictionaryValueCallBacks_001e88bc");	pointer -> _kCFTypeDictionaryValueCallBacks	data.s
+ptrTo_kCFAllocatorDefault_001e88c0	0x1e88c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_kCFAllocatorDefault_001e88c0 asm("ptrTo_kCFAllocatorDefault_001e88c0");	pointer -> _kCFAllocatorDefault	data.s
+ptrTo_gldDisplayNotificationCallback_001e88c4	0x1e88c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldDisplayNotificationCallback_001e88c4 asm("ptrTo_gldDisplayNotificationCallback_001e88c4");	pointer -> gldDisplayNotificationCallback	data.s
 PTR_DAT_001e88c8	0x1e88c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e88c8 asm("PTR_DAT_001e88c8");	pointer -> LD_1d9f34	data.s
 PTR_DAT_001e88cc	0x1e88cc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e88cc asm("PTR_DAT_001e88cc");	pointer -> LD_1fc798	data.s
 PTR_DAT_001e88d0	0x1e88d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e88d0 asm("PTR_DAT_001e88d0");	pointer -> LD_1da90c	data.s
-PTR_FUN_001e88d4	0x1e88d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88d4 asm("PTR_FUN_001e88d4");	pointer -> gldPrimWrapperLineStrip_23a24	data.s
-PTR_FUN_001e88d8	0x1e88d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88d8 asm("PTR_FUN_001e88d8");	pointer -> returnZero_1e270	data.s
-PTR_FUN_001e88dc	0x1e88dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88dc asm("PTR_FUN_001e88dc");	pointer -> glBitmap_impl	data.s
-PTR_FUN_001e88e0	0x1e88e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88e0 asm("PTR_FUN_001e88e0");	pointer -> gldPrimWrapperTriangleStrip_23a24	data.s
-PTR_FUN_001e88e4	0x1e88e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88e4 asm("PTR_FUN_001e88e4");	pointer -> gldPrimWrapperQuads_23a24	data.s
-PTR_FUN_001e88e8	0x1e88e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88e8 asm("PTR_FUN_001e88e8");	pointer -> gld_reserveDrawSpace	data.s
-PTR_FUN_001e88ec	0x1e88ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88ec asm("PTR_FUN_001e88ec");	pointer -> gldPrimInlineLines	data.s
-PTR_FUN_001e88f0	0x1e88f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88f0 asm("PTR_FUN_001e88f0");	pointer -> glGenerateMipmap_impl	data.s
-PTR_FUN_001e88f4	0x1e88f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88f4 asm("PTR_FUN_001e88f4");	pointer -> gldPrimInlineTriangles	data.s
-PTR_FUN_001e88f8	0x1e88f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88f8 asm("PTR_FUN_001e88f8");	pointer -> gldPrimWrapperPoints_24190	data.s
-PTR_FUN_001e88fc	0x1e88fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88fc asm("PTR_FUN_001e88fc");	pointer -> glTexSubImage_impl	data.s
-PTR_FUN_001e8900	0x1e8900	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8900 asm("PTR_FUN_001e8900");	pointer -> gld_drawPixelsDispatch	data.s
-PTR_LAB_001e8904	0x1e8904	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_LAB_001e8904 asm("PTR_LAB_001e8904");	pointer -> _raw_entry_2bbc0	data.s
-PTR_FUN_001e8908	0x1e8908	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8908 asm("PTR_FUN_001e8908");	pointer -> gldPrimInlineLineLoop	data.s
-PTR_FUN_001e890c	0x1e890c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e890c asm("PTR_FUN_001e890c");	pointer -> glCopyTexSubImage_impl	data.s
-PTR_FUN_001e8910	0x1e8910	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8910 asm("PTR_FUN_001e8910");	pointer -> gldPrimWrapperLines_23a24	data.s
-PTR_FUN_001e8914	0x1e8914	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8914 asm("PTR_FUN_001e8914");	pointer -> gldPrimWrapperPolygon_23a24	data.s
-PTR_FUN_001e8918	0x1e8918	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8918 asm("PTR_FUN_001e8918");	pointer -> gldPrimInlinePoints	data.s
-PTR_FUN_001e891c	0x1e891c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e891c asm("PTR_FUN_001e891c");	pointer -> gldPrimWrapperLineLoop_23a24	data.s
-PTR_FUN_001e8920	0x1e8920	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8920 asm("PTR_FUN_001e8920");	pointer -> gld_drawArraysDirect	data.s
-PTR_FUN_001e8924	0x1e8924	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8924 asm("PTR_FUN_001e8924");	pointer -> gldPrimInlineTriangleFan	data.s
-PTR_FUN_001e8928	0x1e8928	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8928 asm("PTR_FUN_001e8928");	pointer -> gld_drawElementsImmediate	data.s
-PTR_FUN_001e892c	0x1e892c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e892c asm("PTR_FUN_001e892c");	pointer -> gldPrimInlineQuads	data.s
-PTR_FUN_001e8930	0x1e8930	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8930 asm("PTR_FUN_001e8930");	pointer -> gldPrimInlineLineStrip	data.s
-PTR_FUN_001e8934	0x1e8934	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8934 asm("PTR_FUN_001e8934");	pointer -> glFlush_impl	data.s
-PTR_FUN_001e8938	0x1e8938	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8938 asm("PTR_FUN_001e8938");	pointer -> gld_swapBuffersImpl	data.s
-PTR_FUN_001e893c	0x1e893c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e893c asm("PTR_FUN_001e893c");	pointer -> gldPrimWrapperQuadStrip_23a24	data.s
-PTR_FUN_001e8940	0x1e8940	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8940 asm("PTR_FUN_001e8940");	pointer -> gldPrimWrapperTriangles_23a24	data.s
-PTR_FUN_001e8944	0x1e8944	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8944 asm("PTR_FUN_001e8944");	pointer -> gldPrimWrapperPoints_23a24	data.s
-PTR_FUN_001e8948	0x1e8948	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8948 asm("PTR_FUN_001e8948");	pointer -> glFlush_impl_withSurfaceUpdate	data.s
-PTR_FUN_001e894c	0x1e894c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e894c asm("PTR_FUN_001e894c");	pointer -> gldPrimWrapperTriangleFan_23a24	data.s
-PTR_FUN_001e8950	0x1e8950	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8950 asm("PTR_FUN_001e8950");	pointer -> glAccum_impl	data.s
-PTR_FUN_001e8954	0x1e8954	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8954 asm("PTR_FUN_001e8954");	pointer -> gldPrimInlinePolygon	data.s
-PTR_FUN_001e8958	0x1e8958	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8958 asm("PTR_FUN_001e8958");	pointer -> gld_clearStreamBuffers	data.s
-PTR_FUN_001e895c	0x1e895c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e895c asm("PTR_FUN_001e895c");	pointer -> gldPrimWrapperPolygon_24190	data.s
-PTR_FUN_001e8960	0x1e8960	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8960 asm("PTR_FUN_001e8960");	pointer -> gldPrimInlineTriangleStrip	data.s
-PTR_FUN_001e8964	0x1e8964	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8964 asm("PTR_FUN_001e8964");	pointer -> gld_signalFence	data.s
-PTR_FUN_001e8968	0x1e8968	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8968 asm("PTR_FUN_001e8968");	pointer -> gldPrimInlineQuadStrip	data.s
-PTR_FUN_001e896c	0x1e896c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e896c asm("PTR_FUN_001e896c");	pointer -> gld_beginQuerySlot	data.s
-PTR_FUN_001e8970	0x1e8970	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8970 asm("PTR_FUN_001e8970");	pointer -> gld_drawArraysStream	data.s
-PTR_FUN_001e8974	0x1e8974	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8974 asm("PTR_FUN_001e8974");	pointer -> gld_reserveVertexBufferSpace	data.s
-PTR__gldFinish_001e8978	0x1e8978	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__gldFinish_001e8978 asm("PTR__gldFinish_001e8978");	pointer -> _gldFinish	data.s
-PTR__gldFlush_001e897c	0x1e897c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__gldFlush_001e897c asm("PTR__gldFlush_001e897c");	pointer -> _gldFlush	data.s
-PTR_FUN_001e8980	0x1e8980	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8980 asm("PTR_FUN_001e8980");	pointer -> glFinish_impl	data.s
-PTR_FUN_001e8984	0x1e8984	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8984 asm("PTR_FUN_001e8984");	pointer -> gld_drawVertexArray	data.s
-PTR_FUN_001e8988	0x1e8988	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8988 asm("PTR_FUN_001e8988");	pointer -> glCopyPixels_impl	data.s
-PTR_FUN_001e898c	0x1e898c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e898c asm("PTR_FUN_001e898c");	pointer -> glReadPixels_entry	data.s
-PTR_FUN_001e8990	0x1e8990	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8990 asm("PTR_FUN_001e8990");	pointer -> gldPrimWrapperLines_24190	data.s
+ptrTo_gldPrimWrapperLineStrip_23a24_001e88d4	0x1e88d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperLineStrip_23a24_001e88d4 asm("ptrTo_gldPrimWrapperLineStrip_23a24_001e88d4");	pointer -> gldPrimWrapperLineStrip_23a24	data.s
+ptrTo_returnZero_1e270_001e88d8	0x1e88d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_returnZero_1e270_001e88d8 asm("ptrTo_returnZero_1e270_001e88d8");	pointer -> returnZero_1e270	data.s
+ptrTo_glBitmap_impl_001e88dc	0x1e88dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glBitmap_impl_001e88dc asm("ptrTo_glBitmap_impl_001e88dc");	pointer -> glBitmap_impl	data.s
+ptrTo_gldPrimWrapperTriangleStrip_23a24_001e88e0	0x1e88e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperTriangleStrip_23a24_001e88e0 asm("ptrTo_gldPrimWrapperTriangleStrip_23a24_001e88e0");	pointer -> gldPrimWrapperTriangleStrip_23a24	data.s
+ptrTo_gldPrimWrapperQuads_23a24_001e88e4	0x1e88e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperQuads_23a24_001e88e4 asm("ptrTo_gldPrimWrapperQuads_23a24_001e88e4");	pointer -> gldPrimWrapperQuads_23a24	data.s
+ptrTo_gld_reserveDrawSpace_001e88e8	0x1e88e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_reserveDrawSpace_001e88e8 asm("ptrTo_gld_reserveDrawSpace_001e88e8");	pointer -> gld_reserveDrawSpace	data.s
+ptrTo_gldPrimInlineLines_001e88ec	0x1e88ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineLines_001e88ec asm("ptrTo_gldPrimInlineLines_001e88ec");	pointer -> gldPrimInlineLines	data.s
+ptrTo_glGenerateMipmap_impl_001e88f0	0x1e88f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glGenerateMipmap_impl_001e88f0 asm("ptrTo_glGenerateMipmap_impl_001e88f0");	pointer -> glGenerateMipmap_impl	data.s
+ptrTo_gldPrimInlineTriangles_001e88f4	0x1e88f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineTriangles_001e88f4 asm("ptrTo_gldPrimInlineTriangles_001e88f4");	pointer -> gldPrimInlineTriangles	data.s
+ptrTo_gldPrimWrapperPoints_24190_001e88f8	0x1e88f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperPoints_24190_001e88f8 asm("ptrTo_gldPrimWrapperPoints_24190_001e88f8");	pointer -> gldPrimWrapperPoints_24190	data.s
+ptrTo_glTexSubImage_impl_001e88fc	0x1e88fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glTexSubImage_impl_001e88fc asm("ptrTo_glTexSubImage_impl_001e88fc");	pointer -> glTexSubImage_impl	data.s
+ptrTo_gld_drawPixelsDispatch_001e8900	0x1e8900	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_drawPixelsDispatch_001e8900 asm("ptrTo_gld_drawPixelsDispatch_001e8900");	pointer -> gld_drawPixelsDispatch	data.s
+ptrTo_rawEntry2bbc0_001e8904	0x1e8904	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_rawEntry2bbc0_001e8904 asm("ptrTo_rawEntry2bbc0_001e8904");	pointer -> _raw_entry_2bbc0	data.s
+ptrTo_gldPrimInlineLineLoop_001e8908	0x1e8908	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineLineLoop_001e8908 asm("ptrTo_gldPrimInlineLineLoop_001e8908");	pointer -> gldPrimInlineLineLoop	data.s
+ptrTo_glCopyTexSubImage_impl_001e890c	0x1e890c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glCopyTexSubImage_impl_001e890c asm("ptrTo_glCopyTexSubImage_impl_001e890c");	pointer -> glCopyTexSubImage_impl	data.s
+ptrTo_gldPrimWrapperLines_23a24_001e8910	0x1e8910	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperLines_23a24_001e8910 asm("ptrTo_gldPrimWrapperLines_23a24_001e8910");	pointer -> gldPrimWrapperLines_23a24	data.s
+ptrTo_gldPrimWrapperPolygon_23a24_001e8914	0x1e8914	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperPolygon_23a24_001e8914 asm("ptrTo_gldPrimWrapperPolygon_23a24_001e8914");	pointer -> gldPrimWrapperPolygon_23a24	data.s
+ptrTo_gldPrimInlinePoints_001e8918	0x1e8918	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlinePoints_001e8918 asm("ptrTo_gldPrimInlinePoints_001e8918");	pointer -> gldPrimInlinePoints	data.s
+ptrTo_gldPrimWrapperLineLoop_23a24_001e891c	0x1e891c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperLineLoop_23a24_001e891c asm("ptrTo_gldPrimWrapperLineLoop_23a24_001e891c");	pointer -> gldPrimWrapperLineLoop_23a24	data.s
+ptrTo_gld_drawArraysDirect_001e8920	0x1e8920	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_drawArraysDirect_001e8920 asm("ptrTo_gld_drawArraysDirect_001e8920");	pointer -> gld_drawArraysDirect	data.s
+ptrTo_gldPrimInlineTriangleFan_001e8924	0x1e8924	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineTriangleFan_001e8924 asm("ptrTo_gldPrimInlineTriangleFan_001e8924");	pointer -> gldPrimInlineTriangleFan	data.s
+ptrTo_gld_drawElementsImmediate_001e8928	0x1e8928	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_drawElementsImmediate_001e8928 asm("ptrTo_gld_drawElementsImmediate_001e8928");	pointer -> gld_drawElementsImmediate	data.s
+ptrTo_gldPrimInlineQuads_001e892c	0x1e892c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineQuads_001e892c asm("ptrTo_gldPrimInlineQuads_001e892c");	pointer -> gldPrimInlineQuads	data.s
+ptrTo_gldPrimInlineLineStrip_001e8930	0x1e8930	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineLineStrip_001e8930 asm("ptrTo_gldPrimInlineLineStrip_001e8930");	pointer -> gldPrimInlineLineStrip	data.s
+ptrTo_glFlush_impl_001e8934	0x1e8934	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glFlush_impl_001e8934 asm("ptrTo_glFlush_impl_001e8934");	pointer -> glFlush_impl	data.s
+ptrTo_gld_swapBuffersImpl_001e8938	0x1e8938	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_swapBuffersImpl_001e8938 asm("ptrTo_gld_swapBuffersImpl_001e8938");	pointer -> gld_swapBuffersImpl	data.s
+ptrTo_gldPrimWrapperQuadStrip_23a24_001e893c	0x1e893c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperQuadStrip_23a24_001e893c asm("ptrTo_gldPrimWrapperQuadStrip_23a24_001e893c");	pointer -> gldPrimWrapperQuadStrip_23a24	data.s
+ptrTo_gldPrimWrapperTriangles_23a24_001e8940	0x1e8940	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperTriangles_23a24_001e8940 asm("ptrTo_gldPrimWrapperTriangles_23a24_001e8940");	pointer -> gldPrimWrapperTriangles_23a24	data.s
+ptrTo_gldPrimWrapperPoints_23a24_001e8944	0x1e8944	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperPoints_23a24_001e8944 asm("ptrTo_gldPrimWrapperPoints_23a24_001e8944");	pointer -> gldPrimWrapperPoints_23a24	data.s
+ptrTo_glFlush_impl_withSurfaceUpdate_001e8948	0x1e8948	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glFlush_impl_withSurfaceUpdate_001e8948 asm("ptrTo_glFlush_impl_withSurfaceUpdate_001e8948");	pointer -> glFlush_impl_withSurfaceUpdate	data.s
+ptrTo_gldPrimWrapperTriangleFan_23a24_001e894c	0x1e894c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperTriangleFan_23a24_001e894c asm("ptrTo_gldPrimWrapperTriangleFan_23a24_001e894c");	pointer -> gldPrimWrapperTriangleFan_23a24	data.s
+ptrTo_glAccum_impl_001e8950	0x1e8950	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glAccum_impl_001e8950 asm("ptrTo_glAccum_impl_001e8950");	pointer -> glAccum_impl	data.s
+ptrTo_gldPrimInlinePolygon_001e8954	0x1e8954	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlinePolygon_001e8954 asm("ptrTo_gldPrimInlinePolygon_001e8954");	pointer -> gldPrimInlinePolygon	data.s
+ptrTo_gld_clearStreamBuffers_001e8958	0x1e8958	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_clearStreamBuffers_001e8958 asm("ptrTo_gld_clearStreamBuffers_001e8958");	pointer -> gld_clearStreamBuffers	data.s
+ptrTo_gldPrimWrapperPolygon_24190_001e895c	0x1e895c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperPolygon_24190_001e895c asm("ptrTo_gldPrimWrapperPolygon_24190_001e895c");	pointer -> gldPrimWrapperPolygon_24190	data.s
+ptrTo_gldPrimInlineTriangleStrip_001e8960	0x1e8960	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineTriangleStrip_001e8960 asm("ptrTo_gldPrimInlineTriangleStrip_001e8960");	pointer -> gldPrimInlineTriangleStrip	data.s
+ptrTo_gld_signalFence_001e8964	0x1e8964	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_signalFence_001e8964 asm("ptrTo_gld_signalFence_001e8964");	pointer -> gld_signalFence	data.s
+ptrTo_gldPrimInlineQuadStrip_001e8968	0x1e8968	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimInlineQuadStrip_001e8968 asm("ptrTo_gldPrimInlineQuadStrip_001e8968");	pointer -> gldPrimInlineQuadStrip	data.s
+ptrTo_gld_beginQuerySlot_001e896c	0x1e896c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_beginQuerySlot_001e896c asm("ptrTo_gld_beginQuerySlot_001e896c");	pointer -> gld_beginQuerySlot	data.s
+ptrTo_gld_drawArraysStream_001e8970	0x1e8970	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_drawArraysStream_001e8970 asm("ptrTo_gld_drawArraysStream_001e8970");	pointer -> gld_drawArraysStream	data.s
+ptrTo_gld_reserveVertexBufferSpace_001e8974	0x1e8974	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_reserveVertexBufferSpace_001e8974 asm("ptrTo_gld_reserveVertexBufferSpace_001e8974");	pointer -> gld_reserveVertexBufferSpace	data.s
+ptrTo_gldFinish_001e8978	0x1e8978	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldFinish_001e8978 asm("ptrTo_gldFinish_001e8978");	pointer -> _gldFinish	data.s
+ptrTo_gldFlush_001e897c	0x1e897c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldFlush_001e897c asm("ptrTo_gldFlush_001e897c");	pointer -> _gldFlush	data.s
+ptrTo_glFinish_impl_001e8980	0x1e8980	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glFinish_impl_001e8980 asm("ptrTo_glFinish_impl_001e8980");	pointer -> glFinish_impl	data.s
+ptrTo_gld_drawVertexArray_001e8984	0x1e8984	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_drawVertexArray_001e8984 asm("ptrTo_gld_drawVertexArray_001e8984");	pointer -> gld_drawVertexArray	data.s
+ptrTo_glCopyPixels_impl_001e8988	0x1e8988	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glCopyPixels_impl_001e8988 asm("ptrTo_glCopyPixels_impl_001e8988");	pointer -> glCopyPixels_impl	data.s
+ptrTo_glReadPixels_entry_001e898c	0x1e898c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_glReadPixels_entry_001e898c asm("ptrTo_glReadPixels_entry_001e898c");	pointer -> glReadPixels_entry	data.s
+ptrTo_gldPrimWrapperLines_24190_001e8990	0x1e8990	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldPrimWrapperLines_24190_001e8990 asm("ptrTo_gldPrimWrapperLines_24190_001e8990");	pointer -> gldPrimWrapperLines_24190	data.s
 PTR_DAT_001e8994	0x1e8994	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8994 asm("PTR_DAT_001e8994");	pointer -> LD_1fc7a0	data.s
 PTR_DAT_001e8998	0x1e8998	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8998 asm("PTR_DAT_001e8998");	pointer -> LD_1da65c	data.s
 PTR_DAT_001e899c	0x1e899c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e899c asm("PTR_DAT_001e899c");	pointer -> LD_1da6d0	data.s
-PTR_FUN_001e89a0	0x1e89a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a0 asm("PTR_FUN_001e89a0");	pointer -> noop_70c50	data.s
-PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> extvsUploadProgramConstants	data.s
-PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a8 asm("PTR_FUN_001e89a8");	pointer -> evsFoldConstantMoves	data.s
-PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> vpStateSetConstantVector	data.s
-PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> ctxTempListFree	data.s
-PTR_FUN_001e89b4	0x1e89b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b4 asm("PTR_FUN_001e89b4");	pointer -> extvsPrepareHardwareProgram	data.s
-PTR_FUN_001e89b8	0x1e89b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b8 asm("PTR_FUN_001e89b8");	pointer -> gldDestroyListObject	data.s
-PTR_FUN_001e89bc	0x1e89bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89bc asm("PTR_FUN_001e89bc");	pointer -> ctxTempListCreate	data.s
-PTR_FUN_001e89c0	0x1e89c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c0 asm("PTR_FUN_001e89c0");	pointer -> vpStateApplyParameters	data.s
-PTR_FUN_001e89c4	0x1e89c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c4 asm("PTR_FUN_001e89c4");	pointer -> gldAllocListNode	data.s
-PTR_FUN_001e89c8	0x1e89c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89c8 asm("PTR_FUN_001e89c8");	pointer -> extvsStateCacheCreate	data.s
-PTR_LAB_001e89cc	0x1e89cc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_LAB_001e89cc asm("PTR_LAB_001e89cc");	pointer -> _raw_entry_627e0	data.s
-PTR_FUN_001e89d0	0x1e89d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89d0 asm("PTR_FUN_001e89d0");	pointer -> vpStateCacheCreate	data.s
-PTR_LAB_001e89d4	0x1e89d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_LAB_001e89d4 asm("PTR_LAB_001e89d4");	pointer -> _raw_entry_772f0	data.s
-PTR_FUN_001e89d8	0x1e89d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89d8 asm("PTR_FUN_001e89d8");	pointer -> extvsInitLimits	data.s
-PTR_FUN_001e89dc	0x1e89dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89dc asm("PTR_FUN_001e89dc");	pointer -> noop_70c60	data.s
-PTR_FUN_001e89e0	0x1e89e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e0 asm("PTR_FUN_001e89e0");	pointer -> extvsUploadSingleConstant	data.s
-PTR_FUN_001e89e4	0x1e89e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e4 asm("PTR_FUN_001e89e4");	pointer -> evsAssignVertexInputs	data.s
-PTR_FUN_001e89e8	0x1e89e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e8 asm("PTR_FUN_001e89e8");	pointer -> extvsRewriteHardwareInstructions	data.s
-PTR_FUN_001e89ec	0x1e89ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ec asm("PTR_FUN_001e89ec");	pointer -> extvsApplyStreamDescriptors	data.s
-PTR_FUN_001e89f0	0x1e89f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f0 asm("PTR_FUN_001e89f0");	pointer -> atifsCompileCurrentShader	data.s
-PTR_FUN_001e89f4	0x1e89f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f4 asm("PTR_FUN_001e89f4");	pointer -> gldSetCurrentProgramObject	data.s
-PTR_FUN_001e89f8	0x1e89f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f8 asm("PTR_FUN_001e89f8");	pointer -> arbEmitRecord2Src_op4f	data.s
-PTR_FUN_001e89fc	0x1e89fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89fc asm("PTR_FUN_001e89fc");	pointer -> arbfpInitResourceLimits	data.s
-PTR_FUN_001e8a00	0x1e8a00	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a00 asm("PTR_FUN_001e8a00");	pointer -> arbEmitRecord1Src_op4b	data.s
-PTR_FUN_001e8a04	0x1e8a04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a04 asm("PTR_FUN_001e8a04");	pointer -> gldValidateVertexStreams	data.s
-PTR_FUN_001e8a08	0x1e8a08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a08 asm("PTR_FUN_001e8a08");	pointer -> gld_freeProgramImage	data.s
-PTR_FUN_001e8a0c	0x1e8a0c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a0c asm("PTR_FUN_001e8a0c");	pointer -> arbEmitIlMulMaxMin2Src	data.s
-PTR_FUN_001e8a10	0x1e8a10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a10 asm("PTR_FUN_001e8a10");	pointer -> arbEmitIlDp4	data.s
-PTR_FUN_001e8a14	0x1e8a14	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a14 asm("PTR_FUN_001e8a14");	pointer -> gldEmitProgramConstants	data.s
-PTR_FUN_001e8a18	0x1e8a18	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a18 asm("PTR_FUN_001e8a18");	pointer -> gldLoadUnitFlagBits	data.s
-PTR_FUN_001e8a1c	0x1e8a1c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a1c asm("PTR_FUN_001e8a1c");	pointer -> arbEmitRecord2Src_op09	data.s
-PTR_FUN_001e8a20	0x1e8a20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a20 asm("PTR_FUN_001e8a20");	pointer -> gldFlushProgramStateForDraw	data.s
-PTR_FUN_001e8a24	0x1e8a24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a24 asm("PTR_FUN_001e8a24");	pointer -> arbEmitRecord2Src_op0a	data.s
-PTR_FUN_001e8a28	0x1e8a28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a28 asm("PTR_FUN_001e8a28");	pointer -> arbEmitRecord2Src_op07	data.s
-PTR_FUN_001e8a2c	0x1e8a2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a2c asm("PTR_FUN_001e8a2c");	pointer -> gld_compileFragmentProgramImage	data.s
-PTR_FUN_001e8a30	0x1e8a30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a30 asm("PTR_FUN_001e8a30");	pointer -> arbEmitRecord3Src_op04	data.s
-PTR_FUN_001e8a34	0x1e8a34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a34 asm("PTR_FUN_001e8a34");	pointer -> arbEmitRecord1Src_op47	data.s
-PTR_FUN_001e8a38	0x1e8a38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a38 asm("PTR_FUN_001e8a38");	pointer -> ffvpInitBuilderOutputSlots	data.s
-PTR_001e8a3c	0x1e8a3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8a3c asm("PTR_001e8a3c");	pointer -> _free	data.s
-PTR_FUN_001e8a40	0x1e8a40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a40 asm("PTR_FUN_001e8a40");	pointer -> arbEmitIlMax	data.s
-PTR_FUN_001e8a44	0x1e8a44	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a44 asm("PTR_FUN_001e8a44");	pointer -> gldValidateState	data.s
-PTR_FUN_001e8a48	0x1e8a48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a48 asm("PTR_FUN_001e8a48");	pointer -> gldCurrentAttributePacketHeader	data.s
-PTR_FUN_001e8a4c	0x1e8a4c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a4c asm("PTR_FUN_001e8a4c");	pointer -> arbEmitRecord2Src_op01	data.s
-PTR_FUN_001e8a50	0x1e8a50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a50 asm("PTR_FUN_001e8a50");	pointer -> vpFillConstantBank	data.s
-PTR_FUN_001e8a54	0x1e8a54	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a54 asm("PTR_FUN_001e8a54");	pointer -> arbEmitIlRcp	data.s
-PTR_001e8a58	0x1e8a58	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8a58 asm("PTR_001e8a58");	pointer -> _realloc	data.s
-PTR_FUN_001e8a5c	0x1e8a5c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a5c asm("PTR_FUN_001e8a5c");	pointer -> arbEmitRecord3Src_op0c	data.s
-PTR_FUN_001e8a60	0x1e8a60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a60 asm("PTR_FUN_001e8a60");	pointer -> extvsBuildStreamDescriptors	data.s
-PTR_FUN_001e8a64	0x1e8a64	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a64 asm("PTR_FUN_001e8a64");	pointer -> arbEmitIlMov	data.s
-PTR_FUN_001e8a68	0x1e8a68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a68 asm("PTR_FUN_001e8a68");	pointer -> gld_compileFragmentProgram	data.s
-PTR_FUN_001e8a6c	0x1e8a6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a6c asm("PTR_FUN_001e8a6c");	pointer -> noop_879e0	data.s
-PTR_FUN_001e8a70	0x1e8a70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a70 asm("PTR_FUN_001e8a70");	pointer -> gldEmitVertexRoutingPackets	data.s
-PTR_FUN_001e8a74	0x1e8a74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a74 asm("PTR_FUN_001e8a74");	pointer -> arbEmitIlMul	data.s
-PTR_FUN_001e8a78	0x1e8a78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a78 asm("PTR_FUN_001e8a78");	pointer -> arbEmitRecord1Src_op0e	data.s
-PTR_FUN_001e8a7c	0x1e8a7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a7c asm("PTR_FUN_001e8a7c");	pointer -> arbEmitIlAddMad3Src	data.s
-PTR_FUN_001e8a80	0x1e8a80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a80 asm("PTR_FUN_001e8a80");	pointer -> arbEmitRecord2Src_op03	data.s
-PTR_FUN_001e8a84	0x1e8a84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a84 asm("PTR_FUN_001e8a84");	pointer -> interpolatorMapInit	data.s
-PTR_FUN_001e8a88	0x1e8a88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a88 asm("PTR_FUN_001e8a88");	pointer -> arbfpUnbindWorkAreaChecked	data.s
-PTR_FUN_001e8a8c	0x1e8a8c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a8c asm("PTR_FUN_001e8a8c");	pointer -> arbEmitRecord1Src_op43	data.s
-PTR_FUN_001e8a90	0x1e8a90	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a90 asm("PTR_FUN_001e8a90");	pointer -> arbEmitRecord2Src_op08	data.s
-PTR_FUN_001e8a94	0x1e8a94	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a94 asm("PTR_FUN_001e8a94");	pointer -> arbEmitIlPow	data.s
-PTR_FUN_001e8a98	0x1e8a98	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a98 asm("PTR_FUN_001e8a98");	pointer -> arbEmitIlRnd	data.s
-PTR_FUN_001e8a9c	0x1e8a9c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a9c asm("PTR_FUN_001e8a9c");	pointer -> arbEmitIlRsq	data.s
-PTR_FUN_001e8aa0	0x1e8aa0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8aa0 asm("PTR_FUN_001e8aa0");	pointer -> gld_emitProgramStateOnly	data.s
-PTR_001e8aa4	0x1e8aa4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8aa4 asm("PTR_001e8aa4");	pointer -> _memcpy	data.s
-PTR_FUN_001e8aa8	0x1e8aa8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8aa8 asm("PTR_FUN_001e8aa8");	pointer -> gld_setStreamCursor	data.s
-PTR_FUN_001e8aac	0x1e8aac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8aac asm("PTR_FUN_001e8aac");	pointer -> noop_65c80	data.s
-PTR_FUN_001e8ab0	0x1e8ab0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ab0 asm("PTR_FUN_001e8ab0");	pointer -> gld_ensureRingSpace	data.s
-PTR_FUN_001e8ab4	0x1e8ab4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ab4 asm("PTR_FUN_001e8ab4");	pointer -> arbEmitIlMin	data.s
-PTR_FUN_001e8ab8	0x1e8ab8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ab8 asm("PTR_FUN_001e8ab8");	pointer -> arbEmitIlExn	data.s
-PTR_FUN_001e8abc	0x1e8abc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8abc asm("PTR_FUN_001e8abc");	pointer -> arbfpBindFragmentProgram	data.s
-PTR_FUN_001e8ac0	0x1e8ac0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ac0 asm("PTR_FUN_001e8ac0");	pointer -> arbEmitIlAdd	data.s
-PTR_FUN_001e8ac4	0x1e8ac4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ac4 asm("PTR_FUN_001e8ac4");	pointer -> gldValidateVertexOutputRouting	data.s
-PTR_FUN_001e8ac8	0x1e8ac8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ac8 asm("PTR_FUN_001e8ac8");	pointer -> noop_4c540	data.s
-PTR_FUN_001e8acc	0x1e8acc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8acc asm("PTR_FUN_001e8acc");	pointer -> gldSetUnitScaleConstants	data.s
-PTR_FUN_001e8ad0	0x1e8ad0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ad0 asm("PTR_FUN_001e8ad0");	pointer -> ffvpUploadVariantConstants	data.s
-PTR_FUN_001e8ad4	0x1e8ad4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ad4 asm("PTR_FUN_001e8ad4");	pointer -> arbEmitRecord3Src_op44	data.s
-PTR_FUN_001e8ad8	0x1e8ad8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ad8 asm("PTR_FUN_001e8ad8");	pointer -> arbEmitIlOp4e	data.s
-PTR_FUN_001e8adc	0x1e8adc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8adc asm("PTR_FUN_001e8adc");	pointer -> arbEmitIlSetCompare5	data.s
-PTR_FUN_001e8ae0	0x1e8ae0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ae0 asm("PTR_FUN_001e8ae0");	pointer -> arbfpCompileFragmentProgram	data.s
+ptrTo_noop70c50_001e89a0	0x1e89a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_noop70c50_001e89a0 asm("ptrTo_noop70c50_001e89a0");	pointer -> noop_70c50	data.s
+ptrTo_extvsUploadProgramConstants_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsUploadProgramConstants_001e89a4 asm("ptrTo_extvsUploadProgramConstants_001e89a4");	pointer -> extvsUploadProgramConstants	data.s
+ptrTo_evsFoldConstantMoves_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_evsFoldConstantMoves_001e89a8 asm("ptrTo_evsFoldConstantMoves_001e89a8");	pointer -> evsFoldConstantMoves	data.s
+ptrTo_vpStateSetConstantVector_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vpStateSetConstantVector_001e89ac asm("ptrTo_vpStateSetConstantVector_001e89ac");	pointer -> vpStateSetConstantVector	data.s
+ptrTo_ctxTempListFree_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ctxTempListFree_001e89b0 asm("ptrTo_ctxTempListFree_001e89b0");	pointer -> ctxTempListFree	data.s
+ptrTo_extvsPrepareHardwareProgram_001e89b4	0x1e89b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsPrepareHardwareProgram_001e89b4 asm("ptrTo_extvsPrepareHardwareProgram_001e89b4");	pointer -> extvsPrepareHardwareProgram	data.s
+ptrTo_gldDestroyListObject_001e89b8	0x1e89b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldDestroyListObject_001e89b8 asm("ptrTo_gldDestroyListObject_001e89b8");	pointer -> gldDestroyListObject	data.s
+ptrTo_ctxTempListCreate_001e89bc	0x1e89bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ctxTempListCreate_001e89bc asm("ptrTo_ctxTempListCreate_001e89bc");	pointer -> ctxTempListCreate	data.s
+ptrTo_vpStateApplyParameters_001e89c0	0x1e89c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vpStateApplyParameters_001e89c0 asm("ptrTo_vpStateApplyParameters_001e89c0");	pointer -> vpStateApplyParameters	data.s
+ptrTo_gldAllocListNode_001e89c4	0x1e89c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldAllocListNode_001e89c4 asm("ptrTo_gldAllocListNode_001e89c4");	pointer -> gldAllocListNode	data.s
+ptrTo_extvsStateCacheCreate_001e89c8	0x1e89c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsStateCacheCreate_001e89c8 asm("ptrTo_extvsStateCacheCreate_001e89c8");	pointer -> extvsStateCacheCreate	data.s
+ptrTo_rawEntry627e0_001e89cc	0x1e89cc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_rawEntry627e0_001e89cc asm("ptrTo_rawEntry627e0_001e89cc");	pointer -> _raw_entry_627e0	data.s
+ptrTo_vpStateCacheCreate_001e89d0	0x1e89d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vpStateCacheCreate_001e89d0 asm("ptrTo_vpStateCacheCreate_001e89d0");	pointer -> vpStateCacheCreate	data.s
+ptrTo_rawEntry772f0_001e89d4	0x1e89d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_rawEntry772f0_001e89d4 asm("ptrTo_rawEntry772f0_001e89d4");	pointer -> _raw_entry_772f0	data.s
+ptrTo_extvsInitLimits_001e89d8	0x1e89d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsInitLimits_001e89d8 asm("ptrTo_extvsInitLimits_001e89d8");	pointer -> extvsInitLimits	data.s
+ptrTo_noop70c60_001e89dc	0x1e89dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_noop70c60_001e89dc asm("ptrTo_noop70c60_001e89dc");	pointer -> noop_70c60	data.s
+ptrTo_extvsUploadSingleConstant_001e89e0	0x1e89e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsUploadSingleConstant_001e89e0 asm("ptrTo_extvsUploadSingleConstant_001e89e0");	pointer -> extvsUploadSingleConstant	data.s
+ptrTo_evsAssignVertexInputs_001e89e4	0x1e89e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_evsAssignVertexInputs_001e89e4 asm("ptrTo_evsAssignVertexInputs_001e89e4");	pointer -> evsAssignVertexInputs	data.s
+ptrTo_extvsRewriteHardwareInstructions_001e89e8	0x1e89e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsRewriteHardwareInstructions_001e89e8 asm("ptrTo_extvsRewriteHardwareInstructions_001e89e8");	pointer -> extvsRewriteHardwareInstructions	data.s
+ptrTo_extvsApplyStreamDescriptors_001e89ec	0x1e89ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsApplyStreamDescriptors_001e89ec asm("ptrTo_extvsApplyStreamDescriptors_001e89ec");	pointer -> extvsApplyStreamDescriptors	data.s
+ptrTo_atifsCompileCurrentShader_001e89f0	0x1e89f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_atifsCompileCurrentShader_001e89f0 asm("ptrTo_atifsCompileCurrentShader_001e89f0");	pointer -> atifsCompileCurrentShader	data.s
+ptrTo_gldSetCurrentProgramObject_001e89f4	0x1e89f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldSetCurrentProgramObject_001e89f4 asm("ptrTo_gldSetCurrentProgramObject_001e89f4");	pointer -> gldSetCurrentProgramObject	data.s
+ptrTo_arbEmitRecord2Src_op4f_001e89f8	0x1e89f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op4f_001e89f8 asm("ptrTo_arbEmitRecord2Src_op4f_001e89f8");	pointer -> arbEmitRecord2Src_op4f	data.s
+ptrTo_arbfpInitResourceLimits_001e89fc	0x1e89fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpInitResourceLimits_001e89fc asm("ptrTo_arbfpInitResourceLimits_001e89fc");	pointer -> arbfpInitResourceLimits	data.s
+ptrTo_arbEmitRecord1Src_op4b_001e8a00	0x1e8a00	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord1Src_op4b_001e8a00 asm("ptrTo_arbEmitRecord1Src_op4b_001e8a00");	pointer -> arbEmitRecord1Src_op4b	data.s
+ptrTo_gldValidateVertexStreams_001e8a04	0x1e8a04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldValidateVertexStreams_001e8a04 asm("ptrTo_gldValidateVertexStreams_001e8a04");	pointer -> gldValidateVertexStreams	data.s
+ptrTo_gld_freeProgramImage_001e8a08	0x1e8a08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_freeProgramImage_001e8a08 asm("ptrTo_gld_freeProgramImage_001e8a08");	pointer -> gld_freeProgramImage	data.s
+ptrTo_arbEmitIlMulMaxMin2Src_001e8a0c	0x1e8a0c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMulMaxMin2Src_001e8a0c asm("ptrTo_arbEmitIlMulMaxMin2Src_001e8a0c");	pointer -> arbEmitIlMulMaxMin2Src	data.s
+ptrTo_arbEmitIlDp4_001e8a10	0x1e8a10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlDp4_001e8a10 asm("ptrTo_arbEmitIlDp4_001e8a10");	pointer -> arbEmitIlDp4	data.s
+ptrTo_gldEmitProgramConstants_001e8a14	0x1e8a14	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldEmitProgramConstants_001e8a14 asm("ptrTo_gldEmitProgramConstants_001e8a14");	pointer -> gldEmitProgramConstants	data.s
+ptrTo_gldLoadUnitFlagBits_001e8a18	0x1e8a18	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldLoadUnitFlagBits_001e8a18 asm("ptrTo_gldLoadUnitFlagBits_001e8a18");	pointer -> gldLoadUnitFlagBits	data.s
+ptrTo_arbEmitRecord2Src_op09_001e8a1c	0x1e8a1c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op09_001e8a1c asm("ptrTo_arbEmitRecord2Src_op09_001e8a1c");	pointer -> arbEmitRecord2Src_op09	data.s
+ptrTo_gldFlushProgramStateForDraw_001e8a20	0x1e8a20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldFlushProgramStateForDraw_001e8a20 asm("ptrTo_gldFlushProgramStateForDraw_001e8a20");	pointer -> gldFlushProgramStateForDraw	data.s
+ptrTo_arbEmitRecord2Src_op0a_001e8a24	0x1e8a24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op0a_001e8a24 asm("ptrTo_arbEmitRecord2Src_op0a_001e8a24");	pointer -> arbEmitRecord2Src_op0a	data.s
+ptrTo_arbEmitRecord2Src_op07_001e8a28	0x1e8a28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op07_001e8a28 asm("ptrTo_arbEmitRecord2Src_op07_001e8a28");	pointer -> arbEmitRecord2Src_op07	data.s
+ptrTo_gld_compileFragmentProgramImage_001e8a2c	0x1e8a2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_compileFragmentProgramImage_001e8a2c asm("ptrTo_gld_compileFragmentProgramImage_001e8a2c");	pointer -> gld_compileFragmentProgramImage	data.s
+ptrTo_arbEmitRecord3Src_op04_001e8a30	0x1e8a30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord3Src_op04_001e8a30 asm("ptrTo_arbEmitRecord3Src_op04_001e8a30");	pointer -> arbEmitRecord3Src_op04	data.s
+ptrTo_arbEmitRecord1Src_op47_001e8a34	0x1e8a34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord1Src_op47_001e8a34 asm("ptrTo_arbEmitRecord1Src_op47_001e8a34");	pointer -> arbEmitRecord1Src_op47	data.s
+ptrTo_ffvpInitBuilderOutputSlots_001e8a38	0x1e8a38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ffvpInitBuilderOutputSlots_001e8a38 asm("ptrTo_ffvpInitBuilderOutputSlots_001e8a38");	pointer -> ffvpInitBuilderOutputSlots	data.s
+ptrTo_free_001e8a3c	0x1e8a3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_free_001e8a3c asm("ptrTo_free_001e8a3c");	pointer -> _free	data.s
+ptrTo_arbEmitIlMax_001e8a40	0x1e8a40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMax_001e8a40 asm("ptrTo_arbEmitIlMax_001e8a40");	pointer -> arbEmitIlMax	data.s
+ptrTo_gldValidateState_001e8a44	0x1e8a44	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldValidateState_001e8a44 asm("ptrTo_gldValidateState_001e8a44");	pointer -> gldValidateState	data.s
+ptrTo_gldCurrentAttributePacketHeader_001e8a48	0x1e8a48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldCurrentAttributePacketHeader_001e8a48 asm("ptrTo_gldCurrentAttributePacketHeader_001e8a48");	pointer -> gldCurrentAttributePacketHeader	data.s
+ptrTo_arbEmitRecord2Src_op01_001e8a4c	0x1e8a4c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op01_001e8a4c asm("ptrTo_arbEmitRecord2Src_op01_001e8a4c");	pointer -> arbEmitRecord2Src_op01	data.s
+ptrTo_vpFillConstantBank_001e8a50	0x1e8a50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vpFillConstantBank_001e8a50 asm("ptrTo_vpFillConstantBank_001e8a50");	pointer -> vpFillConstantBank	data.s
+ptrTo_arbEmitIlRcp_001e8a54	0x1e8a54	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlRcp_001e8a54 asm("ptrTo_arbEmitIlRcp_001e8a54");	pointer -> arbEmitIlRcp	data.s
+ptrTo_realloc_001e8a58	0x1e8a58	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_realloc_001e8a58 asm("ptrTo_realloc_001e8a58");	pointer -> _realloc	data.s
+ptrTo_arbEmitRecord3Src_op0c_001e8a5c	0x1e8a5c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord3Src_op0c_001e8a5c asm("ptrTo_arbEmitRecord3Src_op0c_001e8a5c");	pointer -> arbEmitRecord3Src_op0c	data.s
+ptrTo_extvsBuildStreamDescriptors_001e8a60	0x1e8a60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsBuildStreamDescriptors_001e8a60 asm("ptrTo_extvsBuildStreamDescriptors_001e8a60");	pointer -> extvsBuildStreamDescriptors	data.s
+ptrTo_arbEmitIlMov_001e8a64	0x1e8a64	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMov_001e8a64 asm("ptrTo_arbEmitIlMov_001e8a64");	pointer -> arbEmitIlMov	data.s
+ptrTo_gld_compileFragmentProgram_001e8a68	0x1e8a68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_compileFragmentProgram_001e8a68 asm("ptrTo_gld_compileFragmentProgram_001e8a68");	pointer -> gld_compileFragmentProgram	data.s
+ptrTo_noop879e0_001e8a6c	0x1e8a6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_noop879e0_001e8a6c asm("ptrTo_noop879e0_001e8a6c");	pointer -> noop_879e0	data.s
+ptrTo_gldEmitVertexRoutingPackets_001e8a70	0x1e8a70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldEmitVertexRoutingPackets_001e8a70 asm("ptrTo_gldEmitVertexRoutingPackets_001e8a70");	pointer -> gldEmitVertexRoutingPackets	data.s
+ptrTo_arbEmitIlMul_001e8a74	0x1e8a74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMul_001e8a74 asm("ptrTo_arbEmitIlMul_001e8a74");	pointer -> arbEmitIlMul	data.s
+ptrTo_arbEmitRecord1Src_op0e_001e8a78	0x1e8a78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord1Src_op0e_001e8a78 asm("ptrTo_arbEmitRecord1Src_op0e_001e8a78");	pointer -> arbEmitRecord1Src_op0e	data.s
+ptrTo_arbEmitIlAddMad3Src_001e8a7c	0x1e8a7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlAddMad3Src_001e8a7c asm("ptrTo_arbEmitIlAddMad3Src_001e8a7c");	pointer -> arbEmitIlAddMad3Src	data.s
+ptrTo_arbEmitRecord2Src_op03_001e8a80	0x1e8a80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op03_001e8a80 asm("ptrTo_arbEmitRecord2Src_op03_001e8a80");	pointer -> arbEmitRecord2Src_op03	data.s
+ptrTo_interpolatorMapInit_001e8a84	0x1e8a84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_interpolatorMapInit_001e8a84 asm("ptrTo_interpolatorMapInit_001e8a84");	pointer -> interpolatorMapInit	data.s
+ptrTo_arbfpUnbindWorkAreaChecked_001e8a88	0x1e8a88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpUnbindWorkAreaChecked_001e8a88 asm("ptrTo_arbfpUnbindWorkAreaChecked_001e8a88");	pointer -> arbfpUnbindWorkAreaChecked	data.s
+ptrTo_arbEmitRecord1Src_op43_001e8a8c	0x1e8a8c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord1Src_op43_001e8a8c asm("ptrTo_arbEmitRecord1Src_op43_001e8a8c");	pointer -> arbEmitRecord1Src_op43	data.s
+ptrTo_arbEmitRecord2Src_op08_001e8a90	0x1e8a90	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op08_001e8a90 asm("ptrTo_arbEmitRecord2Src_op08_001e8a90");	pointer -> arbEmitRecord2Src_op08	data.s
+ptrTo_arbEmitIlPow_001e8a94	0x1e8a94	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlPow_001e8a94 asm("ptrTo_arbEmitIlPow_001e8a94");	pointer -> arbEmitIlPow	data.s
+ptrTo_arbEmitIlRnd_001e8a98	0x1e8a98	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlRnd_001e8a98 asm("ptrTo_arbEmitIlRnd_001e8a98");	pointer -> arbEmitIlRnd	data.s
+ptrTo_arbEmitIlRsq_001e8a9c	0x1e8a9c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlRsq_001e8a9c asm("ptrTo_arbEmitIlRsq_001e8a9c");	pointer -> arbEmitIlRsq	data.s
+ptrTo_gld_emitProgramStateOnly_001e8aa0	0x1e8aa0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_emitProgramStateOnly_001e8aa0 asm("ptrTo_gld_emitProgramStateOnly_001e8aa0");	pointer -> gld_emitProgramStateOnly	data.s
+ptrTo_memcpy_001e8aa4	0x1e8aa4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_memcpy_001e8aa4 asm("ptrTo_memcpy_001e8aa4");	pointer -> _memcpy	data.s
+ptrTo_gld_setStreamCursor_001e8aa8	0x1e8aa8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_setStreamCursor_001e8aa8 asm("ptrTo_gld_setStreamCursor_001e8aa8");	pointer -> gld_setStreamCursor	data.s
+ptrTo_noop65c80_001e8aac	0x1e8aac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_noop65c80_001e8aac asm("ptrTo_noop65c80_001e8aac");	pointer -> noop_65c80	data.s
+ptrTo_gld_ensureRingSpace_001e8ab0	0x1e8ab0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_ensureRingSpace_001e8ab0 asm("ptrTo_gld_ensureRingSpace_001e8ab0");	pointer -> gld_ensureRingSpace	data.s
+ptrTo_arbEmitIlMin_001e8ab4	0x1e8ab4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMin_001e8ab4 asm("ptrTo_arbEmitIlMin_001e8ab4");	pointer -> arbEmitIlMin	data.s
+ptrTo_arbEmitIlExn_001e8ab8	0x1e8ab8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlExn_001e8ab8 asm("ptrTo_arbEmitIlExn_001e8ab8");	pointer -> arbEmitIlExn	data.s
+ptrTo_arbfpBindFragmentProgram_001e8abc	0x1e8abc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpBindFragmentProgram_001e8abc asm("ptrTo_arbfpBindFragmentProgram_001e8abc");	pointer -> arbfpBindFragmentProgram	data.s
+ptrTo_arbEmitIlAdd_001e8ac0	0x1e8ac0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlAdd_001e8ac0 asm("ptrTo_arbEmitIlAdd_001e8ac0");	pointer -> arbEmitIlAdd	data.s
+ptrTo_gldValidateVertexOutputRouting_001e8ac4	0x1e8ac4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldValidateVertexOutputRouting_001e8ac4 asm("ptrTo_gldValidateVertexOutputRouting_001e8ac4");	pointer -> gldValidateVertexOutputRouting	data.s
+ptrTo_noop4c540_001e8ac8	0x1e8ac8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_noop4c540_001e8ac8 asm("ptrTo_noop4c540_001e8ac8");	pointer -> noop_4c540	data.s
+ptrTo_gldSetUnitScaleConstants_001e8acc	0x1e8acc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldSetUnitScaleConstants_001e8acc asm("ptrTo_gldSetUnitScaleConstants_001e8acc");	pointer -> gldSetUnitScaleConstants	data.s
+ptrTo_ffvpUploadVariantConstants_001e8ad0	0x1e8ad0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ffvpUploadVariantConstants_001e8ad0 asm("ptrTo_ffvpUploadVariantConstants_001e8ad0");	pointer -> ffvpUploadVariantConstants	data.s
+ptrTo_arbEmitRecord3Src_op44_001e8ad4	0x1e8ad4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord3Src_op44_001e8ad4 asm("ptrTo_arbEmitRecord3Src_op44_001e8ad4");	pointer -> arbEmitRecord3Src_op44	data.s
+ptrTo_arbEmitIlOp4e_001e8ad8	0x1e8ad8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlOp4e_001e8ad8 asm("ptrTo_arbEmitIlOp4e_001e8ad8");	pointer -> arbEmitIlOp4e	data.s
+ptrTo_arbEmitIlSetCompare5_001e8adc	0x1e8adc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlSetCompare5_001e8adc asm("ptrTo_arbEmitIlSetCompare5_001e8adc");	pointer -> arbEmitIlSetCompare5	data.s
+ptrTo_arbfpCompileFragmentProgram_001e8ae0	0x1e8ae0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpCompileFragmentProgram_001e8ae0 asm("ptrTo_arbfpCompileFragmentProgram_001e8ae0");	pointer -> arbfpCompileFragmentProgram	data.s
 PTR_DAT_001e8ae4	0x1e8ae4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8ae4 asm("PTR_DAT_001e8ae4");	pointer -> orph_4c544+12	data.s
-PTR_FUN_001e8ae8	0x1e8ae8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8ae8 asm("PTR_FUN_001e8ae8");	pointer -> arbfpWorkAreaSizeA	data.s
-PTR_FUN_001e8aec	0x1e8aec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8aec asm("PTR_FUN_001e8aec");	pointer -> arbEmitRecord3Src_op0b	data.s
-PTR_FUN_001e8af0	0x1e8af0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8af0 asm("PTR_FUN_001e8af0");	pointer -> arbEmitIlMad	data.s
-PTR_FUN_001e8af4	0x1e8af4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8af4 asm("PTR_FUN_001e8af4");	pointer -> extvsBuildStreamBlock	data.s
-PTR_FUN_001e8af8	0x1e8af8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8af8 asm("PTR_FUN_001e8af8");	pointer -> arbEmitRecord1Src_op02	data.s
-PTR_FUN_001e8afc	0x1e8afc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8afc asm("PTR_FUN_001e8afc");	pointer -> arbfpUnbindWorkArea	data.s
-PTR_FUN_001e8b00	0x1e8b00	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b00 asm("PTR_FUN_001e8b00");	pointer -> gld_emitProgramConstantsOnly	data.s
-PTR_FUN_001e8b04	0x1e8b04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b04 asm("PTR_FUN_001e8b04");	pointer -> arbEmitIlExp	data.s
-PTR_FUN_001e8b08	0x1e8b08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b08 asm("PTR_FUN_001e8b08");	pointer -> arbEmitIlHeader	data.s
-PTR_FUN_001e8b0c	0x1e8b0c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b0c asm("PTR_FUN_001e8b0c");	pointer -> ffvpValidateProgram	data.s
-PTR_FUN_001e8b10	0x1e8b10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b10 asm("PTR_FUN_001e8b10");	pointer -> arbEmitIlSetCompare2	data.s
-PTR_001e8b14	0x1e8b14	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8b14 asm("PTR_001e8b14");	pointer -> _calloc	data.s
-PTR_FUN_001e8b18	0x1e8b18	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b18 asm("PTR_FUN_001e8b18");	pointer -> ffvpComputeOutputMasks	data.s
-PTR_FUN_001e8b1c	0x1e8b1c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b1c asm("PTR_FUN_001e8b1c");	pointer -> arbEmitIlMovMadMov	data.s
-PTR_FUN_001e8b20	0x1e8b20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b20 asm("PTR_FUN_001e8b20");	pointer -> gldAllocAndUploadConstants	data.s
-PTR_FUN_001e8b24	0x1e8b24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b24 asm("PTR_FUN_001e8b24");	pointer -> arbEmitRecord2Src_op45	data.s
-PTR_FUN_001e8b28	0x1e8b28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b28 asm("PTR_FUN_001e8b28");	pointer -> gld_emitProgramStateAndConstants	data.s
-PTR_FUN_001e8b2c	0x1e8b2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b2c asm("PTR_FUN_001e8b2c");	pointer -> arbEmitRecord1Src_op49	data.s
-PTR_FUN_001e8b30	0x1e8b30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b30 asm("PTR_FUN_001e8b30");	pointer -> arbEmitRecord2Src_op02	data.s
-PTR_FUN_001e8b34	0x1e8b34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b34 asm("PTR_FUN_001e8b34");	pointer -> arbEmitIlEnd	data.s
-PTR_FUN_001e8b38	0x1e8b38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b38 asm("PTR_FUN_001e8b38");	pointer -> gld_bindProgramStateAndEmit	data.s
-PTR_FUN_001e8b3c	0x1e8b3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b3c asm("PTR_FUN_001e8b3c");	pointer -> extvsValidateProgramState	data.s
-PTR_FUN_001e8b40	0x1e8b40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b40 asm("PTR_FUN_001e8b40");	pointer -> vpStateSelectForDraw	data.s
+ptrTo_arbfpWorkAreaSizeA_001e8ae8	0x1e8ae8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpWorkAreaSizeA_001e8ae8 asm("ptrTo_arbfpWorkAreaSizeA_001e8ae8");	pointer -> arbfpWorkAreaSizeA	data.s
+ptrTo_arbEmitRecord3Src_op0b_001e8aec	0x1e8aec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord3Src_op0b_001e8aec asm("ptrTo_arbEmitRecord3Src_op0b_001e8aec");	pointer -> arbEmitRecord3Src_op0b	data.s
+ptrTo_arbEmitIlMad_001e8af0	0x1e8af0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMad_001e8af0 asm("ptrTo_arbEmitIlMad_001e8af0");	pointer -> arbEmitIlMad	data.s
+ptrTo_extvsBuildStreamBlock_001e8af4	0x1e8af4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsBuildStreamBlock_001e8af4 asm("ptrTo_extvsBuildStreamBlock_001e8af4");	pointer -> extvsBuildStreamBlock	data.s
+ptrTo_arbEmitRecord1Src_op02_001e8af8	0x1e8af8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord1Src_op02_001e8af8 asm("ptrTo_arbEmitRecord1Src_op02_001e8af8");	pointer -> arbEmitRecord1Src_op02	data.s
+ptrTo_arbfpUnbindWorkArea_001e8afc	0x1e8afc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpUnbindWorkArea_001e8afc asm("ptrTo_arbfpUnbindWorkArea_001e8afc");	pointer -> arbfpUnbindWorkArea	data.s
+ptrTo_gld_emitProgramConstantsOnly_001e8b00	0x1e8b00	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_emitProgramConstantsOnly_001e8b00 asm("ptrTo_gld_emitProgramConstantsOnly_001e8b00");	pointer -> gld_emitProgramConstantsOnly	data.s
+ptrTo_arbEmitIlExp_001e8b04	0x1e8b04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlExp_001e8b04 asm("ptrTo_arbEmitIlExp_001e8b04");	pointer -> arbEmitIlExp	data.s
+ptrTo_arbEmitIlHeader_001e8b08	0x1e8b08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlHeader_001e8b08 asm("ptrTo_arbEmitIlHeader_001e8b08");	pointer -> arbEmitIlHeader	data.s
+ptrTo_ffvpValidateProgram_001e8b0c	0x1e8b0c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ffvpValidateProgram_001e8b0c asm("ptrTo_ffvpValidateProgram_001e8b0c");	pointer -> ffvpValidateProgram	data.s
+ptrTo_arbEmitIlSetCompare2_001e8b10	0x1e8b10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlSetCompare2_001e8b10 asm("ptrTo_arbEmitIlSetCompare2_001e8b10");	pointer -> arbEmitIlSetCompare2	data.s
+ptrTo_calloc_001e8b14	0x1e8b14	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_calloc_001e8b14 asm("ptrTo_calloc_001e8b14");	pointer -> _calloc	data.s
+ptrTo_ffvpComputeOutputMasks_001e8b18	0x1e8b18	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ffvpComputeOutputMasks_001e8b18 asm("ptrTo_ffvpComputeOutputMasks_001e8b18");	pointer -> ffvpComputeOutputMasks	data.s
+ptrTo_arbEmitIlMovMadMov_001e8b1c	0x1e8b1c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMovMadMov_001e8b1c asm("ptrTo_arbEmitIlMovMadMov_001e8b1c");	pointer -> arbEmitIlMovMadMov	data.s
+ptrTo_gldAllocAndUploadConstants_001e8b20	0x1e8b20	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gldAllocAndUploadConstants_001e8b20 asm("ptrTo_gldAllocAndUploadConstants_001e8b20");	pointer -> gldAllocAndUploadConstants	data.s
+ptrTo_arbEmitRecord2Src_op45_001e8b24	0x1e8b24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op45_001e8b24 asm("ptrTo_arbEmitRecord2Src_op45_001e8b24");	pointer -> arbEmitRecord2Src_op45	data.s
+ptrTo_gld_emitProgramStateAndConstants_001e8b28	0x1e8b28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_emitProgramStateAndConstants_001e8b28 asm("ptrTo_gld_emitProgramStateAndConstants_001e8b28");	pointer -> gld_emitProgramStateAndConstants	data.s
+ptrTo_arbEmitRecord1Src_op49_001e8b2c	0x1e8b2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord1Src_op49_001e8b2c asm("ptrTo_arbEmitRecord1Src_op49_001e8b2c");	pointer -> arbEmitRecord1Src_op49	data.s
+ptrTo_arbEmitRecord2Src_op02_001e8b30	0x1e8b30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord2Src_op02_001e8b30 asm("ptrTo_arbEmitRecord2Src_op02_001e8b30");	pointer -> arbEmitRecord2Src_op02	data.s
+ptrTo_arbEmitIlEnd_001e8b34	0x1e8b34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlEnd_001e8b34 asm("ptrTo_arbEmitIlEnd_001e8b34");	pointer -> arbEmitIlEnd	data.s
+ptrTo_gld_bindProgramStateAndEmit_001e8b38	0x1e8b38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_gld_bindProgramStateAndEmit_001e8b38 asm("ptrTo_gld_bindProgramStateAndEmit_001e8b38");	pointer -> gld_bindProgramStateAndEmit	data.s
+ptrTo_extvsValidateProgramState_001e8b3c	0x1e8b3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_extvsValidateProgramState_001e8b3c asm("ptrTo_extvsValidateProgramState_001e8b3c");	pointer -> extvsValidateProgramState	data.s
+ptrTo_vpStateSelectForDraw_001e8b40	0x1e8b40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vpStateSelectForDraw_001e8b40 asm("ptrTo_vpStateSelectForDraw_001e8b40");	pointer -> vpStateSelectForDraw	data.s
 PTR_DAT_001e8b48	0x1e8b48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b48 asm("PTR_DAT_001e8b48");	pointer -> LD_1f1008	data.s
 PTR_DAT_001e8b4c	0x1e8b4c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b4c asm("PTR_DAT_001e8b4c");	pointer -> LD_1e9fc0	data.s
 PTR_DAT_001e8b50	0x1e8b50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b50 asm("PTR_DAT_001e8b50");	pointer -> LD_1f0f60	data.s
@@ -1053,7 +1053,7 @@ PTR_DAT_001e8c6c	0x1e8c6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_DAT_001e8c70	0x1e8c70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c70 asm("PTR_DAT_001e8c70");	pointer -> LD_1dc800	data.s
 PTR_DAT_001e8c74	0x1e8c74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c74 asm("PTR_DAT_001e8c74");	pointer -> LD_1ead60	data.s
 PTR_DAT_001e8c78	0x1e8c78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c78 asm("PTR_DAT_001e8c78");	pointer -> LD_1ab838	data.s
-PTR_FUN_001e8c7c	0x1e8c7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8c7c asm("PTR_FUN_001e8c7c");	pointer -> IRUnary__new_107df4	data.s
+ptrTo_IRUnary__new_107df4_001e8c7c	0x1e8c7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRUnary__new_107df4_001e8c7c asm("ptrTo_IRUnary__new_107df4_001e8c7c");	pointer -> IRUnary__new_107df4	data.s
 PTR_DAT_001e8c80	0x1e8c80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c80 asm("PTR_DAT_001e8c80");	pointer -> LD_1eb5e0	data.s
 PTR_DAT_001e8c84	0x1e8c84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c84 asm("PTR_DAT_001e8c84");	pointer -> LD_1af390	data.s
 PTR_DAT_001e8c88	0x1e8c88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c88 asm("PTR_DAT_001e8c88");	pointer -> LD_1f2890	data.s
@@ -1314,20 +1314,20 @@ PTR_DAT_001e9080	0x1e9080	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_DAT_001e9084	0x1e9084	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9084 asm("PTR_DAT_001e9084");	pointer -> LD_1f5898	data.s
 PTR_DAT_001e9088	0x1e9088	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9088 asm("PTR_DAT_001e9088");	pointer -> LD_1f5b38	data.s
 PTR_DAT_001e908c	0x1e908c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e908c asm("PTR_DAT_001e908c");	pointer -> LD_1f4bb0	data.s
-PTR_FUN_001e9090	0x1e9090	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e9090 asm("PTR_FUN_001e9090");	pointer -> ExprRecordTable__eqByExpr	data.s
-PTR_FUN_001e9094	0x1e9094	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e9094 asm("PTR_FUN_001e9094");	pointer -> returnZero_172dfc	data.s
-PTR_FUN_001e9098	0x1e9098	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e9098 asm("PTR_FUN_001e9098");	pointer -> ExprRecordTable__hashByValueNumber	data.s
-PTR_FUN_001e909c	0x1e909c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e909c asm("PTR_FUN_001e909c");	pointer -> SwizzleTable__eqKeys	data.s
-PTR_FUN_001e90a0	0x1e90a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90a0 asm("PTR_FUN_001e90a0");	pointer -> KeyLaneTable__eqKeys	data.s
-PTR_FUN_001e90a4	0x1e90a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90a4 asm("PTR_FUN_001e90a4");	pointer -> SwizzleTable__hashKey	data.s
-PTR_FUN_001e90a8	0x1e90a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90a8 asm("PTR_FUN_001e90a8");	pointer -> PtrSet__hashPtr	data.s
-PTR_FUN_001e90ac	0x1e90ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90ac asm("PTR_FUN_001e90ac");	pointer -> PtrSet__eqNonNullPtr	data.s
-PTR_FUN_001e90b0	0x1e90b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90b0 asm("PTR_FUN_001e90b0");	pointer -> ScopedExprTable__eqKeys	data.s
-PTR_FUN_001e90b4	0x1e90b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90b4 asm("PTR_FUN_001e90b4");	pointer -> KeyLaneTable__hashByOpcode	data.s
-PTR_FUN_001e90b8	0x1e90b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90b8 asm("PTR_FUN_001e90b8");	pointer -> ExprRecordTable__eqByValueNumber	data.s
-PTR_FUN_001e90bc	0x1e90bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90bc asm("PTR_FUN_001e90bc");	pointer -> ExprRecordTable__hashByExpr	data.s
-PTR_FUN_001e90c0	0x1e90c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90c0 asm("PTR_FUN_001e90c0");	pointer -> LaneMatchTable__eqKeys	data.s
-PTR_FUN_001e90c4	0x1e90c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e90c4 asm("PTR_FUN_001e90c4");	pointer -> ScopedExprTable__hashKey	data.s
+ptrTo_ExprRecordTable__eqByExpr_001e9090	0x1e9090	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ExprRecordTable__eqByExpr_001e9090 asm("ptrTo_ExprRecordTable__eqByExpr_001e9090");	pointer -> ExprRecordTable__eqByExpr	data.s
+ptrTo_returnZero_172dfc_001e9094	0x1e9094	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_returnZero_172dfc_001e9094 asm("ptrTo_returnZero_172dfc_001e9094");	pointer -> returnZero_172dfc	data.s
+ptrTo_ExprRecordTable__hashByValueNumber_001e9098	0x1e9098	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ExprRecordTable__hashByValueNumber_001e9098 asm("ptrTo_ExprRecordTable__hashByValueNumber_001e9098");	pointer -> ExprRecordTable__hashByValueNumber	data.s
+ptrTo_SwizzleTable__eqKeys_001e909c	0x1e909c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_SwizzleTable__eqKeys_001e909c asm("ptrTo_SwizzleTable__eqKeys_001e909c");	pointer -> SwizzleTable__eqKeys	data.s
+ptrTo_KeyLaneTable__eqKeys_001e90a0	0x1e90a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KeyLaneTable__eqKeys_001e90a0 asm("ptrTo_KeyLaneTable__eqKeys_001e90a0");	pointer -> KeyLaneTable__eqKeys	data.s
+ptrTo_SwizzleTable__hashKey_001e90a4	0x1e90a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_SwizzleTable__hashKey_001e90a4 asm("ptrTo_SwizzleTable__hashKey_001e90a4");	pointer -> SwizzleTable__hashKey	data.s
+ptrTo_PtrSet__hashPtr_001e90a8	0x1e90a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_PtrSet__hashPtr_001e90a8 asm("ptrTo_PtrSet__hashPtr_001e90a8");	pointer -> PtrSet__hashPtr	data.s
+ptrTo_PtrSet__eqNonNullPtr_001e90ac	0x1e90ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_PtrSet__eqNonNullPtr_001e90ac asm("ptrTo_PtrSet__eqNonNullPtr_001e90ac");	pointer -> PtrSet__eqNonNullPtr	data.s
+ptrTo_ScopedExprTable__eqKeys_001e90b0	0x1e90b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ScopedExprTable__eqKeys_001e90b0 asm("ptrTo_ScopedExprTable__eqKeys_001e90b0");	pointer -> ScopedExprTable__eqKeys	data.s
+ptrTo_KeyLaneTable__hashByOpcode_001e90b4	0x1e90b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KeyLaneTable__hashByOpcode_001e90b4 asm("ptrTo_KeyLaneTable__hashByOpcode_001e90b4");	pointer -> KeyLaneTable__hashByOpcode	data.s
+ptrTo_ExprRecordTable__eqByValueNumber_001e90b8	0x1e90b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ExprRecordTable__eqByValueNumber_001e90b8 asm("ptrTo_ExprRecordTable__eqByValueNumber_001e90b8");	pointer -> ExprRecordTable__eqByValueNumber	data.s
+ptrTo_ExprRecordTable__hashByExpr_001e90bc	0x1e90bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ExprRecordTable__hashByExpr_001e90bc asm("ptrTo_ExprRecordTable__hashByExpr_001e90bc");	pointer -> ExprRecordTable__hashByExpr	data.s
+ptrTo_LaneMatchTable__eqKeys_001e90c0	0x1e90c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_LaneMatchTable__eqKeys_001e90c0 asm("ptrTo_LaneMatchTable__eqKeys_001e90c0");	pointer -> LaneMatchTable__eqKeys	data.s
+ptrTo_ScopedExprTable__hashKey_001e90c4	0x1e90c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ScopedExprTable__hashKey_001e90c4 asm("ptrTo_ScopedExprTable__hashKey_001e90c4");	pointer -> ScopedExprTable__hashKey	data.s
 PTR_DAT_001e90c8	0x1e90c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e90c8 asm("PTR_DAT_001e90c8");	pointer -> LD_1f63a0	data.s
 PTR_DAT_001e90cc	0x1e90cc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e90cc asm("PTR_DAT_001e90cc");	pointer -> LD_1f6358	data.s
 PTR_DAT_001e90d0	0x1e90d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e90d0 asm("PTR_DAT_001e90d0");	pointer -> LD_1f61a8	data.s
@@ -1362,7 +1362,7 @@ PTR_DAT_001e9140	0x1e9140	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_DAT_001e9144	0x1e9144	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9144 asm("PTR_DAT_001e9144");	pointer -> LD_1ead80	data.s
 PTR_DAT_001e9148	0x1e9148	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9148 asm("PTR_DAT_001e9148");	pointer -> LD_1eb600	data.s
 PTR_DAT_001e914c	0x1e914c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e914c asm("PTR_DAT_001e914c");	pointer -> LD_1e9a38	data.s
-PTR_FUN_001e9150	0x1e9150	__DATA,__const	undefined *	4	extern unsigned char *PTR_FUN_001e9150[] asm("PTR_FUN_001e9150");	pointer -> recordFlagsPending20	data.s
+ptrTo_recordFlagsPending20_001e9150	0x1e9150	__DATA,__const	undefined *	4	extern unsigned char *ptrTo_recordFlagsPending20_001e9150[] asm("ptrTo_recordFlagsPending20_001e9150");	pointer -> recordFlagsPending20	data.s
 PTR_s_1D_001e9158	0x1e9158	__DATA,__const	undefined *	4	extern unsigned char *PTR_s_1D_001e9158[] asm("PTR_s_1D_001e9158");	pointer -> LD_1a4524	data.s
 UNK_001e915c	0x1e915c	__DATA,__const	-	-	extern unsigned char UNK_001e915c asm("UNK_001e915c");	0x0000000e	data.s
 UNK_001e9160	0x1e9160	__DATA,__const	-	-	extern unsigned char UNK_001e9160 asm("UNK_001e9160");	0x00000001	data.s
@@ -1375,74 +1375,74 @@ PTR_DAT_001e9784	0x1e9784	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT
 PTR_DAT_001e9788	0x1e9788	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9788 asm("PTR_DAT_001e9788");	pointer -> LD_1dbd14	data.s
 PTR_DAT_001e978c	0x1e978c	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e978c asm("PTR_DAT_001e978c");	pointer -> LD_1dbd84	data.s
 PTR_DAT_001e9790	0x1e9790	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9790 asm("PTR_DAT_001e9790");	pointer -> LD_1fa5e8	data.s
-PTR_FUN_001e97a0	0x1e97a0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e97a0[] asm("PTR_FUN_001e97a0");	pointer -> IRInst__dtor_1cd970	data.s
-PTR_FUN_001e9848	0x1e9848	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9848[] asm("PTR_FUN_001e9848");	pointer -> IRInst__dtor_1cda2c	data.s
-PTR_FUN_001e98f0	0x1e98f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e98f0[] asm("PTR_FUN_001e98f0");	pointer -> IRInst__dtor_1cdae8	data.s
-PTR_FUN_001e9998	0x1e9998	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9998[] asm("PTR_FUN_001e9998");	pointer -> IRInst__dtor_1cdba4	data.s
-PTR_FUN_001e9a40	0x1e9a40	__DATA,__const	pointer	4	extern unsigned char *PTR_FUN_001e9a40 asm("PTR_FUN_001e9a40");	pointer -> MachineAssembler__dtor_1cd7ec	data.s
-PTR_FUN_001e9b08	0x1e9b08	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9b08[] asm("PTR_FUN_001e9b08");	pointer -> Block__dtor	data.s
-PTR_FUN_001e9b60	0x1e9b60	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9b60[] asm("PTR_FUN_001e9b60");	pointer -> FuncEndBlock__dtor	data.s
-PTR_FUN_001e9bb8	0x1e9bb8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9bb8[] asm("PTR_FUN_001e9bb8");	pointer -> LoopHeader__dtor	data.s
-PTR_FUN_001e9c10	0x1e9c10	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9c10[] asm("PTR_FUN_001e9c10");	pointer -> LoopFooter__dtor	data.s
-PTR_FUN_001e9c68	0x1e9c68	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9c68[] asm("PTR_FUN_001e9c68");	pointer -> PostLoopFooter__dtor	data.s
-PTR_FUN_001e9cc0	0x1e9cc0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9cc0[] asm("PTR_FUN_001e9cc0");	pointer -> IfHeader__dtor_1ce158	data.s
-PTR_FUN_001e9d18	0x1e9d18	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9d18[] asm("PTR_FUN_001e9d18");	pointer -> IfHeader__dtor_1ce1e4	data.s
-PTR_FUN_001e9d70	0x1e9d70	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9d70[] asm("PTR_FUN_001e9d70");	pointer -> IfFooter__dtor_1ce270	data.s
-PTR_FUN_001e9dc8	0x1e9dc8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9dc8[] asm("PTR_FUN_001e9dc8");	pointer -> IfFooter__dtor_1ce2fc	data.s
-PTR_FUN_001e9e20	0x1e9e20	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9e20[] asm("PTR_FUN_001e9e20");	pointer -> BreakBlock__dtor	data.s
-PTR_FUN_001e9e78	0x1e9e78	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9e78[] asm("PTR_FUN_001e9e78");	pointer -> ContinueBlock__dtor	data.s
-PTR_FUN_001e9ed0	0x1e9ed0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9ed0[] asm("PTR_FUN_001e9ed0");	pointer -> ExitBlock__dtor	data.s
-PTR_FUN_001e9f28	0x1e9f28	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9f28[] asm("PTR_FUN_001e9f28");	pointer -> EntryBlock__dtor	data.s
+ptrTo_IRInst__dtor_1cd970_001e97a0	0x1e97a0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cd970_001e97a0[] asm("ptrTo_IRInst__dtor_1cd970_001e97a0");	pointer -> IRInst__dtor_1cd970	data.s
+ptrTo_IRInst__dtor_1cda2c_001e9848	0x1e9848	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cda2c_001e9848[] asm("ptrTo_IRInst__dtor_1cda2c_001e9848");	pointer -> IRInst__dtor_1cda2c	data.s
+ptrTo_IRInst__dtor_1cdae8_001e98f0	0x1e98f0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cdae8_001e98f0[] asm("ptrTo_IRInst__dtor_1cdae8_001e98f0");	pointer -> IRInst__dtor_1cdae8	data.s
+ptrTo_IRInst__dtor_1cdba4_001e9998	0x1e9998	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cdba4_001e9998[] asm("ptrTo_IRInst__dtor_1cdba4_001e9998");	pointer -> IRInst__dtor_1cdba4	data.s
+ptrTo_MachineAssembler__dtor_1cd7ec_001e9a40	0x1e9a40	__DATA,__const	pointer	4	extern unsigned char *ptrTo_MachineAssembler__dtor_1cd7ec_001e9a40 asm("ptrTo_MachineAssembler__dtor_1cd7ec_001e9a40");	pointer -> MachineAssembler__dtor_1cd7ec	data.s
+ptrTo_Block__dtor_001e9b08	0x1e9b08	__DATA,__const	undefined *	4	extern unsigned char ptrTo_Block__dtor_001e9b08[] asm("ptrTo_Block__dtor_001e9b08");	pointer -> Block__dtor	data.s
+ptrTo_FuncEndBlock__dtor_001e9b60	0x1e9b60	__DATA,__const	undefined *	4	extern unsigned char ptrTo_FuncEndBlock__dtor_001e9b60[] asm("ptrTo_FuncEndBlock__dtor_001e9b60");	pointer -> FuncEndBlock__dtor	data.s
+ptrTo_LoopHeader__dtor_001e9bb8	0x1e9bb8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_LoopHeader__dtor_001e9bb8[] asm("ptrTo_LoopHeader__dtor_001e9bb8");	pointer -> LoopHeader__dtor	data.s
+ptrTo_LoopFooter__dtor_001e9c10	0x1e9c10	__DATA,__const	undefined *	4	extern unsigned char ptrTo_LoopFooter__dtor_001e9c10[] asm("ptrTo_LoopFooter__dtor_001e9c10");	pointer -> LoopFooter__dtor	data.s
+ptrTo_PostLoopFooter__dtor_001e9c68	0x1e9c68	__DATA,__const	undefined *	4	extern unsigned char ptrTo_PostLoopFooter__dtor_001e9c68[] asm("ptrTo_PostLoopFooter__dtor_001e9c68");	pointer -> PostLoopFooter__dtor	data.s
+ptrTo_IfHeader__dtor_1ce158_001e9cc0	0x1e9cc0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IfHeader__dtor_1ce158_001e9cc0[] asm("ptrTo_IfHeader__dtor_1ce158_001e9cc0");	pointer -> IfHeader__dtor_1ce158	data.s
+ptrTo_IfHeader__dtor_1ce1e4_001e9d18	0x1e9d18	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IfHeader__dtor_1ce1e4_001e9d18[] asm("ptrTo_IfHeader__dtor_1ce1e4_001e9d18");	pointer -> IfHeader__dtor_1ce1e4	data.s
+ptrTo_IfFooter__dtor_1ce270_001e9d70	0x1e9d70	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IfFooter__dtor_1ce270_001e9d70[] asm("ptrTo_IfFooter__dtor_1ce270_001e9d70");	pointer -> IfFooter__dtor_1ce270	data.s
+ptrTo_IfFooter__dtor_1ce2fc_001e9dc8	0x1e9dc8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IfFooter__dtor_1ce2fc_001e9dc8[] asm("ptrTo_IfFooter__dtor_1ce2fc_001e9dc8");	pointer -> IfFooter__dtor_1ce2fc	data.s
+ptrTo_BreakBlock__dtor_001e9e20	0x1e9e20	__DATA,__const	undefined *	4	extern unsigned char ptrTo_BreakBlock__dtor_001e9e20[] asm("ptrTo_BreakBlock__dtor_001e9e20");	pointer -> BreakBlock__dtor	data.s
+ptrTo_ContinueBlock__dtor_001e9e78	0x1e9e78	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ContinueBlock__dtor_001e9e78[] asm("ptrTo_ContinueBlock__dtor_001e9e78");	pointer -> ContinueBlock__dtor	data.s
+ptrTo_ExitBlock__dtor_001e9ed0	0x1e9ed0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ExitBlock__dtor_001e9ed0[] asm("ptrTo_ExitBlock__dtor_001e9ed0");	pointer -> ExitBlock__dtor	data.s
+ptrTo_EntryBlock__dtor_001e9f28	0x1e9f28	__DATA,__const	undefined *	4	extern unsigned char ptrTo_EntryBlock__dtor_001e9f28[] asm("ptrTo_EntryBlock__dtor_001e9f28");	pointer -> EntryBlock__dtor	data.s
 PTR_DAT_001e9f78	0x1e9f78	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9f78[] asm("PTR_DAT_001e9f78");	pointer -> LD_1ae228	data.s
 PTR_DAT_001e9f7c	0x1e9f7c	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9f7c[] asm("PTR_DAT_001e9f7c");	pointer -> LD_1ae4a8	data.s
 PTR_DAT_001e9f80	0x1e9f80	__DATA,__const	undefined *	4	extern unsigned char *PTR_DAT_001e9f80[] asm("PTR_DAT_001e9f80");	pointer -> LD_1ae310	data.s
-PTR_FUN_001e9fc8	0x1e9fc8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9fc8[] asm("PTR_FUN_001e9fc8");	pointer -> IRInst__dtor_1ced3c	data.s
-PTR_FUN_001ea070	0x1ea070	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea070[] asm("PTR_FUN_001ea070");	pointer -> IRInst__dtor_1cfcbc	data.s
-PTR_FUN_001ea118	0x1ea118	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea118[] asm("PTR_FUN_001ea118");	pointer -> IRInst__dtor_1cf608	data.s
-PTR_FUN_001ea1c0	0x1ea1c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea1c0[] asm("PTR_FUN_001ea1c0");	pointer -> IRInst__dtor_1cfd38	data.s
-PTR_FUN_001ea268	0x1ea268	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea268[] asm("PTR_FUN_001ea268");	pointer -> IRInst__dtor_1cfdb4	data.s
-PTR_FUN_001ea310	0x1ea310	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea310[] asm("PTR_FUN_001ea310");	pointer -> IRInst__dtor_1cfe30	data.s
-PTR_FUN_001ea3b8	0x1ea3b8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea3b8[] asm("PTR_FUN_001ea3b8");	pointer -> IRInst__dtor_1cfeac	data.s
-PTR_FUN_001ea460	0x1ea460	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea460[] asm("PTR_FUN_001ea460");	pointer -> IRInst__dtor_1cf63c	data.s
+ptrTo_IRInst__dtor_1ced3c_001e9fc8	0x1e9fc8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1ced3c_001e9fc8[] asm("ptrTo_IRInst__dtor_1ced3c_001e9fc8");	pointer -> IRInst__dtor_1ced3c	data.s
+ptrTo_IRInst__dtor_1cfcbc_001ea070	0x1ea070	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cfcbc_001ea070[] asm("ptrTo_IRInst__dtor_1cfcbc_001ea070");	pointer -> IRInst__dtor_1cfcbc	data.s
+ptrTo_IRInst__dtor_1cf608_001ea118	0x1ea118	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cf608_001ea118[] asm("ptrTo_IRInst__dtor_1cf608_001ea118");	pointer -> IRInst__dtor_1cf608	data.s
+ptrTo_IRInst__dtor_1cfd38_001ea1c0	0x1ea1c0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cfd38_001ea1c0[] asm("ptrTo_IRInst__dtor_1cfd38_001ea1c0");	pointer -> IRInst__dtor_1cfd38	data.s
+ptrTo_IRInst__dtor_1cfdb4_001ea268	0x1ea268	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cfdb4_001ea268[] asm("ptrTo_IRInst__dtor_1cfdb4_001ea268");	pointer -> IRInst__dtor_1cfdb4	data.s
+ptrTo_IRInst__dtor_1cfe30_001ea310	0x1ea310	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cfe30_001ea310[] asm("ptrTo_IRInst__dtor_1cfe30_001ea310");	pointer -> IRInst__dtor_1cfe30	data.s
+ptrTo_IRInst__dtor_1cfeac_001ea3b8	0x1ea3b8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cfeac_001ea3b8[] asm("ptrTo_IRInst__dtor_1cfeac_001ea3b8");	pointer -> IRInst__dtor_1cfeac	data.s
+ptrTo_IRInst__dtor_1cf63c_001ea460	0x1ea460	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cf63c_001ea460[] asm("ptrTo_IRInst__dtor_1cf63c_001ea460");	pointer -> IRInst__dtor_1cf63c	data.s
 irInstFactoryTable	0x1ea4fc	__DATA,__const	-	-	extern unsigned char irInstFactoryTable asm("irInstFactoryTable");	0x00000000	data.s
 DAT_001ea500	0x1ea500	__DATA,__const	undefined4	4	extern unsigned int DAT_001ea500 asm("DAT_001ea500");	0x00000000	data.s
-PTR_FUN_001ea5b0	0x1ea5b0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea5b0[] asm("PTR_FUN_001ea5b0");	pointer -> HwLimits__dtor	data.s
-PTR_FUN_001ea748	0x1ea748	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea748[] asm("PTR_FUN_001ea748");	pointer -> ExportValue__dtor	data.s
-PTR_FUN_001ea780	0x1ea780	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea780[] asm("PTR_FUN_001ea780");	pointer -> Interpolator__dtor	data.s
-PTR_FUN_001ea7b8	0x1ea7b8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea7b8[] asm("PTR_FUN_001ea7b8");	pointer -> TempValue__dtor_1d7e50	data.s
-PTR_FUN_001ea7f0	0x1ea7f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea7f0[] asm("PTR_FUN_001ea7f0");	pointer -> ExportSlot__dtor	data.s
-PTR_FUN_001ea828	0x1ea828	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea828[] asm("PTR_FUN_001ea828");	pointer -> Resource__dtor	data.s
-PTR_FUN_001ea860	0x1ea860	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea860[] asm("PTR_FUN_001ea860");	pointer -> VertexRegister__dtor	data.s
-PTR_FUN_001ea898	0x1ea898	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea898[] asm("PTR_FUN_001ea898");	pointer -> FixedValue__dtor	data.s
-PTR_FUN_001ea8d0	0x1ea8d0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea8d0[] asm("PTR_FUN_001ea8d0");	pointer -> ImmedConstBuffer__dtor	data.s
+ptrTo_HwLimits__dtor_001ea5b0	0x1ea5b0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_HwLimits__dtor_001ea5b0[] asm("ptrTo_HwLimits__dtor_001ea5b0");	pointer -> HwLimits__dtor	data.s
+ptrTo_ExportValue__dtor_001ea748	0x1ea748	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ExportValue__dtor_001ea748[] asm("ptrTo_ExportValue__dtor_001ea748");	pointer -> ExportValue__dtor	data.s
+ptrTo_Interpolator__dtor_001ea780	0x1ea780	__DATA,__const	undefined *	4	extern unsigned char ptrTo_Interpolator__dtor_001ea780[] asm("ptrTo_Interpolator__dtor_001ea780");	pointer -> Interpolator__dtor	data.s
+ptrTo_TempValue__dtor_1d7e50_001ea7b8	0x1ea7b8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_TempValue__dtor_1d7e50_001ea7b8[] asm("ptrTo_TempValue__dtor_1d7e50_001ea7b8");	pointer -> TempValue__dtor_1d7e50	data.s
+ptrTo_ExportSlot__dtor_001ea7f0	0x1ea7f0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ExportSlot__dtor_001ea7f0[] asm("ptrTo_ExportSlot__dtor_001ea7f0");	pointer -> ExportSlot__dtor	data.s
+ptrTo_Resource__dtor_001ea828	0x1ea828	__DATA,__const	undefined *	4	extern unsigned char ptrTo_Resource__dtor_001ea828[] asm("ptrTo_Resource__dtor_001ea828");	pointer -> Resource__dtor	data.s
+ptrTo_VertexRegister__dtor_001ea860	0x1ea860	__DATA,__const	undefined *	4	extern unsigned char ptrTo_VertexRegister__dtor_001ea860[] asm("ptrTo_VertexRegister__dtor_001ea860");	pointer -> VertexRegister__dtor	data.s
+ptrTo_FixedValue__dtor_001ea898	0x1ea898	__DATA,__const	undefined *	4	extern unsigned char ptrTo_FixedValue__dtor_001ea898[] asm("ptrTo_FixedValue__dtor_001ea898");	pointer -> FixedValue__dtor	data.s
+ptrTo_ImmedConstBuffer__dtor_001ea8d0	0x1ea8d0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ImmedConstBuffer__dtor_001ea8d0[] asm("ptrTo_ImmedConstBuffer__dtor_001ea8d0");	pointer -> ImmedConstBuffer__dtor	data.s
 regKindInfo_flagsWord	0x1ea904	__DATA,__const	-	-	extern unsigned char regKindInfo_flagsWord asm("regKindInfo_flagsWord");	0x00000201	data.s
 regKindInfo_byte4	0x1ea908	__DATA,__const	-	-	extern unsigned char regKindInfo_byte4[] asm("regKindInfo_byte4");	0x00000000	data.s
-PTR_FUN_001ead68	0x1ead68	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead68[] asm("PTR_FUN_001ead68");	pointer -> KhanChip__dtor	data.s
-PTR_FUN_001ead88	0x1ead88	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead88[] asm("PTR_FUN_001ead88");	pointer -> KhanPs__dtor	data.s
-PTR_FUN_001eaf20	0x1eaf20	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eaf20[] asm("PTR_FUN_001eaf20");	pointer -> KhanVs__dtor_1d84e0	data.s
-PTR_FUN_001eb0c0	0x1eb0c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb0c0[] asm("PTR_FUN_001eb0c0");	pointer -> KhanVs__dtor_1d8548	data.s
+ptrTo_KhanChip__dtor_001ead68	0x1ead68	__DATA,__const	undefined *	4	extern unsigned char ptrTo_KhanChip__dtor_001ead68[] asm("ptrTo_KhanChip__dtor_001ead68");	pointer -> KhanChip__dtor	data.s
+ptrTo_KhanPs__dtor_001ead88	0x1ead88	__DATA,__const	undefined *	4	extern unsigned char ptrTo_KhanPs__dtor_001ead88[] asm("ptrTo_KhanPs__dtor_001ead88");	pointer -> KhanPs__dtor	data.s
+ptrTo_KhanVs__dtor_1d84e0_001eaf20	0x1eaf20	__DATA,__const	undefined *	4	extern unsigned char ptrTo_KhanVs__dtor_1d84e0_001eaf20[] asm("ptrTo_KhanVs__dtor_1d84e0_001eaf20");	pointer -> KhanVs__dtor_1d84e0	data.s
+ptrTo_KhanVs__dtor_1d8548_001eb0c0	0x1eb0c0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_KhanVs__dtor_1d8548_001eb0c0[] asm("ptrTo_KhanVs__dtor_1d8548_001eb0c0");	pointer -> KhanVs__dtor_1d8548	data.s
 PTR_DAT_001eb254	0x1eb254	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001eb254 asm("PTR_DAT_001eb254");	pointer -> LD_1aa818	data.s
-PTR_FUN_001eb260	0x1eb260	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb260[] asm("PTR_FUN_001eb260");	pointer -> ResourceModel__dtor	data.s
-PTR_FUN_001eb2f0	0x1eb2f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb2f0[] asm("PTR_FUN_001eb2f0");	pointer -> ThreadModel__dtor	data.s
-PTR_DAT_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_DAT_001eb328[] asm("PTR_DAT_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
+ptrTo_ResourceModel__dtor_001eb260	0x1eb260	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ResourceModel__dtor_001eb260[] asm("ptrTo_ResourceModel__dtor_001eb260");	pointer -> ResourceModel__dtor	data.s
+ptrTo_ThreadModel__dtor_001eb2f0	0x1eb2f0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ThreadModel__dtor_001eb2f0[] asm("ptrTo_ThreadModel__dtor_001eb2f0");	pointer -> ThreadModel__dtor	data.s
+ptrTo_R300SchedModel__dtor_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R300SchedModel__dtor_1d8910_001eb328[] asm("ptrTo_R300SchedModel__dtor_1d8910_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
 PTR_orph_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_orph_1d8910_001eb328[] asm("PTR_orph_1d8910_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
-PTR_FUN_001eb3c0	0x1eb3c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb3c0[] asm("PTR_FUN_001eb3c0");	pointer -> R300VSchedModel__dtor	data.s
-PTR_FUN_001eb450	0x1eb450	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb450[] asm("PTR_FUN_001eb450");	pointer -> FudoPs__dtor	data.s
-PTR_FUN_001eb5e8	0x1eb5e8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb5e8[] asm("PTR_FUN_001eb5e8");	pointer -> FudoChip__dtor	data.s
-PTR_FUN_001eb608	0x1eb608	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb608[] asm("PTR_FUN_001eb608");	pointer -> R520SchedModel__dtor	data.s
-PTR_FUN_001eb6a0	0x1eb6a0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb6a0[] asm("PTR_FUN_001eb6a0");	pointer -> R300MachineAssembler__dtor	data.s
-PTR_FUN_001eb808	0x1eb808	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb808[] asm("PTR_FUN_001eb808");	pointer -> MachineAssembler__dtor_19b9ac	data.s
-PTR_FUN_001eb8d8	0x1eb8d8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb8d8[] asm("PTR_FUN_001eb8d8");	pointer -> MachineAssembler__dtor_19df54	data.s
-PTR_FUN_001eb9a8	0x1eb9a8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb9a8[] asm("PTR_FUN_001eb9a8");	pointer -> R520MachineAssembler__dtor	data.s
+ptrTo_R300VSchedModel__dtor_001eb3c0	0x1eb3c0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R300VSchedModel__dtor_001eb3c0[] asm("ptrTo_R300VSchedModel__dtor_001eb3c0");	pointer -> R300VSchedModel__dtor	data.s
+ptrTo_FudoPs__dtor_001eb450	0x1eb450	__DATA,__const	undefined *	4	extern unsigned char ptrTo_FudoPs__dtor_001eb450[] asm("ptrTo_FudoPs__dtor_001eb450");	pointer -> FudoPs__dtor	data.s
+ptrTo_FudoChip__dtor_001eb5e8	0x1eb5e8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_FudoChip__dtor_001eb5e8[] asm("ptrTo_FudoChip__dtor_001eb5e8");	pointer -> FudoChip__dtor	data.s
+ptrTo_R520SchedModel__dtor_001eb608	0x1eb608	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R520SchedModel__dtor_001eb608[] asm("ptrTo_R520SchedModel__dtor_001eb608");	pointer -> R520SchedModel__dtor	data.s
+ptrTo_R300MachineAssembler__dtor_001eb6a0	0x1eb6a0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R300MachineAssembler__dtor_001eb6a0[] asm("ptrTo_R300MachineAssembler__dtor_001eb6a0");	pointer -> R300MachineAssembler__dtor	data.s
+ptrTo_MachineAssembler__dtor_19b9ac_001eb808	0x1eb808	__DATA,__const	undefined *	4	extern unsigned char ptrTo_MachineAssembler__dtor_19b9ac_001eb808[] asm("ptrTo_MachineAssembler__dtor_19b9ac_001eb808");	pointer -> MachineAssembler__dtor_19b9ac	data.s
+ptrTo_MachineAssembler__dtor_19df54_001eb8d8	0x1eb8d8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_MachineAssembler__dtor_19df54_001eb8d8[] asm("ptrTo_MachineAssembler__dtor_19df54_001eb8d8");	pointer -> MachineAssembler__dtor_19df54	data.s
+ptrTo_R520MachineAssembler__dtor_001eb9a8	0x1eb9a8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R520MachineAssembler__dtor_001eb9a8[] asm("ptrTo_R520MachineAssembler__dtor_001eb9a8");	pointer -> R520MachineAssembler__dtor	data.s
 DAT_001f3a54	0x1f3a54	__DATA,__const_coal	-	-	extern unsigned char DAT_001f3a54 asm("DAT_001f3a54");	0x00000000	data.s
-PTR_DAT_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *PTR_DAT_001f4850 asm("PTR_DAT_001f4850");	pointer -> OpcodeInfo__vslot6_getMovaRoundFlag	data.s
-DAT_001f65e0	0x1f65e0	__DATA,__bss	undefined4	4	extern unsigned char *DAT_001f65e0 asm("DAT_001f65e0");		data.s
-DAT_001f65e4	0x1f65e4	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e4[] asm("DAT_001f65e4");		data.s
-DAT_001f65e5	0x1f65e5	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e5[] asm("DAT_001f65e5");		data.s
-DAT_001f65e6	0x1f65e6	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e6[] asm("DAT_001f65e6");		data.s
+ptrTo_OpcodeInfo__vslot6_getMovaRoundFlag_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *ptrTo_OpcodeInfo__vslot6_getMovaRoundFlag_001f4850 asm("ptrTo_OpcodeInfo__vslot6_getMovaRoundFlag_001f4850");	pointer -> OpcodeInfo__vslot6_getMovaRoundFlag	data.s
+gldContextListHead_001f65e0	0x1f65e0	__DATA,__bss	undefined4	4	extern unsigned char *gldContextListHead_001f65e0 asm("gldContextListHead_001f65e0");		data.s
+dxtBlockPixelByte0_001f65e4	0x1f65e4	__DATA,__bss	undefined1	1	extern unsigned char dxtBlockPixelByte0_001f65e4[] asm("dxtBlockPixelByte0_001f65e4");		data.s
+dxtBlockPixelByte1_001f65e5	0x1f65e5	__DATA,__bss	undefined1	1	extern unsigned char dxtBlockPixelByte1_001f65e5[] asm("dxtBlockPixelByte1_001f65e5");		data.s
+dxtBlockPixelByte2_001f65e6	0x1f65e6	__DATA,__bss	undefined1	1	extern unsigned char dxtBlockPixelByte2_001f65e6[] asm("dxtBlockPixelByte2_001f65e6");		data.s
 DAT_001f65e7	0x1f65e7	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e7 asm("DAT_001f65e7");		data.s
 DAT_001f8514	0x1f8514	__DATA,__bss	-	-	extern unsigned char DAT_001f8514 asm("DAT_001f8514");		data.s
-DAT_001fa5e4	0x1fa5e4	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa5e4 asm("DAT_001fa5e4");		data.s
+drawSetupPacketWord15_001fa5e4	0x1fa5e4	__DATA,__bss	undefined4	4	extern unsigned int drawSetupPacketWord15_001fa5e4 asm("drawSetupPacketWord15_001fa5e4");		data.s
 DAT_001fa5e8	0x1fa5e8	__DATA,__bss	-	-	extern unsigned char DAT_001fa5e8 asm("DAT_001fa5e8");		data.s
 DAT_001fa5f8	0x1fa5f8	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa5f8 asm("DAT_001fa5f8");		data.s
 DAT_001fa5fc	0x1fa5fc	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa5fc asm("DAT_001fa5fc");		data.s
@@ -1452,9 +1452,9 @@ DAT_001fa608	0x1fa608	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa608
 DAT_001fa60c	0x1fa60c	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa60c asm("DAT_001fa60c");		data.s
 DAT_001fa610	0x1fa610	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa610 asm("DAT_001fa610");		data.s
 DAT_001fa614	0x1fa614	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa614 asm("DAT_001fa614");		data.s
-DAT_001fa618	0x1fa618	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa618 asm("DAT_001fa618");		data.s
-DAT_001fa61c	0x1fa61c	__DATA,__bss	undefined4	4	extern unsigned char *DAT_001fa61c asm("DAT_001fa61c");		data.s
-DAT_001fa620	0x1fa620	__DATA,__bss	undefined4	4	extern unsigned int DAT_001fa620 asm("DAT_001fa620");		data.s
+psnSinkContext_001fa618	0x1fa618	__DATA,__bss	undefined4	4	extern unsigned int psnSinkContext_001fa618 asm("psnSinkContext_001fa618");		data.s
+psnSinkCallbacks_001fa61c	0x1fa61c	__DATA,__bss	undefined4	4	extern unsigned char *psnSinkCallbacks_001fa61c asm("psnSinkCallbacks_001fa61c");		data.s
+ilReaderTokenCount_001fa620	0x1fa620	__DATA,__bss	undefined4	4	extern unsigned int ilReaderTokenCount_001fa620 asm("ilReaderTokenCount_001fa620");		data.s
 IrImmedConstLoad__opcodeInfo_guard	0x1fa628	__DATA,__bss	-	-	extern unsigned char IrImmedConstLoad__opcodeInfo_guard asm("IrImmedConstLoad__opcodeInfo_guard");		data.s
 IrImmedConstBuffer__opcodeInfo_guard	0x1fa630	__DATA,__bss	-	-	extern unsigned char IrImmedConstBuffer__opcodeInfo_guard asm("IrImmedConstBuffer__opcodeInfo_guard");		data.s
 IrGetResource__opcodeInfo_guard	0x1fa638	__DATA,__bss	-	-	extern unsigned char IrGetResource__opcodeInfo_guard asm("IrGetResource__opcodeInfo_guard");		data.s
@@ -2720,10 +2720,10 @@ IrRet__opcodeInfo	0x1fc1c0	__DATA,__bss	undefined4	4	extern unsigned int IrRet__
 IrRet__opcodeInfo_opcode	0x1fc1c8	__DATA,__bss	undefined4	4	extern unsigned int IrRet__opcodeInfo_opcode asm("IrRet__opcodeInfo_opcode");		data.s
 IrRet__opcodeInfo_word0c	0x1fc1cc	__DATA,__bss	undefined4	4	extern unsigned int IrRet__opcodeInfo_word0c asm("IrRet__opcodeInfo_word0c");		data.s
 IrRet__opcodeInfo_word10	0x1fc1d0	__DATA,__bss	undefined4	4	extern unsigned int IrRet__opcodeInfo_word10 asm("IrRet__opcodeInfo_word10");		data.s
-DAT_001fc1d4	0x1fc1d4	__DATA,__bss	undefined4	4	extern int (*DAT_001fc1d4)() asm("DAT_001fc1d4");		data.s
-DAT_001fc1d8	0x1fc1d8	__DATA,__bss	undefined4	4	extern int (*DAT_001fc1d8)() asm("DAT_001fc1d8");		data.s
-DAT_001fc1dc	0x1fc1dc	__DATA,__bss	undefined4	4	extern int (*DAT_001fc1dc)() asm("DAT_001fc1dc");		data.s
-DAT_001fc1e0	0x1fc1e0	__DATA,__bss	undefined4	4	extern int (*DAT_001fc1e0)() asm("DAT_001fc1e0");		data.s
+resolvedSprintf_001fc1d4	0x1fc1d4	__DATA,__bss	undefined4	4	extern int (*resolvedSprintf_001fc1d4)() asm("resolvedSprintf_001fc1d4");		data.s
+resolvedPrintf_001fc1d8	0x1fc1d8	__DATA,__bss	undefined4	4	extern int (*resolvedPrintf_001fc1d8)() asm("resolvedPrintf_001fc1d8");		data.s
+resolvedVsnprintf_001fc1dc	0x1fc1dc	__DATA,__bss	undefined4	4	extern int (*resolvedVsnprintf_001fc1dc)() asm("resolvedVsnprintf_001fc1dc");		data.s
+resolvedVsprintf_001fc1e0	0x1fc1e0	__DATA,__bss	undefined4	4	extern int (*resolvedVsprintf_001fc1e0)() asm("resolvedVsprintf_001fc1e0");		data.s
 DAT_001fc1f0	0x1fc1f0	__DATA,__common	undefined4	4	extern unsigned int DAT_001fc1f0 asm("DAT_001fc1f0");		data.s
 DAT_001fc1f4	0x1fc1f4	__DATA,__common	undefined4	4	extern unsigned int DAT_001fc1f4 asm("DAT_001fc1f4");		data.s
 DAT_001fc1f8	0x1fc1f8	__DATA,__common	undefined4	4	extern unsigned char DAT_001fc1f8[] asm("DAT_001fc1f8");		data.s
