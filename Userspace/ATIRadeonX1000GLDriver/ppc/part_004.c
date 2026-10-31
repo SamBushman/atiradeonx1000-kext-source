@@ -1068,7 +1068,7 @@ int gld_bindFragmentProgramRecord(ctx, programObject)
   for (contextRecord = (int *)programObject[9]; contextRecord != programObject + 8; contextRecord = (int *)contextRecord[1]) {
     if (ctx == contextRecord[2]) goto setScratchInt9;
   }
-  contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
+  contextRecord = (int *)_calloc(1,*(int *)(&programRecordSizeByType + programObject[7] * 4) + 0x14);
   contextRecord[3] = programObject[5] + -1;
   scratchInt9 = programObject[6];
   contextRecord[2] = ctx;
@@ -1268,7 +1268,7 @@ int gld_bindProgramRecord(ctx, programObject)
   for (contextRecord = (int *)programObject[9]; contextRecord != programObject + 8; contextRecord = (int *)contextRecord[1]) {
     if (ctx == contextRecord[2]) goto setCommandStream;
   }
-  contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
+  contextRecord = (int *)_calloc(1,*(int *)(&programRecordSizeByType + programObject[7] * 4) + 0x14);
   contextRecord[3] = programObject[5] + -1;
   scratchInt2 = programObject[6];
   contextRecord[2] = ctx;
@@ -1407,7 +1407,7 @@ setPendingGenerationBits:
       recordListHead = programObject + 8;
       if (contextRecord == recordListHead) {
 loopSetContextRecord:
-        contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
+        contextRecord = (int *)_calloc(1,*(int *)(&programRecordSizeByType + programObject[7] * 4) + 0x14);
         contextRecord[3] = programObject[5] + -1;
         scratchInt4 = programObject[6];
         contextRecord[2] = ctx;
@@ -1470,7 +1470,7 @@ int gld_getProgramParameter(ctx, programObject, pname, params)
         for (contextRecord = (int *)programObject[9]; contextRecord != programObject + 8; contextRecord = (int *)contextRecord[1]) {
           if (ctx == contextRecord[2]) goto switchPname;
         }
-        contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
+        contextRecord = (int *)_calloc(1,*(int *)(&programRecordSizeByType + programObject[7] * 4) + 0x14);
         contextRecord[3] = programObject[5] + -1;
         programField6 = programObject[6];
         contextRecord[2] = ctx;

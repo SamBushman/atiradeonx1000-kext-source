@@ -566,7 +566,7 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
         newInst = (int *)IRInst__create(0x14,compiler);
         IRInst__setOperandRef(newInst,0,newRegister);
         IRInst__setOperandRef(newInst,1,callResult);
-        selectWord = DAT_001aff48;
+        selectWord = swizzleXXXX_001aff48;
         srcRecord = IRInst__getOperandRecord(newInst,1);
         literalValue = (double)FLOAT_001aa108;
         *(undefined4 *)(srcRecord + 0x10) = selectWord;
@@ -583,7 +583,7 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
         newInst = (int *)IRInst__create(0x31,compiler);
         IRInst__setOperandRef(newInst,0,newRegister);
         IRInst__setOperandRef(newInst,1,callResult);
-        selectWord = DAT_001affa4;
+        selectWord = swizzleWWWW_001affa4;
         srcRecord = IRInst__getOperandRecord(newInst,1);
         *(undefined4 *)(srcRecord + 0x10) = selectWord;
         VReg__addUse(callResult,1,newInst);

@@ -314,13 +314,13 @@ DOUBLE_001aa290	0x1aa290	__TEXT,__literal8	double	8	extern double DOUBLE_001aa29
 DOUBLE_001aa298	0x1aa298	__TEXT,__literal8	double	8	extern double DOUBLE_001aa298 asm("DOUBLE_001aa298");	0x3e6ad7f2	data.s
 DOUBLE_001aa2a0	0x1aa2a0	__TEXT,__literal8	double	8	extern double DOUBLE_001aa2a0 asm("DOUBLE_001aa2a0");	0x40000000	data.s
 DOUBLE_001aa2a8	0x1aa2a8	__TEXT,__literal8	double	8	extern double DOUBLE_001aa2a8[] asm("DOUBLE_001aa2a8");	0x401c0000	data.s
-DAT_001aa3a8	0x1aa3a8	__TEXT,__const	-	-	extern unsigned char DAT_001aa3a8 asm("DAT_001aa3a8");	0x3949f623	data.s
+powerOfTenDoubleTable	0x1aa3a8	__TEXT,__const	-	-	extern unsigned char powerOfTenDoubleTable asm("powerOfTenDoubleTable");	0x3949f623	data.s
 DAT_001aa4b0	0x1aa4b0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4b0 asm("DAT_001aa4b0");	0xffffffff	data.s
 DAT_001aa4b4	0x1aa4b4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4b4 asm("DAT_001aa4b4");	0x03ffffff	data.s
 DAT_001aa4b8	0x1aa4b8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4b8 asm("DAT_001aa4b8");	0xfffffffd	data.s
 DAT_001aa4bc	0x1aa4bc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4bc asm("DAT_001aa4bc");	0x07ffffff	data.s
 DAT_001aa4c0	0x1aa4c0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4c0 asm("DAT_001aa4c0");	0xffffffff	data.s
-DAT_001aa4c4	0x1aa4c4	__TEXT,__const	-	-	extern unsigned char DAT_001aa4c4 asm("DAT_001aa4c4");	0x00000000	data.s
+programRecordSizeByType	0x1aa4c4	__TEXT,__const	-	-	extern unsigned char programRecordSizeByType asm("programRecordSizeByType");	0x00000000	data.s
 DAT_001aa4e8	0x1aa4e8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4e8 asm("DAT_001aa4e8");	0xffffffff	data.s
 DAT_001aa4ec	0x1aa4ec	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4ec asm("DAT_001aa4ec");	0x03ffffff	data.s
 DAT_001aa4f0	0x1aa4f0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa4f0 asm("DAT_001aa4f0");	0xfffffffd	data.s
@@ -363,12 +363,12 @@ DAT_001aa7dc	0x1aa7dc	__TEXT,__const	-	-	extern unsigned char DAT_001aa7dc asm("
 DAT_001aa7e8	0x1aa7e8	__TEXT,__const	-	-	extern unsigned char DAT_001aa7e8 asm("DAT_001aa7e8");	0x00000000	data.s
 _UNK_001aa7f4	0x1aa7f4	__TEXT,__const	-	-	extern unsigned char _UNK_001aa7f4 asm("_UNK_001aa7f4");	0x00000100	data.s
 _UNK_001aa7f8	0x1aa7f8	__TEXT,__const	-	-	extern unsigned char _UNK_001aa7f8 asm("_UNK_001aa7f8");	0x00000200	data.s
-DAT_001aa7fc	0x1aa7fc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa7fc asm("DAT_001aa7fc");	0x00000000	data.s
-DAT_001aa800	0x1aa800	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa800 asm("DAT_001aa800");	0x00000000	data.s
-DAT_001aa804	0x1aa804	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa804 asm("DAT_001aa804");	0x00010203	data.s
+swizzleXXXX_001aa7fc	0x1aa7fc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa7fc asm("swizzleXXXX_001aa7fc");	0x00000000	data.s
+swizzleXXXX_001aa800	0x1aa800	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa800 asm("swizzleXXXX_001aa800");	0x00000000	data.s
+swizzleXYZW_001aa804	0x1aa804	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001aa804 asm("swizzleXYZW_001aa804");	0x00010203	data.s
 UNK_001aa808	0x1aa808	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa808 asm("UNK_001aa808");	0x04040404	data.s
 DAT_001aa80c	0x1aa80c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa80c asm("DAT_001aa80c");	0x01010101	data.s
-DAT_001aa810	0x1aa810	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa810 asm("DAT_001aa810");	0x00000000	data.s
+swizzleXXXX_001aa810	0x1aa810	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa810 asm("swizzleXXXX_001aa810");	0x00000000	data.s
 DAT_001aa814	0x1aa814	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa814 asm("DAT_001aa814");	0x01010100	data.s
 DAT_001aa818	0x1aa818	__TEXT,__const	undefined4	4	extern unsigned char DAT_001aa818[] asm("DAT_001aa818");	0x00000000	data.s
 DAT_001aa838	0x1aa838	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa838 asm("DAT_001aa838");	0x01010101	data.s
@@ -377,15 +377,15 @@ DAT_001aa840	0x1aa840	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa8
 DAT_001aa844	0x1aa844	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa844 asm("DAT_001aa844");	0x00000000	data.s
 _UNK_001aa848	0x1aa848	__TEXT,__const	-	-	extern unsigned char _UNK_001aa848 asm("_UNK_001aa848");	0x00010203	data.s
 _UNK_001aa84c	0x1aa84c	__TEXT,__const	-	-	extern unsigned char _UNK_001aa84c asm("_UNK_001aa84c");	0x00000000	data.s
-DAT_001aa850	0x1aa850	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa850 asm("DAT_001aa850");	0x01010100	data.s
-DAT_001aa854	0x1aa854	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa854 asm("DAT_001aa854");	0x01010001	data.s
-DAT_001aa858	0x1aa858	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa858 asm("DAT_001aa858");	0x01000101	data.s
-DAT_001aa85c	0x1aa85c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa85c asm("DAT_001aa85c");	0x00010101	data.s
-DAT_001aa860	0x1aa860	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa860 asm("DAT_001aa860");	0x00000000	data.s
-DAT_001aa868	0x1aa868	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa868 asm("DAT_001aa868");	0x00010203	data.s
+swizzleYYYX_001aa850	0x1aa850	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001aa850 asm("swizzleYYYX_001aa850");	0x01010100	data.s
+swizzleYYXY_001aa854	0x1aa854	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYXY_001aa854 asm("swizzleYYXY_001aa854");	0x01010001	data.s
+swizzleYXYY_001aa858	0x1aa858	__TEXT,__const	undefined4	4	extern unsigned int swizzleYXYY_001aa858 asm("swizzleYXYY_001aa858");	0x01000101	data.s
+swizzleXYYY_001aa85c	0x1aa85c	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001aa85c asm("swizzleXYYY_001aa85c");	0x00010101	data.s
+swizzleXXXX_001aa860	0x1aa860	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa860 asm("swizzleXXXX_001aa860");	0x00000000	data.s
+swizzleXYZW_001aa868	0x1aa868	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001aa868 asm("swizzleXYZW_001aa868");	0x00010203	data.s
 DAT_001aa86c	0x1aa86c	__TEXT,__const	-	-	extern unsigned char DAT_001aa86c asm("DAT_001aa86c");	0x00000000	data.s
 DAT_001aa87c	0x1aa87c	__TEXT,__const	-	-	extern unsigned char DAT_001aa87c asm("DAT_001aa87c");	0x00000003	data.s
-DAT_001aa9a8	0x1aa9a8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa9a8 asm("DAT_001aa9a8");	0x00010203	data.s
+swizzleXYZW_001aa9a8	0x1aa9a8	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001aa9a8 asm("swizzleXYZW_001aa9a8");	0x00010203	data.s
 UNK_001aa9ac	0x1aa9ac	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9ac asm("UNK_001aa9ac");	0x01000101	data.s
 UNK_001aa9b0	0x1aa9b0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9b0 asm("UNK_001aa9b0");	0x01010101	data.s
 UNK_001aa9b4	0x1aa9b4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9b4 asm("UNK_001aa9b4");	0x01010001	data.s
@@ -398,7 +398,7 @@ DAT_001aa9cc	0x1aa9cc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa9
 DAT_001aa9d0	0x1aa9d0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa9d0 asm("DAT_001aa9d0");	0x00010101	data.s
 UNK_001aa9d4	0x1aa9d4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9d4 asm("UNK_001aa9d4");	0x03030303	data.s
 UNK_001aa9d8	0x1aa9d8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9d8 asm("UNK_001aa9d8");	0x02020202	data.s
-DAT_001aa9dc	0x1aa9dc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa9dc asm("DAT_001aa9dc");	0x00000000	data.s
+swizzleXXXX_001aa9dc	0x1aa9dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa9dc asm("swizzleXXXX_001aa9dc");	0x00000000	data.s
 DAT_001aa9e0	0x1aa9e0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa9e0 asm("DAT_001aa9e0");	0x01010101	data.s
 DAT_001aa9e4	0x1aa9e4	__TEXT,__const	-	-	extern unsigned char DAT_001aa9e4 asm("DAT_001aa9e4");	0x00000002	data.s
 DAT_001aa9fc	0x1aa9fc	__TEXT,__const	-	-	extern unsigned char DAT_001aa9fc asm("DAT_001aa9fc");	0x00000006	data.s
@@ -409,23 +409,23 @@ UNK_001aaa24	0x1aaa24	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa
 UNK_001aaa28	0x1aaa28	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa28 asm("UNK_001aaa28");	0x01000000	data.s
 UNK_001aaa2c	0x1aaa2c	__TEXT,__const	-	-	extern unsigned char UNK_001aaa2c asm("UNK_001aaa2c");	0x00000000	data.s
 DAT_001ab134	0x1ab134	__TEXT,__const	-	-	extern unsigned char DAT_001ab134 asm("DAT_001ab134");	0x00000000	data.s
-DAT_001abfb4	0x1abfb4	__TEXT,__const	-	-	extern unsigned char DAT_001abfb4 asm("DAT_001abfb4");	0x00000055	data.s
+textPrintDoubleShortest_pow10Table	0x1abfb4	__TEXT,__const	-	-	extern unsigned char textPrintDoubleShortest_pow10Table asm("textPrintDoubleShortest_pow10Table");	0x00000055	data.s
 DAT_001ac5a4	0x1ac5a4	__TEXT,__const	-	-	extern unsigned char DAT_001ac5a4 asm("DAT_001ac5a4");	0x00000056	data.s
 DAT_001acec0	0x1acec0	__TEXT,__const	-	-	extern unsigned char DAT_001acec0 asm("DAT_001acec0");	0x00000055	data.s
 DAT_001ad5d8	0x1ad5d8	__TEXT,__const	-	-	extern unsigned char DAT_001ad5d8 asm("DAT_001ad5d8");	0x0000001f	data.s
 UNK_001ada48	0x1ada48	__TEXT,__const	-	-	extern unsigned char UNK_001ada48 asm("UNK_001ada48");	0x00000031	data.s
-DAT_001af9bc	0x1af9bc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9bc asm("DAT_001af9bc");	0x00010203	data.s
+swizzleXYZW_001af9bc	0x1af9bc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001af9bc asm("swizzleXYZW_001af9bc");	0x00010203	data.s
 DAT_001af9c0	0x1af9c0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9c0 asm("DAT_001af9c0");	0x00000000	data.s
-DAT_001af9c4	0x1af9c4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9c4 asm("DAT_001af9c4");	0x04040404	data.s
+swizzleAllUnused_001af9c4	0x1af9c4	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001af9c4 asm("swizzleAllUnused_001af9c4");	0x04040404	data.s
 DAT_001af9c8	0x1af9c8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9c8 asm("DAT_001af9c8");	0x01010101	data.s
 DAT_001af9cc	0x1af9cc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9cc asm("DAT_001af9cc");	0x00000000	data.s
 DAT_001af9d0	0x1af9d0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9d0 asm("DAT_001af9d0");	0x03030303	data.s
 UNK_001af9d4	0x1af9d4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001af9d4 asm("UNK_001af9d4");	0x03030303	data.s
 _UNK_001af9d8	0x1af9d8	__TEXT,__const	-	-	extern unsigned char _UNK_001af9d8 asm("_UNK_001af9d8");	0x01010100	data.s
-DAT_001af9dc	0x1af9dc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9dc asm("DAT_001af9dc");	0x00010101	data.s
+swizzleXYYY_001af9dc	0x1af9dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001af9dc asm("swizzleXYYY_001af9dc");	0x00010101	data.s
 DAT_001af9e0	0x1af9e0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9e0 asm("DAT_001af9e0");	0x3e000000	data.s
 DAT_001af9ec	0x1af9ec	__TEXT,__const	-	-	extern unsigned char DAT_001af9ec asm("DAT_001af9ec");	0x3f800000	data.s
-DAT_001af9fc	0x1af9fc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9fc asm("DAT_001af9fc");	0x04040404	data.s
+swizzleAllUnused_001af9fc	0x1af9fc	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001af9fc asm("swizzleAllUnused_001af9fc");	0x04040404	data.s
 DAT_001afa00	0x1afa00	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa00 asm("DAT_001afa00");	0x00010203	data.s
 DAT_001afa04	0x1afa04	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa04 asm("DAT_001afa04");	0x01010100	data.s
 DAT_001afa08	0x1afa08	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa08 asm("DAT_001afa08");	0x00000000	data.s
@@ -436,13 +436,13 @@ DAT_001afedc	0x1afedc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afe
 UNK_001afee0	0x1afee0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001afee0 asm("UNK_001afee0");	0x00010101	data.s
 DAT_001afee4	0x1afee4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afee4 asm("DAT_001afee4");	0x00000000	data.s
 DAT_001afee8	0x1afee8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afee8 asm("DAT_001afee8");	0x00000000	data.s
-DAT_001afeec	0x1afeec	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afeec asm("DAT_001afeec");	0x00000000	data.s
+swizzleXXXX_001afeec	0x1afeec	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001afeec asm("swizzleXXXX_001afeec");	0x00000000	data.s
 DAT_001afef0	0x1afef0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afef0 asm("DAT_001afef0");	0x00010101	data.s
 DAT_001afef4	0x1afef4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afef4 asm("DAT_001afef4");	0x00010203	data.s
 DAT_001afef8	0x1afef8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afef8 asm("DAT_001afef8");	0x01010101	data.s
 DAT_001aff08	0x1aff08	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff08 asm("DAT_001aff08");	0x00000000	data.s
 DAT_001aff0c	0x1aff0c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff0c asm("DAT_001aff0c");	0x00000000	data.s
-DAT_001aff48	0x1aff48	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff48 asm("DAT_001aff48");	0x00000000	data.s
+swizzleXXXX_001aff48	0x1aff48	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aff48 asm("swizzleXXXX_001aff48");	0x00000000	data.s
 DAT_001aff4c	0x1aff4c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff4c asm("DAT_001aff4c");	0x3e000000	data.s
 DAT_001aff50	0x1aff50	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff50 asm("DAT_001aff50");	0x3e800000	data.s
 UNK_001aff54	0x1aff54	__TEXT,__const	-	-	extern unsigned char UNK_001aff54 asm("UNK_001aff54");	0x3f000000	data.s
@@ -450,7 +450,7 @@ DAT_001aff68	0x1aff68	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff
 DAT_001aff74	0x1aff74	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff74 asm("DAT_001aff74");	0xbf800000	data.s
 DAT_001aff9c	0x1aff9c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aff9c asm("DAT_001aff9c");	0x00010203	data.s
 DAT_001affa0	0x1affa0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affa0 asm("DAT_001affa0");	0x04040404	data.s
-DAT_001affa4	0x1affa4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affa4 asm("DAT_001affa4");	0x03030303	data.s
+swizzleWWWW_001affa4	0x1affa4	__TEXT,__const	undefined4	4	extern unsigned int swizzleWWWW_001affa4 asm("swizzleWWWW_001affa4");	0x03030303	data.s
 DAT_001affb0	0x1affb0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affb0 asm("DAT_001affb0");	0x00000000	data.s
 DAT_001affb8	0x1affb8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affb8 asm("DAT_001affb8");	0x00010203	data.s
 DAT_001affbc	0x1affbc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affbc asm("DAT_001affbc");	0x04040404	data.s
@@ -470,8 +470,8 @@ UNK_001afff0	0x1afff0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aff
 UNK_001afff4	0x1afff4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001afff4 asm("UNK_001afff4");	0xffffffff	data.s
 UNK_001afff8	0x1afff8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001afff8 asm("UNK_001afff8");	0xffffffff	data.s
 DAT_001afffc	0x1afffc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afffc asm("DAT_001afffc");	0x01010101	data.s
-DAT_001b0000	0x1b0000	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0000 asm("DAT_001b0000");	0x04040404	data.s
-DAT_001b0004	0x1b0004	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0004 asm("DAT_001b0004");	0x00010203	data.s
+swizzleAllUnused_001b0000	0x1b0000	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0000 asm("swizzleAllUnused_001b0000");	0x04040404	data.s
+swizzleXYZW_001b0004	0x1b0004	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b0004 asm("swizzleXYZW_001b0004");	0x00010203	data.s
 DAT_001b0008	0x1b0008	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0008 asm("DAT_001b0008");	0x00000000	data.s
 DAT_001b000c	0x1b000c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b000c asm("DAT_001b000c");	0x00000001	data.s
 DAT_001b0010	0x1b0010	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0010 asm("DAT_001b0010");	0x01010100	data.s
@@ -484,16 +484,16 @@ DAT_001b0028	0x1b0028	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b00
 DAT_001b002c	0x1b002c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b002c asm("DAT_001b002c");	0x01010001	data.s
 DAT_001b0030	0x1b0030	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0030 asm("DAT_001b0030");	0x01000101	data.s
 DAT_001b0034	0x1b0034	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0034 asm("DAT_001b0034");	0x00010101	data.s
-DAT_001b0038	0x1b0038	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0038 asm("DAT_001b0038");	0x04040404	data.s
-DAT_001b003c	0x1b003c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b003c asm("DAT_001b003c");	0x00010203	data.s
+swizzleAllUnused_001b0038	0x1b0038	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0038 asm("swizzleAllUnused_001b0038");	0x04040404	data.s
+swizzleXYZW_001b003c	0x1b003c	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b003c asm("swizzleXYZW_001b003c");	0x00010203	data.s
 DAT_001b0040	0x1b0040	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0040 asm("DAT_001b0040");	0x00000000	data.s
-DAT_001b0044	0x1b0044	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0044 asm("DAT_001b0044");	0x01010101	data.s
-DAT_001b0048	0x1b0048	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0048 asm("DAT_001b0048");	0x01010101	data.s
+swizzleYYYY_001b0044	0x1b0044	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0044 asm("swizzleYYYY_001b0044");	0x01010101	data.s
+swizzleYYYY_001b0048	0x1b0048	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0048 asm("swizzleYYYY_001b0048");	0x01010101	data.s
 DAT_001b004c	0x1b004c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b004c asm("DAT_001b004c");	0x00010203	data.s
-DAT_001b0050	0x1b0050	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0050 asm("DAT_001b0050");	0x04040404	data.s
-DAT_001b0054	0x1b0054	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0054 asm("DAT_001b0054");	0x01010100	data.s
-DAT_001b0058	0x1b0058	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0058 asm("DAT_001b0058");	0x00010101	data.s
-DAT_001b005c	0x1b005c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b005c asm("DAT_001b005c");	0x00000000	data.s
+swizzleAllUnused_001b0050	0x1b0050	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0050 asm("swizzleAllUnused_001b0050");	0x04040404	data.s
+swizzleYYYX_001b0054	0x1b0054	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001b0054 asm("swizzleYYYX_001b0054");	0x01010100	data.s
+swizzleXYYY_001b0058	0x1b0058	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001b0058 asm("swizzleXYYY_001b0058");	0x00010101	data.s
+swizzleXXXX_001b005c	0x1b005c	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001b005c asm("swizzleXXXX_001b005c");	0x00000000	data.s
 DAT_001b0060	0x1b0060	__TEXT,__const	-	-	extern unsigned char DAT_001b0060 asm("DAT_001b0060");	0x00000000	data.s
 DAT_001b0160	0x1b0160	__TEXT,__const	-	-	extern unsigned char DAT_001b0160 asm("DAT_001b0160");	0x01020003	data.s
 DAT_001b0170	0x1b0170	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0170 asm("DAT_001b0170");	0x00000000	data.s
@@ -504,16 +504,16 @@ DAT_001b0184	0x1b0184	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01
 DAT_001b0188	0x1b0188	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0188 asm("DAT_001b0188");	0x00000000	data.s
 DAT_001b018c	0x1b018c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b018c asm("DAT_001b018c");	0x00000000	data.s
 DAT_001b0190	0x1b0190	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0190 asm("DAT_001b0190");	0x00000000	data.s
-DAT_001b0194	0x1b0194	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0194 asm("DAT_001b0194");	0x01010101	data.s
-DAT_001b0198	0x1b0198	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0198 asm("DAT_001b0198");	0x01010101	data.s
+swizzleYYYY_001b0194	0x1b0194	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0194 asm("swizzleYYYY_001b0194");	0x01010101	data.s
+swizzleYYYY_001b0198	0x1b0198	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0198 asm("swizzleYYYY_001b0198");	0x01010101	data.s
 UNK_001b019c	0x1b019c	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b019c asm("UNK_001b019c");	0x00000000	data.s
-DAT_001b01a0	0x1b01a0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01a0 asm("DAT_001b01a0");	0x04040404	data.s
+swizzleAllUnused_001b01a0	0x1b01a0	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b01a0 asm("swizzleAllUnused_001b01a0");	0x04040404	data.s
 DAT_001b01a4	0x1b01a4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01a4 asm("DAT_001b01a4");	0x00010203	data.s
 DAT_001b01a8	0x1b01a8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01a8 asm("DAT_001b01a8");	0x00000000	data.s
 DAT_001b01ac	0x1b01ac	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01ac asm("DAT_001b01ac");	0x00010203	data.s
 DAT_001b01b0	0x1b01b0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01b0 asm("DAT_001b01b0");	0x00000000	data.s
 DAT_001b01b4	0x1b01b4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01b4 asm("DAT_001b01b4");	0x01010101	data.s
-DAT_001b01b8	0x1b01b8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01b8 asm("DAT_001b01b8");	0x04040404	data.s
+swizzleAllUnused_001b01b8	0x1b01b8	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b01b8 asm("swizzleAllUnused_001b01b8");	0x04040404	data.s
 DAT_001b01bc	0x1b01bc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01bc asm("DAT_001b01bc");	0x00010203	data.s
 DAT_001b01c0	0x1b01c0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01c0 asm("DAT_001b01c0");	0x00000001	data.s
 DAT_001b01c4	0x1b01c4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01c4 asm("DAT_001b01c4");	0x00000001	data.s
@@ -521,8 +521,8 @@ DAT_001b01c8	0x1b01c8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01
 DAT_001b01cc	0x1b01cc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01cc asm("DAT_001b01cc");	0x00000001	data.s
 DAT_001b01d0	0x1b01d0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01d0 asm("DAT_001b01d0");	0x01010101	data.s
 DAT_001b01d4	0x1b01d4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01d4 asm("DAT_001b01d4");	0x01010100	data.s
-DAT_001b01d8	0x1b01d8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01d8 asm("DAT_001b01d8");	0x00010203	data.s
-DAT_001b01dc	0x1b01dc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01dc asm("DAT_001b01dc");	0x04040404	data.s
+swizzleXYZW_001b01d8	0x1b01d8	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b01d8 asm("swizzleXYZW_001b01d8");	0x00010203	data.s
+swizzleAllUnused_001b01dc	0x1b01dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b01dc asm("swizzleAllUnused_001b01dc");	0x04040404	data.s
 DAT_001b01e0	0x1b01e0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01e0 asm("DAT_001b01e0");	0x00000000	data.s
 DAT_001b01e4	0x1b01e4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01e4 asm("DAT_001b01e4");	0x00000000	data.s
 DAT_001b01e8	0x1b01e8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01e8 asm("DAT_001b01e8");	0x00000000	data.s
@@ -535,12 +535,12 @@ DAT_001b0200	0x1b0200	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b02
 DAT_001b0204	0x1b0204	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0204 asm("DAT_001b0204");	0x3f800000	data.s
 UNK_001b0208	0x1b0208	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b0208 asm("UNK_001b0208");	0x00010203	data.s
 UNK_001b020c	0x1b020c	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b020c asm("UNK_001b020c");	0x03030303	data.s
-DAT_001b0210	0x1b0210	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0210 asm("DAT_001b0210");	0x01010100	data.s
+swizzleYYYX_001b0210	0x1b0210	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001b0210 asm("swizzleYYYX_001b0210");	0x01010100	data.s
 DAT_001b0214	0x1b0214	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0214 asm("DAT_001b0214");	0x01010001	data.s
 DAT_001b0218	0x1b0218	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0218 asm("DAT_001b0218");	0x01000101	data.s
 DAT_001b021c	0x1b021c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b021c asm("DAT_001b021c");	0x00010101	data.s
-DAT_001b0220	0x1b0220	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0220 asm("DAT_001b0220");	0x00010203	data.s
-DAT_001b0224	0x1b0224	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0224 asm("DAT_001b0224");	0x04040404	data.s
+swizzleXYZW_001b0220	0x1b0220	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b0220 asm("swizzleXYZW_001b0220");	0x00010203	data.s
+swizzleAllUnused_001b0224	0x1b0224	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0224 asm("swizzleAllUnused_001b0224");	0x04040404	data.s
 DAT_001b0228	0x1b0228	__TEXT,__const	undefined1	1	extern unsigned char DAT_001b0228 asm("DAT_001b0228");	0x00010203	data.s
 DAT_001b023c	0x1b023c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b023c asm("DAT_001b023c");	0x01010100	data.s
 DAT_001b0240	0x1b0240	__TEXT,__const	-	-	extern unsigned char DAT_001b0240 asm("DAT_001b0240");	0x00000000	data.s
@@ -549,8 +549,8 @@ DAT_001b02ec	0x1b02ec	__TEXT,__const	-	-	extern unsigned char DAT_001b02ec asm("
 DAT_001b19e0	0x1b19e0	__TEXT,__const	-	-	extern unsigned char DAT_001b19e0 asm("DAT_001b19e0");	0x03000004	data.s
 DAT_001b2994	0x1b2994	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2994 asm("DAT_001b2994");	0x00010200	data.s
 UNK_001b29e4	0x1b29e4	__TEXT,__const	-	-	extern unsigned char UNK_001b29e4 asm("UNK_001b29e4");	0x00010200	data.s
-DAT_001b2a64	0x1b2a64	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a64 asm("DAT_001b2a64");	0x00010203	data.s
-DAT_001b2a68	0x1b2a68	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a68 asm("DAT_001b2a68");	0x04040404	data.s
+swizzleXYZW_001b2a64	0x1b2a64	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b2a64 asm("swizzleXYZW_001b2a64");	0x00010203	data.s
+swizzleAllUnused_001b2a68	0x1b2a68	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b2a68 asm("swizzleAllUnused_001b2a68");	0x04040404	data.s
 DAT_001b2a6c	0x1b2a6c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a6c asm("DAT_001b2a6c");	0x00010101	data.s
 DAT_001b2a70	0x1b2a70	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a70 asm("DAT_001b2a70");	0x01010100	data.s
 DAT_001b2a74	0x1b2a74	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a74 asm("DAT_001b2a74");	0x00000000	data.s
@@ -567,11 +567,11 @@ DAT_001b2aa4	0x1b2aa4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a
 DAT_001b2aa8	0x1b2aa8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2aa8 asm("DAT_001b2aa8");	0x04040404	data.s
 UNK_001b2aac	0x1b2aac	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b2aac asm("UNK_001b2aac");	0x04040404	data.s
 DAT_001b2ab0	0x1b2ab0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2ab0 asm("DAT_001b2ab0");	0x00010303	data.s
-DAT_001b2ab4	0x1b2ab4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2ab4 asm("DAT_001b2ab4");	0x02020202	data.s
-DAT_001b2ab8	0x1b2ab8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2ab8 asm("DAT_001b2ab8");	0x01010101	data.s
-DAT_001b2abc	0x1b2abc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2abc asm("DAT_001b2abc");	0x00000000	data.s
-DAT_001b2ac0	0x1b2ac0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2ac0 asm("DAT_001b2ac0");	0x00010203	data.s
-DAT_001b2ac4	0x1b2ac4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2ac4 asm("DAT_001b2ac4");	0x03030303	data.s
+swizzleZZZZ_001b2ab4	0x1b2ab4	__TEXT,__const	undefined4	4	extern unsigned int swizzleZZZZ_001b2ab4 asm("swizzleZZZZ_001b2ab4");	0x02020202	data.s
+swizzleYYYY_001b2ab8	0x1b2ab8	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b2ab8 asm("swizzleYYYY_001b2ab8");	0x01010101	data.s
+swizzleXXXX_001b2abc	0x1b2abc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001b2abc asm("swizzleXXXX_001b2abc");	0x00000000	data.s
+swizzleXYZW_001b2ac0	0x1b2ac0	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b2ac0 asm("swizzleXYZW_001b2ac0");	0x00010203	data.s
+swizzleWWWW_001b2ac4	0x1b2ac4	__TEXT,__const	undefined4	4	extern unsigned int swizzleWWWW_001b2ac4 asm("swizzleWWWW_001b2ac4");	0x03030303	data.s
 DAT_001b2acc	0x1b2acc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2acc asm("DAT_001b2acc");	0x01010100	data.s
 DAT_001b2ad0	0x1b2ad0	__TEXT,__const	-	-	extern unsigned char DAT_001b2ad0 asm("DAT_001b2ad0");	0x00000000	data.s
 DAT_001b2be8	0x1b2be8	__TEXT,__const	-	-	extern unsigned char DAT_001b2be8 asm("DAT_001b2be8");	0x00000000	data.s
@@ -584,8 +584,8 @@ DAT_001b2d2c	0x1b2d2c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d
 DAT_001b2d30	0x1b2d30	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d30 asm("DAT_001b2d30");	0x02020202	data.s
 DAT_001b2d34	0x1b2d34	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d34 asm("DAT_001b2d34");	0x01010101	data.s
 DAT_001b2d38	0x1b2d38	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d38 asm("DAT_001b2d38");	0x00000000	data.s
-DAT_001b2d4c	0x1b2d4c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d4c asm("DAT_001b2d4c");	0x03030303	data.s
-DAT_001b2d50	0x1b2d50	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d50 asm("DAT_001b2d50");	0x01010100	data.s
+swizzleWWWW_001b2d4c	0x1b2d4c	__TEXT,__const	undefined4	4	extern unsigned int swizzleWWWW_001b2d4c asm("swizzleWWWW_001b2d4c");	0x03030303	data.s
+swizzleYYYX_001b2d50	0x1b2d50	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001b2d50 asm("swizzleYYYX_001b2d50");	0x01010100	data.s
 DAT_001b2d54	0x1b2d54	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d54 asm("DAT_001b2d54");	0x01010101	data.s
 DAT_001b2d58	0x1b2d58	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d58 asm("DAT_001b2d58");	0x03030303	data.s
 DAT_001b2d5c	0x1b2d5c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d5c asm("DAT_001b2d5c");	0x02020202	data.s
@@ -1404,7 +1404,7 @@ PTR_FUN_001ea268	0x1ea268	__DATA,__const	undefined *	4	extern unsigned char PTR_
 PTR_FUN_001ea310	0x1ea310	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea310[] asm("PTR_FUN_001ea310");	pointer -> IRInst__dtor_1cfe30	data.s
 PTR_FUN_001ea3b8	0x1ea3b8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea3b8[] asm("PTR_FUN_001ea3b8");	pointer -> IRInst__dtor_1cfeac	data.s
 PTR_FUN_001ea460	0x1ea460	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea460[] asm("PTR_FUN_001ea460");	pointer -> IRInst__dtor_1cf63c	data.s
-DAT_001ea4fc	0x1ea4fc	__DATA,__const	-	-	extern unsigned char DAT_001ea4fc asm("DAT_001ea4fc");	0x00000000	data.s
+irInstFactoryTable	0x1ea4fc	__DATA,__const	-	-	extern unsigned char irInstFactoryTable asm("irInstFactoryTable");	0x00000000	data.s
 DAT_001ea500	0x1ea500	__DATA,__const	undefined4	4	extern unsigned int DAT_001ea500 asm("DAT_001ea500");	0x00000000	data.s
 PTR_FUN_001ea5b0	0x1ea5b0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea5b0[] asm("PTR_FUN_001ea5b0");	pointer -> HwLimits__dtor	data.s
 PTR_FUN_001ea748	0x1ea748	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea748[] asm("PTR_FUN_001ea748");	pointer -> ExportValue__dtor	data.s
@@ -1415,8 +1415,8 @@ PTR_FUN_001ea828	0x1ea828	__DATA,__const	undefined *	4	extern unsigned char PTR_
 PTR_FUN_001ea860	0x1ea860	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea860[] asm("PTR_FUN_001ea860");	pointer -> VertexRegister__dtor	data.s
 PTR_FUN_001ea898	0x1ea898	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea898[] asm("PTR_FUN_001ea898");	pointer -> FixedValue__dtor	data.s
 PTR_FUN_001ea8d0	0x1ea8d0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea8d0[] asm("PTR_FUN_001ea8d0");	pointer -> ImmedConstBuffer__dtor	data.s
-DAT_001ea904	0x1ea904	__DATA,__const	-	-	extern unsigned char DAT_001ea904 asm("DAT_001ea904");	0x00000201	data.s
-DAT_001ea908	0x1ea908	__DATA,__const	-	-	extern unsigned char DAT_001ea908[] asm("DAT_001ea908");	0x00000000	data.s
+regKindInfo_flagsWord	0x1ea904	__DATA,__const	-	-	extern unsigned char regKindInfo_flagsWord asm("regKindInfo_flagsWord");	0x00000201	data.s
+regKindInfo_byte4	0x1ea908	__DATA,__const	-	-	extern unsigned char regKindInfo_byte4[] asm("regKindInfo_byte4");	0x00000000	data.s
 PTR_FUN_001ead68	0x1ead68	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead68[] asm("PTR_FUN_001ead68");	pointer -> KhanChip__dtor	data.s
 PTR_FUN_001ead88	0x1ead88	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead88[] asm("PTR_FUN_001ead88");	pointer -> KhanPs__dtor	data.s
 PTR_FUN_001eaf20	0x1eaf20	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eaf20[] asm("PTR_FUN_001eaf20");	pointer -> KhanVs__dtor_1d84e0	data.s

@@ -726,16 +726,16 @@ int laneBytes__clearSetLanes(outMask, laneBytes)
 int SelectWord__splatComponent(selectWord)
   int selectWord;
 {
-  if (selectWord == DAT_001aa85c) {
+  if (selectWord == swizzleXYYY_001aa85c) {
     return 0;
   }
-  if (selectWord == DAT_001aa858) {
+  if (selectWord == swizzleYXYY_001aa858) {
     return 1;
   }
-  if (selectWord == DAT_001aa854) {
+  if (selectWord == swizzleYYXY_001aa854) {
     return 2;
   }
-  if (selectWord == DAT_001aa850) {
+  if (selectWord == swizzleYYYX_001aa850) {
     return 3;
   }
   return 0xffffffff;
@@ -745,8 +745,8 @@ int SelectWord__splatComponent(selectWord)
 int SelectWord__isSingleComponentConstant(selectWord)
   int selectWord;
 {
-  if ((((selectWord != DAT_001aa85c) && (selectWord != DAT_001aa858)) && (selectWord != DAT_001aa854)) &&
-     (selectWord != DAT_001aa850)) {
+  if ((((selectWord != swizzleXYYY_001aa85c) && (selectWord != swizzleYXYY_001aa858)) && (selectWord != swizzleYYXY_001aa854)) &&
+     (selectWord != swizzleYYYX_001aa850)) {
     return 0;
   }
   return 1;

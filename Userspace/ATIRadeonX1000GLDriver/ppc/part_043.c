@@ -2842,10 +2842,10 @@ int Inst__collapseAddIntoMadMulAddend(inst, program)
       operandRecord = IRInst__getOperandRecord(inst,otherOperandIndex);
       instOtherRecordPtr = &instOtherRecord;
       IROperand__copyFrom(instOtherRecordPtr,operandRecord);
-      outerSrc3NewSelect = DAT_001b0050;
-      newSelect3 = DAT_001b0050;
-      newSelect1 = DAT_001b0050;
-      newSelect2 = DAT_001b0050;
+      outerSrc3NewSelect = swizzleAllUnused_001b0050;
+      newSelect3 = swizzleAllUnused_001b0050;
+      newSelect1 = swizzleAllUnused_001b0050;
+      newSelect2 = swizzleAllUnused_001b0050;
       operandRecord2 = IRInst__getOperandRecord(mulInst,1);
       mulSrc1Select = *(undefined4 *)(operandRecord2 + 0x10);
       operandRecord2 = IRInst__getOperandRecord(mulInst,2);
@@ -3452,7 +3452,7 @@ int Inst__combineOperandSelects(outSelect, inst, operandIndex, inst2, operandInd
   
   loopIndex = 0;
   loopIndex2 = 0;
-  *outSelect = DAT_001b0050;
+  *outSelect = swizzleAllUnused_001b0050;
   do {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
@@ -9320,10 +9320,10 @@ loopSetResult:
     result = 1;
   }
   else {
-    if (operandSelectB == DAT_001b0054) {
+    if (operandSelectB == swizzleYYYX_001b0054) {
       if (operandSelectB == operandSelect) goto loopSetResult;
     }
-    else if (DAT_001b0054 != operandSelect) goto loopSetResult;
+    else if (swizzleYYYX_001b0054 != operandSelect) goto loopSetResult;
     result = 0;
   }
   return result;
@@ -9729,7 +9729,7 @@ setOperandIdxOrResult:
             if (operandIdxOrResult != 0) {
               splatComponentResult = SelectWord__splatComponent(operandSelectF);
               operandIdxOrResult = 0;
-              counterSaveBuf = DAT_001b0050;
+              counterSaveBuf = swizzleAllUnused_001b0050;
               do {
                 operandRecord2 = IRInst__getOperandRecord(inst2,0);
                 if (*(char *)(operandIdxOrResult + operandRecord2 + 0x10) != '\x01') {
@@ -9761,7 +9761,7 @@ setOperandIdxOrResult:
         if (operandIdxOrResult != 0) {
           splatComponentResult = SelectWord__splatComponent(operandSelectF);
           operandIdxOrResult = 0;
-          counterSaveBuf = DAT_001b0050;
+          counterSaveBuf = swizzleAllUnused_001b0050;
           do {
             operandRecord2 = IRInst__getOperandRecord(inst,0);
             if (*(char *)(operandIdxOrResult + operandRecord2 + 0x10) != '\x01') {
@@ -9964,7 +9964,7 @@ setVcall48Or4cResult:
       loopIndexB = loopIndexB + 1;
     } while (moreComponents);
     loopIndex = 0;
-    laneMapBytes[0] = DAT_001b005c;
+    laneMapBytes[0] = swizzleXXXX_001b005c;
     do {
       operandRecord4 = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex + operandRecord4 + 0x10) == '\x01') {
@@ -9979,7 +9979,7 @@ setVcall48Or4cResult:
     laneMapWord = laneMapBytes[0];
     *(undefined4 *)(operandRecord2 + 0x10) = selectBytesValue;
     operandRecord2 = IRInst__getOperandRecord(inst,operandIndex);
-    producerSelectConst = DAT_001b0058;
+    producerSelectConst = swizzleXYYY_001b0058;
     *(undefined4 *)(operandRecord2 + 0x10) = laneMapWord;
     *(undefined4 *)(sourceDef + 0x9c) = producerSelectConst;
     setOperandSourceIfLegalResultB = IRInst__setOperandSourceIfLegal(sourceDef,operandIndex2,operandVReg2,1,negateFlag2,*(undefined4 *)(pass + 8));
@@ -9988,8 +9988,8 @@ setVcall48Or4cResult:
     operandSelectD = *(undefined4 *)(operandRecord4 + 0x10);
     callResult2 = SelectWord__firstUsedComponent(operandSelectB);
     callResult3 = SelectWord__firstUsedComponent(operandSelectD);
-    selectLowBitsA = DAT_001b0050 & 0xffffff;
-    selectLowBitsB = DAT_001b0050 & 0xffffff;
+    selectLowBitsA = swizzleAllUnused_001b0050 & 0xffffff;
+    selectLowBitsB = swizzleAllUnused_001b0050 & 0xffffff;
     operandRecord = IRInst__getOperandRecord(sourceDef,operandIndex2);
     *(uint *)(operandRecord + 0x10) = callResult2 << 0x18 | selectLowBitsA;
     operandRecord4 = IRInst__getOperandRecord(sourceDef,~operandIndex2 & 3);

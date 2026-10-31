@@ -3232,7 +3232,7 @@ setVecArena:
                           operandLimit = (**(code **)(*inst + 0x14))(inst);
                           if (operandIndex <= operandLimit) {
                             IRInst__computeSourceLaneMask(&operandSelectOutA,inst,operandIndex,program,destSelectWord);
-                            identitySelectB = DAT_001b0000;
+                            identitySelectB = swizzleAllUnused_001b0000;
                             vec2Capacity = operandSelectOutA;
                             savedScratchWord = vec2Capacity;
                             (*(unsigned char *)((unsigned char *)&(vec2Capacity) + 3)) = (char)operandSelectOutA;
@@ -3246,7 +3246,7 @@ setVecArena:
                             vec2Capacity = savedScratchWord;
                             if (((lowByteIsZero && byte2IsZero) && byte1IsZero) && highByteIsZero) {
                               if (operandIndex == 0) {
-                                inst[0x27] = DAT_001b0000;
+                                inst[0x27] = swizzleAllUnused_001b0000;
                               }
                               else {
                                 operandRecord = IRInst__getOperandRecord(inst,operandIndex);
@@ -3304,7 +3304,7 @@ setVecArena:
                               SelectWord__maskUnused(&maskedSelectOut,*(undefined4 *)(operandRecord5 + 0x10),operandSelectWord);
                               maskedSelectWord = maskedSelectOut;
                               operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-                              if (*(int *)(operandRecord + 0x10) != DAT_001b0000) {
+                              if (*(int *)(operandRecord + 0x10) != swizzleAllUnused_001b0000) {
                                 userList = (uint *)sourceInst[4];
                                 userCount = userList[1];
                                 if (userCount < *userList) {
@@ -3335,7 +3335,7 @@ setVecArena:
                         }
                         else {
                           isProjectionOfClass26or3a = IRInst__isProjectionOfClass26or3a(inst);
-                          selectWordConst = DAT_001b0004;
+                          selectWordConst = swizzleXYZW_001b0004;
                           if (isProjectionOfClass26or3a != 0) {
                             selectWordConst = DAT_001b001c;
                           }
@@ -3450,9 +3450,9 @@ code_r0x0013e80c:
                     }
                     else {
                       IRInst__setExtraOperandSource(inst,matchedDef,0,*(undefined4 *)(program + PROG_compiler));
-                      identitySelect = DAT_001b0000;
+                      identitySelect = swizzleAllUnused_001b0000;
                       if (inst[0x21] == 0) {
-                        inst[0x27] = DAT_001b0000;
+                        inst[0x27] = swizzleAllUnused_001b0000;
                       }
                       else {
                         lastOperandRecordB = IRInst__getOperandRecord(inst,inst[0x21]);
@@ -3496,9 +3496,9 @@ code_r0x0013e80c:
                     IRInst__setOperandSource(inst,1,cloneResult,0,*(undefined4 *)(program + PROG_compiler));
                     lastOperandSource = IRInst__getOperandSource(cloneResult,*(undefined4 *)(cloneResult + 0x84));
                     IRInst__setExtraOperandSource(inst,lastOperandSource,0,*(undefined4 *)(program + PROG_compiler));
-                    identitySelectD = DAT_001b0000;
+                    identitySelectD = swizzleAllUnused_001b0000;
                     if (inst[0x21] == 0) {
-                      inst[0x27] = DAT_001b0000;
+                      inst[0x27] = swizzleAllUnused_001b0000;
                     }
                     else {
                       lastOperandRecordB = IRInst__getOperandRecord(inst,inst[0x21]);
@@ -3745,11 +3745,11 @@ code_r0x0013e0ac:
           IRInst__computeSourceReadMask(&operandReadMaskOutA,workInst,operandIndexB,workInst[3],program);
           vec2Capacity = operandReadMaskOutA;
         }
-        identitySelectC = DAT_001b0000;
+        identitySelectC = swizzleAllUnused_001b0000;
         if ((((char)vec2Capacity == '\0' && (*(unsigned char *)((unsigned char *)&(vec2Capacity) + 2)) == '\0') && (*(unsigned char *)((unsigned char *)&(vec2Capacity) + 1)) == '\0') &&
             (*(unsigned char *)((unsigned char *)&(vec2Capacity) + 0)) == '\0') {
           if (operandIndexB == 0) {
-            workInst[0x27] = DAT_001b0000;
+            workInst[0x27] = swizzleAllUnused_001b0000;
           }
           else {
             selectRecord = IRInst__getOperandRecord(workInst,operandIndexB);
@@ -4133,7 +4133,7 @@ setLoopIndex2:
               } while ((int)loopIndex < (int)userCount);
             }
             IRInst__setOperandSource(inst,inst[0x21],0,1,arena);
-            extraSelectChanged = extraSelectWord[0] != DAT_001b0000;
+            extraSelectChanged = extraSelectWord[0] != swizzleAllUnused_001b0000;
             inst[0x21] = inst[0x21] + -1;
             inst[5] = inst[5] & 0xfffffdff;
             if (extraSelectChanged) {
@@ -5072,7 +5072,7 @@ int PostPack__buildLaneMap(pass, inst, inst2, laneMap)
   operandRecord = IRInst__getOperandRecord(inst2,0);
   operandSelectB = *(undefined4 *)(operandRecord + 0x10);
   if (sameInst) {
-    newDestSelect[0] = DAT_001b0044;
+    newDestSelect[0] = swizzleYYYY_001b0044;
   }
   laneMapBase = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   countdown = 4;
@@ -5095,7 +5095,7 @@ int PostPack__buildLaneMap(pass, inst, inst2, laneMap)
     operandRecord = IRInst__getOperandRecord(inst2,lastOperandIndex);
     operandSelect = *(undefined4 *)(operandRecord + 0x10);
     if (sameInst) {
-      operandSelectScratch = DAT_001b0038;
+      operandSelectScratch = swizzleAllUnused_001b0038;
     }
     loopIndex = 0;
     countdownB = 4;
@@ -5121,7 +5121,7 @@ int PostPack__buildLaneMap(pass, inst, inst2, laneMap)
       operandRecordB = IRInst__getOperandRecord(inst2,operandIdx);
       operandSelectScratch = *(undefined4 *)(operandRecordB + 0x10);
       if (sameInst) {
-        instOperandSelect = DAT_001b0038;
+        instOperandSelect = swizzleAllUnused_001b0038;
       }
       loopIndexB = 0;
       countdownC = 4;
@@ -6535,9 +6535,9 @@ int PostPack__assignCompactLanes(packCtx, inst, inst2, laneMapA, laneMapB)
   ((int (*)())PostPack__getNeededLaneMask)(&neededMaskBOut,packCtx,inst2);
   neededMaskB = neededMaskBOut;
   ((int (*)())PostPack__getReadOnlyLaneMask)(usedLanesBOut,packCtx,inst2);
-  identityLaneMap = DAT_001b003c;
+  identityLaneMap = swizzleXYZW_001b003c;
   extraSrcOfInst = 0;
-  *(undefined4 *)laneMapA = DAT_001b003c;
+  *(undefined4 *)laneMapA = swizzleXYZW_001b003c;
   *(undefined4 *)laneMapB = identityLaneMap;
   laneOccupied = DAT_001b0040;
   usedLanesB = usedLanesBOut[0];
@@ -6937,7 +6937,7 @@ int PostPack__remapRootUsers_0014375c(pass, rootInst, rootRemap)
         currentRemap = *remapTopSlot;
         Vector__removeAt(&vec2Capacity,remapTopIndex);
         (*(int *)((unsigned char *)ghidra_home + 8)) = currentRemap;
-      } while (currentRemap == DAT_001b003c);
+      } while (currentRemap == swizzleXYZW_001b003c);
       userVec = *(uint **)(currentInst + 0x10);
       if (userVec[1] != 0) {
         userIndex = 0;
@@ -7089,7 +7089,7 @@ int PostPack__remapRootUsers_0014375c(pass, rootInst, rootRemap)
               userExtraSource = IRInst__getOperandSource(user,*(undefined4 *)(user + 0x84));
             }
             if (userExtraSource == currentInst) {
-              laneSelectBytes = DAT_001b003c;
+              laneSelectBytes = swizzleXYZW_001b003c;
               ((int (*)())PostPack__getReadOnlyLaneMask)(userWriteMaskOut,pass,user);
               loopIndexB = 0;
               remapBytePtr = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
@@ -7567,17 +7567,17 @@ setInsertBefore:
     }
     insertBefore = Block__getFirstRealInst(insertBlock);
   }
-  defaultSelectWord = DAT_001b0044;
+  defaultSelectWord = swizzleYYYY_001b0044;
   blockContext = insertBlock[0x2b];
   compilerForBlock = *(undefined4 *)(blockContext + 8);
   if (distinctSourceCount == 2) {
     loopIndex5 = 0;
-    selectScratch5[0] = DAT_001b0038;
-    selectScratch4 = DAT_001b0038;
+    selectScratch5[0] = swizzleAllUnused_001b0038;
+    selectScratch4 = swizzleAllUnused_001b0038;
     constTableBaseB = &DAT_001b40f0;
     countdown2 = 4;
     constTableBaseA = &DAT_001b40f0;
-    selectScratch1 = DAT_001b0044;
+    selectScratch1 = swizzleYYYY_001b0044;
     scratchBase = &selectScratch0;
     laneSlotCursor = laneGroup;
     do {
@@ -7734,9 +7734,9 @@ setLoopIndex3:
     loopIndex2 = 0;
     constTableBaseA = &DAT_001b40f0;
     countdown8 = 4;
-    selectScratch5[0] = DAT_001b0038;
-    selectScratch3 = DAT_001b0044;
-    selectScratch2 = DAT_001b0038;
+    selectScratch5[0] = swizzleAllUnused_001b0038;
+    selectScratch3 = swizzleYYYY_001b0044;
+    selectScratch2 = swizzleAllUnused_001b0038;
     laneSlotCursor = laneGroup;
     do {
       if (firstSource == laneSlotCursor[4]) {
@@ -7982,7 +7982,7 @@ setSelectScratch1:
       IRInst__setExtraOperandSource(newCombinedInst,fourthSource,1,compilerForBlock);
       extraSelectWord = selectScratch1;
       operandRecord5 = IRInst__getOperandRecord(newCombinedInst,4);
-      selectWordToStore = DAT_001b0048;
+      selectWordToStore = swizzleYYYY_001b0048;
       *(undefined4 *)(operandRecord5 + 0x10) = extraSelectWord;
       *(undefined4 *)(newCombinedInst + 0xc) = selectWordToStore;
     }

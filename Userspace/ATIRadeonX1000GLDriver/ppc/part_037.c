@@ -3460,7 +3460,7 @@ int Interpolator__vslot10(this, laneMask, program)
     specialRegister = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
     IRInst__setOperandRef(exportInst,0,specialRegister);
     IRInst__setOperandRef(exportInst,2,specialRegister);
-    defaultSwizzle = DAT_001afeec;
+    defaultSwizzle = swizzleXXXX_001afeec;
     exportOperandRecord = IRInst__getOperandRecord(exportInst,2);
     *(undefined4 *)(exportOperandRecord + 0x10) = defaultSwizzle;
     ((int (*)())VReg__appendUser)(specialRegister,exportInst);
@@ -4139,7 +4139,7 @@ int ExportValue__ctor_124e68(this, indexValue, interpolatorKind, baseCtorArg4, c
   this[0xd] = vregList;
   IRInst__setOperandRef(exportInst,1,vregList);
   ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
-  colorConstantWord = DAT_001afeec;
+  colorConstantWord = swizzleXXXX_001afeec;
   if (interpolatorKind == 8) {
     operandRecord = IRInst__getOperandRecord(exportInst,1);
     *(undefined4 *)(operandRecord + 0x10) = colorConstantWord;
@@ -4219,7 +4219,7 @@ int ExportValue__ctor_1250dc(this, indexValue, interpolatorKind, baseCtorArg4, c
   this[0xd] = vregList;
   IRInst__setOperandRef(exportInst,1,vregList);
   ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
-  colorConstantWord = DAT_001afeec;
+  colorConstantWord = swizzleXXXX_001afeec;
   if (interpolatorKind == 8) {
     operandRecord = IRInst__getOperandRecord(exportInst,1);
     *(undefined4 *)(operandRecord + 0x10) = colorConstantWord;
@@ -4379,7 +4379,7 @@ callIRInst_setOperandRef:
   laneKind3 = Program__interpSlotOfIlType(program,interpolatorKind);
   laneKind3 = Program__laneKindOfInterpSlot(program,laneKind3);
   IRLoadInterp__setLaneKindAndIndex(exportInst,3,laneKind3,indexValue);
-  colorConstantWord = DAT_001afeec;
+  colorConstantWord = swizzleXXXX_001afeec;
   if (interpolatorKind == 0x18) {
     operandRecord = IRInst__getOperandRecord(exportInst,1);
     *(undefined4 *)(operandRecord + 0x10) = colorConstantWord;
@@ -4526,7 +4526,7 @@ callIRInst_setOperandRef:
   laneKind3 = Program__interpSlotOfIlType(program,interpolatorKind);
   laneKind3 = Program__laneKindOfInterpSlot(program,laneKind3);
   IRLoadInterp__setLaneKindAndIndex(exportInst,3,laneKind3,indexValue);
-  colorConstantWord = DAT_001afeec;
+  colorConstantWord = swizzleXXXX_001afeec;
   if (interpolatorKind == 0x18) {
     operandRecord = IRInst__getOperandRecord(exportInst,1);
     *(undefined4 *)(operandRecord + 0x10) = colorConstantWord;

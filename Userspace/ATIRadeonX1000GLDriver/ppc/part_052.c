@@ -3307,12 +3307,12 @@ int R520VMachineAssembler__vslot37_closeConditional(this, node, extra1, compiler
       if (**(int **)(compiler + COMP_currentProgram) == 0) {
         newInst = (int *)IRInst__create(0x57,compiler);
         zeroInst = ((int (*)())R520VMachineAssembler__getOrCreateConstantZeroInst)(this);
-        callResult = DAT_001b2d50;
+        callResult = swizzleYYYX_001b2d50;
         newInst[0x25] = *(int *)(zeroInst + 0x94);
         newInst[0x27] = callResult;
         newInst[0x26] = 0;
         IRInst__setOperandSource(newInst,1,zeroInst,0,compiler);
-        sourceSelect = DAT_001b2d4c;
+        sourceSelect = swizzleWWWW_001b2d4c;
         callResult = IRInst__getOperandRecord(newInst,1);
         *(undefined4 *)(callResult + 0x10) = sourceSelect;
         (**(code **)(*newInst + 0x84))(newInst,0);
@@ -3366,7 +3366,7 @@ int R520VMachineAssembler__vslot32_assembleWithPredicateClear(this, node, block,
     zeroInst = ((int (*)())R520VMachineAssembler__getOrCreateConstantZeroInst)(this);
     zeroRegister = *(int *)(zeroInst + 0x94);
     newInst = (int *)IRInst__create(0x59,compiler);
-    destSelect = DAT_001b2d50;
+    destSelect = swizzleYYYX_001b2d50;
     newInst[0x25] = zeroRegister;
     newInst[0x26] = 0;
     newInst[0x27] = destSelect;

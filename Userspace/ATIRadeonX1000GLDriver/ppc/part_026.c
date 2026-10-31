@@ -425,7 +425,7 @@ int RegisterMap__findConstVector(registerMap, values, selectBytes, unusedArg)
       canEncode = (**(code **)(**(int **)(*registerMap + 0x30c) + 0x100))
                         (*(int **)(*registerMap + 0x30c),selectBytes);
       if (canEncode != 0) {
-        *(undefined4 *)(candidateInst + 0x9c) = DAT_001aa860;
+        *(undefined4 *)(candidateInst + 0x9c) = swizzleXXXX_001aa860;
         return candidateInst;
       }
 setLoopIndex:
@@ -745,7 +745,7 @@ int RegisterMap__findConstVectorExact(registerMap, values, selectBytes, unusedAr
         loopCounter = loopCounter + 4;
         loopCounterB = loopCounterB + -1;
         if (loopCounterB == 0) {
-          *(undefined4 *)(candidateInst + 0x9c) = DAT_001aa860;
+          *(undefined4 *)(candidateInst + 0x9c) = swizzleXXXX_001aa860;
           return candidateInst;
         }
       }
@@ -1412,7 +1412,7 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
     operandPtrTable[9] = (int *)constOperand2Value;
     operandPtrTable[10] = (int *)constOperand3Value;
     operandPtrTable[7] = (int *)constOperand0Value;
-    existingConstInst = ((int (*)())Program__findOrCreateConstInst)(program,operandPtrTable + 7,DAT_001aa868);
+    existingConstInst = ((int (*)())Program__findOrCreateConstInst)(program,operandPtrTable + 7,swizzleXYZW_001aa868);
     if (existingConstInst != 0) {
       if ((*(uint *)(program + 0x30) & 8) == 0) {
         IRInst__setOperandRef(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),*(undefined4 *)(existingConstInst + 0x8c));
@@ -1422,7 +1422,7 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
       }
       existingInstRecord = IRInst__getOperandRecord(existingConstInst,0);
       existingSelect = *(int *)(existingInstRecord + 0x10);
-      if (existingSelect != DAT_001aa860) {
+      if (existingSelect != swizzleXXXX_001aa860) {
         loopCounterB = 0;
         do {
           operandRecord = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
@@ -1442,7 +1442,7 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
     }
   }
   candidateOperand = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
-  laneUniqueIndex = DAT_001aa868;
+  laneUniqueIndex = swizzleXYZW_001aa868;
   operandPtrTable[0] = &constOperand1Kind;
   operandCursor = &local_274;
   laneIndex = 0;
@@ -1468,7 +1468,7 @@ loopSetLanesLeft:
       operandCursor = operandCursor + 1;
       lanesLeft = lanesLeft + -1;
       if (lanesLeft == 0) {
-        sortOrder = DAT_001aa868;
+        sortOrder = swizzleXYZW_001aa868;
         if (0 < uniqueCount) {
           do {
             compareCount = sortPassIndex + 1;
@@ -3710,8 +3710,8 @@ checkOperandSlotInfo:
     return splitMov;
   }
   operandRecord4 = IRInst__getOperandRecord(inst,0);
-  fullSelectWord = DAT_001aa9dc;
-  if (*(int *)(operandRecord4 + 0x10) == DAT_001aa9dc) {
+  fullSelectWord = swizzleXXXX_001aa9dc;
+  if (*(int *)(operandRecord4 + 0x10) == swizzleXXXX_001aa9dc) {
     return splitMov;
   }
   newInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
@@ -3764,8 +3764,8 @@ int Program__createIfBlock(program, inst, blockKey, elseTarget, vector, scopeSta
   ifHeader = allocation + 1;
   IfHeader__ctor_ea6d0(ifHeader,inst,elseTarget,0,*(undefined4 *)(program + 8));
   Block__setField0xb8AndChildren(ifHeader,blockKey);
-  broadcastSelectWord[0] = DAT_001aa9a8;
-  ((int (*)())Template__bindOperand)(program,5,1,sourceArg,inst,1,DAT_001aa9dc,broadcastSelectWord,scopeStack,1,ifHeader);
+  broadcastSelectWord[0] = swizzleXYZW_001aa9a8;
+  ((int (*)())Template__bindOperand)(program,5,1,sourceArg,inst,1,swizzleXXXX_001aa9dc,broadcastSelectWord,scopeStack,1,ifHeader);
   operandRecord = IRInst__getOperandRecord(inst,1);
   loopCounter = 0;
   loopCounterB = 4;

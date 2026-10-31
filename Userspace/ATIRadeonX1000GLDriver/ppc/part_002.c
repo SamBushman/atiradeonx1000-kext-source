@@ -1398,7 +1398,7 @@ double powerOfTenDouble(int exponent,undefined4 unusedArg2,undefined4 exponentPt
         blocks = blocks + -1;
       } while (blocks != 0);
     }
-    return result * *(double *)(&DAT_001aa3a8 + exponent * 8);
+    return result * *(double *)(&powerOfTenDoubleTable + exponent * 8);
   }
   if (-1 < exponent) {
     return DOUBLE_001aa200;
@@ -1468,7 +1468,7 @@ char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char 
     runStart = outBuffer + 1;
     *outBuffer = '-';
   }
-  pow10Table = &DAT_001abfb4;
+  pow10Table = &textPrintDoubleShortest_pow10Table;
   scaledValue = value;
   if (value <= DOUBLE_001aa228) {
     decimalExponent[0] = 0;

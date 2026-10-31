@@ -2087,9 +2087,9 @@ int ValueKey__setLiteralVec4Operand(operandIndex, vec4Constant, inst, compiler)
   int vectorCapacity;
   undefined4 *newValueKey;
   
-  dummySelectWord = DAT_001b01d8;
+  dummySelectWord = swizzleXYZW_001b01d8;
   if (operandIndex == 0) {
-    *(undefined4 *)(inst + 0x9c) = DAT_001b01d8;
+    *(undefined4 *)(inst + 0x9c) = swizzleXYZW_001b01d8;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);

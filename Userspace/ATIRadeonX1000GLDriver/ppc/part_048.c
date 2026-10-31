@@ -2062,7 +2062,7 @@ int ValueKey__splitMadIntoMulAdd(ctx)
   *(int *)(member0xb0 + 0x9c) = destSelectWord;
   VReg__appendUser(operandRef5,member0xb0);
   loopIndex = 0;
-  tmpSelect[0] = DAT_001b01dc;
+  tmpSelect[0] = swizzleAllUnused_001b01dc;
   loopRemaining = 4;
   do {
     if (*(char *)((int)tmpSelect + loopIndex + -4) == '\0') {
@@ -2323,7 +2323,7 @@ int ValueKey__foldDotOfSplatsIntoAdd(ctx)
   *(undefined4 *)(ctx + 0x218) = operandValueNumber;
   *(undefined4 *)(ctx + 0x214) = operandValueNumber;
   selectTable = PTR_DAT_001e8b8c;
-  selectConstA = DAT_001b01d8;
+  selectConstA = swizzleXYZW_001b01d8;
   if (origOpcode == 0x1c) {
     selectTemp = *(undefined4 *)(PTR_DAT_001e8b8c + (operandSelect >> 0x16 & 0x3fc));
     *(uint *)(rebuiltInst + 0x9c) = DAT_001b01d0 & 0xffffff;
@@ -2344,7 +2344,7 @@ int ValueKey__foldDotOfSplatsIntoAdd(ctx)
   else if (origOpcode == 0x1d) {
     *(uint *)(rebuiltInst + 0x9c) = DAT_001b01d0 & 0xffff;
     operandRecord = IRInst__getOperandRecord(rebuiltInst,1);
-    selectConstA2 = DAT_001b01d8;
+    selectConstA2 = swizzleXYZW_001b01d8;
     *(uint *)(operandRecord + 0x10) = operandSelect & 0xff0000 | operandSelect & 0xff000000 | selectConstA & 0xffff;
     operandRecord = IRInst__getOperandRecord(rebuiltInst,2);
     *(uint *)(operandRecord + 0x10) = (operandSelect & 0xff) << 0x10 | (operandSelect & 0xff00) << 0x10 | selectConstA2 & 0xffff;
@@ -4511,7 +4511,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
     indexPlusOne = vectorSize1;
     do {
       newInst = IRInst__create(opcode,*compiler);
-      selectConstA = DAT_001b0210;
+      selectConstA = swizzleYYYX_001b0210;
       *(undefined4 *)(newInst + 0x94) = *(undefined4 *)(newInst + 0x14c);
       prevIndex = pairLoopIndex - 1;
       *(undefined4 *)(newInst + 0x98) = 0;
@@ -4816,7 +4816,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
   leftNode = listNode;
   if (pairLoopIndex == 0) {
     firstJoinInst = IRInst__create(opcode,*compiler);
-    selectConstA = DAT_001b0210;
+    selectConstA = swizzleYYYX_001b0210;
     *(undefined4 *)(firstJoinInst + 0x98) = 0;
     *(undefined4 *)(firstJoinInst + 0x94) = *(undefined4 *)(firstJoinInst + 0x14c);
     *(undefined4 *)(firstJoinInst + 0x9c) = selectConstA;
@@ -4984,7 +4984,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
   }
   while (rightNode = *(int *)(leftNode + 8), *(int *)(rightNode + 8) != 0) {
     joinInst = IRInst__create(opcode,*compiler);
-    selectConstA = DAT_001b0210;
+    selectConstA = swizzleYYYX_001b0210;
     *(undefined4 *)(joinInst + 0x98) = 0;
     *(undefined4 *)(joinInst + 0x94) = *(undefined4 *)(joinInst + 0x14c);
     *(undefined4 *)(joinInst + 0x9c) = selectConstA;
@@ -5334,7 +5334,7 @@ loopCallRebuildState_computeNodeLevels:
                 ((curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b021c &&
                  ((curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0218 &&
                   (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0214)))))))) &&
-              (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0210)) &&
+              (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != swizzleYYYX_001b0210)) &&
              ((((curNode = IRInst__hasSingleUse(inst,*(undefined4 *)(rebuildState + 4)), curNode != 0 &&
                 (curNode = *(int *)(nodeRec + 0xc), curNode != 0)) &&
                (opcodeKind == *(int *)(*(int *)(curNode + 0x88) + 8))) &&

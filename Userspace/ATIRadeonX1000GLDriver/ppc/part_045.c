@@ -818,7 +818,7 @@ loopCallIRInst_setOperandSource:
           allocation[0x27] = 0x45;
           allocation[0x26] = loopIndex;
           sourceDef = IRInst__getOperandSource(inst,1);
-          defaultSelect = DAT_001b0194;
+          defaultSelect = swizzleYYYY_001b0194;
           allocation[0x4d] = *(undefined4 *)(sourceDef + 0x94);
           allocation[0x4c] = 0x10;
           allocation[0x4e] = (((int)requestedIndex2 >> 4) + (uint)((int)requestedIndex2 < 0 && (requestedIndex2 & 0xf) != 0)) * 0x10;
@@ -4428,7 +4428,7 @@ int ValueKey__computeSwizzleTo(out, key, otherKey)
   
   loopIndexB = 0;
   laneCursor = (int *)(key + 0x20);
-  swizzleWord[0] = DAT_001b01b8;
+  swizzleWord[0] = swizzleAllUnused_001b01b8;
   do {
     operandRecord = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),0);
     if (*(char *)(loopIndexB + operandRecord + 0x10) != '\x01') {
@@ -4438,7 +4438,7 @@ int ValueKey__computeSwizzleTo(out, key, otherKey)
         loopIndex = loopIndex + 1;
         countdown = countdown + -1;
         if (countdown == 0) {
-          *out = DAT_001b01b8;
+          *out = swizzleAllUnused_001b01b8;
           return out;
         }
       }
@@ -4460,7 +4460,7 @@ int SwizzleTable__eqKeys(keyA, keyB)
   int swizzleOut [5];
   
   ((int (*)())ValueKey__computeSwizzleTo)(swizzleOut,keyB,keyA);
-  return -(uint)(swizzleOut[0] == DAT_001b01b8);
+  return -(uint)(swizzleOut[0] == swizzleAllUnused_001b01b8);
 }
 
 /* ValueKey__propagateLaneValues @ 0x173278 (184 bytes) */

@@ -321,12 +321,12 @@ int R520VMachineAssembler__vslot28_assembleIfEnd(this, node, block, compiler)
     if (topKind != 0) {
       popInst = IRInst__create(0x58,compiler);
       zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
-      destSelect = DAT_001b2d50;
+      destSelect = swizzleYYYX_001b2d50;
       *(undefined4 *)(popInst + 0x94) = *(undefined4 *)(zeroInst + 0x94);
       *(undefined4 *)(popInst + 0x98) = 0;
       *(undefined4 *)(popInst + 0x9c) = destSelect;
       IRInst__setOperandSource(popInst,1,zeroInst,0,compiler);
-      sourceSelect = DAT_001b2d4c;
+      sourceSelect = swizzleWWWW_001b2d4c;
       operandRecord = IRInst__getOperandRecord(popInst,1);
       *(undefined4 *)(operandRecord + 0x10) = sourceSelect;
       Block__prependInst(node,popInst);
@@ -383,7 +383,7 @@ int R520VMachineAssembler__vslot31_assembleWithPredicateRestore(this, node, bloc
       zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
       zeroRegister = *(int *)(zeroInst + 0x94);
       newInst = (int *)IRInst__create(0x5a,compiler);
-      destSelect = DAT_001b2d50;
+      destSelect = swizzleYYYX_001b2d50;
       newInst[0x25] = zeroRegister;
       newInst[0x26] = 0;
       newInst[0x27] = destSelect;
@@ -617,7 +617,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
     if (*topKindSlot == 0) {
       if (*program == 0) {
         predSetInst = IRInst__create(0x53,compiler);
-        destSelect = DAT_001b2d50;
+        destSelect = swizzleYYYX_001b2d50;
         literalValue = (double)FLOAT_001aa0d4;
         *(undefined4 *)(predSetInst + 0x94) = destRegister;
         *(undefined4 *)(predSetInst + 0x9c) = destSelect;
@@ -646,7 +646,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
       *(undefined4 *)(saveMovInst + 0x98) = 0;
       *(undefined4 *)(saveMovInst + 0x94) = destRegister;
       IRInst__setOperandSource(saveMovInst,1,zeroInst,0,compiler);
-      sourceSelect = DAT_001b2d4c;
+      sourceSelect = swizzleWWWW_001b2d4c;
       operandRecord = IRInst__getOperandRecord(saveMovInst,1);
       *(undefined4 *)(operandRecord + 0x10) = sourceSelect;
       *(uint *)(saveMovInst + 0x14) = *(uint *)(saveMovInst + 0x14) & 0xfffffffb;

@@ -791,7 +791,7 @@ int PostLoopFooter__ctor_ea828(this, registerIndex, enclosingLoopHeader, argR6, 
     *(byte *)(definitionInst + 0x15c) = *(byte *)(definitionInst + 0x15c) | 1;
     *(undefined4 *)(definitionInst + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,newVReg);
-    constantSelectWord = DAT_001aa7fc;
+    constantSelectWord = swizzleXXXX_001aa7fc;
     operandRecord3 = IRInst__getOperandRecord(this[0x52],1);
     *(undefined4 *)(operandRecord3 + 0x10) = constantSelectWord;
   }
@@ -1226,7 +1226,7 @@ int PostLoopFooter__ctor_eb3c8(this, registerIndex, loopHeader, useFooterInst, c
     *(byte *)(definitionInst + 0x15c) = *(byte *)(definitionInst + 0x15c) | 1;
     *(undefined4 *)(definitionInst + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,virtualRegister);
-    constantSelectWord = DAT_001aa7fc;
+    constantSelectWord = swizzleXXXX_001aa7fc;
     operandRecord = IRInst__getOperandRecord(this[0x52],1);
     *(undefined4 *)(operandRecord + 0x10) = constantSelectWord;
   }

@@ -279,7 +279,7 @@ int IRMix__ctor_10a140(this, kind, compiler)
   IRPseudo__ctor(this,kind,compiler);
   defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
-  laneDefaultWord = DAT_001af9c4;
+  laneDefaultWord = swizzleAllUnused_001af9c4;
   *this = &PTR_FUN_001ea070;
   remaining = 4;
   this[0x4b] = 0;
@@ -306,7 +306,7 @@ int IRMix__ctor_10a1c0(this, kind, compiler)
   IRPseudo__ctor(this,kind,compiler);
   defaultWord27 = DAT_001af9c8;
   this[0x20] = 1;
-  laneDefaultWord = DAT_001af9c4;
+  laneDefaultWord = swizzleAllUnused_001af9c4;
   *this = &PTR_FUN_001ea070;
   remaining = 4;
   this[0x4b] = 0;
@@ -1357,9 +1357,9 @@ void IRInst__setLiteralOperandAndSource(int inst,undefined4 unusedArg2,int opera
   *(int *)(inst + 0x84) = operandIndex;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),operandIndex,value,value,value,value)
   ;
-  arena = DAT_001af9fc;
+  arena = swizzleAllUnused_001af9fc;
   if (operandIndex == 0) {
-    *(undefined4 *)(inst + 0x9c) = DAT_001af9fc;
+    *(undefined4 *)(inst + 0x9c) = swizzleAllUnused_001af9fc;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);

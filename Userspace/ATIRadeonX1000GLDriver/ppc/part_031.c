@@ -15,7 +15,7 @@ int IRInst__createWithConstantOperands(int operandCount,undefined4 destSelect,un
   *(undefined4 *)(newInst + 0x9c) = destSelect;
   *(int *)(newInst + 0x84) = operandCount;
   IRInst__setOperandSource(newInst,1,newSource,*(uint *)(program + 0x30) >> 7 & 1,compiler);
-  defaultSelect = DAT_001af9fc;
+  defaultSelect = swizzleAllUnused_001af9fc;
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 0x10) = defaultSelect;
   ((void (*)())IRInst__makeLiteralVec4Float)(newInst,program,2,value,value,value,value);
@@ -27,7 +27,7 @@ int IRInst__createWithConstantOperands(int operandCount,undefined4 destSelect,un
       thirdConstant = (double)FLOAT_001aa0e8;
     }
     ((void (*)())IRInst__makeLiteralVec4Float)(newInst,program,3,thirdConstant,thirdConstant,thirdConstant,thirdConstant);
-    defaultSelect = DAT_001af9fc;
+    defaultSelect = swizzleAllUnused_001af9fc;
     operandRecord = IRInst__getOperandRecord(newInst,3);
     *(undefined4 *)(operandRecord + 0x10) = defaultSelect;
   }
@@ -177,7 +177,7 @@ int IRInst__removeDefaultSelectOperands(inst, compilerCtx)
     do {
       operandRecord = IRInst__getOperandRecord(inst,loopIndex);
       shiftIndex = loopIndex;
-      if (*(int *)(operandRecord + 0x10) == DAT_001af9fc) {
+      if (*(int *)(operandRecord + 0x10) == swizzleAllUnused_001af9fc) {
         do {
           if (shiftIndex < operandCount) {
             IRInst__copyOperandFrom(inst,shiftIndex,inst,shiftIndex + 1);
@@ -907,7 +907,7 @@ int IRInst__convertCompareToBinaryAlu(inst, compiler)
   negate2 = *(uint *)(inst + 0xd0) & 1;
   abs2 = *(uint *)(inst + 0xd0) >> 1 & 1;
   operandRecord = IRInst__getOperandRecord(inst,2);
-  defaultSelect = DAT_001af9dc;
+  defaultSelect = swizzleXYYY_001af9dc;
   block = *(int **)(inst + 0x158);
   select2 = *(undefined4 *)(operandRecord + 0x10);
   instId = *(undefined4 *)(inst + 0x14c);

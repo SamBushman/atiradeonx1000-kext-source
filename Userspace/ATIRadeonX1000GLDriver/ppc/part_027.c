@@ -74,7 +74,7 @@ int setSelectedConstantWord(record, flag)
     *(undefined4 *)(record + 0x10) = DAT_001af9c0;
     return;
   }
-  *(undefined4 *)(record + 0x10) = DAT_001af9bc;
+  *(undefined4 *)(record + 0x10) = swizzleXYZW_001af9bc;
   return;
 }
 
@@ -415,7 +415,7 @@ int IRInst__create(opcode, compiler)
   undefined4 opcodeInfo;
   
   inst = OpcodeTraits__getInstClass(opcode,compiler);
-  inst = (**(code **)(&DAT_001ea4fc + inst * 8))(opcode,compiler);
+  inst = (**(code **)(&irInstFactoryTable + inst * 8))(opcode,compiler);
   opcodeInfo = Opcode__getInfo(opcode);
   *(undefined4 *)(inst + 0x88) = opcodeInfo;
   return inst;
@@ -729,7 +729,7 @@ int IRInst__appendSource(inst, operandRef)
   newCount = inst[0x21];
   inst[0x21] = newCount + 1;
   if (((0 < inst[0x20]) && (operandRef == inst[0x23])) &&
-     (virtualCallResult = (**(code **)(*inst + 0x14))(inst), flagsAddr = DAT_001af9bc, virtualCallResult < newCount + 1)) {
+     (virtualCallResult = (**(code **)(*inst + 0x14))(inst), flagsAddr = swizzleXYZW_001af9bc, virtualCallResult < newCount + 1)) {
     inst[5] = inst[5] | 0x200;
     inst[(oldCount + 1) * 6 + 0x27] = flagsAddr;
   }
@@ -854,7 +854,7 @@ int IRInst__resetFields(inst, compiler)
   *(undefined4 *)(inst + 0x84) = 0;
   *(undefined4 *)(inst + 0x10) = 0;
   ((int (*)())IRInst__initOperandRecord)(inst,0);
-  defaultRecordWord = DAT_001af9bc;
+  defaultRecordWord = swizzleXYZW_001af9bc;
   *(undefined4 *)(inst + 0x9c) = DAT_001af9c0;
   *(undefined4 *)(inst + 0x154) = defaultRecordWord;
   *(undefined4 *)(inst + 0xc) = 0;
@@ -862,7 +862,7 @@ int IRInst__resetFields(inst, compiler)
   recordCursor = inst;
   do {
     ((int (*)())IRInst__initOperandRecord)(inst,loopIndex);
-    *(undefined4 *)(recordCursor + 0xb4) = DAT_001af9bc;
+    *(undefined4 *)(recordCursor + 0xb4) = swizzleXYZW_001af9bc;
     instFlagBit2Result = OpcodeTraits__instFlagBit2(compiler,inst);
     if (instFlagBit2Result != 0) {
       if (loopIndex == 1) {

@@ -749,7 +749,7 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, unusedArg3, compiler)
     Compiler__fail(compiler,0xf);
   }
   destRecord = IRInst__getOperandRecord(inst,0);
-  if (*(int *)(destRecord + 0x10) != DAT_001aa800) {
+  if (*(int *)(destRecord + 0x10) != swizzleXXXX_001aa800) {
     inst2 = IRInst__create(0x31,compiler);
     staleFprArg1 = (double)FLOAT_001aa0d4;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,staleFprArg1,staleFprArg1,staleFprArg1,
@@ -767,7 +767,7 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, unusedArg3, compiler)
     } while (lanesLeft != 0);
     *(undefined4 *)(inst2 + 0x9c) = unwrittenLaneMask;
     Block__prependInst(*(undefined4 *)(inst + 0x158),inst2);
-    *(int *)(inst + 0x9c) = DAT_001aa800;
+    *(int *)(inst + 0x9c) = swizzleXXXX_001aa800;
   }
   return;
 }
@@ -998,7 +998,7 @@ storeAllocation:
             operandRecord = IRInst__getOperandRecord(memberInstRef,0);
             destSelectWord = *(undefined4 *)(operandRecord + 0x10);
             IRInst__setOperandRef(groupList[7],0,virtualRegister);
-            *(undefined4 *)(groupList[7] + 0x9c) = DAT_001aa800;
+            *(undefined4 *)(groupList[7] + 0x9c) = swizzleXXXX_001aa800;
             VReg__appendUser(virtualRegister,groupList[7]);
             arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
             allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
@@ -1883,7 +1883,7 @@ setCandidate:
     IRExport__ctor_108918(newExport,*(undefined4 *)(program + 8));
     *(undefined4 **)(program + 0x348) = newExport;
     operandRecord4 = IRInst__getOperandRecord(newExport,0);
-    allComponentsSelect = DAT_001aa800;
+    allComponentsSelect = swizzleXXXX_001aa800;
     zeroFloat = (double)FLOAT_001aa0d4;
     *(undefined4 *)(operandRecord4 + 0xc) = 9;
     *(undefined4 *)(operandRecord4 + 8) = 0;
@@ -1912,7 +1912,7 @@ checkProgram:
   *(int *)(*(int *)(program + 8) + 0x3ac) = madTempIndex;
   madResultReg = VRegPool__findOrCreate(registerMap,0,madTempIndex,0);
   IRInst__setOperandRef(inst,0,madResultReg);
-  allComponentsSelect = DAT_001aa800;
+  allComponentsSelect = swizzleXXXX_001aa800;
   *(undefined4 *)(inst + 0x120) = 1;
   *(undefined4 *)(inst + 0x9c) = allComponentsSelect;
   newInst2 = IRInst__create(0x13,*(undefined4 *)(program + 8));
@@ -1931,7 +1931,7 @@ checkProgram:
   *(undefined4 *)(newInst2 + 0x9c) = allComponentsSelect;
   newInst = IRInst__create(0x14,*(undefined4 *)(program + 8));
   IRInst__setOperandRef(newInst,1,madResultReg);
-  identitySelect = DAT_001aa810;
+  identitySelect = swizzleXXXX_001aa810;
   operandRecord3 = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord3 + 0x10) = identitySelect;
   ((void (*)())IRInst__makeLiteralVec4Float)(newInst,program,2,0.9999999403953552,zeroFloat,zeroFloat,zeroFloat);
@@ -3453,7 +3453,7 @@ int Program__foldKind6IntoKind7Inst(program, inst, inst2)
          ((((hwFoldRejects = OpcodeTraits__flag1WithoutFlag7(*(undefined4 *)(program + 8),moveSource), hwFoldRejects != 0 &&
             ((hwFoldRejects = moveSource[0x58] - *(int *)(program + 0x478), hwFoldRejects < 0 || (hwFoldRejects < 2)))) &&
            (hwFoldRejects = (**(code **)(*moveSource + 0x28))(moveSource), hwFoldRejects == 0)) &&
-          ((moveSource[0x21] != 0 && (moveSourceSelect == DAT_001aa804)))))) {
+          ((moveSource[0x21] != 0 && (moveSourceSelect == swizzleXYZW_001aa804)))))) {
         operandRecord = IRInst__getOperandRecord(inst,0);
         destSelectWord = *(undefined4 *)(operandRecord + 0x10);
         ((int (*)())Program__removeInst)(program,inst);

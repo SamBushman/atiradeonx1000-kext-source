@@ -3217,7 +3217,7 @@ int Inst__collapseMulOfExps(inst, program)
       inst3 = IRInst__create(0x12,*(undefined4 *)(program + 8));
       IRInst__copyOperandFrom(inst3,1,operandVReg,1);
       IRInst__copyOperandFrom(inst3,2,operandVReg2,1);
-      addDestSelect = DAT_001b0054;
+      addDestSelect = swizzleYYYX_001b0054;
       depthBase = *(int *)(program + 0x478);
       *(undefined4 *)(inst3 + 0x94) = *(undefined4 *)(inst3 + 0x14c);
       *(undefined4 *)(inst3 + 0x98) = 0;
@@ -3231,7 +3231,7 @@ int Inst__collapseMulOfExps(inst, program)
         inst2[0x27] = addDestSelect;
         inst2[0x58] = depthBase + 1;
         inst2[0x25] = inst2[0x53];
-        sourceSelect = DAT_001b0050;
+        sourceSelect = swizzleAllUnused_001b0050;
         inst2[0x26] = 0;
         operandRecord = IRInst__getOperandRecord(inst2,1);
         *(undefined4 *)(operandRecord + 0x10) = sourceSelect;
@@ -8510,7 +8510,7 @@ int Scheduler__copyFetchInEdge(scheduler, fromNode, toNode)
       if (sourceEdge[7] == 1) {
         arena = *(undefined4 *)(*scheduler + 0x378);
         edgeAlloc = (undefined4 *)Arena__alloc(arena,0x24);
-        edgeConst = DAT_001b0194;
+        edgeConst = swizzleYYYY_001b0194;
         *edgeAlloc = arena;
         edgeAlloc[1] = 0;
         componentIndex = 0;
@@ -10109,7 +10109,7 @@ int Scheduler__transformDotProduct(scheduler, node)
     if (*(int *)(inst[0x22] + 8) == 0x1c) {
       IRInst__reinitAsTrinary(inst,0x1e,*scheduler);
       IRInst__setOperandSource(inst,3,helperInst,0,*scheduler);
-      selectConst = DAT_001b01a0;
+      selectConst = swizzleAllUnused_001b01a0;
       operandRecord3 = IRInst__getOperandRecord(inst,3);
       *(undefined4 *)(operandRecord3 + 0x10) = selectConst;
       (**(code **)(*inst + 0x88))(inst,3,2,outSelector);
@@ -10142,7 +10142,7 @@ int Scheduler__transformDotProduct(scheduler, node)
       if (*(int *)(inst[0x22] + 8) == 0x1d) {
         IRInst__reinitAsTrinary(inst,0xa3,*scheduler);
         IRInst__setOperandSource(inst,3,helperInst,0,*scheduler);
-        selectConst = DAT_001b01a0;
+        selectConst = swizzleAllUnused_001b01a0;
         operandRecord3 = IRInst__getOperandRecord(inst,3);
         *(undefined4 *)(operandRecord3 + 0x10) = selectConst;
         (**(code **)(*inst + 0x88))(inst,3,3,outSelector);
@@ -10256,7 +10256,7 @@ code_r0x001699c4:
       SchedModel__countIssuedNode(scheduler[2],node);
       arena = *(undefined4 *)(*scheduler + 0x378);
       edgeAlloc = (undefined4 *)Arena__alloc(arena,0x24);
-      edgeConst = DAT_001b0194;
+      edgeConst = swizzleYYYY_001b0194;
       *edgeAlloc = arena;
       edgeAlloc[1] = helperNode;
       edgeAlloc[7] = edgeConst;
@@ -10349,7 +10349,7 @@ code_r0x001699c4:
         }
         (**(code **)(*inst + 0x88))(inst,1,2,4);
         (**(code **)(*inst + 0x88))(inst,2,2,4);
-        selectConst = DAT_001b01a0;
+        selectConst = swizzleAllUnused_001b01a0;
         operandRecord2 = IRInst__getOperandRecord(inst,3);
         *(undefined4 *)(operandRecord2 + 0x10) = selectConst;
         (**(code **)(*inst + 0x88))(inst,3,2,outSelector);
@@ -10398,7 +10398,7 @@ storeNode:
   SchedModel__countIssuedNode(scheduler[2],node);
   arena = *(undefined4 *)(*scheduler + 0x378);
   edgeAlloc = (undefined4 *)Arena__alloc(arena,0x24);
-  edgeConst = DAT_001b0194;
+  edgeConst = swizzleYYYY_001b0194;
   edgeRecord = edgeAlloc + 1;
   *edgeAlloc = arena;
   edgeAlloc[1] = helperNode;
@@ -11941,7 +11941,7 @@ int Scheduler__buildCoScheduleGroups(scheduler)
           arena = *(undefined4 *)(*scheduler + 0x378);
           allocation = (undefined4 *)Arena__alloc(arena,0x2c);
           defaultMaskWord = DAT_001b01a8;
-          defaultSelectWord = DAT_001b0198;
+          defaultSelectWord = swizzleYYYY_001b0198;
           groupRecord = allocation + 1;
           *allocation = arena;
           allocation[1] = defaultMaskWord;
@@ -12156,7 +12156,7 @@ loopSetRegisterOrCheck:
                (registerOrCheck = *(int *)(*(int *)(nodeOrTable + 0x60) + 4), registerOrCheck < 0)) {
               vcall7cResult = (**(code **)(**(int **)(*compiler + 0x30c) + 0x7c))
                                  (*(int **)(*compiler + 0x30c),inst2);
-              registerOrCheck = DAT_001b0194;
+              registerOrCheck = swizzleYYYY_001b0194;
               if (vcall7cResult != 0) {
                 if (*(int **)(nodeOrTable + 0x60) == (int *)0x0) {
                   registerOrCheck = inst2[3];

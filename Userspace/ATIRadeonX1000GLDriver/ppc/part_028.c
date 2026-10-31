@@ -274,7 +274,7 @@ int IRInst__firstLiteralSourceValue(outValue, inst)
   do {
     operandIndex = operandIndex + 1;
     if (lastOperand < operandIndex) {
-      *outValue = DAT_001af9bc;
+      *outValue = swizzleXYZW_001af9bc;
       return outValue;
     }
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
@@ -781,7 +781,7 @@ int IRInst__setExtraOperandSource(inst, newSource, trackUses, compilerCtx)
 checkFlagsOrCount:
   if ((flagsOrCount & 0x200) == 0) {
     *(uint *)(inst + 0x14) = flagsOrCount | 0x200;
-    extraOperandSwizzle = DAT_001af9c4;
+    extraOperandSwizzle = swizzleAllUnused_001af9c4;
     oldSource = *(int *)(inst + 0x84) + 1;
     *(int *)(inst + 0x84) = oldSource;
     oldSource = IRInst__getOperandRecord(inst,oldSource);
@@ -831,9 +831,9 @@ int IRInst__insertSourceBeforeLast(inst, newSource, compiler)
   *(int *)(inst + 0x84) = newCount;
   if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
     ((int (*)())IRInst__setOperandSource)(inst,newCount,newSource,0,compiler);
-    defaultSelect = DAT_001af9bc;
+    defaultSelect = swizzleXYZW_001af9bc;
     if (newCount == 0) {
-      *(undefined4 *)(inst + 0x9c) = DAT_001af9bc;
+      *(undefined4 *)(inst + 0x9c) = swizzleXYZW_001af9bc;
     }
     else {
       oldCount = IRInst__getOperandRecord(inst,newCount);
@@ -860,9 +860,9 @@ int IRInst__insertSourceBeforeLast(inst, newSource, compiler)
       *(undefined4 *)(newCount + 0x10) = lastSelect;
     }
     ((int (*)())IRInst__setOperandSource)(inst,oldCount,newSource,0,compiler);
-    defaultSelect2 = DAT_001af9bc;
+    defaultSelect2 = swizzleXYZW_001af9bc;
     if (oldCount == 0) {
-      *(undefined4 *)(inst + 0x9c) = DAT_001af9bc;
+      *(undefined4 *)(inst + 0x9c) = swizzleXYZW_001af9bc;
       newCount = 0;
     }
     else {
@@ -1179,7 +1179,7 @@ int IRVertexFetch__ctor_107250(this, opcode, compiler, vertexArg4, vertexArg5)
   undefined *vtable;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  defaultWord = DAT_001af9bc;
+  defaultWord = swizzleXYZW_001af9bc;
   vtable = PTR_DAT_001e8c08 + 8;
   this[0x4b] = vertexArg5;
   *this = vtable;
@@ -1203,7 +1203,7 @@ int IRVertexFetch__ctor_1072d0(this, opcode, compiler, vertexArg4, vertexArg5)
   undefined *vtable;
   
   ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
-  defaultWord = DAT_001af9bc;
+  defaultWord = swizzleXYZW_001af9bc;
   vtable = PTR_DAT_001e8c08 + 8;
   this[0x4b] = vertexArg5;
   *this = vtable;
@@ -1290,7 +1290,7 @@ int IRTextureFetch__ctor_1074e0(this, opcode, compiler)
   this[0x41] = 0;
   fetchStateBlock = (undefined2 *)Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),0x24);
   _memset(fetchStateBlock,0,0x24);
-  defaultWord = DAT_001af9bc;
+  defaultWord = swizzleXYZW_001af9bc;
   fetchStateBlock[4] = 7;
   fetchStateBlock[6] = 3;
   fetchStateBlock[9] = 1;
@@ -1351,7 +1351,7 @@ int IRTextureFetch__ctor_10764c(this, opcode, compiler)
   this[0x41] = 0;
   fetchStateBlock = (undefined2 *)Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),0x24);
   _memset(fetchStateBlock,0,0x24);
-  defaultWord = DAT_001af9bc;
+  defaultWord = swizzleXYZW_001af9bc;
   fetchStateBlock[4] = 7;
   fetchStateBlock[6] = 3;
   fetchStateBlock[9] = 1;

@@ -90,7 +90,7 @@ int ExportSlot__ctor_12622c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
     IRInst__setOperandRef(exportInst,0,this);
     VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);
-    exportStreamValue = DAT_001afeec;
+    exportStreamValue = swizzleXXXX_001afeec;
     operandRecord = IRInst__getOperandRecord(exportInst,1);
     *(undefined4 *)(operandRecord + 0x10) = exportStreamValue;
     VReg__addUse(this,1,exportInst);
@@ -128,7 +128,7 @@ int ExportSlot__ctor_126378(this, ctorWord2, ctorWord1, ctorWord3, compiler)
     IRInst__setOperandRef(exportInst,0,this);
     VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);
-    exportStreamValue = DAT_001afeec;
+    exportStreamValue = swizzleXXXX_001afeec;
     operandRecord = IRInst__getOperandRecord(exportInst,1);
     *(undefined4 *)(operandRecord + 0x10) = exportStreamValue;
     VReg__addUse(this,1,exportInst);
@@ -242,35 +242,35 @@ int LoopIndexedOutputSet__ctor_126694(this, ctorWord2, ctorWord1, ctorWord3, com
 int RegKind__flagBit7(regKind)
   int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 7 & 1;
+  return *(uint *)(&regKindInfo_flagsWord + regKind * 0x10) >> 7 & 1;
 }
 
 /* RegKind__flagBit8 @ 0x126734 (44 bytes) */
 int RegKind__flagBit8(movSourceKind)
   int movSourceKind;
 {
-  return *(uint *)(&DAT_001ea904 + movSourceKind * 0x10) >> 8 & 1;
+  return *(uint *)(&regKindInfo_flagsWord + movSourceKind * 0x10) >> 8 & 1;
 }
 
 /* RegKind__flagBit0 @ 0x126760 (44 bytes) */
 int RegKind__flagBit0(kind)
   int kind;
 {
-  return *(uint *)(&DAT_001ea904 + kind * 0x10) & 1;
+  return *(uint *)(&regKindInfo_flagsWord + kind * 0x10) & 1;
 }
 
 /* RegKind__flagBit6 @ 0x12678c (44 bytes) */
 int RegKind__flagBit6(regKind)
   int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 6 & 1;
+  return *(uint *)(&regKindInfo_flagsWord + regKind * 0x10) >> 6 & 1;
 }
 
 /* Table1ea904__hasFlag0x11 @ 0x1267b8 (52 bytes) */
 int Table1ea904__hasFlag0x11(rowIndex)
   int rowIndex;
 {
-  return -(uint)(*(uint *)(&DAT_001ea904 + rowIndex * 0x10) & 0x11) >> 0x1f;
+  return -(uint)(*(uint *)(&regKindInfo_flagsWord + rowIndex * 0x10) & 0x11) >> 0x1f;
 }
 
 /* ImmedConstBuffer__vslot283 @ 0x1267ec (84 bytes) */
@@ -294,21 +294,21 @@ int ImmedConstBuffer__vslot283(this, ctorWord1, ctorWord3, compiler)
 int RegKind__flagBit1(regKind)
   int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 1 & 1;
+  return *(uint *)(&regKindInfo_flagsWord + regKind * 0x10) >> 1 & 1;
 }
 
 /* RegKind__flagBit9 @ 0x1268a4 (44 bytes) */
 int RegKind__flagBit9(regKind)
   int regKind;
 {
-  return *(uint *)(&DAT_001ea904 + regKind * 0x10) >> 9 & 1;
+  return *(uint *)(&regKindInfo_flagsWord + regKind * 0x10) >> 9 & 1;
 }
 
 /* RegKind__byte4 @ 0x1268d0 (40 bytes) */
 int RegKind__byte4(regKind)
   int regKind;
 {
-  return (DAT_001ea908)[regKind * 0x10];
+  return (regKindInfo_byte4)[regKind * 0x10];
 }
 
 /* ImmedConstBuffer__vslot235 @ 0x1268f8 (84 bytes) */

@@ -82,7 +82,7 @@ int Inst__mergeSourceInstructions(inst, sourceInstRefA, sourceInstRefB, compiler
   destSelect = *(uint *)(loopIndex2 + 0x10);
   loopIndex2 = IRInst__getOperandRecord(inst1,0);
   inst1DestSelect = *(uint *)(loopIndex2 + 0x10);
-  inst1ExtraSelect = DAT_001b0224;
+  inst1ExtraSelect = swizzleAllUnused_001b0224;
   if ((inst1[5] & 0x200U) != 0) {
     *(int *)(*(int *)(compiler + 0x6c4) + 0x204) = *(int *)(*(int *)(compiler + 0x6c4) + 0x204) + 1;
     loopIndex2 = IRInst__getOperandRecord(inst1,inst1[0x21]);
@@ -101,14 +101,14 @@ int Inst__mergeSourceInstructions(inst, sourceInstRefA, sourceInstRefB, compiler
   }
   selectsCompatible = true;
 setMergedSelect:
-  mergedSelect = DAT_001b0220;
+  mergedSelect = swizzleXYZW_001b0220;
   if (selectsCompatible) {
     loopIndex2 = OpcodeTraits__flag1WithoutFlag7(compiler,inst1);
     if (loopIndex2 == 0) {
       loopIndex2 = OpcodeTraits__flagBit8(*(undefined4 *)(inst1[0x22] + 8),compiler);
       if (loopIndex2 == 0) goto setResult;
       loopIndex2 = IRInst__hasSingleUse(inst1,loopIndex);
-      defaultSelect = DAT_001b0220;
+      defaultSelect = swizzleXYZW_001b0220;
       if (loopIndex2 == 0) {
         loopIndex2 = 0;
         loopIndex3 = 4;
@@ -168,7 +168,7 @@ setMergedSelect:
       else {
         loopPtr6 = newSelects;
         for (; loopIndex2 = (**(code **)(*inst1 + 0x14))(inst1), loopIndex3 <= loopIndex2; loopIndex3 = loopIndex3 + 1) {
-          *loopPtr6 = DAT_001b0224;
+          *loopPtr6 = swizzleAllUnused_001b0224;
           loopPtr6 = loopPtr6 + 1;
         }
       }
@@ -193,7 +193,7 @@ setMergedSelect:
         loopIndex = loopIndex + 1;
       } while (moreLanes);
       loopPtr6 = newSelects;
-      for (loopIndex2 = 1; loopIndex = (**(code **)(*inst1 + 0x14))(inst1), defaultSelect = DAT_001b0220,
+      for (loopIndex2 = 1; loopIndex = (**(code **)(*inst1 + 0x14))(inst1), defaultSelect = swizzleXYZW_001b0220,
           loopIndex2 <= loopIndex; loopIndex2 = loopIndex2 + 1) {
         loopIndex = *loopPtr6;
         if (loopIndex2 == 0) {
@@ -711,7 +711,7 @@ int Inst__r300ReassociateAddPair(inst, srcIndex, inst2, program)
       callResult = IRInst__getOperandRecord(inst2,2);
       SelectWord__compose(&composedSelect2,*(undefined4 *)(callResult + 0x10),srcSelect);
       callResult = IRInst__getOperandRecord(inst2,2);
-      maskSelectConst = DAT_001b0220;
+      maskSelectConst = swizzleXYZW_001b0220;
       *(undefined4 *)(callResult + 0x10) = composedSelect2;
       WriteMask__fromSelectWord(&destWriteMask,destSelect);
       SelectWord__maskUnused(maskedSelect,maskSelectConst,destWriteMask);
@@ -1886,8 +1886,8 @@ int SelectWord__isDefaultAfterCanonicalise(selectWord)
   return *(uint *)(&DAT_001b0244 +
                   ((selectWord >> 0x18) * 0x7d + (selectWord >> 0x10 & 0xff) * 0x19 +
                    (selectWord >> 8 & 0xff) * 5 + (selectWord & 0xff)) * 0x10) ==
-         ((uint)(byte)DAT_001b2a68 << 0x18 | (uint)(*(unsigned char *)((unsigned char *)&(DAT_001b2a68) + 2)) << 0x10 |
-          (uint)(*(unsigned char *)((unsigned char *)&(DAT_001b2a68) + 1)) << 8 | (uint)(*(unsigned char *)((unsigned char *)&(DAT_001b2a68) + 0)));
+         ((uint)(byte)swizzleAllUnused_001b2a68 << 0x18 | (uint)(*(unsigned char *)((unsigned char *)&(swizzleAllUnused_001b2a68) + 2)) << 0x10 |
+          (uint)(*(unsigned char *)((unsigned char *)&(swizzleAllUnused_001b2a68) + 1)) << 8 | (uint)(*(unsigned char *)((unsigned char *)&(swizzleAllUnused_001b2a68) + 0)));
 }
 
 /* SelectWord__matchesDefaultPattern @ 0x18976c (28 bytes) */
@@ -1896,7 +1896,7 @@ int SelectWord__matchesDefaultPattern(selectWord)
 {
   undefined4 callResult;
   
-  callResult = SelectWord__areCompatible(selectWord,DAT_001b2a64);
+  callResult = SelectWord__areCompatible(selectWord,swizzleXYZW_001b2a64);
   return callResult;
 }
 
@@ -2623,7 +2623,7 @@ code_r0x0018a910:
                 destRecord = IRInst__getOperandRecord(callResult,0);
                 mergedDestSelect[0] = *(int *)(destRecord + 0x10);
                 loopRemaining = IRInst__getOperandRecord(operandVReg,0);
-                fullSelect = DAT_001b2a64;
+                fullSelect = swizzleXYZW_001b2a64;
                 loopIndex2 = 0;
                 otherDestSelect = *(undefined4 *)(loopRemaining + 0x10);
                 loopRemaining = 4;
@@ -2702,9 +2702,9 @@ code_r0x0018aab8:
                 *(undefined1 *)(loopIndex + 0xe) = 1;
                 *(int *)(loopIndex + 0xb4) = loopIndex2;
                 *(undefined1 *)(loopIndex + 0x9e) = 0;
-                loopIndex = DAT_001b2a64;
+                loopIndex = swizzleXYZW_001b2a64;
                 if (operandIndex == 0) {
-                  inst[0x27] = DAT_001b2a64;
+                  inst[0x27] = swizzleXYZW_001b2a64;
                 }
                 else {
                   loopIndex2 = IRInst__getOperandRecord(inst,operandIndex);
@@ -4665,7 +4665,7 @@ storeProgram:
       insertedMov[0x25] = insertedMov[0x53];
       IRInst__setOperandSource(insertedMov,1,loopIndex4,0,this[2]);
       IRInst__setOperandSource(inst,1,insertedMov,0,this[2]);
-      identitySelect = DAT_001b2a68;
+      identitySelect = swizzleAllUnused_001b2a68;
       insertedMov[0x27] = DAT_001b2a80;
       loopIndex4 = IRInst__getOperandRecord(insertedMov,1);
       *(undefined4 *)(loopIndex4 + 0x10) = identitySelect;
@@ -4732,7 +4732,7 @@ code_r0x0018e934:
         loopIndex2 = IRInst__getOperandRecord(inst,loopIndex4);
         selectWord = *(undefined4 *)(loopIndex2 + 0x10);
         loopIndex2 = IRInst__getOperandRecord(inst2,1);
-        walkStackCapacity = DAT_001b2a64;
+        walkStackCapacity = swizzleXYZW_001b2a64;
         *(undefined4 *)(loopIndex2 + 0x10) = selectWord;
         destSelectCursor = inst2;
         do {
@@ -4803,7 +4803,7 @@ code_r0x0018eb5c: ;
     IRInst__setOperandSource(inst,1,targetInst,0,this[2]);
     IROperand__setModifierBits(inst + 0x29,2,0);
     IROperand__setModifierBits(inst + 0x29,1,0);
-    loopIndex7 = DAT_001b2a64;
+    loopIndex7 = swizzleXYZW_001b2a64;
     loopIndex4 = IRInst__getOperandRecord(inst,1);
     loopIndex2 = 0;
     *(uint *)(loopIndex4 + 0x10) = loopIndex7;
