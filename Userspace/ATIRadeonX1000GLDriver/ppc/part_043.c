@@ -255,24 +255,24 @@ int FUN_0014700c(param_1, param_2)
 }
 
 /* FUN_00147044 @ 0x147044 (152 bytes) */
-int FUN_00147044(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int FUN_00147044(sourceA, sourceB)
+  int *sourceA;
+  int *sourceB;
 {
-  undefined4 uVar1;
+  undefined4 related;
   undefined4 callResult;
   int vcall5cResult;
   
-  uVar1 = 1;
-  if (param_1 != param_2) {
-    vcall5cResult = (**(code **)(*param_1 + 0x5c))(param_1);
-    if ((vcall5cResult != 0) && (vcall5cResult = (**(code **)(*param_2 + 0x5c))(param_2), vcall5cResult != 0)) {
-      callResult = ((int (*)())FUN_00146edc)(param_1,param_2);
+  related = 1;
+  if (sourceA != sourceB) {
+    vcall5cResult = (**(code **)(*sourceA + 0x5c))(sourceA);
+    if ((vcall5cResult != 0) && (vcall5cResult = (**(code **)(*sourceB + 0x5c))(sourceB), vcall5cResult != 0)) {
+      callResult = ((int (*)())FUN_00146edc)(sourceA,sourceB);
       return callResult;
     }
-    uVar1 = 0;
+    related = 0;
   }
-  return uVar1;
+  return related;
 }
 
 /* Inst__canFuseAddMul @ 0x1470dc (348 bytes) */
@@ -5561,15 +5561,15 @@ int Inst__reassociateUsePair(useA, useB, pass)
   int useAPrecheck;
   int useBPrecheck;
   int swapSharedTermBetweenUsesResult;
-  undefined4 uVar4;
+  undefined4 programCopy;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
   
-  uVar4 = pass;
+  programCopy = pass;
   useAPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useA,pass,pass,in_r6,in_r7,in_r8,in_r9);
-  useBPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useB,pass,uVar4,in_r6,in_r7,in_r8,in_r9);
+  useBPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useB,pass,programCopy,in_r6,in_r7,in_r8,in_r9);
   if ((((useAPrecheck == 0) || (swapSharedTermBetweenUsesResult = ((int (*)())Inst__swapSharedTermBetweenUses)(useB,useA,pass,1,1), swapSharedTermBetweenUsesResult == 0)) &&
       ((useBPrecheck == 0 || (swapSharedTermBetweenUsesResult = ((int (*)())Inst__swapSharedTermBetweenUses)(useA,useB,pass,1,1), swapSharedTermBetweenUsesResult == 0)))) &&
      (((useAPrecheck == 0 || (useBPrecheck == 0)) ||

@@ -3751,28 +3751,28 @@ int ResourceModel__vslot29(this, node, bundleRecord)
 }
 
 /* ResourceModel__vslot22 @ 0x172428 (76 bytes) */
-int ResourceModel__vslot22(this, param_2, param_3, param_4)
+int ResourceModel__vslot22(this, countA, countB, countC)
   int this;
-  int param_2;
-  int param_3;
-  int param_4;
+  int countA;
+  int countB;
+  int countC;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 tooLargeFlag;
+  undefined4 tooLarge;
   
   if (*(int *)(*(int *)(this + 8) + 0x6b8) != 0) {
     return 1;
   }
-  if ((param_2 < 0x10) && ((param_3 < 0x10 || (param_4 <= param_3 << 2)))) {
-    uVar1 = 0;
-    uVar2 = 0;
+  if ((countA < 0x10) && ((countB < 0x10 || (countC <= countB << 2)))) {
+    tooLargeFlag = 0;
+    tooLarge = 0;
   }
   else {
-    uVar1 = 1;
-    uVar2 = 1;
+    tooLargeFlag = 1;
+    tooLarge = 1;
   }
-  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = uVar1;
-  return uVar2;
+  *(undefined4 *)(*(int *)(this + 8) + 0x6b8) = tooLargeFlag;
+  return tooLarge;
 }
 
 /* ResourceModel__vslot32 @ 0x172474 (96 bytes) */

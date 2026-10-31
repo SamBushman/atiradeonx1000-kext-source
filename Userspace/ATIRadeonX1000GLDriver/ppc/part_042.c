@@ -231,20 +231,20 @@ int FUN_001396d0(compiler, inst, operandIndex, program)
 }
 
 /* IRInst__sourceIsSplatConstant @ 0x139838 (124 bytes) */
-undefined4 IRInst__sourceIsSplatConstant(undefined4 inst,undefined4 srcIndex,double fparam_1)
+undefined4 IRInst__sourceIsSplatConstant(undefined4 inst,undefined4 srcIndex,double expectedValue)
 {
   int operandRecord;
-  int iVar1;
-  undefined4 uVar2;
-  int local_48;
-  float local_44;
+  int constantFound;
+  undefined4 isSplat;
+  int uniformConstantHeader;
+  float uniformConstantValue;
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  iVar1 = IRInst__getUniformSourceConstant(inst,srcIndex,*(undefined4 *)(operandRecord + 0x10),&local_48);
-  if (((iVar1 == 0) || ((double)local_44 != fparam_1)) || (uVar2 = 1, local_48 != 2)) {
-    uVar2 = 0;
+  constantFound = IRInst__getUniformSourceConstant(inst,srcIndex,*(undefined4 *)(operandRecord + 0x10),&uniformConstantHeader);
+  if (((constantFound == 0) || ((double)uniformConstantValue != expectedValue)) || (isSplat = 1, uniformConstantHeader != 2)) {
+    isSplat = 0;
   }
-  return uVar2;
+  return isSplat;
 }
 
 /* FUN_001398b4 @ 0x1398b4 (964 bytes) */
@@ -4973,21 +4973,21 @@ int FUN_00141044(param_1, param_2, inst)
 }
 
 /* FUN_00141090 @ 0x141090 (112 bytes) */
-int FUN_00141090(param_1, param_2, inst)
-  uint *param_1;
-  undefined4 param_2;
+int FUN_00141090(outMask, packCtx, inst)
+  uint *outMask;
+  undefined4 packCtx;
   undefined4 inst;
 {
-  uint local_28;
-  uint local_24 [4];
+  uint readMaskOut;
+  uint writeMaskOut [4];
   
-  ((int (*)())FUN_00140e70)(&local_28,param_2,inst);
-  ((int (*)())FUN_00141044)(local_24,param_2,inst);
-  local_24[0] = ~local_24[0];
-  *param_1 = local_28 &
-             (local_24[0] << 0x18 | (local_24[0] & 0xff00) << 8 | local_24[0] >> 8 & 0xff00 |
-             local_24[0] >> 0x18);
-  return param_1;
+  ((int (*)())FUN_00140e70)(&readMaskOut,packCtx,inst);
+  ((int (*)())FUN_00141044)(writeMaskOut,packCtx,inst);
+  writeMaskOut[0] = ~writeMaskOut[0];
+  *outMask = readMaskOut &
+             (writeMaskOut[0] << 0x18 | (writeMaskOut[0] & 0xff00) << 8 | writeMaskOut[0] >> 8 & 0xff00 |
+             writeMaskOut[0] >> 0x18);
+  return outMask;
 }
 
 /* FUN_00141100 @ 0x141100 (220 bytes) */
@@ -9035,20 +9035,20 @@ int FUN_00146788(obj, program)
 }
 
 /* FUN_001467e8 @ 0x1467e8 (128 bytes) */
-int FUN_001467e8(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_001467e8(inst, program)
+  int inst;
+  int program;
 {
   int vcall24Result;
   int isOpcodeInSet139344Result;
-  int *piVar2;
-  int *piVar3;
+  int *stopBlock;
+  int *blockCursor;
   
-  isOpcodeInSet139344Result = ((int (*)())IRInst__isOpcodeInSet139344)(param_1);
+  isOpcodeInSet139344Result = ((int (*)())IRInst__isOpcodeInSet139344)(inst);
   if (isOpcodeInSet139344Result != 0) {
-    piVar2 = *(int **)(param_2 + 0x3a0);
-    for (piVar3 = *(int **)(param_1 + 0x158); piVar2 != piVar3; piVar3 = (int *)piVar3[0x3c]) {
-      vcall24Result = (**(code **)(*piVar3 + 0x24))(piVar3);
+    stopBlock = *(int **)(program + 0x3a0);
+    for (blockCursor = *(int **)(inst + 0x158); stopBlock != blockCursor; blockCursor = (int *)blockCursor[0x3c]) {
+      vcall24Result = (**(code **)(*blockCursor + 0x24))(blockCursor);
       if (vcall24Result != 0) {
         return 0;
       }

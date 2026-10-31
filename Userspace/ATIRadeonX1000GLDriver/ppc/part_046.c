@@ -111,9 +111,9 @@ int FUN_00173638(ctx)
 {
   int inst;
   int operandRecord;
-  code *pcVar1;
-  int iVar2;
-  int *piVar3;
+  code *removeFn;
+  int compilerRef;
+  int *producerInst;
   
   inst = *(int *)(ctx + 0xb0);
   if (*(int *)(*(int *)(inst + 0x88) + 8) == 0x77) {
@@ -121,9 +121,9 @@ int FUN_00173638(ctx)
     if (*(int *)(operandRecord + 0x10) == DAT_001b01b4) {
       *(uint *)(*(int *)(ctx + 0xb0) + 0x14) =
            *(uint *)(*(int *)(ctx + 0xb0) + 0x14) & 0xfffffff7;
-      piVar3 = *(int **)(ctx + 0xb0);
-      iVar2 = *(int *)(ctx + 0x238);
-      pcVar1 = *(code **)(*piVar3 + 0xc);
+      producerInst = *(int **)(ctx + 0xb0);
+      compilerRef = *(int *)(ctx + 0x238);
+      removeFn = *(code **)(*producerInst + 0xc);
       goto LAB_00173718;
     }
     inst = *(int *)(ctx + 0xb0);
@@ -133,15 +133,15 @@ int FUN_00173638(ctx)
     return 0;
   }
   *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) & 0xffffffef;
-  iVar2 = *(int *)(ctx + 0x238);
-  if ((*(uint *)(*(int *)(iVar2 + 0x6c4) + 0x30) & 0x4000) == 0) {
-    Program__removeInst(*(int *)(iVar2 + 0x6c4),*(undefined4 *)(ctx + 0xb0));
-    iVar2 = *(int *)(ctx + 0x238);
+  compilerRef = *(int *)(ctx + 0x238);
+  if ((*(uint *)(*(int *)(compilerRef + 0x6c4) + 0x30) & 0x4000) == 0) {
+    Program__removeInst(*(int *)(compilerRef + 0x6c4),*(undefined4 *)(ctx + 0xb0));
+    compilerRef = *(int *)(ctx + 0x238);
   }
-  piVar3 = *(int **)(ctx + 0xb0);
-  pcVar1 = *(code **)(*piVar3 + 0xc);
+  producerInst = *(int **)(ctx + 0xb0);
+  removeFn = *(code **)(*producerInst + 0xc);
 LAB_00173718:
-  (*pcVar1)(piVar3,0,iVar2);
+  (*removeFn)(producerInst,0,compilerRef);
   *(uint *)(*(int *)(ctx + 0xb0) + 0x14) = *(uint *)(*(int *)(ctx + 0xb0) + 0x14) | 0x400;
   return 1;
 }
@@ -1744,47 +1744,47 @@ int FUN_001758d8(valueKey, scopeIndexHigh, scopeIndexLow, program)
 }
 
 /* FUN_00175a3c @ 0x175a3c (260 bytes) */
-undefined4 * FUN_00175a3c(int compiler,undefined4 param_2,undefined4 param_3,double fparam_1)
+undefined4 * FUN_00175a3c(int compiler,undefined4 unusedArg2,undefined4 valueNumber,double constantValue)
 {
-  undefined4 *puVar1;
+  undefined4 *exprRecord;
   undefined4 *allocation;
-  int *piVar3;
+  int *recordVectorSlot;
   uint vectorFilledCount;
   undefined4 arena;
   uint *vector;
   
-  *(undefined4 *)(*(int *)(compiler + 0x3f0) + 4) = param_3;
-  **(float **)(compiler + 0x3f0) = (float)fparam_1;
-  puVar1 = (undefined4 *)
+  *(undefined4 *)(*(int *)(compiler + 0x3f0) + 4) = valueNumber;
+  **(float **)(compiler + 0x3f0) = (float)constantValue;
+  exprRecord = (undefined4 *)
            HashTable__find(*(undefined4 *)(compiler + 0x3e4),*(undefined4 *)(compiler + 0x3f0));
-  if (puVar1 == (undefined4 *)0x0) {
+  if (exprRecord == (undefined4 *)0x0) {
     arena = *(undefined4 *)(compiler + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x2c);
-    puVar1 = allocation + 1;
+    exprRecord = allocation + 1;
     *allocation = arena;
-    allocation[1] = (float)fparam_1;
+    allocation[1] = (float)constantValue;
     allocation[5] = 4;
     allocation[8] = 0;
     *(undefined1 *)(allocation + 3) = 0;
     *(undefined1 *)((int)allocation + 0xd) = 0;
     allocation[4] = 0;
     allocation[7] = 0;
-    allocation[2] = param_3;
-    HashTable__insert(*(undefined4 *)(compiler + 0x3e4),puVar1);
-    HashTable__insert(*(undefined4 *)(compiler + 0x3e0),puVar1);
+    allocation[2] = valueNumber;
+    HashTable__insert(*(undefined4 *)(compiler + 0x3e4),exprRecord);
+    HashTable__insert(*(undefined4 *)(compiler + 0x3e0),exprRecord);
     vector = *(uint **)(compiler + 0x3d8);
     vectorFilledCount = vector[1];
     if (vectorFilledCount < *vector) {
       _memset(vectorFilledCount * 4 + vector[2],0,4);
-      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      recordVectorSlot = (int *)(vectorFilledCount * 4 + vector[2]);
       vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
+      recordVectorSlot = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
-    *piVar3 = (int)puVar1;
+    *recordVectorSlot = (int)exprRecord;
   }
-  return puVar1;
+  return exprRecord;
 }
 
 /* FUN_00175b40 @ 0x175b40 (620 bytes) */
@@ -2435,61 +2435,61 @@ int ValueKey__lanesAreUnset(key, row, testLane0, testLane1, testLane2, testLane3
 }
 
 /* FUN_001768d4 @ 0x1768d4 (128 bytes) */
-int FUN_001768d4(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_001768d4(key, row)
+  int key;
+  int row;
 {
   bool isLast;
-  int iVar2;
+  int rowBase;
   int *exprRecordForValueNumberResult;
   int loopIndex;
-  int *piVar5;
+  int *valueCursor;
   
-  iVar2 = param_2 * 4 + param_1;
-  piVar5 = (int *)(iVar2 + 0x178);
+  rowBase = row * 4 + key;
+  valueCursor = (int *)(rowBase + 0x178);
   loopIndex = 1;
-  while ((-1 < *piVar5 ||
-         (exprRecordForValueNumberResult = (int *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_1 + 0x238),*piVar5), *exprRecordForValueNumberResult != 0))) {
+  while ((-1 < *valueCursor ||
+         (exprRecordForValueNumberResult = (int *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),*valueCursor), *exprRecordForValueNumberResult != 0))) {
     isLast = loopIndex == 2;
-    piVar5 = piVar5 + 4;
+    valueCursor = valueCursor + 4;
     loopIndex = loopIndex + 1;
     if (isLast) {
       return 0;
     }
   }
-  *(int **)(iVar2 + 0x30) = exprRecordForValueNumberResult;
+  *(int **)(rowBase + 0x30) = exprRecordForValueNumberResult;
   return 1;
 }
 
 /* FUN_00176954 @ 0x176954 (160 bytes) */
-int FUN_00176954(ctx, param_2)
+int FUN_00176954(ctx, row)
   int ctx;
-  int param_2;
+  int row;
 {
   float *exprRecordForValueNumberResult;
   float *exprRecordForValueNumberResultB;
   undefined4 valueNumberForExprResult;
-  undefined4 uVar4;
-  int iVar5;
+  undefined4 literalOrResult;
+  int rowBase;
   int evaluateCompareFloatsResult;
   
-  iVar5 = param_2 * 4 + ctx;
-  if ((*(int *)(iVar5 + 0x178) < 0) && (*(int *)(iVar5 + 0x188) < 0)) {
-    exprRecordForValueNumberResult = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar5 + 0x178));
-    exprRecordForValueNumberResultB = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar5 + 0x188));
+  rowBase = row * 4 + ctx;
+  if ((*(int *)(rowBase + 0x178) < 0) && (*(int *)(rowBase + 0x188) < 0)) {
+    exprRecordForValueNumberResult = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(rowBase + 0x178));
+    exprRecordForValueNumberResultB = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(rowBase + 0x188));
     evaluateCompareFloatsResult = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecordForValueNumberResult,(double)*exprRecordForValueNumberResultB);
-    uVar4 = 0x3f800000;
+    literalOrResult = 0x3f800000;
     if (evaluateCompareFloatsResult == 0) {
-      uVar4 = 0;
+      literalOrResult = 0;
     }
-    valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),uVar4);
-    uVar4 = 1;
-    *(undefined4 *)(param_2 * 4 + ctx + 0x30) = valueNumberForExprResult;
+    valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),literalOrResult);
+    literalOrResult = 1;
+    *(undefined4 *)(row * 4 + ctx + 0x30) = valueNumberForExprResult;
   }
   else {
-    uVar4 = 0;
+    literalOrResult = 0;
   }
-  return uVar4;
+  return literalOrResult;
 }
 
 /* FUN_001769f4 @ 0x1769f4 (160 bytes) */

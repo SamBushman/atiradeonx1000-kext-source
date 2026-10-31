@@ -4477,3 +4477,49 @@ local	FUN_00146624	param_1	selectA	INFERRED	first select word, spilled into the 
 local	FUN_00146624	param_2	selectB	INFERRED	second select word, spilled into the home slot array
 local	FUN_00146624	pcVar1	selectBBytePtr	INFERRED	byte pointer walking selectB
 local	FUN_00146624	pcVar2	selectABytePtr	INFERRED	byte pointer walking selectA
+local	FUN_00176954	param_2	row	INFERRED	operand row; each row is four words
+local	FUN_00176954	uVar4	literalOrResult	INFERRED	one register: float bits 1.0/0.0 for the folded literal, then the return flag
+local	FUN_00176954	iVar5	rowBase	INFERRED	key + row * 4: base of this row's value numbers
+local	FUN_001768d4	param_1	key	INFERRED	value key with per-row value numbers at +0x178
+local	FUN_001768d4	param_2	row	INFERRED	operand row
+local	FUN_001768d4	iVar2	rowBase	INFERRED	key + row * 4
+local	FUN_001768d4	piVar5	valueCursor	INFERRED	walks the value numbers of the row, four words per step
+local	FUN_00160eb0	iVar4	selectWord	INFERRED	one register: operand select word, merged select and the select stored to the inst
+local	FUN_00160eb0	iVar5	splatLane	INFERRED	splat component of the operand select
+local	FUN_00160eb0	local_74	chainSourceSelect	INFERRED	out select of FUN_0015b974 (outSourceSelect), followed by byte uStack_71
+local	FUN_00160eb0	uStack_71	chainSourceSelectByte3	INFERRED	byte 3 of chainSourceSelect
+local	FUN_00160eb0	local_68	selectBytes	INFERRED	select bytes being rebuilt, initialised to 4s
+local	FUN_00147044	param_1	sourceA	INFERRED	first source tested
+local	FUN_00147044	param_2	sourceB	INFERRED	second source tested
+local	FUN_00147044	uVar1	related	INFERRED	return value: 1 when the sources are the same or related
+local	Scheduler__getDependencyLatency	iVar1	checkResult	INFERRED	vtable / classification results in the latency decision chain
+local	Inst__reassociateUsePair	uVar4	programCopy	INFERRED	copy of pass passed in r5 to the second Use__sourceIsPlainSingleUse call
+local	FUN_00175a3c	param_2	unusedArg2	INFERRED	not referenced
+local	FUN_00175a3c	param_3	valueNumber	INFERRED	value number stored in the new record and in the scratch key
+local	FUN_00175a3c	fparam_1	constantValue	INFERRED	float constant interned in the expression table
+local	FUN_00175a3c	puVar1	exprRecord	INFERRED	found or newly created expression record (allocation + 4)
+local	FUN_00175a3c	piVar3	recordVectorSlot	INFERRED	vector slot receiving the new record
+local	IRInst__sourceIsSplatConstant	fparam_1	expectedValue	INFERRED	float the splat constant must equal
+local	IRInst__sourceIsSplatConstant	iVar1	constantFound	INFERRED	IRInst__getUniformSourceConstant result
+local	IRInst__sourceIsSplatConstant	uVar2	isSplat	INFERRED	return value
+local	IRInst__sourceIsSplatConstant	local_48	uniformConstantHeader	INFERRED	first word of the IRInst__getUniformSourceConstant out record (2 = splat)
+local	IRInst__sourceIsSplatConstant	local_44	uniformConstantValue	INFERRED	float value word of the out record
+local	ResourceModel__vslot22	param_2	countA	INFERRED	first count compared against 0x10
+local	ResourceModel__vslot22	param_3	countB	INFERRED	second count compared against 0x10 and scaled by 4
+local	ResourceModel__vslot22	param_4	countC	INFERRED	third count compared against countB * 4
+local	ResourceModel__vslot22	uVar1	tooLargeFlag	INFERRED	value stored at (this+8)+0x6b8: 1 when the counts exceed the limits
+local	ResourceModel__vslot22	uVar2	tooLarge	INFERRED	return value: 1 when the counts exceed the limits
+local	FUN_00173638	pcVar1	removeFn	INFERRED	vtable +0xc entry of the producer inst called with (inst, 0, compiler)
+local	FUN_00173638	iVar2	compilerRef	INFERRED	compiler at ctx+0x238, reloaded before each use
+local	FUN_00173638	piVar3	producerInst	INFERRED	inst at ctx+0xb0 being removed
+local	FUN_00165788	param_2	pass	INFERRED	passed to the vtable +0x94 operand lookup
+local	FUN_00165788	iVar5	checkResult	INFERRED	vtable +0x60 and +0x5c results in the guard chain
+local	FUN_00165788	iVar7	operandCountOrLimit	INFERRED	one register: 1 or the producer's operand count, the loop bound
+local	FUN_001467e8	param_1	inst	INFERRED	inst whose block chain is walked
+local	FUN_001467e8	param_2	program	INFERRED	program whose +0x3a0 block ends the walk
+local	FUN_001467e8	piVar2	stopBlock	INFERRED	block at program +0x3a0 where the walk stops
+local	FUN_001467e8	piVar3	blockCursor	INFERRED	block walked up the +0xf0 parent chain from the inst's block
+local	FUN_00141090	param_1	outMask	INFERRED	receives the lane mask: read mask & ~write mask (byte-swapped)
+local	FUN_00141090	param_2	packCtx	INFERRED	pack context
+local	FUN_00141090	local_28	readMaskOut	INFERRED	out record of FUN_00140e70 for inst
+local	FUN_00141090	local_24	writeMaskOut	INFERRED	out record of FUN_00141044 for inst, then inverted
