@@ -16,6 +16,10 @@ including, the first later line matching `to` (empty `to` = end of function). On
 `use` rows for a variable must not also have a `local` row for it. `first`/`last` (the two columns after `to`, default all/none) may also be lhs | rhs | oN+M (only the Nth and Mth occurrence of `old` on that line). `from` = `*` names every occurrence of `old` the earlier rows left (the rest of the function; such a row must come last: table files apply in name order). The declaration of `new` is added next to old's (same type); old's declaration is
 dropped when nothing uses it any more. Only locals (declared after the `{`) can be split.
 
+    data<TAB>OLDNAME<TAB>NEWNAME<TAB>tier<TAB>evidence     rename the DATA label `OLDNAME` (Ghidra's DAT_/PTR_<addr>, which embeds the stock address) the way a `func` row renames a
+        function: same files, same whole-identifier rule, same chaining. link_corpus.py reads the rows, so the new name still resolves to the stock address
+        (the name no longer carries it) and the linked image defines the label under the new name; Tools/userspace/datacheck.sh proves the data side unchanged.
+
     func<TAB>OLDNAME<TAB>NEWNAME<TAB>tier<TAB>evidence     rename the FUNCTION `OLDNAME` (its Ghidra name, normally FUN_<addr>) to NEWNAME everywhere the corpus names it:
         part_*.c (header comment, definition, calls), decls.h, extra_decls.h, ledger.tsv, data/*.c, landing_pads/, and the other *.tsv tables that carry a name
         column (not names_*.tsv, class_methods.tsv or notes). The address in the header comment `/* NAME @ 0xADDR (N bytes) */` is kept, so the
@@ -57,19 +61,24 @@ def load_rows(d):
         for n, l in enumerate(open(f), 1):
             if not l.strip() or l.startswith('#'): continue
             c = l.rstrip('\n').split('\t')
-            if c[0] == 'func': continue            # see load_funcs
+            if c[0] in ('func', 'data'): continue            # see load_funcs
             if len(c) < 5 or c[0] not in ('local', 'use') or (c[0] == 'use' and len(c) < 7):
                 print('%s:%d: bad row' % (f, n)); sys.exit(1)
             rows.append((f, n, c[1], c[2], c[3], c[4]) if c[0] == 'local' else (f, n, c[1], c[2], c[3], c[4], c[6], c[7] if len(c) > 7 else '', c[8] if len(c) > 8 and c[8] else 'all', c[9] if len(c) > 9 and c[9] else 'none'))
     return rows
 
 
-def load_funcs(d):
-    """-> [(file, line, old, new, tier, evidence)] of the `func` rows of d/names*.tsv"""
+def load_datas(d):
+    """-> [(file, line, old, new, tier, evidence)] of the `data` rows of d/names*.tsv (func_roots() maps their new names to the Ghidra labels)"""
+    return [r for r in load_funcs(d, 'data\t')]
+
+
+def load_funcs(d, kinds=('func\t', 'data\t')):
+    """-> [(file, line, old, new, tier, evidence)] of the `func` and `data` rows of d/names*.tsv"""
     out = []
     for f in sorted(glob.glob(os.path.join(d, 'names.tsv')) + glob.glob(os.path.join(d, 'names_*.tsv'))):
         for n, l in enumerate(open(f), 1):
-            if not l.startswith('func\t'): continue
+            if not l.startswith(kinds): continue
             c = l.rstrip('\n').split('\t')
             if len(c) < 5 or not IDENT.fullmatch(c[1]) or not IDENT.fullmatch(c[2]):
                 print('%s:%d: bad func row' % (f, n)); sys.exit(1)

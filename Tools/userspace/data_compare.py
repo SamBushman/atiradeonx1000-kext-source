@@ -93,6 +93,7 @@ for l in open(ranges):
         for r in f[3].split(';'):
             if r: lo, hi = (int(x, 16) for x in r.split('-')); ssyms.append((lo, hi - lo, f[1]))
 import os
+SYMADDR = {}                                           # symbol_map name -> stock address: a renamed (`data` row) label no longer carries its address
 sm = os.environ.get('SYMMAP')                          # the link tree's symbol_map.tsv: every data label the emitter defined (with its stock address) - more anchors than the data table
 if sm:
     have = set(o[2] for o in objs)
@@ -102,6 +103,7 @@ if sm:
             try: n = int(f[4])
             except ValueError: n = 0
             objs.append((int(f[1], 16), n, f[0], f[2].split(',')[-1]))
+        if len(f) > 7 and f[1].startswith('0x'): SYMADDR[f[0]] = int(f[1], 16)
 lg = os.environ.get('LEDGER')
 if lg:
     for l in open(lg):
@@ -144,7 +146,8 @@ def cstr(d, secs, v):
 def implied_stock_addr(t):
     """Ghidra names embed the stock address (`DAT_001ada48`, `FUN_001d8874`, `orph_1d8910`, `s_x_001a6a00`, `PTR_..._001e9778`): label + offset = the stock address the pointer had"""
     m = re.search(r'(?:^|_)([0-9a-f]{6,8})$', t[0]) if t else None
-    return int(m.group(1), 16) + t[1] if m else None
+    if m: return int(m.group(1), 16) + t[1]
+    return SYMADDR[t[0]] + t[1] if t and t[0] in SYMADDR else None
 def in_image(secs, v): return any(s['addr'] <= v < s['addr'] + max(s['size'], 1) for s in secs if s['seg'] != '__LINKEDIT')
 
 anchors = collections.defaultdict(list)                       # stock section -> sorted [(stock addr, rebuilt addr)] of labelled objects

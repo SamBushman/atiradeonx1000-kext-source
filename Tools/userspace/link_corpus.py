@@ -21,6 +21,7 @@ import sys, os, re, json, struct, collections, glob
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import machoutil as mo
 import rewrites
+import apply_names
 
 args = sys.argv[1:]
 opts = {'exclude': set(), 'config': None}
@@ -140,8 +141,12 @@ for ln in decls:
     if mm:
         data_decls[mm.group(2)] = ('array' if mm.group(3) else 'scalar', ln)
 
+# `data` rows of the corpus's names*.tsv rename a Ghidra data label (DAT_001aa838) to a real name that no longer carries the stock address: DATA_ROOT maps the
+# new name to the Ghidra name it came from, whose suffix still is the address
+DATA_ROOT = apply_names.func_roots(apply_names.load_datas(corpus))
+
 def addr_of_name(n):
-    mm = re.search(r'_([0-9a-f]{8})$', n)
+    mm = re.search(r'_([0-9a-f]{8})$', DATA_ROOT.get(n, n))
     return int(mm.group(1), 16) if mm else None
 
 # ghidra names by address (for names without an address suffix, e.g. _gll_cc); C++ names also under the identifier the corpus gives them (`TType::vtable` -> TType__vtable)
@@ -578,7 +583,7 @@ if cfg.get('symbolize_anchors'):
         # `v = &PTR_DAT_001f4850;` used as `v + 0x1766` (pointer arithmetic by the element size of v's type): Ghidra folded `&other_object` into `&this + k*elem`; the
         # sum leaves this object (and may leave its section), so it is expressed from the object the stock reaches
         _ESZ = {'undefined': 1, 'char': 1, 'byte': 1, 'uchar': 1, 'undefined1': 1, 'undefined2': 2, 'short': 2, 'ushort': 2}
-        for _a in re.finditer(r'(?m)^\s*([A-Za-z_]\w*) = &(\w+_[0-9a-f]{8});', _chunk):
+        for _a in re.finditer(r'(?m)^\s*([A-Za-z_]\w*) = &(\w+);', _chunk):
             _lv, _nm0 = _a.group(1), _a.group(2)
             _A0 = addr_of_name(_nm0)
             if _A0 is None or not (img_lo <= _A0 < img_hi) or _lv in [e_[0] for e_ in anchor_edits.get(_h.group(1), [])]: continue
