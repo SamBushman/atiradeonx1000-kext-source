@@ -962,7 +962,6 @@ int IRInst__operandSelectIsNotDefault(inst, operandIndex)
   undefined4 inst;
   int operandIndex;
 {
-  bool selectIsDefault;
   int operandRecord;
   bool bVar2;
   
@@ -974,7 +973,7 @@ int IRInst__operandSelectIsNotDefault(inst, operandIndex)
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     bVar2 = *(int *)(operandRecord + 0x10) == _laneWord00010203_001aa848;
   }
-  return 1 - (uint)selectIsDefault;
+  return 1 - (uint)bVar2;
 }
 
 /* IRInst__computeSourceLaneMask @ 0xf3c30 (972 bytes) */

@@ -84,9 +84,6 @@ use	SelectWord__matches	uVar1	patternLane	INFERRED	lane byte of pattern compared
 use	WriteMask__fromUsedComponents	pbVar1	laneCursor	INFERRED	pointer walking the used-lane byte list; 4 terminates	^\s*pbVar1\ =\ \(byte\ \*\)\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+1
 use	WriteMask__fromUsedComponents	pbVar1	laneCursor	INFERRED	pointer walking the used-lane byte list; 4 terminates	^\s*if\ \(\*pbVar1\ !=\ 4\)\ \{$	+2
 use	WriteMask__fromUsedComponents	pbVar1	laneCursor	INFERRED	pointer walking the used-lane byte list; 4 terminates	^\s*pbVar1\ =\ pbVar1\ \+\ 1;$	+1
-use	IRInst__operandSelectIsNotDefault	bVar2	selectIsDefault	INFERRED	operand select word equals laneWord 00000000 or 00010203	^\s*bVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x10\)\ ==\ _laneWord00000000_001aa84c;$	+1
-use	IRInst__operandSelectIsNotDefault	bVar2	selectIsDefault	INFERRED	operand select word equals laneWord 00000000 or 00010203	^\s*bVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x10\)\ ==\ _laneWord00010203_001aa848;$	+1
-use	IRInst__operandSelectIsNotDefault	bVar2	selectIsDefault	INFERRED	operand select word equals laneWord 00000000 or 00010203	^\s*return\ 1\ \-\ \(uint\)bVar2;$	+1
 use	IRInst__sourceLanesAllWritten_f485c	bVar1	allLanesChecked	INFERRED	loopCounter == 3	^\s*bVar1\ =\ iVar5\ ==\ 3;$	+1
 use	IRInst__sourceLanesAllWritten_f485c	bVar1	allLanesChecked	INFERRED	loopCounter == 3	^\s*if\ \(bVar1\)\ \{$	+1
 use	IRInst__sourceLanesAllWritten_f485c	bVar2	laneSelectByte	INFERRED	select byte for the lane (4 = unused)	^\s*while\ \(\(bVar2\ =\ \*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar5\),\ bVar2\ ==\ 4\ \|\|$	+2
