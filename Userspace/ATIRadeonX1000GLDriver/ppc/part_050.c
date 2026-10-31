@@ -159,7 +159,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   float lastSplatStore;
   
   if (*laneSwizzle != 0x4040404) {
-    staleArg5 = &DAT_001b19e0;
+    staleArg5 = &laneWord03000004_001b19e0;
     splatValue = 0.0;
     loopRemaining2 = 4;
     noLaneSeen = true;

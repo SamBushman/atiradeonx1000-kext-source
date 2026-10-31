@@ -277,7 +277,7 @@ int IRMix__ctor_10a140(this, kind, compiler)
   int remaining;
   
   IRPseudo__ctor(this,kind,compiler);
-  defaultWord27 = DAT_001af9c8;
+  defaultWord27 = laneWord01010101_001af9c8;
   this[0x20] = 1;
   laneDefaultWord = swizzleAllUnused_001af9c4;
   *this = &ptrTo_IRInst__dtor_1cfcbc_001ea070;
@@ -304,7 +304,7 @@ int IRMix__ctor_10a1c0(this, kind, compiler)
   int remaining;
   
   IRPseudo__ctor(this,kind,compiler);
-  defaultWord27 = DAT_001af9c8;
+  defaultWord27 = laneWord01010101_001af9c8;
   this[0x20] = 1;
   laneDefaultWord = swizzleAllUnused_001af9c4;
   *this = &ptrTo_IRInst__dtor_1cfcbc_001ea070;
@@ -1298,8 +1298,8 @@ int IRInst__retargetOpcode(inst, select0, select1, select2, invert, compiler)
     inst[0x22] = opcodeInfo;
     IROperand__setModifierBits(inst + 0x2f,1,inst[0x34] & 1U ^ 1);
   }
-  selectTable = PTR_DAT_001e8b8c;
-  inst[0x2d] = *(int *)(PTR_DAT_001e8b8c + select0 * 4);
+  selectTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
+  inst[0x2d] = *(int *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + select0 * 4);
   if (1 < operandCount) {
     inst[0x33] = *(int *)(selectTable + select1 * 4);
   }

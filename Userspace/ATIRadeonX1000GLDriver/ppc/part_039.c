@@ -231,7 +231,7 @@ int KhanPs__vslot58_matchImmediateConstantCode(this, constants, outSelectCode, l
   (*(char *)((unsigned char *)ghidra_home + 13)) = (char)((uint)laneSwizzle >> 0x10);
   (*(char *)((unsigned char *)ghidra_home + 14)) = (char)((uint)laneSwizzle >> 8);
   (*(char *)((unsigned char *)ghidra_home + 15)) = (char)laneSwizzle;
-  tableCursor = &DAT_001aff0c;
+  tableCursor = &constVec4SelectTableB_001aff0c;
   while( true ) {
     tableCode = *tableCursor;
     if ((((GH_U2F((unsigned int)(tableCursor[1])) == sumOfLanes) &&
@@ -263,12 +263,12 @@ int KhanPs__vslot73_seedValueNumbers(this, compiler)
   undefined4 seedExpr;
   undefined4 *seedExprCursor;
   
-  seedExprCursor = &DAT_001aff74;
+  seedExprCursor = &seedExprTable_001aff74;
   do {
     seedExpr = *seedExprCursor;
     seedExprCursor = seedExprCursor + 1;
     Compiler__valueNumberForExpr(compiler,seedExpr);
-  } while (seedExprCursor != &DAT_001aff9c);
+  } while (seedExprCursor != &seedExprTable_end_001aff9c);
   return;
 }
 
@@ -281,7 +281,7 @@ int KhanPs__vslot74_seedConstantValueNumbers(this, compiler)
   int exprRecord;
   undefined4 *seedExprCursor;
   
-  seedExprCursor = &DAT_001aff68;
+  seedExprCursor = &seedConstExprTable_001aff68;
   do {
     exprRecord = Compiler__valueNumberForExpr(compiler,*seedExprCursor);
     seedExpr = *seedExprCursor;
@@ -292,7 +292,7 @@ int KhanPs__vslot74_seedConstantValueNumbers(this, compiler)
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
     ValueKey__callTargetHook12c(exprRecord,compiler);
-  } while (seedExprCursor != &DAT_001aff74);
+  } while (seedExprCursor != &seedExprTable_001aff74);
   return;
 }
 
@@ -430,7 +430,7 @@ int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
     lanesLeft = lanesLeft + -1;
   } while (lanesLeft != 0);
   laneMask = laneSwizzle << 0x18 | (laneSwizzle & 0xff00) << 8 | laneSwizzle >> 8 & 0xff00 | laneSwizzle >> 0x18;
-  tableCursor = (float *)&DAT_001aff08;
+  tableCursor = (float *)&constVec4SelectTableA_001aff08;
   while( true ) {
     constValues[1] = tableCursor[-2];
     constValues[0] = tableCursor[-3];
@@ -450,7 +450,7 @@ int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
     matchResult = (**(code **)(*inst + 0x8c))(inst);
     if ((matchResult != 0) && (matchResult = IRInst__sourceMatchesConstant(inst,srcIndex,laneMask,negatedValues), matchResult != 0)) break;
     tableCursor = tableCursor + 6;
-    if (tableCursor == (float *)&DAT_001aff50) {
+    if (tableCursor == (float *)&constVec4SelectTableA_end_001aff50) {
       return 0;
     }
   }
@@ -1201,7 +1201,7 @@ int KhanVs__vslot74(this, compiler)
   int exprRecord;
   undefined4 *seedExprCursor;
   
-  seedExprCursor = &DAT_001affb0;
+  seedExprCursor = &seedConstExprTableB_001affb0;
   do {
     exprRecord = Compiler__valueNumberForExpr(compiler,*seedExprCursor);
     seedExpr = *seedExprCursor;
@@ -1212,7 +1212,7 @@ int KhanVs__vslot74(this, compiler)
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
     ValueKey__callTargetHook12c(exprRecord,compiler);
-  } while (seedExprCursor != &DAT_001affb8);
+  } while (seedExprCursor != &seedConstExprTableB_end_001affb8);
   return;
 }
 

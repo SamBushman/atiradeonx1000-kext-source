@@ -619,7 +619,7 @@ int ValueKey__insertMovOfOperandLane_177b4c(ctx, operandIndex, lane)
   operandOffset = operandIndex * 0x18 + 0x80;
   IRInst__setOperandRef(callResult,1,*(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x8c));
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex);
-  srcSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
+  srcSelectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
   *(undefined4 *)(operandRecord + 0x10) = srcSelectWord;
   IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + operandOffset + 0x20) >> 1 & 1);
@@ -658,7 +658,7 @@ int ValueKey__insertMovOfReplacementLane(ctx, replacement, lane)
   *(undefined4 *)(callResult + 0x98) = 0;
   *(undefined4 *)(callResult + 0x9c) = destSelectWord;
   IRInst__setOperandRef(callResult,1,*(undefined4 *)(replacement + 0xc));
-  srcSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + *(int *)(replacement + 0x10) * 4);
+  srcSelectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + *(int *)(replacement + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
   *(undefined4 *)(operandRecord + 0x10) = srcSelectWord;
   if (*(int *)(replacement + 0x18) != 0) {
@@ -706,8 +706,8 @@ int ValueKey__insertBinaryOfOperandsLane(ctx, opcode, operandIndex, operandIndex
   src1OperandOffset = operandIndex * 0x18 + 0x80;
   IRInst__setOperandRef(callResult,1,*(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x8c));
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex);
-  selectTable = PTR_DAT_001e8b8c;
-  src1SelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
+  selectTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
+  src1SelectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
   *(undefined4 *)(operandRecord + 0x10) = src1SelectWord;
   IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + src1OperandOffset + 0x20) >> 1 & 1);
@@ -758,7 +758,7 @@ int ValueKey__insertMovOfOperandLane(ctx, operandIndex, lane, resultScaleCode)
   operandOffset = operandIndex * 0x18 + 0x80;
   IRInst__setOperandRef(callResult,1,*(undefined4 *)(operandIndex * 0x18 + *(int *)(ctx + 0xb0) + 0x8c));
   operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),operandIndex);
-  srcSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
+  srcSelectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (uint)*(byte *)(lane + operandRecord + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(callResult,1);
   *(undefined4 *)(operandRecord + 0x10) = srcSelectWord;
   IROperand__setModifierBits(callResult + 0xa4,2,*(uint *)(*(int *)(ctx + 0xb0) + operandOffset + 0x20) >> 1 & 1);

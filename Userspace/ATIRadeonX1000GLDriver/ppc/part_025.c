@@ -382,7 +382,7 @@ int SelectWord__clearReadComponents(outMask, selectWord)
   undefined4 *outMask;
   uint selectWord;
 {
-  *outMask = DAT_001aa838;
+  *outMask = laneWord01010101_001aa838;
   if (selectWord >> 0x18 < 4) {
     *(undefined1 *)outMask = 0;
   }
@@ -406,7 +406,7 @@ int SelectWord__clearReferencedLanes(outMask, selectWord)
 {
   uint laneComponent;
   
-  *outMask = DAT_001aa838;
+  *outMask = laneWord01010101_001aa838;
   if (selectWord >> 0x18 < 4) {
     *(undefined1 *)((int)outMask + (selectWord >> 0x18)) = 0;
   }
@@ -572,7 +572,7 @@ int SelectWord__canonicalize(outSelect, selectWord)
     if (!hasUnusedLane) goto storeLane0;
   }
   if (usedLanesAgree) {
-    *outSelect = (DAT_001aa818)[splatComponent];
+    *outSelect = (laneWordSplatTable_001aa818)[splatComponent];
     return;
   }
   lane0Unused = (*(byte *)((unsigned char *)ghidra_home + 4)) == 4;
@@ -635,7 +635,7 @@ int WriteMask__fromUsedComponents(outMask, selectWord)
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord;
   loopCounter = 4;
-  *outMask = DAT_001aa838;
+  *outMask = laneWord01010101_001aa838;
   pbVar1 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
     if (*pbVar1 != 4) {
@@ -659,7 +659,7 @@ int WriteMask__fromUsedLanes(result, selectWord)
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord;
   laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   loopCounter = 4;
-  *result = DAT_001aa838;
+  *result = laneWord01010101_001aa838;
   do {
     if (*laneCursor != '\x04') {
       *(undefined1 *)result = 0;
@@ -685,7 +685,7 @@ int LaneBytes__buildSelectWordOfZeroLanes(outBytes, laneBytes)
   laneIndexByte = '\0';
   laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   loopCounter = 4;
-  *(undefined4 *)outBytes = DAT_001aa83c;
+  *(undefined4 *)outBytes = laneWord04040404_001aa83c;
   do {
     if (*laneCursor == '\0') {
       *outBytes = laneIndexByte;
@@ -710,7 +710,7 @@ int laneBytes__clearSetLanes(outMask, laneBytes)
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = laneBytes;
   laneCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   loopCounter = 4;
-  *outMask = DAT_001aa838;
+  *outMask = laneWord01010101_001aa838;
   do {
     if (*laneCursor != '\0') {
       *(undefined1 *)outMask = 0;
@@ -1448,7 +1448,7 @@ int IRInst__sourceReadMaskAvoidsDestKind1(sourceInst, operandIndex, inst, progra
   undefined4 readMaskBytes [4];
   undefined4 readMaskOut [2];
   
-  ((int (*)())IRInst__computeSourceReadMask)(readMaskOut,sourceInst,operandIndex,DAT_001aa840,program);
+  ((int (*)())IRInst__computeSourceReadMask)(readMaskOut,sourceInst,operandIndex,laneWord01010101_001aa840,program);
   loopCounter = 0;
   readMaskBytes[0] = readMaskOut[0];
   while ((*(char *)((int)readMaskBytes + loopCounter) == '\0' ||
@@ -1622,7 +1622,7 @@ int IRInst__writeMasksOverlap(inst, inst2)
   iVar1 = IRInst__isProjectionOfOpcode2a(inst2);
   if (iVar1 == 0) {
     operandRecord = IRInst__getOperandRecord(inst2,0);
-    ((int (*)())laneBytes__selectWhereFirstIsOne)(selectedMask,*(undefined4 *)(operandRecord + 0x10),DAT_001aa840);
+    ((int (*)())laneBytes__selectWhereFirstIsOne)(selectedMask,*(undefined4 *)(operandRecord + 0x10),laneWord01010101_001aa840);
     inst2WriteMask = selectedMask[0];
   }
   else {

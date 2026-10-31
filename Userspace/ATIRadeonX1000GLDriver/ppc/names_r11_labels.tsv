@@ -1,0 +1,15 @@
+# label rows (r11): the 14 labels r07 left; ffvp emit callbacks resolved via gld_initContextDispatch (ctx+0x240 sub-struct: 0x12e4 DP4, 0x12e8 MOV, 0x12ec MUL, 0x12f0 ADD, 0x12f4 MAD, 0x1314 RCP, 0x1318 RSQ in the IL arm)
+local	ffvpEmitSceneColor	LAB_000972c8	emitAddMaterialTerm	INFERRED	ADD emit callback (ctx+0x12f0 = arbEmitIlAdd) adding the resolved material source; r11
+local	ffvpEmitSceneColor	LAB_00097360	emitMadAlphaTerm	INFERRED	MAD emit callback (ctx+0x12f4 = arbEmitIlMad) with the alpha constant table; r11
+local	ffvpEmitDirectionalLight	LAB_000980d0	afterDiffuseTerm	INFERRED	join point after every diffuse-term emit arm; next is the optional output-colour MUL; r11
+local	ffvpEmitDirectionalLight	LAB_00097d1c	emitMaterialMul	INFERRED	MUL emit callback (ctx+0x12ec) on the resolved material source; r11
+local	ffvpEmitDirectionalLight	LAB_00097d70	emitMaterialMad	INFERRED	MAD emit callback (ctx+0x12f4) on the resolved material source; r11
+local	ffvpEmitDirectionalLight	LAB_00097fd4	emitTempScaleMul	INFERRED	MUL emit callback (ctx+0x12ec) scaling by the temp register; r11
+local	ffvpEmitDirectionalLight	LAB_00098038	emitTempScaleMad	INFERRED	MAD emit callback (ctx+0x12f4) scaling by the temp register; r11
+local	ffvpEmitLight	LAB_00099084	emitColorMad	INFERRED	MAD emit callback (ctx+0x12f4) shared by both arms; r11
+local	ffvpEmitLight	LAB_0009966c	emitMaterialMul	INFERRED	MUL emit callback (ctx+0x12ec) on the resolved material source; r11
+local	ffvpEmitLight	LAB_000996c0	emitMaterialMad	INFERRED	MAD emit callback (ctx+0x12f4) on the resolved material source; r11
+local	ffvpEmitLight	LAB_0009991c	emitTempScaleMul	INFERRED	MUL emit callback (ctx+0x12ec) scaling by the temp register; r11
+local	ffvpEmitLight	LAB_00099980	emitTempScaleMad	INFERRED	MAD emit callback (ctx+0x12f4) scaling by the temp register; r11
+local	ffpsEmitTexEnvCombine	LAB_000d64e8	setupDot3Combine	INFERRED	taken for combine modes 0x86ae/0x86af/0x8740/0x8741 (DOT3_RGB/RGBA, EXT); IL opcode 0x22, both sources forced signed; r11
+local	ffpsEmitTexEnvCombine	LAB_000d6534	unsupportedCombineMode	INFERRED	taken for unrecognised combineRgbMode; argCount = 0; r11

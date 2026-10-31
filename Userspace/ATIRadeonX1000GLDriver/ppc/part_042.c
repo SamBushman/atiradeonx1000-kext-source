@@ -1845,7 +1845,7 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
     if ((*(uint *)(liveRoot + 0x14) & 1) != 0) {
       instVector = IRInst__getOperandRecord(liveRoot,0);
       countBefore = vecCount;
-      if ((*(int *)(instVector + 0x10) != DAT_001b0014) &&
+      if ((*(int *)(instVector + 0x10) != laneWord01010101_001b0014) &&
          (*(int *)(program + PROG_visitStamp) != *(int *)(liveRoot + 0x150))) {
         *(int *)(liveRoot + 0x150) = *(int *)(program + PROG_visitStamp);
         if (vecCount < vecCapacity) {
@@ -3228,7 +3228,7 @@ setVecArena:
                       if (0 < lastOperandIndexB) {
                         operandIndex = 1;
                         do {
-                          vec2Capacity = DAT_001b0020;
+                          vec2Capacity = laneWord01010101_001b0020;
                           operandLimit = (**(code **)(*inst + 0x14))(inst);
                           if (operandIndex <= operandLimit) {
                             IRInst__computeSourceLaneMask(&operandSelectOutA,inst,operandIndex,program,destSelectWord);
@@ -3266,7 +3266,7 @@ setVecArena:
                     if (0 < lastOperandIndexB) {
                       operandIndex = 1;
                       do {
-                        operandSelectWord = DAT_001b0020;
+                        operandSelectWord = laneWord01010101_001b0020;
                         sourceInst = (int *)IRInst__getOperandSource(inst,operandIndex);
                         operandLimit = (**(code **)(*inst + 0x14))(inst);
                         if (operandIndex <= operandLimit) {
@@ -3274,7 +3274,7 @@ setVecArena:
                           operandSelectWord = operandSelectOutB;
                         }
                         hasSpecialSource = ((int (*)())Rewrite__tryFoldSourceLaneMask_001396d0)(*(undefined4 *)(program + PROG_compiler),inst,operandIndex,program);
-                        operandReadMask = DAT_001b0020;
+                        operandReadMask = laneWord01010101_001b0020;
                         if (hasSpecialSource == 0) {
                           operandLimit = (**(code **)(*inst + 0x14))(inst);
                           if (operandIndex <= operandLimit) {
@@ -3438,7 +3438,7 @@ code_r0x0013e80c:
                    ((predicateResultD = RegKind__flagBit7(inst[0x26]), predicateResultD != 0 ||
                     (predicateResultD = RegKind__flagBit8(inst[0x26]), predicateResultD != 0)))) {
                   destOperandRecordC = IRInst__getOperandRecord(inst,0);
-                  if (*(int *)(destOperandRecordC + 0x10) != DAT_001b0014) {
+                  if (*(int *)(destOperandRecordC + 0x10) != laneWord01010101_001b0014) {
                     IRInst__canonicalizeCommutativeOperands(inst,*(undefined4 *)(program + PROG_compiler));
                   }
                   if ((inst[5] & 0x200U) != 0) {
@@ -3785,7 +3785,7 @@ code_r0x0013e0ac:
                   mergeTarget = chainInst;
                   if (prevMergeTarget != 0) {
                     *(undefined4 *)(chainInst + 0xc) = 0;
-                    *(int *)(chainInst + 0x9c) = DAT_001b0014;
+                    *(int *)(chainInst + 0x9c) = laneWord01010101_001b0014;
                     mergeTarget = prevMergeTarget;
                   }
                 }

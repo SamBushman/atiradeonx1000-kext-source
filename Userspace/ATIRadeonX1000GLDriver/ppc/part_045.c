@@ -520,7 +520,7 @@ setSlotCount:
              (reusedSelectRecord = (**(code **)(**(int **)(reusedLoadInst + 0x88) + 0x18))(*(int **)(reusedLoadInst + 0x88)),
              reusedSelectRecord == *(int *)(nodeInst + 300))) {
             IRInst__setOperandSource(nodeInst,1,reusedLoadInst,0,*scheduler);
-            selectConst = *(undefined4 *)(PTR_DAT_001e8b8c + slotComponent * 4);
+            selectConst = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + slotComponent * 4);
             operandRecord = IRInst__getOperandRecord(nodeInst,1);
             *(undefined4 *)(operandRecord + 0x10) = selectConst;
             if (*(int *)(reusedLoadNode + 0x6c) != 0) {
@@ -621,7 +621,7 @@ checkScheduler:
                 compiler = *scheduler;
                 scheduler[chosenSlot + 0x5c] = existingLoadNode;
                 IRInst__setOperandSource(nodeInst,1,a0,0,compiler);
-                selectConst = *(undefined4 *)(PTR_DAT_001e8b8c + slotLane * 4);
+                selectConst = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + slotLane * 4);
                 operandRecord2 = IRInst__getOperandRecord(nodeInst,1);
                 *(undefined4 *)(operandRecord2 + 0x10) = selectConst;
                 if (*(int *)(existingLoadNode + 0x6c) != 0) {
@@ -680,8 +680,8 @@ checkScheduler:
       compiler = *scheduler;
       a3 = 0;
       IRInst__setOperandSource(spareInst,1,sourceDef2,0,compiler);
-      selectTable = PTR_DAT_001e8b8c;
-      selectConst2 = *(undefined4 *)(PTR_DAT_001e8b8c + componentSelect * 4);
+      selectTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
+      selectConst2 = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + componentSelect * 4);
       operandRecord3 = IRInst__getOperandRecord(scheduler[0x60],1);
       *(undefined4 *)(operandRecord3 + 0x10) = selectConst2;
       *(undefined4 *)(scheduler[0x60] + 0xc) = 0;
@@ -972,7 +972,7 @@ int Scheduler__splitAddressRegisterUses(scheduler)
            (consumerNode = *(int *)(addressLoadNode + 0x6c), consumerNode != 0)) {
           do {
             clonedNode = IRInst__getOperandRecord(*(undefined4 *)(consumerNode + 0x38),1);
-            if (*(int *)(clonedNode + 0x10) == (DAT_001aa818)[addressComponent]) {
+            if (*(int *)(clonedNode + 0x10) == (laneWordSplatTable_001aa818)[addressComponent]) {
               componentsLeft = 4;
               clonedNode = consumerNode;
 loopCheckClonedNode:
@@ -981,7 +981,7 @@ loopCheckClonedNode:
               addressSource = IRInst__getOperandSource(*(undefined4 *)(addressLoadNode + 0x38),1);
               IRInst__setOperandSource(clonedInst,1,addressSource,0,*scheduler);
               clonedNode = IRInst__getOperandRecord(*(undefined4 *)(addressLoadNode + 0x38),1);
-              addressSelect = (DAT_001aa818)[*(byte *)(addressComponent + clonedNode + 0x10)];
+              addressSelect = (laneWordSplatTable_001aa818)[*(byte *)(addressComponent + clonedNode + 0x10)];
               clonedNode = IRInst__getOperandRecord(clonedInst,1);
               *(undefined4 *)(clonedNode + 0x10) = addressSelect;
               succIndex = 0;
@@ -2009,12 +2009,12 @@ checkAddrRegLoadsSeen:
               slotByteOffset = (int)vec2Count * 4;
               do {
                 operandRecord = IRInst__getOperandRecord(*(undefined4 *)(a0User + 0x38),1);
-                if (*(int *)(operandRecord + 0x10) == *(int *)(PTR_DAT_001e8b8c + slotByteOffset)) {
+                if (*(int *)(operandRecord + 0x10) == *(int *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + slotByteOffset)) {
                   componentCountsLeft = 4;
                   componentCountCursor = a0User;
 loopCheckComponentCountCursor:
                   if (*(int *)(componentCountCursor + 0x48) < 1) goto code_r0x0016f044;
-                  laneMaskOrUserCount = PTR_DAT_001e8b8c;
+                  laneMaskOrUserCount = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
                   SelectWord__selectWhereMasked(&vec2Capacity,0,*(undefined4 *)(*(int *)(a0User + 0x38) + 0xc));
                   a0UserCopy = Scheduler__createCopyNode(piStack00000018,*(undefined4 *)(a0User + 0x38),vec2Capacity,
                                         piStack00000018[0xb],a0User + 0xc);

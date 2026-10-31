@@ -118,7 +118,7 @@ int ValueKey__eliminateTrivialInst(ctx)
   inst = *(int *)(ctx + 0xb0);
   if (*(int *)(*(int *)(inst + 0x88) + 8) == 0x77) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    if (*(int *)(operandRecord + 0x10) == DAT_001b01b4) {
+    if (*(int *)(operandRecord + 0x10) == laneWord01010101_001b01b4) {
       *(uint *)(*(int *)(ctx + 0xb0) + 0x14) =
            *(uint *)(*(int *)(ctx + 0xb0) + 0x14) & 0xfffffff7;
       producerInst = *(int **)(ctx + 0xb0);

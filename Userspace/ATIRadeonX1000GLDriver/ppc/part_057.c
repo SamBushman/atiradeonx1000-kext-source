@@ -74,7 +74,7 @@ int HwLimits__deleting_dtor(this)
 int HwLimits__vslot7_initInterpolatorTypeDescriptor(this)
   undefined4 *this;
 {
-  *this = DAT_001afa04;
+  *this = laneWord01010100_001afa04;
   return;
 }
 
@@ -90,7 +90,7 @@ int HwLimits__vslot40_initTypeDescriptorB(this)
 int HwLimits__vslot70_initExportValueTypeDescriptor(this)
   undefined4 *this;
 {
-  *this = DAT_001afa04;
+  *this = laneWord01010100_001afa04;
   return;
 }
 

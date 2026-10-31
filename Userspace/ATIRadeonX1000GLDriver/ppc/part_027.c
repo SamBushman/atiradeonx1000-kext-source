@@ -866,10 +866,10 @@ int IRInst__resetFields(inst, compiler)
     instFlagBit2Result = OpcodeTraits__instFlagBit2(compiler,inst);
     if (instFlagBit2Result != 0) {
       if (loopIndex == 1) {
-        defaultWordPtr = &DAT_001af9d0;
+        defaultWordPtr = &laneWordTable_001af9d0;
       }
       else {
-        defaultWordPtr = &DAT_001af9cc;
+        defaultWordPtr = &laneWordTable_001af9cc;
       }
       *(undefined4 *)(recordCursor + 0xb4) = *defaultWordPtr;
     }

@@ -1509,7 +1509,7 @@ int IRNop__ctor_107a74(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRZeroary__ctor_107a28)(this,opcode,compiler);
-  defaultWord = DAT_001af9c8;
+  defaultWord = laneWord01010101_001af9c8;
   vtable = ptrTo_IRNop__vtable_001e8be8 + 8;
   this[0x20] = 0;
   *this = vtable;
@@ -1543,7 +1543,7 @@ int IRNop__ctor_107b4c(this, opcode, compiler)
   undefined *vtable;
   
   ((int (*)())IRZeroary__ctor_107a28)(this,opcode,compiler);
-  defaultWord = DAT_001af9c8;
+  defaultWord = laneWord01010101_001af9c8;
   vtable = ptrTo_IRNop__vtable_001e8be8 + 8;
   this[0x20] = 0;
   *this = vtable;

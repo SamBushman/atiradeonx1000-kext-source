@@ -2701,17 +2701,17 @@ streamScanLoop:
               nothingPending = pendingMask == 0;
               typeSizeOffset = (typeOffset + componentsMinusOne) * 4;
               vertexArray[attrIndex + 10] =
-                   *(uint *)(&DAT_001d9644 + typeSizeOffset) & 0x7f |
+                   *(uint *)(&vertexTypeDwordCountTable_001d9644 + typeSizeOffset) & 0x7f |
                    (fetchElementCount & 0x7f) << 8 | vertexArray[attrIndex + 10] & 0xffff8080U;
               vertexArray[attrIndex + 0x2a] = attrAddress - dataBase;
               signedFlag = *(uint *)(&vertexTypeSignedTable_001d9568 + typeOffset);
               typeFlags = *(uint *)(&vertexTypeFlagsTable_001d9594 + typeSizeOffset);
               rawTypeWord = *(short *)(entryOffset + arrayDesc + 8);
               vertexArray[attrIndex + 0x6a] =
-                   (*(uint *)(&DAT_001d92a8 + typeSizeOffset) & 7) << 9 |
-                   (*(uint *)(&DAT_001d9358 + typeSizeOffset) & 7) << 6 |
-                   (*(uint *)(&DAT_001d9408 + typeSizeOffset) & 7) << 3 |
-                   *(uint *)(&DAT_001d94b8 + typeSizeOffset) & 7 | vertexArray[attrIndex + 0x6a] & 0xfffff000U;
+                   (*(uint *)(&vertexTypeSwizzleFieldWTable_001d92a8 + typeSizeOffset) & 7) << 9 |
+                   (*(uint *)(&vertexTypeSwizzleFieldZTable_001d9358 + typeSizeOffset) & 7) << 6 |
+                   (*(uint *)(&vertexTypeSwizzleFieldYTable_001d9408 + typeSizeOffset) & 7) << 3 |
+                   *(uint *)(&vertexTypeSwizzleFieldXTable_001d94b8 + typeSizeOffset) & 7 | vertexArray[attrIndex + 0x6a] & 0xfffff000U;
               vertexArray[attrIndex + 0x4a] =
                    (uint)(int)rawTypeWord >> 0x10 & 0x8000 |
                    (signedFlag & 1) << 0xe | typeFlags & 0xf | vertexArray[attrIndex + 0x4a] & 0xffff3ff0U;

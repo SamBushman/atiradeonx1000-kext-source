@@ -1,0 +1,3 @@
+# r11: slots whose target DAT_ is now named
+data	PTR_DAT_001e9778	ptrTo_zeroWords4_001fa5e8_001e9778	INFERRED	nl_symbol_ptr slot whose target is zeroWords4_001fa5e8 (passed as the modifier pointer in 8 ffvp emits); r11
+data	PTR_DAT_001e8b8c	ptrTo_laneWordSplatTable_001aa818_001e8b8c	INFERRED	nl_symbol_ptr slot whose target is laneWordSplatTable_001aa818 (34 uses); r11

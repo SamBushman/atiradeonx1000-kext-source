@@ -286,7 +286,7 @@ int IRExport__ctor_1085b0(this, compiler)
   }
   opcodeId = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
   opcodeInfo = Opcode__getInfo(opcodeId);
-  defaultWord27 = DAT_001af9c8;
+  defaultWord27 = laneWord01010101_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
   this[0x27] = defaultWord27;
@@ -403,7 +403,7 @@ int IRExport__ctor_108918(this, compiler)
   }
   opcodeId = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
   opcodeInfo = Opcode__getInfo(opcodeId);
-  defaultWord27 = DAT_001af9c8;
+  defaultWord27 = laneWord01010101_001af9c8;
   this[0x21] = 1;
   this[0x4f] = 0x32;
   this[0x27] = defaultWord27;

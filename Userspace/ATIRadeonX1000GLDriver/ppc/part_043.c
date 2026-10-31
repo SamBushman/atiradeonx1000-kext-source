@@ -1366,7 +1366,7 @@ int Inst__cloneSplatProducer_00148980(inst, program)
           do {
             operandRecord3 = IRInst__getOperandRecord(inst,0);
             if (*(char *)(loopIndex2 + operandRecord3 + 0x10) != '\x01') {
-              *(undefined1 *)((int)laneBytesOut + loopIndex2) = *(undefined1 *)((int)&DAT_001b004c + loopIndex2);
+              *(undefined1 *)((int)laneBytesOut + loopIndex2) = *(undefined1 *)((int)&laneByteTable_001b004c + loopIndex2);
             }
             rewrittenSelectWord = laneBytesOut[0];
             moreComponents = loopIndex2 != 3;
@@ -1778,7 +1778,7 @@ loopCallIRInst_replaceBodyKeepLinks:
                     do {
                       if (*(char *)((int)&destSelectSaved + loopIndex) != '\x01') {
                         *(undefined1 *)((int)&newSelect + loopIndex) =
-                             *(undefined1 *)((int)&DAT_001b004c + loopIndex);
+                             *(undefined1 *)((int)&laneByteTable_001b004c + loopIndex);
                       }
                       selectWordA = newSelect;
                       loopIndex = loopIndex + 1;
@@ -2599,7 +2599,7 @@ setExtraSource:
     inst[0x27] = destSelect;
     inst[0x53] = destRegister;
     IRInst__setOperandSource(inst,onesSourceIndex,sourceDef5,0,compiler);
-    splatSelect = *(int *)(PTR_DAT_001e8b8c + splatLane * 4);
+    splatSelect = *(int *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + splatLane * 4);
     if (onesSourceIndex == 0) {
       inst[0x27] = splatSelect;
     }
@@ -3038,7 +3038,7 @@ loopSetResult:
       extraSource = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
     }
     hasExtraSource = extraSource != 0;
-    extraSelect = DAT_001b004c;
+    extraSelect = laneByteTable_001b004c;
     if (hasExtraSource) {
       operandRecord4 = IRInst__getOperandRecord(inst,*(undefined4 *)(inst + 0x84));
       extraSelect = *(undefined4 *)(operandRecord4 + 0x10);
@@ -4021,7 +4021,7 @@ checkSourceDef:
         }
         Block__insertInstAfter(*(undefined4 *)(prevNode + 0x158),prevNode,inst);
         IRInst__setOperandSource(inst,1,operandVReg,0,*(undefined4 *)(program + 8));
-        splatSelectV = *(undefined4 *)(PTR_DAT_001e8b8c + splatComponentVV * 4);
+        splatSelectV = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + splatComponentVV * 4);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(operandRecord2 + 0x10) = splatSelectV;
         if (*(int *)(program + 0x478) < *(int *)(operandVReg + 0x160)) {
@@ -4031,7 +4031,7 @@ checkSourceDef:
           *(int *)(operandVReg + 0x160) = *(int *)(program + 0x478) + 1;
         }
         IRInst__setOperandSource(inst,2,sourceDef,0,*(undefined4 *)(program + 8));
-        splatSelectS = *(undefined4 *)(PTR_DAT_001e8b8c + splatComponentS * 4);
+        splatSelectS = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + splatComponentS * 4);
         operandRecord = IRInst__getOperandRecord(inst,2);
         *(undefined4 *)(operandRecord + 0x10) = splatSelectS;
         if (*(int *)(program + 0x478) < *(int *)(sourceDef + 0x160)) {
@@ -8794,7 +8794,7 @@ loopSetOutputScale:
         return 0;
       }
       operandRecord3 = IRInst__getOperandRecord(inst,producerOperandIdx);
-      areCompatibleResult2 = SelectWord__areCompatible(*(undefined4 *)(operandRecord3 + 0x10),DAT_001b004c);
+      areCompatibleResult2 = SelectWord__areCompatible(*(undefined4 *)(operandRecord3 + 0x10),laneByteTable_001b004c);
       if (areCompatibleResult2 == 0) {
         return 0;
       }
@@ -9515,7 +9515,7 @@ int Inst__collapseAssociativeChain_00156d48(inst, pass, opcodeKind)
     do {
       inst1 = inst;
       if (*(char *)((int)&destSelect + loopIndex) == '\0') {
-        splatSelectB = *(int *)(PTR_DAT_001e8b8c + loopIndex * 4);
+        splatSelectB = *(int *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + loopIndex * 4);
         splatSelectA = *(int *)(PTR_DAT_001e8b64 + loopIndex * 4);
         break;
       }
@@ -9550,7 +9550,7 @@ int Inst__collapseAssociativeChain_00156d48(inst, pass, opcodeKind)
       if (*(int *)(operandRecord2 + 0x10) != destRecordFold) {
         operandVReg[0x27] = destSelect;
       }
-      defaultSelect = DAT_001b004c;
+      defaultSelect = laneByteTable_001b004c;
       WriteMask__fromSelectWord(&destWriteMask,destSelect);
       SelectWord__maskUnused(&maskedDestSelect,defaultSelect,destWriteMask);
       maskedSelect = maskedDestSelect;
@@ -9708,7 +9708,7 @@ setOperandIdxOrResult:
             operandIdxOrResult = ((uint)inst2[5] >> 0xe & 1) + 1;
             inst2[0x27] = splatSelectA;
             operandRecord = IRInst__getOperandRecord(inst2,operandIdxOrResult);
-            if (*(int *)(operandRecord + 0x10) == DAT_001b004c) {
+            if (*(int *)(operandRecord + 0x10) == laneByteTable_001b004c) {
               if (operandIdxOrResult == 0) {
                 inst2[0x27] = splatSelectB;
               }

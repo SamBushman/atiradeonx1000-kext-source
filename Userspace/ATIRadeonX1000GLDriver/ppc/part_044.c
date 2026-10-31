@@ -4665,7 +4665,7 @@ setPredicateResultF:
               do {
                 if (*(char *)((int)&maskOrSelectA + loopIndex) == '\0') {
                   *(undefined1 *)((int)&composedSelect + loopIndex) =
-                       *(undefined1 *)((int)&DAT_001b004c + loopIndex);
+                       *(undefined1 *)((int)&laneByteTable_001b004c + loopIndex);
                 }
                 loopIndex = loopIndex + 1;
                 countdownB = countdownB + -1;
@@ -10227,8 +10227,8 @@ int Scheduler__transformDotProduct(scheduler, node)
       IROperand__setModifierBits(inst + 0x2f,1,source2Negate);
       IRInst__setOperandSource(inst,3,helperInst,0,*scheduler);
       inst[0x27] = savedDestSelect;
-      selectTable = PTR_DAT_001e8b8c;
-      selectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (source1Select & 0xff) * 4);
+      selectTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
+      selectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (source1Select & 0xff) * 4);
       operandRecord = IRInst__getOperandRecord(inst,1);
       *(undefined4 *)(operandRecord + 0x10) = selectWord;
       selectWord = *(undefined4 *)(selectTable + (source2Select & 0xff) * 4);
@@ -10308,9 +10308,9 @@ code_r0x001699c4:
     if (*(int *)(inst[0x22] + 8) == 0x1e) {
       IRInst__reinitAsTrinary(inst,0x14,*scheduler);
       inst[0x27] = savedDestSelect;
-      selectTable = PTR_DAT_001e8b8c;
+      selectTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
       selectWord = *(undefined4 *)
-               (PTR_DAT_001e8b8c + (uint)*(byte *)((int)&source1Select + (1 - outCount)) * 4);
+               (ptrTo_laneWordSplatTable_001aa818_001e8b8c + (uint)*(byte *)((int)&source1Select + (1 - outCount)) * 4);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
       *(undefined4 *)(operandRecord2 + 0x10) = selectWord;
       selectWord = *(undefined4 *)(selectTable + (uint)*(byte *)((int)&source2Select + (1 - outCount)) * 4);

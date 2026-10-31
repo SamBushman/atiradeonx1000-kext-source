@@ -99,7 +99,7 @@ int ValueKey__rewriteAsMovOfOperandLane(ctx, operandIndex, lane, resultScaleCode
   *(undefined4 *)(inst2 + 0x120) = saturate;
   *(undefined4 *)(inst2 + 0x124) = resultScaleCode;
   IRInst__setOperandRef(inst2,1,operandRef);
-  operandSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)laneSelectByte * 4);
+  operandSelectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (uint)laneSelectByte * 4);
   operandRecord = IRInst__getOperandRecord(inst2,1);
   *(undefined4 *)(operandRecord + 0x10) = operandSelectWord;
   IROperand__setModifierBits(inst2 + 0xa4,1,operandFlags & 1);
@@ -884,7 +884,7 @@ int ValueKey__rewriteAsMovOfReplacement(ctx, replacement)
   *(undefined4 *)(member0xb0 + 0x120) = saturate;
   *(undefined4 *)(member0xb0 + 0x124) = resultScaleCode;
   IRInst__setOperandRef(member0xb0,1,*(undefined4 *)(replacement + 0xc));
-  replacementSwizzle = *(undefined4 *)(PTR_DAT_001e8b8c + *(int *)(replacement + 0x10) * 4);
+  replacementSwizzle = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + *(int *)(replacement + 0x10) * 4);
   operandRecord = IRInst__getOperandRecord(member0xb0,1);
   *(undefined4 *)(operandRecord + 0x10) = replacementSwizzle;
   if (*(int *)(replacement + 0x18) != 0) {
@@ -2322,11 +2322,11 @@ int ValueKey__foldDotOfSplatsIntoAdd(ctx)
   *(undefined4 *)(loopIndex + 0x124) = resultScaleCode;
   *(undefined4 *)(ctx + 0x218) = operandValueNumber;
   *(undefined4 *)(ctx + 0x214) = operandValueNumber;
-  selectTable = PTR_DAT_001e8b8c;
+  selectTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
   selectConstA = swizzleXYZW_001b01d8;
   if (origOpcode == 0x1c) {
-    selectTemp = *(undefined4 *)(PTR_DAT_001e8b8c + (operandSelect >> 0x16 & 0x3fc));
-    *(uint *)(rebuiltInst + 0x9c) = DAT_001b01d0 & 0xffffff;
+    selectTemp = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (operandSelect >> 0x16 & 0x3fc));
+    *(uint *)(rebuiltInst + 0x9c) = laneWord01010101_001b01d0 & 0xffffff;
     operandRecord = IRInst__getOperandRecord(rebuiltInst,1);
     selectTemp2 = *(undefined4 *)(selectTable + (operandSelect >> 0xe & 0x3fc));
     *(undefined4 *)(operandRecord + 0x10) = selectTemp;
@@ -2342,7 +2342,7 @@ int ValueKey__foldDotOfSplatsIntoAdd(ctx)
     *(undefined4 *)(loopIndex + 0x10) = selectTemp;
   }
   else if (origOpcode == 0x1d) {
-    *(uint *)(rebuiltInst + 0x9c) = DAT_001b01d0 & 0xffff;
+    *(uint *)(rebuiltInst + 0x9c) = laneWord01010101_001b01d0 & 0xffff;
     operandRecord = IRInst__getOperandRecord(rebuiltInst,1);
     selectConstA2 = swizzleXYZW_001b01d8;
     *(uint *)(operandRecord + 0x10) = operandSelect & 0xff0000 | operandSelect & 0xff000000 | selectConstA & 0xffff;
@@ -2350,8 +2350,8 @@ int ValueKey__foldDotOfSplatsIntoAdd(ctx)
     *(uint *)(operandRecord + 0x10) = (operandSelect & 0xff) << 0x10 | (operandSelect & 0xff00) << 0x10 | selectConstA2 & 0xffff;
     IRInst__setOperandRef(loopIndex,1,operandRef2);
     IRInst__setOperandRef(loopIndex,2,operandRef2);
-    selectTable = PTR_DAT_001e8b8c;
-    selectTemp = *(undefined4 *)PTR_DAT_001e8b8c;
+    selectTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
+    selectTemp = *(undefined4 *)ptrTo_laneWordSplatTable_001aa818_001e8b8c;
     operandRecord = IRInst__getOperandRecord(loopIndex,1);
     selectTemp2 = *(undefined4 *)(selectTable + 4);
     *(undefined4 *)(operandRecord + 0x10) = selectTemp;
@@ -2637,7 +2637,7 @@ int ValueKey__simplifyInstruction(ctx)
   int laneResults [8];
   
   if ((*(int *)(*(int *)(ctx + 0xb0) + 0x80) == 1) &&
-     (loopIndex = IRInst__getOperandRecord(*(int *)(ctx + 0xb0),0), *(int *)(loopIndex + 0x10) == DAT_001b01d0)) {
+     (loopIndex = IRInst__getOperandRecord(*(int *)(ctx + 0xb0),0), *(int *)(loopIndex + 0x10) == laneWord01010101_001b01d0)) {
     return 0;
   }
   loopPtr4 = laneResults;
@@ -2995,7 +2995,7 @@ int ValueKey__createLaneRecordsByOpcode(ctx)
   case 0x1d:
     loopIndex = 0;
     loopIndex2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-    if (*(int *)(loopIndex2 + 0x10) != DAT_001b01d0) {
+    if (*(int *)(loopIndex2 + 0x10) != laneWord01010101_001b01d0) {
       loopIndex2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
       loopIndex = SelectWord__firstWrittenComponent(*(undefined4 *)(loopIndex2 + 0x10));
     }
@@ -3029,7 +3029,7 @@ int ValueKey__createLaneRecordsByOpcode(ctx)
   }
   loopIndex = 0;
   loopIndex2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
-  if (*(int *)(loopIndex2 + 0x10) != DAT_001b01d0) {
+  if (*(int *)(loopIndex2 + 0x10) != laneWord01010101_001b01d0) {
     loopIndex2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     loopIndex = SelectWord__firstWrittenComponent(*(undefined4 *)(loopIndex2 + 0x10));
   }
@@ -3281,7 +3281,7 @@ loopSetChanged:
           }
         }
         else {
-          origSelect = *(int *)(PTR_DAT_001e8b8c + sourceKindCode * 4);
+          origSelect = *(int *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + sourceKindCode * 4);
           flagBit2Result = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(key + 0xb0) + 0x88) + 8),
                                *(undefined4 *)(key + 0x238));
           if (flagBit2Result == 0) {
@@ -5332,8 +5332,8 @@ loopCallRebuildState_computeNodeLevels:
                 ((*(uint *)(inst + 0x14) & 0x200) == 0)) &&
                (((opcodeKind != 0x12 || (*(int *)(inst + 0x124) == 0)) &&
                 ((curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b021c &&
-                 ((curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0218 &&
-                  (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != DAT_001b0214)))))))) &&
+                 ((curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != laneWord01000101_001b0218 &&
+                  (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != laneWord01010001_001b0214)))))))) &&
               (curNode = IRInst__getOperandRecord(inst,0), *(int *)(curNode + 0x10) != swizzleYYYX_001b0210)) &&
              ((((curNode = IRInst__hasSingleUse(inst,*(undefined4 *)(rebuildState + 4)), curNode != 0 &&
                 (curNode = *(int *)(nodeRec + 0xc), curNode != 0)) &&

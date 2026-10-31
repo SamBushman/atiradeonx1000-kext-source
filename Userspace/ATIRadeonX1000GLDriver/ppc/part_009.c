@@ -1772,7 +1772,7 @@ int extvsAssignVertexInputs(ctx, shader)
   unitIndex = 0;
   DAT_001dba98 = 0xe;
   slotByteOffset = 0x50;
-  hwInputCursor = &DAT_001dba44;
+  hwInputCursor = &hwInputCodeTable_001dba44;
   do {
     if (!noVectorsLeft) {
       vectorVariantCount = vectorVariantCount + -1;
@@ -4712,7 +4712,7 @@ int extvsBuildStreamBlock(ctx, shader)
   streamBlock[0x1b] = 1;
   streamBlock[0x1d] = 1;
   streamBlock[0x10] = componentMaskOrOutputCount << 0xc | savedWord10 & 0xffff0000 | 0x688;
-  streamFlagTable = &DAT_001dbab8;
+  streamFlagTable = &streamFlagTable_001dbab8;
   streamCount = 1;
   inputsLeft = 0x15;
   inputRecordCursor = programState;

@@ -2022,7 +2022,7 @@ int IfFooter__ctor_12e56c(conditionRegister, loopBlock, compiler)
     IRInst__ctor_10502c(branchInst,0x8c,compiler);
     allocation[0x4c] = 6;
     operandRecord = IRInst__getOperandRecord(branchInst,1);
-    vtable = PTR_DAT_001e8b8c;
+    vtable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
     *(undefined4 *)(operandRecord + 0xc) = 0;
     swizzleTableWord = *(undefined4 *)vtable;
     *(undefined4 *)(operandRecord + 8) = conditionRegister;
@@ -2355,7 +2355,7 @@ setConditionKey:
       IRInst__ctor_10502c(branchInst,0x8c,*(undefined4 *)(program + 8));
       instAlloc[0x4c] = 6;
       operandRecord = IRInst__getOperandRecord(branchInst,1);
-      swizzleTablePtr = PTR_DAT_001e8b8c;
+      swizzleTablePtr = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
       *(undefined4 *)(operandRecord + 0xc) = 0;
       swizzleTableWord = *(undefined4 *)swizzleTablePtr;
       *(undefined4 *)(operandRecord + 8) = predicateRegister;

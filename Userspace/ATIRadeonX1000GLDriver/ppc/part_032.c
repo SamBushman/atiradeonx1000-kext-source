@@ -491,7 +491,7 @@ int Program__collectExportEntry(program, valueKey)
     return;
   }
   operandRecord2 = IRInst__getOperandRecord(outputInst,0);
-  if (*(int *)(operandRecord2 + 0x10) == DAT_001afa14) {
+  if (*(int *)(operandRecord2 + 0x10) == laneWord01010101_001afa14) {
     Program__removeInst(program,outputInst);
                     
                     
@@ -1140,7 +1140,7 @@ setVectorAt418B:
     groupVectorAlloc[3] = vectorData;
     laneCounter = 0;
     bucketCursor = &DAT_001fc1f0;
-    laneKindTableBase = &DAT_001b02ec;
+    laneKindTableBase = &laneWord04040404_001b02ec;
     do {
       bucketCursor[2] = 4;
       defaultLaneKind = *(int *)(laneKindTableBase + -0x8d8);
@@ -1259,7 +1259,7 @@ setVectorAt418B:
     savedLaneSourcesAlias = savedLaneSources;
     groupVectorCount = groupVectorAlloc[2];
     requiredLanes = 1;
-    swizzleTableBase = &DAT_001b02ec;
+    swizzleTableBase = &laneWord04040404_001b02ec;
     do {
       if (0 < (int)groupVectorCount) {
         savedSwizzleWordsAlias = savedSwizzleWords;
@@ -1646,7 +1646,7 @@ code_r0x00111b80:
                       *(undefined4 *)(clonedInst + 0x9c) = laneKindValue;
                       headSrcOperand = IRInst__getOperandRecord(*candidateEntry,1);
                       swizzleCode = *(undefined4 *)
-                                (PTR_DAT_001e8b8c + (uint)*(byte *)(laneStep + headSrcOperand + 0x10) * 4);
+                                (ptrTo_laneWordSplatTable_001aa818_001e8b8c + (uint)*(byte *)(laneStep + headSrcOperand + 0x10) * 4);
                       cloneSrcOperand = IRInst__getOperandRecord(clonedInst,1);
                       *(undefined4 *)(cloneSrcOperand + 0x10) = swizzleCode;
                       Program__addInst(program,clonedInst);

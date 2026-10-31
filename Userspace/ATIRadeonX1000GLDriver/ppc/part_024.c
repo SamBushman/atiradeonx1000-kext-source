@@ -824,7 +824,7 @@ int IRInst__bindOperandRegisters(program, inst)
       }
       sourceVReg = (int *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),sourceRegisterFile,
                                    *(undefined4 *)(operandCursor + 0xac),0);
-      sourceVRegRemapped = (int *)(**(code **)(*sourceVReg + 0x28))(sourceVReg,DAT_001aa80c,program);
+      sourceVRegRemapped = (int *)(**(code **)(*sourceVReg + 0x28))(sourceVReg,laneWord01010101_001aa80c,program);
       if (sourceVRegRemapped != (int *)0x0) {
         sourceVReg = sourceVRegRemapped;
       }

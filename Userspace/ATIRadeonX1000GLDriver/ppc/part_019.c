@@ -725,7 +725,7 @@ loopSetArgCount:
           ilOpcode = 3;
           goto loopSetArgCount;
         }
-        if (combineRgbMode != 0x1e01) goto LAB_000d6534;
+        if (combineRgbMode != 0x1e01) goto unsupportedCombineMode;
         argCount = 1;
         argOrder[0] = 0;
         iVar9 = -0xe1ff;
@@ -752,7 +752,7 @@ loopSetArgCount:
         argOrder[0] = 2;
       }
       else {
-        if (combineRgbMode != 0x84e7) goto LAB_000d6534;
+        if (combineRgbMode != 0x84e7) goto unsupportedCombineMode;
         argCount = 2;
         argOrder[0] = 0;
         iVar9 = -0x7b19;
@@ -761,7 +761,7 @@ loopSetArgCount:
       }
     }
     else {
-LAB_000d64e8:
+setupDot3Combine:
       iVar9 = combineRgbMode - 0x10000;
       argOrder[0] = 0;
       ilOpcode = 0x22;
@@ -788,8 +788,8 @@ LAB_000d64e8:
     argOrder[1] = 2;
   }
   else if (combineRgbMode < 0x8745) {
-    if (combineRgbMode - 0x8740 < 2) goto LAB_000d64e8;
-LAB_000d6534:
+    if (combineRgbMode - 0x8740 < 2) goto setupDot3Combine;
+unsupportedCombineMode:
     iVar9 = combineRgbMode - 0x10000;
     argCount = 0;
   }
@@ -807,7 +807,7 @@ LAB_000d6534:
     srcSwizzles[1] = srcSwizzles[1] | 0x20000;
   }
   else {
-    if (combineRgbMode != 0x8746) goto LAB_000d6534;
+    if (combineRgbMode != 0x8746) goto unsupportedCombineMode;
     argOrder[0] = 0;
     argOrder[1] = 2;
     argOrder[2] = 1;

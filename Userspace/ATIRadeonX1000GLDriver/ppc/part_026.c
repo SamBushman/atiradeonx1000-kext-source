@@ -3685,7 +3685,7 @@ loopCheckUseDestTable:
       loopCounterB = loopCounterB + -1;
     } while (loopCounterB != 0);
     if (1 < loopIndex) {
-      descriptorCopy = DAT_001aa9e0;
+      descriptorCopy = laneWord01010101_001aa9e0;
       *(undefined1 *)((int)&descriptorCopy + resultInst) = 0;
       laneSelectEntry = *(undefined4 *)(resultInst * 4 + 0x1dc7bc);
       splitMov = IRInst__create(0x31,*(undefined4 *)(program + 8));
@@ -4152,7 +4152,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
       pdVar25 = (dword *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x25,(uint)uVar1,0);
       pdVar17 = pdVar25;
       IRInst__setOperandRef(newInstObj,1,pdVar25);
-      modifierSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (descriptorWord >> 0x11 & 7) * 4);
+      modifierSelectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (descriptorWord >> 0x11 & 7) * 4);
       operandRecord2 = IRInst__getOperandRecord(newInstObj,1);
       *(undefined4 *)(operandRecord2 + 0x10) = modifierSelectWord;
       allocation[0x4c] = pdVar25[0xc];
@@ -5042,7 +5042,7 @@ code_r0x000fd284:
           *(undefined4 *)(operandRecord3 + 0x10) = operandSelectWord3;
         }
         operandRecord3 = IRInst__getOperandRecord(newInst,2);
-        puVar5 = PTR_DAT_001e8b8c;
+        puVar5 = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
         *(undefined4 *)(operandRecord3 + 0xc) = 0;
         uVar12 = *(undefined4 *)(puVar5 + 0xc);
         registerType = 4;
@@ -6509,7 +6509,7 @@ code_r0x000feeb8:
           stagedSelectWord = (uint ******)0x10101;
           selectTableEntry = &stagedSelectWord;
           if (((uint)*extensionWordPtr & 3) == 1) {
-            selectTableEntry = &DAT_001aa9d0;
+            selectTableEntry = &laneWordTable_001aa9d0;
           }
           swizzleTable = &stagedSelectWord;
           stagedSelectWord = (uint ******)*selectTableEntry;
@@ -6663,7 +6663,7 @@ code_r0x000feeb8:
       IRInst__setOperandRef(getResourceInst,0,virtualRegister);
       IRInst__setOperandRef(getResourceInst,1,virtualRegisterC);
       ((int (*)())Program__appendInst)(program,getResourceInst,currentBlock);
-      resourceOperandTable = PTR_DAT_001e8b8c;
+      resourceOperandTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
       remapTable = PTR_DAT_001e8b64;
       stagedSelectWord = (uint ******)0x10203;
       if (((uint)firstTokenWord & 0x1f000000) != 0x1000000) {
@@ -8475,7 +8475,7 @@ code_r0x00101d1c:
           selectTableEntry = &UNK_001aa9d4;
         }
         else {
-          selectTableEntry = &DAT_001aa9cc;
+          selectTableEntry = &laneWordTable_001aa9cc;
         }
         stagedSelectWord = (uint ******)*selectTableEntry;
       }

@@ -4666,7 +4666,7 @@ storeProgram:
       IRInst__setOperandSource(insertedMov,1,loopIndex4,0,this[2]);
       IRInst__setOperandSource(inst,1,insertedMov,0,this[2]);
       identitySelect = swizzleAllUnused_001b2a68;
-      insertedMov[0x27] = DAT_001b2a80;
+      insertedMov[0x27] = laneWord01010101_001b2a80;
       loopIndex4 = IRInst__getOperandRecord(insertedMov,1);
       *(undefined4 *)(loopIndex4 + 0x10) = identitySelect;
       loopIndex4 = 0;
@@ -4910,7 +4910,7 @@ code_r0x0018eb5c: ;
                 IRInst__setExtraOperandSource(loopIndex4,loopIndex5,0,this[2]);
               }
               loopIndex5 = IRInst__getOperandRecord(loopIndex4,0);
-              if (*(int *)(loopIndex5 + 0x10) == DAT_001b2a80) {
+              if (*(int *)(loopIndex5 + 0x10) == laneWord01010101_001b2a80) {
                 loopIndex4 = IRInst__getOperandSource(loopIndex4,*(undefined4 *)(loopIndex4 + 0x84));
               }
               else {
@@ -5487,7 +5487,7 @@ int R300VSchedModel__vslot17(this, node)
             succEdges = *(uint **)(node + 0x40);
           }
         }
-        nodeInst[0x27] = DAT_001b2a84;
+        nodeInst[0x27] = laneWord01010101_001b2a84;
         *(undefined1 *)((int)nodeInst + targetComponent + 0x9c) = 0;
         nodeInst[3] = 0;
         *(undefined1 *)((int)nodeInst + targetComponent + 0xc) = 1;

@@ -1,0 +1,60 @@
+# data rows (r11): GLDriver DAT_ labels named from consuming code or from their (verified) contents
+data	DAT_001fa5e8	zeroWords4_001fa5e8	INFERRED	bss block, never written statically; passed as the per-source modifier pointer after the swizzle pointer in 369 emit-callback calls; r11
+data	DAT_001fa5f8	zeroWords4_001fa5f8	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[6..9] by ffvpAllocOperand; lane 0; r11
+data	DAT_001fa5fc	zeroWords4_001fa5f8_lane1_001fa5fc	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[6..9] by ffvpAllocOperand; lane 1; r11
+data	DAT_001fa600	zeroWords4_001fa5f8_lane2_001fa600	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[6..9] by ffvpAllocOperand; lane 2; r11
+data	DAT_001fa604	zeroWords4_001fa5f8_lane3_001fa604	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[6..9] by ffvpAllocOperand; lane 3; r11
+data	DAT_001fa608	zeroWords4_001fa608	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[2..5]/fillMask0..3; lane 0; r11
+data	DAT_001fa60c	zeroWords4_001fa608_lane1_001fa60c	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[2..5]/fillMask0..3; lane 1; r11
+data	DAT_001fa610	zeroWords4_001fa608_lane2_001fa610	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[2..5]/fillMask0..3; lane 2; r11
+data	DAT_001fa614	zeroWords4_001fa608_lane3_001fa614	INFERRED	bss, zero-initialised 4-word operand template copied into resultOperand[2..5]/fillMask0..3; lane 3; r11
+data	DAT_001d92a8	vertexTypeSwizzleFieldWTable_001d92a8	INFERRED	word table indexed (type*4+components-1)*4; & 7 stored in bits 9..11 of vertexArray[attr+0x6a] (3-bit component select: 0-3 source lane, 4 zero, 5 one); float rows read X=0 Y=1 Z=2 W=3; r11
+data	DAT_001d9358	vertexTypeSwizzleFieldZTable_001d9358	INFERRED	word table indexed (type*4+components-1)*4; & 7 stored in bits 6..8 of vertexArray[attr+0x6a] (3-bit component select: 0-3 source lane, 4 zero, 5 one); float rows read X=0 Y=1 Z=2 W=3; r11
+data	DAT_001d9408	vertexTypeSwizzleFieldYTable_001d9408	INFERRED	word table indexed (type*4+components-1)*4; & 7 stored in bits 3..5 of vertexArray[attr+0x6a] (3-bit component select: 0-3 source lane, 4 zero, 5 one); float rows read X=0 Y=1 Z=2 W=3; r11
+data	DAT_001d94b8	vertexTypeSwizzleFieldXTable_001d94b8	INFERRED	word table indexed (type*4+components-1)*4; & 7 stored in bits 0..2 of vertexArray[attr+0x6a] (3-bit component select: 0-3 source lane, 4 zero, 5 one); float rows read X=0 Y=1 Z=2 W=3; r11
+data	DAT_001d9644	vertexTypeDwordCountTable_001d9644	INFERRED	word table indexed (type*4+components-1)*4; & 0x7f stored in the low byte of vertexArray[attr+10] (dwords fetched per vertex; 1,1,2,2 for 1-4 shorts, 1..4 for floats); r11
+data	DAT_001aa761	srcRegisterFileByType_entry1_001aa761	INFERRED	byte 1 of srcRegisterFileByType_001aa760 read as DAT_001aa761 * 0x100 + register index; r11
+data	DAT_001aa818	laneWordSplatTable_001aa818	INFERRED	word table 00000000,01010101,02020202,03030303 indexed by a component: select word that splats that component; r11
+data	DAT_001aff08	constVec4SelectTableA_001aff08	INFERRED	6-word records (4 floats + select code + sum) walked by tableCursor += 6 in KhanPs literal matching; ends at DAT_001aff50; r11
+data	DAT_001aff0c	constVec4SelectTableB_001aff0c	INFERRED	start cursor of the 6-word record table in KhanPs__vslot85_findOrEncodeConstantVector (tableCursor[-4..1]); ends at UNK_001aff54; r11
+data	DAT_001aff50	constVec4SelectTableA_end_001aff50	INFERRED	loop end sentinel of constVec4SelectTableA; r11
+data	DAT_001aff68	seedConstExprTable_001aff68	INFERRED	expr-id words walked by KhanPs__vslot74_seedConstantValueNumbers until DAT_001aff74 (3 entries); r11
+data	DAT_001aff74	seedExprTable_001aff74	INFERRED	expr-id words walked by KhanPs__vslot73_seedValueNumbers until DAT_001aff9c (9 entries); also the end of seedConstExprTable; r11
+data	DAT_001aff9c	seedExprTable_end_001aff9c	INFERRED	loop end sentinel of seedExprTable_001aff74; r11
+data	DAT_001affb0	seedConstExprTableB_001affb0	INFERRED	expr-id words walked by the seed-constant value-numbering slot until DAT_001affb8 (2 entries); r11
+data	DAT_001affb8	seedConstExprTableB_end_001affb8	INFERRED	loop end sentinel of seedConstExprTableB_001affb0; r11
+data	DAT_001b004c	laneByteTable_001b004c	INFERRED	byte table indexed by a lane counter (loopIndex2) in part_043 lane-byte copy loops; r11
+data	DAT_001aa9cc	laneWordTable_001aa9cc	INFERRED	selectTableEntry pointer into a pooled select-word table (00000000,00010101,03030303,02020202); r11
+data	DAT_001aa9d0	laneWordTable_001aa9d0	INFERRED	selectTableEntry pointer into a pooled select-word table (00010101,03030303,02020202,00000000); r11
+data	DAT_001af9cc	laneWordTable_001af9cc	INFERRED	defaultWordPtr into a pooled select-word table; r11
+data	DAT_001af9d0	laneWordTable_001af9d0	INFERRED	defaultWordPtr into a pooled select-word table; r11
+data	DAT_001dbed4	colorMaterialLookupTable_001dbed4	INFERRED	word table indexed by the colour-material state; the result is stored to ctx+0x26c as colorMaterialLookup in part_014; r11
+data	DAT_001dba44	hwInputCodeTable_001dba44	INFERRED	hwInputCursor walks this table, hwInputCode = *hwInputCursor per vector variant in part_009; r11
+data	DAT_001dbab8	streamFlagTable_001dbab8	INFERRED	streamFlagTable = &DAT in part_009 stream setup; words 2,4,8,0x10; r11
+data	DAT_001dbd94	onesWords4_001dbd94	INFERRED	4 words all 1, passed as the per-source modifier pointer where the zero block is zeroWords4_001fa5e8 (14 ffvp emit calls); r11
+data	DAT_001db9a8	onesWords4_001db9a8	INFERRED	4 words all 1, passed as an operand block to extvsAppendInstruction; r11
+data	DAT_001aa80c	laneWord01010101_001aa80c	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001aa838	laneWord01010101_001aa838	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001aa83c	laneWord04040404_001aa83c	INFERRED	4-byte lane select/write-mask word with value 04040404 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001aa840	laneWord01010101_001aa840	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001aa9e0	laneWord01010101_001aa9e0	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001af9c8	laneWord01010101_001af9c8	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001afa04	laneWord01010100_001afa04	INFERRED	4-byte lane select/write-mask word with value 01010100 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001afa14	laneWord01010101_001afa14	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001afef8	laneWord01010101_001afef8	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001afffc	laneWord01010101_001afffc	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b0014	laneWord01010101_001b0014	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b0020	laneWord01010101_001b0020	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b01b4	laneWord01010101_001b01b4	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b01d0	laneWord01010101_001b01d0	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b0214	laneWord01010001_001b0214	INFERRED	4-byte lane select/write-mask word with value 01010001 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b0218	laneWord01000101_001b0218	INFERRED	4-byte lane select/write-mask word with value 01000101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b02ec	laneWord04040404_001b02ec	INFERRED	4-byte lane select/write-mask word with value 04040404 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b19e0	laneWord03000004_001b19e0	INFERRED	4-byte lane select/write-mask word with value 03000004 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b2a80	laneWord01010101_001b2a80	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b2a84	laneWord01010101_001b2a84	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b2d54	laneWord01010101_001b2d54	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b2d58	laneWord03030303_001b2d58	INFERRED	4-byte lane select/write-mask word with value 03030303 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b2d5c	laneWord02020202_001b2d5c	INFERRED	4-byte lane select/write-mask word with value 02020202 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b2d60	laneWord01010101_001b2d60	INFERRED	4-byte lane select/write-mask word with value 01010101 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11
+data	DAT_001b2d70	laneWord01010100_001b2d70	INFERRED	4-byte lane select/write-mask word with value 01010100 (bytes: lane index 0-3, 4 = unused, or 0/1 mask bits); r11

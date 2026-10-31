@@ -3306,7 +3306,7 @@ setLiveCountSnapshot:
               configBit6Arg = (code *)(1 << ((uint)scratchArg6 >> 0x10 & 7));
               sourceSelectMask = 1 << ((uint)scratchArg6 >> 0x16 & 7) | 1 << ((uint)scratchArg6 >> 0x13 & 7) |
                        (uint)configBit6Arg;
-              srcRegisterIndex = DAT_001aa761 * 0x100 + ((uint)scratchArg6 >> 5 & 0xff);
+              srcRegisterIndex = srcRegisterFileByType_entry1_001aa761 * 0x100 + ((uint)scratchArg6 >> 5 & 0xff);
               bindingRowBase = (code *)(srcRegisterIndex + alloc + 0x30870);
               bindingEntryPtr = (undefined4 *)(srcRegisterIndex * 0x10 + alloc + 0x2a87c);
               do {

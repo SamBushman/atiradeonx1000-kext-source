@@ -4354,7 +4354,7 @@ loopSetExportLaneKind:
   Block__appendInst(*(undefined4 *)(program + 0x3a8),mappedExportInst);
   IRInst__setOperandRef(this[0xd],1,this[0xf]);
   IRInst__setOperandRef(this[0xd],0,mappedVReg);
-  *(undefined4 *)(this[0xd] + 0x9c) = DAT_001afef8;
+  *(undefined4 *)(this[0xd] + 0x9c) = laneWord01010101_001afef8;
   ((int (*)())VReg__appendUser)(mappedVReg,this[0xd]);
   laneIndex = 0;
   do {
@@ -4501,7 +4501,7 @@ loopSetExportLaneKind:
   Block__appendInst(*(undefined4 *)(program + 0x3a8),mappedExportInst);
   IRInst__setOperandRef(this[0xd],1,this[0xf]);
   IRInst__setOperandRef(this[0xd],0,mappedVReg);
-  *(undefined4 *)(this[0xd] + 0x9c) = DAT_001afef8;
+  *(undefined4 *)(this[0xd] + 0x9c) = laneWord01010101_001afef8;
   ((int (*)())VReg__appendUser)(mappedVReg,this[0xd]);
   laneIndex = 0;
   do {

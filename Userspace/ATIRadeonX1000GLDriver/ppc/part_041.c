@@ -2334,7 +2334,7 @@ int RegAlloc__registerOfInst(allocator, inst)
   
   if (inst[0x26] != 0xc) {
     query = (**(code **)(*inst + 0x50))(inst);
-    if ((query != 0) || (query = IRInst__getOperandRecord(inst,0), *(int *)(query + 0x10) == DAT_001afffc)) {
+    if ((query != 0) || (query = IRInst__getOperandRecord(inst,0), *(int *)(query + 0x10) == laneWord01010101_001afffc)) {
       return 0;
     }
     if ((((inst[0x26] != 0x37) && (inst[0x20] != 0)) &&

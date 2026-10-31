@@ -641,7 +641,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
         }
       }
       saveMovInst = IRMov__new_1084b8(0x66,compiler);
-      *(undefined4 *)(saveMovInst + 0x9c) = DAT_001b2d54;
+      *(undefined4 *)(saveMovInst + 0x9c) = laneWord01010101_001b2d54;
       *(undefined1 *)(predSlot + saveMovInst + 0x9c) = 0;
       *(undefined4 *)(saveMovInst + 0x98) = 0;
       *(undefined4 *)(saveMovInst + 0x94) = destRegister;
@@ -1734,18 +1734,18 @@ int R520MachineAssembler__vslot79_setTexCompareFlags(this, textureClass, compare
     recordsBase = *(int *)(this + 0xa8);
     recordOffset = *(int *)(this + 0x60) * 0x48;
   }
-  else if (compareMode == DAT_001b2d60) {
+  else if (compareMode == laneWord01010101_001b2d60) {
     modeValue = 3;
     recordsBase = *(int *)(this + 0xa8);
     recordOffset = *(int *)(this + 0x60) * 0x48;
   }
-  else if (compareMode == DAT_001b2d5c) {
+  else if (compareMode == laneWord02020202_001b2d5c) {
     modeValue = 4;
     recordsBase = *(int *)(this + 0xa8);
     recordOffset = *(int *)(this + 0x60) * 0x48;
   }
   else {
-    if (compareMode != DAT_001b2d58) {
+    if (compareMode != laneWord03030303_001b2d58) {
       return;
     }
     modeValue = 5;
@@ -2323,8 +2323,8 @@ int evaluateConstantComparison(inst, resultKnownOut)
   int src2Kind;
   float src2Value;
   
-  laneMask = DAT_001b2d70;
-  gotConstant = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&src1Kind);
+  laneMask = laneWord01010100_001b2d70;
+  gotConstant = IRInst__getUniformSourceConstant(inst,1,laneWord01010100_001b2d70,&src1Kind);
   if ((((gotConstant == 0) || (src1Kind != 2)) ||
       (gotConstant = IRInst__getUniformSourceConstant(inst,2,laneMask,&src2Kind), gotConstant == 0)) || (src2Kind != 2)) {
     comparisonResult = false;
