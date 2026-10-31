@@ -976,8 +976,8 @@ switchD_0015a394_default:
 }
 
 /* Inst__takeOutCommonFactor @ 0x15a68c (3608 bytes) */
-int Inst__takeOutCommonFactor(param_1, pass)
-  int param_1;
+int Inst__takeOutCommonFactor(commonInst, pass)
+  int commonInst;
   int pass;
 {
   int loopIndex2;
@@ -1028,13 +1028,13 @@ int Inst__takeOutCommonFactor(param_1, pass)
   bool foundNonIdentityB;
   int allocation2;
   int allocation3;
-  int iVar5;
-  uint uVar6;
+  int userBytes;
+  uint otherAbsOperand;
   undefined4 *elementPtrB;
-  int iVar8;
+  int operandCountOrResult;
   int scanIndex;
   int *operandSlotC;
-  int *piVar11;
+  int *scanHeadInst;
   int operandLimit;
   int *operandModPtr;
   int operandIndex;
@@ -1044,14 +1044,19 @@ int Inst__takeOutCommonFactor(param_1, pass)
   undefined4 compilerCtx;
   undefined4 staleArg6;
   code *a7;
-  int iVar17;
+  int chainPairCursor;
+  int scanOperandRecord;
+  int headOperandRecord;
   uint userCount;
   int byteOffset;
   int *chainHeadSlotC;
   int *chainHeadSlotB;
   int *chainEndSlotC;
   undefined4 maskedSelect;
-  uint uVar24;
+  uint pairAbsOperand;
+  uint newInstFlags;
+  uint chainAbsBitB;
+  uint chainAbsBitA;
   uint *modPtr;
   int *inst8;
   int operandIndex4;
@@ -1071,12 +1076,12 @@ int Inst__takeOutCommonFactor(param_1, pass)
   int otherSelect;
   int otherOperandOffset;
   
-  userCount = *(uint *)(*(int *)(param_1 + 0x10) + 4);
-  iVar5 = userCount << 2;
-  iStack00000018 = param_1;
-  allocation2 = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),iVar5);
-  allocation3 = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),iVar5);
-  allocation = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),iVar5);
+  userCount = *(uint *)(*(int *)(commonInst + 0x10) + 4);
+  userBytes = userCount << 2;
+  iStack00000018 = commonInst;
+  allocation2 = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),userBytes);
+  allocation3 = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),userBytes);
+  allocation = Arena__alloc(*(undefined4 *)(*(int *)(pass + 8) + 0x378),userBytes);
   if (0 < (int)userCount) {
     userIndex = 0;
     loopIndex2 = 0;
@@ -1116,13 +1121,13 @@ int Inst__takeOutCommonFactor(param_1, pass)
         inst6 = (int *)*elementPtrB;
         foundNonIdentity = false;
         modPtr = (uint *)(inst6 + 0x2e);
-        for (operandIndex8 = 1; iVar8 = (**(code **)(*inst6 + 0x14))(inst6), operandIndex8 <= iVar8;
+        for (operandIndex8 = 1; operandCountOrResult = (**(code **)(*inst6 + 0x14))(inst6), operandIndex8 <= operandCountOrResult;
             operandIndex8 = operandIndex8 + 1) {
           operandVReg = (int *)IRInst__getOperandSource(inst6,operandIndex8);
           if (inst7 == operandVReg) {
             operandRecord2 = IRInst__getOperandRecord(inst6,operandIndex8);
-            iVar8 = SelectWord__isIdentity(*(undefined4 *)(operandRecord2 + 0x10));
-            if ((iVar8 == 0) || ((*modPtr & 2) != 0)) {
+            operandCountOrResult = SelectWord__isIdentity(*(undefined4 *)(operandRecord2 + 0x10));
+            if ((operandCountOrResult == 0) || ((*modPtr & 2) != 0)) {
               foundNonIdentity = true;
             }
             *(int *)(byteOffset + allocation) = operandIndex8;
@@ -1144,9 +1149,9 @@ int Inst__takeOutCommonFactor(param_1, pass)
               ((operandIndex8 = IRInst__getOperandSource(inst7,1), iStack00000018 == operandIndex8 ||
                (operandIndex8 = IRInst__getOperandSource(inst7,2), iStack00000018 == operandIndex8)))) {
         *(undefined4 *)(byteOffset + allocation3) = inst7;
-        iVar8 = IRInst__getOperandSource(inst7,1);
+        operandCountOrResult = IRInst__getOperandSource(inst7,1);
         operandIndex8 = 2;
-        if (iStack00000018 == iVar8) {
+        if (iStack00000018 == operandCountOrResult) {
           operandIndex8 = 1;
         }
         loopIndex2 = loopIndex2 + 1;
@@ -1159,26 +1164,26 @@ LAB_0015a760:
       byteOffset = byteOffset + 4;
     } while (userCount != userIndex);
     if (1 < loopIndex2) {
-      iVar17 = 0;
+      chainPairCursor = 0;
       maskedSelect = 0;
       do {
-        slotOffset = iVar17 * 4;
+        slotOffset = chainPairCursor * 4;
         chainHeadSlotB = (int *)(allocation2 + slotOffset);
         if ((*(int *)(allocation2 + slotOffset) == 0) ||
            ((*(uint *)(*(int *)(allocation2 + slotOffset) + 0x14) & 1) == 0)) {
 LAB_0015a9bc:
-          iVar17 = iVar17 + 1;
+          chainPairCursor = chainPairCursor + 1;
         }
         else {
           chainEndSlotA = (int *)(allocation3 + slotOffset);
           operandIndex9 = 1;
           if ((*(uint *)(*(int *)(allocation3 + slotOffset) + 0x14) & 1) == 0) goto LAB_0015a9bc;
-          for (; iVar8 = (**(code **)(*(int *)*chainHeadSlotB + 0x14))((int *)*chainHeadSlotB), operandIndex9 <= iVar8;
+          for (; operandCountOrResult = (**(code **)(*(int *)*chainHeadSlotB + 0x14))((int *)*chainHeadSlotB), operandIndex9 <= operandCountOrResult;
               operandIndex9 = operandIndex9 + 1) {
-            iVar8 = IRInst__getOperandSource(*chainHeadSlotB,operandIndex9);
-            if (iStack00000018 == iVar8) {
-              iVar8 = IRInst__getOperandRecord(*chainHeadSlotB,operandIndex9);
-              commonSelect = *(int *)(iVar8 + 0x10);
+            operandCountOrResult = IRInst__getOperandSource(*chainHeadSlotB,operandIndex9);
+            if (iStack00000018 == operandCountOrResult) {
+              operandCountOrResult = IRInst__getOperandRecord(*chainHeadSlotB,operandIndex9);
+              commonSelect = *(int *)(operandCountOrResult + 0x10);
               absOperand1 = *(uint *)(operandIndex9 * 0x18 + *chainHeadSlotB + 0xa0) >> 1 & 1;
               commonOperandIdx = operandIndex9;
               goto LAB_0015aa4c;
@@ -1187,8 +1192,8 @@ LAB_0015a9bc:
           commonOperandIdx = 0;
           absOperand1 = 0;
 LAB_0015aa4c:
-          nextIndex = iVar17 + 1;
-          iVar17 = nextIndex;
+          nextIndex = chainPairCursor + 1;
+          chainPairCursor = nextIndex;
           if (nextIndex < (int)userCount) {
             slotByteOffsetB = nextIndex * 4;
             chainEndSlotC = (int *)(allocation3 + slotByteOffsetB);
@@ -1198,35 +1203,35 @@ LAB_0015aa4c:
             scanIndex = 0;
             otherOperandOffset = operandIndex10 * 0x18 + 0x80;
             do {
-              piVar11 = (int *)*chainHeadSlotC;
-              if ((((piVar11 != (int *)0x0) && ((piVar11[5] & 1U) != 0)) &&
+              scanHeadInst = (int *)*chainHeadSlotC;
+              if ((((scanHeadInst != (int *)0x0) && ((scanHeadInst[5] & 1U) != 0)) &&
                   ((*(uint *)(*chainEndSlotC + 0x14) & 1) != 0)) &&
-                 ((piVar11 != (int *)*chainHeadSlotB && (*chainEndSlotA == *chainEndSlotC)))) {
+                 ((scanHeadInst != (int *)*chainHeadSlotB && (*chainEndSlotA == *chainEndSlotC)))) {
                 if ((*(int *)(allocation + slotOffset) != *operandSlotC) &&
                    (((*(int *)(*(int *)(*chainEndSlotA + 0x88) + 8) != 0x14 ||
                      (*(int *)(allocation + slotOffset) == 3)) || (*operandSlotC == 3)))) {
-                  uVar24 = 0;
-                  for (operandIndex2 = 1; iVar8 = (**(code **)(*piVar11 + 0x14))(piVar11), operandIndex2 <= iVar8;
+                  pairAbsOperand = 0;
+                  for (operandIndex2 = 1; operandCountOrResult = (**(code **)(*scanHeadInst + 0x14))(scanHeadInst), operandIndex2 <= operandCountOrResult;
                       operandIndex2 = operandIndex2 + 1) {
-                    iVar8 = IRInst__getOperandSource(*chainHeadSlotC,operandIndex2);
-                    if (iStack00000018 == iVar8) {
-                      iVar8 = IRInst__getOperandRecord(*chainHeadSlotC,operandIndex2);
-                      otherSelect = *(int *)(iVar8 + 0x10);
-                      piVar11 = (int *)*chainHeadSlotC;
-                      uVar24 = (uint)piVar11[operandIndex2 * 6 + 0x28] >> 1 & 1;
-                      if ((otherSelect == commonSelect) && (uVar6 = absOperand1, absOperand1 == uVar24))
+                    operandCountOrResult = IRInst__getOperandSource(*chainHeadSlotC,operandIndex2);
+                    if (iStack00000018 == operandCountOrResult) {
+                      operandCountOrResult = IRInst__getOperandRecord(*chainHeadSlotC,operandIndex2);
+                      otherSelect = *(int *)(operandCountOrResult + 0x10);
+                      scanHeadInst = (int *)*chainHeadSlotC;
+                      pairAbsOperand = (uint)scanHeadInst[operandIndex2 * 6 + 0x28] >> 1 & 1;
+                      if ((otherSelect == commonSelect) && (otherAbsOperand = absOperand1, absOperand1 == pairAbsOperand))
                       goto LAB_0015abb0;
                     }
                     else {
-                      piVar11 = (int *)*chainHeadSlotC;
+                      scanHeadInst = (int *)*chainHeadSlotC;
                     }
                   }
                   otherOperandIdx = 0;
-                  uVar6 = uVar24;
+                  otherAbsOperand = pairAbsOperand;
                   operandIndex2 = otherOperandIdx;
 LAB_0015abb0:
                   otherOperandIdx = operandIndex2;
-                  if ((otherSelect == commonSelect) && (absOperand1 == uVar6)) {
+                  if ((otherSelect == commonSelect) && (absOperand1 == otherAbsOperand)) {
                     *(int *)(pass + 0x1cc) = *(int *)(pass + 0x1cc) + 1;
                     inst1 = *chainHeadSlotB;
                     if (inst1 != *chainEndSlotA) {
@@ -1248,9 +1253,9 @@ LAB_0015abb0:
                       newSource = IRInst__getOperandSource(inst1,operandIndex10);
                       operandRecord = IRInst__getOperandRecord(*chainHeadSlotB,operandIndex10);
                       userInst = (int *)*chainHeadSlotB;
-                      iVar17 = *(int *)(operandRecord + 0x10);
+                      headOperandRecord = *(int *)(operandRecord + 0x10);
                       operandModifiers = *(uint *)((int)userInst + otherOperandOffset + 0x20);
-                      uVar24 = userInst[commonOperandIdx * 6 + 0x28];
+                      chainAbsBitA = userInst[commonOperandIdx * 6 + 0x28];
                       (**(code **)(*userInst + 0xc))
                                 (userInst,1,*(undefined4 *)(pass + 8),staleArg4,compilerCtx,staleArg6,operandModifiers,
                                  *(code **)(*userInst + 0xc));
@@ -1262,14 +1267,14 @@ LAB_0015abb0:
                           staleArg4 = 1;
                           IRInst__setOperandSource(inst8,operandIndex5,newSource,1,compilerCtx);
                           if (operandIndex5 == 0) {
-                            inst8[0x27] = iVar17;
+                            inst8[0x27] = headOperandRecord;
                           }
                           else {
                             operandLimit = IRInst__getOperandRecord(inst8,operandIndex5);
-                            *(int *)(operandLimit + 0x10) = iVar17;
+                            *(int *)(operandLimit + 0x10) = headOperandRecord;
                           }
                           IROperand__setModifierBits(operandModPtr + 3,2,operandModifiers >> 1 & 1);
-                          IROperand__setModifierBits(operandModPtr + 3,1,(uVar24 ^ operandModifiers) & 1 ^ operandModPtr[8] & 1U);
+                          IROperand__setModifierBits(operandModPtr + 3,1,(chainAbsBitA ^ operandModifiers) & 1 ^ operandModPtr[8] & 1U);
                         }
                         operandModPtr = operandModPtr + 6;
                       }
@@ -1295,10 +1300,10 @@ LAB_0015abb0:
                       newSource2 = IRInst__getOperandSource(inst2,operandIndex6);
                       operandRecord = IRInst__getOperandRecord(*chainHeadSlotC,operandIndex6);
                       userInst = (int *)*chainHeadSlotC;
-                      iVar17 = *(int *)(operandRecord + 0x10);
+                      scanOperandRecord = *(int *)(operandRecord + 0x10);
                       a7 = *(code **)(*userInst + 0xc);
                       operandModifiers = userInst[operandIndex6 * 6 + 0x28];
-                      uVar24 = userInst[otherOperandIdx * 6 + 0x28];
+                      chainAbsBitB = userInst[otherOperandIdx * 6 + 0x28];
                       (*a7)(userInst,1,*(undefined4 *)(pass + 8),staleArg4,compilerCtx,staleArg6,*userInst,a7);
                       for (operandIndex7 = 1; operandLimit = (**(code **)(*inst9 + 0x14))(inst9),
                           operandIndex7 <= operandLimit; operandIndex7 = operandIndex7 + 1) {
@@ -1306,14 +1311,14 @@ LAB_0015abb0:
                         if (operandLimit == *chainHeadSlotC) {
                           IRInst__setOperandSource(inst9,operandIndex7,newSource2,1,*(undefined4 *)(pass + 8));
                           if (operandIndex7 == 0) {
-                            inst9[0x27] = iVar17;
+                            inst9[0x27] = scanOperandRecord;
                           }
                           else {
                             operandLimit = IRInst__getOperandRecord(inst9,operandIndex7);
-                            *(int *)(operandLimit + 0x10) = iVar17;
+                            *(int *)(operandLimit + 0x10) = scanOperandRecord;
                           }
                           IROperand__setModifierBits(operandModPtr + 3,2,operandModifiers >> 1 & 1);
-                          IROperand__setModifierBits(operandModPtr + 3,1,(uVar24 ^ operandModifiers) & 1 ^ operandModPtr[8] & 1U);
+                          IROperand__setModifierBits(operandModPtr + 3,1,(chainAbsBitB ^ operandModifiers) & 1 ^ operandModPtr[8] & 1U);
                         }
                         operandModPtr = operandModPtr + 6;
                       }
@@ -1330,8 +1335,8 @@ LAB_0015abb0:
                     newMul[0x48] = *(int *)(*chainEndSlotC + 0x120);
                     newMul[0x49] = *(int *)(*chainEndSlotC + 0x124);
                     producerInst = *chainEndSlotC;
-                    iVar8 = *(int *)(*(int *)(producerInst + 0x10) + 4);
-                    userSlotDown = iVar8 - 1;
+                    operandCountOrResult = *(int *)(*(int *)(producerInst + 0x10) + 4);
+                    userSlotDown = operandCountOrResult - 1;
                     if (-1 < (int)userSlotDown) {
                       operandLimit = userSlotDown * 4;
                       loopIndex = 0;
@@ -1373,7 +1378,7 @@ LAB_0015b040:
                         userSlotDown = userSlotDown - 1;
                         operandLimit = operandLimit + -4;
                         loopIndex = loopIndex + 1;
-                        if (iVar8 == loopIndex) break;
+                        if (operandCountOrResult == loopIndex) break;
                         producerInst = *chainEndSlotC;
                       } while( true );
                     }
@@ -1435,8 +1440,8 @@ LAB_0015b1ec:
                     *chainEndSlotC = 0;
                     *operandSlotC = 0;
                     while (newSource3 = newMul, *(int *)(newSource3[0x22] + 8) == 0x13) {
-                      uVar24 = newSource3[5];
-                      if ((uVar24 & 0x200) != 0) goto LAB_0015b3f0;
+                      newInstFlags = newSource3[5];
+                      if ((newInstFlags & 0x200) != 0) goto LAB_0015b3f0;
                       hasSingleUse = IRInst__hasSingleUse(newSource3,pass);
                       if ((hasSingleUse == 0) || (newSource3[0x48] != 0)) break;
                       vector4 = (int *)newSource3[4];
@@ -1453,13 +1458,13 @@ LAB_0015b1ec:
                       newMul = (int *)*elementPtrB;
                       foundNonIdentityB = false;
                       modPtr = (uint *)(newMul + 0x2e);
-                      for (operandIndex3 = 1; iVar8 = (**(code **)(*newMul + 0x14))(newMul),
-                          operandIndex3 <= iVar8; operandIndex3 = operandIndex3 + 1) {
+                      for (operandIndex3 = 1; operandCountOrResult = (**(code **)(*newMul + 0x14))(newMul),
+                          operandIndex3 <= operandCountOrResult; operandIndex3 = operandIndex3 + 1) {
                         operandVReg2 = (int *)IRInst__getOperandSource(newMul,operandIndex3);
                         if (operandVReg2 == newSource3) {
                           operandRecord2 = IRInst__getOperandRecord(newMul,operandIndex3);
-                          iVar8 = SelectWord__isIdentity(*(undefined4 *)(operandRecord2 + 0x10));
-                          if ((iVar8 == 0) || ((*modPtr & 2) != 0)) {
+                          operandCountOrResult = SelectWord__isIdentity(*(undefined4 *)(operandRecord2 + 0x10));
+                          if ((operandCountOrResult == 0) || ((*modPtr & 2) != 0)) {
                             foundNonIdentityB = true;
                           }
                           *operandSlotC = operandIndex3;
@@ -1468,9 +1473,9 @@ LAB_0015b1ec:
                       }
                       if (foundNonIdentityB) break;
                     }
-                    uVar24 = newSource3[5];
+                    newInstFlags = newSource3[5];
 LAB_0015b3f0:
-                    if (((uVar24 & 0x200) == 0) &&
+                    if (((newInstFlags & 0x200) == 0) &&
                        ((*(int *)(newSource3[0x22] + 8) == 0x12 ||
                         (*(int *)(newSource3[0x22] + 8) == 0x14)))) {
                       *chainEndSlotC = (int)newSource3;
@@ -1480,7 +1485,7 @@ LAB_0015b3f0:
                     }
                     if ((*(uint *)(*chainHeadSlotB + 0x14) & 1) == 0) {
                       maskedSelect = 1;
-                      iVar17 = nextIndex;
+                      chainPairCursor = nextIndex;
                       break;
                     }
                     maskedSelect = 1;
@@ -1491,11 +1496,11 @@ LAB_0015b3f0:
               chainHeadSlotC = chainHeadSlotC + 1;
               operandSlotC = operandSlotC + 1;
               chainEndSlotC = chainEndSlotC + 1;
-              iVar17 = nextIndex;
+              chainPairCursor = nextIndex;
             } while (userCount - nextIndex != scanIndex);
           }
         }
-        if ((int)userCount <= iVar17) {
+        if ((int)userCount <= chainPairCursor) {
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation);
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation3);
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation2);

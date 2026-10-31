@@ -3778,3 +3778,45 @@ local	FUN_00148980	iVar12	cloneOrOperandCount	INFERRED	one register: stamp field
 local	FUN_00148980	uVar13	savedField14c	INFERRED	+0x14c field copied to operand record 0
 local	FUN_00148980	local_58	laneBytesOut	INFERRED	four select bytes copied from DAT_001b004c
 local	FUN_00148980	local_48	composedSelectOut	INFERRED	SelectWord__compose out
+local	Inst__takeOutCommonFactor	param_1	commonInst	INFERRED	the inst whose multiply users share a common factor; copied to iStack00000018
+local	Inst__takeOutCommonFactor	iVar5	userBytes	INFERRED	user count * 4: byte size of each of the three arena arrays
+use	Inst__takeOutCommonFactor	uVar6	otherAbsOperand	INFERRED	abs bit of the other operand in the common-select compare	^\s*if\ \(\(local_58\ ==\ local_5c\)\ \&\&\ \(uVar6\ =\ local_6c,\ local_6c\ ==\ uVar24\)\)$	+2
+use	Inst__takeOutCommonFactor	uVar6	otherAbsOperand	INFERRED	abs bit of the other operand in the common-select compare	^\s*uVar6\ =\ uVar24;$	+1
+use	Inst__takeOutCommonFactor	uVar6	otherAbsOperand	INFERRED	abs bit of the other operand in the common-select compare	^\s*if\ \(\(local_58\ ==\ local_5c\)\ \&\&\ \(local_6c\ ==\ uVar6\)\)\ \{$	+1
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*for\ \(iVar9\ =\ 1;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x14\)\)\(piVar10\),\ iVar9\ <=\ iVar8;$	+2
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*iVar8\ =\ FUN_001054ec\(piVar10,iVar9\);$	+3
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*iVar8\ =\ FUN_00105594\(piVar21,1\);$	+1
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*if\ \(iStack00000018\ ==\ iVar8\)\ \{$	+1
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*for\ \(;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*piVar21\ \+\ 0x14\)\)\(\(int\ \*\)\*piVar21\),\ iVar9\ <=\ iVar8;$	+6
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*for\ \(iVar17\ =\ 1;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar17\ <=\ iVar8;$	+6
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*iVar8\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0x10\)\ \+\ 4\);$	+2
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*if\ \(iVar8\ ==\ local_80\)\ break;$	+1
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*for\ \(iVar17\ =\ 1;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),$	+2
+use	Inst__takeOutCommonFactor	iVar8	operandCountOrResult	INFERRED	one register: operand counts, callee results and records through the function	^\s*iVar8\ =\ FUN_001054ec\(piVar11,iVar17\);$	+3
+use	Inst__takeOutCommonFactor	piVar11	scanHeadInst	INFERRED	head inst of the scanned chain	^\s*piVar11\ =\ \(int\ \*\)\*piVar20;$	+4
+use	Inst__takeOutCommonFactor	piVar11	scanHeadInst	INFERRED	head inst of the scanned chain	^\s*for\ \(iVar17\ =\ 1;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar17\ <=\ iVar8;$	+2
+use	Inst__takeOutCommonFactor	piVar11	scanHeadInst	INFERRED	head inst of the scanned chain	^\s*piVar11\ =\ \(int\ \*\)\*piVar20;$@2	+2
+use	Inst__takeOutCommonFactor	piVar11	scanHeadInst	INFERRED	head inst of the scanned chain	^\s*piVar11\ =\ \(int\ \*\)\*piVar20;$@3	+1
+use	Inst__takeOutCommonFactor	uVar24	pairAbsOperand	INFERRED	abs bit of the paired operand	^\s*uVar24\ =\ 0;$@2	+1
+use	Inst__takeOutCommonFactor	uVar24	pairAbsOperand	INFERRED	abs bit of the paired operand	^\s*uVar24\ =\ \(uint\)piVar11\[iVar17\ \*\ 6\ \+\ 0x28\]\ >>\ 1\ \&\ 1;$	+3
+use	Inst__takeOutCommonFactor	uVar24	pairAbsOperand	INFERRED	abs bit of the paired operand	^\s*uVar6\ =\ uVar24;$	+1
+use	Inst__takeOutCommonFactor	uVar24	chainAbsBitA	INFERRED	abs bit of the chain head operand	^\s*uVar24\ =\ piVar11\[local_68\ \*\ 6\ \+\ 0x28\];$	+1
+use	Inst__takeOutCommonFactor	uVar24	chainAbsBitA	INFERRED	abs bit of the chain head operand	^\s*FUN_00103d50\(piVar13\ \+\ 3,1,\(uVar24\ \^\ uVar6\)\ \&\ 1\ \^\ piVar13\[8\]\ \&\ 1U\);$	+1
+use	Inst__takeOutCommonFactor	uVar24	chainAbsBitB	INFERRED	abs bit of the scanned head operand	^\s*uVar24\ =\ piVar11\[local_74\ \*\ 6\ \+\ 0x28\];$	+1
+use	Inst__takeOutCommonFactor	uVar24	chainAbsBitB	INFERRED	abs bit of the scanned head operand	^\s*FUN_00103d50\(piVar13\ \+\ 3,1,\(uVar24\ \^\ uVar6\)\ \&\ 1\ \^\ piVar13\[8\]\ \&\ 1U\);$@2	+1
+use	Inst__takeOutCommonFactor	uVar24	newInstFlags	INFERRED	inst flags word (+0x14) of the new inst or its chain	^\s*uVar24\ =\ piVar13\[5\];$	+2
+use	Inst__takeOutCommonFactor	uVar24	newInstFlags	INFERRED	inst flags word (+0x14) of the new inst or its chain	^\s*uVar24\ =\ piVar13\[5\];$@2	+1
+use	Inst__takeOutCommonFactor	uVar24	newInstFlags	INFERRED	inst flags word (+0x14) of the new inst or its chain	^\s*if\ \(\(\(uVar24\ \&\ 0x200\)\ ==\ 0\)\ \&\&$	+3
+use	Inst__takeOutCommonFactor	iVar17	headOperandRecord	INFERRED	operand record of the chain head	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x10\);$	+1
+use	Inst__takeOutCommonFactor	iVar17	headOperandRecord	INFERRED	operand record of the chain head	^\s*piVar26\[0x27\]\ =\ iVar17;$	+1
+use	Inst__takeOutCommonFactor	iVar17	headOperandRecord	INFERRED	operand record of the chain head	^\s*\*\(int\ \*\)\(iVar12\ \+\ 0x10\)\ =\ iVar17;$	+1
+use	Inst__takeOutCommonFactor	iVar17	scanOperandRecord	INFERRED	operand record of the scanned head	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x10\);$@2	+1
+use	Inst__takeOutCommonFactor	iVar17	scanOperandRecord	INFERRED	operand record of the scanned head	^\s*piVar26\[0x27\]\ =\ iVar17;$@2	+1
+use	Inst__takeOutCommonFactor	iVar17	scanOperandRecord	INFERRED	operand record of the scanned head	^\s*\*\(int\ \*\)\(iVar12\ \+\ 0x10\)\ =\ iVar17;$@2	+1
+use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*iVar17\ =\ 0;$@2	+1
+use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*iVar19\ =\ iVar17\ \*\ 4;$	+1
+use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*iVar17\ =\ iVar17\ \+\ 1;$@3	+1
+use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*local_70\ =\ iVar17\ \+\ 1;$	+2
+use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*iVar17\ =\ local_70;$@2	+1
+use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*iVar17\ =\ local_70;$@3	+1
+use	Inst__takeOutCommonFactor	iVar17	chainPairCursor	INFERRED	outer index over the collected user chains; also restored from nextIndex after each merge	^\s*if\ \(\(int\)uVar18\ <=\ iVar17\)\ \{$	+1
