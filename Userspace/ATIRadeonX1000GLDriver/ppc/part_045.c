@@ -1647,7 +1647,7 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
   bool nothingPassedOver;
   bool moreComponents;
   uint edgeIndex;
-  int iVar4;
+  int checkOrEdgeInst;
   int isOptionEnabledResult;
   char *groupSelectCursor;
   uint predVectorCount;
@@ -1657,14 +1657,14 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
   uint vectorCount;
   uint edgeVectorCount;
   int *targetDescription;
-  int iVar13;
+  int byteCursorOrCount;
   int slotIndex;
   undefined4 *copySourceSlot;
   uint predEdgeCount;
   int node1;
   int bundleSlotNode;
-  undefined *puVar19;
-  uint *puVar20;
+  undefined *laneMaskOrUserCount;
+  uint *candidateOrEdgeRecord;
   uint *vector1;
   int loopIndexLoadsSeen;
   int otherNodesSeen;
@@ -1821,8 +1821,8 @@ LAB_0017036c:
             }
           }
           else {
-            iVar4 = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node);
-            if ((iVar4 == 0) || (iVar4 = Compiler__isOptionEnabled(*scheduler,0x28), iVar4 == 0)) {
+            checkOrEdgeInst = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node);
+            if ((checkOrEdgeInst == 0) || (checkOrEdgeInst = Compiler__isOptionEnabled(*scheduler,0x28), checkOrEdgeInst == 0)) {
               candidateFits = (**(code **)(*(int *)scheduler[2] + 0xc))((int *)scheduler[2],nodeInst);
             }
             else {
@@ -1893,13 +1893,13 @@ LAB_0017036c:
                 }
                 edgeIndex = edgeIndex + 1;
                 predEdge = (int *)*predEdgeSlot;
-                iVar4 = *predEdge;
-                if (((((predEdge[2] == 0) && (producerInst = *(int **)(iVar4 + 0x38), producerInst[0x20] != 0))
+                checkOrEdgeInst = *predEdge;
+                if (((((predEdge[2] == 0) && (producerInst = *(int **)(checkOrEdgeInst + 0x38), producerInst[0x20] != 0))
                      && ((producerFlagBit0Result = RegKind__flagBit0(producerInst[0x26]), producerFlagBit0Result != 0 &&
                          (((producerInst[5] & 2U) == 0 &&
                           (producerIsUndefined = (**(code **)(*producerInst + 0x50))(producerInst), producerIsUndefined == 0)))))) &&
-                    (iVar4 = *(int *)(iVar4 + 0x38), (*(uint *)(iVar4 + 0x14) & 0x40) != 0)) &&
-                   (groupReg == *(int *)(iVar4 + 0x94))) {
+                    (checkOrEdgeInst = *(int *)(checkOrEdgeInst + 0x38), (*(uint *)(checkOrEdgeInst + 0x14) & 0x40) != 0)) &&
+                   (groupReg == *(int *)(checkOrEdgeInst + 0x94))) {
                   componentsLeft = 4;
                   pendingByteOffset = 0;
                   do {
@@ -2014,7 +2014,7 @@ LAB_00170868:
                   componentCountCursor = a0User;
 LAB_0016f038:
                   if (*(int *)(componentCountCursor + 0x48) < 1) goto code_r0x0016f044;
-                  puVar19 = PTR_DAT_001e8b8c;
+                  laneMaskOrUserCount = PTR_DAT_001e8b8c;
                   SelectWord__selectWhereMasked(&vec2Capacity,0,*(undefined4 *)(*(int *)(a0User + 0x38) + 0xc));
                   a0UserCopy = Scheduler__createCopyNode(piStack00000018,*(undefined4 *)(a0User + 0x38),vec2Capacity,
                                         piStack00000018[0xb],a0User + 0xc);
@@ -2074,8 +2074,8 @@ LAB_0016f038:
                         do {
                           if (*(char *)(succEdge + 6) != '\0') {
                             *(int *)(copyCountCursor + 0x48) = *(int *)(copyCountCursor + 0x48) + 1;
-                            puVar19 = (undefined *)(*(int *)(a0UserCountCursor + 0x48) + -1);
-                            *(undefined **)(a0UserCountCursor + 0x48) = puVar19;
+                            laneMaskOrUserCount = (undefined *)(*(int *)(a0UserCountCursor + 0x48) + -1);
+                            *(undefined **)(a0UserCountCursor + 0x48) = laneMaskOrUserCount;
                           }
                           succEdge = (int *)((int)succEdge + 1);
                           copyCountCursor = copyCountCursor + 4;
@@ -2102,7 +2102,7 @@ LAB_0016f038:
                             }
                             targetPredEdge = (int *)*targetPredSlot;
                             if ((vec2Data == *targetPredEdge) &&
-                               (puVar19 = vec2Count, (vec2Count + (int)targetPredEdge)[0x18] != '\0')) {
+                               (laneMaskOrUserCount = vec2Count, (vec2Count + (int)targetPredEdge)[0x18] != '\0')) {
                               Vector__removeAt(*(undefined4 *)(edgeTarget + 0x44),targetPredIndex);
                               targetPredEdge[1] = a0UserCopy;
                               copyPredEdges = *(uint **)(a0UserCopy + 0x44);
@@ -2133,7 +2133,7 @@ LAB_0016f038:
                     }
                   }
                   Scheduler__addDataDependencyEdge(piStack00000018,a0User,a0UserCopy,1,0,
-                               *(undefined4 *)(*(int *)(a0UserCopy + 0x38) + 0xc),(uint)puVar19);
+                               *(undefined4 *)(*(int *)(a0UserCopy + 0x38) + 0xc),(uint)laneMaskOrUserCount);
                   a0UserInst = *(undefined4 *)(a0User + 0x38);
                   *(int *)(a0UserCopy + 0x34) = *(int *)(a0UserCopy + 0x34) + -1;
                   earliestCycle = *(int *)(a0User + 0x2c);
@@ -2247,8 +2247,8 @@ LAB_0016f530:
           } while (fieldsLeft != 0);
           *(undefined4 **)(candidate + 0x60) = allocation + 1;
           allocation[5] = 1;
-          puVar20 = *(uint **)(candidate + 0x38);
-          candidateWriteMask = puVar20[3];
+          candidateOrEdgeRecord = *(uint **)(candidate + 0x38);
+          candidateWriteMask = candidateOrEdgeRecord[3];
           newGroup = *(uint **)(candidate + 0x60);
           *(int *)(previousGroup + 0x10) = *(int *)(previousGroup + 0x10) + -1;
           *newGroup = candidateWriteMask;
@@ -2306,7 +2306,7 @@ LAB_0016fcc0:
                     copySourceSlot = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,copyIndex);
                   }
                   Scheduler__addDataDependencyEdge(scheduler,*copySourceSlot,copyNode,1,0,
-                               *(undefined4 *)(*(int *)(copyNode + 0x38) + 0xc),(uint)puVar20);
+                               *(undefined4 *)(*(int *)(copyNode + 0x38) + 0xc),(uint)candidateOrEdgeRecord);
                   ((int (*)())SchedModel__countIssuedNode)(scheduler[2],copyNode);
                   if (copyIndex < vec2Capacity) {
                     if (vec2Count <= copyIndex) {
@@ -2383,13 +2383,13 @@ LAB_0016fcc0:
                     if (((*(int *)(node1 + 0x2c) < 0) ||
                         ((*(uint *)(*(int *)(node1 + 0x38) + 0x14) & 0x40) == 0)) &&
                        (node1 = Scheduler__hasOtherFlaggedProducer(scheduler,node1), stackCountBefore = workStackCount, node1 == 0)) {
-                      puVar20 = (uint *)*siblingEdge;
-                      if (puVar20[0x18] != *(uint *)(candidate + 0x60)) {
-                        puVar20[0x18] = *(uint *)(candidate + 0x60);
+                      candidateOrEdgeRecord = (uint *)*siblingEdge;
+                      if (candidateOrEdgeRecord[0x18] != *(uint *)(candidate + 0x60)) {
+                        candidateOrEdgeRecord[0x18] = *(uint *)(candidate + 0x60);
                         *(int *)(*(int *)(candidate + 0x60) + 0x10) =
                              *(int *)(*(int *)(candidate + 0x60) + 0x10) + 1;
-                        puVar20 = *(uint **)(*siblingEdge + 0x38);
-                        **(uint **)(candidate + 0x60) = **(uint **)(candidate + 0x60) | puVar20[3];
+                        candidateOrEdgeRecord = *(uint **)(*siblingEdge + 0x38);
+                        **(uint **)(candidate + 0x60) = **(uint **)(candidate + 0x60) | candidateOrEdgeRecord[3];
                         *(int *)(previousGroup + 0x10) = *(int *)(previousGroup + 0x10) + -1;
                         siblingNode = *siblingEdge;
                         if (workStackCount < workStackCapacity) {
@@ -2440,8 +2440,8 @@ LAB_0016fcc0:
                             node1 = *foundCopySlot;
                             *(uint *)(*(int *)(node1 + 0x38) + 0xc) =
                                  *(uint *)(*(int *)(node1 + 0x38) + 0xc) | siblingEdge[6];
-                            puVar20 = *(uint **)(node1 + 0x60);
-                            *puVar20 = *puVar20 | siblingEdge[6];
+                            candidateOrEdgeRecord = *(uint **)(node1 + 0x60);
+                            *candidateOrEdgeRecord = *candidateOrEdgeRecord | siblingEdge[6];
                             goto LAB_0016fafc;
                           }
                           copyScanIndex = copyScanIndex + 1;
@@ -2475,18 +2475,18 @@ LAB_0016fcc0:
                       IRInst__setExtraOperandSource(*(undefined4 *)(node1 + 0x38),*(undefined4 *)(workNode + 0x38),0,
                                    *scheduler);
                       *(undefined4 *)(node1 + 0x60) = *(undefined4 *)(candidate + 0x60);
-                      puVar20 = *(uint **)(candidate + 0x60);
-                      puVar20[4] = puVar20[4] + 1;
+                      candidateOrEdgeRecord = *(uint **)(candidate + 0x60);
+                      candidateOrEdgeRecord[4] = candidateOrEdgeRecord[4] + 1;
                       **(uint **)(candidate + 0x60) = **(uint **)(candidate + 0x60) | siblingEdge[6];
 LAB_0016fafc:
                       if ((siblingEdge[4] < 1) || (siblingEdge[5] != 0)) {
 LAB_0016fb44:
-                        iVar13 = *siblingEdge;
+                        byteCursorOrCount = *siblingEdge;
                       }
                       else {
                         sourceDef2 = IRInst__getOperandSource(*(undefined4 *)(consumer + 0x38),siblingEdge[4]);
-                        iVar13 = *siblingEdge;
-                        if (sourceDef2 == *(int *)(iVar13 + 0x38)) {
+                        byteCursorOrCount = *siblingEdge;
+                        if (sourceDef2 == *(int *)(byteCursorOrCount + 0x38)) {
                           IRInst__setOperandSource(*(undefined4 *)(consumer + 0x38),siblingEdge[4],
                                        *(undefined4 *)(node1 + 0x38),0,*scheduler);
                           goto LAB_0016fb44;
@@ -2498,18 +2498,18 @@ LAB_0016fb44:
                       siblingCountCursor = node1;
                       do {
                         if (*(char *)(edgeCompCursor + 6) != '\0') {
-                          iVar13 = compIndex * 4 + iVar13;
-                          puVar20 = (uint *)(*(int *)(iVar13 + 0x48) + -1);
-                          *(uint **)(iVar13 + 0x48) = puVar20;
+                          byteCursorOrCount = compIndex * 4 + byteCursorOrCount;
+                          candidateOrEdgeRecord = (uint *)(*(int *)(byteCursorOrCount + 0x48) + -1);
+                          *(uint **)(byteCursorOrCount + 0x48) = candidateOrEdgeRecord;
                           *(int *)(siblingCountCursor + 0x48) = *(int *)(siblingCountCursor + 0x48) + 1;
-                          iVar13 = *siblingEdge;
+                          byteCursorOrCount = *siblingEdge;
                         }
                         compIndex = compIndex + 1;
                         edgeCompCursor = (int *)((int)edgeCompCursor + 1);
                         siblingCountCursor = siblingCountCursor + 4;
                         compsLeft = compsLeft + -1;
                       } while (compsLeft != 0);
-                      Vector__removeValue(*(undefined4 *)(iVar13 + 0x40),siblingEdge);
+                      Vector__removeValue(*(undefined4 *)(byteCursorOrCount + 0x40),siblingEdge);
                       if (-1 < *(int *)(*siblingEdge + 0x2c)) {
                         *(int *)(consumer + 0x34) = *(int *)(consumer + 0x34) + 1;
                       }
@@ -3204,8 +3204,8 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   bool noSecondFile;
   uint wordCount;
   undefined *deadVtable;
-  int iVar4;
-  undefined4 *puVar5;
+  int resourceModelOrCount;
+  undefined4 *listSlot;
   undefined4 *bundleAlloc;
   int *target;
   int fileSize1;
@@ -3216,16 +3216,16 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r10;
-  undefined4 uVar12;
+  undefined4 blockOrArena;
   int *bitSetCursor;
   int *handledInst;
   int *inst;
   
   scheduler[1] = program;
-  iVar4 = *(int *)(program + 8);
-  *scheduler = iVar4;
-  iVar4 = Compiler__getResourceModel(iVar4);
-  scheduler[2] = iVar4;
+  resourceModelOrCount = *(int *)(program + 8);
+  *scheduler = resourceModelOrCount;
+  resourceModelOrCount = Compiler__getResourceModel(resourceModelOrCount);
+  scheduler[2] = resourceModelOrCount;
   threadModel = Compiler__getThreadModel(*scheduler);
   scheduler[3] = threadModel;
   arena = *(undefined4 *)(*scheduler + 0x378);
@@ -3251,10 +3251,10 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   *bundleAlloc = arena;
   DListNode__init(bundleAlloc + 6);
   slotsLeft = 5;
-  puVar5 = bundleAlloc + 1;
+  listSlot = bundleAlloc + 1;
   do {
-    *puVar5 = 0;
-    puVar5 = puVar5 + 1;
+    *listSlot = 0;
+    listSlot = listSlot + 1;
     slotsLeft = slotsLeft + -1;
   } while (slotsLeft != 0);
   scheduler[0xc] = (int)(bundleAlloc + 1);
@@ -3318,13 +3318,13 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   entrySuccessorCount = Block__successorCount(*(undefined4 *)(scheduler[1] + 0x3a0));
   if (entrySuccessorCount == 1) {
     programAlias = scheduler[1];
-    puVar5 = (undefined4 *)0x0;
+    listSlot = (undefined4 *)0x0;
     registerCount = *(int *)(*(int *)(programAlias + 0x3a0) + 0xd0);
     if (*(int *)(registerCount + 4) != 0) {
-      puVar5 = *(undefined4 **)(registerCount + 8);
+      listSlot = *(undefined4 **)(registerCount + 8);
     }
     inst = *(int **)(*(int *)(programAlias + 0x3a0) + 0xa0);
-    uVar12 = *puVar5;
+    blockOrArena = *listSlot;
     followingInst = (int *)inst[1];
     if (followingInst != (int *)0x0) {
       do {
@@ -3332,25 +3332,25 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
         isEntry = (**(code **)(*inst + 0x34))(inst);
         if ((isEntry == 0) && (isEntry = (**(code **)(*inst + 0x38))(inst), isEntry == 0)) {
           DList__unlink(inst);
-          Block__prependInst(uVar12,inst);
+          Block__prependInst(blockOrArena,inst);
         }
         followingInst = (int *)handledInst[1];
         inst = handledInst;
       } while (followingInst != (int *)0x0);
       programAlias = scheduler[1];
     }
-    *(undefined4 *)(programAlias + 0x3a4) = uVar12;
+    *(undefined4 *)(programAlias + 0x3a4) = blockOrArena;
   }
   exitPredecessorCount = Block__predecessorCount(*(undefined4 *)(scheduler[1] + 0x3a8));
   if (exitPredecessorCount == 1) {
     programAlias = scheduler[1];
-    puVar5 = (undefined4 *)0x0;
+    listSlot = (undefined4 *)0x0;
     registerCount = *(int *)(*(int *)(programAlias + 0x3a8) + 0xd4);
     if (*(int *)(registerCount + 4) != 0) {
-      puVar5 = *(undefined4 **)(registerCount + 8);
+      listSlot = *(undefined4 **)(registerCount + 8);
     }
     inst = *(int **)(*(int *)(programAlias + 0x3a8) + 0x98);
-    uVar12 = *puVar5;
+    blockOrArena = *listSlot;
     followingInst = (int *)inst[2];
     if (followingInst == (int *)0x0) goto code_r0x00171ba0;
     do {
@@ -3364,7 +3364,7 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
           if (isUndefined != 0) goto code_r0x00171b84;
         }
         DList__unlink(inst);
-        Block__appendInst(uVar12,inst);
+        Block__appendInst(blockOrArena,inst);
       }
 code_r0x00171b84:
       followingInst = (int *)handledInst[2];

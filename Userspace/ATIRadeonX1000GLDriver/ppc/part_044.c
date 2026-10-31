@@ -617,9 +617,9 @@ int FUN_00159794(inst, allowFold, pass)
 }
 
 /* FUN_00159b58 @ 0x159b58 (2844 bytes) */
-int FUN_00159b58(node, param_2, pass)
+int FUN_00159b58(node, allowFold, pass)
   int node;
-  undefined4 param_2;
+  undefined4 allowFold;
   int pass;
 {
   uint compareResultA;
@@ -656,7 +656,7 @@ int FUN_00159b58(node, param_2, pass)
   int *sourceForNode;
   int *chainSource;
   undefined4 movSourceIndex;
-  int iVar6;
+  int checkResult;
   undefined4 a1;
   uint compareResultB;
   undefined4 staleArg4;
@@ -666,18 +666,18 @@ int FUN_00159b58(node, param_2, pass)
   int vregId;
   uint negateFlagB;
   uint compiler;
-  double fparam_1;
-  undefined1 auStack_118 [4];
+  double literalValue;
+  undefined1 instSecondConstant [4];
   undefined4 param_3_w;
-  undefined1 auStack_100 [4];
+  undefined1 instThirdConstant [4];
   undefined4 param_3_w2;
-  undefined1 auStack_e8 [4];
+  undefined1 nodeConstant [4];
   float constantC0;
-  undefined1 auStack_d0 [4];
+  undefined1 nodeSecondConstant [4];
   float constantC1;
-  undefined1 auStack_b8 [4];
+  undefined1 producerSecondConstant [4];
   float constantD0;
-  undefined1 auStack_a0 [4];
+  undefined1 producerThirdConstant [4];
   float constantD1;
   undefined4 scaledConst2;
   undefined4 scaledConst3;
@@ -690,24 +690,24 @@ int FUN_00159b58(node, param_2, pass)
   undefined4 composedSelectA;
   undefined4 composedSelectB;
   undefined4 composedSelectC;
-  undefined4 local_5c [3];
+  undefined4 composedSelectOut [3];
   float chosenConst;
   
   compiler = *(uint *)(pass + 8);
   if ((((*(int *)(*(int *)(compiler + 0x6c4) + 0x214) + *(int *)(*(int *)(compiler + 0x6c4) + 0x218) <
          *(int *)(compiler + 0x6a0)) && (node != 0)) && (0 < *(int *)(node + 0x84))) &&
      (inst = IRInst__getOperandSource(node,1), inst != 0)) {
-    ((int (*)())FUN_00159794)(node,param_2,compiler);
-    ((int (*)())FUN_00159794)(inst,param_2,compiler);
+    ((int (*)())FUN_00159794)(node,allowFold,compiler);
+    ((int (*)())FUN_00159794)(inst,allowFold,compiler);
     opcodeDesc = *(int *)(node + 0x88);
     if ((*(int *)(opcodeDesc + 8) == 0x25) && (*(int *)(*(int *)(inst + 0x88) + 8) == 0x25)) {
       sourceLanesAllWrittenResult = IRInst__sourceLanesAllWritten(node,1);
       if (sourceLanesAllWrittenResult != 0) {
         operandRecord = IRInst__getOperandRecord(inst,0);
-        uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,2,*(undefined4 *)(operandRecord + 0x10),auStack_118);
+        uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,2,*(undefined4 *)(operandRecord + 0x10),instSecondConstant);
         if (uniformSourceConstant2 != 0) {
           operandRecord = IRInst__getOperandRecord(inst,0);
-          uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,3,*(undefined4 *)(operandRecord + 0x10),auStack_100);
+          uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,3,*(undefined4 *)(operandRecord + 0x10),instThirdConstant);
           if (uniformSourceConstant2 != 0) {
             *(int *)(pass + 0x214) = *(int *)(pass + 0x214) + 1;
             operandVReg = (int *)IRInst__getOperandSource(inst,1);
@@ -803,10 +803,10 @@ int FUN_00159b58(node, param_2, pass)
     if (*(int *)(opcodeDesc + 8) == 0x8b) {
       compareKind = *(int *)(node + 300);
       operandRecord2 = IRInst__getOperandRecord(node,0);
-      uniformSourceConstant = IRInst__getUniformSourceConstant(node,2,*(undefined4 *)(operandRecord2 + 0x10),auStack_e8);
+      uniformSourceConstant = IRInst__getUniformSourceConstant(node,2,*(undefined4 *)(operandRecord2 + 0x10),nodeConstant);
       if (uniformSourceConstant == 0) {
         operandRecord2 = IRInst__getOperandRecord(node,0);
-        uniformSourceConstant = IRInst__getUniformSourceConstant(node,1,*(undefined4 *)(operandRecord2 + 0x10),auStack_e8);
+        uniformSourceConstant = IRInst__getUniformSourceConstant(node,1,*(undefined4 *)(operandRecord2 + 0x10),nodeConstant);
         if (uniformSourceConstant == 0) {
           return 0;
         }
@@ -866,16 +866,16 @@ int FUN_00159b58(node, param_2, pass)
           return dropCounterAndDeleteIfUnusedResult;
         }
         operandRecord3 = IRInst__getOperandRecord(node,0);
-        iVar6 = IRInst__getUniformSourceConstant(node,2,*(undefined4 *)(operandRecord3 + 0x10),auStack_d0);
-        if (((*(int *)(*(int *)(sourceDef + 0x88) + 8) == 0x25) && (iVar6 != 0)) &&
+        checkResult = IRInst__getUniformSourceConstant(node,2,*(undefined4 *)(operandRecord3 + 0x10),nodeSecondConstant);
+        if (((*(int *)(*(int *)(sourceDef + 0x88) + 8) == 0x25) && (checkResult != 0)) &&
            ((constantC1 == 0.0 &&
             (((*(uint *)(sourceDef + 0x14) & 0x200) == 0 ||
-             (iVar6 = FUN_000f45f8(node,1,sourceDef,pass), iVar6 != 0)))))) {
+             (checkResult = FUN_000f45f8(node,1,sourceDef,pass), checkResult != 0)))))) {
           operandRecord3 = IRInst__getOperandRecord(sourceDef,0);
-          uniformSourceConstant3 = IRInst__getUniformSourceConstant(sourceDef,2,*(undefined4 *)(operandRecord3 + 0x10),auStack_b8);
+          uniformSourceConstant3 = IRInst__getUniformSourceConstant(sourceDef,2,*(undefined4 *)(operandRecord3 + 0x10),producerSecondConstant);
           if (uniformSourceConstant3 != 0) {
             operandRecord3 = IRInst__getOperandRecord(sourceDef,0);
-            uniformSourceConstant3 = IRInst__getUniformSourceConstant(sourceDef,3,*(undefined4 *)(operandRecord3 + 0x10),auStack_a0);
+            uniformSourceConstant3 = IRInst__getUniformSourceConstant(sourceDef,3,*(undefined4 *)(operandRecord3 + 0x10),producerThirdConstant);
             if (uniformSourceConstant3 != 0) {
               *(int *)(pass + 0x218) = *(int *)(pass + 0x218) + 1;
               switch(compareKind) {
@@ -909,10 +909,10 @@ int FUN_00159b58(node, param_2, pass)
               operandRecord = IRInst__getOperandRecord(sourceDef,1);
               operandSelect = *(undefined4 *)(operandRecord + 0x10);
               operandRecord = IRInst__getOperandRecord(node,1);
-              SelectWord__compose(local_5c,operandSelect,*(undefined4 *)(operandRecord + 0x10));
+              SelectWord__compose(composedSelectOut,operandSelect,*(undefined4 *)(operandRecord + 0x10));
               IRInst__copyOperandFrom(node,1,sourceDef,1);
               operandRecord = IRInst__getOperandRecord(node,1);
-              *(undefined4 *)(operandRecord + 0x10) = local_5c[0];
+              *(undefined4 *)(operandRecord + 0x10) = composedSelectOut[0];
               if (compareResultB == compareResultA) {
                 if (compareResultB == 0) {
                   compareLiteral = 1.0;
@@ -920,9 +920,9 @@ int FUN_00159b58(node, param_2, pass)
                 else {
                   compareLiteral = 0.0;
                 }
-                fparam_1 = (double)compareLiteral;
+                literalValue = (double)compareLiteral;
                 resultSource = (int *)0x0;
-                ((void (*)())IRInst__makeLiteralVec4Float)(node,pass,1,fparam_1,fparam_1,fparam_1,fparam_1);
+                ((void (*)())IRInst__makeLiteralVec4Float)(node,pass,1,literalValue,literalValue,literalValue,literalValue);
               }
               else {
                 resultSource = (int *)IRInst__getOperandSource(sourceDef,1);

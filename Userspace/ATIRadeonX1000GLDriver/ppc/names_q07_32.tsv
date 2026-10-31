@@ -4718,3 +4718,24 @@ local	Scheduler__markGlobalValues	piVar4	walkNode	INFERRED	one register: the blo
 local	Scheduler__markGlobalValues	iVar2	walkLink	INFERRED	one register: list link, element and operand results through the function
 local	Scheduler__markGlobalValues	iVar3	nextWalkLink	INFERRED	one register: next list link, operand count and results through the function
 local	Scheduler__markGlobalValues	iVar6	walkCursor	INFERRED	one register: list cursor of the final block / inst walks
+local	Scheduler__selectNextNode	iVar4	checkOrEdgeInst	INFERRED	one register: target hook results, producer edge node and count/cursor values over the whole selection
+local	Scheduler__selectNextNode	iVar13	byteCursorOrCount	INFERRED	one register: lane countdown, byte offsets and operand counts
+local	Scheduler__selectNextNode	puVar19	laneMaskOrUserCount	INFERRED	one register: table pointer, decremented user count and lane flag
+local	Scheduler__selectNextNode	puVar20	candidateOrEdgeRecord	INFERRED	one register: successor vector, candidate node record and sibling edge records
+local	pass_sched_preprocess_and_schedule_inst	iVar4	resourceModelOrCount	INFERRED	one register: compiler (program+8), resource model and loop counts
+local	pass_sched_preprocess_and_schedule_inst	puVar5	listSlot	INFERRED	one register: bundle slot pointer, block list slot and block record pointer
+local	pass_sched_preprocess_and_schedule_inst	uVar12	blockOrArena	INFERRED	one register: arena (+0x378) for allocations, then the first/last block record
+local	FUN_00159b58	param_2	allowFold	INFERRED	non-zero enables the mad-with-constant folds
+local	FUN_00159b58	iVar6	checkResult	INFERRED	one register: uniform constant and compatibility test results
+local	FUN_00159b58	fparam_1	literalValue	INFERRED	float literal replicated into the vec4 literal operand
+local	FUN_00159b58	auStack_118	instSecondConstant	INFERRED	IRInst__getUniformSourceConstant out record for operand 2 of the second inst
+local	FUN_00159b58	auStack_100	instThirdConstant	INFERRED	out record for operand 3 of the second inst
+local	FUN_00159b58	auStack_e8	nodeConstant	INFERRED	out record for the node's operand 1 or 2
+local	FUN_00159b58	auStack_d0	nodeSecondConstant	INFERRED	out record for operand 2 of the node
+local	FUN_00159b58	auStack_b8	producerSecondConstant	INFERRED	out record for operand 2 of the producer
+local	FUN_00159b58	auStack_a0	producerThirdConstant	INFERRED	out record for operand 3 of the producer
+local	FUN_00159b58	local_5c	composedSelectOut	INFERRED	SelectWord__compose out value
+local	FUN_00147f54	iVar2	sourceMatchResult	INFERRED	IRInst__sourceMatchesConstant results for operands 1 and 2
+local	FUN_00147f54	iVar4	scaleResult	INFERRED	one register: tryOutputScaleExponent result and compiler/program values
+local	FUN_00147f54	local_a8	scaleFrame	INFERRED	[0] output scale code, [1..4] the vec4 constant filled with 2.0 (0x40000000) for the match
+local	FUN_00147f54	auStack_94	constantRecord	INFERRED	IRInst__getUniformSourceConstant out record; the float value follows

@@ -829,9 +829,9 @@ int FUN_00147f54(inst, compiler)
   int useCount;
   int loopIndex;
   bool hasLastOperand;
-  int iVar2;
+  int sourceMatchResult;
   uint instFlags;
-  int iVar4;
+  int scaleResult;
   int operandRecord;
   uint keptOperandModifiers;
   int saturate;
@@ -847,22 +847,22 @@ int FUN_00147f54(inst, compiler)
   int foldMode;
   int keptOperandVregHi;
   double literalValue;
-  int local_a8 [5];
-  undefined1 auStack_94 [4];
+  int scaleFrame [5];
+  undefined1 constantRecord [4];
   float uniformConstantValue;
   undefined4 lastOperandRecord;
   undefined4 lastOperandSource;
   undefined4 lastOperandTail;
   uint hasLastOperandFlag;
   
-  local_a8[0] = 0;
+  scaleFrame[0] = 0;
   opcodeKind = *(int *)(inst[0x22] + 8);
   resultScaleCode = inst[0x49];
   if (opcodeKind == 0x13) {
     loopIndex = 1;
     while( true ) {
       operandRecord3 = IRInst__getOperandRecord(inst,0);
-      uniformSourceConstant = IRInst__getUniformSourceConstant(inst,loopIndex,*(undefined4 *)(operandRecord3 + 0x10),auStack_94);
+      uniformSourceConstant = IRInst__getUniformSourceConstant(inst,loopIndex,*(undefined4 *)(operandRecord3 + 0x10),constantRecord);
       if (uniformSourceConstant != 0) break;
       isLast = loopIndex == 2;
       loopIndex = loopIndex + 1;
@@ -870,11 +870,11 @@ int FUN_00147f54(inst, compiler)
         return inst;
       }
     }
-    iVar4 = ((undefined4 (*)())tryOutputScaleExponent)(uniformSourceConstant,local_a8,(double)uniformConstantValue);
-    if (iVar4 == 0) {
+    scaleResult = ((undefined4 (*)())tryOutputScaleExponent)(uniformSourceConstant,scaleFrame,(double)uniformConstantValue);
+    if (scaleResult == 0) {
       return inst;
     }
-    local_a8[0] = resultScaleCode + local_a8[0];
+    scaleFrame[0] = resultScaleCode + scaleFrame[0];
     if (loopIndex == 1) {
       foldMode = 2;
       literalOperandIndex = 0xffffffff;
@@ -888,32 +888,32 @@ int FUN_00147f54(inst, compiler)
   }
   else if (opcodeKind == 0x14) {
     operandRecord2 = IRInst__getOperandRecord(inst,0);
-    uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,3,*(undefined4 *)(operandRecord2 + 0x10),auStack_94);
+    uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,3,*(undefined4 *)(operandRecord2 + 0x10),constantRecord);
     if (uniformSourceConstant2 == 0) {
       return inst;
     }
     if ((uniformConstantValue != FLOAT_001aa114) && (uniformConstantValue != FLOAT_001aa0e8)) {
       return inst;
     }
-    local_a8[4] = 0x40000000;
-    local_a8[1] = 0x40000000;
-    local_a8[2] = 0x40000000;
-    local_a8[3] = 0x40000000;
+    scaleFrame[4] = 0x40000000;
+    scaleFrame[1] = 0x40000000;
+    scaleFrame[2] = 0x40000000;
+    scaleFrame[3] = 0x40000000;
     operandRecord2 = IRInst__getOperandRecord(inst,0);
-    iVar2 = IRInst__sourceMatchesConstant(inst,1,*(undefined4 *)(operandRecord2 + 0x10),local_a8 + 1);
-    if (iVar2 == 0) {
+    sourceMatchResult = IRInst__sourceMatchesConstant(inst,1,*(undefined4 *)(operandRecord2 + 0x10),scaleFrame + 1);
+    if (sourceMatchResult == 0) {
       operandRecord2 = IRInst__getOperandRecord(inst,0);
-      iVar2 = IRInst__sourceMatchesConstant(inst,2,*(undefined4 *)(operandRecord2 + 0x10),local_a8 + 1);
-      if (iVar2 == 0) {
+      sourceMatchResult = IRInst__sourceMatchesConstant(inst,2,*(undefined4 *)(operandRecord2 + 0x10),scaleFrame + 1);
+      if (sourceMatchResult == 0) {
         return inst;
       }
-      local_a8[0] = resultScaleCode + 1;
+      scaleFrame[0] = resultScaleCode + 1;
       foldMode = 3;
       literalOperandIndex = 2;
       operandIndex = 1;
     }
     else {
-      local_a8[0] = resultScaleCode + 1;
+      scaleFrame[0] = resultScaleCode + 1;
       foldMode = 3;
       literalOperandIndex = 1;
       operandIndex = 2;
@@ -940,13 +940,13 @@ int FUN_00147f54(inst, compiler)
     if (((uint)inst[0x2e] >> 1 & 1) != ((uint)inst[0x34] >> 1 & 1)) {
       return inst;
     }
-    local_a8[0] = resultScaleCode + 1;
+    scaleFrame[0] = resultScaleCode + 1;
     foldMode = 1;
     literalOperandIndex = 0xffffffff;
     operandIndex = 1;
   }
   vcallfcResult = (**(code **)(**(int **)(compiler + COMP_target) + 0xfc))
-                    (*(int **)(compiler + COMP_target),local_a8[0],inst);
+                    (*(int **)(compiler + COMP_target),scaleFrame[0],inst);
   if (vcallfcResult != 0) {
     program = *(int *)(compiler + COMP_currentProgram);
     *(int *)(program + 0x158) = *(int *)(program + 0x158) + 1;
@@ -956,7 +956,7 @@ int FUN_00147f54(inst, compiler)
     else {
       if (foldMode == 3) {
         literalValue = (double)FLOAT_001aa0e8;
-        inst[0x49] = local_a8[0];
+        inst[0x49] = scaleFrame[0];
         ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,literalOperandIndex,literalValue,literalValue,literalValue,literalValue);
         literalValue = (double)FLOAT_001aa10c;
         ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,3,literalValue,literalValue,literalValue,literalValue);
@@ -1014,7 +1014,7 @@ int FUN_00147f54(inst, compiler)
     IROperand__setModifierBits(inst + 0x29,2,keptOperandModifiers >> 1 & 1);
     IROperand__setModifierBits(inst + 0x29,1,negateFlag);
     inst[0x48] = saturate;
-    inst[0x49] = local_a8[0];
+    inst[0x49] = scaleFrame[0];
     if (hasLastOperandFlag != 0) {
       IRInst__setLastOperandFromRecord(inst,&lastOperandRecord,1,compiler);
     }
