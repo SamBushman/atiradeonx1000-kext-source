@@ -4991,27 +4991,27 @@ int FUN_00141090(param_1, param_2, inst)
 }
 
 /* FUN_00141100 @ 0x141100 (220 bytes) */
-int FUN_00141100(param_1, inst, param_3, inst2, param_5)
-  undefined4 param_1;
+int FUN_00141100(packCtx, inst, laneA, inst2, laneB)
+  undefined4 packCtx;
   int inst;
-  int param_3;
+  int laneA;
   undefined4 inst2;
-  int param_5;
+  int laneB;
 {
   int operandRecord;
   int sourceDef;
   int operandVReg;
-  int iVar3;
+  int operandLimit;
   int loopIndex;
   undefined4 operandSelect;
-  undefined4 local_44 [8];
+  undefined4 selectScratch [8];
   
-  ((int (*)())FUN_00140e7c)(param_1,inst,inst2);
-  iVar3 = *(int *)(inst + 0x84);
+  ((int (*)())FUN_00140e7c)(packCtx,inst,inst2);
+  operandLimit = *(int *)(inst + 0x84);
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
-    iVar3 = iVar3 + -1;
+    operandLimit = operandLimit + -1;
   }
-  if (0 < iVar3) {
+  if (0 < operandLimit) {
     loopIndex = 1;
     do {
       sourceDef = IRInst__getOperandSource(inst,loopIndex);
@@ -5022,12 +5022,12 @@ int FUN_00141100(param_1, inst, param_3, inst2, param_5)
       operandRecord = IRInst__getOperandRecord(inst,loopIndex);
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       operandRecord = IRInst__getOperandRecord(inst2,loopIndex);
-      local_44[0] = *(undefined4 *)(operandRecord + 0x10);
-      if (*(char *)((int)local_44 + param_3 + -4) != *(char *)((int)local_44 + param_5)) {
+      selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
+      if (*(char *)((int)selectScratch + laneA + -4) != *(char *)((int)selectScratch + laneB)) {
         return 0;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex <= iVar3);
+    } while (loopIndex <= operandLimit);
   }
   return 1;
 }
@@ -5383,29 +5383,29 @@ int FUN_001416b4(packCtx, inst, inst2, checkExtraSource)
 }
 
 /* PostPack__canPairInEitherOrder @ 0x1418b0 (128 bytes) */
-int PostPack__canPairInEitherOrder(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 *param_4;
+int PostPack__canPairInEitherOrder(packCtx, inst, inst2, outSwapped)
+  undefined4 packCtx;
+  undefined4 inst;
+  undefined4 inst2;
+  undefined4 *outSwapped;
 {
   int callResult;
-  undefined4 uVar2;
+  undefined4 canPair;
   
-  callResult = ((int (*)())FUN_001416b4)(param_1,param_2,param_3,0);
+  callResult = ((int (*)())FUN_001416b4)(packCtx,inst,inst2,0);
   if (callResult == 0) {
-    callResult = ((int (*)())FUN_001416b4)(param_1,param_3,param_2,0);
-    uVar2 = 0;
+    callResult = ((int (*)())FUN_001416b4)(packCtx,inst2,inst,0);
+    canPair = 0;
     if (callResult != 0) {
-      uVar2 = 1;
-      *param_4 = 1;
+      canPair = 1;
+      *outSwapped = 1;
     }
   }
   else {
-    uVar2 = 1;
-    *param_4 = 0;
+    canPair = 1;
+    *outSwapped = 0;
   }
-  return uVar2;
+  return canPair;
 }
 
 /* FUN_00141930 @ 0x141930 (3700 bytes) */
@@ -8902,23 +8902,23 @@ LAB_00146538:
 }
 
 /* FUN_0014657c @ 0x14657c (92 bytes) */
-int FUN_0014657c(param_1)
-  int param_1;
+int FUN_0014657c(program)
+  int program;
 {
-  int local_38 [3];
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
+  int packPassCtx [3];
+  undefined4 packArena;
+  undefined4 packEntryCount;
+  undefined4 packEntryCapacity;
+  undefined4 packScratch;
   
-  local_38[0] = *(int *)(param_1 + 8);
-  local_2c = *(undefined4 *)(local_38[0] + 0x378);
-  local_28 = 0;
-  local_24 = 0x10;
-  local_20 = Arena__alloc(local_2c,0x2c0);
-  ((int (*)())FUN_00140e5c)(local_38,param_1);
-  ((int (*)())pass_post_pack_insts)(local_38);
-  return Arena__free(local_2c,local_20);
+  packPassCtx[0] = *(int *)(program + 8);
+  packArena = *(undefined4 *)(packPassCtx[0] + 0x378);
+  packEntryCount = 0;
+  packEntryCapacity = 0x10;
+  packScratch = Arena__alloc(packArena,0x2c0);
+  ((int (*)())FUN_00140e5c)(packPassCtx,program);
+  ((int (*)())pass_post_pack_insts)(packPassCtx);
+  return Arena__free(packArena,packScratch);
 }
 
 /* IRInst__getOperandSourceOrDefault @ 0x146610 (20 bytes) */
@@ -8937,23 +8937,23 @@ int IRInst__getOperandSourceOrDefault(inst, operandIndex, param_3)
 }
 
 /* FUN_00146624 @ 0x146624 (76 bytes) */
-int FUN_00146624(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int FUN_00146624(selectA, selectB)
+  undefined4 selectA;
+  undefined4 selectB;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
-  char *pcVar2;
+  unsigned int ghidra_home[8] = { selectA, selectB, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char *selectBBytePtr;
+  char *selectABytePtr;
   int countdown;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = selectA;
   countdown = 4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
-  while ((*pcVar1 != '\x01' || (*pcVar2 == '\x04'))) {
-    pcVar1 = pcVar1 + 1;
-    pcVar2 = pcVar2 + 1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectB;
+  selectBBytePtr = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  selectABytePtr = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
+  while ((*selectBBytePtr != '\x01' || (*selectABytePtr == '\x04'))) {
+    selectBBytePtr = selectBBytePtr + 1;
+    selectABytePtr = selectABytePtr + 1;
     countdown = countdown + -1;
     if (countdown == 0) {
       return 1;

@@ -5018,7 +5018,7 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, pass, allowRewrite, allowOp
   int operandRecord;
   bool consumerIsNotMul;
   bool foundMatch;
-  int iVar3;
+  int matchIndexOrSource;
   undefined4 savedSelectWordB;
   undefined4 operandVReg;
   int selectsCompatibleA;
@@ -5031,8 +5031,8 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, pass, allowRewrite, allowOp
   int nextTermSlotB;
   int matchedIndexA;
   int nextTermSlotA;
-  uint *puVar16;
-  uint *puVar17;
+  uint *termSlotPtrB;
+  uint *termSlotPtrA;
   int matchCandidateIndexA;
   int operandRecord3;
   uint *nextTermIndexB;
@@ -5082,9 +5082,9 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, pass, allowRewrite, allowOp
     }
     consumerInstA = *useA;
   }
-  iVar3 = IRInst__getOperandSource(*useB,useB[1]);
-  if ((consumerInstA == iVar3) ||
-     (iVar3 = *useB, consumerInstA = IRInst__getOperandSource(*useA,useA[1]), iVar3 == consumerInstA)) {
+  matchIndexOrSource = IRInst__getOperandSource(*useB,useB[1]);
+  if ((consumerInstA == matchIndexOrSource) ||
+     (matchIndexOrSource = *useB, consumerInstA = IRInst__getOperandSource(*useA,useA[1]), matchIndexOrSource == consumerInstA)) {
     return 0;
   }
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
@@ -5488,22 +5488,22 @@ LAB_0014fad0:
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   newSource = programHome;
   ((int (*)())FUN_001474c8)(programHome,sourceDef,programHome);
-  puVar17 = termIndexB;
-  iVar3 = matchedIndexA;
+  termSlotPtrA = termIndexB;
+  matchIndexOrSource = matchedIndexA;
   if (crossedMatch != 0) {
-    iVar3 = nextTermSlotA;
+    matchIndexOrSource = nextTermSlotA;
     nextTermSlotA = matchedIndexA;
   }
   if (allowOperandSwapHome == 0) {
     return 1;
   }
-  puVar16 = termIndexB;
-  selectsCompatible = SelectWord__matches(matchFrame[iVar3 + 3],matchFrame[(int)((int)termIndexB + 0xf)]);
+  termSlotPtrB = termIndexB;
+  selectsCompatible = SelectWord__matches(matchFrame[matchIndexOrSource + 3],matchFrame[(int)((int)termIndexB + 0xf)]);
   if (selectsCompatible == 0) {
 LAB_00150568:
-    iVar3 = SelectWord__matches(matchFrame[(int)((int)puVar17 + 0xf)],matchFrame[iVar3 + 3]);
-    if (iVar3 != 0) {
-      puVar16 = matchFrame + nextTermSlotA;
+    matchIndexOrSource = SelectWord__matches(matchFrame[(int)((int)termSlotPtrA + 0xf)],matchFrame[matchIndexOrSource + 3]);
+    if (matchIndexOrSource != 0) {
+      termSlotPtrB = matchFrame + nextTermSlotA;
       selectsCompatible2 = SelectWord__matches(matchFrame[nextTermSlotB + 0xf],matchFrame[nextTermSlotA + 3]);
       if (selectsCompatible2 != 0) {
         updatedSourceInst = (int *)IRInst__getOperandSource(*useA,useA[1]);
@@ -5523,7 +5523,7 @@ LAB_00150568:
     updatedSourceInst = (int *)0x0;
   }
   else {
-    puVar16 = matchFrame + nextTermSlotB;
+    termSlotPtrB = matchFrame + nextTermSlotB;
     selectsCompatible = SelectWord__matches(matchFrame[nextTermSlotA + 3],matchFrame[nextTermSlotB + 0xf]);
     if (selectsCompatible == 0) goto LAB_00150568;
     updatedSourceInst = (int *)IRInst__getOperandSource(*useB,useB[1]);
@@ -5543,7 +5543,7 @@ LAB_00150648:
     operandRecord2 = IRInst__getOperandRecord(inst3,operandIndex2);
     *(undefined4 *)(operandRecord2 + 0x10) = copiedSelectWord;
   }
-  newSource = IRInst__hasNoUses(updatedSourceInst,programHome,newSource,allowRewrite,compilerCtx,termA,puVar16);
+  newSource = IRInst__hasNoUses(updatedSourceInst,programHome,newSource,allowRewrite,compilerCtx,termA,termSlotPtrB);
   if (newSource == 0) {
     return 1;
   }
@@ -7022,12 +7022,12 @@ int FUN_00152ea8(inst, inst2, program)
   bool moreComponents;
   byte srcComponent;
   undefined1 componentByte;
-  int iVar4;
+  int constantCheckOrRef;
   undefined4 selectWordToStore;
-  int iVar6;
-  undefined4 uVar7;
+  int packedHighRef;
+  undefined4 componentSelectArg;
   int *newSrcA;
-  int iVar9;
+  int packedHighRefC;
   int *newSrcB;
   int *newSrcC;
   undefined4 foundConstantLowC;
@@ -7043,7 +7043,7 @@ int FUN_00152ea8(inst, inst2, program)
   code *setComponentFn;
   int fillCountdownC;
   uint componentSelect;
-  int iVar21;
+  int packedHighRefB;
   int identitySelectC;
   undefined8 foundConstant;
   undefined8 operandVReg3;
@@ -7093,11 +7093,11 @@ int FUN_00152ea8(inst, inst2, program)
       (*(int *)(inst[0x22] + 8) == 0x12)))) {
     sourceDef = IRInst__getOperandSource(inst,1);
     operandRecord = IRInst__getOperandRecord(inst,1);
-    iVar4 = IRInst__allSelectsAreHwConstants(sourceDef,compiler,*(undefined4 *)(operandRecord + 0x10),staleArg3,staleArg4,staleArg5,staleArg6);
+    constantCheckOrRef = IRInst__allSelectsAreHwConstants(sourceDef,compiler,*(undefined4 *)(operandRecord + 0x10),staleArg3,staleArg4,staleArg5,staleArg6);
     sourceDef = IRInst__getOperandSource(inst2,1);
     operandRecord3 = IRInst__getOperandRecord(inst2,1);
     IRInst__allSelectsAreHwConstants(sourceDef,compiler,*(undefined4 *)(operandRecord3 + 0x10),staleArg3,staleArg4,staleArg5,staleArg6);
-    if (((inst2[0x48] == inst[0x48]) && (inst[0x49] == inst2[0x49])) && (iVar4 == 0)) {
+    if (((inst2[0x48] == inst[0x48]) && (inst[0x49] == inst2[0x49])) && (constantCheckOrRef == 0)) {
       operandRecord = IRInst__getOperandRecord(inst,0);
       destSelectA = *(int *)(operandRecord + 0x10);
       operandRecord = IRInst__getOperandRecord(inst,inst[0x21]);
@@ -7195,13 +7195,13 @@ int FUN_00152ea8(inst, inst2, program)
                       operandIndex14 = 1;
                       do {
                         sourceDef6 = IRInst__getOperandSource(newSrcA,operandIndex14);
-                        iVar6 = (int)((ulonglong)sourceDef6 >> 0x20);
+                        packedHighRef = (int)((ulonglong)sourceDef6 >> 0x20);
                         foundConstantLow = (undefined4)sourceDef6;
-                        if (*(int *)(program + 0x478) < *(int *)(iVar6 + 0x160)) {
-                          *(int *)(iVar6 + 0x160) = *(int *)(iVar6 + 0x160) + 1;
+                        if (*(int *)(program + 0x478) < *(int *)(packedHighRef + 0x160)) {
+                          *(int *)(packedHighRef + 0x160) = *(int *)(packedHighRef + 0x160) + 1;
                         }
                         else {
-                          *(int *)(iVar6 + 0x160) = *(int *)(program + 0x478) + 1;
+                          *(int *)(packedHighRef + 0x160) = *(int *)(program + 0x478) + 1;
                         }
                         operandIndex14 = operandIndex14 + 1;
                       } while (operandIndex14 <= newSrcA[0x21]);
@@ -7213,13 +7213,13 @@ int FUN_00152ea8(inst, inst2, program)
                       operandIndex19 = newSrcA[0x21];
                       oneSelectA = 0;
                       operandVReg3 = IRInst__getOperandSource(newSrcA,operandIndex19);
-                      iVar4 = (int)((ulonglong)operandVReg3 >> 0x20);
+                      constantCheckOrRef = (int)((ulonglong)operandVReg3 >> 0x20);
                       foundConstant = CONCAT44(operandIndex19,(int)operandVReg3);
-                      if (*(int *)(program + 0x478) < *(int *)(iVar4 + 0x160)) {
-                        *(int *)(iVar4 + 0x160) = *(int *)(iVar4 + 0x160) + 1;
+                      if (*(int *)(program + 0x478) < *(int *)(constantCheckOrRef + 0x160)) {
+                        *(int *)(constantCheckOrRef + 0x160) = *(int *)(constantCheckOrRef + 0x160) + 1;
                       }
                       else {
-                        *(int *)(iVar4 + 0x160) = *(int *)(program + 0x478) + 1;
+                        *(int *)(constantCheckOrRef + 0x160) = *(int *)(program + 0x478) + 1;
                         foundConstant = CONCAT44(operandIndex19,(int)operandVReg3);
                       }
                     }
@@ -7311,7 +7311,7 @@ int FUN_00152ea8(inst, inst2, program)
                     }
                     selectWordToStore = srcSelectB;
                     zeroSelectB = 0;
-                    uVar7 = 2;
+                    componentSelectArg = 2;
                     oneSelectB = 0;
                     operandRecord3 = IRInst__getOperandRecord(newSrcB,1);
                     *(undefined4 *)(operandRecord3 + 0x10) = selectWordToStore;
@@ -7328,13 +7328,13 @@ int FUN_00152ea8(inst, inst2, program)
                       operandIndex17 = 1;
                       do {
                         sourceDef6 = IRInst__getOperandSource(newSrcB,operandIndex17);
-                        iVar21 = (int)((ulonglong)sourceDef6 >> 0x20);
+                        packedHighRefB = (int)((ulonglong)sourceDef6 >> 0x20);
                         foundConstantLow = (undefined4)sourceDef6;
-                        if (*(int *)(program + 0x478) < *(int *)(iVar21 + 0x160)) {
-                          *(int *)(iVar21 + 0x160) = *(int *)(iVar21 + 0x160) + 1;
+                        if (*(int *)(program + 0x478) < *(int *)(packedHighRefB + 0x160)) {
+                          *(int *)(packedHighRefB + 0x160) = *(int *)(packedHighRefB + 0x160) + 1;
                         }
                         else {
-                          *(int *)(iVar21 + 0x160) = *(int *)(program + 0x478) + 1;
+                          *(int *)(packedHighRefB + 0x160) = *(int *)(program + 0x478) + 1;
                         }
                         operandIndex17 = operandIndex17 + 1;
                       } while (operandIndex17 <= newSrcB[0x21]);
@@ -7345,17 +7345,17 @@ int FUN_00152ea8(inst, inst2, program)
                       operandIndex8 = newSrcB[0x21];
                       oneSelectB = 0;
                       operandVReg3 = IRInst__getOperandSource(newSrcB,operandIndex8);
-                      iVar6 = (int)((ulonglong)operandVReg3 >> 0x20);
+                      packedHighRef = (int)((ulonglong)operandVReg3 >> 0x20);
                       foundConstant = CONCAT44(operandIndex8,(int)operandVReg3);
-                      if (*(int *)(program + 0x478) < *(int *)(iVar6 + 0x160)) {
-                        *(int *)(iVar6 + 0x160) = *(int *)(iVar6 + 0x160) + 1;
+                      if (*(int *)(program + 0x478) < *(int *)(packedHighRef + 0x160)) {
+                        *(int *)(packedHighRef + 0x160) = *(int *)(packedHighRef + 0x160) + 1;
                       }
                       else {
-                        *(int *)(iVar6 + 0x160) = *(int *)(program + 0x478) + 1;
+                        *(int *)(packedHighRef + 0x160) = *(int *)(program + 0x478) + 1;
                         foundConstant = CONCAT44(operandIndex8,(int)operandVReg3);
                       }
                     }
-                    uVar7 = (undefined4)((ulonglong)foundConstant >> 0x20);
+                    componentSelectArg = (undefined4)((ulonglong)foundConstant >> 0x20);
                     foundConstant = ((int (*)())IRInst__findConstantOperandWithValue)(newSrcB,(int)foundConstant,&zeroSelectB,0.0);
                     operandIndex16 = (int)((ulonglong)foundConstant >> 0x20);
                     if (operandIndex16 == 0) {
@@ -7454,13 +7454,13 @@ int FUN_00152ea8(inst, inst2, program)
                       operandIndex11 = 1;
                       do {
                         sourceDef6 = IRInst__getOperandSource(newSrcC,operandIndex11);
-                        iVar9 = (int)((ulonglong)sourceDef6 >> 0x20);
+                        packedHighRefC = (int)((ulonglong)sourceDef6 >> 0x20);
                         foundConstantLowC = (undefined4)sourceDef6;
-                        if (*(int *)(program + 0x478) < *(int *)(iVar9 + 0x160)) {
-                          *(int *)(iVar9 + 0x160) = *(int *)(iVar9 + 0x160) + 1;
+                        if (*(int *)(program + 0x478) < *(int *)(packedHighRefC + 0x160)) {
+                          *(int *)(packedHighRefC + 0x160) = *(int *)(packedHighRefC + 0x160) + 1;
                         }
                         else {
-                          *(int *)(iVar9 + 0x160) = *(int *)(program + 0x478) + 1;
+                          *(int *)(packedHighRefC + 0x160) = *(int *)(program + 0x478) + 1;
                         }
                         operandIndex11 = operandIndex11 + 1;
                       } while (operandIndex11 <= newSrcC[0x21]);
@@ -7566,7 +7566,7 @@ int FUN_00152ea8(inst, inst2, program)
                               ((int)*(char *)(srcOperandRecord + 0x15c) >> (componentSelect & 0x3f) & 1U) != 0)) &&
                              (*(float *)(componentSelect * 0x18 + srcOperandRecord + 0x20) == 0.0)) {
                             (**(code **)(*newSrcB + 0x88))(newSrcB,operandIndex5,componentSelect,4);
-                            (**(code **)(*newSrcB + 0x88))(newSrcB,uVar7,componentSelect,oneSelectB);
+                            (**(code **)(*newSrcB + 0x88))(newSrcB,componentSelectArg,componentSelect,oneSelectB);
                           }
                           operandIndex5 = operandIndex5 + 1;
                         } while (operandIndex5 <= newSrcB[0x21]);

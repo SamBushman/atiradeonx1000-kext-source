@@ -459,7 +459,7 @@ int Scheduler__tryReuseAddressRegister(scheduler, node)
   uint loopIndex;
   bool moreComponents;
   undefined *slotSelectTable;
-  int iVar3;
+  int slotLane;
   uint vectorCount;
   int *addressRegisterSlot;
   undefined4 a3;
@@ -570,7 +570,7 @@ LAB_0016d5f8:
       scanLoadNode = scheduler[0x5c];
       if (scanLoadNode == 0) {
         chosenSlot = 0;
-        iVar3 = 0;
+        slotLane = 0;
       }
       else {
         loopIndex2 = 0;
@@ -594,9 +594,9 @@ LAB_0016d5f8:
         if ((int)chosenSlot < 0) {
           return 0;
         }
-        iVar3 = chosenSlot + (((int)chosenSlot >> 2) + (uint)((int)chosenSlot < 0 && (chosenSlot & 3) != 0)) * -4;
+        slotLane = chosenSlot + (((int)chosenSlot >> 2) + (uint)((int)chosenSlot < 0 && (chosenSlot & 3) != 0)) * -4;
       }
-      slotIndex = chosenSlot - iVar3;
+      slotIndex = chosenSlot - slotLane;
       slotGroupEnd = slotIndex + 4;
       addressRegisterSlot = scheduler + slotIndex + 0x5c;
       do {
@@ -613,15 +613,15 @@ LAB_0016d5f8:
             else if (*(int *)(a0[0x22] + 8) == 0x2b) {
 LAB_0016d91c:
               if ((scheduler[chosenSlot + 0x5c] == 0) ||
-                 (nodeAddressSource = SchedNode__getLastConsumerCycle(scheduler[chosenSlot + 0x5c],iVar3), nodeAddressSource < *(int *)(existingLoadNode + 0x2c)
+                 (nodeAddressSource = SchedNode__getLastConsumerCycle(scheduler[chosenSlot + 0x5c],slotLane), nodeAddressSource < *(int *)(existingLoadNode + 0x2c)
                  )) {
-                *(undefined1 *)((int)a0 + iVar3 + 0x9c) = 0;
-                (**(code **)(*a0 + 0x88))(a0,1,iVar3,componentSelect,in_r7,in_r8,*(code **)(*a0 + 0x88));
-                *(undefined1 *)((int)a0 + iVar3 + 0xc) = 1;
+                *(undefined1 *)((int)a0 + slotLane + 0x9c) = 0;
+                (**(code **)(*a0 + 0x88))(a0,1,slotLane,componentSelect,in_r7,in_r8,*(code **)(*a0 + 0x88));
+                *(undefined1 *)((int)a0 + slotLane + 0xc) = 1;
                 compiler = *scheduler;
                 scheduler[chosenSlot + 0x5c] = existingLoadNode;
                 IRInst__setOperandSource(nodeInst,1,a0,0,compiler);
-                selectConst = *(undefined4 *)(PTR_DAT_001e8b8c + iVar3 * 4);
+                selectConst = *(undefined4 *)(PTR_DAT_001e8b8c + slotLane * 4);
                 operandRecord2 = IRInst__getOperandRecord(nodeInst,1);
                 *(undefined4 *)(operandRecord2 + 0x10) = selectConst;
                 if (*(int *)(existingLoadNode + 0x6c) != 0) {
@@ -651,7 +651,7 @@ LAB_0016d91c:
                   consumerNode2 = *(int *)(succEdge2 + 4);
                   if (*(int *)(succEdge2 + 8) == 0) {
                     laneMask[0] = 0;
-                    *(undefined1 *)((int)laneMask + iVar3) = 1;
+                    *(undefined1 *)((int)laneMask + slotLane) = 1;
                     Scheduler__addDataDependencyEdge(scheduler,existingLoadNode,consumerNode2,*(undefined4 *)(succEdge2 + 0x10),
                                  *(undefined4 *)(succEdge2 + 0x14),laneMask[0],(uint)laneMask);
                     *(int *)(consumerNode2 + 0x34) = *(int *)(consumerNode2 + 0x34) + -1;
@@ -674,7 +674,7 @@ LAB_0016d91c:
       scheduler[0x60] = spareInst;
       *(undefined4 *)(spareInst + 0x98) = 0x20;
       *(uint *)(spareInst + 0x94) = ((int)chosenSlot >> 2) + (uint)((int)chosenSlot < 0 && (chosenSlot & 3) != 0);
-      *(undefined4 *)(scheduler[0x60] + 0x9c) = *(undefined4 *)(slotSelectTable + iVar3 * 4);
+      *(undefined4 *)(scheduler[0x60] + 0x9c) = *(undefined4 *)(slotSelectTable + slotLane * 4);
       spareInst = scheduler[0x60];
       sourceDef2 = IRInst__getOperandSource(nodeInst,1);
       compiler = *scheduler;
@@ -686,15 +686,15 @@ LAB_0016d91c:
       *(undefined4 *)(operandRecord3 + 0x10) = selectConst2;
       *(undefined4 *)(scheduler[0x60] + 0xc) = 0;
       spareInst = scheduler[0x60];
-      *(undefined1 *)(spareInst + iVar3 + 0xc) = 1;
+      *(undefined1 *)(spareInst + slotLane + 0xc) = 1;
       canAdd = (**(code **)(*(int *)scheduler[2] + 0xc))
-                         ((int *)scheduler[2],scheduler[0x60],sourceDef2,a3,compiler,in_r8,spareInst + iVar3);
+                         ((int *)scheduler[2],scheduler[0x60],sourceDef2,a3,compiler,in_r8,spareInst + slotLane);
       if (canAdd != 0) {
         newLoadNode = Scheduler__createNode(scheduler,scheduler[0x60],node + 0xc,scheduler[0xb]);
         scheduler[0x60] = 0;
         scheduler[chosenSlot + 0x5c] = newLoadNode;
         IRInst__setOperandSource(nodeInst,1,*(undefined4 *)(newLoadNode + 0x38),0,*scheduler);
-        selectConst = *(undefined4 *)(selectTable + iVar3 * 4);
+        selectConst = *(undefined4 *)(selectTable + slotLane * 4);
         operandRecord2 = IRInst__getOperandRecord(nodeInst,1);
         *(undefined4 *)(operandRecord2 + 0x10) = selectConst;
         loopIndex = 0;
@@ -719,7 +719,7 @@ LAB_0016d91c:
             edgeTarget = *(undefined4 *)(succEdge2 + 4);
             if (*(int *)(succEdge2 + 8) == 0) {
               laneMask[0] = 0;
-              *(undefined1 *)((int)laneMask + iVar3) = 1;
+              *(undefined1 *)((int)laneMask + slotLane) = 1;
               Scheduler__addDataDependencyEdge(scheduler,newLoadNode,edgeTarget,*(undefined4 *)(succEdge2 + 0x10),
                            *(undefined4 *)(succEdge2 + 0x14),laneMask[0],(uint)laneMask);
             }
@@ -3569,89 +3569,89 @@ int ResourceModel__vslot23(this)
 }
 
 /* SchedModel__countIssuedNode @ 0x172078 (180 bytes) */
-int SchedModel__countIssuedNode(param_1, param_2)
-  int *param_1;
-  int param_2;
+int SchedModel__countIssuedNode(model, node)
+  int *model;
+  int node;
 {
   int nodeClass;
   
-  (**(code **)(*param_1 + 0x4c))(param_1,*(undefined4 *)(param_2 + 0x38));
-  nodeClass = *(int *)(param_2 + 0x58);
+  (**(code **)(*model + 0x4c))(model,*(undefined4 *)(node + 0x38));
+  nodeClass = *(int *)(node + 0x58);
   if (nodeClass == 3) {
-    param_1[3] = param_1[3] + 1;
-    param_1[4] = param_1[4] + 1;
+    model[3] = model[3] + 1;
+    model[4] = model[4] + 1;
   }
-  else if (*(int *)(param_2 + 0x5c) == 0) {
+  else if (*(int *)(node + 0x5c) == 0) {
     if (nodeClass == 1) {
-      param_1[3] = param_1[3] + 1;
+      model[3] = model[3] + 1;
     }
     else if (nodeClass == 2) {
-      param_1[4] = param_1[4] + 1;
+      model[4] = model[4] + 1;
     }
   }
   else {
-    param_1[5] = param_1[5] + 1;
+    model[5] = model[5] + 1;
   }
   return;
 }
 
 /* SchedModel__uncountNode @ 0x17212c (216 bytes) */
-int SchedModel__uncountNode(param_1, param_2)
-  int *param_1;
-  int param_2;
+int SchedModel__uncountNode(model, node)
+  int *model;
+  int node;
 {
   int nodeClass;
   int newClass;
   int oldClass;
   
-  oldClass = *(int *)(param_2 + 0x58);
-  newClass = (**(code **)(*param_1 + 0x4c))(param_1,*(undefined4 *)(param_2 + 0x38));
+  oldClass = *(int *)(node + 0x58);
+  newClass = (**(code **)(*model + 0x4c))(model,*(undefined4 *)(node + 0x38));
   if (oldClass != newClass) {
-    (**(code **)(*param_1 + 0x50))(param_1);
+    (**(code **)(*model + 0x50))(model);
   }
-  nodeClass = *(int *)(param_2 + 0x58);
+  nodeClass = *(int *)(node + 0x58);
   if (nodeClass == 3) {
-    param_1[3] = param_1[3] + -1;
-    param_1[4] = param_1[4] + -1;
+    model[3] = model[3] + -1;
+    model[4] = model[4] + -1;
   }
-  else if (*(int *)(param_2 + 0x5c) == 0) {
+  else if (*(int *)(node + 0x5c) == 0) {
     if (nodeClass == 1) {
-      param_1[3] = param_1[3] + -1;
+      model[3] = model[3] + -1;
     }
     else if (nodeClass == 2) {
-      param_1[4] = param_1[4] + -1;
+      model[4] = model[4] + -1;
     }
   }
   else {
-    param_1[5] = param_1[5] + -1;
+    model[5] = model[5] + -1;
   }
   return;
 }
 
 /* FUN_00172204 @ 0x172204 (200 bytes) */
-int FUN_00172204(param_1, param_2)
-  int *param_1;
-  undefined4 param_2;
+int FUN_00172204(model, node)
+  int *model;
+  undefined4 node;
 {
   int vcall4cResult;
   int vcall30Result;
   
-  vcall4cResult = (**(code **)(*param_1 + 0x4c))(param_1,param_2);
-  vcall30Result = (**(code **)(*param_1 + 0x30))(param_1,param_2);
+  vcall4cResult = (**(code **)(*model + 0x4c))(model,node);
+  vcall30Result = (**(code **)(*model + 0x30))(model,node);
   if (vcall4cResult == 3) {
-    param_1[3] = param_1[3] + 1;
-    param_1[4] = param_1[4] + 1;
+    model[3] = model[3] + 1;
+    model[4] = model[4] + 1;
   }
   else if (vcall30Result == 0) {
     if (vcall4cResult == 1) {
-      param_1[3] = param_1[3] + 1;
+      model[3] = model[3] + 1;
     }
     else if (vcall4cResult == 2) {
-      param_1[4] = param_1[4] + 1;
+      model[4] = model[4] + 1;
     }
   }
   else {
-    param_1[5] = param_1[5] + 1;
+    model[5] = model[5] + 1;
   }
   return;
 }
@@ -4187,34 +4187,34 @@ int returnZero_172dfc()
 }
 
 /* LaneMatchTable__eqKeys @ 0x172e04 (116 bytes) */
-int LaneMatchTable__eqKeys(param_1, param_2)
-  int param_1;
-  int param_2;
+int LaneMatchTable__eqKeys(keyA, keyB)
+  int keyA;
+  int keyB;
 {
   int loopIndex;
   bool moreComponents;
-  int iVar2;
-  int iVar3;
+  int keyBCursor;
+  int keyACursor;
   int countdown;
   
   countdown = 4;
-  iVar2 = param_2;
-  iVar3 = param_1;
+  keyBCursor = keyB;
+  keyACursor = keyA;
   while( true ) {
-    if (((*(int *)(iVar3 + 0x20) != *(int *)(iVar2 + 0x20)) && (*(int *)(iVar3 + 0x20) != 3)) &&
-       (*(int *)(iVar2 + 0x20) != 3)) break;
-    iVar3 = iVar3 + 4;
-    iVar2 = iVar2 + 4;
+    if (((*(int *)(keyACursor + 0x20) != *(int *)(keyBCursor + 0x20)) && (*(int *)(keyACursor + 0x20) != 3)) &&
+       (*(int *)(keyBCursor + 0x20) != 3)) break;
+    keyACursor = keyACursor + 4;
+    keyBCursor = keyBCursor + 4;
     countdown = countdown + -1;
     if (countdown == 0) {
       loopIndex = 0;
       do {
-        if (*(int *)(param_1 + 0xb8) != *(int *)(param_2 + 0xb8)) {
+        if (*(int *)(keyA + 0xb8) != *(int *)(keyB + 0xb8)) {
           return 0xffffffff;
         }
         moreComponents = loopIndex != 1;
-        param_1 = param_1 + 4;
-        param_2 = param_2 + 4;
+        keyA = keyA + 4;
+        keyB = keyB + 4;
         loopIndex = loopIndex + 1;
       } while (moreComponents);
       return 0;
@@ -4224,30 +4224,30 @@ int LaneMatchTable__eqKeys(param_1, param_2)
 }
 
 /* SwizzleTable__hashKey @ 0x172e78 (92 bytes) */
-int SwizzleTable__hashKey(param_1)
-  int param_1;
+int SwizzleTable__hashKey(key)
+  int key;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
+  uint laneWord;
+  int laneAbs;
+  int laneByteOffset;
+  int maxLaneAbs;
+  uint laneSignMask;
   int countdown;
   
   countdown = 4;
-  iVar4 = 0;
-  iVar3 = 0;
+  maxLaneAbs = 0;
+  laneByteOffset = 0;
   do {
-    uVar1 = *(uint *)(iVar3 + param_1 + 0x20);
-    uVar5 = (int)uVar1 >> 0x1f;
-    iVar2 = (uVar5 ^ uVar1) - uVar5;
-    if (iVar4 < iVar2) {
-      iVar4 = iVar2;
+    laneWord = *(uint *)(laneByteOffset + key + 0x20);
+    laneSignMask = (int)laneWord >> 0x1f;
+    laneAbs = (laneSignMask ^ laneWord) - laneSignMask;
+    if (maxLaneAbs < laneAbs) {
+      maxLaneAbs = laneAbs;
     }
-    iVar3 = iVar3 + 4;
+    laneByteOffset = laneByteOffset + 4;
     countdown = countdown + -1;
   } while (countdown != 0);
-  return iVar4 % 0x65;
+  return maxLaneAbs % 0x65;
 }
 
 /* Compiler__nextValueNumber @ 0x172ed4 (20 bytes) */
@@ -4413,43 +4413,43 @@ LAB_001730b4:
 }
 
 /* ValueKey__computeSwizzleTo @ 0x173164 (196 bytes) */
-int ValueKey__computeSwizzleTo(param_1, param_2, param_3)
-  undefined4 *param_1;
-  int param_2;
-  int param_3;
+int ValueKey__computeSwizzleTo(out, key, otherKey)
+  undefined4 *out;
+  int key;
+  int otherKey;
 {
   int operandRecord;
   bool moreComponents;
   int loopIndex;
   int loopIndexB;
-  int *piVar4;
+  int *laneCursor;
   int countdown;
-  undefined4 local_38 [6];
+  undefined4 swizzleWord [6];
   
   loopIndexB = 0;
-  piVar4 = (int *)(param_2 + 0x20);
-  local_38[0] = DAT_001b01b8;
+  laneCursor = (int *)(key + 0x20);
+  swizzleWord[0] = DAT_001b01b8;
   do {
-    operandRecord = IRInst__getOperandRecord(*(undefined4 *)(param_2 + 0xb0),0);
+    operandRecord = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),0);
     if (*(char *)(loopIndexB + operandRecord + 0x10) != '\x01') {
       countdown = 4;
       loopIndex = 0;
-      while (*(int *)(param_3 + 0x20 + loopIndex * 4) != *piVar4) {
+      while (*(int *)(otherKey + 0x20 + loopIndex * 4) != *laneCursor) {
         loopIndex = loopIndex + 1;
         countdown = countdown + -1;
         if (countdown == 0) {
-          *param_1 = DAT_001b01b8;
-          return param_1;
+          *out = DAT_001b01b8;
+          return out;
         }
       }
-      *(char *)((int)local_38 + loopIndexB) = (char)loopIndex;
+      *(char *)((int)swizzleWord + loopIndexB) = (char)loopIndex;
     }
     moreComponents = loopIndexB != 3;
-    piVar4 = piVar4 + 1;
+    laneCursor = laneCursor + 1;
     loopIndexB = loopIndexB + 1;
   } while (moreComponents);
-  *param_1 = local_38[0];
-  return param_1;
+  *out = swizzleWord[0];
+  return out;
 }
 
 /* SwizzleTable__eqKeys @ 0x173228 (80 bytes) */

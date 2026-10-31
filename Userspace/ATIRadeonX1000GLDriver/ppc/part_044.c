@@ -11876,10 +11876,10 @@ int Scheduler__buildCoScheduleGroups(scheduler)
   uint vectorCount;
   int pushByteOffset;
   undefined4 defaultSelectWord;
-  uint uVar3;
+  uint groupSentinel;
   int *nodeSlot;
-  int iVar5;
-  undefined4 *puVar6;
+  int nodeScratch;
+  undefined4 *siblingEdgeSlot;
   uint succEdgeCount;
   uint vectorCount2;
   int siblingNode;
@@ -11934,8 +11934,8 @@ int Scheduler__buildCoScheduleGroups(scheduler)
       if (node == 0) goto LAB_issue76_skip_16bd70;
       if (((((*(int *)(node + 0x60) == 0) &&
             (nodeSlot = *(int **)(node + 0x38), nodeSlot[0x20] != 0)) &&
-           (iVar5 = RegKind__flagBit0(nodeSlot[0x26]), iVar5 != 0)) &&
-          (((nodeSlot[5] & 2U) == 0 && (iVar5 = (**(code **)(*nodeSlot + 0x50))(nodeSlot), iVar5 == 0))))
+           (nodeScratch = RegKind__flagBit0(nodeSlot[0x26]), nodeScratch != 0)) &&
+          (((nodeSlot[5] & 2U) == 0 && (nodeScratch = (**(code **)(*nodeSlot + 0x50))(nodeSlot), nodeScratch == 0))))
          && ((*(uint *)(*(int *)(node + 0x38) + 0x14) & 0x20) == 0)) {
         if (groupRecord == (uint *)0x0) {
           arena = *(undefined4 *)(*scheduler + 0x378);
@@ -11947,7 +11947,7 @@ int Scheduler__buildCoScheduleGroups(scheduler)
           allocation[1] = defaultMaskWord;
           allocation[6] = 0x7fffffff;
           allocation[2] = 0xffffffff;
-          iVar5 = 4;
+          nodeScratch = 4;
           allocation[4] = defaultSelectWord;
           allocation[5] = 0;
           allocation[3] = 0;
@@ -11955,32 +11955,32 @@ int Scheduler__buildCoScheduleGroups(scheduler)
           do {
             zeroCursor[6] = 0;
             zeroCursor = zeroCursor + 1;
-            iVar5 = iVar5 + -1;
-          } while (iVar5 != 0);
+            nodeScratch = nodeScratch + -1;
+          } while (nodeScratch != 0);
         }
         stackCountBefore = local_64_vec;
         *(uint **)(node + 0x60) = groupRecord;
         groupRecord[4] = 1;
         *groupRecord = *(uint *)(*(int *)(node + 0x38) + 0xc);
         if (local_64_vec < local_68_vec) {
-          iVar5 = local_64_vec * 4;
-          _memset(iVar5 + local_60_vec,0,4);
+          nodeScratch = local_64_vec * 4;
+          _memset(nodeScratch + local_60_vec,0,4);
           local_64_vec = stackCountBefore + 1;
-          pushSlot = (int *)(iVar5 + local_60_vec);
+          pushSlot = (int *)(nodeScratch + local_60_vec);
         }
         else {
           pushSlot = (int *)Vector__elementRefGrow(&local_68_vec,local_64_vec);
         }
         *pushSlot = node;
-        while (uVar3 = DAT_001b01a8, local_64_vec != 0) {
+        while (groupSentinel = DAT_001b01a8, local_64_vec != 0) {
           topIndex = local_64_vec - 1;
           topSlot = (int *)0x0;
           if (topIndex < local_64_vec) {
             topSlot = (int *)(topIndex * 4 + local_60_vec);
           }
-          iVar5 = *topSlot;
+          nodeScratch = *topSlot;
           Vector__removeAt(&local_68_vec,topIndex);
-          succEdges = *(uint **)(iVar5 + 0x40);
+          succEdges = *(uint **)(nodeScratch + 0x40);
           loopIndex2 = 0;
           vectorCount = succEdges[1];
           if (0 < (int)vectorCount) {
@@ -12010,13 +12010,13 @@ int Scheduler__buildCoScheduleGroups(scheduler)
                         _memset(vectorCount2 * 4 + consumerPredEdges[2],0,(loopIndex3 - vectorCount2) * 4 + 4);
                         consumerPredEdges[1] = loopIndex3 + 1;
                       }
-                      puVar6 = (undefined4 *)(loopIndex3 * 4 + consumerPredEdges[2]);
+                      siblingEdgeSlot = (undefined4 *)(loopIndex3 * 4 + consumerPredEdges[2]);
                     }
                     else {
-                      puVar6 = (undefined4 *)Vector__elementRefGrow(consumerPredEdges,loopIndex3);
+                      siblingEdgeSlot = (undefined4 *)Vector__elementRefGrow(consumerPredEdges,loopIndex3);
                     }
                     stackCountBeforeSibling = local_64_vec;
-                    siblingEdge = (int *)*puVar6;
+                    siblingEdge = (int *)*siblingEdgeSlot;
                     if (((siblingEdge[2] == 0) && (siblingEdge[4] == *(int *)(succEdge + 0x10))) &&
                        ((siblingEdge[5] == *(int *)(succEdge + 0x14) && (*(int *)(*siblingEdge + 0x60) == 0))))
                     {
@@ -12043,13 +12043,13 @@ int Scheduler__buildCoScheduleGroups(scheduler)
               }
               loopIndex2 = loopIndex2 + 1;
               if (vectorCount == loopIndex2) break;
-              succEdges = *(uint **)(iVar5 + 0x40);
+              succEdges = *(uint **)(nodeScratch + 0x40);
             }
           }
         }
         if (groupRecord[4] == 1) {
           *(undefined4 *)(node + 0x60) = 0;
-          *groupRecord = uVar3;
+          *groupRecord = groupSentinel;
           groupRecord[4] = 0;
         }
         else {

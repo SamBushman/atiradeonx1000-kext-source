@@ -4406,3 +4406,74 @@ local	Inst__tryCollapseSimilar	param_4	staleArg4	INFERRED	r6 spilled into the ho
 local	Inst__tryCollapseSimilar	param_5	staleArg5	INFERRED	r7 spilled into the home slot array
 local	Inst__tryCollapseSimilar	param_6	staleArg6	INFERRED	r8 spilled into the home slot array
 local	Inst__tryCollapseSimilar	param_7	staleArg7	INFERRED	r9 spilled into the home slot array
+local	SwizzleTable__hashKey	param_1	key	INFERRED	swizzle key: lane words at +0x20
+local	SwizzleTable__hashKey	uVar1	laneWord	INFERRED	lane word read from the key
+local	SwizzleTable__hashKey	iVar2	laneAbs	INFERRED	absolute value of the lane word
+local	SwizzleTable__hashKey	iVar3	laneByteOffset	INFERRED	lane index * 4
+local	SwizzleTable__hashKey	iVar4	maxLaneAbs	INFERRED	largest absolute lane word seen so far (the hash input)
+local	SwizzleTable__hashKey	uVar5	laneSignMask	INFERRED	sign extension of the lane word (word >> 31)
+local	ValueKey__lanesAreUnset	param_1	key	INFERRED	value key with lane value words at +0x168
+local	ValueKey__lanesAreUnset	param_2	row	INFERRED	operand row; each row is four words
+local	ValueKey__lanesAreUnset	param_3	testLane0	INFERRED	non-zero tests that lane 0 of the row is unset
+local	ValueKey__lanesAreUnset	param_4	testLane1	INFERRED	non-zero tests that lane 1 of the row is unset
+local	ValueKey__lanesAreUnset	param_5	testLane2	INFERRED	non-zero tests that lane 2 of the row is unset
+local	ValueKey__lanesAreUnset	param_6	testLane3	INFERRED	non-zero tests that lane 3 of the row is unset
+local	LaneMatchTable__eqKeys	param_1	keyA	INFERRED	first key; advanced word by word in the second comparison loop
+local	LaneMatchTable__eqKeys	param_2	keyB	INFERRED	second key; advanced word by word in the second comparison loop
+local	LaneMatchTable__eqKeys	iVar2	keyBCursor	INFERRED	cursor along the lane words of keyB
+local	LaneMatchTable__eqKeys	iVar3	keyACursor	INFERRED	cursor along the lane words of keyA
+local	FUN_001769f4	param_1	outValue	INFERRED	receives the expression value for the lane (0x7ffffffe when unknown)
+local	FUN_001769f4	param_2	key	INFERRED	value key with per-row value numbers at +0x168
+local	FUN_001769f4	param_3	lane	INFERRED	lane / row selector
+local	FUN_001769f4	iVar1	rowOrValueNumber	INFERRED	one register: row offset (0, 1 or 3), then the value number read from the key
+local	SchedModel__uncountNode	param_1	model	INFERRED	resource model whose issue counters at [3] [4] [5] are decremented
+local	SchedModel__uncountNode	param_2	node	INFERRED	scheduler node being removed from the counts
+local	Scheduler__buildCoScheduleGroups	uVar3	groupSentinel	INFERRED	DAT_001b01a8 constant stored as the group record head word
+local	Scheduler__buildCoScheduleGroups	iVar5	nodeScratch	INFERRED	one register: lane countdown, work stack byte offset and the node popped from the stack
+local	Scheduler__buildCoScheduleGroups	puVar6	siblingEdgeSlot	INFERRED	address of a consumer predecessor edge element
+local	FUN_00172204	param_1	model	INFERRED	resource model whose issue counters at [3] [4] [5] are incremented
+local	FUN_00172204	param_2	node	INFERRED	scheduler node being counted
+local	SchedModel__countIssuedNode	param_1	model	INFERRED	resource model whose issue counters at [3] [4] [5] are incremented
+local	SchedModel__countIssuedNode	param_2	node	INFERRED	scheduler node being counted
+local	FUN_00152ea8	iVar4	constantCheckOrRef	INFERRED	one register: all-constant test result, then the packed high-word source reference
+local	FUN_00152ea8	iVar6	packedHighRef	INFERRED	high word of a packed source pair whose stamp (+0x160) is bumped
+local	FUN_00152ea8	iVar21	packedHighRefB	INFERRED	high word of a packed source pair whose stamp (+0x160) is bumped
+local	FUN_00152ea8	iVar9	packedHighRefC	INFERRED	high word of a packed source pair whose stamp (+0x160) is bumped
+local	FUN_00152ea8	uVar7	componentSelectArg	INFERRED	constant 2 or the found constant's high word passed as the select argument of the vtable +0x88 call
+local	FUN_0014657c	param_1	program	INFERRED	program the post-pack pass runs on
+local	FUN_0014657c	local_38	packPassCtx	INFERRED	pack pass context: [0] program, followed by the arena, counts and scratch fields
+local	FUN_0014657c	local_2c	packArena	INFERRED	arena (compiler +0x378) the scratch buffer is taken from
+local	FUN_0014657c	local_28	packEntryCount	INFERRED	scratch entry count, zero
+local	FUN_0014657c	local_24	packEntryCapacity	INFERRED	scratch capacity, 0x10 entries
+local	FUN_0014657c	local_20	packScratch	INFERRED	0x2c0-byte scratch buffer freed after the pass
+local	PostPack__canPairInEitherOrder	param_1	packCtx	INFERRED	pack context
+local	PostPack__canPairInEitherOrder	param_2	inst	INFERRED	first inst of the pair
+local	PostPack__canPairInEitherOrder	param_3	inst2	INFERRED	second inst of the pair
+local	PostPack__canPairInEitherOrder	param_4	outSwapped	INFERRED	receives 1 when only the swapped order is legal, 0 for the given order
+local	PostPack__canPairInEitherOrder	uVar2	canPair	INFERRED	return value
+local	Inst__swapMatchedOperandsBetweenUses	iVar3	matchIndexOrSource	INFERRED	one register: operand source, term index and match results through the function
+local	Inst__swapMatchedOperandsBetweenUses	puVar16	termSlotPtrB	INFERRED	pointer into the match frame at the second term slot
+local	Inst__swapMatchedOperandsBetweenUses	puVar17	termSlotPtrA	INFERRED	pointer into the match frame at the first term slot
+local	FUN_00141100	param_1	packCtx	INFERRED	pack context
+local	FUN_00141100	param_3	laneA	INFERRED	lane of inst compared
+local	FUN_00141100	param_5	laneB	INFERRED	lane of inst2 compared
+local	FUN_00141100	iVar3	operandLimit	INFERRED	operand count of inst minus the extra operand
+local	FUN_00141100	local_44	selectScratch	INFERRED	select word scratch whose lane bytes are compared; the lane map precedes it at -4
+local	ValueKey__computeSwizzleTo	param_1	out	INFERRED	receives the swizzle word mapping this key's lanes onto the other key's lanes
+local	ValueKey__computeSwizzleTo	param_2	key	INFERRED	key whose lane words (+0x20) are searched in the other key
+local	ValueKey__computeSwizzleTo	param_3	otherKey	INFERRED	key searched for each lane word
+local	ValueKey__computeSwizzleTo	piVar4	laneCursor	INFERRED	walks the lane words of key
+local	ValueKey__computeSwizzleTo	local_38	swizzleWord	INFERRED	swizzle bytes being built; bytes are the matching lane indexes
+local	Scheduler__tryReuseAddressRegister	iVar3	slotLane	INFERRED	one register: lane of the chosen slot (slot mod 4), reused as a loop lane
+local	FUN_00176e20	param_1	valueNumberA	INFERRED	first value number tested
+local	FUN_00176e20	param_2	valueNumberB	INFERRED	second value number tested
+local	FUN_00176e20	param_3	compiler	INFERRED	compiler whose pointer set holds the expression records
+local	FUN_00176e20	uVar3	related	INFERRED	return value: 1 when one record names the other through +0x28/+0x2c
+local	FUN_00176d6c	param_1	valueNumberA	INFERRED	first value number tested
+local	FUN_00176d6c	param_2	valueNumberB	INFERRED	second value number tested
+local	FUN_00176d6c	param_3	compiler	INFERRED	compiler whose pointer set holds the expression records
+local	FUN_00176d6c	uVar3	related	INFERRED	return value: 1 when one record names the other through +0x20/+0x24
+local	FUN_00146624	param_1	selectA	INFERRED	first select word, spilled into the home slot array
+local	FUN_00146624	param_2	selectB	INFERRED	second select word, spilled into the home slot array
+local	FUN_00146624	pcVar1	selectBBytePtr	INFERRED	byte pointer walking selectB
+local	FUN_00146624	pcVar2	selectABytePtr	INFERRED	byte pointer walking selectA

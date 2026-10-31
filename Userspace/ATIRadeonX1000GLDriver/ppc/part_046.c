@@ -2417,18 +2417,18 @@ int FUN_001767d8(ctx, param_2)
 }
 
 /* ValueKey__lanesAreUnset @ 0x176854 (128 bytes) */
-int ValueKey__lanesAreUnset(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+int ValueKey__lanesAreUnset(key, row, testLane0, testLane1, testLane2, testLane3)
+  int key;
+  int row;
+  int testLane0;
+  int testLane1;
+  int testLane2;
+  int testLane3;
 {
-  if (((((param_3 == 0) || (*(int *)(param_2 * 0x10 + param_1 + 0x168) < 0)) &&
-       ((param_4 == 0 || (*(int *)(param_2 * 0x10 + param_1 + 0x16c) < 0)))) &&
-      ((param_5 == 0 || (*(int *)(param_2 * 0x10 + param_1 + 0x170) < 0)))) &&
-     ((param_6 == 0 || (*(int *)(param_2 * 0x10 + param_1 + 0x174) < 0)))) {
+  if (((((testLane0 == 0) || (*(int *)(row * 0x10 + key + 0x168) < 0)) &&
+       ((testLane1 == 0 || (*(int *)(row * 0x10 + key + 0x16c) < 0)))) &&
+      ((testLane2 == 0 || (*(int *)(row * 0x10 + key + 0x170) < 0)))) &&
+     ((testLane3 == 0 || (*(int *)(row * 0x10 + key + 0x174) < 0)))) {
     return 1;
   }
   return 0;
@@ -2493,27 +2493,27 @@ int FUN_00176954(ctx, param_2)
 }
 
 /* FUN_001769f4 @ 0x1769f4 (160 bytes) */
-int FUN_001769f4(param_1, param_2, param_3)
-  undefined4 *param_1;
-  int param_2;
-  int param_3;
+int FUN_001769f4(outValue, key, lane)
+  undefined4 *outValue;
+  int key;
+  int lane;
 {
-  int iVar1;
+  int rowOrValueNumber;
   undefined4 *exprRecordForValueNumberResult;
   
-  iVar1 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
-  if ((iVar1 == 0) || ((iVar1 = 3, param_3 != 1 && (iVar1 = 1, param_3 != 3)))) {
-    iVar1 = 0;
+  rowOrValueNumber = OpcodeTraits__instFlagBit2(*(undefined4 *)(key + 0x238),*(undefined4 *)(key + 0xb0));
+  if ((rowOrValueNumber == 0) || ((rowOrValueNumber = 3, lane != 1 && (rowOrValueNumber = 1, lane != 3)))) {
+    rowOrValueNumber = 0;
   }
-  iVar1 = *(int *)((param_3 * 4 + iVar1) * 4 + param_2 + 0x168);
-  if (iVar1 < 0) {
-    exprRecordForValueNumberResult = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),iVar1);
-    *param_1 = *exprRecordForValueNumberResult;
+  rowOrValueNumber = *(int *)((lane * 4 + rowOrValueNumber) * 4 + key + 0x168);
+  if (rowOrValueNumber < 0) {
+    exprRecordForValueNumberResult = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),rowOrValueNumber);
+    *outValue = *exprRecordForValueNumberResult;
   }
   else {
-    *param_1 = 0x7ffffffe;
+    *outValue = 0x7ffffffe;
   }
-  return param_1;
+  return outValue;
 }
 
 /* FUN_00176a94 @ 0x176a94 (428 bytes) */
@@ -2662,47 +2662,47 @@ int FUN_00176c40(resultOut, valueKey, laneIndex, clampedFlag)
 }
 
 /* FUN_00176d6c @ 0x176d6c (160 bytes) */
-int FUN_00176d6c(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int FUN_00176d6c(valueNumberA, valueNumberB, compiler)
+  int valueNumberA;
+  int valueNumberB;
+  undefined4 compiler;
 {
   int findInPtrSetResult;
   int findInPtrSetResultB;
-  undefined4 uVar3;
+  undefined4 related;
   
-  if ((((param_1 < 1) || (param_2 < 1)) || (findInPtrSetResult = Compiler__findInPtrSet(param_3,param_1), findInPtrSetResult == 0)) ||
-     ((findInPtrSetResultB = Compiler__findInPtrSet(param_3,param_2), findInPtrSetResultB == 0 ||
-      (((*(int *)(findInPtrSetResult + 0x20) == 0 || (param_2 != *(int *)(findInPtrSetResult + 0x24))) &&
-       ((*(int *)(findInPtrSetResultB + 0x20) == 0 || (param_1 != *(int *)(findInPtrSetResultB + 0x24))))))))) {
-    uVar3 = 0;
+  if ((((valueNumberA < 1) || (valueNumberB < 1)) || (findInPtrSetResult = Compiler__findInPtrSet(compiler,valueNumberA), findInPtrSetResult == 0)) ||
+     ((findInPtrSetResultB = Compiler__findInPtrSet(compiler,valueNumberB), findInPtrSetResultB == 0 ||
+      (((*(int *)(findInPtrSetResult + 0x20) == 0 || (valueNumberB != *(int *)(findInPtrSetResult + 0x24))) &&
+       ((*(int *)(findInPtrSetResultB + 0x20) == 0 || (valueNumberA != *(int *)(findInPtrSetResultB + 0x24))))))))) {
+    related = 0;
   }
   else {
-    uVar3 = 1;
+    related = 1;
   }
-  return uVar3;
+  return related;
 }
 
 /* FUN_00176e20 @ 0x176e20 (160 bytes) */
-int FUN_00176e20(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int FUN_00176e20(valueNumberA, valueNumberB, compiler)
+  int valueNumberA;
+  int valueNumberB;
+  undefined4 compiler;
 {
   int findInPtrSetResult;
   int findInPtrSetResultB;
-  undefined4 uVar3;
+  undefined4 related;
   
-  if ((((param_1 < 1) || (param_2 < 1)) || (findInPtrSetResult = Compiler__findInPtrSet(param_3,param_1), findInPtrSetResult == 0)) ||
-     ((findInPtrSetResultB = Compiler__findInPtrSet(param_3,param_2), findInPtrSetResultB == 0 ||
-      (((*(int *)(findInPtrSetResult + 0x28) == 0 || (param_2 != *(int *)(findInPtrSetResult + 0x2c))) &&
-       ((*(int *)(findInPtrSetResultB + 0x28) == 0 || (param_1 != *(int *)(findInPtrSetResultB + 0x2c))))))))) {
-    uVar3 = 0;
+  if ((((valueNumberA < 1) || (valueNumberB < 1)) || (findInPtrSetResult = Compiler__findInPtrSet(compiler,valueNumberA), findInPtrSetResult == 0)) ||
+     ((findInPtrSetResultB = Compiler__findInPtrSet(compiler,valueNumberB), findInPtrSetResultB == 0 ||
+      (((*(int *)(findInPtrSetResult + 0x28) == 0 || (valueNumberB != *(int *)(findInPtrSetResult + 0x2c))) &&
+       ((*(int *)(findInPtrSetResultB + 0x28) == 0 || (valueNumberA != *(int *)(findInPtrSetResultB + 0x2c))))))))) {
+    related = 0;
   }
   else {
-    uVar3 = 1;
+    related = 1;
   }
-  return uVar3;
+  return related;
 }
 
 /* FUN_00176ec0 @ 0x176ec0 (20 bytes) */
