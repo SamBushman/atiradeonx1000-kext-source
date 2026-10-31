@@ -4770,3 +4770,83 @@ local	Scheduler__run	auStack_144	schedList4	INFERRED	fifth sentinel-node list
 local	Scheduler__run	auStack_12c	sentinelTable	INFERRED	array of 24-byte sentinel nodes torn down from the end back to this base
 local	Scheduler__run	uStack_e4	sentinelTableEnd	INFERRED	word just past sentinelTable, the walk-back start
 local	Scheduler__run	local_e0	schedListLast	INFERRED	last sentinel-node list initialised with DListNode__init
+local	Block__scanBranchConeForFetchAndInterp	extraout_r4	retR4	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Block__scanBranchConeForFetchAndInterp	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Block__scanBranchConeForFetchAndInterp	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Block__scanBranchConeForFetchAndInterp	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Block__scanBranchConeForFetchAndInterp	in_r9	staleArg9	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	IRInst__countUsersCoveringLanes_0013a774	extraout_r4	retR4	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	IRInst__countUsersCoveringLanes_0013a774	extraout_r4_00	retR4B	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__cloneSplatProducer_00148980	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__cloneSplatProducer_00148980	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__collapseAlgebraic_0015c6d4	in_r5	staleArg5	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__collapseAlgebraic_0015c6d4	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__collapseAlgebraic_0015c6d4	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__collapseAlgebraic_0015c6d4	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__deleteMergedSources	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__deleteMergedSources	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__hoistToOperandBlock	extraout_r4	retR4	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__insertMovForExtraSource_0015f44c	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__mergeComponentMovsIntoCnd	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__mergeComponentMovsIntoCnd	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__mergeSplatSourceInsts_001524b8	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__mergeSplatSourceInsts_00161748	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__mergeSplatSourceInsts_00161748	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__mergeSplatSourceInsts_00161748	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__mergeSplatSourceInsts_00161748	in_r9	staleArg9	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociateUsePair	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociateUsePair	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociateUsePair	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociateUsePair	in_r9	staleArg9	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociate_14e6e4	in_r5	staleArg5	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociate_14e6e4	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociate_14e6e4	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociate_14e6e4	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__reassociate_14e6e4	in_r9	staleArg9	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__tryComposeSelectWithProducer_00149de4	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__tryMix	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Inst__tryMix	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__eliminateRedundantInst	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__eliminateRedundantInst	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__runPeepholeRewrite	in_r10	staleArg10	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__runPeepholeRewrite	in_r5	staleArg5	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__runPeepholeRewrite	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__runPeepholeRewrite	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__runPeepholeRewrite	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Program__runPeepholeRewrite	in_r9	staleArg9	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__insertOperandCopy	in_r9	staleArg9	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__markGlobalValues	in_r10	staleArg10	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__markGlobalValues	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__run	in_r5	staleArg5	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__run	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__run	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__run	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__run	in_r9	staleArg9	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__selectNextNode	in_stack_ffffffb8	stackArgB8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__selectNextNode	in_stack_ffffffbc	stackArgBC	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__tryReuseAddressRegister	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	Scheduler__tryReuseAddressRegister	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__evaluateConstantLane	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__evaluateConstantLane	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__fill	extraout_r4	retR4	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__fill	extraout_r4_00	retR4B	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__fill	in_r5	staleArg5	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__fill	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__fill	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__initSourceLaneKinds	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__initSourceLaneKinds	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__initSourceLaneKinds	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	pass_sched_preprocess_and_schedule_inst	in_r10	staleArg10	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	pass_sched_preprocess_and_schedule_inst	in_r6	staleArg6	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	pass_sched_preprocess_and_schedule_inst	in_r7	staleArg7	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	pass_sched_preprocess_and_schedule_inst	in_r8	staleArg8	INFERRED	Ghidra stale-register artifact: the register content at entry/call site is forwarded as an extra argument, not a source variable
+local	ValueKey__fill	uVar4	staleArg4	INFERRED	r4 left as an extra argument at the call sites; also assigned the extra-out register after Vector calls (Ghidra artifact)
+local	Use__sourceIsPlainSingleUse	uVar5	useIndexReg	INFERRED	one register: use element index, parity test and select word through the checks
+local	Scheduler__packDotProductCandidates	auStack_48	candidateSentinelList	INFERRED	sentinel-node list header of the sorted dot-product candidates (24 bytes)
+local	Scheduler__packDotProductCandidates	local_40	candidateSentinelFirst	INFERRED	first node slot of candidateSentinelList (auStack_48 + 8)
+local	Scheduler__scheduleBlock	auStack_40	seedSentinelList	INFERRED	sentinel-node list header of the seed nodes (24 bytes)
+local	Scheduler__scheduleBlock	local_38	seedSentinelFirst	INFERRED	first node slot of seedSentinelList (auStack_40 + 0xc)
+local	FudoPs__vslot11_isNotType2Or5	param_2	typeCode	INFERRED	type code tested against 2 and 5
+local	Scheduler__run	puVar3	sentinelNode	INFERRED	cursor over the 24-byte sentinel nodes torn down from the end
+local	Program__valueNumberInst	iVar1	lookupResultA	INFERRED	one register: option test, scoped lookup results and key inst refs through the function
+local	Program__valueNumberInst	iVar2	lookupResultB	INFERRED	one register: scoped lookup results and key inst refs through the function

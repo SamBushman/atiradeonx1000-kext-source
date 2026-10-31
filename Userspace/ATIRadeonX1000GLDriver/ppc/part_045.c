@@ -463,8 +463,8 @@ int Scheduler__tryReuseAddressRegister(scheduler, node)
   uint vectorCount;
   int *addressRegisterSlot;
   undefined4 a3;
-  undefined4 in_r7;
-  int *in_r8;
+  undefined4 staleArg7;
+  int *staleArg8;
   int *a0;
   uint componentSelect;
   int slotComponent;
@@ -575,7 +575,7 @@ LAB_0016d5f8:
       else {
         loopIndex2 = 0;
         bestSlot = 0xffffffff;
-        in_r8 = scheduler;
+        staleArg8 = scheduler;
         do {
           if ((*(int *)((loopIndex2 + (((int)loopIndex2 >> 2) + (uint)((int)loopIndex2 < 0 && (loopIndex2 & 3) != 0)) *
                                  -4) * 4 + scanLoadNode + 0x48) == 0) &&
@@ -587,8 +587,8 @@ LAB_0016d5f8:
           slotCount = slotCount + -1;
           chosenSlot = bestSlot;
           if (slotCount == 0) break;
-          scanLoadNode = in_r8[0x5d];
-          in_r8 = in_r8 + 1;
+          scanLoadNode = staleArg8[0x5d];
+          staleArg8 = staleArg8 + 1;
           chosenSlot = loopIndex2;
         } while (scanLoadNode != 0);
         if ((int)chosenSlot < 0) {
@@ -616,7 +616,7 @@ LAB_0016d91c:
                  (nodeAddressSource = SchedNode__getLastConsumerCycle(scheduler[chosenSlot + 0x5c],slotLane), nodeAddressSource < *(int *)(existingLoadNode + 0x2c)
                  )) {
                 *(undefined1 *)((int)a0 + slotLane + 0x9c) = 0;
-                (**(code **)(*a0 + 0x88))(a0,1,slotLane,componentSelect,in_r7,in_r8,*(code **)(*a0 + 0x88));
+                (**(code **)(*a0 + 0x88))(a0,1,slotLane,componentSelect,staleArg7,staleArg8,*(code **)(*a0 + 0x88));
                 *(undefined1 *)((int)a0 + slotLane + 0xc) = 1;
                 compiler = *scheduler;
                 scheduler[chosenSlot + 0x5c] = existingLoadNode;
@@ -688,7 +688,7 @@ LAB_0016d91c:
       spareInst = scheduler[0x60];
       *(undefined1 *)(spareInst + slotLane + 0xc) = 1;
       canAdd = (**(code **)(*(int *)scheduler[2] + 0xc))
-                         ((int *)scheduler[2],scheduler[0x60],sourceDef2,a3,compiler,in_r8,spareInst + slotLane);
+                         ((int *)scheduler[2],scheduler[0x60],sourceDef2,a3,compiler,staleArg8,spareInst + slotLane);
       if (canAdd != 0) {
         newLoadNode = Scheduler__createNode(scheduler,scheduler[0x60],node + 0xc,scheduler[0xb]);
         scheduler[0x60] = 0;
@@ -1694,8 +1694,8 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
   uint workStackCapacity;
   uint workStackCount;
   int workStackData;
-  undefined4 in_stack_ffffffb8;
-  undefined4 in_stack_ffffffbc;
+  undefined4 stackArgB8;
+  undefined4 stackArgBC;
   
   fetchBatchMode = scheduler[0x46];
   if (fetchBatchMode == 0) {
@@ -2286,11 +2286,11 @@ LAB_0016fcc0:
                   ((int (*)())SchedModel__uncountNode)(scheduler[2],copyNode);
                   copyInst = *(int *)(copyNode + 0x38);
                   SelectWord__selectWhereMasked(&STACKARG(0xffffffb8),0,*(undefined4 *)(copyInst + 0xc));
-                  *(undefined4 *)(copyInst + 0x9c) = in_stack_ffffffb8;
+                  *(undefined4 *)(copyInst + 0x9c) = stackArgB8;
                   copyInst = *(int *)(copyNode + 0x38);
                   SelectWord__maskUnused(&STACKARG(0xffffffbc),0x10203,*(undefined4 *)(copyInst + 0xc));
                   operandRecord = IRInst__getOperandRecord(copyInst,1);
-                  *(undefined4 *)(operandRecord + 0x10) = in_stack_ffffffbc;
+                  *(undefined4 *)(operandRecord + 0x10) = stackArgBC;
                   arena = (**(code **)(*(int *)scheduler[2] + 0x4c))
                                      ((int *)scheduler[2],*(undefined4 *)(copyNode + 0x38));
                   *(undefined4 *)(copyNode + 0x58) = arena;
@@ -2831,16 +2831,16 @@ int Scheduler__scheduleBlock(scheduler, block)
   int writeMaskBytes;
   int zero;
   /* NOTE (issue #64): declared 8 bytes, but DListNode__init's sentinel-list init writes through +0x14
-   * (6 words) - confirmed via stock disasm and by tracing the actual crash: local_38 = auStack_40+0xc
+   * (6 words) - confirmed via stock disasm and by tracing the actual crash: seedSentinelFirst = seedSentinelList+0xc
    * computed a pointer past the declared array, into whatever unrelated stack content followed it, so
-   * *(local_38+8) read garbage instead of the sentinel's real self-pointer. That garbage happened to
+   * *(seedSentinelFirst+8) read garbage instead of the sentinel's real self-pointer. That garbage happened to
    * read as 0 (list "empty"), so the loop below - which registers this object into a shared pending-list
    * via Scheduler__onNodeReady/Scheduler__enqueueReadyNode - never ran at all, leaving Scheduler__commitBundle's later check permanently
    * empty and crashing much deeper in DList__count (same defect class as the two fixes already landed
-   * on this issue for Scheduler__packDotProductCandidates/Inst__distributeResultScale/Scheduler__buildCoScheduleGroups). local_38 only ever stores the *value*
-   * auStack_40+0xc (not aliased memory), so simply enlarging the array is sufficient here. */
-  undefined1 auStack_40 [0x18];
-  int local_38;
+   * on this issue for Scheduler__packDotProductCandidates/Inst__distributeResultScale/Scheduler__buildCoScheduleGroups). seedSentinelFirst only ever stores the *value*
+   * seedSentinelList+0xc (not aliased memory), so simply enlarging the array is sufficient here. */
+  undefined1 seedSentinelList [0x18];
+  int seedSentinelFirst;
   
   Scheduler__buildDependencyGraph(scheduler,block);
   Scheduler__buildCoScheduleGroups(scheduler);
@@ -3007,8 +3007,8 @@ int Scheduler__scheduleBlock(scheduler, block)
   scheduler[0x47] = -1;
   scheduler[0x48] = -1;
   scheduler[0x49] = 0;
-  DListNode__init(auStack_40);
-  seedListFirstNode = (int)(auStack_40 + 0xc);
+  DListNode__init(seedSentinelList);
+  seedListFirstNode = (int)(seedSentinelList + 0xc);
   allNodeVector = (uint *)scheduler[6];
   vectorLength2 = allNodeVector[1];
   if (0 < (int)vectorLength2) {
@@ -3027,7 +3027,7 @@ int Scheduler__scheduleBlock(scheduler, block)
       /* issue #76: same shared scheduler[6] array gap as part_044.c's per-format processing -
        * skip a never-populated slot instead of dereferencing it. */
       if ((*nodeRef2 != 0) && (*(int *)(*nodeRef2 + 0x34) == 0)) {
-        DList__pushBack(auStack_40,*nodeRef2);
+        DList__pushBack(seedSentinelList,*nodeRef2);
       }
       vectorIndex2 = vectorIndex2 + 1;
       if (vectorLength2 == vectorIndex2) break;
@@ -3212,10 +3212,10 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   int lastUseArray;
   int hwRegister;
   int hwRegister2;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r10;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg10;
   undefined4 blockOrArena;
   int *bitSetCursor;
   int *handledInst;
@@ -3423,10 +3423,10 @@ code_r0x00171ba0:
       Program__markHwRegUsed(scheduler[1],hwRegister2);
     } while (loopIndex <= scheduler[0x69]);
   }
-  Compiler__logf(*scheduler,"Scheduler : Total cycles %d\n",scheduler[100],in_r6,in_r7,in_r8,registerCount,in_r10)
+  Compiler__logf(*scheduler,"Scheduler : Total cycles %d\n",scheduler[100],staleArg6,staleArg7,staleArg8,registerCount,staleArg10)
   ;
-  Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],in_r6,in_r7,
-               in_r8,registerCount,in_r10);
+  Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],staleArg6,staleArg7,
+               staleArg8,registerCount,staleArg10);
   Program__beginPass(scheduler[1],(int)"schedule_inst");
   Program__freeBlockBitsets(program);
   liveOutSet = scheduler[0x4c];
@@ -3475,11 +3475,11 @@ int Scheduler__run(program)
   undefined4 *sentinelCursorBack;
   int heightReductionEnabled;
   bool moreSentinels;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
   undefined4 *sentinelCursor;
   int sentinelsLeft;
   /* NOTE (issue #64, ROOT CAUSE of the DList__count crash): these 9 locals were declared as separate
@@ -3503,7 +3503,7 @@ int Scheduler__run(program)
 #define sentinelTable ((undefined4 *)(auStack_1e68_combined + 0xac))
 #define sentinelTableEnd (*(undefined4 *)(auStack_1e68_combined + 0xf4))
 #define schedListLast (auStack_1e68_combined + 0xf8)
-  undefined4 *puVar3;
+  undefined4 *sentinelNode;
   
   DListNode__init(schedList0);
   DListNode__init(schedList1);
@@ -3521,16 +3521,16 @@ int Scheduler__run(program)
   DListNode__init(schedListLast);
   heightReductionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x42);
   if (heightReductionEnabled != 0) {
-    pass_height_reduction(schedulerObj,program,in_r5,in_r6,in_r7,in_r8,in_r9);
+    pass_height_reduction(schedulerObj,program,staleArg5,staleArg6,staleArg7,staleArg8,staleArg9);
   }
   ((int (*)())pass_sched_preprocess_and_schedule_inst)(schedulerObj,program);
   sentinelCursorBack = &sentinelTableEnd;
   do {
-    puVar3 = sentinelCursorBack + -6;
-    *puVar3 = PTR_DAT_001e8b48 + 8;
+    sentinelNode = sentinelCursorBack + -6;
+    *sentinelNode = PTR_DAT_001e8b48 + 8;
     sentinelCursorBack[-3] = PTR_DAT_001e8b48 + 8;
-    sentinelCursorBack = puVar3;
-  } while (puVar3 != sentinelTable);
+    sentinelCursorBack = sentinelNode;
+  } while (sentinelNode != sentinelTable);
   return;
 }
 

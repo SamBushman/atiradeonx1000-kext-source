@@ -535,11 +535,11 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
   undefined4 *stackPushSlot;
   int *stackTopSlot;
   int thenBlock;
-  undefined4 extraout_r4;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 retR4;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
   int coneStampArg;
   uint stackCount;
   
@@ -548,7 +548,7 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
   if (vcall40Result != 0) {
     return;
   }
-  branchInst = Block__getBranchInst(block,extraout_r4,coneStampArg,in_r6,in_r7,in_r8,in_r9);
+  branchInst = Block__getBranchInst(block,retR4,coneStampArg,staleArg6,staleArg7,staleArg8,staleArg9);
   stackCount = vector[1];
   if (stackCount < *vector) {
     _memset(stackCount * 4 + vector[2],0,4);
@@ -904,9 +904,9 @@ int IRInst__countUsersCoveringLanes_0013a774(inst, laneMask, clearLength)
   bool moreComponents;
   uint userCount;
   int operandCount;
-  uint extraout_r4;
+  uint retR4;
   undefined4 a1;
-  uint extraout_r4_00;
+  uint retR4B;
   uint loopIndex;
   uint remainingMask;
   undefined4 user;
@@ -925,7 +925,7 @@ int IRInst__countUsersCoveringLanes_0013a774(inst, laneMask, clearLength)
           clearLength = (loopIndex - userCount) * 4 + 4;
           _memset(userCount * 4 + usersVec[2],0,clearLength);
           usersVec[1] = loopIndex + 1;
-          laneMask = extraout_r4;
+          laneMask = retR4;
         }
         slotRefPair = CONCAT44(loopIndex * 4 + usersVec[2],laneMask);
       }
@@ -955,7 +955,7 @@ int IRInst__countUsersCoveringLanes_0013a774(inst, laneMask, clearLength)
       usersVec = (uint *)inst[4];
       loopIndex = loopIndex + 1;
       userCount = usersVec[1];
-      laneMask = extraout_r4_00;
+      laneMask = retR4B;
     } while (loopIndex < userCount);
   }
   return remainingMask;
@@ -1981,12 +1981,12 @@ int Program__runPeepholeRewrite(program)
   int callResult;
   undefined4 popKey;
   uint stackTopIndex;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
+  undefined4 staleArg10;
   int rootByteOffset;
   uint loopIndex;
   undefined4 keyAtTop;
@@ -2010,8 +2010,8 @@ int Program__runPeepholeRewrite(program)
       (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x39), isOptionEnabledResult == 0)) &&
      (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1b), isOptionEnabledResult == 0)) {
     Compiler__logf(*(undefined4 *)(program + 8),
-                 "Special : all peephole flags off -> bypass Rewrite()\n",in_r5,in_r6,in_r7,in_r8,
-                 in_r9,in_r10);
+                 "Special : all peephole flags off -> bypass Rewrite()\n",staleArg5,staleArg6,staleArg7,staleArg8,
+                 staleArg9,staleArg10);
   }
   *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
   vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);

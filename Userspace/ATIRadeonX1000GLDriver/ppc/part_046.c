@@ -364,14 +364,14 @@ int Program__eliminateRedundantInst(program, inst, block, pass)
   undefined4 removed;
   int registerCheck;
   int staleArg4;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   
   if (*(int *)(inst[0x22] + 8) == 0x8e) {
     staleArg4 = pass;
     Block__recordDefinition(block,inst[0x23],program);
     (**(code **)(*inst + 0xc))
-              (inst,0,*(undefined4 *)(pass + 8),staleArg4,in_r7,in_r8,*(code **)(*inst + 0xc));
+              (inst,0,*(undefined4 *)(pass + 8),staleArg4,staleArg7,staleArg8,*(code **)(*inst + 0xc));
     removed = 1;
     inst[5] = inst[5] | 0x400;
     *(int *)(pass + 0x150) = *(int *)(pass + 0x150) + 1;
@@ -384,7 +384,7 @@ int Program__eliminateRedundantInst(program, inst, block, pass)
       Block__recordDefinition(block,inst[0x23],program);
     }
     (**(code **)(*inst + 0xc))
-              (inst,0,*(undefined4 *)(pass + 8),staleArg4,in_r7,in_r8,*(code **)(*inst + 0xc));
+              (inst,0,*(undefined4 *)(pass + 8),staleArg4,staleArg7,staleArg8,*(code **)(*inst + 0xc));
     removed = 1;
     inst[5] = inst[5] | 0x400;
     *(int *)(pass + 0x14c) = *(int *)(pass + 0x14c) + 1;
@@ -541,16 +541,16 @@ int ValueKey__fill(ctx)
   dword *operandIndex2;
   bool moreLanes;
   undefined4 *sourceLanePtr;
-  undefined4 uVar4;
+  undefined4 staleArg4;
   int operandCountLoop;
   int *topSlot;
   int operandRecord;
   undefined4 *exprRecord;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  dword *in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
+  undefined4 retR4;
+  undefined4 retR4B;
+  dword *staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
   int laneKeyBase;
   dword sourceKeyB;
   dword *operandIndex;
@@ -593,9 +593,9 @@ LAB_00173fa0:
   while( true ) {
     operandCountLoop = (**(code **)(*keyInstPtr + 0x14))(keyInstPtr);
     if (operandCountLoop < defFieldIndex) break;
-    uVar4 = IRInst__getDefiningField128(*(undefined4 *)(ctx + 0xb0),defFieldIndex);
+    staleArg4 = IRInst__getDefiningField128(*(undefined4 *)(ctx + 0xb0),defFieldIndex);
     keyInstPtr = *(int **)(ctx + 0xb0);
-    *(undefined4 *)(laneKeyBase + 0x1bc) = uVar4;
+    *(undefined4 *)(laneKeyBase + 0x1bc) = staleArg4;
     defFieldIndex = defFieldIndex + 1;
     laneKeyBase = laneKeyBase + 4;
   }
@@ -611,7 +611,7 @@ LAB_00173fa0:
         while( true ) {
           operandIndex = (dword *)((int)operandIndex + 1);
           operandCountCall = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0));
-          uVar4 = extraout_r4_00;
+          staleArg4 = retR4B;
           if (operandCountCall < (int)operandIndex) break;
           keyInst = *(int *)(ctx + 0xb0);
           sourceKeyVec = *(uint **)(*(int *)((int)operandIndex * 0x18 + keyInst + 0x8c) + 0x2c);
@@ -623,13 +623,13 @@ LAB_00173fa0:
               sourceKeyVec[1] = vecCount;
               keyInst = *(int *)(ctx + 0xb0);
             }
-            in_r5 = (dword *)(topIndexB * 4 + sourceKeyVec[2]);
+            staleArg5 = (dword *)(topIndexB * 4 + sourceKeyVec[2]);
           }
           else {
-            in_r5 = (dword *)Vector__elementRefGrow(sourceKeyVec,topIndexB);
+            staleArg5 = (dword *)Vector__elementRefGrow(sourceKeyVec,topIndexB);
             keyInst = *(int *)(ctx + 0xb0);
           }
-          sourceKeyB = *in_r5;
+          sourceKeyB = *staleArg5;
           keyInst = IRInst__getOperandRecord(keyInst,operandIndex);
           destSelect[0] = *(undefined4 *)(keyInst + 0x10);
           laneValueCursor = (int *)((int)operandIndex * 0x10 + ctx + 0x168);
@@ -641,8 +641,8 @@ LAB_00173fa0:
               if (valueNumber < 0) {
                 exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),valueNumber);
                 IRInst__applyAbsModifier(&absApplied,*(undefined4 *)(ctx + 0xb0),operandIndex,*exprRecord);
-                in_r5 = operandIndex;
-                in_r6 = absApplied;
+                staleArg5 = operandIndex;
+                staleArg6 = absApplied;
                 IRInst__applyNegateModifier(&negApplied,*(undefined4 *)(ctx + 0xb0),operandIndex,absApplied);
                 valueNumber = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),negApplied);
                 valueNumber = *(int *)(valueNumber + 4);
@@ -668,7 +668,7 @@ LAB_00173fa0:
     while( true ) {
       operandIndex2 = (dword *)((int)operandIndex2 + 1);
       vcall14Result = (**(code **)(*keyInstPtr + 0x14))(keyInstPtr);
-      uVar4 = (undefined4)vcall14Result;
+      staleArg4 = (undefined4)vcall14Result;
       if ((int)((ulonglong)vcall14Result >> 0x20) < (int)operandIndex2) break;
       keyInstPtr = *(int **)(ctx + 0xb0);
       sourceKeyVec = *(uint **)(keyInstPtr[(int)operandIndex2 * 6 + 0x23] + 0x2c);
@@ -676,8 +676,8 @@ LAB_00173fa0:
       topIndex = vecCountB - 1;
       if (topIndex < *sourceKeyVec) {
         if (vecCountB <= topIndex) {
-          in_r5 = (dword *)((topIndex - vecCountB) * 4 + 4);
-          _memset(vecCountB * 4 + sourceKeyVec[2],0,in_r5);
+          staleArg5 = (dword *)((topIndex - vecCountB) * 4 + 4);
+          _memset(vecCountB * 4 + sourceKeyVec[2],0,staleArg5);
           sourceKeyVec[1] = vecCountB;
           keyInstPtr = *(int **)(ctx + 0xb0);
         }
@@ -707,8 +707,8 @@ LAB_00173fa0:
             if (sourceValueNumber < 0) {
               exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),sourceValueNumber);
               IRInst__applyAbsModifier(&absAppliedB,*(undefined4 *)(ctx + 0xb0),operandIndex2,*exprRecord);
-              in_r5 = operandIndex2;
-              in_r6 = absAppliedB;
+              staleArg5 = operandIndex2;
+              staleArg6 = absAppliedB;
               IRInst__applyNegateModifier(negAppliedB,*(undefined4 *)(ctx + 0xb0),operandIndex2,absAppliedB);
               sourceValueNumber = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),negAppliedB[0]);
               keyInstPtr = *(int **)(ctx + 0xb0);
@@ -733,11 +733,11 @@ LAB_00173fa0:
   }
   else {
     operandIdx = 1;
-    uVar4 = extraout_r4;
+    staleArg4 = retR4;
     if (0 < *(int *)(vcall7cResult + 0x84)) {
       do {
         operandSource = IRInst__getOperandSource(vcall7cResult,operandIdx);
-        uVar4 = (undefined4)operandSource;
+        staleArg4 = (undefined4)operandSource;
         if ((int)((ulonglong)operandSource >> 0x20) == 0) {
           countdown = 4;
           operandLaneValues = (undefined4 *)(operandIdx * 0x10 + ctx + 0x168);
@@ -780,7 +780,7 @@ LAB_00174410:
   *(int *)(ctx + 0x1e0) = instWord50;
   *(int *)(ctx + 0x1e4) = instWord51;
   vcall30Result = (**(code **)(*keyInstPtr + 0x30))
-                    (keyInstPtr,uVar4,in_r5,in_r6,in_r7,instWord51,ctx + 0x1cc,instWord50);
+                    (keyInstPtr,staleArg4,staleArg5,staleArg6,staleArg7,instWord51,ctx + 0x1cc,instWord50);
   if (vcall30Result == 0) {
     vcall5cResult = (**(code **)(**(int **)(ctx + 0xb0) + 0x5c))(*(int **)(ctx + 0xb0));
     if (vcall5cResult == 0) {
@@ -1806,9 +1806,9 @@ int ValueKey__initSourceLaneKinds(valueKey)
   undefined4 sourceField70;
   undefined4 sourceFieldA0;
   int *topSlot;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int keyOpcodeInfo;
   undefined4 sourceLaneValue;
   uint topIndex;
@@ -1868,7 +1868,7 @@ LAB_00175c7c:
         }
         splitRgbAlphaEnabled = Compiler__isOptionEnabled(valueKey[0x8e],0x30);
         if (((splitRgbAlphaEnabled == 0) || (loopIndex != 3)) &&
-           (fun113734Result = OpcodeTraits__instFlagBit2_113734(valueKey[0x8e],valueKey[0x2c],topSlot,in_r6,in_r7,in_r8,keyOpcodeInfo),
+           (fun113734Result = OpcodeTraits__instFlagBit2_113734(valueKey[0x8e],valueKey[0x2c],topSlot,staleArg6,staleArg7,staleArg8,keyOpcodeInfo),
            fun113734Result == 0)) {
           *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
                *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;
@@ -1916,11 +1916,11 @@ int Program__valueNumberInst(program, valueNumber, outermostScope, keyRef, block
   int eliminateRedundantInstResult;
   int canonicalizeCommutativeOperandsResult;
   int valueNumberEnabled;
-  int iVar1;
+  int lookupResultA;
   int vcall64Result;
   int vcall68Result;
   int callResult;
-  int iVar2;
+  int lookupResultB;
   int callResult2;
   uint vectorFilledCount;
   undefined4 *vectorElementRef;
@@ -1952,12 +1952,12 @@ LAB_00175e58:
         ValueKey__propagateLaneValues(*keyRef);
         callResult2 = ((int (*)())Compiler__findInScopes408)(*keyRef,valueNumber,outermostScope,program);
         if (callResult2 == 0) {
-          iVar2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 100))(*(int **)(*keyRef + 0xb0));
-          if ((((iVar2 == 0) &&
-               (iVar2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))
-                                  (*(int **)(*keyRef + 0xb0)), iVar2 == 0)) &&
-              (iVar2 = ValueKey__producerIsOpcode2aFlagged(*keyRef), iVar2 == 0)) &&
-             (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),8), iVar2 != 0)) {
+          lookupResultB = (**(code **)(**(int **)(*keyRef + 0xb0) + 100))(*(int **)(*keyRef + 0xb0));
+          if ((((lookupResultB == 0) &&
+               (lookupResultB = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))
+                                  (*(int **)(*keyRef + 0xb0)), lookupResultB == 0)) &&
+              (lookupResultB = ValueKey__producerIsOpcode2aFlagged(*keyRef), lookupResultB == 0)) &&
+             (lookupResultB = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),8), lookupResultB != 0)) {
             callResult2 = ((int (*)())Compiler__findInScopes40c)(*keyRef,valueNumber,outermostScope,program);
             if ((callResult2 != 0) && (callResult2 = ((int (*)())ValueKey__rewriteAsSwizzleMov)(*keyRef,callResult2), callResult2 != 0)) {
               keyInst = *(int *)(*keyRef + 0xb0);
@@ -1971,9 +1971,9 @@ LAB_00175e58:
             valueKey2 = *keyRef;
             keyInst2 = *(int **)(valueKey2 + 0xb0);
             if (keyInst2[0x20] != 0) {
-              iVar2 = RegKind__flagBit0(keyInst2[0x26]);
-              if (((iVar2 == 0) || ((keyInst2[5] & 2U) != 0)) ||
-                 (iVar2 = (**(code **)(*keyInst2 + 0x50))(keyInst2), iVar2 != 0)) goto LAB_001760e4;
+              lookupResultB = RegKind__flagBit0(keyInst2[0x26]);
+              if (((lookupResultB == 0) || ((keyInst2[5] & 2U) != 0)) ||
+                 (lookupResultB = (**(code **)(*keyInst2 + 0x50))(keyInst2), lookupResultB != 0)) goto LAB_001760e4;
               vector = *(uint **)(program + 0x40c);
               if (valueNumber < *vector) {
                 vectorFilledCount = vector[1];
@@ -2031,12 +2031,12 @@ LAB_001760e4:
         *keyRef = callResult2;
         vcall64Result = (**(code **)(**(int **)(callResult2 + 0xb0) + 100))(*(int **)(callResult2 + 0xb0));
         if (vcall64Result == 0) {
-          iVar1 = *(int *)(*keyRef + 0xb0);
-          if (*(int *)(iVar1 + 0x160) <= *(int *)(program + 0x478)) {
-            *(int *)(iVar1 + 0x160) = *(int *)(program + 0x478) + 1;
+          lookupResultA = *(int *)(*keyRef + 0xb0);
+          if (*(int *)(lookupResultA + 0x160) <= *(int *)(program + 0x478)) {
+            *(int *)(lookupResultA + 0x160) = *(int *)(program + 0x478) + 1;
             return 1;
           }
-          *(int *)(iVar1 + 0x160) = *(int *)(iVar1 + 0x160) + 1;
+          *(int *)(lookupResultA + 0x160) = *(int *)(lookupResultA + 0x160) + 1;
           return 1;
         }
       }
@@ -2307,11 +2307,11 @@ int FudoPs__vslot12_lookupTable6x(this, row, column)
 }
 
 /* FudoPs__vslot11_isNotType2Or5 @ 0x176610 (28 bytes) */
-int FudoPs__vslot11_isNotType2Or5(this, param_2)
+int FudoPs__vslot11_isNotType2Or5(this, typeCode)
   undefined4 this;
-  int param_2;
+  int typeCode;
 {
-  if ((param_2 != 2) && (param_2 != 5)) {
+  if ((typeCode != 2) && (typeCode != 5)) {
     return 1;
   }
   return 0;
@@ -2616,8 +2616,8 @@ int ValueKey__evaluateConstantLane(resultOut, valueKey, laneIndex, clampedFlag)
   undefined4 *exprRecordForValueNumberResult;
   int callResult;
   int *opcodeInfo;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   undefined4 *loopPtr2;
   code *evalFn;
   undefined4 *laneValueCursor;
@@ -2648,7 +2648,7 @@ int ValueKey__evaluateConstantLane(resultOut, valueKey, laneIndex, clampedFlag)
   }
   opcodeInfo = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
   evalFn = *(code **)(*opcodeInfo + 4);
-  (*evalFn)(opcodeInfo,resultOut,constOperandValues,*(undefined4 *)(valueKey + 0x238),in_r7,in_r8,evalFn);
+  (*evalFn)(opcodeInfo,resultOut,constOperandValues,*(undefined4 *)(valueKey + 0x238),staleArg7,staleArg8,evalFn);
   if (*resultOut != 0x7ffffffe) {
     IRInst__scaleByOutputScale(&scaledResult,*(undefined4 *)(valueKey + 0xb0),*resultOut);
     *resultOut = scaledResult;

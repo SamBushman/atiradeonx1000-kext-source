@@ -147,7 +147,7 @@ int Use__sourceIsPlainSingleUse(use, program, staleArg3, staleArg4, staleArg5, s
   int operandVReg;
   int useCheck;
   uint sourceIsReusable;
-  uint uVar5;
+  uint useIndexReg;
   
   operandVReg = IRInst__getOperandSource(*use,use[1]);
   if (((*(uint *)(operandVReg + 0x14) & 0x200) == 0) &&
@@ -158,7 +158,7 @@ int Use__sourceIsPlainSingleUse(use, program, staleArg3, staleArg4, staleArg5, s
   else {
     sourceIsReusable = 0;
   }
-  uVar5 = use[1];
+  useIndexReg = use[1];
   if (*(int *)(*(int *)(operandVReg + 0x88) + 8) == 0x12) {
     if ((*(int *)(operandVReg + 0x120) != 0) || (sourceHasResultModifier = 0, *(int *)(operandVReg + 0x124) != 0)) {
       sourceHasResultModifier = 1;
@@ -168,9 +168,9 @@ int Use__sourceIsPlainSingleUse(use, program, staleArg3, staleArg4, staleArg5, s
     sourceHasResultModifier = *(uint *)(operandVReg + 0x120);
   }
   return (sourceHasResultModifier ^ 1) &
-         (*(uint *)((uVar5 + (((int)uVar5 >> 1) + (uint)((int)uVar5 < 0 && (uVar5 & 1) != 0)) * -2)
+         (*(uint *)((useIndexReg + (((int)useIndexReg >> 1) + (uint)((int)useIndexReg < 0 && (useIndexReg & 1) != 0)) * -2)
                     * 0x18 + *use + 0xb8) >> 1 & 1 ^ 1) &
-         (*(uint *)(uVar5 * 0x18 + *use + 0xa0) >> 1 & 1 ^ 1) & sourceIsReusable;
+         (*(uint *)(useIndexReg * 0x18 + *use + 0xa0) >> 1 & 1 ^ 1) & sourceIsReusable;
 }
 
 /* Inst__opcodeOrSourcesDiffer @ 0x146de0 (252 bytes) */
@@ -415,7 +415,7 @@ int Inst__hoistToOperandBlock(ctx, inst, scheduleCtx)
   int *blockWalkNext;
   int *blockWalkCur;
   int nextInstLink;
-  int extraout_r4;
+  int retR4;
   int operandIndexReg;
   int *a0;
   int nextInstCursor;
@@ -431,7 +431,7 @@ int Inst__hoistToOperandBlock(ctx, inst, scheduleCtx)
     operandCount = inst[0x21];
     if ((operandCount != 0) && ((inst[5] & 8U) == 0)) {
       a0 = (int *)inst[0x56];
-      operandIndexReg = extraout_r4;
+      operandIndexReg = retR4;
       if (0 < operandCount) {
         operandIndex2 = 1;
         operandBlockCursor = operandBlocks;
@@ -521,8 +521,8 @@ int Inst__deleteMergedSources(inst, inst2, inst3, pass)
   int *operandVReg;
   int *operandVReg2;
   int a3;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int distinctSourceCount;
   int loopIndex;
   int *sourceCursor;
@@ -590,7 +590,7 @@ LAB_001477a8:
         else {
           operandVReg = (int *)IRInst__getOperandSource(a0,1);
           (**(code **)(*a0 + 0xc))
-                    (a0,0,*(undefined4 *)(pass + 8),a3,in_r7,in_r8,*(code **)(*a0 + 0xc));
+                    (a0,0,*(undefined4 *)(pass + 8),a3,staleArg7,staleArg8,*(code **)(*a0 + 0xc));
 LAB_001479a4:
           if (operandVReg == (int *)0x0) goto LAB_001479ac;
           opcodeInfo = operandVReg[0x22];
@@ -1251,9 +1251,9 @@ int Inst__cloneSplatProducer_00148980(inst, program)
   int operandRecord;
   int operandVReg3;
   int *target;
-  undefined4 in_r6;
+  undefined4 staleArg6;
   undefined4 compilerCtx;
-  undefined4 in_r8;
+  undefined4 staleArg8;
   code *a6;
   int passStamp;
   int newPassStamp;
@@ -1313,7 +1313,7 @@ int Inst__cloneSplatProducer_00148980(inst, program)
                 *(undefined4 *)(operandRecord + 8) = savedField14c;
                 *(int *)(cloneOrOperandCount + 0x160) = newPassStamp;
                 compilerCtx = *(undefined4 *)(program + 8);
-                in_r6 = 0;
+                staleArg6 = 0;
                 IRInst__setOperandSource(cloneOrOriginalInst,operandIndex,cloneOrOperandCount,0,compilerCtx);
                 Block__insertInstBefore(operandVReg2[0x56],operandVReg2,cloneOrOperandCount);
                 if (0 < *(int *)(cloneOrOperandCount + 0x84)) {
@@ -1355,7 +1355,7 @@ int Inst__cloneSplatProducer_00148980(inst, program)
             target = *(int **)(*(int *)(program + 8) + 0x30c);
             newTargetField = *(int *)(inst + 0x124) + operandVReg[0x49];
             a6 = *(code **)(*target + 0xfc);
-            targetCallResult = (*a6)(target,newTargetField,inst,in_r6,compilerCtx,in_r8,a6);
+            targetCallResult = (*a6)(target,newTargetField,inst,staleArg6,compilerCtx,staleArg8,a6);
             if (targetCallResult != 0) {
               cloneOrOriginalInst[0x49] = newTargetField;
               *(undefined4 *)(inst + 0x124) = 0;
@@ -1974,7 +1974,7 @@ int Inst__tryComposeSelectWithProducer_00149de4(inst, operandIndex8, inst2, comp
   int constByteOffset;
   int operandIndex;
   undefined4 selectWordStored;
-  undefined4 in_r8;
+  undefined4 staleArg8;
   int operandIndex2;
   uint absFlag;
   int program;
@@ -2101,7 +2101,7 @@ int Inst__tryComposeSelectWithProducer_00149de4(inst, operandIndex8, inst2, comp
               componentByte = (uint)*(byte *)(loopIndex + operandRecord3 + 0x10);
               if (componentByte != 4) {
                 (**(code **)(*operandVReg2 + 0x88))
-                          (operandVReg2,1,loopIndex,(uint)*(byte *)((int)selectScratch + componentByte),staleArg5,in_r8,
+                          (operandVReg2,1,loopIndex,(uint)*(byte *)((int)selectScratch + componentByte),staleArg5,staleArg8,
                            (int)selectScratch + (componentByte - 4));
                 IRInst__getOperandRecord(inst2,0);
               }
@@ -2200,7 +2200,7 @@ int Inst__tryComposeSelectWithProducer_00149de4(inst, operandIndex8, inst2, comp
               if (componentByte != 4) {
                 if (*(char *)((uint)componentUnused + operandRecord + 0x10) == '\x04') {
                   (**(code **)(*chainProducerCopy + 0x88))
-                            (chainProducerCopy,1,loopIndex,4,staleArg5,in_r8,*(code **)(*chainProducerCopy + 0x88));
+                            (chainProducerCopy,1,loopIndex,4,staleArg5,staleArg8,*(code **)(*chainProducerCopy + 0x88));
                   if (1 < operandVReg[0x21]) {
                     operandIndex2 = 2;
                     constByteOffset = 0x30;
@@ -4542,11 +4542,11 @@ int Inst__reassociate_14e6e4(inst, program)
   int operandVReg;
   undefined4 operandVReg2;
   undefined4 operandVReg3;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
   int instOpcodeB;
   uint loopIndex;
   int userByteOffset;
@@ -4566,9 +4566,9 @@ int Inst__reassociate_14e6e4(inst, program)
     operandVReg3 = IRInst__getOperandSource(inst,2);
     useCheck = IRInst__hasSingleUse(operandVReg2,program);
     if ((useCheck == 0) &&
-       (((useCheck = IRInst__hasNoUses(operandVReg2,program,in_r5,in_r6,in_r7,in_r8,in_r9), useCheck == 0 &&
+       (((useCheck = IRInst__hasNoUses(operandVReg2,program,staleArg5,staleArg6,staleArg7,staleArg8,staleArg9), useCheck == 0 &&
          (useCheck = IRInst__hasSingleUse(operandVReg3,program), useCheck == 0)) &&
-        (vecCount = IRInst__hasNoUses(operandVReg3,program,in_r5,in_r6,in_r7,in_r8,in_r9), vecCount == 0)))) {
+        (vecCount = IRInst__hasNoUses(operandVReg3,program,staleArg5,staleArg6,staleArg7,staleArg8,staleArg9), vecCount == 0)))) {
       vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
       vecCapacity = 2;
       vecData = Arena__alloc(vecArena,8);
@@ -5562,14 +5562,14 @@ int Inst__reassociateUsePair(useA, useB, pass)
   int useBPrecheck;
   int swapSharedTermBetweenUsesResult;
   undefined4 programCopy;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
   
   programCopy = pass;
-  useAPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useA,pass,pass,in_r6,in_r7,in_r8,in_r9);
-  useBPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useB,pass,programCopy,in_r6,in_r7,in_r8,in_r9);
+  useAPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useA,pass,pass,staleArg6,staleArg7,staleArg8,staleArg9);
+  useBPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useB,pass,programCopy,staleArg6,staleArg7,staleArg8,staleArg9);
   if ((((useAPrecheck == 0) || (swapSharedTermBetweenUsesResult = ((int (*)())Inst__swapSharedTermBetweenUses)(useB,useA,pass,1,1), swapSharedTermBetweenUsesResult == 0)) &&
       ((useBPrecheck == 0 || (swapSharedTermBetweenUsesResult = ((int (*)())Inst__swapSharedTermBetweenUses)(useA,useB,pass,1,1), swapSharedTermBetweenUsesResult == 0)))) &&
      (((useAPrecheck == 0 || (useBPrecheck == 0)) ||
@@ -6657,7 +6657,7 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
   int *candidateInst;
   uint componentValue;
   uint componentSentinel;
-  undefined4 in_r8;
+  undefined4 staleArg8;
   int laneSlot2A;
   int laneSlot1A;
   int laneSlot1B;
@@ -6779,7 +6779,7 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
               constSelectWord = 0x1010101;
               lastOperandBuf[0] = 0x1010101;
               *(undefined1 *)((int)&constSelectWord + componentValue) = 0;
-              (**(code **)(*a0 + 0x88))(a0,1,componentValue,componentValue,compilerForPass,in_r8,0x1010101);
+              (**(code **)(*a0 + 0x88))(a0,1,componentValue,componentValue,compilerForPass,staleArg8,0x1010101);
               if (!laneBFree) {
                 componentValue = (uint)*(byte *)((int)&operandSelectB + laneSlotC);
                 *(undefined1 *)((int)&constSelectWord + componentValue) = 0;
@@ -8158,8 +8158,8 @@ int Inst__mergeComponentMovsIntoCnd(inst, program)
   int instSingleComponent;
   int instSplatComponent;
   undefined4 operandVReg;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   uint partnerNegate;
   uint partnerAbs;
   int compiler;
@@ -8233,7 +8233,7 @@ int Inst__mergeComponentMovsIntoCnd(inst, program)
           maskLane0 = 0;
           maskLane2 = 0;
           maskConstant = (**(code **)(**(int **)(compiler + 0x30c) + 0x154))
-                            (*(int **)(compiler + 0x30c),program,&maskLane0,&maskSelect,in_r7,in_r8,
+                            (*(int **)(compiler + 0x30c),program,&maskLane0,&maskSelect,staleArg7,staleArg8,
                              0x10203);
           if (maskConstant != 0) {
             lastSplatComponent = SelectWord__splatComponent(lastDestSelect);

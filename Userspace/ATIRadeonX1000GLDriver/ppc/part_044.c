@@ -2293,10 +2293,10 @@ int Inst__collapseAlgebraic_0015c6d4(inst, program)
   int *userSlot;
   int *vslot73Result;
   int operandRecord;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   uint zeroOperandIdxA;
   uint zeroOperandIdxB;
   uint oneOperandIdx;
@@ -2357,7 +2357,7 @@ LAB_0015c880:
         operandRecord2 = IRInst__getOperandRecord(inst,operandScanIdxOrTrackUses);
         selectWordTmp = *(undefined4 *)((int)((ulonglong)operandRecord2 >> 0x20) + 0x10);
         operandCountA = (**(code **)(*inst + 0x14))
-                          (inst,(int)operandRecord2,in_r5,in_r6,in_r7,in_r8,*(code **)(*inst + 0x14));
+                          (inst,(int)operandRecord2,staleArg5,staleArg6,staleArg7,staleArg8,*(code **)(*inst + 0x14));
         operandRecord3 = IRInst__getOperandRecord(inst,operandCountA + 1);
         operandSelect = *(undefined4 *)(operandRecord3 + 0x10);
         splitRgbAlphaEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x30);
@@ -3608,8 +3608,8 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
   int clearIndex;
   undefined4 a1;
   undefined4 nodeSrc1Select;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int nextIndex;
   uint zeroWord;
   undefined4 operandSelectD;
@@ -3838,7 +3838,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           node[0x26] = 0x36;
           node[0x25] = node[0x53];
           node[0x27] = operandSelectB;
-          isMixResult = (**(code **)(*operandVReg + 0x60))(operandVReg,a1,compilerArg,passArgCopy,in_r7,in_r8,operandSelectB);
+          isMixResult = (**(code **)(*operandVReg + 0x60))(operandVReg,a1,compilerArg,passArgCopy,staleArg7,staleArg8,operandSelectB);
           if (isMixResult == 0) {
             node[0x21] = 2;
             IRInst__setOperandSource(node,1,operandVReg,0,*(undefined4 *)(pass + 8));
@@ -3984,7 +3984,7 @@ int Inst__insertMovForExtraSource_0015f44c(inst, operandIndex7, node, pass)
   int newInstOperandCount;
   int newMovInst;
   undefined4 operandSelectD;
-  undefined4 in_r8;
+  undefined4 staleArg8;
   undefined4 zeroArgB;
   uint nonConstLanes;
   uint slotIdx;
@@ -4336,7 +4336,7 @@ LAB_0015fd14:
   node[0x21] = node[0x21] + -1;
   node[5] = node[5] & 0xfffffdff;
   producer[0x58] = producerRefCount + -1;
-  hasNoUsesResult = IRInst__hasNoUses(producer,pass,zeroArg,zeroArgB,compilerCtx,in_r8,producerRefCount + -1);
+  hasNoUsesResult = IRInst__hasNoUses(producer,pass,zeroArg,zeroArgB,compilerCtx,staleArg8,producerRefCount + -1);
   producerUnused = hasNoUsesResult != 0;
   if (producerUnused) {
     (**(code **)(*producer + 0xc))(producer,0,*(undefined4 *)(pass + 8));
@@ -5211,10 +5211,10 @@ int Inst__mergeSplatSourceInsts_00161748(inst, inst2, pass)
   int src1Record;
   int destRecordInst2;
   int *operandVReg;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
   uint absModifier;
   uint negModifier;
   uint inst2Flags;
@@ -5240,12 +5240,12 @@ int Inst__mergeSplatSourceInsts_00161748(inst, inst2, pass)
         sourceDef = IRInst__getOperandSource(inst,1);
         compilerForCalls = *(undefined4 *)(pass + 8);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        instSrcHwConst = IRInst__allSelectsAreHwConstants(sourceDef,compilerForCalls,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        instSrcHwConst = IRInst__allSelectsAreHwConstants(sourceDef,compilerForCalls,*(undefined4 *)(operandRecord2 + 0x10),staleArg6,staleArg7,staleArg8,staleArg9);
         sourceDef = IRInst__getOperandSource(inst2,1);
         compilerForCalls = *(undefined4 *)(pass + 8);
         instSrcNotHwConst = instSrcHwConst == 0;
         operandRecord2 = IRInst__getOperandRecord(inst2,1);
-        inst2SrcHwConst = IRInst__allSelectsAreHwConstants(sourceDef,compilerForCalls,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        inst2SrcHwConst = IRInst__allSelectsAreHwConstants(sourceDef,compilerForCalls,*(undefined4 *)(operandRecord2 + 0x10),staleArg6,staleArg7,staleArg8,staleArg9);
         if ((!instSrcNotHwConst) || (inst2SrcHwConst != 0)) {
           if (((inst[0x2e] & 1U) != (inst2[0x2e] & 1U)) &&
              ((inst2SrcHwConst == 0 || (fun151318Result = Inst__sourceOneMatchesConstant(inst2), fun151318Result == 0)))) {
@@ -9527,7 +9527,7 @@ int Scheduler__insertOperandCopy(scheduler, node)
   int operandCount;
   int fileBase0;
   int fileBase1;
-  uint in_r9;
+  uint staleArg9;
   uint operandBlock;
   int *inst;
   int compiler;
@@ -9645,7 +9645,7 @@ LAB_00168060:
   IRInst__setOperandSource(inst,1,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
   operandRecord = IRInst__getOperandRecord(inst,1);
   SelectWord__readMask(&copyReadMaskOut,*(undefined4 *)(operandRecord + 0x10));
-  ((int (*)())Scheduler__addDataDependencyEdge)(scheduler,copyNode,node,1,0,copyReadMaskOut,in_r9);
+  ((int (*)())Scheduler__addDataDependencyEdge)(scheduler,copyNode,node,1,0,copyReadMaskOut,staleArg9);
   copyDestField = *(undefined4 *)(*(int *)(copyNode + 0x38) + 0x94);
   operandRecord = IRInst__getOperandRecord(*(int *)(copyNode + 0x38),0);
   *(undefined4 *)(operandRecord + 8) = copyDestField;
@@ -10468,17 +10468,17 @@ int Scheduler__packDotProductCandidates(scheduler)
   uint predEdgeCount;
   uint *allNodes;
   int priority;
-  /* NOTE (issue #64): auStack_48 was declared 8 bytes, but DListNode__init's sentinel-list init writes through
-   * +0x14 (6 words) - confirmed live/via stock disasm: it writes local_40 (frame+0x40, i.e. auStack_48+8) as
+  /* NOTE (issue #64): candidateSentinelList was declared 8 bytes, but DListNode__init's sentinel-list init writes through
+   * +0x14 (6 words) - confirmed live/via stock disasm: it writes candidateSentinelFirst (frame+0x40, i.e. candidateSentinelList+8) as
    * part of the SAME sentinel struct (the self-referential "list head" pointer), not a separately-initialized
    * local. -O0 doesn't lay declared locals contiguously, so the two must be one buffer (classic stack-split
    * artifact, same class as the Scheduler__scheduleBlock/Scheduler__run fixes already landed on this issue). */
   undefined4 auStack_48_vec169b70[6];
-#define auStack_48 ((unsigned char *)auStack_48_vec169b70)
-#define local_40 ((int)auStack_48_vec169b70[2])
+#define candidateSentinelList ((unsigned char *)auStack_48_vec169b70)
+#define candidateSentinelFirst ((int)auStack_48_vec169b70[2])
   
   nodeIndex = 0;
-  DListNode__init(auStack_48);
+  DListNode__init(candidateSentinelList);
   allNodes = *(uint **)(scheduler + 0x18);
   nodeCount = allNodes[1];
   if (0 < (int)nodeCount) {
@@ -10525,7 +10525,7 @@ int Scheduler__packDotProductCandidates(scheduler)
           predEdges = *(uint **)(node + 0x44);
         }
       }
-      sortedCursor = local_40;
+      sortedCursor = candidateSentinelFirst;
       if ((*(uint *)(*(int *)(node + 0x38) + 0x14) & 2) != 0) {
         do {
           listNodeOrPriority = sortedCursor;
@@ -10537,7 +10537,7 @@ int Scheduler__packDotProductCandidates(scheduler)
         nextSortedNode = *(int *)(listNodeOrPriority + 8);
 LAB_00169d08:
         if (nextSortedNode == 0) {
-          DList__pushBack(auStack_48,node);
+          DList__pushBack(candidateSentinelList,node);
         }
       }
 LAB_issue76_skip_169b70:
@@ -10547,11 +10547,11 @@ LAB_issue76_skip_169b70:
     } while( true );
   }
   *(undefined4 *)(scheduler + 0xf4) = 0;
-  while (node = DList__isEmpty(auStack_48), node == 0) {
+  while (node = DList__isEmpty(candidateSentinelList), node == 0) {
     (**(code **)(**(int **)(scheduler + 8) + 8))(*(int **)(scheduler + 8));
-    node = local_40;
+    node = candidateSentinelFirst;
     (**(code **)(**(int **)(scheduler + 8) + 0x10))
-              (*(int **)(scheduler + 8),*(undefined4 *)(local_40 + 0x38));
+              (*(int **)(scheduler + 8),*(undefined4 *)(candidateSentinelFirst + 0x38));
     nextCandidate = *(int *)(node + 8);
     DList__unlink(node);
     while (listNodeOrPriority = nextCandidate, nextCandidate = *(int *)(listNodeOrPriority + 8), nextCandidate != 0) {
@@ -10618,9 +10618,9 @@ int Scheduler__markGlobalValues(scheduler)
   int innerIsPresub;
   int lowRoot;
   int compilerCtx;
-  undefined4 in_r8;
+  undefined4 staleArg8;
   int *nextBlock;
-  undefined4 in_r10;
+  undefined4 staleArg10;
   int *block2;
   undefined4 sourceRegId;
   int inst;
@@ -10872,7 +10872,7 @@ LAB_0016a42c:
     } while (*(int *)(walkCursor + 8) != 0);
   }
   Compiler__logf(*scheduler,"Scheduler : %d out of %d instructions are marked global\n",globalCount,instCount,
-               compilerCtx,in_r8,0,in_r10);
+               compilerCtx,staleArg8,0,staleArg10);
   Arena__free(*(undefined4 *)(*scheduler + 0x378),rootIsGlobal);
   return Arena__free(*(undefined4 *)(*scheduler + 0x378),unionFindParents);
 }
