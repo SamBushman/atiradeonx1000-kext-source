@@ -6263,16 +6263,16 @@ int FUN_00162dfc(instSlot, skipCompatCheck, pass)
 }
 
 /* Inst__tryCollapseSimilar @ 0x1633f8 (128 bytes) */
-int Inst__tryCollapseSimilar(inst, param_2, param_3, param_4, param_5, param_6, param_7)
+int Inst__tryCollapseSimilar(inst, pass, staleArg3, staleArg4, staleArg5, staleArg6, staleArg7)
   int inst;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  int pass;
+  undefined4 staleArg3;
+  undefined4 staleArg4;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
 {
-  unsigned int ghidra_home[8] = { inst, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { inst, pass, staleArg3, staleArg4, staleArg5, staleArg6, staleArg7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int callResult;
   undefined4 inst1;
   
@@ -6281,10 +6281,10 @@ int Inst__tryCollapseSimilar(inst, param_2, param_3, param_4, param_5, param_6, 
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
     inst1 = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
   }
-  callResult = ((int (*)())FUN_00162dfc)(&(*(unsigned int *)((unsigned char *)ghidra_home + 0)),0,param_2);
+  callResult = ((int (*)())FUN_00162dfc)(&(*(unsigned int *)((unsigned char *)ghidra_home + 0)),0,pass);
   if (callResult != 0) {
-    *(int *)(param_2 + 0x1fc) = *(int *)(param_2 + 0x1fc) + 1;
-    IRInst__dropCounterAndDeleteIfUnused(inst1,*(undefined4 *)(param_2 + 8));
+    *(int *)(pass + 0x1fc) = *(int *)(pass + 0x1fc) + 1;
+    IRInst__dropCounterAndDeleteIfUnused(inst1,*(undefined4 *)(pass + 8));
   }
   return callResult != 0;
 }
@@ -6557,7 +6557,7 @@ int Inst__mergeMovAndMadByLanes(node, pass)
   uint *useVector;
   int extraOpcode;
   int lanesLeft;
-  double fparam_1;
+  double literalValue;
   undefined4 extraSourceSelect;
   undefined4 movDestSelect;
   undefined4 madDestSelect;
@@ -6568,8 +6568,8 @@ int Inst__mergeMovAndMadByLanes(node, pass)
   undefined4 lastOperandRecord;
   int lastOperandSource;
   undefined4 lastOperandRecord5;
-  undefined4 local_84;
-  float local_80;
+  undefined4 uniformConstantHeader;
+  float uniformConstantValue;
   
   if ((*(uint *)(node + 0x14) & 0x200) == 0) {
     return 0;
@@ -6591,11 +6591,11 @@ int Inst__mergeMovAndMadByLanes(node, pass)
     }
     operandRecord2 = IRInst__getOperandRecord(node,0);
     laneScan = 0;
-    local_84 = *(undefined4 *)(operandRecord2 + 0x10);
+    uniformConstantHeader = *(undefined4 *)(operandRecord2 + 0x10);
     lanesLeft = 4;
     do {
       if (*(char *)((int)&extraSourceSelect + laneScan) == '\x04') {
-        if (*(char *)((int)&local_84 + laneScan) == '\0') {
+        if (*(char *)((int)&uniformConstantHeader + laneScan) == '\0') {
           *(char *)((int)&extraSourceSelect + laneScan) = (char)laneScan;
         }
       }
@@ -6666,7 +6666,7 @@ int Inst__mergeMovAndMadByLanes(node, pass)
     }
     else if (madSrc1Negate == madSrc2Negate) goto LAB_00163c00;
     matchedSrcIndex = 1;
-    fparam_1 = 1.0;
+    literalValue = 1.0;
     otherIndexA = 2;
     otherIndexB = 3;
   }
@@ -6678,7 +6678,7 @@ LAB_00163c00:
       }
       else if (madSrc1Negate == madSrc2Negate) goto LAB_00163c2c;
       matchedSrcIndex = 2;
-      fparam_1 = 1.0;
+      literalValue = 1.0;
       otherIndexA = 1;
       otherIndexB = 3;
     }
@@ -6694,7 +6694,7 @@ LAB_00163c2c:
         return 0;
       }
       matchedSrcIndex = 3;
-      fparam_1 = 0.0;
+      literalValue = 0.0;
       otherIndexA = 1;
       otherIndexB = 2;
     }
@@ -6790,7 +6790,7 @@ LAB_00163c2c:
     }
     madSrcA[0x21] = 2;
     laneA = 0;
-    ((void (*)())IRInst__makeLiteralVec4Float)(madSrcA,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
+    ((void (*)())IRInst__makeLiteralVec4Float)(madSrcA,pass,2,literalValue,literalValue,literalValue,literalValue);
     do {
       if (*(char *)((int)&madDestSelect + laneA) != '\x01') {
         (**(code **)(*madSrcA + 0x88))(madSrcA,1,laneA,*(undefined1 *)((int)&madOtherSelectA + laneA));
@@ -6827,8 +6827,8 @@ LAB_00163c2c:
       srcIndexA = 2;
       do {
         operandRecord2 = IRInst__getOperandRecord(madSrcA,0);
-        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcA,srcIndexA,*(undefined4 *)(operandRecord2 + 0x10),&local_84);
-        if ((uniformSourceConstant != 0) && (fparam_1 == (double)local_80)) {
+        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcA,srcIndexA,*(undefined4 *)(operandRecord2 + 0x10),&uniformConstantHeader);
+        if ((uniformSourceConstant != 0) && (literalValue == (double)uniformConstantValue)) {
           selectLaneA = -1;
           laneScan4 = 0;
           do {
@@ -6857,7 +6857,7 @@ LAB_00163c2c:
     }
     newSrcIndexA = srcCountA + 1;
     madSrcA[0x21] = newSrcIndexA;
-    ((void (*)())IRInst__makeLiteralVec4Float)(madSrcA,pass,newSrcIndexA,fparam_1,fparam_1,fparam_1,fparam_1);
+    ((void (*)())IRInst__makeLiteralVec4Float)(madSrcA,pass,newSrcIndexA,literalValue,literalValue,literalValue,literalValue);
     operandRecord3 = IRInst__getOperandRecord(madSrcA,newSrcIndexA);
     *(undefined4 *)(operandRecord3 + 0x10) = 0x4040404;
     selectedLane = 0;
@@ -6938,8 +6938,8 @@ LAB_00164300:
       srcIndexB = 2;
       do {
         operandRecord2 = IRInst__getOperandRecord(madSrcB,0);
-        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcB,srcIndexB,*(undefined4 *)(operandRecord2 + 0x10),&local_84);
-        if ((uniformSourceConstant != 0) && (local_80 == 0.0)) {
+        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcB,srcIndexB,*(undefined4 *)(operandRecord2 + 0x10),&uniformConstantHeader);
+        if ((uniformSourceConstant != 0) && (uniformConstantValue == 0.0)) {
           selectLaneB = -1;
           laneScan5 = 0;
           do {
@@ -10457,7 +10457,7 @@ int Scheduler__packDotProductCandidates(scheduler)
   int *predEdgeSlot;
   uint *predEdges;
   uint loopIndex;
-  int iVar1;
+  int listNodeOrPriority;
   uint vectorCount;
   int *nodeSlot;
   uint vectorCount2;
@@ -10515,10 +10515,10 @@ int Scheduler__packDotProductCandidates(scheduler)
             predEdgeSlot = (int *)Vector__elementRefGrow(predEdges,loopIndex);
           }
           loopIndex = loopIndex + 1;
-          iVar1 = *(int *)(*(int *)*predEdgeSlot + 0x18) + ((int *)*predEdgeSlot)[3];
+          listNodeOrPriority = *(int *)(*(int *)*predEdgeSlot + 0x18) + ((int *)*predEdgeSlot)[3];
           priority = *(int *)(node + 0x18);
-          if (*(int *)(node + 0x18) < iVar1) {
-            priority = iVar1;
+          if (*(int *)(node + 0x18) < listNodeOrPriority) {
+            priority = listNodeOrPriority;
           }
           *(int *)(node + 0x18) = priority;
           if (predEdgeCount == loopIndex) break;
@@ -10528,13 +10528,13 @@ int Scheduler__packDotProductCandidates(scheduler)
       sortedCursor = local_40;
       if ((*(uint *)(*(int *)(node + 0x38) + 0x14) & 2) != 0) {
         do {
-          iVar1 = sortedCursor;
+          listNodeOrPriority = sortedCursor;
           nextSortedNode = 0;
-          if (*(int *)(iVar1 + 8) == 0) goto LAB_00169d08;
-          sortedCursor = *(int *)(iVar1 + 8);
-        } while (*(int *)(node + 0x18) <= *(int *)(iVar1 + 0x18));
-        DList__insertBefore(node,iVar1);
-        nextSortedNode = *(int *)(iVar1 + 8);
+          if (*(int *)(listNodeOrPriority + 8) == 0) goto LAB_00169d08;
+          sortedCursor = *(int *)(listNodeOrPriority + 8);
+        } while (*(int *)(node + 0x18) <= *(int *)(listNodeOrPriority + 0x18));
+        DList__insertBefore(node,listNodeOrPriority);
+        nextSortedNode = *(int *)(listNodeOrPriority + 8);
 LAB_00169d08:
         if (nextSortedNode == 0) {
           DList__pushBack(auStack_48,node);
@@ -10554,16 +10554,16 @@ LAB_issue76_skip_169b70:
               (*(int **)(scheduler + 8),*(undefined4 *)(local_40 + 0x38));
     nextCandidate = *(int *)(node + 8);
     DList__unlink(node);
-    while (iVar1 = nextCandidate, nextCandidate = *(int *)(iVar1 + 8), nextCandidate != 0) {
+    while (listNodeOrPriority = nextCandidate, nextCandidate = *(int *)(listNodeOrPriority + 8), nextCandidate != 0) {
       canAdd = (**(code **)(**(int **)(scheduler + 8) + 0xc))
-                        (*(int **)(scheduler + 8),*(undefined4 *)(iVar1 + 0x38));
+                        (*(int **)(scheduler + 8),*(undefined4 *)(listNodeOrPriority + 0x38));
       if (canAdd != 0) {
         (**(code **)(**(int **)(scheduler + 8) + 0x10))
-                  (*(int **)(scheduler + 8),*(undefined4 *)(iVar1 + 0x38));
-        *(undefined4 *)(iVar1 + 0x68) = 1;
+                  (*(int **)(scheduler + 8),*(undefined4 *)(listNodeOrPriority + 0x38));
+        *(undefined4 *)(listNodeOrPriority + 0x68) = 1;
         *(int *)(scheduler + 0xf4) = *(int *)(scheduler + 0xf4) + 1;
         *(undefined4 *)(node + 0x68) = 1;
-        DList__unlink(iVar1);
+        DList__unlink(listNodeOrPriority);
       }
     }
     if (*(int *)(node + 0x68) != 0) {

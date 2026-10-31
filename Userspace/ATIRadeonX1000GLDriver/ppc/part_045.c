@@ -4464,37 +4464,37 @@ int SwizzleTable__eqKeys(param_1, param_2)
 }
 
 /* ValueKey__propagateLaneValues @ 0x173278 (184 bytes) */
-int ValueKey__propagateLaneValues(param_1)
-  undefined4 *param_1;
+int ValueKey__propagateLaneValues(key)
+  undefined4 *key;
 {
   bool moreComponents;
-  char cVar2;
+  char laneKind;
   int operandRecord;
   int loopIndex;
-  undefined4 *puVar5;
+  undefined4 *laneCursor;
   
   loopIndex = 0;
-  puVar5 = param_1;
+  laneCursor = key;
   do {
-    operandRecord = IRInst__getOperandRecord(param_1[0x2c],0);
-    cVar2 = *(char *)(loopIndex + operandRecord + 0x10);
-    if (cVar2 == '\0') {
-      puVar5[8] = *puVar5;
-      puVar5[0x1c] = puVar5[0x14];
-      puVar5[0x28] = puVar5[0x20];
+    operandRecord = IRInst__getOperandRecord(key[0x2c],0);
+    laneKind = *(char *)(loopIndex + operandRecord + 0x10);
+    if (laneKind == '\0') {
+      laneCursor[8] = *laneCursor;
+      laneCursor[0x1c] = laneCursor[0x14];
+      laneCursor[0x28] = laneCursor[0x20];
     }
-    else if (cVar2 == '\x01') {
-      if ((*(uint *)(param_1[0x2c] + 0x14) & 0x200) == 0) {
-        puVar5[8] = 2;
+    else if (laneKind == '\x01') {
+      if ((*(uint *)(key[0x2c] + 0x14) & 0x200) == 0) {
+        laneCursor[8] = 2;
       }
       else {
-        puVar5[8] = puVar5[4];
-        puVar5[0x1c] = puVar5[0x18];
-        puVar5[0x28] = puVar5[0x24];
+        laneCursor[8] = laneCursor[4];
+        laneCursor[0x1c] = laneCursor[0x18];
+        laneCursor[0x28] = laneCursor[0x24];
       }
     }
     moreComponents = loopIndex != 3;
-    puVar5 = puVar5 + 1;
+    laneCursor = laneCursor + 1;
     loopIndex = loopIndex + 1;
   } while (moreComponents);
   return;

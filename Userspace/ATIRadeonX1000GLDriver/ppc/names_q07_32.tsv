@@ -4327,3 +4327,82 @@ local	FUN_001729bc	iVar4	outerKeyCursor	INFERRED	cursor along the lane words in 
 local	FUN_001729bc	iVar5	innerCountdown	INFERRED	lanes left in the inner search
 local	Program__valueNumberInst	param_3	outermostScope	INFERRED	lowest scope index searched by the scoped lookups
 local	Program__valueNumberInst	param_5	block	INFERRED	block passed to Program__tryEliminateRedundantCopy and Program__eliminateRedundantInst
+local	FUN_00146868	param_1	inst	INFERRED	inst whose block must dominate or equal the use block
+local	FUN_00146868	param_2	useInst	INFERRED	inst walked backwards/up through its block chain
+local	FUN_00146868	param_3	program	INFERRED	program whose dominator info is built on demand
+use	FUN_00146868	piVar1	useBlock	INFERRED	block of useInst (+0x158)	^\s*piVar1\ =\ \(int\ \*\)param_2\[0x56\];$	+2
+use	FUN_00146868	piVar1	useBlock	INFERRED	block of useInst (+0x158)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x1c\)\)\(piVar1\);$	+1
+use	FUN_00146868	piVar1	dominatorBlock	INFERRED	immediate dominator walked up toward the block of inst	^\s*piVar1\ =\ \*\(int\ \*\*\)\(param_2\[0x56\]\ \+\ 0xf0\);$	+2
+use	FUN_00146868	piVar1	dominatorBlock	INFERRED	immediate dominator walked up toward the block of inst	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x1c\)\)\(piVar1\);$@2	+1
+use	FUN_00146868	piVar1	dominatorBlock	INFERRED	immediate dominator walked up toward the block of inst	^\s*piVar1\ =\ \(int\ \*\)piVar1\[0x3c\];$	+2
+local	FUN_0013d820	param_2	pass	INFERRED	*(param_2+8) is the compiler
+local	FUN_0013d820	cVar2	laneKind	INFERRED	lane kind byte read from the select scratch
+local	FUN_0013d820	uVar3	sourceLane	INFERRED	source lane byte from the operand record select (+0x10)
+use	FUN_0013d820	iVar4	vcall64Result	INFERRED	vtable +100 result on inst	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1,param_2\);$	+2
+use	FUN_0013d820	iVar4	producerCheck	INFERRED	vtable +0x48 and +0x2c results on the operand sources	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x48\)\)\(piVar5\);$	+2
+local	FUN_0013d820	uVar7	compiler	INFERRED	compiler (pass +8) passed to the vtable calls
+local	FUN_0013d820	local_40	selectScratch	INFERRED	select word scratch read bytewise; the lane kinds precede it at -4
+local	Use__sourceIsPlainSingleUse	param_3	staleArg3	INFERRED	r5 left as an extra argument of IRInst__hasNoUses
+local	Use__sourceIsPlainSingleUse	param_4	staleArg4	INFERRED	r6 left as an extra argument of IRInst__hasNoUses
+local	Use__sourceIsPlainSingleUse	param_5	staleArg5	INFERRED	r7 left as an extra argument of IRInst__hasNoUses
+local	Use__sourceIsPlainSingleUse	param_6	staleArg6	INFERRED	r8 left as an extra argument of IRInst__hasNoUses
+local	Use__sourceIsPlainSingleUse	param_7	staleArg7	INFERRED	r9 left as an extra argument of IRInst__hasNoUses
+local	Use__sourceIsPlainSingleUse	iVar3	useCheck	INFERRED	single-use / no-use results in the guard chain
+local	FUN_0014e2dc	param_3	pass	INFERRED	*(param_3+8) is the compiler
+local	FUN_0014e2dc	iVar1	userByteOffset	INFERRED	user index * 4 into the users vector
+local	FUN_0014e2dc	piVar4	userSlot	INFERRED	address of the user element at the descending index
+local	FUN_0014e2dc	uVar7	userIndexDown	INFERRED	descending index over the users vector
+local	FUN_001541f0	iVar4	checkResult	INFERRED	one register: constant-select tests, operand source and single-use results
+local	FUN_001541f0	iVar6	secondSelectsConstant	INFERRED	IRInst__allSelectsAreHwConstants result for the second operand
+local	FUN_001541f0	local_c8	scratchFrame	INFERRED	scratch frame: [0] lane bytes, [1..3] saved counters, [4..] last-operand record
+local	FUN_001541f0	local_58	mergedLanesOut	INFERRED	SelectWord__mergeWrittenLanes out value
+local	FUN_0015546c	param_1	ctx	INFERRED	unused first argument
+local	FUN_0015546c	param_2	unusedArg2	INFERRED	not referenced
+local	FUN_0015546c	param_4	staleArg4	INFERRED	r6 left as an extra argument of the vtable +0x5c calls
+local	FUN_0015546c	piVar1	producerSource	INFERRED	high word of the packed operand source pair, receiver of the vtable +0x5c call
+local	FUN_0015546c	iVar3	instOrCheck	INFERRED	one register: inst copy, then the vtable +0x5c result
+local	FUN_00146670	param_1	selectOut	INFERRED	select word handed to the target hook
+local	FUN_00146670	param_2	inst	INFERRED	inst tested with vtable +0x5c
+local	FUN_00146670	param_3	strict	INFERRED	non-zero selects the +0x108 target hook instead of +0x100
+local	FUN_00146670	param_4	compiler	INFERRED	compiler whose +0x30c is the target
+local	FUN_00146670	piVar2	target	INFERRED	target object whose hook is called
+local	FUN_00146670	uVar3	hookResult	INFERRED	target hook return value
+local	ValueKey__propagateLaneValues	param_1	key	INFERRED	value key whose per-lane value words are copied from the source rows
+local	ValueKey__propagateLaneValues	cVar2	laneKind	INFERRED	dest select byte for the lane: 0 copies row 0, 1 copies row 1 (or 2 for an extra operand)
+local	ValueKey__propagateLaneValues	puVar5	laneCursor	INFERRED	walks the four lane columns of the key (one word per step)
+local	FUN_0017343c	param_2	block	INFERRED	block whose live-in bit set (+0x128) tracks the register
+local	FUN_0017343c	iVar1	liveSetWordRef	INFERRED	one register: bit set base, then the address of the register's bit-set word
+local	FUN_0017343c	iVar2	instOrProgramRef	INFERRED	one register: the inst at ctx+0xb0, the program statistics record and the compiler at ctx+0x238
+local	FUN_0017343c	uVar3	registerId	INFERRED	register number (a0[7]) whose bit is set or cleared in the live set
+local	FUN_0013c210	local_58	walkInst	INFERRED	inst currently walked on the rewrite stack; reused as the operand source it descends into
+local	FUN_00151a74	iVar2	operandSelectWord	INFERRED	select word of the operand record, or the all-unused default 0x1010101
+local	FUN_00151a74	local_b0	scratchFrame	INFERRED	scratch frame: [0] lane bytes, [1..3] saved counters, [4..] last-operand record
+local	FUN_00151a74	auStack_64	equalLanesOut	INFERRED	SelectWord__markEqualLanes out record
+local	FUN_001507d0	iVar10	programAlias	INFERRED	copy of program kept in r5 as an extra argument of Use__sourceIsPlainSingleUse and IRInst__hasNoUses; also the memset length
+local	FUN_001507d0	local_48	termSources	INFERRED	the shared term and the two operand sources of the consumer, indexed by term offset
+local	FUN_00147238	bVar1	sawNonZeroLane	INFERRED	one non-zero constant lane already seen
+local	FUN_00147238	iVar3	operandCountOrCheck	INFERRED	one register: operand count, vtable +0x60 result and the operand record
+local	FUN_00147238	uVar4	result	INFERRED	return value: 1 when the constants allow the fusion
+local	FUN_00147238	uVar6	sourceLane	INFERRED	source lane byte (+0x10), then redirected through the producer
+local	Scheduler__packDotProductCandidates	iVar1	listNodeOrPriority	INFERRED	one register: edge-derived priority, sorted list cursor and next candidate node
+local	Inst__swapSharedTermBetweenUses	uVar4	staleArg4Value	INFERRED	constant 1 left in r6 as an extra argument of IRInst__hasNoUses
+local	Inst__swapSharedTermBetweenUses	puVar13	matchFramePtr	INFERRED	pointer into the match frame: term group base or the term slot just compared
+local	Inst__swapSharedTermBetweenUses	local_64	maskedSelectOutA	INFERRED	SelectWord__maskUnused out value for the first rewritten select
+local	Inst__swapSharedTermBetweenUses	local_60	writeMaskOut	INFERRED	WriteMask__fromSelectWord out value
+local	Inst__swapSharedTermBetweenUses	local_5c	maskedSelectOutB	INFERRED	SelectWord__maskUnused out value for the second rewritten select
+local	Inst__swapSharedTermBetweenUses	local_58	composedSelectOutA	INFERRED	SelectWord__compose out value stored to matchFrame[0xe]
+local	Inst__swapSharedTermBetweenUses	local_54	composedSelectOutB	INFERRED	SelectWord__compose out value stored to matchFrame[0xf]
+local	Inst__mergeMovAndMadByLanes	fparam_1	literalValue	INFERRED	float literal (1.0 or 0.0, or the constant just read) replicated into the vec4 literal
+local	Inst__mergeMovAndMadByLanes	local_84	uniformConstantHeader	INFERRED	first word of the IRInst__getUniformSourceConstant out record; also read bytewise as lane mask
+local	Inst__mergeMovAndMadByLanes	local_80	uniformConstantValue	INFERRED	float value word of the IRInst__getUniformSourceConstant out record
+local	Inst__canFuseAddMul	param_3	requireSingleUse	INFERRED	non-zero requires the mul operand to have a single use
+local	Inst__canFuseAddMul	bVar1	firstOperandFusable	INFERRED	the first operand is a plain mul that can be fused
+local	Inst__canFuseAddMul	bVar2	secondOperandFusable	INFERRED	the second operand is a plain mul that can be fused
+local	Inst__canFuseAddMul	uVar3	canFuse	INFERRED	return value
+local	Inst__canFuseAddMul	iVar7	operandOpcode	INFERRED	opcode of the operand being tested
+local	Inst__tryCollapseSimilar	param_2	pass	INFERRED	+0x1fc counts the collapses, *(param_2+8) is the compiler
+local	Inst__tryCollapseSimilar	param_3	staleArg3	INFERRED	r5 spilled into the home slot array
+local	Inst__tryCollapseSimilar	param_4	staleArg4	INFERRED	r6 spilled into the home slot array
+local	Inst__tryCollapseSimilar	param_5	staleArg5	INFERRED	r7 spilled into the home slot array
+local	Inst__tryCollapseSimilar	param_6	staleArg6	INFERRED	r8 spilled into the home slot array
+local	Inst__tryCollapseSimilar	param_7	staleArg7	INFERRED	r9 spilled into the home slot array

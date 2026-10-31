@@ -35,38 +35,38 @@ int ValueKey__canonicalizeCommutativeOperands(ctx)
 }
 
 /* FUN_0017343c @ 0x17343c (304 bytes) */
-int FUN_0017343c(ctx, param_2)
+int FUN_0017343c(ctx, block)
   int ctx;
-  int param_2;
+  int block;
 {
   int vcall18Result;
-  int iVar1;
-  int iVar2;
+  int liveSetWordRef;
+  int instOrProgramRef;
   int *a0;
-  uint uVar3;
+  uint registerId;
   
   a0 = *(int **)(*(int *)(ctx + 0xb0) + 0x8c);
-  vcall18Result = (**(code **)(*a0 + 0x18))(a0,param_2);
+  vcall18Result = (**(code **)(*a0 + 0x18))(a0,block);
   if (vcall18Result != 0) {
-    iVar2 = *(int *)(ctx + 0xb0);
-    uVar3 = a0[7];
-    iVar1 = *(int *)(param_2 + 0x128);
-    if ((((*(int *)(*(int *)(iVar2 + 0x88) + 8) == 0x12) && (*(int *)(iVar2 + 0x120) == 0)) &&
-        ((*(uint *)(iVar2 + 0x14) & 0x200) == 0)) &&
-       (((*(uint *)(iVar2 + 0xb8) & 1) != 0 && ((*(uint *)(iVar2 + 0xd0) & 1) == 0)))) {
-      iVar2 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
-      *(int *)(iVar2 + 0xa8) = *(int *)(iVar2 + 0xa8) + 1;
+    instOrProgramRef = *(int *)(ctx + 0xb0);
+    registerId = a0[7];
+    liveSetWordRef = *(int *)(block + 0x128);
+    if ((((*(int *)(*(int *)(instOrProgramRef + 0x88) + 8) == 0x12) && (*(int *)(instOrProgramRef + 0x120) == 0)) &&
+        ((*(uint *)(instOrProgramRef + 0x14) & 0x200) == 0)) &&
+       (((*(uint *)(instOrProgramRef + 0xb8) & 1) != 0 && ((*(uint *)(instOrProgramRef + 0xd0) & 1) == 0)))) {
+      instOrProgramRef = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
+      *(int *)(instOrProgramRef + 0xa8) = *(int *)(instOrProgramRef + 0xa8) + 1;
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,0);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xbc,1,1);
-      iVar1 = (uVar3 >> 3 & 0x1ffffffc) + iVar1;
+      liveSetWordRef = (registerId >> 3 & 0x1ffffffc) + liveSetWordRef;
       *(uint *)(*(int *)(ctx + 0xb0) + 0x14) =
            *(uint *)(*(int *)(ctx + 0xb0) + 0x14) | 0x200000;
-      *(uint *)(iVar1 + 8) = 1 << (uVar3 & 0x1f) | *(uint *)(iVar1 + 8);
+      *(uint *)(liveSetWordRef + 8) = 1 << (registerId & 0x1f) | *(uint *)(liveSetWordRef + 8);
       return;
     }
-    iVar1 = (uVar3 >> 3 & 0x1ffffffc) + iVar1;
-    *(uint *)(iVar1 + 8) =
-         (-2 << (uVar3 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar3 & 0x1f)) & *(uint *)(iVar1 + 8);
+    liveSetWordRef = (registerId >> 3 & 0x1ffffffc) + liveSetWordRef;
+    *(uint *)(liveSetWordRef + 8) =
+         (-2 << (registerId & 0x1f) | 0xfffffffeU >> 0x20 - (registerId & 0x1f)) & *(uint *)(liveSetWordRef + 8);
   }
   return;
 }
