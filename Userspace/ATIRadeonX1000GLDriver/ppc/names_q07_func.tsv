@@ -1,0 +1,138 @@
+func	FUN_0013922c	RewriteStack__topOrderFirstLane	INFERRED	reads the top order key of the rewrite order vector and returns the first lane byte that is not 0xff
+func	FUN_00139294	Block__findEnclosingIfHeader	INFERRED	walks predecessor blocks (skipping if footers) from a block until an if header is found or the stop block is hit
+func	FUN_001396d0	Rewrite__tryFoldSourceLaneMask_001396d0	INFERRED	builds the source lane mask of an operand and tests whether the producer (register kind 2/0xc) can be folded for those lanes
+func	FUN_001398b4	Inst__rewriteClampPattern_001398b4	INFERRED	matches opcode 0x29 with a 1.0 splat source over an opcode 0x24 producer with 0/1 constants and rewrites it to opcode 0x27/0x29
+func	FUN_00139c78	Rewrite__tryPeepholesOnInst	INFERRED	runs FUN_001398b4, the target peephole hook (vtable +0x70) and FUN_001486e8 on a live inst and stamps the inst
+func	FUN_00139d40	Program__collectRewriteCandidates_00139d40	INFERRED	walks every block and inst of the program pushing candidates on a growable vector under a fresh visit stamp
+func	FUN_0013a240	RewriteStack__popOrderKey	INFERRED	pops the top order key from the rewrite stack vector and advances the following key counter
+func	FUN_0013a38c	RewriteStack__pushOperandKeys	INFERRED	pushes the order keys of an inst's operands (0x1ffffff for one operand) onto the stack and returns the first operand index
+func	FUN_0013a644	IRInst__getUsedComponentMask	INFERRED	ORs the used component lanes of every user of the inst into one mask
+func	FUN_0013a774	IRInst__countUsersCoveringLanes_0013a774	INFERRED	walks the users vector clearing lanes of laneMask that each user reads
+func	FUN_0013a8a4	Program__computeLaneInsertWords_0013a8a4	INFERRED	allocates the per-register lane table and fills ten lane word insert tables over the block list
+func	FUN_0013b1e8	IRInst__findCommonUserBlock	INFERRED	walks the users of a producer and returns the nearest block common to all user blocks, choosing by block depth
+func	FUN_0013c210	Program__runPeepholeRewrite	INFERRED	pass_rewrite driver: logs 'all peephole flags off -> bypass Rewrite()' and runs the rewrite worklist over the program
+func	FUN_0013ca84	IRInst__getExtraOrPhiSource	INFERRED	returns the phi source (opcode 0x8e) or the extra last operand source of an inst
+func	FUN_0013d3b8	Program__cloneProducersPerBlock_0013d3b8	INFERRED	walks all insts; for an inst whose vtable +0x7c producer is a plain register (flag tests) clones the producer with IRInst__clone
+func	FUN_0013d820	Inst__swizzleThroughProducer_0013d820	INFERRED	rewrites an inst with an extra operand through its producer by composing select words and remapping lane bytes
+func	FUN_0013da3c	Program__rewriteAttribShaderInsts_0013da3c	INFERRED	option 0x4e/0x4f (softilGenAttribShdr) pass collecting and rewriting insts through two growable vectors
+func	FUN_0013f3d4	Inst__mergeIntoPartner_0013f3d4	INFERRED	merges an inst into a partner by retargeting the partner's users at it
+func	FUN_0013fc38	Program__combineInstPairs_0013fc38	INFERRED	option 0x30 (split rgb/alpha) pass over the program using several growable vectors and compact-lane tables
+func	FUN_00140e5c	PostPack__initContext	INFERRED	initialises a post-pack context: program, record count and capacity words
+func	FUN_00140e70	PostPack__getReadMask	INFERRED	returns the read mask word (inst +0xc) of an inst
+func	FUN_00140e7c	PostPack__instsCompatible	INFERRED	true when two insts have the same opcode, traits, saturate/scale fields and matching negate/abs bits on every operand
+func	FUN_00141044	PostPack__getWriteMask	INFERRED	returns the write mask of the dest select word via WriteMask__fromSelectWord
+func	FUN_00141090	PostPack__getReadOnlyLaneMask	INFERRED	read mask AND the byte-swapped complement of the write mask
+func	FUN_00141100	PostPack__laneSourcesMatch	INFERRED	true when lane laneA of inst and lane laneB of inst2 read the same sources with the same select bytes
+func	FUN_001411dc	PostPack__buildLaneMap	INFERRED	builds the lane map of the combined inst from the dest selects of two insts (home-slot args pass, inst, inst2, laneMap)
+func	FUN_00141458	PostPack__swapInstLanes	INFERRED	swaps two lanes of an inst in the dest/operand select words and lane map
+func	FUN_001415a4	PostPack__replaceUsesAndRemove	INFERRED	repoints every user operand of an inst at newSource then removes the inst
+func	FUN_001416b4	PostPack__orderingAllowsPair	INFERRED	checks the program order and operand/user dependencies between two insts for pairing
+func	FUN_00141930	PostPack__matchOperandLanes	INFERRED	after PostPack__instsCompatible, compares the operands of two insts and fills a 6-word result list when one is given
+func	FUN_001427a4	PostPack__getNeededLaneMask	INFERRED	lane mask the users of an inst need (write mask when it is a phi or register source)
+func	FUN_00142974	PostPack__canMoveLane	INFERRED	early-outs when fromLane equals toLane or the inst is a phi/vtable +0x5c inst, otherwise walks the users through a work vector deciding if the lane can move
+func	FUN_00142fdc	PostPack__assignCompactLanes	INFERRED	assigns the compact lanes of two insts into the lane maps, honouring needed and read-only masks
+func	FUN_00143664	PostPack__tryAssignCompactLanes	INFERRED	PostPack__instsCompatible then PostPack__assignCompactLanes
+func	FUN_0014375c	PostPack__remapRootUsers_0014375c	INFERRED	work-vector traversal from a root inst with a lane remap word (home-slot args pass, rootInst, rootRemap)
+func	FUN_00143e40	PostPack__scoreCandidate	INFERRED	computes the score of a candidate pair (pair[4] order flag; option 0x30 write-mask tests; walks the users of the first inst)
+func	FUN_001440e4	PostPack__rewriteLaneGroup	INFERRED	rewrites the select words of a pair using lane group records and select scratch arrays, called from PostPack__applyCandidate
+func	FUN_0014532c	PostPack__applyCandidate	INFERRED	applies a chosen pair: counts it, rewrites the lane group and removes the second inst
+func	FUN_0014657c	PostPack__runPass	INFERRED	allocates the post-pack scratch, initialises the context, runs pass_post_pack_insts and frees the scratch
+func	FUN_00146624	SelectWord__writtenLanesCoverRead	INFERRED	true when every lane written by selectB is a real lane in selectA
+func	FUN_00146670	Target__acceptsSelect	INFERRED	asks the target hook (+0x100, or +0x108 when strict or the inst is a vtable +0x5c inst) whether the select word is encodable
+func	FUN_0014675c	Inst__sameSaturateAndScale	INFERRED	true when two insts have the same +0x120 and +0x124 fields
+func	FUN_00146788	Inst__isPlainSingleUse	INFERRED	single-use inst with no saturate/scale and no extra operand
+func	FUN_001467e8	Inst__noIfHeaderBetweenBlocks	INFERRED	true unless an if header lies between the inst's block and the program entry block (for opcodes in set 139344)
+func	FUN_00146868	Inst__noBarrierBetween	INFERRED	checks that no inst between a use and its definition (same block, or along the dominator chain) is a barrier (vtable +0x34 / +0x1c)
+func	FUN_0014694c	Inst__allUsesCounted	INFERRED	with requireAllUses set, true only when the use count equals the users vector size
+func	FUN_00146b0c	Inst__findDeepestChain	INFERRED	recursively follows a chain of single-use insts of one opcode and records the deepest inst and depth
+func	FUN_00146edc	Inst__sameOpcodeAndSources	INFERRED	two register insts with the same opcode, operand count and operand sources
+func	FUN_0014700c	Inst__sameOrEquivalentSource	INFERRED	true for the same source or sources that FUN_00146edc finds equivalent
+func	FUN_00147044	Inst__sourcesRelated	INFERRED	same source, or two register sources that FUN_00146edc finds equivalent
+func	FUN_00147238	Inst__constantLanesAllowFusion	INFERRED	opcode 0x12 inst whose per-lane constant operands contain at most one non-zero lane
+func	FUN_001474c8	Inst__hoistToOperandBlock	INFERRED	moves an inst to the latest block that defines one of its operands and inserts it after the last operand definition
+func	FUN_00147704	Inst__deleteMergedSources	INFERRED	deletes the distinct sources (1..3) of three insts through their vtable remove hooks after a merge
+func	FUN_001479f8	Inst__foldOutputScaleChain	INFERRED	walks a single-use chain of scale/saturate insts folding output scale and saturate into one field
+func	FUN_00147b8c	Inst__trySwapOperandSources	INFERRED	checks via the target hook whether two operand sources of two insts can be exchanged and optionally swaps them
+func	FUN_00147f54	Inst__foldOutputScaleIntoConstants	INFERRED	folds the output scale code of an inst into its constant operands via tryOutputScaleExponent
+func	FUN_0014846c	Inst__forwardSelectToProducer_0014846c	INFERRED	rewrites an inst with flag 2 by composing its select with candidate producers (vtable +0x30/+0x40 sources), first variant
+func	FUN_001486e8	Inst__forwardSelectToProducer_001486e8	INFERRED	same as FUN_0014846c but the candidates come from pass +0x3c4
+func	FUN_00148980	Inst__cloneSplatProducer_00148980	INFERRED	option 0x30: clones a splat-source producer for an inst with a single splat operand and rewrites the select
+func	FUN_00148d8c	Inst__mergeLaneProducers_00148d8c	INFERRED	collects the producer inst of each of four dest lanes and merges them into the consumer when compatible
+func	FUN_001494dc	Inst__foldChainedDest_001494dc	INFERRED	register inst with identity selects whose chained producer's dest select is folded into it, setting changedOut
+func	FUN_00149d54	Inst__operandModifiersAndSelectMatch	INFERRED	true when operand operandIndex has the same negate/abs bits and select word in both insts
+func	FUN_00149de4	Inst__tryComposeSelectWithProducer_00149de4	INFERRED	composes inst's operand select with inst2's and asks the target hook (vtable +0x104) whether the result is legal
+func	FUN_0014a898	Inst__extraSelectCoversDest	INFERRED	true when the last operand select of inst has 4 (unused) in every lane that inst2's dest writes
+func	FUN_0014c534	Inst__combineOperandSelects	INFERRED	builds a select word from the non-4 lane bytes of two operand selects
+func	FUN_0014c604	Inst__matchOperandPairs	INFERRED	tries the four operand pairings of two insts through FUN_00147b8c and builds the combined selects
+func	FUN_0014c9d0	Inst__mergeSelectsFrom	INFERRED	merges the dest/operand select words of inst2 into inst (written lanes and unused lanes)
+func	FUN_0014e2dc	Inst__replaceDuplicateInst	INFERRED	when two insts have identical dest, operands and modifiers, rewires inst2's users to inst and removes inst2
+func	FUN_001507d0	Inst__findReassociatePair	INFERRED	finds a user of the shared term that can be reassociated with useA
+func	FUN_00151318	Inst__sourceOneMatchesConstant	INFERRED	IRInst__sourceMatchesConstant on operand 1 with a zeroed vec4
+func	FUN_00151370	Inst__mergeSplatSourceInsts_00151370	INFERRED	merges two insts with different splat sources (variant using WriteMask__fromUsedLanes)
+func	FUN_00151a74	Inst__mergeSplatSourceInsts_00151a74	INFERRED	merges two insts with different splat sources (variant using constant lanes)
+func	FUN_001524b8	Inst__mergeSplatSourceInsts_001524b8	INFERRED	merges two insts with different splat sources (variant)
+func	FUN_00152ea8	Inst__mergeAddWithSharedConstant_00152ea8	INFERRED	opcode 0x12 inst pair with hardware-constant selects merged into one inst with a literal operand
+func	FUN_001541f0	Inst__mergeMulWithSharedConstant_001541f0	INFERRED	opcode 0x13 inst pair with hardware-constant selects merged into one inst with a literal operand
+func	FUN_0015546c	Inst__threeSourcesAreRegisters_0015546c	INFERRED	opcode 0x25 inst whose three sources all pass the vtable +0x5c test
+func	FUN_00155654	Inst__mergeMinMaxWithSource_00155654	INFERRED	opcode 0x17/0x19 (min/max) inst merged with a source producer, rewriting selects and stamps
+func	FUN_00156cb8	Inst__destSelectsCompatible	INFERRED	option 0x30: true unless the two dest select words differ in the special lane pattern DAT_001b0054
+func	FUN_00156d48	Inst__collapseAssociativeChain_00156d48	INFERRED	collapses a chain (length >= compiler +0x6ac) of opcode 0x13/0x14 insts into one inst
+func	FUN_00157b78	Inst__distributeSplatOperand_00157b78	INFERRED	distributes a splat operand across the two sources of a producer by cloning producer and consumer
+func	FUN_0015800c	Inst__canShiftTargetField	INFERRED	true when the +0x124 field of a chain of single-use insts can be shifted by the delta (target hook vtable +0xfc)
+func	FUN_00158988	Inst__shiftTargetField	INFERRED	adds the delta to the +0x124 field along the chain checked by Inst__canShiftTargetField
+func	FUN_00158b78	Inst__shiftTargetFieldFromProducer	INFERRED	shifts a producer's +0x124 field into inst when allowed, then clears the producer's field
+func	FUN_00159794	Inst__normalizeCompareOpcode	INFERRED	rewrites opcode 0x24/0x26 compares to 0x25 and folds half constants into the 0x9d form
+func	FUN_00159b58	Inst__foldCompareChain_00159b58	INFERRED	folds two chained opcode 0x25 compares with constant sources into one, using literal vec4 operands
+func	FUN_0015b4a4	Inst__foldMovIntoProducer	INFERRED	opcode 0x31 mov with non-identity select folded into a register producer by composing selects
+func	FUN_0015b8b8	Inst__skipSplatChain	INFERRED	advances through a chain of opcode 0x3a/0x3b insts to the one writing the requested splat lane
+func	FUN_0015b974	Inst__matchScaledSource	INFERRED	matches an opcode 0x37 inst as source x scale (power of two or constant) and returns the source, addend, scale and select
+func	FUN_0015f44c	Inst__insertMovForExtraSource_0015f44c	INFERRED	creates an opcode 0x31 mov for the extra source of a node and rewires inst to it
+func	FUN_00160eb0	Inst__foldPowOfConstant	INFERRED	option 0x1e: folds a pow of a constant chain into one inst by rebuilding the select bytes
+func	FUN_00161748	Inst__mergeSplatSourceInsts_00161748	INFERRED	merges two insts with different splat sources (variant with hardware-constant checks)
+func	FUN_001621c8	Inst__mergeSplatSourceInsts_001621c8	INFERRED	merges two insts with different splat sources (variant)
+func	FUN_00162dfc	Inst__collapseWithChainedSource	INFERRED	collapses an inst with its chained last-operand source of the same opcode by permuting operands and merging selects
+func	FUN_00165604	Program__findOrInsertEquivalentInst	INFERRED	searches the slot table for an inst with the same opcode/fields/operands, inserting it in the first free slot
+func	FUN_00165788	Inst__rewriteSourceSelects_00165788	INFERRED	rewrites operand select words of an inst through register producers using vtable +0x94 lane lookups
+func	FUN_0016c1fc	Scheduler__assignTempRegisters	INFERRED	assigns temp register numbers to scheduler nodes through Scheduler__findFreeTempRegister, growing the register table
+func	FUN_00172204	SchedModel__countNodeResources	INFERRED	increments the issue counters [3] [4] [5] according to the node's resource class (vtable +0x4c, +0x30)
+func	FUN_001725c4	Inst__insertMovForOperand	INFERRED	creates an opcode 0x31 mov of an operand before the inst with a read-mask select and rewires the operand to it
+func	FUN_001729bc	ValueKey__anyLaneKeysEqual	INFERRED	true when any two of the four lane words of a key are equal
+func	FUN_00172fb8	ValueKey__producerIsOpcode2aFlagged	INFERRED	vtable +0x54 true and producer's +0xb0 field is 0x2a
+func	FUN_00173018	ValueKey__rewriteDuplicateLanesAsMov	INFERRED	builds an opcode 0x31 mov whose select maps duplicate lanes onto the first equal lane
+func	FUN_0017343c	ValueKey__markRegisterLiveInBlock	INFERRED	clears or sets the register's bit (a0[7]) in the block's live set (+0x128) and adjusts the inst's add modifier bits
+func	FUN_0017356c	ValueKey__allRowsUniform	INFERRED	true when every operand row of the key has all lanes equal
+func	FUN_00173638	ValueKey__eliminateTrivialInst	INFERRED	removes the key inst (vtable +0xc) when it is an opcode 0x77 with select DAT_001b01b4 or a flagged opcode 0x3b-type inst
+func	FUN_00173754	ValueKey__tryMergeDestWith	INFERRED	merges the dest of the key inst with another key's inst when option 9 allows it
+func	FUN_00173a48	IRInst__allOperandsSplat	INFERRED	true when no opcode flag 7 and every operand select is a splat
+func	FUN_00173af8	ValueKey__laneFlagsAllowDest	INFERRED	true when the lane flags permit changing the dest lanes of a flagged register inst
+func	FUN_00173cdc	ValueKey__rewriteAsSwizzleMov	INFERRED	option 8: rewrites the key inst as a mov of its value key with the computed swizzle
+func	FUN_001745f0	ValueKey__simplifyAll	INFERRED	option 9: canonicalise constant sources, simplify to a fixpoint and rewrite uniform swizzles, rebuilding the key
+func	FUN_001746c8	Compiler__internPointer	INFERRED	finds or creates the pointer set record for a pointer
+func	FUN_001747c4	Compiler__findInScopes40c	INFERRED	looks the key up in the per-scope hash tables at compiler +0x40c from scopeIndex down to the outermost scope
+func	FUN_00174888	Compiler__findInScopes408	INFERRED	looks the key up in the per-scope hash tables at compiler +0x408 from scopeIndex down to the outermost scope
+func	FUN_0017494c	ValueKey__internScopedKey	INFERRED	option 9: allocates a scoped key record from the key and interns it in the scope tables
+func	FUN_00174b04	ValueKey__markUsesBetweenBlocks	INFERRED	for each operand of the key inst, walks blocks from start to end marking the block's live bit and the operand modifier
+func	FUN_00174ce0	Compiler__internLaneExpr	INFERRED	finds or creates the lane expression record (hash table +0x3ec) for two key words
+func	FUN_00174e0c	ValueKey__computeLaneFlags	INFERRED	computes the four lane flags of a key from the opcode, projection and source properties
+func	FUN_001758d8	Compiler__findInScopes404	INFERRED	looks the key up in the per-scope hash tables at program +0x404
+func	FUN_00175a3c	Compiler__internFloatConstant	INFERRED	finds or creates the expression record for a float constant under a value number
+func	FUN_00175b40	ValueKey__initSourceLaneKinds	INFERRED	initialises the source lane kinds of a key from the users of its extra operand
+func	FUN_0017629c	ValueKey__callTargetHook12c	INFERRED	calls the target hook at vtable +0x12c with the inst and compiler
+func	FUN_001762c0	Compiler__internLaneExprs1to3	INFERRED	interns lane expression records for lanes 1..3
+func	FUN_001764e0	ValueKey__sourceWordIs4	INFERRED	true when the key word at +0x70 for the source index equals 4
+func	FUN_00176534	ValueKey__compareValueNumbers	INFERRED	0 when equal, 1 when both negative, else 2
+func	FUN_00176564	Opcode__isF9	INFERRED	opcode equals 0xf9
+func	FUN_00176574	Opcode__isOneOf1fOr32OrA7A8	INFERRED	opcode is 0x1f, 0x32, 0xa7 or 0xa8
+func	FUN_001765a4	ValueKey__setRowLiteral	INFERRED	interns a float literal and stores its value number in the row slot at +0x30
+func	FUN_0017662c	ValueKey__markUnsetLanesUnknown	INFERRED	for each written lane with no value record, interns a lane expression and marks it unknown (4)
+func	FUN_001766bc	ValueKey__replaceWithMovIfZero	INFERRED	rewrites the key inst opcode to 0x1c when its constant-zero expression value number matches
+func	FUN_0017672c	ValueKey__allRowsKnown	INFERRED	true when every operand row has all lane value numbers known (non-negative)
+func	FUN_001767d8	ValueKey__rowKnown	INFERRED	true when every lane value number of a row is known
+func	FUN_001768d4	ValueKey__findKnownRowRecord	INFERRED	finds the first lane expression record of a row with a nonzero value and stores it in the row
+func	FUN_00176954	ValueKey__foldCompareLiterals	INFERRED	folds a compare of two literal rows into a 0.0/1.0 literal value number
+func	FUN_001769f4	ValueKey__getRowLaneValue	INFERRED	returns the expression value of a lane of the key's row, or 0x7ffffffe when unknown
+func	FUN_00176a94	ValueKey__evaluateConstantInst	INFERRED	evaluates the key inst on constant operand lanes through the opcode evaluator, scaling and clamping the result
+func	FUN_00176c40	ValueKey__evaluateConstantLane	INFERRED	evaluates one lane of the key inst on constant operands through the opcode evaluator
+func	FUN_00176d6c	Compiler__valueNumbersRelatedByFields20	INFERRED	true when one expression record names the other value number in fields +0x20/+0x24
+func	FUN_00176e20	Compiler__valueNumbersRelatedByFields28	INFERRED	true when one expression record names the other value number in fields +0x28/+0x2c
+func	FUN_00176ec0	ValueKey__valueNumbersRelated	INFERRED	Compiler__valueNumbersRelatedByFields28 on two value numbers with the key's compiler

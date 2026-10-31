@@ -373,7 +373,7 @@ LAB_001874d4:
     loopIndex2 = inst2[1];
     DList__unlink(inst2);
     scratchInst = (int *)IRInst__clone(inst2,*(undefined4 *)(program + 8),1);
-    loopIndex = FUN_00162dfc(&scratchInst,1,program);
+    loopIndex = Inst__collapseWithChainedSource(&scratchInst,1,program);
     if (loopIndex == 0) {
       Block__insertInstAfter(*(undefined4 *)(loopIndex2 + 0x158),loopIndex2,inst2);
       return 0;
@@ -1255,14 +1255,14 @@ LAB_00188508:
         changedFlag = 1;
       }
     }
-    callResult = FUN_0015546c(inst,consumerSrcIndex,inst2,(uint)program);
+    callResult = Inst__threeSourcesAreRegisters_0015546c(inst,consumerSrcIndex,inst2,(uint)program);
     if (callResult != 0) {
       changedFlag = 1;
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
     inst3 = inst2;
     programAlias4 = program;
-    callResult = FUN_00155654(inst,consumerSrcIndex,inst2,program);
+    callResult = Inst__mergeMinMaxWithSource_00155654(inst,consumerSrcIndex,inst2,program);
     curInst = inst2;
     if (callResult != 0) {
       changedFlag = 1;
@@ -1282,7 +1282,7 @@ LAB_00188508:
     if (callResult != 0) {
       ((int (*)())Inst__r300Peephole_1882a4)(curInst,program[2]);
     }
-    callResult = FUN_00159b58(curInst,1,program);
+    callResult = Inst__foldCompareChain_00159b58(curInst,1,program);
     if (callResult != 0) {
       curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst);
     }
@@ -1745,7 +1745,7 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
     changedFlag = 1;
     inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerOperandArg,inst2);
   }
-  callResult = FUN_0015f44c(inst,consumerOperandArg,inst2,program);
+  callResult = Inst__insertMovForExtraSource_0015f44c(inst,consumerOperandArg,inst2,program);
   if (callResult != 0) {
     IRInst__getOperandSourceOrDefault(inst,consumerOperandArg,inst2);
     return 1;
@@ -4718,7 +4718,7 @@ code_r0x0018e934:
           loopIndex2 = (**(code **)(*operandSource + 0x60))();
           if ((loopIndex2 == 0) &&
              ((((inst[loopIndex4 * 6 + 0x28] & 2U) == 0 && ((inst[loopIndex4 * 6 + 0x28] & 1U) == 0)) ||
-              (loopIndex2 = FUN_00148d8c(inst,program), loopIndex2 != 0)))) goto code_r0x0018eb5c;
+              (loopIndex2 = Inst__mergeLaneProducers_00148d8c(inst,program), loopIndex2 != 0)))) goto code_r0x0018eb5c;
         }
         loopIndex5 = 0;
         *(int *)(program + 0x238) = *(int *)(program + 0x238) + 1;
@@ -5871,7 +5871,7 @@ int R300VSchedModel__vslot27(this, inst)
           IROperand__setModifierBits((int)callResult + 0xbc,1,1);
           IRInst__setOperandSource(callResult,1,sourceDef,0,*(undefined4 *)(this + 8));
           IRInst__setOperandSource(callResult,2,sourceDef,0,*(undefined4 *)(this + 8));
-          numSources = FUN_00165604(block,callResult);
+          numSources = Program__findOrInsertEquivalentInst(block,callResult);
           if (*(int *)(numSources + 0x158) == 0) {
             *(int *)(program + 0x238) = *(int *)(program + 0x238) + 1;
             Block__insertInstBefore(block,inst,numSources);
@@ -5987,7 +5987,7 @@ int R300VSchedModel__vslot27(this, inst)
         SelectWord__selectWhereMasked(&selectMasked3,0,src3CopyOrLaneMask);
         *(undefined4 *)((int)callResult + 0x9c) = selectMasked3;
         *(uint *)((int)callResult + 0xc) = src3CopyOrLaneMask;
-        canonicalMov = FUN_00165604(block,callResult);
+        canonicalMov = Program__findOrInsertEquivalentInst(block,callResult);
         if (*(int *)(canonicalMov + 0x158) == 0) {
           changed = 1;
           *(int *)(program + 0x238) = *(int *)(program + 0x238) + 1;
@@ -6026,7 +6026,7 @@ int R300VSchedModel__vslot27(this, inst)
         SelectWord__selectWhereMasked(selectMasked4,0,src3CopyOrLaneMask);
         *(undefined4 *)((int)callResult + 0x9c) = selectMasked4[0];
         *(uint *)((int)callResult + 0xc) = src3CopyOrLaneMask;
-        canonicalMov2 = FUN_00165604(block,callResult);
+        canonicalMov2 = Program__findOrInsertEquivalentInst(block,callResult);
         if (*(int *)(canonicalMov2 + 0x158) == 0) {
           changed = 1;
           *(int *)(program + 0x238) = *(int *)(program + 0x238) + 1;

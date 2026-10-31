@@ -5054,7 +5054,7 @@ int Program__finishUsevectorChain(inst, unusedArg2, unusedArg3, program)
   
   a0 = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*a0 + 0x6c))(a0,inst,program,program);
-  return FUN_0014846c(inst,program);
+  return Inst__forwardSelectToProducer_0014846c(inst,program);
 }
 
 /* Mask__countSetBits4 @ 0x139008 (44 bytes) */

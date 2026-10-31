@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0013922c @ 0x13922c (104 bytes) */
-int FUN_0013922c(orderVec)
+/* RewriteStack__topOrderFirstLane @ 0x13922c (104 bytes) */
+int RewriteStack__topOrderFirstLane(orderVec)
   int orderVec;
 {
   uint topIndex;
@@ -31,8 +31,8 @@ int FUN_0013922c(orderVec)
   return 0;
 }
 
-/* FUN_00139294 @ 0x139294 (176 bytes) */
-int FUN_00139294(block, stopBlock)
+/* Block__findEnclosingIfHeader @ 0x139294 (176 bytes) */
+int Block__findEnclosingIfHeader(block, stopBlock)
   int *block;
   int *stopBlock;
 {
@@ -183,8 +183,8 @@ int IRInst__markOpcode13After12(inst, prevInst)
   return;
 }
 
-/* FUN_001396d0 @ 0x1396d0 (360 bytes) */
-int FUN_001396d0(compiler, inst, operandIndex, program)
+/* Rewrite__tryFoldSourceLaneMask_001396d0 @ 0x1396d0 (360 bytes) */
+int Rewrite__tryFoldSourceLaneMask_001396d0(compiler, inst, operandIndex, program)
   int compiler;
   int *inst;
   int operandIndex;
@@ -247,8 +247,8 @@ undefined4 IRInst__sourceIsSplatConstant(undefined4 inst,undefined4 srcIndex,dou
   return isSplat;
 }
 
-/* FUN_001398b4 @ 0x1398b4 (964 bytes) */
-int FUN_001398b4(inst, unusedArg2, unusedArg3, program)
+/* Inst__rewriteClampPattern_001398b4 @ 0x1398b4 (964 bytes) */
+int Inst__rewriteClampPattern_001398b4(inst, unusedArg2, unusedArg3, program)
   int inst;
   undefined4 unusedArg2;
   undefined4 unusedArg3;
@@ -379,8 +379,8 @@ LAB_00139978:
   return 0;
 }
 
-/* FUN_00139c78 @ 0x139c78 (200 bytes) */
-int FUN_00139c78(inst, parentInst, orderKey, program)
+/* Rewrite__tryPeepholesOnInst @ 0x139c78 (200 bytes) */
+int Rewrite__tryPeepholesOnInst(inst, parentInst, orderKey, program)
   int inst;
   int parentInst;
   undefined4 orderKey;
@@ -392,7 +392,7 @@ int FUN_00139c78(inst, parentInst, orderKey, program)
   
   if (((*(uint *)(inst + 0x14) & 1) != 0) &&
      ((parentInst == 0 || ((*(uint *)(parentInst + 0x14) & 1) != 0)))) {
-    callResult = ((int (*)())FUN_001398b4)(inst,parentInst,orderKey,program);
+    callResult = ((int (*)())Inst__rewriteClampPattern_001398b4)(inst,parentInst,orderKey,program);
     if (callResult != 0) {
       *(int *)(inst + 0x150) = *(int *)(program + 0x474) + -1;
     }
@@ -401,14 +401,14 @@ int FUN_00139c78(inst, parentInst, orderKey, program)
     if (vcall70Result != 0) {
       *(int *)(inst + 0x150) = *(int *)(program + 0x474) + -1;
     }
-    FUN_001486e8(inst,program);
+    Inst__forwardSelectToProducer_001486e8(inst,program);
     return;
   }
   return;
 }
 
-/* FUN_00139d40 @ 0x139d40 (524 bytes) */
-int FUN_00139d40(program)
+/* Program__collectRewriteCandidates_00139d40 @ 0x139d40 (524 bytes) */
+int Program__collectRewriteCandidates_00139d40(program)
   int program;
 {
   int *stackPushSlot;
@@ -645,8 +645,8 @@ LAB_0013a198:
   } while( true );
 }
 
-/* FUN_0013a240 @ 0x13a240 (332 bytes) */
-int FUN_0013a240(vector)
+/* RewriteStack__popOrderKey @ 0x13a240 (332 bytes) */
+int RewriteStack__popOrderKey(vector)
   uint *vector;
 {
   int *pushSlot;
@@ -711,8 +711,8 @@ int FUN_0013a240(vector)
   return orderKey;
 }
 
-/* FUN_0013a38c @ 0x13a38c (696 bytes) */
-int FUN_0013a38c(inst, vector, program)
+/* RewriteStack__pushOperandKeys @ 0x13a38c (696 bytes) */
+int RewriteStack__pushOperandKeys(inst, vector, program)
   int inst;
   uint *vector;
   undefined4 program;
@@ -835,8 +835,8 @@ LAB_0013a5cc:
   return (int)(*(unsigned char *)((unsigned char *)&(orderKey) + 0));
 }
 
-/* FUN_0013a644 @ 0x13a644 (304 bytes) */
-int FUN_0013a644(inst)
+/* IRInst__getUsedComponentMask @ 0x13a644 (304 bytes) */
+int IRInst__getUsedComponentMask(inst)
   int inst;
 {
   uint usedComponent;
@@ -892,8 +892,8 @@ int FUN_0013a644(inst)
   return usedComponentMask;
 }
 
-/* FUN_0013a774 @ 0x13a774 (304 bytes) */
-int FUN_0013a774(inst, laneMask, clearLength)
+/* IRInst__countUsersCoveringLanes_0013a774 @ 0x13a774 (304 bytes) */
+int IRInst__countUsersCoveringLanes_0013a774(inst, laneMask, clearLength)
   int *inst;
   uint laneMask;
   uint clearLength;
@@ -961,8 +961,8 @@ int FUN_0013a774(inst, laneMask, clearLength)
   return remainingMask;
 }
 
-/* FUN_0013a8a4 @ 0x13a8a4 (2372 bytes) */
-int FUN_0013a8a4(pass)
+/* Program__computeLaneInsertWords_0013a8a4 @ 0x13a8a4 (2372 bytes) */
+int Program__computeLaneInsertWords_0013a8a4(pass)
   uint pass;
 {
   bool moreComponentsB;
@@ -1151,7 +1151,7 @@ LAB_0013ae00:
                 } while (moreComponents);
                 if (((((usableMask != 0) && (sawRemappedComponent)) && (sawComponent3)) &&
                     ((candidateMask = usableMask, requiredLaneMask == 0 || (candidateMask = requiredLaneMask, (usableMask & requiredLaneMask) != 0)))) &&
-                   (foldMask = ((int (*)())FUN_0013a774)(sourceInst,candidateMask,pass), foldMask != 0)) {
+                   (foldMask = ((int (*)())IRInst__countUsersCoveringLanes_0013a774)(sourceInst,candidateMask,pass), foldMask != 0)) {
                   destOperandRecord = IRInst__getOperandRecord(sourceInst,0);
                   if (*(char *)(destOperandRecord + 0x13) == '\x01') {
                     if ((sourceInst[5] & 0x200U) != 0) {
@@ -1161,7 +1161,7 @@ LAB_0013ae00:
                           ) {
                         destOperandRecord = IRInst__getOperandRecord(chainInst,0);
                         if (*(char *)(destOperandRecord + 0x13) == '\x01') {
-                          foldMask = ((int (*)())FUN_0013a774)(chainInst,foldMask,pass);
+                          foldMask = ((int (*)())IRInst__countUsersCoveringLanes_0013a774)(chainInst,foldMask,pass);
                           chainFailed = foldMask == 0;
                         }
                         else {
@@ -1330,8 +1330,8 @@ LAB_0013ae10: ;
   return Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),laneTable);
 }
 
-/* FUN_0013b1e8 @ 0x13b1e8 (520 bytes) */
-int FUN_0013b1e8(producer, program)
+/* IRInst__findCommonUserBlock @ 0x13b1e8 (520 bytes) */
+int IRInst__findCommonUserBlock(producer, program)
   int producer;
   int program;
 {
@@ -1410,7 +1410,7 @@ LAB_0013b318:
   }
   successorCount = Block__successorCount(commonBlock);
   if (((1 < successorCount) && (commonBlock = (int *)Block__getPredecessor(commonBlock,0), commonBlock == *(int **)(producer + 0x158))
-      ) || (successorCount = ((int (*)())FUN_00139294)(commonBlock,*(undefined4 *)(program + 0x3a0)), successorCount == 0)) {
+      ) || (successorCount = ((int (*)())Block__findEnclosingIfHeader)(commonBlock,*(undefined4 *)(program + 0x3a0)), successorCount == 0)) {
 LAB_0013b3c4:
     commonBlock = (int *)0x0;
   }
@@ -1497,7 +1497,7 @@ int Program__hoistFetchInsts(program)
   block = *(int *)(program + 900);
   for (nextBlock = *(int *)(*(int *)(program + 900) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
     if (block != entryBlock) {
-      blockReachable = ((int (*)())FUN_00139294)(block,entryBlock);
+      blockReachable = ((int (*)())Block__findEnclosingIfHeader)(block,entryBlock);
       if (blockReachable != 0) {
         inst = *(int *)(block + 0x98);
         for (nextInst = *(int *)(*(int *)(block + 0x98) + 8); nextInst != 0; nextInst = *(int *)(nextInst + 8))
@@ -1509,7 +1509,7 @@ int Program__hoistFetchInsts(program)
               operandSource = IRInst__getOperandSource(inst,loopIndex2);
               hoistTarget = ((int (*)())IRInst__isOpcodeInSet139344)(operandSource);
               if ((((hoistTarget != 0) && (*(int *)(*(int *)(operandSource + 0x158) + 0xb8) == 0)) &&
-                  (hoistTarget = ((int (*)())FUN_0013b1e8)(operandSource,program), hoistTarget != 0)) &&
+                  (hoistTarget = ((int (*)())IRInst__findCommonUserBlock)(operandSource,program), hoistTarget != 0)) &&
                  (hoistTarget != *(int *)(operandSource + 0x158))) {
                 blockParentWalk = *(int **)(hoistTarget + 0xf0);
                 while ((blockParentWalk != (int *)0x0 &&
@@ -1961,8 +1961,8 @@ LAB_0013c188:
 #undef vecData
 #undef vecArena
 
-/* FUN_0013c210 @ 0x13c210 (964 bytes) */
-int FUN_0013c210(program)
+/* Program__runPeepholeRewrite @ 0x13c210 (964 bytes) */
+int Program__runPeepholeRewrite(program)
   int program;
 {
   undefined4 firstOperandIndex;
@@ -2073,8 +2073,8 @@ int FUN_0013c210(program)
               }
               keyAtTop = *stackTopSlot;
 LAB_0013c528:
-              popKey = ((int (*)())FUN_0013922c)(&vec2Capacity);
-              ((int (*)())FUN_00139c78)(walkInst,keyAtTop,popKey,program);
+              popKey = ((int (*)())RewriteStack__topOrderFirstLane)(&vec2Capacity);
+              ((int (*)())Rewrite__tryPeepholesOnInst)(walkInst,keyAtTop,popKey,program);
               goto LAB_0013c540;
             }
             if (vecCount < vecCapacity) {
@@ -2087,7 +2087,7 @@ LAB_0013c528:
               stackPushSlotB = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
             }
             *stackPushSlotB = walkInst;
-            firstOperandIndex = ((int (*)())FUN_0013a38c)(walkInst,&vec2Capacity,program);
+            firstOperandIndex = ((int (*)())RewriteStack__pushOperandKeys)(walkInst,&vec2Capacity,program);
 LAB_0013c54c:
             walkInst = IRInst__getOperandSource(walkInst,firstOperandIndex);
             descending = true;
@@ -2106,7 +2106,7 @@ LAB_0013c54c:
               callResult = LaneStack__topFitsLaneCount(&vec2Capacity,*(undefined4 *)(stackTopInst + 0x84));
               countBefore = vecCount;
               if (callResult == 0) {
-                firstOperandIndex = ((int (*)())FUN_0013a240)(&vec2Capacity);
+                firstOperandIndex = ((int (*)())RewriteStack__popOrderKey)(&vec2Capacity);
                 walkInst = stackTopInst;
                 goto LAB_0013c54c;
               }
@@ -2232,7 +2232,7 @@ LAB_0013c9e0:
         if (currentInst != 0) {
           movAndShiftUsevectorEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x14);
           if (movAndShiftUsevectorEnabled != 0) {
-            currentInst = FUN_00147f54(currentInst,*(undefined4 *)(program + PROG_compiler));
+            currentInst = Inst__foldOutputScaleIntoConstants(currentInst,*(undefined4 *)(program + PROG_compiler));
           }
           countBefore = vecCount;
           if (*(int *)(program + PROG_visitStamp) != *(int *)(currentInst + 0x150)) {
@@ -2346,8 +2346,8 @@ LAB_0013c9ec:
 #undef vec2Data
 #undef vec2Arena
 
-/* FUN_0013ca84 @ 0x13ca84 (112 bytes) */
-int FUN_0013ca84(inst)
+/* IRInst__getExtraOrPhiSource @ 0x13ca84 (112 bytes) */
+int IRInst__getExtraOrPhiSource(inst)
   int *inst;
 {
   undefined4 sourceDef;
@@ -2653,7 +2653,7 @@ int pass_rewrite(program)
   if (isOptionEnabledResult != 0) {
     Program__packPsInputs(program);
   }
-  ((int (*)())FUN_0013c210)(program);
+  ((int (*)())Program__runPeepholeRewrite)(program);
   ((int (*)())Program__eliminateDeadInstsAndRecountUses)(program,0);
   Program__beginPass(program,(int)"rewrite");
   isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x1f);
@@ -2663,8 +2663,8 @@ int pass_rewrite(program)
   return;
 }
 
-/* FUN_0013d3b8 @ 0x13d3b8 (1128 bytes) */
-int FUN_0013d3b8(program)
+/* Program__cloneProducersPerBlock_0013d3b8 @ 0x13d3b8 (1128 bytes) */
+int Program__cloneProducersPerBlock_0013d3b8(program)
   int program;
 {
   int writtenCount;
@@ -2810,8 +2810,8 @@ int FUN_0013d3b8(program)
   return;
 }
 
-/* FUN_0013d820 @ 0x13d820 (540 bytes) */
-int FUN_0013d820(inst, pass)
+/* Inst__swizzleThroughProducer_0013d820 @ 0x13d820 (540 bytes) */
+int Inst__swizzleThroughProducer_0013d820(inst, pass)
   int *inst;
   int pass;
 {
@@ -2884,8 +2884,8 @@ int FUN_0013d820(inst, pass)
   return;
 }
 
-/* FUN_0013da3c @ 0x13da3c (760 bytes) */
-int FUN_0013da3c(program)
+/* Program__rewriteAttribShaderInsts_0013da3c @ 0x13da3c (760 bytes) */
+int Program__rewriteAttribShaderInsts_0013da3c(program)
   int program;
 {
   bool replacesWriteMask;
@@ -3146,7 +3146,7 @@ LAB_0013dcf0:
             inst[0x27] = DAT_001b0008;
           }
           inst[3] = 0;
-          ((int (*)())FUN_0013d820)(inst,program);
+          ((int (*)())Inst__swizzleThroughProducer_0013d820)(inst,program);
           arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
           allocation = (undefined4 *)Arena__alloc(arena,0x14);
           *allocation = arena;
@@ -3273,7 +3273,7 @@ LAB_0013dcf0:
                           IRInst__computeSourceLaneMask(&operandSelectOutB,inst,operandIndex,program,destSelectWord);
                           operandSelectWord = operandSelectOutB;
                         }
-                        hasSpecialSource = ((int (*)())FUN_001396d0)(*(undefined4 *)(program + PROG_compiler),inst,operandIndex,program);
+                        hasSpecialSource = ((int (*)())Rewrite__tryFoldSourceLaneMask_001396d0)(*(undefined4 *)(program + PROG_compiler),inst,operandIndex,program);
                         operandReadMask = DAT_001b0020;
                         if (hasSpecialSource == 0) {
                           operandLimit = (**(code **)(*inst + 0x14))(inst);
@@ -3297,7 +3297,7 @@ LAB_0013dcf0:
                                 maskedWriteMaskBytes = maskedWriteMask;
                                 if ((((char)maskedWriteMaskBytes != '\0' || (*(unsigned char *)((unsigned char *)&(maskedWriteMaskBytes) + 2)) != '\0') ||
                                     (*(unsigned char *)((unsigned char *)&(maskedWriteMaskBytes) + 1)) != '\0') || (*(unsigned char *)((unsigned char *)&(maskedWriteMaskBytes) + 0)) != '\0') break;
-                                sourceInst = (int *)((int (*)())FUN_0013ca84)(sourceInst);
+                                sourceInst = (int *)((int (*)())IRInst__getExtraOrPhiSource)(sourceInst);
                               }
                               IRInst__setOperandSource(inst,operandIndex,sourceInst,0,*(undefined4 *)(program + PROG_compiler));
                               operandRecord5 = IRInst__getOperandRecord(inst,operandIndex);
@@ -3401,14 +3401,14 @@ code_r0x0013e80c:
                   else {
                     candidateDef = 0;
                     if (inst[3] != 0) {
-                      candidateDef = ((int (*)())FUN_0013ca84)(inst);
+                      candidateDef = ((int (*)())IRInst__getExtraOrPhiSource)(inst);
                     }
                     defRoot = disjointSetFindRoot(inst[0x53],unionFindParents);
                     while ((candidateDef != 0 &&
                            ((candidateRoot = disjointSetFindRoot(*(undefined4 *)(candidateDef + 0x14c),unionFindParents),
                             defRoot != candidateRoot || (candidateRoot = IRInst__writeMasksOverlap(candidateDef,inst), candidateRoot == 0)
                             )))) {
-                      candidateDef = ((int (*)())FUN_0013ca84)(candidateDef);
+                      candidateDef = ((int (*)())IRInst__getExtraOrPhiSource)(candidateDef);
                     }
                     *(int *)(matchingDefMap + inst[0x53] * 4) = candidateDef;
                     nextInst = (int *)inst[2];
@@ -3872,8 +3872,8 @@ code_r0x0013e0ac:
 #undef vecData
 #undef vecArena
 
-/* FUN_0013f3d4 @ 0x13f3d4 (2148 bytes) */
-int FUN_0013f3d4(inst, program)
+/* Inst__mergeIntoPartner_0013f3d4 @ 0x13f3d4 (2148 bytes) */
+int Inst__mergeIntoPartner_0013f3d4(inst, program)
   int *inst;
   int program;
 {
@@ -4196,8 +4196,8 @@ LAB_0013fad0:
   return false;
 }
 
-/* FUN_0013fc38 @ 0x13fc38 (4516 bytes) */
-int FUN_0013fc38(pass)
+/* Program__combineInstPairs_0013fc38 @ 0x13fc38 (4516 bytes) */
+int Program__combineInstPairs_0013fc38(pass)
   int pass;
 {
   int *unsharedAWrapper;
@@ -4386,7 +4386,7 @@ int FUN_0013fc38(pass)
         destRecord = IRInst__getOperandRecord(blockInst,0);
         destSelect = *(int *)(destRecord + 0x10);
         if (((*(int *)(blockInst[0x22] + 8) == 0x12) &&
-            (canMergeResult = ((int (*)())FUN_0013f3d4)(blockInst,pass), canMergeResult != 0)) && (destSelect != 0x1010101)) {
+            (canMergeResult = ((int (*)())Inst__mergeIntoPartner_0013f3d4)(blockInst,pass), canMergeResult != 0)) && (destSelect != 0x1010101)) {
           if (splitRgbAlphaEnabled == 0) {
             if (destSelect != 0) goto LAB_0013fe30;
           }
@@ -4439,7 +4439,7 @@ LAB_0013fe30:
               } while (candidateIdx < candidateCountScan);
             }
 LAB_0013ff84:
-            candidateMask = ((int (*)())FUN_0013a644)(blockInst);
+            candidateMask = ((int (*)())IRInst__getUsedComponentMask)(blockInst);
             pushCountB = allocation[2];
             if (pushCountB < *candidateVecHeader) {
               _memset(pushCountB * 4 + allocation[3],0,4);
@@ -4895,8 +4895,8 @@ LAB_00140c00:
 #undef vecData
 #undef vecArena
 
-/* FUN_00140e5c @ 0x140e5c (20 bytes) */
-int FUN_00140e5c(packCtx, program)
+/* PostPack__initContext @ 0x140e5c (20 bytes) */
+int PostPack__initContext(packCtx, program)
   int packCtx;
   undefined4 program;
 {
@@ -4906,8 +4906,8 @@ int FUN_00140e5c(packCtx, program)
   return;
 }
 
-/* FUN_00140e70 @ 0x140e70 (12 bytes) */
-int FUN_00140e70(outReadMask, packCtx, inst)
+/* PostPack__getReadMask @ 0x140e70 (12 bytes) */
+int PostPack__getReadMask(outReadMask, packCtx, inst)
   undefined4 *outReadMask;
   undefined4 packCtx;
   int inst;
@@ -4916,8 +4916,8 @@ int FUN_00140e70(outReadMask, packCtx, inst)
   return;
 }
 
-/* FUN_00140e7c @ 0x140e7c (456 bytes) */
-int FUN_00140e7c(packCtx, inst, inst2)
+/* PostPack__instsCompatible @ 0x140e7c (456 bytes) */
+int PostPack__instsCompatible(packCtx, inst, inst2)
   undefined4 *packCtx;
   int *inst;
   int *inst2;
@@ -4957,8 +4957,8 @@ int FUN_00140e7c(packCtx, inst, inst2)
   return 0;
 }
 
-/* FUN_00141044 @ 0x141044 (76 bytes) */
-int FUN_00141044(outWriteMask, packCtx, inst)
+/* PostPack__getWriteMask @ 0x141044 (76 bytes) */
+int PostPack__getWriteMask(outWriteMask, packCtx, inst)
   undefined4 *outWriteMask;
   undefined4 packCtx;
   undefined4 inst;
@@ -4972,8 +4972,8 @@ int FUN_00141044(outWriteMask, packCtx, inst)
   return outWriteMask;
 }
 
-/* FUN_00141090 @ 0x141090 (112 bytes) */
-int FUN_00141090(outMask, packCtx, inst)
+/* PostPack__getReadOnlyLaneMask @ 0x141090 (112 bytes) */
+int PostPack__getReadOnlyLaneMask(outMask, packCtx, inst)
   uint *outMask;
   undefined4 packCtx;
   undefined4 inst;
@@ -4981,8 +4981,8 @@ int FUN_00141090(outMask, packCtx, inst)
   uint readMaskOut;
   uint writeMaskOut [4];
   
-  ((int (*)())FUN_00140e70)(&readMaskOut,packCtx,inst);
-  ((int (*)())FUN_00141044)(writeMaskOut,packCtx,inst);
+  ((int (*)())PostPack__getReadMask)(&readMaskOut,packCtx,inst);
+  ((int (*)())PostPack__getWriteMask)(writeMaskOut,packCtx,inst);
   writeMaskOut[0] = ~writeMaskOut[0];
   *outMask = readMaskOut &
              (writeMaskOut[0] << 0x18 | (writeMaskOut[0] & 0xff00) << 8 | writeMaskOut[0] >> 8 & 0xff00 |
@@ -4990,8 +4990,8 @@ int FUN_00141090(outMask, packCtx, inst)
   return outMask;
 }
 
-/* FUN_00141100 @ 0x141100 (220 bytes) */
-int FUN_00141100(packCtx, inst, laneA, inst2, laneB)
+/* PostPack__laneSourcesMatch @ 0x141100 (220 bytes) */
+int PostPack__laneSourcesMatch(packCtx, inst, laneA, inst2, laneB)
   undefined4 packCtx;
   int inst;
   int laneA;
@@ -5006,7 +5006,7 @@ int FUN_00141100(packCtx, inst, laneA, inst2, laneB)
   undefined4 operandSelect;
   undefined4 selectScratch [8];
   
-  ((int (*)())FUN_00140e7c)(packCtx,inst,inst2);
+  ((int (*)())PostPack__instsCompatible)(packCtx,inst,inst2);
   operandLimit = *(int *)(inst + 0x84);
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
     operandLimit = operandLimit + -1;
@@ -5032,8 +5032,8 @@ int FUN_00141100(packCtx, inst, laneA, inst2, laneB)
   return 1;
 }
 
-/* FUN_001411dc @ 0x1411dc (636 bytes) */
-int FUN_001411dc(pass, inst, inst2, laneMap)
+/* PostPack__buildLaneMap @ 0x1411dc (636 bytes) */
+int PostPack__buildLaneMap(pass, inst, inst2, laneMap)
   undefined4 *pass;
   int inst;
   int inst2;
@@ -5160,8 +5160,8 @@ int FUN_001411dc(pass, inst, inst2, laneMap)
   return;
 }
 
-/* FUN_00141458 @ 0x141458 (332 bytes) */
-int FUN_00141458(packCtx, inst, laneA, laneB)
+/* PostPack__swapInstLanes @ 0x141458 (332 bytes) */
+int PostPack__swapInstLanes(packCtx, inst, laneA, laneB)
   undefined4 *packCtx;
   int inst;
   int laneA;
@@ -5228,8 +5228,8 @@ int FUN_00141458(packCtx, inst, laneA, laneB)
   return;
 }
 
-/* FUN_001415a4 @ 0x1415a4 (272 bytes) */
-int FUN_001415a4(packCtx, inst, newSource)
+/* PostPack__replaceUsesAndRemove @ 0x1415a4 (272 bytes) */
+int PostPack__replaceUsesAndRemove(packCtx, inst, newSource)
   undefined4 *packCtx;
   int *inst;
   undefined4 newSource;
@@ -5275,8 +5275,8 @@ int FUN_001415a4(packCtx, inst, newSource)
   return;
 }
 
-/* FUN_001416b4 @ 0x1416b4 (508 bytes) */
-int FUN_001416b4(packCtx, inst, inst2, checkExtraSource)
+/* PostPack__orderingAllowsPair @ 0x1416b4 (508 bytes) */
+int PostPack__orderingAllowsPair(packCtx, inst, inst2, checkExtraSource)
   undefined4 packCtx;
   int inst;
   int inst2;
@@ -5392,9 +5392,9 @@ int PostPack__canPairInEitherOrder(packCtx, inst, inst2, outSwapped)
   int callResult;
   undefined4 canPair;
   
-  callResult = ((int (*)())FUN_001416b4)(packCtx,inst,inst2,0);
+  callResult = ((int (*)())PostPack__orderingAllowsPair)(packCtx,inst,inst2,0);
   if (callResult == 0) {
-    callResult = ((int (*)())FUN_001416b4)(packCtx,inst2,inst,0);
+    callResult = ((int (*)())PostPack__orderingAllowsPair)(packCtx,inst2,inst,0);
     canPair = 0;
     if (callResult != 0) {
       canPair = 1;
@@ -5408,8 +5408,8 @@ int PostPack__canPairInEitherOrder(packCtx, inst, inst2, outSwapped)
   return canPair;
 }
 
-/* FUN_00141930 @ 0x141930 (3700 bytes) */
-int FUN_00141930(packState, inst, inst2, resultList)
+/* PostPack__matchOperandLanes @ 0x141930 (3700 bytes) */
+int PostPack__matchOperandLanes(packState, inst, inst2, resultList)
   int packState;
   int *inst;
   int *inst2;
@@ -5504,7 +5504,7 @@ int FUN_00141930(packState, inst, inst2, resultList)
   undefined4 entryPad1;
   undefined4 entryPad2;
   
-  ((int (*)())FUN_00140e7c)(packState,inst,inst2);
+  ((int (*)())PostPack__instsCompatible)(packState,inst,inst2);
   if (resultList != (int *)0x0) {
     countdownE = 5;
     *resultList = 0;
@@ -6145,8 +6145,8 @@ LAB_001426b8:
   goto LAB_001420c4;
 }
 
-/* FUN_001427a4 @ 0x1427a4 (464 bytes) */
-int FUN_001427a4(outNeededMask, packCtx, inst)
+/* PostPack__getNeededLaneMask @ 0x1427a4 (464 bytes) */
+int PostPack__getNeededLaneMask(outNeededMask, packCtx, inst)
   uint *outNeededMask;
   undefined4 packCtx;
   int *inst;
@@ -6166,7 +6166,7 @@ int FUN_001427a4(outNeededMask, packCtx, inst)
   
   if ((*(int *)(inst[0x22] + 8) == 0x8e) ||
      (vcall5cResult = (**(code **)(*inst + 0x5c))(inst), vcall5cResult != 0)) {
-    ((int (*)())FUN_00141044)(&writeMaskOut,packCtx,inst);
+    ((int (*)())PostPack__getWriteMask)(&writeMaskOut,packCtx,inst);
     *outNeededMask = writeMaskOut;
   }
   else {
@@ -6191,7 +6191,7 @@ int FUN_001427a4(outNeededMask, packCtx, inst)
         if (userInst != (int *)0x0) {
           if ((*(int *)(userInst[0x22] + 8) == 0x8e) ||
              (vcall5cResult = (**(code **)(*userInst + 0x5c))(userInst), vcall5cResult != 0)) {
-            ((int (*)())FUN_00141044)(&userWriteMaskOut,packCtx,userInst);
+            ((int (*)())PostPack__getWriteMask)(&userWriteMaskOut,packCtx,userInst);
             neededMask = neededMask | userWriteMaskOut;
           }
           extraSource = (int *)0x0;
@@ -6199,7 +6199,7 @@ int FUN_001427a4(outNeededMask, packCtx, inst)
             extraSource = (int *)IRInst__getOperandSource(userInst,userInst[0x21]);
           }
           if (extraSource == inst) {
-            ((int (*)())FUN_00141090)(&userReadMaskOut,packCtx,userInst);
+            ((int (*)())PostPack__getReadOnlyLaneMask)(&userReadMaskOut,packCtx,userInst);
             neededMask = neededMask | userReadMaskOut;
           }
         }
@@ -6207,14 +6207,14 @@ int FUN_001427a4(outNeededMask, packCtx, inst)
         vectorFilledCount = usersVector[1];
       } while (loopIndex < vectorFilledCount);
     }
-    ((int (*)())FUN_00141044)(instWriteMaskOut,packCtx,inst);
+    ((int (*)())PostPack__getWriteMask)(instWriteMaskOut,packCtx,inst);
     *outNeededMask = neededMask & instWriteMaskOut[0];
   }
   return outNeededMask;
 }
 
-/* FUN_00142974 @ 0x142974 (1532 bytes) */
-int FUN_00142974(pass, inst, fromLane, toLane)
+/* PostPack__canMoveLane @ 0x142974 (1532 bytes) */
+int PostPack__canMoveLane(pass, inst, fromLane, toLane)
   int *pass;
   int *inst;
   int fromLane;
@@ -6259,7 +6259,7 @@ int FUN_00142974(pass, inst, fromLane, toLane)
   undefined4 pendingUsedLanesOut;
   undefined4 pendingUserWriteMaskOut [4];
   
-  ((int (*)())FUN_001427a4)(neededMaskDiscard,pass,inst);
+  ((int (*)())PostPack__getNeededLaneMask)(neededMaskDiscard,pass,inst);
   if (fromLane == toLane) {
     return 1;
   }
@@ -6326,7 +6326,7 @@ int FUN_00142974(pass, inst, fromLane, toLane)
           if (user != (int *)0x0) {
             if ((*(int *)(user[0x22] + 8) == 0x8e) ||
                (earlierUser = (**(code **)(*user + 0x5c))(user), earlierUser != 0)) {
-              ((int (*)())FUN_00141044)(&userWriteMaskOut,pass,user);
+              ((int (*)())PostPack__getWriteMask)(&userWriteMaskOut,pass,user);
               laneMaskWord = userWriteMaskOut;
               if (*(char *)((int)&laneMaskWord + fromLane) != '\0') goto LAB_00142f88;
             }
@@ -6368,9 +6368,9 @@ LAB_00142c3c:
     }
     pendingInst = *topSlot;
     Vector__removeAt(&vecCapacity,topIndex);
-    ((int (*)())FUN_001427a4)(&pendingNeededMaskOut,pass,pendingInst);
+    ((int (*)())PostPack__getNeededLaneMask)(&pendingNeededMaskOut,pass,pendingInst);
     laneMaskWord = pendingNeededMaskOut;
-    ((int (*)())FUN_00141090)(&pendingUsedLanesOut,pass,pendingInst);
+    ((int (*)())PostPack__getReadOnlyLaneMask)(&pendingUsedLanesOut,pass,pendingInst);
     pendingUsedLanes = pendingUsedLanesOut;
     if (*(char *)((int)&pendingUsedLanes + fromLane) != '\0') {
       flag1WithoutFlag7Result = OpcodeTraits__flag1WithoutFlag7(*pass,pendingInst);
@@ -6432,7 +6432,7 @@ LAB_00142c3c:
               if (user != (int *)0x0) {
                 if ((*(int *)(user[0x22] + 8) == 0x8e) ||
                    (userOrCount = (**(code **)(*user + 0x5c))(user), userOrCount != 0)) {
-                  ((int (*)())FUN_00141044)(pendingUserWriteMaskOut,pass,user);
+                  ((int (*)())PostPack__getWriteMask)(pendingUserWriteMaskOut,pass,user);
                   pendingUserWriteMask = pendingUserWriteMaskOut[0];
                   if (*(char *)((int)&pendingUserWriteMask + fromLane) != '\0') goto LAB_00142f88;
                 }
@@ -6481,8 +6481,8 @@ LAB_00142f88:
 #undef vecData
 #undef vecArena
 
-/* FUN_00142fdc @ 0x142fdc (1672 bytes) */
-int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
+/* PostPack__assignCompactLanes @ 0x142fdc (1672 bytes) */
+int PostPack__assignCompactLanes(packCtx, inst, inst2, laneMapA, laneMapB)
   undefined4 packCtx;
   int inst;
   int inst2;
@@ -6524,17 +6524,17 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
   uint neededMaskBOut;
   undefined4 usedLanesBOut [4];
   
-  ((int (*)())FUN_00141044)(&writeMaskA,packCtx,inst);
-  ((int (*)())FUN_00140e70)(readMaskScratchA,packCtx,inst);
-  ((int (*)())FUN_001427a4)(&neededMaskAOut,packCtx,inst);
+  ((int (*)())PostPack__getWriteMask)(&writeMaskA,packCtx,inst);
+  ((int (*)())PostPack__getReadMask)(readMaskScratchA,packCtx,inst);
+  ((int (*)())PostPack__getNeededLaneMask)(&neededMaskAOut,packCtx,inst);
   neededMaskA = neededMaskAOut;
-  ((int (*)())FUN_00141090)(&usedLanesAOut,packCtx,inst);
+  ((int (*)())PostPack__getReadOnlyLaneMask)(&usedLanesAOut,packCtx,inst);
   usedLanesA = usedLanesAOut;
-  ((int (*)())FUN_00141044)(&writeMaskB,packCtx,inst2);
-  ((int (*)())FUN_00140e70)(readMaskScratchB,packCtx,inst2);
-  ((int (*)())FUN_001427a4)(&neededMaskBOut,packCtx,inst2);
+  ((int (*)())PostPack__getWriteMask)(&writeMaskB,packCtx,inst2);
+  ((int (*)())PostPack__getReadMask)(readMaskScratchB,packCtx,inst2);
+  ((int (*)())PostPack__getNeededLaneMask)(&neededMaskBOut,packCtx,inst2);
   neededMaskB = neededMaskBOut;
-  ((int (*)())FUN_00141090)(usedLanesBOut,packCtx,inst2);
+  ((int (*)())PostPack__getReadOnlyLaneMask)(usedLanesBOut,packCtx,inst2);
   identityLaneMap = DAT_001b003c;
   extraSrcOfInst = 0;
   *(undefined4 *)laneMapA = DAT_001b003c;
@@ -6611,7 +6611,7 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
       }
       else {
         while ((*(char *)((int)&laneOccupied + laneCursor) != '\0' ||
-               (matchResult = ((int (*)())FUN_00142974)(packCtx,inst,loopIndex,laneCursor), matchResult == 0))) {
+               (matchResult = ((int (*)())PostPack__canMoveLane)(packCtx,inst,loopIndex,laneCursor), matchResult == 0))) {
           isLast = laneCursor == 3;
           laneCursor = laneCursor + 1;
           if (isLast) {
@@ -6661,11 +6661,11 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
         laneComponentOf[loopIndex] = laneComponent;
       }
       else if ((*(char *)((int)&laneWritten + loopIndex) == '\0') ||
-              (laneCursor = ((int (*)())FUN_00141100)(packCtx,*laneOwnerPtr,(uint)laneComponentOf[loopIndex],inst2,loopIndex), laneCursor == 0
+              (laneCursor = ((int (*)())PostPack__laneSourcesMatch)(packCtx,*laneOwnerPtr,(uint)laneComponentOf[loopIndex],inst2,loopIndex), laneCursor == 0
               )) {
         laneCursor = 0;
         while ((*(char *)((int)&laneOccupied + laneCursor) != '\0' ||
-               (matchResult = ((int (*)())FUN_00142974)(packCtx,inst2,loopIndex,laneCursor), matchResult == 0))) {
+               (matchResult = ((int (*)())PostPack__canMoveLane)(packCtx,inst2,loopIndex,laneCursor), matchResult == 0))) {
           isLast = laneCursor == 3;
           laneCursor = laneCursor + 1;
           if (isLast) {
@@ -6710,7 +6710,7 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
       loopIndexB = 0;
       do {
         if ((*(char *)((int)&laneWritten + loopIndexB) != '\0') &&
-           (matchResult = ((int (*)())FUN_00141100)(packCtx,laneOwnerInsts[loopIndexB],(uint)laneComponentOf[loopIndexB],inst,loopIndex),
+           (matchResult = ((int (*)())PostPack__laneSourcesMatch)(packCtx,laneOwnerInsts[loopIndexB],(uint)laneComponentOf[loopIndexB],inst,loopIndex),
            matchResult != 0)) {
           *laneMapA = (byte)loopIndexB;
           goto LAB_001434fc;
@@ -6747,7 +6747,7 @@ LAB_001434fc:
       loopIndexB = 0;
       do {
         if ((*(char *)((int)&laneWritten + loopIndexB) != '\0') &&
-           (matchResult = ((int (*)())FUN_00141100)(packCtx,laneOwnerInsts[loopIndexB],(uint)laneComponentOf[loopIndexB],inst2,loopIndex),
+           (matchResult = ((int (*)())PostPack__laneSourcesMatch)(packCtx,laneOwnerInsts[loopIndexB],(uint)laneComponentOf[loopIndexB],inst2,loopIndex),
            matchResult != 0)) {
           *laneMapB = (byte)loopIndexB;
           goto LAB_001435e4;
@@ -6780,8 +6780,8 @@ LAB_001435e4:
   } while( true );
 }
 
-/* FUN_00143664 @ 0x143664 (80 bytes) */
-int FUN_00143664(packCtx, inst, inst2, laneMapA, laneMapB)
+/* PostPack__tryAssignCompactLanes @ 0x143664 (80 bytes) */
+int PostPack__tryAssignCompactLanes(packCtx, inst, inst2, laneMapA, laneMapB)
   undefined4 packCtx;
   undefined4 inst;
   undefined4 inst2;
@@ -6790,8 +6790,8 @@ int FUN_00143664(packCtx, inst, inst2, laneMapA, laneMapB)
 {
   undefined4 callResult;
   
-  ((int (*)())FUN_00140e7c)(packCtx,inst,inst2);
-  callResult = ((int (*)())FUN_00142fdc)(packCtx,inst,inst2,laneMapA,laneMapB);
+  ((int (*)())PostPack__instsCompatible)(packCtx,inst,inst2);
+  callResult = ((int (*)())PostPack__assignCompactLanes)(packCtx,inst,inst2,laneMapA,laneMapB);
   return callResult;
 }
 
@@ -6806,18 +6806,18 @@ int PostPack__buildCandidate(packCtx, inst, inst2, candidate)
   
   *candidate = inst;
   candidate[1] = inst2;
-  stepResult = ((int (*)())FUN_00140e7c)(packCtx,inst,inst2);
+  stepResult = ((int (*)())PostPack__instsCompatible)(packCtx,inst,inst2);
   if ((((stepResult != 0) &&
-       (stepResult = ((int (*)())FUN_00143664)(packCtx,inst,inst2,candidate + 2,candidate + 3), stepResult != 0)) &&
+       (stepResult = ((int (*)())PostPack__tryAssignCompactLanes)(packCtx,inst,inst2,candidate + 2,candidate + 3), stepResult != 0)) &&
       (stepResult = ((int (*)())PostPack__canPairInEitherOrder)(packCtx,inst,inst2,candidate + 4), stepResult != 0)) &&
-     (stepResult = ((int (*)())FUN_00141930)(packCtx,inst,inst2,candidate + 5), stepResult != 0)) {
+     (stepResult = ((int (*)())PostPack__matchOperandLanes)(packCtx,inst,inst2,candidate + 5), stepResult != 0)) {
     return 1;
   }
   return 0;
 }
 
-/* FUN_0014375c @ 0x14375c (1672 bytes) */
-int FUN_0014375c(pass, rootInst, rootRemap)
+/* PostPack__remapRootUsers_0014375c @ 0x14375c (1672 bytes) */
+int PostPack__remapRootUsers_0014375c(pass, rootInst, rootRemap)
   int *pass;
   undefined4 rootInst;
   int rootRemap;
@@ -7090,7 +7090,7 @@ int FUN_0014375c(pass, rootInst, rootRemap)
             }
             if (userExtraSource == currentInst) {
               laneSelectBytes = DAT_001b003c;
-              ((int (*)())FUN_00141090)(userWriteMaskOut,pass,user);
+              ((int (*)())PostPack__getReadOnlyLaneMask)(userWriteMaskOut,pass,user);
               loopIndexB = 0;
               remapBytePtr = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
               userWriteMask = userWriteMaskOut[0];
@@ -7099,7 +7099,7 @@ int FUN_0014375c(pass, rootInst, rootRemap)
                   remapLane = *remapBytePtr;
                   remapLaneWide = (uint)remapLane;
                   if (remapLaneWide != loopIndexB) {
-                    ((int (*)())FUN_00141458)(pass,user,loopIndexB,remapLaneWide);
+                    ((int (*)())PostPack__swapInstLanes)(pass,user,loopIndexB,remapLaneWide);
                     *(byte *)((int)&laneSelectBytes + loopIndexB) = remapLane;
                     *(char *)((int)&laneSelectBytes + remapLaneWide) = (char)loopIndexB;
                   }
@@ -7155,8 +7155,8 @@ LAB_00143da4:
 #undef vec2Data
 #undef vec2Arena
 
-/* FUN_00143e40 @ 0x143e40 (676 bytes) */
-int FUN_00143e40(pass, pair)
+/* PostPack__scoreCandidate @ 0x143e40 (676 bytes) */
+int PostPack__scoreCandidate(pass, pair)
   undefined4 *pass;
   int *pair;
 {
@@ -7186,8 +7186,8 @@ int FUN_00143e40(pass, pair)
   }
   splitRgbAlphaEnabled = Compiler__isOptionEnabled(*pass,0x30);
   if ((splitRgbAlphaEnabled == 0) ||
-     ((((int (*)())FUN_00141044)(&writeMaskFirst,pass,firstInst), writeMaskFirst != 1 &&
-      (((int (*)())FUN_00141044)(writeMaskOut,pass,secondInst), writeMaskOut[0] != 1)))) {
+     ((((int (*)())PostPack__getWriteMask)(&writeMaskFirst,pass,firstInst), writeMaskFirst != 1 &&
+      (((int (*)())PostPack__getWriteMask)(writeMaskOut,pass,secondInst), writeMaskOut[0] != 1)))) {
     userVec = *(uint **)(firstInst + 0x10);
     userCount = userVec[1];
     if (userCount != 0) {
@@ -7269,8 +7269,8 @@ LAB_001440cc:
   return score;
 }
 
-/* FUN_001440e4 @ 0x1440e4 (4680 bytes) */
-int FUN_001440e4(pass, inst, inst2, groupSlotCursor)
+/* PostPack__rewriteLaneGroup @ 0x1440e4 (4680 bytes) */
+int PostPack__rewriteLaneGroup(pass, inst, inst2, groupSlotCursor)
   undefined4 *pass;
   int inst;
   int inst2;
@@ -8082,8 +8082,8 @@ LAB_001452d4:
   goto LAB_00144144;
 }
 
-/* FUN_0014532c @ 0x14532c (836 bytes) */
-int FUN_0014532c(pass, pair)
+/* PostPack__applyCandidate @ 0x14532c (836 bytes) */
+int PostPack__applyCandidate(pass, pair)
   undefined4 *pass;
   int *pair;
 {
@@ -8112,7 +8112,7 @@ int FUN_0014532c(pass, pair)
   }
   pass[2] = pass[2] + 1;
   if (0 < pair[5]) {
-    ((int (*)())FUN_001440e4)(pass,firstInst,secondInst,pair + 5);
+    ((int (*)())PostPack__rewriteLaneGroup)(pass,firstInst,secondInst,pair + 5);
   }
   firstExtraSource = 0;
   if ((*(uint *)(firstInst + 0x14) & 0x200) != 0) {
@@ -8191,11 +8191,11 @@ int FUN_0014532c(pass, pair)
     IRInst__setExtraOperandSource(firstInst,secondExtraSource,1,*pass);
     IRInst__getOperandRecord(firstInst,*(undefined4 *)(firstInst + 0x84));
   }
-  ((int (*)())FUN_0014375c)(pass,firstInst,firstSelect);
-  ((int (*)())FUN_0014375c)(pass,secondInst,secondSelect);
-  ((int (*)())FUN_001411dc)(pass,firstInst,firstInst,firstSelect);
-  ((int (*)())FUN_001411dc)(pass,firstInst,secondInst,secondSelect);
-  return ((int (*)())FUN_001415a4)(pass,secondInst,firstInst);
+  ((int (*)())PostPack__remapRootUsers_0014375c)(pass,firstInst,firstSelect);
+  ((int (*)())PostPack__remapRootUsers_0014375c)(pass,secondInst,secondSelect);
+  ((int (*)())PostPack__buildLaneMap)(pass,firstInst,firstInst,firstSelect);
+  ((int (*)())PostPack__buildLaneMap)(pass,firstInst,secondInst,secondSelect);
+  return ((int (*)())PostPack__replaceUsesAndRemove)(pass,secondInst,firstInst);
 }
 
 /* pass_post_pack_insts @ 0x145670 (3828 bytes) */
@@ -8302,7 +8302,7 @@ int pass_post_pack_insts(packCtx)
       do {
         nextInst = lookaheadInst;
         if ((*(uint *)(inst + 0x14) & 1) != 0) {
-          ((int (*)())FUN_00141044)(&packResult,packCtx,inst);
+          ((int (*)())PostPack__getWriteMask)(&packResult,packCtx,inst);
           packedWriteMask = packResult;
           if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
             operandRecord = IRInst__getOperandRecord(inst,*(undefined4 *)(inst + 0x84));
@@ -8453,7 +8453,7 @@ LAB_00146530:
           }
           Arena__free(arenaAt378,scanData);
         }
-        candidateScore = ((int (*)())FUN_00143e40)(packCtx,vecData + scoreOffset);
+        candidateScore = ((int (*)())PostPack__scoreCandidate)(packCtx,vecData + scoreOffset);
         if ((bestIndex == 0xffffffff) || (bestScore < candidateScore)) {
           bestIndex = scoreIndex;
           bestScore = candidateScore;
@@ -8483,7 +8483,7 @@ LAB_00146530:
       }
       bestOffset = bestIndex * 0x2c;
       bestCandidate = (int *)(vecData + bestOffset);
-      ((int (*)())FUN_0014532c)(packCtx,bestCandidate);
+      ((int (*)())PostPack__applyCandidate)(packCtx,bestCandidate);
       if (0x17 < packCtx[2]) goto LAB_00146538;
       arenaPtr = packCtx + 3;
       keptCountB = 0;
@@ -8901,8 +8901,8 @@ LAB_00146538:
   goto LAB_0014653c;
 }
 
-/* FUN_0014657c @ 0x14657c (92 bytes) */
-int FUN_0014657c(program)
+/* PostPack__runPass @ 0x14657c (92 bytes) */
+int PostPack__runPass(program)
   int program;
 {
   int packPassCtx [3];
@@ -8916,7 +8916,7 @@ int FUN_0014657c(program)
   packEntryCount = 0;
   packEntryCapacity = 0x10;
   packScratch = Arena__alloc(packArena,0x2c0);
-  ((int (*)())FUN_00140e5c)(packPassCtx,program);
+  ((int (*)())PostPack__initContext)(packPassCtx,program);
   ((int (*)())pass_post_pack_insts)(packPassCtx);
   return Arena__free(packArena,packScratch);
 }
@@ -8936,8 +8936,8 @@ int IRInst__getOperandSourceOrDefault(inst, operandIndex, defaultSource)
   return defaultSource;
 }
 
-/* FUN_00146624 @ 0x146624 (76 bytes) */
-int FUN_00146624(selectA, selectB)
+/* SelectWord__writtenLanesCoverRead @ 0x146624 (76 bytes) */
+int SelectWord__writtenLanesCoverRead(selectA, selectB)
   undefined4 selectA;
   undefined4 selectB;
 {
@@ -8962,8 +8962,8 @@ int FUN_00146624(selectA, selectB)
   return 0;
 }
 
-/* FUN_00146670 @ 0x146670 (132 bytes) */
-int FUN_00146670(selectOut, inst, strict, compiler)
+/* Target__acceptsSelect @ 0x146670 (132 bytes) */
+int Target__acceptsSelect(selectOut, inst, strict, compiler)
   undefined4 selectOut;
   int *inst;
   int strict;
@@ -9006,8 +9006,8 @@ int IRInst__getOperandSourceThroughMix(inst, operandIndex)
   return operandVReg;
 }
 
-/* FUN_0014675c @ 0x14675c (44 bytes) */
-int FUN_0014675c(instA, instB)
+/* Inst__sameSaturateAndScale @ 0x14675c (44 bytes) */
+int Inst__sameSaturateAndScale(instA, instB)
   int instA;
   int instB;
 {
@@ -9018,8 +9018,8 @@ int FUN_0014675c(instA, instB)
   return 0;
 }
 
-/* FUN_00146788 @ 0x146788 (96 bytes) */
-int FUN_00146788(obj, program)
+/* Inst__isPlainSingleUse @ 0x146788 (96 bytes) */
+int Inst__isPlainSingleUse(obj, program)
   int obj;
   undefined4 program;
 {
@@ -9034,8 +9034,8 @@ int FUN_00146788(obj, program)
   return result;
 }
 
-/* FUN_001467e8 @ 0x1467e8 (128 bytes) */
-int FUN_001467e8(inst, program)
+/* Inst__noIfHeaderBetweenBlocks @ 0x1467e8 (128 bytes) */
+int Inst__noIfHeaderBetweenBlocks(inst, program)
   int inst;
   int program;
 {
@@ -9057,8 +9057,8 @@ int FUN_001467e8(inst, program)
   return 1;
 }
 
-/* FUN_00146868 @ 0x146868 (228 bytes) */
-int FUN_00146868(inst, useInst, program)
+/* Inst__noBarrierBetween @ 0x146868 (228 bytes) */
+int Inst__noBarrierBetween(inst, useInst, program)
   int *inst;
   int *useInst;
   undefined4 program;

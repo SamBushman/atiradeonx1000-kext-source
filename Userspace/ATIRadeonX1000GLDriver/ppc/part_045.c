@@ -3628,8 +3628,8 @@ int SchedModel__uncountNode(model, node)
   return;
 }
 
-/* FUN_00172204 @ 0x172204 (200 bytes) */
-int FUN_00172204(model, node)
+/* SchedModel__countNodeResources @ 0x172204 (200 bytes) */
+int SchedModel__countNodeResources(model, node)
   int *model;
   undefined4 node;
 {
@@ -3822,8 +3822,8 @@ int ResourceModel__vslot11(this, node)
   return vcallcResult != 0;
 }
 
-/* FUN_001725c4 @ 0x1725c4 (600 bytes) */
-int FUN_001725c4(inst, operandIndex2, compiler)
+/* Inst__insertMovForOperand @ 0x1725c4 (600 bytes) */
+int Inst__insertMovForOperand(inst, operandIndex2, compiler)
   int *inst;
   int operandIndex2;
   int compiler;
@@ -3859,7 +3859,7 @@ int FUN_001725c4(inst, operandIndex2, compiler)
     IROperand__setModifierBits(inst + operandIndex2 * 6 + 0x23,2,0);
     IROperand__setModifierBits(newInst + 0xa4,2,1);
   }
-  callResult = FUN_00165604(block,newInst);
+  callResult = Program__findOrInsertEquivalentInst(block,newInst);
   operandIndex = 1;
   if (*(int *)(callResult + 0x158) == 0) {
     *(int *)(*(int *)(compiler + 0x6c4) + 0x238) = *(int *)(*(int *)(compiler + 0x6c4) + 0x238) + 1;
@@ -3957,8 +3957,8 @@ int ThreadModel__vslot4(this, node)
   return;
 }
 
-/* FUN_001729bc @ 0x1729bc (108 bytes) */
-int FUN_001729bc(key)
+/* ValueKey__anyLaneKeysEqual @ 0x1729bc (108 bytes) */
+int ValueKey__anyLaneKeysEqual(key)
   int key;
 {
   int *keyPtr;
@@ -4334,8 +4334,8 @@ int noop_172fb4()
   return;
 }
 
-/* FUN_00172fb8 @ 0x172fb8 (96 bytes) */
-int FUN_00172fb8(valueKey)
+/* ValueKey__producerIsOpcode2aFlagged @ 0x172fb8 (96 bytes) */
+int ValueKey__producerIsOpcode2aFlagged(valueKey)
   int valueKey;
 {
   int vcall54Result;
@@ -4348,8 +4348,8 @@ int FUN_00172fb8(valueKey)
   return result;
 }
 
-/* FUN_00173018 @ 0x173018 (332 bytes) */
-int FUN_00173018(ctx)
+/* ValueKey__rewriteDuplicateLanesAsMov @ 0x173018 (332 bytes) */
+int ValueKey__rewriteDuplicateLanesAsMov(ctx)
   int ctx;
 {
   int operandRecord;

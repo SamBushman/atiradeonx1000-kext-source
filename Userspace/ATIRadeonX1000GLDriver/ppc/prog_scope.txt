@@ -1,5 +1,5 @@
 # functions whose variable `program` is the shader-compiler Program (distinctive offsets used); fork E3
-FUN_0013da3c program
+Program__rewriteAttribShaderInsts_0013da3c program
 FudoPs__peepholeCombine program
 IRInst__addToUseLists program
 IRInst__hasSingleUse program

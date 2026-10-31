@@ -3306,34 +3306,34 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 137620	137640	eh-pad	InterferenceGraph__growNodeArray	8	0x193cc0,__Unwind_Resume
 13785c	13787c	eh-pad	InterferenceGraph__addNodes	8	0x193cc0,__Unwind_Resume
 139384	1394a0	table	IRInst__isOpcodeInSet139344	71	
-139f4c	139f64	eh-pad	FUN_00139d40	6	0x193cc0,__Unwind_Resume
+139f4c	139f64	eh-pad	Program__collectRewriteCandidates_00139d40	6	0x193cc0,__Unwind_Resume
 13b49c	13b4b8	other	Program__hoistFetchInsts	7	0x193cc0
 13b808	13b824	other	Program__hoistFetchInsts	7	0x193cc0
 13b978	13b994	other	Program__hoistFetchInsts	7	0x193cc0
 13ba90	13bab0	eh-pad	Program__hoistFetchInsts	8	0x193cc0,__Unwind_Resume
 13c1cc	13c1e4	eh-pad	Program__eliminateDeadInstsAndRecountUses	6	0x193cc0,__Unwind_Resume
-13c5d4	13c600	eh-pad	FUN_0013c210	11	0x193cc0,__Unwind_Resume
+13c5d4	13c600	eh-pad	Program__runPeepholeRewrite	11	0x193cc0,__Unwind_Resume
 13ca48	13ca74	eh-pad	Program__scanUsevectorChains	11	0x193cc0,__Unwind_Resume
 13d2d8	13d2f0	eh-pad	pass_rewrite	6	0x193cc0,__Unwind_Resume
-13dba4	13dba8	millicode	FUN_0013da3c	1	
-13dd38	13dd50	eh-pad	FUN_0013da3c	6	0x193cc0,__Unwind_Resume
-13de58	13de74	other	FUN_0013da3c	7	0x193cc0
-13e7c8	13e7cc	millicode	FUN_0013da3c	1	
-13eda8	13edc4	other	FUN_0013da3c	7	0x193cc0
-13ee04	13ee08	millicode	FUN_0013da3c	1	
-13f3bc	13f3d4	eh-pad	FUN_0013da3c	6	0x193cc0,__Unwind_Resume
-13fd28	13fd44	other	FUN_0013fc38	7	0x193cc0
-13fd5c	13fd78	other	FUN_0013fc38	7	0x193cc0
-1407a0	1407bc	other	FUN_0013fc38	7	0x193cc0
-140dfc	140e10	other	FUN_0013fc38	5	0x193cc0
-140e44	140e5c	eh-pad	FUN_0013fc38	6	0x193cc0,__Unwind_Resume
-142f70	142f88	eh-pad	FUN_00142974	6	0x193cc0,__Unwind_Resume
-143de4	143df8	other	FUN_0014375c	5	0x193cc0
-143e18	143e30	eh-pad	FUN_0014375c	6	0x193cc0,__Unwind_Resume
+13dba4	13dba8	millicode	Program__rewriteAttribShaderInsts_0013da3c	1	
+13dd38	13dd50	eh-pad	Program__rewriteAttribShaderInsts_0013da3c	6	0x193cc0,__Unwind_Resume
+13de58	13de74	other	Program__rewriteAttribShaderInsts_0013da3c	7	0x193cc0
+13e7c8	13e7cc	millicode	Program__rewriteAttribShaderInsts_0013da3c	1	
+13eda8	13edc4	other	Program__rewriteAttribShaderInsts_0013da3c	7	0x193cc0
+13ee04	13ee08	millicode	Program__rewriteAttribShaderInsts_0013da3c	1	
+13f3bc	13f3d4	eh-pad	Program__rewriteAttribShaderInsts_0013da3c	6	0x193cc0,__Unwind_Resume
+13fd28	13fd44	other	Program__combineInstPairs_0013fc38	7	0x193cc0
+13fd5c	13fd78	other	Program__combineInstPairs_0013fc38	7	0x193cc0
+1407a0	1407bc	other	Program__combineInstPairs_0013fc38	7	0x193cc0
+140dfc	140e10	other	Program__combineInstPairs_0013fc38	5	0x193cc0
+140e44	140e5c	eh-pad	Program__combineInstPairs_0013fc38	6	0x193cc0,__Unwind_Resume
+142f70	142f88	eh-pad	PostPack__canMoveLane	6	0x193cc0,__Unwind_Resume
+143de4	143df8	other	PostPack__remapRootUsers_0014375c	5	0x193cc0
+143e18	143e30	eh-pad	PostPack__remapRootUsers_0014375c	6	0x193cc0,__Unwind_Resume
 146564	14657c	eh-pad	pass_post_pack_insts	6	0x193cc0,__Unwind_Resume
-1465d8	1465f0	eh-pad	FUN_0014657c	6	0x193cc0,__Unwind_Resume
+1465d8	1465f0	eh-pad	PostPack__runPass	6	0x193cc0,__Unwind_Resume
 1473f0	1474a8	table	IRInst__isOpcodeInSet147398	46	
-148328	14832c	eh-pad	FUN_00147f54	1	__Unwind_Resume
+148328	14832c	eh-pad	Inst__foldOutputScaleIntoConstants	1	__Unwind_Resume
 14b00c	14b010	eh-pad	Inst__collapseMulSplatByDotOnes	1	__Unwind_Resume
 14b720	14b724	millicode	Inst__collapseAddIntoMadMulAddend	1	
 14b7f4	14b7f8	eh-pad	Inst__collapseAddIntoMadMulAddend	1	__Unwind_Resume
@@ -3341,21 +3341,21 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 14d794	14d798	eh-pad	Inst__collapseDot3VectorTimesScaledVector	1	__Unwind_Resume
 14e1b8	14e1bc	eh-pad	Inst__collapseThreeComponentSumToDot3	1	__Unwind_Resume
 14e984	14e99c	eh-pad	Inst__reassociate_14e6e4	6	0x193cc0,__Unwind_Resume
-1518ac	1518b0	eh-pad	FUN_00151370	1	__Unwind_Resume
-1521dc	1521e0	eh-pad	FUN_00151a74	1	__Unwind_Resume
-152b28	152b2c	eh-pad	FUN_001524b8	1	__Unwind_Resume
-154118	15411c	eh-pad	FUN_00152ea8	1	__Unwind_Resume
-154a44	154a48	eh-pad	FUN_001541f0	1	__Unwind_Resume
+1518ac	1518b0	eh-pad	Inst__mergeSplatSourceInsts_00151370	1	__Unwind_Resume
+1521dc	1521e0	eh-pad	Inst__mergeSplatSourceInsts_00151a74	1	__Unwind_Resume
+152b28	152b2c	eh-pad	Inst__mergeSplatSourceInsts_001524b8	1	__Unwind_Resume
+154118	15411c	eh-pad	Inst__mergeAddWithSharedConstant_00152ea8	1	__Unwind_Resume
+154a44	154a48	eh-pad	Inst__mergeMulWithSharedConstant_001541f0	1	__Unwind_Resume
 155148	15514c	millicode	Inst__mergeComponentMovsIntoCnd	1	
 155264	155268	eh-pad	Inst__mergeComponentMovsIntoCnd	1	__Unwind_Resume
 155c88	155c8c	millicode	Inst__collapseAlgebraic_00155a60	1	
 15626c	156270	eh-pad	Inst__collapseAlgebraic_00155a60	1	__Unwind_Resume
-156f34	156f38	millicode	FUN_00156d48	1	
-1579dc	1579e0	millicode	FUN_00156d48	1	
-157b48	157b60	eh-pad	FUN_00156d48	6	0x193cc0,__Unwind_Resume
+156f34	156f38	millicode	Inst__collapseAssociativeChain_00156d48	1	
+1579dc	1579e0	millicode	Inst__collapseAssociativeChain_00156d48	1	
+157b48	157b60	eh-pad	Inst__collapseAssociativeChain_00156d48	6	0x193cc0,__Unwind_Resume
 1585a0	1585a4	eh-pad	Inst__collapseAlgebraic_00158264	1	__Unwind_Resume
 1595b4	1595cc	eh-pad	Inst__distributeResultScale	6	0x193cc0,__Unwind_Resume
-15a398	15a3b0	table	FUN_00159b58	6	
+15a398	15a3b0	table	Inst__foldCompareChain_00159b58	6	
 15d458	15d45c	millicode	Inst__collapseAlgebraic_0015ceb0	1	
 15dd3c	15dd40	eh-pad	Inst__collapseAlgebraic_0015ceb0	1	__Unwind_Resume
 15e120	15e124	millicode	Inst__collapseMulOfExps	1	
@@ -3364,11 +3364,11 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 15ecf4	15ecf8	millicode	Inst__tryMix	1	
 15f108	15f10c	millicode	Inst__tryMix	1	
 15f2a4	15f2a8	eh-pad	Inst__tryMix	1	__Unwind_Resume
-15fe5c	15fe60	eh-pad	FUN_0015f44c	1	__Unwind_Resume
-161550	161554	millicode	FUN_00160eb0	1	
-1615f8	1615fc	millicode	FUN_00160eb0	1	
-1616c8	1616cc	eh-pad	FUN_00160eb0	1	__Unwind_Resume
-162b2c	162b30	eh-pad	FUN_001621c8	1	__Unwind_Resume
+15fe5c	15fe60	eh-pad	Inst__insertMovForExtraSource_0015f44c	1	__Unwind_Resume
+161550	161554	millicode	Inst__foldPowOfConstant	1	
+1615f8	1615fc	millicode	Inst__foldPowOfConstant	1	
+1616c8	1616cc	eh-pad	Inst__foldPowOfConstant	1	__Unwind_Resume
+162b2c	162b30	eh-pad	Inst__mergeSplatSourceInsts_001621c8	1	__Unwind_Resume
 165f24	165f28	millicode	Scheduler__createNode	1	
 165f38	165f58	eh-pad	Scheduler__createNode	8	0x193cc0,__Unwind_Resume
 166220	166224	millicode	Scheduler__findOrCreateExternalNode	1	
@@ -3399,7 +3399,7 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 172f20	172f24	millicode	Compiler__resetValueNumbers	1	
 172f2c	172f34	millicode	returnZero_172f24	2	
 1764dc	1764e0	millicode	ValueKey__findOrInsertLiteral	1	
-176e0c	176e20	other	FUN_00176d6c	5	
+176e0c	176e20	other	Compiler__valueNumbersRelatedByFields20	5	
 178478	1784f8	table	ValueKey__classifyLaneRangeClass	32	
 1787b4	17887c	table	ValueKey__classifyLaneCompareClass	50	
 179228	179248	eh-pad	ValueKey__insertTempCopyOfOperand	8	0x193cc0,__Unwind_Resume

@@ -34,8 +34,8 @@ int ValueKey__canonicalizeCommutativeOperands(ctx)
   return 0;
 }
 
-/* FUN_0017343c @ 0x17343c (304 bytes) */
-int FUN_0017343c(ctx, block)
+/* ValueKey__markRegisterLiveInBlock @ 0x17343c (304 bytes) */
+int ValueKey__markRegisterLiveInBlock(ctx, block)
   int ctx;
   int block;
 {
@@ -71,8 +71,8 @@ int FUN_0017343c(ctx, block)
   return;
 }
 
-/* FUN_0017356c @ 0x17356c (176 bytes) */
-int FUN_0017356c(ctx)
+/* ValueKey__allRowsUniform @ 0x17356c (176 bytes) */
+int ValueKey__allRowsUniform(ctx)
   int ctx;
 {
   int callResult;
@@ -105,8 +105,8 @@ int IRInst__isCndFloatOp(inst)
   return *(int *)(*(int *)(inst + 0x88) + 8) - 0x24U < 3;
 }
 
-/* FUN_00173638 @ 0x173638 (284 bytes) */
-int FUN_00173638(ctx)
+/* ValueKey__eliminateTrivialInst @ 0x173638 (284 bytes) */
+int ValueKey__eliminateTrivialInst(ctx)
   int ctx;
 {
   int inst;
@@ -146,8 +146,8 @@ LAB_00173718:
   return 1;
 }
 
-/* FUN_00173754 @ 0x173754 (280 bytes) */
-int FUN_00173754(ctx, otherKey)
+/* ValueKey__tryMergeDestWith @ 0x173754 (280 bytes) */
+int ValueKey__tryMergeDestWith(ctx, otherKey)
   int ctx;
   int otherKey;
 {
@@ -296,8 +296,8 @@ int ValueKey__initCopy(key, inst, compiler)
   return ((int (*)())ValueKey__fillSourceLaneUsage)(key);
 }
 
-/* FUN_00173a48 @ 0x173a48 (176 bytes) */
-int FUN_00173a48(inst, compiler)
+/* IRInst__allOperandsSplat @ 0x173a48 (176 bytes) */
+int IRInst__allOperandsSplat(inst, compiler)
   int *inst;
   undefined4 compiler;
 {
@@ -324,8 +324,8 @@ int FUN_00173a48(inst, compiler)
   return 0;
 }
 
-/* FUN_00173af8 @ 0x173af8 (160 bytes) */
-int FUN_00173af8(ctx, laneFlags)
+/* ValueKey__laneFlagsAllowDest @ 0x173af8 (160 bytes) */
+int ValueKey__laneFlagsAllowDest(ctx, laneFlags)
   int ctx;
   int *laneFlags;
 {
@@ -395,8 +395,8 @@ int Program__eliminateRedundantInst(program, inst, block, pass)
   return removed;
 }
 
-/* FUN_00173cdc @ 0x173cdc (308 bytes) */
-int FUN_00173cdc(ctx, inst)
+/* ValueKey__rewriteAsSwizzleMov @ 0x173cdc (308 bytes) */
+int ValueKey__rewriteAsSwizzleMov(ctx, inst)
   int ctx;
   int inst;
 {
@@ -784,7 +784,7 @@ LAB_00174410:
   if (vcall30Result == 0) {
     vcall5cResult = (**(code **)(**(int **)(ctx + 0xb0) + 0x5c))(*(int **)(ctx + 0xb0));
     if (vcall5cResult == 0) {
-      fun172fb8Result = FUN_00172fb8(ctx);
+      fun172fb8Result = ValueKey__producerIsOpcode2aFlagged(ctx);
       if (fun172fb8Result == 0) {
         keyInstPtr = *(int **)(ctx + 0xb0);
         if ((*(int *)(keyInstPtr[0x22] + 8) == 0xf7) || (*(int *)(keyInstPtr[0x22] + 8) == 0xb4)) {
@@ -826,8 +826,8 @@ int ValueKey__rebuild(valueKey)
   return ((int (*)())ValueKey__fill)(valueKey);
 }
 
-/* FUN_001745f0 @ 0x1745f0 (216 bytes) */
-int FUN_001745f0(ctx)
+/* ValueKey__simplifyAll @ 0x1745f0 (216 bytes) */
+int ValueKey__simplifyAll(ctx)
   int ctx;
 {
   int callResult;
@@ -861,8 +861,8 @@ int FUN_001745f0(ctx)
   return result;
 }
 
-/* FUN_001746c8 @ 0x1746c8 (252 bytes) */
-int FUN_001746c8(compiler, pointerKey)
+/* Compiler__internPointer @ 0x1746c8 (252 bytes) */
+int Compiler__internPointer(compiler, pointerKey)
   int compiler;
   undefined4 pointerKey;
 {
@@ -909,8 +909,8 @@ int FUN_001746c8(compiler, pointerKey)
   return pointerRecord;
 }
 
-/* FUN_001747c4 @ 0x1747c4 (196 bytes) */
-int FUN_001747c4(key, scopeIndex, outermostScope, compiler)
+/* Compiler__findInScopes40c @ 0x1747c4 (196 bytes) */
+int Compiler__findInScopes40c(key, scopeIndex, outermostScope, compiler)
   undefined4 key;
   uint scopeIndex;
   int outermostScope;
@@ -948,8 +948,8 @@ int FUN_001747c4(key, scopeIndex, outermostScope, compiler)
   return 0;
 }
 
-/* FUN_00174888 @ 0x174888 (196 bytes) */
-int FUN_00174888(key, scopeIndex, outermostScope, compiler)
+/* Compiler__findInScopes408 @ 0x174888 (196 bytes) */
+int Compiler__findInScopes408(key, scopeIndex, outermostScope, compiler)
   undefined4 key;
   uint scopeIndex;
   int outermostScope;
@@ -987,8 +987,8 @@ int FUN_00174888(key, scopeIndex, outermostScope, compiler)
   return 0;
 }
 
-/* FUN_0017494c @ 0x17494c (440 bytes) */
-int FUN_0017494c(ctx, scopeIndexHigh, scopeIndexLow)
+/* ValueKey__internScopedKey @ 0x17494c (440 bytes) */
+int ValueKey__internScopedKey(ctx, scopeIndexHigh, scopeIndexLow)
   int ctx;
   undefined4 scopeIndexHigh;
   undefined4 scopeIndexLow;
@@ -1034,7 +1034,7 @@ int FUN_0017494c(ctx, scopeIndexHigh, scopeIndexLow)
       laneKeyCursor = laneKeyCursor + 4;
       loopIndex = loopIndex + 1;
     } while (moreComponents);
-    foundKey = ((int (*)())FUN_00174888)(allocation + 1,scopeIndexHigh,scopeIndexLow,
+    foundKey = ((int (*)())Compiler__findInScopes408)(allocation + 1,scopeIndexHigh,scopeIndexLow,
                          *(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4));
     if (foundKey != 0) {
       matchedInst = *(int *)(foundKey + 0xb0);
@@ -1065,8 +1065,8 @@ int FUN_0017494c(ctx, scopeIndexHigh, scopeIndexLow)
   return 0;
 }
 
-/* FUN_00174b04 @ 0x174b04 (476 bytes) */
-int FUN_00174b04(ctx, startBlockIndex, endBlockIndex)
+/* ValueKey__markUsesBetweenBlocks @ 0x174b04 (476 bytes) */
+int ValueKey__markUsesBetweenBlocks(ctx, startBlockIndex, endBlockIndex)
   int ctx;
   uint startBlockIndex;
   int endBlockIndex;
@@ -1157,8 +1157,8 @@ LAB_00174ca8:
   } while( true );
 }
 
-/* FUN_00174ce0 @ 0x174ce0 (300 bytes) */
-int FUN_00174ce0(compiler, keyValueB, keyValueA)
+/* Compiler__internLaneExpr @ 0x174ce0 (300 bytes) */
+int Compiler__internLaneExpr(compiler, keyValueB, keyValueA)
   int compiler;
   undefined4 keyValueB;
   undefined4 keyValueA;
@@ -1213,8 +1213,8 @@ int FUN_00174ce0(compiler, keyValueB, keyValueA)
   return exprRecord;
 }
 
-/* FUN_00174e0c @ 0x174e0c (2764 bytes) */
-int FUN_00174e0c(valueKey)
+/* ValueKey__computeLaneFlags @ 0x174e0c (2764 bytes) */
+int ValueKey__computeLaneFlags(valueKey)
   int *valueKey;
 {
   int laneCounter;
@@ -1306,7 +1306,7 @@ LAB_00174efc:
     do {
       compilerForKey = valueKey[0x8e];
       nextValueNumberResult = Compiler__nextValueNumber(compilerForKey);
-      callResult2 = (int *)((int (*)())FUN_001746c8)(compilerForKey,nextValueNumberResult);
+      callResult2 = (int *)((int (*)())Compiler__internPointer)(compilerForKey,nextValueNumberResult);
       callResult2[2] = loopIndex2;
       callResult2[1] = (int)valueKey;
       HashTable__insert(*(undefined4 *)(valueKey[0x8e] + 1000),callResult2);
@@ -1390,7 +1390,7 @@ LAB_00174efc:
       laneValuePtr = valueKey;
       while( true ) {
         if (((int)*(char *)(keyInst + 0x15c) >> (loopIndex3 & 0x3f) & 1U) == 0) {
-          callResult2 = (int *)((int (*)())FUN_00174ce0)(valueKey[0x8e],loopIndex3,valueKey);
+          callResult2 = (int *)((int (*)())Compiler__internLaneExpr)(valueKey[0x8e],loopIndex3,valueKey);
           laneValuePtr[0x10] = (int)callResult2;
           *laneValuePtr = *callResult2;
         }
@@ -1413,8 +1413,8 @@ LAB_00174efc:
        flagBit9Result != 0)) &&
       (flagBit8Result = OpcodeTraits__flagBit8(*(undefined4 *)(*(int *)(valueKey[0x2c] + 0x88) + 8),valueKey[0x8e]),
       flagBit8Result == 0)) &&
-     ((predicateResult = ((int (*)())FUN_00173a48)(valueKey[0x2c],valueKey[0x8e]), predicateResult == 0 &&
-      (predicateResult = ((int (*)())FUN_0017356c)(valueKey), predicateResult == 0)))) {
+     ((predicateResult = ((int (*)())IRInst__allOperandsSplat)(valueKey[0x2c],valueKey[0x8e]), predicateResult == 0 &&
+      (predicateResult = ((int (*)())ValueKey__allRowsUniform)(valueKey), predicateResult == 0)))) {
     keyInst = valueKey[0x2c];
     returnZero_172f24Result = returnZero_172f24(keyInst);
     if (returnZero_172f24Result == 0) {
@@ -1429,7 +1429,7 @@ LAB_00174efc:
           if (*(int *)(keyInstPtr2[0x22] + 8) == 0x8e) {
             callResult = ValueKey__allOperandLanesEqual(valueKey,loopIndex);
             if (callResult == 0) {
-              callResult2 = (int *)((int (*)())FUN_00174ce0)(valueKey[0x8e],loopIndex,valueKey);
+              callResult2 = (int *)((int (*)())Compiler__internLaneExpr)(valueKey[0x8e],loopIndex,valueKey);
               exprRecordWord = *callResult2;
             }
             else {
@@ -1667,14 +1667,14 @@ LAB_001754f8:
     countdown2 = countdown2 + -1;
   } while (countdown2 != 0);
 LAB_001757ec:
-  ((int (*)())FUN_00173af8)(valueKey,laneFlags);
+  ((int (*)())ValueKey__laneFlagsAllowDest)(valueKey,laneFlags);
   ValueKey__computeLaneCompareCodes(valueKey);
   ValueKey__computeLaneRangeClasses(valueKey);
   return;
 }
 
-/* FUN_001758d8 @ 0x1758d8 (356 bytes) */
-int FUN_001758d8(valueKey, scopeIndexHigh, scopeIndexLow, program)
+/* Compiler__findInScopes404 @ 0x1758d8 (356 bytes) */
+int Compiler__findInScopes404(valueKey, scopeIndexHigh, scopeIndexLow, program)
   undefined4 *valueKey;
   uint scopeIndexHigh;
   int scopeIndexLow;
@@ -1726,7 +1726,7 @@ int FUN_001758d8(valueKey, scopeIndexHigh, scopeIndexLow, program)
       scopeByteOffset = scopeByteOffset + -4;
     } while (scopeIndexLow <= (int)scopeIndex);
   }
-  ((int (*)())FUN_00174e0c)(valueKey);
+  ((int (*)())ValueKey__computeLaneFlags)(valueKey);
   vector2 = *(uint **)(program + 0x404);
   if (scopeIndexHigh < *vector2) {
     vectorFilledCount2 = vector2[1];
@@ -1743,8 +1743,8 @@ int FUN_001758d8(valueKey, scopeIndexHigh, scopeIndexLow, program)
   return (undefined4 *)0x0;
 }
 
-/* FUN_00175a3c @ 0x175a3c (260 bytes) */
-undefined4 * FUN_00175a3c(int compiler,undefined4 unusedArg2,undefined4 valueNumber,double constantValue)
+/* Compiler__internFloatConstant @ 0x175a3c (260 bytes) */
+undefined4 * Compiler__internFloatConstant(int compiler,undefined4 unusedArg2,undefined4 valueNumber,double constantValue)
 {
   undefined4 *exprRecord;
   undefined4 *allocation;
@@ -1787,8 +1787,8 @@ undefined4 * FUN_00175a3c(int compiler,undefined4 unusedArg2,undefined4 valueNum
   return exprRecord;
 }
 
-/* FUN_00175b40 @ 0x175b40 (620 bytes) */
-int FUN_00175b40(valueKey)
+/* ValueKey__initSourceLaneKinds @ 0x175b40 (620 bytes) */
+int ValueKey__initSourceLaneKinds(valueKey)
   undefined4 *valueKey;
 {
   int keyInst;
@@ -1940,26 +1940,26 @@ LAB_00176244:
     valueKey = *keyRef;
     if (*(int *)(*(int *)(*(int *)(valueKey + 0xb0) + 0x88) + 8) == 0x8e) {
 LAB_00175e58:
-      valueKey = ((int (*)())FUN_00173638)(valueKey);
+      valueKey = ((int (*)())ValueKey__eliminateTrivialInst)(valueKey);
       if (valueKey == 0) {
         ValueKey__createLaneRecordsByOpcode(*keyRef);
         canonicalizeCommutativeOperandsResult = ((int (*)())ValueKey__canonicalizeCommutativeOperands)(*keyRef);
         if (canonicalizeCommutativeOperandsResult != 0) {
           ((int (*)())ValueKey__rebuild)(*keyRef);
         }
-        callResult = ((int (*)())FUN_001758d8)(*keyRef,valueNumber,outermostScope,program);
-        ((int (*)())FUN_00175b40)(*keyRef);
+        callResult = ((int (*)())Compiler__findInScopes404)(*keyRef,valueNumber,outermostScope,program);
+        ((int (*)())ValueKey__initSourceLaneKinds)(*keyRef);
         ValueKey__propagateLaneValues(*keyRef);
-        callResult2 = ((int (*)())FUN_00174888)(*keyRef,valueNumber,outermostScope,program);
+        callResult2 = ((int (*)())Compiler__findInScopes408)(*keyRef,valueNumber,outermostScope,program);
         if (callResult2 == 0) {
           iVar2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 100))(*(int **)(*keyRef + 0xb0));
           if ((((iVar2 == 0) &&
                (iVar2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))
                                   (*(int **)(*keyRef + 0xb0)), iVar2 == 0)) &&
-              (iVar2 = FUN_00172fb8(*keyRef), iVar2 == 0)) &&
+              (iVar2 = ValueKey__producerIsOpcode2aFlagged(*keyRef), iVar2 == 0)) &&
              (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),8), iVar2 != 0)) {
-            callResult2 = ((int (*)())FUN_001747c4)(*keyRef,valueNumber,outermostScope,program);
-            if ((callResult2 != 0) && (callResult2 = ((int (*)())FUN_00173cdc)(*keyRef,callResult2), callResult2 != 0)) {
+            callResult2 = ((int (*)())Compiler__findInScopes40c)(*keyRef,valueNumber,outermostScope,program);
+            if ((callResult2 != 0) && (callResult2 = ((int (*)())ValueKey__rewriteAsSwizzleMov)(*keyRef,callResult2), callResult2 != 0)) {
               keyInst = *(int *)(*keyRef + 0xb0);
               currentDefinition2 = VReg__currentDefinition(*(undefined4 *)(keyInst + 0xa4),*(undefined4 *)(program + 0x3a0),
                                    *(uint *)(program + 8));
@@ -1998,9 +1998,9 @@ LAB_001760e4:
           if ((((valueKey2 == 0) &&
                (valueKey2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))
                                   (*(int **)(*keyRef + 0xb0)), valueKey2 == 0)) &&
-              (valueKey2 = FUN_00172fb8(*keyRef), valueKey2 == 0)) &&
-             (((callResult != 0 && (callResult = ((int (*)())FUN_00173754)(*keyRef,callResult), callResult != 0)) ||
-              (callResult = ((int (*)())FUN_0017494c)(*keyRef,valueNumber,outermostScope), callResult != 0)))) {
+              (valueKey2 = ValueKey__producerIsOpcode2aFlagged(*keyRef), valueKey2 == 0)) &&
+             (((callResult != 0 && (callResult = ((int (*)())ValueKey__tryMergeDestWith)(*keyRef,callResult), callResult != 0)) ||
+              (callResult = ((int (*)())ValueKey__internScopedKey)(*keyRef,valueNumber,outermostScope), callResult != 0)))) {
             inst = *(int *)(*keyRef + 0xb0);
             currentDefinition = VReg__currentDefinition(*(undefined4 *)(inst + 0xa4),*(undefined4 *)(program + 0x3a0),
                                  *(uint *)(program + 8));
@@ -2042,7 +2042,7 @@ LAB_001760e4:
       }
     }
     else {
-      valueKey = ((int (*)())FUN_001745f0)(valueKey);
+      valueKey = ((int (*)())ValueKey__simplifyAll)(valueKey);
       if ((valueKey == 0) ||
          (valueKey = Program__tryEliminateRedundantCopy(program,*(undefined4 *)(*keyRef + 0xb0),block), valueKey == 0)) {
         valueKey = *keyRef;
@@ -2082,8 +2082,8 @@ int IROperand__copyRegisterAndSelect(dstRecord, srcRecord)
   return;
 }
 
-/* FUN_0017629c @ 0x17629c (32 bytes) */
-int FUN_0017629c(inst, compiler)
+/* ValueKey__callTargetHook12c @ 0x17629c (32 bytes) */
+int ValueKey__callTargetHook12c(inst, compiler)
   undefined4 inst;
   int compiler;
 {
@@ -2099,8 +2099,8 @@ int noop_1762bc()
   return;
 }
 
-/* FUN_001762c0 @ 0x1762c0 (68 bytes) */
-int FUN_001762c0(compiler)
+/* Compiler__internLaneExprs1to3 @ 0x1762c0 (68 bytes) */
+int Compiler__internLaneExprs1to3(compiler)
   undefined4 compiler;
 {
   bool moreComponents;
@@ -2108,7 +2108,7 @@ int FUN_001762c0(compiler)
   
   loopIndex = 1;
   do {
-    ((int (*)())FUN_001746c8)(compiler,loopIndex);
+    ((int (*)())Compiler__internPointer)(compiler,loopIndex);
     moreComponents = loopIndex != 3;
     loopIndex = loopIndex + 1;
   } while (moreComponents);
@@ -2221,8 +2221,8 @@ int ValueKey__findOrInsertLiteral(undefined4 unusedArg1,int key,int row,double l
   return loopIndex + 1;
 }
 
-/* FUN_001764e0 @ 0x1764e0 (28 bytes) */
-int FUN_001764e0(key, sourceIndex)
+/* ValueKey__sourceWordIs4 @ 0x1764e0 (28 bytes) */
+int ValueKey__sourceWordIs4(key, sourceIndex)
   int key;
   int sourceIndex;
 {
@@ -2245,8 +2245,8 @@ int ValueKey__sourceKindIs4(key, sourceIndex)
   return *(int *)(sourceIndex * 4 + key + 0xa0) == 4;
 }
 
-/* FUN_00176534 @ 0x176534 (48 bytes) */
-int FUN_00176534(keyA, keyB)
+/* ValueKey__compareValueNumbers @ 0x176534 (48 bytes) */
+int ValueKey__compareValueNumbers(keyA, keyB)
   int keyA;
   int keyB;
 {
@@ -2259,15 +2259,15 @@ int FUN_00176534(keyA, keyB)
   return 2;
 }
 
-/* FUN_00176564 @ 0x176564 (16 bytes) */
-int FUN_00176564(opcode)
+/* Opcode__isF9 @ 0x176564 (16 bytes) */
+int Opcode__isF9(opcode)
   int opcode;
 {
   return opcode == 0xf9;
 }
 
-/* FUN_00176574 @ 0x176574 (48 bytes) */
-int FUN_00176574(opcode)
+/* Opcode__isOneOf1fOr32OrA7A8 @ 0x176574 (48 bytes) */
+int Opcode__isOneOf1fOr32OrA7A8(opcode)
   int opcode;
 {
   if (opcode == 0x32) {
@@ -2284,8 +2284,8 @@ int FUN_00176574(opcode)
   return 0;
 }
 
-/* FUN_001765a4 @ 0x1765a4 (64 bytes) */
-int FUN_001765a4(key, literalValue, row)
+/* ValueKey__setRowLiteral @ 0x1765a4 (64 bytes) */
+int ValueKey__setRowLiteral(key, literalValue, row)
   int key;
   undefined4 literalValue;
   int row;
@@ -2317,8 +2317,8 @@ int FudoPs__vslot11_isNotType2Or5(this, param_2)
   return 0;
 }
 
-/* FUN_0017662c @ 0x17662c (144 bytes) */
-int FUN_0017662c(ctx)
+/* ValueKey__markUnsetLanesUnknown @ 0x17662c (144 bytes) */
+int ValueKey__markUnsetLanesUnknown(ctx)
   int ctx;
 {
   int operandRecord;
@@ -2334,7 +2334,7 @@ int FUN_0017662c(ctx)
     if ((*(char *)(loopIndex + operandRecord + 0x10) != '\x01') && (*(int *)(laneCursor + 0x30) == 0)) {
       valueRecord = *(int *)(laneCursor + 0x40);
       if (valueRecord == 0) {
-        valueRecord = ((int (*)())FUN_00174ce0)(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+        valueRecord = ((int (*)())Compiler__internLaneExpr)(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
         *(int *)(laneCursor + 0x40) = valueRecord;
       }
       *(undefined4 *)(valueRecord + 0xc) = 4;
@@ -2346,8 +2346,8 @@ int FUN_0017662c(ctx)
   return;
 }
 
-/* FUN_001766bc @ 0x1766bc (112 bytes) */
-int FUN_001766bc(ctx)
+/* ValueKey__replaceWithMovIfZero @ 0x1766bc (112 bytes) */
+int ValueKey__replaceWithMovIfZero(ctx)
   int ctx;
 {
   int valueNumberForExprResult;
@@ -2367,8 +2367,8 @@ int FUN_001766bc(ctx)
   return changed;
 }
 
-/* FUN_0017672c @ 0x17672c (172 bytes) */
-int FUN_0017672c(ctx)
+/* ValueKey__allRowsKnown @ 0x17672c (172 bytes) */
+int ValueKey__allRowsKnown(ctx)
   int ctx;
 {
   int rowOffset;
@@ -2391,8 +2391,8 @@ int FUN_0017672c(ctx)
   return 0;
 }
 
-/* FUN_001767d8 @ 0x1767d8 (124 bytes) */
-int FUN_001767d8(ctx, row)
+/* ValueKey__rowKnown @ 0x1767d8 (124 bytes) */
+int ValueKey__rowKnown(ctx, row)
   int ctx;
   int row;
 {
@@ -2434,8 +2434,8 @@ int ValueKey__lanesAreUnset(key, row, testLane0, testLane1, testLane2, testLane3
   return 0;
 }
 
-/* FUN_001768d4 @ 0x1768d4 (128 bytes) */
-int FUN_001768d4(key, row)
+/* ValueKey__findKnownRowRecord @ 0x1768d4 (128 bytes) */
+int ValueKey__findKnownRowRecord(key, row)
   int key;
   int row;
 {
@@ -2461,8 +2461,8 @@ int FUN_001768d4(key, row)
   return 1;
 }
 
-/* FUN_00176954 @ 0x176954 (160 bytes) */
-int FUN_00176954(ctx, row)
+/* ValueKey__foldCompareLiterals @ 0x176954 (160 bytes) */
+int ValueKey__foldCompareLiterals(ctx, row)
   int ctx;
   int row;
 {
@@ -2492,8 +2492,8 @@ int FUN_00176954(ctx, row)
   return literalOrResult;
 }
 
-/* FUN_001769f4 @ 0x1769f4 (160 bytes) */
-int FUN_001769f4(outValue, key, lane)
+/* ValueKey__getRowLaneValue @ 0x1769f4 (160 bytes) */
+int ValueKey__getRowLaneValue(outValue, key, lane)
   undefined4 *outValue;
   int key;
   int lane;
@@ -2516,8 +2516,8 @@ int FUN_001769f4(outValue, key, lane)
   return outValue;
 }
 
-/* FUN_00176a94 @ 0x176a94 (428 bytes) */
-int FUN_00176a94(outValue, valueKey, outClampedFlag)
+/* ValueKey__evaluateConstantInst @ 0x176a94 (428 bytes) */
+int ValueKey__evaluateConstantInst(outValue, valueKey, outClampedFlag)
   float *outValue;
   int valueKey;
   undefined4 *outClampedFlag;
@@ -2605,8 +2605,8 @@ int FUN_00176a94(outValue, valueKey, outClampedFlag)
   return outValue;
 }
 
-/* FUN_00176c40 @ 0x176c40 (300 bytes) */
-int FUN_00176c40(resultOut, valueKey, laneIndex, clampedFlag)
+/* ValueKey__evaluateConstantLane @ 0x176c40 (300 bytes) */
+int ValueKey__evaluateConstantLane(resultOut, valueKey, laneIndex, clampedFlag)
   int *resultOut;
   int valueKey;
   int laneIndex;
@@ -2661,8 +2661,8 @@ int FUN_00176c40(resultOut, valueKey, laneIndex, clampedFlag)
   return resultOut;
 }
 
-/* FUN_00176d6c @ 0x176d6c (160 bytes) */
-int FUN_00176d6c(valueNumberA, valueNumberB, compiler)
+/* Compiler__valueNumbersRelatedByFields20 @ 0x176d6c (160 bytes) */
+int Compiler__valueNumbersRelatedByFields20(valueNumberA, valueNumberB, compiler)
   int valueNumberA;
   int valueNumberB;
   undefined4 compiler;
@@ -2683,8 +2683,8 @@ int FUN_00176d6c(valueNumberA, valueNumberB, compiler)
   return related;
 }
 
-/* FUN_00176e20 @ 0x176e20 (160 bytes) */
-int FUN_00176e20(valueNumberA, valueNumberB, compiler)
+/* Compiler__valueNumbersRelatedByFields28 @ 0x176e20 (160 bytes) */
+int Compiler__valueNumbersRelatedByFields28(valueNumberA, valueNumberB, compiler)
   int valueNumberA;
   int valueNumberB;
   undefined4 compiler;
@@ -2705,15 +2705,15 @@ int FUN_00176e20(valueNumberA, valueNumberB, compiler)
   return related;
 }
 
-/* FUN_00176ec0 @ 0x176ec0 (20 bytes) */
-int FUN_00176ec0(key, valueNumberA, valueNumberB)
+/* ValueKey__valueNumbersRelated @ 0x176ec0 (20 bytes) */
+int ValueKey__valueNumbersRelated(key, valueNumberA, valueNumberB)
   int key;
   undefined4 valueNumberA;
   undefined4 valueNumberB;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())FUN_00176e20)(valueNumberA,valueNumberB,*(undefined4 *)(key + 0x238));
+  callResult = ((int (*)())Compiler__valueNumbersRelatedByFields28)(valueNumberA,valueNumberB,*(undefined4 *)(key + 0x238));
   return callResult;
 }
 

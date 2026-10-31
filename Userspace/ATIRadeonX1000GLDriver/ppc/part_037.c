@@ -2137,7 +2137,7 @@ int pass_ssa_build(program)
     target = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
     (**(code **)(*target + 0x128))(target,*(int *)(program + PROG_compiler));
     noop_1762bc(*(undefined4 *)(program + PROG_compiler));
-    FUN_001762c0(*(undefined4 *)(program + PROG_compiler));
+    Compiler__internLaneExprs1to3(*(undefined4 *)(program + PROG_compiler));
   }
   arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
@@ -3054,7 +3054,7 @@ int ImmedConstBuffer__clone(this, targetBlock, compiler)
   ValueKey__init(valueKey,constLoad,compiler);
   valueNumberEnabled = Compiler__isOptionEnabled(compiler,7);
   if (valueNumberEnabled != 0) {
-    FUN_00174e0c(valueKey);
+    ValueKey__computeLaneFlags(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,constLoad);
@@ -3086,7 +3086,7 @@ int VertexRegister__clone(this, instSink, compiler)
   ValueKey__init(valueKey,loadVertexInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(valueKey);
+    ValueKey__computeLaneFlags(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadVertexInst);
@@ -3576,7 +3576,7 @@ int ValueKey__createConstantMov(compiler, block, param_3)
       ValueKey__init(constKeyAlloc,constDefInst,*(undefined4 *)(compiler + 8));
       valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(compiler + 8),7);
       if (valueNumberEnabled != 0) {
-        FUN_00174e0c(constKeyAlloc);
+        ValueKey__computeLaneFlags(constKeyAlloc);
         ValueKey__propagateLaneValues(constKeyAlloc);
       }
       ((int (*)())VReg__pushDefinition)(constRegister,block[0x2c],constKeyAlloc);
@@ -3604,7 +3604,7 @@ int ValueKey__createConstantMov(compiler, block, param_3)
       ValueKey__init(undefKeyAlloc,undefInst,*(undefined4 *)(compiler + 8));
       valueNumberEnabled2 = Compiler__isOptionEnabled(*(undefined4 *)(compiler + 8),7);
       if (valueNumberEnabled2 != 0) {
-        FUN_00174e0c(undefKeyAlloc);
+        ValueKey__computeLaneFlags(undefKeyAlloc);
         ValueKey__propagateLaneValues(undefKeyAlloc);
       }
       ((int (*)())VReg__appendUser)(undefVReg,undefInst);
@@ -3679,7 +3679,7 @@ int TempValue__clone(this, block, compiler)
     ValueKey__init(valueKey,newInst,compiler);
     callResult = Compiler__isOptionEnabled(compiler,7);
     if (callResult != 0) {
-      FUN_00174e0c(valueKey);
+      ValueKey__computeLaneFlags(valueKey);
       ValueKey__propagateLaneValues(valueKey);
     }
     *(uint *)(*(int *)(compiler + COMP_target) + 8) = *(uint *)(*(int *)(compiler + COMP_target) + 8) | 0x20;
@@ -3720,7 +3720,7 @@ int ExportSlot__clone(this, instSink, compiler)
   ValueKey__init(valueKey,loadInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(valueKey);
+    ValueKey__computeLaneFlags(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
@@ -3754,7 +3754,7 @@ int Resource__clone(this, instSink, compiler)
   ValueKey__init(valueKey,loadInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(valueKey);
+    ValueKey__computeLaneFlags(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
@@ -3788,7 +3788,7 @@ int FixedValue__clone(this, instSink, compiler)
   ValueKey__init(valueKey,loadInst,compiler);
   callResult = Compiler__isOptionEnabled(compiler,7);
   if (callResult != 0) {
-    FUN_00174e0c(valueKey);
+    ValueKey__computeLaneFlags(valueKey);
     ValueKey__propagateLaneValues(valueKey);
   }
   ((int (*)())VReg__appendUser)(this,loadInst);
