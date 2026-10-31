@@ -2517,90 +2517,92 @@ int FUN_001769f4(param_1, param_2, param_3)
 }
 
 /* FUN_00176a94 @ 0x176a94 (428 bytes) */
-int FUN_00176a94(param_1, valueKey, param_3)
-  float *param_1;
+int FUN_00176a94(outValue, valueKey, outClampedFlag)
+  float *outValue;
   int valueKey;
-  undefined4 *param_3;
+  undefined4 *outClampedFlag;
 {
-  bool bVar1;
-  undefined4 uVar2;
+  bool moreLanes;
+  undefined4 valueNumberTable;
   undefined4 *loopPtr;
-  int *piVar4;
-  undefined4 uVar5;
-  int iVar6;
+  int *opcodeInfo;
+  undefined4 operand1ValueNumber;
+  undefined4 operand3ValueNumber;
+  undefined4 operand2ValueNumber;
+  int laneByteOffset;
   int loopRemaining;
-  undefined4 local_78 [4];
-  undefined4 local_68 [4];
-  undefined4 local_58 [4];
-  float local_48;
-  float local_44;
+  undefined4 operand1Values [4];
+  undefined4 operand2Values [4];
+  undefined4 operand3Values [4];
+  float scaledValue;
+  float clampedValue;
   float param_3_w;
   
   loopRemaining = 4;
-  *param_1 = GH_U2F(0x7fff0000U);
-  loopPtr = local_78;
+  *outValue = GH_U2F(0x7fff0000U);
+  loopPtr = operand1Values;
   do {
     *loopPtr = 0x7ffffffe;
     loopPtr = loopPtr + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
   loopRemaining = 4;
-  loopPtr = local_68;
+  loopPtr = operand2Values;
   do {
     *loopPtr = 0x7ffffffe;
     loopPtr = loopPtr + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
   loopRemaining = 4;
-  loopPtr = local_58;
+  loopPtr = operand3Values;
   do {
     *loopPtr = 0x7ffffffe;
     loopPtr = loopPtr + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  iVar6 = 0;
+  laneByteOffset = 0;
   loopRemaining = valueKey;
   do {
-    uVar2 = *(undefined4 *)(valueKey + 0x238);
-    uVar5 = *(undefined4 *)(loopRemaining + 0x178);
-    *(undefined4 *)(iVar6 + (int)local_78) = 0;
-    loopPtr = (undefined4 *)Compiler__exprRecordForValueNumber(uVar2,uVar5);
+    valueNumberTable = *(undefined4 *)(valueKey + 0x238);
+    operand1ValueNumber = *(undefined4 *)(loopRemaining + 0x178);
+    *(undefined4 *)(laneByteOffset + (int)operand1Values) = 0;
+    loopPtr = (undefined4 *)Compiler__exprRecordForValueNumber(valueNumberTable,operand1ValueNumber);
     if (loopPtr != (undefined4 *)0x0) {
-      *(undefined4 *)(iVar6 + (int)local_78) = *loopPtr;
+      *(undefined4 *)(laneByteOffset + (int)operand1Values) = *loopPtr;
     }
-    uVar2 = *(undefined4 *)(valueKey + 0x238);
-    uVar5 = *(undefined4 *)(loopRemaining + 0x188);
-    *(undefined4 *)(iVar6 + (int)local_68) = 0;
-    loopPtr = (undefined4 *)Compiler__exprRecordForValueNumber(uVar2,uVar5);
+    valueNumberTable = *(undefined4 *)(valueKey + 0x238);
+    operand2ValueNumber = *(undefined4 *)(loopRemaining + 0x188);
+    *(undefined4 *)(laneByteOffset + (int)operand2Values) = 0;
+    loopPtr = (undefined4 *)Compiler__exprRecordForValueNumber(valueNumberTable,operand2ValueNumber);
     if (loopPtr != (undefined4 *)0x0) {
-      *(undefined4 *)(iVar6 + (int)local_68) = *loopPtr;
+      *(undefined4 *)(laneByteOffset + (int)operand2Values) = *loopPtr;
     }
-    uVar2 = *(undefined4 *)(valueKey + 0x238);
-    uVar5 = *(undefined4 *)(loopRemaining + 0x198);
-    *(undefined4 *)(iVar6 + (int)local_58) = 0;
-    loopPtr = (undefined4 *)Compiler__exprRecordForValueNumber(uVar2,uVar5);
+    valueNumberTable = *(undefined4 *)(valueKey + 0x238);
+    operand3ValueNumber = *(undefined4 *)(loopRemaining + 0x198);
+    *(undefined4 *)(laneByteOffset + (int)operand3Values) = 0;
+    loopPtr = (undefined4 *)Compiler__exprRecordForValueNumber(valueNumberTable,operand3ValueNumber);
     if (loopPtr != (undefined4 *)0x0) {
-      *(undefined4 *)(iVar6 + (int)local_58) = *loopPtr;
+      *(undefined4 *)(laneByteOffset + (int)operand3Values) = *loopPtr;
     }
-    bVar1 = iVar6 != 0xc;
+    moreLanes = laneByteOffset != 0xc;
     loopRemaining = loopRemaining + 4;
-    iVar6 = iVar6 + 4;
-  } while (bVar1);
-  *param_1 = GH_U2F(0x7fff0000U);
-  piVar4 = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
-  (**(code **)(*piVar4 + 8))
-            (piVar4,param_1,local_78,local_68,local_58,*(undefined4 *)(valueKey + 0x238));
-  param_3_w = *param_1;
+    laneByteOffset = laneByteOffset + 4;
+  } while (moreLanes);
+  *outValue = GH_U2F(0x7fff0000U);
+  opcodeInfo = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
+  (**(code **)(*opcodeInfo + 8))
+            (opcodeInfo,outValue,operand1Values,operand2Values,operand3Values,*(undefined4 *)(valueKey + 0x238));
+  param_3_w = *outValue;
   if (param_3_w != FLOAT_001aa1d0) {
-    IRInst__scaleByOutputScale(&local_48,*(undefined4 *)(valueKey + 0xb0),param_3_w);
-    *param_1 = local_48;
-    IRInst__clampOutputValue(&local_44,*(undefined4 *)(valueKey + 0xb0),local_48);
-    if (local_44 != *param_1) {
-      *param_3 = 1;
-      *param_1 = local_44;
+    IRInst__scaleByOutputScale(&scaledValue,*(undefined4 *)(valueKey + 0xb0),param_3_w);
+    *outValue = scaledValue;
+    IRInst__clampOutputValue(&clampedValue,*(undefined4 *)(valueKey + 0xb0),scaledValue);
+    if (clampedValue != *outValue) {
+      *outClampedFlag = 1;
+      *outValue = clampedValue;
     }
   }
-  return param_1;
+  return outValue;
 }
 
 /* FUN_00176c40 @ 0x176c40 (300 bytes) */

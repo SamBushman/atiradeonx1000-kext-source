@@ -2590,14 +2590,18 @@ int pass_rewrite(program)
   int program;
 {
   int vcall24Result;
-  int *piVar1;
-  int iVar2;
+  int *nextBlock;
+  int nextBlockLink;
+  int optionValue;
+  int visitStampNext;
   int isOptionEnabledResult;
-  int *piVar3;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
+  int *block;
+  int *blockB;
+  int *target;
+  undefined4 coneVecCapacity;
+  undefined4 coneVecCount;
+  undefined4 coneVecData;
+  undefined4 coneVecArena;
   
   isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x13);
   if (isOptionEnabledResult != 0) {
@@ -2606,43 +2610,43 @@ int pass_rewrite(program)
       Program__foldUselessPhis(program);
     }
     ((int (*)())Program__scanUsevectorChains)(program);
-    local_1c = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
-    local_24 = 0;
-    local_28 = 2;
-    local_20 = Arena__alloc(local_1c,8);
-    piVar3 = *(int **)(program + PROG_blockListHead);
-    iVar2 = piVar3[2];
-    while (iVar2 != 0) {
-      vcall24Result = (**(code **)(*piVar3 + 0x24))(piVar3);
+    coneVecArena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
+    coneVecCount = 0;
+    coneVecCapacity = 2;
+    coneVecData = Arena__alloc(coneVecArena,8);
+    block = *(int **)(program + PROG_blockListHead);
+    nextBlockLink = block[2];
+    while (nextBlockLink != 0) {
+      vcall24Result = (**(code **)(*block + 0x24))(block);
       if (vcall24Result != 0) {
-        iVar2 = *(int *)(program + PROG_visitStamp) + 1;
-        *(int *)(program + PROG_visitStamp) = iVar2;
-        ((int (*)())Block__scanBranchConeForFetchAndInterp)(piVar3,&local_28,iVar2);
+        visitStampNext = *(int *)(program + PROG_visitStamp) + 1;
+        *(int *)(program + PROG_visitStamp) = visitStampNext;
+        ((int (*)())Block__scanBranchConeForFetchAndInterp)(block,&coneVecCapacity,visitStampNext);
       }
-      piVar3 = (int *)piVar3[2];
-      iVar2 = piVar3[2];
+      block = (int *)block[2];
+      nextBlockLink = block[2];
     }
-    iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x18);
-    if (((iVar2 != 0) && (iVar2 = Compiler__isCurrentHandle(*(undefined4 *)(program + PROG_compiler),0,3), iVar2 == 0)) &&
+    optionValue = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x18);
+    if (((optionValue != 0) && (optionValue = Compiler__isCurrentHandle(*(undefined4 *)(program + PROG_compiler),0,3), optionValue == 0)) &&
        ((*(uint *)(*(int *)(*(int *)(program + PROG_compiler) + COMP_target) + 8) & 0x20000) == 0)) {
       ((int (*)())Program__moveInterpFetchesOutOfIfs)(program);
       ((int (*)())Program__hoistFetchInsts)(program);
     }
-    Arena__free(local_1c,local_20);
+    Arena__free(coneVecArena,coneVecData);
   }
-  piVar3 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
-  (**(code **)(*piVar3 + 0x110))(piVar3,program);
+  target = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
+  (**(code **)(*target + 0x110))(target,program);
   *(uint *)(program + PROG_flags) = *(uint *)(program + PROG_flags) & 0xffffff7f;
   isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x19);
   if (isOptionEnabledResult != 0) {
-    piVar3 = *(int **)(program + PROG_blockListHead);
-    for (piVar1 = (int *)(*(int **)(program + PROG_blockListHead))[2]; piVar1 != (int *)0x0;
-        piVar1 = (int *)piVar1[2]) {
-      vcall24Result = (**(code **)(*piVar3 + 0x24))(piVar3);
+    blockB = *(int **)(program + PROG_blockListHead);
+    for (nextBlock = (int *)(*(int **)(program + PROG_blockListHead))[2]; nextBlock != (int *)0x0;
+        nextBlock = (int *)nextBlock[2]) {
+      vcall24Result = (**(code **)(*blockB + 0x24))(blockB);
       if (vcall24Result != 0) {
-        ((int (*)())IfHeader__convertInnerIfToCmov)(piVar3,program,*(undefined4 *)(program + PROG_compiler));
+        ((int (*)())IfHeader__convertInnerIfToCmov)(blockB,program,*(undefined4 *)(program + PROG_compiler));
       }
-      piVar3 = piVar1;
+      blockB = nextBlock;
     }
   }
   isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x37);

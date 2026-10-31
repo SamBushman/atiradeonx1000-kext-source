@@ -4102,3 +4102,55 @@ use	Inst__reassociate_150b94	iVar3	instOpcode	INFERRED	opcode of the inst for th
 use	Inst__reassociate_150b94	iVar3	instOpcodeB	INFERRED	opcode of the inst for the second operand pass	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$@2	+2
 use	Inst__reassociate_150b94	iVar3	instOpcodeB	INFERRED	opcode of the inst for the second operand pass	^\s*else\ if\ \(\(iVar3\ !=\ 0x13\)\ \|\|$	+3
 local	Inst__reassociate_150b94	local_28	reassociateRecord	INFERRED	{inst, operand index, pair inst, pair operand}: [0..1] the candidate, [2..3] the matched pair
+local	FUN_00176a94	param_1	outValue	INFERRED	receives the folded float result of the inst for one lane
+local	FUN_00176a94	param_3	outClampedFlag	INFERRED	set to 1 when clamping changed the scaled value
+local	FUN_00176a94	bVar1	moreLanes	INFERRED	lane byte offset is not yet 0xc (four lanes)
+use	FUN_00176a94	uVar2	valueNumberTable	INFERRED	compiler value-number table at valueKey +0x238	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x238\);$	+1
+use	FUN_00176a94	uVar2	valueNumberTable	INFERRED	compiler value-number table at valueKey +0x238	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00173360\(uVar2,uVar5\);$	+1
+use	FUN_00176a94	uVar2	valueNumberTable	INFERRED	compiler value-number table at valueKey +0x238	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x238\);$@2	+1
+use	FUN_00176a94	uVar2	valueNumberTable	INFERRED	compiler value-number table at valueKey +0x238	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00173360\(uVar2,uVar5\);$@2	+1
+use	FUN_00176a94	uVar2	valueNumberTable	INFERRED	compiler value-number table at valueKey +0x238	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x238\);$@3	+1
+use	FUN_00176a94	uVar2	valueNumberTable	INFERRED	compiler value-number table at valueKey +0x238	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00173360\(uVar2,uVar5\);$@3	+1
+use	FUN_00176a94	uVar5	operand1ValueNumber	INFERRED	value number of operand 1 lane	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x178\);$	+1
+use	FUN_00176a94	uVar5	operand1ValueNumber	INFERRED	value number of operand 1 lane	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00173360\(uVar2,uVar5\);$	+1
+use	FUN_00176a94	uVar5	operand2ValueNumber	INFERRED	value number of operand 2 lane	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x188\);$	+1
+use	FUN_00176a94	uVar5	operand2ValueNumber	INFERRED	value number of operand 2 lane	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00173360\(uVar2,uVar5\);$@2	+1
+use	FUN_00176a94	uVar5	operand3ValueNumber	INFERRED	value number of operand 3 lane	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x198\);$	+1
+use	FUN_00176a94	uVar5	operand3ValueNumber	INFERRED	value number of operand 3 lane	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00173360\(uVar2,uVar5\);$@3	+1
+local	FUN_00176a94	piVar4	opcodeInfo	INFERRED	opcode info of the inst whose vtable +8 evaluator is called
+local	FUN_00176a94	iVar6	laneByteOffset	INFERRED	lane index * 4 into the three operand constant arrays
+local	FUN_00176a94	local_78	operand1Values	INFERRED	constant value of operand 1 for each of the four lanes (0x7ffffffe when unknown)
+local	FUN_00176a94	local_68	operand2Values	INFERRED	constant value of operand 2 for each lane
+local	FUN_00176a94	local_58	operand3Values	INFERRED	constant value of operand 3 for each lane
+local	FUN_00176a94	local_48	scaledValue	INFERRED	IRInst__scaleByOutputScale out value
+local	FUN_00176a94	local_44	clampedValue	INFERRED	IRInst__clampOutputValue out value
+local	FUN_0015800c	param_1	ctx	INFERRED	unused first argument
+local	FUN_0015800c	param_3	targetFieldDelta	INFERRED	added to inst +0x124 when testing the target hook (vtable +0xfc)
+local	FUN_0015800c	param_4	unusedArg4	INFERRED	not referenced
+local	FUN_0015800c	param_5	laneMask	INFERRED	write mask the dest operand mask must not overlap to keep walking
+use	FUN_0015800c	iVar1	vcall64Result	INFERRED	vtable +100 result on inst	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 100\)\)\(param_2\);$	+2
+use	FUN_0015800c	iVar1	operandIndexOrCheck	INFERRED	one register: operand loop index, register-kind flag and vtable +0x50 result	^\s*for\ \(iVar1\ =\ 1;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\),\ iVar1\ <=\ iVar2;$	+4
+use	FUN_0015800c	iVar1	operandIndexOrCheck	INFERRED	one register: operand loop index, register-kind flag and vtable +0x50 result	^\s*if\ \(\(\(param_2\[0x20\]\ !=\ 0\)\ \&\&$	+3
+use	FUN_0015800c	iVar1	destRecordCheck	INFERRED	FUN_00105dbc and FUN_0010497c results	^\s*iVar1\ =\ FUN_00105dbc\(param_2,0\);$	+3
+use	FUN_0015800c	iVar1	hoistCheck	INFERRED	vtable +0x24, FUN_0010497c and target hook (vtable +0xfc) results	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x24\)\)\(param_2\);$	+6
+local	FUN_0015800c	iVar2	operandCountResult	INFERRED	vtable +0x14 operand count / FUN_000f31e8 result
+local	FUN_0015800c	piVar3	laneByteCursorOrTarget	INFERRED	one register: select byte cursor on inst, then the target object for the hook call
+local	FUN_0015800c	local_28	writeMaskOut	INFERRED	WriteMask__fromSelectWord out value
+local	pass_rewrite	piVar1	nextBlock	INFERRED	block list successor of the current block (+8) in the walks
+use	pass_rewrite	iVar2	nextBlockLink	INFERRED	+8 link of the current block, loop-exit test	^\s*iVar2\ =\ piVar3\[2\];$	+2
+use	pass_rewrite	iVar2	nextBlockLink	INFERRED	+8 link of the current block, loop-exit test	^\s*iVar2\ =\ piVar3\[2\];$@2	+1
+use	pass_rewrite	iVar2	visitStampNext	INFERRED	program visit stamp + 1 passed to the cone scan	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_visitStamp\)\ \+\ 1;$	+3
+use	pass_rewrite	iVar2	optionValue	INFERRED	compiler option query result gating the cone scan	^\s*iVar2\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\),0x18\);$	+3
+use	pass_rewrite	piVar3	block	INFERRED	block being visited in the first walk	^\s*piVar3\ =\ \*\(int\ \*\*\)\(param_1\ \+\ PROG_blockListHead\);$	+2
+use	pass_rewrite	piVar3	block	INFERRED	block being visited in the first walk	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x24\)\)\(piVar3\);$	+1
+use	pass_rewrite	piVar3	block	INFERRED	block being visited in the first walk	^\s*\(\(int\ \(\*\)\(\)\)FUN_00139f84\)\(piVar3,\&local_28,iVar2\);$	+1
+use	pass_rewrite	piVar3	block	INFERRED	block being visited in the first walk	^\s*piVar3\ =\ \(int\ \*\)piVar3\[2\];$	+2
+use	pass_rewrite	piVar3	target	INFERRED	target object at compiler +COMP_target whose hook +0x110 is called	^\s*piVar3\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_target\);$	+2
+use	pass_rewrite	piVar3	blockB	INFERRED	block being visited in the if-to-cmov walk	^\s*piVar3\ =\ \*\(int\ \*\*\)\(param_1\ \+\ PROG_blockListHead\);$@2	+1
+use	pass_rewrite	piVar3	blockB	INFERRED	block being visited in the if-to-cmov walk	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x24\)\)\(piVar3\);$@2	+1
+use	pass_rewrite	piVar3	blockB	INFERRED	block being visited in the if-to-cmov walk	^\s*\(\(int\ \(\*\)\(\)\)FUN_0013caf4\)\(piVar3,param_1,\*\(undefined4\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+1
+use	pass_rewrite	piVar3	blockB	INFERRED	block being visited in the if-to-cmov walk	^\s*piVar3\ =\ piVar1;$	+1
+local	pass_rewrite	local_28	coneVecCapacity	INFERRED	capacity word of the growable cone vector header (set to 2)
+local	pass_rewrite	local_24	coneVecCount	INFERRED	count word of the cone vector header (zero)
+local	pass_rewrite	local_20	coneVecData	INFERRED	data pointer of the cone vector header, 8 bytes from the arena
+local	pass_rewrite	local_1c	coneVecArena	INFERRED	arena the cone vector draws from (compiler +COMP_arenaB)

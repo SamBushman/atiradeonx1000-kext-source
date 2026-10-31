@@ -10012,58 +10012,60 @@ LAB_00157cf8:
 }
 
 /* FUN_0015800c @ 0x15800c (600 bytes) */
-int FUN_0015800c(param_1, inst, param_3, param_4, param_5, program)
-  undefined4 param_1;
+int FUN_0015800c(ctx, inst, targetFieldDelta, unusedArg4, laneMask, program)
+  undefined4 ctx;
   int *inst;
-  int param_3;
-  undefined4 param_4;
-  uint param_5;
+  int targetFieldDelta;
+  undefined4 unusedArg4;
+  uint laneMask;
   int program;
 {
   int vcall64Result;
   int countdown;
   int operandRecord;
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  uint local_28 [4];
+  int operandIndexOrCheck;
+  int hoistCheck;
+  int destRecordCheck;
+  int operandCountResult;
+  int *laneByteCursorOrTarget;
+  uint writeMaskOut [4];
   
 LAB_0015802c:
   do {
     vcall64Result = (**(code **)(*inst + 100))(inst);
     if (vcall64Result != 0) {
-      for (iVar1 = 1; iVar2 = (**(code **)(*inst + 0x14))(inst), iVar1 <= iVar2;
-          iVar1 = iVar1 + 1) {
-        if ((((inst[iVar1 * 6 + 0x28] & 1U) != 0) || ((inst[iVar1 * 6 + 0x28] & 2U) != 0)) ||
-           (iVar2 = IRInst__isSourceSelectIdentity(inst,iVar1), iVar2 == 0)) goto LAB_00158170;
+      for (operandIndexOrCheck = 1; operandCountResult = (**(code **)(*inst + 0x14))(inst), operandIndexOrCheck <= operandCountResult;
+          operandIndexOrCheck = operandIndexOrCheck + 1) {
+        if ((((inst[operandIndexOrCheck * 6 + 0x28] & 1U) != 0) || ((inst[operandIndexOrCheck * 6 + 0x28] & 2U) != 0)) ||
+           (operandCountResult = IRInst__isSourceSelectIdentity(inst,operandIndexOrCheck), operandCountResult == 0)) goto LAB_00158170;
       }
       if ((inst[0x48] == 0) && (inst[0x49] == 0)) {
         if (((inst[0x20] != 0) &&
-            ((iVar1 = RegKind__flagBit0(inst[0x26]), iVar1 != 0 && ((inst[5] & 2U) == 0)))) &&
-           (iVar1 = (**(code **)(*inst + 0x50))(inst), iVar1 == 0)) {
+            ((operandIndexOrCheck = RegKind__flagBit0(inst[0x26]), operandIndexOrCheck != 0 && ((inst[5] & 2U) == 0)))) &&
+           (operandIndexOrCheck = (**(code **)(*inst + 0x50))(inst), operandIndexOrCheck == 0)) {
           countdown = 4;
-          piVar3 = inst;
+          laneByteCursorOrTarget = inst;
           do {
-            if ((uint)(*(byte *)(piVar3 + 0x27) - 2) < 2) goto LAB_00158170;
-            piVar3 = (int *)((int)piVar3 + 1);
+            if ((uint)(*(byte *)(laneByteCursorOrTarget + 0x27) - 2) < 2) goto LAB_00158170;
+            laneByteCursorOrTarget = (int *)((int)laneByteCursorOrTarget + 1);
             countdown = countdown + -1;
           } while (countdown != 0);
         }
         IRInst__getOperandRecord(inst,0);
-        iVar1 = IRInst__operandKindClass(inst,0);
-        if ((((iVar1 == 0) && ((inst[5] & 2U) == 0)) && ((inst[5] & 0x200U) == 0)) &&
-           (iVar1 = IRInst__hasSingleUse(inst,program), iVar1 != 0)) {
+        destRecordCheck = IRInst__operandKindClass(inst,0);
+        if ((((destRecordCheck == 0) && ((inst[5] & 2U) == 0)) && ((inst[5] & 0x200U) == 0)) &&
+           (destRecordCheck = IRInst__hasSingleUse(inst,program), destRecordCheck != 0)) {
           inst = (int *)IRInst__getOperandSource(inst,1);
           goto LAB_0015802c;
         }
       }
     }
 LAB_00158170:
-    iVar1 = (**(code **)(*inst + 0x24))(inst);
-    if (((iVar1 == 0) || (iVar1 = IRInst__hasSingleUse(inst,program), iVar1 == 0)) ||
+    hoistCheck = (**(code **)(*inst + 0x24))(inst);
+    if (((hoistCheck == 0) || (hoistCheck = IRInst__hasSingleUse(inst,program), hoistCheck == 0)) ||
        ((inst[0x48] != 0 ||
-        (piVar3 = *(int **)(*(int *)(program + 8) + 0x30c),
-        iVar1 = (**(code **)(*piVar3 + 0xfc))(piVar3,param_3 + inst[0x49],inst), iVar1 == 0)))
+        (laneByteCursorOrTarget = *(int **)(*(int *)(program + 8) + 0x30c),
+        hoistCheck = (**(code **)(*laneByteCursorOrTarget + 0xfc))(laneByteCursorOrTarget,targetFieldDelta + inst[0x49],inst), hoistCheck == 0)))
        ) {
       return 0;
     }
@@ -10073,8 +10075,8 @@ LAB_00158170:
       }
       inst = (int *)IRInst__getOperandSource(inst,inst[0x21]);
       operandRecord = IRInst__getOperandRecord(inst,0);
-      WriteMask__fromSelectWord(local_28,*(undefined4 *)(operandRecord + 0x10));
-    } while ((param_5 & local_28[0]) == 0);
+      WriteMask__fromSelectWord(writeMaskOut,*(undefined4 *)(operandRecord + 0x10));
+    } while ((laneMask & writeMaskOut[0]) == 0);
   } while( true );
 }
 
