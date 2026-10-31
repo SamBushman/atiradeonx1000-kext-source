@@ -1,0 +1,15 @@
+# fork r02: parameters of small leaf functions whose role is unambiguous
+local	testBit24	param_2	value	INFERRED	returns bit 24 of this argument
+local	Object__setThreeWords	param_2	sourceWords	CONFIRMED	three consecutive words are copied from it into the object at 0x18/0x1c/0x20
+local	OpcodeRecord__getOperandByteB	param_1	recordIndex	CONFIRMED	scaled by the 0x24 record stride
+local	OpcodeRecord__getOperandByteB	param_2	recordTable	CONFIRMED	base address the indexed records are read from
+local	OpcodeRecord__getOperandByteB	param_3	byteIndex	CONFIRMED	byte offset added within the record (+0x1c)
+local	Block__vectorF8NonEmpty	param_1	block	INFERRED	function is a Block__ method; reads the vector pointer at +0xf8
+local	Block__vectorD4NonEmpty	param_1	block	INFERRED	function is a Block__ method; reads the vector pointer at +0xd4
+local	Block__hasDominatedChildren	param_1	block	INFERRED	function is a Block__ method; reads the vector pointer at +0xf4
+local	isRegKindBelow21	param_1	regWord	INFERRED	compares its high half (register kind) against 0x15
+local	tableWordOrEight	param_1	tableIndex	CONFIRMED	indexes the word table when < 6, else returns 8
+local	remapSelect1To0	param_1	selectValue	INFERRED	remaps select value 1 -> 0, 2 -> 1, else 2
+local	remapSelectSmall	param_1	selectValue	INFERRED	remaps select value 1 -> 0, 2 -> 1, else 3
+local	SelectWord__clearReadComponents	param_2	selectWord	CONFIRMED	its four bytes are the per-component selects; component >= 4 clears the matching mask byte
+local	KhanVs__vslot60_isZeroOrOne	fparam_1	value	CONFIRMED	compared against the 0.0 and 1.0 constants

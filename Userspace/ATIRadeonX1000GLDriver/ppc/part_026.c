@@ -2426,33 +2426,33 @@ int OpcodeRecord__getTranslationKind(opcodeIndex, recordTable)
 }
 
 /* tableWordOrEight @ 0xf89b4 (52 bytes) */
-int tableWordOrEight(param_1)
-  uint param_1;
+int tableWordOrEight(tableIndex)
+  uint tableIndex;
 {
-  if (5 < param_1) {
+  if (5 < tableIndex) {
     return 8;
   }
-  return *(undefined4 *)(PTR_DAT_001e8b84 + param_1 * 4);
+  return *(undefined4 *)(PTR_DAT_001e8b84 + tableIndex * 4);
 }
 
 /* remapSelect1To0 @ 0xf89e8 (36 bytes) */
-int remapSelect1To0(param_1)
-  int param_1;
+int remapSelect1To0(selectValue)
+  int selectValue;
 {
-  if (param_1 == 1) {
+  if (selectValue == 1) {
     return 0;
   }
-  return 2 - (uint)(param_1 == 2);
+  return 2 - (uint)(selectValue == 2);
 }
 
 /* remapSelectSmall @ 0xf8a0c (36 bytes) */
-int remapSelectSmall(param_1)
-  int param_1;
+int remapSelectSmall(selectValue)
+  int selectValue;
 {
-  if (param_1 == 1) {
+  if (selectValue == 1) {
     return 0;
   }
-  if (param_1 == 2) {
+  if (selectValue == 2) {
     return 1;
   }
   return 3;

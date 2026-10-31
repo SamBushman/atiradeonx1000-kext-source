@@ -378,21 +378,21 @@ int SelectWord__selectWhereMasked(outSelect, baseSelect, laneMask)
 }
 
 /* SelectWord__clearReadComponents @ 0xf3258 (116 bytes) */
-int SelectWord__clearReadComponents(outMask, param_2)
+int SelectWord__clearReadComponents(outMask, selectWord)
   undefined4 *outMask;
-  uint param_2;
+  uint selectWord;
 {
   *outMask = DAT_001aa838;
-  if (param_2 >> 0x18 < 4) {
+  if (selectWord >> 0x18 < 4) {
     *(undefined1 *)outMask = 0;
   }
-  if ((param_2 >> 0x10 & 0xff) < 4) {
+  if ((selectWord >> 0x10 & 0xff) < 4) {
     *(undefined1 *)((int)outMask + 1) = 0;
   }
-  if ((param_2 >> 8 & 0xff) < 4) {
+  if ((selectWord >> 8 & 0xff) < 4) {
     *(undefined1 *)((int)outMask + 2) = 0;
   }
-  if (3 < (param_2 & 0xff)) {
+  if (3 < (selectWord & 0xff)) {
     return;
   }
   *(undefined1 *)((int)outMask + 3) = 0;
@@ -1660,10 +1660,10 @@ int RegisterMap__nextTempIndex(registerMap)
 }
 
 /* isRegKindBelow21 @ 0xf4a70 (20 bytes) */
-int isRegKindBelow21(param_1)
-  uint param_1;
+int isRegKindBelow21(regWord)
+  uint regWord;
 {
-  return param_1 >> 0x10 < 0x15;
+  return regWord >> 0x10 < 0x15;
 }
 
 /* Emitter__allocateConstantSlot @ 0xf4a84 (324 bytes) */

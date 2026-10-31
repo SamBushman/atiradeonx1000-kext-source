@@ -2173,12 +2173,12 @@ int ILReader__lookupConstComponent(ilReader, registerNumber, componentIndex, out
 }
 
 /* OpcodeRecord__getOperandByteB @ 0xe4710 (20 bytes) */
-int OpcodeRecord__getOperandByteB(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int OpcodeRecord__getOperandByteB(recordIndex, recordTable, byteIndex)
+  int recordIndex;
+  int recordTable;
+  int byteIndex;
 {
-  return *(undefined1 *)(param_2 + param_1 * 0x24 + param_3 + 0x1c);
+  return *(undefined1 *)(recordTable + recordIndex * 0x24 + byteIndex + 0x1c);
 }
 
 /* ILReader__appendBoolConst @ 0xe4724 (92 bytes) */

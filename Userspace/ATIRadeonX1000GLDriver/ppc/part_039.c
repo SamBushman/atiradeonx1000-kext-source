@@ -845,9 +845,9 @@ int KhanVs__vslot80_getLimit_0x14()
 }
 
 /* KhanVs__vslot60_isZeroOrOne @ 0x129408 (60 bytes) */
-undefined4 KhanVs__vslot60_isZeroOrOne(double fparam_1)
+undefined4 KhanVs__vslot60_isZeroOrOne(double value)
 {
-  if ((fparam_1 != (double)FLOAT_001aa0d4) && (fparam_1 != (double)FLOAT_001aa0e8)) {
+  if ((value != (double)FLOAT_001aa0d4) && (value != (double)FLOAT_001aa0e8)) {
     return 0;
   }
   return 1;

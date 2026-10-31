@@ -1866,10 +1866,10 @@ int Block__nearestCommonAncestor(blockA, blockB)
 }
 
 /* Block__vectorF8NonEmpty @ 0xe798c (20 bytes) */
-int Block__vectorF8NonEmpty(param_1)
-  int param_1;
+int Block__vectorF8NonEmpty(block)
+  int block;
 {
-  return *(int *)(*(int *)(param_1 + 0xf8) + 4) != 0;
+  return *(int *)(*(int *)(block + 0xf8) + 4) != 0;
 }
 
 /* Block__hasMultipleSuccessors @ 0xe79a0 (24 bytes) */
@@ -1908,17 +1908,17 @@ int Block__hasSuccessors(block)
 }
 
 /* Block__vectorD4NonEmpty @ 0xe79fc (20 bytes) */
-int Block__vectorD4NonEmpty(param_1)
-  int param_1;
+int Block__vectorD4NonEmpty(block)
+  int block;
 {
-  return *(int *)(*(int *)(param_1 + 0xd4) + 4) != 0;
+  return *(int *)(*(int *)(block + 0xd4) + 4) != 0;
 }
 
 /* Block__hasDominatedChildren @ 0xe7a10 (20 bytes) */
-int Block__hasDominatedChildren(param_1)
-  int param_1;
+int Block__hasDominatedChildren(block)
+  int block;
 {
-  return *(int *)(*(int *)(param_1 + 0xf4) + 4) != 0;
+  return *(int *)(*(int *)(block + 0xf4) + 4) != 0;
 }
 
 /* Block__popDefinitions @ 0xe7a24 (120 bytes) */

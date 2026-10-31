@@ -2774,16 +2774,16 @@ int Compiler__getFailureCode(owner)
 }
 
 /* Object__setThreeWords @ 0xda438 (32 bytes) */
-int Object__setThreeWords(targetObject, param_2)
+int Object__setThreeWords(targetObject, sourceWords)
   int targetObject;
-  undefined4 *param_2;
+  undefined4 *sourceWords;
 {
   undefined4 secondWord;
   undefined4 thirdWord;
   
-  thirdWord = param_2[2];
-  secondWord = param_2[1];
-  *(undefined4 *)(targetObject + 0x18) = *param_2;
+  thirdWord = sourceWords[2];
+  secondWord = sourceWords[1];
+  *(undefined4 *)(targetObject + 0x18) = *sourceWords;
   *(undefined4 *)(targetObject + 0x20) = thirdWord;
   *(undefined4 *)(targetObject + 0x1c) = secondWord;
   return;

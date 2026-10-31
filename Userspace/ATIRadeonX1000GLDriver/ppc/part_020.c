@@ -3473,11 +3473,11 @@ int FUN_000e0ca8(compiler)
 }
 
 /* testBit24 @ 0xe0cc8 (8 bytes) */
-int testBit24(unusedArg1, param_2)
+int testBit24(unusedArg1, value)
   undefined4 unusedArg1;
-  uint param_2;
+  uint value;
 {
-  return param_2 >> 0x18 & 1;
+  return value >> 0x18 & 1;
 }
 
 /* Compiler__applyRequestFlags @ 0xe0cd0 (308 bytes) */
