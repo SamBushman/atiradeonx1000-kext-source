@@ -870,7 +870,7 @@ int Inst__foldCompareChain_00159b58(node, allowFold, pass)
         if (((*(int *)(*(int *)(sourceDef + 0x88) + 8) == 0x25) && (checkResult != 0)) &&
            ((constantC1 == 0.0 &&
             (((*(uint *)(sourceDef + 0x14) & 0x200) == 0 ||
-             (checkResult = FUN_000f45f8(node,1,sourceDef,pass), checkResult != 0)))))) {
+             (checkResult = IRInst__sourceReadMaskAvoidsDestKind1(node,1,sourceDef,pass), checkResult != 0)))))) {
           operandRecord3 = IRInst__getOperandRecord(sourceDef,0);
           uniformSourceConstant3 = IRInst__getUniformSourceConstant(sourceDef,2,*(undefined4 *)(operandRecord3 + 0x10),producerSecondConstant);
           if (uniformSourceConstant3 != 0) {
@@ -9621,7 +9621,7 @@ LAB_00168120:
              ((operandBlock = operandVReg[0x56], operandBlock == scheduler[4] ||
               (operandBlock = *(uint *)(operandBlock + 0x118), *(uint *)(scheduler[1] + 0x474) == operandBlock)))) {
             copyNode = IRInst__getOperandRecord(inst,loopIndex);
-            FUN_000f32cc(&copySelectOutA,*(undefined4 *)(copyNode + 0x10));
+            SelectWord__clearReferencedLanes(&copySelectOutA,*(undefined4 *)(copyNode + 0x10));
             sourceDef2 = IRInst__getOperandSource(inst,loopIndex);
             copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,sourceDef2,copySelectOutA,scheduler[0xb],node + 0xc);
             IRInst__setOperandSource(inst,loopIndex,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
@@ -9640,7 +9640,7 @@ LAB_00168120:
 LAB_00168060:
   sourceDef2 = IRInst__getOperandSource(inst,1);
   copyNode = IRInst__getOperandRecord(inst,1);
-  FUN_000f32cc(&copySelectOutB,*(undefined4 *)(copyNode + 0x10));
+  SelectWord__clearReferencedLanes(&copySelectOutB,*(undefined4 *)(copyNode + 0x10));
   copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,sourceDef2,copySelectOutB,scheduler[0xb],node + 0xc);
   IRInst__setOperandSource(inst,1,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
   operandRecord = IRInst__getOperandRecord(inst,1);

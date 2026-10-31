@@ -3119,7 +3119,7 @@ LAB_00050920:
   if (reserveResult == 0) {
     (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
     (**(code **)(((unsigned char *)0x00001338) + glContext))(glContext);
-    FUN_00086710(glContext);
+    gldEmitPacket_reg880(glContext);
   }
   ctxWord2cc = *(uint *)(glContext + 0x8c);
   *(undefined1 *)(glContext + 0x23ec) = 1;
@@ -4379,7 +4379,7 @@ int gldEmitDirtyStatePackets(glContext)
       registerDirty = *(uint *)(glContext + 0x1930);
     }
     if ((registerDirty & 0x200000) != 0) {
-      FUN_00086710(glContext);
+      gldEmitPacket_reg880(glContext);
       registerDirty = *(uint *)(glContext + 0x1930);
     }
     if ((registerDirty & 0x1000000) != 0) {

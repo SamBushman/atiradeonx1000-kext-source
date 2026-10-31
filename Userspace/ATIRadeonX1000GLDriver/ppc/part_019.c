@@ -304,8 +304,8 @@ int ffpsEmitColorOutputMovs(ctx, ilBuilder, isFirstUnit, previousUnit, component
   return;
 }
 
-/* FUN_000d55c0 @ 0xd55c0 (832 bytes) */
-int FUN_000d55c0(ctx, ilBuilder, isFirstUnit, previousUnit)
+/* ffpsEmitFogTokens @ 0xd55c0 (832 bytes) */
+int ffpsEmitFogTokens(ctx, ilBuilder, isFirstUnit, previousUnit)
   int ctx;
   uint *ilBuilder;
   int isFirstUnit;
@@ -1654,8 +1654,8 @@ LAB_000d75e8:
   return;
 }
 
-/* FUN_000d8450 @ 0xd8450 (5856 bytes) */
-int FUN_000d8450(ctx, ilBuilder, useUnitFlags)
+/* ffpsEmitTextureSamples @ 0xd8450 (5856 bytes) */
+int ffpsEmitTextureSamples(ctx, ilBuilder, useUnitFlags)
   int ctx;
   int ilBuilder;
   int useUnitFlags;

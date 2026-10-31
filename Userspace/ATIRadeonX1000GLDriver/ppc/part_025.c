@@ -399,8 +399,8 @@ int SelectWord__clearReadComponents(outMask, selectWord)
   return;
 }
 
-/* FUN_000f32cc @ 0xf32cc (116 bytes) */
-int FUN_000f32cc(outMask, selectWord)
+/* SelectWord__clearReferencedLanes @ 0xf32cc (116 bytes) */
+int SelectWord__clearReferencedLanes(outMask, selectWord)
   undefined4 *outMask;
   uint selectWord;
 {
@@ -671,8 +671,8 @@ int WriteMask__fromUsedLanes(result, selectWord)
   return;
 }
 
-/* FUN_000f370c @ 0xf370c (88 bytes) */
-int FUN_000f370c(outBytes, laneBytes)
+/* LaneBytes__buildSelectWordOfZeroLanes @ 0xf370c (88 bytes) */
+int LaneBytes__buildSelectWordOfZeroLanes(outBytes, laneBytes)
   char *outBytes;
   undefined4 laneBytes;
 {
@@ -882,8 +882,8 @@ int IRInst__countWrittenComponents(inst)
   return loopCounter;
 }
 
-/* FUN_000f3a90 @ 0xf3a90 (80 bytes) */
-int FUN_000f3a90(inst)
+/* IRInst__destSelectHasZeroLane @ 0xf3a90 (80 bytes) */
+int IRInst__destSelectHasZeroLane(inst)
   undefined4 inst;
 {
   uint destSelect;
@@ -1435,8 +1435,8 @@ LAB_000f4584:
   return laneMask;
 }
 
-/* FUN_000f45f8 @ 0xf45f8 (160 bytes) */
-int FUN_000f45f8(sourceInst, operandIndex, inst, program)
+/* IRInst__sourceReadMaskAvoidsDestKind1 @ 0xf45f8 (160 bytes) */
+int IRInst__sourceReadMaskAvoidsDestKind1(sourceInst, operandIndex, inst, program)
   undefined4 sourceInst;
   undefined4 operandIndex;
   undefined4 inst;

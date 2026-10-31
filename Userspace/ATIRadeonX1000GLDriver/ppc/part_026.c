@@ -2533,8 +2533,8 @@ int Program__applySourceTokenToOperand(program, selectWordPtr, descriptor, opera
   return;
 }
 
-/* FUN_000f8c88 @ 0xf8c88 (64 bytes) */
-int FUN_000f8c88(ilOpcode)
+/* OpcodeTemplate__tableOffsetForIlOpcode @ 0xf8c88 (64 bytes) */
+int OpcodeTemplate__tableOffsetForIlOpcode(ilOpcode)
   int ilOpcode;
 {
   int tableIndex;
@@ -3202,7 +3202,7 @@ int Program__lowerDestinationToken(pass, list, descriptor, unusedArg4, modeSelec
              (uint)((laneMaskWord & 0x30) == 0) << 8 |
              (uint)((laneMaskWord & 0xc) == 0) << 0x10 | (uint)((laneMaskWord & 3) == 0) << 0x18;
   }
-  descriptorTestResult = FUN_0019eb30(descriptor);
+  descriptorTestResult = DestToken__componentWordMatchesLowFields(descriptor);
   if (descriptorTestResult != 0) {
     setupInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     operandRecord2 = IRInst__getOperandRecord(setupInst,0);
@@ -3996,8 +3996,8 @@ int Program__loadDefaultConstants(program, ilReader)
   return;
 }
 
-/* FUN_000fb3d4 @ 0xfb3d4 (2560 bytes) */
-int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByRegisterPtr)
+/* Program__translateILInstruction @ 0xfb3d4 (2560 bytes) */
+int Program__translateILInstruction(program, list, tokenWords, descriptor, param_5, argR8, movByRegisterPtr)
   int program;
   undefined4 list;
   dword *tokenWords;
@@ -5733,7 +5733,7 @@ code_r0x00103c40:
     Program__noSuccessorHasMultipleSuccessors(program);
     return;
   }
-  atFirstInst = FUN_000e43ec(ilReader);
+  atFirstInst = ILReader__atFirstInst(ilReader);
   if (atFirstInst != 0) {
     programInstVector = *(int *)(program + 0x3c4);
     loopCounterC = 0;
@@ -6241,7 +6241,7 @@ code_r0x000fed00:
       *(int *)(operandRecord + 8) = newTempIndex2;
       stagedSelectWord = (uint ******)0x10203;
       argR8 = (uint ******)&lastDeclRegister;
-      ((int (*)())FUN_000fb3d4)(program,pendingListB,tokenWords,*ilReader[0x1b],loopStackData,argR8,&movByRegister);
+      ((int (*)())Program__translateILInstruction)(program,pendingListB,tokenWords,*ilReader[0x1b],loopStackData,argR8,&movByRegister);
       source0Token = **ilReader[0x1b];
       if (((((uint)source0Token & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
@@ -6700,7 +6700,7 @@ code_r0x000ff070:
         instAllocation[0x4c] = 1;
       }
       argR8 = (uint ******)&lastDeclRegister;
-      ((int (*)())FUN_000fb3d4)(program,pendingListB,tokenWords,*ilReader[0x1b],loopStackData,argR8,&movByRegister);
+      ((int (*)())Program__translateILInstruction)(program,pendingListB,tokenWords,*ilReader[0x1b],loopStackData,argR8,&movByRegister);
       source0Token = **ilReader[0x1b];
       if (((((uint)source0Token & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
@@ -6846,7 +6846,7 @@ code_r0x000febe0:
           argR6 = *(uint *******)((int)ilReader[0x1b] + operandByteOffsetC);
           argR8 = (uint ******)&lastDeclRegister;
           argR7 = loopStackData;
-          ((int (*)())FUN_000fb3d4)(program,pendingListB,tokenWords,argR6,loopStackData,argR8,&movByRegister);
+          ((int (*)())Program__translateILInstruction)(program,pendingListB,tokenWords,argR6,loopStackData,argR8,&movByRegister);
           compilerRef = *(int *)(program + 8);
           operandByteOffsetC = operandByteOffsetC + 0x14;
         }
@@ -7958,7 +7958,7 @@ code_r0x00102c90:
           stackElement = (int *)0x0;
         }
         scopeObject = *stackElement;
-        FUN_000e77f4(ifBlock,*(undefined4 *)(scopeObject + 8));
+        Scope__setBreakTarget(ifBlock,*(undefined4 *)(scopeObject + 8));
         *(uint ******)(scopeObject + 8) = ifBlock;
         Block__setField0xb8AndChildren(ifBlock,scopeLevel);
         IRInst__bindOperandRegisters(program,ifConditionInst);
@@ -8375,7 +8375,7 @@ code_r0x00101f74:
         operandRecordB = IRInst__getOperandRecord(workInst,0);
         *(undefined4 *)((int)movFloatInst + 0x9c) = *(undefined4 *)(operandRecordB + 0x10);
         IRInst__setOperandRef(workInst,0,virtualRegister);
-        FUN_000f32cc(&markedSelectOut,operandSelectValue);
+        SelectWord__clearReferencedLanes(&markedSelectOut,operandSelectValue);
         workInst[0x27] = (uint *****)markedSelectOut;
         operandRecordLast = IRInst__getOperandRecord(workInst,1);
         *(int *)(operandRecordLast + 0x10) = loadedProgramValue;
@@ -8455,7 +8455,7 @@ code_r0x00101d1c:
     do {
       stagedSelectWord = *(uint *******)(constantsBase + -0x2c30);
       argR8 = (uint ******)&lastDeclRegister;
-      ((int (*)())FUN_000fb3d4)(program,pendingListB,tokenWords,*(undefined4 *)(loopCounterC + (int)ilReader[0x1b]),
+      ((int (*)())Program__translateILInstruction)(program,pendingListB,tokenWords,*(undefined4 *)(loopCounterC + (int)ilReader[0x1b]),
                    loopStackData,&lastDeclRegister,&movByRegister);
       destTokenWord = **(uint **)(loopCounterC + (int)ilReader[0x1b]);
       if ((((destTokenWord & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&

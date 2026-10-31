@@ -38,7 +38,7 @@ gldPrimInlineQuads
 gldPrimInlineQuadStrip
 gldPrimInlinePolygon
 gldPrimInlineLines
-FUN_0003b870
+gld_uploadProgramStateConstants
 extvsTranslateShaderObject
 gld_emitProgramConstantUpdates
 _gldAllocVertexBuffer

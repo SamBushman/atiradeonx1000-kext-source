@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000934f0 @ 0x934f0 (20 bytes) */
-int FUN_000934f0(allocState)
+/* ffvpEmitSphereMapCoord_0934f0 @ 0x934f0 (20 bytes) */
+int ffvpEmitSphereMapCoord_0934f0(allocState)
   int allocState;
 {
   undefined4 resultOrReg;
@@ -8278,8 +8278,8 @@ int atifsInit(ctx)
   return 1;
 }
 
-/* FUN_000a1040 @ 0xa1040 (20 bytes) */
-int FUN_000a1040(unusedArg1, flag)
+/* arbProgramTypeCode @ 0xa1040 (20 bytes) */
+int arbProgramTypeCode(unusedArg1, flag)
   undefined4 unusedArg1;
   int flag;
 {

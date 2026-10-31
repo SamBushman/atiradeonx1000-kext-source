@@ -1368,8 +1368,8 @@ int ArenaObject__freeBuffer(this)
   return ((int (*)())Arena__free)(*(undefined4 *)(*this + 0x370),this[5]);
 }
 
-/* FUN_00193c00 @ 0x193c00 (116 bytes) */
-int FUN_00193c00(typeDesc, compiler)
+/* TypedValueArray__createForType @ 0x193c00 (116 bytes) */
+int TypedValueArray__createForType(typeDesc, compiler)
   int typeDesc;
   int compiler;
 {

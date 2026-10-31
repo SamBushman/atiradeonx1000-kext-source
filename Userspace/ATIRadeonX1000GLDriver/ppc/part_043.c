@@ -9917,7 +9917,7 @@ int Inst__distributeSplatOperand_00157b78(inst, operandIndex, pass)
   if (isSplatResult == 0) {
     return;
   }
-  callResult = FUN_000f45f8(inst,operandIndex,sourceDef,pass);
+  callResult = IRInst__sourceReadMaskAvoidsDestKind1(inst,operandIndex,sourceDef,pass);
   if (callResult == 0) {
     return;
   }

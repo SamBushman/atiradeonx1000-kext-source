@@ -4073,7 +4073,7 @@ int gld_initContextDispatch(ctx)
    * used elsewhere in this function. The middle call (+0x1154) was the one already fixed and
    * verified to resolve the original atifsCreateShaderTable null-deref crash on this issue. The other two
    * were left as an open follow-up at the time - re-derived and added here after a *different*,
-   * later crash (FUN_00193c00, deep in the GLSL shader-compiler call chain) traced back to this
+   * later crash (TypedValueArray__createForType, deep in the GLSL shader-compiler call chain) traced back to this
    * same still-missing block. */
   *(int *)(streamBase + 0x116c) = ((int (*)())gld_callocBytes)(0xa8);
   *(int *)(streamBase + 0x1154) = ((int (*)())gld_callocBytes)(0x90);

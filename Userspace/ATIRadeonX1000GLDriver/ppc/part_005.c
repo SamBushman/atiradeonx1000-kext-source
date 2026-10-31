@@ -8544,8 +8544,8 @@ void gldPrimInlineLineLoop(int ctx,uint data,undefined4 elementCount,undefined4 
   return;
 }
 
-/* FUN_0003b160 @ 0x3b160 (284 bytes) */
-int FUN_0003b160(ctx, dirtyBits, passThroughResult)
+/* gld_updateProgramConstantsForDirtyBits @ 0x3b160 (284 bytes) */
+int gld_updateProgramConstantsForDirtyBits(ctx, dirtyBits, passThroughResult)
   int ctx;
   int dirtyBits;
   undefined4 passThroughResult;
@@ -8581,7 +8581,7 @@ int FUN_0003b160(ctx, dirtyBits, passThroughResult)
                    *(undefined4 *)(programHeader + 0x18),dirtyBits + 0x14);
     }
     else {
-      ((int (*)())FUN_0003b870)(ctx,constantBank,*(undefined4 *)(programRecord + 0x28),programRecord + *(int *)(programRecord + 0x2c) * 8,
+      ((int (*)())gld_uploadProgramStateConstants)(ctx,constantBank,*(undefined4 *)(programRecord + 0x28),programRecord + *(int *)(programRecord + 0x2c) * 8,
                    *(undefined4 *)(programHeader + 0x18));
     }
   }
@@ -8741,8 +8741,8 @@ int gld_bindVertexShaderSlot(ctx, shaderIdPtr)
   return 1;
 }
 
-/* FUN_0003b620 @ 0x3b620 (592 bytes) */
-int FUN_0003b620(ctx, program, hwProgram, operandCount, operandTable)
+/* extvsBuildProgramSymbolEntries @ 0x3b620 (592 bytes) */
+int extvsBuildProgramSymbolEntries(ctx, program, hwProgram, operandCount, operandTable)
   int ctx;
   int program;
   int hwProgram;
@@ -8835,8 +8835,8 @@ int FUN_0003b620(ctx, program, hwProgram, operandCount, operandTable)
   return extvsCompactSymbolEntries(ctx + 0x240,program,entryTotal,entrySymbols);
 }
 
-/* FUN_0003b870 @ 0x3b870 (2500 bytes) */
-int FUN_0003b870(ctx, passThroughArg2, passThroughArg3, operandTable, literalConstants)
+/* gld_uploadProgramStateConstants @ 0x3b870 (2500 bytes) */
+int gld_uploadProgramStateConstants(ctx, passThroughArg2, passThroughArg3, operandTable, literalConstants)
   int ctx;
   undefined4 passThroughArg2;
   undefined4 passThroughArg3;
@@ -8886,7 +8886,7 @@ int FUN_0003b870(ctx, passThroughArg2, passThroughArg3, operandTable, literalCon
   
   entryCount = extvsGetConstantUploadInfo(ctx + GLD_commandStream,&program,&constantTable,registerBase);
   if (entryCount != 0) {
-    ((int (*)())FUN_0003b620)(ctx,program,passThroughArg2,passThroughArg3,operandTable);
+    ((int (*)())extvsBuildProgramSymbolEntries)(ctx,program,passThroughArg2,passThroughArg3,operandTable);
   }
   entryCount = *(int *)(program + 0x800);
   entryCursor = program;
@@ -9873,7 +9873,7 @@ int gld_emitProgramConstantUpdates(ctx, passThroughArg2, passThroughArg3, operan
   ring = ctx + GLD_commandStream;
   status = extvsGetConstantUploadInfo(ring,&program,&constantTable,registerBase);
   if (status != 0) {
-    ((int (*)())FUN_0003b620)(ctx,program,passThroughArg2,passThroughArg3,operandTable);
+    ((int (*)())extvsBuildProgramSymbolEntries)(ctx,program,passThroughArg2,passThroughArg3,operandTable);
   }
   cmdStart = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,*(int *)(program + 0x808) * 7 + 2)
   ;

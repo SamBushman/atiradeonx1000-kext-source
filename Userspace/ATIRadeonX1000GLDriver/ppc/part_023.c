@@ -264,8 +264,8 @@ LAB_000e9ca8:
   return VReg__pushDefinition(vreg,*(undefined4 *)(block + 0xb0),definition);
 }
 
-/* FUN_000e9cc8 @ 0xe9cc8 (160 bytes) */
-int FUN_000e9cc8(block)
+/* Block__loopBodyHasAllLaneFlags @ 0xe9cc8 (160 bytes) */
+int Block__loopBodyHasAllLaneFlags(block)
   int block;
 {
   byte laneFlags;

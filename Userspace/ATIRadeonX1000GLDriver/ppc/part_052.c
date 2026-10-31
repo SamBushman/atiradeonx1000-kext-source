@@ -3238,7 +3238,7 @@ int R520VMachineAssembler__vslot12_visitNode(this, node, visitFlag)
     if (topKindIndex < predKindCount) {
       topKindSlot = (undefined4 *)(topKindIndex * 4 + *(int *)(*(int *)(this + 0x94) + 8));
     }
-    FUN_000e2bf4(node + 0x24,*topKindSlot);
+    Block__callVtable84OnInstsExceptOpcode57(node + 0x24,*topKindSlot);
   }
                     
                     

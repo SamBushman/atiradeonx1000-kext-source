@@ -573,8 +573,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2b7ec	2b7f0	padding	gld_beginQuerySlot	1	
 2bbac	2bbb0	padding	gld_emitQueryBeginPacket	1	
 2bbbc	2bbc4	millicode	gld_emitQueryBeginPacket	2	
-2bdec	2bdf0	padding	FUN_0002bbc4	1	
-2bdfc	2be00	padding	FUN_0002bbc4	1	
+2bdec	2bdf0	padding	gld_emitStampFencePacket	1	
+2bdfc	2be00	padding	gld_emitStampFencePacket	1	
 2be58	2be60	padding	gld_ensureRingSpace	2	
 2be6c	2be70	padding	gld_setStreamCursor	1	
 2be78	2be80	padding	gld_getStreamCurrent	2	
@@ -733,23 +733,23 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 3ab94	3aba0	padding	gldPrimInlinePoints	3	
 3ae74	3ae80	padding	gldPrimInlineLines	3	
 3b154	3b160	padding	gldPrimInlineLineLoop	3	
-3b24c	3b250	padding	FUN_0003b160	1	
+3b24c	3b250	padding	gld_updateProgramConstantsForDirtyBits	1	
 3b3d4	3b3e0	padding	extvsDeclareProgramVariables	3	
 3b49c	3b4a0	padding	extvsDeclareProgramVariables	1	
 3b4b4	3b4c0	padding	extvsDeclareProgramVariables	3	
 3b56c	3b570	padding	extvsDeclareProgramVariables	1	
 3b5a4	3b5b0	padding	extvsDeclareProgramVariables	3	
 3b614	3b620	padding	gld_bindVertexShaderSlot	3	
-3bc00	3bc18	table	FUN_0003b870	6	
-3bd14	3bd20	padding	FUN_0003b870	3	
-3bde4	3bdf0	padding	FUN_0003b870	3	
-3be38	3be50	table	FUN_0003b870	6	
-3be58	3be60	padding	FUN_0003b870	2	
-3bee4	3bef0	padding	FUN_0003b870	3	
-3bf74	3bfc0	table	FUN_0003b870	19	
-3c014	3c034	table	FUN_0003b870	8	
-3c178	3c180	padding	FUN_0003b870	2	
-3c304	3c310	padding	FUN_0003b870	3	
+3bc00	3bc18	table	gld_uploadProgramStateConstants	6	
+3bd14	3bd20	padding	gld_uploadProgramStateConstants	3	
+3bde4	3bdf0	padding	gld_uploadProgramStateConstants	3	
+3be38	3be50	table	gld_uploadProgramStateConstants	6	
+3be58	3be60	padding	gld_uploadProgramStateConstants	2	
+3bee4	3bef0	padding	gld_uploadProgramStateConstants	3	
+3bf74	3bfc0	table	gld_uploadProgramStateConstants	19	
+3c014	3c034	table	gld_uploadProgramStateConstants	8	
+3c178	3c180	padding	gld_uploadProgramStateConstants	2	
+3c304	3c310	padding	gld_uploadProgramStateConstants	3	
 3c3fc	3c400	padding	gldDeleteVertexShaderObject	1	
 3c79c	3c7a0	padding	extvsTranslateShaderObject	1	
 3c92c	3c948	table	extvsTranslateShaderObject	7	
@@ -1792,7 +1792,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 862a8	862b0	padding	arbEmitRecord1Src_op43	2	
 864d4	864e0	padding	arbEmitRecord2Src_op45	3	
 86704	86710	padding	arbEmitRecord2Src_op4f	3	
-867a8	867b0	padding	FUN_00086710	2	
+867a8	867b0	padding	gldEmitPacket_reg880	2	
 8683c	86840	padding	gldSyncClipPlaneEnables	1	
 86924	86930	padding	gldUploadClipPlanes	3	
 869b8	869c0	padding	gldLodBiasToFixed	2	
@@ -2020,8 +2020,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 932fc	93300	padding	ffvpEmitFogPassThrough	1	
 93338	93340	padding	ffvpEmitFogPassThrough	2	
 9338c	93390	padding	ffvpEmitFogPassThrough	1	
-934fc	93500	padding	FUN_000934f0	1	
-93508	93510	padding	FUN_000934f0	2	
+934fc	93500	padding	ffvpEmitSphereMapCoord_0934f0	1	
+93508	93510	padding	ffvpEmitSphereMapCoord_0934f0	2	
 939d4	939e0	padding	ffvpEmitBlendedEyeNormal	3	
 93a08	93a10	padding	ffvpPrepareRescaledNormal	2	
 93a1c	93a20	padding	ffvpPrepareRescaledNormal	1	
@@ -2189,7 +2189,7 @@ a0d64	a0d70	padding	arbProgramTableRelease	3
 a0ee4	a0ef0	padding	glDeleteProgramsARB_impl	3	
 a0f84	a0f90	padding	noop_a0f80	3	
 a1028	a1040	millicode	atifsInit	6	
-a1054	a1060	padding	FUN_000a1040	3	
+a1054	a1060	padding	arbProgramTypeCode	3	
 a108c	a1090	padding	arbProgramIsValid	1	
 a1158	a1160	padding	gld_setUnitTargetBits	2	
 a1188	a1190	padding	gld_getShaderTexUnitMask	2	
@@ -2846,11 +2846,11 @@ d7cac	d7cb0	padding	ffpsEmitTexEnvLegacy	1
 d7cd4	d7ce0	padding	ffpsEmitTexEnvLegacy	3	
 d7e08	d7e10	padding	ffpsEmitTexEnvLegacy	2	
 d8444	d8450	padding	ffpsEmitTexEnvLegacy	3	
-d8778	d8780	padding	FUN_000d8450	2	
-d8cf4	d8d00	padding	FUN_000d8450	3	
-d934c	d9350	padding	FUN_000d8450	1	
-d9808	d9810	padding	FUN_000d8450	2	
-d99d8	d99e0	padding	FUN_000d8450	2	
+d8778	d8780	padding	ffpsEmitTextureSamples	2	
+d8cf4	d8d00	padding	ffpsEmitTextureSamples	3	
+d934c	d9350	padding	ffpsEmitTextureSamples	1	
+d9808	d9810	padding	ffpsEmitTextureSamples	2	
+d99d8	d99e0	padding	ffpsEmitTextureSamples	2	
 d9f34	d9f3c	other	ConstBank__addMappedEntry	2	
 d9f78	d9f80	other	CompileInput__lacksFlag0x200000	2	
 da180	da184	eh-pad	Compiler__createFromRequest_da0c0	1	__Unwind_Resume
@@ -2870,7 +2870,7 @@ dcf28	dcfac	table	ildisPrintRegisterType	33
 ddc20	ddf1c	table	ildisPrintInstruction	191	
 e0120	e0138	table	ildisPrintInstruction	6	
 e0790	e0794	millicode	ildisDisassembleBody	1	
-e0cc4	e0cc8	millicode	FUN_000e0ca8	1	
+e0cc4	e0cc8	millicode	Compiler__resetOutputBufferState	1	
 e0e04	e0e0c	millicode	Compiler__applyRequestFlags	2	
 e1480	e1484	millicode	Compiler__timerOutputFileName	1	
 e1a08	e1a0c	eh-pad	Compiler__init_e1920	1	__Unwind_Resume
@@ -2946,7 +2946,7 @@ ebf38	ebf58	eh-pad	BreakBlock__clone	8	0x193cc0,__Unwind_Resume
 ec038	ec058	eh-pad	ContinueBlock__clone	8	0x193cc0,__Unwind_Resume
 ec1e4	ec1ec	other	Program__ensureVRegType13	2	
 ec56c	ec58c	eh-pad	Program__getDominatorInfo	8	0x193cc0,__Unwind_Resume
-ecf5c	ecf7c	eh-pad	FUN_000eced0	8	0x193cc0,__Unwind_Resume
+ecf5c	ecf7c	eh-pad	Program__insertEntryInst	8	0x193cc0,__Unwind_Resume
 ed0e4	ed0fc	eh-pad	Program__dtor_ecfac	6	__Unwind_Resume
 ed25c	ed274	eh-pad	Program__dtor_ed124	6	__Unwind_Resume
 edbf0	edc10	eh-pad	Program__groupLoadsIntoProjections	8	0x193cc0,__Unwind_Resume
@@ -2960,7 +2960,7 @@ ee748	ee764	other	Program__ctor_ee29c	7	0x193cc0
 ee780	ee7a0	eh-pad	Program__emitDepthExportScale	8	__Unwind_Resume
 ee830	ee850	eh-pad	Program__buildBlockArrayByKey	8	0x193cc0,__Unwind_Resume
 eede8	eee08	eh-pad	Program__emitDepthExportScale	8	0x193cc0,__Unwind_Resume
-ef038	ef058	eh-pad	FUN_000eee4c	8	0x193cc0,__Unwind_Resume
+ef038	ef058	eh-pad	Program__expandSpecialDestinations	8	0x193cc0,__Unwind_Resume
 ef79c	ef7a0	millicode	Program__initAndTranslate	1	
 ef7f8	ef818	eh-pad	Program__initAndTranslate	8	0x193cc0,__Unwind_Resume
 efaf0	efb2c	eh-pad	Program__orderBlocksByDfs	15	0x193cc0,__Unwind_Resume
@@ -2970,7 +2970,7 @@ f001c	f003c	eh-pad	Program__insertExitMarkerAndFlagBlocks	8	0x193cc0,__Unwind_Re
 f02c0	f02e0	eh-pad	Program__trimOutputChain	8	0x193cc0,__Unwind_Resume
 f0978	f0994	other	Program__forwardMovIntoConsumers	7	0x193cc0
 f09bc	f09dc	eh-pad	Program__forwardMovIntoConsumers	8	0x193cc0,__Unwind_Resume
-f157c	f159c	eh-pad	FUN_000f14f8	8	0x193cc0,__Unwind_Resume
+f157c	f159c	eh-pad	Program__foldKind6IntoKind7Inst	8	0x193cc0,__Unwind_Resume
 f293c	f2950	other	Program__propagateMovThroughUses	5	0x193cc0
 f2960	f2974	other	Program__propagateMovThroughUses	5	0x193cc0
 f2984	f2998	other	Program__propagateMovThroughUses	5	0x193cc0
@@ -2982,7 +2982,7 @@ f6c50	f6c70	eh-pad	Program__findOrCreateConstInst	8	0x193cc0,__Unwind_Resume
 f8258	f8278	eh-pad	DominatorTree__dfsNumber	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	DominatorTree__compress	8	0x193cc0,__Unwind_Resume
 f8908	f8928	eh-pad	Program__computeDominators	8	0x193cc0,__Unwind_Resume
-f8cc8	f8ccc	millicode	FUN_000f8c88	1	
+f8cc8	f8ccc	millicode	OpcodeTemplate__tableOffsetForIlOpcode	1	
 f91e8	f9288	table	Program__createInstForIlOpcode	40	
 f953c	f9550	table	Program__emitInputMerge	5	
 f95e4	f9600	other	Program__emitInputMerge	7	0x193cc0
@@ -2994,12 +2994,12 @@ fa27c	fa298	other	Program__lowerDestinationToken	7	0x193cc0
 fa45c	fa460	millicode	Program__lowerDestinationToken	1	
 fa544	fa564	eh-pad	Program__lowerDestinationToken	8	0x193cc0,__Unwind_Resume
 faeb4	faed4	eh-pad	Program__createIfBlock	8	0x193cc0,__Unwind_Resume
-fb584	fb588	millicode	FUN_000fb3d4	1	
-fb690	fb694	millicode	FUN_000fb3d4	1	
-fb77c	fb780	millicode	FUN_000fb3d4	1	
-fb974	fb978	millicode	FUN_000fb3d4	1	
-fbb88	fbba4	other	FUN_000fb3d4	7	0x193cc0
-fbe00	fbe20	eh-pad	FUN_000fb3d4	8	0x193cc0,__Unwind_Resume
+fb584	fb588	millicode	Program__translateILInstruction	1	
+fb690	fb694	millicode	Program__translateILInstruction	1	
+fb77c	fb780	millicode	Program__translateILInstruction	1	
+fb974	fb978	millicode	Program__translateILInstruction	1	
+fbb88	fbba4	other	Program__translateILInstruction	7	0x193cc0
+fbe00	fbe20	eh-pad	Program__translateILInstruction	8	0x193cc0,__Unwind_Resume
 fd760	fd77c	other	Program__translateILStream	7	0x193cc0
 fd7c4	fd7d8	other	Program__translateILStream	5	
 fd820	fd840	other	Program__translateILStream	8	0x193cc0
@@ -3413,10 +3413,10 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 17d330	17d334	eh-pad	ValueKey__rewriteAsMovOfVec4Constant	1	__Unwind_Resume
 17e138	17e13c	eh-pad	ValueKey__rewriteAsMovOfOperandWithScale	1	__Unwind_Resume
 17e550	17e554	eh-pad	ValueKey__rewriteAsBinaryOfOperands	1	__Unwind_Resume
-17ea3c	17ea40	eh-pad	FUN_0017e7e0	1	__Unwind_Resume
+17ea3c	17ea40	eh-pad	ValueKey__splitMadIntoMulAdd	1	__Unwind_Resume
 17ece0	17ece4	millicode	ValueKey__rewriteAsAdd	1	
 17edb0	17edd0	eh-pad	ValueKey__rewriteAsAdd	8	0x193cc0,__Unwind_Resume
-17f03c	17f040	eh-pad	FUN_0017ee68	1	__Unwind_Resume
+17f03c	17f040	eh-pad	ValueKey__foldDotOfSplatsIntoAdd	1	__Unwind_Resume
 1801a4	1801f8	table	ValueKey__simplifyInstruction	21	
 1811d8	1811f8	eh-pad	ValueKey__simplifyModifiersAndAddressing	8	0x193cc0,__Unwind_Resume
 181fdc	181ff8	other	Block__flattenAndRebuildAddMulTree	7	0x193cc0
@@ -3451,7 +3451,7 @@ ffd5c	ffd60	millicode	Program__translateILStream	1
 19323c	193240	eh-pad	FudoPs__peepholeCombine	1	__Unwind_Resume
 193b88	193ba8	eh-pad	TypedValueArray__createWrapping	8	0x193cc0,__Unwind_Resume
 193bd0	193be8	other	TypedValueArray__createWrapping	6	
-193c74	193c94	eh-pad	FUN_00193c00	8	0x193cc0,__Unwind_Resume
+193c74	193c94	eh-pad	TypedValueArray__createForType	8	0x193cc0,__Unwind_Resume
 193d94	193d98	millicode	List__freeAllNodes	1	
 193f04	193f08	millicode	Arena__bytesInUse	1	
 194bac	194be8	eh-pad	HashTable__grow	15	0x193cc0,__Unwind_Resume

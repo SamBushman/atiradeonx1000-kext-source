@@ -2363,7 +2363,7 @@ LAB_000ab014:
     }
 LAB_000ab18c:
     dirtyBitsArg = (char *)0x0;
-    fpPassThrough1 = (double)FUN_0003b160(glContextPtr4_2,dirtyBits,0);
+    fpPassThrough1 = (double)gld_updateProgramConstantsForDirtyBits(glContextPtr4_2,dirtyBits,0);
     staleR4Chain = r4AfterCall17;
   }
   if ((dirtyBitsWord3 & 0x7000000) == 0) goto LAB_000ab460;
@@ -9101,7 +9101,7 @@ LAB_000b66b8:
     unitCount = (uint)(byte)((unsigned char *)0x000013b2)[glContext];
   }
   ffpsEmitDeclarations(glContext,ffpsProgram);
-  FUN_000d8450(glContext,ffpsProgram,0);
+  ffpsEmitTextureSamples(glContext,ffpsProgram,0);
   tokenCountBefore = *(int *)(ffpsProgram + 4);
   if (unitCount == 0) {
     firstEnabledUnit = 1;
@@ -9151,7 +9151,7 @@ LAB_000b66b8:
     needsFogTokens = false;
   }
   if ((needsFogTokens) || ((glContextWord44 & 0x200000) != 0)) {
-    FUN_000d55c0(glContext,tokenCountPtr,firstEnabledUnit,lastTexUnit);
+    ffpsEmitFogTokens(glContext,tokenCountPtr,firstEnabledUnit,lastTexUnit);
   }
   if (tokenCountBefore == *(int *)(ffpsProgram + 4)) {
     tokenCountLocal = *tokenCountPtr;

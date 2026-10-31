@@ -317,7 +317,7 @@ int R520VMachineAssembler__vslot28_assembleIfEnd(this, node, block, compiler)
       topKindSlot = (int *)(topKindIndex * 4 + *(int *)(this[0x25] + 8));
     }
     topKind = *topKindSlot;
-    FUN_000e2bf4(block,topKind);
+    Block__callVtable84OnInstsExceptOpcode57(block,topKind);
     if (topKind != 0) {
       popInst = IRInst__create(0x58,compiler);
       zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
@@ -369,7 +369,7 @@ int R520VMachineAssembler__vslot31_assembleWithPredicateRestore(this, node, bloc
     if (topKindIndex < predKindCount) {
       topKindSlot = (undefined4 *)(topKindIndex * 4 + *(int *)(this[0x25] + 8));
     }
-    FUN_000e2bf4(block,*topKindSlot);
+    Block__callVtable84OnInstsExceptOpcode57(block,*topKindSlot);
     savedPredStack = this[0x26];
     savedCount = *(uint *)(savedPredStack + 4);
     if (0 < (int)savedCount) {
@@ -796,8 +796,8 @@ int psnPackedLaneNegate(descriptor, lane)
   return 0;
 }
 
-/* FUN_0019eb30 @ 0x19eb30 (172 bytes) */
-int FUN_0019eb30(tokenWords)
+/* DestToken__componentWordMatchesLowFields @ 0x19eb30 (172 bytes) */
+int DestToken__componentWordMatchesLowFields(tokenWords)
   uint *tokenWords;
 {
   uint componentWord;
@@ -842,8 +842,8 @@ int FUN_0019eb30(tokenWords)
   return 1;
 }
 
-/* FUN_0019ebdc @ 0x19ebdc (172 bytes) */
-int FUN_0019ebdc(tokenWords)
+/* DestToken__componentWordMatchesHighFields @ 0x19ebdc (172 bytes) */
+int DestToken__componentWordMatchesHighFields(tokenWords)
   uint *tokenWords;
 {
   uint componentWord;
