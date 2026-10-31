@@ -7873,18 +7873,18 @@ int Scheduler__assignFreshVirtualRegister(scheduler, node)
 }
 
 /* Scheduler__addDataDependencyEdge @ 0x165b7c (448 bytes) */
-int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex, subOperandIndex, componentMask, param_7)
+int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex, subOperandIndex, componentMask, staleArg7)
   int *scheduler;
   int fromNode;
   int toNode;
   undefined4 operandIndex;
   undefined4 subOperandIndex;
   undefined4 componentMask;
-  uint param_7;
+  uint staleArg7;
 {
   undefined4 arena;
   uint *toPredEdges;
-  unsigned int ghidra_home[8] = { scheduler, fromNode, toNode, operandIndex, subOperandIndex, componentMask, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { scheduler, fromNode, toNode, operandIndex, subOperandIndex, componentMask, staleArg7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 *edgeAlloc;
   undefined4 latency;
   undefined4 *appendSlot;
@@ -7895,7 +7895,7 @@ int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex, 
   char *maskByte;
   uint vectorCount;
   uint *fromSuccEdges;
-  undefined4 uVar7;
+  undefined4 edgeField;
   int componentsLeft;
   
   arena = *(undefined4 *)(*scheduler + 0x378);
@@ -7914,14 +7914,14 @@ int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex, 
   edgeAlloc[8] = 0;
   edgeAlloc[2] = toNode;
   a2 = *(undefined4 *)(toNode + 0x38);
-  uVar7 = operandIndex;
+  edgeField = operandIndex;
   latency = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(fromNode + 0x38),a2,0,operandIndex,0);
   edgeAlloc[5] = operandIndex;
   edgeAlloc[4] = latency;
   edgeAlloc[6] = subOperandIndex;
-  uVar7 = (**(code **)(*(int *)scheduler[3] + 0x20))
-                    ((int *)scheduler[3],*(undefined4 *)(fromNode + 0x38),a2,a3,uVar7,a5,a6);
-  edgeAlloc[8] = uVar7;
+  edgeField = (**(code **)(*(int *)scheduler[3] + 0x20))
+                    ((int *)scheduler[3],*(undefined4 *)(fromNode + 0x38),a2,a3,edgeField,a5,a6);
+  edgeAlloc[8] = edgeField;
   edgeAlloc[7] = (*(unsigned int *)((unsigned char *)ghidra_home + 20));
   fromSuccEdges = *(uint **)(fromNode + 0x40);
   vectorCount = fromSuccEdges[1];
@@ -7981,9 +7981,9 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   undefined4 priorityDescendantsB;
   undefined4 priorityDescendantsA;
   uint vectorCount;
-  undefined4 uVar9;
+  undefined4 arenaBlock;
   uint *nodeVector;
-  undefined4 uVar11;
+  undefined4 priorityWord;
   undefined4 *node;
   int fieldsLeft;
   
@@ -8035,8 +8035,8 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar9 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar9;
+  arenaBlock = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = arenaBlock;
   nodeAlloc[0x12] = vectorAlloc + 1;
   arenaAt378 = *(undefined4 *)(*scheduler + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -8044,13 +8044,13 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar9 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar9;
+  arenaBlock = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = arenaBlock;
   nodeAlloc[0x11] = vectorAlloc + 1;
   nodeAlloc[0xc] = 0xffffffff;
   nodeAlloc[0xe] = 0;
   nodeAlloc[0xd] = readyCycle;
-  uVar11 = priorityRecord[7];
+  priorityWord = priorityRecord[7];
   priorityPosition = priorityRecord[1];
   priorityDepth = priorityRecord[2];
   priorityDescendantsA = priorityRecord[5];
@@ -8060,7 +8060,7 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   nodeAlloc[6] = priorityDepth;
   nodeAlloc[9] = priorityDescendantsA;
   nodeAlloc[10] = priorityDescendantsB;
-  nodeAlloc[0xb] = uVar11;
+  nodeAlloc[0xb] = priorityWord;
   nodeVector = (uint *)scheduler[6];
   vectorCount = nodeVector[1];
   if (vectorCount < *nodeVector) {
@@ -9483,29 +9483,29 @@ int Scheduler__createCopyNode(scheduler, sourceInst, writeMask, readyCycle, prio
   undefined4 readyCycle;
   undefined4 priorityRecord;
 {
-  uint uVar1;
+  uint sourceFlags;
   int inst;
   undefined4 callResult;
-  int iVar4;
-  undefined4 local_28 [2];
+  int programStats;
+  undefined4 writeMaskOut [2];
   
-  iVar4 = *(int *)(*scheduler + 0x6c4);
+  programStats = *(int *)(*scheduler + 0x6c4);
   inst = IRInst__create(0x31,*scheduler);
   *(undefined4 *)(inst + 0x98) = 0;
   *(undefined4 *)(inst + 0x94) = *(undefined4 *)(inst + 0x14c);
   *(undefined4 *)(inst + 0x9c) = writeMask;
   IRInst__setOperandSource(inst,1,sourceInst,0,*scheduler);
-  WriteMask__fromSelectWord(local_28,writeMask);
-  uVar1 = *(uint *)(sourceInst + 0x14);
-  *(undefined4 *)(inst + 0xc) = local_28[0];
-  if ((uVar1 & 0x20) == 0) {
+  WriteMask__fromSelectWord(writeMaskOut,writeMask);
+  sourceFlags = *(uint *)(sourceInst + 0x14);
+  *(undefined4 *)(inst + 0xc) = writeMaskOut[0];
+  if ((sourceFlags & 0x20) == 0) {
     *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) & 0xffffffdf;
   }
   else {
     *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x20;
   }
   IRInst__clearSourceSelectsOfUnwrittenComponents(inst);
-  *(int *)(iVar4 + 0x23c) = *(int *)(iVar4 + 0x23c) + 1;
+  *(int *)(programStats + 0x23c) = *(int *)(programStats + 0x23c) + 1;
   callResult = ((int (*)())Scheduler__createNode)(scheduler,inst,priorityRecord,readyCycle);
   return callResult;
 }
@@ -9533,7 +9533,7 @@ int Scheduler__insertOperandCopy(scheduler, node)
   int compiler;
   int *target;
   undefined4 copySelectOutB;
-  undefined4 local_44;
+  undefined4 copyReadMaskOut;
   undefined4 copySelectOutA;
   undefined4 readMaskOut [3];
   
@@ -9644,8 +9644,8 @@ LAB_00168060:
   copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,sourceDef2,copySelectOutB,scheduler[0xb],node + 0xc);
   IRInst__setOperandSource(inst,1,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
   operandRecord = IRInst__getOperandRecord(inst,1);
-  SelectWord__readMask(&local_44,*(undefined4 *)(operandRecord + 0x10));
-  ((int (*)())Scheduler__addDataDependencyEdge)(scheduler,copyNode,node,1,0,local_44,in_r9);
+  SelectWord__readMask(&copyReadMaskOut,*(undefined4 *)(operandRecord + 0x10));
+  ((int (*)())Scheduler__addDataDependencyEdge)(scheduler,copyNode,node,1,0,copyReadMaskOut,in_r9);
   copyDestField = *(undefined4 *)(*(int *)(copyNode + 0x38) + 0x94);
   operandRecord = IRInst__getOperandRecord(*(int *)(copyNode + 0x38),0);
   *(undefined4 *)(operandRecord + 8) = copyDestField;

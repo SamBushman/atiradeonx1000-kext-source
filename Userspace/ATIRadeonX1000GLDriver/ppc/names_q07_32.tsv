@@ -4554,3 +4554,82 @@ local	FUN_001767d8	param_2	row	INFERRED	operand row
 local	FUN_001767d8	iVar1	valueNumber	INFERRED	value number read from the row; negative means unknown
 local	FUN_001767d8	piVar3	valueCursor	INFERRED	walks the value numbers of the row, four words per step
 local	FUN_00142974	iVar8	userOrCount	INFERRED	one register: user element, extra source, and push byte offset
+local	FUN_0017662c	iVar2	valueRecord	INFERRED	expression record for the lane, found at key+0x40 or created through FUN_00174ce0
+local	FUN_0017662c	iVar4	laneCursor	INFERRED	key + lane * 4: base of the lane's fields
+local	FUN_00143664	param_1	packCtx	INFERRED	pack context
+local	FUN_00143664	param_4	laneMapA	INFERRED	receives the lane map for inst
+local	FUN_00143664	param_5	laneMapB	INFERRED	receives the lane map for inst2
+local	SwizzleTable__eqKeys	param_1	keyA	INFERRED	first key
+local	SwizzleTable__eqKeys	param_2	keyB	INFERRED	second key
+local	SwizzleTable__eqKeys	local_18	swizzleOut	INFERRED	ValueKey__computeSwizzleTo out word: DAT_001b01b8 when the keys do not match
+local	ResourceModel__vslot24	param_2	node	INFERRED	scheduler node whose resource costs at +0x20..+0x28 are summed
+local	FUN_00176ec0	param_1	key	INFERRED	value key whose compiler (+0x238) holds the expression records
+local	FUN_00176ec0	param_2	valueNumberA	INFERRED	first value number tested
+local	FUN_00176ec0	param_3	valueNumberB	INFERRED	second value number tested
+local	KeyLaneTable__eqKeys	iVar7	keyOrCountReg	INFERRED	one register: key lane count, operand count and match results
+local	FUN_00151318	local_28	constantX	INFERRED	x lane of the vec4 out record of IRInst__sourceMatchesConstant
+local	FUN_00151318	local_24	constantY	INFERRED	y lane of the out record
+local	FUN_00151318	local_20	constantZ	INFERRED	z lane of the out record
+local	FUN_00151318	local_1c	constantW	INFERRED	w lane of the out record
+local	FUN_0013b1e8	iVar6	useCountOrDepth	INFERRED	one register: use count, block-test results and the common block depth
+local	FUN_0013a774	uVar9	slotRefPair	INFERRED	packed pair: users vector slot address and the stale r4 lane mask
+local	FUN_001398b4	param_2	unusedArg2	INFERRED	not referenced
+local	FUN_001398b4	param_3	unusedArg3	INFERRED	not referenced
+local	FUN_001398b4	uVar6	newOpcode	INFERRED	opcode (0x27 or 0x29) the inst is rewritten to
+local	classifyConstantRange	fparam_1	value	INFERRED	float constant being classified into a range code
+local	ValueKey__swapSources12	param_1	inst	INFERRED	inst whose operands 1 and 2 are swapped
+local	ValueKey__swapSources12	param_2	key	INFERRED	value key whose source words at +4 and +8 are swapped
+local	ValueKey__swapSources12	uVar1	savedSource1	INFERRED	source word at key +8 held during the swap
+local	ValueKey__canonicalizeCommutativeOperands	iVar1	laneRowCursor	INFERRED	key + lane * 4: base of the lane's operand value numbers
+local	Scheduler__splitAddressRegisterUses	iVar21	operandCountOrNode	INFERRED	one register: operand count, operand source, and the node whose lane counters are decremented
+local	Scheduler__scheduleCycle	iVar3	nextNodeOrCheck	INFERRED	one register: resource model checks and the node chosen by Scheduler__selectNextNode
+local	Scheduler__createNode	uVar9	arenaBlock	INFERRED	8-byte arena allocation for a node vector
+local	Scheduler__createNode	uVar11	priorityWord	INFERRED	priority record field copied to the node (+0x2c)
+local	Scheduler__addDataDependencyEdge	param_7	staleArg7	INFERRED	r9 spilled into the home slot array
+local	Scheduler__addDataDependencyEdge	uVar7	edgeField	INFERRED	operand index, then the latency hook result stored to the edge (+0x20)
+local	ResourceModel__vslot32	param_3	variant	INFERRED	opcode variant: 0 selects the 0xa6 opcode, else 0x2b
+local	ResourceModel__vslot32	uVar2	newOpcode	INFERRED	opcode the inst is constructed with
+local	ResourceModel__vslot11	param_2	node	INFERRED	scheduler node moved between the resource counts
+local	FUN_001765a4	param_1	key	INFERRED	value key; +0x238 compiler, +0x30 per-row value numbers
+local	FUN_001765a4	param_2	literalValue	INFERRED	float literal interned through Compiler__valueNumberForExpr
+local	FUN_001765a4	param_3	row	INFERRED	row whose value number is set
+local	FUN_00176534	param_1	keyA	INFERRED	first key; +300 holds its value number
+local	FUN_00176534	param_2	keyB	INFERRED	second key; +300 holds its value number
+local	FUN_0017629c	param_1	inst	INFERRED	inst passed to the target hook (vtable +300)
+local	FUN_0017629c	param_2	compiler	INFERRED	compiler whose +0x30c is the target
+local	FUN_001725c4	local_38	readMaskOut	INFERRED	SelectWord__readMask out value
+local	FUN_001725c4	local_34	selectWhereMaskedOut	INFERRED	SelectWord__selectWhereMasked out value stored to the new inst +0x9c
+local	FUN_001725c4	local_30	maskedUnusedOut	INFERRED	SelectWord__maskUnused out value stored back to the operand record
+local	FUN_0014c534	param_1	outSelect	INFERRED	receives the combined select word built from the two operands' lane bytes
+local	FUN_0014c534	local_48	selectScratch	INFERRED	select word scratch whose lane bytes are copied into outSelect
+local	FUN_001479f8	bVar1	firstScaleOk	INFERRED	the first source passes the output scale check
+local	FUN_001479f8	bVar2	secondScaleOk	INFERRED	the second source passes the output scale check
+local	FUN_0014700c	param_1	sourceA	INFERRED	first source tested
+local	FUN_0014700c	param_2	sourceB	INFERRED	second source tested
+local	FUN_0014675c	param_1	instA	INFERRED	first inst compared (+0x120/+0x124 fields)
+local	FUN_0014675c	param_2	instB	INFERRED	second inst compared (+0x120/+0x124 fields)
+local	ValueKey__findOrInsertLiteral	param_1	unusedArg1	INFERRED	not referenced
+local	ValueKey__findOrInsertLiteral	param_2	key	INFERRED	value key whose literal table (row of four floats) is searched
+local	ValueKey__findOrInsertLiteral	param_3	row	INFERRED	row whose literal slots are scanned
+local	ValueKey__findOrInsertLiteral	fparam_1	literal	INFERRED	float literal looked up or stored in the first free slot
+local	Scheduler__onNodeReady	iVar1	newClass	INFERRED	resource class of the node from the model (vtable +0x4c)
+local	Scheduler__onNodeReady	iVar2	isFetchFlag	INFERRED	0/1 flag stored at node +0x5c
+local	Scheduler__issueDeadNode	uVar1	currentCycle	INFERRED	scheduler current cycle (+0x2c) stored to node +0x2c and +0x30
+local	Scheduler__issueDeadNode	iVar2	checkResult	INFERRED	resource model vtable +0x20 / +0x24 results
+local	Scheduler__createCopyNode	uVar1	sourceFlags	INFERRED	flags word (+0x14) of the source inst
+local	Scheduler__createCopyNode	iVar4	programStats	INFERRED	state record at program +0x6c4 whose counter +0x23c is incremented
+local	Scheduler__createCopyNode	local_28	writeMaskOut	INFERRED	WriteMask__fromSelectWord out value stored at inst +0xc
+local	Ptr__equalNonNull	param_1	ptrA	INFERRED	first pointer
+local	Ptr__equalNonNull	param_2	ptrB	INFERRED	second pointer
+local	FUN_0017672c	iVar1	rowOffset	INFERRED	row selector: 0, 1 or 3 when the inst has flag bit 2
+local	FUN_00156cb8	param_3	pass	INFERRED	*(param_3+8) is the compiler
+local	FUN_00156cb8	uVar2	result	INFERRED	return value
+local	FUN_0014c9d0	local_28	mergedLanesOut	INFERRED	SelectWord__mergeWrittenLanes out value stored to inst[0x27]
+local	FUN_0014c9d0	local_24	fillUnusedOutA	INFERRED	SelectWord__fillUnusedLanes out value for operand record 1
+local	FUN_0014c9d0	local_20	fillUnusedOutB	INFERRED	SelectWord__fillUnusedLanes out value for the second operand record
+local	FUN_0014694c	param_1	inst	INFERRED	inst whose use count is compared with its users vector size
+local	FUN_0014694c	in_r5	requireAllUses	INFERRED	third argument: non-zero requires every user to count as a use
+local	FUN_00141044	param_1	outWriteMask	INFERRED	receives the write mask of inst
+local	FUN_00141044	param_2	packCtx	INFERRED	pack context
+local	FUN_00141044	local_18	writeMaskOut	INFERRED	WriteMask__fromSelectWord out value
+local	Scheduler__insertOperandCopy	local_44	copyReadMaskOut	INFERRED	SelectWord__readMask out value passed to the dependency edge

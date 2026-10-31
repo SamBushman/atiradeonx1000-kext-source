@@ -248,10 +248,10 @@ undefined4 IRInst__sourceIsSplatConstant(undefined4 inst,undefined4 srcIndex,dou
 }
 
 /* FUN_001398b4 @ 0x1398b4 (964 bytes) */
-int FUN_001398b4(inst, param_2, param_3, program)
+int FUN_001398b4(inst, unusedArg2, unusedArg3, program)
   int inst;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
   int program;
 {
   int producerOperand;
@@ -265,7 +265,7 @@ int FUN_001398b4(inst, param_2, param_3, program)
   int operandRecord;
   int operandVReg2;
   int callResult;
-  undefined4 uVar6;
+  undefined4 newOpcode;
   undefined4 operandSelect;
   undefined4 producerOperandIndex;
   undefined4 composedSelect;
@@ -297,7 +297,7 @@ LAB_00139c2c:
       if ((sourceIsSplatConstantResult != 0) &&
          (((*(uint *)(operandVReg + 0xb8) & 1) == 0 && ((*(uint *)(operandVReg + 0xb8) & 2) != 0)))) {
         producerOperandIndex = 1;
-        uVar6 = 0x27;
+        newOpcode = 0x27;
         goto LAB_00139978;
       }
       producerOpcodeInfo = *(int *)(operandVReg + 0x88);
@@ -307,7 +307,7 @@ LAB_00139c2c:
       if ((sourceIsSplatConstantResult != 0) &&
          (((*(uint *)(operandVReg + 0xd0) & 1) == 0 && ((*(uint *)(operandVReg + 0xd0) & 2) == 0)))) {
         producerOperandIndex = 2;
-        uVar6 = 0x29;
+        newOpcode = 0x29;
         goto LAB_00139978;
       }
       producerOpcodeInfo = *(int *)(operandVReg + 0x88);
@@ -334,7 +334,7 @@ LAB_00139c2c:
     }
   }
   producerOperandIndex = 1;
-  uVar6 = 0x29;
+  newOpcode = 0x29;
 LAB_00139978:
   producerOperand = IRInst__getOperandSource(operandVReg,producerOperandIndex);
   if (((((*(int *)(*(int *)(producerOperand + 0x88) + 8) == 0x12) && ((*(uint *)(producerOperand + 0x14) & 0x200) == 0))
@@ -372,7 +372,7 @@ LAB_00139978:
     *(undefined4 *)(operandRecord2 + 0x10) = composedSelectFirst;
     operandRecord2 = IRInst__getOperandRecord(inst,2);
     *(undefined4 *)(operandRecord2 + 0x10) = composedSelectSecond[0];
-    opcodeInfo = Opcode__getInfo(uVar6);
+    opcodeInfo = Opcode__getInfo(newOpcode);
     *(undefined4 *)(inst + 0x88) = opcodeInfo;
     IRInst__dropCounterAndDeleteIfUnused(operandVReg,*(undefined4 *)(program + 8));
   }
@@ -912,7 +912,7 @@ int FUN_0013a774(inst, laneMask, clearLength)
   undefined4 user;
   uint *usersVec;
   int operandIndex;
-  undefined8 uVar9;
+  undefined8 slotRefPair;
   
   usersVec = (uint *)inst[4];
   userCount = usersVec[1];
@@ -927,13 +927,13 @@ int FUN_0013a774(inst, laneMask, clearLength)
           usersVec[1] = loopIndex + 1;
           laneMask = extraout_r4;
         }
-        uVar9 = CONCAT44(loopIndex * 4 + usersVec[2],laneMask);
+        slotRefPair = CONCAT44(loopIndex * 4 + usersVec[2],laneMask);
       }
       else {
-        uVar9 = Vector__elementRefGrow(usersVec,loopIndex);
+        slotRefPair = Vector__elementRefGrow(usersVec,loopIndex);
       }
-      a1 = (undefined4)uVar9;
-      user = *(undefined4 *)((ulonglong)uVar9 >> 0x20);
+      a1 = (undefined4)slotRefPair;
+      user = *(undefined4 *)((ulonglong)slotRefPair >> 0x20);
       for (operandIndex = 1; operandCount = (**(code **)(*inst + 0x14))(inst,a1,clearLength), operandIndex <= operandCount;
           operandIndex = operandIndex + 1) {
         sourceDef = IRInst__getOperandSource(user,operandIndex);
@@ -1344,7 +1344,7 @@ int FUN_0013b1e8(producer, program)
   uint userCount;
   int *elementPtr;
   int operandVReg;
-  int iVar6;
+  int useCountOrDepth;
   int *commonBlock;
   uint loopIndex;
   int *nextCommonBlock;
@@ -1352,7 +1352,7 @@ int FUN_0013b1e8(producer, program)
   int operandIdx;
   
   commonBlock = (int *)0x0;
-  for (loopIndex = 0; iVar6 = IRInst__useCount(producer,program), (int)loopIndex < iVar6; loopIndex = loopIndex + 1) {
+  for (loopIndex = 0; useCountOrDepth = IRInst__useCount(producer,program), (int)loopIndex < useCountOrDepth; loopIndex = loopIndex + 1) {
     userVec = *(uint **)(producer + 0x10);
     if (loopIndex < *userVec) {
       userCount = userVec[1];
@@ -1379,26 +1379,26 @@ int FUN_0013b1e8(producer, program)
       userBlock = (int *)Block__getPredecessor(userBlock,operandIdx);
     }
 LAB_0013b2d8:
-    iVar6 = (**(code **)(*userBlock + 0x24))(userBlock);
-    if ((iVar6 != 0) && (userBlock = (int *)Block__getPredecessor(userBlock,0), userBlock == (int *)0x0))
+    useCountOrDepth = (**(code **)(*userBlock + 0x24))(userBlock);
+    if ((useCountOrDepth != 0) && (userBlock = (int *)Block__getPredecessor(userBlock,0), userBlock == (int *)0x0))
     goto LAB_0013b3c4;
     noCommonYet = commonBlock == (int *)0x0;
     nextCommonBlock = userBlock;
     if ((!noCommonYet) && (nextCommonBlock = commonBlock, commonBlock != userBlock)) {
       do {
         userBlockDepth = userBlock[0x2f];
-        iVar6 = commonBlock[0x2f];
-        if (iVar6 < userBlockDepth) {
+        useCountOrDepth = commonBlock[0x2f];
+        if (useCountOrDepth < userBlockDepth) {
           userBlock = (int *)userBlock[0x3c];
 LAB_0013b318:
           if (userBlock == (int *)0x0) goto LAB_0013b3c4;
           noCommonYet = commonBlock == (int *)0x0;
         }
-        else if (userBlockDepth < iVar6) {
+        else if (userBlockDepth < useCountOrDepth) {
           commonBlock = (int *)commonBlock[0x3c];
           noCommonYet = commonBlock == (int *)0x0;
         }
-        else if (userBlockDepth == iVar6) {
+        else if (userBlockDepth == useCountOrDepth) {
           userBlock = (int *)userBlock[0x3c];
           commonBlock = (int *)commonBlock[0x3c];
           goto LAB_0013b318;
@@ -4958,18 +4958,18 @@ int FUN_00140e7c(packCtx, inst, inst2)
 }
 
 /* FUN_00141044 @ 0x141044 (76 bytes) */
-int FUN_00141044(param_1, param_2, inst)
-  undefined4 *param_1;
-  undefined4 param_2;
+int FUN_00141044(outWriteMask, packCtx, inst)
+  undefined4 *outWriteMask;
+  undefined4 packCtx;
   undefined4 inst;
 {
   int operandRecord;
-  undefined4 local_18 [3];
+  undefined4 writeMaskOut [3];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  WriteMask__fromSelectWord(local_18,*(undefined4 *)(operandRecord + 0x10));
-  *param_1 = local_18[0];
-  return param_1;
+  WriteMask__fromSelectWord(writeMaskOut,*(undefined4 *)(operandRecord + 0x10));
+  *outWriteMask = writeMaskOut[0];
+  return outWriteMask;
 }
 
 /* FUN_00141090 @ 0x141090 (112 bytes) */
@@ -6781,17 +6781,17 @@ LAB_001435e4:
 }
 
 /* FUN_00143664 @ 0x143664 (80 bytes) */
-int FUN_00143664(param_1, inst, inst2, param_4, param_5)
-  undefined4 param_1;
+int FUN_00143664(packCtx, inst, inst2, laneMapA, laneMapB)
+  undefined4 packCtx;
   undefined4 inst;
   undefined4 inst2;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 laneMapA;
+  undefined4 laneMapB;
 {
   undefined4 callResult;
   
-  ((int (*)())FUN_00140e7c)(param_1,inst,inst2);
-  callResult = ((int (*)())FUN_00142fdc)(param_1,inst,inst2,param_4,param_5);
+  ((int (*)())FUN_00140e7c)(packCtx,inst,inst2);
+  callResult = ((int (*)())FUN_00142fdc)(packCtx,inst,inst2,laneMapA,laneMapB);
   return callResult;
 }
 
@@ -9007,12 +9007,12 @@ int IRInst__getOperandSourceThroughMix(inst, operandIndex)
 }
 
 /* FUN_0014675c @ 0x14675c (44 bytes) */
-int FUN_0014675c(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0014675c(instA, instB)
+  int instA;
+  int instB;
 {
-  if ((*(int *)(param_1 + 0x120) == *(int *)(param_2 + 0x120)) &&
-     (*(int *)(param_1 + 0x124) == *(int *)(param_2 + 0x124))) {
+  if ((*(int *)(instA + 0x120) == *(int *)(instB + 0x120)) &&
+     (*(int *)(instA + 0x124) == *(int *)(instB + 0x124))) {
     return 1;
   }
   return 0;

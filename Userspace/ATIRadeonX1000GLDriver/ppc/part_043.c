@@ -1,15 +1,15 @@
 #include "decls.h"
 
 /* FUN_0014694c @ 0x14694c (80 bytes) */
-int FUN_0014694c(param_1, program, in_r5)
-  int param_1;
+int FUN_0014694c(inst, program, requireAllUses)
+  int inst;
   undefined4 program;
-  int in_r5;
+  int requireAllUses;
 {
   int useCountResult;
   
-  if ((in_r5 != 0) &&
-     (useCountResult = IRInst__useCount(param_1,program), useCountResult != *(int *)(*(int *)(param_1 + 0x10) + 4))) {
+  if ((requireAllUses != 0) &&
+     (useCountResult = IRInst__useCount(inst,program), useCountResult != *(int *)(*(int *)(inst + 0x10) + 4))) {
     return 0;
   }
   return 1;
@@ -242,13 +242,13 @@ int FUN_00146edc(inst, inst2)
 }
 
 /* FUN_0014700c @ 0x14700c (56 bytes) */
-int FUN_0014700c(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0014700c(sourceA, sourceB)
+  int sourceA;
+  int sourceB;
 {
   int callResult;
   
-  if ((param_1 != param_2) && (callResult = ((int (*)())FUN_00146edc)(param_1,param_2), callResult == 0)) {
+  if ((sourceA != sourceB) && (callResult = ((int (*)())FUN_00146edc)(sourceA,sourceB), callResult == 0)) {
     return 0;
   }
   return 1;
@@ -624,8 +624,8 @@ int FUN_001479f8(inst, program)
 {
   int inst1;
   int hasSingleUse;
-  bool bVar1;
-  bool bVar2;
+  bool firstScaleOk;
+  bool secondScaleOk;
   int resultScaleCode;
   int *operandVReg;
   int *target;
@@ -633,11 +633,11 @@ int FUN_001479f8(inst, program)
   int saturate;
   int resultScaleCode2;
   
-  bVar1 = true;
+  firstScaleOk = true;
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   resultScaleCode2 = *(int *)(inst + 0x124);
   saturate = *(int *)(inst + 0x120);
-  bVar2 = true;
+  secondScaleOk = true;
   while( true ) {
     vcall24Result = (**(code **)(*operandVReg + 0x24))(operandVReg);
     if (vcall24Result == 0) {
@@ -646,15 +646,15 @@ int FUN_001479f8(inst, program)
     hasSingleUse = IRInst__hasSingleUse(operandVReg,program);
     if (hasSingleUse == 0) break;
     if (operandVReg[0x48] != 0) {
-      bVar1 = false;
+      firstScaleOk = false;
     }
     target = *(int **)(*(int *)(program + 8) + 0x30c);
     inst1 = (**(code **)(*target + 0xfc))(target,resultScaleCode2 + operandVReg[0x49],operandVReg);
     if (inst1 == 0) {
-      bVar2 = false;
+      secondScaleOk = false;
     }
     if ((operandVReg[5] & 0x200U) == 0) {
-      if (((resultScaleCode2 == 0) || ((bVar1 && (bVar2)))) && (inst1 = IRInst__getOperandSource(inst,1), inst1 != 0)) {
+      if (((resultScaleCode2 == 0) || ((firstScaleOk && (secondScaleOk)))) && (inst1 = IRInst__getOperandSource(inst,1), inst1 != 0)) {
         do {
           resultScaleCode = *(int *)(inst1 + 0x124);
           if (resultScaleCode2 != 0) {
@@ -3437,8 +3437,8 @@ LAB_0014bf78:
 }
 
 /* FUN_0014c534 @ 0x14c534 (208 bytes) */
-int FUN_0014c534(param_1, inst, operandIndex, inst2, operandIndex2)
-  undefined4 *param_1;
+int FUN_0014c534(outSelect, inst, operandIndex, inst2, operandIndex2)
+  undefined4 *outSelect;
   undefined4 inst;
   undefined4 operandIndex;
   undefined4 inst2;
@@ -3448,16 +3448,16 @@ int FUN_0014c534(param_1, inst, operandIndex, inst2, operandIndex2)
   int operandRecord;
   int loopIndex;
   int loopIndex2;
-  undefined4 local_48 [9];
+  undefined4 selectScratch [9];
   
   loopIndex = 0;
   loopIndex2 = 0;
-  *param_1 = DAT_001b0050;
+  *outSelect = DAT_001b0050;
   do {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    local_48[0] = *(undefined4 *)(operandRecord + 0x10);
-    if (*(char *)((int)local_48 + loopIndex2) != '\x04') {
-      *(char *)((int)param_1 + loopIndex) = *(char *)((int)local_48 + loopIndex2);
+    selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
+    if (*(char *)((int)selectScratch + loopIndex2) != '\x04') {
+      *(char *)((int)outSelect + loopIndex) = *(char *)((int)selectScratch + loopIndex2);
       loopIndex = loopIndex + 1;
     }
     moreComponents = loopIndex2 != 3;
@@ -3466,15 +3466,15 @@ int FUN_0014c534(param_1, inst, operandIndex, inst2, operandIndex2)
   loopIndex2 = 0;
   do {
     operandRecord = IRInst__getOperandRecord(inst2,operandIndex2);
-    local_48[0] = *(undefined4 *)(operandRecord + 0x10);
-    if ((loopIndex < 4) && (*(char *)((int)local_48 + loopIndex2) != '\x04')) {
-      *(char *)((int)param_1 + loopIndex) = *(char *)((int)local_48 + loopIndex2);
+    selectScratch[0] = *(undefined4 *)(operandRecord + 0x10);
+    if ((loopIndex < 4) && (*(char *)((int)selectScratch + loopIndex2) != '\x04')) {
+      *(char *)((int)outSelect + loopIndex) = *(char *)((int)selectScratch + loopIndex2);
       loopIndex = loopIndex + 1;
     }
     moreComponents = loopIndex2 != 3;
     loopIndex2 = loopIndex2 + 1;
   } while (moreComponents);
-  return param_1;
+  return outSelect;
 }
 
 /* FUN_0014c604 @ 0x14c604 (972 bytes) */
@@ -3593,31 +3593,31 @@ int FUN_0014c9d0(inst, inst2)
   int operandRecord;
   int vcall5cResult;
   undefined4 operandSelect;
-  int local_28;
-  undefined4 local_24;
-  undefined4 local_20 [4];
+  int mergedLanesOut;
+  undefined4 fillUnusedOutA;
+  undefined4 fillUnusedOutB [4];
   
   vcall5cResult = (**(code **)(*inst + 0x5c))(inst,inst2);
   if (vcall5cResult != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     operandSelect = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(inst2,0);
-    SelectWord__mergeWrittenLanes(&local_28,operandSelect,*(undefined4 *)(operandRecord + 0x10));
-    inst[0x27] = local_28;
+    SelectWord__mergeWrittenLanes(&mergedLanesOut,operandSelect,*(undefined4 *)(operandRecord + 0x10));
+    inst[0x27] = mergedLanesOut;
     operandRecord = IRInst__getOperandRecord(inst,1);
     operandSelect = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(inst2,1);
-    SelectWord__fillUnusedLanes(&local_24,operandSelect,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__fillUnusedLanes(&fillUnusedOutA,operandSelect,*(undefined4 *)(operandRecord + 0x10));
     operandRecord = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(operandRecord + 0x10) = local_24;
+    *(undefined4 *)(operandRecord + 0x10) = fillUnusedOutA;
     vcall14Result = (**(code **)(*inst + 0x14))(inst);
     if (vcall14Result == 2) {
       operandRecord = IRInst__getOperandRecord(inst,2);
       operandSelect = *(undefined4 *)(operandRecord + 0x10);
       operandRecord = IRInst__getOperandRecord(inst2,2);
-      SelectWord__fillUnusedLanes(local_20,operandSelect,*(undefined4 *)(operandRecord + 0x10));
+      SelectWord__fillUnusedLanes(fillUnusedOutB,operandSelect,*(undefined4 *)(operandRecord + 0x10));
       operandRecord = IRInst__getOperandRecord(inst,2);
-      *(undefined4 *)(operandRecord + 0x10) = local_20[0];
+      *(undefined4 *)(operandRecord + 0x10) = fillUnusedOutB[0];
     }
   }
   return;
@@ -6060,17 +6060,17 @@ int FUN_00151318(inst)
 {
   int operandRecord;
   undefined4 callResult;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
-  undefined4 local_1c;
+  undefined4 constantX;
+  undefined4 constantY;
+  undefined4 constantZ;
+  undefined4 constantW;
   
-  local_1c = 0;
-  local_28 = 0;
-  local_24 = 0;
-  local_20 = 0;
+  constantW = 0;
+  constantX = 0;
+  constantY = 0;
+  constantZ = 0;
   operandRecord = IRInst__getOperandRecord(inst,0);
-  callResult = IRInst__sourceMatchesConstant(inst,1,*(undefined4 *)(operandRecord + 0x10),&local_28);
+  callResult = IRInst__sourceMatchesConstant(inst,1,*(undefined4 *)(operandRecord + 0x10),&constantX);
   return callResult;
 }
 
@@ -9299,14 +9299,14 @@ code_r0x00156744:
 }
 
 /* FUN_00156cb8 @ 0x156cb8 (144 bytes) */
-int FUN_00156cb8(inst, inst2, param_3)
+int FUN_00156cb8(inst, inst2, pass)
   undefined4 inst;
   undefined4 inst2;
-  int param_3;
+  int pass;
 {
   int splitRgbAlphaEnabled;
   int operandRecord;
-  undefined4 uVar2;
+  undefined4 result;
   int operandSelect;
   int operandSelectB;
   
@@ -9314,19 +9314,19 @@ int FUN_00156cb8(inst, inst2, param_3)
   operandSelectB = *(int *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst2,0);
   operandSelect = *(int *)(operandRecord + 0x10);
-  splitRgbAlphaEnabled = Compiler__isOptionEnabled(*(undefined4 *)(param_3 + 8),0x30);
+  splitRgbAlphaEnabled = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),0x30);
   if (splitRgbAlphaEnabled == 0) {
 LAB_00156d30:
-    uVar2 = 1;
+    result = 1;
   }
   else {
     if (operandSelectB == DAT_001b0054) {
       if (operandSelectB == operandSelect) goto LAB_00156d30;
     }
     else if (DAT_001b0054 != operandSelect) goto LAB_00156d30;
-    uVar2 = 0;
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* FUN_00156d48 @ 0x156d48 (3576 bytes) */
