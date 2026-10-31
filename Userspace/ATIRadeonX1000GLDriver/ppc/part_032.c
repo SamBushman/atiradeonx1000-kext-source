@@ -2664,18 +2664,18 @@ int OpcodeInfo__getResultMode(opcodeInfo, inst, program)
 }
 
 /* mulFloatZeroAnnihilates @ 0x113554 (56 bytes) */
-double mulFloatZeroAnnihilates(double fparam_1,double fparam_2)
+double mulFloatZeroAnnihilates(double factorA,double factorB)
 {
-  double dVar1;
+  double zero;
   
-  dVar1 = (double)FLOAT_001aa0d4;
-  if (fparam_1 == dVar1) {
-    return dVar1;
+  zero = (double)FLOAT_001aa0d4;
+  if (factorA == zero) {
+    return zero;
   }
-  if (fparam_2 == dVar1) {
-    return dVar1;
+  if (factorB == zero) {
+    return zero;
   }
-  return (double)(float)(fparam_1 * fparam_2);
+  return (double)(float)(factorA * factorB);
 }
 
 /* OpcodeSetup__mode9 @ 0x11358c (28 bytes) */

@@ -13,3 +13,6 @@ local	remapSelect1To0	param_1	selectValue	INFERRED	remaps select value 1 -> 0, 2
 local	remapSelectSmall	param_1	selectValue	INFERRED	remaps select value 1 -> 0, 2 -> 1, else 3
 local	SelectWord__clearReadComponents	param_2	selectWord	CONFIRMED	its four bytes are the per-component selects; component >= 4 clears the matching mask byte
 local	KhanVs__vslot60_isZeroOrOne	fparam_1	value	CONFIRMED	compared against the 0.0 and 1.0 constants
+local	mulFloatZeroAnnihilates	fparam_1	factorA	CONFIRMED	first multiplicand: returned as 0 when equal to the zero constant, otherwise multiplied
+local	mulFloatZeroAnnihilates	fparam_2	factorB	CONFIRMED	second multiplicand, same test
+local	mulFloatZeroAnnihilates	dVar1	zero	CONFIRMED	loaded from FLOAT_001aa0d4 and compared against both factors; returned as the zero result
