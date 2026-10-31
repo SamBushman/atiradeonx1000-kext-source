@@ -343,8 +343,8 @@ int _PPEmulatorProgramCreate()
   int allocation;
   
   allocation = _calloc(0x128,1);
-  defaultWord = DAT_a7b7bda4;
-  *(undefined4 *)(allocation + 0xc) = DAT_a7b7bda4;
+  defaultWord = ptrTo_PPEmulatorBuild_a7b7bda4;
+  *(undefined4 *)(allocation + 0xc) = ptrTo_PPEmulatorBuild_a7b7bda4;
   *(undefined4 *)(allocation + 8) = defaultWord;
   /* dropped-return-value defect (class 25, issue #68) - stock leaves calloc's result in r3
    * through to blr; verified via Capstone disasm of the real 0x97b82d7c body. */

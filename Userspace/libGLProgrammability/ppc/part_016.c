@@ -1544,7 +1544,7 @@ loopSetOutCursor:
           }
         }
         else {
-          if (loopIndex != 3) goto LAB_97be7cf4;
+          if (loopIndex != 3) goto switchComponentSelect;
           componentSelect = *(uint *)(operandIndex * 8 + operands) & 0xf;
           copyIndex = 0;
           ch = s___97c2a324[0];
@@ -1568,7 +1568,7 @@ loopSetOutCursor:
         goto loopSetOutCursor;
       }
     }
-LAB_97be7cf4:
+switchComponentSelect:
     switch(componentSelect) {
     case 0:
       copyIndex = 0;

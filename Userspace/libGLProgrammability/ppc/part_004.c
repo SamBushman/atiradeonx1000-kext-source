@@ -3990,15 +3990,15 @@ int TIntermediate__outputTree(this, intermNode)
   
   if (intermNode != (unsigned char *)0x0) {
     infoSink = *(int *)this;
-    visitAggregateFn = DAT_a7b7b9dc;
-    visitBinaryFn = DAT_a7b7b9d8;
-    visitConstantUnionFn = DAT_a7b7b9d4;
-    visitSelectionFn = DAT_a7b7b9d0;
-    visitSymbolFn = DAT_a7b7b9cc;
-    visitUnaryFn = DAT_a7b7b9c8;
-    visitLoopFn = DAT_a7b7b9c4;
+    visitAggregateFn = ptrTo_OutputAggregate_a7b7b9dc;
+    visitBinaryFn = ptrTo_OutputBinary_a7b7b9d8;
+    visitConstantUnionFn = ptrTo_OutputConstantUnion_a7b7b9d4;
+    visitSelectionFn = ptrTo_OutputSelection_a7b7b9d0;
+    visitSymbolFn = ptrTo_OutputSymbol_a7b7b9cc;
+    visitUnaryFn = ptrTo_OutputUnary_a7b7b9c8;
+    visitLoopFn = ptrTo_OutputLoop_a7b7b9c4;
     rightToLeft = 0;
-    visitBranchFn = DAT_a7b7b9c0;
+    visitBranchFn = ptrTo_OutputBranch_a7b7b9c0;
     depth = 0;
     preVisit = 1;
     postVisit = 0;
@@ -5618,20 +5618,20 @@ int TIntermediate__parseConstTree(this, unusedLine, intermNode, constUnion, op, 
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d488;
     index = 0;
     unusedField38 = 0;
-    visitAggregateFn = DAT_a7b7ba0c;
-    visitBinaryFn = DAT_a7b7ba08;
-    visitConstantUnionFn = DAT_a7b7ba04;
-    visitSelectionFn = DAT_a7b7ba00;
-    visitSymbolFn = DAT_a7b7b9fc;
-    visitUnaryFn = DAT_a7b7b9f8;
-    visitLoopFn = DAT_a7b7b9f4;
-    visitBranchFn = DAT_a7b7b9f0;
+    visitAggregateFn = ptrTo_ParseAggregate_a7b7ba0c;
+    visitBinaryFn = ptrTo_ParseBinary_a7b7ba08;
+    visitConstantUnionFn = ptrTo_ParseConstantUnion_a7b7ba04;
+    visitSelectionFn = ptrTo_ParseSelection_a7b7ba00;
+    visitSymbolFn = ptrTo_ParseSymbol_a7b7b9fc;
+    visitUnaryFn = ptrTo_ParseUnary_a7b7b9f8;
+    visitLoopFn = ptrTo_ParseLoop_a7b7b9f4;
+    visitBranchFn = ptrTo_ParseBranch_a7b7b9f0;
     unionArray = constUnion;
     travConstructorType = op;
     travSingleConstantParam = singleConstantParam;
     travSymbolTable = symbolTable;
     (**(code **)(*(int *)intermNode + 8))
-              (intermNode,&visitSymbolFn,stackTypeWord14,stackTypeTypeName,stackTypeFieldName,stackTypeStructure,DAT_a7b7b9f0,stackTypeArraySize);
+              (intermNode,&visitSymbolFn,stackTypeWord14,stackTypeTypeName,stackTypeFieldName,stackTypeStructure,ptrTo_ParseBranch_a7b7b9f0,stackTypeArraySize);
     if (errorFlag == 0) {
       result = 0;
     }

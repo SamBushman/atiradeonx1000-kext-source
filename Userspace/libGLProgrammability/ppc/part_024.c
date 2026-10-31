@@ -75,7 +75,7 @@ int __ZNSt13runtime_errorC2ERKSs(this, text)
   void *this;
   unsigned char * text;
 {
-  *(int *)this = DAT_a7b7c010 + 8;
+  *(int *)this = runtimeErrorVtablePtr_a7b7c010 + 8;
   return __ZNSsC1ERKSs((void *)((int)this + 4),text);
 }
 
@@ -92,7 +92,7 @@ int __ZNSt13runtime_errorC4ERKSs(this, text)
   void *this;
   unsigned char * text;
 {
-  *(int *)this = DAT_a7b7c010 + 8;
+  *(int *)this = runtimeErrorVtablePtr_a7b7c010 + 8;
   return __ZNSsC1ERKSs((void *)((int)this + 4),text);
 }
 
@@ -131,7 +131,7 @@ int __ZNSt13runtime_errorD4Ev(this, deleteFlag)
   undefined1 allocScratch [20];
   
   stringData = *(int *)((int)this + 4);
-  *(int *)this = DAT_a7b7c010 + 8;
+  *(int *)this = runtimeErrorVtablePtr_a7b7c010 + 8;
   refCountPtr = (int *)(stringData + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -264,7 +264,7 @@ int __ZNSt9type_infoD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  *(int *)this = DAT_a7b7c02c + 8;
+  *(int *)this = typeInfoVtablePtr_a7b7c02c + 8;
   if ((deleteFlag & 1) == 0) {
     return;
   }
@@ -297,7 +297,7 @@ int __ZNSt8bad_castD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  *(int *)this = DAT_a7b7c028 + 8;
+  *(int *)this = badCastVtablePtr_a7b7c028 + 8;
   __ZNSt9exceptionD2Ev(this);
   if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
@@ -331,7 +331,7 @@ int __ZNSt10bad_typeidD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  *(int *)this = DAT_a7b7c024 + 8;
+  *(int *)this = badTypeidVtablePtr_a7b7c024 + 8;
   __ZNSt9exceptionD2Ev(this);
   if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
@@ -410,7 +410,7 @@ int __ZN10__cxxabiv117__class_type_infoD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  *(int *)this = DAT_a7b7c020 + 8;
+  *(int *)this = classTypeInfoVtablePtr_a7b7c020 + 8;
   ((int (*)())__ZNSt9type_infoD2Ev)(this);
   if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
@@ -445,7 +445,7 @@ int __ZN10__cxxabiv120__si_class_type_infoD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  *(int *)this = DAT_a7b7c01c + 8;
+  *(int *)this = siClassTypeInfoVtablePtr_a7b7c01c + 8;
   ((int (*)())__ZN10__cxxabiv117__class_type_infoD2Ev)(this);
   if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
@@ -480,7 +480,7 @@ int __ZN10__cxxabiv121__vmi_class_type_infoD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  *(int *)this = DAT_a7b7c018 + 8;
+  *(int *)this = vmiClassTypeInfoVtablePtr_a7b7c018 + 8;
   ((int (*)())__ZN10__cxxabiv117__class_type_infoD2Ev)(this);
   if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);

@@ -477,7 +477,7 @@ int __ZNSt9exceptionD4Ev(this, deleteFlags)
   void *this;
   uint deleteFlags;
 {
-  *(int *)this = DAT_a7b7c034 + 8;
+  *(int *)this = exceptionVtablePtr_a7b7c034 + 8;
   if ((deleteFlags & 1) != 0) {
     __ZdlPv(this);
   }
@@ -510,7 +510,7 @@ int __ZNSt13bad_exceptionD4Ev(this, deleteFlags)
   void *this;
   uint deleteFlags;
 {
-  *(int *)this = DAT_a7b7c030 + 8;
+  *(int *)this = badExceptionVtablePtr_a7b7c030 + 8;
   ((int (*)())__ZNSt9exceptionD2Ev)(this);
   if ((deleteFlags & 1) != 0) {
     __ZdlPv(this);
@@ -566,7 +566,7 @@ int __ZNSt9bad_allocD4Ev(this, deleteFlags)
   void *this;
   uint deleteFlags;
 {
-  *(int *)this = DAT_a7b7c03c + 8;
+  *(int *)this = badAllocVtablePtr_a7b7c03c + 8;
   ((int (*)())__ZNSt9exceptionD2Ev)(this);
   if ((deleteFlags & 1) != 0) {
     __ZdlPv(this);
@@ -667,7 +667,7 @@ int ___cxa_throw(thrownObject, tinfo, dest)
   *(undefined4 *)(thrownObject + -0x4c) = dest;
   terminateHandlerSlot = PTR___terminate_handler_a7b7c188;
   *(undefined4 *)(thrownObject + -0x48) = *(undefined4 *)unexpectedHandlerSlot;
-  exceptionCleanup = DAT_a7b7c06c;
+  exceptionCleanup = ptrTo_gxxExceptionCleanup_a7b7c06c;
   terminateHandler = *(undefined4 *)terminateHandlerSlot;
   *(undefined4 *)(thrownObject + -0x20) = 0x474e5543;
   *(undefined4 *)(thrownObject + -0x1c) = 0x432b2b00;

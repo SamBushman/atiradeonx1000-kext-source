@@ -753,7 +753,7 @@ int _NewScopeInPool(pool)
   }
   scope[1] = 0;
   _ScopeList = scope;
-  _mem_AddCleanup(pool,DAT_a7b7b048,scope);
+  _mem_AddCleanup(pool,ptrTo_unlinkScope_a7b7b048,scope);
   return scope;
 }
 
@@ -1400,7 +1400,7 @@ int _ReadFromTokenStream(ts, name, finalFn)
   allocation[2] = 0;
   allocation[3] = 0;
   allocation[4] = name;
-  scanFn = DAT_a7b7b050;
+  scanFn = ptrTo_scanToken_a7b7b050;
   prevInput = *(undefined4 *)(cppState + 0x20);
   allocation[5] = 1;
   allocation[1] = scanFn;
@@ -1439,7 +1439,7 @@ int _UngetToken(token, yylvalpp)
   allocation[6] = token;
   _memcpy(allocation + 7,yylvalpp,0x90);
   cppState = *(int *)PTR__cpp_a7b7c0a4;
-  allocation[1] = DAT_a7b7b04c;
+  allocation[1] = ptrTo_regetToken_a7b7b04c;
   *allocation = *(undefined4 *)(cppState + 0x20);
   allocation[4] = *(undefined4 *)(*(int *)(cppState + 0x20) + 0x10);
   allocation[5] = *(undefined4 *)(*(int *)(cppState + 0x20) + 0x14);
@@ -1833,7 +1833,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
   if (language == 0) {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    nameChars = DAT_a7b7b708;
+    nameChars = glPositionStrPtr_a7b7b708;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
@@ -1909,7 +1909,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     stackTypeE = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    nameChars = DAT_a7b7b70c;
+    nameChars = glPointSizeStrPtr_a7b7b70c;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
@@ -1984,7 +1984,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     stackTypeF = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    nameChars = DAT_a7b7b710;
+    nameChars = glClipVertexStrPtr_a7b7b710;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
@@ -2137,7 +2137,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    nameChars = DAT_a7b7b6f8;
+    nameChars = glFragCoordStrPtr_a7b7b6f8;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
@@ -2213,7 +2213,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     stackTypeB = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    nameChars = DAT_a7b7b6fc;
+    nameChars = glFragColorStrPtr_a7b7b6fc;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
@@ -2289,7 +2289,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     stackTypeC = &PTR___ZN5TTypeD1Ev_a7b7cf48;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     symbol = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    nameChars = DAT_a7b7b700;
+    nameChars = glFragDepthStrPtr_a7b7b700;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
@@ -2575,7 +2575,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
     fragDataArraySize = *(int *)(builtInResource + 0x2c);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     variable = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
-    nameChars = DAT_a7b7b704;
+    nameChars = glFragDataStrPtr_a7b7b704;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     this = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
@@ -2821,7 +2821,7 @@ int TIntermediate__addSymbol(this, id, text, type, line)
   typeMatrixBit = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
   newSymbolNode[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
   intermSymbolVtable = PTR_vtable_a7b7c0dc;
-  emptyStringRep = DAT_a7b7b9b8;
+  emptyStringRep = emptyStringRepPtr_a7b7b9b8;
   newSymbolNode[0xb] = (*(uint *)(type + 0x24) >> 9 & 1) << 9 |
             typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
   emptyRepRefCount = (int *)(emptyStringRep + 8);
@@ -3134,7 +3134,7 @@ storeTypeTemp12:
       nodeVtable = *newBinaryNode;
       rightConstNode = (unsigned char *)TIntermediate__copyConstUnion(this,leftConstNode);
       setOperandFn = *(code **)(nodeVtable + 0x60);
-      goto LAB_97b8d618;
+      goto callSetOperandFn;
     }
     constantSize = (**(code **)(*(int *)leftConstNode + 0x4c))(leftConstNode);
     if ((constantSize == 1) && (constantSize = (**(code **)(*(int *)rightConstNode + 0x4c))(rightConstNode), 1 < constantSize)) {
@@ -3158,7 +3158,7 @@ storeTypeTemp12:
     (**(code **)(*newBinaryNode + 0x60))(newBinaryNode,leftConstNode);
   }
   setOperandFn = *(code **)(*newBinaryNode + 100);
-LAB_97b8d618:
+callSetOperandFn:
   (*setOperandFn)(newBinaryNode,rightConstNode);
   return newBinaryNode;
 }
@@ -3653,7 +3653,7 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
     aggregateNode[0xd] = sequenceAllocator;
     nameAllocator = GetGlobalPoolAllocator();
     aggregateNode[0x11] = nameAllocator;
-    emptyStringRep = DAT_a7b7b9b8;
+    emptyStringRep = emptyStringRepPtr_a7b7b9b8;
     aggregateNode[0x14] = 0;
     aggregateNode[0x12] = 0;
     emptyRepRefCount = (int *)(emptyStringRep + 8);
@@ -3705,7 +3705,7 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
       aggregateNode[0xd] = sequenceAllocator;
       nameAllocator = GetGlobalPoolAllocator();
       aggregateNode[0x11] = nameAllocator;
-      emptyStringRep = DAT_a7b7b9b8;
+      emptyStringRep = emptyStringRepPtr_a7b7b9b8;
       aggregateNode[0x14] = 0;
       aggregateNode[0x12] = 0;
       emptyRepRefCount = (int *)(emptyStringRep + 8);
@@ -4233,7 +4233,7 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   aggregateNode[0xd] = sequenceAllocator;
   nameAllocator = GetGlobalPoolAllocator();
   aggregateNode[0x11] = nameAllocator;
-  emptyStringRep = DAT_a7b7b9b8;
+  emptyStringRep = emptyStringRepPtr_a7b7b9b8;
   aggregateNode[0x14] = 0;
   aggregateNode[0x12] = 0;
   emptyRepRefCount = (int *)(emptyStringRep + 8);
@@ -4349,7 +4349,7 @@ int TIntermediate__makeAggregate(this, intermNode, line)
     newAggregateNode[0xd] = sequenceAllocator;
     nameAllocator = GetGlobalPoolAllocator();
     newAggregateNode[0x11] = nameAllocator;
-    emptyStringRep = DAT_a7b7b9b8;
+    emptyStringRep = emptyStringRepPtr_a7b7b9b8;
     newAggregateNode[0x14] = 0;
     newAggregateNode[0x12] = 0;
     emptyRepRefCount = (int *)(emptyStringRep + 8);
@@ -4755,7 +4755,7 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   newAggregateNode[0xd] = sequenceAllocator;
   nameAllocator = GetGlobalPoolAllocator();
   newAggregateNode[0x11] = nameAllocator;
-  emptyStringRep = DAT_a7b7b9b8;
+  emptyStringRep = emptyStringRepPtr_a7b7b9b8;
   newAggregateNode[0x14] = 0;
   newAggregateNode[0x12] = 0;
   emptyRepRefCount = (int *)(emptyStringRep + 8);

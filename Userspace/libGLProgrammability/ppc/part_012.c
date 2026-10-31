@@ -297,7 +297,7 @@ int TPPStreamCompiler__getVertex(this)
   symbol = operator_new(100);
   __ZN11ParseSymbolC1Ev(symbol);
   *(undefined4 *)(symbol + 0x28) = 0xffffffff;
-  ParseSymbol__SetName(symbol,DAT_a7b7bd4c);
+  ParseSymbol__SetName(symbol,glVertexStrPtr_a7b7bd4c);
   ParseSymbol__SetParseTreeType(symbol,vertexType);
   *(unsigned char **)operand = symbol;
   ParseSymbolTable__processOperand(*(unsigned char **)(this + 0x68),operand);
@@ -363,7 +363,7 @@ int TPPStreamCompiler__getMVP(this)
   symbol = operator_new(100);
   __ZN11ParseSymbolC1Ev(symbol);
   *(undefined4 *)(symbol + 0x28) = 0xffffffff;
-  ParseSymbol__SetName(symbol,DAT_a7b7bd48);
+  ParseSymbol__SetName(symbol,glModelViewProjectionMatrixStrPtr_a7b7bd48);
   ParseSymbol__SetParseTreeType(symbol,mvpType);
   *(unsigned char **)operand = symbol;
   ParseSymbolTable__processOperand(*(unsigned char **)(this + 0x68),operand);
@@ -441,16 +441,16 @@ int TPPStreamCompiler__newNodeFromOperand(this, parseOperand)
   if (isMatrix == 0) {
     indexedDimCount = *(int *)(parseOperand + 0x20);
 loopCheckIndexedDimCount:
-    if (indexedDimCount == 0) goto LAB_97bc4174;
+    if (indexedDimCount == 0) goto callNewTypeVirtual8;
   }
   else {
     indexedDimCount = 0;
     if (*(uint *)(parseOperand + 0x20) == 0) goto loopCheckIndexedDimCount;
     isMatrix = 0;
-    if (*(uint *)(parseOperand + 0x20) < 2) goto LAB_97bc4174;
+    if (*(uint *)(parseOperand + 0x20) < 2) goto callNewTypeVirtual8;
   }
   nominalSize = 1;
-LAB_97bc4174:
+callNewTypeVirtual8:
   (**(code **)(*newType + 8))(newType,basicType,nominalSize,isMatrix,isArray,arraySize);
   return newType;
 }
@@ -520,7 +520,7 @@ int TPPStreamCompiler__newTemporary(this, type)
   temporaryIndex = TemporaryAllocator__getTemporary
                     (*(unsigned char **)(this + 0x60),(uint)*(ushort *)(symbol + 0x2c));
   glTypeString = GetGLStringForType((uint)*(ushort *)(symbol + 0x2c));
-  _sprintf(symbolNameBuffer,DAT_a7b7bd50,temporaryIndex,glTypeString);
+  _sprintf(symbolNameBuffer,glCompilerTempFmtPtr_a7b7bd50,temporaryIndex,glTypeString);
   *(undefined4 *)(symbol + 0x28) = temporaryIndex;
   ParseSymbol__SetName(symbol,symbolNameBuffer);
   *(unsigned char **)operand = symbol;
@@ -559,7 +559,7 @@ int TPPStreamCompiler__newAddressTemp(this)
   *(undefined4 *)(symbol + 0x58) = 1;
   ParseSymbol__SetParseTreeType(symbol,addressType);
   addressTempIndex = AddressTempAllocator__getTemporary(*(unsigned char **)(this + 100));
-  _sprintf(symbolNameBuffer,DAT_a7b7bd54,addressTempIndex);
+  _sprintf(symbolNameBuffer,glCompilerAddressTempFmtPtr_a7b7bd54,addressTempIndex);
   *(undefined4 *)(symbol + 0x28) = addressTempIndex;
   ParseSymbol__SetName(symbol,symbolNameBuffer);
   *(unsigned char **)operand = symbol;
@@ -695,7 +695,7 @@ int TPPStreamCompiler__newParam(this, type, str, paramIndex)
   __ZN11ParseSymbolC1Ev(symbol);
   nameLength = _strlen(str);
   paramName = (char *)_malloc(nameLength + 10);
-  _sprintf(paramName,DAT_a7b7bd58,str,paramIndex);
+  _sprintf(paramName,stringUnderscoreIntFmtPtr_a7b7bd58,str,paramIndex);
   *(undefined4 *)(symbol + 0x38) = 1;
   *(undefined4 *)(symbol + 0x3c) = 0;
   *(undefined4 *)(symbol + 0x34) = 0;
@@ -856,7 +856,7 @@ loopCheckKeepSearching:
         if (slotIndex == 0) {
           ParseSymbol__SetParseTreeType(newSymbol,typeSaved);
           constantIndex = chunkWord0 & 0xffff;
-          _sprintf(symbolNameText,DAT_a7b7bd5c,constantIndex);
+          _sprintf(symbolNameText,glCompilerConstantFmtPtr_a7b7bd5c,constantIndex);
           *(uint *)(newSymbol + 0x28) = chunkWord0 & 0xffff;
           ParseSymbol__SetName(newSymbol,symbolNameText);
           typeQualifier = (**(code **)(*(int *)typeSaved + 0x24))
@@ -1054,7 +1054,7 @@ checkChunkCursor:
   chunkWord1 = *(undefined4 *)(matchedChunk + 0x10);
   chunkWord0 = *(uint *)(matchedChunk + 0xc);
   ParseSymbol__SetParseTreeType(newSymbol,typeSaved);
-  _sprintf(symbolNameText,DAT_a7b7bd5c,chunkWord0 & 0xffff);
+  _sprintf(symbolNameText,glCompilerConstantFmtPtr_a7b7bd5c,chunkWord0 & 0xffff);
   *(uint *)(newSymbol + 0x28) = chunkWord0 & 0xffff;
   ParseSymbol__SetName(newSymbol,symbolNameText);
   *(unsigned char **)resultOperand = newSymbol;
@@ -1230,7 +1230,7 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             __ZN11ParseSymbolC1Ev(elementSymbol);
             ParseSymbol__SetName(elementSymbol,*(char **)(**(int **)((int)operandSlots + operandSlotOffset) + 0x14));
             ParseSymbol__AddDirectIndex(elementSymbol,elementIndex);
-            _sprintf((char *)&opHeader,DAT_a7b7bd90,elementIndex);
+            _sprintf((char *)&opHeader,bracketIntFmtPtr_a7b7bd90,elementIndex);
             ParseSymbol__CatName(elementSymbol,(char *)&opHeader);
             *(undefined4 *)(elementSymbol + 0x40) =
                  *(undefined4 *)(**(int **)((int)operandSlots + operandSlotOffset) + 0x40);
@@ -1348,7 +1348,7 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
               _strcpy(p0,fieldNameChars);
             }
             else {
-              _sprintf(p0,DAT_a7b7bd8c,(int)parentName,(int)fieldNameChars);
+              _sprintf(p0,stringDotStringFmtPtr_a7b7bd8c,(int)parentName,(int)fieldNameChars);
               operandAArg = parentName;
               operandBArg = fieldNameChars;
             }
@@ -1736,7 +1736,7 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
               _strcpy(fullName,fieldNameChars);
             }
             else {
-              _sprintf(fullName,DAT_a7b7bd8c,(int)parentName,fieldNameChars);
+              _sprintf(fullName,stringDotStringFmtPtr_a7b7bd8c,(int)parentName,fieldNameChars);
               operandPtrArg = parentName;
               allowCopyPropagationArg = fieldNameChars;
             }
@@ -1798,7 +1798,7 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
         __ZN11ParseSymbolC1Ev(childSymbol);
         ParseSymbol__SetName(childSymbol,*(char **)(**(int **)((int)operandSlots + operandByteOffset) + 0x14));
         ParseSymbol__AddDirectIndex(childSymbol,elemCountdown);
-        _sprintf((char *)&scratchDescA,DAT_a7b7bd90,elemCountdown);
+        _sprintf((char *)&scratchDescA,bracketIntFmtPtr_a7b7bd90,elemCountdown);
         ParseSymbol__CatName(childSymbol,(char *)&scratchDescA);
         *(undefined4 *)(childSymbol + 0x40) = 0;
         *(undefined4 *)(childSymbol + 0x3c) = 0;
@@ -1977,7 +1977,7 @@ setElementSymbol:
   ParseSymbol__SetName(elementSymbol,*(char **)(*(int *)arrayOperand + 0x14));
   ParseSymbol__RemoveArrayIndex(elementSymbol);
   ParseSymbol__AddDirectIndex(elementSymbol,1);
-  _sprintf(indexSuffix,DAT_a7b7bd90,1);
+  _sprintf(indexSuffix,bracketIntFmtPtr_a7b7bd90,1);
   ParseSymbol__CatName(elementSymbol,indexSuffix);
   *(undefined4 *)(elementSymbol + 0x28) = *(undefined4 *)(*(int *)arrayOperand + 0x28);
   ParseSymbol__SetParseTreeType(elementSymbol,*(unsigned char **)(*(int *)arrayOperand + 0xc));
@@ -1990,7 +1990,7 @@ setElementSymbol:
     __ZdlPv(elementSymbol);
   }
   if (foundSymbol == (undefined4 *)0x0) {
-    TPPStreamCompiler__warning(this,(char *)0x0,*(char **)(*(int *)arrayOperand + 0x14),DAT_a7b7bd3c,leftoverR7,leftoverR8,
+    TPPStreamCompiler__warning(this,(char *)0x0,*(char **)(*(int *)arrayOperand + 0x14),indirectReferenceToAnArrayStrPtr_a7b7bd3c,leftoverR7,leftoverR8,
             *(int *)arrayOperand,leftoverR10);
     elementRegister = baseRegister;
     goto returnElementRegister;
@@ -2839,7 +2839,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
               _strcpy(allocation,fieldNameChars);
             }
             else {
-              _sprintf(allocation,DAT_a7b7bd8c,parentName,fieldNameChars);
+              _sprintf(allocation,stringDotStringFmtPtr_a7b7bd8c,parentName,fieldNameChars);
               remainingArgs = fieldNameChars;
             }
             childOperand = operator_new(0x38);
@@ -2881,7 +2881,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
                         _strcpy(allocation,argFieldNameChars);
                       }
                       else {
-                        _sprintf(allocation,DAT_a7b7bd8c,argParentName,argFieldNameChars);
+                        _sprintf(allocation,stringDotStringFmtPtr_a7b7bd8c,argParentName,argFieldNameChars);
                       }
                       argFieldOperand = operator_new(0x38);
                       __ZN12ParseOperandC1Ev(argFieldOperand);
@@ -2972,7 +2972,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
           __ZN11ParseSymbolC1Ev(childSymbol);
           ParseSymbol__SetName(childSymbol,*(char **)(*(int *)*destOperandPtr + 0x14));
           ParseSymbol__AddDirectIndex(childSymbol,elemIndex);
-          _sprintf(indexSuffix,DAT_a7b7bd90,elemIndex);
+          _sprintf(indexSuffix,bracketIntFmtPtr_a7b7bd90,elemIndex);
           ParseSymbol__CatName(childSymbol,indexSuffix);
           ParseSymbol__SetParseTreeType(childSymbol,*(unsigned char **)(*(int *)*destOperandPtr + 0xc));
           *(undefined4 *)(childSymbol + 0x48) = 1;
@@ -3622,10 +3622,10 @@ int TPPStreamCompiler__getConstantAsSourceVar(outDesc, compiler, values, valueCo
   
   if (*(int *)(compiler + 0xc4) != 1) {
     exactMatchFound = false;
-    laneUsed[1] = DAT_97c39254;
-    laneUsed[0] = DAT_97c39250;
-    laneUsed[2] = DAT_97c39258;
-    laneUsed[3] = DAT_97c3925c;
+    laneUsed[1] = laneUsedInit1_97c39254;
+    laneUsed[0] = laneUsedInit0_97c39250;
+    laneUsed[2] = laneUsedInit2_97c39258;
+    laneUsed[3] = laneUsedInit3_97c3925c;
     chunkList = *(int **)(*(int *)(compiler + 0x70) + 0x10);
     constantList = *(undefined4 *)(*(int *)(compiler + 0x70) + 0x2c);
     chunkCursor = *chunkList;
@@ -3933,7 +3933,7 @@ int TPPStreamCompiler__getOperandAsSourceVar(outDesc, compiler, operand, unusedA
         }
       }
       else {
-        error(compiler,(char *)0x1,(char *)0x0,DAT_a7b7bd14,unusedArg5,unusedArg6,leftoverArg7,unusedArg8);
+        error(compiler,(char *)0x1,(char *)0x0,tppstreamcompilerGetOperandAsSourceVarStrPtr_a7b7bd14,unusedArg5,unusedArg6,leftoverArg7,unusedArg8);
       }
       valueByteOffset = valueByteOffset + 4;
     }
@@ -4210,10 +4210,10 @@ setPendingMaskAny:
             (*(short *)(defChunk + 0x1a) == *(short *)(moveOperation + 0x16))) &&
            ((*(uint *)(defChunk + 0x14) >> 0xc & 1) == ((uint)scratchPtrOrWord >> 0xe & 1))) {
           searchEnded = false;
-          mergedLaneSel[0] = DAT_97c39260;
-          mergedLaneSel[1] = DAT_97c39264;
-          mergedLaneSel[2] = DAT_97c39268;
-          mergedLaneSel[3] = DAT_97c3926c;
+          mergedLaneSel[0] = mergedLaneSelInit0_97c39260;
+          mergedLaneSel[1] = mergedLaneSelInit1_97c39264;
+          mergedLaneSel[2] = mergedLaneSelInit2_97c39268;
+          mergedLaneSel[3] = mergedLaneSelInit3_97c3926c;
           mergedMaskXYZ[0] = 0;
           mergedMaskXYZ[1] = 0;
           mergedMaskXYZ[2] = 0;
@@ -4304,7 +4304,7 @@ setPendingMaskAny:
     }
     pendingMaskAny = pendingMaskXYZ[0] | pendingMaskXYZ[1] | pendingMaskXYZ[2] | (uint)pendingMaskW;
     if ((pendingMaskAny != 0) && (rewroteDefinition)) {
-      TPPStreamCompiler__warning(this,(char *)0x0,(char *)0x0,DAT_a7b7bd40,movSrcSwizzleX,streamOrLeftover,pendingMaskAny,scratchPtrOrWord);
+      TPPStreamCompiler__warning(this,(char *)0x0,(char *)0x0,tppstreamcompilerCopyPropagateCompilerTempStrPtr_a7b7bd40,movSrcSwizzleX,streamOrLeftover,pendingMaskAny,scratchPtrOrWord);
     }
     if (searchEnded) {
       if (rewroteDefinition) {
@@ -4424,7 +4424,7 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, language, debugOptions)
   *(int *)((int)this + 4) = (int)this + 0xb0;
   *(undefined4 *)((int)this + 0xc) = 0;
   __ZN14TPoolAllocatorC1Ebii((void *)((int)this + 0x10),false,0x2000,0x10);
-  *(int *)this = DAT_a7b7bd98 + 8;
+  *(int *)this = TPPStreamCompilerVtablePtr_a7b7bd98 + 8;
   __ZN22ConstantAllocationListC1Ev((void *)((int)this + 0x44));
   ((int (*)())__ZN18ParseFunctionStackC1Ev)((void *)((int)this + 0x58));
   ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
@@ -4482,7 +4482,7 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, language, debugOptions)
   *(int *)((int)this + 4) = (int)this + 0xb0;
   *(undefined4 *)((int)this + 0xc) = 0;
   __ZN14TPoolAllocatorC1Ebii((void *)((int)this + 0x10),false,0x2000,0x10);
-  *(int *)this = DAT_a7b7bd98 + 8;
+  *(int *)this = TPPStreamCompilerVtablePtr_a7b7bd98 + 8;
   __ZN22ConstantAllocationListC1Ev((void *)((int)this + 0x44));
   ((int (*)())__ZN18ParseFunctionStackC1Ev)((void *)((int)this + 0x58));
   ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
@@ -4540,7 +4540,7 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, language, debugOptions)
   *(int *)((int)this + 4) = (int)this + 0xb0;
   *(undefined4 *)((int)this + 0xc) = 0;
   __ZN14TPoolAllocatorC1Ebii((void *)((int)this + 0x10),0,0x2000,0x10);
-  *(int *)this = DAT_a7b7bd98 + 8;
+  *(int *)this = TPPStreamCompilerVtablePtr_a7b7bd98 + 8;
   __ZN22ConstantAllocationListC1Ev((void *)((int)this + 0x44));
   ((int (*)())__ZN18ParseFunctionStackC1Ev)((void *)((int)this + 0x58));
   ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));

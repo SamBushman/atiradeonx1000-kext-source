@@ -962,7 +962,7 @@ int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endT
   
   result = 0;
   if (binding != (unsigned char *)0x0) {
-    stageMaxIndex = DAT_97c38f98;
+    stageMaxIndex = stageMaxIndexInit_97c38f98;
     elementIdxDown = ((int (*)())Binding__GetDecSize)(binding);
     while (elementIdxDown = elementIdxDown + -1, -1 < elementIdxDown) {
       Binding__RemoveNameBackToChar(binding,0x5b);
@@ -1664,7 +1664,7 @@ int TGenericLinker__FindChunkDelta(this, _PPStreamChunk1, _PPStreamChunk2)
   char *errorText;
   void *infoSink;
   
-  errorText = DAT_a7b7bb8c;
+  errorText = chunkTypesDoMatchWhenStrPtr_a7b7bb8c;
   kind = *_PPStreamChunk1;
   if (kind != *_PPStreamChunk2) {
     infoSink = *(void **)(this + 0x84);

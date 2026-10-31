@@ -496,7 +496,7 @@ int std____default_alloc_template_true_0____S_chunk_alloc(size, nobjs)
   undefined4 *result;
   ulong bytesToGet;
   
-LAB_97c1791c:
+loopSetResult:
   do {
     result = _S_start_free;
     totalBytes = size * *nobjs;
@@ -527,7 +527,7 @@ LAB_97c1791c:
           _S_end_free = (int)freeListHead + i;
           *(undefined4 *)(&DAT_a7b7bf90 + freeListSlot) = *freeListHead;
           _S_start_free = freeListHead;
-          goto LAB_97c1791c;
+          goto loopSetResult;
         }
       }
       _S_end_free = 0;
@@ -588,7 +588,7 @@ int __ZNSt11logic_errorC2ERKSs(this, text)
   void *this;
   unsigned char * text;
 {
-  *(int *)this = DAT_a7b7c014 + 8;
+  *(int *)this = logicErrorVtablePtr_a7b7c014 + 8;
   return __ZNSsC1ERKSs((void *)((int)this + 4),text);
 }
 
@@ -605,7 +605,7 @@ int __ZNSt11logic_errorC4ERKSs(this, text)
   void *this;
   unsigned char * text;
 {
-  *(int *)this = DAT_a7b7c014 + 8;
+  *(int *)this = logicErrorVtablePtr_a7b7c014 + 8;
   return __ZNSsC1ERKSs((void *)((int)this + 4),text);
 }
 
@@ -644,7 +644,7 @@ int __ZNSt11logic_errorD4Ev(this, deleteFlag)
   undefined1 allocScratch [20];
   
   stringData = *(int *)((int)this + 4);
-  *(int *)this = DAT_a7b7c014 + 8;
+  *(int *)this = logicErrorVtablePtr_a7b7c014 + 8;
   refCountPtr = (int *)(stringData + -4);
   do {
     oldRefCount = *refCountPtr;

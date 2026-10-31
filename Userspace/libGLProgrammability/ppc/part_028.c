@@ -574,8 +574,8 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_(this, 
   byte cr0Reg;
   
   length = _strlen((char *)str);
-  emptyRepStorage = DAT_a7b7ba14;
-  emptyRepRefcount = (int *)(DAT_a7b7ba14 + 8);
+  emptyRepStorage = emptyStringRepPtr_a7b7ba14;
+  emptyRepRefcount = (int *)(emptyStringRepPtr_a7b7ba14 + 8);
   do {
     if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
@@ -823,8 +823,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__
   byte cr0Reg;
   
   if ((first == last) &&
-     (poolAllocator = GetGlobalPoolAllocator(), emptyRepStorage = DAT_a7b7ba14, *(int *)alloc == poolAllocator)) {
-    emptyRepRefcount = (int *)(DAT_a7b7ba14 + 8);
+     (poolAllocator = GetGlobalPoolAllocator(), emptyRepStorage = emptyStringRepPtr_a7b7ba14, *(int *)alloc == poolAllocator)) {
+    emptyRepRefcount = (int *)(emptyStringRepPtr_a7b7ba14 + 8);
     do {
       if (reservation != '\0') {
         atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);

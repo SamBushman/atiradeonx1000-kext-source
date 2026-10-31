@@ -665,8 +665,8 @@ int _StoreStr(str)
   undefined4 accumDestroyAlloc [4];
   undefined4 newDestroyAlloc [7];
   
-  emptyRep = DAT_a7b7baa8;
-  emptyRepRefCount = (int *)(DAT_a7b7baa8 + 8);
+  emptyRep = emptyStringRepPtr_a7b7baa8;
+  emptyRepRefCount = (int *)(emptyStringRepPtr_a7b7baa8 + 8);
   do {
     if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
@@ -969,8 +969,8 @@ int _updateExtensionBehavior(extensionName, behaviorName)
   undefined4 msgDestroyAllocErr [5];
   
   behavior2 = ((int (*)())_GetBehavior)(behaviorName);
-  emptyRep = DAT_a7b7baa8;
-  emptyRepRefCount = (int *)(DAT_a7b7baa8 + 8);
+  emptyRep = emptyStringRepPtr_a7b7baa8;
+  emptyRepRefCount = (int *)(emptyStringRepPtr_a7b7baa8 + 8);
   do {
     if (reservation != '\0') {
       atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);

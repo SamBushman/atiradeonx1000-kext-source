@@ -2488,7 +2488,7 @@ setNotEligible:
           _memcpy(loopTempG,&loopTempARegister,0x28);
           loopTempG[0] = _AddTempRegister(stream,loopTempGPrecision,loopTempGType,loopTempGSize);
         }
-        _memcpy(opcodeTable,&DAT_97c3aa40,0x24);
+        _memcpy(opcodeTable,&detectConstantLoopsOpcodeTableInit_97c3aa40,0x24);
         emitEnabledTable[5] = 1;
         emitEnabledTable[0] = 1;
         emitEnabledTable[1] = 1;
@@ -2498,7 +2498,7 @@ setNotEligible:
         emitEnabledTable[6] = isInclusive;
         emitEnabledTable7 = isInclusive;
         emitEnabledTable8 = isInclusive;
-        _memcpy(sourceCountTable,&DAT_97c3aa64,0x24);
+        _memcpy(sourceCountTable,&detectConstantLoopsSourceCountTableInit_97c3aa64,0x24);
         srcPtrTable = limitInfo;
         srcPtrTable2 = initInfo;
         srcPtrTable4 = stepInfo;
@@ -2783,7 +2783,7 @@ loopSetTableBase:
       insertAfterAnchors[2] = (int *)(newOps + 1);
       insertAfterAnchors[3] = (int *)(newOps + 2);
       insertBeforeAnchorsTail = loopEnd;
-      opcodeTableTail = DAT_97c3aa98;
+      opcodeTableTail = unrollConstantLoopsOpcodeTableInitTail_97c3aa98;
       newOps[0] = 0;
       newOps[1] = 0;
       newOps[2] = 0;
@@ -2794,14 +2794,14 @@ loopSetTableBase:
       insertBeforeAnchors[1] = 0;
       insertBeforeAnchors[2] = 0;
       insertBeforeAnchors[3] = 0;
-      opcodeTable[0] = DAT_97c3aa88;
-      opcodeTable[1] = DAT_97c3aa8c;
-      opcodeTable[2] = DAT_97c3aa90;
-      opcodeTable[3] = DAT_97c3aa94;
-      sourceCountTable[0] = DAT_97c3aa9c;
-      sourceCountTable[1] = DAT_97c3aaa0;
-      sourceCountTable[2] = DAT_97c3aaa4;
-      sourceCountTable[3] = DAT_97c3aaa8;
+      opcodeTable[0] = unrollConstantLoopsOpcodeTableInit0_97c3aa88;
+      opcodeTable[1] = unrollConstantLoopsOpcodeTableInit1_97c3aa8c;
+      opcodeTable[2] = unrollConstantLoopsOpcodeTableInit2_97c3aa90;
+      opcodeTable[3] = unrollConstantLoopsOpcodeTableInit3_97c3aa94;
+      sourceCountTable[0] = unrollConstantLoopsSourceCountTableInit0_97c3aa9c;
+      sourceCountTable[1] = unrollConstantLoopsSourceCountTableInit1_97c3aaa0;
+      sourceCountTable[2] = unrollConstantLoopsSourceCountTableInit2_97c3aaa4;
+      sourceCountTable[3] = unrollConstantLoopsSourceCountTableInit3_97c3aaa8;
       destPtrTable[3] = (uint *)0x0;
       destPtrTable[4] = &counterInfoRegister;
       operandPtrTable[0] = &counterInfoRegister;
@@ -2814,7 +2814,7 @@ loopSetTableBase:
       destPtrTable[1] = (uint *)0x0;
       destPtrTable[2] = (uint *)0x0;
       tableByteOffset = 0;
-      sourceCountTableTail = DAT_97c3aaac;
+      sourceCountTableTail = unrollConstantLoopsSourceCountTableInitTail_97c3aaac;
       operandPtrTableTail = &oneConstRegister;
       destPtrTable[0] = &condTempRegister;
       operandPtrTable[1] = &oneConstRegister;
@@ -2962,8 +2962,8 @@ int _UnrollConstantLoopSimple(stream, loopStart, loopEnd, iterationCount)
   
   insertionPoint = loopEnd;
   if (0 < iterationCount) {
-    labelMap = _HashTableNew((*(uint *)(*(int *)(stream + 0x20) + 8) >> 5) + 1,DAT_a7b7bf78,
-                          DAT_a7b7bf74);
+    labelMap = _HashTableNew((*(uint *)(*(int *)(stream + 0x20) + 8) >> 5) + 1,ptrTo_instructionIndexHashFunction_a7b7bf78,
+                          ptrTo_instructionIndexEqualsFunction_a7b7bf74);
     do {
       copyCursor = 0;
       isFirstInsert = true;

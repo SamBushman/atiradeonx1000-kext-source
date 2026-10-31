@@ -702,7 +702,7 @@ int __ZN9TFunctionD4Ev(this)
   undefined4 destroyAlloc [5];
   
   paramPtr = *(int *)((int)this + 0x10);
-  *(int *)this = DAT_a7b7ba7c + 8;
+  *(int *)this = TFunctionVtablePtr_a7b7ba7c + 8;
   paramEnd = *(int *)((int)this + 0x14);
   for (; paramPtr != paramEnd; paramPtr = paramPtr + 8) {
     paramType = *(int **)(paramPtr + 4);
@@ -934,7 +934,7 @@ int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   char *assertText;
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)variable);
-  *(int *)this = DAT_a7b7ba78 + 8;
+  *(int *)this = TVariableVtablePtr_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
   arrayInformationType = *(int *)(variable + 0x3c);
@@ -1013,7 +1013,7 @@ int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   char *assertText;
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)variable);
-  *(int *)this = DAT_a7b7ba78 + 8;
+  *(int *)this = TVariableVtablePtr_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
   arrayInformationType = *(int *)(variable + 0x3c);
@@ -1092,7 +1092,7 @@ int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   char *assertText;
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)variable);
-  *(int *)this = DAT_a7b7ba78 + 8;
+  *(int *)this = TVariableVtablePtr_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
   arrayInformationType = *(int *)(variable + 0x3c);
@@ -1200,10 +1200,10 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 stringAllocator [4];
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
-  *(int *)this = DAT_a7b7ba7c + 8;
+  *(int *)this = TFunctionVtablePtr_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
-  emptyRep = DAT_a7b7ba74;
+  emptyRep = emptyStringRepPtr_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -1299,10 +1299,10 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 stringAllocator [4];
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
-  *(int *)this = DAT_a7b7ba7c + 8;
+  *(int *)this = TFunctionVtablePtr_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
-  emptyRep = DAT_a7b7ba74;
+  emptyRep = emptyStringRepPtr_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -1398,10 +1398,10 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   undefined4 nameCtorAlloc [4];
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
-  *(int *)this = DAT_a7b7ba7c + 8;
+  *(int *)this = TFunctionVtablePtr_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
-  emptyRep = DAT_a7b7ba74;
+  emptyRep = emptyStringRepPtr_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -2255,7 +2255,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   yyssBytes = (unsigned char *)0x190;
   yyvs = yyvsp;
   yyss = yyssInit;
-LAB_97ba3784:
+loopPushYystate:
   do {
     yyssp = yyssp + 2;
     *(short *)yyssp = (short)yystate;
@@ -2325,7 +2325,7 @@ loopCheckYyerrstatus2:
             scratchR5 = (char *)0x2c;
             _memcpy(yyvsp,yylval,0x2c);
             scratchR4 = r4Out19;
-            goto LAB_97ba3784;
+            goto loopPushYystate;
           }
         }
         if (yyssp == yyssBase) {
@@ -2388,7 +2388,7 @@ setYyruleByteOffset:
   yyvalNodeReg = yyvalNode;
   typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
   typeTmp7VtableReg = typeTmp7Vtable[0];
-  if (0xd7 < yyn) goto switchD_97ba39c8_caseD_0;
+  if (0xd7 < yyn) goto yynDefault;
   staleR9Value = (unsigned char *)(yyn * 4);
   slotArg = (unsigned char *)scratchR6;
   switch(yyn) {
@@ -3273,7 +3273,7 @@ loopSetTypeTmp3TypeNameOrTypeTmp4Vtable:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       destroyAllocArg = destroyAlloc4;
-LAB_97ba5844:
+loopDestroyTypeTmp1StringRep:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAllocArg);
     }
@@ -3309,7 +3309,7 @@ LAB_97ba5844:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     destroyAllocArg = destroyAlloc5;
-    if ((int)oldRefCount2 < 1) goto LAB_97ba5844;
+    if ((int)oldRefCount2 < 1) goto loopDestroyTypeTmp1StringRep;
 callTParseContext_recover:
     TParseContext__recover(parseContext);
 yynCase6:
@@ -3465,7 +3465,7 @@ yynCase6:
                     TIntermediate__addUnaryMath
                               (*(unsigned char **)parseContext,findFunctionResultWord4c,functionCallGenericNode,0,scratchR7,staleR8Value,
                                *(uint *)(findFunctionResult + 0x10));
-        if (yyvalNode != (unsigned char *)0x0) goto LAB_97ba5d80;
+        if (yyvalNode != (unsigned char *)0x0) goto callYyvalNodeVirtual34;
         picBase = (unsigned char *)0xa7b8374c;
         TType__getCompleteString(&typeTmp1VtableOrStr1Alloc,*(uint *)(yyvsp + 8) + 8);
         staleR8Value = typeTmp1ArraySizeOrStr1Data;
@@ -3504,7 +3504,7 @@ yynCase6:
                             (*(unsigned char **)parseContext,*(unsigned char **)(yyvsp + 8),findFunctionResultWord4c,
                              scratchR6);
     }
-LAB_97ba5d80:
+callYyvalNodeVirtual34:
     (**(code **)(*(unsigned char **)yyvalNode + 0x34))(yyvalNode,findFunctionResult + 0x1c);
 setYyvalNodeReg:
     yyvalNodeReg = yyvalNode;
@@ -3512,7 +3512,7 @@ setYyvalNodeReg:
     typeTmp7VtableReg = typeTmp7Vtable[0];
     if (stackNode != (unsigned char *)0x0) {
       stackNodeVtable = *(int *)stackNode;
-LAB_97ba86fc:
+loopCallStackNodeVirtual4:
       (**(code **)(stackNodeVtable + 4))(stackNode);
       yyvalNodeReg = yyvalNode;
       typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -3689,7 +3689,7 @@ loopSetYyvalNodeReg:
       *(uint *)(newFunction + 0x14) = 0;
       *(unsigned char **)(newFunction + 0x1c) = picBase2 + -0x610c;
       *(uint *)(newFunction + 0xc) = allocatorArg1;
-      emptyRep = DAT_a7b7ba84;
+      emptyRep = emptyStringRepPtr_a7b7ba84;
       *(uint *)(newFunction + 0x20) = 0;
       clearedTypeBits = *(uint *)(newFunction + 0x40) & 0x9ff | 0x800;
       cr0 = (clearedTypeBits == 0) << 1;
@@ -5430,7 +5430,7 @@ loopSetStackNode:
       typeTmp7VtableReg = typeTmp7Vtable[0];
       if (stackNode == (unsigned char *)0x0) break;
       stackNodeVtable = *(int *)stackNode;
-      goto LAB_97ba86fc;
+      goto loopCallStackNodeVirtual4;
     }
     functionHeaderWord10 = *(uint *)(yyvsp + -0x1c);
     elementEnd = *(uint **)(functionHeaderWord10 + 0x14);
@@ -7251,7 +7251,7 @@ setYyvalTypeOrFunction2:
     methodArg = *(undefined **)(yyvsp + 4);
     nodeMethod = *(code **)(*(unsigned char **)newTypeMem + 0x14);
     yyvalTypeOrFunction = newTypeMem;
-    goto LAB_97baae6c;
+    goto callNodeMethod;
   case 0xa6:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     yyvalTypeOrFunction = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
@@ -7783,7 +7783,7 @@ storeParseContext2:
     *(undefined4 *)(newDeclNode + 0x34) = allocatorArg6;
     allocatorArg7 = GetGlobalPoolAllocator();
     *(undefined4 *)(newDeclNode + 0x44) = allocatorArg7;
-    emptyRep = DAT_a7b7ba84;
+    emptyRep = emptyStringRepPtr_a7b7ba84;
     *(undefined4 *)(newDeclNode + 0x50) = 0;
     *(undefined4 *)(newDeclNode + 0x48) = 0;
     refCountPtr4 = (int *)(emptyRep + 8);
@@ -7991,7 +7991,7 @@ storeParseContext2:
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
   }
-switchD_97ba39c8_caseD_0:
+yynDefault:
   typeTmp7Vtable[0] = typeTmp7VtableReg;
   typeTmp3VtableOrPub3Array = typeTmp3VtableReg;
   yyvalNode = yyvalNodeReg;
@@ -8012,7 +8012,7 @@ switchD_97ba39c8_caseD_0:
   else {
     yystate = (int)*(short *)(&DAT_97c35e08 + scratchR10);
   }
-  goto LAB_97ba3784;
+  goto loopPushYystate;
 loopSetLevelEntry:
   levelEntry = *(int *)(levelsBegin + levelIdx * 4);
   foundSymbol = 0;
@@ -8110,7 +8110,7 @@ yynCase60:
   yyvalNodeReg = (unsigned char *)0x0;
   typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
   typeTmp7VtableReg = typeTmp7Vtable[0];
-  goto switchD_97ba39c8_caseD_0;
+  goto yynDefault;
 loopCheckTypeTmp1StructureCopy2:
   if ((uint)((int)(*(uint *)(typeTmp1StructureCopy2 + 8) - *(uint *)(typeTmp1StructureCopy2 + 4)) >> 3) <= loopIndex)
   goto setScratchR10;
@@ -8182,12 +8182,12 @@ loopCheckTypeTmp1StructureCopy2:
     nodeMethod = *(code **)(*(unsigned char **)newTypeMem + 0x34);
     yyvalNode = newTypeMem;
   }
-LAB_97baae6c:
+callNodeMethod:
   (*nodeMethod)(newTypeMem,methodArg,scratchR5,scratchR6,scratchR7,picBaseValue,typeVtablePtr);
   yyvalNodeReg = yyvalNode;
   typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
   typeTmp7VtableReg = typeTmp7Vtable[0];
-  goto switchD_97ba39c8_caseD_0;
+  goto yynDefault;
 setScratchR10:
   scratchR10 = *(uint *)(yyvsp + 4);
   staleR9Value = *(unsigned char **)(scratchR10 + 4);

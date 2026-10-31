@@ -53,12 +53,12 @@ int ParseOperand__GetString(this)
   if (*(int *)this != 0) {
     length = _strlen(*(undefined4 *)(*(int *)this + 0x14));
     allocation2 = (char *)_malloc(length + 1);
-    _sprintf(allocation2,DAT_a7b7bbdc,*(undefined4 *)(*(int *)this + 0x14));
+    _sprintf(allocation2,stringFmtPtr_a7b7bbdc,*(undefined4 *)(*(int *)this + 0x14));
     return allocation2;
   }
   if (*(int *)(this + 4) == 0) {
     allocation = (char *)_malloc(10);
-    formatString = DAT_a7b7bbf0;
+    formatString = badOperandTypeStrPtr_a7b7bbf0;
 loopCallSprintf:
     _sprintf(allocation,formatString);
   }
@@ -86,13 +86,13 @@ loopCallSprintf:
         else {
           glTypeSigned = *(short *)(symbolPtr + 0x2c);
         }
-        formatString = DAT_a7b7bbec;
+        formatString = badConstantTypeStrPtr_a7b7bbec;
         if (glTypeSigned != -0x74aa) goto loopCallSprintf;
       }
     }
     for (component = 0; baseSize = ParseOperand__GetBaseSize(this), component < baseSize; component = component + 1) {
       if (component != 0) {
-        _sprintf(allocation,DAT_a7b7bbe0,allocation);
+        _sprintf(allocation,stringCommaFmtPtr_a7b7bbe0,allocation);
       }
       if (*(int *)this == 0) {
         glType = *(ushort *)(this + 0x18);
@@ -111,7 +111,7 @@ loopCallSprintf:
                     unusedStackArg3,unusedStackArg4);
 loopSetValueArg:
         valueArg = *(char **)(elemOffset + *(int *)(this + 4));
-        formatString = DAT_a7b7bbe8;
+        formatString = stringIntFmtPtr_a7b7bbe8;
 loopCallSprintf2:
         _sprintf(allocation,formatString,allocation,valueArg);
       }
@@ -122,7 +122,7 @@ loopCallSprintf2:
         }
       }
       else if (glType == 0x8b56) {
-        formatString = DAT_a7b7bbc4;
+        formatString = stringStringFmtPtr_a7b7bbc4;
         if (*(int *)(component * 4 + *(int *)(this + 4)) == 0) {
           valueArg = "false";
         }
@@ -1082,7 +1082,7 @@ int ParseSymbolTable__FindFirstElement(this, parseSymbol)
           _strcpy(elementName,fieldNameData);
         }
         else {
-          _sprintf(elementName,DAT_a7b7bbf4,*(int *)(parseSymbol + 0x14),fieldNameData);
+          _sprintf(elementName,stringDotStringFmtPtr_a7b7bbf4,*(int *)(parseSymbol + 0x14),fieldNameData);
         }
         ParseSymbol__SetName(elementSymbol,elementName);
         srcFlag3c = *(int *)(parseSymbol + 0x3c);
@@ -1109,7 +1109,7 @@ int ParseSymbolTable__FindFirstElement(this, parseSymbol)
           __ZN11ParseSymbolC1Ev(elementSymbol);
           ParseSymbol__SetName(elementSymbol,*(char **)(parseSymbol + 0x14));
           ParseSymbol__AddDirectIndex(elementSymbol,elementIndex);
-          _sprintf(indexText,DAT_a7b7bbf8,elementIndex);
+          _sprintf(indexText,bracketIntFmtPtr_a7b7bbf8,elementIndex);
           ParseSymbol__CatName(elementSymbol,indexText);
           flag40 = *(undefined4 *)(parseSymbol + 0x40);
           flag3c = *(undefined4 *)(parseSymbol + 0x3c);
@@ -1666,7 +1666,7 @@ int ParseSymbolTable__GetString(this, mode)
         do {
           symbol = (unsigned char *)((int (*)())ParseSymbolTable__FirstSymbolInHash)(this,bucketIdx);
           if (symbol != (unsigned char *)0x0) {
-            _sprintf(result,DAT_a7b7bc08,result,bucketIdx);
+            _sprintf(result,hashFmtPtr_a7b7bc08,result,bucketIdx);
             usedLen = _strlen(result);
             buffer = result;
             do {
@@ -1696,7 +1696,7 @@ int ParseSymbolTable__GetString(this, mode)
               symbol = (unsigned char *)((int (*)())ParseSymbolTable__NextSymbolInHash)(this,symbol);
               buffer = result;
             } while (symbol != (unsigned char *)0x0);
-            _strcat(result,DAT_a7b7bc0c);
+            _strcat(result,newlineStrPtr_a7b7bc0c);
             hashSize = *(uint *)(this + 0x10);
           }
           bucketIdx = bucketIdx + 1;
@@ -1739,7 +1739,7 @@ loopCallFree:
       }
     }
     else if (mode == 2) {
-      _sprintf(buffer,DAT_a7b7bc10);
+      _sprintf(buffer,attribsStrPtr_a7b7bc10);
       usedLen = _strlen(buffer);
       do {
         while( true ) {
@@ -1773,22 +1773,22 @@ loopCallFree:
           }
           if (kindFilter != '\x02') break;
           kindFilter = '\x03';
-          _strcat(buffer,DAT_a7b7bc14);
-          sectionHeader = DAT_a7b7bc14;
+          _strcat(buffer,paramsStrPtr_a7b7bc14);
+          sectionHeader = paramsStrPtr_a7b7bc14;
 loopSetSymbolText:
           symbolText = _strlen(sectionHeader);
           usedLen = usedLen + symbolText;
         }
         if (kindFilter == '\x03') {
           kindFilter = '\x04';
-          _strcat(buffer,DAT_a7b7bc18);
-          sectionHeader = DAT_a7b7bc18;
+          _strcat(buffer,outputsStrPtr_a7b7bc18);
+          sectionHeader = outputsStrPtr_a7b7bc18;
           goto loopSetSymbolText;
         }
         if (kindFilter == '\x04') {
           kindFilter = '\0';
-          _strcat(buffer,DAT_a7b7bc1c);
-          sectionHeader = DAT_a7b7bc1c;
+          _strcat(buffer,tempsStrPtr_a7b7bc1c);
+          sectionHeader = tempsStrPtr_a7b7bc1c;
           goto loopSetSymbolText;
         }
         result = buffer;
@@ -2332,7 +2332,7 @@ loopSetThisType:
         operandSlotPtr = &rightOperand;
         __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_
                   (compiler,resultOperand,&leftOperand,operandSlotPtr);
-LAB_97bbf370:
+callGetOperandAsSourceVar:
         TPPStreamCompiler__getOperandAsSourceVar
                   ((unsigned char *)&operandDescOverlay,compiler,leftOperand,operandSlotPtr,op,unusedArg6,thisVtable,zeroCallArg)
         ;
@@ -2376,7 +2376,7 @@ LAB_97bbf370:
         operandSlotPtr = &rightOperand;
         __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_
                   (compiler,resultOperand,&leftOperand,operandSlotPtr);
-        goto LAB_97bbf370;
+        goto callGetOperandAsSourceVar;
       }
       operandWorkPtr = (unsigned char *)&rightOperand;
       operandSlotPtr = (unsigned char **)0x1;
@@ -2399,14 +2399,14 @@ LAB_97bbf370:
     if (binaryOp < 0x31) {
       if (0x2c < binaryOp) goto setRightOperandToDelete;
       if (0x16 < binaryOp) {
-        if (binaryOp < 0x1d) goto LAB_97bbf46c;
+        if (binaryOp < 0x1d) goto callTPPStreamCompilerError;
         if (binaryOp < 0x1f) goto setRightOperandToDelete;
       }
     }
     else {
       if (binaryOp == 0x76) goto setRightOperandToDelete;
       if ((0x75 < binaryOp) && (binaryOp - 0x7fU < 6)) {
-LAB_97bbf46c:
+callTPPStreamCompilerError:
         TPPStreamCompiler__error
                   (compiler,(char *)0x1,(char *)0x0,
                    "TIntermBinary::compileNode: Unsupported operation (TOperator: %d)",binaryOp,unusedArg6
@@ -3412,7 +3412,7 @@ loopSetParamScanIndex:
         srcSlotCursor = srcSlotCursor + 2;
       } while (operandsLeft != 0);
     }
-    goto LAB_97bc11d8;
+    goto callGetOperandAsDestVar;
   case 0x25:
     break;
   case 0x38:
@@ -3435,7 +3435,7 @@ loopSetParamScanIndex:
         srcSlotCursor = srcSlotCursor + 2;
       } while (operandsLeft != 0);
     }
-    goto LAB_97bc11d8;
+    goto callGetOperandAsDestVar;
   case 0x48:
   case 0x49:
     strayArg4 = childCount;
@@ -3457,7 +3457,7 @@ loopSetParamScanIndex:
         srcSlotCursor = srcSlotCursor + -2;
       } while (operandsLeft != 0);
     }
-    goto LAB_97bc11d8;
+    goto callGetOperandAsDestVar;
   case 0x66:
   case 0x67:
   case 0x68:
@@ -3493,7 +3493,7 @@ loopSetParamScanIndex:
               ((unsigned char *)&stackType,compiler,childOperands[1],strayArg4,strayArg5,operatorCode,operatorTimes4,r10In0);
     opSrc1A = stackType;
     opSrc1B = stackTypeArraySize;
-    goto LAB_97bc11d8;
+    goto callGetOperandAsDestVar;
   case 0x8a:
   case 0x8b:
   case 0x8e:
@@ -3610,7 +3610,7 @@ operatorCodeCase8c:
       }
     }
     opHeaderAndFlags[0] = (childCount + 1) * 0x20000000 | opHeaderAndFlags[0] & 0x1fffffff;
-LAB_97bc11d8:
+callGetOperandAsDestVar:
     TPPStreamCompiler__getOperandAsDestVar
               ((unsigned char *)&stackType,compiler,resultOperand[0],strayArg4,strayArg5,operatorCode);
     opDest0 = stackType;

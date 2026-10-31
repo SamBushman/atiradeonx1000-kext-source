@@ -80,7 +80,7 @@ int TGenericLinker__MergeCompilers(this, stage)
   stageOffset = stage * 4;
   firstChunkOfObject = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
   chunkCountOfObject = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
-  errorText = DAT_a7b7bb0c;
+  errorText = aMaximumOfCompilationUnitsStrPtr_a7b7bb0c;
   objectCount = *(int *)(this + stageOffset + 0x20);
   stageRequirementMet = 0;
   if (10000 < objectCount) {
@@ -375,7 +375,7 @@ code_r0x97bb2ab8:
               if ((success != true) || (mergedSymbol == (undefined4 *)0x0)) {
                 if ((success == true) && (mergedSymbol == (undefined4 *)0x0)) {
                   symbolName = *(undefined4 *)(parseSymbol + 0x14);
-                  formatLength = _strlen(DAT_a7b7bbc0);
+                  formatLength = _strlen(idTypeFmtPtr_a7b7bbc0);
                   nameLength = _strlen(symbolName);
                   message = (char *)_malloc(formatLength + nameLength + 1);
                   _sprintf(message,UNK_a7b7bb90,symbolName);
@@ -572,7 +572,7 @@ int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, sourceStream, pa
     _PPStreamChunkListAddChunk(newStream[0xc],plainChunkCopy);
   }
   compareResult = _PPStreamCompare(sourceStream,newStream);
-  errorText = DAT_a7b7bb88;
+  errorText = afterCreationTokenStreamFailedStrPtr_a7b7bb88;
   if (compareResult == 1) {
     infoSink = *(void **)(this + 0x84);
                     
@@ -638,12 +638,12 @@ code_r0x97bb3410:
           goto setChunkHeader;
         }
       }
-      length2 = _strlen(DAT_a7b7baec);
+      length2 = _strlen(implementationLimitOfMAXVERTEXFmtPtr_a7b7baec);
       length = _strlen((&_shaderString)[stage]);
       nameLen = _strlen(functionName);
       allocation = (char *)_malloc(length2 + length + nameLen + 9);
       FunctionTable__getFirstOp(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
-      _sprintf(allocation,DAT_a7b7baec,functionName,(&_shaderString)[stage]);
+      _sprintf(allocation,implementationLimitOfMAXVERTEXFmtPtr_a7b7baec,functionName,(&_shaderString)[stage]);
       infoSink = *(void **)(this + 0x84);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
@@ -657,11 +657,11 @@ code_r0x97bb3410:
   goto setStage;
   while( true ) {
     if ((*(uint *)(opChunk + 0xc) & 0x3ffff) == 0) {
-      length = _strlen(DAT_a7b7baf0);
+      length = _strlen(implementationLimitOfMAXFRAGMENTFmtPtr_a7b7baf0);
       shaderStringLen = _strlen((&_shaderString)[stage]);
       length3 = _strlen(functionName);
       allocation = (char *)_malloc(length + shaderStringLen + length3 + 1);
-      _sprintf(allocation,DAT_a7b7baf0,functionName,(&_shaderString)[stage]);
+      _sprintf(allocation,implementationLimitOfMAXFRAGMENTFmtPtr_a7b7baf0,functionName,(&_shaderString)[stage]);
       infoSink = *(void **)(this + 0x84);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
@@ -949,21 +949,21 @@ joined_r0x97bb3b94:
       if ((**(char **)parseSymbol == '\0') && (*(int *)(parseSymbol + 0x5c) != 0)) {
         symbolName = *(char **)(parseSymbol + 0x14);
         if (*(unsigned char **)(this + 0x2c) == (unsigned char *)0x0) {
-          formatLength = _strlen(DAT_a7b7bae0);
+          formatLength = _strlen(vertexShaderWritesVaryingWhichFmtPtr_a7b7bae0);
           nameLength = _strlen(symbolName);
           message = (char *)_malloc(formatLength + nameLength + 1);
           emitWarning = true;
-          formatString = DAT_a7b7bae0;
+          formatString = vertexShaderWritesVaryingWhichFmtPtr_a7b7bae0;
         }
         else {
           fragmentSymbol = ParseSymbolTable__FindGlobalSymbolByName
                             (*(unsigned char **)(this + 0x2c),symbolName);
           emitWarning = fragmentSymbol == 0;
           if (!emitWarning) goto joined_r0x97bb3b94;
-          formatLength = _strlen(DAT_a7b7bad8);
+          formatLength = _strlen(vertexShaderWritesVaryingWhichFmtPtr_a7b7bad8);
           nameLength = _strlen(symbolName);
           message = (char *)_malloc(formatLength + nameLength + 1);
-          formatString = DAT_a7b7bad8;
+          formatString = vertexShaderWritesVaryingWhichFmtPtr_a7b7bad8;
         }
         _sprintf(message,formatString,symbolName);
         if (emitWarning) {
@@ -1252,12 +1252,12 @@ int TGenericLinker__OptimizeFunctionIO(this)
                                         (*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
                       if ((opHeader & 0x3ffff) == firstOpIndex) goto loopCheckScanEnded;
                     }
-                    formatLength = _strlen(DAT_a7b7baec);
+                    formatLength = _strlen(implementationLimitOfMAXVERTEXFmtPtr_a7b7baec);
                     shaderNameLength = _strlen((&_shaderString)[stage]);
                     functionNameLength = _strlen(functionName);
                     message = (char *)_malloc(formatLength + shaderNameLength + functionNameLength + 9);
                     firstOpIndex = FunctionTable__getFirstOp(*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
-                    _sprintf(message,DAT_a7b7baec,functionName,(&_shaderString)[stage],firstOpIndex);
+                    _sprintf(message,implementationLimitOfMAXVERTEXFmtPtr_a7b7baec,functionName,(&_shaderString)[stage],firstOpIndex);
                     infoSink = *(void **)(this + 0x84);
                     
                     __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
@@ -1384,7 +1384,7 @@ int TGenericLinker__GetRemapTableString(this)
   
   tableSlot = this + 0x40;
   length = _strlen(_linkUtilString);
-  headerStrings = &DAT_a7b7bb38;
+  headerStrings = &noUniformToLocalVertexFmtPtr_a7b7bb38;
   totalLength = length + 2;
   do {
     remapTable = *(int *)tableSlot;
@@ -1400,7 +1400,7 @@ int TGenericLinker__GetRemapTableString(this)
       totalLength = totalLength + lineLength;
       for (entryIndex = 0; uniformBound = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)),
           entryIndex < uniformBound; entryIndex = entryIndex + 1) {
-        entryLength = _strlen(DAT_a7b7bb34);
+        entryLength = _strlen(stringNewlineFmtPtr_a7b7bb34);
         totalLength = totalLength + entryLength + 0x10;
       }
     }
@@ -1410,7 +1410,7 @@ int TGenericLinker__GetRemapTableString(this)
   format = _linkUtilString;
   *text = '\0';
   _sprintf(text,format);
-  headerStrings = &DAT_a7b7bb38;
+  headerStrings = &noUniformToLocalVertexFmtPtr_a7b7bb38;
   tableSlot = this + 0x40;
   tableByteOffset = 0;
   stagesLeft = 1;
@@ -1426,7 +1426,7 @@ int TGenericLinker__GetRemapTableString(this)
       _sprintf(text,(char *)headerStrings[-3],text);
       for (entryIndexPass2 = 0; uniformBoundPass2 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)),
           entryIndexPass2 < uniformBoundPass2; entryIndexPass2 = entryIndexPass2 + 1) {
-        _sprintf(text,DAT_a7b7bb34,text,entryIndexPass2,
+        _sprintf(text,stringNewlineFmtPtr_a7b7bb34,text,entryIndexPass2,
                  *(undefined4 *)(entryIndexPass2 * 4 + *(int *)(this + tableByteOffset + 0x40)));
       }
     }
@@ -1459,7 +1459,7 @@ int TGenericLinker__GetBindingTableString(this)
   
   string = BindingTable__GetString(*(unsigned char **)(this + 4),3);
   if (*(int *)(this + 0x74) < 0) {
-    length = _strlen(DAT_a7b7bb44);
+    length = _strlen(bindingsTableNoTextureCoordinateFmtPtr_a7b7bb44);
     length2 = _strlen(string);
     p0 = (char *)_malloc(length + length2 + 0x29);
     *p0 = '\0';
@@ -1468,10 +1468,10 @@ int TGenericLinker__GetBindingTableString(this)
     sizeActiveUserAttributes = BindingTable__GetSizeActiveUserAttributes(*(unsigned char **)(this + 4));
     numActiveUniformBindings = BindingTable__GetNumActiveUniformBindings(*(unsigned char **)(this + 4));
     sizeActiveUserUniforms = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
-    _sprintf(p0,DAT_a7b7bb44,numActiveAttributeBindings2,sizeActiveAttributes2,sizeActiveUserAttributes,numActiveUniformBindings,sizeActiveUserUniforms,string);
+    _sprintf(p0,bindingsTableNoTextureCoordinateFmtPtr_a7b7bb44,numActiveAttributeBindings2,sizeActiveAttributes2,sizeActiveUserAttributes,numActiveUniformBindings,sizeActiveUserUniforms,string);
   }
   else {
-    length = _strlen(DAT_a7b7bb40);
+    length = _strlen(bindingsTableTextureCoordinateUnitFmtPtr_a7b7bb40);
     length2 = _strlen(string);
     p0 = (char *)_malloc(length + length2 + 0x29);
     *p0 = '\0';
@@ -1480,7 +1480,7 @@ int TGenericLinker__GetBindingTableString(this)
     r6In0 = BindingTable__GetSizeActiveUserAttributes(*(unsigned char **)(this + 4));
     r7In0 = BindingTable__GetNumActiveUniformBindings(*(unsigned char **)(this + 4));
     r8In0 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
-    _sprintf(p0,DAT_a7b7bb40,*(int *)(this + 0x74),numActiveAttributeBindings,sizeActiveAttributes,r6In0,r7In0,r8In0,string);
+    _sprintf(p0,bindingsTableTextureCoordinateUnitFmtPtr_a7b7bb40,*(int *)(this + 0x74),numActiveAttributeBindings,sizeActiveAttributes,r6In0,r7In0,r8In0,string);
   }
   _free(string);
   return p0;
@@ -1549,7 +1549,7 @@ int TGenericLinker__AddAttribBinding(linker, attribName, glType, isBuiltIn)
   
   binding = operator_new(0x38);
   __ZN7BindingC1Ev(binding);
-  errorText = DAT_a7b7bb84;
+  errorText = couldNotAllocateBindingToStrPtr_a7b7bb84;
   if (binding == (unsigned char *)0x0) {
     infoSink = *(void **)(linker + 0x84);
                     
@@ -1651,10 +1651,10 @@ int TGenericLinker__CollectClientAttributeBindings(this)
         builtInFlag = *(int *)(symbol + 0x34);
         if (builtInFlag == 1) {
           bindingName = *(undefined4 *)(binding + 8);
-          errorFormatLength = _strlen(DAT_a7b7bb68);
+          errorFormatLength = _strlen(attemptToSetLocationForFmtPtr_a7b7bb68);
           errorNameLength = _strlen(bindingName);
           message = (char *)_malloc(errorFormatLength + errorNameLength + 1);
-          _sprintf(message,DAT_a7b7bb68,bindingName);
+          _sprintf(message,attemptToSetLocationForFmtPtr_a7b7bb68,bindingName);
           infoSink = *(void **)(this + 0x84);
                     
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
@@ -1810,10 +1810,10 @@ joined_r0x97bb54f0:
     symbolChunk = (char *)*symbol;
     if (*symbolChunk != '\x02') {
       symbolName = symbol[5];
-      formatLength = _strlen(DAT_a7b7bb6c);
+      formatLength = _strlen(symbolIsBoundAsAttributeFmtPtr_a7b7bb6c);
       nameLength = _strlen(symbolName);
       message = (char *)_malloc(formatLength + nameLength + 1);
-      _sprintf(message,DAT_a7b7bb6c,symbolName);
+      _sprintf(message,symbolIsBoundAsAttributeFmtPtr_a7b7bb6c,symbolName);
       infoSink = *(void **)(this + 0x84);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
@@ -2401,9 +2401,9 @@ code_r0x97bb6720:
         }
       }
       else {
-        formatLength = _strlen(DAT_a7b7bb00);
+        formatLength = _strlen(implementationLimitOfVaryingFloatFmtPtr_a7b7bb00);
         messageText = (char *)_malloc(formatLength + 0x11);
-        _sprintf(messageText,DAT_a7b7bb00,0x20,totalSlots);
+        _sprintf(messageText,implementationLimitOfVaryingFloatFmtPtr_a7b7bb00,0x20,totalSlots);
         infoSink = *(void **)(this + 0x84);
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -2801,10 +2801,10 @@ int TGenericLinker__BuildUniformRemapTables(this)
           if ((*(char *)*symbol != '\x03') ||
              ((*(uint *)((char *)*symbol + 0xc) & 0x1f0000) != 0x10000)) {
             symbolName = symbol[5];
-            formatLength = _strlen(DAT_a7b7bb74);
+            formatLength = _strlen(symbolIsBoundAsUniformFmtPtr_a7b7bb74);
             nameLength = _strlen(symbolName);
             message = (char *)_malloc(formatLength + nameLength + 1);
-            _sprintf(message,DAT_a7b7bb74,symbolName);
+            _sprintf(message,symbolIsBoundAsUniformFmtPtr_a7b7bb74,symbolName);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
@@ -2904,10 +2904,10 @@ int TGenericLinker__InsertUniformBindingFromSymbol(this, parseSymbol, isFragment
     __ZN7BindingC1Ev(binding);
     if (binding == (unsigned char *)0x0) {
       uniformName = *(undefined4 *)(parseSymbol + 0x14);
-      formatLength = _strlen(DAT_a7b7bb7c);
+      formatLength = _strlen(failureToAllocateMemoryForFmtPtr_a7b7bb7c);
       nameLength = _strlen(uniformName);
       message = (char *)_malloc(formatLength + nameLength + 1);
-      _sprintf(message,DAT_a7b7bb7c,uniformName);
+      _sprintf(message,failureToAllocateMemoryForFmtPtr_a7b7bb7c,uniformName);
       infoSink = *(void **)(this + 0x84);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
@@ -3098,11 +3098,11 @@ loopSetFnName:
                         *(undefined1 *)(nameCopy + charIdx) = 0;
                       }
                     }
-                    msgFormatLen2 = _strlen(DAT_a7b7bb20);
+                    msgFormatLen2 = _strlen(functionDefinedInMoreThanFmtPtr_a7b7bb20);
                     shaderStringLen = _strlen((&_shaderString)[stage]);
                     nameCopyLen = _strlen(nameCopy);
                     errorMessage = (char *)_malloc(msgFormatLen2 + shaderStringLen + nameCopyLen + 1);
-                    _sprintf(errorMessage,DAT_a7b7bb20,nameCopy,(&_shaderString)[stage]);
+                    _sprintf(errorMessage,functionDefinedInMoreThanFmtPtr_a7b7bb20,nameCopy,(&_shaderString)[stage]);
                     infoSink = *(void **)(this + 0x84);
                     
                     __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -3238,9 +3238,9 @@ int TGenericLinker__BuildSymbolTableList(this, shaderHandles, numShaders)
   r10In0 = 0;
   mainCount[0] = 0;
   mainCount[1] = 0;
-  mainShaderIndex = DAT_97c38fb0;
+  mainShaderIndex = mainShaderIndexInit_97c38fb0;
   status = 1;
-  fillIndex[0] = DAT_97c38fb8;
+  fillIndex[0] = fillIndexInit_97c38fb8;
   r4In0 = shaderHandles;
   r5Fwd = numShaders;
   if (numShaders < 1) {
@@ -3295,7 +3295,7 @@ override_jmp_97bb7df4_case_0:
       if (shaderHandle == (int *)0x0) {
         r9Fwd = (unsigned char *)&_linkIntErrorString;
         loopInfoSink = *(void **)(this + 0x84);
-        errorText = DAT_a7b7bb64;
+        errorText = invalidCompilerObjectPassedToStrPtr_a7b7bb64;
                     
 override_jmp_97bb7c58_case_0:
         __ZN13TInfoSinkBase6appendEPKc(loopInfoSink,"INTERNAL ERROR: ");
@@ -3309,7 +3309,7 @@ override_jmp_97bb7c58_case_0:
         if (compiler == 0) {
           r9Fwd = (unsigned char *)&_linkIntErrorString;
           loopInfoSink = *(void **)(this + 0x84);
-          errorText = DAT_a7b7bb64;
+          errorText = invalidCompilerObjectPassedToStrPtr_a7b7bb64;
                     
           goto override_jmp_97bb7c58_case_0;
         }
@@ -3419,7 +3419,7 @@ int __ZN14TGenericLinkerC2Ei(this, debugOptions)
   char reservation;
   byte cr0Reg;
   
-  *(int *)this = DAT_a7b7bba0 + 8;
+  *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
   emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
@@ -3482,7 +3482,7 @@ int __ZN14TGenericLinkerC1Ei(this, debugOptions)
   char reservation;
   byte cr0Reg;
   
-  *(int *)this = DAT_a7b7bba0 + 8;
+  *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
   emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
@@ -3545,7 +3545,7 @@ int __ZN14TGenericLinkerC4Ei(this, debugOptions)
   char reservation;
   byte cr0Reg;
   
-  *(int *)this = DAT_a7b7bba0 + 8;
+  *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
   emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
@@ -3631,7 +3631,7 @@ int __ZN14TGenericLinkerD4Ev(this, deleteFlag)
   byte cr0Reg;
   undefined1 allocScratch [28];
   
-  *(int *)this = DAT_a7b7bba0 + 8;
+  *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
   ((int (*)())TGenericLinker__reset)(this);
   infoSinkData = *(int **)((int)this + 0x84);
   if (infoSinkData != (int *)0x0) {
@@ -4020,10 +4020,10 @@ int TGenericLinker__link(this, shaderObjects, numShaders)
         do {
           if ((*(int *)(this + loopIndex * 4 + 0x30) != 0) &&
              (branchResolveResult = _PPStreamResolveBranches(*(int *)(this + loopIndex * 4 + 0x30)), branchResolveResult != 0)) {
-            formatLength = _strlen(DAT_a7b7bb1c);
+            formatLength = _strlen(notAllShaderFunctionCallsFmtPtr_a7b7bb1c);
             shaderNameLength = _strlen((&_shaderString)[loopIndex]);
             allocation = (char *)_malloc(formatLength + shaderNameLength + 1);
-            _sprintf(allocation,DAT_a7b7bb1c,(&_shaderString)[loopIndex]);
+            _sprintf(allocation,notAllShaderFunctionCallsFmtPtr_a7b7bb1c,(&_shaderString)[loopIndex]);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -4063,10 +4063,10 @@ int TGenericLinker__link(this, shaderObjects, numShaders)
           }
           sizeActiveVertexUniforms = BindingTable__GetSizeActiveVertexUniforms(*(unsigned char **)(this + 4));
           if (0x200 < sizeActiveVertexUniforms) {
-            formatLength = _strlen(DAT_a7b7baec);
+            formatLength = _strlen(implementationLimitOfMAXVERTEXFmtPtr_a7b7baec);
             allocation = (char *)_malloc(formatLength + 0x11);
             sizeActiveVertexUniforms2 = BindingTable__GetSizeActiveVertexUniforms(*(unsigned char **)(this + 4));
-            _sprintf(allocation,DAT_a7b7baec,0x200,sizeActiveVertexUniforms2);
+            _sprintf(allocation,implementationLimitOfMAXVERTEXFmtPtr_a7b7baec,0x200,sizeActiveVertexUniforms2);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -4077,10 +4077,10 @@ int TGenericLinker__link(this, shaderObjects, numShaders)
           }
           sizeActiveFragmentUniforms = BindingTable__GetSizeActiveFragmentUniforms(*(unsigned char **)(this + 4));
           if (0x200 < sizeActiveFragmentUniforms) {
-            formatLength = _strlen(DAT_a7b7baf0);
+            formatLength = _strlen(implementationLimitOfMAXFRAGMENTFmtPtr_a7b7baf0);
             allocation = (char *)_malloc(formatLength + 0x11);
             sizeActiveFragmentUniforms2 = BindingTable__GetSizeActiveFragmentUniforms(*(unsigned char **)(this + 4));
-            _sprintf(allocation,DAT_a7b7baf0,0x200,sizeActiveFragmentUniforms2);
+            _sprintf(allocation,implementationLimitOfMAXFRAGMENTFmtPtr_a7b7baf0,0x200,sizeActiveFragmentUniforms2);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -4176,10 +4176,10 @@ int TGenericLinker__getStatsString(this)
   
   statsString = *(int *)(this + 0x50);
   if (statsString == 0) {
-    length = _strlen(DAT_a7b7bb5c);
+    length = _strlen(noStatsStrPtr_a7b7bb5c);
     allocation = _malloc(length * 4 + 4);
     *(undefined4 *)(this + 0x50) = allocation;
-    _strcpy(allocation,DAT_a7b7bb5c);
+    _strcpy(allocation,noStatsStrPtr_a7b7bb5c);
     statsString = *(int *)(this + 0x50);
   }
   return statsString;
@@ -4204,11 +4204,11 @@ int TGenericLinker__getPPStreamString(this)
     _free(*(int *)(this + 0x54));
   }
   *(undefined4 *)(this + 0x54) = 0;
-  totalLength = _strlen(DAT_a7b7bb4c);
+  totalLength = _strlen(vertexShaderTokenStreamStrPtr_a7b7bb4c);
   if (*(int *)(this + 0x30) == 0) {
-    length = _strlen(DAT_a7b7bb58);
+    length = _strlen(noTokenStreamStrPtr_a7b7bb58);
     vertexText = (void *)_malloc(length + 1);
-    _strcpy(vertexText,DAT_a7b7bb58);
+    _strcpy(vertexText,noTokenStreamStrPtr_a7b7bb58);
   }
   else {
     _PPStreamGetStream(*(int *)(this + 0x30),0,streamSize);
@@ -4223,12 +4223,12 @@ int TGenericLinker__getPPStreamString(this)
     length = _strlen(vertexText);
     totalLength = totalLength + length;
   }
-  length = _strlen(DAT_a7b7bb48);
+  length = _strlen(fragmentShaderTokenStreamStrPtr_a7b7bb48);
   totalLength = totalLength + length;
   if (*(int *)(this + 0x34) == 0) {
-    length = _strlen(DAT_a7b7bb58);
+    length = _strlen(noTokenStreamStrPtr_a7b7bb58);
     fragmentText = (void *)_malloc(length + 1);
-    _strcpy(fragmentText,DAT_a7b7bb58);
+    _strcpy(fragmentText,noTokenStreamStrPtr_a7b7bb58);
   }
   else {
     _PPStreamGetStream(*(int *)(this + 0x34),0,streamSize);
@@ -4246,12 +4246,12 @@ int TGenericLinker__getPPStreamString(this)
   }
   allocation2 = (char *)_malloc(totalLength + 8);
   *(char **)(this + 0x54) = allocation2;
-  _sprintf(allocation2,"%s\n",DAT_a7b7bb4c);
+  _sprintf(allocation2,"%s\n",vertexShaderTokenStreamStrPtr_a7b7bb4c);
   if (vertexText == (void *)0x0) {
-    _sprintf(*(char **)(this + 0x54),"%s\n\n%s\n",*(char **)(this + 0x54),DAT_a7b7bb48);
+    _sprintf(*(char **)(this + 0x54),"%s\n\n%s\n",*(char **)(this + 0x54),fragmentShaderTokenStreamStrPtr_a7b7bb48);
   }
   else {
-    _sprintf(*(char **)(this + 0x54),"%s%s\n\n%s\n",*(char **)(this + 0x54),vertexText,DAT_a7b7bb48);
+    _sprintf(*(char **)(this + 0x54),"%s%s\n\n%s\n",*(char **)(this + 0x54),vertexText,fragmentShaderTokenStreamStrPtr_a7b7bb48);
   }
   if (noFragmentText) {
     _sprintf(*(char **)(this + 0x54),"%s\n",*(char **)(this + 0x54));
@@ -4290,11 +4290,11 @@ int TGenericLinker__getShaderToProgramString(this)
     _free(*(int *)(this + 0x58));
   }
   *(undefined4 *)(this + 0x58) = 0;
-  totalLength = _strlen(DAT_a7b7bb54);
+  totalLength = _strlen(vertexProgramTokenStreamStrPtr_a7b7bb54);
   if (*(int *)(this + 0x30) == 0) {
-    length2 = _strlen(DAT_a7b7bb58);
+    length2 = _strlen(noTokenStreamStrPtr_a7b7bb58);
     vertexText = _malloc(length2 + 1);
-    _strcpy(vertexText,DAT_a7b7bb58);
+    _strcpy(vertexText,noTokenStreamStrPtr_a7b7bb58);
   }
   else {
     _PPStreamGetStream(*(int *)(this + 0x30),0,streamSize);
@@ -4319,12 +4319,12 @@ int TGenericLinker__getShaderToProgramString(this)
     length = _strlen(vertexText);
     totalLength = totalLength + length;
   }
-  length = _strlen(DAT_a7b7bb50);
+  length = _strlen(fragmentProgramTokenStreamStrPtr_a7b7bb50);
   totalLength = totalLength + length;
   if (*(int *)(this + 0x34) == 0) {
-    length3 = _strlen(DAT_a7b7bb58);
+    length3 = _strlen(noTokenStreamStrPtr_a7b7bb58);
     fragmentText = _malloc(length3 + 1);
-    _strcpy(fragmentText,DAT_a7b7bb58);
+    _strcpy(fragmentText,noTokenStreamStrPtr_a7b7bb58);
   }
   else {
     _PPStreamGetStream(*(int *)(this + 0x34),0,streamSize);
@@ -4352,14 +4352,14 @@ int TGenericLinker__getShaderToProgramString(this)
   }
   allocation2 = (char *)_malloc(totalLength + 8);
   *(char **)(this + 0x58) = allocation2;
-  _sprintf(allocation2,"%s\n",DAT_a7b7bb54);
+  _sprintf(allocation2,"%s\n",vertexProgramTokenStreamStrPtr_a7b7bb54);
   if (vertexText == 0) {
     _sprintf(*(char **)(this + 0x58),"%s\n\n",*(char **)(this + 0x58));
   }
   else {
     _sprintf(*(char **)(this + 0x58),"%s%s\n\n",*(char **)(this + 0x58),vertexText);
   }
-  _sprintf(*(char **)(this + 0x58),"%s%s\n",*(char **)(this + 0x58),DAT_a7b7bb50);
+  _sprintf(*(char **)(this + 0x58),"%s%s\n",*(char **)(this + 0x58),fragmentProgramTokenStreamStrPtr_a7b7bb50);
   if (noFragmentText) {
     _sprintf(*(char **)(this + 0x58),"%s\n",*(char **)(this + 0x58));
   }
@@ -4397,18 +4397,18 @@ int GetGLStringForType(glType)
     return _glTypeNameStrings;
   }
   if (glType == 0x1406) {
-    return DAT_a7b7bc28;
+    return glFLOATStrPtr_a7b7bc28;
   }
   if ((glType + 0x74b0U & 0xffff) < 0x15) {
     return *(undefined4 *)(glType * 4 + -0x584a7114);
   }
   if (glType == 0x7ffe) {
-    return DAT_a7b7bc80;
+    return glslSTRUCTUREAPPLEStrPtr_a7b7bc80;
   }
   if (glType == 0x7fff) {
-    return DAT_a7b7bc84;
+    return glslARRAYAPPLEStrPtr_a7b7bc84;
   }
-  return DAT_a7b7bc88;
+  return noneStrPtr_a7b7bc88;
 }
 
 /* GetShaderStringForType @ 0x97bb9748 (168 bytes) */
@@ -4419,18 +4419,18 @@ int GetShaderStringForType(glType)
     return _shaderTypeNameStrings;
   }
   if (glType == 0x1406) {
-    return DAT_a7b7bc90;
+    return floatStrPtr_a7b7bc90;
   }
   if ((glType + 0x74b0U & 0xffff) < 0x15) {
     return *(undefined4 *)(glType * 4 + -0x584a70ac);
   }
   if (glType == 0x7ffe) {
-    return DAT_a7b7bce8;
+    return structureStrPtr_a7b7bce8;
   }
   if (glType == 0x7fff) {
-    return DAT_a7b7bcec;
+    return arrayStrPtr_a7b7bcec;
   }
-  return DAT_a7b7bcf0;
+  return noneStrPtr_a7b7bcf0;
 }
 
 /* GetVec4sForType @ 0x97bb97f0 (136 bytes) */

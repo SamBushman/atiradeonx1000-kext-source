@@ -1106,7 +1106,7 @@ int __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcES
   if (beg == end) {
     do {
       if (reservation != '\0') {
-        DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
+        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
@@ -1140,7 +1140,7 @@ int std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__stri
   if (beg == end) {
     do {
       if (reservation != '\0') {
-        DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
+        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
@@ -1174,7 +1174,7 @@ int std__string___S_construct_char__(beg, end, alloc, allocator)
   if (beg == end) {
     do {
       if (reservation != '\0') {
-        DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
+        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
@@ -1210,7 +1210,7 @@ int __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag(beg, end, a
   if (beg == end) {
     do {
       if (reservation != '\0') {
-        DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
+        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));

@@ -29,7 +29,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   byte cr0Reg;
   undefined1 stringAllocator [24];
   
-  *(int *)this = DAT_a7b7bd98 + 8;
+  *(int *)this = TPPStreamCompilerVtablePtr_a7b7bd98 + 8;
   ConstantAllocationList__clear((unsigned char *)((int)this + 0x44));
   while( true ) {
     emptyTest = size((unsigned char *)((int)this + 0x4c));
@@ -145,11 +145,11 @@ int TPPStreamCompiler__error(this, formatSelect, locationText, format, vaArg1, v
   }
   messageLength = _strlen(message);
   lineBuffer = (char *)_malloc(messageLength + locationLength + 0x28);
-  formatWithLocation = DAT_a7b7bd20;
-  formatPlain = DAT_a7b7bd24;
+  formatWithLocation = errorWithLocationFmtPtr_a7b7bd20;
+  formatPlain = errorPlainFmtPtr_a7b7bd24;
   if (formatSelect != (char *)0x0) {
-    formatWithLocation = DAT_a7b7bd18;
-    formatPlain = DAT_a7b7bd1c;
+    formatWithLocation = errorWithLocationInternalFmtPtr_a7b7bd18;
+    formatPlain = errorPlainInternalFmtPtr_a7b7bd1c;
   }
   if (locationText == (char *)0x0) {
     _sprintf(lineBuffer,formatPlain,*(undefined4 *)(this + 0x90),message);
@@ -194,11 +194,11 @@ int TPPStreamCompiler__warning(this, formatSelect, locationText, format, vaArg1,
   }
   messageLength = _strlen(message);
   lineBuffer = (char *)_malloc(messageLength + locationLength + 0x28);
-  formatWithLocation = DAT_a7b7bd34;
-  formatPlain = DAT_a7b7bd38;
+  formatWithLocation = warningWithLocationFmtPtr_a7b7bd34;
+  formatPlain = warningPlainFmtPtr_a7b7bd38;
   if (formatSelect != (char *)0x0) {
-    formatWithLocation = DAT_a7b7bd2c;
-    formatPlain = DAT_a7b7bd30;
+    formatWithLocation = warningWithLocationInternalFmtPtr_a7b7bd2c;
+    formatPlain = warningPlainInternalFmtPtr_a7b7bd30;
   }
   if (locationText == (char *)0x0) {
     _sprintf(lineBuffer,formatPlain,*(undefined4 *)(this + 0x90),message);
@@ -228,14 +228,14 @@ int TPPStreamCompiler__getSymbolTableString(this, style)
   length = _strlen(string);
   allocation = (char *)_malloc(length + 0x17);
   *allocation = '\0';
-  headerFormat = DAT_a7b7bd64;
+  headerFormat = symbolTableByHashFmtPtr_a7b7bd64;
   if (style != 1) {
     if (style < 2) {
-      headerFormat = DAT_a7b7bd60;
+      headerFormat = symbolTableFmtPtr_a7b7bd60;
       if (style != 0) goto callFree;
     }
     else {
-      headerFormat = DAT_a7b7bd68;
+      headerFormat = symbolTableByTypeFmtPtr_a7b7bd68;
       if (style != 2) goto callFree;
     }
   }
@@ -253,14 +253,14 @@ int TPPStreamCompiler__dumpSymbolTableInfo(this, style)
   char *string;
   char *headerFormat;
   
-  headerFormat = DAT_a7b7bd70;
+  headerFormat = symbolTableByHashStrPtr_a7b7bd70;
   if (style != 1) {
     if (style < 2) {
-      headerFormat = DAT_a7b7bd6c;
+      headerFormat = symbolTableStrPtr_a7b7bd6c;
       if (style != 0) goto setString;
     }
     else {
-      headerFormat = DAT_a7b7bd74;
+      headerFormat = symbolTableByTypeStrPtr_a7b7bd74;
       if (style != 2) goto setString;
     }
   }
@@ -271,7 +271,7 @@ setString:
     return;
   }
   __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,string);
-  __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,DAT_a7b7bd78);
+  __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,newlineNewlineStrPtr_a7b7bd78);
   _free(string);
   return;
 }
@@ -398,7 +398,7 @@ int TPPStreamCompiler__compile(this, intermNode)
     compileResult = *(int *)(this + 0xc);
   }
   if ((compileResult != 0) && ((*(uint *)(this + 0xc0) & 2) != 0)) {
-    __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,DAT_a7b7bd80);
+    __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,tokenStreamDisassemblyStrPtr_a7b7bd80);
     pPStreamString = (char *)(**(code **)(*(int *)this + 0x28))(this);
     __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pPStreamString);
     compileResult = *(int *)(this + 0xc);
@@ -415,10 +415,10 @@ int TPPStreamCompiler__getStatsString(this)
   int statsString;
   undefined4 allocation;
   
-  placeholderText = DAT_a7b7bd84;
+  placeholderText = noStatsStrPtr_a7b7bd84;
   statsString = *(int *)(this + 0x78);
   if (statsString == 0) {
-    length = _strlen(DAT_a7b7bd84);
+    length = _strlen(noStatsStrPtr_a7b7bd84);
     allocation = _malloc(length * 4 + 4);
     *(undefined4 *)(this + 0x78) = allocation;
     _strcpy(allocation,placeholderText);
@@ -436,11 +436,11 @@ int TPPStreamCompiler__getPPStreamString(this)
   int length;
   undefined4 allocation;
   
-  placeholderText = DAT_a7b7bd88;
+  placeholderText = noPPStreamGeneratedStrPtr_a7b7bd88;
   ppStreamString = *(void **)(this + 0x7c);
   if (ppStreamString == (void *)0x0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
-      length = _strlen(DAT_a7b7bd88);
+      length = _strlen(noPPStreamGeneratedStrPtr_a7b7bd88);
       allocation = _malloc(length * 4 + 4);
       *(undefined4 *)(this + 0x7c) = allocation;
       _strcpy(allocation,placeholderText);

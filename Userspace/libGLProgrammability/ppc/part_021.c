@@ -1017,7 +1017,7 @@ int std__string___S_construct(n, c, alloc)
   
   if (n == 0) {
     if (reservation != '\0') {
-      DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
+      emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
     }
     resultData = (ulong *)&DAT_a7b7bf90;
   }

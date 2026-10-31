@@ -214,11 +214,11 @@ int _HashSetNew(bucketCount, hashFunction, equalsFunction)
   
   hashSet = (uint *)_malloc(0x10);
   if (hashFunction == 0) {
-    hashFunction = DAT_a7b7bf70;
+    hashFunction = ptrTo_defaultHashFunction_a7b7bf70;
   }
   hashSet[2] = hashFunction;
   if (equalsFunction == 0) {
-    equalsFunction = DAT_a7b7bf6c;
+    equalsFunction = ptrTo_defaultEqualsFunction_a7b7bf6c;
   }
   hashSet[3] = equalsFunction;
   *hashSet = bucketCount;

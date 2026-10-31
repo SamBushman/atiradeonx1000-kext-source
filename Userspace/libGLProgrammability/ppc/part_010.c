@@ -1172,7 +1172,7 @@ int ParseSymbol__GetString(this, verbose)
   if (chunk == (byte *)0x0) {
 loopCheckChunkText:
     if (chunkText != 0) {
-      _sprintf(result,DAT_a7b7bbbc,result,chunkText,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
+      _sprintf(result,idTypeFmtPtr_a7b7bbbc,result,chunkText,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
       _free(chunkText);
       goto setGLStringForType;
     }
@@ -1190,7 +1190,7 @@ loopCheckChunkText:
     if (2 < chunkKind) {
       if (chunkKind == 3) {
         if (verbose != 0) {
-          _sprintf(result,DAT_a7b7bba8);
+          _sprintf(result,paramStrPtr_a7b7bba8);
           chunk = *(byte **)this;
         }
         chunkText = PrintParam(*(undefined4 *)(chunk + 0xc),*(undefined4 *)(chunk + 0x10));
@@ -1198,7 +1198,7 @@ loopCheckChunkText:
       else {
         if (chunkKind != 4) goto setChunkText;
         if (verbose != 0) {
-          _sprintf(result,DAT_a7b7bbac);
+          _sprintf(result,outputStrPtr_a7b7bbac);
           chunk = *(byte **)this;
         }
         chunkText = PrintOutput(*(undefined4 *)(chunk + 0xc),*(undefined4 *)(chunk + 0x10));
@@ -1208,21 +1208,21 @@ loopCheckChunkText:
     if (chunkKind != 0) {
 setChunkText:
       chunkText = _malloc(0x20);
-      _strcpy(chunkText,DAT_a7b7bbb8);
+      _strcpy(chunkText,noPPStreamRepresentationStrPtr_a7b7bbb8);
       goto loopCheckChunkText;
     }
-    format = DAT_a7b7bbb4;
+    format = intFmtPtr_a7b7bbb4;
     if (verbose != 0) {
-      format = DAT_a7b7bbb0;
+      format = tempFmtPtr_a7b7bbb0;
     }
     _sprintf(result,format,(uint)*(ushort *)(chunk + 0x12));
   }
-  _sprintf(result,DAT_a7b7bbc0,result,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
+  _sprintf(result,idTypeFmtPtr_a7b7bbc0,result,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
 setGLStringForType:
   gLStringForType = GetGLStringForType((uint)*(ushort *)(this + 0x2c));
-  _sprintf(result,DAT_a7b7bbc4,result,gLStringForType);
+  _sprintf(result,stringStringFmtPtr_a7b7bbc4,result,gLStringForType);
   if (1 < *(short *)(this + 0x2e)) {
-    _sprintf(result,DAT_a7b7bbc8,(int)result,(int)*(short *)(this + 0x30),(int)*(short *)(this + 0x2e));
+    _sprintf(result,arrayPositionDeclaredSizeFmtPtr_a7b7bbc8,(int)result,(int)*(short *)(this + 0x30),(int)*(short *)(this + 0x2e));
   }
   allocation = (char *)_malloc(0x40);
   *allocation = '\0';
@@ -1230,17 +1230,17 @@ setGLStringForType:
   if (*(int *)(this + 0x24) != 0) {
     do {
       if (loopIndex == 0) {
-        _sprintf(allocation,DAT_a7b7bbd0);
+        _sprintf(allocation,indicesStrPtr_a7b7bbd0);
       }
       else {
-        _sprintf(allocation,DAT_a7b7bbcc,allocation);
+        _sprintf(allocation,stringDotFmtPtr_a7b7bbcc,allocation);
       }
       directIndex = GetDirectIndex(this,loopIndex);
-      _sprintf(allocation,DAT_a7b7bbd4,allocation,directIndex);
+      _sprintf(allocation,stringIntFmtPtr_a7b7bbd4,allocation,directIndex);
       loopIndex = loopIndex + 1;
     } while (loopIndex < *(uint *)(this + 0x24));
   }
-  _sprintf(result,DAT_a7b7bbd8,result,allocation);
+  _sprintf(result,stringStringCloseParenFmtPtr_a7b7bbd8,result,allocation);
   _free(allocation);
   return result;
 }

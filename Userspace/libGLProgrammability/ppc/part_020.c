@@ -317,7 +317,7 @@ int __ZNSsC4Ev(this)
   
   do {
     if (reservation != '\0') {
-      DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
+      emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));

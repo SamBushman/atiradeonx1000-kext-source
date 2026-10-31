@@ -783,7 +783,7 @@ loopSetCppRef:
     if (errFlag == 0) {
       while ((nextToken != 0x29 && (nextToken != 10))) {
         binopIndex = 0x11;
-        binopCursor = &DAT_a7b7cf14;
+        binopCursor = &binopTableLastEntry_a7b7cf14;
         while (tableToken = *binopCursor, binopCursor = binopCursor + -3, tableToken != nextToken) {
           binopIndex = binopIndex + -1;
           if (binopIndex < 0) {
@@ -1487,8 +1487,8 @@ int _PushEofSrc()
   int cppState;
   
   eofSrc = (undefined4 *)_malloc(0x18);
-  eofScanGetchFn = DAT_a7b7b010;
-  eofUngetchFn = DAT_a7b7b00c;
+  eofScanGetchFn = ptrTo_eofScan_a7b7b010;
+  eofUngetchFn = ptrTo_noop_a7b7b00c;
   cppState = *(int *)PTR__cpp_a7b7c0a4;
   *eofSrc = 0;
   eofSrc[5] = 0;
@@ -1508,7 +1508,7 @@ int _PopEofSrc()
   undefined4 extraOut1;
   
   inputSrc = *(undefined4 **)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
-  if (inputSrc[1] != DAT_a7b7b010) {
+  if (inputSrc[1] != ptrTo_eofScan_a7b7b010) {
     return inputSrc;
   }
   *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) = *inputSrc;
@@ -1676,7 +1676,7 @@ int _MacroExpand(atom, yylvalpp)
           return 0;
         }
         macroInput = (undefined4 *)_malloc(0x20);
-        scanFunc = DAT_a7b7b008;
+        scanFunc = ptrTo_macroScan_a7b7b008;
         cppState = *(int *)PTR__cpp_a7b7c0a4;
         macroInput[4] = 0;
         macroInput[5] = 0;
@@ -2140,12 +2140,12 @@ int _ScanFromString(string)
   int cppState;
   
   stringSrc = (undefined4 *)_malloc(0x1c);
-  scanFn = DAT_a7b7b038;
-  getchFn = DAT_a7b7b034;
+  scanFn = ptrTo_byteScan_a7b7b038;
+  getchFn = ptrTo_strGetch_a7b7b034;
   cppState = *(int *)PTR__cpp_a7b7c0a4;
   stringSrc[4] = 0;
   stringSrc[1] = scanFn;
-  ungetchFn = DAT_a7b7b030;
+  ungetchFn = ptrTo_strUngetch_a7b7b030;
   *stringSrc = 0;
   stringSrc[6] = string;
   stringSrc[5] = 1;

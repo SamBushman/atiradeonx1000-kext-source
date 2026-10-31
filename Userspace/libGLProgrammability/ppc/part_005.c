@@ -1234,7 +1234,7 @@ int TParseContext__paramErrorCheck(this, sourceLoc, qualifier1, qualifier2, type
     if (qualifier2 == 9) {
       typeVtable = *type;
       qualifier2 = 0xc;
-      goto LAB_97b9d48c;
+      goto callTypeVirtual28;
     }
     qualifierString = (char *)getQualifierString(2);
     qualifier2String = (char *)getQualifierString(qualifier2);
@@ -1243,7 +1243,7 @@ int TParseContext__paramErrorCheck(this, sourceLoc, qualifier1, qualifier2, type
   else {
     if (qualifier1 == 0) {
       typeVtable = *type;
-LAB_97b9d48c:
+callTypeVirtual28:
       (**(code **)(typeVtable + 0x28))(type,qualifier2);
       return 0;
     }
@@ -1949,11 +1949,11 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     } while (!(bool)(cr0Flags >> 1 & 1));
     destroyAllocatorArg = destroyAllocator2;
     typeStringData = ptCopyQualifier;
-    if (0 < oldRefCount) goto LAB_97b9e184;
-LAB_97b9e848:
+    if (0 < oldRefCount) goto loopCallNewNodeVirtual28;
+loopDestroyTypeStringRep:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringData - 0xc),destroyAllocatorArg);
-LAB_97b9e184:
+loopCallNewNodeVirtual28:
     (**(code **)(newNode[3] + 0x28))(newNodeType,0);
     return 1;
   }
@@ -2023,7 +2023,7 @@ LAB_97b9e184:
     qualifierString = (char *)getQualifierString((uint)newNode[0xc] >> 0x19);
     error((int)this,(char *)line," non-matching types for const initializer ",qualifierString,"",ptQualifierCopy,
           typesMatch,ptType);
-    goto LAB_97b9e184;
+    goto loopCallNewNodeVirtual28;
   }
   constantUnionNode = (**(code **)(*(int *)initializer + 0x18))(initializer);
   if (constantUnionNode == 0) {
@@ -2140,10 +2140,10 @@ setParseResult:
           cr0Flags = 2;
         }
       } while (!(bool)(cr0Flags >> 1 & 1));
-      if (0 < oldRefCount) goto LAB_97b9e184;
+      if (0 < oldRefCount) goto loopCallNewNodeVirtual28;
       destroyAllocatorArg = destroyAllocator3;
       typeStringData = typeStringChars;
-      goto LAB_97b9e848;
+      goto loopDestroyTypeStringRep;
     }
     symbolTable = *(int **)(this + 4);
     symbolNode = (int *)(**(code **)(*(int *)initializer + 0x28))(initializer);
@@ -2421,7 +2421,7 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
           builtInNode = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,type,op,*childCursor,nodeLineC,1);
           if (builtInNode != (unsigned char *)0x0) {
             canBeRemoved = ((int (*)())TParseContext__canNodeBeRemoved)(this,builtInNode);
-            if (canBeRemoved == 0) goto LAB_97b9ed60;
+            if (canBeRemoved == 0) goto eraseArgSequence;
             builtInAggregate = (unsigned char *)(**(code **)(*(int *)builtInNode + 0x1c))(builtInNode);
             __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate
                       (*(void **)this,argSequence,type,&argIndex,(unsigned char *)&iteratorSlot,builtInAggregate
@@ -2434,7 +2434,7 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
                   ((int (*)())TParseContext__constructStruct)(this,(unsigned char *)*childCursor,(unsigned char *)structFieldBegin[argIndexCopy * 2],
                                   argIndex + 1,nodeLineB,1);
           if (builtInNode != (unsigned char *)0x0) {
-LAB_97b9ed60:
+eraseArgSequence:
             std__vector_TIntermNode__pool_allocator_TIntermNode_____erase
                       (eraseResultSlot,argSequence,iteratorSlot);
             replacementNode = builtInNode;
@@ -2700,7 +2700,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
                               ((int *)**(undefined4 **)(sequence + 4),vectorFieldsCopy,intermTypedCopy,lineCopy,scratchR7,
                                scratchR8,firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
-    if (constUnionTest == 0) goto LAB_97b9f438;
+    if (constUnionTest == 0) goto callIntermAggregateVirtual38;
     (**(code **)(*(int *)intermAggregate + 0x38))(typeTempOverlay,intermAggregate);
     scratchR10 = 1;
     parseResult = TIntermediate__parseConstTree
@@ -2708,7 +2708,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
                         *(undefined4 *)(this + 4),typeTempOverlay,1);
   }
   else {
-LAB_97b9f438:
+callIntermAggregateVirtual38:
     (**(code **)(*(int *)intermAggregate + 0x38))(typeTempOverlay,intermAggregate);
     scratchR10 = 0;
     parseResult = TIntermediate__parseConstTree
@@ -2948,7 +2948,7 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
     nodeVtable = *(int *)intermConstantUnion;
     constArray = *(unsigned char **)(intermConstantUnion + 0x30);
     intermAggregate = intermConstantUnion;
-    goto LAB_97b9fc60;
+    goto callNodeVirtual38;
   }
   if (intermAggregate == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No Aggregate or Constant Union node available","Internal Error"
@@ -2970,14 +2970,14 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
                               ((int *)**(undefined4 **)(sequence + 4),textCopy2,fwdR5,lineCopy,scratchR7,scratchR8,
                                firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
-    if (constUnionTest == 0) goto LAB_97b9fc00;
+    if (constUnionTest == 0) goto callIntermAggregateVirtual38;
     (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
     parseResult = TIntermediate__parseConstTree
                       (*(unsigned char **)this,line,intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
                        *(undefined4 *)(this + 4),typeTemp,1);
   }
   else {
-LAB_97b9fc00:
+callIntermAggregateVirtual38:
     (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
     parseResult = TIntermediate__parseConstTree
                       (*(unsigned char **)this,line,intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
@@ -2988,7 +2988,7 @@ LAB_97b9fc00:
     return 0;
   }
   nodeVtable = *(int *)intermAggregate;
-LAB_97b9fc60:
+callNodeVirtual38:
   (**(code **)(nodeVtable + 0x38))(typeTemp,intermAggregate);
   resultNode = TIntermediate__addConstantUnion
                     (*(unsigned char **)this,constArray + componentOffset * 4,(unsigned char *)typeTemp,line);
@@ -3509,8 +3509,8 @@ int QualifierWritten(intermNode, qualifier, scratchR5, scratchR6, scratchR7, scr
   undefined4 wantedQualifier;
   
   found = 0;
-  visitSymbolFn = DAT_a7b7ba24;
-  visitSelectionFn = DAT_a7b7ba20;
+  visitSymbolFn = ptrTo_AliveSymbol_a7b7ba24;
+  visitSelectionFn = ptrTo_AliveSelection_a7b7ba20;
   rightToLeft = 1;
   visitConstantUnionFn = 0;
   visitBinaryFn = 0;
@@ -3524,7 +3524,7 @@ int QualifierWritten(intermNode, qualifier, scratchR5, scratchR6, scratchR7, scr
   if (intermNode != (unsigned char *)0x0) {
     wantedQualifier = qualifier;
     (**(code **)(*(int *)intermNode + 8))
-              (intermNode,&visitSymbolFn,scratchR5,scratchR6,scratchR7,scratchR8,DAT_a7b7ba20,intermNode);
+              (intermNode,&visitSymbolFn,scratchR5,scratchR6,scratchR7,scratchR8,ptrTo_AliveSelection_a7b7ba20,intermNode);
   }
   return found;
 }
@@ -3649,20 +3649,20 @@ int RemoveAllTreeNodes(intermNode)
   undefined4 postVisit;
   undefined4 rightToLeft;
   
-  visitAggregateFn = DAT_a7b7ba3c;
-  visitBinaryFn = DAT_a7b7ba38;
-  visitConstantUnionFn = DAT_a7b7ba34;
-  visitSelectionFn = DAT_a7b7ba30;
+  visitAggregateFn = ptrTo_RemoveAggregate_a7b7ba3c;
+  visitBinaryFn = ptrTo_RemoveBinary_a7b7ba38;
+  visitConstantUnionFn = ptrTo_RemoveConstantUnion_a7b7ba34;
+  visitSelectionFn = ptrTo_RemoveSelection_a7b7ba30;
   postVisit = 1;
-  visitSymbolFn = DAT_a7b7ba2c;
-  visitUnaryFn = DAT_a7b7ba28;
+  visitSymbolFn = ptrTo_RemoveSymbol_a7b7ba2c;
+  visitUnaryFn = ptrTo_RemoveUnary_a7b7ba28;
   preVisit = 0;
   visitLoopFn = 0;
   visitBranchFn = 0;
   depth = 0;
   rightToLeft = 0;
   return (**(code **)(*(int *)intermNode + 8))
-            (intermNode,&visitSymbolFn,scratchR5,scratchR6,scratchR7,scratchR8,DAT_a7b7ba28,*(int *)intermNode);
+            (intermNode,&visitSymbolFn,scratchR5,scratchR6,scratchR7,scratchR8,ptrTo_RemoveUnary_a7b7ba28,*(int *)intermNode);
 }
 
 /* GetSymbolTable @ 0x97ba0728 (132 bytes) */
@@ -3690,18 +3690,18 @@ int GetSymbolTable(languageIndex)
 /* GetResources @ 0x97ba07ac (108 bytes) */
 int GetResources()
 {
-  DAT_a7b7e838 = 4;
-  DAT_a7b7e810 = 6;
-  DAT_a7b7e818 = 8;
-  DAT_a7b7e824 = 0x20;
-  DAT_a7b7e828 = 0;
-  DAT_a7b7e830 = 0x10;
-  DAT_a7b7e834 = 0x200;
+  builtInResourceMaxDrawBuffers_a7b7e838 = 4;
+  builtInResourceMaxClipPlanes_a7b7e810 = 6;
+  builtInResourceMaxTextureCoords_a7b7e818 = 8;
+  builtInResourceMaxVaryingFloats_a7b7e824 = 0x20;
+  builtInResourceMaxVertexTextureImageUnits_a7b7e828 = 0;
+  builtInResourceMaxTextureImageUnits_a7b7e830 = 0x10;
+  builtInResourceMaxFragmentUniformComponents_a7b7e834 = 0x200;
   GetResources__Resources = 8;
-  DAT_a7b7e814 = 8;
-  DAT_a7b7e81c = 0x10;
-  DAT_a7b7e820 = 0x200;
-  DAT_a7b7e82c = 0x10;
+  builtInResourceMaxTextureUnits_a7b7e814 = 8;
+  builtInResourceMaxVertexAttribs_a7b7e81c = 0x10;
+  builtInResourceMaxVertexUniformComponents_a7b7e820 = 0x200;
+  builtInResourceMaxCombinedTextureImageUnits_a7b7e82c = 0x10;
   return &GetResources__Resources;
 }
 
@@ -3953,7 +3953,7 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
   pragmaMapCount = 0;
   *pragmaMapHeader = 0;
   pragmaMapHeader[1] = 0;
-  emptyStringChars = DAT_a7b7ba70;
+  emptyStringChars = emptyStringRepPtr_a7b7ba70;
   pragmaMapHeader[2] = pragmaMapHeader;
   emptyRepRefCount = (int *)(emptyStringChars + 8);
   pragmaMapHeader[3] = pragmaMapHeader;
@@ -4281,7 +4281,7 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
   stringMapHeader = (undefined4 *)((int (*)())TPoolAllocator__allocate)(stringMapAllocator,0x20);
   stringMapCount = 0;
   *stringMapHeader = 0;
-  emptyStringChars = DAT_a7b7ba70;
+  emptyStringChars = emptyStringRepPtr_a7b7ba70;
   stringMapHeader[1] = 0;
   emptyRepRefCount = (int *)(emptyStringChars + 8);
   stringMapHeader[2] = stringMapHeader;
