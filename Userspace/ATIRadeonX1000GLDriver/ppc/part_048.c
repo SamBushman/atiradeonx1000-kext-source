@@ -1968,8 +1968,8 @@ int ValueKey__foldMadByPlusMinusOne(ctx)
   return 0;
 }
 
-/* FUN_0017e7e0 @ 0x17e7e0 (604 bytes) */
-int FUN_0017e7e0(ctx)
+/* ValueKey__splitMadIntoMulAdd @ 0x17e7e0 (604 bytes) */
+int ValueKey__splitMadIntoMulAdd(ctx)
   int ctx;
 {
   undefined4 tmpSelectWord;
@@ -2224,8 +2224,8 @@ int ValueKey__rewriteAsAdd(ctx, valueKey, src1Swizzle, negateFlag)
   return;
 }
 
-/* FUN_0017ee68 @ 0x17ee68 (468 bytes) */
-int FUN_0017ee68(ctx)
+/* ValueKey__foldDotOfSplatsIntoAdd @ 0x17ee68 (468 bytes) */
+int ValueKey__foldDotOfSplatsIntoAdd(ctx)
   int ctx;
 {
   bool hasExtraSource;
@@ -3603,7 +3603,7 @@ LAB_00180cb4:
               invertedLanes = ~(creatorWriteMask & laneMask);
               laneBytes__clearSetLanes(&clearedLanesOut,creatorWriteMask & laneMask);
               *(undefined4 *)((int)inst + 0x9c) = clearedLanesOut;
-              FUN_000f370c(&selectWordOut,clearedLanesOut);
+              LaneBytes__buildSelectWordOfZeroLanes(&selectWordOut,clearedLanesOut);
               copySelectWord = selectWordOut;
               operandRecord2 = IRInst__getOperandRecord(inst,1);
               *(undefined4 *)(operandRecord2 + 0x10) = copySelectWord;
@@ -3658,7 +3658,7 @@ LAB_00181100:
                   lanesCovered = writeMaskOut2 & laneMask;
                   laneBytes__clearSetLanes(&clearedLanesOut2,lanesCovered);
                   *(undefined4 *)((int)inst2 + 0x9c) = clearedLanesOut2;
-                  FUN_000f370c(&selectWordOut2,clearedLanesOut2);
+                  LaneBytes__buildSelectWordOfZeroLanes(&selectWordOut2,clearedLanesOut2);
                   copySelectWord2 = selectWordOut2;
                   loopIndex5 = IRInst__getOperandRecord(inst2,1);
                   *(undefined4 *)(loopIndex5 + 0x10) = copySelectWord2;
@@ -6584,7 +6584,7 @@ LAB_00185ea8:
   IRInst__setOperandSource(inst,operandIndex,inst2,0,*(undefined4 *)(program + 8));
 LAB_00185f24:
   commit = commitChange != 0;
-  FUN_000f32cc(&selectWordOut,composedSelect);
+  SelectWord__clearReferencedLanes(&selectWordOut,composedSelect);
   inst2[0x27] = selectWordOut;
   if ((checkFits != 0) && (loopIndex = SchedModel__instructionFitsAlone(inst,*(undefined4 *)(program + 8)), loopIndex == 0)) {
     loopIndex = 0;

@@ -5389,8 +5389,8 @@ int gld_emitQueryBeginPacket(ctx, writeCursor)
   return writeCursor;
 }
 
-/* FUN_0002bbc4 @ 0x2bbc4 (564 bytes) */
-void FUN_0002bbc4(int ctx,undefined4 *stampSource,undefined4 passThroughArg3,undefined4 passThroughArg4,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gld_emitStampFencePacket @ 0x2bbc4 (564 bytes) */
+void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThroughArg3,undefined4 passThroughArg4,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   int fenceUpdated;
   undefined4 *packet;
@@ -6789,7 +6789,7 @@ asm(".set glReadPixels_entry, _glReadPixels_entry");
 asm(".globl gld_beginQuerySlot");
 asm(".set gld_beginQuerySlot, _gld_beginQuerySlot");
 asm(".globl FUN_0002bbc4");
-asm(".set FUN_0002bbc4, _FUN_0002bbc4");
+asm(".set FUN_0002bbc4, _gld_emitStampFencePacket");
 asm(".globl gld_ensureRingSpace");
 asm(".set gld_ensureRingSpace, _gld_ensureRingSpace");
 asm(".globl gld_setStreamCursor");

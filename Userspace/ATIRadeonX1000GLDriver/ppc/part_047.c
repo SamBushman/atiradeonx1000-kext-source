@@ -490,8 +490,8 @@ int ValueKey__canonicalizeCompareCondition(ctx)
   return;
 }
 
-/* FUN_001778e0 @ 0x1778e0 (272 bytes) */
-int FUN_001778e0(ctx)
+/* ValueKey__createLaneRecordsForScaledOutput @ 0x1778e0 (272 bytes) */
+int ValueKey__createLaneRecordsForScaledOutput(ctx)
   int ctx;
 {
   int inst;
@@ -2728,8 +2728,8 @@ LAB_0017affc:
   return resultOut;
 }
 
-/* FUN_0017b020 @ 0x17b020 (268 bytes) */
-int FUN_0017b020(ctx, operandIndex)
+/* ValueKey__sourceDefinedByUniformSelect @ 0x17b020 (268 bytes) */
+int ValueKey__sourceDefinedByUniformSelect(ctx, operandIndex)
   int ctx;
   int operandIndex;
 {

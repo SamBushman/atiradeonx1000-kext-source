@@ -3046,8 +3046,8 @@ int arbEmitRecord2Src_op4f(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   return;
 }
 
-/* FUN_00086710 @ 0x86710 (152 bytes) */
-int FUN_00086710(ctx)
+/* gldEmitPacket_reg880 @ 0x86710 (152 bytes) */
+int gldEmitPacket_reg880(ctx)
   int ctx;
 {
   undefined4 *packet;

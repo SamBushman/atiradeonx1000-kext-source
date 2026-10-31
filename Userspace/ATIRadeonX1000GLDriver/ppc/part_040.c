@@ -2507,11 +2507,11 @@ int Program__unrollLoop(pass, loopStack, block, lastBlockRef, newBlockOut, block
   counterRefArg = blockCounter;
   iStack0000001c = loopStack;
   unrollEnabled = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),2);
-  if ((((unrollEnabled != 0) && (unrollEnabled = FUN_000e9cc8(block), unrollEnabled != 0)) &&
+  if ((((unrollEnabled != 0) && (unrollEnabled = Block__loopBodyHasAllLaneFlags(block), unrollEnabled != 0)) &&
       (*(int *)(block + 0x138) < 1)) && (*(int *)(block + 0x13c) == 0)) {
-    unrollCount = FUN_000e8c7c(block);
-    loopStart = FUN_000e8c14(block);
-    loopStep = FUN_000e8bac(block);
+    unrollCount = Block__loopUnrollCount(block);
+    loopStart = Block__loopStart(block);
+    loopStep = Block__loopStep(block);
     compiler = *(undefined4 *)(pass + 8);
     loopStepArg = loopStep;
     blockArg = block;
@@ -3901,7 +3901,7 @@ int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
       laneIndex = laneIndex + 1;
     } while (moreLanes);
   }
-  FUN_000f370c(&local_38,writtenLaneMask[0]);
+  LaneBytes__buildSelectWordOfZeroLanes(&local_38,writtenLaneMask[0]);
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   storeInst = allocation + 1;

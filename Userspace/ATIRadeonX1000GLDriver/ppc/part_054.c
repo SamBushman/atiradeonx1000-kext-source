@@ -460,7 +460,7 @@ LAB_001a1f84:
   if (loopRemaining == 0x77) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = 0;
     operandRecord = IRInst__getOperandRecord(inst,1);
-    FUN_000f32cc(&destSelectOut,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__clearReferencedLanes(&destSelectOut,*(undefined4 *)(operandRecord + 0x10));
     *(undefined4 *)(inst + 0x9c) = destSelectOut;
     operandRecord = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord + 0x10) = 0x10203;

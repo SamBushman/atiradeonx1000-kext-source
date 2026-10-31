@@ -722,13 +722,13 @@ int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileI
   iStack0000001c = result;
   uStack00000020 = request;
   uStack00000024 = requestFlags;
-  FUN_000e0ca8(compiler);
+  Compiler__resetOutputBufferState(compiler);
   do {
     setjmpResult = _setjmp(*(undefined4 *)(iStack00000018 + 4));
     if (setjmpResult == 0) {
       ((int (*)())Compiler__resetState)(iStack00000018);
       Compiler__applyRequestFlags(iStack00000018,uStack00000024);
-      parsedRequest = FUN_00193c00(uStack00000020,iStack00000018);
+      parsedRequest = TypedValueArray__createForType(uStack00000020,iStack00000018);
       *(int *)(iStack00000018 + 0x524) = iStack0000001c;
       if ((*(uint *)(parsedRequest + 4) & 4) == 0) {
         if ((*(uint *)(parsedRequest + 4) & 2) == 0) {
@@ -754,7 +754,7 @@ int Compiler__compileWithRetry(compiler, result, request, requestFlags, compileI
     *(undefined4 *)(iStack00000018 + 0x4d4) = 0;
     *(undefined4 *)(iStack00000018 + 0x488) = 0;
     retryState = *(int *)(iStack00000018 + 0x314);
-    FUN_000e0e28(iStack00000018);
+    Compiler__clearOutputChunks(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
   } while ((retryState != 0) && (retryHandled = ((int (*)())Compiler__tryRetryAfterFailure)(iStack00000018,retryState), retryHandled != 0));
   return retryState;
@@ -786,7 +786,7 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
   uStack00000020 = sourceA;
   uStack00000024 = sourceB;
   uStack00000028 = optionsArg;
-  FUN_000e0ca8(compiler);
+  Compiler__resetOutputBufferState(compiler);
   do {
     setjmpResult = _setjmp(*(undefined4 *)(iStack00000018 + 4));
     if (setjmpResult == 0) {
@@ -808,7 +808,7 @@ int Compiler__compile(compiler, shader, sourceA, sourceB, optionsArg, unusedArg6
     *(undefined4 *)(iStack00000018 + 0x4d4) = 0;
     *(undefined4 *)(iStack00000018 + 0x488) = 0;
     retryState = *(int *)(iStack00000018 + 0x314);
-    FUN_000e0e28(iStack00000018);
+    Compiler__clearOutputChunks(iStack00000018);
     ((int (*)())Compiler__releaseChipAndPools)(iStack00000018,0);
   } while ((retryState != 0) && (retryHandled = ((int (*)())Compiler__tryRetryAfterFailure)(iStack00000018,retryState), retryHandled != 0));
   return retryState;
@@ -832,8 +832,8 @@ int MachineCodeWriter__accumulateStats(writer, encoderState)
   return;
 }
 
-/* FUN_000e280c @ 0xe280c (44 bytes) */
-int FUN_000e280c(block, encoder, sinkArg)
+/* MachineCodeWriter__encodeBlockViaSink @ 0xe280c (44 bytes) */
+int MachineCodeWriter__encodeBlockViaSink(block, encoder, sinkArg)
   int block;
   int encoder;
   undefined4 sinkArg;
@@ -897,8 +897,8 @@ int IfFooterStatic__accept(this, traversal)
   return;
 }
 
-/* FUN_000e2a04 @ 0xe2a04 (64 bytes) */
-int FUN_000e2a04(param_1, param_2)
+/* Block__getOrAllocSlotId @ 0xe2a04 (64 bytes) */
+int Block__getOrAllocSlotId(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -1018,8 +1018,8 @@ int IRInst__foldConstantSourceSwizzle(inst, operandIndex)
   return;
 }
 
-/* FUN_000e2bf4 @ 0xe2bf4 (132 bytes) */
-int FUN_000e2bf4(block, callArg)
+/* Block__callVtable84OnInstsExceptOpcode57 @ 0xe2bf4 (132 bytes) */
+int Block__callVtable84OnInstsExceptOpcode57(block, callArg)
   int block;
   undefined4 callArg;
 {
@@ -1548,7 +1548,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
       ((int (*)())EncoderState__emitBlock)(auStack_74,(uint)block,*writer);
     }
     else {
-      ((int (*)())FUN_000e280c)(block,auStack_74,auStack_78);
+      ((int (*)())MachineCodeWriter__encodeBlockViaSink)(block,auStack_74,auStack_78);
       nextBlock = *(int **)(block[0x4f] + 8);
     }
     block = nextBlock;
@@ -1831,7 +1831,7 @@ LAB_000e4140:
           ctx[2] = ctx[2] + 1;
           savedRegisterFile = firstPending[0x26];
           savedRegisterNumber = firstPending[0x25];
-          slotId = ((int (*)())FUN_000e2a04)(ctx,(uint)(savedRegisterFile != 0));
+          slotId = ((int (*)())Block__getOrAllocSlotId)(ctx,(uint)(savedRegisterFile != 0));
           iVar14 = ((int (*)())IRInst__redirectDestThroughNewMov)(firstPending,slotId,savedRegisterFile,sourceDef,*ctx);
           Block__insertInstBefore(beforeInst[0x56],beforeInst,iVar14);
           insertAfterInst = scanInst;
@@ -1973,8 +1973,8 @@ LAB_000e413c:
   return 0;
 }
 
-/* FUN_000e43ec @ 0xe43ec (20 bytes) */
-int FUN_000e43ec(ilReader)
+/* ILReader__atFirstInst @ 0xe43ec (20 bytes) */
+int ILReader__atFirstInst(ilReader)
   int ilReader;
 {
   return *(int *)(ilReader + 0x7c) == 3;

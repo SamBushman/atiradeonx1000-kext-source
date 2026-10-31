@@ -2594,7 +2594,7 @@ int ilRewriteForTextureState(ctx, compileOutput, compileRecord, ilSource, scHand
    * expecting scBlockTokens's value; a loop just below also writes scBlockRegsA[8..15], expecting
    * those words to land in scBlockRegsB. With the locals declared separately, the compiler placed
    * them elsewhere on the stack, so scCallbackBlock+0x4c stayed at its memset'd 0 instead of the
-   * real pointer - a null deref several calls downstream, in FUN_00193c00's live differential
+   * real pointer - a null deref several calls downstream, in TypedValueArray__createForType's live differential
    * GLDriver test harness. Root-caused via a live watchpoint comparing stock vs. rebuilt (stock:
    * r3=0x40d470 at the same call; rebuilt: 0). Properly merged this time into one byte-accurate
    * 0xbc-byte buffer; each offset below is confirmed directly from its own name's hex value
@@ -4194,7 +4194,7 @@ int scCompile(scHandle, vertexShader, fragmentShader, programOutput)
     sourceHandle = *(undefined4 *)(vertexShader + 0x4c);
     *(int *)(compiler + 0x398) = scHandle;
     outputProgram = programOutput;
-    FUN_000e0ca8(compiler);
+    Compiler__resetOutputBufferState(compiler);
     do {
       setjmpResult = _setjmp(*(int **)(compiler + 4));
       if (setjmpResult == 0) {
@@ -4216,7 +4216,7 @@ int scCompile(scHandle, vertexShader, fragmentShader, programOutput)
       *(undefined4 *)(compiler + 0x4d4) = 0;
       *(undefined4 *)(compiler + 0x488) = 0;
       iStack00000018Word314 = *(int *)(compiler + 0x314);
-      FUN_000e0e28(compiler);
+      Compiler__clearOutputChunks(compiler);
       Compiler__releaseChipAndPools(compiler,0);
     } while ((iStack00000018Word314 != 0) && (retryRequested = Compiler__tryRetryAfterFailure(compiler,iStack00000018Word314), retryRequested != 0));
     return iStack00000018Word314;

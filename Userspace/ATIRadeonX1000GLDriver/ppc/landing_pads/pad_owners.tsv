@@ -78,7 +78,7 @@
 0xebf38	BreakBlock__clone
 0xec038	ContinueBlock__clone
 0xec56c	Program__getDominatorInfo
-0xecf5c	FUN_000eced0
+0xecf5c	Program__insertEntryInst
 0xed0e4	Program__dtor_ecfac
 0xed25c	Program__dtor_ed124
 0xedbf0	Program__groupLoadsIntoProjections
@@ -92,7 +92,7 @@
 0xee780	Program__emitDepthExportScale
 0xee830	Program__buildBlockArrayByKey
 0xeede8	Program__emitDepthExportScale
-0xef038	FUN_000eee4c
+0xef038	Program__expandSpecialDestinations
 0xef79c	Program__initAndTranslate
 0xef7f8	Program__initAndTranslate
 0xefaf0	Program__orderBlocksByDfs
@@ -103,7 +103,7 @@
 0xf02c0	Program__trimOutputChain
 0xf0978	Program__forwardMovIntoConsumers
 0xf09bc	Program__forwardMovIntoConsumers
-0xf157c	FUN_000f14f8
+0xf157c	Program__foldKind6IntoKind7Inst
 0xf293c	Program__propagateMovThroughUses
 0xf2960	Program__propagateMovThroughUses
 0xf2984	Program__propagateMovThroughUses
@@ -122,12 +122,12 @@
 0xfa45c	Program__lowerDestinationToken
 0xfa544	Program__lowerDestinationToken
 0xfaeb4	Program__createIfBlock
-0xfb584	FUN_000fb3d4
-0xfb690	FUN_000fb3d4
-0xfb77c	FUN_000fb3d4
-0xfb974	FUN_000fb3d4
-0xfbb88	FUN_000fb3d4
-0xfbe00	FUN_000fb3d4
+0xfb584	Program__translateILInstruction
+0xfb690	Program__translateILInstruction
+0xfb77c	Program__translateILInstruction
+0xfb974	Program__translateILInstruction
+0xfbb88	Program__translateILInstruction
+0xfbe00	Program__translateILInstruction
 0xfd760	Program__translateILStream
 0xfd7c4	Program__translateILStream
 0xfd820	Program__translateILStream
@@ -517,10 +517,10 @@
 0x17d330	ValueKey__rewriteAsMovOfVec4Constant
 0x17e138	ValueKey__rewriteAsMovOfOperandWithScale
 0x17e550	ValueKey__rewriteAsBinaryOfOperands
-0x17ea3c	FUN_0017e7e0
+0x17ea3c	ValueKey__splitMadIntoMulAdd
 0x17ece0	ValueKey__rewriteAsAdd
 0x17edb0	ValueKey__rewriteAsAdd
-0x17f03c	FUN_0017ee68
+0x17f03c	ValueKey__foldDotOfSplatsIntoAdd
 0x1811d8	ValueKey__simplifyModifiersAndAddressing
 0x181fdc	Block__flattenAndRebuildAddMulTree
 0x182010	Block__flattenAndRebuildAddMulTree
@@ -548,7 +548,7 @@
 0x19279c	Inst__rewriteSetOpcodesWithLiterals
 0x19323c	FudoPs__peepholeCombine
 0x193b88	TypedValueArray__createWrapping
-0x193c74	FUN_00193c00
+0x193c74	TypedValueArray__createForType
 0x194bac	HashTable__grow
 0x194bc8	HashTable__grow
 0x194dfc	HashTable__insert

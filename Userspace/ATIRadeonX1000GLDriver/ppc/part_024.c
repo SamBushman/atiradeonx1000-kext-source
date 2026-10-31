@@ -424,8 +424,8 @@ int Program__freezeVRegs(program)
   return;
 }
 
-/* FUN_000ec920 @ 0xec920 (240 bytes) */
-int FUN_000ec920(program)
+/* Program__propagateBlockFlagsFromSuccessors @ 0xec920 (240 bytes) */
+int Program__propagateBlockFlagsFromSuccessors(program)
   int program;
 {
   int oldFlags;
@@ -505,8 +505,8 @@ int KhanPs__vslot17_isSimpleInst(this, inst)
   return excluded ^ 1;
 }
 
-/* FUN_000ecb90 @ 0xecb90 (140 bytes) */
-int FUN_000ecb90(inst, compiler)
+/* IRInst__isFoldableByOpcodeFlags @ 0xecb90 (140 bytes) */
+int IRInst__isFoldableByOpcodeFlags(inst, compiler)
   int inst;
   undefined4 compiler;
 {
@@ -554,7 +554,7 @@ int IRInst__isForwardable(inst, selectWord, compiler)
                           (*(int **)(compiler + COMP_target),inst), iVar1 != 0)) &&
       ((*(uint *)(inst[0x56] + 0xc) & 8) != 0)) &&
      ((iVar1 = SelectWord__areCompatible(selectWord,0x10203), iVar1 != 0 ||
-      (iVar1 = ((int (*)())FUN_000ecb90)(inst,compiler), iVar1 != 0)))) {
+      (iVar1 = ((int (*)())IRInst__isFoldableByOpcodeFlags)(inst,compiler), iVar1 != 0)))) {
     return 1;
   }
   return 0;
@@ -616,8 +616,8 @@ LAB_000ece34:
   return Block__insertInstAfter(targetBlock,afterInst,newMov);
 }
 
-/* FUN_000eced0 @ 0xeced0 (140 bytes) */
-int FUN_000eced0(program)
+/* Program__insertEntryInst @ 0xeced0 (140 bytes) */
+int Program__insertEntryInst(program)
   int program;
 {
   int prevBlock;
@@ -1953,8 +1953,8 @@ LAB_000eee08:
   return;
 }
 
-/* FUN_000eee4c @ 0xeee4c (492 bytes) */
-int FUN_000eee4c(program)
+/* Program__expandSpecialDestinations @ 0xeee4c (492 bytes) */
+int Program__expandSpecialDestinations(program)
   int program;
 {
   int *subVReg;
@@ -2355,7 +2355,7 @@ int Program__initAndTranslate(program, ilReader)
   }
   ((int (*)())Program__splitExports)(program);
   Program__predicatePendingIfs(program);
-  ((int (*)())FUN_000eee4c)(program);
+  ((int (*)())Program__expandSpecialDestinations)(program);
   ((int (*)())Program__pinInputRegisters)(program);
   Liveness__allocLiveTable(program);
   blockLabel = "non_local_set";
@@ -3374,8 +3374,8 @@ code_r0x000f0d0c:
   return (**(code **)(*inst + 0x94))(inst,afterInst,*(undefined4 *)(pass + 8));
 }
 
-/* FUN_000f14f8 @ 0xf14f8 (132 bytes) */
-int FUN_000f14f8(program, inst, inst2)
+/* Program__foldKind6IntoKind7Inst @ 0xf14f8 (132 bytes) */
+int Program__foldKind6IntoKind7Inst(program, inst, inst2)
   int program;
   int *inst;
   int *inst2;
@@ -4164,7 +4164,7 @@ int pass_assign_slots(program)
   hwVtable = *hwDescription;
   isExportHardware = (**(code **)(hwVtable + 0xd8))(hwDescription);
   if (isExportHardware == 0) {
-    ((int (*)())FUN_000eced0)(program);
+    ((int (*)())Program__insertEntryInst)(program);
     instCursor = *(int **)(*(int *)(program + 0x3a8) + 0x98);
     for (loopInst = (int *)instCursor[2]; loopInst != (int *)0x0; loopInst = (int *)loopInst[2]) {
       isStore = (**(code **)(*instCursor + 0x68))(instCursor);
@@ -4180,7 +4180,7 @@ int pass_assign_slots(program)
     }
   }
   else {
-    ((int (*)())FUN_000ec920)(program);
+    ((int (*)())Program__propagateBlockFlagsFromSuccessors)(program);
     ((int (*)())Program__insertExitMarkerAndFlagBlocks)(program,r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,hwVtable);
     instCursorB = *(int **)(*(int *)(program + 0x3a8) + 0x98);
     nextInstCursor = (int *)instCursorB[2];
@@ -4216,7 +4216,7 @@ int pass_assign_slots(program)
     }
     *(int *)(*(int *)(program + 0x33c) + 300) = markerFlag;
     if (lastKind6Inst != (int *)0x0) {
-      ((int (*)())FUN_000f14f8)(program,lastKind6Inst,lastKind7Inst);
+      ((int (*)())Program__foldKind6IntoKind7Inst)(program,lastKind6Inst,lastKind7Inst);
     }
   }
   *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x800;

@@ -1774,8 +1774,8 @@ int LoopHeader__getKindName(this)
   return "LOOP_HEADER";
 }
 
-/* FUN_000e77f4 @ 0xe77f4 (16 bytes) */
-int FUN_000e77f4(scope, breakTarget)
+/* Scope__setBreakTarget @ 0xe77f4 (16 bytes) */
+int Scope__setBreakTarget(scope, breakTarget)
   int scope;
   undefined4 breakTarget;
 {
@@ -2695,8 +2695,8 @@ int Block__initVectors(block)
   return;
 }
 
-/* FUN_000e8bac @ 0xe8bac (104 bytes) */
-int FUN_000e8bac(block)
+/* Block__loopStep @ 0xe8bac (104 bytes) */
+int Block__loopStep(block)
   int block;
 {
   int *definitionSlot;
@@ -2715,8 +2715,8 @@ int FUN_000e8bac(block)
   return *(undefined4 *)(*definitionSlot + 0x50);
 }
 
-/* FUN_000e8c14 @ 0xe8c14 (104 bytes) */
-int FUN_000e8c14(block)
+/* Block__loopStart @ 0xe8c14 (104 bytes) */
+int Block__loopStart(block)
   int block;
 {
   int *definitionSlot;
@@ -2735,8 +2735,8 @@ int FUN_000e8c14(block)
   return *(undefined4 *)(*definitionSlot + 0x38);
 }
 
-/* FUN_000e8c7c @ 0xe8c7c (104 bytes) */
-int FUN_000e8c7c(block)
+/* Block__loopUnrollCount @ 0xe8c7c (104 bytes) */
+int Block__loopUnrollCount(block)
   int block;
 {
   int *definitionSlot;

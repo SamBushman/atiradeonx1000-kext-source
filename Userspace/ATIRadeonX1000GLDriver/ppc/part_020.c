@@ -3461,8 +3461,8 @@ int Compiler__setDefaultOptions(compiler)
   return;
 }
 
-/* FUN_000e0ca8 @ 0xe0ca8 (28 bytes) */
-int FUN_000e0ca8(compiler)
+/* Compiler__resetOutputBufferState @ 0xe0ca8 (28 bytes) */
+int Compiler__resetOutputBufferState(compiler)
   int compiler;
 {
   *(undefined4 *)(compiler + 0x318) = 0;
@@ -3537,8 +3537,8 @@ int Compiler__logf(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, u
   return;
 }
 
-/* FUN_000e0e28 @ 0xe0e28 (116 bytes) */
-int FUN_000e0e28(compiler)
+/* Compiler__clearOutputChunks @ 0xe0e28 (116 bytes) */
+int Compiler__clearOutputChunks(compiler)
   int compiler;
 {
   int loopCounter;
@@ -3807,8 +3807,8 @@ int noop_e138c(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unuse
   return;
 }
 
-/* FUN_000e13a8 @ 0xe13a8 (12 bytes) */
-int FUN_000e13a8(compiler)
+/* Compiler__setFlag31c @ 0xe13a8 (12 bytes) */
+int Compiler__setFlag31c(compiler)
   int compiler;
 {
   *(undefined4 *)(compiler + 0x31c) = 1;
@@ -3846,8 +3846,8 @@ int Compiler__resetPerStageState(compiler)
   return;
 }
 
-/* FUN_000e144c @ 0xe144c (24 bytes) */
-int FUN_000e144c(compiler, value588, unusedArg3, value58c, value590, value598, value594)
+/* Compiler__setSamplerCaps @ 0xe144c (24 bytes) */
+int Compiler__setSamplerCaps(compiler, value588, unusedArg3, value58c, value590, value598, value594)
   int compiler;
   undefined4 value588;
   undefined4 unusedArg3;

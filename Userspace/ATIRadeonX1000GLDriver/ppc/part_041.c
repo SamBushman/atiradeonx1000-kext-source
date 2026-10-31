@@ -1516,7 +1516,7 @@ LAB_00133bd0:
         srcRecordA = IRInst__getOperandRecord(pendingInst,1);
         WriteMask__fromUsedComponents(&swizzleWord,*(undefined4 *)(srcRecordA + 0x10));
         newCopyInst[0x27] = swizzleWord;
-        FUN_000f370c(&newSwizzleWord,swizzleWord);
+        LaneBytes__buildSelectWordOfZeroLanes(&newSwizzleWord,swizzleWord);
         newSwizzle = newSwizzleWord;
         srcRecordB = IRInst__getOperandRecord(newCopyInst,1);
         *(undefined4 *)(srcRecordB + 0x10) = newSwizzle;

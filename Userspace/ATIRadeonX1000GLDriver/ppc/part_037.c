@@ -410,7 +410,7 @@ LAB_0011f0c4:
                             (backend,*(int *)(ctx + 0xb0),operandNumber,operandCount,absModifier,negModifier,
                              *(int *)(ctx + 0x238));
           if ((backendAllows == 0) ||
-             (backendAllows = FUN_000f45f8(*(undefined4 *)(ctx + 0xb0),operandNumber,*sourceSlotPtr,program), backendAllows == 0)
+             (backendAllows = IRInst__sourceReadMaskAvoidsDestKind1(*(undefined4 *)(ctx + 0xb0),operandNumber,*sourceSlotPtr,program), backendAllows == 0)
              ) goto LAB_0011f2a8;
           *(int *)(program + 0xa4) = *(int *)(program + 0xa4) + 1;
           keyInst = *(int *)(ctx + 0xb0);
