@@ -3986,8 +3986,8 @@ loopSetInputRecOffset:
       if (maxTempCount < (uint)shader[0x19]) {
         maxTempCount = shader[0x19];
       }
-      emitResult = (**(code **)(&DAT_001b9d04 + *(int *)(instOffsetB + shader[6]) * 4))
-                         (ctx,emitState,shader,instOffsetB + shader[6],activeProgramIndexOrSymbolRecord,&PTR_FUN_001dbb0c);
+      emitResult = (**(code **)(&extvsOpEmitFuncTableBase_001b9d04 + *(int *)(instOffsetB + shader[6]) * 4))
+                         (ctx,emitState,shader,instOffsetB + shader[6],activeProgramIndexOrSymbolRecord,&extvsOpEmitFuncTable_001dbb0c);
       if (emitResult < 0) {
         *(undefined1 *)(shader + 4) = 0;
         shader[0xc] = 0;

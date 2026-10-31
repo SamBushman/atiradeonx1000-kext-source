@@ -79,7 +79,7 @@ int glShaderOp1EXT_impl(ctx, op, resultId, arg1)
 {
   if (((unsigned char *)0x00001170)[ctx] != '\0') {
     ((int (*)())extvsAppendInstruction)(ctx,*(undefined4 *)(((unsigned char *)0x00001168) + ctx),op,resultId,&onesWords4_001db9a8,
-                 arg1,&DAT_001db998,0,&DAT_001db998,0,&DAT_001db998);
+                 arg1,&extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998);
   }
   return;
 }
@@ -94,7 +94,7 @@ int glShaderOp2EXT_impl(ctx, op, resultId, arg1, arg2)
 {
   if (((unsigned char *)0x00001170)[ctx] != '\0') {
     ((int (*)())extvsAppendInstruction)(ctx,*(undefined4 *)(((unsigned char *)0x00001168) + ctx),op,resultId,&onesWords4_001db9a8,
-                 arg1,&DAT_001db998,arg2,&DAT_001db998,0,&DAT_001db998);
+                 arg1,&extSwizzleTokensXYZW_001db998,arg2,&extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998);
   }
   return;
 }
@@ -110,7 +110,7 @@ int glShaderOp3EXT_impl(ctx, op, resultId, arg1, arg2, arg3)
 {
   if (((unsigned char *)0x00001170)[ctx] != '\0') {
     ((int (*)())extvsAppendInstruction)(ctx,*(undefined4 *)(((unsigned char *)0x00001168) + ctx),op,resultId,&onesWords4_001db9a8,
-                 arg1,&DAT_001db998,arg2,&DAT_001db998,arg3,&DAT_001db998);
+                 arg1,&extSwizzleTokensXYZW_001db998,arg2,&extSwizzleTokensXYZW_001db998,arg3,&extSwizzleTokensXYZW_001db998);
   }
   return;
 }
@@ -141,7 +141,7 @@ int extvsEmitSwizzleInstruction(ctx, scratchInt3, src0Id, swizzleX, swizzleY, sw
     outSelectZ = swizzleZ;
     outSelectW = swizzleW;
     appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879a,scratchInt3,&onesWords4_001db9a8,src0Id,&outSelectX,0,
-                         &DAT_001db998,0,&DAT_001db998);
+                         &extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998);
     if ((appendResult != 0) && (scratchInt3 - 0x879dU < 0x10)) {
       *(undefined1 *)((scratchInt3 - 0x879dU) + extvsState + 0x44) = 1;
     }
@@ -171,7 +171,7 @@ int glWriteMaskEXT_impl(ctx, resultId, sourceId, enableX, enableY, enableZ, enab
     writeMaskZ = enableZ;
     writeMaskW = enableW;
     ((int (*)())extvsAppendInstruction)(ctx,*(undefined4 *)(((unsigned char *)0x00001168) + ctx),0x879b,resultId,&writeMaskX,sourceId,
-                 &DAT_001db998,0,&DAT_001db998,0,&DAT_001db998);
+                 &extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998);
   }
   return;
 }
@@ -190,8 +190,8 @@ int glInsertComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   
   if ((((unsigned char *)0x00001170)[ctx] != '\0') && (componentIndex < 4)) {
     extvsState = *(int *)(((unsigned char *)0x00001168) + ctx);
-    appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879c,resultId,&onesWords4_001db9a8,sourceId,&DAT_001db998,0,
-                         &DAT_001db998,0,&DAT_001db998);
+    appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879c,resultId,&onesWords4_001db9a8,sourceId,&extSwizzleTokensXYZW_001db998,0,
+                         &extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998);
     if (appendResult != 0) {
       instRecord = *(int *)(extvsState + 0x14) * 0x74 + *(int *)(extvsState + 0x18);
       extvsOperandDataTypeResult = ((int (*)())extvsOperandDataType)(extvsState + 0x1c,instRecord + -0x70);
@@ -235,8 +235,8 @@ int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   
   if ((((unsigned char *)0x00001170)[ctx] != '\0') && (componentIndex < 4)) {
     extvsState = *(int *)(((unsigned char *)0x00001168) + ctx);
-    appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879d,resultId,&onesWords4_001db9a8,sourceId,&DAT_001db998,0,
-                         &DAT_001db998,0,&DAT_001db998);
+    appendResult = ((int (*)())extvsAppendInstruction)(ctx,extvsState,0x879d,resultId,&onesWords4_001db9a8,sourceId,&extSwizzleTokensXYZW_001db998,0,
+                         &extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998);
     if (appendResult != 0) {
       *(uint *)(*(int *)(extvsState + 0x14) * 0x74 + *(int *)(extvsState + 0x18) + -0x34) = componentIndex;
     }

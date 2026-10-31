@@ -2315,12 +2315,12 @@ loopCheckHwAttrId:
     else {
       typeRowOffset = ((arrayTypeWord & 0xffff7fff) - 0x1400) * 4;
       typeSizeOffset = (typeRowOffset + *(short *)(hwAttrId * 0x18 + arrayDesc + 10) + -1) * 4;
-      scratchUint33 = *(uint *)(&DAT_001d9c4c + typeSizeOffset);
-      streamDescHalf = (ushort)(*(int *)(&DAT_001d9cfc + typeSizeOffset) << 8) | dataTypeBits;
+      scratchUint33 = *(uint *)(&vertexTypeDwordCountTableCopy_001d9c4c + typeSizeOffset);
+      streamDescHalf = (ushort)(*(int *)(&vertexTypeComponentCountMinusOneTable_001d9cfc + typeSizeOffset) << 8) | dataTypeBits;
       hwAttrId = (uint)(arrayTypeWord >> 0xf);
-      scratchUint20 = *(uint *)(&DAT_001d9b9c + typeSizeOffset) & 0xff;
-      pairIndexOrFormatIndex = *(uint *)(&DAT_001d9dac + typeRowOffset) & 0xffff;
-      scratchUint18 = *(uint *)(&DAT_001d9b70 + typeRowOffset) & 0xff;
+      scratchUint20 = *(uint *)(&vertexTypeFlagsTableCopy_001d9b9c + typeSizeOffset) & 0xff;
+      pairIndexOrFormatIndex = *(uint *)(&vertexTypeStreamFormatTable_001d9dac + typeRowOffset) & 0xffff;
+      scratchUint18 = *(uint *)(&vertexTypeSignedTableCopy_001d9b70 + typeRowOffset) & 0xff;
       swizzleSelectX = *(uint *)(&vertexTypeSwizzleSelectXTable_001d9ac0 + typeSizeOffset) & 0xff;
       extWordBits = scratchUint33 & 0xff;
       swizzleSelectY = *(uint *)(&vertexTypeSwizzleSelectYTable_001d9a10 + typeSizeOffset) & 0xff;

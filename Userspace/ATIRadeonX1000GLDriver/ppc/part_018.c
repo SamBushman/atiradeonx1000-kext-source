@@ -9380,13 +9380,13 @@ reportUnknownAlphaOpSecond:
                        (uint)*(byte *)((int)instructionRecord2 + 0x12),(uint)*(byte *)(instructionRecord2 + 4),
                        (uint)*(byte *)((int)instructionRecord2 + 0xe) * 10 + 0x1dc1e9,
                        (uint)*(byte *)((int)instructionRecord2 + 0x11) * 5 + 0x1dc1da,argR9,argR10);
-          if (PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0 == (undefined *)0x0) {
+          if (psnControlFlowOpNameTable_keyText0_001dc2d0 == (undefined *)0x0) {
             cfOpTableIndex = 0;
           }
           else {
-            cfOpNameCursor = &PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8;
+            cfOpNameCursor = &psnControlFlowOpNameTable_keyText1_001dc2d8;
             cfOpTableIndex = 0;
-            cfOpNameEntry = PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0;
+            cfOpNameEntry = psnControlFlowOpNameTable_keyText0_001dc2d0;
             do {
               cfNameLength = _strlen(cfOpNameEntry);
               cfNameCompare = _strncmp(cfOpNameEntry,argR6,cfNameLength);
@@ -9396,7 +9396,7 @@ reportUnknownAlphaOpSecond:
               cfOpNameCursor = cfOpNameCursor + 2;
             } while (cfOpNameEntry != (undefined *)0x0);
           }
-          neutralLineArg0 = (uint *)(PTR_s_IF_b_001dc2cc)[cfOpTableIndex];
+          neutralLineArg0 = (uint *)(psnControlFlowOpNameTable_001dc2cc)[cfOpTableIndex];
           semWaitTextPtr = &semWaitText;
           argR8 = &aluWaitText;
           ((int (*)())psnReportError)(0,"%s(%s)%s%s",neutralLineArg0,argR6,semWaitTextPtr,argR8,argR9,argR10);

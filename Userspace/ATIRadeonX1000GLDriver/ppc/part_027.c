@@ -71,7 +71,7 @@ int setSelectedConstantWord(record, flag)
   int flag;
 {
   if (flag == 0) {
-    *(undefined4 *)(record + 0x10) = DAT_001af9c0;
+    *(undefined4 *)(record + 0x10) = laneWord00000000_001af9c0;
     return;
   }
   *(undefined4 *)(record + 0x10) = swizzleXYZW_001af9bc;
@@ -194,10 +194,10 @@ int IRInst__useCount(obj, program)
 int RegKind__vectorWidthKind(regKind)
   int regKind;
 {
-  if ((*(uint *)(PTR_PTR_001e8c60 + regKind * 0x10 + 4) & 0x400) != 0) {
+  if ((*(uint *)(ptrTo_regKindInfoTable_001e8c60 + regKind * 0x10 + 4) & 0x400) != 0) {
     return 0x16;
   }
-  if ((*(uint *)(PTR_PTR_001e8c60 + regKind * 0x10 + 4) & 0x800) == 0) {
+  if ((*(uint *)(ptrTo_regKindInfoTable_001e8c60 + regKind * 0x10 + 4) & 0x800) == 0) {
     return regKind;
   }
   return 0x15;
@@ -207,10 +207,10 @@ int RegKind__vectorWidthKind(regKind)
 int RegKind__laneCount(regKind)
   int regKind;
 {
-  if ((*(uint *)(PTR_PTR_001e8c60 + regKind * 0x10 + 4) & 0x400) != 0) {
+  if ((*(uint *)(ptrTo_regKindInfoTable_001e8c60 + regKind * 0x10 + 4) & 0x400) != 0) {
     return '\x04';
   }
-  if ((*(uint *)(PTR_PTR_001e8c60 + regKind * 0x10 + 4) & 0x800) != 0) {
+  if ((*(uint *)(ptrTo_regKindInfoTable_001e8c60 + regKind * 0x10 + 4) & 0x800) != 0) {
     return '\x03';
   }
   return (regKind == 7) + '\x01';
@@ -355,7 +355,7 @@ int IRVertexFetch__initSemantics(inst)
   *(undefined4 *)(inst + 0xac) = 0;
   *(undefined4 *)(inst + 0x98) = 0;
   *(undefined4 *)(inst + 0xb0) = 0x1f;
-  *(undefined4 *)(inst + 0x9c) = DAT_001af9c0;
+  *(undefined4 *)(inst + 0x9c) = laneWord00000000_001af9c0;
   return;
 }
 
@@ -393,7 +393,7 @@ int instClassTableIsIdentity()
   
   loopIndex = 0;
   remaining = 0x15;
-  entry = &DAT_001ea500;
+  entry = &irInstFactoryTable_classIndex_001ea500;
   do {
     storedIndex = *entry;
     entry = entry + 2;
@@ -855,7 +855,7 @@ int IRInst__resetFields(inst, compiler)
   *(undefined4 *)(inst + 0x10) = 0;
   ((int (*)())IRInst__initOperandRecord)(inst,0);
   defaultRecordWord = swizzleXYZW_001af9bc;
-  *(undefined4 *)(inst + 0x9c) = DAT_001af9c0;
+  *(undefined4 *)(inst + 0x9c) = laneWord00000000_001af9c0;
   *(undefined4 *)(inst + 0x154) = defaultRecordWord;
   *(undefined4 *)(inst + 0xc) = 0;
   loopIndex = 1;

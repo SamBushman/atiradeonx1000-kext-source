@@ -2327,7 +2327,7 @@ int gldInitStateDefaults(glContext)
   *(undefined4 *)(glContext + 0x2390) = *(undefined4 *)(&perUnitStateDefaultAt2390_001db2e8 + unitByteOffset);
   *(undefined4 *)(glContext + 0x23a0) = *(undefined4 *)(&perUnitStateDefaultAt23A0_001db2f0 + unitByteOffset);
   *(undefined **)(glContext + 0x2394) = (ptrTo_fragmentTranslateSimpleOp_001db2ec)[glContextWord23d0 * 0x2d];
-  defaultWord = *(undefined4 *)(&DAT_001db2f4 + unitByteOffset);
+  defaultWord = *(undefined4 *)(&perUnitStateDefaultAt23A4_001db2f4 + unitByteOffset);
   *(undefined4 *)(glContext + 0x23c4) = 0;
   *(undefined4 *)(glContext + 0x23c8) = 0;
   *(undefined4 *)(glContext + 0x23cc) = 0;
@@ -4780,7 +4780,7 @@ int extvsShaderOp1Explicit(glContext, op, dstId, dstMask, src0Id, src0Swizzle)
 {
   if (((unsigned char *)0x00001170)[glContext] != '\0') {
     extvsAppendInstruction(glContext,*(undefined4 *)(((unsigned char *)0x00001168) + glContext),op,dstId,dstMask,src0Id,
-                 src0Swizzle,0,&DAT_001db998,0,&DAT_001db998);
+                 src0Swizzle,0,&extSwizzleTokensXYZW_001db998,0,&extSwizzleTokensXYZW_001db998);
   }
   return;
 }
@@ -4798,7 +4798,7 @@ int extvsShaderOp2Explicit(glContext, op, dstId, dstMask, src0Id, src0Swizzle, s
 {
   if (((unsigned char *)0x00001170)[glContext] != '\0') {
     extvsAppendInstruction(glContext,*(undefined4 *)(((unsigned char *)0x00001168) + glContext),op,dstId,dstMask,src0Id,
-                 src0Swizzle,src1Id,src1Swizzle,0,&DAT_001db998);
+                 src0Swizzle,src1Id,src1Swizzle,0,&extSwizzleTokensXYZW_001db998);
   }
   return;
 }
@@ -4849,8 +4849,8 @@ int glSwizzleEXT_impl(glContext, res, inId, inSwizzleArg, outX, outY, outZ, outW
     outSelectY = outY;
     outSelectZ = outZ;
     outSelectW = outW;
-    appendResult = extvsAppendInstruction(glContext,extvsState,0x879a,res,inId,inSwizzleArg,&outSelectX,0,&DAT_001db998,0,
-                         &DAT_001db998);
+    appendResult = extvsAppendInstruction(glContext,extvsState,0x879a,res,inId,inSwizzleArg,&outSelectX,0,&extSwizzleTokensXYZW_001db998,0,
+                         &extSwizzleTokensXYZW_001db998);
     if ((appendResult != 0) && (res - 0x879dU < 0x10)) {
       *(undefined1 *)((res - 0x879dU) + extvsState + 0x44) = 1;
     }

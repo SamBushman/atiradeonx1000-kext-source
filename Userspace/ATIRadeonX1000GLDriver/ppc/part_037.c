@@ -267,7 +267,7 @@ int Program__insertPhiNodes(program)
               instAlloc[0x22] = predecessorCount;
               IRInst__setOperandRef(phiNode,0,registerRecord);
               if (*(int *)(registerRecord + 4) == 0x2c) {
-                instAlloc[0x28] = UNK_001afee0;
+                instAlloc[0x28] = laneWord00010101_001afee0;
               }
               definedBitWord = *(uint *)((int)definedInBlocks + frontierWordOffset + 8);
               if ((definedBitWord >> frontierBitIndex & 1) == 0) {
@@ -796,7 +796,7 @@ int Block__appendCopyForDest(vector, destRegister, writeMaskRef, markPinned, sou
     *(uint *)(block + 0xc) = *(uint *)(block + 0xc) | 0x200;
   }
   Block__appendInst(block,newInst);
-  defaultWriteMask = DAT_001afee4;
+  defaultWriteMask = laneWord00000000_001afee4;
   newInst[5] = newInst[5] | 0x40000000;
   if (*writeMaskRef != defaultWriteMask) {
     newInst[0x27] = *writeMaskRef;
@@ -1456,7 +1456,7 @@ callBlockVfn38:
       successorQuery34 = (**(code **)(*successor + 0x34))(successor);
       if (successorQuery34 == 0) goto callBlockVfn38;
     }
-    ((int (*)())Block__appendCopyForDest)(vector5,newTempId,&DAT_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
+    ((int (*)())Block__appendCopyForDest)(vector5,newTempId,&laneWord00000000_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
                  ,cycleDstId);
     readyCountB = vector4[1];
     if (readyCountB < *vector4) {
@@ -2877,7 +2877,7 @@ int VRegPool__constructByKind(arg0, kindIndex, keyExtra, keyLast)
   
                     
                     
-  callResult = (**(code **)(PTR_PTR_001e8c60 + kindIndex * 0x10 + 0xc))(arg0,kindIndex,keyExtra,keyLast);
+  callResult = (**(code **)(ptrTo_regKindInfoTable_001e8c60 + kindIndex * 0x10 + 0xc))(arg0,kindIndex,keyExtra,keyLast);
   return callResult;
 }
 
@@ -3077,7 +3077,7 @@ int VertexRegister__clone(this, instSink, compiler)
   
   loadVertexInst = IRLoadVertex__new_109810(0xa4,compiler);
   IRInst__setOperandRef(loadVertexInst,0,this);
-  *(undefined4 *)(loadVertexInst + 0x9c) = DAT_001afee8;
+  *(undefined4 *)(loadVertexInst + 0x9c) = laneWord00000000_001afee8;
   *(undefined4 *)(loadVertexInst + 300) = *(undefined4 *)(this + 8);
   arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
@@ -3670,7 +3670,7 @@ int TempValue__clone(this, block, compiler)
     newInst = (**(code **)(**(int **)(compiler + COMP_target) + 0x50))
                       (*(int **)(compiler + COMP_target),*(undefined4 *)(this + 8));
     IRInst__setOperandRef(newInst,0,this);
-    *(undefined4 *)(newInst + 0x9c) = DAT_001afee8;
+    *(undefined4 *)(newInst + 0x9c) = laneWord00000000_001afee8;
     ((int (*)())VReg__appendUser)(this,newInst);
     arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
@@ -3710,7 +3710,7 @@ int ExportSlot__clone(this, instSink, compiler)
   *allocation = arena;
   IRLoad__ctor_109a80(loadInst,0xfa,compiler);
   IRInst__setOperandRef(loadInst,0,this);
-  defaultWord28 = DAT_001afee8;
+  defaultWord28 = laneWord00000000_001afee8;
   allocation[6] = allocation[6] & 0xffff7fff;
   allocation[0x28] = defaultWord28;
   arena = *(undefined4 *)(compiler + COMP_arenaB);

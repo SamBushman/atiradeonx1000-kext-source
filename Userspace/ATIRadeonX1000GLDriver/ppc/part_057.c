@@ -82,7 +82,7 @@ int HwLimits__vslot7_initInterpolatorTypeDescriptor(this)
 int HwLimits__vslot40_initTypeDescriptorB(this)
   undefined4 *this;
 {
-  *this = DAT_001afa08;
+  *this = laneWord00000000_001afa08;
   return;
 }
 

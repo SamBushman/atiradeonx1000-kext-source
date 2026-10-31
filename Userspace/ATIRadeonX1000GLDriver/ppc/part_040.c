@@ -3847,16 +3847,16 @@ int Program__insertMemLoadFbAfter(destRegister, operandSwizzle, newSource, offse
   loadInst = allocation + 1;
   *allocation = arena;
   IRMemLoad__ctor_107980(loadInst,0xfb,compiler);
-  writeMaskConstant = UNK_001affe4;
+  writeMaskConstant = laneWord00000000_001affe4;
   allocation[0x27] = 0;
   allocation[0x28] = writeMaskConstant;
   allocation[0x26] = destRegister;
   IRInst__setOperandSource(loadInst,1,newSource,0,compiler);
-  baseSwizzleConstant = UNK_001affe0;
+  baseSwizzleConstant = laneWord00010203_001affe0;
   operandRecord = IRInst__getOperandRecord(loadInst,1);
   *(undefined4 *)(operandRecord + 0x10) = baseSwizzleConstant;
   IRInst__setOperandSource(loadInst,2,offsetSource,0,compiler);
-  offsetSwizzleConstant = UNK_001affdc;
+  offsetSwizzleConstant = laneWord00040404_001affdc;
   operandRecord = IRInst__getOperandRecord(loadInst,2);
   *(undefined4 *)(operandRecord + 0x10) = offsetSwizzleConstant;
   Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,loadInst);
@@ -3916,7 +3916,7 @@ int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
   operandRecord = IRInst__getOperandRecord(storeInst,1);
   *(undefined4 *)(operandRecord + 0x10) = local_38;
   IRInst__setOperandSource(storeInst,2,addressSource,0,compiler);
-  addressSwizzleConstant = UNK_001affdc;
+  addressSwizzleConstant = laneWord00040404_001affdc;
   operandRecord = IRInst__getOperandRecord(storeInst,2);
   *(undefined4 *)(operandRecord + 0x10) = addressSwizzleConstant;
   IRInst__setOperandSource(storeInst,3,newSource,0,compiler);

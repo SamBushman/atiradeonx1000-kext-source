@@ -303,8 +303,8 @@ int IRInst__operandKindClass(inst, operandIndex)
     regKind = *(int *)(sourceDef + 0x98);
   }
   result = 2;
-  if (PTR_PTR_001e8c60[regKind * 0x10 + 9] != '\x01') {
-    result = PTR_PTR_001e8c60[regKind * 0x10 + 9] == '\x02';
+  if (ptrTo_regKindInfoTable_001e8c60[regKind * 0x10 + 9] != '\x01') {
+    result = ptrTo_regKindInfoTable_001e8c60[regKind * 0x10 + 9] == '\x02';
   }
   return result;
 }

@@ -4086,7 +4086,7 @@ int gld_initContextDispatch(ctx)
   *(undefined **)(((unsigned char *)0x00001570) + ctx) = ptrTo_noop4c540_001e8ac8;
   *(undefined **)(((unsigned char *)0x00001574) + ctx) = dispatchEntry;
   dispatchEntry = ptrTo_gldSetCurrentProgramObject_001e89f4;
-  *(undefined **)(((unsigned char *)0x00001578) + ctx) = PTR_DAT_001e8ae4;
+  *(undefined **)(((unsigned char *)0x00001578) + ctx) = ptrTo_ctxFuncTableAt1578_001e8ae4;
   *(undefined **)(((unsigned char *)0x00002b8c) + ctx) = dispatchEntry;
   return;
 }

@@ -382,10 +382,10 @@ int FudoPs__createSchedModels(this, compiler)
   PackState__reset(modelAllocation + 10);
   R520SchedModel__vslot2_reset(modelAllocation);
   modelAllocation[0x1a] = 0;
-  *modelAllocation = PTR_DAT_001e9148 + 8;
+  *modelAllocation = ptrTo_R520SchedModel__vtable_001e9148 + 8;
   *(undefined4 **)(this + 0x60) = modelAllocation;
   modelAllocation = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
-  schedModelVtableBaseB = PTR_DAT_001e9100;
+  schedModelVtableBaseB = ptrTo_ThreadModel__vtable_001e9100;
   modelAllocation[1] = 1;
   modelAllocation[2] = 0;
   *modelAllocation = schedModelVtableBaseB + 8;
@@ -1037,7 +1037,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                   }
                   IRInst__setOperandSource(combineInstA,1,loopIndex3,0,compilerRef);
                   IRInst__setOperandSource(combineInstA,2,loopIndex3,0,compilerRef);
-                  combineInstA[0x27] = *(int *)(PTR_DAT_001e8b64 + lane1Select * 4);
+                  combineInstA[0x27] = *(int *)(ptrTo_laneSelectWordTable_001e8b64 + lane1Select * 4);
                   IRInst__setExtraOperandSource(combineInstA,loopIndex3,0,compilerRef);
                   loopIndex3 = IRInst__getOperandRecord(combineInstA,1);
                   *(undefined4 *)(loopIndex3 + 0x10) = 0x4040404;
@@ -1060,8 +1060,8 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                     combineInstA[0x58] = program[PROG_useEpoch / 4] + 1;
                   }
                   Block__insertInstBefore(curInst[0x56],curInst,combineInstA);
-                  laneMaskBytes[0] = *(int *)(PTR_DAT_001e8b64 + laneSelectB * 4);
-                  loopPtr4 = PTR_DAT_001e8b64 + lane1Select * 4;
+                  laneMaskBytes[0] = *(int *)(ptrTo_laneSelectWordTable_001e8b64 + laneSelectB * 4);
+                  loopPtr4 = ptrTo_laneSelectWordTable_001e8b64 + lane1Select * 4;
                   loopRemaining = 4;
                   loopIndex3 = 0;
                   do {

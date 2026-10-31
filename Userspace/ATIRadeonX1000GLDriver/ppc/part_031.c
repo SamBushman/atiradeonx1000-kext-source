@@ -1230,9 +1230,9 @@ int HwLimits__installDefaults(hwLimits)
   limitsBlock = *(int *)(hwLimits + 0xc);
   *(undefined4 *)(limitsBlock + 0xc78) = 0;
   *(undefined4 *)(limitsBlock + 0x2a0) = 0;
-  defaultDataB = PTR_DAT_001e8c84;
+  defaultDataB = ptrTo_hwLimitsDefaultDataB_001e8c84;
   defaultFunction = ptrTo_IRUnary__new_107df4_001e8c7c;
-  defaultDataA = PTR_DAT_001e8c78;
+  defaultDataA = ptrTo_hwLimitsDefaultDataA_001e8c78;
   *(undefined4 *)(limitsBlock + 0xc60) = 0x4c;
   *(undefined **)(limitsBlock + 0xd08) = defaultDataA;
   *(undefined **)(limitsBlock + 0xc9c) = defaultDataB;
@@ -2005,7 +2005,7 @@ int IRInst__destMaskHasGap(inst)
   
   operandRecord = IRInst__getOperandRecord(inst,0);
   operandWordBytes[0] = *(int *)(operandRecord + 0x10);
-  if (*(int *)(operandRecord + 0x10) != DAT_001afa18) {
+  if (*(int *)(operandRecord + 0x10) != laneWord00000000_001afa18) {
     sawOne = false;
     remaining = 4;
     byteIndex = 0;

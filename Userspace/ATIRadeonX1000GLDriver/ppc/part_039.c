@@ -34,7 +34,7 @@ int KhanPs__createSchedModels(this, compiler)
   schedModel[0x1a] = 0;
   *(undefined4 **)(this + 0x60) = schedModel;
   packModel = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
-  vtable = PTR_DAT_001e9100;
+  vtable = ptrTo_ThreadModel__vtable_001e9100;
   packModel[1] = 1;
   packModel[2] = 0;
   *packModel = vtable + 8;
@@ -61,7 +61,7 @@ int KhanPs__vslot62_lookupTableEntry(this, entryIndex)
   undefined4 this;
   int entryIndex;
 {
-  return *(undefined4 *)(PTR_PTR_001e910c + entryIndex * 4);
+  return *(undefined4 *)(ptrTo_KhanPsEntryTable_001e910c + entryIndex * 4);
 }
 
 /* KhanPs__vslot90_isProgramKind1 @ 0x12801c (20 bytes) */
@@ -240,7 +240,7 @@ int KhanPs__vslot58_matchImmediateConstantCode(this, constants, outSelectCode, l
        ((((*(char *)((unsigned char *)ghidra_home + 14)) == '\x04' || (uniformValue == GH_U2F((unsigned int)(tableCursor[-2])))) &&
         (((*(char *)((unsigned char *)ghidra_home + 15)) == '\x04' || (GH_U2F((unsigned int)(tableCursor[-1])) == uniformValue)))))) break;
     tableCursor = tableCursor + 6;
-    if (tableCursor == (undefined4 *)&UNK_001aff54) {
+    if (tableCursor == (undefined4 *)&constVec4SelectTableBEnd_001aff54) {
       return 0;
     }
   }
@@ -485,7 +485,7 @@ int KhanPs__vslot9_createCompareInst(this, compareKind, srcRegA, srcSwizzleA, sr
   int src1SelectWord;
   
   program = *(undefined4 *)(compiler + COMP_currentProgram);
-  compareCondition = *(int *)(PTR_DAT_001e8b84 + compareKind * 4);
+  compareCondition = *(int *)(ptrTo_compareKindTable_001e8b84 + compareKind * 4);
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = sourceTokenWord;
   callResult = IRInst__create(0x8b,compiler);
   swizzleHandle = Program__registerFileOfIlType(program,srcSwizzleA);
@@ -709,7 +709,7 @@ int KhanPs__ctor_128fd0(this, compiler, createSchedModels)
   
   HwLimits__dtor_10dad8(this);
   this[7] = 0;
-  vtable = PTR_DAT_001e9104;
+  vtable = ptrTo_KhanPsHwLimitsTable_001e9104;
   this[0xe] = 9;
   this[0x10] = 0x60;
   this[1] = vtable;
@@ -750,7 +750,7 @@ int KhanPs__ctor_129130(this, compiler, createSchedModels)
   
   HwLimits__dtor_10dad8(this);
   this[7] = 0;
-  vtable = PTR_DAT_001e9104;
+  vtable = ptrTo_KhanPsHwLimitsTable_001e9104;
   this[0xe] = 9;
   this[0x10] = 0x60;
   this[1] = vtable;
@@ -803,7 +803,7 @@ int FudoVs__createSchedModels(this, compiler)
   vertexSchedModel[0xe] = 0;
   *(undefined4 **)(this + 0x60) = vertexSchedModel;
   secondarySchedModel = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
-  vtable = PTR_DAT_001e9100;
+  vtable = ptrTo_ThreadModel__vtable_001e9100;
   secondarySchedModel[1] = 1;
   secondarySchedModel[2] = 0;
   *secondarySchedModel = vtable + 8;
@@ -1723,7 +1723,7 @@ int KhanVs__createSchedModels(this, compiler)
   schedModel[0xe] = 0;
   *(undefined4 **)(this + 0x60) = schedModel;
   packModel = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
-  vtable = PTR_DAT_001e9100;
+  vtable = ptrTo_ThreadModel__vtable_001e9100;
   packModel[1] = 1;
   packModel[2] = 0;
   *packModel = vtable + 8;
@@ -1740,7 +1740,7 @@ int KhanVs__ctor_12a578(this, compiler, createSchedModels)
   undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
-  vtable = PTR_DAT_001e9114;
+  vtable = ptrTo_KhanVsHwLimitsTable_001e9114;
   this[4] = 5;
   this[1] = vtable;
   this[6] = 0x48;
@@ -1783,7 +1783,7 @@ int KhanVs__ctor_12a6c0(this, compiler, createSchedModels)
   undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
-  vtable = PTR_DAT_001e9114;
+  vtable = ptrTo_KhanVsHwLimitsTable_001e9114;
   this[4] = 5;
   this[1] = vtable;
   this[6] = 0x48;
@@ -1857,16 +1857,16 @@ int FudoVs__ctor_12a8bc(this, allocContext, createSchedModels)
 int KhanVs__vslot96_installHardwareTables(this)
   int this;
 {
-  PTR_DAT_001e27bc = PTR_DAT_001e9120;
+  vsHardwareTable_field0E28_001e27bc = ptrTo_vsHardwareTableField0E28Init_001e9120;
   *(undefined **)(this + 0xc) = &vsHardwareTable_001e1994;
-  PTR_DAT_001e260c = PTR_DAT_001e911c;
-  PTR_DAT_001e1c34 = PTR_DAT_001e9128;
-  DAT_001e1c2c = 5;
-  DAT_001e1c30 = 0;
-  PTR_DAT_001e269c = PTR_DAT_001e9124;
-  PTR_DAT_001e2630 = PTR_DAT_001e9118;
-  DAT_001e2604 = 5;
-  DAT_001e2608 = 0;
+  vsHardwareTable_field0C78_001e260c = ptrTo_vsHardwareTableField0C78Init_001e911c;
+  vsHardwareTable_field02A0_001e1c34 = ptrTo_vsHardwareTableField02A0Init_001e9128;
+  vsHardwareTable_field0298_001e1c2c = 5;
+  vsHardwareTable_field029C_001e1c30 = 0;
+  vsHardwareTable_field0D08_001e269c = ptrTo_vsHardwareTableField0D08Init_001e9124;
+  vsHardwareTable_field0C9C_001e2630 = ptrTo_vsHardwareTableField0C9CInit_001e9118;
+  vsHardwareTable_field0C70_001e2604 = 5;
+  vsHardwareTable_field0C74_001e2608 = 0;
   return;
 }
 
@@ -1875,17 +1875,17 @@ int FudoVs__vslot96_installHardwareTables(this)
   int this;
 {
   *(undefined **)(this + 0xc) = &vsHardwareTable_001e1994;
-  DAT_001e25f4 = 0x4c;
-  PTR_DAT_001e27bc = PTR_DAT_001e8c84;
-  DAT_001e1c2c = 4;
-  DAT_001e1c30 = ptrTo_IRUnary__new_107df4_001e8c7c;
-  PTR_DAT_001e1c34 = (undefined *)0x0;
-  DAT_001e1c1c = 0x4d;
-  PTR_DAT_001e269c = PTR_DAT_001e8c78;
-  DAT_001e2604 = 4;
-  DAT_001e2608 = ptrTo_IRUnary__new_107df4_001e8c7c;
-  PTR_DAT_001e260c = (undefined *)0x0;
-  PTR_DAT_001e2630 = PTR_DAT_001e8c84;
+  vsHardwareTable_field0C60_001e25f4 = 0x4c;
+  vsHardwareTable_field0E28_001e27bc = ptrTo_hwLimitsDefaultDataB_001e8c84;
+  vsHardwareTable_field0298_001e1c2c = 4;
+  vsHardwareTable_field029C_001e1c30 = ptrTo_IRUnary__new_107df4_001e8c7c;
+  vsHardwareTable_field02A0_001e1c34 = (undefined *)0x0;
+  vsHardwareTable_field0288_001e1c1c = 0x4d;
+  vsHardwareTable_field0D08_001e269c = ptrTo_hwLimitsDefaultDataA_001e8c78;
+  vsHardwareTable_field0C70_001e2604 = 4;
+  vsHardwareTable_field0C74_001e2608 = ptrTo_IRUnary__new_107df4_001e8c7c;
+  vsHardwareTable_field0C78_001e260c = (undefined *)0x0;
+  vsHardwareTable_field0C9C_001e2630 = ptrTo_hwLimitsDefaultDataB_001e8c84;
   return;
 }
 

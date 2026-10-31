@@ -1,0 +1,10 @@
+# data rows (r12): psn decoder globals, underscore-prefixed pool words
+data	DAT_001dbf90	psnDefaultOperandWord_001dbf90	INFERRED	global word (initial 0x12) stored to peepholeHalf+0xc as the replacement operand word by psnDecCanonicalizeEntry (part_017 5528-6344, 7 uses); r12
+data	DAT_001dbf94	psnDefaultScaleBits_001dbf94	INFERRED	global word (initial 0x10) used as the default scale/operand bits: stored to peepholeHalf+0x10 and to usageCursor[-3..-1] by psnDecCanonicalizeEntry/psnDecRecomputeSourceUsage (part_017 5301-5914, 16 uses); r12
+data	UNK_001aa848	laneWord00010203_001aa848	INFERRED	4-byte select word 00010203 (identity xyzw) compared with operand select +0x10 (part_025 974); value-named; r12
+data	UNK_001aa84c	laneWord00000000_001aa84c	INFERRED	4-byte select word 00000000 compared with operand select +0x10 (part_025 970); value-named; r12
+data	UNK_001b2a7c	laneWord00010303_001b2a7c	INFERRED	4-byte select word 00010303 compared with operand select +0xb4 and loaded to loopIndex2 (part_049 2697); value-named; r12
+data	UNK_001af9d8	laneWord01010100_001af9d8	INFERRED	4-byte select word 01010100 loaded as defaultSelect (part_030 1055); value-named; r12
+data	UNK_001aa7f8	psnSlotMaskHighWord_001aa7f8	INFERRED	constant 0x200 loaded as slotMaskHigh in the psn decoder (part_017 8297); r12
+data	UNK_001aa7f4	psnSlotMaskLowWord_001aa7f4	INFERRED	constant 0x100 loaded as slotMaskLowB in the psn decoder (part_017 8298); r12
+data	UNK_001ba4e4	ehFrameLabel_unreferencedByCorpus_001ba4e4	INFERRED	label inside __eh_frame with no reference from any corpus code (symbol_map: referenced only by dropped toolchain code); r12

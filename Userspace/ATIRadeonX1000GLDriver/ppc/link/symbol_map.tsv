@@ -340,7 +340,7 @@ alphaIndexRemapEntry4_001aa564	0x1aa564	__TEXT,__const	undefined4	4	extern unsig
 alphaIndexRemapEntry5_001aa568	0x1aa568	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry5_001aa568 asm("alphaIndexRemapEntry5_001aa568");	0x00000003	data.s
 alphaIndexRemapEntry6_001aa56c	0x1aa56c	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry6_001aa56c asm("alphaIndexRemapEntry6_001aa56c");	0x00000002	data.s
 alphaIndexRemapEntry7_001aa570	0x1aa570	__TEXT,__const	undefined4	4	extern unsigned int alphaIndexRemapEntry7_001aa570 asm("alphaIndexRemapEntry7_001aa570");	0x00000000	data.s
-UNK_001aa574	0x1aa574	__TEXT,__const	-	-	extern unsigned char UNK_001aa574 asm("UNK_001aa574");	0x00000000	data.s
+fpilComponentIndexTable_001aa574	0x1aa574	__TEXT,__const	-	-	extern unsigned char fpilComponentIndexTable_001aa574 asm("fpilComponentIndexTable_001aa574");	0x00000000	data.s
 extvsStorageClassEntry0_001aa584	0x1aa584	__TEXT,__const	undefined4	4	extern unsigned int extvsStorageClassEntry0_001aa584 asm("extvsStorageClassEntry0_001aa584");	0xfffffffd	data.s
 extvsStorageClassEntry1_001aa588	0x1aa588	__TEXT,__const	undefined4	4	extern unsigned int extvsStorageClassEntry1_001aa588 asm("extvsStorageClassEntry1_001aa588");	0x000087c3	data.s
 extvsStorageClassEntry2_001aa58c	0x1aa58c	__TEXT,__const	undefined4	4	extern unsigned int extvsStorageClassEntry2_001aa58c asm("extvsStorageClassEntry2_001aa58c");	0x000087c2	data.s
@@ -353,30 +353,30 @@ destRegisterFileByType_001aa758	0x1aa758	__TEXT,__const	-	-	extern unsigned char
 srcRegisterFileByType_001aa760	0x1aa760	__TEXT,__const	-	-	extern unsigned char srcRegisterFileByType_001aa760[] asm("srcRegisterFileByType_001aa760");	0x00010402	data.s
 srcRegisterFileByType_entry1_001aa761	0x1aa761	__TEXT,__const	undefined1	1	extern unsigned char srcRegisterFileByType_entry1_001aa761 asm("srcRegisterFileByType_entry1_001aa761");	0x01040200	data.s
 registerFileByRegIdHighByte_001aa764	0x1aa764	__TEXT,__const	-	-	extern unsigned char registerFileByRegIdHighByte_001aa764[] asm("registerFileByRegIdHighByte_001aa764");	0x00050410	data.s
-DAT_001aa798	0x1aa798	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa798 asm("DAT_001aa798");	0x00000004	data.s
-DAT_001aa79c	0x1aa79c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa79c asm("DAT_001aa79c");	0x00000004	data.s
-DAT_001aa7a0	0x1aa7a0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa7a0 asm("DAT_001aa7a0");	0x00000005	data.s
-DAT_001aa7a4	0x1aa7a4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa7a4 asm("DAT_001aa7a4");	0x00000004	data.s
+constWord00000004_001aa798	0x1aa798	__TEXT,__const	undefined4	4	extern unsigned int constWord00000004_001aa798 asm("constWord00000004_001aa798");	0x00000004	data.s
+constWord00000004_001aa79c	0x1aa79c	__TEXT,__const	undefined4	4	extern unsigned int constWord00000004_001aa79c asm("constWord00000004_001aa79c");	0x00000004	data.s
+constWord00000005_001aa7a0	0x1aa7a0	__TEXT,__const	undefined4	4	extern unsigned int constWord00000005_001aa7a0 asm("constWord00000005_001aa7a0");	0x00000005	data.s
+constWord00000004_001aa7a4	0x1aa7a4	__TEXT,__const	undefined4	4	extern unsigned int constWord00000004_001aa7a4 asm("constWord00000004_001aa7a4");	0x00000004	data.s
 primitiveInputRegisterTable_001aa7a8	0x1aa7a8	__TEXT,__const	-	-	extern unsigned char primitiveInputRegisterTable_001aa7a8 asm("primitiveInputRegisterTable_001aa7a8");	0x00000000	data.s
 sampleCoverageTable_001aa7d0	0x1aa7d0	__TEXT,__const	-	-	extern unsigned char sampleCoverageTable_001aa7d0 asm("sampleCoverageTable_001aa7d0");	0x03393939	data.s
 samplePositionTable_001aa7dc	0x1aa7dc	__TEXT,__const	-	-	extern unsigned char samplePositionTable_001aa7dc asm("samplePositionTable_001aa7dc");	0x33393993	data.s
 samplePatternTable_001aa7e8	0x1aa7e8	__TEXT,__const	-	-	extern unsigned char samplePatternTable_001aa7e8 asm("samplePatternTable_001aa7e8");	0x00000000	data.s
-_UNK_001aa7f4	0x1aa7f4	__TEXT,__const	-	-	extern unsigned char _UNK_001aa7f4 asm("_UNK_001aa7f4");	0x00000100	data.s
-_UNK_001aa7f8	0x1aa7f8	__TEXT,__const	-	-	extern unsigned char _UNK_001aa7f8 asm("_UNK_001aa7f8");	0x00000200	data.s
+_psnSlotMaskLowWord_001aa7f4	0x1aa7f4	__TEXT,__const	-	-	extern unsigned char _psnSlotMaskLowWord_001aa7f4 asm("_psnSlotMaskLowWord_001aa7f4");	0x00000100	data.s
+_psnSlotMaskHighWord_001aa7f8	0x1aa7f8	__TEXT,__const	-	-	extern unsigned char _psnSlotMaskHighWord_001aa7f8 asm("_psnSlotMaskHighWord_001aa7f8");	0x00000200	data.s
 swizzleXXXX_001aa7fc	0x1aa7fc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa7fc asm("swizzleXXXX_001aa7fc");	0x00000000	data.s
 swizzleXXXX_001aa800	0x1aa800	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa800 asm("swizzleXXXX_001aa800");	0x00000000	data.s
 swizzleXYZW_001aa804	0x1aa804	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001aa804 asm("swizzleXYZW_001aa804");	0x00010203	data.s
-UNK_001aa808	0x1aa808	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa808 asm("UNK_001aa808");	0x04040404	data.s
+laneWord04040404_001aa808	0x1aa808	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001aa808 asm("laneWord04040404_001aa808");	0x04040404	data.s
 laneWord01010101_001aa80c	0x1aa80c	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001aa80c asm("laneWord01010101_001aa80c");	0x01010101	data.s
 swizzleXXXX_001aa810	0x1aa810	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa810 asm("swizzleXXXX_001aa810");	0x00000000	data.s
-DAT_001aa814	0x1aa814	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa814 asm("DAT_001aa814");	0x01010100	data.s
+laneWord01010100_001aa814	0x1aa814	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001aa814 asm("laneWord01010100_001aa814");	0x01010100	data.s
 laneWordSplatTable_001aa818	0x1aa818	__TEXT,__const	undefined4	4	extern unsigned char laneWordSplatTable_001aa818[] asm("laneWordSplatTable_001aa818");	0x00000000	data.s
 laneWord01010101_001aa838	0x1aa838	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001aa838 asm("laneWord01010101_001aa838");	0x01010101	data.s
 laneWord04040404_001aa83c	0x1aa83c	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001aa83c asm("laneWord04040404_001aa83c");	0x04040404	data.s
 laneWord01010101_001aa840	0x1aa840	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001aa840 asm("laneWord01010101_001aa840");	0x01010101	data.s
-DAT_001aa844	0x1aa844	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aa844 asm("DAT_001aa844");	0x00000000	data.s
-_UNK_001aa848	0x1aa848	__TEXT,__const	-	-	extern unsigned char _UNK_001aa848 asm("_UNK_001aa848");	0x00010203	data.s
-_UNK_001aa84c	0x1aa84c	__TEXT,__const	-	-	extern unsigned char _UNK_001aa84c asm("_UNK_001aa84c");	0x00000000	data.s
+laneWord00000000_001aa844	0x1aa844	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001aa844 asm("laneWord00000000_001aa844");	0x00000000	data.s
+_laneWord00010203_001aa848	0x1aa848	__TEXT,__const	-	-	extern unsigned char _laneWord00010203_001aa848 asm("_laneWord00010203_001aa848");	0x00010203	data.s
+_laneWord00000000_001aa84c	0x1aa84c	__TEXT,__const	-	-	extern unsigned char _laneWord00000000_001aa84c asm("_laneWord00000000_001aa84c");	0x00000000	data.s
 swizzleYYYX_001aa850	0x1aa850	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001aa850 asm("swizzleYYYX_001aa850");	0x01010100	data.s
 swizzleYYXY_001aa854	0x1aa854	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYXY_001aa854 asm("swizzleYYXY_001aa854");	0x01010001	data.s
 swizzleYXYY_001aa858	0x1aa858	__TEXT,__const	undefined4	4	extern unsigned int swizzleYXYY_001aa858 asm("swizzleYXYY_001aa858");	0x01000101	data.s
@@ -386,107 +386,107 @@ swizzleXYZW_001aa868	0x1aa868	__TEXT,__const	undefined4	4	extern unsigned int sw
 swizzleVariantStartTable_001aa86c	0x1aa86c	__TEXT,__const	-	-	extern unsigned char swizzleVariantStartTable_001aa86c asm("swizzleVariantStartTable_001aa86c");	0x00000000	data.s
 swizzleVariantTemplate_001aa87c	0x1aa87c	__TEXT,__const	-	-	extern unsigned char swizzleVariantTemplate_001aa87c asm("swizzleVariantTemplate_001aa87c");	0x00000003	data.s
 swizzleXYZW_001aa9a8	0x1aa9a8	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001aa9a8 asm("swizzleXYZW_001aa9a8");	0x00010203	data.s
-UNK_001aa9ac	0x1aa9ac	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9ac asm("UNK_001aa9ac");	0x01000101	data.s
-UNK_001aa9b0	0x1aa9b0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9b0 asm("UNK_001aa9b0");	0x01010101	data.s
-UNK_001aa9b4	0x1aa9b4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9b4 asm("UNK_001aa9b4");	0x01010001	data.s
-UNK_001aa9b8	0x1aa9b8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9b8 asm("UNK_001aa9b8");	0x00000001	data.s
-UNK_001aa9bc	0x1aa9bc	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9bc asm("UNK_001aa9bc");	0x01010100	data.s
-UNK_001aa9c0	0x1aa9c0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9c0 asm("UNK_001aa9c0");	0x01010001	data.s
-UNK_001aa9c4	0x1aa9c4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9c4 asm("UNK_001aa9c4");	0x01000101	data.s
-UNK_001aa9c8	0x1aa9c8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9c8 asm("UNK_001aa9c8");	0x04050607	data.s
+laneWord01000101_001aa9ac	0x1aa9ac	__TEXT,__const	undefined4	4	extern unsigned int laneWord01000101_001aa9ac asm("laneWord01000101_001aa9ac");	0x01000101	data.s
+laneWord01010101_001aa9b0	0x1aa9b0	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001aa9b0 asm("laneWord01010101_001aa9b0");	0x01010101	data.s
+laneWord01010001_001aa9b4	0x1aa9b4	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010001_001aa9b4 asm("laneWord01010001_001aa9b4");	0x01010001	data.s
+laneWord00000001_001aa9b8	0x1aa9b8	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000001_001aa9b8 asm("laneWord00000001_001aa9b8");	0x00000001	data.s
+laneWord01010100_001aa9bc	0x1aa9bc	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001aa9bc asm("laneWord01010100_001aa9bc");	0x01010100	data.s
+laneWord01010001_001aa9c0	0x1aa9c0	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010001_001aa9c0 asm("laneWord01010001_001aa9c0");	0x01010001	data.s
+laneWord01000101_001aa9c4	0x1aa9c4	__TEXT,__const	undefined4	4	extern unsigned int laneWord01000101_001aa9c4 asm("laneWord01000101_001aa9c4");	0x01000101	data.s
+constWord04050607_001aa9c8	0x1aa9c8	__TEXT,__const	undefined4	4	extern unsigned int constWord04050607_001aa9c8 asm("constWord04050607_001aa9c8");	0x04050607	data.s
 laneWordTable_001aa9cc	0x1aa9cc	__TEXT,__const	undefined4	4	extern unsigned int laneWordTable_001aa9cc asm("laneWordTable_001aa9cc");	0x00000000	data.s
 laneWordTable_001aa9d0	0x1aa9d0	__TEXT,__const	undefined4	4	extern unsigned int laneWordTable_001aa9d0 asm("laneWordTable_001aa9d0");	0x00010101	data.s
-UNK_001aa9d4	0x1aa9d4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9d4 asm("UNK_001aa9d4");	0x03030303	data.s
-UNK_001aa9d8	0x1aa9d8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aa9d8 asm("UNK_001aa9d8");	0x02020202	data.s
+laneWord03030303_001aa9d4	0x1aa9d4	__TEXT,__const	undefined4	4	extern unsigned int laneWord03030303_001aa9d4 asm("laneWord03030303_001aa9d4");	0x03030303	data.s
+laneWord02020202_001aa9d8	0x1aa9d8	__TEXT,__const	undefined4	4	extern unsigned int laneWord02020202_001aa9d8 asm("laneWord02020202_001aa9d8");	0x02020202	data.s
 swizzleXXXX_001aa9dc	0x1aa9dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aa9dc asm("swizzleXXXX_001aa9dc");	0x00000000	data.s
 laneWord01010101_001aa9e0	0x1aa9e0	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001aa9e0 asm("laneWord01010101_001aa9e0");	0x01010101	data.s
 ilOpcodeTemplateOffsetTable_001aa9e4	0x1aa9e4	__TEXT,__const	-	-	extern unsigned char ilOpcodeTemplateOffsetTable_001aa9e4 asm("ilOpcodeTemplateOffsetTable_001aa9e4");	0x00000002	data.s
 setupLiteralFloatTable_001aa9fc	0x1aa9fc	__TEXT,__const	-	-	extern unsigned char setupLiteralFloatTable_001aa9fc asm("setupLiteralFloatTable_001aa9fc");	0x00000006	data.s
-UNK_001aaa18	0x1aaa18	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa18 asm("UNK_001aaa18");	0x01010100	data.s
-UNK_001aaa1c	0x1aaa1c	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa1c asm("UNK_001aaa1c");	0x00000001	data.s
-DAT_001aaa20	0x1aaa20	__TEXT,__const	undefined4	4	extern unsigned int DAT_001aaa20 asm("DAT_001aaa20");	0x01010000	data.s
-UNK_001aaa24	0x1aaa24	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa24 asm("UNK_001aaa24");	0x00000101	data.s
-UNK_001aaa28	0x1aaa28	__TEXT,__const	undefined4	4	extern unsigned int UNK_001aaa28 asm("UNK_001aaa28");	0x01000000	data.s
-UNK_001aaa2c	0x1aaa2c	__TEXT,__const	-	-	extern unsigned char UNK_001aaa2c asm("UNK_001aaa2c");	0x00000000	data.s
-DAT_001ab134	0x1ab134	__TEXT,__const	-	-	extern unsigned char DAT_001ab134 asm("DAT_001ab134");	0x00000000	data.s
+laneWord01010100_001aaa18	0x1aaa18	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001aaa18 asm("laneWord01010100_001aaa18");	0x01010100	data.s
+laneWord00000001_001aaa1c	0x1aaa1c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000001_001aaa1c asm("laneWord00000001_001aaa1c");	0x00000001	data.s
+laneWord01010000_001aaa20	0x1aaa20	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010000_001aaa20 asm("laneWord01010000_001aaa20");	0x01010000	data.s
+laneWord00000101_001aaa24	0x1aaa24	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000101_001aaa24 asm("laneWord00000101_001aaa24");	0x00000101	data.s
+laneWord01000000_001aaa28	0x1aaa28	__TEXT,__const	undefined4	4	extern unsigned int laneWord01000000_001aaa28 asm("laneWord01000000_001aaa28");	0x01000000	data.s
+zeroTemplate36_001aaa2c	0x1aaa2c	__TEXT,__const	-	-	extern unsigned char zeroTemplate36_001aaa2c asm("zeroTemplate36_001aaa2c");	0x00000000	data.s
+constPoolAnchor_001ab134	0x1ab134	__TEXT,__const	-	-	extern unsigned char constPoolAnchor_001ab134 asm("constPoolAnchor_001ab134");	0x00000000	data.s
 textPrintDoubleShortest_pow10Table	0x1abfb4	__TEXT,__const	-	-	extern unsigned char textPrintDoubleShortest_pow10Table asm("textPrintDoubleShortest_pow10Table");	0x00000055	data.s
 arbTypeTagTable_001ac5a4	0x1ac5a4	__TEXT,__const	-	-	extern unsigned char arbTypeTagTable_001ac5a4 asm("arbTypeTagTable_001ac5a4");	0x00000056	data.s
-DAT_001acec0	0x1acec0	__TEXT,__const	-	-	extern unsigned char DAT_001acec0 asm("DAT_001acec0");	0x00000055	data.s
-DAT_001ad5d8	0x1ad5d8	__TEXT,__const	-	-	extern unsigned char DAT_001ad5d8 asm("DAT_001ad5d8");	0x0000001f	data.s
-UNK_001ada48	0x1ada48	__TEXT,__const	-	-	extern unsigned char UNK_001ada48 asm("UNK_001ada48");	0x00000031	data.s
+constPoolAnchor_001acec0	0x1acec0	__TEXT,__const	-	-	extern unsigned char constPoolAnchor_001acec0 asm("constPoolAnchor_001acec0");	0x00000055	data.s
+constPoolAnchor_001ad5d8	0x1ad5d8	__TEXT,__const	-	-	extern unsigned char constPoolAnchor_001ad5d8 asm("constPoolAnchor_001ad5d8");	0x0000001f	data.s
+constPoolAnchor_001ada48	0x1ada48	__TEXT,__const	-	-	extern unsigned char constPoolAnchor_001ada48 asm("constPoolAnchor_001ada48");	0x00000031	data.s
 swizzleXYZW_001af9bc	0x1af9bc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001af9bc asm("swizzleXYZW_001af9bc");	0x00010203	data.s
-DAT_001af9c0	0x1af9c0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001af9c0 asm("DAT_001af9c0");	0x00000000	data.s
+laneWord00000000_001af9c0	0x1af9c0	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001af9c0 asm("laneWord00000000_001af9c0");	0x00000000	data.s
 swizzleAllUnused_001af9c4	0x1af9c4	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001af9c4 asm("swizzleAllUnused_001af9c4");	0x04040404	data.s
 laneWord01010101_001af9c8	0x1af9c8	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001af9c8 asm("laneWord01010101_001af9c8");	0x01010101	data.s
 laneWordTable_001af9cc	0x1af9cc	__TEXT,__const	undefined4	4	extern unsigned int laneWordTable_001af9cc asm("laneWordTable_001af9cc");	0x00000000	data.s
 laneWordTable_001af9d0	0x1af9d0	__TEXT,__const	undefined4	4	extern unsigned int laneWordTable_001af9d0 asm("laneWordTable_001af9d0");	0x03030303	data.s
-UNK_001af9d4	0x1af9d4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001af9d4 asm("UNK_001af9d4");	0x03030303	data.s
-_UNK_001af9d8	0x1af9d8	__TEXT,__const	-	-	extern unsigned char _UNK_001af9d8 asm("_UNK_001af9d8");	0x01010100	data.s
+laneWord03030303_001af9d4	0x1af9d4	__TEXT,__const	undefined4	4	extern unsigned int laneWord03030303_001af9d4 asm("laneWord03030303_001af9d4");	0x03030303	data.s
+_laneWord01010100_001af9d8	0x1af9d8	__TEXT,__const	-	-	extern unsigned char _laneWord01010100_001af9d8 asm("_laneWord01010100_001af9d8");	0x01010100	data.s
 swizzleXYYY_001af9dc	0x1af9dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001af9dc asm("swizzleXYYY_001af9dc");	0x00010101	data.s
 outputScaleTable_001af9e0	0x1af9e0	__TEXT,__const	undefined4	4	extern unsigned int outputScaleTable_001af9e0 asm("outputScaleTable_001af9e0");	0x3e000000	data.s
 outputScaleByExponent_001af9ec	0x1af9ec	__TEXT,__const	-	-	extern unsigned char outputScaleByExponent_001af9ec asm("outputScaleByExponent_001af9ec");	0x3f800000	data.s
 swizzleAllUnused_001af9fc	0x1af9fc	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001af9fc asm("swizzleAllUnused_001af9fc");	0x04040404	data.s
-DAT_001afa00	0x1afa00	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa00 asm("DAT_001afa00");	0x00010203	data.s
+laneWord00010203_001afa00	0x1afa00	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001afa00 asm("laneWord00010203_001afa00");	0x00010203	data.s
 laneWord01010100_001afa04	0x1afa04	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001afa04 asm("laneWord01010100_001afa04");	0x01010100	data.s
-DAT_001afa08	0x1afa08	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa08 asm("DAT_001afa08");	0x00000000	data.s
-DAT_001afa0c	0x1afa0c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa0c asm("DAT_001afa0c");	0x00010203	data.s
+laneWord00000000_001afa08	0x1afa08	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001afa08 asm("laneWord00000000_001afa08");	0x00000000	data.s
+laneWord00010203_001afa0c	0x1afa0c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001afa0c asm("laneWord00010203_001afa0c");	0x00010203	data.s
 laneWord01010101_001afa14	0x1afa14	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001afa14 asm("laneWord01010101_001afa14");	0x01010101	data.s
-DAT_001afa18	0x1afa18	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afa18 asm("DAT_001afa18");	0x00000000	data.s
-DAT_001afedc	0x1afedc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afedc asm("DAT_001afedc");	0x04040404	data.s
-UNK_001afee0	0x1afee0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001afee0 asm("UNK_001afee0");	0x00010101	data.s
-DAT_001afee4	0x1afee4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afee4 asm("DAT_001afee4");	0x00000000	data.s
-DAT_001afee8	0x1afee8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afee8 asm("DAT_001afee8");	0x00000000	data.s
+laneWord00000000_001afa18	0x1afa18	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001afa18 asm("laneWord00000000_001afa18");	0x00000000	data.s
+laneWord04040404_001afedc	0x1afedc	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001afedc asm("laneWord04040404_001afedc");	0x04040404	data.s
+laneWord00010101_001afee0	0x1afee0	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010101_001afee0 asm("laneWord00010101_001afee0");	0x00010101	data.s
+laneWord00000000_001afee4	0x1afee4	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001afee4 asm("laneWord00000000_001afee4");	0x00000000	data.s
+laneWord00000000_001afee8	0x1afee8	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001afee8 asm("laneWord00000000_001afee8");	0x00000000	data.s
 swizzleXXXX_001afeec	0x1afeec	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001afeec asm("swizzleXXXX_001afeec");	0x00000000	data.s
-DAT_001afef0	0x1afef0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afef0 asm("DAT_001afef0");	0x00010101	data.s
-DAT_001afef4	0x1afef4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001afef4 asm("DAT_001afef4");	0x00010203	data.s
+laneWord00010101_001afef0	0x1afef0	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010101_001afef0 asm("laneWord00010101_001afef0");	0x00010101	data.s
+laneWord00010203_001afef4	0x1afef4	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001afef4 asm("laneWord00010203_001afef4");	0x00010203	data.s
 laneWord01010101_001afef8	0x1afef8	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001afef8 asm("laneWord01010101_001afef8");	0x01010101	data.s
 constVec4SelectTableA_001aff08	0x1aff08	__TEXT,__const	undefined4	4	extern unsigned int constVec4SelectTableA_001aff08 asm("constVec4SelectTableA_001aff08");	0x00000000	data.s
 constVec4SelectTableB_001aff0c	0x1aff0c	__TEXT,__const	undefined4	4	extern unsigned int constVec4SelectTableB_001aff0c asm("constVec4SelectTableB_001aff0c");	0x00000000	data.s
 swizzleXXXX_001aff48	0x1aff48	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001aff48 asm("swizzleXXXX_001aff48");	0x00000000	data.s
 immediateConstantMultiples_001aff4c	0x1aff4c	__TEXT,__const	undefined4	4	extern unsigned int immediateConstantMultiples_001aff4c asm("immediateConstantMultiples_001aff4c");	0x3e000000	data.s
 constVec4SelectTableA_end_001aff50	0x1aff50	__TEXT,__const	undefined4	4	extern unsigned int constVec4SelectTableA_end_001aff50 asm("constVec4SelectTableA_end_001aff50");	0x3e800000	data.s
-UNK_001aff54	0x1aff54	__TEXT,__const	-	-	extern unsigned char UNK_001aff54 asm("UNK_001aff54");	0x3f000000	data.s
+constVec4SelectTableBEnd_001aff54	0x1aff54	__TEXT,__const	-	-	extern unsigned char constVec4SelectTableBEnd_001aff54 asm("constVec4SelectTableBEnd_001aff54");	0x3f000000	data.s
 seedConstExprTable_001aff68	0x1aff68	__TEXT,__const	undefined4	4	extern unsigned int seedConstExprTable_001aff68 asm("seedConstExprTable_001aff68");	0x00000000	data.s
 seedExprTable_001aff74	0x1aff74	__TEXT,__const	undefined4	4	extern unsigned int seedExprTable_001aff74 asm("seedExprTable_001aff74");	0xbf800000	data.s
 seedExprTable_end_001aff9c	0x1aff9c	__TEXT,__const	undefined4	4	extern unsigned int seedExprTable_end_001aff9c asm("seedExprTable_end_001aff9c");	0x00010203	data.s
-DAT_001affa0	0x1affa0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affa0 asm("DAT_001affa0");	0x04040404	data.s
+laneWord04040404_001affa0	0x1affa0	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001affa0 asm("laneWord04040404_001affa0");	0x04040404	data.s
 swizzleWWWW_001affa4	0x1affa4	__TEXT,__const	undefined4	4	extern unsigned int swizzleWWWW_001affa4 asm("swizzleWWWW_001affa4");	0x03030303	data.s
 seedConstExprTableB_001affb0	0x1affb0	__TEXT,__const	undefined4	4	extern unsigned int seedConstExprTableB_001affb0 asm("seedConstExprTableB_001affb0");	0x00000000	data.s
 seedConstExprTableB_end_001affb8	0x1affb8	__TEXT,__const	undefined4	4	extern unsigned int seedConstExprTableB_end_001affb8 asm("seedConstExprTableB_end_001affb8");	0x00010203	data.s
-DAT_001affbc	0x1affbc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affbc asm("DAT_001affbc");	0x04040404	data.s
+laneWord04040404_001affbc	0x1affbc	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001affbc asm("laneWord04040404_001affbc");	0x04040404	data.s
 laneWeightInit3_001affc0	0x1affc0	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit3_001affc0 asm("laneWeightInit3_001affc0");	0x0000001b	data.s
 laneWeightInit2_001affc4	0x1affc4	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit2_001affc4 asm("laneWeightInit2_001affc4");	0x00000009	data.s
 laneWeightInit1_001affc8	0x1affc8	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit1_001affc8 asm("laneWeightInit1_001affc8");	0x00000003	data.s
 laneWeightInit0_001affcc	0x1affcc	__TEXT,__const	undefined4	4	extern unsigned int laneWeightInit0_001affcc asm("laneWeightInit0_001affcc");	0x00000028	data.s
-DAT_001affd0	0x1affd0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affd0 asm("DAT_001affd0");	0x04040404	data.s
-UNK_001affd4	0x1affd4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001affd4 asm("UNK_001affd4");	0x00000000	data.s
-DAT_001affd8	0x1affd8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001affd8 asm("DAT_001affd8");	0x00010203	data.s
-UNK_001affdc	0x1affdc	__TEXT,__const	undefined4	4	extern unsigned int UNK_001affdc asm("UNK_001affdc");	0x00040404	data.s
-UNK_001affe0	0x1affe0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001affe0 asm("UNK_001affe0");	0x00010203	data.s
-UNK_001affe4	0x1affe4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001affe4 asm("UNK_001affe4");	0x00000000	data.s
-UNK_001affe8	0x1affe8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001affe8 asm("UNK_001affe8");	0x01010101	data.s
-UNK_001affec	0x1affec	__TEXT,__const	undefined4	4	extern unsigned int UNK_001affec asm("UNK_001affec");	0xffffffff	data.s
-UNK_001afff0	0x1afff0	__TEXT,__const	undefined4	4	extern unsigned int UNK_001afff0 asm("UNK_001afff0");	0xffffffff	data.s
-UNK_001afff4	0x1afff4	__TEXT,__const	undefined4	4	extern unsigned int UNK_001afff4 asm("UNK_001afff4");	0xffffffff	data.s
-UNK_001afff8	0x1afff8	__TEXT,__const	undefined4	4	extern unsigned int UNK_001afff8 asm("UNK_001afff8");	0xffffffff	data.s
+laneWord04040404_001affd0	0x1affd0	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001affd0 asm("laneWord04040404_001affd0");	0x04040404	data.s
+laneWord00000000_001affd4	0x1affd4	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001affd4 asm("laneWord00000000_001affd4");	0x00000000	data.s
+laneWord00010203_001affd8	0x1affd8	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001affd8 asm("laneWord00010203_001affd8");	0x00010203	data.s
+laneWord00040404_001affdc	0x1affdc	__TEXT,__const	undefined4	4	extern unsigned int laneWord00040404_001affdc asm("laneWord00040404_001affdc");	0x00040404	data.s
+laneWord00010203_001affe0	0x1affe0	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001affe0 asm("laneWord00010203_001affe0");	0x00010203	data.s
+laneWord00000000_001affe4	0x1affe4	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001affe4 asm("laneWord00000000_001affe4");	0x00000000	data.s
+laneWord01010101_001affe8	0x1affe8	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001affe8 asm("laneWord01010101_001affe8");	0x01010101	data.s
+excludedRegsInit0_001affec	0x1affec	__TEXT,__const	undefined4	4	extern unsigned int excludedRegsInit0_001affec asm("excludedRegsInit0_001affec");	0xffffffff	data.s
+excludedRegsInit1_001afff0	0x1afff0	__TEXT,__const	undefined4	4	extern unsigned int excludedRegsInit1_001afff0 asm("excludedRegsInit1_001afff0");	0xffffffff	data.s
+excludedRegsInit2_001afff4	0x1afff4	__TEXT,__const	undefined4	4	extern unsigned int excludedRegsInit2_001afff4 asm("excludedRegsInit2_001afff4");	0xffffffff	data.s
+excludedRegsInit3_001afff8	0x1afff8	__TEXT,__const	undefined4	4	extern unsigned int excludedRegsInit3_001afff8 asm("excludedRegsInit3_001afff8");	0xffffffff	data.s
 laneWord01010101_001afffc	0x1afffc	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001afffc asm("laneWord01010101_001afffc");	0x01010101	data.s
 swizzleAllUnused_001b0000	0x1b0000	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0000 asm("swizzleAllUnused_001b0000");	0x04040404	data.s
 swizzleXYZW_001b0004	0x1b0004	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b0004 asm("swizzleXYZW_001b0004");	0x00010203	data.s
-DAT_001b0008	0x1b0008	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0008 asm("DAT_001b0008");	0x00000000	data.s
-DAT_001b000c	0x1b000c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b000c asm("DAT_001b000c");	0x00000001	data.s
-DAT_001b0010	0x1b0010	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0010 asm("DAT_001b0010");	0x01010100	data.s
+laneWord00000000_001b0008	0x1b0008	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b0008 asm("laneWord00000000_001b0008");	0x00000000	data.s
+laneWord00000001_001b000c	0x1b000c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000001_001b000c asm("laneWord00000001_001b000c");	0x00000001	data.s
+laneWord01010100_001b0010	0x1b0010	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b0010 asm("laneWord01010100_001b0010");	0x01010100	data.s
 laneWord01010101_001b0014	0x1b0014	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b0014 asm("laneWord01010101_001b0014");	0x01010101	data.s
-UNK_001b0018	0x1b0018	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b0018 asm("UNK_001b0018");	0x03030303	data.s
-DAT_001b001c	0x1b001c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b001c asm("DAT_001b001c");	0x00000000	data.s
+laneWord03030303_001b0018	0x1b0018	__TEXT,__const	undefined4	4	extern unsigned int laneWord03030303_001b0018 asm("laneWord03030303_001b0018");	0x03030303	data.s
+laneWord00000000_001b001c	0x1b001c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b001c asm("laneWord00000000_001b001c");	0x00000000	data.s
 laneWord01010101_001b0020	0x1b0020	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b0020 asm("laneWord01010101_001b0020");	0x01010101	data.s
-DAT_001b0024	0x1b0024	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0024 asm("DAT_001b0024");	0x01010100	data.s
-DAT_001b0028	0x1b0028	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0028 asm("DAT_001b0028");	0x01010100	data.s
-DAT_001b002c	0x1b002c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b002c asm("DAT_001b002c");	0x01010001	data.s
-DAT_001b0030	0x1b0030	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0030 asm("DAT_001b0030");	0x01000101	data.s
-DAT_001b0034	0x1b0034	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0034 asm("DAT_001b0034");	0x00010101	data.s
+laneWord01010100_001b0024	0x1b0024	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b0024 asm("laneWord01010100_001b0024");	0x01010100	data.s
+laneWord01010100_001b0028	0x1b0028	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b0028 asm("laneWord01010100_001b0028");	0x01010100	data.s
+laneWord01010001_001b002c	0x1b002c	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010001_001b002c asm("laneWord01010001_001b002c");	0x01010001	data.s
+laneWord01000101_001b0030	0x1b0030	__TEXT,__const	undefined4	4	extern unsigned int laneWord01000101_001b0030 asm("laneWord01000101_001b0030");	0x01000101	data.s
+laneWord00010101_001b0034	0x1b0034	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010101_001b0034 asm("laneWord00010101_001b0034");	0x00010101	data.s
 swizzleAllUnused_001b0038	0x1b0038	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0038 asm("swizzleAllUnused_001b0038");	0x04040404	data.s
 swizzleXYZW_001b003c	0x1b003c	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b003c asm("swizzleXYZW_001b003c");	0x00010203	data.s
-DAT_001b0040	0x1b0040	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0040 asm("DAT_001b0040");	0x00000000	data.s
+laneWord00000000_001b0040	0x1b0040	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b0040 asm("laneWord00000000_001b0040");	0x00000000	data.s
 swizzleYYYY_001b0044	0x1b0044	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0044 asm("swizzleYYYY_001b0044");	0x01010101	data.s
 swizzleYYYY_001b0048	0x1b0048	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0048 asm("swizzleYYYY_001b0048");	0x01010101	data.s
 laneByteTable_001b004c	0x1b004c	__TEXT,__const	undefined4	4	extern unsigned int laneByteTable_001b004c asm("laneByteTable_001b004c");	0x00010203	data.s
@@ -494,111 +494,111 @@ swizzleAllUnused_001b0050	0x1b0050	__TEXT,__const	undefined4	4	extern unsigned i
 swizzleYYYX_001b0054	0x1b0054	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001b0054 asm("swizzleYYYX_001b0054");	0x01010100	data.s
 swizzleXYYY_001b0058	0x1b0058	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYYY_001b0058 asm("swizzleXYYY_001b0058");	0x00010101	data.s
 swizzleXXXX_001b005c	0x1b005c	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001b005c asm("swizzleXXXX_001b005c");	0x00000000	data.s
-DAT_001b0060	0x1b0060	__TEXT,__const	-	-	extern unsigned char DAT_001b0060 asm("DAT_001b0060");	0x00000000	data.s
+scaleFoldModeTable_001b0060	0x1b0060	__TEXT,__const	-	-	extern unsigned char scaleFoldModeTable_001b0060 asm("scaleFoldModeTable_001b0060");	0x00000000	data.s
 componentToSelectWordTable_001b0160	0x1b0160	__TEXT,__const	-	-	extern unsigned char componentToSelectWordTable_001b0160 asm("componentToSelectWordTable_001b0160");	0x01020003	data.s
-DAT_001b0170	0x1b0170	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0170 asm("DAT_001b0170");	0x00000000	data.s
-DAT_001b0174	0x1b0174	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0174 asm("DAT_001b0174");	0x01010101	data.s
-DAT_001b017c	0x1b017c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b017c asm("DAT_001b017c");	0x01010101	data.s
-DAT_001b0180	0x1b0180	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0180 asm("DAT_001b0180");	0x00000000	data.s
-DAT_001b0184	0x1b0184	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0184 asm("DAT_001b0184");	0x00000000	data.s
-DAT_001b0188	0x1b0188	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0188 asm("DAT_001b0188");	0x00000000	data.s
-DAT_001b018c	0x1b018c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b018c asm("DAT_001b018c");	0x00000000	data.s
-DAT_001b0190	0x1b0190	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0190 asm("DAT_001b0190");	0x00000000	data.s
+laneWord00000000_001b0170	0x1b0170	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b0170 asm("laneWord00000000_001b0170");	0x00000000	data.s
+laneWord01010101_001b0174	0x1b0174	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b0174 asm("laneWord01010101_001b0174");	0x01010101	data.s
+laneWord01010101_001b017c	0x1b017c	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b017c asm("laneWord01010101_001b017c");	0x01010101	data.s
+laneWord00000000_001b0180	0x1b0180	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b0180 asm("laneWord00000000_001b0180");	0x00000000	data.s
+laneWord00000000_001b0184	0x1b0184	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b0184 asm("laneWord00000000_001b0184");	0x00000000	data.s
+laneWord00000000_001b0188	0x1b0188	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b0188 asm("laneWord00000000_001b0188");	0x00000000	data.s
+laneWord00000000_001b018c	0x1b018c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b018c asm("laneWord00000000_001b018c");	0x00000000	data.s
+laneWord00000000_001b0190	0x1b0190	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b0190 asm("laneWord00000000_001b0190");	0x00000000	data.s
 swizzleYYYY_001b0194	0x1b0194	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0194 asm("swizzleYYYY_001b0194");	0x01010101	data.s
 swizzleYYYY_001b0198	0x1b0198	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b0198 asm("swizzleYYYY_001b0198");	0x01010101	data.s
-UNK_001b019c	0x1b019c	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b019c asm("UNK_001b019c");	0x00000000	data.s
+laneWord00000000_001b019c	0x1b019c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b019c asm("laneWord00000000_001b019c");	0x00000000	data.s
 swizzleAllUnused_001b01a0	0x1b01a0	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b01a0 asm("swizzleAllUnused_001b01a0");	0x04040404	data.s
-DAT_001b01a4	0x1b01a4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01a4 asm("DAT_001b01a4");	0x00010203	data.s
-DAT_001b01a8	0x1b01a8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01a8 asm("DAT_001b01a8");	0x00000000	data.s
-DAT_001b01ac	0x1b01ac	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01ac asm("DAT_001b01ac");	0x00010203	data.s
-DAT_001b01b0	0x1b01b0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01b0 asm("DAT_001b01b0");	0x00000000	data.s
+laneWord00010203_001b01a4	0x1b01a4	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001b01a4 asm("laneWord00010203_001b01a4");	0x00010203	data.s
+laneWord00000000_001b01a8	0x1b01a8	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b01a8 asm("laneWord00000000_001b01a8");	0x00000000	data.s
+laneWord00010203_001b01ac	0x1b01ac	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001b01ac asm("laneWord00010203_001b01ac");	0x00010203	data.s
+laneWord00000000_001b01b0	0x1b01b0	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b01b0 asm("laneWord00000000_001b01b0");	0x00000000	data.s
 laneWord01010101_001b01b4	0x1b01b4	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b01b4 asm("laneWord01010101_001b01b4");	0x01010101	data.s
 swizzleAllUnused_001b01b8	0x1b01b8	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b01b8 asm("swizzleAllUnused_001b01b8");	0x04040404	data.s
-DAT_001b01bc	0x1b01bc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01bc asm("DAT_001b01bc");	0x00010203	data.s
-DAT_001b01c0	0x1b01c0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01c0 asm("DAT_001b01c0");	0x00000001	data.s
-DAT_001b01c4	0x1b01c4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01c4 asm("DAT_001b01c4");	0x00000001	data.s
-DAT_001b01c8	0x1b01c8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01c8 asm("DAT_001b01c8");	0x00000001	data.s
-DAT_001b01cc	0x1b01cc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01cc asm("DAT_001b01cc");	0x00000001	data.s
+laneWord00010203_001b01bc	0x1b01bc	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001b01bc asm("laneWord00010203_001b01bc");	0x00010203	data.s
+laneWord00000001_001b01c0	0x1b01c0	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000001_001b01c0 asm("laneWord00000001_001b01c0");	0x00000001	data.s
+laneWord00000001_001b01c4	0x1b01c4	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000001_001b01c4 asm("laneWord00000001_001b01c4");	0x00000001	data.s
+laneWord00000001_001b01c8	0x1b01c8	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000001_001b01c8 asm("laneWord00000001_001b01c8");	0x00000001	data.s
+laneWord00000001_001b01cc	0x1b01cc	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000001_001b01cc asm("laneWord00000001_001b01cc");	0x00000001	data.s
 laneWord01010101_001b01d0	0x1b01d0	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b01d0 asm("laneWord01010101_001b01d0");	0x01010101	data.s
-DAT_001b01d4	0x1b01d4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01d4 asm("DAT_001b01d4");	0x01010100	data.s
+laneWord01010100_001b01d4	0x1b01d4	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b01d4 asm("laneWord01010100_001b01d4");	0x01010100	data.s
 swizzleXYZW_001b01d8	0x1b01d8	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b01d8 asm("swizzleXYZW_001b01d8");	0x00010203	data.s
 swizzleAllUnused_001b01dc	0x1b01dc	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b01dc asm("swizzleAllUnused_001b01dc");	0x04040404	data.s
-DAT_001b01e0	0x1b01e0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01e0 asm("DAT_001b01e0");	0x00000000	data.s
-DAT_001b01e4	0x1b01e4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01e4 asm("DAT_001b01e4");	0x00000000	data.s
-DAT_001b01e8	0x1b01e8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01e8 asm("DAT_001b01e8");	0x00000000	data.s
-DAT_001b01ec	0x1b01ec	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01ec asm("DAT_001b01ec");	0x00000000	data.s
-DAT_001b01f0	0x1b01f0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01f0 asm("DAT_001b01f0");	0x00000000	data.s
-DAT_001b01f4	0x1b01f4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01f4 asm("DAT_001b01f4");	0x00000000	data.s
-DAT_001b01f8	0x1b01f8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01f8 asm("DAT_001b01f8");	0x3f800000	data.s
-DAT_001b01fc	0x1b01fc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b01fc asm("DAT_001b01fc");	0x3f800000	data.s
-DAT_001b0200	0x1b0200	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0200 asm("DAT_001b0200");	0x3f800000	data.s
-DAT_001b0204	0x1b0204	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b0204 asm("DAT_001b0204");	0x3f800000	data.s
-UNK_001b0208	0x1b0208	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b0208 asm("UNK_001b0208");	0x00010203	data.s
-UNK_001b020c	0x1b020c	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b020c asm("UNK_001b020c");	0x03030303	data.s
+floatWord00000000_001b01e0	0x1b01e0	__TEXT,__const	undefined4	4	extern unsigned int floatWord00000000_001b01e0 asm("floatWord00000000_001b01e0");	0x00000000	data.s
+floatWord00000000_001b01e4	0x1b01e4	__TEXT,__const	undefined4	4	extern unsigned int floatWord00000000_001b01e4 asm("floatWord00000000_001b01e4");	0x00000000	data.s
+floatWord00000000_001b01e8	0x1b01e8	__TEXT,__const	undefined4	4	extern unsigned int floatWord00000000_001b01e8 asm("floatWord00000000_001b01e8");	0x00000000	data.s
+floatWord00000000_001b01ec	0x1b01ec	__TEXT,__const	undefined4	4	extern unsigned int floatWord00000000_001b01ec asm("floatWord00000000_001b01ec");	0x00000000	data.s
+floatWord00000000_001b01f0	0x1b01f0	__TEXT,__const	undefined4	4	extern unsigned int floatWord00000000_001b01f0 asm("floatWord00000000_001b01f0");	0x00000000	data.s
+floatWord00000000_001b01f4	0x1b01f4	__TEXT,__const	undefined4	4	extern unsigned int floatWord00000000_001b01f4 asm("floatWord00000000_001b01f4");	0x00000000	data.s
+floatWord3f800000_001b01f8	0x1b01f8	__TEXT,__const	undefined4	4	extern unsigned int floatWord3f800000_001b01f8 asm("floatWord3f800000_001b01f8");	0x3f800000	data.s
+floatWord3f800000_001b01fc	0x1b01fc	__TEXT,__const	undefined4	4	extern unsigned int floatWord3f800000_001b01fc asm("floatWord3f800000_001b01fc");	0x3f800000	data.s
+floatWord3f800000_001b0200	0x1b0200	__TEXT,__const	undefined4	4	extern unsigned int floatWord3f800000_001b0200 asm("floatWord3f800000_001b0200");	0x3f800000	data.s
+floatWord3f800000_001b0204	0x1b0204	__TEXT,__const	undefined4	4	extern unsigned int floatWord3f800000_001b0204 asm("floatWord3f800000_001b0204");	0x3f800000	data.s
+laneWord00010203_001b0208	0x1b0208	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001b0208 asm("laneWord00010203_001b0208");	0x00010203	data.s
+laneWord03030303_001b020c	0x1b020c	__TEXT,__const	undefined4	4	extern unsigned int laneWord03030303_001b020c asm("laneWord03030303_001b020c");	0x03030303	data.s
 swizzleYYYX_001b0210	0x1b0210	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001b0210 asm("swizzleYYYX_001b0210");	0x01010100	data.s
 laneWord01010001_001b0214	0x1b0214	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010001_001b0214 asm("laneWord01010001_001b0214");	0x01010001	data.s
 laneWord01000101_001b0218	0x1b0218	__TEXT,__const	undefined4	4	extern unsigned int laneWord01000101_001b0218 asm("laneWord01000101_001b0218");	0x01000101	data.s
-DAT_001b021c	0x1b021c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b021c asm("DAT_001b021c");	0x00010101	data.s
+laneWord00010101_001b021c	0x1b021c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010101_001b021c asm("laneWord00010101_001b021c");	0x00010101	data.s
 swizzleXYZW_001b0220	0x1b0220	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b0220 asm("swizzleXYZW_001b0220");	0x00010203	data.s
 swizzleAllUnused_001b0224	0x1b0224	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b0224 asm("swizzleAllUnused_001b0224");	0x04040404	data.s
-DAT_001b0228	0x1b0228	__TEXT,__const	undefined1	1	extern unsigned char DAT_001b0228 asm("DAT_001b0228");	0x00010203	data.s
-DAT_001b023c	0x1b023c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b023c asm("DAT_001b023c");	0x01010100	data.s
+selectByteRowTable_001b0228	0x1b0228	__TEXT,__const	undefined1	1	extern unsigned char selectByteRowTable_001b0228 asm("selectByteRowTable_001b0228");	0x00010203	data.s
+laneWord01010100_001b023c	0x1b023c	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b023c asm("laneWord01010100_001b023c");	0x01010100	data.s
 r300SchedGroupTable_001b0240	0x1b0240	__TEXT,__const	-	-	extern unsigned char r300SchedGroupTable_001b0240 asm("r300SchedGroupTable_001b0240");	0x00000000	data.s
-DAT_001b0244	0x1b0244	__TEXT,__const	-	-	extern unsigned char DAT_001b0244 asm("DAT_001b0244");	0x04040404	data.s
+selectWordCanonicaliseTable_001b0244	0x1b0244	__TEXT,__const	-	-	extern unsigned char selectWordCanonicaliseTable_001b0244 asm("selectWordCanonicaliseTable_001b0244");	0x04040404	data.s
 laneWord04040404_001b02ec	0x1b02ec	__TEXT,__const	-	-	extern unsigned char laneWord04040404_001b02ec asm("laneWord04040404_001b02ec");	0x04040404	data.s
 laneWord03000004_001b19e0	0x1b19e0	__TEXT,__const	-	-	extern unsigned char laneWord03000004_001b19e0 asm("laneWord03000004_001b19e0");	0x03000004	data.s
-DAT_001b2994	0x1b2994	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2994 asm("DAT_001b2994");	0x00010200	data.s
-UNK_001b29e4	0x1b29e4	__TEXT,__const	-	-	extern unsigned char UNK_001b29e4 asm("UNK_001b29e4");	0x00010200	data.s
+laneSelectWordTable_001b2994	0x1b2994	__TEXT,__const	undefined4	4	extern unsigned int laneSelectWordTable_001b2994 asm("laneSelectWordTable_001b2994");	0x00010200	data.s
+laneSelectWordTableEnd_001b29e4	0x1b29e4	__TEXT,__const	-	-	extern unsigned char laneSelectWordTableEnd_001b29e4 asm("laneSelectWordTableEnd_001b29e4");	0x00010200	data.s
 swizzleXYZW_001b2a64	0x1b2a64	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b2a64 asm("swizzleXYZW_001b2a64");	0x00010203	data.s
 swizzleAllUnused_001b2a68	0x1b2a68	__TEXT,__const	undefined4	4	extern unsigned int swizzleAllUnused_001b2a68 asm("swizzleAllUnused_001b2a68");	0x04040404	data.s
-DAT_001b2a6c	0x1b2a6c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a6c asm("DAT_001b2a6c");	0x00010101	data.s
-DAT_001b2a70	0x1b2a70	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a70 asm("DAT_001b2a70");	0x01010100	data.s
-DAT_001b2a74	0x1b2a74	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a74 asm("DAT_001b2a74");	0x00000000	data.s
-DAT_001b2a78	0x1b2a78	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a78 asm("DAT_001b2a78");	0x01010101	data.s
-_UNK_001b2a7c	0x1b2a7c	__TEXT,__const	-	-	extern unsigned char _UNK_001b2a7c asm("_UNK_001b2a7c");	0x00010303	data.s
+laneWord00010101_001b2a6c	0x1b2a6c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010101_001b2a6c asm("laneWord00010101_001b2a6c");	0x00010101	data.s
+laneWord01010100_001b2a70	0x1b2a70	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b2a70 asm("laneWord01010100_001b2a70");	0x01010100	data.s
+laneWord00000000_001b2a74	0x1b2a74	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b2a74 asm("laneWord00000000_001b2a74");	0x00000000	data.s
+laneWord01010101_001b2a78	0x1b2a78	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b2a78 asm("laneWord01010101_001b2a78");	0x01010101	data.s
+_laneWord00010303_001b2a7c	0x1b2a7c	__TEXT,__const	-	-	extern unsigned char _laneWord00010303_001b2a7c asm("_laneWord00010303_001b2a7c");	0x00010303	data.s
 laneWord01010101_001b2a80	0x1b2a80	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b2a80 asm("laneWord01010101_001b2a80");	0x01010101	data.s
 laneWord01010101_001b2a84	0x1b2a84	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b2a84 asm("laneWord01010101_001b2a84");	0x01010101	data.s
-DAT_001b2a88	0x1b2a88	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a88 asm("DAT_001b2a88");	0x00000000	data.s
-DAT_001b2a8c	0x1b2a8c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a8c asm("DAT_001b2a8c");	0x03030303	data.s
-DAT_001b2a90	0x1b2a90	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a90 asm("DAT_001b2a90");	0x02020202	data.s
-DAT_001b2a94	0x1b2a94	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a94 asm("DAT_001b2a94");	0x01010101	data.s
-DAT_001b2a98	0x1b2a98	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2a98 asm("DAT_001b2a98");	0x00000000	data.s
-DAT_001b2aa4	0x1b2aa4	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2aa4 asm("DAT_001b2aa4");	0x00010203	data.s
-DAT_001b2aa8	0x1b2aa8	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2aa8 asm("DAT_001b2aa8");	0x04040404	data.s
-UNK_001b2aac	0x1b2aac	__TEXT,__const	undefined4	4	extern unsigned int UNK_001b2aac asm("UNK_001b2aac");	0x04040404	data.s
-DAT_001b2ab0	0x1b2ab0	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2ab0 asm("DAT_001b2ab0");	0x00010303	data.s
+laneWord00000000_001b2a88	0x1b2a88	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b2a88 asm("laneWord00000000_001b2a88");	0x00000000	data.s
+laneWord03030303_001b2a8c	0x1b2a8c	__TEXT,__const	undefined4	4	extern unsigned int laneWord03030303_001b2a8c asm("laneWord03030303_001b2a8c");	0x03030303	data.s
+laneWord02020202_001b2a90	0x1b2a90	__TEXT,__const	undefined4	4	extern unsigned int laneWord02020202_001b2a90 asm("laneWord02020202_001b2a90");	0x02020202	data.s
+laneWord01010101_001b2a94	0x1b2a94	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b2a94 asm("laneWord01010101_001b2a94");	0x01010101	data.s
+laneWord00000000_001b2a98	0x1b2a98	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b2a98 asm("laneWord00000000_001b2a98");	0x00000000	data.s
+laneWord00010203_001b2aa4	0x1b2aa4	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001b2aa4 asm("laneWord00010203_001b2aa4");	0x00010203	data.s
+laneWord04040404_001b2aa8	0x1b2aa8	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001b2aa8 asm("laneWord04040404_001b2aa8");	0x04040404	data.s
+laneWord04040404_001b2aac	0x1b2aac	__TEXT,__const	undefined4	4	extern unsigned int laneWord04040404_001b2aac asm("laneWord04040404_001b2aac");	0x04040404	data.s
+laneWord00010303_001b2ab0	0x1b2ab0	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010303_001b2ab0 asm("laneWord00010303_001b2ab0");	0x00010303	data.s
 swizzleZZZZ_001b2ab4	0x1b2ab4	__TEXT,__const	undefined4	4	extern unsigned int swizzleZZZZ_001b2ab4 asm("swizzleZZZZ_001b2ab4");	0x02020202	data.s
 swizzleYYYY_001b2ab8	0x1b2ab8	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYY_001b2ab8 asm("swizzleYYYY_001b2ab8");	0x01010101	data.s
 swizzleXXXX_001b2abc	0x1b2abc	__TEXT,__const	undefined4	4	extern unsigned int swizzleXXXX_001b2abc asm("swizzleXXXX_001b2abc");	0x00000000	data.s
 swizzleXYZW_001b2ac0	0x1b2ac0	__TEXT,__const	undefined4	4	extern unsigned int swizzleXYZW_001b2ac0 asm("swizzleXYZW_001b2ac0");	0x00010203	data.s
 swizzleWWWW_001b2ac4	0x1b2ac4	__TEXT,__const	undefined4	4	extern unsigned int swizzleWWWW_001b2ac4 asm("swizzleWWWW_001b2ac4");	0x03030303	data.s
-DAT_001b2acc	0x1b2acc	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2acc asm("DAT_001b2acc");	0x01010100	data.s
+laneWord01010100_001b2acc	0x1b2acc	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b2acc asm("laneWord01010100_001b2acc");	0x01010100	data.s
 r300DestRegTypeBitsTable_001b2ad0	0x1b2ad0	__TEXT,__const	-	-	extern unsigned char r300DestRegTypeBitsTable_001b2ad0 asm("r300DestRegTypeBitsTable_001b2ad0");	0x00000000	data.s
 r300SwizzleLaneSelectTable_001b2be8	0x1b2be8	__TEXT,__const	-	-	extern unsigned char r300SwizzleLaneSelectTable_001b2be8 asm("r300SwizzleLaneSelectTable_001b2be8");	0x00000000	data.s
-DAT_001b2c04	0x1b2c04	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c04 asm("DAT_001b2c04");	0x01010100	data.s
-DAT_001b2c08	0x1b2c08	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c08 asm("DAT_001b2c08");	0x01010001	data.s
-DAT_001b2c0c	0x1b2c0c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c0c asm("DAT_001b2c0c");	0x01000101	data.s
-DAT_001b2c10	0x1b2c10	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2c10 asm("DAT_001b2c10");	0x00010101	data.s
+laneWord01010100_001b2c04	0x1b2c04	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b2c04 asm("laneWord01010100_001b2c04");	0x01010100	data.s
+laneWord01010001_001b2c08	0x1b2c08	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010001_001b2c08 asm("laneWord01010001_001b2c08");	0x01010001	data.s
+laneWord01000101_001b2c0c	0x1b2c0c	__TEXT,__const	undefined4	4	extern unsigned int laneWord01000101_001b2c0c asm("laneWord01000101_001b2c0c");	0x01000101	data.s
+laneWord00010101_001b2c10	0x1b2c10	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010101_001b2c10 asm("laneWord00010101_001b2c10");	0x00010101	data.s
 r300SrcRegClassBitsTable_001b2c14	0x1b2c14	__TEXT,__const	-	-	extern unsigned char r300SrcRegClassBitsTable_001b2c14 asm("r300SrcRegClassBitsTable_001b2c14");	0x00000000	data.s
-DAT_001b2d2c	0x1b2d2c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d2c asm("DAT_001b2d2c");	0x03030303	data.s
-DAT_001b2d30	0x1b2d30	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d30 asm("DAT_001b2d30");	0x02020202	data.s
-DAT_001b2d34	0x1b2d34	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d34 asm("DAT_001b2d34");	0x01010101	data.s
-DAT_001b2d38	0x1b2d38	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d38 asm("DAT_001b2d38");	0x00000000	data.s
+laneWord03030303_001b2d2c	0x1b2d2c	__TEXT,__const	undefined4	4	extern unsigned int laneWord03030303_001b2d2c asm("laneWord03030303_001b2d2c");	0x03030303	data.s
+laneWord02020202_001b2d30	0x1b2d30	__TEXT,__const	undefined4	4	extern unsigned int laneWord02020202_001b2d30 asm("laneWord02020202_001b2d30");	0x02020202	data.s
+laneWord01010101_001b2d34	0x1b2d34	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b2d34 asm("laneWord01010101_001b2d34");	0x01010101	data.s
+laneWord00000000_001b2d38	0x1b2d38	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b2d38 asm("laneWord00000000_001b2d38");	0x00000000	data.s
 swizzleWWWW_001b2d4c	0x1b2d4c	__TEXT,__const	undefined4	4	extern unsigned int swizzleWWWW_001b2d4c asm("swizzleWWWW_001b2d4c");	0x03030303	data.s
 swizzleYYYX_001b2d50	0x1b2d50	__TEXT,__const	undefined4	4	extern unsigned int swizzleYYYX_001b2d50 asm("swizzleYYYX_001b2d50");	0x01010100	data.s
 laneWord01010101_001b2d54	0x1b2d54	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b2d54 asm("laneWord01010101_001b2d54");	0x01010101	data.s
 laneWord03030303_001b2d58	0x1b2d58	__TEXT,__const	undefined4	4	extern unsigned int laneWord03030303_001b2d58 asm("laneWord03030303_001b2d58");	0x03030303	data.s
 laneWord02020202_001b2d5c	0x1b2d5c	__TEXT,__const	undefined4	4	extern unsigned int laneWord02020202_001b2d5c asm("laneWord02020202_001b2d5c");	0x02020202	data.s
 laneWord01010101_001b2d60	0x1b2d60	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010101_001b2d60 asm("laneWord01010101_001b2d60");	0x01010101	data.s
-DAT_001b2d64	0x1b2d64	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d64 asm("DAT_001b2d64");	0x00000000	data.s
-DAT_001b2d68	0x1b2d68	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d68 asm("DAT_001b2d68");	0x00010203	data.s
-DAT_001b2d6c	0x1b2d6c	__TEXT,__const	undefined4	4	extern unsigned int DAT_001b2d6c asm("DAT_001b2d6c");	0x00010101	data.s
+laneWord00000000_001b2d64	0x1b2d64	__TEXT,__const	undefined4	4	extern unsigned int laneWord00000000_001b2d64 asm("laneWord00000000_001b2d64");	0x00000000	data.s
+laneWord00010203_001b2d68	0x1b2d68	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010203_001b2d68 asm("laneWord00010203_001b2d68");	0x00010203	data.s
+laneWord00010101_001b2d6c	0x1b2d6c	__TEXT,__const	undefined4	4	extern unsigned int laneWord00010101_001b2d6c asm("laneWord00010101_001b2d6c");	0x00010101	data.s
 laneWord01010100_001b2d70	0x1b2d70	__TEXT,__const	undefined4	4	extern unsigned int laneWord01010100_001b2d70 asm("laneWord01010100_001b2d70");	0x01010100	data.s
-DAT_001b2eb8	0x1b2eb8	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b2eb8 asm("DAT_001b2eb8");	0x000007a0	data.s
-DAT_001b40f0	0x1b40f0	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b40f0 asm("DAT_001b40f0");	0x00000000	data.s
-DAT_001b81b8	0x1b81b8	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b81b8 asm("DAT_001b81b8");	0x00000014	data.s
-DAT_001b9d04	0x1b9d04	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b9d04 asm("DAT_001b9d04");	0x00040000	data.s
-UNK_001ba4e4	0x1ba4e4	__TEXT,__eh_frame	-	-	extern unsigned char UNK_001ba4e4 asm("UNK_001ba4e4");	0x000024e0	unused (referenced only by dropped toolchain code)
+constPoolAnchor_001b2eb8	0x1b2eb8	__TEXT,__eh_frame	-	-	extern unsigned char constPoolAnchor_001b2eb8 asm("constPoolAnchor_001b2eb8");	0x000007a0	data.s
+constPoolAnchor_001b40f0	0x1b40f0	__TEXT,__eh_frame	-	-	extern unsigned char constPoolAnchor_001b40f0 asm("constPoolAnchor_001b40f0");	0x00000000	data.s
+constPoolAnchor_001b81b8	0x1b81b8	__TEXT,__eh_frame	-	-	extern unsigned char constPoolAnchor_001b81b8 asm("constPoolAnchor_001b81b8");	0x00000014	data.s
+extvsOpEmitFuncTableBase_001b9d04	0x1b9d04	__TEXT,__eh_frame	-	-	extern unsigned char extvsOpEmitFuncTableBase_001b9d04 asm("extvsOpEmitFuncTableBase_001b9d04");	0x00040000	data.s
+ehFrameLabel_unreferencedByCorpus_001ba4e4	0x1ba4e4	__TEXT,__eh_frame	-	-	extern unsigned char ehFrameLabel_unreferencedByCorpus_001ba4e4 asm("ehFrameLabel_unreferencedByCorpus_001ba4e4");	0x000024e0	unused (referenced only by dropped toolchain code)
 vertexAttribBitTable_001d91f0	0x1d91f0	__DATA,__data	-	-	extern unsigned char vertexAttribBitTable_001d91f0 asm("vertexAttribBitTable_001d91f0");	0x00010000	data.s
 vertexTypeSwizzleFieldWTable_001d92a8	0x1d92a8	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleFieldWTable_001d92a8 asm("vertexTypeSwizzleFieldWTable_001d92a8");	0x00000005	data.s
 vertexTypeSwizzleFieldZTable_001d9358	0x1d9358	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleFieldZTable_001d9358 asm("vertexTypeSwizzleFieldZTable_001d9358");	0x00000004	data.s
@@ -614,11 +614,11 @@ vertexTypeSwizzleSelectWTable_001d98b0	0x1d98b0	__DATA,__data	-	-	extern unsigne
 vertexTypeSwizzleSelectZTable_001d9960	0x1d9960	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleSelectZTable_001d9960 asm("vertexTypeSwizzleSelectZTable_001d9960");	0x00000004	data.s
 vertexTypeSwizzleSelectYTable_001d9a10	0x1d9a10	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleSelectYTable_001d9a10 asm("vertexTypeSwizzleSelectYTable_001d9a10");	0x00000004	data.s
 vertexTypeSwizzleSelectXTable_001d9ac0	0x1d9ac0	__DATA,__data	-	-	extern unsigned char vertexTypeSwizzleSelectXTable_001d9ac0 asm("vertexTypeSwizzleSelectXTable_001d9ac0");	0x00000003	data.s
-DAT_001d9b70	0x1d9b70	__DATA,__data	-	-	extern unsigned char DAT_001d9b70 asm("DAT_001d9b70");	0x00000001	data.s
-DAT_001d9b9c	0x1d9b9c	__DATA,__data	-	-	extern unsigned char DAT_001d9b9c asm("DAT_001d9b9c");	0x00000004	data.s
-DAT_001d9c4c	0x1d9c4c	__DATA,__data	-	-	extern unsigned char DAT_001d9c4c asm("DAT_001d9c4c");	0x00000001	data.s
-DAT_001d9cfc	0x1d9cfc	__DATA,__data	-	-	extern unsigned char DAT_001d9cfc asm("DAT_001d9cfc");	0x00000000	data.s
-DAT_001d9dac	0x1d9dac	__DATA,__data	-	-	extern unsigned char DAT_001d9dac asm("DAT_001d9dac");	0x00000001	data.s
+vertexTypeSignedTableCopy_001d9b70	0x1d9b70	__DATA,__data	-	-	extern unsigned char vertexTypeSignedTableCopy_001d9b70 asm("vertexTypeSignedTableCopy_001d9b70");	0x00000001	data.s
+vertexTypeFlagsTableCopy_001d9b9c	0x1d9b9c	__DATA,__data	-	-	extern unsigned char vertexTypeFlagsTableCopy_001d9b9c asm("vertexTypeFlagsTableCopy_001d9b9c");	0x00000004	data.s
+vertexTypeDwordCountTableCopy_001d9c4c	0x1d9c4c	__DATA,__data	-	-	extern unsigned char vertexTypeDwordCountTableCopy_001d9c4c asm("vertexTypeDwordCountTableCopy_001d9c4c");	0x00000001	data.s
+vertexTypeComponentCountMinusOneTable_001d9cfc	0x1d9cfc	__DATA,__data	-	-	extern unsigned char vertexTypeComponentCountMinusOneTable_001d9cfc asm("vertexTypeComponentCountMinusOneTable_001d9cfc");	0x00000000	data.s
+vertexTypeStreamFormatTable_001d9dac	0x1d9dac	__DATA,__data	-	-	extern unsigned char vertexTypeStreamFormatTable_001d9dac asm("vertexTypeStreamFormatTable_001d9dac");	0x00000001	data.s
 vertexAttribBitTableCopy_001d9dd8	0x1d9dd8	__DATA,__data	-	-	extern unsigned char vertexAttribBitTableCopy_001d9dd8 asm("vertexAttribBitTableCopy_001d9dd8");	0x00010000	data.s
 vertexAttrControlToHwAttrTableCopy_001d9eb0	0x1d9eb0	__DATA,__data	-	-	extern unsigned char vertexAttrControlToHwAttrTableCopy_001d9eb0 asm("vertexAttrControlToHwAttrTableCopy_001d9eb0");	0x00000030	data.s
 textureFormatTable_001d9f34	0x1d9f34	__DATA,__data	-	-	extern unsigned char textureFormatTable_001d9f34 asm("textureFormatTable_001d9f34");	0x00000000	data.s
@@ -635,7 +635,7 @@ textureFormatEntry6_001da00c	0x1da00c	__DATA,__data	-	-	extern unsigned char tex
 textureFormatEntry8_001da054	0x1da054	__DATA,__data	-	-	extern unsigned char textureFormatEntry8_001da054 asm("textureFormatEntry8_001da054");	0x08000000	data.s
 textureFormatEntry18_001da1bc	0x1da1bc	__DATA,__data	-	-	extern unsigned char textureFormatEntry18_001da1bc asm("textureFormatEntry18_001da1bc");	0x12000000	data.s
 textureFormatEntry30_001da36c	0x1da36c	__DATA,__data	-	-	extern unsigned char textureFormatEntry30_001da36c asm("textureFormatEntry30_001da36c");	0x1e000000	data.s
-DAT_001da630	0x1da630	__DATA,__data	-	-	extern unsigned char DAT_001da630 asm("DAT_001da630");	0x000087d5	data.s
+extSwizzleTokenTable_001da630	0x1da630	__DATA,__data	-	-	extern unsigned char extSwizzleTokenTable_001da630 asm("extSwizzleTokenTable_001da630");	0x000087d5	data.s
 fpilSwizzleComponentTable_001dac00	0x1dac00	__DATA,__data	-	-	extern unsigned char fpilSwizzleComponentTable_001dac00[] asm("fpilSwizzleComponentTable_001dac00");	0x00142435	data.s
 fpilSourceInfoTable_001dac08	0x1dac08	__DATA,__data	-	-	extern unsigned char fpilSourceInfoTable_001dac08 asm("fpilSourceInfoTable_001dac08");	0x00000000	data.s
 fragmentOpcodeInfoTable_001dac34	0x1dac34	__DATA,__data	-	-	extern unsigned char fragmentOpcodeInfoTable_001dac34 asm("fragmentOpcodeInfoTable_001dac34");	0x006e0000	data.s
@@ -650,11 +650,11 @@ perUnitStateDefaultAt239C_001db2e4	0x1db2e4	__DATA,__data	-	-	extern unsigned ch
 perUnitStateDefaultAt2390_001db2e8	0x1db2e8	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2390_001db2e8 asm("perUnitStateDefaultAt2390_001db2e8");	0x00000000	data.s
 ptrTo_fragmentTranslateSimpleOp_001db2ec	0x1db2ec	__DATA,__data	pointer	4	extern unsigned char *ptrTo_fragmentTranslateSimpleOp_001db2ec[] asm("ptrTo_fragmentTranslateSimpleOp_001db2ec");	pointer -> fragmentTranslateSimpleOp	data.s
 perUnitStateDefaultAt23A0_001db2f0	0x1db2f0	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt23A0_001db2f0 asm("perUnitStateDefaultAt23A0_001db2f0");	0x20000000	data.s
-DAT_001db2f4	0x1db2f4	__DATA,__data	-	-	extern unsigned char DAT_001db2f4 asm("DAT_001db2f4");	0x6c6e0000	data.s
-DAT_001db344	0x1db344	__DATA,__data	undefined4	4	extern unsigned int DAT_001db344 asm("DAT_001db344");	0x00000008	data.s
+perUnitStateDefaultAt23A4_001db2f4	0x1db2f4	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt23A4_001db2f4 asm("perUnitStateDefaultAt23A4_001db2f4");	0x6c6e0000	data.s
+fragmentOpcodeInfoFlagMask_001db344	0x1db344	__DATA,__data	undefined4	4	extern unsigned int fragmentOpcodeInfoFlagMask_001db344 asm("fragmentOpcodeInfoFlagMask_001db344");	0x00000008	data.s
 stencilFuncBitsTable_001db348	0x1db348	__DATA,__data	-	-	extern unsigned char stencilFuncBitsTable_001db348 asm("stencilFuncBitsTable_001db348");	0x00000000	data.s
 depthFuncBitsTable_001db368	0x1db368	__DATA,__data	-	-	extern unsigned char depthFuncBitsTable_001db368 asm("depthFuncBitsTable_001db368");	0x00000000	data.s
-DAT_001db440	0x1db440	__DATA,__data	-	-	extern unsigned char DAT_001db440 asm("DAT_001db440");	0x00000000	data.s
+constPoolAnchor_001db440	0x1db440	__DATA,__data	-	-	extern unsigned char constPoolAnchor_001db440 asm("constPoolAnchor_001db440");	0x00000000	data.s
 perUnitStateDefaultAt2374_001db5b8	0x1db5b8	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2374_001db5b8 asm("perUnitStateDefaultAt2374_001db5b8");	0x00000000	data.s
 perUnitStateDefaultAt2378_001db5bc	0x1db5bc	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt2378_001db5bc asm("perUnitStateDefaultAt2378_001db5bc");	0x00000000	data.s
 perUnitStateDefaultAt237C_001db5c0	0x1db5c0	__DATA,__data	-	-	extern unsigned char perUnitStateDefaultAt237C_001db5c0 asm("perUnitStateDefaultAt237C_001db5c0");	0x00000000	data.s
@@ -665,12 +665,12 @@ stateDefaultAt2368_001db930	0x1db930	__DATA,__data	undefined4	4	extern unsigned 
 stateDefaultAt236C_001db934	0x1db934	__DATA,__data	undefined4	4	extern unsigned int stateDefaultAt236C_001db934 asm("stateDefaultAt236C_001db934");	0x00000000	data.s
 stateDefaultAt2370_001db938	0x1db938	__DATA,__data	undefined4	4	extern unsigned int stateDefaultAt2370_001db938 asm("stateDefaultAt2370_001db938");	0x00000000	data.s
 textureUnitFormatArgTable_001db98c	0x1db98c	__DATA,__data	-	-	extern unsigned char textureUnitFormatArgTable_001db98c asm("textureUnitFormatArgTable_001db98c");	0x00000000	data.s
-DAT_001db998	0x1db998	__DATA,__data	-	-	extern unsigned char DAT_001db998 asm("DAT_001db998");	0x000087d5	data.s
+extSwizzleTokensXYZW_001db998	0x1db998	__DATA,__data	-	-	extern unsigned char extSwizzleTokensXYZW_001db998 asm("extSwizzleTokensXYZW_001db998");	0x000087d5	data.s
 onesWords4_001db9a8	0x1db9a8	__DATA,__data	-	-	extern unsigned char onesWords4_001db9a8 asm("onesWords4_001db9a8");	0x00000001	data.s
 ptrTo_extvsEmitIndex_001db9b8	0x1db9b8	__DATA,__data	undefined *	4	extern unsigned char *ptrTo_extvsEmitIndex_001db9b8[] asm("ptrTo_extvsEmitIndex_001db9b8");	pointer -> extvsEmitIndex	data.s
 ptrTo_extvsEmitMov_001dba14	0x1dba14	__DATA,__data	undefined *	4	extern int (*ptrTo_extvsEmitMov_001dba14)() asm("ptrTo_extvsEmitMov_001dba14");	pointer -> extvsEmitMov	data.s
 hwInputCodeTable_001dba44	0x1dba44	__DATA,__data	undefined4	4	extern unsigned int hwInputCodeTable_001dba44 asm("hwInputCodeTable_001dba44");	0x000308c8	data.s
-DAT_001dba98	0x1dba98	__DATA,__data	undefined4	4	extern unsigned int DAT_001dba98 asm("DAT_001dba98");	0x00000004	data.s
+hwInputCodeTableSlot23_001dba98	0x1dba98	__DATA,__data	undefined4	4	extern unsigned int hwInputCodeTableSlot23_001dba98 asm("hwInputCodeTableSlot23_001dba98");	0x00000004	data.s
 streamFlagTable_001dbab8	0x1dbab8	__DATA,__data	undefined4	4	extern unsigned int streamFlagTable_001dbab8 asm("streamFlagTable_001dbab8");	0x00000002	data.s
 drawSetupPackedWord_001dbca8	0x1dbca8	__DATA,__data	undefined4	4	extern unsigned int drawSetupPackedWord_001dbca8 asm("drawSetupPackedWord_001dbca8");	0x000000ff	data.s
 drawSetupPacketWord14_001dbcac	0x1dbcac	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord14_001dbcac asm("drawSetupPacketWord14_001dbcac");	0x0ff3f8fe	data.s
@@ -682,7 +682,7 @@ drawSetupPacketWord9_001dbcc0	0x1dbcc0	__DATA,__data	undefined4	4	extern unsigne
 drawSetupPacketWord10_001dbcc4	0x1dbcc4	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord10_001dbcc4 asm("drawSetupPacketWord10_001dbcc4");	0x00d10021	data.s
 drawSetupPacketWord11_001dbcc8	0x1dbcc8	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketWord11_001dbcc8 asm("drawSetupPacketWord11_001dbcc8");	0x016da021	data.s
 drawSetupPacketRegWord_001dbccc	0x1dbccc	__DATA,__data	undefined4	4	extern unsigned int drawSetupPacketRegWord_001dbccc asm("drawSetupPacketRegWord_001dbccc");	0x016da021	data.s
-DAT_001dbcd0	0x1dbcd0	__DATA,__data	undefined4	4	extern unsigned int DAT_001dbcd0 asm("DAT_001dbcd0");	0x00000082	data.s
+arbfpKeywordTableCount_001dbcd0	0x1dbcd0	__DATA,__data	undefined4	4	extern unsigned int arbfpKeywordTableCount_001dbcd0 asm("arbfpKeywordTableCount_001dbcd0");	0x00000082	data.s
 swizzleWordsWWWW_001dbcd4	0x1dbcd4	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsWWWW_001dbcd4 asm("swizzleWordsWWWW_001dbcd4");	0x00000003	data.s
 swizzleWordsWWWW_001dbcd4_lane1_001dbcd8	0x1dbcd8	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsWWWW_001dbcd4_lane1_001dbcd8 asm("swizzleWordsWWWW_001dbcd4_lane1_001dbcd8");	0x00000003	data.s
 swizzleWordsWWWW_001dbcd4_lane2_001dbcdc	0x1dbcdc	__DATA,__data	undefined4	4	extern unsigned int swizzleWordsWWWW_001dbcd4_lane2_001dbcdc asm("swizzleWordsWWWW_001dbcd4_lane2_001dbcdc");	0x00000003	data.s
@@ -740,46 +740,46 @@ swizzleWords5555_001dbdb4	0x1dbdb4	__DATA,__data	undefined4	4	extern unsigned in
 swizzleWords5555_001dbdb4_lane1_001dbdb8	0x1dbdb8	__DATA,__data	undefined4	4	extern unsigned int swizzleWords5555_001dbdb4_lane1_001dbdb8 asm("swizzleWords5555_001dbdb4_lane1_001dbdb8");	0x00000005	data.s
 swizzleWords5555_001dbdb4_lane2_001dbdbc	0x1dbdbc	__DATA,__data	undefined4	4	extern unsigned int swizzleWords5555_001dbdb4_lane2_001dbdbc asm("swizzleWords5555_001dbdb4_lane2_001dbdbc");	0x00000005	data.s
 swizzleWords5555_001dbdb4_lane3_001dbdc0	0x1dbdc0	__DATA,__data	undefined4	4	extern unsigned int swizzleWords5555_001dbdb4_lane3_001dbdc0 asm("swizzleWords5555_001dbdb4_lane3_001dbdc0");	0x00000005	data.s
-PTR_DAT_001dbdd4	0x1dbdd4	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001dbdd4[] asm("PTR_DAT_001dbdd4");	pointer -> LD_1dbde4	data.s
-DAT_001dbdfc	0x1dbdfc	__DATA,__data	-	-	extern unsigned char DAT_001dbdfc asm("DAT_001dbdfc");	0x00000001	data.s
-PTR_DAT_001dbe3c	0x1dbe3c	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001dbe3c[] asm("PTR_DAT_001dbe3c");	pointer -> LD_1dbe64	data.s
-PTR_DAT_001dbe84	0x1dbe84	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001dbe84[] asm("PTR_DAT_001dbe84");	pointer -> LD_1dbe98	data.s
+ffvpFixedSourceSelectTableByProgramMode_001dbdd4	0x1dbdd4	__DATA,__data	pointer	4	extern unsigned char *ffvpFixedSourceSelectTableByProgramMode_001dbdd4[] asm("ffvpFixedSourceSelectTableByProgramMode_001dbdd4");	pointer -> LD_1dbde4	data.s
+onehotMaskWords4x4_001dbdfc	0x1dbdfc	__DATA,__data	-	-	extern unsigned char onehotMaskWords4x4_001dbdfc asm("onehotMaskWords4x4_001dbdfc");	0x00000001	data.s
+ffvpDestFileTableByProgramMode_001dbe3c	0x1dbe3c	__DATA,__data	pointer	4	extern unsigned char *ffvpDestFileTableByProgramMode_001dbe3c[] asm("ffvpDestFileTableByProgramMode_001dbe3c");	pointer -> LD_1dbe64	data.s
+ffvpSourceFileTableByProgramMode_001dbe84	0x1dbe84	__DATA,__data	pointer	4	extern unsigned char *ffvpSourceFileTableByProgramMode_001dbe84[] asm("ffvpSourceFileTableByProgramMode_001dbe84");	pointer -> LD_1dbe98	data.s
 ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4	0x1dbea4	__DATA,__data	-	-	extern unsigned char ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4 asm("ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4");	0x00000020	data.s
 ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac	0x1dbeac	__DATA,__data	-	-	extern unsigned char ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac asm("ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac");	0x00000100	data.s
-DAT_001dbec4	0x1dbec4	__DATA,__data	-	-	extern unsigned char DAT_001dbec4 asm("DAT_001dbec4");	0x00000000	data.s
+swizzleWordsX444_001dbec4	0x1dbec4	__DATA,__data	-	-	extern unsigned char swizzleWordsX444_001dbec4 asm("swizzleWordsX444_001dbec4");	0x00000000	data.s
 colorMaterialLookupTable_001dbed4	0x1dbed4	__DATA,__data	-	-	extern unsigned char colorMaterialLookupTable_001dbed4 asm("colorMaterialLookupTable_001dbed4");	0x99998888	data.s
 unitBiasFieldBitsTable_001dbf2c	0x1dbf2c	__DATA,__data	-	-	extern unsigned char unitBiasFieldBitsTable_001dbf2c asm("unitBiasFieldBitsTable_001dbf2c");	0x00000000	data.s
 texCombinerSlotCodeTable_001dbf70	0x1dbf70	__DATA,__data	-	-	extern unsigned char texCombinerSlotCodeTable_001dbf70 asm("texCombinerSlotCodeTable_001dbf70");	0x00000001	data.s
-PTR_s_IF_b_001dc2cc	0x1dc2cc	__DATA,__data	pointer	4	extern unsigned char *PTR_s_IF_b_001dc2cc[] asm("PTR_s_IF_b_001dc2cc");	pointer -> LD_1a6a00	data.s
-PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0	0x1dc2d0	__DATA,__data	pointer	4	extern unsigned char *PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0 asm("PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0");	pointer -> LD_1a6a0c	data.s
-PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8	0x1dc2d8	__DATA,__data	undefined *	4	extern unsigned char PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8[] asm("PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8");	pointer -> LD_1a6a38	data.s
-PTR_s__position_001dc3f4	0x1dc3f4	__DATA,__data	undefined *	4	extern unsigned char *PTR_s__position_001dc3f4[] asm("PTR_s__position_001dc3f4");	pointer -> LD_1a7d8c	data.s
-PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444	0x1dc444	__DATA,__data	pointer	4	extern unsigned char *PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444 asm("PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444");	pointer -> LD_1a8d5c	data.s
+psnControlFlowOpNameTable_001dc2cc	0x1dc2cc	__DATA,__data	pointer	4	extern unsigned char *psnControlFlowOpNameTable_001dc2cc[] asm("psnControlFlowOpNameTable_001dc2cc");	pointer -> LD_1a6a00	data.s
+psnControlFlowOpNameTable_keyText0_001dc2d0	0x1dc2d0	__DATA,__data	pointer	4	extern unsigned char *psnControlFlowOpNameTable_keyText0_001dc2d0 asm("psnControlFlowOpNameTable_keyText0_001dc2d0");	pointer -> LD_1a6a0c	data.s
+psnControlFlowOpNameTable_keyText1_001dc2d8	0x1dc2d8	__DATA,__data	undefined *	4	extern unsigned char psnControlFlowOpNameTable_keyText1_001dc2d8[] asm("psnControlFlowOpNameTable_keyText1_001dc2d8");	pointer -> LD_1a6a38	data.s
+ildisOutputSemanticNameTable_001dc3f4	0x1dc3f4	__DATA,__data	undefined *	4	extern unsigned char *ildisOutputSemanticNameTable_001dc3f4[] asm("ildisOutputSemanticNameTable_001dc3f4");	pointer -> LD_1a7d8c	data.s
+compilerOptionNameTable_001dc444	0x1dc444	__DATA,__data	pointer	4	extern unsigned char *compilerOptionNameTable_001dc444 asm("compilerOptionNameTable_001dc444");	pointer -> LD_1a8d5c	data.s
 irClassMaskTable_001dc58c	0x1dc58c	__DATA,__data	undefined4	4	extern unsigned char irClassMaskTable_001dc58c[] asm("irClassMaskTable_001dc58c");	0x0000000f	data.s
-UNK_001dc660	0x1dc660	__DATA,__data	undefined4	4	extern unsigned int UNK_001dc660 asm("UNK_001dc660");	0x0000008a	data.s
-UNK_001dc66c	0x1dc66c	__DATA,__data	undefined4	4	extern unsigned int UNK_001dc66c asm("UNK_001dc66c");	0x00000089	data.s
-PTR_DAT_001dc75c	0x1dc75c	__DATA,__data	undefined *	4	extern unsigned char PTR_DAT_001dc75c[] asm("PTR_DAT_001dc75c");	pointer -> LD_1ae874	data.s
-PTR_DAT_001dc76c	0x1dc76c	__DATA,__data	undefined *	4	extern unsigned char *PTR_DAT_001dc76c[] asm("PTR_DAT_001dc76c");	pointer -> LD_1ad470	data.s
-PTR_DAT_001dc77c	0x1dc77c	__DATA,__data	undefined *	4	extern unsigned char *PTR_DAT_001dc77c[] asm("PTR_DAT_001dc77c");	pointer -> LD_1ad020	data.s
-PTR_DAT_001dc78c	0x1dc78c	__DATA,__data	undefined *	4	extern unsigned char *PTR_DAT_001dc78c[] asm("PTR_DAT_001dc78c");	pointer -> LD_1ad1a0	data.s
+ilSampleOpcodeRecords_rec0_opcode_001dc660	0x1dc660	__DATA,__data	undefined4	4	extern unsigned int ilSampleOpcodeRecords_rec0_opcode_001dc660 asm("ilSampleOpcodeRecords_rec0_opcode_001dc660");	0x0000008a	data.s
+ilSampleOpcodeRecords_rec1_opcode_001dc66c	0x1dc66c	__DATA,__data	undefined4	4	extern unsigned int ilSampleOpcodeRecords_rec1_opcode_001dc66c asm("ilSampleOpcodeRecords_rec1_opcode_001dc66c");	0x00000089	data.s
+templateTablePtrsCase4a_001dc75c	0x1dc75c	__DATA,__data	undefined *	4	extern unsigned char templateTablePtrsCase4a_001dc75c[] asm("templateTablePtrsCase4a_001dc75c");	pointer -> LD_1ae874	data.s
+templateTablePtrsToken16_001dc76c	0x1dc76c	__DATA,__data	undefined *	4	extern unsigned char *templateTablePtrsToken16_001dc76c[] asm("templateTablePtrsToken16_001dc76c");	pointer -> LD_1ad470	data.s
+templateTablePtrsToken15_001dc77c	0x1dc77c	__DATA,__data	undefined *	4	extern unsigned char *templateTablePtrsToken15_001dc77c[] asm("templateTablePtrsToken15_001dc77c");	pointer -> LD_1ad020	data.s
+templateTablePtrsToken14_001dc78c	0x1dc78c	__DATA,__data	undefined *	4	extern unsigned char *templateTablePtrsToken14_001dc78c[] asm("templateTablePtrsToken14_001dc78c");	pointer -> LD_1ad1a0	data.s
 KhanPsOpcodeTraits_001dca64	0x1dca64	__DATA,__data	-	-	extern unsigned char KhanPsOpcodeTraits_001dca64 asm("KhanPsOpcodeTraits_001dca64");	0x00000008	data.s
 KhanVsOpcodeTraits_001df1fc	0x1df1fc	__DATA,__data	-	-	extern unsigned char KhanVsOpcodeTraits_001df1fc asm("KhanVsOpcodeTraits_001df1fc");	0x00000008	data.s
 s_MUL_V_001df634	0x1df634	__DATA,__data	string	6	extern char s_MUL_V_001df634[] asm("s_MUL_V_001df634");	0x4d554c5f	data.s
 vsHardwareTable_001e1994	0x1e1994	__DATA,__data	-	-	extern unsigned char vsHardwareTable_001e1994 asm("vsHardwareTable_001e1994");	0x00000000	data.s
-DAT_001e1c1c	0x1e1c1c	__DATA,__data	undefined4	4	extern unsigned int DAT_001e1c1c asm("DAT_001e1c1c");	0x00000000	data.s
-DAT_001e1c2c	0x1e1c2c	__DATA,__data	undefined4	4	extern unsigned int DAT_001e1c2c asm("DAT_001e1c2c");	0x00000005	data.s
-DAT_001e1c30	0x1e1c30	__DATA,__data	undefined4	4	extern unsigned int DAT_001e1c30 asm("DAT_001e1c30");	0x00000000	data.s
-PTR_DAT_001e1c34	0x1e1c34	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001e1c34 asm("PTR_DAT_001e1c34");	pointer -> LD_1adc44	data.s
-DAT_001e25f4	0x1e25f4	__DATA,__data	undefined4	4	extern unsigned int DAT_001e25f4 asm("DAT_001e25f4");	0x00000000	data.s
-DAT_001e2604	0x1e2604	__DATA,__data	undefined4	4	extern unsigned int DAT_001e2604 asm("DAT_001e2604");	0x00000005	data.s
-DAT_001e2608	0x1e2608	__DATA,__data	undefined4	4	extern unsigned int DAT_001e2608 asm("DAT_001e2608");	0x00000000	data.s
-PTR_DAT_001e260c	0x1e260c	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001e260c asm("PTR_DAT_001e260c");	pointer -> LD_1adf48	data.s
-PTR_DAT_001e2630	0x1e2630	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001e2630 asm("PTR_DAT_001e2630");	pointer -> LD_1af548	data.s
-PTR_DAT_001e269c	0x1e269c	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001e269c asm("PTR_DAT_001e269c");	pointer -> LD_1ab8ac	data.s
-PTR_DAT_001e27bc	0x1e27bc	__DATA,__data	pointer	4	extern unsigned char *PTR_DAT_001e27bc asm("PTR_DAT_001e27bc");	pointer -> LD_1af3c8	data.s
-DAT_001e3520	0x1e3520	__DATA,__data	-	-	extern unsigned char DAT_001e3520 asm("DAT_001e3520");	0x000000c3	data.s
+vsHardwareTable_field0288_001e1c1c	0x1e1c1c	__DATA,__data	undefined4	4	extern unsigned int vsHardwareTable_field0288_001e1c1c asm("vsHardwareTable_field0288_001e1c1c");	0x00000000	data.s
+vsHardwareTable_field0298_001e1c2c	0x1e1c2c	__DATA,__data	undefined4	4	extern unsigned int vsHardwareTable_field0298_001e1c2c asm("vsHardwareTable_field0298_001e1c2c");	0x00000005	data.s
+vsHardwareTable_field029C_001e1c30	0x1e1c30	__DATA,__data	undefined4	4	extern unsigned int vsHardwareTable_field029C_001e1c30 asm("vsHardwareTable_field029C_001e1c30");	0x00000000	data.s
+vsHardwareTable_field02A0_001e1c34	0x1e1c34	__DATA,__data	pointer	4	extern unsigned char *vsHardwareTable_field02A0_001e1c34 asm("vsHardwareTable_field02A0_001e1c34");	pointer -> LD_1adc44	data.s
+vsHardwareTable_field0C60_001e25f4	0x1e25f4	__DATA,__data	undefined4	4	extern unsigned int vsHardwareTable_field0C60_001e25f4 asm("vsHardwareTable_field0C60_001e25f4");	0x00000000	data.s
+vsHardwareTable_field0C70_001e2604	0x1e2604	__DATA,__data	undefined4	4	extern unsigned int vsHardwareTable_field0C70_001e2604 asm("vsHardwareTable_field0C70_001e2604");	0x00000005	data.s
+vsHardwareTable_field0C74_001e2608	0x1e2608	__DATA,__data	undefined4	4	extern unsigned int vsHardwareTable_field0C74_001e2608 asm("vsHardwareTable_field0C74_001e2608");	0x00000000	data.s
+vsHardwareTable_field0C78_001e260c	0x1e260c	__DATA,__data	pointer	4	extern unsigned char *vsHardwareTable_field0C78_001e260c asm("vsHardwareTable_field0C78_001e260c");	pointer -> LD_1adf48	data.s
+vsHardwareTable_field0C9C_001e2630	0x1e2630	__DATA,__data	pointer	4	extern unsigned char *vsHardwareTable_field0C9C_001e2630 asm("vsHardwareTable_field0C9C_001e2630");	pointer -> LD_1af548	data.s
+vsHardwareTable_field0D08_001e269c	0x1e269c	__DATA,__data	pointer	4	extern unsigned char *vsHardwareTable_field0D08_001e269c asm("vsHardwareTable_field0D08_001e269c");	pointer -> LD_1ab8ac	data.s
+vsHardwareTable_field0E28_001e27bc	0x1e27bc	__DATA,__data	pointer	4	extern unsigned char *vsHardwareTable_field0E28_001e27bc asm("vsHardwareTable_field0E28_001e27bc");	pointer -> LD_1af3c8	data.s
+constPoolAnchor_001e3520	0x1e3520	__DATA,__data	-	-	extern unsigned char constPoolAnchor_001e3520 asm("constPoolAnchor_001e3520");	0x000000c3	data.s
 KhanPsHardwareTable_001e39a4	0x1e39a4	__DATA,__data	-	-	extern unsigned char KhanPsHardwareTable_001e39a4 asm("KhanPsHardwareTable_001e39a4");	0x00000000	data.s
-DAT_001e3a54	0x1e3a54	__DATA,__data	-	-	extern unsigned char DAT_001e3a54 asm("DAT_001e3a54");	0x00000004	data.s
+constPoolAnchor_001e3a54	0x1e3a54	__DATA,__data	-	-	extern unsigned char constPoolAnchor_001e3a54 asm("constPoolAnchor_001e3a54");	0x00000004	data.s
 laneRangeClassTable_001e59b4	0x1e59b4	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e59b4 asm("laneRangeClassTable_001e59b4");	0x00000000	data.s
 laneRangeClassTable_001e5a44	0x1e5a44	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e5a44 asm("laneRangeClassTable_001e5a44");	0x00000000	data.s
 laneRangeClassTable_001e5ad4	0x1e5ad4	__DATA,__data	-	-	extern unsigned char laneRangeClassTable_001e5ad4 asm("laneRangeClassTable_001e5ad4");	0x00000000	data.s
@@ -793,16 +793,16 @@ laneCompareClassTable_001e5ec4	0x1e5ec4	__DATA,__data	-	-	extern unsigned char l
 fudoPsClassTable6x6_001e5f54	0x1e5f54	__DATA,__data	-	-	extern unsigned char fudoPsClassTable6x6_001e5f54 asm("fudoPsClassTable6x6_001e5f54");	0x00000000	data.s
 foldMinClassTable_001e6014	0x1e6014	__DATA,__data	-	-	extern unsigned char foldMinClassTable_001e6014 asm("foldMinClassTable_001e6014");	0x00000000	data.s
 foldMaxClassTable_001e60a4	0x1e60a4	__DATA,__data	-	-	extern unsigned char foldMaxClassTable_001e60a4 asm("foldMaxClassTable_001e60a4");	0x00000000	data.s
-DAT_001e6134	0x1e6134	__DATA,__data	undefined4	4	extern unsigned int DAT_001e6134 asm("DAT_001e6134");	0x00000001	data.s
-DAT_001e6158	0x1e6158	__DATA,__data	undefined4	4	extern unsigned char DAT_001e6158[] asm("DAT_001e6158");	0x00000004	data.s
-DAT_001e6170	0x1e6170	__DATA,__data	-	-	extern unsigned char DAT_001e6170 asm("DAT_001e6170");	0x00000000	data.s
-DAT_001e6188	0x1e6188	__DATA,__data	-	-	extern unsigned char DAT_001e6188 asm("DAT_001e6188");	0x00000000	data.s
-DAT_001e61a0	0x1e61a0	__DATA,__data	undefined4	4	extern unsigned char DAT_001e61a0[] asm("DAT_001e61a0");	0x00000004	data.s
-DAT_001e61b8	0x1e61b8	__DATA,__data	-	-	extern unsigned char DAT_001e61b8 asm("DAT_001e61b8");	0x00000000	data.s
-DAT_001e61d0	0x1e61d0	__DATA,__data	undefined4	4	extern unsigned char DAT_001e61d0[] asm("DAT_001e61d0");	0x00000004	data.s
-DAT_001e61e8	0x1e61e8	__DATA,__data	-	-	extern unsigned char DAT_001e61e8 asm("DAT_001e61e8");	0x00000000	data.s
-DAT_001e6668	0x1e6668	__DATA,__data	-	-	extern unsigned char DAT_001e6668 asm("DAT_001e6668");	0xffffffff	data.s
-DAT_001e66cc	0x1e66cc	__DATA,__data	-	-	extern unsigned char DAT_001e66cc asm("DAT_001e66cc");	0x00000000	data.s
+liveLaneTripleTable_001e6134	0x1e6134	__DATA,__data	undefined4	4	extern unsigned int liveLaneTripleTable_001e6134 asm("liveLaneTripleTable_001e6134");	0x00000001	data.s
+rangeClassAfterClampTable_001e6158	0x1e6158	__DATA,__data	undefined4	4	extern unsigned char rangeClassAfterClampTable_001e6158[] asm("rangeClassAfterClampTable_001e6158");	0x00000004	data.s
+rangeClassNegateTable_001e6170	0x1e6170	__DATA,__data	-	-	extern unsigned char rangeClassNegateTable_001e6170 asm("rangeClassNegateTable_001e6170");	0x00000000	data.s
+rangeClassAbsTable_001e6188	0x1e6188	__DATA,__data	-	-	extern unsigned char rangeClassAbsTable_001e6188 asm("rangeClassAbsTable_001e6188");	0x00000000	data.s
+compareClassAbsTable_001e61a0	0x1e61a0	__DATA,__data	undefined4	4	extern unsigned char compareClassAbsTable_001e61a0[] asm("compareClassAbsTable_001e61a0");	0x00000004	data.s
+compareClassNegateTable_001e61b8	0x1e61b8	__DATA,__data	-	-	extern unsigned char compareClassNegateTable_001e61b8 asm("compareClassNegateTable_001e61b8");	0x00000000	data.s
+compareClassAbsTable_001e61d0	0x1e61d0	__DATA,__data	undefined4	4	extern unsigned char compareClassAbsTable_001e61d0[] asm("compareClassAbsTable_001e61d0");	0x00000004	data.s
+compareFoldResultTable_001e61e8	0x1e61e8	__DATA,__data	-	-	extern unsigned char compareFoldResultTable_001e61e8 asm("compareFoldResultTable_001e61e8");	0x00000000	data.s
+R300VMachineAssembler__transitionNextStateTable_001e6668	0x1e6668	__DATA,__data	-	-	extern unsigned char R300VMachineAssembler__transitionNextStateTable_001e6668 asm("R300VMachineAssembler__transitionNextStateTable_001e6668");	0xffffffff	data.s
+R300VMachineAssembler__transitionInstrDeltaTable_001e66cc	0x1e66cc	__DATA,__data	-	-	extern unsigned char R300VMachineAssembler__transitionInstrDeltaTable_001e66cc asm("R300VMachineAssembler__transitionInstrDeltaTable_001e66cc");	0x00000000	data.s
 FudoPsHardwareTable_001e6730	0x1e6730	__DATA,__data	-	-	extern unsigned char FudoPsHardwareTable_001e6730 asm("FudoPsHardwareTable_001e6730");	0x00000000	data.s
 dyldStubBindingHelperPtr_001e8740	0x1e8740	__DATA,__dyld	undefined4	4	extern int (*dyldStubBindingHelperPtr_001e8740)() asm("dyldStubBindingHelperPtr_001e8740");	0x8fe01000	unused (referenced only by dropped toolchain code)
 dyldFuncLookupPtr_001e8744	0x1e8744	__DATA,__dyld	undefined4	4	extern int (*dyldFuncLookupPtr_001e8744)() asm("dyldFuncLookupPtr_001e8744");	0x8fe01008	unused (referenced only by dropped toolchain code)
@@ -952,7 +952,7 @@ ptrTo_arbEmitRecord3Src_op44_001e8ad4	0x1e8ad4	__DATA,__nl_symbol_ptr	pointer	4	
 ptrTo_arbEmitIlOp4e_001e8ad8	0x1e8ad8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlOp4e_001e8ad8 asm("ptrTo_arbEmitIlOp4e_001e8ad8");	pointer -> arbEmitIlOp4e	data.s
 ptrTo_arbEmitIlSetCompare5_001e8adc	0x1e8adc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlSetCompare5_001e8adc asm("ptrTo_arbEmitIlSetCompare5_001e8adc");	pointer -> arbEmitIlSetCompare5	data.s
 ptrTo_arbfpCompileFragmentProgram_001e8ae0	0x1e8ae0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpCompileFragmentProgram_001e8ae0 asm("ptrTo_arbfpCompileFragmentProgram_001e8ae0");	pointer -> arbfpCompileFragmentProgram	data.s
-PTR_DAT_001e8ae4	0x1e8ae4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8ae4 asm("PTR_DAT_001e8ae4");	pointer -> orph_4c544+12	data.s
+ptrTo_ctxFuncTableAt1578_001e8ae4	0x1e8ae4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ctxFuncTableAt1578_001e8ae4 asm("ptrTo_ctxFuncTableAt1578_001e8ae4");	pointer -> orph_4c544+12	data.s
 ptrTo_arbfpWorkAreaSizeA_001e8ae8	0x1e8ae8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbfpWorkAreaSizeA_001e8ae8 asm("ptrTo_arbfpWorkAreaSizeA_001e8ae8");	pointer -> arbfpWorkAreaSizeA	data.s
 ptrTo_arbEmitRecord3Src_op0b_001e8aec	0x1e8aec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitRecord3Src_op0b_001e8aec asm("ptrTo_arbEmitRecord3Src_op0b_001e8aec");	pointer -> arbEmitRecord3Src_op0b	data.s
 ptrTo_arbEmitIlMad_001e8af0	0x1e8af0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_arbEmitIlMad_001e8af0 asm("ptrTo_arbEmitIlMad_001e8af0");	pointer -> arbEmitIlMad	data.s
@@ -983,36 +983,36 @@ ptrTo_BreakOrContinueBlock__vtable_001e8b54	0x1e8b54	__DATA,__nl_symbol_ptr	poin
 ptrTo_AnyBlock__vtable_001e8b58	0x1e8b58	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_AnyBlock__vtable_001e8b58 asm("ptrTo_AnyBlock__vtable_001e8b58");	pointer -> LD_1f1158	data.s
 ptrTo_ilTypeToInterpSlotTable_001e8b5c	0x1e8b5c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTypeToInterpSlotTable_001e8b5c asm("ptrTo_ilTypeToInterpSlotTable_001e8b5c");	pointer -> LD_1dc860	data.s
 ptrTo_interpolatorKindToCodeTable_001e8b60	0x1e8b60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_interpolatorKindToCodeTable_001e8b60 asm("ptrTo_interpolatorKindToCodeTable_001e8b60");	pointer -> LD_1aaa50	data.s
-PTR_DAT_001e8b64	0x1e8b64	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b64 asm("PTR_DAT_001e8b64");	pointer -> LD_1aa828	data.s
-PTR_DAT_001e8b68	0x1e8b68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b68 asm("PTR_DAT_001e8b68");	pointer -> LD_1aaafc	data.s
+ptrTo_laneSelectWordTable_001e8b64	0x1e8b64	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_laneSelectWordTable_001e8b64 asm("ptrTo_laneSelectWordTable_001e8b64");	pointer -> LD_1aa828	data.s
+ptrTo_ilTypeLookupTable_001e8b68	0x1e8b68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTypeLookupTable_001e8b68 asm("ptrTo_ilTypeLookupTable_001e8b68");	pointer -> LD_1aaafc	data.s
 ptrTo_interpSlotToLaneKindTable_001e8b6c	0x1e8b6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_interpSlotToLaneKindTable_001e8b6c asm("ptrTo_interpSlotToLaneKindTable_001e8b6c");	pointer -> LD_1aaa94	data.s
-PTR_DAT_001e8b70	0x1e8b70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b70 asm("PTR_DAT_001e8b70");	pointer -> LD_1af9b4	data.s
-PTR_DAT_001e8b74	0x1e8b74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b74 asm("PTR_DAT_001e8b74");	pointer -> LD_1ae694	data.s
-PTR_DAT_001e8b78	0x1e8b78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b78 asm("PTR_DAT_001e8b78");	pointer -> LD_1aed30	data.s
-PTR_DAT_001e8b7c	0x1e8b7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b7c asm("PTR_DAT_001e8b7c");	pointer -> LD_1ae168	data.s
-PTR_DAT_001e8b80	0x1e8b80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b80 asm("PTR_DAT_001e8b80");	pointer -> LD_1ae748	data.s
-PTR_DAT_001e8b84	0x1e8b84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b84 asm("PTR_DAT_001e8b84");	pointer -> LD_1aab48	data.s
+ptrTo_defaultOperandData_001e8b70	0x1e8b70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_defaultOperandData_001e8b70 asm("ptrTo_defaultOperandData_001e8b70");	pointer -> LD_1af9b4	data.s
+ptrTo_ilTemplateCase21Kind5_001e8b74	0x1e8b74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase21Kind5_001e8b74 asm("ptrTo_ilTemplateCase21Kind5_001e8b74");	pointer -> LD_1ae694	data.s
+ptrTo_ilTemplateCase24_001e8b78	0x1e8b78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase24_001e8b78 asm("ptrTo_ilTemplateCase24_001e8b78");	pointer -> LD_1aed30	data.s
+ptrTo_ilTemplateCase23Kind1_001e8b7c	0x1e8b7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase23Kind1_001e8b7c asm("ptrTo_ilTemplateCase23Kind1_001e8b7c");	pointer -> LD_1ae168	data.s
+ptrTo_ilTemplateCase21Kind0_001e8b80	0x1e8b80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase21Kind0_001e8b80 asm("ptrTo_ilTemplateCase21Kind0_001e8b80");	pointer -> LD_1ae748	data.s
+ptrTo_compareKindTable_001e8b84	0x1e8b84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_compareKindTable_001e8b84 asm("ptrTo_compareKindTable_001e8b84");	pointer -> LD_1aab48	data.s
 ptrTo_opcodeOperandSlotInfoTable_001e8b88	0x1e8b88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_opcodeOperandSlotInfoTable_001e8b88 asm("ptrTo_opcodeOperandSlotInfoTable_001e8b88");	pointer -> LD_1af974	data.s
 ptrTo_laneWordSplatTable_001aa818_001e8b8c	0x1e8b8c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_laneWordSplatTable_001aa818_001e8b8c asm("ptrTo_laneWordSplatTable_001aa818_001e8b8c");	pointer -> LD_1aa818	data.s
-PTR_DAT_001e8b90	0x1e8b90	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b90 asm("PTR_DAT_001e8b90");	pointer -> LD_1ae120	data.s
-PTR_DAT_001e8b94	0x1e8b94	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b94 asm("PTR_DAT_001e8b94");	pointer -> LD_1ae6b8	data.s
-PTR_DAT_001e8b98	0x1e8b98	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b98 asm("PTR_DAT_001e8b98");	pointer -> LD_1abc28	data.s
-PTR_DAT_001e8b9c	0x1e8b9c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b9c asm("PTR_DAT_001e8b9c");	pointer -> LD_1abca4	data.s
-PTR_DAT_001e8ba0	0x1e8ba0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8ba0 asm("PTR_DAT_001e8ba0");	pointer -> LD_1ae0d8	data.s
-PTR_DAT_001e8ba4	0x1e8ba4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8ba4 asm("PTR_DAT_001e8ba4");	pointer -> LD_1ae144	data.s
-PTR_DAT_001e8ba8	0x1e8ba8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8ba8 asm("PTR_DAT_001e8ba8");	pointer -> LD_1ae700	data.s
-PTR_DAT_001e8bac	0x1e8bac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bac asm("PTR_DAT_001e8bac");	pointer -> LD_1ae724	data.s
-PTR_DAT_001e8bb0	0x1e8bb0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bb0 asm("PTR_DAT_001e8bb0");	pointer -> LD_1ac1fc	data.s
-PTR_DAT_001e8bb4	0x1e8bb4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bb4 asm("PTR_DAT_001e8bb4");	pointer -> LD_1aed6c	data.s
-PTR_DAT_001e8bb8	0x1e8bb8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bb8 asm("PTR_DAT_001e8bb8");	pointer -> LD_1aab70	data.s
-PTR_DAT_001e8bbc	0x1e8bbc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bbc asm("PTR_DAT_001e8bbc");	pointer -> LD_1aed48	data.s
-PTR_DAT_001e8bc0	0x1e8bc0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bc0 asm("PTR_DAT_001e8bc0");	pointer -> LD_1ae190	data.s
-PTR_DAT_001e8bc4	0x1e8bc4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bc4 asm("PTR_DAT_001e8bc4");	pointer -> LD_1ae0fc	data.s
-PTR_DAT_001e8bc8	0x1e8bc8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bc8 asm("PTR_DAT_001e8bc8");	pointer -> LD_1aab60	data.s
-PTR_DAT_001e8bcc	0x1e8bcc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bcc asm("PTR_DAT_001e8bcc");	pointer -> LD_1ae6dc	data.s
-PTR_DAT_001e8bd0	0x1e8bd0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bd0 asm("PTR_DAT_001e8bd0");	pointer -> LD_1e9b58	data.s
-PTR_DAT_001e8bd4	0x1e8bd4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bd4 asm("PTR_DAT_001e8bd4");	pointer -> LD_1aec88	data.s
-PTR_DAT_001e8bd8	0x1e8bd8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8bd8 asm("PTR_DAT_001e8bd8");	pointer -> LD_1ac2fc	data.s
+ptrTo_ilTemplateCase23Kind3_001e8b90	0x1e8b90	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase23Kind3_001e8b90 asm("ptrTo_ilTemplateCase23Kind3_001e8b90");	pointer -> LD_1ae120	data.s
+ptrTo_ilTemplateCase21Kind4_001e8b94	0x1e8b94	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase21Kind4_001e8b94 asm("ptrTo_ilTemplateCase21Kind4_001e8b94");	pointer -> LD_1ae6b8	data.s
+ptrTo_ilTemplateCase4bDefault_001e8b98	0x1e8b98	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase4bDefault_001e8b98 asm("ptrTo_ilTemplateCase4bDefault_001e8b98");	pointer -> LD_1abc28	data.s
+ptrTo_ilTemplateCase4bHwFlag40Clear_001e8b9c	0x1e8b9c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase4bHwFlag40Clear_001e8b9c asm("ptrTo_ilTemplateCase4bHwFlag40Clear_001e8b9c");	pointer -> LD_1abca4	data.s
+ptrTo_ilTemplateCase23Kind5_001e8ba0	0x1e8ba0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase23Kind5_001e8ba0 asm("ptrTo_ilTemplateCase23Kind5_001e8ba0");	pointer -> LD_1ae0d8	data.s
+ptrTo_ilTemplateCase23Kind2_001e8ba4	0x1e8ba4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase23Kind2_001e8ba4 asm("ptrTo_ilTemplateCase23Kind2_001e8ba4");	pointer -> LD_1ae144	data.s
+ptrTo_ilTemplateCase21Kind2_001e8ba8	0x1e8ba8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase21Kind2_001e8ba8 asm("ptrTo_ilTemplateCase21Kind2_001e8ba8");	pointer -> LD_1ae700	data.s
+ptrTo_ilTemplateCase21Kind1_001e8bac	0x1e8bac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase21Kind1_001e8bac asm("ptrTo_ilTemplateCase21Kind1_001e8bac");	pointer -> LD_1ae724	data.s
+ptrTo_ilTemplateCase6bOptionEnabled_001e8bb0	0x1e8bb0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase6bOptionEnabled_001e8bb0 asm("ptrTo_ilTemplateCase6bOptionEnabled_001e8bb0");	pointer -> LD_1ac1fc	data.s
+ptrTo_ilTemplateCase17Scope72_001e8bb4	0x1e8bb4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase17Scope72_001e8bb4 asm("ptrTo_ilTemplateCase17Scope72_001e8bb4");	pointer -> LD_1aed6c	data.s
+ptrTo_laneRemapTable_001e8bb8	0x1e8bb8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_laneRemapTable_001e8bb8 asm("ptrTo_laneRemapTable_001e8bb8");	pointer -> LD_1aab70	data.s
+ptrTo_ilTemplateCase17_001e8bbc	0x1e8bbc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase17_001e8bbc asm("ptrTo_ilTemplateCase17_001e8bbc");	pointer -> LD_1aed48	data.s
+ptrTo_ilTemplateCase23Kind0_001e8bc0	0x1e8bc0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase23Kind0_001e8bc0 asm("ptrTo_ilTemplateCase23Kind0_001e8bc0");	pointer -> LD_1ae190	data.s
+ptrTo_ilTemplateCase23Kind4_001e8bc4	0x1e8bc4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase23Kind4_001e8bc4 asm("ptrTo_ilTemplateCase23Kind4_001e8bc4");	pointer -> LD_1ae0fc	data.s
+ptrTo_descriptorLaneSelectTable_001e8bc8	0x1e8bc8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_descriptorLaneSelectTable_001e8bc8 asm("ptrTo_descriptorLaneSelectTable_001e8bc8");	pointer -> LD_1aab60	data.s
+ptrTo_ilTemplateCase21Kind3_001e8bcc	0x1e8bcc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase21Kind3_001e8bcc asm("ptrTo_ilTemplateCase21Kind3_001e8bcc");	pointer -> LD_1ae6dc	data.s
+ptrTo_ilBlockTemplateCase6e_001e8bd0	0x1e8bd0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilBlockTemplateCase6e_001e8bd0 asm("ptrTo_ilBlockTemplateCase6e_001e8bd0");	pointer -> LD_1e9b58	data.s
+ptrTo_ilDefaultTemplateTable_001e8bd4	0x1e8bd4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilDefaultTemplateTable_001e8bd4 asm("ptrTo_ilDefaultTemplateTable_001e8bd4");	pointer -> LD_1aec88	data.s
+ptrTo_ilTemplateCase6bDefault_001e8bd8	0x1e8bd8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase6bDefault_001e8bd8 asm("ptrTo_ilTemplateCase6bDefault_001e8bd8");	pointer -> LD_1ac2fc	data.s
 ptrTo_IRLoadVertex__vtable_001e8bdc	0x1e8bdc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRLoadVertex__vtable_001e8bdc asm("ptrTo_IRLoadVertex__vtable_001e8bdc");	pointer -> LD_1f2210	data.s
 ptrTo_IREndCallRoutine__vtable_001e8be0	0x1e8be0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IREndCallRoutine__vtable_001e8be0 asm("ptrTo_IREndCallRoutine__vtable_001e8be0");	pointer -> LD_1e9840	data.s
 ptrTo_IRCmp2__vtable_001e8be4	0x1e8be4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRCmp2__vtable_001e8be4 asm("ptrTo_IRCmp2__vtable_001e8be4");	pointer -> LD_1f15d8	data.s
@@ -1046,16 +1046,16 @@ ptrTo_IRMemLoad__vtable_001e8c50	0x1e8c50	__DATA,__nl_symbol_ptr	pointer	4	exter
 ptrTo_IRLoad__vtable_001e8c54	0x1e8c54	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRLoad__vtable_001e8c54 asm("ptrTo_IRLoad__vtable_001e8c54");	pointer -> LD_1f1260	data.s
 ptrTo_IRAlu__vtable_001e8c58	0x1e8c58	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRAlu__vtable_001e8c58 asm("ptrTo_IRAlu__vtable_001e8c58");	pointer -> LD_1f1308	data.s
 ptrTo_IRExit__vtable_001e8c5c	0x1e8c5c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRExit__vtable_001e8c5c asm("ptrTo_IRExit__vtable_001e8c5c");	pointer -> LD_1f22c8	data.s
-PTR_PTR_001e8c60	0x1e8c60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_PTR_001e8c60 asm("PTR_PTR_001e8c60");	pointer -> LD_1ea900	data.s
+ptrTo_regKindInfoTable_001e8c60	0x1e8c60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_regKindInfoTable_001e8c60 asm("ptrTo_regKindInfoTable_001e8c60");	pointer -> LD_1ea900	data.s
 ptrTo_IRFetch__vtable_001e8c64	0x1e8c64	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRFetch__vtable_001e8c64 asm("ptrTo_IRFetch__vtable_001e8c64");	pointer -> LD_1f18c8	data.s
 ptrTo_IRUnary__vtable_001e8c68	0x1e8c68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRUnary__vtable_001e8c68 asm("ptrTo_IRUnary__vtable_001e8c68");	pointer -> LD_1f25b8	data.s
 ptrTo_compareConditionOperandOrderTable_001e8c6c	0x1e8c6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_compareConditionOperandOrderTable_001e8c6c asm("ptrTo_compareConditionOperandOrderTable_001e8c6c");	pointer -> LD_1dc7e0	data.s
 ptrTo_compareConditionToBinaryOpcodeTable_001e8c70	0x1e8c70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_compareConditionToBinaryOpcodeTable_001e8c70 asm("ptrTo_compareConditionToBinaryOpcodeTable_001e8c70");	pointer -> LD_1dc800	data.s
 ptrTo_KhanChip__vtable_001e8c74	0x1e8c74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanChip__vtable_001e8c74 asm("ptrTo_KhanChip__vtable_001e8c74");	pointer -> LD_1ead60	data.s
-PTR_DAT_001e8c78	0x1e8c78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c78 asm("PTR_DAT_001e8c78");	pointer -> LD_1ab838	data.s
+ptrTo_hwLimitsDefaultDataA_001e8c78	0x1e8c78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_hwLimitsDefaultDataA_001e8c78 asm("ptrTo_hwLimitsDefaultDataA_001e8c78");	pointer -> LD_1ab838	data.s
 ptrTo_IRUnary__new_107df4_001e8c7c	0x1e8c7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IRUnary__new_107df4_001e8c7c asm("ptrTo_IRUnary__new_107df4_001e8c7c");	pointer -> IRUnary__new_107df4	data.s
 ptrTo_FudoChip__vtable_001e8c80	0x1e8c80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_FudoChip__vtable_001e8c80 asm("ptrTo_FudoChip__vtable_001e8c80");	pointer -> LD_1eb5e0	data.s
-PTR_DAT_001e8c84	0x1e8c84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c84 asm("PTR_DAT_001e8c84");	pointer -> LD_1af390	data.s
+ptrTo_hwLimitsDefaultDataB_001e8c84	0x1e8c84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_hwLimitsDefaultDataB_001e8c84 asm("ptrTo_hwLimitsDefaultDataB_001e8c84");	pointer -> LD_1af390	data.s
 ptrTo_HwChip__vtable_001e8c88	0x1e8c88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_HwChip__vtable_001e8c88 asm("ptrTo_HwChip__vtable_001e8c88");	pointer -> LD_1f2890	data.s
 ptrTo_IrPredSetLTPushInt__vtable_001e8c8c	0x1e8c8c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IrPredSetLTPushInt__vtable_001e8c8c asm("ptrTo_IrPredSetLTPushInt__vtable_001e8c8c");	pointer -> LD_1f3c98	data.s
 ptrTo_IrPresubBX2Neg__vtable_001e8c90	0x1e8c90	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IrPresubBX2Neg__vtable_001e8c90 asm("ptrTo_IrPresubBX2Neg__vtable_001e8c90");	pointer -> LD_1f5400	data.s
@@ -1342,39 +1342,39 @@ ptrTo_VRegInfo__vtable_001e90f0	0x1e90f0	__DATA,__nl_symbol_ptr	pointer	4	extern
 ptrTo_R520SchedModel__vtable_001e90f4	0x1e90f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_R520SchedModel__vtable_001e90f4 asm("ptrTo_R520SchedModel__vtable_001e90f4");	pointer -> LD_1eb320	data.s
 ptrTo_compareConditionMapTable_001e90f8	0x1e90f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_compareConditionMapTable_001e90f8 asm("ptrTo_compareConditionMapTable_001e90f8");	pointer -> LD_1dc840	data.s
 ptrTo_R300SchedModel__vtable_001e90fc	0x1e90fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_R300SchedModel__vtable_001e90fc asm("ptrTo_R300SchedModel__vtable_001e90fc");	pointer -> LD_1eb258	data.s
-PTR_DAT_001e9100	0x1e9100	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9100 asm("PTR_DAT_001e9100");	pointer -> LD_1eb2e8	data.s
-PTR_DAT_001e9104	0x1e9104	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9104 asm("PTR_DAT_001e9104");	pointer -> LD_1afdac	data.s
-PTR_DAT_001e9108	0x1e9108	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9108 asm("PTR_DAT_001e9108");	pointer -> LD_1ea5a8	data.s
-PTR_PTR_001e910c	0x1e910c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_PTR_001e910c asm("PTR_PTR_001e910c");	pointer -> LD_1dc64c	data.s
+ptrTo_ThreadModel__vtable_001e9100	0x1e9100	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ThreadModel__vtable_001e9100 asm("ptrTo_ThreadModel__vtable_001e9100");	pointer -> LD_1eb2e8	data.s
+ptrTo_KhanPsHwLimitsTable_001e9104	0x1e9104	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanPsHwLimitsTable_001e9104 asm("ptrTo_KhanPsHwLimitsTable_001e9104");	pointer -> LD_1afdac	data.s
+ptrTo_HwLimits__vtable_001e9108	0x1e9108	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_HwLimits__vtable_001e9108 asm("ptrTo_HwLimits__vtable_001e9108");	pointer -> LD_1ea5a8	data.s
+ptrTo_KhanPsEntryTable_001e910c	0x1e910c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanPsEntryTable_001e910c asm("ptrTo_KhanPsEntryTable_001e910c");	pointer -> LD_1dc64c	data.s
 ptrTo_R300VSchedModel__vtable_001e9110	0x1e9110	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_R300VSchedModel__vtable_001e9110 asm("ptrTo_R300VSchedModel__vtable_001e9110");	pointer -> LD_1eb3b8	data.s
-PTR_DAT_001e9114	0x1e9114	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9114 asm("PTR_DAT_001e9114");	pointer -> LD_1afa1c	data.s
-PTR_DAT_001e9118	0x1e9118	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9118 asm("PTR_DAT_001e9118");	pointer -> LD_1af548	data.s
-PTR_DAT_001e911c	0x1e911c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e911c asm("PTR_DAT_001e911c");	pointer -> LD_1adf48	data.s
-PTR_DAT_001e9120	0x1e9120	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9120 asm("PTR_DAT_001e9120");	pointer -> LD_1af3c8	data.s
-PTR_DAT_001e9124	0x1e9124	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9124 asm("PTR_DAT_001e9124");	pointer -> LD_1ab8ac	data.s
-PTR_DAT_001e9128	0x1e9128	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9128 asm("PTR_DAT_001e9128");	pointer -> LD_1adc44	data.s
+ptrTo_KhanVsHwLimitsTable_001e9114	0x1e9114	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanVsHwLimitsTable_001e9114 asm("ptrTo_KhanVsHwLimitsTable_001e9114");	pointer -> LD_1afa1c	data.s
+ptrTo_vsHardwareTableField0C9CInit_001e9118	0x1e9118	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField0C9CInit_001e9118 asm("ptrTo_vsHardwareTableField0C9CInit_001e9118");	pointer -> LD_1af548	data.s
+ptrTo_vsHardwareTableField0C78Init_001e911c	0x1e911c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField0C78Init_001e911c asm("ptrTo_vsHardwareTableField0C78Init_001e911c");	pointer -> LD_1adf48	data.s
+ptrTo_vsHardwareTableField0E28Init_001e9120	0x1e9120	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField0E28Init_001e9120 asm("ptrTo_vsHardwareTableField0E28Init_001e9120");	pointer -> LD_1af3c8	data.s
+ptrTo_vsHardwareTableField0D08Init_001e9124	0x1e9124	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField0D08Init_001e9124 asm("ptrTo_vsHardwareTableField0D08Init_001e9124");	pointer -> LD_1ab8ac	data.s
+ptrTo_vsHardwareTableField02A0Init_001e9128	0x1e9128	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_vsHardwareTableField02A0Init_001e9128 asm("ptrTo_vsHardwareTableField02A0Init_001e9128");	pointer -> LD_1adc44	data.s
 ptrTo_compareConditionInvertTable_001e912c	0x1e912c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_compareConditionInvertTable_001e912c asm("ptrTo_compareConditionInvertTable_001e912c");	pointer -> LD_1dc820	data.s
 ptrTo_IfFooter__vtable_001e9130	0x1e9130	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_IfFooter__vtable_001e9130 asm("ptrTo_IfFooter__vtable_001e9130");	pointer -> LD_1e9d68	data.s
 ptrTo_MirrorBlock__vtable_001e9134	0x1e9134	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_MirrorBlock__vtable_001e9134 asm("ptrTo_MirrorBlock__vtable_001e9134");	pointer -> LD_1f64b8	data.s
 ptrTo_SchedNode__vtable_001e9138	0x1e9138	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_SchedNode__vtable_001e9138 asm("ptrTo_SchedNode__vtable_001e9138");	pointer -> LD_1f6520	data.s
 ptrTo_KhanPsOpcodeTraits_001e913c	0x1e913c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanPsOpcodeTraits_001e913c asm("ptrTo_KhanPsOpcodeTraits_001e913c");	pointer -> LD_1dca64	data.s
 ptrTo_KhanVsOpcodeTraits_001e9140	0x1e9140	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanVsOpcodeTraits_001e9140 asm("ptrTo_KhanVsOpcodeTraits_001e9140");	pointer -> LD_1df1fc	data.s
-PTR_DAT_001e9144	0x1e9144	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9144 asm("PTR_DAT_001e9144");	pointer -> LD_1ead80	data.s
-PTR_DAT_001e9148	0x1e9148	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e9148 asm("PTR_DAT_001e9148");	pointer -> LD_1eb600	data.s
+ptrTo_KhanPs__vtable_001e9144	0x1e9144	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_KhanPs__vtable_001e9144 asm("ptrTo_KhanPs__vtable_001e9144");	pointer -> LD_1ead80	data.s
+ptrTo_R520SchedModel__vtable_001e9148	0x1e9148	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_R520SchedModel__vtable_001e9148 asm("ptrTo_R520SchedModel__vtable_001e9148");	pointer -> LD_1eb600	data.s
 ptrTo_R300MachineAssembler__vtable_001e914c	0x1e914c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_R300MachineAssembler__vtable_001e914c asm("ptrTo_R300MachineAssembler__vtable_001e914c");	pointer -> LD_1e9a38	data.s
 ptrTo_recordFlagsPending20_001e9150	0x1e9150	__DATA,__const	undefined *	4	extern unsigned char *ptrTo_recordFlagsPending20_001e9150[] asm("ptrTo_recordFlagsPending20_001e9150");	pointer -> recordFlagsPending20	data.s
-PTR_s_1D_001e9158	0x1e9158	__DATA,__const	undefined *	4	extern unsigned char *PTR_s_1D_001e9158[] asm("PTR_s_1D_001e9158");	pointer -> LD_1a4524	data.s
-UNK_001e915c	0x1e915c	__DATA,__const	-	-	extern unsigned char UNK_001e915c asm("UNK_001e915c");	0x0000000e	data.s
-UNK_001e9160	0x1e9160	__DATA,__const	-	-	extern unsigned char UNK_001e9160 asm("UNK_001e9160");	0x00000001	data.s
+arbfpKeywordTable_001e9158	0x1e9158	__DATA,__const	undefined *	4	extern unsigned char *arbfpKeywordTable_001e9158[] asm("arbfpKeywordTable_001e9158");	pointer -> LD_1a4524	data.s
+arbfpKeywordTable_tokenClass_001e915c	0x1e915c	__DATA,__const	-	-	extern unsigned char arbfpKeywordTable_tokenClass_001e915c asm("arbfpKeywordTable_tokenClass_001e915c");	0x0000000e	data.s
+arbfpKeywordTable_tokenIndex_001e9160	0x1e9160	__DATA,__const	-	-	extern unsigned char arbfpKeywordTable_tokenIndex_001e9160 asm("arbfpKeywordTable_tokenIndex_001e9160");	0x00000001	data.s
 ptrTo_swizzleWordsYYYX_001dbd84_001e9770	0x1e9770	__DATA,__const	pointer	4	extern unsigned char *ptrTo_swizzleWordsYYYX_001dbd84_001e9770 asm("ptrTo_swizzleWordsYYYX_001dbd84_001e9770");	pointer -> LD_1dbd84	data.s
 ptrTo_swizzleWordsXYZW_001dbd14_001e9774	0x1e9774	__DATA,__const	pointer	4	extern unsigned char *ptrTo_swizzleWordsXYZW_001dbd14_001e9774 asm("ptrTo_swizzleWordsXYZW_001dbd14_001e9774");	pointer -> LD_1dbd14	data.s
 ptrTo_zeroWords4_001fa5e8_001e9778	0x1e9778	__DATA,__const	pointer	4	extern unsigned char *ptrTo_zeroWords4_001fa5e8_001e9778 asm("ptrTo_zeroWords4_001fa5e8_001e9778");	pointer -> LD_1fa5e8	data.s
 ptrTo_swizzleWordsXYZW_001dbd14_001e977c	0x1e977c	__DATA,__const	pointer	4	extern unsigned char *ptrTo_swizzleWordsXYZW_001dbd14_001e977c asm("ptrTo_swizzleWordsXYZW_001dbd14_001e977c");	pointer -> LD_1dbd14	data.s
 ptrTo_swizzleWordsYYYX_001dbd84_001e9780	0x1e9780	__DATA,__const	pointer	4	extern unsigned char *ptrTo_swizzleWordsYYYX_001dbd84_001e9780 asm("ptrTo_swizzleWordsYYYX_001dbd84_001e9780");	pointer -> LD_1dbd84	data.s
-PTR_DAT_001e9784	0x1e9784	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9784 asm("PTR_DAT_001e9784");	pointer -> LD_1fa5e8	data.s
+ptrTo_zeroWords4_001fa5e8_001e9784	0x1e9784	__DATA,__const	pointer	4	extern unsigned char *ptrTo_zeroWords4_001fa5e8_001e9784 asm("ptrTo_zeroWords4_001fa5e8_001e9784");	pointer -> LD_1fa5e8	data.s
 ptrTo_swizzleWordsXYZW_001dbd14_001e9788	0x1e9788	__DATA,__const	pointer	4	extern unsigned char *ptrTo_swizzleWordsXYZW_001dbd14_001e9788 asm("ptrTo_swizzleWordsXYZW_001dbd14_001e9788");	pointer -> LD_1dbd14	data.s
 ptrTo_swizzleWordsYYYX_001dbd84_001e978c	0x1e978c	__DATA,__const	pointer	4	extern unsigned char *ptrTo_swizzleWordsYYYX_001dbd84_001e978c asm("ptrTo_swizzleWordsYYYX_001dbd84_001e978c");	pointer -> LD_1dbd84	data.s
-PTR_DAT_001e9790	0x1e9790	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9790 asm("PTR_DAT_001e9790");	pointer -> LD_1fa5e8	data.s
+ptrTo_zeroWords4_001fa5e8_001e9790	0x1e9790	__DATA,__const	pointer	4	extern unsigned char *ptrTo_zeroWords4_001fa5e8_001e9790 asm("ptrTo_zeroWords4_001fa5e8_001e9790");	pointer -> LD_1fa5e8	data.s
 ptrTo_IRInst__dtor_1cd970_001e97a0	0x1e97a0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cd970_001e97a0[] asm("ptrTo_IRInst__dtor_1cd970_001e97a0");	pointer -> IRInst__dtor_1cd970	data.s
 ptrTo_IRInst__dtor_1cda2c_001e9848	0x1e9848	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cda2c_001e9848[] asm("ptrTo_IRInst__dtor_1cda2c_001e9848");	pointer -> IRInst__dtor_1cda2c	data.s
 ptrTo_IRInst__dtor_1cdae8_001e98f0	0x1e98f0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cdae8_001e98f0[] asm("ptrTo_IRInst__dtor_1cdae8_001e98f0");	pointer -> IRInst__dtor_1cdae8	data.s
@@ -1393,9 +1393,9 @@ ptrTo_BreakBlock__dtor_001e9e20	0x1e9e20	__DATA,__const	undefined *	4	extern uns
 ptrTo_ContinueBlock__dtor_001e9e78	0x1e9e78	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ContinueBlock__dtor_001e9e78[] asm("ptrTo_ContinueBlock__dtor_001e9e78");	pointer -> ContinueBlock__dtor	data.s
 ptrTo_ExitBlock__dtor_001e9ed0	0x1e9ed0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ExitBlock__dtor_001e9ed0[] asm("ptrTo_ExitBlock__dtor_001e9ed0");	pointer -> ExitBlock__dtor	data.s
 ptrTo_EntryBlock__dtor_001e9f28	0x1e9f28	__DATA,__const	undefined *	4	extern unsigned char ptrTo_EntryBlock__dtor_001e9f28[] asm("ptrTo_EntryBlock__dtor_001e9f28");	pointer -> EntryBlock__dtor	data.s
-PTR_DAT_001e9f78	0x1e9f78	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9f78[] asm("PTR_DAT_001e9f78");	pointer -> LD_1ae228	data.s
-PTR_DAT_001e9f7c	0x1e9f7c	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9f7c[] asm("PTR_DAT_001e9f7c");	pointer -> LD_1ae4a8	data.s
-PTR_DAT_001e9f80	0x1e9f80	__DATA,__const	undefined *	4	extern unsigned char *PTR_DAT_001e9f80[] asm("PTR_DAT_001e9f80");	pointer -> LD_1ae310	data.s
+ptrTo_ilOpcodeTemplateTableVariantN_001e9f78	0x1e9f78	__DATA,__const	pointer	4	extern unsigned char *ptrTo_ilOpcodeTemplateTableVariantN_001e9f78[] asm("ptrTo_ilOpcodeTemplateTableVariantN_001e9f78");	pointer -> LD_1ae228	data.s
+ptrTo_ilOpcodeTemplateTableNoHwTemplate_001e9f7c	0x1e9f7c	__DATA,__const	pointer	4	extern unsigned char *ptrTo_ilOpcodeTemplateTableNoHwTemplate_001e9f7c[] asm("ptrTo_ilOpcodeTemplateTableNoHwTemplate_001e9f7c");	pointer -> LD_1ae4a8	data.s
+ptrTo_ilOpcodeTemplateTableVariant0_001e9f80	0x1e9f80	__DATA,__const	undefined *	4	extern unsigned char *ptrTo_ilOpcodeTemplateTableVariant0_001e9f80[] asm("ptrTo_ilOpcodeTemplateTableVariant0_001e9f80");	pointer -> LD_1ae310	data.s
 ptrTo_IRInst__dtor_1ced3c_001e9fc8	0x1e9fc8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1ced3c_001e9fc8[] asm("ptrTo_IRInst__dtor_1ced3c_001e9fc8");	pointer -> IRInst__dtor_1ced3c	data.s
 ptrTo_IRInst__dtor_1cfcbc_001ea070	0x1ea070	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cfcbc_001ea070[] asm("ptrTo_IRInst__dtor_1cfcbc_001ea070");	pointer -> IRInst__dtor_1cfcbc	data.s
 ptrTo_IRInst__dtor_1cf608_001ea118	0x1ea118	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cf608_001ea118[] asm("ptrTo_IRInst__dtor_1cf608_001ea118");	pointer -> IRInst__dtor_1cf608	data.s
@@ -1405,7 +1405,7 @@ ptrTo_IRInst__dtor_1cfe30_001ea310	0x1ea310	__DATA,__const	undefined *	4	extern 
 ptrTo_IRInst__dtor_1cfeac_001ea3b8	0x1ea3b8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cfeac_001ea3b8[] asm("ptrTo_IRInst__dtor_1cfeac_001ea3b8");	pointer -> IRInst__dtor_1cfeac	data.s
 ptrTo_IRInst__dtor_1cf63c_001ea460	0x1ea460	__DATA,__const	undefined *	4	extern unsigned char ptrTo_IRInst__dtor_1cf63c_001ea460[] asm("ptrTo_IRInst__dtor_1cf63c_001ea460");	pointer -> IRInst__dtor_1cf63c	data.s
 irInstFactoryTable	0x1ea4fc	__DATA,__const	-	-	extern unsigned char irInstFactoryTable asm("irInstFactoryTable");	0x00000000	data.s
-DAT_001ea500	0x1ea500	__DATA,__const	undefined4	4	extern unsigned int DAT_001ea500 asm("DAT_001ea500");	0x00000000	data.s
+irInstFactoryTable_classIndex_001ea500	0x1ea500	__DATA,__const	undefined4	4	extern unsigned int irInstFactoryTable_classIndex_001ea500 asm("irInstFactoryTable_classIndex_001ea500");	0x00000000	data.s
 ptrTo_HwLimits__dtor_001ea5b0	0x1ea5b0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_HwLimits__dtor_001ea5b0[] asm("ptrTo_HwLimits__dtor_001ea5b0");	pointer -> HwLimits__dtor	data.s
 ptrTo_ExportValue__dtor_001ea748	0x1ea748	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ExportValue__dtor_001ea748[] asm("ptrTo_ExportValue__dtor_001ea748");	pointer -> ExportValue__dtor	data.s
 ptrTo_Interpolator__dtor_001ea780	0x1ea780	__DATA,__const	undefined *	4	extern unsigned char ptrTo_Interpolator__dtor_001ea780[] asm("ptrTo_Interpolator__dtor_001ea780");	pointer -> Interpolator__dtor	data.s
@@ -1421,11 +1421,11 @@ ptrTo_KhanChip__dtor_001ead68	0x1ead68	__DATA,__const	undefined *	4	extern unsig
 ptrTo_KhanPs__dtor_001ead88	0x1ead88	__DATA,__const	undefined *	4	extern unsigned char ptrTo_KhanPs__dtor_001ead88[] asm("ptrTo_KhanPs__dtor_001ead88");	pointer -> KhanPs__dtor	data.s
 ptrTo_KhanVs__dtor_1d84e0_001eaf20	0x1eaf20	__DATA,__const	undefined *	4	extern unsigned char ptrTo_KhanVs__dtor_1d84e0_001eaf20[] asm("ptrTo_KhanVs__dtor_1d84e0_001eaf20");	pointer -> KhanVs__dtor_1d84e0	data.s
 ptrTo_KhanVs__dtor_1d8548_001eb0c0	0x1eb0c0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_KhanVs__dtor_1d8548_001eb0c0[] asm("ptrTo_KhanVs__dtor_1d8548_001eb0c0");	pointer -> KhanVs__dtor_1d8548	data.s
-PTR_DAT_001eb254	0x1eb254	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001eb254 asm("PTR_DAT_001eb254");	pointer -> LD_1aa818	data.s
+ptrTo_laneWordSplatTable_001aa818_001eb254	0x1eb254	__DATA,__const	pointer	4	extern unsigned char *ptrTo_laneWordSplatTable_001aa818_001eb254 asm("ptrTo_laneWordSplatTable_001aa818_001eb254");	pointer -> LD_1aa818	data.s
 ptrTo_ResourceModel__dtor_001eb260	0x1eb260	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ResourceModel__dtor_001eb260[] asm("ptrTo_ResourceModel__dtor_001eb260");	pointer -> ResourceModel__dtor	data.s
 ptrTo_ThreadModel__dtor_001eb2f0	0x1eb2f0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_ThreadModel__dtor_001eb2f0[] asm("ptrTo_ThreadModel__dtor_001eb2f0");	pointer -> ThreadModel__dtor	data.s
 ptrTo_R300SchedModel__dtor_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R300SchedModel__dtor_1d8910_001eb328[] asm("ptrTo_R300SchedModel__dtor_1d8910_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
-PTR_orph_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_orph_1d8910_001eb328[] asm("PTR_orph_1d8910_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
+orphanRefTo_R300SchedModel__dtor_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char orphanRefTo_R300SchedModel__dtor_1d8910_001eb328[] asm("orphanRefTo_R300SchedModel__dtor_1d8910_001eb328");	pointer -> R300SchedModel__dtor_1d8910	data.s
 ptrTo_R300VSchedModel__dtor_001eb3c0	0x1eb3c0	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R300VSchedModel__dtor_001eb3c0[] asm("ptrTo_R300VSchedModel__dtor_001eb3c0");	pointer -> R300VSchedModel__dtor	data.s
 ptrTo_FudoPs__dtor_001eb450	0x1eb450	__DATA,__const	undefined *	4	extern unsigned char ptrTo_FudoPs__dtor_001eb450[] asm("ptrTo_FudoPs__dtor_001eb450");	pointer -> FudoPs__dtor	data.s
 ptrTo_FudoChip__dtor_001eb5e8	0x1eb5e8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_FudoChip__dtor_001eb5e8[] asm("ptrTo_FudoChip__dtor_001eb5e8");	pointer -> FudoChip__dtor	data.s
@@ -1434,14 +1434,14 @@ ptrTo_R300MachineAssembler__dtor_001eb6a0	0x1eb6a0	__DATA,__const	undefined *	4	
 ptrTo_MachineAssembler__dtor_19b9ac_001eb808	0x1eb808	__DATA,__const	undefined *	4	extern unsigned char ptrTo_MachineAssembler__dtor_19b9ac_001eb808[] asm("ptrTo_MachineAssembler__dtor_19b9ac_001eb808");	pointer -> MachineAssembler__dtor_19b9ac	data.s
 ptrTo_MachineAssembler__dtor_19df54_001eb8d8	0x1eb8d8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_MachineAssembler__dtor_19df54_001eb8d8[] asm("ptrTo_MachineAssembler__dtor_19df54_001eb8d8");	pointer -> MachineAssembler__dtor_19df54	data.s
 ptrTo_R520MachineAssembler__dtor_001eb9a8	0x1eb9a8	__DATA,__const	undefined *	4	extern unsigned char ptrTo_R520MachineAssembler__dtor_001eb9a8[] asm("ptrTo_R520MachineAssembler__dtor_001eb9a8");	pointer -> R520MachineAssembler__dtor	data.s
-DAT_001f3a54	0x1f3a54	__DATA,__const_coal	-	-	extern unsigned char DAT_001f3a54 asm("DAT_001f3a54");	0x00000000	data.s
+constPoolAnchor_001f3a54	0x1f3a54	__DATA,__const_coal	-	-	extern unsigned char constPoolAnchor_001f3a54 asm("constPoolAnchor_001f3a54");	0x00000000	data.s
 ptrTo_OpcodeInfo__vslot6_getMovaRoundFlag_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *ptrTo_OpcodeInfo__vslot6_getMovaRoundFlag_001f4850 asm("ptrTo_OpcodeInfo__vslot6_getMovaRoundFlag_001f4850");	pointer -> OpcodeInfo__vslot6_getMovaRoundFlag	data.s
 gldContextListHead_001f65e0	0x1f65e0	__DATA,__bss	undefined4	4	extern unsigned char *gldContextListHead_001f65e0 asm("gldContextListHead_001f65e0");		data.s
 dxtBlockPixelByte0_001f65e4	0x1f65e4	__DATA,__bss	undefined1	1	extern unsigned char dxtBlockPixelByte0_001f65e4[] asm("dxtBlockPixelByte0_001f65e4");		data.s
 dxtBlockPixelByte1_001f65e5	0x1f65e5	__DATA,__bss	undefined1	1	extern unsigned char dxtBlockPixelByte1_001f65e5[] asm("dxtBlockPixelByte1_001f65e5");		data.s
 dxtBlockPixelByte2_001f65e6	0x1f65e6	__DATA,__bss	undefined1	1	extern unsigned char dxtBlockPixelByte2_001f65e6[] asm("dxtBlockPixelByte2_001f65e6");		data.s
-DAT_001f65e7	0x1f65e7	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e7 asm("DAT_001f65e7");		data.s
-DAT_001f8514	0x1f8514	__DATA,__bss	-	-	extern unsigned char DAT_001f8514 asm("DAT_001f8514");		data.s
+dxtBlockPixelByte3_001f65e7	0x1f65e7	__DATA,__bss	undefined1	1	extern unsigned char dxtBlockPixelByte3_001f65e7 asm("dxtBlockPixelByte3_001f65e7");		data.s
+constPoolAnchor_001f8514	0x1f8514	__DATA,__bss	-	-	extern unsigned char constPoolAnchor_001f8514 asm("constPoolAnchor_001f8514");		data.s
 drawSetupPacketWord15_001fa5e4	0x1fa5e4	__DATA,__bss	undefined4	4	extern unsigned int drawSetupPacketWord15_001fa5e4 asm("drawSetupPacketWord15_001fa5e4");		data.s
 zeroWords4_001fa5e8	0x1fa5e8	__DATA,__bss	-	-	extern unsigned char zeroWords4_001fa5e8 asm("zeroWords4_001fa5e8");		data.s
 zeroWords4_001fa5f8	0x1fa5f8	__DATA,__bss	undefined4	4	extern unsigned int zeroWords4_001fa5f8 asm("zeroWords4_001fa5f8");		data.s
@@ -2724,10 +2724,10 @@ resolvedSprintf_001fc1d4	0x1fc1d4	__DATA,__bss	undefined4	4	extern int (*resolve
 resolvedPrintf_001fc1d8	0x1fc1d8	__DATA,__bss	undefined4	4	extern int (*resolvedPrintf_001fc1d8)() asm("resolvedPrintf_001fc1d8");		data.s
 resolvedVsnprintf_001fc1dc	0x1fc1dc	__DATA,__bss	undefined4	4	extern int (*resolvedVsnprintf_001fc1dc)() asm("resolvedVsnprintf_001fc1dc");		data.s
 resolvedVsprintf_001fc1e0	0x1fc1e0	__DATA,__bss	undefined4	4	extern int (*resolvedVsprintf_001fc1e0)() asm("resolvedVsprintf_001fc1e0");		data.s
-DAT_001fc1f0	0x1fc1f0	__DATA,__common	undefined4	4	extern unsigned int DAT_001fc1f0 asm("DAT_001fc1f0");		data.s
-DAT_001fc1f4	0x1fc1f4	__DATA,__common	undefined4	4	extern unsigned int DAT_001fc1f4 asm("DAT_001fc1f4");		data.s
-DAT_001fc1f8	0x1fc1f8	__DATA,__common	undefined4	4	extern unsigned char DAT_001fc1f8[] asm("DAT_001fc1f8");		data.s
-DAT_001fc1fc	0x1fc1fc	__DATA,__common	undefined4	4	extern unsigned char DAT_001fc1fc[] asm("DAT_001fc1fc");		data.s
+interpolatorBucketTable_001fc1f0	0x1fc1f0	__DATA,__common	undefined4	4	extern unsigned int interpolatorBucketTable_001fc1f0 asm("interpolatorBucketTable_001fc1f0");		data.s
+interpolatorBucketTable_laneFlags_001fc1f4	0x1fc1f4	__DATA,__common	undefined4	4	extern unsigned int interpolatorBucketTable_laneFlags_001fc1f4 asm("interpolatorBucketTable_laneFlags_001fc1f4");		data.s
+interpolatorBucketTable_liveLaneCount_001fc1f8	0x1fc1f8	__DATA,__common	undefined4	4	extern unsigned char interpolatorBucketTable_liveLaneCount_001fc1f8[] asm("interpolatorBucketTable_liveLaneCount_001fc1f8");		data.s
+interpolatorBucketTable_memberVector_001fc1fc	0x1fc1fc	__DATA,__common	undefined4	4	extern unsigned char interpolatorBucketTable_memberVector_001fc1fc[] asm("interpolatorBucketTable_memberVector_001fc1fc");		data.s
 opcodeInfoTable	0x1fc2b0	__DATA,__common	-	-	extern unsigned char opcodeInfoTable asm("opcodeInfoTable");		data.s
 opcodeInfoTable_op15	0x1fc2ec	__DATA,__common	undefined4	4	extern unsigned int opcodeInfoTable_op15 asm("opcodeInfoTable_op15");		data.s
 opcodeInfoTable_op16	0x1fc2f0	__DATA,__common	undefined4	4	extern unsigned int opcodeInfoTable_op16 asm("opcodeInfoTable_op16");		data.s

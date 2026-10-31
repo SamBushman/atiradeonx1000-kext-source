@@ -2130,15 +2130,15 @@ int gld_getTextureFormatInfo(ctx, texture, face, level, formatInfoOut)
     baseFormat = *(short *)(*(int *)(texture + 0x30) + 2);
     if (baseFormat == 0x1902) {
       *formatInfoOut = 0x81a6;
-      formatInfoOut[7] = (*(unsigned int *)&DAT_001da50c) >> 8 & 0x3f;
+      formatInfoOut[7] = (*(unsigned int *)&textureFormatEntry41_field14_001da50c) >> 8 & 0x3f;
     }
     else if (baseFormat == 0x1901) {
       formatInfoOut[7] = 0;
       *formatInfoOut = 0x81a6;
     }
     else {
-      *formatInfoOut = (uint)(*(unsigned int *)&DAT_001da500);
-      formatInfoOut[7] = (*(unsigned int *)&DAT_001da50c) >> 8 & 0x3f;
+      *formatInfoOut = (uint)(*(unsigned int *)&textureFormatEntry41_field08_001da500);
+      formatInfoOut[7] = (*(unsigned int *)&textureFormatEntry41_field14_001da50c) >> 8 & 0x3f;
     }
     formatInfoOut[4] = 0;
   }
@@ -9700,14 +9700,14 @@ callGlShaderOp1EXTImpl:
         case 0x41:
           scratchUint15 = *nextInstruction;
           nextInstruction = scratchPtr21 + 4;
-          if (((*(int *)(&DAT_001da630 + (scratchUint15 >> 10 & 0x3c)) != 0x87d5) ||
-              (*(int *)(&DAT_001da630 + (scratchUint15 >> 6 & 0x3c)) != 0x87d6)) ||
-             ((*(int *)(&DAT_001da630 + (scratchUint15 >> 2 & 0x3c)) != 0x87d7 ||
-              (*(int *)(&DAT_001da630 + (scratchUint15 & 0xf) * 4) != 0x87d8)))) {
-            extvsEmitSwizzleInstruction(ctx,scratchInt3,sourceSymbols[0],*(int *)(&DAT_001da630 + (scratchUint15 >> 10 & 0x3c)),
-                         *(int *)(&DAT_001da630 + (scratchUint15 >> 6 & 0x3c)),
-                         *(int *)(&DAT_001da630 + (scratchUint15 >> 2 & 0x3c)),
-                         *(int *)(&DAT_001da630 + (scratchUint15 & 0xf) * 4));
+          if (((*(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 >> 10 & 0x3c)) != 0x87d5) ||
+              (*(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 >> 6 & 0x3c)) != 0x87d6)) ||
+             ((*(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 >> 2 & 0x3c)) != 0x87d7 ||
+              (*(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 & 0xf) * 4) != 0x87d8)))) {
+            extvsEmitSwizzleInstruction(ctx,scratchInt3,sourceSymbols[0],*(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 >> 10 & 0x3c)),
+                         *(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 >> 6 & 0x3c)),
+                         *(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 >> 2 & 0x3c)),
+                         *(int *)(&extSwizzleTokenTable_001da630 + (scratchUint15 & 0xf) * 4));
           }
           break;
         case 0x48:

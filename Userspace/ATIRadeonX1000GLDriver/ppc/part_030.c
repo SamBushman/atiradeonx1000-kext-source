@@ -777,7 +777,7 @@ int IRInst__newOpcode8c(operandWord2, compiler)
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 8) = operandWord2;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  defaultSwizzle = UNK_001af9d4;
+  defaultSwizzle = laneWord03030303_001af9d4;
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 0x10) = defaultSwizzle;
   allocation[0x4c] = 0;
@@ -1052,7 +1052,7 @@ int IRInst__createCompareConstInst(undefined4 compareKind,undefined4 operandWord
   nextTempId = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = nextTempId;
   operandRecord = IRInst__getOperandRecord(inst,0);
-  defaultSelect = _UNK_001af9d8;
+  defaultSelect = _laneWord01010100_001af9d8;
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(int *)(operandRecord + 8) = nextTempId;
   *(undefined4 *)(inst + 0x9c) = defaultSelect;

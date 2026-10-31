@@ -80,9 +80,9 @@ int FudoPs__deleting_dtor(this)
   undefined *baseVtableBase1;
   undefined *baseVtableBase2;
   
-  baseVtableBase2 = PTR_DAT_001e9144;
+  baseVtableBase2 = ptrTo_KhanPs__vtable_001e9144;
   *this = &ptrTo_FudoPs__dtor_001eb450;
-  baseVtableBase1 = PTR_DAT_001e9108;
+  baseVtableBase1 = ptrTo_HwLimits__vtable_001e9108;
   *this = baseVtableBase2 + 8;
   *this = baseVtableBase1 + 8;
   return operator_delete(this);
@@ -110,9 +110,9 @@ int FudoPs__dtor(this)
   undefined *baseVtableBase1;
   undefined *baseVtableBase2;
   
-  baseVtableBase2 = PTR_DAT_001e9144;
+  baseVtableBase2 = ptrTo_KhanPs__vtable_001e9144;
   *this = &ptrTo_FudoPs__dtor_001eb450;
-  baseVtableBase1 = PTR_DAT_001e9108;
+  baseVtableBase1 = ptrTo_HwLimits__vtable_001e9108;
   *this = baseVtableBase2 + 8;
   *this = baseVtableBase1 + 8;
   return;

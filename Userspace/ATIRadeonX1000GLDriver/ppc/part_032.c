@@ -1139,7 +1139,7 @@ setVectorAt418B:
     vectorData = Arena__alloc(arena,8);
     groupVectorAlloc[3] = vectorData;
     laneCounter = 0;
-    bucketCursor = &DAT_001fc1f0;
+    bucketCursor = &interpolatorBucketTable_001fc1f0;
     laneKindTableBase = &laneWord04040404_001b02ec;
     do {
       bucketCursor[2] = 4;
@@ -1178,12 +1178,12 @@ setVectorAt418B:
         laneIndex = 0;
         bucketInst = *packEntry;
         bucketRegister = *(int *)(bucketInst + 0x94);
-        laneFlagBytePtr = &DAT_001fc1f4 + bucketRegister * 4;
+        laneFlagBytePtr = &interpolatorBucketTable_laneFlags_001fc1f4 + bucketRegister * 4;
         while( true ) {
           bucketInst = IRInst__getOperandRecord(bucketInst,0);
           if (*(char *)(laneIndex + bucketInst + 0x10) != '\x01') {
             *(undefined1 *)laneFlagBytePtr = 0;
-            (DAT_001fc1f8)[bucketRegister * 4] = (DAT_001fc1f8)[bucketRegister * 4] + -1;
+            (interpolatorBucketTable_liveLaneCount_001fc1f8)[bucketRegister * 4] = (interpolatorBucketTable_liveLaneCount_001fc1f8)[bucketRegister * 4] + -1;
           }
           isLastLane = laneIndex == 3;
           laneFlagBytePtr = (undefined4 *)((int)laneFlagBytePtr + 1);
@@ -1191,7 +1191,7 @@ setVectorAt418B:
           if (isLastLane) break;
           bucketInst = *packEntry;
         }
-        bucketVector = (uint *)(DAT_001fc1fc)[bucketRegister * 4];
+        bucketVector = (uint *)(interpolatorBucketTable_memberVector_001fc1fc)[bucketRegister * 4];
         bucketVectorCount = bucketVector[1];
         if (bucketVectorCount < *bucketVector) {
           _memset((void *)(bucketVectorCount * 4 + bucketVector[2]),0,4);
@@ -1206,7 +1206,7 @@ setVectorAt418B:
       } while ((int)bucketScanIndex < (int)recordCount);
     }
     laneCounter = 0;
-    bucketCursor = DAT_001fc1f8;
+    bucketCursor = interpolatorBucketTable_liveLaneCount_001fc1f8;
     do {
       if (*bucketCursor == 0) {
         bucketMembers = (uint *)bucketCursor[1];
@@ -1250,7 +1250,7 @@ setVectorAt418B:
         else {
           bucketSlotRef = (undefined4 *)Vector__elementRefGrow(groupVector,groupVectorCount);
         }
-        *bucketSlotRef = &DAT_001fc1f0 + laneCounter * 4;
+        *bucketSlotRef = &interpolatorBucketTable_001fc1f0 + laneCounter * 4;
       }
       notLastBucket = laneCounter != 0xb;
       bucketCursor = bucketCursor + 4;
@@ -1615,7 +1615,7 @@ code_r0x00111aa4:
                 candidateLaneCount = PackEntry__activeLaneCount(candidateGroup);
                 if (laneCountTarget == candidateLaneCount) {
                   laneIndex = 0;
-                  laneKindTable = (undefined4 *)PTR_DAT_001e8b64;
+                  laneKindTable = (undefined4 *)ptrTo_laneSelectWordTable_001e8b64;
                   candidateWordCursor = candidateGroup;
                   do {
                     laneSourceInst = PackEntry__laneNeedsZero(candidateGroup,laneIndex);
@@ -2233,7 +2233,7 @@ loopSetNextInst:
     nextSlot = 1;
     bindOutputFn = *(code **)(*this + 0x54);
     kind6LaneIndex = IRLoadInterp__laneIndex_104180(outputKind6Inst,0);
-    defaultLaneMask = DAT_001afa0c;
+    defaultLaneMask = laneWord00010203_001afa0c;
     IRLoadInterp__laneIndex_104180(outputKind6Inst,0);
     (*bindOutputFn)(this,0,0,kind6LaneIndex,defaultLaneMask,0,0,0);
   }
@@ -2243,7 +2243,7 @@ loopSetNextInst:
     nextSlot = nextSlot + 1;
     bindOutputFn = *(code **)(*this + 0x54);
     kind7LaneIndex = IRLoadInterp__laneIndex_104180(outputKind7Inst,0);
-    defaultLaneMask = DAT_001afa0c;
+    defaultLaneMask = laneWord00010203_001afa0c;
     IRLoadInterp__laneIndex_104180(outputKind7Inst,0);
     (*bindOutputFn)(this,1,1,kind7LaneIndex,defaultLaneMask,0,0,0);
   }

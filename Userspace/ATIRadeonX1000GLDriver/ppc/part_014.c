@@ -123,9 +123,9 @@ int ffvpEmitBlendedEyeNormal(programBuilder, matrixSelectors, matrixCount, impli
         constFile = fileTable[2];
         dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
         if (matrixCount == 0) {
-          maskBaseX = &DAT_001e3520;
-          maskBaseY = &DAT_001e3520;
-          maskBaseZ = &DAT_001e3520;
+          maskBaseX = &constPoolAnchor_001e3520;
+          maskBaseY = &constPoolAnchor_001e3520;
+          maskBaseZ = &constPoolAnchor_001e3520;
 loopSetSrcTempFile:
           srcTempFile = *fileTable;
           eyeNormalReg = *(undefined4 *)(programBuilder + 0x448);
@@ -145,9 +145,9 @@ loopSetSrcTempFile:
           return 0;
         }
         invModelviewRegs = (int *)(programBuilder + 0xc4);
-        maskBaseX = &DAT_001e3520;
-        maskBaseY = &DAT_001e3520;
-        maskBaseZ = &DAT_001e3520;
+        maskBaseX = &constPoolAnchor_001e3520;
+        maskBaseY = &constPoolAnchor_001e3520;
+        maskBaseZ = &constPoolAnchor_001e3520;
 loopSetLoopIndex:
         loopIndex = 0;
         dstMask = (undefined4 *)(maskBaseX + -0x781c);
@@ -413,8 +413,8 @@ loopCheckWriteDirect:
                   dstFile = *(undefined4 *)programBuilder[0xfc];
                   dstReg = outTempReg;
                 }
-                constBase88 = &DAT_001e3a54;
-                constBase80 = &DAT_001f3a54;
+                constBase88 = &constPoolAnchor_001e3a54;
+                constBase80 = &constPoolAnchor_001f3a54;
                 src1Index = *(int *)((int)programBuilder + 1376);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
                           (programBuilder,dstFile,dstReg,&swizzleWordsYXXX_001dbd04,srcTempFile,blendTemp0Reg,&swizzleWordsXYZW_001dbd14,
@@ -467,9 +467,9 @@ loopCheckWriteDirect:
                 }
                 return 0;
               }
-              constBase88 = &DAT_001e3a54;
-              constBase80 = &DAT_001f3a54;
-              constBase74 = &DAT_001e3a54;
+              constBase88 = &constPoolAnchor_001e3a54;
+              constBase80 = &constPoolAnchor_001f3a54;
+              constBase74 = &constPoolAnchor_001e3a54;
 loopSetMatrixIndex:
               matrixIndex = 0;
               maskPtr = (undefined4 *)(constBase74 + -0x7d50);
@@ -547,23 +547,23 @@ loopSetMatrixIndex:
       dstTempFileB = *dstFileTable;
       constFile = srcFileTable[2];
       if (matrixCount == 0) {
-        constBase54 = &DAT_001e3a54;
-        constBase88 = &DAT_001e3a54;
-        constBase80 = &DAT_001f3a54;
-        constBase64 = &DAT_001e3a54;
-        constBase58 = &DAT_001e3a54;
-        constBase5c = &DAT_001e3a54;
-        constBase60 = &DAT_001f3a54;
+        constBase54 = &constPoolAnchor_001e3a54;
+        constBase88 = &constPoolAnchor_001e3a54;
+        constBase80 = &constPoolAnchor_001f3a54;
+        constBase64 = &constPoolAnchor_001e3a54;
+        constBase58 = &constPoolAnchor_001e3a54;
+        constBase5c = &constPoolAnchor_001e3a54;
+        constBase60 = &constPoolAnchor_001f3a54;
       }
       else {
-        constBase54 = &DAT_001e3a54;
-        constBase88 = &DAT_001e3a54;
-        constBase80 = &DAT_001f3a54;
-        constBase64 = &DAT_001e3a54;
-        constBase5c = &DAT_001e3a54;
-        constBase58 = &DAT_001e3a54;
+        constBase54 = &constPoolAnchor_001e3a54;
+        constBase88 = &constPoolAnchor_001e3a54;
+        constBase80 = &constPoolAnchor_001f3a54;
+        constBase64 = &constPoolAnchor_001e3a54;
+        constBase5c = &constPoolAnchor_001e3a54;
+        constBase58 = &constPoolAnchor_001e3a54;
         matrixIndex = 0;
-        constBase60 = &DAT_001f3a54;
+        constBase60 = &constPoolAnchor_001f3a54;
         tempRegCursor = blendTemp3Reg;
         mvpRegCursor2 = programBuilder;
         do {
@@ -1890,7 +1890,7 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
                *(undefined4 *)(unitOffset + programBuilder + 0x2c),&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
   }
   componentShift = 0;
-  maskCursor = &DAT_001dbdfc;
+  maskCursor = &onehotMaskWords4x4_001dbdfc;
   planeRegCursor = (undefined4 *)(texUnit * 0x10 + programBuilder + 0x348);
   do {
     genMode = texGenModes >> (componentShift & 0x3f) & 7;
@@ -3157,7 +3157,7 @@ setSrcInputReg:
   dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
   srcTempFile = **(int **)(programBuilder + 0x3ec);
   if (lightFlag23 == 0) {
-    constBase64 = &DAT_001f8514;
+    constBase64 = &constPoolAnchor_001f8514;
     constBase60 = KhanVs__deleting_dtor_1d8514;
     constBase80 = KhanVs__deleting_dtor_1d8514;
     emit1Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 8);
@@ -3174,7 +3174,7 @@ setSrcInputReg:
                ((unsigned char *)0x00003880) + (int)constBase80,srcTempFileArg,emit2Src1Index,identitySelectArg,noNegateArg,srcTempFileArg,tempAReg,identitySelectArg,noNegateArg);
   }
   else {
-    constBase64 = &DAT_001f8514;
+    constBase64 = &constPoolAnchor_001f8514;
     constBase60 = KhanVs__deleting_dtor_1d8514;
     constBase80 = KhanVs__deleting_dtor_1d8514;
     emit3Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 8);
@@ -4021,7 +4021,7 @@ int ffvpEmitFogDistance(programBuilder)
                   (programBuilder,dstTempFile,tempAReg,&swizzleWordsXYXX_001dbd64,srcTempFile,tempAReg,&zeroWords4_001fa5f8,&zeroWords4_001fa5e8);
         emit5Src1Select = ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 244);
         (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                  (programBuilder,outputFile,fogOutReg,&swizzleWordsYXXX_001dbd04,srcTempFile,tempAReg,&DAT_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempAReg,emit5Src1Select,&zeroWords4_001fa5e8);
+                  (programBuilder,outputFile,fogOutReg,&swizzleWordsYXXX_001dbd04,srcTempFile,tempAReg,&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempAReg,emit5Src1Select,&zeroWords4_001fa5e8);
         ffvpFreeTempRegister(programBuilder,tempA);
         return 0;
       }
@@ -4207,7 +4207,7 @@ int ffvpEmitFogLinear(programBuilder)
                     );
           emit3Src1Select = ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 244);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstFile,tempAReg,tempAMask,srcTempFile,tempBReg,&DAT_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempBReg,emit3Src1Select,&zeroWords4_001fa5e8);
+                    (programBuilder,dstFile,tempAReg,tempAMask,srcTempFile,tempBReg,&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempBReg,emit3Src1Select,&zeroWords4_001fa5e8);
           ffvpFreeTempRegister(programBuilder,tempB);
         }
         else {
@@ -4396,7 +4396,7 @@ int ffvpEmitFogExp(programBuilder)
                     );
           emit3Src1Select = ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 244);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstFile,fogTempRegCopy,tempAMask,srcTempFile,tempBReg,&DAT_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempBReg,emit3Src1Select,&zeroWords4_001fa5e8);
+                    (programBuilder,dstFile,fogTempRegCopy,tempAMask,srcTempFile,tempBReg,&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempBReg,emit3Src1Select,&zeroWords4_001fa5e8);
           ffvpFreeTempRegister(programBuilder,tempB);
         }
         else {
@@ -4481,9 +4481,9 @@ int ffvpEmitColorOutputs(programBuilder, noLights)
     loopIndex = 0;
     srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
     stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
-    constBase68 = &DAT_001db440;
-    constBase64 = &DAT_001db440;
-    constBase5c = &DAT_001db440;
+    constBase68 = &constPoolAnchor_001db440;
+    constBase64 = &constPoolAnchor_001db440;
+    constBase5c = &constPoolAnchor_001db440;
     builderRegCursor = programBuilder;
     ctxWordCursor = glCtx;
     colorSlotCursor = programBuilder;
@@ -4669,7 +4669,7 @@ loopSetSrcTempFileB:
                        &zeroWords4_001fa5e8);
             emit4Src1Select = ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 244);
             (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                      (programBuilder,texOutFile,texOutReg,&swizzleWordsYYYY_001dbd24,srcTempFile,tempAReg,&DAT_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempAReg,emit4Src1Select,&zeroWords4_001fa5e8)
+                      (programBuilder,texOutFile,texOutReg,&swizzleWordsYYYY_001dbd24,srcTempFile,tempAReg,&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempAReg,emit4Src1Select,&zeroWords4_001fa5e8)
             ;
             ffvpFreeTempRegister(programBuilder,tempA);
             return 0;

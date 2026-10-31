@@ -376,7 +376,7 @@ loopSetSrcIdx:
     writesAlpha = classifyWritesAlpha != 0;
     crFlagsWord = (uint)(byte)(((int)classifyFlagBit4 < 0) << 3 | (0 < (int)classifyFlagBit4) << 2 |
                             (classifyFlagBit4 == 0) << 1 | in_xer_so & 1) << 0x1c;
-    picBase = &DAT_001b81b8;
+    picBase = &constPoolAnchor_001b81b8;
     do {
       operandRecordTmp = IRInst__getOperandRecord(irInst,srcIdx);
       swizzle = *(int **)(operandRecordTmp + 0x10);
@@ -1283,8 +1283,8 @@ int R300VMachineAssembler__transitionState(this, event)
   int loopRemaining;
   
   loopRemaining = (event * 5 + *(int *)(this + 0x1c)) * 4;
-  loopIndex = *(int *)(&DAT_001e6668 + loopRemaining);
-  loopRemaining = *(int *)(&DAT_001e66cc + loopRemaining);
+  loopIndex = *(int *)(&R300VMachineAssembler__transitionNextStateTable_001e6668 + loopRemaining);
+  loopRemaining = *(int *)(&R300VMachineAssembler__transitionInstrDeltaTable_001e66cc + loopRemaining);
   *(int *)(this + 0x1c) = loopIndex;
   if (loopIndex == -1) {
     *(undefined4 *)(this + 0x1c) = 2;

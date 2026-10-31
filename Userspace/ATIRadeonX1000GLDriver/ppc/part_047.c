@@ -205,7 +205,7 @@ checkCtx:
         loopPtr2[0x14] = rangeClass;
       }
       else {
-        loopPtr2[0x14] = (DAT_001e6158)[rangeClass];
+        loopPtr2[0x14] = (rangeClassAfterClampTable_001e6158)[rangeClass];
       }
     }
     lastLane = loopIndex == 3;
@@ -262,7 +262,7 @@ setValueNumber2:
         loopPtr2[0x20] = valueNumber;
       }
       else {
-        loopPtr2[0x20] = (DAT_001e61a0)[valueNumber];
+        loopPtr2[0x20] = (compareClassAbsTable_001e61a0)[valueNumber];
       }
     }
     lastLane = loopIndex == 3;
@@ -462,10 +462,10 @@ int ValueKey__canonicalizeCompareCondition(ctx)
           laneClass = *(int *)(findInPtrSetResult + 0xc);
           operandFlags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
           if ((operandFlags & 2) != 0) {
-            laneClass = (DAT_001e61d0)[laneClass];
+            laneClass = (compareClassAbsTable_001e61d0)[laneClass];
           }
           if ((operandFlags & 1) != 0) {
-            laneClass = *(int *)(&DAT_001e61b8 + laneClass * 4);
+            laneClass = *(int *)(&compareClassNegateTable_001e61b8 + laneClass * 4);
           }
         }
         if (laneClass == 0) {
@@ -612,7 +612,7 @@ int ValueKey__insertMovOfOperandLane_177b4c(ctx, operandIndex, lane)
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
+  destSelectWord = *(undefined4 *)(ptrTo_laneSelectWordTable_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
   *(undefined4 *)(callResult + 0x9c) = destSelectWord;
   *(undefined4 *)(callResult + 0x98) = 0;
@@ -653,7 +653,7 @@ int ValueKey__insertMovOfReplacementLane(ctx, replacement, lane)
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
+  destSelectWord = *(undefined4 *)(ptrTo_laneSelectWordTable_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
   *(undefined4 *)(callResult + 0x98) = 0;
   *(undefined4 *)(callResult + 0x9c) = destSelectWord;
@@ -699,7 +699,7 @@ int ValueKey__insertBinaryOfOperandsLane(ctx, opcode, operandIndex, operandIndex
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(opcode,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
+  destSelectWord = *(undefined4 *)(ptrTo_laneSelectWordTable_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
   *(undefined4 *)(callResult + 0x9c) = destSelectWord;
   *(undefined4 *)(callResult + 0x98) = 0;
@@ -751,7 +751,7 @@ int ValueKey__insertMovOfOperandLane(ctx, operandIndex, lane, resultScaleCode)
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  destSelectWord = *(undefined4 *)(PTR_DAT_001e8b64 + lane * 4);
+  destSelectWord = *(undefined4 *)(ptrTo_laneSelectWordTable_001e8b64 + lane * 4);
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
   *(undefined4 *)(callResult + 0x9c) = destSelectWord;
   *(undefined4 *)(callResult + 0x98) = 0;
@@ -888,11 +888,11 @@ int ValueKey__classifyLaneRangeClass(ctx, lane, clampFlagsOut)
         operandRecAddr = *(int *)(ctx + 0xb0) + operandRecOffset;
         operandFlags = *(uint *)(operandRecAddr + 0x20);
         if ((operandFlags & 2) != 0) {
-          *loopPtr = *(int *)(&DAT_001e6188 + valueNumber * 4);
+          *loopPtr = *(int *)(&rangeClassAbsTable_001e6188 + valueNumber * 4);
           operandFlags = *(uint *)(operandRecAddr + 0x20);
         }
         if ((operandFlags & 1) != 0) {
-          *loopPtr = *(int *)(&DAT_001e6170 + *loopPtr * 4);
+          *loopPtr = *(int *)(&rangeClassNegateTable_001e6170 + *loopPtr * 4);
         }
       }
       operandRecOffset = operandRecOffset + 0x18;
@@ -928,7 +928,7 @@ int ValueKey__classifyLaneRangeClass(ctx, lane, clampFlagsOut)
     }
     resultClass = operandClass[0];
     if (*(int *)(keyInst + 0x120) != 0) {
-      resultClass = (DAT_001e6158)[operandClass[0]];
+      resultClass = (rangeClassAfterClampTable_001e6158)[operandClass[0]];
       if (operandClass[0] == resultClass) {
         *(undefined4 *)(laneByteOffset + clampFlagsOut) = 0;
         resultClass = operandClass[0];
@@ -990,7 +990,7 @@ int ValueKey__classifyLaneCompareClass(ctx, lane)
           valueNumber = *(int *)(ctx + 0xb0) + operandRecOffset;
           operandFlags = *(uint *)(valueNumber + 0x20);
           if ((operandFlags & 2) != 0) {
-            *loopPtr = DAT_001e61d0[0];
+            *loopPtr = compareClassAbsTable_001e61d0[0];
             operandFlags = *(uint *)(valueNumber + 0x20);
           }
         }
@@ -1001,12 +1001,12 @@ int ValueKey__classifyLaneCompareClass(ctx, lane)
           operandRecAddr = *(int *)(ctx + 0xb0) + operandRecOffset2;
           operandFlags = *(uint *)(operandRecAddr + 0x20);
           if ((operandFlags & 2) != 0) {
-            *loopPtr = (DAT_001e61d0)[valueNumber];
+            *loopPtr = (compareClassAbsTable_001e61d0)[valueNumber];
             operandFlags = *(uint *)(operandRecAddr + 0x20);
           }
         }
         if ((operandFlags & 1) != 0) {
-          *loopPtr = *(int *)(&DAT_001e61b8 + *loopPtr * 4);
+          *loopPtr = *(int *)(&compareClassNegateTable_001e61b8 + *loopPtr * 4);
         }
       }
       operandRecOffset2 = operandRecOffset2 + 0x18;
@@ -1050,7 +1050,7 @@ int ValueKey__classifyLaneCompareClass(ctx, lane)
       resultClass = operandClass[0];
     }
     if (*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) {
-      resultClass = (DAT_001e61a0)[resultClass];
+      resultClass = (compareClassAbsTable_001e61a0)[resultClass];
     }
     laneEntryPtr2 = lane * 4 + ctx;
     laneNode = *(int *)(laneEntryPtr2 + 0x40);
@@ -2147,10 +2147,10 @@ int ValueKey__setLiteralOperandsForOpcode(ctx, vec4Constant, compiler)
     ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(compiler + 0x6c4),1,(double)*vec4Constant
                  ,(double)vec4Constant[1],(double)vec4Constant[2],(double)vec4Constant[3]);
     IRInst__initOperandRecord(*(undefined4 *)(ctx + 0xb0),2);
-    secondVec4Y = DAT_001b01ec;
-    secondVec4X = DAT_001b01e8;
-    secondVec4Z = DAT_001b01f0;
-    secondVec4W = DAT_001b01f4;
+    secondVec4Y = floatWord00000000_001b01ec;
+    secondVec4X = floatWord00000000_001b01e8;
+    secondVec4Z = floatWord00000000_001b01f0;
+    secondVec4W = floatWord00000000_001b01f4;
     operandValueNumber = ((int (*)())ValueKey__setLiteralVec4Operand)(2,&secondVec4X,*(undefined4 *)(ctx + 0xb0),compiler);
     *(undefined4 *)(ctx + 0x218) = operandValueNumber;
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 300) = 0;
@@ -2253,7 +2253,7 @@ int ValueKey__foldCompareOfFloatConstants(ctx)
           operandRecAddr = *(int *)(ctx + 0xb0) + operandRecOffset;
           operandFlags = *(uint *)(operandRecAddr + 0x20);
           if ((operandFlags & 2) != 0) {
-            *loopPtr5 = (DAT_001e61d0)[compareClass];
+            *loopPtr5 = (compareClassAbsTable_001e61d0)[compareClass];
             operandFlags = *(uint *)(operandRecAddr + 0x20);
           }
           if ((operandFlags & 1) == 0) {
@@ -2264,7 +2264,7 @@ int ValueKey__foldCompareOfFloatConstants(ctx)
           else {
             usedUniformConstant = true;
             allOperandsFloatConst = false;
-            operandClass = *(int *)(&DAT_001e61b8 + *loopPtr5 * 4);
+            operandClass = *(int *)(&compareClassNegateTable_001e61b8 + *loopPtr5 * 4);
             *loopPtr5 = operandClass;
           }
         }
@@ -2290,7 +2290,7 @@ loopSetLaneResult:
       }
       else {
         loopIndex2 = IRInst__getCompareCondition(*(undefined4 *)(ctx + 0xb0));
-        loopIndex2 = *(int *)(&DAT_001e61e8 + (loopIndex2 * 6 + firstOperandClass * 0x30 + operandClasses[1]) * 4);
+        loopIndex2 = *(int *)(&compareFoldResultTable_001e61e8 + (loopIndex2 * 6 + firstOperandClass * 0x30 + operandClasses[1]) * 4);
         if (loopIndex2 == 1) {
           *loopPtr3 = 0.0;
         }
@@ -2388,10 +2388,10 @@ int ValueKey__foldEqualSourcesCompareToLiteralOperands(ctx)
         operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
         if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
           compareCondition = IRInst__getCompareCondition(*(undefined4 *)(ctx + 0xb0));
-          if (*(int *)(&DAT_001e61e8 + (compareCondition * 6 + loopRemaining * 0x31) * 4) == 1) {
+          if (*(int *)(&compareFoldResultTable_001e61e8 + (compareCondition * 6 + loopRemaining * 0x31) * 4) == 1) {
             *loopPtr3 = 0;
           }
-          else if (*(int *)(&DAT_001e61e8 + (compareCondition * 6 + loopRemaining * 0x31) * 4) == 2) {
+          else if (*(int *)(&compareFoldResultTable_001e61e8 + (compareCondition * 6 + loopRemaining * 0x31) * 4) == 2) {
             *loopPtr3 = 0x3f800000;
           }
         }
@@ -2467,15 +2467,15 @@ int ValueKey__foldCompareAgainstZero(ctx)
         inst = *(int *)(ctx + 0xb0);
         compareResultOrClass = *(int *)(findInPtrSetResult + 0xc);
         if ((*(uint *)(inst + 0xb8) & 2) != 0) {
-          compareResultOrClass = (DAT_001e61d0)[compareResultOrClass];
+          compareResultOrClass = (compareClassAbsTable_001e61d0)[compareResultOrClass];
         }
         usedUniformConstant = true;
         if ((*(uint *)(inst + 0xb8) & 1) != 0) {
-          compareResultOrClass = *(int *)(&DAT_001e61b8 + compareResultOrClass * 4);
+          compareResultOrClass = *(int *)(&compareClassNegateTable_001e61b8 + compareResultOrClass * 4);
         }
       }
       compareCondition = IRInst__getCompareCondition(inst);
-      compareResultOrClass = *(int *)(&DAT_001e61e8 + (compareCondition * 6 + compareResultOrClass * 0x30 + loopRemaining2) * 4);
+      compareResultOrClass = *(int *)(&compareFoldResultTable_001e61e8 + (compareCondition * 6 + compareResultOrClass * 0x30 + loopRemaining2) * 4);
       if (compareResultOrClass == 1) {
         *(undefined4 *)(laneByteOffset + (int)&laneResults) = 0;
       }
@@ -2616,7 +2616,7 @@ int ValueKey__insertSplatMov(ctx, fillValue, operandIndex)
   block = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158);
   callResult = IRInst__create(0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(callResult,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
-  swizzle = *(undefined4 *)(PTR_DAT_001e8b64 + operandIndex * 4);
+  swizzle = *(undefined4 *)(ptrTo_laneSelectWordTable_001e8b64 + operandIndex * 4);
   fillOffset = 0;
   *(undefined4 *)(callResult + 0x94) = *(undefined4 *)(callResult + 0x14c);
   loopRemaining = 4;
@@ -2854,10 +2854,10 @@ int ValueKey__mixLiteralSources(key)
       moreIterations = loopIndex2 != 4;
       loopIndex2 = loopIndex2 + 1;
     } while (moreIterations);
-    picBaseB = &DAT_001ab134;
+    picBaseB = &constPoolAnchor_001ab134;
     literalCountPadAlias = literalCountPad;
     loopIndex = 5;
-    picBaseA = &DAT_001ab134;
+    picBaseA = &constPoolAnchor_001ab134;
     loopIndex2 = 0;
     do {
       *(undefined4 *)((int)literalMovTable + loopIndex2 + 4) = 0;

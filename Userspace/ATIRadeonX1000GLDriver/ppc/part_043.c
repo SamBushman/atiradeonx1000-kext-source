@@ -2538,12 +2538,12 @@ int Inst__collapseMulSplatByDotOnes(inst, program)
   dotSourceIndex = 2;
 setSourceDef:
   sourceDef = IRInst__getOperandSource(inst,dotSourceIndex);
-  laneCheckMask = DAT_001b0170;
+  laneCheckMask = laneWord00000000_001b0170;
   onesLane3 = 0x3f800000;
   onesLane0 = 0x3f800000;
   onesLane1 = 0x3f800000;
   onesLane2 = 0x3f800000;
-  isOnesConstant = IRInst__sourceMatchesConstant(sourceDef,1,DAT_001b0170,&onesLane0);
+  isOnesConstant = IRInst__sourceMatchesConstant(sourceDef,1,laneWord00000000_001b0170,&onesLane0);
   if (isOnesConstant == 0) {
     isOnesConstant = IRInst__sourceMatchesConstant(sourceDef,2,laneCheckMask,&onesLane0);
     if (isOnesConstant == 0) {
@@ -7182,7 +7182,7 @@ int Inst__mergeAddWithSharedConstant_00152ea8(inst, inst2, program)
                     selectBytesAPtr = &selectBytesA;
                     *(undefined4 *)(operandRecord3 + 0x10) = selectWordToStore;
                     oneOperandIndex = 2;
-                    globalsBase = &DAT_001b2eb8;
+                    globalsBase = &constPoolAnchor_001b2eb8;
                   }
                   else {
                     sourceDef = IRInst__getOperandSource(inst4,1);
@@ -7240,11 +7240,11 @@ int Inst__mergeAddWithSharedConstant_00152ea8(inst, inst2, program)
                     }
                     operandCountA = newSrcA[0x21];
                     if (operandCountA < 1) {
-                      globalsBase = &DAT_001b2eb8;
+                      globalsBase = &constPoolAnchor_001b2eb8;
                     }
                     else {
                       operandIndex6 = 1;
-                      globalsBase = &DAT_001b2eb8;
+                      globalsBase = &constPoolAnchor_001b2eb8;
                       do {
                         if (operandIndex6 == 0) {
                           newSrcA[0x27] = 0x4040404;
@@ -8884,7 +8884,7 @@ setSourceDef6:
       if (((inst2[operandIndex3 * 6 + 0x28] & 1U) != 0) || (modeBitB = 0, swapSecond)) {
         modeBitB = 1;
       }
-      modeTableEntry = *(uint *)(&DAT_001b0060 +
+      modeTableEntry = *(uint *)(&scaleFoldModeTable_001b0060 +
                        (*(uint *)((int)inst + otherOperandIdx * 0x18 + 0xa0) & 1 |
                         (*(uint *)((int)inst + producerOperandIdx * 0x18 + 0xa0) & 1) << 1 |
                         (*(uint *)((int)inst + 0xe8) & 1) << 2 | modeBitA << 3 | modeBitB << 4 |
@@ -9516,7 +9516,7 @@ int Inst__collapseAssociativeChain_00156d48(inst, pass, opcodeKind)
       inst1 = inst;
       if (*(char *)((int)&destSelect + loopIndex) == '\0') {
         splatSelectB = *(int *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + loopIndex * 4);
-        splatSelectA = *(int *)(PTR_DAT_001e8b64 + loopIndex * 4);
+        splatSelectA = *(int *)(ptrTo_laneSelectWordTable_001e8b64 + loopIndex * 4);
         break;
       }
       loopIndex = loopIndex + 1;

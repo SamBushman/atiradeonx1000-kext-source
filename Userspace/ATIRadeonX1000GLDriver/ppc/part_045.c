@@ -670,7 +670,7 @@ checkScheduler:
       spareInst = (**(code **)(*(int *)scheduler[2] + 0x80))
                          ((int *)scheduler[2],scheduler[0x60],*(undefined4 *)(nodeInst + 300),
                           *(undefined4 *)(nodeInst + 0x130),*(int *)(nodeInst + 0x98) == 0x3a);
-      slotSelectTable = PTR_DAT_001e8b64;
+      slotSelectTable = ptrTo_laneSelectWordTable_001e8b64;
       scheduler[0x60] = spareInst;
       *(undefined4 *)(spareInst + 0x98) = 0x20;
       *(uint *)(spareInst + 0x94) = ((int)chosenSlot >> 2) + (uint)((int)chosenSlot < 0 && (chosenSlot & 3) != 0);
@@ -3849,9 +3849,9 @@ int Inst__insertMovForOperand(inst, operandIndex2, compiler)
   operandRecord = IRInst__getOperandRecord(inst,operandIndex2);
   SelectWord__readMask(&readMaskOut,*(undefined4 *)(operandRecord + 0x10));
   IRInst__setOperandSource(inst,operandIndex2,newInst,0,compiler);
-  SelectWord__selectWhereMasked(&selectWhereMaskedOut,DAT_001b01b0,readMaskOut);
+  SelectWord__selectWhereMasked(&selectWhereMaskedOut,laneWord00000000_001b01b0,readMaskOut);
   *(undefined4 *)(newInst + 0x9c) = selectWhereMaskedOut;
-  SelectWord__maskUnused(maskedUnusedOut,DAT_001b01ac,readMaskOut);
+  SelectWord__maskUnused(maskedUnusedOut,laneWord00010203_001b01ac,readMaskOut);
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 0x10) = maskedUnusedOut[0];
   *(undefined4 *)(newInst + 0xc) = readMaskOut;
@@ -4366,7 +4366,7 @@ int ValueKey__rewriteDuplicateLanesAsMov(ctx)
   int innerCountdown;
   undefined4 laneMapWord;
   
-  laneMapWord = DAT_001b01bc;
+  laneMapWord = laneWord00010203_001b01bc;
   loopIndex = 1;
   programStats = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
   *(int *)(programStats + 0xa8) = *(int *)(programStats + 0xa8) + 1;

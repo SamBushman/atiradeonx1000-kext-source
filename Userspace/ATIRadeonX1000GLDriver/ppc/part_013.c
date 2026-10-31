@@ -4787,10 +4787,10 @@ int ffvpResolveFixedSource(programBuilder, sourceKind, fileOut, regOut, selectOu
   if (*regOut != -1) {
     sideOffset = (sourceKind & 1) * 4;
     status = 0;
-    *selectOut = *(undefined4 *)((PTR_DAT_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
-    selectOut[1] = *(undefined4 *)((PTR_DAT_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
-    selectOut[2] = *(undefined4 *)((PTR_DAT_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
-    selectOut[3] = *(undefined4 *)((PTR_DAT_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
+    *selectOut = *(undefined4 *)((ffvpFixedSourceSelectTableByProgramMode_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
+    selectOut[1] = *(undefined4 *)((ffvpFixedSourceSelectTableByProgramMode_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
+    selectOut[2] = *(undefined4 *)((ffvpFixedSourceSelectTableByProgramMode_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
+    selectOut[3] = *(undefined4 *)((ffvpFixedSourceSelectTableByProgramMode_001dbdd4)[*(int *)(programBuilder + 0x3d8)] + sideOffset);
   }
   return status;
 }
@@ -5583,8 +5583,8 @@ int ffvpCreateBuilder(glCtx, programMode, needsInvW)
     *(undefined4 *)(builder + 0x3d0) = 0;
     *(undefined4 *)(builder + 0x3e4) = *(undefined4 *)(&ffvpBuilderDefaultAt3E4ByProgramMode_001dbeac + programMode * 4);
     *(undefined4 *)(builder + 1000) = *(undefined4 *)(&ffvpBuilderDefaultAt3E8ByProgramMode_001dbea4 + programMode * 4);
-    *(undefined **)(builder + 0x3ec) = (PTR_DAT_001dbe84)[programMode];
-    *(undefined **)(builder + 0x3f0) = (PTR_DAT_001dbe3c)[programMode];
+    *(undefined **)(builder + 0x3ec) = (ffvpSourceFileTableByProgramMode_001dbe84)[programMode];
+    *(undefined **)(builder + 0x3f0) = (ffvpDestFileTableByProgramMode_001dbe3c)[programMode];
     _memset(builder + 0x3f4,0xffffffff,0x2d0);
     _memset(builder + 0x6c4,0,0x80);
     *(undefined1 *)(builder + 0x744) = (undefined1)needsInvW;

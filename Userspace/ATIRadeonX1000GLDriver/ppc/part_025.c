@@ -967,11 +967,11 @@ int IRInst__operandSelectIsNotDefault(inst, operandIndex)
   
   if (operandIndex == 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    bVar2 = *(int *)(operandRecord + 0x10) == _UNK_001aa84c;
+    bVar2 = *(int *)(operandRecord + 0x10) == _laneWord00000000_001aa84c;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    bVar2 = *(int *)(operandRecord + 0x10) == _UNK_001aa848;
+    bVar2 = *(int *)(operandRecord + 0x10) == _laneWord00010203_001aa848;
   }
   return 1 - (uint)bVar2;
 }

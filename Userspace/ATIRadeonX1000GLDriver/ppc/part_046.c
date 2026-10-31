@@ -186,7 +186,7 @@ loopSetResult:
     *(int *)(currentProgram + 0xa8) = *(int *)(currentProgram + 0xa8) + 1;
     currentProgram = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(currentProgram + 0x140) = *(int *)(currentProgram + 0x140) + 1;
-    ValueKey__rewriteAsMovOfValueKey(ctx,inst,&DAT_001b01bc,0);
+    ValueKey__rewriteAsMovOfValueKey(ctx,inst,&laneWord00010203_001b01bc,0);
     result = 1;
   }
   return result;
@@ -1058,7 +1058,7 @@ int ValueKey__internScopedKey(ctx, scopeIndexHigh, scopeIndexLow)
       *(int *)(currentProgram + 0xa8) = *(int *)(currentProgram + 0xa8) + 1;
       currentProgram = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
       *(int *)(currentProgram + 0x144) = *(int *)(currentProgram + 0x144) + 1;
-      ValueKey__rewriteAsMovOfValueKey(ctx,matchedInst,&DAT_001b01bc,0);
+      ValueKey__rewriteAsMovOfValueKey(ctx,matchedInst,&laneWord00010203_001b01bc,0);
       return 1;
     }
   }

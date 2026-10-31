@@ -795,10 +795,10 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                 if ((instFlags & 2) == 0) {
                   isUndefinedResult = (**(code **)(*walkInst + 0x50))(walkInst);
                   if (isUndefinedResult != 0) goto code_r0x00132adc;
-                  excludedRegs0 = UNK_001affec;
-                  excludedRegs1 = UNK_001afff0;
-                  excludedRegs2 = UNK_001afff4;
-                  excludedRegs3 = UNK_001afff8;
+                  excludedRegs0 = excludedRegsInit0_001affec;
+                  excludedRegs1 = excludedRegsInit1_001afff0;
+                  excludedRegs2 = excludedRegsInit2_001afff4;
+                  excludedRegs3 = excludedRegsInit3_001afff8;
                   regNode = ((int (*)())InterferenceGraph__resolveNode)(graph,walkInst[0x25],useCoalesced);
                   isMovResult = (**(code **)(*walkInst + 100))(walkInst);
                   if (isMovResult != 0) {
@@ -999,7 +999,7 @@ code_r0x00132ca8: ;
           walkFlags = walkInst[5];
           if ((walkFlags & 1) != 0) {
             operandRecord = IRInst__getOperandRecord(walkInst,0);
-            if (((((*(int *)(operandRecord + 0x10) != UNK_001affe8) &&
+            if (((((*(int *)(operandRecord + 0x10) != laneWord01010101_001affe8) &&
                   (*(int *)(walkInst[0x22] + 8) != 0x8e)) &&
                  (operandRecord = (**(code **)(*walkInst + 0x34))(walkInst), operandRecord == 0)) &&
                 ((operandRecord = (**(code **)(*walkInst + 0x38))(walkInst), operandRecord == 0 &&

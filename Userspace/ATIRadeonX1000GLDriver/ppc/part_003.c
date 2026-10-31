@@ -1771,7 +1771,7 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
     do {
       if (scratchFlag3) {
         scratchInt25 = 0;
-        scratchPtr28 = &DAT_001f65e7 + scratchInt49 * 4;
+        scratchPtr28 = &dxtBlockPixelByte3_001f65e7 + scratchInt49 * 4;
         scratchInt52 = scratchInt48;
         do {
           scratchInt42 = scratchInt47 * (scratchInt25 + scratchInt49);

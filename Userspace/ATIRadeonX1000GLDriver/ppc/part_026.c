@@ -1448,11 +1448,11 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   laneIndex = 0;
   operandPtrTable[1] = &constOperand2Kind;
   operandPtrTable[2] = &constOperand3Kind;
-  operandPtrTable[6] = (int *)PTR_DAT_001e8b70;
+  operandPtrTable[6] = (int *)ptrTo_defaultOperandData_001e8b70;
   local_274 = candidateOperand;
-  operandPtrTable[3] = (int *)PTR_DAT_001e8b70;
-  operandPtrTable[4] = (int *)PTR_DAT_001e8b70;
-  operandPtrTable[5] = (int *)PTR_DAT_001e8b70;
+  operandPtrTable[3] = (int *)ptrTo_defaultOperandData_001e8b70;
+  operandPtrTable[4] = (int *)ptrTo_defaultOperandData_001e8b70;
+  operandPtrTable[5] = (int *)ptrTo_defaultOperandData_001e8b70;
   uniqueCount = 0;
 uniqueOperandLoop:
   do {
@@ -2432,7 +2432,7 @@ int tableWordOrEight(tableIndex)
   if (5 < tableIndex) {
     return 8;
   }
-  return *(undefined4 *)(PTR_DAT_001e8b84 + tableIndex * 4);
+  return *(undefined4 *)(ptrTo_compareKindTable_001e8b84 + tableIndex * 4);
 }
 
 /* remapSelect1To0 @ 0xf89e8 (36 bytes) */
@@ -2464,7 +2464,7 @@ double IRInst__literalForLane(int sourceSelect,int lane,int literalMask,int sele
   undefined *selectRemapTable;
   double literalValue;
   
-  selectRemapTable = PTR_DAT_001e8bb8;
+  selectRemapTable = ptrTo_laneRemapTable_001e8bb8;
   if (sourceSelect == 4) {
     literalValue = (double)FLOAT_001aa0d4;
     *(undefined1 *)(literalMask + lane) = 0;
@@ -2558,13 +2558,13 @@ int OpcodeTemplate__lookup(ilOpcode, compiler, variant)
   hwTemplateQuery = (**(code **)(**(int **)(compiler + 0x30c) + 0xdc))
                     (*(int **)(compiler + 0x30c),compiler,variant);
   if (hwTemplateQuery == 0) {
-    templateTable = (PTR_DAT_001e9f7c)[ilOpcode * 3];
+    templateTable = (ptrTo_ilOpcodeTemplateTableNoHwTemplate_001e9f7c)[ilOpcode * 3];
   }
   else if (variant == 0) {
-    templateTable = (PTR_DAT_001e9f80)[ilOpcode * 3];
+    templateTable = (ptrTo_ilOpcodeTemplateTableVariant0_001e9f80)[ilOpcode * 3];
   }
   else {
-    templateTable = (PTR_DAT_001e9f78)[ilOpcode * 3];
+    templateTable = (ptrTo_ilOpcodeTemplateTableVariantN_001e9f78)[ilOpcode * 3];
   }
   return templateTable;
 }
@@ -2636,8 +2636,8 @@ int IRInst__applyDescriptorSelects(program, unusedArg2, overrideSelects, descrip
       }
     }
     laneComponent = psnPackedLaneComponent(descriptor,0);
-    laneSelectTable = PTR_DAT_001e8bc8;
-    descriptorSelects[0] = (char)*(undefined4 *)(PTR_DAT_001e8bc8 + laneComponent * 4);
+    laneSelectTable = ptrTo_descriptorLaneSelectTable_001e8bc8;
+    descriptorSelects[0] = (char)*(undefined4 *)(ptrTo_descriptorLaneSelectTable_001e8bc8 + laneComponent * 4);
     laneComponent = psnPackedLaneComponent(descriptor,1);
     descriptorSelects[1] = (char)*(undefined4 *)(laneSelectTable + laneComponent * 4);
     laneComponent = psnPackedLaneComponent(descriptor,2);
@@ -2690,7 +2690,7 @@ int IRInst__applyDescriptorSwizzle(descriptor, inst)
   int psnPackedLaneSourceResult;
   int loopCounter;
   
-  laneRemapTable = PTR_DAT_001e8bb8;
+  laneRemapTable = ptrTo_laneRemapTable_001e8bb8;
   loopCounter = 0;
   do {
     psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,loopCounter);
@@ -5682,7 +5682,7 @@ int Program__translateILStream(program, ilReader)
   vectorAllocation[4] = compilerArenaB;
   vectorStorage = Arena__alloc(compilerArenaB,8);
   vectorAllocation[3] = vectorStorage;
-  constantsBaseC = &DAT_001ad5d8;
+  constantsBaseC = &constPoolAnchor_001ad5d8;
   previousBlock = *(uint ******)(program + 0x3a0);
   local_128 = 0;
   local_170 = (uint *****)0x1010101;
@@ -5979,8 +5979,8 @@ code_r0x000fed00:
       if (((uint)*argR6 & 0x400000) != 0) {
         argR7 = *(uint *******)(constantsBaseC + -0x2bf8);
         laneSelect = psnPackedLaneComponent(argR6,0);
-        remapTable = PTR_DAT_001e8bc8;
-        if (*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0) {
+        remapTable = ptrTo_descriptorLaneSelectTable_001e8bc8;
+        if (*(int *)(ptrTo_descriptorLaneSelectTable_001e8bc8 + laneSelect * 4) == 0) {
           selectLaneByte = selectIndex + 4;
           selectIndex = selectIndex + 1;
           argR7 = (uint ******)(selectLaneByte * 0x1000000 | (uint)argR7 & 0xffffff);
@@ -6175,13 +6175,13 @@ code_r0x000fed00:
       if (((uint)*argR6 & 0x400000) != 0) {
         argR7 = *(uint *******)(constantsBaseC + -0x2bf8);
         laneSelect = psnPackedLaneComponent(argR6,0);
-        if (*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0) {
+        if (*(int *)(ptrTo_descriptorLaneSelectTable_001e8bc8 + laneSelect * 4) == 0) {
           argR7 = (uint ******)((uint)argR7 & 0xffffff | 0x4000000);
         }
-        selectIndex = (uint)(*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0);
+        selectIndex = (uint)(*(int *)(ptrTo_descriptorLaneSelectTable_001e8bc8 + laneSelect * 4) == 0);
         laneSelect = psnPackedLaneComponent(argR6,1);
-        remapTable = PTR_DAT_001e8bc8;
-        if (*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0) {
+        remapTable = ptrTo_descriptorLaneSelectTable_001e8bc8;
+        if (*(int *)(ptrTo_descriptorLaneSelectTable_001e8bc8 + laneSelect * 4) == 0) {
           selectLaneByte = selectIndex + 4;
           selectIndex = selectIndex + 1;
           argR7 = (uint ******)(selectLaneByte * 0x10000 | (uint)argR7 & 0xff00ffff);
@@ -6213,7 +6213,7 @@ code_r0x000fed00:
       newBlockB = (uint *****)(blockAllocation + 1);
       Block__ctor_ea148(newBlockB,*(undefined4 *)(program + 8));
       blockAllocation[0x4c] = trailingToken;
-      blockAllocation[1] = PTR_DAT_001e8bd0 + 8;
+      blockAllocation[1] = ptrTo_ilBlockTemplateCase6e_001e8bd0 + 8;
       currentBlock = newBlockB;
       Program__insertBlockAfter(program,previousBlock,newBlockB);
       Block__connect(previousBlock,currentBlock);
@@ -6514,17 +6514,17 @@ code_r0x000feeb8:
           swizzleTable = &stagedSelectWord;
           stagedSelectWord = (uint ******)*selectTableEntry;
           if (((uint)*extensionWordPtr & 0xc) == 4) {
-            swizzleTable = &UNK_001aa9c4;
+            swizzleTable = &laneWord01000101_001aa9c4;
           }
           selectTableEntry = &stagedSelectWord;
           stagedSelectWord = (uint ******)*swizzleTable;
           if (((uint)*extensionWordPtr & 0x30) == 0x10) {
-            selectTableEntry = &UNK_001aa9c0;
+            selectTableEntry = &laneWord01010001_001aa9c0;
           }
           swizzleTable = &stagedSelectWord;
           stagedSelectWord = (uint ******)*selectTableEntry;
           if (((uint)*extensionWordPtr & 0xc0) == 0x40) {
-            swizzleTable = &UNK_001aa9bc;
+            swizzleTable = &laneWord01010100_001aa9bc;
           }
           stagedSelectWord = (uint ******)*swizzleTable;
           local_170 = (uint *****)stagedSelectWord;
@@ -6664,7 +6664,7 @@ code_r0x000feeb8:
       IRInst__setOperandRef(getResourceInst,1,virtualRegisterC);
       ((int (*)())Program__appendInst)(program,getResourceInst,currentBlock);
       resourceOperandTable = ptrTo_laneWordSplatTable_001aa818_001e8b8c;
-      remapTable = PTR_DAT_001e8b64;
+      remapTable = ptrTo_laneSelectWordTable_001e8b64;
       stagedSelectWord = (uint ******)0x10203;
       if (((uint)firstTokenWord & 0x1f000000) != 0x1000000) {
         loopCounterB = 0;
@@ -6788,8 +6788,8 @@ code_r0x000febe0:
     isTranslationKind7 = false;
     break;
   case 5:
-    constantsBaseB = &DAT_001ad5d8;
-    constantsBase = &DAT_001ad5d8;
+    constantsBaseB = &constPoolAnchor_001ad5d8;
+    constantsBase = &constPoolAnchor_001ad5d8;
     templateBase = *(int *)(ilOpcode * 0x24 + hwOpcodeRecords + 0x18);
     templateModeWord = (uint *****)0x0;
     stagedSelectWord = (uint ******)0x10203;
@@ -6812,7 +6812,7 @@ code_r0x000febe0:
     vectorStorage = Arena__alloc(compilerArenaB,8);
     vectorAllocation2[3] = vectorStorage;
     templateCursor = (int *)0x0;
-    _memcpy(&tempIndexCache,&UNK_001aaa2c,0x24);
+    _memcpy(&tempIndexCache,&zeroTemplate36_001aaa2c,0x24);
     compilerRef = *(int *)(program + 8);
     operandNumber = (uint ******)0x0;
     opcodeRecordTable = *(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc);
@@ -6866,7 +6866,7 @@ code_r0x000febe0:
     operandIndexC = (uint ******)0x0;
 code_r0x001005f4:
     savedCurrentBlock = (uint ******)currentBlock;
-    opcodeTemplateTable = (uint ******)PTR_DAT_001e8bd4;
+    opcodeTemplateTable = (uint ******)ptrTo_ilDefaultTemplateTable_001e8bd4;
     templateToken = *(uint *)(templateBase + (int)templateCursor * 4);
     if (0x71 < templateToken) goto setOpcodeFallthrough;
     switch(templateToken) {
@@ -6916,13 +6916,13 @@ code_r0x001005f4:
     case 0x16:
       tokenIndexField = (uint)*tokenWords >> 0x10 & 0x3fff;
       if (templateToken == 0x14) {
-        argR7 = (uint ******)(PTR_DAT_001dc78c)[tokenIndexField];
+        argR7 = (uint ******)(templateTablePtrsToken14_001dc78c)[tokenIndexField];
       }
       else if (templateToken == 0x15) {
-        argR7 = (uint ******)(PTR_DAT_001dc77c)[tokenIndexField];
+        argR7 = (uint ******)(templateTablePtrsToken15_001dc77c)[tokenIndexField];
       }
       else {
-        argR7 = (uint ******)(PTR_DAT_001dc76c)[tokenIndexField];
+        argR7 = (uint ******)(templateTablePtrsToken16_001dc76c)[tokenIndexField];
       }
       goto code_r0x001022b4;
     case 0x17:
@@ -6936,7 +6936,7 @@ code_r0x001005f4:
           }
           scopeObject = *stackElement;
           ifStackCount = (uint *****)ifStack[1];
-          opcodeTemplateTable = (uint ******)PTR_DAT_001e8bbc;
+          opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase17_001e8bbc;
           if (ifStackCount != (uint *****)0x0) {
             ifStackTopSlot = (uint *****)0x0;
             if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
@@ -6965,7 +6965,7 @@ code_r0x001005f4:
       }
       else {
         enclosingScopeOpcode = ILReader__topScopeOpcode(ilReader);
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8bb4;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase17Scope72_001e8bb4;
         if (enclosingScopeOpcode == 0x72) {
           stackElement = (int *)0x0;
           conditionStackTopIndex = conditionStack[1] - 1;
@@ -7001,22 +7001,22 @@ code_r0x00103718:
       opcodeTemplateTable = (uint ******)0x0;
       switch((uint)*tokenWords >> 0x10 & 7) {
       case 0:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8b80;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase21Kind0_001e8b80;
         break;
       case 1:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8bac;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase21Kind1_001e8bac;
         break;
       case 2:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8ba8;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase21Kind2_001e8ba8;
         break;
       case 3:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8bcc;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase21Kind3_001e8bcc;
         break;
       case 4:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8b94;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase21Kind4_001e8b94;
         break;
       case 5:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8b74;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase21Kind5_001e8b74;
       }
       goto templateTokenDefault;
     case 0x22:
@@ -7083,28 +7083,28 @@ code_r0x00102220:
       opcodeTemplateTable = (uint ******)0x0;
       switch((uint)*tokenWords >> 0x10 & 7) {
       case 0:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8bc0;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase23Kind0_001e8bc0;
         break;
       case 1:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8b7c;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase23Kind1_001e8b7c;
         break;
       case 2:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8ba4;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase23Kind2_001e8ba4;
         break;
       case 3:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8b90;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase23Kind3_001e8b90;
         break;
       case 4:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8bc4;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase23Kind4_001e8bc4;
         break;
       case 5:
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8ba0;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase23Kind5_001e8ba0;
       }
       goto templateTokenDefault;
     case 0x24:
       if (loopStackAlloc[2] != 0) {
         ifStackCount = (uint *****)ifStack[1];
-        opcodeTemplateTable = (uint ******)PTR_DAT_001e8b78;
+        opcodeTemplateTable = (uint ******)ptrTo_ilTemplateCase24_001e8b78;
         if (ifStackCount != (uint *****)0x0) {
           ifStackTopSlot = (uint *****)0x0;
           if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
@@ -7262,12 +7262,12 @@ joined_r0x00103afc:
       goto setOpcodeFallthrough;
     case 0x2c:
       opcodeTableBase = 0x1dd5d8;
-      if ((UNK_001dc660 == 0) || (ilOpcode == UNK_001dc660)) {
+      if ((ilSampleOpcodeRecords_rec0_opcode_001dc660 == 0) || (ilOpcode == ilSampleOpcodeRecords_rec0_opcode_001dc660)) {
 code_r0x00101020:
         opcodeTableOffset = 0;
       }
       else {
-        opcodeTableEntry = &UNK_001dc66c;
+        opcodeTableEntry = &ilSampleOpcodeRecords_rec1_opcode_001dc66c;
         opcodeTableOffset = 0;
         do {
           tableOpcode = *opcodeTableEntry;
@@ -7842,7 +7842,7 @@ code_r0x00101cbc:
         registerFile = Program__registerFileOfIlType(program,(uint)source0Token >> 0x10 & 0x3f);
         operandRecord2 = IRInst__getOperandRecord(cmp1SInst,1);
         *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
-        remapTable = PTR_DAT_001e8b84;
+        remapTable = ptrTo_compareKindTable_001e8b84;
         *(int *)(operandRecord2 + 8) = sourceRegisterIndexB;
         *(undefined4 *)((int)cmp1SInst + 300) = *(undefined4 *)remapTable;
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -8198,10 +8198,10 @@ code_r0x00103300:
     case 0x48:
     case 0x49:
       opcodeTemplateTable = (uint ******)
-                     (PTR_s_IF_b_001dc2cc)[templateToken * 4 + ((uint)*tokenWords >> 0x10 & 0x3fff)];
+                     (psnControlFlowOpNameTable_001dc2cc)[templateToken * 4 + ((uint)*tokenWords >> 0x10 & 0x3fff)];
       goto templateTokenDefault;
     case 0x4a:
-      opcodeTemplateTable = *(uint *******)((int)&PTR_DAT_001dc75c + ((uint)*tokenWords >> 0xe & 0xc));
+      opcodeTemplateTable = *(uint *******)((int)&templateTablePtrsCase4a_001dc75c + ((uint)*tokenWords >> 0xe & 0xc));
 templateTokenDefault:
       argR6 = (uint ******)currentBlock;
       argR8 = scopeVector;
@@ -8215,9 +8215,9 @@ code_r0x0010372c:
          (hwFlag0x40Clear = true, (*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x40) != 0)) {
         hwFlag0x40Clear = false;
       }
-      argR7 = (uint ******)PTR_DAT_001e8b98;
+      argR7 = (uint ******)ptrTo_ilTemplateCase4bDefault_001e8b98;
       if (hwFlag0x40Clear) {
-        argR7 = (uint ******)PTR_DAT_001e8b9c;
+        argR7 = (uint ******)ptrTo_ilTemplateCase4bHwFlag40Clear_001e8b9c;
       }
 code_r0x001022b4:
       argR6 = (uint ******)currentBlock;
@@ -8340,9 +8340,9 @@ code_r0x00101f74:
       goto code_r0x00101d1c;
     case 0x6b:
       optionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),4);
-      argR7 = (uint ******)PTR_DAT_001e8bd8;
+      argR7 = (uint ******)ptrTo_ilTemplateCase6bDefault_001e8bd8;
       if (optionEnabled != 0) {
-        argR7 = (uint ******)PTR_DAT_001e8bb0;
+        argR7 = (uint ******)ptrTo_ilTemplateCase6bOptionEnabled_001e8bb0;
       }
       argR8 = scopeVector;
       templateBase = ((int (*)())Template__pushCallFrame)(program,templateBase,&templateCursor,savedCurrentBlock,argR7,scopeVector);
@@ -8451,7 +8451,7 @@ code_r0x00101d1c:
   if (1 < (int)operandCountPlusOne) {
     sourceOperandNumber = (uint ******)((int)((unsigned char *)0x0) + 1);
     loopCounterC = 0;
-    constantsBase = &DAT_001ad5d8;
+    constantsBase = &constPoolAnchor_001ad5d8;
     do {
       stagedSelectWord = *(uint *******)(constantsBase + -0x2c30);
       argR8 = (uint ******)&lastDeclRegister;
@@ -8472,7 +8472,7 @@ code_r0x00101d1c:
       if ((!isTranslationKind7) &&
          (flagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + 8),builtInstB), flagBit2Result != 0)) {
         if (sourceOperandNumber == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
-          selectTableEntry = &UNK_001aa9d4;
+          selectTableEntry = &laneWord03030303_001aa9d4;
         }
         else {
           selectTableEntry = &laneWordTable_001aa9cc;
@@ -8541,7 +8541,7 @@ code_r0x00101d1c:
             operandLoopIndex = (uint ******)((int)operandLoopIndex + 1);
           } while (operandCountPlusOne != operandLoopIndex);
         }
-        *(undefined4 *)(copiedInst + 0x9c) = *(undefined4 *)(PTR_DAT_001e8b64 + firstWrittenLaneB * 4);
+        *(undefined4 *)(copiedInst + 0x9c) = *(undefined4 *)(ptrTo_laneSelectWordTable_001e8b64 + firstWrittenLaneB * 4);
         *(undefined1 *)((int)scopeLevelPtr + firstWrittenLaneB + 0x10) = 1;
         *(uint ******)(copiedInst + 0x120) = builtInstB[0x48];
         DList__pushBack(pendingListB,copiedInst);

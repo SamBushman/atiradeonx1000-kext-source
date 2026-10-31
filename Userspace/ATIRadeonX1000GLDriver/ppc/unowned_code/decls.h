@@ -519,5 +519,5 @@ extern int _strlen();
 extern unsigned char ptrTo_R300SchedModel__vtable_001e90fc;
 extern int (*lazyPtrTo_memset_001e876c)();
 extern unsigned char ptrTo_MachineAssembler__dtor_1cd7ec_001e9a40;
-extern unsigned char PTR_orph_1d8910_001eb328;
+extern unsigned char orphanRefTo_R300SchedModel__dtor_1d8910_001eb328;
 extern float FLOAT_001aa0d4;

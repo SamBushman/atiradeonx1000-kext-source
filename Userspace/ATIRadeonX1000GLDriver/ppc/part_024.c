@@ -126,7 +126,7 @@ int Program__lookupTable8b68(program, ilType)
   undefined4 program;
   int ilType;
 {
-  return *(undefined4 *)(PTR_DAT_001e8b68 + ilType * 4);
+  return *(undefined4 *)(ptrTo_ilTypeLookupTable_001e8b68 + ilType * 4);
 }
 
 /* Program__laneKindOfInterpSlot @ 0xec2a0 (36 bytes) */
@@ -2125,7 +2125,7 @@ int Program__splitExports(program)
               (*(int *)(*(int *)(exportInst[0x22] + 8) * 0x38 + hwOpcodeTable + 0x34) == 0)) &&
              (isExport = IRInst__countWrittenComponents(exportInst), 1 < isExport)) {
             loopCounter = 0;
-            laneSelectPtr = (int *)PTR_DAT_001e8b64;
+            laneSelectPtr = (int *)ptrTo_laneSelectWordTable_001e8b64;
             do {
               operandRecord2 = IRInst__getOperandRecord(exportInst,0);
               if (*(char *)(loopCounter + operandRecord2 + 0x10) != '\x01') {

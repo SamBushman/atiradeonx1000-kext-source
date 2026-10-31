@@ -2771,7 +2771,7 @@ int Program__cloneProducersPerBlock_0013d3b8(program)
               writtenCount = IRInst__countWrittenComponents(inst);
               if (1 < writtenCount) {
                 loopIndex = 0;
-                componentSelectTable = (int *)PTR_DAT_001e8b64;
+                componentSelectTable = (int *)ptrTo_laneSelectWordTable_001e8b64;
                 do {
                   operandRecord = IRInst__getOperandRecord(inst,0);
                   if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
@@ -3143,7 +3143,7 @@ setVecArena:
           *(undefined4 *)(matchingDefMap + inst[0x53] * 4) = 0;
           vcall48Result = (**(code **)(*inst + 0x48))(inst);
           if (vcall48Result != 0) {
-            inst[0x27] = DAT_001b0008;
+            inst[0x27] = laneWord00000000_001b0008;
           }
           inst[3] = 0;
           ((int (*)())Inst__swizzleThroughProducer_0013d820)(inst,program);
@@ -3337,15 +3337,15 @@ setVecArena:
                           isProjectionOfClass26or3a = IRInst__isProjectionOfClass26or3a(inst);
                           selectWordConst = swizzleXYZW_001b0004;
                           if (isProjectionOfClass26or3a != 0) {
-                            selectWordConst = DAT_001b001c;
+                            selectWordConst = laneWord00000000_001b001c;
                           }
                           instFlagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + PROG_compiler),inst);
                           if (instFlagBit2Result != 0) {
                             if (operandIndex == 1) {
-                              selectConstPtr = &UNK_001b0018;
+                              selectConstPtr = &laneWord03030303_001b0018;
                             }
                             else {
-                              selectConstPtr = &DAT_001b001c;
+                              selectConstPtr = &laneWord00000000_001b001c;
                             }
                             selectWordConst = *selectConstPtr;
                           }
@@ -3723,7 +3723,7 @@ code_r0x0013f320:
       }
     } while (operandCount < 1);
     operandIndexB = 1;
-    globalsBase = &UNK_001ada48;
+    globalsBase = &constPoolAnchor_001ada48;
     do {
       operandVReg = (int *)IRInst__getOperandSource(workInst,operandIndexB);
       if (operandVReg != (int *)0x0) {
@@ -3807,7 +3807,7 @@ code_r0x0013e0ac:
               }
               *growSlotPtr = mergeTarget;
               *(uint *)(mergeTarget + 0xc) = mergedMask;
-              SelectWord__selectWhereMasked(&mergedSelectWord,DAT_001b0008,mergedMask);
+              SelectWord__selectWhereMasked(&mergedSelectWord,laneWord00000000_001b0008,mergedMask);
               *(undefined4 *)(mergeTarget + 0x9c) = mergedSelectWord;
             }
             vec2Capacity = 0;
@@ -5144,7 +5144,7 @@ int PostPack__buildLaneMap(pass, inst, inst2, laneMap)
   inst2WriteMask = *(undefined4 *)(inst2 + 0xc);
   instWriteMask = *(undefined4 *)(inst + 0xc);
   if (sameInst) {
-    instWriteMask = DAT_001b0040;
+    instWriteMask = laneWord00000000_001b0040;
   }
   countdown = 4;
   loopIndex = 0;
@@ -6172,7 +6172,7 @@ int PostPack__getNeededLaneMask(outNeededMask, packCtx, inst)
   else {
     usersVector = (uint *)inst[4];
     vectorFilledCount = usersVector[1];
-    neededMask = DAT_001b0040;
+    neededMask = laneWord00000000_001b0040;
     if (vectorFilledCount != 0) {
       loopIndex = 0;
       do {
@@ -6539,9 +6539,9 @@ int PostPack__assignCompactLanes(packCtx, inst, inst2, laneMapA, laneMapB)
   extraSrcOfInst = 0;
   *(undefined4 *)laneMapA = swizzleXYZW_001b003c;
   *(undefined4 *)laneMapB = identityLaneMap;
-  laneOccupied = DAT_001b0040;
+  laneOccupied = laneWord00000000_001b0040;
   usedLanesB = usedLanesBOut[0];
-  laneWritten = DAT_001b0040;
+  laneWritten = laneWord00000000_001b0040;
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
     extraSrcOfInst = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
   }
@@ -7574,9 +7574,9 @@ setInsertBefore:
     loopIndex5 = 0;
     selectScratch5[0] = swizzleAllUnused_001b0038;
     selectScratch4 = swizzleAllUnused_001b0038;
-    constTableBaseB = &DAT_001b40f0;
+    constTableBaseB = &constPoolAnchor_001b40f0;
     countdown2 = 4;
-    constTableBaseA = &DAT_001b40f0;
+    constTableBaseA = &constPoolAnchor_001b40f0;
     selectScratch1 = swizzleYYYY_001b0044;
     scratchBase = &selectScratch0;
     laneSlotCursor = laneGroup;
@@ -7730,9 +7730,9 @@ setLoopIndex3:
     }
     scratchBase = &selectScratch0;
     if (4 < distinctSourceCount) goto setCountdown4;
-    constTableBaseB = &DAT_001b40f0;
+    constTableBaseB = &constPoolAnchor_001b40f0;
     loopIndex2 = 0;
-    constTableBaseA = &DAT_001b40f0;
+    constTableBaseA = &constPoolAnchor_001b40f0;
     countdown8 = 4;
     selectScratch5[0] = swizzleAllUnused_001b0038;
     selectScratch3 = swizzleYYYY_001b0044;

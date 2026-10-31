@@ -1770,7 +1770,7 @@ int extvsAssignVertexInputs(ctx, shader)
   noVectorsLeft = vectorVariantCount == 0;
   nextInputSlot = 2;
   unitIndex = 0;
-  DAT_001dba98 = 0xe;
+  hwInputCodeTableSlot23_001dba98 = 0xe;
   slotByteOffset = 0x50;
   hwInputCursor = &hwInputCodeTable_001dba44;
   do {

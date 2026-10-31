@@ -99,7 +99,7 @@ int R300SchedModel__dtor_1d8910(param_1)
   undefined *puVar1;
   
   puVar1 = ptrTo_R300SchedModel__vtable_001e90fc + 8;
-  *param_1 = &PTR_orph_1d8910_001eb328;
+  *param_1 = &orphanRefTo_R300SchedModel__dtor_1d8910_001eb328;
   *param_1 = puVar1;
   return;
 }

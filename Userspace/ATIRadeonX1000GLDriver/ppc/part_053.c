@@ -1724,12 +1724,12 @@ int R520MachineAssembler__vslot79_setTexCompareFlags(this, textureClass, compare
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 6) = 1;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 8) = 1;
   }
-  if (compareMode == DAT_001b2d68) {
+  if (compareMode == laneWord00010203_001b2d68) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 5) = 1;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 7) = 5;
     return;
   }
-  if (compareMode == DAT_001b2d64) {
+  if (compareMode == laneWord00000000_001b2d64) {
     modeValue = 2;
     recordsBase = *(int *)(this + 0xa8);
     recordOffset = *(int *)(this + 0x60) * 0x48;

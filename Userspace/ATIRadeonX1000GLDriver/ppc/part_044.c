@@ -3055,7 +3055,7 @@ setSourceDef5:
           IRInst__foldConstantSourcesIntoClone(sourceDef,vslot73Result,*(undefined4 *)(pass + 8));
         }
         newSource2 = 0;
-        constTablePtr = &DAT_001acec0;
+        constTablePtr = &constPoolAnchor_001acec0;
         counterSave[0] = 0x4040404;
         if (((a0[5] & 0x200U) != 0) && (newSource2 = IRInst__getOperandSource(a0,a0[0x21]), newSource2 != 0)) {
           operandRecord8 = IRInst__getOperandRecord(node,node[0x21]);
@@ -10234,7 +10234,7 @@ int Scheduler__transformDotProduct(scheduler, node)
       selectWord = *(undefined4 *)(selectTable + (source2Select & 0xff) * 4);
       operandRecord = IRInst__getOperandRecord(inst,2);
       *(undefined4 *)(operandRecord + 0x10) = selectWord;
-      selectConst = UNK_001b019c;
+      selectConst = laneWord00000000_001b019c;
       operandRecord = IRInst__getOperandRecord(inst,3);
       *(undefined4 *)(operandRecord + 0x10) = selectConst;
       IRInst__clearSourceSelectsOfUnwrittenComponents(inst);
@@ -11940,7 +11940,7 @@ int Scheduler__buildCoScheduleGroups(scheduler)
         if (groupRecord == (uint *)0x0) {
           arena = *(undefined4 *)(*scheduler + 0x378);
           allocation = (undefined4 *)Arena__alloc(arena,0x2c);
-          defaultMaskWord = DAT_001b01a8;
+          defaultMaskWord = laneWord00000000_001b01a8;
           defaultSelectWord = swizzleYYYY_001b0198;
           groupRecord = allocation + 1;
           *allocation = arena;
@@ -11972,7 +11972,7 @@ int Scheduler__buildCoScheduleGroups(scheduler)
           pushSlot = (int *)Vector__elementRefGrow(&local_68_vec,local_64_vec);
         }
         *pushSlot = node;
-        while (groupSentinel = DAT_001b01a8, local_64_vec != 0) {
+        while (groupSentinel = laneWord00000000_001b01a8, local_64_vec != 0) {
           topIndex = local_64_vec - 1;
           topSlot = (int *)0x0;
           if (topIndex < local_64_vec) {

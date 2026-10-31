@@ -613,7 +613,7 @@ int KhanPs__deleting_dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e9108 + 8;
+  vtable = ptrTo_HwLimits__vtable_001e9108 + 8;
   *this = &ptrTo_KhanPs__dtor_001ead88;
   *this = vtable;
   return operator_delete(this);
@@ -649,7 +649,7 @@ int KhanPs__dtor(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e9108 + 8;
+  vtable = ptrTo_HwLimits__vtable_001e9108 + 8;
   *this = &ptrTo_KhanPs__dtor_001ead88;
   *this = vtable;
   return;
@@ -661,7 +661,7 @@ int KhanVs__deleting_dtor_1d84ac(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e9108 + 8;
+  vtable = ptrTo_HwLimits__vtable_001e9108 + 8;
   *this = &ptrTo_KhanVs__dtor_1d84e0_001eaf20;
   *this = vtable;
   return operator_delete(this);
@@ -673,7 +673,7 @@ int KhanVs__dtor_1d84e0(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e9108 + 8;
+  vtable = ptrTo_HwLimits__vtable_001e9108 + 8;
   *this = &ptrTo_KhanVs__dtor_1d84e0_001eaf20;
   *this = vtable;
   return;
@@ -685,7 +685,7 @@ int KhanVs__deleting_dtor_1d8514(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e9108 + 8;
+  vtable = ptrTo_HwLimits__vtable_001e9108 + 8;
   *this = &ptrTo_KhanVs__dtor_1d84e0_001eaf20;
   *this = vtable;
   return operator_delete(this);
@@ -697,7 +697,7 @@ int KhanVs__dtor_1d8548(this)
 {
   undefined *vtable;
   
-  vtable = PTR_DAT_001e9108 + 8;
+  vtable = ptrTo_HwLimits__vtable_001e9108 + 8;
   *this = &ptrTo_KhanVs__dtor_1d84e0_001eaf20;
   *this = vtable;
   return;

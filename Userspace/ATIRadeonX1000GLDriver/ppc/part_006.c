@@ -2422,7 +2422,7 @@ int fragmentTranslateAngleConvert(emitter, slot, entryHeader, srcRegWord1, unuse
   entryHeader[7] = 0;
   entryHeader[4] = 0x10000;
   *(short *)((int)entryHeader + 0x12) = (short)tempRegister;
-  opWord = *(uint *)(&UNK_001aa574 + (2 - ((int)-(opWord & 0x3fc0000 ^ 0x580000) >> 0x1f)) * 4);
+  opWord = *(uint *)(&fpilComponentIndexTable_001aa574 + (2 - ((int)-(opWord & 0x3fc0000 ^ 0x580000) >> 0x1f)) * 4);
   entryHeader[4] = entryHeader[4] | 0x400000;
   entryHeader[7] = (opWord & 7) << 0xc |
                (opWord & 7) << 8 | (opWord & 7) << 4 | opWord & 7 | entryHeader[7] & 0xffff0000;
@@ -5945,7 +5945,7 @@ loopReturnCode:
     opcode = *(uint *)(program + instructionBlockOffset) >> 0x12 & 0xff;
     opcodeInfoOffset = opcode * 0x10;
     opClass = *(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
-    if ((opClass != 0) && ((*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) == 0)) {
+    if ((opClass != 0) && ((*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & fragmentOpcodeInfoFlagMask_001db344) == 0)) {
       instructionIndex = 0;
       recordIndex = 0;
       recordByteOffset = 0;
@@ -6749,7 +6749,7 @@ joined_r0x0004802c:
         opcode = instructionRecords[recordIndex * 2] >> 0x12 & 0xff;
         opcodeInfoOffset = opcode * 0x10;
         opClass = *(uint *)(&fragmentOpcodeInfoTable_001dac34 + opcodeInfoOffset) >> 0x11 & 0xf;
-        if ((opClass == 0) || ((*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & DAT_001db344) != 0))
+        if ((opClass == 0) || ((*(uint *)(&fragmentOpcodeInfoTable_word3_001dac40 + opcodeInfoOffset) >> 0x1c & fragmentOpcodeInfoFlagMask_001db344) != 0))
         break;
       } while( true );
     }

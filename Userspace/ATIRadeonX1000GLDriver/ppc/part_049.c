@@ -48,7 +48,7 @@ int Inst__mergeSourceInstructions(inst, sourceInstRefA, sourceInstRefB, compiler
   destSelectBytes = *(undefined4 *)(loopIndex2 + 0x10);
   do {
     loopIndex2 = 0;
-    loopPtr5 = &DAT_001b0228 + loopIndex4 * 4;
+    loopPtr5 = &selectByteRowTable_001b0228 + loopIndex4 * 4;
     loopIndex = 4;
     while ((*(char *)((int)&destSelectBytes + loopIndex2) != '\0' ||
            ((*(char *)((int)&srcSelect2 + loopIndex2) == *(char *)((int)&srcSelect1 + loopIndex2) &&
@@ -1883,7 +1883,7 @@ int KhanPs__vslot65_isEncodableSourceSwizzle(this, unusedArg2, unusedArg3, swizz
 int SelectWord__isDefaultAfterCanonicalise(selectWord)
   uint selectWord;
 {
-  return *(uint *)(&DAT_001b0244 +
+  return *(uint *)(&selectWordCanonicaliseTable_001b0244 +
                   ((selectWord >> 0x18) * 0x7d + (selectWord >> 0x10 & 0xff) * 0x19 +
                    (selectWord >> 8 & 0xff) * 5 + (selectWord & 0xff)) * 0x10) ==
          ((uint)(byte)swizzleAllUnused_001b2a68 << 0x18 | (uint)(*(unsigned char *)((unsigned char *)&(swizzleAllUnused_001b2a68) + 2)) << 0x10 |
@@ -1907,14 +1907,14 @@ int SelectWord__matchesAnyKnownPattern(selectWord)
   int callResult;
   undefined4 *loopPtr;
   
-  loopPtr = &DAT_001b2994;
+  loopPtr = &laneSelectWordTable_001b2994;
   do {
     callResult = SelectWord__areCompatible(*loopPtr,selectWord);
     if (callResult != 0) {
       return 1;
     }
     loopPtr = loopPtr + 1;
-  } while (loopPtr != (undefined4 *)&UNK_001b29e4);
+  } while (loopPtr != (undefined4 *)&laneSelectWordTableEnd_001b29e4);
   return 0;
 }
 
@@ -2694,8 +2694,8 @@ code_r0x0018aab8:
               loopIndex2 = IRInst__getOperandRecord(inst,operandIndex);
               loopIndex3 = *(uint *)(loopIndex2 + 0x10);
               if ((((loopIndex != 0) &&
-                   (((loopRemaining = IRInst__getOperandRecord(loopIndex,0), loopIndex2 = _UNK_001b2a7c,
-                     *(char *)(loopRemaining + 0x12) == '\x01' || (*(int *)(loopIndex + 0xb4) == _UNK_001b2a7c)
+                   (((loopRemaining = IRInst__getOperandRecord(loopIndex,0), loopIndex2 = _laneWord00010303_001b2a7c,
+                     *(char *)(loopRemaining + 0x12) == '\x01' || (*(int *)(loopIndex + 0xb4) == _laneWord00010303_001b2a7c)
                      ) && ((laneSelectWord >> 8 & 0xff) != 0)))) && ((loopIndex3 >> 8 & 0xff) == 3)) &&
                  (((laneSelectWord >> 0x18 != 0 && (loopIndex3 >> 0x18 == 0)) ||
                   (((laneSelectWord >> 0x10 & 0xff) != 0 && ((loopIndex3 >> 0x10 & 0xff) == 1)))))) {

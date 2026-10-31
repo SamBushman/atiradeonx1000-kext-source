@@ -2731,7 +2731,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       outputSemantic = instructionToken >> 0x10 & 0x3fff;
       lastReturnR4 = r4AfterDclOutput;
       if (outputSemantic < 0x13) {
-        ildisAppendf(disassembler,(PTR_s__position_001dc3f4)[outputSemantic],mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,
+        ildisAppendf(disassembler,(ildisOutputSemanticNameTable_001dc3f4)[outputSemantic],mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,
                      fmtArgR9,nextWordPtr);
         lastReturnR4 = r4AfterDclOutputB;
       }
@@ -2745,7 +2745,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       lastReturnR4 = r4AfterDclInput;
       if ((instructionToken & 0x7c000) != 0x14000) {
         ildisAppendf(disassembler,*(undefined4 *)
-                              ((int)PTR_s__position_001dc3f4 + (instructionToken >> 0xc & 0x7c)),mnemonic,
+                              ((int)ildisOutputSemanticNameTable_001dc3f4 + (instructionToken >> 0xc & 0x7c)),mnemonic,
                      fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
         lastReturnR4 = r4AfterDclInputB;
       }
@@ -3602,7 +3602,7 @@ int Compiler__setOption(compiler, optionName, value)
   undefined **optionNamePtr;
   
   length = _strlen(optionName);
-  optionNamePtr = &PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444;
+  optionNamePtr = &compilerOptionNameTable_001dc444;
   loopCounter = 0;
   while (prefixCompare = _strncmp(*optionNamePtr,optionName,length), prefixCompare != 0) {
     isLastEntry = loopCounter == 0x4f;

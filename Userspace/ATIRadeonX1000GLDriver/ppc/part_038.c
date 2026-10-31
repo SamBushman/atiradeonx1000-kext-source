@@ -86,7 +86,7 @@ int ExportSlot__ctor_12622c(this, ctorWord2, ctorWord1, ctorWord3, compiler)
     exportInst = allocation + 1;
     *allocation = arena;
     IRExport__ctor_108918(exportInst,compiler);
-    allocation[0x28] = DAT_001afef0;
+    allocation[0x28] = laneWord00010101_001afef0;
     IRInst__setOperandRef(exportInst,0,this);
     VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);
@@ -124,7 +124,7 @@ int ExportSlot__ctor_126378(this, ctorWord2, ctorWord1, ctorWord3, compiler)
     exportInst = allocation + 1;
     *allocation = arena;
     IRExport__ctor_108918(exportInst,compiler);
-    allocation[0x28] = DAT_001afef0;
+    allocation[0x28] = laneWord00010101_001afef0;
     IRInst__setOperandRef(exportInst,0,this);
     VReg__appendUser(this,exportInst);
     IRInst__setOperandRef(exportInst,1,this);

@@ -4239,7 +4239,7 @@ int arbfpLookupKeyword(parser)
   low = 0;
   compareResult = 0;
   tokenLength = *(int *)(parser + 0xc) - (int)tokenText;
-  high = DAT_001dbcd0 + -1;
+  high = arbfpKeywordTableCount_001dbcd0 + -1;
   do {
     sum = low + high;
     mid = ((int)sum >> 1) + (uint)((int)sum < 0 && (sum & 1) != 0);
@@ -4249,7 +4249,7 @@ loopSetMatchIndex:
       matchIndex = 0;
     }
     else {
-      compareResult = (uint)*tokenText - (int)(char)*(PTR_s_1D_001e9158)[mid * 3];
+      compareResult = (uint)*tokenText - (int)(char)*(arbfpKeywordTable_001e9158)[mid * 3];
       isEqual = compareResult == 0;
       if (!isEqual) goto loopSetMatchIndex;
       matchIndex = 0;
@@ -4261,16 +4261,16 @@ loopSetMatchIndex:
           compareResult = 0;
           goto checkMid;
         }
-        compareResult = (uint)tokenText[matchIndex] - (int)(char)(PTR_s_1D_001e9158)[mid * 3][matchIndex];
+        compareResult = (uint)tokenText[matchIndex] - (int)(char)(arbfpKeywordTable_001e9158)[mid * 3][matchIndex];
         isEqual = false;
       } while (compareResult == 0);
     }
     if (compareResult < 1) {
       if (isEqual) {
 checkMid:
-        if ((PTR_s_1D_001e9158)[mid * 3][matchIndex] == '\0') {
-          *(undefined4 *)(parser + 0x14) = *(undefined4 *)(&UNK_001e915c + mid * 0xc);
-          *(undefined4 *)(parser + 0x18) = *(undefined4 *)(&UNK_001e9160 + mid * 0xc);
+        if ((arbfpKeywordTable_001e9158)[mid * 3][matchIndex] == '\0') {
+          *(undefined4 *)(parser + 0x14) = *(undefined4 *)(&arbfpKeywordTable_tokenClass_001e915c + mid * 0xc);
+          *(undefined4 *)(parser + 0x18) = *(undefined4 *)(&arbfpKeywordTable_tokenIndex_001e9160 + mid * 0xc);
           return;
         }
       }
