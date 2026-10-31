@@ -463,7 +463,7 @@ double gld_gatherProgramConstants(int ctx,int maxCount,float *outConstants,doubl
     operandsLeft = maxCount;
   }
   if (operandsLeft < 1) {
-LAB_00025b04:
+loopSetScratchFloat3:
     scratchFloat3 = FLOAT_001aa13c;
     scratchFloat2 = FLOAT_001aa138;
     scratchFloat6 = FLOAT_001aa134;
@@ -494,15 +494,15 @@ LAB_00025b04:
     return staleFprArg1;
   }
   operandIndex = 0;
-LAB_00025090:
+loopSetI2dMagic:
   i2dMagic = DOUBLE_001aa1e0;
   scratchFloat6 = FLOAT_001aa0e8;
   operandWord = *operandPtr;
   operandFile = operandWord & 0x1f0000;
-  if (operandFile == 0) goto LAB_00025af0;
+  if (operandFile == 0) goto setOperandIndex;
   if (operandFile == 0x110000) {
     constantSrc = (float *)(programData + paramBase * 8 + (uint)(ushort)*operandPtr * 0x10);
-LAB_0002546c:
+loopCheckUseDefaultProgram:
     if ((useDefaultProgram) || ((operandWord & 0x1c000000) == 0x4000000)) {
       *outConstants = *constantSrc;
       outConstants[1] = constantSrc[1];
@@ -553,11 +553,11 @@ LAB_0002546c:
       }
       outConstants[3] = scratchFloat6;
     }
-    goto LAB_00025af0;
+    goto setOperandIndex;
   }
   if (operandFile == 0x10000) {
     constantSrc = (float *)(literalPool + (uint)(ushort)*operandPtr * 0x10);
-    goto LAB_0002546c;
+    goto loopCheckUseDefaultProgram;
   }
   if (operandFile == 0x20000) {
     scratchInt23 = (uint)(ushort)*operandPtr * 0x10;
@@ -566,7 +566,7 @@ LAB_0002546c:
     outConstants[1] = *(float *)(scratchInt10 + 4);
     outConstants[2] = *(float *)(scratchInt10 + 8);
     outConstants[3] = *(float *)(scratchInt10 + 0xc);
-    goto LAB_00025af0;
+    goto setOperandIndex;
   }
   if (operandFile == 0x100000) {
     scratchUint20 = operandWord >> 0xc & 3;
@@ -597,7 +597,7 @@ LAB_0002546c:
     }
     if (operandWord < 3) {
       if (operandWord == 0) {
-LAB_000256f4:
+loopSetScratchInt23:
         scratchInt23 = scratchUint20 * 4;
         scratchInt11 = scratchInt10 + scratchInt23;
         vecX = *(float *)(scratchInt10 + scratchInt23);
@@ -614,8 +614,8 @@ LAB_000256f4:
         vecW[0] = *(float *)(scratchInt11 + 0xc);
       }
     }
-    else if (operandWord == 3) goto LAB_000256f4;
-    goto LAB_00025ac8;
+    else if (operandWord == 3) goto loopSetScratchInt23;
+    goto storeOutConstants;
   }
   switch(operandWord >> 0x10 & 0x1f) {
   case 0:
@@ -683,7 +683,7 @@ LAB_000256f4:
       vecZ = vecZPlusOne * scratchFloat6;
       vecX = scratchFloat3 * scratchFloat6;
       vecY = scratchFloat2 * scratchFloat6;
-      goto LAB_00025ac8;
+      goto storeOutConstants;
     case 7:
       vecPtr = (float *)(scratchUint20 * 0x80 + 0x2530 + *(int *)(ctx + GLD_engineState));
       srcYPtr = (dword *)(vecPtr + 1);
@@ -721,7 +721,7 @@ LAB_000256f4:
       vecZ = *(float *)(lightRecord + 8) * *(float *)(materialRecord + 8);
       vecW[0] = *(float *)(materialRecord + 0xc);
     }
-    goto LAB_00025ac8;
+    goto storeOutConstants;
   case 5:
     scratchUint20 = operandWord & 1;
     switch(operandWord >> 1 & 7) {
@@ -763,7 +763,7 @@ LAB_000256f4:
       vecY = *(float *)(engineStateB + 0x24b4) * *(float *)(scratchInt10 + 4) + *(float *)(scratchInt10 + 0x34);
       vecZ = *(float *)(engineStateB + 0x24b8) * *(float *)(scratchInt10 + 8) + *(float *)(scratchInt10 + 0x38);
       vecW[0] = *(float *)(scratchInt10 + 0x1c);
-      goto LAB_00025ac8;
+      goto storeOutConstants;
     default:
       goto switchD_00025774_caseD_1;
     }
@@ -781,7 +781,7 @@ LAB_000256f4:
     if (scratchUint20 == 1) {
       engineState = *(int *)(ctx + GLD_engineState);
       stateRecord = ((unsigned char *)0x000039a0) + operandWord * 0x94;
-LAB_00025180:
+loopSetSrcWPtr:
       srcWPtr = (dword *)(stateRecord + engineState + 0x1c);
       vecPtr = (float *)(stateRecord + engineState + 0x10);
       srcYPtr = (dword *)(stateRecord + engineState + 0x14);
@@ -792,14 +792,14 @@ LAB_00025180:
         if (scratchUint20 == 0) {
           engineState = *(int *)(ctx + GLD_engineState);
           stateRecord = ((unsigned char *)0x00003980) + operandWord * 0x94;
-          goto LAB_0002515c;
+          goto setSrcWPtr;
         }
         goto switchD_00025774_caseD_1;
       }
       if (scratchUint20 == 2) {
         engineState = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x000039c0) + operandWord * 0x94;
-LAB_000251a4:
+loopSetSrcWPtr2:
         srcWPtr = (dword *)(stateRecord + engineState + 0x20);
         vecPtr = (float *)(stateRecord + engineState + 0x14);
         srcYPtr = (dword *)(stateRecord + engineState + 0x18);
@@ -809,7 +809,7 @@ LAB_000251a4:
         if (scratchUint20 != 3) goto switchD_00025774_caseD_1;
         engineState = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x000039e0) + operandWord * 0x94;
-LAB_000251c8:
+loopSetSrcWPtr3:
         srcWPtr = (dword *)(stateRecord + engineState + 0x24);
         vecPtr = (float *)(stateRecord + engineState + 0x18);
         srcYPtr = (dword *)(stateRecord + engineState + 0x1c);
@@ -823,25 +823,25 @@ LAB_000251c8:
     if (scratchUint20 == 1) {
       engineState = *(int *)(ctx + GLD_engineState);
       stateRecord = ((unsigned char *)0x000039b0) + operandWord * 0x94;
-      goto LAB_00025180;
+      goto loopSetSrcWPtr;
     }
     if (scratchUint20 < 2) {
       if (scratchUint20 == 0) {
         engineState = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x00003990) + operandWord * 0x94;
-        goto LAB_0002515c;
+        goto setSrcWPtr;
       }
     }
     else {
       if (scratchUint20 == 2) {
         engineState = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x000039d0) + operandWord * 0x94;
-        goto LAB_000251a4;
+        goto loopSetSrcWPtr2;
       }
       if (scratchUint20 == 3) {
         engineState = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x000039f0) + operandWord * 0x94;
-        goto LAB_000251c8;
+        goto loopSetSrcWPtr3;
       }
     }
     goto switchD_00025774_caseD_1;
@@ -855,7 +855,7 @@ LAB_000251c8:
   case 10:
     engineState = *(int *)(ctx + GLD_engineState);
     stateRecord = ((unsigned char *)0x00003e20) + (operandWord & 0xff) * 0x10;
-LAB_0002515c:
+setSrcWPtr:
     srcWPtr = (dword *)(stateRecord + engineState + 0x18);
     vecPtr = (float *)(stateRecord + engineState + 0xc);
     srcYPtr = (dword *)(stateRecord + engineState + 0x10);
@@ -895,36 +895,36 @@ LAB_0002515c:
     vecY = (float)*(double *)(engineStateB + 0x1838);
     vecW[0] = 1.0;
     vecZ = (float)(*(double *)(engineStateB + 0x1838) - *(double *)(0x00001830 + engineStateB));
-    goto LAB_00025ac8;
+    goto storeOutConstants;
   case 0x12:
     vecW[0] = *(float *)(*(int *)(ctx + GLD_engineState) + 0x24a4);
     vecX = vecW[0];
     vecY = vecW[0];
     vecZ = vecW[0];
-    goto LAB_00025ac8;
+    goto storeOutConstants;
   }
-LAB_00025aa8:
+loopSetVecX:
   vecX = *vecPtr;
   vecY = (float)*srcYPtr;
   vecZ = (float)*srcZPtr;
   vecW[0] = (float)*srcWPtr;
-LAB_00025ac8:
+storeOutConstants:
   outConstants[1] = vecY;
   outConstants[2] = vecZ;
   *outConstants = vecX;
   outConstants[3] = vecW[0];
-LAB_00025af0:
+setOperandIndex:
   operandIndex = operandIndex + 1;
   operandPtr = operandPtr + 2;
   outConstants = outConstants + 4;
-  if (operandsLeft == operandIndex) goto LAB_00025b04;
-  goto LAB_00025090;
+  if (operandsLeft == operandIndex) goto loopSetScratchFloat3;
+  goto loopSetI2dMagic;
 switchD_00025774_caseD_1:
   vecPtr = (float *)0x0;
   srcYPtr = ((unsigned char *)0x4);
   srcZPtr = ((unsigned char *)0x8);
   srcWPtr = ((unsigned char *)0xc);
-  goto LAB_00025aa8;
+  goto loopSetVecX;
 }
 
 /* gld_releaseProgramObject @ 0x25bf0 (408 bytes) */
@@ -1066,7 +1066,7 @@ int gld_bindFragmentProgramRecord(ctx, programObject)
   
   commandStream = (int *)(ctx + 0x240);
   for (contextRecord = (int *)programObject[9]; contextRecord != programObject + 8; contextRecord = (int *)contextRecord[1]) {
-    if (ctx == contextRecord[2]) goto LAB_00025f80;
+    if (ctx == contextRecord[2]) goto setScratchInt9;
   }
   contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
   contextRecord[3] = programObject[5] + -1;
@@ -1078,18 +1078,18 @@ int gld_bindFragmentProgramRecord(ctx, programObject)
   *contextRecord = programObject[8];
   programObject[8] = (int)contextRecord;
   *(int **)(*contextRecord + 4) = contextRecord;
-LAB_00025f80:
+setScratchInt9:
   scratchInt9 = contextRecord[5];
   recordProgramId = contextRecord + 5;
   if (scratchInt9 == 0) {
     glGenProgramsARB_impl(commandStream,1,recordProgramId);
     scratchInt9 = contextRecord[5];
-    if (scratchInt9 != 0) goto LAB_00025fac;
-LAB_000263d8:
+    if (scratchInt9 != 0) goto callGlBindProgramARBImpl;
+loopSetBindResult:
     bindResult = 0;
   }
   else {
-LAB_00025fac:
+callGlBindProgramARBImpl:
     glBindProgramARB_impl(commandStream,0x8804,scratchInt9,staleArgR6,staleArgR7,literalPool,rowsMinusOne);
     if (contextRecord[3] == programObject[5]) {
       constantUseCursor = (byte *)programObject[0xe];
@@ -1098,14 +1098,14 @@ LAB_00025fac:
         scratchUint5 = programFlags >> 0x1b;
         literalPool = *(int *)(*programObject + 0x18);
         if (scratchUint5 == 0) {
-LAB_00026008:
+loopSetScratchFlag3:
           scratchFlag3 = false;
         }
         else {
           if ((uint)constantUseCursor[1] == *(uint *)(literalPool + (uint)*constantUseCursor * 0x10)) {
             do {
               scratchUint5 = scratchUint5 - 1;
-              if (scratchUint5 == 0) goto LAB_00026008;
+              if (scratchUint5 == 0) goto loopSetScratchFlag3;
               useIndexPtr = constantUseCursor + 2;
               useValuePtr = constantUseCursor + 3;
               constantUseCursor = constantUseCursor + 2;
@@ -1129,17 +1129,17 @@ LAB_00026008:
           if (scratchFlag3) {
             contextRecord[3] = programObject[5];
           }
-          goto LAB_000260dc;
+          goto checkScratchFlag3;
         }
       }
-LAB_000263c0:
-      if (*(char *)(programObject + 10) != '\0') goto LAB_000263d8;
+loopCheckProgramObject:
+      if (*(char *)(programObject + 10) != '\0') goto loopSetBindResult;
     }
     else {
       contextRecord[3] = programObject[5];
       scratchFlag3 = true;
-LAB_000260dc:
-      if (!scratchFlag3) goto LAB_000263c0;
+checkScratchFlag3:
+      if (!scratchFlag3) goto loopCheckProgramObject;
       *(undefined1 *)(programObject + 10) = 0;
       if (programObject[0xb] != 0) {
         _glpFreePPShaderLinearize(programObject[0xb]);
@@ -1188,12 +1188,12 @@ LAB_000260dc:
             scratchInt9 = translator[0xd];
             translator[0xd] = *commandStream;
             programObject[0xe] = scratchInt9;
-            goto LAB_0002639c;
+            goto callFpilDestroyTranslator;
           }
         }
         else {
           translateOk = !scratchFlag3;
-          if (!translateOk) goto LAB_0002639c;
+          if (!translateOk) goto callFpilDestroyTranslator;
         }
         if ((*(short *)*programObject != -0x74d0) || ((scratchUint5 & 6) == 6)) break;
         if ((scratchUint5 & 4) == 0) {
@@ -1243,7 +1243,7 @@ LAB_000260dc:
       else {
         translateOk = false;
       }
-LAB_0002639c:
+callFpilDestroyTranslator:
       fpilDestroyTranslator(translator);
       if (translateOk) {
         *(undefined1 *)(programObject + 10) = 1;
@@ -1266,7 +1266,7 @@ int gld_bindProgramRecord(ctx, programObject)
   int commandStream;
   
   for (contextRecord = (int *)programObject[9]; contextRecord != programObject + 8; contextRecord = (int *)contextRecord[1]) {
-    if (ctx == contextRecord[2]) goto LAB_000264f0;
+    if (ctx == contextRecord[2]) goto setCommandStream;
   }
   contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
   contextRecord[3] = programObject[5] + -1;
@@ -1277,7 +1277,7 @@ int gld_bindProgramRecord(ctx, programObject)
   *contextRecord = programObject[8];
   programObject[8] = (int)contextRecord;
   *(int **)(*contextRecord + 4) = contextRecord;
-LAB_000264f0:
+setCommandStream:
   commandStream = ctx + 0x240;
   scratchInt2 = gld_bindVertexShaderSlot(commandStream,contextRecord + 5);
   if (scratchInt2 != 0) {
@@ -1336,28 +1336,28 @@ int gld_bindProgramObject(ctx, programObject)
   int sharedState;
   int *recordListHead;
   
-  if (programObject[7] != 0) goto LAB_00026758;
+  if (programObject[7] != 0) goto setPendingGenerationBits;
   programHeader = (short *)*programObject;
   if (programHeader[1] == 0) {
     if ((*programHeader == -0x79e0) || (*programHeader == -0x74cf)) {
       scratchInt4 = 1;
-      goto LAB_00026698;
+      goto storeProgramObject;
     }
-LAB_00026694:
+loopSetScratchInt4:
     scratchInt4 = 0;
   }
   else {
-    if (programHeader[1] != 1) goto LAB_00026694;
+    if (programHeader[1] != 1) goto loopSetScratchInt4;
     programKind = *programHeader;
     if ((programKind == -0x77fc) || (programKind == -0x74d0)) {
       scratchInt4 = 2;
     }
     else {
       scratchInt4 = 3;
-      if (programKind != -0x7e00) goto LAB_00026694;
+      if (programKind != -0x7e00) goto loopSetScratchInt4;
     }
   }
-LAB_00026698:
+storeProgramObject:
   programObject[7] = scratchInt4;
   if (scratchInt4 == 0) {
     return 0;
@@ -1370,7 +1370,7 @@ LAB_00026698:
   programObject[3] = scratchInt4;
   *(int **)(sharedState + 0x2c) = programObject + 3;
   *(int **)(programObject[3] + 4) = programObject + 3;
-LAB_00026758:
+setPendingGenerationBits:
   pendingGenerationBits = programObject[0xf];
   if (pendingGenerationBits != 0) {
     if ((pendingGenerationBits & 1) != 0) {
@@ -1406,7 +1406,7 @@ LAB_00026758:
       contextRecord = (int *)programObject[9];
       recordListHead = programObject + 8;
       if (contextRecord == recordListHead) {
-LAB_0002687c:
+loopSetContextRecord:
         contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
         contextRecord[3] = programObject[5] + -1;
         scratchInt4 = programObject[6];
@@ -1421,7 +1421,7 @@ LAB_0002687c:
         scratchInt4 = contextRecord[2];
         while (scratchInt4 != ctx) {
           contextRecord = (int *)contextRecord[1];
-          if (recordListHead == contextRecord) goto LAB_0002687c;
+          if (recordListHead == contextRecord) goto loopSetContextRecord;
           scratchInt4 = contextRecord[2];
         }
       }
@@ -1468,7 +1468,7 @@ int gld_getProgramParameter(ctx, programObject, pname, params)
     if (programHeader[1] == 0) {
       if (*programHeader == -0x79e0) {
         for (contextRecord = (int *)programObject[9]; contextRecord != programObject + 8; contextRecord = (int *)contextRecord[1]) {
-          if (ctx == contextRecord[2]) goto LAB_00026ae0;
+          if (ctx == contextRecord[2]) goto switchPname;
         }
         contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
         contextRecord[3] = programObject[5] + -1;
@@ -1479,7 +1479,7 @@ int gld_getProgramParameter(ctx, programObject, pname, params)
         *contextRecord = programObject[8];
         programObject[8] = (int)contextRecord;
         *(int **)(*contextRecord + 4) = contextRecord;
-LAB_00026ae0:
+switchPname:
         switch(pname) {
         case 0x88a2:
           *params = contextRecord[0x23];
@@ -1551,7 +1551,7 @@ int gld_drawArraysDirect(ctx, staleArgR4, primitiveMode, vertexCount, staleArgR7
       if (*(int *)(ctx + 0x2680) != scratchInt7) {
         vapVteCntl = *(undefined4 *)(ctx + 0x28e0);
         scratchInt12 = ctx + 0x2860;
-        goto LAB_00026ea8;
+        goto storeCtx;
       }
     }
     else {
@@ -1559,7 +1559,7 @@ int gld_drawArraysDirect(ctx, staleArgR4, primitiveMode, vertexCount, staleArgR7
       if (*(int *)(ctx + 0x2680) != scratchInt7) {
         vapVteCntl = *(undefined4 *)(ctx + 0x2984);
         scratchInt12 = ctx + 0x2904;
-LAB_00026ea8:
+storeCtx:
         *(int *)(ctx + 0x2680) = scratchInt7;
         *(int *)(ctx + 0x2684) = scratchInt12;
         *(undefined4 *)(0x000026c8 + ctx + 4) = vapVteCntl;
@@ -1582,7 +1582,7 @@ LAB_00026ea8:
     ringCursor[scratchInt7 + 5] = 0;
     *(undefined4 **)(ctx + 0x298c) = ringCursor + scratchInt7 + 6;
     *(undefined4 **)(ctx + 0x1dc) = ringCursor + scratchInt7 + 6;
-    goto LAB_00026f60;
+    goto storeCtx3;
   }
   streamCountField = *(uint *)(ctx + 0x283c) & 0x1f;
   if (*(char *)(ctx + 0x27d4) == '\0') {
@@ -1611,7 +1611,7 @@ LAB_00026ea8:
     streamRecord = ctx + 0x2840;
     if (*(int *)(ctx + 0x2680) != streamRecord) {
       streamRecordExt = ctx + 0x2860;
-      goto LAB_00026d64;
+      goto storeCtx2;
     }
   }
   else {
@@ -1622,7 +1622,7 @@ LAB_00026ea8:
     streamRecord = ctx + 0x28e4;
     if (*(int *)(ctx + 0x2680) != streamRecord) {
       streamRecordExt = ctx + 0x2904;
-LAB_00026d64:
+storeCtx2:
       *(int *)(ctx + 0x2680) = streamRecord;
       *(int *)(ctx + 0x2684) = streamRecordExt;
       ringCursor = (undefined4 *)((int (*)())gld_emitVapStreamControl)(ctx,ringCursor);
@@ -1648,7 +1648,7 @@ LAB_00026d64:
   if (((*(uint *)(ctx + 0x27d8) & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
     gldFlushDataCacheRange(ctx,scratchInt12,scratchInt7,vertexCount,staleArgR7,streamCountField,0xc0003400,packetEnd);
   }
-LAB_00026f60:
+storeCtx3:
   *(undefined1 *)(ctx + 0x2a5e) = 1;
   return;
 }
@@ -1863,13 +1863,13 @@ uint gld_reserveDrawSpace(int ctx,uint *altCountPtr,uint *countInOut,undefined4 
   *(undefined1 *)(ctx + 0x27d4) = recordSelector;
   scratchUint5 = *(uint *)(ctx + 0x27d8);
   if (!usesSecondRecord) {
-    if ((scratchUint5 & 0x10) != 0) goto LAB_00027478;
-LAB_00027458:
+    if ((scratchUint5 & 0x10) != 0) goto setModeBit;
+loopSetModeBit:
     modeBit = 1;
   }
   else {
-    if ((scratchUint5 & 8) == 0) goto LAB_00027458;
-LAB_00027478:
+    if ((scratchUint5 & 8) == 0) goto loopSetModeBit;
+setModeBit:
     modeBit = 2;
   }
   newModeWord = modeBit | scratchUint5 & 0x18;
@@ -1878,14 +1878,14 @@ LAB_00027478:
   }
   if ((modeBit & 2) == 0) {
     if (*(char *)(ctx + 0x27d4) == '\0') {
-      if (*(int *)(ctx + 0x2680) != ctx + 0x2840) goto LAB_000276e0;
-LAB_000276f8:
+      if (*(int *)(ctx + 0x2680) != ctx + 0x2840) goto setScratchUint5;
+loopSetScratchInt12:
       scratchInt12 = 2;
       scratchInt11 = 4;
     }
     else {
-      if (*(int *)(ctx + 0x2680) == ctx + 0x28e4) goto LAB_000276f8;
-LAB_000276e0:
+      if (*(int *)(ctx + 0x2680) == ctx + 0x28e4) goto loopSetScratchInt12;
+setScratchUint5:
       scratchUint5 = *(int *)(ctx + 0x267c) + 1U & 0xfffffffe;
       scratchInt11 = scratchUint5 + 8;
       scratchInt12 = scratchUint5 + 6;
@@ -1917,7 +1917,7 @@ LAB_000276e0:
     for (; ringCursor < alignedRingEnd; ringCursor = ringCursor + 1) {
       *ringCursor = 0x80000000;
     }
-    if (*countInOut != 0) goto LAB_00027854;
+    if (*countInOut != 0) goto storeCountInOut;
     scratchUint8 = (((*(int *)(ctx + 0x1e0) - *(int *)(ctx + 0x1dc) >> 2) + -1) -
             (uint)(*(byte *)(ctx + 8) >> 1)) - (scratchInt11 + 2);
     if (0x600 < scratchUint8) {
@@ -1939,10 +1939,10 @@ LAB_000276e0:
     }
     scratchUint18 = scratchInt12 + ((*(uint *)(ctx + 0x283c) & 0x1f) + 1 >> 1) * 3 + 3;
     if (!usesSecondRecord) {
-      if (*(int *)(ctx + 0x2680) != ctx + 0x2840) goto LAB_00027540;
+      if (*(int *)(ctx + 0x2680) != ctx + 0x2840) goto setScratchUint18;
     }
     else if (*(int *)(ctx + 0x2680) != ctx + 0x28e4) {
-LAB_00027540:
+setScratchUint18:
       scratchUint18 = scratchUint18 + (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 4;
     }
     scratchUint5 = *(uint *)(ctx + 0x1ec);
@@ -1958,7 +1958,7 @@ LAB_00027540:
           scratchInt11 = *(int *)(ctx + 0x1e0);
         }
         scratchInt12 = scratchInt11 - ringWriteCursor;
-LAB_00027630:
+loopSetScratchUint5:
         scratchUint5 = (scratchInt12 >> 2) - 1;
         if (scratchUint5 < scratchUint18 + scratchUint17) {
           scratchUint17 = scratchUint5 - scratchUint18;
@@ -1992,14 +1992,14 @@ LAB_00027630:
           scratchInt11 = *(int *)(ctx + 0x1e0);
         }
         scratchInt12 = scratchInt11 - ringWriteCursor;
-        goto LAB_00027630;
+        goto loopSetScratchUint5;
       }
     }
     scratchUint8 = ((int)(scratchInt12 - scratchUint5) >> 2) - (scratchUint8 >> 1);
-    if (vertexStride * fittingCount <= scratchUint8) goto LAB_00027854;
+    if (vertexStride * fittingCount <= scratchUint8) goto storeCountInOut;
   }
   fittingCount = ((scratchUint8 / vertexStride) / 0xc) * 0xc;
-LAB_00027854:
+storeCountInOut:
   *countInOut = fittingCount;
   scratchUint8 = (uint)*(byte *)(ctx + 8);
   if (scratchUint8 != 0x20) {
@@ -2147,11 +2147,11 @@ switchD_00027e30_default:
     scratchFlag1 = *(int *)(scratchInt14 + 0x1cc) == 0;
     do {
       if (scratchFlag1) {
-        if ((1 << (loopIndex2 & 0x3f) & *(uint *)(stream + 0x1ca0)) != 0) goto LAB_00027b90;
+        if ((1 << (loopIndex2 & 0x3f) & *(uint *)(stream + 0x1ca0)) != 0) goto checkScratchFlag1;
       }
       else if ((*(int *)(scratchInt16 + *(int *)(programRecord + 0x20)) != 0x80) ||
               (*(uint *)(programRecord + 0x1c) <= loopIndex2)) {
-LAB_00027b90:
+checkScratchFlag1:
         if (scratchFlag1) {
           attrsLeft = *(int *)(scratchInt16 + 0x1d9e58);
         }
@@ -2191,7 +2191,7 @@ LAB_00027b90:
         }
         if ((attrsLeft == 0) || (attrsLeft == 0x10)) {
           scratchFlag1 = true;
-          goto LAB_00027d04;
+          goto setStreamByteOffset;
         }
       }
 switchD_00027c3c_default:
@@ -2201,7 +2201,7 @@ switchD_00027c3c_default:
     } while (scratchInt10 != 0);
   }
   scratchFlag1 = false;
-LAB_00027d04:
+setStreamByteOffset:
   streamByteOffset = 0;
   totalWords = 0;
   scratchUint33 = 0;
@@ -2213,18 +2213,18 @@ LAB_00027d04:
   loopIndex = 0;
   attrByteOffset = 0;
   scratchInt16 = stream;
-LAB_00027d44:
+loopSetScratchFlag2:
   scratchFlag2 = *(int *)(scratchInt14 + 0x1cc) == 0;
   if (scratchFlag2) {
-    if ((1 << (loopIndex3 & 0x3f) & *(uint *)(stream + 0x1ca0)) != 0) goto LAB_00027d90;
-    goto LAB_00028214;
+    if ((1 << (loopIndex3 & 0x3f) & *(uint *)(stream + 0x1ca0)) != 0) goto checkScratchFlag2;
+    goto checkLoopIndex;
   }
   if ((*(int *)(attrByteOffset + *(int *)(programRecord + 0x20)) == 0x80) && (loopIndex3 < *(uint *)(programRecord + 0x1c)))
-  goto LAB_00028214;
-LAB_00027d90:
+  goto checkLoopIndex;
+checkScratchFlag2:
   if (scratchFlag2) {
     hwAttrId = *(uint *)(attrByteOffset + 0x1d9e58);
-LAB_00027eac:
+loopCheckHwAttrId:
     if (hwAttrId == 0x30) goto switchD_00027e30_default;
     scratchUint20 = hwAttrId & 0xffff;
   }
@@ -2261,7 +2261,7 @@ LAB_00027eac:
           goto switchD_00027e30_default;
         }
       }
-      goto LAB_00027eac;
+      goto loopCheckHwAttrId;
     }
     hwAttrId = 2;
     scratchUint20 = 2;
@@ -2369,9 +2369,9 @@ LAB_00027eac:
   else if (scratchInt10 != 0) {
     slotCounter = slotCounter + 1;
   }
-LAB_00028214:
+checkLoopIndex:
   if (loopIndex == streamCount) {
-LAB_00028238:
+loopCheckStream:
     if (*(char *)(stream + 0x2595) == '\0') {
       descriptorWord = 0;
       scratchFlag1 = false;
@@ -2416,9 +2416,9 @@ LAB_00028238:
   attrByteOffset = attrByteOffset + 4;
   scratchInt16 = scratchInt16 + 4;
   attrsLeft = attrsLeft + -1;
-  if (attrsLeft == 0) goto LAB_00028238;
+  if (attrsLeft == 0) goto loopCheckStream;
   scratchInt14 = *(int *)(stream + 4);
-  goto LAB_00027d44;
+  goto loopSetScratchFlag2;
 }
 
 /* gld_readPixelsViaBlit @ 0x28350 (3820 bytes) */
@@ -2565,11 +2565,11 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
     if (pixelType != ((unsigned char *)0x00001401)) {
       hwFormat = 0x13;
       if ((pixelType == ((unsigned char *)0x00001406)) || (hwFormat = 0x1f, pixelType == ((unsigned char *)0x0000140b)))
-      goto LAB_000284b0;
+      goto checkX1000;
       hwFormat = 0;
       if (pixelType == ((unsigned char *)0x00001403)) {
         hwFormat = 0x19;
-        goto LAB_000284b0;
+        goto checkX1000;
       }
     }
   }
@@ -2579,7 +2579,7 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
       if ((pixelType != (undefined *)0x8363) && (hwFormat = 0x28, pixelType != (undefined *)0x8032)) {
         return 0;
       }
-      goto LAB_000284b0;
+      goto checkX1000;
     }
     if (format < 0x1908) {
       if (format != 0x1906) {
@@ -2589,24 +2589,24 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
       if (pixelType != ((unsigned char *)0x00001401)) {
         hwFormat = 0x14;
         if ((pixelType == ((unsigned char *)0x00001406)) || (hwFormat = 0x20, pixelType == ((unsigned char *)0x0000140b)))
-        goto LAB_000284b0;
+        goto checkX1000;
         hwFormat = 0;
         if (pixelType == ((unsigned char *)0x00001403)) {
           hwFormat = 0x1a;
-          goto LAB_000284b0;
+          goto checkX1000;
         }
       }
-      goto LAB_000283c0;
+      goto checkHwFormat;
     }
     hwFormat = 0x12;
     if (pixelType == ((unsigned char *)0x00001406)) {
-LAB_00028524:
+loopCheckPixelType:
       if (pixelType != (undefined *)0x8367) {
         if (pixelType == ((unsigned char *)0x00001401)) {
           hwFormat = 9;
-          goto LAB_000284b0;
+          goto checkX1000;
         }
-        goto LAB_00028510;
+        goto checkPixelType;
       }
       hwFormat = 10;
     }
@@ -2614,18 +2614,18 @@ LAB_00028524:
       hwFormat = 0x1e;
       if (pixelType != ((unsigned char *)0x0000140b)) {
         hwFormat = 0;
-        if (pixelType != (undefined *)0x8035) goto LAB_00028524;
+        if (pixelType != (undefined *)0x8035) goto loopCheckPixelType;
         hwFormat = 9;
       }
-LAB_00028510:
+checkPixelType:
       if (pixelType == (undefined *)0x8368) {
         hwFormat = 0x23;
-        goto LAB_000284b0;
+        goto checkX1000;
       }
     }
     if (pixelType == ((unsigned char *)0x00001403)) {
       hwFormat = 0x18;
-      goto LAB_000284b0;
+      goto checkX1000;
     }
   }
   else {
@@ -2635,7 +2635,7 @@ LAB_00028510:
         if ((pixelType != (undefined *)0x85ba) && (hwFormat = 0x26, pixelType != (undefined *)0x85bb)) {
           return 0;
         }
-        goto LAB_000284b0;
+        goto checkX1000;
       }
       if (format != 0x190a) {
         return 0;
@@ -2644,62 +2644,62 @@ LAB_00028510:
       if (pixelType != ((unsigned char *)0x00001401)) {
         if (pixelType == ((unsigned char *)0x00001406)) {
           hwFormat = 0x16;
-          goto LAB_000284b0;
+          goto checkX1000;
         }
         hwFormat = 0x22;
-        if (pixelType == ((unsigned char *)0x0000140b)) goto LAB_000284b0;
+        if (pixelType == ((unsigned char *)0x0000140b)) goto checkX1000;
         hwFormat = 0;
         if (pixelType == ((unsigned char *)0x00001403)) {
           hwFormat = 0x1c;
-          goto LAB_000284b0;
+          goto checkX1000;
         }
       }
-      goto LAB_000283c0;
+      goto checkHwFormat;
     }
     hwFormat = 7;
     if (pixelType == (undefined *)0x8366) {
-LAB_00028460:
+loopCheckPixelType2:
       if (pixelType != (undefined *)0x8035) {
-LAB_00028428:
+loopCheckPixelType3:
         if (pixelType == ((unsigned char *)0x00001401)) {
           hwFormat = 8;
-          goto LAB_000283c0;
+          goto checkHwFormat;
         }
-        goto LAB_0002844c;
+        goto checkPixelType2;
       }
       hwFormat = 8;
-LAB_00028474:
+loopCheckPixelType4:
       if (pixelType == ((unsigned char *)0x00001406)) {
         hwFormat = 0x11;
-        goto LAB_000284b0;
+        goto checkX1000;
       }
       if (pixelType == ((unsigned char *)0x0000140b)) {
         hwFormat = 0x1d;
-        goto LAB_000284b0;
+        goto checkX1000;
       }
     }
     else {
       if (pixelType == (undefined *)0x8365) {
         hwFormat = 6;
-        goto LAB_00028428;
+        goto loopCheckPixelType3;
       }
       hwFormat = 0;
-      if (pixelType != (undefined *)0x8367) goto LAB_00028460;
+      if (pixelType != (undefined *)0x8367) goto loopCheckPixelType2;
       hwFormat = 0xb;
-LAB_0002844c:
-      if (pixelType != (undefined *)0x8368) goto LAB_00028474;
+checkPixelType2:
+      if (pixelType != (undefined *)0x8368) goto loopCheckPixelType4;
       hwFormat = 0x24;
     }
     if (pixelType == ((unsigned char *)0x00001403)) {
       hwFormat = 0x17;
-      goto LAB_000284b0;
+      goto checkX1000;
     }
   }
-LAB_000283c0:
+checkHwFormat:
   if (hwFormat == 0) {
     return 0;
   }
-LAB_000284b0:
+checkX1000:
   if ((((0x1000 < (int)width) || (0x1000 < (int)height)) || (0x1000 < *(int *)(ctx + GLD_renderWidth)))
      || (0x1000 < *(int *)(ctx + GLD_renderHeight))) {
     return 0;
@@ -3129,7 +3129,7 @@ LAB_000284b0:
       targetSlot = (int *)(unitOffset + *(int *)(ctx + GLD_engineObjects));
       do {
         if (unitObject == *targetSlot) {
-          if (*(int *)(unitObject + 0x34) != 0) goto LAB_0002918c;
+          if (*(int *)(unitObject + 0x34) != 0) goto checkUnitIndex;
           break;
         }
         targetSlot = targetSlot + 1;
@@ -3137,7 +3137,7 @@ LAB_000284b0:
       } while (targetsLeft != 0);
       unitObject = 0;
     }
-LAB_0002918c:
+checkUnitIndex:
     if ((unitIndex == 0) || (unitObject != 0)) {
       packet = (undefined4 *)((int (*)())gld_emitUnitObjectPacket)(ctx,unitObject,unitIndex,packet);
     }
@@ -3273,7 +3273,7 @@ int glReadPixels_entry(ctx, rectX, rectY, width, height, format, pixelType, pixe
   }
   else if ((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 2) == 0) {
     if (((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 4) == 0) ||
-       (*(short *)(((unsigned char *)0x00002fe8) + engineState) != -0x7fea)) goto LAB_000293b0;
+       (*(short *)(((unsigned char *)0x00002fe8) + engineState) != -0x7fea)) goto setScratchInt6;
     sendAttachments = true;
     scratchInt6 = *(int *)(((unsigned char *)0x00002ff0) + engineState) + -1;
   }
@@ -3282,7 +3282,7 @@ int glReadPixels_entry(ctx, rectX, rectY, width, height, format, pixelType, pixe
     scratchInt6 = *(int *)(((unsigned char *)0x00002fb0) + engineState) + -1;
   }
   else {
-LAB_000293b0:
+setScratchInt6:
     scratchInt6 = 0;
     sendAttachments = true;
   }
@@ -3364,27 +3364,27 @@ LAB_000293b0:
             procChannelSize = 0x14;
             procChannelFormat = 0xf;
             if ((renderFlags & 0x2000) == 0) {
-LAB_000298a4:
+loopSetRequestFormat:
               requestFormat = 4;
             }
             else {
-LAB_00029878:
+loopCheckReadSurfaceCode:
               if (readSurfaceCode == 7) {
                 requestFormat = 10;
               }
               else {
-                if (readSurfaceCode != 8) goto LAB_000298a4;
+                if (readSurfaceCode != 8) goto loopSetRequestFormat;
                 requestFormat = 0xb;
               }
             }
-LAB_000299f8:
+loopCheckSendAttachments:
             if ((sendAttachments) ||
                ((((convertPixels && (((*(uint *)(((unsigned char *)0x000030b4) + engineState) & 0xff1) != 0 ||
                              ((*(uint *)(((unsigned char *)0x00002e68U) + engineState) & 0xffff0000) != 0)))) ||
                  (format - 0x1901U < 2)) ||
                 ((((srcRowBytes & 0x3f) != 0 || (0x1fff < (int)srcRowBytes)) ||
                  ((dstAddress & 0x1f) != 0)))))) {
-LAB_00029a74:
+loopSetRequestPitch:
               requestPitch = procPitch;
               scratchBytes = height * procPitch + 0xfff & 0xfffff000;
               if (*(uint *)(((unsigned char *)GLD_readScratchSize) + ctx) < scratchBytes) {
@@ -3396,15 +3396,15 @@ LAB_00029a74:
                 *(void **)(((unsigned char *)GLD_readScratchBuffer) + ctx) = scratchBuffer;
               }
               requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
-              if (requestAddress == 0) goto LAB_00029bd0;
+              if (requestAddress == 0) goto setResult;
               directCopy = false;
             }
             else {
               if ((renderFlags & 0xf) == 4) {
-                if ((format != 0x80e1) || (pixelType != 0x8367)) goto LAB_00029a74;
+                if ((format != 0x80e1) || (pixelType != 0x8367)) goto loopSetRequestPitch;
               }
               else if ((((renderFlags & 0xf) != 3) || (format != 0x80e1)) || (pixelType != 0x8366))
-              goto LAB_00029a74;
+              goto loopSetRequestPitch;
               directCopy = true;
               requestPitch = srcRowBytes;
               requestAddress = dstAddress;
@@ -3430,7 +3430,7 @@ LAB_00029a74:
             }
             status = _io_connect_method_structureI_structureO
                               (*(undefined4 *)(ctx + GLD_connect),7,layoutSkipBytes + 2,0x1c,0,layoutSkipBytes + 1);
-            if (status != 0) goto LAB_00029bd0;
+            if (status != 0) goto setResult;
             if (!directCopy) {
               _glgProcessPixels(packState,&procPixels);
               return 1;
@@ -3468,7 +3468,7 @@ LAB_00029a74:
             procChannelSize = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
             procChannelFormat = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
             requestFormat = readSurfaceCode;
-            goto LAB_000299f8;
+            goto loopCheckSendAttachments;
           }
           renderFlags = *(uint *)(ctx + GLD_renderFlags);
           if ((renderFlags & 0x30000) != 0) {
@@ -3492,8 +3492,8 @@ LAB_00029a74:
                 procChannelSize = 4;
               }
             }
-            if ((renderFlags & 0x2000) != 0) goto LAB_00029878;
-            goto LAB_000298a4;
+            if ((renderFlags & 0x2000) != 0) goto loopCheckReadSurfaceCode;
+            goto loopSetRequestFormat;
           }
         }
       }
@@ -3558,7 +3558,7 @@ LAB_00029a74:
                            surfaceInfo);
       return fallbackResult;
     }
-LAB_00029bd0:
+setResult:
     result = 0;
   }
   return result;
@@ -3673,7 +3673,7 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
   }
   else if ((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 2) == 0) {
     if (((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 4) == 0) ||
-       (*(short *)(((unsigned char *)0x00002fe8) + ctxState) != -0x7fea)) goto LAB_000293b0;
+       (*(short *)(((unsigned char *)0x00002fe8) + ctxState) != -0x7fea)) goto setScratchInt6;
     sendAttachments = true;
     scratchInt6 = *(int *)(((unsigned char *)0x00002ff0) + ctxState) + -1;
   }
@@ -3682,7 +3682,7 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
     scratchInt6 = *(int *)(((unsigned char *)0x00002fb0) + ctxState) + -1;
   }
   else {
-LAB_000293b0:
+setScratchInt6:
     scratchInt6 = 0;
     sendAttachments = true;
   }
@@ -3765,20 +3765,20 @@ LAB_000293b0:
             targetFormatB = 0x14;
             targetFormatA = 0xf;
             if ((flags & 0x2000) == 0) {
-LAB_000298a4:
+loopSetRequestSurfaceCode:
               requestSurfaceCode = ((unsigned char *)0x4);
             }
             else {
-LAB_00029878:
+loopCheckReadSurfaceCode:
               if (readSurfaceCode == (dword *)((int)((unsigned char *)0x4) + 3)) {
                 requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 2);
               }
               else {
-                if (readSurfaceCode != ((unsigned char *)0x8)) goto LAB_000298a4;
+                if (readSurfaceCode != ((unsigned char *)0x8)) goto loopSetRequestSurfaceCode;
                 requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 3);
               }
             }
-LAB_000299f8:
+loopSetScratchUint12:
             scratchUint12 = flags & 0xf;
             if ((sendAttachments) ||
                ((((convertPixels && (((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff1) != 0 ||
@@ -3786,7 +3786,7 @@ LAB_000299f8:
                  (format - 0x1901U < 2)) ||
                 ((((srcRowBytes & 0x3f) != 0 || (0x1fff < (int)srcRowBytes)) ||
                  ((dstAddress & 0x1f) != 0)))))) {
-LAB_00029a74:
+loopSetScratchUint122:
               scratchUint12 = *(uint *)(((unsigned char *)GLD_readScratchSize) + ctx);
               requestPitch = procPitch;
               scratchBytes = height * procPitch + 0xfff & 0xfffff000;
@@ -3799,15 +3799,15 @@ LAB_00029a74:
                 *(undefined4 *)(((unsigned char *)GLD_readScratchBuffer) + ctx) = scratchBuffer;
               }
               requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
-              if (requestAddress == 0) goto LAB_00029bd0;
+              if (requestAddress == 0) goto setResult;
               directCopy = false;
             }
             else {
               if (scratchUint12 == 4) {
-                if ((format != 0x80e1) || (pixelType != 0x8367)) goto LAB_00029a74;
+                if ((format != 0x80e1) || (pixelType != 0x8367)) goto loopSetScratchUint122;
               }
               else if (((scratchUint12 != 3) || (format != 0x80e1)) || (pixelType != 0x8366))
-              goto LAB_00029a74;
+              goto loopSetScratchUint122;
               directCopy = true;
               requestPitch = srcRowBytes;
               requestAddress = dstAddress;
@@ -3838,7 +3838,7 @@ LAB_00029a74:
             replySizePtr = layoutSkipBytes + 1;
             ring = _io_connect_method_structureI_structureO
                                (*(undefined4 *)(ctx + GLD_connect),7,requestPtr,0x1c,0,replySizePtr);
-            if (ring != 0) goto LAB_00029bd0;
+            if (ring != 0) goto setResult;
             if (!directCopy) {
               _glgProcessPixels(packState,&procSrcAddress,requestPtr,requestBytes,staleArgR10,replySizePtr,scratchUint12,flags);
               return 1;
@@ -3881,7 +3881,7 @@ LAB_00029a74:
             targetFormatB = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
             targetFormatA = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
             requestSurfaceCode = readSurfaceCode;
-            goto LAB_000299f8;
+            goto loopSetScratchUint12;
           }
           flags = *(uint *)(ctx + GLD_renderFlags);
           if ((flags & 0x30000) != 0) {
@@ -3905,8 +3905,8 @@ LAB_00029a74:
                 targetFormatB = 4;
               }
             }
-            if ((flags & 0x2000) != 0) goto LAB_00029878;
-            goto LAB_000298a4;
+            if ((flags & 0x2000) != 0) goto loopCheckReadSurfaceCode;
+            goto loopSetRequestSurfaceCode;
           }
         }
       }
@@ -3975,7 +3975,7 @@ LAB_00029a74:
                            surfaceInfo);
       return fallbackResult;
     }
-LAB_00029bd0:
+setResult:
     result = 0;
   }
   return result;
@@ -4433,12 +4433,12 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
       hwFormat = 0x13;
       if ((pixelType != ((unsigned char *)0x00001406)) && (hwFormat = 0x1f, pixelType != ((unsigned char *)0x0000140b))) {
         hwFormat = 0;
-        if (pixelType != ((unsigned char *)0x00001403)) goto LAB_0002a440;
+        if (pixelType != ((unsigned char *)0x00001403)) goto loopCheckHwFormat;
         hwFormat = 0x19;
       }
-      goto LAB_0002a520;
+      goto callPthreadMutexLock;
     }
-LAB_0002a440:
+loopCheckHwFormat:
     if (hwFormat == 0) {
       return 0;
     }
@@ -4455,72 +4455,72 @@ LAB_0002a440:
         return 0;
       }
       hwFormat = 2;
-      if (pixelType == ((unsigned char *)0x00001401)) goto LAB_0002a440;
+      if (pixelType == ((unsigned char *)0x00001401)) goto loopCheckHwFormat;
       hwFormat = 0x14;
       if ((pixelType != ((unsigned char *)0x00001406)) && (hwFormat = 0x20, pixelType != ((unsigned char *)0x0000140b))) {
         hwFormat = 0;
-        if (pixelType != ((unsigned char *)0x00001403)) goto LAB_0002a440;
+        if (pixelType != ((unsigned char *)0x00001403)) goto loopCheckHwFormat;
         hwFormat = 0x1a;
       }
     }
     else {
       hwFormat = 0x12;
       if (pixelType == ((unsigned char *)0x00001406)) {
-LAB_0002a570:
+loopCheckPixelType:
         if (pixelType == (undefined *)0x8368) {
           hwFormat = 0x23;
-          goto LAB_0002a520;
+          goto callPthreadMutexLock;
         }
       }
       else {
         if (pixelType == (undefined *)0x8035) {
           hwFormat = 9;
-          goto LAB_0002a570;
+          goto loopCheckPixelType;
         }
         if (pixelType != (undefined *)0x8367) {
           hwFormat = 0;
           if (pixelType == ((unsigned char *)0x00001401)) {
             hwFormat = 9;
-            goto LAB_0002a520;
+            goto callPthreadMutexLock;
           }
-          goto LAB_0002a570;
+          goto loopCheckPixelType;
         }
         hwFormat = 10;
       }
-      if (pixelType != ((unsigned char *)0x00001403)) goto LAB_0002a440;
+      if (pixelType != ((unsigned char *)0x00001403)) goto loopCheckHwFormat;
       hwFormat = 0x18;
     }
   }
   else if (format == 0x80e1) {
     hwFormat = 7;
     if (pixelType == (undefined *)0x8366) {
-LAB_0002a4e0:
+loopCheckPixelType2:
       if (pixelType == (undefined *)0x8035) {
         hwFormat = 8;
-        goto LAB_0002a4f4;
+        goto checkPixelType2;
       }
-LAB_0002a4a8:
-      if (pixelType != (undefined *)0x8368) goto LAB_0002a4d4;
+loopCheckPixelType3:
+      if (pixelType != (undefined *)0x8368) goto checkPixelType;
       hwFormat = 0x24;
-LAB_0002a504:
-      if (pixelType != ((unsigned char *)0x00001403)) goto LAB_0002a440;
+loopCheckPixelType4:
+      if (pixelType != ((unsigned char *)0x00001403)) goto loopCheckHwFormat;
       hwFormat = 0x17;
     }
     else {
       if (pixelType == (undefined *)0x8365) {
         hwFormat = 6;
-        goto LAB_0002a4a8;
+        goto loopCheckPixelType3;
       }
       hwFormat = 0;
-      if (pixelType != (undefined *)0x8367) goto LAB_0002a4e0;
+      if (pixelType != (undefined *)0x8367) goto loopCheckPixelType2;
       hwFormat = 0xb;
-LAB_0002a4d4:
+checkPixelType:
       if (pixelType == ((unsigned char *)0x00001406)) {
         hwFormat = 0x11;
       }
       else {
-LAB_0002a4f4:
-        if (pixelType != ((unsigned char *)0x0000140b)) goto LAB_0002a504;
+checkPixelType2:
+        if (pixelType != ((unsigned char *)0x0000140b)) goto loopCheckPixelType4;
         hwFormat = 0x1d;
       }
     }
@@ -4536,7 +4536,7 @@ LAB_0002a4f4:
       return 0;
     }
     hwFormat = 4;
-    if (pixelType == ((unsigned char *)0x00001401)) goto LAB_0002a440;
+    if (pixelType == ((unsigned char *)0x00001401)) goto loopCheckHwFormat;
     if (pixelType == ((unsigned char *)0x00001406)) {
       hwFormat = 0x16;
     }
@@ -4544,12 +4544,12 @@ LAB_0002a4f4:
       hwFormat = 0x22;
       if (pixelType != ((unsigned char *)0x0000140b)) {
         hwFormat = 0;
-        if (pixelType != ((unsigned char *)0x00001403)) goto LAB_0002a440;
+        if (pixelType != ((unsigned char *)0x00001403)) goto loopCheckHwFormat;
         hwFormat = 0x1c;
       }
     }
   }
-LAB_0002a520:
+callPthreadMutexLock:
   _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
   if (rawTransfer == 0) {
     unpackState = ((unsigned char *)0x00002e6c) + *(int *)(ctx + GLD_engineState);
@@ -4637,7 +4637,7 @@ LAB_0002a520:
                (prepareResult = *(int *)surfaceInfo[2], prepareResult == 0)))) ||
           ((*(char *)(prepareResult + 0x16) != '\x06' &&
            ((format != 0x1908 || ((pixelType != ((unsigned char *)0x00001406) && (pixelType != (undefined *)0x8366)))))
-           ))) || (((dstAddress | srcRowBytes) & 0x1f) != 0)) goto LAB_0002a9a0;
+           ))) || (((dstAddress | srcRowBytes) & 0x1f) != 0)) goto callPthreadMutexUnlock;
       ring = ctx + GLD_commandStream;
       unitIndex = 0xf;
       scratchUint25 = (**(code **)(ctx + GLD_streamAllocate))(ring,0x343);
@@ -4972,7 +4972,7 @@ LAB_0002a520:
           targetSlot = (int *)(scratchInt26 + *(int *)(ctx + GLD_engineObjects));
           do {
             if (unitObject == *targetSlot) {
-              if (*(int *)(unitObject + 0x34) != 0) goto LAB_0002b2fc;
+              if (*(int *)(unitObject + 0x34) != 0) goto checkUnitOffset;
               break;
             }
             targetSlot = targetSlot + 1;
@@ -4980,7 +4980,7 @@ LAB_0002a520:
           } while (targetsLeft != 0);
           unitObject = 0;
         }
-LAB_0002b2fc:
+checkUnitOffset:
         if ((unitOffset == 0) || (unitObject != 0)) {
           packet = (undefined4 *)((int (*)())gld_emitUnitObjectPacket)(ctx,unitObject,unitOffset,packet);
         }
@@ -4996,7 +4996,7 @@ LAB_0002b2fc:
     scratchUint25 = 1;
   }
   else {
-LAB_0002a9a0:
+callPthreadMutexUnlock:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     scratchUint25 = 0;
   }
@@ -5781,7 +5781,7 @@ int gld_validateStreamState(stream, dirtyBits)
   scratchUint7 = (uint)((scratchUint8 & 0x10000000) != *(uint *)(stream + 0x2780));
   if ((((*dirtyBits == 0) && (dirtyBits[1] == 0)) && (dirtyBits[2] == 0)) &&
      ((((scratchUint8 & 0xffefffff) == 0 && (dirtyBits[4] == 0)) && (scratchUint7 == 0)))) {
-LAB_0002c610:
+loopSetScratchUint7:
     scratchUint7 = *(uint *)(stream + 0x2488);
   }
   else {
@@ -5891,7 +5891,7 @@ LAB_0002c610:
     if (*(short *)((int)dirtyBits + 6) != 0) {
       ((int (*)())gld_emitUnitObjectPackets)(stream,dirtyBits);
     }
-    if (*(char *)(stream + 0x2435) == '\0') goto LAB_0002c610;
+    if (*(char *)(stream + 0x2435) == '\0') goto loopSetScratchUint7;
     *(int *)(stream + 0x2440) = stream + 0x249c;
     *(int *)(stream + 0x2444) = stream + 0x24bc;
     *(undefined4 *)(stream + 0x2494) = 0;
@@ -5905,10 +5905,10 @@ LAB_0002c610:
     else {
       scratchUint7 = *(uint *)(*(int *)(engineObjects + 0x14) + 0x120);
     }
-    if ((scratchUint7 == 0) && ((*dirtyBits & 0x800000) == 0)) goto LAB_0002c67c;
+    if ((scratchUint7 == 0) && ((*dirtyBits & 0x800000) == 0)) goto checkDirtyBits;
   }
   ((int (*)())gld_buildVertexStreamCache)(stream);
-LAB_0002c67c:
+checkDirtyBits:
   if ((((dirtyBits[3] & 0x100000) != 0) || ((*(uint *)(stream + 0x2488) & 4) != 0)) ||
      (*(char *)(stream + 0x247d) != '\0')) {
     gld_buildVertexStreamLayout(stream);
@@ -6179,7 +6179,7 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
     primitiveClassBits = (primitiveMode >> 3 & 1) + (primitiveMode >> 2 & 1) + (primitiveMode >> 1 & 1) + drawFlagsOrModeBit;
     modeForward = primitiveMode;
     trimmedCount = vertexCount;
-    if (((primitiveClassBits == 2) || (primitiveClassBits == 0)) || (primitiveMode == 2)) goto LAB_0002cce8;
+    if (((primitiveClassBits == 2) || (primitiveClassBits == 0)) || (primitiveMode == 2)) goto checkX00002b80;
     if (primitiveClassBits == 3) {
       trimmedCount = vertexCount & 0xfffffffc;
     }
@@ -6193,7 +6193,7 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
   if (trimmedCount == 0) {
     return 0;
   }
-LAB_0002cce8:
+checkX00002b80:
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
     staleFprArg1 = (double)gld_setPrimitiveInputRegisters(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
   }
@@ -6365,12 +6365,12 @@ int gld_setSamplerMinFilter(samplerState, minFilter)
         *(uint *)(samplerState + 0x14) = scratchUint2;
       }
     }
-    goto LAB_0002d190;
+    goto checkSamplerState;
   }
   scratchUint2 = scratchUint1 & 0xffffe7ff | 0x1800;
   *(uint *)(samplerState + 0x14) = scratchUint2;
   if (minFilter == 0x2700) {
-LAB_0002d0a0:
+loopSetScratchUint2:
     scratchUint2 = scratchUint1 & 0xffff87ff | 0x3800;
     *(uint *)(samplerState + 0x14) = scratchUint2;
   }
@@ -6380,16 +6380,16 @@ LAB_0002d0a0:
         scratchUint2 = scratchUint1 & 0xffff87ff | 0x1800;
         *(uint *)(samplerState + 0x14) = scratchUint2;
       }
-      goto LAB_0002d190;
+      goto checkSamplerState;
     }
     if (minFilter != 0x2702) {
-      if (minFilter < 0x2702) goto LAB_0002d0a0;
-      if (minFilter != 0x2703) goto LAB_0002d190;
+      if (minFilter < 0x2702) goto loopSetScratchUint2;
+      if (minFilter != 0x2703) goto checkSamplerState;
     }
     scratchUint2 = scratchUint1 & 0xffff87ff | 0x5800;
     *(uint *)(samplerState + 0x14) = scratchUint2;
   }
-LAB_0002d190:
+checkSamplerState:
   if (*(char *)(samplerState + 0x35) != '\0') {
     scratchUint1 = *(uint *)(samplerState + 0x18);
     *(uint *)(samplerState + 0x18) = scratchUint1 & 0xfff1ffff;
@@ -6588,7 +6588,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
     else {
       channelInt = (uint)(int)redScaled;
     }
-    goto LAB_0002d9d4;
+    goto setPackedColor;
   case '\x13':
   case '\x15':
     packedColor = redF;
@@ -6606,7 +6606,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
     else {
       channelInt = (uint)(int)redScaled;
     }
-    goto LAB_0002d9d0;
+    goto setChannelInt;
   case '\x1a':
     alphaScaled = alphaClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
     roundedD = (double)(float)alphaScaled;
@@ -6616,9 +6616,9 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
     else {
       channelInt = (uint)(int)alphaScaled;
     }
-LAB_0002d9d0:
+setChannelInt:
     channelInt = channelInt & 0xffff;
-LAB_0002d9d4:
+setPackedColor:
     packedColor = GH_U2F((unsigned int)((channelInt | channelInt << 0x10)));
     break;
   case '\x1c':
@@ -6689,7 +6689,7 @@ LAB_0002d9d4:
     else {
       channelInt3 = (uint)(int)greenScaled;
     }
-    goto LAB_0002dcb4;
+    goto setPackedColor2;
   case '$':
     blueScaledD = blueClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
     roundedBlueD = (double)(float)blueScaledD;
@@ -6725,7 +6725,7 @@ LAB_0002d9d4:
     else {
       channelInt3 = (uint)(int)greenScaled;
     }
-LAB_0002dcb4:
+setPackedColor2:
     packedColor = GH_U2F((unsigned int)((channelInt | channelInt2 | (channelInt3 & 0x3ff) << 10)));
     break;
   case '(':

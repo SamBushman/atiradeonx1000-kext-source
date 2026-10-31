@@ -62,7 +62,7 @@ int ilEmitProjectiveDivide(programRecord, coordinateOperand, coordinateExtraWord
   outCursor[3] = (*(ushort *)coordinateOperand & 0x3f) << 0x10 | (uint)(ushort)*coordinateOperand | 0x400000;
   if ((*coordinateOperand & 0x400000) == 0) {
     replicatedSwizzle = ((unsigned char *)0x00005555);
-    goto LAB_000c7584;
+    goto storeOutCursor;
   }
   divisorComponent = 1;
   scratchRegisterBits = *coordinateExtraWord >> 0x15 & 7;
@@ -70,20 +70,20 @@ int ilEmitProjectiveDivide(programRecord, coordinateOperand, coordinateExtraWord
     if (scratchRegisterBits < 2) {
       divisorComponent = 5;
       if (scratchRegisterBits != 0) {
-LAB_000c7520:
+loopSetDivisorComponent:
         divisorComponent = 0;
       }
     }
     else {
       divisorComponent = 2;
       if (scratchRegisterBits != 2) {
-        if (scratchRegisterBits != 3) goto LAB_000c7520;
+        if (scratchRegisterBits != 3) goto loopSetDivisorComponent;
         divisorComponent = 3;
       }
     }
   }
   replicatedSwizzle = (undefined *)(divisorComponent << 0xc | divisorComponent << 8 | divisorComponent << 4 | divisorComponent);
-LAB_000c7584:
+storeOutCursor:
   outCursor[4] = replicatedSwizzle;
   outCursor[5] = 0x49;
   scratchRegisterBits = *(uint *)(programRecord + 0x184);
@@ -612,13 +612,13 @@ int ilRecordRegisterUse(registerIndex, registerKind, usageInfo, destinationExtra
   }
   else {
     lastRegister = usageInfo[1];
-    if (lastRegister < (int)registerIndex) goto LAB_000c8650;
+    if (lastRegister < (int)registerIndex) goto checkRegisterKind;
     *usageInfo = registerIndex + 1;
   }
   if (((int)registerIndex <= lastRegister) && (*usageInfo <= (int)registerIndex)) {
     usageInfo[1] = registerIndex - 1;
   }
-LAB_000c8650:
+checkRegisterKind:
   if (registerKind == 0x17) {
     usageInfo[registerIndex + 0x87c] = 1;
     if (((((destinationExtraWord & 3) != 1) && ((destinationExtraWord & 0xc) != 4)) && ((destinationExtraWord & 0x30) != 0x10)) &&
@@ -703,7 +703,7 @@ int ilMarkOperandRegisterUsed(operandWords, operandExtraWordPtr, programRecord)
              (-2 << (registerIndex & 0x1f) | 0xfffffffeU >> 0x20 - (registerIndex & 0x1f)) & *(uint *)(bitWordCursor + 0x2c)
         ;
         operandWord = *operandWords;
-        goto LAB_000c88e4;
+        goto checkOperandWord;
       }
       remaining = 8;
       bitWordCursor = programRecord;
@@ -719,9 +719,9 @@ int ilMarkOperandRegisterUsed(operandWords, operandExtraWordPtr, programRecord)
           *(undefined4 *)(programRecord + 0x21c8) = 5;
           operandWord = *operandWords;
         }
-        goto LAB_000c88e4;
+        goto checkOperandWord;
       }
-      if (registerType != 0x15) goto LAB_000c88e4;
+      if (registerType != 0x15) goto checkOperandWord;
       *(undefined4 *)(programRecord + 0x21c8) = 5;
     }
   }
@@ -730,7 +730,7 @@ int ilMarkOperandRegisterUsed(operandWords, operandExtraWordPtr, programRecord)
       bitWordPtr = bitWordCursor * 4 + programRecord;
       *(uint *)(bitWordPtr + 0xc) = *(uint *)(bitWordPtr + 0xc) & ~(1 << (registerIndex + bitWordCursor * -0x20 & 0x3f));
       operandWord = *operandWords;
-      goto LAB_000c88e4;
+      goto checkOperandWord;
     }
     remaining2 = 8;
     bitWordCursor = programRecord;
@@ -741,7 +741,7 @@ int ilMarkOperandRegisterUsed(operandWords, operandExtraWordPtr, programRecord)
     } while (remaining2 != 0);
   }
   operandWord = *operandWords;
-LAB_000c88e4:
+checkOperandWord:
   if ((operandWord & 0x1800000) == 0) {
     return;
   }
@@ -1316,7 +1316,7 @@ switchD_000c90cc_caseD_18:
   if (errorResult != (uint *******)0x0) {
     streamPtr = (uint *)0x0;
     scratchWord = 0;
-    goto LAB_000ca6bc;
+    goto checkErrorResult;
   }
   extraWords = (extraWords + ilWordCount) * 4;
   scanStateSnapshot = scanState;
@@ -1356,7 +1356,7 @@ switchD_000c90cc_caseD_18:
   else if (featureSelector == 3) {
     sizeBytes3 = sizeBytes3 + 0x40;
   }
-  else if (featureSelector == 0) goto LAB_000c99d4;
+  else if (featureSelector == 0) goto checkNeverSetFlag1d0;
   sizeBytes3 = sizeBytes3 + 8;
   flagCursor = perOutputFlags;
   countdown = 4;
@@ -1367,7 +1367,7 @@ switchD_000c90cc_caseD_18:
     flagCursor = flagCursor + 1;
     countdown = countdown + -1;
   } while (countdown != 0);
-LAB_000c99d4:
+checkNeverSetFlag1d0:
   if (((neverSetFlag1d0 != 0) || (neverSetFlag1c8 != 0)) || (scratchWord = sizeBytes3, neverSetPointer1b4 == (uint *******)0x0)) {
     if ((neverSetFlag1d4 == 0) && (neverSetFlag1cc != 0)) {
       sizeBytes3 = sizeBytes3 + 0xc;
@@ -1450,7 +1450,7 @@ code_r0x000c90a4:
   case 0x56:
   case 0x5b:
     hasDestination = 1;
-    goto LAB_000c9340;
+    goto setScanTokenWord;
   case 6:
   case 0x10:
   case 0x27:
@@ -1467,7 +1467,7 @@ code_r0x000c90a4:
   case 0x11:
   case 0x34:
     hasDestination = 0;
-LAB_000c9340:
+setScanTokenWord:
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 2);
     srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(streamPtr,hasDestination,2,&scanState);
     tokenCursor = srcCursor;
@@ -1521,7 +1521,7 @@ LAB_000c9340:
     else if (registerKindBits == (undefined *)0x100000) {
       usesOutputKind10 = 1;
     }
-    goto LAB_000c9564;
+    goto setSrcCursor;
   case 0x18:
     goto switchD_000c90cc_caseD_18;
   case 0x19:
@@ -1540,7 +1540,7 @@ LAB_000c9340:
     if ((int)scanTokenWord < 0) {
       srcCursor = streamPtr + 2;
     }
-LAB_000c9564:
+setSrcCursor:
     srcCursor = srcCursor + 1;
     tokenCursor = srcCursor;
     goto switchD_000c90cc_caseD_18;
@@ -1690,7 +1690,7 @@ switchD_000c9ab8_caseD_18:
   if (ilTokens + ilWordCount <= readToken) {
     scratchWord = scratchWord >> 2;
     usedTexcoordMask = usedBits | usedTexcoordMask;
-LAB_000ca6bc:
+checkErrorResult:
     if (errorResult != (uint *******)0x0) {
       return errorResult;
     }
@@ -1818,7 +1818,7 @@ LAB_000ca6bc:
     if ((uint ******)0x100 < programBody[0x1501]) {
       programBody[0x1501] = (uint ******)0x100;
     }
-    if (dclRecordCount == 0) goto LAB_000caa4c;
+    if (dclRecordCount == 0) goto checkDefRecordCount;
     scratchWord = 0;
     recordOffset = 0;
     usedBits = dclRecordCount;
@@ -1828,21 +1828,21 @@ LAB_000ca6bc:
         dclRegisterIndex = *(uint *)(dclRecord + 0x10);
         recordRegister = *(int *)(recordOffset + dclRecords);
         maskWordIndex = ((int)dclRegisterIndex >> 5) + (uint)((int)dclRegisterIndex < 0 && (dclRegisterIndex & 0x1f) != 0);
-        if ((1 << (dclRegisterIndex + maskWordIndex * -0x20 & 0x3f) & inputMaskWords[maskWordIndex]) == 0) goto LAB_000caa2c;
+        if ((1 << (dclRegisterIndex + maskWordIndex * -0x20 & 0x3f) & inputMaskWords[maskWordIndex]) == 0) goto callIlPushDclRecord;
         selectorSlot = ilSelectorOneToThreeOrZero(*(undefined4 *)(dclRecord + 4));
         dclRecord = ilSelectorOneToThreeOrZero(*(undefined4 *)(dclRecord + 0xc));
         convertedConstant = (longlong)(int)dclValueTable[dclRegisterIndex * 4 + dclRecord];
         intConstTable[recordRegister * 4 + selectorSlot] = (int)dclValueTable[dclRegisterIndex * 4 + dclRecord];
       }
       else if (*(int *)(dclRecord + 8) == 0x18) {
-LAB_000caa2c:
+callIlPushDclRecord:
         ((int (*)())ilPushDclRecord)(programBody + 0x1589,dclRecord);
         usedBits = dclRecordCount;
       }
       scratchWord = scratchWord + 1;
       recordOffset = recordOffset + 0x24;
       if (usedBits <= scratchWord) {
-LAB_000caa4c:
+checkDefRecordCount:
         if (defRecordCount != 0) {
           loopIndex2 = 0;
           recordOffset = 0;
@@ -2270,7 +2270,7 @@ switchD_000c90cc_caseD_0:
     }
     texModeBits = (uint)texTokenWord & 0xc000000;
     if (texModeBits == 0x4000000) {
-LAB_000ca0e4:
+loopCheckShadowCompareUnitMask:
       if (shadowCompareUnitMask << (tokenUpper & 0x3f) == 0) {
         operandPtrA = (uint ******)&operandWord2b74;
         projectiveFlag = (uint *******)0x0;
@@ -2296,7 +2296,7 @@ LAB_000ca0e4:
     }
     else if (texModeBits == 0x8000000) {
       unitBit = 1 << (tokenUpper & 0x3f);
-      if ((unitBit & shadowDoneUnitMask) != 0) goto LAB_000ca0e4;
+      if ((unitBit & shadowDoneUnitMask) != 0) goto loopCheckShadowCompareUnitMask;
       operandPtrA = (uint ******)&operandWord2b74;
       projectiveFlag = (uint *******)0x0;
       texSourceExtraPtr = (uint ******)&operandWord2b98;
@@ -2394,7 +2394,7 @@ LAB_000ca0e4:
     }
     texModeBits = (uint)texTokenWord & 0xc000000;
     if (texModeBits == 0x4000000) {
-LAB_000ca3b8:
+loopCheckShadowCompareUnitMask2:
       if (shadowCompareUnitMask << (tokenUpper & 0x3f) != 0) {
         scanTokenWord = &operandWord2b74;
         dstCursor = (uint *******)
@@ -2404,20 +2404,20 @@ LAB_000ca3b8:
           scratchCursorA = (uint *******)((int)((unsigned char *)0x0) + 1);
           unitBit = 1 << (tokenUpper & 0x3f);
           operandWord2bb0 = calleeSavedR14;
-          goto LAB_000ca414;
+          goto storeDstCursor;
         }
       }
-LAB_000ca3ec:
+loopSetScratchCursorA:
       scratchCursorA = (uint *******)0x0;
       unitBit = 1 << (tokenUpper & 0x3f);
     }
     else {
-      if (texModeBits != 0x8000000) goto LAB_000ca3ec;
+      if (texModeBits != 0x8000000) goto loopSetScratchCursorA;
       scratchCursorA = (uint *******)0x0;
       unitBit = 1 << (tokenUpper & 0x3f);
-      if ((unitBit & shadowDoneUnitMask) != 0) goto LAB_000ca3b8;
+      if ((unitBit & shadowDoneUnitMask) != 0) goto loopCheckShadowCompareUnitMask2;
     }
-LAB_000ca414:
+storeDstCursor:
     *dstCursor = texTokenWord;
     nextDstCursorB = dstCursor + 1;
     if (hasSecondWord) {
@@ -2862,7 +2862,7 @@ switchD_000cb23c_caseD_18:
   if (resultCode != 0) {
     scanCursor = (uint *)0x0;
     sizeBytes = 0;
-    goto LAB_000cc88c;
+    goto checkResultCode;
   }
   extraOutputWords = (ilWordCount + extraOutputWords) * 4;
   usageStateCopy = ilUsageState;
@@ -2902,7 +2902,7 @@ switchD_000cb23c_caseD_18:
   else if (featureSelector == (uint ******)0x3) {
     sizeBytesC = sizeBytesC + 0x40;
   }
-  else if (featureSelector == (uint ******)0x0) goto LAB_000cbb64;
+  else if (featureSelector == (uint ******)0x0) goto checkNeverSetFlagD;
   sizeBytesC = sizeBytesC + 8;
   arrayCursor = perOutputFlags;
   extraOutputWords = 4;
@@ -2913,7 +2913,7 @@ switchD_000cb23c_caseD_18:
     arrayCursor = arrayCursor + 1;
     extraOutputWords = extraOutputWords + -1;
   } while (extraOutputWords != 0);
-LAB_000cbb64:
+checkNeverSetFlagD:
   if (((neverSetFlagD != 0) || (neverSetFlagF != 0)) || (sizeBytes = sizeBytesC, oneWord == (uint *******)0x0)
      ) {
     if ((neverSetFlagC == 0) && (neverSetFlagE != 0)) {
@@ -2996,7 +2996,7 @@ code_r0x000cb214:
   case 0x56:
   case 0x5b:
     calleeArg = 1;
-    goto LAB_000cb4b0;
+    goto setCompileRecordAlias;
   case 6:
   case 0x10:
   case 0x27:
@@ -3035,7 +3035,7 @@ code_r0x000cb214:
   case 0x11:
   case 0x34:
     calleeArg = 0;
-LAB_000cb4b0:
+setCompileRecordAlias:
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 2);
     readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(scanCursor,calleeArg,2,&ilUsageState);
     readCursorB = readCursor;
@@ -3089,7 +3089,7 @@ LAB_000cb4b0:
     else if (operandKindBits == (undefined *)0x100000) {
       usesOutputKind10 = 1;
     }
-    goto LAB_000cb6d4;
+    goto setReadCursor;
   case 0x18:
     goto switchD_000cb23c_caseD_18;
   case 0x19:
@@ -3108,7 +3108,7 @@ LAB_000cb4b0:
     if ((int)compileRecordAlias < 0) {
       readCursor = scanCursor + 2;
     }
-LAB_000cb6d4:
+setReadCursor:
     readCursor = readCursor + 1;
     readCursorB = readCursor;
     goto switchD_000cb23c_caseD_18;
@@ -3260,7 +3260,7 @@ switchD_000cbc48_caseD_18:
   if (ilTokens + ilWordCount <= secondReadCursor) {
     sizeBytes = sizeBytes >> 2;
     outputKind11Mask = accumBits | outputKind11Mask;
-LAB_000cc88c:
+checkResultCode:
     if (resultCode != 0) {
       _free(scanCursor);
       return resultCode;
@@ -3579,10 +3579,10 @@ LAB_000cc88c:
         declListCount = declListCount + -1;
       } while (declListCount != 0);
       shadowExtraWords = 1;
-      if (8 < extraOutputWords) goto LAB_000ccf90;
+      if (8 < extraOutputWords) goto setLoopIndexU;
     }
     shadowExtraWords = 0;
-LAB_000ccf90:
+setLoopIndexU:
     loopIndexU = 0x10;
     extraOutputWords = 0;
     do {
@@ -3860,7 +3860,7 @@ switchD_000cb23c_caseD_0:
     }
     texTargetBits = (uint)tokenWord & 0xc000000;
     if (texTargetBits == 0x4000000) {
-LAB_000cc2a4:
+loopCheckDepthTextureUnitMask:
       if (depthTextureUnitMask << (scratchWord & 0x3f) == 0) {
         operandPtrLocal = (uint ******)&operandExtB;
         writeCursorNext = (uint *******)0x0;
@@ -3886,7 +3886,7 @@ LAB_000cc2a4:
     }
     else if (texTargetBits == 0x8000000) {
       unitBitMaskB = 1 << (scratchWord & 0x3f);
-      if ((unitBitMaskB & shadowCompareUnitMask) != 0) goto LAB_000cc2a4;
+      if ((unitBitMaskB & shadowCompareUnitMask) != 0) goto loopCheckDepthTextureUnitMask;
       operandPtrLocal = (uint ******)&operandExtB;
       writeCursorNext = (uint *******)0x0;
       operandPtrB = (uint ******)&operandTokenB;
@@ -3984,7 +3984,7 @@ LAB_000cc2a4:
     }
     texTargetBits = (uint)tokenWord & 0xc000000;
     if (texTargetBits == 0x4000000) {
-LAB_000cc588:
+loopCheckDepthTextureUnitMask2:
       if (depthTextureUnitMask << (scratchWord & 0x3f) != 0) {
         compileRecordAlias = &operandExtB;
         writeCursor = (uint *******)
@@ -3994,20 +3994,20 @@ LAB_000cc588:
           staleArgR8 = (uint *******)((int)((unsigned char *)0x0) + 1);
           unitBitMaskB = 1 << (scratchWord & 0x3f);
           operandExtA = calleeSavedR14;
-          goto LAB_000cc5e4;
+          goto storeWriteCursor;
         }
       }
-LAB_000cc5bc:
+loopSetStaleArgR8:
       staleArgR8 = (uint *******)0x0;
       unitBitMaskB = 1 << (scratchWord & 0x3f);
     }
     else {
-      if (texTargetBits != 0x8000000) goto LAB_000cc5bc;
+      if (texTargetBits != 0x8000000) goto loopSetStaleArgR8;
       staleArgR8 = (uint *******)0x0;
       unitBitMaskB = 1 << (scratchWord & 0x3f);
-      if ((unitBitMaskB & shadowCompareUnitMask) != 0) goto LAB_000cc588;
+      if ((unitBitMaskB & shadowCompareUnitMask) != 0) goto loopCheckDepthTextureUnitMask2;
     }
-LAB_000cc5e4:
+storeWriteCursor:
     *writeCursor = tokenWord;
     savedWriteCursor = writeCursor + 1;
     if (hasIndexWord) {
@@ -4458,11 +4458,11 @@ int scDumpSrcShaderImpl(sinkContext, shaderState, sinkRecord, argR6, argR7Text, 
   constIndex = shaderState[0xb];
   ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumBoolGSConst = %d\r\n",constIndex,argR7Text,argR8Text,
                argR9Text,argR10Text);
-  if (shaderState[9] == 0) goto LAB_000cd7d0;
+  if (shaderState[9] == 0) goto callScLogToSink;
   if (shaderState[6] != 0) {
     ((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool VS Constants",constIndex,argR7Text,argR8Text,
                  argR9Text,argR10Text);
-    if (shaderState[9] == 0) goto LAB_000cd7d0;
+    if (shaderState[9] == 0) goto callScLogToSink;
     nextConstIndex = 0;
     do {
       argR9Text = (undefined1 *)shaderState[6];
@@ -4477,7 +4477,7 @@ int scDumpSrcShaderImpl(sinkContext, shaderState, sinkRecord, argR6, argR7Text, 
                    argR10Text);
       nextConstIndex = nextConstIndex + 1;
     } while (nextConstIndex < (uint)shaderState[9]);
-    if (shaderState[9] == 0) goto LAB_000cd7d0;
+    if (shaderState[9] == 0) goto callScLogToSink;
   }
   if (shaderState[7] != 0) {
     ((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool PS Constants",constIndex,argR7Text,argR8Text,
@@ -4498,7 +4498,7 @@ int scDumpSrcShaderImpl(sinkContext, shaderState, sinkRecord, argR6, argR7Text, 
         nextConstIndex = nextConstIndex + 1;
       } while (nextConstIndex < (uint)shaderState[10]);
     }
-    if (shaderState[9] == 0) goto LAB_000cd7d0;
+    if (shaderState[9] == 0) goto callScLogToSink;
   }
   if ((shaderState[8] != 0) &&
      (((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool GS Constants",constIndex,argR7Text,argR8Text
@@ -4517,7 +4517,7 @@ int scDumpSrcShaderImpl(sinkContext, shaderState, sinkRecord, argR6, argR7Text, 
       constIndex = constIndex + 1;
     } while (constIndex < (uint)shaderState[0xb]);
   }
-LAB_000cd7d0:
+callScLogToSink:
   ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatVSConst = %d\r\n",shaderState[0xf],argR7Text,
                argR8Text,argR9Text,argR10Text);
   ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatPSConst = %d\r\n",shaderState[0x10],argR7Text,
@@ -6032,7 +6032,7 @@ int vsdisPrintFlowInstruction(disasmCtx, labelEntry, argR5, argR6, argR7, argR8,
     formatString = "          CF- IF  B%d %s 0, if = %d, else = %d, endif = %d";
     formatValueA = (char *)(labelEntry[4] + 1);
     formatValueC = labelEntry[5] + 1;
-LAB_000cfef0:
+loopCallScDisasmPrintf:
     ((int (*)())scDisasmPrintf)(disasmCtx,formatString,formatValueD,compareText,formatValueA,formatValueC,formatValueB,argR10);
     return;
   }
@@ -6046,7 +6046,7 @@ LAB_000cfef0:
         formatValueB = labelEntry[4];
         formatValueD = labelEntry[5];
         flowFormat = "          CF- CALL at %d, subroutine from %d to %d";
-        goto LAB_000cfe3c;
+        goto callScDisasmPrintf;
       }
       if (flowOp == 9) {
         formatValueD = labelEntry[4];
@@ -6060,7 +6060,7 @@ LAB_000cfef0:
         formatValueB = labelEntry[6];
         formatValueC = labelEntry[5];
         formatString = "          CF- CALL at %d if B%d %s 0, subroutine from %d to %d";
-        goto LAB_000cfef0;
+        goto loopCallScDisasmPrintf;
       }
     }
     else if (flowOp == 0x29) {
@@ -6081,7 +6081,7 @@ LAB_000cfef0:
         flowFormat = "          CF- Rep  I%d first in loop = %d last in loop = %d";
         formatValueD = labelEntry[4] + 1;
       }
-      goto LAB_000cfe3c;
+      goto callScDisasmPrintf;
     }
     if (flowOp == 0x53) {
       return;
@@ -6100,7 +6100,7 @@ LAB_000cfef0:
   flowFormat = " endif= %d , endinst = %d, retinst = %d";
   formatValueD = formatValueB;
   formatValueC = formatValueB;
-LAB_000cfe3c:
+callScDisasmPrintf:
   ((int (*)())scDisasmPrintf)(disasmCtx,flowFormat,formatValueB,formatValueD,formatValueC,argR8,argR9,argR10);
   return;
 }
@@ -6722,18 +6722,18 @@ int psnNormalizeProgram(psn, level, dumpIdArg, argR6, argR7, argR8, argR9Scratch
     loopIndex = 1;
     do {
       loopIndex = loopIndex + 1;
-      if (*rsScanCursor != 1) goto LAB_000d0bfc;
+      if (*rsScanCursor != 1) goto checkRecordCount;
       rsScanCursor = rsScanCursor + 0x12;
     } while (loopIndex <= recordCount);
-LAB_000d0bd8:
+loopSetWaitFlagsOr:
     waitFlagsOr = 0;
     texCustomEnables = 0;
     r300Compatible = true;
   }
   else {
     loopIndex = 1;
-LAB_000d0bfc:
-    if (recordCount < loopIndex) goto LAB_000d0bd8;
+checkRecordCount:
+    if (recordCount < loopIndex) goto loopSetWaitFlagsOr;
     waitFlagsOr = 0;
     r300Compatible = true;
     recordCursor = (uint *)(psn + loopIndex * 0x48);
@@ -6746,7 +6746,7 @@ LAB_000d0bfc:
       recordKind = *recordCursor;
       if (recordKind < 5) {
         if (recordKind < 3) {
-          if (recordKind != 2) goto LAB_000d0c50;
+          if (recordKind != 2) goto callPsnReportError;
           argR9Scratch = (uint)*(byte *)((int)recordCursor + 0x1b);
           waitFlagsOr = waitFlagsOr | *(byte *)(recordCursor + 1) | argR9Scratch;
           if (*(char *)((int)recordCursor + 0x1a) != '\0') {
@@ -6776,13 +6776,13 @@ LAB_000d0bfc:
           }
           cfOpSelect = argR9Scratch;
           if ((cfOpA == 1) || (cfOpSelect = cfOpA, cfOpA != 0)) {
-            if (cfOpSelect == 2) goto LAB_000d0d60;
+            if (cfOpSelect == 2) goto setCfDepth;
             if (cfOpSelect == 1) {
               cfDepth = cfDepth - *(byte *)((int)recordCursor + 0x13);
             }
           }
           else if (argR9Scratch == 2) {
-LAB_000d0d60:
+setCfDepth:
             cfDepth = cfDepth + 1;
           }
           r300Compatible = !needsFlowControl;
@@ -6793,17 +6793,17 @@ LAB_000d0d60:
         }
       }
       else {
-LAB_000d0c50:
+callPsnReportError:
         ((int (*)())psnReportError)(0,"Bad Instruction Type!",dumpIdArg,argR6,argR7,argR8,argR9Scratch,argR10);
       }
       scanRecordIndex = scanRecordIndex + 1;
       usInstructionNumber = usInstructionNumber + 1;
       recordCursor = recordCursor + 0x12;
     } while (scanRecordIndex <= recordCount);
-    if (usInstructionNumber != 0) goto LAB_000d0be8;
+    if (usInstructionNumber != 0) goto checkPsn;
   }
   usInstructionNumber = 1;
-LAB_000d0be8:
+checkPsn:
   if ((*(short *)(psn + 0x20) == 0) && (*(short *)(psn + 0x12) == 0)) {
     *(short *)(psn + 0x12) = (short)usInstructionNumber + -1;
   }
@@ -6860,7 +6860,7 @@ LAB_000d0be8:
             *recordCursor = 4;
           }
           if ((hasWaitFlags) || (pendingTexIndex == 100000)) {
-LAB_000d1004:
+loopSetNextPendingTexIndex:
             nextPendingTexIndex = 100000;
           }
           else {
@@ -6880,7 +6880,7 @@ LAB_000d1004:
           *(undefined1 *)(recordCursor + 1) = 1;
         }
         if ((byte)(*(byte *)((int)recordCursor + 0x12) & 0xf0) ==
-            (byte)(*(byte *)((int)recordCursor + 0x12) << 4)) goto LAB_000d1004;
+            (byte)(*(byte *)((int)recordCursor + 0x12) << 4)) goto loopSetNextPendingTexIndex;
         if (loopIndex2 == 0) {
           ((int (*)())psnReportError)(0,"FC ALU result test is first US instruction",dumpIdArg,argR6,argR7,
                        argR8,argR9Scratch,argR10);
@@ -7121,7 +7121,7 @@ int psDisasmFormatRgbSource(outText, rgbAddrA, rgbAddrB, rgbAddrC, alphaAddrA, a
   rgbAddrCSaved = rgbAddrC;
   sourceSelectCopy = sourceSelect;
   if (rgbOpcode - 0xbU < 2) {
-LAB_000d14bc:
+loopCallPsDisasmFormatRegister:
     ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrA,rgbAddrB,rgbAddrCSaved,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelectCopy,floatArg1);
   }
   else {
@@ -7132,30 +7132,30 @@ LAB_000d14bc:
     if (auxCheckResult == 0) {
       if (sourceSelect == 1) {
         ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrB,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
-        goto LAB_000d1518;
+        goto setLength2;
       }
       rgbAddrB = rgbAddrBSaved;
       alphaAddrA = alphaAddrASaved;
       alphaAddrB = alphaAddrBSaved;
       floatArg1 = floatArg1Saved;
-      if (sourceSelect == 0) goto LAB_000d14bc;
+      if (sourceSelect == 0) goto loopCallPsDisasmFormatRegister;
       if (sourceSelect == 2) {
         ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrC,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
-        goto LAB_000d1518;
+        goto setLength2;
       }
     }
     else {
       if (sourceSelect == 1) {
         ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrB,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
-        goto LAB_000d1518;
+        goto setLength2;
       }
       if (sourceSelect == 0) {
         ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrA,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
-        goto LAB_000d1518;
+        goto setLength2;
       }
       if (sourceSelect == 2) {
         ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrC,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
-        goto LAB_000d1518;
+        goto setLength2;
       }
     }
     if (sourceSelect == 3) {
@@ -7169,7 +7169,7 @@ LAB_000d14bc:
       builtin_strncpy(operandText,"???",4);
     }
   }
-LAB_000d1518:
+setLength2:
   length2 = _strlen(outText);
   swizzleLow16 = swizzleWord & 0xffff;
   swizzleKind = swizzleWord & 0xff80;
@@ -7244,24 +7244,24 @@ int psDisasmFormatAlphaSource(outText, rgbAddrA, rgbAddrB, rgbAddrC, alphaAddrA,
       if (sourceSelect != 1) {
         if (sourceSelect == 0) {
           ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrA,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,0,floatArg1);
-          goto LAB_000d1780;
+          goto setLength;
         }
         rgbAddrB = rgbAddrC;
-        if (sourceSelect != 2) goto LAB_000d176c;
+        if (sourceSelect != 2) goto checkSourceSelect;
       }
       ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrB,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelect,floatArg1);
-      goto LAB_000d1780;
+      goto setLength;
     }
     if (sourceSelect == 1) {
       ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrB,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,1,floatArg1);
-      goto LAB_000d1780;
+      goto setLength;
     }
     if (sourceSelect != 0) {
       if (sourceSelect == 2) {
         ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrC,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,2,floatArg1);
-        goto LAB_000d1780;
+        goto setLength;
       }
-LAB_000d176c:
+checkSourceSelect:
       if (sourceSelect == 3) {
         modifierPrefix = "srcp";
         operandText[0] = s_srcp_001a6fa0[0];
@@ -7273,11 +7273,11 @@ LAB_000d176c:
       else {
         builtin_strncpy(operandText,"???",4);
       }
-      goto LAB_000d1780;
+      goto setLength;
     }
   }
   ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrA,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelect,floatArg1);
-LAB_000d1780:
+setLength:
   length = _strlen(outText);
   if (componentCode - 4U < 3) {
     _strcpy(outText + length,componentCode * 4 + 0x1dc259);
@@ -7597,9 +7597,9 @@ int psnDumpPixelShader(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR
           if (*(char *)((int)rsRecord + 9) != '\0') {
             ((int (*)())psnReportError)(0,"                         ",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,
                          argR10);
-            goto LAB_000d3b80;
+            goto checkRsRecord;
           }
-LAB_000d3be0:
+loopCallPsnReportError:
           ((int (*)())psnReportError)(0,"\n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
         }
         else {
@@ -7615,20 +7615,20 @@ LAB_000d3be0:
               ((int (*)())psnReportError)(0," back  ",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
             }
             else {
-              if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
+              if (*(char *)((int)rsRecord + 9) == '\0') goto loopCallPsnReportError;
               ((int (*)())psnReportError)(0,"       ",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
             }
           }
           else {
             ((int (*)())psnReportError)(0," biased",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
           }
-LAB_000d3b80:
-          if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
+checkRsRecord:
+          if (*(char *)((int)rsRecord + 9) == '\0') goto loopCallPsnReportError;
           dumpLabelArg = (uint)*(ushort *)(rsRecord + 1);
           argR7 = (uint)*(byte *)(rsRecord + 2);
           dumpIdArg = (uint *)((*(byte *)((int)rsRecord + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
           ((int (*)())psnReportError)(0,"   r%02d.%s = txc%02ld",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
-          if (*(char *)(rsRecord + 3) == '\0') goto LAB_000d3be0;
+          if (*(char *)(rsRecord + 3) == '\0') goto loopCallPsnReportError;
           ((int (*)())psnReportError)(0," adjusted\n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
         }
         rsRecordNumber = rsRecordNumber + 1;
@@ -8272,9 +8272,9 @@ switchD_000d489c_caseD_4:
           if (*(char *)((int)rsRecord2 + 9) != '\0') {
             ((int (*)())psnReportError)(0,"                         ",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,
                          argR10);
-            goto LAB_000d1afc;
+            goto checkRsRecord2;
           }
-LAB_000d1b5c:
+loopCallPsnReportError2:
           ((int (*)())psnReportError)(0,"\n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
         }
         else {
@@ -8303,16 +8303,16 @@ LAB_000d1b5c:
             ((int (*)())psnReportError)(0,"  r%02d.%s = back",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
           }
           else {
-            if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
+            if (*(char *)((int)rsRecord2 + 9) == '\0') goto loopCallPsnReportError2;
             ((int (*)())psnReportError)(0,"       ",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
           }
-LAB_000d1afc:
-          if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
+checkRsRecord2:
+          if (*(char *)((int)rsRecord2 + 9) == '\0') goto loopCallPsnReportError2;
           neutralLineArg0 = (uint *)(uint)*(ushort *)(rsRecord2 + 1);
           neutralRecordCountArg = (uint)*(byte *)(rsRecord2 + 2);
           argR6 = (char *)((*(byte *)((int)rsRecord2 + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
           ((int (*)())psnReportError)(0,"   r%02d.%s = txc%02ld",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
-          if (*(char *)(rsRecord2 + 3) == '\0') goto LAB_000d1b5c;
+          if (*(char *)(rsRecord2 + 3) == '\0') goto loopCallPsnReportError2;
           ((int (*)())psnReportError)(0," adjusted\n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
         }
         rsRecordNumber2 = rsRecordNumber2 + 1;
@@ -8779,18 +8779,18 @@ LAB_000d1afc:
           if (rgbOperandAUsed) {
             rgbSelectANotSrcp = rgbSelectABase != 3;
             if (rgbSelectANotSrcp) {
-LAB_000d2654:
+loopSetRgbSrcpNeededFlag:
               rgbSrcpNeededFlag = false;
             }
             else {
               auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxA);
               rgbSrcpNeededFlag = true;
-              if (auxCheckResult != 0) goto LAB_000d2654;
+              if (auxCheckResult != 0) goto loopSetRgbSrcpNeededFlag;
             }
             if (!rgbSelectANotSrcp) {
               alphaSrcpNeededFlag = true;
               auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxA);
-              if (auxCheckResult != 0) goto LAB_000d2674;
+              if (auxCheckResult != 0) goto checkRgbOperandBUsed;
             }
             alphaSrcpNeededFlag = false;
           }
@@ -8798,50 +8798,50 @@ LAB_000d2654:
             alphaSrcpNeededFlag = false;
             rgbSrcpNeededFlag = false;
           }
-LAB_000d2674:
+checkRgbOperandBUsed:
           if (rgbOperandBUsed) {
             rgbSelectBNotSrcp = rgbSelectBBase != 3;
             if (rgbSelectBNotSrcp) {
-LAB_000d269c:
+loopSetSrcpNeedBit:
               srcpNeedBit = 0;
             }
             else {
               auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxB);
               srcpNeedBit = 1;
-              if (auxCheckResult != 0) goto LAB_000d269c;
+              if (auxCheckResult != 0) goto loopSetSrcpNeedBit;
             }
             rgbSrcpNeededFlag = (bool)(rgbSrcpNeededFlag | srcpNeedBit);
             if (rgbSelectBNotSrcp) {
-LAB_000d26bc:
+loopSetSrcpNeedBit2:
               srcpNeedBit = 0;
             }
             else {
               auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxB);
               srcpNeedBit = 1;
-              if (auxCheckResult == 0) goto LAB_000d26bc;
+              if (auxCheckResult == 0) goto loopSetSrcpNeedBit2;
             }
             alphaSrcpNeededFlag = (bool)(alphaSrcpNeededFlag | srcpNeedBit);
           }
           if (rgbOperandCUsed) {
             rgbSelectCNotSrcp = rgbSelectCBase != 3;
             if (rgbSelectCNotSrcp) {
-LAB_000d26ec:
+loopSetSrcpNeedBit3:
               srcpNeedBit = 0;
             }
             else {
               auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxC);
               srcpNeedBit = 1;
-              if (auxCheckResult != 0) goto LAB_000d26ec;
+              if (auxCheckResult != 0) goto loopSetSrcpNeedBit3;
             }
             rgbSrcpNeededFlag = (bool)(rgbSrcpNeededFlag | srcpNeedBit);
             if (rgbSelectCNotSrcp) {
-LAB_000d270c:
+loopSetSrcpNeedBit4:
               srcpNeedBit = 0;
             }
             else {
               auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxC);
               srcpNeedBit = 1;
-              if (auxCheckResult == 0) goto LAB_000d270c;
+              if (auxCheckResult == 0) goto loopSetSrcpNeedBit4;
             }
             alphaSrcpNeededFlag = (bool)(alphaSrcpNeededFlag | srcpNeedBit);
           }
@@ -8942,7 +8942,7 @@ LAB_000d270c:
           rgbOutputWriteMask = (uint)*(byte *)((int)instructionRecord2 + 0x15);
           rgbTempWriteMask2 = *(byte *)(instructionRecord2 + 5);
           if (rgbOutputWriteMask == 0) {
-LAB_000d2b24:
+loopCallPsnReportError3:
             ((int (*)())psnReportError)(0,"           ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
           }
           else if (*instructionRecord2 == 3) {
@@ -8952,7 +8952,7 @@ LAB_000d2b24:
             ((int (*)())psnReportError)(0,"out%d.%s = ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
           }
           else {
-            if (*instructionRecord2 != 4) goto LAB_000d2b24;
+            if (*instructionRecord2 != 4) goto loopCallPsnReportError3;
             rgbOutputWriteMask = rgbOutputWriteMask * 4 + 0x1dc239;
             ((int (*)())psnReportError)(0,"pred.%s = ",rgbOutputWriteMask,rgbDestMaskTextPtr,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             rgbOutIndex = *(char *)((int)instructionRecord2 + 0x16);

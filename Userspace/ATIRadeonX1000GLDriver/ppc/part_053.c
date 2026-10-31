@@ -47,7 +47,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, staleAr
   condSwizzle = *(uint *)(branchSrcRecord + 0x10);
   branchOpcode = *(int *)(*(int *)(branchInst + 0x88) + 8);
   if (branchOpcode == 0x8b) {
-    if (*(int *)(branchInst + 300) != 0) goto LAB_0019dab0;
+    if (*(int *)(branchInst + 300) != 0) goto setCondValueInst;
     condValueInst = IRInst__create(0x12,compiler);
     addSrcRecord = IRInst__getOperandRecord(condValueInst,1);
     branchFlags = *(uint *)(branchInst + 0xb8);
@@ -86,7 +86,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, staleAr
     }
   }
   else {
-LAB_0019dab0:
+setCondValueInst:
     condValueInst = (int *)0x0;
   }
   zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
@@ -462,7 +462,7 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
       }
     }
     else {
-LAB_0019e3d4:
+loopSetPredSetOpcode:
       predSetOpcode = 0;
     }
   }
@@ -475,7 +475,7 @@ LAB_0019e3d4:
     }
   }
   else {
-    if (loopIndex != 3) goto LAB_0019e3d4;
+    if (loopIndex != 3) goto loopSetPredSetOpcode;
     if (unpredicated) {
       predSetOpcode = 0x56;
     }
@@ -942,11 +942,11 @@ int ilSourceOperandWordCount(operandWords)
         loopPtr = loopPtr + nestedWordCount;
       } while (loopIndex2 < (header >> 0x19 & 1));
     }
-    if ((header & 0x1800000) == 0) goto LAB_0019ed78;
+    if ((header & 0x1800000) == 0) goto checkHeader;
   }
   loopPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(header >> 0x17 & 3,header >> 0x19 & 1,loopPtr);
   header = *operandWords;
-LAB_0019ed78:
+checkHeader:
   if ((header & 0x4000000) != 0) {
     loopPtr = loopPtr + 1;
   }
@@ -1377,9 +1377,9 @@ int R520MachineAssembler__setAlphaOpcode(this, hardwareOpcode, irOpcode, irInst)
   int recordPtr2;
   
   alphaOpcode = (undefined1)hardwareOpcode;
-  if (hardwareOpcode != -1) goto LAB_0019f708;
+  if (hardwareOpcode != -1) goto storeThis;
   if (irOpcode == 0x34) {
-LAB_0019f51c:
+loopSetAlphaOpcode:
     alphaOpcode = 0;
     recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
     *(undefined1 *)(recordPtr + 0x3b) = *(undefined1 *)(recordPtr + 0x3a);
@@ -1393,17 +1393,17 @@ LAB_0019f51c:
   else {
     if (irOpcode < 0x35) {
       if (irOpcode == 0x13) {
-LAB_0019f4fc:
+loopSetAlphaOpcode2:
         alphaOpcode = 0;
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x38) = 4;
-        goto LAB_0019f708;
+        goto storeThis;
       }
       if (irOpcode < 0x14) {
-        if (irOpcode == 0x12) goto LAB_0019f51c;
+        if (irOpcode == 0x12) goto loopSetAlphaOpcode;
       }
       else {
         if (irOpcode == 0x25) {
-LAB_0019f5f0:
+loopSetRecordPtr2:
           recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
           alphaOpcode = *(undefined1 *)(recordPtr2 + 0x39);
           *(undefined1 *)(recordPtr2 + 0x39) = *(undefined1 *)(recordPtr2 + 0x3a);
@@ -1431,36 +1431,36 @@ LAB_0019f5f0:
           else {
             alphaOpcode = 6;
           }
-          goto LAB_0019f708;
+          goto storeThis;
         }
         if (irOpcode == 0x31) {
-LAB_0019f5b4:
+loopSetAlphaOpcode3:
           alphaOpcode = 0;
           *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x37) = 6;
           *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x38) = 4;
-          goto LAB_0019f708;
+          goto storeThis;
         }
       }
     }
     else {
-      if (irOpcode == 0x8b) goto LAB_0019f51c;
+      if (irOpcode == 0x8b) goto loopSetAlphaOpcode;
       if (irOpcode < 0x8c) {
-        if (irOpcode == 0x36) goto LAB_0019f4fc;
-        if (irOpcode == 0x66) goto LAB_0019f5b4;
+        if (irOpcode == 0x36) goto loopSetAlphaOpcode2;
+        if (irOpcode == 0x66) goto loopSetAlphaOpcode3;
       }
       else {
-        if (irOpcode == 0x9d) goto LAB_0019f5f0;
+        if (irOpcode == 0x9d) goto loopSetRecordPtr2;
         if (irOpcode == 0xb4) {
           alphaOpcode = 0;
           *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x36) = 4;
           *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x37) = 4;
-          goto LAB_0019f708;
+          goto storeThis;
         }
       }
     }
     alphaOpcode = 0xff;
   }
-LAB_0019f708:
+storeThis:
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x40) = alphaOpcode;
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x42) = 1;
@@ -1839,9 +1839,9 @@ int R520MachineAssembler__setRgbOpcode(this, hardwareOpcode, irOpcode, irInst)
   int recordPtr2;
   
   rgbOpcode = (undefined1)hardwareOpcode;
-  if (hardwareOpcode != -1) goto LAB_001a0654;
+  if (hardwareOpcode != -1) goto storeThis;
   if (irOpcode == 0x34) {
-LAB_001a0260:
+loopSetRgbOpcode:
     rgbOpcode = 0;
     recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
     *(undefined1 *)(recordPtr + 0x2c) = *(undefined1 *)(recordPtr + 0x2b);
@@ -1867,7 +1867,7 @@ LAB_001a0260:
   else {
     if (irOpcode < 0x35) {
       if (irOpcode == 0x13) {
-LAB_001a0200:
+loopSetRgbOpcode2:
         rgbOpcode = 0;
         recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
         *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0x1fffffff | 0x80000000;
@@ -1875,14 +1875,14 @@ LAB_001a0200:
         *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xe3ffffff | 0x10000000;
         recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
         *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xfc7fffff | 0x2000000;
-        goto LAB_001a0654;
+        goto storeThis;
       }
       if (irOpcode < 0x14) {
-        if (irOpcode == 0x12) goto LAB_001a0260;
+        if (irOpcode == 0x12) goto loopSetRgbOpcode;
       }
       else {
         if (irOpcode == 0x25) {
-LAB_001a044c:
+loopSetRecordPtr2:
           recordPtr2 = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
           rgbOpcode = *(undefined1 *)(recordPtr2 + 0x2a);
           *(undefined1 *)(recordPtr2 + 0x2a) = *(undefined1 *)(recordPtr2 + 0x2b);
@@ -1928,10 +1928,10 @@ LAB_001a044c:
           else {
             rgbOpcode = 8;
           }
-          goto LAB_001a0654;
+          goto storeThis;
         }
         if (irOpcode == 0x31) {
-LAB_001a0390:
+loopSetRgbOpcode3:
           rgbOpcode = 0;
           recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
           *(uint *)(recordPtr + 0x24) = *(uint *)(recordPtr + 0x24) & 0xffff1fff | 0xc000;
@@ -1945,18 +1945,18 @@ LAB_001a0390:
           *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xe3ffffff | 0x10000000;
           recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
           *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xfc7fffff | 0x2000000;
-          goto LAB_001a0654;
+          goto storeThis;
         }
       }
     }
     else {
-      if (irOpcode == 0x8b) goto LAB_001a0260;
+      if (irOpcode == 0x8b) goto loopSetRgbOpcode;
       if (irOpcode < 0x8c) {
-        if (irOpcode == 0x36) goto LAB_001a0200;
-        if (irOpcode == 0x66) goto LAB_001a0390;
+        if (irOpcode == 0x36) goto loopSetRgbOpcode2;
+        if (irOpcode == 0x66) goto loopSetRgbOpcode3;
       }
       else {
-        if (irOpcode == 0x9d) goto LAB_001a044c;
+        if (irOpcode == 0x9d) goto loopSetRecordPtr2;
         if (irOpcode == 0xb4) {
           *(undefined4 *)(this + 0x9c) = 1;
           rgbOpcode = 0;
@@ -1972,13 +1972,13 @@ LAB_001a0390:
           *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xfc7fffff | 0x2000000;
           recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8);
           *(uint *)(recordPtr + 0x28) = *(uint *)(recordPtr + 0x28) & 0xe3ffffff | 0x10000000;
-          goto LAB_001a0654;
+          goto storeThis;
         }
       }
     }
     rgbOpcode = 0xff;
   }
-LAB_001a0654:
+storeThis:
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x31) = rgbOpcode;
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x33) = 1;
@@ -2048,7 +2048,7 @@ int R520MachineAssembler__vslot53_selectBitsForLiteralFloat(this, sourceIndex, u
     if (laneSelector < 4) {
       literalValue = *(float *)(laneSelector * 0x18 + operandVReg + 0x20);
       if (literalValue == zeroLiteral) {
-LAB_001a08b4:
+loopStoreSelectWord:
         *selectWord = 4 << (bitShift & 0x3f) | *selectWord;
       }
       else if (literalValue == halfLiteral) {
@@ -2059,7 +2059,7 @@ LAB_001a08b4:
       }
     }
     else {
-      if (laneSelector != 6) goto LAB_001a08b4;
+      if (laneSelector != 6) goto loopStoreSelectWord;
       *selectWord = 6 << (bitShift & 0x3f) | *selectWord;
     }
     lastLane = loopIndex == 2;
@@ -2093,7 +2093,7 @@ int R520MachineAssembler__vslot54_selectBitsForAlphaLiteral(this, sourceIndex, s
   if (laneSelector < 4) {
     literalValue = *(float *)(laneSelector * 0x18 + operandVReg + 0x20);
     if (literalValue == FLOAT_001aa0d4) {
-LAB_001a09b0:
+loopStoreByteOffset:
       *(uint *)(byteOffset + selectBase) = *(uint *)(byteOffset + selectBase) | 0x800;
       return;
     }
@@ -2105,7 +2105,7 @@ LAB_001a09b0:
       return;
     }
   }
-  else if (laneSelector != 6) goto LAB_001a09b0;
+  else if (laneSelector != 6) goto loopStoreByteOffset;
   *(uint *)(byteOffset + selectBase) = *(uint *)(byteOffset + selectBase) | 0xc00;
   return;
 }

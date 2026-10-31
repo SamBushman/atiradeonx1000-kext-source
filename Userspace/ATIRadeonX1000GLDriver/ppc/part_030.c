@@ -1201,7 +1201,7 @@ int IRInst__foldCompareConstResult(outValue, inst, operandSlot, valueBits, compi
     if (operandSlot != 1) {
       foldedValue = (double)FLOAT_001aa0e8;
     }
-    goto LAB_0010badc;
+    goto storeOutValue2;
   case 0x14:
     if (operandSlot == 2) {
       if ((*(uint *)(inst + 0xe8) & 1) == 0) {
@@ -1210,7 +1210,7 @@ int IRInst__foldCompareConstResult(outValue, inst, operandSlot, valueBits, compi
       else {
         selectedValue = 1.0;
       }
-      goto LAB_0010baf4;
+      goto storeOutValue;
     }
     if (operandSlot == 3) {
       instFlags = *(uint *)(inst + 0xe8);
@@ -1222,7 +1222,7 @@ int IRInst__foldCompareConstResult(outValue, inst, operandSlot, valueBits, compi
     }
   default:
     selectedValue = GH_U2F(0x7ffffffdU);
-LAB_0010baf4:
+storeOutValue:
     *outValue = selectedValue;
     return outValue;
   case 0x16:
@@ -1235,15 +1235,15 @@ LAB_0010baf4:
   if (operandSlot == 1) {
     instFlags = *(uint *)(inst + 0xb8);
 joined_r0x0010bad0:
-    if ((instFlags & 1) == 0) goto LAB_0010badc;
+    if ((instFlags & 1) == 0) goto storeOutValue2;
   }
   else {
     instFlags = *(uint *)(inst + 0xb8);
 joined_r0x0010baa4:
-    if ((instFlags & 1) != 0) goto LAB_0010badc;
+    if ((instFlags & 1) != 0) goto storeOutValue2;
   }
   foldedValue = (double)FLOAT_001aa0d4;
-LAB_0010badc:
+storeOutValue2:
   *outValue = (float)foldedValue;
   return outValue;
 }

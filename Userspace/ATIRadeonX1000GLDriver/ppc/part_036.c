@@ -3967,7 +3967,7 @@ int IRPhi__getUniqueSource(inst)
   int loopIndex;
   
   if (*(int *)(inst + 0x84) < 1) {
-LAB_0011e764:
+loopSetUniqueSource:
     uniqueSource = 0;
   }
   else {
@@ -3977,7 +3977,7 @@ LAB_0011e764:
       callResult = IRInst__getOperandSource(inst,loopIndex);
       uniqueSource = previousSource;
       if ((((callResult != 0) && (inst != callResult)) && (uniqueSource = callResult, previousSource != 0)) &&
-         (uniqueSource = previousSource, previousSource != callResult)) goto LAB_0011e764;
+         (uniqueSource = previousSource, previousSource != callResult)) goto loopSetUniqueSource;
       loopIndex = loopIndex + 1;
       previousSource = uniqueSource;
     } while (loopIndex <= *(int *)(inst + 0x84));

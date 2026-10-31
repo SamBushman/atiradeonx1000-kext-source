@@ -62,7 +62,7 @@ int Block__splitOutgoingEdge(block, successor, newBlock)
   loopCounterC = 0;
   do {
     if (*(uint *)(successorPredecessors + 4) < loopIndex) {
-LAB_000e9874:
+loopSetLoopIndex:
       loopIndex = 1;
       loopCounterB = 0;
       while( true ) {
@@ -81,7 +81,7 @@ LAB_000e9874:
     if (predecessorEntry != 0) {
       if (block == predecessorEntry) {
         Vector__removeAt(successorPredecessors,loopCounter);
-        goto LAB_000e9874;
+        goto loopSetLoopIndex;
       }
       loopCounter = loopCounter + 1;
     }
@@ -149,7 +149,7 @@ int Block__splitIncomingEdge(block, predecessor, newBlock)
   loopCounterC = 0;
   do {
     if (*(uint *)(predecessorSuccessors + 4) < loopIndex) {
-LAB_000e9a40:
+loopSetLoopIndex:
       loopIndex = 1;
       loopCounterB = 0;
       while( true ) {
@@ -168,7 +168,7 @@ LAB_000e9a40:
     if (successorEntry != 0) {
       if (block == successorEntry) {
         Vector__removeAt(predecessorSuccessors,loopCounter);
-        goto LAB_000e9a40;
+        goto loopSetLoopIndex;
       }
       loopCounter = loopCounter + 1;
     }
@@ -246,7 +246,7 @@ int Block__recordDefinition(block, vreg, definition)
       if (loopIndex < definitionCount) {
         listEntry = (int *)(loopIndex * 4 + definitionList[2]);
       }
-      if (vreg == *listEntry) goto LAB_000e9ca8;
+      if (vreg == *listEntry) goto returnVReg__pushDefinition;
       loopIndex = loopIndex + 1;
       entriesLeft = entriesLeft - 1;
     } while (entriesLeft != 0);
@@ -260,7 +260,7 @@ int Block__recordDefinition(block, vreg, definition)
     vectorSlot = (int *)Vector__elementRefGrow(definitionList,definitionCount);
   }
   *vectorSlot = vreg;
-LAB_000e9ca8:
+returnVReg__pushDefinition:
   return VReg__pushDefinition(vreg,*(undefined4 *)(block + 0xb0),definition);
 }
 

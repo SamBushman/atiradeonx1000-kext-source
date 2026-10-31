@@ -167,7 +167,7 @@ int get_globals()
       symbolAddress = ((int (*)())find_atexit_10_3)();
       *(undefined4 *)(atexit_globals + 0x10) = symbolAddress;
       if ((*(int *)(atexit_globals + 0x10) != 0) &&
-         (libSystemHandle = (**(code **)(atexit_globals + 0x10))(our_atexit), libSystemHandle == 0)) goto LAB_00001d08;
+         (libSystemHandle = (**(code **)(atexit_globals + 0x10))(our_atexit), libSystemHandle == 0)) goto setResult;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -183,18 +183,18 @@ int get_globals()
         else {
           symbolAddress = _dlsym(libSystemHandle,"atexit");
           *(undefined4 *)(atexit_globals + 0x10) = symbolAddress;
-          if (*(int *)(atexit_globals + 0x10) == 0) goto LAB_00001d14;
+          if (*(int *)(atexit_globals + 0x10) == 0) goto callKeymgrSetAndUnlockProcesswidePtr;
           *(undefined1 *)(atexit_globals + 3) = 0x10;
         }
-        goto LAB_00001d08;
+        goto setResult;
       }
     }
-LAB_00001d14:
+callKeymgrSetAndUnlockProcesswidePtr:
     __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
     result = 0;
   }
   else {
-LAB_00001d08:
+setResult:
     result = atexit_globals;
   }
   return result;
@@ -732,7 +732,7 @@ int get_globals_stub_000026a8()
       *(undefined4 *)((int)atexit_globals + 0x10) = symbolAddress;
       if ((*(int *)((int)atexit_globals + 0x10) != 0) &&
          (libSystemHandle = (**(code **)((int)atexit_globals + 0x10))(our_atexit), libSystemHandle == 0))
-      goto LAB_00001d08;
+      goto setResult;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -748,18 +748,18 @@ int get_globals_stub_000026a8()
         else {
           symbolAddress = _dlsym(libSystemHandle,"atexit");
           *(undefined4 *)((int)atexit_globals + 0x10) = symbolAddress;
-          if (*(int *)((int)atexit_globals + 0x10) == 0) goto LAB_00001d14;
+          if (*(int *)((int)atexit_globals + 0x10) == 0) goto callKeymgrSetAndUnlockProcesswidePtr;
           *(undefined1 *)((int)atexit_globals + 3) = 0x10;
         }
-        goto LAB_00001d08;
+        goto setResult;
       }
     }
-LAB_00001d14:
+callKeymgrSetAndUnlockProcesswidePtr:
     __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
     result = (void *)0x0;
   }
   else {
-LAB_00001d08:
+setResult:
     result = atexit_globals;
   }
   return result;
@@ -2686,7 +2686,7 @@ joined_r0x000058fc:
           return 0;
         }
       }
-LAB_00005690:
+loopSetConnectionOrError:
       connectionOrError = gld_setIntegerEngineParam(ctx,pname,values);
       return connectionOrError;
     }
@@ -2702,7 +2702,7 @@ LAB_00005690:
         *(uint *)(ctx + GLD_scaleY) = values[2];
         return 0;
       }
-      if (pname != 0x132) goto LAB_00005690;
+      if (pname != 0x132) goto loopSetConnectionOrError;
       connectionOrError = *(undefined4 *)(ctx + GLD_connect);
       selector = 0x10;
       scalarIn0 = (uint)(*values != 0);
@@ -2733,7 +2733,7 @@ LAB_00005690:
           connectionOrError = 0x2712;
           goto joined_r0x000058fc;
         }
-        if (pname != 0x29c) goto LAB_00005690;
+        if (pname != 0x29c) goto loopSetConnectionOrError;
         textureTarget = values[1];
         if (0xf < *values) {
           return 0x2718;
@@ -2929,7 +2929,7 @@ int gld_waitBufferStamp(ctx, buffer)
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         pluginRecord = pluginRecord + 8;
-LAB_00005e6c:
+loopCallIoConnectMethodScalarIStructureI:
         _io_connect_method_scalarI_structureI(connection,9,pluginRecord,1,0,0);
         return;
       }
@@ -2942,7 +2942,7 @@ LAB_00005e6c:
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         pluginRecord = pluginRecord + 0xc;
-        goto LAB_00005e6c;
+        goto loopCallIoConnectMethodScalarIStructureI;
       }
     }
   }
@@ -3096,7 +3096,7 @@ int _gldTestMemoryPluginData(ctx, pluginData)
   int pluginRecord;
   
   if ((pluginData == (int *)0x0) || (pluginRecord = *pluginData, pluginRecord == 0)) {
-LAB_00006230:
+loopSetIsComplete:
     isComplete = 1;
   }
   else {
@@ -3107,7 +3107,7 @@ LAB_00006230:
       }
     }
     else {
-      if (*(char *)(pluginRecord + 0x16) != '\a') goto LAB_00006230;
+      if (*(char *)(pluginRecord + 0x16) != '\a') goto loopSetIsComplete;
       if (*(int *)(pluginRecord + 0x10) < 0x20000) {
         isComplete = gld_isStampRetired(ctx,*(undefined4 *)(pluginRecord + 0xc));
         return isComplete;
@@ -3402,11 +3402,11 @@ int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateB
         scalarOut[0] = scalarOut[0] + 1;
         if (*(uint *)(PTR_DAT_001e88ac + 4) <= scalarOut[0]) break;
       } while ((1 << (scalarOut[0] & 0x3f) & *(uint *)(pixelFormat + 0x30)) == 0);
-      goto LAB_00006798;
+      goto storeCtx;
     }
   }
   scalarOut[0] = 0;
-LAB_00006798:
+storeCtx:
   *ctx = scalarOut[0];
   libraryOrTaskPtr = PTR_DAT_001e88ac;
   ctx[GLD_connect / 4] = 0;
@@ -3670,12 +3670,12 @@ int _gldDestroyContext(ctx)
         do {
           prevNode = listNode;
           listNode = (int *)prevNode[1];
-          if (listNode == (int *)0x0) goto LAB_00006e50;
+          if (listNode == (int *)0x0) goto checkCtx;
         } while (ctx != *listNode);
         prevNode[1] = listNode[1];
       }
     }
-LAB_00006e50:
+checkCtx:
     if (*(int *)(ctx + GLD_softwareBuffer) != 0) {
       _free(*(int *)(ctx + GLD_softwareBuffer));
     }

@@ -832,7 +832,7 @@ int extvsEmitOp879c(ctx, shader, instRecord)
       extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot,3,0,0);
     }
     else {
-      if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d600;
+      if (extvsOperandDataTypeResult != 0x87c0) goto setResult;
       extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot,3,0,*(uint *)(instRecord + 0x40));
     }
     extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
@@ -842,7 +842,7 @@ int extvsEmitOp879c(ctx, shader, instRecord)
     *(uint *)(instSlot + 8) = swizzleWord;
   }
   else {
-LAB_0005d600:
+setResult:
     result = 0xffffffff;
   }
   return result;
@@ -905,16 +905,16 @@ int extvsEmitOp879d(ctx, shader, instRecord)
         *(uint *)(instSlot + 4) = swizzleWord;
       }
       else {
-        if (componentSelect != 3) goto LAB_0005d81c;
+        if (componentSelect != 3) goto setSwizzleWord;
         swizzleWord = *(uint *)(instSlot + 4) >> 0x16 & 7;
         swizzleWord = swizzleWord << 0x13 | swizzleWord << 0x10 | swizzleWord << 0xd | *(uint *)(instSlot + 4) & 0xffc01fff;
         *(uint *)(instSlot + 4) = swizzleWord;
       }
     }
     else {
-      if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d850;
+      if (extvsOperandDataTypeResult != 0x87c0) goto setResult;
       extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,componentSelect);
-LAB_0005d81c:
+setSwizzleWord:
       swizzleWord = *(uint *)(instSlot + 4);
     }
     result = 1;
@@ -923,7 +923,7 @@ LAB_0005d81c:
     *(uint *)(instSlot + 8) = swizzleWord;
   }
   else {
-LAB_0005d850:
+setResult:
     result = 0xffffffff;
   }
   return result;
@@ -2133,7 +2133,7 @@ int extvsPrepareHardwareProgram(ctx, shader)
   programState = *hwProgramSlot;
   if ((shader[6] == 0) || (shader[5] == 0)) {
     success = 1;
-LAB_00061d90:
+loopStoreShader:
     shader[0x19] = 0;
     shader[0xc] = 0;
     shader[0x15] = 0;
@@ -2328,7 +2328,7 @@ LAB_00061d90:
                 symbolIndex = programState;
                 extvsAllocConstantRegisters(ctx,shader,programState,symbolOffset);
                 instrRecords2 = shader[6];
-                goto LAB_0005fdf0;
+                goto checkInstrByteOffset;
               }
             }
             else {
@@ -2351,14 +2351,14 @@ LAB_00061d90:
             instrRecords2 = shader[6];
           }
         }
-LAB_0005fdf0:
+checkInstrByteOffset:
         if (*(int *)(instrByteOffset + instrRecords2 + 0x3c) == 2) {
           symbolRecords2 = shader[8];
           symbolByteOffset2 = *(int *)(instrByteOffset + instrRecords2 + 0x40) * 0x54;
           slotFieldPtr = symbolByteOffset2 + symbolRecords2;
           if ((*(int *)(slotFieldPtr + 0x28) == 0x87c2) && (*(char *)(slotFieldPtr + 0x3d) == '\0')) {
             if (*(int *)(slotFieldPtr + 0x30) == 0) {
-              if (1 < *(uint *)(slotFieldPtr + 0x34)) goto LAB_00060230;
+              if (1 < *(uint *)(slotFieldPtr + 0x34)) goto checkSymbolByteOffset2;
               shader[0x17] = shader[0x17] + 1;
               if (*(char *)(slotFieldPtr + 0x44) == '\0') {
                 *(int *)(programState + 0x224) = *(int *)(programState + 0x224) + 1;
@@ -2375,7 +2375,7 @@ LAB_0005fdf0:
                 searching = true;
                 *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                 while (slotScanIndex2 < *(uint *)(programState + 0x58)) {
-                  if (!searching) goto LAB_0005ffe8;
+                  if (!searching) goto storeSlotFieldPtr;
                   if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
                     in_r8 = 1;
                     searching = false;
@@ -2394,18 +2394,18 @@ LAB_0005fdf0:
                   (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
                   *(undefined4 *)(programState + 0x54) = newSlotArray;
                   *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
-LAB_00060078:
+loopStoreSlotFieldPtr:
                   *(int *)(slotFieldPtr + 4) = slotCount;
                   *(undefined1 *)(slotCount * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                   instrRecords2 = shader[6];
-                  goto LAB_000608e0;
+                  goto checkInstrByteOffset2;
                 }
-LAB_0005ffe8:
+storeSlotFieldPtr:
                 *(uint *)(slotFieldPtr + 4) = slotScanIndex2;
-LAB_0005ffec:
+loopStoreSlotScanIndex2:
                 *(undefined1 *)(slotScanIndex2 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                 instrRecords2 = shader[6];
-                goto LAB_000608e0;
+                goto checkInstrByteOffset2;
               }
               if (symbolDataType == 0x87c0) {
                 slotScanIndex2 = 0;
@@ -2413,7 +2413,7 @@ LAB_0005ffec:
                 searching = true;
                 *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
                 while (slotScanIndex2 < *(int *)(programState + 0x58) - 3U) {
-                  if (!searching) goto LAB_000600f4;
+                  if (!searching) goto setSlotWriteOffset;
                   if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
                     searching = false;
                   }
@@ -2423,7 +2423,7 @@ LAB_0005ffec:
                   }
                 }
                 if (!searching) {
-LAB_000600f4:
+setSlotWriteOffset:
                   slotWriteOffset = slotScanIndex2 * 0x28;
                   slotEntry3 = slotWriteOffset + *(int *)(programState + 0x54);
                   if (((*(char *)(slotEntry3 + 0x38) == '\0') && (*(char *)(slotEntry3 + 0x60) == '\0')) &&
@@ -2441,7 +2441,7 @@ LAB_000600f4:
                       *(undefined1 *)(slotEntry6 + 0x10) = 1;
                       rowsLeft = rowsLeft + -1;
                     } while (rowsLeft != 0);
-                    goto LAB_000608d4;
+                    goto setInstrRecords2;
                   }
                 }
                 *(undefined1 *)(shader + 4) = 0;
@@ -2474,7 +2474,7 @@ LAB_000600f4:
                 searching = true;
                 *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                 while (slotScanIndex2 < *(uint *)(programState + 0x58)) {
-                  if (!searching) goto LAB_0005ff00;
+                  if (!searching) goto storeSlotFieldPtr2;
                   if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
                     foundFlag = 1;
                     searching = false;
@@ -2494,19 +2494,19 @@ LAB_000600f4:
                   *(undefined4 *)(programState + 0x54) = newSlotArray2;
                   *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                   *(undefined4 *)(slotFieldPtr + 8) = foundFlag;
-                  goto LAB_00060078;
+                  goto loopStoreSlotFieldPtr;
                 }
-LAB_0005ff00:
+storeSlotFieldPtr2:
                 *(uint *)(slotFieldPtr + 4) = slotScanIndex2;
                 *(undefined4 *)(slotFieldPtr + 8) = 0;
-                goto LAB_0005ffec;
+                goto loopStoreSlotScanIndex2;
               }
             }
             else {
               symbolByteOffset2 = extvsSymbolListGetIndex(shader + 7,*(int *)(slotFieldPtr + 0x30));
               symbolRecords2 = shader[8];
               symbolByteOffset2 = symbolByteOffset2 * 0x54;
-LAB_00060230:
+checkSymbolByteOffset2:
               if (*(int *)(symbolByteOffset2 + symbolRecords2 + 0x34) != 0) {
                 slotScanIndex2 = 0;
                 dependentOffset2 = symbolByteOffset2;
@@ -2529,7 +2529,7 @@ LAB_00060230:
                         searching = true;
                         *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
                         while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-                          if (!searching) goto LAB_000603e0;
+                          if (!searching) goto setSlotByteOffset;
                           if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                             searching = false;
                           }
@@ -2539,7 +2539,7 @@ LAB_00060230:
                           }
                         }
                         if (!searching) {
-LAB_000603e0:
+setSlotByteOffset:
                           slotByteOffset = slotIndex * 0x28;
                           slotEntry6 = slotByteOffset + *(int *)(programState + 0x54);
                           in_r8 = slotByteOffset;
@@ -2559,7 +2559,7 @@ LAB_000603e0:
                               *(undefined1 *)(slotEntry4 + 0x10) = 1;
                               rowsLeft4 = rowsLeft4 + -1;
                             } while (rowsLeft4 != 0);
-                            goto LAB_000608b8;
+                            goto setSymbolRecords2;
                           }
                         }
                         *(undefined1 *)(shader + 4) = 0;
@@ -2594,7 +2594,7 @@ LAB_000603e0:
                         searching = true;
                         *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                         while (slotIndex < *(uint *)(programState + 0x58)) {
-                          if (!searching) goto LAB_00060590;
+                          if (!searching) goto loopStoreSlotFieldPtr2;
                           if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                             foundFlag = 1;
                             searching = false;
@@ -2604,14 +2604,14 @@ LAB_000603e0:
                             slotScanOffset3 = slotScanOffset3 + 0x28;
                           }
                         }
-LAB_0006058c:
+loopCheckSearching:
                         if (!searching) {
-LAB_00060590:
+loopStoreSlotFieldPtr2:
                           *(uint *)(slotFieldPtr + 4) = slotIndex;
                           *(undefined4 *)(slotFieldPtr + 8) = 0;
                           *(undefined1 *)(slotIndex * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                           symbolRecords2 = shader[8];
-                          goto LAB_000608bc;
+                          goto setSlotScanIndex2;
                         }
                         *(char *)(shader + 4) = (char)foundFlag;
                         slotCount3 = *(int *)(programState + 0x58);
@@ -2623,9 +2623,9 @@ LAB_00060590:
                         *(undefined4 *)(programState + 0x54) = newSlotArray2;
                         *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                         *(undefined4 *)(slotFieldPtr + 8) = foundFlag;
-                        goto LAB_00060720;
+                        goto storeSlotFieldPtr3;
                       }
-                      goto LAB_000608b8;
+                      goto setSymbolRecords2;
                     }
                     in_r8 = 0;
                     slotIndex = 0;
@@ -2633,7 +2633,7 @@ LAB_00060590:
                     searching = true;
                     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                     while (slotIndex < *(uint *)(programState + 0x58)) {
-                      if (!searching) goto LAB_00060690;
+                      if (!searching) goto loopStoreSlotFieldPtr3;
                       if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         in_r8 = 1;
                         searching = false;
@@ -2643,7 +2643,7 @@ LAB_00060590:
                         slotScanOffset3 = slotScanOffset3 + 0x28;
                       }
                     }
-LAB_0006068c:
+loopCheckSearching2:
                     if (searching) {
                       *(char *)(shader + 4) = (char)in_r8;
                       slotCount3 = *(int *)(programState + 0x58);
@@ -2653,13 +2653,13 @@ LAB_0006068c:
                       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
                       *(undefined4 *)(programState + 0x54) = newSlotArray;
                       *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
-LAB_00060720:
+storeSlotFieldPtr3:
                       *(int *)(slotFieldPtr + 4) = slotCount3;
                       *(undefined1 *)(slotCount3 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                       symbolRecords2 = shader[8];
                     }
                     else {
-LAB_00060690:
+loopStoreSlotFieldPtr3:
                       *(uint *)(slotFieldPtr + 4) = slotIndex;
                       *(undefined1 *)(slotIndex * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                       symbolRecords2 = shader[8];
@@ -2676,7 +2676,7 @@ LAB_00060690:
                       searching = true;
                       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                       while (slotIndex < *(uint *)(programState + 0x58)) {
-                        if (!searching) goto LAB_00060690;
+                        if (!searching) goto loopStoreSlotFieldPtr3;
                         if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           in_r8 = 1;
                           searching = false;
@@ -2686,7 +2686,7 @@ LAB_00060690:
                           slotScanOffset3 = slotScanOffset3 + 0x28;
                         }
                       }
-                      goto LAB_0006068c;
+                      goto loopCheckSearching2;
                     }
                     if (symbolDataType3 == 0x87c0) {
                       slotIndex = 0;
@@ -2694,7 +2694,7 @@ LAB_00060690:
                       searching = true;
                       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
                       while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-                        if (!searching) goto LAB_0006079c;
+                        if (!searching) goto setSlotByteOffset2;
                         if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           searching = false;
                         }
@@ -2704,7 +2704,7 @@ LAB_00060690:
                         }
                       }
                       if (!searching) {
-LAB_0006079c:
+setSlotByteOffset2:
                         slotByteOffset = slotIndex * 0x28;
                         slotEntry6 = slotByteOffset + *(int *)(programState + 0x54);
                         in_r8 = slotByteOffset;
@@ -2724,7 +2724,7 @@ LAB_0006079c:
                             *(undefined1 *)(slotEntry4 + 0x10) = 1;
                             rowsLeft4 = rowsLeft4 + -1;
                           } while (rowsLeft4 != 0);
-                          goto LAB_000608b8;
+                          goto setSymbolRecords2;
                         }
                       }
                       *(undefined1 *)(shader + 4) = 0;
@@ -2758,7 +2758,7 @@ LAB_0006079c:
                       searching = true;
                       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                       while (slotIndex < *(uint *)(programState + 0x58)) {
-                        if (!searching) goto LAB_00060590;
+                        if (!searching) goto loopStoreSlotFieldPtr2;
                         if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           foundFlag = 1;
                           searching = false;
@@ -2768,22 +2768,22 @@ LAB_0006079c:
                           slotScanOffset3 = slotScanOffset3 + 0x28;
                         }
                       }
-                      goto LAB_0006058c;
+                      goto loopCheckSearching;
                     }
-LAB_000608b8:
+setSymbolRecords2:
                     symbolRecords2 = shader[8];
                   }
-LAB_000608bc:
+setSlotScanIndex2:
                   slotScanIndex2 = slotScanIndex2 + 1;
                   dependentOffset2 = dependentOffset2 + 0x54;
                 } while (slotScanIndex2 < *(uint *)(symbolByteOffset2 + symbolRecords2 + 0x34));
               }
             }
-LAB_000608d4:
+setInstrRecords2:
             instrRecords2 = shader[6];
           }
         }
-LAB_000608e0:
+checkInstrByteOffset2:
         if (*(int *)(instrByteOffset + instrRecords2 + 0x58) == 2) {
           symbolRecords = shader[8];
           instrRecords2 = *(int *)(instrByteOffset + instrRecords2 + 0x5c) * 0x54;
@@ -2807,7 +2807,7 @@ LAB_000608e0:
                   searching = true;
                   *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                   while (slotScanIndex2 < *(uint *)(programState + 0x58)) {
-                    if (!searching) goto LAB_00060ad8;
+                    if (!searching) goto storeRecordOffsetOrCount;
                     if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       in_r8 = 1;
                       searching = false;
@@ -2826,14 +2826,14 @@ LAB_000608e0:
                     (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
                     *(undefined4 *)(programState + 0x54) = newSlotArray;
                     *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
-LAB_00060b64:
+loopStoreRecordOffsetOrCount:
                     *(int *)(recordOffsetOrCount + 4) = slotCount;
                     *(undefined1 *)(slotCount * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                   }
                   else {
-LAB_00060ad8:
+storeRecordOffsetOrCount:
                     *(uint *)(recordOffsetOrCount + 4) = slotScanIndex2;
-LAB_00060adc:
+loopStoreSlotScanIndex22:
                     *(undefined1 *)(slotScanIndex2 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                   }
                 }
@@ -2843,7 +2843,7 @@ LAB_00060adc:
                   searching = true;
                   *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
                   while (slotScanIndex2 < *(int *)(programState + 0x58) - 3U) {
-                    if (!searching) goto LAB_00060bdc;
+                    if (!searching) goto setSlotWriteOffset2;
                     if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       searching = false;
                     }
@@ -2853,7 +2853,7 @@ LAB_00060adc:
                     }
                   }
                   if (!searching) {
-LAB_00060bdc:
+setSlotWriteOffset2:
                     slotWriteOffset = slotScanIndex2 * 0x28;
                     slotEntry5 = slotWriteOffset + *(int *)(programState + 0x54);
                     if (((*(char *)(slotEntry5 + 0x38) == '\0') && (*(char *)(slotEntry5 + 0x60) == '\0'))
@@ -2871,7 +2871,7 @@ LAB_00060bdc:
                         *(undefined1 *)(slotEntry6 + 0x10) = 1;
                         rowsLeft3 = rowsLeft3 + -1;
                       } while (rowsLeft3 != 0);
-                      goto LAB_000613b0;
+                      goto setSlotScanIndex;
                     }
                   }
                   *(undefined1 *)(shader + 4) = 0;
@@ -2904,7 +2904,7 @@ LAB_00060bdc:
                   searching = true;
                   *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                   while (slotScanIndex2 < *(uint *)(programState + 0x58)) {
-                    if (!searching) goto LAB_000609f0;
+                    if (!searching) goto storeRecordOffsetOrCount2;
                     if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       foundFlag = 1;
                       searching = false;
@@ -2924,14 +2924,14 @@ LAB_00060bdc:
                     *(undefined4 *)(programState + 0x54) = newSlotArray2;
                     *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                     *(undefined4 *)(recordOffsetOrCount + 8) = foundFlag;
-                    goto LAB_00060b64;
+                    goto loopStoreRecordOffsetOrCount;
                   }
-LAB_000609f0:
+storeRecordOffsetOrCount2:
                   *(uint *)(recordOffsetOrCount + 4) = slotScanIndex2;
                   *(undefined4 *)(recordOffsetOrCount + 8) = 0;
-                  goto LAB_00060adc;
+                  goto loopStoreSlotScanIndex22;
                 }
-                goto LAB_000613b0;
+                goto setSlotScanIndex;
               }
             }
             else {
@@ -2961,7 +2961,7 @@ LAB_000609f0:
                       searching = true;
                       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
                       while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-                        if (!searching) goto LAB_00060ebc;
+                        if (!searching) goto setSlotByteOffset3;
                         if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           searching = false;
                         }
@@ -2971,7 +2971,7 @@ LAB_000609f0:
                         }
                       }
                       if (!searching) {
-LAB_00060ebc:
+setSlotByteOffset3:
                         slotByteOffset = slotIndex * 0x28;
                         slotEntry5 = slotByteOffset + *(int *)(programState + 0x54);
                         in_r8 = slotByteOffset;
@@ -2991,7 +2991,7 @@ LAB_00060ebc:
                             *(undefined1 *)(slotEntry4 + 0x10) = 1;
                             rowsLeft3 = rowsLeft3 + -1;
                           } while (rowsLeft3 != 0);
-                          goto LAB_00061394;
+                          goto setSymbolRecords;
                         }
                       }
                       *(undefined1 *)(shader + 4) = 0;
@@ -3025,7 +3025,7 @@ LAB_00060ebc:
                       searching = true;
                       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                       while (slotIndex < *(uint *)(programState + 0x58)) {
-                        if (!searching) goto LAB_0006106c;
+                        if (!searching) goto loopStoreSlotFieldPtr21;
                         if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           foundFlag = 1;
                           searching = false;
@@ -3035,14 +3035,14 @@ LAB_00060ebc:
                           slotScanOffset2 = slotScanOffset2 + 0x28;
                         }
                       }
-LAB_00061068:
+loopCheckSearching3:
                       if (!searching) {
-LAB_0006106c:
+loopStoreSlotFieldPtr21:
                         *(uint *)(slotFieldPtr2 + 4) = slotIndex;
                         *(undefined4 *)(slotFieldPtr2 + 8) = 0;
                         *(undefined1 *)(slotIndex * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                         symbolRecords = shader[8];
-                        goto LAB_00061398;
+                        goto setSlotScanIndex22;
                       }
                       *(char *)(shader + 4) = (char)foundFlag;
                       slotCount2 = *(int *)(programState + 0x58);
@@ -3053,9 +3053,9 @@ LAB_0006106c:
                       *(undefined4 *)(programState + 0x54) = newSlotArray2;
                       *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                       *(undefined4 *)(slotFieldPtr2 + 8) = foundFlag;
-                      goto LAB_000611fc;
+                      goto storeSlotFieldPtr21;
                     }
-                    goto LAB_00061394;
+                    goto setSymbolRecords;
                   }
                   in_r8 = 0;
                   slotIndex = 0;
@@ -3063,7 +3063,7 @@ LAB_0006106c:
                   searching = true;
                   *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                   while (slotIndex < *(uint *)(programState + 0x58)) {
-                    if (!searching) goto LAB_0006116c;
+                    if (!searching) goto loopStoreSlotFieldPtr22;
                     if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       in_r8 = 1;
                       searching = false;
@@ -3073,7 +3073,7 @@ LAB_0006106c:
                       slotScanOffset2 = slotScanOffset2 + 0x28;
                     }
                   }
-LAB_00061168:
+loopCheckSearching4:
                   if (searching) {
                     *(char *)(shader + 4) = (char)in_r8;
                     slotCount2 = *(int *)(programState + 0x58);
@@ -3083,13 +3083,13 @@ LAB_00061168:
                     (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
                     *(undefined4 *)(programState + 0x54) = newSlotArray;
                     *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
-LAB_000611fc:
+storeSlotFieldPtr21:
                     *(int *)(slotFieldPtr2 + 4) = slotCount2;
                     *(undefined1 *)(slotCount2 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                     symbolRecords = shader[8];
                   }
                   else {
-LAB_0006116c:
+loopStoreSlotFieldPtr22:
                     *(uint *)(slotFieldPtr2 + 4) = slotIndex;
                     *(undefined1 *)(slotIndex * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                     symbolRecords = shader[8];
@@ -3106,7 +3106,7 @@ LAB_0006116c:
                     searching = true;
                     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                     while (slotIndex < *(uint *)(programState + 0x58)) {
-                      if (!searching) goto LAB_0006116c;
+                      if (!searching) goto loopStoreSlotFieldPtr22;
                       if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         in_r8 = 1;
                         searching = false;
@@ -3116,7 +3116,7 @@ LAB_0006116c:
                         slotScanOffset2 = slotScanOffset2 + 0x28;
                       }
                     }
-                    goto LAB_00061168;
+                    goto loopCheckSearching4;
                   }
                   if (symbolDataType2 == 0x87c0) {
                     slotIndex = 0;
@@ -3124,7 +3124,7 @@ LAB_0006116c:
                     searching = true;
                     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
                     while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-                      if (!searching) goto LAB_00061278;
+                      if (!searching) goto setSlotByteOffset4;
                       if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         searching = false;
                       }
@@ -3134,7 +3134,7 @@ LAB_0006116c:
                       }
                     }
                     if (!searching) {
-LAB_00061278:
+setSlotByteOffset4:
                       slotByteOffset = slotIndex * 0x28;
                       slotEntry5 = slotByteOffset + *(int *)(programState + 0x54);
                       in_r8 = slotByteOffset;
@@ -3153,7 +3153,7 @@ LAB_00061278:
                           *(undefined1 *)(slotEntry4 + 0x10) = 1;
                           rowsLeft3 = rowsLeft3 + -1;
                         } while (rowsLeft3 != 0);
-                        goto LAB_00061394;
+                        goto setSymbolRecords;
                       }
                     }
                     *(undefined1 *)(shader + 4) = 0;
@@ -3187,7 +3187,7 @@ LAB_00061278:
                     searching = true;
                     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
                     while (slotIndex < *(uint *)(programState + 0x58)) {
-                      if (!searching) goto LAB_0006106c;
+                      if (!searching) goto loopStoreSlotFieldPtr21;
                       if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         foundFlag = 1;
                         searching = false;
@@ -3197,19 +3197,19 @@ LAB_00061278:
                         slotScanOffset2 = slotScanOffset2 + 0x28;
                       }
                     }
-                    goto LAB_00061068;
+                    goto loopCheckSearching3;
                   }
-LAB_00061394:
+setSymbolRecords:
                   symbolRecords = shader[8];
                 }
-LAB_00061398:
+setSlotScanIndex22:
                 slotScanIndex2 = slotScanIndex2 + 1;
                 dependentOffset = dependentOffset + 0x54;
               } while (slotScanIndex2 < *(uint *)(instrRecords2 + symbolRecords + 0x34));
             }
           }
         }
-LAB_000613b0:
+setSlotScanIndex:
         slotScanIndex = slotScanIndex + 1;
         instrByteOffset = instrByteOffset + 0x74;
       } while (slotScanIndex < (uint)shader[5]);
@@ -3227,7 +3227,7 @@ LAB_000613b0:
                 if (*(uint *)(symbolRecordOrCallResult + 0x34) < 2) {
                   extvsAllocConstantRegisters(ctx,shader,programState,symbolRecordOrCallResult);
                   instrRecords2 = shader[6];
-                  goto LAB_000614b0;
+                  goto checkInstrByteOffset3;
                 }
               }
               else {
@@ -3249,7 +3249,7 @@ LAB_000613b0:
               instrRecords2 = shader[6];
             }
           }
-LAB_000614b0:
+checkInstrByteOffset3:
           if (*(int *)(instrByteOffset + instrRecords2 + 0x3c) == 2) {
             symbolRecordsBase = shader[8];
             symbolByteOffset2 = *(int *)(instrByteOffset + instrRecords2 + 0x40) * 0x54;
@@ -3259,7 +3259,7 @@ LAB_000614b0:
                 if (*(uint *)(symbolRecordOrCallResult + 0x34) < 2) {
                   extvsAllocConstantRegisters(ctx,shader,programState,symbolRecordOrCallResult);
                   instrRecords2 = shader[6];
-                  goto LAB_00061580;
+                  goto checkInstrByteOffset4;
                 }
               }
               else {
@@ -3281,7 +3281,7 @@ LAB_000614b0:
               instrRecords2 = shader[6];
             }
           }
-LAB_00061580:
+checkInstrByteOffset4:
           if (*(int *)(instrByteOffset + instrRecords2 + 0x58) == 2) {
             symbolRecordOrCallResult = shader[8];
             instrRecords2 = *(int *)(instrByteOffset + instrRecords2 + 0x5c) * 0x54;
@@ -3290,7 +3290,7 @@ LAB_00061580:
               if (*(int *)(recordOffsetOrCount + 0x30) == 0) {
                 if (*(uint *)(recordOffsetOrCount + 0x34) < 2) {
                   extvsAllocConstantRegisters(ctx,shader,programState,recordOffsetOrCount);
-                  goto LAB_00061650;
+                  goto setSlotScanIndex2X;
                 }
               }
               else {
@@ -3311,7 +3311,7 @@ LAB_00061580:
               }
             }
           }
-LAB_00061650:
+setSlotScanIndex2X:
           slotScanIndex = slotScanIndex + 1;
           instrByteOffset = instrByteOffset + 0x74;
         } while (slotScanIndex < (uint)shader[5]);
@@ -3360,7 +3360,7 @@ LAB_00061650:
         symbolRecordOrCallResult = (*(code *)(PTR_FUN_001db9b8)[opIndex])(ctx,shader,instrByteOffset + shader[6]);
         if (symbolRecordOrCallResult < 0) {
           success = 0;
-          goto LAB_00061d90;
+          goto loopStoreShader;
         }
         *(int *)(programState + 0x18) = symbolRecordOrCallResult + *(int *)(programState + 0x18);
         glContextWord44 = *(uint *)(ctx + 0x44);
@@ -4753,14 +4753,14 @@ int extvsBuildStreamBlock(ctx, shader)
       streamTotal = streamBlock[0x1b] + 1;
       streamBlock[0x1b] = streamTotal;
       *streamBlock = *streamBlock | *streamFlagTable;
-      if (streamCount == *(int *)(programState + 0x110)) goto LAB_000644c0;
+      if (streamCount == *(int *)(programState + 0x110)) goto checkStreamTotal;
     }
     inputRecordCursor = inputRecordCursor + 4;
     streamFlagTable = streamFlagTable + 1;
     inputsLeft = inputsLeft + -1;
   } while (inputsLeft != 0);
   streamTotal = streamBlock[0x1b];
-LAB_000644c0:
+checkStreamTotal:
   if (streamTotal < 2) {
     *streamBlock = *streamBlock | 2;
     streamBlock[1] = (streamBlock[1] & 0x7f) + 4 & 0x7f | streamBlock[1] & 0xffffff80;
@@ -5012,7 +5012,7 @@ int extvsUploadProgramConstants(glContext, shader)
     regionHeight = *(uint *)(programState + 0x5c);
     if ((*(char *)(shader + 4) != '\0') && ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0)) {
       if (*programState != '\0') {
-LAB_00064c00:
+loopCheckRegionHeight:
         if (regionHeight != 0) {
           if (*(int *)(programState + 0x2b8) == 0) {
             constantBlock = hwProgramSlot[0x22];
@@ -5119,8 +5119,8 @@ LAB_00064c00:
       allocX = *constAlloc;
       cacheMode = *(int *)(glContext + 0xd8);
       allocY = constAlloc[1] - *(int *)(glContext + 0x2448);
-LAB_00064a98:
-      if (cacheMode == 1) goto LAB_00064ac0;
+loopCheckCacheMode:
+      if (cacheMode == 1) goto setFreeWidth;
       if (cacheMode == 0) {
         freeWidth = 0x80 - allocX;
         freeHeight = 0x80 - allocY;
@@ -5143,7 +5143,7 @@ LAB_00064af0:
             *programState = '\x01';
             ctxTempListPush(glContext,programState);
             regionHeight = *(uint *)(programState + 0x5c);
-            goto LAB_00064c00;
+            goto loopCheckRegionHeight;
           }
           if (cacheMode == 1) break;
           if (cacheMode != 0) {
@@ -5163,11 +5163,11 @@ LAB_00064af0:
               allocX = 0;
               allocY = 0;
             }
-            goto LAB_00064a98;
+            goto loopCheckCacheMode;
           }
           cacheMode = 1;
           *(undefined4 *)(glContext + 0xd8) = 1;
-LAB_00064ac0:
+setFreeWidth:
           freeWidth = 0xfe - allocX;
           freeHeight = 0x100 - allocY;
           *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000;
@@ -5249,13 +5249,13 @@ int extvsValidateProgramState(glContext, arg2)
               *variantTable = chainEntry;
               shader[0x15] = *(int *)(chainEntry + 0x18);
               *(undefined4 *)(((unsigned char *)0x00001174) + glContext) = *(undefined4 *)(chainEntry + 0x18);
-              goto LAB_00065094;
+              goto storeGlContext;
             }
             break;
           }
         }
         extvsMakeShaderCurrent(glContext,shader);
-LAB_00065094:
+storeGlContext:
         *(byte *)(glContext + 0x2d) = *(byte *)(glContext + 0x2d) | 3;
       }
       else {
@@ -5422,7 +5422,7 @@ LAB_00065500:
       goto LAB_00065500;
     }
   }
-  else if (*(char *)(variant + 0x59) != '\0') goto LAB_0006559c;
+  else if (*(char *)(variant + 0x59) != '\0') goto storeGlContext;
   *(int *)(glContext + 0x14c) = variant;
   (**(code **)(((unsigned char *)0x000012c4) + glContext))(glContext,variant);
   if (*(int *)(variant + 0x54) + 0x750 == *(int *)(((unsigned char *)0x0000148c) + glContext)) {
@@ -5437,7 +5437,7 @@ LAB_00065500:
   if (*(char *)(*(int *)(variant + 0x54) + 0x752) == '\0') {
     return;
   }
-LAB_0006559c:
+storeGlContext:
   *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x1020;
   *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000000;
   *(undefined1 *)(glContext + 0x126) = 1;
@@ -5848,7 +5848,7 @@ int arbEmitIlDp4(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_00065f90:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -5858,16 +5858,16 @@ LAB_00065f90:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_00065f90;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_00065f90;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_00065f90;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -5880,7 +5880,7 @@ LAB_00065f90:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_000660e0;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -5889,7 +5889,7 @@ LAB_00065f90:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_000660e0;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -5897,28 +5897,28 @@ LAB_00065f90:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_000660e0;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_000660e0;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_000660e0;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_000660e0;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_000660e0;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -5928,7 +5928,7 @@ LAB_00065f90:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_000660e0:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -5951,7 +5951,7 @@ LAB_000660e0:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_00066234;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -6007,7 +6007,7 @@ LAB_000660e0:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_00066234:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -6156,7 +6156,7 @@ int arbEmitIlMov(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_00066720:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -6166,16 +6166,16 @@ LAB_00066720:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_00066720;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_00066720;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_00066720;
+      goto loopSetDstHeader;
     }
   }
   srcHeader = (srcFile & 0x3f) << 0x10 | srcIndex & 0xffff;
@@ -6193,7 +6193,7 @@ LAB_00066720:
               tokenIndex = srcSelect[2];
               if (tokenIndex == 2) {
                 srcSelect3 = srcSelect[3];
-                if (srcSelect3 == 3) goto LAB_00066894;
+                if (srcSelect3 == 3) goto setTokenIndex;
               }
               else {
                 srcSelect3 = srcSelect[3];
@@ -6249,7 +6249,7 @@ LAB_00066720:
            (srcNegate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 | (srcNegate1 & 1) << 7 | (srcSelect1 & 7) << 4 | (*srcNegate & 1) << 3 | srcSelectX & 7
   ;
-LAB_00066894:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -6380,7 +6380,7 @@ int arbEmitIlMul(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_00066c70:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -6390,16 +6390,16 @@ LAB_00066c70:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_00066c70;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_00066c70;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_00066c70;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -6412,7 +6412,7 @@ LAB_00066c70:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00066dc0;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -6421,7 +6421,7 @@ LAB_00066c70:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00066dc0;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -6429,28 +6429,28 @@ LAB_00066c70:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00066dc0;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00066dc0;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_00066dc0;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_00066dc0;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_00066dc0;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -6460,7 +6460,7 @@ LAB_00066c70:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_00066dc0:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -6483,7 +6483,7 @@ LAB_00066dc0:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_00066f14;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -6539,7 +6539,7 @@ LAB_00066dc0:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_00066f14:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -6700,7 +6700,7 @@ int arbEmitIlAdd(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_00067410:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -6710,16 +6710,16 @@ LAB_00067410:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_00067410;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_00067410;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_00067410;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -6732,7 +6732,7 @@ LAB_00067410:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00067560;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -6741,7 +6741,7 @@ LAB_00067410:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00067560;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -6749,28 +6749,28 @@ LAB_00067410:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00067560;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_00067560;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_00067560;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_00067560;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_00067560;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -6780,7 +6780,7 @@ LAB_00067410:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_00067560:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -6803,7 +6803,7 @@ LAB_00067560:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_000676b4;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -6859,7 +6859,7 @@ LAB_00067560:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_000676b4:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -7039,7 +7039,7 @@ int arbEmitIlMad(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMaskW = dstMask[3];
     dstMaskY = dstMask[1];
     dstMaskZ = dstMask[2];
-LAB_00067bc0:
+loopSetDstToken:
     dstToken = dstToken | 0x400000;
     dstMaskWord = (uint)(dstMaskW != 0) * 0x40 |
              (uint)(dstMaskZ != 0) * 0x10 | (uint)(dstMaskY != 0) * 4 | (uint)(*dstMask != 0);
@@ -7049,16 +7049,16 @@ LAB_00067bc0:
     if (dstMaskY == 0) {
       dstMaskW = dstMask[3];
       dstMaskZ = dstMask[2];
-      goto LAB_00067bc0;
+      goto loopSetDstToken;
     }
     dstMaskZ = dstMask[2];
     if (dstMaskZ == 0) {
       dstMaskW = dstMask[3];
-      goto LAB_00067bc0;
+      goto loopSetDstToken;
     }
     if (dstMask[3] == 0) {
       dstMaskW = 0;
-      goto LAB_00067bc0;
+      goto loopSetDstToken;
     }
   }
   src0Token = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -7071,7 +7071,7 @@ LAB_00067bc0:
       src0SelectX = *src0Select;
       src0SelectY = src0Select[1];
       src0SelectZ = src0Select[2];
-      goto LAB_00067d10;
+      goto setSrc0Token;
     }
     src0NegateZ = src0Negate[2];
     if (src0NegateZ != 0) {
@@ -7080,7 +7080,7 @@ LAB_00067bc0:
       src0SelectX = *src0Select;
       src0SelectY = src0Select[1];
       src0SelectZ = src0Select[2];
-      goto LAB_00067d10;
+      goto setSrc0Token;
     }
     src0NegateW = src0Negate[3];
     if (src0NegateW != 0) {
@@ -7088,28 +7088,28 @@ LAB_00067bc0:
       src0SelectX = *src0Select;
       src0SelectY = src0Select[1];
       src0SelectZ = src0Select[2];
-      goto LAB_00067d10;
+      goto setSrc0Token;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0SelectW = src0Select[3];
       src0SelectY = src0Select[1];
       src0SelectZ = src0Select[2];
-      goto LAB_00067d10;
+      goto setSrc0Token;
     }
     src0SelectY = src0Select[1];
     if (src0SelectY != 1) {
       src0SelectW = src0Select[3];
       src0SelectZ = src0Select[2];
-      goto LAB_00067d10;
+      goto setSrc0Token;
     }
     src0SelectZ = src0Select[2];
     if (src0SelectZ != 2) {
       src0SelectW = src0Select[3];
-      goto LAB_00067d10;
+      goto setSrc0Token;
     }
     src0SelectW = src0Select[3];
-    if (src0SelectW != 3) goto LAB_00067d10;
+    if (src0SelectW != 3) goto setSrc0Token;
   }
   else {
     src0NegateW = src0Negate[3];
@@ -7119,7 +7119,7 @@ LAB_00067bc0:
     src0SelectX = *src0Select;
     src0SelectY = src0Select[1];
     src0SelectZ = src0Select[2];
-LAB_00067d10:
+setSrc0Token:
     src0Token = src0Token | 0x400000;
     src0Packed = (src0NegateW & 1) << 0xf |
              (src0SelectW & 7) << 0xc |
@@ -7137,7 +7137,7 @@ LAB_00067d10:
       src1SelectX = *src1Select;
       src1SelectY = src1Select[1];
       src1SelectZ = src1Select[2];
-      goto LAB_00067e40;
+      goto setSrc1Token;
     }
     src1NegateZ = src1Negate[2];
     if (src1NegateZ != 0) {
@@ -7146,7 +7146,7 @@ LAB_00067d10:
       src1SelectX = *src1Select;
       src1SelectY = src1Select[1];
       src1SelectZ = src1Select[2];
-      goto LAB_00067e40;
+      goto setSrc1Token;
     }
     src1NegateW = src1Negate[3];
     if (src1NegateW != 0) {
@@ -7154,28 +7154,28 @@ LAB_00067d10:
       src1SelectX = *src1Select;
       src1SelectY = src1Select[1];
       src1SelectZ = src1Select[2];
-      goto LAB_00067e40;
+      goto setSrc1Token;
     }
     src1SelectX = *src1Select;
     if (src1SelectX != 0) {
       src1SelectW = src1Select[3];
       src1SelectY = src1Select[1];
       src1SelectZ = src1Select[2];
-      goto LAB_00067e40;
+      goto setSrc1Token;
     }
     src1SelectY = src1Select[1];
     if (src1SelectY != 1) {
       src1SelectW = src1Select[3];
       src1SelectZ = src1Select[2];
-      goto LAB_00067e40;
+      goto setSrc1Token;
     }
     src1SelectZ = src1Select[2];
     if (src1SelectZ != 2) {
       src1SelectW = src1Select[3];
-      goto LAB_00067e40;
+      goto setSrc1Token;
     }
     src1SelectW = src1Select[3];
-    if (src1SelectW != 3) goto LAB_00067e40;
+    if (src1SelectW != 3) goto setSrc1Token;
   }
   else {
     src1NegateW = src1Negate[3];
@@ -7185,7 +7185,7 @@ LAB_00067d10:
     src1SelectX = *src1Select;
     src1SelectY = src1Select[1];
     src1SelectZ = src1Select[2];
-LAB_00067e40:
+setSrc1Token:
     src1Token = src1Token | 0x400000;
     src1Packed = (src1NegateW & 1) << 0xf |
              (src1SelectW & 7) << 0xc |
@@ -7208,7 +7208,7 @@ LAB_00067e40:
               src2SelectZ = src2Select[2];
               if (src2SelectZ == 2) {
                 src2SelectW = src2Select[3];
-                if (src2SelectW == 3) goto LAB_00067f94;
+                if (src2SelectW == 3) goto setInstrCountPtrValue;
               }
               else {
                 src2SelectW = src2Select[3];
@@ -7264,7 +7264,7 @@ LAB_00067e40:
            (src2NegateZ & 1) << 0xb |
            (src2SelectZ & 7) << 8 |
            (src2NegateY & 1) << 7 | (src2SelectY & 7) << 4 | (*src2Negate & 1) << 3 | src2SelectX & 7;
-LAB_00067f94:
+setInstrCountPtrValue:
   instrCountPtrValue = *instrCountPtr;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= instrCountPtrValue) {
@@ -7540,7 +7540,7 @@ int arbEmitIlAddMad3Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, sr
     dstMaskW = dstMask[3];
     dstMaskY = dstMask[1];
     dstMaskZ = dstMask[2];
-LAB_00068a20:
+loopSetDstToken:
     dstToken = dstToken | 0x400000;
     dstMaskToken = (uint)(dstMaskW != 0) * 0x40 |
              (uint)(dstMaskZ != 0) * 0x10 | (uint)(dstMaskY != 0) * 4 | (uint)(*dstMask != 0);
@@ -7550,16 +7550,16 @@ LAB_00068a20:
     if (dstMaskY == 0) {
       dstMaskW = dstMask[3];
       dstMaskZ = dstMask[2];
-      goto LAB_00068a20;
+      goto loopSetDstToken;
     }
     dstMaskZ = dstMask[2];
     if (dstMaskZ == 0) {
       dstMaskW = dstMask[3];
-      goto LAB_00068a20;
+      goto loopSetDstToken;
     }
     if (dstMask[3] == 0) {
       dstMaskW = 0;
-      goto LAB_00068a20;
+      goto loopSetDstToken;
     }
   }
   src0Token = (src0File & 0x3f) << 0x10 | tempOperandRegister & 0xffff;
@@ -7572,7 +7572,7 @@ LAB_00068a20:
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_00068b70;
+      goto setSrc0Token;
     }
     src0Flags2 = src0Flags[2];
     if (src0Flags2 != 0) {
@@ -7581,7 +7581,7 @@ LAB_00068a20:
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_00068b70;
+      goto setSrc0Token;
     }
     src0Flags3 = src0Flags[3];
     if (src0Flags3 != 0) {
@@ -7589,28 +7589,28 @@ LAB_00068a20:
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_00068b70;
+      goto setSrc0Token;
     }
     src0WordsValue = *src0Words;
     if (src0WordsValue != 0) {
       src0Words3 = src0Words[3];
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_00068b70;
+      goto setSrc0Token;
     }
     src0Words1 = src0Words[1];
     if (src0Words1 != 1) {
       src0Words3 = src0Words[3];
       src0Words2 = src0Words[2];
-      goto LAB_00068b70;
+      goto setSrc0Token;
     }
     src0Words2 = src0Words[2];
     if (src0Words2 != 2) {
       src0Words3 = src0Words[3];
-      goto LAB_00068b70;
+      goto setSrc0Token;
     }
     src0Words3 = src0Words[3];
-    if (src0Words3 != 3) goto LAB_00068b70;
+    if (src0Words3 != 3) goto setSrc0Token;
   }
   else {
     src0Flags3 = src0Flags[3];
@@ -7620,7 +7620,7 @@ LAB_00068a20:
     src0WordsValue = *src0Words;
     src0Words1 = src0Words[1];
     src0Words2 = src0Words[2];
-LAB_00068b70:
+setSrc0Token:
     src0Token = src0Token | 0x400000;
     src0SwizzleToken = (src0Flags3 & 1) << 0xf |
              (src0Words3 & 7) << 0xc |
@@ -7634,7 +7634,7 @@ LAB_00068b70:
     if (src1Flags1 != 0) {
       src1Words3 = src1Words[3];
       src1Flags3 = src1Flags[3];
-      goto LAB_00068c4c;
+      goto setSrc1Flags2;
     }
     src1Flags2 = src1Flags[2];
     if (src1Flags2 != 0) {
@@ -7643,7 +7643,7 @@ LAB_00068b70:
       src1Words2 = src1Words[2];
       src1Flags3 = src1Flags[3];
       src1Words1 = src1Words[1];
-      goto LAB_00068cb0;
+      goto setSrc1Token;
     }
     src1Flags3 = src1Flags[3];
     if (src1Flags3 != 0) {
@@ -7651,39 +7651,39 @@ LAB_00068b70:
       src1WordsValue = *src1Words;
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_00068cb0;
+      goto setSrc1Token;
     }
     src1WordsValue = *src1Words;
     if (src1WordsValue != 0) {
       src1Words3 = src1Words[3];
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_00068cb0;
+      goto setSrc1Token;
     }
     src1Words1 = src1Words[1];
     if (src1Words1 != 1) {
       src1Words3 = src1Words[3];
       src1Words2 = src1Words[2];
-      goto LAB_00068cb0;
+      goto setSrc1Token;
     }
     src1Words2 = src1Words[2];
     if (src1Words2 != 2) {
       src1Words3 = src1Words[3];
-      goto LAB_00068cb0;
+      goto setSrc1Token;
     }
     src1Words3 = src1Words[3];
-    if (src1Words3 != 3) goto LAB_00068cb0;
+    if (src1Words3 != 3) goto setSrc1Token;
   }
   else {
     src1Words3 = src1Words[3];
     src1Flags3 = src1Flags[3];
     src1Flags1 = src1Flags[1];
-LAB_00068c4c:
+setSrc1Flags2:
     src1Flags2 = src1Flags[2];
     src1WordsValue = *src1Words;
     src1Words1 = src1Words[1];
     src1Words2 = src1Words[2];
-LAB_00068cb0:
+setSrc1Token:
     src1Token = src1Token | 0x400000;
     src1SwizzleToken = (src1Flags3 & 1) << 0xf |
              (src1Words3 & 7) << 0xc |
@@ -7697,7 +7697,7 @@ LAB_00068cb0:
     if (src2Flags1 != 0) {
       src2Words3 = src2Words[3];
       src2Flags3 = src2Flags[3];
-      goto LAB_00068d8c;
+      goto setSrc2Flags2;
     }
     src2Flags2 = src2Flags[2];
     if (src2Flags2 == 0) {
@@ -7710,7 +7710,7 @@ LAB_00068cb0:
             src2Words2 = src2Words[2];
             if (src2Words2 == 2) {
               src2Words3 = src2Words[3];
-              if (src2Words3 == 3) goto LAB_00068e14;
+              if (src2Words3 == 3) goto setAllocator;
             }
             else {
               src2Words3 = src2Words[3];
@@ -7746,7 +7746,7 @@ LAB_00068cb0:
     src2Words3 = src2Words[3];
     src2Flags3 = src2Flags[3];
     src2Flags1 = src2Flags[1];
-LAB_00068d8c:
+setSrc2Flags2:
     src2Flags2 = src2Flags[2];
     src2WordsValue = *src2Words;
     src2Words1 = src2Words[1];
@@ -7758,7 +7758,7 @@ LAB_00068d8c:
            (src2Flags2 & 1) << 0xb |
            (src2Words2 & 7) << 8 |
            (src2Flags1 & 1) << 7 | (src2Words1 & 7) << 4 | (*src2Flags & 1) << 3 | src2WordsValue & 7;
-LAB_00068e14:
+setAllocator:
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= nextTokenIndex) {
     newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
@@ -7975,7 +7975,7 @@ int arbEmitIlMulMaxMin2Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_000694c0;
+      goto setSrc0Token;
     }
     src0Flags2 = src0Flags[2];
     if (src0Flags2 != 0) {
@@ -7984,7 +7984,7 @@ int arbEmitIlMulMaxMin2Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_000694c0;
+      goto setSrc0Token;
     }
     src0Flags3 = src0Flags[3];
     if (src0Flags3 != 0) {
@@ -7992,28 +7992,28 @@ int arbEmitIlMulMaxMin2Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_000694c0;
+      goto setSrc0Token;
     }
     src0WordsValue = *src0Words;
     if (src0WordsValue != 0) {
       src0Words3 = src0Words[3];
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_000694c0;
+      goto setSrc0Token;
     }
     src0Words1 = src0Words[1];
     if (src0Words1 != 1) {
       src0Words3 = src0Words[3];
       src0Words2 = src0Words[2];
-      goto LAB_000694c0;
+      goto setSrc0Token;
     }
     src0Words2 = src0Words[2];
     if (src0Words2 != 2) {
       src0Words3 = src0Words[3];
-      goto LAB_000694c0;
+      goto setSrc0Token;
     }
     src0Words3 = src0Words[3];
-    if (src0Words3 != 3) goto LAB_000694c0;
+    if (src0Words3 != 3) goto setSrc0Token;
   }
   else {
     src0Flags3 = src0Flags[3];
@@ -8023,7 +8023,7 @@ int arbEmitIlMulMaxMin2Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
     src0WordsValue = *src0Words;
     src0Words1 = src0Words[1];
     src0Words2 = src0Words[2];
-LAB_000694c0:
+setSrc0Token:
     src0Token = src0Token | 0x400000;
     src0SwizzleToken = (src0Flags3 & 1) << 0xf |
              (src0Words3 & 7) << 0xc |
@@ -8041,7 +8041,7 @@ LAB_000694c0:
       src1WordsValue = *src1Words;
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_000695f0;
+      goto setSrc1Token;
     }
     src1Flags2 = src1Flags[2];
     if (src1Flags2 != 0) {
@@ -8050,7 +8050,7 @@ LAB_000694c0:
       src1WordsValue = *src1Words;
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_000695f0;
+      goto setSrc1Token;
     }
     src1Flags3 = src1Flags[3];
     if (src1Flags3 != 0) {
@@ -8058,28 +8058,28 @@ LAB_000694c0:
       src1WordsValue = *src1Words;
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_000695f0;
+      goto setSrc1Token;
     }
     src1WordsValue = *src1Words;
     if (src1WordsValue != 0) {
       src1Words3 = src1Words[3];
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_000695f0;
+      goto setSrc1Token;
     }
     src1Words1 = src1Words[1];
     if (src1Words1 != 1) {
       src1Words3 = src1Words[3];
       src1Words2 = src1Words[2];
-      goto LAB_000695f0;
+      goto setSrc1Token;
     }
     src1Words2 = src1Words[2];
     if (src1Words2 != 2) {
       src1Words3 = src1Words[3];
-      goto LAB_000695f0;
+      goto setSrc1Token;
     }
     src1Words3 = src1Words[3];
-    if (src1Words3 != 3) goto LAB_000695f0;
+    if (src1Words3 != 3) goto setSrc1Token;
   }
   else {
     src1Flags3 = src1Flags[3];
@@ -8089,7 +8089,7 @@ LAB_000694c0:
     src1WordsValue = *src1Words;
     src1Words1 = src1Words[1];
     src1Words2 = src1Words[2];
-LAB_000695f0:
+setSrc1Token:
     src1Token = src1Token | 0x400000;
     src1SwizzleToken = (src1Flags3 & 1) << 0xf |
              (src1Words3 & 7) << 0xc |
@@ -8305,7 +8305,7 @@ LAB_000695f0:
         dstMaskW = dstMask[3];
       }
       else {
-        if (dstMask[3] != 0) goto LAB_00069f70;
+        if (dstMask[3] != 0) goto setSrc2FlagsValue;
         dstMaskW = 0;
       }
     }
@@ -8313,7 +8313,7 @@ LAB_000695f0:
   dstToken = dstToken | 0x400000;
   dstMaskToken = (uint)(dstMaskW != 0) * 0x40 |
            (uint)(dstMaskZ != 0) * 0x10 | (uint)(dstMaskY != 0) * 4 | (uint)(*dstMask != 0);
-LAB_00069f70:
+setSrc2FlagsValue:
   src2FlagsValue = *src2Flags;
   src2Flags1 = src2Flags[1];
   src2Flags2 = src2Flags[2];
@@ -8479,7 +8479,7 @@ int arbEmitIlMin(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006a4f0:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -8489,16 +8489,16 @@ LAB_0006a4f0:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006a4f0;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006a4f0;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006a4f0;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -8511,7 +8511,7 @@ LAB_0006a4f0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006a640;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -8520,7 +8520,7 @@ LAB_0006a4f0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006a640;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -8528,28 +8528,28 @@ LAB_0006a4f0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006a640;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006a640;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_0006a640;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_0006a640;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_0006a640;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -8559,7 +8559,7 @@ LAB_0006a4f0:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_0006a640:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -8582,7 +8582,7 @@ LAB_0006a640:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_0006a794;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -8638,7 +8638,7 @@ LAB_0006a640:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_0006a794:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -8799,7 +8799,7 @@ int arbEmitIlMax(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006ac90:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -8809,16 +8809,16 @@ LAB_0006ac90:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006ac90;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006ac90;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006ac90;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -8831,7 +8831,7 @@ LAB_0006ac90:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006ade0;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -8840,7 +8840,7 @@ LAB_0006ac90:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006ade0;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -8848,28 +8848,28 @@ LAB_0006ac90:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006ade0;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006ade0;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_0006ade0;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_0006ade0;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_0006ade0;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -8879,7 +8879,7 @@ LAB_0006ac90:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_0006ade0:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -8902,7 +8902,7 @@ LAB_0006ade0:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_0006af34;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -8958,7 +8958,7 @@ LAB_0006ade0:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_0006af34:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -9119,7 +9119,7 @@ int arbEmitIlSetCompare5(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, s
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006b430:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -9129,16 +9129,16 @@ LAB_0006b430:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006b430;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006b430;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006b430;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -9151,7 +9151,7 @@ LAB_0006b430:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006b580;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -9160,7 +9160,7 @@ LAB_0006b430:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006b580;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -9168,28 +9168,28 @@ LAB_0006b430:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006b580;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006b580;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_0006b580;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_0006b580;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_0006b580;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -9199,7 +9199,7 @@ LAB_0006b430:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_0006b580:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -9222,7 +9222,7 @@ LAB_0006b580:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_0006b6d4;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -9278,7 +9278,7 @@ LAB_0006b580:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_0006b6d4:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -9439,7 +9439,7 @@ int arbEmitIlSetCompare2(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, s
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006bbd0:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -9449,16 +9449,16 @@ LAB_0006bbd0:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006bbd0;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006bbd0;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006bbd0;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -9471,7 +9471,7 @@ LAB_0006bbd0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006bd20;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -9480,7 +9480,7 @@ LAB_0006bbd0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006bd20;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -9488,28 +9488,28 @@ LAB_0006bbd0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006bd20;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006bd20;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_0006bd20;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_0006bd20;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_0006bd20;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -9519,7 +9519,7 @@ LAB_0006bbd0:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_0006bd20:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -9542,7 +9542,7 @@ LAB_0006bd20:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_0006be74;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -9598,7 +9598,7 @@ LAB_0006bd20:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_0006be74:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -9749,7 +9749,7 @@ int arbEmitIlRnd(emitter, dstFile, dstIndex, dstMask, src0File, src0Index, src0S
     dstMaskW = dstMask[3];
     dstMaskY = dstMask[1];
     dstMaskZ = dstMask[2];
-LAB_0006c360:
+loopSetDstToken:
     dstToken = dstToken | 0x400000;
     dstMaskToken = (uint)(dstMaskW != 0) * 0x40 |
              (uint)(dstMaskZ != 0) * 0x10 | (uint)(dstMaskY != 0) * 4 | (uint)(*dstMask != 0);
@@ -9759,16 +9759,16 @@ LAB_0006c360:
     if (dstMaskY == 0) {
       dstMaskW = dstMask[3];
       dstMaskZ = dstMask[2];
-      goto LAB_0006c360;
+      goto loopSetDstToken;
     }
     dstMaskZ = dstMask[2];
     if (dstMaskZ == 0) {
       dstMaskW = dstMask[3];
-      goto LAB_0006c360;
+      goto loopSetDstToken;
     }
     if (dstMask[3] == 0) {
       dstMaskW = 0;
-      goto LAB_0006c360;
+      goto loopSetDstToken;
     }
   }
   src0Token = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -9786,7 +9786,7 @@ LAB_0006c360:
               src0SelectZ = src0Select[2];
               if (src0SelectZ == 2) {
                 src0SelectW = src0Select[3];
-                if (src0SelectW == 3) goto LAB_0006c4d4;
+                if (src0SelectW == 3) goto setTokenCount;
               }
               else {
                 src0SelectW = src0Select[3];
@@ -9842,7 +9842,7 @@ LAB_0006c360:
            (src0NegateZ & 1) << 0xb |
            (src0SelectZ & 7) << 8 | (src0NegateY & 1) << 7 | (src0SelectY & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7
   ;
-LAB_0006c4d4:
+setTokenCount:
   tokenCount = *tokenCountPtr;
   allocator = *(int *)(emitter + 0x3d4);
   if (*(uint *)(emitter + 0x758) <= tokenCount) {

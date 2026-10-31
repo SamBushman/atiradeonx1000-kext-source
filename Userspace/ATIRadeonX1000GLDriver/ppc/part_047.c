@@ -145,7 +145,7 @@ int ValueKey__commonLaneValue(resultOut, ctx, sourceIndex)
         commonIsExpr = commonValueNumber < 0;
         noLaneSeen = commonValueNumber == 0;
       }
-      else if (*loopPtr2 != commonValueNumber) goto LAB_00177184;
+      else if (*loopPtr2 != commonValueNumber) goto storeResultOut;
     }
     notLastLane = loopIndex != 3;
     loopPtr2 = loopPtr2 + 1;
@@ -156,7 +156,7 @@ int ValueKey__commonLaneValue(resultOut, ctx, sourceIndex)
     *resultOut = *exprRecord;
   }
   else {
-LAB_00177184:
+storeResultOut:
     *resultOut = 0x7ffffffe;
   }
   return resultOut;
@@ -190,7 +190,7 @@ int ValueKey__computeLaneRangeClasses(ctx)
           if (ptrSetEntry == 0) {
             if (rangeClass < 1) {
               rangeClass = 0;
-              goto LAB_00177254;
+              goto checkCtx;
             }
             ptrSetEntry = Compiler__findInPtrSet(ctx[0x8e],rangeClass);
           }
@@ -200,7 +200,7 @@ int ValueKey__computeLaneRangeClasses(ctx)
       else {
         rangeClass = ((undefined4 (*)())classifyConstantRange)((double)*(float *)loopPtr2[0xc]);
       }
-LAB_00177254:
+checkCtx:
       if (*(int *)(ctx[0x2c] + 0x120) == 0) {
         loopPtr2[0x14] = rangeClass;
       }
@@ -239,23 +239,23 @@ int ValueKey__computeLaneCompareCodes(ctx)
         valueNumber = *loopPtr2;
         if (valueNumber < 0) {
           exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(ctx[0x8e],valueNumber);
-          goto LAB_00177304;
+          goto setValueNumber2;
         }
         ptrSetEntry = loopPtr2[0x10];
         if (ptrSetEntry == 0) {
           if (0 < valueNumber) {
             ptrSetEntry = Compiler__findInPtrSet(ctx[0x8e],valueNumber);
-            goto LAB_00177330;
+            goto setValueNumber;
           }
           valueNumber = 0;
         }
         else {
-LAB_00177330:
+setValueNumber:
           valueNumber = *(int *)(ptrSetEntry + 0xc);
         }
       }
       else {
-LAB_00177304:
+setValueNumber2:
         valueNumber = signToCompareCode(*exprRecord);
       }
       if (*(int *)(ctx[0x2c] + 0x120) == 0) {
@@ -1144,36 +1144,36 @@ int ValueKey__allDotInputsConstant(ctx)
       loopIndex2 = 0;
       loopPtr4 = (int *)(loopIndex * 0x10 + ctx + 0x168);
       do {
-        if (-1 < *loopPtr4) goto LAB_00178b50;
+        if (-1 < *loopPtr4) goto setResult;
         moreComponents = loopIndex2 != 2;
         loopPtr4 = loopPtr4 + 1;
         loopIndex2 = loopIndex2 + 1;
       } while (moreComponents);
       loopPtr4 = *(int **)(ctx + 0xb0);
     }
-LAB_00178bc4:
+loopSetResult:
     result = 1;
   }
   else {
     if (loopIndex < 0x1d) {
       if (loopIndex == 0x18) {
-LAB_00178b6c:
+loopLoopIndex:
         for (loopIndex = 1; loopIndex2 = (**(code **)(*loopPtr4 + 0x14))(loopPtr4), loopIndex <= loopIndex2;
             loopIndex = loopIndex + 1) {
           loopIndex2 = 4;
           loopPtr4 = (int *)(loopIndex * 0x10 + ctx + 0x168);
           do {
-            if (-1 < *loopPtr4) goto LAB_00178b50;
+            if (-1 < *loopPtr4) goto setResult;
             loopPtr4 = loopPtr4 + 1;
             loopIndex2 = loopIndex2 + -1;
           } while (loopIndex2 != 0);
           loopPtr4 = *(int **)(ctx + 0xb0);
         }
-        goto LAB_00178bc4;
+        goto loopSetResult;
       }
     }
     else {
-      if (loopIndex == 0x1d) goto LAB_00178b6c;
+      if (loopIndex == 0x1d) goto loopLoopIndex;
       if (loopIndex == 0x1e) {
         loopIndex = 1;
         loopIndex2 = ctx + 0x170;
@@ -1181,7 +1181,7 @@ LAB_00178b6c:
           loopPtr4 = (int *)(loopIndex2 + 8);
           loopIndex3 = 0;
           do {
-            if (-1 < *loopPtr4) goto LAB_00178b50;
+            if (-1 < *loopPtr4) goto setResult;
             moreComponents = loopIndex3 != 1;
             loopPtr4 = loopPtr4 + 1;
             loopIndex3 = loopIndex3 + 1;
@@ -1190,10 +1190,10 @@ LAB_00178b6c:
           loopIndex2 = loopIndex2 + 0x10;
           loopIndex = loopIndex + 1;
         } while (moreComponents);
-        if (*(int *)(ctx + 0x1a0) < 0) goto LAB_00178bc4;
+        if (*(int *)(ctx + 0x1a0) < 0) goto loopSetResult;
       }
     }
-LAB_00178b50:
+setResult:
     result = 0;
   }
   return result;
@@ -1217,10 +1217,10 @@ int ValueKey__singleLaneValueNumber(resultOut, ctx, lane)
       laneBase = lane * 0x10 + ctx;
       valueNumber = *(int *)(laneBase + 0x168);
       if ((valueNumber != *(int *)(laneBase + 0x16c)) || (valueNumber != *(int *)(laneBase + 0x174)))
-      goto LAB_00178d10;
+      goto storeResultOut;
     }
     else {
-      if (valueNumber != 3) goto LAB_00178d10;
+      if (valueNumber != 3) goto storeResultOut;
       if (lane == 2) {
         valueNumber = *(int *)(ctx + 0x18c);
       }
@@ -1228,7 +1228,7 @@ int ValueKey__singleLaneValueNumber(resultOut, ctx, lane)
         valueNumber = *(int *)(ctx + 0x1a4);
       }
       else {
-        if (lane != 1) goto LAB_00178d10;
+        if (lane != 1) goto storeResultOut;
         valueNumber = *(int *)(ctx + 0x178);
       }
     }
@@ -1238,7 +1238,7 @@ int ValueKey__singleLaneValueNumber(resultOut, ctx, lane)
       return resultOut;
     }
   }
-LAB_00178d10:
+storeResultOut:
   *resultOut = 0x7ffffffe;
   return resultOut;
 }
@@ -1258,36 +1258,36 @@ int ValueKey__dotOperandSplatValue(resultOut, key, operandNumber)
   if (opcode == 0x1c) {
     operandEntryPtr = operandNumber * 0x10 + key;
     splatValueNumber = *(int *)(operandEntryPtr + 0x168);
-    if ((splatValueNumber != *(int *)(operandEntryPtr + 0x16c)) || (splatValueNumber != *(int *)(operandEntryPtr + 0x170))) goto LAB_00178de8;
+    if ((splatValueNumber != *(int *)(operandEntryPtr + 0x16c)) || (splatValueNumber != *(int *)(operandEntryPtr + 0x170))) goto storeResultOut;
   }
   else {
     if (opcode < 0x1d) {
-      if (opcode != 0x18) goto LAB_00178de8;
+      if (opcode != 0x18) goto storeResultOut;
     }
     else if (opcode != 0x1d) {
-      if (opcode != 0x1e) goto LAB_00178de8;
+      if (opcode != 0x1e) goto storeResultOut;
       if (operandNumber - 1U < 2) {
         operandEntryPtr = operandNumber * 0x10 + key;
         splatValueNumber = *(int *)(operandEntryPtr + 0x168);
-        if (splatValueNumber != *(int *)(operandEntryPtr + 0x16c)) goto LAB_00178de8;
+        if (splatValueNumber != *(int *)(operandEntryPtr + 0x16c)) goto storeResultOut;
       }
       else {
         splatValueNumber = *(int *)(operandNumber * 0x10 + key + 0x170);
       }
-      goto LAB_00178e60;
+      goto checkSplatValueNumber;
     }
     operandEntryPtr = operandNumber * 0x10 + key;
     splatValueNumber = *(int *)(operandEntryPtr + 0x168);
     if (((splatValueNumber != *(int *)(operandEntryPtr + 0x16c)) || (splatValueNumber != *(int *)(operandEntryPtr + 0x170))) ||
-       (splatValueNumber != *(int *)(operandEntryPtr + 0x174))) goto LAB_00178de8;
+       (splatValueNumber != *(int *)(operandEntryPtr + 0x174))) goto storeResultOut;
   }
-LAB_00178e60:
+checkSplatValueNumber:
   if (splatValueNumber < 0) {
     exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),splatValueNumber);
     *resultOut = *exprRecord;
     return resultOut;
   }
-LAB_00178de8:
+storeResultOut:
   *resultOut = 0x7ffffffe;
   return resultOut;
 }
@@ -2283,7 +2283,7 @@ int ValueKey__foldCompareOfFloatConstants(ctx)
                             );
         laneResult = 0.0;
         if (loopIndex2 == 0) {
-LAB_0017a608:
+loopSetLaneResult:
           laneResult = 1.0;
         }
         *loopPtr3 = laneResult;
@@ -2295,7 +2295,7 @@ LAB_0017a608:
           *loopPtr3 = 0.0;
         }
         else {
-          if (loopIndex2 == 2) goto LAB_0017a608;
+          if (loopIndex2 == 2) goto loopSetLaneResult;
           if (loopIndex2 == 0) {
             return 0;
           }
@@ -2711,7 +2711,7 @@ int ValueKey__commonLaneValue_17af58(resultOut, ctx, sourceIndex)
         commonIsExpr = commonValueNumber < 0;
         noLaneSeen = commonValueNumber == 0;
       }
-      else if (*loopPtr2 != commonValueNumber) goto LAB_0017affc;
+      else if (*loopPtr2 != commonValueNumber) goto storeResultOut;
     }
     loopIndex = loopIndex + 1;
     loopPtr2 = loopPtr2 + 1;
@@ -2722,7 +2722,7 @@ int ValueKey__commonLaneValue_17af58(resultOut, ctx, sourceIndex)
     *resultOut = *exprRecord;
   }
   else {
-LAB_0017affc:
+storeResultOut:
     *resultOut = 0x7ffffffe;
   }
   return resultOut;
@@ -3205,11 +3205,11 @@ int ValueKey__rewriteUniformSwizzle(ctx)
       swizzleRewritten = 1;
       loopIndex3 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),1);
       *(undefined4 *)(loopIndex3 + 0x10) = newSwizzleWord;
-      goto LAB_0017bb2c;
+      goto setLoopIndex3;
     }
   }
   swizzleRewritten = 0;
-LAB_0017bb2c:
+setLoopIndex3:
   loopIndex3 = *(int *)(ctx + 0xb0);
   if ((*(int *)(loopIndex3 + 0x120) != 0) && (*(int *)(loopIndex3 + 0x124) == 0)) {
     vector2 = *(uint **)(*(int *)(loopIndex3 + 0xa4) + 0x2c);

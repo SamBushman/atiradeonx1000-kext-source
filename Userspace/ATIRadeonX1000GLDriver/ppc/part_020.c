@@ -848,7 +848,7 @@ int ildisPrintRegisterType(disassembler, registerTypeCode, passThroughR5, fmtArg
 switchD_000dcf24_caseD_7:
     registerTypeText = "!!!invalidRegType!!!";
     *disassembler = *disassembler + 1;
-    goto LAB_000dd1f4;
+    goto callIldisAppendf;
   }
   fmtArgR9 = 0;
   switch(registerTypeCode) {
@@ -890,13 +890,13 @@ switchD_000dcf24_caseD_7:
       registerTypeText = "o";
       break;
     }
-    goto LAB_000dd09c;
+    goto setRegisterTypeText;
   case 0xc:
     if (disassembler[0x86] != 0) {
       registerTypeText = "vPixIn";
       break;
     }
-LAB_000dd09c:
+setRegisterTypeText:
     registerTypeText = "!!!invalidRegUsage(oVtxOut)!!!";
     break;
   case 0xd:
@@ -989,7 +989,7 @@ LAB_000dd09c:
     ildisAppendf(disassembler,"icb",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdcf00);
     return;
   }
-LAB_000dd1f4:
+callIldisAppendf:
   ildisAppendf(disassembler,registerTypeText,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdcf00);
   return;
 }
@@ -1050,7 +1050,7 @@ int ildisPrintSourceOperand(disassembler, passThroughR4, printedValue, fmtArgR6,
         indexPrinted = true;
         ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
       }
-LAB_000dd324:
+loopCheckRelativeMode:
       if (relativeMode == 0) {
         if (indexPrinted) {
           printedValue = 0;
@@ -1097,7 +1097,7 @@ LAB_000dd324:
               printedValue = *(uint *)disassembler[2];
               disassembler[2] = (int)((uint *)disassembler[2] + 1);
             }
-LAB_000dd4f0:
+loopCallPrintfLDBLStub1a32d0:
             printf_LDBLStub_1a32d0(formatBuffer2,"+%lu",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
             ildisAppendf(disassembler,formatBuffer2,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
           }
@@ -1110,21 +1110,21 @@ LAB_000dd4f0:
           }
         }
         else {
-          if (relativeMode != 0x1000000) goto LAB_000dd51c;
+          if (relativeMode != 0x1000000) goto setLoopIndex;
           formatBuffer2[0] = 0x5b00;
           ildisAppendf(disassembler,formatBuffer2,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
           ((int (*)())ildisPrintSourceOperand)(disassembler,r4AfterCall,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
           if ((operandWord & 0x4000000) != 0) {
             printedValue = *(uint *)disassembler[2];
             disassembler[2] = (int)((uint *)disassembler[2] + 1);
-            goto LAB_000dd4f0;
+            goto loopCallPrintfLDBLStub1a32d0;
           }
         }
         ildisAppendf(disassembler,"]",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
       }
-LAB_000dd51c:
+setLoopIndex:
       loopIndex = loopIndex + 1;
-      if (extraOperandCount + 1 <= loopIndex) goto LAB_000dd530;
+      if (extraOperandCount + 1 <= loopIndex) goto checkNoModifierWord;
     } while (loopIndex == 0);
     fmtArgR9 = (uint *)disassembler[2];
     operandWord = *fmtArgR9;
@@ -1139,9 +1139,9 @@ LAB_000dd51c:
       unaff_r23 = *(uint *)disassembler[2];
       disassembler[2] = (int)((uint *)disassembler[2] + 1);
     }
-    goto LAB_000dd324;
+    goto loopCheckRelativeMode;
   }
-LAB_000dd530:
+checkNoModifierWord:
   if (noModifierWord) {
     return;
   }
@@ -1170,27 +1170,27 @@ LAB_000dd530:
   divCompSelect = unaff_r28 >> 0x15 & 7;
   if (divCompSelect == 2) {
     ildisAppendf(disassembler,"z",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-    goto LAB_000dd630;
+    goto callIldisAppendf;
   }
   if (divCompSelect < 3) {
     if (divCompSelect == 1) {
       ildisAppendf(disassembler,"y",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-      goto LAB_000dd630;
+      goto callIldisAppendf;
     }
   }
   else {
     if (divCompSelect == 3) {
       ildisAppendf(disassembler,"w",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-      goto LAB_000dd630;
+      goto callIldisAppendf;
     }
     if (divCompSelect == 4) {
       ildisAppendf(disassembler,"unknown",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-      goto LAB_000dd630;
+      goto callIldisAppendf;
     }
   }
   ildisAppendf(disassembler,"!!!invalid!!!",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
   *disassembler = *disassembler + 1;
-LAB_000dd630:
+callIldisAppendf:
   ildisAppendf(disassembler,")",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
   return;
 }

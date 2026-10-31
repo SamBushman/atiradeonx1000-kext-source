@@ -41,7 +41,7 @@ int arbEmitIlRcp(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006c8a0:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -51,16 +51,16 @@ LAB_0006c8a0:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006c8a0;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006c8a0;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006c8a0;
+      goto loopSetDstHeader;
     }
   }
   srcHeader = (srcFile & 0x3f) << 0x10 | srcIndex & 0xffff;
@@ -78,7 +78,7 @@ LAB_0006c8a0:
               tokenIndex = srcSelect[2];
               if (tokenIndex == 2) {
                 srcSelect3 = srcSelect[3];
-                if (srcSelect3 == 3) goto LAB_0006ca14;
+                if (srcSelect3 == 3) goto setTokenIndex;
               }
               else {
                 srcSelect3 = srcSelect[3];
@@ -134,7 +134,7 @@ LAB_0006c8a0:
            (srcNegate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 | (srcNegate1 & 1) << 7 | (srcSelect1 & 7) << 4 | (*srcNegate & 1) << 3 | srcSelectX & 7
   ;
-LAB_0006ca14:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -253,7 +253,7 @@ int arbEmitIlRsq(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006cde0:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -263,16 +263,16 @@ LAB_0006cde0:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006cde0;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006cde0;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006cde0;
+      goto loopSetDstHeader;
     }
   }
   srcHeader = (srcFile & 0x3f) << 0x10 | srcIndex & 0xffff;
@@ -290,7 +290,7 @@ LAB_0006cde0:
               tokenIndex = srcSelect[2];
               if (tokenIndex == 2) {
                 srcSelect3 = srcSelect[3];
-                if (srcSelect3 == 3) goto LAB_0006cf54;
+                if (srcSelect3 == 3) goto setTokenIndex;
               }
               else {
                 srcSelect3 = srcSelect[3];
@@ -346,7 +346,7 @@ LAB_0006cde0:
            (srcNegate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 | (srcNegate1 & 1) << 7 | (srcSelect1 & 7) << 4 | (*srcNegate & 1) << 3 | srcSelectX & 7
   ;
-LAB_0006cf54:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -465,7 +465,7 @@ int arbEmitIlExp(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006d320:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -475,16 +475,16 @@ LAB_0006d320:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006d320;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006d320;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006d320;
+      goto loopSetDstHeader;
     }
   }
   srcHeader = (srcFile & 0x3f) << 0x10 | srcIndex & 0xffff;
@@ -502,7 +502,7 @@ LAB_0006d320:
               tokenIndex = srcSelect[2];
               if (tokenIndex == 2) {
                 srcSelect3 = srcSelect[3];
-                if (srcSelect3 == 3) goto LAB_0006d494;
+                if (srcSelect3 == 3) goto setTokenIndex;
               }
               else {
                 srcSelect3 = srcSelect[3];
@@ -558,7 +558,7 @@ LAB_0006d320:
            (srcNegate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 | (srcNegate1 & 1) << 7 | (srcSelect1 & 7) << 4 | (*srcNegate & 1) << 3 | srcSelectX & 7
   ;
-LAB_0006d494:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -677,7 +677,7 @@ int arbEmitIlExn(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006d860:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -687,16 +687,16 @@ LAB_0006d860:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006d860;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006d860;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006d860;
+      goto loopSetDstHeader;
     }
   }
   srcHeader = (srcFile & 0x3f) << 0x10 | srcIndex & 0xffff;
@@ -714,7 +714,7 @@ LAB_0006d860:
               tokenIndex = srcSelect[2];
               if (tokenIndex == 2) {
                 srcSelect3 = srcSelect[3];
-                if (srcSelect3 == 3) goto LAB_0006d9d4;
+                if (srcSelect3 == 3) goto setTokenIndex;
               }
               else {
                 srcSelect3 = srcSelect[3];
@@ -770,7 +770,7 @@ LAB_0006d860:
            (srcNegate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 | (srcNegate1 & 1) << 7 | (srcSelect1 & 7) << 4 | (*srcNegate & 1) << 3 | srcSelectX & 7
   ;
-LAB_0006d9d4:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -901,7 +901,7 @@ int arbEmitIlPow(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMask3 = dstMask[3];
     dstMask1 = dstMask[1];
     dstMask2 = dstMask[2];
-LAB_0006ddb0:
+loopSetDstHeader:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(dstMask3 != 0) * 0x40 |
              (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
@@ -911,16 +911,16 @@ LAB_0006ddb0:
     if (dstMask1 == 0) {
       dstMask3 = dstMask[3];
       dstMask2 = dstMask[2];
-      goto LAB_0006ddb0;
+      goto loopSetDstHeader;
     }
     dstMask2 = dstMask[2];
     if (dstMask2 == 0) {
       dstMask3 = dstMask[3];
-      goto LAB_0006ddb0;
+      goto loopSetDstHeader;
     }
     if (dstMask[3] == 0) {
       dstMask3 = 0;
-      goto LAB_0006ddb0;
+      goto loopSetDstHeader;
     }
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -933,7 +933,7 @@ LAB_0006ddb0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006df00;
+      goto setSrc0Header;
     }
     src0Negate2 = src0Negate[2];
     if (src0Negate2 != 0) {
@@ -942,7 +942,7 @@ LAB_0006ddb0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006df00;
+      goto setSrc0Header;
     }
     src0Negate3 = src0Negate[3];
     if (src0Negate3 != 0) {
@@ -950,28 +950,28 @@ LAB_0006ddb0:
       src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006df00;
+      goto setSrc0Header;
     }
     src0SelectX = *src0Select;
     if (src0SelectX != 0) {
       src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
-      goto LAB_0006df00;
+      goto setSrc0Header;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
       src0Select3 = src0Select[3];
       src1Header = src0Select[2];
-      goto LAB_0006df00;
+      goto setSrc0Header;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
       src0Select3 = src0Select[3];
-      goto LAB_0006df00;
+      goto setSrc0Header;
     }
     src0Select3 = src0Select[3];
-    if (src0Select3 != 3) goto LAB_0006df00;
+    if (src0Select3 != 3) goto setSrc0Header;
   }
   else {
     src0Negate3 = src0Negate[3];
@@ -981,7 +981,7 @@ LAB_0006ddb0:
     src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
-LAB_0006df00:
+setSrc0Header:
     src0Header = src0Header | 0x400000;
     src0SwizzleWord = (src0Negate3 & 1) << 0xf |
              (src0Select3 & 7) << 0xc |
@@ -1004,7 +1004,7 @@ LAB_0006df00:
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
                 src1Select3 = src1Select[3];
-                if (src1Select3 == 3) goto LAB_0006e054;
+                if (src1Select3 == 3) goto setTokenIndex;
               }
               else {
                 src1Select3 = src1Select[3];
@@ -1060,7 +1060,7 @@ LAB_0006df00:
            (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
            (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
-LAB_0006e054:
+setTokenIndex:
   tokenIndex = *tokenCount;
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
@@ -1225,7 +1225,7 @@ int arbEmitIlOp4e(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Sele
     maskW = dstMask[3];
     maskY = dstMask[1];
     maskZ = dstMask[2];
-LAB_0006e560:
+loopSetDstToken:
     dstToken = dstToken | 0x400000;
     dstMaskToken = (uint)(maskW != 0) * 0x40 |
              (uint)(maskZ != 0) * 0x10 |
@@ -1236,16 +1236,16 @@ LAB_0006e560:
     if (maskY == 0) {
       maskW = dstMask[3];
       maskZ = dstMask[2];
-      goto LAB_0006e560;
+      goto loopSetDstToken;
     }
     maskZ = dstMask[2];
     if (maskZ == 0) {
       maskW = dstMask[3];
-      goto LAB_0006e560;
+      goto loopSetDstToken;
     }
     if (dstMask[3] == 0) {
       maskW = 0;
-      goto LAB_0006e560;
+      goto loopSetDstToken;
     }
   }
   src0Token = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
@@ -1258,7 +1258,7 @@ LAB_0006e560:
       src0SelX = *src0Select;
       src0SelY = src0Select[1];
       src0SelZ = src0Select[2];
-      goto LAB_0006e6b0;
+      goto setSrc0Token;
     }
     src0NegZ = src0Negate[2];
     if (src0NegZ != 0) {
@@ -1267,7 +1267,7 @@ LAB_0006e560:
       src0SelX = *src0Select;
       src0SelY = src0Select[1];
       src0SelZ = src0Select[2];
-      goto LAB_0006e6b0;
+      goto setSrc0Token;
     }
     src0NegW = src0Negate[3];
     if (src0NegW != 0) {
@@ -1275,28 +1275,28 @@ LAB_0006e560:
       src0SelX = *src0Select;
       src0SelY = src0Select[1];
       src0SelZ = src0Select[2];
-      goto LAB_0006e6b0;
+      goto setSrc0Token;
     }
     src0SelX = *src0Select;
     if (src0SelX != 0) {
       src0SelW = src0Select[3];
       src0SelY = src0Select[1];
       src0SelZ = src0Select[2];
-      goto LAB_0006e6b0;
+      goto setSrc0Token;
     }
     src0SelY = src0Select[1];
     if (src0SelY != 1) {
       src0SelW = src0Select[3];
       src0SelZ = src0Select[2];
-      goto LAB_0006e6b0;
+      goto setSrc0Token;
     }
     src0SelZ = src0Select[2];
     if (src0SelZ != 2) {
       src0SelW = src0Select[3];
-      goto LAB_0006e6b0;
+      goto setSrc0Token;
     }
     src0SelW = src0Select[3];
-    if (src0SelW != 3) goto LAB_0006e6b0;
+    if (src0SelW != 3) goto setSrc0Token;
   }
   else {
     src0NegW = src0Negate[3];
@@ -1306,7 +1306,7 @@ LAB_0006e560:
     src0SelX = *src0Select;
     src0SelY = src0Select[1];
     src0SelZ = src0Select[2];
-LAB_0006e6b0:
+setSrc0Token:
     src0Token = src0Token | 0x400000;
     src0ModifierToken = (src0NegW & 1) << 0xf |
              (src0SelW & 7) << 0xc |
@@ -1329,7 +1329,7 @@ LAB_0006e6b0:
               src1SelZ = src1Select[2];
               if (src1SelZ == 2) {
                 src1SelW = src1Select[3];
-                if (src1SelW == 3) goto LAB_0006e804;
+                if (src1SelW == 3) goto setTokenIndex;
               }
               else {
                 src1SelW = src1Select[3];
@@ -1385,7 +1385,7 @@ LAB_0006e6b0:
            (src1NegZ & 1) << 0xb |
            (src1SelZ & 7) << 8 |
            (src1NegY & 1) << 7 | (src1SelY & 7) << 4 | (*src1Negate & 1) << 3 | src1SelX & 7;
-LAB_0006e804:
+setTokenIndex:
   tokenIndex = *tokenCountPtr;
   allocTable = *(int *)(ctx + 0x3d4);
   if (*(uint *)(ctx + 0x758) <= tokenIndex) {
@@ -1567,7 +1567,7 @@ int arbEmitIlMovMadMov(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src
       src1WordsValue = *src1Words;
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_0006edc0;
+      goto setSrc1Token;
     }
     src1Flags2 = src1Flags[2];
     if (src1Flags2 != 0) {
@@ -1576,7 +1576,7 @@ int arbEmitIlMovMadMov(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src
       src1WordsValue = *src1Words;
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_0006edc0;
+      goto setSrc1Token;
     }
     src1Flags3 = src1Flags[3];
     if (src1Flags3 != 0) {
@@ -1584,28 +1584,28 @@ int arbEmitIlMovMadMov(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src
       src1WordsValue = *src1Words;
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_0006edc0;
+      goto setSrc1Token;
     }
     src1WordsValue = *src1Words;
     if (src1WordsValue != 0) {
       src1Words3 = src1Words[3];
       src1Words1 = src1Words[1];
       src1Words2 = src1Words[2];
-      goto LAB_0006edc0;
+      goto setSrc1Token;
     }
     src1Words1 = src1Words[1];
     if (src1Words1 != 1) {
       src1Words3 = src1Words[3];
       src1Words2 = src1Words[2];
-      goto LAB_0006edc0;
+      goto setSrc1Token;
     }
     src1Words2 = src1Words[2];
     if (src1Words2 != 2) {
       src1Words3 = src1Words[3];
-      goto LAB_0006edc0;
+      goto setSrc1Token;
     }
     src1Words3 = src1Words[3];
-    if (src1Words3 != 3) goto LAB_0006edc0;
+    if (src1Words3 != 3) goto setSrc1Token;
   }
   else {
     src1Flags3 = src1Flags[3];
@@ -1615,7 +1615,7 @@ int arbEmitIlMovMadMov(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src
     src1WordsValue = *src1Words;
     src1Words1 = src1Words[1];
     src1Words2 = src1Words[2];
-LAB_0006edc0:
+setSrc1Token:
     src1Token = src1Token | 0x400000;
     src1ModifierToken = (src1Flags3 & 1) << 0xf |
              (src1Words3 & 7) << 0xc |
@@ -1708,7 +1708,7 @@ LAB_0006edc0:
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_0006f1f0;
+      goto setSrc0Token;
     }
     src0Flags2 = src0Flags[2];
     if (src0Flags2 != 0) {
@@ -1717,7 +1717,7 @@ LAB_0006edc0:
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_0006f1f0;
+      goto setSrc0Token;
     }
     src0Flags3 = src0Flags[3];
     if (src0Flags3 != 0) {
@@ -1725,28 +1725,28 @@ LAB_0006edc0:
       src0WordsValue = *src0Words;
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_0006f1f0;
+      goto setSrc0Token;
     }
     src0WordsValue = *src0Words;
     if (src0WordsValue != 0) {
       src0Words3 = src0Words[3];
       src0Words1 = src0Words[1];
       src0Words2 = src0Words[2];
-      goto LAB_0006f1f0;
+      goto setSrc0Token;
     }
     src0Words1 = src0Words[1];
     if (src0Words1 != 1) {
       src0Words3 = src0Words[3];
       src0Words2 = src0Words[2];
-      goto LAB_0006f1f0;
+      goto setSrc0Token;
     }
     src0Words2 = src0Words[2];
     if (src0Words2 != 2) {
       src0Words3 = src0Words[3];
-      goto LAB_0006f1f0;
+      goto setSrc0Token;
     }
     src0Words3 = src0Words[3];
-    if (src0Words3 != 3) goto LAB_0006f1f0;
+    if (src0Words3 != 3) goto setSrc0Token;
   }
   else {
     src0Flags3 = src0Flags[3];
@@ -1756,7 +1756,7 @@ LAB_0006edc0:
     src0WordsValue = *src0Words;
     src0Words1 = src0Words[1];
     src0Words2 = src0Words[2];
-LAB_0006f1f0:
+setSrc0Token:
     src0Token = src0Token | 0x400000;
     src0ModifierToken = (src0Flags3 & 1) << 0xf |
             (src0Words3 & 7) << 0xc |
@@ -1849,7 +1849,7 @@ LAB_0006f1f0:
       src2WordsValue = *src2Words;
       src2Words1 = src2Words[1];
       src2Words2 = src2Words[2];
-      goto LAB_0006f620;
+      goto setSrc2Token;
     }
     src2Flags2 = src2Flags[2];
     if (src2Flags2 != 0) {
@@ -1858,7 +1858,7 @@ LAB_0006f1f0:
       src2WordsValue = *src2Words;
       src2Words1 = src2Words[1];
       src2Words2 = src2Words[2];
-      goto LAB_0006f620;
+      goto setSrc2Token;
     }
     src2Flags3 = src2Flags[3];
     if (src2Flags3 != 0) {
@@ -1866,28 +1866,28 @@ LAB_0006f1f0:
       src2WordsValue = *src2Words;
       src2Words1 = src2Words[1];
       src2Words2 = src2Words[2];
-      goto LAB_0006f620;
+      goto setSrc2Token;
     }
     src2WordsValue = *src2Words;
     if (src2WordsValue != 0) {
       src2Words3 = src2Words[3];
       src2Words1 = src2Words[1];
       src2Words2 = src2Words[2];
-      goto LAB_0006f620;
+      goto setSrc2Token;
     }
     src2Words1 = src2Words[1];
     if (src2Words1 != 1) {
       src2Words3 = src2Words[3];
       src2Words2 = src2Words[2];
-      goto LAB_0006f620;
+      goto setSrc2Token;
     }
     src2Words2 = src2Words[2];
     if (src2Words2 != 2) {
       src2Words3 = src2Words[3];
-      goto LAB_0006f620;
+      goto setSrc2Token;
     }
     src2Words3 = src2Words[3];
-    if (src2Words3 != 3) goto LAB_0006f620;
+    if (src2Words3 != 3) goto setSrc2Token;
   }
   else {
     src2Flags3 = src2Flags[3];
@@ -1897,7 +1897,7 @@ LAB_0006f1f0:
     src2WordsValue = *src2Words;
     src2Words1 = src2Words[1];
     src2Words2 = src2Words[2];
-LAB_0006f620:
+setSrc2Token:
     src2Token = src2Token | 0x400000;
     src2ModifierToken = (src2Flags3 & 1) << 0xf |
             (src2Words3 & 7) << 0xc |
@@ -1999,7 +1999,7 @@ LAB_0006f620:
         allocator = dstMask[3];
       }
       else {
-        if (dstMask[3] != 0) goto LAB_0006f9f0;
+        if (dstMask[3] != 0) goto setAllocator;
         allocator = 0;
       }
     }
@@ -2007,7 +2007,7 @@ LAB_0006f620:
   dstToken = dstToken | 0x400000;
   dstMaskToken = (uint)(allocator != 0) * 0x40 |
            (uint)(maskZ != 0) * 0x10 | (uint)(maskY != 0) * 4 | (uint)(*dstMask != 0);
-LAB_0006f9f0:
+setAllocator:
   allocator = *(int *)(ctx + ARB_allocator);
   if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
     newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
@@ -2137,7 +2137,7 @@ int evsAllocLocalConstantRegisters(ctx, shader, programState, symbol)
       noFreeRecordYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
       while (loopIndex < *(uint *)(programState + 0x48)) {
-        if (!noFreeRecordYet) goto LAB_000702bc;
+        if (!noFreeRecordYet) goto storeSymbol;
         if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
           growFlagValue = 1;
           noFreeRecordYet = false;
@@ -2147,7 +2147,7 @@ int evsAllocLocalConstantRegisters(ctx, shader, programState, symbol)
           recordByteOffset = recordByteOffset + 0x28;
         }
       }
-      goto LAB_000702b8;
+      goto checkNoFreeRecordYet;
     }
     if (dataType == 0x87c0) {
       loopIndex = 0;
@@ -2155,7 +2155,7 @@ int evsAllocLocalConstantRegisters(ctx, shader, programState, symbol)
       noFreeRecordYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 4;
       while (loopIndex < *(int *)(programState + 0x48) - 3U) {
-        if (!noFreeRecordYet) goto LAB_000703cc;
+        if (!noFreeRecordYet) goto setRegisterRecordOffset;
         if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
           noFreeRecordYet = false;
         }
@@ -2165,7 +2165,7 @@ int evsAllocLocalConstantRegisters(ctx, shader, programState, symbol)
         }
       }
       if (!noFreeRecordYet) {
-LAB_000703cc:
+setRegisterRecordOffset:
         registerRecordOffset = loopIndex * 0x28;
         registerRecordPtrC = registerRecordOffset + *(int *)(programState + 0x44);
         if (((*(char *)(registerRecordPtrC + 0x38) == '\0') && (*(char *)(registerRecordPtrC + 0x60) == '\0')) &&
@@ -2217,7 +2217,7 @@ LAB_000703cc:
     noFreeRegisterYet = true;
     *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
     while (loopIndex < *(uint *)(programState + 0x48)) {
-      if (!noFreeRegisterYet) goto LAB_000701ac;
+      if (!noFreeRegisterYet) goto storeSymbol2;
       if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
         allocatedFlag = 1;
         noFreeRegisterYet = false;
@@ -2251,7 +2251,7 @@ LAB_000703cc:
       noFreeRecordYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
       while (loopIndex < *(uint *)(programState + 0x48)) {
-        if (!noFreeRecordYet) goto LAB_000702bc;
+        if (!noFreeRecordYet) goto storeSymbol;
         if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
           growFlagValue = 1;
           noFreeRecordYet = false;
@@ -2261,9 +2261,9 @@ LAB_000703cc:
           recordByteOffset = recordByteOffset + 0x28;
         }
       }
-LAB_000702b8:
+checkNoFreeRecordYet:
       if (!noFreeRecordYet) {
-LAB_000702bc:
+storeSymbol:
         *(uint *)(symbol + 4) = loopIndex;
         *(undefined1 *)(loopIndex * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
         return 0;
@@ -2276,7 +2276,7 @@ LAB_000702bc:
       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x44));
       *(undefined4 *)(programState + 0x44) = newRegisterTableB;
       *(int *)(programState + 0x48) = *(int *)(programState + 0x48) + 0x40;
-      goto LAB_00070350;
+      goto storeSymbol3;
     }
     if (dataType == 0x87c0) {
       loopIndex = 0;
@@ -2284,7 +2284,7 @@ LAB_000702bc:
       noFreeRegisterYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 4;
       while (loopIndex < *(int *)(programState + 0x48) - 3U) {
-        if (!noFreeRegisterYet) goto LAB_0006ffbc;
+        if (!noFreeRegisterYet) goto setRegisterRecordOffset2;
         if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
           noFreeRegisterYet = false;
         }
@@ -2294,7 +2294,7 @@ LAB_000702bc:
         }
       }
       if (!noFreeRegisterYet) {
-LAB_0006ffbc:
+setRegisterRecordOffset2:
         registerRecordOffset = loopIndex * 0x28;
         registerRecordPtrC = registerRecordOffset + *(int *)(programState + 0x44);
         if (((*(char *)(registerRecordPtrC + 0x38) == '\0') && (*(char *)(registerRecordPtrC + 0x60) == '\0')) &&
@@ -2346,7 +2346,7 @@ LAB_0006ffbc:
     noFreeRegisterYet = true;
     *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
     while (loopIndex < *(uint *)(programState + 0x48)) {
-      if (!noFreeRegisterYet) goto LAB_000701ac;
+      if (!noFreeRegisterYet) goto storeSymbol2;
       if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
         allocatedFlag = 1;
         noFreeRegisterYet = false;
@@ -2358,7 +2358,7 @@ LAB_0006ffbc:
     }
   }
   if (!noFreeRegisterYet) {
-LAB_000701ac:
+storeSymbol2:
     *(uint *)(symbol + 4) = loopIndex;
     *(undefined4 *)(symbol + 8) = 0;
     *(undefined1 *)(loopIndex * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
@@ -2373,7 +2373,7 @@ LAB_000701ac:
   *(undefined4 *)(programState + 0x44) = newRegisterTable;
   *(int *)(programState + 0x48) = *(int *)(programState + 0x48) + 0x40;
   *(undefined4 *)(symbol + 8) = allocatedFlag;
-LAB_00070350:
+storeSymbol3:
   *(int *)(symbol + 4) = tableSize;
   *(undefined1 *)(tableSize * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
   return 0;
@@ -2478,7 +2478,7 @@ int evsAllocLocalRegisters(ctx, shader, programState, operand)
         growFlagValue = 0;
         noFreeRecordYet = true;
         while (scanIndex < *(uint *)(programState + 0x40)) {
-          if (!noFreeRecordYet) goto LAB_000708f8;
+          if (!noFreeRecordYet) goto storeSymbolRecord;
           if (*(char *)(scanIndex * 0x28 + *(int *)(programState + 0x3c) + 0x10) == '\0') {
             growFlagValue = 1;
             noFreeRecordYet = false;
@@ -2499,7 +2499,7 @@ int evsAllocLocalRegisters(ctx, shader, programState, operand)
           *(uint *)(symbolRecord + 4) = scanIndex;
         }
         else {
-LAB_000708f8:
+storeSymbolRecord:
           *(uint *)(symbolRecord + 4) = scanIndex;
         }
         registerRecordOffset = scanIndex * 0x28;
@@ -2514,7 +2514,7 @@ LAB_000708f8:
         loopIndex = 0;
         noFreeRecordYet = true;
         while (loopIndex < *(int *)(programState + 0x40) - 3U) {
-          if (!noFreeRecordYet) goto LAB_00070a18;
+          if (!noFreeRecordYet) goto setRegisterRecordOffsetB;
           if (*(char *)(loopIndex * 0x28 + *(int *)(programState + 0x3c) + 0x10) == '\0') {
             noFreeRecordYet = false;
           }
@@ -2523,7 +2523,7 @@ LAB_000708f8:
           }
         }
         if (!noFreeRecordYet) {
-LAB_00070a18:
+setRegisterRecordOffsetB:
           registerRecordOffsetB = loopIndex * 0x28;
           registerRecordPtrD = registerRecordOffsetB + *(int *)(programState + 0x3c);
           if (((*(char *)(registerRecordPtrD + 0x38) == '\0') && (*(char *)(registerRecordPtrD + 0x60) == '\0')) &&
@@ -2581,7 +2581,7 @@ LAB_00070a18:
         foundScalarRecord = false;
         recordByteOffset = 0;
         while (loopIndex2 < tableSize) {
-          if (foundScalarRecord) goto LAB_0007075c;
+          if (foundScalarRecord) goto storeSymbolRecord2;
           registerRecordPtrE = recordByteOffset + *(int *)(programState + 0x3c);
           if ((*(char *)(registerRecordPtrE + 0x10) == '\0') || (foundScalarRecord = true, 3 < *(uint *)(registerRecordPtrE + 0x14))) {
             loopIndex2 = loopIndex2 + 1;
@@ -2590,7 +2590,7 @@ LAB_00070a18:
           }
         }
         if (foundScalarRecord) {
-LAB_0007075c:
+storeSymbolRecord2:
           *(uint *)(symbolRecord + 4) = loopIndex2;
           recordByteOffset = loopIndex2 * 0x28;
           *(undefined4 *)(symbolRecord + 8) = *(undefined4 *)(*(int *)(programState + 0x3c) + recordByteOffset + 0x14);
@@ -2601,7 +2601,7 @@ LAB_0007075c:
         }
         else {
           if (tableSize == 0) {
-LAB_000707f4:
+loopStoreShader:
             *(undefined1 *)(shader + 0x10) = 0;
             tableSizeB = *(uint *)(programState + 0x40);
             newRegisterTable = (**(code **)(ctx + 0x10))(tableSizeB + 0x40,0x28);
@@ -2621,7 +2621,7 @@ LAB_000707f4:
                 tableSizeB = tableSizeB + 1;
               }
               if (tableSize <= tableSizeB) {
-                if (recordUnused) goto LAB_000707f4;
+                if (recordUnused) goto loopStoreShader;
                 break;
               }
             } while (recordUnused);
@@ -2799,7 +2799,7 @@ int evsEmitFogOutput(ctx, tokens, programState, mode)
     nextTokenIndexB = *tokenCountPtr + 1;
     *tokenCountPtr = nextTokenIndexB;
     if (tokenCapacity <= nextTokenIndexB) {
-LAB_00071330:
+loopSetNewTokenBuffer:
       newTokenBuffer = (**(code **)(ctx + 0xc))(tokenCapacity * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
         _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
@@ -2809,7 +2809,7 @@ LAB_00071330:
       nextTokenIndexB = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-LAB_00071390:
+loopStoreNextTokenIndexB:
     *(undefined **)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tokenWord;
     *tokenCountPtr = *tokenCountPtr + 1;
   }
@@ -2941,8 +2941,8 @@ LAB_00071390:
         tokenCapacity = *(uint *)(tokens + 8);
         nextTokenIndexB = *tokenCountPtr + 1;
         *tokenCountPtr = nextTokenIndexB;
-        if (tokenCapacity <= nextTokenIndexB) goto LAB_00071330;
-        goto LAB_00071390;
+        if (tokenCapacity <= nextTokenIndexB) goto loopSetNewTokenBuffer;
+        goto loopStoreNextTokenIndexB;
       }
       if (fogMode != 0x800) {
         return;
@@ -3211,7 +3211,7 @@ int evsAssignVertexInputs(ctx, shader)
           if ((*(char *)(symbolRecord + 0x44) == '\0') || (*(int *)(symbolRecord + 0x48) == 0x12)) {
             symbolDataTypeB = *(int *)(symbolRecord + 0x24);
             if (symbolDataTypeB == 0x87bf) {
-LAB_0007209c:
+loopSetInputRecOffsetB:
               inputRecOffsetB = nextInputReg * 0x28;
               *(int *)(symbolRecord + 4) = nextInputReg;
               nextInputReg = nextInputReg + 1;
@@ -3226,7 +3226,7 @@ LAB_0007209c:
             }
             else {
               inputRecOffsetB = 0;
-              if (symbolDataTypeB == 0x87be) goto LAB_0007209c;
+              if (symbolDataTypeB == 0x87be) goto loopSetInputRecOffsetB;
             }
             inputRecOffsetB = *(int *)(curProgramState + 0x10) + inputRecOffsetB;
           }
@@ -3401,7 +3401,7 @@ LAB_0007209c:
           if ((*(char *)(symbolRecord + 0x44) == '\0') || (*(int *)(symbolRecord + 0x48) == 0x12)) {
             symbolDataTypeB = *(int *)(symbolRecord + 0x24);
             if (symbolDataTypeB == 0x87bf) {
-LAB_000724bc:
+loopSetInputRecOffsetB2:
               inputRecOffsetB = nextInputReg * 0x28;
               *(int *)(symbolRecord + 4) = nextInputReg;
               nextInputReg = nextInputReg + 1;
@@ -3416,7 +3416,7 @@ LAB_000724bc:
             }
             else {
               inputRecOffsetB = 0;
-              if (symbolDataTypeB == 0x87be) goto LAB_000724bc;
+              if (symbolDataTypeB == 0x87be) goto loopSetInputRecOffsetB2;
             }
             inputRecOffsetB = *(int *)(curProgramState + 0x10) + inputRecOffsetB;
           }
@@ -3591,7 +3591,7 @@ LAB_000724bc:
           if ((*(char *)(activeProgramIndexOrSymbolRecord + 0x44) == '\0') || (*(int *)(activeProgramIndexOrSymbolRecord + 0x48) == 0x12)) {
             symbolDataTypeC = *(int *)(activeProgramIndexOrSymbolRecord + 0x24);
             if (symbolDataTypeC == 0x87bf) {
-LAB_000728e4:
+loopSetInputRecOffset:
               inputRecOffset = nextInputReg * 0x28;
               *(int *)(activeProgramIndexOrSymbolRecord + 4) = nextInputReg;
               nextInputReg = nextInputReg + 1;
@@ -3606,7 +3606,7 @@ LAB_000728e4:
             }
             else {
               inputRecOffset = 0;
-              if (symbolDataTypeC == 0x87be) goto LAB_000728e4;
+              if (symbolDataTypeC == 0x87be) goto loopSetInputRecOffset;
             }
             *(undefined1 *)(*(int *)(curProgramState + 0x10) + inputRecOffset + 0x10) = 1;
           }
@@ -4047,7 +4047,7 @@ LAB_000728e4:
                       coveredW = coveredW | destCoversW;
                       if (((coveredX != 0) && (coveredY != 0)) && (coveredZ != 0)) {
                         scanDone = coveredW != 0;
-                        goto LAB_000734d0;
+                        goto setScanInstIndex;
                       }
                     }
                     scanDone = false;
@@ -4056,7 +4056,7 @@ LAB_000728e4:
                     slotReleasable = false;
                     scanDone = true;
                   }
-LAB_000734d0:
+setScanInstIndex:
                   scanInstIndex = scanInstIndex + 1;
                 } while ((instCount != scanInstIndex) && (nextInst = nextInst + 0x74, !scanDone));
               }
@@ -4106,14 +4106,14 @@ LAB_000734d0:
     }
     else {
       fogWriteMode = 0;
-      if (fogFlagsNotBothSet) goto LAB_000736b0;
+      if (fogFlagsNotBothSet) goto callEvsTokenBufPush;
     }
     fogOutputReg = *(int *)(programState + 0x4c);
     *(int *)(((unsigned char *)0x000013c4) + programState) = fogOutputReg;
     *(int *)(programState + 0x4c) = fogOutputReg + 1;
     ((int (*)())evsEmitFogOutput)(ctx,emitState,programState,fogWriteMode);
   }
-LAB_000736b0:
+callEvsTokenBufPush:
   ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x28);
   shader[0x15] = *(int *)(programState + 4);
   shader[0x19] = maxTempCount;
@@ -4130,14 +4130,14 @@ LAB_000736b0:
         if (*(char *)(symbolRecordC + 0x3d) != '\0') {
           if (*(int *)(symbolRecordC + 0x28) == 0x87c2) {
             if (*(char *)(symbolRecordC + 0x44) == '\0') {
-LAB_00073754:
+loopSetUsedListOffset:
               usedListOffset = usedSymbolCount * 4;
               usedSymbolCount = usedSymbolCount + 1;
               *(uint *)(usedListOffset + *(int *)(programState + 0x114)) = symbolIndex;
               symbolCount = shader[7];
             }
           }
-          else if (*(int *)(symbolRecordC + 0x28) == 0x87c3) goto LAB_00073754;
+          else if (*(int *)(symbolRecordC + 0x28) == 0x87c3) goto loopSetUsedListOffset;
         }
         symbolIndex = symbolIndex + 1;
         symbolOffsetC = symbolOffsetC + 0x54;
@@ -4374,7 +4374,7 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
       return 0;
     }
     registerWord = 0x40000;
-    goto LAB_00074014;
+    goto checkIsScalarSource;
   }
   symbol = operand[1] * 0x54 + *(int *)(compileState + 0x20);
   registerWord = *(uint *)(symbol + 0x28);
@@ -4406,15 +4406,15 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
           finalSwizzle = (undefined *)((uint)swizzleWord & 0xffff8888 | 0x5441);
         }
       }
-      goto LAB_00074014;
+      goto checkIsScalarSource;
     }
     if (dataType == 0x87bf) {
       registerWord = *(uint *)(symbol + 4) & 0xffff | 0x10000;
-      goto LAB_00074014;
+      goto checkIsScalarSource;
     }
     if (dataType == 0x87c0) {
       registerWord = *(uint *)(symbol + 0x10) & 0xffff | 0x10000;
-      goto LAB_00074014;
+      goto checkIsScalarSource;
     }
     if (dataType != 0x87be) {
       return 0;
@@ -4429,11 +4429,11 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
     }
     if (dataType == 0x87bf) {
       registerWord = *(uint *)(symbol + 4) & 0xffff | 0x40000;
-      goto LAB_00074014;
+      goto checkIsScalarSource;
     }
     if (dataType == 0x87c0) {
       registerWord = *(uint *)(symbol + 0x10) & 0xffff | 0x40000;
-      goto LAB_00074014;
+      goto checkIsScalarSource;
     }
     if (dataType != 0x87be) {
       return 0;
@@ -4446,7 +4446,7 @@ int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarS
   finalSwizzle = (undefined *)
             ((symbolWord & 7) << 0xc |
             (symbolWord & 7) << 8 | (symbolWord & 7) << 4 | symbolWord & 7 | (uint)swizzleWord & 0xffff8888);
-LAB_00074014:
+checkIsScalarSource:
   if ((isScalarSource == 0) && (finalSwizzle == ((unsigned char *)0x00003210))) {
     if (*(char *)(operand + 6) == '\0') {
       tokenIndex = *instructionArray;
@@ -4961,10 +4961,10 @@ int evsEmitOp879d(compiler, tokenStream, compileState, op)
   if (extvsOperandDataTypeResult != 0x87be) {
     srcWord1 = laneIndex + srcWord1;
     evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,&srcWord0,1,0);
-    goto LAB_00075028;
+    goto checkEvsEncodeSourceResult;
   }
   if (laneIndex == 1) {
-LAB_00074fd4:
+loopSetSelectWord0:
     selectWord0 = laneIndex;
     selectWord1 = laneIndex;
     selectWord2 = laneIndex;
@@ -4976,9 +4976,9 @@ LAB_00074fd4:
     selectWord1 = 0;
     selectWord2 = 0;
   }
-  else if ((laneIndex == 2) || (laneIndex == 3)) goto LAB_00074fd4;
+  else if ((laneIndex == 2) || (laneIndex == 3)) goto loopSetSelectWord0;
   evsEncodeSourceResult = ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,&srcWord0,1,&selectWord0);
-LAB_00075028:
+checkEvsEncodeSourceResult:
   if (evsEncodeSourceResult == 0) {
     return 0xffffffff;
   }
@@ -5068,15 +5068,15 @@ int evsEmitOp879c(compiler, tokenStream, compileState, op)
       dstWord0 = 0;
       dstWord1 = 0;
       dstWord2 = 0;
-      goto LAB_00075258;
+      goto callEvsEncodeSource;
     }
-    if ((laneIndex != 2) && (laneIndex != 3)) goto LAB_00075258;
+    if ((laneIndex != 2) && (laneIndex != 3)) goto callEvsEncodeSource;
   }
   dstWord0 = laneIndex;
   dstWord1 = laneIndex;
   dstWord2 = laneIndex;
   dstWord3 = laneIndex;
-LAB_00075258:
+callEvsEncodeSource:
   ((int (*)())evsEncodeSource)(compiler,tokenCountPtr,compileState,op + 0x20,1,&dstWord0);
   return 1;
 }

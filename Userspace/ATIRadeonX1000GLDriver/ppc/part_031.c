@@ -264,7 +264,7 @@ int IRInst__canFoldConstantCompare(inst, pass)
         sourceOpcode = IRInst__getOperandRecord(inst,1);
         selectedLane = (uint)*(byte *)(laneNumber + sourceOpcode + 0x10);
         if (((selectedLane != 4) && (sourceOpcode = IRInst__getOperandRecord(sourceInst,0), *(char *)(laneNumber + sourceOpcode + 0x10) == '\x01')
-            ) && (selectedLane != laneNumber)) goto LAB_0010c648;
+            ) && (selectedLane != laneNumber)) goto setCanFold;
         moreLanes = laneNumber != 3;
         laneNumber = laneNumber + 1;
       } while (moreLanes);
@@ -275,7 +275,7 @@ int IRInst__canFoldConstantCompare(inst, pass)
     canFold = 1;
   }
   else {
-LAB_0010c648:
+setCanFold:
     canFold = 0;
   }
   return canFold;
@@ -616,13 +616,13 @@ int IRInst__foldCompareResultIntoCopy(inst, pass)
           if (recordLaneByte != 4) {
             sourceDef2 = IRInst__getOperandSource(inst,operandNumber);
             fallbackSourceValue = *(undefined4 *)(recordLaneByte * 0x18 + sourceDef2 + 0x20);
-            goto LAB_0010ce20;
+            goto setCopyListCursor;
           }
           operandNumber = operandNumber + 1;
         } while (operandNumber <= *(int *)(inst + 0x84));
       }
       fallbackSourceValue = 0;
-LAB_0010ce20:
+setCopyListCursor:
       copyListCursor = copyInsts;
       for (operandNumberB = 1; operandCountLimit = (**(code **)(*operandVReg + 0x14))(operandVReg), operandNumberB <= operandCountLimit;
           operandNumberB = operandNumberB + 1) {
@@ -1923,10 +1923,10 @@ int PsBackend__bindExportRegisters(hwState, program, unusedArg3, unusedArg4, unu
     colorExportCount = 0;
     do {
       nextInstAdvance = nextInstLink;
-      if ((exportInst[5] & 1U) == 0) goto LAB_0010ebe4;
+      if ((exportInst[5] & 1U) == 0) goto setNextInstLink;
       instQuery68 = (**(code **)(*exportInst + 0x68))(exportInst);
       if (instQuery68 == 0) {
-LAB_0010ebe0:
+loopSetNextInstAdvance:
         nextInstAdvance = (int *)exportInst[2];
       }
       else {
@@ -1936,13 +1936,13 @@ LAB_0010ebe0:
           *(undefined4 *)(hwState + 0x17c8) = 1;
         }
         exportKind = exportInst[0x4f];
-        if (exportKind == 6) goto LAB_0010ebe0;
+        if (exportKind == 6) goto loopSetNextInstAdvance;
         if (exportKind == 0x18) {
           nextInstAdvance = (int *)exportInst[2];
           depthExport = exportInst;
         }
         else {
-          if (exportKind == 7) goto LAB_0010ebe0;
+          if (exportKind == 7) goto loopSetNextInstAdvance;
           if (exportKind - 0x16U < 2) {
             colorExports[colorExportCount] = (int)exportInst;
             colorExportCount = colorExportCount + 1;
@@ -1955,7 +1955,7 @@ LAB_0010ebe0:
           }
         }
       }
-LAB_0010ebe4:
+setNextInstLink:
       nextInstLink = (int *)nextInstAdvance[2];
       exportInst = nextInstAdvance;
     } while ((int *)nextInstAdvance[2] != (int *)0x0);
@@ -2158,7 +2158,7 @@ int PsBackend__assignInterpolatorRegisters(psBackend, program, unusedArg3, unuse
   if (*(int *)(program + 0x3e4) != 0) {
     inst = *(int **)(entryBlock + 0x98);
     nextInstLink = (int *)inst[2];
-    if ((int *)inst[2] == (int *)0x0) goto LAB_0010f084;
+    if ((int *)inst[2] == (int *)0x0) goto checkInst;
     do {
       cursorInst = nextInstLink;
       if ((inst[5] & 1U) != 0) {
@@ -2186,7 +2186,7 @@ int PsBackend__assignInterpolatorRegisters(psBackend, program, unusedArg3, unuse
     } while ((int *)cursorInst[2] != (int *)0x0);
   }
   inst = *(int **)(entryBlock + 0x98);
-LAB_0010f084:
+checkInst:
   if ((int *)inst[2] != (int *)0x0) {
     nextInstLink = (int *)inst[2];
     nextFreeRegister = 0;
@@ -2204,12 +2204,12 @@ LAB_0010f084:
               if ((regLimitOrScratch != 0) && (regLimitOrScratch = RegAlloc__testBit42c(program,nextFreeRegister), regLimitOrScratch != 0)) {
                 savedNextFreeRegister = nextFreeRegister + 1;
                 assignedRegister = nextFreeRegister;
-                goto LAB_0010f168;
+                goto callProgram_markHwRegUsed;
               }
             }
             assignedRegister = 0xffffffff;
             savedNextFreeRegister = nextFreeRegister;
-LAB_0010f168:
+callProgram_markHwRegUsed:
             Program__markHwRegUsed(program,assignedRegister);
             *(undefined4 *)(loadInst + 0x98) = 0;
             *(uint *)(loadInst + 0x94) = assignedRegister;

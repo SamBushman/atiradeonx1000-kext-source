@@ -150,7 +150,7 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
           status == 0)))) {
         scalarIn0 = (uint)*(byte *)((int)ctx + GLD_surfaceVolatile);
         _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0x10,&scalarIn0,1,0,0);
-LAB_00007320:
+loopSetOutCount:
         outCount = 4;
         returnCode = 0x2715;
         status = _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],5,0,0,&drawableWidth,&outCount);
@@ -216,9 +216,9 @@ LAB_00007320:
             return returnCode;
           }
         }
-        goto LAB_000077a0;
+        goto callGldDetachDrawable;
       }
-      goto LAB_00007790;
+      goto returnCode1;
     }
   }
   else {
@@ -237,7 +237,7 @@ LAB_00007320:
       if (*(int *)(PTR_DAT_001e88ac + status + 0x18) == 0) {
         status = _IOServiceOpen(*(undefined4 *)(*(int *)(PTR_DAT_001e88ac + 8) + status),
                                *(undefined4 *)PTR_001e88b4,0,PTR_DAT_001e88ac + status + 0x18);
-        if (status != 0) goto LAB_00007780;
+        if (status != 0) goto returnCode2;
         rendererIndex = *ctx;
       }
       library = PTR_DAT_001e88ac;
@@ -254,11 +254,11 @@ LAB_00007320:
         scalarIn2 = ctxFlags;
         scalarIn3 = ctxFlags;
         status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
-        if (status == 0) goto LAB_00007320;
+        if (status == 0) goto loopSetOutCount;
       }
-LAB_00007790:
+returnCode1:
       returnCode = 0x2715;
-      goto LAB_000077a0;
+      goto callGldDetachDrawable;
     }
     if (drawableType != 0x35) {
       if (drawableType != 0) {
@@ -294,17 +294,17 @@ LAB_00007790:
           return 0;
         }
         returnCode = 0x271a;
-        goto LAB_000077a0;
+        goto callGldDetachDrawable;
       }
       if (drawable == (int *)0x0) {
         returnCode = 1;
-        goto LAB_000077a0;
+        goto callGldDetachDrawable;
       }
     }
   }
-LAB_00007780:
+returnCode2:
   returnCode = 0x2715;
-LAB_000077a0:
+callGldDetachDrawable:
   ((int (*)())gld_detachDrawable)(ctx);
   scalarIn1 = 0;
   scalarIn0 = 0;
@@ -363,7 +363,7 @@ int _gldCreateFence(ctx, fenceOut)
       if (bitmapWord != 0xffffffff) {
         wordIndex = 0;
         wordByteOffset = 0;
-LAB_00007950:
+loopSetBitsLeft:
         bitsLeft = 0x20;
         scanCounter = 0;
         break;
@@ -377,7 +377,7 @@ LAB_00007950:
         if (scanCounter == 0) break;
         bitmapWord = *bitmapCursor;
         wordByteOffset = wordIndex * 4;
-        if (bitmapWord != 0xffffffff) goto LAB_00007950;
+        if (bitmapWord != 0xffffffff) goto loopSetBitsLeft;
       }
     }
     wordByteOffset = _IOConnectMapMemory(*(undefined4 *)(ctx + GLD_connect),4,*(undefined4 *)taskPtr,ctx + GLD_statusRegion
@@ -398,10 +398,10 @@ LAB_00007950:
     scanCounter = freeBitIndex;
     if (bitsLeft == 0) break;
     freeBitIndex = scanCounter;
-    if ((bitmapWord >> (scanCounter & 0x3f) & 1) == 0) goto LAB_0000797c;
+    if ((bitmapWord >> (scanCounter & 0x3f) & 1) == 0) goto setWordIndex;
   }
   scanCounter = 0x20;
-LAB_0000797c:
+setWordIndex:
   wordIndex = freeBitIndex + wordIndex * 0x20;
   *(uint *)((int)bitmap + wordByteOffset) = 1 << (scanCounter & 0x3f) | *(uint *)((int)bitmap + wordByteOffset);
   *fence = wordIndex;
@@ -607,16 +607,16 @@ int gld_bindCurrentFramebuffer(ctx, dispatch, dirtyBits, scratchR6, scratchR7, s
   noNewFramebuffer = newFramebuffer == (int *)0x0;
   if ((!noNewFramebuffer) && (*(int *)(*newFramebuffer + 0xa0) == 0)) {
     if (*(int *)(newFramebuffer[1] + 0x18) == 0) {
-      if (*(int *)(newFramebuffer[1] + 0x1c) == 0) goto LAB_00007e28;
+      if (*(int *)(newFramebuffer[1] + 0x1c) == 0) goto storeCtx;
     }
     else {
       validateResult = gld_validateFramebuffer(ctx,newFramebuffer,dirtyBits,scratchR6,scratchR7,scratchR8);
-      if (validateResult != 0) goto LAB_00007e28;
+      if (validateResult != 0) goto storeCtx;
     }
   }
   newFramebuffer = (int *)0x0;
   noNewFramebuffer = true;
-LAB_00007e28:
+storeCtx:
   *(int **)(ctx + 0x150) = newFramebuffer;
   if (!noNewFramebuffer) {
     attachmentsLeft = 6;
@@ -907,7 +907,7 @@ int _gldChoosePixelFormat(formatListOut, attribList)
           newList = formatList;
           if (serviceOrNewRows != 0) {
             if (depthSize == 0) {
-LAB_00008798:
+loopSetGreenSize:
               greenSize = depthSize + 1;
               redSize = 1 << (depthSize & 0x3f);
               if (greenSize < accumAlphaSize) {
@@ -1000,7 +1000,7 @@ LAB_00008798:
               do {
                 copyIndex = copyIndex + 1;
                 redSize = redSize - 1;
-                if (redSize == 0) goto LAB_00008798;
+                if (redSize == 0) goto loopSetGreenSize;
               } while (rendererListCursor[copyIndex] != serviceOrNewRows);
             }
           }
@@ -1284,12 +1284,12 @@ int _gldGetRendererInfo(rendererInfo, rendererMask, unused3, unused4, unused5, u
         offsetOrService = offsetOrService + -1;
         if (offsetOrService == 0) {
           offsetOrService = listCount << 2;
-          goto LAB_00008ad4;
+          goto setServiceList;
         }
       } while ((rendererMask & 1 << (bitOrId & 0x3f)) == 0);
       offsetOrService = bitOrId * 4;
     }
-LAB_00008ad4:
+setServiceList:
     serviceList = *(int **)(PTR_DAT_001e88ac + 8);
     offsetOrService = *(int *)((int)serviceList + offsetOrService);
     if ((listCount == 0) || (offsetOrService == *serviceList)) {
@@ -1817,12 +1817,12 @@ int gld_resolveProgramSlots(ctx)
     if (programObject == (int *)0x0) {
       if (((unsigned char *)0x00004304)[programIndex * 8 + *(int *)(ctx + 0x10)] != '\0') {
         programObject = *(int **)(engineObjectSlot + 0x18c);
-        goto LAB_00009640;
+        goto checkProgramObject;
       }
       *(undefined4 *)(programSlotPtr + 0x1cc) = 0;
     }
     else {
-LAB_00009640:
+checkProgramObject:
       if ((*(int *)(*programObject + 4) == 0) || (engineObjectSlot = gld_bindProgramObject(ctx,programObject), engineObjectSlot == 0)) {
         *(undefined4 *)(programSlotPtr + 0x1cc) = 0;
       }
@@ -2407,7 +2407,7 @@ int _gldCreateQuery(ctx, queryOut)
       if (bitmapWord != 0xffffffff) {
         wordIndex = 0;
         wordByteOffset = 0;
-LAB_0000a030:
+loopSetBitsLeft:
         bitsLeft = 0x20;
         scanCounter = 0;
         break;
@@ -2421,11 +2421,11 @@ LAB_0000a030:
         if (scanCounter == 0) break;
         bitmapWord = *bitmapCursor;
         wordByteOffset = wordIndex * 4;
-        if (bitmapWord != 0xffffffff) goto LAB_0000a030;
+        if (bitmapWord != 0xffffffff) goto loopSetBitsLeft;
       }
     }
     if ((*(int *)(ctx + GLD_queryRecord) == 0) && (wordByteOffset = ((int (*)())gldAllocQueryRecord)(ctx), wordByteOffset == 0x2720)) {
-LAB_0000a010:
+loopCallFree:
       _free(query);
       *queryOut = 0;
       return 0x2720;
@@ -2446,11 +2446,11 @@ LAB_0000a010:
       *(int *)(ctx + GLD_queryPoolBytes) = wordByteOffset;
       wordByteOffset = _realloc(*(undefined4 *)(ctx + GLD_queryPool),wordByteOffset);
       *(int *)(ctx + GLD_queryPool) = wordByteOffset;
-      if (wordByteOffset == 0) goto LAB_0000a010;
+      if (wordByteOffset == 0) goto loopCallFree;
     }
     wordByteOffset = ((int (*)())gld_setQueryAgpRefBacking)(ctx,*(undefined4 *)(ctx + GLD_queryRecord),*(undefined4 *)(ctx + GLD_queryPool),
                          *(undefined4 *)(ctx + GLD_queryPool),*(undefined4 *)(ctx + GLD_queryPoolBytes));
-    if (wordByteOffset != 1) goto LAB_0000a010;
+    if (wordByteOffset != 1) goto loopCallFree;
     noop_2b3b0(ctx);
     bitmapWord = *(uint *)(ctx + GLD_queryCapacity);
     scanCounter = bitmapWord >> 3;
@@ -2472,10 +2472,10 @@ LAB_0000a010:
     scanCounter = freeBitIndex;
     if (bitsLeft == 0) break;
     freeBitIndex = scanCounter;
-    if ((bitmapWord >> (scanCounter & 0x3f) & 1) == 0) goto LAB_0000a05c;
+    if ((bitmapWord >> (scanCounter & 0x3f) & 1) == 0) goto storeBitmap;
   }
   scanCounter = 0x20;
-LAB_0000a05c:
+storeBitmap:
   *(uint *)((int)bitmap + wordByteOffset) = 1 << (scanCounter & 0x3f) | *(uint *)((int)bitmap + wordByteOffset);
   *queryOut = query;
   *query = freeBitIndex + wordIndex * 0x20;

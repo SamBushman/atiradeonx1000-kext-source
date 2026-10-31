@@ -46,9 +46,9 @@ int gld_buildActiveUnitList(glContext)
         unitShadowCursor = unitShadowCursor + 4;
         unitsLeft = unitsLeft - 1;
       } while (unitsLeft != 0);
-LAB_000a7de8:
+loopSetActiveUnitCount:
       activeUnitCount = activeUnitCount << 4;
-      goto LAB_000a7df4;
+      goto storeGlContext;
     }
   }
   else {
@@ -76,11 +76,11 @@ LAB_000a7de8:
         if (unitsLeftMasked == 0) break;
         ctx44Word = *(uint *)(glContext + 0x44);
       }
-      goto LAB_000a7de8;
+      goto loopSetActiveUnitCount;
     }
   }
   activeUnitCount = 0;
-LAB_000a7df4:
+storeGlContext:
   *(int *)(glContext + 0x1804) = baseCost + activeUnitCount;
   return;
 }
@@ -226,7 +226,7 @@ int gld_updateTextureUnitState(ctx, unitMask)
             *(uint *)(ctx + 0x1a48) = *(uint *)(ctx + 0x1a48) | 0x10000000;
           }
           if ((loopIndex < 8) && (samplerModeBits != 0)) {
-            if ((*(uint *)(ctx + 0x284) & 0x20000) != 0) goto LAB_000a81e0;
+            if ((*(uint *)(ctx + 0x284) & 0x20000) != 0) goto checkCtx;
             if (((int)(uint)*(byte *)(ctx + 0x260) >> (loopIndex & 0x3f) & 1U) == 0) {
               *(undefined1 *)(ctx + 0x269) = 1;
               *(byte *)(ctx + 0x260) = *(byte *)(ctx + 0x260) | unitBit8;
@@ -239,7 +239,7 @@ int gld_updateTextureUnitState(ctx, unitMask)
             *(uint *)(unitRegBase12 + 0x285c) = (uint)*(ushort *)(boundTexture + 0xd2);
           }
           else {
-LAB_000a81e0:
+checkCtx:
             if (((int)(uint)*(byte *)(ctx + 0x260) >> (loopIndex & 0x3f) & 1U) != 0) {
               *(undefined1 *)(ctx + 0x269) = 1;
               *(byte *)(ctx + 0x260) = *(byte *)(ctx + 0x260) & ~unitBit8;
@@ -614,14 +614,14 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
           do {
             loopIndex = loopIndex + 1;
             unitsLeft = unitsLeft + -1;
-            if (unitsLeft == 0) goto LAB_000a89c0;
+            if (unitsLeft == 0) goto storeGlContext;
           } while ((dirtyBitsWord8 & 0x10 << (loopIndex & 0x3f)) == 0);
         }
         ctxWord40 = ctxWord40 | 0x10000;
         *(uint *)(glContext + 0x40) = ctxWord40;
       }
     }
-LAB_000a89c0:
+storeGlContext:
     *(uint *)(glContext + 0x40) = ctxWord40 | 0x30000;
     *(undefined1 *)(glContext + 0x29) = 1;
     *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x80;
@@ -751,12 +751,12 @@ int gld_updateProgramFlags(glContext, engineCaps, dirtyBitsArg, scratchR6, dirty
     if (glContextPtr4 == 0) {
       glContextPtr4 = *(int *)(glContext + 4);
       programFlag = 1;
-      goto LAB_000a8cb4;
+      goto setGlContextWord1928;
     }
     glContextPtr4 = *(int *)(glContext + 4);
   }
   programFlag = 0;
-LAB_000a8cb4:
+setGlContextWord1928:
   glContextWord1928 = *(uint *)(glContext + 0x1928);
   flagChange = glContextWord1928 >> 4 & 1 ^ programFlag;
   *(uint *)(glContext + 0x1928) = glContextWord1928 & 0xffffffef | flagChange | programFlag << 4;
@@ -821,17 +821,17 @@ int gld_updateLightingFlags(glContext, engineCaps, dirtyMask)
   if ((dirtyMask & 0x1000) == 0) {
     ctx44Word = *(uint *)(glContext + 0x44);
     capsFlag2e0b = (uint)(byte)((unsigned char *)0x00002e0b)[engineCaps];
-    goto LAB_000a8ee8;
+    goto checkCtx44Word;
   }
   if (((unsigned char *)0x00002e0a)[engineCaps] == '\0') {
     glContextWord44 = *(uint *)(glContext + 0x44);
-LAB_000a8e54:
+loopSetBit24Value:
     bit24Value = 0;
   }
   else {
     glContextWord44 = *(uint *)(glContext + 0x44);
     bit24Value = 1;
-    if ((glContextWord44 & 0x2000) != 0) goto LAB_000a8e54;
+    if ((glContextWord44 & 0x2000) != 0) goto loopSetBit24Value;
   }
   glContextWord38 = *(uint *)(glContext + 0x38);
   ctx44Word = bit24Value << 0x18 | glContextWord44 & 0xfeffffff;
@@ -846,7 +846,7 @@ LAB_000a8e54:
     *(uint *)(glContext + 0x38) = glContextWord38 | 0x120;
     capsFlag2e0b = (uint)(byte)((unsigned char *)0x00002e0b)[engineCaps];
   }
-LAB_000a8ee8:
+checkCtx44Word:
   if ((ctx44Word >> 0x17 & 1) != capsFlag2e0b) {
     glContextWord38_2 = *(uint *)(glContext + 0x38);
     *(uint *)(glContext + 0x44) = (capsFlag2e0b & 1) << 0x17 | ctx44Word & 0xff7fffff;
@@ -1271,11 +1271,11 @@ double gld_updatePointState(int glContext,int pointState,double fpPassThrough1,d
   if ((*(int *)(glContext + 0xe4) < 2) && ((pointStateWord & 1) == 0)) {
     needsScaleRecompute = false;
     needsDerivedScale = 0;
-    if (*(int *)(glContext + 0xec) == 0) goto LAB_000a99e8;
+    if (*(int *)(glContext + 0xec) == 0) goto storeGlContext;
   }
   needsScaleRecompute = true;
   needsDerivedScale = 1;
-LAB_000a99e8:
+storeGlContext:
   *(undefined4 *)(glContext + 0x1940) = needsDerivedScale;
   if (needsScaleRecompute) {
     scaledWidth = *(float *)(*(int *)(glContext + 4) + 0x2a54);
@@ -1502,7 +1502,7 @@ void gld_validateDirtyState(char *glContext,uint *dirtyBits,char *dirtyBitsArg,u
   if (*(int *)(glContextPtr4_2 + 0x1cc) == 0) {
     *(undefined4 *)(glContextPtr4_2 + 0x26c4) = 0;
     *(undefined4 *)(glContextPtr4_2 + 0x26c0) = 0;
-    if (dirtyBitsWord8 == (char *)0x0 && dirtyBitsWord3 == 0) goto LAB_000aaa50;
+    if (dirtyBitsWord8 == (char *)0x0 && dirtyBitsWord3 == 0) goto setDirtyBitsWord4;
     dirtyBits0x4400000 = dirtyBitsWord3 & 0x4400000;
     if (dirtyBits0x4400000 != 0) {
       glContextWordNeg74 = *(int *)(glContext + -0x74);
@@ -1512,8 +1512,8 @@ void gld_validateDirtyState(char *glContext,uint *dirtyBits,char *dirtyBitsArg,u
       if (glContextWordNeg74 - adjustedCount == ((uint)dirtyWord1 >> 0x14 & 1)) {
         if (((glContextWordNeg74 != adjustedCount) ||
             ((uint)dirtyWord1 >> 0x1f == (uint)(byte)((unsigned char *)0x00002d48)[engineState + 2])) ||
-           (((unsigned char *)0x00004304)[engineState] != '\0')) goto LAB_000a9de4;
-LAB_000a9c74:
+           (((unsigned char *)0x00004304)[engineState] != '\0')) goto setDirtyBits0x7000000;
+loopSetStateBit23:
         stateBit23 = *(uint *)(glContext + 0x1874) >> 0x17 & 1;
         *(uint *)(glContext + 0x1928) =
              *(uint *)(glContext + 0x1928) & 0xfffffffd |
@@ -1544,7 +1544,7 @@ LAB_000a9c74:
         fpPassThrough1 = f1AfterCall;
       }
       else {
-        if (glContextWordNeg74 == adjustedCount) goto LAB_000a9c74;
+        if (glContextWordNeg74 == adjustedCount) goto loopSetStateBit23;
         dirtyWord38Set = *(uint *)(glContext + 0x38);
         dirtyWord1 = (char *)((uint)dirtyWord1 | 0x180000);
         *(char **)(glContext + 0x44) = dirtyWord1;
@@ -1578,7 +1578,7 @@ LAB_000a9c74:
       glContext[0x29] = '\x01';
       glContext[0x2d] = glContext[0x2d] | 0xf;
     }
-LAB_000a9de4:
+setDirtyBits0x7000000:
     dirtyBits0x7000000 = dirtyBitsWord3 & 0x7000000;
     if (dirtyBits0x7000000 != 0) {
       glContext[0x29] = '\x01';
@@ -1671,7 +1671,7 @@ LAB_000a9de4:
       glContextPtr4 = *(int *)(glContext + 4);
       if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4 + 0x10)] == '\0') ||
          ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) {
-LAB_000a9ffc:
+loopSetZeroFlagA:
         zeroFlagA = 0;
       }
       else {
@@ -1681,7 +1681,7 @@ LAB_000a9ffc:
         fpPassThrough1 = f1AfterCall2;
         if (glContextPtr4 != 0) {
           glContextPtr4 = *(int *)(glContext + 4);
-          goto LAB_000a9ffc;
+          goto loopSetZeroFlagA;
         }
         glContextPtr4 = *(int *)(glContext + 4);
         zeroFlagA = 1;
@@ -1803,12 +1803,12 @@ LAB_000a9ffc:
           } while (dirtyLightMask != 0);
           dirtyNegative = (int)dirtyBitsWord8 < 0;
           dirtyBitsArg = (char *)0x0;
-          if (dirtyBitsWord8 == (char *)0x0) goto LAB_000aa35c;
+          if (dirtyBitsWord8 == (char *)0x0) goto checkDirtyBitsWord8;
         }
         dirtyBitsArg = (char *)0x0;
         *(undefined1 *)(glContextPtr4_2 + 0x26b5) = 1;
       }
-LAB_000aa35c:
+checkDirtyBitsWord8:
       if ((((uint)dirtyBitsWord8 & 0x40000000) != 0) && (((unsigned char *)0x00002d48)[engineState + 2] != '\0')) {
         glContext[0x29] = '\x01';
         dirtyWord4 = *(uint *)(glContext + 0x38) | 0x20;
@@ -2067,7 +2067,7 @@ LAB_000aa35c:
         glContext[0x29] = '\x01';
       }
     }
-LAB_000aaa50:
+setDirtyBitsWord4:
     dirtyBitsWord4 = dirtyBits[1];
     dirtyBitsWord10 = dirtyBits[4];
     if (dirtyBitsWord10 != 0 || (dirtyBitsWord4 & 0xff0000) != 0) {
@@ -2297,8 +2297,8 @@ LAB_000aaa50:
       noVertexProgramMask = -(uint)(*(int *)(glContext + -0x74) == 0);
       if (noVertexProgramMask + 1U == (engineWord3e28 >> 0x14 & 1)) {
         if (((noVertexProgramMask != -1) || (engineWord3e28 >> 0x1f == (uint)(byte)((unsigned char *)0x00002d48)[engineState + 2])) ||
-           (((unsigned char *)0x00004304)[engineState] != '\0')) goto LAB_000ab18c;
-LAB_000ab014:
+           (((unsigned char *)0x00004304)[engineState] != '\0')) goto setDirtyBitsArg;
+loopSetStateBit23B:
         stateBit23B = *(uint *)(glContext + 0x1874) >> 0x17 & 1;
         *(uint *)(glContext + 0x1928) =
              *(uint *)(glContext + 0x1928) & 0xfffffffd | *(uint *)(glContext + 0x1928) >> 1 & 1 ^ stateBit23B
@@ -2327,7 +2327,7 @@ LAB_000ab014:
              (short)(1 << (glContextByte13b6 & 0x3f)) - 1U | *(ushort *)(glContext + 0x34);
       }
       else {
-        if (noVertexProgramMask == -1) goto LAB_000ab014;
+        if (noVertexProgramMask == -1) goto loopSetStateBit23B;
         dirtyWord38SetB = *(uint *)(glContext + 0x38);
         engineWord3e28 = engineWord3e28 | 0x180000;
         *(uint *)(glContext + 0x44) = engineWord3e28;
@@ -2361,12 +2361,12 @@ LAB_000ab014:
       glContext[0x29] = '\x01';
       glContext[0x2d] = glContext[0x2d] | 0xf;
     }
-LAB_000ab18c:
+setDirtyBitsArg:
     dirtyBitsArg = (char *)0x0;
     fpPassThrough1 = (double)gld_updateProgramConstantsForDirtyBits(glContextPtr4_2,dirtyBits,0);
     staleR4Chain = r4AfterCall17;
   }
-  if ((dirtyBitsWord3 & 0x7000000) == 0) goto LAB_000ab460;
+  if ((dirtyBitsWord3 & 0x7000000) == 0) goto checkDirtyKeepSelected;
   glContext[0x29] = '\x01';
   stateByte2eNewB = glContext[0x2e] | 2;
   if ((dirtyBitsWord3 & 0x5000000) != 0) {
@@ -2453,7 +2453,7 @@ LAB_000ab18c:
   glContextPtr4 = *(int *)(glContext + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4 + 0x10)] == '\0') ||
      ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) {
-LAB_000ab3d0:
+loopSetZeroFlagB:
     zeroFlagB = 0;
   }
   else {
@@ -2462,7 +2462,7 @@ LAB_000ab3d0:
     fpPassThrough1 = f1AfterCall3;
     if (glContextPtr4 != 0) {
       glContextPtr4 = *(int *)(glContext + 4);
-      goto LAB_000ab3d0;
+      goto loopSetZeroFlagB;
     }
     glContextPtr4 = *(int *)(glContext + 4);
     zeroFlagB = 1;
@@ -2479,7 +2479,7 @@ LAB_000ab3d0:
   *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x2000;
   *(uint *)(glContext + 0x1928) =
        glContextWord1928 & 0xffffffe7 | flagChangeB | zeroFlagB << 4 | (glContextWord1928 & 8) >> 3 ^ oneFlag | oneFlag << 3;
-LAB_000ab460:
+checkDirtyKeepSelected:
   if (dirtyKeepSelected != (char *)0x0) {
     if (((uint)dirtyKeepSelected & 1) != 0) {
       sampleCountAB = *(byte *)(glContextPtr4_2 + 0x2a5c);
@@ -3143,7 +3143,7 @@ switchD_000ac280_caseD_4:
         a12Ptr74 = *(int *)(a12 + 0x74);
         operandRegCount = ((uint)GH_F2U(operandScratch0) & 0xffff) + 1;
         if (*(int *)(a12Ptr74 + 0x84) < operandRegCount) {
-LAB_000ac4f8:
+loopStoreA12Ptr74:
           *(int *)(a12Ptr74 + 0x84) = operandRegCount;
         }
       }
@@ -3183,7 +3183,7 @@ LAB_000ac4f8:
       if (((uint)GH_F2U(operandScratch1) >> 0x10 & 0x3f) - 1 < 2) {
         a12Ptr74 = *(int *)(a12 + 0x74);
         operandRegCount = ((uint)GH_F2U(operandScratch1) & 0xffff) + 1;
-        if (*(int *)(a12Ptr74 + 0x84) < operandRegCount) goto LAB_000ac4f8;
+        if (*(int *)(a12Ptr74 + 0x84) < operandRegCount) goto loopStoreA12Ptr74;
       }
     }
   }
@@ -3392,7 +3392,7 @@ int gld_emitFormatConvertTokens(glContext, a1Ptr74, wordVector, formatCode, form
   case 0x39:
   case 0x3c:
     loopIndex = 1;
-    goto LAB_000ad33c;
+    goto storeSwizzleTokens2;
   case 1:
   case 4:
   case 5:
@@ -3420,7 +3420,7 @@ int gld_emitFormatConvertTokens(glContext, a1Ptr74, wordVector, formatCode, form
   case 0x3b:
   case 0x40:
     loopIndex = 1;
-    goto LAB_000ace5c;
+    goto storeSwizzleTokens;
   case 2:
   case 0xe:
   case 0xf:
@@ -3666,7 +3666,7 @@ int gld_emitFormatConvertTokens(glContext, a1Ptr74, wordVector, formatCode, form
                     (swizzleTokens[2] & 0xfffffff7 ^ 0x80) & 0x80 |
                     (swizzleTokens[2] ^ 8) & 8 | swizzleTokens[2] & 0xffff7777;
     }
-LAB_000ace5c:
+storeSwizzleTokens:
     swizzleTokens[6] = src1Swizzle0;
     swizzleTokens[5] = src1Swizzle1;
     swizzleTokens[4] = src1Swizzle2;
@@ -3905,7 +3905,7 @@ LAB_000ace5c:
                     (swizzleTokens[1] & 0xfffffff7 ^ 0x80) & 0x80 |
                     (swizzleTokens[1] ^ 8) & 8 | swizzleTokens[1] & 0xffff7777;
     }
-LAB_000ad33c:
+storeSwizzleTokens2:
     swizzleTokens[6] = src0Swizzle0;
     swizzleTokens[5] = src0Swizzle1;
     swizzleTokens[4] = src0Swizzle2;
@@ -4551,7 +4551,7 @@ LAB_000ad33c:
   case 3:
   case 0x24:
     staleArgR8 = 0x12;
-    goto LAB_000ae47c;
+    goto setWordVectorWord0_2;
   case 4:
   case 0x25:
     staleArgR8 = 0x22;
@@ -4639,7 +4639,7 @@ LAB_000ad33c:
   case 0x19:
   case 0x39:
     staleArgR8 = 0x58;
-LAB_000ae47c:
+setWordVectorWord0_2:
     wordVectorWord0_2 = *wordVector;
     if (wordVector[1] <= wordVectorWord0_2) {
       allocation5 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
@@ -5192,12 +5192,12 @@ int gld_emitInstructionTokens(glContext, a1Ptr74, wordVector, opcode, destOperan
     tokenCountA = *wordVector + 1;
     *wordVector = tokenCountA;
     operandToken0 = operandToken0 & 0xffc0ffff | 0x40000;
-LAB_000af474:
+loopSetSwizzleTokenCount:
     swizzleTokenCount = 1;
     opcodeToken = 0x5d;
     operandToken0 = operandToken0 | 0x400000;
     swizzleTokens[0] = swizzleTokens[0] & 0xff1fffff | 0x600000;
-    goto LAB_000afabc;
+    goto setOpcodeToken;
   }
   swizzleTokens[5] = swizzleSelect3;
   swizzleTokens[4] = swizzleSelect2;
@@ -5442,11 +5442,11 @@ LAB_000af474:
     tokenCountA = *wordVector;
     swizzleTokenCount = 1;
     opcodeToken = 0x37;
-    goto LAB_000afb10;
+    goto checkWordVector;
   default:
     tokenCountA = *wordVector;
     swizzleTokenCount = 0;
-    goto LAB_000afb10;
+    goto checkWordVector;
   case 0x1d:
   case 0x3d:
     tokenCountA = *wordVector;
@@ -5464,11 +5464,11 @@ LAB_000af474:
   case 0x1f:
   case 0x3f:
     tokenCountA = *wordVector;
-    goto LAB_000af474;
+    goto loopSetSwizzleTokenCount;
   }
-LAB_000afabc:
+setOpcodeToken:
   opcodeToken = (uint)(precisionMode - 6U < 3) << 0x1a | (modifierBits & 0x33ff) << 0x10 | opcodeToken;
-LAB_000afb10:
+checkWordVector:
   if (wordVector[1] <= tokenCountA) {
     allocation5 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
     if (wordVector[2] != 0) {
@@ -5691,7 +5691,7 @@ undefined4 gld_compileFragmentProgram(int glContext,int forceRecompile,undefined
     *(undefined4 *)(instanceSlotOffset + instanceTable) = newInstance;
   }
   else {
-    if ((forceRecompile != 1) && (programInstance[0x119] == '\0')) goto LAB_000b0028;
+    if ((forceRecompile != 1) && (programInstance[0x119] == '\0')) goto storeX000011d0;
     *(undefined4 *)(instanceSlotOffset + instanceTable) = 0;
     (**(code **)(((unsigned char *)0x00001224) + glContext))(glContext,programInstance);
     glContextPtr10 = *(code **)(glContext + 0x10);
@@ -5985,7 +5985,7 @@ undefined4 gld_compileFragmentProgram(int glContext,int forceRecompile,undefined
     }
     if (**(int **)(a1Ptr74_2 + 100) == 0x41) {
       tokenVecPtr = &wordCount;
-LAB_000b10a0:
+loopCheckWordCapacity:
       if (wordCapacity <= tokenCountCache) {
         allocation20 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
         if (wordData != 0) {
@@ -6086,8 +6086,8 @@ LAB_000b10a0:
         src1Word7Copy = src1Word7;
         src0Word6Mod = src0Word6;
         if (instOpcode < 0x20) {
-          if ((0x1c < instOpcode) || (instOpcode == 0xb)) goto LAB_000b0fbc;
-LAB_000b0e20:
+          if ((0x1c < instOpcode) || (instOpcode == 0xb)) goto callGldConvertDestOperand;
+loopCallGldConvertDestOperand:
           ((int (*)())gld_convertDestOperand)(dstWord1,dstWord2,staleArgR8,dstOperandOut,dstFlags,
                        (uint)*(byte *)(*(int *)(a1Ptr74_2 + 0x94) + loopIndex));
           src0Word6Mod = CONCAT13(src0ModifierByte,(*(unsigned int *)((unsigned char *)&(src0Word6Mod) + 1)));
@@ -6108,8 +6108,8 @@ LAB_000b0e20:
                        (uint)*(byte *)(loopIndex + *(int *)(a1Ptr74_2 + 0x94)));
         }
         else {
-          if (2 < instOpcode - 0x3d) goto LAB_000b0e20;
-LAB_000b0fbc:
+          if (2 < instOpcode - 0x3d) goto loopCallGldConvertDestOperand;
+callGldConvertDestOperand:
           ((int (*)())gld_convertDestOperand)(dstWord1,dstWord2,staleArgR8,src1OperandOut,dstFlags,0);
           src0Word6Mod = CONCAT13(src0ModifierByte,(*(unsigned int *)((unsigned char *)&(src0Word6Mod) + 1)));
           ((int (*)())gld_classifyOperand)(src0Word0,src0Word1,src0Word2,src0Word3,src0Word4,src0Word5,src0Word6Mod,
@@ -6125,7 +6125,7 @@ LAB_000b0fbc:
         loopIndex = loopIndex + 1;
       } while (*(int *)(*(int *)(a1Ptr74_2 + 100) + loopIndex5) != 0x41);
       tokenCountCache = wordCount;
-      if (anyDstWritten == 0) goto LAB_000b10a0;
+      if (anyDstWritten == 0) goto loopCheckWordCapacity;
     }
     if (wordCapacity <= wordCount) {
       allocation24 = (**(code **)(glContext + 0xc))(wordCapacity * 4 + 0x200);
@@ -6195,7 +6195,7 @@ LAB_000b1448:
     }
   }
   programInstance[0x119] = '\0';
-LAB_000b0028:
+storeX000011d0:
   ((unsigned char *)0x000011d0)[glContext] = 0;
   if (a1Ptr74_2[0x55] == '\0') {
     a1Ptr74 = *(int *)(boundProgram + 0x74);
@@ -6489,7 +6489,7 @@ int atifsEmitSourceOperand(ctx, tokenBuf, srcArg, reserved0, isColorOp, regWritt
   if ((argReg - 0x8921 < 6) && (*(char *)(argReg + regWritten + -0x8921) == '\0')) {
     argReg = 0;
     *srcArg = 0;
-LAB_000b1f80:
+loopSetSrcToken:
     srcToken = 0x410000;
     swizzleWord = ((unsigned char *)0x00004444);
   }
@@ -6500,7 +6500,7 @@ LAB_000b1f80:
         swizzleWord = ((unsigned char *)0x00005555);
       }
       else {
-        if (argReg == 0) goto LAB_000b1f80;
+        if (argReg == 0) goto loopSetSrcToken;
         if (argReg == 0x8577) {
           srcToken = 0x120000;
         }
@@ -6521,13 +6521,13 @@ LAB_000b1f80:
   argRep = srcArg[3];
   if (argRep == 0) {
     argMod = srcArg[2];
-    if (argMod == 0) goto LAB_000b2028;
+    if (argMod == 0) goto checkArgMod;
   }
   else {
     argMod = srcArg[2];
   }
   srcToken = srcToken | 0x400000;
-LAB_000b2028:
+checkArgMod:
   if ((argMod & 1) != 0) {
     swizzleWord = (undefined *)((uint)swizzleWord | 0x40000);
   }
@@ -6633,11 +6633,11 @@ int atifsEmitDestinationOperand(ctx, tokenBuf, dstArg, reserved0, hasWriteMask, 
       dstToken = dstToken | 0x400000;
       ilDstWord = ilDstWord & 0xffffffcf | 0x10;
     }
-    if ((dstMask & 8) == 0) goto LAB_000b2364;
+    if ((dstMask & 8) == 0) goto setDstModBits;
   }
   dstToken = dstToken | 0x400000;
   ilDstWord = ilDstWord | 0x40;
-LAB_000b2364:
+setDstModBits:
   dstModBits = dstArg[2];
   if (dstModBits != 0) {
     dstToken = dstToken | 0x400000;
@@ -6731,7 +6731,7 @@ int atifsEmitTextureOps(ctx, tokenBuf, fsState, pass, passCount, regWritten)
         swizzleMode = *(uint *)(textureOp + 4);
         swizzleWord = (undefined *)0x0;
         if (*(char *)(textureOp + 1) == '\0') {
-          if ((swizzleMode == 0x8976) && (loopIndex == *(int *)(textureOp + 8) - 0x8921U)) goto LAB_000b2c0c;
+          if ((swizzleMode == 0x8976) && (loopIndex == *(int *)(textureOp + 8) - 0x8921U)) goto setLoopIndex;
           tokenIndex = *tokenBuf;
           if (tokenBuf[1] <= tokenIndex) {
             newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
@@ -6866,7 +6866,7 @@ int atifsEmitTextureOps(ctx, tokenBuf, fsState, pass, passCount, regWritten)
         *tokenBuf = *tokenBuf + 1;
         regsPerPass = (uint)*(ushort *)(fsState + 0x14);
       }
-LAB_000b2c0c:
+setLoopIndex:
       loopIndex = loopIndex + 1;
     } while ((int)loopIndex < (int)regsPerPass);
     if (regsPerPass != 0) {
@@ -7033,9 +7033,9 @@ int atifsEmitInputDeclarations(ctx, tokenBuf, fsState, shaderDef)
   *tokenBuf = pushIndex;
   if (*(char *)(shaderDef + 0x6c) == '\0') {
     if ((*(uint *)(ctx + 0x44) & 0x80100000) == 0x80000000) {
-      if (*(short *)(((unsigned char *)0x00002d48) + rendererRec) != -0x7e06) goto LAB_000b3398;
+      if (*(short *)(((unsigned char *)0x00002d48) + rendererRec) != -0x7e06) goto setTextureUnitCount;
     }
-    else if ((*(uint *)(ctx + 0x44) & 0x800000) == 0) goto LAB_000b3398;
+    else if ((*(uint *)(ctx + 0x44) & 0x800000) == 0) goto setTextureUnitCount;
   }
   if (tokenBuf[1] <= pushIndex) {
     pushIndex = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
@@ -7063,7 +7063,7 @@ int atifsEmitInputDeclarations(ctx, tokenBuf, fsState, shaderDef)
   *(undefined4 *)(pushIndex * 4 + tokenBuf[2]) = 0x130000;
   pushIndex = *tokenBuf + 1;
   *tokenBuf = pushIndex;
-LAB_000b3398:
+setTextureUnitCount:
   textureUnitCount = (uint)(byte)((unsigned char *)0x000013b0)[ctx];
   if (textureUnitCount != 0) {
     loopIndex = 0;
@@ -7214,7 +7214,7 @@ int atifsCompileCurrentShader(ctx)
     else {
       compiledProgram[0x119] = 1;
     }
-    if (compiledProgram[0x119] == '\0') goto LAB_000b42ec;
+    if (compiledProgram[0x119] == '\0') goto setConstantIndex;
   }
   tokenData = 0;
   tokenCount = 0;
@@ -7287,7 +7287,7 @@ int atifsCompileCurrentShader(ctx)
         else {
           alphaOp = (int *)0x0;
         }
-        if ((colorOp == (int *)0x0) || (alphaOp == (int *)0x0)) goto LAB_000b3a90;
+        if ((colorOp == (int *)0x0) || (alphaOp == (int *)0x0)) goto checkColorOp;
         switch(*alphaOp) {
         case 0x8961:
           alphaSourceCount = 1;
@@ -7297,14 +7297,14 @@ int atifsCompileCurrentShader(ctx)
           break;
         case 0x8966:
         case 0x8967:
-          if (*alphaOp == *colorOp) goto LAB_000b3a90;
+          if (*alphaOp == *colorOp) goto checkColorOp;
         case 0x8963:
         case 0x8964:
         case 0x8965:
           alphaSourceCount = 2;
           break;
         case 0x896c:
-          if (*colorOp == 0x896c) goto LAB_000b3a90;
+          if (*colorOp == 0x896c) goto checkColorOp;
         case 0x8968:
         case 0x8969:
         case 0x896a:
@@ -7314,11 +7314,11 @@ int atifsCompileCurrentShader(ctx)
         savedColorDst = colorOp[1];
         if (((savedColorDst != alphaOp[5]) && ((savedColorDst != alphaOp[9] || (alphaSourceCount < 2)))) &&
            ((savedColorDst != alphaOp[0xd] || (alphaSourceCount < 3)))) {
-LAB_000b3a90:
+checkColorOp:
           if (colorOp != (int *)0x0) {
             redirectedToScratch = false;
             savedColorDst = 0;
-            goto LAB_000b3aa8;
+            goto setHaveAlphaOp;
           }
           redirectedToScratch = false;
           savedColorDst = 0;
@@ -7327,7 +7327,7 @@ LAB_000b3a90:
         savedColorDst = colorOp[1];
         redirectedToScratch = true;
         colorOp[1] = 6;
-LAB_000b3aa8:
+setHaveAlphaOp:
         haveAlphaOp = alphaOp != (int *)0x0;
         switch(*colorOp) {
         case 0x8961:
@@ -7359,30 +7359,30 @@ LAB_000b3aa8:
           break;
         case 0x8968:
           ilOpcode = 0x40;
-          goto LAB_000b3c70;
+          goto setIlOpcodeWord;
         case 0x8969:
           ilOpcode = 0x3f;
-LAB_000b3c70:
+setIlOpcodeWord:
           ilOpcodeWord = (uint)ilOpcode;
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,ilOpcodeWord);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,colorOp + 1,0,1,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 5,0,1,regWritten);
-LAB_000b3e14:
+loopCallAtifsEmitSourceOperand:
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 9,0,1,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 0xd,0,1,regWritten);
           goto switchD_000b3adc_caseD_8962;
         case 0x896a:
           ilCndOpcodeBase = 0x3000d;
           ilCndModeBit = 1;
-          goto LAB_000b3d3c;
+          goto callIlTokenBufPush;
         case 0x896b:
           ilCndOpcodeBase = 0x2000d;
           ilCndModeBit = 0;
-LAB_000b3d3c:
+callIlTokenBufPush:
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,ilCndModeBit << 0x16 | ilCndOpcodeBase);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,colorOp + 1,0,1,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 0xd,0,1,regWritten);
-          goto LAB_000b3bb4;
+          goto callAtifsEmitSourceOperand;
         case 0x896c:
           if ((haveAlphaOp) && (*alphaOp == 0x896c)) {
             colorOp[2] = colorOp[2] | 8;
@@ -7390,12 +7390,12 @@ LAB_000b3d3c:
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,0x21);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,colorOp + 1,0,1,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 5,0,1,regWritten);
-          goto LAB_000b3e14;
+          goto loopCallAtifsEmitSourceOperand;
         }
         ilOpcodeWord = (uint)ilOpcode;
         ((int (*)())ilTokenBufPush)(ctx,&tokenCount,ilOpcodeWord);
         ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,colorOp + 1,0,1,regWritten);
-LAB_000b3bb4:
+callAtifsEmitSourceOperand:
         ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 5,0,1,regWritten);
         ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 9,0,1,regWritten);
 switchD_000b3adc_caseD_8962:
@@ -7408,26 +7408,26 @@ switchD_000b3adc_caseD_8962:
           break;
         case 0x8963:
           ilOpcode = 3;
-          goto LAB_000b3f1c;
+          goto setIlOpcodeWord2;
         case 0x8964:
           ilOpcode = 0x49;
-          goto LAB_000b3f1c;
+          goto setIlOpcodeWord2;
         case 0x8965:
           ilOpcode = 0x5b;
-LAB_000b3f1c:
+setIlOpcodeWord2:
           ilOpcodeWord = (uint)ilOpcode;
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,ilOpcodeWord);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,alphaOp + 1,0,0,regWritten);
-LAB_000b4120:
+loopCallAtifsEmitSourceOperand2:
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,alphaOp + 5,0,0,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,alphaOp + 9,0,0,regWritten);
           break;
         case 0x8968:
           ilOpcode = 0x40;
-          goto LAB_000b3f68;
+          goto setIlOpcodeWord3;
         case 0x8969:
           ilOpcode = 0x3f;
-LAB_000b3f68:
+setIlOpcodeWord3:
           ilOpcodeWord = (uint)ilOpcode;
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,ilOpcodeWord);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,alphaOp + 1,0,0,regWritten);
@@ -7439,12 +7439,12 @@ LAB_000b3f68:
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,0x43000d);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,alphaOp + 1,0,0,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,alphaOp + 0xd,0,0,regWritten);
-          goto LAB_000b4120;
+          goto loopCallAtifsEmitSourceOperand2;
         case 0x896b:
           ((int (*)())ilTokenBufPush)(ctx,&tokenCount,0x2000d);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,alphaOp + 1,0,0,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,alphaOp + 0xd,0,0,regWritten);
-          goto LAB_000b4120;
+          goto loopCallAtifsEmitSourceOperand2;
         }
 switchD_000b3e78_caseD_8962:
         if (redirectedToScratch) {
@@ -7456,13 +7456,13 @@ switchD_000b3e78_caseD_8962:
     } while (passCount != passIndex);
   }
   if ((*(uint *)(ctx + 0x44) & 0x80100000) == 0x80000000) {
-    if (*(short *)(((unsigned char *)0x00002d48) + rendererRec) == -0x7e06) goto LAB_000b420c;
-LAB_000b41b8:
+    if (*(short *)(((unsigned char *)0x00002d48) + rendererRec) == -0x7e06) goto callAtifsEmitAddSecondaryColor;
+loopStoreCompiledProgram:
     compiledProgram[0x118] = 0;
   }
   else {
-    if ((*(uint *)(ctx + 0x44) & 0x800000) == 0) goto LAB_000b41b8;
-LAB_000b420c:
+    if ((*(uint *)(ctx + 0x44) & 0x800000) == 0) goto loopStoreCompiledProgram;
+callAtifsEmitAddSecondaryColor:
     ((int (*)())atifsEmitAddSecondaryColor)(ctx,&tokenCount);
     compiledProgram[0x118] = 1;
   }
@@ -7491,7 +7491,7 @@ LAB_000b420c:
   compiledProgram[0x120] = 1;
   (**(code **)(((unsigned char *)0x00001288) + ctx))(ctx,0,compiledProgram,&tokenCount);
   compiledProgram[0x119] = 0;
-LAB_000b42ec:
+setConstantIndex:
   constantIndex = 0;
   constantOffset = 0;
   ((unsigned char *)0x00001136)[ctx] = 0;
@@ -8021,11 +8021,11 @@ int gld_decodeProgramInterface(glContext, programObj)
         }
         else if (cursor3Word0 < 3) {
           if (cursor3Word0 == 1) {
-LAB_000b4ee0:
+loopStoreLoopIndex2:
             *(uint *)(loopIndex2 * 4 + *(int *)(programObj + 0x74) + 0x14) = cursor3Word0;
           }
         }
-        else if ((cursor3Word0 == 3) || (cursor3Word0 == 4)) goto LAB_000b4ee0;
+        else if ((cursor3Word0 == 3) || (cursor3Word0 == 4)) goto loopStoreLoopIndex2;
       }
       loopIndex2 = loopIndex2 + 1;
       cursor2 = cursor2 + 1;
@@ -9001,7 +9001,7 @@ int ffpsBuildProgram(glContext, cachedProgram)
   if (noCachedProgram) {
     allocPair = gldLookupProgramVariant(glContext);
     cachedProgram = (int)allocPair;
-    if ((int)((ulonglong)allocPair >> 0x20) == 0) goto LAB_000b66b8;
+    if ((int)((ulonglong)allocPair >> 0x20) == 0) goto setGlContextWord1e5c_3;
     glContextWord1e5c_2 = *(int *)(glContext + 0x1e5c);
     if ((*(int *)(((unsigned char *)0x000036c0) + glContextWord1e5c_2) == 0) ||
        (*(int *)(((unsigned char *)0x00001488) + glContext) != *(int *)(((unsigned char *)0x000036c0) + glContextWord1e5c_2))) {
@@ -9040,7 +9040,7 @@ int ffpsBuildProgram(glContext, cachedProgram)
   }
   ((unsigned char *)0x000036c4)[glContextPtr1e5c_3] = 1;
   *(undefined4 *)(*(int *)(glContext + 0x1e5c) + 0x1c) = 0;
-LAB_000b66b8:
+setGlContextWord1e5c_3:
   glContextWord1e5c_3 = *(int *)(glContext + 0x1e5c);
   *(undefined4 *)(((unsigned char *)0x000010e4) + glContextWord1e5c_3) = 0xffffffff;
   ffpsProgram = (undefined1 *)
@@ -9386,7 +9386,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
           field17Bits = (uint)(int)(scaledBias * FLOAT_001aa1bc);
         }
       }
-      goto LAB_000b7220;
+      goto setUnitRegAddrFinal;
     }
     if (DOUBLE_001aa1e8 <= biasBase) {
       field15Bits = (int)(biasBase - DOUBLE_001aa1e8) + 0x80000000;
@@ -9403,7 +9403,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
   }
   field17Bits = 0;
   scaledBiasD = (double)FLOAT_001aa0d4;
-LAB_000b7220:
+setUnitRegAddrFinal:
   unitRegAddrFinal = unitWordOffset + glContext;
   *(uint *)(unitRegAddrFinal + 0x1cdc) =
        (*(uint *)(&DAT_001dbf2c + field21Count * 4) & 7) << 0x15 | *(uint *)(unitRegAddrFinal + 0x1cdc) & 0xff1fffff;
@@ -9461,7 +9461,7 @@ int extvsInstReadsTempComponents(symbolTable, inst, tempIndex, outReadsX, outRea
   case 0x8793:
   case 0x8794:
   case 0x8795:
-switchD_000b7340_caseD_8782:
+instCase8782:
     *outReadsX = 1;
     *outReadsY = 1;
     *outReadsZ = 1;
@@ -9474,7 +9474,7 @@ switchD_000b7340_caseD_8782:
   case 0x8799:
   case 0x879c:
     operandDataType = extvsOperandDataType(symbolTable,inst + 8);
-    if (operandDataType != 0x87bf) goto switchD_000b7340_caseD_8782;
+    if (operandDataType != 0x87bf) goto instCase8782;
   case 0x879a:
   case 0x879b:
     componentReadFlag3 = destEnableX == '\0';
@@ -9512,15 +9512,15 @@ switchD_000b7340_caseD_8782:
         ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
        ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) {
       if (destEnableW == '\0') {
-LAB_000b9970:
+loopSetReadFlag:
         readFlag = 0;
-        goto LAB_000b9ef0;
+        goto storeOutReadsW;
       }
-LAB_000b99c0:
+loopSetSwizzleSelect:
       swizzleSelect = inst[0xd];
       if (swizzleSelect != 0x87d8) {
-LAB_000b9960:
-        if (swizzleSelect != 0x87dc) goto LAB_000b9970;
+loopCheckSwizzleSelect:
+        if (swizzleSelect != 0x87dc) goto loopSetReadFlag;
       }
     }
     break;
@@ -9598,7 +9598,7 @@ LAB_000b9960:
     }
     *outReadsZ = readFlag;
     if (componentReadFlag1) break;
-    goto LAB_000b9dfc;
+    goto loopSetReadFlag3;
   case 0x8785:
     if ((inst[8] == 2) && (tempIndex == inst[9])) {
       swizzleSelect = inst[10];
@@ -9669,11 +9669,11 @@ LAB_000b9960:
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if (componentReadFlag9) goto LAB_000b92a0;
-LAB_000b9294:
+    if (componentReadFlag9) goto setReadFlag;
+loopSetReadFlag2:
     readFlag = 0;
-    if (componentReadFlag10) goto LAB_000b92a0;
-    goto LAB_000b92a4;
+    if (componentReadFlag10) goto setReadFlag;
+    goto storeOutReadsY;
   case 0x8786:
   case 0x8787:
   case 0x878a:
@@ -9716,7 +9716,7 @@ LAB_000b9294:
              ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
             ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
            ((destEnableW == '\0' || ((inst[0xd] != 0x87d8 && (inst[0xd] != 0x87dc))))))
-        goto LAB_000b7dec;
+        goto setComponentReadFlag3;
         componentReadFlag3 = true;
       }
       else {
@@ -9730,7 +9730,7 @@ LAB_000b9294:
       componentReadFlag9 = false;
       componentReadFlag11 = false;
       componentReadFlag1 = false;
-LAB_000b7dec:
+setComponentReadFlag3:
       componentReadFlag3 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
@@ -9768,7 +9768,7 @@ LAB_000b7dec:
             ((destEnableY == '\0' || ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))) &&
            (((destEnableZ == '\0' || ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))) &&
             ((destEnableW == '\0' || ((inst[0x14] != 0x87d8 && (inst[0x14] != 0x87dc))))))))
-        goto LAB_000b812c;
+        goto setComponentReadFlag2;
         componentReadFlag2 = true;
       }
       else {
@@ -9782,7 +9782,7 @@ LAB_000b7dec:
       componentReadFlag8 = false;
       componentReadFlag10 = false;
       componentReadFlag12 = false;
-LAB_000b812c:
+setComponentReadFlag2:
       componentReadFlag2 = false;
     }
     if ((componentReadFlag9) || (readFlag = 0, componentReadFlag8)) {
@@ -9835,7 +9835,7 @@ LAB_000b812c:
              ((destEnableY == '\0' || ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))) &&
             ((destEnableZ == '\0' || ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
            ((destEnableW == '\0' || ((inst[0xd] != 0x87d8 && (inst[0xd] != 0x87dc))))))
-        goto LAB_000b84cc;
+        goto setComponentReadFlag8;
         componentReadFlag8 = true;
       }
       else {
@@ -9849,7 +9849,7 @@ LAB_000b812c:
       componentReadFlag3 = false;
       componentReadFlag9 = false;
       componentReadFlag11 = false;
-LAB_000b84cc:
+setComponentReadFlag8:
       componentReadFlag8 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
@@ -9887,7 +9887,7 @@ LAB_000b84cc:
             ((destEnableY == '\0' || ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))) &&
            (((destEnableZ == '\0' || ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))) &&
             ((destEnableW == '\0' || ((inst[0x14] != 0x87d8 && (inst[0x14] != 0x87dc))))))))
-        goto LAB_000b880c;
+        goto setComponentReadFlag1;
         componentReadFlag1 = true;
       }
       else {
@@ -9901,7 +9901,7 @@ LAB_000b84cc:
       componentReadFlag10 = false;
       componentReadFlag12 = false;
       componentReadFlag16 = false;
-LAB_000b880c:
+setComponentReadFlag1:
       componentReadFlag1 = false;
     }
     if ((inst[0x16] == 2) && (tempIndex == inst[0x17])) {
@@ -9939,7 +9939,7 @@ LAB_000b880c:
             ((destEnableY == '\0' || ((inst[0x19] != 0x87d8 && (inst[0x19] != 0x87dc)))))) &&
            (((destEnableZ == '\0' || ((inst[0x1a] != 0x87d8 && (inst[0x1a] != 0x87dc)))) &&
             ((destEnableW == '\0' || ((inst[0x1b] != 0x87d8 && (inst[0x1b] != 0x87dc))))))))
-        goto LAB_000b8b4c;
+        goto setComponentReadFlag22;
         componentReadFlag2 = true;
       }
       else {
@@ -9953,7 +9953,7 @@ LAB_000b880c:
       componentReadFlag13 = false;
       componentReadFlag14 = false;
       componentReadFlag15 = false;
-LAB_000b8b4c:
+setComponentReadFlag22:
       componentReadFlag2 = false;
     }
     if (((componentReadFlag3) || (componentReadFlag10)) || (readFlag = 0, componentReadFlag13)) {
@@ -10023,14 +10023,14 @@ LAB_000b8b4c:
             ((inst[0xc] != 0x87d8 && (inst[0xc] != 0x87dc)))))) &&
           ((destEnableZ == '\0' ||
            (((inst[10] != 0x87d8 && (inst[10] != 0x87dc)) &&
-            ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))))))) goto LAB_000b8f1c;
+            ((inst[0xb] != 0x87d8 && (inst[0xb] != 0x87dc)))))))))) goto setComponentReadFlag12;
       componentReadFlag1 = true;
     }
     else {
       componentReadFlag3 = false;
       componentReadFlag9 = false;
       componentReadFlag11 = false;
-LAB_000b8f1c:
+setComponentReadFlag12:
       componentReadFlag1 = false;
     }
     if ((inst[0xf] == 2) && (tempIndex == inst[0x10])) {
@@ -10085,24 +10085,24 @@ LAB_000b8f1c:
             ((inst[0x13] != 0x87d8 && (inst[0x13] != 0x87dc)))))))) &&
          ((destEnableZ == '\0' ||
           (((inst[0x11] != 0x87d8 && (inst[0x11] != 0x87dc)) &&
-           ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))))) goto LAB_000b926c;
+           ((inst[0x12] != 0x87d8 && (inst[0x12] != 0x87dc)))))))) goto setComponentReadFlag23;
       componentReadFlag2 = true;
     }
     else {
       componentReadFlag8 = false;
       componentReadFlag10 = false;
       componentReadFlag12 = false;
-LAB_000b926c:
+setComponentReadFlag23:
       componentReadFlag2 = false;
     }
     if ((componentReadFlag3) || (readFlag = 0, componentReadFlag8)) {
       readFlag = 1;
     }
     *outReadsX = readFlag;
-    if (!componentReadFlag9) goto LAB_000b9294;
-LAB_000b92a0:
+    if (!componentReadFlag9) goto loopSetReadFlag2;
+setReadFlag:
     readFlag = 1;
-LAB_000b92a4:
+storeOutReadsY:
     *outReadsY = readFlag;
     if ((componentReadFlag11) || (readFlag = 0, componentReadFlag12)) {
       readFlag = 1;
@@ -10110,9 +10110,9 @@ LAB_000b92a4:
     *outReadsZ = readFlag;
 joined_r0x000b8bc8:
     if (!componentReadFlag1) {
-LAB_000b9dfc:
+loopSetReadFlag3:
       readFlag = 0;
-      if (!componentReadFlag2) goto LAB_000b9ef0;
+      if (!componentReadFlag2) goto storeOutReadsW;
     }
     break;
   case 0x8798:
@@ -10140,17 +10140,17 @@ LAB_000b9dfc:
         ((inst[0x12] != 0x87dc && (inst[0x13] != 0x87d8)))) && (inst[0x13] != 0x87dc)) {
       swizzleSelect = inst[0x14];
 joined_r0x000b9b40:
-      if ((swizzleSelect != 0x87d8) && (readFlag = 0, swizzleSelect != 0x87dc)) goto LAB_000b9ef0;
+      if ((swizzleSelect != 0x87d8) && (readFlag = 0, swizzleSelect != 0x87dc)) goto storeOutReadsW;
     }
     break;
   case 0x879d:
     operandDataType = extvsOperandDataType(symbolTable,inst + 8);
-    if (operandDataType != 0x87bf) goto switchD_000b7340_caseD_8782;
+    if (operandDataType != 0x87bf) goto instCase8782;
     swizzleSelect = inst[0x10];
     if (swizzleSelect == 0) {
       swizzleSelect = inst[10];
 joined_r0x000b97e0:
-      if ((swizzleSelect != 0x87d5) && (swizzleSelect != 0x87d9)) goto LAB_000b9790;
+      if ((swizzleSelect != 0x87d5) && (swizzleSelect != 0x87d9)) goto setReadFlag2;
       readFlag = 1;
     }
     else {
@@ -10166,7 +10166,7 @@ joined_r0x000b97e0:
         swizzleSelect = inst[0xd];
         goto joined_r0x000b97e0;
       }
-LAB_000b9790:
+setReadFlag2:
       readFlag = 0;
     }
     *outReadsX = readFlag;
@@ -10174,7 +10174,7 @@ LAB_000b9790:
     if (swizzleSelect == 0) {
       swizzleSelect = inst[10];
 joined_r0x000b9880:
-      if ((swizzleSelect != 0x87d6) && (swizzleSelect != 0x87da)) goto LAB_000b9830;
+      if ((swizzleSelect != 0x87d6) && (swizzleSelect != 0x87da)) goto setReadFlag3;
       readFlag = 1;
     }
     else {
@@ -10190,7 +10190,7 @@ joined_r0x000b9880:
         swizzleSelect = inst[0xd];
         goto joined_r0x000b9880;
       }
-LAB_000b9830:
+setReadFlag3:
       readFlag = 0;
     }
     *outReadsY = readFlag;
@@ -10198,7 +10198,7 @@ LAB_000b9830:
     if (swizzleSelect == 0) {
       swizzleSelect = inst[10];
 joined_r0x000b9920:
-      if ((swizzleSelect != 0x87d7) && (swizzleSelect != 0x87db)) goto LAB_000b98d0;
+      if ((swizzleSelect != 0x87d7) && (swizzleSelect != 0x87db)) goto setReadFlag4;
       readFlag = 1;
     }
     else {
@@ -10214,7 +10214,7 @@ joined_r0x000b9920:
         swizzleSelect = inst[0xd];
         goto joined_r0x000b9920;
       }
-LAB_000b98d0:
+setReadFlag4:
       readFlag = 0;
     }
     *outReadsZ = readFlag;
@@ -10223,7 +10223,7 @@ LAB_000b98d0:
       swizzleSelect = inst[10];
 joined_r0x000b9990:
       if (swizzleSelect == 0x87d8) break;
-      goto LAB_000b9960;
+      goto loopCheckSwizzleSelect;
     }
     if (swizzleSelect == 1) {
       swizzleSelect = inst[0xb];
@@ -10233,8 +10233,8 @@ joined_r0x000b9990:
       swizzleSelect = inst[0xc];
       goto joined_r0x000b9990;
     }
-    if (swizzleSelect == 3) goto LAB_000b99c0;
-    goto LAB_000b9970;
+    if (swizzleSelect == 3) goto loopSetSwizzleSelect;
+    goto loopSetReadFlag;
   case 0x879e:
     if (((((inst[10] == 0x87d5) || (inst[10] == 0x87d9)) || (inst[0xb] == 0x87d5)) ||
         ((inst[0xb] == 0x87d9 || (inst[0xd] == 0x87d5)))) ||
@@ -10326,7 +10326,7 @@ joined_r0x000b9990:
     *outReadsZ = readFlag;
 joined_r0x000b9df8:
     if (componentReadFlag3) break;
-    goto LAB_000b9dfc;
+    goto loopSetReadFlag3;
   case 0x87a0:
   case 0x87a1:
   case 0x87a2:
@@ -10352,10 +10352,10 @@ joined_r0x000b9df8:
     *outReadsX = 0;
     *outReadsY = 0;
     *outReadsZ = 0;
-    goto LAB_000b9ef0;
+    goto storeOutReadsW;
   }
   readFlag = 1;
-LAB_000b9ef0:
+storeOutReadsW:
   *outReadsW = readFlag;
   return;
 }

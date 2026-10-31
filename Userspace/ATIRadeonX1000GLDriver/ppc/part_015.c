@@ -158,7 +158,7 @@ int glBindFragmentShaderATI_impl(ctx, shaderId)
     searching = true;
     shaderOffset = 0;
     while (loopIndex < shaderCount) {
-      if (!searching) goto LAB_000a1378;
+      if (!searching) goto setShaders;
       if (shaderId == *(int *)(shaderOffset + *(int *)(shaderTable + 0x88))) {
         searching = false;
       }
@@ -189,7 +189,7 @@ int glBindFragmentShaderATI_impl(ctx, shaderId)
       ((unsigned char *)0x00001136)[ctx] = 1;
     }
     else {
-LAB_000a1378:
+setShaders:
       shaders = *(int *)(shaderTable + 0x88);
       if (loopIndex != *(uint *)(((unsigned char *)0x00001140) + ctx)) {
         ((unsigned char *)0x00001136)[ctx] = 1;
@@ -243,7 +243,7 @@ int glDeleteFragmentShaderATI_impl(ctx, shaderId)
     loopIndex2 = 0;
     searching = true;
     while (loopIndex < *(uint *)(shaderTable + 4)) {
-      if (!searching) goto LAB_000a161c;
+      if (!searching) goto callAtifsFreeShader;
       if (shaderId == *(int *)(loopIndex2 + *(int *)(shaderTable + 0x88))) {
         searching = false;
       }
@@ -253,7 +253,7 @@ int glDeleteFragmentShaderATI_impl(ctx, shaderId)
       }
     }
     if (!searching) {
-LAB_000a161c:
+callAtifsFreeShader:
       ((int (*)())atifsFreeShader)(ctx,loopIndex * 0x78 + *(int *)(shaderTable + 0x88));
       shaderEntry = loopIndex * 0x78 + *(int *)(shaderTable + 0x88);
       _memmove(shaderEntry,shaderEntry + 0x78,(*(int *)(shaderTable + 4) - loopIndex) * 0x78 + -0x78);
@@ -350,11 +350,11 @@ int glEndFragmentShaderATI_impl(ctx)
     if (usesColorInterpolator) {
       *(undefined4 *)(shader + 4) = 1;
       ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
-      goto LAB_000a1914;
+      goto callGldCollectUsedTexCoordUnits;
     }
   }
   *(uint *)(shader + 4) = (byte)((unsigned char *)0x00001138)[ctx] + 1;
-LAB_000a1914:
+callGldCollectUsedTexCoordUnits:
   ((int (*)())gld_collectUsedTexCoordUnits)(ctx,*(int *)(((unsigned char *)0x00001144) + ctx),
                *(undefined4 *)(*(int *)(((unsigned char *)0x00001144) + ctx) + 4));
   ((unsigned char *)0x00001136)[ctx] = 1;
@@ -413,10 +413,10 @@ int glPassTexCoordATI_impl(ctx, dst, coord, swizzle)
   if (((passIndex < (byte)((unsigned char *)0x00001150)[ctx]) && (dst - 0x8921U < 6)) &&
      (swizzle - 0x8976U < 4)) {
     if (coord - 0x84c0U < 0x20) {
-      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[ctx] < (int)(coord - 0x84c0U)) goto LAB_000a1b60;
+      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[ctx] < (int)(coord - 0x84c0U)) goto callAtifsSetShaderValid;
     }
     else if (((5 < coord - 0x8921U) || (passIndex == 0)) ||
-            ((swizzle != 0x8976 && (swizzle != 0x8978)))) goto LAB_000a1b60;
+            ((swizzle != 0x8976 && (swizzle != 0x8978)))) goto callAtifsSetShaderValid;
     addOk = ((int (*)())atifsAddTextureOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),passIndex,dst,coord,0,
                          swizzle);
     if (addOk != 0) {
@@ -428,7 +428,7 @@ int glPassTexCoordATI_impl(ctx, dst, coord, swizzle)
       return;
     }
   }
-LAB_000a1b60:
+callAtifsSetShaderValid:
   ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
   return;
 }
@@ -451,10 +451,10 @@ int glSampleMapATI_impl(ctx, dst, coordSource, swizzle)
   if (((passIndex < (byte)((unsigned char *)0x00001150)[ctx]) && (dst - 0x8921U < 6)) &&
      (swizzle - 0x8976U < 4)) {
     if (coordSource - 0x84c0U < 0x20) {
-      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[ctx] < (int)(coordSource - 0x84c0U)) goto LAB_000a1cc0;
+      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[ctx] < (int)(coordSource - 0x84c0U)) goto callAtifsSetShaderValid;
     }
     else if (((5 < coordSource - 0x8921U) || (passIndex == 0)) ||
-            ((swizzle != 0x8976 && (swizzle != 0x8978)))) goto LAB_000a1cc0;
+            ((swizzle != 0x8976 && (swizzle != 0x8978)))) goto callAtifsSetShaderValid;
     addOk = ((int (*)())atifsAddTextureOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),passIndex,dst,coordSource,1,
                          swizzle);
     if (addOk != 0) {
@@ -466,7 +466,7 @@ int glSampleMapATI_impl(ctx, dst, coordSource, swizzle)
       return;
     }
   }
-LAB_000a1cc0:
+callAtifsSetShaderValid:
   ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
   return;
 }
@@ -1441,7 +1441,7 @@ void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint
     do {
       coverageSum = (double)FLOAT_001aa0d4;
       if (filterWidthF <= coverageSum) {
-LAB_000a39f0:
+loopSetCoverageValue:
         coverageValue = (float)(coverageSum * (double)FLOAT_001aa0f0);
       }
       else {
@@ -1474,7 +1474,7 @@ LAB_000a39f0:
           ;
         } while (sampleIndexF2 < filterWidthF);
         coverageValue = FLOAT_001aa0f0;
-        if (coverageSum <= (double)FLOAT_001aa0e8) goto LAB_000a39f0;
+        if (coverageSum <= (double)FLOAT_001aa0e8) goto loopSetCoverageValue;
       }
       outByte = (char)(int)(coverageValue + FLOAT_001aa10c);
       *(char *)(loopIndex + outTable) = outByte;
@@ -1623,7 +1623,7 @@ int gld_setPrimitiveInputRegisters(glContext, primitiveMode, unitCounter, unused
     gldSetProgramStreamMode(glContext,*(undefined4 *)(tableCursor + 0xc0));
   }
   *(undefined4 *)(glContext + 0x1ba8) = *(undefined4 *)(glContext + 0x1ba0);
-  if (!noPrimitiveTable) goto LAB_000a41d0;
+  if (!noPrimitiveTable) goto setPacketB;
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
     ffvpComputeOutputMasks(glContext);
   }
@@ -1648,7 +1648,7 @@ int gld_setPrimitiveInputRegisters(glContext, primitiveMode, unitCounter, unused
   else {
     if (primitiveMode == 0) {
       if ((glContextWord44 & 0x20000) == 0) {
-        if (((unsigned char *)0x000013b2)[glContext] == '\0') goto LAB_000a40f0;
+        if (((unsigned char *)0x000013b2)[glContext] == '\0') goto loopSetRegisterCount;
         baseSelectBits = 0;
         unitCounter = 0;
         loopIndex4 = 0;
@@ -1700,9 +1700,9 @@ int gld_setPrimitiveInputRegisters(glContext, primitiveMode, unitCounter, unused
         }
         glContextWordec = *(uint *)(glContext + 0xec);
         if (((unsigned char *)0x000013b2)[glContext] == '\0') {
-LAB_000a40f0:
+loopSetRegisterCount:
           registerCount = 0;
-          goto LAB_000a40f4;
+          goto storeGlContext;
         }
         baseSelectBits = 0;
         unitCounter = 0;
@@ -1742,10 +1742,10 @@ LAB_000a40f0:
       registerCount = baseSelectBits & 0xff;
     }
     else {
-      if (*(int *)(glContext + 0x2768) != 0) goto LAB_000a40f0;
+      if (*(int *)(glContext + 0x2768) != 0) goto loopSetRegisterCount;
       if ((glContextWord44 & 0x20000) == 0) {
         glContextPtr13b2 = (uint)(byte)((unsigned char *)0x000013b2)[glContext];
-        if (glContextPtr13b2 == 0) goto LAB_000a40d4;
+        if (glContextPtr13b2 == 0) goto setBaseSelectBits;
         baseSelectBits = 0;
         loopIndex = 0;
         tableCursor = glContext;
@@ -1777,7 +1777,7 @@ LAB_000a40f0:
         unitCounter = (uint)unitEnableMask;
         glContextPtr13b2 = (uint)(byte)((unsigned char *)0x000013b2)[glContext];
         if (glContextPtr13b2 == 0) {
-LAB_000a40d4:
+setBaseSelectBits:
           baseSelectBits = 0;
         }
         else {
@@ -1807,7 +1807,7 @@ LAB_000a40d4:
       *(undefined4 *)(glContext + 0x1bc0) = 0;
       *(uint *)(glContext + 0x1b50) = (uint)*(ushort *)(glContext + 0x1b52);
     }
-LAB_000a40f4:
+storeGlContext:
     *(uint *)(glContext + 0x1f2c) = registerCount & 0x7f | *(uint *)(glContext + 0x1f2c) & 0xffffff80;
     packetA = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0xd);
     *(undefined4 **)(0x00002748 + glContext + 4) = packetA;
@@ -1834,7 +1834,7 @@ LAB_000a40f4:
     (*UNRECOVERED_JUMPTABLE)(glContext,streamWritePtr + 0x34);
   }
   *(uint *)(glContext + 0x1ba8) = glContextWord1ba4;
-LAB_000a41d0:
+setPacketB:
   packetB = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0xc);
   *(undefined4 **)(0x00002748 + glContext + 4) = packetB;
   *packetB = ((unsigned char *)0x00001002U);
@@ -2268,7 +2268,7 @@ int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5, staleArgR6, sta
     if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4_2 + 0x10)] != '\0') && ((glContextWord44 & 0x20000) == 0)) {
       glContextPtr4_2 = gld_needsMultisampleResolve(glContextPtr4_2,*(undefined4 *)(glContextPtr4_2 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
                             glContextWord44);
-      if (glContextPtr4_2 == 0) goto LAB_000a4a50;
+      if (glContextPtr4_2 == 0) goto setGlContextPtr276c;
       glContextPtr4_2 = *(int *)(glContext + 4);
     }
     glContextPtr4_2 = *(int *)(glContextPtr4_2 + 0x10);
@@ -2284,7 +2284,7 @@ int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5, staleArgR6, sta
       return 0;
     }
   }
-LAB_000a4a50:
+setGlContextPtr276c:
   glContextPtr276c = *(uint *)(glContext + 0x276c);
   glContextWord38 = *(uint *)(glContext + 0x38);
   if (-1 < (int)glContextPtr276c) {
@@ -2327,7 +2327,7 @@ LAB_000a4a50:
     *(ushort *)(glContext + 0x34) = (ushort)dirtyUnitMask | *(ushort *)(glContext + 0x34);
   }
   *(uint *)(glContext + 0x276c) = lastActiveUnit;
-  if ((int)lastActiveUnit < 0) goto LAB_000a52dc;
+  if ((int)lastActiveUnit < 0) goto callGldMarkBoundObjectsDirty;
   glContextPtr4_3 = *(int *)(glContext + 4);
   glContextByte245b = *(char *)(glContext + 0x245b);
   engineState = *(int *)(glContextPtr4_3 + 0x10);
@@ -2341,7 +2341,7 @@ LAB_000a4a50:
   engineStateShort2e0e = *(short *)(((unsigned char *)0x00002e0e) + engineState);
   engineState3 = *(uint *)(glContextPtr4_4 + 0x10);
   if ((((unsigned char *)0x00002e2d)[engineState3] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) {
-LAB_000a4c38:
+loopSetSizeAttenuated:
     sizeAttenuated = '\0';
   }
   else {
@@ -2350,7 +2350,7 @@ LAB_000a4c38:
     calleeResultLow = (undefined4)callResultPair2;
     if ((int)((ulonglong)callResultPair2 >> 0x20) != 0) {
       glContextPtr4_4 = *(int *)(glContext + 4);
-      goto LAB_000a4c38;
+      goto loopSetSizeAttenuated;
     }
     glContextPtr4_4 = *(int *)(glContext + 4);
     sizeAttenuated = '\x01';
@@ -2410,21 +2410,21 @@ LAB_000a4c38:
            ((sizeClamped == '\0' || (*(short *)(cacheEntry + 0x28) == engineStateShort2e28)))))))) {
         if ((uint)engineStateShort3170 == *(uint *)(cacheEntry + 0xb4)) {
           cacheEntryWordb8 = *(uint *)(cacheEntry + 0xb8);
-          if (engineStateShort3172 != cacheEntryWordb8) goto LAB_000a4e54;
+          if (engineStateShort3172 != cacheEntryWordb8) goto checkEngineStateShort3170;
         }
         else {
           cacheEntryWordb8 = *(uint *)(cacheEntry + 0xb8);
-LAB_000a4e54:
-          if ((engineStateShort3170 != cacheEntryWordb8) || ((uint)engineStateShort3172 != *(uint *)(cacheEntry + 0xb4))) goto LAB_000a4e90;
+checkEngineStateShort3170:
+          if ((engineStateShort3170 != cacheEntryWordb8) || ((uint)engineStateShort3172 != *(uint *)(cacheEntry + 0xb4))) goto setCacheEntry;
         }
         if (cacheEntry[0x2a] == fillPolygonMode) {
-          if (fillPolygonMode == '\0') goto LAB_000a5b9c;
+          if (fillPolygonMode == '\0') goto storeGlContext;
           staleArgR5 = 0x80;
           memcmpResult = _memcmp(cacheEntry + 0x2c,((unsigned char *)0x000030e8) + engineState,0x80);
-          if (memcmpResult == 0) goto LAB_000a5b9c;
+          if (memcmpResult == 0) goto storeGlContext;
         }
       }
-LAB_000a4e90:
+setCacheEntry:
       cacheEntry = *(char **)(cacheEntry + 0x138);
     } while (cacheEntry != (char *)0x0);
   }
@@ -2435,7 +2435,7 @@ LAB_000a4e90:
   engineState2 = *(int *)(glContextPtr4_5 + 0x10);
   glContextByte245b = *(char *)(glContext + 0x245b);
   cacheEntry = (char *)(**(code **)(glContext + 0x10))(1,0x13c);
-  if (cacheEntry == (char *)0x0) goto LAB_000a52dc;
+  if (cacheEntry == (char *)0x0) goto callGldMarkBoundObjectsDirty;
   *cacheEntry = (*(uint *)(glContext + 0x44) & 0x60020000) == 0x40000000;
   callResultPair = gld_needsMultisampleResolve(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0),
                         staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,engineState3);
@@ -2445,14 +2445,14 @@ LAB_000a4e90:
   glContextPtr4 = *(int *)(glContext + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4 + 0x10)] == '\0') ||
      (negPointMode = (char *)(*(uint *)(glContext + 0x44) & 0x20000), negPointMode != (char *)0x0)) {
-LAB_000a4f50:
+loopSetSizeAttenuated2:
     sizeAttenuated = '\0';
   }
   else {
     callResultPair = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,0,dirtyUnitMask,engineState3);
     calleeResultLow = (undefined4)callResultPair;
     sizeAttenuated = '\x01';
-    if ((int)((ulonglong)callResultPair >> 0x20) != 0) goto LAB_000a4f50;
+    if ((int)((ulonglong)callResultPair >> 0x20) != 0) goto loopSetSizeAttenuated2;
   }
   cacheEntry[0x14] = sizeAttenuated;
   cacheEntry[0x1c] = *(short *)(((unsigned char *)0x00002e10) + engineState2) == 0x1102;
@@ -2495,7 +2495,7 @@ LAB_000a4f50:
   }
   if (*cacheEntry == '\0') {
     if ((*(int *)(cacheEntry + 0xb4) == 0x1b00) || (*(int *)(cacheEntry + 0xb8) == 0x1b00))
-    goto LAB_000a5108;
+    goto setLevelBytes;
     levelBytes = 0;
     levelCount = 0;
   }
@@ -2506,7 +2506,7 @@ LAB_000a4f50:
     levelBytes = allocPairHigh << 2;
     *(int *)(cacheEntry + 4) = allocPairHigh;
     if (levelBytes < 1) {
-LAB_000a5108:
+setLevelBytes:
       levelBytes = 0;
       levelCount = 1;
     }
@@ -2518,7 +2518,7 @@ LAB_000a5108:
   minLevelBytes = levelBytes;
   if ((*(uint *)(cacheEntry + 0x14) & 0xffff0000) == 0) {
     if ((*(int *)(cacheEntry + 0xb4) == 0x1b01) || (*(int *)(cacheEntry + 0xb8) == 0x1b01))
-    goto LAB_000a5188;
+    goto setLevelCount;
   }
   else {
     maxSizeShort = 0xffff;
@@ -2534,7 +2534,7 @@ LAB_000a5108:
     if (levelBytes < 0x10) {
       minLevelBytes = 0x10;
     }
-LAB_000a5188:
+setLevelCount:
     levelCount = levelCount + 1;
     levelBytes = smoothLevelBytes;
   }
@@ -2619,7 +2619,7 @@ LAB_000a5188:
           levelCountClamped = rampAllocHigh;
           if ((*(uint *)(glContext + 0xe8) & 1) == 0) {
             contextFloatArg = (double)*(float *)(glContext + 0xe0);
-            if (cacheEntry[8] != '\0') goto LAB_000a53ac;
+            if (cacheEntry[8] != '\0') goto callGldBuildCoverageByteTable;
             ((void (*)())gld_buildCoverageRampTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
                          staleArgF6,staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
                          staleStackArg_fffffed0,staleStackArg_fffffed8);
@@ -2627,7 +2627,7 @@ LAB_000a5188:
           }
           else {
             contextFloatArg = (double)*(float *)(glContext + 0x104);
-LAB_000a53ac:
+callGldBuildCoverageByteTable:
             ((void (*)())gld_buildCoverageByteTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
                          staleArgF6,staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
                          staleStackArg_fffffed0);
@@ -2729,7 +2729,7 @@ LAB_000a53ac:
     if (entryWord14High == (int *)0x0) {
       if (1 < levelCount) {
         _memset(pixelCursor,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
-        goto LAB_000a58ec;
+        goto setCacheEntryPtrbc;
       }
     }
     else {
@@ -2844,7 +2844,7 @@ LAB_000a53ac:
         loopIndex4 = loopIndex4 + 1;
         pixelCursor = rowsEnd;
       } while (notLastBlock);
-LAB_000a58ec:
+setCacheEntryPtrbc:
       cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
     pixelCursor = *(int *)(cacheEntryPtrbc + 0x80);
@@ -2854,7 +2854,7 @@ LAB_000a58ec:
     if (cacheEntry[0x2a] == '\0') {
       if (1 < levelCount) {
         _memset(pixelCursor,0xff,*(undefined4 *)(cacheEntryPtrbc + 0x84));
-        goto LAB_000a59f4;
+        goto setCacheEntryPtrbc2;
       }
     }
     else {
@@ -2899,7 +2899,7 @@ LAB_000a58ec:
         pixelCursor = pixelCursor + maskFieldValue * (int)oneValue;
         cacheEntryWordb0 = cacheEntryWordb0 + 1 & 0x1f;
       } while (blocksLeft != 0);
-LAB_000a59f4:
+setCacheEntryPtrbc2:
       cacheEntryPtrbc = *(int *)(cacheEntry + 0xbc);
     }
     uploadResult = gld_makeTextureResidentOrDelete(glContext,*(undefined4 *)(cacheEntryPtrbc + 0x7c),*(undefined4 *)(glContext + 0x276c),
@@ -2993,7 +2993,7 @@ LAB_000a59f4:
       *(undefined4 *)(cacheEntry + 0x138) = *(undefined4 *)(glContext + 0x2764);
       *(undefined4 *)(glContext + 0x2764) = cacheEntry;
       *(int *)(glContext + 0x2778) = *(int *)(glContext + 0x2778) + 1;
-LAB_000a5b9c:
+storeGlContext:
       *(char **)(glContext + 0x2768) = cacheEntry;
       ((int (*)())gld_refreshActivePointMask)(glContext);
       *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x200;
@@ -3005,7 +3005,7 @@ LAB_000a5b9c:
     }
   }
   _free(cacheEntry);
-LAB_000a52dc:
+callGldMarkBoundObjectsDirty:
   ((int (*)())gld_markBoundObjectsDirty)(glContext);
   return 1;
 }
@@ -3121,7 +3121,7 @@ int gld_updateSampleCoverage(glContext)
       *(undefined4 *)(glContext + 0x1a68) = 0x66666666;
       *(undefined4 *)(glContext + 0x1a6c) = 0x6666666;
       *(undefined4 *)(glContext + 0x1b60) = 0xffffff;
-      goto LAB_000a6110;
+      goto setGlContextWord1930;
     }
   }
   else {
@@ -3169,7 +3169,7 @@ int gld_updateSampleCoverage(glContext)
             (coverageInvertMask ^ (1 << (coverageSamples + (2 < coverageRemainder) & 0x3f)) - 1U) << 6;
   }
   *(uint *)(glContext + 0x1b60) = sampleCountU;
-LAB_000a6110:
+setGlContextWord1930:
   glContextWord1930 = *(uint *)(glContext + 0x1930);
   *(uint *)(glContext + 0x1930) = glContextWord1930 | 0x80200;
   if (glContextWord1a60 != *(int *)(glContext + 0x1a60)) {
@@ -3354,12 +3354,12 @@ int gld_emitClearFillPacket(glContext, emitFill)
     if (surfaceFormatBits == 0x10000) {
       channelBits = 0x10;
       *(uint *)(glContext + 0x1ae4) = clearValue | clearValue << 0x10;
-      goto LAB_000a6564;
+      goto setSurfaceModeWord;
     }
     channelBits = 0;
   }
   *(uint *)(glContext + 0x1ae4) = clearValue << 8;
-LAB_000a6564:
+setSurfaceModeWord:
   surfaceModeWord = *(uint *)(((unsigned char *)0x00002db4) + engineCaps);
   *(uint *)(glContext + 0x1ae4) = *(uint *)(glContext + 0x1ae4) | surfaceModeWord;
   packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0x1a,staleArgR5,staleArgR6,staleArgR7,staleArgR8,surfaceModeWord)
@@ -3643,10 +3643,10 @@ int gld_clearStreamBuffers(glContext, clearMask)
   }
   if ((surfaceFlags & 0x40) == 0) {
     colorClearNotRequested = (clearMask >> 8 & 1) == 0;
-LAB_000a6d70:
+loopCheckSurfaceFlags:
     if ((surfaceFlags & 0x80) == 0) {
       depthClearBit = clearMask >> 10 & 1;
-LAB_000a6db0:
+loopCheckScissorActive:
       if (scissorActive == '\0') {
         if (colorClearNotRequested) {
           useFastClear = 0;
@@ -3670,12 +3670,12 @@ LAB_000a6db0:
         *(int *)(clearPacketHeader + 0x10) = *(int *)(0x00002748 + glContext + 4) - streamStart >> 2;
         ((int (*)())gld_emitInternalViewportPacket)(glContext,clearMask);
         *(int *)(clearPacketHeader + 0x14) = *(int *)(glContext + 0x2794) - streamStart >> 2;
-        goto LAB_000a6ebc;
+        goto checkDepthClearBit;
       }
     }
     else {
       depthClearBit = clearMask >> 10 & 1;
-      if ((depthClearBit != 0) || ((*(uint *)(glContext + 0x8c) & 0x20000000) == 0)) goto LAB_000a6db0;
+      if ((depthClearBit != 0) || ((*(uint *)(glContext + 0x8c) & 0x20000000) == 0)) goto loopCheckScissorActive;
     }
     if (!colorClearNotRequested) {
       *(undefined1 *)(surfaceRecord + 0xc5) = 1;
@@ -3683,11 +3683,11 @@ LAB_000a6db0:
   }
   else {
     colorClearNotRequested = (clearMask >> 8 & 1) == 0;
-    if (!colorClearNotRequested) goto LAB_000a6d70;
+    if (!colorClearNotRequested) goto loopCheckSurfaceFlags;
   }
   depthClearBit = clearMask >> 10 & 1;
   ((int (*)())gld_emitInternalViewportPacket)(glContext,clearMask);
-LAB_000a6ebc:
+checkDepthClearBit:
   if (depthClearBit != 0) {
     *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x20000000;
   }

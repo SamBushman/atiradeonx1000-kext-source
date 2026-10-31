@@ -455,7 +455,7 @@ int R300MachineAssembler__rgbSelectForSourceSwizzle(this, sourceIndex, selectOut
   }
   swizzleOrLane = swizzle >> 0x18;
   if (swizzleOrLane == 1) {
-LAB_00195b1c:
+loopStoreSourceIndex:
     *(int *)(sourceIndex * 4 + selectOut) = sourceNumber + 0x17;
   }
   else {
@@ -464,7 +464,7 @@ LAB_00195b1c:
         *(int *)(sourceIndex * 4 + selectOut) = sourceNumber + 0x1a;
         return;
       }
-      if ((swizzle >> 8 & 0xff) == 0) goto LAB_00195b1c;
+      if ((swizzle >> 8 & 0xff) == 0) goto loopStoreSourceIndex;
     }
     *(int *)(sourceIndex * 4 + selectOut) = sourceNumber + 0x1d;
   }
@@ -580,18 +580,18 @@ int R300MachineAssembler__setAlphaOpcode(this, hardwareOpcode, irOpcode, irInst)
   
   alphaOpcode = (undefined1)hardwareOpcode;
   *(undefined4 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58)) = 3;
-  if (hardwareOpcode != -1) goto LAB_00195f08;
+  if (hardwareOpcode != -1) goto storeThis;
   if (irOpcode == 0x31) {
-LAB_00195e0c:
+loopSetAlphaOpcode:
     alphaOpcode = 0;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3a) = 0x11;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3b) = 0x10;
-    goto LAB_00195f08;
+    goto storeThis;
   }
   if (irOpcode < 0x32) {
     if (irOpcode != 0x13) {
       if (irOpcode == 0x25) {
-LAB_00195e48:
+loopSetRecordPtr:
         recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
         alphaOpcode = *(undefined1 *)(recordPtr + 0x39);
         *(undefined1 *)(recordPtr + 0x39) = *(undefined1 *)(recordPtr + 0x3a);
@@ -610,10 +610,10 @@ LAB_00195e48:
         else {
           alphaOpcode = 6;
         }
-        goto LAB_00195f08;
+        goto storeThis;
       }
-      if (irOpcode != 0x12) goto LAB_00195d6c;
-LAB_00195d94:
+      if (irOpcode != 0x12) goto setAlphaOpcode;
+loopSetAlphaOpcode2:
       alphaOpcode = 0;
       recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
       *(undefined1 *)(recordPtr + 0x3b) = *(undefined1 *)(recordPtr + 0x3a);
@@ -621,24 +621,24 @@ LAB_00195d94:
       *(undefined1 *)(recordPtr + 0x3e) = *(undefined1 *)(recordPtr + 0x3d);
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3a) = 0x11;
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3d) = 0;
-      goto LAB_00195f08;
+      goto storeThis;
     }
   }
   else if (irOpcode != 0x36) {
     if (irOpcode < 0x37) {
-      if (irOpcode == 0x34) goto LAB_00195d94;
+      if (irOpcode == 0x34) goto loopSetAlphaOpcode2;
     }
     else {
-      if (irOpcode == 0x66) goto LAB_00195e0c;
-      if (irOpcode == 0x9d) goto LAB_00195e48;
+      if (irOpcode == 0x66) goto loopSetAlphaOpcode;
+      if (irOpcode == 0x9d) goto loopSetRecordPtr;
     }
-LAB_00195d6c:
+setAlphaOpcode:
     alphaOpcode = 0xff;
-    goto LAB_00195f08;
+    goto storeThis;
   }
   alphaOpcode = 0;
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3b) = 0x10;
-LAB_00195f08:
+storeThis:
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x40) = alphaOpcode;
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x42) = 1;
@@ -939,7 +939,7 @@ int R300MachineAssembler__emitFetchRecord(assembler, inst, staleArg3)
       *(uint *)(*(int *)(compilerRef + 0x6c4) + 0x88) =
            1 << (loopIndex & 0x3f) | *(uint *)(*(int *)(compilerRef + 0x6c4) + 0x88);
       slotA = assembler[0x25];
-      goto LAB_0019675c;
+      goto checkSlotA;
     }
     emitSlotAFn = *(code **)(*assembler + 0xc4);
     a1 = assembler[0x25];
@@ -951,7 +951,7 @@ int R300MachineAssembler__emitFetchRecord(assembler, inst, staleArg3)
   (**(code **)(*assembler + 0xd0))(assembler,assembler[0x25],a2);
   slotA = assembler[0x25] + 1;
   assembler[0x25] = slotA;
-LAB_0019675c:
+checkSlotA:
   if (slotA <= assembler[0x26]) {
     slotA = assembler[0x26];
   }
@@ -1043,7 +1043,7 @@ int R300MachineAssembler__setAluSourceSelectsAndModifiers(this, irInst, writeRgb
     modifierBits = ((int (*)())packSourceModifier)(*sourceFlags & 1,*sourceFlags >> 1 & 1);
     if (writeAlpha != 0) {
       if (hasThirdSource) {
-        if (!notFirstSource) goto LAB_001969d4;
+        if (!notFirstSource) goto storeThis;
         if (loopIndex == 2) {
           *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3d) = modifierBits
           ;
@@ -1054,7 +1054,7 @@ int R300MachineAssembler__setAluSourceSelectsAndModifiers(this, irInst, writeRgb
         }
       }
       else if (loopIndex == 3) {
-LAB_001969d4:
+storeThis:
         *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x3c) = modifierBits;
       }
     }
@@ -1094,18 +1094,18 @@ int R300MachineAssembler__setRgbOpcode(this, hardwareOpcode, irOpcode, irInst)
   
   rgbOpcode = (undefined1)hardwareOpcode;
   *(undefined4 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58)) = 3;
-  if (hardwareOpcode != -1) goto LAB_00196cf4;
+  if (hardwareOpcode != -1) goto storeThis;
   if (irOpcode == 0x31) {
-LAB_00196bf8:
+loopSetRgbOpcode:
     rgbOpcode = 0;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2b) = 0x15;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2c) = 0x14;
-    goto LAB_00196cf4;
+    goto storeThis;
   }
   if (irOpcode < 0x32) {
     if (irOpcode != 0x13) {
       if (irOpcode == 0x25) {
-LAB_00196c34:
+loopSetRecordPtr:
         recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
         rgbOpcode = *(undefined1 *)(recordPtr + 0x2a);
         *(undefined1 *)(recordPtr + 0x2a) = *(undefined1 *)(recordPtr + 0x2b);
@@ -1124,10 +1124,10 @@ LAB_00196c34:
         else {
           rgbOpcode = 8;
         }
-        goto LAB_00196cf4;
+        goto storeThis;
       }
-      if (irOpcode != 0x12) goto LAB_00196b58;
-LAB_00196b80:
+      if (irOpcode != 0x12) goto setRgbOpcode;
+loopSetRgbOpcode2:
       rgbOpcode = 0;
       recordPtr = *(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58);
       *(undefined1 *)(recordPtr + 0x2c) = *(undefined1 *)(recordPtr + 0x2b);
@@ -1135,24 +1135,24 @@ LAB_00196b80:
       *(undefined1 *)(recordPtr + 0x2f) = *(undefined1 *)(recordPtr + 0x2e);
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2b) = 0x15;
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2e) = 0;
-      goto LAB_00196cf4;
+      goto storeThis;
     }
   }
   else if (irOpcode != 0x36) {
     if (irOpcode < 0x37) {
-      if (irOpcode == 0x34) goto LAB_00196b80;
+      if (irOpcode == 0x34) goto loopSetRgbOpcode2;
     }
     else {
-      if (irOpcode == 0x66) goto LAB_00196bf8;
-      if (irOpcode == 0x9d) goto LAB_00196c34;
+      if (irOpcode == 0x66) goto loopSetRgbOpcode;
+      if (irOpcode == 0x9d) goto loopSetRecordPtr;
     }
-LAB_00196b58:
+setRgbOpcode:
     rgbOpcode = 0xff;
-    goto LAB_00196cf4;
+    goto storeThis;
   }
   rgbOpcode = 0;
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x2c) = 0x14;
-LAB_00196cf4:
+storeThis:
   *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x31) = rgbOpcode;
   if (*(int *)(irInst + 0x120) != 0) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x33) = 1;
@@ -1421,7 +1421,7 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
       }
       PackState__buildSlotTable(packState,this + 7);
       if (groupInst == (int *)0x0) {
-LAB_00197808:
+loopSetCursorInst:
         cursorInst = (int *)groupInst[2];
       }
       else {
@@ -1443,7 +1443,7 @@ LAB_00197808:
                 isSourceConstant = (**(code **)(*src1Inst + 0x50))(src1Inst);
                 if ((isSourceConstant != 0) &&
                    (isSourceConstant = IRInst__getOperandRecord(cursorInst,0), *(int *)(isSourceConstant + 0x10) == 0x1010100))
-                goto LAB_00197784;
+                goto setInstFlags;
               }
               isFetchInst = (**(code **)(*cursorInst + 0x28))(cursorInst);
               if (isFetchInst == 0) {
@@ -1462,7 +1462,7 @@ LAB_00197808:
                 startsNewWord = !prevEndedAluClause;
                 if (startsNewWord) {
                   groupHasAlu = true;
-                  goto LAB_00197624;
+                  goto checkCursorInst;
                 }
                 groupHasAlu = true;
               }
@@ -1474,18 +1474,18 @@ LAB_00197808:
                 }
                 else {
                   if (clauseState != 2) {
-                    if ((clauseState != 1) || ((cursorInst[5] & 0x1000U) == 0)) goto LAB_0019752c;
+                    if ((clauseState != 1) || ((cursorInst[5] & 0x1000U) == 0)) goto setPrevEndedAluClause;
                     (**(code **)(*this + 0x148))(this);
                   }
                   this[0x23] = 1;
                   (**(code **)(*this + 0x134))(this);
                   (**(code **)(*this + 0x138))(this);
                 }
-LAB_0019752c:
+setPrevEndedAluClause:
                 prevEndedAluClause = false;
                 groupHasFetch = true;
                 startsNewWord = true;
-LAB_00197624:
+checkCursorInst:
                 if (*(int *)(cursorInst[0x22] + 8) == 0xb4) {
                   cursorInst[5] = cursorInst[5] | 0x1000;
                 }
@@ -1498,13 +1498,13 @@ LAB_00197624:
                   if (isFetchInst2 == 0) {
                     prevEndedAluClause = true;
                     startOfShaderFlag = 0;
-                    goto LAB_001976d0;
+                    goto checkGroupHasFlag0x80;
                   }
                 }
                 prevEndedAluClause = false;
                 startOfShaderFlag = 0;
               }
-LAB_001976d0:
+checkGroupHasFlag0x80:
               if (groupHasFlag0x80) {
                 (**(code **)(*this + 0x114))(this);
               }
@@ -1517,7 +1517,7 @@ LAB_001976d0:
                 this[0x1a] = this[0x1a] + 1;
                 (**(code **)(*this + 0x15c))(this);
                 instFlags = cursorInst[5];
-                goto LAB_00197788;
+                goto setCursorInst;
               }
             }
             else {
@@ -1537,13 +1537,13 @@ LAB_001976d0:
               if ((predicate38 != 0) && (this[0x23] == 1)) {
                 (**(code **)(*this + 0x148))(this);
                 instFlags = cursorInst[5];
-                goto LAB_00197788;
+                goto setCursorInst;
               }
             }
-LAB_00197784:
+setInstFlags:
             instFlags = cursorInst[5];
           }
-LAB_00197788:
+setCursorInst:
           cursorInst = (int *)cursorInst[2];
         } while ((cursorInst != (int *)0x0) && ((instFlags & 4) != 0));
         if (groupHasAlu) {
@@ -1552,7 +1552,7 @@ LAB_00197788:
           cursorInst = (int *)groupInst[2];
         }
         else {
-          if ((groupHasFetch) || (!groupHasPresub)) goto LAB_00197808;
+          if ((groupHasFetch) || (!groupHasPresub)) goto loopSetCursorInst;
           (**(code **)(*this + 0x110))(this);
           cursorInst = (int *)groupInst[2];
         }
@@ -1617,18 +1617,18 @@ int R300MachineAssembler__classifyAluOperation(this, rgbLaneBytes, alphaLaneByte
     if (*(char *)(this + 0x28) == '\0') {
       laneY = *(char *)((int)this + 0xa1);
       laneZ = *(char *)((int)this + 0xa2);
-LAB_001979d4:
+loopSetClassFlags:
       classFlags = 1;
     }
     else {
       laneY = *(char *)((int)this + 0xa1);
       if (laneY == '\0') {
         laneZ = *(char *)((int)this + 0xa2);
-        goto LAB_001979d4;
+        goto loopSetClassFlags;
       }
       laneZ = *(char *)((int)this + 0xa2);
       classFlags = 0;
-      if (laneZ == '\0') goto LAB_001979d4;
+      if (laneZ == '\0') goto loopSetClassFlags;
     }
     laneW = *(char *)((int)this + 0xa3);
     if (laneW == '\0') {
@@ -1655,7 +1655,7 @@ LAB_001979d4:
     if (laneW != '\0') {
       laneEnableByte = 0;
     }
-    goto LAB_00197b18;
+    goto storeAlphaLaneBytes;
   case 1:
     classFlags = 5;
     if (*(char *)((int)this + 0xa3) == '\0') {
@@ -1678,7 +1678,7 @@ LAB_001979d4:
     break;
   case 3:
     classFlags = 3;
-    goto LAB_00197aa4;
+    goto storeAlphaHardwareOpcodeOut;
   default:
     classFlags = 0;
     break;
@@ -1690,12 +1690,12 @@ LAB_001979d4:
       classFlags = 0xb;
     }
     laneEnableByte = 0xff;
-LAB_00197b18:
+storeAlphaLaneBytes:
     *(undefined1 *)((int)alphaLaneBytes + 3) = laneEnableByte;
     break;
   case 8:
     classFlags = 0x13;
-LAB_00197aa4:
+storeAlphaHardwareOpcodeOut:
     *alphaHardwareOpcodeOut = 1;
     *(undefined1 *)((int)alphaLaneBytes + 3) = 0xff;
     *(undefined1 *)((int)rgbLaneBytes + 2) = 0xff;

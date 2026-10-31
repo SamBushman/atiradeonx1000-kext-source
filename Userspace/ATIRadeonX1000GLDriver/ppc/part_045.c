@@ -62,7 +62,7 @@ int Scheduler__allocateRegisterForNode(scheduler, node)
       else {
         liveOutSet = scheduler[0x4c];
         setWordOffset = groupReg >> 3 & 0x1ffffffc;
-        if ((*(uint *)(setWordOffset + liveOutSet + 8) >> (groupReg & 0x1f) & 1) != 0) goto LAB_0016cd84;
+        if ((*(uint *)(setWordOffset + liveOutSet + 8) >> (groupReg & 0x1f) & 1) != 0) goto setThreadLimit;
       }
       if ((*(uint *)(setWordOffset + liveOutSet + 8) >> (groupReg & 0x1f) & 1) == 0) {
         return;
@@ -81,7 +81,7 @@ int Scheduler__allocateRegisterForNode(scheduler, node)
       return;
     }
     groupCycleBound = *(int *)(groupRecord + 0x14);
-LAB_0016cd84:
+setThreadLimit:
     threadLimit = (**(code **)(*(int *)scheduler[3] + 0x18))((int *)scheduler[3]);
     if ((threadLimit <= groupCycleBound) &&
        (threadLimit = Scheduler__findFreeHwRegister(scheduler,*(undefined4 *)groupRecord,groupCycleBound,1), -1 < threadLimit)) {
@@ -137,7 +137,7 @@ LAB_0016cd84:
   nodeReg = *(uint *)(nodeInstAlias + 0x94);
   if (((*(uint *)(nodeInstAlias + 0x14) & 0x40) == 0) || (scheduler[0x51] <= (int)nodeReg)) {
     nodeIssueCycle = *(int *)(node + 0x2c);
-LAB_0016cd5c:
+loopSetThreadLimit:
     threadLimit = (**(code **)(*(int *)scheduler[3] + 0x18))((int *)scheduler[3]);
     if ((nodeIssueCycle < threadLimit) ||
        (threadLimit = Scheduler__findFreeHwRegister(scheduler,*(undefined4 *)(*(int *)(node + 0x38) + 0xc),nodeIssueCycle,1),
@@ -170,7 +170,7 @@ LAB_0016cd5c:
     else {
       liveOutSet = scheduler[0x4c];
       setWordOffset = nodeReg >> 3 & 0x1ffffffc;
-      if ((*(uint *)(setWordOffset + liveOutSet + 8) >> (nodeReg & 0x1f) & 1) != 0) goto LAB_0016cd5c;
+      if ((*(uint *)(setWordOffset + liveOutSet + 8) >> (nodeReg & 0x1f) & 1) != 0) goto loopSetThreadLimit;
     }
     if ((*(uint *)(setWordOffset + liveOutSet + 8) >> (nodeReg & 0x1f) & 1) != 0) {
       componentsLeft2 = 4;
@@ -284,7 +284,7 @@ int Scheduler__releaseOperandsOfIssuedNode(scheduler, node)
         }
         IRInst__setOperandSource(inst,producerNode,operandVReg,0,*scheduler);
       }
-      goto LAB_0016d0d8;
+      goto setOperandNumber;
     }
   }
   if (((inst[5] & 0x200U) != 0) &&
@@ -298,7 +298,7 @@ int Scheduler__releaseOperandsOfIssuedNode(scheduler, node)
       IRInst__setExtraOperandSource(inst,operandVReg,0,*scheduler);
     }
   }
-LAB_0016d0d8:
+setOperandNumber:
   operandNumber = Compiler__isOptionEnabled(*scheduler,0x25);
   if ((operandNumber != 0) && (operandNumber = *(int *)(node + 0x60), operandNumber != 0)) {
     producerNode = *(int *)(operandNumber + 4);
@@ -496,13 +496,13 @@ int Scheduler__tryReuseAddressRegister(scheduler, node)
     if (*(char *)(firstWrittenComponent + operandRecord + 0x10) != '\x01') {
       operandRecord = IRInst__getOperandRecord(nodeInst,1);
       componentSelect = (uint)*(byte *)(firstWrittenComponent + operandRecord + 0x10);
-      goto LAB_0016d5f8;
+      goto setSlotCount;
     }
     moreComponents = firstWrittenComponent != 3;
     firstWrittenComponent = firstWrittenComponent + 1;
   } while (moreComponents);
   componentSelect = 4;
-LAB_0016d5f8:
+setSlotCount:
   slotCount = scheduler[0x61];
   if (0 < slotCount) {
     loopIndex = 0;
@@ -608,10 +608,10 @@ LAB_0016d5f8:
             existingLoadNode = *addressRegisterSlot;
             a0 = *(int **)(existingLoadNode + 0x38);
             if (*(int *)(nodeInst + 300) == 0) {
-              if (*(int *)(a0[0x22] + 8) == 0xa6) goto LAB_0016d91c;
+              if (*(int *)(a0[0x22] + 8) == 0xa6) goto checkScheduler;
             }
             else if (*(int *)(a0[0x22] + 8) == 0x2b) {
-LAB_0016d91c:
+checkScheduler:
               if ((scheduler[chosenSlot + 0x5c] == 0) ||
                  (nodeAddressSource = SchedNode__getLastConsumerCycle(scheduler[chosenSlot + 0x5c],slotLane), nodeAddressSource < *(int *)(existingLoadNode + 0x2c)
                  )) {
@@ -779,11 +779,11 @@ int Scheduler__tryReuseLoopIndexLoad(scheduler, node)
       requestedIndex = IRInst__getDefiningField128(inst,0);
       sourceDef2 = IRInst__getOperandSource(inst,1);
       if (loadBaseReg == *(int *)(sourceDef2 + 0x94)) {
-        if ((loadStart <= requestedIndex) && (requestedIndex < loadStart + loadSize)) goto LAB_0016ddd8;
+        if ((loadStart <= requestedIndex) && (requestedIndex < loadStart + loadSize)) goto loopCallIRInst_setOperandSource;
         if (loadSize == 0x10) {
           if ((loadStart <= requestedIndex) && (requestedIndex < loadStart + 0x20)) {
             *(undefined4 *)(loadInst + 300) = 0x20;
-LAB_0016ddd8:
+loopCallIRInst_setOperandSource:
             IRInst__setOperandSource(inst,1,loadInst,0,*scheduler);
             *(undefined4 *)(node + 0x6c) = *(undefined4 *)(loadSlotCursor2[0x62] + 0x6c);
             *(int *)(loadSlotCursor2[0x62] + 0x6c) = node;
@@ -792,7 +792,7 @@ LAB_0016ddd8:
           if ((loadStart + -0x10 <= requestedIndex) && (requestedIndex < loadStart + 0x10)) {
             *(undefined4 *)(loadInst + 300) = 0x20;
             *(int *)(loadInst + 0x134) = loadStart + -0x10;
-            goto LAB_0016ddd8;
+            goto loopCallIRInst_setOperandSource;
           }
         }
       }
@@ -893,7 +893,7 @@ int Scheduler__enqueueReadyNode(scheduler, node)
       while (nextCompareNode != 0) {
         compareResult = Scheduler__compareNodes(scheduler,node,compareNode,0);
         if (0 < compareResult) {
-LAB_0016e148:
+loopCallDList_insertBefore:
           DList__insertBefore(node,compareNode);
           return;
         }
@@ -907,7 +907,7 @@ LAB_0016e148:
       nextCompareNode = *(int *)(compareNode + 8);
       while (nextCompareNode != 0) {
         compareResult = Scheduler__compareNodes(scheduler,node,compareNode,0);
-        if (0 < compareResult) goto LAB_0016e148;
+        if (0 < compareResult) goto loopCallDList_insertBefore;
         compareNode = *(int *)(compareNode + 8);
         nextCompareNode = *(int *)(compareNode + 8);
       }
@@ -975,7 +975,7 @@ int Scheduler__splitAddressRegisterUses(scheduler)
             if (*(int *)(clonedNode + 0x10) == (DAT_001aa818)[addressComponent]) {
               componentsLeft = 4;
               clonedNode = consumerNode;
-LAB_0016e258:
+loopCheckClonedNode:
               if (*(int *)(clonedNode + 0x48) < 1) goto code_r0x0016e264;
               clonedInst = IRInst__clone(*(undefined4 *)(consumerNode + 0x38),*scheduler,0);
               addressSource = IRInst__getOperandSource(*(undefined4 *)(addressLoadNode + 0x38),1);
@@ -1083,7 +1083,7 @@ LAB_0016e258:
               }
               ((int (*)())Scheduler__enqueueReadyNode)(scheduler,clonedNode);
             }
-LAB_0016e574:
+loopSetConsumerNode:
             consumerNode = *(int *)(consumerNode + 0x6c);
           } while (consumerNode != 0);
           clonedNode = scheduler[0x61];
@@ -1187,8 +1187,8 @@ LAB_0016e800: ;
 code_r0x0016e264:
   clonedNode = clonedNode + 4;
   componentsLeft = componentsLeft + -1;
-  if (componentsLeft == 0) goto LAB_0016e574;
-  goto LAB_0016e258;
+  if (componentsLeft == 0) goto loopSetConsumerNode;
+  goto loopCheckClonedNode;
 }
 
 /* Scheduler__advanceCycle @ 0x16e828 (1640 bytes) */
@@ -1320,7 +1320,7 @@ int Scheduler__advanceCycle(scheduler)
         }
         else {
           nodeReadyCycle = *(int *)(waitingNode + 0x30);
-          if (aluReadyCycle <= nodeReadyCycle) goto LAB_0016eb08;
+          if (aluReadyCycle <= nodeReadyCycle) goto setWaitingNode;
         }
         noAluReadyCycle = nodeReadyCycle < 0;
         aluReadyCycle = nodeReadyCycle;
@@ -1336,12 +1336,12 @@ int Scheduler__advanceCycle(scheduler)
         }
         else {
           nodeReadyCycle = *(int *)(waitingNode + 0x30);
-          if (fetchReadyCycle <= nodeReadyCycle) goto LAB_0016eb08;
+          if (fetchReadyCycle <= nodeReadyCycle) goto setWaitingNode;
         }
         noFetchReadyCycle = nodeReadyCycle < 0;
         fetchReadyCycle = nodeReadyCycle;
       }
-LAB_0016eb08:
+setWaitingNode:
       waitingNode = *(int *)(waitingNode + 8);
     } while (*(int *)(waitingNode + 8) != 0);
   }
@@ -1358,14 +1358,14 @@ LAB_0016eb08:
     scheduler[0x47] = nodeHeight;
     if (noAluReadyCycle) {
       nodeReadyCycle = *(int *)(specialNode + 0x30);
-LAB_0016eb7c:
+loopSetNoAluReadyCycle:
       noAluReadyCycle = nodeReadyCycle < 0;
       aluReadyCycle = nodeReadyCycle;
     }
     else {
       nodeReadyCycle = *(int *)(specialNode + 0x30);
       noAluReadyCycle = false;
-      if (nodeReadyCycle < aluReadyCycle) goto LAB_0016eb7c;
+      if (nodeReadyCycle < aluReadyCycle) goto loopSetNoAluReadyCycle;
     }
     specialNode = *(int *)(specialNode + 8);
     nextNode = *(int *)(specialNode + 8);
@@ -1374,20 +1374,20 @@ LAB_0016eb7c:
   scheduler[0x45] = targetDepth;
   scheduler[9] = (uint)(scheduler[0x44] <= targetDepth);
   if (noAluReadyCycle) {
-    if (noFetchReadyCycle) goto LAB_0016ec14;
+    if (noFetchReadyCycle) goto setFirstPassedOver;
   }
   else if (((noFetchReadyCycle) || (scheduler[0x46] == 0)) || (aluReadyCycle <= fetchReadyCycle)) {
     if (aluReadyCycle <= scheduler[0xb]) {
       aluReadyCycle = scheduler[0xb];
     }
     scheduler[0xb] = aluReadyCycle;
-    goto LAB_0016ec14;
+    goto setFirstPassedOver;
   }
   if (fetchReadyCycle <= scheduler[0xb]) {
     fetchReadyCycle = scheduler[0xb];
   }
   scheduler[0xb] = fetchReadyCycle;
-LAB_0016ec14:
+setFirstPassedOver:
   firstPassedOver = *(int *)(scheduler[0x21] + 8);
   if (firstPassedOver == 0) {
     topFetchCount = 0;
@@ -1472,16 +1472,16 @@ int Scheduler__onNodeReady(scheduler, node)
   int isFetchFlag;
   
   vcall50Result = (**(code **)(*(int *)scheduler[2] + 0x50))((int *)scheduler[2],node);
-  if (vcall50Result == 0) goto LAB_0016ef60;
+  if (vcall50Result == 0) goto setIsNodeReadyResult;
   balanceEnabled = Compiler__isOptionEnabled(*scheduler,0x28);
   if (balanceEnabled == 0) {
-LAB_0016ef04:
+loopSetIsFetchFlag:
     isFetchFlag = 0;
   }
   else {
     isFetchFlag = 1;
     vcall34Result = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node);
-    if (vcall34Result == 0) goto LAB_0016ef04;
+    if (vcall34Result == 0) goto loopSetIsFetchFlag;
   }
   newClass = (**(code **)(*(int *)scheduler[2] + 0x4c))
                     ((int *)scheduler[2],*(undefined4 *)(node + 0x38));
@@ -1491,7 +1491,7 @@ LAB_0016ef04:
     *(int *)(node + 0x5c) = isFetchFlag;
     ((int (*)())SchedModel__countIssuedNode)(scheduler[2],node);
   }
-LAB_0016ef60:
+setIsNodeReadyResult:
   isNodeReadyResult = Scheduler__isNodeReady(scheduler,node);
   if (isNodeReadyResult != 0) {
     ((int (*)())Scheduler__enqueueReadyNode)(scheduler,node);
@@ -1710,7 +1710,7 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
   otherNodesSeen = 0;
   while (*(int *)(node + 8) != 0) {
     nodeInst = *(int **)(node + 0x38);
-    if ((fetchBatchMode == 0) && (cycleLimit < *(int *)(node + 0x10))) goto LAB_00170868;
+    if ((fetchBatchMode == 0) && (cycleLimit < *(int *)(node + 0x10))) goto checkAddrRegLoadsSeen;
     isProjectionOfClass26or3a = IRInst__isProjectionOfClass26or3a(nodeInst);
     if (isProjectionOfClass26or3a == 0) {
       isProjectionOfClass44 = IRInst__isProjectionOfClass44(nodeInst);
@@ -1722,7 +1722,7 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
       coGroup = *(int *)(node + 0x60);
       otherNodesSeen = otherNodesSeen + 1;
       if (coGroup == 0) {
-LAB_0017036c:
+loopSetSchedulerAllocRegEnabled:
         schedulerAllocRegEnabled = Compiler__isOptionEnabled(*scheduler,0x25);
         if ((schedulerAllocRegEnabled != 0) &&
            (((((*(int *)(node + 0x60) == 0 || (*(int *)(*(int *)(node + 0x60) + 4) < 0)) &&
@@ -1764,14 +1764,14 @@ LAB_0017036c:
         else {
           if ((*(uint *)(*(int *)(*scheduler + 0x30c) + 8) & 0x200) == 0) {
             canAdd = (**(code **)(*(int *)scheduler[2] + 0xc))((int *)scheduler[2],nodeInst);
-            if (canAdd != 0) goto LAB_001705f8;
+            if (canAdd != 0) goto callDList_unlink;
             bundleEmpty = (**(code **)(*(int *)scheduler[2] + 0x24))((int *)scheduler[2]);
             if (bundleEmpty != 0) {
               insertedCopy = Scheduler__insertOperandCopy(scheduler,node);
               if (insertedCopy != 0) {
                 return insertedCopy;
               }
-              goto LAB_001705f8;
+              goto callDList_unlink;
             }
             balanceEnabled = Compiler__isOptionEnabled(*scheduler,0x28);
             if (balanceEnabled != 0) {
@@ -1779,7 +1779,7 @@ LAB_0017036c:
               if ((selectsRewritable != 0) &&
                  (registerStateFits = (**(code **)(*(int *)scheduler[2] + 0x2c))
                                     ((int *)scheduler[2],node,scheduler + 0x4d), registerStateFits != 0))
-              goto LAB_001705f8;
+              goto callDList_unlink;
               occupiedSlots = 0;
               rewritableCount = 0;
               lastBundleNode = 0;
@@ -1829,7 +1829,7 @@ LAB_0017036c:
               candidateFits = (**(code **)(*(int *)scheduler[2] + 0x2c))
                                 ((int *)scheduler[2],node,scheduler + 0x4d);
             }
-            if (candidateFits != 0) goto LAB_001705f8;
+            if (candidateFits != 0) goto callDList_unlink;
           }
           savedNext = *(int *)(node + 8);
           DList__unlink(node);
@@ -1842,7 +1842,7 @@ LAB_0017036c:
               nothingPassedOver = false;
               DList__pushBack(scheduler + (deferredBucket - 1U) * 6 + 0x2b,node);
               node = savedNext;
-              goto LAB_00170838;
+              goto setFetchBatchMode;
             }
           }
           DList__pushBack(scheduler + 0x1f,node);
@@ -1919,15 +1919,15 @@ LAB_0017036c:
             do {
               destOperandRecord = IRInst__getOperandRecord(nodeInst,0);
               if ((*(char *)(componentIndex + destOperandRecord + 0x10) != '\x01') && (0 < (int)(&vec2Count)[componentIndex]))
-              goto LAB_00170968;
+              goto setNode;
               moreComponents = componentIndex != 3;
               componentIndex = componentIndex + 1;
             } while (moreComponents);
           }
           coGroup = *(int *)(node + 0x60);
-          if (coGroup == 0) goto LAB_0017036c;
+          if (coGroup == 0) goto loopSetSchedulerAllocRegEnabled;
         }
-        if (*(int *)(coGroup + 8) == 0) goto LAB_0017036c;
+        if (*(int *)(coGroup + 8) == 0) goto loopSetSchedulerAllocRegEnabled;
         if (*(int *)(*(int *)(coGroup + 8) + 0x2c) == scheduler[0xb]) {
           operandRecord2 = IRInst__getOperandRecord(nodeInst,0);
           groupSelectCursor = (char *)(coGroup + 0xc);
@@ -1936,7 +1936,7 @@ LAB_0017036c:
           selectsLeft = 4;
           do {
             if ((*groupSelectCursor != '\x01') && (*(char *)((int)&vec2Capacity + componentIndex) != '\x01'))
-            goto LAB_00170320;
+            goto setNextNode;
             componentIndex = componentIndex + 1;
             groupSelectCursor = groupSelectCursor + 1;
             selectsLeft = selectsLeft + -1;
@@ -1944,16 +1944,16 @@ LAB_0017036c:
           coGroup = *(int *)(node + 0x60);
         }
         leaderRegKind = *(int *)(*(int *)(*(int *)(coGroup + 8) + 0x38) + 0x98);
-        if (leaderRegKind == nodeInst[0x26]) goto LAB_0017036c;
+        if (leaderRegKind == nodeInst[0x26]) goto loopSetSchedulerAllocRegEnabled;
         if (nodeInst[0x26] == 1) {
           nodeInst[0x26] = 0;
-          goto LAB_0017036c;
+          goto loopSetSchedulerAllocRegEnabled;
         }
         if (((nodeInst[5] & 0x20U) == 0) && (leaderRegKind == 1)) {
           nodeInst[0x26] = 1;
-          goto LAB_0017036c;
+          goto loopSetSchedulerAllocRegEnabled;
         }
-LAB_00170968:
+setNode:
         node = *(int *)(node + 8);
       }
     }
@@ -1962,27 +1962,27 @@ LAB_00170968:
       addrRegLoadsSeen = addrRegLoadsSeen + 1;
 joined_r0x00170058:
       if (reuseResult != 0) {
-LAB_001705f8:
+callDList_unlink:
         DList__unlink(node);
         return node;
       }
-LAB_00170320:
+setNextNode:
       nextNode = *(int *)(node + 8);
       DList__unlink(node);
       DList__pushBack(scheduler + 0x1f,node);
       node = nextNode;
     }
-LAB_00170838:
+setFetchBatchMode:
     fetchBatchMode = scheduler[0x46];
   }
   if (fetchBatchMode == 0) {
-LAB_00170868:
+checkAddrRegLoadsSeen:
     if (((0 < addrRegLoadsSeen) || (0 < loopIndexLoadsSeen)) &&
        ((otherNodesSeen == 0 && (waitingListEmpty = DList__isEmpty(scheduler + 0x19), waitingListEmpty != 0)))) {
       slotsLeft = 5;
       bundleSlotCursor = (int *)scheduler[0xc];
       do {
-        if (*bundleSlotCursor != 0) goto LAB_001708c4;
+        if (*bundleSlotCursor != 0) goto setCurrentListEmpty;
         bundleSlotCursor = bundleSlotCursor + 1;
         slotsLeft = slotsLeft + -1;
       } while (slotsLeft != 0);
@@ -2012,7 +2012,7 @@ LAB_00170868:
                 if (*(int *)(operandRecord + 0x10) == *(int *)(PTR_DAT_001e8b8c + slotByteOffset)) {
                   componentCountsLeft = 4;
                   componentCountCursor = a0User;
-LAB_0016f038:
+loopCheckComponentCountCursor:
                   if (*(int *)(componentCountCursor + 0x48) < 1) goto code_r0x0016f044;
                   laneMaskOrUserCount = PTR_DAT_001e8b8c;
                   SelectWord__selectWhereMasked(&vec2Capacity,0,*(undefined4 *)(*(int *)(a0User + 0x38) + 0xc));
@@ -2144,7 +2144,7 @@ LAB_0016f038:
                   }
                   ((int (*)())Scheduler__onNodeReady)(piStack00000018,a0UserCopy);
                 }
-LAB_0016f3cc:
+loopSetA0User:
                 a0User = *(int *)(a0User + 0x6c);
               } while (a0User != 0);
               addrRegLoadCount = piStack00000018[0x61];
@@ -2170,7 +2170,7 @@ LAB_0016f3cc:
         return 0;
       }
     }
-LAB_001708c4:
+setCurrentListEmpty:
     currentListEmpty = DList__isEmpty(scheduler + 0x13);
   }
   else {
@@ -2187,7 +2187,7 @@ LAB_001708c4:
   }
   do {
     if (*(int *)(candidate + 8) == 0) {
-LAB_0016f574:
+loopSetBundleEmpty:
       bundleEmpty = (**(code **)(*(int *)scheduler[2] + 0x24))((int *)scheduler[2]);
       if (bundleEmpty != 0) {
         (**(code **)(*(int *)scheduler[2] + 0x7c))((int *)scheduler[2]);
@@ -2206,11 +2206,11 @@ LAB_0016f574:
         if (candidateCopy != 0) {
           return candidateCopy;
         }
-        goto LAB_0016f530;
+        goto setCandidateIssuable;
       }
     }
     else {
-LAB_0016f530:
+setCandidateIssuable:
       candidateIssuable = (**(code **)(*(int *)scheduler[3] + 0xc))
                          ((int *)scheduler[3],*(undefined4 *)(candidate + 0x38));
       if (candidateIssuable != 0) {
@@ -2442,7 +2442,7 @@ LAB_0016fcc0:
                                  *(uint *)(*(int *)(node1 + 0x38) + 0xc) | siblingEdge[6];
                             candidateOrEdgeRecord = *(uint **)(node1 + 0x60);
                             *candidateOrEdgeRecord = *candidateOrEdgeRecord | siblingEdge[6];
-                            goto LAB_0016fafc;
+                            goto checkSiblingEdge;
                           }
                           copyScanIndex = copyScanIndex + 1;
                         } while (copyCount != copyScanIndex);
@@ -2478,9 +2478,9 @@ LAB_0016fcc0:
                       candidateOrEdgeRecord = *(uint **)(candidate + 0x60);
                       candidateOrEdgeRecord[4] = candidateOrEdgeRecord[4] + 1;
                       **(uint **)(candidate + 0x60) = **(uint **)(candidate + 0x60) | siblingEdge[6];
-LAB_0016fafc:
+checkSiblingEdge:
                       if ((siblingEdge[4] < 1) || (siblingEdge[5] != 0)) {
-LAB_0016fb44:
+loopSetByteCursorOrCount:
                         byteCursorOrCount = *siblingEdge;
                       }
                       else {
@@ -2489,7 +2489,7 @@ LAB_0016fb44:
                         if (sourceDef2 == *(int *)(byteCursorOrCount + 0x38)) {
                           IRInst__setOperandSource(*(undefined4 *)(consumer + 0x38),siblingEdge[4],
                                        *(undefined4 *)(node1 + 0x38),0,*scheduler);
-                          goto LAB_0016fb44;
+                          goto loopSetByteCursorOrCount;
                         }
                       }
                       compsLeft = 4;
@@ -2538,7 +2538,7 @@ LAB_0016fb44:
             workSuccEdges = *(uint **)(workNode + 0x40);
           } while( true );
         }
-        goto LAB_0016f574;
+        goto loopSetBundleEmpty;
       }
     }
     candidate = *(int *)(candidate + 8);
@@ -2546,8 +2546,8 @@ LAB_0016fb44:
 code_r0x0016f044:
   componentCountCursor = componentCountCursor + 4;
   componentCountsLeft = componentCountsLeft + -1;
-  if (componentCountsLeft == 0) goto LAB_0016f3cc;
-  goto LAB_0016f038;
+  if (componentCountsLeft == 0) goto loopSetA0User;
+  goto loopCheckComponentCountCursor;
 }
 #undef vecCapacity
 #undef vecCount
@@ -4113,7 +4113,7 @@ int KeyLaneTable__eqKeys(keyA, keyB)
   if ((((opcodeCheck == 0) || (*(int *)(recordA + 0xb4) != *(int *)(recordB + 0xb4))) ||
       (*(int *)(recordA + 0xc0) != *(int *)(recordB + 0xc0))) ||
      (*(int *)(recordA + 0xc4) != *(int *)(recordB + 0xc4))) {
-LAB_00172d04:
+loopSetResult:
     result = 0xffffffff;
   }
   else {
@@ -4127,7 +4127,7 @@ LAB_00172d04:
         ) {
       keyOrCountReg = Ptr__equalNonNull(*selectCursorA,*selectCursorB);
       if (((keyOrCountReg == 0) || (*(int *)(fieldsA + 0x108) != *(int *)(fieldsB + 0x108))) ||
-         (*(int *)(cursorA + 0x20) != *(int *)(cursorB + 0x20))) goto LAB_00172d04;
+         (*(int *)(cursorA + 0x20) != *(int *)(cursorB + 0x20))) goto loopSetResult;
       laneFieldPtrA = (int *)(cursorA + 0x30);
       fieldsA = fieldsA + 4;
       laneFieldPtrB = (int *)(cursorB + 0x30);
@@ -4136,7 +4136,7 @@ LAB_00172d04:
       fieldsB = fieldsB + 4;
       selectCursorA = selectCursorA + 4;
       selectCursorB = selectCursorB + 4;
-      if (*laneFieldPtrA != *laneFieldPtrB) goto LAB_00172d04;
+      if (*laneFieldPtrA != *laneFieldPtrB) goto loopSetResult;
     }
     result = 0;
   }
@@ -4382,7 +4382,7 @@ int ValueKey__rewriteDuplicateLanesAsMov(ctx)
       do {
         firstEqualLane = firstEqualLane + '\x01';
         innerCountdown = innerCountdown + -1;
-        if (innerCountdown == 0) goto LAB_001730b4;
+        if (innerCountdown == 0) goto setLanesLeft;
         keyPtr = (int *)(innerKeyCursor + 0x24);
         innerKeyCursor = innerKeyCursor + 4;
       } while (*keyPtr != *(int *)(outerKeyCursor + 0x24));
@@ -4390,7 +4390,7 @@ int ValueKey__rewriteDuplicateLanesAsMov(ctx)
     producerInst = *(int *)(ctx + 0xb0);
     *(char *)((int)&laneMapWord + loopIndex) = firstEqualLane;
     *(undefined1 *)(loopIndex + producerInst + 0x9c) = 1;
-LAB_001730b4:
+setLanesLeft:
     lanesLeft = 4 - loopIndex;
     do {
       loopIndex = loopIndex + 1;

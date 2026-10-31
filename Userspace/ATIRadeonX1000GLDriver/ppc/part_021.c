@@ -42,7 +42,7 @@ int Compiler__tryRetryAfterFailure(compiler, failureKind)
   
   if (*(int *)(compiler + 0x47c) != 0) {
     if (failureKind == 5) {
-LAB_000e1644:
+loopStoreCompiler:
       *(undefined4 *)(compiler + 0x318) = 1;
       *(int *)(compiler + 0x478) = *(int *)(compiler + 0x480) + -1;
       *(undefined4 *)(compiler + 0x314) = 0;
@@ -51,12 +51,12 @@ LAB_000e1644:
     }
     if (failureKind == 4) {
       iVar1 = 0;
-      if (*(int *)(compiler + 0x6bc) != 0) goto LAB_000e1644;
-      goto LAB_000e16a4;
+      if (*(int *)(compiler + 0x6bc) != 0) goto loopStoreCompiler;
+      goto checkFailureKind;
     }
   }
   iVar1 = *(int *)(compiler + 0x6bc);
-LAB_000e16a4:
+checkFailureKind:
   if ((iVar1 == 0) && (failureKind == 4)) {
     uVar2 = 1;
     *(undefined4 *)(compiler + 0x318) = 1;
@@ -1560,7 +1560,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   programTooLarge = ((int (*)())EncoderState__sinkIsOverflowed)(auStack_74);
   compressEnabled = Compiler__isOptionEnabled(writer[2],0x4d);
   if (compressEnabled == 0) {
-    if (programTooLarge != 0) goto LAB_000e3900;
+    if (programTooLarge != 0) goto callCompiler_fail;
   }
   else if (programTooLarge != 0) {
     if (*writer == 0) {
@@ -1571,13 +1571,13 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
       ((int (*)())EncoderState__sinkIsOverflowed)(auStack_74);
       Compiler__logf(writer[2],"Compression : size reduced from %d to %d  (%%%d)\n",sizeBeforeCompression,
                    writer[1],(int)((sizeBeforeCompression - writer[1]) * 100) / (int)sizeBeforeCompression,staleArgR8,staleArgR9,staleArgR10);
-      goto LAB_000e392c;
+      goto returnEncoderState__destroy_e3308;
     }
-LAB_000e3900:
+callCompiler_fail:
     Compiler__fail(writer[2],5);
   }
   (**(code **)(*local_54 + 0x24))(local_54,outBuffer,outSize);
-LAB_000e392c:
+returnEncoderState__destroy_e3308:
   return ((int (*)())EncoderState__destroy_e3308)(auStack_74);
 }
 #undef auStack_78
@@ -1812,7 +1812,7 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
             if (firstPending != operandVReg2) {
               needsClone = true;
               hasTwoPending = true;
-              goto LAB_000e4140;
+              goto loopSetFirstPending;
             }
             needsClone = false;
             ctx[1] = ctx[1] + 1;
@@ -1825,7 +1825,7 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
       else {
         needsClone = true;
         if (iVar14 != 1) {
-LAB_000e4140:
+loopSetFirstPending:
           firstPending = pendingInsts[0];
           sourceDef = IRInst__getOperandSource(pendingInsts[0],pendingInsts[0][0x21]);
           ctx[2] = ctx[2] + 1;
@@ -1922,14 +1922,14 @@ LAB_000e4140:
             if ((instFlags & 1) != 0) {
               moveBlocked = ((int (*)())IRInst__hasSourceWithKey)(scanCursor,iVar14,*ctx);
               if (moveBlocked != 0) {
-LAB_000e413c:
+loopSetHasTwoPending:
                 hasTwoPending = false;
-                goto LAB_000e4140;
+                goto loopSetFirstPending;
               }
               instFlags = scanCursor[5];
               if ((instFlags & 0x200) != 0) {
                 keyEqualResultB = ((int (*)())IRInst__lastSourceKeyEquals)(scanCursor,iVar14,*ctx);
-                if (keyEqualResultB != 0) goto LAB_000e413c;
+                if (keyEqualResultB != 0) goto loopSetHasTwoPending;
                 instFlags = scanCursor[5];
               }
             }

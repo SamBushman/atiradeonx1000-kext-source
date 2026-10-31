@@ -247,7 +247,7 @@ int FudoPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
   a0 = (int *)IRInst__getOperandSource(inst,srcIndex);
   loopRemaining = (**(code **)(*a0 + 0x48))(a0);
   if (loopRemaining == 0) {
-LAB_00191c54:
+loopSetResult:
     result = 0;
   }
   else {
@@ -262,7 +262,7 @@ LAB_00191c54:
       if (laneMaskByte == '\0') {
         if ((((int)*(char *)(a0 + 0x57) >> (*(byte *)((int)&srcSelectWord + loopIndex) & 0x3f) & 1U) == 0) ||
            (((laneValue = GH_U2F((unsigned int)(a0[(uint)*(byte *)((int)&srcSelectWord + loopIndex) * 6 + 8])), laneValue != 0.0 &&
-             (laneValue != 1.0)) && (halfBits = 0x3f000000, laneValue != 0.5)))) goto LAB_00191c54;
+             (laneValue != 1.0)) && (halfBits = 0x3f000000, laneValue != 0.5)))) goto loopSetResult;
         *loopPtr2 = laneValue;
       }
       loopIndex = loopIndex + 1;
@@ -959,7 +959,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst);
   }
   compilerRef = program[PROG_compiler / 4];
-  if (*(int *)(curInst[0x22] + 8) != 0x77) goto LAB_00193490;
+  if (*(int *)(curInst[0x22] + 8) != 0x77) goto setLoopIndex3;
   loopIndex3 = Compiler__isOptionEnabled(compilerRef,0x3d);
   if (loopIndex3 != 0) {
     loopIndex3 = IRInst__getOperandRecord(curInst,1);
@@ -977,7 +977,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
         loopRemaining = (**(code **)(*addSrcDef + 0x48))(addSrcDef);
         if (loopRemaining == 0) {
           loopRemaining = (**(code **)(*operandVReg + 0x48))(operandVReg);
-          if (loopRemaining == 0) goto LAB_0019348c;
+          if (loopRemaining == 0) goto setCompilerRef;
           splatOperandIndex = 2;
           loopRemaining = 1;
         }
@@ -1076,7 +1076,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                   curInst[5] = curInst[5] | 0x2000000;
                   curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst);
                   compilerRef = program[PROG_compiler / 4];
-                  goto LAB_00193490;
+                  goto setLoopIndex3;
                 }
               }
             }
@@ -1085,9 +1085,9 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
       }
     }
   }
-LAB_0019348c:
+setCompilerRef:
   compilerRef = program[PROG_compiler / 4];
-LAB_00193490:
+setLoopIndex3:
   loopIndex3 = Compiler__isOptionEnabled(compilerRef,0x39);
   if (loopIndex3 != 0) {
     Inst__r300Peephole_1882a4(curInst,program[PROG_compiler / 4]);
@@ -1812,7 +1812,7 @@ int Vector__removeValue(vector, value)
   
   remaining = *(int *)(vector + 4);
   if (remaining == 0) {
-LAB_001943c4:
+loopSetFound:
     found = 0;
   }
   else {
@@ -1822,7 +1822,7 @@ LAB_001943c4:
       do {
         loopIndex = loopIndex + 1;
         remaining = remaining + -1;
-        if (remaining == 0) goto LAB_001943c4;
+        if (remaining == 0) goto loopSetFound;
       } while (value != (*(int **)(vector + 8))[loopIndex]);
     }
     ((int (*)())Vector__removeAt)(vector,loopIndex);

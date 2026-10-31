@@ -634,7 +634,7 @@ int IRInst__validate(inst, compiler)
             loopIndex = loopIndex + 1;
           } while (loopIndex <= inst[0x21]);
         }
-        goto LAB_0010663c;
+        goto setProgram;
       }
       laneIndex = laneIndex + 1;
       lanesLeft = lanesLeft + -1;
@@ -661,7 +661,7 @@ int IRInst__validate(inst, compiler)
         }
         srcLoopIndex = srcLoopIndex + 1;
       } while (srcLoopIndex <= inst[0x21]);
-LAB_0010663c:
+setProgram:
       program = *(int *)(compiler + COMP_currentProgram);
     }
   }
@@ -747,7 +747,7 @@ int IRInst__setExtraOperandSource(inst, newSource, trackUses, compilerCtx)
   options = *(int *)(compilerCtx + 0x6c4);
   if (trackUses != 0) {
     flagsOrCount = *(uint *)(inst + 0x14);
-    if ((flagsOrCount & 0x200) == 0) goto LAB_00106908;
+    if ((flagsOrCount & 0x200) == 0) goto checkFlagsOrCount;
     oldSource = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
     if (oldSource != 0) {
       vectorHeader = *(uint **)(oldSource + 0x10);
@@ -769,7 +769,7 @@ int IRInst__setExtraOperandSource(inst, newSource, trackUses, compilerCtx)
             Vector__removeAt(vectorHeader,loopIndex);
             flagsOrCount = *(uint *)(inst + 0x14);
             *(int *)(oldSource + 0x160) = *(int *)(oldSource + 0x160) + -1;
-            goto LAB_00106908;
+            goto checkFlagsOrCount;
           }
           flagsOrCount = vectorHeader[1];
           loopIndex = loopIndex + 1;
@@ -778,7 +778,7 @@ int IRInst__setExtraOperandSource(inst, newSource, trackUses, compilerCtx)
     }
   }
   flagsOrCount = *(uint *)(inst + 0x14);
-LAB_00106908:
+checkFlagsOrCount:
   if ((flagsOrCount & 0x200) == 0) {
     *(uint *)(inst + 0x14) = flagsOrCount | 0x200;
     extraOperandSwizzle = DAT_001af9c4;

@@ -220,7 +220,7 @@ int RegAlloc__findFreeSpillSlot(allocator)
   usedSlotBitset = *(int *)(allocator + 0x434);
   bitsLeft = *(int *)(usedSlotBitset + 4);
   if (bitsLeft == 0) {
-LAB_00131ae0:
+loopSetFreeSlot:
     freeSlot = 0xffffffff;
   }
   else {
@@ -230,7 +230,7 @@ LAB_00131ae0:
       do {
         freeSlot = freeSlot + 1;
         bitsLeft = bitsLeft + -1;
-        if (bitsLeft == 0) goto LAB_00131ae0;
+        if (bitsLeft == 0) goto loopSetFreeSlot;
       } while ((*(uint *)((freeSlot >> 3 & 0x1ffffffc) + usedSlotBitset + 8) >> (freeSlot & 0x1f) & 1) != 0);
     }
   }
@@ -428,7 +428,7 @@ int RegAlloc__buildClassTables(program, virtualRegCount, physicalRegCount, total
             if ((regKindFlagB == 0) ||
                (((instC[5] & 2U) != 0 ||
                 (regKindFlagB = (**(code **)(*instC + 0x50))(instC), regKindFlagB != 0)))) {
-LAB_00131f98:
+loopSetInstNextA:
               instNextA = (int *)instC[2];
             }
             else {
@@ -438,7 +438,7 @@ LAB_00131f98:
                 regClassB = regClassB * 4;
                 wordOrClassIndex = registerNumber >> 3 & 0x1ffffffc;
                 if ((*(uint *)(wordOrClassIndex + *(int *)(classArrayBytes + regClassB) + 8) >> (registerNumber & 0x1f) & 1) != 0)
-                goto LAB_00131f98;
+                goto loopSetInstNextA;
                 virtualCountArray = *(int *)(*(int *)(program + 0x3c0) + 0x18);
                 *(int *)(regClassB + virtualCountArray) = *(int *)(regClassB + virtualCountArray) + 1;
                 regClassB = *(int *)(classArrayBytes + regClassB);
@@ -447,7 +447,7 @@ LAB_00131f98:
                 regClassB = regClassB * 4;
                 wordOrClassIndex = registerNumber >> 3 & 0x1ffffffc;
                 if ((*(uint *)(wordOrClassIndex + *(int *)(allocation2 + regClassB) + 8) >> (registerNumber & 0x1f) & 1) != 0)
-                goto LAB_00131f98;
+                goto loopSetInstNextA;
                 physicalCountArray = *(int *)(*(int *)(program + 0x3c0) + 0x14);
                 *(int *)(regClassB + physicalCountArray) = *(int *)(regClassB + physicalCountArray) + 1;
                 regClassB = *(int *)(allocation2 + regClassB);
@@ -1253,7 +1253,7 @@ int RegAlloc__insertSpillCode(pass, copyState)
             inst = instListHead;
             do {
               instFlags = inst[5];
-              if ((instFlags & 1) == 0) goto LAB_001339e4;
+              if ((instFlags & 1) == 0) goto setInst;
               rootOrQuery = (**(code **)(*inst + 0x7c))(inst);
               if (rootOrQuery == 0) {
                 if ((inst[5] & 0x10000U) == 0) {
@@ -1331,30 +1331,30 @@ int RegAlloc__insertSpillCode(pass, copyState)
                   }
                 }
                 instQuery64 = (**(code **)(*inst + 100))(inst);
-                if (instQuery64 == 0) goto LAB_001339e0;
+                if (instQuery64 == 0) goto setInstFlags;
                 operandFlagsCursor = (uint *)(inst + 0x2e);
                 for (operandNumber = 1; laneNumber = (**(code **)(*inst + 0x14))(inst), operandNumber <= laneNumber;
                     operandNumber = operandNumber + 1) {
                   operandFlags = *operandFlagsCursor;
                   operandFlagsCursor = operandFlagsCursor + 6;
                   if ((((operandFlags & 1) != 0) || ((operandFlags & 2) != 0)) ||
-                     (laneNumber = IRInst__isSourceSelectIdentity(inst,operandNumber), laneNumber == 0)) goto LAB_001339e0;
+                     (laneNumber = IRInst__isSourceSelectIdentity(inst,operandNumber), laneNumber == 0)) goto setInstFlags;
                 }
-                if ((inst[0x48] != 0) || (inst[0x49] != 0)) goto LAB_001339e0;
+                if ((inst[0x48] != 0) || (inst[0x49] != 0)) goto setInstFlags;
                 if (((inst[0x20] != 0) &&
                     ((operandNumber = RegKind__flagBit0(inst[0x26]), operandNumber != 0 && ((inst[5] & 2U) == 0))))
                    && (operandNumber = (**(code **)(*inst + 0x50))(inst), operandNumber == 0)) {
                   laneCountdown = 4;
                   srcDef = inst;
                   do {
-                    if ((uint)(*(byte *)(srcDef + 0x27) - 2) < 2) goto LAB_001339e0;
+                    if ((uint)(*(byte *)(srcDef + 0x27) - 2) < 2) goto setInstFlags;
                     srcDef = (int *)((int)srcDef + 1);
                     laneCountdown = laneCountdown + -1;
                   } while (laneCountdown != 0);
                 }
                 IRInst__getOperandRecord(inst,0);
                 destKindClass = IRInst__operandKindClass(inst,0);
-                if (destKindClass != 0) goto LAB_001339e0;
+                if (destKindClass != 0) goto setInstFlags;
                 instFlags = inst[5];
                 if ((((instFlags & 2) == 0) && ((instFlags & 0x200) == 0)) && (-1 < (int)instFlags)) {
                   srcDef = (int *)IRInst__getOperandSource(inst,1);
@@ -1398,7 +1398,7 @@ int RegAlloc__insertSpillCode(pass, copyState)
                         instFlags = inst[5] | 0x80000000;
                         inst[5] = instFlags;
                       }
-                      goto LAB_001339e4;
+                      goto setInst;
                     }
                     if ((*(int *)(pass + 0x46c) <= destRootB) &&
                        (*(int *)(destRootB * 4 + *(int *)(pass + 0x45c)) ==
@@ -1406,14 +1406,14 @@ int RegAlloc__insertSpillCode(pass, copyState)
                       ((int (*)())InterferenceGraph__appendToNodeList)(copyState,destRootB,laneNumber);
                     }
                   }
-                  goto LAB_001339e0;
+                  goto setInstFlags;
                 }
               }
               else {
-LAB_001339e0:
+setInstFlags:
                 instFlags = inst[5];
               }
-LAB_001339e4:
+setInst:
               inst = (int *)inst[2];
             } while ((inst != (int *)0x0) && ((instFlags & 4) != 0));
             nextInstInList = (int *)instListHead[2];
@@ -1454,7 +1454,7 @@ LAB_00133348: ;
     if (changedFlag == 0) {
       compilerAgain = *(int *)(pass + 8);
       needsFlagUpdate = false;
-      goto LAB_00133af8;
+      goto storePass;
     }
     registerIndex = 0;
     if (0 < *(int *)(pass + 0x464)) {
@@ -1469,10 +1469,10 @@ LAB_00133348: ;
     secondPass = 1;
   } while( true );
   needsFlagUpdate = true;
-LAB_00133af8:
+storePass:
   *(undefined4 *)(pass + 0x34) = 5;
   if ((*(uint *)(*(int *)(compilerAgain + 0x30c) + 8) & 0x200) != 0) {
-LAB_00133bf0:
+loopCheckVec2Count:
     if (vec2Count != 0) {
       lastDeferredIndex = vec2Count - 1;
       deferredTopRef = (undefined4 *)0x0;
@@ -1497,7 +1497,7 @@ LAB_00133bd0:
         }
         chainSource = (int *)IRInst__getOperandSource(chainSource,chainSource[0x21]);
       } while (destRoot == blockArray);
-      goto LAB_00133bf0;
+      goto loopCheckVec2Count;
     }
     if (vecCount != 0) {
       ((int (*)())InterferenceGraph__addNodes)(copyState,vecCount);
@@ -1861,14 +1861,14 @@ int RegAlloc__addDefinitionNodes(allocator)
                 }
               }
               if ((hasDestination == 0) || (hasDestination = RegKind__flagBit0(inst[0x26]), hasDestination == 0)) {
-LAB_001345fc:
+loopSetInstFlags:
                 instFlags = inst[5];
               }
               else {
                 instFlags = inst[5];
                 if ((instFlags & 2) == 0) {
                   instQuery50 = (**(code **)(*inst + 0x50))(inst);
-                  if (instQuery50 != 0) goto LAB_001345fc;
+                  if (instQuery50 != 0) goto loopSetInstFlags;
                   nodeVectorB = *(uint **)(allocator + 4);
                   destRegisterB = inst[0x25];
                   if (destRegisterB < *nodeVectorB) {
@@ -2103,12 +2103,12 @@ code_r0x001348ac:
             } while (restoreWordCountB != 0);
           }
           RegAlloc__initRegisterTables(pass);
-          goto LAB_00134a58;
+          goto setAllocatorObj;
         }
       }
       Compiler__fail(compilerB,4);
     }
-LAB_00134a58:
+setAllocatorObj:
     allocatorObj = *(int *)(pass + 0x3c0);
     if (allocatorObj != 0) {
       ((int (*)())InterferenceGraph__dtor_1357d4)(allocatorObj);
@@ -4153,15 +4153,15 @@ int RegAlloc__accumulateUseWeights(regInfoOwner, pass)
                       }
                       flagBit6Result = RegKind__flagBit6(regKind);
                       if (flagBit6Result == 0) {
-LAB_00137af8:
+loopSetClearedFlags:
                         clearedFlags = inst[5] & 0xdfffffff;
                         inst[5] = clearedFlags;
-                        goto LAB_00137b2c;
+                        goto checkClearedFlags;
                       }
                       IRInst__getOperandRecord(inst,operandNumberA);
                       operandCursor = operandCursor + 6;
                       operandKindClass = IRInst__operandKindClass(inst,operandNumberA);
-                      if (operandKindClass != 0) goto LAB_00137af8;
+                      if (operandKindClass != 0) goto loopSetClearedFlags;
                     }
                     clearedFlags = inst[5];
                   }
@@ -4181,7 +4181,7 @@ LAB_00137af8:
                     *(undefined4 *)(*regInfoRef + 0x20) = 0;
                     clearedFlags = inst[5];
                   }
-LAB_00137b2c:
+checkClearedFlags:
                   if ((clearedFlags & 0x20000000) != 0) {
                     regInfoVector = *(uint **)(regInfoOwner + 4);
                     if (destRegister < *regInfoVector) {
@@ -4893,7 +4893,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
     headInst = (int *)block[0x26];
     block[0x42] = (int)bitsetWords;
     if (headInst[2] != 0) break;
-LAB_00138d5c:
+loopSetBlockSlot6Result:
     blockSlot6Result = (**(code **)(*block + 0x18))(block);
     if (blockSlot6Result != 0) {
       ((int (*)())Liveness__markUsedBits)(block,block[0x40]);
@@ -4946,7 +4946,7 @@ LAB_00138d5c:
               } while (sourceIndex <= sourceCount);
               instFlags = walkInst[5];
             }
-            if ((instFlags & 0x200) == 0) goto LAB_00138af0;
+            if ((instFlags & 0x200) == 0) goto setScanInst;
             sourceInst = (int *)IRInst__getOperandSource(walkInst,walkInst[0x21]);
             if ((((sourceInst[0x20] != 0) && (sourceCount = RegKind__flagBit0(sourceInst[0x26]), sourceCount != 0)) &&
                 ((sourceInst[5] & 2U) == 0)) &&
@@ -4973,7 +4973,7 @@ LAB_00138d5c:
           }
           instFlags = walkInst[5];
         }
-LAB_00138af0:
+setScanInst:
         scanInst = headInst;
       } while (((int *)walkInst[2] != (int *)0x0) && (walkInst = (int *)walkInst[2], (instFlags & 4) != 0));
       do {
@@ -4984,7 +4984,7 @@ LAB_00138af0:
               (predicateResult = (**(code **)(*scanInst + 0x60))(scanInst), predicateResult == 0)) &&
              (predicateResult = (**(code **)(*scanInst + 0x5c))(scanInst), predicateResult == 0)) {
             if ((scanInst[0x20] == 0) || (predicateResult = RegKind__flagBit0(scanInst[0x26]), predicateResult == 0)) {
-LAB_00138c50:
+loopSetInstFlags:
               instFlags = scanInst[5];
             }
             else {
@@ -5004,7 +5004,7 @@ LAB_00138c50:
                     predicateResult = predicateResult + 1;
                   } while (moreComponents);
                 }
-                goto LAB_00138c50;
+                goto loopSetInstFlags;
               }
             }
             if ((instFlags & 0x200) == 0) goto LAB_00138d24;
@@ -5036,7 +5036,7 @@ LAB_00138d24: ;
     do {
       headInst = nextInst;
       flagsPtr = (uint *)(scanInst + 5);
-      if ((int *)headInst[2] == (int *)0x0) goto LAB_00138d5c;
+      if ((int *)headInst[2] == (int *)0x0) goto loopSetBlockSlot6Result;
       nextInst = (int *)headInst[2];
       scanInst = headInst;
     } while ((*flagsPtr & 4) != 0);
@@ -5148,7 +5148,7 @@ int LaneStack__topFitsLaneCount(stack, laneCount)
   }
   if (laneCount < 5) {
     usedLaneCount = 0;
-    if (laneCount < 1) goto LAB_00139218;
+    if (laneCount < 1) goto returnUsedLaneCount;
   }
   else {
     laneCount = 4;
@@ -5162,7 +5162,7 @@ int LaneStack__topFitsLaneCount(stack, laneCount)
     laneByteIndex = laneByteIndex + 1;
     laneCount = laneCount + -1;
   } while (laneCount != 0);
-LAB_00139218:
+returnUsedLaneCount:
   return usedLaneCount < 2;
 }
 

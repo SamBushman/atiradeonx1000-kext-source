@@ -594,14 +594,14 @@ int Program__insertMovAfter(program, newSource, afterInst, destRegisterOffset, d
         nextInst = (int *)nextInst[2]) {
       if ((scanInst[5] & 1U) != 0) {
         if (scanInst == afterInst) break;
-        if (scanInst == newSource) goto LAB_000ece34;
+        if (scanInst == newSource) goto setTargetBlock;
       }
       scanInst = nextInst;
     }
   }
-  else if ((*(uint *)(sourceBlock + 0xc) & 8) == 0) goto LAB_000ece34;
+  else if ((*(uint *)(sourceBlock + 0xc) & 8) == 0) goto setTargetBlock;
   afterInst = newSource;
-LAB_000ece34:
+setTargetBlock:
   targetBlock = (int *)afterInst[0x56];
   isEntryLike = (**(code **)(*targetBlock + 0x2c))(targetBlock);
   if (isEntryLike != 0) {
@@ -956,7 +956,7 @@ int Program__groupLoadsIntoProjections(program)
                     groupCursor[6] = loadOffset + loadSize[0];
                   }
                   groupCursor[4] = groupCursor[4] + 1;
-                  goto LAB_000eda98;
+                  goto storeAllocation;
                 }
                 groupNextLink = groupCursor + 0xb;
                 groupCursor = (int *)*groupNextLink;
@@ -976,7 +976,7 @@ int Program__groupLoadsIntoProjections(program)
             newGroup[5] = 1;
             newGroup[4] = inst;
             groupList = groupCursor;
-LAB_000eda98:
+storeAllocation:
             allocation[1] = groupCursor;
             followingInst = (int *)inst[2];
             memberList = allocation + 1;
@@ -1863,19 +1863,19 @@ int Program__emitDepthExportScale(program, unusedArg2)
             candidate[5] = candidate[5] | 0x10;
             ((int (*)())Program__addInst)(program,candidate);
             nextInst = (int *)candidate[2];
-            goto LAB_000eed14;
+            goto setCandidate;
           }
         }
         nextInst = (int *)candidate[2];
       }
-LAB_000eed14:
+setCandidate:
       candidate = nextInst;
     }
     *(int *)(program + 0x3f0) = -*(int *)(program + 1000);
   }
   if ((*(int *)(program + 0x348) == 0) && (*(int *)(program + 0x350) == 0)) {
     exportInst = *(int *)(program + 0x34c);
-    if (exportInst != 0) goto LAB_000eee08;
+    if (exportInst != 0) goto checkProgram;
     arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
     allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
     *allocation = arenaA;
@@ -1895,7 +1895,7 @@ LAB_000eed14:
   if (exportInst == 0) {
     return;
   }
-LAB_000eee08:
+checkProgram:
   if ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x4000) == 0) {
     return;
   }
@@ -2054,7 +2054,7 @@ int Program__expandSpecialDestinations(program)
               followingInst = (int *)allocation[3];
             }
             else {
-LAB_000ef1c8:
+loopSetFollowingInst:
               followingInst = (int *)inst[2];
             }
           }
@@ -2063,7 +2063,7 @@ LAB_000ef1c8:
               if ((inst[0x20] == 0) ||
                  ((destKind = IRInst__writesAllLanes(inst), destKind == 0 ||
                   (destKind = (**(code **)(*inst + 0x4c))(inst), destKind != 0))))
-              goto LAB_000ef1c8;
+              goto loopSetFollowingInst;
               resultVReg = inst[0x23];
               IRInst__appendSource(inst,resultVReg);
             }
@@ -2170,12 +2170,12 @@ int Program__splitExports(program)
             Block__insertInstBefore(*(undefined4 *)(program + 0x3a8),exportInst2,cloneResult);
             ((int (*)())Program__addInst)(program,cloneResult);
             nextInst2 = (int *)exportInst2[2];
-            goto LAB_000ef344;
+            goto setExportInst2;
           }
         }
         nextInst2 = (int *)exportInst2[2];
       }
-LAB_000ef344:
+setExportInst2:
       exportInst2 = nextInst2;
     }
   }
@@ -2647,7 +2647,7 @@ int Program__insertExitMarkerAndFlagBlocks(program, unusedArg2, unusedArg3, unus
   do {
     markerBlock = blockCursor;
     blockCursor = *(int *)(markerBlock + 0xf0);
-    if (blockCursor == 0) goto LAB_000eff14;
+    if (blockCursor == 0) goto setInst;
     *(uint *)(markerBlock + 0xc) = *(uint *)(markerBlock + 0xc) | 8;
     blockFlags = *(uint *)(blockCursor + 0xc);
   } while ((((blockFlags & 2) == 0) && ((blockFlags & 1) == 0)) && ((blockFlags & 4) == 0));
@@ -2655,12 +2655,12 @@ int Program__insertExitMarkerAndFlagBlocks(program, unusedArg2, unusedArg3, unus
     *(uint *)(blockCursor + 0xc) = blockFlags | 8;
     markerBlock = blockCursor;
   }
-LAB_000eff14:
+setInst:
   inst = *(int **)(markerBlock + 0x98);
   nextInst = (int *)(*(int **)(markerBlock + 0x98))[2];
   do {
     if (nextInst == (int *)0x0) {
-LAB_000eff98:
+loopStoreMarkerBlock:
       *(uint *)(markerBlock + 0xc) = *(uint *)(markerBlock + 0xc) | 8;
       if (*(int *)(program + 0x344) != 0) {
         (**(code **)(**(int **)(program + 0x33c) + 0x94))
@@ -2723,7 +2723,7 @@ LAB_000eff98:
       isSpecialInst = (**(code **)(*inst + 0x7c))(inst);
       if ((isSpecialInst == 0) && (isSpecialInst = (**(code **)(*inst + 0x34))(inst), isSpecialInst == 0)) {
         Block__insertInstBefore(markerBlock,inst,*(undefined4 *)(program + 0x33c));
-        goto LAB_000eff98;
+        goto loopStoreMarkerBlock;
       }
       nextInst = (int *)inst[2];
     }
@@ -2876,7 +2876,7 @@ int IRInst__tryFoldOutputScale(program, inst)
     for (sourceIndex = 1; sourceCount = (**(code **)(*inst + 0x14))(inst), sourceIndex <= sourceCount;
         sourceIndex = sourceIndex + 1) {
       if ((((inst[sourceIndex * 6 + 0x28] & 1U) != 0) || ((inst[sourceIndex * 6 + 0x28] & 2U) != 0)) ||
-         (sourceCount = IRInst__isSourceSelectIdentity(inst,sourceIndex), sourceCount == 0)) goto LAB_000f0628;
+         (sourceCount = IRInst__isSourceSelectIdentity(inst,sourceIndex), sourceCount == 0)) goto setOperandVReg;
     }
     if ((inst[0x48] == 0) && (inst[0x49] == 0)) {
       if (((inst[0x20] != 0) &&
@@ -2885,7 +2885,7 @@ int IRInst__tryFoldOutputScale(program, inst)
         loopCounter = 4;
         selectBytePtr = inst;
         do {
-          if ((uint)(*(byte *)(selectBytePtr + 0x27) - 2) < 2) goto LAB_000f0628;
+          if ((uint)(*(byte *)(selectBytePtr + 0x27) - 2) < 2) goto setOperandVReg;
           selectBytePtr = (int *)((int)selectBytePtr + 1);
           loopCounter = loopCounter + -1;
         } while (loopCounter != 0);
@@ -2894,7 +2894,7 @@ int IRInst__tryFoldOutputScale(program, inst)
       IRInst__operandKindClass(inst,0);
     }
   }
-LAB_000f0628:
+setOperandVReg:
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   loopCounter = 0;
   scaleLane = 0xffffffff;
@@ -3821,7 +3821,7 @@ LAB_000f26b0:
         walking = false;
       }
       else if (*(int *)(pass + 0x474) == node[0x54]) {
-LAB_000f26a4:
+loopSetWalking:
         walking = false;
       }
       else {
@@ -3836,7 +3836,7 @@ LAB_000f26a4:
           nodeOpcodeInSet = IRInst__opcodeIsInSet(node);
           walkInstCount = vec4Count;
           if (nodeOpcodeInSet == 0) {
-            if ((node[5] & 0x200U) == 0) goto LAB_000f26a4;
+            if ((node[5] & 0x200U) == 0) goto loopSetWalking;
             if (vec4Count < vec4Capacity) {
               walkInstByteOffset = vec4Count * 4;
               a2 = ((unsigned char *)0x4);
@@ -3916,7 +3916,7 @@ LAB_000f26a4:
           *walkIndexSlotB = 1;
           node = (int *)IRInst__getOperandSource(node,1);
         }
-LAB_000f2690:
+loopSetWalking2:
         walking = true;
         walkInstCount = vec4Count;
       }
@@ -3954,7 +3954,7 @@ LAB_000f2690:
         }
         *walkIndexSlot = lastWalkIndex + 1;
         node = (int *)IRInst__getOperandSource(node,lastWalkIndex + 1);
-        goto LAB_000f2690;
+        goto loopSetWalking2;
       }
     }
     Vector__removeAt(&vec4Capacity,walkInstTopIndex);
@@ -3975,7 +3975,7 @@ LAB_000f2690:
               ) == 0) {
             unusedMask = ~*(uint *)(thirdSourceDef + 0xc);
             if ((nodeDestMask & (unusedMask << 0x18 | (unusedMask & 0xff00) << 8 | unusedMask >> 8 & 0xff00 |
-                         unusedMask >> 0x18)) == 0) goto LAB_000f25ac;
+                         unusedMask >> 0x18)) == 0) goto checkNode;
             IRInst__reduceTernaryToBinary(node,3,*(undefined4 *)(pass + 8));
           }
           else {
@@ -4010,7 +4010,7 @@ LAB_000f2690:
           *fixupIndexSlotB = 3;
           node[3] = 0;
         }
-LAB_000f25ac:
+checkNode:
         if ((node[5] & 0x200U) != 0) {
           sourceDef = IRInst__getOperandSource(node,node[0x21]);
           node[3] = nodeDestMask | *(uint *)(sourceDef + 0xc);
@@ -4075,7 +4075,7 @@ LAB_000f25ac:
           } while (loopIndex <= node[0x21]);
         }
       }
-LAB_000f260c:
+loopSetWalking3:
       walking = false;
       walkInstCount = vec4Count;
       goto LAB_000f26b0;
@@ -4086,7 +4086,7 @@ LAB_000f260c:
     sourceDef = IRInst__getOperandSource(node,node[0x21]);
     fixupInstCount = vec2Count;
     node[3] = 0;
-    if ((nodeDestMask & *(uint *)(sourceDef + 0xc)) == 0) goto LAB_000f260c;
+    if ((nodeDestMask & *(uint *)(sourceDef + 0xc)) == 0) goto loopSetWalking3;
     if (vec2Count < vec2Capacity) {
       fixupInstByteOffset = vec2Count * 4;
       a2 = ((unsigned char *)0x4);

@@ -47,6 +47,7 @@ def split_functions(text):
 
 def strip_strings(s):
     s = re.sub(r'/\*.*?\*/', ' ', s, flags=re.S)      # words in comments are not identifiers
+    s = re.sub(r"'(?:\\.|[^'\\\n])'", "' '", s)       # char literals ('\"' would open a string that swallows the rest of the function)
     return re.sub(r'"(\\.|[^"\\])*"', lambda m: '"' + 'x' * (len(m.group(0)) - 2) + '"', s)
 
 

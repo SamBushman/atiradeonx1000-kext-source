@@ -428,7 +428,7 @@ void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,und
             record = record + 4;
           } while (loopIndex < *(uint *)(program + 0x3cc));
         }
-LAB_00083c10:
+loopCheckVariant:
         if (variant != *(int *)(ctx + 0x14c)) {
           *(int *)(ctx + 0x14c) = variant;
           hookFn = *(code **)(((unsigned char *)0x000012d0) + ctx);
@@ -447,7 +447,7 @@ LAB_00083c10:
                    unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
     }
     else {
-      if (*(char *)(variant + 0x59) == '\0') goto LAB_00083c10;
+      if (*(char *)(variant + 0x59) == '\0') goto loopCheckVariant;
       *(undefined1 *)(ctx + 0x2435) = 1;
       *(uint *)(ctx + 0x8c) = *(uint *)(ctx + 0x8c) | 0x40000000;
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
@@ -3530,10 +3530,10 @@ int gldLeaveInternalDrawState(glContext, savedState)
     else {
       enableFlagByte = ((unsigned char *)0x000011d0)[glContext];
     }
-    if (enableFlagByte == '\0') goto LAB_00087474;
+    if (enableFlagByte == '\0') goto storeDrawStateWords;
   }
   drawStateWords = *(undefined4 **)(glContext + 0x1e5c);
-LAB_00087474:
+storeDrawStateWords:
   *(undefined1 *)((int)drawStateWords + 0x10eb) = 0;
   if (*(int *)(glContext + 0x23e0) == 0) {
     *drawStateWords = 0;
@@ -4022,7 +4022,7 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
     else if (texEnumValue == 0x800) {
       keyBlock3 = keyBlock3 | 8;
     }
-    if (*(char *)(shaderInfo + 5) != '\0') goto LAB_00088008;
+    if (*(char *)(shaderInfo + 5) != '\0') goto checkAltMode;
   }
   else {
     keyBlock3 = 2;
@@ -4045,7 +4045,7 @@ int arbfpCompileFragmentProgram(ctx, fpRecord, workArea, keyWords)
     } while (bitCount != 0);
     keyBlock3 = keyBlock3 | 0x400;
   }
-LAB_00088008:
+checkAltMode:
   if (altMode != 0) {
     keyBlock3 = keyBlock3 | 0x100;
     *(undefined4 *)(0x00001830 + workArea) = ctx[0x9db];
@@ -4245,13 +4245,13 @@ int arbfpLookupKeyword(parser)
     mid = ((int)sum >> 1) + (uint)((int)sum < 0 && (sum & 1) != 0);
     if (tokenLength < 1) {
       isEqual = compareResult == 0;
-LAB_000884dc:
+loopSetMatchIndex:
       matchIndex = 0;
     }
     else {
       compareResult = (uint)*tokenText - (int)(char)*(PTR_s_1D_001e9158)[mid * 3];
       isEqual = compareResult == 0;
-      if (!isEqual) goto LAB_000884dc;
+      if (!isEqual) goto loopSetMatchIndex;
       matchIndex = 0;
       remaining = tokenLength;
       do {
@@ -4259,7 +4259,7 @@ LAB_000884dc:
         remaining = remaining + -1;
         if (remaining == 0) {
           compareResult = 0;
-          goto LAB_0008855c;
+          goto checkMid;
         }
         compareResult = (uint)tokenText[matchIndex] - (int)(char)(PTR_s_1D_001e9158)[mid * 3][matchIndex];
         isEqual = false;
@@ -4267,7 +4267,7 @@ LAB_000884dc:
     }
     if (compareResult < 1) {
       if (isEqual) {
-LAB_0008855c:
+checkMid:
         if ((PTR_s_1D_001e9158)[mid * 3][matchIndex] == '\0') {
           *(undefined4 *)(parser + 0x14) = *(undefined4 *)(&UNK_001e915c + mid * 0xc);
           *(undefined4 *)(parser + 0x18) = *(undefined4 *)(&UNK_001e9160 + mid * 0xc);
@@ -4337,7 +4337,7 @@ int arbLexNumber(parser)
     isIntegerLiteral = true;
   }
   cursor = *(byte **)(parser + 0xc);
-  if ((*cursor != 0x45) && (*cursor != 0x65)) goto LAB_0008886c;
+  if ((*cursor != 0x45) && (*cursor != 0x65)) goto setSuffixChar;
   *(byte **)(parser + 0xc) = cursor + 1;
   if (cursor[1] == 0x2d) {
     exponentNegative = true;
@@ -4352,7 +4352,7 @@ int arbLexNumber(parser)
   cursor = *(byte **)(parser + 0xc);
   expDigit = (uint)*cursor;
   if ((expDigit - 0x30 & 0xff) < 10) {
-LAB_000887c4:
+loopSetExponent:
     exponent = 0;
     do {
       exponent = exponent * 10 + expDigit + -0x30;
@@ -4377,14 +4377,14 @@ LAB_000887c4:
     cursor = *(byte **)(parser + 0xc);
     expDigit = (uint)*cursor;
     exponentScale = DOUBLE_001aa200;
-    if ((expDigit - 0x30 & 0xff) < 10) goto LAB_000887c4;
+    if ((expDigit - 0x30 & 0xff) < 10) goto loopSetExponent;
   }
   if (exponentNegative) {
     exponentScale = DOUBLE_001aa200 / exponentScale;
   }
   value = value * exponentScale;
   isIntegerLiteral = false;
-LAB_0008886c:
+setSuffixChar:
   suffixChar = *cursor;
   if ((((byte)(suffixChar + 0xbf) < 0x1a) || ((byte)(suffixChar + 0x9f) < 0x1a)) || (suffixChar == 0x5f)) {
     ((int (*)())arbSetError)(parser,"invalid suffix on number");
@@ -4423,7 +4423,7 @@ int arbNextToken(parser)
       switch(*cursor) {
       case 9:
       case 0x20:
-        if ((!sawCarriageReturn) && (!sawNewline)) goto LAB_00088ae8;
+        if ((!sawCarriageReturn) && (!sawNewline)) goto setSawCarriageReturn;
         sawNewline = false;
         sawCarriageReturn = false;
         *(int *)(parser + 0x24) = *(int *)(parser + 0x24) + 1;
@@ -4444,8 +4444,8 @@ int arbNextToken(parser)
           sawNewline = false;
           *(int *)(parser + 0x24) = *(int *)(parser + 0x24) + 1;
         }
-        if (!inComment) goto LAB_00088afc;
-LAB_00088ae8:
+        if (!inComment) goto checkCursor;
+setSawCarriageReturn:
         sawCarriageReturn = false;
         break;
       case 0xd:
@@ -4473,7 +4473,7 @@ LAB_00088ae8:
       *(undefined1 **)(parser + 0xc) = cursor;
     } while (remaining != 0);
   }
-LAB_00088afc:
+checkCursor:
   if (cursor < sourceEnd) {
     *(undefined1 **)(parser + 8) = cursor;
     switch(*cursor) {
@@ -4495,7 +4495,7 @@ LAB_00088afc:
         *(undefined4 *)(parser + 0x14) = 0x12;
       }
       else {
-        if ((byte)(cursor[1] - 0x30) < 10) goto switchD_00088b48_caseD_30;
+        if ((byte)(cursor[1] - 0x30) < 10) goto cursorCase30;
         *(undefined1 **)(parser + 0xc) = cursor + 1;
         *(undefined4 *)(parser + 0x14) = 0x11;
       }
@@ -4516,7 +4516,7 @@ LAB_00088afc:
           } while ((byte)(ch + 0xbfU) < 0x1a);
         } while ((((byte)(ch + 0x9fU) < 0x1a) || ((byte)(ch - 0x30U) < 10)) || (ch == '_'))
         ;
-        goto LAB_00088d48;
+        goto callArbfpLookupKeyword;
       }
     case 0x30:
     case 0x34:
@@ -4525,7 +4525,7 @@ LAB_00088afc:
     case 0x37:
     case 0x38:
     case 0x39:
-switchD_00088b48_caseD_30:
+cursorCase30:
       ((int (*)())arbLexNumber)(parser);
       return;
     case 0x3b:
@@ -4597,7 +4597,7 @@ switchD_00088b48_caseD_30:
           cursor = sourceEnd;
         } while ((byte)(ch + 0xbfU) < 0x1a);
       } while ((((byte)(ch + 0x9fU) < 0x1a) || ((byte)(ch - 0x30U) < 10)) || (ch == '_'));
-LAB_00088d48:
+callArbfpLookupKeyword:
       ((int (*)())arbfpLookupKeyword)(parser);
       return;
     case 0x5b:
@@ -4722,7 +4722,7 @@ int arbParseVariableName(parser)
         if (tokenLength == entry[2]) {
           if (tokenLength < 1) {
             if (tokenLength == 0) {
-LAB_00089104:
+loopReturnEntry:
               return (int *)entry[3];
             }
           }
@@ -4732,7 +4732,7 @@ LAB_00089104:
             do {
               charIndex = charIndex + 1;
               remaining = remaining + -1;
-              if (remaining == 0) goto LAB_00089104;
+              if (remaining == 0) goto loopReturnEntry;
             } while (tokenText[charIndex] == ((char *)entry[1])[charIndex]);
           }
         }
@@ -4966,13 +4966,13 @@ int arbParseResultBinding(parser, binding)
       }
     }
     else {
-      if (parser[6] != 5) goto LAB_00089638;
+      if (parser[6] != 5) goto callArbSetError;
       ((int (*)())arbNextToken)(parser);
       binding[1] = 1;
     }
     return;
   }
-LAB_00089638:
+callArbSetError:
   ((int (*)())arbSetError)(parser,"invalid result binding");
   return;
 }

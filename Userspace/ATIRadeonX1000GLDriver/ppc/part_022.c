@@ -116,7 +116,7 @@ int ILReader__decodeInstruction(ilReader, tokenIndexPtr, compiler)
   case 0x85:
   case 0x89:
     tokenWord = *tokenWindow;
-    goto LAB_000e4e4c;
+    goto setExtraWordCount;
   case 0x7d:
     break;
   case 0x86:
@@ -126,19 +126,19 @@ int ILReader__decodeInstruction(ilReader, tokenIndexPtr, compiler)
   case 0x8c:
   case 0x8d:
     tokenWord = *tokenWindow;
-    if ((tokenWord & 0x20000000) == 0) goto LAB_000e4e4c;
+    if ((tokenWord & 0x20000000) == 0) goto setExtraWordCount;
     extraWordCount = 2;
     *(undefined4 *)(ilReader + 0x60) = 1;
     tokenWord = *tokenWindow;
-    goto LAB_000e4e50;
+    goto checkTokenWord;
   case 0x87:
     extraTokenCount = 1;
-    goto LAB_000e4e74;
+    goto setLoopIndex6;
   default:
     tokenWord = *(uint *)(ilReader + 0x8c);
-LAB_000e4e4c:
+setExtraWordCount:
     extraWordCount = 1;
-LAB_000e4e50:
+checkTokenWord:
     if ((int)tokenWord < 0) {
       extraWordCount = extraWordCount + 1;
     }
@@ -147,7 +147,7 @@ LAB_000e4e50:
       extraTokenCount = extraWordCount;
     }
     if (0 < extraTokenCount) {
-LAB_000e4e74:
+setLoopIndex6:
       loopIndex6 = 0;
       do {
         fetchIndex = *tokenIndexPtr;
@@ -164,7 +164,7 @@ LAB_000e4e74:
   destReplicaCount = OpcodeRecord__getOperandByteB(opcode,0,*(undefined4 *)(*(int *)(compiler + 0x30c) + 0xc));
   operandStartIndex = *tokenIndexPtr;
   tokenIndex = operandStartIndex;
-  if (destCount < 1) goto LAB_000e50f4;
+  if (destCount < 1) goto checkSourceCount;
   **(int **)(ilReader + 100) = operandStartIndex * 4 + ilReader + 0x8c;
   tokenIndex = *tokenIndexPtr;
   *tokenIndexPtr = tokenIndex + 1;
@@ -185,7 +185,7 @@ LAB_000e4e74:
     tokenIndex = *tokenIndexPtr;
   }
   if ((destFlags & 0x1800000) == 0x800000) {
-LAB_000e5044:
+loopStoreTokenIndexPtr:
     *tokenIndexPtr = tokenIndex + 1;
     ILReader__fetchToken(ilReader,tokenIndex);
     tokenIndex = *tokenIndexPtr;
@@ -216,7 +216,7 @@ LAB_000e5044:
     else {
       destModifierFlags = *(uint *)(destModifierSlot + 0xc);
     }
-    if ((destModifierFlags & 0x4000000) != 0) goto LAB_000e5044;
+    if ((destModifierFlags & 0x4000000) != 0) goto loopStoreTokenIndexPtr;
   }
   if ((*(uint *)(destTokenSlot + 0xc) & 0x4000000) != 0) {
     *tokenIndexPtr = tokenIndex + 1;
@@ -240,7 +240,7 @@ LAB_000e5044:
     } while (destReplicaCount != loopIndex2);
     tokenIndex = *tokenIndexPtr;
   }
-LAB_000e50f4:
+checkSourceCount:
   if (0 < sourceCount) {
     loopIndex = 0;
     sourceSlotOffset = 0x14;
@@ -259,7 +259,7 @@ LAB_000e50f4:
       else {
         tokenIndex = *tokenIndexPtr;
         loopIndex3 = 0;
-LAB_000e5190:
+loopSetSourceTokenSlot:
         sourceTokenSlot = ilReader + tokenIndex * 4 + 0x7c;
         sourceFlags = *(uint *)(sourceTokenSlot + 0xc);
         if ((sourceFlags & 0x400000) != 0) {
@@ -271,7 +271,7 @@ LAB_000e5190:
         sourceFlags = sourceFlags & 0x1800000;
         if (sourceFlags != 0) {
           if (sourceFlags == 0x800000) {
-LAB_000e523c:
+loopStoreTokenIndexPtr2:
             *tokenIndexPtr = tokenIndex + 1;
             ILReader__fetchToken(ilReader,tokenIndex);
             tokenIndex = *tokenIndexPtr;
@@ -288,7 +288,7 @@ LAB_000e523c:
               sourceModifierFlags = *(uint *)(sourceModifierSlot + 0xc);
               tokenIndex = *tokenIndexPtr;
             }
-            if ((sourceModifierFlags & 0x4000000) != 0) goto LAB_000e523c;
+            if ((sourceModifierFlags & 0x4000000) != 0) goto loopStoreTokenIndexPtr2;
           }
         }
         if ((*(uint *)(sourceTokenSlot + 0xc) & 0x4000000) != 0) {
@@ -303,7 +303,7 @@ LAB_000e523c:
             ILReader__fetchToken(ilReader,tokenIndex);
             tokenIndex = *tokenIndexPtr;
           }
-          goto LAB_000e5190;
+          goto loopSetSourceTokenSlot;
         }
       }
       if (0 < sourceReplicaCount) {
@@ -910,16 +910,16 @@ LAB_000e5e9c:
       if ((opcode16 < 0xbf) && (opcode16 == 0x29)) {
         ilReader[0x20] = 0;
         Vector__removeAt(ilReader[0xf],*(int *)(ilReader[0xf] + 4) + -1);
-        goto LAB_000e5f48;
+        goto setOpcode;
       }
     }
     else {
-LAB_000e5f48:
+setOpcode:
       opcode = (uint)*(ushort *)((int)ilReader + 0x8e);
     }
     if (opcode < 0xbf) {
       if (((opcode - 0x34 < 2) || (opcode == 0x70)) || (opcode == 0x6f)) {
-LAB_000e6000:
+loopSetReplaySkipDepth:
         replaySkipDepth = replaySkipDepth + 1;
       }
       else {
@@ -947,14 +947,14 @@ joined_r0x000e600c:
       opcode = (uint)*(ushort *)((int)ilReader + 0x8e);
     }
     if ((opcode < 0xbf) && (((opcode - 0x34 < 2 || (opcode == 0x70)) || (opcode == 0x6f))))
-    goto LAB_000e6000;
+    goto loopSetReplaySkipDepth;
     if (opcode < 0xbf) goto joined_r0x000e600c;
     goto LAB_000e5e9c;
   }
   if (iVar4 == 1) {
     if (((*(ushort *)((int)ilReader + 0x8e) < 0xbf) && (*(ushort *)((int)ilReader + 0x8e) == 0x32)) &&
        (waitLabel == *(ushort *)((int)ilReader + 0x92))) {
-LAB_000e6ac4:
+loopStoreIlReader:
       ilReader[0x20] = 0;
     }
     goto LAB_000e5e9c;
@@ -1206,7 +1206,7 @@ LAB_000e6ac4:
     }
     poppedState = *ifResultStackTop;
     Vector__removeAt(iVar4,ifResultStackCount - 1);
-    if (poppedState != 0) goto LAB_000e6ac4;
+    if (poppedState != 0) goto loopStoreIlReader;
     ilReader[0x12] = ilReader[0x12] + -1;
     scopeStackSizeB = *(uint *)(ilReader[0x10] + 4);
     if (0 < (int)scopeStackSizeB) {
@@ -1284,10 +1284,10 @@ LAB_000e6ac4:
       comparisonResult = GH_U2F((unsigned int)(leftConstant)) < rightConstant[0];
       break;
     default:
-      goto switchD_000e67b4_default;
+      goto dispatchOpcodeDefault;
     }
-    if (comparisonResult) goto LAB_000e6870;
-switchD_000e67b4_default:
+    if (comparisonResult) goto setIfResultStack;
+dispatchOpcodeDefault:
     ifResultStack = (uint *)ilReader[0xf];
     ifResultStackCount = ifResultStack[1];
     if (ifResultStackCount < *ifResultStack) {
@@ -1337,7 +1337,7 @@ switchD_000e67b4_default:
       *ifResultStackSlotEntry = 2;
     }
     else {
-LAB_000e6870:
+setIfResultStack:
       ifResultStack = (uint *)ilReader[0xf];
       ifResultStackCount = ifResultStack[1];
       if (ifResultStackCount < *ifResultStack) {
@@ -1373,7 +1373,7 @@ LAB_000e6870:
     *scopeStackSlotEntry = newScope;
     goto switchD_000e61ac_caseD_a;
   case 0x53:
-    goto switchD_000e61ac_caseD_53;
+    goto dispatchOpcodeCase53;
   case 0x65:
     leftConstant = 6;
     ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,tokenCount,6,argR7,staleArgR8);
@@ -1428,7 +1428,7 @@ LAB_000e6870:
     }
     iVar4 = *scopeStackTop;
     *(int *)(iVar4 + 0x10) = ilReader[0x1d] + tokenCount * -4;
-    if (*(int *)(iVar4 + 4) != 0) goto LAB_000e7400;
+    if (*(int *)(iVar4 + 4) != 0) goto checkX14;
     if (*(int *)(iVar4 + 0x14) != 0) goto switchD_000e61ac_caseD_a;
     replayStack = (uint *)ilReader[0x22];
     iVar4 = ilReader[0x20];
@@ -1630,7 +1630,7 @@ joined_r0x000e6a0c:
       ilReader[0x16] = 1;
       goto switchD_000e61ac_caseD_a;
     }
-switchD_000e61ac_caseD_53:
+dispatchOpcodeCase53:
     iVar4 = ilReader[0x15];
     savedFlagSnapshotB = ilReader[0x14];
     ilReader[0x15] = iVar4 + -1;
@@ -1686,7 +1686,7 @@ switchD_000e61ac_caseD_53:
     ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,tokenCount,0x73,argR7,staleArgR8);
   }
   goto LAB_000e5e9c;
-LAB_000e7400:
+checkX14:
   if (*(int *)(iVar4 + 0x14) != 0) {
 switchD_000e61ac_caseD_a:
     DAT_001fa620 = tokenCount;
@@ -2090,7 +2090,7 @@ int Block__isInVectorD4Of(fromBlock, toBlock)
   do {
     if (*(uint *)(*(int *)(toBlock + 0xd4) + 4) < loopIndex) {
       isPredecessor = 0;
-LAB_000e7e3c:
+loopSetLoopCounterB:
       loopCounterB = 1;
       for (byteOffset = 0;
           (loopCounterB <= *(uint *)(*(int *)(fromBlock + 0xd0) + 4) &&
@@ -2103,7 +2103,7 @@ LAB_000e7e3c:
     listEntry = *(int *)(loopCounter + *(int *)(*(int *)(toBlock + 0xd4) + 8));
     if ((listEntry != 0) && (fromBlock == listEntry)) {
       isPredecessor = 1;
-      goto LAB_000e7e3c;
+      goto loopSetLoopCounterB;
     }
     loopIndex = loopIndex + 1;
     loopCounter = loopCounter + 4;
@@ -2306,7 +2306,7 @@ int Program__allocateBitSetIndex(program, unusedArg2, unusedArg3, unusedArg4, un
   bitSet = *(uint **)(program + 0x3bc);
   bitCount = bitSet[1];
   if (bitCount == 0) {
-LAB_000e8190:
+loopSetNewBitCount:
     newBitCount = bitCount + 1;
     if (bitCount + 0x20 >> 5 == *bitSet) {
       bitSet[1] = newBitCount;
@@ -2328,12 +2328,12 @@ LAB_000e8190:
           do {
             loopCounter = loopCounter + 1;
             bitsLeft = bitsLeft - 1;
-            if (bitsLeft == 0) goto LAB_000e82ec;
+            if (bitsLeft == 0) goto setLoopCounter;
           } while ((*(uint *)((int)bitSet + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) !=
                    0);
-          goto LAB_000e8388;
+          goto setWordOffsetOfBit;
         }
-        goto LAB_000e8324;
+        goto setLoopCounter2;
       }
     }
     else {
@@ -2377,15 +2377,15 @@ LAB_000e8190:
           do {
             loopCounter = loopCounter + 1;
             bitsLeft2 = bitsLeft2 - 1;
-            if (bitsLeft2 == 0) goto LAB_000e82ec;
+            if (bitsLeft2 == 0) goto setLoopCounter;
           } while ((*(uint *)((int)bitSet + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) !=
                    0);
-          goto LAB_000e8388;
+          goto setWordOffsetOfBit;
         }
-        goto LAB_000e8324;
+        goto setLoopCounter2;
       }
     }
-LAB_000e82ec:
+setLoopCounter:
     loopCounter = 0xffffffff;
   }
   else {
@@ -2395,15 +2395,15 @@ LAB_000e82ec:
       do {
         loopCounter = loopCounter + 1;
         bitsLeft3 = bitsLeft3 - 1;
-        if (bitsLeft3 == 0) goto LAB_000e8190;
+        if (bitsLeft3 == 0) goto loopSetNewBitCount;
       } while ((*(uint *)((int)bitSet + (loopCounter >> 3 & 0x1ffffffc) + 8) >> (loopCounter & 0x1f) & 1) != 0);
-      if (loopCounter != 0xffffffff) goto LAB_000e8388;
-      goto LAB_000e8190;
+      if (loopCounter != 0xffffffff) goto setWordOffsetOfBit;
+      goto loopSetNewBitCount;
     }
-LAB_000e8324:
+setLoopCounter2:
     loopCounter = 0;
   }
-LAB_000e8388:
+setWordOffsetOfBit:
   wordOffsetOfBit = loopCounter >> 3 & 0x1ffffffc;
   *(uint *)((int)bitSet + wordOffsetOfBit + 8) = 1 << (loopCounter & 0x1f) | *(uint *)((int)bitSet + wordOffsetOfBit + 8);
   return loopCounter;
@@ -2895,14 +2895,14 @@ int Block__replaceRegionEdges(oldFirst, oldLast, newBlock)
               }
               *edgeSlot = newBlock;
               edgeVector = *(int *)(oldLast + 0xd0);
-              goto LAB_000e9098;
+              goto setLoopIndex;
             }
             loopCounter = loopCounter + 4;
             lastEdgeIndex = edgeIndex;
           }
           edgeVector = *(int *)(oldLast + 0xd0);
         }
-LAB_000e9098:
+setLoopIndex:
         loopIndex = loopIndex + 1;
         loopCounterB = loopCounterB + 4;
       } while( true );
@@ -2930,14 +2930,14 @@ LAB_000e9098:
           }
           *edgeSlot = newBlock;
           edgeVector = *(int *)(oldFirst + 0xd4);
-          goto LAB_000e8f80;
+          goto setLoopIndex2;
         }
         loopCounter = loopCounter + 4;
         lastEdgeIndex = edgeIndex;
       }
       edgeVector = *(int *)(oldFirst + 0xd4);
     }
-LAB_000e8f80:
+setLoopIndex2:
     loopIndex = loopIndex + 1;
     loopCounterB = loopCounterB + 4;
   } while( true );
@@ -3153,7 +3153,7 @@ int Block__bypass(block, predBlock, succBlock)
   loopCounterC = 0;
   do {
     if (*(uint *)(blockSuccessors + 4) < loopIndex2) {
-LAB_000e9610:
+loopCheckBlock:
       if ((*(uint *)(block[0x2b] + 0x30) & 2) == 0) {
         succVtable0x20Result = (**(code **)(*succBlock + 0x20))(succBlock);
         if ((succVtable0x20Result == 0) || (succVtable0x20Result = ((int (*)())Block__successorCount)(predBlock), succVtable0x20Result != 0)) {
@@ -3174,7 +3174,7 @@ LAB_000e9610:
     if (listEntry != (int *)0x0) {
       if (succBlock == listEntry) {
         Vector__removeAt(blockSuccessors,loopCounter);
-        goto LAB_000e9610;
+        goto loopCheckBlock;
       }
       loopCounter = loopCounter + 1;
     }

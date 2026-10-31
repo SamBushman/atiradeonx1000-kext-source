@@ -81,9 +81,9 @@ int ffpsBuildRgbSourceOperand(ctx, srcEnum, operandEnum, outSrcToken, outSwizzle
             if (operandEnum != 0x303) {
               return;
             }
-            goto LAB_000d5160;
+            goto storeOutSwizzleWord;
           }
-LAB_000d517c:
+loopStoreOutSwizzleWord:
           *outSwizzleWord = *outSwizzleWord & 0xfffff888 | 0x444;
           return;
         }
@@ -95,7 +95,7 @@ LAB_000d517c:
         *outSrcToken = *outSrcToken & 0xffc0ffff | 0x120000;
         *(undefined2 *)((int)outSrcToken + 2) = 0;
         *outSrcToken = *outSrcToken | 0x400000;
-        if (operandEnum == 0x301) goto LAB_000d517c;
+        if (operandEnum == 0x301) goto loopStoreOutSwizzleWord;
         if (operandEnum < 0x302) {
           if (operandEnum != 0x300) {
             return;
@@ -105,36 +105,36 @@ LAB_000d517c:
           if (operandEnum != 0x303) {
             return;
           }
-          goto LAB_000d517c;
+          goto loopStoreOutSwizzleWord;
         }
       }
-LAB_000d5160:
+storeOutSwizzleWord:
       *outSwizzleWord = *outSwizzleWord & 0xfffff888 | 0x555;
       return;
     }
     if (srcEnum == (undefined *)0x8576) {
       *outSrcToken = *outSrcToken & 0xffc0ffff | 0x10000;
       *(short *)((int)outSrcToken + 2) = (short)unit;
-      goto LAB_000d4fe0;
+      goto checkOperandEnum;
     }
     if ((undefined *)0x8576 < srcEnum) {
       if (srcEnum != (undefined *)0x8577) {
-        if (srcEnum != (undefined *)0x8578) goto LAB_000d4fe0;
+        if (srcEnum != (undefined *)0x8578) goto checkOperandEnum;
         if (isFirstUnit == 0) {
           *outSrcToken = *outSrcToken & 0xffc0ffff | 0x40000;
           *(ushort *)((int)outSrcToken + 2) = (*(unsigned short *)((unsigned char *)&(previousUnit) + 2)) + (ushort)(byte)((unsigned char *)0x000013b2)[ctx];
-          goto LAB_000d4fe0;
+          goto checkOperandEnum;
         }
       }
       *outSrcToken = *outSrcToken & 0xffc0ffff | 0x120000;
-      goto LAB_000d4fe0;
+      goto checkOperandEnum;
     }
     texUnitIndex = unit;
-    if (srcEnum != ((unsigned char *)0x00001702)) goto LAB_000d4fe0;
+    if (srcEnum != ((unsigned char *)0x00001702)) goto checkOperandEnum;
   }
   *outSrcToken = *outSrcToken & 0xffc0ffff | 0x40000;
   *(short *)((int)outSrcToken + 2) = (short)texUnitIndex;
-LAB_000d4fe0:
+checkOperandEnum:
   if (operandEnum == 0x302) {
     *outSrcToken = *outSrcToken | 0x400000;
     *outSwizzleWord = *outSwizzleWord & 0xfffff888 | 0x333;
@@ -178,7 +178,7 @@ int ffpsBuildAlphaSourceOperand(ctx, srcEnum, operandEnum, outSrcToken, outSwizz
           if (operandEnum != 0x303) {
             return;
           }
-          goto LAB_000d535c;
+          goto storeOutSwizzleWord;
         }
       }
       else {
@@ -189,7 +189,7 @@ int ffpsBuildAlphaSourceOperand(ctx, srcEnum, operandEnum, outSrcToken, outSwizz
         *(undefined2 *)((int)outSrcToken + 2) = 0;
         *outSrcToken = *outSrcToken | 0x400000;
         if (operandEnum == 0x302) {
-LAB_000d535c:
+storeOutSwizzleWord:
           *outSwizzleWord = *outSwizzleWord & 0xffff8fff | 0x5000;
           return;
         }
@@ -203,27 +203,27 @@ LAB_000d535c:
     if (srcEnum == (undefined *)0x8576) {
       *outSrcToken = *outSrcToken & 0xffc0ffff | 0x10000;
       *(short *)((int)outSrcToken + 2) = (short)unit;
-      goto LAB_000d52a0;
+      goto checkOperandEnum;
     }
     if ((undefined *)0x8576 < srcEnum) {
       if (srcEnum != (undefined *)0x8577) {
-        if (srcEnum != (undefined *)0x8578) goto LAB_000d52a0;
+        if (srcEnum != (undefined *)0x8578) goto checkOperandEnum;
         if (isFirstUnit == 0) {
           *outSrcToken = *outSrcToken & 0xffc0ffff | 0x40000;
           *(ushort *)((int)outSrcToken + 2) = (*(unsigned short *)((unsigned char *)&(previousUnit) + 2)) + (ushort)(byte)((unsigned char *)0x000013b2)[ctx];
-          goto LAB_000d52a0;
+          goto checkOperandEnum;
         }
       }
       *outSrcToken = *outSrcToken & 0xffc0ffff | 0x120000;
       *(undefined2 *)((int)outSrcToken + 2) = 0;
-      goto LAB_000d52a0;
+      goto checkOperandEnum;
     }
     texUnitIndex = unit;
-    if (srcEnum != ((unsigned char *)0x00001702)) goto LAB_000d52a0;
+    if (srcEnum != ((unsigned char *)0x00001702)) goto checkOperandEnum;
   }
   *outSrcToken = *outSrcToken & 0xffc0ffff | 0x40000;
   *(short *)((int)outSrcToken + 2) = (short)texUnitIndex;
-LAB_000d52a0:
+checkOperandEnum:
   if (operandEnum == 0x303) {
     *outSrcToken = *outSrcToken | 0x400000;
     *outSwizzleWord = *outSwizzleWord & 0xffff8fff | 0x13000;
@@ -714,7 +714,7 @@ int ffpsEmitTexEnvCombine(ctx, ilBuilder, baseFormat, unit, textureObject, isFir
     if (combineRgbMode < 0x86ae) {
       if (combineRgbMode == 0x2100) {
         ilOpcode = 0x49;
-LAB_000d6560:
+loopSetArgCount:
         argCount = 2;
         argOrder[0] = 0;
         iVar9 = combineRgbMode - 0x10000;
@@ -723,7 +723,7 @@ LAB_000d6560:
       else if (combineRgbMode < 0x2101) {
         if (combineRgbMode == 0x104) {
           ilOpcode = 3;
-          goto LAB_000d6560;
+          goto loopSetArgCount;
         }
         if (combineRgbMode != 0x1e01) goto LAB_000d6534;
         argCount = 1;
@@ -824,7 +824,7 @@ LAB_000d6534:
   dstWriteWord = 0x115;
   if (iVar9 + 0x7952U < 2) {
     if (rgbScale == FLOAT_001aa0e8) {
-LAB_000d6840:
+loopSetDstWriteWord:
       dstWriteWord = 0x515;
     }
     else if (rgbScale == FLOAT_001aa108) {
@@ -836,7 +836,7 @@ LAB_000d6840:
     }
   }
   else {
-    if (((rgbScale == FLOAT_001aa104) || (combineRgbMode == 0x8740)) || (combineRgbMode == 0x8741)) goto LAB_000d6840;
+    if (((rgbScale == FLOAT_001aa104) || (combineRgbMode == 0x8740)) || (combineRgbMode == 0x8741)) goto loopSetDstWriteWord;
     if (rgbScale == FLOAT_001aa108) {
       dstWriteWord = 0x315;
     }
@@ -1021,9 +1021,9 @@ LAB_000d6840:
     else {
       if (combineAlphaMode < 0x1e02) {
         if (combineAlphaMode != 0x104) {
-LAB_000d6fbc:
+loopSetUnitState:
           unitState = 0;
-          goto LAB_000d7144;
+          goto setTextureUnitCount;
         }
         ilOpcode = 3;
       }
@@ -1031,7 +1031,7 @@ LAB_000d6fbc:
         ilOpcode = 0x49;
       }
       else {
-        if (combineAlphaMode != 0x84e7) goto LAB_000d6fbc;
+        if (combineAlphaMode != 0x84e7) goto loopSetUnitState;
         ilOpcode = 0x5b;
       }
       unitState = 2;
@@ -1047,7 +1047,7 @@ LAB_000d6fbc:
     argOrder[1] = 2;
   }
   else if (combineAlphaMode < 0x8745) {
-    if (combineAlphaMode != 0x8575) goto LAB_000d6fbc;
+    if (combineAlphaMode != 0x8575) goto loopSetUnitState;
     argOrder[1] = 0;
     unitState = 3;
     ilOpcode = 0x3f;
@@ -1067,7 +1067,7 @@ LAB_000d6fbc:
     alphaSwizzle1 = alphaSwizzle1 | 0x20000;
   }
   else {
-    if (combineAlphaMode != 0x8746) goto LAB_000d6fbc;
+    if (combineAlphaMode != 0x8746) goto loopSetUnitState;
     argOrder[0] = 0;
     argOrder[1] = 2;
     ilOpcode = 0x40;
@@ -1079,7 +1079,7 @@ LAB_000d6fbc:
     unitState = 3;
     alphaSwizzle1 = alphaSwizzle1 | 0x8000;
   }
-LAB_000d7144:
+setTextureUnitCount:
   textureUnitCount = ((unsigned char *)0x000013b2)[ctx];
   dstWriteWord = 0x140;
   if (combineAlphaMode == 0x86af) {
@@ -1091,17 +1091,17 @@ LAB_000d7144:
         dstWriteWord = 0x740;
         alphaSwizzle0 = alphaSwizzle0 | 0x40000;
       }
-      goto LAB_000d7214;
+      goto setTokenIndex;
     }
   }
   else if ((rgbScale != FLOAT_001aa104) && (combineAlphaMode != 0x8741)) {
     if (rgbScale == FLOAT_001aa108) {
       dstWriteWord = 0x340;
     }
-    goto LAB_000d7214;
+    goto setTokenIndex;
   }
   dstWriteWord = 0x540;
-LAB_000d7214:
+setTokenIndex:
   tokenIndex = *countPtr;
   if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
     newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
@@ -1251,10 +1251,10 @@ int ffpsEmitTexEnvLegacy(ctx, ilBuilder, baseFormat, texEnvMode, unit, textureOb
           source1Token = unitNumber | 0x440000;
           source1Swizzle = ((unsigned char *)0x00003444);
           source0Swizzle = ((unsigned char *)0x00004210);
-          goto LAB_000d75e8;
+          goto checkIlBuilder;
         }
-        if (baseFormat != 0x1907) goto LAB_000d75e0;
-LAB_000d7d84:
+        if (baseFormat != 0x1907) goto setTokenIndex;
+loopSetIlOpcode:
         ilOpcode = 3;
         if (isFirstUnit == 0) {
           colorSourceToken = textureUnitCount + previousUnit & 0xffff | 0x40000;
@@ -1268,18 +1268,18 @@ LAB_000d7d84:
         source1Token = unitNumber | 0x440000;
         source0Swizzle = ((unsigned char *)0x00003444);
         source1Swizzle = ((unsigned char *)0x00004210);
-        goto LAB_000d75e8;
+        goto checkIlBuilder;
       }
       if (baseFormat != 0x190a) {
-        if (baseFormat < 0x190a) goto LAB_000d7d84;
-        if (baseFormat != 0x8049) goto LAB_000d75e0;
+        if (baseFormat < 0x190a) goto loopSetIlOpcode;
+        if (baseFormat != 0x8049) goto setTokenIndex;
       }
     }
     tokenIndex = *countPtr;
     argCount = 1;
     ilOpcode = 0x47;
     colorSourceToken = unitNumber | 0x40000;
-    goto LAB_000d75e8;
+    goto checkIlBuilder;
   }
   if (texEnvMode < 0x1e02) {
     if (texEnvMode == 0x104) {
@@ -1294,31 +1294,31 @@ LAB_000d7d84:
       source2Token = unitNumber | 0x440000;
       if (baseFormat < 0x190b) {
         if (0x1906 < baseFormat) {
-LAB_000d7ee4:
+loopSetSource1Swizzle:
           source1Swizzle = (undefined *)0x555;
           source2Swizzle = 0x210;
-          goto LAB_000d7f0c;
+          goto checkBaseFormat;
         }
-        if (baseFormat != 0x1906) goto LAB_000d7f0c;
+        if (baseFormat != 0x1906) goto checkBaseFormat;
         source2Swizzle = 0x444;
         source1Swizzle = (undefined *)0x555;
       }
       else {
-        if (baseFormat == 0x8049) goto LAB_000d7ee4;
-LAB_000d7f0c:
+        if (baseFormat == 0x8049) goto loopSetSource1Swizzle;
+checkBaseFormat:
         if (baseFormat == 0x8049) {
           tokenIndex = *countPtr;
           argCount = 3;
           source1Swizzle = (undefined *)((uint)source1Swizzle | 0x5000);
           source2Swizzle = source2Swizzle | 0x3000;
-          goto LAB_000d75e8;
+          goto checkIlBuilder;
         }
       }
       tokenIndex = *countPtr;
       argCount = 3;
       source1Swizzle = (undefined *)((uint)source1Swizzle | 0x3000);
       source2Swizzle = source2Swizzle | 0x4000;
-      goto LAB_000d75e8;
+      goto checkIlBuilder;
     }
     if ((texEnvMode == 0xbe2) && (0x1905 < baseFormat)) {
       if (baseFormat < 0x190b) {
@@ -1418,7 +1418,7 @@ LAB_000d7f0c:
         argCount = 2;
         unitDestToken = unitTempRegister | 0x440000;
         destModifierWord = 0x40;
-        goto LAB_000d75e8;
+        goto checkIlBuilder;
       }
       if (baseFormat == 0x8049) {
         ilOpcode = 0x3f;
@@ -1434,7 +1434,7 @@ LAB_000d7f0c:
           argCount = 0;
           source2Token = 0x120000;
         }
-        goto LAB_000d75e8;
+        goto checkIlBuilder;
       }
     }
   }
@@ -1480,7 +1480,7 @@ LAB_000d7f0c:
           source1Token = 0x120000;
         }
       }
-      goto LAB_000d75e8;
+      goto checkIlBuilder;
     }
     if (texEnvMode == 0x2101) {
       if (baseFormat == 0x1907) {
@@ -1497,7 +1497,7 @@ LAB_000d7f0c:
         argCount = 2;
         source0Swizzle = ((unsigned char *)0x00004210);
         source1Swizzle = ((unsigned char *)0x00003444);
-        goto LAB_000d75e8;
+        goto checkIlBuilder;
       }
       if (baseFormat == 0x1908) {
         ilOpcode = 0x3f;
@@ -1513,14 +1513,14 @@ LAB_000d7f0c:
         argCount = 3;
         source0Swizzle = ((unsigned char *)0x00004333);
         source1Swizzle = ((unsigned char *)0x00004210);
-        goto LAB_000d75e8;
+        goto checkIlBuilder;
       }
     }
   }
-LAB_000d75e0:
+setTokenIndex:
   tokenIndex = *countPtr;
   argCount = 0;
-LAB_000d75e8:
+checkIlBuilder:
   if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
     grownTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
     if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -2262,7 +2262,7 @@ undefined4 scStoreConstantComponent(undefined4 unusedArg1,int constRegister,unde
     if (tableBase != (int *)0x0) {
       entryCount = *(uint *)(constBlock + 0x78);
       if (entryCount == 0) {
-LAB_000d9c0c:
+loopCheckConstBlock:
         if (*(uint *)(constBlock + 0x6c) <= entryCount) {
           return 0;
         }
@@ -2280,7 +2280,7 @@ LAB_000d9c0c:
           entryOffset = nextEntryOffset;
           entryCursor = entryCursor + 5;
           entriesLeft = entriesLeft - 1;
-          if (entriesLeft == 0) goto LAB_000d9c0c;
+          if (entriesLeft == 0) goto loopCheckConstBlock;
           nextEntryOffset = entryOffset + 0x14;
         } while (*entryCursor != constRegister);
       }
@@ -2326,7 +2326,7 @@ int ConstBank__storeIntLane(unusedArg1, registerKey, laneValue, lane, bank, useG
     if (entryTable != (int *)0x0) {
       entryCount = *(uint *)(bank + 0x7c);
       if (entryCount == 0) {
-LAB_000d9cf0:
+loopCheckBank:
         if (*(uint *)(bank + 0x70) <= entryCount) {
           return 0;
         }
@@ -2344,7 +2344,7 @@ LAB_000d9cf0:
           entryOffset = nextEntryOffset;
           entryCursor = entryCursor + 5;
           entriesLeft = entriesLeft - 1;
-          if (entriesLeft == 0) goto LAB_000d9cf0;
+          if (entriesLeft == 0) goto loopCheckBank;
           nextEntryOffset = entryOffset + 0x14;
         } while (*entryCursor != registerKey);
       }
@@ -2390,7 +2390,7 @@ int ConstBank__storeBoolLane(unusedArg1, registerKey, laneValue, lane, bank, use
     if (entryTable != (int *)0x0) {
       entryCount = *(uint *)(bank + 0x80);
       if (entryCount == 0) {
-LAB_000d9dd4:
+loopCheckBank:
         if (*(uint *)(bank + 0x74) <= entryCount) {
           return 0;
         }
@@ -2408,7 +2408,7 @@ LAB_000d9dd4:
           entryOffset = nextEntryOffset;
           entryCursor = entryCursor + 5;
           entriesLeft = entriesLeft - 1;
-          if (entriesLeft == 0) goto LAB_000d9dd4;
+          if (entriesLeft == 0) goto loopCheckBank;
           nextEntryOffset = entryOffset + 0x14;
         } while (*entryCursor != registerKey);
       }

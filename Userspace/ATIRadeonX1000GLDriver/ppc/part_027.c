@@ -480,13 +480,13 @@ int IRInst__allSelectsAreHwConstants(inst, compiler, selectBytes, unusedArg4, un
          ((((int)*(char *)(inst + 0x15c) >> (selectValue & 0x3f) & 1U) == 0 ||
           (isHwConstant = (**(code **)(**(int **)(compiler + 0x30c) + 0xf0))
                              ((double)*(float *)(selectValue * 0x18 + inst + 0x20)), isHwConstant == 0))))
-      goto LAB_001045cc;
+      goto setResult;
       selectPtr = selectPtr + 1;
     } while (selectPtr != &(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
     result = 1;
   }
   else {
-LAB_001045cc:
+setResult:
     result = 0;
   }
   return result;

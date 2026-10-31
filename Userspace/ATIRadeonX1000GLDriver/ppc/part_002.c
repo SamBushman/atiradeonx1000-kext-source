@@ -324,11 +324,11 @@ int gld_resolveBoundTextures(ctx, unitMask, staleArgR5, staleArgR6, staleArgR7, 
         targetsLeft = 5;
         do {
           if ((*(uint *)(((unsigned char *)0x000031d4) + unitStateOffset + *(int *)(ctx + 0x10)) & 1 << (targetSlot & 0x3f))
-              != 0) goto LAB_0000a96c;
+              != 0) goto setTexture;
           targetSlot = targetSlot + 1;
           targetsLeft = targetsLeft + -1;
         } while (targetsLeft != 0);
-LAB_0000a924:
+loopSetTexture:
         texture = 0;
       }
       else {
@@ -340,13 +340,13 @@ LAB_0000a924:
           targetSlot = programMaskHigh >> (targetSlot & 0x3f);
         }
         targetSlot = targetSlot & 0xf;
-        if (4 < targetSlot) goto LAB_0000a924;
-LAB_0000a96c:
+        if (4 < targetSlot) goto loopSetTexture;
+setTexture:
         texture = *(int *)(unitObjectOffset + *(int *)(ctx + 0x18) + targetSlot * 4);
         if ((*(short *)(*(int *)(texture + 0x30) + 0x5c) == 0) ||
            (((*(byte *)(texture + 0x39) & 0x87) != 0 &&
             (makeResidentResult = gldTextureMakeResident(ctx,texture,staleArgR5,staleArgR6,staleArgR7,staleArgR8), makeResidentResult == 0))))
-        goto LAB_0000a924;
+        goto loopSetTexture;
       }
       *(int *)(unitObjectCursor + 0x18c) = texture;
     }
@@ -432,7 +432,7 @@ int gld_waitTextureStamp(ctx, texture)
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         resident = resident + 8;
-LAB_0000abac:
+loopCallIoConnectMethodScalarIStructureI:
         _io_connect_method_scalarI_structureI(connection,9,resident,1,0,0);
         return;
       }
@@ -445,7 +445,7 @@ LAB_0000abac:
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         resident = resident + 0xc;
-        goto LAB_0000abac;
+        goto loopCallIoConnectMethodScalarIStructureI;
       }
     }
   }
@@ -512,7 +512,7 @@ int gld_ensureTextureBackingSized2(ctx, texture, requestArg0, requestArg1)
   currentBacking = texture[0xd];
   if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x03')) || (requestArg0 != texture[2])) ||
      (requestArg1 != texture[3])) {
-LAB_0000adc0:
+loopStoreTexture:
     *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     if (currentBacking != 0) {
       oldRefCountPtr = (int *)(currentBacking + 0x10);
@@ -558,9 +558,9 @@ LAB_0000adc0:
     }
     maskCount = (uint)*(byte *)(texImages + 0x6c);
     if (maskCount == 0) {
-LAB_0000ad38:
+loopSetGld_isStampRetiredResult:
       gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(currentBacking + 0xc));
-      if (gld_isStampRetiredResult == 0) goto LAB_0000adc0;
+      if (gld_isStampRetiredResult == 0) goto loopStoreTexture;
     }
     else {
       if ((ushort)((*(ushort *)(currentBacking + 0x1c) | *(ushort *)(currentBacking + 0x28)) &
@@ -572,7 +572,7 @@ LAB_0000ad38:
         }
         do {
           maskCount = maskCount - 1;
-          if (maskCount == 0) goto LAB_0000ad38;
+          if (maskCount == 0) goto loopSetGld_isStampRetiredResult;
           backingMaskPtrB = (ushort *)(backingCursor + 0x2a);
           backingMaskPtrA = (ushort *)(backingCursor + 0x1e);
           backingCursor = backingCursor + 2;
@@ -624,7 +624,7 @@ int gld_ensureTextureAgpRefBacking(ctx, texture, requestArg2)
   currentBacking = texture[0xd];
   if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x06')) || (texture[2] != 0)) ||
      ((texture[3] != 0 || (requestArg2 != texture[4])))) {
-LAB_0000b010:
+loopStoreTexture:
     *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     if (currentBacking != 0) {
       oldRefCountPtr = (int *)(currentBacking + 0x10);
@@ -671,9 +671,9 @@ LAB_0000b010:
     }
     maskCount = (uint)*(byte *)(texImages + 0x6c);
     if (maskCount == 0) {
-LAB_0000af80:
+loopSetGld_isStampRetiredResult:
       gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(currentBacking + 8));
-      if (gld_isStampRetiredResult == 0) goto LAB_0000b010;
+      if (gld_isStampRetiredResult == 0) goto loopStoreTexture;
     }
     else {
       if ((ushort)((*(ushort *)(currentBacking + 0x1c) | *(ushort *)(currentBacking + 0x28)) &
@@ -685,7 +685,7 @@ LAB_0000af80:
         }
         do {
           maskCount = maskCount - 1;
-          if (maskCount == 0) goto LAB_0000af80;
+          if (maskCount == 0) goto loopSetGld_isStampRetiredResult;
           backingMaskPtrB = (ushort *)(backingCursor + 0x2a);
           backingMaskPtrA = (ushort *)(backingCursor + 0x1e);
           backingCursor = backingCursor + 2;
@@ -1068,19 +1068,19 @@ int gld_updateCurrentVertexArray(ctx)
       (*(uint *)(arrayState + 0x30c) & *(uint *)(arrayState + 0x304)) == 0) {
     if ((((unsigned char *)0x000042fc)[*(int *)(ctx + GLD_engineState)] != '\0') ||
        (*(short *)(arrayState + 0x312) != -0x7a4c)) {
-      if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto LAB_0000b830;
+      if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto storeCtx;
       arrayState = gld_prepareVertexArrayBacking(ctx,vertexArray);
       goto joined_r0x0000b814;
     }
   }
   else {
-    if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto LAB_0000b830;
+    if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto storeCtx;
     arrayState = gld_prepareVertexArrayBuffers(ctx,vertexArray);
 joined_r0x0000b814:
-    if (arrayState != 0) goto LAB_0000b830;
+    if (arrayState != 0) goto storeCtx;
   }
   vertexArray = (int *)0x0;
-LAB_0000b830:
+storeCtx:
   *(int **)(ctx + GLD_currentVertexArray) = vertexArray;
   if ((previousArray != 0) && (vertexArray == (int *)0x0)) {
     gld_startPacket(ctx);
@@ -1108,7 +1108,7 @@ int gld_waitVertexArrayStamp(ctx, vertexArray)
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         backing = backing + 8;
-LAB_0000b93c:
+loopCallIoConnectMethodScalarIStructureI:
         _io_connect_method_scalarI_structureI(connection,9,backing,1,0,0);
         return;
       }
@@ -1121,7 +1121,7 @@ LAB_0000b93c:
       if (retired == 0) {
         connection = *(undefined4 *)(ctx + GLD_connect);
         backing = backing + 0xc;
-        goto LAB_0000b93c;
+        goto loopCallIoConnectMethodScalarIStructureI;
       }
     }
   }
@@ -1180,7 +1180,7 @@ int _gldModifyVertexArray(ctx, vertexArray)
       else {
         stateMismatch = vertexArray[0x8c] ^ 6;
       }
-      if (stateMismatch == 0) goto LAB_0000bb18;
+      if (stateMismatch == 0) goto callPthreadMutexUnlock;
     }
     refCountSlot = (int *)(backing + 0x10);
     do {
@@ -1196,7 +1196,7 @@ int _gldModifyVertexArray(ctx, vertexArray)
     }
     vertexArray[0x8a] = 0;
   }
-LAB_0000bb18:
+callPthreadMutexUnlock:
   _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
   return 0;
 }
@@ -1514,7 +1514,7 @@ char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char 
   outPos = runStart;
   integerPartRemaining = scaledSum;
   if (scaledSum <= tolerance) {
-LAB_0000c240:
+loopStoreOutPos:
     *outPos = '0';
     outPos = outPos + 1;
   }
@@ -1530,7 +1530,7 @@ LAB_0000c240:
       *outPos = (char)integerDigit + '0';
       outPos = outPos + 1;
     } while (tolerance < integerPartRemaining);
-    if (outPos <= runStart) goto LAB_0000c240;
+    if (outPos <= runStart) goto loopStoreOutPos;
     digitRunLength = (int)outPos - (int)runStart;
     if (1 < digitRunLength) {
       swapsLeft = ((uint)(runStart + (digitRunLength * 2 - (int)outPos) + -2) >> 1) + 1;
@@ -1557,7 +1557,7 @@ LAB_0000c240:
       *outPos = '.';
       outPos[1] = '0';
       outPos = outPos + 2;
-      goto LAB_0000c31c;
+      goto checkDecimalExponent;
     }
   }
   else {
@@ -1579,8 +1579,8 @@ LAB_0000c240:
       *outPos = (char)(int)fractionDigit + '0';
       outPos = outPos + 1;
     } while (tolerance < scaledSum);
-LAB_0000c31c:
-    if (decimalExponent[0] == 0) goto LAB_0000c440;
+checkDecimalExponent:
+    if (decimalExponent[0] == 0) goto checkOutPos;
   }
   if ((int)outEnd - (int)outPos < 3) {
     return (char *)0x0;
@@ -1624,7 +1624,7 @@ LAB_0000c31c:
       } while (reversalSwaps != 0);
     }
   }
-LAB_0000c440:
+checkOutPos:
   if (outPos == outEnd) {
     return (char *)0x0;
   }
@@ -1667,9 +1667,9 @@ double parseDecimalDouble(char *cursor,undefined4 *endPtr,undefined4 staleArgR5,
   }
   chCode = (int)ch;
   value = DOUBLE_001aa228;
-  if (chCode == 0) goto LAB_0000c5a8;
+  if (chCode == 0) goto checkNegative;
   if (chCode == 0x2e) {
-LAB_0000c670:
+loopSetFractionStart:
     fractionStart = cursor + 1;
     ch = cursor[1];
     digitRunEnd = fractionStart;
@@ -1692,7 +1692,7 @@ LAB_0000c670:
     value = value + fraction;
   }
   else {
-    if ((chCode == 0x65) || (chCode == 0x45)) goto LAB_0000c5a8;
+    if ((chCode == 0x65) || (chCode == 0x45)) goto checkNegative;
     integerScan = cursor;
     placeValue = DOUBLE_001aa200;
     digitRunEnd = cursor;
@@ -1709,7 +1709,7 @@ LAB_0000c670:
     }
     ch = *digitRunEnd;
     cursor = digitRunEnd;
-    if (ch == '.') goto LAB_0000c670;
+    if (ch == '.') goto loopSetFractionStart;
   }
   if ((ch == 'e') || (cursor = digitRunEnd, ch == 'E')) {
     exponentStart = digitRunEnd + 1;
@@ -1742,7 +1742,7 @@ LAB_0000c670:
     powerOfTen = (double)((double (*)())powerOfTenDouble)((int)exponent,endPtr,staleArgR5,staleArgR6,staleArgR7,staleArgR8,digitRunEnd);
     value = value * powerOfTen;
   }
-LAB_0000c5a8:
+checkNegative:
   if (negative) {
     value = -value;
   }
@@ -2081,7 +2081,7 @@ int arbIrPrintDeclSizeSuffix(cursor, vectorWidthMinus1, hasSecondWidth, elementT
     }
   }
   else if (elementType < 3) {
-    if (elementType != 1) goto LAB_0000d0e4;
+    if (elementType != 1) goto checkBitWidthCode;
     emitLength = 0;
     if (s_F_001a4448[0] != '\0') {
       copySrc = "F";
@@ -2108,7 +2108,7 @@ int arbIrPrintDeclSizeSuffix(cursor, vectorWidthMinus1, hasSecondWidth, elementT
     }
   }
   else {
-    if (elementType != 4) goto LAB_0000d0e4;
+    if (elementType != 4) goto checkBitWidthCode;
     emitLength = 0;
     if (s_B_001a4450[0] != '\0') {
       copySrc = "B";
@@ -2122,7 +2122,7 @@ int arbIrPrintDeclSizeSuffix(cursor, vectorWidthMinus1, hasSecondWidth, elementT
     }
   }
   suffixCursor = suffixCursor + emitLength;
-LAB_0000d0e4:
+checkBitWidthCode:
   if (bitWidthCode == 2) {
     emitLength = 0;
     if (s_16_001a4458[0] != '\0') {
@@ -2259,11 +2259,11 @@ int arbIrPrintDestinationOperand(instrTable, outCursor, nameTable3, nameTable4, 
     if ((useNames == 0) || (nameTable3 == 0)) {
       written = ((int (*)())textPrintSignedDecimal)(afterPrefix,(uint)*(ushort *)((int)operandEntry + 6));
       outCursor = afterPrefix + written;
-      goto LAB_0000d5c0;
+      goto checkUseNames;
     }
     written = ((int (*)())textPrintSignedDecimal)(afterPrefix,*(undefined4 *)(nameTable3 + (uint)*(ushort *)((int)operandEntry + 6) * 4));
     outCursor = afterPrefix + written;
-    if (nameTable4 == 0) goto LAB_0000d5c4;
+    if (nameTable4 == 0) goto setRegisterFile;
     registerFile = operandEntry[1];
     if (-1 < (int)registerFile) {
       registerId = (uint)*(ushort *)((int)operandEntry + 6);
@@ -2298,9 +2298,9 @@ int arbIrPrintDestinationOperand(instrTable, outCursor, nameTable3, nameTable4, 
         registerFile = operandEntry[1];
         outCursor = afterPrefix + emitLength + written;
       }
-      goto LAB_0000d5c8;
+      goto checkRegisterFile;
     }
-LAB_0000d5d0:
+loopSetWritten:
     written = 0;
     if (s__adr_001a4470[0] != '\0') {
       srcCursor = "[adr";
@@ -2329,9 +2329,9 @@ LAB_0000d5d0:
           written = written + 1;
           curChar = *srcCursor;
         } while (curChar != '\0');
-        goto LAB_0000d794;
+        goto loopSetOperandWord1;
       }
-LAB_0000d798:
+loopSetAfterPrefix:
       afterPrefix = afterPrefix + written;
     }
     else {
@@ -2347,12 +2347,12 @@ LAB_0000d798:
               written = written + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-LAB_0000d794:
+loopSetOperandWord1:
             operandWord1 = operandEntry[1];
           }
         }
         else {
-          if (registerFile != 3) goto LAB_0000d79c;
+          if (registerFile != 3) goto checkOperandEntry;
           written = 0;
           if (s__w_001a4484[0] != '\0') {
             srcCursor = ".w";
@@ -2363,10 +2363,10 @@ LAB_0000d794:
               written = written + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-            goto LAB_0000d794;
+            goto loopSetOperandWord1;
           }
         }
-        goto LAB_0000d798;
+        goto loopSetAfterPrefix;
       }
       if (registerFile == 0) {
         written = 0;
@@ -2379,12 +2379,12 @@ LAB_0000d794:
             written = written + 1;
             curChar = *srcCursor;
           } while (curChar != '\0');
-          goto LAB_0000d794;
+          goto loopSetOperandWord1;
         }
-        goto LAB_0000d798;
+        goto loopSetAfterPrefix;
       }
     }
-LAB_0000d79c:
+checkOperandEntry:
     if ((((*operandEntry & 0xe0000) != 0x20000) || (nameTable4 == 0)) ||
        (written = *(int *)(nameTable4 + (uint)*(ushort *)((int)operandEntry + 6) * 4), written == -1)) {
       written = 0;
@@ -2421,7 +2421,7 @@ LAB_0000d79c:
       } while (curChar != '\0');
     }
     outCursor = afterPrefix + written;
-LAB_0000d89c:
+loopSetWritten2:
     written = 0;
     if (s___001a448c[0] != '\0') {
       srcCursor = ".";
@@ -2498,13 +2498,13 @@ LAB_0000d89c:
       emitLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,(uint)*(ushort *)((int)operandEntry + 6));
       outCursor = outCursor + written + emitLength;
     }
-LAB_0000d5c0:
+checkUseNames:
     if (useNames != 0) {
-LAB_0000d5c4:
+setRegisterFile:
       registerFile = operandEntry[1];
-LAB_0000d5c8:
-      if ((int)registerFile < 0) goto LAB_0000d5d0;
-      goto LAB_0000d89c;
+checkRegisterFile:
+      if ((int)registerFile < 0) goto loopSetWritten;
+      goto loopSetWritten2;
     }
     registerFile = *operandEntry;
     if ((registerFile & 0x1e000) != 0x1e000) {
@@ -2598,7 +2598,7 @@ LAB_0000d5c8:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-LAB_0000de9c:
+loopSetRegisterFile:
       registerFile = *operandEntry;
     }
     break;
@@ -2613,7 +2613,7 @@ LAB_0000de9c:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-      goto LAB_0000de9c;
+      goto loopSetRegisterFile;
     }
     break;
   case 2:
@@ -2627,7 +2627,7 @@ LAB_0000de9c:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-      goto LAB_0000de9c;
+      goto loopSetRegisterFile;
     }
     break;
   case 3:
@@ -2641,7 +2641,7 @@ LAB_0000de9c:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-      goto LAB_0000de9c;
+      goto loopSetRegisterFile;
     }
     break;
   case 4:
@@ -2655,7 +2655,7 @@ LAB_0000de9c:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-      goto LAB_0000de9c;
+      goto loopSetRegisterFile;
     }
     break;
   case 5:
@@ -2669,7 +2669,7 @@ LAB_0000de9c:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-      goto LAB_0000de9c;
+      goto loopSetRegisterFile;
     }
     break;
   case 6:
@@ -2683,7 +2683,7 @@ LAB_0000de9c:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-      goto LAB_0000de9c;
+      goto loopSetRegisterFile;
     }
     break;
   case 7:
@@ -2697,7 +2697,7 @@ LAB_0000de9c:
         written = written + 1;
         curChar = *srcCursor;
       } while (curChar != '\0');
-      goto LAB_0000de9c;
+      goto loopSetRegisterFile;
     }
     break;
   default:
@@ -2927,7 +2927,7 @@ int arbIrPrintSourceOperand(instrTable, outCursor, nameTable3, nameTable4, nameT
     }
     else {
       operandWord = *operandEntry;
-      if ((int)operandWord < 0) goto LAB_0000e6e8;
+      if ((int)operandWord < 0) goto setWritten;
       nameIndex = (uint)*(ushort *)((int)operandEntry + 6);
       if (*(int *)(nameTable6 + nameIndex * 4) != -1) {
         written = 0;
@@ -2957,7 +2957,7 @@ int arbIrPrintSourceOperand(instrTable, outCursor, nameTable3, nameTable4, nameT
             curChar = *srcCursor2;
           } while (curChar != '\0');
         }
-        goto LAB_0000e610;
+        goto setOperandWord;
       }
     }
     goto switchD_0000e310_default;
@@ -3008,13 +3008,13 @@ int arbIrPrintSourceOperand(instrTable, outCursor, nameTable3, nameTable4, nameT
             curChar = *srcCursor2;
           } while (curChar != '\0');
         }
-LAB_0000e610:
+setOperandWord:
         operandWord = *operandEntry;
         outCursor = srcCursor + written;
       }
       goto switchD_0000e310_default;
     }
-    goto LAB_0000e6e8;
+    goto setWritten;
   case 3:
     written = 0;
     if (s_res_001a446c[0] != '\0') {
@@ -3051,7 +3051,7 @@ LAB_0000e610:
   outCursor = outCursor + written + nameLength;
 switchD_0000e310_default:
   if ((int)operandWord < 0) {
-LAB_0000e6e8:
+setWritten:
     written = 0;
     if (s__adr_001a4470[0] != '\0') {
       srcCursor = "[adr";
@@ -3079,9 +3079,9 @@ LAB_0000e6e8:
           written = written + 1;
           curChar = *srcCursor2;
         } while (curChar != '\0');
-        goto LAB_0000e89c;
+        goto loopSetNameIndex;
       }
-LAB_0000e8a0:
+loopSetSrcCursor:
       srcCursor = srcCursor + written;
     }
     else {
@@ -3097,12 +3097,12 @@ LAB_0000e8a0:
               written = written + 1;
               curChar = *srcCursor2;
             } while (curChar != '\0');
-LAB_0000e89c:
+loopSetNameIndex:
             nameIndex = *operandEntry;
           }
         }
         else {
-          if (operandWord != 3) goto LAB_0000e8a4;
+          if (operandWord != 3) goto checkNameIndex;
           written = 0;
           if (s__w_001a4484[0] != '\0') {
             srcCursor2 = ".w";
@@ -3113,10 +3113,10 @@ LAB_0000e89c:
               written = written + 1;
               curChar = *srcCursor2;
             } while (curChar != '\0');
-            goto LAB_0000e89c;
+            goto loopSetNameIndex;
           }
         }
-        goto LAB_0000e8a0;
+        goto loopSetSrcCursor;
       }
       if (operandWord == 0) {
         written = 0;
@@ -3129,24 +3129,24 @@ LAB_0000e89c:
             written = written + 1;
             curChar = *srcCursor2;
           } while (curChar != '\0');
-          goto LAB_0000e89c;
+          goto loopSetNameIndex;
         }
-        goto LAB_0000e8a0;
+        goto loopSetSrcCursor;
       }
     }
-LAB_0000e8a4:
+checkNameIndex:
     if ((nameIndex & 0x3800000) == 0x800000) {
-      if (nameTable6 == 0) goto LAB_0000e908;
+      if (nameTable6 == 0) goto setWritten2;
       written = *(int *)(nameTable6 + (uint)*(ushort *)((int)operandEntry + 6) * 4);
 joined_r0x0000e904:
-      if (written == -1) goto LAB_0000e908;
+      if (written == -1) goto setWritten2;
     }
     else {
       if (((nameIndex & 0x3800000) == 0x1000000) && (nameTable4 != 0)) {
         written = *(int *)(nameTable4 + (uint)*(ushort *)((int)operandEntry + 6) * 4);
         goto joined_r0x0000e904;
       }
-LAB_0000e908:
+setWritten2:
       written = 0;
     }
     written = written + (char)*operandEntry;
@@ -3184,13 +3184,13 @@ LAB_0000e908:
     outCursor = srcCursor + written;
   }
   if ((operandWord & 0x3800000) == 0x2000000) {
-LAB_0000efb4:
-    if (useNames == 0) goto LAB_0000f0bc;
+loopCheckUseNames:
+    if (useNames == 0) goto checkOperandWord;
   }
   else {
     if (isSwizzleOperand != 0) {
       swizzleEntry = (uint *)(instrTable + (instrIndex + 1) * 8);
-LAB_0000e9fc:
+loopSetOperandWord:
       operandWord = *swizzleEntry >> 0xc & 0xf;
       if (s___001a44f4[0] == '\0') {
         written = 0;
@@ -3208,7 +3208,7 @@ LAB_0000e9fc:
       }
       outCursor = outCursor + written;
       written = 0;
-LAB_0000ebd8:
+loopSwitchOperandWord:
       switch(operandWord) {
       case 0:
         nameLength = 0;
@@ -3362,7 +3362,7 @@ switchD_0000ebf8_default:
       written = written + 1;
       if (lastComponent) {
         operandWord = *operandEntry;
-        goto LAB_0000efb4;
+        goto loopCheckUseNames;
       }
       if (written == 1) {
         nameLength = 0;
@@ -3381,8 +3381,8 @@ switchD_0000ebf8_default:
       }
       else {
         if (written < 2) {
-          if (written == 0) goto LAB_0000e9fc;
-          goto LAB_0000ebd8;
+          if (written == 0) goto loopSetOperandWord;
+          goto loopSwitchOperandWord;
         }
         if (written == 2) {
           nameLength = 0;
@@ -3398,9 +3398,9 @@ switchD_0000ebf8_default:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_0000ebd4;
+          goto setOutCursor;
         }
-        if (written != 3) goto LAB_0000ebd8;
+        if (written != 3) goto loopSwitchOperandWord;
         nameLength = 0;
         operandWord = *swizzleEntry & 0xf;
         if (s___001a44f8[0] != '\0') {
@@ -3415,9 +3415,9 @@ switchD_0000ebf8_default:
           } while (curChar != '\0');
         }
       }
-LAB_0000ebd4:
+setOutCursor:
       outCursor = outCursor + nameLength;
-      goto LAB_0000ebd8;
+      goto loopSwitchOperandWord;
     }
     if (useNames == 0) {
       if ((operandWord & 0x7f8000) != 0xd8000) {
@@ -3451,7 +3451,7 @@ LAB_0000ebd4:
           operandWord = *operandEntry;
         }
       }
-      goto LAB_0000f0bc;
+      goto checkOperandWord;
     }
     written = 0;
     if (s___001a448c[0] != '\0') {
@@ -3488,7 +3488,7 @@ LAB_0000ebd4:
   }
   outCursor = (char *)((int (*)())arbIrPrintSourceSizeSuffix)(outCursor,operandWord >> 0xc & 3,operandWord >> 0xe & 1);
   operandWord = *operandEntry;
-LAB_0000f0bc:
+checkOperandWord:
   if ((operandWord & 0x4000000) != 0) {
     written = 0;
     if (s___001a44e4[0] != '\0') {
@@ -3847,7 +3847,7 @@ int arbProgramIrToText(program)
       }
     }
     else {
-LAB_0000f6a4:
+loopCheckS_Unkown_Target__error__001a45a8:
       if (s_Unkown_Target__error__001a45a8[0] == '\0') {
         emitLength = 0;
       }
@@ -3880,7 +3880,7 @@ LAB_0000f6a4:
     }
   }
   else {
-    if (programTarget != 0x8b31) goto LAB_0000f6a4;
+    if (programTarget != 0x8b31) goto loopCheckS_Unkown_Target__error__001a45a8;
     emitLength = 0;
     if (s___ARBvertexshader_001a4570[0] != '\0') {
       srcCursor = "!!ARBvertexshader\n";
@@ -4134,7 +4134,7 @@ switchD_0000f958_default:
       }
       outCursor = outCursor + emitLength;
       bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacityPtr,&outBuffer,outCursorPtr);
-      if (bufferOk == 0) goto LAB_00016630;
+      if (bufferOk == 0) goto callFree;
       loopIndex = loopIndex + 1;
       optionEntry = optionEntry + 2;
     } while (optionCount != loopIndex);
@@ -4203,7 +4203,7 @@ switchD_0000f958_default:
     }
     outCursor = outCursor + emitLength;
     bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
-    if (bufferOk == 0) goto LAB_00016630;
+    if (bufferOk == 0) goto callFree;
     if (!isAssemblyProgram) {
       emitLength = 0;
       if (s__001a45c0[0] != '\0') {
@@ -4227,7 +4227,7 @@ switchD_0000f958_default:
       tmpRegisterNumbers = 0;
       tmpGroupState = (uint *)0x0;
       tmpArrayLengths = 0;
-LAB_0001025c:
+loopSetOutCapacityPtr:
       outCapacityPtr = outCapacity;
       outCursorPtr = &outCursor;
       groupIndex = 0;
@@ -4248,7 +4248,7 @@ LAB_0001025c:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-LAB_00010394:
+loopSetOutCursor:
           outCursor = outCursor + emitLength2;
         }
         else {
@@ -4264,7 +4264,7 @@ LAB_00010394:
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            goto LAB_00010394;
+            goto loopSetOutCursor;
           }
           if (entryWord == 0) {
             emitLength2 = 0;
@@ -4278,7 +4278,7 @@ LAB_00010394:
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            goto LAB_00010394;
+            goto loopSetOutCursor;
           }
         }
         entryWord = *argReg6;
@@ -4393,7 +4393,7 @@ LAB_00010394:
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-LAB_00010780:
+loopSetOutCursor2:
             outCursor = outCursor + emitLength2;
             groupEnded = false;
           }
@@ -4411,7 +4411,7 @@ LAB_00010780:
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
-              goto LAB_00010780;
+              goto loopSetOutCursor2;
             }
           }
           else {
@@ -4430,8 +4430,8 @@ LAB_00010780:
             groupEnded = true;
           }
           reallocOk = ((int (*)())textBufferEnsureRoom)(outCapacityPtr,&outBuffer,outCursorPtr);
-          if (reallocOk == 0) goto LAB_00014070;
-          if ((int)tempCount <= (int)loopCounter) goto LAB_000107a8;
+          if (reallocOk == 0) goto checkTmpRegisterNumbers;
+          if ((int)tempCount <= (int)loopCounter) goto checkTmpArrayLengths;
           currentTempEntry = currentTempEntry + 2;
         } while (!groupEnded);
       } while( true );
@@ -4452,24 +4452,24 @@ LAB_00010780:
         tempScanEntry = tempScanEntry + 2;
         entriesRemaining = entriesRemaining - 1;
       } while (entriesRemaining != 0);
-      if (maxTempId == 0xffffffff) goto LAB_000100c0;
+      if (maxTempId == 0xffffffff) goto setTmpRegisterNumbers;
       idTableBytes = maxTempId * 4 + 4;
       tmpRegisterNumbers = _malloc(idTableBytes);
       tmpGroupState = (uint *)_malloc(idTableBytes);
       if (tmpRegisterNumbers == 0) {
         if (tmpGroupState != (uint *)0x0) {
-LAB_000163f0:
+loopCallFree:
           _free(tmpGroupState);
         }
-        goto LAB_00016630;
+        goto callFree;
       }
       if (tmpGroupState == (uint *)0x0) {
         _free(tmpRegisterNumbers);
-        goto LAB_00016630;
+        goto callFree;
       }
     }
     else {
-LAB_000100c0:
+setTmpRegisterNumbers:
       tmpRegisterNumbers = 0;
       tmpGroupState = (uint *)0x0;
     }
@@ -4490,7 +4490,7 @@ LAB_000100c0:
         entryWord = (uint)*(ushort *)((int)argReg10 + 6);
         tempArrayTable = program + program[0x11] * 2;
         if ((tempArraysLeft == 0) || ((int)tempArraysLeft < 1)) {
-LAB_00010194:
+loopStoreTmpGroupState:
           tmpGroupState[entryWord] = argReg7;
           entryWord = 0xffffffff;
         }
@@ -4500,7 +4500,7 @@ LAB_00010194:
             descriptorOffset = 8;
             do {
               tempArraysLeft = tempArraysLeft - 1;
-              if (tempArraysLeft == 0) goto LAB_00010194;
+              if (tempArraysLeft == 0) goto loopStoreTmpGroupState;
               arrayDescriptor = (uint *)((int)tempArrayTable + descriptorOffset);
               descriptorOffset = descriptorOffset + 8;
             } while (entryWord != (ushort)*arrayDescriptor);
@@ -4525,7 +4525,7 @@ LAB_00010194:
         while( true ) {
           argReg8 = (uint *)((int)argReg8 + 1);
           entriesLeft = entriesLeft + -1;
-          if (entriesLeft == 0) goto LAB_0001025c;
+          if (entriesLeft == 0) goto loopSetOutCapacityPtr;
           if (entryWord == 0xffffffff) break;
           if ((int)(uint)*(ushort *)((int)nextTempEntry + 6) <= (int)tempArrayEndId) {
             *(uint *)((uint)*(ushort *)((int)nextTempEntry + 6) * 4 + tmpRegisterNumbers) = entryWord;
@@ -4545,7 +4545,7 @@ LAB_00010194:
       } while( true );
     }
     groupElementIndex = -1;
-LAB_000107a8:
+checkTmpArrayLengths:
     if (tmpArrayLengths != 0) {
       _free(tmpArrayLengths);
     }
@@ -4593,7 +4593,7 @@ LAB_000107a8:
           outCursor = (undefined1 *)((int (*)())arbIrPrintDeclSizeSuffix)(outCursor,entryWord >> 0x18 & 3,0,argReg6,argReg7);
         }
         if (programTarget == 0x8804) {
-LAB_00010974:
+loopSetEmitLength:
           emitLength = 0;
           if (s___fragment__001a4750[0] != '\0') {
             srcCursor = " = fragment.";
@@ -4605,12 +4605,12 @@ LAB_00010974:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-LAB_000109bc:
+loopSetOutCursor3:
           outCursor = outCursor + emitLength;
         }
         else if (programTarget < 0x8805) {
           if (programTarget == 0x8620) {
-LAB_0001092c:
+loopSetEmitLength2:
             emitLength = 0;
             if (s___vertex__001a4744[0] != '\0') {
               srcCursor = " = vertex.";
@@ -4622,12 +4622,12 @@ LAB_0001092c:
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            goto LAB_000109bc;
+            goto loopSetOutCursor3;
           }
         }
         else {
-          if (programTarget == 0x8b30) goto LAB_00010974;
-          if (programTarget == 0x8b31) goto LAB_0001092c;
+          if (programTarget == 0x8b30) goto loopSetEmitLength;
+          if (programTarget == 0x8b31) goto loopSetEmitLength2;
         }
         switch(entryHalfword & 0xf) {
         default:
@@ -4831,10 +4831,10 @@ LAB_0001092c:
                 emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
-LAB_00010f94:
+loopSetEntryWord:
               entryWord = *attribEntry;
             }
-LAB_00010f9c:
+loopSetOutCursor4:
             outCursor = outCursor + emitLength;
           }
           else if ((entryWord & 1) == 1) {
@@ -4848,9 +4848,9 @@ LAB_00010f9c:
                 emitLength = emitLength + 1;
                 curChar = *srcCursor;
               } while (curChar != '\0');
-              goto LAB_00010f94;
+              goto loopSetEntryWord;
             }
-            goto LAB_00010f9c;
+            goto loopSetOutCursor4;
           }
           switch(entryWord >> 0xc & 0xf) {
           case 0:
@@ -4950,7 +4950,7 @@ switchD_000109e4_caseD_0:
         }
         outCursor = outCursor + emitLength;
         bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
-        if (bufferOk == 0) goto LAB_00014070;
+        if (bufferOk == 0) goto checkTmpRegisterNumbers;
       }
       loopCounter = loopCounter + 1;
       attribEntry = attribEntry + 2;
@@ -4976,10 +4976,10 @@ switchD_000109e4_caseD_0:
   if (paramCount == (uint *)0x0) {
     paramRegisterNumbers = 0;
     paramGroupState = (uint *)0x0;
-    goto LAB_0001376c;
+    goto setOutputCount;
   }
   if ((int)paramCount < 1) {
-LAB_000112d0:
+loopSetParamRegisterNumbers:
     paramRegisterNumbers = 0;
     paramGroupState = (uint *)0x0;
   }
@@ -4994,14 +4994,14 @@ LAB_000112d0:
       paramScanEntry = paramScanEntry + 2;
       paramRemaining = (uint *)((int)paramRemaining - 1);
     } while (paramRemaining != (uint *)0x0);
-    if (paramArrayEndId == 0xffffffff) goto LAB_000112d0;
+    if (paramArrayEndId == 0xffffffff) goto loopSetParamRegisterNumbers;
     idTableBytes = paramArrayEndId * 4 + 4;
     paramRegisterNumbers = _malloc(idTableBytes);
     paramGroupState = (uint *)_malloc(idTableBytes);
     if (paramRegisterNumbers == 0) goto joined_r0x000112bc;
     if (paramGroupState == (uint *)0x0) {
       _free(paramRegisterNumbers);
-      goto LAB_00014070;
+      goto checkTmpRegisterNumbers;
     }
   }
   paramArrayLengths = (uint *)0x0;
@@ -5024,7 +5024,7 @@ LAB_000112d0:
           argReg6 = (uint *)(uint)*(ushort *)((int)paramScanCursor + 6);
           paramArrayTable = program + program[0xf] * 2;
           if ((paramArraysLeft == 0) || ((int)paramArraysLeft < 1)) {
-LAB_000113ac:
+loopStoreParamGroupState:
             paramGroupState[(int)argReg6] = argReg7;
             argReg6 = (uint *)0xffffffff;
             argReg8 = paramArrayTable;
@@ -5035,7 +5035,7 @@ LAB_000113ac:
               descriptorByteOffset = 8;
               do {
                 paramArraysLeft = paramArraysLeft - 1;
-                if (paramArraysLeft == 0) goto LAB_000113ac;
+                if (paramArraysLeft == 0) goto loopStoreParamGroupState;
                 argReg8 = (uint *)((int)paramArrayTable + descriptorByteOffset);
                 descriptorByteOffset = descriptorByteOffset + 8;
               } while (argReg6 != (uint *)(uint)(ushort)*argReg8);
@@ -5045,7 +5045,7 @@ LAB_000113ac:
             paramGroupState[(int)argReg6] = 0;
           }
           if (*(ushort *)((int)paramScanCursor + 6) == paramArrayEndId) {
-LAB_00011410:
+loopStoreArrayLengthCursor:
             *arrayLengthCursor = argReg7;
             argReg6 = (uint *)0xffffffff;
             arrayLengthCursor = arrayLengthCursor + 1;
@@ -5057,7 +5057,7 @@ LAB_00011410:
           *(uint **)((uint)*(ushort *)((int)paramScanCursor + 6) * 4 + paramRegisterNumbers) = argReg6;
           paramGroupState[*(ushort *)((int)paramScanCursor + 6)] = argReg7;
           argReg7 = argReg7 + 1;
-          if (*(ushort *)((int)paramScanCursor + 6) == paramArrayEndId) goto LAB_00011410;
+          if (*(ushort *)((int)paramScanCursor + 6) == paramArrayEndId) goto loopStoreArrayLengthCursor;
         }
       }
       printResult = (ulonglong)paramArrayEndId;
@@ -5069,7 +5069,7 @@ LAB_00011410:
     do {
       entryHalfword = *(ushort *)paramEntry;
       paramKind = entryHalfword & 0x1f;
-      if ((entryHalfword & 0x1f) == 0) goto LAB_000136f0;
+      if ((entryHalfword & 0x1f) == 0) goto setParamLoopCursor;
       paramRegisterId = (uint)*(ushort *)((int)paramEntry + 6);
       if (paramGroupState[paramRegisterId] == 0xffffffff) {
         emitLength3 = 0;
@@ -5105,7 +5105,7 @@ LAB_00011410:
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-LAB_00011758:
+loopSetOutCursor5:
         outCursor = outCursor + emitLength3;
       }
       else {
@@ -5122,7 +5122,7 @@ LAB_00011758:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_00011758;
+          goto loopSetOutCursor5;
         }
         emitLength5 = 0;
         if (s_PARAM_prm_001a4828[0] != '\0') {
@@ -5198,9 +5198,9 @@ LAB_00011758:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_000118a8;
+          goto setOutCursor;
         }
-        if (paramKind != 0x11) goto LAB_00011778;
+        if (paramKind != 0x11) goto checkS_state__001a4858;
         emitLength3 = 0;
         if (s__001a4134[0] != '\0') {
           srcCursor = "";
@@ -5315,7 +5315,7 @@ switchD_000118c8_caseD_11:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_000135c0;
+          goto setOutCursor3;
         case 3:
         case 4:
           emitLength3 = 0;
@@ -5393,11 +5393,11 @@ switchD_000118c8_caseD_11:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_000135c0;
+          goto setOutCursor3;
         }
         goto switchD_000118c8_caseD_0;
       }
-LAB_00011778:
+checkS_state__001a4858:
       if (s_state__001a4858[0] == '\0') {
         emitLength3 = 0;
       }
@@ -5412,7 +5412,7 @@ LAB_00011778:
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
-LAB_000118a8:
+setOutCursor:
       outCursor = outCursor + emitLength3;
       switch(paramKind) {
       default:
@@ -5645,10 +5645,10 @@ LAB_000118a8:
               emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-LAB_00011f20:
+loopSetParamWord2:
             paramWord2 = *paramEntry;
           }
-LAB_00011f28:
+loopSetOutCursor6:
           outCursor = outCursor + emitLength3;
         }
         else if (lightFace == 1) {
@@ -5662,9 +5662,9 @@ LAB_00011f28:
               emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-            goto LAB_00011f20;
+            goto loopSetParamWord2;
           }
-          goto LAB_00011f28;
+          goto loopSetOutCursor6;
         }
         lightColorKind = paramWord2 >> 9 & 3;
         if (lightColorKind == 1) {
@@ -5721,7 +5721,7 @@ LAB_00011f28:
               emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-LAB_00012114:
+loopSetParamWord:
             paramWord = *paramEntry;
           }
         }
@@ -5736,7 +5736,7 @@ LAB_00012114:
               emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-            goto LAB_00012114;
+            goto loopSetParamWord;
           }
         }
         outCursor = outCursor + emitLength3;
@@ -5751,10 +5751,10 @@ LAB_00012114:
               emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-LAB_000121c4:
+loopSetParamWord2X:
             paramWord = *paramEntry;
           }
-LAB_000121cc:
+loopSetOutCursor7:
           outCursor = outCursor + emitLength3;
         }
         else if ((paramWord & 1) == 1) {
@@ -5768,9 +5768,9 @@ LAB_000121cc:
               emitLength3 = emitLength3 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-            goto LAB_000121c4;
+            goto loopSetParamWord2X;
           }
-          goto LAB_000121cc;
+          goto loopSetOutCursor7;
         }
         switch(paramWord >> 1 & 7) {
         case 0:
@@ -6177,10 +6177,10 @@ LAB_000121cc:
               emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-LAB_00012bfc:
+loopSetParamWord3:
             paramWord = *paramEntry;
           }
-          goto LAB_00012e2c;
+          goto setOutCursor2;
         case 1:
           emitLength2 = 0;
           if (s_projection__001a497c[0] != '\0') {
@@ -6192,9 +6192,9 @@ LAB_00012bfc:
               emitLength2 = emitLength2 + 1;
               curChar = *srcCursor;
             } while (curChar != '\0');
-            goto LAB_00012bfc;
+            goto loopSetParamWord3;
           }
-          goto LAB_00012e2c;
+          goto setOutCursor2;
         case 2:
           emitLength3 = 0;
           if (s_color__001a4990[0] != '\0') {
@@ -6221,7 +6221,7 @@ LAB_00012bfc:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_00012d68;
+          goto setParamWord;
         case 3:
           emitLength3 = 0;
           if (s_modelview__001a4998[0] != '\0') {
@@ -6248,7 +6248,7 @@ LAB_00012bfc:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-LAB_00012d68:
+setParamWord:
           paramWord = *paramEntry;
           outCursor = outCursor + emitLength2;
           break;
@@ -6279,7 +6279,7 @@ LAB_00012d68:
             } while (curChar != '\0');
           }
           paramWord = *paramEntry;
-LAB_00012e2c:
+setOutCursor2:
           outCursor = outCursor + emitLength2;
           break;
         case 5:
@@ -6323,7 +6323,7 @@ LAB_00012e2c:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-LAB_00012ff0:
+loopSetOutCursor8:
           outCursor = outCursor + emitLength3;
         }
         else {
@@ -6339,7 +6339,7 @@ LAB_00012ff0:
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            goto LAB_00012ff0;
+            goto loopSetOutCursor8;
           }
           if (matrixModifier == 1) {
             emitLength3 = 0;
@@ -6353,7 +6353,7 @@ LAB_00012ff0:
                 curChar = *srcCursor;
               } while (curChar != '\0');
             }
-            goto LAB_00012ff0;
+            goto loopSetOutCursor8;
           }
         }
         emitLength3 = 0;
@@ -6397,7 +6397,7 @@ LAB_00012ff0:
           } while (curChar != '\0');
         }
       }
-LAB_000135c0:
+setOutCursor3:
       outCursor = outCursor + emitLength3;
 switchD_000118c8_caseD_0:
       if (paramGroupState[*(ushort *)((int)paramEntry + 6)] == 0xffffffff) {
@@ -6442,8 +6442,8 @@ switchD_000118c8_caseD_0:
       }
       outCursor = outCursor + emitLength3;
       printResult = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
-      if ((int)(printResult >> 0x20) == 0) goto LAB_00014048;
-LAB_000136f0:
+      if ((int)(printResult >> 0x20) == 0) goto checkParamRegisterNumbers;
+setParamLoopCursor:
       paramLoopCursor = (uint *)((int)paramLoopCursor + 1);
       paramEntry = paramEntry + 2;
     } while (paramCount != paramLoopCursor);
@@ -6464,14 +6464,14 @@ LAB_000136f0:
     } while (curChar != '\0');
   }
   outCursor = outCursor + emitLength;
-LAB_0001376c:
+setOutputCount:
   outputCount = program[0xc];
   outputEntry = program + program[0xd] * 2;
   if (0 < (int)outputCount) {
     loopCounter = 0;
     do {
       entryWord = *outputEntry >> 0x10 & 0xf;
-      if (entryWord == 0) goto LAB_000140a0;
+      if (entryWord == 0) goto setLoopCounter;
       outputPrecision = *outputEntry >> 0x1d;
       if (outputPrecision == 1) {
         emitLength = 0;
@@ -6485,7 +6485,7 @@ LAB_0001376c:
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-LAB_0001389c:
+loopSetOutCursor9:
         outCursor = outCursor + emitLength;
       }
       else {
@@ -6501,7 +6501,7 @@ LAB_0001389c:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_0001389c;
+          goto loopSetOutCursor9;
         }
         if (outputPrecision == 0) {
           emitLength = 0;
@@ -6515,7 +6515,7 @@ LAB_0001389c:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_0001389c;
+          goto loopSetOutCursor9;
         }
       }
       emitLength = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)*(ushort *)((int)outputEntry + 6));
@@ -6805,8 +6805,8 @@ switchD_00013960_caseD_0:
       }
       outCursor = outCursor + emitLength;
       bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
-      if (bufferOk == 0) goto LAB_00014048;
-LAB_000140a0:
+      if (bufferOk == 0) goto checkParamRegisterNumbers;
+setLoopCounter:
       loopCounter = loopCounter + 1;
       outputEntry = outputEntry + 2;
     } while (outputCount != loopCounter);
@@ -6868,7 +6868,7 @@ LAB_000140a0:
               do {
                 argReg8 = (uint *)((int)argReg8 + 1);
                 labelsRemaining = (uint *)((int)labelsRemaining + -1);
-                if (labelsRemaining == (uint *)0x0) goto LAB_00014230;
+                if (labelsRemaining == (uint *)0x0) goto setLabelCountNext;
                 branchTargetCursor = branchTargetCursor + 1;
               } while (*branchTargetCursor < (int)branchTarget);
             }
@@ -6878,13 +6878,13 @@ LAB_000140a0:
           }
           else {
             if (noLabels) {
-LAB_00014230:
+setLabelCountNext:
               labelCountNext = (uint *)((int)labelCount + 1);
               moreLabels = 0 < (int)labelCountNext;
               noLabels = labelCountNext == (uint *)0x0;
               branchTargets[(int)labelCount] = (int)branchTarget;
               branchSources[(int)labelCount] = entryWord;
-              goto LAB_00014300;
+              goto setLoopCounter2;
             }
             argReg8 = (uint *)0x0;
           }
@@ -6922,7 +6922,7 @@ LAB_00014230:
             argReg8 = labelCount;
           }
         }
-LAB_00014300:
+setLoopCounter2:
         loopCounter = loopCounter + 1;
         scanEntryIndex = scanEntryIndex + (program[instructionOffset * 2 + scanEntryIndex * 2] >> 0x1d) + 2;
         labelCount = labelCountNext;
@@ -7154,7 +7154,7 @@ LAB_00014300:
             emitLength3 = 0;
           }
           lineCursor = lineCursor + emitLength3;
-          goto LAB_000154ec;
+          goto setOperandEntriesUsed;
         }
         break;
       case 0x1f:
@@ -7238,7 +7238,7 @@ LAB_00014300:
           emitLength2 = 0;
         }
         lineCursor = (undefined1 *)(emitLength3 + emitLength2);
-LAB_000154ec:
+setOperandEntriesUsed:
         operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 3);
         argReg6 = paramGroupState;
         argReg7 = tmpRegisterNumbers;
@@ -7623,7 +7623,7 @@ LAB_000154ec:
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
-              goto LAB_00016158;
+              goto setLineCursor;
             }
           }
           else {
@@ -7684,7 +7684,7 @@ LAB_000154ec:
                   curChar = *srcCursor;
                 } while (curChar != '\0');
               }
-LAB_00016158:
+setLineCursor:
               lineCursor = lineCursor + emitLength3;
             }
           }
@@ -7700,9 +7700,9 @@ LAB_00016158:
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-LAB_000161a0:
+loopSetLineCursor:
         lineCursor = lineCursor + emitLength3;
-        goto LAB_00014cb8;
+        goto setOperandEntriesUsed2;
       case 0x4b:
       case 0x4c:
         indentLength = (char *)0x0;
@@ -7731,7 +7731,7 @@ LAB_000161a0:
         emitLength3 = printf_LDBLStub_1a32d0(lineCursor + (int)indentLength,"label_%i",labelSearchIndex,argReg6,argReg7,argReg8,srcCursor,
                               argReg10);
         lineCursor = lineCursor + (int)indentLength + emitLength3;
-        if (opcode != 0x4b) goto switchD_000146d8_caseD_4d;
+        if (opcode != 0x4b) goto opcodeCase4d;
         firstOperand = instructionRecord + 2;
         switch(instructionRecord[2] >> 0x1c & 7) {
         case 0:
@@ -7839,10 +7839,10 @@ LAB_000161a0:
           }
           break;
         default:
-          goto switchD_00014df8_default;
+          goto opcodeDefault;
         }
         lineCursor = lineCursor + emitLength3;
-switchD_00014df8_default:
+opcodeDefault:
         if ((int)*firstOperand < 0) {
           *lineCursor = 0x31;
           lineCursor = lineCursor + 1;
@@ -7865,7 +7865,7 @@ switchD_00014df8_default:
       case 0x69:
       case 0x6b:
       case 0x6e:
-switchD_000146d8_caseD_4d:
+opcodeCase4d:
         operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 1);
         break;
       case 0x4f:
@@ -7880,7 +7880,7 @@ switchD_000146d8_caseD_4d:
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        goto LAB_00014cb4;
+        goto setLineCursor2;
       case 0x55:
         nestingDepth = nestingDepth + 1;
         if (!isAssemblyProgram) {
@@ -7898,7 +7898,7 @@ switchD_000146d8_caseD_4d:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          goto LAB_000161a0;
+          goto loopSetLineCursor;
         }
         firstOperand = instructionRecord + 2;
         switch(instructionRecord[2] >> 0x1c & 7) {
@@ -8007,10 +8007,10 @@ switchD_000146d8_caseD_4d:
           }
           break;
         default:
-          goto switchD_00014940_default;
+          goto opcodeDefault2;
         }
         lineCursor = lineCursor + emitLength3;
-switchD_00014940_default:
+opcodeDefault2:
         if ((int)*firstOperand < 0) {
           *lineCursor = 0x31;
           lineCursor = lineCursor + 1;
@@ -8037,7 +8037,7 @@ switchD_00014940_default:
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        goto LAB_00014cb4;
+        goto setLineCursor2;
       case 0x58:
       case 0x6a:
         nestingDepth = nestingDepth + 1;
@@ -8056,9 +8056,9 @@ switchD_00014940_default:
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-LAB_00014cb4:
+setLineCursor2:
         lineCursor = lineCursor + emitLength3;
-LAB_00014cb8:
+setOperandEntriesUsed2:
         operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 2);
         argReg6 = paramGroupState;
         argReg7 = tmpRegisterNumbers;
@@ -8214,10 +8214,10 @@ LAB_00014cb8:
         if (tmpGroupState != (uint *)0x0) {
           _free(tmpGroupState);
         }
-        if (noLabels) goto LAB_00016630;
+        if (noLabels) goto callFree;
         _free(branchTargets);
         tmpGroupState = branchSources;
-        goto LAB_000163f0;
+        goto loopCallFree;
       }
       loopCounter = loopCounter + 1;
       entryIndex = (undefined1 *)((int)operandEntriesUsed + (int)(entryIndex + 1));
@@ -8288,7 +8288,7 @@ LAB_00014cb8:
     outBuffer = _realloc(outBuffer,(int)outCursor - outBuffer);
   }
   return outBuffer;
-LAB_00014048:
+checkParamRegisterNumbers:
   if (paramRegisterNumbers != 0) {
     _free(paramRegisterNumbers);
   }
@@ -8296,14 +8296,14 @@ joined_r0x000112bc:
   if (paramGroupState != (uint *)0x0) {
     _free(paramGroupState);
   }
-LAB_00014070:
+checkTmpRegisterNumbers:
   if (tmpRegisterNumbers != 0) {
     _free(tmpRegisterNumbers);
   }
   if (tmpGroupState != (uint *)0x0) {
     _free(tmpGroupState);
   }
-LAB_00016630:
+callFree:
   _free(outBuffer);
   return 0;
 }
@@ -8510,7 +8510,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
           lsbNextByteBit = lsbFirstMask & 1;
           msbNextByteBit = msbFirstMask & 0x80;
           bitsLeft = columns;
-          goto LAB_00016e40;
+          goto setRowBytesLeft;
         }
         byteColumn = 0;
         lsbNextByteBit = lsbFirstMask & 1;
@@ -8638,12 +8638,12 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
             bitIndex = bitIndex + 1;
             pixelX = pixelX + FLOAT_001aa0e8;
           } while ((moreBitsInByte) && (bitInByte = bitInByte + 1, byteBits != bitInByte));
-LAB_00016e40:
+setRowBytesLeft:
           rowBytesLeft = rowBytesUsed - byteColumn;
           do {
             byteColumn = byteColumn + 1;
             rowBytesLeft = rowBytesLeft + -1;
-            if (rowBytesLeft == 0) goto LAB_00016a6c;
+            if (rowBytesLeft == 0) goto setPixelY;
           } while (bitsLeft == 0);
           bitIndex = 0;
           msbBit = msbNextByteBit;
@@ -8651,7 +8651,7 @@ LAB_00016e40:
           byteBits = bitsLeft;
         } while( true );
       }
-LAB_00016a6c:
+setPixelY:
       pixelY = pixelY + rowStep;
       rowIndex = rowIndex + 1;
       rowPtr = rowPtr + rowStride;
@@ -8692,7 +8692,7 @@ int gld_bufferEnumToIndex(bufferEnum, drawableFlags)
   if (bufferEnum != 0x405) {
     if (bufferEnum < 0x406) {
       if (bufferEnum == 0x401) {
-LAB_00017070:
+loopCheckDrawableFlags:
         if ((drawableFlags & 0x10) == 0) {
           return 1;
         }
@@ -8729,7 +8729,7 @@ LAB_00017070:
         if (bufferEnum == 0x406) {
           return 1;
         }
-        if (bufferEnum == 0x407) goto LAB_00017070;
+        if (bufferEnum == 0x407) goto loopCheckDrawableFlags;
       }
       else if (bufferEnum == 0x40a) {
         if (0x1ff < (drawableFlags & 0x300)) {
@@ -9223,7 +9223,7 @@ int gld_postDisplayNotification(ctx)
   displayMaskKey = _CFStringCreateWithCString(0,"gldisplaymask",0x600);
   driverNotificationName = _CFStringCreateWithCString(0,"ATI GL Driver",0x600);
   driverNotificationObject = _CFStringCreateWithCString(0,"com.ati.ati_gl_driver",0x600);
-  if (displaysNotificationName == 0) goto LAB_00017d90;
+  if (displaysNotificationName == 0) goto checkDisplaysNotificationObject;
   if ((((displaysNotificationObject != 0) && (pidKey != 0)) && (displayMaskKey != 0)) && ((driverNotificationName != 0 && (driverNotificationObject != 0)))) {
     _CFNotificationCenterAddObserver(distributedCenter,ctx,PTR_FUN_001e88c4,displaysNotificationName,displaysNotificationObject,2);
     dictKeyPid = pidKey;
@@ -9248,7 +9248,7 @@ LAB_00017cfc:
     }
   }
   _CFRelease(displaysNotificationName);
-LAB_00017d90:
+checkDisplaysNotificationObject:
   if (displaysNotificationObject != 0) {
     _CFRelease(displaysNotificationObject);
   }
@@ -9373,9 +9373,9 @@ int gld_classifyTextureVariant(variantCode, variantFlags)
       if (variantCode != 7) {
         return 0;
       }
-      goto LAB_000180e4;
+      goto checkVariantFlags;
     }
-    if (variantCode == 10) goto LAB_000180e4;
+    if (variantCode == 10) goto checkVariantFlags;
     if (variantCode != 0xb) {
       return 0;
     }
@@ -9383,7 +9383,7 @@ int gld_classifyTextureVariant(variantCode, variantFlags)
   if (0x1ff < (variantFlags & 0x300)) {
     return 2;
   }
-LAB_000180e4:
+checkVariantFlags:
   if ((variantFlags & 0x300) < 0x100) {
     return 0;
   }
@@ -9610,11 +9610,11 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
         ((scratchInt24 < srcY || (scratchInt38 < scratchInt24)))) &&
        (((scratchInt33 < srcX || (((scratchInt40 < scratchInt33 || (destEndY < srcY)) || (scratchInt38 < destEndY)))) &&
         (((scratchInt27 < srcX || (scratchInt40 < scratchInt27)) || ((destEndY < srcY || (scratchInt38 < destEndY))))))))
-    goto LAB_000185c0;
+    goto setSrcDstOverlap;
     srcDstOverlap = true;
   }
   else {
-LAB_000185c0:
+setSrcDstOverlap:
     srcDstOverlap = false;
   }
   if (((copyType == 0x1801) && ((*(uint *)(ctx + 0x154) & 0x30000) != 0)) &&
@@ -9624,7 +9624,7 @@ LAB_000185c0:
     scratchInt33 = gld_needsMultisampleResolve(ctx,4,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
     if (scratchInt33 == 0) {
       scratchInt33 = 3;
-      goto LAB_00018700;
+      goto checkCtx;
     }
     scratchPtr42 = *(undefined **)(ctx + 0x26b0);
   }
@@ -9640,7 +9640,7 @@ LAB_000185c0:
   else {
     scratchInt33 = 2;
   }
-LAB_00018700:
+checkCtx:
   if ((*(int *)(*(int *)(ctx + 0x18) + 0x1a0) != 0) ||
      (1 < (*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff))) {
     scratchInt33 = 0;
@@ -10585,7 +10585,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     yDir = 1;
     scaledWidth = width;
     scaledHeight = height;
-    goto LAB_000194f4;
+    goto setConvBuffer;
   }
   scratchR10 = "ret_logicalnz ";
   rasterYWork = rasterYWork * scratchStack3e8;
@@ -10662,7 +10662,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     windowYI2dHi = 0x43300000;
     yDir = -1;
     if (rasterYWork - (float)((double)CONCAT44(0x43300000,windowYI2dLo) - 4503601774854144.0) == 0.0)
-    goto LAB_0001931c;
+    goto setScratchR9;
   }
   else {
     scratchR9 = "ret_logicalnz ";
@@ -10681,7 +10681,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     yDir = 1;
     if (((float)((double)CONCAT44(0x43300000,windowYI2dLoB) - 4503601774854144.0) - rasterYWork) + 1.0 == 1.0)
     {
-LAB_0001931c:
+setScratchR9:
       scratchR9 = "ret_logicalnz ";
       windowY = windowY - 1;
     }
@@ -10702,7 +10702,7 @@ LAB_0001931c:
   convRowBytes = bytesPerPixel * scaledWidth;
   scaledHeight = _glgPixelCenters(scaledWidth,r4AfterCall2,convertOutAPtr,convertOutBPtr,heightCopy,srcRowBytesPtr,scratchR9,scratchR10);
   convBuffer = scaledHeight * convRowBytes;
-LAB_000194f4:
+setConvBuffer:
   convBuffer = _malloc(convBuffer);
   if (convBuffer != 0) {
     procRecEnd = 1;
@@ -10935,7 +10935,7 @@ int gld_selectSampleGrid(ctx, requestedSamples)
   renderFlags = *(uint *)(ctx + 0x154);
   if (((((renderFlags & 0x20) == 0) && (((renderFlags & 0x10) != 0 || ((renderFlags & 0x400) == 0)))) ||
       ((gld_bufferEnumToIndexResult != 0 && ((gld_bufferEnumToIndexResult != 1 || ((renderFlags & 0x400) != 0)))))) || ((renderFlags & 0x70000000) != 0)) {
-LAB_00019b60:
+loopStoreCtx:
     *(undefined4 *)(ctx + 0x2a58) = 0x3f800000;
     *(undefined1 *)(ctx + 0x2a5d) = 1;
     *(undefined4 *)(ctx + 0x2a54) = 0x3f800000;
@@ -10943,13 +10943,13 @@ LAB_00019b60:
   }
   else {
     if (requestedSamples < 4) {
-      if (requestedSamples < 2) goto LAB_00019b60;
+      if (requestedSamples < 2) goto loopStoreCtx;
       *(undefined4 *)(ctx + 0x2a54) = 0x3f800000;
       *(undefined1 *)(ctx + 0x2a5c) = 1;
       if (0x1000 < *(int *)(ctx + 0x160) << 1) {
         *(undefined4 *)(ctx + 0x2a58) = 0x3f800000;
         *(undefined1 *)(ctx + 0x2a5d) = 1;
-        goto LAB_00019be0;
+        goto storeCtx;
       }
     }
     else {
@@ -10964,13 +10964,13 @@ LAB_00019b60:
       if (0x1000 < *(int *)(ctx + 0x160) << 1) {
         *(undefined4 *)(ctx + 0x2a58) = 0x3f800000;
         *(undefined1 *)(ctx + 0x2a5d) = 1;
-        goto LAB_00019be0;
+        goto storeCtx;
       }
     }
     *(undefined4 *)(ctx + 0x2a58) = 0x40000000;
     *(undefined1 *)(ctx + 0x2a5d) = 2;
   }
-LAB_00019be0:
+storeCtx:
   *(undefined4 *)(ctx + 0x2a50) = 1;
   return;
 }

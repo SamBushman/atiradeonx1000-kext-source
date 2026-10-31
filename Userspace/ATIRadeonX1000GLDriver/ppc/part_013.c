@@ -115,9 +115,9 @@ int arbParseParamBinding(parser, variable, allowRange, isArrayElement)
   float constVecZ;
   
   if (0x1a < (uint)parser[5]) {
-LAB_0008aaa0:
+loopSetErrorMessage:
     errorMessage = "invalid parameter binding";
-    goto LAB_0008ab20;
+    goto loopCallArbSetError;
   }
   tokenBit = 1 << (parser[5] & 0x3fU);
   if ((tokenBit & 0x818000) == 0) {
@@ -135,7 +135,7 @@ LAB_0008aaa0:
             paramNumber = ((int (*)())arbParseEnvParamNumber)(parser);
             lastIndex = paramNumber;
             if ((allowRange == 0) || (parser[5] != 0x12)) {
-LAB_0008abb4:
+loopCallArbExpectToken:
               arbExpectToken(parser,0x16);
               binding[3] = paramNumber;
               while (paramNumber = paramNumber + 1, paramNumber <= lastIndex) {
@@ -156,33 +156,33 @@ LAB_0008abb4:
             }
             arbNextToken(parser);
             lastIndex = ((int (*)())arbParseEnvParamNumber)(parser);
-            if (paramNumber <= lastIndex) goto LAB_0008abb4;
+            if (paramNumber <= lastIndex) goto loopCallArbExpectToken;
           }
           else {
-            if (parser[6] != 0x14) goto LAB_0008ab0c;
+            if (parser[6] != 0x14) goto setErrorMessage;
             binding[2] = 0x33;
             arbNextToken(parser);
             arbExpectToken(parser,0x15);
             paramNumber = ((int (*)())arbParseLocalParamNumber)(parser);
             lastIndex = paramNumber;
-            if ((allowRange == 0) || (parser[5] != 0x12)) goto LAB_0008abb4;
+            if ((allowRange == 0) || (parser[5] != 0x12)) goto loopCallArbExpectToken;
             arbNextToken(parser);
             lastIndex = ((int (*)())arbParseLocalParamNumber)(parser);
-            if (paramNumber <= lastIndex) goto LAB_0008abb4;
+            if (paramNumber <= lastIndex) goto loopCallArbExpectToken;
           }
           errorMessage = "invalid program parameter range";
         }
         else {
-LAB_0008ab0c:
+setErrorMessage:
           errorMessage = "invalid program parameter type";
         }
-LAB_0008ab20:
+loopCallArbSetError:
         arbSetError(parser,errorMessage);
         return;
       }
       if (parser[6] != 0x27) {
         errorMessage = "invalid parameter binding";
-        goto LAB_0008ab20;
+        goto loopCallArbSetError;
       }
       arbNextToken(parser);
       arbExpectToken(parser,0x11);
@@ -194,7 +194,7 @@ LAB_0008ab20:
       switch(parser[6]) {
       case 5:
         if (parser[5] != 0) {
-LAB_0008a570:
+loopCallArbErrorInternal:
           arbErrorInternal(parser);
           return;
         }
@@ -211,7 +211,7 @@ LAB_0008a570:
         errorMessage = "invalid state binding";
         break;
       case 10:
-        if (parser[5] != 0) goto LAB_0008a570;
+        if (parser[5] != 0) goto loopCallArbErrorInternal;
         arbNextToken(parser);
         arbExpectToken(parser,0x11);
         if (parser[5] == 0) {
@@ -229,7 +229,7 @@ LAB_0008a570:
         errorMessage = "invalid fog property";
         break;
       case 0x11:
-        if (parser[5] != 0) goto LAB_0008a570;
+        if (parser[5] != 0) goto loopCallArbErrorInternal;
         arbNextToken(parser);
         arbExpectToken(parser,0x15);
         stateKind = ((int (*)())arbParseLightNumber)(parser);
@@ -239,7 +239,7 @@ LAB_0008a570:
         if (parser[5] == 0) {
           switch(parser[6]) {
           default:
-            goto switchD_0008a094_caseD_0;
+            goto parserCase0;
           case 1:
             stateKind = 10;
             break;
@@ -263,16 +263,16 @@ LAB_0008a570:
             arbExpectToken(parser,0x11);
             if ((parser[5] != 0) || (parser[6] != 7)) {
               errorMessage = "invalid spot light property";
-              goto LAB_0008a9fc;
+              goto callArbSetError;
             }
             stateKind = 0xf;
           }
-LAB_00089fc4:
+loopStoreBinding:
           binding[2] = stateKind;
           arbNextToken(parser);
           return;
         }
-switchD_0008a094_caseD_0:
+parserCase0:
         errorMessage = "invalid light property";
         break;
       case 0x12:
@@ -295,17 +295,17 @@ switchD_0008a094_caseD_0:
           }
           else if (tokenValue == 1) {
             stateKind = 0x11;
-            goto LAB_00089fc4;
+            goto loopStoreBinding;
           }
           if ((parser[5] == 0) && (parser[6] == 0x22)) {
             stateKind = 0x12;
-            goto LAB_00089fc4;
+            goto loopStoreBinding;
           }
         }
         errorMessage = "invalid light model property";
         break;
       case 0x13:
-        if (parser[5] != 0) goto LAB_0008a570;
+        if (parser[5] != 0) goto loopCallArbErrorInternal;
         arbNextToken(parser);
         arbExpectToken(parser,0x15);
         stateKind = ((int (*)())arbParseLightNumber)(parser);
@@ -316,46 +316,46 @@ switchD_0008a094_caseD_0:
         if (parser[5] == 0) {
           if (parser[6] == 3) {
             binding[4] = 1;
-LAB_0008a31c:
+loopCallArbNextToken:
             arbNextToken(parser);
             arbExpectToken(parser,0x11);
-            if (parser[5] != 0) goto LAB_0008a38c;
+            if (parser[5] != 0) goto setErrorMessage2;
           }
-          else if (parser[6] == 0xd) goto LAB_0008a31c;
+          else if (parser[6] == 0xd) goto loopCallArbNextToken;
           tokenValue = parser[6];
           if (tokenValue == 6) {
             stateKind = 0x14;
-            goto LAB_00089fc4;
+            goto loopStoreBinding;
           }
           if (tokenValue == 0x25) {
             stateKind = 0x15;
-            goto LAB_00089fc4;
+            goto loopStoreBinding;
           }
           if (tokenValue == 1) {
             stateKind = 0x13;
-            goto LAB_00089fc4;
+            goto loopStoreBinding;
           }
         }
-LAB_0008a38c:
+setErrorMessage2:
         errorMessage = "invalid light product property";
         break;
       case 0x15:
-        if (parser[5] != 0) goto LAB_0008a570;
+        if (parser[5] != 0) goto loopCallArbErrorInternal;
         arbNextToken(parser);
         arbExpectToken(parser,0x11);
         binding[3] = 0;
         if (parser[5] == 0) {
           if (parser[6] == 3) {
             binding[3] = 1;
-LAB_00089ec0:
+loopCallArbNextToken2:
             arbNextToken(parser);
             arbExpectToken(parser,0x11);
-            if (parser[5] != 0) goto switchD_00089f14_caseD_0;
+            if (parser[5] != 0) goto parserCase02;
           }
-          else if (parser[6] == 0xd) goto LAB_00089ec0;
+          else if (parser[6] == 0xd) goto loopCallArbNextToken2;
           switch(parser[6]) {
           default:
-            goto switchD_00089f14_caseD_0;
+            goto parserCase02;
           case 1:
             stateKind = 5;
             break;
@@ -371,13 +371,13 @@ LAB_00089ec0:
           case 0x25:
             stateKind = 7;
           }
-          goto LAB_00089fc4;
+          goto loopStoreBinding;
         }
-switchD_00089f14_caseD_0:
+parserCase02:
         errorMessage = "invalid material property";
         break;
       case 0x16:
-        if (parser[5] != 0) goto LAB_0008a570;
+        if (parser[5] != 0) goto loopCallArbErrorInternal;
         arbNextToken(parser);
         arbExpectToken(parser,0x11);
         if (parser[5] != 0) {
@@ -456,8 +456,8 @@ switchD_00089f14_caseD_0:
               arbNextToken(parser);
             }
             binding[4] = 3;
-LAB_0008a838:
-            if (notRangeToken) goto LAB_0008a960;
+loopCheckNotRangeToken:
+            if (notRangeToken) goto checkAllowRange;
           }
           else {
             if (tokenValue == 0x2b) {
@@ -467,7 +467,7 @@ LAB_0008a838:
                 arbNextToken(parser);
               }
               binding[4] = 2;
-              goto LAB_0008a838;
+              goto loopCheckNotRangeToken;
             }
             if (tokenValue == 0xf) {
               arbNextToken(parser);
@@ -476,7 +476,7 @@ LAB_0008a838:
                 arbNextToken(parser);
               }
               binding[4] = 1;
-              goto LAB_0008a838;
+              goto loopCheckNotRangeToken;
             }
             binding[4] = 0;
           }
@@ -495,7 +495,7 @@ LAB_0008a838:
             }
             firstIndex = matrixRowNumber + 1;
             arbExpectToken(parser,0x16);
-LAB_0008a984:
+loopStoreBinding2:
             binding[2] = matrixRowNumber + binding[2];
             for (; firstIndex <= lastIndex; firstIndex = firstIndex + 1) {
               rangeBinding = (undefined4 *)arbAllocBindingEntry(parser,variable);
@@ -517,18 +517,18 @@ LAB_0008a984:
           errorMessage = "invalid matrix row selector";
         }
         else {
-LAB_0008a960:
+checkAllowRange:
           if (allowRange != 0) {
             lastIndex = 3;
             matrixRowNumber = 0;
             firstIndex = 1;
-            goto LAB_0008a984;
+            goto loopStoreBinding2;
           }
           errorMessage = "missing matrix row selector";
         }
         break;
       case 0x29:
-        if (parser[5] != 0) goto LAB_0008a570;
+        if (parser[5] != 0) goto loopCallArbErrorInternal;
         firstIndex = 0;
         arbNextToken(parser);
         if (parser[5] == 0x15) {
@@ -545,25 +545,25 @@ LAB_0008a960:
         arbExpectToken(parser,0x11);
         if ((parser[5] == 0) && (parser[6] == 4)) {
           stateKind = 0x19;
-          goto LAB_00089fc4;
+          goto loopStoreBinding;
         }
         errorMessage = "invalid texenv property";
       }
-LAB_0008a9fc:
+callArbSetError:
       arbSetError(parser,errorMessage);
       return;
     }
-    if ((tokenBit & 0x6000000) == 0) goto LAB_0008aaa0;
+    if ((tokenBit & 0x6000000) == 0) goto loopSetErrorMessage;
     if (isArrayElement == 0) {
       errorMessage = "consecutive sign operators";
-      goto LAB_0008ab20;
+      goto loopCallArbSetError;
     }
   }
   binding = (undefined4 *)arbAllocBindingEntry(parser,variable);
   binding[2] = 0x34;
   *binding = 2;
   if (0x1a < (uint)parser[5]) {
-LAB_000898c0:
+loopCallArbSetError2:
     arbSetError(parser,"invalid constant");
     return;
   }
@@ -577,7 +577,7 @@ LAB_000898c0:
     binding[3] = stateKind;
     return;
   }
-  if ((tokenBit & 0x800000) == 0) goto LAB_000898c0;
+  if ((tokenBit & 0x800000) == 0) goto loopCallArbSetError2;
   arbNextToken(parser);
   constVecZ = 0.0;
   constVecY = 0.0;
@@ -594,7 +594,7 @@ LAB_000898c0:
       if (parser[5] == 0x13) {
         arbNextToken(parser);
         ((double (*)())arbParseFloatConstant)(parser);
-        goto LAB_000899e0;
+        goto callArbExpectToken;
       }
     }
   }
@@ -604,7 +604,7 @@ LAB_000898c0:
                    "warning: <paramConstVector> rule match where parser is supplying some default component(s)"
     ;
   }
-LAB_000899e0:
+callArbExpectToken:
   arbExpectToken(parser,0x18);
   stateKind = arbInternConstant(parser,&constVecX);
   binding[3] = stateKind;
@@ -718,16 +718,16 @@ int arbParseSourceRegister(parser, operand, unused)
   
   tokenKind = *(uint *)(parser + 0x14);
   if (tokenKind < 0x11) {
-    if (0xe < tokenKind) goto LAB_0008b1f0;
-    if (tokenKind != 0) goto LAB_0008b1a0;
+    if (0xe < tokenKind) goto setVariable;
+    if (tokenKind != 0) goto setErrorMessage;
     variable = *(int *)(parser + 0x18);
-    if ((variable == 0x1d) || (variable == 0x27)) goto LAB_0008b1f0;
+    if ((variable == 0x1d) || (variable == 0x27)) goto setVariable;
     if (variable == 0xc) {
       variable = arbAllocVariable(parser);
       if (variable == 0) {
         return;
       }
-LAB_0008b270:
+loopStoreOperand:
       *operand = variable;
       if (*(int *)(parser + 0x14) != 0) {
         arbErrorInternal(parser);
@@ -745,10 +745,10 @@ LAB_0008b270:
     variable = arbParseVariableName(parser);
     if (variable == 0) {
       errorMessage = "undefined variable";
-      goto LAB_0008b220;
+      goto callArbSetError;
     }
     variableKind = *(int *)(variable + 0x18);
-    if (variableKind == 1) goto LAB_0008b270;
+    if (variableKind == 1) goto loopStoreOperand;
     if (variableKind == 0) {
       operand[6] = 0;
       *operand = variable;
@@ -761,18 +761,18 @@ LAB_0008b270:
         return;
       }
       errorMessage = "invalid source register type";
-      goto LAB_0008b220;
+      goto callArbSetError;
     }
   }
   else {
     if (tokenKind != 0x17) {
-LAB_0008b1a0:
+setErrorMessage:
       errorMessage = "invalid source register";
-LAB_0008b220:
+callArbSetError:
       arbSetError(parser,errorMessage);
       return;
     }
-LAB_0008b1f0:
+setVariable:
     variable = arbAllocVariable(parser);
     if (variable == 0) {
       return;
@@ -811,12 +811,12 @@ LAB_0008b1f0:
         operand[6] = 0;
         return;
       }
-LAB_0008afa0:
+loopCallArbErrorInternal:
       arbErrorInternal(parser);
       return;
     }
   }
-  else if (tokenKind != 0x17) goto LAB_0008afa0;
+  else if (tokenKind != 0x17) goto loopCallArbErrorInternal;
   ((int (*)())arbParseParamBinding)(parser,variable,0,0);
   operand[6] = 0;
   return;
@@ -840,10 +840,10 @@ int arbParseExtendedSwizzleSelector(parser, signState)
     if (letterIndex < 0x1a) {
       selectorSign = 1;
       letterBit = 1 << ((int)(char)letterIndex & 0x3fU);
-      if (((letterBit & 0x20043) == 0) && (selectorSign = 0, (letterBit & 0x3c00000) == 0)) goto LAB_0008b3d0;
+      if (((letterBit & 0x20043) == 0) && (selectorSign = 0, (letterBit & 0x3c00000) == 0)) goto setSelectorSign;
     }
     else {
-LAB_0008b3d0:
+setSelectorSign:
       selectorSign = -1;
     }
     selector = ((int (*)())arbParseComponentToken)(parser);
@@ -852,23 +852,23 @@ LAB_0008b3d0:
       *signState = selectorSign;
       expectedSign = selectorSign;
     }
-    if (selectorSign == expectedSign) goto LAB_0008b41c;
+    if (selectorSign == expectedSign) goto checkSign;
   }
   else if (*(int *)(parser + 0x14) == 0xf) {
     if (*(int *)(parser + 0x18) == 0) {
       selector = 4;
       arbNextToken(parser);
-      goto LAB_0008b41c;
+      goto checkSign;
     }
     if (*(int *)(parser + 0x18) == 1) {
       selector = 5;
       arbNextToken(parser);
-      goto LAB_0008b41c;
+      goto checkSign;
     }
   }
   selector = 0;
   arbSetError(parser,"invalid extended swizzle selector");
-LAB_0008b41c:
+checkSign:
   if (sign == -1) {
     switch(selector) {
     case 0:
@@ -925,7 +925,7 @@ int arbParseDestRegister(parser, destination)
         writeMask = *(uint *)(variable + 0x18);
         if (writeMask < 3) {
           if (writeMask == 0) {
-LAB_0008b558:
+loopCallArbNextToken:
             arbNextToken(parser);
           }
           else {
@@ -934,7 +934,7 @@ LAB_0008b558:
           }
         }
         else {
-          if (writeMask == 3) goto LAB_0008b558;
+          if (writeMask == 3) goto loopCallArbNextToken;
           variable = 0;
           arbErrorInternal(parser);
         }
@@ -975,13 +975,13 @@ LAB_0008b558:
           } while (letter < *(byte **)(parser + 0xc));
         }
         arbNextToken(parser);
-        goto LAB_0008b6a0;
+        goto storeDestination;
       }
     }
     writeMask = 0xf;
     arbSetError(parser,"invalid writemask");
   }
-LAB_0008b6a0:
+storeDestination:
   destination[1] = writeMask;
   return;
 }
@@ -1037,16 +1037,16 @@ int arbParseSwizzleSuffix(parser, operand)
               (((letter != 'a' && (letter = suffixText[2], letter != 'r')) &&
                (((letter != 'g' && ((letter != 'b' && (letter != 'a')))) &&
                 (letter = suffixText[3], letter != 'r')))))) &&
-             (((letter != 'g' && (letter != 'b')) && (letter != 'a')))) goto LAB_0008b93c;
+             (((letter != 'g' && (letter != 'b')) && (letter != 'a')))) goto callArbNextToken;
         }
         else if (((((3 < (byte)(suffixText[1] + 0x89U)) && (letter = suffixText[2], letter != 'x')) &&
                   (letter != 'y')) &&
                  (((letter != 'z' && (letter != 'w')) &&
                   ((letter = suffixText[3], letter != 'x' && ((letter != 'y' && (letter != 'z')))))))) &&
-                (letter != 'w')) goto LAB_0008b93c;
+                (letter != 'w')) goto callArbNextToken;
         arbSetError(parser,"invalid swizzle suffix");
       }
-LAB_0008b93c:
+callArbNextToken:
       arbNextToken(parser);
       return;
     }
@@ -1151,7 +1151,7 @@ int arbParseProgramText(parser)
                         arbExpectToken(parser,0x14);
                         tokenKind = parser[5];
                       }
-LAB_0008bbb0:
+loopCheckTokenKind:
                       if ((tokenKind == 6) || (tokenKind == 0x1c)) {
                         arbExpectToken(parser,6);
                         arbExpectToken(parser,0x1c);
@@ -1239,14 +1239,14 @@ LAB_0008bbb0:
                               instructionRecord[10] = 0;
                             }
                             parser[0x9014] = parser[0x9014] + 1;
-                            goto LAB_0008bba0;
+                            goto callArbExpectToken;
                           }
                           arbSetError(parser,"too many ALU instructions");
                           tokenKind = parser[5];
-                          goto LAB_0008bbb0;
+                          goto loopCheckTokenKind;
                         }
                         if ((kindBit & 0x24) == 0) {
-                          if ((kindBit & 0x880) == 0) goto LAB_0008bb90;
+                          if ((kindBit & 0x880) == 0) goto callArbSetError;
                           if (parser[0x9015] < *(int *)(((unsigned char *)0x00001208) + *parser)) {
                             value = parser[0x9015] + parser[0x9014];
                             if (tokenKind == 7) {
@@ -1297,11 +1297,11 @@ LAB_0008bbb0:
                               arbErrorInternal(parser);
                             }
                             parser[0x9015] = parser[0x9015] + 1;
-                            goto LAB_0008bba0;
+                            goto callArbExpectToken;
                           }
                           arbSetError(parser,"too many texture instructions");
                           tokenKind = parser[5];
-                          goto LAB_0008bbb0;
+                          goto loopCheckTokenKind;
                         }
                         if ((tokenKind != 2) && (tokenKind != 5)) {
                           arbErrorInternal(parser);
@@ -1426,13 +1426,13 @@ LAB_0008bbb0:
                         }
                       }
                       else {
-LAB_0008bb90:
+callArbSetError:
                         arbSetError(parser,"invalid statement");
                       }
-LAB_0008bba0:
+callArbExpectToken:
                       arbExpectToken(parser,0x14);
                       tokenKind = parser[5];
-                      goto LAB_0008bbb0;
+                      goto loopCheckTokenKind;
                     }
                   }
                 }
@@ -1699,7 +1699,7 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
       }
       hasFogOption = stageR9;
       if (optionCount < 2) {
-LAB_0008c88c:
+loopSetDeclNode:
         declNode = (int *)workArea[0xf];
         loopCounterE = 0;
         do {
@@ -1722,13 +1722,13 @@ LAB_0008c88c:
                 stageR10 = typeTagTable;
                 internStatus = ((int (*)())arbfpInternParameter)(workArea,workArea + 0x9117,a2,
                                      *(int *)(((unsigned char *)0x000011ec) + limits) - (int)fogOptionCopy,in_r7,in_r8);
-                if (internStatus < 0) goto LAB_0008d2d0;
+                if (internStatus < 0) goto storeX00001124;
               }
               else if (declKind == 0) {
                 if (*(int *)(((unsigned char *)0x000011dc) + limits) - (int)fogOptionCopy <= workArea[0x928b]) {
                   stageR9 = fogOptionCopy;
                   arbSetError(workArea,"too many temporaries");
-                  goto LAB_0008d2d0;
+                  goto storeX00001124;
                 }
                 declNode[7] = workArea[0x928b];
                 workArea[0x928b] = workArea[0x928b] + 1;
@@ -1753,7 +1753,7 @@ LAB_0008c88c:
                     stageR10 = typeTagTableB;
                     fogBias = ((int (*)())arbfpInternParameter)(workArea,paramListBase,attrListBase,
                                           *(int *)(((unsigned char *)0x000011e4) + limits) - fogBias,in_r7,in_r8);
-                    if (fogBias < 0) goto LAB_0008d2d0;
+                    if (fogBias < 0) goto storeX00001124;
                     loopCounter = loopCounter + 1;
                     byteOffset = byteOffset + 0x14;
                   } while (arrayLen != loopCounter);
@@ -1761,7 +1761,7 @@ LAB_0008c88c:
               }
               else if (declKind != 3) {
                 arbErrorInternal(workArea);
-                goto LAB_0008d2d0;
+                goto storeX00001124;
               }
               declNode = (int *)*declNode;
               precisionCountNeg = stageR10;
@@ -1777,22 +1777,22 @@ LAB_0008c88c:
               if (!noFogOption) {
                 if (*(char *)(workArea + 0xd) == '\x01') {
                   if (aluCount <= *(int *)(((unsigned char *)0x00001204) + limits) + -3) {
-                    if ((int)((int)stageR9 + -3) < totalInsts) goto LAB_0008cad4;
-                    goto LAB_0008ca70;
+                    if ((int)((int)stageR9 + -3) < totalInsts) goto callArbSetError;
+                    goto checkWorkArea;
                   }
-LAB_0008cab4:
+loopCallArbSetError:
                   arbSetError(workArea,"too many ALU instructions");
                   stageR10 = precisionCountNeg;
-                  goto LAB_0008d2d0;
+                  goto storeX00001124;
                 }
-LAB_0008ca70:
+checkWorkArea:
                 if (*(char *)((int)workArea + 0x35) == '\x01') {
-                  if (*(int *)(((unsigned char *)0x00001204) + limits) + -4 < aluCount) goto LAB_0008cab4;
-                  if ((int)(stageR9 + -1) < totalInsts) goto LAB_0008cad4;
+                  if (*(int *)(((unsigned char *)0x00001204) + limits) + -4 < aluCount) goto loopCallArbSetError;
+                  if ((int)(stageR9 + -1) < totalInsts) goto callArbSetError;
                 }
                 if (*(char *)((int)workArea + 0x36) == '\x01') {
-                  if (*(int *)(((unsigned char *)0x00001204) + limits) + -2 < aluCount) goto LAB_0008cab4;
-                  if ((int)((int)stageR9 + -2) < totalInsts) goto LAB_0008cad4;
+                  if (*(int *)(((unsigned char *)0x00001204) + limits) + -2 < aluCount) goto loopCallArbSetError;
+                  if ((int)((int)stageR9 + -2) < totalInsts) goto callArbSetError;
                 }
               }
               unitCount = (uint)(byte)((unsigned char *)0x000013b1)[limits];
@@ -1823,8 +1823,8 @@ LAB_0008ca70:
                   inst = (undefined *)((int)a2 + (int)(workArea + 0x14));
                   savedStageR10 = stageR10;
                   if (opcode < 0x20) {
-                    if ((0x1c < opcode) || (opcode == 0xb)) goto LAB_0008cb94;
-LAB_0008cb70:
+                    if ((0x1c < opcode) || (opcode == 0xb)) goto setStageR9;
+loopCheckInst:
                     if (*(int *)(*(int *)(inst + 0xc) + 0x18) == 0) {
                       bitIndex = *(uint *)(*(int *)(inst + 0xc) + 0x1c);
                       maskBit = bitIndex - 0x20;
@@ -1883,8 +1883,8 @@ LAB_0008cb70:
                       in_r8 = (uint *)((uint)in_r8 | (uint)maskHiTmp);
                       precisionCountNeg = maskHiTmp;
                     }
-                    if (opcode == 0xb) goto LAB_0008ce38;
-LAB_0008cddc:
+                    if (opcode == 0xb) goto setA2;
+loopCheckStageR9:
                     if (stageR9[6] == 0) {
                       bitOffset = stageR9[7] - 0x20;
                       if ((int)bitOffset < 0) {
@@ -1902,8 +1902,8 @@ LAB_0008cddc:
                     }
                   }
                   else {
-                    if (2 < opcode - 0x3d) goto LAB_0008cb70;
-LAB_0008cb94:
+                    if (2 < opcode - 0x3d) goto loopCheckInst;
+setStageR9:
                     stageR9 = *(int **)(*(int *)(inst + 0xc) + 0x1c);
                     if (*(int *)(*(int *)(inst + 0xc) + 0x18) == 0) {
                       if ((int)(stageR9 + -8) < 0) {
@@ -1914,15 +1914,15 @@ LAB_0008cb94:
                         shiftedBits = writtenLo >> ((uint)(stageR9 + -8) & 0x3f);
                       }
                       stageR9 = (int *)(shiftedBits & 1);
-                      if (stageR9 == (int *)0x0) goto LAB_0008cbd4;
-LAB_0008cc20:
+                      if (stageR9 == (int *)0x0) goto checkOpcode;
+loopSetLoopCounterD:
                       loopCounterD = loopCounterD + 1;
                       if (opcode != 0xb) {
                         writtenLo = 0;
                         writtenHi = 0;
                         in_r7 = (int *)0x0;
                         in_r8 = (uint *)0x0;
-LAB_0008cc50:
+loopSetStageR9:
                         stageR9 = (int *)(*(int *)(inst + 0x40) * 4);
                         precisionCountNeg = stageR10;
                         if (*(int *)((int)stageR9 + (int)stageR10) == 0) {
@@ -1932,11 +1932,11 @@ LAB_0008cc50:
                         else {
                           if (*(int *)((int)stageR9 + (int)stageR10) != *(int *)(inst + 0x5c)) {
                             arbSetError(workArea,"multiple targets on texture context");
-                            goto LAB_0008d2d0;
+                            goto storeX00001124;
                           }
                           stageR9 = *(int **)(inst + 4);
                         }
-                        goto LAB_0008cddc;
+                        goto loopCheckStageR9;
                       }
                       writtenLo = 0;
                       writtenHi = 0;
@@ -1945,7 +1945,7 @@ LAB_0008cc50:
                       in_r8 = (uint *)0x0;
                     }
                     else {
-LAB_0008cbd4:
+checkOpcode:
                       if (opcode != 0xb) {
                         if (*(int *)(*(int *)(inst + 4) + 0x18) == 0) {
                           stageR9 = *(int **)(*(int *)(inst + 4) + 0x1c);
@@ -1957,14 +1957,14 @@ LAB_0008cbd4:
                             shiftedBits = (uint)in_r7 >> ((uint)(stageR9 + -8) & 0x3f);
                           }
                           precisionCountNeg = (int *)(shiftedBits & 1);
-                          if (precisionCountNeg != (int *)0x0) goto LAB_0008cc20;
+                          if (precisionCountNeg != (int *)0x0) goto loopSetLoopCounterD;
                         }
-                        goto LAB_0008cc50;
+                        goto loopSetStageR9;
                       }
                       hasKill = 1;
                     }
                   }
-LAB_0008ce38:
+setA2:
                   a2 = a2 + 0x18;
                   instsLeft = instsLeft + -1;
                 } while (instsLeft != 0);
@@ -2138,14 +2138,14 @@ LAB_0008ce38:
                   program[0x54] = 1;
                 }
               }
-              goto LAB_0008d2d0;
+              goto storeX00001124;
             }
-LAB_0008cad4:
+callArbSetError:
             arbSetError(workArea,"too many total instructions");
             stageR10 = precisionCountNeg;
-            goto LAB_0008d2d0;
+            goto storeX00001124;
           }
-          if (loopCounterE == 0) goto LAB_0008c88c;
+          if (loopCounterE == 0) goto loopSetDeclNode;
           declNode = (int *)workArea[0x11];
         } while( true );
       }
@@ -2156,7 +2156,7 @@ LAB_0008cad4:
       arbSetError(workArea,"more than one fog option");
     }
   }
-LAB_0008d2d0:
+storeX00001124:
   *(int *)(((unsigned char *)0x00001124) + callbacks) = workArea[10];
   if (*(int *)(((unsigned char *)0x00001128) + callbacks) != 0) {
     (**(code **)(callbacks + 0x18))(*(int *)(((unsigned char *)0x00001128) + callbacks));
@@ -2272,13 +2272,13 @@ int arbfpUpdateStateForProgram(context, passThroughArg2, passThroughArg3, passTh
     highestLiveSlot = unitCountLoop - 1;
     if (-1 < (int)highestLiveSlot) {
       do {
-        if (((liveMaskLow & 0xff | liveMaskHigh) >> (highestLiveSlot & 0x3f) & 1) != 0) goto LAB_0008d4f8;
+        if (((liveMaskLow & 0xff | liveMaskHigh) >> (highestLiveSlot & 0x3f) & 1) != 0) goto setMaxUnits;
         highestLiveSlot = highestLiveSlot - 1;
         unitCountLoop = unitCountLoop - 1;
       } while (unitCountLoop != 0);
     }
     highestLiveSlot = 0xffffffff;
-LAB_0008d4f8:
+setMaxUnits:
     maxUnits = (uint)(byte)((unsigned char *)0x000013b1)[context];
     if (maxUnits != 0) {
       loopIndex = 0;
@@ -2325,7 +2325,7 @@ LAB_0008d4f8:
     if ((dirtyFlags & 0x200) != 0) {
       ctxWord3c = *(uint *)(context + 0x3c);
       dirtyFlags = dirtyFlags & 0xfffffdff;
-      goto LAB_0008d6a4;
+      goto storeContext;
     }
   }
   else {
@@ -2333,7 +2333,7 @@ LAB_0008d4f8:
     if ((dirtyFlags & 0x200) == 0) {
       ctxWord3c = *(uint *)(context + 0x3c);
       dirtyFlags = dirtyFlags | 0x200;
-LAB_0008d6a4:
+storeContext:
       *(uint *)(context + 0x44) = dirtyFlags;
       *(undefined1 *)(context + 0x29) = 1;
       *(uint *)(context + 0x3c) = ctxWord3c | 1;
@@ -2350,7 +2350,7 @@ LAB_0008d6a4:
     if ((dirtyFlags & 0x10000) != 0) {
       pendingWordC = *(uint *)(context + 0x38);
       dirtyFlags = dirtyFlags & 0xfffeffff;
-      goto LAB_0008d760;
+      goto storeContext2;
     }
   }
   else {
@@ -2364,7 +2364,7 @@ joined_r0x0008d734:
     if ((dirtyFlags & 0x10000) == 0) {
       pendingWordC = *(uint *)(context + 0x38);
       dirtyFlags = dirtyFlags | 0x10000;
-LAB_0008d760:
+storeContext2:
       *(uint *)(context + 0x44) = dirtyFlags;
       *(undefined1 *)(context + 0x29) = 1;
       *(uint *)(context + 0x38) = pendingWordC | 0x20;
@@ -2374,13 +2374,13 @@ LAB_0008d760:
     if ((dirtyFlags & 0x100) != 0) {
       pendingWordC = *(uint *)(context + 0x38);
       dirtyFlags = dirtyFlags & 0xfffffeff;
-      goto LAB_0008d7b0;
+      goto storeContext3;
     }
   }
   else if ((dirtyFlags & 0x100) == 0) {
     pendingWordC = *(uint *)(context + 0x38);
     dirtyFlags = dirtyFlags | 0x100;
-LAB_0008d7b0:
+storeContext3:
     *(uint *)(context + 0x44) = dirtyFlags;
     *(undefined1 *)(context + 0x2a) = 1;
     *(uint *)(context + 0x38) = pendingWordC | 1;
@@ -2450,7 +2450,7 @@ LAB_0008d7b0:
           slotCount = (byte)lastUnsetSlotB;
         }
         ((unsigned char *)0x000011d2)[context] = slotCount;
-        if ((int)lastUnsetSlotB <= (int)highestLiveSlot) goto LAB_0008d98c;
+        if ((int)lastUnsetSlotB <= (int)highestLiveSlot) goto setDirtyFlags;
         dirtyFlags = *(uint *)(context + 0x44);
         highestLiveSlot = lastUnsetSlotB;
       }
@@ -2475,7 +2475,7 @@ LAB_0008d7b0:
           highestLiveSlot = firstUnsetSlot;
         }
         else {
-LAB_0008d98c:
+setDirtyFlags:
           dirtyFlags = *(uint *)(context + 0x44);
         }
       }
@@ -2533,13 +2533,13 @@ LAB_0008d98c:
       *(uint *)(context + 0x38) = *(uint *)(context + 0x38) | 0x2200;
       *(undefined1 *)(context + 0x29) = 1;
       *(ushort *)(context + 0x34) = (short)(1 << (texUnitCount & 0x3f)) - 1U | *(ushort *)(context + 0x34);
-      goto LAB_0008da14;
+      goto storeContext4;
     }
   }
   *(undefined1 *)(context + 0x29) = 1;
   dirtyFlags = *(uint *)(context + 0x3c) | 0x100;
   *(uint *)(context + 0x3c) = dirtyFlags;
-LAB_0008da14:
+storeContext4:
   *(uint *)(context + 0x3c) = dirtyFlags | 0x40;
   *(undefined1 *)(context + 0x29) = 1;
   return;
@@ -3154,7 +3154,7 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     else {
       stateFloat28cc = *(float *)(stateBlock + 0x2b0c);
     }
-    goto LAB_0008f398;
+    goto storeOutValue;
   case 0x14:
     if (*(int *)(element + 0x10) == 0) {
       materialDiffuseR = *(float *)(stateBlock + 0x28d0);
@@ -3183,7 +3183,7 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     else {
       stateFloat28cc = *(float *)(stateBlock + 0x2b1c);
     }
-    goto LAB_0008f398;
+    goto storeOutValue;
   case 0x15:
     if (*(int *)(element + 0x10) == 0) {
       materialSpecularR = *(float *)(stateBlock + 0x28e0);
@@ -3212,7 +3212,7 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     else {
       stateFloat28cc = *(float *)(stateBlock + 0x2b2c);
     }
-    goto LAB_0008f398;
+    goto storeOutValue;
   case 0x16:
     *outValue = *(float *)(((unsigned char *)0x00002de0) + stateBlock);
     outValue[1] = *(float *)(((unsigned char *)0x00002de4) + stateBlock);
@@ -3240,7 +3240,7 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     outValue[2] = *(float *)(((unsigned char *)0x000031cc) + *(int *)(element + 0xc) * 0x7c + *(int *)(stateOwner + 0x10)
                            );
     stateFloat28cc = *(float *)(((unsigned char *)0x000031d0) + *(int *)(element + 0xc) * 0x7c + *(int *)(stateOwner + 0x10));
-LAB_0008f398:
+storeOutValue:
     outValue[3] = stateFloat28cc;
     break;
   case 0x1a:
@@ -3249,35 +3249,35 @@ LAB_0008f398:
   case 0x1d:
     kind = kind + -0x1a;
     stateBlock = stateBlock + lightOrFace * 0x40 + 0x1960;
-    goto LAB_0008f444;
+    goto setLightOrFace;
   case 0x1e:
   case 0x1f:
   case 0x20:
   case 0x21:
     stateBlock = stateBlock + 0x1920;
     kind = kind + -0x1e;
-    goto LAB_0008f444;
+    goto setLightOrFace;
   case 0x22:
   case 0x23:
   case 0x24:
   case 0x25:
     stateBlock = stateBlock + 0x1860;
     kind = kind + -0x22;
-    goto LAB_0008f444;
+    goto setLightOrFace;
   case 0x26:
   case 0x27:
   case 0x28:
   case 0x29:
     kind = kind + -0x26;
     stateBlock = stateBlock + lightOrFace * 0x40 + 0x1c60;
-    goto LAB_0008f444;
+    goto setLightOrFace;
   case 0x2e:
   case 0x2f:
   case 0x30:
   case 0x31:
     kind = kind + -0x2e;
     stateBlock = stateBlock + lightOrFace * 0x40 + 0x1a60;
-LAB_0008f444:
+setLightOrFace:
     lightOrFace = 0;
     stateOwner = 0x10;
     outCursor = matrixCopy;
@@ -3501,14 +3501,14 @@ LAB_0008f444:
               matrixCopy7 = workRowC[5];
               matrixCopy11 = workRowC[6];
               matrixCopy15 = workRowC[7];
-              goto LAB_0008eb2c;
+              goto checkLightOrFace;
             }
           }
         }
         lightOrFace = *(int *)(element + 0x10);
       }
     }
-LAB_0008eb2c:
+checkLightOrFace:
     if (-1 < lightOrFace) {
       if (lightOrFace < 2) {
         lightOrFace = 0;
@@ -3883,7 +3883,7 @@ int ffvpAssignOutputSlots(ctx)
     if ((uint)(byte)((unsigned char *)0x000013b0)[ctx] < (uint)*(byte *)(ctx + 0x2b)) {
       texUnitCount = (uint)(byte)((unsigned char *)0x000013b0)[ctx];
     }
-    if (texUnitCount == 0) goto LAB_0008ff78;
+    if (texUnitCount == 0) goto checkCtxFlags44;
     loopIndex = 0;
     unitCursor = ctx;
     enableCursor = ctx;
@@ -3906,7 +3906,7 @@ int ffvpAssignOutputSlots(ctx)
       texEnableMask = ((unsigned char *)0x000011d3)[ctx];
     }
     texUnitCount = (uint)(byte)((unsigned char *)0x000013b0)[ctx];
-    if (texUnitCount == 0) goto LAB_0008ff78;
+    if (texUnitCount == 0) goto checkCtxFlags44;
     loopIndex = 0;
     unitCursor = ctx;
     do {
@@ -3921,7 +3921,7 @@ int ffvpAssignOutputSlots(ctx)
     } while ((int)loopIndex < (int)texUnitCount);
   }
   ctxFlags44 = *(uint *)(ctx + 0x44);
-LAB_0008ff78:
+checkCtxFlags44:
   if (((ctxFlags44 & 0x1000800) != 0) && (*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7baf)) {
     ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1ec) = nextSlot;
@@ -4506,7 +4506,7 @@ int ffvpAllocTempRegister(allocState, componentCount, resultOperand)
           if (loopIndex < *(uint *)(allocState + 0x3d0)) {
             return 0;
           }
-          goto LAB_00090e50;
+          goto storeAllocState;
         }
         loopIndex = loopIndex + 1;
         flagCursor = flagCursor + 4;
@@ -4545,7 +4545,7 @@ int ffvpAllocTempRegister(allocState, componentCount, resultOperand)
           if (loopIndex < *(uint *)(allocState + 0x3d0)) {
             return 0;
           }
-LAB_00090e50:
+storeAllocState:
           *(uint *)(allocState + 0x3d0) = loopIndex + 1;
           return 0;
         }
@@ -4563,7 +4563,7 @@ LAB_00090e50:
     if (regCountdown != 0) {
       loopIndex = 0;
       if (*(char *)(allocState + 0x6c4) == '\0') {
-LAB_00090e7c:
+loopStoreResultOperand:
         resultOperand[1] = loopIndex;
         resultWord5Staged = DAT_001dbd10;
         resultWord4Staged = DAT_001dbd0c;
@@ -4580,10 +4580,10 @@ LAB_00090e7c:
         resultOperand[6] = resultWord6Staged;
         resultOperand[8] = resultWord8Staged;
         *(undefined1 *)(loopIndex * 4 + allocState + 0x6c4) = 1;
-        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto LAB_00091070;
+        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto loopStoreAllocState;
       }
       else if (*(char *)(allocState + 0x6c5) == '\0') {
-LAB_00090efc:
+loopStoreResultOperand2:
         resultOperand[1] = loopIndex;
         resultWord5Staged = DAT_001dbd70;
         resultWord4Staged = DAT_001dbd6c;
@@ -4600,10 +4600,10 @@ LAB_00090efc:
         resultOperand[6] = resultWord6Staged;
         resultOperand[8] = resultWord8Staged;
         *(undefined1 *)(loopIndex * 4 + allocState + 0x6c5) = 1;
-        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto LAB_00091070;
+        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto loopStoreAllocState;
       }
       else if (*(char *)(allocState + 0x6c6) == '\0') {
-LAB_00090f7c:
+loopStoreResultOperand3:
         resultOperand[1] = loopIndex;
         resultWord5Staged = DAT_001dbd60;
         resultWord4Staged = DAT_001dbd5c;
@@ -4621,7 +4621,7 @@ LAB_00090f7c:
         resultOperand[8] = resultWord8Staged;
         *(undefined1 *)(loopIndex * 4 + allocState + 0x6c6) = 1;
         if (*(uint *)(allocState + 0x3d0) <= loopIndex) {
-LAB_00091070:
+loopStoreAllocState:
           *(uint *)(allocState + 0x3d0) = loopIndex + 1;
           return 0;
         }
@@ -4632,10 +4632,10 @@ LAB_00091070:
         while (flagByte != '\0') {
           loopIndex = loopIndex + 1;
           regCountdown = regCountdown + -1;
-          if (regCountdown == 0) goto LAB_00091090;
-          if (*(char *)(flagCursor + 0x6c8) == '\0') goto LAB_00090e7c;
-          if (*(char *)(flagCursor + 0x6c9) == '\0') goto LAB_00090efc;
-          if (*(char *)(flagCursor + 0x6ca) == '\0') goto LAB_00090f7c;
+          if (regCountdown == 0) goto storeResultOperand;
+          if (*(char *)(flagCursor + 0x6c8) == '\0') goto loopStoreResultOperand;
+          if (*(char *)(flagCursor + 0x6c9) == '\0') goto loopStoreResultOperand2;
+          if (*(char *)(flagCursor + 0x6ca) == '\0') goto loopStoreResultOperand3;
           flagPtr = (char *)(flagCursor + 0x6cb);
           flagCursor = flagCursor + 4;
           flagByte = *flagPtr;
@@ -4656,12 +4656,12 @@ LAB_00091070:
         resultOperand[6] = resultWord6Staged;
         resultOperand[8] = resultWord8Staged;
         *(undefined1 *)(loopIndex * 4 + allocState + 0x6c7) = 1;
-        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto LAB_00091070;
+        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto loopStoreAllocState;
       }
       return 0;
     }
   }
-LAB_00091090:
+storeResultOperand:
   resultOperand[1] = -1;
   resultWord5Staged = DAT_001fa614;
   resultWord4Staged = DAT_001fa610;
@@ -5239,12 +5239,12 @@ int ffvpEmitEyeVector(programBuilder)
   if (invEyeDistReg == -1) {
     ((int (*)())ffvpEmitInverseEyeDistance)(programBuilder);
     invEyeDistReg = *(int *)(programBuilder + 0x538);
-    if (invEyeDistReg != -1) goto LAB_0009226c;
-LAB_00092320:
+    if (invEyeDistReg != -1) goto checkProgramBuilder;
+loopSetStatus:
     status = 2;
   }
   else {
-LAB_0009226c:
+checkProgramBuilder:
     if (*(int *)(programBuilder + 0x3f8) == -1) {
       if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
         ((int (*)())ffvpEmitEyePositionDp4)(programBuilder);
@@ -5252,7 +5252,7 @@ LAB_0009226c:
       else {
         ((int (*)())ffvpEmitEyePositionMad)(programBuilder);
       }
-      if (*(int *)(programBuilder + 0x3f8) == -1) goto LAB_00092320;
+      if (*(int *)(programBuilder + 0x3f8) == -1) goto loopSetStatus;
     }
     allocStatus = ((int (*)())ffvpAllocTempRegister)(programBuilder,1,programBuilder + 0x41c);
     status = 7;
@@ -5300,25 +5300,25 @@ int ffvpEmitReflectionVector(programBuilder)
   }
   if (*(char *)(glCtx + 0x128) == '\0') {
     if (*(char *)(glCtx + 300) == '\0') {
-      if (*(int *)(programBuilder + 0x448) != -1) goto LAB_00092420;
+      if (*(int *)(programBuilder + 0x448) != -1) goto setNormalReg;
       ((int (*)())ffvpEmitEyeNormal)(programBuilder);
       normalReg = *(int *)(programBuilder + 0x448);
     }
     else {
-      if (*(int *)(programBuilder + 0x470) != -1) goto LAB_00092420;
+      if (*(int *)(programBuilder + 0x470) != -1) goto setNormalReg;
       ((int (*)())ffvpEmitRescaledNormal)(programBuilder);
       normalReg = *(int *)(programBuilder + 0x470);
     }
   }
   else {
-    if (*(int *)(programBuilder + 0x498) != -1) goto LAB_00092420;
+    if (*(int *)(programBuilder + 0x498) != -1) goto setNormalReg;
     ((int (*)())ffvpEmitNormalizedNormal)(programBuilder);
     normalReg = *(int *)(programBuilder + 0x498);
   }
   if (normalReg == -1) {
     return 2;
   }
-LAB_00092420:
+setNormalReg:
   normalReg = ((int (*)())ffvpAllocTempRegister)(programBuilder,1,programBuilder + 0x4bc);
   if (normalReg == 0) {
     reflectionReg = *(undefined4 *)(programBuilder + 0x4c0);

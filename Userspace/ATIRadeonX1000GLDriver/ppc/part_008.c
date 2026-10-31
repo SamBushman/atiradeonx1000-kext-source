@@ -32,7 +32,7 @@ int extvsDeleteShaderObject(glContext, shaderId)
   shaderByteOffset = 0;
   searching = true;
   while (loopIndex < *(uint *)(shaderList + 4)) {
-    if (!searching) goto LAB_00053e6c;
+    if (!searching) goto setShaderRecord;
     if (shaderId == *(int *)(shaderByteOffset + *(int *)(shaderList + 0xc) + 8)) {
       searching = false;
     }
@@ -42,7 +42,7 @@ int extvsDeleteShaderObject(glContext, shaderId)
     }
   }
   if (!searching) {
-LAB_00053e6c:
+setShaderRecord:
     shaderRecord = loopIndex * 0x7c + *(int *)(shaderList + 0xc);
     if (*(int *)(shaderRecord + 0xc) == 0) {
       ((int (*)())extvsFreeShaderObject)(glContext,shaderRecord);
@@ -642,19 +642,19 @@ int extvsAppendSymbol(ctx, symbolList, symbol)
       }
       symbolList[1] = newEntries;
       entryIndex = *symbolList;
-      goto LAB_00054e60;
+      goto callMemcpy;
     }
-LAB_00054f2c:
+loopSetEntryIndex:
     entryIndex = 0;
   }
   else {
-LAB_00054e60:
+callMemcpy:
     _memcpy(symbolList[1] + entryIndex * 0x54,symbol,0x54);
     symbolId = *(uint *)(symbol + 0x20);
     *(undefined1 *)(entryIndex * 0x54 + symbolList[1] + 0x3c) = 0;
     if (symbolList[3] <= symbolId) {
       newIdIndex = (**(code **)(ctx + 0x10))(symbolId + 0x40,4);
-      if (newIdIndex == 0) goto LAB_00054f2c;
+      if (newIdIndex == 0) goto loopSetEntryIndex;
       if (symbolList[2] != 0) {
         (**(code **)(((unsigned char *)0x00001344) + ctx))(newIdIndex,symbolList[2],symbolList[3] << 2);
         (**(code **)(ctx + 0x18))(symbolList[2]);
@@ -693,7 +693,7 @@ int extvsResolveOperand(glContext, shader, operandId, swizzleSrc, outOperand)
   if (operandId == 0) {
     outOperand[1] = 0;
     *outOperand = 0;
-    goto LAB_000550a0;
+    goto setSwizzleWord1;
   }
   extvsState = *(int *)(((unsigned char *)0x0000116c) + glContext);
   symbolId = operandId & 0x7fffffff;
@@ -716,7 +716,7 @@ int extvsResolveOperand(glContext, shader, operandId, swizzleSrc, outOperand)
         dependentCount = *(uint *)(localSymbolIndex + 0x34);
         if (dependentCount < 2) {
           localSymbolIndex = ((int (*)())extvsAppendSymbol)(glContext,localSymbolList,localSymbolIndex);
-          goto LAB_00055088;
+          goto storeOutOperand;
         }
       }
       else {
@@ -738,10 +738,10 @@ int extvsResolveOperand(glContext, shader, operandId, swizzleSrc, outOperand)
       localSymbolIndex = ((int (*)())extvsSymbolListGetIndex)(localSymbolList,symbolId);
     }
   }
-LAB_00055088:
+storeOutOperand:
   outOperand[1] = localSymbolIndex;
   *outOperand = 2;
-LAB_000550a0:
+setSwizzleWord1:
   swizzleWord1 = swizzleSrc[1];
   swizzleWord2 = swizzleSrc[2];
   swizzleWord3 = swizzleSrc[3];
@@ -911,7 +911,7 @@ int extvsAppendInstruction(glContext, shader, op, dstId, dstMask, src0Id, src0Sw
   *(int *)(instrCount * 0x74 + *(int *)(shader + 0x18)) = op;
   if (dstId < 0x879d) {
     if ((dstId < 0x879a) && (2 < dstId - 0x610e)) {
-LAB_00055500:
+loopSetDstSymbolIndex:
       dstSymbolIndex = ((int (*)())extvsSymbolListGetIndex)(shader + 0x1c,dstId);
       if (dstSymbolIndex == 0) {
         return 0;
@@ -922,7 +922,7 @@ LAB_00055500:
       }
       *(int *)(instrRecord + 8) = dstSymbolIndex;
       *(undefined4 *)(instrRecord + 4) = 2;
-      goto LAB_00055550;
+      goto setMaskWord0;
     }
   }
   else if (dstId < 0x87a5) {
@@ -930,10 +930,10 @@ LAB_00055500:
       return 0;
     }
   }
-  else if (dstId != 0x87bd) goto LAB_00055500;
+  else if (dstId != 0x87bd) goto loopSetDstSymbolIndex;
   *(uint *)(instrRecord + 8) = dstId;
   *(undefined4 *)(instrRecord + 4) = 1;
-LAB_00055550:
+setMaskWord0:
   maskWord0 = *dstMask;
   maskWord1 = dstMask[1];
   maskWord2 = dstMask[2];
@@ -974,14 +974,14 @@ int extvsCreateSymbol(ctx, symbolList, dataType, storageClass, entryWord2c, base
   
   symbolIdState = *(int *)(((unsigned char *)0x0000116c) + ctx);
   if (*(int *)(symbolIdState + 0x24) < 0) {
-LAB_00055a00:
+loopSetParentSymbol:
     parentSymbol = 0;
   }
   else {
     entryIndex = *symbolList;
     if ((entryIndex & 0x3f) == 0) {
       entryIndex = (**(code **)(ctx + 0xc))(((unsigned char *)0x00001500) + entryIndex * 0x54);
-      if (entryIndex == 0) goto LAB_00055a00;
+      if (entryIndex == 0) goto loopSetParentSymbol;
       if (symbolList[1] != 0) {
         (**(code **)(((unsigned char *)0x00001344) + ctx))(entryIndex,symbolList[1],*symbolList * 0x54);
         (**(code **)(ctx + 0x18))(symbolList[1]);
@@ -1021,7 +1021,7 @@ LAB_00055a00:
         if (dataType != 0x87be) {
           *(undefined4 *)(entryOffset + symbolList[1] + 0x38) = 0;
           *(undefined1 *)(entryOffset + symbolList[1] + 0x3c) = 0;
-          goto LAB_00055870;
+          goto setEntryOffset;
         }
         growSlots = 4;
       }
@@ -1030,7 +1030,7 @@ LAB_00055a00:
       *(undefined4 *)(entryOffset + entriesBase + 0x38) = growSlots;
       *(undefined1 *)(entryOffset + symbolList[1] + 0x3c) = 1;
     }
-LAB_00055870:
+setEntryOffset:
     entryOffset = entryIndex * 0x54;
     *(undefined4 *)(symbolList[1] + entryOffset + 0x20) = *(undefined4 *)(symbolIdState + 0x24);
     *(int *)(symbolList[1] + entryOffset + 0x24) = dataType;
@@ -1052,7 +1052,7 @@ LAB_00055870:
     symbolId = *(uint *)(symbolIdState + 0x24);
     if (symbolList[3] <= symbolId) {
       symbolId = (**(code **)(ctx + 0x10))(symbolId + 0x40,4);
-      if (symbolId == 0) goto LAB_00055a00;
+      if (symbolId == 0) goto loopSetParentSymbol;
       if (symbolList[2] != 0) {
         (**(code **)(((unsigned char *)0x00001344) + ctx))(symbolId,symbolList[2],symbolList[3] << 2);
         (**(code **)(ctx + 0x18))(symbolList[2]);
@@ -1265,7 +1265,7 @@ int extvsAllocConstantRegisters(ctx, shader, programState, symbol)
       searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
       while (slotIndex < *(uint *)(programState + 0x58)) {
-        if (!searching) goto LAB_00055f2c;
+        if (!searching) goto storeSymbol;
         if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
           slotFoundFlag = 1;
           searching = false;
@@ -1275,7 +1275,7 @@ int extvsAllocConstantRegisters(ctx, shader, programState, symbol)
           slotByteOffset = slotByteOffset + 0x28;
         }
       }
-      goto LAB_00055f28;
+      goto checkSearching;
     }
     if (symbolKind == 0x87c0) {
       slotIndex = 0;
@@ -1283,7 +1283,7 @@ int extvsAllocConstantRegisters(ctx, shader, programState, symbol)
       searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
       while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-        if (!searching) goto LAB_00055fac;
+        if (!searching) goto setMatrixSlotOffset;
         if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
           searching = false;
         }
@@ -1293,7 +1293,7 @@ int extvsAllocConstantRegisters(ctx, shader, programState, symbol)
         }
       }
       if (!searching) {
-LAB_00055fac:
+setMatrixSlotOffset:
         matrixSlotOffset = slotIndex * 0x28;
         slotEntryAddr = matrixSlotOffset + *(int *)(programState + 0x54);
         if (((*(char *)(slotEntryAddr + 0x38) == '\0') && (*(char *)(slotEntryAddr + 0x60) == '\0')) &&
@@ -1345,7 +1345,7 @@ LAB_00055fac:
     searching = true;
     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
     while (slotIndex < *(uint *)(programState + 0x58)) {
-      if (!searching) goto LAB_0005618c;
+      if (!searching) goto storeSymbol3;
       if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
         slotFoundFlag2 = 1;
         searching = false;
@@ -1370,7 +1370,7 @@ LAB_00055fac:
       searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
       while (slotIndex < *(uint *)(programState + 0x58)) {
-        if (!searching) goto LAB_00055f2c;
+        if (!searching) goto storeSymbol;
         if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
           slotFoundFlag = 1;
           searching = false;
@@ -1380,7 +1380,7 @@ LAB_00055fac:
           slotByteOffset = slotByteOffset + 0x28;
         }
       }
-LAB_00055f28:
+checkSearching:
       if (searching) {
         *(undefined1 *)(shader + 0x10) = slotFoundFlag;
         oldSlotCountBeforeGrow = *(int *)(programState + 0x58);
@@ -1390,11 +1390,11 @@ LAB_00055f28:
         (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
         *(undefined4 *)(programState + 0x54) = newSlotArray2;
         *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
-        goto LAB_000562e8;
+        goto storeSymbol2;
       }
-LAB_00055f2c:
+storeSymbol:
       *(uint *)(symbol + 4) = slotIndex;
-      goto LAB_00055f30;
+      goto storeSlotIndex;
     }
     if (symbolKind == 0x87c0) {
       slotIndex = 0;
@@ -1402,7 +1402,7 @@ LAB_00055f2c:
       searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
       while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-        if (!searching) goto LAB_0005636c;
+        if (!searching) goto setMatrixSlotOffset2;
         if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
           searching = false;
         }
@@ -1412,7 +1412,7 @@ LAB_00055f2c:
         }
       }
       if (!searching) {
-LAB_0005636c:
+setMatrixSlotOffset2:
         matrixSlotOffset = slotIndex * 0x28;
         slotEntryAddr = matrixSlotOffset + *(int *)(programState + 0x54);
         if (((*(char *)(slotEntryAddr + 0x38) == '\0') && (*(char *)(slotEntryAddr + 0x60) == '\0')) &&
@@ -1464,7 +1464,7 @@ LAB_0005636c:
     searching = true;
     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
     while (slotIndex < *(uint *)(programState + 0x58)) {
-      if (!searching) goto LAB_0005618c;
+      if (!searching) goto storeSymbol3;
       if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
         slotFoundFlag2 = 1;
         searching = false;
@@ -1485,15 +1485,15 @@ LAB_0005636c:
     *(undefined4 *)(programState + 0x54) = newSlotArray;
     *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
     *(undefined4 *)(symbol + 8) = slotFoundFlag2;
-LAB_000562e8:
+storeSymbol2:
     *(int *)(symbol + 4) = oldSlotCountBeforeGrow;
     *(undefined1 *)(oldSlotCountBeforeGrow * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
     return;
   }
-LAB_0005618c:
+storeSymbol3:
   *(uint *)(symbol + 4) = slotIndex;
   *(undefined4 *)(symbol + 8) = 0;
-LAB_00055f30:
+storeSlotIndex:
   *(undefined1 *)(slotIndex * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
   return;
 }
@@ -1544,7 +1544,7 @@ int extvsAllocTempRegisters(ctx, shader, programState, operand)
     slotIndex = 0;
     foundFlag = 0;
     while (slotIndex < *(uint *)(programState + 0x50)) {
-      if (!searching) goto LAB_000567d8;
+      if (!searching) goto storeSymbol;
       if (*(char *)(slotIndex * 0x28 + *(int *)(programState + 0x4c) + 0x10) == '\0') {
         foundFlag = 1;
         searching = false;
@@ -1573,11 +1573,11 @@ int extvsAllocTempRegisters(ctx, shader, programState, operand)
       if (slotCount < *(uint *)(programState + 0x2ac)) {
         return;
       }
-LAB_00056918:
+loopStoreProgramState:
       *(uint *)(programState + 0x2ac) = slotCount + 1;
       return;
     }
-LAB_000567d8:
+storeSymbol:
     *(uint *)(symbol + 4) = slotIndex;
     symbol = slotIndex * 0x28;
     *(undefined1 *)(*(int *)(programState + 0x4c) + symbol + 0x10) = 1;
@@ -1594,7 +1594,7 @@ LAB_000567d8:
     if (dataType == 0x87c0) {
       slotIndex = 0;
       while (slotIndex < *(int *)(programState + 0x50) - 3U) {
-        if (!searching) goto LAB_00056978;
+        if (!searching) goto setDataType;
         if (*(char *)(slotIndex * 0x28 + *(int *)(programState + 0x4c) + 0x10) == '\0') {
           searching = false;
         }
@@ -1603,7 +1603,7 @@ LAB_000567d8:
         }
       }
       if (!searching) {
-LAB_00056978:
+setDataType:
         dataType = slotIndex * 0x28;
         slotEntry = dataType + *(int *)(programState + 0x4c);
         if (((*(char *)(slotEntry + 0x38) == '\0') && (*(char *)(slotEntry + 0x60) == '\0')) &&
@@ -1672,7 +1672,7 @@ LAB_00056978:
     searching = false;
     dataType = 0;
     while (slotIndex < slotCountSnapshot) {
-      if (searching) goto LAB_000565ec;
+      if (searching) goto storeSymbol2;
       slotEntry = dataType + *(int *)(programState + 0x4c);
       if ((*(char *)(slotEntry + 0x10) == '\0') || (searching = true, 3 < *(uint *)(slotEntry + 0x14))) {
         slotIndex = slotIndex + 1;
@@ -1681,7 +1681,7 @@ LAB_00056978:
       }
     }
     if (searching) {
-LAB_000565ec:
+storeSymbol2:
       *(uint *)(symbol + 4) = slotIndex;
       dataType = slotIndex * 0x28;
       *(undefined4 *)(symbol + 8) = *(undefined4 *)(*(int *)(programState + 0x4c) + dataType + 0x14);
@@ -1695,7 +1695,7 @@ LAB_000565ec:
     }
     else {
       if (slotCountSnapshot == 0) {
-LAB_000566c8:
+loopStoreShader:
         *(undefined1 *)(shader + 0x10) = 0;
         slotCount = *(uint *)(programState + 0x50);
         newSlotArray = (**(code **)(ctx + 0x10))(slotCount + 0x10,0x28);
@@ -1713,7 +1713,7 @@ LAB_000566c8:
         if (slotCount < *(uint *)(programState + 0x2ac)) {
           return;
         }
-        goto LAB_00056918;
+        goto loopStoreProgramState;
       }
       slotIndex = 0;
       do {
@@ -1722,7 +1722,7 @@ LAB_000566c8:
           slotIndex = slotIndex + 1;
         }
         if (slotCountSnapshot <= slotIndex) {
-          if (searching) goto LAB_000566c8;
+          if (searching) goto loopStoreShader;
           break;
         }
       } while (searching);
@@ -1830,7 +1830,7 @@ int extvsFreeDeadTempSlots(ctx, shader, instIndex)
                 writtenX = writtenX | writesX;
                 if (((writtenX != 0) && (writtenY != 0)) && (writtenZ != 0)) {
                   stopScan = writtenW != 0;
-                  goto LAB_00056e00;
+                  goto setScanIndex;
                 }
               }
               stopScan = false;
@@ -1839,10 +1839,10 @@ int extvsFreeDeadTempSlots(ctx, shader, instIndex)
               noLaterRead = false;
               stopScan = true;
             }
-LAB_00056e00:
+setScanIndex:
             scanIndex = scanIndex + 1;
           } while ((scanIndex != instCount) && (inst = inst + 0x74, !stopScan));
-          if (!noLaterRead) goto LAB_00056ef0;
+          if (!noLaterRead) goto setSlotIndex;
         }
         *(undefined1 *)(slotRegX * 0x54 + shader[8] + 0x3d) = 0;
         *(undefined1 *)
@@ -1860,7 +1860,7 @@ LAB_00056e00:
         shader[0x19] = shader[0x19] + -1;
         tempSlotCount = *(uint *)(programState + 0x50);
       }
-LAB_00056ef0:
+setSlotIndex:
       slotIndex = slotIndex + 1;
       slotOffset = slotOffset + 0x28;
     } while (slotIndex < tempSlotCount);
@@ -1977,7 +1977,7 @@ int extvsEncodeSourceOperand(ctx, shader, operand, outWord, registerSelect, sele
           encodedWord = (*(uint *)(programState + 500) & 0x7f) << 0xd |
                   flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
           *outWord = encodedWord;
-          goto LAB_00057320;
+          goto storeOutWord;
         }
       }
       else {
@@ -1994,7 +1994,7 @@ int extvsEncodeSourceOperand(ctx, shader, operand, outWord, registerSelect, sele
           }
           encodedWord = *outWord & 0xff1fffff;
           *outWord = encodedWord;
-          goto LAB_00057320;
+          goto storeOutWord;
         }
         if (encodedWord != 0x6110) {
           if (encodedWord != 0x879a) {
@@ -2003,13 +2003,13 @@ int extvsEncodeSourceOperand(ctx, shader, operand, outWord, registerSelect, sele
           encodedWord = (*(uint *)(programState + 0x1e8) & 0x7f) << 0xd |
                   flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
           *outWord = encodedWord;
-          goto LAB_00057320;
+          goto storeOutWord;
         }
         if (*(char *)(shader + 0x1c) != '\0') {
           encodedWord = (*(uint *)(programState + 0x1f8) & 0x7f) << 0xd |
                   flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
           *outWord = encodedWord;
-          goto LAB_00057320;
+          goto storeOutWord;
         }
       }
       encodedWord = selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
@@ -2058,7 +2058,7 @@ int extvsEncodeSourceOperand(ctx, shader, operand, outWord, registerSelect, sele
             flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x100;
     *outWord = encodedWord;
   }
-LAB_00057320:
+storeOutWord:
   *outWord = encodedWord & 0x1fffefff;
   return 1;
 }
@@ -2300,7 +2300,7 @@ LAB_00057ae0:
       finalWord = (operand[1] & 0xff) << 5 | swizzleWord & 0xffffe018 | 2;
       *outWord = finalWord;
     }
-    goto LAB_00057aa0;
+    goto checkOperand;
   }
   symbolOffset = operand[1] * 0x54;
   symbolEntry = symbolOffset + *(int *)(symbolList + 4);
@@ -2321,7 +2321,7 @@ LAB_00057ae0:
           finalWord = registerIndexBits | swizzleWord & 0xfe3fe018 | 1 | 0x1000000;
           *outWord = finalWord;
         }
-        goto LAB_00057aa0;
+        goto checkOperand;
       }
       if (symbolDataType != 0x87c0) {
         if (symbolDataType != 0x87be) {
@@ -2348,7 +2348,7 @@ LAB_00057ae0:
         }
         finalWord = finalWord & 0xe1ffffff;
         *outWord = finalWord;
-        goto LAB_00057aa0;
+        goto checkOperand;
       }
       swizzleWord = swizzleWord & 0xfffffff8 | 1;
     }
@@ -2358,14 +2358,14 @@ LAB_00057ae0:
         *outWord = swizzleWord & 0xfffffff8 | 2;
         finalWord = (*(uint *)(symbolEntry + 4) & 0xff) << 5 | swizzleWord & 0xffffe018 | 2;
         *outWord = finalWord;
-        goto LAB_00057aa0;
+        goto checkOperand;
       }
       if (entryDataType != 0x87c0) {
         swizzleWord = swizzleWord & 0xfffffff8 | 2;
         if (entryDataType != 0x87be) {
           return 0;
         }
-        goto LAB_000579dc;
+        goto storeOutWord;
       }
       swizzleWord = swizzleWord & 0xfffffff8 | 2;
     }
@@ -2382,19 +2382,19 @@ LAB_00057ae0:
       *outWord = swizzleWord & 0xfffffff8;
       finalWord = (*(uint *)(symbolEntry + 4) & 0xff) << 5 | swizzleWord & 0xffffe018;
       *outWord = finalWord;
-      goto LAB_00057aa0;
+      goto checkOperand;
     }
     if (entryDataType == 0x87c0) {
       *outWord = swizzleWord & 0xfffffff8;
       finalWord = (*(uint *)(matrixRow * 4 + symbolEntry + 0x10) & 0xff) << 5 | swizzleWord & 0xffffe018;
       *outWord = finalWord;
-      goto LAB_00057aa0;
+      goto checkOperand;
     }
     if (entryDataType != 0x87be) {
       return 0;
     }
     swizzleWord = swizzleWord & 0xfffffff8;
-LAB_000579dc:
+storeOutWord:
     *outWord = swizzleWord;
     finalWord = (*(uint *)(symbolEntry + 4) & 0xff) << 5;
     *outWord = finalWord | swizzleWord & 0xffffe01f;
@@ -2407,7 +2407,7 @@ LAB_000579dc:
     finalWord = (*(uint *)(symbolEntry + 8) & 7) << 0x16 | broadcastZ | broadcastY | broadcastX | finalWord | swizzleWord & 0xe000001f;
     *outWord = finalWord;
   }
-LAB_00057aa0:
+checkOperand:
   if (*(char *)(operand + 6) == '\0') {
     finalWord = finalWord & 0x9fffffef;
     *outWord = finalWord;

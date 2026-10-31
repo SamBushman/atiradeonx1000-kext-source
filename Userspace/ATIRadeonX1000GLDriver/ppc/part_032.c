@@ -195,13 +195,13 @@ int Program__bindLinkRecordsToSlots(scopeId, slotOwnerRegister, firstSlot, slotE
           do {
             foundSlot = foundSlot + 1;
             slotsLeft = slotsLeft + -1;
-            if (slotsLeft == 0) goto LAB_0010fb28;
+            if (slotsLeft == 0) goto setVectorCount;
             slotScanCursor = slotScanCursor + 1;
           } while (*slotScanCursor != *(int *)(vectorElement + 0x14));
         }
         *(int *)(vectorElement + 0x14) = foundSlot;
       }
-LAB_0010fb28:
+setVectorCount:
       vectorCount = vector[1];
     } while (loopIndex < vectorCount);
   }
@@ -386,10 +386,10 @@ int Program__assignSharedExportSlots(scopeId, vector, nextSlotRef, program)
           slotCursor = slotCursor + 1;
           scanRemaining = scanRemaining + -1;
         } while (scanRemaining != 0);
-        if (!foundExisting) goto LAB_0010febc;
+        if (!foundExisting) goto setSlotNumber;
       }
       else {
-LAB_0010febc:
+setSlotNumber:
         slotNumber = *nextSlotRef;
         slotTable[slotNumber] = registerKey;
         elementRecord = *vectorElement;
@@ -508,30 +508,30 @@ int Program__collectExportEntry(program, valueKey)
     kindQuery6e8 = IRInst__query68AndWord4fIn16_17(outputInst);
     if (kindQuery6e8 == 0) {
       kindQuery690 = IRInst__query68AndWord4fIs18(outputInst);
-      if (kindQuery690 == 0) goto LAB_001101ac;
+      if (kindQuery690 == 0) goto setValueNumberEnabled;
       exportListVector = *(uint **)(program + 0x424);
       exportListCount = exportListVector[1];
-      if (exportListCount < *exportListVector) goto LAB_00110170;
+      if (exportListCount < *exportListVector) goto callMemset;
     }
     else {
       exportListVector = *(uint **)(program + 0x420);
       exportListCount = exportListVector[1];
-      if (exportListCount < *exportListVector) goto LAB_00110170;
+      if (exportListCount < *exportListVector) goto callMemset;
     }
-LAB_0011019c:
+loopSetExportListSlotRef:
     exportListSlotRef = (undefined4 *)Vector__elementRefGrow(exportListVector,exportListCount);
   }
   else {
     exportListVector = *(uint **)(program + 0x41c);
     exportListCount = exportListVector[1];
-    if (*exportListVector <= exportListCount) goto LAB_0011019c;
-LAB_00110170:
+    if (*exportListVector <= exportListCount) goto loopSetExportListSlotRef;
+callMemset:
     _memset((void *)(exportListCount * 4 + exportListVector[2]),0,4);
     exportListSlotRef = (undefined4 *)(exportListCount * 4 + exportListVector[2]);
     exportListVector[1] = exportListCount + 1;
   }
   *exportListSlotRef = exportRecord;
-LAB_001101ac:
+setValueNumberEnabled:
   valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
   if (valueNumberEnabled != 0) {
     ValueKey__initResultLaneValues(valueKey);
@@ -781,7 +781,7 @@ int Program__packInterpolatorEntries(program, scopeId, vector)
             if (searchIndex < allocationCount) {
               searchRef = (int *)(searchIndex * 4 + allocation[3]);
             }
-            if (*searchRef == recordInst) goto LAB_0011047c;
+            if (*searchRef == recordInst) goto setVectorAt418B;
             searchIndex = searchIndex + 1;
             searchRemaining = searchRemaining - 1;
           } while (searchRemaining != 0);
@@ -796,7 +796,7 @@ int Program__packInterpolatorEntries(program, scopeId, vector)
         }
         *newSlotRef = recordInst;
       }
-LAB_0011047c:
+setVectorAt418B:
       vectorAt418B = *(uint **)(program + 0x418);
       vectorAt418BCount = vectorAt418B[1];
     } while (vectorAt418BIndex < vectorAt418BCount);
@@ -1280,7 +1280,7 @@ LAB_0011047c:
           packEntry = (int *)*groupEntryRef;
           headInst = *packEntry;
           if ((requiredLanes == packEntry[2]) && (otherIndex = 0, 0 < (int)groupVectorCount)) {
-LAB_00111270:
+loopCheckOtherIndex:
             if (otherIndex < *groupVector) {
               if (groupVectorCount <= otherIndex) {
                 _memset((void *)(groupVectorCount * 4 + groupVectorAlloc[3]),0,(otherIndex - groupVectorCount) * 4 + 4);
@@ -1293,7 +1293,7 @@ LAB_00111270:
             }
             otherEntry = (int *)*groupEntryRef;
             candidateInst = *otherEntry;
-            if ((candidateInst == headInst) || (requiredLanes < 4 - otherEntry[2])) goto LAB_001116e0;
+            if ((candidateInst == headInst) || (requiredLanes < 4 - otherEntry[2])) goto setGroupVectorCount;
             Vector__removeValue(groupVector,otherEntry);
             candLaneVector = (uint *)otherEntry[3];
             recordCount = candLaneVector[1];
@@ -1333,10 +1333,10 @@ LAB_00111270:
                     laneNumber = 0;
                     laneFlagPtr = (undefined1 *)(laneInst + 0x9c);
                     laneInstCursor = laneRecord;
-LAB_001113e0:
+loopSetLaneInstCursor:
                     laneInstCursor = laneInstCursor + 1;
                     candDestOperand = IRInst__getOperandRecord(laneInst,0);
-                    if (*(char *)(laneNumber + candDestOperand + 0x10) == '\x01') goto LAB_00111508;
+                    if (*(char *)(laneNumber + candDestOperand + 0x10) == '\x01') goto setIsLastLane;
                     candSrcOperand = IRInst__getOperandRecord(laneInst,1);
                     savedSwizzlePtr = savedSwizzleWordsAlias;
                     srcSwizzleByte = *(undefined1 *)(laneNumber + candSrcOperand + 0x10);
@@ -1375,7 +1375,7 @@ LAB_001113e0:
                     }
                     *laneFlagPtr = 1;
                   }
-LAB_0011151c:
+loopSetNotLastLane:
                   notLastLane = laneStep != 3;
                   entryLaneFlagCursor = (int *)((int)entryLaneFlagCursor + 1);
                   laneStep = laneStep + 1;
@@ -1454,7 +1454,7 @@ LAB_0011151c:
             }
             goto LAB_001116f4;
           }
-LAB_001116f0:
+loopSetGroupIndex:
           groupIndex = groupIndex + 1;
 LAB_001116f4: ;
         } while ((int)groupIndex < (int)groupVectorCount);
@@ -1828,17 +1828,17 @@ code_r0x00111b80:
     }
   }
   return;
-LAB_001116e0:
+setGroupVectorCount:
   groupVectorCount = groupVectorAlloc[2];
   otherIndex = otherIndex + 1;
-  if ((int)groupVectorCount <= (int)otherIndex) goto LAB_001116f0;
-  goto LAB_00111270;
-LAB_00111508:
+  if ((int)groupVectorCount <= (int)otherIndex) goto loopSetGroupIndex;
+  goto loopCheckOtherIndex;
+setIsLastLane:
   isLastLane = laneNumber == 3;
   laneFlagPtr = laneFlagPtr + 1;
   laneNumber = laneNumber + 1;
-  if (isLastLane) goto LAB_0011151c;
-  goto LAB_001113e0;
+  if (isLastLane) goto loopSetNotLastLane;
+  goto loopSetLaneInstCursor;
 }
 
 /* Program__packPsInputs @ 0x1121b4 (156 bytes) */
@@ -2135,12 +2135,12 @@ int Program__packPsInputs(program)
           }
           *appendRef = sourceLoad;
           nextInst = (int *)cursorInst[2];
-          goto LAB_00112378;
+          goto setCursorInst;
         }
       }
       nextInst = (int *)cursorInst[2];
     }
-LAB_00112378:
+setCursorInst:
     cursorInst = nextInst;
     nextInst = (int *)nextInst[2];
   } while( true );
@@ -2208,7 +2208,7 @@ int KhanVs__vslot88_assignOutputBindings(this, program)
       if ((inst[5] & 1U) != 0) {
         instQuery68 = (**(code **)(*inst + 0x68))(inst);
         if (instQuery68 == 0) {
-LAB_0011293c:
+loopSetNextInst:
           nextInst = (int *)inst[2];
         }
         else if (inst[0x4f] == 6) {
@@ -2216,7 +2216,7 @@ LAB_0011293c:
           outputKind6Inst = inst;
         }
         else {
-          if (inst[0x4f] != 7) goto LAB_0011293c;
+          if (inst[0x4f] != 7) goto loopSetNextInst;
           nextInst = (int *)inst[2];
           outputKind7Inst = inst;
         }
@@ -2325,7 +2325,7 @@ LAB_0011293c:
           else {
             ((int (*)())Program__assignExportSlotsByKind)(*(undefined4 *)(program + 0x420),&nextSlot,program);
           }
-          goto LAB_00112c28;
+          goto callProgram_assignSharedExportSlots;
         }
         recordCount = kind2Vector[1];
         loopIndex = loopIndex + 1;
@@ -2335,7 +2335,7 @@ LAB_0011293c:
       kind2Vector = *(uint **)(program + 0x420);
     }
     ((int (*)())Program__assignSharedExportSlots)(2,kind2Vector,&nextSlot,program);
-LAB_00112c28:
+callProgram_assignSharedExportSlots:
     ((int (*)())Program__assignSharedExportSlots)(3,*(undefined4 *)(program + 0x424),&nextSlot,program);
     Vector__shellSort(*(undefined4 *)(program + 0x41c),Compare__descendingByField140);
     ((int (*)())Program__assignSharedExportSlots)(1,*(undefined4 *)(program + 0x41c),&nextSlot,program);
@@ -2349,7 +2349,7 @@ LAB_00112c28:
   *(int *)(program + 0x234) = nextSlot + 1;
   slotMask = 0;
   exportIndex = 0;
-LAB_00112ec4:
+loopSetExportVector:
   exportVector = *(uint **)(program + 0x418);
   recordCountA = exportVector[1];
   if (recordCountA <= exportIndex) {
@@ -2375,7 +2375,7 @@ LAB_00112ec4:
   recordCountB = exportVector[1];
   if (recordCountB != nextExportIndex) goto code_r0x00112df4;
   interpolatorKind = *(int *)(outputRecord + 4);
-  goto LAB_00112e78;
+  goto setBindGroupFn;
 code_r0x00112df4:
   if (nextExportIndex < *exportVector) {
     if (recordCountB <= nextExportIndex) {
@@ -2390,7 +2390,7 @@ code_r0x00112df4:
   interpolatorKind = *(int *)(outputRecord + 4);
   if ((interpolatorKind != *(int *)(*exportRecordRef + 4)) ||
      (exportIndex = nextExportIndex, *(int *)(outputRecord + 8) != *(int *)(*exportRecordRef + 8))) {
-LAB_00112e78:
+setBindGroupFn:
     bindGroupFn = *(code **)(*this + 0x58);
     interpolatorCode = Table__interpolatorKindToCode(program,interpolatorKind);
     semanticCode = Index__scaleForMode(*(undefined4 *)(outputRecord + 4),*(undefined4 *)(outputRecord + 8));
@@ -2398,7 +2398,7 @@ LAB_00112e78:
     slotMask = 0;
     exportIndex = nextExportIndex;
   }
-  goto LAB_00112ec4;
+  goto loopSetExportVector;
 }
 
 /* OpcodeTraits__getRecordTail @ 0x112f08 (76 bytes) */
@@ -2458,7 +2458,7 @@ int Backend__bindingSlotsSequential(compiler)
   limitsTable = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c));
   bindingCount = (**(code **)(**(int **)(compiler + 0x30c) + 0x40))(*(int **)(compiler + 0x30c));
   if (bindingCount < 1) {
-LAB_00113034:
+loopSetSlotsAreSequential:
     slotsAreSequential = 1;
   }
   else {
@@ -2467,7 +2467,7 @@ LAB_00113034:
       entrySlotNumber = 0;
       do {
         nextExpectedSlot = entrySlotNumber + 1;
-        if (bindingCount == nextExpectedSlot) goto LAB_00113034;
+        if (bindingCount == nextExpectedSlot) goto loopSetSlotsAreSequential;
         entrySlotNumber = *entryCursor;
         entryCursor = entryCursor + 0xe;
       } while (entrySlotNumber == nextExpectedSlot);

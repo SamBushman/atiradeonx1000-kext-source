@@ -613,21 +613,21 @@ int recordIsSchedulable(alloc, records, liveIndex, modeFlag)
       fileBit = 1 << fileBit;
       if ((fileBit & 0x31) != 0) {
         usageMaskPtr = (uint *)(alloc + 0x30ba0 + (recordWord >> 0xb & 0x1fc));
-        goto LAB_000779d4;
+        goto setFlagResult;
       }
       if ((fileBit & 2) != 0) {
         usageMaskPtr = (uint *)(alloc + 0x30c20 + (recordWord >> 0xb & 0x1fc));
-        goto LAB_000779d4;
+        goto setFlagResult;
       }
       if ((fileBit & 0xc) != 0) {
         usageMaskPtr = (uint *)(alloc + 0x31450 + (recordWord >> 0xb & 0x1fc));
-        goto LAB_000779d4;
+        goto setFlagResult;
       }
     }
 switchD_000778cc_caseD_1:
     usageMaskPtr = (uint *)0x0;
   }
-LAB_000779d4:
+setFlagResult:
   flagResult = ((int (*)())recordDestFileIs0Or45)(recordPtr,modeFlag);
   if ((flagResult == 0) && (flagResult = ((int (*)())recordDestFileIs3Or1)(recordPtr,modeFlag), flagResult == 0)) {
     writeMask = ((int (*)())recordGetWriteMask)(recordPtr);
@@ -875,7 +875,7 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
             seenSlot = seenValueIds + loopCounter;
             seenCountdown = seenCountdown + -1;
             if (seenCountdown == 0) {
-              if (*seenSlot != candidateValueId) goto LAB_00077f68;
+              if (*seenSlot != candidateValueId) goto storeSeenValueIds;
               break;
             }
             loopCounter = loopCounter + 1;
@@ -883,7 +883,7 @@ int recordRegisterIsAssignable(ctx, program, reg, usedValueMask, recordIndex, co
         }
         else {
           candidateValueId = *valueIdCursor;
-LAB_00077f68:
+storeSeenValueIds:
           seenValueIds[loopIndex] = candidateValueId;
           conflict = 0 < loopIndex + 1;
           loopIndex = loopIndex + 1;
@@ -943,11 +943,11 @@ LAB_00077f68:
           remainingB = remainingB + -1;
         } while (remainingB != 0);
       }
-      goto LAB_000780d4;
+      goto checkUsedValueMask;
     }
   }
   earlierWriterMask = 0;
-LAB_000780d4:
+checkUsedValueMask:
   if (((usedValueMask & boundMask) == 0) && ((earlierWriterMask & usedValueMask) != 0)) {
     return 1;
   }
@@ -1054,13 +1054,13 @@ int recordOpcodeSourceMask(record, isR500)
   case '\b':
   case '\t':
   case '\n':
-switchD_00078334_caseD_1:
+opcodeCase1:
     return 3;
   case '\x04':
   case '\v':
   case '\f':
   case -0x80:
-switchD_00078334_caseD_4:
+opcodeCase4:
     return 7;
   case '\x06':
   case '\r':
@@ -1075,7 +1075,7 @@ switchD_00078334_caseD_4:
   case 'L':
   case 'P':
   case 'Q':
-    goto switchD_00078334_caseD_6;
+    goto opcodeCase6;
   default:
     if (isR500 != 0) {
       switch(opcode) {
@@ -1085,21 +1085,21 @@ switchD_00078334_caseD_4:
       case 'M':
       case 'N':
       case -0x7f:
-        goto switchD_00078334_caseD_4;
+        goto opcodeCase4;
       case 'E':
       case 'O':
         return 5;
       default:
         goto switchD_000785b4_caseD_46;
       case 'J':
-        goto switchD_00078334_caseD_1;
+        goto opcodeCase1;
       }
     }
     if ((7 < (byte)(opcode + 0xbdU)) || ((1 << ((int)(char)(opcode + -0x43) & 0x3fU) & 0x87U) == 0)) {
 switchD_000785b4_caseD_46:
       return 0xffffffff;
     }
-switchD_00078334_caseD_6:
+opcodeCase6:
     return 1;
   }
 }
@@ -1275,7 +1275,7 @@ int recordCountSourceRegisterFiles(ctx, outCounts, record)
           }
           remaining = remaining - 1;
         } while (remaining != 0);
-        if (!isNewKey) goto LAB_00078b54;
+        if (!isNewKey) goto setLastSource;
       }
       fileAndIndex = fileAndIndex >> 8;
       if (fileAndIndex == 1) {
@@ -1291,7 +1291,7 @@ int recordCountSourceRegisterFiles(ctx, outCounts, record)
         outCounts[2] = outCounts[2] + '\x01';
       }
     }
-LAB_00078b54:
+setLastSource:
     lastSource = loopIndex == 2;
     seenSlot = seenSlot + 1;
     loopIndex = loopIndex + 1;
@@ -1601,105 +1601,105 @@ int recordRetireBindings(alloc, recordIndex, sourceWordPtrs, unusedArg4, unusedA
   sourceIndex = 0;
   sourceListHead = (int *)(recordIndex * 0xc + alloc + 0x450);
   earliestWriterBase = earliestWriter;
-LAB_00079150:
+loopCheckUsedSourceMask:
   if ((usedSourceMask & 1 << (sourceIndex & 0x3f)) != 0) {
     bindingNode = (uint *)*sourceWordPtrs;
     depNode = *sourceListHead;
     registerKey = (char)(DAT_001aa760)[*bindingNode & 0xf] * 0x100 + (*bindingNode >> 5 & 0xff);
     if (depNode != 0) {
       bindingEmptied = false;
-LAB_000791c0:
+loopSetFileIs2:
       fileIs2 = ((int (*)())recordSourceFileIs2)(bindingNode);
       if (fileIs2 == 0) {
         bindingNode = (uint *)(alloc + registerKey * 0x10 + 0x2a87c);
         componentIndexC = 0;
-LAB_000792a0:
+loopSetComponentBitB:
         componentBitB = 1 << (componentIndexC & 0x3f);
         if ((componentBitB & *(uint *)(depNode + 4)) != 0) {
           bindingCur = (uint *)*bindingNode;
           headWord = 0;
           if (bindingCur != (uint *)0x0) {
             do {
-              if ((*bindingCur & 0x4000) == 0) goto LAB_00079318;
+              if ((*bindingCur & 0x4000) == 0) goto loopBindingPrev;
               bindingCur = (uint *)bindingCur[1];
               *bindingNode = (uint)bindingCur;
             } while (bindingCur != (uint *)0x0);
-            goto LAB_00079324;
+            goto setHeadWord;
           }
-          goto LAB_00079328;
+          goto checkHeadWord;
         }
-        goto LAB_00079340;
+        goto setLastComponent;
       }
       bindingNode = (uint *)(alloc + 0x30b7c);
       componentIndexC = 0;
-LAB_000791e0:
+loopSetComponentBitB2:
       componentBitB = 1 << (componentIndexC & 0x3f);
       if ((componentBitB & *(uint *)(depNode + 4)) != 0) {
         bindingCur = (uint *)*bindingNode;
         headWord = 0;
         if (bindingCur != (uint *)0x0) {
           do {
-            if ((*bindingCur & 0x4000) == 0) goto LAB_00079258;
+            if ((*bindingCur & 0x4000) == 0) goto loopBindingPrev2;
             bindingCur = (uint *)bindingCur[1];
             *bindingNode = (uint)bindingCur;
           } while (bindingCur != (uint *)0x0);
-          goto LAB_00079264;
+          goto setHeadWord2;
         }
-        goto LAB_00079268;
+        goto checkHeadWord2;
       }
-      goto LAB_00079280;
+      goto setLastComponent2;
     }
     bindingEmptied = false;
-    goto LAB_00079378;
+    goto setSrcWord0;
   }
-  goto LAB_000798a8;
-LAB_00079318:
+  goto setLastSource;
+loopBindingPrev:
   while (bindingPrev = bindingCur, bindingCur = (uint *)bindingPrev[1], bindingCur != (uint *)0x0) {
     if ((*bindingCur & 0x4000) != 0) {
       bindingPrev[1] = bindingCur[1];
       bindingCur = bindingPrev;
     }
   }
-LAB_00079324:
+setHeadWord:
   headWord = *bindingNode;
-LAB_00079328:
+checkHeadWord:
   if (headWord == 0) {
     bindingEmptied = true;
     *(byte *)(registerKey + alloc + 0x3087c) = *(byte *)(registerKey + alloc + 0x3087c) & ~(byte)componentBitB;
   }
-LAB_00079340:
+setLastComponent:
   lastComponent = componentIndexC == 3;
   bindingNode = bindingNode + 1;
   componentIndexC = componentIndexC + 1;
-  if (lastComponent) goto LAB_00079350;
-  goto LAB_000792a0;
-LAB_00079258:
+  if (lastComponent) goto setDepNode;
+  goto loopSetComponentBitB;
+loopBindingPrev2:
   while (bindingPrev = bindingCur, bindingCur = (uint *)bindingPrev[1], bindingCur != (uint *)0x0) {
     if ((*bindingCur & 0x4000) != 0) {
       bindingPrev[1] = bindingCur[1];
       bindingCur = bindingPrev;
     }
   }
-LAB_00079264:
+setHeadWord2:
   headWord = *bindingNode;
-LAB_00079268:
+checkHeadWord2:
   if (headWord == 0) {
     *(byte *)(alloc + 0x30b9c) = *(byte *)(alloc + 0x30b9c) & ~(byte)componentBitB;
   }
-LAB_00079280:
+setLastComponent2:
   lastComponent = componentIndexC == 3;
   bindingNode = bindingNode + 1;
   componentIndexC = componentIndexC + 1;
-  if (lastComponent) goto LAB_00079350;
-  goto LAB_000791e0;
-LAB_00079350:
+  if (lastComponent) goto setDepNode;
+  goto loopSetComponentBitB2;
+setDepNode:
   depNode = *(int *)(depNode + 0x10);
-  if (depNode == 0) goto LAB_0007936c;
+  if (depNode == 0) goto checkSourceListHead;
   bindingNode = (uint *)*sourceWordPtrs;
-  goto LAB_000791c0;
-LAB_0007936c:
+  goto loopSetFileIs2;
+checkSourceListHead:
   if (*sourceListHead == 0) {
-LAB_00079378:
+setSrcWord0:
     srcWord0 = *(uint *)*sourceWordPtrs;
     if ((srcWord0 & 0xf) == 1) {
       bindingHeadCursor = (undefined4 *)(registerKey * 0x10 + alloc + 0x2a87c);
@@ -1715,7 +1715,7 @@ LAB_00079378:
             while (bindingScan = bindingNode, bindingRecord == recordIndex) {
               bindingNode = (uint *)bindingNode[1];
               listEmpty = bindingNode == (uint *)0x0;
-              if (listEmpty) goto LAB_00079448;
+              if (listEmpty) goto storeBindingHeadCursor;
               bindingRecord = *bindingNode;
             }
             while (bindingPrev = bindingScan, bindingScan = (uint *)bindingPrev[1], bindingScan != (uint *)0x0) {
@@ -1725,7 +1725,7 @@ LAB_00079378:
               }
             }
           }
-LAB_00079448:
+storeBindingHeadCursor:
           *bindingHeadCursor = bindingNode;
           if (listEmpty) {
             *(byte *)(registerKey + alloc + 0x3087c) =
@@ -1754,7 +1754,7 @@ LAB_00079448:
             seenSlot = seenValueIds + loopCounter;
             seenCountdown = seenCountdown + -1;
             if (seenCountdown == 0) {
-              if (*seenSlot != candidateValueId) goto LAB_00079508;
+              if (*seenSlot != candidateValueId) goto storeSeenValueIds;
               break;
             }
             loopCounter = loopCounter + 1;
@@ -1762,7 +1762,7 @@ LAB_00079448:
         }
         else {
           candidateValueId = *valueIdCursor;
-LAB_00079508:
+storeSeenValueIds:
           seenValueIds[seenCount] = candidateValueId;
           haveValueIds = 0 < seenCount + 1;
           seenCount = seenCount + 1;
@@ -1914,7 +1914,7 @@ LAB_00079508:
       }
     }
   }
-LAB_000798a8:
+setLastSource:
   lastSource = sourceIndex == 2;
   sourceWordPtrs = sourceWordPtrs + 1;
   sourceListHead = sourceListHead + 1;
@@ -1922,7 +1922,7 @@ LAB_000798a8:
   if (lastSource) {
     return 0;
   }
-  goto LAB_00079150;
+  goto loopCheckUsedSourceMask;
 }
 
 /* recordSetWriteMask @ 0x798f0 (28 bytes) */
@@ -2093,42 +2093,42 @@ int recordLinkSourceToDefinition(alloc, records, recordsCopy, dependent, recordI
       defFile = *defRecord >> 8 & 0xf;
       if (sourceFile == 1) {
         fileMatches = defFile == 5;
-LAB_00079cd0:
+loopCheckFileMatches:
         if (((!fileMatches) || ((*defRecord >> 0xd & 0x7f) != (*sourcePtr >> 5 & 0xff))) ||
-           (writesComponent = ((int (*)())recordGetWriteEnable)(defRecord,sourceSelect), writesComponent == 0)) goto LAB_00079dc0;
+           (writesComponent = ((int (*)())recordGetWriteEnable)(defRecord,sourceSelect), writesComponent == 0)) goto setLinked2;
         if ((char)*defRecord == 'A') {
           if (((**(uint **)(alloc + 0x34) & 0x280) == 0) || (sourceSelect != 3)) {
-LAB_00079d90:
+loopCallDepListAddEdge:
             ((int (*)())depListAddEdge)(alloc,dependent + 0x418 + (recordIndex * 3 + sourceSlot) * 4,defIndex - loopIndex,
                          1 << (sourceSelect & 0x3f),0,0,dependent);
             linked = true;
           }
           else {
             ((int (*)())recordSetSourceSelect)(sourcePtr,componentSel,5);
-            if (recordsCopy == 0) goto LAB_00079dc8;
-LAB_00079d78:
+            if (recordsCopy == 0) goto setLinked;
+loopSetLinked:
             linked = true;
             *(uint *)(sourceByteOffset + recordsCopy + 4) = *sourcePtr;
           }
         }
         else {
-          if (((char)*defRecord != 'D') || ((sourceSelect != 0 && (sourceSelect != 3)))) goto LAB_00079d90;
+          if (((char)*defRecord != 'D') || ((sourceSelect != 0 && (sourceSelect != 3)))) goto loopCallDepListAddEdge;
           ((int (*)())recordSetSourceSelect)(sourcePtr,componentSel,5);
-          if ((recordsCopy != 0) && ((**(uint **)(alloc + 0x34) & 0x200) != 0)) goto LAB_00079d78;
-LAB_00079dc8:
+          if ((recordsCopy != 0) && ((**(uint **)(alloc + 0x34) & 0x200) != 0)) goto loopSetLinked;
+setLinked:
           linked = true;
         }
       }
       else {
         if (sourceFile == 0) {
           fileMatches = defFile == 0;
-          goto LAB_00079cd0;
+          goto loopCheckFileMatches;
         }
         if (sourceFile == 3) {
           fileMatches = defFile == 4;
-          goto LAB_00079cd0;
+          goto loopCheckFileMatches;
         }
-LAB_00079dc0:
+setLinked2:
         linked = false;
       }
       if (defIndex == loopIndex) {
@@ -2230,16 +2230,16 @@ int recordFindScheduleConflict(alloc, useDistinctCheck)
                 callResultPair = ((int (*)())recordGetWriteMask)(programBase + laterRecordIndex * 0x10);
                 useDistinctCheck = (int)callResultPair;
                 overlaps = true;
-                if (((uint)((ulonglong)callResultPair >> 0x20) & dependencyNode[1]) == 0) goto LAB_00079fc0;
+                if (((uint)((ulonglong)callResultPair >> 0x20) & dependencyNode[1]) == 0) goto setOverlaps;
               }
               else {
-LAB_00079fc0:
+setOverlaps:
                 overlaps = false;
               }
               laterQueueIndex = laterQueueIndex + 1;
               if (queueCount == laterQueueIndex) {
                 if (overlaps) {
-LAB_00079ffc:
+loopCheckLaterRecordIndex:
                   if (laterRecordIndex != dependencyRecord) {
                     conflictFound = true;
                     resultCode = 9;
@@ -2247,7 +2247,7 @@ LAB_00079ffc:
                 }
                 break;
               }
-              if (overlaps) goto LAB_00079ffc;
+              if (overlaps) goto loopCheckLaterRecordIndex;
               laterQueueCursor = laterQueueCursor + 1;
             } while (laterRecordIndex != dependencyRecord);
           }
@@ -2500,24 +2500,24 @@ int recordPlanDestination(ctx, program, laterPass, tempRegLimit, recordIndex, ke
       componentIndexB = 0;
       slotBase = recordIndex * 4 + ctx;
       fixedMask = (uint)*(char *)(ctx + 0x30b9c);
-LAB_0007a7b0:
-      if (((combinedWriteMask & fixedMask & 1 << (componentIndexB & 0x3f)) == 0) || (4 < loopCounterC)) goto LAB_0007aa50;
+loopCheckCombinedWriteMask:
+      if (((combinedWriteMask & fixedMask & 1 << (componentIndexB & 0x3f)) == 0) || (4 < loopCounterC)) goto setLastComponent;
       if (loopCounterC != 4) {
         if ((1 << (loopCounterC & 0x3f) & ~(combinedWriteMask | fixedMask)) == 0) {
           remainingBits = 5 - loopCounterC;
           do {
             loopCounterC = loopCounterC + 1;
             remainingBits = remainingBits + -1;
-            if (remainingBits == 0) goto LAB_0007aa50;
-            if (loopCounterC == 4) goto LAB_0007a7e8;
+            if (remainingBits == 0) goto setLastComponent;
+            if (loopCounterC == 4) goto setCombinedSwizzledMask;
           } while ((1 << (loopCounterC & 0x3f) & ~(combinedWriteMask | fixedMask)) == 0);
         }
         swizzleShiftBits = loopCounterC << (componentIndexB << 2 & 0x3c);
         loopCounterC = loopCounterC + 1;
         swizzleWord = (undefined *)((uint)swizzleWord & ~(0xf << (componentIndexB << 2 & 0x3c)) | swizzleShiftBits);
-        goto LAB_0007aa50;
+        goto setLastComponent;
       }
-LAB_0007a7e8:
+setCombinedSwizzledMask:
       combinedSwizzledMask = 0;
       loopCounterB = 0;
       remaining = 4;
@@ -2540,7 +2540,7 @@ LAB_0007a7e8:
       } while (remaining != 0);
       fixedMask = fixedMask & combinedSwizzledMask;
       if (fixedMask == 0) {
-LAB_0007aa5c:
+loopSetChosenSwizzle:
         chosenSwizzle = swizzleWord;
       }
       else {
@@ -2557,7 +2557,7 @@ LAB_0007aa5c:
           fixedHeadCursor = fixedHeadCursor + 1;
           remaining = remaining + -1;
         } while (remaining != 0);
-        if (fixedMask == 0) goto LAB_0007aa5c;
+        if (fixedMask == 0) goto loopSetChosenSwizzle;
         fixedValueIdCursor = (int *)(ctx + 0x30b8c);
         componentIndex = 0;
         do {
@@ -2572,24 +2572,24 @@ LAB_0007aa5c:
                   }
                   listNode = (int *)listNode[4];
                   if (listNode == (int *)0x0) {
-                    if (!matched) goto LAB_0007a948;
+                    if (!matched) goto setMoreComponents;
                     break;
                   }
                 } while (!matched);
-                goto LAB_0007a944;
+                goto setFixedMask;
               }
             }
             else if (recordIndex == *fixedValueIdCursor) {
-LAB_0007a944:
+setFixedMask:
               fixedMask = fixedMask & ~componentBit;
             }
           }
-LAB_0007a948:
+setMoreComponents:
           moreComponents = componentIndex != 3;
           fixedValueIdCursor = fixedValueIdCursor + 1;
           componentIndex = componentIndex + 1;
         } while (moreComponents);
-        if (fixedMask == 0) goto LAB_0007aa5c;
+        if (fixedMask == 0) goto loopSetChosenSwizzle;
         fixedValueIdCursor = (int *)(ctx + 0x30b8c);
         componentIndex = 0;
         do {
@@ -2602,28 +2602,28 @@ LAB_0007a948:
               }
               listNode = (int *)listNode[4];
               if (listNode == (int *)0x0) {
-                if (!matched) goto LAB_0007a9d4;
+                if (!matched) goto setMoreComponents2;
                 break;
               }
             } while (!matched);
             fixedMask = fixedMask & ~componentBit;
           }
-LAB_0007a9d4:
+setMoreComponents2:
           moreComponents = componentIndex != 3;
           fixedValueIdCursor = fixedValueIdCursor + 1;
           componentIndex = componentIndex + 1;
         } while (moreComponents);
         chosenSwizzle = (undefined *)0xffffffff;
-        if (fixedMask == 0) goto LAB_0007aa5c;
+        if (fixedMask == 0) goto loopSetChosenSwizzle;
       }
       *chosenRegOut = (uint)chosenSwizzle;
       if (chosenSwizzle != (undefined *)0xffffffff) {
-        if (chosenSwizzle == ((unsigned char *)0x00003210U)) goto LAB_0007a680;
-        goto LAB_0007aa80;
+        if (chosenSwizzle == ((unsigned char *)0x00003210U)) goto loopSetResult;
+        goto setResult2;
       }
-      goto LAB_0007aa90;
+      goto setResult;
     }
-LAB_0007a680:
+loopSetResult:
     result = 1;
   }
   else {
@@ -2640,7 +2640,7 @@ LAB_0007a680:
          (otherRecordIndex = otherRecordIndex * 4 + ctx, (*(uint *)(otherRecordIndex + 0x3348c) & 0x40000) != 0)) {
         for (listNode = *(int **)(otherRecordIndex + 0xa450); listNode != (int *)0x0; listNode = (int *)listNode[4]) {
           if (((recordIndex != *listNode) && ((otherWriteMask & writeMask & listNode[1]) != 0)) &&
-             ((*(uint *)(*listNode * 4 + ctx + 0x3348c) & 0x40000) == 0)) goto LAB_0007aa90;
+             ((*(uint *)(*listNode * 4 + ctx + 0x3348c) & 0x40000) == 0)) goto setResult;
         }
       }
     }
@@ -2648,16 +2648,16 @@ LAB_0007a680:
     callResult = ((int (*)())recordDestFileIs0)(record);
     if (callResult == 0) {
       recordWord0 = *record;
-LAB_0007a634:
+loopSetRegFileBase:
       regFileBase = (DAT_001aa758)[recordWord0 >> 8 & 0xf];
       destWriteMask = ((int (*)())recordGetWriteMask)(record);
       callResult = ((int (*)())recordRegisterIsAssignable)(ctx,program,regFileBase * 0x100 + (recordWord0 >> 0xd & 0x7f),result,recordIndex,
                            destWriteMask);
-      if (callResult == 0) goto LAB_0007a680;
+      if (callResult == 0) goto loopSetResult;
     }
     else {
       recordWord0 = *record;
-      if ((recordWord0 >> 0xd & 0x7f) < tempRegLimit) goto LAB_0007a634;
+      if ((recordWord0 >> 0xd & 0x7f) < tempRegLimit) goto loopSetRegFileBase;
     }
     callResult = ((int (*)())recordDestFileIs0)(record);
     if (callResult == 0) {
@@ -2676,30 +2676,30 @@ LAB_0007a634:
         loopCounter = 0;
         do {
           callResult = ((int (*)())recordRegisterIsAssignable)(ctx,program,loopCounter,result,recordIndex,destWriteMask);
-          if (callResult == 0) goto LAB_0007a6e4;
+          if (callResult == 0) goto storeChosenRegOut;
           loopCounter = loopCounter + 1;
         } while (tempRegLimit != loopCounter);
       }
       loopCounter = 0xffffffff;
-LAB_0007a6e4:
+storeChosenRegOut:
       *chosenRegOut = loopCounter;
     }
     if ((int)*chosenRegOut < 0) {
-LAB_0007aa90:
+setResult:
       result = 0;
     }
     else {
-LAB_0007aa80:
+setResult2:
       result = 1;
       *keepFlagOut = 1;
     }
   }
   return result;
-LAB_0007aa50:
+setLastComponent:
   lastComponent = componentIndexB == 3;
   componentIndexB = componentIndexB + 1;
-  if (lastComponent) goto LAB_0007aa5c;
-  goto LAB_0007a7b0;
+  if (lastComponent) goto loopSetChosenSwizzle;
+  goto loopCheckCombinedWriteMask;
 }
 
 /* recordPickNextToEmit @ 0x7aae0 (1460 bytes) */
@@ -3222,12 +3222,12 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
       lastChainNodeB = configBit6Arg;
       for (chainCursor = *(code **)(configBit6Arg + 0x10); chainNodeLast != chainCursor;
           chainCursor = *(code **)(chainCursor + 0x10)) {
-        if (chainCursor == (code *)0x0) goto LAB_0007b378;
+        if (chainCursor == (code *)0x0) goto setLiveCountSnapshot;
         lastChainNodeB = chainCursor;
       }
     }
   }
-LAB_0007b378:
+setLiveCountSnapshot:
   liveCountSnapshot = *(uint *)(alloc + 0x26870);
   hasLiveRecords = liveCountSnapshot != 0;
   if (hasLiveRecords) {
@@ -3387,14 +3387,14 @@ LAB_0007b378:
         scratchArg6 = records;
         recordCount = ((int (*)())recordPickNextToEmit)(alloc,registerBudget,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,configFlagsB);
         noCandidate = recordCount < 0;
-        if (!noCandidate) goto LAB_0007b894;
+        if (!noCandidate) goto setLoopIndex;
         configFlagsB = **(uint **)(alloc + 0x34);
       }
       if (noCandidate) {
         return 3;
       }
     }
-LAB_0007b894:
+setLoopIndex:
     loopIndex = 0;
     scratchArg3 = (code *)pickScratch;
     recordPtrB = records + recordCount * 0x10;
@@ -3469,7 +3469,7 @@ LAB_0007b894:
                   bindingChainHead = (int *)*bindingListSlot;
                   do {
                     lastChainNode = bindingChainHead;
-                    if (*lastChainNode == *chainSource) goto LAB_0007bdf0;
+                    if (*lastChainNode == *chainSource) goto setChainSource;
                     bindingChainHead = (int *)lastChainNode[1];
                   } while ((int *)lastChainNode[1] != (int *)0x0);
                   newChainNode = (int *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
@@ -3495,7 +3495,7 @@ LAB_0007b894:
                   haveChainHead = true;
                 }
               }
-LAB_0007bdf0:
+setChainSource:
               chainSource = (int *)chainSource[4];
             } while (chainSource != (int *)0x0);
           }
@@ -3580,7 +3580,7 @@ LAB_0007bdf0:
                 bindingChainHead = (int *)*bindingListSlot;
                 do {
                   lastChainNode = bindingChainHead;
-                  if (*lastChainNode == *chainSource) goto LAB_0007bc50;
+                  if (*lastChainNode == *chainSource) goto setChainSource2;
                   bindingChainHead = (int *)lastChainNode[1];
                 } while ((int *)lastChainNode[1] != (int *)0x0);
                 newChainNode = (int *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
@@ -3606,7 +3606,7 @@ LAB_0007bdf0:
                 haveChainHead = true;
               }
             }
-LAB_0007bc50:
+setChainSource2:
             chainSource = (int *)chainSource[4];
           } while (chainSource != (int *)0x0);
         }
@@ -3746,7 +3746,7 @@ LAB_0007bc50:
       outRecordPtr = (uint *)(outRecordCount * 0x10 + *(int *)(config + 0x18));
       emitRecord = records + *(int *)(allocPlus30000 + -0x7788) * 0x10;
       if ((*(uint *)(recordFlagOffset + alloc + 0x3348c) & 0x100) == 0) {
-LAB_0007c4b0:
+loopSetHasFile1SourceFirst:
         hasFile1SourceFirst = 0;
         sourceUsedMask = *(uint *)(recordFlagOffset + allocPlus38 + 0x6418);
         sourceLoop = 0;
@@ -3780,7 +3780,7 @@ LAB_0007c4b0:
         if ((((2 < (int)recordAFileCount0 + (int)recordBFileCount0) || (1 < (int)recordAFileCount1 + (int)recordBFileCount1)) ||
             (1 < (int)recordAFileCount2 + (int)recordBFileCount2)) ||
            ((1 < (int)recordAFileCount3 + (int)recordBFileCount3 || ((*(uint *)combinedRecord & 0xf00) == 0x400))))
-        goto LAB_0007c4b0;
+        goto loopSetHasFile1SourceFirst;
         word3Before = *(uint *)(combinedRecord + 0xc);
         destModeBits = (*(uint *)partnerRecord & 0x6000) << 6;
         *(uint *)(combinedRecord + 0xc) = destModeBits | word3Before & 0xffe7ffff;
@@ -3869,10 +3869,10 @@ LAB_0007c4b0:
             sourceLoop = sourceLoop + 1;
           } while (moreSourceSlots);
           hasFile1SourceFirst = 0;
-          if (hasFile1SourceSecond != 0) goto LAB_0007c484;
+          if (hasFile1SourceSecond != 0) goto setHasFile1SourceFirst;
         }
         else {
-LAB_0007c484:
+setHasFile1SourceFirst:
           hasFile1SourceFirst = 1;
         }
         allocPlus30000 = allocPlus30000 + 4;
@@ -4315,7 +4315,7 @@ int recordProgramBuildDependencies(alloc)
     do {
       lastRecordIndex = lastRecordIndex + -1;
       if (noOutputRecords) {
-LAB_0007cc7c:
+loopSetConfigFlagsPtr:
         configFlagsPtr = (uint *)alloc[0xd];
       }
       else {
@@ -4331,7 +4331,7 @@ LAB_0007cc7c:
             outRecordCopyPtr = outRecordCopyPtr + 1;
             remainingC = remainingC + -1;
           } while (remainingC != 0);
-          goto LAB_0007cc7c;
+          goto loopSetConfigFlagsPtr;
         }
       }
       wordIndex = 0;
@@ -4345,7 +4345,7 @@ LAB_0007cc7c:
       srcWordPtrTableTail.current_version = (dword)(records + recordWordOffset);
       recordWriteMask = (dword *)((int (*)())recordGetWriteMask)(record);
       if (recordWriteMask == (dword *)0x0) {
-LAB_0007ceb8:
+loopSetRecordIsSpecialWrite:
         recordIsSpecialWrite = 0;
       }
       else {
@@ -4377,13 +4377,13 @@ LAB_0007ceb8:
             if (edgeStatus != 0) {
               return edgeStatus;
             }
-LAB_0007ceb4:
+loopSetConfigFlagsPtr2:
             configFlagsPtr = (uint *)alloc[0xd];
           }
-          goto LAB_0007ceb8;
+          goto loopSetRecordIsSpecialWrite;
         }
         scratchArg8 = (dword *)*record;
-        if (1 < ((uint)scratchArg8 >> 8 & 0xf) - 2) goto LAB_0007ceb8;
+        if (1 < ((uint)scratchArg8 >> 8 & 0xf) - 2) goto loopSetRecordIsSpecialWrite;
         for (scratchArg6 = (int *)alloc[0x4114]; scratchArg6 != (int *)0x0; scratchArg6 = (int *)scratchArg6[4]) {
           recordCopyWord = records[*scratchArg6 * 4];
           if (((uint)scratchArg8 & 0xfe000) == (recordCopyWord & 0xfe000)) {
@@ -4411,7 +4411,7 @@ LAB_0007ceb4:
         if (edgeStatus != 0) {
           return edgeStatus;
         }
-        if ((*record & 0xf00) != 0x300) goto LAB_0007ceb4;
+        if ((*record & 0xf00) != 0x300) goto loopSetConfigFlagsPtr2;
         configFlagsPtr = (uint *)alloc[0xd];
         recordIsSpecialWrite = 1;
       }
@@ -4531,7 +4531,7 @@ LAB_0007ceb4:
           }
           **(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase) =
                srcFileDefault | **(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase) & 0xfffffff0;
-          goto LAB_0007da08;
+          goto setMoreSources;
         }
         configFlagsPtrB = (uint *)alloc[0xd];
         sourceWordValue = **(uint **)((int)sourceSlotOffset + (int)srcWordPtrFrameBase);
@@ -4561,13 +4561,13 @@ LAB_0007ceb4:
                 callResultPair = ((int (*)())recordDestFileIs3Or1)(&recordCopyWord,*configFlagsPtrB >> 6 & 1);
                 scratchArg2 = (uint *)callResultPair;
                 if ((int)((ulonglong)callResultPair >> 0x20) == 0) {
-LAB_0007d968:
+loopSetSourceIsRegisterFile:
                   sourceIsRegisterFile = false;
                 }
                 else {
                   callResultPair = ((int (*)())recordGetWriteEnable)(&recordCopyWord,srcSelectBits);
                   scratchArg2 = (uint *)callResultPair;
-                  if ((int)((ulonglong)callResultPair >> 0x20) == 0) goto LAB_0007d968;
+                  if ((int)((ulonglong)callResultPair >> 0x20) == 0) goto loopSetSourceIsRegisterFile;
                   scratchArg3 = (dword *)(lastRecordIndex + -(int)scanPtr);
                   in_r6 = (dword *)(1 << (srcSelectBits & 0x3f));
                   ((int (*)())depListAddEdge)(alloc,dependentsBase,scratchArg3,in_r6,0,0,arena);
@@ -4679,7 +4679,7 @@ LAB_0007d968:
           do {
             if (sourceSlot == 0) {
               if (componentIndex - 1U < 2) {
-LAB_0007d6c4:
+loopSetCallResultPair:
                 callResultPair = ((int (*)())recordGetWriteEnable)(record,componentIndex);
                 scratchArg2 = (uint *)callResultPair;
                 if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
@@ -4690,7 +4690,7 @@ LAB_0007d6c4:
                 }
               }
             }
-            else if ((sourceSlot == 1) && ((componentIndex == 1 || (componentIndex == 3)))) goto LAB_0007d6c4;
+            else if ((sourceSlot == 1) && ((componentIndex == 1 || (componentIndex == 3)))) goto loopSetCallResultPair;
             moreComponents = componentIndex != 3;
             componentIndex = componentIndex + 1;
           } while (moreComponents);
@@ -4703,11 +4703,11 @@ LAB_0007d6c4:
         case 'L':
         case 'P':
         case 'Q':
-          goto switchD_0007d27c_caseD_41;
+          goto recordCase41;
         case 'C':
         case 'G':
         case 'I':
-          if ((configBit6B & 1) != 0) goto switchD_0007d27c_caseD_41;
+          if ((configBit6B & 1) != 0) goto recordCase41;
           scratchArg3 = outRecordsOut;
           in_r6 = arena;
           ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,0);
@@ -4752,7 +4752,7 @@ LAB_0007d6c4:
               } while (componentIndex == 2);
             } while( true );
           }
-          goto switchD_0007d27c_caseD_41;
+          goto recordCase41;
         case 'E':
         case 'M':
         case 'N':
@@ -4775,14 +4775,14 @@ LAB_0007d6c4:
               } while (((componentIndex == 1) && ((char)*record != '\r')) && ((char)*record != '\x0e'));
             } while( true );
           }
-switchD_0007d27c_caseD_41:
+recordCase41:
           scratchArg3 = outRecordsOut;
           in_r6 = arena;
           ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,3);
           scratchArg2 = extraout_r4_06;
           break;
         case 'J':
-          if ((configBit6B & 1) != 0) goto switchD_0007d27c_caseD_41;
+          if ((configBit6B & 1) != 0) goto recordCase41;
           componentIndex = 0;
           do {
             scratchArg3 = outRecordsOut;
@@ -4806,7 +4806,7 @@ switchD_0007d27c_caseD_0:
             return componentIndex;
           }
         }
-LAB_0007da08:
+setMoreSources:
         moreSources = sourceSlot != 2;
         perSourceOffset = perSourceOffset + 4;
         sourceSlot = sourceSlot + 1;
@@ -4951,7 +4951,7 @@ int ctxTempListRemove(ctx, value)
   
   holder = *(int *)(((unsigned char *)0x000011b4) + ctx);
   if ((holder == 0) || (node = *(int **)(holder + 8), node == (int *)0x0)) {
-LAB_0007ddc0:
+loopSetFound:
     found = 0;
   }
   else {
@@ -4962,7 +4962,7 @@ LAB_0007ddc0:
       do {
         prev = node;
         node = (int *)prev[1];
-        if (node == (int *)0x0) goto LAB_0007ddc0;
+        if (node == (int *)0x0) goto loopSetFound;
       } while (value != *node);
       prev[1] = node[1];
     }
@@ -5078,7 +5078,7 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   if (instructionCount != 0) {
     instructionIndex = 0;
     selectorEnumerant = 0x87df;
-LAB_0007de3c:
+loopSetInstructions:
     instructions = *(int *)(shaderProgram + 0x18);
     currentInstruction = instructionIndex * 0x74 + instructions;
     if ((((((*(int *)(instructionIndex * 0x74 + instructions) == 0x8799) && (*(int *)(currentInstruction + 0x20) == 2)) &&
@@ -5190,7 +5190,7 @@ LAB_0007de3c:
                   foundLaterMov = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
-                goto LAB_0007e2bc;
+                goto setScanIndex;
               }
               instructionCount = *(uint *)(shaderProgram + 0x14);
             }
@@ -5199,16 +5199,16 @@ LAB_0007de3c:
           else {
             foundLaterMov = false;
           }
-LAB_0007e2bc:
+setScanIndex:
           scanIndex = scanIndex + 1;
-          if ((instructionCount <= scanIndex) || (symbol = symbol + 0x74, foundLaterMov)) goto LAB_0007e2d4;
+          if ((instructionCount <= scanIndex) || (symbol = symbol + 0x74, foundLaterMov)) goto checkAllLanesPass;
           instructions = *(int *)(shaderProgram + 0x18);
         } while( true );
       }
     }
-    goto LAB_0007e2e0;
+    goto setInstructionIndex;
   }
-LAB_0007e330:
+loopSetInstructionIndex:
   instructionIndex = 0;
   do {
     changedThisPass = false;
@@ -5246,12 +5246,12 @@ LAB_0007e330:
                 laneW = laneW | *(byte *)((int)laterSlotCursor + -5);
                 if ((laneX != 0) && ((laneY != 0 && (laneZ != 0)))) {
                   readerScanStop = laneW != 0;
-                  goto LAB_0007e530;
+                  goto setSymbol;
                 }
               }
               readerScanStop = false;
             }
-LAB_0007e530:
+setSymbol:
             symbol = symbol + -1;
           } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !readerScanStop));
           if (!srcDeadAfterMov) goto LAB_0007e760;
@@ -5387,7 +5387,7 @@ LAB_0007e760: ;
               }
               scanIndex = scanIndex + 1;
             } while ((scanIndex < instructionCount) && (!redefinesDest));
-            if (!noRedefinitionConflict) goto LAB_00080860;
+            if (!noRedefinitionConflict) goto setInstIndex;
           }
           readersSatisfied = true;
           instructions = currentInstruction + scanIndex * 0x74;
@@ -5429,7 +5429,7 @@ LAB_0007e760: ;
               if (instructionCount <= scanIndex) break;
               currentInstruction = *(int *)(shaderProgram + 0x18);
             }
-            if (!readersSatisfied) goto LAB_00080860;
+            if (!readersSatisfied) goto setInstIndex;
           }
           if (writeEnableX < instructionIndex) {
             currentInstruction = writeEnableX * 0x74;
@@ -7078,7 +7078,7 @@ code_r0x000807a8:
           }
           changedThisPass = true;
         }
-LAB_00080860:
+setInstIndex:
         instIndex = instIndex + 1;
       } while (instIndex < instructionCount);
     }
@@ -8859,7 +8859,7 @@ code_r0x0008286c:
       }
     }
   } while( true );
-LAB_0007e2d4:
+checkAllLanesPass:
   if (allLanesPass) {
     if (instIndex < instructionCount) {
       do {
@@ -8875,10 +8875,10 @@ LAB_0007e2d4:
     instructionCount = instructionCount - 1;
     *(uint *)(shaderProgram + 0x14) = instructionCount;
   }
-LAB_0007e2e0:
+setInstructionIndex:
   instructionIndex = instructionIndex + 1;
-  if (instructionCount <= instructionIndex) goto LAB_0007e330;
-  goto LAB_0007de3c;
+  if (instructionCount <= instructionIndex) goto loopSetInstructionIndex;
+  goto loopSetInstructions;
 }
 
 /* gldAllocAndUploadConstants @ 0x82900 (812 bytes) */
@@ -8920,7 +8920,7 @@ int gldAllocAndUploadConstants(glContext, program)
   }
   ctxFlags = *(uint *)(glContext + 0x8c);
   if ((ctxFlags & 0x40000) == 0) {
-LAB_00082b00:
+loopSetOldBase:
     oldBase = *(uint *)(glContext + 0x3cc);
     reg1b90Old = *(uint *)(glContext + 0x1b90);
     oldOffset = *(undefined4 *)(glContext + 0x3d0);
@@ -8963,7 +8963,7 @@ LAB_00082b00:
   availableConsts = 0;
   availableCount = 0;
   do {
-    if (allocMode == 1) goto LAB_000829a0;
+    if (allocMode == 1) goto setLimitRaw;
     if (allocMode == 0) {
       availableCount = (uint)(*(ushort *)(((unsigned char *)0x000013be) + glContext) >> 1);
       newBase = *(uint *)(constBlock + 0x3e4) >> 1;
@@ -9011,12 +9011,12 @@ LAB_000829e0:
           if (*(int *)(glContext + 0xd8) == 0) {
             *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) & 0xfffbffff;
           }
-          goto LAB_00082b00;
+          goto loopSetOldBase;
         }
         if (allocMode != 0) break;
         allocMode = 1;
         *(undefined4 *)(glContext + 0xd8) = 1;
-LAB_000829a0:
+setLimitRaw:
         limitRaw = *(int *)(constBlock + 0x3e4);
         availableCount = (uint)*(ushort *)(((unsigned char *)0x000013be) + glContext);
         ctxFlags = ctxFlags | 0x10000;

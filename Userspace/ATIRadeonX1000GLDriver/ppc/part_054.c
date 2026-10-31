@@ -15,7 +15,7 @@ int R520MachineAssembler__terminateOpenBranches(this)
     pendingCount = *(uint *)(stackVector + 4);
     if (pendingCount == 0) {
       previousTarget = -1;
-LAB_001a1430:
+loopStoreThis:
       *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
       *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0xff;
       *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x10) = 1;
@@ -35,7 +35,7 @@ LAB_001a1430:
     if ((*(char *)(branchRecord + 0xe) == '\x03') || (*(char *)(branchRecord + 0xe) == '\x01')) {
       previousTarget = *(short *)(branchRecord + 0xc);
       *(short *)(branchRecord + 0xc) = (short)this[0x18] - (short)this[0x1d];
-      goto LAB_001a1430;
+      goto loopStoreThis;
     }
     *(short *)(branchRecord + 0xc) = (short)this[0x18] - (short)this[0x1d];
   } while( true );
@@ -120,12 +120,12 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
       loopCount = prevLoopCount + 1;
       *(int *)(this[4] + 0x1c) = *(int *)(this[4] + 0x1c) + 1;
       recordTable = this[0x2a];
-      goto LAB_001a168c;
+      goto setLoopStartOffset;
     }
   }
   loopCount = 1;
   this[0x2f] = 0;
-LAB_001a168c:
+setLoopStartOffset:
   loopStartOffset = loopStartRecord * 0x48;
   *(short *)(recordTable + loopStartOffset + 0xc) = (short)this[0x18] - (short)this[0x1d];
   loopRemaining = this[0x2f];
@@ -447,13 +447,13 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
     if (textureTargetKind < 3) {
       formatCode = 0xe;
       if (textureTargetKind != 1) {
-LAB_001a1f84:
+loopSetFormatCode:
         formatCode = 0;
       }
     }
     else {
       formatCode = 8;
-      if (4 < textureTargetKind) goto LAB_001a1f84;
+      if (4 < textureTargetKind) goto loopSetFormatCode;
     }
   }
   isFlag138One = *(int *)(inst + 0x138) == 1;
@@ -464,28 +464,28 @@ LAB_001a1f84:
     *(undefined4 *)(inst + 0x9c) = destSelectOut;
     operandRecord = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord + 0x10) = 0x10203;
-    goto LAB_001a20d4;
+    goto setOperandRecord;
   }
   if ((loopRemaining - 0x75U < 2) || (loopRemaining == 0xae)) {
     *(byte *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = formatCode & 7;
     *(bool *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = isFlag138One;
     recordPtr = this[0x18] * 0x48 + this[0x2a];
-    if ((*(uint *)(inst + 0x14) & 0x2000) == 0) goto LAB_001a20b4;
-LAB_001a20cc:
+    if ((*(uint *)(inst + 0x14) & 0x2000) == 0) goto setOptionEnabled;
+loopSetFlag1c:
     flag1c = 0;
   }
   else {
     *(byte *)(this[0x18] * 0x48 + this[0x2a] + 0x1f) = formatCode;
     *(bool *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = isFlag138One;
     recordPtr = this[0x18] * 0x48 + this[0x2a];
-    if ((*(uint *)(inst + 0x14) & 0x2000) != 0) goto LAB_001a20cc;
-LAB_001a20b4:
+    if ((*(uint *)(inst + 0x14) & 0x2000) != 0) goto loopSetFlag1c;
+setOptionEnabled:
     optionEnabled = Compiler__isOptionEnabled(compiler,0x22);
     flag1c = 1;
-    if (optionEnabled == 0) goto LAB_001a20cc;
+    if (optionEnabled == 0) goto loopSetFlag1c;
   }
   *(undefined1 *)(recordPtr + 0x1c) = flag1c;
-LAB_001a20d4:
+setOperandRecord:
   operandRecord = IRInst__getOperandRecord(inst,1);
   SelectWord__canonicalize(&srcSelectScratch,*(undefined4 *)(operandRecord + 0x10));
   recordPtr = this[0x18] * 0x48 + this[0x2a];
@@ -642,21 +642,21 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
     break;
   case 2:
     modifierWordToInvert = *(uint *)(inst + 0xb8);
-    goto LAB_001a2784;
+    goto setCompareCode;
   case 3:
     modifierWordToInvert = *(uint *)(inst + 0xd0);
-    goto LAB_001a27a4;
+    goto setCompareCode2;
   case 4:
     modifierWordToInvert = *(uint *)(inst + 0xd0);
     operandRecord2 = operandRecord1;
-LAB_001a2784:
+setCompareCode:
     compareCode = 1;
     IROperand__setModifierBits(operandRecord2,1,modifierWordToInvert & 1 ^ 1);
     break;
   case 5:
     modifierWordToInvert = *(uint *)(inst + 0xb8);
     operandRecord1 = operandRecord2;
-LAB_001a27a4:
+setCompareCode2:
     compareCode = 2;
     IROperand__setModifierBits(operandRecord1,1,modifierWordToInvert & 1 ^ 1);
   }
@@ -920,10 +920,10 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
       conditionNode = *(int **)(*(int *)(loopBlock + 0xd0) + 8);
     }
     hasCondition = 0;
-    if (*conditionNode == *(int *)(node + 0x13c)) goto LAB_001a2fe8;
+    if (*conditionNode == *(int *)(node + 0x13c)) goto returnR520MachineAssembler__appendLoopRecord;
   }
   hasCondition = 1;
-LAB_001a2fe8:
+returnR520MachineAssembler__appendLoopRecord:
   return ((int (*)())R520MachineAssembler__appendLoopRecord)(this,hasCondition);
 }
 

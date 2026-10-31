@@ -98,12 +98,12 @@ int R300MachineAssembler__rgbSelectForLiteralFloat(this, sourceIndex, selectOut,
   loopRemaining = 4;
   do {
     laneSelector = (uint)*(byte *)((int)swizzleWord + loopIndex);
-    if (laneSelector < 4) goto LAB_00197e50;
+    if (laneSelector < 4) goto setLiteralValue;
     loopIndex = loopIndex + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
   laneSelector = 0;
-LAB_00197e50:
+setLiteralValue:
   literalValue = *(float *)(laneSelector * 0x18 + operandVReg + 0x20);
   if (literalValue == FLOAT_001aa0d4) {
     *(undefined4 *)(sourceIndex * 4 + selectOut) = 0x14;
@@ -139,12 +139,12 @@ int R300MachineAssembler__alphaSelectForLiteralFloat(this, sourceIndex, selectOu
   loopRemaining = 4;
   do {
     laneSelector = (uint)*(byte *)((int)swizzleWord + loopIndex);
-    if (laneSelector < 4) goto LAB_00197f38;
+    if (laneSelector < 4) goto setLiteralValue;
     loopIndex = loopIndex + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
   laneSelector = 0;
-LAB_00197f38:
+setLiteralValue:
   literalValue = *(float *)(laneSelector * 0x18 + operandVReg + 0x20);
   if (literalValue == FLOAT_001aa0d4) {
     *(undefined4 *)(sourceIndex * 4 + selectOut) = 0x10;
@@ -369,7 +369,7 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   classifyAlphaCopy = classifyWritesAlpha;
   if (irOpcode == 0xb4) {
     sourceCount = 3;
-LAB_00198290:
+loopSetSrcIdx:
     srcIdx = (int *)((int)((unsigned char *)0x0) + 1);
     irInstWords = irInst + 0x26;
     writesRgb = classifyWritesRgb != 0;
@@ -420,7 +420,7 @@ LAB_00198290:
           /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
            * disassembly): stock passes srcIdx and loopPtr2 (the value just computed above) too. */
           sourceRegister = (**(code **)(*this + 0x158))(this,irInst,srcIdx,stagedArg3);
-LAB_0019852c:
+loopSetIsThirdSource:
           isThirdSource = srcIdx == (int *)((int)((unsigned char *)0x0) + 3);
           crFlagsByte = (byte)((uint)crFlagsWord >> 0x18);
           if ((isThirdSource) && (!(bool)(crFlagsByte >> 5 & 1))) {
@@ -429,7 +429,7 @@ LAB_0019852c:
           if (writesRgb) {
             laneEnable = rgbLaneEnables;
             if (isThirdSource) {
-              if (!(bool)(crFlagsByte >> 5 & 1)) goto LAB_00199cdc;
+              if (!(bool)(crFlagsByte >> 5 & 1)) goto checkWritesAlpha;
               if (classifyFlagBit2 != 0) {
                 laneEnable = srcpEnablesAlpha;
               }
@@ -459,7 +459,7 @@ LAB_0019852c:
                     usedMaskOld = this[0x20];
                     *slotWordPtr = sourceRegister;
                     this[0x20] = 1 << (slotIndex & 0x3f) | usedMaskOld;
-                    goto LAB_00199c88;
+                    goto setSelectMethod;
                   }
                   moreSlots = slotIndex != 3;
                   slotWordPtr = slotWordPtr + 1;
@@ -467,7 +467,7 @@ LAB_0019852c:
                   slotIndex = slotIndex + 1;
                 } while (moreSlots);
                 stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
-LAB_00199c88:
+setSelectMethod:
                 selectMethod = *(code **)(*this + 0xf8);
                 goto joined_r0x00199c90;
               }
@@ -494,7 +494,7 @@ LAB_00199c88:
                     usedMaskOld = this[0x21];
                     *slotWordPtr = sourceRegister;
                     this[0x21] = 1 << (slotIndex & 0x3f) | usedMaskOld;
-                    goto LAB_00199b44;
+                    goto setSelectMethod2;
                   }
                   moreSlots = slotIndex != 3;
                   slotWordPtr = slotWordPtr + 1;
@@ -502,7 +502,7 @@ LAB_00199c88:
                   slotIndex = slotIndex + 1;
                 } while (moreSlots);
                 stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
-LAB_00199b44:
+setSelectMethod2:
                 selectMethod = *(code **)(*this + 0xf4);
               }
               else {
@@ -572,7 +572,7 @@ joined_r0x00199c90:
               alphaHardwareOpcodeOut = swizzle;
             }
           }
-LAB_00199cdc:
+checkWritesAlpha:
           if (writesAlpha) {
             operandRecordTmp = IRInst__getOperandRecord(irInst,srcIdx);
             swizzle2 = *(int **)(operandRecordTmp + 0x10);
@@ -604,7 +604,7 @@ LAB_00199cdc:
                   usedMaskOld = this[0x21];
                   *slotWordPtr = sourceRegister;
                   this[0x21] = 1 << (slotIndex & 0x3f) | usedMaskOld;
-                  goto LAB_00199e60;
+                  goto setSelectSrcIdx;
                 }
                 moreSlots = slotIndex != 3;
                 slotWordPtr = slotWordPtr + 1;
@@ -612,7 +612,7 @@ LAB_00199cdc:
                 slotIndex = slotIndex + 1;
               } while (moreSlots);
               stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
-LAB_00199e60:
+setSelectSrcIdx:
               selectSrcIdx = srcIdx;
               if (isThirdSource) {
                 if ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1)) {
@@ -649,7 +649,7 @@ LAB_00199e60:
                   usedMaskOld = this[0x20];
                   *slotWordPtr = sourceRegister;
                   this[0x20] = 1 << (slotIndex & 0x3f) | usedMaskOld;
-                  goto LAB_00199fdc;
+                  goto setSelectSrcIdx2;
                 }
                 moreSlots = slotIndex != 3;
                 slotWordPtr = slotWordPtr + 1;
@@ -657,7 +657,7 @@ LAB_00199e60:
                 slotIndex = slotIndex + 1;
               } while (moreSlots);
               stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
-LAB_00199fdc:
+setSelectSrcIdx2:
               selectSrcIdx2 = srcIdx;
               if (isThirdSource) {
                 if ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1)) {
@@ -689,12 +689,12 @@ LAB_00199fdc:
                * disassembly): stock passes irInst and loopPtr2 too. */
               (**(code **)(*this + 0x154))(this,srcIdx,irInst,stagedArg3);
             }
-            goto LAB_0019852c;
+            goto loopSetIsThirdSource;
           }
           vslot50Result = (**(code **)(*sourceInst + 0x50))(sourceInst);
           if (vslot50Result != 0) {
             sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),sourceInst);
-            goto LAB_0019852c;
+            goto loopSetIsThirdSource;
           }
           vslot48Result = (**(code **)(*sourceInst + 0x48))(sourceInst);
           if (vslot48Result != 0) {
@@ -733,7 +733,7 @@ LAB_00199fdc:
                             );
                   alphaSelect[1] = alphaSelect[3];
                 }
-                goto LAB_0019a030;
+                goto checkSourceReplaced;
               }
             }
             else {
@@ -742,10 +742,10 @@ LAB_00199fdc:
               R300MachineAssembler__trackMaxLevelAndAssemble(this,sourceRegister,sourceInst);
               sourceRegister = (**(code **)(*this + 0xe0))(this,sourceRegister);
             }
-            goto LAB_0019852c;
+            goto loopSetIsThirdSource;
           }
           vslot5cResult = (**(code **)(*sourceInst + 0x5c))(sourceInst);
-          if (vslot5cResult == 0) goto LAB_0019852c;
+          if (vslot5cResult == 0) goto loopSetIsThirdSource;
           if ((srcIdx != (int *)((int)((unsigned char *)0x0) + 3)) ||
              ((bool)((byte)((uint)crFlagsWord >> 0x1d) & 1))) {
             if (writesRgb) {
@@ -793,14 +793,14 @@ LAB_00199fdc:
                        stagedArg3,stagedArg4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + srcOpcode * 0x38);
           }
           if (sourceWidth < 2) {
-            if (sourceWidth != 1) goto LAB_0019a030;
+            if (sourceWidth != 1) goto checkSourceReplaced;
             sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1);
             if ((((sourceDef3[0x20] == 0) || (sourceWidth = RegKind__flagBit0(sourceDef3[0x26]), sourceWidth == 0)) ||
                 ((sourceDef3[5] & 2U) != 0)) ||
                (sourceWidth = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), sourceWidth != 0)) {
               sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1);
               vslot50Result = (**(code **)(*sourceDef3 + 0x50))(sourceDef3);
-              if (vslot50Result != 0) goto LAB_001994a8;
+              if (vslot50Result != 0) goto setAllocTable;
               sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,1);
               hwRegister = 0;
               vslot48Result = (**(code **)(*sourceDef3 + 0x48))(sourceDef3);
@@ -813,7 +813,7 @@ LAB_00199fdc:
               }
             }
             else {
-LAB_001994a8:
+setAllocTable:
               allocTable = *(undefined4 *)(this[3] + 0x6c4);
               sourceDef2 = IRInst__getOperandSource(sourceInst,1);
               hwRegister = thunk_FUN_00134de8(allocTable,sourceDef2);
@@ -862,7 +862,7 @@ LAB_001994a8:
                (sourceWidth = (**(code **)(*sourceDef + 0x50))(sourceDef), sourceWidth != 0)) {
               sourceDef = (int *)IRInst__getOperandSource(sourceInst,1);
               sourceWidth = (**(code **)(*sourceDef + 0x50))(sourceDef);
-              if (sourceWidth != 0) goto LAB_00198950;
+              if (sourceWidth != 0) goto setAllocTable2;
               sourceDef = (int *)IRInst__getOperandSource(sourceInst,1);
               hwRegister2 = 0;
               sourceWidth = (**(code **)(*sourceDef + 0x48))(sourceDef);
@@ -875,7 +875,7 @@ LAB_001994a8:
               }
             }
             else {
-LAB_00198950:
+setAllocTable2:
               allocTable = *(undefined4 *)(this[3] + 0x6c4);
               sourceDef2 = IRInst__getOperandSource(sourceInst,1);
               hwRegister2 = thunk_FUN_00134de8(allocTable,sourceDef2);
@@ -886,7 +886,7 @@ LAB_00198950:
                 (sourceWidth = (**(code **)(*sourceDef3 + 0x50))(sourceDef3), sourceWidth != 0)))) {
               sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2);
               vslot50Result = (**(code **)(*sourceDef3 + 0x50))(sourceDef3);
-              if (vslot50Result != 0) goto LAB_00198a1c;
+              if (vslot50Result != 0) goto setAllocTable3;
               sourceDef3 = (int *)IRInst__getOperandSource(sourceInst,2);
               hwRegister3 = 0;
               vslot48Result = (**(code **)(*sourceDef3 + 0x48))(sourceDef3);
@@ -899,13 +899,13 @@ LAB_00198950:
               }
             }
             else {
-LAB_00198a1c:
+setAllocTable3:
               allocTable = *(undefined4 *)(this[3] + 0x6c4);
               sourceDef2 = IRInst__getOperandSource(sourceInst,2);
               hwRegister3 = thunk_FUN_00134de8(allocTable,sourceDef2);
             }
             if (swizzleHighClear) {
-LAB_00198f54:
+loopSetIsOpcode9a:
               isOpcode9a = false;
             }
             else {
@@ -968,17 +968,17 @@ LAB_00198f54:
                         *(int *)(innerSource + 0x94) == *(int *)(this[8] + 0x94))))))))))))) {
                   this[0xe] = hwRegister2;
                   this[0xf] = hwRegister3;
-                  if ((srcOpcode == 0x9a) && (isOpcode9a = true, (irInstWords[8] & 2U) == 0)) goto LAB_00198f58;
+                  if ((srcOpcode == 0x9a) && (isOpcode9a = true, (irInstWords[8] & 2U) == 0)) goto checkMaskByteNonZero;
                 }
-                goto LAB_00198f54;
+                goto loopSetIsOpcode9a;
               }
               isOpcode9a = false;
               this[0xf] = hwRegister2;
               this[0xe] = hwRegister3;
             }
-LAB_00198f58:
+checkMaskByteNonZero:
             if (maskByteNonZero) {
-LAB_0019941c:
+loopSetIsOpcode9aAlpha:
               isOpcode9aAlpha = false;
             }
             else {
@@ -1042,22 +1042,22 @@ LAB_0019941c:
                        *(int *)(innerSource + 0x94) == *(int *)(this[0xb] + 0x94))))))))))) {
                   this[0x12] = hwRegister2;
                   this[0x13] = hwRegister3;
-                  if ((srcOpcode == 0x9a) && (isOpcode9aAlpha = true, (irInstWords[8] & 2U) == 0)) goto LAB_00199420;
+                  if ((srcOpcode == 0x9a) && (isOpcode9aAlpha = true, (irInstWords[8] & 2U) == 0)) goto checkIsOpcode9a;
                 }
-                goto LAB_0019941c;
+                goto loopSetIsOpcode9aAlpha;
               }
               isOpcode9aAlpha = false;
               this[0x13] = hwRegister2;
               this[0x12] = hwRegister3;
             }
-LAB_00199420:
+checkIsOpcode9a:
             if ((isOpcode9a) || (isOpcode9aAlpha)) {
               stagedArg2 = (int *)(irInstWords[8] & 1U ^ 1);
               IROperand__setModifierBits(irInstWords + 3,1,stagedArg2);
             }
           }
         }
-LAB_0019a030:
+checkSourceReplaced:
         if (sourceReplaced != 0) {
           if (writesAlpha) {
             (**(code **)(*this + 0x10c))(this,srcIdx,alphaModAlias,movInst,picTableWord);
@@ -1082,12 +1082,12 @@ LAB_0019a030:
       irInstWords = irInstWords + 6;
     } while ((int)srcIdx <= sourceCount);
   }
-  else if (0 < sourceCount) goto LAB_00198290;
+  else if (0 < sourceCount) goto loopSetSrcIdx;
   (**(code **)(*this + 0x118))(this,this[0x20],this + 0xd,this[0x21],this + 0x11);
   (**(code **)(*this + 0x11c))
             (this,irInst,classifyWritesRgb,rgbSelect,rgbMod,classifyWritesAlpha,alphaSelect,alphaModAlias);
   if (irInst[0x26] == 0x2c) {
-LAB_0019a1f4:
+loopSetSelectMethod:
     selectMethod = *(code **)(*this + 0x124);
   }
   else {
@@ -1097,14 +1097,14 @@ LAB_0019a1f4:
       selectMethod = *(code **)(*this + 0x120);
       allocatedRegister = thunk_FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),irInst);
       (*selectMethod)(this,classifyWritesRgb,classifyWritesAlpha,irInst,allocatedRegister);
-      goto LAB_0019a230;
+      goto checkClassifyRgbCopy;
     }
-    if ((irInst[5] & 2U) != 0) goto LAB_0019a1f4;
-    if ((irInst[5] & 0x80000U) == 0) goto LAB_0019a230;
+    if ((irInst[5] & 2U) != 0) goto loopSetSelectMethod;
+    if ((irInst[5] & 0x80000U) == 0) goto checkClassifyRgbCopy;
     selectMethod = *(code **)(*this + 0x128);
   }
   (*selectMethod)(this,classifyWritesRgb,classifyWritesAlpha,irInst);
-LAB_0019a230:
+checkClassifyRgbCopy:
   if (classifyRgbCopy != 0) {
     (**(code **)(*this + 300))(this,rgbHwOpcode,irOpcode,irInst);
   }
@@ -1841,18 +1841,18 @@ int R300VMachineAssembler__findFoldableMovePair(this, block, groupHead, foldNotN
                 sourceDef = IRInst__getOperandSource(groupCursor,1);
                 src1RegId = *(int *)(sourceDef + 0x94);
                 sourceDef = IRInst__getOperandSource(groupCursor,2);
-                if (src1RegId != *(int *)(sourceDef + 0x94)) goto LAB_0019b168;
+                if (src1RegId != *(int *)(sourceDef + 0x94)) goto setInstFlags;
               }
               instFlags = groupCursor[5];
-              goto LAB_0019b144;
+              goto setGroupCursor;
             }
-LAB_0019b168:
+setInstFlags:
             instFlags = groupCursor[5];
           }
           noMathHazard = false;
         }
       }
-LAB_0019b144:
+setGroupCursor:
       groupCursor = (int *)groupCursor[2];
     } while ((groupCursor != (int *)0x0) && ((instFlags & 4) != 0));
     resultInst = groupHead;
@@ -2265,7 +2265,7 @@ int R300VMachineAssembler__encodeDestinationWord(this, inst, instructionWords)
           instructionWords[2] = instructionWords[2] & 0xfe3fffff | 0x1000000;
         }
         else {
-          if (opcode != 0x28) goto LAB_0019bc7c;
+          if (opcode != 0x28) goto setIsMathInst;
           word1Old2 = instructionWords[1];
           isMathInst = true;
           *(undefined1 *)((int)instructionWords + 3) = 10;
@@ -2274,15 +2274,15 @@ int R300VMachineAssembler__encodeDestinationWord(this, inst, instructionWords)
         }
       }
       else {
-LAB_0019bbfc:
+loopSetIsMathInst:
         isMathInst = false;
         *(undefined1 *)((int)instructionWords + 3) = 7;
         instructionWords[2] = instructionWords[1];
       }
     }
     else {
-      if (opcode == 0x66) goto LAB_0019bbfc;
-      if (opcode != 0xa5) goto LAB_0019bc7c;
+      if (opcode == 0x66) goto loopSetIsMathInst;
+      if (opcode != 0xa5) goto setIsMathInst;
       isMathInst = true;
       *(undefined1 *)((int)instructionWords + 3) = 5;
       instructionWords[3] = instructionWords[2];
@@ -2290,11 +2290,11 @@ LAB_0019bbfc:
   }
   else {
     *(byte *)((int)instructionWords + 3) = (byte)hwOpcode;
-LAB_0019bc7c:
+setIsMathInst:
     isMathInst = true;
   }
   numSources = (**(code **)(*inst + 0x14))(inst);
-  if (numSources != 3) goto LAB_0019bee4;
+  if (numSources != 3) goto setFlagBit2;
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   isMix1 = (**(code **)(*operandVReg + 0x60))(operandVReg);
   if (isMix1 == 0) {
@@ -2350,18 +2350,18 @@ LAB_0019bc7c:
     src3RegClass = *(int *)(src3Def + 0x98);
   }
   if (((((src1RegClass != 0) || (src2RegClass != 0)) || (src3RegClass != 0)) || ((src1Reg == callResult || (callResult == src3RegOffset))))
-     || (src1Reg == src3RegOffset)) goto LAB_0019bee4;
+     || (src1Reg == src3RegOffset)) goto setFlagBit2;
   opcodeByte = 0;
   if (hwOpcode == 4) {
-LAB_0019bed0:
+loopStoreInstructionWords:
     *(undefined1 *)((int)instructionWords + 3) = opcodeByte;
   }
   else if (hwOpcode == 0xb) {
     opcodeByte = 1;
-    goto LAB_0019bed0;
+    goto loopStoreInstructionWords;
   }
   *(byte *)((int)instructionWords + 3) = (byte)*instructionWords | 0x80;
-LAB_0019bee4:
+setFlagBit2:
   flagBit2 = ((int (*)())opcodeInfoIsVsFlagBit2)(*(undefined4 *)(this + 0x88),inst);
   if ((flagBit2 != 0) && (isMathInst)) {
     *(byte *)((int)instructionWords + 3) = (byte)*instructionWords | 0x40;
@@ -2615,7 +2615,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
     srcRegClass = srcDefInst[0x26];
     allocTable = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
     regDefInst = srcDefInst;
-LAB_0019c490:
+loopSetRegisterIndex:
     registerIndex = thunk_FUN_00134de8(allocTable,regDefInst);
     *sourceWord = *(uint *)(&DAT_001b2c14 + srcRegClass * 4) & 7 | *sourceWord & 0xfffffff8;
     if (srcRegClass == 0x37) {
@@ -2634,7 +2634,7 @@ LAB_0019c490:
     if (srcRegClass != 0x33) {
       allocTable = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
       regDefInst = (int *)IRInst__getOperandSource(srcDefInst,1);
-      goto LAB_0019c490;
+      goto loopSetRegisterIndex;
     }
     if (sourceNumber < 2) {
       registerIndex = 0;
@@ -2701,37 +2701,37 @@ LAB_0019c490:
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff;
           *sourceWord = addrSelCleared;
-          goto LAB_0019c710;
+          goto storeSourceWord;
         }
         swizzleMatchResult = SelectWord__areCompatible(constSwizzle,0x1010101);
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff | 0x20000000;
           *sourceWord = addrSelCleared;
-          goto LAB_0019c710;
+          goto storeSourceWord;
         }
         swizzleMatchResult = SelectWord__areCompatible(constSwizzle,0x2020202);
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff | 0x40000000;
           *sourceWord = addrSelCleared;
-          goto LAB_0019c710;
+          goto storeSourceWord;
         }
         swizzleMatchResult = SelectWord__areCompatible(constSwizzle,0x3030303);
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff | 0x60000000;
           *sourceWord = addrSelCleared;
-          goto LAB_0019c710;
+          goto storeSourceWord;
         }
       }
-      goto LAB_0019c70c;
+      goto setAddrSelCleared;
     }
     addrSelCleared = *sourceWord & 0x9fffffff | 0x80000000;
     *sourceWord = addrSelCleared;
   }
   else {
-LAB_0019c70c:
+setAddrSelCleared:
     addrSelCleared = *sourceWord;
   }
-LAB_0019c710:
+storeSourceWord:
   *sourceWord = (registerIndex & 0xff) << 5 | addrSelCleared & 0xffffe01f;
   negateBase = *(uint *)(sourceNumber * 0x18 + inst + 0xa0) & 1;
   sourceOperandRecord = IRInst__getOperandRecord(inst,sourceNumber);
@@ -3006,7 +3006,7 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
       }
       *dualMathWord = (negateBit2 & 1) << 0x1a | src2Select | oldDualMathWord & 0xfbf8ffff;
     }
-    goto LAB_0019d024;
+    goto setHwLimits;
   }
   *dualMathWord = *(uint *)(&DAT_001b2c14 + loopIndex * 4) & 3 | dualMathFlags & 0xfffffffc;
   loopIndex = (**(code **)(*operandVReg + 0x60))(operandVReg,(int)srcOffsetPair,a2,passThroughR6,passThroughR7,passThroughR8,loopIndex * 4);
@@ -3054,7 +3054,7 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
           if (laneSelectByte != 4) {
             sourceDef = IRInst__getOperandSource(operandVReg,loopIndex);
             selectWord1 = ((int (*)())vsSourceSelectForConstant)(sourceDef,(uint)laneSelectByte,constNegated);
-            goto LAB_0019cf10;
+            goto setLoopIndex;
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex <= operandVReg[0x21]);
@@ -3064,13 +3064,13 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
     else {
       selectWord1 = *(uint *)(&DAT_001b2be8 + (composedSwizzle1 & 0xff) * 4);
     }
-LAB_0019cf10:
+setLoopIndex:
     loopIndex = (**(code **)(*inst + 0x14))(inst);
     if (1 < loopIndex) {
       SelectWord__compose(composedSwizzle2,srcSelectWord,selectWord2);
       if ((selectWord2 >> 0x18 != 4) && (composedSwizzle2[0] >> 0x18 != 4)) {
         selectWord2 = *(uint *)(&DAT_001b2be8 + (composedSwizzle2[0] >> 0x18) * 4);
-        goto LAB_0019d014;
+        goto storeDualMathWord;
       }
       loopIndex = 1;
       if (0 < operandVReg[0x21]) {
@@ -3080,7 +3080,7 @@ LAB_0019cf10:
           if (laneSelectByte != 4) {
             sourceDef2 = IRInst__getOperandSource(operandVReg,loopIndex);
             selectWord2 = ((int (*)())vsSourceSelectForConstant)(sourceDef2,(uint)laneSelectByte,constNegated);
-            goto LAB_0019d014;
+            goto storeDualMathWord;
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex <= operandVReg[0x21]);
@@ -3088,9 +3088,9 @@ LAB_0019cf10:
     }
     selectWord2 = 0;
   }
-LAB_0019d014:
+storeDualMathWord:
   *dualMathWord = (selectWord2 & 7) << 0x10 | (selectWord1 & 7) << 0xd | *dualMathWord & 0xfff81fff;
-LAB_0019d024:
+setHwLimits:
   hwLimits = *(int **)(*(int *)(this + 0xc) + 0x30c);
   loopIndex = (**(code **)(*hwLimits + 0x16c))(hwLimits);
   opcodeTraitWord = *(uint *)(*(int *)(inst[0x22] + 8) * 0x38 + loopIndex + 0xc);

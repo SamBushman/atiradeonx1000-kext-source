@@ -120,7 +120,7 @@ int extvsOptimizeProgram(ctx, shader)
       destEnableW = *(char *)(instEnd + -0x59);
       destXUnused = *(char *)(instEnd + -0x65) == '\0';
       if ((((destXUnused) && (destEnableY == '\0')) && (destEnableZ == '\0')) && (destEnableW == '\0')) {
-LAB_000ba610:
+loopSetShiftCursorOffset:
         shiftCursorOffset = instEndOffset;
         if (remainingInsts < instCount) {
           do {
@@ -163,7 +163,7 @@ LAB_000ba610:
           }
           if ((((destXUnused) || (laterReadFlagB != 0)) && ((destEnableY == '\0' || (laterReadFlagA != 0)))) &&
              (((destEnableZ == '\0' || (laterReadFlagC != 0)) && ((destEnableW == '\0' || (laterReadFlagD != 0))))))
-          goto LAB_000ba610;
+          goto loopSetShiftCursorOffset;
         }
         else {
           if (*(int *)(instEnd + -0x74) == 0x87a2) {
@@ -199,7 +199,7 @@ LAB_000ba610:
             }
             if (((((((destXUnused) || (laterReadFlagA != 0)) && ((destEnableY == '\0' || (laterReadFlagC != 0)))) &&
                   ((destEnableZ == '\0' || (laterReadFlagD != 0)))) && ((destEnableW == '\0' || (laterReadFlagB != 0)))) &&
-                (fusable)) || (instCount <= remainingInsts)) goto LAB_000ba610;
+                (fusable)) || (instCount <= remainingInsts)) goto loopSetShiftCursorOffset;
             remaining = instCount - remainingInsts;
             laterFlagCursor = (char *)(instEnd + 0x38);
             fusable = true;
@@ -216,15 +216,15 @@ LAB_000ba610:
               if (instKind == 2) {
                 instKind = *(int *)(instEnd + -0x6c);
                 shaderWord20 = *(int *)(shader + 0x20);
-                goto LAB_000ba1a0;
+                goto checkInstKind;
               }
             }
             else if (instKind == 2) {
               instKind = *(int *)(instEnd + -0x6c);
               shaderWord20 = *(int *)(shader + 0x20);
-              if (*(int *)(instKind * 0x54 + shaderWord20 + 0x28) == 0x87c4) goto LAB_000ba664;
-LAB_000ba1a0:
-              if (*(int *)(instKind * 0x54 + shaderWord20 + 0x24) == 0x87c0) goto LAB_000ba664;
+              if (*(int *)(instKind * 0x54 + shaderWord20 + 0x28) == 0x87c4) goto setSweepStep;
+checkInstKind:
+              if (*(int *)(instKind * 0x54 + shaderWord20 + 0x24) == 0x87c0) goto setSweepStep;
             }
             if (remainingInsts < instCount) {
               laterReadFlagD = 0;
@@ -276,7 +276,7 @@ LAB_000ba1a0:
             }
             if (((((destXUnused) || (laterReadFlagB != 0)) && ((destEnableY == '\0' || (laterReadFlagA != 0)))) &&
                 ((((destEnableZ == '\0' || (laterReadFlagC != 0)) && ((destEnableW == '\0' || (laterReadFlagD != 0)))) &&
-                 (fusable)))) || (instCount <= remainingInsts)) goto LAB_000ba610;
+                 (fusable)))) || (instCount <= remainingInsts)) goto loopSetShiftCursorOffset;
             fusable = true;
             laterReadFlagC = 0;
             laterReadFlagA = 0;
@@ -315,10 +315,10 @@ LAB_000ba1a0:
               laterOffset = laterOffset + 0x74;
             } while (scanIndex < instCount);
           }
-          if (fusable) goto LAB_000ba610;
+          if (fusable) goto loopSetShiftCursorOffset;
         }
       }
-LAB_000ba664:
+setSweepStep:
       sweepStep = sweepStep + 1;
       instEndOffset = instEndOffset + -0x74;
     } while (instCountAtEntry != sweepStep);
@@ -339,15 +339,15 @@ LAB_000ba664:
             instKind = addInst[8];
             if ((instKind != 2) || (shaderWord20 = mulInst[2], addInst[9] != shaderWord20)) {
               if ((addInst[0xf] != 2) || (shaderWord20 = mulInst[2], addInst[0x10] != shaderWord20))
-              goto LAB_000ba7ec;
+              goto setCanContinue2;
               wantedKind = 2;
-              if (instKind == 2) goto LAB_000ba7dc;
+              if (instKind == 2) goto checkAddInst;
             }
             else {
               wantedKind = addInst[0xf];
               if (wantedKind == 2) {
-LAB_000ba7dc:
-                if (addInst[9] == addInst[0x10]) goto LAB_000ba7ec;
+checkAddInst:
+                if (addInst[9] == addInst[0x10]) goto setCanContinue2;
               }
             }
             canContinue = true;
@@ -366,8 +366,8 @@ LAB_000ba7dc:
                 laterSrcSlot = laterSrcSlot + 0x1d;
                 remainingLater = remainingLater + -1;
               } while (remainingLater != 0);
-              if (canContinue) goto LAB_000ba8a8;
-LAB_000ba754:
+              if (canContinue) goto setCanContinue;
+loopSetCanContinue:
               canContinue = true;
               remainingLater = addSearchIndex - remainingInsts;
               laterSrcSlot = (int *)(remainingInsts * 0x74 + instArray + 0x20);
@@ -390,7 +390,7 @@ LAB_000ba754:
                 remainingLater = remainingLater + -1;
               } while (remainingLater != 0);
               if (canContinue) {
-LAB_000bc018:
+loopSetCanContinue2:
                 canContinue = true;
                 afterAddIndex = addSearchIndex + 1;
                 if (afterAddIndex < instCount) {
@@ -405,7 +405,7 @@ LAB_000bc018:
                     laterSrcSlot = laterSrcSlot + 0x1d;
                     remainingLater = remainingLater + -1;
                   } while (remainingLater != 0);
-                  if (!canContinue) goto LAB_000bd6dc;
+                  if (!canContinue) goto setAddSearchIndex;
                 }
                 addSrcIndex = addInst[9];
                 *mulInst = 0x8788;
@@ -550,43 +550,43 @@ LAB_000bc018:
                   addInstWord28Mapped = *srcRecordPtr;
                   switch(addInstWord28Mapped) {
                   case 0x87d5:
-switchD_000bc544_caseD_87d5:
+addInstWord28MappedCase87d5Switch1:
                     addInstWord28Mapped = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bc544_caseD_87d6:
+addInstWord28MappedCase87d6Switch1:
                     addInstWord28Mapped = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bc544_caseD_87d7:
+addInstWord28MappedCase87d7Switch1:
                     addInstWord28Mapped = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bc544_caseD_87d8:
+addInstWord28MappedCase87d8Switch1:
                     addInstWord28Mapped = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bc544_caseD_87d9:
+addInstWord28MappedCase87d9Switch1:
                     addInstWord28Mapped = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bc544_caseD_87da:
+addInstWord28MappedCase87daSwitch1:
                     addInstWord28Mapped = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bc544_caseD_87db:
+addInstWord28MappedCase87dbSwitch1:
                     addInstWord28Mapped = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bc544_caseD_87dc:
+addInstWord28MappedCase87dcSwitch1:
                     addInstWord28Mapped = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bc544_caseD_87de:
+addInstWord28MappedCase87deSwitch1:
                     addInstWord28Mapped = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bc544_caseD_87df:
+addInstWord28MappedCase87dfSwitch1:
                     addInstWord28Mapped = 0x87de;
                   }
                   break;
@@ -594,75 +594,75 @@ switchD_000bc544_caseD_87df:
                   addInstWord28Mapped = mulInst[0xb];
                   switch(addInstWord28Mapped) {
                   case 0x87d5:
-                    goto switchD_000bc544_caseD_87d5;
+                    goto addInstWord28MappedCase87d5Switch1;
                   case 0x87d6:
-                    goto switchD_000bc544_caseD_87d6;
+                    goto addInstWord28MappedCase87d6Switch1;
                   case 0x87d7:
-                    goto switchD_000bc544_caseD_87d7;
+                    goto addInstWord28MappedCase87d7Switch1;
                   case 0x87d8:
-                    goto switchD_000bc544_caseD_87d8;
+                    goto addInstWord28MappedCase87d8Switch1;
                   case 0x87d9:
-                    goto switchD_000bc544_caseD_87d9;
+                    goto addInstWord28MappedCase87d9Switch1;
                   case 0x87da:
-                    goto switchD_000bc544_caseD_87da;
+                    goto addInstWord28MappedCase87daSwitch1;
                   case 0x87db:
-                    goto switchD_000bc544_caseD_87db;
+                    goto addInstWord28MappedCase87dbSwitch1;
                   case 0x87dc:
-                    goto switchD_000bc544_caseD_87dc;
+                    goto addInstWord28MappedCase87dcSwitch1;
                   case 0x87de:
-                    goto switchD_000bc544_caseD_87de;
+                    goto addInstWord28MappedCase87deSwitch1;
                   case 0x87df:
-                    goto switchD_000bc544_caseD_87df;
+                    goto addInstWord28MappedCase87dfSwitch1;
                   }
                   break;
                 case 0x87db:
                   addInstWord28Mapped = mulInst[0xc];
                   switch(addInstWord28Mapped) {
                   case 0x87d5:
-                    goto switchD_000bc544_caseD_87d5;
+                    goto addInstWord28MappedCase87d5Switch1;
                   case 0x87d6:
-                    goto switchD_000bc544_caseD_87d6;
+                    goto addInstWord28MappedCase87d6Switch1;
                   case 0x87d7:
-                    goto switchD_000bc544_caseD_87d7;
+                    goto addInstWord28MappedCase87d7Switch1;
                   case 0x87d8:
-                    goto switchD_000bc544_caseD_87d8;
+                    goto addInstWord28MappedCase87d8Switch1;
                   case 0x87d9:
-                    goto switchD_000bc544_caseD_87d9;
+                    goto addInstWord28MappedCase87d9Switch1;
                   case 0x87da:
-                    goto switchD_000bc544_caseD_87da;
+                    goto addInstWord28MappedCase87daSwitch1;
                   case 0x87db:
-                    goto switchD_000bc544_caseD_87db;
+                    goto addInstWord28MappedCase87dbSwitch1;
                   case 0x87dc:
-                    goto switchD_000bc544_caseD_87dc;
+                    goto addInstWord28MappedCase87dcSwitch1;
                   case 0x87de:
-                    goto switchD_000bc544_caseD_87de;
+                    goto addInstWord28MappedCase87deSwitch1;
                   case 0x87df:
-                    goto switchD_000bc544_caseD_87df;
+                    goto addInstWord28MappedCase87dfSwitch1;
                   }
                   break;
                 case 0x87dc:
                   addInstWord28Mapped = mulInst[0xd];
                   switch(addInstWord28Mapped) {
                   case 0x87d5:
-                    goto switchD_000bc544_caseD_87d5;
+                    goto addInstWord28MappedCase87d5Switch1;
                   case 0x87d6:
-                    goto switchD_000bc544_caseD_87d6;
+                    goto addInstWord28MappedCase87d6Switch1;
                   case 0x87d7:
-                    goto switchD_000bc544_caseD_87d7;
+                    goto addInstWord28MappedCase87d7Switch1;
                   case 0x87d8:
-                    goto switchD_000bc544_caseD_87d8;
+                    goto addInstWord28MappedCase87d8Switch1;
                   case 0x87d9:
-                    goto switchD_000bc544_caseD_87d9;
+                    goto addInstWord28MappedCase87d9Switch1;
                   case 0x87da:
-                    goto switchD_000bc544_caseD_87da;
+                    goto addInstWord28MappedCase87daSwitch1;
                   case 0x87db:
-                    goto switchD_000bc544_caseD_87db;
+                    goto addInstWord28MappedCase87dbSwitch1;
                   case 0x87dc:
-                    goto switchD_000bc544_caseD_87dc;
+                    goto addInstWord28MappedCase87dcSwitch1;
                   case 0x87de:
-                    goto switchD_000bc544_caseD_87de;
+                    goto addInstWord28MappedCase87deSwitch1;
                   case 0x87df:
-                    goto switchD_000bc544_caseD_87df;
+                    goto addInstWord28MappedCase87dfSwitch1;
                   }
                 }
                 addInstWord2cMapped = addInst[0xb];
@@ -684,43 +684,43 @@ switchD_000bc544_caseD_87df:
                   addInstWord2cMapped = *srcRecordPtr;
                   switch(addInstWord2cMapped) {
                   case 0x87d5:
-switchD_000bc79c_caseD_87d5:
+addInstWord2cMappedCase87d5Switch2:
                     addInstWord2cMapped = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bc79c_caseD_87d6:
+addInstWord2cMappedCase87d6Switch2:
                     addInstWord2cMapped = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bc79c_caseD_87d7:
+addInstWord2cMappedCase87d7Switch2:
                     addInstWord2cMapped = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bc79c_caseD_87d8:
+addInstWord2cMappedCase87d8Switch2:
                     addInstWord2cMapped = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bc79c_caseD_87d9:
+addInstWord2cMappedCase87d9Switch2:
                     addInstWord2cMapped = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bc79c_caseD_87da:
+addInstWord2cMappedCase87daSwitch2:
                     addInstWord2cMapped = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bc79c_caseD_87db:
+addInstWord2cMappedCase87dbSwitch2:
                     addInstWord2cMapped = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bc79c_caseD_87dc:
+addInstWord2cMappedCase87dcSwitch2:
                     addInstWord2cMapped = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bc79c_caseD_87de:
+addInstWord2cMappedCase87deSwitch2:
                     addInstWord2cMapped = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bc79c_caseD_87df:
+addInstWord2cMappedCase87dfSwitch2:
                     addInstWord2cMapped = 0x87de;
                   }
                   break;
@@ -728,75 +728,75 @@ switchD_000bc79c_caseD_87df:
                   addInstWord2cMapped = mulInst[0xb];
                   switch(addInstWord2cMapped) {
                   case 0x87d5:
-                    goto switchD_000bc79c_caseD_87d5;
+                    goto addInstWord2cMappedCase87d5Switch2;
                   case 0x87d6:
-                    goto switchD_000bc79c_caseD_87d6;
+                    goto addInstWord2cMappedCase87d6Switch2;
                   case 0x87d7:
-                    goto switchD_000bc79c_caseD_87d7;
+                    goto addInstWord2cMappedCase87d7Switch2;
                   case 0x87d8:
-                    goto switchD_000bc79c_caseD_87d8;
+                    goto addInstWord2cMappedCase87d8Switch2;
                   case 0x87d9:
-                    goto switchD_000bc79c_caseD_87d9;
+                    goto addInstWord2cMappedCase87d9Switch2;
                   case 0x87da:
-                    goto switchD_000bc79c_caseD_87da;
+                    goto addInstWord2cMappedCase87daSwitch2;
                   case 0x87db:
-                    goto switchD_000bc79c_caseD_87db;
+                    goto addInstWord2cMappedCase87dbSwitch2;
                   case 0x87dc:
-                    goto switchD_000bc79c_caseD_87dc;
+                    goto addInstWord2cMappedCase87dcSwitch2;
                   case 0x87de:
-                    goto switchD_000bc79c_caseD_87de;
+                    goto addInstWord2cMappedCase87deSwitch2;
                   case 0x87df:
-                    goto switchD_000bc79c_caseD_87df;
+                    goto addInstWord2cMappedCase87dfSwitch2;
                   }
                   break;
                 case 0x87db:
                   addInstWord2cMapped = mulInst[0xc];
                   switch(addInstWord2cMapped) {
                   case 0x87d5:
-                    goto switchD_000bc79c_caseD_87d5;
+                    goto addInstWord2cMappedCase87d5Switch2;
                   case 0x87d6:
-                    goto switchD_000bc79c_caseD_87d6;
+                    goto addInstWord2cMappedCase87d6Switch2;
                   case 0x87d7:
-                    goto switchD_000bc79c_caseD_87d7;
+                    goto addInstWord2cMappedCase87d7Switch2;
                   case 0x87d8:
-                    goto switchD_000bc79c_caseD_87d8;
+                    goto addInstWord2cMappedCase87d8Switch2;
                   case 0x87d9:
-                    goto switchD_000bc79c_caseD_87d9;
+                    goto addInstWord2cMappedCase87d9Switch2;
                   case 0x87da:
-                    goto switchD_000bc79c_caseD_87da;
+                    goto addInstWord2cMappedCase87daSwitch2;
                   case 0x87db:
-                    goto switchD_000bc79c_caseD_87db;
+                    goto addInstWord2cMappedCase87dbSwitch2;
                   case 0x87dc:
-                    goto switchD_000bc79c_caseD_87dc;
+                    goto addInstWord2cMappedCase87dcSwitch2;
                   case 0x87de:
-                    goto switchD_000bc79c_caseD_87de;
+                    goto addInstWord2cMappedCase87deSwitch2;
                   case 0x87df:
-                    goto switchD_000bc79c_caseD_87df;
+                    goto addInstWord2cMappedCase87dfSwitch2;
                   }
                   break;
                 case 0x87dc:
                   addInstWord2cMapped = mulInst[0xd];
                   switch(addInstWord2cMapped) {
                   case 0x87d5:
-                    goto switchD_000bc79c_caseD_87d5;
+                    goto addInstWord2cMappedCase87d5Switch2;
                   case 0x87d6:
-                    goto switchD_000bc79c_caseD_87d6;
+                    goto addInstWord2cMappedCase87d6Switch2;
                   case 0x87d7:
-                    goto switchD_000bc79c_caseD_87d7;
+                    goto addInstWord2cMappedCase87d7Switch2;
                   case 0x87d8:
-                    goto switchD_000bc79c_caseD_87d8;
+                    goto addInstWord2cMappedCase87d8Switch2;
                   case 0x87d9:
-                    goto switchD_000bc79c_caseD_87d9;
+                    goto addInstWord2cMappedCase87d9Switch2;
                   case 0x87da:
-                    goto switchD_000bc79c_caseD_87da;
+                    goto addInstWord2cMappedCase87daSwitch2;
                   case 0x87db:
-                    goto switchD_000bc79c_caseD_87db;
+                    goto addInstWord2cMappedCase87dbSwitch2;
                   case 0x87dc:
-                    goto switchD_000bc79c_caseD_87dc;
+                    goto addInstWord2cMappedCase87dcSwitch2;
                   case 0x87de:
-                    goto switchD_000bc79c_caseD_87de;
+                    goto addInstWord2cMappedCase87deSwitch2;
                   case 0x87df:
-                    goto switchD_000bc79c_caseD_87df;
+                    goto addInstWord2cMappedCase87dfSwitch2;
                   }
                 }
                 addInstWord30Mapped = addInst[0xc];
@@ -818,43 +818,43 @@ switchD_000bc79c_caseD_87df:
                   addInstWord30Mapped = *srcRecordPtr;
                   switch(addInstWord30Mapped) {
                   case 0x87d5:
-switchD_000bc9f4_caseD_87d5:
+addInstWord30MappedCase87d5Switch3:
                     addInstWord30Mapped = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bc9f4_caseD_87d6:
+addInstWord30MappedCase87d6Switch3:
                     addInstWord30Mapped = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bc9f4_caseD_87d7:
+addInstWord30MappedCase87d7Switch3:
                     addInstWord30Mapped = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bc9f4_caseD_87d8:
+addInstWord30MappedCase87d8Switch3:
                     addInstWord30Mapped = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bc9f4_caseD_87d9:
+addInstWord30MappedCase87d9Switch3:
                     addInstWord30Mapped = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bc9f4_caseD_87da:
+addInstWord30MappedCase87daSwitch3:
                     addInstWord30Mapped = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bc9f4_caseD_87db:
+addInstWord30MappedCase87dbSwitch3:
                     addInstWord30Mapped = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bc9f4_caseD_87dc:
+addInstWord30MappedCase87dcSwitch3:
                     addInstWord30Mapped = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bc9f4_caseD_87de:
+addInstWord30MappedCase87deSwitch3:
                     addInstWord30Mapped = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bc9f4_caseD_87df:
+addInstWord30MappedCase87dfSwitch3:
                     addInstWord30Mapped = 0x87de;
                   }
                   break;
@@ -862,75 +862,75 @@ switchD_000bc9f4_caseD_87df:
                   addInstWord30Mapped = mulInst[0xb];
                   switch(addInstWord30Mapped) {
                   case 0x87d5:
-                    goto switchD_000bc9f4_caseD_87d5;
+                    goto addInstWord30MappedCase87d5Switch3;
                   case 0x87d6:
-                    goto switchD_000bc9f4_caseD_87d6;
+                    goto addInstWord30MappedCase87d6Switch3;
                   case 0x87d7:
-                    goto switchD_000bc9f4_caseD_87d7;
+                    goto addInstWord30MappedCase87d7Switch3;
                   case 0x87d8:
-                    goto switchD_000bc9f4_caseD_87d8;
+                    goto addInstWord30MappedCase87d8Switch3;
                   case 0x87d9:
-                    goto switchD_000bc9f4_caseD_87d9;
+                    goto addInstWord30MappedCase87d9Switch3;
                   case 0x87da:
-                    goto switchD_000bc9f4_caseD_87da;
+                    goto addInstWord30MappedCase87daSwitch3;
                   case 0x87db:
-                    goto switchD_000bc9f4_caseD_87db;
+                    goto addInstWord30MappedCase87dbSwitch3;
                   case 0x87dc:
-                    goto switchD_000bc9f4_caseD_87dc;
+                    goto addInstWord30MappedCase87dcSwitch3;
                   case 0x87de:
-                    goto switchD_000bc9f4_caseD_87de;
+                    goto addInstWord30MappedCase87deSwitch3;
                   case 0x87df:
-                    goto switchD_000bc9f4_caseD_87df;
+                    goto addInstWord30MappedCase87dfSwitch3;
                   }
                   break;
                 case 0x87db:
                   addInstWord30Mapped = mulInst[0xc];
                   switch(addInstWord30Mapped) {
                   case 0x87d5:
-                    goto switchD_000bc9f4_caseD_87d5;
+                    goto addInstWord30MappedCase87d5Switch3;
                   case 0x87d6:
-                    goto switchD_000bc9f4_caseD_87d6;
+                    goto addInstWord30MappedCase87d6Switch3;
                   case 0x87d7:
-                    goto switchD_000bc9f4_caseD_87d7;
+                    goto addInstWord30MappedCase87d7Switch3;
                   case 0x87d8:
-                    goto switchD_000bc9f4_caseD_87d8;
+                    goto addInstWord30MappedCase87d8Switch3;
                   case 0x87d9:
-                    goto switchD_000bc9f4_caseD_87d9;
+                    goto addInstWord30MappedCase87d9Switch3;
                   case 0x87da:
-                    goto switchD_000bc9f4_caseD_87da;
+                    goto addInstWord30MappedCase87daSwitch3;
                   case 0x87db:
-                    goto switchD_000bc9f4_caseD_87db;
+                    goto addInstWord30MappedCase87dbSwitch3;
                   case 0x87dc:
-                    goto switchD_000bc9f4_caseD_87dc;
+                    goto addInstWord30MappedCase87dcSwitch3;
                   case 0x87de:
-                    goto switchD_000bc9f4_caseD_87de;
+                    goto addInstWord30MappedCase87deSwitch3;
                   case 0x87df:
-                    goto switchD_000bc9f4_caseD_87df;
+                    goto addInstWord30MappedCase87dfSwitch3;
                   }
                   break;
                 case 0x87dc:
                   addInstWord30Mapped = mulInst[0xd];
                   switch(addInstWord30Mapped) {
                   case 0x87d5:
-                    goto switchD_000bc9f4_caseD_87d5;
+                    goto addInstWord30MappedCase87d5Switch3;
                   case 0x87d6:
-                    goto switchD_000bc9f4_caseD_87d6;
+                    goto addInstWord30MappedCase87d6Switch3;
                   case 0x87d7:
-                    goto switchD_000bc9f4_caseD_87d7;
+                    goto addInstWord30MappedCase87d7Switch3;
                   case 0x87d8:
-                    goto switchD_000bc9f4_caseD_87d8;
+                    goto addInstWord30MappedCase87d8Switch3;
                   case 0x87d9:
-                    goto switchD_000bc9f4_caseD_87d9;
+                    goto addInstWord30MappedCase87d9Switch3;
                   case 0x87da:
-                    goto switchD_000bc9f4_caseD_87da;
+                    goto addInstWord30MappedCase87daSwitch3;
                   case 0x87db:
-                    goto switchD_000bc9f4_caseD_87db;
+                    goto addInstWord30MappedCase87dbSwitch3;
                   case 0x87dc:
-                    goto switchD_000bc9f4_caseD_87dc;
+                    goto addInstWord30MappedCase87dcSwitch3;
                   case 0x87de:
-                    goto switchD_000bc9f4_caseD_87de;
+                    goto addInstWord30MappedCase87deSwitch3;
                   case 0x87df:
-                    goto switchD_000bc9f4_caseD_87df;
+                    goto addInstWord30MappedCase87dfSwitch3;
                   }
                 }
                 addInstWord34Mapped = addInst[0xd];
@@ -952,43 +952,43 @@ switchD_000bc9f4_caseD_87df:
                   addInstWord34Mapped = *srcRecordPtr;
                   switch(addInstWord34Mapped) {
                   case 0x87d5:
-switchD_000bcc4c_caseD_87d5:
+addInstWord34MappedCase87d5Switch4:
                     addInstWord34Mapped = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bcc4c_caseD_87d6:
+addInstWord34MappedCase87d6Switch4:
                     addInstWord34Mapped = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bcc4c_caseD_87d7:
+addInstWord34MappedCase87d7Switch4:
                     addInstWord34Mapped = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bcc4c_caseD_87d8:
+addInstWord34MappedCase87d8Switch4:
                     addInstWord34Mapped = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bcc4c_caseD_87d9:
+addInstWord34MappedCase87d9Switch4:
                     addInstWord34Mapped = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bcc4c_caseD_87da:
+addInstWord34MappedCase87daSwitch4:
                     addInstWord34Mapped = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bcc4c_caseD_87db:
+addInstWord34MappedCase87dbSwitch4:
                     addInstWord34Mapped = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bcc4c_caseD_87dc:
+addInstWord34MappedCase87dcSwitch4:
                     addInstWord34Mapped = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bcc4c_caseD_87de:
+addInstWord34MappedCase87deSwitch4:
                     addInstWord34Mapped = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bcc4c_caseD_87df:
+addInstWord34MappedCase87dfSwitch4:
                     addInstWord34Mapped = 0x87de;
                   }
                   break;
@@ -996,75 +996,75 @@ switchD_000bcc4c_caseD_87df:
                   addInstWord34Mapped = mulInst[0xb];
                   switch(addInstWord34Mapped) {
                   case 0x87d5:
-                    goto switchD_000bcc4c_caseD_87d5;
+                    goto addInstWord34MappedCase87d5Switch4;
                   case 0x87d6:
-                    goto switchD_000bcc4c_caseD_87d6;
+                    goto addInstWord34MappedCase87d6Switch4;
                   case 0x87d7:
-                    goto switchD_000bcc4c_caseD_87d7;
+                    goto addInstWord34MappedCase87d7Switch4;
                   case 0x87d8:
-                    goto switchD_000bcc4c_caseD_87d8;
+                    goto addInstWord34MappedCase87d8Switch4;
                   case 0x87d9:
-                    goto switchD_000bcc4c_caseD_87d9;
+                    goto addInstWord34MappedCase87d9Switch4;
                   case 0x87da:
-                    goto switchD_000bcc4c_caseD_87da;
+                    goto addInstWord34MappedCase87daSwitch4;
                   case 0x87db:
-                    goto switchD_000bcc4c_caseD_87db;
+                    goto addInstWord34MappedCase87dbSwitch4;
                   case 0x87dc:
-                    goto switchD_000bcc4c_caseD_87dc;
+                    goto addInstWord34MappedCase87dcSwitch4;
                   case 0x87de:
-                    goto switchD_000bcc4c_caseD_87de;
+                    goto addInstWord34MappedCase87deSwitch4;
                   case 0x87df:
-                    goto switchD_000bcc4c_caseD_87df;
+                    goto addInstWord34MappedCase87dfSwitch4;
                   }
                   break;
                 case 0x87db:
                   addInstWord34Mapped = mulInst[0xc];
                   switch(addInstWord34Mapped) {
                   case 0x87d5:
-                    goto switchD_000bcc4c_caseD_87d5;
+                    goto addInstWord34MappedCase87d5Switch4;
                   case 0x87d6:
-                    goto switchD_000bcc4c_caseD_87d6;
+                    goto addInstWord34MappedCase87d6Switch4;
                   case 0x87d7:
-                    goto switchD_000bcc4c_caseD_87d7;
+                    goto addInstWord34MappedCase87d7Switch4;
                   case 0x87d8:
-                    goto switchD_000bcc4c_caseD_87d8;
+                    goto addInstWord34MappedCase87d8Switch4;
                   case 0x87d9:
-                    goto switchD_000bcc4c_caseD_87d9;
+                    goto addInstWord34MappedCase87d9Switch4;
                   case 0x87da:
-                    goto switchD_000bcc4c_caseD_87da;
+                    goto addInstWord34MappedCase87daSwitch4;
                   case 0x87db:
-                    goto switchD_000bcc4c_caseD_87db;
+                    goto addInstWord34MappedCase87dbSwitch4;
                   case 0x87dc:
-                    goto switchD_000bcc4c_caseD_87dc;
+                    goto addInstWord34MappedCase87dcSwitch4;
                   case 0x87de:
-                    goto switchD_000bcc4c_caseD_87de;
+                    goto addInstWord34MappedCase87deSwitch4;
                   case 0x87df:
-                    goto switchD_000bcc4c_caseD_87df;
+                    goto addInstWord34MappedCase87dfSwitch4;
                   }
                   break;
                 case 0x87dc:
                   addInstWord34Mapped = mulInst[0xd];
                   switch(addInstWord34Mapped) {
                   case 0x87d5:
-                    goto switchD_000bcc4c_caseD_87d5;
+                    goto addInstWord34MappedCase87d5Switch4;
                   case 0x87d6:
-                    goto switchD_000bcc4c_caseD_87d6;
+                    goto addInstWord34MappedCase87d6Switch4;
                   case 0x87d7:
-                    goto switchD_000bcc4c_caseD_87d7;
+                    goto addInstWord34MappedCase87d7Switch4;
                   case 0x87d8:
-                    goto switchD_000bcc4c_caseD_87d8;
+                    goto addInstWord34MappedCase87d8Switch4;
                   case 0x87d9:
-                    goto switchD_000bcc4c_caseD_87d9;
+                    goto addInstWord34MappedCase87d9Switch4;
                   case 0x87da:
-                    goto switchD_000bcc4c_caseD_87da;
+                    goto addInstWord34MappedCase87daSwitch4;
                   case 0x87db:
-                    goto switchD_000bcc4c_caseD_87db;
+                    goto addInstWord34MappedCase87dbSwitch4;
                   case 0x87dc:
-                    goto switchD_000bcc4c_caseD_87dc;
+                    goto addInstWord34MappedCase87dcSwitch4;
                   case 0x87de:
-                    goto switchD_000bcc4c_caseD_87de;
+                    goto addInstWord34MappedCase87deSwitch4;
                   case 0x87df:
-                    goto switchD_000bcc4c_caseD_87df;
+                    goto addInstWord34MappedCase87dfSwitch4;
                   }
                 }
                 operandWord = *operandRecordPtr;
@@ -1087,43 +1087,43 @@ switchD_000bcc4c_caseD_87df:
                   operandWord = *srcRecordPtr;
                   switch(operandWord) {
                   case 0x87d5:
-switchD_000bcea8_caseD_87d5:
+operandWordCase87d5Switch5:
                     operandWord = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bcea8_caseD_87d6:
+operandWordCase87d6Switch5:
                     operandWord = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bcea8_caseD_87d7:
+operandWordCase87d7Switch5:
                     operandWord = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bcea8_caseD_87d8:
+operandWordCase87d8Switch5:
                     operandWord = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bcea8_caseD_87d9:
+operandWordCase87d9Switch5:
                     operandWord = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bcea8_caseD_87da:
+operandWordCase87daSwitch5:
                     operandWord = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bcea8_caseD_87db:
+operandWordCase87dbSwitch5:
                     operandWord = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bcea8_caseD_87dc:
+operandWordCase87dcSwitch5:
                     operandWord = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bcea8_caseD_87de:
+operandWordCase87deSwitch5:
                     operandWord = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bcea8_caseD_87df:
+operandWordCase87dfSwitch5:
                     operandWord = 0x87de;
                   }
                   break;
@@ -1131,75 +1131,75 @@ switchD_000bcea8_caseD_87df:
                   operandWord = mulInst[0x12];
                   switch(operandWord) {
                   case 0x87d5:
-                    goto switchD_000bcea8_caseD_87d5;
+                    goto operandWordCase87d5Switch5;
                   case 0x87d6:
-                    goto switchD_000bcea8_caseD_87d6;
+                    goto operandWordCase87d6Switch5;
                   case 0x87d7:
-                    goto switchD_000bcea8_caseD_87d7;
+                    goto operandWordCase87d7Switch5;
                   case 0x87d8:
-                    goto switchD_000bcea8_caseD_87d8;
+                    goto operandWordCase87d8Switch5;
                   case 0x87d9:
-                    goto switchD_000bcea8_caseD_87d9;
+                    goto operandWordCase87d9Switch5;
                   case 0x87da:
-                    goto switchD_000bcea8_caseD_87da;
+                    goto operandWordCase87daSwitch5;
                   case 0x87db:
-                    goto switchD_000bcea8_caseD_87db;
+                    goto operandWordCase87dbSwitch5;
                   case 0x87dc:
-                    goto switchD_000bcea8_caseD_87dc;
+                    goto operandWordCase87dcSwitch5;
                   case 0x87de:
-                    goto switchD_000bcea8_caseD_87de;
+                    goto operandWordCase87deSwitch5;
                   case 0x87df:
-                    goto switchD_000bcea8_caseD_87df;
+                    goto operandWordCase87dfSwitch5;
                   }
                   break;
                 case 0x87db:
                   operandWord = mulInst[0x13];
                   switch(operandWord) {
                   case 0x87d5:
-                    goto switchD_000bcea8_caseD_87d5;
+                    goto operandWordCase87d5Switch5;
                   case 0x87d6:
-                    goto switchD_000bcea8_caseD_87d6;
+                    goto operandWordCase87d6Switch5;
                   case 0x87d7:
-                    goto switchD_000bcea8_caseD_87d7;
+                    goto operandWordCase87d7Switch5;
                   case 0x87d8:
-                    goto switchD_000bcea8_caseD_87d8;
+                    goto operandWordCase87d8Switch5;
                   case 0x87d9:
-                    goto switchD_000bcea8_caseD_87d9;
+                    goto operandWordCase87d9Switch5;
                   case 0x87da:
-                    goto switchD_000bcea8_caseD_87da;
+                    goto operandWordCase87daSwitch5;
                   case 0x87db:
-                    goto switchD_000bcea8_caseD_87db;
+                    goto operandWordCase87dbSwitch5;
                   case 0x87dc:
-                    goto switchD_000bcea8_caseD_87dc;
+                    goto operandWordCase87dcSwitch5;
                   case 0x87de:
-                    goto switchD_000bcea8_caseD_87de;
+                    goto operandWordCase87deSwitch5;
                   case 0x87df:
-                    goto switchD_000bcea8_caseD_87df;
+                    goto operandWordCase87dfSwitch5;
                   }
                   break;
                 case 0x87dc:
                   operandWord = mulInst[0x14];
                   switch(operandWord) {
                   case 0x87d5:
-                    goto switchD_000bcea8_caseD_87d5;
+                    goto operandWordCase87d5Switch5;
                   case 0x87d6:
-                    goto switchD_000bcea8_caseD_87d6;
+                    goto operandWordCase87d6Switch5;
                   case 0x87d7:
-                    goto switchD_000bcea8_caseD_87d7;
+                    goto operandWordCase87d7Switch5;
                   case 0x87d8:
-                    goto switchD_000bcea8_caseD_87d8;
+                    goto operandWordCase87d8Switch5;
                   case 0x87d9:
-                    goto switchD_000bcea8_caseD_87d9;
+                    goto operandWordCase87d9Switch5;
                   case 0x87da:
-                    goto switchD_000bcea8_caseD_87da;
+                    goto operandWordCase87daSwitch5;
                   case 0x87db:
-                    goto switchD_000bcea8_caseD_87db;
+                    goto operandWordCase87dbSwitch5;
                   case 0x87dc:
-                    goto switchD_000bcea8_caseD_87dc;
+                    goto operandWordCase87dcSwitch5;
                   case 0x87de:
-                    goto switchD_000bcea8_caseD_87de;
+                    goto operandWordCase87deSwitch5;
                   case 0x87df:
-                    goto switchD_000bcea8_caseD_87df;
+                    goto operandWordCase87dfSwitch5;
                   }
                 }
                 addInstWord48Mapped = addInst[0x12];
@@ -1221,43 +1221,43 @@ switchD_000bcea8_caseD_87df:
                   addInstWord48Mapped = *srcRecordPtr;
                   switch(addInstWord48Mapped) {
                   case 0x87d5:
-switchD_000bd100_caseD_87d5:
+addInstWord48MappedCase87d5Switch6:
                     addInstWord48Mapped = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bd100_caseD_87d6:
+addInstWord48MappedCase87d6Switch6:
                     addInstWord48Mapped = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bd100_caseD_87d7:
+addInstWord48MappedCase87d7Switch6:
                     addInstWord48Mapped = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bd100_caseD_87d8:
+addInstWord48MappedCase87d8Switch6:
                     addInstWord48Mapped = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bd100_caseD_87d9:
+addInstWord48MappedCase87d9Switch6:
                     addInstWord48Mapped = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bd100_caseD_87da:
+addInstWord48MappedCase87daSwitch6:
                     addInstWord48Mapped = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bd100_caseD_87db:
+addInstWord48MappedCase87dbSwitch6:
                     addInstWord48Mapped = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bd100_caseD_87dc:
+addInstWord48MappedCase87dcSwitch6:
                     addInstWord48Mapped = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bd100_caseD_87de:
+addInstWord48MappedCase87deSwitch6:
                     addInstWord48Mapped = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bd100_caseD_87df:
+addInstWord48MappedCase87dfSwitch6:
                     addInstWord48Mapped = 0x87de;
                   }
                   break;
@@ -1265,75 +1265,75 @@ switchD_000bd100_caseD_87df:
                   addInstWord48Mapped = mulInst[0x12];
                   switch(addInstWord48Mapped) {
                   case 0x87d5:
-                    goto switchD_000bd100_caseD_87d5;
+                    goto addInstWord48MappedCase87d5Switch6;
                   case 0x87d6:
-                    goto switchD_000bd100_caseD_87d6;
+                    goto addInstWord48MappedCase87d6Switch6;
                   case 0x87d7:
-                    goto switchD_000bd100_caseD_87d7;
+                    goto addInstWord48MappedCase87d7Switch6;
                   case 0x87d8:
-                    goto switchD_000bd100_caseD_87d8;
+                    goto addInstWord48MappedCase87d8Switch6;
                   case 0x87d9:
-                    goto switchD_000bd100_caseD_87d9;
+                    goto addInstWord48MappedCase87d9Switch6;
                   case 0x87da:
-                    goto switchD_000bd100_caseD_87da;
+                    goto addInstWord48MappedCase87daSwitch6;
                   case 0x87db:
-                    goto switchD_000bd100_caseD_87db;
+                    goto addInstWord48MappedCase87dbSwitch6;
                   case 0x87dc:
-                    goto switchD_000bd100_caseD_87dc;
+                    goto addInstWord48MappedCase87dcSwitch6;
                   case 0x87de:
-                    goto switchD_000bd100_caseD_87de;
+                    goto addInstWord48MappedCase87deSwitch6;
                   case 0x87df:
-                    goto switchD_000bd100_caseD_87df;
+                    goto addInstWord48MappedCase87dfSwitch6;
                   }
                   break;
                 case 0x87db:
                   addInstWord48Mapped = mulInst[0x13];
                   switch(addInstWord48Mapped) {
                   case 0x87d5:
-                    goto switchD_000bd100_caseD_87d5;
+                    goto addInstWord48MappedCase87d5Switch6;
                   case 0x87d6:
-                    goto switchD_000bd100_caseD_87d6;
+                    goto addInstWord48MappedCase87d6Switch6;
                   case 0x87d7:
-                    goto switchD_000bd100_caseD_87d7;
+                    goto addInstWord48MappedCase87d7Switch6;
                   case 0x87d8:
-                    goto switchD_000bd100_caseD_87d8;
+                    goto addInstWord48MappedCase87d8Switch6;
                   case 0x87d9:
-                    goto switchD_000bd100_caseD_87d9;
+                    goto addInstWord48MappedCase87d9Switch6;
                   case 0x87da:
-                    goto switchD_000bd100_caseD_87da;
+                    goto addInstWord48MappedCase87daSwitch6;
                   case 0x87db:
-                    goto switchD_000bd100_caseD_87db;
+                    goto addInstWord48MappedCase87dbSwitch6;
                   case 0x87dc:
-                    goto switchD_000bd100_caseD_87dc;
+                    goto addInstWord48MappedCase87dcSwitch6;
                   case 0x87de:
-                    goto switchD_000bd100_caseD_87de;
+                    goto addInstWord48MappedCase87deSwitch6;
                   case 0x87df:
-                    goto switchD_000bd100_caseD_87df;
+                    goto addInstWord48MappedCase87dfSwitch6;
                   }
                   break;
                 case 0x87dc:
                   addInstWord48Mapped = mulInst[0x14];
                   switch(addInstWord48Mapped) {
                   case 0x87d5:
-                    goto switchD_000bd100_caseD_87d5;
+                    goto addInstWord48MappedCase87d5Switch6;
                   case 0x87d6:
-                    goto switchD_000bd100_caseD_87d6;
+                    goto addInstWord48MappedCase87d6Switch6;
                   case 0x87d7:
-                    goto switchD_000bd100_caseD_87d7;
+                    goto addInstWord48MappedCase87d7Switch6;
                   case 0x87d8:
-                    goto switchD_000bd100_caseD_87d8;
+                    goto addInstWord48MappedCase87d8Switch6;
                   case 0x87d9:
-                    goto switchD_000bd100_caseD_87d9;
+                    goto addInstWord48MappedCase87d9Switch6;
                   case 0x87da:
-                    goto switchD_000bd100_caseD_87da;
+                    goto addInstWord48MappedCase87daSwitch6;
                   case 0x87db:
-                    goto switchD_000bd100_caseD_87db;
+                    goto addInstWord48MappedCase87dbSwitch6;
                   case 0x87dc:
-                    goto switchD_000bd100_caseD_87dc;
+                    goto addInstWord48MappedCase87dcSwitch6;
                   case 0x87de:
-                    goto switchD_000bd100_caseD_87de;
+                    goto addInstWord48MappedCase87deSwitch6;
                   case 0x87df:
-                    goto switchD_000bd100_caseD_87df;
+                    goto addInstWord48MappedCase87dfSwitch6;
                   }
                 }
                 addInstWord4cMapped = addInst[0x13];
@@ -1355,43 +1355,43 @@ switchD_000bd100_caseD_87df:
                   addInstWord4cMapped = *srcRecordPtr;
                   switch(addInstWord4cMapped) {
                   case 0x87d5:
-switchD_000bd358_caseD_87d5:
+addInstWord4cMappedCase87d5Switch7:
                     addInstWord4cMapped = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bd358_caseD_87d6:
+addInstWord4cMappedCase87d6Switch7:
                     addInstWord4cMapped = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bd358_caseD_87d7:
+addInstWord4cMappedCase87d7Switch7:
                     addInstWord4cMapped = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bd358_caseD_87d8:
+addInstWord4cMappedCase87d8Switch7:
                     addInstWord4cMapped = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bd358_caseD_87d9:
+addInstWord4cMappedCase87d9Switch7:
                     addInstWord4cMapped = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bd358_caseD_87da:
+addInstWord4cMappedCase87daSwitch7:
                     addInstWord4cMapped = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bd358_caseD_87db:
+addInstWord4cMappedCase87dbSwitch7:
                     addInstWord4cMapped = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bd358_caseD_87dc:
+addInstWord4cMappedCase87dcSwitch7:
                     addInstWord4cMapped = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bd358_caseD_87de:
+addInstWord4cMappedCase87deSwitch7:
                     addInstWord4cMapped = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bd358_caseD_87df:
+addInstWord4cMappedCase87dfSwitch7:
                     addInstWord4cMapped = 0x87de;
                   }
                   break;
@@ -1399,75 +1399,75 @@ switchD_000bd358_caseD_87df:
                   addInstWord4cMapped = mulInst[0x12];
                   switch(addInstWord4cMapped) {
                   case 0x87d5:
-                    goto switchD_000bd358_caseD_87d5;
+                    goto addInstWord4cMappedCase87d5Switch7;
                   case 0x87d6:
-                    goto switchD_000bd358_caseD_87d6;
+                    goto addInstWord4cMappedCase87d6Switch7;
                   case 0x87d7:
-                    goto switchD_000bd358_caseD_87d7;
+                    goto addInstWord4cMappedCase87d7Switch7;
                   case 0x87d8:
-                    goto switchD_000bd358_caseD_87d8;
+                    goto addInstWord4cMappedCase87d8Switch7;
                   case 0x87d9:
-                    goto switchD_000bd358_caseD_87d9;
+                    goto addInstWord4cMappedCase87d9Switch7;
                   case 0x87da:
-                    goto switchD_000bd358_caseD_87da;
+                    goto addInstWord4cMappedCase87daSwitch7;
                   case 0x87db:
-                    goto switchD_000bd358_caseD_87db;
+                    goto addInstWord4cMappedCase87dbSwitch7;
                   case 0x87dc:
-                    goto switchD_000bd358_caseD_87dc;
+                    goto addInstWord4cMappedCase87dcSwitch7;
                   case 0x87de:
-                    goto switchD_000bd358_caseD_87de;
+                    goto addInstWord4cMappedCase87deSwitch7;
                   case 0x87df:
-                    goto switchD_000bd358_caseD_87df;
+                    goto addInstWord4cMappedCase87dfSwitch7;
                   }
                   break;
                 case 0x87db:
                   addInstWord4cMapped = mulInst[0x13];
                   switch(addInstWord4cMapped) {
                   case 0x87d5:
-                    goto switchD_000bd358_caseD_87d5;
+                    goto addInstWord4cMappedCase87d5Switch7;
                   case 0x87d6:
-                    goto switchD_000bd358_caseD_87d6;
+                    goto addInstWord4cMappedCase87d6Switch7;
                   case 0x87d7:
-                    goto switchD_000bd358_caseD_87d7;
+                    goto addInstWord4cMappedCase87d7Switch7;
                   case 0x87d8:
-                    goto switchD_000bd358_caseD_87d8;
+                    goto addInstWord4cMappedCase87d8Switch7;
                   case 0x87d9:
-                    goto switchD_000bd358_caseD_87d9;
+                    goto addInstWord4cMappedCase87d9Switch7;
                   case 0x87da:
-                    goto switchD_000bd358_caseD_87da;
+                    goto addInstWord4cMappedCase87daSwitch7;
                   case 0x87db:
-                    goto switchD_000bd358_caseD_87db;
+                    goto addInstWord4cMappedCase87dbSwitch7;
                   case 0x87dc:
-                    goto switchD_000bd358_caseD_87dc;
+                    goto addInstWord4cMappedCase87dcSwitch7;
                   case 0x87de:
-                    goto switchD_000bd358_caseD_87de;
+                    goto addInstWord4cMappedCase87deSwitch7;
                   case 0x87df:
-                    goto switchD_000bd358_caseD_87df;
+                    goto addInstWord4cMappedCase87dfSwitch7;
                   }
                   break;
                 case 0x87dc:
                   addInstWord4cMapped = mulInst[0x14];
                   switch(addInstWord4cMapped) {
                   case 0x87d5:
-                    goto switchD_000bd358_caseD_87d5;
+                    goto addInstWord4cMappedCase87d5Switch7;
                   case 0x87d6:
-                    goto switchD_000bd358_caseD_87d6;
+                    goto addInstWord4cMappedCase87d6Switch7;
                   case 0x87d7:
-                    goto switchD_000bd358_caseD_87d7;
+                    goto addInstWord4cMappedCase87d7Switch7;
                   case 0x87d8:
-                    goto switchD_000bd358_caseD_87d8;
+                    goto addInstWord4cMappedCase87d8Switch7;
                   case 0x87d9:
-                    goto switchD_000bd358_caseD_87d9;
+                    goto addInstWord4cMappedCase87d9Switch7;
                   case 0x87da:
-                    goto switchD_000bd358_caseD_87da;
+                    goto addInstWord4cMappedCase87daSwitch7;
                   case 0x87db:
-                    goto switchD_000bd358_caseD_87db;
+                    goto addInstWord4cMappedCase87dbSwitch7;
                   case 0x87dc:
-                    goto switchD_000bd358_caseD_87dc;
+                    goto addInstWord4cMappedCase87dcSwitch7;
                   case 0x87de:
-                    goto switchD_000bd358_caseD_87de;
+                    goto addInstWord4cMappedCase87deSwitch7;
                   case 0x87df:
-                    goto switchD_000bd358_caseD_87df;
+                    goto addInstWord4cMappedCase87dfSwitch7;
                   }
                 }
                 addInstWord50Mapped = addInst[0x14];
@@ -1489,43 +1489,43 @@ switchD_000bd358_caseD_87df:
                   addInstWord50Mapped = *srcRecordPtr;
                   switch(addInstWord50Mapped) {
                   case 0x87d5:
-switchD_000bd5b0_caseD_87d5:
+addInstWord50MappedCase87d5Switch8:
                     addInstWord50Mapped = 0x87d9;
                     break;
                   case 0x87d6:
-switchD_000bd5b0_caseD_87d6:
+addInstWord50MappedCase87d6Switch8:
                     addInstWord50Mapped = 0x87da;
                     break;
                   case 0x87d7:
-switchD_000bd5b0_caseD_87d7:
+addInstWord50MappedCase87d7Switch8:
                     addInstWord50Mapped = 0x87db;
                     break;
                   case 0x87d8:
-switchD_000bd5b0_caseD_87d8:
+addInstWord50MappedCase87d8Switch8:
                     addInstWord50Mapped = 0x87dc;
                     break;
                   case 0x87d9:
-switchD_000bd5b0_caseD_87d9:
+addInstWord50MappedCase87d9Switch8:
                     addInstWord50Mapped = 0x87d5;
                     break;
                   case 0x87da:
-switchD_000bd5b0_caseD_87da:
+addInstWord50MappedCase87daSwitch8:
                     addInstWord50Mapped = 0x87d6;
                     break;
                   case 0x87db:
-switchD_000bd5b0_caseD_87db:
+addInstWord50MappedCase87dbSwitch8:
                     addInstWord50Mapped = 0x87d7;
                     break;
                   case 0x87dc:
-switchD_000bd5b0_caseD_87dc:
+addInstWord50MappedCase87dcSwitch8:
                     addInstWord50Mapped = 0x87d8;
                     break;
                   case 0x87de:
-switchD_000bd5b0_caseD_87de:
+addInstWord50MappedCase87deSwitch8:
                     addInstWord50Mapped = 0x87df;
                     break;
                   case 0x87df:
-switchD_000bd5b0_caseD_87df:
+addInstWord50MappedCase87dfSwitch8:
                     addInstWord50Mapped = 0x87de;
                   }
                   break;
@@ -1533,75 +1533,75 @@ switchD_000bd5b0_caseD_87df:
                   addInstWord50Mapped = mulInst[0x12];
                   switch(addInstWord50Mapped) {
                   case 0x87d5:
-                    goto switchD_000bd5b0_caseD_87d5;
+                    goto addInstWord50MappedCase87d5Switch8;
                   case 0x87d6:
-                    goto switchD_000bd5b0_caseD_87d6;
+                    goto addInstWord50MappedCase87d6Switch8;
                   case 0x87d7:
-                    goto switchD_000bd5b0_caseD_87d7;
+                    goto addInstWord50MappedCase87d7Switch8;
                   case 0x87d8:
-                    goto switchD_000bd5b0_caseD_87d8;
+                    goto addInstWord50MappedCase87d8Switch8;
                   case 0x87d9:
-                    goto switchD_000bd5b0_caseD_87d9;
+                    goto addInstWord50MappedCase87d9Switch8;
                   case 0x87da:
-                    goto switchD_000bd5b0_caseD_87da;
+                    goto addInstWord50MappedCase87daSwitch8;
                   case 0x87db:
-                    goto switchD_000bd5b0_caseD_87db;
+                    goto addInstWord50MappedCase87dbSwitch8;
                   case 0x87dc:
-                    goto switchD_000bd5b0_caseD_87dc;
+                    goto addInstWord50MappedCase87dcSwitch8;
                   case 0x87de:
-                    goto switchD_000bd5b0_caseD_87de;
+                    goto addInstWord50MappedCase87deSwitch8;
                   case 0x87df:
-                    goto switchD_000bd5b0_caseD_87df;
+                    goto addInstWord50MappedCase87dfSwitch8;
                   }
                   break;
                 case 0x87db:
                   addInstWord50Mapped = mulInst[0x13];
                   switch(addInstWord50Mapped) {
                   case 0x87d5:
-                    goto switchD_000bd5b0_caseD_87d5;
+                    goto addInstWord50MappedCase87d5Switch8;
                   case 0x87d6:
-                    goto switchD_000bd5b0_caseD_87d6;
+                    goto addInstWord50MappedCase87d6Switch8;
                   case 0x87d7:
-                    goto switchD_000bd5b0_caseD_87d7;
+                    goto addInstWord50MappedCase87d7Switch8;
                   case 0x87d8:
-                    goto switchD_000bd5b0_caseD_87d8;
+                    goto addInstWord50MappedCase87d8Switch8;
                   case 0x87d9:
-                    goto switchD_000bd5b0_caseD_87d9;
+                    goto addInstWord50MappedCase87d9Switch8;
                   case 0x87da:
-                    goto switchD_000bd5b0_caseD_87da;
+                    goto addInstWord50MappedCase87daSwitch8;
                   case 0x87db:
-                    goto switchD_000bd5b0_caseD_87db;
+                    goto addInstWord50MappedCase87dbSwitch8;
                   case 0x87dc:
-                    goto switchD_000bd5b0_caseD_87dc;
+                    goto addInstWord50MappedCase87dcSwitch8;
                   case 0x87de:
-                    goto switchD_000bd5b0_caseD_87de;
+                    goto addInstWord50MappedCase87deSwitch8;
                   case 0x87df:
-                    goto switchD_000bd5b0_caseD_87df;
+                    goto addInstWord50MappedCase87dfSwitch8;
                   }
                   break;
                 case 0x87dc:
                   addInstWord50Mapped = mulInst[0x14];
                   switch(addInstWord50Mapped) {
                   case 0x87d5:
-                    goto switchD_000bd5b0_caseD_87d5;
+                    goto addInstWord50MappedCase87d5Switch8;
                   case 0x87d6:
-                    goto switchD_000bd5b0_caseD_87d6;
+                    goto addInstWord50MappedCase87d6Switch8;
                   case 0x87d7:
-                    goto switchD_000bd5b0_caseD_87d7;
+                    goto addInstWord50MappedCase87d7Switch8;
                   case 0x87d8:
-                    goto switchD_000bd5b0_caseD_87d8;
+                    goto addInstWord50MappedCase87d8Switch8;
                   case 0x87d9:
-                    goto switchD_000bd5b0_caseD_87d9;
+                    goto addInstWord50MappedCase87d9Switch8;
                   case 0x87da:
-                    goto switchD_000bd5b0_caseD_87da;
+                    goto addInstWord50MappedCase87daSwitch8;
                   case 0x87db:
-                    goto switchD_000bd5b0_caseD_87db;
+                    goto addInstWord50MappedCase87dbSwitch8;
                   case 0x87dc:
-                    goto switchD_000bd5b0_caseD_87dc;
+                    goto addInstWord50MappedCase87dcSwitch8;
                   case 0x87de:
-                    goto switchD_000bd5b0_caseD_87de;
+                    goto addInstWord50MappedCase87deSwitch8;
                   case 0x87df:
-                    goto switchD_000bd5b0_caseD_87df;
+                    goto addInstWord50MappedCase87dfSwitch8;
                   }
                 }
                 addInst[0x14] = addInstWord50Mapped;
@@ -1633,12 +1633,12 @@ switchD_000bd5b0_caseD_87df:
                   } while (shiftIndex < instCount);
                 }
               }
-LAB_000bd6dc:
+setAddSearchIndex:
               addSearchIndex = addSearchIndex + 1;
               canContinue = true;
             }
             else {
-LAB_000ba8a8:
+setCanContinue:
               canContinue = true;
               afterAddIndex = addSearchIndex + 1;
               if (afterAddIndex < instCount) {
@@ -1654,8 +1654,8 @@ LAB_000ba8a8:
                   remainingLater = remainingLater + -1;
                 } while (remainingLater != 0);
                 if (!canContinue) {
-                  if (remainingInsts < addSearchIndex) goto LAB_000ba754;
-                  goto LAB_000bc018;
+                  if (remainingInsts < addSearchIndex) goto loopSetCanContinue;
+                  goto loopSetCanContinue2;
                 }
               }
               *addInst = 0x8788;
@@ -1775,43 +1775,43 @@ LAB_000ba8a8:
                 addInstWord28Mapped = *srcRecordPtr;
                 switch(addInstWord28Mapped) {
                 case 0x87d5:
-switchD_000badac_caseD_87d5:
+addInstWord28MappedCase87d5Switch9:
                   addInstWord28Mapped = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000badac_caseD_87d6:
+addInstWord28MappedCase87d6Switch9:
                   addInstWord28Mapped = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000badac_caseD_87d7:
+addInstWord28MappedCase87d7Switch9:
                   addInstWord28Mapped = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000badac_caseD_87d8:
+addInstWord28MappedCase87d8Switch9:
                   addInstWord28Mapped = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000badac_caseD_87d9:
+addInstWord28MappedCase87d9Switch9:
                   addInstWord28Mapped = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000badac_caseD_87da:
+addInstWord28MappedCase87daSwitch9:
                   addInstWord28Mapped = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000badac_caseD_87db:
+addInstWord28MappedCase87dbSwitch9:
                   addInstWord28Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000badac_caseD_87dc:
+addInstWord28MappedCase87dcSwitch9:
                   addInstWord28Mapped = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000badac_caseD_87de:
+addInstWord28MappedCase87deSwitch9:
                   addInstWord28Mapped = 0x87df;
                   break;
                 case 0x87df:
-switchD_000badac_caseD_87df:
+addInstWord28MappedCase87dfSwitch9:
                   addInstWord28Mapped = 0x87de;
                 }
                 break;
@@ -1819,75 +1819,75 @@ switchD_000badac_caseD_87df:
                 addInstWord28Mapped = mulInst[0xb];
                 switch(addInstWord28Mapped) {
                 case 0x87d5:
-                  goto switchD_000badac_caseD_87d5;
+                  goto addInstWord28MappedCase87d5Switch9;
                 case 0x87d6:
-                  goto switchD_000badac_caseD_87d6;
+                  goto addInstWord28MappedCase87d6Switch9;
                 case 0x87d7:
-                  goto switchD_000badac_caseD_87d7;
+                  goto addInstWord28MappedCase87d7Switch9;
                 case 0x87d8:
-                  goto switchD_000badac_caseD_87d8;
+                  goto addInstWord28MappedCase87d8Switch9;
                 case 0x87d9:
-                  goto switchD_000badac_caseD_87d9;
+                  goto addInstWord28MappedCase87d9Switch9;
                 case 0x87da:
-                  goto switchD_000badac_caseD_87da;
+                  goto addInstWord28MappedCase87daSwitch9;
                 case 0x87db:
-                  goto switchD_000badac_caseD_87db;
+                  goto addInstWord28MappedCase87dbSwitch9;
                 case 0x87dc:
-                  goto switchD_000badac_caseD_87dc;
+                  goto addInstWord28MappedCase87dcSwitch9;
                 case 0x87de:
-                  goto switchD_000badac_caseD_87de;
+                  goto addInstWord28MappedCase87deSwitch9;
                 case 0x87df:
-                  goto switchD_000badac_caseD_87df;
+                  goto addInstWord28MappedCase87dfSwitch9;
                 }
                 break;
               case 0x87db:
                 addInstWord28Mapped = mulInst[0xc];
                 switch(addInstWord28Mapped) {
                 case 0x87d5:
-                  goto switchD_000badac_caseD_87d5;
+                  goto addInstWord28MappedCase87d5Switch9;
                 case 0x87d6:
-                  goto switchD_000badac_caseD_87d6;
+                  goto addInstWord28MappedCase87d6Switch9;
                 case 0x87d7:
-                  goto switchD_000badac_caseD_87d7;
+                  goto addInstWord28MappedCase87d7Switch9;
                 case 0x87d8:
-                  goto switchD_000badac_caseD_87d8;
+                  goto addInstWord28MappedCase87d8Switch9;
                 case 0x87d9:
-                  goto switchD_000badac_caseD_87d9;
+                  goto addInstWord28MappedCase87d9Switch9;
                 case 0x87da:
-                  goto switchD_000badac_caseD_87da;
+                  goto addInstWord28MappedCase87daSwitch9;
                 case 0x87db:
-                  goto switchD_000badac_caseD_87db;
+                  goto addInstWord28MappedCase87dbSwitch9;
                 case 0x87dc:
-                  goto switchD_000badac_caseD_87dc;
+                  goto addInstWord28MappedCase87dcSwitch9;
                 case 0x87de:
-                  goto switchD_000badac_caseD_87de;
+                  goto addInstWord28MappedCase87deSwitch9;
                 case 0x87df:
-                  goto switchD_000badac_caseD_87df;
+                  goto addInstWord28MappedCase87dfSwitch9;
                 }
                 break;
               case 0x87dc:
                 addInstWord28Mapped = mulInst[0xd];
                 switch(addInstWord28Mapped) {
                 case 0x87d5:
-                  goto switchD_000badac_caseD_87d5;
+                  goto addInstWord28MappedCase87d5Switch9;
                 case 0x87d6:
-                  goto switchD_000badac_caseD_87d6;
+                  goto addInstWord28MappedCase87d6Switch9;
                 case 0x87d7:
-                  goto switchD_000badac_caseD_87d7;
+                  goto addInstWord28MappedCase87d7Switch9;
                 case 0x87d8:
-                  goto switchD_000badac_caseD_87d8;
+                  goto addInstWord28MappedCase87d8Switch9;
                 case 0x87d9:
-                  goto switchD_000badac_caseD_87d9;
+                  goto addInstWord28MappedCase87d9Switch9;
                 case 0x87da:
-                  goto switchD_000badac_caseD_87da;
+                  goto addInstWord28MappedCase87daSwitch9;
                 case 0x87db:
-                  goto switchD_000badac_caseD_87db;
+                  goto addInstWord28MappedCase87dbSwitch9;
                 case 0x87dc:
-                  goto switchD_000badac_caseD_87dc;
+                  goto addInstWord28MappedCase87dcSwitch9;
                 case 0x87de:
-                  goto switchD_000badac_caseD_87de;
+                  goto addInstWord28MappedCase87deSwitch9;
                 case 0x87df:
-                  goto switchD_000badac_caseD_87df;
+                  goto addInstWord28MappedCase87dfSwitch9;
                 }
               }
               addInstWord2cMapped = addInst[0xb];
@@ -1909,43 +1909,43 @@ switchD_000badac_caseD_87df:
                 addInstWord2cMapped = *srcRecordPtr;
                 switch(addInstWord2cMapped) {
                 case 0x87d5:
-switchD_000bb004_caseD_87d5:
+addInstWord2cMappedCase87d5Switch10:
                   addInstWord2cMapped = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000bb004_caseD_87d6:
+addInstWord2cMappedCase87d6Switch10:
                   addInstWord2cMapped = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000bb004_caseD_87d7:
+addInstWord2cMappedCase87d7Switch10:
                   addInstWord2cMapped = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000bb004_caseD_87d8:
+addInstWord2cMappedCase87d8Switch10:
                   addInstWord2cMapped = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000bb004_caseD_87d9:
+addInstWord2cMappedCase87d9Switch10:
                   addInstWord2cMapped = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000bb004_caseD_87da:
+addInstWord2cMappedCase87daSwitch10:
                   addInstWord2cMapped = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000bb004_caseD_87db:
+addInstWord2cMappedCase87dbSwitch10:
                   addInstWord2cMapped = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000bb004_caseD_87dc:
+addInstWord2cMappedCase87dcSwitch10:
                   addInstWord2cMapped = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000bb004_caseD_87de:
+addInstWord2cMappedCase87deSwitch10:
                   addInstWord2cMapped = 0x87df;
                   break;
                 case 0x87df:
-switchD_000bb004_caseD_87df:
+addInstWord2cMappedCase87dfSwitch10:
                   addInstWord2cMapped = 0x87de;
                 }
                 break;
@@ -1953,75 +1953,75 @@ switchD_000bb004_caseD_87df:
                 addInstWord2cMapped = mulInst[0xb];
                 switch(addInstWord2cMapped) {
                 case 0x87d5:
-                  goto switchD_000bb004_caseD_87d5;
+                  goto addInstWord2cMappedCase87d5Switch10;
                 case 0x87d6:
-                  goto switchD_000bb004_caseD_87d6;
+                  goto addInstWord2cMappedCase87d6Switch10;
                 case 0x87d7:
-                  goto switchD_000bb004_caseD_87d7;
+                  goto addInstWord2cMappedCase87d7Switch10;
                 case 0x87d8:
-                  goto switchD_000bb004_caseD_87d8;
+                  goto addInstWord2cMappedCase87d8Switch10;
                 case 0x87d9:
-                  goto switchD_000bb004_caseD_87d9;
+                  goto addInstWord2cMappedCase87d9Switch10;
                 case 0x87da:
-                  goto switchD_000bb004_caseD_87da;
+                  goto addInstWord2cMappedCase87daSwitch10;
                 case 0x87db:
-                  goto switchD_000bb004_caseD_87db;
+                  goto addInstWord2cMappedCase87dbSwitch10;
                 case 0x87dc:
-                  goto switchD_000bb004_caseD_87dc;
+                  goto addInstWord2cMappedCase87dcSwitch10;
                 case 0x87de:
-                  goto switchD_000bb004_caseD_87de;
+                  goto addInstWord2cMappedCase87deSwitch10;
                 case 0x87df:
-                  goto switchD_000bb004_caseD_87df;
+                  goto addInstWord2cMappedCase87dfSwitch10;
                 }
                 break;
               case 0x87db:
                 addInstWord2cMapped = mulInst[0xc];
                 switch(addInstWord2cMapped) {
                 case 0x87d5:
-                  goto switchD_000bb004_caseD_87d5;
+                  goto addInstWord2cMappedCase87d5Switch10;
                 case 0x87d6:
-                  goto switchD_000bb004_caseD_87d6;
+                  goto addInstWord2cMappedCase87d6Switch10;
                 case 0x87d7:
-                  goto switchD_000bb004_caseD_87d7;
+                  goto addInstWord2cMappedCase87d7Switch10;
                 case 0x87d8:
-                  goto switchD_000bb004_caseD_87d8;
+                  goto addInstWord2cMappedCase87d8Switch10;
                 case 0x87d9:
-                  goto switchD_000bb004_caseD_87d9;
+                  goto addInstWord2cMappedCase87d9Switch10;
                 case 0x87da:
-                  goto switchD_000bb004_caseD_87da;
+                  goto addInstWord2cMappedCase87daSwitch10;
                 case 0x87db:
-                  goto switchD_000bb004_caseD_87db;
+                  goto addInstWord2cMappedCase87dbSwitch10;
                 case 0x87dc:
-                  goto switchD_000bb004_caseD_87dc;
+                  goto addInstWord2cMappedCase87dcSwitch10;
                 case 0x87de:
-                  goto switchD_000bb004_caseD_87de;
+                  goto addInstWord2cMappedCase87deSwitch10;
                 case 0x87df:
-                  goto switchD_000bb004_caseD_87df;
+                  goto addInstWord2cMappedCase87dfSwitch10;
                 }
                 break;
               case 0x87dc:
                 addInstWord2cMapped = mulInst[0xd];
                 switch(addInstWord2cMapped) {
                 case 0x87d5:
-                  goto switchD_000bb004_caseD_87d5;
+                  goto addInstWord2cMappedCase87d5Switch10;
                 case 0x87d6:
-                  goto switchD_000bb004_caseD_87d6;
+                  goto addInstWord2cMappedCase87d6Switch10;
                 case 0x87d7:
-                  goto switchD_000bb004_caseD_87d7;
+                  goto addInstWord2cMappedCase87d7Switch10;
                 case 0x87d8:
-                  goto switchD_000bb004_caseD_87d8;
+                  goto addInstWord2cMappedCase87d8Switch10;
                 case 0x87d9:
-                  goto switchD_000bb004_caseD_87d9;
+                  goto addInstWord2cMappedCase87d9Switch10;
                 case 0x87da:
-                  goto switchD_000bb004_caseD_87da;
+                  goto addInstWord2cMappedCase87daSwitch10;
                 case 0x87db:
-                  goto switchD_000bb004_caseD_87db;
+                  goto addInstWord2cMappedCase87dbSwitch10;
                 case 0x87dc:
-                  goto switchD_000bb004_caseD_87dc;
+                  goto addInstWord2cMappedCase87dcSwitch10;
                 case 0x87de:
-                  goto switchD_000bb004_caseD_87de;
+                  goto addInstWord2cMappedCase87deSwitch10;
                 case 0x87df:
-                  goto switchD_000bb004_caseD_87df;
+                  goto addInstWord2cMappedCase87dfSwitch10;
                 }
               }
               addInstWord30Mapped = addInst[0xc];
@@ -2043,43 +2043,43 @@ switchD_000bb004_caseD_87df:
                 addInstWord30Mapped = *srcRecordPtr;
                 switch(addInstWord30Mapped) {
                 case 0x87d5:
-switchD_000bb25c_caseD_87d5:
+addInstWord30MappedCase87d5Switch11:
                   addInstWord30Mapped = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000bb25c_caseD_87d6:
+addInstWord30MappedCase87d6Switch11:
                   addInstWord30Mapped = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000bb25c_caseD_87d7:
+addInstWord30MappedCase87d7Switch11:
                   addInstWord30Mapped = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000bb25c_caseD_87d8:
+addInstWord30MappedCase87d8Switch11:
                   addInstWord30Mapped = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000bb25c_caseD_87d9:
+addInstWord30MappedCase87d9Switch11:
                   addInstWord30Mapped = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000bb25c_caseD_87da:
+addInstWord30MappedCase87daSwitch11:
                   addInstWord30Mapped = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000bb25c_caseD_87db:
+addInstWord30MappedCase87dbSwitch11:
                   addInstWord30Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000bb25c_caseD_87dc:
+addInstWord30MappedCase87dcSwitch11:
                   addInstWord30Mapped = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000bb25c_caseD_87de:
+addInstWord30MappedCase87deSwitch11:
                   addInstWord30Mapped = 0x87df;
                   break;
                 case 0x87df:
-switchD_000bb25c_caseD_87df:
+addInstWord30MappedCase87dfSwitch11:
                   addInstWord30Mapped = 0x87de;
                 }
                 break;
@@ -2087,75 +2087,75 @@ switchD_000bb25c_caseD_87df:
                 addInstWord30Mapped = mulInst[0xb];
                 switch(addInstWord30Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb25c_caseD_87d5;
+                  goto addInstWord30MappedCase87d5Switch11;
                 case 0x87d6:
-                  goto switchD_000bb25c_caseD_87d6;
+                  goto addInstWord30MappedCase87d6Switch11;
                 case 0x87d7:
-                  goto switchD_000bb25c_caseD_87d7;
+                  goto addInstWord30MappedCase87d7Switch11;
                 case 0x87d8:
-                  goto switchD_000bb25c_caseD_87d8;
+                  goto addInstWord30MappedCase87d8Switch11;
                 case 0x87d9:
-                  goto switchD_000bb25c_caseD_87d9;
+                  goto addInstWord30MappedCase87d9Switch11;
                 case 0x87da:
-                  goto switchD_000bb25c_caseD_87da;
+                  goto addInstWord30MappedCase87daSwitch11;
                 case 0x87db:
-                  goto switchD_000bb25c_caseD_87db;
+                  goto addInstWord30MappedCase87dbSwitch11;
                 case 0x87dc:
-                  goto switchD_000bb25c_caseD_87dc;
+                  goto addInstWord30MappedCase87dcSwitch11;
                 case 0x87de:
-                  goto switchD_000bb25c_caseD_87de;
+                  goto addInstWord30MappedCase87deSwitch11;
                 case 0x87df:
-                  goto switchD_000bb25c_caseD_87df;
+                  goto addInstWord30MappedCase87dfSwitch11;
                 }
                 break;
               case 0x87db:
                 addInstWord30Mapped = mulInst[0xc];
                 switch(addInstWord30Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb25c_caseD_87d5;
+                  goto addInstWord30MappedCase87d5Switch11;
                 case 0x87d6:
-                  goto switchD_000bb25c_caseD_87d6;
+                  goto addInstWord30MappedCase87d6Switch11;
                 case 0x87d7:
-                  goto switchD_000bb25c_caseD_87d7;
+                  goto addInstWord30MappedCase87d7Switch11;
                 case 0x87d8:
-                  goto switchD_000bb25c_caseD_87d8;
+                  goto addInstWord30MappedCase87d8Switch11;
                 case 0x87d9:
-                  goto switchD_000bb25c_caseD_87d9;
+                  goto addInstWord30MappedCase87d9Switch11;
                 case 0x87da:
-                  goto switchD_000bb25c_caseD_87da;
+                  goto addInstWord30MappedCase87daSwitch11;
                 case 0x87db:
-                  goto switchD_000bb25c_caseD_87db;
+                  goto addInstWord30MappedCase87dbSwitch11;
                 case 0x87dc:
-                  goto switchD_000bb25c_caseD_87dc;
+                  goto addInstWord30MappedCase87dcSwitch11;
                 case 0x87de:
-                  goto switchD_000bb25c_caseD_87de;
+                  goto addInstWord30MappedCase87deSwitch11;
                 case 0x87df:
-                  goto switchD_000bb25c_caseD_87df;
+                  goto addInstWord30MappedCase87dfSwitch11;
                 }
                 break;
               case 0x87dc:
                 addInstWord30Mapped = mulInst[0xd];
                 switch(addInstWord30Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb25c_caseD_87d5;
+                  goto addInstWord30MappedCase87d5Switch11;
                 case 0x87d6:
-                  goto switchD_000bb25c_caseD_87d6;
+                  goto addInstWord30MappedCase87d6Switch11;
                 case 0x87d7:
-                  goto switchD_000bb25c_caseD_87d7;
+                  goto addInstWord30MappedCase87d7Switch11;
                 case 0x87d8:
-                  goto switchD_000bb25c_caseD_87d8;
+                  goto addInstWord30MappedCase87d8Switch11;
                 case 0x87d9:
-                  goto switchD_000bb25c_caseD_87d9;
+                  goto addInstWord30MappedCase87d9Switch11;
                 case 0x87da:
-                  goto switchD_000bb25c_caseD_87da;
+                  goto addInstWord30MappedCase87daSwitch11;
                 case 0x87db:
-                  goto switchD_000bb25c_caseD_87db;
+                  goto addInstWord30MappedCase87dbSwitch11;
                 case 0x87dc:
-                  goto switchD_000bb25c_caseD_87dc;
+                  goto addInstWord30MappedCase87dcSwitch11;
                 case 0x87de:
-                  goto switchD_000bb25c_caseD_87de;
+                  goto addInstWord30MappedCase87deSwitch11;
                 case 0x87df:
-                  goto switchD_000bb25c_caseD_87df;
+                  goto addInstWord30MappedCase87dfSwitch11;
                 }
               }
               addInstWord34Mapped = addInst[0xd];
@@ -2177,43 +2177,43 @@ switchD_000bb25c_caseD_87df:
                 addInstWord34Mapped = *srcRecordPtr;
                 switch(addInstWord34Mapped) {
                 case 0x87d5:
-switchD_000bb4b4_caseD_87d5:
+addInstWord34MappedCase87d5Switch12:
                   addInstWord34Mapped = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000bb4b4_caseD_87d6:
+addInstWord34MappedCase87d6Switch12:
                   addInstWord34Mapped = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000bb4b4_caseD_87d7:
+addInstWord34MappedCase87d7Switch12:
                   addInstWord34Mapped = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000bb4b4_caseD_87d8:
+addInstWord34MappedCase87d8Switch12:
                   addInstWord34Mapped = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000bb4b4_caseD_87d9:
+addInstWord34MappedCase87d9Switch12:
                   addInstWord34Mapped = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000bb4b4_caseD_87da:
+addInstWord34MappedCase87daSwitch12:
                   addInstWord34Mapped = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000bb4b4_caseD_87db:
+addInstWord34MappedCase87dbSwitch12:
                   addInstWord34Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000bb4b4_caseD_87dc:
+addInstWord34MappedCase87dcSwitch12:
                   addInstWord34Mapped = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000bb4b4_caseD_87de:
+addInstWord34MappedCase87deSwitch12:
                   addInstWord34Mapped = 0x87df;
                   break;
                 case 0x87df:
-switchD_000bb4b4_caseD_87df:
+addInstWord34MappedCase87dfSwitch12:
                   addInstWord34Mapped = 0x87de;
                 }
                 break;
@@ -2221,75 +2221,75 @@ switchD_000bb4b4_caseD_87df:
                 addInstWord34Mapped = mulInst[0xb];
                 switch(addInstWord34Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb4b4_caseD_87d5;
+                  goto addInstWord34MappedCase87d5Switch12;
                 case 0x87d6:
-                  goto switchD_000bb4b4_caseD_87d6;
+                  goto addInstWord34MappedCase87d6Switch12;
                 case 0x87d7:
-                  goto switchD_000bb4b4_caseD_87d7;
+                  goto addInstWord34MappedCase87d7Switch12;
                 case 0x87d8:
-                  goto switchD_000bb4b4_caseD_87d8;
+                  goto addInstWord34MappedCase87d8Switch12;
                 case 0x87d9:
-                  goto switchD_000bb4b4_caseD_87d9;
+                  goto addInstWord34MappedCase87d9Switch12;
                 case 0x87da:
-                  goto switchD_000bb4b4_caseD_87da;
+                  goto addInstWord34MappedCase87daSwitch12;
                 case 0x87db:
-                  goto switchD_000bb4b4_caseD_87db;
+                  goto addInstWord34MappedCase87dbSwitch12;
                 case 0x87dc:
-                  goto switchD_000bb4b4_caseD_87dc;
+                  goto addInstWord34MappedCase87dcSwitch12;
                 case 0x87de:
-                  goto switchD_000bb4b4_caseD_87de;
+                  goto addInstWord34MappedCase87deSwitch12;
                 case 0x87df:
-                  goto switchD_000bb4b4_caseD_87df;
+                  goto addInstWord34MappedCase87dfSwitch12;
                 }
                 break;
               case 0x87db:
                 addInstWord34Mapped = mulInst[0xc];
                 switch(addInstWord34Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb4b4_caseD_87d5;
+                  goto addInstWord34MappedCase87d5Switch12;
                 case 0x87d6:
-                  goto switchD_000bb4b4_caseD_87d6;
+                  goto addInstWord34MappedCase87d6Switch12;
                 case 0x87d7:
-                  goto switchD_000bb4b4_caseD_87d7;
+                  goto addInstWord34MappedCase87d7Switch12;
                 case 0x87d8:
-                  goto switchD_000bb4b4_caseD_87d8;
+                  goto addInstWord34MappedCase87d8Switch12;
                 case 0x87d9:
-                  goto switchD_000bb4b4_caseD_87d9;
+                  goto addInstWord34MappedCase87d9Switch12;
                 case 0x87da:
-                  goto switchD_000bb4b4_caseD_87da;
+                  goto addInstWord34MappedCase87daSwitch12;
                 case 0x87db:
-                  goto switchD_000bb4b4_caseD_87db;
+                  goto addInstWord34MappedCase87dbSwitch12;
                 case 0x87dc:
-                  goto switchD_000bb4b4_caseD_87dc;
+                  goto addInstWord34MappedCase87dcSwitch12;
                 case 0x87de:
-                  goto switchD_000bb4b4_caseD_87de;
+                  goto addInstWord34MappedCase87deSwitch12;
                 case 0x87df:
-                  goto switchD_000bb4b4_caseD_87df;
+                  goto addInstWord34MappedCase87dfSwitch12;
                 }
                 break;
               case 0x87dc:
                 addInstWord34Mapped = mulInst[0xd];
                 switch(addInstWord34Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb4b4_caseD_87d5;
+                  goto addInstWord34MappedCase87d5Switch12;
                 case 0x87d6:
-                  goto switchD_000bb4b4_caseD_87d6;
+                  goto addInstWord34MappedCase87d6Switch12;
                 case 0x87d7:
-                  goto switchD_000bb4b4_caseD_87d7;
+                  goto addInstWord34MappedCase87d7Switch12;
                 case 0x87d8:
-                  goto switchD_000bb4b4_caseD_87d8;
+                  goto addInstWord34MappedCase87d8Switch12;
                 case 0x87d9:
-                  goto switchD_000bb4b4_caseD_87d9;
+                  goto addInstWord34MappedCase87d9Switch12;
                 case 0x87da:
-                  goto switchD_000bb4b4_caseD_87da;
+                  goto addInstWord34MappedCase87daSwitch12;
                 case 0x87db:
-                  goto switchD_000bb4b4_caseD_87db;
+                  goto addInstWord34MappedCase87dbSwitch12;
                 case 0x87dc:
-                  goto switchD_000bb4b4_caseD_87dc;
+                  goto addInstWord34MappedCase87dcSwitch12;
                 case 0x87de:
-                  goto switchD_000bb4b4_caseD_87de;
+                  goto addInstWord34MappedCase87deSwitch12;
                 case 0x87df:
-                  goto switchD_000bb4b4_caseD_87df;
+                  goto addInstWord34MappedCase87dfSwitch12;
                 }
               }
               addInst[0xd] = addInstWord34Mapped;
@@ -2313,43 +2313,43 @@ switchD_000bb4b4_caseD_87df:
                 operandWord = *srcRecordPtr;
                 switch(operandWord) {
                 case 0x87d5:
-switchD_000bb718_caseD_87d5:
+operandWordCase87d5Switch13:
                   operandWord = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000bb718_caseD_87d6:
+operandWordCase87d6Switch13:
                   operandWord = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000bb718_caseD_87d7:
+operandWordCase87d7Switch13:
                   operandWord = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000bb718_caseD_87d8:
+operandWordCase87d8Switch13:
                   operandWord = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000bb718_caseD_87d9:
+operandWordCase87d9Switch13:
                   operandWord = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000bb718_caseD_87da:
+operandWordCase87daSwitch13:
                   operandWord = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000bb718_caseD_87db:
+operandWordCase87dbSwitch13:
                   operandWord = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000bb718_caseD_87dc:
+operandWordCase87dcSwitch13:
                   operandWord = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000bb718_caseD_87de:
+operandWordCase87deSwitch13:
                   operandWord = 0x87df;
                   break;
                 case 0x87df:
-switchD_000bb718_caseD_87df:
+operandWordCase87dfSwitch13:
                   operandWord = 0x87de;
                 }
                 break;
@@ -2357,75 +2357,75 @@ switchD_000bb718_caseD_87df:
                 operandWord = mulInst[0x12];
                 switch(operandWord) {
                 case 0x87d5:
-                  goto switchD_000bb718_caseD_87d5;
+                  goto operandWordCase87d5Switch13;
                 case 0x87d6:
-                  goto switchD_000bb718_caseD_87d6;
+                  goto operandWordCase87d6Switch13;
                 case 0x87d7:
-                  goto switchD_000bb718_caseD_87d7;
+                  goto operandWordCase87d7Switch13;
                 case 0x87d8:
-                  goto switchD_000bb718_caseD_87d8;
+                  goto operandWordCase87d8Switch13;
                 case 0x87d9:
-                  goto switchD_000bb718_caseD_87d9;
+                  goto operandWordCase87d9Switch13;
                 case 0x87da:
-                  goto switchD_000bb718_caseD_87da;
+                  goto operandWordCase87daSwitch13;
                 case 0x87db:
-                  goto switchD_000bb718_caseD_87db;
+                  goto operandWordCase87dbSwitch13;
                 case 0x87dc:
-                  goto switchD_000bb718_caseD_87dc;
+                  goto operandWordCase87dcSwitch13;
                 case 0x87de:
-                  goto switchD_000bb718_caseD_87de;
+                  goto operandWordCase87deSwitch13;
                 case 0x87df:
-                  goto switchD_000bb718_caseD_87df;
+                  goto operandWordCase87dfSwitch13;
                 }
                 break;
               case 0x87db:
                 operandWord = mulInst[0x13];
                 switch(operandWord) {
                 case 0x87d5:
-                  goto switchD_000bb718_caseD_87d5;
+                  goto operandWordCase87d5Switch13;
                 case 0x87d6:
-                  goto switchD_000bb718_caseD_87d6;
+                  goto operandWordCase87d6Switch13;
                 case 0x87d7:
-                  goto switchD_000bb718_caseD_87d7;
+                  goto operandWordCase87d7Switch13;
                 case 0x87d8:
-                  goto switchD_000bb718_caseD_87d8;
+                  goto operandWordCase87d8Switch13;
                 case 0x87d9:
-                  goto switchD_000bb718_caseD_87d9;
+                  goto operandWordCase87d9Switch13;
                 case 0x87da:
-                  goto switchD_000bb718_caseD_87da;
+                  goto operandWordCase87daSwitch13;
                 case 0x87db:
-                  goto switchD_000bb718_caseD_87db;
+                  goto operandWordCase87dbSwitch13;
                 case 0x87dc:
-                  goto switchD_000bb718_caseD_87dc;
+                  goto operandWordCase87dcSwitch13;
                 case 0x87de:
-                  goto switchD_000bb718_caseD_87de;
+                  goto operandWordCase87deSwitch13;
                 case 0x87df:
-                  goto switchD_000bb718_caseD_87df;
+                  goto operandWordCase87dfSwitch13;
                 }
                 break;
               case 0x87dc:
                 operandWord = mulInst[0x14];
                 switch(operandWord) {
                 case 0x87d5:
-                  goto switchD_000bb718_caseD_87d5;
+                  goto operandWordCase87d5Switch13;
                 case 0x87d6:
-                  goto switchD_000bb718_caseD_87d6;
+                  goto operandWordCase87d6Switch13;
                 case 0x87d7:
-                  goto switchD_000bb718_caseD_87d7;
+                  goto operandWordCase87d7Switch13;
                 case 0x87d8:
-                  goto switchD_000bb718_caseD_87d8;
+                  goto operandWordCase87d8Switch13;
                 case 0x87d9:
-                  goto switchD_000bb718_caseD_87d9;
+                  goto operandWordCase87d9Switch13;
                 case 0x87da:
-                  goto switchD_000bb718_caseD_87da;
+                  goto operandWordCase87daSwitch13;
                 case 0x87db:
-                  goto switchD_000bb718_caseD_87db;
+                  goto operandWordCase87dbSwitch13;
                 case 0x87dc:
-                  goto switchD_000bb718_caseD_87dc;
+                  goto operandWordCase87dcSwitch13;
                 case 0x87de:
-                  goto switchD_000bb718_caseD_87de;
+                  goto operandWordCase87deSwitch13;
                 case 0x87df:
-                  goto switchD_000bb718_caseD_87df;
+                  goto operandWordCase87dfSwitch13;
                 }
               }
               addInstWord48Mapped = addInst[0x12];
@@ -2447,43 +2447,43 @@ switchD_000bb718_caseD_87df:
                 addInstWord48Mapped = *srcRecordPtr;
                 switch(addInstWord48Mapped) {
                 case 0x87d5:
-switchD_000bb970_caseD_87d5:
+addInstWord48MappedCase87d5Switch14:
                   addInstWord48Mapped = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000bb970_caseD_87d6:
+addInstWord48MappedCase87d6Switch14:
                   addInstWord48Mapped = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000bb970_caseD_87d7:
+addInstWord48MappedCase87d7Switch14:
                   addInstWord48Mapped = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000bb970_caseD_87d8:
+addInstWord48MappedCase87d8Switch14:
                   addInstWord48Mapped = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000bb970_caseD_87d9:
+addInstWord48MappedCase87d9Switch14:
                   addInstWord48Mapped = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000bb970_caseD_87da:
+addInstWord48MappedCase87daSwitch14:
                   addInstWord48Mapped = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000bb970_caseD_87db:
+addInstWord48MappedCase87dbSwitch14:
                   addInstWord48Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000bb970_caseD_87dc:
+addInstWord48MappedCase87dcSwitch14:
                   addInstWord48Mapped = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000bb970_caseD_87de:
+addInstWord48MappedCase87deSwitch14:
                   addInstWord48Mapped = 0x87df;
                   break;
                 case 0x87df:
-switchD_000bb970_caseD_87df:
+addInstWord48MappedCase87dfSwitch14:
                   addInstWord48Mapped = 0x87de;
                 }
                 break;
@@ -2491,75 +2491,75 @@ switchD_000bb970_caseD_87df:
                 addInstWord48Mapped = mulInst[0x12];
                 switch(addInstWord48Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb970_caseD_87d5;
+                  goto addInstWord48MappedCase87d5Switch14;
                 case 0x87d6:
-                  goto switchD_000bb970_caseD_87d6;
+                  goto addInstWord48MappedCase87d6Switch14;
                 case 0x87d7:
-                  goto switchD_000bb970_caseD_87d7;
+                  goto addInstWord48MappedCase87d7Switch14;
                 case 0x87d8:
-                  goto switchD_000bb970_caseD_87d8;
+                  goto addInstWord48MappedCase87d8Switch14;
                 case 0x87d9:
-                  goto switchD_000bb970_caseD_87d9;
+                  goto addInstWord48MappedCase87d9Switch14;
                 case 0x87da:
-                  goto switchD_000bb970_caseD_87da;
+                  goto addInstWord48MappedCase87daSwitch14;
                 case 0x87db:
-                  goto switchD_000bb970_caseD_87db;
+                  goto addInstWord48MappedCase87dbSwitch14;
                 case 0x87dc:
-                  goto switchD_000bb970_caseD_87dc;
+                  goto addInstWord48MappedCase87dcSwitch14;
                 case 0x87de:
-                  goto switchD_000bb970_caseD_87de;
+                  goto addInstWord48MappedCase87deSwitch14;
                 case 0x87df:
-                  goto switchD_000bb970_caseD_87df;
+                  goto addInstWord48MappedCase87dfSwitch14;
                 }
                 break;
               case 0x87db:
                 addInstWord48Mapped = mulInst[0x13];
                 switch(addInstWord48Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb970_caseD_87d5;
+                  goto addInstWord48MappedCase87d5Switch14;
                 case 0x87d6:
-                  goto switchD_000bb970_caseD_87d6;
+                  goto addInstWord48MappedCase87d6Switch14;
                 case 0x87d7:
-                  goto switchD_000bb970_caseD_87d7;
+                  goto addInstWord48MappedCase87d7Switch14;
                 case 0x87d8:
-                  goto switchD_000bb970_caseD_87d8;
+                  goto addInstWord48MappedCase87d8Switch14;
                 case 0x87d9:
-                  goto switchD_000bb970_caseD_87d9;
+                  goto addInstWord48MappedCase87d9Switch14;
                 case 0x87da:
-                  goto switchD_000bb970_caseD_87da;
+                  goto addInstWord48MappedCase87daSwitch14;
                 case 0x87db:
-                  goto switchD_000bb970_caseD_87db;
+                  goto addInstWord48MappedCase87dbSwitch14;
                 case 0x87dc:
-                  goto switchD_000bb970_caseD_87dc;
+                  goto addInstWord48MappedCase87dcSwitch14;
                 case 0x87de:
-                  goto switchD_000bb970_caseD_87de;
+                  goto addInstWord48MappedCase87deSwitch14;
                 case 0x87df:
-                  goto switchD_000bb970_caseD_87df;
+                  goto addInstWord48MappedCase87dfSwitch14;
                 }
                 break;
               case 0x87dc:
                 addInstWord48Mapped = mulInst[0x14];
                 switch(addInstWord48Mapped) {
                 case 0x87d5:
-                  goto switchD_000bb970_caseD_87d5;
+                  goto addInstWord48MappedCase87d5Switch14;
                 case 0x87d6:
-                  goto switchD_000bb970_caseD_87d6;
+                  goto addInstWord48MappedCase87d6Switch14;
                 case 0x87d7:
-                  goto switchD_000bb970_caseD_87d7;
+                  goto addInstWord48MappedCase87d7Switch14;
                 case 0x87d8:
-                  goto switchD_000bb970_caseD_87d8;
+                  goto addInstWord48MappedCase87d8Switch14;
                 case 0x87d9:
-                  goto switchD_000bb970_caseD_87d9;
+                  goto addInstWord48MappedCase87d9Switch14;
                 case 0x87da:
-                  goto switchD_000bb970_caseD_87da;
+                  goto addInstWord48MappedCase87daSwitch14;
                 case 0x87db:
-                  goto switchD_000bb970_caseD_87db;
+                  goto addInstWord48MappedCase87dbSwitch14;
                 case 0x87dc:
-                  goto switchD_000bb970_caseD_87dc;
+                  goto addInstWord48MappedCase87dcSwitch14;
                 case 0x87de:
-                  goto switchD_000bb970_caseD_87de;
+                  goto addInstWord48MappedCase87deSwitch14;
                 case 0x87df:
-                  goto switchD_000bb970_caseD_87df;
+                  goto addInstWord48MappedCase87dfSwitch14;
                 }
               }
               addInstWord4cMapped = addInst[0x13];
@@ -2581,43 +2581,43 @@ switchD_000bb970_caseD_87df:
                 addInstWord4cMapped = *srcRecordPtr;
                 switch(addInstWord4cMapped) {
                 case 0x87d5:
-switchD_000bbbc8_caseD_87d5:
+addInstWord4cMappedCase87d5Switch15:
                   addInstWord4cMapped = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000bbbc8_caseD_87d6:
+addInstWord4cMappedCase87d6Switch15:
                   addInstWord4cMapped = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000bbbc8_caseD_87d7:
+addInstWord4cMappedCase87d7Switch15:
                   addInstWord4cMapped = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000bbbc8_caseD_87d8:
+addInstWord4cMappedCase87d8Switch15:
                   addInstWord4cMapped = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000bbbc8_caseD_87d9:
+addInstWord4cMappedCase87d9Switch15:
                   addInstWord4cMapped = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000bbbc8_caseD_87da:
+addInstWord4cMappedCase87daSwitch15:
                   addInstWord4cMapped = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000bbbc8_caseD_87db:
+addInstWord4cMappedCase87dbSwitch15:
                   addInstWord4cMapped = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000bbbc8_caseD_87dc:
+addInstWord4cMappedCase87dcSwitch15:
                   addInstWord4cMapped = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000bbbc8_caseD_87de:
+addInstWord4cMappedCase87deSwitch15:
                   addInstWord4cMapped = 0x87df;
                   break;
                 case 0x87df:
-switchD_000bbbc8_caseD_87df:
+addInstWord4cMappedCase87dfSwitch15:
                   addInstWord4cMapped = 0x87de;
                 }
                 break;
@@ -2625,75 +2625,75 @@ switchD_000bbbc8_caseD_87df:
                 addInstWord4cMapped = mulInst[0x12];
                 switch(addInstWord4cMapped) {
                 case 0x87d5:
-                  goto switchD_000bbbc8_caseD_87d5;
+                  goto addInstWord4cMappedCase87d5Switch15;
                 case 0x87d6:
-                  goto switchD_000bbbc8_caseD_87d6;
+                  goto addInstWord4cMappedCase87d6Switch15;
                 case 0x87d7:
-                  goto switchD_000bbbc8_caseD_87d7;
+                  goto addInstWord4cMappedCase87d7Switch15;
                 case 0x87d8:
-                  goto switchD_000bbbc8_caseD_87d8;
+                  goto addInstWord4cMappedCase87d8Switch15;
                 case 0x87d9:
-                  goto switchD_000bbbc8_caseD_87d9;
+                  goto addInstWord4cMappedCase87d9Switch15;
                 case 0x87da:
-                  goto switchD_000bbbc8_caseD_87da;
+                  goto addInstWord4cMappedCase87daSwitch15;
                 case 0x87db:
-                  goto switchD_000bbbc8_caseD_87db;
+                  goto addInstWord4cMappedCase87dbSwitch15;
                 case 0x87dc:
-                  goto switchD_000bbbc8_caseD_87dc;
+                  goto addInstWord4cMappedCase87dcSwitch15;
                 case 0x87de:
-                  goto switchD_000bbbc8_caseD_87de;
+                  goto addInstWord4cMappedCase87deSwitch15;
                 case 0x87df:
-                  goto switchD_000bbbc8_caseD_87df;
+                  goto addInstWord4cMappedCase87dfSwitch15;
                 }
                 break;
               case 0x87db:
                 addInstWord4cMapped = mulInst[0x13];
                 switch(addInstWord4cMapped) {
                 case 0x87d5:
-                  goto switchD_000bbbc8_caseD_87d5;
+                  goto addInstWord4cMappedCase87d5Switch15;
                 case 0x87d6:
-                  goto switchD_000bbbc8_caseD_87d6;
+                  goto addInstWord4cMappedCase87d6Switch15;
                 case 0x87d7:
-                  goto switchD_000bbbc8_caseD_87d7;
+                  goto addInstWord4cMappedCase87d7Switch15;
                 case 0x87d8:
-                  goto switchD_000bbbc8_caseD_87d8;
+                  goto addInstWord4cMappedCase87d8Switch15;
                 case 0x87d9:
-                  goto switchD_000bbbc8_caseD_87d9;
+                  goto addInstWord4cMappedCase87d9Switch15;
                 case 0x87da:
-                  goto switchD_000bbbc8_caseD_87da;
+                  goto addInstWord4cMappedCase87daSwitch15;
                 case 0x87db:
-                  goto switchD_000bbbc8_caseD_87db;
+                  goto addInstWord4cMappedCase87dbSwitch15;
                 case 0x87dc:
-                  goto switchD_000bbbc8_caseD_87dc;
+                  goto addInstWord4cMappedCase87dcSwitch15;
                 case 0x87de:
-                  goto switchD_000bbbc8_caseD_87de;
+                  goto addInstWord4cMappedCase87deSwitch15;
                 case 0x87df:
-                  goto switchD_000bbbc8_caseD_87df;
+                  goto addInstWord4cMappedCase87dfSwitch15;
                 }
                 break;
               case 0x87dc:
                 addInstWord4cMapped = mulInst[0x14];
                 switch(addInstWord4cMapped) {
                 case 0x87d5:
-                  goto switchD_000bbbc8_caseD_87d5;
+                  goto addInstWord4cMappedCase87d5Switch15;
                 case 0x87d6:
-                  goto switchD_000bbbc8_caseD_87d6;
+                  goto addInstWord4cMappedCase87d6Switch15;
                 case 0x87d7:
-                  goto switchD_000bbbc8_caseD_87d7;
+                  goto addInstWord4cMappedCase87d7Switch15;
                 case 0x87d8:
-                  goto switchD_000bbbc8_caseD_87d8;
+                  goto addInstWord4cMappedCase87d8Switch15;
                 case 0x87d9:
-                  goto switchD_000bbbc8_caseD_87d9;
+                  goto addInstWord4cMappedCase87d9Switch15;
                 case 0x87da:
-                  goto switchD_000bbbc8_caseD_87da;
+                  goto addInstWord4cMappedCase87daSwitch15;
                 case 0x87db:
-                  goto switchD_000bbbc8_caseD_87db;
+                  goto addInstWord4cMappedCase87dbSwitch15;
                 case 0x87dc:
-                  goto switchD_000bbbc8_caseD_87dc;
+                  goto addInstWord4cMappedCase87dcSwitch15;
                 case 0x87de:
-                  goto switchD_000bbbc8_caseD_87de;
+                  goto addInstWord4cMappedCase87deSwitch15;
                 case 0x87df:
-                  goto switchD_000bbbc8_caseD_87df;
+                  goto addInstWord4cMappedCase87dfSwitch15;
                 }
               }
               addInstWord50Mapped = addInst[0x14];
@@ -2715,43 +2715,43 @@ switchD_000bbbc8_caseD_87df:
                 addInstWord50Mapped = *srcRecordPtr;
                 switch(addInstWord50Mapped) {
                 case 0x87d5:
-switchD_000bbe20_caseD_87d5:
+addInstWord50MappedCase87d5Switch16:
                   addInstWord50Mapped = 0x87d9;
                   break;
                 case 0x87d6:
-switchD_000bbe20_caseD_87d6:
+addInstWord50MappedCase87d6Switch16:
                   addInstWord50Mapped = 0x87da;
                   break;
                 case 0x87d7:
-switchD_000bbe20_caseD_87d7:
+addInstWord50MappedCase87d7Switch16:
                   addInstWord50Mapped = 0x87db;
                   break;
                 case 0x87d8:
-switchD_000bbe20_caseD_87d8:
+addInstWord50MappedCase87d8Switch16:
                   addInstWord50Mapped = 0x87dc;
                   break;
                 case 0x87d9:
-switchD_000bbe20_caseD_87d9:
+addInstWord50MappedCase87d9Switch16:
                   addInstWord50Mapped = 0x87d5;
                   break;
                 case 0x87da:
-switchD_000bbe20_caseD_87da:
+addInstWord50MappedCase87daSwitch16:
                   addInstWord50Mapped = 0x87d6;
                   break;
                 case 0x87db:
-switchD_000bbe20_caseD_87db:
+addInstWord50MappedCase87dbSwitch16:
                   addInstWord50Mapped = 0x87d7;
                   break;
                 case 0x87dc:
-switchD_000bbe20_caseD_87dc:
+addInstWord50MappedCase87dcSwitch16:
                   addInstWord50Mapped = 0x87d8;
                   break;
                 case 0x87de:
-switchD_000bbe20_caseD_87de:
+addInstWord50MappedCase87deSwitch16:
                   addInstWord50Mapped = 0x87df;
                   break;
                 case 0x87df:
-switchD_000bbe20_caseD_87df:
+addInstWord50MappedCase87dfSwitch16:
                   addInstWord50Mapped = 0x87de;
                 }
                 break;
@@ -2759,75 +2759,75 @@ switchD_000bbe20_caseD_87df:
                 addInstWord50Mapped = mulInst[0x12];
                 switch(addInstWord50Mapped) {
                 case 0x87d5:
-                  goto switchD_000bbe20_caseD_87d5;
+                  goto addInstWord50MappedCase87d5Switch16;
                 case 0x87d6:
-                  goto switchD_000bbe20_caseD_87d6;
+                  goto addInstWord50MappedCase87d6Switch16;
                 case 0x87d7:
-                  goto switchD_000bbe20_caseD_87d7;
+                  goto addInstWord50MappedCase87d7Switch16;
                 case 0x87d8:
-                  goto switchD_000bbe20_caseD_87d8;
+                  goto addInstWord50MappedCase87d8Switch16;
                 case 0x87d9:
-                  goto switchD_000bbe20_caseD_87d9;
+                  goto addInstWord50MappedCase87d9Switch16;
                 case 0x87da:
-                  goto switchD_000bbe20_caseD_87da;
+                  goto addInstWord50MappedCase87daSwitch16;
                 case 0x87db:
-                  goto switchD_000bbe20_caseD_87db;
+                  goto addInstWord50MappedCase87dbSwitch16;
                 case 0x87dc:
-                  goto switchD_000bbe20_caseD_87dc;
+                  goto addInstWord50MappedCase87dcSwitch16;
                 case 0x87de:
-                  goto switchD_000bbe20_caseD_87de;
+                  goto addInstWord50MappedCase87deSwitch16;
                 case 0x87df:
-                  goto switchD_000bbe20_caseD_87df;
+                  goto addInstWord50MappedCase87dfSwitch16;
                 }
                 break;
               case 0x87db:
                 addInstWord50Mapped = mulInst[0x13];
                 switch(addInstWord50Mapped) {
                 case 0x87d5:
-                  goto switchD_000bbe20_caseD_87d5;
+                  goto addInstWord50MappedCase87d5Switch16;
                 case 0x87d6:
-                  goto switchD_000bbe20_caseD_87d6;
+                  goto addInstWord50MappedCase87d6Switch16;
                 case 0x87d7:
-                  goto switchD_000bbe20_caseD_87d7;
+                  goto addInstWord50MappedCase87d7Switch16;
                 case 0x87d8:
-                  goto switchD_000bbe20_caseD_87d8;
+                  goto addInstWord50MappedCase87d8Switch16;
                 case 0x87d9:
-                  goto switchD_000bbe20_caseD_87d9;
+                  goto addInstWord50MappedCase87d9Switch16;
                 case 0x87da:
-                  goto switchD_000bbe20_caseD_87da;
+                  goto addInstWord50MappedCase87daSwitch16;
                 case 0x87db:
-                  goto switchD_000bbe20_caseD_87db;
+                  goto addInstWord50MappedCase87dbSwitch16;
                 case 0x87dc:
-                  goto switchD_000bbe20_caseD_87dc;
+                  goto addInstWord50MappedCase87dcSwitch16;
                 case 0x87de:
-                  goto switchD_000bbe20_caseD_87de;
+                  goto addInstWord50MappedCase87deSwitch16;
                 case 0x87df:
-                  goto switchD_000bbe20_caseD_87df;
+                  goto addInstWord50MappedCase87dfSwitch16;
                 }
                 break;
               case 0x87dc:
                 addInstWord50Mapped = mulInst[0x14];
                 switch(addInstWord50Mapped) {
                 case 0x87d5:
-                  goto switchD_000bbe20_caseD_87d5;
+                  goto addInstWord50MappedCase87d5Switch16;
                 case 0x87d6:
-                  goto switchD_000bbe20_caseD_87d6;
+                  goto addInstWord50MappedCase87d6Switch16;
                 case 0x87d7:
-                  goto switchD_000bbe20_caseD_87d7;
+                  goto addInstWord50MappedCase87d7Switch16;
                 case 0x87d8:
-                  goto switchD_000bbe20_caseD_87d8;
+                  goto addInstWord50MappedCase87d8Switch16;
                 case 0x87d9:
-                  goto switchD_000bbe20_caseD_87d9;
+                  goto addInstWord50MappedCase87d9Switch16;
                 case 0x87da:
-                  goto switchD_000bbe20_caseD_87da;
+                  goto addInstWord50MappedCase87daSwitch16;
                 case 0x87db:
-                  goto switchD_000bbe20_caseD_87db;
+                  goto addInstWord50MappedCase87dbSwitch16;
                 case 0x87dc:
-                  goto switchD_000bbe20_caseD_87dc;
+                  goto addInstWord50MappedCase87dcSwitch16;
                 case 0x87de:
-                  goto switchD_000bbe20_caseD_87de;
+                  goto addInstWord50MappedCase87deSwitch16;
                 case 0x87df:
-                  goto switchD_000bbe20_caseD_87df;
+                  goto addInstWord50MappedCase87dfSwitch16;
                 }
               }
               addInst[0x14] = addInstWord50Mapped;
@@ -2854,7 +2854,7 @@ switchD_000bbe20_caseD_87df:
             }
           }
           else {
-LAB_000ba7ec:
+setCanContinue2:
             canContinue = false;
             addSearchIndex = addSearchIndex + 1;
           }
@@ -2889,14 +2889,14 @@ LAB_000ba7ec:
                     fusedPartnerIndex = followerIndex;
                   }
                   else {
-LAB_000bd88c:
+loopSetCanContinue3:
                     canContinue = false;
                     notFused = true;
                   }
                 }
                 else {
                   if (((laterSrc1Slot[-7] == 2) && (laterSrc1Slot[-6] == *(int *)(matMulInst + 8))) ||
-                     ((laterSrc1Slot[7] == 2 && (laterSrc1Slot[8] == *(int *)(matMulInst + 8))))) goto LAB_000bd88c;
+                     ((laterSrc1Slot[7] == 2 && (laterSrc1Slot[8] == *(int *)(matMulInst + 8))))) goto loopSetCanContinue3;
                   if ((laterSrc1Slot[-0xe] != 2) || (notFused = true, laterSrc1Slot[-0xd] != *(int *)(matMulInst + 8)))
                   {
                     notFused = false;
@@ -2905,7 +2905,7 @@ LAB_000bd88c:
                 followerIndex = followerIndex + 1;
                 followerCount = followerCount + -1;
               } while ((followerCount != 0) && (laterSrc1Slot = laterSrc1Slot + 0x1d, !notFused));
-              if (!canContinue) goto LAB_000bd970;
+              if (!canContinue) goto setMatMulSearchIndex;
               partnerOffset = fusedPartnerIndex * 0x74;
             }
             else {
@@ -2948,7 +2948,7 @@ LAB_000bd88c:
             }
           }
         }
-LAB_000bd970:
+setMatMulSearchIndex:
         matMulSearchIndex = matMulSearchIndex + 1;
       } while (matMulSearchIndex < instCount);
     }
@@ -3211,12 +3211,12 @@ int psnDecDecodeFragmentProgram(rsWords, programImage, outProgram, scCallbacks)
     if (phaseIndex < 4) {
       phaseCursor = phaseIndex;
       phaseScan = phaseIndex;
-      if ((*programImage >> 3 & 1) != 0) goto LAB_000bdeec;
+      if ((*programImage >> 3 & 1) != 0) goto setRecordCount;
       while( true ) {
         recordCount = recordCount + (programImage[phaseScan + 2] >> 6 & 0x3f) + 1;
         phaseCursor = phaseScan + 1;
         if (3 < phaseScan + 1) break;
-LAB_000bdeec:
+setRecordCount:
         recordCount = recordCount + (programImage[phaseCursor + 2] >> 0x11 & 0x1f) + 1;
         phaseScan = phaseCursor;
       }
@@ -3468,14 +3468,14 @@ int psnEncodeHwProgramPhased(psnProgram, rsWords, programImage, unusedArgR6, unu
       rsOutIndex = rsOutIndexNext;
     } while (loopIndex2 <= psnProgramWord8);
     rsCountMasked = rsOutIndexNext & 0xff;
-    if (rsOutIndexNext != 0) goto LAB_000be580;
+    if (rsOutIndexNext != 0) goto setRsCountMasked;
   }
   else {
     loopIndex2 = 1;
   }
   rsCountMasked = 1;
   rsWords[1] = 0;
-LAB_000be580:
+setRsCountMasked:
   rsCountMasked = rsCountMasked - 1 & 0xf;
   *rsWords = rsCountMasked;
   *rsWords = (*(byte *)(psnProgram + 0xd) & 7) << 5 | rsCountMasked;
@@ -3976,11 +3976,11 @@ int psnRemapTempRegisters(psnProgram, passThroughR4, passThroughR5, unusedArgR6,
                             *regField1ePtr = (ushort)remapIndex;
                           }
                         }
-                        goto LAB_000bf33c;
+                        goto setLoopIndex;
                       }
                       operandKindByte = *(byte *)kindField1aPtr;
                       if (operandKindByte == 2) {
-LAB_000bf224:
+loopSetRemapIndex:
                         remapIndex = regRemapTable[*(ushort *)scanRecordPtr];
                         if (remapIndex != -1) {
                           *(ushort *)scanRecordPtr = (ushort)remapIndex;
@@ -3988,16 +3988,16 @@ LAB_000bf224:
                       }
                       else if (operandKindByte < 3) {
                         if (operandKindByte == 1) {
-LAB_000bf20c:
+loopSetRemapIndex2:
                           remapIndex = regRemapTable[*(ushort *)regField0cCursor];
                           if (remapIndex != -1) {
                             *(ushort *)regField0cCursor = (ushort)remapIndex;
                           }
-                          goto LAB_000bf224;
+                          goto loopSetRemapIndex;
                         }
                       }
-                      else if (operandKindByte < 5) goto LAB_000bf20c;
-LAB_000bf33c:
+                      else if (operandKindByte < 5) goto loopSetRemapIndex2;
+setLoopIndex:
                       loopIndex = loopIndex + 1;
                       recordPtr = recordPtr + 0x12;
                       scanRecordPtr = scanRecordPtr + 0x12;
@@ -4098,18 +4098,18 @@ int psnPlanPhases(psnProgram, wantedPhaseCount, unusedArgR5, unusedArgR6, unused
     loopIndex = 1;
     do {
       loopIndex = loopIndex + 1;
-      if (*rsScanPtr != 1) goto LAB_000bf474;
+      if (*rsScanPtr != 1) goto checkRecordCount;
       rsScanPtr = rsScanPtr + 0x12;
     } while (loopIndex <= recordCount);
-LAB_000bf44c:
+loopSetUsedFlags:
     usedFlags = 0;
     hasHighAddress = 0;
     splittable = true;
   }
   else {
     loopIndex = 1;
-LAB_000bf474:
-    if (recordCount < loopIndex) goto LAB_000bf44c;
+checkRecordCount:
+    if (recordCount < loopIndex) goto loopSetUsedFlags;
     usedFlags = 0;
     splittable = true;
     recordPtr = (uint *)(psnProgram + loopIndex * 0x48);
@@ -4149,13 +4149,13 @@ LAB_000bf474:
         }
         texDimModeB = texDimModeC;
         if ((texDimModeA == '\x01') || (texDimModeB = texDimModeA, texDimModeA != '\0')) {
-          if (texDimModeB == '\x02') goto LAB_000bf5b4;
+          if (texDimModeB == '\x02') goto setTexRegCount;
           if (texDimModeB == '\x01') {
             texRegCount = texRegCount - *(byte *)((int)recordPtr + 0x13);
           }
         }
         else if (texDimModeC == '\x02') {
-LAB_000bf5b4:
+setTexRegCount:
           texRegCount = texRegCount + 1;
         }
         splittable = !needSplit;
@@ -4168,10 +4168,10 @@ LAB_000bf5b4:
       loopIndex3 = loopIndex3 + 1;
       recordPtr = recordPtr + 0x12;
     } while (recordNumber <= recordCount);
-    if (loopIndex3 != 0) goto LAB_000bf45c;
+    if (loopIndex3 != 0) goto checkPsnProgram;
   }
   loopIndex3 = 1;
-LAB_000bf45c:
+checkPsnProgram:
   if ((*(short *)(psnProgram + 0x20) == 0) && (*(short *)(psnProgram + 0x12) == 0)) {
     *(short *)(psnProgram + 0x12) = (short)loopIndex3 + -1;
   }
@@ -4226,7 +4226,7 @@ LAB_000bf45c:
             *recordPtr = 4;
           }
           if ((anyFlagsSet) || (pendingRecord == 100000)) {
-LAB_000bf860:
+loopSetNextPendingRecord:
             nextPendingRecord = 100000;
           }
           else {
@@ -4247,7 +4247,7 @@ LAB_000bf860:
         }
         if ((((byte)(*(byte *)((int)recordPtr + 0x12) & 0xf0) ==
               (byte)(*(byte *)((int)recordPtr + 0x12) << 4)) || (loopIndex2 == 0)) ||
-           (1 < *(int *)(flagPtr + -0x45) - 3U)) goto LAB_000bf860;
+           (1 < *(int *)(flagPtr + -0x45) - 3U)) goto loopSetNextPendingRecord;
         *flagPtr = 1;
         nextPendingRecord = 100000;
       }
@@ -4312,7 +4312,7 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     return;
   case 5:
     selectValue = 0;
-    goto LAB_000bfac8;
+    goto storeSwizzleCode;
   case 6:
     *swizzleCode = 1;
     *selectX = 1;
@@ -4321,7 +4321,7 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     return;
   case 7:
     selectValue = 2;
-    goto LAB_000bfac8;
+    goto storeSwizzleCode;
   case 8:
     *swizzleCode = 2;
     *selectX = 0;
@@ -4330,10 +4330,10 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     return;
   case 9:
     selectValue = 0;
-    goto LAB_000bfae4;
+    goto storeSwizzleCode2;
   case 10:
     selectValue = 1;
-    goto LAB_000bfae4;
+    goto storeSwizzleCode2;
   case 0xb:
     *swizzleCode = 2;
     *selectX = 2;
@@ -4345,7 +4345,7 @@ int ilRemapSwizzleTriple(swizzleCode, selectX, selectY, selectZ)
     break;
   case 0xd:
     selectValue = 3;
-LAB_000bfac8:
+storeSwizzleCode:
     *swizzleCode = 1;
     *selectX = selectValue;
     *selectY = selectValue;
@@ -4353,7 +4353,7 @@ LAB_000bfac8:
     return;
   case 0xe:
     selectValue = 3;
-LAB_000bfae4:
+storeSwizzleCode2:
     *swizzleCode = 2;
     *selectX = selectValue;
     *selectY = selectValue;
@@ -4367,13 +4367,13 @@ LAB_000bfae4:
     return;
   case 0x10:
     selectValue = 0;
-    goto LAB_000bfb34;
+    goto storeSwizzleCode3;
   case 0x11:
     selectValue = 1;
-    goto LAB_000bfb34;
+    goto storeSwizzleCode3;
   case 0x12:
     selectValue = 2;
-LAB_000bfb34:
+storeSwizzleCode3:
     *swizzleCode = 3;
     *selectX = selectValue;
     *selectY = selectValue;
@@ -4725,11 +4725,11 @@ int psnEncodeHwProgram(psnProgram, rsWords, programImage)
       prevScanInst = rsScanCur;
     } while (loopIndex2 <= psnProgramWord8);
     rsOutCount = rsOutIndexNext & 0xff;
-    if (rsOutIndexNext == 0) goto LAB_000c004c;
+    if (rsOutIndexNext == 0) goto setRsOutCount;
   }
   else {
     loopIndex2 = 1;
-LAB_000c004c:
+setRsOutCount:
     rsOutCount = 1;
     rsWords[1] = 0;
   }
@@ -5011,7 +5011,7 @@ LAB_000c004c:
       loopIndex = loopIndex + 0x18;
     } while (loopIndex2 <= psnProgramWord8);
     hwRecordCountEnd = hwRecordIndex;
-    if (!needEndRecord) goto LAB_000c07dc;
+    if (!needEndRecord) goto storeProgramImage;
     endRecordOffset = hwRecordIndex * 0x18;
     hwRecordCountEnd = prevHwRecordIndex + 2;
   }
@@ -5026,7 +5026,7 @@ LAB_000c004c:
   if ((hwRecordIndex != 0) && ((uint)*(ushort *)(psnProgram + 0x12) == hwRecordIndex - 1U)) {
     *(short *)(psnProgram + 0x12) = (short)hwRecordIndex;
   }
-LAB_000c07dc:
+storeProgramImage:
   programImage[2] = 0;
   programImage[3] = (hwRecordCountEnd + -1) * 0x10000 & 0x1ff0000;
   firstAddrWord = *(ushort *)(psnProgram + 0x10) & 0x1ff;
@@ -5589,7 +5589,7 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
             *(ushort *)(peepholeHalf + 0x38) = source0Flags;
             *(int *)(peepholeHalf + 0x10) = source2Word;
             *(int *)(peepholeHalf + 8) = source0Word;
-            if ((source0Flags & 1) != 0) goto LAB_000c14b0;
+            if ((source0Flags & 1) != 0) goto checkOldHalfFlags;
           }
           if (((source0Word == source2Word) && ((*(ushort *)(peepholeHalf + 0x36) & 2) != 0)) &&
              (outputScale = *(float *)(peepholeHalf + 0x2c), outputScale < FLOAT_001aa100)) {
@@ -5600,7 +5600,7 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
             *(undefined4 *)(peepholeHalf + 0x10) = defaultOperandWord2;
           }
         }
-LAB_000c14b0:
+checkOldHalfFlags:
         if (((oldHalfFlags & 8) == 0) && (*(float *)(peepholeHalf + 0x2c) == FLOAT_001aa0e8)) {
           source0Flags = *(ushort *)(peepholeHalf + 0x34);
           source1Flags = *(ushort *)(peepholeHalf + 0x36);
@@ -6141,7 +6141,7 @@ int psnDecDecodeHwInstruction(decoded, wordsMode0, wordsMode2)
     rgbOpTableOffset = (uint)*(ushort *)(rgbOpTableOffset + 0x1dc15a);
     if (rgbOpTableOffset != 0) {
       sourceModifier = rgbInstWord >> 5 & 3;
-LAB_000c1ab0:
+loopSetSourceIndex:
       sourceIndex = 0;
       sourceSelectCode = rgbInstWord & 0x1f;
       sourceModifierCopy = sourceModifier;
@@ -6159,7 +6159,7 @@ LAB_000c1ab0:
         sourceSelectCode = rgbInstWord >> 7 & 0x1f;
         sourceModifierCopy = rgbInstWord >> 0xc & 3;
         if (sourceIndex != 1) {
-          if (sourceIndex == 0) goto LAB_000c1ab0;
+          if (sourceIndex == 0) goto loopSetSourceIndex;
           sourceSelectCode = rgbInstWord >> 0xe & 0x1f;
           sourceModifierCopy = rgbInstWord >> 0x13 & 3;
           if (sourceIndex != 2) {
@@ -6197,7 +6197,7 @@ LAB_000c1ab0:
       }
     }
     else if (alphaOpTableOffset == 0) {
-LAB_000c1cec:
+loopStoreDecoded:
       decoded[0x35] = (ushort)(alphaWordValue >> 0x15) & 3;
       if ((alphaWordValue & 0x40000000) != 0) {
         *(uint *)(decoded + 0x38) = *(uint *)(decoded + 0x38) | 8;
@@ -6376,7 +6376,7 @@ LAB_000c1cec:
                 *(ushort *)(peepholeHalf + 0x38) = source0Flags;
                 *(int *)(peepholeHalf + 0x10) = source2Word;
                 *(int *)(peepholeHalf + 8) = source0Word;
-                if ((source0Flags & 1) != 0) goto LAB_000c14b0;
+                if ((source0Flags & 1) != 0) goto checkAlphaOpTableOffset;
               }
               if (((source0Word == source2Word) && ((*(ushort *)(peepholeHalf + 0x36) & 2) != 0)) &&
                  (outputScale = *(float *)(peepholeHalf + 0x2c), outputScale < FLOAT_001aa100)) {
@@ -6387,7 +6387,7 @@ LAB_000c1cec:
                 *(undefined4 *)(peepholeHalf + 0x10) = defaultOperandWord2;
               }
             }
-LAB_000c14b0:
+checkAlphaOpTableOffset:
             if (((alphaOpTableOffset & 8) == 0) && (*(float *)(peepholeHalf + 0x2c) == FLOAT_001aa0e8)) {
               source0Flags = *(ushort *)(peepholeHalf + 0x34);
               source1Flags = *(ushort *)(peepholeHalf + 0x36);
@@ -6730,7 +6730,7 @@ LAB_000c14b0:
       } while( true );
     }
     alphaSourceModifier = alphaWordValue >> 5 & 3;
-LAB_000c1c40:
+loopSetHwImage:
     hwImage = 0;
     alphaSourceSelectCode = alphaWordValue & 0x1f;
     sourceModifier = alphaSourceModifier;
@@ -6744,11 +6744,11 @@ LAB_000c1c40:
       *(undefined4 *)slotWordPtr = *(undefined4 *)(alphaSourceSelectCode * 4 + 0x1dc04c);
       slotWordPtr[1] = (ushort)(sourceModifier << 0xc) | slotWordPtr[1];
       alphaSourcesLeft = alphaSourcesLeft - 1;
-      if (alphaSourcesLeft == 0) goto LAB_000c1cec;
+      if (alphaSourcesLeft == 0) goto loopStoreDecoded;
       alphaSourceSelectCode = alphaWordValue >> 7 & 0x1f;
       sourceModifier = alphaWordValue >> 0xc & 3;
       if (hwImage != 1) {
-        if (hwImage == 0) goto LAB_000c1c40;
+        if (hwImage == 0) goto loopSetHwImage;
         alphaSourceSelectCode = alphaWordValue >> 0xe & 0x1f;
         sourceModifier = alphaWordValue >> 0x13 & 3;
         if (hwImage != 2) {
@@ -6771,13 +6771,13 @@ LAB_000c1c40:
   }
   else {
     if (texFieldCode < 3) {
-      if (texFieldCode != 1) goto LAB_000c1950;
+      if (texFieldCode != 1) goto setTexWord;
     }
-    else if (4 < texFieldCode) goto LAB_000c1950;
+    else if (4 < texFieldCode) goto setTexWord;
     decoded[10] = 0xf;
     decoded[3] = 0xf;
   }
-LAB_000c1950:
+setTexWord:
   texWord = *(uint *)(hwImage * 4 + wordsMode2 + 0x18);
   decoded[0x16] = 0x3f80;
   decoded[0x17] = 0;
@@ -6812,15 +6812,15 @@ int psnDecTrySwapAddressSlots(entry, group, slotA, slotB)
     if (*(short *)(slotMaskBase + 0x20) != 0 || *(short *)(slotMaskBase + 0x60) != 0) {
       return 0;
     }
-LAB_000c1da8:
-    if (slotB != 1) goto LAB_000c1dd0;
+loopCheckSlotB:
+    if (slotB != 1) goto setHalfByteOffset;
   }
-  else if (slotA != 1) goto LAB_000c1da8;
+  else if (slotA != 1) goto loopCheckSlotB;
   slotMaskBase = group * 4 + entry;
   if (*(short *)(slotMaskBase + 0x22) != 0 || *(short *)(slotMaskBase + 0x62) != 0) {
     return 0;
   }
-LAB_000c1dd0:
+setHalfByteOffset:
   halfByteOffset = 0;
   slotBAddressPtr = (group * 3 + slotB) * 2 + entry;
   slotAAddressPtr = (group * 3 + slotA) * 2 + entry;
@@ -8224,22 +8224,22 @@ int psnDecTryRebindAddressWithRollback(entry, oldAddressValue, newAddressValue, 
   alphaNotAffected = (rebindFlags >> 3 & 1) == 0;
   if (alphaNotAffected) {
     bankSelect = 0;
-    goto LAB_000c3a40;
+    goto setHalfLoop;
   }
   if (*(ushort *)(entry + 0x86) != oldAddressValue) {
     if ((*(ushort *)(entry + 0x88) == 0xffff) || (oldAddressValue == *(ushort *)(entry + 0x88))) {
       bankSelect = 1;
       ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,1,1,excludeMaskCopy,slotMaskLow,scanCounter);
-      goto LAB_000c3a40;
+      goto setHalfLoop;
     }
     if ((*(ushort *)(entry + 0x8a) == 0xffff) || (oldAddressValue == *(ushort *)(entry + 0x8a))) {
       bankSelect = 1;
       ((int (*)())psnDecSwapAddressSlotsInSources)(entry,0,2,1,excludeMaskCopy,slotMaskLow,scanCounter);
-      goto LAB_000c3a40;
+      goto setHalfLoop;
     }
   }
   bankSelect = 1;
-LAB_000c3a40:
+setHalfLoop:
   halfLoop = 0;
   usageGroupBase = entry + 0x10;
   entryCursor = entry;
@@ -8254,13 +8254,13 @@ LAB_000c3a40:
         if ((sourceSelectWord & 0x200) != 0) {
           sourceUsageMask = usageMaskCursor[3];
           slotRef = (ushort *)((int)((unsigned char *)0x0) + 1);
-          goto LAB_000c3ab0;
+          goto checkSourceSelectWord;
         }
       }
       else {
         sourceUsageMask = *usageMaskCursor;
         slotRef = (ushort *)0x0;
-LAB_000c3ab0:
+checkSourceSelectWord:
         if ((((sourceSelectWord & 3) < 3) &&
             (slotRowBase = (int)slotRef * 3,
             *(ushort *)((slotRowBase + (sourceSelectWord & 3)) * 2 + entry + 0x80) == oldAddressValue)) &&
@@ -8445,7 +8445,7 @@ int psnDecRangeHasConflict(decodedProgram, firstEntry, lastEntry, half, passThro
   alphaDestReg = *(ushort *)(entry + 0x44);
   alphaWriteMask = *(ushort *)(entry + 0x46);
   if (scanIndex < firstEntry) {
-LAB_000c3fb0:
+loopSetConflictResult:
     conflictResult = 0;
   }
   else {
@@ -8465,27 +8465,27 @@ LAB_000c3fb0:
       do {
         sourceSelect = *sourceSelectPtr;
         addressSlot = sourceSelect & 3;
-        if (addressSlot == 3) goto LAB_000c3fa8;
+        if (addressSlot == 3) goto setConflictResult;
         passThroughR9 = sourceSelect & 0x100;
         if ((sourceSelect & 0x100) != 0) {
           slotConflict = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)*(ushort *)(addressSlot * 2 + entry + 0x80),7,half,passThroughR7
                                 ,passThroughR8,passThroughR9);
-          if (slotConflict != 0) goto LAB_000c3fa8;
+          if (slotConflict != 0) goto setConflictResult;
           sourceSelect = *sourceSelectPtr;
         }
         if (((sourceSelect & 0x200) != 0) &&
            (slotConflict = ((int (*)())psnDecDestMatchesRegMask)(decodedProgramWord8,(uint)*(ushort *)(addressSlot * 2 + entry + 0x86),8,half,
-                                  passThroughR7,passThroughR8,passThroughR9), slotConflict != 0)) goto LAB_000c3fa8;
+                                  passThroughR7,passThroughR8,passThroughR9), slotConflict != 0)) goto setConflictResult;
         loopContinue = loopIndex != 2;
         sourceSelectPtr = sourceSelectPtr + 2;
         loopIndex = loopIndex + 1;
       } while (loopContinue);
       scanIndex = scanIndex + -1;
       scanOffset = scanOffset + -0xa0;
-      if (scanIndex < firstEntry) goto LAB_000c3fb0;
+      if (scanIndex < firstEntry) goto loopSetConflictResult;
       decodedProgramWord8 = *(int *)(decodedProgram + 8);
     }
-LAB_000c3fa8:
+setConflictResult:
     conflictResult = 1;
   }
   return conflictResult;
@@ -8845,7 +8845,7 @@ int psnProgramToDecoded(decodedProgram, recordCursor)
         }
         else if (opKindByte < 3) {
           if (opKindByte == 1) {
-LAB_000c46e8:
+loopStoreEntry:
             entry[3] = 0xf;
             entry[2] = *(ushort *)recField0c;
             entry[10] = ~(ushort)*recField1f & 0xf;
@@ -8853,7 +8853,7 @@ LAB_000c46e8:
             sourceSelectWord = (ushort)*(byte *)recField1a;
           }
         }
-        else if (opKindByte < 5) goto LAB_000c46e8;
+        else if (opKindByte < 5) goto loopStoreEntry;
         selectByte = *recField19;
         entry[0x16] = 0x3f80;
         entry[0x17] = 0;
@@ -8932,7 +8932,7 @@ LAB_000c46e8:
         entry[0x14] = *(ushort *)((uint)*recField31 * 4 + 0x1dc158);
         rgbSourceCount = (uint)*(ushort *)((uint)*recField31 * 4 + 0x1dc15a);
         if (rgbSourceCount != 0) {
-LAB_000c4830:
+loopSetSourceSelectCode:
           sourceSelectCode = (uint)*recField2a;
           sourceModifier = (ushort)*recField2d;
           slotCounter = 0;
@@ -8946,13 +8946,13 @@ LAB_000c4830:
             *(undefined4 *)rgbSourceSlotPtr = *(undefined4 *)(sourceSelectCode * 4 + 0x1dc0d8);
             rgbSourceSlotPtr[1] = sourceModifier << 0xc | rgbSourceSlotPtr[1];
             rgbSourcesLeft = rgbSourcesLeft - 1;
-            if (rgbSourcesLeft == 0) goto LAB_000c48b4;
+            if (rgbSourcesLeft == 0) goto storeEntry;
             if (slotCounter == 1) {
               sourceSelectCode = (uint)*recField2b;
               sourceModifier = (ushort)*recField2e;
             }
             else {
-              if (slotCounter == 0) goto LAB_000c4830;
+              if (slotCounter == 0) goto loopSetSourceSelectCode;
               if (slotCounter == 2) {
                 sourceSelectCode = (uint)*(byte *)recField2c;
                 sourceModifier = (ushort)*recField2f;
@@ -8966,7 +8966,7 @@ LAB_000c4830:
           } while( true );
         }
         slotCounter = 3;
-LAB_000c48b4:
+storeEntry:
         entry[0x15] = (ushort)*(byte *)recField30;
         if (*recField33 == '\x01') {
           *(uint *)(entry + 0x18) = *(uint *)(entry + 0x18) | 8;
@@ -8990,8 +8990,8 @@ LAB_000c48b4:
           if (alphaSourceCount < 2) {
             alphaSourceCount = 2;
           }
-LAB_000c49a8:
-LAB_000c49b0:
+loopSetSourceSelectCode2:
+loopSetSourceSelectCode3:
           sourceSelectCode = (uint)*recField39;
           sourceModifier = (ushort)*(byte *)recField3c;
           slotCounter = 0;
@@ -9006,13 +9006,13 @@ LAB_000c49b0:
             alphaSourceSlotPtr[1] = sourceModifier << 0xc | alphaSourceSlotPtr[1];
             alphaSourcesLeft = alphaSourcesLeft - 1;
             staleArgR5 = (uint *)0x1dc04c;
-            if (alphaSourcesLeft == 0) goto LAB_000c4a74;
+            if (alphaSourcesLeft == 0) goto storeEntry2;
             if (slotCounter == 1) {
               sourceSelectCode = (uint)*recField3a;
               sourceModifier = (ushort)*recField3d;
             }
             else {
-              if (slotCounter == 0) goto LAB_000c49b0;
+              if (slotCounter == 0) goto loopSetSourceSelectCode3;
               if (slotCounter == 2) {
                 sourceSelectCode = (uint)*recField3b;
                 sourceModifier = (ushort)*recField3e;
@@ -9026,8 +9026,8 @@ LAB_000c49b0:
           } while( true );
         }
         staleArgR5 = recField20;
-        if (alphaSourceCount != 0) goto LAB_000c49a8;
-LAB_000c4a74:
+        if (alphaSourceCount != 0) goto loopSetSourceSelectCode2;
+storeEntry2:
         entry[0x35] = (ushort)*recField3f;
         if (*recField42 == '\x01') {
           *(uint *)(entry + 0x38) = *(uint *)(entry + 0x38) | 8;
@@ -10037,7 +10037,7 @@ int psnAnalyzeProgram(psnProgram)
                 if (*recFieldShortPtr12 <= regFieldValue) {
                   maxRegister = regFieldValue;
                 }
-                goto LAB_000c60a8;
+                goto checkMaxRegister;
               }
             }
             else if (maxRegister < *cursor2) {
@@ -10045,7 +10045,7 @@ int psnAnalyzeProgram(psnProgram)
             }
           }
           else {
-LAB_000c60a8:
+checkMaxRegister:
             if (maxRegister < *cursor2) {
               maxRegister = *cursor2;
             }
@@ -10159,10 +10159,10 @@ LAB_000c60a8:
       recFieldShortPtr6 = recFieldShortPtr6 + 0x24;
       recFieldBytePtrb = recFieldBytePtrb + 0x48;
     } while (loopIndex <= instructionCount);
-    if (kind1Count != 0) goto LAB_000c6350;
+    if (kind1Count != 0) goto checkFileCount0;
   }
   kind1Count = 1;
-LAB_000c6350:
+checkFileCount0:
   if (fileCount0 == 0) {
     fileCount0 = 1;
     fileCount1 = 1;
@@ -10348,12 +10348,12 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
             } while (scanIndex < lowComponentBit);
             pastLastEntry = collectedCount < lowComponentBit;
             collectedCount = lowComponentBit;
-            if (pastLastEntry) goto LAB_000c6e10;
+            if (pastLastEntry) goto setLoopIndex2;
           }
           collectedCount = lowComponentBit + 1;
           collectedRegs[lowComponentBit] = workMask;
         }
-        goto LAB_000c6e10;
+        goto setLoopIndex2;
       }
       if (instKind < 3) {
         if (instKind == 1) {
@@ -10385,9 +10385,9 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
             *(byte *)((int)inst + 0xe) = (byte)secondOperandMask ^ 0xf;
           }
         }
-        goto LAB_000c6e10;
+        goto setLoopIndex2;
       }
-      if (4 < instKind) goto LAB_000c6e10;
+      if (4 < instKind) goto setLoopIndex2;
       releaseOperandReg = *(ushort *)(inst + 3);
       secondOperandReg = *(ushort *)(inst + 6);
       secondOperandMask = 0;
@@ -10574,7 +10574,7 @@ code_r0x000c6c50:
       (*(unsigned short *)((unsigned char *)&(zeroedOperandWord1) + 2)) = *(ushort *)(inst + 7);
       zeroedOperandBlock[2] = (*(unsigned short *)((unsigned char *)&(zeroWordB) + 2));
       zeroedOperandBlock[3] = (*(unsigned short *)((unsigned char *)&(zeroWordC) + 2));
-LAB_000c6e10:
+setLoopIndex2:
       loopIndex2 = loopIndex2 + 1;
       lastVisitedInst = inst;
       inst = inst + -0x12;

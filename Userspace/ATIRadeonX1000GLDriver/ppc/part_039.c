@@ -638,7 +638,7 @@ int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler, unuse
   else {
     kindFlags = *(byte *)(exprRecord2 + 9);
     if (((((kindFlags & 1) == 0) && ((kindFlags & 2) == 0)) && ((kindFlags & 4) == 0)) && ((kindFlags & 8) == 0))
-    goto LAB_00128e28;
+    goto setMultiple;
   }
   if (((kindFlags & 1) == 0) || ((kindFlags & 2) != 0)) {
     *(undefined4 *)(exprRecord2 + 0x20) = 0x31;
@@ -649,14 +649,14 @@ int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler, unuse
     *(undefined4 *)(exprRecord2 + 0x1c) = 0;
     *(undefined4 *)(exprRecord2 + 0x18) = 1;
   }
-LAB_00128e28:
+setMultiple:
   multiple = -3;
   multipleCursor = (float *)&DAT_001aff4c;
   do {
     exprRecord = Compiler__valueNumberForExpr(compiler,GH_F2U(*constRecord * *multipleCursor));
     if (*(char *)(exprRecord + 8) == '\0') {
       kindFlags = *(byte *)(exprRecord + 9);
-LAB_00128e98:
+loopCheckKindFlags:
       if ((((kindFlags & 1) == 0) || ((kindFlags & 2) != 0)) && (((kindFlags & 2) == 0 || ((kindFlags & 1) != 0))))
       {
         *(undefined4 *)(exprRecord + 0x20) = 0x31;
@@ -671,7 +671,7 @@ LAB_00128e98:
     else {
       kindFlags = *(byte *)(exprRecord + 9);
       if ((((kindFlags & 1) != 0) || ((kindFlags & 2) != 0)) || (((kindFlags & 4) != 0 || ((kindFlags & 8) != 0))))
-      goto LAB_00128e98;
+      goto loopCheckKindFlags;
     }
     isLastMultiple = multiple == 3;
     multipleCursor = multipleCursor + 1;
@@ -1245,7 +1245,7 @@ int KhanVs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
   a0 = (int *)IRInst__getOperandSource(inst,srcIndex);
   isConstant = (**(code **)(*a0 + 0x48))(a0);
   if (isConstant == 0) {
-LAB_00129b30:
+loopSetResult:
     result = 0;
   }
   else {
@@ -1260,7 +1260,7 @@ LAB_00129b30:
       if (laneMaskByte == '\0') {
         if ((((int)*(char *)(a0 + 0x57) >> (*(byte *)((int)&srcSelectWord + lane) & 0x3f) & 1U) == 0) ||
            (((laneValue = GH_U2F((unsigned int)(a0[(uint)*(byte *)((int)&srcSelectWord + lane) * 6 + 8])), laneValue != 0.0 &&
-             (laneValue != 1.0)) && (minusOneBits = 0xbf800000, laneValue != -1.0)))) goto LAB_00129b30;
+             (laneValue != 1.0)) && (minusOneBits = 0xbf800000, laneValue != -1.0)))) goto loopSetResult;
         *valueCursor = laneValue;
       }
       lane = lane + 1;
@@ -1328,7 +1328,7 @@ int KhanVs__vslot71_canCombineSources(this, inst, replacedSourceIndex, inst2, un
         regNumber = inst3[0x2b];
         regClass = inst3[0x2c];
       }
-LAB_00129cc4:
+loopSwitchRegClass:
       switch(regClass) {
       case 2:
       case 0xc:
@@ -1374,7 +1374,7 @@ LAB_00129cc4:
           defTemp = IRInst__getOperandSource(inst2,1);
           regNumber = *(int *)(defTemp + 0x94);
         }
-        goto LAB_00129cc4;
+        goto loopSwitchRegClass;
       }
       defTemp = IRInst__getOperandSource(inst,loopIndex);
       if (defTemp != 0) {
@@ -1394,7 +1394,7 @@ LAB_00129cc4:
           defTemp = IRInst__getOperandSource(operandVReg2,1);
           regNumber = *(int *)(defTemp + 0x94);
         }
-        goto LAB_00129cc4;
+        goto loopSwitchRegClass;
       }
     }
 switchD_00129ce4_caseD_0:

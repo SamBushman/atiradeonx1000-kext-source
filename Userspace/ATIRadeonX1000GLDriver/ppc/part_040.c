@@ -45,7 +45,7 @@ int IRInst__swapCompareOperands(branchInst, inst, compiler)
   case 0:
     IROperand__setModifierBits(inst + 0xa4,2,1);
     branchFlags = *(uint *)(inst + 0xb8);
-    goto LAB_0012b4b0;
+    goto callIROperand_setModifierBits;
   case 1:
     IROperand__setModifierBits(inst + 0xa4,2,1);
     IROperand__setModifierBits(inst + 0xa4,1,*(uint *)(inst + 0xb8) & 1 ^ 1);
@@ -59,7 +59,7 @@ int IRInst__swapCompareOperands(branchInst, inst, compiler)
     break;
   case 5:
     branchFlags = *(uint *)(inst + 0xb8);
-LAB_0012b4b0:
+callIROperand_setModifierBits:
     IROperand__setModifierBits(inst + 0xa4,1,branchFlags & 1 ^ 1);
     return;
   }
@@ -174,7 +174,7 @@ int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight, passThroughR5, passT
   
   constRegister = Emitter__allocateConstantSlot(*(undefined4 *)(loopInfo[0x10] + 0x3ac),3,1,passThroughR6,passThroughR7,passThroughR8,passThroughR9);
   if (constRegister < 0) {
-LAB_0012ba38:
+loopSetConversionResult:
     conversionResult = 0;
   }
   else {
@@ -208,7 +208,7 @@ LAB_0012ba38:
       newConstInst[0xd] = loopInfo[3];
     }
     else {
-      if (loopInfo[1] == 0) goto LAB_0012ba38;
+      if (loopInfo[1] == 0) goto loopSetConversionResult;
       newConstInst[8] = 3;
       newConstInst[9] = loopInfo[6];
     }
@@ -676,9 +676,9 @@ int Program__rebaseInstRegisters(inst, registerBase, program)
         registerFileKind = 2;
       }
       else {
-        if (operandSlotCursor[0x2c] != 0x29) goto LAB_0012c498;
+        if (operandSlotCursor[0x2c] != 0x29) goto setOperandNumber;
         if ((*(uint *)(program + 0x30) & 1) == 0) {
-          if ((*(uint *)(program + 0x30) & 0x2000) == 0) goto LAB_0012c498;
+          if ((*(uint *)(program + 0x30) & 0x2000) == 0) goto setOperandNumber;
           vregList = *(undefined4 *)(program + 0x3ac);
           registerFileKind = 0x24;
         }
@@ -690,7 +690,7 @@ int Program__rebaseInstRegisters(inst, registerBase, program)
       registerFileKind = VRegPool__findOrCreate(vregList,registerFileKind,registerBase + definingField1282,0);
       IRInst__setOperandRef(inst,operandNumber,registerFileKind);
     }
-LAB_0012c498:
+setOperandNumber:
     operandNumber = operandNumber + 1;
     operandSlotCursor = operandSlotCursor + 6;
   } while( true );
@@ -970,7 +970,7 @@ int LoopInfo__matchExit(loopInfo, inst, branchHeader, outBoundOnRight)
       if (exitBlockQuery38 != 0) {
         successor2 = Block__getSuccessor(thenBlock,0);
         *(undefined4 *)(loopInfo + 0x24) = successor2;
-LAB_0012cc9c:
+loopStoreLoopInfo:
         *(int *)(loopInfo + 0x28) = branchHeader;
         return 1;
       }
@@ -987,7 +987,7 @@ LAB_0012cc9c:
         footerSuccessorIsSimple = Block__isSimple(successor2);
         if ((footerSuccessorIsSimple != 0) &&
            (footerSuccessorIsSimple = Block__getSuccessor(successor2,0), footerSuccessorIsSimple == *(int *)(*(int *)(loopInfo + 0x2c) + 0x150)))
-        goto LAB_0012cc9c;
+        goto loopStoreLoopInfo;
       }
     }
   }
@@ -1057,12 +1057,12 @@ int pass_loop_trans(program)
                       phiInst = (**(code **)(*exitCandidateBlock + 0x24))(exitCandidateBlock);
                       staleArg4 = staleArg4B;
                       staleFooterArg = exitBlock;
-                      if (phiInst != 0) goto LAB_0012ce40;
+                      if (phiInst != 0) goto setExitBlock;
                     }
                   }
                 }
                 else {
-LAB_0012ce40:
+setExitBlock:
                   exitBlock = exitCandidateBlock;
                   staleArg4 = Block__getBranchInst(exitBlock,staleArg4,staleFooterArg,boundOnRightPtr,staleArg7,staleArg8,staleArg9);
                   footerCursor = (int *)exitBlock[0x4f];
@@ -2287,7 +2287,7 @@ int Program__predicatePendingIfs(program)
       chainHeadKey = *(undefined4 *)(pendingEntry + 300);
       chainSecondKey = 0;
       conditionKey = Block__findLoopEntryPredecessor(chainHeadKey,chainKey);
-LAB_0012ed5c:
+loopSetPredicateRegister:
       predicateRegister = 0;
       if (conditionKey != 0) {
         predicateRegister = Program__emitMovFromField8c(zeroMovInst,conditionKey,program);
@@ -2313,18 +2313,18 @@ LAB_0012ed5c:
           }
           if (*visitedElemRef == chainBlock) {
             foundInChain = true;
-            goto LAB_0012ed24;
+            goto setConditionKey;
           }
           visitedCount = allocation[2];
           loopIndex = loopIndex + 1;
         } while (loopIndex < visitedCount);
       }
       foundInChain = false;
-LAB_0012ed24:
+setConditionKey:
       conditionKey = *(int *)(chainBlock + 0x134);
       chainSecondKey = *(undefined4 *)(chainBlock + 0x13c);
       chainHeadKey = 0xffffffff;
-      if (!foundInChain) goto LAB_0012ed5c;
+      if (!foundInChain) goto loopSetPredicateRegister;
       chainLastBlock = Block__getFirstRealInst(containerBlock);
       predicateRegister = *(undefined4 *)(chainLastBlock + 0x94);
     }
@@ -2754,7 +2754,7 @@ int Program__unrollLoop(pass, loopStack, block, lastBlockRef, newBlockOut, block
                     if (((blockQuery30 != 0) ||
                         (blockQuery30 = (**(code **)(*clonedBlockObj + 0x34))(clonedBlockObj), blockQuery30 != 0)) ||
                        (blockQuery30 = (**(code **)(*clonedBlockObj + 0x38))(clonedBlockObj), blockQuery30 != 0))
-                    goto LAB_0012fafc;
+                    goto setTargetCloneIndex;
                     (**(code **)(*clonedBlockObj + 0x3c))(clonedBlockObj);
                   }
                   else {
@@ -2788,7 +2788,7 @@ int Program__unrollLoop(pass, loopStack, block, lastBlockRef, newBlockOut, block
                   }
                 }
                 else {
-LAB_0012fafc:
+setTargetCloneIndex:
                   targetCloneIndex = *(uint *)(*(int *)(rewireBlockCursor + 300) + 0xc0);
                   if (targetCloneIndex < *cloneVector) {
                     cloneFilledCountD = allocation[2];
@@ -2922,7 +2922,7 @@ LAB_0012fafc:
           instQuery3c = (**(code **)(*exitInst + 0x3c))(exitInst);
           if (instQuery3c == 0) {
             if (*(int *)(exitInst[0x22] + 4) == 3) {
-              if (*(int *)(block + 0x134) == 0) goto LAB_0012fc9c;
+              if (*(int *)(block + 0x134) == 0) goto callOwner_removeVectorEntry;
               Owner__removeVectorEntry(exitInst[0x29],exitInst);
               DList__unlink(exitInst);
               loopFooterBlock = *(int *)(block + 0x14c);
@@ -2936,7 +2936,7 @@ LAB_0012fafc:
             }
           }
           else {
-LAB_0012fc9c:
+callOwner_removeVectorEntry:
             Owner__removeVectorEntry(exitInst[0x29],exitInst);
             (**(code **)(*exitInst + 0xc))(exitInst,0,*(undefined4 *)(pass + 8));
             nextExitInst = (int *)exitInst[2];
@@ -2983,12 +2983,12 @@ int Program__isRegionTrivial(program, startBlock, boundaryBlock)
     if (blockInstCount == 0) {
       blockInstCount = DList__count(startBlock + 0x24);
       if (((2 < blockInstCount) || (blockInstCount = (**(code **)(*startBlock + 0x38))(startBlock), blockInstCount != 0)) ||
-         (blockInstCount = (**(code **)(*startBlock + 0x3c))(startBlock), blockInstCount != 0)) goto LAB_00130080;
+         (blockInstCount = (**(code **)(*startBlock + 0x3c))(startBlock), blockInstCount != 0)) goto setResult;
     }
     else {
       blockInstCount = DList__count(startBlock + 0x24);
       if (3 < blockInstCount) {
-LAB_00130080:
+setResult:
         result = 0;
         goto code_r0x0013008c;
       }
@@ -3012,7 +3012,7 @@ LAB_00130080:
       blockInstCount = blockInstCount + 4;
     }
     if (vecCount == 0) {
-LAB_00130088:
+loopSetResult:
       result = 1;
 code_r0x0013008c:
       Arena__free(vecArena,vecData);
@@ -3024,7 +3024,7 @@ code_r0x0013008c:
     }
     startBlock = (int *)*firstEntry;
     if ((startBlock == (int *)0x0) || (blockInstCount = Vector__removeValue(&vecCapacity,startBlock), blockInstCount == 0))
-    goto LAB_00130088;
+    goto loopSetResult;
   } while( true );
 }
 #undef vecCapacity
@@ -3071,7 +3071,7 @@ int pass_remove_empty_graphs(program)
              ((testResult = Block__isSimple(successorOrNextBlock), testResult != 0 ||
               (testResult = (**(code **)(*successorOrNextBlock + 0x20))(successorOrNextBlock), testResult != 0)))) {
             Block__bypassAndDetach(block,predecessorBlock,successorOrNextBlock);
-            goto LAB_0013037c;
+            goto setChanged;
           }
         }
       }
@@ -3115,7 +3115,7 @@ int pass_remove_empty_graphs(program)
           (**(code **)(*successorOrNextBlock + 0x48))(successorOrNextBlock);
           testResult = Program__mergeBlockWithSuccessor(program,nextBlock,successorOrNextBlock);
           if (testResult == 0) {
-LAB_0013037c:
+setChanged:
             changed = true;
             nextBlock = successorOrNextBlock;
           }
