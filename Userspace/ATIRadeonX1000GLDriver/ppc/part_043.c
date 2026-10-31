@@ -2323,72 +2323,75 @@ int Inst__swizzleTextureFetchOutput(inst, operandIndex, program)
   int isIdentity;
   int operandRecord;
   int operandRecord2;
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
+  uint targetFlags;
+  int *selectBytePtr;
+  int *lastOperandSource;
+  int producerCheck;
+  int selectWordValue;
+  int consumerCheck;
   int isOptionEnabledResult;
   int *operandVReg;
   undefined4 inst1;
   int countdown;
-  int local_48 [2];
-  int *local_40;
-  undefined4 local_30;
-  int local_28 [4];
+  int selectWordAndLastOperand [2];
+  int *lastOperandSourceOut;
+  undefined4 lastOperandRecordTail;
+  int composedSelectOut [4];
   
-  uVar1 = *(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8);
-  if ((((uVar1 & 0x800) != 0) && ((uVar1 & 0x1000) != 0)) &&
+  targetFlags = *(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8);
+  if ((((targetFlags & 0x800) != 0) && ((targetFlags & 0x1000) != 0)) &&
      (isOptionEnabledResult = Compiler__isOptionEnabled(*(int *)(program + 8),0x38), isOptionEnabledResult != 0)) {
     operandVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
     operandRecord2 = IRInst__getOperandRecord(inst,operandIndex);
-    local_48[0] = *(int *)(operandRecord2 + 0x10);
-    iVar3 = (**(code **)(*operandVReg + 0x30))(operandVReg);
-    if (((iVar3 != 0) && (iVar3 = IRInst__hasSingleUse(operandVReg,program), iVar3 != 0)) &&
+    selectWordAndLastOperand[0] = *(int *)(operandRecord2 + 0x10);
+    producerCheck = (**(code **)(*operandVReg + 0x30))(operandVReg);
+    if (((producerCheck != 0) && (producerCheck = IRInst__hasSingleUse(operandVReg,program), producerCheck != 0)) &&
        ((operandVReg[5] & 0x200U) == 0)) {
-      isIdentity = SelectWord__isIdentity(local_48[0]);
+      isIdentity = SelectWord__isIdentity(selectWordAndLastOperand[0]);
       if (isIdentity == 0) {
-        SelectWord__compose(local_28,operandVReg[0x50],local_48[0]);
+        SelectWord__compose(composedSelectOut,operandVReg[0x50],selectWordAndLastOperand[0]);
         loopIndex = 0;
-        local_48[0] = local_28[0];
-        operandVReg[0x50] = local_28[0];
+        selectWordAndLastOperand[0] = composedSelectOut[0];
+        operandVReg[0x50] = composedSelectOut[0];
         countdown = 4;
-        piVar2 = operandVReg + 0x27;
+        selectBytePtr = operandVReg + 0x27;
         do {
-          if (*(char *)((int)local_48 + loopIndex) == '\x04') {
-            *(undefined1 *)piVar2 = 1;
+          if (*(char *)((int)selectWordAndLastOperand + loopIndex) == '\x04') {
+            *(undefined1 *)selectBytePtr = 1;
           }
           else {
-            *(undefined1 *)piVar2 = 0;
-            *(char *)((int)local_48 + loopIndex) = (char)loopIndex;
+            *(undefined1 *)selectBytePtr = 0;
+            *(char *)((int)selectWordAndLastOperand + loopIndex) = (char)loopIndex;
           }
           loopIndex = loopIndex + 1;
-          piVar2 = (int *)((int)piVar2 + 1);
+          selectBytePtr = (int *)((int)selectBytePtr + 1);
           countdown = countdown + -1;
         } while (countdown != 0);
       }
-      local_30 = 0;
-      local_48[1] = 0;
-      local_40 = (int *)0x0;
+      lastOperandRecordTail = 0;
+      selectWordAndLastOperand[1] = 0;
+      lastOperandSourceOut = (int *)0x0;
       if ((inst[5] & 0x200U) != 0) {
-        IRInst__readLastOperand(inst,local_48 + 1);
+        IRInst__readLastOperand(inst,selectWordAndLastOperand + 1);
       }
-      piVar2 = local_40;
-      iVar3 = (**(code **)(*inst + 100))(inst);
-      if (((iVar3 == 0) ||
-          (((piVar2 != (int *)0x0 &&
-            ((iVar3 = (**(code **)(*piVar2 + 0x30))(piVar2), iVar3 == 0 ||
-             (iVar3 = ((int (*)())FUN_0014a898)(inst,piVar2), iVar3 == 0)))) ||
+      lastOperandSource = lastOperandSourceOut;
+      consumerCheck = (**(code **)(*inst + 100))(inst);
+      if (((consumerCheck == 0) ||
+          (((lastOperandSource != (int *)0x0 &&
+            ((consumerCheck = (**(code **)(*lastOperandSource + 0x30))(lastOperandSource), consumerCheck == 0 ||
+             (consumerCheck = ((int (*)())FUN_0014a898)(inst,lastOperandSource), consumerCheck == 0)))) ||
            ((inst[operandIndex * 6 + 0x28] & 1U) != 0)))) ||
          (((((inst[operandIndex * 6 + 0x28] & 2U) != 0 || (inst[0x48] != 0)) ||
-           (inst[0x49] != 0)) || (iVar3 = IRInst__hasSingleUse(inst,program), iVar3 == 0)))) {
+           (inst[0x49] != 0)) || (consumerCheck = IRInst__hasSingleUse(inst,program), consumerCheck == 0)))) {
         operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-        iVar3 = local_48[0];
-        if (*(int *)(operandRecord + 0x10) != local_48[0]) {
+        selectWordValue = selectWordAndLastOperand[0];
+        if (*(int *)(operandRecord + 0x10) != selectWordAndLastOperand[0]) {
           if (operandIndex == 0) {
-            inst[0x27] = local_48[0];
+            inst[0x27] = selectWordAndLastOperand[0];
             return 1;
           }
           operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-          *(int *)(operandRecord + 0x10) = iVar3;
+          *(int *)(operandRecord + 0x10) = selectWordValue;
           return 1;
         }
       }
@@ -2398,8 +2401,8 @@ int Inst__swizzleTextureFetchOutput(inst, operandIndex, program)
         DList__unlink(inst);
         inst1 = IRInst__cloneInto(operandVReg,inst,*(undefined4 *)(program + 8),1);
         Block__insertInstBefore(*(undefined4 *)(beforeInst + 0x158),beforeInst,inst1);
-        if (piVar2 != (int *)0x0) {
-          IRInst__setLastOperandFromRecord(inst1,local_48 + 1,0,*(undefined4 *)(program + 8));
+        if (lastOperandSource != (int *)0x0) {
+          IRInst__setLastOperandFromRecord(inst1,selectWordAndLastOperand + 1,0,*(undefined4 *)(program + 8));
         }
       }
       return 1;
@@ -5761,64 +5764,65 @@ int FUN_001507d0(useA, foundUse, program)
 }
 
 /* Inst__reassociate_150b94 @ 0x150b94 (420 bytes) */
-int Inst__reassociate_150b94(inst, param_2)
+int Inst__reassociate_150b94(inst, pass)
   int inst;
-  int param_2;
+  int pass;
 {
   int operandSource;
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
-  int local_28 [6];
+  bool firstOperandReassociated;
+  bool secondOperandReassociated;
+  int instOpcode;
+  int instOpcodeB;
+  int reassociateRecord [6];
   
-  local_28[1] = 0;
-  local_28[0] = 0;
-  iVar3 = *(int *)(*(int *)(inst + 0x88) + 8);
-  if (iVar3 == 0x12) {
+  reassociateRecord[1] = 0;
+  reassociateRecord[0] = 0;
+  instOpcode = *(int *)(*(int *)(inst + 0x88) + 8);
+  if (instOpcode == 0x12) {
     operandSource = IRInst__getOperandSource(inst,1);
     if (*(int *)(*(int *)(operandSource + 0x88) + 8) == 0x12) {
 LAB_00150c04:
-      local_28[1] = 1;
-      local_28[0] = inst;
+      reassociateRecord[1] = 1;
+      reassociateRecord[0] = inst;
     }
   }
-  else if ((iVar3 == 0x13) &&
-          (iVar3 = IRInst__getOperandSource(inst,1), *(int *)(*(int *)(iVar3 + 0x88) + 8) == 0x13))
+  else if ((instOpcode == 0x13) &&
+          (instOpcode = IRInst__getOperandSource(inst,1), *(int *)(*(int *)(instOpcode + 0x88) + 8) == 0x13))
   goto LAB_00150c04;
-  local_28[3] = 0;
-  local_28[2] = 0;
-  if (local_28[0] != 0) {
-    ((int (*)())FUN_001507d0)(local_28,local_28 + 2,param_2);
+  reassociateRecord[3] = 0;
+  reassociateRecord[2] = 0;
+  if (reassociateRecord[0] != 0) {
+    ((int (*)())FUN_001507d0)(reassociateRecord,reassociateRecord + 2,pass);
   }
-  bVar1 = local_28[2] != 0;
-  if (bVar1) {
-    *(int *)(param_2 + 0x1f8) = *(int *)(param_2 + 0x1f8) + 1;
-    ((int (*)())Inst__reassociateUsePair)(local_28 + 2,local_28,param_2);
+  firstOperandReassociated = reassociateRecord[2] != 0;
+  if (firstOperandReassociated) {
+    *(int *)(pass + 0x1f8) = *(int *)(pass + 0x1f8) + 1;
+    ((int (*)())Inst__reassociateUsePair)(reassociateRecord + 2,reassociateRecord,pass);
   }
-  local_28[0] = 0;
-  iVar3 = *(int *)(*(int *)(inst + 0x88) + 8);
-  if (iVar3 == 0x12) {
+  reassociateRecord[0] = 0;
+  instOpcodeB = *(int *)(*(int *)(inst + 0x88) + 8);
+  if (instOpcodeB == 0x12) {
     operandSource = IRInst__getOperandSource(inst,2);
     if (*(int *)(*(int *)(operandSource + 0x88) + 8) != 0x12) goto LAB_00150cd0;
   }
-  else if ((iVar3 != 0x13) ||
-          (iVar3 = IRInst__getOperandSource(inst,2), *(int *)(*(int *)(iVar3 + 0x88) + 8) != 0x13))
+  else if ((instOpcodeB != 0x13) ||
+          (instOpcodeB = IRInst__getOperandSource(inst,2), *(int *)(*(int *)(instOpcodeB + 0x88) + 8) != 0x13))
   goto LAB_00150cd0;
-  local_28[1] = 2;
-  local_28[0] = inst;
+  reassociateRecord[1] = 2;
+  reassociateRecord[0] = inst;
 LAB_00150cd0:
-  if (local_28[0] == 0) {
-    local_28[2] = local_28[0];
+  if (reassociateRecord[0] == 0) {
+    reassociateRecord[2] = reassociateRecord[0];
   }
   else {
-    ((int (*)())FUN_001507d0)(local_28,local_28 + 2,param_2);
+    ((int (*)())FUN_001507d0)(reassociateRecord,reassociateRecord + 2,pass);
   }
-  bVar2 = local_28[2] != 0;
-  if (bVar2) {
-    *(int *)(param_2 + 0x1f8) = *(int *)(param_2 + 0x1f8) + 1;
-    ((int (*)())Inst__reassociateUsePair)(local_28 + 2,local_28,param_2);
+  secondOperandReassociated = reassociateRecord[2] != 0;
+  if (secondOperandReassociated) {
+    *(int *)(pass + 0x1f8) = *(int *)(pass + 0x1f8) + 1;
+    ((int (*)())Inst__reassociateUsePair)(reassociateRecord + 2,reassociateRecord,pass);
   }
-  return bVar2 || bVar1;
+  return secondOperandReassociated || firstOperandReassociated;
 }
 
 /* Inst__collapseAddOfScaledMov @ 0x150d38 (1504 bytes) */

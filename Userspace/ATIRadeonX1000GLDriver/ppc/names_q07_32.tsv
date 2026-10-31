@@ -4062,3 +4062,43 @@ use	FUN_00157b78	uVar19	producerSelectConst	INFERRED	DAT_001b0058 stored at prod
 local	FUN_00157b78	local_68	selectBytes	INFERRED	select bytes being rebuilt lane by lane; also the second operand select
 local	FUN_00157b78	local_60	selectBytesCopy	INFERRED	copy of selectBytes taken before the rebuild
 local	FUN_00157b78	local_5c	laneMapBytes	INFERRED	rebuilt lane map bytes; operand-select-indexed reads start four bytes below
+local	FUN_00158988	param_1	ctx	INFERRED	unused first argument
+local	FUN_00158988	param_3	targetFieldDelta	INFERRED	added to inst +0x124 (inst[0x49])
+local	FUN_00158988	param_4	unusedArg4	INFERRED	not referenced
+local	FUN_00158988	param_5	laneMask	INFERRED	write mask tested against the dest operand mask to stop the walk
+local	FUN_00158988	param_6	pass	INFERRED	+0x1ac counts the calls
+local	FUN_00158988	uVar1	instFlags	INFERRED	inst flags word (+0x14), re-read each pass of the walk
+use	FUN_00158988	iVar2	vcall64Result	INFERRED	vtable +100 result on inst	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 100\)\)\(param_2\);$	+2
+use	FUN_00158988	iVar2	targetField	INFERRED	inst +0x124 field; also holds register-kind and vtable +0x50 results in the guard chain	^\s*iVar2\ =\ param_2\[0x49\];$	+1
+use	FUN_00158988	iVar2	targetField	INFERRED	inst +0x124 field; also holds register-kind and vtable +0x50 results in the guard chain	^\s*iVar2\ =\ param_2\[0x49\];$@2	+5
+use	FUN_00158988	iVar2	targetField	INFERRED	inst +0x124 field; also holds register-kind and vtable +0x50 results in the guard chain	^\s*iVar2\ =\ param_2\[0x49\];$@3	+1
+use	FUN_00158988	iVar2	targetField	INFERRED	inst +0x124 field; also holds register-kind and vtable +0x50 results in the guard chain	^\s*iVar2\ =\ param_2\[0x49\];$@4	+1
+use	FUN_00158988	iVar2	targetField	INFERRED	inst +0x124 field; also holds register-kind and vtable +0x50 results in the guard chain	^\s*param_2\[0x49\]\ =\ param_3\ \+\ iVar2;$	+1
+use	FUN_00158988	iVar2	operandIndex	INFERRED	operand loop index 1..operandCount	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\),\ iVar2\ <=\ iVar3;$	+5
+local	FUN_00158988	iVar3	operandCountResult	INFERRED	vtable +0x14 operand count / FUN_000f31e8 result
+local	FUN_00158988	piVar4	laneByteCursor	INFERRED	walks the select bytes of inst (+0x9c) one at a time
+local	FUN_00158988	local_28	writeMaskOut	INFERRED	WriteMask__fromSelectWord out value
+local	Inst__swizzleTextureFetchOutput	uVar1	targetFlags	INFERRED	target capability flags word (+8 of the target at compiler +0x30c)
+use	Inst__swizzleTextureFetchOutput	piVar2	selectBytePtr	INFERRED	byte pointer into the producer's select bytes (+0x9c)	^\s*piVar2\ =\ piVar4\ \+\ 0x27;$	+1
+use	Inst__swizzleTextureFetchOutput	piVar2	selectBytePtr	INFERRED	byte pointer into the producer's select bytes (+0x9c)	^\s*\*\(undefined1\ \*\)piVar2\ =\ 1;$	+1
+use	Inst__swizzleTextureFetchOutput	piVar2	selectBytePtr	INFERRED	byte pointer into the producer's select bytes (+0x9c)	^\s*\*\(undefined1\ \*\)piVar2\ =\ 0;$	+1
+use	Inst__swizzleTextureFetchOutput	piVar2	selectBytePtr	INFERRED	byte pointer into the producer's select bytes (+0x9c)	^\s*piVar2\ =\ \(int\ \*\)\(\(int\)piVar2\ \+\ 1\);$	+1
+use	Inst__swizzleTextureFetchOutput	piVar2	lastOperandSource	INFERRED	source of inst's last operand read via IRInst__readLastOperand	^\s*piVar2\ =\ local_40;$	+1
+use	Inst__swizzleTextureFetchOutput	piVar2	lastOperandSource	INFERRED	source of inst's last operand read via IRInst__readLastOperand	^\s*if\ \(\(\(iVar3\ ==\ 0\)\ \|\|$	+7
+use	Inst__swizzleTextureFetchOutput	piVar2	lastOperandSource	INFERRED	source of inst's last operand read via IRInst__readLastOperand	^\s*if\ \(piVar2\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	Inst__swizzleTextureFetchOutput	iVar3	producerCheck	INFERRED	vtable +0x30 and FUN_0010497c results on the producer	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x30\)\)\(piVar4\);$	+3
+use	Inst__swizzleTextureFetchOutput	iVar3	consumerCheck	INFERRED	vtable +100, +0x30, FUN_0014a898 and FUN_0010497c results on inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1\);$	+8
+use	Inst__swizzleTextureFetchOutput	iVar3	selectWordValue	INFERRED	select word read back from local_48[0]	^\s*iVar3\ =\ local_48\[0\];$	+1
+use	Inst__swizzleTextureFetchOutput	iVar3	selectWordValue	INFERRED	select word read back from local_48[0]	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x10\)\ =\ iVar3;$	+1
+local	Inst__swizzleTextureFetchOutput	local_48	selectWordAndLastOperand	INFERRED	[0] is the composed select word, [1..] the IRInst__readLastOperand out record
+local	Inst__swizzleTextureFetchOutput	local_40	lastOperandSourceOut	INFERRED	source slot of the last-operand out record
+local	Inst__swizzleTextureFetchOutput	local_30	lastOperandRecordTail	INFERRED	trailing word of the last-operand out record, zeroed
+local	Inst__swizzleTextureFetchOutput	local_28	composedSelectOut	INFERRED	SelectWord__compose out value
+local	Inst__reassociate_150b94	param_2	pass	INFERRED	pass; +0x1f8 counts the reassociations
+local	Inst__reassociate_150b94	bVar1	firstOperandReassociated	INFERRED	pair found and reassociated for operand 1
+local	Inst__reassociate_150b94	bVar2	secondOperandReassociated	INFERRED	pair found and reassociated for operand 2
+use	Inst__reassociate_150b94	iVar3	instOpcode	INFERRED	opcode of the inst for the first operand pass	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$	+2
+use	Inst__reassociate_150b94	iVar3	instOpcode	INFERRED	opcode of the inst for the first operand pass	^\s*else\ if\ \(\(iVar3\ ==\ 0x13\)\ \&\&$	+3
+use	Inst__reassociate_150b94	iVar3	instOpcodeB	INFERRED	opcode of the inst for the second operand pass	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$@2	+2
+use	Inst__reassociate_150b94	iVar3	instOpcodeB	INFERRED	opcode of the inst for the second operand pass	^\s*else\ if\ \(\(iVar3\ !=\ 0x13\)\ \|\|$	+3
+local	Inst__reassociate_150b94	local_28	reassociateRecord	INFERRED	{inst, operand index, pair inst, pair operand}: [0..1] the candidate, [2..3] the matched pair

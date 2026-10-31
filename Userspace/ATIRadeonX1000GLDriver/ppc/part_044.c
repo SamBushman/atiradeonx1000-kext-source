@@ -1,81 +1,82 @@
 #include "decls.h"
 
 /* FUN_00158988 @ 0x158988 (496 bytes) */
-int FUN_00158988(param_1, inst, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
+int FUN_00158988(ctx, inst, targetFieldDelta, unusedArg4, laneMask, pass)
+  undefined4 ctx;
   int *inst;
-  int param_3;
-  undefined4 param_4;
-  uint param_5;
-  int param_6;
+  int targetFieldDelta;
+  undefined4 unusedArg4;
+  uint laneMask;
+  int pass;
 {
   int operandKindClassResult;
   int vcall64Result;
   int countdown;
   int operandRecord;
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
-  uint local_28 [5];
+  uint instFlags;
+  int targetField;
+  int operandIndex;
+  int operandCountResult;
+  int *laneByteCursor;
+  uint writeMaskOut [5];
   
-  *(int *)(param_6 + 0x1ac) = *(int *)(param_6 + 0x1ac) + 1;
+  *(int *)(pass + 0x1ac) = *(int *)(pass + 0x1ac) + 1;
 LAB_001589b0:
   do {
     vcall64Result = (**(code **)(*inst + 100))(inst);
     if (vcall64Result == 0) {
 LAB_00158b48:
-      iVar2 = inst[0x49];
+      targetField = inst[0x49];
 LAB_00158b4c:
-      uVar1 = inst[5];
+      instFlags = inst[5];
     }
     else {
-      for (iVar2 = 1; iVar3 = (**(code **)(*inst + 0x14))(inst), iVar2 <= iVar3;
-          iVar2 = iVar2 + 1) {
-        if ((inst[iVar2 * 6 + 0x28] & 1U) != 0) goto LAB_00158b48;
-        if (((inst[iVar2 * 6 + 0x28] & 2U) != 0) ||
-           (iVar3 = IRInst__isSourceSelectIdentity(inst,iVar2), iVar3 == 0)) goto LAB_00158b3c;
+      for (operandIndex = 1; operandCountResult = (**(code **)(*inst + 0x14))(inst), operandIndex <= operandCountResult;
+          operandIndex = operandIndex + 1) {
+        if ((inst[operandIndex * 6 + 0x28] & 1U) != 0) goto LAB_00158b48;
+        if (((inst[operandIndex * 6 + 0x28] & 2U) != 0) ||
+           (operandCountResult = IRInst__isSourceSelectIdentity(inst,operandIndex), operandCountResult == 0)) goto LAB_00158b3c;
       }
       if (inst[0x48] == 0) {
-        iVar2 = inst[0x49];
-        if (iVar2 != 0) goto LAB_00158b4c;
-        if ((((inst[0x20] != 0) && (iVar2 = RegKind__flagBit0(inst[0x26]), iVar2 != 0)) &&
+        targetField = inst[0x49];
+        if (targetField != 0) goto LAB_00158b4c;
+        if ((((inst[0x20] != 0) && (targetField = RegKind__flagBit0(inst[0x26]), targetField != 0)) &&
             ((inst[5] & 2U) == 0)) &&
-           (iVar2 = (**(code **)(*inst + 0x50))(inst), iVar2 == 0)) {
+           (targetField = (**(code **)(*inst + 0x50))(inst), targetField == 0)) {
           countdown = 4;
-          piVar4 = inst;
+          laneByteCursor = inst;
           do {
-            if ((uint)(*(byte *)(piVar4 + 0x27) - 2) < 2) goto LAB_00158b48;
-            piVar4 = (int *)((int)piVar4 + 1);
+            if ((uint)(*(byte *)(laneByteCursor + 0x27) - 2) < 2) goto LAB_00158b48;
+            laneByteCursor = (int *)((int)laneByteCursor + 1);
             countdown = countdown + -1;
           } while (countdown != 0);
         }
         IRInst__getOperandRecord(inst,0);
         operandKindClassResult = IRInst__operandKindClass(inst,0);
         if (operandKindClassResult != 0) goto LAB_00158b48;
-        uVar1 = inst[5];
-        if (((uVar1 & 2) == 0) && ((uVar1 & 0x200) == 0)) {
+        instFlags = inst[5];
+        if (((instFlags & 2) == 0) && ((instFlags & 0x200) == 0)) {
           inst = (int *)IRInst__getOperandSource(inst,1);
           goto LAB_001589b0;
         }
-        iVar2 = inst[0x49];
+        targetField = inst[0x49];
       }
       else {
 LAB_00158b3c:
-        iVar2 = inst[0x49];
-        uVar1 = inst[5];
+        targetField = inst[0x49];
+        instFlags = inst[5];
       }
     }
-    inst[0x49] = param_3 + iVar2;
+    inst[0x49] = targetFieldDelta + targetField;
     while( true ) {
-      if ((uVar1 & 0x200) == 0) {
+      if ((instFlags & 0x200) == 0) {
         return;
       }
       inst = (int *)IRInst__getOperandSource(inst,inst[0x21]);
       operandRecord = IRInst__getOperandRecord(inst,0);
-      WriteMask__fromSelectWord(local_28,*(undefined4 *)(operandRecord + 0x10));
-      if ((param_5 & local_28[0]) != 0) break;
-      uVar1 = inst[5];
+      WriteMask__fromSelectWord(writeMaskOut,*(undefined4 *)(operandRecord + 0x10));
+      if ((laneMask & writeMaskOut[0]) != 0) break;
+      instFlags = inst[5];
     }
   } while( true );
 }
