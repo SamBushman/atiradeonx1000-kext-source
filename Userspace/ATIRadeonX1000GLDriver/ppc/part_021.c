@@ -613,16 +613,16 @@ int Compiler__compileStages(compiler, compileRequest)
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     reduceDepEnabled = Compiler__isOptionEnabled(compiler,0xf);
     if (reduceDepEnabled != 0) {
-      FUN_0013d3b8(*(undefined4 *)(compiler + COMP_currentProgram));
-      FUN_0013da3c(*(undefined4 *)(compiler + COMP_currentProgram));
+      Program__cloneProducersPerBlock_0013d3b8(*(undefined4 *)(compiler + COMP_currentProgram));
+      Program__rewriteAttribShaderInsts_0013da3c(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     mapChannelsEnabled = Compiler__isOptionEnabled(compiler,0x34);
     if (mapChannelsEnabled != 0) {
-      FUN_0013a8a4(*(undefined4 *)(compiler + COMP_currentProgram));
+      Program__computeLaneInsertWords_0013a8a4(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     pairInstructionsEnabled = Compiler__isOptionEnabled(compiler,0x35);
     if (pairInstructionsEnabled != 0) {
-      FUN_0013fc38(*(undefined4 *)(compiler + COMP_currentProgram));
+      Program__combineInstPairs_0013fc38(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
     if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
@@ -648,20 +648,20 @@ int Compiler__compileStages(compiler, compileRequest)
     }
     packInstsEnabled = Compiler__isOptionEnabled(compiler,0x12);
     if (packInstsEnabled != 0) {
-      FUN_0013da3c(*(undefined4 *)(compiler + COMP_currentProgram));
+      Program__rewriteAttribShaderInsts_0013da3c(*(undefined4 *)(compiler + COMP_currentProgram));
       *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
            *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80;
       deadCodeEnabled = Compiler__isOptionEnabled(compiler,0x11);
       if (deadCodeEnabled != 0) {
         Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + COMP_currentProgram),0);
       }
-      FUN_0014657c(*(undefined4 *)(compiler + COMP_currentProgram));
+      PostPack__runPass(*(undefined4 *)(compiler + COMP_currentProgram));
       *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
            *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0xffffff7f;
     }
     markIgnoreUncoveredEnabled = Compiler__isOptionEnabled(compiler,0x22);
     if (markIgnoreUncoveredEnabled != 0) {
-      FUN_00139d40(*(undefined4 *)(compiler + COMP_currentProgram));
+      Program__collectRewriteCandidates_00139d40(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     pass_assign_slots(*(undefined4 *)(compiler + COMP_currentProgram));
     List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));

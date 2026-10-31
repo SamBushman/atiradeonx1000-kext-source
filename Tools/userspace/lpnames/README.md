@@ -73,3 +73,13 @@ Helpers added in the GLDriver round gU (fork lp21):
 * A name applied by a `local` row and the same name proposed by `webspec.py` for another variable of the function collide: let `uniq_names.py` (lp21's; `uniq.py` is lp19's suffixing tool) see all names or give `local` rows distinct names.
 * A variable whose web 0 contains its declaration line (a one-line `T x;` web) must get a line filter on web 0 in `specs.py` / `emit_webs.py` rows, e.g. `0>21` (body lines >= 21): otherwise the first row renames the declaration too and every later row of that variable fails with "no simple declaration of x". `find_webs.py DIR FN VAR` (not `lw2.py`, whose placeholder regex misses names like `ppppppuVar10`) lists the webs of any variable name.
 * A name applied by a `local` row and the same name proposed by `webspec.py` for another variable of the function collide: let `uniq_names.py` see all names or give `local` rows distinct names.
+
+## q07 round (parts 042-046): tools and pitfalls
+
+- `q07_gen.py DIR rules/q07_generic3.py OUT FN...` names every web a rule module can classify (counters, operand records/sources, callee results, `vcallNNResult`, fields); names are made unique against the function's identifiers. It works on the *current* text, so web numbers differ from older `orig.py` numbering.
+- Specs are `VAR WEBS|L<lines>|* new TIER evidence` blocks under `@FN name`; `specs.py` turns them into rows. A row with `*` fails once any web of the variable is already aliased (name the remaining webs by number, or use a whole-variable row only when no web is named yet). Rows reported by `apply_names.py --check` as errors must be removed before applying (they otherwise stop the whole run).
+- Gate results: whole-variable renames are byte-identical (`87 objects, 0 different`; the `part_*` traceback printed after `IDENTICAL` by `gate.sh` is only its per-part loop finding no parts), splits need `SPLIT-EQUIVALENT` with every part at `0 problems`.
+- Names that collide with an existing local of the same function (or with a global function name such as `pairIndex`) make the row fail or merge two base slots (`MERGE ... slot N stands for A and B`); pick another name.
+- Registers reused for unrelated roles (block/inst walk cursors that become the program, counters that become a found lane, stale argument registers) cannot be split: give them one joined whole-variable name and record them in `notes_unsplittable_hybrids_q07.md`. Address-taken locals and the stack arrays next to them must keep whole-variable names.
+- Ghidra `in_rN` / `extraout_r4` / `in_stack_*` artifacts are stale argument registers, named `staleArgN` / `retR4` / `stackArgNN`.
+- `USE_DECL=beside` places the new declaration directly after the old one, which keeps fake-struct frames intact.

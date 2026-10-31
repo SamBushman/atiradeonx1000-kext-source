@@ -291,7 +291,7 @@ int KhanPs__vslot74_seedConstantValueNumbers(this, compiler)
     *(undefined1 *)(exprRecord + 8) = 1;
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
-    FUN_0017629c(exprRecord,compiler);
+    ValueKey__callTargetHook12c(exprRecord,compiler);
   } while (seedExprCursor != &DAT_001aff74);
   return;
 }
@@ -1211,7 +1211,7 @@ int KhanVs__vslot74(this, compiler)
     *(undefined1 *)(exprRecord + 8) = 1;
     *(undefined1 *)(exprRecord + 9) = 0;
     *(undefined4 *)(exprRecord + 0x18) = 0;
-    FUN_0017629c(exprRecord,compiler);
+    ValueKey__callTargetHook12c(exprRecord,compiler);
   } while (seedExprCursor != &DAT_001affb8);
   return;
 }

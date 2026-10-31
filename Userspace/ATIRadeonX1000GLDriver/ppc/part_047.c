@@ -50,7 +50,7 @@ int ValueKey__laneRelationHoldsOnWrittenLanes_176f44(ctx, sourceA, sourceB)
   loopIndex = 0;
   while ((operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0),
          *(char *)(loopIndex + operandRecord + 0x10) == '\x01' ||
-         (laneRelation = FUN_00176d6c(*loopPtr2,*loopPtr3,*(undefined4 *)(ctx + 0x238)), laneRelation != 0))) {
+         (laneRelation = Compiler__valueNumbersRelatedByFields20(*loopPtr2,*loopPtr3,*(undefined4 *)(ctx + 0x238)), laneRelation != 0))) {
     lastLane = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopPtr3 = loopPtr3 + 1;
@@ -80,7 +80,7 @@ int ValueKey__laneRelationHoldsOnWrittenLanes_176fd4(ctx, sourceA, sourceB)
   loopIndex = 0;
   while ((operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0),
          *(char *)(loopIndex + operandRecord + 0x10) == '\x01' ||
-         (laneRelation = FUN_00176e20(*loopPtr2,*loopPtr3,*(undefined4 *)(ctx + 0x238)), laneRelation != 0))) {
+         (laneRelation = Compiler__valueNumbersRelatedByFields28(*loopPtr2,*loopPtr3,*(undefined4 *)(ctx + 0x238)), laneRelation != 0))) {
     lastLane = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopPtr3 = loopPtr3 + 1;
@@ -372,7 +372,7 @@ int ValueKey__createLaneRecordsKind20(ctx)
         if ((*(char *)(loopIndex + operandRecord + 0x10) != '\x01') && (*(int *)(laneWordPtr + 0x30) == 0)) {
           laneRecord = *(int *)(laneWordPtr + 0x40);
           if (laneRecord == 0) {
-            laneRecord = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+            laneRecord = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
             *(int *)(laneWordPtr + 0x40) = laneRecord;
           }
           *(int *)(laneRecord + 4) = ctx;
@@ -403,7 +403,7 @@ int ValueKey__foldLaneToZeroIfSourcesCancel(ctx, lane)
   int laneBase;
   
   laneBase = lane * 4 + ctx;
-  callResult = FUN_00176ec0(ctx,*(undefined4 *)(laneBase + 0x178),*(undefined4 *)(laneBase + 0x188));
+  callResult = ValueKey__valueNumbersRelated(ctx,*(undefined4 *)(laneBase + 0x178),*(undefined4 *)(laneBase + 0x188));
   if (callResult != 0) {
     word0xd0Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     word0xb8Flags = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
@@ -512,10 +512,10 @@ int FUN_001778e0(ctx)
       operandRecord = IRInst__getOperandRecord(inst,0);
       if ((*(char *)(loopIndex + operandRecord + 0x10) != '\x01') && (*(int *)(laneWordPtr + 0x30) == 0)) {
         if (*(int *)(laneWordPtr + 0x40) == 0) {
-          firstLaneRecord = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+          firstLaneRecord = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
           *(undefined4 *)(laneWordPtr + 0x40) = firstLaneRecord;
         }
-        laneRecord = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+        laneRecord = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
         *(int *)(laneWordPtr + 0x40) = laneRecord;
         *(int *)(laneRecord + 4) = ctx;
         *(int *)(*(int *)(laneWordPtr + 0x40) + 8) = loopIndex;
@@ -556,7 +556,7 @@ int ValueKey__createLaneRecordsKind28(ctx)
         if ((*(char *)(loopIndex + operandRecord + 0x10) != '\x01') && (*(int *)(laneWordPtr + 0x30) == 0)) {
           laneRecord = *(int *)(laneWordPtr + 0x40);
           if (laneRecord == 0) {
-            laneRecord = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+            laneRecord = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
             *(int *)(laneWordPtr + 0x40) = laneRecord;
           }
           *(int *)(laneRecord + 4) = ctx;
@@ -939,7 +939,7 @@ int ValueKey__classifyLaneRangeClass(ctx, lane, clampFlagsOut)
     }
     laneNode = *(int *)(laneByteOffset + ctx + 0x40);
     if (laneNode == 0) {
-      laneNode = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),lane,ctx);
+      laneNode = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),lane,ctx);
       *(int *)(laneByteOffset + ctx + 0x40) = laneNode;
     }
     *(int *)(laneNode + 0x10) = resultClass;
@@ -1055,7 +1055,7 @@ int ValueKey__classifyLaneCompareClass(ctx, lane)
     laneEntryPtr2 = lane * 4 + ctx;
     laneNode = *(int *)(laneEntryPtr2 + 0x40);
     if (laneNode == 0) {
-      laneNode = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),lane,ctx);
+      laneNode = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),lane,ctx);
       *(int *)(laneEntryPtr2 + 0x40) = laneNode;
     }
     *(int *)(laneNode + 0xc) = resultClass;
@@ -1406,7 +1406,7 @@ int ValueKey__refreshExprRecordForOperand(ctx, operandIndex)
   *(undefined1 *)(callResult + 9) = 0;
   *(undefined4 *)(callResult + 0x1c) = 0;
   *(undefined4 *)(callResult + 0x18) = 0;
-  FUN_0017629c(callResult,*(undefined4 *)(ctx + 0x238));
+  ValueKey__callTargetHook12c(callResult,*(undefined4 *)(ctx + 0x238));
   return callResult;
 }
 
@@ -2116,7 +2116,7 @@ int ValueKey__setLiteralVec4Operand(operandIndex, vec4Constant, inst, compiler)
     newValueKey = allocation + 1;
     *allocation = arenaAt378;
     ValueKey__init(newValueKey,vectorCapacity,compiler);
-    FUN_00174e0c(newValueKey);
+    ValueKey__computeLaneFlags(newValueKey);
     ValueKey__propagateLaneValues(newValueKey);
     VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(vectorCapacity + 0x158) + 0xb0),newValueKey);
   }
@@ -2663,7 +2663,7 @@ int ValueKey__setOperandFromValueKey(ctx, operandIndex, valueKey, swizzle, negat
     newValueKey = allocation + 1;
     *allocation = arena;
     ValueKey__init(newValueKey,valueKey,compiler);
-    FUN_00174e0c(newValueKey);
+    ValueKey__computeLaneFlags(newValueKey);
     ValueKey__propagateLaneValues(newValueKey);
     VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(valueKey + 0x158) + 0xb0),newValueKey);
   }
@@ -3099,8 +3099,8 @@ int ValueKey__mixLiteralSources(key)
         operandKey = *loopPtr8;
         ValueKey__fillSourceLaneUsage(operandKey);
         ValueKey__fill(operandKey);
-        FUN_00174e0c(operandKey);
-        FUN_00175b40(operandKey);
+        ValueKey__computeLaneFlags(operandKey);
+        ValueKey__initSourceLaneKinds(operandKey);
         ValueKey__propagateLaneValues(operandKey);
         *(int *)(loopIndex2 + 0x214) = operandIndex2;
       }
@@ -3234,7 +3234,7 @@ LAB_0017bb2c:
       loopIndex3 = IRInst__getOperandRecord(loopIndex3,0);
       if (*(char *)(loopIndex + loopIndex3 + 0x10) != '\x01') {
         loopIndex3 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),1);
-        loopIndex3 = FUN_001764e0(valueRow,(uint)*(byte *)(loopIndex + loopIndex3 + 0x10));
+        loopIndex3 = ValueKey__sourceWordIs4(valueRow,(uint)*(byte *)(loopIndex + loopIndex3 + 0x10));
         if (loopIndex3 == 0) {
           return swizzleRewritten;
         }

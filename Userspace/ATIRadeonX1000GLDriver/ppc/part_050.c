@@ -931,14 +931,14 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
       changedFlag = 1;
     }
   }
-  loopIndex3 = FUN_0015546c(inst,consumerSrcIndex,inst2,(uint)program);
+  loopIndex3 = Inst__threeSourcesAreRegisters_0015546c(inst,consumerSrcIndex,inst2,(uint)program);
   if (loopIndex3 != 0) {
     changedFlag = 1;
     inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
   }
   combineInstA = inst2;
   programAlias15 = program;
-  loopIndex3 = FUN_00155654(inst,consumerSrcIndex,inst2,program);
+  loopIndex3 = Inst__mergeMinMaxWithSource_00155654(inst,consumerSrcIndex,inst2,program);
   curInst = inst2;
   if (loopIndex3 != 0) {
     changedFlag = 1;
@@ -954,7 +954,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
      (curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst), curInst == (int *)0x0)) {
     return 1;
   }
-  loopIndex3 = FUN_00160eb0(inst,consumerSrcIndex,curInst,program);
+  loopIndex3 = Inst__foldPowOfConstant(inst,consumerSrcIndex,curInst,program);
   if (loopIndex3 != 0) {
     curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst);
   }
@@ -1103,7 +1103,7 @@ LAB_00193490:
     }
   }
   combinedInst = (int *)((int (*)())Inst__rewriteSetOpcodesWithLiterals)(inst,consumerSrcIndex,curInst,program);
-  loopIndex3 = FUN_00159b58(combinedInst,1,program);
+  loopIndex3 = Inst__foldCompareChain_00159b58(combinedInst,1,program);
   if (loopIndex3 != 0) {
     changedFlag = 1;
     combinedInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,combinedInst);
@@ -1210,7 +1210,7 @@ LAB_00193490:
     changedFlag = 1;
     combinedInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,combinedInst);
   }
-  loopIndex3 = FUN_0015f44c(inst,consumerSrcIndex,combinedInst,program);
+  loopIndex3 = Inst__insertMovForExtraSource_0015f44c(inst,consumerSrcIndex,combinedInst,program);
   if (loopIndex3 != 0) {
     IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,combinedInst);
     return 1;

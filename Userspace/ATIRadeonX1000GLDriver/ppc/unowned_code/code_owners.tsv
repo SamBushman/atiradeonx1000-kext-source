@@ -72,7 +72,7 @@
 0x12ab78	IRInst__hasOperandKindClass1
 0x12dd48	FudoPs__flattenIfs
 0x12dd50	FudoPs__flattenIfs
-0x176e0c	FUN_00176d6c
+0x176e0c	Compiler__valueNumbersRelatedByFields20
 0x187588	Inst__foldSourceProducerIntoConsumer
 0x191708	R300VSchedModel__vslot12
 0x193bd0	TypedValueArray__createWrapping

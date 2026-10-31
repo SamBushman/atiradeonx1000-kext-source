@@ -1386,7 +1386,7 @@ void IRInst__setLiteralOperandAndSource(int inst,undefined4 unusedArg2,int opera
       *allocation = arena;
       ValueKey__init(valueKey,defInst,compiler);
       ValueKey__fill(valueKey);
-      FUN_00174e0c(valueKey);
+      ValueKey__computeLaneFlags(valueKey);
       ValueKey__propagateLaneValues(valueKey);
       VReg__pushDefinition(vreg,*(undefined4 *)(*(int *)(defInst + 0x158) + 0xb0),valueKey);
     }

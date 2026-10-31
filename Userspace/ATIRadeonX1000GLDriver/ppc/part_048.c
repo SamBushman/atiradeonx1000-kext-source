@@ -21,7 +21,7 @@ int Inst__findLaneProducer(inst, laneMask, relinkFlag, compilerCtx)
     }
     callResult = IRInst__getOperandRecord(callResult2,0);
     producerSelectWord = *(undefined4 *)(callResult + 0x10);
-    callResult = FUN_00176534(inst,callResult2);
+    callResult = ValueKey__compareValueNumbers(inst,callResult2);
     if (callResult == 2) break;
     if ((callResult == 0) && (WriteMask__fromSelectWord(producerWriteMask,producerSelectWord), (laneMask & producerWriteMask[0]) != DAT_001b01e0)) {
       return callResult2;
@@ -976,7 +976,7 @@ int ValueKey__rewriteAsMovOfValueKey(ctx, valueKey, src1SwizzlePtr, negateFlag)
     *newValueKey = arenaAt378;
     newValueKey = newValueKey + 1;
     ValueKey__init(newValueKey,valueKey,*(undefined4 *)(ctx + 0x238));
-    FUN_00174e0c(newValueKey);
+    ValueKey__computeLaneFlags(newValueKey);
     ValueKey__propagateLaneValues(newValueKey);
     VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(valueKey + 0x158) + 0xb0),newValueKey);
   }
@@ -1489,11 +1489,11 @@ int ValueKey__evaluateLaneConstants(ctx, laneResultsOut)
   int laneResultOutA [6];
   
   opcode = *(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8);
-  isOpcodeKindA = FUN_00176564(opcode);
+  isOpcodeKindA = Opcode__isF9(opcode);
   if (isOpcodeKindA != 0) {
     return 0;
   }
-  isOpcodeKindB = FUN_00176574(opcode);
+  isOpcodeKindB = Opcode__isOneOf1fOr32OrA7A8(opcode);
   if (isOpcodeKindB == 0) {
     loopIndex = OpcodeTraits__flagBit7(opcode,*(undefined4 *)(ctx + 0x238));
     if ((loopIndex == 0) ||
@@ -1508,9 +1508,9 @@ int ValueKey__evaluateLaneConstants(ctx, laneResultsOut)
         loopPtr3 = laneResultsOut;
         do {
           foldFlags[0] = 0;
-          loopRemaining = FUN_001767d8(ctx,loopIndex2);
+          loopRemaining = ValueKey__rowKnown(ctx,loopIndex2);
           if (loopRemaining != 0) {
-            FUN_00176c40(laneResultOutA,ctx,loopIndex2,foldFlags);
+            ValueKey__evaluateConstantLane(laneResultOutA,ctx,loopIndex2,foldFlags);
             *loopPtr3 = laneResultOutA[0];
             if (laneResultOutA[0] != 0x7ffffffe) {
               exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutA[0]);
@@ -1540,7 +1540,7 @@ int ValueKey__evaluateLaneConstants(ctx, laneResultsOut)
         } while (moreLanes);
       }
       else {
-        loopIndex = FUN_0017672c(ctx);
+        loopIndex = ValueKey__allRowsKnown(ctx);
         if (loopIndex == 0) goto LAB_0017df9c;
         foldFlags[0] = isOpcodeKindB;
         ValueKey__evaluateConstantInstruction(&laneResultOutB,ctx,foldFlags);
@@ -1569,7 +1569,7 @@ LAB_0017dfa0:
         goto LAB_0017dd38;
       }
       foldFlags[0] = isOpcodeKindB;
-      FUN_00176a94(&laneResultOutC,ctx,foldFlags);
+      ValueKey__evaluateConstantInst(&laneResultOutC,ctx,foldFlags);
       partialFlag = foldFlags[0];
       if (laneResultOutC == 0x7ffffffe) goto LAB_0017dfa0;
       exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutC);
@@ -2184,7 +2184,7 @@ int ValueKey__rewriteAsAdd(ctx, valueKey, src1Swizzle, negateFlag)
     *loopPtr2 = arenaAt378;
     loopPtr2 = loopPtr2 + 1;
     ValueKey__init(loopPtr2,valueKey,*(undefined4 *)(ctx + 0x238));
-    FUN_00174e0c(loopPtr2);
+    ValueKey__computeLaneFlags(loopPtr2);
     ValueKey__propagateLaneValues(loopPtr2);
     VReg__pushDefinition(operandRef,*(undefined4 *)(*(int *)(valueKey + 0x158) + 0xb0),loopPtr2);
   }
@@ -2676,7 +2676,7 @@ int ValueKey__simplifyInstruction(ctx)
     if (loopIndex != 0) {
       return 1;
     }
-    loopIndex = FUN_001766bc(ctx);
+    loopIndex = ValueKey__replaceWithMovIfZero(ctx);
 joined_r0x0017f980:
     if (loopIndex != 0) {
       return 1;
@@ -2736,7 +2736,7 @@ joined_r0x0017f980:
             loopIndex = *(int *)(ctx + 0x238);
             if (*(int *)(loopIndex + 0x658) <= *(int *)(*(int *)(loopIndex + 0x6c4) + 0xa8))
             goto LAB_0017fe30;
-            if ((*loopPtr3 == 0x7ffffffe) && (loopIndex = FUN_001768d4(ctx,loopIndex2), loopIndex == 0)) {
+            if ((*loopPtr3 == 0x7ffffffe) && (loopIndex = ValueKey__findKnownRowRecord(ctx,loopIndex2), loopIndex == 0)) {
               ValueKey__forwardOtherSourceIfOne(ctx,loopIndex2);
             }
           }
@@ -2876,7 +2876,7 @@ LAB_0017fe28:
           loopIndex = *(int *)(ctx + 0x238);
           if (*(int *)(loopIndex + 0x658) <= *(int *)(*(int *)(loopIndex + 0x6c4) + 0xa8))
           goto LAB_0017fe30;
-          if ((*loopPtr3 == 0x7ffffffe) && (loopIndex = FUN_00176954(ctx,loopIndex2), loopIndex == 0)) {
+          if ((*loopPtr3 == 0x7ffffffe) && (loopIndex = ValueKey__foldCompareLiterals(ctx,loopIndex2), loopIndex == 0)) {
             ValueKey__foldCompareSameSourcesValueNumber(ctx,loopIndex2);
           }
         }
@@ -2921,7 +2921,7 @@ LAB_0017fe34:
         return 0;
       }
       if (*loopPtr4 != 0x7ffffffe) {
-        FUN_001765a4(ctx,*loopPtr4,loopIndex);
+        ValueKey__setRowLiteral(ctx,*loopPtr4,loopIndex);
       }
       notLastLane = loopIndex != 3;
       loopPtr4 = loopPtr4 + 1;
@@ -2936,7 +2936,7 @@ LAB_0017fe34:
         return 0;
       }
       if (*loopPtr4 != 0x7ffffffe) {
-        FUN_001765a4(ctx,*loopPtr4,loopIndex);
+        ValueKey__setRowLiteral(ctx,*loopPtr4,loopIndex);
       }
       notLastLane = loopIndex != 3;
       loopPtr4 = loopPtr4 + 1;
@@ -2969,7 +2969,7 @@ int ValueKey__createLaneRecordsByOpcode(ctx)
   case 0x28:
   case 0x29:
   case 0x2a:
-    FUN_0017662c(ctx);
+    ValueKey__markUnsetLanesUnknown(ctx);
     loopIndex = 0;
     loopIndex2 = ctx;
     do {
@@ -2978,7 +2978,7 @@ int ValueKey__createLaneRecordsByOpcode(ctx)
          (*(int *)(*(int *)(ctx + 0xb0) + 0x124) < 1)) {
         laneRecord = *(int *)(loopIndex2 + 0x40);
         if (laneRecord == 0) {
-          laneRecord = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+          laneRecord = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
           *(int *)(loopIndex2 + 0x40) = laneRecord;
         }
         *(undefined4 *)(laneRecord + 0x10) = 4;
@@ -3014,7 +3014,7 @@ int ValueKey__createLaneRecordsByOpcode(ctx)
         } while (loopContinue);
         loopIndex2 = *(int *)(loopIndex * 4 + ctx + 0x40);
         if (loopIndex2 == 0) {
-          loopIndex2 = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+          loopIndex2 = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
         }
         *(undefined4 *)(loopIndex2 + 0xc) = 4;
         loopIndex = 4;
@@ -3048,7 +3048,7 @@ int ValueKey__createLaneRecordsByOpcode(ctx)
       } while (loopContinue);
       loopIndex2 = *(int *)(loopIndex * 4 + ctx + 0x40);
       if (loopIndex2 == 0) {
-        loopIndex2 = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
+        loopIndex2 = Compiler__internLaneExpr(*(undefined4 *)(ctx + 0x238),loopIndex,ctx);
       }
       loopIndex = 4;
       *(undefined4 *)(loopIndex2 + 0xc) = 4;
@@ -3632,8 +3632,8 @@ LAB_00181100:
                   ValueKey__loadSourceDefinitions(loopPtr9,*(undefined4 *)
                                         (*(int *)(*(int *)(key + 0x238) + 0x6c4) + 0x3a0));
                   ValueKey__fill(loopPtr9);
-                  FUN_00174e0c(loopPtr9);
-                  FUN_00175b40(loopPtr9);
+                  ValueKey__computeLaneFlags(loopPtr9);
+                  ValueKey__initSourceLaneKinds(loopPtr9);
                   ValueKey__propagateLaneValues(loopPtr9);
                   Block__recordDefinition(*(undefined4 *)(*(int *)(key + 0xb0) + 0x158),
                                *(undefined4 *)(loopIndex + 0x8c),loopPtr9);
@@ -3735,10 +3735,10 @@ code_r0x001812b0:
     }
     loopPtr8 = *(int **)(key + 0xb0);
     opcode = *(undefined4 *)(loopPtr8[0x22] + 8);
-    loopRemaining = FUN_00176564(opcode);
+    loopRemaining = Opcode__isF9(opcode);
     loopIndex = 0x7ffffffe;
     if (loopRemaining == 0) {
-      loopIndex = FUN_00176574(opcode);
+      loopIndex = Opcode__isOneOf1fOr32OrA7A8(opcode);
       if (loopIndex == 0) {
         loopIndex = OpcodeTraits__flagBit7(opcode,*(undefined4 *)(key + 0x238));
         if (loopIndex == 0) {
@@ -3750,7 +3750,7 @@ code_r0x001812b0:
             loopIndex = valueNumberOut1;
           }
           else {
-            FUN_001769f4(&valueNumberOut2,key,loopIndex2);
+            ValueKey__getRowLaneValue(&valueNumberOut2,key,loopIndex2);
             loopPtr8 = *(int **)(key + 0xb0);
             loopIndex = valueNumberOut2;
           }
@@ -4156,7 +4156,7 @@ int RebuildState__computeNodeLevels(rebuildState, block, maxLevelOut, schedCostO
         elementRef2 = (undefined4 *)Vector__elementRefGrow(vector3,nodeSlot);
       }
       consumerNode = (int *)*elementRef2;
-      FUN_00172204(*(undefined4 *)(rebuildState + 8),inst2);
+      SchedModel__countNodeResources(*(undefined4 *)(rebuildState + 8),inst2);
       if (0 < *(int *)(inst2 + 0x84)) {
         loopIndex = 1;
         do {
@@ -6441,14 +6441,14 @@ int Inst__tryDp3Add(inst, program, compiler)
     operandVReg = (int *)IRInst__getOperandSource(inst,2);
     if (((*(int *)(dotInst[0x22] + 8) == 0x1c) && (callResult = IRInst__hasSingleUse(dotInst,program), callResult != 0))
        && (((*(uint *)(inst + 0xb8) & 1) == 0 && ((*(uint *)(inst + 0xb8) & 2) == 0)))) {
-      callResult = FUN_00146788(dotInst,program);
+      callResult = Inst__isPlainSingleUse(dotInst,program);
       addendIndex = 2;
       if (callResult != 0) goto LAB_00185afc;
     }
     if (((*(int *)(operandVReg[0x22] + 8) == 0x1c) && (callResult = IRInst__hasSingleUse(operandVReg,program), callResult != 0))
        && (((*(uint *)(inst + 0xd0) & 1) == 0 &&
            (((*(uint *)(inst + 0xd0) & 2) == 0 &&
-            (callResult = FUN_00146788(operandVReg,program), callResult != 0)))))) {
+            (callResult = Inst__isPlainSingleUse(operandVReg,program), callResult != 0)))))) {
       addendIndex = 1;
       dotInst = operandVReg;
       addendSelect = src1Select;
