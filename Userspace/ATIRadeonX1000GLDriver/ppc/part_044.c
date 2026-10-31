@@ -3278,7 +3278,7 @@ int Inst__collapseMulOfExps(inst, program)
 }
 
 /* IRInst__getOtherOperandIfConstant @ 0x15e2f4 (416 bytes) */
-undefined4 IRInst__getOtherOperandIfConstant(int inst,int param_2,undefined4 param_3,undefined4 compilerCtx,double fparam_1)
+undefined4 IRInst__getOtherOperandIfConstant(int inst,int opcode,undefined4 unusedArg3,undefined4 compilerCtx,double expectedValue)
 {
   undefined4 sourceDef;
   int operandRecord;
@@ -3286,17 +3286,17 @@ undefined4 IRInst__getOtherOperandIfConstant(int inst,int param_2,undefined4 par
   undefined4 operandVReg;
   undefined4 operandSelect;
   undefined4 operandSelectB;
-  undefined1 auStack_48 [4];
-  float local_44;
+  undefined1 constantHeader [4];
+  float constantValue;
   
   if (((((*(int *)(inst + 0x120) == 0) && (*(int *)(inst + 0x124) == 0)) &&
        ((*(uint *)(inst + 0xb8) & 1) == 0)) &&
       (((*(uint *)(inst + 0xb8) & 2) == 0 && ((*(uint *)(inst + 0xd0) & 1) == 0)))) &&
-     (((*(uint *)(inst + 0xd0) & 2) == 0 && (*(int *)(*(int *)(inst + 0x88) + 8) == param_2)))
+     (((*(uint *)(inst + 0xd0) & 2) == 0 && (*(int *)(*(int *)(inst + 0x88) + 8) == opcode)))
      ) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,1,*(undefined4 *)(operandRecord + 0x10),auStack_48);
-    if ((uniformSourceConstant != 0) && (fparam_1 == (double)local_44)) {
+    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,1,*(undefined4 *)(operandRecord + 0x10),constantHeader);
+    if ((uniformSourceConstant != 0) && (expectedValue == (double)constantValue)) {
       operandVReg = IRInst__getOperandSource(inst,2);
       operandRecord = IRInst__getOperandRecord(inst,2);
       operandSelectB = *(undefined4 *)(operandRecord + 0x10);
@@ -3312,8 +3312,8 @@ undefined4 IRInst__getOtherOperandIfConstant(int inst,int param_2,undefined4 par
       return operandVReg;
     }
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,2,*(undefined4 *)(operandRecord + 0x10),auStack_48);
-    if ((uniformSourceConstant != 0) && ((double)local_44 == fparam_1)) {
+    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,2,*(undefined4 *)(operandRecord + 0x10),constantHeader);
+    if ((uniformSourceConstant != 0) && ((double)constantValue == expectedValue)) {
       operandVReg = IRInst__getOperandSource(inst,1);
       return operandVReg;
     }
@@ -10608,11 +10608,11 @@ int Scheduler__markGlobalValues(scheduler)
   int *operandVReg;
   int loopIndex;
   uint instFlags;
-  int iVar2;
-  int iVar3;
-  int *piVar4;
+  int walkLink;
+  int nextWalkLink;
+  int *walkNode;
   int *inst3;
-  int iVar6;
+  int walkCursor;
   int unionFindParents;
   int rootIsGlobal;
   int innerIsPresub;
@@ -10634,12 +10634,12 @@ int Scheduler__markGlobalValues(scheduler)
   block2 = *(int **)(program + 900);
   if (nextBlock != (int *)0x0) {
     do {
-      piVar4 = nextBlock;
+      walkNode = nextBlock;
       nextInst = (int *)((int *)block2[0x26])[2];
       inst3 = (int *)block2[0x26];
       if (nextInst != (int *)0x0) {
         do {
-          piVar4 = nextInst;
+          walkNode = nextInst;
           if ((inst3[5] & 1U) != 0) {
             *(int *)(unionFindParents + inst3[0x53] * 4) = inst3[0x53];
             *(undefined4 *)(inst3[0x53] * 4 + rootIsGlobal) = 0;
@@ -10657,7 +10657,7 @@ int Scheduler__markGlobalValues(scheduler)
               if ((*(int *)(inst3[0x22] + 8) == 0x32) &&
                  (isPhi = (**(code **)(**(int **)(*scheduler + 0x30c) + 0xd0))
                                     (*(int **)(*scheduler + 0x30c)), isPhi == 0)) {
-                piVar4 = (int *)inst3[2];
+                walkNode = (int *)inst3[2];
                 inst3[5] = inst3[5] | 0x20;
                 goto LAB_0016a118;
               }
@@ -10711,24 +10711,24 @@ int Scheduler__markGlobalValues(scheduler)
                 } while (operandNumber <= numSources);
               }
             }
-            piVar4 = (int *)inst3[2];
+            walkNode = (int *)inst3[2];
           }
 LAB_0016a118:
-          nextInst = (int *)piVar4[2];
-          inst3 = piVar4;
-        } while ((int *)piVar4[2] != (int *)0x0);
-        piVar4 = (int *)block2[2];
+          nextInst = (int *)walkNode[2];
+          inst3 = walkNode;
+        } while ((int *)walkNode[2] != (int *)0x0);
+        walkNode = (int *)block2[2];
       }
-      nextBlock = (int *)piVar4[2];
-      block2 = piVar4;
-    } while ((int *)piVar4[2] != (int *)0x0);
+      nextBlock = (int *)walkNode[2];
+      block2 = walkNode;
+    } while ((int *)walkNode[2] != (int *)0x0);
     program = scheduler[1];
   }
   element = *(int *)(*(int *)(program + 900) + 8);
   block = *(int *)(program + 900);
   if (element != 0) {
     do {
-      iVar2 = element;
+      walkLink = element;
       nextInst = (int *)(*(int **)(block + 0x98))[2];
       inst2 = *(int **)(block + 0x98);
       if (nextInst != (int *)0x0) {
@@ -10823,15 +10823,15 @@ LAB_0016a42c:
           nextInst = (int *)followingInst[2];
           inst2 = followingInst;
         } while ((int *)followingInst[2] != (int *)0x0);
-        iVar2 = *(int *)(block + 8);
+        walkLink = *(int *)(block + 8);
       }
-      element = *(int *)(iVar2 + 8);
-      block = iVar2;
-    } while (*(int *)(iVar2 + 8) != 0);
+      element = *(int *)(walkLink + 8);
+      block = walkLink;
+    } while (*(int *)(walkLink + 8) != 0);
     program = scheduler[1];
   }
-  iVar3 = *(int *)(*(int *)(program + 900) + 8);
-  if (iVar3 == 0) {
+  nextWalkLink = *(int *)(*(int *)(program + 900) + 8);
+  if (nextWalkLink == 0) {
     instCount = 0;
     globalCount = 0;
   }
@@ -10840,12 +10840,12 @@ LAB_0016a42c:
     globalCount = 0;
     program = *(int *)(program + 900);
     do {
-      iVar6 = iVar3;
-      iVar3 = *(int *)(*(int *)(program + 0x98) + 8);
+      walkCursor = nextWalkLink;
+      nextWalkLink = *(int *)(*(int *)(program + 0x98) + 8);
       inst = *(int *)(program + 0x98);
-      if (iVar3 != 0) {
+      if (nextWalkLink != 0) {
         do {
-          iVar6 = iVar3;
+          walkCursor = nextWalkLink;
           if ((*(uint *)(inst + 0x14) & 1) != 0) {
             root = disjointSetFindRoot(*(undefined4 *)(inst + 0x14c),unionFindParents);
             if (*(int *)(root * 4 + rootIsGlobal) == 0) {
@@ -10859,17 +10859,17 @@ LAB_0016a42c:
             if ((instFlags & 0x20) != 0) {
               globalCount = globalCount + 1;
             }
-            iVar6 = *(int *)(inst + 8);
+            walkCursor = *(int *)(inst + 8);
             instCount = instCount + 1;
           }
-          iVar3 = *(int *)(iVar6 + 8);
-          inst = iVar6;
-        } while (*(int *)(iVar6 + 8) != 0);
-        iVar6 = *(int *)(program + 8);
+          nextWalkLink = *(int *)(walkCursor + 8);
+          inst = walkCursor;
+        } while (*(int *)(walkCursor + 8) != 0);
+        walkCursor = *(int *)(program + 8);
       }
-      iVar3 = *(int *)(iVar6 + 8);
-      program = iVar6;
-    } while (*(int *)(iVar6 + 8) != 0);
+      nextWalkLink = *(int *)(walkCursor + 8);
+      program = walkCursor;
+    } while (*(int *)(walkCursor + 8) != 0);
   }
   Compiler__logf(*scheduler,"Scheduler : %d out of %d instructions are marked global\n",globalCount,instCount,
                compilerCtx,in_r8,0,in_r10);
@@ -10980,7 +10980,7 @@ int Scheduler__buildDependencyGraph(scheduler, block)
   int *inst;
   undefined4 *nodeAlloc;
   int sourceOperandCount;
-  int iVar17;
+  int bucketPtr;
   int listNextNode;
   uint dotProductLimit;
   uint nodeIndex;
@@ -10991,21 +10991,21 @@ int Scheduler__buildDependencyGraph(scheduler, block)
   uint *lastWriterSet;
   undefined4 getDependencyLatencyResult;
   uint *nodeVector;
-  /* issue #64 live-repro (crash #11, past the 0x275c dropped-arg fix): auStack_78 is declared
-   * as only 8 bytes, but DListNode__init(auStack_78) - a sentinel-node doubly-linked-list
+  /* issue #64 live-repro (crash #11, past the 0x275c dropped-arg fix): fetchNodeList is declared
+   * as only 8 bytes, but DListNode__init(fetchNodeList) - a sentinel-node doubly-linked-list
    * initializer - writes through it as `undefined4*` up to index 5 (`scheduler[4] = scheduler;
    * scheduler[5] = 0;`), i.e. 24 bytes: the same undersized-local defect class already fixed for
    * local_c08c/local_2c/local_98. The overrun silently landed on whatever gcc placed next on
    * this rebuild's stack instead of the intended sentinel-node fields, so the list's "head"
    * self-pointer (meant to make the sentinel point to itself when empty, per
    * DList__insertBefore/DList__pushBack's insert logic) never actually got set. Live-verified on real
-   * hardware: the very next list-insert call (DList__pushBack(auStack_78,schedNode), a few lines
-   * below) crashed dereferencing that missing self-pointer as a wild address. `local_70`,
+   * hardware: the very next list-insert call (DList__pushBack(fetchNodeList,schedNode), a few lines
+   * below) crashed dereferencing that missing self-pointer as a wild address. `fetchNodeListFirst`,
    * declared right after, is independently used later in this function (part_044.c:10810-
-   * 10858) and must keep its own storage - so auStack_78 gets its own full-sized buffer here
+   * 10858) and must keep its own storage - so fetchNodeList gets its own full-sized buffer here
    * rather than being merged with its neighbors. */
-  undefined1 auStack_78 [24];
-  int local_70;
+  undefined1 fetchNodeList [24];
+  int fetchNodeListFirst;
   uint lastNodeIndex;
   int visitedCount;
 
@@ -11016,7 +11016,7 @@ int Scheduler__buildDependencyGraph(scheduler, block)
   }
   scheduler[4] = block;
   SchedModel__resetCounters(scheduler[2]);
-  DListNode__init(auStack_78);
+  DListNode__init(fetchNodeList);
   instAfterNext = (int *)(*(int **)(scheduler[4] + 0x98))[2];
   if (instAfterNext != (int *)0x0) {
     nodeIndex = 0;
@@ -11222,7 +11222,7 @@ LAB_0016a958:
               }
             }
             if (*(int *)(inst[0x22] + 4) == 1) {
-              DList__pushBack(auStack_78,schedNode);
+              DList__pushBack(fetchNodeList,schedNode);
             }
             if (dotProductLimit == nodeIndex) {
               chainIndex = nodeIndex - 1;
@@ -11729,9 +11729,9 @@ LAB_0016b038:
             *edgeAppendSlot = (int)(nodeAlloc + 1);
           }
           threadIsFetchClass = (**(code **)(*(int *)scheduler[3] + 0x20))((int *)scheduler[3],curInst);
-          if ((threadIsFetchClass != 0) && (threadIsFetchClass = DList__isEmpty(auStack_78), threadIsFetchClass == 0)) {
-            listNext = *(int *)(local_70 + 8);
-            listNode = local_70;
+          if ((threadIsFetchClass != 0) && (threadIsFetchClass = DList__isEmpty(fetchNodeList), threadIsFetchClass == 0)) {
+            listNext = *(int *)(fetchNodeListFirst + 8);
+            listNode = fetchNodeListFirst;
             while (listNext != 0) {
               arena = *(undefined4 *)(*scheduler + 0x378);
               nodeAlloc = (undefined4 *)Arena__alloc(arena,0x24);
@@ -11777,8 +11777,8 @@ LAB_0016b038:
                *(int *)(*(int *)(scheduler[1] + 0x33c) + 300))) &&
              (resourceSlot10Result = (**(code **)(*(int *)scheduler[2] + 0x28))((int *)scheduler[2],curInst),
              resourceSlot10Result != 0)) {
-            listNext = *(int *)(local_70 + 8);
-            listNode = local_70;
+            listNext = *(int *)(fetchNodeListFirst + 8);
+            listNode = fetchNodeListFirst;
             while (listNextNode = listNext, listNextNode != 0) {
               if (*(int *)(listNode + 0x38) == *(int *)(scheduler[1] + 0x33c)) {
                 arena = *(undefined4 *)(*scheduler + 0x378);
@@ -11839,9 +11839,9 @@ LAB_issue76_skip_pair:
           hashBuckets = hashAlloc[3];
           nodeIndex = 0;
           do {
-            iVar17 = *(int *)(nodeIndex * 4 + hashBuckets);
-            if (iVar17 != 0) {
-              Arena__free(hashAlloc[6],iVar17);
+            bucketPtr = *(int *)(nodeIndex * 4 + hashBuckets);
+            if (bucketPtr != 0) {
+              Arena__free(hashAlloc[6],bucketPtr);
               dotProductLimit = *lastWriterSet;
               hashBuckets = hashAlloc[3];
             }

@@ -540,15 +540,15 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
-  int iVar10;
+  int coneStampArg;
   uint stackCount;
   
-  iVar10 = coneStamp;
+  coneStampArg = coneStamp;
   vcall40Result = (**(code **)(*block + 0x40))(block,vector,coneStamp);
   if (vcall40Result != 0) {
     return;
   }
-  branchInst = Block__getBranchInst(block,extraout_r4,iVar10,in_r6,in_r7,in_r8,in_r9);
+  branchInst = Block__getBranchInst(block,extraout_r4,coneStampArg,in_r6,in_r7,in_r8,in_r9);
   stackCount = vector[1];
   if (stackCount < *vector) {
     _memset(stackCount * 4 + vector[2],0,4);
@@ -3904,7 +3904,7 @@ int FUN_0013f3d4(inst, program)
   int *usersVecHeader;
   undefined4 *firstUserSlot;
   int otherSource;
-  int iVar7;
+  int operandIndexC;
   int otherOperandIndex;
   int *newInst;
   uint userCountCopy;
@@ -3915,7 +3915,7 @@ int FUN_0013f3d4(inst, program)
   uint loopIndex2;
   bool partnerFlag400000Clear;
   code *setLaneSelectFn;
-  uint uVar18;
+  uint userIndexDown;
   uint *partnerUsersVec;
   int countdown;
   undefined4 operandSelect;
@@ -4025,28 +4025,28 @@ int FUN_0013f3d4(inst, program)
           if (((inst[5] & 0x200U) == 0) || ((partner[5] & 0x200U) == 0)) {
             partnerUsersVec = (uint *)partner[4];
             userCount = partnerUsersVec[1];
-            uVar18 = userCount - 1;
-            if (-1 < (int)uVar18) {
-              userByteOffset = uVar18 * 4;
+            userIndexDown = userCount - 1;
+            if (-1 < (int)userIndexDown) {
+              userByteOffset = userIndexDown * 4;
               loopIndex2 = 0;
               do {
-                if (uVar18 < *partnerUsersVec) {
+                if (userIndexDown < *partnerUsersVec) {
                   userCountCopy = partnerUsersVec[1];
-                  if (userCountCopy <= uVar18) {
-                    _memset(userCountCopy * 4 + partnerUsersVec[2],0,(uVar18 - userCountCopy) * 4 + 4);
-                    partnerUsersVec[1] = uVar18 + 1;
+                  if (userCountCopy <= userIndexDown) {
+                    _memset(userCountCopy * 4 + partnerUsersVec[2],0,(userIndexDown - userCountCopy) * 4 + 4);
+                    partnerUsersVec[1] = userIndexDown + 1;
                   }
                   userSlot = (undefined4 *)(userByteOffset + partnerUsersVec[2]);
                 }
                 else {
-                  userSlot = (undefined4 *)Vector__elementRefGrow(partnerUsersVec,uVar18);
+                  userSlot = (undefined4 *)Vector__elementRefGrow(partnerUsersVec,userIndexDown);
                 }
                 user = (int *)*userSlot;
-                for (iVar7 = 1; otherOperandIndex = (**(code **)(*user + 0x14))(user), iVar7 <= otherOperandIndex;
-                    iVar7 = iVar7 + 1) {
-                  operandVReg = (int *)IRInst__getOperandSource(user,iVar7);
+                for (operandIndexC = 1; otherOperandIndex = (**(code **)(*user + 0x14))(user), operandIndexC <= otherOperandIndex;
+                    operandIndexC = operandIndexC + 1) {
+                  operandVReg = (int *)IRInst__getOperandSource(user,operandIndexC);
                   if (partner == operandVReg) {
-                    IRInst__setOperandSource(user,iVar7,inst,1,*(undefined4 *)(program + 8));
+                    IRInst__setOperandSource(user,operandIndexC,inst,1,*(undefined4 *)(program + 8));
                     goto LAB_0013fad0;
                   }
                 }
@@ -4056,7 +4056,7 @@ int FUN_0013f3d4(inst, program)
                 }
 LAB_0013fad0:
                 loopIndex2 = loopIndex2 + 1;
-                uVar18 = uVar18 - 1;
+                userIndexDown = userIndexDown - 1;
                 userByteOffset = userByteOffset + -4;
                 if (loopIndex2 == userCount) break;
                 partnerUsersVec = (uint *)partner[4];

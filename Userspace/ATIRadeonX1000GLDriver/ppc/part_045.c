@@ -4295,28 +4295,28 @@ int returnZero_172f24()
 }
 
 /* ValueKey__initResultLaneValues @ 0x172f34 (124 bytes) */
-int ValueKey__initResultLaneValues(param_1)
-  int param_1;
+int ValueKey__initResultLaneValues(key)
+  int key;
 {
   bool moreComponents;
-  char cVar2;
+  char laneKind;
   int operandRecord;
   int loopIndex;
-  int iVar5;
+  int laneCursor;
   
   loopIndex = 0;
-  iVar5 = param_1;
+  laneCursor = key;
   do {
-    operandRecord = IRInst__getOperandRecord(*(undefined4 *)(param_1 + 0xb0),0);
-    cVar2 = *(char *)(loopIndex + operandRecord + 0x10);
-    if (cVar2 == '\0') {
-      *(undefined4 *)(iVar5 + 0x20) = *(undefined4 *)(iVar5 + 0x178);
+    operandRecord = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),0);
+    laneKind = *(char *)(loopIndex + operandRecord + 0x10);
+    if (laneKind == '\0') {
+      *(undefined4 *)(laneCursor + 0x20) = *(undefined4 *)(laneCursor + 0x178);
     }
-    else if (cVar2 == '\x01') {
-      *(undefined4 *)(iVar5 + 0x20) = *(undefined4 *)(iVar5 + 0x10);
+    else if (laneKind == '\x01') {
+      *(undefined4 *)(laneCursor + 0x20) = *(undefined4 *)(laneCursor + 0x10);
     }
     moreComponents = loopIndex != 3;
-    iVar5 = iVar5 + 4;
+    laneCursor = laneCursor + 4;
     loopIndex = loopIndex + 1;
   } while (moreComponents);
   return;

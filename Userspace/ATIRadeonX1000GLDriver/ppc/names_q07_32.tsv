@@ -4700,3 +4700,21 @@ local	FUN_00146788	uVar2	result	INFERRED	return value: 1 when obj has a single p
 local	FUN_00140e5c	param_1	packCtx	INFERRED	pack context being initialised
 local	FUN_00140e5c	param_2	program	INFERRED	program stored at packCtx +4
 local	FUN_0013ca84	uVar1	result	INFERRED	phi source or 0
+local	ValueKey__initResultLaneValues	param_1	key	INFERRED	value key whose result lane values (+0x20) are initialised from the source rows
+local	ValueKey__initResultLaneValues	cVar2	laneKind	INFERRED	dest select byte for the lane: 0 copies row 0, 1 copies row 1
+local	ValueKey__initResultLaneValues	iVar5	laneCursor	INFERRED	key + lane * 4: base of the lane's value words
+local	IRInst__getOtherOperandIfConstant	param_2	opcode	INFERRED	opcode the inst must have
+local	IRInst__getOtherOperandIfConstant	param_3	unusedArg3	INFERRED	not referenced
+local	IRInst__getOtherOperandIfConstant	fparam_1	expectedValue	INFERRED	float constant one operand must equal
+local	IRInst__getOtherOperandIfConstant	auStack_48	constantHeader	INFERRED	first words of the IRInst__getUniformSourceConstant out record
+local	IRInst__getOtherOperandIfConstant	local_44	constantValue	INFERRED	float value word of the out record
+local	Block__scanBranchConeForFetchAndInterp	iVar10	coneStampArg	INFERRED	cone stamp left in r5 as an extra argument of Block__getBranchInst
+local	FUN_0013f3d4	iVar7	operandIndexC	INFERRED	operand loop index 1..operandCount of the user
+local	FUN_0013f3d4	uVar18	userIndexDown	INFERRED	descending index over the partner's users vector
+local	Scheduler__buildDependencyGraph	iVar17	bucketPtr	INFERRED	hash bucket chain freed in the cleanup
+local	Scheduler__buildDependencyGraph	auStack_78	fetchNodeList	INFERRED	sentinel-node list header of the fetch-thread scheduler nodes
+local	Scheduler__buildDependencyGraph	local_70	fetchNodeListFirst	INFERRED	first node slot of fetchNodeList (auStack_78 + 8)
+local	Scheduler__markGlobalValues	piVar4	walkNode	INFERRED	one register: the block / inst list node being advanced in the block and inst walks
+local	Scheduler__markGlobalValues	iVar2	walkLink	INFERRED	one register: list link, element and operand results through the function
+local	Scheduler__markGlobalValues	iVar3	nextWalkLink	INFERRED	one register: next list link, operand count and results through the function
+local	Scheduler__markGlobalValues	iVar6	walkCursor	INFERRED	one register: list cursor of the final block / inst walks
