@@ -396,17 +396,18 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   int ctx;
   int ilBuilder;
 {
+  int ctxFieldCursor;
   bool hasUnitWithoutCompare;
   undefined4 newTokenBuffer;
   uint tokenIndex;
   uint textureUnitCount;
   uint loopCounter;
-  int iVar6;
+  int declContextTable;
   uint loopIndex;
   uint *countPtr;
   
   countPtr = (uint *)(ilBuilder + 4);
-  iVar6 = *(int *)(*(int *)(ctx + 4) + 0x10);
+  declContextTable = *(int *)(*(int *)(ctx + 4) + 0x10);
   if (*(uint *)(ilBuilder + 8) <= *(uint *)(ilBuilder + 4)) {
     newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
     if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -433,7 +434,7 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   tokenIndex = *countPtr + 1;
   *countPtr = tokenIndex;
   if (((*(uint *)(ctx + 0x44) & 0xa00000) != 0) ||
-     (((int)*(uint *)(ctx + 0x44) < 0 && (*(short *)(((unsigned char *)0x00002d48) + iVar6) == -0x7e06)))) {
+     (((int)*(uint *)(ctx + 0x44) < 0 && (*(short *)(((unsigned char *)0x00002d48) + declContextTable) == -0x7e06)))) {
     if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
       newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
       if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -466,13 +467,13 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   if (textureUnitCount != 0) {
     loopIndex = 0;
     loopCounter = 0x80000;
-    iVar6 = ctx;
+    ctxFieldCursor = ctx;
     do {
       if (((*(uint *)(ctx + 0x44) & 0x100000) != 0) &&
          (*(char *)(loopIndex + *(int *)(((unsigned char *)0x00001168) + ctx) + 0x71) == '\0')) {
         hasUnitWithoutCompare = true;
       }
-      if (*(int *)(((unsigned char *)0x000013f8) + iVar6) != 0) {
+      if (*(int *)(((unsigned char *)0x000013f8) + ctxFieldCursor) != 0) {
         if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
           newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
           if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -534,7 +535,7 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
       }
       loopIndex = loopIndex + 1;
       loopCounter = loopCounter + 0x10000;
-      iVar6 = iVar6 + 4;
+      ctxFieldCursor = ctxFieldCursor + 4;
     } while ((int)loopIndex < (int)textureUnitCount);
   }
   if (*(char *)(ctx + 0x121) != '\0') {
@@ -670,7 +671,7 @@ int ffpsEmitTexEnvCombine(ctx, ilBuilder, baseFormat, unit, textureObject, isFir
   int unitState;
   undefined4 newTokenBuffer;
   uint combineRgbMode;
-  int iVar9;
+  int combineModeBiased;
   int argCount;
   undefined4 ilOpcode;
   int *argOrderCursor;
@@ -717,7 +718,7 @@ int ffpsEmitTexEnvCombine(ctx, ilBuilder, baseFormat, unit, textureObject, isFir
 loopSetArgCount:
         argCount = 2;
         argOrder[0] = 0;
-        iVar9 = combineRgbMode - 0x10000;
+        combineModeBiased = combineRgbMode - 0x10000;
         argOrder[1] = 1;
       }
       else if (combineRgbMode < 0x2101) {
@@ -728,7 +729,7 @@ loopSetArgCount:
         if (combineRgbMode != 0x1e01) goto unsupportedCombineMode;
         argCount = 1;
         argOrder[0] = 0;
-        iVar9 = -0xe1ff;
+        combineModeBiased = -0xe1ff;
         ilOpcode = 0x47;
       }
       else if (combineRgbMode == 0x8574) {
@@ -740,14 +741,14 @@ loopSetArgCount:
           srcSwizzles[1] = srcSwizzles[1] & 0xfffff888 | 0x210;
         }
         argCount = 2;
-        iVar9 = -0x7a8c;
+        combineModeBiased = -0x7a8c;
         srcSwizzles[1] = srcSwizzles[1] | 0x20000;
       }
       else if (combineRgbMode == 0x8575) {
         argOrder[1] = 0;
         argCount = 3;
         ilOpcode = 0x3f;
-        iVar9 = -0x7a8b;
+        combineModeBiased = -0x7a8b;
         argOrder[2] = 1;
         argOrder[0] = 2;
       }
@@ -755,14 +756,14 @@ loopSetArgCount:
         if (combineRgbMode != 0x84e7) goto unsupportedCombineMode;
         argCount = 2;
         argOrder[0] = 0;
-        iVar9 = -0x7b19;
+        combineModeBiased = -0x7b19;
         ilOpcode = 0x5b;
         argOrder[1] = 1;
       }
     }
     else {
 setupDot3Combine:
-      iVar9 = combineRgbMode - 0x10000;
+      combineModeBiased = combineRgbMode - 0x10000;
       argOrder[0] = 0;
       ilOpcode = 0x22;
       argOrder[1] = 1;
@@ -783,14 +784,14 @@ setupDot3Combine:
     argOrder[0] = 0;
     argCount = 3;
     ilOpcode = 0x40;
-    iVar9 = -0x78bc;
+    combineModeBiased = -0x78bc;
     argOrder[2] = 1;
     argOrder[1] = 2;
   }
   else if (combineRgbMode < 0x8745) {
     if (combineRgbMode - 0x8740 < 2) goto setupDot3Combine;
 unsupportedCombineMode:
-    iVar9 = combineRgbMode - 0x10000;
+    combineModeBiased = combineRgbMode - 0x10000;
     argCount = 0;
   }
   else if (combineRgbMode == 0x8745) {
@@ -803,7 +804,7 @@ unsupportedCombineMode:
       srcSwizzles[1] = srcSwizzles[1] & 0xfffff888 | 0x210;
     }
     argCount = 3;
-    iVar9 = -0x78bb;
+    combineModeBiased = -0x78bb;
     srcSwizzles[1] = srcSwizzles[1] | 0x20000;
   }
   else {
@@ -817,12 +818,12 @@ unsupportedCombineMode:
       srcSwizzles[1] = srcSwizzles[1] & 0xfffff888 | 0x210;
     }
     argCount = 3;
-    iVar9 = -0x78ba;
+    combineModeBiased = -0x78ba;
     srcSwizzles[1] = srcSwizzles[1] | 0x888;
   }
   textureUnitCount = ((unsigned char *)0x000013b2)[ctx];
   dstWriteWord = 0x115;
-  if (iVar9 + 0x7952U < 2) {
+  if (combineModeBiased + 0x7952U < 2) {
     if (rgbScale == FLOAT_001aa0e8) {
 loopSetDstWriteWord:
       dstWriteWord = 0x515;
@@ -2614,15 +2615,15 @@ int CompileInput__readBoolConst(compileInput, sideSelector, constIndex, unusedAr
   undefined4 unusedArg4;
   undefined4 *outValue;
 {
-  int iVar1;
+  int constantArray;
   
   if (sideSelector == 0) {
-    iVar1 = *(int *)(*(int *)(compileInput + 0x2c) + 0x1c);
+    constantArray = *(int *)(*(int *)(compileInput + 0x2c) + 0x1c);
   }
   else {
-    iVar1 = *(int *)(*(int *)(compileInput + 0x30) + 0x18);
+    constantArray = *(int *)(*(int *)(compileInput + 0x30) + 0x18);
   }
-  *outValue = *(undefined4 *)(iVar1 + constIndex * 4);
+  *outValue = *(undefined4 *)(constantArray + constIndex * 4);
   return;
 }
 
@@ -3565,7 +3566,7 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
   undefined1 *textBufferPtr;
   undefined4 staleArgR7;
   undefined4 staleArgR8;
-  uint uVar6;
+  uint fractionBitsWord;
   undefined4 staleArgR10;
   uint bitIndex;
   undefined1 textBuffer [256];
@@ -3602,18 +3603,18 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
     integerPart = FLOAT_001aa114 - integerPart;
   }
   fractionField = 0;
-  uVar6 = integerField;
+  fractionBitsWord = integerField;
   if (fractionBits != 0) {
     loopCounter = 0;
-    uVar6 = 0;
+    fractionBitsWord = 0;
     bitIndex = fractionBits;
     do {
       fractionBitIndex = loopCounter & 0x3f;
       loopCounter = loopCounter + 1;
-      uVar6 = uVar6 | 1 << fractionBitIndex;
+      fractionBitsWord = fractionBitsWord | 1 << fractionBitIndex;
       bitIndex = bitIndex - 1;
     } while (bitIndex != 0);
-    fractionField = uVar6 & fieldBits;
+    fractionField = fractionBitsWord & fieldBits;
   }
   intToDoubleHi3 = 0x43300000;
   textBufferPtr = textBuffer;
@@ -3621,7 +3622,7 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
                (double)((float)(DOUBLE_001aa200 /
                                ((double)CONCAT44(0x43300000,fractionScale) - DOUBLE_001aa250)) *
                         (float)((double)CONCAT44(0x43300000,fractionField) - DOUBLE_001aa250) + integerPart));
-  ((int (*)())ildisAppendf)(disassembler,textBuffer,textBufferPtr,fractionBits,staleArgR7,staleArgR8,uVar6,staleArgR10);
+  ((int (*)())ildisAppendf)(disassembler,textBuffer,textBufferPtr,fractionBits,staleArgR7,staleArgR8,fractionBitsWord,staleArgR10);
   return;
 }
 

@@ -232,7 +232,7 @@ int Compiler__getOrCreateLoadConst4(compiler, constVec0, constVec1, constVec2, c
   undefined4 constVec5;
   undefined4 constVec6;
 {
-  undefined4 uVar1;
+  undefined4 loadConstResult;
   undefined4 uStack0000001c;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
@@ -248,8 +248,8 @@ int Compiler__getOrCreateLoadConst4(compiler, constVec0, constVec1, constVec2, c
   uStack0000002c = constVec4;
   uStack00000030 = constVec5;
   uStack00000034 = constVec6;
-  uVar1 = ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,4,constVec0,constVec1,constVec2,constVec3,constVec4,constVec5);
-  return uVar1;
+  loadConstResult = ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,4,constVec0,constVec1,constVec2,constVec3,constVec4,constVec5);
+  return loadConstResult;
 }
 
 /* Compiler__getOrCreateLoadConst3 @ 0xf53c0 (396 bytes) */
@@ -955,7 +955,7 @@ int Compiler__getOrCreateConstVector4(owner, operandWord0, operandWord1, operand
   undefined4 operandWord5;
   undefined4 operandWord6;
 {
-  undefined4 uVar1;
+  undefined4 constVectorResult;
   undefined4 operandWord0Home;
   undefined4 operandWord1Home;
   undefined4 operandWord2Home;
@@ -971,8 +971,8 @@ int Compiler__getOrCreateConstVector4(owner, operandWord0, operandWord1, operand
   operandWord4Home = operandWord4;
   operandWord5Home = operandWord5;
   operandWord6Home = operandWord6;
-  uVar1 = ((int (*)())Compiler__getOrCreateConstVectorN)(owner,4,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
-  return uVar1;
+  constVectorResult = ((int (*)())Compiler__getOrCreateConstVectorN)(owner,4,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
+  return constVectorResult;
 }
 
 /* Compiler__getOrCreateConstVector3 @ 0xf65d4 (396 bytes) */
@@ -1974,7 +1974,7 @@ int DominatorTree__computeDominanceFrontiers(domInfo)
 int DominatorTree__free_f7f1c(domInfo)
   undefined4 *domInfo;
 {
-  int iVar1;
+  int bucketOffsetOrNode;
   int bucketNode;
   int bucketArray;
   uint loopIndex;
@@ -1983,17 +1983,17 @@ int DominatorTree__free_f7f1c(domInfo)
   loopIndex = 0;
   bucketArray = domInfo[5];
   do {
-    iVar1 = loopIndex * 4;
-    bucketNode = *(int *)(iVar1 + bucketArray);
+    bucketOffsetOrNode = loopIndex * 4;
+    bucketNode = *(int *)(bucketOffsetOrNode + bucketArray);
     while ((bucketNode != 0 && (nextBucketNode = *(int *)(bucketNode + 4), nextBucketNode != 0))) {
       Arena__free(*(undefined4 *)(bucketNode + -4),bucketNode + -4);
-      *(int *)(iVar1 + domInfo[5]) = nextBucketNode;
+      *(int *)(bucketOffsetOrNode + domInfo[5]) = nextBucketNode;
       bucketArray = domInfo[5];
-      bucketNode = *(int *)(iVar1 + bucketArray);
+      bucketNode = *(int *)(bucketOffsetOrNode + bucketArray);
     }
-    iVar1 = *(int *)(iVar1 + bucketArray);
-    if (iVar1 != 0) {
-      Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+    bucketOffsetOrNode = *(int *)(bucketOffsetOrNode + bucketArray);
+    if (bucketOffsetOrNode != 0) {
+      Arena__free(*(undefined4 *)(bucketOffsetOrNode + -4),bucketOffsetOrNode + -4);
       bucketArray = domInfo[5];
     }
     loopIndex = loopIndex + 1;
@@ -2013,7 +2013,7 @@ int DominatorTree__free_f7f1c(domInfo)
 int DominatorTree__free(domInfo)
   undefined4 *domInfo;
 {
-  int iVar1;
+  int bucketOffsetOrNode;
   int bucketNode;
   int bucketArray;
   uint loopIndex;
@@ -2022,17 +2022,17 @@ int DominatorTree__free(domInfo)
   loopIndex = 0;
   bucketArray = domInfo[5];
   do {
-    iVar1 = loopIndex * 4;
-    bucketNode = *(int *)(iVar1 + bucketArray);
+    bucketOffsetOrNode = loopIndex * 4;
+    bucketNode = *(int *)(bucketOffsetOrNode + bucketArray);
     while ((bucketNode != 0 && (nextBucketNode = *(int *)(bucketNode + 4), nextBucketNode != 0))) {
       Arena__free(*(undefined4 *)(bucketNode + -4),bucketNode + -4);
-      *(int *)(iVar1 + domInfo[5]) = nextBucketNode;
+      *(int *)(bucketOffsetOrNode + domInfo[5]) = nextBucketNode;
       bucketArray = domInfo[5];
-      bucketNode = *(int *)(iVar1 + bucketArray);
+      bucketNode = *(int *)(bucketOffsetOrNode + bucketArray);
     }
-    iVar1 = *(int *)(iVar1 + bucketArray);
-    if (iVar1 != 0) {
-      Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
+    bucketOffsetOrNode = *(int *)(bucketOffsetOrNode + bucketArray);
+    if (bucketOffsetOrNode != 0) {
+      Arena__free(*(undefined4 *)(bucketOffsetOrNode + -4),bucketOffsetOrNode + -4);
       bucketArray = domInfo[5];
     }
     loopIndex = loopIndex + 1;
@@ -2802,7 +2802,7 @@ int Program__appendInst(program, inst, block)
   void *inst2;
   int newTempIndex;
   int sourceRegNumber;
-  int iVar7;
+  int instRegisterFile;
   
   splitQuery = (**(code **)(*inst + 0x30))(inst,inst,block);
   if ((splitQuery != 0) &&
@@ -2829,10 +2829,10 @@ int Program__appendInst(program, inst, block)
     *(int *)(operandRecord + 8) = newTempIndex;
     *(undefined4 *)((int)inst2 + 0x9c) = 0x1010000;
     sourceRegNumberB = inst[0x2b];
-    iVar7 = inst[0x2c];
+    instRegisterFile = inst[0x2c];
     operandRecord = IRInst__getOperandRecord(inst2,1);
     *(int *)(operandRecord + 8) = sourceRegNumberB;
-    *(int *)(operandRecord + 0xc) = iVar7;
+    *(int *)(operandRecord + 0xc) = instRegisterFile;
     ((int (*)())Program__appendInst)(program,inst2,block);
     operandRecord = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord + 0xc) = 0;
@@ -5222,7 +5222,7 @@ int Program__translateILStream(program, ilReader)
   int program;
   uint ******ilReader;
 {
-  uint ******ppppppuVar49;
+  uint ******vectorElementOrNewInst;
   bool hwFlag0x40Clear;
   bool hasPendingExtra;
   uint *****instWord0x98C;
@@ -6609,12 +6609,12 @@ code_r0x000feeb8:
           else {
             vectorElementSlot = (undefined4 *)Vector__elementRefGrow(movByRegister,registerNumber);
           }
-          ppppppuVar49 = (uint ******)*vectorElementSlot;
+          vectorElementOrNewInst = (uint ******)*vectorElementSlot;
           argR6 = (uint ******)0x0;
           newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
           *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
           virtualRegister = VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0,newTempIndex,0);
-          IRInst__setOperandRef(ppppppuVar49,0,virtualRegister);
+          IRInst__setOperandRef(vectorElementOrNewInst,0,virtualRegister);
           goto code_r0x000ff070;
         }
       }
@@ -6703,14 +6703,14 @@ code_r0x000feeb8:
           loopCounterB = loopCounterB + 4;
         } while (notLastIteration);
       }
-      ppppppuVar49 = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      vectorElementOrNewInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
       argR8 = (uint ******)((int)((unsigned char *)0x0) + 1);
       argR6 = ilReader;
-      argR7 = ppppppuVar49;
-      ((int (*)())Template__bindOperand)(program,0,0,ilReader,ppppppuVar49,1,0,selectWordPtr,loopStackData,1,currentBlock);
-      IRInst__setOperandRef(ppppppuVar49,1,virtualRegister);
+      argR7 = vectorElementOrNewInst;
+      ((int (*)())Template__bindOperand)(program,0,0,ilReader,vectorElementOrNewInst,1,0,selectWordPtr,loopStackData,1,currentBlock);
+      IRInst__setOperandRef(vectorElementOrNewInst,1,virtualRegister);
 code_r0x000ff070:
-      ((int (*)())Program__appendInst)(program,ppppppuVar49,currentBlock);
+      ((int (*)())Program__appendInst)(program,vectorElementOrNewInst,currentBlock);
       goto readNextInstruction;
     case 0xbe:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);

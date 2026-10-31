@@ -401,26 +401,26 @@ int ildisPrintOutputTopology(disassembler, instructionToken, fmtArgR5, fmtArgR6,
   char *fmtArgR9;
   undefined4 fmtArgR10;
 {
-  uint uVar1;
+  uint topologyKind;
   char local_38 [4];
   char local_34 [4];
   char local_30 [4];
   char local_2c [40];
   
-  uVar1 = instructionToken >> 0x10 & 0x3fff;
-  if (uVar1 == 1) {
+  topologyKind = instructionToken >> 0x10 & 0x3fff;
+  if (topologyKind == 1) {
     fmtArgR9 = "_line_strip";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 0));
     *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 4));
     *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 8));
   }
-  else if (uVar1 == 0) {
+  else if (topologyKind == 0) {
     fmtArgR9 = "_point_list";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 0));
     *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 4));
     *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 8));
   }
-  else if (uVar1 == 2) {
+  else if (topologyKind == 2) {
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 0));
     *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 4));
     *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 8));
@@ -517,7 +517,7 @@ int ildisPrintTexldmsModifiers(disassembler, controlWord, passThroughR5, fmtArgR
   undefined4 integerBitsArg;
   undefined4 fractionBitsArg;
   uint extraWord;
-  double dVar4;
+  double staleFprResult;
   double staleFpr2;
   double staleFpr3;
   double staleFpr4;
@@ -545,17 +545,17 @@ int ildisPrintTexldmsModifiers(disassembler, controlWord, passThroughR5, fmtArgR
   if ((controlWord & 0x40000000) != 0) {
     extraWord = **(uint **)(disassembler + 8);
     *(uint **)(disassembler + 8) = *(uint **)(disassembler + 8) + 1;
-    dVar4 = (double)ildisAppendf(disassembler,"_xoffset(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10
+    staleFprResult = (double)ildisAppendf(disassembler,"_xoffset(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10
                                 );
     integerBitsArg = 7;
     fractionBitsArg = 1;
-    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord & 0xff,7,1,dVar4,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord & 0xff,7,1,staleFprResult,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
                  staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
     ildisAppendf(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-    dVar4 = (double)ildisAppendf(disassembler,"_yoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    staleFprResult = (double)ildisAppendf(disassembler,"_yoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     integerBitsArg = 7;
     fractionBitsArg = 1;
-    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord >> 8 & 0xff,7,1,dVar4,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord >> 8 & 0xff,7,1,staleFprResult,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
                  staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
     ildisAppendf(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     return;
@@ -1206,13 +1206,14 @@ int ildisPrintDestinationOperand(disassembler, passThroughR4, printedValue, fmtA
   undefined4 fmtArgR9;
   undefined4 fmtArgR10;
 {
+  undefined4 componentChar;
   bool noModifierWord;
   bool indexPrinted;
   undefined4 *registerTypeBits;
   undefined4 letterStyle;
   uint *tokenPtr;
   undefined4 r4AfterCall;
-  undefined4 uVar6;
+  undefined4 indexValue;
   uint unaff_r24;
   uint unaff_r25;
   uint operandWordOrIndex;
@@ -1265,13 +1266,13 @@ int ildisPrintDestinationOperand(disassembler, passThroughR4, printedValue, fmtA
     }
     if (relativeModeOrWord == 0) {
       if (indexPrinted) {
-        uVar6 = 0;
+        indexValue = 0;
         if ((operandWordOrIndex & 0x4000000) != 0) {
-          uVar6 = *(undefined4 *)disassembler[2];
+          indexValue = *(undefined4 *)disassembler[2];
           disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
         }
-        printf_LDBLStub_1a32d0(formatBuffer,"[%lu]",uVar6,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-        ildisAppendf(disassembler,formatBuffer,uVar6,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+        printf_LDBLStub_1a32d0(formatBuffer,"[%lu]",indexValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+        ildisAppendf(disassembler,formatBuffer,indexValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       }
       else {
         operandWordOrIndex = operandWordOrIndex & 0xffff;
@@ -1287,11 +1288,11 @@ int ildisPrintDestinationOperand(disassembler, passThroughR4, printedValue, fmtA
           printf_LDBLStub_1a32d0(formatBuffer,"a%d",relativeModeOrWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
           ildisAppendf(disassembler,formatBuffer,relativeModeOrWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
           if ((unaff_r24 & 0xe0000) != 0) {
-            uVar6 = returnZero_da8f4(disassembler,operandWordOrIndex);
-            uVar6 = ildisComponentSelectChar(disassembler,unaff_r24 >> 0x11 & 7,uVar6,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9
+            componentChar = returnZero_da8f4(disassembler,operandWordOrIndex);
+            componentChar = ildisComponentSelectChar(disassembler,unaff_r24 >> 0x11 & 7,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9
                                  ,fmtArgR10);
-            printf_LDBLStub_1a32d0(formatBuffer,".%c",uVar6,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-            ildisAppendf(disassembler,formatBuffer,uVar6,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+            printf_LDBLStub_1a32d0(formatBuffer,".%c",componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+            ildisAppendf(disassembler,formatBuffer,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
           }
         }
         else {
@@ -3485,10 +3486,10 @@ int Compiler__applyRequestFlags(compiler, requestFlags)
   undefined4 compiler;
   uint requestFlags;
 {
-  int iVar1;
+  int bit24Set;
   
-  iVar1 = ((int (*)())testBit24)(compiler,requestFlags);
-  if (iVar1 != 0) {
+  bit24Set = ((int (*)())testBit24)(compiler,requestFlags);
+  if (bit24Set != 0) {
     ((int (*)())Compiler__clearOptionBit)(compiler,9);
     ((int (*)())Compiler__clearOptionBit)(compiler,0x14);
     ((int (*)())Compiler__clearOptionBit)(compiler,0x1c);

@@ -344,6 +344,7 @@ int Program__findBranchingBlock(program)
 int Program__splitMixedSourceKinds(program)
   int program;
 {
+  int instWalkNode;
   undefined4 sourceVReg;
   int sourceCursor2;
   int newTempIndex;
@@ -354,23 +355,23 @@ int Program__splitMixedSourceKinds(program)
   int loopIndex;
   int sourceCursor;
   int loopIndex2;
-  int iVar7;
-  int iVar8;
+  int instOrSourceCount;
+  int blockWalkNode;
   int candidateInst;
   int sourcesLeft;
   
   block = *(int *)(program + 900);
-  for (iVar8 = *(int *)(*(int *)(program + 900) + 8); iVar8 != 0; iVar8 = *(int *)(iVar8 + 8)) {
-    iVar7 = *(int *)(*(int *)(block + 0x98) + 8);
+  for (blockWalkNode = *(int *)(*(int *)(program + 900) + 8); blockWalkNode != 0; blockWalkNode = *(int *)(blockWalkNode + 8)) {
+    instOrSourceCount = *(int *)(*(int *)(block + 0x98) + 8);
     candidateInst = *(int *)(block + 0x98);
-    if (iVar7 != 0) {
+    if (instOrSourceCount != 0) {
       do {
-        iVar8 = iVar7;
-        if (((*(uint *)(candidateInst + 0x14) & 1) != 0) && (iVar7 = *(int *)(candidateInst + 0x84), 0 < iVar7)) {
+        instWalkNode = instOrSourceCount;
+        if (((*(uint *)(candidateInst + 0x14) & 1) != 0) && (instOrSourceCount = *(int *)(candidateInst + 0x84), 0 < instOrSourceCount)) {
           loopIndex = 0;
           loopIndex2 = 0;
           sourceCursor = candidateInst;
-          sourcesLeft = iVar7;
+          sourcesLeft = instOrSourceCount;
           do {
             if (*(int *)(sourceCursor + 0xb0) - 2U < 3) {
               loopIndex2 = loopIndex2 + 1;
@@ -401,16 +402,16 @@ int Program__splitMixedSourceKinds(program)
                 Block__insertInstBefore(*(undefined4 *)(candidateInst + 0x158),candidateInst,inst);
               }
               sourceCursor2 = sourceCursor2 + 0x18;
-            } while (iVar7 != loopIndex3);
-            iVar8 = *(int *)(candidateInst + 8);
+            } while (instOrSourceCount != loopIndex3);
+            instWalkNode = *(int *)(candidateInst + 8);
           }
         }
-        iVar7 = *(int *)(iVar8 + 8);
-        candidateInst = iVar8;
-      } while (*(int *)(iVar8 + 8) != 0);
-      iVar8 = *(int *)(block + 8);
+        instOrSourceCount = *(int *)(instWalkNode + 8);
+        candidateInst = instWalkNode;
+      } while (*(int *)(instWalkNode + 8) != 0);
+      blockWalkNode = *(int *)(block + 8);
     }
-    block = iVar8;
+    block = blockWalkNode;
   }
   return;
 }
@@ -532,9 +533,10 @@ int IRInst__isForwardable(inst, selectWord, compiler)
   undefined4 selectWord;
   int compiler;
 {
+  int forwardCheckResult;
   int queryResult;
   int hasSingleUse;
-  int iVar1;
+  int foldableCompareResult;
   
   queryResult = (**(code **)(*inst + 0x60))(inst,selectWord,compiler);
   if (queryResult != 0) {
@@ -542,19 +544,19 @@ int IRInst__isForwardable(inst, selectWord, compiler)
     if (hasSingleUse == 0) {
       return 0;
     }
-    iVar1 = IRInst__canFoldConstantCompare(inst,compiler);
-    if (iVar1 == 0) {
+    foldableCompareResult = IRInst__canFoldConstantCompare(inst,compiler);
+    if (foldableCompareResult == 0) {
       return 0;
     }
     inst = (int *)IRInst__getOperandSource(inst,1);
   }
-  iVar1 = IRInst__hasSingleUse(inst,*(undefined4 *)(compiler + COMP_currentProgram));
-  if ((((iVar1 != 0) &&
-       (iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x44))
-                          (*(int **)(compiler + COMP_target),inst), iVar1 != 0)) &&
+  forwardCheckResult = IRInst__hasSingleUse(inst,*(undefined4 *)(compiler + COMP_currentProgram));
+  if ((((forwardCheckResult != 0) &&
+       (forwardCheckResult = (**(code **)(**(int **)(compiler + COMP_target) + 0x44))
+                          (*(int **)(compiler + COMP_target),inst), forwardCheckResult != 0)) &&
       ((*(uint *)(inst[0x56] + 0xc) & 8) != 0)) &&
-     ((iVar1 = SelectWord__areCompatible(selectWord,0x10203), iVar1 != 0 ||
-      (iVar1 = ((int (*)())IRInst__isFoldableByOpcodeFlags)(inst,compiler), iVar1 != 0)))) {
+     ((forwardCheckResult = SelectWord__areCompatible(selectWord,0x10203), forwardCheckResult != 0 ||
+      (forwardCheckResult = ((int (*)())IRInst__isFoldableByOpcodeFlags)(inst,compiler), forwardCheckResult != 0)))) {
     return 1;
   }
   return 0;
@@ -842,28 +844,29 @@ int Program__beginPass(program, param_2)
   int program;
   uint param_2;
 {
-  int iVar1;
-  int iVar2;
+  int instructionVector;
+  int nextBlockLink;
+  int vectorInst;
   uint r4AfterCall;
   int loopCounter;
   int *a0;
   uint loopIndex;
   
   a0 = *(int **)(program + PROG_blockListHead);
-  iVar1 = a0[2];
-  while (iVar1 != 0) {
+  nextBlockLink = a0[2];
+  while (nextBlockLink != 0) {
     (**(code **)(*a0 + 0x48))(a0,param_2);
     a0 = (int *)a0[2];
     param_2 = r4AfterCall;
-    iVar1 = a0[2];
+    nextBlockLink = a0[2];
   }
-  iVar1 = *(int *)(program + PROG_instructionVector);
+  instructionVector = *(int *)(program + PROG_instructionVector);
   loopCounter = 0;
-  for (loopIndex = 1; loopIndex <= *(uint *)(iVar1 + 4); loopIndex = loopIndex + 1) {
-    iVar2 = *(int *)(*(int *)(iVar1 + 8) + loopCounter);
-    if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
-      IRInst__getOperandRecord(iVar2,0);
-      iVar1 = *(int *)(program + PROG_instructionVector);
+  for (loopIndex = 1; loopIndex <= *(uint *)(instructionVector + 4); loopIndex = loopIndex + 1) {
+    vectorInst = *(int *)(*(int *)(instructionVector + 8) + loopCounter);
+    if ((*(uint *)(vectorInst + 0x14) & 1) != 0) {
+      IRInst__getOperandRecord(vectorInst,0);
+      instructionVector = *(int *)(program + PROG_instructionVector);
     }
     loopCounter = loopCounter + 4;
   }

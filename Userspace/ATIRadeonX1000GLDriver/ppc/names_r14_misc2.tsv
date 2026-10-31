@@ -1,0 +1,114 @@
+use	gld_readPixelsViaBlit	bVar42	loopExitFlagWord	INFERRED	bit 1 of the byte is tested by the do-while; set from (unitIndex==0)<<1 and later forced to 2	^\s*bVar42\ =\ \(iVar39\ ==\ 0\)\ <<\ 1;$	+1
+use	gld_readPixelsViaBlit	bVar42	loopExitFlagWord	INFERRED	bit 1 of the byte is tested by the do-while; set from (unitIndex==0)<<1 and later forced to 2	^\s*bVar42\ =\ 2;$	+1
+use	gld_readPixelsViaBlit	bVar42	loopExitFlagWord	INFERRED	bit 1 of the byte is tested by the do-while; set from (unitIndex==0)<<1 and later forced to 2	^\s*\}\ while\ \(!\(bool\)\(bVar42\ >>\ 1\ \&\ 1\)\);$	+1
+use	ffpsEmitDeclarations	iVar6	declContextTable	INFERRED	*(*(ctx+4)+0x10): table base the 0x2d48-offset halfword is compared against	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	ffpsEmitDeclarations	iVar6	declContextTable	INFERRED	*(*(ctx+4)+0x10): table base the 0x2d48-offset halfword is compared against	^\s*if\ \(\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0xa00000\)\ !=\ 0\)\ \|\|$	+2
+use	ffpsEmitDeclarations	iVar6	ctxFieldCursor	INFERRED	starts at ctx and advances by 4 over the per-slot fields tested at +0x13f8	^\s*iVar6\ =\ param_1;$	+1
+use	ffpsEmitDeclarations	iVar6	ctxFieldCursor	INFERRED	starts at ctx and advances by 4 over the per-slot fields tested at +0x13f8	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\)\ !=\ 0\)\ \{$	+1
+use	ffpsEmitDeclarations	iVar6	ctxFieldCursor	INFERRED	starts at ctx and advances by 4 over the per-slot fields tested at +0x13f8	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ uVar8\ \-\ 0x10000;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ \-0xe1ff;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ \-0x7a8c;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ \-0x7a8b;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ \-0x7b19;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ uVar8\ \-\ 0x10000;$@2	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ \-0x78bc;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ uVar8\ \-\ 0x10000;$@3	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ \-0x78bb;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*iVar9\ =\ \-0x78ba;$	+1
+use	ffpsEmitTexEnvCombine	iVar9	combineModeBiased	INFERRED	combine mode minus 0x10000 or biased constants; compared with unsigned range checks	^\s*if\ \(iVar9\ \+\ 0x7952U\ <\ 2\)\ \{$	+1
+use	CompileInput__readBoolConst	iVar1	constantArray	INFERRED	pointer to the bool constant array selected from compileInput+0x2c/+0x30 fields; indexed by constIndex*4	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ \+\ 0x1c\);$	+1
+use	CompileInput__readBoolConst	iVar1	constantArray	INFERRED	pointer to the bool constant array selected from compileInput+0x2c/+0x30 fields; indexed by constIndex*4	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x30\)\ \+\ 0x18\);$	+1
+use	CompileInput__readBoolConst	iVar1	constantArray	INFERRED	pointer to the bool constant array selected from compileInput+0x2c/+0x30 fields; indexed by constIndex*4	^\s*\*param_5\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ param_3\ \*\ 4\);$	+1
+use	ildisPrintFixedPoint	uVar6	fractionBitsWord	INFERRED	integerField, 0 or OR of 1<<fractionBitIndex; masked into fractionField and passed to ildisAppendf as a stale argument	^\s*uVar6\ =\ uStack_1c;$	+1
+use	ildisPrintFixedPoint	uVar6	fractionBitsWord	INFERRED	integerField, 0 or OR of 1<<fractionBitIndex; masked into fractionField and passed to ildisAppendf as a stale argument	^\s*uVar6\ =\ 0;$@2	+1
+use	ildisPrintFixedPoint	uVar6	fractionBitsWord	INFERRED	integerField, 0 or OR of 1<<fractionBitIndex; masked into fractionField and passed to ildisAppendf as a stale argument	^\s*uVar6\ =\ uVar6\ \|\ 1\ <<\ uVar2;$	+1
+use	ildisPrintFixedPoint	uVar6	fractionBitsWord	INFERRED	integerField, 0 or OR of 1<<fractionBitIndex; masked into fractionField and passed to ildisAppendf as a stale argument	^\s*uStack_14\ =\ uVar6\ \&\ param_2;$	+1
+use	ildisPrintFixedPoint	uVar6	fractionBitsWord	INFERRED	integerField, 0 or OR of 1<<fractionBitIndex; masked into fractionField and passed to ildisAppendf as a stale argument	^\s*\(\(int\ \(\*\)\(\)\)FUN_000da904\)\(param_1,auStack_128,puVar5,param_4,in_r7,in_r8,uVar6,in_r10\);$	+1
+use	ildisPrintOutputTopology	uVar1	topologyKind	INFERRED	instructionToken>>16 & 0x3fff: topology selector compared with 0/1/2	^\s*uVar1\ =\ param_2\ >>\ 0x10\ \&\ 0x3fff;$	+2
+use	ildisPrintOutputTopology	uVar1	topologyKind	INFERRED	instructionToken>>16 & 0x3fff: topology selector compared with 0/1/2	^\s*else\ if\ \(uVar1\ ==\ 0\)\ \{$	+1
+use	ildisPrintOutputTopology	uVar1	topologyKind	INFERRED	instructionToken>>16 & 0x3fff: topology selector compared with 0/1/2	^\s*else\ if\ \(uVar1\ ==\ 2\)\ \{$	+1
+use	ildisPrintTexldmsModifiers	dVar4	staleFprResult	INFERRED	double-typed stale FPR return of ildisAppendf, forwarded as the FPR argument of ildisPrintFixedPoint	^\s*dVar4\ =\ \(double\)FUN_000da904\(param_1,"_xoffset\(",param_3,param_4,param_5,param_6,param_7,param_8$	+13
+use	ildisPrintDestinationOperand	uVar6	indexValue	INFERRED	operand index printed with "[%lu]" (0 or the word at disassembler[2])	^\s*uVar6\ =\ 0;$	+1
+use	ildisPrintDestinationOperand	uVar6	indexValue	INFERRED	operand index printed with "[%lu]" (0 or the word at disassembler[2])	^\s*uVar6\ =\ \*\(undefined4\ \*\)param_1\[2\];$	+1
+use	ildisPrintDestinationOperand	uVar6	indexValue	INFERRED	operand index printed with "[%lu]" (0 or the word at disassembler[2])	^\s*FUN_001a32d0\(auStack_b8,"\[%lu\]",uVar6,param_4,param_5,param_6,param_7,param_8\);$	+2
+use	ildisPrintDestinationOperand	uVar6	componentChar	INFERRED	component select character from ildisComponentSelectChar printed with ".%c"	^\s*uVar6\ =\ FUN_000da8f4\(param_1,uVar7\);$	+5
+use	Compiler__applyRequestFlags	iVar1	bit24Set	INFERRED	testBit24(compiler,requestFlags) result	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000e0cc8\)\(param_1,param_2\);$	+2
+use	Compiler__tryRetryAfterFailure	iVar1	retryPendingFlag	INFERRED	0 or compiler+0x6bc: tested together with failureKind == 4	^\s*iVar1\ =\ 0;$	+1
+use	Compiler__tryRetryAfterFailure	iVar1	retryPendingFlag	INFERRED	0 or compiler+0x6bc: tested together with failureKind == 4	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x6bc\);$	+1
+use	Compiler__tryRetryAfterFailure	iVar1	retryPendingFlag	INFERRED	0 or compiler+0x6bc: tested together with failureKind == 4	^\s*if\ \(\(iVar1\ ==\ 0\)\ \&\&\ \(param_2\ ==\ 4\)\)\ \{$	+1
+use	Compiler__tryRetryAfterFailure	uVar2	shouldRetry	INFERRED	1/0 return value	^\s*uVar2\ =\ 1;$	+1
+use	Compiler__tryRetryAfterFailure	uVar2	shouldRetry	INFERRED	1/0 return value	^\s*uVar2\ =\ 0;$	+1
+use	Compiler__tryRetryAfterFailure	uVar2	shouldRetry	INFERRED	1/0 return value	^\s*return\ uVar2;$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	instKind	INFERRED	inst+0x98 compared with 2/0xc, 4 and 3 to pick the bit-set routine	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x98\);$	+2
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	instKind	INFERRED	inst+0x98 compared with 2/0xc, 4 and 3 to pick the bit-set routine	^\s*else\ if\ \(iVar2\ ==\ 4\)\ \{$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	instKind	INFERRED	inst+0x98 compared with 2/0xc, 4 and 3 to pick the bit-set routine	^\s*else\ if\ \(iVar2\ ==\ 3\)\ \{$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	bVar1	moreLanesA	INFERRED	loopCounter != 3 loop condition of the first lane loop	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	bVar1	moreLanesA	INFERRED	loopCounter != 3 loop condition of the first lane loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	bVar1	moreLanesB	INFERRED	loopCounter != 3 loop condition of the second lane loop	^\s*bVar1\ =\ iVar2\ !=\ 3;$@2	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	bVar1	moreLanesB	INFERRED	loopCounter != 3 loop condition of the second lane loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	bVar1	moreLanesC	INFERRED	loopCounter != 3 loop condition of the third lane loop	^\s*bVar1\ =\ iVar2\ !=\ 3;$@3	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	bVar1	moreLanesC	INFERRED	loopCounter != 3 loop condition of the third lane loop	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	uVar3	instKeyA	INFERRED	thunk_FUN_00134de8 key of inst, passed to Compiler__setBitInSelectedBlock98	^\s*uVar3\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\),param_2\);$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	uVar3	instKeyA	INFERRED	thunk_FUN_00134de8 key of inst, passed to Compiler__setBitInSelectedBlock98	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e17b4\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),uVar3\);$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	uVar3	instKeyB	INFERRED	key of inst passed to Compiler__setBitInSelectedBlockD8	^\s*uVar3\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\),param_2\);$@2	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	uVar3	instKeyB	INFERRED	key of inst passed to Compiler__setBitInSelectedBlockD8	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e175c\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),uVar3\);$	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	uVar3	instKeyC	INFERRED	key of inst passed to Compiler__setBitInSelectedBlockB8	^\s*uVar3\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\),param_2\);$@3	+1
+use	MachineAssembler__vslot34_declareDestinationLanesByClass	uVar3	instKeyC	INFERRED	key of inst passed to Compiler__setBitInSelectedBlockB8	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e1704\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),uVar3\);$	+1
+use	Block__findSimplePredecessor	iVar1	predecessorVector	INFERRED	block+0xd4: vector of predecessor blocks (count at +4, data at +8)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xd4\);$	+1
+use	Block__findSimplePredecessor	iVar1	predecessorVector	INFERRED	block+0xd4: vector of predecessor blocks (count at +4, data at +8)	^\s*if\ \(\*\(uint\ \*\)\(iVar1\ \+\ 4\)\ <\ uVar3\)\ \{$	+1
+use	Block__findSimplePredecessor	iVar1	predecessorVector	INFERRED	block+0xd4: vector of predecessor blocks (count at +4, data at +8)	^\s*a0\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar1\ \+\ 8\)\ \+\ iVar2\);$	+1
+use	Block__findSimplePredecessor	iVar1	predecessorVector	INFERRED	block+0xd4: vector of predecessor blocks (count at +4, data at +8)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xd4\);$@2	+1
+use	Block__findSimplePredecessor	iVar1	hasMorePredecessors	INFERRED	vtable +0x1c result tested against 0	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x1c\)\)\(a0\);$	+2
+use	Program__splitMixedSourceKinds	iVar7	instOrSourceCount	INFERRED	one register: first instruction of the block, source count (inst+0x84) and next-instruction link	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x98\)\ \+\ 8\);$	+1
+use	Program__splitMixedSourceKinds	iVar7	instOrSourceCount	INFERRED	one register: first instruction of the block, source count (inst+0x84) and next-instruction link	^\s*if\ \(iVar7\ !=\ 0\)\ \{$	+1
+use	Program__splitMixedSourceKinds	iVar7	instOrSourceCount	INFERRED	one register: first instruction of the block, source count (inst+0x84) and next-instruction link	^\s*iVar8\ =\ iVar7;$	+2
+use	Program__splitMixedSourceKinds	iVar7	instOrSourceCount	INFERRED	one register: first instruction of the block, source count (inst+0x84) and next-instruction link	^\s*iVar11\ =\ iVar7;$	+1
+use	Program__splitMixedSourceKinds	iVar7	instOrSourceCount	INFERRED	one register: first instruction of the block, source count (inst+0x84) and next-instruction link	^\s*\}\ while\ \(iVar7\ !=\ iVar5\);$	+1
+use	Program__splitMixedSourceKinds	iVar7	instOrSourceCount	INFERRED	one register: first instruction of the block, source count (inst+0x84) and next-instruction link	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+1
+use	Program__splitMixedSourceKinds	iVar8	blockWalkNode	INFERRED	block list cursor (program+900 list, +8 links)	^\s*for\ \(iVar8\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);\ iVar8\ !=\ 0;\ iVar8\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\)\)\ \{$	+1
+use	Program__splitMixedSourceKinds	iVar8	blockWalkNode	INFERRED	block list cursor (program+900 list, +8 links)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$	+1
+use	Program__splitMixedSourceKinds	iVar8	blockWalkNode	INFERRED	block list cursor (program+900 list, +8 links)	^\s*iVar1\ =\ iVar8;$	+1
+use	Program__splitMixedSourceKinds	iVar8	instWalkNode	INFERRED	instruction list cursor through the block	^\s*iVar8\ =\ iVar7;$	+1
+use	Program__splitMixedSourceKinds	iVar8	instWalkNode	INFERRED	instruction list cursor through the block	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\);$	+1
+use	Program__splitMixedSourceKinds	iVar8	instWalkNode	INFERRED	instruction list cursor through the block	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+3
+use	IRInst__isForwardable	iVar1	foldableCompareResult	INFERRED	IRInst__canFoldConstantCompare result	^\s*iVar1\ =\ FUN_0010c47c\(param_1,param_3\);$	+2
+use	IRInst__isForwardable	iVar1	forwardCheckResult	INFERRED	joined results of hasSingleUse, the target vtable +0x44 query and SelectWord__areCompatible tested in one condition chain	^\s*iVar1\ =\ FUN_0010497c\(param_1,\*\(undefined4\ \*\)\(param_3\ \+\ COMP_currentProgram\)\);$@2	+7
+use	Program__beginPass	iVar1	nextBlockLink	INFERRED	a0[2]: next block in the program block list	^\s*iVar1\ =\ a0\[2\];$	+2
+use	Program__beginPass	iVar1	nextBlockLink	INFERRED	a0[2]: next block in the program block list	^\s*iVar1\ =\ a0\[2\];$@2	+1
+use	Program__beginPass	iVar1	instructionVector	INFERRED	program instruction vector; count at +4, data at +8	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$	+1
+use	Program__beginPass	iVar1	instructionVector	INFERRED	program instruction vector; count at +4, data at +8	^\s*for\ \(uVar4\ =\ 1;\ uVar4\ <=\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);\ uVar4\ =\ uVar4\ \+\ 1\)\ \{$	+2
+use	Program__beginPass	iVar1	instructionVector	INFERRED	program instruction vector; count at +4, data at +8	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ PROG_instructionVector\);$@2	+1
+use	Program__beginPass	iVar2	vectorInst	INFERRED	instruction taken from the instruction vector at loopCounter	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 8\)\ \+\ iVar3\);$	+3
+use	SelectWord__matches	uVar1	patternLane	INFERRED	lane byte of pattern compared against 4 (wildcard) or the selectWord lane; assigned inside the && chain	^\s*if\ \(\(\(\(\(param_2\ >>\ 0x18\ ==\ 4\)\ \|\|\ \(param_2\ >>\ 0x18\ ==\ param_1\ >>\ 0x18\)\)\ \&\&$	+4
+use	WriteMask__fromUsedComponents	pbVar1	laneCursor	INFERRED	pointer walking the used-lane byte list; 4 terminates	^\s*pbVar1\ =\ \(byte\ \*\)\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+1
+use	WriteMask__fromUsedComponents	pbVar1	laneCursor	INFERRED	pointer walking the used-lane byte list; 4 terminates	^\s*if\ \(\*pbVar1\ !=\ 4\)\ \{$	+2
+use	WriteMask__fromUsedComponents	pbVar1	laneCursor	INFERRED	pointer walking the used-lane byte list; 4 terminates	^\s*pbVar1\ =\ pbVar1\ \+\ 1;$	+1
+use	IRInst__operandSelectIsNotDefault	bVar2	selectIsDefault	INFERRED	operand select word equals laneWord 00000000 or 00010203	^\s*bVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x10\)\ ==\ _laneWord00000000_001aa84c;$	+1
+use	IRInst__operandSelectIsNotDefault	bVar2	selectIsDefault	INFERRED	operand select word equals laneWord 00000000 or 00010203	^\s*bVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x10\)\ ==\ _laneWord00010203_001aa848;$	+1
+use	IRInst__operandSelectIsNotDefault	bVar2	selectIsDefault	INFERRED	operand select word equals laneWord 00000000 or 00010203	^\s*return\ 1\ \-\ \(uint\)bVar2;$	+1
+use	IRInst__sourceLanesAllWritten_f485c	bVar1	allLanesChecked	INFERRED	loopCounter == 3	^\s*bVar1\ =\ iVar5\ ==\ 3;$	+1
+use	IRInst__sourceLanesAllWritten_f485c	bVar1	allLanesChecked	INFERRED	loopCounter == 3	^\s*if\ \(bVar1\)\ \{$	+1
+use	IRInst__sourceLanesAllWritten_f485c	bVar2	laneSelectByte	INFERRED	select byte for the lane (4 = unused)	^\s*while\ \(\(bVar2\ =\ \*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar5\),\ bVar2\ ==\ 4\ \|\|$	+2
+use	IRInst__sourceLanesAllWritten	bVar1	allLanesChecked	INFERRED	loopCounter == 3	^\s*bVar1\ =\ iVar5\ ==\ 3;$	+1
+use	IRInst__sourceLanesAllWritten	bVar1	allLanesChecked	INFERRED	loopCounter == 3	^\s*if\ \(bVar1\)\ \{$	+1
+use	IRInst__sourceLanesAllWritten	bVar2	laneSelectByte	INFERRED	select byte for the lane (4 = unused)	^\s*while\ \(\(bVar2\ =\ \*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar5\),\ bVar2\ ==\ 4\ \|\|$	+2
+use	IRInst__writeMasksOverlap	iVar1	isProjectionOfOpcode2a	INFERRED	IRInst__isProjectionOfOpcode2a(inst2) result	^\s*iVar1\ =\ FUN_001055cc\(param_2\);$	+2
+use	RegisterMap__nextTempIndex	iVar1	tempIndex	INFERRED	registerMap+0x30 before decrement: the temp register number handed out	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x30\);$	+3
+use	Compiler__getOrCreateLoadConst4	uVar1	loadConstResult	INFERRED	Compiler__getOrCreateLoadConstN(compiler,4,...) result returned	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f4fdc\)\(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7\);$	+2
+use	Compiler__getOrCreateConstVector4	uVar1	constVectorResult	INFERRED	Compiler__getOrCreateConstVectorN(owner,4,...) result returned	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f6248\)\(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7\);$	+2
+use	DominatorTree__free_f7f1c	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar1\ =\ uVar4\ \*\ 4;$	+2
+use	DominatorTree__free_f7f1c	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*\*\(int\ \*\)\(iVar1\ \+\ param_1\[5\]\)\ =\ iVar5;$	+1
+use	DominatorTree__free_f7f1c	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar3\);$@2	+1
+use	DominatorTree__free_f7f1c	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar3\);$	+3
+use	DominatorTree__free	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar1\ =\ uVar4\ \*\ 4;$	+2
+use	DominatorTree__free	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*\*\(int\ \*\)\(iVar1\ \+\ param_1\[5\]\)\ =\ iVar5;$	+1
+use	DominatorTree__free	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar3\);$@2	+1
+use	DominatorTree__free	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar3\);$	+3
+use	Program__appendInst	iVar7	instRegisterFile	INFERRED	inst[0x2c] stored to operandRecord+0xc	^\s*iVar7\ =\ param_2\[0x2c\];$@2	+1
+use	Program__appendInst	iVar7	instRegisterFile	INFERRED	inst[0x2c] stored to operandRecord+0xc	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0xc\)\ =\ iVar7;$@2	+1
+use	Program__translateILStream	ppppppuVar49	vectorElementOrNewInst	INFERRED	joined: element read through vectorElementSlot (operand 0 set), then the IRInst created for the case 0x7e..0x87 bind	^\s*ppppppuVar49\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar14;$	+1
+use	Program__translateILStream	ppppppuVar49	vectorElementOrNewInst	INFERRED	joined: element read through vectorElementSlot (operand 0 set), then the IRInst created for the case 0x7e..0x87 bind	^\s*FUN_001046c8\(ppppppuVar49,0,uVar46\);$	+1
+use	Program__translateILStream	ppppppuVar49	vectorElementOrNewInst	INFERRED	joined: element read through vectorElementSlot (operand 0 set), then the IRInst created for the case 0x7e..0x87 bind	^\s*ppppppuVar49\ =\ FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	Program__translateILStream	ppppppuVar49	vectorElementOrNewInst	INFERRED	joined: element read through vectorElementSlot (operand 0 set), then the IRInst created for the case 0x7e..0x87 bind	^\s*in_r7\ =\ ppppppuVar49;$	+3
+use	Program__translateILStream	ppppppuVar49	vectorElementOrNewInst	INFERRED	joined: element read through vectorElementSlot (operand 0 set), then the IRInst created for the case 0x7e..0x87 bind	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f92fc\)\(param_1,ppppppuVar49,local_180\);$	+1

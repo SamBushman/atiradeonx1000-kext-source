@@ -2114,30 +2114,31 @@ loopSetLoopCounterB:
 int Block__findSimplePredecessor(block)
   int block;
 {
+  int hasMorePredecessors;
   int isSimple;
   int *a0;
-  int iVar1;
+  int predecessorVector;
   int loopCounter;
   uint loopIndex;
   
   loopIndex = 1;
   loopCounter = 0;
-  iVar1 = *(int *)(block + 0xd4);
+  predecessorVector = *(int *)(block + 0xd4);
   do {
-    if (*(uint *)(iVar1 + 4) < loopIndex) {
+    if (*(uint *)(predecessorVector + 4) < loopIndex) {
       return (int *)0x0;
     }
-    a0 = *(int **)(*(int *)(iVar1 + 8) + loopCounter);
+    a0 = *(int **)(*(int *)(predecessorVector + 8) + loopCounter);
     if (a0 != (int *)0x0) {
       isSimple = ((int (*)())Block__isSimple)(a0);
       if (isSimple != 0) {
         return a0;
       }
-      iVar1 = (**(code **)(*a0 + 0x1c))(a0);
-      if (iVar1 != 0) {
+      hasMorePredecessors = (**(code **)(*a0 + 0x1c))(a0);
+      if (hasMorePredecessors != 0) {
         return a0;
       }
-      iVar1 = *(int *)(block + 0xd4);
+      predecessorVector = *(int *)(block + 0xd4);
     }
     loopIndex = loopIndex + 1;
     loopCounter = loopCounter + 4;

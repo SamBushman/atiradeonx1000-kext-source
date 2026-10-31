@@ -37,8 +37,8 @@ int Compiler__tryRetryAfterFailure(compiler, failureKind)
   int compiler;
   int failureKind;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int retryPendingFlag;
+  undefined4 shouldRetry;
   
   if (*(int *)(compiler + 0x47c) != 0) {
     if (failureKind == 5) {
@@ -50,24 +50,24 @@ loopStoreCompiler:
       return 1;
     }
     if (failureKind == 4) {
-      iVar1 = 0;
+      retryPendingFlag = 0;
       if (*(int *)(compiler + 0x6bc) != 0) goto loopStoreCompiler;
       goto checkFailureKind;
     }
   }
-  iVar1 = *(int *)(compiler + 0x6bc);
+  retryPendingFlag = *(int *)(compiler + 0x6bc);
 checkFailureKind:
-  if ((iVar1 == 0) && (failureKind == 4)) {
-    uVar2 = 1;
+  if ((retryPendingFlag == 0) && (failureKind == 4)) {
+    shouldRetry = 1;
     *(undefined4 *)(compiler + 0x318) = 1;
     *(undefined4 *)(compiler + 0x6b8) = 1;
     *(undefined4 *)(compiler + 0x314) = 0;
     *(undefined4 *)(compiler + 0x6bc) = 1;
   }
   else {
-    uVar2 = 0;
+    shouldRetry = 0;
   }
-  return uVar2;
+  return shouldRetry;
 }
 
 /* Compiler__selectBlockByProgramFlags @ 0xe16b8 (76 bytes) */
@@ -1212,48 +1212,52 @@ int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
   int this;
   int inst;
 {
+  undefined4 instKeyC;
+  undefined4 instKeyB;
+  bool moreLanesC;
+  bool moreLanesB;
   int loopCounter;
-  bool bVar1;
-  int iVar2;
-  undefined4 uVar3;
+  bool moreLanesA;
+  int instKind;
+  undefined4 instKeyA;
   int operandRecord;
   
-  iVar2 = *(int *)(inst + 0x98);
-  if ((iVar2 == 2) || (iVar2 == 0xc)) {
+  instKind = *(int *)(inst + 0x98);
+  if ((instKind == 2) || (instKind == 0xc)) {
     loopCounter = 0;
-    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
+    instKeyA = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopCounter + operandRecord + 0x10) != '\x01') {
-        ((int (*)())Compiler__setBitInSelectedBlock98)(*(undefined4 *)(this + 0xc),uVar3);
+        ((int (*)())Compiler__setBitInSelectedBlock98)(*(undefined4 *)(this + 0xc),instKeyA);
       }
-      bVar1 = loopCounter != 3;
+      moreLanesA = loopCounter != 3;
       loopCounter = loopCounter + 1;
-    } while (bVar1);
+    } while (moreLanesA);
   }
-  else if (iVar2 == 4) {
+  else if (instKind == 4) {
     loopCounter = 0;
-    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
+    instKeyB = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopCounter + operandRecord + 0x10) != '\x01') {
-        ((int (*)())Compiler__setBitInSelectedBlockD8)(*(undefined4 *)(this + 0xc),uVar3);
+        ((int (*)())Compiler__setBitInSelectedBlockD8)(*(undefined4 *)(this + 0xc),instKeyB);
       }
-      bVar1 = loopCounter != 3;
+      moreLanesB = loopCounter != 3;
       loopCounter = loopCounter + 1;
-    } while (bVar1);
+    } while (moreLanesB);
   }
-  else if (iVar2 == 3) {
+  else if (instKind == 3) {
     loopCounter = 0;
-    uVar3 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
+    instKeyC = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(this + 0xc) + 0x6c4),inst);
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopCounter + operandRecord + 0x10) != '\x01') {
-        ((int (*)())Compiler__setBitInSelectedBlockB8)(*(undefined4 *)(this + 0xc),uVar3);
+        ((int (*)())Compiler__setBitInSelectedBlockB8)(*(undefined4 *)(this + 0xc),instKeyC);
       }
-      bVar1 = loopCounter != 3;
+      moreLanesC = loopCounter != 3;
       loopCounter = loopCounter + 1;
-    } while (bVar1);
+    } while (moreLanesC);
   }
   return;
 }

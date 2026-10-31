@@ -2530,7 +2530,7 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
   int ring;
   int hwFormat;
   char reservation;
-  byte bVar42;
+  byte loopExitFlagWord;
   int targetsLeft;
   uint rowBytes;
   undefined1 layoutOut [4];
@@ -2848,7 +2848,7 @@ checkX1000:
       streamPtr = ((int (*)())gld_emitUnitObjectPacket)(ctx,0,unitIndex,streamPtr);
     }
     unitIndex = unitIndex + -1;
-    bVar42 = (unitIndex == 0) << 1;
+    loopExitFlagWord = (unitIndex == 0) << 1;
     scratchInt24 = scratchInt24 + -4;
   } while (unitIndex != 0);
   packetRaw = (uint *)((int (*)())gld_emitUnitObjectPacket)(ctx,0,0,streamPtr);
@@ -2865,9 +2865,9 @@ checkX1000:
     if (reservation != '\0') {
       storeResult = storeWordConditionalIndexed(*surfaceRefPtr + 0x10000,0,surfaceRefPtr);
       *surfaceRefPtr = storeResult;
-      bVar42 = 2;
+      loopExitFlagWord = 2;
     }
-  } while (!(bool)(bVar42 >> 1 & 1));
+  } while (!(bool)(loopExitFlagWord >> 1 & 1));
   packet[2] = *surfaceObject;
   packet[3] = dstAddress - *(int *)*surfaceInfo;
   readSurfaceCode = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + GLD_engineState)),
