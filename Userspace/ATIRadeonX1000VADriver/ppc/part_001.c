@@ -176,10 +176,10 @@ int ava_acquire_image(ctx, syncId)
     break;
   case 2:
     refCounter = *(int **)(ctx + 0x170);
-    goto LAB_00003ed8;
+    goto setRefCounter;
   case 3:
     refCounter = *(int **)(ctx + 0x1d8);
-    goto LAB_00003ed8;
+    goto setRefCounter;
   case 4:
   case 5:
   case 6:
@@ -199,7 +199,7 @@ int ava_acquire_image(ctx, syncId)
     break;
   case 0x11:
     refCounter = *(int **)(ctx + 0xa44);
-LAB_00003ed8:
+setRefCounter:
     refCounter = (int *)*refCounter;
     fillCursor = cmdWrite + 2;
     *payload = *refCounter;
@@ -212,7 +212,7 @@ LAB_00003ed8:
       }
     } while (!(bool)(condReg0 >> 1 & 1));
   default:
-    goto switchD_00003e00_default;
+    goto syncIdDefault;
   }
   fillCursor = cmdWrite + 2;
   refCounter = (int *)*refCounter;
@@ -225,7 +225,7 @@ LAB_00003ed8:
       condReg0 = 2;
     }
   } while (!(bool)(condReg0 >> 1 & 1));
-switchD_00003e00_default:
+syncIdDefault:
   mapBaseOrCount = 6;
   do {
     *fillCursor = -0x80000000;
@@ -311,19 +311,19 @@ int ava_get_frame(ctx, surfaceIndex, surfaceDesc, outResult, unused1, unused2, u
   if (featureFlags != 0x61726762) {
     if (featureFlags < 0x61726763) {
       if (featureFlags == 0x32767579) {
-LAB_000041b8:
+loopCallAvaRenderConvertFrameYuv2:
         ((int (*)())ava_render_convert_frame_yuv2)(ctx,surfaceIndex,surfaceDesc);
-        goto LAB_000041dc;
+        goto callAvaWaitForStamps;
       }
-      if (featureFlags != 0x61723135) goto LAB_000041dc;
+      if (featureFlags != 0x61723135) goto callAvaWaitForStamps;
     }
     else if (featureFlags != 0x72676261) {
-      if (featureFlags != 0x79757673) goto LAB_000041dc;
-      goto LAB_000041b8;
+      if (featureFlags != 0x79757673) goto callAvaWaitForStamps;
+      goto loopCallAvaRenderConvertFrameYuv2;
     }
   }
   ((int (*)())ava_render_convert_frame)(ctx,surfaceIndex,surfaceDesc);
-LAB_000041dc:
+callAvaWaitForStamps:
   ava_wait_for_stamps(ctx,0,*(undefined4 *)(ctx + 0xac4));
   ((int (*)())ava_dcache_flush_range_sync)(ctx,surfaceDesc[6],surfaceDesc[1] * surfaceDesc[2],descWord0,descWord1,fourccArg,failStatus,unused4);
   ava_release_image(ctx,0x11);
@@ -436,7 +436,7 @@ int ava_setup_decode(ctx, sizeInfo, requestedCount)
             _free(bufferOrStatus);
           } while (descCursor != indexOrStatus);
         }
-        goto LAB_00004448;
+        goto setBufferOrStatus;
       }
       notLast = indexOrStatus != 0x18;
       tableCursor = tableCursor + 3;
@@ -541,13 +541,13 @@ int ava_setup_decode(ctx, sizeInfo, requestedCount)
             return 0;
           }
         }
-        goto LAB_00004448;
+        goto setBufferOrStatus;
       }
     }
     bufferOrStatus = 0xfffffffb;
   }
   else {
-LAB_00004448:
+setBufferOrStatus:
     bufferOrStatus = 0xfffffffd;
   }
   return bufferOrStatus;
@@ -590,15 +590,15 @@ int ava_render_slot(ctx, slotIndex, flags, position, enable)
         ((int (*)())ava_deinterlace_frame)(ctx,slotIndex * 0x14 + ctx + 0x14348,slotIndex * 0x18 + ctx + 0x143ac,2
                     );
         *(undefined4 *)(slotOffset + slotTable + 0x554) = 1;
-        goto LAB_00004810;
+        goto checkCtx;
       }
-      goto LAB_0000481c;
+      goto checkSlotOffset;
     }
   }
   else {
-LAB_00004810:
+checkCtx:
     if (*(int *)(ctx + 0x120) != 0) {
-LAB_0000481c:
+checkSlotOffset:
       if (*(int *)(slotOffset + slotTable + 0x554) != 0) {
         effectFlags = *(uint *)(ctx + 0x11c);
         if ((effectFlags & 2) != 0) {
@@ -609,7 +609,7 @@ LAB_0000481c:
           ((int (*)())ava_render_hue_saturation_pass)(ctx,slotIndex,1);
         }
         fpPassThrough = (double)((int (*)())ava_render_source_rect_pass)(ctx,slotIndex,1);
-        goto LAB_000048e0;
+        goto storeCtx;
       }
     }
   }
@@ -622,7 +622,7 @@ LAB_0000481c:
     ((int (*)())ava_render_hue_saturation_pass)(ctx,slotIndex,0);
   }
   fpPassThrough = (double)((int (*)())ava_render_source_rect_pass)(ctx,slotIndex,0);
-LAB_000048e0:
+storeCtx:
   *(int *)(ctx + 0x118) = enable;
   if (enable != 0) {
     *(undefined4 *)(ctx + 0x114) = flags;
@@ -896,7 +896,7 @@ int ava_setup_subpicture(ctx, subpicParams)
       do {
         countdown = ava_declare_image(ctx,cursor,*(undefined4 *)(countOrStatus + 0x538),0xc0,
                              *(undefined4 *)(ctx + 100),8,*(undefined4 *)(countOrStatus + 0x6c));
-        if (countdown != 0) goto LAB_000051c0;
+        if (countdown != 0) goto setStatus;
         countOrAlignedWidth = *(uint *)(ctx + 0x5c);
         index = index + 1;
         cursor = cursor + 100;
@@ -928,7 +928,7 @@ int ava_setup_subpicture(ctx, subpicParams)
       status = 0xfffffffb;
     }
     else {
-LAB_000051c0:
+setStatus:
       status = 0xfffffffd;
     }
   }
@@ -1475,11 +1475,11 @@ int ava_submit_idct_list(ctx, listSelect)
     requestHeight = *(uint *)(ctx + 0x57c) >> 1;
     if (*(int *)(ctx + 0x55c) == 2) {
       requestFlag = 1;
-      goto LAB_00006078;
+      goto setRequestSurface;
     }
   }
   requestFlag = 0;
-LAB_00006078:
+setRequestSurface:
   requestSurface = *(undefined4 *)(ctx + 0x568);
   if (isSecondList) {
     modeBits = 0;
@@ -2256,11 +2256,11 @@ int ava_emit_picture_setup_packet(ctx, ringWords)
     header14[3] = 0;
     if (mapBaseOrAddr == 3) {
       header14[4] = 0;
-      goto LAB_00007998;
+      goto storeHeader14;
     }
   }
   header14[4] = 1;
-LAB_00007998:
+storeHeader14:
   header14[5] = 1;
   header14[6] = -0x80000000;
   header14[7] = -0x80000000;
@@ -2491,7 +2491,7 @@ int ava_end_picture(ctx)
       surfaceIndexOrScratch = *(int *)(ctx + 0x15164);
       descTable[*(int *)(ctx + 0x568) + 0x14b] = 1;
       *(undefined4 *)(surfaceIndexOrScratch + -0xc) = 0;
-      goto LAB_000082e0;
+      goto setTaskPortPtr;
     }
     programRingOrPitch = *(int *)(ctx + 0x15164);
     *(undefined4 *)(programRingOrPitch + -8) = 0x5c8;
@@ -2558,7 +2558,7 @@ int ava_end_picture(ctx)
     notLast = planeIndex != 3;
     planeIndex = planeIndex + 1;
   } while (notLast);
-LAB_000082e0:
+setTaskPortPtr:
   taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
@@ -2807,7 +2807,7 @@ int ava_emit_mb_motion_vectors(ctx, mbInfo, mbIndex)
         *(int *)(ctx + 0x14428) = mbPosOrListEntry + -1;
         return;
       }
-      goto LAB_000089ac;
+      goto setMbPosOrListEntry;
     case 2:
       descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
       surfaceOrListBase = ctx + 0x14434;
@@ -2821,7 +2821,7 @@ int ava_emit_mb_motion_vectors(ctx, mbInfo, mbIndex)
         *(int *)(ctx + 0x14434) = mbPosOrListEntry + -1;
         return;
       }
-LAB_000089ac:
+setMbPosOrListEntry:
       mbPosOrListEntry = *(int *)(surfaceOrListBase + 4);
       *(int *)(mbPosOrListEntry * 4 + *(int *)(surfaceOrListBase + 8)) = mbOffsetBytes;
       *(int *)(surfaceOrListBase + 4) = mbPosOrListEntry + 1;
@@ -2980,7 +2980,7 @@ LAB_000089ac:
   }
   switch(*(undefined1 *)(mbInfo + 10)) {
   default:
-    goto switchD_00008894_caseD_0;
+    goto mbInfoCase0;
   case 1:
     descOrSurfaceEntry = surfaceOrListBase * 0x10 + descOrSurfaceEntry;
     surfaceOrListBase = ctx + 0x14428;
@@ -3069,7 +3069,7 @@ LAB_000089ac:
       *(int *)(mbPosOrListEntry + 0x78) = descOrSurfaceEntry + -1;
       return;
     }
-    goto LAB_00009624;
+    goto setMbPosOrListEntry2;
   case 6:
     mbPosOrListEntry = mbPosOrListEntry * 4;
     mvTmp1 = mbInfo[7];
@@ -3106,7 +3106,7 @@ LAB_000089ac:
       *(int *)(mbPosOrListEntry + 0xa8) = descOrSurfaceEntry + -1;
       return;
     }
-    goto LAB_00009624;
+    goto setMbPosOrListEntry2;
   case 7:
     mbPosOrListEntry = mbPosOrListEntry * 4;
     mvTmp4 = mbInfo[2];
@@ -3161,16 +3161,16 @@ LAB_000089ac:
       *(int *)(mbPosOrListEntry + 0xf0) = descOrSurfaceEntry + -1;
       return;
     }
-LAB_00009624:
+setMbPosOrListEntry2:
     mbPosOrListEntry = *(int *)(descOrSurfaceEntry + 4);
     *(int *)(mbPosOrListEntry * 4 + *(int *)(descOrSurfaceEntry + 8)) = mbOffsetBytes;
     *(int *)(descOrSurfaceEntry + 4) = mbPosOrListEntry + 1;
-    goto switchD_00008894_caseD_0;
+    goto mbInfoCase0;
   }
   mbPosOrListEntry = *(int *)(descOrSurfaceEntry + 4);
   *(int *)(mbPosOrListEntry * 4 + *(int *)(descOrSurfaceEntry + 8)) = mbOffsetBytes;
   *(int *)(descOrSurfaceEntry + 4) = mbPosOrListEntry + 1;
-switchD_00008894_caseD_0:
+mbInfoCase0:
   return;
 }
 
@@ -4046,10 +4046,10 @@ void ava_render_scale_pass(int ctx,double fpPassThrough,double unusedFp2,double 
     surfaceWidth = *(int *)(ctx + 0x578);
     if ((*(short *)(ctx + 0x12a) != surfaceWidth) || (*(short *)(ctx + 0x124) != 0)) {
       surfaceHeight = *(int *)(ctx + 0x57c);
-      goto LAB_0000b054;
+      goto setSrcRight;
     }
     surfaceHeight = *(int *)(ctx + 0x57c);
-    if (*(short *)(ctx + 0x128) != surfaceHeight) goto LAB_0000b054;
+    if (*(short *)(ctx + 0x128) != surfaceHeight) goto setSrcRight;
     i2dHi1 = 0x43300000;
     i2dHi2 = 0x43300000;
     i2dHi4 = 0x43300000;
@@ -4090,7 +4090,7 @@ void ava_render_scale_pass(int ctx,double fpPassThrough,double unusedFp2,double 
   else {
     surfaceHeight = *(int *)(ctx + 0x57c);
     surfaceWidth = *(int *)(ctx + 0x578);
-LAB_0000b054:
+setSrcRight:
     srcRight = *(short *)(ctx + 0x112);
     i2dHi11 = 0x43300000;
     i2dHi14 = 0x43300000;
@@ -4122,14 +4122,14 @@ LAB_0000b054:
     srcHeightOrSrcTopScaled = ((float)((double)CONCAT44(0x43300000,i2dLo17) - 4503601774854144.0) * heightFOrClipRightF) / srcHeightOrSrcTopScaled;
     i2dLo11 = surfaceWidth;
     i2dLo15 = surfaceHeight;
-    if (srcRightScaled <= clipLeftOrWidthF) goto LAB_0000b7d0;
+    if (srcRightScaled <= clipLeftOrWidthF) goto callRestf24;
     if (srcRightScaled <= clipLeftOrWidthF) {
       clipRight = *(short *)(ctx + 0x12a);
-LAB_0000b1e4:
+loopSetI2dLo21:
       i2dLo21 = (int)clipRight ^ 0x80000000;
       i2dHi21 = 0x43300000;
       heightFOrClipRightF = (float)((double)CONCAT44(0x43300000,i2dLo21) - 4503601774854144.0);
-      if (heightFOrClipRightF <= srcWidthOrSrcLeftScaled) goto LAB_0000b7d0;
+      if (heightFOrClipRightF <= srcWidthOrSrcLeftScaled) goto callRestf24;
       clippedLeft = srcWidthOrSrcLeftScaled;
       if (srcWidthOrSrcLeftScaled - clipLeftOrWidthF < 0.0) {
         clippedLeft = clipLeftOrWidthF;
@@ -4143,7 +4143,7 @@ LAB_0000b1e4:
       i2dHi20 = 0x43300000;
       i2dLo20 = (int)clipRight ^ 0x80000000;
       if ((float)((double)CONCAT44(0x43300000,i2dLo20) - 4503601774854144.0) <= srcRightScaled)
-      goto LAB_0000b1e4;
+      goto loopSetI2dLo21;
       clippedLeft = clipLeftOrWidthF;
       heightFOrClipRightF = srcRightScaled;
       if (clipLeftOrWidthF <= srcWidthOrSrcLeftScaled) {
@@ -4154,14 +4154,14 @@ LAB_0000b1e4:
     i2dHi22 = 0x43300000;
     i2dLo22 = (int)clipTop ^ 0x80000000;
     clipLeftOrWidthF = (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
-    if (srcBottomScaled <= clipLeftOrWidthF) goto LAB_0000b7d0;
+    if (srcBottomScaled <= clipLeftOrWidthF) goto callRestf24;
     if (srcBottomScaled <= clipLeftOrWidthF) {
       clipBottom = *(short *)(ctx + 0x128);
-LAB_0000b2b8:
+loopSetI2dLo24:
       i2dLo24 = (int)clipBottom ^ 0x80000000;
       i2dHi24 = 0x43300000;
       clipBottomF = (float)((double)CONCAT44(0x43300000,i2dLo24) - 4503601774854144.0);
-      if (clipBottomF <= srcHeightOrSrcTopScaled) goto LAB_0000b7d0;
+      if (clipBottomF <= srcHeightOrSrcTopScaled) goto callRestf24;
       clippedTop = srcHeightOrSrcTopScaled;
       if (srcHeightOrSrcTopScaled - clipLeftOrWidthF < 0.0) {
         clippedTop = clipLeftOrWidthF;
@@ -4175,7 +4175,7 @@ LAB_0000b2b8:
       i2dHi23 = 0x43300000;
       i2dLo23 = (int)clipBottom ^ 0x80000000;
       if ((float)((double)CONCAT44(0x43300000,i2dLo23) - 4503601774854144.0) <= srcBottomScaled)
-      goto LAB_0000b2b8;
+      goto loopSetI2dLo24;
       clippedTop = clipLeftOrWidthF;
       clipBottomF = srcBottomScaled;
       if (clipLeftOrWidthF <= srcHeightOrSrcTopScaled) {
@@ -4316,7 +4316,7 @@ LAB_0000b2b8:
                                   (int)*(short *)(ctx + 0x10e),
                                   (int)*(short *)(ctx + 0x110) -
                                   (int)*(short *)(ctx + 0x10c));
-LAB_0000b7d0:
+callRestf24:
   ((int (*)())_restf24)(fpPassThrough);
   return;
 }
@@ -4722,14 +4722,14 @@ int ava_emit_deint_field_quad(ctx, cmdPtr, srcDesc, fieldMode, flipFlag)
   vertexConstA = FLOAT_0000d430;
   if (flipFlag == 1) {
     if (*(int *)(srcDesc + 8) == 0) {
-LAB_0000c3c0:
+loopSetTexOffsetA:
       texOffsetA = FLOAT_0000d43c / (float)((double)CONCAT44(0x43300000,fieldHeight) - DOUBLE_0000d418);
-      goto LAB_0000c3e4;
+      goto setTexOffsetB;
     }
   }
-  else if (*(int *)(srcDesc + 8) != 0) goto LAB_0000c3c0;
+  else if (*(int *)(srcDesc + 8) != 0) goto loopSetTexOffsetA;
   texOffsetA = FLOAT_0000d438 / (float)((double)CONCAT44(0x43300000,fieldHeight) - DOUBLE_0000d418);
-LAB_0000c3e4:
+setTexOffsetB:
   texOffsetB = texOffsetA + FLOAT_0000d43c;
   texOffsetA = texOffsetA + FLOAT_0000d430;
   cmdPtr[0x30] = 0;

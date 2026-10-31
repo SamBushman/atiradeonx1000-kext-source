@@ -151,7 +151,7 @@ int _get_globals()
       symbolAddress = ((int (*)())_find_atexit_10_3)();
       *(undefined4 *)(globals + 0x10) = symbolAddress;
       if ((*(int *)(globals + 0x10) != 0) &&
-         (libSystemHandle = (**(code **)(globals + 0x10))(_our_atexit), libSystemHandle == 0)) goto LAB_00001638;
+         (libSystemHandle = (**(code **)(globals + 0x10))(_our_atexit), libSystemHandle == 0)) goto setResult;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -167,18 +167,18 @@ int _get_globals()
         else {
           symbolAddress = _dlsym(libSystemHandle,"atexit");
           *(undefined4 *)(globals + 0x10) = symbolAddress;
-          if (*(int *)(globals + 0x10) == 0) goto LAB_00001644;
+          if (*(int *)(globals + 0x10) == 0) goto callKeymgrSetAndUnlockProcesswidePtr;
           *(undefined1 *)(globals + 3) = 0x10;
         }
-        goto LAB_00001638;
+        goto setResult;
       }
     }
-LAB_00001644:
+callKeymgrSetAndUnlockProcesswidePtr:
     __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
     result = 0;
   }
   else {
-LAB_00001638:
+setResult:
     result = globals;
   }
   return result;
@@ -732,7 +732,7 @@ int pic_jump_get_globals_1fd8()
       *(undefined4 *)((int)globals + 0x10) = symbolAddress;
       if ((*(int *)((int)globals + 0x10) != 0) &&
          (libSystemHandle = (**(code **)((int)globals + 0x10))(_our_atexit), libSystemHandle == 0))
-      goto LAB_00001638;
+      goto setResult;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -748,18 +748,18 @@ int pic_jump_get_globals_1fd8()
         else {
           symbolAddress = _dlsym(libSystemHandle,"atexit");
           *(undefined4 *)((int)globals + 0x10) = symbolAddress;
-          if (*(int *)((int)globals + 0x10) == 0) goto LAB_00001644;
+          if (*(int *)((int)globals + 0x10) == 0) goto callKeymgrSetAndUnlockProcesswidePtr;
           *(undefined1 *)((int)globals + 3) = 0x10;
         }
-        goto LAB_00001638;
+        goto setResult;
       }
     }
-LAB_00001644:
+callKeymgrSetAndUnlockProcesswidePtr:
     __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
     result = (void *)0x0;
   }
   else {
-LAB_00001638:
+setResult:
     result = globals;
   }
   return result;
@@ -1388,9 +1388,9 @@ int ava_set_attribute(ctx, attribute, value)
     }
     hue = *(float *)(ctx + 300);
     if (hue <= 3.1415927) {
-LAB_00003100:
+loopSetBrightness:
       brightness = *(float *)(ctx + 0x134);
-LAB_00003104:
+loopSetFlags:
       flags = *(uint *)(ctx + 0x11c);
       status = 0;
     }
@@ -1411,7 +1411,7 @@ LAB_00003104:
     if (*(float *)(ctx + 0x130) <= 3.0) {
       hue = *(float *)(ctx + 300);
       brightness = *(float *)(ctx + 0x134);
-      goto LAB_00003104;
+      goto loopSetFlags;
     }
     hue = *(float *)(ctx + 300);
     brightness = *(float *)(ctx + 0x134);
@@ -1429,7 +1429,7 @@ LAB_00003104:
     if (*(float *)(ctx + 0x134) <= 1.0) {
       hue = *(float *)(ctx + 300);
       brightness = *(float *)(ctx + 0x134);
-      goto LAB_00003104;
+      goto loopSetFlags;
     }
     hue = *(float *)(ctx + 300);
     flags = *(uint *)(ctx + 0x11c);
@@ -1444,7 +1444,7 @@ LAB_00003104:
     }
     if (*(float *)(ctx + 0x138) <= 4.0) {
       hue = *(float *)(ctx + 300);
-      goto LAB_00003100;
+      goto loopSetBrightness;
     }
     hue = *(float *)(ctx + 300);
     brightness = *(float *)(ctx + 0x134);
@@ -1497,12 +1497,12 @@ LAB_00003104:
   }
   if ((flags & 1) == 0) {
     if ((flags & 2) == 0) {
-      if ((flags & 4) == 0) goto LAB_00003310;
+      if ((flags & 4) == 0) goto checkCtx;
       controlWord = *(uint *)(ctx + 0xa84);
-      goto LAB_00003220;
+      goto checkFlags;
     }
     controlWord = *(uint *)(ctx + 0xa84);
-LAB_00003248:
+loopSetControlWord:
     controlWord = controlWord | 0x80000;
     *(uint *)(ctx + 0xa84) = controlWord;
   }
@@ -1517,8 +1517,8 @@ LAB_00003248:
     controlWord = *(uint *)(ctx + 0xa84) | 0x8000;
     *(uint *)(ctx + 0xa84) = controlWord;
     flags = *(uint *)(ctx + 0x11c);
-LAB_00003220:
-    if (((flags & 2) != 0) || ((flags & 4) != 0)) goto LAB_00003248;
+checkFlags:
+    if (((flags & 2) != 0) || ((flags & 4) != 0)) goto loopSetControlWord;
   }
   scalarIn2 = *(undefined4 *)(ctx + 0x57c);
   scalarIn1 = *(undefined4 *)(ctx + 0x578);
@@ -1538,7 +1538,7 @@ LAB_00003220:
       kr = _io_connect_method_scalarI_structureO
                         (*(undefined4 *)(ctx + 0x14),4,&scalarIn0,1,attributeBlock,&outCount);
       if (kr == 0) {
-LAB_00003310:
+checkCtx:
         if (*(int *)(ctx + 0x120) == 4) {
           ava_emit_deint_enable_packet(ctx);
           return status;
@@ -1584,12 +1584,12 @@ int ava_declare_image(ctx, surface, unused, width, height, pixelFormat, external
   }
   else if (pixelFormat < 0x61723136) {
     if (pixelFormat == 0x20) {
-LAB_00003450:
+loopStoreRecord:
       *(undefined4 *)(record + 0x24) = 4;
       *(undefined4 *)(record + 0x28) = 2;
       *(undefined4 *)(record + 0x2c) = 0xc;
       *(undefined4 *)(record + 0x30) = 2;
-      goto LAB_000034b4;
+      goto setHasExternalData;
     }
     if (pixelFormat != 0x32767579) {
       if (pixelFormat != 8) {
@@ -1599,7 +1599,7 @@ LAB_00003450:
       *(undefined4 *)(record + 0x24) = 1;
       *(undefined4 *)(record + 0x2c) = 0;
       *(undefined4 *)(record + 0x30) = 0;
-      goto LAB_000034b4;
+      goto setHasExternalData;
     }
     formatCode = 0x14;
   }
@@ -1609,13 +1609,13 @@ LAB_00003450:
       *(undefined4 *)(record + 0x24) = 4;
       *(undefined4 *)(record + 0x30) = 0;
       *(undefined4 *)(record + 0x28) = 2;
-      goto LAB_000034b4;
+      goto setHasExternalData;
     }
     if (pixelFormat != 0x79757673) {
       if (pixelFormat != 0x61726762) {
         return 0xfffffff9;
       }
-      goto LAB_00003450;
+      goto loopStoreRecord;
     }
     formatCode = 0x15;
   }
@@ -1623,7 +1623,7 @@ LAB_00003450:
   *(undefined4 *)(record + 0x24) = 2;
   *(undefined4 *)(record + 0x30) = 0;
   *(undefined4 *)(record + 0x28) = 1;
-LAB_000034b4:
+setHasExternalData:
   hasExternalData = externalData != 0;
   surface[5] = height;
   surface[4] = width;

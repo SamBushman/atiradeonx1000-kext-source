@@ -156,7 +156,7 @@ int _get_globals()
       symbolAddress = ((int (*)())_find_atexit_10_3)();
       *(undefined4 *)(globals + 0x10) = symbolAddress;
       if ((*(int *)(globals + 0x10) != 0) &&
-         (atexitRegResult = (**(code **)(globals + 0x10))(_our_atexit), atexitRegResult == 0)) goto LAB_00000bc8;
+         (atexitRegResult = (**(code **)(globals + 0x10))(_our_atexit), atexitRegResult == 0)) goto setResult;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -172,18 +172,18 @@ int _get_globals()
         else {
           symbolAddress = _dlsym(libSystemHandle,"atexit");
           *(undefined4 *)(globals + 0x10) = symbolAddress;
-          if (*(int *)(globals + 0x10) == 0) goto LAB_00000bd4;
+          if (*(int *)(globals + 0x10) == 0) goto callKeymgrSetAndUnlockProcesswidePtr;
           *(undefined1 *)(globals + 3) = 0x10;
         }
-        goto LAB_00000bc8;
+        goto setResult;
       }
     }
-LAB_00000bd4:
+callKeymgrSetAndUnlockProcesswidePtr:
     __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
     result = 0;
   }
   else {
-LAB_00000bc8:
+setResult:
     result = globals;
   }
   return result;
@@ -771,7 +771,7 @@ int _get_globals_island_1568()
       *(undefined4 *)((int)globals + 0x10) = symbolAddress;
       if ((*(int *)((int)globals + 0x10) != 0) &&
          (libSystemHandle = (**(code **)((int)globals + 0x10))(_our_atexit), libSystemHandle == 0))
-      goto LAB_00000bc8;
+      goto setResult;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -787,18 +787,18 @@ int _get_globals_island_1568()
         else {
           symbolAddress = _dlsym(libSystemHandle,"atexit");
           *(undefined4 *)((int)globals + 0x10) = symbolAddress;
-          if (*(int *)((int)globals + 0x10) == 0) goto LAB_00000bd4;
+          if (*(int *)((int)globals + 0x10) == 0) goto callKeymgrSetAndUnlockProcesswidePtr;
           *(undefined1 *)((int)globals + 3) = 0x10;
         }
-        goto LAB_00000bc8;
+        goto setResult;
       }
     }
-LAB_00000bd4:
+callKeymgrSetAndUnlockProcesswidePtr:
     __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
     result = (void *)0x0;
   }
   else {
-LAB_00000bc8:
+setResult:
     result = globals;
   }
   return result;
@@ -1138,7 +1138,7 @@ int __DecodePixelFormat(pixelFormat, outDstFormat, outPixelClass, outBytesPerPix
         dstFormat = 0;
         tileFormat = 0;
       }
-      goto LAB_00001cfc;
+      goto checkOutDstFormat;
     }
     if (pixelFormat == 0x42475241) {
       hwColorFormat = 6;
@@ -1148,7 +1148,7 @@ int __DecodePixelFormat(pixelFormat, outDstFormat, outPixelClass, outBytesPerPix
       atiFormat = 8;
       dstFormat = 6;
       tileFormat = 10;
-      goto LAB_00001cfc;
+      goto checkOutDstFormat;
     }
     if (pixelFormat < 0x42475242) {
       if (pixelFormat != 0x42343434) {
@@ -1161,7 +1161,7 @@ int __DecodePixelFormat(pixelFormat, outDstFormat, outPixelClass, outBytesPerPix
       atiFormat = 6;
       dstFormat = 10;
       tileFormat = 0;
-      goto LAB_00001cfc;
+      goto checkOutDstFormat;
     }
     if (pixelFormat != 0x59565955) {
       if (pixelFormat != 0x79757673) {
@@ -1174,7 +1174,7 @@ int __DecodePixelFormat(pixelFormat, outDstFormat, outPixelClass, outBytesPerPix
       atiFormat = 0x26;
       dstFormat = 0x14;
       tileFormat = 6;
-      goto LAB_00001cfc;
+      goto checkOutDstFormat;
     }
   }
   hwColorFormat = 3;
@@ -1184,7 +1184,7 @@ int __DecodePixelFormat(pixelFormat, outDstFormat, outPixelClass, outBytesPerPix
   atiFormat = 0x27;
   dstFormat = 0x15;
   tileFormat = 9;
-LAB_00001cfc:
+checkOutDstFormat:
   if (outDstFormat != (undefined4 *)0x0) {
     *outDstFormat = dstFormat;
   }
@@ -1397,37 +1397,37 @@ int __GetBlitter(accel, unusedArg2, operation, blitFlags, outBlitter)
   if (operation == 1) {
     if ((blitClass == 0) || (blitClass == 0x1000)) {
       blitter = _radeonCopy;
-      goto LAB_00002114;
+      goto storeOutBlitter;
     }
   }
   else {
     if (operation == 4) {
       blitter = (code *)&_radeonCopyRegion;
-      goto LAB_00002114;
+      goto storeOutBlitter;
     }
     if (operation == 0) {
       if (blitClass == 0x6000) {
-LAB_000021a0:
+loopSetBlitter:
         blitter = _radeonFill;
-        goto LAB_00002114;
+        goto storeOutBlitter;
       }
     }
     else if (operation == 0x40000) {
       if (blitClass == 0x6000) {
         blitter = _radeonHighlight;
-        goto LAB_00002114;
+        goto storeOutBlitter;
       }
     }
     else if (operation == 0x100) {
-      if (blitClass == 0x5000) goto LAB_000021a0;
+      if (blitClass == 0x5000) goto loopSetBlitter;
     }
     else if ((operation == 3) && (blitClass == 0x6000)) {
       blitter = _radeonSolidScanlines;
-      goto LAB_00002114;
+      goto storeOutBlitter;
     }
   }
   blitter = (code *)0x0;
-LAB_00002114:
+storeOutBlitter:
   *outBlitter = blitter;
   if (blitter == (code *)0x0) {
     return 0xe00002c7;

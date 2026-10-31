@@ -46,7 +46,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
     if ((flags & 8) == 0) {
       status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,&formatCode,
                                   record + 0xb,0,record + 0xe);
-      if (status == 0) goto LAB_00002cb0;
+      if (status == 0) goto setStatus;
       srcPitch = surfaceDesc[6];
       bytesPerPixel = record[10];
       repeatCount = 1;
@@ -141,7 +141,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
         cmdCursor[2] = 0x5c8;
         cmdCursor[3] = 0x10000;
         status = 0;
-        goto LAB_00002ce0;
+        goto storeSurfaceDesc;
       }
     }
     else if (((surfaceDesc[6] & 0x3f) == 0) &&
@@ -163,10 +163,10 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
       scalarIn0 = flags;
       status = _io_connect_method_scalarI_scalarO
                         (*(undefined4 *)(accel + 0xc),8,&scalarIn0,3,record,&outCount);
-      if (status == 0) goto LAB_00002ce0;
+      if (status == 0) goto storeSurfaceDesc;
     }
     else {
-LAB_00002cb0:
+setStatus:
       status = -0x1ffffd39;
     }
   }
@@ -182,7 +182,7 @@ LAB_00002cb0:
         scalarIn0 = flags;
         status = _io_connect_method_scalarI_scalarO
                           (*(undefined4 *)(accel + 0xc),4,&scalarIn0,3,0,&outCount);
-        if (status != 0) goto LAB_00002cb8;
+        if (status != 0) goto callFree;
       }
       if (((flags & 0x10) != 0) &&
          (status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,0,
@@ -209,17 +209,17 @@ LAB_00002cb0:
           record[6] = tiledHeight;
           record[1] = scalarOut0;
           surfaceDesc[9] = 2;
-          goto LAB_00002ce0;
+          goto storeSurfaceDesc;
         }
       }
       status = 0;
-      goto LAB_00002ce0;
+      goto storeSurfaceDesc;
     }
   }
-LAB_00002cb8:
+callFree:
   _free(record);
   record = (undefined4 *)0x0;
-LAB_00002ce0:
+storeSurfaceDesc:
   surfaceDesc[10] = (uint)record;
   return status;
 }
@@ -670,13 +670,13 @@ int _createTextureBuffer(accel, width, height, is16bpp)
   if (_textureBufferBytes == 0) {
     alignedWidth = width + 0x20U & 0xffffffe0;
     alignedHeight = height + 0x20U & 0xffffffe0;
-    goto LAB_00004194;
+    goto checkIs16bpp;
   }
   if (is16bpp == 0) {
-    if (textureBufferPixelFormat_0000e724 == 0x42475241) goto LAB_000040bc;
+    if (textureBufferPixelFormat_0000e724 == 0x42475241) goto setAlignedWidth;
   }
   else if (textureBufferPixelFormat_0000e724 == 0x10) {
-LAB_000040bc:
+setAlignedWidth:
     alignedWidth = width + 0x20U & 0xffffffe0;
     if ((alignedWidth == _textureBufferWidth) &&
        (alignedHeight = height + 0x20U & 0xffffffe0, alignedHeight == _textureBufferHeight)) {
@@ -685,7 +685,7 @@ LAB_000040bc:
       if (status == 0) {
         return 1;
       }
-      if (_textureBufferBytes == 0) goto LAB_00004194;
+      if (_textureBufferBytes == 0) goto checkIs16bpp;
     }
   }
   alignedWidth = width + 0x20U & 0xffffffe0;
@@ -694,7 +694,7 @@ LAB_000040bc:
   ((int (*)())__FreeSurface)(accel,8,&_textureBuffer);
   _free(_textureBufferBytes);
   _textureBufferBytes = 0;
-LAB_00004194:
+checkIs16bpp:
   if (is16bpp == 0) {
     textureBufferRowBytes_0000e738 = alignedWidth << 2;
     textureBufferPixelFormat_0000e724 = 0x42475241;
@@ -736,12 +736,12 @@ int _createOffscreenBuffer(accel, rect, is16bpp)
   int status;
   undefined4 result;
   
-  if (_offscreenBufferBytes == 0) goto LAB_000043f0;
+  if (_offscreenBufferBytes == 0) goto setOffscreenBufferWidth;
   if (is16bpp == 0) {
-    if (offscreenBufferPixelFormat_0000e6c0 == 0x42475241) goto LAB_0000430c;
+    if (offscreenBufferPixelFormat_0000e6c0 == 0x42475241) goto checkRect;
   }
   else if (offscreenBufferPixelFormat_0000e6c0 == 0x10) {
-LAB_0000430c:
+checkRect:
     if ((((int)*(short *)(rect + 4) + 0x20U & 0xffffffe0) == _offscreenBufferWidth) &&
        (((int)*(short *)(rect + 6) + 0x20U & 0xffffffe0) == _offscreenBufferHeight)) {
       status = _io_connect_method_scalarI_structureI
@@ -749,14 +749,14 @@ LAB_0000430c:
       if (status == 0) {
         return 1;
       }
-      if (_offscreenBufferBytes == 0) goto LAB_000043f0;
+      if (_offscreenBufferBytes == 0) goto setOffscreenBufferWidth;
     }
   }
   *(int *)(accel + 0x94) = *(int *)(accel + 0x94) + -1;
   ((int (*)())__FreeSurface)(accel,0,&_offscreenBuffer);
   _free(_offscreenBufferBytes);
   _offscreenBufferBytes = 0;
-LAB_000043f0:
+setOffscreenBufferWidth:
   _offscreenBufferWidth = (int)*(short *)(rect + 4) + 0x20U & 0xffffffe0;
   _offscreenBufferHeight = (int)*(short *)(rect + 6) + 0x20U & 0xffffffe0;
   if (is16bpp == 0) {
@@ -1081,7 +1081,7 @@ int _radeonCopy(accel, unusedArg2, unusedArg3, unusedArg4, blitReq)
                 cmdWordsLeft = cmdCapacity;
               }
               else {
-LAB_00004b14:
+loopSetNeedsSetup:
                 needsSetup = true;
                 *(undefined4 *)(accel + 0x7c) = 0;
                 *(undefined4 *)(accel + 0x18) = 0;
@@ -1119,7 +1119,7 @@ LAB_00004b14:
             *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
             mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)ptrTo_machTaskSelf_0000e694
                                         ,scratchWord3Ptr,&scratchWord0,1);
-            if (mapResult != 0) goto LAB_00004b14;
+            if (mapResult != 0) goto loopSetNeedsSetup;
             needsSetup = true;
             *(undefined4 *)(scratchWord3 + 0x1c) = 0;
             *(uint *)(accel + 0x18) = scratchWord3;
@@ -1810,7 +1810,7 @@ int _radeonCopyRegionBody(int accel,undefined4 unusedArg2,undefined4 unusedArg3,
   regionCount = *regionRect;
   cmdCapacity = cmdBufferSize - 7;
   if (cmdWrite == (dword *)0x0) {
-LAB_000081e0:
+loopSetErrorCode:
     errorCode = -0x1ffffd42;
   }
   else {
@@ -1821,7 +1821,7 @@ LAB_000081e0:
       srcOriginX = *(int *)(accel + 0x30);
       cmdHeaderBase = 0x9000000;
       srcOriginY = *(int *)(accel + 0x34);
-LAB_000056ac:
+loopSetSrcWidth:
       srcWidth = *(short *)(srcDesc + 1);
       if ((0x1000 < srcWidth) || (0x1000 < *(short *)((int)srcDesc + 6))) {
         return -0x1ffffd39;
@@ -1838,7 +1838,7 @@ LAB_000056ac:
         srcOriginY = 0;
         srcHandle = 0;
         cmdHeaderBase = 0xd000000;
-        goto LAB_000056ac;
+        goto loopSetSrcWidth;
       }
       if (blitKind == 0x3000) {
         srcSurface = *(undefined4 **)(srcRef + 0x28);
@@ -1949,7 +1949,7 @@ LAB_000056ac:
     offscreenWidth = (int)*(short *)(srcDesc + 1);
     if (((isScreenCopy) || (blitKind == 0)) && (*(int *)(accel + 0x8c) == 0)) {
       offscreenResult = ((int (*)())_createOffscreenBuffer)(accel,srcDesc,0);
-      if (offscreenResult == 0) goto LAB_000081e0;
+      if (offscreenResult == 0) goto loopSetErrorCode;
       offscreenDesc = offscreenBufferSurfaceInfo_0000e6e4 + 3;
       offscreenFormat = offscreenBufferSurfaceInfo_0000e6e4[0xc];
       if (offscreenFormat == 3) {
@@ -2042,13 +2042,13 @@ LAB_000056ac:
                 *(uint *)(accel + 0x7c) = scratchWord1 + 0x1c;
               }
               else {
-LAB_00005e40:
+loopSetCmdWrite:
                 cmdWrite = (dword *)0x0;
                 *(undefined4 *)(accel + 0x7c) = 0;
                 *(undefined4 *)(accel + 0x18) = 0;
                 cmdWord1 = &__mh_bundle_header.cputype;
               }
-LAB_00005e7c:
+loopSetNeedsSetup:
               needsSetup = true;
               cmdWordsLeft = cmdCapacity;
             }
@@ -2072,13 +2072,13 @@ LAB_00005e7c:
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
               mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
                                            *(undefined4 *)ptrTo_machTaskSelf_0000e694,scratchWord0Ptr,scratchWord1Ptr,1);
-              if (mapResult != 0) goto LAB_00005e40;
+              if (mapResult != 0) goto loopSetCmdWrite;
               *(undefined4 *)(scratchWord0 + 0x1c) = 0;
               *(uint *)(accel + 0x18) = scratchWord0;
               cmdWrite = (dword *)(scratchWord0 + 0x20);
               cmdWord1 = (dword *)(scratchWord0 + 0x24);
               *(uint *)(accel + 0x7c) = scratchWord0 + 0x1c;
-              goto LAB_00005e7c;
+              goto loopSetNeedsSetup;
             }
             cmdWord1 = cmdWrite + 1;
             needsSetup = false;
@@ -2465,7 +2465,7 @@ LAB_00005e7c:
                 cmdWordsLeft = cmdCapacity;
               }
               else {
-LAB_00006cc0:
+loopSetCmdWrite2:
                 cmdWrite = (dword *)0x0;
                 *(undefined4 *)(accel + 0x7c) = 0;
                 *(undefined4 *)(accel + 0x18) = 0;
@@ -2486,7 +2486,7 @@ LAB_00006cc0:
               cmdWord5 = cmdWrite + 5;
               cmdPtrPlus6Block3 = cmdWrite + 6;
             }
-LAB_00006d28:
+loopSetLastHeader:
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
             *(dword **)(accel + 0x7c) = cmdWrite;
@@ -2539,7 +2539,7 @@ LAB_00006d28:
               *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
               mapResult2 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,*(undefined4 *)taskPtr,
                                            scratchWord0Ptr,scratchWord1Ptr,1);
-              if (mapResult2 != 0) goto LAB_00006cc0;
+              if (mapResult2 != 0) goto loopSetCmdWrite2;
               *(undefined4 *)(scratchWord0 + 0x1c) = 0;
               *(uint *)(accel + 0x18) = scratchWord0;
               cmdWrite = (dword *)(scratchWord0 + 0x20);
@@ -2551,7 +2551,7 @@ LAB_00006d28:
               cmdWord4 = (dword *)(scratchWord0 + 0x30);
               cmdWord5 = (dword *)(scratchWord0 + 0x34);
               cmdWordsLeft = cmdCapacity;
-              goto LAB_00006d28;
+              goto loopSetLastHeader;
             }
             regByteOffset = 0;
             regionQuadRectTLIdx = 1;
@@ -2850,7 +2850,7 @@ LAB_00006d28:
               cmdWordsLeft = cmdWordsLeft - 4;
               setupWords4 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,splitRowPlus2,0)
               ;
-LAB_0000789c:
+loopSetTopLeftCornerIdx:
               topLeftCornerIdx = setupWords4 + 9;
               leftTileQuadPacketWordsIdx = setupWords4 + 0x16;
               regByteOffset2 = setupWords4 << 2;
@@ -2926,7 +2926,7 @@ LAB_0000789c:
                 cmdWordsLeft = cmdBufferSize - 0xb;
                 setupWords4 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,splitRowPlus2,
                                             0);
-                goto LAB_0000789c;
+                goto loopSetTopLeftCornerIdx;
               }
               regByteOffset2 = 0;
               leftTileQuadRectTLIdx = 1;
@@ -3104,7 +3104,7 @@ LAB_0000789c:
               cmdWordsLeft = cmdWordsLeft - 4;
               setupWords4 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,splitRemainder,0)
               ;
-LAB_00007ff0:
+loopSetTopLeftCornerIdx2:
               topLeftCornerIdx = setupWords4 + 9;
               blockEndIdx = setupWords4 + 10;
               rightTileQuadPacketWordsIdx = setupWords4 + 0x16;
@@ -3180,7 +3180,7 @@ LAB_00007ff0:
                 cmdWordsLeft = cmdBufferSize - 0xb;
                 setupWords4 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,splitRemainder,
                                             0);
-                goto LAB_00007ff0;
+                goto loopSetTopLeftCornerIdx2;
               }
               regByteOffset2 = 0;
               rightTileQuadRectTLIdx = 1;
@@ -3587,7 +3587,7 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                   tileRowTopNext = firstTileRightUnclamped;
                   tileLeft = dstLeft;
                   tileRight = tileRightLimit;
-                  goto LAB_00008bec;
+                  goto checkCmdWordsLeft;
                 }
                 nextTileLeft = firstTileRightUnclamped;
                 if (cmdWordsLeft < 0xd4) {
@@ -4162,10 +4162,10 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                       tileRight = curTileLeft + 0x10;
                     }
                     firstTile = false;
-                    if (dstRight <= nextTileLeft) goto LAB_0000a09c;
+                    if (dstRight <= nextTileLeft) goto setTileBottom;
                     tileRowTopNext = nextTileLeft + 8;
                     tileLeft = nextTileLeft;
-LAB_00008bec:
+checkCmdWordsLeft:
                     if (cmdWordsLeft < 0x1a) break;
                     screenWidth = *(short *)(accel + 0x50);
                     tileIdx16 = 0x10;
@@ -4244,7 +4244,7 @@ LAB_00008bec:
                   }
                 } while( true );
               }
-LAB_0000a09c:
+setTileBottom:
               tileBottom = dstBottom;
               if (tileTop + 0x10 < dstBottom) {
                 tileBottom = tileTop + 0x10;
@@ -5447,7 +5447,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                   tileTopHi = tileTop << 0x10;
                   tileHeight = tileBottom - tileTop;
                   tileBottomNext = firstTileRightUnclamped;
-                  goto LAB_0000c1c8;
+                  goto checkCmdWordsLeft;
                 }
                 if (cmdWordsLeft < 0x8e) {
                   scratchWord0 = *(uint *)(accel + 0x18);
@@ -5663,10 +5663,10 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                       tileRight = tileLeft + 0x10;
                     }
                     needsSetup = false;
-                    if (dstRight <= nextTileLeft) goto LAB_0000c820;
+                    if (dstRight <= nextTileLeft) goto setNextTileBottom;
                     tileBottomNext = nextTileLeft + 8;
                     tileLeft = nextTileLeft;
-LAB_0000c1c8:
+checkCmdWordsLeft:
                     if (cmdWordsLeft < 0x16) break;
                     regIdxNext = 4;
                     scanPacketWord3Idx = 3;
@@ -5729,7 +5729,7 @@ LAB_0000c1c8:
                   }
                 } while( true );
               }
-LAB_0000c820:
+setNextTileBottom:
               nextTileBottom = tileTop + 0x10;
               tileTop = tileTop + 8;
               tileBottom = dstBottom;
