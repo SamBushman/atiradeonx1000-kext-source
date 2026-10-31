@@ -263,7 +263,7 @@ code_r0x97bb26e0:
         stageEntryCopy3 = stageEntrySave3;
       } while (objectIndex < *(int *)(stageEntrySave2 + 0x20));
     }
-    errorText = UNK_a7b7bb10;
+    errorText = vertexShaderDidNotWriteStrPtr_a7b7bb10;
     if (stageRequirementMet == 0) {
       infoSink = *(void **)(this + 0x84);
                     
@@ -306,21 +306,21 @@ code_r0x97bb2ab4:
                     if (*(short *)((int)mergedSymbol + 0x2e) == *(short *)(parseSymbol + 0x2e))
                     goto code_r0x97bb2ab4;
                     symbolName = mergedSymbol[5];
-                    formatLength = _strlen(UNK_a7b7bb18);
+                    formatLength = _strlen(globalSymbolsNamedSizesDoFmtPtr_a7b7bb18);
                     nameLength = _strlen(symbolName);
                     stageNameLength = _strlen((&_shaderString)[stage]);
                     message = (char *)_malloc(formatLength + nameLength + stageNameLength + 1);
-                    _sprintf(message,UNK_a7b7bb18,symbolName,(&_shaderString)[stage]);
+                    _sprintf(message,globalSymbolsNamedSizesDoFmtPtr_a7b7bb18,symbolName,(&_shaderString)[stage]);
                     infoSink = *(void **)(this + 0x84);
                     
                   }
                   else {
                     symbolName = mergedSymbol[5];
-                    formatLength = _strlen(UNK_a7b7bb14);
+                    formatLength = _strlen(globalSymbolsNamedTypesDoFmtPtr_a7b7bb14);
                     nameLength = _strlen(symbolName);
                     stageNameLength = _strlen((&_shaderString)[stage]);
                     message = (char *)_malloc(formatLength + nameLength + stageNameLength + 1);
-                    _sprintf(message,UNK_a7b7bb14,symbolName,(&_shaderString)[stage]);
+                    _sprintf(message,globalSymbolsNamedTypesDoFmtPtr_a7b7bb14,symbolName,(&_shaderString)[stage]);
                     infoSink = *(void **)(this + 0x84);
                     
                   }
@@ -378,7 +378,7 @@ code_r0x97bb2ab8:
                   formatLength = _strlen(idTypeFmtPtr_a7b7bbc0);
                   nameLength = _strlen(symbolName);
                   message = (char *)_malloc(formatLength + nameLength + 1);
-                  _sprintf(message,UNK_a7b7bb90,symbolName);
+                  _sprintf(message,couldNotAddSymbolToFmtPtr_a7b7bb90,symbolName);
                   infoSink = *(void **)(this + 0x84);
                     
                   __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -1611,10 +1611,10 @@ int TGenericLinker__CollectClientAttributeBindings(this)
         binding = (unsigned char *)
                  BindingTable__NextAttribRequestBinding(*(unsigned char **)(this + 4),binding)) {
       bindingName = *(undefined4 *)(binding + 8);
-      formatLength = _strlen(UNK_a7b7bac8);
+      formatLength = _strlen(doNotHaveAnAttachedFmtPtr_a7b7bac8);
       nameLength = _strlen(bindingName);
       message = (char *)_malloc(formatLength + nameLength + 1);
-      _sprintf(message,UNK_a7b7bac8,bindingName);
+      _sprintf(message,doNotHaveAnAttachedFmtPtr_a7b7bac8,bindingName);
       infoSink = *(void **)(this + 0x84);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
@@ -1633,10 +1633,10 @@ int TGenericLinker__CollectClientAttributeBindings(this)
                         (*(unsigned char **)(this + 0x28),*(char **)(binding + 8));
       if (symbol == 0) {
         bindingName = *(undefined4 *)(binding + 8);
-        formatLength = _strlen(UNK_a7b7bac4);
+        formatLength = _strlen(couldNotFindVertexShaderFmtPtr_a7b7bac4);
         nameLength = _strlen(bindingName);
         message = (char *)_malloc(formatLength + nameLength + 1);
-        _sprintf(message,UNK_a7b7bac4,bindingName);
+        _sprintf(message,couldNotFindVertexShaderFmtPtr_a7b7bac4,bindingName);
         infoSink = *(void **)(this + 0x84);
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
@@ -2008,10 +2008,10 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
                      ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
           if ((**(char **)parseSymbol == '\0') && (*(int *)(parseSymbol + 0x60) != 0)) {
             symbolName = *(undefined4 *)(parseSymbol + 0x14);
-            formatLength = _strlen(UNK_a7b7badc);
+            formatLength = _strlen(fragmentShaderReadsVaryingWhichFmtPtr_a7b7badc);
             nameLength = _strlen(symbolName);
             messageText = (char *)_malloc(formatLength + nameLength + 1);
-            _sprintf(messageText,UNK_a7b7badc,symbolName);
+            _sprintf(messageText,fragmentShaderReadsVaryingWhichFmtPtr_a7b7badc,symbolName);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -2085,10 +2085,10 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
                 if (vertexSymbol == (int *)0x0) {
 code_r0x97bb689c:
                   varyingName = *(undefined4 *)(parseSymbol + 0x14);
-                  fmtLength = _strlen(UNK_a7b7bad4);
+                  fmtLength = _strlen(fragmentShaderReadsVaryingWhichFmtPtr_a7b7bad4);
                   msgNameLength = _strlen(varyingName);
                   messageText = (char *)_malloc(fmtLength + msgNameLength + 1);
-                  _sprintf(messageText,UNK_a7b7bad4,varyingName);
+                  _sprintf(messageText,fragmentShaderReadsVaryingWhichFmtPtr_a7b7bad4,varyingName);
                   infoSink = *(void **)(this + 0x84);
                     
 override_jmp_97bb67f0_case_0:
@@ -2097,7 +2097,7 @@ override_jmp_97bb67f0_case_0:
                 else {
                   if (*(short *)(parseSymbol + 0x2c) != *(short *)(vertexSymbol + 0xb)) {
                     symbolNameB = *(undefined4 *)(parseSymbol + 0x14);
-                    fmtLength = _strlen(UNK_a7b7bad0);
+                    fmtLength = _strlen(varyingTypesDoNotMatchFmtPtr_a7b7bad0);
                     msgNameLength = _strlen(symbolNameB);
                     typeNameForLength = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
                     typeNameLength = _strlen(typeNameForLength);
@@ -2106,17 +2106,17 @@ override_jmp_97bb67f0_case_0:
                     messageText = (char *)_malloc(fmtLength + msgNameLength + typeNameLength + typeNameLength2 + 1);
                     fragmentTypeName = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(parseSymbol + 0x2c));
                     vertexTypeName = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
-                    _sprintf(messageText,UNK_a7b7bad0,symbolNameB,vertexTypeName,fragmentTypeName);
+                    _sprintf(messageText,varyingTypesDoNotMatchFmtPtr_a7b7bad0,symbolNameB,vertexTypeName,fragmentTypeName);
                     infoSink = *(void **)(this + 0x84);
                     
                     goto override_jmp_97bb67f0_case_0;
                   }
                   if ((*(char *)*vertexSymbol == '\0') && (vertexSymbol[0x17] == 0)) goto code_r0x97bb689c;
                   varyingName = *(undefined4 *)(parseSymbol + 0x14);
-                  fmtLength = _strlen(UNK_a7b7bb70);
+                  fmtLength = _strlen(varyingInVertexShaderDoesFmtPtr_a7b7bb70);
                   msgNameLength = _strlen(varyingName);
                   messageText = (char *)_malloc(fmtLength + msgNameLength + 1);
-                  _sprintf(messageText,UNK_a7b7bb70,varyingName);
+                  _sprintf(messageText,varyingInVertexShaderDoesFmtPtr_a7b7bb70,varyingName);
                   infoSink = *(void **)(this + 0x84);
                   messagePrefix = "INTERNAL ERROR: ";
                     
@@ -2274,7 +2274,7 @@ code_r0x97bb5cd0:
                       attempt = attempt + 1;
                     } while ((attempt < componentCount) && (slotsFree));
                   }
-                  messageText = UNK_a7b7bacc;
+                  messageText = couldNotFindMappingForStrPtr_a7b7bacc;
                   allocationId = allocationId + 1;
                   if (slotsFree) {
                     success = 0;
@@ -2816,7 +2816,7 @@ int TGenericLinker__BuildUniformRemapTables(this)
           if (typeSeen) {
             if (*(ushort *)(symbol + 0xb) != boundType) {
               symbolNameCopy = symbol[5];
-              formatLength = _strlen(UNK_a7b7bae4);
+              formatLength = _strlen(uniformTypesDoNotMatchFmtPtr_a7b7bae4);
               nameLength = _strlen(symbolNameCopy);
               boundTypeName = ((int (*)())GetShaderStringForType)(boundType);
               boundTypeNameLength = _strlen(boundTypeName);
@@ -2825,7 +2825,7 @@ int TGenericLinker__BuildUniformRemapTables(this)
               message = (char *)_malloc(formatLength + nameLength + boundTypeNameLength + symbolTypeNameLength + 1);
               symbolTypeName = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(symbol + 0xb));
               boundTypeNameAgain = ((int (*)())GetShaderStringForType)(boundType);
-              _sprintf(message,UNK_a7b7bae4,symbolNameCopy,boundTypeNameAgain,symbolTypeName);
+              _sprintf(message,uniformTypesDoNotMatchFmtPtr_a7b7bae4,symbolNameCopy,boundTypeNameAgain,symbolTypeName);
               infoSink = *(void **)(this + 0x84);
                     
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -2854,7 +2854,7 @@ int TGenericLinker__BuildUniformRemapTables(this)
   vertexMapped = 0;
   fragmentMapped = 0;
   for (entryIndex = 0; uniformCountNow = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)),
-      errorText = UNK_a7b7bb04, entryIndex < uniformCountNow; entryIndex = entryIndex + 1) {
+      errorText = mismatchBetweenCompilerSAndStrPtr_a7b7bb04, entryIndex < uniformCountNow; entryIndex = entryIndex + 1) {
     if (*(int *)(entryIndex * 4 + *(int *)(this + 0x40)) != -1) {
       vertexMapped = vertexMapped + 1;
     }
@@ -2870,7 +2870,7 @@ int TGenericLinker__BuildUniformRemapTables(this)
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     status = 0;
   }
-  errorText = UNK_a7b7bb08;
+  errorText = mismatchBetweenCompilerSAndStrPtr_a7b7bb08;
   if (*(int *)(this + 0x4c) != fragmentMapped) {
     infoSink = *(void **)(this + 0x84);
                     
@@ -3160,11 +3160,11 @@ loopSetFnName:
                 *(undefined1 *)(calleeName + charIdx) = 0;
               }
             }
-            msgFormatLen = _strlen(UNK_a7b7bb24);
+            msgFormatLen = _strlen(functionIsCalledButNotFmtPtr_a7b7bb24);
             shaderStringLen2 = _strlen((&_shaderString)[stage]);
             calleeNameLen = _strlen(calleeName);
             errorMessage = (char *)_malloc(msgFormatLen + shaderStringLen2 + calleeNameLen + 1);
-            _sprintf(errorMessage,UNK_a7b7bb24,calleeName,(&_shaderString)[stage]);
+            _sprintf(errorMessage,functionIsCalledButNotFmtPtr_a7b7bb24,calleeName,(&_shaderString)[stage]);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -3250,10 +3250,10 @@ loopSetLinkOk:
       checkStage = 0;
       do {
         if ((mainCount[checkStage] == 0) && (0 < *(int *)(this + checkStage * 4 + 0x20))) {
-          length = _strlen(UNK_a7b7bab8);
+          length = _strlen(noMainFunctionFoundInFmtPtr_a7b7bab8);
           length2 = _strlen((char *)(&_shaderString)[checkStage]);
           allocation = _malloc(length + length2 + 1);
-          _sprintf(allocation,UNK_a7b7bab8,(&_shaderString)[checkStage]);
+          _sprintf(allocation,noMainFunctionFoundInFmtPtr_a7b7bab8,(&_shaderString)[checkStage]);
           infoSink = *(void **)(this + 0x84);
                     
 override_jmp_97bb7df4_case_0:
@@ -3264,10 +3264,10 @@ override_jmp_97bb7df4_case_0:
           status = 0;
         }
         else if (1 < mainCount[checkStage]) {
-          length = _strlen(UNK_a7b7babc);
+          length = _strlen(mainFunctionsFoundInLinkedFmtPtr_a7b7babc);
           length2 = _strlen((char *)(&_shaderString)[checkStage]);
           allocation = _malloc(length + length2 + 9);
-          _sprintf(allocation,UNK_a7b7babc,mainCount[checkStage],(&_shaderString)[checkStage]);
+          _sprintf(allocation,mainFunctionsFoundInLinkedFmtPtr_a7b7babc,mainCount[checkStage],(&_shaderString)[checkStage]);
           infoSink = *(void **)(this + 0x84);
                     
           goto override_jmp_97bb7df4_case_0;
@@ -4049,10 +4049,10 @@ int TGenericLinker__link(this, shaderObjects, numShaders)
           }
           sizeActiveAttributes = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
           if (0x10 < sizeActiveAttributes) {
-            formatLength = _strlen(UNK_a7b7bae8);
+            formatLength = _strlen(implementationLimitOfMaxVertexFmtPtr_a7b7bae8);
             allocation = (char *)_malloc(formatLength + 0x11);
             sizeActiveAttributes2 = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
-            _sprintf(allocation,UNK_a7b7bae8,0x10,sizeActiveAttributes2);
+            _sprintf(allocation,implementationLimitOfMaxVertexFmtPtr_a7b7bae8,0x10,sizeActiveAttributes2);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -4091,10 +4091,10 @@ int TGenericLinker__link(this, shaderObjects, numShaders)
           }
           numActiveVertexSamplers = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
           if (0 < numActiveVertexSamplers) {
-            formatLength = _strlen(UNK_a7b7baf4);
+            formatLength = _strlen(implementationLimitOfActiveVertexFmtPtr_a7b7baf4);
             allocation = (char *)_malloc(formatLength + 0x11);
             numActiveVertexSamplers2 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
-            _sprintf(allocation,UNK_a7b7baf4,0,numActiveVertexSamplers2);
+            _sprintf(allocation,implementationLimitOfActiveVertexFmtPtr_a7b7baf4,0,numActiveVertexSamplers2);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -4105,10 +4105,10 @@ int TGenericLinker__link(this, shaderObjects, numShaders)
           }
           numActiveFragmentSamplers = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
           if (0x10 < numActiveFragmentSamplers) {
-            formatLength = _strlen(UNK_a7b7baf8);
+            formatLength = _strlen(implementationLimitOfActiveFragmentFmtPtr_a7b7baf8);
             allocation = (char *)_malloc(formatLength + 0x11);
             numActiveFragmentSamplers2 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
-            _sprintf(allocation,UNK_a7b7baf8,0x10,numActiveFragmentSamplers2);
+            _sprintf(allocation,implementationLimitOfActiveFragmentFmtPtr_a7b7baf8,0x10,numActiveFragmentSamplers2);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -4120,11 +4120,11 @@ int TGenericLinker__link(this, shaderObjects, numShaders)
           numActiveVertexSamplers = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
           numActiveFragmentSamplers3 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
           if (0x10 < numActiveVertexSamplers + numActiveFragmentSamplers3) {
-            formatLength = _strlen(UNK_a7b7bafc);
+            formatLength = _strlen(implementationLimitOfActiveSamplersFmtPtr_a7b7bafc);
             allocation = (char *)_malloc(formatLength + 0x11);
             numActiveVertexSamplers3 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
             numActiveFragmentSamplers = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
-            _sprintf(allocation,UNK_a7b7bafc,0x10,numActiveVertexSamplers3 + numActiveFragmentSamplers);
+            _sprintf(allocation,implementationLimitOfActiveSamplersFmtPtr_a7b7bafc,0x10,numActiveVertexSamplers3 + numActiveFragmentSamplers);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");

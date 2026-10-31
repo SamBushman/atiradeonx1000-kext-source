@@ -92,7 +92,7 @@ int _InitAtomTable(atable, hashSize)
           tokenAtom = *tokenCursor;
           tokenCursor = tokenCursor + 2;
           ((int (*)())_AddAtomFixed)(atable,*tokenNamePtr,tokenAtom);
-        } while (tokenCursor < &UNK_a7b7ce41);
+        } while (tokenCursor < &tokensTableLastEntryPlus1_a7b7ce41);
         if (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 8) != 0) {
           ((int (*)())_AddAtomFixed)(atable,"error",0x10a);
         }
@@ -793,7 +793,7 @@ loopSetCppRef:
         if (binopIndex < 0) {
           return nextToken;
         }
-        opPrecedence = *(int *)(&UNK_a7b7ce4c + binopIndex * 0xc);
+        opPrecedence = *(int *)(&binopTableRecord0Precedence_a7b7ce4c + binopIndex * 0xc);
         if (opPrecedence <= precedence) {
           return nextToken;
         }
@@ -801,7 +801,7 @@ loopSetCppRef:
         scanToken = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
                           (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
         nextToken = ((int (*)())_eval)(scanToken,opPrecedence,result,errorFlag,yylvalpp);
-        binopResult = (**(code **)(&UNK_a7b7ce50 + binopIndex * 0xc))(lhsValue,*result);
+        binopResult = (**(code **)(&binopTableRecord0Function_a7b7ce50 + binopIndex * 0xc))(lhsValue,*result);
         *result = binopResult;
         if (*errorFlag != 0) {
           return nextToken;
@@ -836,7 +836,7 @@ checkUlonglong:
             scanToken = (**(code **)(nextToken + 4))
                               (nextToken,yylvalpp,aliasResult,aliasErrorFlag,aliasYylvalpp,leftoverR8,*(int *)PTR__cpp_a7b7c0a4);
             nextToken = ((int (*)())_eval)(scanToken,0xc,result,errorFlag,yylvalpp);
-            unopResult = (**(code **)(&UNK_a7b7cf24 + unopIndex * 8))(*result);
+            unopResult = (**(code **)(&unopTableRecord0Function_a7b7cf24 + unopIndex * 8))(*result);
             *result = unopResult;
             goto loopSetErrFlag;
           }

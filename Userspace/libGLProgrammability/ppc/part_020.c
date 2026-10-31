@@ -321,7 +321,7 @@ int __ZNSsC4Ev(this)
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,&DAT_a7b7bf90,stringAllocator);
+  return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,&emptyStringRepData_freeListBase_a7b7bf90,stringAllocator);
 }
 
 /* __ZNSsC2ERKSaIcE @ 0x97c136e0 (4 bytes) */

@@ -1,0 +1,27 @@
+# r10: libGLProgrammability orphan fragments and the DAT_/UNK_ leftovers of r08 (fork r10)
+
+Rows: `names_r10_orph.tsv` (30 `unowned_code/` fragments), `names_r10_pads.tsv` (38 `landing_pads/` fragments), `names_r10_data.tsv` (20 `DAT_`), `names_r10_strslots.tsv` (21 `UNK_` string slots), `names_r10_misc.tsv` (8 `UNK_`). After: 0 `DAT_` and 0 `UNK_` labels in `link/symbol_map.tsv`, 0 `orph_`/`eh_pad_` names.
+
+## unowned_code/ (30)
+* 5 data-wired callbacks of the preprocessor operator table (`_op_shr/_add/_sub/_mul/_neg`) and 3 exported entries (`_InterpreterTextureSamplerSampleTexelRECT`, `_BitSetFirstSetBit`, `_instructionIndexEqualsFunction`) take the Mach-O name that `data/DATA___const.c`, `DATA___la_symbol_ptr.c` and `DATA___data.c` print for the word that points at them. Tier `EXPORTED` (new): the name is the function's Mach-O label, which `link_corpus.fn_label` uses whatever the C name is, so the linked image is unchanged; the main corpus already declared three of these names as `extern`, which `apply_names.py` refuses for any other tier.
+* 21 severity-prefix entries of the shared report tails (`ParseBinary/Unary/Selection/Loop/Branch__errorReportTail`, `TParseContext__error__tail`, `_CPPWarningToInfoLog`): `<owner>__prefix<Error|InternalError|Unimplemented|Note>Entry_<addr>`. The kind comes from the distance between the prefix literal this entry appends and the ": " literal it appends later (-0x44 ERROR, -0x3c INTERNAL ERROR, -0x28 UNIMPLEMENTED, -0x18 NOTE; the cstrings at 0x97c287a4..0x97c287dc have exactly these spacings, WARNING is the owner's own entry at -0x50). Not referenced from anywhere (`reachability.tsv`), they are the other cases of gcc's inlined TInfoSinkBase prefix switch.
+* `_PPParserParseSwizzleCode__trailingDyldStubBindingHelperCall_97b853f0` (INFERRED: 8 bytes, body is a call to dyld_stub_binding_helper) and `save_world__epilogue_97c1ddfc` (INFERRED: 20 bytes between save_world and eh_rest_world_r10, one indirect call/return through the frame's saved word) are the two fragments whose role is a guess.
+
+## landing_pads/ (38)
+`<owner>__eh<Resume|Cleanup|Unexpected|UnlockMutex|Terminate>Pad_<addr>`; role from the calls in the pad body (only `__Unwind_Resume`; a local destructor then resume; `___cxa_call_unexpected`; `_pthread_mutex_unlock`; `___cxa_begin_catch`+`_abort`). The owner is the ledger function that ends at or contains the pad (gcc puts landing pads after the function). It agrees with `pad_owners.tsv` up to spelling except where that table names an inlined callee or the template instance instead of the function the pad follows: `97c13804` (copy ctor `__ZNSsC4ERKSs`; table: `_Rep::_M_grab`), `97c13888`, `97c14bc8` (`__ZNSs6assignERKSs`; table: `append`), `97c16c04`, `97c16c78`, `97c16cb4`; `pad_owners.tsv` is unchanged.
+
+## Data
+* `typeQualifier{Const,Attribute,Varying,Uniform}Init_*`: the four 7-word TPublicType initializers of yyparse (const 2, attribute 3, varying 4, uniform 6; size 1); the varying one is read by the stock's yyparse through a pc-relative address that Ghidra's C shows as inline constants, so only the link layer sees the label.
+* `yydgotoMinusNtbase_97c35e08`, `yypgotoMinusNtbase_97c36138` (YYNTBASE = 95: `0xbe/2`), `yydgotoLastEntry_97c35f58` (yydgoto itself has no label, 74 shorts at 0x97c35ec6, values are valid state numbers, last 0x30), `yyEcBytePlus3_97c37983` / `yyMetaBytePlus3_97c37d83` (flex `yy_ec[256]` at 0x97c37980 and `yy_meta[67]` at 0x97c37d80 are int tables read as bytes at +3).
+* `flattenIfZeroDoubleInit_97c3aa2c`, `flattenIfWordsInit{0,1,2}`: constants `_FlattenIf` loads pc-relative (97c0b968, 97c0c418..30) but whose uses Ghidra's C no longer shows. INFERRED roles.
+* `emptyStringRepData_freeListBase_a7b7bf90`: still two roles at one address, now documented in the row: data area of the empty string rep AND `_S_free_list - 1 word` (the allocator indexes the free list from a biased base). One name carries both, since a data row renames every use.
+* 21 `UNK_a7b7bab8..bb90` string slots in part_009 (linker/validation messages): r08's rule (`<first words>Str|FmtPtr_<addr>`).
+* `UNK_a7b7ce41/ce4c/ce50/cf24`: `_InitAtomTable` loop limit (`_tokens` last pair + 1), first records of `_eval`'s binary (12-byte {token, precedence, function}) and unary (8-byte {token, function}) operator tables; `slotPlanInit0..3`: the -1 words `TGenericLinker::AllocateTextureUnitsForVaryings` initializes `slotPlan` from.
+
+## Not done / follow-ups
+* The Ghidra C of `_FlattenIf` and `TGenericLinker::AllocateTextureUnitsForVaryings` has no reference to the `flattenIf*Init`/`slotPlanInit*` constants (it stores the values inline), and yyparse case 0x82 does the same for the varying record: nothing for a rename to touch there, but a future "every stock data reference appears in the C" audit should expect these.
+* `PTR_<symbol>` import slots (libGL 3, libGLProg 94, VA 35, GA 7) stay unnamed (their name already is the symbol).
+* The `s_*` string-literal labels keep Ghidra's text-derived names by rule.
+
+## Checks
+`apply_names.py --check` 0 errors. `datacheck.sh` (with `funcmap.py --link`, which leaves the EXPORTED rows out of the name map): link tree identical except `decls.h` and `x_unowned_code_part_000.c`, which carry the C names of the renamed fragments (the labels, `data.s`, `exports.txt`, `symbol_map.tsv` and every other file are equal). Compile gate on the G5 (Tiger 10.4.11): see the commit message.

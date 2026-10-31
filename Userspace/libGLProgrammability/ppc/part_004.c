@@ -2955,7 +2955,7 @@ setScratchR9:
         if (srcBasicType != 2) {
           if (srcBasicType < 3) {
             if (srcBasicType == 1) {
-              scratchR9 = &DAT_97c35f58;
+              scratchR9 = &yydgotoLastEntry_97c35f58;
               srcValue = (uint)(*(float *)(componentIndex * 4 + srcConstArray) != 0.0);
               goto loopStoreNewConstArray;
             }

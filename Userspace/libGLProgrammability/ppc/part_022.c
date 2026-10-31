@@ -1110,7 +1110,7 @@ int __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcES
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    data = (ulong *)&DAT_a7b7bf90;
+    data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
     dnew = end - beg;
@@ -1144,7 +1144,7 @@ int std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__stri
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    data = (ulong *)&DAT_a7b7bf90;
+    data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
     dnew = end - beg;
@@ -1178,7 +1178,7 @@ int std__string___S_construct_char__(beg, end, alloc, allocator)
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    data = (ulong *)&DAT_a7b7bf90;
+    data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
     if (beg == (char *)0x0) {
@@ -1214,7 +1214,7 @@ int __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag(beg, end, a
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    data = (ulong *)&DAT_a7b7bf90;
+    data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
     if (beg == (char *)0x0) {
