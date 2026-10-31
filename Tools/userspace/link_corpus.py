@@ -1017,6 +1017,8 @@ for a in sorted(slot_expr):
 # and the code then reads the real object at a displacement from it (`*(anchor - 0x56f8)`, `anchor + 4 * opcode`). The anchor is the real object's label plus the same
 # constant, so it moves with the object in the rebuilt image: `.set NAME, LD_<base> + (anchor - base)`.
 for nm_, sp_ in sorted(cfg.get('data_anchors', {}).items()):
+    # the config names the anchor by its Ghidra label; a `data` row may have renamed it (the code then refers to the new name): define whichever name the corpus uses
+    nm_ = next((k_ for k_, v_ in sorted(DATA_ROOT.items()) if v_ == nm_ and k_ in needed), nm_)
     base_ = int(sp_['base'], 16)
     anchor_ = addr_of_name(nm_)
     delta_ = anchor_ - base_
