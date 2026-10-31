@@ -396,104 +396,104 @@ int Program__eliminateRedundantInst(program, inst, block, pass)
 }
 
 /* FUN_00173cdc @ 0x173cdc (308 bytes) */
-int FUN_00173cdc(ctx, param_2)
+int FUN_00173cdc(ctx, inst)
   int ctx;
-  int param_2;
+  int inst;
 {
   int isOptionEnabled;
-  int iVar1;
-  int *piVar2;
-  undefined4 uVar3;
-  int iVar4;
+  int producerInst;
+  int *userSlot;
+  undefined4 changed;
+  int programStats;
   uint vectorFilledCount;
-  uint uVar6;
+  uint userTopIndex;
   uint *vector;
-  undefined4 local_38 [4];
-  undefined4 local_28 [4];
+  undefined4 swizzleWord [4];
+  undefined4 swizzleOut [4];
   
   isOptionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),8);
   if ((isOptionEnabled == 0) ||
      (*(int *)(*(int *)(ctx + 0x238) + 0x658) <=
       *(int *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0xa8))) {
-    uVar3 = 0;
+    changed = 0;
   }
   else {
-    iVar1 = *(int *)(param_2 + 0xb0);
-    if ((*(uint *)(iVar1 + 0x14) & 1) == 0) {
-      vector = *(uint **)(*(int *)(iVar1 + 0x8c) + 0x2c);
+    producerInst = *(int *)(inst + 0xb0);
+    if ((*(uint *)(producerInst + 0x14) & 1) == 0) {
+      vector = *(uint **)(*(int *)(producerInst + 0x8c) + 0x2c);
       vectorFilledCount = vector[1];
-      uVar6 = vectorFilledCount - 1;
-      if (uVar6 < *vector) {
-        if (vectorFilledCount <= uVar6) {
-          _memset(vectorFilledCount * 4 + vector[2],0,(uVar6 - vectorFilledCount) * 4 + 4);
+      userTopIndex = vectorFilledCount - 1;
+      if (userTopIndex < *vector) {
+        if (vectorFilledCount <= userTopIndex) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(userTopIndex - vectorFilledCount) * 4 + 4);
           vector[1] = vectorFilledCount;
         }
-        piVar2 = (int *)(uVar6 * 4 + vector[2]);
+        userSlot = (int *)(userTopIndex * 4 + vector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(vector,uVar6);
+        userSlot = (int *)Vector__elementRefGrow(vector,userTopIndex);
       }
-      iVar1 = *(int *)(*piVar2 + 0xb0);
+      producerInst = *(int *)(*userSlot + 0xb0);
     }
-    ValueKey__computeSwizzleTo(local_28,ctx,param_2);
-    local_38[0] = local_28[0];
-    iVar4 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
-    *(int *)(iVar4 + 0xa8) = *(int *)(iVar4 + 0xa8) + 1;
-    iVar4 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
-    *(int *)(iVar4 + 0x13c) = *(int *)(iVar4 + 0x13c) + 1;
-    ValueKey__rewriteAsMovOfValueKey(ctx,iVar1,local_38,0);
-    uVar3 = 1;
+    ValueKey__computeSwizzleTo(swizzleOut,ctx,inst);
+    swizzleWord[0] = swizzleOut[0];
+    programStats = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
+    *(int *)(programStats + 0xa8) = *(int *)(programStats + 0xa8) + 1;
+    programStats = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
+    *(int *)(programStats + 0x13c) = *(int *)(programStats + 0x13c) + 1;
+    ValueKey__rewriteAsMovOfValueKey(ctx,producerInst,swizzleWord,0);
+    changed = 1;
   }
-  return uVar3;
+  return changed;
 }
 
 /* Compiler__valueNumberForExpr @ 0x173e10 (268 bytes) */
-int Compiler__valueNumberForExpr(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int Compiler__valueNumberForExpr(compiler, exprKey)
+  int compiler;
+  undefined4 exprKey;
 {
   undefined4 arenaAt378;
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  int *piVar3;
+  undefined4 *exprRecord;
+  undefined4 *exprAllocation;
+  int *recordVectorSlot;
   uint vectorFilledCount;
   undefined4 nextNegativeValueNumberResult;
   uint *vector;
   
-  *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 4) = 0;
-  **(undefined4 **)(param_1 + 0x3f0) = param_2;
-  puVar1 = (undefined4 *)
-           HashTable__find(*(undefined4 *)(param_1 + 0x3e4),*(undefined4 *)(param_1 + 0x3f0));
-  if (puVar1 == (undefined4 *)0x0) {
-    arenaAt378 = *(undefined4 *)(param_1 + 0x378);
-    puVar2 = (undefined4 *)Arena__alloc(arenaAt378,0x2c);
-    puVar1 = puVar2 + 1;
-    *puVar2 = arenaAt378;
-    puVar2[1] = param_2;
-    puVar2[5] = 4;
-    puVar2[8] = 0;
-    puVar2[2] = 0;
-    *(undefined1 *)(puVar2 + 3) = 0;
-    *(undefined1 *)((int)puVar2 + 0xd) = 0;
-    puVar2[4] = 0;
-    puVar2[7] = 0;
-    nextNegativeValueNumberResult = Compiler__nextNegativeValueNumber(param_1);
-    puVar2[2] = nextNegativeValueNumberResult;
-    HashTable__insert(*(undefined4 *)(param_1 + 0x3e4),puVar1);
-    HashTable__insert(*(undefined4 *)(param_1 + 0x3e0),puVar1);
-    vector = *(uint **)(param_1 + 0x3d8);
+  *(undefined4 *)(*(int *)(compiler + 0x3f0) + 4) = 0;
+  **(undefined4 **)(compiler + 0x3f0) = exprKey;
+  exprRecord = (undefined4 *)
+           HashTable__find(*(undefined4 *)(compiler + 0x3e4),*(undefined4 *)(compiler + 0x3f0));
+  if (exprRecord == (undefined4 *)0x0) {
+    arenaAt378 = *(undefined4 *)(compiler + 0x378);
+    exprAllocation = (undefined4 *)Arena__alloc(arenaAt378,0x2c);
+    exprRecord = exprAllocation + 1;
+    *exprAllocation = arenaAt378;
+    exprAllocation[1] = exprKey;
+    exprAllocation[5] = 4;
+    exprAllocation[8] = 0;
+    exprAllocation[2] = 0;
+    *(undefined1 *)(exprAllocation + 3) = 0;
+    *(undefined1 *)((int)exprAllocation + 0xd) = 0;
+    exprAllocation[4] = 0;
+    exprAllocation[7] = 0;
+    nextNegativeValueNumberResult = Compiler__nextNegativeValueNumber(compiler);
+    exprAllocation[2] = nextNegativeValueNumberResult;
+    HashTable__insert(*(undefined4 *)(compiler + 0x3e4),exprRecord);
+    HashTable__insert(*(undefined4 *)(compiler + 0x3e0),exprRecord);
+    vector = *(uint **)(compiler + 0x3d8);
     vectorFilledCount = vector[1];
     if (vectorFilledCount < *vector) {
       _memset(vectorFilledCount * 4 + vector[2],0,4);
-      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      recordVectorSlot = (int *)(vectorFilledCount * 4 + vector[2]);
       vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
+      recordVectorSlot = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
-    *piVar3 = (int)puVar1;
+    *recordVectorSlot = (int)exprRecord;
   }
-  return puVar1;
+  return exprRecord;
 }
 
 /* ValueKey__fill @ 0x173f1c (1680 bytes) */

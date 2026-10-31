@@ -4143,29 +4143,29 @@ LAB_00172d04:
 }
 
 /* ScopedExprTable__hashKey @ 0x172d1c (168 bytes) */
-int ScopedExprTable__hashKey(param_1)
-  int param_1;
+int ScopedExprTable__hashKey(key)
+  int key;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int laneValue;
+  int *laneCursor;
+  int operandCountOrLanesLeft;
+  int operandIndex;
+  int hash;
   
-  iVar5 = 1;
-  for (iVar4 = 0;
-      iVar3 = (**(code **)(**(int **)(param_1 + 0xb0) + 0x14))(*(int **)(param_1 + 0xb0)),
-      iVar4 < iVar3; iVar4 = iVar4 + 1) {
-    iVar3 = 4;
-    piVar2 = (int *)(iVar4 * 0x10 + param_1 + 0x168);
+  hash = 1;
+  for (operandIndex = 0;
+      operandCountOrLanesLeft = (**(code **)(**(int **)(key + 0xb0) + 0x14))(*(int **)(key + 0xb0)),
+      operandIndex < operandCountOrLanesLeft; operandIndex = operandIndex + 1) {
+    operandCountOrLanesLeft = 4;
+    laneCursor = (int *)(operandIndex * 0x10 + key + 0x168);
     do {
-      iVar1 = *piVar2;
-      piVar2 = piVar2 + 1;
-      iVar5 = iVar5 * iVar1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      laneValue = *laneCursor;
+      laneCursor = laneCursor + 1;
+      hash = hash * laneValue;
+      operandCountOrLanesLeft = operandCountOrLanesLeft + -1;
+    } while (operandCountOrLanesLeft != 0);
   }
-  return (iVar5 + *(int *)(param_1 + 0xb4)) % 0x65;
+  return (hash + *(int *)(key + 0xb4)) % 0x65;
 }
 
 /* ScopedExprTable__eqKeys @ 0x172dc4 (56 bytes) */

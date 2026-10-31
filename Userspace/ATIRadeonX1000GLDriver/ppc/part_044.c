@@ -9701,18 +9701,18 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
   int numSources;
   int isExternalProducer;
   uint producerIndex;
-  undefined4 uVar18;
+  undefined4 operandSelectWord;
   undefined4 vcall20Result;
   undefined4 getDependencyLatencyResult;
   uint *allNodes;
-  undefined4 local_88;
+  undefined4 producerLaneMask;
   undefined4 coveredLanes;
   undefined4 edgeList [6];
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
-  uint local_58 [4];
+  undefined4 readMaskOut;
+  undefined4 maskedUnusedOut;
+  undefined4 readMaskOutB;
+  undefined4 maskedUnusedOutB;
+  uint readMaskOutC [4];
   
   hasSubOperand = 0 < subOperandIndex;
   if (hasSubOperand) {
@@ -9748,10 +9748,10 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
     numSources = (**(code **)(*inst + 0x14))(inst);
     if (effectiveOperandIndex <= numSources) {
       operandRecord = IRInst__getOperandRecord(inst,effectiveOperandIndex);
-      uVar18 = *(undefined4 *)(operandRecord + 0x10);
+      operandSelectWord = *(undefined4 *)(operandRecord + 0x10);
       if (hasSubOperand) {
         operandRecord = IRInst__getOperandRecord(*(undefined4 *)(consumerNode + 0x38),operandIndex);
-        SelectWord__readMask(&local_68,*(undefined4 *)(operandRecord + 0x10));
+        SelectWord__readMask(&readMaskOut,*(undefined4 *)(operandRecord + 0x10));
         operandVReg2 = (int *)IRInst__getOperandSource(*(undefined4 *)(consumerNode + 0x38),operandIndex);
         if (inst != operandVReg2) {
           operandVReg2 = (int *)IRInst__getOperandSource(*(undefined4 *)(consumerNode + 0x38),operandIndex);
@@ -9762,23 +9762,23 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
           }
           operandVReg3 = IRInst__getOperandSource(*(undefined4 *)(consumerNode + 0x38),operandIndex);
           operandRecord = IRInst__getOperandRecord(operandVReg3,1);
-          SelectWord__maskUnused(&local_64,*(undefined4 *)(operandRecord + 0x10),local_68);
-          SelectWord__readMask(&local_60,local_64);
-          local_68 = local_60;
+          SelectWord__maskUnused(&maskedUnusedOut,*(undefined4 *)(operandRecord + 0x10),readMaskOut);
+          SelectWord__readMask(&readMaskOutB,maskedUnusedOut);
+          readMaskOut = readMaskOutB;
         }
-        SelectWord__maskUnused(&local_5c,uVar18,local_68);
-        uVar18 = local_5c;
+        SelectWord__maskUnused(&maskedUnusedOutB,operandSelectWord,readMaskOut);
+        operandSelectWord = maskedUnusedOutB;
       }
-      SelectWord__readMask(local_58,uVar18);
+      SelectWord__readMask(readMaskOutC,operandSelectWord);
       producerInBlock = isExternalProducer == 0;
-      local_88 = local_58[0];
+      producerLaneMask = readMaskOutC[0];
       edgeCount = 0;
-      maskCursor = &local_88;
+      maskCursor = &producerLaneMask;
 LAB_00168844:
       edgeListSlot = maskCursor + 2;
       do {
-        coveredLanes = operandVReg[3] & local_88;
-        if ((operandVReg[3] & local_88) != 0) {
+        coveredLanes = operandVReg[3] & producerLaneMask;
+        if ((operandVReg[3] & producerLaneMask) != 0) {
           arena = *(undefined4 *)(*scheduler + 0x378);
           edgeAlloc = (undefined4 *)Arena__alloc(arena,0x24);
           edge = edgeAlloc + 1;
@@ -9837,21 +9837,21 @@ LAB_00168844:
           edgeListSlot = edgeListSlot + 1;
         }
         if (producerInBlock) {
-          remainingLanes = ((uint)*(byte *)((int)&local_88 + isExternalProducer + 3) << 0x18 |
-                    (uint)*(byte *)((int)&local_88 + isExternalProducer + 2) << 0x10 |
-                    (uint)*(byte *)((int)&local_88 + isExternalProducer + 1) << 8 |
-                   (uint)*(byte *)(isExternalProducer + (int)&local_88)) -
+          remainingLanes = ((uint)*(byte *)((int)&producerLaneMask + isExternalProducer + 3) << 0x18 |
+                    (uint)*(byte *)((int)&producerLaneMask + isExternalProducer + 2) << 0x10 |
+                    (uint)*(byte *)((int)&producerLaneMask + isExternalProducer + 1) << 8 |
+                   (uint)*(byte *)(isExternalProducer + (int)&producerLaneMask)) -
                    ((uint)*(byte *)((int)edgeList + isExternalProducer + -1) << 0x18 |
                     (uint)*(byte *)((int)edgeList + isExternalProducer + -2) << 0x10 |
                     (uint)*(byte *)((int)edgeList + isExternalProducer + -3) << 8 |
                    (uint)*(byte *)((int)edgeList + isExternalProducer + -4));
-          local_88 = remainingLanes * 0x1000000 | (remainingLanes & 0xff00) << 8 | remainingLanes >> 8 & 0xff00 |
+          producerLaneMask = remainingLanes * 0x1000000 | (remainingLanes & 0xff00) << 8 | remainingLanes >> 8 & 0xff00 |
                      remainingLanes >> 0x18;
         }
         else {
-          local_88 = 0;
+          producerLaneMask = 0;
         }
-        if ((local_88 == 0) || ((operandVReg[5] & 0x200U) == 0)) {
+        if ((producerLaneMask == 0) || ((operandVReg[5] & 0x200U) == 0)) {
 LAB_00168ab0:
           if (edgeCount < 1) {
             return;

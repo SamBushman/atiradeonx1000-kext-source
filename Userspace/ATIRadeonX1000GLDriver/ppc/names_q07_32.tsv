@@ -4256,3 +4256,35 @@ use	FUN_00173018	iVar7	outerKeyCursor	INFERRED	cursor along the lane keys in the
 use	FUN_00173018	iVar7	outerKeyCursor	INFERRED	cursor along the lane keys in the outer scan	^\s*iVar7\ =\ iVar7\ \+\ 4;$	+1
 local	FUN_00173018	iVar8	innerCountdown	INFERRED	lanes left in the inner key search
 local	FUN_00173018	local_28	laneMapWord	INFERRED	lane map bytes being built (bytes 1..3 written per lane)
+local	ScopedExprTable__hashKey	param_1	key	INFERRED	scoped expression key: +0xb0 inst, +0x168 per-operand lane words, +0xb4 opcode word
+local	ScopedExprTable__hashKey	iVar1	laneValue	INFERRED	one lane value multiplied into the hash
+local	ScopedExprTable__hashKey	piVar2	laneCursor	INFERRED	walks the four lane words of the current operand
+local	ScopedExprTable__hashKey	iVar3	operandCountOrLanesLeft	INFERRED	one register: operand count of the key inst, then the four-lane countdown
+local	ScopedExprTable__hashKey	iVar4	operandIndex	INFERRED	operand loop index
+local	ScopedExprTable__hashKey	iVar5	hash	INFERRED	running product of the lane words
+local	Compiler__valueNumberForExpr	param_1	compiler	INFERRED	compiler owning the value-number hash tables (+0x3e0, +0x3e4, scratch key +0x3f0)
+local	Compiler__valueNumberForExpr	param_2	exprKey	INFERRED	expression key looked up or stored in the new record
+local	Compiler__valueNumberForExpr	puVar1	exprRecord	INFERRED	found or newly created expression record (allocation + 4)
+local	Compiler__valueNumberForExpr	puVar2	exprAllocation	INFERRED	0x2c-byte arena allocation whose first word is the arena
+local	Compiler__valueNumberForExpr	piVar3	recordVectorSlot	INFERRED	vector slot receiving the new record
+local	FUN_00173cdc	param_2	inst	INFERRED	inst rewritten as a mov of its value key
+use	FUN_00173cdc	iVar1	producerInst	INFERRED	inst (+0xb0) whose value key is rewritten	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 0xb0\);$	+3
+use	FUN_00173cdc	iVar1	producerInst	INFERRED	inst (+0xb0) whose value key is rewritten	^\s*iVar1\ =\ \*\(int\ \*\)\(\*piVar2\ \+\ 0xb0\);$	+1
+use	FUN_00173cdc	iVar1	producerInst	INFERRED	inst (+0xb0) whose value key is rewritten	^\s*FUN_0017d06c\(param_1,iVar1,local_38,0\);$	+1
+local	FUN_00173cdc	piVar2	userSlot	INFERRED	address of the last user element
+local	FUN_00173cdc	uVar3	changed	INFERRED	return value: 1 when the mov rewrite happened
+use	FUN_00173cdc	iVar4	programStats	INFERRED	state record at program +0x6c4 whose counters +0xa8 and +0x13c are incremented	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+2
+use	FUN_00173cdc	iVar4	programStats	INFERRED	state record at program +0x6c4 whose counters +0xa8 and +0x13c are incremented	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$@2	+2
+local	FUN_00173cdc	uVar6	userTopIndex	INFERRED	users vector count - 1
+local	FUN_00173cdc	local_38	swizzleWord	INFERRED	swizzle word passed by address to ValueKey__rewriteAsMovOfValueKey
+local	FUN_00173cdc	local_28	swizzleOut	INFERRED	ValueKey__computeSwizzleTo out word
+use	Scheduler__addOperandDependencyEdges	uVar18	operandSelectWord	INFERRED	select word of the current operand record (+0x10), later the masked variant	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(iVar15\ \+\ 0x10\);$	+1
+use	Scheduler__addOperandDependencyEdges	uVar18	operandSelectWord	INFERRED	select word of the current operand record (+0x10), later the masked variant	^\s*FUN_000f3340\(\&local_5c,uVar18,local_68\);$	+2
+use	Scheduler__addOperandDependencyEdges	uVar18	operandSelectWord	INFERRED	select word of the current operand record (+0x10), later the masked variant	^\s*FUN_000f3398\(local_58,uVar18\);$	+1
+use	Scheduler__addOperandDependencyEdges	uVar18	vcall20Result	INFERRED	vtable +0x20 result on the node	^\s*uVar18\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[3\]\ \+\ 0x20\)\)\(\(int\ \*\)param_1\[3\],piVar10\);$	+2
+local	Scheduler__addOperandDependencyEdges	local_88	producerLaneMask	INFERRED	lane bytes still to be covered by earlier producers; walked bytewise through maskCursor
+local	Scheduler__addOperandDependencyEdges	local_68	readMaskOut	INFERRED	SelectWord__readMask out value for the operand select
+local	Scheduler__addOperandDependencyEdges	local_64	maskedUnusedOut	INFERRED	SelectWord__maskUnused out value
+local	Scheduler__addOperandDependencyEdges	local_60	readMaskOutB	INFERRED	SelectWord__readMask out value for the masked select
+local	Scheduler__addOperandDependencyEdges	local_5c	maskedUnusedOutB	INFERRED	SelectWord__maskUnused out value for the final select
+local	Scheduler__addOperandDependencyEdges	local_58	readMaskOutC	INFERRED	SelectWord__readMask out value copied to producerLaneMask
