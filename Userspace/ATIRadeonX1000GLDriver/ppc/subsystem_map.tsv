@@ -2082,7 +2082,7 @@ address	name	size	subsystem	basis
 0x114b28	IrAddInt__opcodeInfo_atexit_dtor_op198	40	compiler-ir	name
 0x114b50	IrAlloc__opcodeInfo_atexit_dtor_op17	40	compiler-ir	name
 0x114b78	IrCondJmp__opcodeInfo_atexit_dtor_op16	40	compiler-ir	name
-0x114ba0	IrMul__opcodeInfo_atexit_dtor_001fc120	40	compiler-ir	name
+0x114ba0	IrMul__opcodeInfo_001fc10c_atexit_dtor	40	compiler-ir	name
 0x114bc8	IrRet__opcodeInfo_atexit_dtor_op15	40	compiler-ir	name
 0x114bf0	IrFloor__opcodeInfo_atexit_dtor_op56	40	compiler-ir	name
 0x114c18	IrFloorFloat__opcodeInfo_atexit_dtor_op21	40	compiler-ir	name

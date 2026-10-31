@@ -1,97 +1,13 @@
 #include "decls.h"
 
-/* ffvpEmitSphereMapCoord_0934f0 @ 0x934f0 (20 bytes) */
-int ffvpEmitSphereMapCoord_0934f0(allocState)
+/* ffvpEmitSphereMapCoordChecked @ 0x934f0 (20 bytes) */
+int ffvpEmitSphereMapCoordChecked(allocState)
   int allocState;
 {
-  undefined4 resultOrReg;
-  int allocStatus;
-  int emitTable;
-  undefined4 dstTempFile;
-  undefined4 srcTempFile;
-  undefined4 selectRowA0;
-  undefined4 selectRowA1;
-  undefined4 selectRowA2;
-  undefined4 selectRowA3;
-  undefined4 selectRowC0;
-  undefined4 selectRowC1;
-  undefined4 selectRowC2;
-  undefined4 selectRowC3;
-  undefined4 selectRowB0;
-  undefined4 selectRowB1;
-  undefined4 selectRowB2;
-  undefined4 selectRowB3;
-  undefined1 tempA [4];
-  undefined4 tempAReg;
-  undefined1 tempAMask [16];
-  undefined4 tempASelect0;
-  undefined4 tempASelect1;
-  undefined4 tempASelect2;
-  undefined1 tempB [4];
-  undefined4 tempBReg;
-  undefined1 tempBMask [16];
-  undefined4 tempBSelect0;
-  undefined4 tempBSelect1;
-  undefined4 tempBSelect3;
-  
   if (allocState == 0) {
     return 1;
   }
-  resultOrReg = 0;
-  emitTable = *(int *)(allocState + 0x3d4);
-  if (*(int *)(allocState + 0x4e8) == -1) {
-    if ((*(int *)(allocState + 0x4c0) == -1) &&
-       (ffvpEmitReflectionVector(allocState), *(int *)(allocState + 0x4c0) == -1)) {
-      return 2;
-    }
-    allocStatus = ffvpAllocTempRegister(allocState,1,allocState + 0x4e4);
-    if (allocStatus == 0) {
-      resultOrReg = *(undefined4 *)(allocState + 0x4e8);
-      allocStatus = ffvpAllocTempRegister(allocState,2,tempA);
-      if (allocStatus == 0) {
-        allocStatus = ffvpAllocTempRegister(allocState,2,tempB);
-        if (allocStatus == 0) {
-          srcTempFile = **(undefined4 **)(allocState + 0x3ec);
-          dstTempFile = **(undefined4 **)(allocState + 0x3f0);
-          (**(code **)(((unsigned char *)0x000012f0) + emitTable))
-                    (allocState,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&swizzleWords5555_001dbdb4,&DAT_001fa5e8,srcTempFile,tempAReg,&swizzleWords5555_001dbdb4,&DAT_001fa5e8)
-          ;
-          selectRowA0 = 4;
-          selectRowA1 = 4;
-          selectRowA3 = 4;
-          selectRowA2 = tempASelect2;
-          (**(code **)(((unsigned char *)0x000012f4) + emitTable))
-                    (allocState,dstTempFile,resultOrReg,&swizzleWordsYYYX_001dbd84,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8,srcTempFile,(*(int *)((int)allocState + 1216)),(&swizzleWordsXYZ4_001dbd74),&DAT_001fa5e8,srcTempFile,tempAReg,(&selectRowA0),&DAT_001fa5e8);
-          (**(code **)(((unsigned char *)0x000012e4) + emitTable))
-                    (allocState,dstTempFile,tempAReg,tempAMask,srcTempFile,resultOrReg,&swizzleWordsXYZ4_001dbd74,&DAT_001fa5e8,srcTempFile,resultOrReg,&swizzleWordsXYZ4_001dbd74,&DAT_001fa5e8);
-          (**(code **)(((unsigned char *)0x00001318) + emitTable))
-                    (allocState,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&tempASelect0,&DAT_001fa5e8);
-          (**(code **)(((unsigned char *)0x0000131c) + emitTable))
-                    (allocState,dstTempFile,tempBReg,tempBMask,srcTempFile,tempBReg,&swizzleWords5555_001dbdb4,&DAT_001dbd94)
-          ;
-          selectRowC0 = *(undefined4 *)(allocState + 0x4d4);
-          selectRowC1 = *(undefined4 *)(allocState + 0x4d8);
-          selectRowB2 = 4;
-          selectRowA2 = 4;
-          selectRowA3 = 4;
-          selectRowA0 = tempASelect0;
-          selectRowA1 = tempASelect1;
-          selectRowC2 = 4;
-          selectRowC3 = 4;
-          selectRowB0 = tempBSelect0;
-          selectRowB1 = tempBSelect1;
-          selectRowB3 = tempBSelect3;
-          (**(code **)(((unsigned char *)0x000012f4) + emitTable))
-                    (allocState,dstTempFile,resultOrReg,&swizzleWordsYYYX_001dbd84,srcTempFile,tempAReg,&selectRowA0,&DAT_001fa5e8,srcTempFile,(*(int *)((int)allocState + 1216)),(&selectRowC0),&DAT_001fa5e8,srcTempFile,tempBReg,(&selectRowB0),&DAT_001fa5e8);
-          ffvpFreeTempRegister(allocState,tempA);
-          ffvpFreeTempRegister(allocState,tempB);
-          return 0;
-        }
-      }
-    }
-    resultOrReg = 7;
-  }
-  return resultOrReg;
+  return ffvpEmitSphereMapCoord(allocState);
 }
 
 /* ffvpEmitBlendedEyeNormal @ 0x93510 (1220 bytes) */

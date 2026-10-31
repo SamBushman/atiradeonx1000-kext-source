@@ -53,9 +53,9 @@ data	DAT_001fc128	IrMul__opcodeInfo_opcode	CONFIRMED	opcode number of the record
 data	DAT_001fc12c	IrMul__opcodeInfo_word0c	INFERRED	constructor-initialised word at +0xc of IrMul__opcodeInfo (value not interpreted)
 data	DAT_001fc130	IrMul__opcodeInfo_word10	INFERRED	constructor-initialised word at +0x10 of IrMul__opcodeInfo (value not interpreted)
 data	DAT_001fc388	opcodeInfoTable_op54	CONFIRMED	slot 54 of the table Opcode__getInfo(opcode) indexes (table at DAT_001fc2b0, stride 4); holds the address of IrMul__opcodeInfo
-data	DAT_001fadc0	IrMul__opcodeInfo_001fc10c_guard	CONFIRMED	guard variable of the function-local static IrMul__opcodeInfo_001fc10c: ___cxa_guard_acquire/release in Compiler__initStaticLocals brackets its initialization, which registers IrMul__opcodeInfo_atexit_dtor_001fc120
-data	DAT_001fc10c	IrMul__opcodeInfo_001fc10c	CONFIRMED	function-local static IrMul__opcodeInfo_001fc10c built in Compiler__initStaticLocals (vtable pointer at +0, stored with PTR_DAT+8, destroyed by IrMul__opcodeInfo_atexit_dtor_001fc120)
-data	DAT_001fc114	IrMul__opcodeInfo_001fc10c_opcode	CONFIRMED	opcode number of the record: opcode 182; equals its slot index in opcodeInfoTable (the dtor name IrMul__opcodeInfo_atexit_dtor_001fc120 carries an address instead)
+data	DAT_001fadc0	IrMul__opcodeInfo_001fc10c_guard	CONFIRMED	guard variable of the function-local static IrMul__opcodeInfo_001fc10c: ___cxa_guard_acquire/release in Compiler__initStaticLocals brackets its initialization, which registers IrMul__opcodeInfo_001fc10c_atexit_dtor
+data	DAT_001fc10c	IrMul__opcodeInfo_001fc10c	CONFIRMED	function-local static IrMul__opcodeInfo_001fc10c built in Compiler__initStaticLocals (vtable pointer at +0, stored with PTR_DAT+8, destroyed by IrMul__opcodeInfo_001fc10c_atexit_dtor)
+data	DAT_001fc114	IrMul__opcodeInfo_001fc10c_opcode	CONFIRMED	opcode number of the record: opcode 182; equals its slot index in opcodeInfoTable (the dtor name IrMul__opcodeInfo_001fc10c_atexit_dtor carries an address instead)
 data	DAT_001fc118	IrMul__opcodeInfo_001fc10c_word0c	INFERRED	constructor-initialised word at +0xc of IrMul__opcodeInfo_001fc10c (value not interpreted)
 data	DAT_001fc11c	IrMul__opcodeInfo_001fc10c_word10	INFERRED	constructor-initialised word at +0x10 of IrMul__opcodeInfo_001fc10c (value not interpreted)
 data	DAT_001fc588	opcodeInfoTable_op182	CONFIRMED	slot 182 of the table Opcode__getInfo(opcode) indexes (table at DAT_001fc2b0, stride 4); holds the address of IrMul__opcodeInfo_001fc10c

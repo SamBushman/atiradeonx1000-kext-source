@@ -38,4 +38,4 @@ func	FUN_000f8c88	OpcodeTemplate__tableOffsetForIlOpcode	INFERRED	maps ilOpcode 
 func	FUN_000e144c	Compiler__setSamplerCaps	INFERRED	stores five parameters into compiler+0x588/58c/590/594/598 (arg 3 unused)
 func	FUN_000e13a8	Compiler__setFlag31c	CONFIRMED	stores 1 at compiler+0x31c
 func	FUN_000a1040	arbProgramTypeCode	INFERRED	returns 0x125 when flag!=0 else 2 (arg 1 unused); precedes arbProgramIsValid
-func	FUN_000934f0	ffvpEmitSphereMapCoord_0934f0	CONFIRMED	body matches ffvpEmitSphereMapCoord (0x92570) line for line (0x4e8 cache, ffvpEmitReflectionVector, two temps, emit-table slots 0x12f4/0x12e4/0x1318/0x131c); the ledger size of 20 bytes is just the header
+func	FUN_000934f0	ffvpEmitSphereMapCoordChecked	CONFIRMED	20-byte wrapper (disassembled 0x934f0): cmpwi r3,0; if zero return 1; else tail-call ffvpEmitSphereMapCoord (0x92570). Earlier body was a mis-attributed duplicate of 0x92570

@@ -532,7 +532,7 @@ int Compiler__initStaticLocals()
     IrMul__opcodeInfo_001fc10c_word0c = 0;
     IrMul__opcodeInfo_001fc10c = vtablePtr;
     ___cxa_guard_release(&IrMul__opcodeInfo_001fc10c_guard);
-    atexit(IrMul__opcodeInfo_atexit_dtor_001fc120);
+    atexit(IrMul__opcodeInfo_001fc10c_atexit_dtor);
   }
   IrMul__opcodeInfo_001fc10c_opcode = 0xb6;
   IrMul__opcodeInfo_001fc10c_word0c = 0;

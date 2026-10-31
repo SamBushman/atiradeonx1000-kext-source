@@ -838,7 +838,7 @@
 0x93130	168	ffvpEmitPointSizePassThrough	part_013	converted
 0x931e0	404	ffvpEmitFogPassThrough	part_013	converted
 0x93390	352	ffvpEmitVectorLength	part_013	converted
-0x934f0	20	ffvpEmitSphereMapCoord_0934f0	part_014	converted
+0x934f0	20	ffvpEmitSphereMapCoordChecked	part_014	converted
 0x93510	1220	ffvpEmitBlendedEyeNormal	part_014	converted
 0x939e0	52	ffvpPrepareRescaledNormal	part_014	converted
 0x93a20	24	ffvpPrepareNormalizedNormal	part_014	converted
@@ -2087,7 +2087,7 @@
 0x114b28	40	IrAddInt__opcodeInfo_atexit_dtor_op198	part_034	converted
 0x114b50	40	IrAlloc__opcodeInfo_atexit_dtor_op17	part_034	converted
 0x114b78	40	IrCondJmp__opcodeInfo_atexit_dtor_op16	part_034	converted
-0x114ba0	40	IrMul__opcodeInfo_atexit_dtor_001fc120	part_034	converted
+0x114ba0	40	IrMul__opcodeInfo_001fc10c_atexit_dtor	part_034	converted
 0x114bc8	40	IrRet__opcodeInfo_atexit_dtor_op15	part_034	converted
 0x114bf0	40	IrFloor__opcodeInfo_atexit_dtor_op56	part_034	converted
 0x114c18	40	IrFloorFloat__opcodeInfo_atexit_dtor_op21	part_034	converted

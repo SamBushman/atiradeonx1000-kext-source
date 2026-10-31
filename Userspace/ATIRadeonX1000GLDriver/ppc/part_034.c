@@ -336,8 +336,8 @@ int IrCondJmp__opcodeInfo_atexit_dtor_op16()
   return;
 }
 
-/* IrMul__opcodeInfo_atexit_dtor_001fc120 @ 0x114ba0 (40 bytes) */
-int IrMul__opcodeInfo_atexit_dtor_001fc120()
+/* IrMul__opcodeInfo_001fc10c_atexit_dtor @ 0x114ba0 (40 bytes) */
+int IrMul__opcodeInfo_001fc10c_atexit_dtor()
 {
   IrMul__opcodeInfo_001fc10c = PTR_DAT_001e8f28 + 8;
   return;

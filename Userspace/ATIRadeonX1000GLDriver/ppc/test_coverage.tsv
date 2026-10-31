@@ -839,7 +839,7 @@
 0x93130	ffvpEmitPointSizePassThrough	168	no	indirect call (driver context / vtable / callback)
 0x931e0	ffvpEmitFogPassThrough	404	no	indirect call (driver context / vtable / callback)
 0x93390	ffvpEmitVectorLength	352	no	indirect call (driver context / vtable / callback)
-0x934f0	ffvpEmitSphereMapCoord_0934f0	20	yes	
+0x934f0	ffvpEmitSphereMapCoordChecked	20	yes	
 0x93510	ffvpEmitBlendedEyeNormal	1220	no	indirect call (driver context / vtable / callback)
 0x939e0	ffvpPrepareRescaledNormal	52	yes	
 0x93a20	ffvpPrepareNormalizedNormal	24	yes	
@@ -2087,7 +2087,7 @@
 0x114b28	IrAddInt__opcodeInfo_atexit_dtor_op198	40	yes	
 0x114b50	IrAlloc__opcodeInfo_atexit_dtor_op17	40	yes	
 0x114b78	IrCondJmp__opcodeInfo_atexit_dtor_op16	40	yes	
-0x114ba0	IrMul__opcodeInfo_atexit_dtor_001fc120	40	yes	
+0x114ba0	IrMul__opcodeInfo_001fc10c_atexit_dtor	40	yes	
 0x114bc8	IrRet__opcodeInfo_atexit_dtor_op15	40	yes	
 0x114bf0	IrFloor__opcodeInfo_atexit_dtor_op56	40	yes	
 0x114c18	IrFloorFloat__opcodeInfo_atexit_dtor_op21	40	yes	
