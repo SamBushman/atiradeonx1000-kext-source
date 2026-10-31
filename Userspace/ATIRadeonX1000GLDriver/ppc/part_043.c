@@ -1659,13 +1659,13 @@ int FUN_001494dc(inst, program, changedOut)
   int operandRecord;
   int operandRecord2;
   char selectByteD;
-  int iVar2;
+  int operandSelectWord;
   int flagBitResultE;
   int predicateResultD;
   int vcall64ResultD;
   int predicateResultC;
   int operandIdxA;
-  int iVar3;
+  int operandSelectWordB;
   int operandIdxB;
   int operandCountA;
   int *a0;
@@ -1676,7 +1676,7 @@ int FUN_001494dc(inst, program, changedOut)
   int operandCountSource;
   int identityResult;
   int instField3;
-  int *piVar6;
+  int *instFlagMask;
   int *laneByteCursorB;
   int *laneByteCursorA;
   int *newSource2;
@@ -1713,11 +1713,11 @@ int FUN_001494dc(inst, program, changedOut)
         IRInst__getOperandRecord(inst,0);
         predicateResultC = IRInst__operandKindClass(inst,0);
         if (predicateResultC == 0) {
-          piVar6 = (int *)(inst[5] & 2);
-          if ((piVar6 == (int *)0x0) && ((inst[5] & 0x200U) != 0)) {
-            lastOperandBuf0 = piVar6;
-            lastOperandSourceSave = piVar6;
-            lastOperandBuf2 = piVar6;
+          instFlagMask = (int *)(inst[5] & 2);
+          if ((instFlagMask == (int *)0x0) && ((inst[5] & 0x200U) != 0)) {
+            lastOperandBuf0 = instFlagMask;
+            lastOperandSourceSave = instFlagMask;
+            lastOperandBuf2 = instFlagMask;
             IRInst__readLastOperand(inst,&lastOperandBuf0);
             inst1 = lastOperandSourceSave;
             a0 = (int *)IRInst__getOperandSource(inst,1);
@@ -1728,7 +1728,7 @@ int FUN_001494dc(inst, program, changedOut)
                 predicateResultC == 0)))) {
               operandRecord2 = IRInst__getOperandRecord(inst,0);
               destSelectSaved = *(int *)(operandRecord2 + 0x10);
-              iVar2 = chainDestSelect;
+              operandSelectWord = chainDestSelect;
               newSource2 = inst1;
 LAB_00149704:
               IRInst__replaceBodyKeepLinks(inst,a0,program);
@@ -1793,11 +1793,11 @@ LAB_001499ec:
               if (newSource2 != (int *)0x0) {
                 IRInst__setExtraOperandSource(inst,newSource2,0,*(undefined4 *)(program + 8));
                 if (inst[0x21] == 0) {
-                  inst[0x27] = iVar2;
+                  inst[0x27] = operandSelectWord;
                 }
                 else {
                   operandRecord = IRInst__getOperandRecord(inst,inst[0x21]);
-                  *(int *)(operandRecord + 0x10) = iVar2;
+                  *(int *)(operandRecord + 0x10) = operandSelectWord;
                 }
               }
               inst[0x27] = destSelectSaved;
@@ -1816,7 +1816,7 @@ LAB_001499ec:
               WriteMask__fromUsedLanes(usedLanesOut,chainDestSelect);
               destSelectSaved = usedLanesOut[0];
               operandRecord2 = IRInst__getOperandRecord(inst,1);
-              iVar2 = *(int *)(operandRecord2 + 0x10);
+              operandSelectWord = *(int *)(operandRecord2 + 0x10);
               newSource2 = a0;
               a0 = inst1;
               goto LAB_00149704;
@@ -1880,10 +1880,10 @@ LAB_00149a40:
             selectWordB = *(undefined4 *)(operandRecord + 0x10);
           }
           operandRecord = IRInst__getOperandRecord(inst,0);
-          iVar3 = *(int *)(operandRecord + 0x10);
+          operandSelectWordB = *(int *)(operandRecord + 0x10);
           instField3 = inst[3];
           IRInst__replaceBodyKeepLinks(inst,sourceDef,program);
-          inst[0x27] = iVar3;
+          inst[0x27] = operandSelectWordB;
           inst[3] = instField3;
           if (newSource != 0) {
             IRInst__setExtraOperandSource(inst,newSource,0,*(undefined4 *)(program + 8));
@@ -1906,15 +1906,15 @@ int FUN_00149d54(inst, inst2, operandIndex)
   int operandIndex;
 {
   int operandRecord;
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
+  int operandBase;
+  uint modifiersA;
+  uint modifiersB;
   int operandSelect;
   
-  iVar1 = operandIndex * 0x18 + 0x80;
-  uVar2 = *(uint *)(inst + iVar1 + 0x20);
-  uVar3 = *(uint *)(inst2 + iVar1 + 0x20);
-  if (((uVar2 & 1) == (uVar3 & 1)) && ((uVar2 >> 1 & 1) == (uVar3 >> 1 & 1))) {
+  operandBase = operandIndex * 0x18 + 0x80;
+  modifiersA = *(uint *)(inst + operandBase + 0x20);
+  modifiersB = *(uint *)(inst2 + operandBase + 0x20);
+  if (((modifiersA & 1) == (modifiersB & 1)) && ((modifiersA >> 1 & 1) == (modifiersB >> 1 & 1))) {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     operandSelect = *(int *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(inst2,operandIndex);

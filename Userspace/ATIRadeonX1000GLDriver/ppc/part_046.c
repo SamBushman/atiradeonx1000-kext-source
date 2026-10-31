@@ -233,18 +233,18 @@ int ValueKey__fillSourceLaneUsage(ctx)
 }
 
 /* ValueKey__init @ 0x173938 (136 bytes) */
-int ValueKey__init(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int ValueKey__init(key, inst, compiler)
+  undefined4 *key;
+  undefined4 inst;
+  undefined4 compiler;
 {
   undefined4 *loopPtr;
   int loopRemaining;
   
   loopRemaining = 4;
-  param_1[0x2c] = param_2;
-  param_1[0x8e] = param_3;
-  loopPtr = param_1;
+  key[0x2c] = inst;
+  key[0x8e] = compiler;
+  loopPtr = key;
   do {
     loopPtr[8] = 0;
     loopPtr[4] = 0;
@@ -260,23 +260,23 @@ int ValueKey__init(param_1, param_2, param_3)
     loopPtr = loopPtr + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  _memset(param_1 + 0x2d,0,0x15c);
-  return ((int (*)())ValueKey__fillSourceLaneUsage)(param_1);
+  _memset(key + 0x2d,0,0x15c);
+  return ((int (*)())ValueKey__fillSourceLaneUsage)(key);
 }
 
 /* ValueKey__initCopy @ 0x1739c0 (136 bytes) */
-int ValueKey__initCopy(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int ValueKey__initCopy(key, inst, compiler)
+  undefined4 *key;
+  undefined4 inst;
+  undefined4 compiler;
 {
   undefined4 *loopPtr;
   int loopRemaining;
   
   loopRemaining = 4;
-  param_1[0x2c] = param_2;
-  param_1[0x8e] = param_3;
-  loopPtr = param_1;
+  key[0x2c] = inst;
+  key[0x8e] = compiler;
+  loopPtr = key;
   do {
     loopPtr[8] = 0;
     loopPtr[4] = 0;
@@ -292,8 +292,8 @@ int ValueKey__initCopy(param_1, param_2, param_3)
     loopPtr = loopPtr + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  _memset(param_1 + 0x2d,0,0x15c);
-  return ((int (*)())ValueKey__fillSourceLaneUsage)(param_1);
+  _memset(key + 0x2d,0,0x15c);
+  return ((int (*)())ValueKey__fillSourceLaneUsage)(key);
 }
 
 /* FUN_00173a48 @ 0x173a48 (176 bytes) */
@@ -2161,28 +2161,28 @@ undefined4 classifyConstantRange(double fparam_1)
 }
 
 /* ValueKey__rowLanesAllEqual @ 0x1763e4 (144 bytes) */
-int ValueKey__rowLanesAllEqual(param_1, param_2)
-  int param_1;
-  int param_2;
+int ValueKey__rowLanesAllEqual(key, row)
+  int key;
+  int row;
 {
   bool moreComponents;
   int callResult;
-  int iVar3;
+  int firstLaneValue;
   int loopIndex;
   int *loopPtr3;
   char *loopPtr2;
   
-  loopPtr2 = (char *)(param_2 * 4 + param_1 + 0x224);
-  loopPtr3 = (int *)(param_2 * 0x10 + param_1 + 0x168);
-  iVar3 = 0;
+  loopPtr2 = (char *)(row * 4 + key + 0x224);
+  loopPtr3 = (int *)(row * 0x10 + key + 0x168);
+  firstLaneValue = 0;
   loopIndex = 0;
   do {
     if (*loopPtr2 != '\0') {
-      if (iVar3 == 0) {
-        iVar3 = *loopPtr3;
+      if (firstLaneValue == 0) {
+        firstLaneValue = *loopPtr3;
       }
       else {
-        callResult = ((int (*)())Ptr__equalNonNull)(iVar3,*loopPtr3);
+        callResult = ((int (*)())Ptr__equalNonNull)(firstLaneValue,*loopPtr3);
         if (callResult == 0) {
           return 0;
         }
@@ -2392,25 +2392,25 @@ int FUN_0017672c(ctx)
 }
 
 /* FUN_001767d8 @ 0x1767d8 (124 bytes) */
-int FUN_001767d8(ctx, param_2)
+int FUN_001767d8(ctx, row)
   int ctx;
-  int param_2;
+  int row;
 {
-  int iVar1;
+  int valueNumber;
   int vcall14Result;
   int loopIndex;
-  int *piVar3;
+  int *valueCursor;
   
-  piVar3 = (int *)(param_2 * 4 + ctx + 0x178);
+  valueCursor = (int *)(row * 4 + ctx + 0x178);
   loopIndex = 1;
   while( true ) {
     vcall14Result = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0));
     if (vcall14Result < loopIndex) {
       return 1;
     }
-    iVar1 = *piVar3;
-    piVar3 = piVar3 + 4;
-    if (-1 < iVar1) break;
+    valueNumber = *valueCursor;
+    valueCursor = valueCursor + 4;
+    if (-1 < valueNumber) break;
     loopIndex = loopIndex + 1;
   }
   return 0;

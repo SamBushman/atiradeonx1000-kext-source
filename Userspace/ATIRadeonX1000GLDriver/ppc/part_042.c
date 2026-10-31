@@ -6239,7 +6239,7 @@ int FUN_00142974(pass, inst, fromLane, toLane)
   uint userIndexPlus1;
   int userByteOffset;
   int flag1WithoutFlag7Result;
-  int iVar8;
+  int userOrCount;
   uint loopIndex2;
   uint loopIndex;
   uint *userVec;
@@ -6399,7 +6399,7 @@ LAB_00142c3c:
                 userSlot = (int *)Vector__elementRefGrow(pendingUserVec,loopIndex);
                 userVecCopy = *(uint **)(pendingInst + 0x10);
               }
-              iVar8 = *userSlot;
+              userOrCount = *userSlot;
               if (loopIndex2 < *userVecCopy) {
                 userCountCopy = userVecCopy[1];
                 pendingUserVec = userVecCopy;
@@ -6414,7 +6414,7 @@ LAB_00142c3c:
                 earlierSlot = (int *)Vector__elementRefGrow(userVecCopy,loopIndex2);
                 pendingUserVec = *(uint **)(pendingInst + 0x10);
               }
-              if (iVar8 == *earlierSlot) break;
+              if (userOrCount == *earlierSlot) break;
             }
             if (loopIndex == loopIndex2) {
               if (loopIndex < *pendingUserVec) {
@@ -6431,22 +6431,22 @@ LAB_00142c3c:
               user = (int *)*userSlotB;
               if (user != (int *)0x0) {
                 if ((*(int *)(user[0x22] + 8) == 0x8e) ||
-                   (iVar8 = (**(code **)(*user + 0x5c))(user), iVar8 != 0)) {
+                   (userOrCount = (**(code **)(*user + 0x5c))(user), userOrCount != 0)) {
                   ((int (*)())FUN_00141044)(pendingUserWriteMaskOut,pass,user);
                   pendingUserWriteMask = pendingUserWriteMaskOut[0];
                   if (*(char *)((int)&pendingUserWriteMask + fromLane) != '\0') goto LAB_00142f88;
                 }
-                iVar8 = 0;
+                userOrCount = 0;
                 if ((user[5] & 0x200U) != 0) {
-                  iVar8 = IRInst__getOperandSource(user,user[0x21]);
+                  userOrCount = IRInst__getOperandSource(user,user[0x21]);
                 }
                 countBefore = vecCount;
-                if (iVar8 == pendingInst) {
+                if (userOrCount == pendingInst) {
                   if (vecCount < vecCapacity) {
-                    iVar8 = vecCount * 4;
-                    _memset(iVar8 + vecData,0,4);
+                    userOrCount = vecCount * 4;
+                    _memset(userOrCount + vecData,0,4);
                     vecCount = countBefore + 1;
-                    pushSlot = (undefined4 *)(iVar8 + vecData);
+                    pushSlot = (undefined4 *)(userOrCount + vecData);
                   }
                   else {
                     pushSlot = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);

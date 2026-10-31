@@ -1679,33 +1679,33 @@ int FUN_0015b4a4(inst, pass)
 }
 
 /* FUN_0015b8b8 @ 0x15b8b8 (188 bytes) */
-int FUN_0015b8b8(param_1, param_2)
-  int *param_1;
-  int param_2;
+int FUN_0015b8b8(instRef, lane)
+  int *instRef;
+  int lane;
 {
   int operandRecord;
-  int iVar1;
+  int opcodeOrSplatLane;
   int inst;
   
-  inst = *param_1;
+  inst = *instRef;
   while( true ) {
     if (((inst == 0) ||
-        (((iVar1 = *(int *)(*(int *)(inst + 0x88) + 8), iVar1 != 0x3a && (iVar1 != 0x3b)) ||
+        (((opcodeOrSplatLane = *(int *)(*(int *)(inst + 0x88) + 8), opcodeOrSplatLane != 0x3a && (opcodeOrSplatLane != 0x3b)) ||
          ((*(uint *)(inst + 0xb8) & 1) != 0)))) || (*(int *)(inst + 0x120) != 0)) {
       return 0;
     }
     operandRecord = IRInst__getOperandRecord(inst,0);
-    iVar1 = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
-    if (iVar1 < 0) {
+    opcodeOrSplatLane = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
+    if (opcodeOrSplatLane < 0) {
       return 0;
     }
-    if (iVar1 == param_2) break;
+    if (opcodeOrSplatLane == lane) break;
     if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
       return 0;
     }
     inst = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
   }
-  *param_1 = inst;
+  *instRef = inst;
   return 1;
 }
 
@@ -3617,7 +3617,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
   undefined4 foldStatus;
   undefined4 srcDestSelect;
   int operandSelectB;
-  undefined4 local_64;
+  undefined4 selectBytes;
   int operandSelect;
   uint savedCounters0;
   uint savedCounters1;
@@ -3664,11 +3664,11 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           operandRecord2 = IRInst__getOperandRecord(cloneResult,0);
           operandSelectB = *(int *)(operandRecord2 + 0x10);
           operandRecord2 = IRInst__getOperandRecord(operandVReg,0);
-          local_64 = *(undefined4 *)(operandRecord2 + 0x10);
+          selectBytes = *(undefined4 *)(operandRecord2 + 0x10);
           do {
             operandRecord2 = IRInst__getOperandRecord(cloneResult,0);
             if (*(char *)(laneIndex7 + operandRecord2 + 0x10) != '\x01') {
-              *(undefined1 *)((int)&local_64 + laneIndex7) = 1;
+              *(undefined1 *)((int)&selectBytes + laneIndex7) = 1;
             }
             moreLanes2 = laneIndex7 != 3;
             laneIndex7 = laneIndex7 + 1;
@@ -3698,7 +3698,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           IRInst__setOperandSource(node,2,sourceDef,0,*(undefined4 *)(pass + 8));
           operandRecord = IRInst__getOperandRecord(operandVReg,1);
           mixSrc2Select = *(undefined4 *)(operandRecord + 0x10);
-          WriteMask__fromSelectWord(&destWriteMask2,local_64);
+          WriteMask__fromSelectWord(&destWriteMask2,selectBytes);
           SelectWord__maskUnused(maskedSelect2,mixSrc2Select,destWriteMask2);
           operandRecord = IRInst__getOperandRecord(node,2);
           *(undefined4 *)(operandRecord + 0x10) = maskedSelect2[0];
@@ -3748,11 +3748,11 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           operandSelect = *(int *)(operandRecord + 0x10);
           operandRecord2 = IRInst__getOperandRecord(operandVReg,1);
           laneIndex2 = 0;
-          local_64 = *(undefined4 *)(operandRecord2 + 0x10);
+          selectBytes = *(undefined4 *)(operandRecord2 + 0x10);
           lanesLeft = 4;
           do {
             if (*(char *)((int)&operandSelect + laneIndex2) != '\x01') {
-              *(undefined1 *)((int)&local_64 + laneIndex2) = 4;
+              *(undefined1 *)((int)&selectBytes + laneIndex2) = 4;
             }
             laneIndex2 = laneIndex2 + 1;
             lanesLeft = lanesLeft + -1;
@@ -3783,7 +3783,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           *(undefined4 *)(operandRecord + 0x10) = nodeSrc1Select;
           sourceDef = IRInst__getOperandSource(operandVReg,1);
           IRInst__setOperandSource(node,2,sourceDef,0,*(undefined4 *)(pass + 8));
-          src2Select = local_64;
+          src2Select = selectBytes;
           operandRecord = IRInst__getOperandRecord(node,2);
           *(undefined4 *)(operandRecord + 0x10) = src2Select;
           Block__insertInstAfter(*(undefined4 *)(prevNode2 + 0x158),prevNode2,node);
@@ -3810,11 +3810,11 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
             lanesLeft4 = lanesLeft4 + -1;
           } while (lanesLeft4 != 0);
           laneIndex5 = 0;
-          local_64 = 0x10203;
+          selectBytes = 0x10203;
           do {
             operandRecord3 = IRInst__getOperandRecord(node,0);
             if (*(char *)(laneIndex5 + operandRecord3 + 0x10) != '\x01') {
-              *(undefined1 *)((int)&local_64 + laneIndex5) = 4;
+              *(undefined1 *)((int)&selectBytes + laneIndex5) = 4;
             }
             moreLanes2 = laneIndex5 != 3;
             laneIndex5 = laneIndex5 + 1;
@@ -3823,7 +3823,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           lanesLeft5 = 4;
           do {
             if (*(char *)((int)&operandSelectB + laneIndex6) == '\x01') {
-              *(undefined1 *)((int)&local_64 + laneIndex6) = 4;
+              *(undefined1 *)((int)&selectBytes + laneIndex6) = 4;
             }
             laneIndex6 = laneIndex6 + 1;
             lanesLeft5 = lanesLeft5 + -1;
@@ -3842,7 +3842,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           if (isMixResult == 0) {
             node[0x21] = 2;
             IRInst__setOperandSource(node,1,operandVReg,0,*(undefined4 *)(pass + 8));
-            src1Select = local_64;
+            src1Select = selectBytes;
             operandRecord = IRInst__getOperandRecord(node,1);
             *(undefined4 *)(operandRecord + 0x10) = src1Select;
             IRInst__setOperandSource(node,2,sourceDef,0,*(undefined4 *)(pass + 8));
@@ -7375,14 +7375,14 @@ int Scheduler__getDependencyLatency(scheduler, producerInst, consumerInst, opera
 }
 
 /* IRInst__writesTrackedRegister @ 0x164fc0 (84 bytes) */
-int IRInst__writesTrackedRegister(param_1)
-  int param_1;
+int IRInst__writesTrackedRegister(inst)
+  int inst;
 {
-  int iVar1;
+  int destRegisterKind;
   
-  if ((0 < *(int *)(param_1 + 0x80)) &&
-     ((((*(int *)(*(int *)(param_1 + 0x88) + 4) == 1 || ((*(uint *)(param_1 + 0x14) & 0x40) != 0))
-       || (iVar1 = *(int *)(param_1 + 0x98), iVar1 == 0x20)) || ((iVar1 == 0x21 || (iVar1 == 0x22)))
+  if ((0 < *(int *)(inst + 0x80)) &&
+     ((((*(int *)(*(int *)(inst + 0x88) + 4) == 1 || ((*(uint *)(inst + 0x14) & 0x40) != 0))
+       || (destRegisterKind = *(int *)(inst + 0x98), destRegisterKind == 0x20)) || ((destRegisterKind == 0x21 || (destRegisterKind == 0x22)))
       ))) {
     return 1;
   }
@@ -8897,7 +8897,7 @@ int Scheduler__computeNodePriorities(scheduler)
   int wordsLeft;
   int zeroOffset;
   bool hasDeepFetch;
-  bool bVar1;
+  bool repeatPass;
   bool moreBits;
   int balanceEnabled;
   int *bitSetCursor;
@@ -8915,7 +8915,7 @@ int Scheduler__computeNodePriorities(scheduler)
   uint *descendantMask;
   uint succEdgeCount;
   uint nodeCount;
-  undefined4 uVar19;
+  undefined4 flagValue;
   uint *allNodes;
   int maxHeight;
   int neighbourNode;
@@ -8933,11 +8933,11 @@ int Scheduler__computeNodePriorities(scheduler)
   loopIndex = 0;
   bitSetCursor = usedFetchSlots;
   do {
-    bVar1 = loopIndex == -1;
+    repeatPass = loopIndex == -1;
     bitSetCursor[2] = 0;
     loopIndex = loopIndex + 1;
     bitSetCursor = bitSetCursor + 1;
-  } while (bVar1);
+  } while (repeatPass);
   descendantMasks = Arena__alloc(*(undefined4 *)(*scheduler + 0x378),nodeCount << 2);
   wordsLeft = *usedFetchSlots;
   if (wordsLeft != 0) {
@@ -8994,18 +8994,18 @@ int Scheduler__computeNodePriorities(scheduler)
       balanceEnabled = Compiler__isOptionEnabled(*scheduler,0x28);
       if (balanceEnabled == 0) {
 LAB_001672b8:
-        uVar19 = 0;
+        flagValue = 0;
       }
       else {
         selectsRewritable = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node);
-        uVar19 = 1;
+        flagValue = 1;
         if (selectsRewritable == 0) goto LAB_001672b8;
       }
-      *(undefined4 *)(node + 0x5c) = uVar19;
+      *(undefined4 *)(node + 0x5c) = flagValue;
       succEdgeIndex = 0;
-      uVar19 = (**(code **)(*(int *)scheduler[2] + 0x4c))
+      flagValue = (**(code **)(*(int *)scheduler[2] + 0x4c))
                          ((int *)scheduler[2],*(undefined4 *)(node + 0x38));
-      *(undefined4 *)(node + 0x58) = uVar19;
+      *(undefined4 *)(node + 0x58) = flagValue;
       (**(code **)(*(int *)scheduler[2] + 0x48))((int *)scheduler[2],node);
       (**(code **)(*(int *)scheduler[2] + 0x44))((int *)scheduler[2],node);
       SchedModel__countIssuedNode(scheduler[2],node);
@@ -9083,16 +9083,16 @@ LAB_0016753c:
       if (*(int *)(node + 0x1c) == 0) {
         resourceSlot10Result = (**(code **)(*(int *)scheduler[2] + 0x28))
                           ((int *)scheduler[2],*(undefined4 *)(node + 0x38));
-        uVar19 = 0;
+        flagValue = 0;
         if (resourceSlot10Result != 0) goto LAB_00167574;
       }
       else {
 LAB_00167574:
-        uVar19 = 1;
+        flagValue = 1;
       }
       predEdges = *(uint **)(node + 0x44);
       predEdgeIndex = 0;
-      *(undefined4 *)(node + 0x1c) = uVar19;
+      *(undefined4 *)(node + 0x1c) = flagValue;
       vectorCount = predEdges[1];
       if (0 < (int)vectorCount) {
         do {
@@ -9121,10 +9121,10 @@ LAB_00167574:
               producerCountCursor = producerCountCursor + 4;
               neighbourNode = neighbourNode + -1;
             } while (neighbourNode != 0);
-            if ((*(int *)(edge + 0x1c) != 0) || (uVar19 = 0, *(int *)(node + 0x1c) != 0)) {
-              uVar19 = 1;
+            if ((*(int *)(edge + 0x1c) != 0) || (flagValue = 0, *(int *)(node + 0x1c) != 0)) {
+              flagValue = 1;
             }
-            *(undefined4 *)(edge + 0x1c) = uVar19;
+            *(undefined4 *)(edge + 0x1c) = flagValue;
             threadIsFetchClass = (**(code **)(*(int *)scheduler[3] + 0x20))
                               ((int *)scheduler[3],*(undefined4 *)(node + 0x38));
             if ((threadIsFetchClass == 0) &&
@@ -9522,7 +9522,7 @@ int Scheduler__insertOperandCopy(scheduler, node)
   int loopIndex;
   int copyNode;
   int *operandVReg;
-  undefined4 uVar3;
+  undefined4 copyDestField;
   int operandRecord;
   int operandCount;
   int fileBase0;
@@ -9532,9 +9532,9 @@ int Scheduler__insertOperandCopy(scheduler, node)
   int *inst;
   int compiler;
   int *target;
-  undefined4 local_48;
+  undefined4 copySelectOutB;
   undefined4 local_44;
-  undefined4 local_40;
+  undefined4 copySelectOutA;
   undefined4 readMaskOut [3];
   
   inst = *(int **)(node + 0x38);
@@ -9621,9 +9621,9 @@ LAB_00168120:
              ((operandBlock = operandVReg[0x56], operandBlock == scheduler[4] ||
               (operandBlock = *(uint *)(operandBlock + 0x118), *(uint *)(scheduler[1] + 0x474) == operandBlock)))) {
             copyNode = IRInst__getOperandRecord(inst,loopIndex);
-            FUN_000f32cc(&local_40,*(undefined4 *)(copyNode + 0x10));
+            FUN_000f32cc(&copySelectOutA,*(undefined4 *)(copyNode + 0x10));
             sourceDef2 = IRInst__getOperandSource(inst,loopIndex);
-            copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,sourceDef2,local_40,scheduler[0xb],node + 0xc);
+            copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,sourceDef2,copySelectOutA,scheduler[0xb],node + 0xc);
             IRInst__setOperandSource(inst,loopIndex,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
             operandRecord3 = IRInst__getOperandRecord(inst,loopIndex);
             SelectWord__readMask(readMaskOut,*(undefined4 *)(operandRecord3 + 0x10));
@@ -9640,15 +9640,15 @@ LAB_00168120:
 LAB_00168060:
   sourceDef2 = IRInst__getOperandSource(inst,1);
   copyNode = IRInst__getOperandRecord(inst,1);
-  FUN_000f32cc(&local_48,*(undefined4 *)(copyNode + 0x10));
-  copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,sourceDef2,local_48,scheduler[0xb],node + 0xc);
+  FUN_000f32cc(&copySelectOutB,*(undefined4 *)(copyNode + 0x10));
+  copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,sourceDef2,copySelectOutB,scheduler[0xb],node + 0xc);
   IRInst__setOperandSource(inst,1,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
   operandRecord = IRInst__getOperandRecord(inst,1);
   SelectWord__readMask(&local_44,*(undefined4 *)(operandRecord + 0x10));
   ((int (*)())Scheduler__addDataDependencyEdge)(scheduler,copyNode,node,1,0,local_44,in_r9);
-  uVar3 = *(undefined4 *)(*(int *)(copyNode + 0x38) + 0x94);
+  copyDestField = *(undefined4 *)(*(int *)(copyNode + 0x38) + 0x94);
   operandRecord = IRInst__getOperandRecord(*(int *)(copyNode + 0x38),0);
-  *(undefined4 *)(operandRecord + 8) = uVar3;
+  *(undefined4 *)(operandRecord + 8) = copyDestField;
   *(undefined4 *)(operandRecord + 0xc) = 1;
   *(undefined4 *)(copyNode + 100) = 1;
   DList__unlink(node);

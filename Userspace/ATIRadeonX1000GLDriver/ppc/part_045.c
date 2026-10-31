@@ -853,28 +853,28 @@ int Scheduler__enqueueReadyNode(scheduler, node)
   int consumerCounterCursor;
   int readyList;
   int nextCompareNode;
-  int iVar2;
+  int checkResult;
   int componentsLeft;
   int *nodeInst;
   
   Scheduler__isNodeReady(scheduler,node);
   readyList = scheduler + 0xf8;
   if (*(int *)(node + 0x68) == 0) {
-    iVar2 = (**(code **)(**(int **)(scheduler + 0xc) + 0x20))
+    checkResult = (**(code **)(**(int **)(scheduler + 0xc) + 0x20))
                       (*(int **)(scheduler + 0xc),*(undefined4 *)(node + 0x38));
-    if ((iVar2 == 0) &&
-       (iVar2 = (**(code **)(**(int **)(scheduler + 0xc) + 0x24))
-                          (*(int **)(scheduler + 0xc),*(undefined4 *)(node + 0x38)), iVar2 == 0)) {
+    if ((checkResult == 0) &&
+       (checkResult = (**(code **)(**(int **)(scheduler + 0xc) + 0x24))
+                          (*(int **)(scheduler + 0xc),*(undefined4 *)(node + 0x38)), checkResult == 0)) {
       if (((*(int *)(node + 0x58) == 0) &&
-          (iVar2 = IRInst__isProjectionOfClass26or3a(*(undefined4 *)(node + 0x38)), iVar2 == 0)) &&
-         (iVar2 = IRInst__isProjectionOfClass44(*(undefined4 *)(node + 0x38)), iVar2 == 0)) {
+          (checkResult = IRInst__isProjectionOfClass26or3a(*(undefined4 *)(node + 0x38)), checkResult == 0)) &&
+         (checkResult = IRInst__isProjectionOfClass44(*(undefined4 *)(node + 0x38)), checkResult == 0)) {
         ((int (*)())Scheduler__issueNode)(scheduler,node);
         return;
       }
       nodeInst = *(int **)(node + 0x38);
       if ((((nodeInst[5] & 0x20U) == 0) && (nodeInst[0x20] != 0)) &&
-         ((iVar2 = RegKind__flagBit0(nodeInst[0x26]), iVar2 != 0 &&
-          (((nodeInst[5] & 2U) == 0 && (iVar2 = (**(code **)(*nodeInst + 0x50))(nodeInst), iVar2 == 0)))))
+         ((checkResult = RegKind__flagBit0(nodeInst[0x26]), checkResult != 0 &&
+          (((nodeInst[5] & 2U) == 0 && (checkResult = (**(code **)(*nodeInst + 0x50))(nodeInst), checkResult == 0)))))
          ) {
         componentsLeft = 4;
         consumerCounterCursor = node;

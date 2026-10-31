@@ -4523,3 +4523,34 @@ local	FUN_00141090	param_1	outMask	INFERRED	receives the lane mask: read mask & 
 local	FUN_00141090	param_2	packCtx	INFERRED	pack context
 local	FUN_00141090	local_28	readMaskOut	INFERRED	out record of FUN_00140e70 for inst
 local	FUN_00141090	local_24	writeMaskOut	INFERRED	out record of FUN_00141044 for inst, then inverted
+local	ValueKey__rowLanesAllEqual	param_1	key	INFERRED	value key with per-row lane values at +0x168 and lane flags at +0x224
+local	ValueKey__rowLanesAllEqual	param_2	row	INFERRED	operand row to test
+local	ValueKey__rowLanesAllEqual	iVar3	firstLaneValue	INFERRED	first lane value seen in the row, compared with the others
+local	ValueKey__initCopy	param_1	key	INFERRED	value key being initialised
+local	ValueKey__initCopy	param_2	inst	INFERRED	inst the key describes (stored at key[0x2c])
+local	ValueKey__initCopy	param_3	compiler	INFERRED	compiler (stored at key[0x8e], key +0x238)
+local	ValueKey__init	param_1	key	INFERRED	value key being initialised
+local	ValueKey__init	param_2	inst	INFERRED	inst the key describes (stored at key[0x2c])
+local	ValueKey__init	param_3	compiler	INFERRED	compiler (stored at key[0x8e], key +0x238)
+local	Scheduler__insertOperandCopy	uVar3	copyDestField	INFERRED	+0x94 field of the copy inst stored to the operand record +8
+local	Scheduler__insertOperandCopy	local_48	copySelectOutB	INFERRED	FUN_000f32cc out value used to create the second copy node
+local	Scheduler__insertOperandCopy	local_40	copySelectOutA	INFERRED	FUN_000f32cc out value used to create the first copy node
+local	Scheduler__enqueueReadyNode	iVar2	checkResult	INFERRED	vtable / classification results in the enqueue decision chain
+local	FUN_0015b8b8	param_1	instRef	INFERRED	address of the inst pointer: read at entry, advanced to the chain end on success
+local	FUN_0015b8b8	param_2	lane	INFERRED	lane the splat component must equal
+local	FUN_0015b8b8	iVar1	opcodeOrSplatLane	INFERRED	one register: opcode of the inst, then its splat component
+local	FUN_001494dc	iVar2	operandSelectWord	INFERRED	one register: chained dest select and operand select words stored back to the inst
+local	FUN_001494dc	iVar3	operandSelectWordB	INFERRED	select word of operand record 0 stored to inst[0x27]
+local	FUN_001494dc	piVar6	instFlagMask	INFERRED	inst flag bit 1 (inst[5] & 2), zero-tested and used to clear the last-operand buffers
+local	FUN_00149d54	iVar1	operandBase	INFERRED	operand index * 0x18 + 0x80: byte offset of the operand modifiers
+local	FUN_00149d54	uVar2	modifiersA	INFERRED	modifier word of inst's operand
+local	FUN_00149d54	uVar3	modifiersB	INFERRED	modifier word of inst2's operand
+local	Scheduler__computeNodePriorities	bVar1	repeatPass	INFERRED	loop-again flag of the node-order passes
+local	Scheduler__computeNodePriorities	uVar19	flagValue	INFERRED	0/1 flag stored into node and edge fields (+0x5c, +0x1c)
+local	Inst__tryMix	local_64	selectBytes	INFERRED	select bytes being rebuilt lane by lane
+local	IRInst__writesTrackedRegister	param_1	inst	INFERRED	inst whose dest register kind is tested
+local	IRInst__writesTrackedRegister	iVar1	destRegisterKind	INFERRED	register kind field (+0x98) tested against 0x20..0x22
+local	FUN_001767d8	param_2	row	INFERRED	operand row
+local	FUN_001767d8	iVar1	valueNumber	INFERRED	value number read from the row; negative means unknown
+local	FUN_001767d8	piVar3	valueCursor	INFERRED	walks the value numbers of the row, four words per step
+local	FUN_00142974	iVar8	userOrCount	INFERRED	one register: user element, extra source, and push byte offset
