@@ -862,24 +862,24 @@ int FUN_001745f0(ctx)
 }
 
 /* FUN_001746c8 @ 0x1746c8 (252 bytes) */
-int FUN_001746c8(compiler, param_2)
+int FUN_001746c8(compiler, pointerKey)
   int compiler;
-  undefined4 param_2;
+  undefined4 pointerKey;
 {
-  undefined4 *puVar1;
+  undefined4 *pointerRecord;
   undefined4 *allocation;
-  int *piVar3;
+  int *recordVectorSlot;
   uint vectorFilledCount;
   undefined4 arena;
   uint *vector;
   
-  **(undefined4 **)(compiler + 0x3f4) = param_2;
-  puVar1 = (undefined4 *)
+  **(undefined4 **)(compiler + 0x3f4) = pointerKey;
+  pointerRecord = (undefined4 *)
            HashTable__find(*(undefined4 *)(compiler + COMP_pointerSet),*(undefined4 *)(compiler + 0x3f4));
-  if (puVar1 == (undefined4 *)0x0) {
+  if (pointerRecord == (undefined4 *)0x0) {
     arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x34);
-    puVar1 = allocation + 1;
+    pointerRecord = allocation + 1;
     *allocation = arena;
     allocation[3] = 0xffffffff;
     allocation[0xc] = 0;
@@ -891,98 +891,98 @@ int FUN_001746c8(compiler, param_2)
     allocation[9] = 0;
     allocation[10] = 0;
     allocation[0xb] = 0;
-    allocation[1] = param_2;
+    allocation[1] = pointerKey;
     allocation[8] = 0;
-    HashTable__insert(*(undefined4 *)(compiler + COMP_pointerSet),puVar1);
+    HashTable__insert(*(undefined4 *)(compiler + COMP_pointerSet),pointerRecord);
     vector = *(uint **)(compiler + 0x3dc);
     vectorFilledCount = vector[1];
     if (vectorFilledCount < *vector) {
       _memset(vectorFilledCount * 4 + vector[2],0,4);
-      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      recordVectorSlot = (int *)(vectorFilledCount * 4 + vector[2]);
       vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
+      recordVectorSlot = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
-    *piVar3 = (int)puVar1;
+    *recordVectorSlot = (int)pointerRecord;
   }
-  return puVar1;
+  return pointerRecord;
 }
 
 /* FUN_001747c4 @ 0x1747c4 (196 bytes) */
-int FUN_001747c4(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
-  int param_4;
+int FUN_001747c4(key, scopeIndex, outermostScope, compiler)
+  undefined4 key;
+  uint scopeIndex;
+  int outermostScope;
+  int compiler;
 {
   uint vectorFilledCount;
-  undefined4 *puVar2;
+  undefined4 *scopeTableSlot;
   int callResult;
-  int iVar4;
+  int scopeByteOffset;
   uint *vector;
   
-  if (param_3 <= (int)param_2) {
-    iVar4 = param_2 << 2;
+  if (outermostScope <= (int)scopeIndex) {
+    scopeByteOffset = scopeIndex << 2;
     do {
-      vector = *(uint **)(param_4 + 0x40c);
-      if (param_2 < *vector) {
+      vector = *(uint **)(compiler + 0x40c);
+      if (scopeIndex < *vector) {
         vectorFilledCount = vector[1];
-        if (vectorFilledCount <= param_2) {
-          _memset(vectorFilledCount * 4 + vector[2],0,(param_2 - vectorFilledCount) * 4 + 4);
-          vector[1] = param_2 + 1;
+        if (vectorFilledCount <= scopeIndex) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(scopeIndex - vectorFilledCount) * 4 + 4);
+          vector[1] = scopeIndex + 1;
         }
-        puVar2 = (undefined4 *)(iVar4 + vector[2]);
+        scopeTableSlot = (undefined4 *)(scopeByteOffset + vector[2]);
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(vector,param_2);
+        scopeTableSlot = (undefined4 *)Vector__elementRefGrow(vector,scopeIndex);
       }
-      callResult = HashTable__find(*puVar2,param_1);
+      callResult = HashTable__find(*scopeTableSlot,key);
       if (callResult != 0) {
         return callResult;
       }
-      param_2 = param_2 - 1;
-      iVar4 = iVar4 + -4;
-    } while (param_3 <= (int)param_2);
+      scopeIndex = scopeIndex - 1;
+      scopeByteOffset = scopeByteOffset + -4;
+    } while (outermostScope <= (int)scopeIndex);
   }
   return 0;
 }
 
 /* FUN_00174888 @ 0x174888 (196 bytes) */
-int FUN_00174888(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
-  int param_4;
+int FUN_00174888(key, scopeIndex, outermostScope, compiler)
+  undefined4 key;
+  uint scopeIndex;
+  int outermostScope;
+  int compiler;
 {
   uint vectorFilledCount;
-  undefined4 *puVar2;
+  undefined4 *scopeTableSlot;
   int callResult;
-  int iVar4;
+  int scopeByteOffset;
   uint *vector;
   
-  if (param_3 <= (int)param_2) {
-    iVar4 = param_2 << 2;
+  if (outermostScope <= (int)scopeIndex) {
+    scopeByteOffset = scopeIndex << 2;
     do {
-      vector = *(uint **)(param_4 + 0x408);
-      if (param_2 < *vector) {
+      vector = *(uint **)(compiler + 0x408);
+      if (scopeIndex < *vector) {
         vectorFilledCount = vector[1];
-        if (vectorFilledCount <= param_2) {
-          _memset(vectorFilledCount * 4 + vector[2],0,(param_2 - vectorFilledCount) * 4 + 4);
-          vector[1] = param_2 + 1;
+        if (vectorFilledCount <= scopeIndex) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(scopeIndex - vectorFilledCount) * 4 + 4);
+          vector[1] = scopeIndex + 1;
         }
-        puVar2 = (undefined4 *)(iVar4 + vector[2]);
+        scopeTableSlot = (undefined4 *)(scopeByteOffset + vector[2]);
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(vector,param_2);
+        scopeTableSlot = (undefined4 *)Vector__elementRefGrow(vector,scopeIndex);
       }
-      callResult = HashTable__find(*puVar2,param_1);
+      callResult = HashTable__find(*scopeTableSlot,key);
       if (callResult != 0) {
         return callResult;
       }
-      param_2 = param_2 - 1;
-      iVar4 = iVar4 + -4;
-    } while (param_3 <= (int)param_2);
+      scopeIndex = scopeIndex - 1;
+      scopeByteOffset = scopeByteOffset + -4;
+    } while (outermostScope <= (int)scopeIndex);
   }
   return 0;
 }
@@ -1900,12 +1900,12 @@ LAB_00175ce8:
 }
 
 /* Program__valueNumberInst @ 0x175dac (1208 bytes) */
-int Program__valueNumberInst(program, valueNumber, param_3, keyRef, param_5)
+int Program__valueNumberInst(program, valueNumber, outermostScope, keyRef, block)
   int program;
   uint valueNumber;
-  undefined4 param_3;
+  undefined4 outermostScope;
   int *keyRef;
-  undefined4 param_5;
+  undefined4 block;
 {
   int valueKey2;
   int currentDefinition2;
@@ -1947,10 +1947,10 @@ LAB_00175e58:
         if (canonicalizeCommutativeOperandsResult != 0) {
           ((int (*)())ValueKey__rebuild)(*keyRef);
         }
-        callResult = ((int (*)())FUN_001758d8)(*keyRef,valueNumber,param_3,program);
+        callResult = ((int (*)())FUN_001758d8)(*keyRef,valueNumber,outermostScope,program);
         ((int (*)())FUN_00175b40)(*keyRef);
         ValueKey__propagateLaneValues(*keyRef);
-        callResult2 = ((int (*)())FUN_00174888)(*keyRef,valueNumber,param_3,program);
+        callResult2 = ((int (*)())FUN_00174888)(*keyRef,valueNumber,outermostScope,program);
         if (callResult2 == 0) {
           iVar2 = (**(code **)(**(int **)(*keyRef + 0xb0) + 100))(*(int **)(*keyRef + 0xb0));
           if ((((iVar2 == 0) &&
@@ -1958,13 +1958,13 @@ LAB_00175e58:
                                   (*(int **)(*keyRef + 0xb0)), iVar2 == 0)) &&
               (iVar2 = FUN_00172fb8(*keyRef), iVar2 == 0)) &&
              (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),8), iVar2 != 0)) {
-            callResult2 = ((int (*)())FUN_001747c4)(*keyRef,valueNumber,param_3,program);
+            callResult2 = ((int (*)())FUN_001747c4)(*keyRef,valueNumber,outermostScope,program);
             if ((callResult2 != 0) && (callResult2 = ((int (*)())FUN_00173cdc)(*keyRef,callResult2), callResult2 != 0)) {
               keyInst = *(int *)(*keyRef + 0xb0);
               currentDefinition2 = VReg__currentDefinition(*(undefined4 *)(keyInst + 0xa4),*(undefined4 *)(program + 0x3a0),
                                    *(uint *)(program + 8));
               if ((keyInst == *(int *)(currentDefinition2 + 0xb0)) &&
-                 (currentDefinition2 = Program__tryEliminateRedundantCopy(program,*(undefined4 *)(*keyRef + 0xb0),param_5), currentDefinition2 != 0
+                 (currentDefinition2 = Program__tryEliminateRedundantCopy(program,*(undefined4 *)(*keyRef + 0xb0),block), currentDefinition2 != 0
                  )) goto LAB_0017624c;
               goto LAB_001760e4;
             }
@@ -2000,12 +2000,12 @@ LAB_001760e4:
                                   (*(int **)(*keyRef + 0xb0)), valueKey2 == 0)) &&
               (valueKey2 = FUN_00172fb8(*keyRef), valueKey2 == 0)) &&
              (((callResult != 0 && (callResult = ((int (*)())FUN_00173754)(*keyRef,callResult), callResult != 0)) ||
-              (callResult = ((int (*)())FUN_0017494c)(*keyRef,valueNumber,param_3), callResult != 0)))) {
+              (callResult = ((int (*)())FUN_0017494c)(*keyRef,valueNumber,outermostScope), callResult != 0)))) {
             inst = *(int *)(*keyRef + 0xb0);
             currentDefinition = VReg__currentDefinition(*(undefined4 *)(inst + 0xa4),*(undefined4 *)(program + 0x3a0),
                                  *(uint *)(program + 8));
             if ((inst == *(int *)(currentDefinition + 0xb0)) &&
-               (currentDefinition = Program__tryEliminateRedundantCopy(program,inst,param_5), currentDefinition != 0)) goto LAB_0017624c;
+               (currentDefinition = Program__tryEliminateRedundantCopy(program,inst,block), currentDefinition != 0)) goto LAB_0017624c;
           }
           vcall68Result = (**(code **)(**(int **)(*keyRef + 0xb0) + 0x68))(*(int **)(*keyRef + 0xb0));
           if (vcall68Result == 0) {
@@ -2026,7 +2026,7 @@ LAB_001760e4:
           }
           goto LAB_00176244;
         }
-        eliminateRedundantInstResult = ((int (*)())Program__eliminateRedundantInst)(callResult2,*(undefined4 *)(*keyRef + 0xb0),param_5,program);
+        eliminateRedundantInstResult = ((int (*)())Program__eliminateRedundantInst)(callResult2,*(undefined4 *)(*keyRef + 0xb0),block,program);
         if (eliminateRedundantInstResult == 0) goto LAB_00176244;
         *keyRef = callResult2;
         vcall64Result = (**(code **)(**(int **)(callResult2 + 0xb0) + 100))(*(int **)(callResult2 + 0xb0));
@@ -2044,7 +2044,7 @@ LAB_001760e4:
     else {
       valueKey = ((int (*)())FUN_001745f0)(valueKey);
       if ((valueKey == 0) ||
-         (valueKey = Program__tryEliminateRedundantCopy(program,*(undefined4 *)(*keyRef + 0xb0),param_5), valueKey == 0)) {
+         (valueKey = Program__tryEliminateRedundantCopy(program,*(undefined4 *)(*keyRef + 0xb0),block), valueKey == 0)) {
         valueKey = *keyRef;
         goto LAB_00175e58;
       }

@@ -3958,37 +3958,38 @@ int ThreadModel__vslot4(this, node)
 }
 
 /* FUN_001729bc @ 0x1729bc (108 bytes) */
-int FUN_001729bc(param_1)
-  int param_1;
+int FUN_001729bc(key)
+  int key;
 {
-  int *piVar1;
-  int iVar2;
+  int *keyPtr;
+  int innerKeyCursor;
+  int lanesLeft;
   int loopIndex;
-  int iVar4;
-  int iVar5;
+  int outerKeyCursor;
+  int innerCountdown;
   
   loopIndex = 1;
-  iVar4 = param_1;
+  outerKeyCursor = key;
   do {
-    iVar2 = param_1;
-    iVar5 = loopIndex;
-    if (*(int *)(param_1 + 0x20) == *(int *)(iVar4 + 0x24)) {
+    innerKeyCursor = key;
+    innerCountdown = loopIndex;
+    if (*(int *)(key + 0x20) == *(int *)(outerKeyCursor + 0x24)) {
       return 1;
     }
-    while (iVar5 + -1 != 0) {
-      piVar1 = (int *)(iVar2 + 0x24);
-      iVar2 = iVar2 + 4;
-      iVar5 = iVar5 + -1;
-      if (*(int *)(iVar4 + 0x24) == *piVar1) {
+    while (innerCountdown + -1 != 0) {
+      keyPtr = (int *)(innerKeyCursor + 0x24);
+      innerKeyCursor = innerKeyCursor + 4;
+      innerCountdown = innerCountdown + -1;
+      if (*(int *)(outerKeyCursor + 0x24) == *keyPtr) {
         return 1;
       }
     }
-    iVar2 = 4 - loopIndex;
+    lanesLeft = 4 - loopIndex;
     do {
       loopIndex = loopIndex + 1;
-      iVar4 = iVar4 + 4;
-      iVar2 = iVar2 + -1;
-      if (iVar2 == 0) {
+      outerKeyCursor = outerKeyCursor + 4;
+      lanesLeft = lanesLeft + -1;
+      if (lanesLeft == 0) {
         return 0;
       }
     } while (loopIndex < 1);

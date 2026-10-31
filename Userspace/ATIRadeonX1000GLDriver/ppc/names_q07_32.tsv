@@ -4288,3 +4288,42 @@ local	Scheduler__addOperandDependencyEdges	local_64	maskedUnusedOut	INFERRED	Sel
 local	Scheduler__addOperandDependencyEdges	local_60	readMaskOutB	INFERRED	SelectWord__readMask out value for the masked select
 local	Scheduler__addOperandDependencyEdges	local_5c	maskedUnusedOutB	INFERRED	SelectWord__maskUnused out value for the final select
 local	Scheduler__addOperandDependencyEdges	local_58	readMaskOutC	INFERRED	SelectWord__readMask out value copied to producerLaneMask
+local	FUN_001747c4	param_1	key	INFERRED	key looked up in each scope's hash table
+local	FUN_001747c4	param_2	scopeIndex	INFERRED	scope index the lookup starts at; decremented toward outermostScope
+local	FUN_001747c4	param_3	outermostScope	INFERRED	lowest scope index searched
+local	FUN_001747c4	param_4	compiler	INFERRED	compiler whose +0x40c vector holds the per-scope hash tables
+local	FUN_001747c4	puVar2	scopeTableSlot	INFERRED	address of the hash table pointer for the scope
+local	FUN_001747c4	iVar4	scopeByteOffset	INFERRED	scope index * 4, stepped down with scopeIndex
+local	FUN_00174888	param_1	key	INFERRED	key looked up in each scope's hash table
+local	FUN_00174888	param_2	scopeIndex	INFERRED	scope index the lookup starts at; decremented toward outermostScope
+local	FUN_00174888	param_3	outermostScope	INFERRED	lowest scope index searched
+local	FUN_00174888	param_4	compiler	INFERRED	compiler whose +0x408 vector holds the per-scope hash tables
+local	FUN_00174888	puVar2	scopeTableSlot	INFERRED	address of the hash table pointer for the scope
+local	FUN_00174888	iVar4	scopeByteOffset	INFERRED	scope index * 4, stepped down with scopeIndex
+local	FUN_001746c8	param_2	pointerKey	INFERRED	pointer interned in the compiler's pointer set (scratch key +0x3f4)
+local	FUN_001746c8	puVar1	pointerRecord	INFERRED	found or newly created record (allocation + 4)
+local	FUN_001746c8	piVar3	recordVectorSlot	INFERRED	vector slot receiving the new record
+local	FUN_00155654	param_4	pass	INFERRED	*(param_4+8) is the compiler, +0x478 the stamp
+use	FUN_00155654	iVar1	instOpcode	INFERRED	opcode of inst2 (0x17 / 0x19 accepted)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x88\)\ \+\ 8\);$	+2
+use	FUN_00155654	iVar1	targetTraitResult	INFERRED	target hook / opcode traits results in the legality chain	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x88\)\)\(piVar2\);$	+4
+use	FUN_00155654	iVar1	vcall5cResult	INFERRED	vtable +0x5c results on the operand sources	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x5c\)\)\(piVar2\);$	+2
+use	FUN_00155654	iVar1	vcall5cResult	INFERRED	vtable +0x5c results on the operand sources	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x5c\)\)\(piVar3\);$	+2
+use	FUN_00155654	iVar1	vcall5cResult	INFERRED	vtable +0x5c results on the operand sources	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x5c\)\)\(piVar2\);$@2	+2
+use	FUN_00155654	iVar4	passStamp	INFERRED	*(param_4+0x478) stamp	^\s*iVar4\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x478\);$	+1
+use	FUN_00155654	iVar4	passStamp	INFERRED	*(param_4+0x478) stamp	^\s*if\ \(iVar4\ <\ piVar2\[0x58\]\)\ \{$	+1
+use	FUN_00155654	iVar4	passStamp	INFERRED	*(param_4+0x478) stamp	^\s*piVar2\[0x58\]\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_00155654	iVar4	passStamp	INFERRED	*(param_4+0x478) stamp	^\s*iVar6\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_00155654	iVar4	passStamp	INFERRED	*(param_4+0x478) stamp	^\s*if\ \(iVar4\ <\ \*\(int\ \*\)\(iVar5\ \+\ 0x160\)\)\ \{$	+1
+use	FUN_00155654	iVar4	passStamp	INFERRED	*(param_4+0x478) stamp	^\s*if\ \(iVar4\ <\ \*\(int\ \*\)\(iVar5\ \+\ 0x160\)\)\ \{$@2	+1
+local	FUN_00155654	iVar6	passStampNext	INFERRED	stamp + 1 for rewired insts
+local	FUN_00155654	local_28	composedSelectOut	INFERRED	SelectWord__compose out value
+local	FUN_001729bc	param_1	key	INFERRED	value key: +0x20 lane words (offsets 0x20..0x2c)
+local	FUN_001729bc	piVar1	keyPtr	INFERRED	address of the inner lane word compared with the outer one
+use	FUN_001729bc	iVar2	innerKeyCursor	INFERRED	cursor along the lane words in the inner search	^\s*iVar2\ =\ param_1;$	+1
+use	FUN_001729bc	iVar2	innerKeyCursor	INFERRED	cursor along the lane words in the inner search	^\s*piVar1\ =\ \(int\ \*\)\(iVar2\ \+\ 0x24\);$	+2
+use	FUN_001729bc	iVar2	lanesLeft	INFERRED	4 - lane index: lanes left in the outer scan	^\s*iVar2\ =\ 4\ \-\ iVar3;$	+1
+use	FUN_001729bc	iVar2	lanesLeft	INFERRED	4 - lane index: lanes left in the outer scan	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+local	FUN_001729bc	iVar4	outerKeyCursor	INFERRED	cursor along the lane words in the outer scan
+local	FUN_001729bc	iVar5	innerCountdown	INFERRED	lanes left in the inner search
+local	Program__valueNumberInst	param_3	outermostScope	INFERRED	lowest scope index searched by the scoped lookups
+local	Program__valueNumberInst	param_5	block	INFERRED	block passed to Program__tryEliminateRedundantCopy and Program__eliminateRedundantInst
