@@ -292,19 +292,19 @@ int _PPStreamChunkListGetMaxIndex(chunkList)
       if (maxIndex < loopIndex) {
         maxIndex = loopIndex;
       }
-      goto switchD_97b82c84_default;
+      goto chunkDefault;
     case 8:
       chunkIndex = *(uint *)(chunk + 0xc) & 0x3ffff;
       break;
     case 0xb:
       return 0;
     default:
-      goto switchD_97b82c84_default;
+      goto chunkDefault;
     }
     if (maxIndex < chunkIndex) {
       maxIndex = chunkIndex;
     }
-switchD_97b82c84_default:
+chunkDefault:
     chunk = *(undefined1 **)(chunk + 8);
     loopIndex = loopIndex + 1;
   } while( true );
@@ -531,7 +531,7 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, ppStream)
         workWord = *inst;
         switch(workWord) {
         default:
-          goto switchD_97b83138_caseD_0;
+          goto workWordCase0;
         case 1:
         case 0x11:
         case 0x13:
@@ -546,7 +546,7 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, ppStream)
         }
         emulator[0xd] = workWord;
         workWord = *inst;
-switchD_97b83138_caseD_0:
+workWordCase0:
         switch(workWord) {
         case 4:
         case 5:
@@ -557,7 +557,7 @@ switchD_97b83138_caseD_0:
           workWord = emulator[0xd] | 0x400;
           break;
         default:
-          goto switchD_97b832a0_caseD_6;
+          goto workWordCase6;
         case 0x4b:
         case 0x4c:
         case 0x55:
@@ -574,7 +574,7 @@ switchD_97b83138_caseD_0:
         }
         emulator[0xd] = workWord;
         workWord = *inst;
-switchD_97b832a0_caseD_6:
+workWordCase6:
         if (workWord == 0x4e) {
           *inst = 0x22;
         }
@@ -616,7 +616,7 @@ switchD_97b832a0_caseD_6:
         }
         if (*(short *)(inst + 7) == 9) {
           fieldByte = 4;
-LAB_97b835e0:
+loopStoreInst:
           *(byte *)(inst + 10) = fieldByte;
         }
         else {
@@ -636,7 +636,7 @@ LAB_97b835e0:
           }
           if ((workWord & 0x10000) == 0) {
             fieldByte = *(byte *)(inst + 10) & 0xf7;
-            goto LAB_97b835e0;
+            goto loopStoreInst;
           }
         }
         if (emulator[0xe] - 0x8b30 < 2) {
@@ -660,7 +660,7 @@ LAB_97b835e0:
         inst[0xc] = workWord;
         if (workWord2 == 0x41) {
           workWord3 = 1;
-LAB_97b83714:
+loopStoreInst2:
           inst[0xc] = workWord3;
         }
         else if (workWord2 == 0x6d) {
@@ -679,14 +679,14 @@ LAB_97b83714:
         }
         else if (workWord2 - 0x42 < 4) {
           workWord3 = workWord - 1;
-          goto LAB_97b83714;
+          goto loopStoreInst2;
         }
         srcOperandLoop = 0;
         srcIndex = 0;
         if (workWord != 0) {
           do {
             if (workWord2 == 0x41) {
-              if (srcOperandLoop != 1) goto LAB_97b837e4;
+              if (srcOperandLoop != 1) goto setSrcRecOffset;
               *(byte *)(inst + srcIndex * 9 + 0xf) = (byte)(*(uint *)(opChunk + 0x24) >> 0xc) & 0xf;
               *(byte *)((int)inst + srcIndex * 0x24 + 0x3d) =
                    (byte)((uint)*(undefined4 *)(opChunk + 0x24) >> 8) & 0xf;
@@ -694,26 +694,26 @@ LAB_97b83714:
                    (byte)(*(uint *)(opChunk + 0x24) >> 4) & 0xf;
               *(byte *)((int)inst + srcIndex * 0x24 + 0x3f) =
                    (byte)*(undefined4 *)(opChunk + 0x24) & 0xf;
-              goto LAB_97b83af4;
+              goto setWorkWord2;
             }
             if ((0x40 < workWord2) && (workWord2 < 0x46)) {
               if (1 < emulator[0xe] - 0x8b30) {
                 if (srcOperandLoop == 1) {
                   inst[0x44] = *(uint *)(opChunk + 0x24) >> 5 & 7;
                   workWord4 = *(uint *)(opChunk + 0x24);
-                  goto LAB_97b83794;
+                  goto setSrcIndex;
                 }
-                goto LAB_97b837e4;
+                goto setSrcRecOffset;
               }
-              if (srcOperandLoop != 2) goto LAB_97b837e4;
+              if (srcOperandLoop != 2) goto setSrcRecOffset;
               inst[0x44] = *(uint *)(opChunk + 0x2c) >> 5 & 7;
               workWord4 = *(uint *)(opChunk + 0x2c);
-LAB_97b83794:
+setSrcIndex:
               srcIndex = srcIndex + -1;
               inst[0x43] = workWord4 & 0x1f;
-              goto LAB_97b83af8;
+              goto setSrcOperandLoop;
             }
-LAB_97b837e4:
+setSrcRecOffset:
             srcRecOffset = srcIndex * 0x24;
             srcWordOffset = srcOperandLoop * 8;
             inst[srcIndex * 9 + 0x13] = 1;
@@ -725,7 +725,7 @@ LAB_97b837e4:
               operandOrdinal = *(ushort *)((int)opHeader + srcWordOffset + 0x16);
               inst[srcIndex * 9 + 0xe] = 0;
               registerAddr = registerFileBase + (uint)operandOrdinal * 0x10;
-              goto LAB_97b839f4;
+              goto storeInst;
             }
             if (1 < workWord2) {
               if (workWord2 == 2) {
@@ -751,14 +751,14 @@ LAB_97b837e4:
                 inst[srcIndex * 9 + 0xe] = 3;
                 inst[srcIndex * 9 + 0x13] = *(uint *)(srcBindingChunk + 0xc) >> 0x1a & 7;
               }
-              goto LAB_97b839f4;
+              goto storeInst;
             }
-            if (workWord2 != 0) goto LAB_97b839f4;
+            if (workWord2 != 0) goto storeInst;
             srcBindingChunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(attribBindingList,(uint)*(ushort *)((int)opHeader + srcWordOffset + 0x16));
             *(undefined2 *)(inst + srcIndex * 9 + 0x11) = 2;
             switch(*(uint *)(srcBindingChunk + 0xc) >> 0x10 & 0xf) {
             default:
-              goto switchD_97b83930_caseD_0;
+              goto srcBindingChunkCase0;
             case 1:
               registerAddr = emulator[0xd] | 0x10080;
               break;
@@ -773,22 +773,22 @@ LAB_97b837e4:
               break;
             case 7:
               emulator[0xd] = emulator[0xd] | 1 << (*(uint *)(srcBindingChunk + 0xc) & 0x1f) + 0x14;
-              goto switchD_97b83930_caseD_0;
+              goto srcBindingChunkCase0;
             case 9:
               if ((*(uint *)(srcBindingChunk + 0xc) & 0x1f) == 0) {
                 registerAddr = emulator[0xd] | 0x100;
                 break;
               }
-              goto switchD_97b83930_caseD_0;
+              goto srcBindingChunkCase0;
             }
             emulator[0xd] = registerAddr;
-switchD_97b83930_caseD_0:
+srcBindingChunkCase0:
             registerFileBase = emulator[0x26];
             emulator[0xd] = emulator[0xd] | 4;
             operandOrdinal = *(ushort *)(srcBindingChunk + 0x12);
             inst[srcIndex * 9 + 0xe] = 2;
             registerAddr = registerFileBase + (uint)operandOrdinal * 0x10;
-LAB_97b839f4:
+storeInst:
             inst[srcIndex * 9 + 0xd] = registerAddr;
             workWord2 = opHeader[srcOperandLoop * 2 + 4];
             if ((int)workWord2 < 0) {
@@ -820,9 +820,9 @@ LAB_97b839f4:
               fieldByte = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0xf);
             }
             *(byte *)((int)inst + srcRecOffset + 0x3f) = fieldByte & 3;
-LAB_97b83af4:
+setWorkWord2:
             workWord2 = *inst;
-LAB_97b83af8:
+setSrcOperandLoop:
             srcOperandLoop = srcOperandLoop + 1;
             srcIndex = srcIndex + 1;
           } while (srcOperandLoop < workWord);
@@ -868,12 +868,12 @@ LAB_97b83af8:
         texUnit = *(uint *)(texChunk + 0xc) >> 0x18 & 7;
         if (texUnit == 2) {
           texUnit = emulator[0xd] | 0x1000;
-LAB_97b83d90:
+loopStoreEmulator:
           emulator[0xd] = texUnit;
         }
         else if (texUnit == 1) {
           texUnit = emulator[0xd] | 0x4000;
-          goto LAB_97b83d90;
+          goto loopStoreEmulator;
         }
         registerAddr = *(uint *)(texChunk + 0xc);
         texUnit = registerAddr >> 0x15 & 0x38;
@@ -923,17 +923,17 @@ int _PPStreamChunkListChunkAtIndex(chunkList, index)
       chunkIndex = *(uint *)(chunk + 0xc) & 0x3ffff;
       break;
     case 0xb:
-      goto LAB_97b83e9c;
+      goto returnX0;
     default:
-      goto switchD_97b83e20_default;
+      goto chunkDefault;
     }
     if (chunkIndex == index) {
       return chunk;
     }
-switchD_97b83e20_default:
+chunkDefault:
     position = position + 1;
   }
-LAB_97b83e9c:
+returnX0:
   return (undefined1 *)0x0;
 }
 
@@ -1280,53 +1280,53 @@ int _PPParserParseSourceSwizzle(parser, operand, swizzleGiven)
         break;
       case 0x62:
         swizzleSets = swizzleSets | 2;
-        goto LAB_97b84574;
+        goto setComponent3;
       default:
-        goto switchD_97b844cc_caseD_63;
+        goto partBufCase63;
       case 0x67:
         swizzleSets = swizzleSets | 2;
-        goto LAB_97b84568;
+        goto setComponent2;
       case 0x72:
         swizzleSets = swizzleSets | 2;
-        goto LAB_97b8455c;
+        goto setComponent;
       case 0x77:
         swizzleSets = swizzleSets | 1;
         break;
       case 0x78:
         swizzleSets = swizzleSets | 1;
-LAB_97b8455c:
+setComponent:
         component = 0;
-        goto LAB_97b84584;
+        goto checkLoopIndex;
       case 0x79:
         swizzleSets = swizzleSets | 1;
-LAB_97b84568:
+setComponent2:
         component = 1;
-        goto LAB_97b84584;
+        goto checkLoopIndex;
       case 0x7a:
         swizzleSets = swizzleSets | 1;
-LAB_97b84574:
+setComponent3:
         component = 2;
-        goto LAB_97b84584;
+        goto checkLoopIndex;
       }
       component = 3;
-LAB_97b84584:
+checkLoopIndex:
       if (loopIndex == 1) {
         operandWord = component << 0x13 | *operand & 0xffe7ffff;
-LAB_97b845d4:
+loopStoreOperand:
         *operand = operandWord;
       }
       else {
         if (loopIndex == 0) {
           operandWord = component << 0x15 | *operand & 0xff9fffff;
-          goto LAB_97b845d4;
+          goto loopStoreOperand;
         }
         if (loopIndex == 2) {
           operandWord = component << 0x11 | *operand & 0xfff9ffff;
-          goto LAB_97b845d4;
+          goto loopStoreOperand;
         }
         if (loopIndex == 3) {
           operandWord = component << 0xf | *operand & 0xfffe7fff;
-          goto LAB_97b845d4;
+          goto loopStoreOperand;
         }
       }
       if (part != 1) {
@@ -1335,7 +1335,7 @@ LAB_97b845d4:
       loopIndex = loopIndex + 1;
     } while (loopIndex < 4);
     if ((swizzleSets == 3) || ((swizzleSets == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
-switchD_97b844cc_caseD_63:
+partBufCase63:
       status = 0xd;
     }
     else {
@@ -1379,7 +1379,7 @@ int _PPParserParseDestinationMask(parser, operand)
           maskWord = *operand | 0x8000;
           break;
         default:
-          goto LAB_97b8481c;
+          goto returnXc;
         case 0x67:
           if ((*operand & 0x4000) != 0) {
             return 0xc;
@@ -1397,36 +1397,36 @@ int _PPParserParseDestinationMask(parser, operand)
             return 0xc;
           }
           maskWord = *operand | 0x10000;
-          goto LAB_97b84778;
+          goto storeOperand;
         case 0x78:
           if ((*operand & 0x2000) != 0) {
             return 0xc;
           }
           maskWord = *operand | 0x2000;
-          goto LAB_97b84778;
+          goto storeOperand;
         case 0x79:
           if ((*operand & 0x4000) != 0) {
             return 0xc;
           }
           maskWord = *operand | 0x4000;
-          goto LAB_97b84778;
+          goto storeOperand;
         case 0x7a:
           if ((*operand & 0x8000) != 0) {
             return 0xc;
           }
           maskWord = *operand | 0x8000;
-LAB_97b84778:
+storeOperand:
           *operand = maskWord;
           swizzleSets = swizzleSets | 1;
-          goto LAB_97b847e8;
+          goto setLoopIndex;
         }
         *operand = maskWord;
         swizzleSets = swizzleSets | 2;
-LAB_97b847e8:
+setLoopIndex:
         loopIndex = loopIndex + 1;
       } while (loopIndex < part);
       if ((swizzleSets == 3) || ((swizzleSets == 2 && ((*(uint *)(parser + 0x48c) & 2) == 0)))) {
-LAB_97b8481c:
+returnXc:
         return 0xc;
       }
     }
@@ -1832,7 +1832,7 @@ int _PPParserParseSwizzleCode(parser, operand)
       return 0xf;
     }
     if (partBuf == '+') {
-LAB_97b850c8:
+loopCheckPartLength:
       if (partLength == 2) {
         partBuf = partBuf1;
       }
@@ -1849,7 +1849,7 @@ LAB_97b850c8:
     else {
       if (partBuf == '-') {
         negateComponent = 1;
-        goto LAB_97b850c8;
+        goto loopCheckPartLength;
       }
       if (partLength == 2) {
         return 0xf;
@@ -1869,19 +1869,19 @@ LAB_97b850c8:
       return 0xf;
     case 'a':
       swizzleSets = swizzleSets | 2;
-      goto LAB_97b85300;
+      goto setComponent;
     case 'b':
       swizzleSets = swizzleSets | 2;
-      goto LAB_97b852e8;
+      goto setComponent4;
     case 'g':
       swizzleSets = swizzleSets | 2;
-      goto LAB_97b852d0;
+      goto setComponent3;
     case 'r':
       swizzleSets = swizzleSets | 2;
-      goto LAB_97b852c0;
+      goto setComponent2;
     case 'w':
       swizzleSets = swizzleSets | 1;
-LAB_97b85300:
+setComponent:
       component = 7;
       if (negateComponent == 0) {
         component = 3;
@@ -1889,12 +1889,12 @@ LAB_97b85300:
       break;
     case 'x':
       swizzleSets = swizzleSets | 1;
-LAB_97b852c0:
+setComponent2:
       component = negateComponent << 2;
       break;
     case 'y':
       swizzleSets = swizzleSets | 1;
-LAB_97b852d0:
+setComponent3:
       component = 5;
       if (negateComponent == 0) {
         component = 1;
@@ -1902,7 +1902,7 @@ LAB_97b852d0:
       break;
     case 'z':
       swizzleSets = swizzleSets | 1;
-LAB_97b852e8:
+setComponent4:
       component = 6;
       if (negateComponent == 0) {
         component = 2;
@@ -1913,9 +1913,9 @@ LAB_97b852e8:
     }
     if (loopIndex == 1) {
       component = component << 8 | *operand & 0xfffff0ff;
-LAB_97b85380:
+loopStoreOperand:
       *operand = component;
-LAB_97b85398:
+loopCheckLoopIndex:
       if (loopIndex == 3) {
         return 0;
       }
@@ -1923,15 +1923,15 @@ LAB_97b85398:
     else {
       if (loopIndex == 0) {
         component = component << 0xc | *operand & 0xffff0fff;
-        goto LAB_97b85380;
+        goto loopStoreOperand;
       }
       if (loopIndex == 2) {
         component = component << 4 | *operand & 0xffffff0f;
-        goto LAB_97b85380;
+        goto loopStoreOperand;
       }
       if (loopIndex == 3) {
         *operand = component | *operand & 0xfffffff0;
-        goto LAB_97b85398;
+        goto loopCheckLoopIndex;
       }
     }
     part2 = _PPParserGetPart(parser,&partBuf,0);

@@ -18,7 +18,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   uint nodeKeyLengthCopy [4];
   
   if ((parentNode == *(int *)(tree + 4)) || (hintX != (unsigned char *)0x0)) {
-LAB_97c30f44:
+loopSetNewNode:
     newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
     if (newNode + 0x10 != (unsigned char *)0x0) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
@@ -30,7 +30,7 @@ LAB_97c30f44:
       if (parentNode == *(int *)(headerNode + 8)) {
         *(unsigned char **)(headerNode + 8) = newNode;
       }
-      goto LAB_97c30fe4;
+      goto storeNewNode;
     }
     *(unsigned char **)(parentNode + 4) = newNode;
     headerNode = *(int *)(tree + 4);
@@ -48,7 +48,7 @@ LAB_97c30f44:
     if (keyCompare == 0) {
       keyCompare = keyLength - nodeKeyLength;
     }
-    if (keyCompare < 0) goto LAB_97c30f44;
+    if (keyCompare < 0) goto loopSetNewNode;
     newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
     if (newNode + 0x10 != (unsigned char *)0x0) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
@@ -56,10 +56,10 @@ LAB_97c30f44:
     }
     *(unsigned char **)(parentNode + 0xc) = newNode;
     headerNode = *(int *)(tree + 4);
-    if (parentNode != *(int *)(headerNode + 0xc)) goto LAB_97c30fe4;
+    if (parentNode != *(int *)(headerNode + 0xc)) goto storeNewNode;
   }
   *(unsigned char **)(headerNode + 0xc) = newNode;
-LAB_97c30fe4:
+storeNewNode:
   *(int *)(newNode + 4) = parentNode;
   *(undefined4 *)(newNode + 0xc) = 0;
   *(undefined4 *)(newNode + 8) = 0;
@@ -85,7 +85,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(capacit
   sizeEstimate = capacity + 0x1d;
   allocSize = capacity + 0xd;
   if (sizeEstimate < 0x1001) {
-    if (allocSize < 0x81) goto LAB_97c310a4;
+    if (allocSize < 0x81) goto setAllocation;
     padding = 0x80 - (sizeEstimate & 0x7f) & 0x7f;
   }
   else {
@@ -93,7 +93,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(capacit
   }
   capacity = capacity + padding;
   allocSize = capacity + 0xd;
-LAB_97c310a4:
+setAllocation:
   allocation = (undefined4 *)TPoolAllocator__allocate(*(unsigned char **)alloc,allocSize);
   *allocation = 0;
   allocation[1] = capacity;
@@ -171,14 +171,14 @@ int std___Rb_tree_rebalance(x, root)
           ((int (*)())std___Rb_tree_rotate_right)(rotateTop,root);
         }
         else {
-LAB_97c31228:
+loopStoreParentNode:
           *(undefined4 *)parentNode = 1;
           *(undefined4 *)grandparentChild = 1;
           *(undefined4 *)nextX = 0;
         }
       }
       else {
-        if ((grandparentChild != (unsigned char *)0x0) && (*(int *)grandparentChild == 0)) goto LAB_97c31228;
+        if ((grandparentChild != (unsigned char *)0x0) && (*(int *)grandparentChild == 0)) goto loopStoreParentNode;
         nextX = x;
         pivot = parentNode;
         if (x == *(unsigned char **)(parentNode + 8)) {
@@ -812,11 +812,11 @@ int TType__setStructSize(this, fields)
       if ((memberSize != 0) ||
          (memberSize = (**(code **)(*(int *)*entry + 0x3c))((int *)*entry), memberSize != 0)) {
         memberSize = (**(code **)(*(int *)*entry + 0x30))((int *)*entry);
-        goto LAB_97c31d28;
+        goto setTotalSize;
       }
       if (*(unsigned char **)(*entry + 8) != (unsigned char *)0x0) {
         memberSize = ((int (*)())TType__setStructSize)(this,*(unsigned char **)(*entry + 8));
-        goto LAB_97c31d28;
+        goto setTotalSize;
       }
       totalSize = totalSize + 1;
     }
@@ -829,7 +829,7 @@ int TType__setStructSize(this, fields)
         memberSize = ((int (*)())TType__setStructSize)(this,(unsigned char *)memberType[2]);
       }
       memberSize = memberSize * *(int *)(*entry + 4);
-LAB_97c31d28:
+setTotalSize:
       totalSize = totalSize + memberSize;
     }
     entry = entry + 2;

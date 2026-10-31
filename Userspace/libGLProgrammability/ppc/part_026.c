@@ -83,13 +83,13 @@ int _extract_cie_info(cie, context, fs)
     }
     if (augChar == 'L') {
       *(byte *)(fs + 0x39e) = *p;
-LAB_97c1a718:
+loopSetP:
       p = p + 1;
     }
     else {
       if (augChar == 'R') {
         *(byte *)(fs + 0x39d) = *p;
-        goto LAB_97c1a718;
+        goto loopSetP;
       }
       if (augChar != 'P') {
         return ret;
@@ -142,7 +142,7 @@ int _execute_stack_op(opPtr, opEnd, context, initial)
       opPtrNext = (ushort *)((int)opPtr + 5);
       break;
     default:
-      goto switchD_97c1a7e8_caseD_4;
+      goto opCase4;
     case 6:
     case 0x19:
     case 0x1f:
@@ -150,10 +150,10 @@ int _execute_stack_op(opPtr, opEnd, context, initial)
     case 0x23:
     case 0x94:
       newStackElt = stackElt - 1;
-      if ((int)newStackElt < 0) goto switchD_97c1a7e8_caseD_4;
+      if ((int)newStackElt < 0) goto opCase4;
       operand = (uint *)stackFrameWords[stackElt + 2];
       if (op == 0x1f) {
-LAB_97c1acc8:
+loopSetResult:
         result = (uint *)-(int)operand;
       }
       else {
@@ -161,12 +161,12 @@ LAB_97c1acc8:
         if (op < 0x20) {
           if (op != 6) {
             if (op == 0x19) {
-              if (-1 < (int)operand) goto LAB_97c1ae98;
-              goto LAB_97c1acc8;
+              if (-1 < (int)operand) goto checkX3f;
+              goto loopSetResult;
             }
-            goto switchD_97c1a7e8_caseD_4;
+            goto opCase4;
           }
-LAB_97c1ac88:
+loopSetResult2:
           result = (uint *)*operand;
         }
         else if (op == 0x23) {
@@ -175,10 +175,10 @@ LAB_97c1ac88:
         }
         else if (op < 0x24) {
           result = (uint *)~(uint)operand;
-          if (op != 0x20) goto switchD_97c1a7e8_caseD_4;
+          if (op != 0x20) goto opCase4;
         }
         else {
-          if (op != 0x94) goto switchD_97c1a7e8_caseD_4;
+          if (op != 0x94) goto opCase4;
           operandSize = *(byte *)opPtrNext;
           opPtrNext = opPtr + 1;
           if (operandSize == 2) {
@@ -186,17 +186,17 @@ LAB_97c1ac88:
           }
           else {
             if (2 < operandSize) {
-              if (operandSize == 4) goto LAB_97c1ac88;
+              if (operandSize == 4) goto loopSetResult2;
               if (operandSize == 8) {
                 operandSize = *(byte *)((int)operand + 7);
                 newStackElt = (uint)*(byte *)((int)operand + 6) << 8 |
                         (uint)*(byte *)((int)operand + 5) << 0x10 |
                         (uint)*(byte *)(operand + 1) << 0x18;
-                goto LAB_97c1acb4;
+                goto setOperand;
               }
-              goto switchD_97c1a7e8_caseD_4;
+              goto opCase4;
             }
-            if (operandSize != 1) goto switchD_97c1a7e8_caseD_4;
+            if (operandSize != 1) goto opCase4;
             result = (uint *)(uint)*(byte *)operand;
           }
         }
@@ -213,10 +213,10 @@ LAB_97c1ac88:
       break;
     case 10:
       result = (uint *)(uint)*opPtrNext;
-      goto LAB_97c1aa6c;
+      goto setOpPtrNext;
     case 0xb:
       result = (uint *)(int)(short)*opPtrNext;
-LAB_97c1aa6c:
+setOpPtrNext:
       opPtrNext = (ushort *)((int)opPtr + 3);
       break;
     case 0xe:
@@ -225,41 +225,41 @@ LAB_97c1aa6c:
       newStackElt = (uint)*(byte *)((int)opPtr + 7) << 8 |
               (uint)*(byte *)(opPtr + 3) << 0x10 | (uint)*(byte *)((int)opPtr + 5) << 0x18;
       opPtrNext = (ushort *)((int)opPtr + 9);
-LAB_97c1acb4:
+setOperand:
       operand = (uint *)(operandSize | newStackElt);
-      goto LAB_97c1ae98;
+      goto checkX3f;
     case 0x10:
       opPtrNext = (ushort *)_read_uleb128_97c1a3ec(opPtrNext,&operand);
-      goto LAB_97c1ae98;
+      goto checkX3f;
     case 0x11:
       opPtrNext = (ushort *)_read_sleb128_97c1a41c(opPtrNext,&stmp);
       result = stmp;
       break;
     case 0x12:
       stackByteOffset = stackElt << 2;
-      if (0 < (int)stackElt) goto LAB_97c1ab88;
-      goto switchD_97c1a7e8_caseD_4;
+      if (0 < (int)stackElt) goto setOperand2;
+      goto opCase4;
     case 0x13:
       stackElt = stackElt - 1;
-      if (-1 < (int)stackElt) goto switchD_97c1a7e8_caseD_96;
-      goto switchD_97c1a7e8_caseD_4;
+      if (-1 < (int)stackElt) goto opCase96;
+      goto opCase4;
     case 0x14:
       if (1 < (int)stackElt) {
         operand = (uint *)stackFrameWords[stackElt + 1];
         goto LAB_97c1aba8;
       }
-      goto switchD_97c1a7e8_caseD_4;
+      goto opCase4;
     case 0x15:
       decodedImmediate = (uint)*(byte *)opPtrNext;
       opPtrNext = opPtr + 1;
       if ((int)decodedImmediate < (int)(stackElt - 1)) {
         stackByteOffset = (stackElt - decodedImmediate) * 4;
-LAB_97c1ab88:
+setOperand2:
         operand = *(uint **)((int)stackFrameWords + stackByteOffset + 8);
 LAB_97c1aba8:
-        goto LAB_97c1ae98;
+        goto checkX3f;
       }
-      goto switchD_97c1a7e8_caseD_4;
+      goto opCase4;
     case 0x17:
       if (2 < (int)stackElt) {
         newStackElt = stackFrameWords[stackElt + 2];
@@ -267,9 +267,9 @@ LAB_97c1aba8:
         stackFrameWords[stackElt + 2] = stackFrameWords[stackElt + 1];
         stackFrameWords[stackElt] = newStackElt;
         stackFrameWords[stackElt + 1] = op;
-        goto switchD_97c1a7e8_caseD_96;
+        goto opCase96;
       }
-      goto switchD_97c1a7e8_caseD_4;
+      goto opCase4;
     case 0x1a:
     case 0x1b:
     case 0x1c:
@@ -284,7 +284,7 @@ LAB_97c1aba8:
     case 0x2d:
     case 0x2e:
       newStackElt = stackElt - 2;
-      if ((int)newStackElt < 0) goto switchD_97c1a7e8_caseD_4;
+      if ((int)newStackElt < 0) goto opCase4;
       first = stackFrameWords[stackElt + 1];
       stackElt = stackFrameWords[stackElt + 2];
       switch(op) {
@@ -304,7 +304,7 @@ LAB_97c1aba8:
         result = (uint *)(first * stackElt);
         break;
       default:
-        goto switchD_97c1a7e8_caseD_4;
+        goto opCase4;
       case 0x21:
         result = (uint *)(first | stackElt);
         break;
@@ -329,25 +329,25 @@ LAB_97c1aba8:
       case 0x2a:
         result = (uint *)0x1;
         if ((int)stackElt < (int)first) {
-LAB_97c1ae34:
+loopSetResult3:
           result = (uint *)0x0;
         }
         break;
       case 0x2b:
         result = (uint *)0x1;
-        if ((int)stackElt <= (int)first) goto LAB_97c1ae34;
+        if ((int)stackElt <= (int)first) goto loopSetResult3;
         break;
       case 0x2c:
         result = (uint *)0x1;
-        if ((int)first < (int)stackElt) goto LAB_97c1ae34;
+        if ((int)first < (int)stackElt) goto loopSetResult3;
         break;
       case 0x2d:
         result = (uint *)0x1;
-        if ((int)first <= (int)stackElt) goto LAB_97c1ae34;
+        if ((int)first <= (int)stackElt) goto loopSetResult3;
         break;
       case 0x2e:
         operand = (uint *)(uint)(stackElt != first);
-        goto LAB_97c1ae4c;
+        goto setStackElt;
       }
       break;
     case 0x28:
@@ -361,14 +361,14 @@ LAB_97c1ae34:
         if (stackFrameWords[stackByteOffset] != 0) {
           opPtrNext = (ushort *)((int)opPtrNext + (int)(short)branchOffset);
         }
-        goto switchD_97c1a7e8_caseD_96;
+        goto opCase96;
       }
-      goto switchD_97c1a7e8_caseD_4;
+      goto opCase4;
     case 0x2f:
       branchOffset = *opPtrNext;
       opPtrNext = (ushort *)((int)opPtr + (int)(short)branchOffset + 3U);
       decodedImmediate = (int)(short)branchOffset;
-      goto switchD_97c1a7e8_caseD_96;
+      goto opCase96;
     case 0x30:
     case 0x31:
     case 0x32:
@@ -436,7 +436,7 @@ LAB_97c1ae34:
     case 0x6e:
     case 0x6f:
       stackByteOffset = op - 0x50;
-      goto LAB_97c1aaf4;
+      goto setOperand3;
     case 0x70:
     case 0x71:
     case 0x72:
@@ -471,38 +471,38 @@ LAB_97c1ae34:
     case 0x8f:
       opPtrNext = (ushort *)_read_sleb128_97c1a41c(opPtrNext,&decodedImmediate);
       stackByteOffset = op - 0x70;
-      goto LAB_97c1ab30;
+      goto setOperand4;
     case 0x90:
       opPtrNext = (ushort *)_read_uleb128_97c1a3ec(opPtrNext,&regNumber);
       stackByteOffset = regNumber;
-LAB_97c1aaf4:
+setOperand3:
       operand = (uint *)**(uint **)(context + stackByteOffset * 4);
       goto LAB_97c1aba8;
     case 0x92:
       lebValue = _read_uleb128_97c1a3ec(opPtrNext,&regNumber);
       opPtrNext = (ushort *)_read_sleb128_97c1a41c(lebValue,&decodedImmediate);
       stackByteOffset = regNumber;
-LAB_97c1ab30:
+setOperand4:
       operand = (uint *)(**(int **)(context + stackByteOffset * 4) + decodedImmediate);
-LAB_97c1ae4c:
+setStackElt:
       stackElt = newStackElt;
-      goto LAB_97c1ae98;
+      goto checkX3f;
     case 0x96:
-      goto switchD_97c1a7e8_caseD_96;
+      goto opCase96;
     }
     operand = result;
     stackElt = newStackElt;
-LAB_97c1ae98:
-    if (0x3f < stackElt) goto switchD_97c1a7e8_caseD_4;
+checkX3f:
+    if (0x3f < stackElt) goto opCase4;
     stackFrameWords[stackElt + 4] = (uint)operand;
     stackElt = stackElt + 1;
-switchD_97c1a7e8_caseD_96:
+opCase96:
     opPtr = opPtrNext;
   }
   if (-1 < (int)(stackElt - 1)) {
     return stackFrameWords[stackElt + 2];
   }
-switchD_97c1a7e8_caseD_4:
+opCase4:
                     
   _abort();
 }
@@ -543,18 +543,18 @@ int _execute_cfa_program(insnPtr, insnEnd, context, fs)
       insnClass = insn & 0xc0;
       if (insnClass == 0x40) {
         scaledValue = (insn & 0x3f) * *(int *)(fs + 0x398);
-        goto LAB_97c1b0dc;
+        goto storeFs;
       }
       if (insnClass == 0x80) {
         reg = insn & 0x3f;
-LAB_97c1b0f4:
+loopSetInsnNext:
         insnNext = (uint *)_read_uleb128_97c1a3ec(insnNext,&offset);
         dataAlign = *(int *)(fs + 0x394);
         scaledValue = offset;
-LAB_97c1b10c:
+loopStoreReg:
         *(undefined4 *)(reg * 8 + fs + 4) = 1;
         scaledValue = scaledValue * dataAlign;
-LAB_97c1b3a0:
+loopStoreFs:
         *(int *)(fs + reg * 8) = scaledValue;
         goto switchD_97c1afc0_caseD_0;
       }
@@ -575,25 +575,25 @@ LAB_97c1b3a0:
       case 2:
         delta = (uint)*(byte *)insnNext;
         insnNext = (uint *)((int)insnPtr + 2);
-        goto LAB_97c1b0c0;
+        goto setScaledValue;
       case 3:
         delta = (uint)*(ushort *)insnNext;
         insnNext = (uint *)((int)insnPtr + 3);
-LAB_97c1b0c0:
+setScaledValue:
         scaledValue = *(int *)(fs + 0x398);
-LAB_97c1b0d4:
+loopSetScaledValue:
         scaledValue = delta * scaledValue;
-LAB_97c1b0dc:
+storeFs:
         *(uint *)(fs + 0x38c) = pc + scaledValue;
         break;
       case 4:
         scaledValue = *(int *)(fs + 0x398);
         delta = *insnNext;
         insnNext = (uint *)((int)insnPtr + 5);
-        goto LAB_97c1b0d4;
+        goto loopSetScaledValue;
       case 5:
         insnNext = (uint *)_read_uleb128_97c1a3ec(insnNext,&reg);
-        goto LAB_97c1b0f4;
+        goto loopSetInsnNext;
       case 6:
         insnNext = (uint *)_read_uleb128_97c1a3ec(insnNext,&reg);
         *(undefined4 *)(reg * 8 + fs + 4) = 0;
@@ -601,7 +601,7 @@ LAB_97c1b0dc:
       case 7:
       case 8:
         ulebTarget = &reg;
-        goto LAB_97c1b358;
+        goto setInsnNext;
       case 9:
         pAfterReg = _read_uleb128_97c1a3ec(insnNext,&reg);
         insnNext = (uint *)_read_uleb128_97c1a3ec(pAfterReg,&reg2);
@@ -639,7 +639,7 @@ LAB_97c1b0dc:
         break;
       case 0xd:
         insnNext = (uint *)_read_uleb128_97c1a3ec(insnNext,fs + 0x380);
-        goto LAB_97c1b2e8;
+        goto storeFs2;
       case 0xe:
         insnNext = (uint *)_read_uleb128_97c1a3ec(insnNext,&offset);
         *(int *)(fs + 0x37c) = offset;
@@ -662,11 +662,11 @@ LAB_97c1b0dc:
         insnNext = (uint *)_read_sleb128_97c1a41c(pAfterReg,&soffset);
         dataAlign = *(int *)(fs + 0x394);
         scaledValue = soffset;
-        goto LAB_97c1b10c;
+        goto loopStoreReg;
       case 0x12:
         pAfterReg = _read_uleb128_97c1a3ec(insnNext,fs + 0x380);
         insnNext = (uint *)_read_sleb128_97c1a41c(pAfterReg,fs + 0x37c);
-LAB_97c1b2e8:
+storeFs2:
         *(undefined4 *)(fs + 0x388) = 1;
         break;
       case 0x13:
@@ -686,7 +686,7 @@ LAB_97c1b2e8:
         break;
       case 0x2e:
         ulebTarget = (uint *)(context + 0x1d4);
-LAB_97c1b358:
+setInsnNext:
         insnNext = (uint *)_read_uleb128_97c1a3ec(insnNext,ulebTarget);
         break;
       case 0x2f:
@@ -695,7 +695,7 @@ LAB_97c1b358:
         scaledValue = *(int *)(fs + 0x394);
         *(undefined4 *)(reg * 8 + fs + 4) = 1;
         scaledValue = -(offset * scaledValue);
-        goto LAB_97c1b3a0;
+        goto loopStoreFs;
       }
 switchD_97c1afc0_caseD_0: ;
     } while ((insnNext < insnEnd) &&
@@ -1372,7 +1372,7 @@ int _size_of_encoded_value_97c1c3a4(encoding)
     if (format != 2) {
       if (format < 3) {
         if (format != 0) {
-LAB_97c1c404:
+loopCallAbort:
                     
           _abort();
         }
@@ -1381,7 +1381,7 @@ LAB_97c1c404:
       else {
         valueSize = 4;
         if (format != 3) {
-          if (format != 4) goto LAB_97c1c404;
+          if (format != 4) goto loopCallAbort;
           valueSize = 8;
         }
       }
@@ -1453,7 +1453,7 @@ int _read_encoded_value_with_base_97c1c498(encoding, base, p, val)
   if (encoding == 0x50) {
     result[0] = (uint *)((int)p + 3U & 0xfffffffc);
     next = result[0] + 1;
-    goto LAB_97c1c5e4;
+    goto storeResult;
   }
   switch(encoding & 0xf) {
   case 0:
@@ -1468,7 +1468,7 @@ int _read_encoded_value_with_base_97c1c498(encoding, base, p, val)
     break;
   case 2:
     result[0] = (uint *)(uint)*(ushort *)p;
-    goto LAB_97c1c570;
+    goto setNext;
   case 4:
   case 0xc:
     next = p + 2;
@@ -1485,7 +1485,7 @@ int _read_encoded_value_with_base_97c1c498(encoding, base, p, val)
     break;
   case 10:
     result[0] = (uint *)(int)(short)*(ushort *)p;
-LAB_97c1c570:
+setNext:
     next = (uint *)((int)p + 2);
   }
   if (result[0] != (uint *)0x0) {
@@ -1494,7 +1494,7 @@ LAB_97c1c570:
     }
     result[0] = (uint *)((int)result[0] + (int)base);
     if ((encoding & 0x80) != 0) {
-LAB_97c1c5e4:
+storeResult:
       result[0] = (uint *)*result[0];
     }
   }
@@ -1586,7 +1586,7 @@ int ___deregister_frame_info_bases(fde)
   }
   linkSlot = &_unseen_objects;
   for (ob = _unseen_objects; ob != (void *)0x0; ob = *(void **)((int)ob + 0x18)) {
-    if (*(void **)((int)ob + 0xc) == fde) goto LAB_97c1c810;
+    if (*(void **)((int)ob + 0xc) == fde) goto storeLinkSlot;
     linkSlot = (undefined4 *)((int)ob + 0x18);
   }
   linkSlot = &_seen_objects;
@@ -1604,7 +1604,7 @@ int ___deregister_frame_info_bases(fde)
       }
     }
     else if (*(void **)((int)ob + 0xc) == fde) {
-LAB_97c1c810:
+storeLinkSlot:
       *linkSlot = *(undefined4 *)((int)ob + 0x18);
       return ob;
     }
@@ -1815,11 +1815,11 @@ joined_r0x97c1cb68:
                              ,tmp);
           if (compareResult < 1) {
             compareResult = heapBuildIndex << 2;
-            goto LAB_97c1cd10;
+            goto setCompareResult2;
           }
           compareResult = heapBuildIndex * 4;
           compareResult2 = (*fdeCompare)(ob,a[heapBuildIndex * 2 + 2],a[heapBuildIndex]);
-          if (compareResult2 < 1) goto LAB_97c1cd10;
+          if (compareResult2 < 1) goto setCompareResult2;
           tmp2 = a[heapBuildIndex];
           a[heapBuildIndex] = a[heapBuildIndex * 2 + 2];
           a[heapBuildIndex * 2 + 2] = tmp2;
@@ -1827,7 +1827,7 @@ joined_r0x97c1cb68:
         else {
           compareResult = heapBuildIndex << 2;
           byteOffsetOfI2 = heapBuildIndex << 3;
-LAB_97c1cd10:
+setCompareResult2:
           compareResult2 = (*fdeCompare)(ob,*(undefined4 *)((int)a + byteOffsetOfI2 + 4),
                              *(undefined4 *)(compareResult + (int)a));
           if (compareResult2 < 1) break;
@@ -1918,12 +1918,12 @@ int _classify_object_over_fdes(ob, thisFde)
           bits = (encoding & 0xff) << 0x15 | bits & 0xe01fffff;
         }
         else {
-          if (objEncoding == encoding) goto LAB_97c1ce18;
+          if (objEncoding == encoding) goto callReadEncodedValueWithBase97c1c498;
           bits = bits | 0x20000000;
         }
         ob[4] = bits;
       }
-LAB_97c1ce18:
+callReadEncodedValueWithBase97c1c498:
       ((int (*)())_read_encoded_value_with_base_97c1c498)(sizeMask,baseAddress,thisFde + 2,pcBegin);
       sizeMask = ((int (*)())_size_of_encoded_value_97c1c3a4)(sizeMask);
       if (sizeMask < 4) {
@@ -2190,7 +2190,7 @@ int __Unwind_Find_registered_FDE(pc, bases)
   for (ob = _seen_objects; ob != (uint *)0x0; ob = (uint *)ob[6]) {
     if (*ob <= pc) {
       ret = ((int (*)())_search_object)(ob,pc);
-      if (ret != 0) goto LAB_97c1d4c0;
+      if (ret != 0) goto storeBases;
       break;
     }
   }
@@ -2206,24 +2206,24 @@ int __Unwind_Find_registered_FDE(pc, bases)
       cursor = _seen_objects;
       if (_seen_objects != (uint *)0x0) {
         do {
-          if (*cursor < *ob) goto LAB_97c1d498;
+          if (*cursor < *ob) goto storeOb;
           nextSlot = cursor + 6;
           linkSlot = cursor + 6;
           cursor = (uint *)*nextSlot;
         } while ((uint *)*nextSlot != (uint *)0x0);
         cursor = (uint *)0x0;
       }
-LAB_97c1d498:
+storeOb:
       ob[6] = (uint)cursor;
       *linkSlot = (uint)ob;
-      if (ret != 0) goto LAB_97c1d4c0;
+      if (ret != 0) goto storeBases;
       ob = _unseen_objects;
     } while (_unseen_objects != (uint *)0x0);
     notFound = true;
   }
   ob = _unseen_objects;
   if (!notFound) {
-LAB_97c1d4c0:
+storeBases:
     *bases = ob[1];
     bases[1] = ob[2];
     encoding = ob[4] >> 0x15 & 0xff;
@@ -2278,17 +2278,17 @@ int __Unwind_Find_FDE(pc, bases)
   if (dontAlloc) {
     objectState = (undefined4 *)_calloc(1,0x10);
     dontAlloc = objectState == (undefined4 *)0x0;
-    if (!dontAlloc) goto LAB_97c1d644;
+    if (!dontAlloc) goto setSeenObjects;
   }
   else {
-LAB_97c1d644:
+setSeenObjects:
     _seen_objects = *objectState;
     _unseen_objects = objectState[1];
     fde = (void *)((int (*)())__Unwind_Find_registered_FDE)(pc,bases);
-    if (fde != (void *)0x0) goto LAB_97c1d688;
+    if (fde != (void *)0x0) goto checkDontAlloc;
   }
   fde = (void *)((int (*)())_examine_objects)(pc,bases,(uint)dontAlloc);
-LAB_97c1d688:
+checkDontAlloc:
   if (!dontAlloc) {
     *objectState = _seen_objects;
     objectState[1] = _unseen_objects;
@@ -2384,7 +2384,7 @@ int _init_object(ob)
       }
     }
     if ((linearVec != (undefined4 *)0x0) && (linearVec[1] != count)) {
-LAB_97c1d890:
+loopCallAbort:
                     
       _abort();
     }
@@ -2398,7 +2398,7 @@ LAB_97c1d890:
     }
     else {
       ((int (*)())_fde_split)(ob,fdeCompare,linearVec,erraticVec);
-      if (linearVec[1] + *(int *)(erraticVec + 4) != count) goto LAB_97c1d890;
+      if (linearVec[1] + *(int *)(erraticVec + 4) != count) goto loopCallAbort;
       ((int (*)())_frame_heapsort)(ob,fdeCompare,erraticVec);
       erraticAlias = erraticVec;
       v1 = linearVec;
@@ -2462,7 +2462,7 @@ int _examine_objects(pc, bases, dontAlloc)
   ret = 0;
   do {
     if (image == 0) {
-LAB_97c1dbb0:
+loopCallKeymgrUnlockProcesswidePtr:
       __keymgr_unlock_processwide_ptr(0x12d);
       return ret;
     }
@@ -2472,11 +2472,11 @@ LAB_97c1dbb0:
         getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(image + 4),"__TEXT","__eh_frame",sectionSize);
         if (getsectdatafromheaderResult != 0) {
           *(uint *)(image + 0x14) = *(uint *)(image + 0x14) | 4;
-          goto LAB_97c1da58;
+          goto checkSectionSize;
         }
       }
       else {
-LAB_97c1da58:
+checkSectionSize:
         if (sectionSize[0] != 0) {
           ob = (uint *)0x0;
           realFde = getsectdatafromheaderResult + *(int *)(image + 8);
@@ -2503,18 +2503,18 @@ LAB_97c1da58:
             cur = _seen_objects;
             if (_seen_objects != (uint *)0x0) {
               do {
-                if (*cur < *ob) goto LAB_97c1db30;
+                if (*cur < *ob) goto storeOb;
                 curNextLink = cur + 6;
                 prevLink = cur + 6;
                 cur = (uint *)*curNextLink;
               } while ((uint *)*curNextLink != (uint *)0x0);
               cur = (uint *)0x0;
             }
-LAB_97c1db30:
+storeOb:
             ob[6] = (uint)cur;
             *prevLink = (uint)ob;
           }
-          if (ret == 0) goto LAB_97c1dba4;
+          if (ret == 0) goto setImage;
           *bases = ob[1];
           bases[1] = ob[2];
           encoding = ob[4] >> 0x15 & 0xff;
@@ -2523,12 +2523,12 @@ LAB_97c1db30:
           }
           baseAddress = ((int (*)())_base_from_object)(encoding & 0xff,ob);
           ((int (*)())_read_encoded_value_with_base_97c1c498)(encoding & 0xff,baseAddress,ret + 8,bases + 2);
-          goto LAB_97c1dbb0;
+          goto loopCallKeymgrUnlockProcesswidePtr;
         }
       }
       *(uint *)(image + 0x14) = *(uint *)(image + 0x14) | 1;
     }
-LAB_97c1dba4:
+setImage:
     image = *(int *)(image + 0x10);
   } while( true );
 }
@@ -2780,7 +2780,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
     leftmost[0] = *(int *)(header + 8);
     if (y == leftmost[0]) {
       std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)insertResult,tree,(unsigned char *)0x0,y,value);
-      goto LAB_97c30d34;
+      goto storeRetPair;
     }
     std___Rb_tree_base_iterator___M_decrement((unsigned char *)j);
   }
@@ -2804,7 +2804,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   }
   std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)leftmost,tree,(unsigned char *)0x0,y,value);
   insertResult[0] = leftmost[0];
-LAB_97c30d34:
+storeRetPair:
   *(int *)retPair = insertResult[0];
   *(undefined4 *)(retPair + 4) = 1;
   return retPair;

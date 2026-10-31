@@ -307,9 +307,9 @@ int _CPPdefine(yylvalpp)
       do {
         token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
                           (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
-        if ((loopIndex == 0) && (token == 0x29)) goto LAB_97b86554;
+        if ((loopIndex == 0) && (token == 0x29)) goto setScratchR5;
         r4Fwd = extraOut2;
-        if (token != 0x10e) goto LAB_97b86774;
+        if (token != 0x10e) goto callCPPErrorToInfoLog;
         if (loopIndex < 0x40) {
           loopIndex = loopIndex + 1;
           *argAtomWrite = yylvalpp[2];
@@ -319,8 +319,8 @@ int _CPPdefine(yylvalpp)
                           (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
       } while (token == 0x2c);
       r4Fwd = extraOut3;
-      if (token != 0x29) goto LAB_97b86774;
-LAB_97b86554:
+      if (token != 0x29) goto callCPPErrorToInfoLog;
+setScratchR5:
       scratchR5 = (int *)(loopIndex << 2);
       argCount = loopIndex;
       argAtomsCopy = ((int (*)())_mem_Alloc)(*(undefined4 *)(_macros + 0x10),scratchR5);
@@ -362,7 +362,7 @@ LAB_97b86554:
           scratchR8 = *(int *)(macroSymbol + 0x1c);
           do {
             scratchR9 = *(int *)(loopIndex2 * 4 + argAtomsCopy);
-            if (*(int *)(loopIndex2 * 4 + scratchR8) != scratchR9) goto LAB_97b86728;
+            if (*(int *)(loopIndex2 * 4 + scratchR8) != scratchR9) goto callStoreStr;
             loopIndex2 = loopIndex2 + 1;
           } while (loopIndex2 < argCount);
         }
@@ -372,11 +372,11 @@ LAB_97b86554:
           readTokenResult2 = _ReadToken(*(undefined4 *)(macroSymbol + 0x20),yylvalpp);
           oldTokenInt = *yylvalpp;
           readTokenResult = _ReadToken(bodyStream,yylvalpp);
-          if ((readTokenResult != readTokenResult2) || (*yylvalpp != oldTokenInt)) goto LAB_97b86728;
+          if ((readTokenResult != readTokenResult2) || (*yylvalpp != oldTokenInt)) goto callStoreStr;
         } while (0 < readTokenResult);
       }
       else {
-LAB_97b86728:
+callStoreStr:
         _StoreStr("Macro Redefined");
         stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,macroAtom);
         _StoreStr(stringOfAtom);
@@ -394,7 +394,7 @@ LAB_97b86728:
     *(undefined4 *)(macroSymbol + 0x20) = bodyStream;
   }
   else {
-LAB_97b86774:
+callCPPErrorToInfoLog:
     _CPPErrorToInfoLog("#define",r4Fwd,scratchR5,leftoverR6,leftoverR7,scratchR8,scratchR9);
   }
   return token;
@@ -749,7 +749,7 @@ int _eval(token, precedence, result, errorFlag, yylvalpp)
         r4Artifact = extraOut2;
       }
       r4TokenPair = CONCAT44(nextToken,r4Artifact);
-      if (nextToken != 0x10e) goto LAB_97b86fdc;
+      if (nextToken != 0x10e) goto setNextToken;
       definedValue = 0;
       lookUpSymbolResult = _LookUpSymbol(_macros,yylvalpp[2]);
       cppRefInt = (int *)PTR__cpp_a7b7c0a4;
@@ -759,12 +759,12 @@ int _eval(token, precedence, result, errorFlag, yylvalpp)
       *result = definedValue;
       nextToken = (**(code **)(*(int *)(*cppRefInt + 0x20) + 4))(*(int *)(*cppRefInt + 0x20),yylvalpp);
       r4TokenPair = CONCAT44(nextToken,extraOut3);
-      if (!hadOpenParen) goto LAB_97b86f0c;
-      goto LAB_97b86e70;
+      if (!hadOpenParen) goto loopSetErrFlag;
+      goto checkUlonglong;
     }
     macroExpandResult = ((int (*)())_MacroExpand)(yylvalpp[2],yylvalpp);
     r4TokenPair = CONCAT44(0x10e,(int)macroExpandResult);
-    if ((int)((ulonglong)macroExpandResult >> 0x20) == 0) goto LAB_97b86fdc;
+    if ((int)((ulonglong)macroExpandResult >> 0x20) == 0) goto setNextToken;
     cppState = *(int *)PTR__cpp_a7b7c0a4;
     token = (**(code **)(*(int *)(cppState + 0x20) + 4))
                         (*(int *)(cppState + 0x20),yylvalpp,aliasResult,aliasErrorFlag,aliasYylvalpp,leftoverR8,cppState);
@@ -774,11 +774,11 @@ int _eval(token, precedence, result, errorFlag, yylvalpp)
     *result = *yylvalpp;
     cppState = *cppRefInt;
     nextToken = *(int *)(cppState + 0x20);
-LAB_97b86e10:
+loopSetNextToken:
     nextToken = (**(code **)(nextToken + 4))(nextToken,yylvalpp,aliasResult,aliasErrorFlag,aliasYylvalpp,leftoverR8,cppState);
-LAB_97b86f0c:
+loopSetErrFlag:
     errFlag = *errorFlag;
-LAB_97b86f10:
+loopSetCppRef:
     cppRef = PTR__cpp_a7b7c0a4;
     if (errFlag == 0) {
       while ((nextToken != 0x29 && (nextToken != 10))) {
@@ -819,11 +819,11 @@ LAB_97b86f10:
       r4TokenPair = ((int (*)())_eval)(scanToken,0,result,errorFlag,yylvalpp);
       nextToken = (int)((ulonglong)r4TokenPair >> 0x20);
       errFlag = *errorFlag;
-      if (errFlag != 0) goto LAB_97b86f10;
-LAB_97b86e70:
+      if (errFlag != 0) goto loopSetCppRef;
+checkUlonglong:
       if ((int)((ulonglong)r4TokenPair >> 0x20) == 0x29) {
         nextToken = *(int *)(*cppRefInt + 0x20);
-        goto LAB_97b86e10;
+        goto loopSetNextToken;
       }
     }
     else {
@@ -838,14 +838,14 @@ LAB_97b86e70:
             nextToken = ((int (*)())_eval)(scanToken,0xc,result,errorFlag,yylvalpp);
             unopResult = (**(code **)(&UNK_a7b7cf24 + unopIndex * 8))(*result);
             *result = unopResult;
-            goto LAB_97b86f0c;
+            goto loopSetErrFlag;
           }
           break;
         }
         unopIndex = unopIndex + -1;
       } while (-1 < unopIndex);
     }
-LAB_97b86fdc:
+setNextToken:
     nextToken = (int)((ulonglong)r4TokenPair >> 0x20);
     _CPPErrorToInfoLog("incorrect preprocessor directive",(int)r4TokenPair,aliasResult,aliasErrorFlag,aliasYylvalpp,leftoverR8,cppState);
     *errorFlag = 1;
@@ -1137,7 +1137,7 @@ int _CPPpragma(yylvalpp)
         r4Fwd = extraOutB;
       }
       if (token == 0x10b) {
-LAB_97b8758c:
+loopSetSrcStr:
         srcStr = (undefined2 *)(yylvalpp + 0xc);
         length = _strlen(srcStr);
         tokenCopy = _malloc(length + 1);
@@ -1158,16 +1158,16 @@ LAB_97b8758c:
             length = _strlen(srcStr);
             tokenCopy = _malloc(length + 1);
             allTokens[tokenCount] = tokenCopy;
-            goto LAB_97b875f0;
+            goto setTokenCount;
           }
-          if (token == 0x10f) goto LAB_97b8758c;
+          if (token == 0x10f) goto loopSetSrcStr;
         }
         charStr[0] = (undefined2)((token & 0xff) << 8);
         tokenCopy = _malloc(2);
         allTokens[tokenCount] = tokenCopy;
         srcStr = charStr;
       }
-LAB_97b875f0:
+setTokenCount:
       tokenCount = tokenCount + 1;
       _strcpy(tokenCopy,srcStr);
       cppRef = PTR__cpp_a7b7c0a4;
@@ -1358,7 +1358,7 @@ int _readCPPline(yylvalpp)
           versionFlag = 1;
           *(undefined4 *)(*(int *)cppRef + 0x34) = 0;
           cppState = *(int *)cppRef;
-          goto LAB_97b87cb4;
+          goto storeCppState;
         }
         cppStateInput = *(int *)cppRef;
         if (*(int *)(cppStateInput + 0x34) == 0) {
@@ -1426,13 +1426,13 @@ int _readCPPline(yylvalpp)
                   _CPPShInfoLogMsg(strfromTStr,extraOut3,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
                   _ResetTString();
                 }
-                goto LAB_97b87c50;
+                goto setCppRef;
               }
               isIfdef = 0;
             }
             token = ((int (*)())_CPPifdef)(isIfdef,yylvalpp);
           }
-          goto LAB_97b87c50;
+          goto setCppRef;
         }
         cppStateInput = *(int *)cppRef;
         if (*(int *)(cppStateInput + 0x34) == 0) {
@@ -1449,7 +1449,7 @@ int _readCPPline(yylvalpp)
       token = ((int (*)())_CPPelse)(0,yylvalpp,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
     }
   }
-LAB_97b87c50:
+setCppRef:
   cppRef = PTR__cpp_a7b7c0a4;
   if ((token != 10) && (token != 0)) {
     while (token != -1) {
@@ -1460,7 +1460,7 @@ LAB_97b87c50:
   }
   versionFlag = versionFlag ^ 1;
   cppState = *(int *)PTR__cpp_a7b7c0a4;
-LAB_97b87cb4:
+storeCppState:
   *(uint *)(cppState + 0x28) = versionFlag;
   return token;
 }
@@ -1585,7 +1585,7 @@ int _macro_scan(macroInput, yylvalpp, unusedArg3, unusedArg4, unusedArg5, unused
             unusedArg3 = 0;
             _ReadFromTokenStream
                       (*(undefined4 *)(formalIndex * 4 + macroInput[7]),*(undefined4 *)(yylvalpp + 8),0);
-            goto LAB_97b87fc4;
+            goto setCurrentInput;
           }
           break;
         }
@@ -1614,7 +1614,7 @@ int _macro_scan(macroInput, yylvalpp, unusedArg3, unusedArg4, unusedArg5, unused
     _free(argStreams);
   }
   _free(macroInput);
-LAB_97b87fc4:
+setCurrentInput:
   currentInput = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
                     
                     
@@ -1713,24 +1713,24 @@ int _MacroExpand(atom, yylvalpp)
           cppRef = PTR__cpp_a7b7c0a4;
           argIndex = 0;
           argHasTokens = false;
-LAB_97b881d8:
+loopSetParenDepth:
           parenDepth = 0;
           do {
             argToken = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
                                (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
             cppRefCopy = PTR__cpp_a7b7c0a4;
             gotToken = 0 < argToken;
-            if (!gotToken) goto LAB_97b8830c;
+            if (!gotToken) goto callStoreStr;
             scratchPtr = (int *)macroInput[6];
             isCloseParen = argToken == 0x29;
-            if ((*scratchPtr == 0) && (!isCloseParen)) goto LAB_97b88284;
+            if ((*scratchPtr == 0) && (!isCloseParen)) goto setArgIndex;
             if (parenDepth == 0) {
-              if (argToken == 0x2c) goto LAB_97b88284;
+              if (argToken == 0x2c) goto setArgIndex;
               if (isCloseParen) {
                 if ((*scratchPtr != 1) || (argHasTokens)) {
                   argIndex = argIndex + 1;
                 }
-                goto LAB_97b88294;
+                goto checkArgIndex;
               }
             }
             if (argToken == 0x28) {
@@ -1744,28 +1744,28 @@ LAB_97b881d8:
             _RecordToken(*(undefined4 *)(argIndex * 4 + macroInput[7]),argToken,yylvalpp);
           } while( true );
         }
-        goto LAB_97b883b8;
+        goto setCppRef;
       }
       yylvalpp[3] = 0x31303000;
       atoiResult = _atoi(yylvalpp + 3);
       *yylvalpp = atoiResult;
-      goto LAB_97b88078;
+      goto callUngetToken;
     }
     expansionNumber = _GetStringNumber();
   }
   *yylvalpp = expansionNumber;
   _sprintf((char *)(yylvalpp + 3),"%d",expansionNumber);
-LAB_97b88078:
+callUngetToken:
   _UngetToken(0x10f,yylvalpp);
   return 1;
-LAB_97b88284:
+setArgIndex:
   argIndex = argIndex + 1;
-  if (*scratchPtr <= argIndex) goto LAB_97b88294;
-  goto LAB_97b881d8;
-LAB_97b88294:
+  if (*scratchPtr <= argIndex) goto checkArgIndex;
+  goto loopSetParenDepth;
+checkArgIndex:
   if (argIndex < *scratchPtr) {
     errorMessage = "Too few args in Macro ";
-LAB_97b8834c:
+loopCallStoreStr:
     _StoreStr(errorMessage);
     stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,atom);
     _StoreStr(stringOfAtom);
@@ -1791,7 +1791,7 @@ LAB_97b8834c:
       } while ((-1 < skipToken) && ((prevWasCloseParen = skipToken == 0x29, 0 < skipDepth || (!prevWasCloseParen))));
     }
     if (!gotToken) {
-LAB_97b8830c:
+callStoreStr:
       _StoreStr("EOF in Macro ");
       stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,atom);
       _StoreStr(stringOfAtom);
@@ -1801,7 +1801,7 @@ LAB_97b8830c:
       return 1;
     }
     errorMessage = "Too many args in Macro ";
-    goto LAB_97b8834c;
+    goto loopCallStoreStr;
   }
   argIndex = 0;
   if (0 < *scratchPtr) {
@@ -1812,7 +1812,7 @@ LAB_97b8830c:
       *(undefined4 *)(argByteOffset + macroInput[7]) = prescanMacroArgResult;
     } while (argIndex < *(int *)macroInput[6]);
   }
-LAB_97b883b8:
+setCppRef:
   cppRef = PTR__cpp_a7b7c0a4;
   *macroInput = *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
   *(uint *)(lookUpSymbolResult + 0x24) = *(uint *)(lookUpSymbolResult + 0x24) | 0x80000000;

@@ -677,7 +677,7 @@ int ParseSymbol__ResolveOpenGLType(this)
     }
     switch(basicType) {
     default:
-      goto switchD_97bba640_caseD_0;
+      goto basicTypeCase0;
     case 1:
       typeIsMatrix = (**(code **)(**(int **)(this + 0xc) + 0x34))
                         (*(int **)(this + 0xc),staleR4,staleR5,staleR6,staleR7,staleR8,basicType * 4);
@@ -696,7 +696,7 @@ int ParseSymbol__ResolveOpenGLType(this)
           if (nominalSize != 3) {
             sizeIsFour = nominalSize == 4;
             glType = 0x8b52;
-            goto LAB_97bba7d4;
+            goto loopCheckSizeIsFour;
           }
           glType = 0x8b51;
         }
@@ -715,7 +715,7 @@ int ParseSymbol__ResolveOpenGLType(this)
         else {
           sizeIsFour = nominalSize == 4;
           glType = 0x8b5c;
-LAB_97bba7d4:
+loopCheckSizeIsFour:
           if (!sizeIsFour) {
             return;
           }
@@ -737,7 +737,7 @@ LAB_97bba7d4:
         if (nominalSize != 3) {
           sizeIsFour = nominalSize == 4;
           glType = 0x8b55;
-          goto LAB_97bba7d4;
+          goto loopCheckSizeIsFour;
         }
         glType = 0x8b54;
       }
@@ -757,7 +757,7 @@ LAB_97bba7d4:
         if (nominalSize != 3) {
           sizeIsFour = nominalSize == 4;
           glType = 0x8b59;
-          goto LAB_97bba7d4;
+          goto loopCheckSizeIsFour;
         }
         glType = 0x8b58;
       }
@@ -791,7 +791,7 @@ LAB_97bba7d4:
     }
   }
   *(undefined2 *)(this + 0x2c) = glType;
-switchD_97bba640_caseD_0:
+basicTypeCase0:
   return;
 }
 
@@ -1170,11 +1170,11 @@ int ParseSymbol__GetString(this, verbose)
   *result = '\0';
   chunk = *(byte **)this;
   if (chunk == (byte *)0x0) {
-LAB_97bbb054:
+loopCheckChunkText:
     if (chunkText != 0) {
       _sprintf(result,DAT_a7b7bbbc,result,chunkText,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
       _free(chunkText);
-      goto LAB_97bbb0a4;
+      goto setGLStringForType;
     }
   }
   else {
@@ -1185,7 +1185,7 @@ LAB_97bbb054:
         chunk = *(byte **)this;
       }
       chunkText = PrintAttribute(*(undefined4 *)(chunk + 0xc),*(undefined4 *)(chunk + 0x10));
-      goto LAB_97bbb054;
+      goto loopCheckChunkText;
     }
     if (2 < chunkKind) {
       if (chunkKind == 3) {
@@ -1196,20 +1196,20 @@ LAB_97bbb054:
         chunkText = PrintParam(*(undefined4 *)(chunk + 0xc),*(undefined4 *)(chunk + 0x10));
       }
       else {
-        if (chunkKind != 4) goto LAB_97bbb038;
+        if (chunkKind != 4) goto setChunkText;
         if (verbose != 0) {
           _sprintf(result,DAT_a7b7bbac);
           chunk = *(byte **)this;
         }
         chunkText = PrintOutput(*(undefined4 *)(chunk + 0xc),*(undefined4 *)(chunk + 0x10));
       }
-      goto LAB_97bbb054;
+      goto loopCheckChunkText;
     }
     if (chunkKind != 0) {
-LAB_97bbb038:
+setChunkText:
       chunkText = _malloc(0x20);
       _strcpy(chunkText,DAT_a7b7bbb8);
-      goto LAB_97bbb054;
+      goto loopCheckChunkText;
     }
     format = DAT_a7b7bbb4;
     if (verbose != 0) {
@@ -1218,7 +1218,7 @@ LAB_97bbb038:
     _sprintf(result,format,(uint)*(ushort *)(chunk + 0x12));
   }
   _sprintf(result,DAT_a7b7bbc0,result,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
-LAB_97bbb0a4:
+setGLStringForType:
   gLStringForType = GetGLStringForType((uint)*(ushort *)(this + 0x2c));
   _sprintf(result,DAT_a7b7bbc4,result,gLStringForType);
   if (1 < *(short *)(this + 0x2e)) {
@@ -1443,27 +1443,27 @@ int __ZN12ParseOperandD4Ev(this)
   void *symbol;
   
   symbol = *(void **)this;
-  if (symbol == (void *)0x0) goto LAB_97bbb3cc;
+  if (symbol == (void *)0x0) goto checkThis;
   if ((*(int *)((int)symbol + 0x3c) == 0) ||
      (ParseOperand__temporaryAllocator == (unsigned char *)0x0)) {
     if ((*(int *)((int)symbol + 0x58) != 0) &&
        (ParseOperand__addressTempAllocator != (unsigned char *)0x0)) {
       AddressTempAllocator__releaseTemporary
                 (ParseOperand__addressTempAllocator,*(undefined4 *)((int)symbol + 0x28));
-      goto LAB_97bbb3a4;
+      goto setSymbol;
     }
   }
   else {
     ((int (*)())TemporaryAllocator__releaseTemporary)(ParseOperand__temporaryAllocator,(uint)*(ushort *)((int)symbol + 0x2c),
                *(uint *)((int)symbol + 0x28));
-LAB_97bbb3a4:
+setSymbol:
     symbol = *(void **)this;
   }
   if ((*(int *)((int)symbol + 0x50) == 0) && (symbol != (void *)0x0)) {
     ((int (*)())__ZN11ParseSymbolD1Ev)(symbol);
     __ZdlPv(symbol);
   }
-LAB_97bbb3cc:
+checkThis:
   if (*(int *)((int)this + 0x1c) != 0) {
     _free(*(int *)((int)this + 0x1c));
   }
@@ -1699,7 +1699,7 @@ int ParseOperand__GetAsDestVar(destDesc, operand, markWord1)
   isMatrix2 = ((int (*)())ParseOperand__IsMatrix)(operand);
   columnOffset = 0;
   if (isMatrix2 == 0) {
-LAB_97bbb868:
+loopSetRegOffset:
     regOffset = columnOffset;
     directCount = *(uint *)(operand + 0x20);
   }
@@ -1709,7 +1709,7 @@ LAB_97bbb868:
       columnOffset = GetDirectIndex(operand,0);
       directStart = 1;
       *destDesc = *destDesc & 0xffffefff;
-      goto LAB_97bbb868;
+      goto loopSetRegOffset;
     }
   }
   if (directStart == directCount) {
@@ -1717,19 +1717,19 @@ LAB_97bbb868:
       descWord = *destDesc;
       directStart = descWord >> 10 & 3;
       if (directStart == 1) {
-LAB_97bbb950:
+loopSetDescWord:
         descWord = descWord | 0x4000;
         *destDesc = descWord;
       }
       else if (directStart != 0) {
         if (directStart != 2) {
-          if (directStart != 3) goto LAB_97bbba00;
+          if (directStart != 3) goto checkOperand;
           descWord = descWord | 0x10000;
           *destDesc = descWord;
         }
         descWord = descWord | 0x8000;
         *destDesc = descWord;
-        goto LAB_97bbb950;
+        goto loopSetDescWord;
       }
       *destDesc = descWord | 0x2000;
     }
@@ -1740,7 +1740,7 @@ LAB_97bbb950:
           swizzle = ParseOperand__GetSwizzle(operand,loopIndex);
           if (swizzle == 1) {
             directStart = (loopIndex & 3) << 6 | *destDesc & 0xffffff3f | 0x4000;
-LAB_97bbb900:
+loopStoreDestDesc:
             *destDesc = directStart;
           }
           else {
@@ -1749,17 +1749,17 @@ LAB_97bbb900:
                 directStart = (loopIndex & 3) << 4 | *destDesc & 0xffffffcf | 0x8000;
               }
               else {
-                if (swizzle != 3) goto LAB_97bbb904;
+                if (swizzle != 3) goto setLoopIndex;
                 directStart = (loopIndex & 3) << 2 | *destDesc & 0xfffffff3 | 0x10000;
               }
-              goto LAB_97bbb900;
+              goto loopStoreDestDesc;
             }
             if (swizzle == 0) {
               directStart = (loopIndex & 3) << 8 | *destDesc & 0xfffffcff | 0x2000;
-              goto LAB_97bbb900;
+              goto loopStoreDestDesc;
             }
           }
-LAB_97bbb904:
+setLoopIndex:
           loopIndex = loopIndex + 1;
         } while (loopIndex < *(uint *)(operand + 0x14));
       }
@@ -1772,41 +1772,41 @@ LAB_97bbb904:
         directIndex = GetDirectIndex(operand,directIdx);
         if (directIndex == 1) {
           newWord = (directIdx - directStart) * 0x40 & 0xc0 | *destDesc & 0xffffff3f | 0x4000;
-LAB_97bbb9ec:
+loopStoreDestDesc2:
           *destDesc = newWord;
           directCount = *(uint *)(operand + 0x20);
         }
         else {
           if (directIndex == 0) {
             newWord = (directIdx - directStart) * 0x100 & 0x300 | *destDesc & 0xfffffcff | 0x2000;
-            goto LAB_97bbb9ec;
+            goto loopStoreDestDesc2;
           }
           if (directIndex == 2) {
             newWord = (directIdx - directStart) * 0x10 & 0x30 | *destDesc & 0xffffffcf | 0x8000;
-            goto LAB_97bbb9ec;
+            goto loopStoreDestDesc2;
           }
           if (directIndex == 3) {
             newWord = (directIdx - directStart) * 4 & 0xc | *destDesc & 0xfffffff3 | 0x10000;
-            goto LAB_97bbb9ec;
+            goto loopStoreDestDesc2;
           }
         }
         directIdx = directIdx + 1;
       } while (directIdx < directCount);
     }
   }
-LAB_97bbba00:
+checkOperand:
   if (*(char *)**(undefined4 **)operand == '\0') {
     descWord = *destDesc;
     classBits = 1;
   }
   else {
-    if (*(char *)**(undefined4 **)operand != '\x04') goto LAB_97bbba4c;
+    if (*(char *)**(undefined4 **)operand != '\x04') goto checkMarkWord1;
     descWord = *destDesc;
     classBits = 3;
   }
   *destDesc = classBits << 0x11 | descWord & 0xfff1ffff;
   *(short *)((int)destDesc + 6) = *(short *)(**(int **)operand + 0x12) + regOffset;
-LAB_97bbba4c:
+checkMarkWord1:
   if (markWord1 != 0) {
     destDesc[1] = destDesc[1] & 0x800fffff | 0x80000000;
   }
@@ -1853,7 +1853,7 @@ int ParseOperand__GetAsSourceVar(srcDesc, operand, markWord1)
       if (loopIndex == 1) {
         swizzle = ParseOperand__GetSwizzle(operand,1);
         swizzleWord = (swizzle & 3) << 0x13 | *srcDesc & 0xffe7ffff;
-LAB_97bbbb6c:
+loopStoreSrcDesc:
         *srcDesc = swizzleWord;
         swizzleCount = *(uint *)(operand + 0x14);
       }
@@ -1861,17 +1861,17 @@ LAB_97bbbb6c:
         if (loopIndex == 0) {
           swizzle = ParseOperand__GetSwizzle(operand,0);
           swizzleWord = (swizzle & 3) << 0x15 | *srcDesc & 0xff9fffff;
-          goto LAB_97bbbb6c;
+          goto loopStoreSrcDesc;
         }
         if (loopIndex == 2) {
           swizzle = ParseOperand__GetSwizzle(operand,2);
           swizzleWord = (swizzle & 3) << 0x11 | *srcDesc & 0xfff9ffff;
-          goto LAB_97bbbb6c;
+          goto loopStoreSrcDesc;
         }
         if (loopIndex == 3) {
           swizzle = ParseOperand__GetSwizzle(operand,3);
           swizzleWord = (swizzle & 3) << 0xf | *srcDesc & 0xfffe7fff;
-          goto LAB_97bbbb6c;
+          goto loopStoreSrcDesc;
         }
       }
       loopIndex = loopIndex + 1;
@@ -1887,11 +1887,11 @@ LAB_97bbbb6c:
     if (directCount == 0) {
       swizzle0 = *srcDesc >> 0x15 & 3;
       *srcDesc = swizzle0 << 0x13 | swizzle0 << 0x11 | swizzle0 << 0xf | *srcDesc & 0xffe07fff;
-      goto LAB_97bbbbc4;
+      goto setDirectCount;
     }
   }
   else {
-LAB_97bbbbc4:
+setDirectCount:
     directCount = *(int *)(operand + 0x20);
   }
   directLeft = directCount;
@@ -1925,7 +1925,7 @@ LAB_97bbbbc4:
   }
   else {
     if (chunkKind < 3) {
-      if (chunkKind != 0) goto LAB_97bbbcb0;
+      if (chunkKind != 0) goto storeSrcDesc;
       descWord = *srcDesc;
       classBits = 1;
     }
@@ -1934,7 +1934,7 @@ LAB_97bbbbc4:
       classBits = 2;
     }
     else {
-      if (chunkKind != 4) goto LAB_97bbbcb0;
+      if (chunkKind != 4) goto storeSrcDesc;
       descWord = *srcDesc;
       classBits = 3;
     }
@@ -1942,7 +1942,7 @@ LAB_97bbbbc4:
   }
   *srcDesc = descWord;
   *(short *)((int)srcDesc + 6) = *(short *)(**(int **)operand + 0x12) + regOffset;
-LAB_97bbbcb0:
+storeSrcDesc:
   *srcDesc = (uint)(matrixWidth != 1) * 0x4000 | *srcDesc & 0xffffbfff;
   logicalSize = ((int (*)())ParseOperand__GetLogicalSize)(operand);
   oldWord0 = *srcDesc;

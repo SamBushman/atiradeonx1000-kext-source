@@ -705,7 +705,7 @@ int _GetStreamArray_97c08e40(listKind, registerNumber, stream, outRangeStart, ou
     for (arrayChunk = **(int **)(stream + 8); arrayChunk != 0; arrayChunk = *(int *)(arrayChunk + 8)) {
       rangeStart = (uint)*(ushort *)(arrayChunk + 0xe);
       if ((rangeStart <= registerNumber) && (registerNumber <= *(ushort *)(arrayChunk + 0x12))) {
-LAB_97c08e8c:
+loopStoreOutRangeStart:
         *outRangeStart = rangeStart;
         *outRangeEnd = (uint)*(ushort *)(arrayChunk + 0x12);
         return arrayIndex;
@@ -716,7 +716,7 @@ LAB_97c08e8c:
   else if (listKind == 2) {
     for (arrayChunk = **(int **)(stream + 0x14); arrayChunk != 0; arrayChunk = *(int *)(arrayChunk + 8)) {
       rangeStart = (uint)*(ushort *)(arrayChunk + 0xe);
-      if ((rangeStart <= registerNumber) && (registerNumber <= *(ushort *)(arrayChunk + 0x12))) goto LAB_97c08e8c;
+      if ((rangeStart <= registerNumber) && (registerNumber <= *(ushort *)(arrayChunk + 0x12))) goto loopStoreOutRangeStart;
       arrayIndex = arrayIndex + 1;
     }
   }
@@ -1076,9 +1076,9 @@ int _RegistersMerge(program)
         keptVectorIndex = 0;
         keptVector = keptVectors;
         if (keptVectorCount != 0) {
-LAB_97c09514:
+loopSetRegisterVectorCanMergeResult:
           registerVectorCanMergeResult = ((int (*)())_RegisterVectorCanMerge)(keptVector,candidateVector);
-          if (registerVectorCanMergeResult == 0) goto LAB_97c09608;
+          if (registerVectorCanMergeResult == 0) goto setKeptVectorIndex;
           componentOffset = 0;
           componentsRemaining = 3;
           do {
@@ -1111,11 +1111,11 @@ LAB_97c09514:
           }
           merged = true;
         }
-LAB_97c09618:
-        if (!merged) goto LAB_97c09620;
+loopCheckMerged:
+        if (!merged) goto setKeptVectorCount;
       }
       else {
-LAB_97c09620:
+setKeptVectorCount:
         keptVectorCount = keptVectorCount + 1;
         keptVectors = (int *)_realloc(keptVectors,keptVectorCount * 0x10);
         componentsLeft = 4;
@@ -1139,11 +1139,11 @@ LAB_97c09620:
     _free(replacements);
   }
   return;
-LAB_97c09608:
+setKeptVectorIndex:
   keptVectorIndex = keptVectorIndex + 1;
   keptVector = keptVector + 4;
-  if (keptVectorCount <= keptVectorIndex) goto LAB_97c09618;
-  goto LAB_97c09514;
+  if (keptVectorCount <= keptVectorIndex) goto loopCheckMerged;
+  goto loopSetRegisterVectorCanMergeResult;
 }
 
 /* _DeadCodeEliminationSimple @ 0x97c096b4 (440 bytes) */
@@ -1183,11 +1183,11 @@ int _DeadCodeEliminationSimple(program)
             destIndex = 0;
             if (destCount == 0) {
               isDead = instruction[4] == 0;
-LAB_97c0978c:
+loopCheckIsDead:
               if (isDead) {
                 _PPStreamRemoveOperation(*program,instruction[6]);
                 instruction[5] = 1;
-                goto LAB_97c09828;
+                goto setInstructionIndex;
               }
             }
             else {
@@ -1203,7 +1203,7 @@ LAB_97c0978c:
                     destCount = instruction[2];
                   }
                   destIndex = destIndex + 1;
-                  if (destCount <= destIndex) goto LAB_97c0978c;
+                  if (destCount <= destIndex) goto loopCheckIsDead;
                 } while (isDead);
               }
             }
@@ -1231,7 +1231,7 @@ LAB_97c0978c:
               } while (registerIndex < sourceCount);
             }
           }
-LAB_97c09828:
+setInstructionIndex:
           instructionIndex = instructionIndex + -1;
           instructionOffset = instructionOffset + -0x1c;
         } while (-1 < instructionIndex);
@@ -1468,10 +1468,10 @@ int _RegistersCleanup(program)
       groupRecord = program[4] + recordIndex * 0x2c;
       if ((((*(int *)(groupRecord + 0x18) == 0) || (*(int *)(groupRecord + 0x44) == 0)) ||
           (*(int *)(groupRecord + 0x70) == 0)) ||
-         ((*(int *)(groupRecord + 0x9c) == 0 || (*(int *)(groupRecord + 0x28) == 0)))) goto LAB_97c09d98;
+         ((*(int *)(groupRecord + 0x9c) == 0 || (*(int *)(groupRecord + 0x28) == 0)))) goto setRecordIndex;
       switch(*(undefined4 *)(groupRecord + 0x14)) {
       default:
-        goto switchD_97c09d2c_caseD_0;
+        goto groupRecordCase0;
       case 1:
         usageList = *(undefined4 *)(*program + 4);
         break;
@@ -1480,7 +1480,7 @@ int _RegistersCleanup(program)
           usageList = *(undefined4 *)(*program + 0x10);
           break;
         }
-        goto switchD_97c09d2c_caseD_0;
+        goto groupRecordCase0;
       case 3:
         usageList = *(undefined4 *)(*program + 0x1c);
         break;
@@ -1488,13 +1488,13 @@ int _RegistersCleanup(program)
         usageList = *(undefined4 *)(*program + 0xc);
       }
       _PPStreamChunkListRemoveChunk(usageList,*(int *)(groupRecord + 0x28));
-switchD_97c09d2c_caseD_0:
+groupRecordCase0:
       *(undefined4 *)(groupRecord + 0x28) = 0;
       *(undefined4 *)(groupRecord + 0x54) = 0;
       *(undefined4 *)(groupRecord + 0x80) = 0;
       *(undefined4 *)(groupRecord + 0xac) = 0;
       registerCount = program[3];
-LAB_97c09d98:
+setRecordIndex:
       recordIndex = recordIndex + 4;
     } while (recordIndex < registerCount);
   }
@@ -1743,24 +1743,24 @@ int _InstructionAdd(program, block, operationChunk)
       operandScratch[2] = 0;
       operandScratch[3] = 0;
       if (operandSizeBits == 1) {
-LAB_97c0a284:
+loopStoreOperandScratch:
         *(undefined4 *)((int)operandScratch + (*(uint *)(operandCursor + 0x1c) >> 0x11 & 0xc)) = 1;
-LAB_97c0a290:
+loopStoreOperandScratch2:
         *(undefined4 *)((int)operandScratch + (*(uint *)(operandCursor + 0x1c) >> 0x13 & 0xc)) = 1;
       }
       else {
         if (1 < operandSizeBits) {
           if (operandSizeBits != 2) {
-            if (operandSizeBits != 3) goto LAB_97c0a29c;
+            if (operandSizeBits != 3) goto setOperandWord;
             *(undefined4 *)((int)operandScratch + (sourceWord >> 0xd & 0xc)) = 1;
             sourceWord = *(uint *)(operandCursor + 0x1c);
           }
           *(undefined4 *)((int)operandScratch + (sourceWord >> 0xf & 0xc)) = 1;
-          goto LAB_97c0a284;
+          goto loopStoreOperandScratch;
         }
-        if (operandSizeBits == 0) goto LAB_97c0a290;
+        if (operandSizeBits == 0) goto loopStoreOperandScratch2;
       }
-LAB_97c0a29c:
+setOperandWord:
       operandWord = *(uint *)(operandCursor + 0x1c);
       usesIndirect = usesIndirect | operandWord >> 0x1f;
       ((int (*)())_GetRegisterIndicies)(*program,operandScratch + 4,&sourceLastIndex,operandWord >> 0x17 & 7,(uint)*(ushort *)(operandCursor + 0x22),
@@ -2192,11 +2192,11 @@ int _Blockify(program)
     case 0x59:
       break;
     default:
-      goto switchD_97c0ac70_caseD_4e;
+      goto operationChunkCase4e;
     }
     ((int (*)())_GetOrAddBlock)(program,blockLabel);
     nextOperation = *(int *)(operationChunk + 8);
-switchD_97c0ac70_caseD_4e:
+operationChunkCase4e:
     operationChunk = nextOperation;
   }
   _memset(program[6],0,program[5] << 2);
@@ -2232,11 +2232,11 @@ switchD_97c0ac70_caseD_4e:
       case 0x59:
         break;
       default:
-        goto switchD_97c0adac_caseD_4e;
+        goto operationChunkCase4e2;
       }
       ((int (*)())_GetBlockFrom)(program,blockLabel,nextBlockIndex);
       nextOperation = *(int *)(operationChunk + 8);
-switchD_97c0adac_caseD_4e:
+operationChunkCase4e2:
       operationChunk = nextOperation;
     } while (nextOperation != 0);
     stream = *program;
@@ -2266,7 +2266,7 @@ switchD_97c0adac_caseD_4e:
     case 0x69:
       fallthroughBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
       edgeTargetBlock = ((int (*)())_GetBlock)(program,*(uint *)(operationChunk + 0x10) & 0x3ffff);
-      goto LAB_97c0b02c;
+      goto setCurrentBlock;
     case 0x4c:
       break;
     case 0x4d:
@@ -2275,7 +2275,7 @@ switchD_97c0adac_caseD_4e:
     default:
       edgeTargetBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
       fallthroughBlock = edgeTargetBlock;
-      if (edgeTargetBlock != 0) goto LAB_97c0b02c;
+      if (edgeTargetBlock != 0) goto setCurrentBlock;
       break;
     case 0x55:
     case 0x56:
@@ -2287,11 +2287,11 @@ switchD_97c0adac_caseD_4e:
       fallthroughBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
       edgeTargetBlock = ((int (*)())_GetBlock)(program,*(uint *)(operationChunk + 0x10) & 0x3ffff);
       ((int (*)())_BlockAddSuccessor)(ownerBlock,fallthroughBlock);
-      goto LAB_97c0b02c;
+      goto setCurrentBlock;
     case 0x59:
       edgeTargetBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
       fallthroughBlock = edgeTargetBlock;
-LAB_97c0b02c:
+setCurrentBlock:
       currentBlock = fallthroughBlock;
       ((int (*)())_BlockAddSuccessor)(ownerBlock,edgeTargetBlock);
     }
@@ -2425,7 +2425,7 @@ int _FlattenIfs(stream)
       }
       resumeOperation = operationChunk;
       if ((*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) == 0x55) break;
-LAB_97c0b480:
+loopSetOperationChunk:
       operationChunk = *(int *)(resumeOperation + 8);
     }
     elseOperation = 0;
@@ -2449,11 +2449,11 @@ LAB_97c0b480:
       case 0x4b:
       case 0x54:
       case 0x69:
-        if (targetLabel < (*(uint *)(scanOperation + 0x10) & 0x3ffff)) goto switchD_97c0b318_caseD_4c;
+        if (targetLabel < (*(uint *)(scanOperation + 0x10) & 0x3ffff)) goto scanOperationCase4c;
         break;
       case 0x4c:
       case 0x4d:
-switchD_97c0b318_caseD_4c:
+scanOperationCase4c:
         canFlatten = false;
       }
       sourceCount = ((int (*)())_GetValidArgs)(scanOperation);
@@ -2485,10 +2485,10 @@ switchD_97c0b318_caseD_4c:
       endifOperation = 0;
       scanOperation = *nextLink;
     } while (*nextLink != 0);
-    if (!canFlatten) goto LAB_97c0b480;
+    if (!canFlatten) goto loopSetOperationChunk;
     resumeOperation = *(int *)(operationChunk + 4);
     _FlattenIf(stream,operationChunk,elseOperation,endifOperation);
-    if (resumeOperation != 0) goto LAB_97c0b480;
+    if (resumeOperation != 0) goto loopSetOperationChunk;
     operationChunk = **(int **)(stream + 0x20);
   } while( true );
 }

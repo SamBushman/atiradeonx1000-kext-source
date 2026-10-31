@@ -440,12 +440,12 @@ int TPPStreamCompiler__newNodeFromOperand(this, parseOperand)
   }
   if (isMatrix == 0) {
     indexedDimCount = *(int *)(parseOperand + 0x20);
-LAB_97bc4168:
+loopCheckIndexedDimCount:
     if (indexedDimCount == 0) goto LAB_97bc4174;
   }
   else {
     indexedDimCount = 0;
-    if (*(uint *)(parseOperand + 0x20) == 0) goto LAB_97bc4168;
+    if (*(uint *)(parseOperand + 0x20) == 0) goto loopCheckIndexedDimCount;
     isMatrix = 0;
     if (*(uint *)(parseOperand + 0x20) < 2) goto LAB_97bc4174;
   }
@@ -785,7 +785,7 @@ int TPPStreamCompiler__newIndirectOperandFromConstant(this, parseOperand, type)
   constantSlotCount = (operandValueCount - 1U) / typeNominalSize + 1;
   if (chunkCursor == 0) {
     keepSearching = true;
-LAB_97bc4c8c:
+loopCheckKeepSearching:
     if (keepSearching) {
       valueIndex = 0;
       slotIndex = 0;
@@ -922,36 +922,36 @@ LAB_97bc4c8c:
             slotMatched = 1;
             crSizeVs2Byte = (byte)((uint)crSizeVs2 >> 0x18);
             if ((bool)(crSizeVs2Byte >> 5 & 1)) {
-LAB_97bc49e0:
+loopCheckConstantValues:
               if ((constantValues[1] != 0) &&
                  (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 4) == *(float *)(outerCandidateChunk + 0x10))) {
-LAB_97bc4a14:
+loopCheckConstantValues2:
                 if ((constantValues[0] != 0) &&
                    (*(float *)(*(int *)(parseOperand + 4) + slotIndex * 4) == *(float *)(outerCandidateChunk + 0xc)))
-                goto LAB_97bc4a38;
+                goto setSlotIndex;
               }
-LAB_97bc4a34:
+loopSetSlotMatched:
               slotMatched = 0;
             }
             else {
               if ((bool)(crSizeVs2Byte >> 6 & 1)) {
                 if ((bool)((byte)((uint)crSizeVs3 >> 0x1d) & 1)) {
-LAB_97bc49bc:
+loopCheckConstantValues3:
                   if ((constantValues[2] != 0) &&
                      (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 8) == *(float *)(outerCandidateChunk + 0x14)
-                     )) goto LAB_97bc49e0;
+                     )) goto loopCheckConstantValues;
                 }
                 else {
-                  if (!(bool)((byte)((uint)crSizeVs4 >> 0x1d) & 1)) goto LAB_97bc4a38;
+                  if (!(bool)((byte)((uint)crSizeVs4 >> 0x1d) & 1)) goto setSlotIndex;
                   if ((constantValues[3] != 0) &&
                      (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 0xc) ==
-                      *(float *)(outerCandidateChunk + 0x18))) goto LAB_97bc49bc;
+                      *(float *)(outerCandidateChunk + 0x18))) goto loopCheckConstantValues3;
                 }
-                goto LAB_97bc4a34;
+                goto loopSetSlotMatched;
               }
-              if ((bool)((byte)((uint)crSizeVs1 >> 0x1d) & 1)) goto LAB_97bc4a14;
+              if ((bool)((byte)((uint)crSizeVs1 >> 0x1d) & 1)) goto loopCheckConstantValues2;
             }
-LAB_97bc4a38:
+setSlotIndex:
             slotIndex = slotIndex + typeNominalSize;
             if ((slotMatched != 0) && (matchedChunk = chunkCursor, constantSlotCount == 1)) {
               fullMatchFound = true;
@@ -995,42 +995,42 @@ LAB_97bc4a38:
                       (float)((double)CONCAT44(0x43300000,constantValues[5]) - 4503601774854144.0)) {
                     slotMatched = 1;
                     if ((bool)(crSizeVs2Byte >> 5 & 1)) {
-LAB_97bc4bec:
+loopCheckConstantValues4:
                       if ((constantValues[1] != 0) &&
                          (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 4) ==
                           *(float *)(innerCandidateChunk + 0x10))) {
-LAB_97bc4c10:
+loopCheckConstantValues5:
                         if ((constantValues[0] != 0) &&
                            (*(float *)(*(int *)(parseOperand + 4) + slotIndex * 4) ==
-                            *(float *)(innerCandidateChunk + 0xc))) goto LAB_97bc4c34;
+                            *(float *)(innerCandidateChunk + 0xc))) goto setSlotIndex2;
                       }
-LAB_97bc4c30:
+loopSetSlotMatched2:
                       slotMatched = 0;
                     }
                     else {
                       if ((bool)(crSizeVs2Byte >> 6 & 1)) {
                         if ((bool)((byte)((uint)crSizeVs3 >> 0x1d) & 1)) {
-LAB_97bc4bc8:
+loopCheckConstantValues6:
                           if ((constantValues[2] != 0) &&
                              (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 8) ==
-                              *(float *)(innerCandidateChunk + 0x14))) goto LAB_97bc4bec;
+                              *(float *)(innerCandidateChunk + 0x14))) goto loopCheckConstantValues4;
                         }
                         else {
-                          if (!(bool)((byte)((uint)crSizeVs4 >> 0x1d) & 1)) goto LAB_97bc4c34;
+                          if (!(bool)((byte)((uint)crSizeVs4 >> 0x1d) & 1)) goto setSlotIndex2;
                           if ((constantValues[3] != 0) &&
                              (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 0xc) ==
-                              *(float *)(innerCandidateChunk + 0x18))) goto LAB_97bc4bc8;
+                              *(float *)(innerCandidateChunk + 0x18))) goto loopCheckConstantValues6;
                         }
-                        goto LAB_97bc4c30;
+                        goto loopSetSlotMatched2;
                       }
-                      if ((bool)((byte)((uint)crSizeVs1 >> 0x1d) & 1)) goto LAB_97bc4c10;
+                      if ((bool)((byte)((uint)crSizeVs1 >> 0x1d) & 1)) goto loopCheckConstantValues5;
                     }
-LAB_97bc4c34:
+setSlotIndex2:
                     slotIndex = slotIndex + typeNominalSize;
                     if (slotMatched == 0) {
                       slotIndex = 0;
                       matchedChunk = 0;
-                      goto LAB_97bc4c7c;
+                      goto checkChunkCursor;
                     }
                   }
                 }
@@ -1041,14 +1041,14 @@ LAB_97bc4c34:
                 keepSearching = false;
               }
               innerChunkCursor = *(int *)(innerChunkCursor + 8);
-              if ((innerChunkCursor == 0) || (!keepSearching)) goto LAB_97bc4c7c;
+              if ((innerChunkCursor == 0) || (!keepSearching)) goto checkChunkCursor;
             } while( true );
           }
-          goto LAB_97bc4c8c;
+          goto loopCheckKeepSearching;
         }
       }
-LAB_97bc4c7c:
-      if (chunkCursor == 0) goto LAB_97bc4c8c;
+checkChunkCursor:
+      if (chunkCursor == 0) goto loopCheckKeepSearching;
     } while (keepSearching);
   }
   chunkWord1 = *(undefined4 *)(matchedChunk + 0x10);
@@ -1499,7 +1499,7 @@ int TPPStreamCompiler__duplicateDestinationSource(compiler, destDescA, destDescB
   }
   componentSelector = destDescA >> 10 & 3;
   if (componentSelector != 1) {
-    if (componentSelector == 0) goto LAB_97bc5aec;
+    if (componentSelector == 0) goto checkDestDescA3;
     if (componentSelector != 2) {
       if (componentSelector != 3) {
         return destEqualsSource;
@@ -1509,88 +1509,88 @@ int TPPStreamCompiler__duplicateDestinationSource(compiler, destDescA, destDescB
         if (componentSelector == 1) {
           componentSelector = srcDescA & 0x180000;
           expectedSourceBits = 0x180000;
-LAB_97bc59d0:
+loopSetSwizzleMatches:
           swizzleMatches = componentSelector == expectedSourceBits;
-LAB_97bc59e8:
-          if (swizzleMatches) goto LAB_97bc59f0;
+loopCheckSwizzleMatches:
+          if (swizzleMatches) goto checkDestDescA;
         }
         else {
           if (componentSelector == 0) {
             componentSelector = srcDescA & 0x600000;
             expectedSourceBits = 0x600000;
-            goto LAB_97bc59d0;
+            goto loopSetSwizzleMatches;
           }
           if (componentSelector == 2) {
             componentSelector = srcDescA & 0x60000;
             expectedSourceBits = 0x60000;
-            goto LAB_97bc59d0;
+            goto loopSetSwizzleMatches;
           }
           if (componentSelector == 3) {
             swizzleMatches = (srcDescA & 0x18000) == 0x18000;
-            goto LAB_97bc59e8;
+            goto loopCheckSwizzleMatches;
           }
         }
         destEqualsSource = 0;
       }
     }
-LAB_97bc59f0:
+checkDestDescA:
     if ((destDescA & 0x8000) != 0) {
       componentSelector = destDescA >> 4 & 3;
       if (componentSelector == 1) {
         expectedSourceBits = 0x100000;
         componentSelector = srcDescA & 0x180000;
-LAB_97bc5a60:
-        if (componentSelector == expectedSourceBits) goto LAB_97bc5a6c;
+loopCheckComponentSelector:
+        if (componentSelector == expectedSourceBits) goto checkDestDescA2;
       }
       else {
         if (componentSelector == 0) {
           expectedSourceBits = 0x400000;
           componentSelector = srcDescA & 0x600000;
-          goto LAB_97bc5a60;
+          goto loopCheckComponentSelector;
         }
         if (componentSelector == 2) {
           expectedSourceBits = 0x40000;
           componentSelector = srcDescA & 0x60000;
-          goto LAB_97bc5a60;
+          goto loopCheckComponentSelector;
         }
         if (componentSelector == 3) {
           expectedSourceBits = 0x10000;
           componentSelector = srcDescA & 0x18000;
-          goto LAB_97bc5a60;
+          goto loopCheckComponentSelector;
         }
       }
       destEqualsSource = 0;
     }
   }
-LAB_97bc5a6c:
-  if ((destDescA & 0x4000) == 0) goto LAB_97bc5aec;
+checkDestDescA2:
+  if ((destDescA & 0x4000) == 0) goto checkDestDescA3;
   componentSelector = destDescA >> 6 & 3;
   if (componentSelector == 1) {
     expectedSourceBits = 0x80000;
     componentSelector = srcDescA & 0x180000;
-LAB_97bc5ac8:
+loopSetSwizzleMatches2:
     swizzleMatches = componentSelector == expectedSourceBits;
-LAB_97bc5ae4:
-    if (swizzleMatches) goto LAB_97bc5aec;
+loopCheckSwizzleMatches2:
+    if (swizzleMatches) goto checkDestDescA3;
   }
   else {
     if (componentSelector == 0) {
       expectedSourceBits = 0x200000;
       componentSelector = srcDescA & 0x600000;
-      goto LAB_97bc5ac8;
+      goto loopSetSwizzleMatches2;
     }
     if (componentSelector == 2) {
       expectedSourceBits = 0x20000;
       componentSelector = srcDescA & 0x60000;
-      goto LAB_97bc5ac8;
+      goto loopSetSwizzleMatches2;
     }
     if (componentSelector == 3) {
       swizzleMatches = (srcDescA & 0x18000) == 0x8000;
-      goto LAB_97bc5ae4;
+      goto loopCheckSwizzleMatches2;
     }
   }
   destEqualsSource = 0;
-LAB_97bc5aec:
+checkDestDescA3:
   if ((destDescA & 0x2000) == 0) {
     return destEqualsSource;
   }
@@ -1963,15 +1963,15 @@ int TPPStreamCompiler__getArrayOffset(this, arrayOperand)
         isRegisterChunk = chunkKind == 0;
       }
       else {
-        if (chunkKind == 3) goto LAB_97bc632c;
+        if (chunkKind == 3) goto setBaseRegister;
         isRegisterChunk = chunkKind == 4;
       }
-      if (!isRegisterChunk) goto LAB_97bc6330;
+      if (!isRegisterChunk) goto setElementSymbol;
     }
-LAB_97bc632c:
+setBaseRegister:
     baseRegister = (uint)*(ushort *)((byte *)*foundSymbol + 0x12);
   }
-LAB_97bc6330:
+setElementSymbol:
   elementSymbol = operator_new(100);
   __ZN11ParseSymbolC1Ev(elementSymbol);
   ParseSymbol__SetName(elementSymbol,*(char **)(*(int *)arrayOperand + 0x14));
@@ -1993,7 +1993,7 @@ LAB_97bc6330:
     TPPStreamCompiler__warning(this,(char *)0x0,*(char **)(*(int *)arrayOperand + 0x14),DAT_a7b7bd3c,leftoverR7,leftoverR8,
             *(int *)arrayOperand,leftoverR10);
     elementRegister = baseRegister;
-    goto LAB_97bc6440;
+    goto returnElementRegister;
   }
   chunkKind = *(byte *)*foundSymbol;
   if (chunkKind != 2) {
@@ -2001,15 +2001,15 @@ LAB_97bc6330:
       isRegisterChunk = chunkKind == 0;
     }
     else {
-      if (chunkKind == 3) goto LAB_97bc6414;
+      if (chunkKind == 3) goto setElementRegister;
       isRegisterChunk = chunkKind == 4;
     }
     elementRegister = 0;
-    if (!isRegisterChunk) goto LAB_97bc6440;
+    if (!isRegisterChunk) goto returnElementRegister;
   }
-LAB_97bc6414:
+setElementRegister:
   elementRegister = (uint)*(ushort *)((byte *)*foundSymbol + 0x12);
-LAB_97bc6440:
+returnElementRegister:
   return elementRegister - baseRegister;
 }
 
@@ -2326,10 +2326,10 @@ int TPPStreamCompiler__constructDiagonal(this, parseOperand1, parseOperand2, for
       if (loopIndex == 1) {
         fillDescBits = filldest0 & 0xfffffcff | 0x2000;
         if (logicalSize != 3) {
-          if (sizeIsNot4) goto LAB_97bc6b98;
+          if (sizeIsNot4) goto setFilldest0;
           fillDescBits = filldest0 & 0xfffffcf3 | 0x1200c;
         }
-LAB_97bc6b90:
+loopSetFillDescBits:
         fillDescBits = fillDescBits & 0xffffffcf | 0x8020;
       }
       else {
@@ -2337,17 +2337,17 @@ LAB_97bc6b90:
         if (loopIndex < 2) {
           if (isFirstColumn) {
             if (logicalSize == 3) {
-LAB_97bc6ae0:
+loopSetFilldest0:
               filldest0 = filldest0 & 0xffffffcf | 0x8020;
-LAB_97bc6af8:
+loopSetFillDescBits2:
               fillDescBits = filldest0 & 0xffffff3f | 0x4040;
             }
             else if (logicalSize < 4) {
-              if (logicalSize == 2) goto LAB_97bc6af8;
+              if (logicalSize == 2) goto loopSetFillDescBits2;
             }
             else if (!sizeIsNot4) {
               filldest0 = filldest0 & 0xfffffff3 | 0x1000c;
-              goto LAB_97bc6ae0;
+              goto loopSetFilldest0;
             }
           }
         }
@@ -2359,10 +2359,10 @@ LAB_97bc6af8:
         }
         else if (loopIndex == 3) {
           fillDescBits = filldest0 & 0xfffffc3f | 0x6040;
-          goto LAB_97bc6b90;
+          goto loopSetFillDescBits;
         }
       }
-LAB_97bc6b98:
+setFilldest0:
       filldest0 = fillDescBits;
       if (*sourceOperand == 0) {
         sourceGlType = *(ushort *)(sourceOperand + 6);
@@ -2656,7 +2656,7 @@ int TPPStreamCompiler__constructElement(this, parseOperand1, parseOperand2, argC
               do {
                 if (destLane == 1) {
                   movOpDest0 = (argElemsUsedWork & 3) << 6 | movOpDest0 & 0xffffff3f | 0x4000;
-LAB_97bc704c:
+loopSetMoveLaneCount:
                   moveLaneCount = moveLaneCount + 1;
                 }
                 else {
@@ -2665,17 +2665,17 @@ LAB_97bc704c:
                       movOpDest0 = (argElemsUsedWork & 3) << 4 | movOpDest0 & 0xffffffcf | 0x8000;
                     }
                     else {
-                      if (destLane != 3) goto LAB_97bc7050;
+                      if (destLane != 3) goto setArgElemsUsedWork;
                       movOpDest0 = (argElemsUsedWork & 3) << 2 | movOpDest0 & 0xfffffff3 | 0x10000;
                     }
-                    goto LAB_97bc704c;
+                    goto loopSetMoveLaneCount;
                   }
                   if (destLane == 0) {
                     movOpDest0 = (argElemsUsedWork & 3) << 8 | movOpDest0 & 0xfffffcff | 0x2000;
-                    goto LAB_97bc704c;
+                    goto loopSetMoveLaneCount;
                   }
                 }
-LAB_97bc7050:
+setArgElemsUsedWork:
                 argElemsUsedWork = argElemsUsedWork + 1;
                 destLane = destLane + 1;
                 moveElemsLeft = moveElemsLeft + -1;
@@ -3336,7 +3336,7 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, oper
           do {
             if ((aliasScanIndex != operandIndex) && (operands[operandIndex] == *aliasScanCursor)) {
               *(unsigned char **)(operands[operandIndex] + 0xc) = offsetOperand;
-              goto LAB_97bc7fe0;
+              goto storeOperands;
             }
             aliasScanIndex = aliasScanIndex + 1;
             aliasScanCursor = aliasScanCursor + 1;
@@ -3352,7 +3352,7 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, oper
           __ZN12ParseOperandD1Ev(offsetOperand);
           __ZdlPv(operandToFree);
         }
-LAB_97bc7fe0:
+storeOperands:
         operands[operandIndex] = tempOperand;
       }
       operandIndex = operandIndex + 1;
@@ -3384,7 +3384,7 @@ LAB_97bc7fe0:
       aliasScanCursor = operands;
       aliasScanRemaining = operandCount;
       if (operandCount < 1) {
-LAB_97bc80d0:
+loopSetOperandToFree:
         operandToFree = operands[indirectOperandIndex];
         if (operandToFree != (unsigned char *)0x0) {
           __ZN12ParseOperandD1Ev(operandToFree);
@@ -3400,7 +3400,7 @@ LAB_97bc80d0:
           aliasScanRemaining = aliasScanRemaining + -1;
           aliasScanCursor = aliasScanCursor + 1;
         } while (aliasScanRemaining != 0);
-        if (!operandAliased) goto LAB_97bc80d0;
+        if (!operandAliased) goto loopSetOperandToFree;
       }
       operands[indirectOperandIndex] = tempOperandSlot[0];
     }
@@ -3645,42 +3645,42 @@ int TPPStreamCompiler__getConstantAsSourceVar(outDesc, compiler, values, valueCo
           }
           if (usageGlTypes[0] == glType) {
             if (valueCount == 2) {
-LAB_97bc86b4:
+loopCheckLaneUsed:
               if ((laneUsed[1] != 0) && (values[1] == *(float *)(chunk + 0x10))) {
-LAB_97bc86d0:
-                if ((laneUsed[0] != 0) && (*values == *(float *)(chunk + 0xc))) goto LAB_97bc86ec;
+loopCheckLaneUsed2:
+                if ((laneUsed[0] != 0) && (*values == *(float *)(chunk + 0xc))) goto setExactMatchFound;
               }
             }
             else {
               if (2 < valueCount) {
                 if (valueCount != 3) {
-                  if (valueCount != 4) goto LAB_97bc86ec;
+                  if (valueCount != 4) goto setExactMatchFound;
                   if ((laneUsed[3] == 0) || (values[3] != *(float *)(chunk + 0x18)))
-                  goto LAB_97bc86f8;
+                  goto setChunkCursor;
                 }
                 if ((laneUsed[2] == 0) || (values[2] != *(float *)(chunk + 0x14)))
-                goto LAB_97bc86f8;
-                goto LAB_97bc86b4;
+                goto setChunkCursor;
+                goto loopCheckLaneUsed;
               }
-              if (valueCount == 1) goto LAB_97bc86d0;
-LAB_97bc86ec:
+              if (valueCount == 1) goto loopCheckLaneUsed2;
+setExactMatchFound:
               exactMatchFound = true;
               *(undefined2 *)(outDesc + 6) = (*(unsigned short *)((unsigned char *)&(scratchWord1) + 2));
             }
           }
         }
-LAB_97bc86f8:
+setChunkCursor:
         chunkCursor = *(int *)(chunkCursor + 8);
         if (chunkCursor == 0) {
           noExactMatch = !exactMatchFound;
-          goto LAB_97bc8720;
+          goto checkNoExactMatch;
         }
       } while (!exactMatchFound);
-      goto LAB_97bc89bc;
+      goto checkValueCount;
     }
     noExactMatch = true;
-LAB_97bc8720:
-    if (!noExactMatch) goto LAB_97bc89bc;
+checkNoExactMatch:
+    if (!noExactMatch) goto checkValueCount;
     if (*(int *)(compiler + 0xc4) != 2) {
       chunkCursor = *chunkList;
       if (chunkCursor != 0) {
@@ -3701,26 +3701,26 @@ LAB_97bc8720:
             if (usageGlTypes[0] == glType) {
               chunkCompatible = true;
               if (valueCount == 2) {
-LAB_97bc8838:
+loopCheckLaneUsed3:
                 if ((laneUsed[1] == 1) && (values[1] == *(float *)(chunk + 0x10))) {
                   mergedLaneFlags[1] = laneUsed[1];
                 }
                 else if (laneUsed[1] != 0) {
                   chunkCompatible = false;
                 }
-LAB_97bc8868:
+loopCheckLaneUsed4:
                 if ((laneUsed[0] == 1) && (*values == *(float *)(chunk + 0xc))) {
                   mergedLaneFlags[0] = laneUsed[0];
                 }
                 else if (laneUsed[0] != 0) {
                   chunkCompatible = false;
                 }
-                if (!chunkCompatible) goto LAB_97bc897c;
+                if (!chunkCompatible) goto setChunkCursor2;
               }
               else {
                 if (2 < valueCount) {
                   if (valueCount != 3) {
-                    if (valueCount != 4) goto LAB_97bc88a0;
+                    if (valueCount != 4) goto setLoopIndex;
                     if ((laneUsed[3] == 1) && (values[3] == *(float *)(chunk + 0x18))) {
                       mergedLaneFlags[3] = 1;
                     }
@@ -3734,11 +3734,11 @@ LAB_97bc8868:
                   else if (laneUsed[2] != 0) {
                     chunkCompatible = false;
                   }
-                  goto LAB_97bc8838;
+                  goto loopCheckLaneUsed3;
                 }
-                if (valueCount == 1) goto LAB_97bc8868;
+                if (valueCount == 1) goto loopCheckLaneUsed4;
               }
-LAB_97bc88a0:
+setLoopIndex:
               loopIndex = 0;
               if (valueCount != 0) {
                 do {
@@ -3778,20 +3778,20 @@ LAB_97bc88a0:
               }
             }
           }
-LAB_97bc897c:
+setChunkCursor2:
           chunkCursor = *(int *)(chunkCursor + 8);
-          if (chunkCursor == 0) goto LAB_97bc8990;
+          if (chunkCursor == 0) goto checkNoExactMatch2;
         } while (noExactMatch);
-        goto LAB_97bc89bc;
+        goto checkValueCount;
       }
-LAB_97bc8990:
-      if (!noExactMatch) goto LAB_97bc89bc;
+checkNoExactMatch2:
+      if (!noExactMatch) goto checkValueCount;
     }
   }
   ((int (*)())TPPStreamCompiler__getNewConstantSourceVar)((unsigned char *)&scratchWord0,compiler,values,valueCount,glType);
   *(uint *)(outDesc + 4) = scratchWord1;
   *(uint *)outDesc = scratchWord0;
-LAB_97bc89bc:
+checkValueCount:
   if (valueCount == 1) {
     xSelector = *(uint *)outDesc >> 0x15 & 3;
     *(uint *)outDesc = xSelector << 0xf | xSelector << 0x11 | xSelector << 0x13 | *(uint *)outDesc & 0xffe07fff;
@@ -4045,26 +4045,26 @@ int TPPStreamCompiler__removeOrphanedCompilerTemp(this, operation, tempOperand)
   chunkKind = *chunk;
   if (chunkKind == 2) {
     chunkList = *(int *)(*(int *)(this + 0x70) + 0x18);
-    goto LAB_97bc8ebc;
+    goto checkChunkList;
   }
   if (chunkKind < 3) {
     if (chunkKind == 0) {
       chunkList = *(int *)(*(int *)(this + 0x70) + 4);
-      goto LAB_97bc8ebc;
+      goto checkChunkList;
     }
   }
   else {
     if (chunkKind == 3) {
       chunkList = *(int *)(*(int *)(this + 0x70) + 0x10);
-      goto LAB_97bc8ebc;
+      goto checkChunkList;
     }
     if (chunkKind == 4) {
       chunkList = *(int *)(*(int *)(this + 0x70) + 0x1c);
-      goto LAB_97bc8ebc;
+      goto checkChunkList;
     }
   }
   chunkList = 0;
-LAB_97bc8ebc:
+checkChunkList:
   if ((chunkList != 0) && (removedCount = 0, chunkCount != 0)) {
     do {
       nextChunk = *(byte **)(chunk + 8);
@@ -4175,9 +4175,9 @@ int TPPStreamCompiler__copyPropagateCompilerTemp(this, moveOperation, tempOperan
       do {
         if (lastLabelChunk == 0) {
           defHeader = *(uint *)(defChunk + 0xc);
-LAB_97bc9078:
+loopCheckDefHeader:
           if (((defHeader & 0x3fc0000) == 0x1300000) ||
-             ((moveUsesRelativeAddressing && ((defHeader & 0x3fc0000) == 0x1200000)))) goto LAB_97bc909c;
+             ((moveUsesRelativeAddressing && ((defHeader & 0x3fc0000) == 0x1200000)))) goto setPendingMaskAny;
           defSrcCount = defHeader >> 0x1d;
           defSrcIndex = 0;
           if (defSrcCount != 0) {
@@ -4197,8 +4197,8 @@ LAB_97bc9078:
         }
         else {
           defHeader = *(uint *)(defChunk + 0xc);
-          if (*(uint *)(lastLabelChunk + 0xc) <= (defHeader & 0x3ffff)) goto LAB_97bc9078;
-LAB_97bc909c:
+          if (*(uint *)(lastLabelChunk + 0xc) <= (defHeader & 0x3ffff)) goto loopCheckDefHeader;
+setPendingMaskAny:
           pendingMaskAny = 0;
           barrierReached = true;
         }

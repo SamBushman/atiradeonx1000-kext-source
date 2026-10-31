@@ -450,28 +450,28 @@ int TType__buildMangledName(this, text)
     isVectorResult = (**(code **)(*(int *)this + 0x3c))(this,staleR4);
     if (isVectorResult != 0) {
       mangleChar = 0x76;
-      goto LAB_97ba26e0;
+      goto callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE6appendEmc;
     }
   }
   else {
     mangleChar = 0x6d;
-LAB_97ba26e0:
+callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE6appendEmc:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,mangleChar);
   }
   switch(*(uint *)(this + 0x24) >> 0x13 & 0x3f) {
   default:
-    goto switchD_97ba270c_caseD_0;
+    goto thisCase0;
   case 1:
     mangleChar = 0x66;
-    goto LAB_97ba2778;
+    goto callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE6appendEmc2;
   case 2:
     mangleChar = 0x69;
-    goto LAB_97ba2778;
+    goto callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE6appendEmc2;
   case 3:
     mangleChar = 0x62;
-LAB_97ba2778:
+callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE6appendEmc2:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,mangleChar);
-    goto switchD_97ba270c_caseD_0;
+    goto thisCase0;
   case 5:
     typeCode = "s1";
     length = _strlen("s1");
@@ -517,10 +517,10 @@ LAB_97ba2778:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,0x2d);
       ((int (*)())TType__buildMangledName)(*(unsigned char **)(*(int *)(*(int *)(this + 8) + 4) + fieldIdx * 8),text);
     }
-    goto switchD_97ba270c_caseD_0;
+    goto thisCase0;
   }
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(text,typeCode,length);
-switchD_97ba270c_caseD_0:
+thisCase0:
   nominalSize = (**(code **)(*(int *)this + 0x2c))(this);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(text,1,(int)(char)((char)nominalSize + '0'))
   ;
@@ -944,7 +944,7 @@ int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     srcUnionArray = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
     copyScratch = 0;
-    if (srcUnionArray == 0) goto LAB_97ba314c;
+    if (srcUnionArray == 0) goto storeThis;
     copyScratch = *(uint *)(variable + 0x14);
     if (copyScratch == 0) {
       copyScratch = *(uint *)(variable + 0x30);
@@ -961,7 +961,7 @@ int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
         *(undefined4 **)((int)this + 0x38) = unionArray;
         copyScratch = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
         if (copyScratch == 2) {
-LAB_97ba311c:
+loopStoreUnionArray:
           *unionArray = **(undefined4 **)(variable + 0x38);
           return;
         }
@@ -971,7 +971,7 @@ LAB_97ba311c:
             return;
           }
         }
-        else if (copyScratch == 3) goto LAB_97ba311c;
+        else if (copyScratch == 3) goto loopStoreUnionArray;
         assertText = "false && \"Unknown type\"";
         assertLine = 0xb9;
       }
@@ -992,7 +992,7 @@ LAB_97ba311c:
   ___eprintf("%s:%u: failed assertion `%s\'\n",
              "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/SymbolTable.cpp"
              ,assertLine,assertText);
-LAB_97ba314c:
+storeThis:
   *(uint *)((int)this + 0x38) = copyScratch;
   return;
 }
@@ -1023,7 +1023,7 @@ int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     srcUnionArray = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
     copyScratch = 0;
-    if (srcUnionArray == 0) goto LAB_97ba314c;
+    if (srcUnionArray == 0) goto storeThis;
     copyScratch = *(uint *)(variable + 0x14);
     if (copyScratch == 0) {
       copyScratch = *(uint *)(variable + 0x30);
@@ -1040,7 +1040,7 @@ int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
         *(undefined4 **)((int)this + 0x38) = unionArray;
         copyScratch = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
         if (copyScratch == 2) {
-LAB_97ba311c:
+loopStoreUnionArray:
           *unionArray = **(undefined4 **)(variable + 0x38);
           return;
         }
@@ -1050,7 +1050,7 @@ LAB_97ba311c:
             return;
           }
         }
-        else if (copyScratch == 3) goto LAB_97ba311c;
+        else if (copyScratch == 3) goto loopStoreUnionArray;
         assertText = "false && \"Unknown type\"";
         assertLine = 0xb9;
       }
@@ -1071,7 +1071,7 @@ LAB_97ba311c:
   ___eprintf("%s:%u: failed assertion `%s\'\n",
              "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/SymbolTable.cpp"
              ,assertLine,assertText);
-LAB_97ba314c:
+storeThis:
   *(uint *)((int)this + 0x38) = copyScratch;
   return;
 }
@@ -1102,7 +1102,7 @@ int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     srcUnionArray = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
     copyScratch = 0;
-    if (srcUnionArray == 0) goto LAB_97ba314c;
+    if (srcUnionArray == 0) goto storeThis;
     copyScratch = *(uint *)(variable + 0x14);
     if (copyScratch == 0) {
       copyScratch = *(uint *)(variable + 0x30);
@@ -1119,7 +1119,7 @@ int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
         *(undefined4 **)((int)this + 0x38) = unionArray;
         copyScratch = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
         if (copyScratch == 2) {
-LAB_97ba311c:
+loopStoreUnionArray:
           *unionArray = **(undefined4 **)(variable + 0x38);
           return;
         }
@@ -1129,7 +1129,7 @@ LAB_97ba311c:
             return;
           }
         }
-        else if (copyScratch == 3) goto LAB_97ba311c;
+        else if (copyScratch == 3) goto loopStoreUnionArray;
         assertText = "false && \"Unknown type\"";
         assertLine = 0xb9;
       }
@@ -1150,7 +1150,7 @@ LAB_97ba311c:
   ___eprintf("%s:%u: failed assertion `%s\'\n",
              "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/SymbolTable.cpp"
              ,assertLine,assertText);
-LAB_97ba314c:
+storeThis:
   *(uint *)((int)this + 0x38) = copyScratch;
   return;
 }
@@ -2293,15 +2293,15 @@ LAB_97ba3784:
     yyvs = yyvsBase;
     yyss = yyssBase;
     if (yypactEntry == -0x8000) {
-LAB_97ba3958:
+loopSetYyn:
       yyn = (uint)*(short *)(&_yydefact + yystateByteOffset);
-      if (yyn != 0) goto LAB_97ba3970;
-LAB_97bac03c:
+      if (yyn != 0) goto setYyruleByteOffset;
+loopCheckYyerrstatus:
       if (yyerrstatus == 0) {
         yyerror("parse error",scratchR4,scratchR5,scratchR6,scratchR7,staleR8Value,scratchR9,scratchR10);
         scratchR4 = r4Out18;
       }
-LAB_97bac050:
+loopCheckYyerrstatus2:
       if (yyerrstatus == 3) {
         if (yychar == 0) {
           return 1;
@@ -2315,7 +2315,7 @@ LAB_97bac050:
            (scratchR9 = (undefined *)(yyn * 2), *(short *)(&_yycheck + (int)scratchR9) == 1)) {
           yystate = (int)*(short *)(&_yytable + (int)scratchR9);
           if (yystate < 0) {
-            if (yystate != -0x8000) goto LAB_97bac0d0;
+            if (yystate != -0x8000) goto setYyn;
           }
           else if (yystate != 0) {
             if (yystate == 0x14d) {
@@ -2354,13 +2354,13 @@ LAB_97bac050:
     yyn = yypactEntry + yytoken;
     if ((0x4ef < yyn) ||
        (scratchR9 = (undefined *)(yyn * 2), *(short *)(&_yycheck + (int)scratchR9) != yytoken))
-    goto LAB_97ba3958;
+    goto loopSetYyn;
     yystate = (int)*(short *)(&_yytable + (int)scratchR9);
     if (yystate < 0) {
       if (yystate != -0x8000) break;
-      goto LAB_97bac03c;
+      goto loopCheckYyerrstatus;
     }
-    if (yystate == 0) goto LAB_97bac03c;
+    if (yystate == 0) goto loopCheckYyerrstatus;
     if (yystate == 0x14d) {
       return 0;
     }
@@ -2375,9 +2375,9 @@ LAB_97bac050:
       yyerrstatus = yyerrstatus + -1;
     }
   } while( true );
-LAB_97bac0d0:
+setYyn:
   yyn = -yystate;
-LAB_97ba3970:
+setYyruleByteOffset:
   yyruleByteOffset = yyn * 2;
   yylen = (int)*(short *)(&_yyr2 + yyruleByteOffset);
   if (0 < yylen) {
@@ -2521,13 +2521,13 @@ LAB_97ba3970:
                 (*(uint *)(symbol + 0x30) >> 0x13 & 0x3f) << 0x13 |
                 *(uint *)(symbol + 0x30) & 0xfe000000 | (uint)typeTmp1BitsOrPubQualifier & 0x1ff);
     typeTmp1MaxArraySize = (unsigned char *)scratchR7;
-LAB_97ba4158:
+loopSetTypeTmp1VtableOrStr1Alloc:
     typeTmp1VtableOrStr1Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
     intermediate = *(unsigned char **)parseContext;
     scratchR6 = *(char **)yyvsp;
-    goto LAB_97ba7d0c;
+    goto setTypeTmp1VtableCopy;
   default:
-    goto switchD_97ba39c8_caseD_2;
+    goto yynCase2;
   case 3:
     signMask = (int)*(uint *)(yyvsp + 4) >> 0x1f;
     absConstant = (signMask ^ *(uint *)(yyvsp + 4)) - signMask;
@@ -2550,20 +2550,20 @@ LAB_97ba4158:
     typeTmp1Word18OrPubLine = (unsigned char *)0x0;
     typeTmp1MaxArraySize = (unsigned char *)0x0;
     typeTmp1Word20OrPubType = (unsigned char *)0x0;
-    goto LAB_97ba4158;
+    goto loopSetTypeTmp1VtableOrStr1Alloc;
   case 4:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     constArray = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
     *(uint *)constArray = *(uint *)(yyvsp + 4);
     constTypeBits = (uint)typeTmp1BitsOrPubQualifier & 0x7ff | 0x4080000;
-    goto LAB_97ba41e8;
+    goto setTypeTmp1BitsOrPubQualifier;
   case 5:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     constArray = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
     *(uint *)constArray = *(uint *)(yyvsp + 4);
     picBase2 = (unsigned char *)0xa7b8374c;
     constTypeBits = (uint)typeTmp1BitsOrPubQualifier & 0x1807ff | 0x4180000;
-LAB_97ba41e8:
+setTypeTmp1BitsOrPubQualifier:
     typeTmp1BitsOrPubQualifier = (unsigned char *)(constTypeBits & 0xfffff9ff | 0x800);
     typeTmp1Word20OrPubType = (unsigned char *)0x0;
     typeTmp1ArraySizeOrStr1Data = (unsigned char *)0x0;
@@ -2573,10 +2573,10 @@ LAB_97ba41e8:
     typeTmp1Word14OrStr2Data = (unsigned char *)0x0;
     typeTmp1Word18OrPubLine = (unsigned char *)0x0;
     typeTmp1MaxArraySize = (unsigned char *)0x0;
-    goto LAB_97ba4158;
+    goto loopSetTypeTmp1VtableOrStr1Alloc;
   case 6:
   case 0xbb:
-    goto switchD_97ba39c8_caseD_6;
+    goto yynCase6;
   case 8:
     queryResult = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))
                        (*(int **)(yyvsp + -0x7c),scratchR4,scratchR5,scratchR6,scratchR7,staleR8Value);
@@ -2676,7 +2676,7 @@ LAB_97ba41e8:
                        "field selection out of range \'%d\'",staleR8Value,staleR9Value,scratchR10);
             TParseContext__recover(parseContext);
             nodePair = CONCAT44(yyvalNode,r4Out6);
-            goto LAB_97ba47fc;
+            goto setYyvalNode;
           }
         }
         isArray = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))(*(int **)(yyvsp + -0x7c));
@@ -2721,7 +2721,7 @@ LAB_97ba41e8:
             arraySetMaxSizeResult = TParseContext__arraySetMaxSize
                                (parseContext,arrayOperand,operandTypePtr,newMaxArraySize,(uint)!isNullSize,(int)staleR8Value);
             if (arraySetMaxSizeResult != 0) {
-LAB_97ba475c:
+loopCallTParseContext_recover:
               TParseContext__recover(parseContext);
             }
           }
@@ -2741,7 +2741,7 @@ LAB_97ba475c:
               TParseContext__error
                         ((int)parseContext,*(char **)(yyvsp + -0x58),"","[",
                          "array index out of range \'%d\'",staleR8Value,staleR9Value,scratchR10);
-              goto LAB_97ba475c;
+              goto loopCallTParseContext_recover;
             }
           }
         }
@@ -2769,7 +2769,7 @@ LAB_97ba475c:
       scratchR7 = *(char **)(yyvsp + -0x58);
       nodePair = TIntermediate__addIndex(intermediate,indexOpCode,scratchR5,scratchR6,scratchR7);
     }
-LAB_97ba47fc:
+setYyvalNode:
     yyvalNode = (unsigned char *)((ulonglong)nodePair >> 0x20);
     resultNode = yyvalNode;
     if (yyvalNode == (unsigned char *)0x0) {
@@ -2788,7 +2788,7 @@ LAB_97ba47fc:
       typeTmp1Word20OrPubType = resultNode;
       intermediate = *(unsigned char **)parseContext;
       scratchR6 = *(char **)(yyvsp + -0x58);
-      goto LAB_97ba7d0c;
+      goto setTypeTmp1VtableCopy;
     }
     queryResult = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))
                        (*(int **)(yyvsp + -0x7c),(int)nodePair,scratchR5,scratchR6,scratchR7,staleR8Value,
@@ -2809,7 +2809,7 @@ LAB_97ba47fc:
                       ((nominalSize3 & 0xff) << 0xb |
                       (basicTypeValue & 0x3f) << 0x13 | (uint)typeTmp2BitsOrPub3Qualifier & 0x1ff | 0x4000000);
           typeTmp2Word20OrPub3Type = (unsigned char *)0x0;
-          goto LAB_97ba4bc0;
+          goto setTypeTmp2VtableOrPubArray;
         }
       }
       isMatrix2 = (unsigned char *)
@@ -2903,7 +2903,7 @@ LAB_97ba47fc:
                   ((isMatrix22 & 1) << 10 |
                   (nominalSize3 & 0xff) << 0xb | (basicType3 & 0x3f) << 0x13 | (uint)typeTmp2BitsOrPub3Qualifier & 0x1ff);
       typeTmp2Word20OrPub3Type = typeTmp1StructureCopy;
-LAB_97ba4bc0:
+setTypeTmp2VtableOrPubArray:
       typeTmp2VtableOrPubArray = typeVtable2;
       typeTmp2ArraySizeOrPubUserDef = typeTmp2Word20OrPub3Type;
       typeTmp2StructureOrPubLine = typeTmp2Word20OrPub3Type;
@@ -3007,7 +3007,7 @@ LAB_97ba4bc0:
           scratchR10 = *(uint *)(yyvsp + 4);
           staleR9Value = *(unsigned char **)(scratchR10 + 4);
           msgText2 = " field selection requires structure, vector, or matrix on left hand side";
-          goto LAB_97ba5784;
+          goto setPicBase;
         }
         picBase2 = (unsigned char *)0xa7b8374c;
         (**(code **)(**(int **)(yyvsp + -0x50) + 0x38))(&typeTmp1VtableOrStr1Alloc,*(int **)(yyvsp + -0x50));
@@ -3018,11 +3018,11 @@ LAB_97ba4bc0:
           errorLine2 = *(char **)(yyvsp + -0x2c);
           msgText2 = "structure has no fields";
           scratchR6 = "Internal Error";
-          goto LAB_97ba5548;
+          goto setScratchR73;
         }
         loopIndex = 0;
         staleR4Value = r4Out7;
-        goto LAB_97ba55dc;
+        goto loopCheckTypeTmp1StructureCopy2;
       }
       nominalSize = (**(code **)(**(int **)(yyvsp + -0x50) + 0x48))(*(int **)(yyvsp + -0x50));
       parseMatrixFieldsResult = TParseContext__parseMatrixFields
@@ -3151,14 +3151,14 @@ LAB_97ba4bc0:
                   TParseContext__addConstVectorNode
                             (parseContext,(unsigned char *)&typeTmp1VtableOrStr1Alloc,postfixExpressionNode2,(int)scratchR6,scratchR7,
                              picBase2);
-      if (yyvalNode == (unsigned char *)0x0) goto LAB_97ba5554;
+      if (yyvalNode == (unsigned char *)0x0) goto loopCallTParseContext_recover2;
       basicType2 = (**(code **)(**(int **)(yyvsp + -0x50) + 0x40))(*(int **)(yyvsp + -0x50));
       typeTmp3Word14OrTypeTmp4ArraySize = (unsigned char *)
                   ((*(uint *)(*(int *)(*(uint *)(yyvsp + 4) + 4) + -0xc) & 0xff) << 0xb |
                   (basicType2 & 0x3f) << 0x13 | (uint)typeTmp3Word14OrTypeTmp4ArraySize & 0x1ff | 0x4000000);
       nodeSetTypeFunc = *(unsigned char **)(*(unsigned char **)yyvalNode + 0x34);
       nodeVtable = *(unsigned char **)yyvalNode;
-LAB_97ba50cc:
+loopSetTypeTmp3TypeNameOrTypeTmp4Vtable:
       typeTmp3TypeNameOrTypeTmp4Vtable = (unsigned char *)0x0;
       typeTmp3Word0c = (unsigned char *)0x0;
       typeTmp3StructureOrPub3Line = (unsigned char *)0x0;
@@ -3201,7 +3201,7 @@ LAB_97ba50cc:
       typeTmp3Word14OrTypeTmp4ArraySize = (unsigned char *)((basicType3 & 0x3f) << 0x13 | (uint)typeTmp3Word14OrTypeTmp4ArraySize & 0x1ff | 0x800);
       nodeSetTypeFunc = *(unsigned char **)(*(unsigned char **)yyvalNode + 0x34);
       nodeVtable = yyvalNode;
-      goto LAB_97ba50cc;
+      goto loopSetTypeTmp3TypeNameOrTypeTmp4Vtable;
     }
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&typeTmp2Word20OrPub3Type,*(unsigned char **)(yyvsp + 4));
     scratchR6 = (char *)TIntermediate__addSwizzle
@@ -3240,7 +3240,7 @@ LAB_97ba50cc:
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc3;
     typeTmp3VtableOrPub3Array = typeVtable2;
-    goto LAB_97ba869c;
+    goto loopSetYyvalNodeReg2;
   case 0xb:
     lValueError = TParseContext__lValueErrorCheck
                        (parseContext,*(uint *)yyvsp,"++",*(unsigned char **)(yyvsp + -0x24),scratchR7,
@@ -3277,7 +3277,7 @@ LAB_97ba5844:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAllocArg);
     }
-    goto LAB_97ba5848;
+    goto callTParseContext_recover;
   case 0xc:
     lValueError = TParseContext__lValueErrorCheck
                        (parseContext,*(uint *)yyvsp,"--",*(unsigned char **)(yyvsp + -0x24),scratchR7,
@@ -3310,16 +3310,16 @@ LAB_97ba5844:
     } while (!(bool)(cr0 >> 1 & 1));
     destroyAllocArg = destroyAlloc5;
     if ((int)oldRefCount2 < 1) goto LAB_97ba5844;
-LAB_97ba5848:
+callTParseContext_recover:
     TParseContext__recover(parseContext);
-switchD_97ba39c8_caseD_6:
+yynCase6:
     yyvalNodeReg = *(unsigned char **)(yyvsp + -0x24);
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
     break;
   case 0xd:
     errorCheckResult = TParseContext__integerErrorCheck(parseContext,*(unsigned char **)(yyvsp + 8),"[]");
-    goto LAB_97ba82e8;
+    goto checkErrorCheckResult;
   case 0xe:
     stackNode = *(unsigned char **)(yyvsp + 0x10);
     stackNodeWord4c = *(unsigned char **)(stackNode + 0x4c);
@@ -3361,7 +3361,7 @@ switchD_97ba39c8_caseD_6:
       }
       (**(code **)(*(unsigned char **)yyvalNode + 0x34))(yyvalNode,(unsigned char *)&typeTmp1VtableOrStr1Alloc);
       typeTmp1VtableOrStr1Alloc = picBase2 + -0x610c;
-      goto LAB_97ba5e28;
+      goto setYyvalNodeReg;
     }
     findFunctionResult = (unsigned char *)
              TParseContext__findFunction
@@ -3387,7 +3387,7 @@ switchD_97ba39c8_caseD_6:
                             (*(unsigned char **)parseContext,constArray,(unsigned char *)&typeTmp1VtableOrStr1Alloc,(int)scratchR6);
       typeTmp1VtableOrStr1Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
       TParseContext__recover(parseContext);
-      goto LAB_97ba5e28;
+      goto setYyvalNodeReg;
     }
     findFunctionResultWord4c = *(uint *)(findFunctionResult + 0x4c);
     if ((outFlag == 0) || (findFunctionResultWord4c == 0)) {
@@ -3496,7 +3496,7 @@ switchD_97ba39c8_caseD_6:
                     ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc6);
           scratchR4 = r4Out10;
         }
-        goto LAB_97bac050;
+        goto loopCheckYyerrstatus2;
       }
       scratchR6 = *(char **)yyvsp;
       yyvalNode = (unsigned char *)
@@ -3506,7 +3506,7 @@ switchD_97ba39c8_caseD_6:
     }
 LAB_97ba5d80:
     (**(code **)(*(unsigned char **)yyvalNode + 0x34))(yyvalNode,findFunctionResult + 0x1c);
-LAB_97ba5e28:
+setYyvalNodeReg:
     yyvalNodeReg = yyvalNode;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
@@ -3529,10 +3529,10 @@ LAB_97ba86fc:
     break;
   case 0x11:
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
-    goto LAB_97ba5e64;
+    goto setYyvalNodeReg2;
   case 0x12:
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + 0x10);
-LAB_97ba5e64:
+setYyvalNodeReg2:
     yyvalNodeReg = (unsigned char *)0x0;
     break;
   case 0x13:
@@ -3664,9 +3664,9 @@ LAB_97ba5e64:
     intermediate = *(unsigned char **)parseContext;
     leftNode = *(unsigned char **)(yyvsp + -0x50);
     operandNode = *(unsigned char **)(yyvsp + 8);
-LAB_97ba97d4:
+loopSetScratchR6:
     scratchR6 = *(char **)(yyvsp + -0x2c);
-LAB_97ba97d8:
+loopSetYyvalNodeReg:
     yyvalNodeReg = (unsigned char *)TIntermediate__growAggregate(intermediate,leftNode,operandNode,(int)scratchR6);
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
@@ -3785,7 +3785,7 @@ LAB_97ba97d8:
     stillShared = 0 < (int)oldRefCount3;
     destroyAllocArg = destroyAlloc9;
     yyvalTypeOrFunction = newFunction;
-    goto LAB_97ba869c;
+    goto loopSetYyvalNodeReg2;
   case 0x17:
     reservedError = TParseContext__reservedErrorCheck(parseContext,*(uint *)yyvsp,*(unsigned char **)(yyvsp + 4));
     if (reservedError != 0) {
@@ -4061,7 +4061,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc10;
-    goto LAB_97ba82d4;
+    goto checkStillShared3;
   case 0x2a:
     lValueError = TParseContext__lValueErrorCheck
                        (parseContext,*(uint *)(yyvsp + -0x2c),"--",*(unsigned char **)(yyvsp + 8),
@@ -4095,11 +4095,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       destroyAllocArg = destroyAlloc11;
-      goto LAB_97ba69a8;
+      goto callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS2;
     }
-    goto LAB_97ba82f0;
+    goto loopCallTParseContext_recover3;
   case 0x2b:
-    if (*(uint *)(yyvsp + -0x28) == 0) goto switchD_97ba39c8_caseD_2;
+    if (*(uint *)(yyvsp + -0x28) == 0) goto yynCase2;
     scratchR6 = *(char **)(yyvsp + -0x2c);
     scratchR7 = *(char **)((int)parseContext + 4);
     yyvalNode = (unsigned char *)
@@ -4139,7 +4139,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc12;
-    goto LAB_97ba82d4;
+    goto checkStillShared3;
   case 0x2c:
     yyval = *(uint *)yyvsp;
     yyvalOp = 0;
@@ -4216,7 +4216,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc14;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x32:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       TParseContext__error
@@ -4266,7 +4266,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc16;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x33:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
       TParseContext__error
@@ -4316,7 +4316,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc18;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x35:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4360,7 +4360,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc20;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x36:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4404,7 +4404,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc22;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x38:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
       TParseContext__error
@@ -4454,7 +4454,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc24;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x39:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
       TParseContext__error
@@ -4504,7 +4504,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc26;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x3b:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4547,7 +4547,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc28;
-    goto LAB_97ba7bac;
+    goto checkStillShared2;
   case 0x3c:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4590,7 +4590,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc30;
-    goto LAB_97ba7bac;
+    goto checkStillShared2;
   case 0x3d:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4633,7 +4633,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc32;
-    goto LAB_97ba7bac;
+    goto checkStillShared2;
   case 0x3e:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4676,7 +4676,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc34;
-    goto LAB_97ba7bac;
+    goto checkStillShared2;
   case 0x40:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4719,7 +4719,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc36;
-    goto LAB_97ba7bac;
+    goto checkStillShared2;
   case 0x41:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -4762,7 +4762,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc38;
-    goto LAB_97ba7bac;
+    goto checkStillShared2;
   case 0x43:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
       TParseContext__error
@@ -4812,7 +4812,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc40;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x45:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
       TParseContext__error
@@ -4862,7 +4862,7 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc42;
-    goto LAB_97ba7a00;
+    goto checkStillShared;
   case 0x47:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
       TParseContext__error
@@ -4912,12 +4912,12 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc44;
-LAB_97ba7a00:
+checkStillShared:
     if (!stillShared) {
-LAB_97ba7f84:
+loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS2:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
     }
-LAB_97ba5554:
+loopCallTParseContext_recover2:
     TParseContext__recover(parseContext);
     yyvalNodeReg = *(unsigned char **)(yyvsp + -0x50);
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -4965,7 +4965,7 @@ LAB_97ba5554:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc46;
-    goto LAB_97ba7bac;
+    goto checkStillShared2;
   case 0x4b:
     scratchR6 = *(char **)(yyvsp + 8);
     scratchR7 = *(char **)(yyvsp + -0x2c);
@@ -5008,12 +5008,12 @@ LAB_97ba5554:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc48;
-LAB_97ba7bac:
+checkStillShared2:
     if (!stillShared) {
-LAB_97ba7c88:
+loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS22:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
     }
-LAB_97ba7c8c:
+loopSetNullWord:
     nullWord = (unsigned char *)0x0;
     TParseContext__recover(parseContext);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -5031,7 +5031,7 @@ LAB_97ba7c8c:
     typeTmp1Word18OrPubLine = nullWord;
     typeTmp1MaxArraySize = nullWord;
     typeTmp1Word20OrPubType = nullWord;
-LAB_97ba7d0c:
+setTypeTmp1VtableCopy:
     typeTmp1VtableCopy = typeTmp1VtableOrStr1Alloc;
     yyvalNodeReg = (unsigned char *)
              TIntermediate__addConstantUnion(intermediate,constArray,(unsigned char *)&typeTmp1VtableOrStr1Alloc,(int)scratchR6);
@@ -5081,9 +5081,9 @@ LAB_97ba7d0c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount < 1) {
       destroyAllocArg = destroyAlloc50;
-      goto LAB_97ba7c88;
+      goto loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS22;
     }
-    goto LAB_97ba7c8c;
+    goto loopSetNullWord;
   case 0x4f:
     boolError = __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped
                        (parseContext,*(uint *)(yyvsp + -0x84),*(unsigned char **)(yyvsp + -0xa8),
@@ -5148,7 +5148,7 @@ LAB_97ba7d0c:
     stillShared = 0 < (int)oldRefCount3;
     destroyAllocArg = destroyAlloc52;
     scratchR7 = (char *)typeTmp1VtableAddr;
-    goto LAB_97ba82d4;
+    goto checkStillShared3;
   case 0x51:
     lValueError = TParseContext__lValueErrorCheck
                        (parseContext,*(uint *)(yyvsp + -0x2c),"assign",
@@ -5196,9 +5196,9 @@ LAB_97ba7d0c:
         cr0 = 2;
       }
     } while (!(bool)(cr0 >> 1 & 1));
-    if (0 < (int)oldRefCount2) goto LAB_97ba5554;
+    if (0 < (int)oldRefCount2) goto loopCallTParseContext_recover2;
     destroyAllocArg = destroyAlloc54;
-    goto LAB_97ba7f84;
+    goto loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS2;
   case 0x52:
     yyval = *(uint *)yyvsp;
     yyvalOp = 0x76;
@@ -5373,29 +5373,29 @@ LAB_97ba7d0c:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc56;
-LAB_97ba82d4:
+checkStillShared3:
     if (!stillShared) {
-LAB_97ba69a8:
+callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS2:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
     }
-LAB_97ba82f0:
+loopCallTParseContext_recover3:
     TParseContext__recover(parseContext);
-switchD_97ba39c8_caseD_2:
+yynCase2:
     yyvalNodeReg = *(unsigned char **)(yyvsp + 8);
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
     break;
   case 0x5f:
     errorCheckResult = TParseContext__constErrorCheck(parseContext,*(unsigned char **)(yyvsp + 8));
-LAB_97ba82e8:
-    if (errorCheckResult != 0) goto LAB_97ba82f0;
-    goto switchD_97ba39c8_caseD_2;
+checkErrorCheckResult:
+    if (errorCheckResult != 0) goto loopCallTParseContext_recover3;
+    goto yynCase2;
   case 0x60:
   case 0xb0:
   case 0xb6:
   case 0xba:
   case 0xca:
-    goto switchD_97ba39c8_caseD_60;
+    goto yynCase60;
   case 0x61:
   case 0xb7:
     statementListNode2 = *(int **)(yyvsp + -0x24);
@@ -5412,7 +5412,7 @@ LAB_97ba82e8:
     functionNameText = (char *)(**(code **)(**(int **)(yyvsp + -0x1c) + 8))(*(int **)(yyvsp + -0x1c));
     levelsBegin = *symbolTable;
     levelIdx = (symbolTable[1] - levelsBegin >> 2) + -1;
-    goto LAB_97ba8338;
+    goto loopSetLevelEntry;
   case 99:
   case 100:
   case 0xa0:
@@ -5423,7 +5423,7 @@ LAB_97ba82e8:
     binaryNode = (**(code **)(**(int **)(yyvsp + 0x14) + 0x20))
                        (*(int **)(yyvsp + 0x14),scratchR4,scratchR5,scratchR6,scratchR7,staleR8Value,staleR9Value);
     if (binaryNode == 0) {
-LAB_97ba86ec:
+loopSetStackNode:
       stackNode = *(unsigned char **)(yyvsp + 0x14);
       yyvalNodeReg = yyvalNode;
       typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -5484,12 +5484,12 @@ LAB_97ba86ec:
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc58;
-LAB_97ba869c:
+loopSetYyvalNodeReg2:
     yyvalNodeReg = yyvalNode;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
     if (!stillShared) {
-LAB_97ba8824:
+loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
       yyvalNodeReg = yyvalNode;
       typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -5506,7 +5506,7 @@ LAB_97ba8824:
                  "cannot be an argument type except for \'(void)\'","void","",staleR8Value,staleR9Value,
                  scratchR10);
       TParseContext__recover(parseContext);
-      goto LAB_97ba86ec;
+      goto loopSetStackNode;
     }
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x48);
     functionHeaderWithParametersFunction = *(uint *)(yyvsp + -0x48);
@@ -5564,7 +5564,7 @@ LAB_97ba8824:
     typeTmp7VtableReg = typeTmp7Vtable[0];
     if (0 < (int)oldRefCount2) break;
     destroyAllocArg = destroyAlloc59;
-    goto LAB_97ba8824;
+    goto loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23;
   case 0x67:
     if (1 < *(uint *)(yyvsp + -0x44)) {
       scratchR6 = (char *)getQualifierString(*(uint *)(yyvsp + -0x44));
@@ -5936,7 +5936,7 @@ LAB_97ba8824:
     parameterTypeSpecifierLine = *(uint *)yyvsp;
     paramQualifierArg = *(uint *)(yyvsp + -0x44);
     scratchR6 = *(char **)(yyvsp + -0x1c);
-    goto LAB_97ba9130;
+    goto setScratchR7;
   case 0x6b:
   case 0x6d:
     _memcpy(&yyval,yyvsp,0x2c);
@@ -5949,15 +5949,15 @@ LAB_97ba8824:
     parameterTypeSpecifierLine = *(uint *)yyvsp;
     scratchR6 = *(char **)(yyvsp + -0x1c);
     paramQualifierArg = 0;
-LAB_97ba9130:
+setScratchR7:
     scratchR7 = (char *)yyvalQualifierOrParamType;
     errorCheckResult = TParseContext__paramErrorCheck(parseContext,parameterTypeSpecifierLine,paramQualifierArg,scratchR6,yyvalQualifierOrParamType);
-LAB_97bab180:
+loopSetYyvalNodeReg3:
     yyvalNodeReg = yyvalNode;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
     if (errorCheckResult == 0) break;
-LAB_97bab5f4:
+loopCallTParseContext_recover4:
     TParseContext__recover(parseContext);
     yyvalNodeReg = yyvalNode;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -6213,7 +6213,7 @@ LAB_97bab5f4:
     _memcpy(&yyval,yyvsp + -0x58,0x2c);
     identifierLine = *(uint *)yyvsp;
     valueSlot = (unsigned char *)(yyvsp + -0x48);
-    goto LAB_97ba9874;
+    goto setStructQualifierError;
   case 0x76:
     _memcpy(&yyval,yyvsp + -0xb0,0x2c);
     structQualifierError = TParseContext__structQualifierErrorCheck
@@ -6225,12 +6225,12 @@ LAB_97bab5f4:
     leftBracketLine2 = *(unsigned char **)(yyvsp + -0x2c);
     identifierValue = *(uint *)(yyvsp + -0x54);
     nodeOpArg = 0;
-    goto LAB_97ba99f8;
+    goto storeYyOutArgs;
   case 0x77:
     _memcpy(&yyval,yyvsp + -0xdc,0x2c);
     identifierLine = *(uint *)(yyvsp + -0x84);
     valueSlot = (unsigned char *)(yyvsp + -0xcc);
-    goto LAB_97ba99a0;
+    goto setStructQualifierError2;
   case 0x78:
     slotArg = yyvsp + -0xa0;
     _memcpy(&yyval,yyvsp + -0xb0,0x2c);
@@ -6249,7 +6249,7 @@ LAB_97bab5f4:
         intermediate = *(unsigned char **)parseContext;
         leftNode = *(unsigned char **)(yyvsp + -0xa8);
         operandNode = operandOut1;
-        goto LAB_97ba97d4;
+        goto loopSetScratchR6;
       }
       scratchR6 = (char *)slotArg;
       yyvalNodeReg = *(unsigned char **)(yyvsp + -0xa8);
@@ -6257,7 +6257,7 @@ LAB_97bab5f4:
       typeTmp7VtableReg = typeTmp7Vtable[0];
       break;
     }
-    goto LAB_97bab1f4;
+    goto callTParseContext_recover2;
   case 0x79:
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + 0x10);
     yyvalQualifierOrParamType = *(unsigned char **)(yyvsp + 0x14);
@@ -6280,7 +6280,7 @@ LAB_97bab5f4:
     staleR9Value = *(unsigned char **)(yyvsp + -4);
     identifierLine = *(uint *)yyvsp;
     yyvalTypeLine = staleR9Value;
-LAB_97ba9874:
+setStructQualifierError:
     structQualifierError = TParseContext__structQualifierErrorCheck
                        (parseContext,identifierLine,valueSlot,scratchR6,scratchR7,staleR8Value,staleR9Value);
     if (structQualifierError != 0) {
@@ -6289,7 +6289,7 @@ LAB_97ba9874:
     scratchR6 = (char *)&yyvalTypeOrFunction;
     errorCheckResult = TParseContext__nonInitErrorCheck
                        (parseContext,*(uint *)yyvsp,*(unsigned char **)(yyvsp + 4),(unsigned char *)scratchR6);
-    goto LAB_97bab180;
+    goto loopSetYyvalNodeReg3;
   case 0x7b:
     yyvalNode = (unsigned char *)0x0;
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x74);
@@ -6316,7 +6316,7 @@ LAB_97ba9874:
     pubCopy850Line = yyvalTypeLine;
     yyOutArgs[0x10] = 0;
     yyOutArgs[0xf] = yyvalTypeLine;
-    goto LAB_97ba9a08;
+    goto storeYyOutArgs2;
   case 0x7c:
     yyvalNode = (unsigned char *)0x0;
     valueSlot = (unsigned char *)(yyvsp + -0xa0);
@@ -6329,7 +6329,7 @@ LAB_97ba9874:
     staleR9Value = *(unsigned char **)(yyvsp + -0x88);
     identifierLine = *(uint *)(yyvsp + -0x84);
     yyvalTypeLine = staleR9Value;
-LAB_97ba99a0:
+setStructQualifierError2:
     structQualifierError = TParseContext__structQualifierErrorCheck
                        (parseContext,identifierLine,valueSlot,scratchR6,scratchR7,staleR8Value,staleR9Value);
     if (structQualifierError != 0) {
@@ -6338,7 +6338,7 @@ LAB_97ba99a0:
     leftBracketLine2 = *(unsigned char **)(yyvsp + -0x58);
     identifierValue = *(uint *)(yyvsp + -0x80);
     nodeOpArg = *(uint *)(yyvsp + -0x24);
-LAB_97ba99f8:
+storeYyOutArgs:
     yyOutArgs[0x10] = nodeOpArg;
     yyOutArgs[0xf] = yyvalTypeLine;
     typeTmp1VtableOrStr1Alloc = yyvalTypeOrFunction;
@@ -6348,7 +6348,7 @@ LAB_97ba99f8:
     typeTmp1TypeNameOrStr2Alloc = yyvalArray;
     typeTmp1Word14OrStr2Data = yyvalUserDef;
     pubCopy850Line = yyvalTypeLine;
-LAB_97ba9a08:
+storeYyOutArgs2:
     yyOutArgs[0xe] = typeTmp1Word14OrStr2Data;
     scratchR6 = (char *)typeTmp1VtableOrStr1Alloc;
     scratchR7 = (char *)typeTmp1ArraySizeOrStr1Data;
@@ -6362,7 +6362,7 @@ LAB_97ba9a08:
     errorCheckResult = TParseContext__arrayErrorCheck
                        ((int)parseContext,leftBracketLine2,identifierValue,typeTmp1VtableOrStr1Alloc,typeTmp1ArraySizeOrStr1Data,typeTmp1StructureOrPubSize,typeTmp1Word0cOrPubMatrix,
                         typeTmp1TypeNameOrStr2Alloc,yyOutArgs[0xe],yyOutArgs[0xf],yyOutArgs[0x10]);
-    goto LAB_97bab180;
+    goto loopSetYyvalNodeReg3;
   case 0x7d:
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x74);
     slotArg = yyvsp + -0x74;
@@ -6382,15 +6382,15 @@ LAB_97ba9a08:
     executeInitializerResult = TParseContext__executeInitializer
                        (parseContext,*(uint *)(yyvsp + -0x58),*(unsigned char **)(yyvsp + -0x54),
                         (unsigned char *)slotArg,(unsigned char *)scratchR7,&operandOut2);
-    if (executeInitializerResult != 0) goto LAB_97bab1f4;
+    if (executeInitializerResult != 0) goto callTParseContext_recover2;
     if (operandOut2 != (unsigned char *)0x0) {
       intermediate = *(unsigned char **)parseContext;
       aggregateLine = *(uint *)(yyvsp + -0x2c);
       operandNode = operandOut2;
       scratchR6 = (char *)slotArg;
-      goto LAB_97bab0ec;
+      goto setYyvalNodeReg3;
     }
-    goto switchD_97ba39c8_caseD_60;
+    goto yynCase60;
   case 0x7e:
     yyvalSize = *(unsigned char **)(yyvsp + 0x18);
     yyvalMatrix = *(unsigned char **)(yyvsp + 0x1c);
@@ -6436,10 +6436,10 @@ LAB_97ba9a08:
                  typeSpecifierUserDef,typeSpecifierSize3);
       TParseContext__recover(parseContext);
     }
-    goto LAB_97ba9d1c;
+    goto setYyvalTypeOrFunction;
   case 0x80:
     typeSpecifierInit = &DAT_97c356fc;
-    goto LAB_97ba9da4;
+    goto setYyvalTypeLine;
   case 0x81:
     if (*(int *)((int)parseContext + 0xc) != 0) {
       scratchR7 = "";
@@ -6458,7 +6458,7 @@ LAB_97ba9a08:
       TParseContext__recover(parseContext);
     }
     typeSpecifierInit = &DAT_97c35718;
-    goto LAB_97ba9da4;
+    goto setYyvalTypeLine;
   case 0x82:
     globalError = TParseContext__globalErrorCheck
                        (parseContext,*(uint *)yyvsp,
@@ -6480,7 +6480,7 @@ LAB_97ba9a08:
     if (*(int *)((int)parseContext + 0xc) == 0) {
       typeTmp1ArraySizeOrStr1Data = (unsigned char *)0x5;
     }
-LAB_97ba9d1c:
+setYyvalTypeOrFunction:
     yyvalTypeOrFunction = typeTmp1VtableOrStr1Alloc;
     yyvalQualifierOrParamType = typeTmp1ArraySizeOrStr1Data;
     yyvalSize = typeTmp1StructureOrPubSize;
@@ -6502,7 +6502,7 @@ LAB_97ba9d1c:
       TParseContext__recover(parseContext);
     }
     typeSpecifierInit = &DAT_97c35750;
-LAB_97ba9da4:
+setYyvalTypeLine:
     yyvalTypeLine = (unsigned char *)typeSpecifierInit[6];
     yyvalSize = (unsigned char *)typeSpecifierInit[2];
     yyvalMatrix = (unsigned char *)typeSpecifierInit[3];
@@ -6551,64 +6551,64 @@ LAB_97ba9da4:
   case 0x85:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x1;
-    goto LAB_97ba9f0c;
+    goto setLevelsBytes2;
   case 0x86:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x2;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x87:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x3;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x88:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x1;
-    goto LAB_97ba9eec;
+    goto setLevelsBytes;
   case 0x89:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x1;
-    goto LAB_97ba9fa8;
+    goto setLevelsBytes3;
   case 0x8a:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x1;
-    goto LAB_97ba9fc8;
+    goto setLevelsBytes4;
   case 0x8b:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x3;
-LAB_97ba9eec:
+setLevelsBytes:
     levelsBytes = symbolTable[1] - *symbolTable;
     pubSize = (unsigned char *)0x2;
-    goto LAB_97baa40c;
+    goto setTypeTmp2StructureOrPubLine;
   case 0x8c:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x3;
-    goto LAB_97ba9f0c;
+    goto setLevelsBytes2;
   case 0x8d:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x3;
-    goto LAB_97ba9fc8;
+    goto setLevelsBytes4;
   case 0x8e:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x2;
-LAB_97ba9f0c:
+setLevelsBytes2:
     levelsBytes = symbolTable[1] - *symbolTable;
     typeTmp2StructureOrPubLine = *(unsigned char **)yyvsp;
     pubSize = typeTmp1Word20OrPubType;
-    goto LAB_97baa46c;
+    goto setTypeTmp1BitsOrPubQualifier3;
   case 0x8f:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x2;
-LAB_97ba9fa8:
+setLevelsBytes3:
     levelsBytes = symbolTable[1] - *symbolTable;
     pubSize = (unsigned char *)0x3;
-    goto LAB_97baa40c;
+    goto setTypeTmp2StructureOrPubLine;
   case 0x90:
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x2;
-LAB_97ba9fc8:
+setLevelsBytes4:
     levelsBytes = symbolTable[1] - *symbolTable;
     pubSize = (unsigned char *)0x4;
-    goto LAB_97baa40c;
+    goto setTypeTmp2StructureOrPubLine;
   case 0x91:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6620,7 +6620,7 @@ LAB_97ba9fc8:
     }
     levelsBytes = (*(int **)((int)parseContext + 4))[1] - **(int **)((int)parseContext + 4);
     yyvalSize = (unsigned char *)0x2;
-    goto LAB_97baa0ec;
+    goto setTypeTmp1BitsOrPubQualifier2;
   case 0x92:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6632,7 +6632,7 @@ LAB_97ba9fc8:
     }
     levelsBytes = (*(int **)((int)parseContext + 4))[1] - **(int **)((int)parseContext + 4);
     yyvalSize = (unsigned char *)0x3;
-    goto LAB_97baa0ec;
+    goto setTypeTmp1BitsOrPubQualifier2;
   case 0x93:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6644,7 +6644,7 @@ LAB_97ba9fc8:
     }
     levelsBytes = (*(int **)((int)parseContext + 4))[1] - **(int **)((int)parseContext + 4);
     yyvalSize = (unsigned char *)0x4;
-LAB_97baa0ec:
+setTypeTmp1BitsOrPubQualifier2:
     typeTmp1BitsOrPubQualifier = (unsigned char *)(uint)((uint)(levelsBytes >> 2) < 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x1;
     pubMatrix = (unsigned char *)0x1;
@@ -6680,7 +6680,7 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x5;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x95:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6692,7 +6692,7 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x6;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x96:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6704,7 +6704,7 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x7;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x97:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6716,7 +6716,7 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x8;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x98:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6728,7 +6728,7 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0x9;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x99:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6740,7 +6740,7 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0xa;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x9a:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6757,7 +6757,7 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0xb;
-    goto LAB_97baa3fc;
+    goto setLevelsBytes5;
   case 0x9b:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
       scratchR7 = "";
@@ -6774,12 +6774,12 @@ LAB_97baa0ec:
     }
     symbolTable = *(int **)((int)parseContext + 4);
     typeTmp1Word20OrPubType = (unsigned char *)0xc;
-LAB_97baa3fc:
+setLevelsBytes5:
     levelsBytes = symbolTable[1] - *symbolTable;
     pubSize = (unsigned char *)0x1;
-LAB_97baa40c:
+setTypeTmp2StructureOrPubLine:
     typeTmp2StructureOrPubLine = *(unsigned char **)yyvsp;
-LAB_97baa46c:
+setTypeTmp1BitsOrPubQualifier3:
     typeTmp1BitsOrPubQualifier = (unsigned char *)(uint)((uint)(levelsBytes >> 2) < 4);
     typeTmp2ArraySizeOrPubUserDef = (unsigned char *)0x0;
     typeTmp2VtableOrPubArray = (unsigned char *)0x0;
@@ -7203,10 +7203,10 @@ LAB_97baa46c:
       *(undefined4 *)(typeListMem + 8) = 0;
       typeList = (unsigned char *)typeListMem;
     }
-    goto LAB_97baadbc;
+    goto setYyvalTypeOrFunction2;
   case 0xa4:
     typeList = yyvalTypeOrFunction;
-LAB_97baadbc:
+setYyvalTypeOrFunction2:
     yyvalTypeOrFunction = typeList;
     elementEnd = *(uint **)(yyvalTypeOrFunction + 8);
     if (elementEnd == *(uint **)(yyvalTypeOrFunction + 0xc)) {
@@ -7301,7 +7301,7 @@ LAB_97baadbc:
     *(unsigned char *)((int)currentFunctionObj + currentFunctionObj[-3]) = *DAT_a7b7ba88;
     scratchR6 = *(char **)(scratchR10 + 4);
     errorLine = *(char **)(yyvsp + -0x58);
-    goto LAB_97bab5e8;
+    goto setScratchR72;
   case 0xb1:
     symbolTable3 = *(unsigned char **)((int)parseContext + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -7364,7 +7364,7 @@ LAB_97baadbc:
     intermediate = *(unsigned char **)parseContext;
     aggregateLine = 0;
     operandNode = *(unsigned char **)(yyvsp + 8);
-LAB_97bab0ec:
+setYyvalNodeReg3:
     yyvalNodeReg = (unsigned char *)TIntermediate__makeAggregate(intermediate,operandNode,aggregateLine);
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
@@ -7374,7 +7374,7 @@ LAB_97bab0ec:
     scratchR6 = (char *)0x0;
     leftNode = *(unsigned char **)(yyvsp + -0x24);
     operandNode = *(unsigned char **)(yyvsp + 8);
-    goto LAB_97ba97d8;
+    goto loopSetYyvalNodeReg;
   case 0xbc:
     boolError = __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped
                        (parseContext,*(uint *)(yyvsp + -0xb0),*(unsigned char **)(yyvsp + -0x50),
@@ -7400,13 +7400,13 @@ LAB_97bab0ec:
     break;
   case 0xbe:
     yyvalNodeReg = *(unsigned char **)(yyvsp + 8);
-    goto LAB_97bab424;
+    goto setYyvalNode2;
   case 0xbf:
     yyvalNode = *(unsigned char **)(yyvsp + 8);
     nodeLine2 = (**(code **)**(undefined4 **)(yyvsp + 8))(*(undefined4 **)(yyvsp + 8));
     errorCheckResult = __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped
                        (parseContext,nodeLine2,*(unsigned char **)(yyvsp + 8),scratchR6,scratchR7,staleR8Value);
-    goto LAB_97bab180;
+    goto loopSetYyvalNodeReg3;
   case 0xc0:
     slotArg = yyvsp + -0x74;
     structQualifierError = TParseContext__structQualifierErrorCheck
@@ -7425,8 +7425,8 @@ LAB_97bab0ec:
                        (parseContext,*(uint *)(yyvsp + -0x58),*(unsigned char **)(yyvsp + -0x54),
                         (unsigned char *)slotArg,(unsigned char *)scratchR7,&initializerNodeOut);
     scratchR6 = (char *)slotArg;
-    if (executeInitializerResult == 0) goto switchD_97ba39c8_caseD_2;
-LAB_97bab1f4:
+    if (executeInitializerResult == 0) goto yynCase2;
+callTParseContext_recover2:
     TParseContext__recover(parseContext);
     scratchR6 = (char *)slotArg;
     yyvalNodeReg = (unsigned char *)0x0;
@@ -7439,7 +7439,7 @@ LAB_97bab1f4:
     elementPtr = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     loopPoolCopy = poolAllocator;
-    goto LAB_97bab2e8;
+    goto storeElementPtr;
   case 0xc2:
     symbolTable = *(int **)((int)parseContext + 4);
     levelsEnd = symbolTable[1];
@@ -7454,9 +7454,9 @@ LAB_97bab1f4:
     loopBodyNode = *(unsigned char **)(yyvsp + 8);
     conditionNode = *(unsigned char **)(yyvsp + -0x50);
     whileLine = *(uint *)(yyvsp + -0xdc);
-    goto LAB_97bab2b4;
+    goto setScratchR6;
   case 0xc3:
-    goto switchD_97ba39c8_caseD_c3;
+    goto yynCasec3;
   case 0xc4:
     boolError = __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped
                        (parseContext,*(uint *)yyvsp,*(unsigned char **)(yyvsp + -0x50),scratchR6,scratchR7
@@ -7469,21 +7469,21 @@ LAB_97bab1f4:
     scratchR7 = (char *)0x0;
     conditionNode = *(unsigned char **)(yyvsp + -0x50);
     whileLine = *(uint *)(yyvsp + -0xb0);
-LAB_97bab2b4:
+setScratchR6:
     scratchR6 = (char *)0x0;
     yyvalNode = (unsigned char *)
                 TIntermediate__addLoop(intermediate,loopBodyNode,conditionNode,(unsigned char *)0x0,scratchR7,whileLine);
     loopDepth = *(int *)((int)parseContext + 0x20);
-LAB_97bab40c:
+loopSetLoopDepth:
     loopDepth = loopDepth + -1;
-    goto LAB_97bab410;
+    goto storeParseContext;
   case 0xc5:
     symbolTable3 = *(unsigned char **)((int)parseContext + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     elementPtr = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     switchPoolCopy = poolAllocator;
-LAB_97bab2e8:
+storeElementPtr:
     *elementPtr = poolAllocator;
     elementPtr[1] = 0;
     treeNodeMem = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x1c);
@@ -7507,9 +7507,9 @@ LAB_97bab2e8:
       }
       *(int *)(symbolTable3 + 4) = levelsFinish + 4;
     }
-switchD_97ba39c8_caseD_c3:
+yynCasec3:
     loopDepth = *(int *)((int)parseContext + 0x20) + 1;
-LAB_97bab410:
+storeParseContext:
     *(int *)((int)parseContext + 0x20) = loopDepth;
     yyvalNodeReg = yyvalNode;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -7542,10 +7542,10 @@ LAB_97bab410:
     aggregateNode = (int *)(**(code **)(*(unsigned char **)yyvalNode + 0x1c))(yyvalNode);
     (**(code **)(*aggregateNode + 0x60))(aggregateNode,1);
     loopDepth = *(int *)((int)parseContext + 0x20);
-    goto LAB_97bab40c;
+    goto loopSetLoopDepth;
   case 0xcb:
     yyvalNodeReg = *(unsigned char **)(yyvsp + -0x24);
-LAB_97bab424:
+setYyvalNode2:
     yyvalNode2 = 0;
     break;
   case 0xcd:
@@ -7559,7 +7559,7 @@ LAB_97bab424:
     }
     intermediateForBranch = *(void **)parseContext;
     branchOp = 0x65;
-    goto LAB_97bab644;
+    goto setYyvalNodeReg4;
   case 0xce:
     if (*(int *)((int)parseContext + 0x20) < 1) {
       scratchR6 = "";
@@ -7571,7 +7571,7 @@ LAB_97bab424:
     }
     intermediateForBranch = *(void **)parseContext;
     branchOp = 100;
-    goto LAB_97bab644;
+    goto setYyvalNodeReg4;
   case 0xcf:
     returnLine = *(uint *)(yyvsp + -0x2c);
     addBranchResult = __ZN13TIntermediate9addBranchE9TOperatori(*(void **)parseContext,99,returnLine);
@@ -7586,7 +7586,7 @@ LAB_97bab424:
     if (queryResult == 0) break;
     errorLine = *(char **)(yyvsp + -0x2c);
     msgText = "non-void function must return a value";
-    goto LAB_97bab5e4;
+    goto setScratchR62;
   case 0xd0:
     expressionNode = *(uint *)(yyvsp + -0x24);
     scratchR6 = *(char **)(yyvsp + -0x58);
@@ -7620,12 +7620,12 @@ LAB_97bab424:
       msgText = "function return is not matching type:";
       currentFunctionObj = (int *)0x0;
     }
-LAB_97bab5e4:
+setScratchR62:
     scratchR6 = "return";
-LAB_97bab5e8:
+setScratchR72:
     scratchR7 = "";
     TParseContext__error((int)parseContext,errorLine,msgText,scratchR6,"",staleR8Value,currentFunctionObj,scratchR10);
-    goto LAB_97bab5f4;
+    goto loopCallTParseContext_recover4;
   case 0xd1:
     if (*(int *)((int)parseContext + 0xc) != 1) {
       scratchR7 = "";
@@ -7637,7 +7637,7 @@ LAB_97bab5e8:
     }
     intermediateForBranch = *(void **)parseContext;
     branchOp = 0x62;
-LAB_97bab644:
+setYyvalNodeReg4:
     yyvalNodeReg = (unsigned char *)
              __ZN13TIntermediate9addBranchE9TOperatori(intermediateForBranch,branchOp,*(uint *)(yyvsp + -0x2c));
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -7645,14 +7645,14 @@ LAB_97bab644:
     break;
   case 0xd2:
     yyvalNodeReg = *(unsigned char **)(yyvsp + 8);
-    goto LAB_97bab674;
+    goto storeParseContext2;
   case 0xd3:
     scratchR6 = (char *)0x0;
     yyvalNodeReg = (unsigned char *)
              TIntermediate__growAggregate
                        (*(unsigned char **)parseContext,*(unsigned char **)(yyvsp + -0x24),
                         *(unsigned char **)(yyvsp + 8),0);
-LAB_97bab674:
+storeParseContext2:
     *(unsigned char **)((int)parseContext + 0x10) = yyvalNodeReg;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
@@ -8013,7 +8013,7 @@ switchD_97ba39c8_caseD_0:
     yystate = (int)*(short *)(&DAT_97c35e08 + scratchR10);
   }
   goto LAB_97ba3784;
-LAB_97ba8338:
+loopSetLevelEntry:
   levelEntry = *(int *)(levelsBegin + levelIdx * 4);
   foundSymbol = 0;
   errorText = functionNameText;
@@ -8024,7 +8024,7 @@ LAB_97ba8338:
   levelIdx = levelIdx + -1;
   staleR4Value = r4Out13;
   if (foundSymbol == 0) {
-    if (-1 < levelIdx) goto LAB_97ba8334;
+    if (-1 < levelIdx) goto setLevelsBegin;
   }
   else {
     declaredFunction = *(uint *)(yyvsp + -0x1c);
@@ -8069,11 +8069,11 @@ LAB_97ba8338:
       }
     }
   }
-  goto LAB_97ba84b0;
-LAB_97ba8334:
+  goto setFunctionHeader;
+setLevelsBegin:
   levelsBegin = *symbolTable;
-  goto LAB_97ba8338;
-LAB_97ba84b0:
+  goto loopSetLevelEntry;
+setFunctionHeader:
   functionHeader = *(unsigned char **)(yyvsp + -0x1c);
   symbolTable = *(int **)((int)parseContext + 4);
   yyval = *(uint *)yyvsp;
@@ -8104,16 +8104,16 @@ LAB_97ba84b0:
   } while (!(bool)(cr0 >> 1 & 1));
   stillShared = 0 < oldRefCount4;
   destroyAllocArg = destroyAlloc57;
-  goto LAB_97ba869c;
-switchD_97ba39c8_caseD_60:
+  goto loopSetYyvalNodeReg2;
+yynCase60:
   scratchR6 = (char *)slotArg;
   yyvalNodeReg = (unsigned char *)0x0;
   typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
   typeTmp7VtableReg = typeTmp7Vtable[0];
   goto switchD_97ba39c8_caseD_0;
-LAB_97ba55dc:
+loopCheckTypeTmp1StructureCopy2:
   if ((uint)((int)(*(uint *)(typeTmp1StructureCopy2 + 8) - *(uint *)(typeTmp1StructureCopy2 + 4)) >> 3) <= loopIndex)
-  goto LAB_97ba5740;
+  goto setScratchR10;
   fieldType = *(int **)(*(uint *)(typeTmp1StructureCopy2 + 4) + loopIndex * 8);
   fieldNameStr2 = *fieldType;
   fieldNameStr2 = (**(code **)(fieldNameStr2 + 0x1c))(fieldType,staleR4Value,scratchR5,scratchR6,scratchR7,staleR8Value,fieldNameStr2);
@@ -8134,7 +8134,7 @@ LAB_97ba55dc:
   if (fieldNameStr2 != 0) {
     loopIndex = loopIndex + 1;
     staleR4Value = r4Out8;
-    goto LAB_97ba55dc;
+    goto loopCheckTypeTmp1StructureCopy2;
   }
   (**(code **)(**(int **)(yyvsp + -0x50) + 0x38))(&typeTmp1VtableOrStr1Alloc,*(int **)(yyvsp + -0x50));
   typeVtable3 = picBase2 + -0x610c;
@@ -8147,7 +8147,7 @@ LAB_97ba55dc:
                 TParseContext__addConstStruct
                           (parseContext,*(unsigned char **)(yyvsp + 4),(unsigned char *)scratchR5,(int)scratchR6,
                            scratchR7,picBase2);
-    if (yyvalNode == (unsigned char *)0x0) goto LAB_97ba5554;
+    if (yyvalNode == (unsigned char *)0x0) goto loopCallTParseContext_recover2;
     typeVtablePtr = *(undefined ***)(typeTmp1StructureCopy2 + 4);
     (**(code **)(*(int *)yyvalNode + 0x34))
               (yyvalNode,typeVtablePtr[loopIndex * 2],scratchR5,scratchR6,scratchR7,picBaseValue,typeVtablePtr);
@@ -8188,19 +8188,19 @@ LAB_97baae6c:
   typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
   typeTmp7VtableReg = typeTmp7Vtable[0];
   goto switchD_97ba39c8_caseD_0;
-LAB_97ba5740:
+setScratchR10:
   scratchR10 = *(uint *)(yyvsp + 4);
   staleR9Value = *(unsigned char **)(scratchR10 + 4);
   msgText2 = " no such field in structure";
-LAB_97ba5784:
+setPicBase:
   picBase = (unsigned char *)0xa7b8374c;
   staleR9Value[*(uint *)(staleR9Value + -0xc)] = *DAT_a7b7ba88;
   scratchR6 = *(char **)(scratchR10 + 4);
   errorLine2 = *(char **)(yyvsp + -0x2c);
-LAB_97ba5548:
+setScratchR73:
   scratchR7 = "";
   TParseContext__error((int)parseContext,errorLine2,msgText2,scratchR6,"",staleR8Value,staleR9Value,scratchR10);
-  goto LAB_97ba5554;
+  goto loopCallTParseContext_recover2;
 }
 
 /* yylex @ 0x97bac120 (4128 bytes) */
@@ -8248,11 +8248,11 @@ int yylex(yYSTYPE, parseContext)
     }
     ((int (*)())yy_load_buffer_state)();
   }
-switchD_97bac34c_caseD_1:
+yyActCase1:
   *_yy_c_buf_p = _yy_hold_char;
   yyBp = _yy_c_buf_p;
   yyCurrentState = _yy_start;
-LAB_97bac214:
+loopSetYyDefPtr:
   yyDefPtr = &_yy_def;
   stateOffset = yyCurrentState << 1;
   do {
@@ -8273,7 +8273,7 @@ LAB_97bac214:
     _yy_c_buf_p = _yy_c_buf_p + 1;
     stateOffset = yyCurrentState * 2;
   } while (*(short *)(&_yy_base + stateOffset) != 0x260);
-LAB_97bac2e4:
+loopSetYyAct:
   yyAct = (uint)*(short *)(&_yy_accept + stateOffset);
   yyCp = _yy_c_buf_p;
   if (yyAct == 0) {
@@ -8285,12 +8285,12 @@ LAB_97bac2e4:
   _yytext = yyBp;
   *yyCp = 0;
   _yy_c_buf_p = yyCp;
-LAB_97bac330:
+loopSetTokenLine:
   tokenLine = _yylineno;
   matchStart = _yytext;
   if (0x93 < yyAct) {
     yy_fatal_error("fatal flex scanner internal error--no action found");
-    goto switchD_97bac34c_caseD_1;
+    goto yyActCase1;
   }
   switch(yyAct) {
   case 0:
@@ -8298,12 +8298,12 @@ LAB_97bac330:
     _yytext = yyBp;
     stateOffset = _yy_last_accepting_state;
     _yy_c_buf_p = _yy_last_accepting_cpos;
-LAB_97bad2c8:
+loopSetStateOffset:
     stateOffset = stateOffset << 1;
     yyBp = _yytext;
-    goto LAB_97bac2e4;
+    goto loopSetYyAct;
   default:
-    goto switchD_97bac34c_caseD_1;
+    goto yyActCase1;
   case 2:
     token = 0x101;
     *(char **)yYSTYPE = _yylineno;
@@ -8728,7 +8728,7 @@ LAB_97bad2c8:
   case 0x5e:
     commentResult = PaParseComment((int *)yYSTYPE,parseContext);
     token = 0;
-    if (commentResult != 0) goto switchD_97bac34c_caseD_1;
+    if (commentResult != 0) goto yyActCase1;
     break;
   case 0x5f:
     token = 0x13d;
@@ -8944,7 +8944,7 @@ LAB_97bad2c8:
     break;
   case 0x90:
     _fwrite(_yytext,_yyleng,1,_yyout);
-    goto switchD_97bac34c_caseD_1;
+    goto yyActCase1;
   case 0x91:
     *yyCp = _yy_hold_char;
     if (*(int *)(_yy_current_buffer + 0x24) == 0) {
@@ -8956,22 +8956,22 @@ LAB_97bad2c8:
       _yy_c_buf_p = _yytext + (int)(yyCp + (-1 - (int)matchStart));
       stateOffset = ((int (*)())yy_get_previous_state)();
       yyCurrentState = ((int (*)())yy_try_NUL_trans)(stateOffset);
-      if (yyCurrentState == 0) goto LAB_97bad2c8;
+      if (yyCurrentState == 0) goto loopSetStateOffset;
       _yy_c_buf_p = _yy_c_buf_p + 1;
       yyBp = _yytext;
-      goto LAB_97bac214;
+      goto loopSetYyDefPtr;
     }
     nextBufferAction = ((int (*)())yy_get_next_buffer)();
-    if (nextBufferAction == 1) goto LAB_97bad2f8;
+    if (nextBufferAction == 1) goto setYyAct;
     if (1 < nextBufferAction) {
-      if (nextBufferAction == 2) goto LAB_97bad344;
-      goto switchD_97bac34c_caseD_1;
+      if (nextBufferAction == 2) goto setYyCBufP;
+      goto yyActCase1;
     }
-    if (nextBufferAction != 0) goto switchD_97bac34c_caseD_1;
+    if (nextBufferAction != 0) goto yyActCase1;
     _yy_c_buf_p = _yytext + (int)(yyCp + (-1 - (int)matchStart));
     yyCurrentState = ((int (*)())yy_get_previous_state)();
     yyBp = _yytext;
-    goto LAB_97bac214;
+    goto loopSetYyDefPtr;
   case 0x92:
   case 0x93:
     *(undefined4 *)((int)parseContext + 0x60) = 1;
@@ -8979,18 +8979,18 @@ LAB_97bad2c8:
     token = 0;
   }
   return token;
-LAB_97bad2f8:
+setYyAct:
   yyAct = _yy_start - 1;
   _yy_did_buffer_switch_on_eof = 0;
   _yy_c_buf_p = _yytext;
   yyAct = ((int)yyAct >> 1) + (uint)((int)yyAct < 0 && (yyAct & 1) != 0) + 0x92;
-  goto LAB_97bac330;
-LAB_97bad344:
+  goto loopSetTokenLine;
+setYyCBufP:
   _yy_c_buf_p = (byte *)(*(int *)(_yy_current_buffer + 4) + _yy_n_chars);
   stateOffset = ((int (*)())yy_get_previous_state)();
   stateOffset = stateOffset << 1;
   yyBp = _yytext;
-  goto LAB_97bac2e4;
+  goto loopSetYyAct;
 }
 
 /* yy_get_next_buffer @ 0x97bad390 (656 bytes) */

@@ -245,7 +245,7 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
       nameLength = *(int *)(nameChars + -0xc);
       cr0Flags = *DAT_a7b7ba18;
       errorMessage = "INTERNAL ERROR finding symbol";
-LAB_97b9c154:
+loopStoreNameChars:
       *(byte *)(nameChars + nameLength) = cr0Flags;
       error((int)this,(char *)0x0,errorMessage,*(char **)((int)nameString + 4),"",scratchR8,(uint)cr0Flags,scratchR10);
       return 1;
@@ -323,7 +323,7 @@ LAB_97b9c154:
   nameLength = *(int *)(nameChars + -0xc);
   cr0Flags = *DAT_a7b7ba18;
   errorMessage = "INTERNAL ERROR inserting new symbol";
-  goto LAB_97b9c154;
+  goto loopStoreNameChars;
 }
 
 /* TParseContext__arrayErrorCheck @ 0x97b9c180 (2552 bytes) */
@@ -610,7 +610,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
                     ((unsigned char *)(nameCopyChars + -0xc),destroyAllocator1);
         }
         if (stackTypeArraySize != (char *)0x0) {
-LAB_97b9caf4:
+loopSetVoidErrorResult:
           voidErrorResult = TParseContext__voidErrorCheck((unsigned char *)parseContext,(int)line,text,
                                  (unsigned char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
           if (voidErrorResult != 0) {
@@ -709,7 +709,7 @@ LAB_97b9caf4:
                   identifierLength = *(int *)(identifierChars + -0xc);
                   stringTerminator = (uint)*DAT_a7b7ba18;
                   errorReason = "higher index value already used for the array";
-                  goto LAB_97b9cb40;
+                  goto storeIdentifierChars;
                 }
                 *(int *)(redeclaredArrayNode + 4) = *(int *)arraySizeUnion[0xc];
                 *(uint *)(redeclaredArrayNode + 0x24) = *(uint *)(redeclaredArrayNode + 0x24) | 0x200;
@@ -718,7 +718,7 @@ LAB_97b9caf4:
                 existingSymbol[4] = *(int *)arraySizeUnion[0xc];
                 existingSymbol[0xc] = existingSymbol[0xc] | 0x200;
               }
-              goto LAB_97b9caf4;
+              goto loopSetVoidErrorResult;
             }
             identifierChars = *(int *)(text + 4);
             identifierLength = *(int *)(identifierChars + -0xc);
@@ -740,7 +740,7 @@ LAB_97b9caf4:
       stringTerminator = (uint)*DAT_a7b7ba18;
       errorReason = "array size must be a positive integer";
     }
-LAB_97b9cb40:
+storeIdentifierChars:
     *(char *)(identifierChars + identifierLength) = (char)stringTerminator;
     error(parseContext,(char *)line,errorReason,*(char **)(text + 4),"",ptSize,stringTerminator,ptArray);
   }
@@ -890,7 +890,7 @@ int TParseContext__arraySetMaxSize(this, intermSymbol, type, maxSize, updateFlag
     symbolNameString = (void *)(**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol);
     compareResult = __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc(symbolNameString,"gl_TexCoord");
     if (compareResult != 0) {
-LAB_97b9cf8c:
+loopCheckUpdateFlag:
       if (updateFlag == 0) {
         return 0;
       }
@@ -958,7 +958,7 @@ LAB_97b9cf8c:
         constArray = (int *)((int (*)())TPoolAllocator__allocate)(poolAllocator,componentCount << 2);
         *(int **)(lookedUpVariable + 0x38) = constArray;
       }
-      if (maxSize < *constArray) goto LAB_97b9cf8c;
+      if (maxSize < *constArray) goto loopCheckUpdateFlag;
       error((int)this,(char *)line,"","[",
             "gl_TexCoord can only have a max array size of up to gl_MaxTextureCoords","",maxTexCoordsNameChars,
             scratchR10);
@@ -1327,7 +1327,7 @@ int TParseContext__extensionErrorCheck(this, sourceLoc, str)
   mapNode = mapIterOverlay;
   mapEndOverlay = *(int *)(this + 0x34);
   if (mapIterOverlay == mapEndOverlay) {
-LAB_97b9d574:
+loopStoreInsertHintCopy:
     insertHintCopy[0] = mapNode;
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&entryKey,(unsigned char *)&extensionKey);
     entryBehavior = 0;
@@ -1366,7 +1366,7 @@ LAB_97b9d574:
     if (compareResult == 0) {
       compareResult = keyLength - nodeKeyLength;
     }
-    if (compareResult < 0) goto LAB_97b9d574;
+    if (compareResult < 0) goto loopStoreInsertHintCopy;
   }
   extBehavior = *(int *)(mapNode + 0x18);
   refCountPtr = (int *)(extensionKeyChars + -4);
@@ -1489,7 +1489,7 @@ LAB_97b9d574:
     if (compareResult == 0) {
       compareResult = keyLength - nodeKeyLength;
     }
-    if (-1 < compareResult) goto LAB_97b9d98c;
+    if (-1 < compareResult) goto setExtBehavior;
   }
   insertIterator[0] = mapNode;
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&entryKey2,(unsigned char *)&extensionKey);
@@ -1514,7 +1514,7 @@ LAB_97b9d574:
               ((unsigned char *)(entryKey2Chars + -0xc),entryKey2DestroyArg);
     mapNode = allocatorOverlay[0];
   }
-LAB_97b9d98c:
+setExtBehavior:
   extBehavior = *(int *)(mapNode + 0x18);
   refCountPtr = (int *)(extensionKeyChars + -4);
   keyDestroyArg2[0] = extensionKey;
@@ -1876,13 +1876,13 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     errorReason = "redefinition";
     *(byte *)(*(int *)(levelsBegin + 4) + *(int *)(*(int *)(levelsBegin + 4) + -0xc)) = *DAT_a7b7ba18;
     nameChars = *(char **)(levelsBegin + 4);
-    goto LAB_97b9df14;
+    goto callError;
   }
   ptLineCopy = (**(code **)(newNode[3] + 0x24))(newNodeType,passThroughR4,tempName,ptLineCopy,ptQualifier,ptSize,decrementedRefCount,levelsBegin);
   if (2 < ptLineCopy) {
     nameChars = (char *)getQualifierString((uint)newNode[0xc] >> 0x19);
     errorReason = " cannot initialize this type of qualifier ";
-    goto LAB_97b9df14;
+    goto callError;
   }
   if (ptLineCopy != 2) {
     variableSymbol = TIntermediate__addSymbol
@@ -2083,7 +2083,7 @@ LAB_97b9e184:
           passThroughR4 = *(undefined4 *)(constantArrayPtr + 0x30);
           intermediate = *(unsigned char **)this;
           singleConstantParam = 1;
-          goto LAB_97b9e6d8;
+          goto setParseResult;
         }
       }
       existingTypeWord = newNode[4];
@@ -2111,7 +2111,7 @@ LAB_97b9e184:
       passThroughR4 = *(undefined4 *)(constantArrayPtr + 0x30);
       intermediate = *(unsigned char **)this;
       singleConstantParam = 0;
-LAB_97b9e6d8:
+setParseResult:
       parseResult = TIntermediate__parseConstTree
                         (intermediate,line,(unsigned char *)initializer,variableConstPointer,passThroughR4,symbolTableArg,
                          (unsigned char *)&stackType,singleConstantParam);
@@ -2251,27 +2251,27 @@ LAB_97b9e6d8:
             if (ptBasicType == 1) {
               constantUnionNodeArray = (**(code **)(*(int *)initializer + 0x18))(initializer,ptSizeCopy,stackTypeBits,1);
               *variableConstArray = **(undefined4 **)(constantUnionNodeArray + 0x30);
-              goto LAB_97b9e850;
+              goto storeIntermNode;
             }
           }
-          else if (ptBasicType == 3) goto LAB_97b9e3bc;
+          else if (ptBasicType == 3) goto setConstantUnionNodeArray;
           nameChars = "";
           errorReason = " cannot initialize constant of this type";
-LAB_97b9df14:
+callError:
           error((int)this,(char *)line,errorReason,nameChars,"",ptSize,decrementedRefCount,levelsBegin);
           return 1;
         }
-LAB_97b9e3bc:
+setConstantUnionNodeArray:
         constantUnionNodeArray = (**(code **)(*(int *)initializer + 0x18))(initializer);
         *variableConstArray = **(undefined4 **)(constantUnionNodeArray + 0x30);
-        goto LAB_97b9e850;
+        goto storeIntermNode;
       }
     }
     initializerUnion = (**(code **)(*(int *)initializer + 0x18))(initializer,ptSizeCopy,ptUserDef,qualifierIsNotConst,ptLine);
     constArray = *(int *)(initializerUnion + 0x30);
   }
   newNode[0xe] = constArray;
-LAB_97b9e850:
+storeIntermNode:
   *intermNode = (unsigned char *)0x0;
   return 0;
 }
@@ -2671,7 +2671,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
       TParseContext__recover(this);
       return intermTyped;
     }
-    goto LAB_97b9f4c4;
+    goto setFieldCount;
   }
   if (intermAggregate == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No aggregate or constant union node available","Internal Error"
@@ -2719,7 +2719,7 @@ LAB_97b9f438:
   if (parseResult != 0) {
     return (unsigned char *)0x0;
   }
-LAB_97b9f4c4:
+setFieldCount:
   fieldCount = *(int *)(vectorFields + 0x10);
   fieldIndex = 0;
   poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
@@ -2847,14 +2847,14 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
       parseResult = TIntermediate__parseConstTree
                         (*(unsigned char **)this,line,intermAggregate,newConstArray,*(undefined4 *)(intermAggregate + 0x30),
                          *(undefined4 *)(this + 4),(unsigned char *)typeTemp,1);
-      goto LAB_97b9f8f4;
+      goto storeTypeTemp;
     }
   }
   (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
   parseResult = TIntermediate__parseConstTree
                     (*(unsigned char **)this,line,intermAggregate,newConstArray,*(undefined4 *)(intermAggregate + 0x30),
                      *(undefined4 *)(this + 4),typeTemp,0);
-LAB_97b9f8f4:
+storeTypeTemp:
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   resultNode = 0;
   if (parseResult == 0) {
@@ -3047,7 +3047,7 @@ int TParseContext__initializeExtensionBehavior(this)
     if (compareResult == 0) {
       compareResult = keyLength - nodeKeyLength;
     }
-    if (-1 < compareResult) goto LAB_97b9fe04;
+    if (-1 < compareResult) goto storeMapNode;
   }
   insertHint = mapNode;
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&entryKey,(unsigned char *)&extensionKey);
@@ -3072,7 +3072,7 @@ int TParseContext__initializeExtensionBehavior(this)
               ((unsigned char *)(entryKeyChars + -0xc),entryKeyDestroyArg);
     mapNode = lowerBound[0];
   }
-LAB_97b9fe04:
+storeMapNode:
   *(undefined4 *)(mapNode + 0x18) = 1;
   refCountPtr = (int *)(extensionKeyChars + -4);
   keyDestroyArg[0] = extensionKey;
@@ -4006,12 +4006,12 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
     numStringArrays = TBuiltIns__getNumStringArrays(builtIns,pcLanguage);
     arrayIndex = 0;
     if (numStringArrays != 0) {
-LAB_97ba0e34:
+loopSetStringArray:
       stringArray = (char **)TBuiltIns__getStringArray(builtIns,pcLanguage,arrayIndex);
       stringSizeArray = (int *)TBuiltIns__getStringSizeArray(builtIns,pcLanguage,arrayIndex);
       numStrings = TBuiltIns__getNumStrings(builtIns,pcLanguage,arrayIndex);
       paParseStringsResult = PaParseStrings(stringArray,stringSizeArray,numStrings,0,(unsigned char *)&pcIntermediate);
-      if (paParseStringsResult == 0) goto LAB_97ba0fd8;
+      if (paParseStringsResult == 0) goto setArrayIndex;
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"Unable to parse built-ins");
@@ -4033,7 +4033,7 @@ LAB_97ba0e34:
       }
       goto code_r0x97ba0f58;
     }
-LAB_97ba0fe4:
+loopCallZ16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource:
     __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(pcLanguage,this,builtInResource);
     __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(pcLanguage,this);
     _FinalizePreprocessor();
@@ -4108,10 +4108,10 @@ code_r0x97ba0f58:
     result = 0;
   }
   return result;
-LAB_97ba0fd8:
+setArrayIndex:
   arrayIndex = arrayIndex + 1;
-  if (numStringArrays <= arrayIndex) goto LAB_97ba0fe4;
-  goto LAB_97ba0e34;
+  if (numStringArrays <= arrayIndex) goto loopCallZ16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource;
+  goto loopSetStringArray;
 }
 
 /* _ShCompile @ 0x97ba10c8 (1888 bytes) */
@@ -4357,7 +4357,7 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
         __ZN13TInfoSinkBase6appendEPKc
                   (infoSinkRef,"Parse tree post-processing failure. No code generated.");
         __ZN13TInfoSinkBase6appendEPKc(infoSinkRef,"\n");
-        goto LAB_97ba18d4;
+        goto callTIntermediate_remove;
       }
       if (optLevel != 0) {
         noDebugOutput = (debugOptions & 1) == 0;
@@ -4368,8 +4368,8 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
         (**(code **)(*compiler + 0x34))(compiler,optLevel);
         (**(code **)(*compiler + 0x38))(compiler,debugOptions);
         parseResult = (**(code **)(*compiler + 0x14))(compiler,treeRoot);
-        if (parseResult != 0) goto LAB_97ba18d4;
-        goto LAB_97ba18cc;
+        if (parseResult != 0) goto callTIntermediate_remove;
+        goto setSuccess;
       }
       __ZN13TInfoSinkBase6appendEPKc
                 (infoSink,"No errors.  No code generation or linking was requested.");
@@ -4409,14 +4409,14 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
     }
   }
   else {
-    if (treeRoot != (unsigned char *)0x0) goto LAB_97ba18d4;
+    if (treeRoot != (unsigned char *)0x0) goto callTIntermediate_remove;
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
     __ZN13TInfoSinkBase6appendEPKc(infoSinkRef,"Parser found no code to compile in source strings.");
     __ZN13TInfoSinkBase6appendEPKc(infoSinkRef,"\n");
-LAB_97ba18cc:
+setSuccess:
     success = 0;
   }
-LAB_97ba18d4:
+callTIntermediate_remove:
   TIntermediate__remove((unsigned char *)&intermediate,treeRoot);
   levelsBase = symbolTableLevelsBegin;
   for (; parseResult = (int)symbolTableLevelsEnd - (int)levelsBase >> 2, parseResult != 1; symbolTableLevelsEnd = symbolTableLevelsEnd + -1) {
@@ -4511,7 +4511,7 @@ int _ShLink(handle, shaderHandles, numShaders, linkerWord80, linkerWord7c)
           messageText = "Invalid shader passed to linker (internal error).";
           messagePrefix = "INTERNAL ERROR: ";
                     
-LAB_97ba1bf0:
+loopCallZN13TInfoSinkBase6appendEPKc:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,messagePrefix);
           __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
@@ -4523,7 +4523,7 @@ LAB_97ba1bf0:
           messageText = "Not all shaders have valid object code.";
                     
           messagePrefix = "ERROR: ";
-          goto LAB_97ba1bf0;
+          goto loopCallZN13TInfoSinkBase6appendEPKc;
         }
         shaderIndex = shaderIndex + 1;
       } while (shaderIndex < numShaders);

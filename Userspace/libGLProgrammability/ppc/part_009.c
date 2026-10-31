@@ -627,7 +627,7 @@ code_r0x97bb3410:
       for (callChunk = **(int **)(*(int *)(this + stageOffset + 0x30) + 0x20); callChunk != 0;
           callChunk = *(int *)(callChunk + 8)) {
         if ((((*(uint *)(callChunk + 0xc) & 0x3fc0000) == 0x1300000) && (*(int *)(callChunk + 0x40) != 0))
-           && (callNameCompare = _strcmp(callChunk + 0x44,functionName), callNameCompare == 0)) goto LAB_97bb37a8;
+           && (callNameCompare = _strcmp(callChunk + 0x44,functionName), callNameCompare == 0)) goto setFnIdx;
       }
       for (opChunk = **(int **)(*(int *)(this + stageOffset + 0x30) + 0x20); opChunk != 0;
           opChunk = *(int *)(opChunk + 8)) {
@@ -635,7 +635,7 @@ code_r0x97bb3410:
         firstOp = FunctionTable__getFirstOp(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
         if ((chunkHeader & 0x3ffff) == firstOp) {
           removedAny = false;
-          goto LAB_97bb361c;
+          goto setChunkHeader;
         }
       }
       length2 = _strlen(DAT_a7b7baec);
@@ -652,9 +652,9 @@ code_r0x97bb3410:
       _free(allocation);
       goto code_r0x97bb3790;
     }
-    goto LAB_97bb37a8;
+    goto setFnIdx;
   }
-  goto LAB_97bb37d4;
+  goto setStage;
   while( true ) {
     if ((*(uint *)(opChunk + 0xc) & 0x3ffff) == 0) {
       length = _strlen(DAT_a7b7baf0);
@@ -682,7 +682,7 @@ code_r0x97bb3410:
       opChunk = nextChunk2;
     }
     if (removedAny) break;
-LAB_97bb361c:
+setChunkHeader:
     chunkHeader = *(uint *)(opChunk + 0xc);
     lastOp = FunctionTable__getLastOp(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
     if ((chunkHeader & 0x3ffff) == lastOp) {
@@ -706,15 +706,15 @@ code_r0x97bb3790:
   fnIdxBase = fnIdx + -1;
   removedAny = true;
   FunctionTable__removeFunction(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
-LAB_97bb37a8:
+setFnIdx:
   fnIdx = fnIdxBase + 1;
   if ((*(int *)(this + stageOffset + 0x38) == 0) ||
      (*(int *)(*(int *)(this + stageOffset + 0x38) + 4) <= fnIdx)) goto code_r0x97bb37cc;
   goto code_r0x97bb3410;
 code_r0x97bb37cc:
-  if (!removedAny) goto LAB_97bb37d4;
+  if (!removedAny) goto setStage;
   goto code_r0x97bb33e8;
-LAB_97bb37d4:
+setStage:
   stage = stage + 1;
   if (1 < stage) {
     return;
@@ -782,8 +782,8 @@ int TGenericLinker__RemoveUnusedRegisters(this)
         opChunk = **(int **)(*(int *)(stageSlot + 0x30) + 0x20);
         if (opChunk == 0) {
           unreferenced = referenced == 0;
-LAB_97bb3a3c:
-          if (!unreferenced) goto LAB_97bb3b10;
+loopCheckUnreferenced:
+          if (!unreferenced) goto setNextSymbol;
           nextSymbol = (unsigned char *)
                    ParseSymbolTable__NextSymbol(*(unsigned char **)(stageSlot + 0x28),symbol);
           ParseSymbolTable__RemoveSymbol(*(unsigned char **)(stageSlot + 0x28),symbol);
@@ -793,7 +793,7 @@ LAB_97bb3a3c:
             nextChunk = *(byte **)(chunk + 8);
             if (chunkKind == 2) {
               chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 0x18);
-LAB_97bb3ad8:
+loopCallPPStreamChunkListRemoveChunk:
               _PPStreamChunkListRemoveChunk(chunkList,chunk);
             }
             else {
@@ -802,17 +802,17 @@ LAB_97bb3ad8:
                   chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 0x10);
                 }
                 else {
-                  if (chunkKind != 4) goto LAB_97bb3adc;
+                  if (chunkKind != 4) goto setChunk;
                   chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 0x1c);
                 }
-                goto LAB_97bb3ad8;
+                goto loopCallPPStreamChunkListRemoveChunk;
               }
               if (chunkKind == 0) {
                 chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 4);
-                goto LAB_97bb3ad8;
+                goto loopCallPPStreamChunkListRemoveChunk;
               }
             }
-LAB_97bb3adc:
+setChunk:
             chunk = nextChunk;
           }
           if (symbol != (unsigned char *)0x0) {
@@ -835,33 +835,33 @@ LAB_97bb3adc:
                   do {
                     if (chunkKind == 2) {
                       if (*(int *)(symbol + 0x34) != 0) {
-                        if ((*(uint *)(operandPtr + 0xc) & 0x3800000) != 0) goto LAB_97bb3954;
-LAB_97bb393c:
+                        if ((*(uint *)(operandPtr + 0xc) & 0x3800000) != 0) goto setOperandIndex;
+loopCheckOperandPtr:
                         if ((uint)*(ushort *)(operandPtr + 0x12) !=
-                            (uint)*(ushort *)(chunk + 0x12) + elementIndex) goto LAB_97bb3954;
+                            (uint)*(ushort *)(chunk + 0x12) + elementIndex) goto setOperandIndex;
                       }
-LAB_97bb3950:
+loopSetReferenced:
                       referenced = 1;
                     }
                     else if (chunkKind < 3) {
                       if (chunkKind == 0) {
                         operandClassMatches = (*(uint *)(operandPtr + 0xc) >> 0x17 & 7) == 1;
-                        goto LAB_97bb3938;
+                        goto checkOperandClassMatches;
                       }
                     }
                     else {
                       if (chunkKind == 3) {
-                        if (*(int *)(symbol + 0x34) == 0) goto LAB_97bb3950;
+                        if (*(int *)(symbol + 0x34) == 0) goto loopSetReferenced;
                         operandClassMatches = (*(uint *)(operandPtr + 0xc) >> 0x17 & 7) == 2;
                       }
                       else {
-                        if (chunkKind != 4) goto LAB_97bb3954;
+                        if (chunkKind != 4) goto setOperandIndex;
                         operandClassMatches = (*(uint *)(operandPtr + 0xc) >> 0x17 & 7) == 3;
                       }
-LAB_97bb3938:
-                      if (operandClassMatches) goto LAB_97bb393c;
+checkOperandClassMatches:
+                      if (operandClassMatches) goto loopCheckOperandPtr;
                     }
-LAB_97bb3954:
+setOperandIndex:
                     operandIndex = operandIndex + 1;
                     operandPtr = operandPtr + 8;
                   } while ((operandIndex < (int)operandCount) && (referenced == 0));
@@ -871,44 +871,44 @@ LAB_97bb3954:
                 }
                 if (chunkKind == 2) {
                   if (*(int *)(symbol + 0x34) != 0) {
-                    if ((*(uint *)(opChunk + 0x14) & 0xe0000) != 0) goto LAB_97bb3a08;
-LAB_97bb39f0:
+                    if ((*(uint *)(opChunk + 0x14) & 0xe0000) != 0) goto setUnreferenced;
+loopCheckOpChunk:
                     if ((uint)*(ushort *)(opChunk + 0x1a) !=
-                        (uint)*(ushort *)(chunk + 0x12) + elementIndex) goto LAB_97bb3a08;
+                        (uint)*(ushort *)(chunk + 0x12) + elementIndex) goto setUnreferenced;
                   }
-LAB_97bb3a04:
+loopSetReferenced2:
                   referenced = 1;
                 }
                 else if (chunkKind < 3) {
                   if (chunkKind == 0) {
                     destWord = *(uint *)(opChunk + 0x14);
                     classBits = 0x20000;
-                    goto LAB_97bb39e4;
+                    goto checkDestWord;
                   }
                 }
                 else {
                   if (chunkKind == 3) {
-                    if (*(int *)(symbol + 0x34) == 0) goto LAB_97bb3a04;
+                    if (*(int *)(symbol + 0x34) == 0) goto loopSetReferenced2;
                     destWord = *(uint *)(opChunk + 0x14);
                     classBits = 0x40000;
                   }
                   else {
-                    if (chunkKind != 4) goto LAB_97bb3a08;
+                    if (chunkKind != 4) goto setUnreferenced;
                     destWord = *(uint *)(opChunk + 0x14);
                     classBits = 0x60000;
                   }
-LAB_97bb39e4:
-                  if ((destWord & 0xe0000) == classBits) goto LAB_97bb39f0;
+checkDestWord:
+                  if ((destWord & 0xe0000) == classBits) goto loopCheckOpChunk;
                 }
-LAB_97bb3a08:
+setUnreferenced:
                 unreferenced = referenced == 0;
                 elementIndex = elementIndex + 1;
               }
               opChunk = *(int *)(opChunk + 8);
-              if (opChunk == 0) goto LAB_97bb3a3c;
+              if (opChunk == 0) goto loopCheckUnreferenced;
             } while (unreferenced);
           }
-LAB_97bb3b10:
+setNextSymbol:
           nextSymbol = (unsigned char *)
                    ParseSymbolTable__NextSymbol(*(unsigned char **)(stageSlot + 0x28),symbol);
         }
@@ -1123,21 +1123,21 @@ int TGenericLinker__FixOutputReads(this)
                 opHeader = 0x20000000;
                 opWord13 = 0;
                 if (componentCount == 1) {
-LAB_97bb40ac:
+loopSetOpDest0:
                   opDest0 = opDest0 | 0x4000;
-LAB_97bb40b4:
+loopSetOpDest02:
                   opDest0 = opDest0 | 0x2000;
                 }
                 else {
-                  if (componentCount == 0) goto LAB_97bb40b4;
+                  if (componentCount == 0) goto loopSetOpDest02;
                   if (componentCount == 2) {
-LAB_97bb40a4:
+loopSetOpDest03:
                     opDest0 = opDest0 | 0x8000;
-                    goto LAB_97bb40ac;
+                    goto loopSetOpDest0;
                   }
                   if (componentCount == 3) {
                     opDest0 = 0x10c6c;
-                    goto LAB_97bb40a4;
+                    goto loopSetOpDest03;
                   }
                 }
                 componentCount = tempUsageFlags >> 0x18 & 3;
@@ -1250,7 +1250,7 @@ int TGenericLinker__OptimizeFunctionIO(this)
                       opHeader = *(uint *)(bodyOp + 0xc);
                       firstOpIndex = FunctionTable__getFirstOp
                                         (*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
-                      if ((opHeader & 0x3ffff) == firstOpIndex) goto LAB_97bb43a0;
+                      if ((opHeader & 0x3ffff) == firstOpIndex) goto loopCheckScanEnded;
                     }
                     formatLength = _strlen(DAT_a7b7baec);
                     shaderNameLength = _strlen((&_shaderString)[stage]);
@@ -1265,7 +1265,7 @@ int TGenericLinker__OptimizeFunctionIO(this)
                     __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
                     _free(message);
                   }
-LAB_97bb44d0:
+loopSetNextOp:
                   nextOp = (unsigned char *)
                             **(undefined4 **)(*(int *)(this + stageByteOffset + 0x30) + 0x20);
 joined_r0x97bb44e4:
@@ -1310,12 +1310,12 @@ joined_r0x97bb44e4:
       return;
     }
   } while( true );
-LAB_97bb43a0:
+loopCheckScanEnded:
   if (((scanEnded) ||
       (opHeader = *(uint *)(bodyOp + 0xc),
       lastOpIndex = FunctionTable__getLastOp(*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex),
       lastOpIndex < (opHeader & 0x3ffff))) || ((*(uint *)(bodyOp + 0xc) & 0x3ffff) == 0))
-  goto LAB_97bb44d0;
+  goto loopSetNextOp;
   bodyNextOp = *(unsigned char **)(bodyOp + 8);
   if ((*(uint *)(bodyOp + 0xc) & 0x3fc0000) == 0) {
     srcOperandWord = *(uint *)(bodyOp + 0x1c);
@@ -1329,7 +1329,7 @@ LAB_97bb43a0:
     else {
       if (((*(uint *)(bodyOp + 0x14) & 0xe0000) != 0x20000) ||
          ((uint)*(ushort *)(bodyOp + 0x1a) != *(ushort *)(paramChunk + 0x12) + elementIndex))
-      goto LAB_97bb4398;
+      goto setScanEnded;
       inSourceWord1 = *(int *)(bodyOp + 0x20);
       FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + stageByteOffset + 0x38),bodyOp);
       ppStream = *(undefined4 *)(this + stageByteOffset + 0x30);
@@ -1337,10 +1337,10 @@ LAB_97bb43a0:
     }
     _PPStreamRemoveOperation(ppStream,bodyOp);
   }
-LAB_97bb4398:
+setScanEnded:
   scanEnded = bodyNextOp == (unsigned char *)0x0;
   bodyOp = bodyNextOp;
-  goto LAB_97bb43a0;
+  goto loopCheckScanEnded;
 code_r0x97bb456c:
   if ((((*(uint *)(opChunk + 0xc) & 0x3fc0000) == 0x1b40000) &&
       ((*(uint *)(opChunk + 0x1c) & 0x3800000) == 0x800000)) &&
@@ -1833,7 +1833,7 @@ joined_r0x97bb54f0:
       }
     }
   }
-  goto LAB_97bb56a8;
+  goto setBinding;
 code_r0x97bb567c:
   while( true ) {
     glType = Binding__GetOpenGLType(binding);
@@ -1844,7 +1844,7 @@ code_r0x97bb567c:
     *(uint *)(chunk + 0xc) = registerValue & 0x1f | *(uint *)(chunk + 0xc) & 0xffffffe0;
     chunk = *(int *)(chunk + 8);
   }
-LAB_97bb56a8:
+setBinding:
   binding = (unsigned char *)BindingTable__NextAttribBinding(*(unsigned char **)(this + 4),binding);
   goto joined_r0x97bb54f0;
 }
@@ -3063,7 +3063,7 @@ int TGenericLinker__CreateFunctionTable(this, stage)
           isDuplicate = false;
           earlierObjIdx = 0;
           if (objectIdx < 1) {
-LAB_97bb7818:
+loopSetFnName:
             fnName = (char *)FunctionTable__getFunctionName(objectFnTable,fnIdx);
             mergedFnIdx = FunctionTable__addFunction(mergedTable,fnName);
             emptyFlag = FunctionTable__getEmpty(objectFnTable,fnIdx);
@@ -3117,7 +3117,7 @@ LAB_97bb7818:
               }
               earlierObjIdx = earlierObjIdx + 1;
             } while (earlierObjIdx < objectIdx);
-            if (!isDuplicate) goto LAB_97bb7818;
+            if (!isDuplicate) goto loopSetFnName;
           }
           fnIdx = fnIdx + 1;
           errorFound = (bool)(errorFound | isDuplicate);
@@ -3244,7 +3244,7 @@ int TGenericLinker__BuildSymbolTableList(this, shaderHandles, numShaders)
   r4In0 = shaderHandles;
   r5Fwd = numShaders;
   if (numShaders < 1) {
-LAB_97bb7d6c:
+loopSetLinkOk:
     linkOk = false;
     if (status == 1) {
       checkStage = 0;
@@ -3332,7 +3332,7 @@ override_jmp_97bb7c58_case_0:
         r4In0 = r4Out0;
       }
       shaderIndex = shaderIndex + 1;
-      if (numShaders <= shaderIndex) goto LAB_97bb7d6c;
+      if (numShaders <= shaderIndex) goto loopSetLinkOk;
     } while (status == 1);
     linkOk = false;
   }
@@ -4798,11 +4798,11 @@ int AddressTempAllocator__getTemporary(this)
           slotCursor = slotCursor + 1;
         } while (*slotCursor != 0);
       }
-      goto LAB_97bb9e58;
+      goto storeSlotOffset;
     }
   }
   table = *(int *)this;
-LAB_97bb9e58:
+storeSlotOffset:
   *(undefined4 *)(slotOffset + table) = 1;
   return slot;
 }

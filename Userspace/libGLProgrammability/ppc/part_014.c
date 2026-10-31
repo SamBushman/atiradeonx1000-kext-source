@@ -271,75 +271,75 @@ int _InterpreterTextureSamplerWrapCoordinate(sampler, texelCoord)
   }
   if (wrapModeS == 0x2901) {
     wrappedS = *texelCoord & *(uint *)(levelRecord + 0x40);
-LAB_97bd3d20:
+loopStoreTexelCoord:
     *texelCoord = wrappedS;
   }
   else {
     if (wrapModeS < 0x2902) {
-      if (wrapModeS != 0x2900) goto LAB_97bd3d24;
-LAB_97bd3cec:
+      if (wrapModeS != 0x2900) goto checkWrapModeT;
+loopSetWrappedS:
       wrappedS = *texelCoord;
       if ((int)wrappedS < 0) {
-LAB_97bd3cf8:
+loopSetWrappedS2:
         wrappedS = 0;
-        goto LAB_97bd3d20;
+        goto loopStoreTexelCoord;
       }
       clampLimitS = *(uint *)(levelRecord + 0x80);
     }
     else {
-      if (wrapModeS == 0x812d) goto LAB_97bd3cec;
-      if (wrapModeS != 0x812f) goto LAB_97bd3d24;
+      if (wrapModeS == 0x812d) goto loopSetWrappedS;
+      if (wrapModeS != 0x812f) goto checkWrapModeT;
       wrappedS = *texelCoord;
-      if ((int)wrappedS < 0) goto LAB_97bd3cf8;
+      if ((int)wrappedS < 0) goto loopSetWrappedS2;
       clampLimitS = *(uint *)(levelRecord + 0x30);
     }
     if (clampLimitS < wrappedS) {
       *texelCoord = clampLimitS;
     }
   }
-LAB_97bd3d24:
+checkWrapModeT:
   if (wrapModeT == 0x2901) {
     wrappedT = texelCoord[1] & *(uint *)(levelRecord + 0x44);
-LAB_97bd3da8:
+loopStoreTexelCoord2:
     texelCoord[1] = wrappedT;
   }
   else {
     if (wrapModeT < 0x2902) {
-      if (wrapModeT != 0x2900) goto LAB_97bd3dac;
-LAB_97bd3d74:
+      if (wrapModeT != 0x2900) goto checkWrapModeR;
+loopSetWrappedT:
       wrappedT = texelCoord[1];
       if ((int)wrappedT < 0) {
-LAB_97bd3d80:
+loopSetWrappedT2:
         wrappedT = 0;
-        goto LAB_97bd3da8;
+        goto loopStoreTexelCoord2;
       }
       clampLimitT = *(uint *)(levelRecord + 0x84);
     }
     else {
-      if (wrapModeT == 0x812d) goto LAB_97bd3d74;
-      if (wrapModeT != 0x812f) goto LAB_97bd3dac;
+      if (wrapModeT == 0x812d) goto loopSetWrappedT;
+      if (wrapModeT != 0x812f) goto checkWrapModeR;
       wrappedT = texelCoord[1];
-      if ((int)wrappedT < 0) goto LAB_97bd3d80;
+      if ((int)wrappedT < 0) goto loopSetWrappedT2;
       clampLimitT = *(uint *)(levelRecord + 0x34);
     }
     if (clampLimitT < wrappedT) {
       texelCoord[1] = clampLimitT;
     }
   }
-LAB_97bd3dac:
+checkWrapModeR:
   if (wrapModeR == 0x2901) {
     wrappedR = texelCoord[2] & *(uint *)(levelRecord + 0x48);
-    goto LAB_97bd3e30;
+    goto storeTexelCoord;
   }
   if (wrapModeR < 0x2902) {
     if (wrapModeR != 0x2900) {
       return;
     }
-LAB_97bd3dfc:
+loopSetWrappedR:
     wrappedR = texelCoord[2];
     if (-1 < (int)wrappedR) {
       clampLimitR = *(uint *)(levelRecord + 0x88);
-LAB_97bd3e14:
+loopCheckClampLimitR:
       if (clampLimitR < wrappedR) {
         texelCoord[2] = clampLimitR;
         return;
@@ -348,18 +348,18 @@ LAB_97bd3e14:
     }
   }
   else {
-    if (wrapModeR == 0x812d) goto LAB_97bd3dfc;
+    if (wrapModeR == 0x812d) goto loopSetWrappedR;
     if (wrapModeR != 0x812f) {
       return;
     }
     wrappedR = texelCoord[2];
     if (-1 < (int)wrappedR) {
       clampLimitR = *(uint *)(levelRecord + 0x38);
-      goto LAB_97bd3e14;
+      goto loopCheckClampLimitR;
     }
   }
   wrappedR = 0;
-LAB_97bd3e30:
+storeTexelCoord:
   texelCoord[2] = wrappedR;
   return;
 }
@@ -573,7 +573,7 @@ double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *sampler,uint textur
   textureState = *textureObject;
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97bd42d8:
+loopCheckTextureState:
     if (*(short *)(textureState + 0x10) == -0x7ed3) {
       levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
       nearestRecordIndex = level * 0x34 + 100;
@@ -593,18 +593,18 @@ LAB_97bd42d8:
     return loadTexelResult;
   }
   if (minFilter < 0x2701) {
-    if (minFilter == 0x2600) goto LAB_97bd42d8;
+    if (minFilter == 0x2600) goto loopCheckTextureState;
     isLinearFilterCode = minFilter == 0x2601;
-LAB_97bd42d0:
+loopCheckIsLinearFilterCode:
     if (!isLinearFilterCode) {
       return scratchF1;
     }
   }
   else {
-    if (minFilter == 0x2702) goto LAB_97bd42d8;
+    if (minFilter == 0x2702) goto loopCheckTextureState;
     if (0x2701 < minFilter) {
       isLinearFilterCode = minFilter == 0x2703;
-      goto LAB_97bd42d0;
+      goto loopCheckIsLinearFilterCode;
     }
   }
   if (*(short *)(textureState + 0x10) == -0x7ed3) {
@@ -616,13 +616,13 @@ LAB_97bd42d0:
       levelWidthF = *levelInfo;
       linearRecordIndex = level * 0x34 + 0x50;
       linearTexelData = textureObject[level * 0x34 + 0x70];
-      goto LAB_97bd43d4;
+      goto setCoordS;
     }
     levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
     linearTexelData = textureObject[level * 0x34 + 0x72];
   }
   linearRecordIndex = level * 0x34 + 100;
-LAB_97bd43d4:
+setCoordS:
   coordS = (float)((double)(coordS * levelWidthF) + DOUBLE_97c30a88);
   scaledT = DOUBLE_97c30a88 + 0.0;
   scaledR = DOUBLE_97c30a88 + 0.0;
@@ -732,7 +732,7 @@ double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *sampler,uint textur
   textureState = *textureObject;
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97bd4648:
+loopCheckTextureState:
     if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
       nearestWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
       nearestRecordIndex = level * 0x34 + 100;
@@ -754,18 +754,18 @@ LAB_97bd4648:
     return loadTexelResult;
   }
   if (minFilter < 0x2701) {
-    if (minFilter == 0x2600) goto LAB_97bd4648;
+    if (minFilter == 0x2600) goto loopCheckTextureState;
     isLinearFilterCode = minFilter == 0x2601;
-LAB_97bd4640:
+loopCheckIsLinearFilterCode:
     if (!isLinearFilterCode) {
       return scratchF1;
     }
   }
   else {
-    if (minFilter == 0x2702) goto LAB_97bd4648;
+    if (minFilter == 0x2702) goto loopCheckTextureState;
     if (0x2701 < minFilter) {
       isLinearFilterCode = minFilter == 0x2703;
-      goto LAB_97bd4640;
+      goto loopCheckIsLinearFilterCode;
     }
   }
   if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
@@ -778,14 +778,14 @@ LAB_97bd4640:
       linearRecordIndex = level * 0x34 + 0x50;
       linearTexelData = textureObject[level * 0x34 + 0x70];
       linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
-      goto LAB_97bd479c;
+      goto setTextureObject;
     }
     linearWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
     linearTexelData = textureObject[level * 0x34 + 0x72];
   }
   linearRecordIndex = level * 0x34 + 100;
   linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
-LAB_97bd479c:
+setTextureObject:
   textureObject = textureObject + linearRecordIndex;
   coordS = (float)((double)(coordS * linearWidthF) + DOUBLE_97c30a88);
   scaledR = DOUBLE_97c30a88 + 0.0;
@@ -942,7 +942,7 @@ double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textur
   textureState = *textureObject;
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97bd4b08:
+loopCheckTextureState:
     if (((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) ||
        (*(short *)(textureState + 0x14) == -0x7ed3)) {
       nearestWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
@@ -967,18 +967,18 @@ LAB_97bd4b08:
     return interpreterTextureSamplerLoadTexel3DResult;
   }
   if (minFilter < 0x2701) {
-    if (minFilter == 0x2600) goto LAB_97bd4b08;
+    if (minFilter == 0x2600) goto loopCheckTextureState;
     isLinearFilterCode = minFilter == 0x2601;
-LAB_97bd4b00:
+loopCheckIsLinearFilterCode:
     if (!isLinearFilterCode) {
       return scratchF1;
     }
   }
   else {
-    if (minFilter == 0x2702) goto LAB_97bd4b08;
+    if (minFilter == 0x2702) goto loopCheckTextureState;
     if (0x2701 < minFilter) {
       isLinearFilterCode = minFilter == 0x2703;
-      goto LAB_97bd4b00;
+      goto loopCheckIsLinearFilterCode;
     }
   }
   if (((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) ||
@@ -994,7 +994,7 @@ LAB_97bd4b00:
       linearTexelData = textureObject[level * 0x34 + 0x70];
       linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
-      goto LAB_97bd4cb4;
+      goto setTextureObject;
     }
     levelWidth = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
     linearTexelData = textureObject[level * 0x34 + 0x72];
@@ -1002,7 +1002,7 @@ LAB_97bd4b00:
   linearRecordIndex = level * 0x34 + 100;
   linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
   floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
-LAB_97bd4cb4:
+setTextureObject:
   textureObject = textureObject + linearRecordIndex;
   scaledS = (float)((double)(coordS * levelWidth) + DOUBLE_97c30a88);
   scaledT = (float)((double)(coordT * linearHeightF) + DOUBLE_97c30a88);
@@ -1165,7 +1165,7 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(sampler, textureUnit, lev
   textureState = *textureObject;
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97bd51b8:
+loopCheckTextureState:
     if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
       nearestRecordIndex = level * 0x34 + 100;
       nearestTexelData = textureObject[level * 0x34 + 0x71];
@@ -1183,18 +1183,18 @@ LAB_97bd51b8:
   }
   else {
     if (minFilter < 0x2701) {
-      if (minFilter == 0x2600) goto LAB_97bd51b8;
+      if (minFilter == 0x2600) goto loopCheckTextureState;
       isLinearFilterCode = minFilter == 0x2601;
-LAB_97bd51b0:
+loopCheckIsLinearFilterCode:
       if (!isLinearFilterCode) {
         return;
       }
     }
     else {
-      if (minFilter == 0x2702) goto LAB_97bd51b8;
+      if (minFilter == 0x2702) goto loopCheckTextureState;
       if (0x2701 < minFilter) {
         isLinearFilterCode = minFilter == 0x2703;
-        goto LAB_97bd51b0;
+        goto loopCheckIsLinearFilterCode;
       }
     }
     if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
@@ -2026,7 +2026,7 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(machine)
     break;
   case 3:
     depthOrEqualPassed = fragDepth <= *depthBufferPtr;
-    goto LAB_97bd67ac;
+    goto setTestPassed;
   case 4:
     testPassed = (uint)(*depthBufferPtr < fragDepth);
     break;
@@ -2035,7 +2035,7 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(machine)
     break;
   case 6:
     depthOrEqualPassed = *depthBufferPtr <= fragDepth;
-LAB_97bd67ac:
+setTestPassed:
     testPassed = (uint)depthOrEqualPassed;
     break;
   case 7:
@@ -2080,7 +2080,7 @@ int _InterpreterRasterOpMachine_AlphaTest(machine, fragment)
   if ((framebufferFormat & 0x1c000) == 0) {
     switch(alphaFunc & 7) {
     case 0:
-switchD_97bd6924_caseD_0:
+alphaFuncCase0:
       passed = false;
       break;
     case 1:
@@ -2102,7 +2102,7 @@ switchD_97bd6924_caseD_0:
       passed = alphaRef <= *(float *)(fragment + 0xc);
       break;
     case 7:
-switchD_97bd6924_caseD_7:
+alphaFuncCase7:
       passed = true;
     }
   }
@@ -2126,7 +2126,7 @@ switchD_97bd6924_caseD_7:
     }
     switch(alphaFunc & 7) {
     case 0:
-      goto switchD_97bd6924_caseD_0;
+      goto alphaFuncCase0;
     case 1:
       fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
       fixedScratch = (double)fragAlpha;
@@ -2242,7 +2242,7 @@ switchD_97bd6924_caseD_7:
       passed = alphaRefFixed <= fragAlphaFixed;
       break;
     case 7:
-      goto switchD_97bd6924_caseD_7;
+      goto alphaFuncCase7;
     }
   }
   return passed ^ 1;
@@ -2376,7 +2376,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     *result = *srcColor * srcFactorR + *dstColor * dstFactorR;
     result[1] = srcColor[1] * srcFactorG + dstColor[1] * dstFactorG;
     srcComponent = srcColor[2] * srcFactorB + dstColor[2] * dstFactorB;
-    goto LAB_97bd7230;
+    goto storeResult2;
   case 1:
     *result = *srcColor * srcFactorR - *dstColor * dstFactorR;
     result[1] = srcColor[1] * srcFactorG - dstColor[1] * dstFactorG;
@@ -2406,10 +2406,10 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcComponent2 = srcColor[2];
     clampLimit1 = dstColor[2];
     if (srcComponent2 < clampLimit1) {
-LAB_97bd72bc:
+loopSetClampLimit1:
       clampLimit1 = srcComponent2;
     }
-    goto LAB_97bd72c0;
+    goto storeResult;
   case 4:
     srcComponent = *dstColor;
     if (*dstColor < *srcColor) {
@@ -2423,20 +2423,20 @@ LAB_97bd72bc:
     result[1] = srcComponent;
     srcComponent2 = srcColor[2];
     clampLimit1 = dstColor[2];
-    if (dstColor[2] < srcComponent2) goto LAB_97bd72bc;
-LAB_97bd72c0:
+    if (dstColor[2] < srcComponent2) goto loopSetClampLimit1;
+storeResult:
     result[2] = clampLimit1;
   default:
-    goto switchD_97bd7128_default;
+    goto blendStateDefault;
   }
   srcComponent = srcComponent2 * dstFactorB - srcComponent * selectedFactorB;
-LAB_97bd7230:
+storeResult2:
   result[2] = srcComponent;
-switchD_97bd7128_default:
+blendStateDefault:
   switch(blendState >> 0x13 & 7) {
   case 0:
     clampLimit2 = srcColor[3] * srcFactorA + dstColor[3] * dstFactorA;
-    goto LAB_97bd734c;
+    goto storeResult4;
   case 1:
     srcComponent = srcColor[3];
     clampLimit2 = dstColor[3] * dstFactorA;
@@ -2450,23 +2450,23 @@ switchD_97bd7128_default:
     srcComponent2 = srcColor[3];
     clampLimit1 = dstColor[3];
     if (srcComponent2 < clampLimit1) {
-LAB_97bd7378:
+loopSetClampLimit12:
       clampLimit1 = srcComponent2;
     }
-    goto LAB_97bd737c;
+    goto storeResult3;
   case 4:
     srcComponent2 = srcColor[3];
     clampLimit1 = dstColor[3];
-    if (dstColor[3] < srcComponent2) goto LAB_97bd7378;
-LAB_97bd737c:
+    if (dstColor[3] < srcComponent2) goto loopSetClampLimit12;
+storeResult3:
     result[3] = clampLimit1;
   default:
-    goto switchD_97bd72e8_default;
+    goto blendStateDefault2;
   }
   clampLimit2 = srcComponent * dstFactorA - clampLimit2;
-LAB_97bd734c:
+storeResult4:
   result[3] = clampLimit2;
-switchD_97bd72e8_default:
+blendStateDefault2:
   return;
 }
 
@@ -2541,19 +2541,19 @@ int _InterpreterRasterOpMachine_LogicOp(machine, srcColor, dstColor, outColor)
     colorG = dstColor[1];
     colorB = dstColor[2];
     colorA = dstColor[3];
-LAB_97bd74b4:
+loopSetResultPacked:
     resultPacked = ~(int)((double)colorA * DOUBLE_97c30a98) & 0xffU |
             (~(int)((double)colorB * DOUBLE_97c30a98) & 0xffU) << 8 |
             (~(int)((double)colorG * DOUBLE_97c30a98) & 0xffU) << 0x10 |
             ~(int)((double)colorR * DOUBLE_97c30a98) << 0x18;
-    goto LAB_97bd77d8;
+    goto setUnpackedA;
   }
   if (logicOp == 3) {
     colorR = *srcColor;
     colorG = srcColor[1];
     colorB = srcColor[2];
     colorA = srcColor[3];
-    goto LAB_97bd74b4;
+    goto loopSetResultPacked;
   }
   srcRedByte = (uint)(int)((double)*srcColor * DOUBLE_97c30a98);
   dstRedByte = (uint)(int)((double)*dstColor * DOUBLE_97c30a98);
@@ -2569,45 +2569,45 @@ LAB_97bd74b4:
     resultAlphaLane = packedSrc & packedDst;
     resultPacked = resultWord >> 8;
     resultShiftedLane = resultWord >> 0x10;
-    goto LAB_97bd7670;
+    goto setResultPacked;
   case 7:
     resultPacked = packedDst & packedSrc;
     resultAlphaLane = ~(packedSrc & packedDst);
     resultWord = resultPacked ^ 0xff000000;
     resultShiftedLane = ~(resultPacked >> 0x10);
     resultPacked = ~(resultPacked >> 8);
-LAB_97bd7670:
+setResultPacked:
     resultPacked = (resultPacked & 0xff) << 8 | (resultShiftedLane & 0xff) << 0x10 | resultWord & 0xff000000;
-    goto LAB_97bd770c;
+    goto setResultPacked4;
   case 8:
     resultShiftedLane = packedDst | packedSrc;
     resultAlphaLane = packedSrc | packedDst;
     resultWord = packedDst | packedSrc;
-    goto LAB_97bd76cc;
+    goto setResultPacked2;
   case 9:
     resultAlphaLane = ~(packedSrc | packedDst);
     resultWord = (packedDst | packedSrc) ^ 0xff000000;
     resultPacked = ~((packedDst | packedSrc) >> 0x10);
     resultShiftedLane = ~((packedDst | packedSrc) >> 8);
-    goto LAB_97bd7700;
+    goto setResultPacked3;
   case 10:
     resultShiftedLane = packedDst ^ packedSrc;
     resultAlphaLane = packedSrc ^ packedDst;
     resultWord = packedDst ^ packedSrc;
-LAB_97bd76cc:
+setResultPacked2:
     resultPacked = resultShiftedLane >> 0x10;
     resultShiftedLane = resultShiftedLane >> 8;
-    goto LAB_97bd7700;
+    goto setResultPacked3;
   case 0xb:
     resultWord = packedDst ^ packedSrc ^ 0xff000000;
     resultPacked = ~((packedDst ^ packedSrc) >> 0x10);
     resultShiftedLane = ~((packedDst ^ packedSrc) >> 8);
     resultAlphaLane = ~(packedSrc ^ packedDst);
-LAB_97bd7700:
+setResultPacked3:
     resultPacked = (resultShiftedLane & 0xff) << 8 | (resultPacked & 0xff) << 0x10 | resultWord & 0xff000000;
-LAB_97bd770c:
+setResultPacked4:
     resultPacked = resultAlphaLane & 0xff | resultPacked;
-    goto LAB_97bd77d8;
+    goto setUnpackedA;
   case 0xc:
     packedSrcRG = packedSrcRG >> 0x10 & ~(packedDstRG >> 0x10);
     srcRedByte = srcRedByte & 0xff & ~(dstRedByte & 0xff);
@@ -2634,10 +2634,10 @@ LAB_97bd770c:
     break;
   default:
     resultPacked = 0;
-    goto LAB_97bd77d8;
+    goto setUnpackedA;
   }
   resultPacked = packedDst & 0xff | (resultPacked & 0xff) << 8 | (packedSrcRG & 0xff) << 0x10 | srcRedByte << 0x18;
-LAB_97bd77d8:
+setUnpackedA:
   unpackedA = (GH_U2F((unsigned int)((resultPacked & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
   unpackedG = (GH_U2F((unsigned int)((resultPacked >> 0x10 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
   unpackedB = (GH_U2F((unsigned int)((resultPacked >> 8 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
@@ -2706,10 +2706,10 @@ int _InterpreterRasterOpMachineCalculateBlendingFactors(factorMode, srcColor, ds
   switch(factorMode) {
   case 0:
     factorValue = 0.0;
-    goto LAB_97bd7970;
+    goto storeFactorOut;
   case 1:
     factorValue = 1.0;
-LAB_97bd7970:
+storeFactorOut:
     factorOut[3] = factorValue;
     *factorOut = factorValue;
     factorOut[1] = factorValue;
@@ -2724,7 +2724,7 @@ LAB_97bd7970:
     *factorOut = (float)(DOUBLE_97c30a60 - (double)*srcColor);
     factorOut[1] = (float)(oneConst - (double)srcColor[1]);
     factorValue = srcColor[2];
-    goto LAB_97bd7a1c;
+    goto storeFactorOut2;
   case 4:
     *factorOut = srcColor[3];
     factorOut[1] = srcColor[3];
@@ -2734,64 +2734,64 @@ LAB_97bd7970:
     *factorOut = (float)(DOUBLE_97c30a60 - (double)srcColor[3]);
     factorOut[1] = (float)(oneConst - (double)srcColor[3]);
     factorValue = srcColor[3];
-LAB_97bd7a1c:
+storeFactorOut2:
     factorOut[2] = (float)(oneConst - (double)factorValue);
     alphaForComplement = (double)srcColor[3];
-LAB_97bd7a2c:
+loopStoreFactorOut:
     factorOut[3] = (float)(oneConst - alphaForComplement);
     return;
   case 6:
     *factorOut = dstColor[3];
     factorOut[1] = dstColor[3];
     factorValue = dstColor[3];
-    goto LAB_97bd7b40;
+    goto storeFactorOut5;
   case 7:
     *factorOut = (float)(DOUBLE_97c30a60 - (double)dstColor[3]);
     factorOut[1] = (float)(oneConst - (double)dstColor[3]);
     factorValue = dstColor[3];
-    goto LAB_97bd7b78;
+    goto storeFactorOut6;
   case 8:
     *factorOut = *constantColor;
     factorOut[1] = constantColor[1];
     factorValue = constantColor[2];
-    goto LAB_97bd7ae0;
+    goto storeFactorOut3;
   case 9:
     *factorOut = (float)(DOUBLE_97c30a60 - (double)*constantColor);
     factorOut[1] = (float)(oneConst - (double)constantColor[1]);
     factorValue = constantColor[2];
-    goto LAB_97bd7b18;
+    goto storeFactorOut4;
   case 10:
     *factorOut = constantColor[3];
     factorOut[1] = constantColor[3];
     factorValue = constantColor[3];
-LAB_97bd7ae0:
+storeFactorOut3:
     factorOut[2] = factorValue;
     factorValue = constantColor[3];
-    goto LAB_97bd79e8;
+    goto storeFactorOut7;
   case 0xb:
     *factorOut = (float)(DOUBLE_97c30a60 - (double)constantColor[3]);
     factorOut[1] = (float)(oneConst - (double)constantColor[3]);
     factorValue = constantColor[3];
-LAB_97bd7b18:
+storeFactorOut4:
     factorOut[2] = (float)(oneConst - (double)factorValue);
     alphaForComplement = (double)constantColor[3];
-    goto LAB_97bd7a2c;
+    goto loopStoreFactorOut;
   case 0xc:
     *factorOut = *dstColor;
     factorOut[1] = dstColor[1];
     factorValue = dstColor[2];
-LAB_97bd7b40:
+storeFactorOut5:
     factorOut[2] = factorValue;
     factorValue = dstColor[3];
-    goto LAB_97bd79e8;
+    goto storeFactorOut7;
   case 0xd:
     *factorOut = (float)(DOUBLE_97c30a60 - (double)*dstColor);
     factorOut[1] = (float)(oneConst - (double)dstColor[1]);
     factorValue = dstColor[2];
-LAB_97bd7b78:
+storeFactorOut6:
     factorOut[2] = (float)(oneConst - (double)factorValue);
     alphaForComplement = (double)dstColor[3];
-    goto LAB_97bd7a2c;
+    goto loopStoreFactorOut;
   case 0xe:
     factorValue = (float)(DOUBLE_97c30a60 - (double)dstColor[3]);
     if (srcColor[3] < (float)(DOUBLE_97c30a60 - (double)dstColor[3])) {
@@ -2807,7 +2807,7 @@ LAB_97bd7b78:
   }
   factorOut[2] = factorValue;
   factorValue = srcColor[3];
-LAB_97bd79e8:
+storeFactorOut7:
   factorOut[3] = factorValue;
   return;
 }
@@ -2825,12 +2825,12 @@ int _InterpreterRasterOpMachineUpdateStencilBuffer(stencilOp, referenceValue, st
   switch(stencilOp) {
   case 0:
     newValue = *stencilPtr & ~(byte)writeMask;
-    goto LAB_97bd7c38;
+    goto storeStencilPtr2;
   case 1:
     return;
   case 2:
     newValue = *stencilPtr & ~(byte)writeMask;
-    goto LAB_97bd7c34;
+    goto setNewValue;
   case 3:
     newValue = *stencilPtr;
     (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = 0xff;
@@ -2851,20 +2851,20 @@ int _InterpreterRasterOpMachineUpdateStencilBuffer(stencilOp, referenceValue, st
   case 6:
     newValue = *stencilPtr;
     wrappedValue = newValue + 1;
-    goto LAB_97bd7c90;
+    goto storeStencilPtr;
   case 7:
     newValue = *stencilPtr;
     wrappedValue = newValue - 1;
-LAB_97bd7c90:
+storeStencilPtr:
     *stencilPtr = newValue & ~(byte)writeMask | wrappedValue & (byte)writeMask;
     return;
   default:
     return;
   }
   newValue = newValue & ~(byte)writeMask;
-LAB_97bd7c34:
+setNewValue:
   newValue = newValue | (byte)referenceValue & (byte)writeMask;
-LAB_97bd7c38:
+storeStencilPtr2:
   *stencilPtr = newValue;
   return;
 }
@@ -3174,7 +3174,7 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
             ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                        (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
             regRecord[0xc] = compiler[0x391];
-            goto LAB_97bd8938;
+            goto storeCompiler;
           }
           if (*(char *)((int)regRecord + 0x1a) == (*(char *)((unsigned char *)ghidra_home + 26))) {
             return;
@@ -3251,7 +3251,7 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
       ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,vectorRegIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                  (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
       compiler[matchRegister * 0xe + 0x1cc] = compiler[0x391];
-LAB_97bd8938:
+storeCompiler:
       compiler[0x391] = compiler[0x391] + 1;
       return;
     }
@@ -3275,7 +3275,7 @@ LAB_97bd8938:
         codeCursor[5] = rtField | 0x100419ae;
         codeCursor[6] = rtField | (regIndex - 0x20) * 0x10000 | 0x1000396e;
         compiler[0x38c] = (int)(codeCursor + 7);
-        goto LAB_97bd87b4;
+        goto callPPCRuntimeCompilerSwizzleRegisterAV;
       }
     }
     codeCursor = (uint *)compiler[0x38c];
@@ -3285,7 +3285,7 @@ LAB_97bd8938:
     codeCursor[3] = 0x10c0728c;
     codeCursor[4] = (regIndex - 0x20) * 0x200000 | 0x100419ae;
     compiler[0x38c] = (int)(codeCursor + 5);
-    goto LAB_97bd87b4;
+    goto callPPCRuntimeCompilerSwizzleRegisterAV;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 27)) == '\0') {
     firstOffset = *(*(uint * *)((unsigned char *)ghidra_home + 8));
@@ -3309,13 +3309,13 @@ LAB_97bd8938:
       codeCursor[8] = 0x39e00200;
       codeCursor[9] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
       compiler[0x38c] = (int)(codeCursor + 10);
-      goto LAB_97bd877c;
+      goto setZero;
     }
     if (firstOffset != 0) {
       codeCursor = (uint *)compiler[0x38c];
       *codeCursor = firstOffset & 0xffff | 0x39e00000;
       loadWordTemplate = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c0078ce;
-      goto LAB_97bd8640;
+      goto storeCodeCursor;
     }
     codeCursor = (uint *)compiler[0x38c];
     *codeCursor = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x800 | 0x7c0000ce;
@@ -3333,7 +3333,7 @@ LAB_97bd8938:
       codeCursor = (uint *)compiler[0x38c];
       *codeCursor = 0x82ef0000;
       loadWordTemplate = (regIndex - 0x20) * 0x200000 | ((*(ushort *)((unsigned char *)ghidra_home + 24)) + 5) * 0x10000 | 0x7c00b8ce;
-LAB_97bd8640:
+storeCodeCursor:
       codeCursor[1] = loadWordTemplate;
       compiler[0x38c] = (int)(codeCursor + 2);
     }
@@ -3354,7 +3354,7 @@ LAB_97bd8640:
       emitCursorB[0xc] = 0x39e00200;
       emitCursorB[0xd] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
       compiler[0x38c] = (int)(emitCursorB + 0xe);
-LAB_97bd877c:
+setZero:
       zero = 1;
     }
   }
@@ -3363,7 +3363,7 @@ LAB_97bd877c:
     *codeCursor = (regIndex - 0x20) * 0x200000 | (regIndex - 0x20) * 0x800 | 0x1000034a;
     compiler[0x38c] = (int)(codeCursor + 1);
   }
-LAB_97bd87b4:
+callPPCRuntimeCompilerSwizzleRegisterAV:
   _PPCRuntimeCompilerSwizzleRegisterAV(compiler,regIndex - 0x20,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex - 0x20,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
              (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,zero,elementCopy);
@@ -3446,7 +3446,7 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
           if (containsResult == 1) {
             return;
           }
-          goto LAB_97bd8c50;
+          goto setVectorMode;
         }
       }
       else if (((loopIndex != regIndex - 0x20) && (regRecord[0x1c0] == 0)) && (regRecord[0x1cb] != 0)) {
@@ -3458,7 +3458,7 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
         if (containsResult - 1U < 2) {
           return;
         }
-LAB_97bd8c50:
+setVectorMode:
         vectorMode = compiler[0x393];
       }
       loopIndex = loopIndex + 1;
@@ -3533,7 +3533,7 @@ LAB_97bd8c50:
             if (componentUsedFlags[0] == 0) {
               if (componentUsedFlags[1] == 0) {
                 if (componentUsedFlags[2] == 0) {
-                  if (componentUsedFlags[3] == 0) goto LAB_97bd9024;
+                  if (componentUsedFlags[3] == 0) goto setCodeCursor2;
                   codeCursor3 = (undefined4 *)compiler[0x38c];
                   instWord = 0x106d6c84;
                 }
@@ -3588,7 +3588,7 @@ LAB_97bd8c50:
               loopIndex3 = nextComponent;
             } while (nextComponent < 4);
           }
-LAB_97bd9024:
+setCodeCursor2:
           codeCursor2 = (uint *)compiler[0x38c];
           regRecord = regRecord + 0x1c4;
           *codeCursor2 = loopIndex2 << 0x15 | loopIndex2 << 0x10 | vectorRegIndex * 0x800 | 0x100000ea;
@@ -3760,7 +3760,7 @@ int _PPCRuntimeCompilerSaveRegisterToMemory(compiler, regIndex)
     vectorInstWord = regIndex << 0x15 | (*(ushort *)(scalarRecord + 0x18) + 5) * 0x10000 |
             *(uint *)((uint)*(byte *)(scalarRecord + *(int *)(scalarRecord + 4) + 0x10) * 4 + *(int *)(scalarRecord + 8))
             & 0xffff | 0xd0000000;
-LAB_97bd9944:
+loopStoreCodeWritePtr:
     *codeWritePtr = vectorInstWord;
   }
   else {
@@ -3784,7 +3784,7 @@ LAB_97bd9944:
         if (*offsetTable == 0) {
           codeWritePtr = *(uint **)(compiler + 0xe30);
           vectorInstWord = regIndex << 0x15 | fieldInstWord * 0x800 | 0x7c0001ce;
-          goto LAB_97bd9944;
+          goto loopStoreCodeWritePtr;
         }
         codeCursor2 = *(uint **)(compiler + 0xe30);
         ppcInstWord = *offsetTable & 0xffff | 0x39e00000;
@@ -3832,7 +3832,7 @@ LAB_97bd9944:
         *codeCursor = vectorInstWord2;
         codeWritePtr = *(uint **)(compiler + 0xe30);
         vectorInstWord = regIndex << 0xb | 0x127300ea;
-        goto LAB_97bd9944;
+        goto loopStoreCodeWritePtr;
       }
       programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
       if (((programTarget == 0x8804) || (programTarget == 0x8b30)) && ((*(unsigned short *)((unsigned char *)&(descStorage) + 0)) == 9)) {
@@ -3841,7 +3841,7 @@ LAB_97bd9944:
         codeCursor[1] = regIndex << 0x15 | 0x7c0379ce;
         codeWritePtr = codeCursor + 3;
         codeCursor[2] = 0xc1a30218;
-        goto LAB_97bd994c;
+        goto storeCompiler;
       }
       if ((char)descStorage == '\0') {
         if ((descWriteMask & 0x1000000) != 0) {
@@ -3902,7 +3902,7 @@ LAB_97bd9944:
     *codeWritePtr = fieldInstWord2;
   }
   codeWritePtr = codeWritePtr + 1;
-LAB_97bd994c:
+storeCompiler:
   *(uint **)(compiler + 0xe30) = codeWritePtr;
   return;
 }
@@ -4228,12 +4228,12 @@ int _PPCRuntimeCompilerRegisterContainsData(compiler, regIndex, opOffsets, opBan
             do {
               recordSwizzleByte = *recordSwizzlePtr;
               recordSwizzlePtr = recordSwizzlePtr + 1;
-              if (recordSwizzleByte == *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + componentIndex)) goto LAB_97bd9f54;
+              if (recordSwizzleByte == *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + componentIndex)) goto storeComponentPresentPtr;
               recordComponentIndex = recordComponentIndex + 1;
             } while (recordComponentIndex < 4);
           }
           else {
-LAB_97bd9f54:
+storeComponentPresentPtr:
             *componentPresentPtr = 1;
           }
           componentIndex = componentIndex + 1;

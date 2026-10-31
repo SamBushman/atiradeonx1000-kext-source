@@ -105,7 +105,7 @@ int __ZNKSs12find_last_ofEPKcmm(this, str, pos, n)
   
   data = *(int *)this;
   if ((*(int *)(data + -0xc) == 0) || (n == 0)) {
-LAB_97c15cf8:
+loopSetI:
     i = 0xffffffff;
   }
   else {
@@ -116,7 +116,7 @@ LAB_97c15cf8:
     while (found = _memchr(str,(int)*(char *)(data + i),n), found == (void *)0x0) {
       wasZero = i == 0;
       i = i - 1;
-      if (wasZero) goto LAB_97c15cf8;
+      if (wasZero) goto loopSetI;
       data = *(int *)this;
     }
   }
@@ -228,7 +228,7 @@ int __ZNKSs16find_last_not_ofEPKcmm(this, str, pos, n)
   
   data = *(int *)this;
   if (*(int *)(data + -0xc) == 0) {
-LAB_97c15eec:
+loopSetI:
     i = 0xffffffff;
   }
   else {
@@ -239,7 +239,7 @@ LAB_97c15eec:
     while (found = _memchr(str,(int)*(char *)(data + i),n), found != (void *)0x0) {
       wasZero = i == 0;
       i = i - 1;
-      if (wasZero) goto LAB_97c15eec;
+      if (wasZero) goto loopSetI;
       data = *(int *)this;
     }
   }
@@ -592,7 +592,7 @@ int __ZNSs4_Rep9_S_createEmRKSaIcE(capacity, alloc)
   adjSize = capacity + 0x1d;
   allocSize = capacity + 0xd;
   if (adjSize < 0x1001) {
-    if (allocSize < 0x81) goto LAB_97c164a4;
+    if (allocSize < 0x81) goto setRep;
     extraBytes = 0x80 - (adjSize & 0x7f) & 0x7f;
   }
   else {
@@ -600,7 +600,7 @@ int __ZNSs4_Rep9_S_createEmRKSaIcE(capacity, alloc)
   }
   capacity = capacity + extraBytes;
   allocSize = capacity + 0xd;
-LAB_97c164a4:
+setRep:
   rep = (undefined4 *)0x0;
   if (allocSize != 0) {
     if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {

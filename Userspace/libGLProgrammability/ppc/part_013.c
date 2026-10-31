@@ -232,15 +232,15 @@ int TPPStreamCompiler__getSymbolTableString(this, style)
   if (style != 1) {
     if (style < 2) {
       headerFormat = DAT_a7b7bd60;
-      if (style != 0) goto LAB_97bc9d00;
+      if (style != 0) goto callFree;
     }
     else {
       headerFormat = DAT_a7b7bd68;
-      if (style != 2) goto LAB_97bc9d00;
+      if (style != 2) goto callFree;
     }
   }
   _sprintf(allocation,headerFormat,string);
-LAB_97bc9d00:
+callFree:
   _free(string);
   return allocation;
 }
@@ -257,15 +257,15 @@ int TPPStreamCompiler__dumpSymbolTableInfo(this, style)
   if (style != 1) {
     if (style < 2) {
       headerFormat = DAT_a7b7bd6c;
-      if (style != 0) goto LAB_97bc9d98;
+      if (style != 0) goto setString;
     }
     else {
       headerFormat = DAT_a7b7bd74;
-      if (style != 2) goto LAB_97bc9d98;
+      if (style != 2) goto setString;
     }
   }
   __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,headerFormat);
-LAB_97bc9d98:
+setString:
   string = (char *)ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),style);
   if (string == (char *)0x0) {
     return;
@@ -587,7 +587,7 @@ int GetBuiltInInitialSwizzle(parseSymbol)
           fieldValue = 0x18ea6;
         }
       }
-LAB_97bca478:
+loopCheckNameHash:
       if (nameHash == fieldValue) {
         return 3;
       }
@@ -605,10 +605,10 @@ LAB_97bca478:
           return 1;
         }
         hashMatches = nameHash == 0x7171;
-        goto LAB_97bca520;
+        goto checkHashMatches;
       }
       hashMatches = nameHash == 0x2c25;
-      goto LAB_97bca590;
+      goto checkHashMatches2;
     }
     if (nameHash == 0x8837) {
       return 2;
@@ -618,10 +618,10 @@ LAB_97bca478:
         return 3;
       }
       fieldValue = 0x17e06;
-      goto LAB_97bca478;
+      goto loopCheckNameHash;
     }
     hashMatches = nameHash == 0x7a53;
-    goto LAB_97bca520;
+    goto checkHashMatches;
   }
   if (nameHash == 0x2043a) {
     return 1;
@@ -636,7 +636,7 @@ LAB_97bca478:
       }
       if (nameHash < 0x18f0a) {
         fieldValue = 0x18ee8;
-        goto LAB_97bca478;
+        goto loopCheckNameHash;
       }
       if (nameHash == 0x18f2a) {
         return 3;
@@ -660,9 +660,9 @@ LAB_97bca478:
         fieldValue = 0x20419;
       }
     }
-LAB_97bca51c:
+loopSetHashMatches:
     hashMatches = nameHash == fieldValue;
-LAB_97bca520:
+checkHashMatches:
     if (hashMatches) {
       return 1;
     }
@@ -677,7 +677,7 @@ LAB_97bca520:
     }
     if (nameHash < 0x24cba) {
       fieldValue = 0x2045b;
-      goto LAB_97bca51c;
+      goto loopSetHashMatches;
     }
     if (nameHash == 0x2610b) {
       return 2;
@@ -702,7 +702,7 @@ LAB_97bca520:
     }
   }
   hashMatches = nameHash == fieldValue;
-LAB_97bca590:
+checkHashMatches2:
   if (hashMatches) {
     return 2;
   }
@@ -747,19 +747,19 @@ int GetBuiltInChunkForSymbol(parseSymbol, shaderStage)
   if (nameHash == 0x10f9c) {
     chunk = _PPStreamChunkCreateWithType(3,0);
     chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff9 | 0x50009;
-    goto LAB_97bcc694;
+    goto loopStoreChunk2;
   }
   if (nameHash < 0x10f9d) {
-    if (nameHash == 0x81d5) goto LAB_97bcc54c;
+    if (nameHash == 0x81d5) goto setChunk3;
     if (nameHash < 0x81d6) {
       if (nameHash == 0x5a70) {
-LAB_97bcc4ac:
+loopSetChunk:
         chunk = _PPStreamChunkCreateWithType(3,0);
         fieldValue = 7;
         chunkWord = *(uint *)(chunk + 0xc);
-LAB_97bcc53c:
+loopSetChunkWord:
         chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff3f | 0x20;
-LAB_97bcbb78:
+loopStoreChunk:
         *(uint *)(chunk + 0xc) = chunkWord;
         directIndex = ParseSymbol__GetDirectIndex(parseSymbol,0);
         chunkWord = directIndex & 0x1f | *(uint *)(chunk + 0xc) & 0xffffffe0;
@@ -773,9 +773,9 @@ LAB_97bcbb78:
         else {
           if (nameHash < 0x504f) {
             if (nameHash == 0x4209) {
-LAB_97bcc5e0:
+loopSetChunkType:
               chunkType = 2;
-LAB_97bcc64c:
+loopSetChunk2:
               chunk = _PPStreamChunkCreateWithType(chunkType,0);
               fieldValue = 1;
             }
@@ -784,82 +784,82 @@ LAB_97bcc64c:
                 if (nameHash < 0x3840) {
                   if (nameHash == 0x280f) {
                     chunkType = 2;
-LAB_97bcc5ec:
+loopSetChunk3:
                     chunk = _PPStreamChunkCreateWithType(chunkType,0);
                     fieldValue = 4;
-                    goto LAB_97bcc658;
+                    goto loopSetChunkWord3;
                   }
                   if (nameHash < 0x2810) {
-                    if (nameHash != 0x2099) goto LAB_97bcc698;
+                    if (nameHash != 0x2099) goto storeParseSymbol;
                     chunkType = 2;
-                    goto LAB_97bcbba8;
+                    goto setChunk2;
                   }
-                  if (nameHash == 0x297a) goto LAB_97bcc5e0;
-                  if (nameHash != 0x2c25) goto LAB_97bcc698;
+                  if (nameHash == 0x297a) goto loopSetChunkType;
+                  if (nameHash != 0x2c25) goto storeParseSymbol;
                 }
                 else if (nameHash != 0x3f94) {
                   if (nameHash < 0x3f95) {
-                    if (nameHash != 0x3bf9) goto LAB_97bcc698;
+                    if (nameHash != 0x3bf9) goto storeParseSymbol;
                     chunkType = 4;
-                    goto LAB_97bcc64c;
+                    goto loopSetChunk2;
                   }
                   if (nameHash == 0x41d9) {
                     chunk = _PPStreamChunkCreateWithType(3,0);
                     fieldValue = 0xb;
-                    goto LAB_97bcc5c0;
+                    goto loopSetChunkWord5;
                   }
-                  if (nameHash != 0x4203) goto LAB_97bcc698;
+                  if (nameHash != 0x4203) goto storeParseSymbol;
                   chunk = _PPStreamChunkCreateWithType(4,0);
                   fieldValue = 7;
-                  goto LAB_97bcc658;
+                  goto loopSetChunkWord3;
                 }
-LAB_97bcc5b0:
+loopSetChunk4:
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 fieldValue = 0xc;
-                goto LAB_97bcc5c0;
+                goto loopSetChunkWord5;
               }
-LAB_97bcbce8:
+loopSetChunk5:
               chunk = _PPStreamChunkCreateWithType(2,0);
               fieldValue = 5;
             }
             else {
-              if (nameHash == 0x4dd3) goto LAB_97bcc034;
+              if (nameHash == 0x4dd3) goto loopSetChunk9;
               if (0x4dd3 < nameHash) {
                 if (nameHash != 0x4ee0) {
                   if (nameHash < 0x4ee1) {
-                    if ((nameHash != 0x4eaa) && (nameHash != 0x4ec5)) goto LAB_97bcc698;
+                    if ((nameHash != 0x4eaa) && (nameHash != 0x4ec5)) goto storeParseSymbol;
                   }
                   else if (nameHash != 0x4efb) {
-                    if (nameHash != 0x4fb4) goto LAB_97bcc698;
+                    if (nameHash != 0x4fb4) goto storeParseSymbol;
                     chunk = _PPStreamChunkCreateWithType(4,0);
                     fieldValue = 4;
                     chunkWord = *(uint *)(chunk + 0xc);
-LAB_97bcbb08:
+loopSetChunkWord2:
                     chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0fffe;
-                    goto LAB_97bcc694;
+                    goto loopStoreChunk2;
                   }
                 }
                 chunk = _PPStreamChunkCreateWithType(4,0);
                 *(uint *)(chunk + 0xc) = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x40000;
                 directIndex = ParseSymbol__GetDirectIndex(parseSymbol,0);
                 chunkWord = (directIndex & 7) << 1 | *(uint *)(chunk + 0xc) & 0xfffffff1;
-                goto LAB_97bcc694;
+                goto loopStoreChunk2;
               }
-              if (nameHash == 0x42d8) goto LAB_97bcc5b0;
+              if (nameHash == 0x42d8) goto loopSetChunk4;
               if (nameHash < 0x42d9) {
-                if (nameHash != 0x425a) goto LAB_97bcc698;
+                if (nameHash != 0x425a) goto storeParseSymbol;
                 chunk = _PPStreamChunkCreateWithType(4,0);
                 fieldValue = 4;
                 chunkWord = *(uint *)(chunk + 0xc);
-                goto LAB_97bcbb2c;
+                goto setChunkWord3;
               }
               if (nameHash == 0x42e3) {
                 chunkType = 4;
-                goto LAB_97bcc5ec;
+                goto loopSetChunk3;
               }
-              if (nameHash != 0x4493) goto LAB_97bcc698;
+              if (nameHash != 0x4493) goto storeParseSymbol;
               chunkType = 4;
-LAB_97bcc668:
+loopSetChunk6:
               chunk = _PPStreamChunkCreateWithType(chunkType,0);
               fieldValue = 3;
             }
@@ -872,32 +872,32 @@ LAB_97bcc668:
                     if (nameHash != 0x5a21) {
                       if (nameHash < 0x5a22) {
                         hashMatches = nameHash == 0x5a08;
-LAB_97bca874:
-                        if (!hashMatches) goto LAB_97bcc698;
+loopCheckHashMatches:
+                        if (!hashMatches) goto storeParseSymbol;
                       }
                       else if (nameHash != 0x5a25) {
                         hashMatches = nameHash == 0x5a3a;
-                        goto LAB_97bca888;
+                        goto loopCheckHashMatches3;
                       }
-                      goto LAB_97bcc4e4;
+                      goto loopSetChunk8;
                     }
                   }
                   else {
-                    if (nameHash == 0x5a57) goto LAB_97bcc490;
+                    if (nameHash == 0x5a57) goto loopSetChunk7;
                     if (nameHash < 0x5a58) {
                       if (nameHash != 0x5a42) {
                         hashMatches = nameHash == 0x5a53;
-                        goto LAB_97bca8e4;
+                        goto loopCheckHashMatches4;
                       }
-                      goto LAB_97bcc4e4;
+                      goto loopSetChunk8;
                     }
                     if (nameHash != 0x5a5b) {
                       hashMatches = nameHash == 0x5a5f;
-                      goto LAB_97bca874;
+                      goto loopCheckHashMatches;
                     }
                   }
                 }
-                goto LAB_97bcc4c8;
+                goto setChunk;
               }
               if (nameHash != 0x5214) {
                 if (nameHash < 0x5215) {
@@ -906,27 +906,27 @@ LAB_97bca874:
                       hashMatches = nameHash == 0x51a8;
                     }
                     else {
-                      if (nameHash == 0x51de) goto LAB_97bcbb38;
+                      if (nameHash == 0x51de) goto checkShaderStage;
                       hashMatches = nameHash == 0x51f9;
                     }
-LAB_97bca770:
-                    if (!hashMatches) goto LAB_97bcc698;
+loopCheckHashMatches2:
+                    if (!hashMatches) goto storeParseSymbol;
                   }
                 }
                 else if (nameHash != 0x524a) {
                   if (nameHash < 0x524b) {
                     hashMatches = nameHash == 0x522f;
-                    goto LAB_97bca770;
+                    goto loopCheckHashMatches2;
                   }
                   if (nameHash != 0x5265) {
-                    if (nameHash != 0x5811) goto LAB_97bcc698;
+                    if (nameHash != 0x5811) goto storeParseSymbol;
                     chunk = _PPStreamChunkCreateWithType(3,0);
                     fieldValue = 0x12;
-                    goto LAB_97bcc5c0;
+                    goto loopSetChunkWord5;
                   }
                 }
               }
-LAB_97bcbb38:
+checkShaderStage:
               if (shaderStage == 0) {
                 chunk = _PPStreamChunkCreateWithType(4,0);
                 fieldValue = 6;
@@ -938,115 +938,115 @@ LAB_97bcbb38:
                 chunkWord = *(uint *)(chunk + 0xc);
               }
               chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0ffff;
-              goto LAB_97bcbb78;
+              goto loopStoreChunk;
             }
             chunk = _PPStreamChunkCreateWithType(2,0);
             fieldValue = 0xb;
           }
-LAB_97bcc658:
+loopSetChunkWord3:
           chunkWord = *(uint *)(chunk + 0xc);
         }
         chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0ffff;
       }
       else {
-        if (nameHash == 0x5b05) goto LAB_97bcc490;
+        if (nameHash == 0x5b05) goto loopSetChunk7;
         if (nameHash < 0x5b06) {
           if (nameHash != 0x5ab2) {
             if (nameHash < 0x5ab3) {
               if (nameHash == 0x5a91) {
-LAB_97bcc490:
+loopSetChunk7:
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 fieldValue = 7;
                 chunkWord = *(uint *)(chunk + 0xc);
-LAB_97bcc518:
+loopSetChunkWord4:
                 chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff1f;
-                goto LAB_97bcbb78;
+                goto loopStoreChunk;
               }
               if (nameHash < 0x5a92) {
                 if (nameHash != 0x5a78) {
                   if (0x5a78 < nameHash) {
                     if (nameHash != 0x5a7c) {
                       hashMatches = nameHash == 0x5a8d;
-                      goto LAB_97bca8e4;
+                      goto loopCheckHashMatches4;
                     }
-                    goto LAB_97bcc4e4;
+                    goto loopSetChunk8;
                   }
                   hashMatches = nameHash == 0x5a74;
-LAB_97bca888:
-                  if (!hashMatches) goto LAB_97bcc698;
-                  goto LAB_97bcc490;
+loopCheckHashMatches3:
+                  if (!hashMatches) goto storeParseSymbol;
+                  goto loopSetChunk7;
                 }
               }
               else {
                 if (nameHash == 0x5a99) {
-LAB_97bcc4e4:
+loopSetChunk8:
                   chunk = _PPStreamChunkCreateWithType(3,0);
                   fieldValue = 7;
                   chunkWord = *(uint *)(chunk + 0xc);
-                  goto LAB_97bcc58c;
+                  goto setChunkWord;
                 }
                 if (0x5a99 < nameHash) {
-                  if (nameHash == 0x5aaa) goto LAB_97bcc4ac;
+                  if (nameHash == 0x5aaa) goto loopSetChunk;
                   hashMatches = nameHash == 0x5aae;
-                  goto LAB_97bca888;
+                  goto loopCheckHashMatches3;
                 }
-                if (nameHash != 0x5a95) goto LAB_97bcc698;
+                if (nameHash != 0x5a95) goto storeParseSymbol;
               }
             }
             else if (nameHash != 0x5acf) {
               if (nameHash < 0x5ad0) {
-                if (nameHash == 0x5ac2) goto LAB_97bcc5b0;
+                if (nameHash == 0x5ac2) goto loopSetChunk4;
                 if (nameHash < 0x5ac3) {
                   hashMatches = nameHash == 0x5ab6;
-                  goto LAB_97bca874;
+                  goto loopCheckHashMatches;
                 }
-                if (nameHash == 0x5ac7) goto LAB_97bcc4ac;
+                if (nameHash == 0x5ac7) goto loopSetChunk;
                 hashMatches = nameHash == 0x5acb;
-                goto LAB_97bca888;
+                goto loopCheckHashMatches3;
               }
               if (nameHash != 0x5ae8) {
                 if (nameHash < 0x5ae9) {
-                  if (nameHash == 0x5ad3) goto LAB_97bcc4e4;
+                  if (nameHash == 0x5ad3) goto loopSetChunk8;
                   hashMatches = nameHash == 0x5ae4;
                 }
                 else {
-                  if (nameHash == 0x5aec) goto LAB_97bcc4c8;
+                  if (nameHash == 0x5aec) goto setChunk;
                   hashMatches = nameHash == 0x5b01;
                 }
-LAB_97bca8e4:
-                if (!hashMatches) goto LAB_97bcc698;
-                goto LAB_97bcc4ac;
+loopCheckHashMatches4:
+                if (!hashMatches) goto storeParseSymbol;
+                goto loopSetChunk;
               }
-              goto LAB_97bcc490;
+              goto loopSetChunk7;
             }
           }
-LAB_97bcc4c8:
+setChunk:
           chunk = _PPStreamChunkCreateWithType(3,0);
           fieldValue = 7;
           chunkWord = *(uint *)(chunk + 0xc);
-          goto LAB_97bcc564;
+          goto setChunkWord2;
         }
         if (nameHash != 0x71c3) {
           if (0x71c3 < nameHash) {
             if (nameHash == 0x7ab2) {
               chunk = _PPStreamChunkCreateWithType(2,0);
               chunkWord = *(uint *)(chunk + 0xc) & 0xfff0ffe3 | 0x70000;
-              goto LAB_97bcc190;
+              goto setChunkWord5;
             }
             if (nameHash < 0x7ab3) {
-              if (nameHash == 0x7a53) goto LAB_97bcbff4;
+              if (nameHash == 0x7a53) goto loopSetChunk12;
               if (nameHash < 0x7a54) {
-                if (nameHash != 0x7a49) goto LAB_97bcc698;
+                if (nameHash != 0x7a49) goto storeParseSymbol;
                 chunk = _PPStreamChunkCreateWithType(2,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xfff0ffe0 | 0x70000;
-                goto LAB_97bcc694;
+                goto loopStoreChunk2;
               }
               if (nameHash == 0x7a6c) {
                 chunk = _PPStreamChunkCreateWithType(2,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xfff0ffe1 | 0x70000;
-                goto LAB_97bcbb30;
+                goto setChunkWord4;
               }
-              if (nameHash != 0x7a8f) goto LAB_97bcc698;
+              if (nameHash != 0x7a8f) goto storeParseSymbol;
               chunk = _PPStreamChunkCreateWithType(2,0);
               chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
               chunkWord = 2;
@@ -1063,7 +1063,7 @@ LAB_97bcc4c8:
                 chunkWord = 4;
               }
               else {
-                if (nameHash != 0x7af8) goto LAB_97bcc698;
+                if (nameHash != 0x7af8) goto storeParseSymbol;
                 chunk = _PPStreamChunkCreateWithType(2,0);
                 chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
                 chunkWord = 5;
@@ -1072,64 +1072,64 @@ LAB_97bcc4c8:
             else {
               if (nameHash != 0x7b3e) {
                 fieldValue = 0x81b6;
-                goto LAB_97bcab00;
+                goto checkNameHash;
               }
               chunk = _PPStreamChunkCreateWithType(2,0);
               chunkWord = 7;
               chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
             }
             chunkWord = chunkWord | chunkWordTexcoord & 0xffffffe0;
-            goto LAB_97bcc694;
+            goto loopStoreChunk2;
           }
           if (nameHash != 0x5c79) {
             if (nameHash < 0x5c7a) {
               if (nameHash != 0x5c22) {
                 if (nameHash < 0x5c23) {
                   hashMatches = nameHash == 0x5b1e;
-                  goto LAB_97bca8e4;
+                  goto loopCheckHashMatches4;
                 }
                 if (nameHash != 0x5c3f) {
                   hashMatches = nameHash == 0x5c5c;
-LAB_97bca914:
-                  if (!hashMatches) goto LAB_97bcc698;
+loopCheckHashMatches5:
+                  if (!hashMatches) goto storeParseSymbol;
                 }
               }
             }
             else {
               if (nameHash == 0x6349) {
                 chunkType = 4;
-                if (shaderStage != 0) goto LAB_97bcbce8;
-LAB_97bcbba8:
+                if (shaderStage != 0) goto loopSetChunk5;
+setChunk2:
                 chunk = _PPStreamChunkCreateWithType(chunkType,0);
                 fieldValue = 2;
-                goto LAB_97bcc658;
+                goto loopSetChunkWord3;
               }
               if (0x6349 < nameHash) {
                 if (nameHash != 0x68de) {
                   hashMatches = nameHash == 0x7171;
-                  goto LAB_97bcb178;
+                  goto checkHashMatches;
                 }
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
                 fieldValue = 3;
-                goto LAB_97bcbe2c;
+                goto setChunkWord6;
               }
               if (nameHash != 0x5c96) {
                 hashMatches = nameHash == 0x5cb3;
-                goto LAB_97bca914;
+                goto loopCheckHashMatches5;
               }
             }
           }
           chunk = _PPStreamChunkCreateWithType(3,0);
           chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0xa0000;
-          goto LAB_97bcc458;
+          goto storeChunk2;
         }
-LAB_97bcc034:
+loopSetChunk9:
         chunk = _PPStreamChunkCreateWithType(3,0);
         fieldValue = 0xd;
-LAB_97bcc5c0:
+loopSetChunkWord5:
         chunkWord = *(uint *)(chunk + 0xc);
-LAB_97bcc00c:
+loopSetChunkWord6:
         chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ffff;
       }
     }
@@ -1140,11 +1140,11 @@ LAB_97bcc00c:
     else {
       if (nameHash < 0xa563) {
         if (nameHash == 0x829f) {
-LAB_97bcc524:
+loopSetChunk10:
           chunk = _PPStreamChunkCreateWithType(3,0);
           fieldValue = 8;
           chunkWord = *(uint *)(chunk + 0xc);
-          goto LAB_97bcc53c;
+          goto loopSetChunkWord;
         }
         if (nameHash < 0x82a0) {
           if (nameHash != 0x823a) {
@@ -1155,75 +1155,75 @@ LAB_97bcc524:
                     if (0x8242 < nameHash) {
                       if (nameHash != 0x8259) {
                         fieldValue = 0x825d;
-                        goto LAB_97bcab50;
+                        goto loopCheckNameHash;
                       }
-                      goto LAB_97bcc524;
+                      goto loopSetChunk10;
                     }
-                    if (nameHash != 0x823e) goto LAB_97bcc698;
-                    goto LAB_97bcc54c;
+                    if (nameHash != 0x823e) goto storeParseSymbol;
+                    goto setChunk3;
                   }
                 }
                 else {
-                  if (nameHash == 0x8280) goto LAB_97bcc500;
+                  if (nameHash == 0x8280) goto loopSetChunk13;
                   if (0x8280 < nameHash) {
                     if (nameHash != 0x8284) {
                       fieldValue = 0x8288;
-                      goto LAB_97bcab00;
+                      goto checkNameHash;
                     }
-                    goto LAB_97bcc54c;
+                    goto setChunk3;
                   }
                   if (nameHash != 0x8265) {
                     fieldValue = 0x827c;
-                    goto LAB_97bcaba4;
+                    goto loopCheckNameHash3;
                   }
                 }
-LAB_97bcc574:
+loopSetChunk11:
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 fieldValue = 8;
                 chunkWord = *(uint *)(chunk + 0xc);
-LAB_97bcc58c:
+setChunkWord:
                 chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff7f | 0x60;
-                goto LAB_97bcbb78;
+                goto loopStoreChunk;
               }
-              goto LAB_97bcc54c;
+              goto setChunk3;
             }
-            if (nameHash == 0x8213) goto LAB_97bcc524;
+            if (nameHash == 0x8213) goto loopSetChunk10;
             if (nameHash < 0x8214) {
               if (nameHash != 0x81f4) {
                 if (nameHash < 0x81f5) {
                   fieldValue = 0x81d9;
                 }
                 else {
-                  if (nameHash == 0x81f8) goto LAB_97bcc54c;
+                  if (nameHash == 0x81f8) goto setChunk3;
                   fieldValue = 0x81fc;
                 }
-LAB_97bcab00:
-                if (nameHash != fieldValue) goto LAB_97bcc698;
-                goto LAB_97bcc574;
+checkNameHash:
+                if (nameHash != fieldValue) goto storeParseSymbol;
+                goto loopSetChunk11;
               }
             }
             else {
-              if (nameHash == 0x821b) goto LAB_97bcc54c;
+              if (nameHash == 0x821b) goto setChunk3;
               if (0x821b < nameHash) {
                 if (nameHash != 0x821f) {
                   fieldValue = 0x8236;
-                  goto LAB_97bcaba4;
+                  goto loopCheckNameHash3;
                 }
-                goto LAB_97bcc574;
+                goto loopSetChunk11;
               }
               fieldValue = 0x8217;
-LAB_97bcab50:
-              if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash:
+              if (nameHash != fieldValue) goto storeParseSymbol;
             }
           }
-          goto LAB_97bcc500;
+          goto loopSetChunk13;
         }
         if (nameHash == 0x8837) {
-LAB_97bcbff4:
+loopSetChunk12:
           chunk = _PPStreamChunkCreateWithType(3,0);
           fieldValue = 0xf;
           chunkWord = *(uint *)(chunk + 0xc);
-          goto LAB_97bcc00c;
+          goto loopSetChunkWord6;
         }
         if (0x8837 < nameHash) {
           if (nameHash != 0x9a2c) {
@@ -1231,81 +1231,81 @@ LAB_97bcbff4:
               if (nameHash == 0x92cd) {
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe07fff | 0x104000;
-LAB_97bcbdf0:
+loopSetChunkWord7:
                 chunkWord = chunkWord & 0xffffcfff;
-                goto LAB_97bcbdf4;
+                goto setChunkWord7;
               }
               if (nameHash < 0x92ce) {
-                if (nameHash != 0x89f6) goto LAB_97bcc698;
-                goto LAB_97bcbff4;
+                if (nameHash != 0x89f6) goto storeParseSymbol;
+                goto loopSetChunk12;
               }
               if (nameHash != 0x99e2) {
                 fieldValue = 0x9a07;
-                goto LAB_97bcac74;
+                goto loopCheckNameHash2;
               }
             }
             else if (nameHash != 0x9a9b) {
               if (nameHash < 0x9a9c) {
                 if (nameHash != 0x9a51) {
                   fieldValue = 0x9a76;
-LAB_97bcac74:
-                  if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash2:
+                  if (nameHash != fieldValue) goto storeParseSymbol;
                 }
               }
               else if (nameHash != 0x9ac0) {
                 fieldValue = 0x9ae5;
-                goto LAB_97bcac74;
+                goto loopCheckNameHash2;
               }
             }
           }
           chunk = _PPStreamChunkCreateWithType(3,0);
           chunkWord = *(uint *)(chunk + 0xc) & 0xffe07fff | 0x104000;
-LAB_97bcbe80:
+loopSetChunkWord8:
           chunkWord = chunkWord & 0xffffcfff;
-          goto LAB_97bcbe84;
+          goto loopSetChunkWord11;
         }
         if (nameHash == 0x82c6) {
-LAB_97bcc500:
+loopSetChunk13:
           chunk = _PPStreamChunkCreateWithType(3,0);
           fieldValue = 8;
           chunkWord = *(uint *)(chunk + 0xc);
-          goto LAB_97bcc518;
+          goto loopSetChunkWord4;
         }
         if (nameHash < 0x82c7) {
           if (nameHash != 0x82a7) {
             if (nameHash < 0x82a8) {
               fieldValue = 0x82a3;
-              goto LAB_97bcab50;
+              goto loopCheckNameHash;
             }
-            if (nameHash == 0x82ab) goto LAB_97bcc574;
+            if (nameHash == 0x82ab) goto loopSetChunk11;
             fieldValue = 0x82c2;
-LAB_97bcaba4:
-            if (nameHash != fieldValue) goto LAB_97bcc698;
-            goto LAB_97bcc524;
+loopCheckNameHash3:
+            if (nameHash != fieldValue) goto storeParseSymbol;
+            goto loopSetChunk10;
           }
         }
         else {
-          if (nameHash == 0x82e9) goto LAB_97bcc500;
+          if (nameHash == 0x82e9) goto loopSetChunk13;
           if (0x82e9 < nameHash) {
             if (nameHash != 0x8308) {
-              if (nameHash != 0x840f) goto LAB_97bcc698;
+              if (nameHash != 0x840f) goto storeParseSymbol;
               chunkType = 2;
-              goto LAB_97bcc668;
+              goto loopSetChunk6;
             }
-            goto LAB_97bcc524;
+            goto loopSetChunk10;
           }
           if (nameHash != 0x82ca) {
             fieldValue = 0x82e5;
-            goto LAB_97bcaba4;
+            goto loopCheckNameHash3;
           }
         }
-LAB_97bcc54c:
+setChunk3:
         chunk = _PPStreamChunkCreateWithType(3,0);
         fieldValue = 8;
         chunkWord = *(uint *)(chunk + 0xc);
-LAB_97bcc564:
+setChunkWord2:
         chunkWord = fieldValue << 0x10 | chunkWord & 0xffe0ff1f | 0x40;
-        goto LAB_97bcbb78;
+        goto loopStoreChunk;
       }
       if (nameHash != 0xe1f0) {
         if (0xe1f0 < nameHash) {
@@ -1313,36 +1313,36 @@ LAB_97bcc564:
             if (0x1021f < nameHash) {
               if (nameHash != 0x1029a) {
                 if (nameHash < 0x1029b) {
-                  if (nameHash == 0x10240) goto LAB_97bcc1e8;
+                  if (nameHash == 0x10240) goto setChunk5;
                   if (nameHash < 0x10241) {
                     fieldValue = 0x10237;
                   }
                   else {
-                    if (nameHash == 0x10258) goto LAB_97bcc20c;
+                    if (nameHash == 0x10258) goto setChunk4;
                     fieldValue = 0x10279;
                   }
-LAB_97bcaf2c:
-                  if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash4:
+                  if (nameHash != fieldValue) goto storeParseSymbol;
                 }
                 else if (nameHash != 0x102fd) {
                   if (nameHash < 0x102fe) {
                     if (nameHash != 0x102bb) {
                       fieldValue = 0x102dc;
-                      goto LAB_97bcaf2c;
+                      goto loopCheckNameHash4;
                     }
                   }
                   else if (nameHash != 0x1031e) {
-                    if (nameHash != 0x10f0d) goto LAB_97bcc698;
+                    if (nameHash != 0x10f0d) goto storeParseSymbol;
                     chunk = _PPStreamChunkCreateWithType(3,0);
                     chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
-                    goto LAB_97bcc1b8;
+                    goto setFieldValue;
                   }
                 }
               }
-LAB_97bcc20c:
+setChunk4:
               chunk = _PPStreamChunkCreateWithType(3,0);
               chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f1ff | 0x30100;
-              goto LAB_97bcc458;
+              goto storeChunk2;
             }
             if (nameHash != 0x10159) {
               if (nameHash < 0x1015a) {
@@ -1350,10 +1350,10 @@ LAB_97bcc20c:
                   chunk = _PPStreamChunkCreateWithType(3,0);
                   chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
                   fieldValue = 1;
-                  goto LAB_97bcc0cc;
+                  goto setChunkWord8;
                 }
                 if (nameHash < 0xf7d3) {
-                  if (nameHash != 0xf700) goto LAB_97bcc698;
+                  if (nameHash != 0xf700) goto storeParseSymbol;
                   chunk = _PPStreamChunkCreateWithType(3,0);
                   chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff0 | 0x50000;
                 }
@@ -1361,35 +1361,35 @@ LAB_97bcc20c:
                   if (nameHash == 0xf839) {
                     chunk = _PPStreamChunkCreateWithType(3,0);
                     chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x50001;
-LAB_97bcc1b8:
+setFieldValue:
                     fieldValue = 2;
-                    goto LAB_97bcc0cc;
+                    goto setChunkWord8;
                   }
-                  if (nameHash != 0xf9fd) goto LAB_97bcc698;
+                  if (nameHash != 0xf9fd) goto storeParseSymbol;
                   chunk = _PPStreamChunkCreateWithType(3,0);
                   chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff7 | 0x50007;
                 }
-                goto LAB_97bcc694;
+                goto loopStoreChunk2;
               }
               if (nameHash != 0x101bc) {
                 if (nameHash < 0x101bd) {
                   if (nameHash != 0x1017a) {
                     fieldValue = 0x1019b;
-LAB_97bcaea4:
-                    if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash5:
+                    if (nameHash != fieldValue) goto storeParseSymbol;
                   }
                 }
                 else if (nameHash != 0x101dd) {
                   fieldValue = 0x101fe;
-                  goto LAB_97bcaea4;
+                  goto loopCheckNameHash5;
                 }
               }
             }
           }
-LAB_97bcc1e8:
+setChunk5:
           chunk = _PPStreamChunkCreateWithType(3,0);
           chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f0ff | 0x30000;
-          goto LAB_97bcc458;
+          goto storeChunk2;
         }
         if (nameHash != 0xb938) {
           if (nameHash < 0xb939) {
@@ -1400,11 +1400,11 @@ LAB_97bcc1e8:
                     fieldValue = 0xb7c7;
                   }
                   else {
-                    if (nameHash == 0xb819) goto LAB_97bcc470;
+                    if (nameHash == 0xb819) goto setChunk6;
                     fieldValue = 0xb842;
                   }
-LAB_97bcadb8:
-                  if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash6:
+                  if (nameHash != fieldValue) goto storeParseSymbol;
                 }
               }
               else if (nameHash != 0xb8bd) {
@@ -1412,10 +1412,10 @@ LAB_97bcadb8:
                   fieldValue = 0xb894;
                 }
                 else {
-                  if (nameHash == 0xb8e6) goto LAB_97bcc470;
+                  if (nameHash == 0xb8e6) goto setChunk6;
                   fieldValue = 0xb90f;
                 }
-                goto LAB_97bcadb8;
+                goto loopCheckNameHash6;
               }
             }
           }
@@ -1425,131 +1425,131 @@ LAB_97bcadb8:
                 chunk = _PPStreamChunkCreateWithType(4,0);
                 fieldValue = 5;
                 chunkWord = *(uint *)(chunk + 0xc);
-LAB_97bcbb2c:
+setChunkWord3:
                 chunkWord = fieldValue << 0x10 | chunkWord & 0xfff0ffff;
-LAB_97bcbb30:
+setChunkWord4:
                 chunkWord = chunkWord | 1;
               }
               else {
                 if (nameHash < 0xc311) {
                   if (nameHash != 0xc166) {
                     fieldValue = 0xc191;
-                    goto LAB_97bcadb8;
+                    goto loopCheckNameHash6;
                   }
-                  goto LAB_97bcc470;
+                  goto setChunk6;
                 }
                 if (nameHash == 0xd7ba) {
                   chunk = _PPStreamChunkCreateWithType(4,0);
                   fieldValue = 5;
                   chunkWord = *(uint *)(chunk + 0xc);
-                  goto LAB_97bcbb08;
+                  goto loopSetChunkWord2;
                 }
-                if (nameHash != 0xe12a) goto LAB_97bcc698;
+                if (nameHash != 0xe12a) goto storeParseSymbol;
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff1 | 0x50001;
               }
-              goto LAB_97bcc694;
+              goto loopStoreChunk2;
             }
             if (nameHash != 0xc0ba) {
               if (nameHash < 0xc0bb) {
-                if (nameHash != 0xbd41) goto LAB_97bcc698;
+                if (nameHash != 0xbd41) goto storeParseSymbol;
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 fieldValue = 6;
-                goto LAB_97bcc5c0;
+                goto loopSetChunkWord5;
               }
               if (nameHash != 0xc0e5) {
                 fieldValue = 0xc110;
-                goto LAB_97bcadb8;
+                goto loopCheckNameHash6;
               }
             }
           }
         }
-LAB_97bcc470:
+setChunk6:
         chunk = _PPStreamChunkCreateWithType(3,0);
         chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x90000;
-        goto LAB_97bcbb78;
+        goto loopStoreChunk;
       }
       chunk = _PPStreamChunkCreateWithType(3,0);
       chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff3 | 0x50000;
-LAB_97bcc190:
+setChunkWord5:
       chunkWord = chunkWord | 3;
     }
-LAB_97bcc694:
+loopStoreChunk2:
     *(uint *)(chunk + 0xc) = chunkWord;
-    goto LAB_97bcc698;
+    goto storeParseSymbol;
   }
-  if (nameHash == 0x18b0a) goto LAB_97bcc36c;
+  if (nameHash == 0x18b0a) goto loopSetChunk14;
   if (nameHash < 0x18b0b) {
-    if (nameHash == 0x147c7) goto LAB_97bcc2a0;
+    if (nameHash == 0x147c7) goto setChunk13;
     if (0x147c7 < nameHash) {
-      if (nameHash == 0x1705e) goto LAB_97bcc3e4;
+      if (nameHash == 0x1705e) goto setChunk8;
       if (0x1705e < nameHash) {
         if (nameHash != 0x17e27) {
           if (nameHash < 0x17e28) {
             if (nameHash != 0x170f7) {
               if (nameHash < 0x170f8) {
-                if (nameHash == 0x17089) goto LAB_97bcc3e4;
+                if (nameHash == 0x17089) goto setChunk8;
                 if (nameHash < 0x1708a) {
                   fieldValue = 0x17076;
                 }
                 else {
-                  if (nameHash == 0x170a1) goto LAB_97bcc40c;
+                  if (nameHash == 0x170a1) goto setChunk7;
                   fieldValue = 0x170cc;
                 }
-LAB_97bcb448:
-                if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash7:
+                if (nameHash != fieldValue) goto storeParseSymbol;
               }
               else if (nameHash != 0x17178) {
                 if (nameHash < 0x17179) {
                   if (nameHash != 0x17122) {
                     fieldValue = 0x1714d;
-                    goto LAB_97bcb448;
+                    goto loopCheckNameHash7;
                   }
                 }
                 else if (nameHash != 0x171a3) {
                   fieldValue = 0x17e06;
-                  goto LAB_97bcba88;
+                  goto loopCheckNameHash9;
                 }
               }
             }
-LAB_97bcc40c:
+setChunk7:
             chunk = _PPStreamChunkCreateWithType(3,0);
             chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fbff | 0x40300;
-            goto LAB_97bcc458;
+            goto storeChunk2;
           }
           if (nameHash != 0x17ecc) {
             if (0x17ecc < nameHash) {
               if (nameHash != 0x18a83) {
                 if (nameHash < 0x18a84) {
-                  if (nameHash == 0x17eed) goto LAB_97bcc2ec;
+                  if (nameHash == 0x17eed) goto setChunk16;
                   fieldValue = 0x18a56;
                 }
                 else {
-                  if (nameHash == 0x18ab0) goto LAB_97bcc36c;
+                  if (nameHash == 0x18ab0) goto loopSetChunk14;
                   fieldValue = 0x18add;
                 }
-LAB_97bcb594:
-                if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash8:
+                if (nameHash != fieldValue) goto storeParseSymbol;
               }
-LAB_97bcc36c:
+loopSetChunk14:
               chunk = _PPStreamChunkCreateWithType(3,0);
               chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f8ff | 0x40000;
-              goto LAB_97bcc458;
+              goto storeChunk2;
             }
             if (nameHash != 0x17e69) {
               if (nameHash < 0x17e6a) {
                 fieldValue = 0x17e48;
               }
               else {
-                if (nameHash == 0x17e8a) goto LAB_97bcc2ec;
+                if (nameHash == 0x17e8a) goto setChunk16;
                 fieldValue = 0x17eab;
               }
-LAB_97bcba88:
-              if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash9:
+              if (nameHash != fieldValue) goto storeParseSymbol;
             }
           }
         }
-        goto LAB_97bcc2ec;
+        goto setChunk16;
       }
       if (nameHash != 0x14d24) {
         if (0x14d24 < nameHash) {
@@ -1560,40 +1560,40 @@ LAB_97bcba88:
                   if (nameHash == 0x158fc) {
                     chunk = _PPStreamChunkCreateWithType(3,0);
                     chunkWord = *(uint *)(chunk + 0xc) & 0xffe07fff | 0x104000;
-LAB_97bcbe54:
+loopSetChunkWord9:
                     chunkWord = chunkWord & 0xffffcfff;
-LAB_97bcbfa8:
+loopSetChunkWord10:
                     chunkWord = chunkWord & 0xfffff8ff;
-                    goto LAB_97bcbfac;
+                    goto storeChunk;
                   }
-                  if (nameHash != 0x15dbb) goto LAB_97bcc698;
+                  if (nameHash != 0x15dbb) goto storeParseSymbol;
                   chunk = _PPStreamChunkCreateWithType(3,0);
                   chunkWord = *(uint *)(chunk + 0xc) & 0xffe00fff | 0x100000;
-                  goto LAB_97bcbe28;
+                  goto setFieldValue2;
                 }
                 fieldValue = 0x14d5b;
-                goto LAB_97bcb334;
+                goto checkNameHash2;
               }
-              goto LAB_97bcbf0c;
+              goto setChunk9;
             }
             if (nameHash != 0x16fdd) {
               if (nameHash < 0x16fde) {
                 if (nameHash != 0x16f87) {
                   fieldValue = 0x16fb2;
-LAB_97bcb3ac:
-                  if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash10:
+                  if (nameHash != fieldValue) goto storeParseSymbol;
                 }
               }
               else if (nameHash != 0x17008) {
                 fieldValue = 0x17033;
-                goto LAB_97bcb3ac;
+                goto loopCheckNameHash10;
               }
             }
           }
-LAB_97bcc3e4:
+setChunk8:
           chunk = _PPStreamChunkCreateWithType(3,0);
           chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f9ff | 0x40100;
-          goto LAB_97bcc458;
+          goto storeChunk2;
         }
         if (nameHash != 0x14c11) {
           if (nameHash < 0x14c12) {
@@ -1602,35 +1602,35 @@ LAB_97bcc3e4:
                 fieldValue = 0x147e8;
               }
               else {
-                if (nameHash == 0x1482a) goto LAB_97bcc2a0;
+                if (nameHash == 0x1482a) goto setChunk13;
                 fieldValue = 0x1484b;
               }
-LAB_97bcb2bc:
-              if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash11:
+              if (nameHash != fieldValue) goto storeParseSymbol;
             }
-            goto LAB_97bcc2a0;
+            goto setChunk13;
           }
           if (nameHash != 0x14c7f) {
             if (nameHash < 0x14c80) {
               fieldValue = 0x14c48;
             }
             else {
-              if (nameHash == 0x14cb6) goto LAB_97bcbf0c;
+              if (nameHash == 0x14cb6) goto setChunk9;
               fieldValue = 0x14ced;
             }
-LAB_97bcb334:
-            if (nameHash != fieldValue) goto LAB_97bcc698;
+checkNameHash2:
+            if (nameHash != fieldValue) goto storeParseSymbol;
           }
         }
       }
-LAB_97bcbf0c:
+setChunk9:
       chunk = _PPStreamChunkCreateWithType(3,0);
       chunkWord = *(uint *)(chunk + 0xc) & 0xffe00fff | 0x100000;
-LAB_97bcbe84:
+loopSetChunkWord11:
       chunkWord = chunkWord & 0xfffff8ff | 0x400;
-      goto LAB_97bcc458;
+      goto storeChunk2;
     }
-    if (nameHash == 0x11ea4) goto LAB_97bcc258;
+    if (nameHash == 0x11ea4) goto setChunk12;
     if (nameHash < 0x11ea5) {
       if (nameHash != 0x11b4b) {
         if (0x11b4b < nameHash) {
@@ -1641,49 +1641,49 @@ LAB_97bcbe84:
                   fieldValue = 0x11c82;
                 }
                 else {
-                  if (nameHash == 0x11ce8) goto LAB_97bcbe60;
+                  if (nameHash == 0x11ce8) goto setChunk10;
                   fieldValue = 0x11d1b;
                 }
-LAB_97bcb0c4:
-                if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash12:
+                if (nameHash != fieldValue) goto storeParseSymbol;
               }
             }
             else if (nameHash != 0x11de7) {
               if (0x11de7 < nameHash) {
                 if (nameHash != 0x11e62) {
                   fieldValue = 0x11e83;
-                  goto LAB_97bcb14c;
+                  goto checkNameHash4;
                 }
-                goto LAB_97bcc258;
+                goto setChunk12;
               }
               if (nameHash != 0x11d81) {
                 fieldValue = 0x11db4;
-                goto LAB_97bcb0c4;
+                goto loopCheckNameHash12;
               }
             }
           }
-LAB_97bcbe60:
+setChunk10:
           chunk = _PPStreamChunkCreateWithType(3,0);
           chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x10c000;
-          goto LAB_97bcbe80;
+          goto loopSetChunkWord8;
         }
         if (nameHash != 0x11aa6) {
           if (nameHash < 0x11aa7) {
             if (nameHash == 0x1142d) {
               chunk = _PPStreamChunkCreateWithType(3,0);
               chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x10c000;
-              goto LAB_97bcbdf0;
+              goto loopSetChunkWord7;
             }
             if (nameHash < 0x1142e) {
-              if (nameHash != 0x110e1) goto LAB_97bcc698;
+              if (nameHash != 0x110e1) goto storeParseSymbol;
               chunk = _PPStreamChunkCreateWithType(3,0);
               chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
               fieldValue = 3;
-              goto LAB_97bcc0cc;
+              goto setChunkWord8;
             }
             if (nameHash != 0x11a64) {
               fieldValue = 0x11a85;
-              goto LAB_97bcb03c;
+              goto checkNameHash3;
             }
           }
           else if (nameHash != 0x11ae8) {
@@ -1691,15 +1691,15 @@ LAB_97bcbe60:
               fieldValue = 0x11ac7;
             }
             else {
-              if (nameHash == 0x11b09) goto LAB_97bcc234;
+              if (nameHash == 0x11b09) goto setChunk11;
               fieldValue = 0x11b2a;
             }
-LAB_97bcb03c:
-            if (nameHash != fieldValue) goto LAB_97bcc698;
+checkNameHash3:
+            if (nameHash != fieldValue) goto storeParseSymbol;
           }
         }
       }
-LAB_97bcc234:
+setChunk11:
       chunk = _PPStreamChunkCreateWithType(3,0);
       chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
       fieldValue = 2;
@@ -1712,39 +1712,39 @@ LAB_97bcc234:
               if (nameHash == 0x1275a) {
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fff8 | 0x50008;
-                goto LAB_97bcc694;
+                goto loopStoreChunk2;
               }
               if (nameHash < 0x1275b) {
                 hashMatches = nameHash == 0x12304;
-LAB_97bcb178:
-                if (!hashMatches) goto LAB_97bcc698;
-                goto LAB_97bcc034;
+checkHashMatches:
+                if (!hashMatches) goto storeParseSymbol;
+                goto loopSetChunk9;
               }
               if (nameHash == 0x12c7a) {
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe0cfff | 0x10c000;
-                goto LAB_97bcbe28;
+                goto setFieldValue2;
               }
               fieldValue = 0x14307;
-              goto LAB_97bcb220;
+              goto checkNameHash5;
             }
             if (nameHash != 0x11ee6) {
               if (nameHash < 0x11ee7) {
                 fieldValue = 0x11ec5;
               }
               else {
-                if (nameHash == 0x11f07) goto LAB_97bcc258;
+                if (nameHash == 0x11f07) goto setChunk12;
                 fieldValue = 0x11f28;
               }
-LAB_97bcb14c:
-              if (nameHash != fieldValue) goto LAB_97bcc698;
+checkNameHash4:
+              if (nameHash != fieldValue) goto storeParseSymbol;
             }
           }
-LAB_97bcc258:
+setChunk12:
           chunk = _PPStreamChunkCreateWithType(3,0);
           fieldValue = 3;
           chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
-          goto LAB_97bcc274;
+          goto loopSetChunkWord12;
         }
         if (nameHash != 0x143ac) {
           if (0x143ac < nameHash) {
@@ -1752,164 +1752,164 @@ LAB_97bcc258:
               if (nameHash < 0x14765) {
                 if (nameHash != 0x143cd) {
                   fieldValue = 0x143ee;
-                  goto LAB_97bcb220;
+                  goto checkNameHash5;
                 }
-                goto LAB_97bcc27c;
+                goto setChunk14;
               }
               if (nameHash != 0x14785) {
                 fieldValue = 0x147a6;
-                goto LAB_97bcb2bc;
+                goto loopCheckNameHash11;
               }
             }
-LAB_97bcc2a0:
+setChunk13:
             chunk = _PPStreamChunkCreateWithType(3,0);
             chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f7ff | 0x30700;
-            goto LAB_97bcc458;
+            goto storeChunk2;
           }
           if (nameHash != 0x1436a) {
             if (nameHash < 0x1436b) {
               fieldValue = 0x14349;
-LAB_97bcb220:
-              if (nameHash != fieldValue) goto LAB_97bcc698;
+checkNameHash5:
+              if (nameHash != fieldValue) goto storeParseSymbol;
             }
             else if (nameHash != 0x1438b) {
-              if (nameHash != 0x143a8) goto LAB_97bcc698;
+              if (nameHash != 0x143a8) goto storeParseSymbol;
               chunk = _PPStreamChunkCreateWithType(3,0);
               chunkWord = *(uint *)(chunk + 0xc) & 0xffe00fff | 0x100000;
-              goto LAB_97bcbdf4;
+              goto setChunkWord7;
             }
           }
         }
       }
-LAB_97bcc27c:
+setChunk14:
       chunk = _PPStreamChunkCreateWithType(3,0);
       chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
       fieldValue = 6;
     }
-LAB_97bcc274:
+loopSetChunkWord12:
     chunkWord = fieldValue << 8 | chunkWord & 0xfffff0ff;
   }
   else {
-    if (nameHash == 0x1aa90) goto LAB_97bcc3bc;
+    if (nameHash == 0x1aa90) goto setChunk17;
     if (0x1aa90 < nameHash) {
       if (nameHash == 0x21945) {
         chunk = _PPStreamChunkCreateWithType(3,0);
         chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
-LAB_97bcbe28:
+setFieldValue2:
         fieldValue = 1;
-LAB_97bcbe2c:
+setChunkWord6:
         chunkWord = fieldValue << 8 | chunkWord & 0xfffff8ff;
-        goto LAB_97bcc694;
+        goto loopStoreChunk2;
       }
       if (nameHash < 0x21946) {
         if (nameHash != 0x203d7) {
           if (nameHash < 0x203d8) {
-            if (nameHash == 0x20368) goto LAB_97bcbfb8;
+            if (nameHash == 0x20368) goto setChunk15;
             if (nameHash < 0x20369) {
               if (nameHash == 0x1f97a) {
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
-LAB_97bcbdf4:
+setChunkWord7:
                 chunkWord = chunkWord & 0xfffff8ff | 0x300;
-LAB_97bcbfac:
+storeChunk:
                 *(uint *)(chunk + 0xc) = chunkWord;
                 *(undefined1 *)(chunk + 0xf) = 0;
-                goto LAB_97bcc698;
+                goto storeParseSymbol;
               }
               if (0x1f97a < nameHash) {
                 if (nameHash == 0x1ff52) {
                   chunk = _PPStreamChunkCreateWithType(3,0);
                   fieldValue = 5;
                   chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x50001;
-                  goto LAB_97bcc0cc;
+                  goto setChunkWord8;
                 }
                 fieldValue = 0x20323;
-                goto LAB_97bcb91c;
+                goto loopCheckNameHash13;
               }
-              if (nameHash != 0x1f1a8) goto LAB_97bcc698;
-              goto LAB_97bcc048;
+              if (nameHash != 0x1f1a8) goto storeParseSymbol;
+              goto loopSetChunk15;
             }
             if (nameHash != 0x20395) {
               if (nameHash < 0x20396) {
                 fieldValue = 0x20374;
               }
               else {
-                if (nameHash == 0x203ad) goto LAB_97bcbfb8;
+                if (nameHash == 0x203ad) goto setChunk15;
                 fieldValue = 0x203b6;
               }
-              goto LAB_97bcba88;
+              goto loopCheckNameHash9;
             }
           }
           else if (nameHash != 0x2043a) {
             if (nameHash < 0x2043b) {
-              if (nameHash == 0x203f8) goto LAB_97bcc2ec;
+              if (nameHash == 0x203f8) goto setChunk16;
               if (nameHash < 0x203f9) {
                 fieldValue = 0x203f2;
               }
               else {
-                if (nameHash == 0x20419) goto LAB_97bcc2ec;
+                if (nameHash == 0x20419) goto setChunk16;
                 fieldValue = 0x20437;
               }
-LAB_97bcb91c:
-              if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash13:
+              if (nameHash != fieldValue) goto storeParseSymbol;
             }
             else if (nameHash != 0x204c1) {
               if (nameHash < 0x204c2) {
                 if (nameHash != 0x2045b) {
                   fieldValue = 0x2047c;
-                  goto LAB_97bcb91c;
+                  goto loopCheckNameHash13;
                 }
-                goto LAB_97bcc2ec;
+                goto setChunk16;
               }
               if (nameHash != 0x20506) {
-                if (nameHash != 0x2138c) goto LAB_97bcc698;
+                if (nameHash != 0x2138c) goto storeParseSymbol;
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x10c000;
-                goto LAB_97bcbe54;
+                goto loopSetChunkWord9;
               }
             }
-LAB_97bcbfb8:
+setChunk15:
             chunk = _PPStreamChunkCreateWithType(3,0);
             chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
-            goto LAB_97bcbe84;
+            goto loopSetChunkWord11;
           }
         }
       }
       else {
         if (nameHash == 0x24cb9) {
-LAB_97bcc048:
+loopSetChunk15:
           chunk = _PPStreamChunkCreateWithType(3,0);
           fieldValue = 0xe;
-          goto LAB_97bcc5c0;
+          goto loopSetChunkWord5;
         }
         if (nameHash < 0x24cba) {
           if (nameHash != 0x2461d) {
             if (nameHash < 0x2461e) {
-              if (nameHash == 0x23231) goto LAB_97bcc048;
+              if (nameHash == 0x23231) goto loopSetChunk15;
               if (nameHash < 0x23232) {
-                if (nameHash != 0x21eb8) goto LAB_97bcc698;
+                if (nameHash != 0x21eb8) goto storeParseSymbol;
                 chunk = _PPStreamChunkCreateWithType(3,0);
                 fieldValue = 5;
                 chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fffe | 0x50000;
-LAB_97bcc0cc:
+setChunkWord8:
                 chunkWord = fieldValue << 1 | chunkWord & 0xfffffff1;
-                goto LAB_97bcc694;
+                goto loopStoreChunk2;
               }
               if (nameHash != 0x245db) {
                 fieldValue = 0x245fc;
-                goto LAB_97bcba88;
+                goto loopCheckNameHash9;
               }
             }
             else if (nameHash != 0x24680) {
               if (nameHash < 0x24681) {
                 if (nameHash != 0x2463e) {
                   fieldValue = 0x2465f;
-                  goto LAB_97bcba88;
+                  goto loopCheckNameHash9;
                 }
               }
               else if (nameHash != 0x246a1) {
                 fieldValue = 0x246c2;
-                goto LAB_97bcba88;
+                goto loopCheckNameHash9;
               }
             }
           }
@@ -1923,11 +1923,11 @@ LAB_97bcc0cc:
                   *(uint *)(chunk + 0xc) = *(uint *)(chunk + 0xc) & 0xffe008ff | 0x100000;
                   *(undefined1 *)(chunk + 0xf) = 0;
                 }
-                goto LAB_97bcc698;
+                goto storeParseSymbol;
               }
               if (nameHash != 0x2612c) {
                 fieldValue = 0x2614d;
-                goto LAB_97bcba88;
+                goto loopCheckNameHash9;
               }
             }
           }
@@ -1935,30 +1935,30 @@ LAB_97bcc0cc:
             if (nameHash < 0x261d2) {
               if (nameHash != 0x2618f) {
                 fieldValue = 0x261b0;
-                goto LAB_97bcba88;
+                goto loopCheckNameHash9;
               }
             }
             else if (nameHash != 0x261f2) {
-              if (nameHash != 0x343c5) goto LAB_97bcc698;
+              if (nameHash != 0x343c5) goto storeParseSymbol;
               chunk = _PPStreamChunkCreateWithType(3,0);
               chunkWord = *(uint *)(chunk + 0xc) & 0xffe08fff | 0x108000;
-              goto LAB_97bcbfa8;
+              goto loopSetChunkWord10;
             }
           }
         }
       }
-LAB_97bcc2ec:
+setChunk16:
       chunk = _PPStreamChunkCreateWithType(3,0);
       chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
       fieldValue = 5;
-      goto LAB_97bcc274;
+      goto loopSetChunkWord12;
     }
     if (nameHash == 0x18e85) {
-LAB_97bcc2c8:
+loopSetChunk16:
       chunk = _PPStreamChunkCreateWithType(3,0);
       chunkWord = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x30000;
       fieldValue = 4;
-      goto LAB_97bcc274;
+      goto loopSetChunkWord12;
     }
     if (0x18e85 < nameHash) {
       if (nameHash != 0x19384) {
@@ -1968,44 +1968,44 @@ LAB_97bcc2c8:
               if (nameHash != 0x193c6) {
                 if (nameHash < 0x193c7) {
                   fieldValue = 0x193a5;
-                  goto LAB_97bcb768;
+                  goto loopCheckNameHash15;
                 }
                 if (nameHash != 0x193e7) {
                   fieldValue = 0x1a955;
-                  goto LAB_97bcb7d8;
+                  goto loopCheckNameHash14;
                 }
               }
-              goto LAB_97bcc2c8;
+              goto loopSetChunk16;
             }
             if (nameHash != 0x1aa09) {
               if (nameHash < 0x1aa0a) {
                 if (nameHash != 0x1a9af) {
                   fieldValue = 0x1a9dc;
-LAB_97bcb7d8:
-                  if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash14:
+                  if (nameHash != fieldValue) goto storeParseSymbol;
                 }
               }
               else if (nameHash != 0x1aa36) {
                 fieldValue = 0x1aa63;
-                goto LAB_97bcb7d8;
+                goto loopCheckNameHash14;
               }
             }
           }
-LAB_97bcc3bc:
+setChunk17:
           chunk = _PPStreamChunkCreateWithType(3,0);
           chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fcff | 0x40400;
-          goto LAB_97bcc458;
+          goto storeChunk2;
         }
         if (nameHash != 0x18f09) {
           if (nameHash < 0x18f0a) {
             if (nameHash != 0x18ea6) {
               if (nameHash < 0x18ea7) {
                 fieldValue = 0x18e8a;
-                goto LAB_97bcb6c4;
+                goto loopCheckNameHash16;
               }
               if (nameHash != 0x18ec7) {
                 fieldValue = 0x18ee8;
-                goto LAB_97bcb768;
+                goto loopCheckNameHash15;
               }
             }
           }
@@ -2013,18 +2013,18 @@ LAB_97bcc3bc:
             if (nameHash < 0x19322) {
               if (nameHash != 0x18f2a) {
                 fieldValue = 0x19300;
-LAB_97bcb768:
-                if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash15:
+                if (nameHash != fieldValue) goto storeParseSymbol;
               }
             }
             else if (nameHash != 0x19342) {
               fieldValue = 0x19363;
-              goto LAB_97bcb768;
+              goto loopCheckNameHash15;
             }
           }
         }
       }
-      goto LAB_97bcc2c8;
+      goto loopSetChunk16;
     }
     if (nameHash != 0x18c8a) {
       if (0x18c8a < nameHash) {
@@ -2033,67 +2033,67 @@ LAB_97bcb768:
             if (nameHash != 0x18d5d) {
               if (nameHash < 0x18d5e) {
                 fieldValue = 0x18cb7;
-                goto LAB_97bcb60c;
+                goto checkNameHash6;
               }
               if (nameHash != 0x18d88) {
                 fieldValue = 0x18db3;
-LAB_97bcb6c4:
-                if (nameHash != fieldValue) goto LAB_97bcc698;
+loopCheckNameHash16:
+                if (nameHash != fieldValue) goto storeParseSymbol;
               }
             }
           }
           else {
-            if (nameHash == 0x18e43) goto LAB_97bcc2c8;
+            if (nameHash == 0x18e43) goto loopSetChunk16;
             if (nameHash < 0x18e44) {
               if (nameHash != 0x18e09) {
                 fieldValue = 0x18e34;
-                goto LAB_97bcb6c4;
+                goto loopCheckNameHash16;
               }
             }
             else if (nameHash != 0x18e5f) {
               fieldValue = 0x18e64;
-              goto LAB_97bcb768;
+              goto loopCheckNameHash15;
             }
           }
         }
         chunk = _PPStreamChunkCreateWithType(3,0);
         chunkWord = *(uint *)(chunk + 0xc) & 0xffe0fdff | 0x40500;
-        goto LAB_97bcc458;
+        goto storeChunk2;
       }
       if (nameHash != 0x18ba9) {
         if (nameHash < 0x18baa) {
-          if (nameHash == 0x18b64) goto LAB_97bcc36c;
+          if (nameHash == 0x18b64) goto loopSetChunk14;
           if (nameHash < 0x18b65) {
             fieldValue = 0x18b37;
           }
           else {
-            if (nameHash == 0x18b7c) goto LAB_97bcc390;
+            if (nameHash == 0x18b7c) goto setChunk18;
             fieldValue = 0x18b91;
           }
-          goto LAB_97bcb594;
+          goto loopCheckNameHash8;
         }
         if (nameHash != 0x18c03) {
           if (nameHash < 0x18c04) {
             fieldValue = 0x18bd6;
           }
           else {
-            if (nameHash == 0x18c30) goto LAB_97bcc390;
+            if (nameHash == 0x18c30) goto setChunk18;
             fieldValue = 0x18c5d;
           }
-LAB_97bcb60c:
-          if (nameHash != fieldValue) goto LAB_97bcc698;
+checkNameHash6:
+          if (nameHash != fieldValue) goto storeParseSymbol;
         }
       }
     }
-LAB_97bcc390:
+setChunk18:
     chunk = _PPStreamChunkCreateWithType(3,0);
     chunkWord = *(uint *)(chunk + 0xc) & 0xffe0f8ff | 0x40200;
   }
-LAB_97bcc458:
+storeChunk2:
   *(uint *)(chunk + 0xc) = chunkWord;
   directIndex2 = ParseSymbol__GetDirectIndex(parseSymbol,0);
   *(undefined1 *)(chunk + 0xf) = directIndex2;
-LAB_97bcc698:
+storeParseSymbol:
   *(undefined4 *)(parseSymbol + 0x34) = 1;
   return chunk;
 }
@@ -2152,15 +2152,15 @@ int GetChunkForSymbol(parseSymbol, shaderStage)
     *(undefined4 *)(parseSymbol + 0x38) = 1;
     *(undefined4 *)(parseSymbol + 0x28) = 0xffffffff;
   }
-  if (chunk == (byte *)0x0) goto LAB_97bcc8c4;
+  if (chunk == (byte *)0x0) goto checkParseSymbol;
   chunkKind = *chunk;
   if (chunkKind == 2) {
-LAB_97bcc864:
+loopSetStreamType:
     streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(parseSymbol + 0x2c));
     *(uint *)(chunk + 0xc) = (streamType & 7) << 0x1a | *(uint *)(chunk + 0xc) & 0xe3ffffff;
     scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
     chunkWord = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(chunk + 0xc) & 0x1cffffff;
-LAB_97bcc8c0:
+loopStoreChunk:
     *(uint *)(chunk + 0xc) = chunkWord;
   }
   else if (chunkKind < 3) {
@@ -2169,11 +2169,11 @@ LAB_97bcc8c0:
       *(uint *)(chunk + 0xc) = (streamType & 7) << 0x1a | *(uint *)(chunk + 0xc) & 0xe3ffffff;
       scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
       chunkWord = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(chunk + 0xc) & 0x1cffffff;
-      goto LAB_97bcc8c0;
+      goto loopStoreChunk;
     }
   }
-  else if ((chunkKind == 3) || (chunkKind == 4)) goto LAB_97bcc864;
-LAB_97bcc8c4:
+  else if ((chunkKind == 3) || (chunkKind == 4)) goto loopSetStreamType;
+checkParseSymbol:
   if (*(int *)(parseSymbol + 0x34) == 0) {
     return chunk;
   }
@@ -2187,14 +2187,14 @@ LAB_97bcc8c4:
       isTypedKind = chunkKind == 0;
     }
     else {
-      if (chunkKind == 3) goto LAB_97bcc908;
+      if (chunkKind == 3) goto setSwizzleBits;
       isTypedKind = chunkKind == 4;
     }
     if (!isTypedKind) {
       return chunk;
     }
   }
-LAB_97bcc908:
+setSwizzleBits:
   swizzleBits = *(uint *)(chunk + 0xc) >> 0x18 & 3;
   if (swizzleBits < builtInInitialSwizzle) {
     swizzleBits = builtInInitialSwizzle;
@@ -2940,12 +2940,12 @@ int _InterpreterWriteDestination(machine, componentOffsets, bankIndex, swizzle, 
         componentSlot = (int *)(emulator + (((uint)((componentOffsets + element * 0x10) - emulator) >> 4) +
                                   machine[0x290] + (int)(*(short *)((unsigned char *)ghidra_home + 16)) & *(uint *)(programInfo + 0x88)) *
                                  0x10);
-        goto LAB_97bcd680;
+        goto setTargetX;
       }
     }
     componentSlot = (int *)(componentOffsets + element * 0x10);
   }
-LAB_97bcd680:
+setTargetX:
   targetX = componentTarget;
   (*(int *)((unsigned char *)ghidra_home + 4)) = componentOffsets;
   (*(int *)((unsigned char *)ghidra_home + 8)) = bankIndex;
@@ -3092,7 +3092,7 @@ int _InterpreterLoadSource(machine, componentOffsets, bankIndex, swizzle, indexI
       x = *(float *)(workPtr + componentSlot[swizzle & 0xff]);
     }
     else {
-      if (1 < valueType - 3) goto LAB_97bcdbfc;
+      if (1 < valueType - 3) goto setNegate;
       *result = (float)((double)CONCAT44(0x43300000,
                                            *(uint *)(workPtr + componentSlot[swizzleX]) ^ 0x80000000) -
                          DOUBLE_97c30a58);
@@ -3108,7 +3108,7 @@ int _InterpreterLoadSource(machine, componentOffsets, bankIndex, swizzle, indexI
     }
     result[3] = x;
   }
-LAB_97bcdbfc:
+setNegate:
   negate = (char)((uint)storageFlags >> 8);
   if (negate != '\0') {
     *result = -*result;
@@ -3486,7 +3486,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double
           }
           operandScratch = opVec;
           destUpdatesCC = (uint)instUpdateCC;
-          goto LAB_97bd043c;
+          goto callInterpreterWriteDestination;
         }
         operandScratch = opVec + 8;
         ((int (*)())_InterpreterLoadSource)(machine,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],
@@ -3824,7 +3824,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double
       destWord5 = inst[8];
       destElement = 3;
     }
-    goto LAB_97bd043c;
+    goto callInterpreterWriteDestination;
   }
   if ((opcode != 0x31) && (opcode != 0x36)) {
     loopIndex2 = 0;
@@ -3862,7 +3862,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double
       operandComponent = opVec[7];
       switch(opcode) {
       case 0:
-switchD_97bd0598_caseD_0:
+opcodeCase0:
         opVec[0] = opVec[4];
         opVec[1] = opVec[5];
         opVec[2] = opVec[6];
@@ -3881,7 +3881,7 @@ switchD_97bd0598_caseD_0:
           powResult = _pow((double)opVec[5],scratchF2);
           opVec[2] = (float)powResult;
         }
-        goto LAB_97bd1cd8;
+        goto storeOpVec6;
       case 2:
         opVec[0] = ABS(opVec[4]);
         opVec[1] = ABS(opVec[5]);
@@ -3896,7 +3896,7 @@ switchD_97bd0598_caseD_0:
         ceilResult = _ceil((double)opVec[6]);
         opVec[2] = (float)ceilResult;
         powValue = _ceil((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 4:
         floorValue_29 = (double)opVec[4];
         floorResult = _floor(floorValue_29);
@@ -3910,7 +3910,7 @@ switchD_97bd0598_caseD_0:
         opVec[2] = (float)(floorValue_29 - floorResult2);
         floorResult2 = _floor(floorValue);
         floorValue = floorValue - floorResult2;
-        goto LAB_97bd1440;
+        goto storeOpVec4;
       case 5:
         floorResult = _floor((double)opVec[4]);
         opVec[0] = (float)floorResult;
@@ -3919,9 +3919,9 @@ switchD_97bd0598_caseD_0:
         floorResult = _floor((double)opVec[6]);
         opVec[2] = (float)floorResult;
         powValue = _floor((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       default:
-        goto switchD_97bd0598_caseD_6;
+        goto opcodeCase6;
       case 7:
         if (opVec[4] <= 0.0) {
           if (0.0 <= opVec[4]) {
@@ -3956,27 +3956,27 @@ switchD_97bd0598_caseD_0:
         else {
           opVec[2] = 1.0;
         }
-        if (0.0 < opVec[7]) goto LAB_97bd1cd8;
-        if (0.0 <= opVec[7]) goto LAB_97bd1ce0;
+        if (0.0 < opVec[7]) goto storeOpVec6;
+        if (0.0 <= opVec[7]) goto loopStoreOpVec4;
         opVec[3] = -1.0;
         break;
       case 8:
         if (((opVec[4] == 0.0) && (opVec[5] == 0.0)) && (opVec[6] == 0.0)) {
-LAB_97bd0ab8:
+loopSetBoolBit:
           boolBit = 0;
-          if (opVec[7] == 0.0) goto LAB_97bd0ac8;
+          if (opVec[7] == 0.0) goto setI2dLo;
         }
         boolBit = 1;
-        goto LAB_97bd0ac8;
+        goto setI2dLo;
       case 9:
         boolBit = 0;
         if (((opVec[4] != 0.0) && (opVec[5] != 0.0)) && (opVec[6] != 0.0))
-        goto LAB_97bd0ab8;
-LAB_97bd0ac8:
+        goto loopSetBoolBit;
+setI2dLo:
         i2dLo = boolBit ^ 0x80000000;
         i2dHi = 0x43300000;
         intAsDouble = (double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0;
-LAB_97bd0cc8:
+loopStoreOpVec:
         opVec[0] = (float)intAsDouble;
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
@@ -3996,7 +3996,7 @@ LAB_97bd0cc8:
           opVec[2] = 0.0;
         }
         opVec[3] = 1.0;
-        if (opVec[7] != 0.0) goto LAB_97bd1ce0;
+        if (opVec[7] != 0.0) goto loopStoreOpVec4;
         break;
       case 0xb:
         vectorDimension = *(byte *)((int)inst + 5);
@@ -4027,7 +4027,7 @@ LAB_97bd0cc8:
         sqrtResult = _sqrt(ABS((double)opVec[6]));
         opVec[2] = (float)sqrtResult;
         powValue = _sqrt(ABS((double)opVec[7]));
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0xd:
         if (*(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U < 2) {
           sqrtResult = _sqrt(ABS((double)opVec[4]));
@@ -4038,11 +4038,11 @@ LAB_97bd0cc8:
           opVec[2] = (float)(1.0 / sqrtResult);
           sqrtResult = _sqrt(ABS((double)opVec[7]));
           floorValue = 1.0 / sqrtResult;
-          goto LAB_97bd1440;
+          goto storeOpVec4;
         }
         sqrtResult = _sqrt(ABS((double)opVec[7]));
         intAsDouble = 1.0 / sqrtResult;
-        goto LAB_97bd0cc8;
+        goto loopStoreOpVec;
       case 0xe:
         opVec[0] = 1.0 / opVec[7];
         opVec[1] = opVec[0];
@@ -4062,7 +4062,7 @@ LAB_97bd0cc8:
                 opVec[1] = opVec[0];
                 opVec[2] = opVec[0];
                 opVec[3] = opVec[0];
-                if (-1.8446744e+19 <= opVec[7]) goto LAB_97bd0d80;
+                if (-1.8446744e+19 <= opVec[7]) goto storeOpVec;
               }
               else {
                 opVec[0] = -1.8446744e+19;
@@ -4073,7 +4073,7 @@ LAB_97bd0cc8:
             }
           }
           else {
-LAB_97bd0d80:
+storeOpVec:
             opVec[0] = 1.0 / opVec[7];
             opVec[1] = opVec[0];
             opVec[2] = opVec[0];
@@ -4090,7 +4090,7 @@ LAB_97bd0d80:
       case 0x10:
         if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
           mathAccumulator = _exp2((double)opVec[7]);
-          goto LAB_97bd1d68;
+          goto loopStoreOpVec2;
         }
         exp2Result = _exp2((double)opVec[4]);
         opVec[0] = (float)exp2Result;
@@ -4099,14 +4099,14 @@ LAB_97bd0d80:
         exp2Result = _exp2((double)opVec[6]);
         opVec[2] = (float)exp2Result;
         powValue = _exp2((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x11:
         floorResult = _floor((double)opVec[7]);
         exp2Result2 = _exp2((double)(float)floorResult);
         opVec[0] = (float)exp2Result2;
         opVec[1] = (float)((double)opVec[7] - (double)(float)floorResult);
         exp2Value = _exp2((double)opVec[7]);
-        goto LAB_97bd0fd4;
+        goto storeOpVec2;
       case 0x12:
         dimension = (uint)*(byte *)((int)inst + 5);
         mathAccumulator = 0.0;
@@ -4119,9 +4119,9 @@ LAB_97bd0d80:
             dimension = dimension - 1;
           } while (dimension != 0);
         }
-LAB_97bd1924:
+loopSetMathAccumulator:
         mathAccumulator = _sqrt(mathAccumulator);
-LAB_97bd1d68:
+loopStoreOpVec2:
         opVec[0] = (float)mathAccumulator;
         opVec[1] = opVec[0];
         opVec[2] = opVec[0];
@@ -4134,7 +4134,7 @@ LAB_97bd1d68:
             mathAccumulator = 0.0;
           }
           mathAccumulator = _log2(mathAccumulator);
-          goto LAB_97bd1d68;
+          goto loopStoreOpVec2;
         }
         log2Value = (double)opVec[4];
         if (log2Value < 0.0) {
@@ -4159,7 +4159,7 @@ LAB_97bd1d68:
           mathTemp = 0.0;
         }
         powValue = _log2(mathTemp);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x14:
         mathTemp = ABS((double)opVec[7]);
         log2Result = _log2(mathTemp);
@@ -4171,7 +4171,7 @@ LAB_97bd1d68:
           mathTemp = 0.0;
         }
         exp2Value = _log2(mathTemp);
-LAB_97bd0fd4:
+storeOpVec2:
         opVec[2] = (float)exp2Value;
         opVec[3] = 1.0;
         break;
@@ -4200,10 +4200,10 @@ LAB_97bd0fd4:
         break;
       case 0x16:
         degRadFactor = 0.017453292;
-        goto LAB_97bd109c;
+        goto storeOpVec3;
       case 0x17:
         degRadFactor = 57.29578;
-LAB_97bd109c:
+storeOpVec3:
         opVec[0] = opVec[4] * degRadFactor;
         opVec[1] = opVec[5] * degRadFactor;
         opVec[2] = opVec[6] * degRadFactor;
@@ -4220,7 +4220,7 @@ LAB_97bd109c:
       case 0x19:
         if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
           mathAccumulator = _sin((double)opVec[7]);
-          goto LAB_97bd1d68;
+          goto loopStoreOpVec2;
         }
         sinResult = _sin((double)opVec[4]);
         opVec[0] = (float)sinResult;
@@ -4229,11 +4229,11 @@ LAB_97bd109c:
         sinResult = _sin((double)opVec[6]);
         opVec[2] = (float)sinResult;
         powValue = _sin((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x1a:
         if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
           mathAccumulator = _cos((double)opVec[7]);
-          goto LAB_97bd1d68;
+          goto loopStoreOpVec2;
         }
         cosResult = _cos((double)opVec[4]);
         opVec[0] = (float)cosResult;
@@ -4242,7 +4242,7 @@ LAB_97bd109c:
         cosResult = _cos((double)opVec[6]);
         opVec[2] = (float)cosResult;
         powValue = _cos((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x1b:
         tanResult = _tan((double)opVec[4]);
         opVec[0] = (float)tanResult;
@@ -4251,7 +4251,7 @@ LAB_97bd109c:
         tanResult = _tan((double)opVec[6]);
         opVec[2] = (float)tanResult;
         powValue = _tan((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x1c:
         asinResult = _asin((double)opVec[4]);
         opVec[0] = (float)asinResult;
@@ -4260,7 +4260,7 @@ LAB_97bd109c:
         asinResult = _asin((double)opVec[6]);
         opVec[2] = (float)asinResult;
         powValue = _asin((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x1d:
         acosResult = _acos((double)opVec[4]);
         opVec[0] = (float)acosResult;
@@ -4269,7 +4269,7 @@ LAB_97bd109c:
         acosResult = _acos((double)opVec[6]);
         opVec[2] = (float)acosResult;
         powValue = _acos((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x1e:
         if (inst[0xc] == 1) {
           atanResult = _atan((double)opVec[4]);
@@ -4279,7 +4279,7 @@ LAB_97bd109c:
           atanResult = _atan((double)opVec[6]);
           opVec[2] = (float)atanResult;
           powValue = _atan((double)opVec[7]);
-          goto LAB_97bd2010;
+          goto storeOpVec8;
         }
         opVec[0] = _atan2f(opVec[4],opVec[8]);
         opVec[1] = _atan2f(opVec[5],opVec[9]);
@@ -4332,7 +4332,7 @@ LAB_97bd109c:
         opVec[2] = (float)-(floorValue_31 * floorResult - mathTemp);
         floorResult = _floor((double)(float)(floorValue_29 / (double)operandComponent));
         floorValue = -((double)operandComponent * floorResult - floorValue_29);
-LAB_97bd1440:
+storeOpVec4:
         opVec[3] = (float)floorValue;
         break;
       case 0x22:
@@ -4366,11 +4366,11 @@ LAB_97bd1440:
         opVec[2] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if (opVec[7] != 0.0) {
-LAB_97bd17d0:
+loopSetBoolBit8:
           boolBit8 = 0;
-          if (opVec[0xb] != 0.0) goto LAB_97bd17ec;
+          if (opVec[0xb] != 0.0) goto loopSetBoolBit82;
         }
-        goto LAB_97bd17f0;
+        goto setI2dLo2;
       case 0x25:
         boolBit = 0;
         if ((opVec[4] != 0.0) || (opVec[8] != 0.0)) {
@@ -4390,45 +4390,45 @@ LAB_97bd17d0:
         }
         opVec[2] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
-        if (opVec[7] == 0.0) goto LAB_97bd17d0;
-LAB_97bd17ec:
+        if (opVec[7] == 0.0) goto loopSetBoolBit8;
+loopSetBoolBit82:
         boolBit8 = 1;
-        goto LAB_97bd17f0;
+        goto setI2dLo2;
       case 0x26:
         boolBit = 0;
         if (opVec[4] == 0.0) {
           if (opVec[8] != 0.0) {
-LAB_97bd16cc:
+loopSetBoolBit2:
             boolBit = 1;
           }
         }
-        else if (opVec[8] == 0.0) goto LAB_97bd16cc;
+        else if (opVec[8] == 0.0) goto loopSetBoolBit2;
         boolBit8 = 0;
         opVec[0] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
         if (opVec[5] == 0.0) {
           if (opVec[9] != 0.0) {
-LAB_97bd172c:
+loopSetBoolBit83:
             boolBit8 = 1;
           }
         }
-        else if (opVec[9] == 0.0) goto LAB_97bd172c;
+        else if (opVec[9] == 0.0) goto loopSetBoolBit83;
         boolBit = 0;
         opVec[1] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
         ;
         if (opVec[6] == 0.0) {
           if (opVec[10] != 0.0) {
-LAB_97bd178c:
+loopSetBoolBit3:
             boolBit = 1;
           }
         }
-        else if (opVec[10] == 0.0) goto LAB_97bd178c;
+        else if (opVec[10] == 0.0) goto loopSetBoolBit3;
         boolBit8 = 0;
         opVec[2] = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0
                               );
-        if (opVec[7] == 0.0) goto LAB_97bd17d0;
-        if (opVec[0xb] == 0.0) goto LAB_97bd17ec;
-LAB_97bd17f0:
+        if (opVec[7] == 0.0) goto loopSetBoolBit8;
+        if (opVec[0xb] == 0.0) goto loopSetBoolBit82;
+setI2dLo2:
         i2dLo = boolBit8 ^ 0x80000000;
         i2dHi = 0x43300000;
         opVec[3] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
@@ -4491,7 +4491,7 @@ LAB_97bd17f0:
               dimension = dimension - 1;
             } while (dimension != 0);
           }
-          goto LAB_97bd1924;
+          goto loopSetMathAccumulator;
         }
         opVec[0] = 1.0;
         opVec[1] = opVec[5] * opVec[9];
@@ -4513,7 +4513,7 @@ LAB_97bd17f0:
         }
         opVec[3] = opVec[0xb];
         if (opVec[7] < opVec[0xb]) {
-LAB_97bd2210:
+loopStoreOpVec3:
           opVec[3] = operandComponent;
         }
         break;
@@ -4531,7 +4531,7 @@ LAB_97bd2210:
           opVec[2] = opVec[6];
         }
         opVec[3] = opVec[0xb];
-        if (opVec[0xb] < opVec[7]) goto LAB_97bd2210;
+        if (opVec[0xb] < opVec[7]) goto loopStoreOpVec3;
         break;
       case 0x2e:
         scratchF6 = (double)opVec[10];
@@ -4543,7 +4543,7 @@ LAB_97bd2210:
                               (double)(float)(scratchF8 * (double)opVec[5]));
         opVec[1] = (float)((double)opVec[6] * scratchF8 -
                               (double)(float)(scratchF6 * (double)opVec[4]));
-        goto LAB_97bd1ce0;
+        goto loopStoreOpVec4;
       case 0x2f:
         dimension = (uint)*(byte *)((int)inst + 5);
         dotProduct = 0.0;
@@ -4583,7 +4583,7 @@ LAB_97bd2210:
           opVec[2] = 0.0;
         }
         cmpResult = opVec[0xb] <= opVec[7];
-        goto LAB_97bd1c60;
+        goto storeOpVec5;
       case 0x33:
         if (opVec[4] <= opVec[8]) {
           opVec[0] = 0.0;
@@ -4603,8 +4603,8 @@ LAB_97bd2210:
         else {
           opVec[2] = 1.0;
         }
-        if (opVec[7] <= opVec[0xb]) goto LAB_97bd1ce0;
-        goto LAB_97bd1cd8;
+        if (opVec[7] <= opVec[0xb]) goto loopStoreOpVec4;
+        goto storeOpVec6;
       case 0x34:
         opVec[0] = 1.0;
         if (opVec[8] < opVec[4]) {
@@ -4619,10 +4619,10 @@ LAB_97bd2210:
           opVec[2] = 0.0;
         }
         cmpResult = opVec[7] <= opVec[0xb];
-LAB_97bd1c60:
+storeOpVec5:
         opVec[3] = 1.0;
         if (!cmpResult) {
-LAB_97bd1ce0:
+loopStoreOpVec4:
           opVec[3] = 0.0;
         }
         break;
@@ -4645,8 +4645,8 @@ LAB_97bd1ce0:
         else {
           opVec[2] = 1.0;
         }
-        if (opVec[0xb] <= opVec[7]) goto LAB_97bd1ce0;
-LAB_97bd1cd8:
+        if (opVec[0xb] <= opVec[7]) goto loopStoreOpVec4;
+storeOpVec6:
         opVec[3] = 1.0;
         break;
       case 0x37:
@@ -4659,7 +4659,7 @@ LAB_97bd1cd8:
         if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
           scratchF2 = (double)opVec[0xb];
           mathAccumulator = _pow((double)opVec[7],scratchF2);
-          goto LAB_97bd1d68;
+          goto loopStoreOpVec2;
         }
         powResult = _pow((double)opVec[4],(double)opVec[8]);
         opVec[0] = (float)powResult;
@@ -4669,7 +4669,7 @@ LAB_97bd1cd8:
         scratchF2 = (double)opVec[0xb];
         opVec[2] = (float)powResult;
         powValue = _pow((double)opVec[7],scratchF2);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x39:
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
@@ -4722,7 +4722,7 @@ LAB_97bd1cd8:
           opVec[1] = (float)truncResult;
           truncResult = _trunc((double)(opVec[6] / opVec[10]));
           operandComponent = opVec[7] / opVec[0xb];
-          goto LAB_97bd200c;
+          goto storeOpVec7;
         }
         break;
       case 0x3b:
@@ -4738,7 +4738,7 @@ LAB_97bd1cd8:
             dimension = dimension - 1;
           } while (dimension != 0);
         }
-        if (dotProduct < 0.0) goto switchD_97bd0598_caseD_0;
+        if (dotProduct < 0.0) goto opcodeCase0;
         opVec[0] = -opVec[4];
         opVec[1] = -opVec[5];
         opVec[2] = -opVec[6];
@@ -4787,7 +4787,7 @@ LAB_97bd1cd8:
         opVec[3] = srcC[3];
         if ((operandComponent < srcC[3]) &&
            (operandComponent = opVec[0xb], opVec[3] = opVec[7], opVec[7] <= opVec[0xb]))
-        goto LAB_97bd2210;
+        goto loopStoreOpVec3;
         break;
       case 0x3e:
         opVec[0] = srcC[0];
@@ -4949,11 +4949,11 @@ LAB_97bd1cd8:
           if (1 < *(int *)(programInfo + 0x38) - 0x8b30U) {
             opVec[7] = 1.0;
             operandComponent = sourceComponentW;
-            goto LAB_97bd29a8;
+            goto setProgramInfo;
           }
         }
         else {
-LAB_97bd29a8:
+setProgramInfo:
           programInfo = *(int *)(emulator + 0xd80);
         }
         texLodBias = (double)operandComponent;
@@ -5009,7 +5009,7 @@ LAB_97bd29a8:
           d2iScratch4 = (longlong)(int)intComponent;
         }
         machine[0x290] = intComponent;
-        goto switchD_97bd0598_caseD_6;
+        goto opcodeCase6;
       case 0x4b:
         in_r5_artifact = (float *)inst[4];
         conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
@@ -5026,19 +5026,19 @@ LAB_97bd29a8:
               in_r5_artifact = (float *)inst[4];
               conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
-              if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
+              if (conditionResult == 0) goto opcodeCase6;
             }
           }
         }
       case 0x54:
       case 0x58:
       case 0x6b:
-switchD_97bd0598_caseD_54:
+opcodeCase54:
         nextInst = (int *)((**(int **)(emulator + 0xd80) + inst[2] * 0x11c) - 0x11c);
         if ((int *)(*(int **)(emulator + 0xd80))[1] < nextInst) {
           nextInst = (int *)0x0;
         }
-switchD_97bd0598_caseD_6:
+opcodeCase6:
         fallsThrough = false;
         break;
       case 0x4c:
@@ -5057,14 +5057,14 @@ switchD_97bd0598_caseD_6:
               in_r5_artifact = (float *)inst[4];
               conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
-              if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
+              if (conditionResult == 0) goto opcodeCase6;
             }
           }
         }
         if ((uint *)machine[0x29b] + 1 <= machine + 0x29b) {
           *(uint *)machine[0x29b] = (uint)nextInst;
           machine[0x29b] = machine[0x29b] + 4;
-          goto switchD_97bd0598_caseD_54;
+          goto opcodeCase54;
         }
         break;
       case 0x4d:
@@ -5083,7 +5083,7 @@ switchD_97bd0598_caseD_6:
               in_r5_artifact = (float *)inst[4];
               conditionResult = ((int (*)())_InterpreterTestCR)(machine,inst[3],in_r5_artifact,inst[5],inst[6],inst[7],
                                           inst[8],inst[9],inst[10],inst[0xb],3);
-              if (conditionResult == 0) goto switchD_97bd0598_caseD_6;
+              if (conditionResult == 0) goto opcodeCase6;
             }
           }
         }
@@ -5094,16 +5094,16 @@ switchD_97bd0598_caseD_6:
           machine[0x29b] = (int)poppedStackTop;
           nextInst = *(int **)(callStackTop + -4);
         }
-        goto switchD_97bd0598_caseD_6;
+        goto opcodeCase6;
       case 0x4f:
         if (((opVec[4] < 0.0) || (opVec[5] < 0.0)) ||
            ((opVec[6] < 0.0 || (opVec[7] < 0.0)))) {
           machine[0x296] = 1;
         }
-        goto switchD_97bd0598_caseD_6;
+        goto opcodeCase6;
       case 0x55:
         if ((((opVec[4] == 0.0) && (opVec[5] == 0.0)) && (opVec[6] == 0.0)) &&
-           (opVec[7] == 0.0)) goto switchD_97bd0598_caseD_54;
+           (opVec[7] == 0.0)) goto opcodeCase54;
         break;
       case 0x68:
         dimension = (uint)*(byte *)((int)inst + 5);
@@ -5146,13 +5146,13 @@ switchD_97bd0598_caseD_6:
           opVec[1] = (float)truncResult;
           truncResult = _trunc((double)opVec[6]);
           operandComponent = opVec[7];
-LAB_97bd200c:
+storeOpVec7:
           opVec[2] = (float)truncResult;
           powValue = _trunc((double)operandComponent);
-          goto LAB_97bd2010;
+          goto storeOpVec8;
         }
         if ((inst[9] != 4) || ((inst[0x13] != 1 && (inst[0x13] != 3))))
-        goto switchD_97bd0598_caseD_0;
+        goto opcodeCase0;
         opVec[0] = 1.0;
         if (opVec[4] == 0.0) {
           opVec[0] = 0.0;
@@ -5166,7 +5166,7 @@ LAB_97bd200c:
           opVec[2] = 0.0;
         }
         opVec[3] = 1.0;
-        if (opVec[7] == 0.0) goto LAB_97bd1ce0;
+        if (opVec[7] == 0.0) goto loopStoreOpVec4;
         break;
       case 0x6d:
         opVec[0] = srcC[0];
@@ -5199,7 +5199,7 @@ LAB_97bd200c:
         expValue = _exp((double)opVec[6]);
         opVec[2] = (float)expValue;
         powValue = _exp((double)opVec[7]);
-        goto LAB_97bd2010;
+        goto storeOpVec8;
       case 0x70:
         logValue = _log((double)opVec[4]);
         opVec[0] = (float)logValue;
@@ -5208,7 +5208,7 @@ LAB_97bd200c:
         logValue = _log((double)opVec[6]);
         opVec[2] = (float)logValue;
         powValue = _log((double)opVec[7]);
-LAB_97bd2010:
+storeOpVec8:
         opVec[3] = (float)powValue;
       }
       if (saturate != '\0') {
@@ -5281,26 +5281,26 @@ LAB_97bd2010:
     if (*(char *)((int)inst + 0x21) == '\x01') {
       saturate = *(char *)((int)inst + 5);
       if (saturate == '\x01') {
-LAB_97bd0310:
+loopStoreOpVec5:
         opVec[0] = 1.0;
-        if (opVec[5] == opVec[9]) goto LAB_97bd0328;
+        if (opVec[5] == opVec[9]) goto storeOpVec9;
       }
       else if (saturate == '\x02') {
-        if (opVec[4] == opVec[8]) goto LAB_97bd0310;
+        if (opVec[4] == opVec[8]) goto loopStoreOpVec5;
       }
       else if (saturate == '\x03') {
         if ((opVec[4] == opVec[8]) &&
            (fallsThrough = opVec[5] == opVec[9], opVec[5] = opVec[6],
-           opVec[9] = opVec[10], fallsThrough)) goto LAB_97bd0310;
+           opVec[9] = opVec[10], fallsThrough)) goto loopStoreOpVec5;
       }
       else {
-        if (saturate != '\x04') goto LAB_97bd0328;
+        if (saturate != '\x04') goto storeOpVec9;
         if (((opVec[4] == opVec[8]) && (opVec[5] == opVec[9])) &&
            (opVec[5] = opVec[7], opVec[9] = opVec[0xb],
-           opVec[6] == opVec[10])) goto LAB_97bd0310;
+           opVec[6] == opVec[10])) goto loopStoreOpVec5;
       }
       opVec[0] = 0.0;
-      goto LAB_97bd0328;
+      goto storeOpVec9;
     }
     opVec[0] = 1.0;
     if (opVec[4] != opVec[8]) {
@@ -5348,7 +5348,7 @@ LAB_97bd0310:
       operandComponent = opVec[2];
       logicComponent = opVec[1];
       if (opVec[0] != 0.0) goto joined_r0x97bd003c;
-LAB_97bd01a0:
+loopSetI2dLo:
       i2dLo = i2dLo ^ 0x80000000;
       i2dHi = 0x43300000;
       opVec[0] = (float)((double)CONCAT44(0x43300000,i2dLo) - 4503601774854144.0);
@@ -5384,7 +5384,7 @@ joined_r0x97bd003c:
         if ((logicComponent != 0.0) && (i2dLo = 0, operandComponent != 0.0)) {
           i2dLo = 1;
         }
-        goto LAB_97bd01a0;
+        goto loopSetI2dLo;
       }
     }
     else if (elementCount == 4) {
@@ -5413,10 +5413,10 @@ joined_r0x97bd003c:
       } while (loopIndex < 4);
       i2dLo = 0;
       if ((opVec[0] == 0.0) || (operandComponent = opVec[3], logicComponent = opVec[2], opVec[1] == 0.0)
-         ) goto LAB_97bd01a0;
+         ) goto loopSetI2dLo;
       goto joined_r0x97bd003c;
     }
-LAB_97bd0328:
+storeOpVec9:
     opVec[3] = opVec[0];
     opVec[1] = opVec[0];
     opVec[2] = opVec[0];
@@ -5439,7 +5439,7 @@ LAB_97bd0328:
   destStorageFlags = inst[7];
   destWord5 = inst[8];
   destElement = 0;
-LAB_97bd043c:
+callInterpreterWriteDestination:
   ((int (*)())_InterpreterWriteDestination)(machine,destOffsetTable,destBankIndex,destSwizzle,destIndexInfo,destStorageFlags,destWord5,destValueType,destWriteMask,destConditionSwizzleZW,destElement,operandScratch,
              destUpdatesCC);
   return nextInst;

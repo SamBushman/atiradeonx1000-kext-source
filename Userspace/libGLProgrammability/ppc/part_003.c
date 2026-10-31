@@ -67,7 +67,7 @@ int _lFloatConst(lexemeBuf, mantissaLength, triggerChar, token)
     }
   }
   cppGlobalSlot = PTR__cpp_a7b7c0a4;
-  if ((currentChar != 0x65) && (currentChar != 0x45)) goto LAB_97b88e60;
+  if ((currentChar != 0x65) && (currentChar != 0x45)) goto checkWriteIndex;
   *(char *)((int)lexemeBuf + writeIndex) = (char)currentChar;
   nextWriteIndex = writeIndex + 1;
   exponentSign = 1;
@@ -76,7 +76,7 @@ int _lFloatConst(lexemeBuf, mantissaLength, triggerChar, token)
   if (currentChar == 0x2b) {
     *(undefined1 *)((int)lexemeBuf + nextWriteIndex) = 0x2b;
     cppState = *(int *)cppGlobalSlot;
-LAB_97b88de8:
+loopSetCurrentChar:
     currentChar = (**(code **)(*(int *)(cppState + 0x20) + 8))(*(int *)(cppState + 0x20),token);
     scratchR4 = r4Out4;
     nextWriteIndex = writeIndex + 2;
@@ -87,7 +87,7 @@ LAB_97b88de8:
       *(undefined1 *)((int)lexemeBuf + nextWriteIndex) = 0x2d;
       cppState = *(int *)cppGlobalSlot;
       exponentSign = -1;
-      goto LAB_97b88de8;
+      goto loopSetCurrentChar;
     }
   }
   writeIndex = nextWriteIndex;
@@ -105,7 +105,7 @@ LAB_97b88de8:
     _CPPErrorToInfoLog("ERROR___ERROR_IN_EXPONENT",scratchR4,triggerChar,tokenCopy,scratchR7,scratchR8,scratchR9);
   }
   exponentValue = exponentValue * exponentSign;
-LAB_97b88e60:
+checkWriteIndex:
   if (writeIndex == 0) {
     *lexemeBuf = 0x302e3000;
     floatValue = 0.0;
@@ -163,7 +163,7 @@ int _byte_scan(unusedArg1, token, scratchR5, scratchR6, scratchR7, scratchR8)
   
   constantValue = 0;
   cppContext = *(int *)PTR__cpp_a7b7c0a4;
-LAB_97b88f18:
+loopStoreToken:
   *token = 0;
   inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
   while (((inputChar == 0x20 || (inputChar == 9)) || (inputChar == 0xd))) {
@@ -176,7 +176,7 @@ LAB_97b88f18:
   }
   lexemeLength = 0;
   if (0x7d < inputChar + 1U) {
-LAB_97b89cb4:
+loopReturnInputChar:
     return inputChar;
   }
   digitValue = (inputChar + 1U) * 4;
@@ -228,7 +228,7 @@ LAB_97b89cb4:
   case 0x5d:
   case 0x60:
   case 0x7b:
-    goto LAB_97b89cb4;
+    goto loopReturnInputChar;
   case 0x21:
     inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     if (inputChar != 0x3d) {
@@ -240,9 +240,9 @@ LAB_97b89cb4:
     inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     overflowReported = inputChar == 0x22;
     scratchR4 = r4Out9;
-    if (((overflowReported) || (inputChar == 10)) || (inputChar == -1)) goto LAB_97b89c74;
+    if (((overflowReported) || (inputChar == 10)) || (inputChar == -1)) goto loopStoreStringLiteralText;
     lexemeCursor = stringLiteralText;
-    goto LAB_97b89bf4;
+    goto loopCheckInputChar;
   case 0x25:
     inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     if (inputChar == 0x3d) {
@@ -302,7 +302,7 @@ LAB_97b89cb4:
     (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
     lexemeLength = 0;
     currentChar = 0x2e;
-    goto LAB_97b89a54;
+    goto setResult;
   case 0x2f:
     inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     if (inputChar != 0x2f) break;
@@ -312,7 +312,7 @@ LAB_97b89cb4:
         return 10;
       }
     } while (inputChar != -1);
-switchD_97b88fcc_caseD_ffffffff:
+inputCharCaseffffffff:
     return -1;
   case 0x30:
     *(char *)(token + 3) = (char)inputChar;
@@ -354,7 +354,7 @@ switchD_97b88fcc_caseD_ffffffff:
         _CPPErrorToInfoLog("ERROR___ERROR_IN_HEX_CONSTANT",r4Out1,scratchR5,scratchR6,scratchR7,
                            scratchR8,digitValue);
       }
-      goto LAB_97b89458;
+      goto storeToken;
     }
     digitValue = currentChar - 0x30;
     if (digitValue < 8) {
@@ -381,8 +381,8 @@ switchD_97b88fcc_caseD_ffffffff:
         scratchR4 = r4Out3;
       } while (digitValue < 8);
       if ((((currentChar == 0x2e) || (currentChar == 0x65)) || ((currentChar == 0x66 || ((currentChar == 0x68 || (currentChar == 0x78)))))) ||
-         (currentChar == 0x45)) goto LAB_97b89a54;
-LAB_97b89458:
+         (currentChar == 0x45)) goto setResult;
+storeToken:
       *(undefined1 *)((int)token + lexemeLength + 0xc) = 0;
       (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),currentChar,token);
       *token = constantValue;
@@ -390,7 +390,7 @@ LAB_97b89458:
     }
     inputChar = 0x30;
     (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),currentChar,token);
-switchD_97b88fcc_caseD_31:
+inputCharCase31:
     lexemeCursor = (undefined1 *)((int)token + lexemeLength + 0xc);
     currentChar = inputChar;
     do {
@@ -434,7 +434,7 @@ switchD_97b88fcc_caseD_31:
       }
       return 0x10f;
     }
-LAB_97b89a54:
+setResult:
     result = ((int (*)())_lFloatConst)(token + 3,lexemeLength,currentChar,token);
     return result;
   case 0x31:
@@ -446,7 +446,7 @@ LAB_97b89a54:
   case 0x37:
   case 0x38:
   case 0x39:
-    goto switchD_97b88fcc_caseD_31;
+    goto inputCharCase31;
   case 0x3a:
     inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     if (inputChar != 0x3e) {
@@ -538,7 +538,7 @@ LAB_97b89a54:
     }
     return 0x11b;
   case -1:
-    goto switchD_97b88fcc_caseD_ffffffff;
+    goto inputCharCaseffffffff;
   }
   if (inputChar != 0x2a) {
     if (inputChar != 0x3d) {
@@ -556,7 +556,7 @@ LAB_97b89a54:
         loopIndex = loopIndex + 1;
       }
       if (lexemeLength == -1) {
-LAB_97b89b60:
+loopCallCPPErrorToInfoLog:
         _CPPErrorToInfoLog("ERROR___EOF_IN_COMMENT",scratchR4,scratchR5,scratchR6,scratchR7,scratchR8,digitValue);
         return -1;
       }
@@ -565,19 +565,19 @@ LAB_97b89b60:
     }
     lexemeLength = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     scratchR4 = r4Out8;
-    if (lexemeLength == -1) goto LAB_97b89b60;
+    if (lexemeLength == -1) goto loopCallCPPErrorToInfoLog;
   } while (lexemeLength != 0x2f);
   if (loopIndex != 0) {
     return 10;
   }
-  goto LAB_97b88f18;
-LAB_97b89bf4:
+  goto loopStoreToken;
+loopCheckInputChar:
   if (inputChar == 0x5c) {
     inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     overflowReported = inputChar == 0x22;
     scratchR4 = r4Out10;
     if ((inputChar == 10) || (inputChar == -1)) {
-LAB_97b89c74:
+loopStoreStringLiteralText:
       stringLiteralText[lexemeLength] = 0;
       if (!overflowReported) {
         _CPPErrorToInfoLog("ERROR___CPP_EOL_IN_STRING",scratchR4,scratchR5,scratchR6,scratchR7,scratchR8,digitValue);
@@ -596,8 +596,8 @@ LAB_97b89c74:
     scratchR4 = r4Out11;
   }
   overflowReported = inputChar == 0x22;
-  if (((overflowReported) || (inputChar == 10)) || (inputChar == -1)) goto LAB_97b89c74;
-  goto LAB_97b89bf4;
+  if (((overflowReported) || (inputChar == 10)) || (inputChar == -1)) goto loopStoreStringLiteralText;
+  goto loopCheckInputChar;
 }
 
 /* _yylex_CPP @ 0x97b89cd0 (452 bytes) */
@@ -659,7 +659,7 @@ int _yylex_CPP(outBuf, maxLengthOrResult)
       if ((token != 0x10b) && (token != 0x10f)) {
         *(undefined4 *)(*(int *)cppGlobalSlot + 0x28) = 1;
         atomTable = *(undefined4 *)atomTableSlot;
-        goto LAB_97b89e08;
+        goto setTokenText;
       }
       tokenText = tokenTextBuf;
       *(undefined4 *)(*(int *)cppGlobalSlot + 0x28) = 1;
@@ -668,7 +668,7 @@ int _yylex_CPP(outBuf, maxLengthOrResult)
       *(undefined4 *)(*(int *)cppGlobalSlot + 0x28) = 1;
       atomTable = *(undefined4 *)atomTableSlot;
       token = tokenAtom;
-LAB_97b89e08:
+setTokenText:
       tokenText = (char *)_GetStringOfAtom(atomTable,token);
     }
     if (tokenText != (char *)0x0) {
@@ -938,13 +938,13 @@ int _LookUpSymbol(scope, name)
   int nextScope;
   
   nextScope = _CurrentScope;
-  if (scope != 0) goto LAB_97b8a2f8;
+  if (scope != 0) goto setSymbol;
   while( true ) {
     scope = nextScope;
     if (scope == 0) {
       return 0;
     }
-LAB_97b8a2f8:
+setSymbol:
     symbol = ((int (*)())_LookUpLocalSymbol)(scope,name);
     if (symbol != 0) break;
     nextScope = *(int *)(scope + 8);
@@ -992,12 +992,12 @@ int _idstr(srcCursor, pool)
     if (isAlnum == 0) {
       if (*srcCursor - 0x2e < 2) {
         *dstCursor = 0x5f;
-        goto LAB_97b8a3f8;
+        goto setDstCursor;
       }
     }
     else {
       *dstCursor = *srcCursor;
-LAB_97b8a3f8:
+setDstCursor:
       dstCursor = dstCursor + 1;
     }
     srcCursor = srcCursor + 1;
@@ -1144,7 +1144,7 @@ int _RecordToken(ts, token, yylvalpp)
   }
   ((int (*)())_lAddByte)(ts,tokenByte);
   if (token == 0x10e) {
-LAB_97b8a6cc:
+loopSetTextCursor:
     textCursor = (byte *)_GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,yylvalpp[2]);
     ch = *textCursor;
     while (ch != 0) {
@@ -1167,7 +1167,7 @@ LAB_97b8a6cc:
       if (1 < token - 0x116) {
         return;
       }
-      goto LAB_97b8a6cc;
+      goto loopSetTextCursor;
     }
     textCursor = (byte *)(yylvalpp + 3);
     ch = *(byte *)(yylvalpp + 3);
@@ -1223,7 +1223,7 @@ int _ReadToken(ts, yylvalpp)
     token = token + 0x80;
   }
   if (token == 0x10e) {
-LAB_97b8a810:
+loopSetLoopIndex:
     loopIndex = 0;
     byteValue = ((int (*)())_lReadByte)(ts);
     ch = (int)(char)byteValue;
@@ -1245,7 +1245,7 @@ LAB_97b8a810:
       return 0x10e;
     }
     assertLine = 0x140;
-LAB_97b8aac8:
+loopCallEprintf:
     ___eprintf("%s:%u: failed assertion `%s\'\n",
                "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/preprocessor/tokens.c"
                ,assertLine,"ch == \'\\0\'");
@@ -1254,7 +1254,7 @@ LAB_97b8aac8:
     if (token < 0x10f) {
       if (token == 0x28) {
         ival = ((int (*)())_lReadByte)(ts);
-        goto LAB_97b8aaf0;
+        goto storeYylvalpp;
       }
       if (token != 0x10b) {
         return token;
@@ -1281,7 +1281,7 @@ LAB_97b8aac8:
         return 0x10b;
       }
       assertLine = 0x158;
-      goto LAB_97b8aac8;
+      goto loopCallEprintf;
     }
     if (token == 0x116) {
       loopIndex2 = 0;
@@ -1304,7 +1304,7 @@ LAB_97b8aac8:
       if (token != 0x117) {
         return token;
       }
-      goto LAB_97b8a810;
+      goto loopSetLoopIndex;
     }
     if (token != 0x10f) {
       return token;
@@ -1325,12 +1325,12 @@ LAB_97b8aac8:
     lexemeBuf[loopIndex] = 0;
     if (ch != 0) {
       assertLine = 0x168;
-      goto LAB_97b8aac8;
+      goto loopCallEprintf;
     }
   }
   _strcpy(yylvalpp + 3,lexemeBuf);
   ival = _atoi(yylvalpp + 3);
-LAB_97b8aaf0:
+storeYylvalpp:
   *yylvalpp = ival;
   return token;
 }
@@ -1466,15 +1466,15 @@ int _DumpTokenStream(unusedArg1, ts, yylvalpp)
     switch(tokenOrFormatArg) {
     case 0x10b:
     case 0x10f:
-      goto switchD_97b8ae00_caseD_10b;
+      goto tokenOrFormatArgCase10b;
     default:
-      if (0x7e < tokenOrFormatArg) goto LAB_97b8ae70;
+      if (0x7e < tokenOrFormatArg) goto setTokenOrFormatArg;
       format = "%c";
       break;
     case 0x10e:
     case 0x117:
       tokenOrFormatArg = *(int *)(yylvalpp + 8);
-LAB_97b8ae70:
+setTokenOrFormatArg:
       tokenOrFormatArg = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,tokenOrFormatArg);
       format = "%s ";
       break;
@@ -1483,7 +1483,7 @@ LAB_97b8ae70:
       format = "\"%s\"";
     }
     _sprintf(dumpBuf,format,tokenOrFormatArg);
-switchD_97b8ae00_caseD_10b:
+tokenOrFormatArgCase10b:
     _CPPDebugLogMsg(dumpBuf);
   } while( true );
 }
@@ -2915,20 +2915,20 @@ int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, line, sym
       (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
       typeTemp1Constructed = false;
       if ((stackTypeBits >> 0x13 & 0x3f) == 0xe) {
-LAB_97b8cff8:
+loopSetOperandInvalid:
         operandInvalid = true;
-        if (typeTemp1Constructed) goto LAB_97b8d008;
+        if (typeTemp1Constructed) goto storeTypeTemp1;
       }
       else {
         (**(code **)(*intermTyped1 + 0x38))(typeTemp1,intermTyped1);
         typeTemp1Constructed = true;
-        if ((typeTemp1Bits >> 0x13 & 0x3f) == 3) goto LAB_97b8cff8;
-LAB_97b8d008:
+        if ((typeTemp1Bits >> 0x13 & 0x3f) == 3) goto loopSetOperandInvalid;
+storeTypeTemp1:
         typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       }
-      goto LAB_97b8d01c;
+      goto setStackType;
     default:
-      goto switchD_97b8cd3c_default;
+      goto opDefault;
     case 0x21:
     case 0x22:
     case 0x23:
@@ -2942,17 +2942,17 @@ LAB_97b8d008:
       if ((stackTypeBits & 0x400) == 0) {
         typeTemp1Live = true;
         (**(code **)(*intermTyped1 + 0x38))(typeTemp1,intermTyped1);
-        if ((typeTemp1Bits & 0x200) != 0) goto LAB_97b8ce68;
+        if ((typeTemp1Bits & 0x200) != 0) goto setOperandInvalid;
         typeTemp2Live = true;
         (**(code **)(*intermTyped1 + 0x38))(typeTemp2,intermTyped1);
         if ((1 < (int)(typeTemp2Bits << 0xd | typeTemp2Bits >> 0x13) >> 0x18) && ((typeTemp2Bits & 0x400) == 0))
-        goto LAB_97b8ce68;
+        goto setOperandInvalid;
         typeTemp3Live = true;
         (**(code **)(*intermTyped1 + 0x38))(typeTemp3,intermTyped1);
-        if ((typeTemp3Bits >> 0x13 & 0x3f) == 0xe) goto LAB_97b8ce68;
+        if ((typeTemp3Bits >> 0x13 & 0x3f) == 0xe) goto setOperandInvalid;
       }
       else {
-LAB_97b8ce68:
+setOperandInvalid:
         operandInvalid = true;
         if (!typeTemp3Live) break;
       }
@@ -2969,21 +2969,21 @@ LAB_97b8ce68:
       if ((stackTypeBits >> 0x13 & 0x3f) == 3) {
         typeTemp1Live = true;
         (**(code **)(*intermTyped1 + 0x38))(typeTemp1,intermTyped1);
-        if ((typeTemp1Bits & 0x400) != 0) goto LAB_97b8cf4c;
+        if ((typeTemp1Bits & 0x400) != 0) goto setOperandInvalid2;
         typeTemp2Live = true;
         (**(code **)(*intermTyped1 + 0x38))(typeTemp2,intermTyped1);
-        if ((typeTemp2Bits & 0x200) != 0) goto LAB_97b8cf4c;
+        if ((typeTemp2Bits & 0x200) != 0) goto setOperandInvalid2;
         typeTemp3Live = true;
         (**(code **)(*intermTyped1 + 0x38))(typeTemp3Alt,intermTyped1);
         if ((1 < (int)(typeTemp3AltBits << 0xd | typeTemp3AltBits >> 0x13) >> 0x18) && ((typeTemp3AltBits & 0x400) == 0))
-        goto LAB_97b8cf4c;
-LAB_97b8cf5c:
+        goto setOperandInvalid2;
+loopStoreTypeTemp3Alt:
         typeTemp3Alt[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       }
       else {
-LAB_97b8cf4c:
+setOperandInvalid2:
         operandInvalid = true;
-        if (typeTemp3Live) goto LAB_97b8cf5c;
+        if (typeTemp3Live) goto loopStoreTypeTemp3Alt;
       }
     }
     if (typeTemp2Live) {
@@ -2992,26 +2992,26 @@ LAB_97b8cf4c:
     if (typeTemp1Live) {
       typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
-LAB_97b8d01c:
+setStackType:
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     if (operandInvalid) {
       return (int *)0x0;
     }
   }
-switchD_97b8cd3c_default:
+opDefault:
   needsConversion = false;
   (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
   typeTemp1Constructed = false;
   if (stackTypeStructure == 0) {
-LAB_97b8d08c:
+loopSetNeedsConversion:
     needsConversion = true;
-    if (typeTemp1Constructed) goto LAB_97b8d098;
+    if (typeTemp1Constructed) goto storeTypeTemp12;
   }
   else {
     (**(code **)(*intermTyped2 + 0x38))(typeTemp1,intermTyped2);
     typeTemp1Constructed = true;
-    if (typeTemp1Structure == 0) goto LAB_97b8d08c;
-LAB_97b8d098:
+    if (typeTemp1Structure == 0) goto loopSetNeedsConversion;
+storeTypeTemp12:
     typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
@@ -3405,23 +3405,23 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
       typeTemp2Live = true;
       (**(code **)(*operandNode + 0x38))(typeTemp2,operandNode);
       scratchR4 = r4Out2;
-      if ((typeTemp2Bits & 0x400) != 0) goto LAB_97b8dcfc;
+      if ((typeTemp2Bits & 0x400) != 0) goto setOperandInvalid;
       typeTemp3Live = true;
       (**(code **)(*operandNode + 0x38))(typeTemp3,operandNode);
       scratchR4 = r4Out3;
-      if ((typeTemp3Bits & 0x200) != 0) goto LAB_97b8dcfc;
+      if ((typeTemp3Bits & 0x200) != 0) goto setOperandInvalid;
       typeTemp4Live = true;
       (**(code **)(*operandNode + 0x38))(typeTemp4,operandNode);
       scratchR4 = r4Out4;
       if ((1 < (int)(typeTemp4Bits << 0xd | typeTemp4Bits >> 0x13) >> 0x18) && ((typeTemp4Bits & 0x400) == 0))
-      goto LAB_97b8dcfc;
-LAB_97b8dd0c:
+      goto setOperandInvalid;
+loopStoreTypeTemp4:
       typeTemp4[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
     else {
-LAB_97b8dcfc:
+setOperandInvalid:
       operandInvalid = true;
-      if (typeTemp4Live) goto LAB_97b8dd0c;
+      if (typeTemp4Live) goto loopStoreTypeTemp4;
     }
     if (typeTemp3Live) {
       typeTemp3[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
@@ -3429,7 +3429,7 @@ LAB_97b8dcfc:
     if (typeTemp2Live) {
       typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
-LAB_97b8ddc8:
+loopSetStackType:
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     if (operandInvalid) {
       return (int *)0x0;
@@ -3439,39 +3439,39 @@ LAB_97b8ddc8:
     scratchR4 = r4Out0;
     if (op < 7) {
       if (op == 5) {
-LAB_97b8dd4c:
+loopSetOperandInvalid:
         operandInvalid = false;
         (**(code **)(*operandNode + 0x38))(&stackType,operandNode);
         typeTemp1Live = false;
         scratchR4 = r4Out5;
         if ((stackTypeBits >> 0x13 & 0x3f) == 0xe) {
-LAB_97b8dda4:
+loopSetOperandInvalid2:
           operandInvalid = true;
-          if (typeTemp1Live) goto LAB_97b8ddb4;
+          if (typeTemp1Live) goto storeTypeTemp1;
         }
         else {
           (**(code **)(*operandNode + 0x38))(typeTemp1,operandNode);
           typeTemp1Live = true;
           scratchR9 = typeTemp1Bits & 0x200;
           scratchR4 = r4Out6;
-          if (scratchR9 != 0) goto LAB_97b8dda4;
-LAB_97b8ddb4:
+          if (scratchR9 != 0) goto loopSetOperandInvalid2;
+storeTypeTemp1:
           typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         }
-        goto LAB_97b8ddc8;
+        goto loopSetStackType;
       }
     }
-    else if (op - 9U < 4) goto LAB_97b8dd4c;
+    else if (op - 9U < 4) goto loopSetOperandInvalid;
   }
   if (op == 0x67) {
     targetBasicType = 3;
   }
   else if (op < 0x68) {
-    if (op != 0x66) goto LAB_97b8decc;
+    if (op != 0x66) goto checkOp;
     targetBasicType = 2;
   }
   else {
-    if (op != 0x68) goto LAB_97b8decc;
+    if (op != 0x68) goto checkOp;
     targetBasicType = 1;
   }
   nominalSize = (**(code **)(*operandNode + 0x48))(operandNode,scratchR4,intermNode,nominalSize,symbolTableCopy,scratchR8,scratchR9);
@@ -3508,7 +3508,7 @@ LAB_97b8ddb4:
   if (operandNode == (int *)0x0) {
     return (int *)0x0;
   }
-LAB_97b8decc:
+checkOp:
   if (2 < op - 0x66U) {
     childConstantUnion = (**(code **)(*operandNode + 0x18))(operandNode);
     if (childConstantUnion != 0) {
@@ -3860,7 +3860,7 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   }
   else if (op < 0x68) {
     if (op != 0x66) {
-LAB_97b8e794:
+loopSetTargetBasicType:
       targetBasicType = (**(code **)(*(int *)type + 0x20))(type);
       (**(code **)(*intermTyped + 0x38))(&stackType,intermTyped);
       if (targetBasicType == (stackTypeBits >> 0x13 & 0x3f)) {
@@ -3871,13 +3871,13 @@ LAB_97b8e794:
     targetBasicType = 2;
   }
   else {
-    if (op != 0x68) goto LAB_97b8e794;
+    if (op != 0x68) goto loopSetTargetBasicType;
     targetBasicType = 1;
   }
   isAggregateOnly = true;
   intermAggregate = (**(code **)(*intermTyped + 0x1c))(intermTyped);
   if (intermAggregate == 0) {
-LAB_97b8e8ac:
+loopSetIntermAggregate:
     intermAggregate = (**(code **)(*intermTyped + 0x1c))(intermTyped);
     if (intermAggregate != 0) {
       typedNodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
@@ -3900,7 +3900,7 @@ LAB_97b8e8ac:
           childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
           d2iScratch = (longlong)(int)**(float **)(childConstantUnion + 0x30);
           *(int *)convertedValue = (int)**(float **)(childConstantUnion + 0x30);
-LAB_97b8ec88:
+loopSetStackTypeBits:
           stackTypeBits = targetBasicType << 0x13 | stackTypeBits & 0x7ff | 0x4000000 | 0x800;
         }
         else {
@@ -3915,10 +3915,10 @@ LAB_97b8ec88:
           childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
           constValueScratch = *(undefined4 **)(childConstantUnion + 0x30);
           *(undefined4 *)convertedValue = *constValueScratch;
-LAB_97b8ecd8:
+loopSetStackTypeBits2:
           stackTypeBits = targetBasicType << 0x13 | stackTypeBits & 0xfff | 0x4000000 | 0x800;
         }
-LAB_97b8ed90:
+loopSetStackTypeBits3:
         stackTypeBits = stackTypeBits & 0xfffff9ff;
         stackTypeArraySize = 0;
         stackTypeStructure = 0;
@@ -3972,7 +3972,7 @@ LAB_97b8ed90:
           i2dHi = 0x43300000;
           stackTypeBits = stackTypeBits & 0x7ff | 0x4080800;
           i2dLo = constValueScratch;
-          goto LAB_97b8ed90;
+          goto loopSetStackTypeBits3;
         }
       }
       else if (targetBasicType == 3) {
@@ -3984,7 +3984,7 @@ LAB_97b8ed90:
           nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
           childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
           *(uint *)convertedValue = (uint)(**(float **)(childConstantUnion + 0x30) != 0.0);
-          goto LAB_97b8ec88;
+          goto loopSetStackTypeBits;
         }
         if (childBasicType == 2) {
           nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
@@ -3992,7 +3992,7 @@ LAB_97b8ed90:
           constantInt = **(int **)(childConstantUnion + 0x30);
           constValueScratch = (undefined4 *)(constantInt + -1);
           *(uint *)convertedValue = constantInt - ((int)constValueScratch + (uint)(constantInt == 0));
-          goto LAB_97b8ecd8;
+          goto loopSetStackTypeBits2;
         }
         infoSink = *(void **)this;
         errorText = "Bad promotion node";
@@ -4024,7 +4024,7 @@ LAB_97b8ed90:
         }
       }
     }
-    if (isAggregateOnly) goto LAB_97b8e8ac;
+    if (isAggregateOnly) goto loopSetIntermAggregate;
   }
   constantUnionNode = (**(code **)(*intermTyped + 0x18))(intermTyped);
   if (constantUnionNode != 0) {
@@ -4050,7 +4050,7 @@ LAB_97b8ed90:
             goto override_jmp_97b8ea8c_case_0;
           }
         }
-        goto LAB_97b8f1ac;
+        goto setChildBasicType;
       }
     }
     else if (targetBasicType == 3) {
@@ -4069,7 +4069,7 @@ LAB_97b8ed90:
           goto override_jmp_97b8ea8c_case_0;
         }
       }
-      goto LAB_97b8f1ac;
+      goto setChildBasicType;
     }
     infoSink = *(void **)this;
     errorText = "Bad promotion type";
@@ -4120,7 +4120,7 @@ override_jmp_97b8ea8c_case_0:
       goto override_jmp_97b8ea8c_case_0;
     }
   }
-LAB_97b8f1ac:
+setChildBasicType:
   childBasicType = (**(code **)(*intermTyped + 0x48))(intermTyped,scratchR4);
   isMatrix = (**(code **)(*intermTyped + 0x50))(intermTyped);
   isArray = (**(code **)(*intermTyped + 0x54))(intermTyped);
@@ -4202,7 +4202,7 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   if (intermNode1 != (unsigned char *)0x0) {
     aggregateNode = (int *)(**(code **)(*(int *)intermNode1 + 0x1c))(intermNode1);
     cr0Reg = (aggregateNode == (int *)0x0) << 1;
-    if ((aggregateNode != (int *)0x0) && (aggregateNode[0xc] == 0)) goto LAB_97b8f5cc;
+    if ((aggregateNode != (int *)0x0) && (aggregateNode[0xc] == 0)) goto checkIntermNode2Spill;
   }
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   aggregateNode = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
@@ -4266,7 +4266,7 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
       *(int *)(sequence + 8) = sequenceFinishValue + 4;
     }
   }
-LAB_97b8f5cc:
+checkIntermNode2Spill:
   if (intermNode2Spill != (unsigned char *)0x0) {
     sequence = (unsigned char *)(**(code **)(*aggregateNode + 100))(aggregateNode);
     sequenceFinish = *(undefined4 **)(sequence + 8);

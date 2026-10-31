@@ -105,17 +105,17 @@ int _PPCRuntimeCompilerSwizzleRegisterAV(compiler, vectorReg, swizzle)
       ascendingRun = 2;
       ascShiftA = 0x20 - selectorBitBase;
       ascShiftB = 0x1c - selectorBitBase;
-      goto LAB_97bda1ac;
+      goto checkSelectors;
     }
     runStart = runStart + 1;
   } while ((int)runStart < 4);
-  goto LAB_97bda240;
+  goto setEqualRunStart;
   while( true ) {
     equalRun = equalRun + 1;
     eqShiftA = eqShiftA - 4;
     eqShiftB = eqShiftB - 4;
     if (3 < equalRun) break;
-LAB_97bda278:
+loopCheckSelectors:
     if ((selectors >> (eqShiftA & 0x3f) & 3) != (selectors >> (eqShiftB & 0x3f) & 3)) break;
   }
   if ((equalRunStart == 0) && (equalRun < 4)) {
@@ -129,13 +129,13 @@ LAB_97bda278:
       eqShiftB = eqShiftB + 4;
     } while (equalRun < 4);
   }
-  goto LAB_97bda304;
+  goto checkEqualRun;
   while( true ) {
     ascendingRun = ascendingRun + 1;
     ascShiftA = ascShiftA - 4;
     ascShiftB = ascShiftB - 4;
     if (3 < ascendingRun) break;
-LAB_97bda1ac:
+checkSelectors:
     if (((selectors >> (ascShiftA & 0x3f)) + 1 & 3) != (selectors >> (ascShiftB & 0x3f) & 3)) break;
   }
   if ((runStart == 0) && (ascendingRun < 4)) {
@@ -149,7 +149,7 @@ LAB_97bda1ac:
       ascShiftB = ascShiftB + 4;
     } while (ascendingRun < 4);
   }
-LAB_97bda240:
+setEqualRunStart:
   equalRunStart = 0;
   do {
     if ((selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 3) == (selectors >> (equalRunStart * -4 + 0x18 & 0x3f) & 3)) {
@@ -157,11 +157,11 @@ LAB_97bda240:
       equalRun = 2;
       eqShiftA = 0x20 - selectorBitBase;
       eqShiftB = 0x1c - selectorBitBase;
-      goto LAB_97bda278;
+      goto loopCheckSelectors;
     }
     equalRunStart = equalRunStart + 1;
   } while ((int)equalRunStart < 4);
-LAB_97bda304:
+checkEqualRun:
   if (equalRun == 4) {
     codeCursor = *(uint **)(compiler + 0xe30);
     *codeCursor = vectorReg << 0x15 | (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | vectorReg << 0xb
@@ -176,10 +176,10 @@ LAB_97bda304:
     }
     registerFields = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
     runStart = runStart << 8;
-LAB_97bda710:
+loopSetCodeWritePtr:
     codeWritePtr = *(uint **)(compiler + 0xe30);
     instWord = registerFields | runStart & 0x300 | 0x1000002c;
-LAB_97bdaabc:
+loopStoreCodeWritePtr:
     *codeWritePtr = instWord;
   }
   else {
@@ -226,7 +226,7 @@ LAB_97bdaabc:
             }
             codeCursor2 = *(uint **)(compiler + 0xe30);
             instWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000022c;
-LAB_97bda6e8:
+loopStoreCodeCursor2:
             *codeCursor2 = instWord;
             nextCursor = codeCursor2 + 1;
           }
@@ -250,7 +250,7 @@ LAB_97bda6e8:
               }
               codeCursor2 = *(uint **)(compiler + 0xe30);
               instWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
-              goto LAB_97bda6e8;
+              goto loopStoreCodeCursor2;
             }
             nextCursor = codeCursor + 3;
             codeCursor[2] = vectorReg << 0x15 | 0x1003222c;
@@ -262,9 +262,9 @@ LAB_97bda6e8:
           }
           registerFields = vectorReg << 0x15 | vectorReg << 0x10 | registerFields;
           runStart = equalRunStart;
-LAB_97bda70c:
+loopSetRunStart:
           runStart = (4 - runStart) * 0x100;
-          goto LAB_97bda710;
+          goto loopSetCodeWritePtr;
         }
         if (ascendingRun == 2) {
           firstSelector = selectors >> (runStart * -4 + 0x1c & 0x3f) & 0xf;
@@ -290,7 +290,7 @@ LAB_97bda70c:
             }
             codeWritePtr = *(uint **)(compiler + 0xe30);
             *codeWritePtr = vectorReg << 0x15 | srcRegA << 0x10 | srcRegB << 0xb | 0x1000022c;
-LAB_97bda854:
+loopStoreCompiler:
             *(uint **)(compiler + 0xe30) = codeWritePtr + 1;
           }
           else {
@@ -299,7 +299,7 @@ LAB_97bda854:
               *codeCursor = selectorA << 0x10 | 0x800000 | vectorReg << 0xb | 0x1000028c;
               codeWritePtr = codeCursor + 1;
               *codeWritePtr = vectorReg << 0x15 | srcRegA << 0x10 | 0x1000222c;
-              goto LAB_97bda854;
+              goto loopStoreCompiler;
             }
             srcRegB = vectorReg;
             if (selectorA != 0) {
@@ -328,7 +328,7 @@ LAB_97bda854:
             return;
           }
           registerFields = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
-          goto LAB_97bda70c;
+          goto loopSetRunStart;
         }
         component3Selector = (swizzleWord & 0x3000000) >> 0x18;
         srcRegA = vectorReg;
@@ -367,7 +367,7 @@ LAB_97bda854:
         }
         codeWritePtr = *(uint **)(compiler + 0xe30);
         instWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
-        goto LAB_97bdaabc;
+        goto loopStoreCodeWritePtr;
       }
       firstSelector = selectors >> (runStart * -4 + 0x1c & 0x3f) & 0xf;
       srcRegA = vectorReg;
@@ -497,13 +497,13 @@ int _PPCRuntimeCompilerLoadSourceNO(compiler, opOffsets, opBank, opSwizzle, opIn
     negateTemplate = &_glpNegateSourceBRTC;
   }
   else {
-    if (sourceSlot != 2) goto LAB_97bdac4c;
+    if (sourceSlot != 2) goto setLoopIndex;
     codeCursor = *(undefined4 *)(compiler + 0xe30);
     negateTemplate = &_glpNegateSourceCRTC;
   }
   chunkIndex = _glpRTCAddAChunk_97bd7cbc(negateTemplate,codeCursor);
   *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + chunkIndex * 4;
-LAB_97bdac4c:
+setLoopIndex:
   loopIndex = 0;
   do {
     registerIndex = firstRegister + loopIndex;
@@ -748,7 +748,7 @@ int _PPCRuntimeCompilerTestConditionRegisterAV(compiler, condDescWord0, condDesc
   case 0:
     codeWritePtr = *(uint **)(compiler + 0xe30);
     testWord = 0x10636a8c;
-    goto LAB_97bdb424;
+    goto storeCodeWritePtr;
   case 1:
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x10b4a484;
@@ -764,7 +764,7 @@ int _PPCRuntimeCompilerTestConditionRegisterAV(compiler, condDescWord0, condDesc
     ((int (*)())_PPCRuntimeCompilerSwizzleRegisterAV)(compiler,5,(int)&conditionWord + 2);
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     testWord = 0x10810000;
-    goto LAB_97bdb338;
+    goto storeCodeCursor;
   case 3:
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x10b4a484;
@@ -780,7 +780,7 @@ int _PPCRuntimeCompilerTestConditionRegisterAV(compiler, condDescWord0, condDesc
     ((int (*)())_PPCRuntimeCompilerSwizzleRegisterAV)(compiler,5,(int)&conditionWord + 2);
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     testWord = 0x10820000;
-LAB_97bdb338:
+storeCodeCursor:
     *codeCursor = 0x1060038c;
     codeCursor[1] = testWord | 0x38c;
     codeCursor[2] = 0x10651886;
@@ -806,24 +806,24 @@ LAB_97bdb338:
     codeCursor[1] = 0x10651886;
     codeWritePtr = codeCursor + 3;
     codeCursor[2] = 0x10631d04;
-    goto LAB_97bdb42c;
+    goto storeCompiler;
   case 7:
     codeWritePtr = *(uint **)(compiler + 0xe30);
     testWord = 0x10694c84;
-LAB_97bdb424:
+storeCodeWritePtr:
     *codeWritePtr = testWord;
-    goto LAB_97bdb428;
+    goto setCodeWritePtr;
   default:
-    goto switchD_97bdb240_default;
+    goto conditionWordDefault;
   }
   *codeCursor2 = testWord | 0x38c;
   codeWritePtr = codeCursor2 + 1;
   *codeWritePtr = 0x10651886;
-LAB_97bdb428:
+setCodeWritePtr:
   codeWritePtr = codeWritePtr + 1;
-LAB_97bdb42c:
+storeCompiler:
   *(uint **)(compiler + 0xe30) = codeWritePtr;
-switchD_97bdb240_default:
+conditionWordDefault:
   return;
 }
 
@@ -1342,7 +1342,7 @@ int _PPCRuntimeCompilerStride(compiler)
         }
         programInfo = *(int *)(compiler + 0xe24);
       }
-      if ((*(uint *)(programInfo + 0x34) & 0x1000) == 0) goto LAB_97bdc214;
+      if ((*(uint *)(programInfo + 0x34) & 0x1000) == 0) goto checkProgramInfo;
       codeCursor = *(undefined4 **)(compiler + 0xe30);
       *codeCursor = 0xed8c502a;
       codeCursor[1] = 0xc10d0008;
@@ -1359,7 +1359,7 @@ int _PPCRuntimeCompilerStride(compiler)
     programInfo = *(int *)(compiler + 0xe24);
     *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
   }
-LAB_97bdc214:
+checkProgramInfo:
   if ((*(uint *)(programInfo + 0x34) & 2) != 0) {
     codeCursor2 = *(uint **)(compiler + 0xe30);
     *codeCursor2 = *(ushort *)(programInfo + 0xba) | 0x38c60000;
@@ -1566,7 +1566,7 @@ int _PPCRuntimeCompilerCompileNO(compiler)
                 srcDescWord3 = *(undefined4 *)(instruction + 0x40);
                 argReg8 = *(int *)(instruction + 0x44);
                 srcDescWord5 = *(undefined4 *)(instruction + 0x48);
-                goto LAB_97bdc778;
+                goto callPPCRuntimeCompilerLoadSourceNO;
               }
             }
             else {
@@ -1582,7 +1582,7 @@ int _PPCRuntimeCompilerCompileNO(compiler)
               srcDescWord3 = *(undefined4 *)(instruction + 100);
               argReg8 = *(int *)(instruction + 0x68);
               srcDescWord5 = *(undefined4 *)(instruction + 0x6c);
-LAB_97bdc778:
+callPPCRuntimeCompilerLoadSourceNO:
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,srcDescWord0,argReg5,srcDescWord2,srcDescWord3,argReg8,srcDescWord5,argReg10,srcDescWord7,srcDescWord8,0,0);
             }
             if (componentCount == 2) {
@@ -1632,7 +1632,7 @@ LAB_97bdc778:
               ppcOpBase = 0xfe400000;
             }
             else {
-              if (componentCount != 4) goto LAB_97bdcb04;
+              if (componentCount != 4) goto callPPCRuntimeCompilerWriteDestinationNO;
               srcByteOffset = srcIndex * 0x24;
               chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               codeCursor = *(int *)(compiler + 0xe30);
@@ -1675,7 +1675,7 @@ LAB_97bdc778:
             *(undefined4 *)((int)argReg10 + chunkByteOffset + 4) = 0xfe004090;
             *(int *)(compiler + 0xe30) = (int)argReg10 + chunkByteOffset + 8;
           }
-LAB_97bdcb04:
+callPPCRuntimeCompilerWriteDestinationNO:
           ((int (*)())_PPCRuntimeCompilerWriteDestinationNO)(compiler,0);
         }
         else {
@@ -1743,7 +1743,7 @@ LAB_97bdcb04:
               }
               if (opcode < 0x15) {
                 if (((0x12 < opcode) || (opcode == 1)) || ((opcode != 0 && (opcode - 0x10 < 2)))) {
-LAB_97bdcd64:
+loopCallPPCRuntimeCompilerDirtyRegister:
                   _PPCRuntimeCompilerDirtyRegister(compiler,0);
                   _PPCRuntimeCompilerDirtyRegister(compiler,1);
                   _PPCRuntimeCompilerDirtyRegister(compiler,2);
@@ -1755,7 +1755,7 @@ LAB_97bdcd64:
                 }
               }
               else {
-                if (opcode == 0x38) goto LAB_97bdcd64;
+                if (opcode == 0x38) goto loopCallPPCRuntimeCompilerDirtyRegister;
                 if (opcode == 0x48) {
                   _PPCRuntimeCompilerDirtyRegister(compiler,0);
                   _PPCRuntimeCompilerDirtyRegistersWithIndirectData(compiler);
@@ -1787,7 +1787,7 @@ LAB_97bdcd64:
                 opTemplate = &_glpOpAbsRTC;
                 break;
               default:
-                goto switchD_97bdcdfc_caseD_3;
+                goto opcodeCase3;
               case 4:
                 intTemp = *(int *)(compiler + 0xe30);
                 opTemplate = &_glpOpFrcRTC;
@@ -1799,14 +1799,14 @@ LAB_97bdcd64:
               case 0xd:
                 codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                 opTemplate = &_glpOpRsqRTC;
-                goto LAB_97bdcf9c;
+                goto setIntTemp2;
               case 0xe:
                 codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                 opTemplate = &_glpOpRcpRTC;
-                goto LAB_97bdcf9c;
+                goto setIntTemp2;
               case 0x10:
                 intTemp = *(int *)(compiler + 0xe30);
-                goto LAB_97bdd288;
+                goto setOpTemplate2;
               case 0x11:
                 intTemp = *(int *)(compiler + 0xe30);
                 opTemplate = &_glpOpExpRTC;
@@ -1814,7 +1814,7 @@ LAB_97bdcd64:
               case 0x13:
                 intTemp = *(int *)(compiler + 0xe30);
                 opTemplate = &_glpOpLogRTC;
-                goto LAB_97bdcfe4;
+                goto setIntTemp3;
               case 0x14:
                 intTemp = *(int *)(compiler + 0xe30);
                 opTemplate = &_glpOpLogRTC;
@@ -1836,7 +1836,7 @@ LAB_97bdcd64:
                 if (dotComponentCount == 2) {
                   codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                   opTemplate = &_glpOpDot2RTC;
-LAB_97bdd170:
+loopSetIntTemp:
                   intTemp = _glpRTCAddAChunk_97bd7cbc(opTemplate,codeWritePtr6);
                   *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + intTemp * 4;
                 }
@@ -1847,37 +1847,37 @@ LAB_97bdd170:
                       opTemplate = &_glpOpDot3RTC;
                     }
                     else {
-                      if (dotComponentCount != 4) goto LAB_97bdd184;
+                      if (dotComponentCount != 4) goto setIntTemp;
                       codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                       opTemplate = &_glpOpDot4RTC;
                     }
-                    goto LAB_97bdd170;
+                    goto loopSetIntTemp;
                   }
                   if (dotComponentCount == 1) {
                     codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                     opTemplate = &_glpOpDot1RTC;
-                    goto LAB_97bdd170;
+                    goto loopSetIntTemp;
                   }
                 }
-LAB_97bdd184:
+setIntTemp:
                 intTemp = *(int *)(compiler + 0xe30);
-                goto LAB_97bdcfb4;
+                goto setOpTemplate;
               case 0x28:
                 codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                 opTemplate = &_glpOpDot3RTC;
-                goto LAB_97bdcf9c;
+                goto setIntTemp2;
               case 0x29:
                 codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                 opTemplate = &_glpOpDot4RTC;
-                goto LAB_97bdcf9c;
+                goto setIntTemp2;
               case 0x2a:
                 codeWritePtr6 = *(undefined4 *)(compiler + 0xe30);
                 opTemplate = &_glpOpDphRTC;
-LAB_97bdcf9c:
+setIntTemp2:
                 intTemp = _glpRTCAddAChunk_97bd7cbc(opTemplate,codeWritePtr6);
                 intTemp = *(int *)(compiler + 0xe30) + intTemp * 4;
                 *(int *)(compiler + 0xe30) = intTemp;
-LAB_97bdcfb4:
+setOpTemplate:
                 opTemplate = &_glpOpSplatC0RTC;
                 break;
               case 0x2b:
@@ -1915,9 +1915,9 @@ LAB_97bdcfb4:
                 intTemp = _glpRTCAddAChunk_97bd7cbc(&_glpOpRestoreSrcBRTC,intTemp);
                 intTemp = *(int *)(compiler + 0xe30) + intTemp * 4;
                 *(int *)(compiler + 0xe30) = intTemp;
-LAB_97bdd288:
+setOpTemplate2:
                 opTemplate = &_glpOpExpRTC;
-LAB_97bdcfe4:
+setIntTemp3:
                 intTemp = _glpRTCAddAChunk_97bd7cbc(opTemplate,intTemp);
                 intTemp = *(int *)(compiler + 0xe30) + intTemp * 4;
                 *(int *)(compiler + 0xe30) = intTemp;
@@ -1984,12 +1984,12 @@ LAB_97bdcfe4:
                   intTemp = *(int *)(compiler + 0xe28);
                   *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
                 default:
-                  goto switchD_97bdd2fc_default;
+                  goto intTempDefault;
                 }
                 *codeWritePtr5 = ppcInstWord3;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
                 intTemp = *(int *)(compiler + 0xe28);
-switchD_97bdd2fc_default:
+intTempDefault:
                 switch(*(undefined1 *)(intTemp + 0x61)) {
                 case 0:
                   codeWritePtr5 = *(undefined4 **)(compiler + 0xe30);
@@ -2037,12 +2037,12 @@ switchD_97bdd2fc_default:
                   intTemp = *(int *)(compiler + 0xe28);
                   *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
                 default:
-                  goto switchD_97bdd41c_default;
+                  goto intTempDefault2;
                 }
                 *codeWritePtr5 = ppcInstWord3;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
                 intTemp = *(int *)(compiler + 0xe28);
-switchD_97bdd41c_default:
+intTempDefault2:
                 switch(*(undefined1 *)(intTemp + 0x62)) {
                 case 0:
                   codeWritePtr5 = *(undefined4 **)(compiler + 0xe30);
@@ -2090,12 +2090,12 @@ switchD_97bdd41c_default:
                   intTemp = *(int *)(compiler + 0xe28);
                   *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
                 default:
-                  goto switchD_97bdd53c_default;
+                  goto intTempDefault3;
                 }
                 *codeWritePtr5 = ppcInstWord3;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
                 intTemp = *(int *)(compiler + 0xe28);
-switchD_97bdd53c_default:
+intTempDefault3:
                 switch(*(undefined1 *)(intTemp + 99)) {
                 case 0:
                   codeWritePtr5 = *(undefined4 **)(compiler + 0xe30);
@@ -2142,11 +2142,11 @@ switchD_97bdd53c_default:
                   ppcInstWord3 = 0xfe605050;
                   break;
                 default:
-                  goto switchD_97bdcdfc_caseD_3;
+                  goto opcodeCase3;
                 }
                 *codeWritePtr5 = ppcInstWord3;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
-                goto switchD_97bdcdfc_caseD_3;
+                goto opcodeCase3;
               case 0x42:
                 argReg8 = *(int *)(compiler + 0xe20);
                 if (*(int *)(*(int *)(argReg8 + 0xd80) + 0x38) - 0x8b30U < 2) {
@@ -2165,12 +2165,12 @@ switchD_97bdd53c_default:
                   texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,argReg5);
                 }
                 else {
-                  if (intTemp != 3) goto switchD_97bdcdfc_caseD_3;
+                  if (intTemp != 3) goto opcodeCase3;
                   argReg5 = *(undefined4 *)(compiler + 0xe30);
                   texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,argReg5);
                 }
                 *(undefined4 *)(compiler + 0xe30) = texCodeCursor;
-                goto switchD_97bdcdfc_caseD_3;
+                goto opcodeCase3;
               case 0x48:
                 if ((*(byte *)(*(int *)(compiler + 0xe28) + 0x28) & 1) != 0) {
                   intTemp = _glpRTCAddAChunk_97bd7cbc(&_glpOpArlRTC,*(undefined4 *)(compiler + 0xe30));
@@ -2189,14 +2189,14 @@ switchD_97bdd53c_default:
               case 0x59:
               case 0x5a:
                 writesDestination = false;
-                goto LAB_97bdd85c;
+                goto setComponentIndex;
               case 0x5b:
                 writesDestination = false;
-                goto switchD_97bdcdfc_caseD_3;
+                goto opcodeCase3;
               }
               intTemp = _glpRTCAddAChunk_97bd7cbc(opTemplate,intTemp);
               *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + intTemp * 4;
-switchD_97bdcdfc_caseD_3:
+opcodeCase3:
               if (writesDestination) {
                 if (saturate != '\0') {
                   intTemp = _glpRTCAddAChunk_97bd7cbc
@@ -2205,7 +2205,7 @@ switchD_97bdcdfc_caseD_3:
                 }
                 ((int (*)())_PPCRuntimeCompilerWriteDestinationNO)(compiler,componentIndex);
               }
-LAB_97bdd85c:
+setComponentIndex:
               componentIndex = componentIndex + 1;
               if (componentCount <= componentIndex) break;
               currentInst = *(uint **)(compiler + 0xe28);
@@ -2428,12 +2428,12 @@ int _PPCRuntimeCompilerCompileAV(compiler)
             chunkWordCount = _glpRTCAddAChunk_97bd7cbc(&_glpOpSaturateAVRTC,chunkWordCount);
             *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + chunkWordCount * 4;
           }
-LAB_97bdde9c:
+loopSetDestComponent:
           destComponent = 0;
-LAB_97bddea4:
+loopCallPPCRuntimeCompilerWriteDestinationAV:
           ((int (*)())_PPCRuntimeCompilerWriteDestinationAV)(compiler,destComponent);
           passThroughR4 = leftoverR4_01;
-          goto LAB_97be18e4;
+          goto setInst;
         }
         if (((*(char *)(inst + 0x12) == '\0') || (*(char *)(inst + 0x1b) == '\0')) ||
            (*(char *)((int)inst + 0x49) != *(char *)((int)inst + 0x6d))) {
@@ -2497,7 +2497,7 @@ LAB_97bddea4:
                 vectorInstWord2 = 0x10a20000;
               }
               else {
-                if (elementCount != 4) goto LAB_97bdde9c;
+                if (elementCount != 4) goto loopSetDestComponent;
                 codeCursor = *(undefined4 **)(compiler + 0xe30);
                 *codeCursor = 0x10a0028c;
                 codeCursor[1] = 0x1045386e;
@@ -2538,7 +2538,7 @@ LAB_97bddea4:
               codeWritePtr2 = codeCursor3 + 1;
               *codeWritePtr2 = 0x1045106e;
             }
-            goto LAB_97bdde94;
+            goto storeCompiler;
           }
           if ((*(char *)(inst + 0x1b) != '\0') && (1 < *(byte *)((int)inst + 0x49))) {
             ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,inst[0x16],inst[0x17],inst[0x18],inst[0x19],inst[0x1a],
@@ -2569,7 +2569,7 @@ LAB_97bddea4:
               srcTypeWord = *(int **)(compiler + 0xe30);
               codeWordPtr = srcTypeWord + chunkIndex;
               emittedWord = 0x10a5132c;
-LAB_97bdeef0:
+loopStoreSrcTypeWord:
               srcTypeWord[chunkIndex] = emittedWord;
               codeWordPtr[1] = 0x10452c84;
             }
@@ -2604,9 +2604,9 @@ LAB_97bdeef0:
                 srcTypeWord = *(int **)(compiler + 0xe30);
                 codeWordPtr = srcTypeWord + chunkIndex;
                 emittedWord = 0x10a5122c;
-                goto LAB_97bdeef0;
+                goto loopStoreSrcTypeWord;
               }
-              if (elementCount != 4) goto LAB_97bdde9c;
+              if (elementCount != 4) goto loopSetDestComponent;
               chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDp4AVRTC,*(undefined4 *)(compiler + 0xe30));
               codeCursor2 = *(int *)(compiler + 0xe30);
               *(undefined4 *)(codeCursor2 + chunkIndex * 4) = 0x10a5112c;
@@ -2646,7 +2646,7 @@ LAB_97bdeef0:
               codeWordPtr[1] = 0x10452c84;
             }
             *(int **)(compiler + 0xe30) = codeWordPtr + 2;
-            goto LAB_97bdde9c;
+            goto loopSetDestComponent;
           }
           if ((*(char *)(inst + 0x12) == '\0') == 0) {
             sourceOffset = 0x54;
@@ -2725,7 +2725,7 @@ LAB_97bdeef0:
           }
           else {
             passThroughR4 = leftoverR4_02;
-            if (elementCount != 4) goto LAB_97be18e4;
+            if (elementCount != 4) goto setInst;
             codeCursor = *(undefined4 **)(compiler + 0xe30);
             *codeCursor = 0x1040386e;
             *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
@@ -2770,7 +2770,7 @@ LAB_97bdeef0:
           }
           *codeCursor = 0x1040386e;
           *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-          goto LAB_97bddea4;
+          goto loopCallPPCRuntimeCompilerWriteDestinationAV;
         }
         if (elementCount == 2) {
           ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],inst[0x12],
@@ -2820,14 +2820,14 @@ LAB_97bdeef0:
           *codeCursor = 0x10c00a8c;
           codeWritePtr = codeCursor + 1;
           *codeWritePtr = 0x104011ae;
-LAB_97bdde5c:
+loopStoreCompiler:
           *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 1;
           ((int (*)())_PPCRuntimeCompilerWriteDestinationAV)(compiler,1);
           _PPCRuntimeCompilerBackupRegister(compiler,2);
           _PPCRuntimeCompilerDirtyRegister(compiler,2);
           codeWritePtr2 = *(uint **)(compiler + 0xe30);
           ppcWord = 0x7c43c0ce;
-          goto LAB_97bdde90;
+          goto storeCodeWritePtr2;
         }
         if (elementCount == 3) {
           ((int (*)())_PPCRuntimeCompilerLoadSourceAV)(compiler,inst[0xd],inst[0xe],inst[0xf],inst[0x10],inst[0x11],inst[0x12],
@@ -2934,7 +2934,7 @@ LAB_97bdde5c:
           _PPCRuntimeCompilerDirtyRegister(compiler,2);
           codeWritePtr = *(undefined4 **)(compiler + 0xe30);
           *codeWritePtr = 0x7c43c8ce;
-          goto LAB_97bdde5c;
+          goto loopStoreCompiler;
         }
         passThroughR4 = leftoverR4_00;
         if (elementCount == 4) {
@@ -3126,7 +3126,7 @@ LAB_97bdde5c:
           _PPCRuntimeCompilerDirtyRegister(compiler,2);
           codeWritePtr2 = *(uint **)(compiler + 0xe30);
           ppcWord = 0x7c43b8ce;
-          goto LAB_97bdde90;
+          goto storeCodeWritePtr2;
         }
       }
       else {
@@ -3164,7 +3164,7 @@ LAB_97bdde5c:
                 opTemplate = &_glpOpSetAllEqualTo3AVRTC;
               }
               else {
-                if (dimensionByte != '\x04') goto LAB_97bdf944;
+                if (dimensionByte != '\x04') goto checkOpcode;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpSetAllEqualTo4AVRTC;
               }
@@ -3173,7 +3173,7 @@ LAB_97bdde5c:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpSetEqualToAVRTC;
             }
-LAB_97bdf930:
+loopSetChunkWordCount:
             chunkWordCount = _glpRTCAddAChunk_97bd7cbc(opTemplate,codeWritePtr);
             *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + chunkWordCount * 4;
           }
@@ -3214,7 +3214,7 @@ LAB_97bdf930:
                 *(undefined4 *)(codeCursor2 + chunkWordCount * 4) = 0x10a5112c;
                 *(int *)(compiler + 0xe30) = codeCursor2 + chunkWordCount * 4 + 4;
               } while (loopIndex < 3);
-LAB_97bdf7ec:
+loopCallPPCRuntimeCompilerBackupRegister:
               _PPCRuntimeCompilerBackupRegister(compiler,0);
               _PPCRuntimeCompilerDirtyRegister(compiler,0);
               codeCursor = *(undefined4 **)(compiler + 0xe30);
@@ -3222,7 +3222,7 @@ LAB_97bdf7ec:
               *codeCursor = 0x10052c84;
               codeWritePtr = codeCursor + 1;
               *(undefined4 **)(compiler + 0xe30) = codeWritePtr;
-              goto LAB_97bdf930;
+              goto loopSetChunkWordCount;
             }
             if (elementCount < 4) {
               if (elementCount == 2) {
@@ -3258,7 +3258,7 @@ LAB_97bdf7ec:
                   *(undefined4 *)(codeCursor2 + chunkWordCount * 4) = 0x10a5112c;
                   *(int *)(compiler + 0xe30) = codeCursor2 + chunkWordCount * 4 + 4;
                 } while (loopIndex < 2);
-                goto LAB_97bdf7ec;
+                goto loopCallPPCRuntimeCompilerBackupRegister;
               }
             }
             else if (elementCount == 4) {
@@ -3294,19 +3294,19 @@ LAB_97bdf7ec:
                 *(undefined4 *)(codeCursor2 + chunkWordCount * 4) = 0x10a5112c;
                 *(int *)(compiler + 0xe30) = codeCursor2 + chunkWordCount * 4 + 4;
               } while (loopIndex < 4);
-              goto LAB_97bdf7ec;
+              goto loopCallPPCRuntimeCompilerBackupRegister;
             }
           }
-LAB_97bdf944:
+checkOpcode:
           if (opcode == 0x36) {
             codeWritePtr2 = *(uint **)(compiler + 0xe30);
             ppcWord = 0x1048104a;
-LAB_97bdde90:
+storeCodeWritePtr2:
             *codeWritePtr2 = ppcWord;
-LAB_97bdde94:
+storeCompiler:
             *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
           }
-          goto LAB_97bdde9c;
+          goto loopSetDestComponent;
         }
         operandWidth = 0;
         if (elementCount != 0) {
@@ -3365,7 +3365,7 @@ LAB_97bdde94:
             }
             switch(opcode) {
             case 0:
-switchD_97bdfc38_caseD_0:
+srcStorageWordCase0:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpMovAVRTC;
               break;
@@ -3390,7 +3390,7 @@ switchD_97bdfc38_caseD_0:
               opTemplate = &_glpOpFlrAVRTC;
               break;
             default:
-              goto switchD_97bdfc38_caseD_6;
+              goto opcodeCase6;
             case 7:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpSetSignAVRTC;
@@ -3414,7 +3414,7 @@ switchD_97bdfc38_caseD_0:
                                     *(undefined4 *)(compiler + 0xe30));
               }
               else if (dimension < 3) {
-                if (dimension != 1) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 1) goto opcodeCase6;
                 emitResult64 = ((int (*)())_PPCNoiseGeneratorCalculate1DAVRTC)(*(int *)(compiler + 0xe20) + 0x360,
                                     *(undefined4 *)(compiler + 0xe30));
               }
@@ -3423,11 +3423,11 @@ switchD_97bdfc38_caseD_0:
                                     *(undefined4 *)(compiler + 0xe30));
               }
               else {
-                if (dimension != 4) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 4) goto opcodeCase6;
                 emitResult64 = ((int (*)())_PPCNoiseGeneratorCalculate4DAVRTC)(*(int *)(compiler + 0xe20) + 0x360,
                                     *(undefined4 *)(compiler + 0xe30));
               }
-              goto LAB_97be1634;
+              goto setPassThroughR4;
             case 0xc:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpSqrtAVRTC;
@@ -3442,7 +3442,7 @@ switchD_97bdfc38_caseD_0:
               break;
             case 0x10:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
-              goto LAB_97be04f0;
+              goto setOpTemplate;
             case 0x11:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpExpAVRTC;
@@ -3454,7 +3454,7 @@ switchD_97bdfc38_caseD_0:
                 opTemplate = &_glpOpLength2AVRTC;
               }
               else if (dimension < 3) {
-                if (dimension != 1) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 1) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpLength1AVRTC;
               }
@@ -3463,7 +3463,7 @@ switchD_97bdfc38_caseD_0:
                 opTemplate = &_glpOpLength3AVRTC;
               }
               else {
-                if (dimension != 4) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 4) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpLength4AVRTC;
               }
@@ -3483,7 +3483,7 @@ switchD_97bdfc38_caseD_0:
                 opTemplate = &_glpOpNormalise2AVRTC;
               }
               else if (dimension < 3) {
-                if (dimension != 1) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 1) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpNormalise1AVRTC;
               }
@@ -3492,7 +3492,7 @@ switchD_97bdfc38_caseD_0:
                 opTemplate = &_glpOpNormalise3AVRTC;
               }
               else {
-                if (dimension != 4) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 4) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpNormalise4AVRTC;
               }
@@ -3519,7 +3519,7 @@ switchD_97bdfc38_caseD_0:
               vectorInstWord5 = (int)((ulonglong)chunkIndex2 >> 0x20) * 4;
               codeWritePtr3 = (uint *)(*(int *)(compiler + 0xe30) + vectorInstWord5 + 4);
               *(undefined4 *)(*(int *)(compiler + 0xe30) + vectorInstWord5) = 0x1041132c;
-              goto LAB_97be1820;
+              goto storeCompiler3;
             case 0x19:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpSinAVRTC;
@@ -3571,17 +3571,17 @@ switchD_97bdfc38_caseD_0:
                 }
               }
               else {
-                if (dimension == 3) goto switchD_97bdfc38_caseD_28;
-                if (dimension == 4) goto switchD_97bdfc38_caseD_29;
+                if (dimension == 3) goto opcodeCase28;
+                if (dimension == 4) goto opcodeCase29;
               }
-              goto switchD_97bdfc38_caseD_6;
+              goto opcodeCase6;
             case 0x28:
-switchD_97bdfc38_caseD_28:
+opcodeCase28:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpDp3AVRTC;
               break;
             case 0x29:
-switchD_97bdfc38_caseD_29:
+opcodeCase29:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpDp4AVRTC;
               break;
@@ -3597,7 +3597,7 @@ switchD_97bdfc38_caseD_29:
                   opTemplate = &_glpOpDistance2GLSLAVRTC;
                 }
                 else if (dimension < 3) {
-                  if (dimension != 1) goto switchD_97bdfc38_caseD_6;
+                  if (dimension != 1) goto opcodeCase6;
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   opTemplate = &_glpOpDistance1GLSLAVRTC;
                 }
@@ -3606,7 +3606,7 @@ switchD_97bdfc38_caseD_29:
                   opTemplate = &_glpOpDistance3GLSLAVRTC;
                 }
                 else {
-                  if (dimension != 4) goto switchD_97bdfc38_caseD_6;
+                  if (dimension != 4) goto opcodeCase6;
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   opTemplate = &_glpOpDistance4GLSLAVRTC;
                 }
@@ -3635,7 +3635,7 @@ switchD_97bdfc38_caseD_29:
                 opTemplate = &_glpOpReflect2AVRTC;
               }
               else if (dimension < 3) {
-                if (dimension != 1) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 1) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpReflect1AVRTC;
               }
@@ -3644,7 +3644,7 @@ switchD_97bdfc38_caseD_29:
                 opTemplate = &_glpOpReflect3AVRTC;
               }
               else {
-                if (dimension != 4) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 4) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpReflect4AVRTC;
               }
@@ -3680,7 +3680,7 @@ switchD_97bdfc38_caseD_29:
               chunkWordCount = _glpRTCAddAChunk_97bd7cbc(&_glpOpMulForPowAVRTC,chunkWordCount);
               codeWritePtr = (undefined4 *)(*(int *)(compiler + 0xe30) + chunkWordCount * 4);
               *(undefined4 **)(compiler + 0xe30) = codeWritePtr;
-LAB_97be04f0:
+setOpTemplate:
               opTemplate = &_glpOpEx2AVRTC;
               break;
             case 0x39:
@@ -3694,7 +3694,7 @@ LAB_97be04f0:
                 opTemplate = &_glpOpDivideAVRTC;
               }
               else {
-                if (curInst != 3) goto switchD_97bdfc38_caseD_6;
+                if (curInst != 3) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpIntegerDivideAVRTC;
               }
@@ -3706,7 +3706,7 @@ LAB_97be04f0:
                 opTemplate = &_glpOpFaceForward2AVRTC;
               }
               else if (dimension < 3) {
-                if (dimension != 1) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 1) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpFaceForward1AVRTC;
               }
@@ -3715,7 +3715,7 @@ LAB_97be04f0:
                 opTemplate = &_glpOpFaceForward3AVRTC;
               }
               else {
-                if (dimension != 4) goto switchD_97bdfc38_caseD_6;
+                if (dimension != 4) goto opcodeCase6;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpFaceForward4AVRTC;
               }
@@ -3752,182 +3752,182 @@ LAB_97be04f0:
                   if ((srcTypeWord == (int *)0x0) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x0)) {
                     srcStorageWord = (int *)0xffffffff;
                   }
-LAB_97be06cc:
+loopSetCodeWritePtr2:
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord4 = 0x10400000;
-LAB_97be07d8:
+loopSetVectorInstWord4:
                   vectorInstWord4 = vectorInstWord4 | 0x28c;
-LAB_97be0ad4:
+loopStoreCodeWritePtr2:
                   *codeWritePtr2 = vectorInstWord4;
-LAB_97be0ad8:
+loopStoreCompiler2:
                   *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
                   break;
                 }
-                if (operandSelector != 1) goto LAB_97be06cc;
+                if (operandSelector != 1) goto loopSetCodeWritePtr2;
                 if (srcTypeWord != (int *)0x2) {
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1040022c;
-                  goto LAB_97be0794;
+                  goto loopStoreCodeWritePtr23;
                 }
                 if (srcStorageWord != (int *)0x3) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1040032c;
-                  goto LAB_97be077c;
+                  goto storeCodeWritePtr32;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10400484;
-                goto LAB_97be1470;
+                goto storeCodeWritePtr33;
               case 1:
                 if (operandSelector == 1) {
                   operandSelector = 0xffffffff;
                   if ((srcTypeWord == (int *)0x1) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x1)) {
                     srcStorageWord = (int *)0xffffffff;
                   }
-LAB_97be0748:
+loopSetCodeWritePtr22:
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord4 = 0x10410000;
-                  goto LAB_97be07d8;
+                  goto loopSetVectorInstWord4;
                 }
-                if (operandSelector != 2) goto LAB_97be0748;
+                if (operandSelector != 2) goto loopSetCodeWritePtr22;
                 if (srcTypeWord != (int *)0x3) {
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1040032c;
-                  goto LAB_97be0794;
+                  goto loopStoreCodeWritePtr23;
                 }
                 if (srcStorageWord != (int *)0x0) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10400484;
-                  goto LAB_97be077c;
+                  goto storeCodeWritePtr32;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10400000;
-                goto LAB_97be13a0;
+                goto setVectorInstWord11;
               case 2:
                 if (operandSelector == 2) {
                   operandSelector = 0xffffffff;
                   if ((srcTypeWord == (int *)0x2) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x2)) {
                     srcStorageWord = (int *)0xffffffff;
                   }
-LAB_97be07d0:
+loopSetCodeWritePtr23:
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord4 = 0x10420000;
-                  goto LAB_97be07d8;
+                  goto loopSetVectorInstWord4;
                 }
-                if (operandSelector != 3) goto LAB_97be07d0;
+                if (operandSelector != 3) goto loopSetCodeWritePtr23;
                 if (srcTypeWord != (int *)0x0) {
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10400484;
-                  goto LAB_97be0794;
+                  goto loopStoreCodeWritePtr23;
                 }
                 if (srcStorageWord != (int *)0x1) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10400000;
-                  goto LAB_97be1050;
+                  goto setVectorInstWord7;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10400000;
-                goto LAB_97be1040;
+                goto setVectorInstWord8;
               case 3:
                 if (operandSelector == 0) {
                   if (srcTypeWord != (int *)0x1) {
                     codeWritePtr2 = *(uint **)(compiler + 0xe30);
                     vectorInstWord = 0x10400000;
-                    goto LAB_97be0c28;
+                    goto setVectorInstWord;
                   }
                   if (srcStorageWord != (int *)0x2) {
                     codeWritePtr3 = *(uint **)(compiler + 0xe30);
                     vectorInstWord = 0x10400000;
-                    goto LAB_97be0c18;
+                    goto setVectorInstWord2;
                   }
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10400000;
-                  goto LAB_97be0c08;
+                  goto setVectorInstWord3;
                 }
                 if (operandSelector != 3) {
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord4 = 0x10400484;
-                  goto LAB_97be0ad4;
+                  goto loopStoreCodeWritePtr2;
                 }
                 if ((srcTypeWord == (int *)0x3) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x3)) {
                   srcStorageWord = (int *)0xffffffff;
                 }
                 codeWritePtr2 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1043028c;
-                goto LAB_97be0794;
+                goto loopStoreCodeWritePtr23;
               case 4:
                 if (operandSelector == 4) {
                   operandSelector = 0xffffffff;
                   if ((srcTypeWord == (int *)0x4) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x4)) {
                     srcStorageWord = (int *)0xffffffff;
                   }
-LAB_97be08c4:
+loopSetCodeWritePtr:
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord4 = 0x10400000;
-LAB_97be0960:
+loopStoreCodeWritePtr:
                   *codeWritePtr = 0x10603cc4;
                   codeWritePtr2 = codeWritePtr + 1;
                   *codeWritePtr2 = vectorInstWord4 | 0x1a8c;
-                  goto LAB_97be0ad8;
+                  goto loopStoreCompiler2;
                 }
-                if (operandSelector != 5) goto LAB_97be08c4;
+                if (operandSelector != 5) goto loopSetCodeWritePtr;
                 if (srcTypeWord != (int *)0x6) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x10603cc4;
                   vectorInstWord = 0x10431a2c;
-                  goto LAB_97be0e64;
+                  goto storeCodeWritePtr;
                 }
                 if (srcStorageWord == (int *)0x7) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10403cc4;
-                  goto LAB_97be1470;
+                  goto storeCodeWritePtr33;
                 }
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord3 = 0x10603cc4;
                 vectorInstWord = 0x10431b2c;
-                goto LAB_97be1248;
+                goto storeCodeWritePtr3;
               case 5:
                 if (operandSelector == 5) {
                   operandSelector = 0xffffffff;
                   if ((srcTypeWord == (int *)0x5) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x5)) {
                     srcStorageWord = (int *)0xffffffff;
                   }
-LAB_97be0954:
+loopSetCodeWritePtr3:
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord4 = 0x10410000;
-                  goto LAB_97be0960;
+                  goto loopStoreCodeWritePtr;
                 }
-                if (operandSelector != 6) goto LAB_97be0954;
+                if (operandSelector != 6) goto loopSetCodeWritePtr3;
                 if (srcTypeWord != (int *)0x7) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x10603cc4;
                   vectorInstWord = 0x10431b2c;
-                  goto LAB_97be0e64;
+                  goto storeCodeWritePtr;
                 }
                 if (srcStorageWord != (int *)0x4) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10403cc4;
-                  goto LAB_97be077c;
+                  goto storeCodeWritePtr32;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10600000;
                 vectorInstWord4 = 0x10430000;
-                goto LAB_97be1484;
+                goto setVectorInstWord12;
               case 6:
                 if (operandSelector == 6) {
                   operandSelector = 0xffffffff;
                   if ((srcTypeWord == (int *)0x6) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x6)) {
                     srcStorageWord = (int *)0xffffffff;
                   }
-LAB_97be09ec:
+loopSetCodeWritePtr4:
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord4 = 0x10420000;
-                  goto LAB_97be0960;
+                  goto loopStoreCodeWritePtr;
                 }
-                if (operandSelector != 7) goto LAB_97be09ec;
+                if (operandSelector != 7) goto loopSetCodeWritePtr4;
                 if (srcTypeWord != (int *)0x4) {
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10403cc4;
-                  goto LAB_97be0794;
+                  goto loopStoreCodeWritePtr23;
                 }
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -3935,16 +3935,16 @@ LAB_97be09ec:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcStorageWord != (int *)0x5) {
                   vectorInstWord = 0x10430000;
-                  goto LAB_97be1338;
+                  goto setVectorInstWord9;
                 }
                 vectorInstWord = 0x10430000;
-                goto LAB_97be132c;
+                goto setVectorInstWord10;
               case 7:
                 if (operandSelector != 4) {
                   if (operandSelector != 7) {
                     codeWritePtr2 = *(uint **)(compiler + 0xe30);
                     vectorInstWord4 = 0x10403cc4;
-                    goto LAB_97be0ad4;
+                    goto loopStoreCodeWritePtr2;
                   }
                   if ((srcTypeWord == (int *)0x7) && (srcTypeWord = (int *)0xffffffff, srcStorageWord == (int *)0x7)) {
                     srcStorageWord = (int *)0xffffffff;
@@ -3952,7 +3952,7 @@ LAB_97be09ec:
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x10603cc4;
                   vectorInstWord = 0x10431a8c;
-                  goto LAB_97be0e64;
+                  goto storeCodeWritePtr;
                 }
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -3960,22 +3960,22 @@ LAB_97be09ec:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcTypeWord != (int *)0x5) {
                   vectorInstWord = 0x10430000;
-                  goto LAB_97be0fb8;
+                  goto storeCodeWritePtr22;
                 }
                 vectorInstWord = 0x10430000;
-                if (srcStorageWord != (int *)0x6) goto LAB_97be0fac;
+                if (srcStorageWord != (int *)0x6) goto setVectorInstWord4;
                 vectorInstWord = 0x10430000;
-                goto LAB_97be0ab4;
+                goto setVectorInstWord5;
               case 8:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10484484;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 1;
                 if (operandSelector != 8) break;
-                if (srcTypeWord != (int *)0x8) goto switchD_97be0ba4_default;
+                if (srcTypeWord != (int *)0x8) goto curInstDefault;
                 storageMatches = srcStorageWord == (int *)0x8;
-LAB_97be0b40:
-                if (storageMatches) goto switchD_97bdfc38_caseD_6;
-                goto switchD_97be0fe8_default;
+loopCheckStorageMatches:
+                if (storageMatches) goto opcodeCase6;
+                goto curInstDefault2;
               case 9:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x1040038c;
@@ -3983,18 +3983,18 @@ LAB_97be0b40:
                 if (operandSelector != 9) break;
                 if (srcTypeWord == (int *)0x9) {
                   storageMatches = srcStorageWord == (int *)0x9;
-                  goto LAB_97be0b40;
+                  goto loopCheckStorageMatches;
                 }
-                goto switchD_97be0ba4_default;
+                goto curInstDefault;
               case 10:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10483cc4;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 1;
                 if (operandSelector == 10) {
                   operandSelector = 0xffffffff;
-                  if (srcTypeWord != (int *)0xa) goto switchD_97be0ba4_default;
+                  if (srcTypeWord != (int *)0xa) goto curInstDefault;
                   srcTypeWord = (int *)0xffffffff;
-                  if (srcStorageWord != (int *)0xa) goto switchD_97be0fe8_default;
+                  if (srcStorageWord != (int *)0xa) goto curInstDefault2;
                   srcStorageWord = (int *)0xffffffff;
                 }
               }
@@ -4004,91 +4004,91 @@ LAB_97be0b40:
                   storageMatches = srcStorageWord == (int *)0x0;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10600000;
-LAB_97be0c50:
+loopSetVectorInstWord:
                   vectorInstWord = vectorInstWord | 0x28c;
-                  goto LAB_97be0c54;
+                  goto storeCodeCursor3;
                 }
                 if (srcTypeWord != (int *)0x1) {
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10420000;
-LAB_97be0c28:
+setVectorInstWord:
                   vectorInstWord = vectorInstWord | 300;
-                  goto LAB_97be0794;
+                  goto loopStoreCodeWritePtr23;
                 }
                 if (srcStorageWord != (int *)0x2) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10420000;
-LAB_97be0c18:
+setVectorInstWord2:
                   vectorInstWord = vectorInstWord | 0x22c;
-                  goto LAB_97be077c;
+                  goto storeCodeWritePtr32;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10420000;
-LAB_97be0c08:
+setVectorInstWord3:
                 vectorInstWord = vectorInstWord | 0x32c;
-                goto LAB_97be1470;
+                goto storeCodeWritePtr33;
               case 1:
                 if (srcTypeWord == (int *)0x1) {
                   storageMatches = srcStorageWord == (int *)0x1;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10610000;
-                  goto LAB_97be0c50;
+                  goto loopSetVectorInstWord;
                 }
                 if (srcTypeWord != (int *)0x2) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x1060012c;
-                  goto LAB_97be0e60;
+                  goto setVectorInstWord6;
                 }
                 storageMatches = srcStorageWord == (int *)0x3;
                 codeCursor3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060012c;
-                goto LAB_97be0c54;
+                goto storeCodeCursor3;
               case 2:
                 if (srcTypeWord == (int *)0x2) {
                   storageMatches = srcStorageWord == (int *)0x2;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10620000;
-                  goto LAB_97be0c50;
+                  goto loopSetVectorInstWord;
                 }
                 if (srcTypeWord != (int *)0x3) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x1060022c;
-                  goto LAB_97be0e60;
+                  goto setVectorInstWord6;
                 }
                 storageMatches = srcStorageWord == (int *)0x0;
                 codeCursor3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060022c;
-                goto LAB_97be0c54;
+                goto storeCodeCursor3;
               case 3:
                 if (srcTypeWord != (int *)0x0) {
                   if (srcTypeWord != (int *)0x3) {
                     codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                     vectorInstWord3 = 0x1060032c;
-                    goto LAB_97be0e60;
+                    goto setVectorInstWord6;
                   }
                   storageMatches = srcStorageWord == (int *)0x3;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10630000;
-                  goto LAB_97be0c50;
+                  goto loopSetVectorInstWord;
                 }
                 storageMatches = srcStorageWord == (int *)0x1;
                 codeCursor3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060032c;
-LAB_97be0c54:
+storeCodeCursor3:
                 *codeCursor3 = vectorInstWord;
                 codeWritePtr2 = codeCursor3 + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
-LAB_97be0f9c:
+loopCheckStorageMatches2:
                 if (!storageMatches) {
                   vectorInstWord = 0x10420000;
-LAB_97be0fac:
+setVectorInstWord4:
                   vectorInstWord = vectorInstWord | 0x1a2c;
-                  goto LAB_97be133c;
+                  goto setCodeWritePtr32;
                 }
                 vectorInstWord = 0x10420000;
-LAB_97be0ab4:
+setVectorInstWord5:
                 vectorInstWord = vectorInstWord | 0x1b2c;
-                goto LAB_97be181c;
+                goto loopSetCodeWritePtr32;
               case 4:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -4097,17 +4097,17 @@ LAB_97be0ab4:
                 if (srcTypeWord == (int *)0x4) {
                   storageMatches = srcStorageWord == (int *)0x4;
                   vectorInstWord = 0x10600000;
-LAB_97be0da4:
+loopStoreCodeWritePtr22:
                   *codeWritePtr2 = vectorInstWord | 0x1a8c;
-                  goto LAB_97be0e24;
+                  goto storeCompiler2;
                 }
                 if (srcTypeWord == (int *)0x5) {
                   storageMatches = srcStorageWord == (int *)0x6;
-                  goto LAB_97be0f9c;
+                  goto loopCheckStorageMatches2;
                 }
                 codeWritePtr2 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1042192c;
-LAB_97be0794:
+loopStoreCodeWritePtr23:
                 *codeWritePtr2 = vectorInstWord;
                 break;
               case 5:
@@ -4118,26 +4118,26 @@ LAB_97be0794:
                 if (srcTypeWord == (int *)0x5) {
                   storageMatches = srcStorageWord == (int *)0x5;
                   vectorInstWord = 0x10610000;
-                  goto LAB_97be0da4;
+                  goto loopStoreCodeWritePtr22;
                 }
                 if (srcTypeWord != (int *)0x6) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x1063192c;
-                  goto LAB_97be0e60;
+                  goto setVectorInstWord6;
                 }
                 storageMatches = srcStorageWord == (int *)0x7;
                 vectorInstWord = 0x1063192c;
-LAB_97be0e1c:
+loopStoreCodeWritePtr24:
                 *codeWritePtr2 = vectorInstWord;
-LAB_97be0e24:
+storeCompiler2:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
                 if (!storageMatches) {
                   codeWritePtr3 = codeWritePtr2 + 2;
                   codeWritePtr2[1] = 0x10421a2c;
-                  goto LAB_97be1344;
+                  goto loopStoreCompiler3;
                 }
                 vectorInstWord = 0x10421b2c;
-                goto LAB_97be1418;
+                goto setCodeWritePtr33;
               case 6:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -4146,18 +4146,18 @@ LAB_97be0e24:
                 if (srcTypeWord == (int *)0x6) {
                   storageMatches = srcStorageWord == (int *)0x6;
                   vectorInstWord = 0x10620000;
-                  goto LAB_97be0da4;
+                  goto loopStoreCodeWritePtr22;
                 }
                 if (srcTypeWord == (int *)0x7) {
                   storageMatches = srcStorageWord == (int *)0x4;
                   vectorInstWord = 0x10631a2c;
-                  goto LAB_97be0e1c;
+                  goto loopStoreCodeWritePtr24;
                 }
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord3 = 0x10631a2c;
-LAB_97be0e60:
+setVectorInstWord6:
                 vectorInstWord = 0x1042192c;
-LAB_97be0e64:
+storeCodeWritePtr:
                 *codeWritePtr = vectorInstWord3;
                 codeWritePtr2 = codeWritePtr + 1;
                 *codeWritePtr2 = vectorInstWord;
@@ -4176,7 +4176,7 @@ LAB_97be0e64:
                     *vectorInstWord6 = 0x10631b2c;
                     codeWritePtr[2] = 0x1042192c;
                     *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 3;
-                    goto switchD_97be0ba4_default;
+                    goto curInstDefault;
                   }
                   storageMatches = srcStorageWord == (int *)0x7;
                   vectorInstWord3 = 0x10631a8c;
@@ -4186,25 +4186,25 @@ LAB_97be0e64:
                 if (storageMatches) {
                   codeWritePtr3 = codeWritePtr + 3;
                   codeWritePtr[2] = 0x10421b2c;
-                  goto LAB_97be1820;
+                  goto storeCompiler3;
                 }
                 codeWritePtr3 = codeWritePtr + 3;
                 codeWritePtr[2] = 0x10421a2c;
-                goto LAB_97be1344;
+                goto loopStoreCompiler3;
               case 8:
                 if (srcTypeWord != (int *)0x8) {
                   codeWritePtr2 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1042412c;
-                  goto LAB_97be0794;
+                  goto loopStoreCodeWritePtr23;
                 }
                 if (srcStorageWord == (int *)0x8) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1042432c;
-                  goto LAB_97be1470;
+                  goto storeCodeWritePtr33;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1042422c;
-                goto LAB_97be077c;
+                goto storeCodeWritePtr32;
               case 9:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x1060038c;
@@ -4212,11 +4212,11 @@ LAB_97be0e64:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcTypeWord == (int *)0x9) {
                   storageMatches = srcStorageWord == (int *)0x9;
-                  goto LAB_97be0f9c;
+                  goto loopCheckStorageMatches2;
                 }
-LAB_97be0fb4:
+loopSetVectorInstWord2:
                 vectorInstWord = 0x10420000;
-LAB_97be0fb8:
+storeCodeWritePtr22:
                 *codeWritePtr2 = vectorInstWord | 0x192c;
                 break;
               case 10:
@@ -4224,85 +4224,85 @@ LAB_97be0fb8:
                 *codeWritePtr = 0x10683cc4;
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
-                if (srcTypeWord != (int *)0xa) goto LAB_97be0fb4;
+                if (srcTypeWord != (int *)0xa) goto loopSetVectorInstWord2;
                 storageMatches = srcStorageWord == (int *)0xa;
-                goto LAB_97be0f9c;
+                goto loopCheckStorageMatches2;
               default:
-                goto switchD_97be0ba4_default;
+                goto curInstDefault;
               }
               *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
-switchD_97be0ba4_default:
+curInstDefault:
               switch((int)srcTypeWord) {
               case 0x0:
                 if (srcStorageWord == (int *)0x0) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10600000;
-LAB_97be1074:
+loopSetVectorInstWord3:
                   vectorInstWord = vectorInstWord | 0x28c;
-                  goto LAB_97be107c;
+                  goto setVectorInstWord42;
                 }
                 if (srcStorageWord != (int *)0x1) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10420000;
-LAB_97be1050:
+setVectorInstWord7:
                   vectorInstWord = vectorInstWord | 300;
-                  goto LAB_97be077c;
+                  goto storeCodeWritePtr32;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10420000;
-LAB_97be1040:
+setVectorInstWord8:
                 vectorInstWord = vectorInstWord | 0x22c;
-                goto LAB_97be1470;
+                goto storeCodeWritePtr33;
               case 0x1:
                 if (srcStorageWord == (int *)0x1) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10610000;
-                  goto LAB_97be1074;
+                  goto loopSetVectorInstWord3;
                 }
                 if (srcStorageWord == (int *)0x2) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1060012c;
-                  goto LAB_97be107c;
+                  goto setVectorInstWord42;
                 }
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord3 = 0x1060012c;
-LAB_97be1244:
+loopSetVectorInstWord5:
                 vectorInstWord = 0x1042192c;
-LAB_97be1248:
+storeCodeWritePtr3:
                 *codeWritePtr = vectorInstWord3;
                 codeWritePtr3 = codeWritePtr + 1;
                 *codeWritePtr3 = vectorInstWord;
-                goto LAB_97be0780;
+                goto setCodeWritePtr3;
               case 0x2:
                 if (srcStorageWord == (int *)0x2) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10620000;
-                  goto LAB_97be1074;
+                  goto loopSetVectorInstWord3;
                 }
                 if (srcStorageWord != (int *)0x3) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x1060022c;
-                  goto LAB_97be1244;
+                  goto loopSetVectorInstWord5;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060022c;
-                goto LAB_97be107c;
+                goto setVectorInstWord42;
               case 0x3:
                 if (srcStorageWord != (int *)0x0) {
                   if (srcStorageWord != (int *)0x3) {
                     codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                     vectorInstWord3 = 0x1060032c;
-                    goto LAB_97be1244;
+                    goto loopSetVectorInstWord5;
                   }
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10630000;
-                  goto LAB_97be1074;
+                  goto loopSetVectorInstWord3;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060032c;
-LAB_97be107c:
+setVectorInstWord42:
                 vectorInstWord4 = 0x10421a2c;
-                goto LAB_97be148c;
+                goto storeCodeWritePtr34;
               case 0x4:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -4310,18 +4310,18 @@ LAB_97be107c:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcStorageWord == (int *)0x4) {
                   vectorInstWord = 0x10600000;
-LAB_97be11c0:
+loopSetVectorInstWord6:
                   vectorInstWord = vectorInstWord | 0x1a8c;
-                  goto LAB_97be1290;
+                  goto loopStoreCodeWritePtr25;
                 }
                 if (srcStorageWord != (int *)0x5) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1042192c;
-                  goto LAB_97be077c;
+                  goto storeCodeWritePtr32;
                 }
                 codeWritePtr3 = codeWritePtr + 2;
                 *codeWritePtr2 = 0x10421a2c;
-                goto LAB_97be1820;
+                goto storeCompiler3;
               case 0x5:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -4329,15 +4329,15 @@ LAB_97be11c0:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcStorageWord == (int *)0x5) {
                   vectorInstWord = 0x10610000;
-                  goto LAB_97be11c0;
+                  goto loopSetVectorInstWord6;
                 }
                 if (srcStorageWord != (int *)0x6) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x1063192c;
-                  goto LAB_97be1244;
+                  goto loopSetVectorInstWord5;
                 }
                 vectorInstWord = 0x1063192c;
-                goto LAB_97be1290;
+                goto loopStoreCodeWritePtr25;
               case 0x6:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -4345,19 +4345,19 @@ LAB_97be11c0:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcStorageWord == (int *)0x6) {
                   vectorInstWord = 0x10620000;
-                  goto LAB_97be11c0;
+                  goto loopSetVectorInstWord6;
                 }
                 if (srcStorageWord != (int *)0x7) {
                   codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                   vectorInstWord3 = 0x10631a2c;
-                  goto LAB_97be1244;
+                  goto loopSetVectorInstWord5;
                 }
                 vectorInstWord = 0x10631a2c;
-LAB_97be1290:
+loopStoreCodeWritePtr25:
                 *codeWritePtr2 = vectorInstWord;
                 codeWritePtr2[1] = 0x10421a2c;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2 + 2;
-                goto switchD_97bdfc38_caseD_6;
+                goto opcodeCase6;
               case 0x7:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 *codeWritePtr = 0x10603cc4;
@@ -4365,10 +4365,10 @@ LAB_97be1290:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcStorageWord == (int *)0x4) {
                   vectorInstWord = 0x10631b2c;
-                  goto LAB_97be1290;
+                  goto loopStoreCodeWritePtr25;
                 }
                 vectorInstWord = 0x10630000;
-                if (srcStorageWord == (int *)0x7) goto LAB_97be11c0;
+                if (srcStorageWord == (int *)0x7) goto loopSetVectorInstWord6;
                 *codeWritePtr2 = 0x10631b2c;
                 codeWritePtr[2] = 0x1042192c;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 3;
@@ -4377,55 +4377,55 @@ LAB_97be1290:
                 if (srcStorageWord == (int *)0x8) {
                   codeWritePtr3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x1042422c;
-                  goto LAB_97be1470;
+                  goto storeCodeWritePtr33;
                 }
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1042412c;
-LAB_97be077c:
+storeCodeWritePtr32:
                 *codeWritePtr3 = vectorInstWord;
-LAB_97be0780:
+setCodeWritePtr3:
                 codeWritePtr3 = codeWritePtr3 + 1;
-LAB_97be1344:
+loopStoreCompiler3:
                 *(uint **)(compiler + 0xe30) = codeWritePtr3;
                 break;
               case 0x9:
                 storageMatches = srcStorageWord == (int *)0x9;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord3 = 0x1060038c;
-                goto LAB_97be1318;
+                goto storeCodeWritePtr4;
               case 0xa:
                 storageMatches = srcStorageWord == (int *)0xa;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord3 = 0x10683cc4;
-LAB_97be1318:
+storeCodeWritePtr4:
                 *codeWritePtr = vectorInstWord3;
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (!storageMatches) {
                   vectorInstWord = 0x10420000;
-LAB_97be1338:
+setVectorInstWord9:
                   vectorInstWord = vectorInstWord | 0x192c;
-LAB_97be133c:
+setCodeWritePtr32:
                   codeWritePtr3 = codeWritePtr2 + 1;
                   *codeWritePtr2 = vectorInstWord;
-                  goto LAB_97be1344;
+                  goto loopStoreCompiler3;
                 }
                 vectorInstWord = 0x10420000;
-LAB_97be132c:
+setVectorInstWord10:
                 vectorInstWord = vectorInstWord | 0x1a2c;
-LAB_97be181c:
+loopSetCodeWritePtr32:
                 codeWritePtr3 = codeWritePtr2 + 1;
                 *codeWritePtr2 = vectorInstWord;
-                goto LAB_97be1820;
+                goto storeCompiler3;
               }
-switchD_97be0fe8_default:
+curInstDefault2:
               switch((int)srcStorageWord) {
               case 0x0:
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10420000;
-LAB_97be13a0:
+setVectorInstWord11:
                 vectorInstWord = vectorInstWord | 300;
-                goto LAB_97be1470;
+                goto storeCodeWritePtr33;
               case 0x1:
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord4 = 0x10420000;
@@ -4444,33 +4444,33 @@ LAB_97be13a0:
               case 0x4:
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10600000;
-                goto LAB_97be1480;
+                goto setVectorInstWord43;
               case 0x5:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord = 0x1063192c;
-                goto LAB_97be1404;
+                goto storeCodeWritePtr5;
               case 0x6:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord = 0x10631a2c;
-                goto LAB_97be1404;
+                goto storeCodeWritePtr5;
               case 0x7:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord = 0x10631b2c;
-LAB_97be1404:
+storeCodeWritePtr5:
                 *codeWritePtr = 0x10603cc4;
                 codeWritePtr2 = codeWritePtr + 1;
                 *codeWritePtr2 = vectorInstWord;
                 vectorInstWord = 0x1042192c;
-LAB_97be1418:
+setCodeWritePtr33:
                 codeWritePtr3 = codeWritePtr2 + 2;
                 codeWritePtr2[1] = vectorInstWord;
-                goto LAB_97be1820;
+                goto storeCompiler3;
               case 0x8:
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1042412c;
-LAB_97be1470:
+storeCodeWritePtr33:
                 *codeWritePtr3 = vectorInstWord;
-                goto LAB_97be1494;
+                goto setCodeWritePtr34;
               case 0x9:
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord4 = 0x10420000;
@@ -4479,24 +4479,24 @@ LAB_97be1470:
               case 0xa:
                 codeWritePtr3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x10680000;
-LAB_97be1480:
+setVectorInstWord43:
                 vectorInstWord4 = 0x10420000;
-LAB_97be1484:
+setVectorInstWord12:
                 vectorInstWord = vectorInstWord | 0x3cc4;
                 break;
               default:
-                goto switchD_97bdfc38_caseD_6;
+                goto opcodeCase6;
               }
               vectorInstWord4 = vectorInstWord4 | 0x192c;
-LAB_97be148c:
+storeCodeWritePtr34:
               *codeWritePtr3 = vectorInstWord;
               codeWritePtr3 = codeWritePtr3 + 1;
               *codeWritePtr3 = vectorInstWord4;
-LAB_97be1494:
+setCodeWritePtr34:
               codeWritePtr3 = codeWritePtr3 + 1;
-LAB_97be1820:
+storeCompiler3:
               *(uint **)(compiler + 0xe30) = codeWritePtr3;
-              goto switchD_97bdfc38_caseD_6;
+              goto opcodeCase6;
             case 0x42:
             case 0x43:
             case 0x44:
@@ -4533,7 +4533,7 @@ LAB_97be1820:
               else {
                 passThroughR4 = leftoverR4_07;
                 if (textureTarget < 3) {
-                  if (textureTarget != 1) goto switchD_97bdfc38_caseD_6;
+                  if (textureTarget != 1) goto opcodeCase6;
                   srcBankWord = *(undefined4 *)(compiler + 0xe30);
                   emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel3DRTCAV)(*(undefined4 *)(compiler + 0xe1c),textureObject,srcBankWord);
                 }
@@ -4542,15 +4542,15 @@ LAB_97be1820:
                   emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCAV)(*(undefined4 *)(compiler + 0xe1c),textureObject,srcBankWord);
                 }
                 else {
-                  if (textureTarget != 4) goto switchD_97bdfc38_caseD_6;
+                  if (textureTarget != 4) goto opcodeCase6;
                   srcBankWord = *(undefined4 *)(compiler + 0xe30);
                   emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel1DRTCAV)(*(undefined4 *)(compiler + 0xe1c),textureObject,srcBankWord);
                 }
               }
-LAB_97be1634:
+setPassThroughR4:
               passThroughR4 = (undefined4)emitResult64;
               *(int *)(compiler + 0xe30) = (int)((ulonglong)emitResult64 >> 0x20);
-              goto switchD_97bdfc38_caseD_6;
+              goto opcodeCase6;
             case 0x48:
               if ((*(byte *)(*(int *)(compiler + 0xe28) + 0x28) & 1) != 0) {
                 chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(&_glpOpArlAVRTC,*(undefined4 *)(compiler + 0xe30))
@@ -4569,7 +4569,7 @@ LAB_97be1634:
             case 0x5a:
             case 0x5b:
             case 0x6a:
-              goto switchD_97bdfc38_caseD_49;
+              goto opcodeCase49;
             case 0x4b:
               curInst = *(int *)(compiler + 0xe28);
               srcBankWord = *(undefined4 *)(curInst + 0x10);
@@ -4585,12 +4585,12 @@ LAB_97be1634:
               codeWritePtr[2] = 0x419a0008;
               srcTypeWord = codeWritePtr + 3;
               passThroughR4 = leftoverR4_08;
-              goto LAB_97be16ec;
+              goto storeCompiler4;
             case 0x4d:
               codeWritePtr2 = *(uint **)(compiler + 0xe30);
               *codeWritePtr2 = *(int *)(compiler + 0xe40) - (int)codeWritePtr2 & 0x3fffffcU | 0x48000000;
               *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
-              goto switchD_97bdfc38_caseD_49;
+              goto opcodeCase49;
             case 0x54:
             case 0x58:
               codeWordPtr = *(int **)(*(int *)(compiler + 0xe20) + 0xd80);
@@ -4604,13 +4604,13 @@ LAB_97be1634:
                 branchWord = *(int *)(curInst + -4) - ((int)codeWritePtr2 - *(int *)(compiler + 0xe2c));
               }
               *codeWritePtr2 = branchWord & 0x3fffffc | 0x48000000;
-              goto LAB_97be17b0;
+              goto storeCompiler5;
             case 0x55:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               codeWritePtr[1] = 0x40980008;
               srcTypeWord = codeWritePtr + 2;
               *codeWritePtr = 0x10604cc6;
-LAB_97be16ec:
+storeCompiler4:
               *(int **)(compiler + 0xe30) = srcTypeWord;
               codeWordPtr = *(int **)(*(int *)(compiler + 0xe20) + 0xd80);
               curInst = *codeWordPtr + *(int *)(*(int *)(compiler + 0xe28) + 8) * 0x11c;
@@ -4622,11 +4622,11 @@ LAB_97be16ec:
               }
               codeWritePtr2 = *(uint **)(compiler + 0xe30);
               *codeWritePtr2 = branchWord & 0x3fffffc | 0x48000000;
-LAB_97be17b0:
+storeCompiler5:
               *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
-switchD_97bdfc38_caseD_49:
+opcodeCase49:
               writesDestination = false;
-              goto LAB_97be1860;
+              goto setOperandWidth;
             case 0x68:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
               opTemplate = &_glpOpRefractAVRTC;
@@ -4644,7 +4644,7 @@ switchD_97bdfc38_caseD_49:
               }
               vectorInstWord = vectorInstWord & 0x3fffffc | 0x48000000;
               writesDestination = false;
-              goto LAB_97be181c;
+              goto loopSetCodeWritePtr32;
             case 0x6c:
               curInst = *(int *)(compiler + 0xe28);
               if ((*(int *)(curInst + 0x24) == 3) && (*(int *)(curInst + 0x4c) == 1)) {
@@ -4654,7 +4654,7 @@ switchD_97bdfc38_caseD_49:
               else {
                 if ((*(int *)(curInst + 0x24) != 4) ||
                    ((*(int *)(curInst + 0x4c) != 1 && (*(int *)(curInst + 0x4c) != 3))))
-                goto switchD_97bdfc38_caseD_0;
+                goto srcStorageWordCase0;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 opTemplate = &_glpOpSetNotEqualToZeroAVRTC;
               }
@@ -4683,13 +4683,13 @@ switchD_97bdfc38_caseD_49:
               srcTypeWord[1] = 0x7c6378ce;
               srcTypeWord[2] = 0x104238ee;
               *(int **)(compiler + 0xe30) = srcTypeWord + 3;
-              goto switchD_97bdfc38_caseD_6;
+              goto opcodeCase6;
             }
             chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(opTemplate,codeWritePtr);
             passThroughR4 = (undefined4)chunkIndex2;
             *(int *)(compiler + 0xe30) =
                  *(int *)(compiler + 0xe30) + (int)((ulonglong)chunkIndex2 >> 0x20) * 4;
-switchD_97bdfc38_caseD_6:
+opcodeCase6:
             if (writesDestination) {
               if (saturateFlag != '\0') {
                 chunkWordCount = _glpRTCAddAChunk_97bd7cbc
@@ -4699,7 +4699,7 @@ switchD_97bdfc38_caseD_6:
               ((int (*)())_PPCRuntimeCompilerWriteDestinationAV)(compiler,operandWidth);
               passThroughR4 = leftoverR4_09;
             }
-LAB_97be1860:
+setOperandWidth:
             operandWidth = operandWidth + 1;
           } while (operandWidth < elementCount);
         }
@@ -4722,7 +4722,7 @@ LAB_97be1860:
             *(int **)(compiler + 0xe40) = srcStorageWord;
           }
         }
-LAB_97be18e4:
+setInst:
         inst = *(undefined4 **)(compiler + 0xe28);
       }
       programInfo = *(int *)(compiler + 0xe24);
@@ -4744,7 +4744,7 @@ LAB_97be18e4:
       _PPCRuntimeCompilerInitialise(compiler,1);
       passStartCursor = *(undefined4 *)(compiler + 0xe34);
       passThroughR4 = leftoverR4_10;
-LAB_97be1ac8:
+loopSetPassIndex:
       passIndex = *(int *)(compiler + 0xe48);
       *(undefined4 *)(compiler + 0xe30) = passStartCursor;
     }
@@ -4800,7 +4800,7 @@ LAB_97be1ac8:
         _PPCRuntimeCompilerInitialiseVariableInfo(compiler);
         passStartCursor = *(undefined4 *)(compiler + 0xe38);
         passThroughR4 = leftoverR4_12;
-        goto LAB_97be1ac8;
+        goto loopSetPassIndex;
       }
       if (passIndex == 3) {
         if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
@@ -5529,11 +5529,11 @@ int _PPCTextureSamplerSampleTexel1DFromLevelRTCAV(sampler, textureUnit, codeCurs
   }
   if (((sampler[5] == textureUnit) && (sampler[6] == 4)) && (sampler[7] == borderMode)) {
     lambdaComputed = sampler[10];
-    if (lambdaComputed != 0) goto LAB_97be2d14;
+    if (lambdaComputed != 0) goto checkLambdaComputed;
   }
   else {
     lambdaComputed = sampler[10];
-LAB_97be2d14:
+checkLambdaComputed:
     if (lambdaComputed == 0) {
       emittedWord = 0x3a310120;
       *codeCursor = textureUnit * 4 & 0xfffc | 0x82220000;
@@ -5584,7 +5584,7 @@ LAB_97be2d14:
   }
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97be2ebc:
+loopCheckSampler:
     if (sampler[8] != 0) {
       chunkWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,codeCursor);
       codeCursor = codeCursor + chunkWordCount;
@@ -5597,18 +5597,18 @@ LAB_97be2ebc:
   }
   else {
     if (minFilter < 0x2701) {
-      if (minFilter == 0x2600) goto LAB_97be2ebc;
+      if (minFilter == 0x2600) goto loopCheckSampler;
       isLinearFilter = minFilter == 0x2601;
-LAB_97be2eb4:
+loopCheckIsLinearFilter:
       if (!isLinearFilter) {
         return codeCursor;
       }
     }
     else {
-      if (minFilter == 0x2702) goto LAB_97be2ebc;
+      if (minFilter == 0x2702) goto loopCheckSampler;
       if (0x2701 < minFilter) {
         isLinearFilter = minFilter == 0x2703;
-        goto LAB_97be2eb4;
+        goto loopCheckIsLinearFilter;
       }
     }
     if (sampler[8] != 0) {
@@ -5675,11 +5675,11 @@ int _PPCTextureSamplerSampleTexel2DFromLevelRTCAV(sampler, textureUnit, codeCurs
   }
   if (((sampler[5] == textureUnit) && (sampler[6] == 3)) && (sampler[7] == borderMode)) {
     lambdaComputed = sampler[10];
-    if (lambdaComputed != 0) goto LAB_97be30f0;
+    if (lambdaComputed != 0) goto checkLambdaComputed;
   }
   else {
     lambdaComputed = sampler[10];
-LAB_97be30f0:
+checkLambdaComputed:
     if (lambdaComputed == 0) {
       emittedWord = 0x3a310120;
       *codeCursor = textureUnit * 4 & 0xfffc | 0x82220000;
@@ -5730,7 +5730,7 @@ LAB_97be30f0:
   }
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97be32a0:
+loopCheckSampler:
     if (sampler[8] != 0) {
       chunkWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,codeCursor);
       codeCursor = codeCursor + chunkWordCount;
@@ -5743,18 +5743,18 @@ LAB_97be32a0:
   }
   else {
     if (minFilter < 0x2701) {
-      if (minFilter == 0x2600) goto LAB_97be32a0;
+      if (minFilter == 0x2600) goto loopCheckSampler;
       isLinearFilter = minFilter == 0x2601;
-LAB_97be3298:
+loopCheckIsLinearFilter:
       if (!isLinearFilter) {
         return codeCursor;
       }
     }
     else {
-      if (minFilter == 0x2702) goto LAB_97be32a0;
+      if (minFilter == 0x2702) goto loopCheckSampler;
       if (0x2701 < minFilter) {
         isLinearFilter = minFilter == 0x2703;
-        goto LAB_97be3298;
+        goto loopCheckIsLinearFilter;
       }
     }
     if (sampler[8] != 0) {
@@ -5844,11 +5844,11 @@ int _PPCTextureSamplerSampleTexel3DFromLevelRTCAV(sampler, textureUnit, codeCurs
   }
   if (((sampler[5] == textureUnit) && (sampler[6] == 1)) && (sampler[7] == borderMode)) {
     lambdaComputed = sampler[10];
-    if (lambdaComputed != 0) goto LAB_97be359c;
+    if (lambdaComputed != 0) goto checkLambdaComputed;
   }
   else {
     lambdaComputed = sampler[10];
-LAB_97be359c:
+checkLambdaComputed:
     if (lambdaComputed == 0) {
       emittedWord = 0x3a310120;
       *codeCursor = textureUnit * 4 & 0xfffc | 0x82220000;
@@ -5902,7 +5902,7 @@ LAB_97be359c:
   }
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97be376c:
+loopCheckSampler:
     if (sampler[8] != 0) {
       chunkWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexProjectCoordinatesAVRTC,codeCursor);
       codeCursor = codeCursor + chunkWordCount;
@@ -5915,18 +5915,18 @@ LAB_97be376c:
   }
   else {
     if (minFilter < 0x2701) {
-      if (minFilter == 0x2600) goto LAB_97be376c;
+      if (minFilter == 0x2600) goto loopCheckSampler;
       isLinearFilter = minFilter == 0x2601;
-LAB_97be3764:
+loopCheckIsLinearFilter:
       if (!isLinearFilter) {
         return codeCursor;
       }
     }
     else {
-      if (minFilter == 0x2702) goto LAB_97be376c;
+      if (minFilter == 0x2702) goto loopCheckSampler;
       if (0x2701 < minFilter) {
         isLinearFilter = minFilter == 0x2703;
-        goto LAB_97be3764;
+        goto loopCheckIsLinearFilter;
       }
     }
     if (sampler[8] != 0) {
@@ -6109,7 +6109,7 @@ int _PPCTextureSamplerSampleTexelRECTFromLevelRTCAV(sampler, textureUnit, codeCu
   }
   minFilter = *(ushort *)(textureState + 0x16);
   if (minFilter == 0x2700) {
-LAB_97be3d34:
+loopSetFloatToIntWordCount:
     floatToIntWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntDenormalisedAVRTC,codeCursor);
     emitPtr = codeCursor + floatToIntWordCount;
     wrapCoordsWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
@@ -6119,18 +6119,18 @@ LAB_97be3d34:
   }
   else {
     if (minFilter < 0x2701) {
-      if (minFilter == 0x2600) goto LAB_97be3d34;
+      if (minFilter == 0x2600) goto loopSetFloatToIntWordCount;
       isLinearFilter = minFilter == 0x2601;
-LAB_97be3d2c:
+loopCheckIsLinearFilter:
       if (!isLinearFilter) {
         return codeCursor;
       }
     }
     else {
-      if (minFilter == 0x2702) goto LAB_97be3d34;
+      if (minFilter == 0x2702) goto loopSetFloatToIntWordCount;
       if (0x2701 < minFilter) {
         isLinearFilter = minFilter == 0x2703;
-        goto LAB_97be3d2c;
+        goto loopCheckIsLinearFilter;
       }
     }
     floatToIntWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntDenormalisedWithLERPValuesAVRTC,codeCursor);
@@ -6425,7 +6425,7 @@ int _PPCRasterOpMachine_DepthTestRTCAV(machine, codeCursor)
   switch(depthState & 7) {
   case 0:
     *codeCursor = (skipWords & 0xffffff) << 2 | 0x48000000;
-    goto LAB_97be44f0;
+    goto setCodeCursor;
   case 1:
     branchWord = 0x41800000;
     break;
@@ -6445,14 +6445,14 @@ int _PPCRasterOpMachine_DepthTestRTCAV(machine, codeCursor)
     branchWord = 0x40800000;
     break;
   default:
-    goto switchD_97be4464_caseD_7;
+    goto depthStateCase7;
   }
   *codeCursor = branchWord | 8;
   codeCursor = codeCursor + 1;
   *codeCursor = (skipWords - 1) * 4 & 0x3fffffc | 0x48000000;
-LAB_97be44f0:
+setCodeCursor:
   codeCursor = codeCursor + 1;
-switchD_97be4464_caseD_7:
+depthStateCase7:
   return codeCursor;
 }
 
@@ -6500,7 +6500,7 @@ int _PPCRasterOpMachine_DepthAndStencilTestRTCAV(machine, codeCursor)
   }
   stencilEnabled = (stageFlags & 2) != 0;
   stencilValueMask = *(uint *)(rasterState + 0x4c) >> 8 & 0xff;
-  if (!stencilEnabled) goto LAB_97be4754;
+  if (!stencilEnabled) goto checkStageFlags;
   *codeCursor = 0x83430dac;
   codeCursor[1] = 0x8b3a0000;
   stencilTestEnd = codeCursor + 2;
@@ -6509,7 +6509,7 @@ int _PPCRasterOpMachine_DepthAndStencilTestRTCAV(machine, codeCursor)
   case 0:
     stencilState = stencilState >> 0xf;
     codeCursor = stencilTestEnd;
-    goto LAB_97be47b8;
+    goto setCodeCursor;
   case 1:
     *stencilTestEnd = stencilRef & stencilValueMask | 0x3ba00000;
     codeCursor[3] = stencilValueMask | 0x733e0000;
@@ -6545,18 +6545,18 @@ int _PPCRasterOpMachine_DepthAndStencilTestRTCAV(machine, codeCursor)
     emitPtr = codeCursor + 3;
     branchFixupPtr = stencilTestEnd;
   default:
-    goto switchD_97be45d8_default;
+    goto stencilStateDefault;
   }
   codeCursor[4] = 0x7c1df000;
   branchFixupPtr = codeCursor + 5;
   *branchFixupPtr = stencilBranchWord;
   emitPtr = codeCursor + 6;
-switchD_97be45d8_default:
+stencilStateDefault:
   stencilUpdateCursor = (uint *)((int (*)())_PPCRasterOpMachineUpdateStencilBufferRTCAV)(stencilState >> 0xf & 7,0x1a,0x19,stencilRef,stencilWriteMask,emitPtr);
   codeCursor = stencilUpdateCursor + 1;
   *stencilUpdateCursor = *(int *)(compiler + 0xe3c) - (int)stencilUpdateCursor & 0x3fffffcU | 0x48000000;
   *branchFixupPtr = *branchFixupPtr | (int)codeCursor - (int)branchFixupPtr & 0xfffcU;
-LAB_97be4754:
+checkStageFlags:
   if ((stageFlags & 4) == 0) {
     if (!stencilEnabled) {
       return codeCursor;
@@ -6568,7 +6568,7 @@ LAB_97be4754:
   case 0:
     if (stencilEnabled) {
       stencilState = stencilState >> 0x12;
-LAB_97be47b8:
+setCodeCursor:
       codeCursor = (uint *)((int (*)())_PPCRasterOpMachineUpdateStencilBufferRTCAV)(stencilState & 7,0x1a,0x19,stencilRef,stencilWriteMask,codeCursor);
     }
     *codeCursor = *(int *)(compiler + 0xe3c) - (int)codeCursor & 0x3fffffcU | 0x48000000;
@@ -6606,17 +6606,17 @@ LAB_97be47b8:
   case 7:
     *codeCursor = 0x81e30da8;
     depthBranchWord = 0x48000000;
-    goto LAB_97be48e0;
+    goto setBranchFixupPtr;
   default:
-    goto switchD_97be4784_default;
+    goto depthFuncDefault;
   }
   codeCursor = codeCursor + 2;
   *codeCursor = 0xfc0d4000;
-LAB_97be48e0:
+setBranchFixupPtr:
   branchFixupPtr = codeCursor + 1;
   *branchFixupPtr = depthBranchWord;
   codeCursor = codeCursor + 2;
-switchD_97be4784_default:
+depthFuncDefault:
   if (stencilEnabled) {
     codeCursor = (uint *)((int (*)())_PPCRasterOpMachineUpdateStencilBufferRTCAV)(stencilState >> 0x12 & 7,0x1a,0x19,stencilRef,stencilWriteMask,codeCursor);
   }
@@ -6715,11 +6715,11 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(machine, codeCursor)
     branchField = (branchField & 0x3fff) << 2 | 0x41800000;
     break;
   default:
-    goto switchD_97be4bb8_caseD_7;
+    goto alphaStateCase7;
   }
   *codeCursor = branchField;
   codeCursor = codeCursor + 1;
-switchD_97be4bb8_caseD_7:
+alphaStateCase7:
   return codeCursor;
 }
 
@@ -6784,7 +6784,7 @@ int _PPCRasterOpMachine_BlendingRTCAV(machine, codeCursor)
     *codeCursor = 0x1093482e;
     codeCursor = codeCursor + 1;
     *codeCursor = vectorRegSel << 0x15 | 0x1002206e;
-    goto LAB_97be4f04;
+    goto setCodeCursor;
   case 1:
     *codeCursor = 0x1093482e;
     rgbEquationWord = vectorRegSel << 0x15 | 0x1004284a;
@@ -6795,21 +6795,21 @@ int _PPCRasterOpMachine_BlendingRTCAV(machine, codeCursor)
     break;
   case 3:
     rgbEquationWord = vectorRegSel << 0x15 | 0x1013144a;
-    goto LAB_97be4f00;
+    goto storeCodeCursor;
   case 4:
     rgbEquationWord = vectorRegSel << 0x15 | 0x1013140a;
-LAB_97be4f00:
+storeCodeCursor:
     *codeCursor = rgbEquationWord;
-    goto LAB_97be4f04;
+    goto setCodeCursor;
   default:
-    goto switchD_97be4e5c_default;
+    goto blendFieldDefault;
   }
   codeCursor[1] = 0x10a2486e;
   codeCursor = codeCursor + 2;
   *codeCursor = rgbEquationWord;
-LAB_97be4f04:
+setCodeCursor:
   codeCursor = codeCursor + 1;
-switchD_97be4e5c_default:
+blendFieldDefault:
   if (equationsEqual) {
     return codeCursor;
   }
@@ -6817,7 +6817,7 @@ switchD_97be4e5c_default:
   case 0:
     alphaEquationWord = 0x1262206e;
     *codeCursor = 0x1093482e;
-    goto LAB_97be4f88;
+    goto setCodeCursor2;
   case 1:
     *codeCursor = 0x1093482e;
     alphaEquationWord = 0x1264284a;
@@ -6828,23 +6828,23 @@ switchD_97be4e5c_default:
     break;
   case 3:
     alphaEquationWord = 0x1273144a;
-    goto LAB_97be4fc4;
+    goto storeCodeCursor2;
   case 4:
     alphaEquationWord = 0x1273140a;
-LAB_97be4fc4:
+storeCodeCursor2:
     *codeCursor = alphaEquationWord;
-    goto LAB_97be4fc8;
+    goto setCodeCursor3;
   default:
-    goto switchD_97be4f38_default;
+    goto blendStateDefault;
   }
   codeCursor = codeCursor + 1;
   *codeCursor = 0x10a2486e;
-LAB_97be4f88:
+setCodeCursor2:
   codeCursor = codeCursor + 1;
   *codeCursor = alphaEquationWord;
-LAB_97be4fc8:
+setCodeCursor3:
   codeCursor = codeCursor + 1;
-switchD_97be4f38_default:
+blendStateDefault:
   *codeCursor = vectorRegSel << 0x10 | 0x12609b6a;
   return codeCursor + 1;
 }
@@ -6881,7 +6881,7 @@ int _PPCRasterOpMachine_LogicOpRTCAV(machine, codeCursor)
       opWord = 0x12621484;
     }
     *codeCursor = opWord;
-    goto LAB_97be507c;
+    goto returnCodeCursor;
   }
   if (logicOp != 5) {
     *codeCursor = 0x10734b2e;
@@ -6897,12 +6897,12 @@ int _PPCRasterOpMachine_LogicOpRTCAV(machine, codeCursor)
   switch(logicOpState) {
   case 3:
     opWord = 0x10c30000;
-    goto LAB_97be5148;
+    goto setOpWord;
   default:
-    goto switchD_97be5104_caseD_4;
+    goto logicOpStateCase4;
   case 5:
     opWord = 0x10c40000;
-LAB_97be5148:
+setOpWord:
     opWord = opWord | 0x4d04;
     break;
   case 6:
@@ -6910,7 +6910,7 @@ LAB_97be5148:
     break;
   case 7:
     opWord = 0x10c32404;
-    goto LAB_97be51a0;
+    goto setOpWord2;
   case 8:
     opWord = 0x10c32484;
     break;
@@ -6922,13 +6922,13 @@ LAB_97be5148:
     break;
   case 0xb:
     opWord = 0x10c324c4;
-LAB_97be51a0:
+setOpWord2:
     opWord2 = 0x10c64d04;
-LAB_97be51d8:
+loopStoreCodeCursor:
     *codeCursor = opWord;
     codeCursor = codeCursor + 1;
     *codeCursor = opWord2;
-    goto LAB_97be51e0;
+    goto setCodeCursor;
   case 0xc:
     opWord = 0x10c32444;
     break;
@@ -6937,18 +6937,18 @@ LAB_97be51d8:
     break;
   case 0xe:
     opWord = 0x10840000;
-    goto LAB_97be51cc;
+    goto setOpWord3;
   case 0xf:
     opWord = 0x10630000;
-LAB_97be51cc:
+setOpWord3:
     opWord = opWord | 0x4d04;
     opWord2 = 0x10c32484;
-    goto LAB_97be51d8;
+    goto loopStoreCodeCursor;
   }
   *codeCursor = opWord;
-LAB_97be51e0:
+setCodeCursor:
   codeCursor = codeCursor + 1;
-switchD_97be5104_caseD_4:
+logicOpStateCase4:
   *codeCursor = 0x39e00020;
   codeCursor[1] = 0x7c6378ce;
   codeCursor[2] = 0x10c61c04;
@@ -6957,7 +6957,7 @@ switchD_97be5104_caseD_4:
   codeCursor[5] = 0x7c6378ce;
   codeCursor = codeCursor + 6;
   *codeCursor = 0x126648ee;
-LAB_97be507c:
+returnCodeCursor:
   return codeCursor + 1;
 }
 
@@ -7023,14 +7023,14 @@ int _PPCRasterOpMachineCalculateBlendingFactorsRTCAV(codeCursor, vectorReg, blen
   case 5:
     factorWord = vectorReg << 0x15 | vectorReg << 0xb | 0x10080000;
     factorWord2 = vectorReg << 0x15 | 0x10039a8c;
-    goto LAB_97be545c;
+    goto storeCodeCursor;
   case 6:
     factorWord = vectorReg << 0x15 | 0x1003128c;
     break;
   case 7:
     factorWord = vectorReg << 0x15 | vectorReg << 0xb | 0x10080000;
     factorWord2 = vectorReg << 0x15 | 0x1003128c;
-    goto LAB_97be545c;
+    goto storeCodeCursor;
   case 8:
     factorWord = vectorReg << 0x15 | 0x10063484;
     break;
@@ -7043,11 +7043,11 @@ int _PPCRasterOpMachineCalculateBlendingFactorsRTCAV(codeCursor, vectorReg, blen
   case 0xb:
     factorWord = vectorReg << 0x15 | vectorReg << 0xb | 0x10080000;
     factorWord2 = vectorReg << 0x15 | 0x1003328c;
-LAB_97be545c:
+storeCodeCursor:
     *codeCursor = factorWord2;
     codeCursor = codeCursor + 1;
     *codeCursor = factorWord | 0x4a;
-    goto LAB_97be5394;
+    goto returnCodeCursor;
   case 0xc:
     factorWord = vectorReg << 0x15 | 0x10021484;
     break;
@@ -7062,12 +7062,12 @@ LAB_97be545c:
     codeCursor[2] = factorWord | vectorReg << 0xb | 0x1003028c;
     codeCursor = codeCursor + 3;
     *codeCursor = factorWord2 | 0x1000436a;
-    goto LAB_97be5394;
+    goto returnCodeCursor;
   default:
     return codeCursor;
   }
   *codeCursor = factorWord;
-LAB_97be5394:
+returnCodeCursor:
   return codeCursor + 1;
 }
 
@@ -7089,7 +7089,7 @@ int _PPCRasterOpMachineUpdateStencilBufferRTCAV(stencilOp, stencilPtrReg, valueR
     *codeCursor = writeMask ^ 0xffff | valueReg << 0x15 | 0x701e0000;
     emitPtr = codeCursor + 1;
     *emitPtr = stencilPtrReg << 0x10 | 0x9bc00000;
-    goto LAB_97be5588;
+    goto returnEmitPtr;
   case 1:
     return codeCursor;
   case 2:
@@ -7097,7 +7097,7 @@ int _PPCRasterOpMachineUpdateStencilBufferRTCAV(stencilOp, stencilPtrReg, valueR
     codeCursor[1] = stencilRef & writeMask | 0x3be00000;
     emitPtr = codeCursor + 2;
     *emitPtr = 0x7fdefb78;
-    goto LAB_97be5580;
+    goto setEmitPtr;
   case 3:
     *codeCursor = (valueReg & 0x1f) << 0x10 | 0x2c0000ff;
     codeCursor[1] = valueReg << 0x10 | 0x3be00000;
@@ -7122,29 +7122,29 @@ int _PPCRasterOpMachineUpdateStencilBufferRTCAV(stencilOp, stencilPtrReg, valueR
   case 6:
     clearBitsWord = writeMask ^ 0xffff | valueReg << 0x15;
     deltaLoadWord = valueReg << 0x10 | 0x3be00001;
-    goto LAB_97be55e8;
+    goto storeCodeCursor;
   case 7:
     clearBitsWord = writeMask ^ 0xffff | valueReg << 0x15;
     deltaLoadWord = valueReg << 0x10 | 0x3be0ffff;
-LAB_97be55e8:
+storeCodeCursor:
     *codeCursor = deltaLoadWord;
     emitPtr = codeCursor + 1;
     *emitPtr = 0x73ff00ff;
-    goto LAB_97be55f4;
+    goto storeEmitPtr;
   default:
     return codeCursor;
   }
   emitPtr = codeCursor + 3;
   *emitPtr = deltaLoadWord;
-LAB_97be55f4:
+storeEmitPtr:
   emitPtr[1] = clearBitsWord | 0x701e0000;
   emitPtr[2] = writeMask | 0x73ff0000;
   emitPtr = emitPtr + 3;
   *emitPtr = 0x7fdefb78;
-LAB_97be5580:
+setEmitPtr:
   emitPtr = emitPtr + 1;
   *emitPtr = stencilPtrReg << 0x10 | 0x9bc00000;
-LAB_97be5588:
+returnEmitPtr:
   return emitPtr + 1;
 }
 

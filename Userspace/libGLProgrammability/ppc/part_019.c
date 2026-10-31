@@ -28,7 +28,7 @@ int _GetRegisterTypeInfo(stream, regInfo)
     break;
   case 1:
     usageList = *(undefined4 *)(stream + 4);
-    goto LAB_97c0b8d4;
+    goto setChunk;
   case 2:
     chunk = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(stream + 0x10),*regInfo);
     regInfo[2] = *(uint *)(chunk + 0xc) >> 0x1d;
@@ -62,7 +62,7 @@ int _GetRegisterTypeInfo(stream, regInfo)
     break;
   case 3:
     usageList = *(undefined4 *)(stream + 0x1c);
-LAB_97c0b8d4:
+setChunk:
     chunk = _PPStreamChunkListChunkAtIndex(usageList,*regInfo);
     regInfo[2] = *(uint *)(chunk + 0xc) >> 0x1d;
     regInfo[3] = *(uint *)(chunk + 0xc) >> 0x1a & 7;
@@ -463,23 +463,23 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
         pairDestWord = sizeShifted | 0x6c;
         sizeBits = *(uint *)(pairTempInfo + 0x10) & 3;
         if (sizeBits == 1) {
-LAB_97c0c1d8:
+loopSetPairDestWord:
           pairDestWord = pairDestWord | 0x4000;
-LAB_97c0c1e0:
+loopSetPairDestWord2:
           pairDestWord = pairDestWord | 0x2000;
         }
         else {
           if (1 < sizeBits) {
             if (sizeBits != 2) {
-              if (sizeBits != 3) goto LAB_97c0c1e8;
+              if (sizeBits != 3) goto setPairOpDest0;
               pairDestWord = sizeShifted | 0x1006c;
             }
             pairDestWord = pairDestWord | 0x8000;
-            goto LAB_97c0c1d8;
+            goto loopSetPairDestWord;
           }
-          if (sizeBits == 0) goto LAB_97c0c1e0;
+          if (sizeBits == 0) goto loopSetPairDestWord2;
         }
-LAB_97c0c1e8:
+setPairOpDest0:
         pairOpDest0 = (*(uint *)(pairTempInfo + 4) & 7) << 0x11 | pairDestWord;
         pairOpDest1 = (uint)*(ushort *)(pairTempInfo + 2);
         pairOpSrc0A = (*(uint *)(*modifiedPair + 4) & 7) << 0x17 |
@@ -561,23 +561,23 @@ LAB_97c0c1e8:
       op3Dest0 = destSizeShifted | 0x6c;
       destSizeBits = *(uint *)(modifiedRegister + 0x10) & 3;
       if (destSizeBits == 1) {
-LAB_97c0c404:
+loopSetOp3Dest0:
         op3Dest0 = op3Dest0 | 0x4000;
-LAB_97c0c40c:
+loopSetOp3Dest02:
         op3Dest0 = op3Dest0 | 0x2000;
       }
       else {
         if (1 < destSizeBits) {
           if (destSizeBits != 2) {
-            if (destSizeBits != 3) goto LAB_97c0c414;
+            if (destSizeBits != 3) goto setOp3Dest0;
             op3Dest0 = destSizeShifted | 0x1006c;
           }
           op3Dest0 = op3Dest0 | 0x8000;
-          goto LAB_97c0c404;
+          goto loopSetOp3Dest0;
         }
-        if (destSizeBits == 0) goto LAB_97c0c40c;
+        if (destSizeBits == 0) goto loopSetOp3Dest02;
       }
-LAB_97c0c414:
+setOp3Dest0:
       op3Dest0 = (*(uint *)(modifiedRegister + 4) & 7) << 0x11 | op3Dest0;
       srcBroadcastFlags[2] = 0;
       srcNegateFlags[2] = 0;
@@ -876,12 +876,12 @@ int _EmulateOp(compileContext, inst, hashSet)
   isBadUsage = ((int (*)())_IsBadUsage)(inst);
   destValue = (float *)(destInfo + 0x18);
   resultKnown = false;
-  if (isBadUsage != 0) goto LAB_97c0ee84;
-  if (((validArgCount != 1) || (noDestination)) || (src0 == (float *)0x0)) goto LAB_97c0d82c;
+  if (isBadUsage != 0) goto checkResultKnown;
+  if (((validArgCount != 1) || (noDestination)) || (src0 == (float *)0x0)) goto loopCheckFoldFailed;
   foldFailed = false;
   switch(*instWords >> 0x12 & 0xff) {
   case 0:
-    goto switchD_97c0cae8_caseD_0;
+    goto instWordsCase0;
   case 1:
     *destValue = 1.0;
     resultY = *src0;
@@ -900,15 +900,15 @@ int _EmulateOp(compileContext, inst, hashSet)
       resultZ = (float)powResult;
     }
     *(float *)(destInfo + 0x20) = resultZ;
-LAB_97c0d000:
+loopSetResultWBits:
     resultWBits = 0x3f800000;
-    goto LAB_97c0d128;
+    goto loopStoreDestInfo;
   case 2:
     *destValue = ABS(*src0);
     *(float *)(destInfo + 0x1c) = ABS(src0[1]);
     *(float *)(destInfo + 0x20) = ABS(src0[2]);
     resultW = ABS(src0[3]);
-    goto LAB_97c0ce78;
+    goto storeDestInfo7;
   case 3:
     ceilResult = _ceil((double)*src0);
     *destValue = (float)ceilResult;
@@ -931,7 +931,7 @@ LAB_97c0d000:
     resultW = src0[3];
     floorResult = _floor((double)resultW);
     *(float *)(destInfo + 0x24) = (float)((double)resultW - floorResult);
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 5:
     floorResult = _floor((double)*src0);
     *destValue = (float)floorResult;
@@ -943,7 +943,7 @@ LAB_97c0d000:
     break;
   default:
     foldFailed = true;
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 7:
     if (*src0 <= 0.0) {
       if (0.0 <= *src0) {
@@ -981,28 +981,28 @@ LAB_97c0d000:
       resultZBits = 0x3f800000;
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
-    if (0.0 < src0[3]) goto LAB_97c0d000;
-    if (0.0 <= src0[3]) goto LAB_97c0d124;
+    if (0.0 < src0[3]) goto loopSetResultWBits;
+    if (0.0 <= src0[3]) goto loopSetResultWBits2;
     resultWBits = 0xbf800000;
-    goto LAB_97c0d128;
+    goto loopStoreDestInfo;
   case 8:
     if (((*src0 == 0.0) && (src0[1] == 0.0)) && (src0[2] == 0.0)) {
-LAB_97c0d078:
+loopSetIntToFloatLow:
       intToFloatLow = 0;
-      if (src0[3] == 0.0) goto LAB_97c0d088;
+      if (src0[3] == 0.0) goto setIntToFloatLow;
     }
     intToFloatLow = 1;
-    goto LAB_97c0d088;
+    goto setIntToFloatLow;
   case 9:
     intToFloatLow = 0;
-    if (((*src0 != 0.0) && (src0[1] != 0.0)) && (src0[2] != 0.0)) goto LAB_97c0d078;
-LAB_97c0d088:
+    if (((*src0 != 0.0) && (src0[1] != 0.0)) && (src0[2] != 0.0)) goto loopSetIntToFloatLow;
+setIntToFloatLow:
     intToFloatLow = intToFloatLow ^ 0x80000000;
     intToFloatHigh = 0x43300000;
     sqrtValue = (double)CONCAT44(0x43300000,intToFloatLow) - 4503601774854144.0;
-LAB_97c0d214:
+loopSetScalarResult:
     scalarResult = (float)sqrtValue;
-    goto LAB_97c0d71c;
+    goto storeDestInfo;
   case 10:
     resultX = 1.0;
     if (*src0 != 0.0) {
@@ -1021,12 +1021,12 @@ LAB_97c0d214:
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     resultWBits = 0x3f800000;
     if (src0[3] != 0.0) {
-LAB_97c0d124:
+loopSetResultWBits2:
       resultWBits = 0;
     }
-LAB_97c0d128:
+loopStoreDestInfo:
     *(undefined4 *)(destInfo + 0x24) = resultWBits;
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 0xc:
     sqrtResult = _sqrt(ABS((double)*src0));
     *destValue = (float)sqrtResult;
@@ -1046,14 +1046,14 @@ LAB_97c0d128:
       *(float *)(destInfo + 0x20) = (float)(1.0 / sqrtResult);
       sqrtResult = _sqrt(ABS((double)src0[3]));
       *(float *)(destInfo + 0x24) = (float)(1.0 / sqrtResult);
-      goto LAB_97c0d82c;
+      goto loopCheckFoldFailed;
     }
     sqrtResult = _sqrt(ABS((double)src0[3]));
     sqrtValue = 1.0 / sqrtResult;
-    goto LAB_97c0d214;
+    goto loopSetScalarResult;
   case 0xe:
     scalarResult = 1.0 / src0[3];
-    goto LAB_97c0d71c;
+    goto storeDestInfo;
   case 0xf:
     operandComponent = src0[3];
     if (operandComponent <= 1.8446744e+19) {
@@ -1062,7 +1062,7 @@ LAB_97c0d128:
         if (operandComponent < 0.0) {
           if (operandComponent <= -5.421011e-20) {
             scalarResult = -5.421011e-20;
-            if (-1.8446744e+19 <= operandComponent) goto LAB_97c0d2cc;
+            if (-1.8446744e+19 <= operandComponent) goto setScalarResult;
           }
           else {
             scalarResult = -1.8446744e+19;
@@ -1070,18 +1070,18 @@ LAB_97c0d128:
         }
       }
       else {
-LAB_97c0d2cc:
+setScalarResult:
         scalarResult = 1.0 / operandComponent;
       }
     }
     else {
       scalarResult = 5.421011e-20;
     }
-    goto LAB_97c0d71c;
+    goto storeDestInfo;
   case 0x10:
     if (1 < *compileContext - 0x8b30U) {
       mathAccumulator = _exp2((double)src0[3]);
-      goto LAB_97c0d718;
+      goto loopSetScalarResult2;
     }
     exp2Result = _exp2((double)*src0);
     *destValue = (float)exp2Result;
@@ -1097,7 +1097,7 @@ LAB_97c0d2cc:
     *destValue = (float)exp2Result2;
     *(float *)(destInfo + 0x1c) = (float)((double)src0[3] - (double)(float)floorResult);
     exp2Value = _exp2((double)src0[3]);
-    goto LAB_97c0d51c;
+    goto storeDestInfo2;
   case 0x12:
     mathAccumulator = 0.0;
     sizeMinusOne = *(uint *)(inst + 0x10) >> 0x1a & 3;
@@ -1112,14 +1112,14 @@ LAB_97c0d2cc:
       } while (remainingCount != 0);
     }
     mathAccumulator = _sqrt(mathAccumulator);
-LAB_97c0d718:
+loopSetScalarResult2:
     scalarResult = (float)mathAccumulator;
-LAB_97c0d71c:
+storeDestInfo:
     *(float *)(destInfo + 0x24) = scalarResult;
     *destValue = scalarResult;
     *(float *)(destInfo + 0x1c) = scalarResult;
     *(float *)(destInfo + 0x20) = scalarResult;
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 0x13:
     if (1 < *compileContext - 0x8b30U) {
       mathAccumulator = (double)src0[3];
@@ -1127,7 +1127,7 @@ LAB_97c0d71c:
         mathAccumulator = 0.0;
       }
       mathAccumulator = _log2(mathAccumulator);
-      goto LAB_97c0d718;
+      goto loopSetScalarResult2;
     }
     log2Value = (double)*src0;
     if (log2Value < 0.0) {
@@ -1164,10 +1164,10 @@ LAB_97c0d71c:
       magnitude = 0.0;
     }
     exp2Value = _log2(magnitude);
-LAB_97c0d51c:
+storeDestInfo2:
     *(undefined4 *)(destInfo + 0x24) = 0x3f800000;
     *(float *)(destInfo + 0x20) = (float)exp2Value;
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 0x15:
     sqrtValue = 0.0;
     sizeMinusOne = *(uint *)(inst + 0x10) >> 0x1a & 3;
@@ -1190,18 +1190,18 @@ LAB_97c0d51c:
         componentIndex2 = nextComponent;
       } while (nextComponent < (int)((*(uint *)(inst + 0x10) >> 0x1a & 3) + 1));
     }
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 0x16:
     scalarResult = 0.017453292;
-    goto LAB_97c0d600;
+    goto storeDestValue;
   case 0x17:
     scalarResult = 57.29578;
-LAB_97c0d600:
+storeDestValue:
     *destValue = *src0 * scalarResult;
     *(float *)(destInfo + 0x1c) = src0[1] * scalarResult;
     *(float *)(destInfo + 0x20) = src0[2] * scalarResult;
     *(float *)(destInfo + 0x24) = src0[3] * scalarResult;
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 0x18:
     cosResult = _cos((double)*src0);
     *destValue = (float)cosResult;
@@ -1209,11 +1209,11 @@ LAB_97c0d600:
     *(undefined4 *)(destInfo + 0x24) = 0;
     *(undefined4 *)(destInfo + 0x20) = 0;
     *(float *)(destInfo + 0x1c) = (float)sinResult;
-    goto LAB_97c0d82c;
+    goto loopCheckFoldFailed;
   case 0x19:
     if (1 < *compileContext - 0x8b30U) {
       mathAccumulator = _sin((double)src0[3]);
-      goto LAB_97c0d718;
+      goto loopSetScalarResult2;
     }
     sinResult = _sin((double)*src0);
     *destValue = (float)sinResult;
@@ -1226,7 +1226,7 @@ LAB_97c0d600:
   case 0x1a:
     if (1 < *compileContext - 0x8b30U) {
       mathAccumulator = _cos((double)src0[3]);
-      goto LAB_97c0d718;
+      goto loopSetScalarResult2;
     }
     cosResult = _cos((double)*src0);
     *destValue = (float)cosResult;
@@ -1277,7 +1277,7 @@ LAB_97c0d600:
     *(float *)(destInfo + 0x1c) = *src0;
     *(float *)(destInfo + 0x20) = *src0;
     resultW = *src0;
-    goto LAB_97c0ce78;
+    goto storeDestInfo7;
   case 0x6c:
     if ((*(int *)(destInfo + 0xc) == 3) && (*(int *)(operandIds[0] + 0xc) == 1)) {
       truncResult = _trunc((double)*src0);
@@ -1307,10 +1307,10 @@ LAB_97c0d600:
       }
       *(undefined4 *)(destInfo + 0x20) = resultZBits;
       resultWBits = 0x3f800000;
-      if (src0[3] == 0.0) goto LAB_97c0d124;
-      goto LAB_97c0d128;
+      if (src0[3] == 0.0) goto loopSetResultWBits2;
+      goto loopStoreDestInfo;
     }
-    goto switchD_97c0cae8_caseD_0;
+    goto instWordsCase0;
   case 0x6f:
     expResult = _exp((double)*src0);
     *destValue = (float)expResult;
@@ -1330,11 +1330,11 @@ LAB_97c0d600:
     mathAccumulator = _log((double)src0[3]);
   }
   *(float *)(destInfo + 0x24) = (float)mathAccumulator;
-LAB_97c0d82c:
-  if (!foldFailed) goto LAB_97c0eea8;
+loopCheckFoldFailed:
+  if (!foldFailed) goto checkNoDestination;
   foldFailed = false;
   if (((validArgCount != 2) || (noDestination)) || ((src0 == (float *)0x0 || (src1 == (float *)0x0))))
-  goto LAB_97c0e77c;
+  goto checkFoldFailed;
   foldFailed = false;
   switch(*instWords >> 0x12 & 0xff) {
   case 0x1e:
@@ -1346,29 +1346,29 @@ LAB_97c0d82c:
     *(float *)(destInfo + 0x20) = resultZ;
     resultW = _atan2f(src0[3],src1[3]);
     *(float *)(destInfo + 0x24) = resultW;
-    goto LAB_97c0e778;
+    goto setFoldFailed;
   case 0x1f:
     *destValue = *src0 + *src1;
     *(float *)(destInfo + 0x1c) = src0[1] + src1[1];
     *(float *)(destInfo + 0x20) = src0[2] + src1[2];
     resultW = src0[3] + src1[3];
-    goto LAB_97c0e6f8;
+    goto loopSetFoldFailed3;
   case 0x20:
     *destValue = *src0 - *src1;
     *(float *)(destInfo + 0x1c) = src0[1] - src1[1];
     *(float *)(destInfo + 0x20) = src0[2] - src1[2];
     resultW = src0[3] - src1[3];
-    goto LAB_97c0e6f8;
+    goto loopSetFoldFailed3;
   default:
     foldFailed = true;
-    goto LAB_97c0e778;
+    goto setFoldFailed;
   case 0x22:
   case 0x23:
     *destValue = *src0 * *src1;
     *(float *)(destInfo + 0x1c) = src0[1] * src1[1];
     *(float *)(destInfo + 0x20) = src0[2] * src1[2];
     resultW = src0[3] * src1[3];
-    goto LAB_97c0e6f8;
+    goto loopSetFoldFailed3;
   case 0x24:
     boolBit = 0;
     if ((*src0 != 0.0) && (*src1 != 0.0)) {
@@ -1389,11 +1389,11 @@ LAB_97c0d82c:
     *(float *)(destInfo + 0x20) =
          (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if (src0[3] != 0.0) {
-LAB_97c0de28:
+loopSetIntToFloatLow2:
       intToFloatLow = 0;
-      if (src1[3] != 0.0) goto LAB_97c0de44;
+      if (src1[3] != 0.0) goto loopSetIntToFloatLow3;
     }
-    goto LAB_97c0de48;
+    goto setIntToFloatLow2;
   case 0x25:
     boolBit = 0;
     if ((*src0 != 0.0) || (*src1 != 0.0)) {
@@ -1412,48 +1412,48 @@ LAB_97c0de28:
     }
     *(float *)(destInfo + 0x20) =
          (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
-    if (src0[3] == 0.0) goto LAB_97c0de28;
-LAB_97c0de44:
+    if (src0[3] == 0.0) goto loopSetIntToFloatLow2;
+loopSetIntToFloatLow3:
     intToFloatLow = 1;
-    goto LAB_97c0de48;
+    goto setIntToFloatLow2;
   case 0x26:
     boolBit = 0;
     if (*src0 == 0.0) {
       if (*src1 != 0.0) {
-LAB_97c0dd24:
+loopSetBoolBit:
         boolBit = 1;
       }
     }
-    else if (*src1 == 0.0) goto LAB_97c0dd24;
+    else if (*src1 == 0.0) goto loopSetBoolBit;
     boolBitY = 0;
     *destValue = (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
     if (src0[1] == 0.0) {
       if (src1[1] != 0.0) {
-LAB_97c0dd84:
+loopSetBoolBitY:
         boolBitY = 1;
       }
     }
-    else if (src1[1] == 0.0) goto LAB_97c0dd84;
+    else if (src1[1] == 0.0) goto loopSetBoolBitY;
     boolBit = 0;
     *(float *)(destInfo + 0x1c) =
          (float)((double)CONCAT44(0x43300000,boolBitY ^ 0x80000000) - 4503601774854144.0);
     if (src0[2] == 0.0) {
       if (src1[2] != 0.0) {
-LAB_97c0dde4:
+loopSetBoolBit2:
         boolBit = 1;
       }
     }
-    else if (src1[2] == 0.0) goto LAB_97c0dde4;
+    else if (src1[2] == 0.0) goto loopSetBoolBit2;
     intToFloatLow = 0;
     *(float *)(destInfo + 0x20) =
          (float)((double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0);
-    if (src0[3] == 0.0) goto LAB_97c0de28;
-    if (src1[3] == 0.0) goto LAB_97c0de44;
-LAB_97c0de48:
+    if (src0[3] == 0.0) goto loopSetIntToFloatLow2;
+    if (src1[3] == 0.0) goto loopSetIntToFloatLow3;
+setIntToFloatLow2:
     intToFloatLow = intToFloatLow ^ 0x80000000;
     intToFloatHigh = 0x43300000;
     resultW = (float)((double)CONCAT44(0x43300000,intToFloatLow) - 4503601774854144.0);
-    goto LAB_97c0e6f8;
+    goto loopSetFoldFailed3;
   case 0x27:
     scalarResult = 0.0;
     componentIndex2 = 0;
@@ -1461,17 +1461,17 @@ LAB_97c0de48:
       scalarResult = src0[componentIndex2] * src1[componentIndex2] + scalarResult;
       componentIndex2 = componentIndex2 + 1;
     }
-    goto LAB_97c0e18c;
+    goto storeDestInfo5;
   case 0x28:
     scalarResult = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1];
-    goto LAB_97c0e4e0;
+    goto loopSetFoldFailed;
   case 0x29:
     scalarResult = src0[3] * src1[3] +
             src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1];
-    goto LAB_97c0e4e0;
+    goto loopSetFoldFailed;
   case 0x2a:
     scalarResult = src0[2] * src1[2] + *src0 * *src1 + src0[1] * src1[1] + src1[3];
-LAB_97c0e4e0:
+loopSetFoldFailed:
     foldFailed = true;
     *(float *)(destInfo + 0x24) = scalarResult;
     *destValue = scalarResult;
@@ -1489,15 +1489,15 @@ LAB_97c0e4e0:
         componentIndex2 = componentIndex2 + 1;
       }
       mathAccumulator = _sqrt(mathAccumulator);
-LAB_97c0e4d8:
+loopSetScalarResult3:
       scalarResult = (float)mathAccumulator;
-      goto LAB_97c0e4e0;
+      goto loopSetFoldFailed;
     }
     *destValue = 1.0;
     *(float *)(destInfo + 0x1c) = src0[1] * src1[1];
     *(float *)(destInfo + 0x20) = src0[2];
     resultW = src1[3];
-    goto LAB_97c0e6f8;
+    goto loopSetFoldFailed3;
   case 0x2c:
     resultX = *src1;
     if (*src0 < *src1) {
@@ -1517,10 +1517,10 @@ LAB_97c0e4d8:
     operandComponent = src0[3];
     resultW = src1[3];
     if (operandComponent < resultW) {
-LAB_97c0e08c:
+loopSetResultW:
       resultW = operandComponent;
     }
-    goto LAB_97c0e090;
+    goto storeDestInfo3;
   case 0x2d:
     resultX = *src1;
     if (*src1 < *src0) {
@@ -1539,10 +1539,10 @@ LAB_97c0e08c:
     *(float *)(destInfo + 0x20) = resultZ;
     operandComponent = src0[3];
     resultW = src1[3];
-    if (src1[3] < operandComponent) goto LAB_97c0e08c;
-LAB_97c0e090:
+    if (src1[3] < operandComponent) goto loopSetResultW;
+storeDestInfo3:
     *(float *)(destInfo + 0x24) = resultW;
-    goto LAB_97c0e778;
+    goto setFoldFailed;
   case 0x2e:
     foldFailed = true;
     *destValue = src0[1] * src1[2] - src1[1] * src0[2];
@@ -1570,7 +1570,7 @@ LAB_97c0e090:
     break;
   case 0x30:
     scalarResult = 1.0;
-    goto LAB_97c0e18c;
+    goto storeDestInfo5;
   case 0x31:
     resultX = 1.0;
     if (*src0 != *src1) {
@@ -1588,8 +1588,8 @@ LAB_97c0e090:
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     resultWBits = 0x3f800000;
-    if (src0[3] != src1[3]) goto LAB_97c0e454;
-    goto LAB_97c0e458;
+    if (src0[3] != src1[3]) goto setResultWBits2;
+    goto storeDestInfo4;
   case 0x32:
     resultX = 1.0;
     if (*src0 < *src1) {
@@ -1607,7 +1607,7 @@ LAB_97c0e090:
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     wCompareResult = src1[3] <= src0[3];
-    goto LAB_97c0e36c;
+    goto setResultWBits;
   case 0x33:
     if (*src0 <= *src1) {
       resultX = 0.0;
@@ -1631,11 +1631,11 @@ LAB_97c0e090:
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     if (src1[3] < src0[3]) {
-LAB_97c0e3e4:
+loopSetResultWBits3:
       resultWBits = 0x3f800000;
-      goto LAB_97c0e458;
+      goto storeDestInfo4;
     }
-    goto LAB_97c0e454;
+    goto setResultWBits2;
   case 0x34:
     resultX = 1.0;
     if (*src1 < *src0) {
@@ -1653,10 +1653,10 @@ LAB_97c0e3e4:
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     wCompareResult = src0[3] <= src1[3];
-LAB_97c0e36c:
+setResultWBits:
     resultWBits = 0x3f800000;
-    if (!wCompareResult) goto LAB_97c0e454;
-    goto LAB_97c0e458;
+    if (!wCompareResult) goto setResultWBits2;
+    goto storeDestInfo4;
   case 0x35:
     if (*src1 <= *src0) {
       resultX = 0.0;
@@ -1679,8 +1679,8 @@ LAB_97c0e36c:
       resultZBits = 0x3f800000;
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
-    if (src0[3] < src1[3]) goto LAB_97c0e3e4;
-    goto LAB_97c0e454;
+    if (src0[3] < src1[3]) goto loopSetResultWBits3;
+    goto setResultWBits2;
   case 0x36:
     resultX = 1.0;
     if (*src0 == *src1) {
@@ -1698,26 +1698,26 @@ LAB_97c0e36c:
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
     resultWBits = 0x3f800000;
-    if (src0[3] != src1[3]) goto LAB_97c0e458;
-LAB_97c0e454:
+    if (src0[3] != src1[3]) goto storeDestInfo4;
+setResultWBits2:
     resultWBits = 0;
-LAB_97c0e458:
+storeDestInfo4:
     *(undefined4 *)(destInfo + 0x24) = resultWBits;
-    goto LAB_97c0e778;
+    goto setFoldFailed;
   case 0x37:
     scalarResult = 0.0;
-LAB_97c0e18c:
+storeDestInfo5:
     *(float *)(destInfo + 0x24) = scalarResult;
     *destValue = scalarResult;
     *(float *)(destInfo + 0x1c) = scalarResult;
     *(float *)(destInfo + 0x20) = scalarResult;
-LAB_97c0e778:
+setFoldFailed:
     foldFailed = !foldFailed;
     break;
   case 0x38:
     if (1 < *compileContext - 0x8b30U) {
       mathAccumulator = _pow((double)src0[3],(double)src1[3]);
-      goto LAB_97c0e4d8;
+      goto loopSetScalarResult3;
     }
     powResult = _pow((double)*src0,(double)*src1);
     *destValue = (float)powResult;
@@ -1726,7 +1726,7 @@ LAB_97c0e778:
     powResult = _pow((double)src0[2],(double)src1[2]);
     *(float *)(destInfo + 0x20) = (float)powResult;
     powValue = _pow((double)src0[3],(double)src1[3]);
-LAB_97c0e764:
+loopSetFoldFailed2:
     foldFailed = true;
     *(float *)(destInfo + 0x24) = (float)powValue;
     break;
@@ -1771,7 +1771,7 @@ LAB_97c0e764:
       intPairLo = (longlong)intComponent2;
     }
     resultW = src0[intComponent2];
-LAB_97c0e6f8:
+loopSetFoldFailed3:
     foldFailed = true;
     *(float *)(destInfo + 0x24) = resultW;
     break;
@@ -1781,7 +1781,7 @@ LAB_97c0e6f8:
       *(float *)(destInfo + 0x1c) = src0[1] / src1[1];
       *(float *)(destInfo + 0x20) = src0[2] / src1[2];
       resultW = src0[3] / src1[3];
-      goto LAB_97c0e6f8;
+      goto loopSetFoldFailed3;
     }
     foldFailed = true;
     if (*(int *)(destInfo + 0xc) == 3) {
@@ -1792,7 +1792,7 @@ LAB_97c0e6f8:
       truncResult = _trunc((double)(src0[2] / src1[2]));
       *(float *)(destInfo + 0x20) = (float)truncResult;
       powValue = _trunc((double)(src0[3] / src1[3]));
-      goto LAB_97c0e764;
+      goto loopSetFoldFailed2;
     }
     break;
   case 0x6d:
@@ -1817,11 +1817,11 @@ LAB_97c0e6f8:
     foldFailed = true;
     destValue[intComponent2] = src0[intComponent];
   }
-LAB_97c0e77c:
-  if (foldFailed) goto LAB_97c0eea8;
+checkFoldFailed:
+  if (foldFailed) goto checkNoDestination;
   resultKnown = false;
   if ((((validArgCount != 3) || (noDestination)) || (src0 == (float *)0x0)) ||
-     ((src1 == (float *)0x0 || (src2 == (float *)0x0)))) goto LAB_97c0ee84;
+     ((src1 == (float *)0x0 || (src2 == (float *)0x0)))) goto checkResultKnown;
   resultKnown = false;
   switch(*instWords >> 0x12 & 0xff) {
   case 0x3b:
@@ -1894,7 +1894,7 @@ LAB_97c0e77c:
     if ((clampLoweredW < resultW) && (resultW = clampLowW, clampLowW < operandComponent)) {
       resultW = operandComponent;
     }
-    goto LAB_97c0eb30;
+    goto storeDestInfo6;
   case 0x3e:
     if (0.0 <= *src0) {
       resultX = *src2;
@@ -1923,9 +1923,9 @@ LAB_97c0e77c:
     else {
       resultW = src1[3];
     }
-LAB_97c0eb30:
+storeDestInfo6:
     *(float *)(destInfo + 0x24) = resultW;
-    goto LAB_97c0ee80;
+    goto setResultKnown;
   case 0x3f:
     *destValue = *src0 * *src1 + *src2;
     *(float *)(destInfo + 0x1c) = src0[1] * src1[1] + src2[1];
@@ -1973,13 +1973,13 @@ LAB_97c0eb30:
       scalarResult = 1.0;
     }
     scalarResult = scalarResult * scalarResult * (3.0 - (scalarResult + scalarResult));
-LAB_97c0ee74:
+loopSetResultKnown:
     resultKnown = true;
     *(float *)(destInfo + 0x24) = scalarResult;
-    goto LAB_97c0ee84;
+    goto checkResultKnown;
   default:
     resultKnown = true;
-    goto LAB_97c0ee80;
+    goto setResultKnown;
   case 0x68:
     scalarResult = 0.0;
     componentIndex = 0;
@@ -1996,21 +1996,21 @@ LAB_97c0ee74:
       *(float *)(destInfo + 0x1c) = *src2 * src0[1] - scalarResult * src1[1];
       *(float *)(destInfo + 0x20) = *src2 * src0[2] - scalarResult * src1[2];
       scalarResult = *src2 * src0[3] - scalarResult * src1[3];
-      goto LAB_97c0ee74;
+      goto loopSetResultKnown;
     }
     *(float *)(destInfo + 0x24) = 0.0;
     *destValue = 0.0;
     *(float *)(destInfo + 0x1c) = 0.0;
     *(float *)(destInfo + 0x20) = 0.0;
-LAB_97c0ee80:
+setResultKnown:
     resultKnown = !resultKnown;
-    goto LAB_97c0ee84;
+    goto checkResultKnown;
   }
   resultKnown = true;
   *(float *)(destInfo + 0x24) = resultW;
-LAB_97c0ee84:
+checkResultKnown:
   if (resultKnown) {
-LAB_97c0eea8:
+checkNoDestination:
     if (!noDestination) {
       *(undefined4 *)(destInfo + 0x14) = 1;
     }
@@ -2030,7 +2030,7 @@ LAB_97c0eea8:
     ((int (*)())_ClearRegisterState)(hashSet);
     return;
   default:
-    goto switchD_97c0eee4_caseD_4e;
+    goto instWordsCase4e;
   case 0x56:
   case 0x57:
   case 0x6a:
@@ -2046,16 +2046,16 @@ LAB_97c0eea8:
     destInfo = inst;
   }
   ((int (*)())_ClearDestedRegisters)(compileContext,hashSet,currentInst,destInfo);
-switchD_97c0eee4_caseD_4e:
+instWordsCase4e:
   return;
-switchD_97c0cae8_caseD_0:
+instWordsCase0:
   *destValue = *src0;
   *(float *)(destInfo + 0x1c) = src0[1];
   *(float *)(destInfo + 0x20) = src0[2];
   resultW = src0[3];
-LAB_97c0ce78:
+storeDestInfo7:
   *(float *)(destInfo + 0x24) = resultW;
-  goto LAB_97c0d82c;
+  goto loopCheckFoldFailed;
 }
 
 /* _UpdateScope @ 0x97c0efd8 (96 bytes) */
@@ -2085,13 +2085,13 @@ int _UpdateScope(operationChunk, scopeDepth)
   case 0x67:
   case 0x68:
   case 0x69:
-    goto switchD_97c0f014_caseD_58;
+    goto operationChunkCase58;
   case 0x59:
   case 0x5a:
   case 0x5b:
   case 0x6b:
     *scopeDepth = *scopeDepth + -1;
-switchD_97c0f014_caseD_58:
+operationChunkCase58:
     return;
   default:
     return;
@@ -2129,14 +2129,14 @@ int _GetOpRegs(stream, operationChunk, sourceInfos, destInfo)
       sourceInfo = sourceInfo + 10;
     } while (sourcesLeft != 0);
     paddedCount = validArgs;
-    if (3 < validArgs) goto LAB_97c0f130;
+    if (3 < validArgs) goto checkOperationChunk;
   }
   do {
     nextPadIndex = paddedCount + 1;
     sourceInfos[paddedCount * 10 + 1] = 500;
     paddedCount = nextPadIndex;
   } while (nextPadIndex < 4);
-LAB_97c0f130:
+checkOperationChunk:
   if ((*(uint *)(operationChunk + 0x14) & 0x1e000) == 0) {
     destInfo[1] = 500;
     return;
@@ -2326,7 +2326,7 @@ int _DetectConstantLoopsSimple(stream)
       isInclusive = 0;
       if (regEqualsFunctionResult == 0) {
         otherSourceInfo = src123Infos;
-LAB_97c0f2e0:
+loopCallMemcpy:
         _memcpy(limitInfo,otherSourceInfo,0x28);
       }
       else {
@@ -2334,7 +2334,7 @@ LAB_97c0f2e0:
         if (regEqualsFunctionResult == 0) {
           otherSourceInfo = src0Info;
           limitIsSrc0 = true;
-          goto LAB_97c0f2e0;
+          goto loopCallMemcpy;
         }
         setupFailed = 1;
       }
@@ -2345,17 +2345,17 @@ LAB_97c0f2e0:
       else if (compareOpcode < 0x34) {
         if (compareOpcode == 0x32) {
           countsDown = true;
-LAB_97c0f324:
+loopSetIsInclusive:
           isInclusive = 1;
         }
         else {
-LAB_97c0f33c:
+loopSetSetupFailed:
           setupFailed = 1;
         }
       }
       else {
-        if (compareOpcode == 0x34) goto LAB_97c0f324;
-        if (compareOpcode != 0x35) goto LAB_97c0f33c;
+        if (compareOpcode == 0x34) goto loopSetIsInclusive;
+        if (compareOpcode != 0x35) goto loopSetSetupFailed;
       }
       if (limitIsSrc0) {
         countsDown = (bool)(countsDown ^ 1);
@@ -2385,7 +2385,7 @@ LAB_97c0f33c:
             notEligible = notEligible | isBadUsage | (uint)(1 < scopeDepth);
             if (foundStep) {
               notEligible = 1;
-              goto LAB_97c0f4cc;
+              goto setBodyOpWord;
             }
             bodyOpWord = *(uint *)(scanCursor + 0xc);
             foundStep = true;
@@ -2401,27 +2401,27 @@ LAB_97c0f33c:
             regEqualsFunctionResult = _regEqualsFunction(counterInfo,src0Info);
             otherSourceInfo = src123Infos;
             if (regEqualsFunctionResult == 0) {
-LAB_97c0f4b8:
+loopCallMemcpy2:
               _memcpy(stepInfo,otherSourceInfo,0x28);
-              goto LAB_97c0f4cc;
+              goto setBodyOpWord;
             }
             regEqualsFunctionResult = _regEqualsFunction(counterInfo,src123Infos);
             if (regEqualsFunctionResult == 0) {
               notEligible = notEligible | stepIsSubtract;
               otherSourceInfo = src0Info;
-              goto LAB_97c0f4b8;
+              goto loopCallMemcpy2;
             }
             notEligible = 1;
           }
           else {
-LAB_97c0f4cc:
+setBodyOpWord:
             bodyOpWord = *(uint *)(scanCursor + 0xc);
           }
           regEqualsFunctionResult = _regEqualsFunction(limitInfo,destInfo);
           bodyOpcode = bodyOpWord >> 0x12 & 0xff;
           notEligible = notEligible | regEqualsFunctionResult == 0;
           if (bodyOpcode == 0x4d) {
-LAB_97c0f508:
+loopSetBodyIsSimple:
             bodyIsSimple = false;
           }
           else {
@@ -2431,7 +2431,7 @@ LAB_97c0f508:
             else {
               isBranchOp = bodyOpcode == 0x69;
             }
-            if (isBranchOp) goto LAB_97c0f508;
+            if (isBranchOp) goto loopSetBodyIsSimple;
           }
           if (!foundEndif) {
             bodyOpcode = bodyOpWord >> 0x12 & 0xff;
@@ -2462,10 +2462,10 @@ LAB_97c0f508:
         stepIsSubtract = stepIsSubtract ^ 1;
       }
       if (countsDown) {
-        if (stepIsSubtract == 0) goto LAB_97c0f608;
+        if (stepIsSubtract == 0) goto setNotEligible;
       }
       else if (stepIsSubtract != 0) {
-LAB_97c0f608:
+setNotEligible:
         notEligible = 1;
       }
       if (((notEligible == 0) && (foundStep)) && (((foundEndif && ((ifOpCursor != 0 && (endifOp != 0)))) && (bodyIsSimple)))) {
@@ -2557,23 +2557,23 @@ LAB_97c0f608:
             opDest0 = destSizeShifted | 0x6c;
             destSizeBits = *(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3;
             if (destSizeBits == 1) {
-LAB_97c0f960:
+loopSetOpDest0:
               opDest0 = opDest0 | 0x4000;
-LAB_97c0f968:
+loopSetOpDest02:
               opDest0 = opDest0 | 0x2000;
             }
             else {
               if (1 < destSizeBits) {
                 if (destSizeBits != 2) {
-                  if (destSizeBits != 3) goto LAB_97c0f970;
+                  if (destSizeBits != 3) goto setOpDest0;
                   opDest0 = destSizeShifted | 0x1006c;
                 }
                 opDest0 = opDest0 | 0x8000;
-                goto LAB_97c0f960;
+                goto loopSetOpDest0;
               }
-              if (destSizeBits == 0) goto LAB_97c0f968;
+              if (destSizeBits == 0) goto loopSetOpDest02;
             }
-LAB_97c0f970:
+setOpDest0:
             opDest0 = (*(uint *)(*(int *)(tableBase + 0x3c0) + 4) & 7) << 0x11 | opDest0;
             opDest1 = (uint)*(ushort *)(*(int *)(tableBase + 0x3c0) + 2);
             sourceIndex = 0;
@@ -2717,9 +2717,9 @@ int _UnrollConstantLoopsSimple(stream, allowRepify)
         return;
       }
       if ((*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) == 0x57) break;
-LAB_97c102a8:
+loopCallEmulateOp:
       ((int (*)())_EmulateOp)(stream,operationChunk,knownRegisters);
-LAB_97c102ac:
+loopSetOperationChunk:
       operationChunk = *(int *)(operationChunk + 8);
     }
     isCountKnown = false;
@@ -2729,7 +2729,7 @@ LAB_97c102ac:
       ((int (*)())_GetRegisterTypeInfo)(stream,&countInfoRegister);
       isCountKnown = countInfoIsConstant != 0;
     }
-    if (isCountKnown) goto LAB_97c102a8;
+    if (isCountKnown) goto loopCallEmulateOp;
     loopEnd[0] = 0;
     bodyIsStraightLine = true;
     loopEndLabel = *(uint *)(operationChunk + 0x10) & 0x3ffff;
@@ -2743,11 +2743,11 @@ LAB_97c102ac:
       case 0x4b:
       case 0x54:
       case 0x69:
-        if (loopEndLabel < (*(uint *)(scanCursor + 0x10) & 0x3ffff)) goto switchD_97c0fc88_caseD_4c;
+        if (loopEndLabel < (*(uint *)(scanCursor + 0x10) & 0x3ffff)) goto scanCursorCase4c;
         break;
       case 0x4c:
       case 0x4d:
-switchD_97c0fc88_caseD_4c:
+scanCursorCase4c:
         bodyIsStraightLine = false;
       }
       hasNext = *(int *)(scanCursor + 8) != 0;
@@ -2761,7 +2761,7 @@ switchD_97c0fc88_caseD_4c:
     loopStart = operationChunk;
     knownCountRegister = _HashSetGet(knownRegisters,&lookupKeyRegister);
     if (knownCountRegister == 0) {
-LAB_97c0fe04:
+loopSetTableBase:
       tableBase = &countInfoRegister;
       newOpIndex = 0;
       counterInfoBank = *(uint *)(loopStart + 0x1c) >> 0x17 & 7;
@@ -2901,7 +2901,7 @@ LAB_97c0fe04:
       *(uint *)(loopEnd[0] + 0x10) =
            *(uint *)(*(int *)(loopStart + 8) + 0xc) & 0x3ffff |
            *(uint *)(loopEnd[0] + 0x10) & 0xfffc0000;
-      goto LAB_97c102a8;
+      goto loopCallEmulateOp;
     }
     if (((*(int *)(knownCountRegister + 0x14) == 0) || (*(int *)(knownCountRegister + 0x10) != 0)) ||
        (*(int *)(knownCountRegister + 0xc) != 1)) {
@@ -2911,13 +2911,13 @@ LAB_97c0fe04:
       iterationCount = (int)*(float *)(knownCountRegister + 0x18);
       convertScratch = (longlong)iterationCount;
     }
-    if (!bodyIsStraightLine) goto LAB_97c0fe04;
+    if (!bodyIsStraightLine) goto loopSetTableBase;
     operationChunk = *(int *)(loopStart + 4);
     if (((allowRepify == 0) || (iterationCount < 1)) ||
        (repifyResult = ((int (*)())_RepifyConstantLoopSimple)(stream,loopStart,loopEnd[0],iterationCount), repifyResult == 0)) {
       ((int (*)())_UnrollConstantLoopSimple)(stream,loopStart,loopEnd[0],iterationCount);
     }
-    if (operationChunk != 0) goto LAB_97c102ac;
+    if (operationChunk != 0) goto loopSetOperationChunk;
     operationChunk = **(int **)(stream + 0x20);
   } while( true );
 }
@@ -3054,7 +3054,7 @@ int _RepifyConstantLoopSimple(compileContext, loopStart, loopEnd, iterationCount
   bodyOperation = *(int *)(loopStart + 8);
   isConstantLoop = 1;
   do {
-    if ((bodyOperation == 0) || (bodyOperation == loopEnd)) goto LAB_97c10628;
+    if ((bodyOperation == 0) || (bodyOperation == loopEnd)) goto callClearRegisterState;
     opcode = *(uint *)(bodyOperation + 0xc) >> 0x12 & 0xff;
     if ((opcode == 0x57) || (opcode == 0x48)) {
       lookupKeyBank = *(uint *)(bodyOperation + 0x1c) >> 0x17 & 7;
@@ -3062,7 +3062,7 @@ int _RepifyConstantLoopSimple(compileContext, loopStart, loopEnd, iterationCount
       knownRegister = _HashSetGet(knownRegisters,&lookupKeyRegister);
       if ((knownRegister == 0) || (*(int *)(knownRegister + 0x14) == 0)) {
         isConstantLoop = 0;
-LAB_97c10628:
+callClearRegisterState:
         ((int (*)())_ClearRegisterState)(knownRegisters);
         _HashSetFree(knownRegisters);
         if (isConstantLoop != 0) {
@@ -3877,7 +3877,7 @@ int _PPParserParseBranchCondition(parser, conditionWord, opcode)
                   return 0x10;
                 }
                 newConditionWord = *conditionWord | 0x70000000;
-                goto LAB_97c1180c;
+                goto storeConditionWord;
               }
               newConditionWord = *conditionWord;
               conditionCode = 6;
@@ -3888,19 +3888,19 @@ int _PPParserParseBranchCondition(parser, conditionWord, opcode)
     }
     newConditionWord = conditionCode << 0x1c | newConditionWord & 0x8fffffff;
   }
-LAB_97c1180c:
+storeConditionWord:
   *conditionWord = newConditionWord;
   if ((*(int *)(parser + 0x48c) == 0x34) && (tokenLength == 3)) {
     if (token[2] == '0') {
       newConditionWord = *conditionWord & 0x7fffffff;
     }
     else {
-      if (token[2] != '1') goto LAB_97c11858;
+      if (token[2] != '1') goto setTokenLength;
       newConditionWord = *conditionWord | 0x80000000;
     }
     *conditionWord = newConditionWord;
   }
-LAB_97c11858:
+setTokenLength:
   tokenLength = _PPParserGetPart(parser,token,0);
   if (tokenLength == 0) {
     return 0x2d;
@@ -3933,7 +3933,7 @@ LAB_97c11858:
       else {
         if (swizzleChar == 'y') {
           swizzleComponent = 1;
-          goto LAB_97c1192c;
+          goto checkSwizzleIndex;
         }
         isSwizzleLetter = swizzleChar == 'z';
         swizzleComponent = 2;
@@ -3942,24 +3942,24 @@ LAB_97c11858:
         return 0x10;
       }
     }
-LAB_97c1192c:
+checkSwizzleIndex:
     if (swizzleIndex == 1) {
       patchedWord = swizzleComponent << 0x18 | *conditionWord & 0xfcffffff;
-LAB_97c1197c:
+loopStoreConditionWord:
       *conditionWord = patchedWord;
     }
     else {
       if (swizzleIndex == 0) {
         patchedWord = swizzleComponent << 0x1a | *conditionWord & 0xf3ffffff;
-        goto LAB_97c1197c;
+        goto loopStoreConditionWord;
       }
       if (swizzleIndex == 2) {
         patchedWord = swizzleComponent << 0x16 | *conditionWord & 0xff3fffff;
-        goto LAB_97c1197c;
+        goto loopStoreConditionWord;
       }
       if (swizzleIndex == 3) {
         patchedWord = swizzleComponent << 0x14 | *conditionWord & 0xffcfffff;
-        goto LAB_97c1197c;
+        goto loopStoreConditionWord;
       }
     }
     if (tokenLength == 4) {
@@ -4465,20 +4465,20 @@ double _glp_strtod(byte *str,undefined4 *endPtr)
   isExponentNegative = false;
   sawDigits = false;
   if (*str == 0x2b) {
-LAB_97c12560:
+loopSetStr:
     str = str + 1;
   }
   else if (*str == 0x2d) {
     isNegative = true;
-    goto LAB_97c12560;
+    goto loopSetStr;
   }
   currentChar = *str;
   isDecimalPoint = currentChar == 0x2e;
   endCursor = str;
   value = DOUBLE_97c30a48;
   if (currentChar == 0) {
-LAB_97c12644:
-    if (isDecimalPoint) goto LAB_97c12648;
+loopCheckIsDecimalPoint:
+    if (isDecimalPoint) goto setFractionStart;
   }
   else {
     if (!isDecimalPoint) {
@@ -4507,9 +4507,9 @@ LAB_97c12644:
         sawDigits = true;
         isDecimalPoint = currentChar == 0x2e;
       }
-      goto LAB_97c12644;
+      goto loopCheckIsDecimalPoint;
     }
-LAB_97c12648:
+setFractionStart:
     fractionStart = endCursor + 1;
     currentChar = endCursor[1];
     fractionDigitCursor = fractionStart;
@@ -4530,15 +4530,15 @@ LAB_97c12648:
     currentChar = *endCursor;
     value = fraction * DOUBLE_97c30ab8 + value;
   }
-  if ((!sawDigits) || ((currentChar != 0x65 && (currentChar != 0x45)))) goto LAB_97c12804;
+  if ((!sawDigits) || ((currentChar != 0x65 && (currentChar != 0x45)))) goto checkIsNegative;
   exponentStart = endCursor + 1;
   if (*exponentStart == 0x2b) {
-LAB_97c12738:
+loopSetExponentStart:
     exponentStart = endCursor + 2;
   }
   else if (*exponentStart == 0x2d) {
     isExponentNegative = true;
-    goto LAB_97c12738;
+    goto loopSetExponentStart;
   }
   currentChar = *exponentStart;
   exponentDigitCursor = exponentStart;
@@ -4569,7 +4569,7 @@ LAB_97c12738:
   }
   pow_10Result = (double)((double (*)())_pow_10)((int)exponentValue);
   value = value * pow_10Result;
-LAB_97c12804:
+checkIsNegative:
   if (isNegative) {
     value = -value;
   }
@@ -4645,12 +4645,12 @@ char * _glp_dtostr(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,u
       scaledTolerance = scaledTolerance * DOUBLE_97c30ab8;
     }
     if (3 < (int)(((int)exponent[0] >> 0x1f ^ exponent[0]) - ((int)exponent[0] >> 0x1f)))
-    goto LAB_97c12a28;
+    goto setRoundedValue;
   }
   exponent[0] = 0;
   scaledValue = value;
   tolerance = scaledTolerance;
-LAB_97c12a28:
+setRoundedValue:
   roundedValue = tolerance * DOUBLE_97c30a88 + scaledValue;
   floorResult = _floor(roundedValue);
   tenth = DOUBLE_97c30ab8;

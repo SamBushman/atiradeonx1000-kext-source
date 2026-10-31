@@ -190,7 +190,7 @@ int _PPParserPreprocessString(parser, source, keepHeader)
   if (keepHeader == 0) {
     outLength = 0;
     inPos = 0;
-LAB_97b7c0e8:
+loopSetPrevSep:
     prevSep = 1;
   }
   else {
@@ -202,7 +202,7 @@ LAB_97b7c0e8:
     if ((((outLength < length) && (nextCh = *(char *)(source + outLength), nextCh != ' ')) && (nextCh != '\t'))
        && (((nextCh != '\n' && (nextCh != '\r')) && (nextCh != '#')))) {
       outLength = outLength + 1;
-      goto LAB_97b7c0e8;
+      goto loopSetPrevSep;
     }
     prevSep = 0;
   }
@@ -210,12 +210,12 @@ LAB_97b7c0e8:
   digitState = 0;
 joined_r0x97b7c0f8:
   curPos = inPos;
-  if (length <= curPos) goto LAB_97b7c6cc;
+  if (length <= curPos) goto checkPrevSep;
   charStep = 1;
   if (inComment) {
     if (*(char *)(source + curPos) != '\n') goto code_r0x97b7c67c;
     inPos = curPos + 1;
-    goto LAB_97b7c6bc;
+    goto setInComment2;
   }
   switch(*(undefined1 *)(source + curPos)) {
   case 9:
@@ -223,11 +223,11 @@ joined_r0x97b7c0f8:
     if ((((prevSep == 0) && (curPos + 1 < length)) &&
         ((nextCh = *(char *)(source + curPos + 1), nextCh != ' ' &&
          (((nextCh != '\t' && (nextCh != '\n')) && (nextCh != '\r')))))) && (nextCh != '#')) {
-LAB_97b7c5fc:
+loopSetOutLength:
       outLength = outLength + 1;
       prevSep = 1;
     }
-    goto LAB_97b7c604;
+    goto setNextPos;
   case 10:
     outLength = outLength + 1;
     nextPos = curPos + 1;
@@ -236,7 +236,7 @@ LAB_97b7c5fc:
     outLength = outLength + 1;
     nextPos = curPos + 1;
     prevSep = 0;
-    goto LAB_97b7c664;
+    goto setDigitState;
   case 0xd:
     outLength = outLength + 1;
     if ((curPos + 1 < length) && (*(char *)(source + curPos + 1) == '\n')) {
@@ -265,11 +265,11 @@ LAB_97b7c5fc:
     outLength = outLength + 1;
     if (((curPos + 1 < length) && (nextCh = *(char *)(source + curPos + 1), nextCh != ' ')) &&
        ((nextCh != '\t' && (((nextCh != '\n' && (nextCh != '\r')) && (nextCh != '#'))))))
-    goto LAB_97b7c5fc;
+    goto loopSetOutLength;
     prevSep = 0;
-LAB_97b7c604:
+setNextPos:
     nextPos = curPos + 1;
-    goto LAB_97b7c664;
+    goto setDigitState;
   case 0x2b:
   case 0x2d:
     if ((prevSep == 0) && (digitState == 0)) {
@@ -324,13 +324,13 @@ LAB_97b7c604:
         prevSep = 0;
       }
       nextPos = curPos + 2;
-      goto LAB_97b7c664;
+      goto setDigitState;
     }
     if ((prevSep == 0) && (digitState != 1)) {
       outLength = outLength + 1;
     }
     inPos = outLength + 1;
-    if (length <= curPos + 1) goto LAB_97b7c64c;
+    if (length <= curPos + 1) goto setPrevSep;
     nextByte = *(byte *)(source + curPos + 1);
     if (nextByte - 0x30 < 10) {
       prevSep = 0;
@@ -346,7 +346,7 @@ LAB_97b7c604:
       inPos = curPos + 1;
       goto joined_r0x97b7c0f8;
     }
-    goto LAB_97b7c64c;
+    goto setPrevSep;
   case 0x30:
   case 0x31:
   case 0x32:
@@ -361,18 +361,18 @@ LAB_97b7c604:
   case 0x45:
   case 0x65:
     inPos = outLength + 1;
-LAB_97b7c64c:
+setPrevSep:
     prevSep = 0;
     outLength = inPos;
     inPos = curPos + 1;
     goto joined_r0x97b7c0f8;
   }
   prevSep = 1;
-LAB_97b7c664:
+setDigitState:
   digitState = 0;
   inPos = nextPos;
   goto joined_r0x97b7c0f8;
-LAB_97b7c6cc:
+checkPrevSep:
   if (prevSep == 0) {
     outLength = outLength + 1;
   }
@@ -380,7 +380,7 @@ LAB_97b7c6cc:
   if (keepHeader == 0) {
     outPos = 0;
     srcPos = 0;
-LAB_97b7c774:
+loopSetLastWasSep:
     lastWasSep = 1;
   }
   else {
@@ -397,7 +397,7 @@ LAB_97b7c774:
        ((nextCh != '\t' && (((nextCh != '\n' && (nextCh != '\r')) && (nextCh != '#')))))) {
       *(undefined1 *)(output + outPos) = 0x20;
       outPos = outPos + 1;
-      goto LAB_97b7c774;
+      goto loopSetLastWasSep;
     }
     lastWasSep = 0;
   }
@@ -416,7 +416,7 @@ joined_r0x97b7c784:
     if (*(char *)(source + curSrcPos) != '\n') goto code_r0x97b7cd84;
     *(undefined1 *)(output + outPos) = 10;
     srcPos = curSrcPos + 1;
-    goto LAB_97b7cdd0;
+    goto setInComment;
   }
   ch = *(undefined1 *)(source + curSrcPos);
   nextOutPos = outPos;
@@ -426,15 +426,15 @@ joined_r0x97b7c784:
     if ((((lastWasSep == 0) && (curSrcPos + 1 < length)) &&
         ((nextCh = *(char *)(source + curSrcPos + 1), nextCh != ' ' &&
          (((nextCh != '\t' && (nextCh != '\n')) && (nextCh != '\r')))))) && (nextCh != '#')) {
-LAB_97b7ccec:
+loopSetLastWasSep2:
       lastWasSep = 1;
       *(undefined1 *)(output + outPos) = 0x20;
       nextOutPos = outPos + 1;
     }
-    goto LAB_97b7ccfc;
+    goto setSrcPos;
   case 10:
     ch = 10;
-    goto LAB_97b7cbd8;
+    goto setSrcPos2;
   default:
     *(undefined1 *)(output + outPos) = ch;
     srcPos = curSrcPos + 1;
@@ -448,11 +448,11 @@ LAB_97b7ccec:
       charAdvance = 2;
     }
     srcPos = curSrcPos + charAdvance;
-    goto LAB_97b7cbe0;
+    goto setLastWasSep;
   case 0x23:
     srcPos = curSrcPos + 1;
     inComment = true;
-    goto LAB_97b7cbe0;
+    goto setLastWasSep;
   case 0x28:
   case 0x29:
   case 0x2c:
@@ -472,10 +472,10 @@ LAB_97b7ccec:
     outPos = outPos + 1;
     if (((curSrcPos + 1 < length) && (nextCh = *(char *)(source + curSrcPos + 1), nextCh != ' ')) &&
        ((nextCh != '\t' && (((nextCh != '\n' && (nextCh != '\r')) && (nextCh != '#'))))))
-    goto LAB_97b7ccec;
+    goto loopSetLastWasSep2;
     lastWasSep = 0;
     nextOutPos = outPos;
-LAB_97b7ccfc:
+setSrcPos:
     srcPos = curSrcPos + 1;
     break;
   case 0x2b:
@@ -516,11 +516,11 @@ LAB_97b7ccfc:
       goto joined_r0x97b7c784;
     }
     ch = 0x20;
-LAB_97b7cbd8:
+setSrcPos2:
     srcPos = curSrcPos + 1;
     *(undefined1 *)(output + outPos) = ch;
     nextOutPos = outPos + 1;
-LAB_97b7cbe0:
+setLastWasSep:
     lastWasSep = 1;
     break;
   case 0x2e:
@@ -531,7 +531,7 @@ LAB_97b7cbe0:
       }
       *(undefined1 *)(output + outPos) = 0x2e;
       charAdvance = outPos + 1;
-      if (length <= curSrcPos + 1) goto LAB_97b7cd54;
+      if (length <= curSrcPos + 1) goto setLastWasSep2;
       nextByte = *(byte *)(source + curSrcPos + 1);
       if (nextByte - 0x30 < 10) {
         lastWasSep = 0;
@@ -548,7 +548,7 @@ LAB_97b7cbe0:
         srcPos = curSrcPos + 1;
         goto joined_r0x97b7c784;
       }
-      goto LAB_97b7cd54;
+      goto setLastWasSep2;
     }
     if (lastWasSep == 0) {
       *(undefined1 *)(output + outPos) = 0x20;
@@ -581,12 +581,12 @@ LAB_97b7cbe0:
     *(undefined1 *)(output + outPos) = ch;
     numState = numState | lastWasSep;
     charAdvance = outPos + 1;
-    goto LAB_97b7cd54;
+    goto setLastWasSep2;
   case 0x45:
   case 0x65:
     *(undefined1 *)(output + outPos) = ch;
     charAdvance = outPos + 1;
-LAB_97b7cd54:
+setLastWasSep2:
     lastWasSep = 0;
     outPos = charAdvance;
     srcPos = curSrcPos + 1;
@@ -603,7 +603,7 @@ code_r0x97b7cd84:
       charAdvance = 2;
     }
     srcPos = curSrcPos + charAdvance;
-LAB_97b7cdd0:
+setInComment:
     inComment = false;
     outPos = outPos + 1;
   }
@@ -615,7 +615,7 @@ code_r0x97b7c67c:
       charStep = 2;
     }
     inPos = curPos + charStep;
-LAB_97b7c6bc:
+setInComment2:
     inComment = false;
     outLength = outLength + 1;
   }
@@ -824,23 +824,23 @@ int _PPParserParse(parser)
     if (status == 1) {
       status = 0x2d;
     }
-    if (status != 0) goto LAB_97b7d180;
+    if (status != 0) goto setBranchError;
     succeeded = true;
     if (((*(uint *)(parser + 0x48c) & 0x10) != 0) &&
        (branchError = _PPStreamResolveBranches(*(undefined4 *)(parser + 0x1c)), branchError != 0)) {
       status = 0x1b;
-      goto LAB_97b7d170;
+      goto setSucceeded;
     }
   }
   else if (status == 1) {
     status = 0;
-LAB_97b7d170:
+setSucceeded:
     succeeded = status == 0;
   }
   if (succeeded) {
     return 0;
   }
-LAB_97b7d180:
+setBranchError:
   branchError = 2;
   if (status != 2) {
     _PPParserBuildErrorString(parser,status,0);
@@ -1025,14 +1025,14 @@ int _PPParserParseOptionIdentifier(parser)
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined4 *)(parser + 0x48c) = 0x31;
       optionId = 10;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"NV_vertex_program3",0x13);
     if (compareResult == 0) {
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined4 *)(parser + 0x48c) = 0x34;
       optionId = 0xb;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
   }
   else {
@@ -1044,7 +1044,7 @@ int _PPParserParseOptionIdentifier(parser)
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined1 *)(parser + 0x443) = 1;
       optionId = 1;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"ARB_fog_exp2",0xd);
     if (compareResult == 0) {
@@ -1054,7 +1054,7 @@ int _PPParserParseOptionIdentifier(parser)
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined1 *)(parser + 0x443) = 2;
       optionId = 2;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"ARB_fog_linear",0xf);
     if (compareResult == 0) {
@@ -1064,7 +1064,7 @@ int _PPParserParseOptionIdentifier(parser)
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined1 *)(parser + 0x443) = 3;
       optionId = 3;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"ARB_precision_hint_fastest",0x1b);
     if (compareResult == 0) {
@@ -1074,7 +1074,7 @@ int _PPParserParseOptionIdentifier(parser)
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined1 *)(parser + 0x444) = 4;
       optionId = 4;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"ARB_precision_hint_nicest",0x1a);
     if (compareResult == 0) {
@@ -1084,14 +1084,14 @@ int _PPParserParseOptionIdentifier(parser)
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined1 *)(parser + 0x444) = 5;
       optionId = 5;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"NV_fragment_program",0x14);
     if (compareResult == 0) {
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined4 *)(parser + 0x48c) = 0x33;
       optionId = 8;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"NV_fragment_program2",0x15);
     if (compareResult == 0) {
@@ -1104,14 +1104,14 @@ int _PPParserParseOptionIdentifier(parser)
     if (compareResult == 0) {
       stream = *(undefined4 *)(parser + 0x1c);
       optionId = 0xd;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
     compareResult = _memcmp(optionName,"ARB_draw_buffers",0x11);
     if (compareResult == 0) {
       stream = *(undefined4 *)(parser + 0x1c);
       *(undefined1 *)(parser + 0x445) = 1;
       optionId = 0xc;
-      goto LAB_97b7d8b8;
+      goto callPPStreamAddOption;
     }
   }
   compareResult = _memcmp(optionName,"APPLE_no_runtime_compile",0x19);
@@ -1127,7 +1127,7 @@ int _PPParserParseOptionIdentifier(parser)
     stream = *(undefined4 *)(parser + 0x1c);
     optionId = 7;
   }
-LAB_97b7d8b8:
+callPPStreamAddOption:
   ((int (*)())_PPStreamAddOption)(stream,optionId);
   return 0;
 }
@@ -1283,7 +1283,7 @@ int _PPParserParseStatement(parser)
     }
     else {
       compareResult = _memcmp(partBuf,"SHORT",6);
-      if (compareResult != 0) goto LAB_97b7db80;
+      if (compareResult != 0) goto setCompareResult;
       longShortMode = 2;
     }
     partLengthThenLabelStatus = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
@@ -1291,7 +1291,7 @@ int _PPParserParseStatement(parser)
       return 1;
     }
   }
-LAB_97b7db80:
+setCompareResult:
   compareResult = _memcmp(partBuf,"TEMP",5);
   if (compareResult == 0) {
     declStatus = _PPParserParseTempDeclaration(parser,longShortMode);
@@ -1346,7 +1346,7 @@ LAB_97b7db80:
                           if (compareResult == 0) {
                             opcode = opsList[1];
                             precision = 0;
-                            goto LAB_97b7e2b0;
+                            goto setUpdateCC;
                           }
                           profile = *(uint *)(parser + 0x48c);
                           if ((profile & 0x10) != 0) {
@@ -1354,57 +1354,57 @@ LAB_97b7db80:
                             compareResult = _strcmp(partBuf,suffixedName);
                             if (compareResult != 0) {
                               profile = *(uint *)(parser + 0x48c);
-                              if (profile != 0x34) goto LAB_97b7ddc8;
+                              if (profile != 0x34) goto checkProfile;
                               _sprintf(suffixedName,"%sC0",*opsList);
                               compareResult = _strcmp(partBuf,suffixedName);
-                              if (compareResult == 0) goto LAB_97b7e228;
+                              if (compareResult == 0) goto setOpcode;
                               _sprintf(suffixedName,"%sC1",*opsList);
                               compareResult = _strcmp(partBuf,suffixedName);
                               if (compareResult != 0) {
                                 profile = *(uint *)(parser + 0x48c);
-                                goto LAB_97b7ddc8;
+                                goto checkProfile;
                               }
                               opcode = opsList[1];
                               saturate = 0;
-LAB_97b7e28c:
+loopSetUpdateCC:
                               updateCC = 1;
                               precision = 0;
                               ccRegister = 1;
-                              goto LAB_97b7e334;
+                              goto setPpParserParseOperationResult;
                             }
-LAB_97b7e228:
+setOpcode:
                             opcode = opsList[1];
                             precision = 0;
-                            goto LAB_97b7e234;
+                            goto setUpdateCC2;
                           }
-LAB_97b7ddc8:
+checkProfile:
                           if ((profile & 2) != 0) {
                             _sprintf(suffixedName,"%s_SAT",*opsList);
                             compareResult = _strcmp(partBuf,suffixedName);
                             if (compareResult == 0) {
                               opcode = opsList[1];
                               precision = 0;
-                              goto LAB_97b7e260;
+                              goto setUpdateCC3;
                             }
-                            if ((*(uint *)(parser + 0x48c) & 0x10) == 0) goto LAB_97b7e11c;
+                            if ((*(uint *)(parser + 0x48c) & 0x10) == 0) goto setOpsList;
                             _sprintf(suffixedName,"%sC_SAT",*opsList);
                             compareResult = _strcmp(partBuf,suffixedName);
                             if (compareResult == 0) {
-LAB_97b7e268:
+loopSetOpcode:
                               opcode = opsList[1];
                               precision = 0;
-                              goto LAB_97b7e328;
+                              goto setUpdateCC4;
                             }
                             if (*(int *)(parser + 0x48c) == 0x34) {
                               _sprintf(suffixedName,"%sC0_SAT",*opsList);
                               compareResult = _strcmp(partBuf,suffixedName);
-                              if (compareResult == 0) goto LAB_97b7e268;
+                              if (compareResult == 0) goto loopSetOpcode;
                               _sprintf(suffixedName,"%sC1_SAT",*opsList);
                               compareResult = _strcmp(partBuf,suffixedName);
                               if (compareResult == 0) {
                                 opcode = opsList[1];
                                 saturate = 1;
-                                goto LAB_97b7e28c;
+                                goto loopSetUpdateCC;
                               }
                             }
                             length = _strlen(partBuf);
@@ -1426,14 +1426,14 @@ LAB_97b7e268:
                                 else {
                                   _sprintf(suffixedName,"%sX",*opsList);
                                   compareResult = _strcmp(partBuf,suffixedName);
-                                  if (compareResult != 0) goto LAB_97b7e11c;
+                                  if (compareResult != 0) goto setOpsList;
                                   opcode = opsList[1];
                                   precision = 3;
                                 }
                               }
-LAB_97b7e2b0:
+setUpdateCC:
                               updateCC = 0;
-LAB_97b7e2b4:
+loopSetSaturate:
                               saturate = 0;
                             }
                             else {
@@ -1456,14 +1456,14 @@ LAB_97b7e2b4:
                                   else {
                                     _sprintf(suffixedName,"%sXC",*opsList);
                                     compareResult = _strcmp(partBuf,suffixedName);
-                                    if (compareResult != 0) goto LAB_97b7e11c;
+                                    if (compareResult != 0) goto setOpsList;
                                     opcode = opsList[1];
                                     precision = 3;
                                   }
                                 }
-LAB_97b7e234:
+setUpdateCC2:
                                 updateCC = 1;
-                                goto LAB_97b7e2b4;
+                                goto loopSetSaturate;
                               }
                               length = _strlen(partBuf);
                               length2 = _strlen(*opsList);
@@ -1484,18 +1484,18 @@ LAB_97b7e234:
                                   else {
                                     _sprintf(suffixedName,"%sX_SAT",*opsList);
                                     compareResult = _strcmp(partBuf,suffixedName);
-                                    if (compareResult != 0) goto LAB_97b7e11c;
+                                    if (compareResult != 0) goto setOpsList;
                                     opcode = opsList[1];
                                     precision = 3;
                                   }
                                 }
-LAB_97b7e260:
+setUpdateCC3:
                                 updateCC = 0;
                               }
                               else {
                                 length = _strlen(partBuf);
                                 length2 = _strlen(*opsList);
-                                if (length != length2 + 6) goto LAB_97b7e11c;
+                                if (length != length2 + 6) goto setOpsList;
                                 _sprintf(suffixedName,"%sRC_SAT",*opsList);
                                 compareResult = _strcmp(partBuf,suffixedName);
                                 if (compareResult == 0) {
@@ -1512,22 +1512,22 @@ LAB_97b7e260:
                                   else {
                                     _sprintf(suffixedName,"%sXC_SAT",*opsList);
                                     compareResult = _strcmp(partBuf,suffixedName);
-                                    if (compareResult != 0) goto LAB_97b7e11c;
+                                    if (compareResult != 0) goto setOpsList;
                                     opcode = opsList[1];
                                     precision = 3;
                                   }
                                 }
-LAB_97b7e328:
+setUpdateCC4:
                                 updateCC = 1;
                               }
                               saturate = 1;
                             }
                             ccRegister = 0;
-LAB_97b7e334:
+setPpParserParseOperationResult:
                             ppParserParseOperationResult = ((int (*)())_PPParserParseOperation)(parser,opcode,precision,updateCC,saturate,ccRegister,leftoverR9);
                             return ppParserParseOperationResult;
                           }
-LAB_97b7e11c:
+setOpsList:
                           opsList = opsList + 2;
                           mnemonic = *opsList;
                         } while (mnemonic != 0);
@@ -1535,25 +1535,25 @@ LAB_97b7e11c:
                       }
                       if (profile == 0x34) {
                         if (tableTier == 0) {
-LAB_97b7e160:
+loopSetOpsList:
                           opsList = (int *)&_OpsList_NVvp20;
                         }
                         else {
-                          if (tableTier != 1) goto LAB_97b7e1b4;
+                          if (tableTier != 1) goto loopCheckProfile;
                           opsList = &_OpsList_NVvp30;
                         }
                       }
                       else {
                         if (profile == 0x31) {
-                          if (tableTier == 0) goto LAB_97b7e160;
-                          goto LAB_97b7e1b4;
+                          if (tableTier == 0) goto loopSetOpsList;
+                          goto loopCheckProfile;
                         }
                         if (profile == 0x33) {
-                          if (tableTier != 0) goto LAB_97b7e1b4;
+                          if (tableTier != 0) goto loopCheckProfile;
                         }
                         else {
                           if (profile != 0x36) {
-LAB_97b7e1b4:
+loopCheckProfile:
                             if (((profile & 0x10) != 0) &&
                                (partLengthThenLabelStatus = _PPParserParseLabel(parser,partBuf,partLengthThenLabelStatus), partLengthThenLabelStatus != 3))
                             {
@@ -1574,14 +1574,14 @@ LAB_97b7e1b4:
                           if (tableTier != 0) {
                             if (tableTier == 1) {
                               opsList = (int *)&_OpsList_NVfp20;
-                              goto LAB_97b7e1ac;
+                              goto setTableTier;
                             }
-                            goto LAB_97b7e1b4;
+                            goto loopCheckProfile;
                           }
                         }
                         opsList = (int *)&_OpsList_NVfp10;
                       }
-LAB_97b7e1ac:
+setTableTier:
                       tableTier = tableTier + 1;
                     } while( true );
                   }
@@ -1817,7 +1817,7 @@ int _PPParserValidateName(parser, name)
                 else {
                   length = _strlen(name);
                   length2 = _strlen(*tableEntry);
-                  if (length != length2 + 6) goto LAB_97b7e970;
+                  if (length != length2 + 6) goto setTableEntry;
                   _sprintf(suffixedName,"%sRC_SAT",*tableEntry);
                   compareResult = _strcmp(name,suffixedName);
                   if (compareResult == 0) {
@@ -1840,7 +1840,7 @@ int _PPParserValidateName(parser, name)
             }
           }
         }
-LAB_97b7e970:
+setTableEntry:
         tableEntry = tableEntry + 2;
         mnemonic = *tableEntry;
       } while (mnemonic != 0);
@@ -1848,7 +1848,7 @@ LAB_97b7e970:
     }
     if (profile == 0x34) {
       if (loopIndex == 0) {
-LAB_97b7e9b4:
+loopSetTableEntry:
         tableEntry = (int *)&_OpsList_NVvp20;
       }
       else {
@@ -1863,7 +1863,7 @@ LAB_97b7e9b4:
         if (loopIndex != 0) {
           return 0;
         }
-        goto LAB_97b7e9b4;
+        goto loopSetTableEntry;
       }
       if (profile == 0x33) {
         if (loopIndex != 0) {
@@ -1879,12 +1879,12 @@ LAB_97b7e9b4:
             return 0;
           }
           tableEntry = (int *)&_OpsList_NVfp20;
-          goto LAB_97b7ea00;
+          goto setLoopIndex;
         }
       }
       tableEntry = (int *)&_OpsList_NVfp10;
     }
-LAB_97b7ea00:
+setLoopIndex:
     loopIndex = loopIndex + 1;
   } while( true );
 }
@@ -2148,7 +2148,7 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
           }
           compareResult = _memcmp(partText,"front",6);
           if (compareResult == 0) {
-LAB_97b7ef9c:
+loopSetPart:
             part = ((int (*)())_PPParserGetPart)(parser,partText,0);
             if (part == 0) {
               return 0x2d;
@@ -2165,7 +2165,7 @@ LAB_97b7ef9c:
             compareResult = _memcmp(partText,"back",5);
             if (compareResult == 0) {
               bindingWord = bindingWord | 1;
-              goto LAB_97b7ef9c;
+              goto loopSetPart;
             }
           }
           compareResult = _memcmp(partText,"ambient",8);
@@ -2176,7 +2176,7 @@ LAB_97b7ef9c:
             compareResult = _memcmp(partText,"diffuse",8);
             if (compareResult == 0) {
               materialProperty = 1;
-LAB_97b7f0a8:
+loopSetBindingWord:
               bindingWord = materialProperty << 1 | bindingWord & 0xfffffff1;
             }
             else {
@@ -2192,7 +2192,7 @@ LAB_97b7f0a8:
                     return 10;
                   }
                   materialProperty = 4;
-                  goto LAB_97b7f0a8;
+                  goto loopSetBindingWord;
                 }
                 bindingWord = bindingWord & 0xfffffff1 | 6;
               }
@@ -2204,9 +2204,9 @@ LAB_97b7f0a8:
           if (compareResult == 0) {
             ppStream = *(undefined4 *)(parser + 0x1c);
             stateClass = 0x12;
-LAB_97b7fbb8:
+loopSetBindingWord2:
             bindingWord = stateClass << 0x10 | bindingWord & 0xffe0ffff;
-            goto LAB_97b801d0;
+            goto callPPStreamAddParamBinding;
           }
           compareResult = _memcmp(partText,"light",6);
           if (compareResult == 0) {
@@ -2322,7 +2322,7 @@ LAB_97b7fbb8:
                 compareResult = _memcmp(partText,"front",6);
                 if (compareResult == 0) {
                   bindingWord = bindingWord & 0xfffffffe;
-LAB_97b7f420:
+loopSetPart2:
                   part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
@@ -2342,7 +2342,7 @@ LAB_97b7f420:
                   compareResult = _memcmp(partText,"back",5);
                   if (compareResult == 0) {
                     bindingWord = bindingWord | 1;
-                    goto LAB_97b7f420;
+                    goto loopSetPart2;
                   }
                 }
                 compareResult = _memcmp(partText,"scenecolor",0xb);
@@ -2350,10 +2350,10 @@ LAB_97b7f420:
                   return 10;
                 }
                 bindingWord = bindingWord & 0xffe0fff1 | 0x5000a;
-                goto LAB_97b7fa44;
+                goto setPpStream;
               }
               stateClass = 6;
-              goto LAB_97b7fa3c;
+              goto setBindingWord;
             }
             compareResult = _memcmp(partText,"lightprod",10);
             if (compareResult == 0) {
@@ -2379,7 +2379,7 @@ LAB_97b7f420:
               }
               compareResult = _memcmp(partText,"front",6);
               if (compareResult == 0) {
-LAB_97b7f59c:
+loopSetPart3:
                 part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
@@ -2399,7 +2399,7 @@ LAB_97b7f59c:
                 compareResult = _memcmp(partText,"back",5);
                 if (compareResult == 0) {
                   bindingWord = bindingWord | 0x100;
-                  goto LAB_97b7f59c;
+                  goto loopSetPart3;
                 }
               }
               compareResult = _memcmp(partText,"ambient",8);
@@ -2419,11 +2419,11 @@ LAB_97b7f59c:
                   bindingWord = bindingWord & 0xfffff9ff | 0x400;
                 }
               }
-              goto LAB_97b7fa44;
+              goto setPpStream;
             }
             if (isFragmentProgram) {
               compareResult = _memcmp(partText,"texenv",7);
-              if (compareResult != 0) goto LAB_97b7f980;
+              if (compareResult != 0) goto setCompareResult;
               bindingWord = bindingWord & 0xffe0ffe0 | 0x90000;
               part = ((int (*)())_PPParserGetPart)(parser,partText,0);
               if (part == 0) {
@@ -2452,7 +2452,7 @@ LAB_97b7f59c:
                 return 0x2d;
               }
               compareResult = _memcmp(partText,"color",6);
-LAB_97b7fae0:
+loopCheckCompareResult:
               if (compareResult != 0) {
                 return 10;
               }
@@ -2541,9 +2541,9 @@ LAB_97b7fae0:
                     }
                   }
                 }
-                goto LAB_97b7fa44;
+                goto setPpStream;
               }
-LAB_97b7f980:
+setCompareResult:
               compareResult = _memcmp(partText,"fog",4);
               if (compareResult == 0) {
                 part = ((int (*)())_PPParserGetPart)(parser,partText,0);
@@ -2576,7 +2576,7 @@ LAB_97b7f980:
                 if (isFragmentProgram) {
                   compareResult = _memcmp(partText,"depth",6);
                   if (compareResult != 0) {
-LAB_97b7fc90:
+loopSetCompareResult:
                     compareResult = _memcmp(partText,"matrix",7);
                     if (compareResult != 0) {
                       return 10;
@@ -2605,12 +2605,12 @@ LAB_97b7fc90:
                       }
                       ((int (*)())_PPParserReturnPart)(parser);
                       if (partText[0] == '[') {
-LAB_97b7fe54:
+loopSetArrayResult:
                         arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                         if (arrayResult != 0) {
                           return arrayResult;
                         }
-LAB_97b7fec8:
+loopSetBindingWord3:
                         bindingWord = CONCAT31((*(unsigned int *)((unsigned char *)&(bindingWord) + 0)),(undefined1)arrayStart);
                       }
                       else {
@@ -2647,7 +2647,7 @@ LAB_97b7fec8:
                               if (*(uint *)(parser + 0x458) <= arrayStart) {
                                 return 0x30;
                               }
-                              goto LAB_97b7fec8;
+                              goto loopSetBindingWord3;
                             }
                             bindingWord = bindingWord & 0xfffff8ff | 0x400;
                             part = ((int (*)())_PPParserGetPart)(parser,partText,0);
@@ -2655,7 +2655,7 @@ LAB_97b7fec8:
                               return 0x2d;
                             }
                             ((int (*)())_PPParserReturnPart)(parser);
-                            if (partText[0] == '[') goto LAB_97b7fe54;
+                            if (partText[0] == '[') goto loopSetArrayResult;
                             bindingWord = bindingWord & 0xffffff00;
                           }
                         }
@@ -2688,7 +2688,7 @@ LAB_97b7fec8:
                             partText[1] = 0;
                             partText[0] = savedChar;
                             savedChar = '.';
-                            goto LAB_97b7ffd8;
+                            goto setArrayStart;
                           }
                           bindingWord = bindingWord & 0xffff3fff | 0xc000;
                         }
@@ -2699,7 +2699,7 @@ LAB_97b7fec8:
                         return 0x2d;
                       }
                     }
-LAB_97b7ffd8:
+setArrayStart:
                     arrayStart = 0;
                     arrayEnd[0] = 3;
                     if ((savedChar == '.') && (part == 1)) {
@@ -2745,7 +2745,7 @@ LAB_97b7ffd8:
                       bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)nextOrdinal);
                       *(int *)(parser + 0x20) = nextOrdinal;
                     }
-                    goto LAB_97b801d4;
+                    goto setLoopIndex;
                   }
                   bindingWord = bindingWord & 0xffe0ffff | 0xf0000;
                   part = ((int (*)())_PPParserGetPart)(parser,partText,0);
@@ -2763,7 +2763,7 @@ LAB_97b7ffd8:
                     return 0x2d;
                   }
                   compareResult = _memcmp(partText,"range",6);
-                  goto LAB_97b7fae0;
+                  goto loopCheckCompareResult;
                 }
                 compareResult = _memcmp(partText,"clip",5);
                 if (compareResult == 0) {
@@ -2795,10 +2795,10 @@ LAB_97b7ffd8:
                   }
                   ppStream = *(undefined4 *)(parser + 0x1c);
                   stateClass = 10;
-                  goto LAB_97b7fbb8;
+                  goto loopSetBindingWord2;
                 }
                 compareResult = _memcmp(partText,"point",6);
-                if (compareResult != 0) goto LAB_97b7fc90;
+                if (compareResult != 0) goto loopSetCompareResult;
                 part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
@@ -2825,12 +2825,12 @@ LAB_97b7ffd8:
                   stateClass = 0xe;
                 }
               }
-LAB_97b7fa3c:
+setBindingWord:
               bindingWord = stateClass << 0x10 | bindingWord & 0xffe0ffff;
             }
           }
         }
-LAB_97b7fa44:
+setPpStream:
         ppStream = *(undefined4 *)(parser + 0x1c);
       }
       else {
@@ -2872,13 +2872,13 @@ LAB_97b7fa44:
         bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)*(int *)(parser + 0x2c));
         *(int *)(parser + 0x2c) = *(int *)(parser + 0x2c) + 1;
       }
-LAB_97b801d0:
+callPPStreamAddParamBinding:
       ((int (*)())_PPStreamAddParamBinding)(ppStream,&bindingWord);
     }
-LAB_97b801d4:
+setLoopIndex:
     loopIndex = loopIndex + 1;
     *(int *)(parser + 0x20) = *(int *)(parser + 0x20) + 1;
-    if (singleBinding) goto LAB_97b80220;
+    if (singleBinding) goto checkBindingCountOut;
     part = ((int (*)())_PPParserGetPart)(parser,partText,0);
     if (part == 0) {
       return 0x2d;
@@ -2886,7 +2886,7 @@ LAB_97b801d4:
   } while (partText[0] == ',');
   resultCode = 10;
   if (partText[0] == '}') {
-LAB_97b80220:
+checkBindingCountOut:
     if (*bindingCountOut == 0) {
       *bindingCountOut = loopIndex;
     }
@@ -3109,7 +3109,7 @@ int _PPParserParseAttributeBinding(parser)
     }
     bindingClass = 0x3d;
     indexLimit = *(uint *)(parser + 0x488);
-    goto LAB_97b80948;
+    goto loopCheckIndexLimit;
   }
   keywordCompare = _memcmp(partBuf,"position",9);
   if (keywordCompare == 0) {
@@ -3132,19 +3132,19 @@ int _PPParserParseAttributeBinding(parser)
           keywordCompare = _memcmp(partBuf,"secondary",10);
           if (keywordCompare == 0) {
             bindingClass = 3;
-            goto LAB_97b80b98;
+            goto setBinding;
           }
           keywordCompare = _memcmp(partBuf,"primary",8);
-          if (keywordCompare == 0) goto LAB_97b80bac;
+          if (keywordCompare == 0) goto checkIsFragmentProgram;
           ((int (*)())_PPParserReturnPart)(parser);
         }
         ((int (*)())_PPParserReturnPart)(parser);
-        goto LAB_97b80bac;
+        goto checkIsFragmentProgram;
       }
       keywordCompare = _memcmp(partBuf,"fogcoord",9);
       if (keywordCompare == 0) {
         bindingClass = 5;
-        goto LAB_97b80b98;
+        goto setBinding;
       }
       keywordCompare = _memcmp(partBuf,"texcoord",9);
       if (keywordCompare == 0) {
@@ -3155,9 +3155,9 @@ int _PPParserParseAttributeBinding(parser)
         }
         ((int (*)())_PPParserReturnPart)(parser);
         if (partBuf[0] != '[') {
-LAB_97b8095c:
+loopSetBinding:
           binding = binding & 0xffffffe0;
-          goto LAB_97b80bac;
+          goto checkIsFragmentProgram;
         }
         arrayStatus = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
         if (arrayStatus != 0) {
@@ -3165,12 +3165,12 @@ LAB_97b8095c:
         }
         bindingClass = 0x38;
         indexLimit = *(uint *)(parser + 0x470);
-LAB_97b80948:
+loopCheckIndexLimit:
         if (indexLimit <= arrayIndex[0]) {
           return bindingClass;
         }
         binding = arrayIndex[0] & 0x1f | binding & 0xffffffe0;
-        goto LAB_97b80bac;
+        goto checkIsFragmentProgram;
       }
       if (isFragmentProgram) {
         keywordCompare = _memcmp(partBuf,"facing",7);
@@ -3181,7 +3181,7 @@ LAB_97b80948:
           return 10;
         }
         bindingClass = 0xb;
-        goto LAB_97b80b98;
+        goto setBinding;
       }
       keywordCompare = _memcmp(partBuf,"weight",7);
       if (keywordCompare == 0) {
@@ -3191,14 +3191,14 @@ LAB_97b80948:
           return 0x2d;
         }
         ((int (*)())_PPParserReturnPart)(parser);
-        if (partBuf[0] != '[') goto LAB_97b8095c;
+        if (partBuf[0] != '[') goto loopSetBinding;
         arrayStatus = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
         if (arrayStatus != 0) {
           return arrayStatus;
         }
         bindingClass = 0x39;
         indexLimit = *(uint *)(parser + 0x478);
-        goto LAB_97b80948;
+        goto loopCheckIndexLimit;
       }
       keywordCompare = _memcmp(partBuf,"material",9);
       if (keywordCompare != 0) {
@@ -3221,7 +3221,7 @@ LAB_97b80948:
       }
       keywordCompare = _memcmp(partBuf,"front",6);
       if (keywordCompare == 0) {
-LAB_97b80a4c:
+loopSetPartLength:
         partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
         if (partLength == 0) {
           return 0x2d;
@@ -3238,7 +3238,7 @@ LAB_97b80a4c:
         keywordCompare = _memcmp(partBuf,"back",5);
         if (keywordCompare == 0) {
           binding = binding | 1;
-          goto LAB_97b80a4c;
+          goto loopSetPartLength;
         }
       }
       keywordCompare = _memcmp(partBuf,"ambient",8);
@@ -3271,13 +3271,13 @@ LAB_97b80a4c:
         }
         binding = materialProperty << 0xc | binding & 0xffff0fff;
       }
-      goto LAB_97b80bac;
+      goto checkIsFragmentProgram;
     }
     bindingClass = 4;
   }
-LAB_97b80b98:
+setBinding:
   binding = bindingClass << 0x10 | binding & 0xfff0ffff;
-LAB_97b80bac:
+checkIsFragmentProgram:
   if (isFragmentProgram) {
     stream = *(int *)(parser + 0x1c);
   }
@@ -3347,17 +3347,17 @@ int _testAttribMatch(binding, generic)
     break;
   case 6:
   case 7:
-    goto switchD_97b80cc0_caseD_6;
+    goto genericIndexWordCase6;
   default:
     if ((*binding >> 0x10 & 0xf) == 7) {
       matches = (*binding & 0x1f) == (genericIndexWord & 0x1f) - 8;
       break;
     }
-    goto switchD_97b80cc0_caseD_6;
+    goto genericIndexWordCase6;
   }
   result = 1;
   if (!matches) {
-switchD_97b80cc0_caseD_6:
+genericIndexWordCase6:
     result = 0;
   }
   return result;
@@ -3460,7 +3460,7 @@ int _PPParserParseOutputBinding(parser, outputMode)
       return 0x22;
     }
     binding = binding & 0xfff0ffff | 0x10000;
-    goto LAB_97b81320;
+    goto setBindingOrdinal;
   }
   keywordCompare = _memcmp(&partBuf,"color",6);
   if (keywordCompare == 0) {
@@ -3483,7 +3483,7 @@ int _PPParserParseOutputBinding(parser, outputMode)
           binding = binding & 0xfffffff1;
         }
       }
-      goto LAB_97b81320;
+      goto setBindingOrdinal;
     }
     partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
     if (partLength == 0) {
@@ -3504,7 +3504,7 @@ int _PPParserParseOutputBinding(parser, outputMode)
           ((int (*)())_PPParserReturnPart)(parser);
           partBuf1 = 0;
           partBuf = '.';
-          goto LAB_97b810c0;
+          goto checkPartBuf;
         }
       }
       partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
@@ -3512,7 +3512,7 @@ int _PPParserParseOutputBinding(parser, outputMode)
         return 0x2d;
       }
     }
-LAB_97b810c0:
+checkPartBuf:
     if ((partBuf == '.') && (partLength == 1)) {
       partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
       if (partLength == 0) {
@@ -3521,10 +3521,10 @@ LAB_97b810c0:
       keywordCompare = _memcmp(&partBuf,"secondary",10);
       if (keywordCompare == 0) {
         outputClass = 5;
-        goto LAB_97b8130c;
+        goto setBinding;
       }
       keywordCompare = _memcmp(&partBuf,"primary",8);
-      if (keywordCompare == 0) goto LAB_97b81320;
+      if (keywordCompare == 0) goto setBindingOrdinal;
       ((int (*)())_PPParserReturnPart)(parser);
     }
     ((int (*)())_PPParserReturnPart)(parser);
@@ -3566,7 +3566,7 @@ LAB_97b810c0:
             else {
               binding = binding & 0xffffffe0;
             }
-            goto LAB_97b81320;
+            goto setBindingOrdinal;
           }
           keywordCompare = _memcmp(&partBuf,"clip",5);
           if (keywordCompare != 0) {
@@ -3579,10 +3579,10 @@ LAB_97b810c0:
         }
       }
     }
-LAB_97b8130c:
+setBinding:
     binding = outputClass << 0x10 | binding & 0xfff0ffff;
   }
-LAB_97b81320:
+setBindingOrdinal:
   bindingOrdinal = CONCAT22(bindingOrdinal,(short)*(int *)(parser + 0x28));
   *(int *)(parser + 0x28) = *(int *)(parser + 0x28) + 1;
   ((int (*)())_PPStreamAddOutputBinding)(*(undefined4 *)(parser + 0x1c),&binding);
@@ -3709,7 +3709,7 @@ int _PPParserParseOperation(parser, opcode, precision, updateCC, saturate, ccReg
   case 0x65:
   case 0x66:
     sourceCount = 1;
-    goto LAB_97b81664;
+    goto setRequireScalarSwizzle;
   case 0x1f:
   case 0x20:
   case 0x22:
@@ -3740,7 +3740,7 @@ int _PPParserParseOperation(parser, opcode, precision, updateCC, saturate, ccReg
     break;
   case 0x38:
     sourceCount = 2;
-LAB_97b81664:
+setRequireScalarSwizzle:
     requireScalarSwizzle = true;
     break;
   case 0x3c:
@@ -3769,10 +3769,10 @@ LAB_97b81664:
   case 0x54:
   case 0x55:
     status = _PPParserParseBranchCondition(parser,&opDest0,opcode);
-    goto LAB_97b816dc;
+    goto setHasDestination;
   case 0x4f:
     sourceCount = 1;
-LAB_97b816dc:
+setHasDestination:
     hasDestination = false;
     if (status != 0) {
       return status;
@@ -3783,13 +3783,13 @@ LAB_97b816dc:
   case 0x60:
   case 0x61:
     sourceCount = 1;
-    goto LAB_97b816c8;
+    goto setHasDestination2;
   case 0x58:
   case 0x59:
   case 0x5a:
   case 0x5b:
     sourceCount = 0;
-LAB_97b816c8:
+setHasDestination2:
     hasDestination = false;
     break;
   case 0x62:
@@ -3840,13 +3840,13 @@ LAB_97b816c8:
             else {
               status = ((int (*)())_PPParserParseSwizzleSourceVar)(parser,sourceCursor,opcode,sourceSwizzleInfo);
             }
-            goto LAB_97b818a8;
+            goto checkStatus;
           }
           sourceTarget = &opSrc1A;
         }
         status = _PPParserParseTextureSourceVar(parser,sourceTarget);
       }
-LAB_97b818a8:
+checkStatus:
       if (status != 0) {
         return status;
       }
@@ -4322,34 +4322,34 @@ int _PPStreamChunkGetStream(outEntry, chunk, context, entryCountOut, entryIndex)
   case 6:
   case 7:
   case 9:
-    goto switchD_97b82430_caseD_0;
+    goto chunkCase0;
   default:
     entryWord1 = (*(unsigned int *)0x00000004);
     entryWord0 = (*(unsigned int *)0x00000000);
-    goto LAB_97b824b4;
+    goto storeOutEntry2;
   case 8:
     *entryCountOut = (*(uint *)(chunk + 0xc) >> 0x1d) + 2;
     if (entryIndex != 0) {
       if (entryIndex == 1) {
         entryWord1 = *(undefined4 *)(chunk + 0x18);
         entryWord0 = *(undefined4 *)(chunk + 0x14);
-        goto LAB_97b82490;
+        goto storeOutEntry;
       }
-      goto LAB_97b824a8;
+      goto setEntryWord1;
     }
-switchD_97b82430_caseD_0:
+chunkCase0:
     entryWord1 = *(undefined4 *)(chunk + 0x10);
     entryWord0 = *(undefined4 *)(chunk + 0xc);
-LAB_97b82490:
+storeOutEntry:
     outEntry[1] = entryWord1;
     *outEntry = entryWord0;
     return;
   case 10:
     *entryCountOut = 2;
-LAB_97b824a8:
+setEntryWord1:
     entryWord1 = *(undefined4 *)(chunk + entryIndex * 8 + 0x10);
     entryWord0 = *(undefined4 *)(chunk + entryIndex * 8 + 0xc);
-LAB_97b824b4:
+storeOutEntry2:
     outEntry[1] = entryWord1;
     *outEntry = entryWord0;
     return;

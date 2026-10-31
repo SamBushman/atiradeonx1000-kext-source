@@ -59,7 +59,7 @@ int ParseOperand__GetString(this)
   if (*(int *)(this + 4) == 0) {
     allocation = (char *)_malloc(10);
     formatString = DAT_a7b7bbf0;
-LAB_97bbc23c:
+loopCallSprintf:
     _sprintf(allocation,formatString);
   }
   else {
@@ -87,7 +87,7 @@ LAB_97bbc23c:
           glTypeSigned = *(short *)(symbolPtr + 0x2c);
         }
         formatString = DAT_a7b7bbec;
-        if (glTypeSigned != -0x74aa) goto LAB_97bbc23c;
+        if (glTypeSigned != -0x74aa) goto loopCallSprintf;
       }
     }
     for (component = 0; baseSize = ParseOperand__GetBaseSize(this), component < baseSize; component = component + 1) {
@@ -109,16 +109,16 @@ LAB_97bbc23c:
                     (double)*(float *)(elemOffset + *(int *)(this + 4)),1e-07,unusedFpArg3,unusedFpArg4,unusedFpArg5,unusedFpArg6,
                     unusedFpArg7,unusedFpArg8,unusedStackArg0,unusedStackArg1,unusedStackArg2,
                     unusedStackArg3,unusedStackArg4);
-LAB_97bbc1b0:
+loopSetValueArg:
         valueArg = *(char **)(elemOffset + *(int *)(this + 4));
         formatString = DAT_a7b7bbe8;
-LAB_97bbc1ec:
+loopCallSprintf2:
         _sprintf(allocation,formatString,allocation,valueArg);
       }
       else if (glType < 0x1407) {
         if (glType == 0x1404) {
           elemOffset = component << 2;
-          goto LAB_97bbc1b0;
+          goto loopSetValueArg;
         }
       }
       else if (glType == 0x8b56) {
@@ -129,7 +129,7 @@ LAB_97bbc1ec:
         else {
           valueArg = "true";
         }
-        goto LAB_97bbc1ec;
+        goto loopCallSprintf2;
       }
     }
   }
@@ -356,11 +356,11 @@ int ParseSymbolTable__AddSymbol(this, parseSymbol)
         chainNext = *(int *)(lastInBucket + 4);
       } while (chainNext != 0);
       *(unsigned char **)(lastInBucket + 4) = parseSymbol;
-      goto LAB_97bbc4f8;
+      goto storeThis;
     }
   }
   *(unsigned char **)(bucketOffset + buckets) = parseSymbol;
-LAB_97bbc4f8:
+storeThis:
   *(unsigned char **)(this + 4) = parseSymbol;
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + 1;
   return;
@@ -420,11 +420,11 @@ int ParseSymbolTable__InsertSingleSymbol(this, parseSymbol)
             typeKind != 0xc)))) {
           needsRegisters = 1;
         }
-        goto LAB_97bbc61c;
+        goto setR3In1;
       }
     }
     else {
-LAB_97bbc61c:
+setR3In1:
       r3In1 = *(int **)(parseSymbol + 0xc);
     }
     *(undefined4 *)(parseSymbol + 0x38) = needsRegisters;
@@ -448,26 +448,26 @@ LAB_97bbc61c:
   chunkKind = *curChunk;
   if (chunkKind == 2) {
     chunkList = *(int *)(*(int *)(this + 0xc) + 0x18);
-    goto LAB_97bbc70c;
+    goto setVec4Index;
   }
   if (chunkKind < 3) {
     if (chunkKind == 0) {
       chunkList = *(int *)(*(int *)(this + 0xc) + 4);
-      goto LAB_97bbc70c;
+      goto setVec4Index;
     }
   }
   else {
     if (chunkKind == 3) {
       chunkList = *(int *)(*(int *)(this + 0xc) + 0x10);
-      goto LAB_97bbc70c;
+      goto setVec4Index;
     }
     if (chunkKind == 4) {
       chunkList = *(int *)(*(int *)(this + 0xc) + 0x1c);
-      goto LAB_97bbc70c;
+      goto setVec4Index;
     }
   }
   chunkList = 0;
-LAB_97bbc70c:
+setVec4Index:
   vec4Index = 0;
   if ((vec4Count != 0) && (chunkList != 0)) {
     do {
@@ -548,7 +548,7 @@ LAB_97bbc70c:
       _PPStreamChunkListAddChunk(chunkList,curChunk);
       arrayTrackingMode = *(int *)(this + 0x50);
       if (arrayTrackingMode == 0) {
-LAB_97bbc990:
+loopCheckVec4Count:
         if (1 < vec4Count) {
           if (((isExtraVec4) || (arrayTrackingMode == 0)) || (*(int *)(this + 0x40) != 0)) {
             if (((vec4Index == vec4Count - 1) && (arrayTrackingMode != 0)) && (*(int *)(this + 0x40) == 0)) {
@@ -559,7 +559,7 @@ LAB_97bbc990:
                      (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4),
                      *(short *)(firstChunk + 0x12) == 0)) {
                     counterLow = *(short *)(this + 0x3a);
-LAB_97bbcab0:
+loopStoreFirstChunk:
                     *(short *)(firstChunk + 0x12) = counterLow + -1;
                   }
                 }
@@ -567,7 +567,7 @@ LAB_97bbcab0:
                         (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4),
                         *(short *)(firstChunk + 0x12) == 0)) {
                   counterLow = *(short *)(this + 0x26);
-                  goto LAB_97bbcab0;
+                  goto loopStoreFirstChunk;
                 }
               }
             }
@@ -594,7 +594,7 @@ LAB_97bbcab0:
       else {
         arraySizeLimit = *(uint *)(this + 0x40);
         if (((arraySizeLimit <= *(uint *)(this + 0x44)) || (*(uint *)(this + 0x44) != 0)) || (isExtraVec4))
-        goto LAB_97bbc990;
+        goto loopCheckVec4Count;
         chunkKind = *curChunk;
         if (chunkKind != 2) {
           if (chunkKind < 3) {
@@ -602,7 +602,7 @@ LAB_97bbcab0:
               usageEntry[1] = 0;
               usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x3a) - 1);
               _PPStreamAddTempUsageArray(*(undefined4 *)(this + 0xc),usageEntry);
-LAB_97bbc984:
+loopSetArraySizeLimit:
               arraySizeLimit = *(uint *)(this + 0x40);
             }
           }
@@ -610,7 +610,7 @@ LAB_97bbc984:
             usageEntry[1] = 0;
             usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x26) - 1);
             _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0xc),usageEntry);
-            goto LAB_97bbc984;
+            goto loopSetArraySizeLimit;
           }
         }
         *(uint *)(this + 0x44) = arraySizeLimit;
@@ -645,19 +645,19 @@ int ParseSymbolTable__FinishArrayAddition(this)
     if (chunkKind < 3) {
       if ((chunkKind != 0) ||
          (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4), *(short *)(firstChunk + 0x12) != 0))
-      goto LAB_97bbcba4;
+      goto checkArrayTrackingMode;
       counterLow = *(short *)(this + 0x3a);
     }
     else {
       if ((chunkKind != 3) ||
          (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4), *(short *)(firstChunk + 0x12) != 0
-         )) goto LAB_97bbcba4;
+         )) goto checkArrayTrackingMode;
       counterLow = *(short *)(this + 0x26);
     }
     *(short *)(firstChunk + 0x12) = counterLow + -1;
     arrayTrackingMode = *(int *)(this + 0x50);
   }
-LAB_97bbcba4:
+checkArrayTrackingMode:
   if (arrayTrackingMode == 0) {
     *(undefined4 *)(this + 0x44) = 0;
     *(undefined4 *)(this + 0x40) = 0;
@@ -873,7 +873,7 @@ int ParseSymbolTable__AddFromExternalSymbol(this, parseSymbol, addFirstUsage, pa
                  (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4),
                  *(short *)(firstChunk + 0x12) == 0)) {
                 counterLow = *(short *)(this + 0x3a);
-LAB_97bbd0d4:
+loopStoreFirstChunk:
                 *(short *)(firstChunk + 0x12) = counterLow + -1;
               }
             }
@@ -881,7 +881,7 @@ LAB_97bbd0d4:
                     (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4),
                     *(short *)(firstChunk + 0x12) == 0)) {
               counterLow = *(short *)(this + 0x26);
-              goto LAB_97bbd0d4;
+              goto loopStoreFirstChunk;
             }
           }
         }
@@ -921,7 +921,7 @@ int ParseSymbolTable__InsertSymbol(this, parseSymbol)
   }
   if ((*(int *)(this + 0x4c) != 0) || (*(int *)(parseSymbol + 0x24) == 0)) {
     glType = *(short *)(parseSymbol + 0x2c);
-LAB_97bbd254:
+loopCheckGlType:
     if (glType == 0x7ffe) {
       structFieldList = *(int *)(*(int *)(parseSymbol + 0xc) + 8);
       if (structFieldList != 0) {
@@ -999,7 +999,7 @@ LAB_97bbd254:
   }
   glType = *(short *)(parseSymbol + 0x2c);
   if (((glType != 0x7fff) || (*(int *)(parseSymbol + 0x3c) != 0)) || (*(int *)(parseSymbol + 0x40) != 0))
-  goto LAB_97bbd254;
+  goto loopCheckGlType;
   foundSymbolId = false;
   if (-1 < *(int *)(parseSymbol + 0x28)) {
     for (symbolCursor = *(int *)this; symbolCursor != 0; symbolCursor = *(int *)(symbolCursor + 8)) {
@@ -1008,7 +1008,7 @@ LAB_97bbd254:
         break;
       }
     }
-    if (foundSymbolId) goto LAB_97bbd244;
+    if (foundSymbolId) goto storeThis;
   }
   *(undefined4 *)(this + 0x4c) = 1;
   elementSymbol = operator_new(100);
@@ -1027,7 +1027,7 @@ LAB_97bbd254:
   ((int (*)())ParseSymbolTable__processOperand)(this,elementOperand);
   __ZN12ParseOperandD1Ev(elementOperand);
   __ZdlPv(elementOperand);
-LAB_97bbd244:
+storeThis:
   *(undefined4 *)(this + 0x4c) = 0;
   return 0;
 }
@@ -1313,7 +1313,7 @@ int ParseSymbolTable__RemoveSymbol(this, parseSymbol)
     do {
       chunkKind = *chunk;
       if (chunkKind == 2) {
-LAB_97bbdb58:
+loopStoreThis:
         *(int *)(this + 0x18) = *(int *)(this + 0x18) + -1;
         if ((*(uint *)(chunk + 0xc) & 0xf0000) == 0x90000) {
           *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
@@ -1334,7 +1334,7 @@ LAB_97bbdb58:
             *(int *)(this + 0x20) = *(int *)(this + 0x20) - scalerWidth;
           }
           *(int *)(this + 0x38) = *(int *)(this + 0x38) + -1;
-          goto LAB_97bbdb58;
+          goto loopStoreThis;
         }
       }
       else if (chunkKind == 3) {
@@ -1377,7 +1377,7 @@ LAB_97bbdb58:
   do {
     curSymbol = cursorSymbol;
     if (curSymbol == (unsigned char *)0x0) {
-LAB_97bbdcd0:
+loopStoreParseSymbol:
       *(undefined4 *)(parseSymbol + 0x50) = 0;
       return;
     }
@@ -1391,7 +1391,7 @@ LAB_97bbdcd0:
       if (*(unsigned char **)(this + 4) == curSymbol) {
         *(unsigned char **)(this + 4) = prevSymbol;
       }
-      goto LAB_97bbdcd0;
+      goto loopStoreParseSymbol;
     }
     cursorSymbol = *(unsigned char **)(curSymbol + 8);
     prevSymbol = curSymbol;
@@ -1426,7 +1426,7 @@ int ParseSymbolTable__RemoveEndSymbol(this, parseSymbol)
     do {
       chunkKind = *chunk;
       if (chunkKind == 2) {
-        if (*(int *)(this + 0x18) - 1U != (uint)*(ushort *)(chunk + 0x12)) goto LAB_97bbde78;
+        if (*(int *)(this + 0x18) - 1U != (uint)*(ushort *)(chunk + 0x12)) goto loopSetRemovedOk;
         *(uint *)(this + 0x18) = *(int *)(this + 0x18) - 1U;
         if ((*(uint *)(chunk + 0xc) & 0xf0000) == 0x90000) {
           *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
@@ -1437,7 +1437,7 @@ int ParseSymbolTable__RemoveEndSymbol(this, parseSymbol)
       else if (chunkKind < 3) {
         if (chunkKind == 0) {
           tempCounter = *(int *)(this + 0x38);
-          if (tempCounter - 1U != (uint)*(ushort *)(chunk + 0x12)) goto LAB_97bbde78;
+          if (tempCounter - 1U != (uint)*(ushort *)(chunk + 0x12)) goto loopSetRemovedOk;
           if (*(int *)(parseSymbol + 0x60) == 0) {
             if (*(int *)(parseSymbol + 0x5c) != 0) {
               *(int *)(this + 0x34) = *(int *)(this + 0x34) + -1;
@@ -1462,12 +1462,12 @@ int ParseSymbolTable__RemoveEndSymbol(this, parseSymbol)
           }
         }
         else {
-LAB_97bbde78:
+loopSetRemovedOk:
           removedOk = 0;
         }
       }
       else if (chunkKind == 4) {
-        if (*(int *)(this + 0x30) - 1U != (uint)*(ushort *)(chunk + 0x12)) goto LAB_97bbde78;
+        if (*(int *)(this + 0x30) - 1U != (uint)*(ushort *)(chunk + 0x12)) goto loopSetRemovedOk;
         *(uint *)(this + 0x30) = *(int *)(this + 0x30) - 1U;
       }
       vec4Idx = vec4Idx + 1;
@@ -1502,7 +1502,7 @@ LAB_97bbde78:
   do {
     listNode = listNext;
     if (listNode == (unsigned char *)0x0) {
-LAB_97bbdf8c:
+loopStoreParseSymbol:
       *(undefined4 *)(parseSymbol + 0x50) = 0;
       return removedOk;
     }
@@ -1517,7 +1517,7 @@ LAB_97bbdf8c:
       if (*(unsigned char **)(this + 4) == listNode) {
         *(unsigned char **)(this + 4) = listPrev;
       }
-      goto LAB_97bbdf8c;
+      goto loopStoreParseSymbol;
     }
     listNext = *(unsigned char **)(listNode + 8);
     listPrev = listNode;
@@ -1683,7 +1683,7 @@ int ParseSymbolTable__GetString(this, mode)
                   }
                   capacity = needed2 + capacity;
                   result = (char *)_malloc(capacity);
-                  if (result == (char *)0x0) goto LAB_97bbe3d4;
+                  if (result == (char *)0x0) goto loopCallFree;
                   _memmove(result,buffer,usedLen + 1);
                   _free(buffer);
                 }
@@ -1719,7 +1719,7 @@ int ParseSymbolTable__GetString(this, mode)
               capacity = needed + capacity;
               result = (char *)_malloc(capacity);
               if (result == (char *)0x0) {
-LAB_97bbe3d4:
+loopCallFree:
                 _free(buffer);
                 _free(symbolText);
                 return (char *)0x0;
@@ -1758,7 +1758,7 @@ LAB_97bbe3d4:
                 }
                 capacity = needed + capacity;
                 result = (char *)_malloc(capacity);
-                if (result == (char *)0x0) goto LAB_97bbe3d4;
+                if (result == (char *)0x0) goto loopCallFree;
                 _memmove(result,buffer,usedLen + 1);
                 _free(buffer);
               }
@@ -1775,7 +1775,7 @@ LAB_97bbe3d4:
           kindFilter = '\x03';
           _strcat(buffer,DAT_a7b7bc14);
           sectionHeader = DAT_a7b7bc14;
-LAB_97bbe53c:
+loopSetSymbolText:
           symbolText = _strlen(sectionHeader);
           usedLen = usedLen + symbolText;
         }
@@ -1783,13 +1783,13 @@ LAB_97bbe53c:
           kindFilter = '\x04';
           _strcat(buffer,DAT_a7b7bc18);
           sectionHeader = DAT_a7b7bc18;
-          goto LAB_97bbe53c;
+          goto loopSetSymbolText;
         }
         if (kindFilter == '\x04') {
           kindFilter = '\0';
           _strcat(buffer,DAT_a7b7bc1c);
           sectionHeader = DAT_a7b7bc1c;
-          goto LAB_97bbe53c;
+          goto loopSetSymbolText;
         }
         result = buffer;
       } while (kindFilter != '\0');
@@ -1883,20 +1883,20 @@ int TIntermConstantUnion__compileNode(this, pPStreamCompiler, strayArg3, strayAr
   basicType = stackTypeBits >> 0x13 & 0x3f;
   if (basicType == 2) {
     glTypeCode = 0x1404;
-LAB_97bbe7a0:
+loopStoreConstantOperand:
     *(undefined2 *)((int)constantOperand + 0x18) = glTypeCode;
   }
   else {
     if (basicType < 3) {
       if (basicType == 1) {
         glTypeCode = 0x1406;
-        goto LAB_97bbe7a0;
+        goto loopStoreConstantOperand;
       }
     }
     else {
       if (basicType == 3) {
         glTypeCode = 0x8b56;
-        goto LAB_97bbe7a0;
+        goto loopStoreConstantOperand;
       }
       if (basicType == 0xe) {
         TPPStreamCompiler__error
@@ -2056,7 +2056,7 @@ int TIntermBinary__compileNode(this, compiler, unusedArg3, unusedArg4, unusedArg
       isArrayResult = (**(code **)(*(int *)this + 0x54))(this);
       if (isArrayResult == 0) {
         symbolIsArray = 1;
-LAB_97bbf03c:
+loopSetLeftSymbol:
         leftSymbol = *(unsigned char **)leftOperand;
         *(undefined4 *)(leftSymbol + 0x48) = symbolIsArray;
         ParseSymbol__ResolveOpenGLType(leftSymbol);
@@ -2068,9 +2068,9 @@ LAB_97bbf03c:
                    ,op,unusedArg6,rightConstData,zeroCallArg);
       }
     }
-LAB_97bbf04c:
+loopStoreResultOperand:
     resultOperand[0] = leftOperand;
-    goto LAB_97bbf4fc;
+    goto setRightOperandToDelete;
   }
   if (op == 0x2e) {
     if (*(int *)leftOperand == 0) {
@@ -2126,7 +2126,7 @@ LAB_97bbf04c:
       if (leftIsMatrix == 0) {
         *(unsigned char **)(leftOperand + 0xc) = rightOperand;
         rightOperand = (unsigned char *)0x0;
-        goto LAB_97bbf04c;
+        goto loopStoreResultOperand;
       }
     }
     leftType = (int *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
@@ -2188,7 +2188,7 @@ LAB_97bbf04c:
       TPPStreamCompiler__AddOperation
                 (compiler,&addrTempOperand,(unsigned char *)&opHeader,(char *)0x0,0);
       *(unsigned char **)(resultOperand[0] + 8) = addrTempOperand;
-      goto LAB_97bbf4fc;
+      goto setRightOperandToDelete;
     }
     if (arrayStride < 2) {
       opHeader = opHeader & 0xfc03ffff | 0x7c0000;
@@ -2262,7 +2262,7 @@ LAB_97bbf04c:
       ParseSymbol__CatName(leftSymbol,*(char **)(fieldNameString + 4));
       ParseSymbol__SetParseTreeType(leftSymbol,*(unsigned char **)(*(int *)(structTypeFields + 4) + fieldIndex * 8));
       symbolIsArray = 0;
-      goto LAB_97bbf03c;
+      goto loopSetLeftSymbol;
     }
     if (op == 0x30) {
       swizzleMap = 0;
@@ -2315,7 +2315,7 @@ LAB_97bbf04c:
           }
         }
       }
-      goto LAB_97bbf4fc;
+      goto setRightOperandToDelete;
     }
     if (op < 0x31) {
       if (op - 0x1dU < 2) {
@@ -2326,7 +2326,7 @@ LAB_97bbf04c:
                            (compiler,thisType,(unsigned char **)operandWorkPtr,operandSlotPtr,(uint)(op == 0x1d));
       }
       else {
-LAB_97bbf334:
+loopSetThisType:
         thisType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
         resultOperand[0] = (unsigned char *)TPPStreamCompiler__newTemporary(compiler,thisType);
         operandSlotPtr = &rightOperand;
@@ -2353,7 +2353,7 @@ LAB_97bbf370:
     }
     else {
       if (op != 0x76) {
-        if ((op < 0x76) || (0x7e < op)) goto LAB_97bbf334;
+        if ((op < 0x76) || (0x7e < op)) goto loopSetThisType;
         if ((*(int *)(leftOperand + 0xc) == 0) && (*(int *)(leftOperand + 8) == 0)) {
           resultOperand[0] = leftOperand;
         }
@@ -2397,21 +2397,21 @@ LAB_97bbf370:
       binaryOp = *(int *)(this + 0x30);
     }
     if (binaryOp < 0x31) {
-      if (0x2c < binaryOp) goto LAB_97bbf4fc;
+      if (0x2c < binaryOp) goto setRightOperandToDelete;
       if (0x16 < binaryOp) {
         if (binaryOp < 0x1d) goto LAB_97bbf46c;
-        if (binaryOp < 0x1f) goto LAB_97bbf4fc;
+        if (binaryOp < 0x1f) goto setRightOperandToDelete;
       }
     }
     else {
-      if (binaryOp == 0x76) goto LAB_97bbf4fc;
+      if (binaryOp == 0x76) goto setRightOperandToDelete;
       if ((0x75 < binaryOp) && (binaryOp - 0x7fU < 6)) {
 LAB_97bbf46c:
         TPPStreamCompiler__error
                   (compiler,(char *)0x1,(char *)0x0,
                    "TIntermBinary::compileNode: Unsupported operation (TOperator: %d)",binaryOp,unusedArg6
                    ,operatorTokenOffset,zeroCallArg);
-        goto LAB_97bbf4fc;
+        goto setRightOperandToDelete;
       }
     }
     isMatrixFlag = ParseOperand__IsMatrix(resultOperand[0]);
@@ -2429,7 +2429,7 @@ LAB_97bbf46c:
     operandSlotPtr = resultOperand;
   }
   TPPStreamCompiler__AddOperation(compiler,operandSlotPtr,(unsigned char *)&opHeader,(char *)0x0,0);
-LAB_97bbf4fc:
+setRightOperandToDelete:
   rightOperandToDelete = rightOperand;
   if (rightOperand != (unsigned char *)0x0) {
     __ZN12ParseOperandD1Ev(rightOperand);
@@ -2537,10 +2537,10 @@ int TIntermUnary__compileNode(this, compiler, unusedArg3, scratchArg4, scratchAr
     switch(operatorCode) {
     default:
       emitFinalOp = false;
-      goto LAB_97bbfa5c;
+      goto setResultOperand;
     case 6:
     case 7:
-      goto switchD_97bbf664_caseD_6;
+      goto operatorCodeCase6;
     case 9:
     case 10:
       thisType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))
@@ -2600,9 +2600,9 @@ int TIntermUnary__compileNode(this, compiler, unusedArg3, scratchArg4, scratchAr
       ppStreamType = GetPPStreamTypeForGLType((uint)glType);
       if (ppStreamType == 3) {
         constGlType = 0x1404;
-LAB_97bbf88c:
+loopStoreConstValue:
         constValue[0] = 1;
-LAB_97bbf894:
+loopSetCallArgScratch:
         callArgScratch = 1;
         TPPStreamCompiler__getConstantAsSourceVar
                   ((unsigned char *)&operandDesc,(uint)compiler,constValue,1,constGlType);
@@ -2613,12 +2613,12 @@ LAB_97bbf894:
         if (ppStreamType == 1) {
           constGlType = 0x1406;
           constValue[0] = 0x3f800000;
-          goto LAB_97bbf894;
+          goto loopSetCallArgScratch;
         }
       }
       else if (ppStreamType == 4) {
         constGlType = 0x8b56;
-        goto LAB_97bbf88c;
+        goto loopStoreConstValue;
       }
       __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_
                 (compiler,&operand,&operand);
@@ -2663,9 +2663,9 @@ LAB_97bbf894:
       streamType = GetPPStreamTypeForGLType((uint)glType);
       if (streamType == 3) {
         scratchArg5 = 0x1404;
-LAB_97bbfa3c:
+loopStoreConstValue2:
         constValue[0] = 1;
-LAB_97bbfa44:
+loopSetScratchArg4:
         scratchArg4 = 1;
         TPPStreamCompiler__getConstantAsSourceVar
                   ((unsigned char *)&operandDesc,(uint)compiler,constValue,1,scratchArg5);
@@ -2676,19 +2676,19 @@ LAB_97bbfa44:
         if (streamType == 1) {
           scratchArg5 = 0x1406;
           constValue[0] = 0x3f800000;
-          goto LAB_97bbfa44;
+          goto loopSetScratchArg4;
         }
       }
       else if (streamType == 4) {
         scratchArg5 = 0x8b56;
-        goto LAB_97bbfa3c;
+        goto loopStoreConstValue2;
       }
-LAB_97bbfa5c:
+setResultOperand:
       resultOperand = operand;
     }
   }
   else {
-switchD_97bbf664_caseD_6:
+operatorCodeCase6:
     thisType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
     resultOperand = (unsigned char *)TPPStreamCompiler__newTemporary(compiler,thisType);
   }
@@ -2708,14 +2708,14 @@ switchD_97bbf664_caseD_6:
     op1Dest0 = operandDesc;
     scratchPtr7 = *(unsigned char **)resultOperand;
     resultParseType = *(int **)(scratchPtr7 + 0xc);
-    if (resultParseType == (int *)0x0) goto LAB_97bbfb3c;
+    if (resultParseType == (int *)0x0) goto checkOpReload;
     resultQualifier = (**(code **)(*resultParseType + 0x24))(resultParseType,r4In2,callArgOperand,scratchArg4,scratchArg5,scratchArg6,scratchPtr7,opReload);
     if (resultQualifier == 0xd) {
       *(undefined4 *)(compiler + 0xa4) = 1;
     }
   }
   opReload = *(int *)(this + 0x30);
-LAB_97bbfb3c:
+checkOpReload:
   if (opReload == 5) {
     *(uint *)(operand + 0x28) = (uint)(*(int *)(operand + 0x28) != 1);
   }
@@ -3086,7 +3086,7 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
   }
   resultOperand[0] = (unsigned char *)((ulonglong)resultAndR4Pair >> 0x20);
   if (0xa3 < operatorCode) {
-switchD_97bc03dc_caseD_0:
+operatorCodeCase0:
     TType__getCompleteString(&stackType,this + 8);
     terminalChar = *DAT_a7b7bd04;
     *(byte *)(stackTypeArraySize + *(int *)(stackTypeArraySize - 0xc)) = terminalChar;
@@ -3108,12 +3108,12 @@ switchD_97bc03dc_caseD_0:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(stackTypeArraySize - 0xc),destroyAllocatorArg);
     }
-    goto switchD_97bc03dc_caseD_25;
+    goto operatorCodeCase25;
   }
   operatorTimes4 = operatorCode * 4;
   switch(operatorCode) {
   default:
-    goto switchD_97bc03dc_caseD_0;
+    goto operatorCodeCase0;
   case 1:
     *(int *)(compiler + 0x98) = *(int *)(compiler + 0x98) + -1;
     break;
@@ -3238,14 +3238,14 @@ switchD_97bc03dc_caseD_0:
                       (*(unsigned char **)(compiler + 0x6c),functionNameData,parseOperand2,strayArg4,strayArg5,operatorCode);
     functionFirstOp = FunctionTable__getFirstOp(*(unsigned char **)(compiler + 0x6c),functionIndex);
     if (functionFirstOp == 0) {
-LAB_97bc06f4:
+loopSetFunctionTable:
       functionTable = *(unsigned char **)(compiler + 0x6c);
       functionIsEmpty = 0;
     }
     else {
       lastParamOpIndex = ParseFunctionStack__getLastParamOpIndex(functionStack);
       lastOpIndexNow = TPPStreamCompiler__LastOperationIndex(compiler);
-      if (lastParamOpIndex != lastOpIndexNow) goto LAB_97bc06f4;
+      if (lastParamOpIndex != lastOpIndexNow) goto loopSetFunctionTable;
       functionTable = *(unsigned char **)(compiler + 0x6c);
       functionIsEmpty = 1;
     }
@@ -3258,7 +3258,7 @@ LAB_97bc06f4:
     lastOperation = *(int *)(*(int *)(ppStream + 0x20) + 4);
     carriedR4 = r4Out5;
     if ((lastOperation == 0) || ((*(uint *)(lastOperation + 0xc) & 0x3fc0000) != 0x1340000)) {
-LAB_97bc0788:
+loopSetParamScanIndex:
       paramScanIndex = 0;
       if (0 < (int)childOperandCopies) {
         do {
@@ -3311,7 +3311,7 @@ LAB_97bc0788:
       curLastOpIndex = TPPStreamCompiler__LastOperationIndex(compiler);
       resultAndR4Pair = FunctionTable__getFirstOp(*(unsigned char **)(compiler + 0x6c),functionIndex);
       carriedR4 = (undefined4)resultAndR4Pair;
-      if (curLastOpIndex < (int)((ulonglong)resultAndR4Pair >> 0x20)) goto LAB_97bc0788;
+      if (curLastOpIndex < (int)((ulonglong)resultAndR4Pair >> 0x20)) goto loopSetParamScanIndex;
     }
     if (childCursor != (undefined4 *)0x0) {
       paramListCursor = childCursor;
@@ -3523,7 +3523,7 @@ LAB_97bc0788:
         headerOpcode = 0x45;
         break;
       default:
-        goto switchD_97bc03dc_caseD_8c;
+        goto operatorCodeCase8c;
       }
       opHeaderAndFlags[0] = headerOpcode << 0x12 | opHeaderAndFlags[0] & 0xfc03ffff;
     }
@@ -3542,7 +3542,7 @@ LAB_97bc0788:
   case 0xa1:
   case 0xa2:
   case 0xa3:
-switchD_97bc03dc_caseD_8c:
+operatorCodeCase8c:
     operatorOffset = operatorCode - 0x8a;
     src2SelectCode = 4;
     srcOperandOffset = operatorOffset;
@@ -3644,7 +3644,7 @@ LAB_97bc11d8:
     opHeaderAndFlags[1] = (logicalSize + -1) * 0x4000000 & 0xc000000U | opHeaderAndFlags[1] & 0xf3ffffff;
     TPPStreamCompiler__AddOperation(compiler,resultOperand,(unsigned char *)opHeaderAndFlags,(char *)0x0,0);
   }
-switchD_97bc03dc_caseD_25:
+operatorCodeCase25:
   if (*(int *)(this + 0x30) != 4) {
     childOperandCopies = childOperands;
     if (0 < childCount) {
@@ -3860,7 +3860,7 @@ int TIntermSelection__compileNode(this, compiler, strayArg3, strayArg4, strayArg
           __ZdlPv(conditionOperand);
           carriedR4 = r4Out2;
           conditionOperand = trueOperand;
-          goto LAB_97bc18ac;
+          goto checkConditionOperand;
         }
       }
     }
@@ -3918,7 +3918,7 @@ int TIntermSelection__compileNode(this, compiler, strayArg3, strayArg4, strayArg
       conditionOperand = trueOperand;
     }
   }
-LAB_97bc18ac:
+checkConditionOperand:
   if (conditionOperand != (unsigned char *)0x0) {
     __ZN12ParseOperandD1Ev(conditionOperand);
     __ZdlPv(conditionOperand);
@@ -4857,20 +4857,20 @@ int TIntermConstantUnion__indirectNode(this, pPStreamCompiler, strayArg3, strayA
   basicType = stackTypeBits >> 0x13 & 0x3f;
   if (basicType == 2) {
     glTypeCode = 0x1404;
-LAB_97bc2f80:
+loopStoreConstantOperand:
     *(undefined2 *)((int)constantOperand + 0x18) = glTypeCode;
   }
   else {
     if (basicType < 3) {
       if (basicType == 1) {
         glTypeCode = 0x1406;
-        goto LAB_97bc2f80;
+        goto loopStoreConstantOperand;
       }
     }
     else {
       if (basicType == 3) {
         glTypeCode = 0x8b56;
-        goto LAB_97bc2f80;
+        goto loopStoreConstantOperand;
       }
       if (basicType == 0xe) {
         TPPStreamCompiler__error
@@ -4937,12 +4937,12 @@ int TIntermBinary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, st
   }
   leftIsNull = leftOperand == (unsigned char *)0x0;
   resultOperand = (unsigned char *)0x0;
-  if (leftIsNull) goto LAB_97bc3364;
+  if (leftIsNull) goto checkRightOperand;
   binaryOp = *(int *)(this + 0x30);
   if (binaryOp == 0x2d) {
     constIndex = **(uint **)((int)rightOperand + 4);
     resultOperand = leftOperand;
-    if (*(int *)(*(unsigned char **)leftOperand + 0x4c) == 0) goto LAB_97bc3364;
+    if (*(int *)(*(unsigned char **)leftOperand + 0x4c) == 0) goto checkRightOperand;
     ParseSymbol__AddDirectIndex(*(unsigned char **)leftOperand,constIndex);
     _sprintf((char *)typeTempOverlay,"[%d]",constIndex);
     ParseSymbol__CatName(*(unsigned char **)leftOperand,(char *)typeTempOverlay);
@@ -4952,7 +4952,7 @@ int TIntermBinary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, st
                 (pPStreamCompiler,(char *)0x1,(char *)0x0,
                  "TIntermBinary::: Array index results in another array, this is not handled",
                  strayArg5,strayArg6,strayArg7,strayArg8);
-      goto LAB_97bc3364;
+      goto checkRightOperand;
     }
     leftSymbol = *(unsigned char **)leftOperand;
     *(undefined4 *)(leftSymbol + 0x48) = 1;
@@ -4973,7 +4973,7 @@ int TIntermBinary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, st
           leftChildType = (int *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
           typeQueryResult = (**(code **)(*leftChildType + 0x34))(leftChildType);
           resultOperand = leftOperand;
-          if (typeQueryResult == 0) goto LAB_97bc3364;
+          if (typeQueryResult == 0) goto checkRightOperand;
           symbolTable = *(unsigned char **)(pPStreamCompiler + 0x68);
           *(undefined4 *)(pPStreamCompiler + 0xa8) = 1;
         }
@@ -4996,9 +4996,9 @@ int TIntermBinary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, st
         ((int (*)())ParseSymbolTable__processOperand)(symbolTable,leftOperand);
         resultOperand = leftOperand;
       }
-      goto LAB_97bc3364;
+      goto checkRightOperand;
     }
-    if (binaryOp != 0x2f) goto LAB_97bc3364;
+    if (binaryOp != 0x2f) goto checkRightOperand;
     leftSymbol = *(unsigned char **)leftOperand;
     (**(code **)(**(int **)(this + 0x34) + 0x38))(typeTempOverlay,*(int **)(this + 0x34));
     typeTempOverlay[0] = &PTR___ZN5TTypeD1Ev_a7b7d778;
@@ -5034,7 +5034,7 @@ int TIntermBinary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, st
   }
   ParseSymbol__ResolveOpenGLType(leftSymbol);
   resultOperand = leftOperand;
-LAB_97bc3364:
+checkRightOperand:
   if (rightOperand != (void *)0x0) {
     __ZN12ParseOperandD1Ev(rightOperand);
     __ZdlPv(rightOperand);

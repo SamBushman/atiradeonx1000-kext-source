@@ -580,11 +580,11 @@ int BindingTable__InsertClientAttribBinding(this, binding)
     } while (nextBinding != (unsigned char *)0x0);
     if (prev != (unsigned char *)0x0) {
       ((int (*)())Binding__SetNextBinding)(prev,newBinding);
-      goto LAB_97bb0bf0;
+      goto callBinding_SetNextBinding;
     }
   }
   *(unsigned char **)(this + 0xc) = newBinding;
-LAB_97bb0bf0:
+callBinding_SetNextBinding:
   ((int (*)())Binding__SetNextBinding)(newBinding,nextBinding);
   hashIdx = Binding__GetHash(newBinding,*(uint *)this);
   nextNode = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10));
@@ -658,7 +658,7 @@ int BindingTable__InsertAttribBinding(this, binding)
         curLocation = ((int (*)())Binding__GetLocation)(curBinding);
         slotCount = ((int (*)())Binding__GetBindingSlots)(binding);
         nextBinding = curBinding;
-        if (newLocation + slotCount <= curLocation) goto LAB_97bb0db4;
+        if (newLocation + slotCount <= curLocation) goto checkPrevBinding;
         prevLocation = ((int (*)())Binding__GetLocation)(curBinding);
         newLocation = ((int (*)())Binding__GetBindingSlots)(curBinding);
         nextBinding = (unsigned char *)((int (*)())Binding__GetNextBinding)(curBinding);
@@ -666,7 +666,7 @@ int BindingTable__InsertAttribBinding(this, binding)
       } while (nextBinding != (unsigned char *)0x0);
       newLocation = prevLocation + newLocation;
     }
-LAB_97bb0db4:
+checkPrevBinding:
     if (prevBinding == (unsigned char *)0x0) {
       *(unsigned char **)(this + 0xc) = binding;
     }
@@ -1002,7 +1002,7 @@ int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endT
               tablePtr = tablePtr + 1;
               if ((symbolTable != (unsigned char *)0x0) &&
                  (elementSymbolFound = ParseSymbolTable__FindSymbolByName(symbolTable,*(char **)(elementBinding + 8)),
-                 elementSymbolFound != 0)) goto LAB_97bb1538;
+                 elementSymbolFound != 0)) goto setLocation;
               probeIdx = probeIdx + 1;
             } while (probeIdx < endTable);
           }
@@ -1012,7 +1012,7 @@ int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endT
           }
         }
         if (keepElement) {
-LAB_97bb1538:
+setLocation:
           location = 0;
           lastBindingSlots = 0;
           nextNode = *(unsigned char **)(this + 0x14);
@@ -1340,7 +1340,7 @@ int BindingTable__GetString(this, kind)
           length = _strlen(string);
           length2 = _strlen(buf);
           result = (char *)_realloc(buf,length + length2 + 1);
-          if (result == (char *)0x0) goto LAB_97bb1ddc;
+          if (result == (char *)0x0) goto callFree;
           _sprintf(result,"%s%s",result,string);
           _free(string);
         }
@@ -1360,7 +1360,7 @@ int BindingTable__GetString(this, kind)
           length = _strlen(kindStr);
           length2 = _strlen(buf);
           result = (char *)_realloc(buf,length + length2 + 1);
-          if (result == (char *)0x0) goto LAB_97bb1ddc;
+          if (result == (char *)0x0) goto callFree;
           _sprintf(result,"%s%s",result,kindStr);
           _free(kindStr);
         }
@@ -1380,7 +1380,7 @@ int BindingTable__GetString(this, kind)
       }
     }
     else if (5 < kind) {
-      if (kind != 6) goto LAB_97bb1cf0;
+      if (kind != 6) goto setLoopIndex;
       if (**(int **)(this + 0x18) == 0) {
         kindHeader = "\n No Uniform Bindings\n";
       }
@@ -1389,7 +1389,7 @@ int BindingTable__GetString(this, kind)
       }
     }
     else {
-      if (kind != 4) goto LAB_97bb1cf0;
+      if (kind != 4) goto setLoopIndex;
       if (**(int **)(this + 8) == 0) {
         kindHeader = "\n No Client Attribute Requests\n";
       }
@@ -1398,7 +1398,7 @@ int BindingTable__GetString(this, kind)
       }
     }
     _sprintf(result,kindHeader);
-LAB_97bb1cf0:
+setLoopIndex:
     loopIndex = 0;
     if (*(int *)this == 0) {
       return result;
@@ -1406,18 +1406,18 @@ LAB_97bb1cf0:
     do {
       if (kind == 5) {
         bucketArray = *(int *)(this + 0x10);
-LAB_97bb1d30:
+loopSetBinding:
         binding = *(unsigned char **)(loopIndex * 4 + bucketArray);
       }
       else if (5 < kind) {
         if (kind == 6) {
           bucketArray = *(int *)(this + 0x18);
-          goto LAB_97bb1d30;
+          goto loopSetBinding;
         }
       }
       else if (kind == 4) {
         bucketArray = *(int *)(this + 8);
-        goto LAB_97bb1d30;
+        goto loopSetBinding;
       }
       if (binding != (unsigned char *)0x0) {
         _sprintf(result,"%s  --- Hash %d ---\n",result,loopIndex);
@@ -1434,7 +1434,7 @@ LAB_97bb1d30:
           if (capacity < usedLen + 0x300U) {
             capacity = capacity << 1;
             result = (char *)_realloc(buf,capacity);
-            if (result == (char *)0x0) goto LAB_97bb1ddc;
+            if (result == (char *)0x0) goto callFree;
           }
           binding = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(binding);
           buf = result;
@@ -1458,7 +1458,7 @@ LAB_97bb1d30:
   }
   else if (kind < 2) {
     listEmpty = true;
-    if (kind != 0) goto LAB_97bb1b5c;
+    if (kind != 0) goto checkListEmpty;
     binding = *(unsigned char **)(this + 4);
     listEmpty = binding == (unsigned char *)0x0;
     if (listEmpty) {
@@ -1471,7 +1471,7 @@ LAB_97bb1d30:
   else {
     if (kind != 2) {
       listEmpty = true;
-      goto LAB_97bb1b5c;
+      goto checkListEmpty;
     }
     binding = *(unsigned char **)(this + 0x14);
     listEmpty = binding == (unsigned char *)0x0;
@@ -1483,7 +1483,7 @@ LAB_97bb1d30:
     }
   }
   _sprintf(result,header);
-LAB_97bb1b5c:
+checkListEmpty:
   if (!listEmpty) {
     do {
       stringValue = ((int (*)())Binding__GetString)(binding);
@@ -1498,7 +1498,7 @@ LAB_97bb1b5c:
         capacity = capacity << 1;
         result = (char *)_realloc(buf,capacity);
         if (result == (char *)0x0) {
-LAB_97bb1ddc:
+callFree:
           _free(buf);
           return (char *)0x0;
         }
@@ -1572,22 +1572,22 @@ int UpdateOperations(_PPStreamChunk1, _PPStreamChunk2, unusedArg3, _PPStreamChun
             operand = chunk + 0x10;
             do {
               if (kind == 0x2) {
-                if ((*(uint *)(operand + 0xc) & 0x3800000) == 0) goto LAB_97bb1f94;
+                if ((*(uint *)(operand + 0xc) & 0x3800000) == 0) goto checkOperand;
               }
               else {
                 if ((byte)kind < 3) {
-                  if (kind != 0x0) goto LAB_97bb1fe8;
+                  if (kind != 0x0) goto setOperandIdx;
                   matchesKind = (*(uint *)(operand + 0xc) >> 0x17 & 7) == 1;
                 }
                 else if (kind == 0x3) {
                   matchesKind = (*(uint *)(operand + 0xc) >> 0x17 & 7) == 2;
                 }
                 else {
-                  if (kind != 0x4) goto LAB_97bb1fe8;
+                  if (kind != 0x4) goto setOperandIdx;
                   matchesKind = (*(uint *)(operand + 0xc) >> 0x17 & 7) == 3;
                 }
                 if (matchesKind) {
-LAB_97bb1f94:
+checkOperand:
                   if ((uint)*(ushort *)(operand + 0x12) == (uint)*(ushort *)(_PPStreamChunk3 + 0x12) + copyIdx
                      ) {
                     newWalkIdx = walkIdx;
@@ -1606,28 +1606,28 @@ LAB_97bb1f94:
                   }
                 }
               }
-LAB_97bb1fe8:
+setOperandIdx:
               operandIdx = operandIdx + 1;
               operand = operand + 8;
             } while (operandIdx < (int)(chunkInfo >> 0x1d));
           }
           if (kind == 0x2) {
-            if ((*(uint *)(chunk + 0x14) & 0xe0000) == 0) goto LAB_97bb2064;
+            if ((*(uint *)(chunk + 0x14) & 0xe0000) == 0) goto checkChunk;
           }
           else {
             if ((byte)kind < 3) {
-              if (kind != 0x0) goto LAB_97bb20a4;
+              if (kind != 0x0) goto setChunk;
               matchesKind = (*(uint *)(chunk + 0x14) & 0xe0000) == 0x20000;
             }
             else if (kind == 0x3) {
               matchesKind = (*(uint *)(chunk + 0x14) & 0xe0000) == 0x40000;
             }
             else {
-              if (kind != 0x4) goto LAB_97bb20a4;
+              if (kind != 0x4) goto setChunk;
               matchesKind = (*(uint *)(chunk + 0x14) & 0xe0000) == 0x60000;
             }
             if (matchesKind) {
-LAB_97bb2064:
+checkChunk:
               if ((uint)*(ushort *)(chunk + 0x1a) == (uint)*(ushort *)(_PPStreamChunk3 + 0x12) + copyIdx) {
                 walkIdxNext = walkIdx;
                 if ((walkIdx != chunkIdx) && (walkIdxNext = chunkIdx, walkIdx < chunkIdx)) {
@@ -1642,7 +1642,7 @@ LAB_97bb2064:
               }
             }
           }
-LAB_97bb20a4:
+setChunk:
           chunk = *(unsigned char **)(chunk + 8);
           chunkIdx = chunkIdx + 1;
         } while (chunk != (unsigned char *)0x0);
@@ -1679,14 +1679,14 @@ int TGenericLinker__FindChunkDelta(this, _PPStreamChunk1, _PPStreamChunk2)
       kindKnown = kind == 0x0;
     }
     else {
-      if (kind == 0x3) goto LAB_97bb21b8;
+      if (kind == 0x3) goto returnPPStreamChunk1;
       kindKnown = kind == 0x4;
     }
     if (!kindKnown) {
       return 0;
     }
   }
-LAB_97bb21b8:
+returnPPStreamChunk1:
   return (uint)*(ushort *)(_PPStreamChunk1 + 0x12) - (uint)*(ushort *)(_PPStreamChunk2 + 0x12);
 }
 

@@ -480,10 +480,10 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
     if (finalCompareResult == 0) {
       finalCompareResult = finalKeySize - candidateKeySize;
     }
-    if (-1 < finalCompareResult) goto LAB_97c32a44;
+    if (-1 < finalCompareResult) goto storeResult;
   }
   candidate = header;
-LAB_97c32a44:
+storeResult:
   *(int *)result = candidate;
   return result;
 }
@@ -692,7 +692,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
         compareResult = sizeA - sizeB;
       }
       insertY = insertX;
-      if (compareResult < 0) goto LAB_97c32f8c;
+      if (compareResult < 0) goto callStd__Rb_tree_std_string_std_pair_std_string_const_TBehavior_std__Select1st_std_pair_std_string_const_TBehavior__std_less_std_string_pool_allocator_std_pair_std_string_const_TBehavior___M_insert;
     }
   }
   else {
@@ -730,14 +730,14 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
           if (*(int *)(insertY + 0xc) != 0) {
             insertX = (unsigned char *)*position;
             insertY = insertX;
-            goto LAB_97c32f8c;
+            goto callStd__Rb_tree_std_string_std_pair_std_string_const_TBehavior_std__Select1st_std_pair_std_string_const_TBehavior__std_less_std_string_pool_allocator_std_pair_std_string_const_TBehavior___M_insert;
           }
-          goto LAB_97c32f68;
+          goto setInsertX;
         }
       }
       ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)nestedResult,tree,value);
       iterSlot[0] = nestedResult[0];
-      goto LAB_97c32fa8;
+      goto storeResult;
     }
     minSizeRef = &minArgEndB;
     sizeA = *(uint *)(*(int *)(*(int *)(insertX + 0xc) + 0x14) + -0xc);
@@ -753,15 +753,15 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
     }
     if (compareResult < 0) {
       insertY = *(unsigned char **)(insertY + 0xc);
-LAB_97c32f68:
+setInsertX:
       insertX = (unsigned char *)0x0;
-LAB_97c32f8c:
+callStd__Rb_tree_std_string_std_pair_std_string_const_TBehavior_std__Select1st_std_pair_std_string_const_TBehavior__std_less_std_string_pool_allocator_std_pair_std_string_const_TBehavior___M_insert:
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)(result,tree,insertX,insertY,value);
       return result;
     }
   }
   ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)iterSlot,tree,value);
-LAB_97c32fa8:
+storeResult:
   *(unsigned char **)result = iterSlot[0];
   return result;
 }
@@ -971,7 +971,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
   uint minArgYSize [4];
   
   if ((y == *(int *)(tree + 4)) || (x != (unsigned char *)0x0)) {
-LAB_97c333f0:
+loopSetNewNode:
     newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
     if (newNode + 0x10 != (unsigned char *)0x0) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
@@ -983,7 +983,7 @@ LAB_97c333f0:
       if (y == *(int *)(header + 8)) {
         *(unsigned char **)(header + 8) = newNode;
       }
-      goto LAB_97c33490;
+      goto storeNewNode;
     }
     *(unsigned char **)(y + 4) = newNode;
     header = *(int *)(tree + 4);
@@ -1001,7 +1001,7 @@ LAB_97c333f0:
     if (compareResult == 0) {
       compareResult = valueKeySize - yKeySize;
     }
-    if (compareResult < 0) goto LAB_97c333f0;
+    if (compareResult < 0) goto loopSetNewNode;
     newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
     if (newNode + 0x10 != (unsigned char *)0x0) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
@@ -1009,10 +1009,10 @@ LAB_97c333f0:
     }
     *(unsigned char **)(y + 0xc) = newNode;
     header = *(int *)(tree + 4);
-    if (y != *(int *)(header + 0xc)) goto LAB_97c33490;
+    if (y != *(int *)(header + 0xc)) goto storeNewNode;
   }
   *(unsigned char **)(header + 0xc) = newNode;
-LAB_97c33490:
+storeNewNode:
   *(int *)(newNode + 4) = y;
   *(undefined4 *)(newNode + 0xc) = 0;
   *(undefined4 *)(newNode + 8) = 0;
@@ -1083,7 +1083,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
     insertResultLeft[0] = *(int *)(header + 8);
     if (y == insertResultLeft[0]) {
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)insertResultRight,tree,(unsigned char *)0x0,y,value);
-      goto LAB_97c3362c;
+      goto storeResult;
     }
     std___Rb_tree_base_iterator___M_decrement((unsigned char *)j);
   }
@@ -1107,7 +1107,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
   }
   ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)insertResultLeft,tree,(unsigned char *)0x0,y,value);
   insertResultRight[0] = insertResultLeft[0];
-LAB_97c3362c:
+storeResult:
   *(int *)result = insertResultRight[0];
   *(undefined4 *)(result + 4) = 1;
   return result;

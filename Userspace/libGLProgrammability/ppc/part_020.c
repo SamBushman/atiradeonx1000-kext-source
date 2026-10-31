@@ -177,7 +177,7 @@ int __ZNSs9_M_mutateEmmm(this, pos, n, n2)
         _memmove(curData + pos + n2,tailSrc,tailLen);
         curData = *(int *)this;
       }
-      goto LAB_97c135b0;
+      goto storeCurData;
     }
   }
   else {
@@ -209,7 +209,7 @@ int __ZNSs9_M_mutateEmmm(this, pos, n, n2)
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)allocatorTmp);
   }
   *(int *)this = curData;
-LAB_97c135b0:
+storeCurData:
   *(undefined4 *)(curData + -4) = 0;
   *(uint *)(*(int *)this + -0xc) = newSize;
   *(undefined1 *)(*(int *)this + newSize) = 0;
@@ -756,14 +756,14 @@ int __ZNSs6assignEPKcm(this, str, n)
     return result;
   }
   if ((uint)((int)str - (int)data) < n) {
-    if (str == data) goto LAB_97c13b7c;
+    if (str == data) goto storeData;
     _memmove(data,str,n);
   }
   else {
     _memcpy(data,str,n);
   }
   data = *(char **)this;
-LAB_97c13b7c:
+storeData:
   *(ulong *)(data + -0xc) = n;
   *(undefined1 *)(*(int *)this + n) = 0;
   return this;
@@ -794,14 +794,14 @@ int __ZNSs6assignEPKc(this, str)
     return result;
   }
   if ((uint)((int)str - (int)data) < length) {
-    if (str == data) goto LAB_97c13c80;
+    if (str == data) goto storeData;
     _memmove(data,str,length);
   }
   else {
     _memcpy(data,str,length);
   }
   data = *(char **)this;
-LAB_97c13c80:
+storeData:
   *(uint *)(data + -0xc) = length;
   *(undefined1 *)(*(int *)this + length) = 0;
   return this;
@@ -832,14 +832,14 @@ int __ZNSsaSEPKc(this, str)
     return result;
   }
   if ((uint)((int)str - (int)data) < length) {
-    if (str == data) goto LAB_97c13d84;
+    if (str == data) goto storeData;
     _memmove(data,str,length);
   }
   else {
     _memcpy(data,str,length);
   }
   data = *(char **)this;
-LAB_97c13d84:
+storeData:
   *(uint *)(data + -0xc) = length;
   *(undefined1 *)(*(int *)this + length) = 0;
   return this;

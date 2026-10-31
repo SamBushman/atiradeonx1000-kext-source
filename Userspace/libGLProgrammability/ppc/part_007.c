@@ -201,7 +201,7 @@ int PaParseStrings(shaderStrings, stringLengths, numStrings, freeSymbolsFlag, pa
           TParseContext__error
                     ((int)parseContext,(char *)0x0,"Null shader source string","","",staleR8,stringIdx,staleR10);
           TParseContext__recover(parseContext);
-          goto LAB_97badf80;
+          goto setResult;
         }
         stringIdx = stringIdx + 1;
         stringPtr = stringPtr + 1;
@@ -235,7 +235,7 @@ int PaParseStrings(shaderStrings, stringLengths, numStrings, freeSymbolsFlag, pa
           numStringsCopy = *(int *)(*(int *)cppPtr2 + 0x20);
         }
       }
-LAB_97badf80:
+setResult:
       result = 1;
     }
   }
@@ -355,11 +355,11 @@ int PaParseComment(lineCounter, parseContext)
         TParseContext__recover(*(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c));
         return 0;
       }
-LAB_97bae268:
+loopSetStarState:
       starState = 0;
     }
     else {
-      if (yyinputResult != 0x2f) goto LAB_97bae268;
+      if (yyinputResult != 0x2f) goto loopSetStarState;
       if (starState == 1) {
         return 1;
       }
@@ -563,7 +563,7 @@ int _HandlePragma(tokens, tokenCount)
           if (compareResult != 0) {
             message = "\"on\" or \"off\" expected after \'(\' for \'optimize\' pragma";
             staleR4 = r4Out2;
-            goto LAB_97bae84c;
+            goto callCPPShInfoLogMsg;
           }
           cppState = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(cppState + 0x2c) + 0x40) = 0;
@@ -608,7 +608,7 @@ int _HandlePragma(tokens, tokenCount)
           if (compareResult != 0) {
             message = "\"on\" or \"off\" expected after \'(\' for \'debug\' pragma";
             staleR4 = r4Out6;
-            goto LAB_97bae84c;
+            goto callCPPShInfoLogMsg;
           }
           cppState = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(cppState + 0x2c) + 0x44) = 0;
@@ -631,7 +631,7 @@ int _HandlePragma(tokens, tokenCount)
       staleR4 = r4Out4;
     }
   }
-LAB_97bae84c:
+callCPPShInfoLogMsg:
   ((int (*)())_CPPShInfoLogMsg)(message,staleR4,cmpLen,staleR6,staleR7,staleR8,cppState);
   return;
 }
@@ -786,14 +786,14 @@ int _ResetTString()
     return (char *)result;
   }
   if ((uint)((int)"" - (int)data) < length) {
-    if (data == "") goto LAB_97baeb5c;
+    if (data == "") goto storeData;
     _memmove(data,"",length);
   }
   else {
     _memcpy(data,"",length);
   }
   data = *(char **)(parseContext + 0x5c);
-LAB_97baeb5c:
+storeData:
   *(uint *)(data + -0xc) = length;
   *(undefined1 *)(*(int *)(parseContext + 0x5c) + length) = 0;
   return data;
@@ -993,7 +993,7 @@ int _updateExtensionBehavior(extensionName, behaviorName)
         *(uint *)(extIter[0] + 0x18) = behavior2;
         std___Rb_tree_base_iterator___M_increment((unsigned char *)extIter);
       }
-LAB_97baf31c:
+loopSetRefCountPtr:
       refCountPtr = (int *)(msgStrData + -4);
       msgDestroyAllocAll[0] = msgStrAlloc;
       do {
@@ -1048,7 +1048,7 @@ LAB_97baf31c:
     endNodeFind = *(int *)(*(int *)(*(int *)cppPtr + 0x2c) + 0x34);
     if (extIter[0] != endNodeFind) {
       *(uint *)(extIter[0] + 0x18) = behavior2;
-      goto LAB_97baf31c;
+      goto loopSetRefCountPtr;
     }
     if (behavior2 == 0) {
       errPrefixCtorAlloc[0] = GetGlobalPoolAllocator();
@@ -1321,22 +1321,22 @@ int PrintAttribute(_PPStreamToken, ordinalIn)
     break;
   case 6:
     label = ": PP_BIND_ATTRIB_WEIGHT:";
-    goto LAB_97baf584;
+    goto setCopyEnd;
   case 7:
     label = ": PP_BIND_ATTRIB_TEX_COORD:";
-    goto LAB_97baf584;
+    goto setCopyEnd;
   case 8:
     label = ": PP_BIND_ATTRIB_MATRIX_INDICES:";
-    goto LAB_97baf584;
+    goto setCopyEnd;
   case 9:
     label = ": PP_BIND_ATTRIB_ATTRIB:";
-LAB_97baf584:
+setCopyEnd:
     copyEnd = ((int (*)())scpy)(writePtr,label);
     writePtr = writePtr + copyEnd;
     indexValue = bindingWord & 0x1f;
-LAB_97baf658:
+loopSetCopyEnd:
     copyEnd = ((int (*)())ncpy)(writePtr,indexValue);
-    goto LAB_97baf660;
+    goto setWritePtr;
   case 10:
     copyEnd = ((int (*)())scpy)(writePtr,"PP_BIND_ATTRIB_MATERIAL:");
     writePtr = writePtr + copyEnd;
@@ -1357,23 +1357,23 @@ LAB_97baf658:
       label = "PP_ATTRIB_MATERIAL_SHININESS:";
       break;
     default:
-      goto switchD_97baf5f0_default;
+      goto bindingWordDefault;
     }
     copyEnd = ((int (*)())scpy)(writePtr,label);
     writePtr = writePtr + copyEnd;
-switchD_97baf5f0_default:
+bindingWordDefault:
     indexValue = bindingWord & 1;
-    goto LAB_97baf658;
+    goto loopSetCopyEnd;
   case 0xb:
     label = ": PP_BIND_ATTRIB_FRONT_FACING";
     break;
   default:
-    goto switchD_97baf4e0_default;
+    goto bindingWordDefault2;
   }
   copyEnd = ((int (*)())scpy)(writePtr,label);
-LAB_97baf660:
+setWritePtr:
   writePtr = writePtr + copyEnd;
-switchD_97baf4e0_default:
+bindingWordDefault2:
   *writePtr = '\0';
   _realloc(allocation,writePtr + (1 - (int)allocation));
   return;
@@ -1404,13 +1404,13 @@ int PrintParam(_PPStreamToken, ordinalIn)
   switch(bindingWord >> 0x10 & 0x1f) {
   case 0:
     label = ": PP_BIND_PARAM_NONE:";
-    goto LAB_97baf750;
+    goto setCopyEnd3;
   case 1:
     label = ": PP_BIND_PARAM_PROGRAM_LOCAL:";
-    goto LAB_97baf750;
+    goto setCopyEnd3;
   case 2:
     label = ": PP_BIND_PARAM_PROGRAM_ENV:";
-    goto LAB_97baf750;
+    goto setCopyEnd3;
   case 3:
     copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_PARAM_LIGHT:");
     copyEnd2 = ((int (*)())ncpy)(writePtr + copyEnd,bindingWord & 0xff);
@@ -1441,7 +1441,7 @@ int PrintParam(_PPStreamToken, ordinalIn)
       label = ":PP_PARAM_LIGHT_SPOTCUTOFF";
       break;
     default:
-      goto switchD_97bafb24_default;
+      goto bindingWordDefault;
     }
     break;
   case 4:
@@ -1460,7 +1460,7 @@ int PrintParam(_PPStreamToken, ordinalIn)
       label = ":PP_PARAM_LIGHT_PROD_AMBIENT";
     }
     else {
-      if (bindingBits9 != 2) goto switchD_97bafb24_default;
+      if (bindingBits9 != 2) goto bindingWordDefault;
       label = ":PP_PARAM_LIGHT_PROD_SPECULAR";
     }
     break;
@@ -1488,7 +1488,7 @@ int PrintParam(_PPStreamToken, ordinalIn)
       label = ":PP_PARAM_MATERIAL_SCENE_COLOR";
       break;
     default:
-      goto switchD_97bafb24_default;
+      goto bindingWordDefault;
     }
     break;
   case 6:
@@ -1496,41 +1496,41 @@ int PrintParam(_PPStreamToken, ordinalIn)
     break;
   case 7:
     label = ": PP_BIND_PARAM_TEX_GEN_EYE_PLANE:";
-    goto LAB_97baf9a4;
+    goto setCopyEnd;
   case 8:
     label = ": PP_BIND_PARAM_TEX_GEN_OBJECT_PLANE:";
-LAB_97baf9a4:
+setCopyEnd:
     copyEnd = ((int (*)())scpy)(writePtr,label);
     writePtr = writePtr + copyEnd;
     bindingBits5 = bindingWord >> 5 & 7;
     if (bindingBits5 == 1) {
       label = "PP_PARAM_TEX_GEN_COORD_T:";
-LAB_97bafa10:
+loopSetCopyEnd:
       copyEnd = ((int (*)())scpy)(writePtr,label);
       writePtr = writePtr + copyEnd;
     }
     else {
       if (bindingBits5 == 0) {
         label = "PP_PARAM_TEX_GEN_COORD_S:";
-        goto LAB_97bafa10;
+        goto loopSetCopyEnd;
       }
       if (bindingBits5 == 2) {
         label = "PP_PARAM_TEX_GEN_COORD_R:";
-        goto LAB_97bafa10;
+        goto loopSetCopyEnd;
       }
       if (bindingBits5 == 3) {
         label = "PP_PARAM_TEX_GEN_COORD_Q:";
-        goto LAB_97bafa10;
+        goto loopSetCopyEnd;
       }
     }
     bindingIndex = bindingWord & 0x1f;
-    goto LAB_97baf760;
+    goto setCopyEnd4;
   default:
     label = ": Error, binding not found.";
     break;
   case 10:
     label = ": PP_BIND_PARAM_CLIP_PLANE:";
-    goto LAB_97bafb84;
+    goto setCopyEnd2;
   case 0xb:
     label = ": PP_BIND_PARAM_FOG_COLOR";
     break;
@@ -1552,22 +1552,22 @@ LAB_97bafa10:
     bindingBits14 = bindingWord >> 0xe & 3;
     if (bindingBits14 == 1) {
       label = "PP_MATRIX_TRANSFORM_TRANSPOSE:";
-LAB_97bafae0:
+loopSetCopyEnd2:
       copyEnd = ((int (*)())scpy)(writePtr,label);
       writePtr = writePtr + copyEnd;
     }
     else {
       if (bindingBits14 == 0) {
         label = "PP_MATRIX_TRANSFORM_IDENTITY:";
-        goto LAB_97bafae0;
+        goto loopSetCopyEnd2;
       }
       if (bindingBits14 == 2) {
         label = "PP_MATRIX_TRANSFORM_INVERSE:";
-        goto LAB_97bafae0;
+        goto loopSetCopyEnd2;
       }
       if (bindingBits14 == 3) {
         label = "PP_MATRIX_TRANSFORM_INVERSE_TRANSPOSE:";
-        goto LAB_97bafae0;
+        goto loopSetCopyEnd2;
       }
     }
     copyEnd = ((int (*)())ncpy)(writePtr,bindingWord >> 0xc & 3);
@@ -1584,37 +1584,37 @@ LAB_97bafae0:
       break;
     case 3:
       label = ":PP_PARAM_MATRIX_MODELVIEW:";
-      goto LAB_97bafb84;
+      goto setCopyEnd2;
     case 4:
       label = ":PP_PARAM_MATRIX_TEXTURE:";
-      goto LAB_97bafb84;
+      goto setCopyEnd2;
     case 5:
       label = ":PP_PARAM_MATRIX_PROGRAM:";
-LAB_97bafb84:
+setCopyEnd2:
       copyEnd = ((int (*)())scpy)(writePtr,label);
       bindingIndex = bindingWord & 0xff;
-      goto LAB_97baf75c;
+      goto setWritePtr;
     default:
-      goto switchD_97bafb24_default;
+      goto bindingWordDefault;
     }
     break;
   case 0x11:
     label = ": PP_BIND_PARAM_CONSTANT:";
-LAB_97baf750:
+setCopyEnd3:
     copyEnd = ((int (*)())scpy)(writePtr,label);
     bindingIndex = bindingWord & 0xffff;
-LAB_97baf75c:
+setWritePtr:
     writePtr = writePtr + copyEnd;
-LAB_97baf760:
+setCopyEnd4:
     copyEnd = ((int (*)())ncpy)(writePtr,bindingIndex);
-    goto LAB_97bafbc8;
+    goto setWritePtr2;
   case 0x12:
     label = ": PP_BIND_PARAM_NORMAL_SCALE";
   }
   copyEnd = ((int (*)())scpy)(writePtr,label);
-LAB_97bafbc8:
+setWritePtr2:
   writePtr = writePtr + copyEnd;
-switchD_97bafb24_default:
+bindingWordDefault:
   *writePtr = '\0';
   _realloc(allocation,writePtr + (1 - (int)allocation));
   return;
@@ -1664,7 +1664,7 @@ int PrintOutput(_PPStreamToken, ordinalIn)
     copyEnd2 = ((int (*)())scpy)(writePtr + copyEnd,label);
     writePtr = writePtr + copyEnd + copyEnd2;
     indexValue = bindingWord >> 1 & 7;
-    goto LAB_97bafcf4;
+    goto setCopyEnd2;
   case 5:
     copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_OUTPUT_RESULT_SEC_COLOR:");
     writePtr = writePtr + copyEnd;
@@ -1677,7 +1677,7 @@ int PrintOutput(_PPStreamToken, ordinalIn)
     break;
   case 6:
     label = ": PP_BIND_OUTPUT_RESULT_TEX_COORD:";
-    goto LAB_97bafd6c;
+    goto setCopyEnd;
   case 7:
     label = ": PP_BIND_OUTPUT_RESULT_DEPTH";
     break;
@@ -1689,16 +1689,16 @@ int PrintOutput(_PPStreamToken, ordinalIn)
     break;
   case 10:
     label = ": PP_BIND_OUTPUT_RESULT_ATTRIB:";
-LAB_97bafd6c:
+setCopyEnd:
     copyEnd = ((int (*)())scpy)(writePtr,label);
     writePtr = writePtr + copyEnd;
     indexValue = bindingWord & 0x1f;
-LAB_97bafcf4:
+setCopyEnd2:
     copyEnd = ((int (*)())ncpy)(writePtr,indexValue);
-    goto LAB_97bafd98;
+    goto storeWritePtr;
   }
   copyEnd = ((int (*)())scpy)(writePtr,label);
-LAB_97bafd98:
+storeWritePtr:
   writePtr[copyEnd] = '\0';
   allocation2 = _realloc(allocation,writePtr + copyEnd + (1 - (int)allocation));
   return allocation2;
@@ -2104,7 +2104,7 @@ int Binding__SetNameFromArrayName(this, str)
           foundBracket = true;
         }
         if (bracketPos < 0) {
-          if (!foundBracket) goto LAB_97bb0358;
+          if (!foundBracket) goto setCharIdx;
           break;
         }
       } while (!foundBracket);
@@ -2119,7 +2119,7 @@ int Binding__SetNameFromArrayName(this, str)
       *(int *)(this + 0x10) = bracketPos;
       nameLengthCountdown = bracketPos;
     }
-LAB_97bb0358:
+setCharIdx:
     charIdx = 0;
     *(undefined4 *)(this + 0xc) = 0;
     if (nameLengthCountdown != 0) {
