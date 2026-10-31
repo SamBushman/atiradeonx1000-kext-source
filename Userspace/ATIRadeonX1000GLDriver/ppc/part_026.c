@@ -4133,7 +4133,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
   dword local_94 [3];
   undefined4 local_88;
   undefined4 local_84;
-  undefined4 splatSelectBytes;
+  undefined4 local_80;
   
   descriptorWord = *descriptor;
   hasExtensionWord = descriptorWord >> 0x16 & 1;
@@ -4370,8 +4370,8 @@ releaseTempRegister:
       scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
     }
     operandRecord2 = IRInst__getOperandRecord(allocation,scratchInstOrOperandIndex);
-    selectWordScratch[0] = *(dword *)(operandRecord2 + 0x10);
-    scratchSourcePtrOrZero = selectWordScratch;
+    local_94[0] = *(dword *)(operandRecord2 + 0x10);
+    scratchSourcePtrOrZero = local_94;
     param_5 = (dword *)0x0;
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
     hwAcceptsLoadResult = (**(code **)(*hwDescription + 0x104))(hwDescription,allocation,scratchInstOrOperandIndex,scratchSourcePtrOrZero,0);
@@ -4683,8 +4683,8 @@ callProgram_emitInputMerge:
           operandRecord2 = IRInst__getOperandRecord(inst,2);
           *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(uint *)(operandRecord2 + 8) = swizzleWord;
-          selectWordScratch[0] = 0x10203;
-          ((int (*)())Program__applySourceTokenToOperand)(program,selectWordScratch,fourthSourceTokenPtr,2,inst);
+          local_94[0] = 0x10203;
+          ((int (*)())Program__applySourceTokenToOperand)(program,local_94,fourthSourceTokenPtr,2,inst);
           DList__pushBack(list,inst);
           *fourthSourceTokenPtr = *fourthSourceTokenPtr & 0xffc0ffff | 0x40000;
           swizzleWord = newTempIndex2;
@@ -4772,7 +4772,7 @@ callDList_pushBack:
     psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,1);
     psnPackedLaneSourceResult2 = psnPackedLaneSource(descriptor,2);
     psnPackedLaneSourceResult3 = psnPackedLaneSource(descriptor,3);
-    scratchSourcePtrOrZero = selectWordScratch;
+    scratchSourcePtrOrZero = local_94;
     destTempRegister = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(program + 8) + 0x3ac) = destTempRegister;
     inst = IRInst__create(0x31,*(undefined4 *)(program + 8));
@@ -4783,12 +4783,12 @@ callDList_pushBack:
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = registerFile4;
     *(dword **)(operandRecord2 + 8) = resultRegisterNumber;
-    selectWordScratch[0] = 0x10203;
+    local_94[0] = 0x10203;
     staleFprArg1 = (double)((double (*)())IRInst__literalForLane)(packedLaneSource0,0,&local_98,scratchSourcePtrOrZero);
     staleFprArg2 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult,1,&local_98,scratchSourcePtrOrZero);
     staleFprArg3 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult2,2,&local_98,scratchSourcePtrOrZero);
     staleFprArg4 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult3,3,&local_98,scratchSourcePtrOrZero);
-    laneLiteralSelectWord = selectWordScratch[0];
+    laneLiteralSelectWord = local_94[0];
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword *)(operandRecord2 + 0x10) = laneLiteralSelectWord;
     DList__pushBack(list,inst);
@@ -5073,9 +5073,9 @@ code_r0x000fd284:
         *(undefined4 *)(operandRecord3 + 0x10) = splatSelectWord0;
         operandRecord3 = IRInst__getOperandRecord(newInst,1);
         extensionWordOrCompiler = &STACKARG(0xffffff30) + extensionSelectLane;
-        splatSelectBytes = *(undefined4 *)(operandRecord3 + 0x10);
+        local_80 = *(undefined4 *)(operandRecord3 + 0x10);
         resultInTempRegister = true;
-        splatSelectWord = *(undefined4 *)(laneWordSplatTable + (uint)*(byte *)((int)&splatSelectBytes + extensionSelectLane) * 4);
+        splatSelectWord = *(undefined4 *)(laneWordSplatTable + (uint)*(byte *)((int)&local_80 + extensionSelectLane) * 4);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(operandRecord2 + 0x10) = splatSelectWord;
         *(undefined4 *)((int)newInst + 0x9c) = constantSelectWord2;
