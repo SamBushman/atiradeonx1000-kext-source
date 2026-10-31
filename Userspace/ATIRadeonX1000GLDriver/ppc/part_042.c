@@ -6484,13 +6484,13 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
   bool moreComponents;
   undefined4 identityLaneMap;
   int extraSrcOfInst;
-  int iVar4;
+  int matchResult;
   int *laneOwnerPtr;
   uint invertedNeeded;
   byte *laneMapPtr;
   byte laneComponent;
-  int iVar9;
-  byte local_b8 [4];
+  int laneCursor;
+  byte laneComponentOf [4];
   uint freeComponentsA;
   uint invertedNeededSwappedB;
   uint invertedNeededSwappedA;
@@ -6501,52 +6501,52 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
   undefined4 laneWritten;
   undefined4 laneOccupied;
   uint freeComponentsB;
-  int local_8c [5];
+  int laneOwnerInsts [5];
   uint writeMaskA;
-  undefined1 auStack_74 [4];
+  undefined1 readMaskScratchA [4];
   uint neededMaskAOut;
   undefined4 usedLanesAOut;
   uint writeMaskB;
-  undefined1 auStack_64 [4];
+  undefined1 readMaskScratchB [4];
   uint neededMaskBOut;
-  undefined4 local_5c [4];
+  undefined4 usedLanesBOut [4];
   
   ((int (*)())FUN_00141044)(&writeMaskA,packCtx,inst);
-  ((int (*)())FUN_00140e70)(auStack_74,packCtx,inst);
+  ((int (*)())FUN_00140e70)(readMaskScratchA,packCtx,inst);
   ((int (*)())FUN_001427a4)(&neededMaskAOut,packCtx,inst);
   neededMaskA = neededMaskAOut;
   ((int (*)())FUN_00141090)(&usedLanesAOut,packCtx,inst);
   usedLanesA = usedLanesAOut;
   ((int (*)())FUN_00141044)(&writeMaskB,packCtx,inst2);
-  ((int (*)())FUN_00140e70)(auStack_64,packCtx,inst2);
+  ((int (*)())FUN_00140e70)(readMaskScratchB,packCtx,inst2);
   ((int (*)())FUN_001427a4)(&neededMaskBOut,packCtx,inst2);
   neededMaskB = neededMaskBOut;
-  ((int (*)())FUN_00141090)(local_5c,packCtx,inst2);
+  ((int (*)())FUN_00141090)(usedLanesBOut,packCtx,inst2);
   identityLaneMap = DAT_001b003c;
   extraSrcOfInst = 0;
   *(undefined4 *)laneMapA = DAT_001b003c;
   *(undefined4 *)laneMapB = identityLaneMap;
   laneOccupied = DAT_001b0040;
-  usedLanesB = local_5c[0];
+  usedLanesB = usedLanesBOut[0];
   laneWritten = DAT_001b0040;
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
     extraSrcOfInst = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
   }
   if (extraSrcOfInst != inst2) {
     loopIndex = 0;
-    iVar9 = 4;
-    laneOwnerPtr = local_8c;
+    laneCursor = 4;
+    laneOwnerPtr = laneOwnerInsts;
     do {
       if (*(char *)((int)&usedLanesA + loopIndex) != '\0') {
         *(undefined1 *)((int)&laneWritten + loopIndex) = 0;
         *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
         *laneOwnerPtr = inst;
-        local_b8[loopIndex] = (byte)loopIndex;
+        laneComponentOf[loopIndex] = (byte)loopIndex;
       }
       loopIndex = loopIndex + 1;
       laneOwnerPtr = laneOwnerPtr + 1;
-      iVar9 = iVar9 + -1;
-    } while (iVar9 != 0);
+      laneCursor = laneCursor + -1;
+    } while (laneCursor != 0);
   }
   extraSrcOfInst2 = 0;
   if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
@@ -6554,25 +6554,25 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
   }
   if (extraSrcOfInst2 != inst) {
     loopIndex = 0;
-    laneOwnerPtr = local_8c;
+    laneOwnerPtr = laneOwnerInsts;
     do {
       if (*(char *)((int)&usedLanesB + loopIndex) != '\0') {
         if (*(char *)((int)&laneOccupied + loopIndex) == '\0') {
           *(undefined1 *)((int)&laneWritten + loopIndex) = 0;
           *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
           *laneOwnerPtr = inst2;
-          local_b8[loopIndex] = (byte)loopIndex;
+          laneComponentOf[loopIndex] = (byte)loopIndex;
         }
         else {
-          iVar9 = 0;
+          laneCursor = 0;
           if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
-            iVar9 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
+            laneCursor = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
           }
-          iVar4 = 0;
+          matchResult = 0;
           if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
-            iVar4 = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
+            matchResult = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
           }
-          if (iVar9 != iVar4) {
+          if (laneCursor != matchResult) {
             return 0;
           }
         }
@@ -6583,33 +6583,33 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
     } while (moreComponents);
   }
   loopIndex = 0;
-  laneOwnerPtr = local_8c;
+  laneOwnerPtr = laneOwnerInsts;
   laneMapPtr = laneMapA;
   do {
     if (*(char *)((int)&neededMaskA + loopIndex) != '\0') {
-      iVar9 = 0;
+      laneCursor = 0;
       laneComponent = (byte)loopIndex;
       if (*(char *)((int)&laneOccupied + loopIndex) == '\0') {
         *laneOwnerPtr = inst;
         *laneMapPtr = laneComponent;
         *(undefined1 *)((int)&laneWritten + loopIndex) = 1;
         *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
-        local_b8[loopIndex] = laneComponent;
+        laneComponentOf[loopIndex] = laneComponent;
       }
       else {
-        while ((*(char *)((int)&laneOccupied + iVar9) != '\0' ||
-               (iVar4 = ((int (*)())FUN_00142974)(packCtx,inst,loopIndex,iVar9), iVar4 == 0))) {
-          isLast = iVar9 == 3;
-          iVar9 = iVar9 + 1;
+        while ((*(char *)((int)&laneOccupied + laneCursor) != '\0' ||
+               (matchResult = ((int (*)())FUN_00142974)(packCtx,inst,loopIndex,laneCursor), matchResult == 0))) {
+          isLast = laneCursor == 3;
+          laneCursor = laneCursor + 1;
           if (isLast) {
             return 0;
           }
         }
-        *(undefined1 *)((int)&laneOccupied + iVar9) = 1;
-        local_8c[iVar9] = inst;
-        *(undefined1 *)((int)&laneWritten + iVar9) = 1;
-        *laneMapPtr = (byte)iVar9;
-        local_b8[iVar9] = laneComponent;
+        *(undefined1 *)((int)&laneOccupied + laneCursor) = 1;
+        laneOwnerInsts[laneCursor] = inst;
+        *(undefined1 *)((int)&laneWritten + laneCursor) = 1;
+        *laneMapPtr = (byte)laneCursor;
+        laneComponentOf[laneCursor] = laneComponent;
       }
     }
     moreComponents = loopIndex != 3;
@@ -6622,7 +6622,7 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
     extraSrcOfInst2 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
   }
   if (extraSrcOfInst2 == inst) {
-    iVar9 = 4;
+    laneCursor = 4;
     loopIndex = 0;
     laneMapPtr = laneMapB;
     do {
@@ -6631,11 +6631,11 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
       }
       loopIndex = loopIndex + 1;
       laneMapPtr = laneMapPtr + 1;
-      iVar9 = iVar9 + -1;
-    } while (iVar9 != 0);
+      laneCursor = laneCursor + -1;
+    } while (laneCursor != 0);
   }
   loopIndex = 0;
-  laneOwnerPtr = local_8c;
+  laneOwnerPtr = laneOwnerInsts;
   laneMapPtr = laneMapB;
   do {
     if (*(char *)((int)&neededMaskB + loopIndex) != '\0') {
@@ -6645,25 +6645,25 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
         *laneOwnerPtr = inst2;
         *laneMapPtr = laneComponent;
         *(undefined1 *)((int)&laneOccupied + loopIndex) = 1;
-        local_b8[loopIndex] = laneComponent;
+        laneComponentOf[loopIndex] = laneComponent;
       }
       else if ((*(char *)((int)&laneWritten + loopIndex) == '\0') ||
-              (iVar9 = ((int (*)())FUN_00141100)(packCtx,*laneOwnerPtr,(uint)local_b8[loopIndex],inst2,loopIndex), iVar9 == 0
+              (laneCursor = ((int (*)())FUN_00141100)(packCtx,*laneOwnerPtr,(uint)laneComponentOf[loopIndex],inst2,loopIndex), laneCursor == 0
               )) {
-        iVar9 = 0;
-        while ((*(char *)((int)&laneOccupied + iVar9) != '\0' ||
-               (iVar4 = ((int (*)())FUN_00142974)(packCtx,inst2,loopIndex,iVar9), iVar4 == 0))) {
-          isLast = iVar9 == 3;
-          iVar9 = iVar9 + 1;
+        laneCursor = 0;
+        while ((*(char *)((int)&laneOccupied + laneCursor) != '\0' ||
+               (matchResult = ((int (*)())FUN_00142974)(packCtx,inst2,loopIndex,laneCursor), matchResult == 0))) {
+          isLast = laneCursor == 3;
+          laneCursor = laneCursor + 1;
           if (isLast) {
             return 0;
           }
         }
-        *(undefined1 *)((int)&laneOccupied + iVar9) = 1;
-        local_8c[iVar9] = inst2;
-        *(undefined1 *)((int)&laneWritten + iVar9) = 1;
-        *laneMapPtr = (byte)iVar9;
-        local_b8[iVar9] = laneComponent;
+        *(undefined1 *)((int)&laneOccupied + laneCursor) = 1;
+        laneOwnerInsts[laneCursor] = inst2;
+        *(undefined1 *)((int)&laneWritten + laneCursor) = 1;
+        *laneMapPtr = (byte)laneCursor;
+        laneComponentOf[laneCursor] = laneComponent;
       }
     }
     moreComponents = loopIndex != 3;
@@ -6697,8 +6697,8 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
       loopIndexB = 0;
       do {
         if ((*(char *)((int)&laneWritten + loopIndexB) != '\0') &&
-           (iVar4 = ((int (*)())FUN_00141100)(packCtx,local_8c[loopIndexB],(uint)local_b8[loopIndexB],inst,loopIndex),
-           iVar4 != 0)) {
+           (matchResult = ((int (*)())FUN_00141100)(packCtx,laneOwnerInsts[loopIndexB],(uint)laneComponentOf[loopIndexB],inst,loopIndex),
+           matchResult != 0)) {
           *laneMapA = (byte)loopIndexB;
           goto LAB_001434fc;
         }
@@ -6706,19 +6706,19 @@ int FUN_00142fdc(packCtx, inst, inst2, laneMapA, laneMapB)
         loopIndexB = loopIndexB + 1;
       } while (moreComponents);
       loopIndexB = 0;
-      iVar4 = 4;
+      matchResult = 4;
       while (*(char *)((int)&laneOccupied + loopIndexB) != '\0') {
         loopIndexB = loopIndexB + 1;
-        iVar4 = iVar4 + -1;
-        if (iVar4 == 0) {
+        matchResult = matchResult + -1;
+        if (matchResult == 0) {
           return 0;
         }
       }
       *(undefined1 *)((int)&laneOccupied + loopIndexB) = 1;
-      local_8c[loopIndexB] = inst;
+      laneOwnerInsts[loopIndexB] = inst;
       *(undefined1 *)((int)&laneWritten + loopIndexB) = 1;
       *laneMapA = (byte)loopIndexB;
-      local_b8[loopIndexB] = (byte)loopIndex;
+      laneComponentOf[loopIndexB] = (byte)loopIndex;
     }
 LAB_001434fc:
     moreComponents = loopIndex != 3;
@@ -6730,12 +6730,12 @@ LAB_001434fc:
   do {
     invertedNeededSwappedB = invertedNeeded << 0x18 | (invertedNeeded & 0xff00) << 8 | invertedNeeded >> 8 & 0xff00 | invertedNeeded >> 0x18;
     freeComponentsB = writeMaskB & invertedNeededSwappedB;
-    if (*(char *)((int)local_8c + loopIndex + -4) != '\0') {
+    if (*(char *)((int)laneOwnerInsts + loopIndex + -4) != '\0') {
       loopIndexB = 0;
       do {
         if ((*(char *)((int)&laneWritten + loopIndexB) != '\0') &&
-           (iVar4 = ((int (*)())FUN_00141100)(packCtx,local_8c[loopIndexB],(uint)local_b8[loopIndexB],inst2,loopIndex),
-           iVar4 != 0)) {
+           (matchResult = ((int (*)())FUN_00141100)(packCtx,laneOwnerInsts[loopIndexB],(uint)laneComponentOf[loopIndexB],inst2,loopIndex),
+           matchResult != 0)) {
           *laneMapB = (byte)loopIndexB;
           goto LAB_001435e4;
         }
@@ -6743,19 +6743,19 @@ LAB_001434fc:
         loopIndexB = loopIndexB + 1;
       } while (moreComponents);
       loopIndexB = 0;
-      iVar4 = 4;
+      matchResult = 4;
       while (*(char *)((int)&laneOccupied + loopIndexB) != '\0') {
         loopIndexB = loopIndexB + 1;
-        iVar4 = iVar4 + -1;
-        if (iVar4 == 0) {
+        matchResult = matchResult + -1;
+        if (matchResult == 0) {
           return 0;
         }
       }
       *(undefined1 *)((int)&laneOccupied + loopIndexB) = 1;
-      local_8c[loopIndexB] = inst2;
+      laneOwnerInsts[loopIndexB] = inst2;
       *(undefined1 *)((int)&laneWritten + loopIndexB) = 1;
       *laneMapB = (byte)loopIndexB;
-      local_b8[loopIndexB] = (byte)loopIndex;
+      laneComponentOf[loopIndexB] = (byte)loopIndex;
     }
 LAB_001435e4:
     isLast = loopIndex == 3;

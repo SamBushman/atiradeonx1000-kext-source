@@ -3711,3 +3711,70 @@ local	FUN_0015b974	local_5c	uniformConstantValue	INFERRED	float out value of IRI
 local	FUN_0015b974	local_48	constantAsLongLong	INFERRED	fctiw conversion scratch
 local	FUN_0015b974	local_40	doubleHighWord	INFERRED	0x43300000 high word of the int-to-double trick
 local	FUN_0015b974	uStack_3c	doubleLowWord	INFERRED	biased int low word of the int-to-double trick
+local	FUN_0014c604	param_2	otherInst	INFERRED	second inst whose operand selects are matched against inst
+local	FUN_0014c604	param_3	pass	INFERRED	*(param_3+8) is passed as the compiler to FUN_00146670
+local	FUN_0014c604	param_4	outSelectA	INFERRED	out select word for the first operand pair
+local	FUN_0014c604	param_5	outSelectB	INFERRED	out select word for the second operand pair
+local	FUN_0014c604	param_6	outMatched	INFERRED	receives the straight-match result of the first operand pair
+local	FUN_0014c604	local_68	operandMaskA	INFERRED	out mask for operand 1 of inst from FUN_00147b8c, passed by address
+local	FUN_0014c604	local_64	operandMaskB	INFERRED	out mask for operand 2 of inst from FUN_00147b8c (array slot, passed as pointer)
+local	FUN_0014c604	local_58	selInst1Other1	INFERRED	FUN_0014c534 select word for (inst op1, other op1)
+local	FUN_0014c604	local_54	selInst2Other2	INFERRED	FUN_0014c534 select word for (inst op2, other op2)
+local	FUN_0014c604	local_50	selOther1Inst1	INFERRED	FUN_0014c534 select word for (other op1, inst op1)
+local	FUN_0014c604	local_4c	selOther2Inst2	INFERRED	FUN_0014c534 select word for (other op2, inst op2)
+local	FUN_0014c604	local_48	selInst1Other2	INFERRED	FUN_0014c534 select word for (inst op1, other op2)
+local	FUN_0014c604	local_44	selInst2Other1	INFERRED	FUN_0014c534 select word for (inst op2, other op1)
+local	FUN_0014c604	local_40	selOther1Inst2	INFERRED	FUN_0014c534 select word for (other op1, inst op2)
+local	FUN_0014c604	local_3c	selOther2Inst1	INFERRED	FUN_0014c534 select word for (other op2, inst op1), array slot
+local	FUN_00142fdc	local_b8	laneComponentOf	INFERRED	source component assigned to each of the four compact lanes
+local	FUN_00142fdc	local_8c	laneOwnerInsts	INFERRED	inst owning each compact lane (inst or inst2)
+local	FUN_00142fdc	auStack_74	readMaskScratchA	INFERRED	out record of FUN_00140e70 for inst, otherwise unused
+local	FUN_00142fdc	auStack_64	readMaskScratchB	INFERRED	out record of FUN_00140e70 for inst2, otherwise unused
+local	FUN_00142fdc	local_5c	usedLanesBOut	INFERRED	out record of FUN_00141090 for inst2; first word copied to usedLanesB
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*iVar9\ =\ 4;$	+1
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*iVar9\ =\ 0;$	+1
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*iVar9\ =\ FUN_00105594\(param_3,\*\(undefined4\ \*\)\(param_3\ \+\ 0x84\)\);$	+1
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*if\ \(iVar9\ !=\ iVar4\)\ \{$	+1
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*iVar9\ =\ 0;$@2	+1
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*while\ \(\(\*\(char\ \*\)\(\(int\)\&local_94\ \+\ iVar9\)\ !=\ '\\0'\ \|\|$	+4
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_94\ \+\ iVar9\)\ =\ 1;$	+5
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*iVar9\ =\ 4;$@2	+1
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+2
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*else\ if\ \(\(\*\(char\ \*\)\(\(int\)\&local_98\ \+\ iVar3\)\ ==\ '\\0'\)\ \|\|$	+8
+use	FUN_00142fdc	iVar9	laneCursor	INFERRED	one register: 4 countdown, lane scan index from 0, and compare operand	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_94\ \+\ iVar9\)\ =\ 1;$@2	+5
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*iVar4\ =\ 0;$	+1
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*iVar4\ =\ FUN_00105594\(param_2,\*\(undefined4\ \*\)\(param_2\ \+\ 0x84\)\);$	+1
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*if\ \(iVar9\ !=\ iVar4\)\ \{$	+1
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*while\ \(\(\*\(char\ \*\)\(\(int\)\&local_94\ \+\ iVar9\)\ !=\ '\\0'\ \|\|$	+2
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*while\ \(\(\*\(char\ \*\)\(\(int\)\&local_94\ \+\ iVar9\)\ !=\ '\\0'\ \|\|$@2	+2
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*if\ \(\(\*\(char\ \*\)\(\(int\)\&local_98\ \+\ iVar9\)\ !=\ '\\0'\)\ \&\&$	+3
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*iVar4\ =\ 4;$	+1
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*if\ \(\(\*\(char\ \*\)\(\(int\)\&local_98\ \+\ iVar9\)\ !=\ '\\0'\)\ \&\&$@2	+3
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*iVar4\ =\ 4;$@2	+1
+use	FUN_00142fdc	iVar4	matchResult	INFERRED	callee result, extra source or lane countdown	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@2	+2
+use	FUN_00148980	iVar2	vcall24Result	INFERRED	vtable +0x24 or opcode field query on the producer	^\s*iVar2\ =\ FUN_00113420\(\*\(undefined4\ \*\)\(piVar3\[0x22\]\ \+\ 8\),\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+3
+use	FUN_00148980	iVar2	checkResult	INFERRED	one register for operand record 0, select test and FUN_001467e8 in a condition chain	^\s*iVar2\ =\ FUN_001054ec\(piVar3,0\);$	+3
+use	FUN_00148980	iVar2	operandIndex	INFERRED	for-loop operand index 1..operandCount	^\s*for\ \(iVar2\ =\ 1;\ iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x14\)\)\(piVar4\),\ iVar2\ <=\ iVar12;$	+3
+use	FUN_00148980	iVar2	operandIndex	INFERRED	for-loop operand index 1..operandCount	^\s*FUN_00106004\(piVar4,iVar2,iVar12,0,in_r7\);$	+1
+use	FUN_00148980	iVar2	targetCallResult	INFERRED	target hook call result	^\s*iVar2\ =\ \(\*a6\)\(piVar7,iVar10,param_1,in_r6,in_r7,in_r8,a6\);$	+2
+local	FUN_00148980	piVar4	cloneOrOriginalInst	INFERRED	clone of the producer when it has other users, otherwise the producer
+use	FUN_00148980	iVar8	passStamp	INFERRED	*(program+0x478) stamp	^\s*iVar8\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+1
+use	FUN_00148980	iVar8	passStamp	INFERRED	*(program+0x478) stamp	^\s*iVar9\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_00148980	iVar8	passStamp	INFERRED	*(program+0x478) stamp	^\s*if\ \(iVar8\ <\ piVar7\[0x58\]\)\ \{$	+1
+use	FUN_00148980	iVar8	passStamp	INFERRED	*(program+0x478) stamp	^\s*if\ \(iVar8\ <\ \*\(int\ \*\)\(iVar6\ \+\ 0x160\)\)\ \{$	+1
+local	FUN_00148980	iVar9	newPassStamp	INFERRED	stamp + 1 for the cloned insts
+use	FUN_00148980	iVar10	selectWordOrNewTarget	INFERRED	one register: operand select word, composed select and target value	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x10\);$	+1
+use	FUN_00148980	iVar10	selectWordOrNewTarget	INFERRED	one register: operand select word, composed select and target value	^\s*piVar4\[0x27\]\ =\ iVar10;$	+3
+use	FUN_00148980	iVar10	selectWordOrNewTarget	INFERRED	one register: operand select word, composed select and target value	^\s*iVar10\ =\ local_48\[0\];$	+1
+use	FUN_00148980	iVar10	selectWordOrNewTarget	INFERRED	one register: operand select word, composed select and target value	^\s*\*\(int\ \*\)\(iVar8\ \+\ 0x10\)\ =\ iVar10;$	+1
+use	FUN_00148980	iVar10	newTargetField	INFERRED	inst +0x124 plus producer +0x49 field	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x124\)\ \+\ piVar3\[0x49\];$	+1
+use	FUN_00148980	iVar10	newTargetField	INFERRED	inst +0x124 plus producer +0x49 field	^\s*iVar2\ =\ \(\*a6\)\(piVar7,iVar10,param_1,in_r6,in_r7,in_r8,a6\);$	+1
+use	FUN_00148980	iVar10	newTargetField	INFERRED	inst +0x124 plus producer +0x49 field	^\s*piVar4\[0x49\]\ =\ iVar10;$	+1
+use	FUN_00148980	uVar11	rewrittenSelectWord	INFERRED	select word built from DAT_001b004c lane bytes	^\s*uVar11\ =\ local_58\[0\];$	+1
+use	FUN_00148980	uVar11	rewrittenSelectWord	INFERRED	select word built from DAT_001b004c lane bytes	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar11;$	+1
+local	FUN_00148980	iVar12	cloneOrOperandCount	INFERRED	one register: stamp field, operand count, vtable +0x5c result and operand clone
+local	FUN_00148980	uVar13	savedField14c	INFERRED	+0x14c field copied to operand record 0
+local	FUN_00148980	local_58	laneBytesOut	INFERRED	four select bytes copied from DAT_001b004c
+local	FUN_00148980	local_48	composedSelectOut	INFERRED	SelectWord__compose out
