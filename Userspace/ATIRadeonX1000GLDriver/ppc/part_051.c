@@ -1286,7 +1286,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
       if (isConstantSource == 0) {
         if ((a0[0x26] != 0x33) || (a0[0x4b] == 3)) {
           if ((sourceLaneWord & 0xffffff00) == 0) {
-            if ((sourceLaneWord & 0xff) == 0) goto LAB_001971a8;
+            if ((sourceLaneWord & 0xff) == 0) goto returnOneAfterLoop;
             placed = ConstantSlots__tryAddToRow(constantAllocator,a0,1);
           }
           else if ((sourceLaneWord & 0xff) == 0) {
@@ -1331,7 +1331,7 @@ joined_r0x00197160:
           goto joined_r0x00197160;
         }
       }
-LAB_001971a8: ;
+returnOneAfterLoop: ;
     }
   }
   return 1;

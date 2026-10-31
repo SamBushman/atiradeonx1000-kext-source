@@ -124,7 +124,7 @@ int ValueKey__eliminateTrivialInst(ctx)
       producerInst = *(int **)(ctx + 0xb0);
       compilerRef = *(int *)(ctx + 0x238);
       removeFn = *(code **)(*producerInst + 0xc);
-      goto LAB_00173718;
+      goto callRemoveFn;
     }
     inst = *(int *)(ctx + 0xb0);
   }
@@ -140,7 +140,7 @@ int ValueKey__eliminateTrivialInst(ctx)
   }
   producerInst = *(int **)(ctx + 0xb0);
   removeFn = *(code **)(*producerInst + 0xc);
-LAB_00173718:
+callRemoveFn:
   (*removeFn)(producerInst,0,compilerRef);
   *(uint *)(*(int *)(ctx + 0xb0) + 0x14) = *(uint *)(*(int *)(ctx + 0xb0) + 0x14) | 0x400;
   return 1;

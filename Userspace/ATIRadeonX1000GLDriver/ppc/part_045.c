@@ -1104,7 +1104,7 @@ loopSetConsumerNode:
         while (*(int *)(addressLoadNode + 0x48) < 1) {
           addressLoadNode = addressLoadNode + 4;
           consumerNode = consumerNode + -1;
-          if (consumerNode == 0) goto LAB_0016e800;
+          if (consumerNode == 0) goto endOfLoopBody;
         }
         clonedInst = IRInst__clone(*(undefined4 *)(loopIndexConsumer + 0x38),*scheduler,0);
         addressSource = IRInst__getOperandSource(*(undefined4 *)(clonedNode + 0x38),1);
@@ -1176,7 +1176,7 @@ loopSetConsumerNode:
           }
         }
         ((int (*)())Scheduler__enqueueReadyNode)(scheduler,addressLoadNode);
-LAB_0016e800: ;
+endOfLoopBody: ;
       }
     }
     loadSlotCursor = loadSlotCursor + 1;
@@ -2262,7 +2262,7 @@ setCandidateIssuable:
             pushSlot = (int *)Vector__elementRefGrow(&workStackCapacity,workStackCount);
           }
           *pushSlot = candidate;
-LAB_0016fcc0:
+workStackLoop:
           do {
             copyCount = vecCount;
             if (workStackCount == 0) {
@@ -2534,7 +2534,7 @@ loopSetByteCursorOrCount:
               }
             }
             workSuccIndex = workSuccIndex + 1;
-            if (workSuccCount == workSuccIndex) goto LAB_0016fcc0;
+            if (workSuccCount == workSuccIndex) goto workStackLoop;
             workSuccEdges = *(uint **)(workNode + 0x40);
           } while( true );
         }

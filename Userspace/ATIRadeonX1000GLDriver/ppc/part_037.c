@@ -1448,13 +1448,13 @@ setTargetBlockForCopy:
     predecessor = (int *)Block__getPredecessor(block,0);
     predQuery2c = (**(code **)(*predecessor + 0x2c))(predecessor);
     if (predQuery2c == 0) {
-LAB_00120cb8:
+callBlockVfn38:
       (**(code **)(*block + 0x38))(block);
     }
     else {
       successor = (int *)Block__getSuccessor(block,0);
       successorQuery34 = (**(code **)(*successor + 0x34))(successor);
-      if (successorQuery34 == 0) goto LAB_00120cb8;
+      if (successorQuery34 == 0) goto callBlockVfn38;
     }
     ((int (*)())Block__appendCopyForDest)(vector5,newTempId,&DAT_001afee4,0,cycleDstId,block,*(undefined4 *)(pass + 8),1,vector3
                  ,cycleDstId);

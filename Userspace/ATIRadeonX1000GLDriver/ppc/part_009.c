@@ -573,7 +573,7 @@ int extvsEmitSwizzle(ctx, shader, instRecord)
     *(uint *)(instSlot + 4) = swizzleWord;
     break;
   default:
-    goto LAB_0005d2d0;
+    goto returnZero;
   }
   selectMask0 = *(int *)(instRecord + 0x28) - 0x87d5;
   if (selectMask0 < 0xb) {
@@ -620,7 +620,7 @@ int extvsEmitSwizzle(ctx, shader, instRecord)
       *(uint *)(instSlot + 4) = swizzleWord;
       break;
     default:
-      goto LAB_0005d2d0;
+      goto returnZero;
     }
     selectMask1 = *(int *)(instRecord + 0x2c) - 0x87d5;
     if (selectMask1 < 0xb) {
@@ -667,7 +667,7 @@ int extvsEmitSwizzle(ctx, shader, instRecord)
         *(uint *)(instSlot + 4) = swizzleWord;
         break;
       default:
-        goto LAB_0005d2d0;
+        goto returnZero;
       }
       selectMask2 = *(int *)(instRecord + 0x30) - 0x87d5;
       if (selectMask2 < 0xb) {
@@ -714,7 +714,7 @@ int extvsEmitSwizzle(ctx, shader, instRecord)
           *(uint *)(instSlot + 4) = swizzleWord;
           break;
         default:
-          goto LAB_0005d2d0;
+          goto returnZero;
         }
         selectMask3 = *(int *)(instRecord + 0x34) - 0x87d5;
         if (selectMask3 < 0xb) {
@@ -738,7 +738,7 @@ int extvsEmitSwizzle(ctx, shader, instRecord)
       }
     }
   }
-LAB_0005d2d0:
+returnZero:
   return 0;
 }
 
@@ -3631,7 +3631,7 @@ int vpUploadConstantsWithFog(glContext, shader, programState, constantBlock, upl
       commitCallback = *(code **)(glContext + 0x275c);
       constantCount = *(int *)(0x00002748 + glContext + 4) + 0x1c;
       *(int *)(0x00002748 + glContext + 4) = constantCount;
-      goto LAB_000620ec;
+      goto commitConstants;
     }
     constantCount = *(int *)(programState + 0x5c);
   }
@@ -3645,7 +3645,7 @@ int vpUploadConstantsWithFog(glContext, shader, programState, constantBlock, upl
   commitCallback = *(code **)(glContext + 0x275c);
   constantCount = constantCount * 0x10 + *(int *)(0x00002748 + glContext + 4) + 0xc;
   *(int *)(0x00002748 + glContext + 4) = constantCount;
-LAB_000620ec:
+commitConstants:
                     
                     
   (*commitCallback)(glContext,constantCount);
@@ -5124,14 +5124,14 @@ loopCheckCacheMode:
       if (cacheMode == 0) {
         freeWidth = 0x80 - allocX;
         freeHeight = 0x80 - allocY;
-        goto LAB_00064af0;
+        goto findConstantRegion;
       }
-      if (cacheMode != 2) goto LAB_00064af0;
+      if (cacheMode != 2) goto findConstantRegion;
       do {
         freeWidth = 0x100 - allocX;
         freeHeight = 0x100 - allocY;
         *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x48000;
-LAB_00064af0:
+findConstantRegion:
         while( true ) {
           if ((regionWidth <= freeWidth) && (regionHeight <= freeHeight)) {
             *(int *)(programState + 0x14) = allocY;
@@ -5392,7 +5392,7 @@ int ffvpSelectLitProgramVariant(glContext)
   *(int *)(glContext + 0x140) = lightKeyA;
   *(int *)(glContext + 0x144) = lightKeyB;
   if (*(char *)(glContext + 0x124) != '\0') {
-LAB_00065500:
+callVariantSelectCallback:
     (**(code **)(((unsigned char *)0x000012dc) + glContext))(glContext);
     return;
   }
@@ -5419,7 +5419,7 @@ LAB_00065500:
       *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x1020;
       *(undefined1 *)(glContext + 0x29) = 1;
       (*a6)(glContext,(int)lookupResult,in_r5,in_r6,variantKeyHeader,variantKeyWords[0],a6);
-      goto LAB_00065500;
+      goto callVariantSelectCallback;
     }
   }
   else if (*(char *)(variant + 0x59) != '\0') goto storeGlContext;

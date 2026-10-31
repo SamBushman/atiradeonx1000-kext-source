@@ -2116,10 +2116,10 @@ int extvsEncodeSourceSwizzle(shader, symbolList, operand, outWord, matrixRow)
     *outWord = swizzleWord;
     break;
   default:
-    goto LAB_00057ae0;
+    goto returnZero;
   }
   if (10 < operand[2] - 0x87d5) {
-LAB_00057ae0:
+returnZero:
     return 0;
   }
   componentClassBit = 1 << (operand[2] - 0x87d5 & 0x3f);

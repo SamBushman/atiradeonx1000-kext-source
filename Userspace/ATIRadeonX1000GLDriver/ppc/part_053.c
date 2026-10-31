@@ -35,7 +35,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, staleAr
   program = *(int **)(node + 0xac);
   a5 = compiler;
   branchInst = Block__getBranchInst(node,node,block,staleArg4,traversal,compiler,staleArg7);
-  if (*program != 0) goto LAB_0019dc0c;
+  if (*program != 0) goto callAssembleBlockVfn34;
   loopStackSlot = (uint *)0x0;
   condSwizzle = *(uint *)(this[0x25] + 4);
   loopStackEntry = condSwizzle - 1;
@@ -128,7 +128,7 @@ setCondValueInst:
   Block__appendInst(node,predicatedInst);
   DListNode__unlinkAndDelete(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
-LAB_0019dc0c:
+callAssembleBlockVfn34:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   return Block__accept(*(undefined4 *)(node + 0x13c),traversal);
 }
@@ -434,7 +434,7 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   
   program = *(int **)(node + 0xac);
   branchInst = (int *)Block__getBranchInst(node,node,block,compiler,extra2,extra3,extra4);
-  if (*program != 0) goto LAB_0019e5d0;
+  if (*program != 0) goto callAssembleBlockVfn34;
   (**(code **)(*branchInst + 0x14))(branchInst);
   topKindSlot = (int *)0x0;
   predKindCount = *(uint *)(this[0x25] + 4);
@@ -536,7 +536,7 @@ loopSetPredSetOpcode:
   Block__appendInst(node,predSetInst);
   DListNode__unlinkAndDelete(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
-LAB_0019e5d0:
+callAssembleBlockVfn34:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   predKindStack = (uint *)this[0x25];
   pushIndex = predKindStack[1];

@@ -31,7 +31,7 @@ int vpStateSelectForDraw(ctx)
       if ((*(byte *)(ctx + 0x2d) & 3) != 0) {
         vpStateUpdateFogConstants(ctx,stateRecord + 0x13c,shader);
       }
-      goto LAB_00076dc0;
+      goto callDrawStateCallback;
     }
     noState = stateRecord == 0;
   }
@@ -50,7 +50,7 @@ int vpStateSelectForDraw(ctx)
   }
   vpStateApplyParameters(ctx,shader);
   (**(code **)(((unsigned char *)0x000012a4) + ctx))(ctx,shader,0);
-LAB_00076dc0:
+callDrawStateCallback:
   (**(code **)(((unsigned char *)0x000012b4) + ctx))(ctx);
   if ((!noState) && (currentStateBlock != stateRecord + 0x13c)) {
                     
@@ -586,7 +586,7 @@ int recordIsSchedulable(alloc, records, liveIndex, modeFlag)
       usageMaskPtr = (uint *)(alloc + 0x30ba0 + (*recordPtr >> 0xb & 0x1fc));
       break;
     default:
-      goto switchD_000778cc_caseD_1;
+      goto clearUsageMaskPtr;
     case 3:
       usageMaskPtr = (uint *)(alloc + 0x30c20 + (*recordPtr >> 0xb & 0x1fc));
       break;
@@ -624,7 +624,7 @@ int recordIsSchedulable(alloc, records, liveIndex, modeFlag)
         goto setFlagResult;
       }
     }
-switchD_000778cc_caseD_1:
+clearUsageMaskPtr:
     usageMaskPtr = (uint *)0x0;
   }
 setFlagResult:
@@ -1090,13 +1090,13 @@ opcodeCase4:
       case 'O':
         return 5;
       default:
-        goto switchD_000785b4_caseD_46;
+        goto returnAllOnes;
       case 'J':
         goto opcodeCase1;
       }
     }
     if ((7 < (byte)(opcode + 0xbdU)) || ((1 << ((int)(char)(opcode + -0x43) & 0x3fU) & 0x87U) == 0)) {
-switchD_000785b4_caseD_46:
+returnAllOnes:
       return 0xffffffff;
     }
 opcodeCase6:
@@ -4579,7 +4579,7 @@ loopSetSourceIsRegisterFile:
               } while( true );
             }
           }
-          goto switchD_0007d27c_caseD_0;
+          goto addSourceDependencyEdges;
         }
         switch((char)*record) {
         case '\x01':
@@ -4728,7 +4728,7 @@ loopSetCallResultPair:
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
                 scratchArg2 = extraout_r4_01;
-                if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
+                if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (componentIndex == 2);
             } while( true );
           }
@@ -4748,7 +4748,7 @@ loopSetCallResultPair:
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
                 scratchArg2 = extraout_r4_02;
-                if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
+                if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (componentIndex == 2);
             } while( true );
           }
@@ -4771,7 +4771,7 @@ loopSetCallResultPair:
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
                 scratchArg2 = extraout_r4_03;
-                if (componentsLeftC == 0) goto switchD_0007d27c_caseD_0;
+                if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (((componentIndex == 1) && ((char)*record != '\r')) && ((char)*record != '\x0e'));
             } while( true );
           }
@@ -4793,7 +4793,7 @@ recordCase41:
             scratchArg2 = extraout_r4_05;
           } while (moreComponentsB);
         }
-switchD_0007d27c_caseD_0:
+addSourceDependencyEdges:
         for (sourceDepNode = (int *)*perSourceDepHead; sourceDepNode != (int *)0x0;
             sourceDepNode = *(int **)((int)sourceDepNode + 0x10)) {
           in_r6 = *(dword **)((int)sourceDepNode + 4);
@@ -5254,7 +5254,7 @@ loopSetInstructionIndex:
 setSymbol:
             symbol = symbol + -1;
           } while ((symbol != 0) && (laterSlotCursor = laterSlotCursor + 0x1d, !readerScanStop));
-          if (!srcDeadAfterMov) goto LAB_0007e760;
+          if (!srcDeadAfterMov) goto startInstructionScan;
         }
         scanIndex = instIndex - 1;
         if (scanIndex != 0) {
@@ -5349,7 +5349,7 @@ setSymbol:
           }
         }
       }
-LAB_0007e760: ;
+startInstructionScan: ;
     }
     if (instructionCount != 0) {
       instIndex = 0;
@@ -8969,9 +8969,9 @@ loopSetOldBase:
       newBase = *(uint *)(constBlock + 0x3e4) >> 1;
       availableConsts = newBase - 2;
       newOffset = availableCount;
-      goto LAB_000829e0;
+      goto checkConstantAllocFit;
     }
-    if (allocMode != 2) goto LAB_000829e0;
+    if (allocMode != 2) goto checkConstantAllocFit;
     while( true ) {
       availableConsts = *(uint *)(constBlock + 0x3e4);
       availableCount = (uint)*(ushort *)(((unsigned char *)0x000013be) + glContext);
@@ -8979,7 +8979,7 @@ loopSetOldBase:
       ctxFlags = ctxFlags | 0x18000;
       *(uint *)(glContext + 0x8c) = ctxFlags;
       newOffset = 0;
-LAB_000829e0:
+checkConstantAllocFit:
       while( true ) {
         if ((constCount <= availableConsts) && (*(uint *)(program + 0x48) <= availableCount)) {
           *(uint *)(glContext + 0x3d0) = newOffset;

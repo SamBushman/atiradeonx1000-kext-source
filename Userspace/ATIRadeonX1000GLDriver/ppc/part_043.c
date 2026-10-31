@@ -379,7 +379,7 @@ int IRInst__isOpcodeInSet147398(inst)
   
   callResult = ((int (*)())Inst__constantLanesAllowFusion)(inst);
   if (callResult != 0) {
-LAB_001474b4:
+returnOne:
     return 1;
   }
   switch(*(undefined4 *)(*(int *)(inst + 0x88) + 8)) {
@@ -391,7 +391,7 @@ LAB_001474b4:
   case 0x3e:
   case 0x3f:
   case 0x40:
-    goto LAB_001474b4;
+    goto returnOne;
   default:
     return 0;
   }
@@ -4464,7 +4464,7 @@ setVector:
                 vectorFilledCount2 = vector[1];
                 userIndexDown = vectorFilledCount2 - 1;
                 if ((int)userIndexDown < 0) {
-LAB_0014e690:
+callInstVfnCAndHoist:
                   (**(code **)(*inst2 + 0xc))(inst2,1,*(undefined4 *)(pass + 8));
                   ((int (*)())Inst__hoistToOperandBlock)(pass,inst,pass);
                   return;
@@ -4508,7 +4508,7 @@ loopCheckOperandIndex2:
                   loopIndex2 = loopIndex2 + 1;
                   userIndexDown = userIndexDown - 1;
                   userByteOffset = userByteOffset + -4;
-                  if (vectorFilledCount2 == loopIndex2) goto LAB_0014e690;
+                  if (vectorFilledCount2 == loopIndex2) goto callInstVfnCAndHoist;
                   vector = (uint *)inst2[4];
                 } while( true );
               }
@@ -10031,7 +10031,7 @@ int Inst__canShiftTargetField(ctx, inst, targetFieldDelta, unusedArg4, laneMask,
   int *laneByteCursorOrTarget;
   uint writeMaskOut [4];
   
-LAB_0015802c:
+shiftCheckLoop:
   do {
     vcall64Result = (**(code **)(*inst + 100))(inst);
     if (vcall64Result != 0) {
@@ -10057,7 +10057,7 @@ LAB_0015802c:
         if ((((destRecordCheck == 0) && ((inst[5] & 2U) == 0)) && ((inst[5] & 0x200U) == 0)) &&
            (destRecordCheck = IRInst__hasSingleUse(inst,program), destRecordCheck != 0)) {
           inst = (int *)IRInst__getOperandSource(inst,1);
-          goto LAB_0015802c;
+          goto shiftCheckLoop;
         }
       }
     }

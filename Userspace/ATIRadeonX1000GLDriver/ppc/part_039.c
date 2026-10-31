@@ -1341,7 +1341,7 @@ loopSwitchRegClass:
           seenRegCursor = seenRegCursor + 1;
           if (tableEntry == -1) break;
           if ((regNumber == tableEntry) || (slotsFull = slotIndex == 2, slotIndex = slotIndex + 1, slotsFull))
-          goto switchD_00129ce4_caseD_0;
+          goto nextSourceSlot;
         }
         loopIndex3 = loopIndex3 + 1;
         seenRegs[slotIndex] = regNumber;
@@ -1355,7 +1355,7 @@ loopSwitchRegClass:
           seenRegCursor = seenRegCursor + 1;
           if (tableEntry == -1) break;
           if ((regNumber == tableEntry) || (slotsFull = slotIndex == 2, slotIndex = slotIndex + 1, slotsFull))
-          goto switchD_00129ce4_caseD_0;
+          goto nextSourceSlot;
         }
         loopIndex2 = loopIndex2 + 1;
         seenRegs[slotIndex + 3] = regNumber;
@@ -1397,7 +1397,7 @@ loopSwitchRegClass:
         goto loopSwitchRegClass;
       }
     }
-switchD_00129ce4_caseD_0:
+nextSourceSlot:
     if ((1 < loopIndex3) || (inst3 = inst3 + 6, 1 < loopIndex2)) {
       return 0;
     }

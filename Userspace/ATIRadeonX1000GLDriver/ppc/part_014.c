@@ -1978,7 +1978,7 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
   planeRegCursor = (undefined4 *)(texUnit * 0x10 + programBuilder + 0x348);
   do {
     genMode = texGenModes >> (componentShift & 0x3f) & 7;
-    if (genMode == 0) goto switchD_0009696c_default;
+    if (genMode == 0) goto nextTexCoordComponent;
     srcFileTable = *(undefined4 **)(programBuilder + 0x3ec);
     glCtx = *(int *)(programBuilder + 0x3d4);
     planeReg = *planeRegCursor;
@@ -2006,7 +2006,7 @@ setIssue:
        * &swizzleWordsXYZW_001dbd14 / &DAT_001fa5e8) for the `bctrl` at 0x96a20 - the same 7th / 8th arguments every sibling call through
        * this slot passes - and stores them again as stack words, which is why the same-block count stopped at r8 */
       (**(code **)(((unsigned char *)0x000012e4) + glCtx))(programBuilder,genDstFile,genDstReg,maskCursor,constFile,planeReg,&swizzleWordsXYZW_001dbd14,&DAT_001fa5e8,iVarSa,iVarSb,&swizzleWordsXYZW_001dbd14,&DAT_001fa5e8);
-      goto switchD_0009696c_default;
+      goto nextTexCoordComponent;
     case 3:
       texgenSrcReg = *(int *)(programBuilder + 0x4e8);
       genSrcFile = *srcFileTable;
@@ -2050,11 +2050,11 @@ setIssue:
       }
       break;
     default:
-      goto switchD_0009696c_default;
+      goto nextTexCoordComponent;
     }
     (**(code **)(((unsigned char *)0x000012e8) + glCtx))
               (programBuilder,genDstFile,genDstReg,maskCursor,genSrcFile,texgenSrcReg,&swizzleWordsXYZW_001dbd14,&DAT_001fa5e8);
-switchD_0009696c_default:
+nextTexCoordComponent:
     noTexGen = componentShift != 9;
     maskCursor = maskCursor + 0x10;
     planeRegCursor = planeRegCursor + 1;
@@ -3844,7 +3844,7 @@ int ffvpEmitPointSizeAttenuation(programBuilder, sizeSource, useDistanceSquared)
     attenParamRegCheck = *(int *)(programBuilder + 0x334);
     goto joined_r0x00099f10;
   default:
-    goto switchD_00099ea8_default;
+    goto returnStatus;
   }
   if (attenParamRegCheck == -1) {
     return 2;
@@ -4037,7 +4037,7 @@ setClampMinMax:
   }
   ffvpFreeTempRegister(programBuilder,tempA);
   status = 0;
-switchD_00099ea8_default:
+returnStatus:
   return status;
 }
 

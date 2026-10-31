@@ -845,7 +845,7 @@ int ildisPrintRegisterType(disassembler, registerTypeCode, passThroughR5, fmtArg
   char *registerTypeText;
   
   if (0x20 < registerTypeCode) {
-switchD_000dcf24_caseD_7:
+printInvalidRegType:
     registerTypeText = "!!!invalidRegType!!!";
     *disassembler = *disassembler + 1;
     goto callIldisAppendf;
@@ -875,7 +875,7 @@ switchD_000dcf24_caseD_7:
     return;
   case 7:
   case 0x1a:
-    goto switchD_000dcf24_caseD_7;
+    goto printInvalidRegType;
   case 8:
     ildisAppendf(disassembler,"vBaryCoord",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdcf00);
     return;
@@ -1727,7 +1727,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
     fmtArgR9 = 0;
     switch(opcode) {
     default:
-      goto switchD_000ddc1c_caseD_0;
+      goto printUnknownOpcode;
     case 1:
       mnemonic = "abs";
       ildisAppendIndentedf(disassembler,disassembler[0x87],"abs",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -3204,7 +3204,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
     }
   }
   else {
-switchD_000ddc1c_caseD_0:
+printUnknownOpcode:
     *disassembler = *disassembler + 1;
     ildisAppendf(disassembler,"!!!unknownOpcode!!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
     result = 1;

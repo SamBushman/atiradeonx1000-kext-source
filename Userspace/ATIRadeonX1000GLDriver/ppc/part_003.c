@@ -873,7 +873,7 @@ int _gldAllocVertexBuffer(ctx, bufferKind, sizeInOut)
   }
   switch(bufferKind & 0x7fff) {
   default:
-    goto LAB_0001b494;
+    goto returnZero;
   case 1:
     kernelKind = 9;
     break;
@@ -926,7 +926,7 @@ loopSetStructIn0:
     requestedSize = _io_connect_method_structureI_structureO
                       (*(undefined4 *)(ctx + GLD_connect),10,&structIn0,0x14,&chunk,&structOutSize);
     if (requestedSize != 0) {
-LAB_0001b494:
+returnZero:
       return 0;
     }
     refCountSlot = (int *)(chunkMemory + 0x10);
@@ -2657,7 +2657,7 @@ int gld_validateVertexArrayStreams(vertexArray, updateMode)
   nothingPending = pendingMask == 0;
   attrIndex = 0;
   loopIndex = 0;
-LAB_0001dae4:
+streamScanLoop:
   do {
     while (nothingPending) {
       availableMask = *(uint *)(arrayDesc + 0x300);
@@ -2719,12 +2719,12 @@ LAB_0001dae4:
             }
             nothingPending = pendingMask == 0;
             *attrEnabledFlag = 0;
-            goto LAB_0001dae4;
+            goto streamScanLoop;
           }
         }
         nothingPending = pendingMask == 0;
         *attrEnabledFlag = 0;
-        goto LAB_0001dae4;
+        goto streamScanLoop;
       }
     }
 setAttrIndex:
@@ -4340,7 +4340,7 @@ checkEngineObjects:
       ((!lowMaskUnset || !highMaskUnset &&
        ((*(uint *)(arrayDesc + 0x300) & ~*(uint *)(arrayDesc + 0x308)) != 0 ||
         (controlMaskHigh & ~*(uint *)(arrayDesc + 0x30c)) != 0)))) || (unsupportedMode)) {
-switchD_0001ffbc_default:
+clearStreamCacheValidFlag:
     *(undefined1 *)(glContext + 0x24e4) = 0;
   }
   else {
@@ -4412,11 +4412,11 @@ checkProgramVertexInfo:
               hwAttrId = (attrControlWord & 1) + 0x28;
               break;
             default:
-              goto switchD_0001ffbc_default;
+              goto clearStreamCacheValidFlag;
             }
           }
         }
-        if (hwAttrId == 0x30) goto switchD_0001ffbc_default;
+        if (hwAttrId == 0x30) goto clearStreamCacheValidFlag;
         if (hwAttrId < 0x10) {
           attrControlWord = *(uint *)(arrayDesc + 0x304);
         }

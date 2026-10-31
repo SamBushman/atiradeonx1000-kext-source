@@ -21,7 +21,7 @@ int Inst__shiftTargetField(ctx, inst, targetFieldDelta, unusedArg4, laneMask, pa
   uint writeMaskOut [5];
   
   *(int *)(pass + 0x1ac) = *(int *)(pass + 0x1ac) + 1;
-LAB_001589b0:
+shiftLoop:
   do {
     vcall64Result = (**(code **)(*inst + 100))(inst);
     if (vcall64Result == 0) {
@@ -57,7 +57,7 @@ loopSetInstFlags:
         instFlags = inst[5];
         if (((instFlags & 2) == 0) && ((instFlags & 0x200) == 0)) {
           inst = (int *)IRInst__getOperandSource(inst,1);
-          goto LAB_001589b0;
+          goto shiftLoop;
         }
         targetField = inst[0x49];
       }
@@ -904,7 +904,7 @@ int Inst__foldCompareChain_00159b58(node, allowFold, pass)
                 compareResultB = (uint)(constantD0 <= constantC0);
                 break;
               default:
-                goto switchD_0015a394_default;
+                goto returnZero;
               }
               operandRecord = IRInst__getOperandRecord(sourceDef,1);
               operandSelect = *(undefined4 *)(operandRecord + 0x10);
@@ -973,7 +973,7 @@ int Inst__foldCompareChain_00159b58(node, allowFold, pass)
       }
     }
   }
-switchD_0015a394_default:
+returnZero:
   return 0;
 }
 
@@ -1393,7 +1393,7 @@ loopCheckOperandIndex4:
                     Block__insertInstAfter(*(undefined4 *)(*chainEndSlotC + 0x158),*chainEndSlotC,newMul);
                     if (*chainHeadSlotB == *chainEndSlotA) {
                       newSource3 = (int *)*chainEndSlotC;
-LAB_0015b134:
+callNewSourceVfnC:
                       (**(code **)(*newSource3 + 0xc))(newSource3,1,*(undefined4 *)(pass + 8));
                       inst = IRInst__create(0x12,*(undefined4 *)(pass + 8));
                       sourceDef = IRInst__getOperandSource(*chainEndSlotC,3);
@@ -1431,7 +1431,7 @@ loopSetSourceDef:
                     }
                     else {
                       newSource3 = (int *)*chainEndSlotC;
-                      if ((int *)*chainHeadSlotC == newSource3) goto LAB_0015b134;
+                      if ((int *)*chainHeadSlotC == newSource3) goto callNewSourceVfnC;
                       compilerCtx = *(undefined4 *)(pass + 8);
                       staleArg4 = 1;
                       IRInst__setOperandSource(newMul,2,newSource3,1,compilerCtx);
@@ -6357,7 +6357,7 @@ int Inst__hoistScalarMulOutOfDot(consumer, consumerSrcIndex, inst, program)
           isSplatResult = SelectWord__isSplat(src1SelectWord);
           if (isSplatResult == 0) {
             isSplatResult = SelectWord__isSplat(src2SelectWord);
-            if (isSplatResult == 0) goto LAB_00163950;
+            if (isSplatResult == 0) goto endOfLoopBody;
             scalarDef = IRInst__getOperandSource(mulInst,2);
             vectorDef = IRInst__getOperandSource(mulInst,1);
             scalarOperandIndex = 2;
@@ -6475,7 +6475,7 @@ setMulOperandRecord:
           result = 1;
         }
       }
-LAB_00163950: ;
+endOfLoopBody: ;
     }
   }
   else {
@@ -7633,7 +7633,7 @@ int Scheduler__computeBlockRegisterSets(scheduler)
           wordsLeftCopy = wordsLeft;
           if ((liveInCursor[2] | *(uint *)(programOrCount + 8)) == liveInCursor[2]) {
             do {
-              if (wordsLeftCopy + -1 == 0) goto LAB_001655a8;
+              if (wordsLeftCopy + -1 == 0) goto endOfLoopBody;
               setWord = (uint *)(liveInCursorCopy + 3);
               setWord2 = (uint *)(liveOutWordCursor + 0xc);
               liveOutWordCursor = liveOutWordCursor + 4;
@@ -7656,7 +7656,7 @@ int Scheduler__computeBlockRegisterSets(scheduler)
           changed = true;
         }
       }
-LAB_001655a8: ;
+endOfLoopBody: ;
     }
     if (!changed) {
       return;

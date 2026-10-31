@@ -1168,9 +1168,9 @@ loopStoreLaneTable:
                           predicateResult = (**(code **)(*chainInst + 0x24))(chainInst);
                           if ((predicateResult == 0) ||
                              (predicateResult = OpcodeTraits__instFlagBit2(*(undefined4 *)(pass + 8),chainInst),
-                             predicateResult != 0)) goto LAB_0013ae10;
+                             predicateResult != 0)) goto endOfLoopBody;
                         }
-                        if (chainFailed) goto LAB_0013ae10;
+                        if (chainFailed) goto endOfLoopBody;
                         if ((chainInst[5] & 0x200U) == 0) break;
                       }
                     }
@@ -1215,7 +1215,7 @@ loopStoreLaneTable:
                   goto loopStoreLaneTable;
                 }
               }
-LAB_0013ae10: ;
+endOfLoopBody: ;
             }
             nextInst = (int *)inst[2];
           }
@@ -2225,7 +2225,7 @@ loopSetCountBefore:
     *indexStackSlot = 0;
     descending = true;
     countBefore = vecCount;
-LAB_0013c9e0:
+chainScanLoop:
     do {
       if (countBefore == 0) goto code_r0x0013c9e8;
       if (descending) {
@@ -2265,11 +2265,11 @@ LAB_0013c9e0:
 loopSetDescending:
             descending = true;
             countBefore = vecCount;
-            goto LAB_0013c9e0;
+            goto chainScanLoop;
           }
         }
         descending = false;
-        goto LAB_0013c9e0;
+        goto chainScanLoop;
       }
       instTopIndex = countBefore - 1;
       instTopSlotB = (int *)0x0;
@@ -8371,7 +8371,7 @@ int pass_post_pack_insts(packCtx)
                         else {
                           candidateLimitHit = 0x3ff < candidateTotal;
                           candidateTotal = candidateTotal + 1;
-                          if (candidateLimitHit) goto LAB_00146530;
+                          if (candidateLimitHit) goto candidateSelectLoop;
                           newVecSize = vecSize;
                           grownDataC = vecData;
                           if ((vecSize <= candidateCount) && (newVecSize = candidateCount + 1, vecCapacity < newVecSize)) {
@@ -8425,7 +8425,7 @@ int pass_post_pack_insts(packCtx)
       walkNextLink = *(int *)(instWalkNode + 8);
       blockWalkNode = instWalkNode;
     } while (*(int *)(instWalkNode + 8) != 0);
-LAB_00146530:
+candidateSelectLoop:
     do {
       if ((int)candidateCount < 1) goto setBlockWalkNode;
       bestIndex = 0xffffffff;

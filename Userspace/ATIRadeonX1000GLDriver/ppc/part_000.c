@@ -2858,7 +2858,7 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
       values[1] = 0x8367;
       break;
     default:
-      goto switchD_00005c44_caseD_5;
+      goto setReturnCode2722;
     case 6:
     case 7:
     case 8:
@@ -2887,7 +2887,7 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
     values[3] = scalarOut2;
   }
   else {
-switchD_00005c44_caseD_5:
+setReturnCode2722:
     returnCode = 0x2722;
   }
   return returnCode;

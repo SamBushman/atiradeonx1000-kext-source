@@ -625,7 +625,7 @@ loopSetScratchInt23:
     vecPtr = &vecX;
     break;
   default:
-    goto switchD_00025774_caseD_1;
+    goto useIdentityLaneOffsets;
   case 2:
     vecPtr = (float *)((operandWord & 0xffff) * 0x10 +
                        *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + GLD_engineState)));
@@ -691,7 +691,7 @@ loopSetScratchInt23:
       srcWPtr = (dword *)(vecPtr + 3);
       break;
     default:
-      goto switchD_00025774_caseD_1;
+      goto useIdentityLaneOffsets;
     }
     break;
   case 4:
@@ -715,7 +715,7 @@ loopSetScratchInt23:
       vecW[0] = *(float *)(materialRecord + 0x2c);
     }
     else {
-      if (scratchUint20 != 0) goto switchD_00025774_caseD_1;
+      if (scratchUint20 != 0) goto useIdentityLaneOffsets;
       vecX = *(float *)(stateBlockA + scratchInt23) * *(float *)(stateBlockB + scratchInt10);
       vecY = *(float *)(lightRecord + 4) * *(float *)(materialRecord + 4);
       vecZ = *(float *)(lightRecord + 8) * *(float *)(materialRecord + 8);
@@ -765,7 +765,7 @@ loopSetScratchInt23:
       vecW[0] = *(float *)(scratchInt10 + 0x1c);
       goto storeOutConstants;
     default:
-      goto switchD_00025774_caseD_1;
+      goto useIdentityLaneOffsets;
     }
     break;
   case 6:
@@ -794,7 +794,7 @@ loopSetSrcWPtr:
           stateRecord = ((unsigned char *)0x00003980) + operandWord * 0x94;
           goto setSrcWPtr;
         }
-        goto switchD_00025774_caseD_1;
+        goto useIdentityLaneOffsets;
       }
       if (scratchUint20 == 2) {
         engineState = *(int *)(ctx + GLD_engineState);
@@ -806,7 +806,7 @@ loopSetSrcWPtr2:
         srcZPtr = (dword *)(stateRecord + engineState + 0x1c);
       }
       else {
-        if (scratchUint20 != 3) goto switchD_00025774_caseD_1;
+        if (scratchUint20 != 3) goto useIdentityLaneOffsets;
         engineState = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x000039e0) + operandWord * 0x94;
 loopSetSrcWPtr3:
@@ -844,7 +844,7 @@ loopSetSrcWPtr3:
         goto loopSetSrcWPtr3;
       }
     }
-    goto switchD_00025774_caseD_1;
+    goto useIdentityLaneOffsets;
   case 9:
     stateRowPtr = *(int *)(ctx + GLD_engineState) + (operandWord & 0x1f) * 0x7c;
     vecPtr = (float *)(((unsigned char *)0x000031c0) + stateRowPtr + 4);
@@ -919,7 +919,7 @@ setOperandIndex:
   outConstants = outConstants + 4;
   if (operandsLeft == operandIndex) goto loopSetScratchFloat3;
   goto loopSetI2dMagic;
-switchD_00025774_caseD_1:
+useIdentityLaneOffsets:
   vecPtr = (float *)0x0;
   srcYPtr = ((unsigned char *)0x4);
   srcZPtr = ((unsigned char *)0x8);
@@ -2099,7 +2099,7 @@ int gld_buildVertexStreamCache(stream)
        (*(int *)(*(int *)(engineObjects + 0x14) + 0x120) == 0)) {
       return;
     }
-switchD_00027e30_default:
+markStreamStateDirty:
     *(uint *)(stream + 0x2488) = *(uint *)(stream + 0x2488) | 2;
     *(undefined4 *)(*(int *)(engineObjects + 0x14) + 0x11c) = 0;
     *(undefined4 *)(*(int *)(engineObjects + 0x14) + 0x120) = 0;
@@ -2156,7 +2156,7 @@ checkScratchFlag1:
           attrsLeft = *(int *)(scratchInt16 + 0x1d9e58);
         }
         else {
-          if (*(uint *)(programRecord + 0x1c) <= loopIndex2) goto switchD_00027c3c_default;
+          if (*(uint *)(programRecord + 0x1c) <= loopIndex2) goto nextProgramRecordEntry;
           attrsLeft = (fetchBase + *(int *)(inputMap + scratchInt16)) * 8;
           descriptorWord = *(uint *)(programVertexInfo + attrsLeft);
           scratchPtr17 = (uint *)(programVertexInfo + attrsLeft);
@@ -2185,7 +2185,7 @@ checkScratchFlag1:
               attrsLeft = (*scratchPtr17 & 1) + 0x28;
               break;
             default:
-              goto switchD_00027c3c_default;
+              goto nextProgramRecordEntry;
             }
           }
         }
@@ -2194,7 +2194,7 @@ checkScratchFlag1:
           goto setStreamByteOffset;
         }
       }
-switchD_00027c3c_default:
+nextProgramRecordEntry:
       scratchInt10 = scratchInt10 + -1;
       loopIndex2 = loopIndex2 + 1;
       scratchInt16 = scratchInt16 + 4;
@@ -2225,7 +2225,7 @@ checkScratchFlag2:
   if (scratchFlag2) {
     hwAttrId = *(uint *)(attrByteOffset + 0x1d9e58);
 loopCheckHwAttrId:
-    if (hwAttrId == 0x30) goto switchD_00027e30_default;
+    if (hwAttrId == 0x30) goto markStreamStateDirty;
     scratchUint20 = hwAttrId & 0xffff;
   }
   else {
@@ -2258,7 +2258,7 @@ loopCheckHwAttrId:
           hwAttrId = (*scratchPtr17 & 1) + 0x28;
           break;
         default:
-          goto switchD_00027e30_default;
+          goto markStreamStateDirty;
         }
       }
       goto loopCheckHwAttrId;

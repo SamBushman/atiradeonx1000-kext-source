@@ -3318,12 +3318,12 @@ checkTexImages:
             scratchStack134 = 0;
             if (0x190a < scratchUint27) {
               scratchStack134 = 0;
-              if (scratchUint27 != 0x8049) goto LAB_00032e78;
+              if (scratchUint27 != 0x8049) goto lookupTextureFormat;
               scratchStack134 = 0x4000;
             }
             scratchStack134 = scratchStack134 | 0x2000;
           }
-LAB_00032e78:
+lookupTextureFormat:
           scratchStack64 = &scratchStack158;
           scratchStack138 = 2;
           ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,scratchStack64,&scratchStack214,&scratchStack208,
@@ -9006,7 +9006,7 @@ loopSetStateConstants:
     srcVec = outSlot;
     break;
   default:
-    goto switchD_0003bf70_caseD_1;
+    goto useIdentityLaneOffsets;
   case 2:
     srcVec = (float *)((operandWord & 0xffff) * 0x10 +
                        *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + GLD_engineState)));
@@ -9072,7 +9072,7 @@ loopSetStateConstants:
       srcWPtr = (dword *)(srcVec + 3);
       break;
     default:
-      goto switchD_0003bf70_caseD_1;
+      goto useIdentityLaneOffsets;
     }
     break;
   case 4:
@@ -9096,7 +9096,7 @@ loopSetStateConstants:
       outSlot[3] = *(float *)(materialRecord + 0x2c);
     }
     else {
-      if (scratchUint20 != 0) goto switchD_0003bf70_caseD_1;
+      if (scratchUint20 != 0) goto useIdentityLaneOffsets;
       *outSlot = *(float *)(lightArrayBase + stateConstants) * *(float *)(scratchInt19 + scratchInt11);
       outSlot[1] = *(float *)(lightRecord + 4) * *(float *)(materialRecord + 4);
       outSlot[2] = *(float *)(lightRecord + 8) * *(float *)(materialRecord + 8);
@@ -9146,7 +9146,7 @@ loopSetStateConstants:
       outSlot[3] = *(float *)(scratchInt11 + 0x1c);
       goto setDestVec;
     default:
-      goto switchD_0003bf70_caseD_1;
+      goto useIdentityLaneOffsets;
     }
     break;
   case 6:
@@ -9175,7 +9175,7 @@ loopSetSrcWPtr:
           stateRecord = ((unsigned char *)0x00003980) + operandWord * 0x94;
           goto setSrcWPtr;
         }
-        goto switchD_0003bf70_caseD_1;
+        goto useIdentityLaneOffsets;
       }
       if (scratchUint20 == 2) {
         stateConstants = *(int *)(ctx + GLD_engineState);
@@ -9187,7 +9187,7 @@ loopSetSrcWPtr2:
         srcVec = (float *)(stateRecord + stateConstants + 0x14);
       }
       else {
-        if (scratchUint20 != 3) goto switchD_0003bf70_caseD_1;
+        if (scratchUint20 != 3) goto useIdentityLaneOffsets;
         stateConstants = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x000039e0) + operandWord * 0x94;
 loopSetSrcWPtr3:
@@ -9225,7 +9225,7 @@ loopSetSrcWPtr3:
         goto loopSetSrcWPtr3;
       }
     }
-    goto switchD_0003bf70_caseD_1;
+    goto useIdentityLaneOffsets;
   case 9:
     stateConstants = *(int *)(ctx + GLD_engineState) + (operandWord & 0x1f) * 0x7c;
     srcWPtr = (dword *)(((unsigned char *)0x000031c0) + stateConstants + 0x10);
@@ -9298,7 +9298,7 @@ setDestVec:
   *destVec = *(undefined8 *)outSlot;
   destVec[1] = scratchUint30;
   goto joined_r0x0003b9b0;
-switchD_0003bf70_caseD_1:
+useIdentityLaneOffsets:
   srcYPtr = ((unsigned char *)0x4);
   srcZPtr = ((unsigned char *)0x8);
   srcWPtr = ((unsigned char *)0xc);
@@ -9485,20 +9485,20 @@ int extvsTranslateShaderObject(ctx, shaderObject, hwProgram)
         opcode = *instructionPtr >> 0x12 & 0xff;
         if ((*instructionPtr & 0x3fc0000) == 0x1340000) goto setLoopIndex;
         operandWord = instructionPtr[2];
-        if (0x4d < opcode) goto switchD_0003cbec_caseD_3;
+        if (0x4d < opcode) goto clearScratchFlag2;
         scratchFlag1 = opcode == 0x48;
         if (scratchFlag1) {
           scratchInt17 = hwProgram[0x17];
           goto setScratchInt3;
         }
-        if ((isGLSLShader) && ((operandWord & 0x7000) != 0x3000)) goto switchD_0003cbec_caseD_3;
+        if ((isGLSLShader) && ((operandWord & 0x7000) != 0x3000)) goto clearScratchFlag2;
         scratchUint6 = operandWord >> 0x11 & 7;
         if (scratchUint6 == 1) {
           scratchInt17 = *(int *)((instructionPtr[3] & 0xffff) * 4 + hwProgram[2]);
           goto setScratchInt3;
         }
         if (scratchUint6 != 3) {
-switchD_0003cbec_caseD_3:
+clearScratchFlag2:
           scratchFlag2 = false;
           goto checkHwProgram;
         }
@@ -9532,7 +9532,7 @@ switchD_0003cbec_caseD_3:
           scratchInt17 = (scratchUint6 & 0x1f) + 0x879d;
           break;
         default:
-          goto switchD_0003cbec_caseD_3;
+          goto clearScratchFlag2;
         }
 setScratchInt3:
         scratchInt3 = scratchInt17;
@@ -9551,7 +9551,7 @@ setScratchInt3:
           instructionWord = *scratchPtr21;
           nextInstruction = scratchPtr21 + 2;
           dstIndex = scratchPtr21[1] & 0xffff;
-          if ((isGLSLShader) && ((instructionWord & 0x7000) != 0x3000)) goto switchD_0003cbec_caseD_3;
+          if ((isGLSLShader) && ((instructionWord & 0x7000) != 0x3000)) goto clearScratchFlag2;
           srcRegisterFile = instructionWord >> 0x17 & 7;
           if (srcRegisterFile == 1) {
             scratchUint7 = *(undefined4 *)(dstIndex * 4 + hwProgram[2]);
@@ -9609,7 +9609,7 @@ setScratchInt3:
           glShaderOp2EXT_impl(ctx,0x878a,scratchInt3,sourceSymbols[0],hwProgram[0x18]);
           break;
         default:
-          goto switchD_0003cbec_caseD_3;
+          goto clearScratchFlag2;
         case 4:
           glShaderOp1EXT_impl(ctx,0x8789,scratchInt3,sourceSymbols[0]);
           break;
@@ -9950,7 +9950,7 @@ int gld_emitProgramConstantUpdates(ctx, passThroughArg2, passThroughArg3, operan
     }
   }
   entryCountC = *(int *)(program + 0x808);
-LAB_0003d820:
+constantUpdateLoop:
   while( true ) {
     if (program + entryCountC * 8 <= entryCursorB) {
       *(undefined4 **)(ctx + GLD_streamCurrent) = cmdCursor;
@@ -10044,7 +10044,7 @@ loopSetStateConstants:
     srcVec = outSlot;
     break;
   default:
-    goto switchD_0003de14_caseD_1;
+    goto useIdentityLaneOffsets;
   case 2:
     srcVec = (float *)((operandWord & 0xffff) * 0x10 +
                        *(int *)(((unsigned char *)0x00004308) + *(int *)(ctx + GLD_engineState)));
@@ -10110,7 +10110,7 @@ loopSetStateConstants:
       srcWPtr = (dword *)(srcVec + 3);
       break;
     default:
-      goto switchD_0003de14_caseD_1;
+      goto useIdentityLaneOffsets;
     }
     break;
   case 4:
@@ -10134,7 +10134,7 @@ loopSetStateConstants:
       cmdCursor[6] = *(undefined4 *)(materialRecord + 0x2c);
     }
     else {
-      if (cacheLineAddr != 0) goto switchD_0003de14_caseD_1;
+      if (cacheLineAddr != 0) goto useIdentityLaneOffsets;
       *outSlot = *(float *)(lightArrayBase + stateConstants) * *(float *)(scratchInt12 + scratchInt17);
       cmdCursor[4] = *(float *)(lightRecord + 4) * *(float *)(materialRecord + 4);
       cmdCursor[5] = *(float *)(lightRecord + 8) * *(float *)(materialRecord + 8);
@@ -10184,7 +10184,7 @@ loopSetStateConstants:
       cmdCursor[6] = *(undefined4 *)(scratchInt17 + 0x1c);
       goto setScratchUint37;
     default:
-      goto switchD_0003de14_caseD_1;
+      goto useIdentityLaneOffsets;
     }
     break;
   case 6:
@@ -10213,7 +10213,7 @@ loopSetSrcWPtr:
           stateRecord = ((unsigned char *)0x00003980) + cacheLineAddr * 0x94;
           goto setSrcWPtr;
         }
-        goto switchD_0003de14_caseD_1;
+        goto useIdentityLaneOffsets;
       }
       if (cmdEndAligned == 2) {
         stateConstants = *(int *)(ctx + GLD_engineState);
@@ -10225,7 +10225,7 @@ loopSetSrcWPtr2:
         srcVec = (float *)(stateRecord + stateConstants + 0x14);
       }
       else {
-        if (cmdEndAligned != 3) goto switchD_0003de14_caseD_1;
+        if (cmdEndAligned != 3) goto useIdentityLaneOffsets;
         stateConstants = *(int *)(ctx + GLD_engineState);
         stateRecord = ((unsigned char *)0x000039e0) + cacheLineAddr * 0x94;
 loopSetSrcWPtr3:
@@ -10263,7 +10263,7 @@ loopSetSrcWPtr3:
         goto loopSetSrcWPtr3;
       }
     }
-    goto switchD_0003de14_caseD_1;
+    goto useIdentityLaneOffsets;
   case 9:
     stateConstants = *(int *)(ctx + GLD_engineState) + (operandWord & 0x1f) * 0x7c;
     srcWPtr = (dword *)(((unsigned char *)0x000031c0) + stateConstants + 0x10);
@@ -10340,8 +10340,8 @@ setScratchUint37:
   entryCursorB = entryCursorB + 8;
   scratchPtr22[1] = scratchUint37;
   *scratchPtr22 = scratchUint35;
-  goto LAB_0003d820;
-switchD_0003de14_caseD_1:
+  goto constantUpdateLoop;
+useIdentityLaneOffsets:
   srcYPtr = ((unsigned char *)0x4);
   srcZPtr = ((unsigned char *)0x8);
   srcWPtr = ((unsigned char *)0xc);

@@ -540,7 +540,7 @@ setSelectMethod2:
                     this[0x20] = slotIndex | rgbUsedMaskOld;
                     this[0x21] = slotIndex | usedMaskOld;
                     slotIter[0xe] = sourceRegister;
-                    goto LAB_001999e8;
+                    goto callSelectSourceVfnF4;
                   }
                   moreSlots = slotIndex != 3;
                   slotWordPtr = slotWordPtr + 1;
@@ -548,7 +548,7 @@ setSelectMethod2:
                   slotIter = slotIter + 1;
                 } while (moreSlots);
                 stagedArg4 = (int *)((int)((unsigned char *)0x0) + 3);
-LAB_001999e8:
+callSelectSourceVfnF4:
                 (**(code **)(*this + 0xf4))(this,srcIdx,rgbSelect,rgbMod,stagedArg4,swizzle);
                 selectMethod = *(code **)(*this + 0xf8);
 joined_r0x00199c90:

@@ -3441,7 +3441,7 @@ int ValueKey__simplifyModifiersAndAddressing(key)
             if ((sourceKindTest == 0) || (!negateAbsIsNoOp)) {
 loopSetLoopPtr8:
               loopPtr8 = *(int **)(key + 0xb0);
-              goto LAB_00180a14;
+              goto endOfLoopBody;
             }
             loopPtr8 = *(int **)(key + 0xb0);
             absIsNoOp = false;
@@ -3468,7 +3468,7 @@ loopSetLoopPtr8:
         loopPtr8 = *(int **)(key + 0xb0);
       }
     }
-LAB_00180a14: ;
+endOfLoopBody: ;
   }
   optionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(key + 0x238),10);
   if (optionEnabled != 0) {

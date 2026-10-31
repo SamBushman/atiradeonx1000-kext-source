@@ -3245,7 +3245,7 @@ int ildisPrintResultModifiers(disassembler, resultModifierWord, passThroughR5, f
     fmtArgR9 = 0;
     switch(shiftCode) {
     case 0:
-      goto switchD_000daebc_caseD_0;
+      goto printInvalidShift;
     case 1:
       suffixText = "_x2";
       break;
@@ -3266,7 +3266,7 @@ int ildisPrintResultModifiers(disassembler, resultModifierWord, passThroughR5, f
     }
   }
   else {
-switchD_000daebc_caseD_0:
+printInvalidShift:
     suffixText = "!!!invalidShift!!!";
     *disassembler = *disassembler + 1;
   }

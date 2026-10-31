@@ -569,7 +569,7 @@ int SelectWord__canonicalize(outSelect, selectWord)
       laneCursor = laneCursor + 1;
       loopCounter = loopCounter + -1;
     } while (loopCounter != 0);
-    if (!hasUnusedLane) goto LAB_000f35b4;
+    if (!hasUnusedLane) goto storeLane0;
   }
   if (usedLanesAgree) {
     *outSelect = (DAT_001aa818)[splatComponent];
@@ -591,7 +591,7 @@ int SelectWord__canonicalize(outSelect, selectWord)
     (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = CONCAT31((*(unsigned char *)((unsigned char *)ghidra_home + 4)),3);
     lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   }
-LAB_000f35b4:
+storeLane0:
   (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = lane0Byte;
   *outSelect = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   return;

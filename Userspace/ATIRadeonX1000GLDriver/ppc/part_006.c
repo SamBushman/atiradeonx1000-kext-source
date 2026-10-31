@@ -6883,7 +6883,7 @@ int fragmentProgramToIL(translator)
   translator[8] = program[4] + program[0xc] + 1;
   programKind = *program;
   if ((programKind != 0x8804) && (programKind != 0x8b30)) {
-switchD_00049180_caseD_0:
+returnTranslatorStatus:
     if (translator[9] != 0) {
       return translator[9];
     }
@@ -7047,16 +7047,16 @@ loopCheckTranslator:
       attribBinding = *(ushort *)attribEntry;
       if ((attribBinding & 0xf) == 1) {
         *tokenWritePtr = 0x3ff0016;
-switchD_00049180_caseD_1:
+setAttribSourceToken:
         attribSourceToken = ((unsigned char *)0x00160000);
       }
       else {
         *tokenWritePtr = 0x1ff0016;
         switch(attribBinding & 0xf) {
         default:
-          goto switchD_00049180_caseD_0;
+          goto returnTranslatorStatus;
         case 1:
-          goto switchD_00049180_caseD_1;
+          goto setAttribSourceToken;
         case 2:
           attribSourceToken = (undefined *)0x120000;
           break;
@@ -7732,7 +7732,7 @@ setChannelIndex:
           }
         }
         else {
-          if ((*(ushort *)outputEntry & 0xf) != 7) goto switchD_00049180_caseD_0;
+          if ((*(ushort *)outputEntry & 0xf) != 7) goto returnTranslatorStatus;
           translatorFlags = translator[5];
           dstMaskToken = 0x155;
           translator[5] = translatorFlags | 0x40000000;
@@ -8477,7 +8477,7 @@ int gldReleaseProgramEntry(glContext, programEntry)
         do {
           loopIndex = loopIndex + 1;
           searchCountdown = searchCountdown + -1;
-          if (searchCountdown == 0) goto LAB_0004b6a8;
+          if (searchCountdown == 0) goto callProgramEntryReleaseCallback;
         } while (glContextWord1e7c[loopIndex] != programEntry);
       }
       listCount = listCount + -1;
@@ -8495,7 +8495,7 @@ int gldReleaseProgramEntry(glContext, programEntry)
         }
       }
     }
-LAB_0004b6a8:
+callProgramEntryReleaseCallback:
     (**(code **)(glContext + 0x18))(*(undefined4 *)(((unsigned char *)0x000036c0) + programEntry));
     if (programEntry != stateBlock + 0x124) {
       *(undefined4 *)(((unsigned char *)0x000036c0) + programEntry) = 0;

@@ -1454,7 +1454,7 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   operandPtrTable[4] = (int *)PTR_DAT_001e8b70;
   operandPtrTable[5] = (int *)PTR_DAT_001e8b70;
   uniqueCount = 0;
-LAB_000f6f18:
+uniqueOperandLoop:
   do {
     sortPassIndex = uniqueCount;
     *(char *)((int)&laneUniqueIndex + laneIndex) = (char)sortPassIndex;
@@ -1712,7 +1712,7 @@ setOperandRecordB:
       while ((*operandPtrTable[loopCounter + 3] != *candidateOperand || (operandPtrTable[loopCounter + 3][1] != candidateOperand[1]))) {
         loopCounter = loopCounter + 1;
         if (uniqueCount < loopCounter) goto loopSetLanesLeft;
-        if (loopCounter == uniqueCount) goto LAB_000f6f18;
+        if (loopCounter == uniqueCount) goto uniqueOperandLoop;
       }
       *(char *)((int)&laneUniqueIndex + previousLane + 1) = (char)loopCounter;
       goto loopSetLanesLeft;
@@ -4244,7 +4244,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
     bVar3 = true;
   }
   if ((registerType == 0x20) && (bVar2 = true, (descriptorWord & 0x1800000) == 0x1000000)) {
-LAB_000fb800:
+releaseTempRegister:
     pdVar25 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(program + 8) + 0x3ac) = pdVar25;
     descriptorWord = *descriptor;
@@ -4388,7 +4388,7 @@ LAB_000fb800:
     if (((undefined4 *)(descriptorWord & 0x3f0000) == (undefined4 *)0x1c0000) ||
        ((undefined4 *)(descriptorWord & 0x3f0000) == 0x001b0000)) {
       bVar2 = false;
-      goto LAB_000fb800;
+      goto releaseTempRegister;
     }
     pdVar25 = (dword *)0x0;
     if ((descriptorWord & 0x2000000) != 0) {
@@ -5710,7 +5710,7 @@ int Program__translateILStream(program, ilReader)
   ((int (*)())Program__loadDefaultConstants)(program,ilReader);
   outputSlotCounter = (uint *****)0x0;
   extraSeen = 0;
-switchD_000fdaf0_caseD_2:
+readNextInstruction:
   nextInstOk = ILReader__nextInstruction(ilReader);
   if (nextInstOk == 0) {
 code_r0x00103c40:
@@ -5817,14 +5817,14 @@ code_r0x000fed00:
               } while (firstRegisterIndex < *(int *)(program + 0x3ec));
             }
           }
-          goto switchD_000fdaf0_caseD_2;
+          goto readNextInstruction;
         }
         if (registerFile2 < 0x16) {
-          if (registerFile2 != 0x14) goto switchD_000fdaf0_caseD_2;
+          if (registerFile2 != 0x14) goto readNextInstruction;
         }
         else if (registerFile2 != 0x1a) {
           if (registerFile2 == 0x24) goto code_r0x000fed00;
-          goto switchD_000fdaf0_caseD_2;
+          goto readNextInstruction;
         }
         *(int *)(program + 1000) = firstRegisterIndex;
         *(undefined4 *)(program + 0x3e4) = 1;
@@ -5839,7 +5839,7 @@ code_r0x000fed00:
         }
       }
     default:
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x16:
     case 0x18:
       if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x2000) != 0) {
@@ -5870,7 +5870,7 @@ code_r0x000fed00:
         *(uint *)(interpRecord + 0x140) = (uint)firstTokenWord >> 0x19 & 1;
         *(undefined4 *)(interpRecord + 0x144) = registerFile;
       }
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x17:
       laneKindValue = (uint ******)Program__lookupTable8b68(program,(uint)*tokenWords >> 0x10 & 0x1f);
       interpIndexValue = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
@@ -5927,7 +5927,7 @@ code_r0x000fed00:
         notLastIteration = loopCounterC != 3;
         loopCounterC = loopCounterC + 1;
       } while (notLastIteration);
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x19:
       ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);
       firstTokenWord = *tokenWords;
@@ -5945,7 +5945,7 @@ code_r0x000fed00:
       if (interpKind != 0) {
         *(int *)(ilRegisterRecordOffset + *(int *)(program + 0x78) + 4) = interpKind;
       }
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x1a:
       DListNode__init(&templateModeWord);
       firstTokenWord = *tokenWords;
@@ -6026,7 +6026,7 @@ code_r0x000fed00:
       }
       templateModeWord = (uint *****)(PTR_DAT_001e8b48 + 8);
       local_118 = (uint ****)templateModeWord;
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x1b:
       laneKind = Program__lookupTable8b68(program,(uint)*tokenWords >> 0x10 & 0x1f);
       interpIndexField = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
@@ -6072,7 +6072,7 @@ code_r0x000fed00:
         notLastIteration = loopCounterC != 3;
         loopCounterC = loopCounterC + 1;
       } while (notLastIteration);
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x1c:
     case 0x1d:
     case 0x79:
@@ -6096,7 +6096,7 @@ code_r0x000fed00:
       }
       argR7 = (uint ******)&templateModeWord;
       ((int (*)())Program__createConstantVReg)(program,(uint)destOperandToken >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x42:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
       instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
@@ -6167,7 +6167,7 @@ code_r0x000fed00:
       ((int (*)())Program__appendInst)(program,movInst,currentBlock);
       IRInst__setHardwareRegisterAndAdd(movInst,program,0x2c,argR6);
       extraSeen = 1;
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x43:
       firstTokenWord = *tokenWords;
       argR6 = (uint ******)*ilReader[0x19];
@@ -6204,7 +6204,7 @@ code_r0x000fed00:
       argR8 = (uint ******)currentBlock;
       (**(code **)(**(int **)(compiler + 0x30c) + 0x4c))
                 (*(int **)(compiler + 0x30c),program,(uint)firstTokenWord >> 0x10 & 0x3f);
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x6e:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
       trailingToken = ilReader[(int)ilReader[0x16] + 0x23];
@@ -6227,7 +6227,7 @@ code_r0x000fed00:
       Program__insertBlockAfter(program,previousBlock,newBlockC);
       Block__connect(previousBlock,currentBlock);
       previousBlock = currentBlock;
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x72:
       storedObject = (int *)Arena__alloc(*(undefined4 *)(compiler + 0x378),0xc);
       storedObject[1] = 0;
@@ -6366,16 +6366,16 @@ code_r0x000fed00:
           ((int (*)())Program__appendInst)(program,instObject,*(undefined4 *)(program + 0x3a0));
         }
       }
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x78:
       *(uint *)(program + 0x400) = (uint)*tokenWords >> 0x10 & 0x3fff;
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x7a:
       *(uint *)(program + 0x3f8) = (uint)*tokenWords >> 0x10 & 0x3fff;
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x7c:
       *(uint *)(program + 0x3fc) = (uint)*tokenWords >> 0x10 & 0x3fff;
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x7d:
       destTokenPtr = *ilReader[0x19];
       if ((*(uint *)(program + 0x30) & 0x4000) == 0) {
@@ -6450,7 +6450,7 @@ code_r0x000fed00:
         argR8 = (uint ******)0x0;
         (**(code **)(*hwDescription + 0x54))(hwDescription,argR6,(uint)*tokenWords >> 0x10 & 0x3fff);
       }
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x7e:
       declKindField = (uint)*tokenWords >> 0xe & 0x1f;
       laneKindValue = (uint ******)Program__lookupTable8b68(program,declKindField);
@@ -6596,7 +6596,7 @@ code_r0x000feeb8:
           goto code_r0x000ff070;
         }
       }
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x80:
       ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);
       interpMode = (uint)*tokenWords >> 0x18 & 0xf;
@@ -6611,7 +6611,7 @@ code_r0x000feeb8:
       if (interpMode != 0) {
         *(uint *)(ilRegisterRecordOffset + *(int *)(program + 0x78) + 4) = interpMode;
       }
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x81:
     case 0x84:
     case 0x85:
@@ -6636,7 +6636,7 @@ code_r0x000feeb8:
         *(undefined4 *)(operandRecord + 0x10) = 0;
         ((int (*)())Program__appendInst)(program,createdInstB,currentBlock);
       }
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0x87:
       ilRegisterIndex2 = (uint)*(byte *)((int)ilReader + 0x8d);
       firstTokenWord = *tokenWords;
@@ -6689,7 +6689,7 @@ code_r0x000feeb8:
       IRInst__setOperandRef(ppppppuVar49,1,virtualRegister);
 code_r0x000ff070:
       ((int (*)())Program__appendInst)(program,ppppppuVar49,currentBlock);
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0xbe:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
       instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
@@ -6760,7 +6760,7 @@ code_r0x000ff070:
         nextListNode = *(int *)(flushNodeC + 8);
       }
       ((int (*)())Program__appendInst)(program,instOpcode0xb4,currentBlock);
-      goto switchD_000fdaf0_caseD_2;
+      goto readNextInstruction;
     case 0xe3:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
       instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
@@ -6781,9 +6781,9 @@ code_r0x000ff070:
     }
 code_r0x000febe0:
     *vectorSlotC = (int)storedObject;
-    goto switchD_000fdaf0_caseD_2;
+    goto readNextInstruction;
   default:
-    goto switchD_000fdaf0_caseD_2;
+    goto readNextInstruction;
   case 4:
     isTranslationKind7 = false;
     break;
@@ -6868,10 +6868,10 @@ code_r0x001005f4:
     savedCurrentBlock = (uint ******)currentBlock;
     opcodeTemplateTable = (uint ******)PTR_DAT_001e8bd4;
     templateToken = *(uint *)(templateBase + (int)templateCursor * 4);
-    if (0x71 < templateToken) goto switchD_0010061c_caseD_0;
+    if (0x71 < templateToken) goto setOpcodeFallthrough;
     switch(templateToken) {
     default:
-      goto switchD_0010061c_caseD_0;
+      goto setOpcodeFallthrough;
     case 1:
     case 0x13:
     case 0x33:
@@ -7259,7 +7259,7 @@ joined_r0x00103afc:
         templateBase = *stackElement;
         goto joined_r0x00103afc;
       }
-      goto switchD_0010061c_caseD_0;
+      goto setOpcodeFallthrough;
     case 0x2c:
       opcodeTableBase = 0x1dd5d8;
       if ((UNK_001dc660 == 0) || (ilOpcode == UNK_001dc660)) {
@@ -8659,8 +8659,8 @@ code_r0x001002dc:
     pendingInst = flushNodeC;
     nextListNode = *(int *)(flushNodeC + 8);
   }
-  goto switchD_000fdaf0_caseD_2;
-switchD_0010061c_caseD_0:
+  goto readNextInstruction;
+setOpcodeFallthrough:
   opcodeFallthrough = 1;
 code_r0x00103b34:
   if (workInst != (uint ******)0x0) {
@@ -8694,7 +8694,7 @@ code_r0x00103bb0:
     Arena__free(vectorAllocation2[4],vectorAllocation2[3]);
     Arena__free(*vectorAllocation2,vectorAllocation2);
   }
-  goto switchD_000fdaf0_caseD_2;
+  goto readNextInstruction;
 }
 #undef local_14c
 #undef local_164

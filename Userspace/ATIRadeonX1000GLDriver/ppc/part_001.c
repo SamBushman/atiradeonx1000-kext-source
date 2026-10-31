@@ -1019,7 +1019,7 @@ loopSetGreenSize:
     nextCursor = attribCursor + 1;
     switch(*attribCursor) {
     default:
-      goto LAB_000089f0;
+      goto returnFailure10000;
     case 2:
       attribValue = *nextCursor;
       nextCursor = attribCursor + 2;
@@ -1226,7 +1226,7 @@ loopSetGreenSize:
     }
     attribCursor = nextCursor;
   } while ((int)nextCursor - (int)attribList < 0x94);
-LAB_000089f0:
+returnFailure10000:
   return 10000;
 }
 
