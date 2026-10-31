@@ -2744,7 +2744,7 @@ int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this
       __ZNSs7reserveEm(this,capacity + (capacity >> 1));
       textChars = *(int *)(text + 4);
     }
-    *(undefined1 *)(textChars + *(int *)(textChars + -0xc)) = *DAT_a7b7b720;
+    *(undefined1 *)(textChars + *(int *)(textChars + -0xc)) = *stringTerminalPtr_a7b7b720;
     textPtr = *(char **)(text + 4);
     length = _strlen(textPtr);
     __ZNSs6appendEPKcm(this,textPtr,length);
@@ -2752,7 +2752,7 @@ int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this
   }
   stdFiles = PTR_DAT_a7b7c0bc;
   if ((targetFlags & 2) != 0) {
-    *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7b720;
+    *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *stringTerminalPtr_a7b7b720;
     _fprintf((FILE *)(stdFiles + 0x58),"%s",*(undefined4 *)(text + 4));
     return;
   }

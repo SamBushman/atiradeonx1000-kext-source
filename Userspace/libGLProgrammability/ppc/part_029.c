@@ -334,7 +334,7 @@ int TType__copyType(this, copyOf, remapper)
   *(undefined4 *)(this + 0xc) = 0;
   srcFieldName = *(int *)(copyOf + 0xc);
   if (srcFieldName != 0) {
-    *(undefined1 *)(*(int *)(srcFieldName + 4) + *(int *)(*(int *)(srcFieldName + 4) + -0xc)) = *DAT_a7b7ba80;
+    *(undefined1 *)(*(int *)(srcFieldName + 4) + *(int *)(*(int *)(srcFieldName + 4) + -0xc)) = *stringTerminalPtr_a7b7ba80;
     srcChars = *(char **)(srcFieldName + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringAlloc = (void *)TPoolAllocator__allocate(poolAllocator,8);
@@ -350,7 +350,7 @@ int TType__copyType(this, copyOf, remapper)
   *(undefined4 *)(this + 0x10) = 0;
   srcTypeName = *(int *)(copyOf + 0x10);
   if (srcTypeName != 0) {
-    *(undefined1 *)(*(int *)(srcTypeName + 4) + *(int *)(*(int *)(srcTypeName + 4) + -0xc)) = *DAT_a7b7ba80;
+    *(undefined1 *)(*(int *)(srcTypeName + 4) + *(int *)(*(int *)(srcTypeName + 4) + -0xc)) = *stringTerminalPtr_a7b7ba80;
     srcChars = *(char **)(srcTypeName + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringAlloc = (void *)TPoolAllocator__allocate(poolAllocator,8);
@@ -366,7 +366,7 @@ int TType__copyType(this, copyOf, remapper)
   *(undefined4 *)(this + 0x14) = 0;
   srcMangled = *(int *)(copyOf + 0x14);
   if (srcMangled != 0) {
-    *(undefined1 *)(*(int *)(srcMangled + 4) + *(int *)(*(int *)(srcMangled + 4) + -0xc)) = *DAT_a7b7ba80;
+    *(undefined1 *)(*(int *)(srcMangled + 4) + *(int *)(*(int *)(srcMangled + 4) + -0xc)) = *stringTerminalPtr_a7b7ba80;
     srcChars = *(char **)(srcMangled + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringAlloc = (void *)TPoolAllocator__allocate(poolAllocator,8);

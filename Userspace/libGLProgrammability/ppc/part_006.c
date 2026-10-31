@@ -549,7 +549,7 @@ int TVariable__dump(this, infoSink)
   symbolName = *(int *)(this + 4);
   sinkBase = infoSink + 8;
   nameData = *(int *)(symbolName + 4);
-  *(undefined1 *)(nameData + *(int *)(nameData + -0xc)) = *DAT_a7b7ba80;
+  *(undefined1 *)(nameData + *(int *)(nameData + -0xc)) = *stringTerminalPtr_a7b7ba80;
   __ZN13TInfoSinkBase6appendEPKc(sinkBase,*(char **)(symbolName + 4));
   __ZN13TInfoSinkBase6appendEPKc(sinkBase,": ");
   qualifierString = (char *)getQualifierString(*(uint *)(this + 0x30) >> 0x19);
@@ -575,11 +575,11 @@ int TFunction__dump(this, infoSink)
   int symbolName;
   unsigned char *sinkBase;
   
-  terminalPtr = DAT_a7b7ba80;
+  terminalPtr = stringTerminalPtr_a7b7ba80;
   symbolName = *(int *)(this + 4);
   sinkBase = infoSink + 8;
   nameData = *(int *)(symbolName + 4);
-  *(undefined1 *)(nameData + *(int *)(nameData + -0xc)) = *DAT_a7b7ba80;
+  *(undefined1 *)(nameData + *(int *)(nameData + -0xc)) = *stringTerminalPtr_a7b7ba80;
   __ZN13TInfoSinkBase6appendEPKc(sinkBase,*(char **)(symbolName + 4));
   __ZN13TInfoSinkBase6appendEPKc(sinkBase,": ");
   basicString = (char *)TType__getBasicString(*(uint *)(this + 0x40) >> 0x13 & 0x3f);
@@ -834,7 +834,7 @@ int __ZN7TSymbolC2ERKS_(this, symbol)
   srcName = *(int *)(symbol + 4);
   *(undefined ***)this = &PTR___ZN7TSymbolD1Ev_a7b7d568;
   srcNameData = *(int *)(srcName + 4);
-  *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *DAT_a7b7ba80;
+  *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *stringTerminalPtr_a7b7ba80;
   nameText = *(char **)(srcName + 4);
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   nameMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
@@ -868,7 +868,7 @@ int __ZN7TSymbolC1ERKS_(this, symbol)
   srcName = *(int *)(symbol + 4);
   *(undefined ***)this = &PTR___ZN7TSymbolD1Ev_a7b7d568;
   srcNameData = *(int *)(srcName + 4);
-  *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *DAT_a7b7ba80;
+  *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *stringTerminalPtr_a7b7ba80;
   nameText = *(char **)(srcName + 4);
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   nameMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
@@ -902,7 +902,7 @@ int __ZN7TSymbolC4ERKS_(this, symbol)
   srcName = *(int *)(symbol + 4);
   *(undefined ***)this = &PTR___ZN7TSymbolD1Ev_a7b7d568;
   srcNameData = *(int *)(srcName + 4);
-  *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *DAT_a7b7ba80;
+  *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *stringTerminalPtr_a7b7ba80;
   nameText = *(char **)(srcName + 4);
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   nameMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
@@ -1219,7 +1219,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = emptyRep + 0xc;
-  nulCharPtr = DAT_a7b7ba80;
+  nulCharPtr = stringTerminalPtr_a7b7ba80;
   for (paramIdx = 0; paramIdx < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       paramIdx = paramIdx + 1) {
     paramFinish = *(undefined4 **)((int)this + 0x14);
@@ -1318,7 +1318,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = emptyRep + 0xc;
-  nulCharPtr = DAT_a7b7ba80;
+  nulCharPtr = stringTerminalPtr_a7b7ba80;
   for (paramIdx = 0; paramIdx < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       paramIdx = paramIdx + 1) {
     paramFinish = *(undefined4 **)((int)this + 0x14);
@@ -1417,7 +1417,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = emptyRep + 0xc;
-  nulCharPtr = DAT_a7b7ba80;
+  nulCharPtr = stringTerminalPtr_a7b7ba80;
   for (paramIdx = 0; paramIdx < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       paramIdx = paramIdx + 1) {
     paramFinish = *(undefined4 **)((int)this + 0x14);
@@ -2402,7 +2402,7 @@ setYyruleByteOffset:
       stringData = *(int *)(identifierString + 4);
       emptyText = "";
       msgText2 = "undeclared identifier";
-      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
+      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *stringTerminalPtr_a7b7ba88;
       identifierStringWord4 = *(char **)(identifierString + 4);
       TParseContext__error
                 ((int)parseContext,*(char **)yyvsp,"undeclared identifier",identifierStringWord4,"",staleR8Value,stringData,
@@ -2486,7 +2486,7 @@ setYyruleByteOffset:
         identifierString = *(uint *)(yyvsp + 4);
         picBase = (unsigned char *)0xa7b8374c;
         stringData = *(int *)(identifierString + 4);
-        *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
+        *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *stringTerminalPtr_a7b7ba88;
         TParseContext__error
                   ((int)parseContext,*(char **)yyvsp,"variable expected",*(char **)(identifierString + 4),"",
                    staleR8Value,stringData,identifierString);
@@ -5683,7 +5683,7 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
       identifierString = *(uint *)(yyvsp + 4);
       picBase = (unsigned char *)0xa7b8374c;
       stringData = *(int *)(identifierString + 4);
-      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
+      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *stringTerminalPtr_a7b7ba88;
       TParseContext__error
                 ((int)parseContext,*(char **)yyvsp,"illegal use of type \'void\'",
                  *(char **)(identifierString + 4),"",staleR8Value,stringData,identifierString);
@@ -6869,7 +6869,7 @@ setTypeTmp1BitsOrPubQualifier3:
     typeTmp1Word14Copy = typeTmp1Word14OrStr2Data;
     picBase = (unsigned char *)0xa7b8374c;
     *(undefined4 *)(newType + 0x18) = setStructSizeResult3;
-    typeTmp1Word14OrStr2Data[(int)*(unsigned char **)(typeTmp1Word14OrStr2Data + -0xc)] = *DAT_a7b7ba88;
+    typeTmp1Word14OrStr2Data[(int)*(unsigned char **)(typeTmp1Word14OrStr2Data + -0xc)] = *stringTerminalPtr_a7b7ba88;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     cr0 = (stringMem2 == (void *)0x0) << 1;
@@ -6976,7 +6976,7 @@ setTypeTmp1BitsOrPubQualifier3:
       identifierString = *(uint *)(yyvsp + -0x80);
       stringData = *(int *)(identifierString + 4);
       scratchR7 = "struct";
-      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
+      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *stringTerminalPtr_a7b7ba88;
       scratchR6 = *(char **)(identifierString + 4);
       TParseContext__error
                 ((int)parseContext,*(char **)(yyvsp + -0x84),"redefinition",scratchR6,"struct",newTypeWord10,
@@ -7029,7 +7029,7 @@ setTypeTmp1BitsOrPubQualifier3:
     typeTmp1Word14Copy = typeTmp1Word14OrStr2Data;
     *(undefined4 *)(newType + 0x18) = setStructSizeResult3;
     picBase = (unsigned char *)0xa7b8374c;
-    typeTmp1Word14OrStr2Data[(int)*(unsigned char **)(typeTmp1Word14OrStr2Data + -0xc)] = *DAT_a7b7ba88;
+    typeTmp1Word14OrStr2Data[(int)*(unsigned char **)(typeTmp1Word14OrStr2Data + -0xc)] = *stringTerminalPtr_a7b7ba88;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
     cr0 = (stringMem2 == (void *)0x0) << 1;
@@ -7096,7 +7096,7 @@ setTypeTmp1BitsOrPubQualifier3:
     break;
   case 0xa1:
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
-    for (loopIndex = 0; yyssBase = DAT_a7b7ba88, yyvalNodeReg = yyvalNode, typeTmp3VtableReg = typeTmp3VtableOrPub3Array,
+    for (loopIndex = 0; yyssBase = stringTerminalPtr_a7b7ba88, yyvalNodeReg = yyvalNode, typeTmp3VtableReg = typeTmp3VtableOrPub3Array,
         typeTmp7VtableReg = typeTmp7Vtable[0],
         loopIndex < (uint)(*(int *)(*(uint *)(yyvsp + 0x10) + 8) -
                         *(int *)(*(uint *)(yyvsp + 0x10) + 4) >> 3); loopIndex = loopIndex + 1) {
@@ -7298,7 +7298,7 @@ setYyvalTypeOrFunction2:
     picBase = (unsigned char *)0xa7b8374c;
     currentFunctionObj = *(int **)(scratchR10 + 4);
     msgText = "structure field array size must be a positive integer";
-    *(unsigned char *)((int)currentFunctionObj + currentFunctionObj[-3]) = *DAT_a7b7ba88;
+    *(unsigned char *)((int)currentFunctionObj + currentFunctionObj[-3]) = *stringTerminalPtr_a7b7ba88;
     scratchR6 = *(char **)(scratchR10 + 4);
     errorLine = *(char **)(yyvsp + -0x58);
     goto setScratchR72;
@@ -7679,7 +7679,7 @@ storeParseContext2:
       picBase = (unsigned char *)0xa7b8374c;
       stringData2 = *(int *)(nameString + 4);
       scratchR7 = "";
-      *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *DAT_a7b7ba88;
+      *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *stringTerminalPtr_a7b7ba88;
       TParseContext__error
                 ((int)parseContext,*(char **)yyvsp,"function already has a body",*(char **)(nameString + 4)
                  ,"",staleR8Value,stringData2,nameString);
@@ -7695,7 +7695,7 @@ storeParseContext2:
         nameString = functionSymbol[1];
         stringData2 = *(int *)(nameString + 4);
         scratchR7 = "";
-        *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *DAT_a7b7ba88;
+        *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *stringTerminalPtr_a7b7ba88;
         TParseContext__error
                   ((int)parseContext,*(char **)yyvsp,"function cannot take any parameter(s)",
                    *(char **)(nameString + 4),"",staleR8Value,stringData2,nameString);
@@ -7707,7 +7707,7 @@ storeParseContext2:
         picBase = (unsigned char *)0xa7b8374c;
         stringData2 = *(int *)(nameString + 4);
         scratchR7 = "";
-        *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *DAT_a7b7ba88;
+        *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *stringTerminalPtr_a7b7ba88;
         TParseContext__error
                   ((int)parseContext,*(char **)yyvsp,"function cannot return a value",
                    *(char **)(nameString + 4),"",staleR8Value,stringData2,nameString);
@@ -7928,13 +7928,13 @@ storeParseContext2:
   case 0xd7:
     picBase = (unsigned char *)0xa7b8374c;
     queryResult = (**(code **)(**(int **)((int)parseContext + 0x28) + 0x20))(*(int **)((int)parseContext + 0x28));
-    terminalCharPtr = DAT_a7b7ba88;
+    terminalCharPtr = stringTerminalPtr_a7b7ba88;
     if ((queryResult != 0) && (picBase = (unsigned char *)0xa7b8374c, *(int *)((int)parseContext + 0x2c) == 0)
        ) {
       nameString2 = *(int *)(*(uint *)(yyvsp + -0x48) + 4);
       scratchR7 = "";
       *(unsigned char *)(*(int *)(nameString2 + 4) + *(int *)(*(int *)(nameString2 + 4) + -0xc)) =
-           *DAT_a7b7ba88;
+           *stringTerminalPtr_a7b7ba88;
       TParseContext__error
                 ((int)parseContext,*(char **)(yyvsp + -0x58),"function does not return a value",
                  *(char **)(nameString2 + 4),"",0xa7b8374c,terminalCharPtr,nameString2);
@@ -8194,7 +8194,7 @@ setScratchR10:
   msgText2 = " no such field in structure";
 setPicBase:
   picBase = (unsigned char *)0xa7b8374c;
-  staleR9Value[*(uint *)(staleR9Value + -0xc)] = *DAT_a7b7ba88;
+  staleR9Value[*(uint *)(staleR9Value + -0xc)] = *stringTerminalPtr_a7b7ba88;
   scratchR6 = *(char **)(scratchR10 + 4);
   errorLine2 = *(char **)(yyvsp + -0x2c);
 setScratchR73:

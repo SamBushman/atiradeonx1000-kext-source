@@ -760,7 +760,7 @@ int _GetStrfromTStr()
   cpp = *(int *)PTR__cpp_a7b7c0a4;
   parseContext = *(int *)(cpp + 0x2c);
   tokenData = *(int *)(parseContext + 0x5c);
-  *(undefined1 *)(tokenData + *(int *)(tokenData + -0xc)) = *DAT_a7b7baa4;
+  *(undefined1 *)(tokenData + *(int *)(tokenData + -0xc)) = *stringTerminalPtr_a7b7baa4;
   *(undefined4 *)(cpp + 0x13c) = *(undefined4 *)(parseContext + 0x5c);
   return *(undefined4 *)(*(int *)cppPtr + 0x13c);
 }
@@ -851,7 +851,7 @@ int _GetBehavior(str)
           length = _strlen("\' is not supported");
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
                     (&fullStrAlloc,"\' is not supported",length);
-          terminator = *DAT_a7b7baa4;
+          terminator = *stringTerminalPtr_a7b7baa4;
           *(byte *)(fullStrData + *(int *)(fullStrData + -0xc)) = terminator;
           ((int (*)())_CPPShInfoLogMsg)(fullStrData,r4Out0,length,staleR6,staleR7,staleR8,(uint)terminator);
           refCountPtr = (int *)(fullStrData + -4);
@@ -1063,7 +1063,7 @@ loopSetRefCountPtr:
       length = _strlen("\' is not supported");
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
                 (&fullStrAlloc,"\' is not supported",length);
-      terminator = *DAT_a7b7baa4;
+      terminator = *stringTerminalPtr_a7b7baa4;
       *(byte *)(fullStrData + *(int *)(fullStrData + -0xc)) = terminator;
       ((int (*)())_CPPShInfoLogMsg)(fullStrData,r4Out1,length,staleR6,staleR7,staleR8,(uint)terminator);
       refCountPtr = (int *)(fullStrData + -4);
@@ -1168,7 +1168,7 @@ loopSetRefCountPtr:
       }
       msgText = msgStrData;
       infoSink = *(void **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8);
-      msgStrData[*(int *)(msgStrData + -0xc)] = *DAT_a7b7baa4;
+      msgStrData[*(int *)(msgStrData + -0xc)] = *stringTerminalPtr_a7b7baa4;
       lineNo = _yylineno;
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");

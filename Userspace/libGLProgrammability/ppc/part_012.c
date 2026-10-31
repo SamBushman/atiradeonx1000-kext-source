@@ -1335,7 +1335,7 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             fieldNameString = (**(code **)(*fieldType + 0x1c))
                               (fieldType,(int)callResultPair,operandAArg,operandBArg,isEqualTestArg,leftoverR8,operandSlots[operandSide]);
             *(undefined1 *)(*(int *)(fieldNameString + 4) + *(int *)(*(int *)(fieldNameString + 4) + -0xc)) =
-                 *DAT_a7b7bd9c;
+                 *stringTerminalPtr_a7b7bd9c;
             fieldNameChars = *(unsigned char ***)(fieldNameString + 4);
             length = _strlen(fieldNameChars);
             nameBufferSize = length + 1;
@@ -1723,7 +1723,7 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
             fieldNameString = (**(code **)(*fieldType + 0x1c))
                                (fieldType,operandSlot0Arg,operandPtrArg,allowCopyPropagationArg,leftoverR7,leftoverR8,operandSlots[operandSide]);
             *(undefined1 *)(*(int *)(fieldNameString + 4) + *(int *)(*(int *)(fieldNameString + 4) + -0xc)) =
-                 *DAT_a7b7bd9c;
+                 *stringTerminalPtr_a7b7bd9c;
             fieldNameChars = *(int *)(fieldNameString + 4);
             nameBufferSize = _strlen(fieldNameChars);
             nameBufferSize = nameBufferSize + 1;
@@ -2866,9 +2866,9 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
                     do {
                       fieldType = *(int **)(*(int *)(argStructFieldList + 4) + argFieldIndex * 8);
                       argFieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType);
-                      scratchR9 = (uint)*DAT_a7b7bd9c;
+                      scratchR9 = (uint)*stringTerminalPtr_a7b7bd9c;
                       *(byte *)(*(int *)(argFieldNameString + 4) + *(int *)(*(int *)(argFieldNameString + 4) + -0xc)) =
-                           *DAT_a7b7bd9c;
+                           *stringTerminalPtr_a7b7bd9c;
                       argFieldNameChars = *(undefined4 *)(argFieldNameString + 4);
                       argNameBufferSize = _strlen(argFieldNameChars);
                       argNameBufferSize = argNameBufferSize + 1;

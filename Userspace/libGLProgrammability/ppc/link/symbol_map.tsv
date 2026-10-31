@@ -821,9 +821,9 @@ DAT_a7b7b708	0xa7b7b708	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7b70c	0xa7b7b70c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b70c asm("DAT_a7b7b70c");	pointer -> LD_97c27e0c	data.s
 DAT_a7b7b710	0xa7b7b710	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b710 asm("DAT_a7b7b710");	pointer -> LD_97c27e1c	data.s
 GetPreprocessorBuiltinString__PreprocessorBuiltinString	0xa7b7b714	__DATA,__data	undefined4	4		pointer -> LD_97c27e2c	data.s
-DAT_a7b7b718	0xa7b7b718	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7b718 asm("DAT_a7b7b718");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7b718	0xa7b7b718	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7b718 asm("stringTerminalPtr_a7b7b718");	pointer -> LD_a7b7e00c	data.s
 SYM_a7b7b71c	0xa7b7b71c	__DATA,__data	-	-		pointer -> LD_a7b7e010	data.s
-DAT_a7b7b720	0xa7b7b720	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7b720 asm("DAT_a7b7b720");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7b720	0xa7b7b720	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7b720 asm("stringTerminalPtr_a7b7b720");	pointer -> LD_a7b7e00c	data.s
 DAT_a7b7b9b8	0xa7b7b9b8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9b8 asm("DAT_a7b7b9b8");	pointer -> LD_a7b7e010	data.s
 DAT_a7b7b9c0	0xa7b7b9c0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9c0 asm("DAT_a7b7b9c0");	pointer -> __Z12OutputBranchbP13TIntermBranchP16TIntermTraverser	data.s
 DAT_a7b7b9c4	0xa7b7b9c4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9c4 asm("DAT_a7b7b9c4");	pointer -> __Z10OutputLoopbP11TIntermLoopP16TIntermTraverser	data.s
@@ -833,7 +833,7 @@ DAT_a7b7b9d0	0xa7b7b9d0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7b9d4	0xa7b7b9d4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9d4 asm("DAT_a7b7b9d4");	pointer -> __Z19OutputConstantUnionP20TIntermConstantUnionP16TIntermTraverser	data.s
 DAT_a7b7b9d8	0xa7b7b9d8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9d8 asm("DAT_a7b7b9d8");	pointer -> __Z12OutputBinarybP13TIntermBinaryP16TIntermTraverser	data.s
 DAT_a7b7b9dc	0xa7b7b9dc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9dc asm("DAT_a7b7b9dc");	pointer -> __Z15OutputAggregatebP16TIntermAggregateP16TIntermTraverser	data.s
-DAT_a7b7b9e0	0xa7b7b9e0	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7b9e0 asm("DAT_a7b7b9e0");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7b9e0	0xa7b7b9e0	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7b9e0 asm("stringTerminalPtr_a7b7b9e0");	pointer -> LD_a7b7e00c	data.s
 DAT_a7b7b9f0	0xa7b7b9f0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9f0 asm("DAT_a7b7b9f0");	pointer -> __Z11ParseBranchbP13TIntermBranchP16TIntermTraverser	data.s
 DAT_a7b7b9f4	0xa7b7b9f4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9f4 asm("DAT_a7b7b9f4");	pointer -> __Z9ParseLoopbP11TIntermLoopP16TIntermTraverser	data.s
 DAT_a7b7b9f8	0xa7b7b9f8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9f8 asm("DAT_a7b7b9f8");	pointer -> __Z10ParseUnarybP12TIntermUnaryP16TIntermTraverser	data.s
@@ -842,9 +842,9 @@ DAT_a7b7ba00	0xa7b7ba00	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7ba04	0xa7b7ba04	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba04 asm("DAT_a7b7ba04");	pointer -> __Z18ParseConstantUnionP20TIntermConstantUnionP16TIntermTraverser	data.s
 DAT_a7b7ba08	0xa7b7ba08	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba08 asm("DAT_a7b7ba08");	pointer -> __Z11ParseBinarybP13TIntermBinaryP16TIntermTraverser	data.s
 DAT_a7b7ba0c	0xa7b7ba0c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba0c asm("DAT_a7b7ba0c");	pointer -> __Z14ParseAggregatebP16TIntermAggregateP16TIntermTraverser	data.s
-DAT_a7b7ba10	0xa7b7ba10	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba10 asm("DAT_a7b7ba10");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7ba10	0xa7b7ba10	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7ba10 asm("stringTerminalPtr_a7b7ba10");	pointer -> LD_a7b7e00c	data.s
 DAT_a7b7ba14	0xa7b7ba14	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba14 asm("DAT_a7b7ba14");	pointer -> LD_a7b7e010	data.s
-DAT_a7b7ba18	0xa7b7ba18	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba18 asm("DAT_a7b7ba18");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7ba18	0xa7b7ba18	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7ba18 asm("stringTerminalPtr_a7b7ba18");	pointer -> LD_a7b7e00c	data.s
 _gPollAllocThreadData	0xa7b7ba1c	__DATA,__data	undefined4	4		0x00000000	data.s
 DAT_a7b7ba20	0xa7b7ba20	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba20 asm("DAT_a7b7ba20");	pointer -> __Z14AliveSelectionbP16TIntermSelectionP16TIntermTraverser	data.s
 DAT_a7b7ba24	0xa7b7ba24	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba24 asm("DAT_a7b7ba24");	pointer -> __Z11AliveSymbolP13TIntermSymbolP16TIntermTraverser	data.s
@@ -860,16 +860,16 @@ DAT_a7b7ba70	0xa7b7ba70	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7ba74	0xa7b7ba74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba74 asm("DAT_a7b7ba74");	pointer -> LD_a7b7e010	data.s
 DAT_a7b7ba78	0xa7b7ba78	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba78 asm("DAT_a7b7ba78");	pointer -> LD_a7b7d538	data.s
 DAT_a7b7ba7c	0xa7b7ba7c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba7c asm("DAT_a7b7ba7c");	pointer -> LD_a7b7d510	data.s
-DAT_a7b7ba80	0xa7b7ba80	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba80 asm("DAT_a7b7ba80");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7ba80	0xa7b7ba80	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7ba80 asm("stringTerminalPtr_a7b7ba80");	pointer -> LD_a7b7e00c	data.s
 DAT_a7b7ba84	0xa7b7ba84	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba84 asm("DAT_a7b7ba84");	pointer -> LD_a7b7e010	data.s
-DAT_a7b7ba88	0xa7b7ba88	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba88 asm("DAT_a7b7ba88");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7ba88	0xa7b7ba88	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7ba88 asm("stringTerminalPtr_a7b7ba88");	pointer -> LD_a7b7e00c	data.s
 _yyleng	0xa7b7ba8c	__DATA,__data	undefined4	4		0x00000000	data.s
 _yy_init	0xa7b7ba90	__DATA,__data	undefined4	4		0x00000001	data.s
 _yyin	0xa7b7ba94	__DATA,__data	undefined4	4		0x00000000	data.s
 _yyout	0xa7b7ba98	__DATA,__data	undefined4	4		0x00000000	data.s
 _yytext	0xa7b7ba9c	__DATA,__data	undefined4	4		0x00000000	data.s
 _yylineno	0xa7b7baa0	__DATA,__data	undefined4	4		0x00000000	data.s
-DAT_a7b7baa4	0xa7b7baa4	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7baa4 asm("DAT_a7b7baa4");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7baa4	0xa7b7baa4	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7baa4 asm("stringTerminalPtr_a7b7baa4");	pointer -> LD_a7b7e00c	data.s
 DAT_a7b7baa8	0xa7b7baa8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baa8 asm("DAT_a7b7baa8");	pointer -> LD_a7b7e010	data.s
 _shaderString	0xa7b7baac	__DATA,__data	undefined4	4		pointer -> LD_97c2b564	data.s
 _linkErrorString	0xa7b7bab4	__DATA,__data	undefined4	4		pointer -> LD_97c2b578	data.s
@@ -963,9 +963,9 @@ DAT_a7b7bcec	0xa7b7bcec	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bcf0	0xa7b7bcf0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bcf0 asm("DAT_a7b7bcf0");	pointer -> LD_97c2ccbc	data.s
 ParseOperand__temporaryAllocator	0xa7b7bcf4	__DATA,__data	undefined4	4		0x00000000	data.s
 ParseOperand__addressTempAllocator	0xa7b7bcf8	__DATA,__data	undefined4	4		0x00000000	data.s
-DAT_a7b7bcfc	0xa7b7bcfc	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bcfc asm("DAT_a7b7bcfc");	pointer -> LD_a7b7e00c	data.s
-DAT_a7b7bd04	0xa7b7bd04	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd04 asm("DAT_a7b7bd04");	pointer -> LD_a7b7e00c	data.s
-DAT_a7b7bd0c	0xa7b7bd0c	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd0c asm("DAT_a7b7bd0c");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7bcfc	0xa7b7bcfc	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7bcfc asm("stringTerminalPtr_a7b7bcfc");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7bd04	0xa7b7bd04	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7bd04 asm("stringTerminalPtr_a7b7bd04");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7bd0c	0xa7b7bd0c	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7bd0c asm("stringTerminalPtr_a7b7bd0c");	pointer -> LD_a7b7e00c	data.s
 _compileErrorString	0xa7b7bd10	__DATA,__data	undefined4	4		pointer -> LD_97c2d098	data.s
 DAT_a7b7bd14	0xa7b7bd14	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd14 asm("DAT_a7b7bd14");	pointer -> LD_97c2d104	data.s
 DAT_a7b7bd18	0xa7b7bd18	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd18 asm("DAT_a7b7bd18");	pointer -> LD_97c2d170	data.s
@@ -998,7 +998,7 @@ DAT_a7b7bd88	0xa7b7bd88	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bd8c	0xa7b7bd8c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd8c asm("DAT_a7b7bd8c");	pointer -> LD_97c2c9dc	data.s
 DAT_a7b7bd90	0xa7b7bd90	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd90 asm("DAT_a7b7bd90");	pointer -> LD_97c2b410	data.s
 DAT_a7b7bd98	0xa7b7bd98	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd98 asm("DAT_a7b7bd98");	pointer -> LD_a7b7d7b8	data.s
-DAT_a7b7bd9c	0xa7b7bd9c	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd9c asm("DAT_a7b7bd9c");	pointer -> LD_a7b7e00c	data.s
+stringTerminalPtr_a7b7bd9c	0xa7b7bd9c	__DATA,__data	undefined4	4	extern unsigned char *stringTerminalPtr_a7b7bd9c asm("stringTerminalPtr_a7b7bd9c");	pointer -> LD_a7b7e00c	data.s
 _glpPushInstructions	0xa7b7bda0	__DATA,__data	undefined4	4		pointer -> LD_97c3a2f0	data.s
 DAT_a7b7bda4	0xa7b7bda4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bda4 asm("DAT_a7b7bda4");	pointer -> _PPEmulatorBuild	data.s
 _ppstreamOpString	0xa7b7bda8	__DATA,__data	-	-		pointer -> LD_97c2d510	data.s

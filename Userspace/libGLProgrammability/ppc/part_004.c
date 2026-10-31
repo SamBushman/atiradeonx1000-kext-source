@@ -3522,8 +3522,8 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   ((int (*)())OutputTreeText)(*(unsigned char **)(intermTraverser + 0x30),(unsigned char *)intermSymbol,traverserDepth);
   ((int (*)())TType__getCompleteString)(&typeString,intermSymbol + 8);
   typeCharsCopy = typeStringChars;
-  stringTerminal = DAT_a7b7b9e0;
-  *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *DAT_a7b7b9e0;
+  stringTerminal = stringTerminalPtr_a7b7b9e0;
+  *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *stringTerminalPtr_a7b7b9e0;
   symbolName = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol,intermTraverserCopy,traverserDepth,scratchR6,scratchR7,scratchR8,typeStringChars);
   symbolNameChars = *(int *)(symbolName + 4);
   *(undefined1 *)(symbolNameChars + *(int *)(symbolNameChars + -0xc)) = *stringTerminal;
@@ -4512,7 +4512,7 @@ code_r0x97b98dd8:
         } while( true );
       }
       symbolName = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol);
-      *(undefined1 *)(*(int *)(symbolName + 4) + *(int *)(*(int *)(symbolName + 4) + -0xc)) = *DAT_a7b7ba10;
+      *(undefined1 *)(*(int *)(symbolName + 4) + *(int *)(*(int *)(symbolName + 4) + -0xc)) = *stringTerminalPtr_a7b7ba10;
       _sprintf((char *)&stackType,
                "\'constructor\' : constant \'%s\' has not been initialized correctly",
                *(undefined4 *)(symbolName + 4));
@@ -4549,7 +4549,7 @@ code_r0x97b98dd8:
     else {
       ((int (*)())TType__getCompleteString)(&stackType,intermTraverser + 0x3c);
       messageText = messageBuf;
-      *(undefined1 *)(stackTypeArraySize + *(int *)(stackTypeArraySize + -0xc)) = *DAT_a7b7ba10;
+      *(undefined1 *)(stackTypeArraySize + *(int *)(stackTypeArraySize + -0xc)) = *stringTerminalPtr_a7b7ba10;
       _sprintf((char *)messageText,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
       refCountPtr = (int *)(stackTypeArraySize + -4);
       destroyAllocatorArg[0] = stackType;
@@ -4663,7 +4663,7 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
   }
   else {
     ((int (*)())TType__getCompleteString)(&stackType,intermTraverser + 0x3c);
-    *(undefined1 *)(stackTypeArraySize + *(int *)(stackTypeArraySize + -0xc)) = *DAT_a7b7ba10;
+    *(undefined1 *)(stackTypeArraySize + *(int *)(stackTypeArraySize + -0xc)) = *stringTerminalPtr_a7b7ba10;
     _sprintf(messageBuf,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
     refCountPtr = (int *)(stackTypeArraySize + -4);
     destroyAllocatorArg[0] = stackType;
@@ -4780,7 +4780,7 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   unsigned char allocatorDummy [28];
   
   ((int (*)())TType__getCompleteString)(&typeString,intermTraverser + 0x3c);
-  *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *DAT_a7b7ba10;
+  *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *stringTerminalPtr_a7b7ba10;
   _sprintf(messageBuf,"\'constructor\' : assigning non-constant to \'%s\'",typeStringChars);
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
@@ -4918,7 +4918,7 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
   isConstructorResult = ((int (*)())TIntermOperator__isConstructor)((unsigned char *)intermAggregate);
   if (((int)((ulonglong)isConstructorResult >> 0x20) == 0) && (*(int *)(intermAggregate + 0x30) != 0x25)) {
     ((int (*)())TType__getCompleteString)(&typeString,intermTraverser + 0x3c);
-    *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *DAT_a7b7ba10;
+    *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *stringTerminalPtr_a7b7ba10;
     _sprintf((char *)typeTemp1,"\'constructor\' : assigning non-constant to \'%s\'",typeStringChars);
     refCountPtr = (int *)(typeStringChars + -4);
     destroyAllocatorArg[0] = typeString;
@@ -5744,7 +5744,7 @@ setFieldCount:
         if (vecSize <= fieldValue) {
           textCharsB = *(int *)(text + 4);
           errTextLength = *(int *)(textCharsB + -0xc);
-          terminalChar = *DAT_a7b7ba18;
+          terminalChar = *stringTerminalPtr_a7b7ba18;
           errorMessage = "vector field selection out of range";
 loopStoreTextCharsB:
           *(byte *)(textCharsB + errTextLength) = terminalChar;
@@ -5754,7 +5754,7 @@ loopStoreTextCharsB:
         if ((0 < fieldIndex) && (fieldSetCursor[1] != *fieldSetCursor)) {
           textCharsB = *(int *)(text + 4);
           errTextLength = *(int *)(textCharsB + -0xc);
-          terminalChar = *DAT_a7b7ba18;
+          terminalChar = *stringTerminalPtr_a7b7ba18;
           errorMessage = "illegal - vector component fields not from the same set";
           goto loopStoreTextCharsB;
         }
@@ -5768,7 +5768,7 @@ loopStoreTextCharsB:
     textChars = *(int *)(text + 4);
     textLengthB = *(int *)(textChars + -0xc);
 setTerminalChar:
-    terminalChar = *DAT_a7b7ba18;
+    terminalChar = *stringTerminalPtr_a7b7ba18;
     *(byte *)(textChars + textLengthB) = terminalChar;
     errorToken = *(char **)(text + 4);
     errorMessage = "illegal vector field selection";
@@ -5810,13 +5810,13 @@ loopCheckMatrixFields:
         if ((*(int *)(matrixFields + 8) < matSize) && (*(int *)(matrixFields + 0xc) < matSize)) {
           return 1;
         }
-        fieldTextLengthReg = (uint)*DAT_a7b7ba18;
+        fieldTextLengthReg = (uint)*stringTerminalPtr_a7b7ba18;
         errorMessage = "matrix field selection out of range";
-        *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7ba18;
+        *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
         goto setTextChars;
       }
 loopStoreTextChars:
-      textChars[2] = *DAT_a7b7ba18;
+      textChars[2] = *stringTerminalPtr_a7b7ba18;
     }
     else {
       secondChar = textChars[1];
@@ -5832,15 +5832,15 @@ loopStoreTextChars:
         *(int *)(matrixFields + 8) = firstChar + -0x30;
         goto loopStoreMatrixFields;
       }
-      fieldTextLengthReg = (uint)*DAT_a7b7ba18;
-      textChars[*(int *)(textChars + -0xc)] = *DAT_a7b7ba18;
+      fieldTextLengthReg = (uint)*stringTerminalPtr_a7b7ba18;
+      textChars[*(int *)(textChars + -0xc)] = *stringTerminalPtr_a7b7ba18;
     }
     textChars = *(char **)(text + 4);
     errorMessage = "illegal matrix field selection";
   }
   else {
     errorMessage = "illegal length of matrix field selection";
-    textChars[fieldTextLengthReg] = *DAT_a7b7ba18;
+    textChars[fieldTextLengthReg] = *stringTerminalPtr_a7b7ba18;
 setTextChars:
     textChars = *(char **)(text + 4);
   }
@@ -5989,8 +5989,8 @@ int TParseContext__assignError(this, sourceLoc, str, text1, text2)
   byte *terminalPtr;
   undefined4 text1Chars;
   
-  terminalPtr = DAT_a7b7ba18;
-  *(byte *)(*(int *)(text1 + 4) + *(int *)(*(int *)(text1 + 4) + -0xc)) = *DAT_a7b7ba18;
+  terminalPtr = stringTerminalPtr_a7b7ba18;
+  *(byte *)(*(int *)(text1 + 4) + *(int *)(*(int *)(text1 + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
   terminalChar = *terminalPtr;
   text1Chars = *(undefined4 *)(text1 + 4);
   *(byte *)(*(int *)(text2 + 4) + *(int *)(*(int *)(text2 + 4) + -0xc)) = terminalChar;
@@ -6005,7 +6005,7 @@ int TParseContext__unaryOpError(this, sourceLoc, str, text)
   char *str;
   int text;
 {
-  *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7ba18;
+  *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
   return error((int)this,(char *)sourceLoc," wrong operand type",str,
         "no operation \'%s\' exists that takes an operand of type %s (or there is no acceptable conversion)"
         ,str,*(undefined4 *)(text + 4),text);
@@ -6022,8 +6022,8 @@ int TParseContext__binaryOpError(this, sourceLoc, str, text1, text2)
   undefined1 *terminalPtr;
   undefined4 text2Chars;
   
-  terminalPtr = DAT_a7b7ba18;
-  *(undefined1 *)(*(int *)(text2 + 4) + *(int *)(*(int *)(text2 + 4) + -0xc)) = *DAT_a7b7ba18;
+  terminalPtr = stringTerminalPtr_a7b7ba18;
+  *(undefined1 *)(*(int *)(text2 + 4) + *(int *)(*(int *)(text2 + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
   text2Chars = *(undefined4 *)(text2 + 4);
   *(undefined1 *)(*(int *)(text1 + 4) + *(int *)(*(int *)(text1 + 4) + -0xc)) = *terminalPtr;
   return error((int)this,(char *)sourceLoc," wrong operand types ",str,
@@ -6079,8 +6079,8 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
     staleR4 = r4Out0;
     if (hasSymbolNode) {
       symbolName = (**(code **)(*symbolNode + 0x60))(symbolNode);
-      scratchR9 = (uint)*DAT_a7b7ba18;
-      *(byte *)(*(int *)(symbolName + 4) + *(int *)(*(int *)(symbolName + 4) + -0xc)) = *DAT_a7b7ba18;
+      scratchR9 = (uint)*stringTerminalPtr_a7b7ba18;
+      *(byte *)(*(int *)(symbolName + 4) + *(int *)(*(int *)(symbolName + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
       symbolNameChars = *(undefined4 *)(symbolName + 4);
       staleR4 = r4Out1;
     }
@@ -6535,7 +6535,7 @@ setConstructorScratch2:
     stackTypeStructure = structFieldList;
     stackTypeStructureSize = TType__setStructSize((unsigned char *)&stackType,structFieldList);
     structNameChars = nameCopy2Chars;
-    nameCopy2Chars[*(int *)(nameCopy2Chars + -0xc)] = *DAT_a7b7ba18;
+    nameCopy2Chars[*(int *)(nameCopy2Chars + -0xc)] = *stringTerminalPtr_a7b7ba18;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     allocPair = TPoolAllocator__allocate(poolAllocator,8);
     newTypeNameString = (void *)((ulonglong)allocPair >> 0x20);
@@ -6730,7 +6730,7 @@ int TParseContext__voidErrorCheck(this, sourceLoc, text, publicType)
   
   basicType = *(int *)publicType;
   if (basicType == 0) {
-    terminalChar = *DAT_a7b7ba18;
+    terminalChar = *stringTerminalPtr_a7b7ba18;
     *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = terminalChar;
     error((int)this,(char *)sourceLoc,"illegal use of type \'void\'",*(char **)(text + 4),"",scratchR8,
           (uint)terminalChar,text);

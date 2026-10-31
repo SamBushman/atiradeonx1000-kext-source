@@ -318,7 +318,7 @@ int TType__setTypeName(this, name)
   char *chars;
   undefined4 poolAllocArg [4];
   
-  *(undefined1 *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *DAT_a7b7b718;
+  *(undefined1 *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *stringTerminalPtr_a7b7b718;
   chars = *(char **)(name + 4);
   globalAllocator = (unsigned char *)GetGlobalPoolAllocator();
   stringMem = (void *)TPoolAllocator__allocate(globalAllocator,8);
@@ -343,7 +343,7 @@ int TType__setFieldName(this, text)
   char *textData;
   undefined4 allocRef [4];
   
-  *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7b718;
+  *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *stringTerminalPtr_a7b7b718;
   textData = *(char **)(text + 4);
   globalPool = (unsigned char *)GetGlobalPoolAllocator();
   stringObject = (void *)TPoolAllocator__allocate(globalPool,8);

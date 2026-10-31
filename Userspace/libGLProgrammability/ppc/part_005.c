@@ -243,7 +243,7 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
     if (levelIndex < 0) {
       nameChars = *(int *)((int)nameString + 4);
       nameLength = *(int *)(nameChars + -0xc);
-      cr0Flags = *DAT_a7b7ba18;
+      cr0Flags = *stringTerminalPtr_a7b7ba18;
       errorMessage = "INTERNAL ERROR finding symbol";
 loopStoreNameChars:
       *(byte *)(nameChars + nameLength) = cr0Flags;
@@ -321,7 +321,7 @@ loopStoreNameChars:
   (**(code **)(*newVariable + 4))(newVariable);
   nameChars = *(int *)((int)nameString + 4);
   nameLength = *(int *)(nameChars + -0xc);
-  cr0Flags = *DAT_a7b7ba18;
+  cr0Flags = *stringTerminalPtr_a7b7ba18;
   errorMessage = "INTERNAL ERROR inserting new symbol";
   goto loopStoreNameChars;
 }
@@ -536,7 +536,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
           stackTypeStructureSize = (char *)((ulonglong)structSizeResult >> 0x20);
           structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
                             (pt2CopyUserDef,(int)structSizeResult,fwdR5,fwdR6,scratchR8,ptSize,*(int *)pt2CopyUserDef);
-          *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
+          *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
           structTypeNameChars = *(char **)(structTypeNameStringRef + 4);
           poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
           typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
@@ -623,7 +623,7 @@ loopSetVoidErrorResult:
         }
         identifierChars = *(int *)(text + 4);
         identifierLength = *(int *)(identifierChars + -0xc);
-        stringTerminator = (uint)*DAT_a7b7ba18;
+        stringTerminator = (uint)*stringTerminalPtr_a7b7ba18;
         errorReason = "INTERNAL ERROR inserting new symbol";
       }
       else {
@@ -631,7 +631,7 @@ loopSetVoidErrorResult:
         if (isVariable == 0) {
           identifierChars = *(int *)(text + 4);
           identifierLength = *(int *)(identifierChars + -0xc);
-          stringTerminator = (uint)*DAT_a7b7ba18;
+          stringTerminator = (uint)*stringTerminalPtr_a7b7ba18;
           errorReason = "variable expected";
         }
         else {
@@ -639,7 +639,7 @@ loopSetVoidErrorResult:
           if (isArray == 0) {
             identifierChars = *(int *)(text + 4);
             identifierLength = *(int *)(identifierChars + -0xc);
-            stringTerminator = (uint)*DAT_a7b7ba18;
+            stringTerminator = (uint)*stringTerminalPtr_a7b7ba18;
             errorReason = "redeclaring non-array as array";
           }
           else if (existingSymbol[4] < 1) {
@@ -684,7 +684,7 @@ loopSetVoidErrorResult:
               structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
                                 (pt2CopyUserDef,(int)structSizeResult,passThroughR4,scratchR8,scratchR7,ptSize,*(int *)pt2CopyUserDef)
               ;
-              *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
+              *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
               structTypeNameChars = *(char **)(structTypeNameStringRef + 4);
               poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
               structTypeNameString = (undefined **)((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
@@ -707,7 +707,7 @@ loopSetVoidErrorResult:
                 if (*(int *)arraySizeUnion[0xc] < *(int *)(redeclaredArrayNode + 0x1c)) {
                   identifierChars = *(int *)(text + 4);
                   identifierLength = *(int *)(identifierChars + -0xc);
-                  stringTerminator = (uint)*DAT_a7b7ba18;
+                  stringTerminator = (uint)*stringTerminalPtr_a7b7ba18;
                   errorReason = "higher index value already used for the array";
                   goto storeIdentifierChars;
                 }
@@ -722,13 +722,13 @@ loopSetVoidErrorResult:
             }
             identifierChars = *(int *)(text + 4);
             identifierLength = *(int *)(identifierChars + -0xc);
-            stringTerminator = (uint)*DAT_a7b7ba18;
+            stringTerminator = (uint)*stringTerminalPtr_a7b7ba18;
             errorReason = "redeclaration of array with a different type";
           }
           else {
             identifierChars = *(int *)(text + 4);
             identifierLength = *(int *)(identifierChars + -0xc);
-            stringTerminator = (uint)*DAT_a7b7ba18;
+            stringTerminator = (uint)*stringTerminalPtr_a7b7ba18;
             errorReason = "redeclaration of array with size";
           }
         }
@@ -737,7 +737,7 @@ loopSetVoidErrorResult:
     else {
       identifierChars = *(int *)(text + 4);
       identifierLength = *(int *)(identifierChars + -0xc);
-      stringTerminator = (uint)*DAT_a7b7ba18;
+      stringTerminator = (uint)*stringTerminalPtr_a7b7ba18;
       errorReason = "array size must be a positive integer";
     }
 storeIdentifierChars:
@@ -781,7 +781,7 @@ storeIdentifierChars:
       stackTypeBStructureSize = (undefined4)((ulonglong)structSizeResult >> 0x20);
       structTypeNameStringRef = (**(code **)(*(int *)pt4CopyUserDef + 0x18))
                         (pt4CopyUserDef,(int)structSizeResult,passThroughR4,intermTyped,ptSize,publicType,*(int *)pt4CopyUserDef);
-      *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
+      *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
       structTypeNameChars2 = *(char **)(structTypeNameStringRef + 4);
       poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
       this = (void *)((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
@@ -796,7 +796,7 @@ storeIdentifierChars:
     }
     stackTypeBTypeName = typeNameString;
     TType__getCompleteString(&stackType,(unsigned char *)&stackTypeTypeNameOverlay);
-    stackTypeArraySize[*(int *)(stackTypeArraySize + -0xc)] = *DAT_a7b7ba18;
+    stackTypeArraySize[*(int *)(stackTypeArraySize + -0xc)] = *stringTerminalPtr_a7b7ba18;
     error(parseContext,(char *)line,"cannot declare arrays of this type",stackTypeArraySize,"",publicType,
           stackTypeArraySize,ptMatrix);
     refCountPtr = (int *)(stackTypeArraySize + -4);
@@ -997,7 +997,7 @@ loopCheckUpdateFlag:
   }
   else {
     undeclaredNameRef = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol);
-    cr0Flags = *DAT_a7b7ba18;
+    cr0Flags = *stringTerminalPtr_a7b7ba18;
     *(byte *)(*(int *)(undeclaredNameRef + 4) + *(int *)(*(int *)(undeclaredNameRef + 4) + -0xc)) = cr0Flags;
     error((int)this,(char *)line," undeclared identifier",*(char **)(undeclaredNameRef + 4),"",lineCopy,
           (uint)cr0Flags,scratchR10);
@@ -1123,7 +1123,7 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
     structSizeResult = TType__setStructSize((unsigned char *)&stackType,(unsigned char *)ptCopy1UserDef[2]);
     stackTypeStructureSize = (int)((ulonglong)structSizeResult >> 0x20);
     structTypeNameRef = (**(code **)(*ptCopy2UserDef + 0x18))(ptCopy2UserDef,(int)structSizeResult,fwdR5,ptQualifier,ptSize,ptType,*ptCopy2UserDef);
-    *(byte *)(*(int *)(structTypeNameRef + 4) + *(int *)(*(int *)(structTypeNameRef + 4) + -0xc)) = *DAT_a7b7ba18;
+    *(byte *)(*(int *)(structTypeNameRef + 4) + *(int *)(*(int *)(structTypeNameRef + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
     structTypeNameChars = *(char **)(structTypeNameRef + 4);
     poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
     typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
@@ -1194,7 +1194,7 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
   }
   if (stackTypeArraySize == 0) {
     existingNameRef = newVariable[1];
-    terminalChar = *DAT_a7b7ba18;
+    terminalChar = *stringTerminalPtr_a7b7ba18;
     *(byte *)(*(int *)(existingNameRef + 4) + *(int *)(*(int *)(existingNameRef + 4) + -0xc)) = terminalChar;
     error((int)this,(char *)sourceLoc,"redefinition",*(char **)(existingNameRef + 4),"",ptType,(uint)terminalChar,existingNameRef);
     if (newVariable != (int *)0x0) {
@@ -1206,7 +1206,7 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
       voidErrorCheckResult = TParseContext__voidErrorCheck(this,sourceLoc,text,publicType);
       return voidErrorCheckResult != 0;
     }
-    terminalChar = *DAT_a7b7ba18;
+    terminalChar = *stringTerminalPtr_a7b7ba18;
     *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = terminalChar;
     error((int)this,(char *)sourceLoc,"variables with qualifier \'const\' must be initialized",
           *(char **)(text + 4),"",ptType,(uint)terminalChar,levelsBegin);
@@ -1396,7 +1396,7 @@ loopStoreInsertHintCopy:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
               ((unsigned char *)&mapIterOverlay," is being used",length);
     messageChars = msgChars;
-    msgChars[*(int *)(msgChars + -0xc)] = *DAT_a7b7ba18;
+    msgChars[*(int *)(msgChars + -0xc)] = *stringTerminalPtr_a7b7ba18;
                     
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
     lineInString = sourceLoc & 0xffff;
@@ -1590,14 +1590,14 @@ int TParseContext__findFunction(this, sourceLoc, function, builtInOut, scratchR8
     }
     nameStringRef = *(int *)(function + 4);
     nameChars = *(int *)(nameStringRef + 4);
-    terminalChar = *DAT_a7b7ba18;
+    terminalChar = *stringTerminalPtr_a7b7ba18;
     nameLength = *(int *)(nameChars + -0xc);
     errorReason = "function name expected";
   }
   else {
     nameStringRef = *(int *)(function + 4);
     nameChars = *(int *)(nameStringRef + 4);
-    terminalChar = *DAT_a7b7ba18;
+    terminalChar = *stringTerminalPtr_a7b7ba18;
     nameLength = *(int *)(nameChars + -0xc);
     errorReason = "no matching overloaded function found";
   }
@@ -1795,7 +1795,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     stackTypeStructureSize = (uint)((ulonglong)structSizeResult >> 0x20);
     structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
                       (pt2CopyUserDef,(int)structSizeResult,ptUserDef,ptLineCopy,ptQualifier,ptSize,*(int *)pt2CopyUserDef);
-    *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
+    *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
     typeNameChars = *(char **)(structTypeNameStringRef + 4);
     poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
     typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
@@ -1872,9 +1872,9 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   }
   if (nameStringChars == 0) {
     levelsBegin = newNode[1];
-    decrementedRefCount = (uint)*DAT_a7b7ba18;
+    decrementedRefCount = (uint)*stringTerminalPtr_a7b7ba18;
     errorReason = "redefinition";
-    *(byte *)(*(int *)(levelsBegin + 4) + *(int *)(*(int *)(levelsBegin + 4) + -0xc)) = *DAT_a7b7ba18;
+    *(byte *)(*(int *)(levelsBegin + 4) + *(int *)(*(int *)(levelsBegin + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
     nameChars = *(char **)(levelsBegin + 4);
     goto callError;
   }
@@ -1933,7 +1933,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   cr0Flags = (qualifierIsNotConst == 0) << 1;
   if (qualifierIsNotConst != 0) {
     TType__getCompleteString(&ptCopyType,newNodeType);
-    stringTerminator = *DAT_a7b7ba18;
+    stringTerminator = *stringTerminalPtr_a7b7ba18;
     *(byte *)(ptCopyQualifier + *(int *)(ptCopyQualifier - 0xc)) = stringTerminator;
     error((int)this,(char *)line," assigning non-constant to","=","\'%s\'",ptCopyQualifier,(uint)stringTerminator,
           levelsBegin);
@@ -1998,7 +1998,7 @@ LAB_97b9e184:
     stackTypeStructureSize = (uint)((ulonglong)structSizeResult >> 0x20);
     structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
                       (pt2CopyUserDef,(int)structSizeResult,ptUserDef,qualifierIsNotConst,ptLine,ptQualifierCopy,*(int *)pt2CopyUserDef);
-    *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
+    *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
     typeNameChars = *(char **)(structTypeNameStringRef + 4);
     poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
     structTypeNameString = (undefined **)((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
@@ -2126,7 +2126,7 @@ setParseResult:
     symbolNodeResult = (**(code **)(*(int *)initializer + 0x28))(initializer);
     if (symbolNodeResult == 0) {
       TType__getCompleteString((unsigned char *)&stackType,newNodeType);
-      stringTerminator = *DAT_a7b7ba18;
+      stringTerminator = *stringTerminalPtr_a7b7ba18;
       *(byte *)(typeStringChars + *(int *)(typeStringChars - 0xc)) = stringTerminator;
       error((int)this,(char *)line," assigning non-constant to","=","\'%s\'",typeStringChars,
             (uint)stringTerminator,ptType);
@@ -2225,8 +2225,8 @@ setParseResult:
         stackTypeStructureSize = (uint)((ulonglong)structSizeResult >> 0x20);
         structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
                           (pt2CopyUserDef,(int)structSizeResult,stackTypeBitsCopy,qualifierIsNotConst,ptLine,ptSize,*(int *)pt2CopyUserDef);
-        decrementedRefCount = (uint)*DAT_a7b7ba18;
-        *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
+        decrementedRefCount = (uint)*stringTerminalPtr_a7b7ba18;
+        *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *stringTerminalPtr_a7b7ba18;
         typeNameChars = *(char **)(structTypeNameStringRef + 4);
         poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
         typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);

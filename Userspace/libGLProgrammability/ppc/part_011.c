@@ -914,7 +914,7 @@ int ParseSymbolTable__InsertSymbol(this, parseSymbol)
   uint fieldIndex;
   char indexText [20];
   
-  terminalCharPtr = DAT_a7b7bcfc;
+  terminalCharPtr = stringTerminalPtr_a7b7bcfc;
   result = 0;
   if (parseSymbol == (unsigned char *)0x0) {
     return 0;
@@ -1069,7 +1069,7 @@ int ParseSymbolTable__FindFirstElement(this, parseSymbol)
         fieldNameObj = *(int *)**(undefined4 **)(structFieldList + 4);
         fieldNameObj = (**(code **)(fieldNameObj + 0x1c))
                           ((int *)**(undefined4 **)(structFieldList + 4),r4In0,strayR5,strayR6,strayR7,strayR8,fieldNameObj);
-        *(undefined1 *)(*(int *)(fieldNameObj + 4) + *(int *)(*(int *)(fieldNameObj + 4) + -0xc)) = *DAT_a7b7bcfc;
+        *(undefined1 *)(*(int *)(fieldNameObj + 4) + *(int *)(*(int *)(fieldNameObj + 4) + -0xc)) = *stringTerminalPtr_a7b7bcfc;
         fieldNameData = *(undefined4 *)(fieldNameObj + 4);
         nameBufferSize = _strlen(fieldNameData);
         nameBufferSize = nameBufferSize + 1;
@@ -1820,9 +1820,9 @@ int TIntermSymbol__compileNode(this, pPStreamCompiler, strayArg3, strayArg4, str
   
   symbolOperand = (undefined4 *)0x0;
   symbol = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,strayArg3,strayArg4,strayArg5,strayArg6);
-  terminalCharPtr = DAT_a7b7bd04;
+  terminalCharPtr = stringTerminalPtr_a7b7bd04;
   r9In0 = *(int *)(symbol + 4);
-  *(undefined1 *)(r9In0 + *(int *)(r9In0 + -0xc)) = *DAT_a7b7bd04;
+  *(undefined1 *)(r9In0 + *(int *)(r9In0 + -0xc)) = *stringTerminalPtr_a7b7bd04;
   if (*(int *)(symbol + 4) != 0) {
     sourceLine = (*(code *)**(undefined4 **)this)(this,r4In0,strayArg3,strayArg4,strayArg5,strayArg6,r9In0);
     *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
@@ -2258,7 +2258,7 @@ loopStoreResultOperand:
       fieldType = *(int **)(*(int *)(structTypeFields + 4) + fieldIndex * 8);
       fieldTypeVtable = *fieldType;
       fieldNameString = (**(code **)(fieldTypeVtable + 0x1c))(fieldType,r4In2,unusedArg3,unusedArg4,op,unusedArg6,fieldTypeVtable);
-      *(undefined1 *)(*(int *)(fieldNameString + 4) + *(int *)(*(int *)(fieldNameString + 4) + -0xc)) = *DAT_a7b7bd04;
+      *(undefined1 *)(*(int *)(fieldNameString + 4) + *(int *)(*(int *)(fieldNameString + 4) + -0xc)) = *stringTerminalPtr_a7b7bd04;
       ParseSymbol__CatName(leftSymbol,*(char **)(fieldNameString + 4));
       ParseSymbol__SetParseTreeType(leftSymbol,*(unsigned char **)(*(int *)(structTypeFields + 4) + fieldIndex * 8));
       symbolIsArray = 0;
@@ -2926,8 +2926,8 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
   aggregateOp = *(int *)(this + 0x30);
   if (aggregateOp == 3) {
     name = (**(code **)(*(int *)this + 0x6c))(this);
-    terminalCharPtr = DAT_a7b7bd04;
-    *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *DAT_a7b7bd04;
+    terminalCharPtr = stringTerminalPtr_a7b7bd04;
+    *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *stringTerminalPtr_a7b7bd04;
     labelLength = _strlen(*(undefined4 *)(name + 4));
     name = (**(code **)(*(int *)this + 0x6c))(this);
     *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *terminalCharPtr;
@@ -2966,7 +2966,7 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
     if (returnTypeBits != 0) {
       name2 = (**(code **)(*(int *)this + 0x6c))(this,r4In0,parseOperand2,strayArg4,strayArg5,strayArg6,returnTypeBits);
       defReturnNameData = *(int *)(name2 + 4);
-      *(byte *)(defReturnNameData + *(int *)(defReturnNameData + -0xc)) = *DAT_a7b7bd04;
+      *(byte *)(defReturnNameData + *(int *)(defReturnNameData + -0xc)) = *stringTerminalPtr_a7b7bd04;
       carriedR4 = *(undefined4 *)(name2 + 4);
       nodeType = (char *)(**(code **)(*(int *)this + 0x3c))
                                  (this,r4In1,parseOperand2,strayArg4,strayArg5,strayArg6,defReturnNameData,name2);
@@ -3088,7 +3088,7 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
   if (0xa3 < operatorCode) {
 operatorCodeCase0:
     TType__getCompleteString(&stackType,this + 8);
-    terminalChar = *DAT_a7b7bd04;
+    terminalChar = *stringTerminalPtr_a7b7bd04;
     *(byte *)(stackTypeArraySize + *(int *)(stackTypeArraySize - 0xc)) = terminalChar;
     TPPStreamCompiler__error
               (compiler,(char *)0x1,(char *)0x0,
@@ -3125,7 +3125,7 @@ operatorCodeCase0:
       childOperandCopies = (unsigned char **)_malloc(childCount << 2);
       resultAndR4Pair = CONCAT44(resultOperand[0],r4Out12);
     }
-    terminalCharPtr = DAT_a7b7bd04;
+    terminalCharPtr = stringTerminalPtr_a7b7bd04;
     resultOperand[0] = (unsigned char *)((ulonglong)resultAndR4Pair >> 0x20);
     paramSetupIndex = 0;
     childCursor = *(undefined4 **)(this + 0x38);
@@ -3175,8 +3175,8 @@ operatorCodeCase0:
     copyBackIndex = 0;
     labelNameObj = (**(code **)(*(int *)this + 0x6c))
                        (this,(int)resultAndR4Pair,parseOperand2,strayArg4,strayArg5,operatorCode,*(int *)this);
-    terminalCharPtr = DAT_a7b7bd04;
-    *(byte *)(*(int *)(labelNameObj + 4) + *(int *)(*(int *)(labelNameObj + 4) + -0xc)) = *DAT_a7b7bd04;
+    terminalCharPtr = stringTerminalPtr_a7b7bd04;
+    *(byte *)(*(int *)(labelNameObj + 4) + *(int *)(*(int *)(labelNameObj + 4) + -0xc)) = *stringTerminalPtr_a7b7bd04;
     opLabelLength = _strlen(*(undefined4 *)(labelNameObj + 4));
     name3 = (**(code **)(*(int *)this + 0x6c))(this);
     lastCallArg3Ptr = (unsigned char *)opHeaderAndFlags;
@@ -3221,7 +3221,7 @@ operatorCodeCase0:
       name = (**(code **)(*(int *)this + 0x6c))(this,r4In6,lastCallArg3Ptr,functionNameData,carriedR4,operatorCode,stackTypeBits & 0x1f80000)
       ;
       returnNameData = *(int *)(name + 4);
-      *(byte *)(returnNameData + *(int *)(returnNameData + -0xc)) = *DAT_a7b7bd04;
+      *(byte *)(returnNameData + *(int *)(returnNameData + -0xc)) = *stringTerminalPtr_a7b7bd04;
       returnValueName = *(undefined4 *)(name + 4);
       nodeType = (char *)(**(code **)(*(int *)this + 0x3c))
                                  (this,r4In7,lastCallArg3Ptr,functionNameData,carriedR4,operatorCode,returnNameData,name);
@@ -3253,7 +3253,7 @@ loopSetFunctionTable:
     operandArraySel = childOperandCopies;
     FunctionTable__setNumParams(*(unsigned char **)(compiler + 0x6c),functionIndex,(int)childOperandCopies);
     calleeNameObj = (**(code **)(*(int *)this + 0x6c))(this);
-    *(byte *)(*(int *)(calleeNameObj + 4) + *(int *)(*(int *)(calleeNameObj + 4) + -0xc)) = *DAT_a7b7bd04;
+    *(byte *)(*(int *)(calleeNameObj + 4) + *(int *)(*(int *)(calleeNameObj + 4) + -0xc)) = *stringTerminalPtr_a7b7bd04;
     functionNameData = *(char **)(calleeNameObj + 4);
     lastOperation = *(int *)(*(int *)(ppStream + 0x20) + 4);
     carriedR4 = r4Out5;
@@ -4794,9 +4794,9 @@ int TIntermSymbol__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, st
   
   symbolOperand = (undefined4 *)0x0;
   symbol = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,strayArg3,strayArg4,strayArg5,strayArg6);
-  terminalCharPtr = DAT_a7b7bd0c;
+  terminalCharPtr = stringTerminalPtr_a7b7bd0c;
   r9In0 = *(int *)(symbol + 4);
-  *(undefined1 *)(r9In0 + *(int *)(r9In0 + -0xc)) = *DAT_a7b7bd0c;
+  *(undefined1 *)(r9In0 + *(int *)(r9In0 + -0xc)) = *stringTerminalPtr_a7b7bd0c;
   if (**(char **)(symbol + 4) != '\0') {
     sourceLine = (*(code *)**(undefined4 **)this)(this,r4In0,strayArg3,strayArg4,strayArg5,strayArg6,r9In0);
     *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
@@ -5026,7 +5026,7 @@ int TIntermBinary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, st
     ParseSymbol__CatName(leftSymbol,".");
     fieldType = *(int **)(*(int *)(typeStructFields + 4) + fieldByteOffset);
     fieldName = (**(code **)(*fieldType + 0x1c))(fieldType);
-    *(undefined1 *)(*(int *)(fieldName + 4) + *(int *)(*(int *)(fieldName + 4) + -0xc)) = *DAT_a7b7bd0c;
+    *(undefined1 *)(*(int *)(fieldName + 4) + *(int *)(*(int *)(fieldName + 4) + -0xc)) = *stringTerminalPtr_a7b7bd0c;
     ParseSymbol__CatName(leftSymbol,*(char **)(fieldName + 4));
     ParseSymbol__SetParseTreeType(leftSymbol,*(unsigned char **)(*(int *)(typeStructFields + 4) + fieldByteOffset));
     leftSymbol = *(unsigned char **)leftOperand;
