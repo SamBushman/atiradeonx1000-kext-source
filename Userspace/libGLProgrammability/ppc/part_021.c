@@ -1019,7 +1019,7 @@ int std__string___S_construct(n, c, alloc)
     if (reservation != '\0') {
       emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
     }
-    resultData = (ulong *)&DAT_a7b7bf90;
+    resultData = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
     rep = (ulong *)__ZNSs4_Rep9_S_createEmRKSaIcE(n,alloc);

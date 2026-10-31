@@ -9,7 +9,7 @@ T=${TMPDIR:-/tmp}/dc_$(echo $D | tr / _); rm -rf $T; mkdir -p $T/base
 git archive $REV $D | tar -x -C $T/base
 python3 $H/link_corpus.py $T/base/$D $STOCK $GD $T/lk_base --config $CFG > $T/base.log 2>&1 || { echo "link of base failed"; tail -3 $T/base.log; exit 2; }
 python3 $H/link_corpus.py $D $STOCK $GD $T/lk_cand --config $CFG > $T/cand.log 2>&1 || { echo "link of candidate failed"; tail -3 $T/cand.log; exit 2; }
-python3 $H/funcmap.py $D > $T/map.tsv; python3 $H/funcmap.py $T/base/$D > $T/map.base.tsv
+python3 $H/funcmap.py $D --link > $T/map.tsv; python3 $H/funcmap.py $T/base/$D --link > $T/map.base.tsv
 [ -s $T/map.base.tsv ] && python3 $H/unmap_names.py $T/map.base.tsv $T/lk_base/*
 [ -s $T/map.tsv ] && python3 $H/unmap_names.py $T/map.tsv $T/lk_cand/*
 for f in base cand; do grep -h "data labels emitted\|typed data decls" $T/$f.log | sed 's/^[^:]*: //'; done

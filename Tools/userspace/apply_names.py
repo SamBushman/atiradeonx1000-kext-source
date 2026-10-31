@@ -24,7 +24,7 @@ dropped when nothing uses it any more. Only locals (declared after the `{`) can 
         part_*.c (header comment, definition, calls), decls.h, extra_decls.h, ledger.tsv, data/*.c, landing_pads/, and the other *.tsv tables that carry a name
         column (not names_*.tsv, class_methods.tsv or notes). The address in the header comment `/* NAME @ 0xADDR (N bytes) */` is kept, so the
         binary<->corpus mapping by address stays. `func` rows are applied AFTER every `local`/`use` row; the FUNCTION field of those rows (and the
-        anchors of `use` rows) keep the OLD name: the tool resolves either name. NEWNAME must not already occur in the corpus. Tools/userspace/funcmap.py
+        anchors of `use` rows) keep the OLD name: the tool resolves either name. NEWNAME must not already occur in the corpus, except in a row whose tier is EXPORTED: NEWNAME is the Mach-O (nlist/exports) name of the function, which the link labels it with whatever its C name is (link_corpus.fn_label); the rest of the corpus may already declare/call it by that name (an unowned_code/ entry reached only through the data tables). funcmap.py --link leaves those rows out of the datacheck.sh name map. Tools/userspace/funcmap.py
         prints the new->old map for the compile gate (verify_names.sh maps the candidate's symbol names back before comparing).
 
 Idempotent: a row whose `old` is gone and whose `new` is present is "already applied". An `old` that is absent and a `new` that is absent
@@ -304,7 +304,7 @@ def apply_funcs(d, funcs, decl, check):
         if new in seen_new: print('%s:%d: new function name %s is already used by the row at %s' % (f, n, new, seen_new[new])); err += 1; continue
         seen_new[new] = '%s:%d' % (f, n)
         if old in ids:
-            if new in ids or new in decl: print('%s:%d: new function name %s already occurs in the corpus' % (f, n, new)); err += 1; continue
+            if (new in ids or new in decl) and tier != 'EXPORTED': print('%s:%d: new function name %s already occurs in the corpus' % (f, n, new)); err += 1; continue
             pend[old] = new
         else:
             nn = new                                # a later row of a chain may already have renamed this row's result

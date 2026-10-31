@@ -508,39 +508,39 @@ _sizeStandardUniformConstants	0x97c35550	__TEXT,__const	-	-		0x0000001c	data.s
 _sizeStandardUniforms	0x97c35584	__TEXT,__const	-	-		0x00000021	data.s
 guardBlockBeginVal	0x97c356f8	__TEXT,__const	undefined1	1		0xfbfecd00	data.s
 guardBlockEndVal	0x97c356f9	__TEXT,__const	undefined1	1		0xfecd0000	data.s
-DAT_97c356fc	0x97c356fc	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c356fc asm("DAT_97c356fc");	0x00000000	data.s
-DAT_97c35718	0x97c35718	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35718 asm("DAT_97c35718");	0x00000000	data.s
-DAT_97c35734	0x97c35734	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35734 asm("DAT_97c35734");	0x00000000	data.s
-DAT_97c35738	0x97c35738	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35738 asm("DAT_97c35738");	0x00000004	data.s
-DAT_97c3573c	0x97c3573c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3573c asm("DAT_97c3573c");	0x00000001	data.s
-DAT_97c35740	0x97c35740	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35740 asm("DAT_97c35740");	0x00000000	data.s
-DAT_97c35744	0x97c35744	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35744 asm("DAT_97c35744");	0x00000000	data.s
-DAT_97c35748	0x97c35748	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35748 asm("DAT_97c35748");	0x00000000	data.s
-DAT_97c3574c	0x97c3574c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3574c asm("DAT_97c3574c");	0x00000000	data.s
-DAT_97c35750	0x97c35750	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35750 asm("DAT_97c35750");	0x00000000	data.s
+typeQualifierConstInit_97c356fc	0x97c356fc	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierConstInit_97c356fc asm("typeQualifierConstInit_97c356fc");	0x00000000	data.s
+typeQualifierAttributeInit_97c35718	0x97c35718	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierAttributeInit_97c35718 asm("typeQualifierAttributeInit_97c35718");	0x00000000	data.s
+typeQualifierVaryingInit_97c35734	0x97c35734	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierVaryingInit_97c35734 asm("typeQualifierVaryingInit_97c35734");	0x00000000	data.s
+typeQualifierVaryingInitQualifier_97c35738	0x97c35738	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierVaryingInitQualifier_97c35738 asm("typeQualifierVaryingInitQualifier_97c35738");	0x00000004	data.s
+typeQualifierVaryingInitSize_97c3573c	0x97c3573c	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierVaryingInitSize_97c3573c asm("typeQualifierVaryingInitSize_97c3573c");	0x00000001	data.s
+typeQualifierVaryingInitMatrix_97c35740	0x97c35740	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierVaryingInitMatrix_97c35740 asm("typeQualifierVaryingInitMatrix_97c35740");	0x00000000	data.s
+typeQualifierVaryingInitArray_97c35744	0x97c35744	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierVaryingInitArray_97c35744 asm("typeQualifierVaryingInitArray_97c35744");	0x00000000	data.s
+typeQualifierVaryingInitUserDef_97c35748	0x97c35748	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierVaryingInitUserDef_97c35748 asm("typeQualifierVaryingInitUserDef_97c35748");	0x00000000	data.s
+typeQualifierVaryingInitLine_97c3574c	0x97c3574c	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierVaryingInitLine_97c3574c asm("typeQualifierVaryingInitLine_97c3574c");	0x00000000	data.s
+typeQualifierUniformInit_97c35750	0x97c35750	__TEXT,__const	undefined4	4	extern unsigned int typeQualifierUniformInit_97c35750 asm("typeQualifierUniformInit_97c35750");	0x00000000	data.s
 _yytranslate	0x97c3576c	__TEXT,__const	-	-		0x00020202	data.s
 SYM_97c35888	0x97c35888	__TEXT,__const	-	-		0x1e1f2021	data.s
 _yyr2	0x97c35a7a	__TEXT,__const	-	-		0x00000001	data.s
 _yydefact	0x97c35c2a	__TEXT,__const	-	-		0x00000081	data.s
-DAT_97c35e08	0x97c35e08	__TEXT,__const	-	-	extern unsigned char DAT_97c35e08 asm("DAT_97c35e08");	0x00000000	data.s
-DAT_97c35f58	0x97c35f58	__TEXT,__const	-	-	extern unsigned char DAT_97c35f58 asm("DAT_97c35f58");	0x00300499	data.s
+yydgotoMinusNtbase_97c35e08	0x97c35e08	__TEXT,__const	-	-	extern unsigned char yydgotoMinusNtbase_97c35e08 asm("yydgotoMinusNtbase_97c35e08");	0x00000000	data.s
+yydgotoLastEntry_97c35f58	0x97c35f58	__TEXT,__const	-	-	extern unsigned char yydgotoLastEntry_97c35f58 asm("yydgotoLastEntry_97c35f58");	0x00300499	data.s
 _yypact	0x97c35f5a	__TEXT,__const	undefined2	2		0x04998000	data.s
-DAT_97c36138	0x97c36138	__TEXT,__const	-	-	extern unsigned char DAT_97c36138 asm("DAT_97c36138");	0x03d103d1	data.s
+yypgotoMinusNtbase_97c36138	0x97c36138	__TEXT,__const	-	-	extern unsigned char yypgotoMinusNtbase_97c36138 asm("yypgotoMinusNtbase_97c36138");	0x03d103d1	data.s
 _yypgoto	0x97c361f6	__TEXT,__const	-	-		0x80008000	data.s
 _yytable	0x97c3628a	__TEXT,__const	-	-		0x00b800c5	data.s
 _yycheck	0x97c36c6a	__TEXT,__const	-	-		0x004c005c	data.s
 _yy_accept	0x97c3764c	__TEXT,__const	-	-		0x00000000	data.s
-DAT_97c37983	0x97c37983	__TEXT,__const	-	-	extern unsigned char DAT_97c37983[] asm("DAT_97c37983");	0x00000000	data.s
-DAT_97c37d83	0x97c37d83	__TEXT,__const	-	-	extern unsigned char DAT_97c37d83[] asm("DAT_97c37d83");	0x00000000	data.s
+yyEcBytePlus3_97c37983	0x97c37983	__TEXT,__const	-	-	extern unsigned char yyEcBytePlus3_97c37983[] asm("yyEcBytePlus3_97c37983");	0x00000000	data.s
+yyMetaBytePlus3_97c37d83	0x97c37d83	__TEXT,__const	-	-	extern unsigned char yyMetaBytePlus3_97c37d83[] asm("yyMetaBytePlus3_97c37d83");	0x00000000	data.s
 _yy_base	0x97c37e8c	__TEXT,__const	-	-		0x00000000	data.s
 _yy_def	0x97c381cc	__TEXT,__const	-	-		0x00000199	data.s
 _yy_nxt	0x97c3850c	__TEXT,__const	-	-		0x00000006	data.s
 _yy_chk	0x97c38a52	__TEXT,__const	-	-		0x00000001	data.s
 stageMaxIndexInit_97c38f98	0x97c38f98	__TEXT,__const	undefined8	8	extern unsigned long long stageMaxIndexInit_97c38f98 asm("stageMaxIndexInit_97c38f98");	0xffffffff	data.s
-UNK_97c38fa0	0x97c38fa0	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fa0 asm("UNK_97c38fa0");	0xffffffff	data.s
-UNK_97c38fa4	0x97c38fa4	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fa4 asm("UNK_97c38fa4");	0xffffffff	data.s
-UNK_97c38fa8	0x97c38fa8	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fa8 asm("UNK_97c38fa8");	0xffffffff	data.s
-UNK_97c38fac	0x97c38fac	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fac asm("UNK_97c38fac");	0xffffffff	data.s
+slotPlanInit0_97c38fa0	0x97c38fa0	__TEXT,__const	undefined4	4	extern unsigned int slotPlanInit0_97c38fa0 asm("slotPlanInit0_97c38fa0");	0xffffffff	data.s
+slotPlanInit1_97c38fa4	0x97c38fa4	__TEXT,__const	undefined4	4	extern unsigned int slotPlanInit1_97c38fa4 asm("slotPlanInit1_97c38fa4");	0xffffffff	data.s
+slotPlanInit2_97c38fa8	0x97c38fa8	__TEXT,__const	undefined4	4	extern unsigned int slotPlanInit2_97c38fa8 asm("slotPlanInit2_97c38fa8");	0xffffffff	data.s
+slotPlanInit3_97c38fac	0x97c38fac	__TEXT,__const	undefined4	4	extern unsigned int slotPlanInit3_97c38fac asm("slotPlanInit3_97c38fac");	0xffffffff	data.s
 mainShaderIndexInit_97c38fb0	0x97c38fb0	__TEXT,__const	undefined8	8	extern unsigned long long mainShaderIndexInit_97c38fb0 asm("mainShaderIndexInit_97c38fb0");	0xffffffff	data.s
 fillIndexInit_97c38fb8	0x97c38fb8	__TEXT,__const	undefined8	8	extern unsigned long long fillIndexInit_97c38fb8 asm("fillIndexInit_97c38fb8");	0x00000001	data.s
 _operatorToken	0x97c38fc0	__TEXT,__const	-	-		0x0000006e	data.s
@@ -708,10 +708,10 @@ _glpOpFirstStageAVRTC	0x97c3a7b4	__TEXT,__const	-	-		0x39e00020	data.s
 _glpOpSecondStage1DAVRTC	0x97c3a7f4	__TEXT,__const	-	-		0x83630210	data.s
 _glpOpSecondStage2DAVRTC	0x97c3a858	__TEXT,__const	-	-		0x83630210	data.s
 _glpOpSecondStage3DAVRTC	0x97c3a8fc	__TEXT,__const	-	-		0x83630210	data.s
-DAT_97c3aa2c	0x97c3aa2c	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c3aa2c asm("DAT_97c3aa2c");	0x00000000	data.s
-DAT_97c3aa34	0x97c3aa34	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa34 asm("DAT_97c3aa34");	0x00000001	data.s
-DAT_97c3aa38	0x97c3aa38	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa38 asm("DAT_97c3aa38");	0x00000000	data.s
-DAT_97c3aa3c	0x97c3aa3c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa3c asm("DAT_97c3aa3c");	0x00000000	data.s
+flattenIfZeroDoubleInit_97c3aa2c	0x97c3aa2c	__TEXT,__const	undefined8	8	extern unsigned long long flattenIfZeroDoubleInit_97c3aa2c asm("flattenIfZeroDoubleInit_97c3aa2c");	0x00000000	data.s
+flattenIfWordsInit0_97c3aa34	0x97c3aa34	__TEXT,__const	undefined4	4	extern unsigned int flattenIfWordsInit0_97c3aa34 asm("flattenIfWordsInit0_97c3aa34");	0x00000001	data.s
+flattenIfWordsInit1_97c3aa38	0x97c3aa38	__TEXT,__const	undefined4	4	extern unsigned int flattenIfWordsInit1_97c3aa38 asm("flattenIfWordsInit1_97c3aa38");	0x00000000	data.s
+flattenIfWordsInit2_97c3aa3c	0x97c3aa3c	__TEXT,__const	undefined4	4	extern unsigned int flattenIfWordsInit2_97c3aa3c asm("flattenIfWordsInit2_97c3aa3c");	0x00000000	data.s
 detectConstantLoopsOpcodeTableInit_97c3aa40	0x97c3aa40	__TEXT,__const	-	-	extern unsigned char detectConstantLoopsOpcodeTableInit_97c3aa40 asm("detectConstantLoopsOpcodeTableInit_97c3aa40");	0x0000006c	data.s
 detectConstantLoopsSourceCountTableInit_97c3aa64	0x97c3aa64	__TEXT,__const	-	-	extern unsigned char detectConstantLoopsSourceCountTableInit_97c3aa64 asm("detectConstantLoopsSourceCountTableInit_97c3aa64");	0x00000001	data.s
 unrollConstantLoopsOpcodeTableInit0_97c3aa88	0x97c3aa88	__TEXT,__const	undefined4	4	extern unsigned int unrollConstantLoopsOpcodeTableInit0_97c3aa88 asm("unrollConstantLoopsOpcodeTableInit0_97c3aa88");	0x00000034	data.s
@@ -873,33 +873,33 @@ stringTerminalPtr_a7b7baa4	0xa7b7baa4	__DATA,__data	undefined4	4	extern unsigned
 emptyStringRepPtr_a7b7baa8	0xa7b7baa8	__DATA,__data	undefined4	4	extern unsigned int emptyStringRepPtr_a7b7baa8 asm("emptyStringRepPtr_a7b7baa8");	pointer -> LD_a7b7e010	data.s
 _shaderString	0xa7b7baac	__DATA,__data	undefined4	4		pointer -> LD_97c2b564	data.s
 _linkErrorString	0xa7b7bab4	__DATA,__data	undefined4	4		pointer -> LD_97c2b578	data.s
-UNK_a7b7bab8	0xa7b7bab8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bab8 asm("UNK_a7b7bab8");	pointer -> LD_97c2b608	data.s
-UNK_a7b7babc	0xa7b7babc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7babc asm("UNK_a7b7babc");	pointer -> LD_97c2b63c	data.s
-UNK_a7b7bac4	0xa7b7bac4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bac4 asm("UNK_a7b7bac4");	pointer -> LD_97c2b6b0	data.s
-UNK_a7b7bac8	0xa7b7bac8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bac8 asm("UNK_a7b7bac8");	pointer -> LD_97c2b704	data.s
-UNK_a7b7bacc	0xa7b7bacc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bacc asm("UNK_a7b7bacc");	pointer -> LD_97c2b75c	data.s
-UNK_a7b7bad0	0xa7b7bad0	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bad0 asm("UNK_a7b7bad0");	pointer -> LD_97c2b794	data.s
-UNK_a7b7bad4	0xa7b7bad4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bad4 asm("UNK_a7b7bad4");	pointer -> LD_97c2b818	data.s
+noMainFunctionFoundInFmtPtr_a7b7bab8	0xa7b7bab8	__DATA,__data	undefined4	4	extern unsigned int noMainFunctionFoundInFmtPtr_a7b7bab8 asm("noMainFunctionFoundInFmtPtr_a7b7bab8");	pointer -> LD_97c2b608	data.s
+mainFunctionsFoundInLinkedFmtPtr_a7b7babc	0xa7b7babc	__DATA,__data	undefined4	4	extern unsigned int mainFunctionsFoundInLinkedFmtPtr_a7b7babc asm("mainFunctionsFoundInLinkedFmtPtr_a7b7babc");	pointer -> LD_97c2b63c	data.s
+couldNotFindVertexShaderFmtPtr_a7b7bac4	0xa7b7bac4	__DATA,__data	undefined4	4	extern unsigned int couldNotFindVertexShaderFmtPtr_a7b7bac4 asm("couldNotFindVertexShaderFmtPtr_a7b7bac4");	pointer -> LD_97c2b6b0	data.s
+doNotHaveAnAttachedFmtPtr_a7b7bac8	0xa7b7bac8	__DATA,__data	undefined4	4	extern unsigned int doNotHaveAnAttachedFmtPtr_a7b7bac8 asm("doNotHaveAnAttachedFmtPtr_a7b7bac8");	pointer -> LD_97c2b704	data.s
+couldNotFindMappingForStrPtr_a7b7bacc	0xa7b7bacc	__DATA,__data	undefined4	4	extern unsigned int couldNotFindMappingForStrPtr_a7b7bacc asm("couldNotFindMappingForStrPtr_a7b7bacc");	pointer -> LD_97c2b75c	data.s
+varyingTypesDoNotMatchFmtPtr_a7b7bad0	0xa7b7bad0	__DATA,__data	undefined4	4	extern unsigned int varyingTypesDoNotMatchFmtPtr_a7b7bad0 asm("varyingTypesDoNotMatchFmtPtr_a7b7bad0");	pointer -> LD_97c2b794	data.s
+fragmentShaderReadsVaryingWhichFmtPtr_a7b7bad4	0xa7b7bad4	__DATA,__data	undefined4	4	extern unsigned int fragmentShaderReadsVaryingWhichFmtPtr_a7b7bad4 asm("fragmentShaderReadsVaryingWhichFmtPtr_a7b7bad4");	pointer -> LD_97c2b818	data.s
 vertexShaderWritesVaryingWhichFmtPtr_a7b7bad8	0xa7b7bad8	__DATA,__data	undefined4	4	extern unsigned int vertexShaderWritesVaryingWhichFmtPtr_a7b7bad8 asm("vertexShaderWritesVaryingWhichFmtPtr_a7b7bad8");	pointer -> LD_97c2b864	data.s
-UNK_a7b7badc	0xa7b7badc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7badc asm("UNK_a7b7badc");	pointer -> LD_97c2b8ac	data.s
+fragmentShaderReadsVaryingWhichFmtPtr_a7b7badc	0xa7b7badc	__DATA,__data	undefined4	4	extern unsigned int fragmentShaderReadsVaryingWhichFmtPtr_a7b7badc asm("fragmentShaderReadsVaryingWhichFmtPtr_a7b7badc");	pointer -> LD_97c2b8ac	data.s
 vertexShaderWritesVaryingWhichFmtPtr_a7b7bae0	0xa7b7bae0	__DATA,__data	undefined4	4	extern unsigned int vertexShaderWritesVaryingWhichFmtPtr_a7b7bae0 asm("vertexShaderWritesVaryingWhichFmtPtr_a7b7bae0");	pointer -> LD_97c2b908	data.s
-UNK_a7b7bae4	0xa7b7bae4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bae4 asm("UNK_a7b7bae4");	pointer -> LD_97c2b960	data.s
-UNK_a7b7bae8	0xa7b7bae8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bae8 asm("UNK_a7b7bae8");	pointer -> LD_97c2b9e4	data.s
+uniformTypesDoNotMatchFmtPtr_a7b7bae4	0xa7b7bae4	__DATA,__data	undefined4	4	extern unsigned int uniformTypesDoNotMatchFmtPtr_a7b7bae4 asm("uniformTypesDoNotMatchFmtPtr_a7b7bae4");	pointer -> LD_97c2b960	data.s
+implementationLimitOfMaxVertexFmtPtr_a7b7bae8	0xa7b7bae8	__DATA,__data	undefined4	4	extern unsigned int implementationLimitOfMaxVertexFmtPtr_a7b7bae8 asm("implementationLimitOfMaxVertexFmtPtr_a7b7bae8");	pointer -> LD_97c2b9e4	data.s
 implementationLimitOfMAXVERTEXFmtPtr_a7b7baec	0xa7b7baec	__DATA,__data	undefined4	4	extern unsigned int implementationLimitOfMAXVERTEXFmtPtr_a7b7baec asm("implementationLimitOfMAXVERTEXFmtPtr_a7b7baec");	pointer -> LD_97c2ba8c	data.s
 implementationLimitOfMAXFRAGMENTFmtPtr_a7b7baf0	0xa7b7baf0	__DATA,__data	undefined4	4	extern unsigned int implementationLimitOfMAXFRAGMENTFmtPtr_a7b7baf0 asm("implementationLimitOfMAXFRAGMENTFmtPtr_a7b7baf0");	pointer -> LD_97c2bb44	data.s
-UNK_a7b7baf4	0xa7b7baf4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7baf4 asm("UNK_a7b7baf4");	pointer -> LD_97c2bbfc	data.s
-UNK_a7b7baf8	0xa7b7baf8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7baf8 asm("UNK_a7b7baf8");	pointer -> LD_97c2bc90	data.s
-UNK_a7b7bafc	0xa7b7bafc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bafc asm("UNK_a7b7bafc");	pointer -> LD_97c2bd28	data.s
+implementationLimitOfActiveVertexFmtPtr_a7b7baf4	0xa7b7baf4	__DATA,__data	undefined4	4	extern unsigned int implementationLimitOfActiveVertexFmtPtr_a7b7baf4 asm("implementationLimitOfActiveVertexFmtPtr_a7b7baf4");	pointer -> LD_97c2bbfc	data.s
+implementationLimitOfActiveFragmentFmtPtr_a7b7baf8	0xa7b7baf8	__DATA,__data	undefined4	4	extern unsigned int implementationLimitOfActiveFragmentFmtPtr_a7b7baf8 asm("implementationLimitOfActiveFragmentFmtPtr_a7b7baf8");	pointer -> LD_97c2bc90	data.s
+implementationLimitOfActiveSamplersFmtPtr_a7b7bafc	0xa7b7bafc	__DATA,__data	undefined4	4	extern unsigned int implementationLimitOfActiveSamplersFmtPtr_a7b7bafc asm("implementationLimitOfActiveSamplersFmtPtr_a7b7bafc");	pointer -> LD_97c2bd28	data.s
 implementationLimitOfVaryingFloatFmtPtr_a7b7bb00	0xa7b7bb00	__DATA,__data	undefined4	4	extern unsigned int implementationLimitOfVaryingFloatFmtPtr_a7b7bb00 asm("implementationLimitOfVaryingFloatFmtPtr_a7b7bb00");	pointer -> LD_97c2bdac	data.s
-UNK_a7b7bb04	0xa7b7bb04	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb04 asm("UNK_a7b7bb04");	pointer -> LD_97c2be10	data.s
-UNK_a7b7bb08	0xa7b7bb08	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb08 asm("UNK_a7b7bb08");	pointer -> LD_97c2be60	data.s
+mismatchBetweenCompilerSAndStrPtr_a7b7bb04	0xa7b7bb04	__DATA,__data	undefined4	4	extern unsigned int mismatchBetweenCompilerSAndStrPtr_a7b7bb04 asm("mismatchBetweenCompilerSAndStrPtr_a7b7bb04");	pointer -> LD_97c2be10	data.s
+mismatchBetweenCompilerSAndStrPtr_a7b7bb08	0xa7b7bb08	__DATA,__data	undefined4	4	extern unsigned int mismatchBetweenCompilerSAndStrPtr_a7b7bb08 asm("mismatchBetweenCompilerSAndStrPtr_a7b7bb08");	pointer -> LD_97c2be60	data.s
 aMaximumOfCompilationUnitsStrPtr_a7b7bb0c	0xa7b7bb0c	__DATA,__data	undefined4	4	extern unsigned int aMaximumOfCompilationUnitsStrPtr_a7b7bb0c asm("aMaximumOfCompilationUnitsStrPtr_a7b7bb0c");	pointer -> LD_97c2beb0	data.s
-UNK_a7b7bb10	0xa7b7bb10	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb10 asm("UNK_a7b7bb10");	pointer -> LD_97c2bee4	data.s
-UNK_a7b7bb14	0xa7b7bb14	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb14 asm("UNK_a7b7bb14");	pointer -> LD_97c2bf10	data.s
-UNK_a7b7bb18	0xa7b7bb18	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb18 asm("UNK_a7b7bb18");	pointer -> LD_97c2bf54	data.s
+vertexShaderDidNotWriteStrPtr_a7b7bb10	0xa7b7bb10	__DATA,__data	undefined4	4	extern unsigned int vertexShaderDidNotWriteStrPtr_a7b7bb10 asm("vertexShaderDidNotWriteStrPtr_a7b7bb10");	pointer -> LD_97c2bee4	data.s
+globalSymbolsNamedTypesDoFmtPtr_a7b7bb14	0xa7b7bb14	__DATA,__data	undefined4	4	extern unsigned int globalSymbolsNamedTypesDoFmtPtr_a7b7bb14 asm("globalSymbolsNamedTypesDoFmtPtr_a7b7bb14");	pointer -> LD_97c2bf10	data.s
+globalSymbolsNamedSizesDoFmtPtr_a7b7bb18	0xa7b7bb18	__DATA,__data	undefined4	4	extern unsigned int globalSymbolsNamedSizesDoFmtPtr_a7b7bb18 asm("globalSymbolsNamedSizesDoFmtPtr_a7b7bb18");	pointer -> LD_97c2bf54	data.s
 notAllShaderFunctionCallsFmtPtr_a7b7bb1c	0xa7b7bb1c	__DATA,__data	undefined4	4	extern unsigned int notAllShaderFunctionCallsFmtPtr_a7b7bb1c asm("notAllShaderFunctionCallsFmtPtr_a7b7bb1c");	pointer -> LD_97c2bf98	data.s
 functionDefinedInMoreThanFmtPtr_a7b7bb20	0xa7b7bb20	__DATA,__data	undefined4	4	extern unsigned int functionDefinedInMoreThanFmtPtr_a7b7bb20 asm("functionDefinedInMoreThanFmtPtr_a7b7bb20");	pointer -> LD_97c2bfdc	data.s
-UNK_a7b7bb24	0xa7b7bb24	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb24 asm("UNK_a7b7bb24");	pointer -> LD_97c2c020	data.s
+functionIsCalledButNotFmtPtr_a7b7bb24	0xa7b7bb24	__DATA,__data	undefined4	4	extern unsigned int functionIsCalledButNotFmtPtr_a7b7bb24 asm("functionIsCalledButNotFmtPtr_a7b7bb24");	pointer -> LD_97c2c020	data.s
 _linkUtilString	0xa7b7bb28	__DATA,__data	undefined4	4		pointer -> LD_97c2c058	data.s
 stringNewlineFmtPtr_a7b7bb34	0xa7b7bb34	__DATA,__data	undefined4	4	extern unsigned int stringNewlineFmtPtr_a7b7bb34 asm("stringNewlineFmtPtr_a7b7bb34");	pointer -> LD_97c2c150	data.s
 noUniformToLocalVertexFmtPtr_a7b7bb38	0xa7b7bb38	__DATA,__data	undefined4	4	extern unsigned int noUniformToLocalVertexFmtPtr_a7b7bb38 asm("noUniformToLocalVertexFmtPtr_a7b7bb38");	pointer -> LD_97c2c18c	data.s
@@ -916,13 +916,13 @@ _linkIntErrorString	0xa7b7bb60	__DATA,__data	undefined4	4		pointer -> LD_97c2c41
 invalidCompilerObjectPassedToStrPtr_a7b7bb64	0xa7b7bb64	__DATA,__data	undefined4	4	extern unsigned int invalidCompilerObjectPassedToStrPtr_a7b7bb64 asm("invalidCompilerObjectPassedToStrPtr_a7b7bb64");	pointer -> LD_97c2c44c	data.s
 attemptToSetLocationForFmtPtr_a7b7bb68	0xa7b7bb68	__DATA,__data	undefined4	4	extern unsigned int attemptToSetLocationForFmtPtr_a7b7bb68 asm("attemptToSetLocationForFmtPtr_a7b7bb68");	pointer -> LD_97c2c478	data.s
 symbolIsBoundAsAttributeFmtPtr_a7b7bb6c	0xa7b7bb6c	__DATA,__data	undefined4	4	extern unsigned int symbolIsBoundAsAttributeFmtPtr_a7b7bb6c asm("symbolIsBoundAsAttributeFmtPtr_a7b7bb6c");	pointer -> LD_97c2c4b0	data.s
-UNK_a7b7bb70	0xa7b7bb70	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb70 asm("UNK_a7b7bb70");	pointer -> LD_97c2c4f4	data.s
+varyingInVertexShaderDoesFmtPtr_a7b7bb70	0xa7b7bb70	__DATA,__data	undefined4	4	extern unsigned int varyingInVertexShaderDoesFmtPtr_a7b7bb70 asm("varyingInVertexShaderDoesFmtPtr_a7b7bb70");	pointer -> LD_97c2c4f4	data.s
 symbolIsBoundAsUniformFmtPtr_a7b7bb74	0xa7b7bb74	__DATA,__data	undefined4	4	extern unsigned int symbolIsBoundAsUniformFmtPtr_a7b7bb74 asm("symbolIsBoundAsUniformFmtPtr_a7b7bb74");	pointer -> LD_97c2c53c	data.s
 failureToAllocateMemoryForFmtPtr_a7b7bb7c	0xa7b7bb7c	__DATA,__data	undefined4	4	extern unsigned int failureToAllocateMemoryForFmtPtr_a7b7bb7c asm("failureToAllocateMemoryForFmtPtr_a7b7bb7c");	pointer -> LD_97c2c5d8	data.s
 couldNotAllocateBindingToStrPtr_a7b7bb84	0xa7b7bb84	__DATA,__data	undefined4	4	extern unsigned int couldNotAllocateBindingToStrPtr_a7b7bb84 asm("couldNotAllocateBindingToStrPtr_a7b7bb84");	pointer -> LD_97c2c63c	data.s
 afterCreationTokenStreamFailedStrPtr_a7b7bb88	0xa7b7bb88	__DATA,__data	undefined4	4	extern unsigned int afterCreationTokenStreamFailedStrPtr_a7b7bb88 asm("afterCreationTokenStreamFailedStrPtr_a7b7bb88");	pointer -> LD_97c2c66c	data.s
 chunkTypesDoMatchWhenStrPtr_a7b7bb8c	0xa7b7bb8c	__DATA,__data	undefined4	4	extern unsigned int chunkTypesDoMatchWhenStrPtr_a7b7bb8c asm("chunkTypesDoMatchWhenStrPtr_a7b7bb8c");	pointer -> LD_97c2c6ac	data.s
-UNK_a7b7bb90	0xa7b7bb90	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb90 asm("UNK_a7b7bb90");	pointer -> LD_97c2c6d0	data.s
+couldNotAddSymbolToFmtPtr_a7b7bb90	0xa7b7bb90	__DATA,__data	undefined4	4	extern unsigned int couldNotAddSymbolToFmtPtr_a7b7bb90 asm("couldNotAddSymbolToFmtPtr_a7b7bb90");	pointer -> LD_97c2c6d0	data.s
 TGenericLinkerVtablePtr_a7b7bba0	0xa7b7bba0	__DATA,__data	undefined4	4	extern unsigned int TGenericLinkerVtablePtr_a7b7bba0 asm("TGenericLinkerVtablePtr_a7b7bba0");	pointer -> LD_a7b7d6e0	data.s
 _symbolUtilString	0xa7b7bba4	__DATA,__data	undefined4	4		pointer -> LD_97c2c8d8	data.s
 paramStrPtr_a7b7bba8	0xa7b7bba8	__DATA,__data	undefined4	4	extern unsigned int paramStrPtr_a7b7bba8 asm("paramStrPtr_a7b7bba8");	pointer -> LD_97c2c8e0	data.s
@@ -1011,7 +1011,7 @@ regHashFunctionPtr	0xa7b7bf80	__DATA,__data	undefined4	4	extern unsigned int reg
 std__string___S_empty_rep_storage	0xa7b7bf84	__DATA,__data	undefined1	1		0x00000000	data.s
 emptyStringRepRefcount_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4	extern unsigned int emptyStringRepRefcount_a7b7bf8c asm("emptyStringRepRefcount_a7b7bf8c");	0x00000000	data.s
 SYM_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4		0x00000000	data.s
-DAT_a7b7bf90	0xa7b7bf90	__DATA,__data	-	-	extern unsigned char DAT_a7b7bf90 asm("DAT_a7b7bf90");	0x00000000	data.s
+emptyStringRepData_freeListBase_a7b7bf90	0xa7b7bf90	__DATA,__data	-	-	extern unsigned char emptyStringRepData_freeListBase_a7b7bf90 asm("emptyStringRepData_freeListBase_a7b7bf90");	0x00000000	data.s
 _S_start_free	0xa7b7bfd4	__DATA,__data	undefined4	4		0x00000000	data.s
 _S_end_free	0xa7b7bfd8	__DATA,__data	undefined4	4		0x00000000	data.s
 _S_heap_size	0xa7b7bfdc	__DATA,__data	undefined4	4		0x00000000	data.s
@@ -1109,12 +1109,12 @@ PTR_LAB_a7b7c1b4	0xa7b7c1b4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LA
 PTR_LAB_a7b7c1c4	0xa7b7c1c4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1c4)() asm("PTR_LAB_a7b7c1c4");	pointer -> _free	data.s
 PTR_LAB_a7b7c1c8	0xa7b7c1c8	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1c8)() asm("PTR_LAB_a7b7c1c8");	pointer -> _malloc	data.s
 _tokens	0xa7b7cd58	__DATA,__const	undefined4	4		0x00000101	data.s
-UNK_a7b7ce41	0xa7b7ce41	__DATA,__const	-	-	extern unsigned char UNK_a7b7ce41 asm("UNK_a7b7ce41");	0x00011797	data.s
-UNK_a7b7ce4c	0xa7b7ce4c	__DATA,__const	-	-	extern unsigned char UNK_a7b7ce4c asm("UNK_a7b7ce4c");	0x00000002	data.s
-UNK_a7b7ce50	0xa7b7ce50	__DATA,__const	-	-	extern unsigned char UNK_a7b7ce50 asm("UNK_a7b7ce50");	pointer -> _op_logor	data.s
+tokensTableLastEntryPlus1_a7b7ce41	0xa7b7ce41	__DATA,__const	-	-	extern unsigned char tokensTableLastEntryPlus1_a7b7ce41 asm("tokensTableLastEntryPlus1_a7b7ce41");	0x00011797	data.s
+binopTableRecord0Precedence_a7b7ce4c	0xa7b7ce4c	__DATA,__const	-	-	extern unsigned char binopTableRecord0Precedence_a7b7ce4c asm("binopTableRecord0Precedence_a7b7ce4c");	0x00000002	data.s
+binopTableRecord0Function_a7b7ce50	0xa7b7ce50	__DATA,__const	-	-	extern unsigned char binopTableRecord0Function_a7b7ce50 asm("binopTableRecord0Function_a7b7ce50");	pointer -> _op_logor	data.s
 binopTableLastEntry_a7b7cf14	0xa7b7cf14	__DATA,__const	undefined4	4	extern unsigned int binopTableLastEntry_a7b7cf14 asm("binopTableLastEntry_a7b7cf14");	0x00000025	data.s
 _unop	0xa7b7cf20	__DATA,__const	-	-		0x0000002b	data.s
-UNK_a7b7cf24	0xa7b7cf24	__DATA,__const	-	-	extern unsigned char UNK_a7b7cf24 asm("UNK_a7b7cf24");	pointer -> _op_pos	data.s
+unopTableRecord0Function_a7b7cf24	0xa7b7cf24	__DATA,__const	-	-	extern unsigned char unopTableRecord0Function_a7b7cf24 asm("unopTableRecord0Function_a7b7cf24");	pointer -> _op_pos	data.s
 TType__vtable	0xa7b7cf40	__DATA,__const	-	-		0x00000000	data.s
 PTR___ZN5TTypeD1Ev_a7b7cf48	0xa7b7cf48	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7cf48 asm("PTR___ZN5TTypeD1Ev_a7b7cf48");	pointer -> __ZN5TTypeD1Ev	data.s
 PTR_getLine_a7b7cf90	0xa7b7cf90	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7cf90 asm("PTR_getLine_a7b7cf90");	pointer -> __ZNK11TIntermNode7getLineEv	data.s

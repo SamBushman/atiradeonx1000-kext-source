@@ -186,12 +186,12 @@ int std____default_alloc_template_true_0___allocate(n)
   if ((n < 0x81) && (_S_force_new < 1)) {
     freeListOffset = n + 7 >> 1 & 0x7ffffffc;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(lock);
-    result = *(undefined4 **)(&DAT_a7b7bf90 + freeListOffset);
+    result = *(undefined4 **)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset);
     if (result == (undefined4 *)0x0) {
       result = (undefined4 *)((int (*)())std____default_alloc_template_true_0____S_refill)(n + 7 & 0xfffffff8);
     }
     else {
-      *(undefined4 *)(&DAT_a7b7bf90 + freeListOffset) = *result;
+      *(undefined4 *)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset) = *result;
     }
     if (result == (undefined4 *)0x0) {
       std____throw_bad_alloc();
@@ -245,13 +245,13 @@ int std__allocator_char___allocate(alloc, n)
     if ((n < (void *)0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
       freeListOffset = (int)n + 7U >> 1 & 0x7ffffffc;
       ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(lock);
-      result = *(undefined4 **)(&DAT_a7b7bf90 + freeListOffset);
+      result = *(undefined4 **)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset);
       if (result == (undefined4 *)0x0) {
         result = (undefined4 *)
                  __default_alloc_template_true_0____S_refill((int)n + 7U & 0xfffffff8);
       }
       else {
-        *(undefined4 *)(&DAT_a7b7bf90 + freeListOffset) = *result;
+        *(undefined4 *)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset) = *result;
       }
       if (result == (undefined4 *)0x0) {
         std____throw_bad_alloc();
@@ -276,8 +276,8 @@ int std____default_alloc_template_true_0___deallocate(p, n)
   if ((n < 0x81) && (_S_force_new < 1)) {
     freeListOffset = n + 7 >> 1 & 0x7ffffffc;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(lock);
-    *(undefined4 *)p = *(undefined4 *)(&DAT_a7b7bf90 + freeListOffset);
-    *(void **)(&DAT_a7b7bf90 + freeListOffset) = p;
+    *(undefined4 *)p = *(undefined4 *)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset);
+    *(void **)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset) = p;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(lock);
   }
   else {
@@ -298,8 +298,8 @@ int std__allocator_char___deallocate(alloc, p, n)
   if ((n < 0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
     freeListOffset = n + 7 >> 1 & 0x7ffffffc;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(lock);
-    *(undefined4 *)p = *(undefined4 *)(&DAT_a7b7bf90 + freeListOffset);
-    *(char **)(&DAT_a7b7bf90 + freeListOffset) = p;
+    *(undefined4 *)p = *(undefined4 *)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset);
+    *(char **)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset) = p;
     ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(lock);
   }
   else {
@@ -470,7 +470,7 @@ int std____default_alloc_template_true_0____S_refill(n)
   nobjs[0] = 0x14;
   chunk = ((int (*)())std____default_alloc_template_true_0____S_chunk_alloc)(n,nobjs);
   if (nobjs[0] != 1) {
-    *(undefined4 **)(&DAT_a7b7bf90 + (n + 7 >> 1 & 0x7ffffffc)) =
+    *(undefined4 **)(&emptyStringRepData_freeListBase_a7b7bf90 + (n + 7 >> 1 & 0x7ffffffc)) =
          (undefined4 *)(chunk + n);
     currentObj = (undefined4 *)(chunk + n);
     for (i = 1; nobjs[0] + -1 != i; i = i + 1) {
@@ -514,18 +514,18 @@ loopSetResult:
     bytesToGet = totalBytes * 2 + ((_S_heap_size >> 4) + 7 & 0xfffffff8);
     if (bytesLeft != 0) {
       freeListOffset = bytesLeft + 7 >> 1 & 0x7ffffffc;
-      *_S_start_free = *(undefined4 *)(&DAT_a7b7bf90 + freeListOffset);
-      *(undefined4 **)(&DAT_a7b7bf90 + freeListOffset) = _S_start_free;
+      *_S_start_free = *(undefined4 *)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset);
+      *(undefined4 **)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListOffset) = _S_start_free;
     }
     _S_start_free = operator_new(bytesToGet);
     i = size;
     if (_S_start_free == (undefined4 *)0x0) {
       for (; i < 0x81; i = i + 8) {
         freeListSlot = i + 7 >> 1 & 0x7ffffffc;
-        freeListHead = *(undefined4 **)(&DAT_a7b7bf90 + freeListSlot);
+        freeListHead = *(undefined4 **)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListSlot);
         if (freeListHead != (undefined4 *)0x0) {
           _S_end_free = (int)freeListHead + i;
-          *(undefined4 *)(&DAT_a7b7bf90 + freeListSlot) = *freeListHead;
+          *(undefined4 *)(&emptyStringRepData_freeListBase_a7b7bf90 + freeListSlot) = *freeListHead;
           _S_start_free = freeListHead;
           goto loopSetResult;
         }

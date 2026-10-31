@@ -6438,7 +6438,7 @@ storeYyOutArgs2:
     }
     goto setYyvalTypeOrFunction;
   case 0x80:
-    typeSpecifierInit = &DAT_97c356fc;
+    typeSpecifierInit = &typeQualifierConstInit_97c356fc;
     goto setYyvalTypeLine;
   case 0x81:
     if (*(int *)((int)parseContext + 0xc) != 0) {
@@ -6457,7 +6457,7 @@ storeYyOutArgs2:
     if (globalError != 0) {
       TParseContext__recover(parseContext);
     }
-    typeSpecifierInit = &DAT_97c35718;
+    typeSpecifierInit = &typeQualifierAttributeInit_97c35718;
     goto setYyvalTypeLine;
   case 0x82:
     globalError = TParseContext__globalErrorCheck
@@ -6501,7 +6501,7 @@ setYyvalTypeOrFunction:
     if (globalError != 0) {
       TParseContext__recover(parseContext);
     }
-    typeSpecifierInit = &DAT_97c35750;
+    typeSpecifierInit = &typeQualifierUniformInit_97c35750;
 setYyvalTypeLine:
     yyvalTypeLine = (unsigned char *)typeSpecifierInit[6];
     yyvalSize = (unsigned char *)typeSpecifierInit[2];
@@ -8002,7 +8002,7 @@ yynDefault:
   scratchR10 = *(short *)(" !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^" +
                       yyruleByteOffset + 0x40) * 2;
   scratchR9 = &_yypgoto + scratchR10;
-  yytableIndex = (int)*(short *)(&DAT_97c36138 + scratchR10) + (int)*(short *)yyssp;
+  yytableIndex = (int)*(short *)(&yypgotoMinusNtbase_97c36138 + scratchR10) + (int)*(short *)yyssp;
   scratchR4 = r4Out17;
   if ((yytableIndex < 0x4f0) &&
      (scratchR9 = (undefined *)(yytableIndex * 2),
@@ -8010,7 +8010,7 @@ yynDefault:
     yystate = (int)*(short *)(&_yytable + (int)scratchR9);
   }
   else {
-    yystate = (int)*(short *)(&DAT_97c35e08 + scratchR10);
+    yystate = (int)*(short *)(&yydgotoMinusNtbase_97c35e08 + scratchR10);
   }
   goto loopPushYystate;
 loopSetLevelEntry:
@@ -8256,7 +8256,7 @@ loopSetYyDefPtr:
   yyDefPtr = &_yy_def;
   stateOffset = yyCurrentState << 1;
   do {
-    yyC = (uint)(byte)(DAT_97c37983)[(uint)*_yy_c_buf_p * 4];
+    yyC = (uint)(byte)(yyEcBytePlus3_97c37983)[(uint)*_yy_c_buf_p * 4];
     if (*(short *)(&_yy_accept + stateOffset) != 0) {
       _yy_last_accepting_cpos = _yy_c_buf_p;
       _yy_last_accepting_state = yyCurrentState;
@@ -8266,7 +8266,7 @@ loopSetYyDefPtr:
       yyCurrentState = (int)*(short *)(&_yy_def + stateOffset);
       stateOffset = yyCurrentState << 1;
       if (0x199 < yyCurrentState) {
-        yyC = (uint)(byte)(DAT_97c37d83)[yyC * 4];
+        yyC = (uint)(byte)(yyMetaBytePlus3_97c37d83)[yyC * 4];
       }
     }
     yyCurrentState = (int)*(short *)(&_yy_nxt + nxtIndex);
@@ -9107,7 +9107,7 @@ int yy_get_previous_state()
   for (yyCp = _yytext; yyCp < _yy_c_buf_p; yyCp = yyCp + 1) {
     yyC = 1;
     if (*yyCp != 0) {
-      yyC = (uint)(byte)(DAT_97c37983)[(uint)*yyCp * 4];
+      yyC = (uint)(byte)(yyEcBytePlus3_97c37983)[(uint)*yyCp * 4];
     }
     stateOffset = yyCurrentState * 2;
     if (*(short *)(&_yy_accept + stateOffset) != 0) {
@@ -9119,7 +9119,7 @@ int yy_get_previous_state()
       yyCurrentState = (int)*(short *)(&_yy_def + stateOffset);
       stateOffset = yyCurrentState << 1;
       if (0x199 < yyCurrentState) {
-        yyC = (uint)(byte)(DAT_97c37d83)[yyC * 4];
+        yyC = (uint)(byte)(yyMetaBytePlus3_97c37d83)[yyC * 4];
       }
     }
     yyCurrentState = (int)*(short *)(&_yy_nxt + nxtIndex);
@@ -9146,7 +9146,7 @@ int yy_try_NUL_trans(yyCurrentState)
     yyCurrentState = (int)*(short *)(&_yy_def + stateOffset);
     stateOffset = yyCurrentState << 1;
     if (0x199 < yyCurrentState) {
-      yyC = (uint)(byte)(DAT_97c37d83)[yyC * 4];
+      yyC = (uint)(byte)(yyMetaBytePlus3_97c37d83)[yyC * 4];
     }
   }
   if (*(short *)(&_yy_nxt + nxtIndex) == 0x199) {
