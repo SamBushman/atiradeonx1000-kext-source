@@ -674,7 +674,7 @@ int orph_40a9c(param_1, param_2, param_3)
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
-        goto LAB_00040524;
+        goto checkComponentCount;
       }
       *piVar10 = (int)pvVar2;
       param_1[0xc] = uVar3;
@@ -688,7 +688,7 @@ int orph_40a9c(param_1, param_2, param_3)
     puVar1[3] = param_3[3];
     puVar1[4] = param_3[6];
   }
-LAB_00040524:
+checkComponentCount:
   if (1 >= uVar6) {
     return param_1[9];
   }
@@ -723,7 +723,7 @@ LAB_00040524:
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
-        goto LAB_00040664;
+        goto checkComponentCount2;
       }
       *piVar10 = (int)pvVar2;
       param_1[0xc] = uVar3;
@@ -737,8 +737,8 @@ LAB_00040524:
     puVar1[3] = param_3[3];
     puVar1[4] = param_3[6];
   }
-LAB_00040664:
-  if (uVar6 < 3) goto LAB_000408d0;
+checkComponentCount2:
+  if (uVar6 < 3) goto setTempRegister;
   uVar3 = uVar9 >> 8 & 7;
   uVar5 = uVar9 >> 0xb & 1;
   *puVar7 = *puVar7 & 0xfffffff3;
@@ -769,7 +769,7 @@ LAB_00040664:
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
-        goto LAB_00040794;
+        goto checkComponentCount3;
       }
       *piVar10 = (int)pvVar2;
       param_1[0xc] = uVar3;
@@ -783,7 +783,7 @@ LAB_00040664:
     puVar1[3] = param_3[3];
     puVar1[4] = param_3[6];
   }
-LAB_00040794:
+checkComponentCount3:
   if (uVar6 == 4) {
     uVar6 = uVar9 >> 0xc & 7;
     uVar9 = uVar9 >> 0xf & 1;
@@ -815,7 +815,7 @@ LAB_00040794:
           if (param_1[9] == 0) {
             param_1[9] = 1;
           }
-          goto LAB_000408d0;
+          goto setTempRegister;
         }
         *piVar10 = (int)pvVar2;
         param_1[0xc] = uVar6;
@@ -830,7 +830,7 @@ LAB_00040794:
       puVar1[4] = param_3[6];
     }
   }
-LAB_000408d0:
+setTempRegister:
   iVar4 = param_1[8];
   param_3[3] = 0;
   *puVar8 = 0;
@@ -965,7 +965,7 @@ int orph_40ac0(param_1, param_2, param_3)
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
-        goto LAB_00040cf0;
+        goto checkRepeatCount;
       }
       *piVar18 = (int)pvVar3;
       param_1[0xc] = uVar5;
@@ -988,7 +988,7 @@ int orph_40ac0(param_1, param_2, param_3)
       puVar11 = puVar11 + 2;
     } while (bVar2);
   }
-LAB_00040cf0:
+checkRepeatCount:
   if (uVar12 < 2) {
     return param_1[9];
   }
@@ -1029,7 +1029,7 @@ LAB_00040cf0:
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
-        goto LAB_00040e70;
+        goto checkRepeatCount2;
       }
       *piVar18 = (int)pvVar3;
       param_1[0xc] = uVar5;
@@ -1052,8 +1052,8 @@ LAB_00040cf0:
       puVar11 = puVar11 + 2;
     } while (bVar2);
   }
-LAB_00040e70:
-  if (uVar12 < 3) goto LAB_00041170;
+checkRepeatCount2:
+  if (uVar12 < 3) goto setTempRegister;
   uVar9 = uVar17 >> 8 & 7;
   uVar10 = uVar17 >> 0xb & 1;
   uVar6 = uVar16 >> 8 & 7;
@@ -1090,7 +1090,7 @@ LAB_00040e70:
         if (param_1[9] == 0) {
           param_1[9] = 1;
         }
-        goto LAB_00040ff0;
+        goto checkRepeatCount3;
       }
       *piVar18 = (int)pvVar3;
       param_1[0xc] = uVar5;
@@ -1113,7 +1113,7 @@ LAB_00040e70:
       puVar11 = puVar11 + 2;
     } while (bVar2);
   }
-LAB_00040ff0:
+checkRepeatCount3:
   if (uVar12 == 4) {
     uVar5 = uVar17 >> 0xc & 7;
     uVar9 = uVar17 >> 0xf & 1;
@@ -1152,7 +1152,7 @@ LAB_00040ff0:
           if (param_1[9] == 0) {
             param_1[9] = 1;
           }
-          goto LAB_00041170;
+          goto setTempRegister;
         }
         *piVar18 = (int)pvVar3;
         param_1[0xc] = uVar12;
@@ -1176,7 +1176,7 @@ LAB_00040ff0:
       } while (bVar2);
     }
   }
-LAB_00041170:
+setTempRegister:
   iVar8 = param_1[8];
   param_3[3] = 0;
   *puVar15 = 0;

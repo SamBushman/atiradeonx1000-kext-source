@@ -205,7 +205,7 @@ checkCtx:
         loopPtr2[0x14] = rangeClass;
       }
       else {
-        loopPtr2[0x14] = (rangeClassAfterClampTable_001e6158)[rangeClass];
+        loopPtr2[0x14] = (rangeClassAfterSaturateTable_001e6158)[rangeClass];
       }
     }
     lastLane = loopIndex == 3;
@@ -262,7 +262,7 @@ setValueNumber2:
         loopPtr2[0x20] = valueNumber;
       }
       else {
-        loopPtr2[0x20] = (compareClassAbsTable_001e61a0)[valueNumber];
+        loopPtr2[0x20] = (compareClassAfterSaturateTable_001e61a0)[valueNumber];
       }
     }
     lastLane = loopIndex == 3;
@@ -928,7 +928,7 @@ int ValueKey__classifyLaneRangeClass(ctx, lane, clampFlagsOut)
     }
     resultClass = operandClass[0];
     if (*(int *)(keyInst + 0x120) != 0) {
-      resultClass = (rangeClassAfterClampTable_001e6158)[operandClass[0]];
+      resultClass = (rangeClassAfterSaturateTable_001e6158)[operandClass[0]];
       if (operandClass[0] == resultClass) {
         *(undefined4 *)(laneByteOffset + clampFlagsOut) = 0;
         resultClass = operandClass[0];
@@ -1050,7 +1050,7 @@ int ValueKey__classifyLaneCompareClass(ctx, lane)
       resultClass = operandClass[0];
     }
     if (*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) {
-      resultClass = (compareClassAbsTable_001e61a0)[resultClass];
+      resultClass = (compareClassAfterSaturateTable_001e61a0)[resultClass];
     }
     laneEntryPtr2 = lane * 4 + ctx;
     laneNode = *(int *)(laneEntryPtr2 + 0x40);

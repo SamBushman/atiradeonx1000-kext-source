@@ -145,6 +145,16 @@ for ln in decls:
 # new name to the Ghidra name it came from, whose suffix still is the address
 DATA_ROOT = apply_names.func_roots(apply_names.load_datas(corpus))
 
+# `target` rows (`target<TAB>LD_<hex address><TAB>NEWNAME<TAB>tier<TAB>evidence`) name an object the link layer would label LD_<address>: an anonymous data object that only
+# pointer words reach (a vtable, a template). The new name replaces LD_<address> everywhere in data.s/code.s; ld(addr) gives the label for an address.
+TARGET_NAME = {}
+for _r in apply_names.load_targets(corpus):
+    _a = int(_r[2][3:], 16)
+    assert _a not in TARGET_NAME, 'two target rows for 0x%x' % _a
+    TARGET_NAME[_a] = _r[3]
+def ld(a):
+    return TARGET_NAME.get(a, 'LD_%x' % a)
+
 def addr_of_name(n):
     mm = re.search(r'_([0-9a-f]{8})$', DATA_ROOT.get(n, n))
     return int(mm.group(1), 16) if mm else None
@@ -805,7 +815,7 @@ def classify_target(t):
     s = m.sec_at(t)
     if s is not None:
         targets.add(t)
-        return 'LD_%x' % t
+        return ld(t)
     for ss in nlist_by_addr.get(t, []):
         return ss['name']
     return None
@@ -900,7 +910,7 @@ def emit_label(a):
         S.append('.globl %s' % nm)
         S.append('%s:' % nm)
     if a in targets:
-        S.append('LD_%x:' % a)
+        S.append('%s:' % ld(a))
 
 label_positions = sorted(set(a2 for a2 in names_at if names_at[a2]) | set(targets))
 skip_words = set()
@@ -912,7 +922,7 @@ for a, g in gd.items():
         skip_words.add(a)
 zerofill_grown = []   # (address, name, Ghidra length, emitted size) of zerofill objects larger than their Ghidra type
 def first_name_of(a_):
-    return (names_at.get(a_) or ['LD_%x' % a_])[0]
+    return (names_at.get(a_) or [ld(a_)])[0]
 for s in data_secs:
     ty = s['flags'] & 0xff
     a, end = s['addr'], s['addr'] + s['size']
@@ -930,12 +940,12 @@ for s in data_secs:
             if g and g['len'] and g['len'] < size:
                 zerofill_grown.append((a2, first_name_of(a2), g['len'], size))
             names = [n for n in names_at.get(a2, []) if n not in defined and n not in TOOLCHAIN_DATA]
-            first = names[0] if names else 'LD_%x' % a2
+            first = names[0] if names else ld(a2)
             for n in names:
                 defined.add(n)
                 S.append('.globl %s' % n)
             if a2 in targets and not names:
-                S.append('.globl LD_%x' % a2)
+                S.append('.globl %s' % ld(a2))
             # Alignment 0 for every object but the first: each object's size is the whole gap to the next label, so objects laid out in address order without padding keep the
             # stock's exact offsets - and with them the stock's alignment, from the section's start. Aligning a later object (7981-byte DAT_001f65e7, 8-aligned) moved it one
             # byte away from DAT_001f65e4..e6, which the pixel-conversion code (FUN_0001c380) indexes as ONE buffer (`DAT_001f65e4[i]`, `DAT_001f65e5[i]`, `&DAT_001f65e7 + i*4`).
@@ -943,7 +953,7 @@ for s in data_secs:
             for n in names[1:]:
                 S.append('.set %s, %s' % (n, first))
             if a2 in targets and names:
-                S.append('.set LD_%x, %s' % (a2, first))
+                S.append('.set %s, %s' % (ld(a2), first))
         continue
     DIRECTIVE = {('__TEXT', '__cstring'): '.cstring', ('__TEXT', '__literal4'): '.literal4', ('__TEXT', '__literal8'): '.literal8', ('__TEXT', '__const'): '.const',
                  ('__DATA', '__const'): '.const_data', ('__DATA', '__data'): '.data'}
@@ -1023,7 +1033,7 @@ for nm_, sp_ in sorted(cfg.get('data_anchors', {}).items()):
     anchor_ = addr_of_name(nm_)
     delta_ = anchor_ - base_
     S.append('.globl %s' % nm_)
-    S.append('.set %s, LD_%x%s' % (nm_, base_, ('%+d' % delta_) if delta_ else ''))
+    S.append('.set %s, %s%s' % (nm_, ld(base_), ('%+d' % delta_) if delta_ else ''))
     defined.add(nm_)
 open(os.path.join(out, 'data.s'), 'w').write('\n'.join(S) + '\n')
 

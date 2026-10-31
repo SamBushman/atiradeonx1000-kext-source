@@ -709,7 +709,7 @@ int KhanPs__ctor_128fd0(this, compiler, createSchedModels)
   
   HwLimits__dtor_10dad8(this);
   this[7] = 0;
-  vtable = ptrTo_KhanPsHwLimitsTable_001e9104;
+  vtable = ptrTo_KhanPsIlTypeToRegisterFileTable_001e9104;
   this[0xe] = 9;
   this[0x10] = 0x60;
   this[1] = vtable;
@@ -750,7 +750,7 @@ int KhanPs__ctor_129130(this, compiler, createSchedModels)
   
   HwLimits__dtor_10dad8(this);
   this[7] = 0;
-  vtable = ptrTo_KhanPsHwLimitsTable_001e9104;
+  vtable = ptrTo_KhanPsIlTypeToRegisterFileTable_001e9104;
   this[0xe] = 9;
   this[0x10] = 0x60;
   this[1] = vtable;
@@ -1740,7 +1740,7 @@ int KhanVs__ctor_12a578(this, compiler, createSchedModels)
   undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
-  vtable = ptrTo_KhanVsHwLimitsTable_001e9114;
+  vtable = ptrTo_KhanVsIlTypeToRegisterFileTable_001e9114;
   this[4] = 5;
   this[1] = vtable;
   this[6] = 0x48;
@@ -1783,7 +1783,7 @@ int KhanVs__ctor_12a6c0(this, compiler, createSchedModels)
   undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
-  vtable = ptrTo_KhanVsHwLimitsTable_001e9114;
+  vtable = ptrTo_KhanVsIlTypeToRegisterFileTable_001e9114;
   this[4] = 5;
   this[1] = vtable;
   this[6] = 0x48;

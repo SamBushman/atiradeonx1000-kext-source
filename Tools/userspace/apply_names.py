@@ -61,7 +61,7 @@ def load_rows(d):
         for n, l in enumerate(open(f), 1):
             if not l.strip() or l.startswith('#'): continue
             c = l.rstrip('\n').split('\t')
-            if c[0] in ('func', 'data'): continue            # see load_funcs
+            if c[0] in ('func', 'data', 'target'): continue   # see load_funcs / load_targets
             if len(c) < 5 or c[0] not in ('local', 'use') or (c[0] == 'use' and len(c) < 7):
                 print('%s:%d: bad row' % (f, n)); sys.exit(1)
             rows.append((f, n, c[1], c[2], c[3], c[4]) if c[0] == 'local' else (f, n, c[1], c[2], c[3], c[4], c[6], c[7] if len(c) > 7 else '', c[8] if len(c) > 8 and c[8] else 'all', c[9] if len(c) > 9 and c[9] else 'none'))
@@ -71,6 +71,21 @@ def load_rows(d):
 def load_datas(d):
     """-> [(file, line, old, new, tier, evidence)] of the `data` rows of d/names*.tsv (func_roots() maps their new names to the Ghidra labels)"""
     return [r for r in load_funcs(d, 'data\t')]
+
+
+def load_targets(d):
+    """-> [(file, line, old, new, tier, evidence)] of the `target` rows of d/names*.tsv: `target<TAB>LD_<hex address><TAB>NEW<TAB>tier<TAB>evidence` names the anonymous data
+    object the LINK layer labels LD_<address> (link_corpus.py ld()). The old name never occurs in the C corpus, so apply_names has nothing to rewrite; main() only checks
+    the rows (new names unique, not already a corpus identifier)."""
+    out = []
+    for f in sorted(glob.glob(os.path.join(d, 'names.tsv')) + glob.glob(os.path.join(d, 'names_*.tsv'))):
+        for n, l in enumerate(open(f), 1):
+            if not l.startswith('target\t'): continue
+            c = l.rstrip('\n').split('\t')
+            if len(c) < 5 or not re.fullmatch(r'LD_[0-9a-f]+', c[1]) or not IDENT.fullmatch(c[2]):
+                print('%s:%d: bad target row' % (f, n)); sys.exit(1)
+            out.append((f, n, c[1], c[2], c[3], c[4]))
+    return out
 
 
 def load_funcs(d, kinds=('func\t', 'data\t')):
@@ -365,6 +380,16 @@ def main():
     if funcs:
         p2, a2, e2 = apply_funcs(d, funcs, decl, check)
         pending += p2; applied += a2; errors += e2
+    tgts = load_targets(d)
+    if tgts:
+        used = set(IDENT.findall(dtext))
+        for r_ in funcs: used.update((r_[2], r_[3]))
+        seen_t, seen_a = {}, {}
+        for (f, n, old, new, tier, ev) in tgts:
+            if new in seen_t or old in seen_a: print('%s:%d: target %s / %s is already used by the row at %s' % (f, n, old, new, seen_t.get(new) or seen_a[old])); errors += 1; continue
+            seen_t[new] = seen_a[old] = '%s:%d' % (f, n)
+            if new in used: print('%s:%d: target name %s already occurs in the corpus' % (f, n, new)); errors += 1; continue
+            applied += 1
     print('%d renames %s, %d already applied, %d errors' % (pending, 'pending' if check else 'applied', applied, errors))
     sys.exit(1 if errors or (check and pending) else 0)
 

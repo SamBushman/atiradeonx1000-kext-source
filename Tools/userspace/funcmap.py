@@ -9,5 +9,8 @@ import apply_names as A
 funcs = A.load_funcs(sys.argv[1])
 if '--link' in sys.argv[2:]:
     funcs = [r for r in funcs if r[4] != 'EXPORTED']
+if '--link' in sys.argv[2:]:                        # `target` rows: the link labels the object LD_<addr> until named (link_corpus.ld)
+    for r in A.load_targets(sys.argv[1]):
+        print('%s\t%s' % (r[3], r[2]))
 for new, old in A.func_roots(funcs).items():          # chained rows map to the Ghidra name
     print('%s\t%s' % (new, old))
