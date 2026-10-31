@@ -6379,7 +6379,7 @@ int Inst__mergeSplatSourceInsts_00151a74(inst, inst2, program)
   undefined4 operandCopyWord5;
   int mergedLanesOut;
   undefined1 equalLanesOut [4];
-  int local_60 [6];
+  int mergeWrittenLanesOut [6];
   
   vcall64Result = (**(code **)(*inst + 100))(inst,inst2,program);
   if ((vcall64Result != 0) && (vcall64Result = (**(code **)(*inst2 + 100))(inst2), vcall64Result != 0)) {
@@ -6442,10 +6442,10 @@ int Inst__mergeSplatSourceInsts_00151a74(inst, inst2, program)
               mergedLanes = mergedLanesOut;
               operandRecord = IRInst__getOperandRecord(inst3,0);
               SelectWord__markEqualLanes(equalLanesOut,*(undefined4 *)(operandRecord + 0x10),mergedLanes);
-              SelectWord__mergeWrittenLanes(local_60,operandSelectWord,mergedLanes);
-              mergedLanes = local_60[0];
+              SelectWord__mergeWrittenLanes(mergeWrittenLanesOut,operandSelectWord,mergedLanes);
+              mergedLanes = mergeWrittenLanesOut[0];
               sourceDef = IRInst__getOperandSource(inst2,1);
-              newSrcB = (int *)((int (*)())IRInst__createWithConstantOperands)(3,local_60[0],sourceDef,program,*(undefined4 *)(program + 8),
+              newSrcB = (int *)((int (*)())IRInst__createWithConstantOperands)(3,mergeWrittenLanesOut[0],sourceDef,program,*(undefined4 *)(program + 8),
                                            1.0);
               mergedLanesCopy = mergedLanes;
               sourceDef = IRInst__getOperandSource(inst,1);

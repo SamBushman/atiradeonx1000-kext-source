@@ -8281,7 +8281,7 @@ int pass_post_pack_insts(packCtx)
   int *bestCandidate;
   uint newVecSize;
   uint recordIndex;
-  uint uVar15;
+  uint scoreClearIndex;
   uint pairVecSizeB;
   int candidateByteOffset;
   int inst;
@@ -8580,10 +8580,10 @@ LAB_00146530:
       }
       packCtx[4] = keptCountB;
       if (keptCountB != 0) {
-        uVar15 = 0;
+        scoreClearIndex = 0;
         do {
-          minCapacityB = uVar15 + 1;
-          if ((uint)packCtx[4] <= uVar15) {
+          minCapacityB = scoreClearIndex + 1;
+          if ((uint)packCtx[4] <= scoreClearIndex) {
             if ((uint)packCtx[5] < minCapacityB) {
               grownCapacityB = (uint)(packCtx[5] << 4) / 10;
               packCtx[5] = grownCapacityB;
@@ -8608,8 +8608,8 @@ LAB_00146530:
             }
             packCtx[4] = minCapacityB;
           }
-          *(undefined4 *)(uVar15 * 0x2c + packCtx[6] + 0x28) = 0;
-          uVar15 = minCapacityB;
+          *(undefined4 *)(scoreClearIndex * 0x2c + packCtx[6] + 0x28) = 0;
+          scoreClearIndex = minCapacityB;
         } while (minCapacityB < keptCountB);
       }
       newVecSizeC = vecSize;

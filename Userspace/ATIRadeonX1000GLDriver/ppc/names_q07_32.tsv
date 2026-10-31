@@ -4850,3 +4850,5 @@ local	FudoPs__vslot11_isNotType2Or5	param_2	typeCode	INFERRED	type code tested a
 local	Scheduler__run	puVar3	sentinelNode	INFERRED	cursor over the 24-byte sentinel nodes torn down from the end
 local	Program__valueNumberInst	iVar1	lookupResultA	INFERRED	one register: option test, scoped lookup results and key inst refs through the function
 local	Program__valueNumberInst	iVar2	lookupResultB	INFERRED	one register: scoped lookup results and key inst refs through the function
+local	pass_post_pack_insts	uVar15	scoreClearIndex	INFERRED	index over the candidate records when clearing the scores
+local	Inst__mergeSplatSourceInsts_00151a74	local_60	mergeWrittenLanesOut	INFERRED	SelectWord__mergeWrittenLanes out record (first word is the merged select)
