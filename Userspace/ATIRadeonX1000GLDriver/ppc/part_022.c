@@ -854,7 +854,7 @@ int ILReader__nextInstruction(ilReader)
   short operandRegister;
   ushort opcode16;
   uint opcode;
-  int iVar4;
+  int readerStateOrScratch;
   uint secondOperandToken;
   uint scopeStackSize;
   int replayStackVec;
@@ -902,8 +902,8 @@ readNextToken:
     if (tokenReadOk == 0) {
       return 0;
     }
-    iVar4 = ilReader[0x20];
-    if (iVar4 != 3) break;
+    readerStateOrScratch = ilReader[0x20];
+    if (readerStateOrScratch != 3) break;
     if (replaySkipDepth == 0) {
       opcode16 = *(ushort *)((int)ilReader + 0x8e);
       opcode = (uint)opcode16;
@@ -930,7 +930,7 @@ joined_r0x000e600c:
       }
     }
   }
-  if (iVar4 == 2) {
+  if (readerStateOrScratch == 2) {
     if (replaySkipDepth == 0) {
       opcode16 = *(ushort *)((int)ilReader + 0x8e);
       opcode = (uint)opcode16;
@@ -951,7 +951,7 @@ joined_r0x000e600c:
     if (opcode < 0xbf) goto joined_r0x000e600c;
     goto readNextToken;
   }
-  if (iVar4 == 1) {
+  if (readerStateOrScratch == 1) {
     if (((*(ushort *)((int)ilReader + 0x8e) < 0xbf) && (*(ushort *)((int)ilReader + 0x8e) == 0x32)) &&
        (waitLabel == *(ushort *)((int)ilReader + 0x92))) {
 loopStoreIlReader:
@@ -960,30 +960,30 @@ loopStoreIlReader:
     goto readNextToken;
   }
   ilReader[9] = (int)(ilReader + 0x23);
-  if (iVar4 == 4) {
-    iVar4 = ILReader__currentOpcode(ilReader);
-    if ((iVar4 != 0x6d) && (iVar4 != 0x69)) goto readNextToken;
+  if (readerStateOrScratch == 4) {
+    readerStateOrScratch = ILReader__currentOpcode(ilReader);
+    if ((readerStateOrScratch != 0x6d) && (readerStateOrScratch != 0x69)) goto readNextToken;
     replayStackVec = ilReader[0x22];
     replayStackTop = (int *)0x0;
     replayStackCount = *(uint *)(replayStackVec + 4);
     if (replayStackCount - 1 < replayStackCount) {
       replayStackTop = (int *)((replayStackCount - 1) * 4 + *(int *)(replayStackVec + 8));
     }
-    iVar4 = *replayStackTop;
+    readerStateOrScratch = *replayStackTop;
     Vector__removeAt(replayStackVec,replayStackCount - 1);
-    ilReader[0x20] = iVar4;
+    ilReader[0x20] = readerStateOrScratch;
   }
-  if (iVar4 == 5) {
-    iVar4 = ILReader__currentOpcode(ilReader);
-    if (iVar4 != 0x6d) goto readNextToken;
-    iVar4 = ilReader[0x22];
+  if (readerStateOrScratch == 5) {
+    readerStateOrScratch = ILReader__currentOpcode(ilReader);
+    if (readerStateOrScratch != 0x6d) goto readNextToken;
+    readerStateOrScratch = ilReader[0x22];
     replayStackTop = (int *)0x0;
-    replayStackCount = *(uint *)(iVar4 + 4);
+    replayStackCount = *(uint *)(readerStateOrScratch + 4);
     if (replayStackCount - 1 < replayStackCount) {
-      replayStackTop = (int *)((replayStackCount - 1) * 4 + *(int *)(iVar4 + 8));
+      replayStackTop = (int *)((replayStackCount - 1) * 4 + *(int *)(readerStateOrScratch + 8));
     }
     poppedState = *replayStackTop;
-    Vector__removeAt(iVar4,replayStackCount - 1);
+    Vector__removeAt(readerStateOrScratch,replayStackCount - 1);
     ilReader[0x20] = poppedState;
   }
   if (ilReader[0xe] != 0) {
@@ -1022,7 +1022,7 @@ loopStoreIlReader:
         goto returnInstructionRead;
       }
       replayStack = (uint *)ilReader[0x22];
-      iVar4 = ilReader[0x20];
+      readerStateOrScratch = ilReader[0x20];
       replayStackCount = replayStack[1];
       if (replayStackCount < *replayStack) {
         _memset(replayStackCount * 4 + replayStack[2],0,4);
@@ -1032,7 +1032,7 @@ loopStoreIlReader:
       else {
         replayStackSlot = (int *)Vector__elementRefGrow(replayStack,replayStackCount);
       }
-      *replayStackSlot = iVar4;
+      *replayStackSlot = readerStateOrScratch;
       ilReader[0x20] = 5;
       break;
     }
@@ -1119,7 +1119,7 @@ loopStoreIlReader:
     }
     *savedStateStackSlot = loopNestingSnapshot;
     savedStateStack = (uint *)ilReader[0x11];
-    iVar4 = ilReader[0x12];
+    readerStateOrScratch = ilReader[0x12];
     savedStateStackCount = savedStateStack[1];
     if (savedStateStackCount < *savedStateStack) {
       _memset(savedStateStackCount * 4 + savedStateStack[2],0,4);
@@ -1129,7 +1129,7 @@ loopStoreIlReader:
     else {
       savedStateStackSlot = (int *)Vector__elementRefGrow(savedStateStack,savedStateStackCount);
     }
-    *savedStateStackSlot = iVar4;
+    *savedStateStackSlot = readerStateOrScratch;
     ilReader[0x1f] = 0;
     ilReader[0x20] = 1;
     ilReader[0x1d] = ilReader[0xb];
@@ -1139,10 +1139,10 @@ loopStoreIlReader:
     break;
   case 9:
     leftConstant = 8;
-    iVar4 = tokenCount + -1;
+    readerStateOrScratch = tokenCount + -1;
     argR7 = ilReader[tokenCount + 0x22];
-    tokenCount = iVar4;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,iVar4,8,argR7,staleArgR8);
+    tokenCount = readerStateOrScratch;
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,readerStateOrScratch,8,argR7,staleArgR8);
     break;
   default:
     goto returnInstructionRead;
@@ -1157,8 +1157,8 @@ loopStoreIlReader:
     }
     break;
   case 0x1c:
-    iVar4 = Compiler__isOptionEnabled(*ilReader,0);
-    if (iVar4 == 0) {
+    readerStateOrScratch = Compiler__isOptionEnabled(*ilReader,0);
+    if (readerStateOrScratch == 0) {
       preprocessConstantIfsEnabled = Compiler__isOptionEnabled(*ilReader,1);
       if (preprocessConstantIfsEnabled != 0) {
         constantRegister = (int)(short)**(uint **)ilReader[0x19];
@@ -1175,8 +1175,8 @@ loopStoreIlReader:
     }
     break;
   case 0x1d:
-    iVar4 = Compiler__isOptionEnabled(*ilReader,0);
-    if (iVar4 == 0) {
+    readerStateOrScratch = Compiler__isOptionEnabled(*ilReader,0);
+    if (readerStateOrScratch == 0) {
       tokenWord2Snapshot = ilReader[0x25];
       firstDestToken = *(int *)ilReader[0x19];
       preprocessConstantIfsEnabled2 = Compiler__isOptionEnabled(*ilReader,1);
@@ -1198,14 +1198,14 @@ loopStoreIlReader:
     ilReader[0x20] = 3;
     break;
   case 0x29:
-    iVar4 = ilReader[0xf];
+    readerStateOrScratch = ilReader[0xf];
     ifResultStackTop = (int *)0x0;
-    ifResultStackCount = *(uint *)(iVar4 + 4);
+    ifResultStackCount = *(uint *)(readerStateOrScratch + 4);
     if (ifResultStackCount - 1 < ifResultStackCount) {
-      ifResultStackTop = (int *)((ifResultStackCount - 1) * 4 + *(int *)(iVar4 + 8));
+      ifResultStackTop = (int *)((ifResultStackCount - 1) * 4 + *(int *)(readerStateOrScratch + 8));
     }
     poppedState = *ifResultStackTop;
-    Vector__removeAt(iVar4,ifResultStackCount - 1);
+    Vector__removeAt(readerStateOrScratch,ifResultStackCount - 1);
     if (poppedState != 0) goto loopStoreIlReader;
     ilReader[0x12] = ilReader[0x12] + -1;
     scopeStackSizeB = *(uint *)(ilReader[0x10] + 4);
@@ -1235,19 +1235,19 @@ loopStoreIlReader:
     tokenWord0Snapshot = ilReader[0x23];
     extraOperandB = 0;
     firstRegisterFile = tokenWord1Snapshot >> 0x10 & 0x3f;
-    iVar4 = 1;
+    readerStateOrScratch = 1;
     if ((tokenWord1Snapshot & 0x400000) != 0) {
       extraOperandA = ilReader[0x25];
-      iVar4 = 3;
+      readerStateOrScratch = 3;
     }
-    secondOperandToken = ilReader[iVar4 + 0x23];
+    secondOperandToken = ilReader[readerStateOrScratch + 0x23];
     if ((secondOperandToken & 0x400000) != 0) {
-      extraOperandB = ilReader[iVar4 + 0x24];
+      extraOperandB = ilReader[readerStateOrScratch + 0x24];
     }
     if ((((firstRegisterFile != (secondOperandToken >> 0x10 & 0x3f)) || (firstRegisterFile != 1)) ||
-        (iVar4 = Compiler__isOptionEnabled(*ilReader,1), iVar4 == 0)) ||
-       ((iVar4 = ILReader__readFloatConst(ilReader,(int)(short)tokenWord1Snapshot,&leftConstant,extraOperandA), iVar4 == 0 ||
-        (iVar4 = ILReader__readFloatConst(ilReader,(int)(short)secondOperandToken,rightConstant,extraOperandB), iVar4 == 0)))) {
+        (readerStateOrScratch = Compiler__isOptionEnabled(*ilReader,1), readerStateOrScratch == 0)) ||
+       ((readerStateOrScratch = ILReader__readFloatConst(ilReader,(int)(short)tokenWord1Snapshot,&leftConstant,extraOperandA), readerStateOrScratch == 0 ||
+        (readerStateOrScratch = ILReader__readFloatConst(ilReader,(int)(short)secondOperandToken,rightConstant,extraOperandB), readerStateOrScratch == 0)))) {
       ifResultStack = (uint *)ilReader[0xf];
       ifResultStackSizeB = ifResultStack[1];
       if (ifResultStackSizeB < *ifResultStack) {
@@ -1320,8 +1320,8 @@ dispatchOpcodeDefault:
       ilReader[0x12] = ilReader[0x12] + 1;
       goto returnInstructionRead;
     }
-    iVar4 = ILReader__lookupBoolConst(ilReader,(int)operandRegister);
-    if (iVar4 == 0) {
+    readerStateOrScratch = ILReader__lookupBoolConst(ilReader,(int)operandRegister);
+    if (readerStateOrScratch == 0) {
       ifResultStack = (uint *)ilReader[0xf];
       ilReader[0x20] = 2;
       ifResultStackCount = ifResultStack[1];
@@ -1384,17 +1384,17 @@ setIfResultStack:
     break;
   case 0x67:
     leftConstant = 8;
-    iVar4 = tokenCount + -1;
+    readerStateOrScratch = tokenCount + -1;
     argR7 = ilReader[tokenCount + 0x22];
-    tokenCount = iVar4;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,iVar4,8,argR7,staleArgR8);
+    tokenCount = readerStateOrScratch;
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,readerStateOrScratch,8,argR7,staleArgR8);
     break;
   case 0x68:
     leftConstant = 8;
-    iVar4 = tokenCount + -1;
+    readerStateOrScratch = tokenCount + -1;
     argR7 = ilReader[tokenCount + 0x22];
-    tokenCount = iVar4;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,iVar4,8,argR7,staleArgR8);
+    tokenCount = readerStateOrScratch;
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,readerStateOrScratch,8,argR7,staleArgR8);
     break;
   case 0x69:
     scopeStackTop = (int *)0x0;
@@ -1403,19 +1403,19 @@ setIfResultStack:
     if (topIndex < scopeStackSize) {
       scopeStackTop = (int *)(topIndex * 4 + *(int *)(ilReader[0x10] + 8));
     }
-    iVar4 = *scopeStackTop;
-    if (*(int *)(iVar4 + 0x14) == 0) {
-      if (*(int *)(iVar4 + 4) == 0) {
-        if (*(int *)(iVar4 + 8) == 0) {
-          *(undefined4 *)(iVar4 + 4) = 1;
+    readerStateOrScratch = *scopeStackTop;
+    if (*(int *)(readerStateOrScratch + 0x14) == 0) {
+      if (*(int *)(readerStateOrScratch + 4) == 0) {
+        if (*(int *)(readerStateOrScratch + 8) == 0) {
+          *(undefined4 *)(readerStateOrScratch + 4) = 1;
           goto returnInstructionRead;
         }
-        ilReader[0x1d] = *(int *)(iVar4 + 8);
+        ilReader[0x1d] = *(int *)(readerStateOrScratch + 8);
         ilReader[0x20] = 0;
-        *(undefined4 *)(iVar4 + 8) = 0;
+        *(undefined4 *)(readerStateOrScratch + 8) = 0;
       }
-      else if (*(int *)(iVar4 + 8) == 0) {
-        *(int *)(iVar4 + 8) = ilReader[0x1d] + tokenCount * -4;
+      else if (*(int *)(readerStateOrScratch + 8) == 0) {
+        *(int *)(readerStateOrScratch + 8) = ilReader[0x1d] + tokenCount * -4;
       }
     }
     break;
@@ -1426,12 +1426,12 @@ setIfResultStack:
     if (topIndex < scopeStackSize) {
       scopeStackTop = (int *)(topIndex * 4 + *(int *)(ilReader[0x10] + 8));
     }
-    iVar4 = *scopeStackTop;
-    *(int *)(iVar4 + 0x10) = ilReader[0x1d] + tokenCount * -4;
-    if (*(int *)(iVar4 + 4) != 0) goto checkX14;
-    if (*(int *)(iVar4 + 0x14) != 0) goto returnInstructionRead;
+    readerStateOrScratch = *scopeStackTop;
+    *(int *)(readerStateOrScratch + 0x10) = ilReader[0x1d] + tokenCount * -4;
+    if (*(int *)(readerStateOrScratch + 4) != 0) goto checkX14;
+    if (*(int *)(readerStateOrScratch + 0x14) != 0) goto returnInstructionRead;
     replayStack = (uint *)ilReader[0x22];
-    iVar4 = ilReader[0x20];
+    readerStateOrScratch = ilReader[0x20];
     replayStackCount = replayStack[1];
     if (replayStackCount < *replayStack) {
       _memset(replayStackCount * 4 + replayStack[2],0,4);
@@ -1441,21 +1441,21 @@ setIfResultStack:
     else {
       replayStackSlot = (int *)Vector__elementRefGrow(replayStack,replayStackCount);
     }
-    *replayStackSlot = iVar4;
+    *replayStackSlot = readerStateOrScratch;
     ilReader[0x20] = 4;
     break;
   case 0x6d:
-    iVar4 = ilReader[0x10];
+    readerStateOrScratch = ilReader[0x10];
     scopeStackTop = (int *)0x0;
-    scopeStackCount = *(uint *)(iVar4 + 4);
+    scopeStackCount = *(uint *)(readerStateOrScratch + 4);
     if (scopeStackCount - 1 < scopeStackCount) {
-      scopeStackTop = (int *)((scopeStackCount - 1) * 4 + *(int *)(iVar4 + 8));
+      scopeStackTop = (int *)((scopeStackCount - 1) * 4 + *(int *)(readerStateOrScratch + 8));
     }
     poppedState = *scopeStackTop;
     if (*(int *)(poppedState + 4) == 0) {
       if (*(int *)(poppedState + 8) == 0) {
         if ((*(int *)(poppedState + 0x14) != 0) || (*(int *)(poppedState + 0x10) == 0)) {
-          Vector__removeAt(iVar4,scopeStackCount - 1);
+          Vector__removeAt(readerStateOrScratch,scopeStackCount - 1);
           goto returnInstructionRead;
         }
         ilReader[0x1d] = *(int *)(poppedState + 0x10);
@@ -1464,19 +1464,19 @@ setIfResultStack:
       else {
         ilReader[0x1d] = *(int *)(poppedState + 8);
         scopeStackTop = (int *)0x0;
-        scopeStackCount = *(uint *)(iVar4 + 4) - 1;
-        if (scopeStackCount < *(uint *)(iVar4 + 4)) {
-          scopeStackTop = (int *)(scopeStackCount * 4 + *(int *)(iVar4 + 8));
+        scopeStackCount = *(uint *)(readerStateOrScratch + 4) - 1;
+        if (scopeStackCount < *(uint *)(readerStateOrScratch + 4)) {
+          scopeStackTop = (int *)(scopeStackCount * 4 + *(int *)(readerStateOrScratch + 8));
         }
         *(undefined4 *)(*scopeStackTop + 8) = 0;
         ilReader[0x1f] = 0;
       }
     }
     else {
-      iVar4 = *(int *)(poppedState + 8);
-      if (iVar4 == 0) {
+      readerStateOrScratch = *(int *)(poppedState + 8);
+      if (readerStateOrScratch == 0) {
         replayStack = (uint *)ilReader[0x22];
-        iVar4 = ilReader[0x1d];
+        readerStateOrScratch = ilReader[0x1d];
         replayStackCount = replayStack[1];
         streamBaseSnapshotB = ilReader[0xb];
         if (replayStackCount < *replayStack) {
@@ -1487,7 +1487,7 @@ setIfResultStack:
         else {
           replayStackSlot = (int *)Vector__elementRefGrow(replayStack,replayStackCount);
         }
-        *replayStackSlot = (iVar4 - streamBaseSnapshotB) + -4 >> 2;
+        *replayStackSlot = (readerStateOrScratch - streamBaseSnapshotB) + -4 >> 2;
         replayStack = (uint *)ilReader[0x22];
         replayStackCount = replayStack[1];
         if (replayStackCount < *replayStack) {
@@ -1547,7 +1547,7 @@ setIfResultStack:
         else {
           replayStackSlot = (int *)Vector__elementRefGrow(replayStack,replayStackCount);
         }
-        *replayStackSlot = iVar4 - streamBaseSnapshotB >> 2;
+        *replayStackSlot = readerStateOrScratch - streamBaseSnapshotB >> 2;
         *(undefined4 *)(poppedState + 8) = 0;
         replayStack = (uint *)ilReader[0x22];
         replayStackCount = replayStack[1];
@@ -1631,10 +1631,10 @@ joined_r0x000e6a0c:
       goto returnInstructionRead;
     }
 dispatchOpcodeCase53:
-    iVar4 = ilReader[0x15];
+    readerStateOrScratch = ilReader[0x15];
     savedFlagSnapshotB = ilReader[0x14];
-    ilReader[0x15] = iVar4 + -1;
-    if (iVar4 + -1 < 0) {
+    ilReader[0x15] = readerStateOrScratch + -1;
+    if (readerStateOrScratch + -1 < 0) {
       ilReader[0x14] = 0;
       ilReader[0x12] = 0;
       ilReader[0x13] = 0;
@@ -1657,15 +1657,15 @@ dispatchOpcodeCase53:
       }
       restoredValue = *savedStateStackTop;
       Vector__removeAt(savedStateStackVec,savedStateStackCount - 1);
-      iVar4 = ilReader[0x11];
+      readerStateOrScratch = ilReader[0x11];
       ilReader[0x13] = restoredValue;
       savedStateStackTop = (int *)0x0;
-      savedStateStackCount = *(uint *)(iVar4 + 4);
+      savedStateStackCount = *(uint *)(readerStateOrScratch + 4);
       if (savedStateStackCount - 1 < savedStateStackCount) {
-        savedStateStackTop = (int *)((savedStateStackCount - 1) * 4 + *(int *)(iVar4 + 8));
+        savedStateStackTop = (int *)((savedStateStackCount - 1) * 4 + *(int *)(readerStateOrScratch + 8));
       }
       restoredValue = *savedStateStackTop;
-      Vector__removeAt(iVar4,savedStateStackCount - 1);
+      Vector__removeAt(readerStateOrScratch,savedStateStackCount - 1);
       ilReader[0x14] = (uint)(restoredValue == 1);
     }
     ilReader[0x1f] = 1;
@@ -1687,7 +1687,7 @@ dispatchOpcodeCase53:
   }
   goto readNextToken;
 checkX14:
-  if (*(int *)(iVar4 + 0x14) != 0) {
+  if (*(int *)(readerStateOrScratch + 0x14) != 0) {
 returnInstructionRead:
     ilReaderTokenCount_001fa620 = tokenCount;
     ilReader[0xd] = ilReader[0xd] + 1;
