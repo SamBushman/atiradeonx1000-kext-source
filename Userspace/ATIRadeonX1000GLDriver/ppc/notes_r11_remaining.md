@@ -28,4 +28,4 @@ r09 suspected `gld_initContextDispatch` had no stores for the emit slots at `0x1
 - Vtable slots `001e9108` (base of KhanPs/KhanVs/FudoPs, stored `+8` in all their dtors), `001e9144`, `001e9100`, `001e9148`: the base class has no name in the corpus (the three derived classes are the only users), so a slot name would not be derivable. Not changed.
 
 ## Gates
-apply_names --check 0 errors (105,144 applied). datacheck.sh (base 380a4b9f): symbol_map/data.s/etc identical; only part_014.c/part_019.c differ, by the 14 label names (checked line by line). Compile gate (G5, Tiger) vs 380a4b9f: SPLIT-EQUIVALENT, 29 differing objects, 29 parts compared, 0 problems; no quota/No space/compared 0 in the log.
+apply_names --check 0 errors (105,146 applied). datacheck.sh (base 380a4b9f): symbol_map/data.s/etc identical; only part_014.c/part_019.c differ, by the 14 label names (checked line by line). Compile gate (G5, Tiger) vs 380a4b9f: SPLIT-EQUIVALENT, 29 differing objects, 29 parts compared, 0 problems; no quota/No space/compared 0 in the log.
