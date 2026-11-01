@@ -595,11 +595,11 @@ int Program__isTrivialBranchRegion(program, block)
   int successorBlock;
   int successorInstCount;
   int *successor2;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
   undefined8 successor3;
   
   if ((0 < *(int *)(block + 0x138)) || (*(int *)(block + 0x13c) != 0)) {
@@ -611,7 +611,7 @@ int Program__isTrivialBranchRegion(program, block)
       if (successorInstCount != 0) {
         successor3 = Block__getSuccessor(successor,0);
         successorBlock = (int)((ulonglong)successor3 >> 0x20);
-        branchInst = Block__getBranchInst(successorBlock,(int)successor3,in_r5,in_r6,in_r7,in_r8,in_r9);
+        branchInst = Block__getBranchInst(successorBlock,(int)successor3,staleArg5,staleArg6,staleArg7,staleArg8,staleArg9);
         if ((((*(uint *)(program + 0x30) & 8) == 0) && (*(int *)(branchInst + 0x84) == 2)) &&
            (*(int *)(branchInst + 0xa4) == *(int *)(branchInst + 0xbc))) {
           successor2 = (int *)Block__getSuccessor(*(undefined4 *)(successorBlock + 0x134),0);
@@ -2199,7 +2199,7 @@ int Program__predicatePendingIfs(program)
   int newVRegB;
   undefined4 zeroMovInst;
   uint loopIndex;
-  double fparam_1;
+  double zeroValue;
   
   if (*(int *)(*(int *)(program + 0x414) + 4) == 0) {
     return;
@@ -2217,9 +2217,9 @@ int Program__predicatePendingIfs(program)
   zeroMovInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
   operandRecord3 = IRInst__getOperandRecord(zeroMovInst,0);
   *(int *)(operandRecord3 + 8) = newVRegA;
-  fparam_1 = (double)FLOAT_001aa0d4;
+  zeroValue = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord3 + 0xc) = 0;
-  ((void (*)())IRInst__makeLiteralVec4Float)(zeroMovInst,program,1,fparam_1,fparam_1,fparam_1,fparam_1);
+  ((void (*)())IRInst__makeLiteralVec4Float)(zeroMovInst,program,1,zeroValue,zeroValue,zeroValue,zeroValue);
   Program__appendInst(program,zeroMovInst,*(undefined4 *)(program + 0x3a0));
   newVRegB = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(program + 8) + 0x3ac) = newVRegB;
@@ -3041,10 +3041,10 @@ int pass_remove_empty_graphs(program)
   int testResult;
   int *nextBlock;
   int *predecessorBlock;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  code *in_r9;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  code *vtableDispatchFn;
   int joinBlock;
   int elseBlock;
   int thenBlock;
@@ -3094,13 +3094,13 @@ int pass_remove_empty_graphs(program)
           }
         }
         else {
-          successorOrNextBlock = (int *)Block__getBranchInst(block,(int)regionResult,testResult,in_r6,in_r7,in_r8,in_r9);
+          successorOrNextBlock = (int *)Block__getBranchInst(block,(int)regionResult,testResult,staleArg6,staleArg7,staleArg8,vtableDispatchFn);
           if (successorOrNextBlock != (int *)0x0) {
             Program__removeInst(program,successorOrNextBlock);
             successorOrNextBlock[5] = successorOrNextBlock[5] & 0xffffffef;
-            in_r9 = *(code **)(*successorOrNextBlock + 0xc);
-            (*in_r9)(successorOrNextBlock,*(uint *)(program + PROG_flags) >> 7 & 1,*(undefined4 *)(program + PROG_compiler),in_r6,
-                     in_r7,in_r8,in_r9);
+            vtableDispatchFn = *(code **)(*successorOrNextBlock + 0xc);
+            (*vtableDispatchFn)(successorOrNextBlock,*(uint *)(program + PROG_flags) >> 7 & 1,*(undefined4 *)(program + PROG_compiler),staleArg6,
+                     staleArg7,staleArg8,vtableDispatchFn);
             block[0x4c] = 0;
           }
           block[3] = block[3] | 0x100;
@@ -3743,8 +3743,8 @@ int Program__appendLoadFa(baseHandle, derivedHandle, compiler)
 }
 
 /* Program__prependLoad79 @ 0x130f64 (72 bytes) */
-int Program__prependLoad79(param_1, newSlotNumber, compiler)
-  undefined4 param_1;
+int Program__prependLoad79(spillBase, newSlotNumber, compiler)
+  undefined4 spillBase;
   undefined4 newSlotNumber;
   int compiler;
 {
@@ -3757,7 +3757,7 @@ int Program__prependLoad79(param_1, newSlotNumber, compiler)
   loadInst = allocation + 1;
   *allocation = arena;
   IRLoad__ctor_109a80(loadInst,0x79,compiler);
-  allocation[0x4d] = param_1;
+  allocation[0x4d] = spillBase;
   allocation[0x27] = 0x3c;
   allocation[0x50] = newSlotNumber;
   allocation[0x26] = newSlotNumber;
@@ -3884,7 +3884,7 @@ int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
   undefined4 spillDestRegister;
   undefined4 *storeInst;
   undefined4 writtenLaneMask [4];
-  undefined4 local_38;
+  undefined4 zeroLaneSelectWord;
   undefined4 storeWriteMask [3];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
@@ -3902,7 +3902,7 @@ int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
       laneIndex = laneIndex + 1;
     } while (moreLanes);
   }
-  LaneBytes__buildSelectWordOfZeroLanes(&local_38,writtenLaneMask[0]);
+  LaneBytes__buildSelectWordOfZeroLanes(&zeroLaneSelectWord,writtenLaneMask[0]);
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   storeInst = allocation + 1;
@@ -3911,11 +3911,11 @@ int RegAlloc__emitSpillStore(inst, newSource, addressSource, ref, compiler)
   spillDestRegister = *(undefined4 *)(newSource + 0x94);
   allocation[0x27] = 0x3b;
   allocation[0x26] = spillDestRegister;
-  WriteMask__fromUsedLanes(storeWriteMask,local_38);
+  WriteMask__fromUsedLanes(storeWriteMask,zeroLaneSelectWord);
   allocation[0x28] = storeWriteMask[0];
   IRInst__setOperandSource(storeInst,1,inst,0,compiler);
   operandRecord = IRInst__getOperandRecord(storeInst,1);
-  *(undefined4 *)(operandRecord + 0x10) = local_38;
+  *(undefined4 *)(operandRecord + 0x10) = zeroLaneSelectWord;
   IRInst__setOperandSource(storeInst,2,addressSource,0,compiler);
   addressSwizzleConstant = laneWord00040404_001affdc;
   operandRecord = IRInst__getOperandRecord(storeInst,2);

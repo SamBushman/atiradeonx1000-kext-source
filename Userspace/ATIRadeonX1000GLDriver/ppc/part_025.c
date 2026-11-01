@@ -917,14 +917,14 @@ int IRInst__operandReadsXYZ(inst, operandIndex)
   int operandRecord;
   int loopCounter;
   int loopCounterB;
-  undefined4 local_28 [10];
+  undefined4 swizzleBytes [10];
   
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   loopCounter = 0;
-  local_28[0] = *(undefined4 *)(operandRecord + 0x10);
+  swizzleBytes[0] = *(undefined4 *)(operandRecord + 0x10);
   loopCounterB = 4;
   do {
-    if (*(byte *)((int)local_28 + loopCounter) < 3) {
+    if (*(byte *)((int)swizzleBytes + loopCounter) < 3) {
       return 1;
     }
     loopCounter = loopCounter + 1;
@@ -941,14 +941,14 @@ int IRInst__operandReadsW(inst, operandIndex)
   int operandRecord;
   int loopCounter;
   int loopCounterB;
-  undefined4 local_28 [10];
+  undefined4 swizzleBytes [10];
   
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   loopCounter = 0;
-  local_28[0] = *(undefined4 *)(operandRecord + 0x10);
+  swizzleBytes[0] = *(undefined4 *)(operandRecord + 0x10);
   loopCounterB = 4;
   do {
-    if (*(char *)((int)local_28 + loopCounter) == '\x03') {
+    if (*(char *)((int)swizzleBytes + loopCounter) == '\x03') {
       return 1;
     }
     loopCounter = loopCounter + 1;
@@ -1562,13 +1562,13 @@ int IRInst__sourceLanesAllWritten_f485c(inst, operandIndex)
   undefined4 operandVReg;
   int operandRecord;
   int loopCounter;
-  undefined4 local_38 [9];
+  undefined4 swizzleBytes [9];
   
   operandVReg = IRInst__getOperandSource(inst,operandIndex);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   loopCounter = 0;
-  local_38[0] = *(undefined4 *)(operandRecord + 0x10);
-  while ((laneSelectByte = *(byte *)((int)local_38 + loopCounter), laneSelectByte == 4 ||
+  swizzleBytes[0] = *(undefined4 *)(operandRecord + 0x10);
+  while ((laneSelectByte = *(byte *)((int)swizzleBytes + loopCounter), laneSelectByte == 4 ||
          (operandRecord = IRInst__getOperandRecord(operandVReg,0), *(char *)((uint)laneSelectByte + operandRecord + 0x10) == '\x01'))) {
     allLanesChecked = loopCounter == 3;
     loopCounter = loopCounter + 1;
@@ -1740,9 +1740,9 @@ int floatLess(param_1_w, param_2_w)
   unsigned int param_1_w;
   unsigned int param_2_w;
 {
-  float param_1 = GH_U2F(param_1_w);
-  float param_2 = GH_U2F(param_2_w);
-  return param_2 < param_1;
+  float floatA = GH_U2F(param_1_w);
+  float floatB = GH_U2F(param_2_w);
+  return floatB < floatA;
 }
 
 /* BitSet__findFirstSet @ 0xf4be8 (92 bytes) */

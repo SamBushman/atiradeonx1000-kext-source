@@ -128,8 +128,8 @@ int ffvpBuildPassThroughProgram(ctx)
   undefined4 *builder;
   undefined4 colorInputIndex;
   undefined4 sideFlag;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   uint extraSlotCount;
   uint ctxFlags44;
   int nextTexOutSlot;
@@ -234,7 +234,7 @@ int ffvpBuildPassThroughProgram(ctx)
             loopIndex = loopIndex + 1;
             ctxCursor = ctxCursor + 4;
             nextTexOutSlot = nextTexOutSlot + 1;
-            ffvpEmitTexCoordPassThrough(builder,texUnitIndex,colorInputIndex,sideFlag,in_r7,in_r8,extraSlotCount);
+            ffvpEmitTexCoordPassThrough(builder,texUnitIndex,colorInputIndex,sideFlag,staleArg7,staleArg8,extraSlotCount);
           } while (outputMask >> 4 != loopIndex);
         }
         ffvpFinishProgram(builder);
@@ -269,10 +269,10 @@ int gldEmitVertexRoutingPackets(ctx)
 {
   undefined4 *a6;
   int cmdPos;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   undefined4 regValue;
   code *streamSetCurrent;
   
@@ -295,12 +295,12 @@ int gldEmitVertexRoutingPackets(ctx)
   cmdPos = *(int *)(0x00002748 + ctx + 4);
   streamSetCurrent = *(code **)(ctx + 0x275c);
   *(int *)(0x00002748 + ctx + 4) = cmdPos + 0x24;
-  (*streamSetCurrent)(ctx,cmdPos + 0x24,in_r5,in_r6,in_r7,in_r8,a6);
+  (*streamSetCurrent)(ctx,cmdPos + 0x24,staleArg5,staleArg6,staleArg7,staleArg8,a6);
   return gldEmitRegisterPairPacket(ctx);
 }
 
 /* ffvpValidateProgram @ 0x83870 (1012 bytes) */
-void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double fparam_9)
+void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
 {
   int program;
   int recordCountdown;
@@ -315,14 +315,14 @@ void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,und
   undefined4 paramList;
   undefined4 *depRecord;
   int dependencyStatus;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 retR4;
+  undefined4 retR4b;
   undefined4 *depRecordCopy;
   undefined4 depElemSize;
   uint src1Reg;
   uint loopIndex;
   int programKind;
-  undefined4 in_r10;
+  undefined4 staleArg10;
   uint src2Reg;
   double validateResult;
   undefined8 lookupResult;
@@ -362,7 +362,7 @@ void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,und
     if (variant == 0) {
       ffvpUpdateLightModelFlags(ctx,(int)lookupResult,unusedArg3,unusedArg4,unusedArg5,unusedArg6);
       paramList = paramListCreate(ctx);
-      programKind = ffvpBuildProgram(ctx,0,&builtConstBytes,constRegCount,paramList,unusedArg6,programKind,in_r10);
+      programKind = ffvpBuildProgram(ctx,0,&builtConstBytes,constRegCount,paramList,unusedArg6,programKind,staleArg10);
       variant = fpVariantCacheInsert(ctx,ctx + 0x1874,programKind,(uint)*(byte *)(ctx + 0x131),builtConstBytes
                            ,constRegCount[0],paramList,(uint)*(byte *)(ctx + 0x126));
       depRecord = (undefined4 *)
@@ -443,7 +443,7 @@ loopCheckVariant:
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
       validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x29) = 1;
-      ((void (*)())gldValidateState)(ctx,extraout_r4,depRecordCopy,depElemSize,builtConstBytes,constRegCount[0],paramList,validateResult,unusedFloatArg2,
+      ((void (*)())gldValidateState)(ctx,retR4,depRecordCopy,depElemSize,builtConstBytes,constRegCount[0],paramList,validateResult,unusedFloatArg2,
                    unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
     }
     else {
@@ -454,7 +454,7 @@ loopCheckVariant:
       validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x126) = 1;
       *(undefined1 *)(ctx + 0x29) = 1;
-      ((void (*)())gldValidateState)(ctx,extraout_r4_00,unusedArg3,unusedArg4,unusedArg5,unusedArg6,programKind,validateResult,unusedFloatArg2,
+      ((void (*)())gldValidateState)(ctx,retR4b,unusedArg3,unusedArg4,unusedArg5,unusedArg6,programKind,validateResult,unusedFloatArg2,
                    unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
     }
   }
@@ -463,11 +463,11 @@ loopCheckVariant:
 }
 
 /* ffvpValidateProgramForced @ 0x83c80 (12 bytes) */
-void ffvpValidateProgramForced(int ctx,undefined4 passThroughArg2,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+void ffvpValidateProgramForced(int ctx,undefined4 passThroughArg2,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7,double passThroughFloatArg1,double passThroughFloatArg2,double passThroughFloatArg3,double passThroughFloatArg4,double passThroughFloatArg5,double passThroughFloatArg6,double passThroughFloatArg7,double passThroughFloatArg8,double passThroughFloatArg9)
 {
   *(undefined1 *)(ctx + 0x29) = 1;
-  ((void (*)())ffvpValidateProgram)(ctx,passThroughArg2,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7,fparam_1,fparam_2,fparam_3,
-               fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
+  ((void (*)())ffvpValidateProgram)(ctx,passThroughArg2,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7,passThroughFloatArg1,passThroughFloatArg2,passThroughFloatArg3,
+               passThroughFloatArg4,passThroughFloatArg5,passThroughFloatArg6,passThroughFloatArg7,passThroughFloatArg8,passThroughFloatArg9);
   return;
 }
 
@@ -3115,10 +3115,10 @@ int gldUploadClipPlanes(ctx)
   int regBase;
   code *streamSetCurrent;
   undefined4 *a6;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   uint clipPlaneMask;
   uint loopCounter;
   undefined4 *planeEquation;
@@ -3141,7 +3141,7 @@ int gldUploadClipPlanes(ctx)
       cmdPos = *(int *)(0x00002748 + ctx + 4);
       streamSetCurrent = *(code **)(ctx + 0x275c);
       *(int *)(0x00002748 + ctx + 4) = cmdPos + 0x1c;
-      (*streamSetCurrent)(ctx,cmdPos + 0x1c,in_r5,in_r6,in_r7,in_r8,a6);
+      (*streamSetCurrent)(ctx,cmdPos + 0x1c,staleArg5,staleArg6,staleArg7,staleArg8,a6);
     }
     morePlanes = loopCounter != 5;
     planeEquation = planeEquation + 4;
@@ -3151,13 +3151,13 @@ int gldUploadClipPlanes(ctx)
 }
 
 /* gldLodBiasToFixed @ 0x86930 (204 bytes) */
-int gldLodBiasToFixed(int ctx,double fparam_1,double fparam_2)
+int gldLodBiasToFixed(int ctx,double texUnitLodBias,double extraBias)
 {
   float biasSum;
   float fixedResult;
   
   biasSum = (float)((double)CONCAT44(0x43300000,*(undefined4 *)(ctx + 0x284c)) - DOUBLE_001aa250)
-          * FLOAT_001aa170 + (float)(fparam_1 + fparam_2);
+          * FLOAT_001aa170 + (float)(texUnitLodBias + extraBias);
   if (biasSum == FLOAT_001aa0d4) {
     return 0;
   }
@@ -3472,17 +3472,17 @@ int gldLeaveInternalDrawState(glContext, savedState)
   undefined *flagTable;
   code *hookFn;
   uint *ringFlagPtr;
-  undefined4 extraout_r4;
+  undefined4 retR4;
   undefined4 *packetTail;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   undefined4 regValue;
   uint regValueMasked;
   undefined4 *drawStateWords;
   int stateObject;
-  double fparam_1;
+  double staleFpArg1;
   
   drawStateWords = *(undefined4 **)(glContext + 0x2440);
   *(undefined4 *)(glContext + 0x1b74) = *savedState;
@@ -3521,7 +3521,7 @@ int gldLeaveInternalDrawState(glContext, savedState)
   hookFn = *(code **)(((unsigned char *)0x00001334) + glContext);
   regValue = savedState[0x22];
   *(undefined4 *)(glContext + 0x1bb0) = regValue;
-  (*hookFn)(glContext,0,in_r5,in_r6,in_r7,in_r8,regValue,drawStateWords);
+  (*hookFn)(glContext,0,staleArg5,staleArg6,staleArg7,staleArg8,regValue,drawStateWords);
   if (((*(uint *)(glContext + 0x44) & 0x20000) != 0) &&
      (drawStateWords = *(undefined4 **)(glContext + 0x1e70), drawStateWords != (undefined4 *)0x0)) {
     if ((*(uint *)(glContext + 0x44) & 0x2000) == 0) {
@@ -3543,12 +3543,12 @@ storeDrawStateWords:
     drawStateWords[7] = 0;
     drawStateWords[0x54b] = 0;
   }
-  ((void (*)())gldRebindCurrentProgram)(glContext,extraout_r4,in_r5,in_r6,fparam_1);
+  ((void (*)())gldRebindCurrentProgram)(glContext,retR4,staleArg5,staleArg6,staleFpArg1);
   (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) & 0x3fefffff;
   packet = (undefined4 *)
            (**(code **)(glContext + 0x2758))
-                     (glContext,0x55,in_r5,in_r6,in_r7,in_r8,*(code **)(glContext + 0x2758));
+                     (glContext,0x55,staleArg5,staleArg6,staleArg7,staleArg8,*(code **)(glContext + 0x2758));
   *(undefined4 **)(0x00002748 + glContext + 4) = packet;
   *packet = 0x887;
   flagTable = ptrTo_textureFormatTable_001e88c8;

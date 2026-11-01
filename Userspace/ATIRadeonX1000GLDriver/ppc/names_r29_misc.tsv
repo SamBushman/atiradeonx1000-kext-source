@@ -1,0 +1,69 @@
+local	ffvpBuildPassThroughProgram	in_r7	staleArg7	INFERRED	stale forwarded trailing register to ffvpEmitTexCoordPassThrough, never assigned in this function
+local	ffvpBuildPassThroughProgram	in_r8	staleArg8	INFERRED	stale forwarded trailing register to ffvpEmitTexCoordPassThrough, never assigned in this function
+local	gldEmitVertexRoutingPackets	in_r5	staleArg5	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	gldEmitVertexRoutingPackets	in_r6	staleArg6	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	gldEmitVertexRoutingPackets	in_r7	staleArg7	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	gldEmitVertexRoutingPackets	in_r8	staleArg8	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	ffvpValidateProgram	extraout_r4	retR4	INFERRED	extra r4 side-register from the preceding gld_buildActiveUnitList call, forwarded into gldValidateState
+local	ffvpValidateProgram	extraout_r4_00	retR4b	INFERRED	extra r4 side-register from the preceding gld_buildActiveUnitList call (second call site), forwarded into gldValidateState
+local	ffvpValidateProgram	in_r10	staleArg10	INFERRED	stale forwarded trailing register to ffvpBuildProgram, never assigned in this function
+local	ffvpValidateProgramForced	fparam_1	passThroughFloatArg1	INFERRED	double forwarded unread to ffvpValidateProgram, matches already-applied passThroughArg2-7 int siblings
+local	ffvpValidateProgramForced	fparam_2	passThroughFloatArg2	INFERRED	double forwarded unread to ffvpValidateProgram
+local	ffvpValidateProgramForced	fparam_3	passThroughFloatArg3	INFERRED	double forwarded unread to ffvpValidateProgram
+local	ffvpValidateProgramForced	fparam_4	passThroughFloatArg4	INFERRED	double forwarded unread to ffvpValidateProgram
+local	ffvpValidateProgramForced	fparam_5	passThroughFloatArg5	INFERRED	double forwarded unread to ffvpValidateProgram
+local	ffvpValidateProgramForced	fparam_6	passThroughFloatArg6	INFERRED	double forwarded unread to ffvpValidateProgram
+local	ffvpValidateProgramForced	fparam_7	passThroughFloatArg7	INFERRED	double forwarded unread to ffvpValidateProgram
+local	ffvpValidateProgramForced	fparam_8	passThroughFloatArg8	INFERRED	double forwarded unread to ffvpValidateProgram
+local	ffvpValidateProgramForced	fparam_9	passThroughFloatArg9	INFERRED	double forwarded unread to ffvpValidateProgram
+local	gldUploadClipPlanes	in_r5	staleArg5	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	gldUploadClipPlanes	in_r6	staleArg6	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	gldUploadClipPlanes	in_r7	staleArg7	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	gldUploadClipPlanes	in_r8	staleArg8	INFERRED	stale forwarded trailing register to streamSetCurrent call, never assigned
+local	gldLodBiasToFixed	fparam_1	texUnitLodBias	INFERRED	caller gldUpdateLodBiasField passes texRecord+0x20 (the per-texture-unit stored LOD bias)
+local	gldLodBiasToFixed	fparam_2	extraBias	INFERRED	caller gldUpdateLodBiasField passes its own `extraBias` parameter here by name
+local	gldLeaveInternalDrawState	extraout_r4	retR4	INFERRED	extra r4 side-register from the preceding hookFn call, forwarded into gldRebindCurrentProgram
+local	gldLeaveInternalDrawState	in_r5	staleArg5	INFERRED	stale forwarded trailing register, reused across 3 calls without reassignment
+local	gldLeaveInternalDrawState	in_r6	staleArg6	INFERRED	stale forwarded trailing register, reused across 3 calls without reassignment
+local	gldLeaveInternalDrawState	in_r7	staleArg7	INFERRED	stale forwarded trailing register, reused across 2 calls without reassignment
+local	gldLeaveInternalDrawState	in_r8	staleArg8	INFERRED	stale forwarded trailing register, reused across 2 calls without reassignment
+local	gldLeaveInternalDrawState	fparam_1	staleFpArg1	INFERRED	stale forwarded FPR double to gldRebindCurrentProgram, never computed in this function
+local	R520MachineAssembler__vslot30_assembleThenTerminate	in_r6	staleArg6	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot30_assembleThenTerminate	in_r7	staleArg7	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot30_assembleThenTerminate	in_r8	staleArg8	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot39_appendLoopStartRecord	in_r5	staleArg5	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot39_appendLoopStartRecord	in_r6	staleArg6	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot39_appendLoopStartRecord	in_r7	staleArg7	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot39_appendLoopStartRecord	in_r8	staleArg8	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot32_assembleBranchEnd	in_r6	staleArg6	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot32_assembleBranchEnd	in_r7	staleArg7	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot32_assembleBranchEnd	in_r8	staleArg8	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot37_closeBranch	in_r5	staleArg5	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot37_closeBranch	in_r6	staleArg6	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot37_closeBranch	in_r7	staleArg7	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	R520MachineAssembler__vslot37_closeBranch	in_r8	staleArg8	INFERRED	stale forwarded trailing register to the vtable-dispatched record-emit call
+local	fpVariantCacheFlush	in_r5	staleArg5	INFERRED	stale forwarded trailing register to the vtable free-callback call, never assigned
+local	fpVariantCacheFlush	in_r6	staleArg6	INFERRED	stale forwarded trailing register to the vtable free-callback call, never assigned
+local	fpVariantCacheFlush	in_r7	staleArg7	INFERRED	stale forwarded trailing register to the vtable free-callback call, never assigned
+local	fpVariantCacheFlush	in_r8	staleArg8	INFERRED	stale forwarded trailing register to the vtable free-callback call, never assigned
+local	glBindProgramARB_impl	in_r10	staleArg10	INFERRED	stale forwarded trailing register to arbfpBindProgram, never assigned in this function
+local	glDeleteProgramsARB_impl	in_r6	staleArg6	INFERRED	stale forwarded trailing register to glBindProgramARB_impl, never assigned
+local	glDeleteProgramsARB_impl	in_r7	staleArg7	INFERRED	stale forwarded trailing register to glBindProgramARB_impl, never assigned
+local	glDeleteProgramsARB_impl	in_r8	staleArg8	INFERRED	stale forwarded trailing register to glBindProgramARB_impl, never assigned
+local	Program__isTrivialBranchRegion	in_r5	staleArg5	INFERRED	stale forwarded trailing register to Block__getBranchInst, never assigned
+local	Program__isTrivialBranchRegion	in_r6	staleArg6	INFERRED	stale forwarded trailing register to Block__getBranchInst, never assigned
+local	Program__isTrivialBranchRegion	in_r7	staleArg7	INFERRED	stale forwarded trailing register to Block__getBranchInst, never assigned
+local	Program__isTrivialBranchRegion	in_r8	staleArg8	INFERRED	stale forwarded trailing register to Block__getBranchInst, never assigned
+local	Program__isTrivialBranchRegion	in_r9	staleArg9	INFERRED	stale forwarded trailing register to Block__getBranchInst, never assigned
+local	Program__predicatePendingIfs	fparam_1	zeroValue	INFERRED	FLOAT_001aa0d4 (0.0, matches the pre-named zeroMovInst context) broadcast into all 4 lanes of a literal vec4
+local	pass_remove_empty_graphs	in_r6	staleArg6	INFERRED	stale forwarded trailing register, same value used unmodified in both the branch-inst and dispatch calls
+local	pass_remove_empty_graphs	in_r7	staleArg7	INFERRED	stale forwarded trailing register, same value used unmodified in both the branch-inst and dispatch calls
+local	pass_remove_empty_graphs	in_r8	staleArg8	INFERRED	stale forwarded trailing register, same value used unmodified in both the branch-inst and dispatch calls
+local	pass_remove_empty_graphs	in_r9	vtableDispatchFn	INFERRED	single Ghidra web spanning a stale pre-assignment read (Block__getBranchInst call) then a real assignment+use as the vtable-slot-0xc dispatch callee
+local	Program__prependLoad79	param_1	spillBase	INFERRED	caller passes spillState+0x130 (the spill-area base/address); stored into the new IRLoad record's source field
+local	RegAlloc__emitSpillStore	local_38	zeroLaneSelectWord	INFERRED	output of LaneBytes__buildSelectWordOfZeroLanes, consumed by WriteMask__fromUsedLanes
+local	IRInst__operandReadsXYZ	local_28	swizzleBytes	INFERRED	4-byte word written once then re-read byte-by-byte as the operand's per-lane swizzle selector
+local	IRInst__operandReadsW	local_28	swizzleBytes	INFERRED	4-byte word written once then re-read byte-by-byte as the operand's per-lane swizzle selector
+local	IRInst__sourceLanesAllWritten_f485c	local_38	swizzleBytes	INFERRED	4-byte word written once then re-read byte-by-byte as the operand's per-lane swizzle selector
+local	floatLess	param_1	floatA	INFERRED	GH_U2F reinterpret of param_1_w's bit pattern as float
+local	floatLess	param_2	floatB	INFERRED	GH_U2F reinterpret of param_2_w's bit pattern as float
