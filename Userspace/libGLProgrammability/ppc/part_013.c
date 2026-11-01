@@ -3267,10 +3267,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double
   longlong d2iScratch2;
   longlong d2iScratch3;
   longlong d2iScratch4;
-  float texelX;
-  float texelY;
-  float texelZ;
-  float texelW;
+  float texel [4];
   float storedComponent;
   
   emulator = *machine;
@@ -4956,29 +4953,29 @@ setProgramInfo:
         textureTarget = inst[0x44];
         if (textureTarget == 2) {
           _InterpreterTextureSamplerSampleTexelRECT
-                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX);
+                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0]);
         }
         else if (textureTarget < 3) {
           if (textureTarget == 1) {
-            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodBias,scratchF2,scratchF3,
+            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0],texLodBias,scratchF2,scratchF3,
                        scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                        leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
           }
         }
         else if (textureTarget == 3) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodBias,scratchF2,scratchF3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0],texLodBias,scratchF2,scratchF3,
                      scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                      leftoverStackArg1,leftoverStackArg2,leftoverStackArg3,leftoverStackArg4);
         }
         else if (textureTarget == 4) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodBias,scratchF2,scratchF3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0],texLodBias,scratchF2,scratchF3,
                      scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                      leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
         }
-        opVec[0] = texelX;
-        opVec[1] = texelY;
-        opVec[2] = texelZ;
-        opVec[3] = texelW;
+        opVec[0] = texel[0];
+        opVec[1] = texel[1];
+        opVec[2] = texel[2];
+        opVec[3] = texel[3];
         break;
       case 0x48:
       case 0x49:

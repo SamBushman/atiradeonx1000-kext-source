@@ -240,9 +240,9 @@ use	TGenericLinker__RemoveUnreachableFunctions	iVar7	length3	INFERRED	every defi
 use	TGenericLinker__RemoveUnreachableFunctions	pcVar8	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#29	+26	all	all
 use	TGenericLinker__RemoveUnreachableFunctions	uVar6	firstOp	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
 use	TGenericLinker__RemoveUnreachableFunctions	uVar6	lastOp	INFERRED	every definition is the result of a call whose name says it returns this	#72	+10	all	all
-use	TGenericLinker__FixOutputReads	iVar3	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#93	+1	all	all
-use	TGenericLinker__FixOutputReads	uVar4	maxIndex	INFERRED	every definition is the result of a call whose name says it returns this	#58	+1	all	all
-use	TGenericLinker__FixOutputReads	uVar4	functionName	INFERRED	every definition is the result of a call whose name says it returns this	#92	+1	all	all
+use	TGenericLinker__FixOutputReads	iVar3	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#80	+1	all	all
+use	TGenericLinker__FixOutputReads	uVar4	maxIndex	INFERRED	every definition is the result of a call whose name says it returns this	#45	+1	all	all
+use	TGenericLinker__FixOutputReads	uVar4	functionName	INFERRED	every definition is the result of a call whose name says it returns this	#79	+1	all	all
 use	TGenericLinker__OptimizeFunctionIO	pcVar4	paramName	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar3\ \+\ 9\);$	+62	all	all
 use	TGenericLinker__GetRemapTableString	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _strlen\(_linkUtilString\);$	+0	all	all
 use	TGenericLinker__GetRemapTableString	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ iVar3\ \+\ 2;$	+0	rhs	rhs
@@ -331,7 +331,7 @@ use	__ZN16ParseSymbolTableC2Ej	pvVar2	allocation	INFERRED	every definition is th
 use	__ZN16ParseSymbolTableC1Ej	pvVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+2	all	all
 use	__ZN16ParseSymbolTableC4Ej	pvVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+2	all	all
 use	ParseSymbolTable__FindNextParamSymbolByName	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#2	+11	all	all
-use	TIntermUnary__compileNode	uVar4	streamType	INFERRED	every definition is the result of a call whose name says it returns this	#179	+38	all	all
+use	TIntermUnary__compileNode	uVar4	streamType	INFERRED	every definition is the result of a call whose name says it returns this	#152	+38	all	all
 use	TIntermAggregate__indirectNode	puVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#4	+21	all	all
 use	ConstantAllocationList__addConstant	iVar3	newEntries	INFERRED	every definition is the result of a call whose name says it returns this	#2	+31	all	all
 use	store	puVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+12	all	all

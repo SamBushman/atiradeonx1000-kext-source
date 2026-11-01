@@ -35,18 +35,15 @@ int ffvpEmitBlendedEyeNormal(programBuilder, matrixSelectors, matrixCount, impli
   undefined4 *fileTable;
   undefined4 srcTempFile;
   uint remaining;
-  undefined1 tempX [4];
-  undefined4 tempXReg;
-  undefined1 tempY [4];
-  undefined4 tempYReg;
-  undefined1 tempZ [4];
-  undefined4 tempZReg;
+  int tempX [10];
+  int tempY [10];
+  int tempZ [10];
   undefined *maskBaseX;
   undefined *maskBaseY;
   undefined *maskBaseZ;
-  undefined1 *tempYOperand;
+  int *tempYOperand;
   int *invModelviewRegs;
-  undefined1 *tempZOperand;
+  int *tempZOperand;
   int emit1Src1Index;
   int emit2Src1File;
   
@@ -131,13 +128,13 @@ loopSetSrcTempFile:
           eyeNormalReg = *(undefined4 *)(programBuilder + 0x448);
           emit1Src1Index = *(int *)((int)programBuilder + 1376);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,eyeNormalReg,maskBaseX + -0x781c,srcTempFile,tempXReg,&swizzleWordsXYZW_001dbd14,
+                    (programBuilder,dstTempFile,eyeNormalReg,maskBaseX + -0x781c,srcTempFile,tempX[1],&swizzleWordsXYZW_001dbd14,
                      &zeroWords4_001fa5e8,srcTempFile,emit1Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,eyeNormalReg,maskBaseY + -0x77bc,srcTempFile,tempYReg,&swizzleWordsXYZW_001dbd14,
+                    (programBuilder,dstTempFile,eyeNormalReg,maskBaseY + -0x77bc,srcTempFile,tempY[1],&swizzleWordsXYZW_001dbd14,
                      &zeroWords4_001fa5e8,srcTempFile,emit1Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,eyeNormalReg,maskBaseZ + -0x77cc,srcTempFile,tempZReg,&swizzleWordsXYZW_001dbd14,
+                    (programBuilder,dstTempFile,eyeNormalReg,maskBaseZ + -0x77cc,srcTempFile,tempZ[1],&swizzleWordsXYZW_001dbd14,
                      &zeroWords4_001fa5e8,srcTempFile,emit1Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
           ffvpFreeTempRegister(programBuilder,tempX);
           ffvpFreeTempRegister(programBuilder,tempYOperand);
@@ -157,11 +154,11 @@ loopSetLoopIndex:
           loopIndex = loopIndex + 1;
           emit2Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,tempXReg,dstMask,constFile,invModelviewReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,emit2Src1File,(*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 0 ? *(int *)(programBuilder + 4) : (*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 1 ? *(int *)(programBuilder + 100) : 0)),&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFile,tempX[1],dstMask,constFile,invModelviewReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,emit2Src1File,(*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 0 ? *(int *)(programBuilder + 4) : (*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 1 ? *(int *)(programBuilder + 100) : 0)),&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,tempYReg,dstMask,constFile,invModelviewReg + 1,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,emit2Src1File,(*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 0 ? *(int *)(programBuilder + 4) : (*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 1 ? *(int *)(programBuilder + 100) : 0)),&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFile,tempY[1],dstMask,constFile,invModelviewReg + 1,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,emit2Src1File,(*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 0 ? *(int *)(programBuilder + 4) : (*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 1 ? *(int *)(programBuilder + 100) : 0)),&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,tempZReg,dstMask,constFile,invModelviewReg + 2,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,emit2Src1File,(*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 0 ? *(int *)(programBuilder + 4) : (*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 1 ? *(int *)(programBuilder + 100) : 0)),&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFile,tempZ[1],dstMask,constFile,invModelviewReg + 2,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,emit2Src1File,(*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 0 ? *(int *)(programBuilder + 4) : (*(int *)(matrixSelectors + (loopIndex - 1) * 4) == 1 ? *(int *)(programBuilder + 100) : 0)),&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
           if (matrixCount <= loopIndex) {
             fileTable = *(undefined4 **)(programBuilder + 0x3ec);
             goto loopSetSrcTempFile;
@@ -262,31 +259,20 @@ int ffvpEmitBlendedClipPosition(programBuilder, matrixSelectors, matrixCount, im
   undefined4 tempDstFile;
   uint remaining;
   uint uStack0000002c;
-  undefined1 blendTemp1 [4];
-  int blendTemp1Reg;
-  undefined1 blendTemp0 [4];
-  undefined4 blendTemp0Reg;
-  undefined1 outTemp [4];
-  int outTempReg;
-  undefined1 blendTemp2 [4];
-  undefined4 blendTemp2Reg;
-  undefined1 blendTemp3 [4];
-  undefined4 blendTemp3Reg [9];
-  undefined1 blendTemp4 [4];
-  undefined4 blendTemp4Reg;
-  undefined1 blendTemp5 [4];
-  undefined4 blendTemp5Reg;
-  undefined1 blendTemp6 [4];
-  undefined4 blendTemp6Reg;
+  int blendTemp1 [10];
+  int blendTemp0 [10];
+  int outTemp [10];
+  int blendTemp2 [10];
+  int blendTemp3 [40];
   undefined *constBase88;
-  undefined1 *blendTemp2Ptr;
+  int *blendTemp2Ptr;
   undefined *constBase80;
-  undefined1 *blendTemp3Ptr;
-  undefined1 *blendTemp4Ptr;
+  int *blendTemp3Ptr;
+  int *blendTemp4Ptr;
   undefined *constBase74;
-  undefined1 *blendTemp5Ptr;
-  undefined1 *blendTemp6Ptr;
-  undefined1 *blendTemp0Ptr;
+  int *blendTemp5Ptr;
+  int *blendTemp6Ptr;
+  int *blendTemp0Ptr;
   undefined *constBase64;
   undefined *constBase60;
   undefined *constBase5c;
@@ -411,24 +397,24 @@ loopCheckWriteDirect:
                     return 7;
                   }
                   dstFile = *(undefined4 *)programBuilder[0xfc];
-                  dstReg = outTempReg;
+                  dstReg = outTemp[1];
                 }
                 constBase88 = &constPoolAnchor_001e3a54;
                 constBase80 = &constPoolAnchor_001f3a54;
                 src1Index = *(int *)((int)programBuilder + 1376);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstFile,dstReg,&swizzleWordsYXXX_001dbd04,srcTempFile,blendTemp0Reg,&swizzleWordsXYZW_001dbd14,
+                          (programBuilder,dstFile,dstReg,&swizzleWordsYXXX_001dbd04,srcTempFile,blendTemp0[1],&swizzleWordsXYZW_001dbd14,
                            &zeroWords4_001fa5e8,srcTempFile,src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstFile,dstReg,&swizzleWordsXYXX_001dbd64,srcTempFile,blendTemp1Reg,&swizzleWordsXYZW_001dbd14,
+                          (programBuilder,dstFile,dstReg,&swizzleWordsXYXX_001dbd64,srcTempFile,blendTemp1[1],&swizzleWordsXYZW_001dbd14,
                            &zeroWords4_001fa5e8,srcTempFile,src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstFile,dstReg,&swizzleWordsXXYX_001dbd54,srcTempFile,blendTemp2Reg,&swizzleWordsXYZW_001dbd14,
+                          (programBuilder,dstFile,dstReg,&swizzleWordsXXYX_001dbd54,srcTempFile,blendTemp2[1],&swizzleWordsXYZW_001dbd14,
                            &zeroWords4_001fa5e8,srcTempFile,src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                 if ((*(char *)(programBuilder + 0x1d1) == '\0') || (programBuilder[0x1a8] != -1)) {
                   emit4Src1Index = *(int *)((int)programBuilder + 1376);
                   (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                            (programBuilder,dstFile,dstReg,&swizzleWordsXXXY_001dbd44,srcTempFile,blendTemp3Reg[0],&swizzleWordsXYZW_001dbd14,
+                            (programBuilder,dstFile,dstReg,&swizzleWordsXXXY_001dbd44,srcTempFile,blendTemp3[1],&swizzleWordsXYZW_001dbd14,
                              &zeroWords4_001fa5e8,srcTempFile,emit4Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                   ffvpFreeTempRegister(programBuilder,blendTemp0Ptr);
                   ffvpFreeTempRegister(programBuilder,blendTemp1);
@@ -438,12 +424,12 @@ loopCheckWriteDirect:
                 else {
                   emit5Src1Index = *(int *)((int)programBuilder + 1376);
                   (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                            (programBuilder,*(undefined4 *)programBuilder[0xfc],blendTemp0Reg,&swizzleWordsXXXY_001dbd44,srcTempFile,
-                             blendTemp3Reg[0],&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,srcTempFile,emit5Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                            (programBuilder,*(undefined4 *)programBuilder[0xfc],blendTemp0[1],&swizzleWordsXXXY_001dbd44,srcTempFile,
+                             blendTemp3[1],&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,srcTempFile,emit5Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                   (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                            (programBuilder,dstFile,dstReg,&swizzleWordsXXXY_001dbd44,srcTempFile,blendTemp0Reg,&swizzleWordsWWWW_001dbcd4,
+                            (programBuilder,dstFile,dstReg,&swizzleWordsXXXY_001dbd44,srcTempFile,blendTemp0[1],&swizzleWordsWWWW_001dbcd4,
                              &zeroWords4_001fa5e8);
-                  ffvpEmitInverseW(programBuilder,srcTempFile,blendTemp0Reg);
+                  ffvpEmitInverseW(programBuilder,srcTempFile,blendTemp0[1]);
                   ffvpFreeTempRegister(programBuilder,blendTemp0Ptr);
                   ffvpFreeTempRegister(programBuilder,blendTemp1);
                   ffvpFreeTempRegister(programBuilder,blendTemp2Ptr);
@@ -458,10 +444,10 @@ loopCheckWriteDirect:
                   negateConstPtr = constBase80 + 0x6b94;
                   (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                             (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],&swizzleWordsYYYY_001dbd24,
-                             srcTempFile,outTempReg,selectConstPtr,negateConstPtr);
+                             srcTempFile,outTemp[1],selectConstPtr,negateConstPtr);
                   (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                             (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 0x14),
-                             programBuilder[uStack0000002c + 0x21],&swizzleWordsYYYY_001dbd24,srcTempFile,outTempReg,selectConstPtr,
+                             programBuilder[uStack0000002c + 0x21],&swizzleWordsYYYY_001dbd24,srcTempFile,outTemp[1],selectConstPtr,
                              negateConstPtr);
                   ffvpFreeTempRegister(programBuilder,outTemp);
                 }
@@ -481,13 +467,13 @@ loopSetMatrixIndex:
                 negateConstPtr = constBase80 + 0x6b94;
                 src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp0Reg,maskPtr,constFileB,mvpReg,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp0[1],maskPtr,constFileB,mvpReg,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp1Reg,maskPtr,constFileB,mvpReg + 1,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp1[1],maskPtr,constFileB,mvpReg + 1,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp2Reg,maskPtr,constFileB,mvpReg + 2,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp2[1],maskPtr,constFileB,mvpReg + 2,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp3Reg[0],maskPtr,constFileB,mvpReg + 3,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp3[1],maskPtr,constFileB,mvpReg + 3,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
                 if (matrixCount <= matrixIndex) goto loopCheckWriteDirect;
                 if (matrixIndex == 1) {
                   maskPtr = &swizzleWordsXYXX_001dbd64;
@@ -522,17 +508,17 @@ loopSetMatrixIndex:
       if (allocStatus != 0) {
         return 7;
       }
-      blendTemp4Ptr = blendTemp4;
+      blendTemp4Ptr = (&blendTemp3[10]);
       allocStatus = ffvpAllocTempRegister(programBuilder,0,blendTemp4Ptr);
       if (allocStatus != 0) {
         return 7;
       }
-      blendTemp5Ptr = blendTemp5;
+      blendTemp5Ptr = (&blendTemp3[20]);
       allocStatus = ffvpAllocTempRegister(programBuilder,0,blendTemp5Ptr);
       if (allocStatus != 0) {
         return 7;
       }
-      blendTemp6Ptr = blendTemp6;
+      blendTemp6Ptr = (&blendTemp3[30]);
       allocStatus = ffvpAllocTempRegister(programBuilder,0,blendTemp6Ptr);
       if (allocStatus != 0) {
         return 7;
@@ -564,7 +550,7 @@ loopSetMatrixIndex:
         constBase58 = &constPoolAnchor_001e3a54;
         matrixIndex = 0;
         constBase60 = &constPoolAnchor_001f3a54;
-        tempRegCursor = blendTemp3Reg;
+        tempRegCursor = (&blendTemp3[1]);
         mvpRegCursor2 = programBuilder;
         do {
           mvpReg = mvpRegCursor2[0x29];
@@ -594,14 +580,14 @@ loopSetMatrixIndex:
         dstFileTable = (undefined4 *)programBuilder[0xfc];
         srcFileTable = (undefined4 *)programBuilder[0xfb];
       }
-      dstReg = blendTemp1Reg;
+      dstReg = blendTemp1[1];
       if (writeDirect) {
         copyDstFile = dstFileTable[2];
         copySrcReg = programBuilder[0x1a];
       }
       else {
         copyDstFile = *dstFileTable;
-        copySrcReg = blendTemp1Reg;
+        copySrcReg = blendTemp1[1];
       }
       srcTempFileB = *srcFileTable;
       negateConstPtr2 = constBase80 + 0x6b94;
@@ -610,23 +596,23 @@ loopSetMatrixIndex:
       emit17Src1Index = *(int *)((int)programBuilder + 1376);
       emit17Src1Select = (int)constBase64 + -32128;
       (**(code **)(((unsigned char *)0x000012ec) + glCtx))
-                (programBuilder,srcTempFileB,blendTemp1Reg,negateConstPtr,srcTempFile,blendTemp6Reg,selectConstPtr,negateConstPtr2,srcTempFileB,emit17Src1Index,emit17Src1Select,negateConstPtr2);
+                (programBuilder,srcTempFileB,blendTemp1[1],negateConstPtr,srcTempFile,blendTemp3[31],selectConstPtr,negateConstPtr2,srcTempFileB,emit17Src1Index,emit17Src1Select,negateConstPtr2);
       iVarS7 = *(int *)((int)programBuilder + 1376);
       deadEmitFn12f4 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4852);
       src1IndexB = *(int *)((int)programBuilder + 1376);
       emit18Src1Select = (int)constBase58 + -32096;
       (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                (programBuilder,srcTempFileB,dstReg,negateConstPtr,srcTempFile,blendTemp5Reg,selectConstPtr,negateConstPtr2,srcTempFileB,src1IndexB,emit18Src1Select,negateConstPtr2,srcTempFileB,dstReg,selectConstPtr,negateConstPtr2);
+                (programBuilder,srcTempFileB,dstReg,negateConstPtr,srcTempFile,blendTemp3[21],selectConstPtr,negateConstPtr2,srcTempFileB,src1IndexB,emit18Src1Select,negateConstPtr2,srcTempFileB,dstReg,selectConstPtr,negateConstPtr2);
       deadEmitFn12f4B = *(int *)((int)*(int *)((int)programBuilder + 980) + 4852);
       emit19Src1Select = (int)constBase5c + -32112;
       (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                (programBuilder,srcTempFileB,dstReg,negateConstPtr,srcTempFile,blendTemp4Reg,selectConstPtr,negateConstPtr2,srcTempFileB,src1IndexB,emit19Src1Select,negateConstPtr2,srcTempFileB,dstReg,selectConstPtr,negateConstPtr2);
+                (programBuilder,srcTempFileB,dstReg,negateConstPtr,srcTempFile,blendTemp3[11],selectConstPtr,negateConstPtr2,srcTempFileB,src1IndexB,emit19Src1Select,negateConstPtr2,srcTempFileB,dstReg,selectConstPtr,negateConstPtr2);
       if ((*(char *)(programBuilder + 0x1d1) == '\0') || (programBuilder[0x1a8] != -1)) {
         emit20Src1Index = *(int *)((int)programBuilder + 1376);
         emit20Src1Select = (int)constBase60 + 27556;
-        emit20Src2Index = blendTemp1Reg;
+        emit20Src2Index = blendTemp1[1];
         (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                  (programBuilder,copyDstFile,copySrcReg,negateConstPtr,srcTempFile,blendTemp3Reg[0],selectConstPtr,negateConstPtr2,srcTempFile,emit20Src1Index,emit20Src1Select,negateConstPtr2,srcTempFile,emit20Src2Index,selectConstPtr,negateConstPtr2);
+                  (programBuilder,copyDstFile,copySrcReg,negateConstPtr,srcTempFile,blendTemp3[1],selectConstPtr,negateConstPtr2,srcTempFile,emit20Src1Index,emit20Src1Select,negateConstPtr2,srcTempFile,emit20Src2Index,selectConstPtr,negateConstPtr2);
       }
       else {
         iVarS10 = *(int *)((int)programBuilder + 1376);
@@ -634,13 +620,13 @@ loopSetMatrixIndex:
         emit21Src1Index = *(int *)((int)programBuilder + 1376);
         emit21Src1Select = (int)constBase60 + 27556;
         (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                  (programBuilder,srcTempFileB,dstReg,negateConstPtr,srcTempFile,blendTemp3Reg[0],selectConstPtr,negateConstPtr2,srcTempFileB,emit21Src1Index,emit21Src1Select,negateConstPtr2,srcTempFileB,dstReg,selectConstPtr,negateConstPtr2);
+                  (programBuilder,srcTempFileB,dstReg,negateConstPtr,srcTempFile,blendTemp3[1],selectConstPtr,negateConstPtr2,srcTempFileB,emit21Src1Index,emit21Src1Select,negateConstPtr2,srcTempFileB,dstReg,selectConstPtr,negateConstPtr2);
         if (writeDirect) {
           (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                     (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],negateConstPtr,srcTempFile,
-                     blendTemp1Reg,selectConstPtr,negateConstPtr2);
+                     blendTemp1[1],selectConstPtr,negateConstPtr2);
         }
-        ffvpEmitInverseW(programBuilder,srcTempFile,blendTemp1Reg);
+        ffvpEmitInverseW(programBuilder,srcTempFile,blendTemp1[1]);
         if (programBuilder[0x1a8] == -1) {
           ffvpFreeTempRegister(programBuilder,blendTemp3Ptr);
           ffvpFreeTempRegister(programBuilder,blendTemp4Ptr);
@@ -655,11 +641,11 @@ loopSetMatrixIndex:
         selectConstPtr = constBase88 + -0x7d40;
         negateConstPtr = constBase80 + 0x6b94;
         (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                  (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],maskConstPtr,srcTempFile,blendTemp1Reg,
+                  (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],maskConstPtr,srcTempFile,blendTemp1[1],
                    selectConstPtr,negateConstPtr);
         (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                   (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 0x14),programBuilder[uStack0000002c + 0x21],
-                   maskConstPtr,srcTempFile,blendTemp1Reg,selectConstPtr,negateConstPtr);
+                   maskConstPtr,srcTempFile,blendTemp1[1],selectConstPtr,negateConstPtr);
       }
       ffvpFreeTempRegister(programBuilder,blendTemp3Ptr);
       ffvpFreeTempRegister(programBuilder,blendTemp4Ptr);
@@ -1481,10 +1467,8 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
   undefined4 srcTempFileB;
   int mvpConstReg;
   undefined4 dstTempFile;
-  undefined1 clipTemp [4];
-  int clipTempRegB;
-  undefined1 wTemp [4];
-  undefined4 wTempReg;
+  int clipTemp [10];
+  int wTemp [10];
   int emit9Src1File;
   int emit9Src1Index;
   int emit9Src1Select;
@@ -1543,7 +1527,7 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
       }
       mvpConstReg = programBuilder[0x29];
       dstFile = *(undefined4 *)programBuilder[0xfc];
-      dstReg = clipTempRegB;
+      dstReg = clipTemp[1];
     }
     constFile = *(undefined4 *)(programBuilder[0xfb] + 8);
     /* issue #64 live-repro (crash #9, past the local_98-cluster fix): this indirect dispatch
@@ -1588,10 +1572,10 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
       emit5Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
       emit5Src1Index = *(int *)((int)programBuilder + 0);
       (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                (programBuilder,dstTempFile,wTempReg,&swizzleWordsXXXY_001dbd44,constFile,mvpConstReg + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit5Src1File,emit5Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                (programBuilder,dstTempFile,wTemp[1],&swizzleWordsXXXY_001dbd44,constFile,mvpConstReg + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit5Src1File,emit5Src1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
       (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                (programBuilder,dstFile,dstReg,&swizzleWordsXXXY_001dbd44,srcTempFileB,wTempReg,&swizzleWordsWWWW_001dbcd4,&zeroWords4_001fa5e8);
-      ffvpEmitInverseW(programBuilder,srcTempFileB,wTempReg);
+                (programBuilder,dstFile,dstReg,&swizzleWordsXXXY_001dbd44,srcTempFileB,wTemp[1],&swizzleWordsWWWW_001dbcd4,&zeroWords4_001fa5e8);
+      ffvpEmitInverseW(programBuilder,srcTempFileB,wTemp[1]);
       ffvpFreeTempRegister(programBuilder,wTemp);
       if (programBuilder[0x1a8] == -1) {
         return 2;
@@ -1602,16 +1586,16 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
     }
     srcTempFile = *(undefined4 *)programBuilder[0xfb];
     (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-              (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],&swizzleWordsYYYY_001dbd24,srcTempFile,clipTempRegB
+              (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],&swizzleWordsYYYY_001dbd24,srcTempFile,clipTemp[1]
                ,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
     (**(code **)(((unsigned char *)0x000012e8) + glCtx))
               (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 0x14),programBuilder[clipCopyIndex + 0x21],&swizzleWordsYYYY_001dbd24,
-               srcTempFile,clipTempRegB,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+               srcTempFile,clipTemp[1],&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
   }
   else {
     srcTempFile = *(undefined4 *)programBuilder[0xfb];
     allocStatus = ffvpAllocTempRegister(programBuilder,0,clipTemp);
-    clipTempReg = clipTempRegB;
+    clipTempReg = clipTemp[1];
     if (allocStatus != 0) {
       return 7;
     }
@@ -1621,7 +1605,7 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
     }
     else {
       outDstFile = *(undefined4 *)programBuilder[0xfc];
-      dstReg = clipTempRegB;
+      dstReg = clipTemp[1];
     }
     mvpConstRegCopy = programBuilder[0x29];
     srcTempFileC = *(undefined4 *)programBuilder[0xfb];
@@ -1630,7 +1614,7 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
     emit9Src1Index = *(int *)((int)programBuilder + 0);
     emit9Src1Select = &swizzleWordsWWWW_001dbcd4;
     (**(code **)(((unsigned char *)0x000012ec) + glCtx))
-              (programBuilder,srcTempFileC,clipTempRegB,&swizzleWordsYYYY_001dbd24,constFileB,mvpConstRegCopy + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit9Src1File,emit9Src1Index,emit9Src1Select,&zeroWords4_001fa5e8);
+              (programBuilder,srcTempFileC,clipTemp[1],&swizzleWordsYYYY_001dbd24,constFileB,mvpConstRegCopy + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit9Src1File,emit9Src1Index,emit9Src1Select,&zeroWords4_001fa5e8);
     emit10Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
     emit10Src1Index = *(int *)((int)programBuilder + 0);
     emit10Src1Select = &swizzleWordsZZZZ_001dbcf4;
@@ -1652,7 +1636,7 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
       emit12Src1Index = *(int *)((int)programBuilder + 0);
       emit12Src1Select = &zeroWords4_001fa5f8;
       emit12Src2File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-      emit12Src2Index = clipTempRegB;
+      emit12Src2Index = clipTemp[1];
       (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                 (programBuilder,outDstFile,dstReg,&swizzleWordsYYYY_001dbd24,constFileB,mvpConstRegCopy,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit12Src1File,emit12Src1Index,emit12Src1Select,&zeroWords4_001fa5e8,emit12Src2File,emit12Src2Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
     }
@@ -1661,14 +1645,14 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
       emit13Src1Index = *(int *)((int)programBuilder + 0);
       emit13Src1Select = &zeroWords4_001fa5f8;
       (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                (programBuilder,*(undefined4 *)programBuilder[0xfb],clipTempRegB,&swizzleWordsYYYY_001dbd24,constFileB,mvpConstRegCopy,
-                 &swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit13Src1File,emit13Src1Index,emit13Src1Select,&zeroWords4_001fa5e8,*(undefined4 *)programBuilder[0xfb],clipTempRegB,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                (programBuilder,*(undefined4 *)programBuilder[0xfb],clipTemp[1],&swizzleWordsYYYY_001dbd24,constFileB,mvpConstRegCopy,
+                 &swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit13Src1File,emit13Src1Index,emit13Src1Select,&zeroWords4_001fa5e8,*(undefined4 *)programBuilder[0xfb],clipTemp[1],&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
       if (noClipCopy) {
         (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                   (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],&swizzleWordsYYYY_001dbd24,srcTempFile,
-                   clipTempRegB,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                   clipTemp[1],&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
       }
-      ffvpEmitInverseW(programBuilder,srcTempFile,clipTempRegB);
+      ffvpEmitInverseW(programBuilder,srcTempFile,clipTemp[1]);
       if (programBuilder[0x1a8] == -1) {
         ffvpFreeTempRegister(programBuilder,clipTemp);
         return 2;
@@ -1678,10 +1662,10 @@ int ffvpEmitClipPosition(programBuilder, copyDisabled, clipCopyIndex)
       srcTempFile = *(undefined4 *)programBuilder[0xfb];
       (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                 (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 8),programBuilder[0x1a],&swizzleWordsYYYY_001dbd24,srcTempFile,
-                 clipTempRegB,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                 clipTemp[1],&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
       (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                 (programBuilder,*(undefined4 *)(programBuilder[0xfc] + 0x14),programBuilder[clipCopyIndex + 0x21],&swizzleWordsYYYY_001dbd24
-                 ,srcTempFile,clipTempRegB,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                 ,srcTempFile,clipTemp[1],&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
     }
   }
   ffvpFreeTempRegister(programBuilder,clipTemp);
@@ -1772,10 +1756,8 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
   undefined4 genDstReg;
   undefined *maskCursor;
   undefined4 uStack00000020;
-  undefined1 texTempA [4];
-  undefined4 texTempAReg;
-  undefined1 texTempB [4];
-  undefined4 texTempBReg;
+  int texTempA [10];
+  int texTempB [10];
   undefined4 wMulSrcFile;
   undefined4 wMulSrcReg;
   int ownsTempB;
@@ -1818,11 +1800,11 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
     if (noTexGen) {
       dstFileTable = *(undefined4 **)(programBuilder + 0x3f0);
       genDstFile = 0;
-      texTempAReg = 0;
+      texTempA[1] = 0;
     }
     else if (noTexMatrix) {
       dstFileTable = *(undefined4 **)(programBuilder + 0x3f0);
-      texTempAReg = *(undefined4 *)(unitOffset + programBuilder + 0x84);
+      texTempA[1] = *(undefined4 *)(unitOffset + programBuilder + 0x84);
       genDstFile = dstFileTable[5];
     }
     else {
@@ -1840,21 +1822,21 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
     ownsTempB = 0;
     wMulSrcFile = 0;
     wMulSrcReg = 0;
-    genDstReg = texTempAReg;
+    genDstReg = texTempA[1];
   }
   else {
     if (noTexGen) {
-      wMulSrcReg = texTempAReg;
+      wMulSrcReg = texTempA[1];
       matrixDstFile = **(undefined4 **)(programBuilder + 0x3f0);
       ownsTempB = 0;
-      matrixDstReg = texTempAReg;
+      matrixDstReg = texTempA[1];
       wMulSrcFile = matrixDstFile;
       goto checkNoTexMatrix;
     }
     genDstFile = **(undefined4 **)(programBuilder + 0x3f0);
-    genDstReg = texTempAReg;
+    genDstReg = texTempA[1];
     if (noTexMatrix) {
-      wMulSrcReg = texTempAReg;
+      wMulSrcReg = texTempA[1];
       matrixDstFile = 0;
       ownsTempB = 0;
       matrixDstReg = 0;
@@ -1876,10 +1858,10 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
         ffvpFreeTempRegister(programBuilder,texTempA);
         return 7;
       }
-      wMulSrcReg = texTempBReg;
+      wMulSrcReg = texTempB[1];
       matrixDstFile = **(undefined4 **)(programBuilder + 0x3f0);
       ownsTempB = 1;
-      matrixDstReg = texTempBReg;
+      matrixDstReg = texTempB[1];
       wMulSrcFile = matrixDstFile;
     }
   }
@@ -1981,13 +1963,13 @@ checkNoTexMatrix:
     texMatrixReg = *(int *)(texMatrixUnit * 4 + programBuilder + 0xd8);
     constFileB = *(undefined4 *)(*(int *)(programBuilder + 0x3ec) + 8);
     (**(code **)(((unsigned char *)0x000012e4) + glCtxB))
-              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsYXXX_001dbd04,constFileB,texMatrixReg,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempAReg),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
+              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsYXXX_001dbd04,constFileB,texMatrixReg,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempA[1]),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
     (**(code **)(((unsigned char *)0x000012e4) + glCtxB))
-              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsXYXX_001dbd64,constFileB,texMatrixReg + 1,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempAReg),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
+              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsXYXX_001dbd64,constFileB,texMatrixReg + 1,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempA[1]),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
     (**(code **)(((unsigned char *)0x000012e4) + glCtxB))
-              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsXXYX_001dbd54,constFileB,texMatrixReg + 2,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempAReg),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
+              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsXXYX_001dbd54,constFileB,texMatrixReg + 2,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempA[1]),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
     (**(code **)(((unsigned char *)0x000012e4) + glCtxB))
-              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsXXXY_001dbd44,constFileB,texMatrixReg + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempAReg),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
+              (programBuilder,matrixDstFile,matrixDstReg,&swizzleWordsXXXY_001dbd44,constFileB,texMatrixReg + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,(noTexGen ? (*(int **)(programBuilder + 0x3ec))[1] : noTexMatrix ? 0 : **(int **)(programBuilder + 0x3ec)),(noTexGen ? *(int *)(unitOffset + programBuilder + 0x2c) : noTexMatrix ? 0 : texTempA[1]),(useXyz1Select != 0 ? ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 4) : &swizzleWordsXYZW_001dbd14),&zeroWords4_001fa5e8);
   }
   if (*(char *)(programBuilder + 0x744) != '\0') {
     emit8Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
@@ -3971,8 +3953,7 @@ int ffvpEmitFogDistance(programBuilder)
   int fogOutReg;
   int glCtx;
   int eyePositionReg;
-  undefined1 tempA [4];
-  undefined4 tempAReg;
+  int tempA [10];
   int emit5Src1Select;
   int emit1Src1Negate;
   
@@ -4016,12 +3997,12 @@ int ffvpEmitFogDistance(programBuilder)
       allocStatus = ffvpAllocTempRegister(programBuilder,1,tempA);
       if (allocStatus == 0) {
         (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                  (programBuilder,dstTempFile,tempAReg,&swizzleWordsYXXX_001dbd04,srcTempFile,eyePositionReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,srcTempFile,eyePositionReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
+                  (programBuilder,dstTempFile,tempA[1],&swizzleWordsYXXX_001dbd04,srcTempFile,eyePositionReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,srcTempFile,eyePositionReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
         (**(code **)(((unsigned char *)0x00001318) + glCtx))
-                  (programBuilder,dstTempFile,tempAReg,&swizzleWordsXYXX_001dbd64,srcTempFile,tempAReg,&zeroWords4_001fa5f8,&zeroWords4_001fa5e8);
+                  (programBuilder,dstTempFile,tempA[1],&swizzleWordsXYXX_001dbd64,srcTempFile,tempA[1],&zeroWords4_001fa5f8,&zeroWords4_001fa5e8);
         emit5Src1Select = ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 244);
         (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                  (programBuilder,outputFile,fogOutReg,&swizzleWordsYXXX_001dbd04,srcTempFile,tempAReg,&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempAReg,emit5Src1Select,&zeroWords4_001fa5e8);
+                  (programBuilder,outputFile,fogOutReg,&swizzleWordsYXXX_001dbd04,srcTempFile,tempA[1],&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempA[1],emit5Src1Select,&zeroWords4_001fa5e8);
         ffvpFreeTempRegister(programBuilder,tempA);
         return 0;
       }
@@ -4108,20 +4089,10 @@ int ffvpEmitFogLinear(programBuilder)
   int glCtx;
   int glCtxB;
   undefined4 fogCoordFile;
-  undefined4 selectArrA0;
-  undefined4 selectArrA1;
-  undefined4 selectArrA2;
-  undefined4 selectArrA3;
-  undefined4 selectArrB0;
-  undefined4 selectArrB1;
-  undefined4 selectArrB2;
-  undefined4 selectArrB3;
-  undefined1 tempA [4];
-  undefined4 tempAReg;
-  undefined1 tempAMask [24];
-  undefined4 tempASelect2;
-  undefined1 tempB [4];
-  undefined4 tempBReg;
+  int selectArrA [4];
+  int selectArrB [4];
+  int tempA [10];
+  int tempB [10];
   int emit3Src1Select;
   int deadSrcTempFile;
   int deadEmitFnSlot;
@@ -4201,54 +4172,54 @@ int ffvpEmitFogLinear(programBuilder)
             return 7;
           }
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstTempFile,tempBReg,&swizzleWordsYXXX_001dbd04,fogCoordFile,fogCoordReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,fogCoordFile,fogCoordReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFile,tempB[1],&swizzleWordsYXXX_001dbd04,fogCoordFile,fogCoordReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,fogCoordFile,fogCoordReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x00001318) + glCtx))
-                    (programBuilder,dstTempFile,tempBReg,&swizzleWordsXYXX_001dbd64,srcTempFile,tempBReg,&zeroWords4_001fa5f8,&zeroWords4_001fa5e8
+                    (programBuilder,dstTempFile,tempB[1],&swizzleWordsXYXX_001dbd64,srcTempFile,tempB[1],&zeroWords4_001fa5f8,&zeroWords4_001fa5e8
                     );
           emit3Src1Select = ((unsigned char *)&swizzleWords5555_001dbdb4_lane3_001dbdc0 + 244);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                    (programBuilder,dstFile,tempAReg,tempAMask,srcTempFile,tempBReg,&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempBReg,emit3Src1Select,&zeroWords4_001fa5e8);
+                    (programBuilder,dstFile,tempA[1],(&tempA[2]),srcTempFile,tempB[1],&swizzleWordsX444_001dbec4,&zeroWords4_001fa5e8,srcTempFile,tempB[1],emit3Src1Select,&zeroWords4_001fa5e8);
           ffvpFreeTempRegister(programBuilder,tempB);
         }
         else {
           (**(code **)(((unsigned char *)0x000012e8) + glCtx))
-                    (programBuilder,dstFile,tempAReg,tempAMask,fogCoordFile,fogCoordReg,fogCoordSelect,&onesWords4_001dbd94);
+                    (programBuilder,dstFile,tempA[1],(&tempA[2]),fogCoordFile,fogCoordReg,fogCoordSelect,&onesWords4_001dbd94);
         }
       }
       else {
         emit5Src1Negate = &onesWords4_001dbd94;
         (**(code **)(((unsigned char *)0x00001304) + glCtx))
-                  (programBuilder,dstFile,tempAReg,tempAMask,fogCoordFile,fogCoordReg,fogCoordSelect,&zeroWords4_001fa5e8,fogCoordFile,fogCoordReg,fogCoordSelect,emit5Src1Negate);
+                  (programBuilder,dstFile,tempA[1],(&tempA[2]),fogCoordFile,fogCoordReg,fogCoordSelect,&zeroWords4_001fa5e8,fogCoordFile,fogCoordReg,fogCoordSelect,emit5Src1Negate);
       }
       fogCoordFile = **(undefined4 **)(programBuilder + 0x3ec);
-      selectArrB3 = 4;
-      selectArrA0 = 4;
-      selectArrA2 = 2;
-      selectArrA1 = 1;
-      selectArrA3 = 4;
-      selectArrB0 = 4;
-      selectArrB1 = 5;
-      selectArrB2 = tempASelect2;
+      selectArrB[3] = 4;
+      selectArrA[0] = 4;
+      selectArrA[2] = 2;
+      selectArrA[1] = 1;
+      selectArrA[3] = 4;
+      selectArrB[0] = 4;
+      selectArrB[1] = 5;
+      selectArrB[2] = tempA[8];
       if (*(int *)(programBuilder + 0x3d8) != 0) {
         deadSrcTempFile = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
         deadEmitFnSlot = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
-        deadSelectPtr = &selectArrB0;
+        deadSelectPtr = &selectArrB[0];
         emit6Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-        emit6Src1Index = tempAReg;
-        emit6Src1Select = &selectArrB0;
+        emit6Src1Index = tempA[1];
+        emit6Src1Select = &selectArrB[0];
         (**(code **)(((unsigned char *)0x000012e4) + glCtxB))
-                  (programBuilder,*(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18),*(undefined4 *)(programBuilder + 0x70),&swizzleWordsYXXX_001dbd04,constFile,fogParamConstReg,&selectArrA0,&zeroWords4_001fa5e8,emit6Src1File,emit6Src1Index,emit6Src1Select,&zeroWords4_001fa5e8);
+                  (programBuilder,*(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18),*(undefined4 *)(programBuilder + 0x70),&swizzleWordsYXXX_001dbd04,constFile,fogParamConstReg,&selectArrA[0],&zeroWords4_001fa5e8,emit6Src1File,emit6Src1Index,emit6Src1Select,&zeroWords4_001fa5e8);
         ffvpFreeTempRegister(programBuilder,tempA);
         return 0;
       }
       fogMask = (undefined4 *)(programBuilder + 0x58c);
       deadSrcTempFileB = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
       deadEmitFnSlotB = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
-      deadSelectPtrB = &selectArrB0;
+      deadSelectPtrB = &selectArrB[0];
       emit7Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-      emit7Src1Index = tempAReg;
-      emit7Src1Select = &selectArrB0;
-      (**(code **)(((unsigned char *)0x000012e4) + glCtxB))(programBuilder,dstFile,fogFactorReg,fogMask,constFile,fogParamConstReg,&selectArrA0,&zeroWords4_001fa5e8,emit7Src1File,emit7Src1Index,emit7Src1Select,&zeroWords4_001fa5e8);
+      emit7Src1Index = tempA[1];
+      emit7Src1Select = &selectArrB[0];
+      (**(code **)(((unsigned char *)0x000012e4) + glCtxB))(programBuilder,dstFile,fogFactorReg,fogMask,constFile,fogParamConstReg,&selectArrA[0],&zeroWords4_001fa5e8,emit7Src1File,emit7Src1Index,emit7Src1Select,&zeroWords4_001fa5e8);
       ffvpFreeTempRegister(programBuilder,tempA);
       fogDstReg = fogFactorReg;
       if (-1 < *(int *)(glCtxB + 0x44)) {

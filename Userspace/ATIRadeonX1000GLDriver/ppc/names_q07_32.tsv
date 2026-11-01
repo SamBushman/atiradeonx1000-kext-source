@@ -2719,16 +2719,9 @@ local	Inst__collapseAlgebraic_0015ceb0	local_100	combinedDestSelect	INFERRED	des
 local	Inst__collapseAlgebraic_0015ceb0	local_f8	nodeOperand1Select	INFERRED	select word of node operand 1
 local	Inst__collapseAlgebraic_0015ceb0	local_f4	counterSave	INFERRED	IRInst__saveCounters out buffer (3 words); word 0 is reused as the last operand select
 local	Inst__collapseAlgebraic_0015ceb0	local_e8	partnerOperand2Copy	INFERRED	IROperand copy of partner operand 2
-local	Inst__collapseAlgebraic_0015ceb0	local_d4	partnerOperand2CopyEnd	INFERRED	last word of the partner operand 2 IROperand copy
 local	Inst__collapseAlgebraic_0015ceb0	local_d0	nodeOperand2Copy	INFERRED	IROperand copy of node operand 2
-local	Inst__collapseAlgebraic_0015ceb0	local_cc	nodeOperand2Copy1	INFERRED	word 1 of the node operand 2 IROperand copy
-local	Inst__collapseAlgebraic_0015ceb0	local_bc	nodeOperand2CopyEnd	INFERRED	last word of the node operand 2 IROperand copy
 local	Inst__collapseAlgebraic_0015ceb0	local_b8	nodeOperand1Copy	INFERRED	IROperand copy of node operand 1
-local	Inst__collapseAlgebraic_0015ceb0	local_b4	nodeOperand1Copy1	INFERRED	word 1 of the node operand 1 IROperand copy
-local	Inst__collapseAlgebraic_0015ceb0	local_a4	nodeOperand1CopyEnd	INFERRED	last word of the node operand 1 IROperand copy
 local	Inst__collapseAlgebraic_0015ceb0	local_a0	partnerOperand1Copy	INFERRED	IROperand copy of partner operand 1
-local	Inst__collapseAlgebraic_0015ceb0	local_9c	partnerOperand1Copy1	INFERRED	word 1 of the partner operand 1 IROperand copy
-local	Inst__collapseAlgebraic_0015ceb0	local_8c	partnerOperand1CopyEnd	INFERRED	last word of the partner operand 1 IROperand copy
 local	Inst__collapseAlgebraic_0015ceb0	local_88	lastOperandBuf0	INFERRED	IRInst__readLastOperand out buffer word 0
 local	Inst__collapseAlgebraic_0015ceb0	local_84	lastOperandSourceSave	INFERRED	last operand source of the partner; its +0x160 counter is bumped
 local	Inst__collapseAlgebraic_0015ceb0	local_74	lastOperandBuf2	INFERRED	IRInst__readLastOperand out buffer word 2
@@ -3336,8 +3329,6 @@ local	FUN_001524b8	local_98	mergedDestSelect	INFERRED	merged dest select (Select
 local	FUN_001524b8	local_94	constSelectWord	INFERRED	0x1010101 / select word used for the constants
 local	FUN_001524b8	local_90	lastOperandBuf	INFERRED	IRInst__readLastOperand out buffer (5 words)
 local	FUN_001524b8	local_6c	lastOperandBuf0	INFERRED	zero-initialised word before the last operand buffer
-local	FUN_001524b8	local_64	zeroWordA	INFERRED	zero-initialised scratch word
-local	FUN_001524b8	local_54	zeroWordB	INFERRED	zero-initialised scratch word
 local	FUN_001524b8	local_48	mergeOut	INFERRED	out of SelectWord__mergeWrittenLanes
 local	FUN_001524b8	local_68	scaleOut	INFERRED	out buffer of FUN_00104730
 use	FUN_001524b8	uVar6	inst2DestSelectCopy	INFERRED	copy of the inst2 dest select word	^\s*uVar6\ =\ local_a4;$	+1
@@ -3695,7 +3686,6 @@ use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13
 use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015b8b8\)\(\&local_64,\(uint\)\*\(byte\ \*\)\(uVar5\ \+\ iVar1\ \+\ 0x10\)\);$	+1
 use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015b8b8\)\(\&local_64,\(uint\)\*\(byte\ \*\)\(uVar5\ \+\ iVar1\ \+\ 0x10\)\);$@2	+1
 use	FUN_0015b974	uVar5	sourceSelectByte	INFERRED	select byte of operand 1 (+0x13)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0015b8b8\)\(\&local_64,uVar5\);$	+1
-use	FUN_0015b974	uVar5	constantIntValue	INFERRED	integer value of the uniform constant	^\s*uVar5\ =\ \(uint\)\(int\)local_5c;$	+3
 use	FUN_0015b974	uVar5	constantIntValue	INFERRED	integer value of the uniform constant	^\s*\*param_4\ =\ uVar5;$	+1
 use	FUN_0015b974	uVar5	scaleValue	INFERRED	shift scale or 2	^\s*uVar5\ =\ 2;$	+1
 use	FUN_0015b974	uVar5	scaleValue	INFERRED	shift scale or 2	^\s*uVar5\ =\ 1\ <<\ \(local_64\[0x49\]\ \+\ local_68\[0x49\]\ \&\ 0x3fU\);$	+1
@@ -3706,8 +3696,6 @@ use	FUN_0015b974	iVar7	sourceOpcode	INFERRED	opcode of the source inst	^\s*if\ \
 use	FUN_0015b974	iVar7	sourceOpcode	INFERRED	opcode of the source inst	^\s*if\ \(\(iVar7\ !=\ 0x12\)\ \&\&\ \(iVar7\ !=\ 0x9b\)\)\ \{$	+1
 local	FUN_0015b974	local_68	sourceInst	INFERRED	operand 1 source of inst; passed by address to FUN_0015b8b8
 local	FUN_0015b974	local_64	innerSource	INFERRED	operand source of sourceInst; passed by address to FUN_0015b8b8
-local	FUN_0015b974	auStack_60	uniformConstantHeader	INFERRED	first word of the out record of IRInst__getUniformSourceConstant
-local	FUN_0015b974	local_5c	uniformConstantValue	INFERRED	float out value of IRInst__getUniformSourceConstant
 local	FUN_0015b974	local_48	constantAsLongLong	INFERRED	fctiw conversion scratch
 local	FUN_0015b974	local_40	doubleHighWord	INFERRED	0x43300000 high word of the int-to-double trick
 local	FUN_0015b974	uStack_3c	doubleLowWord	INFERRED	biased int low word of the int-to-double trick
@@ -4392,8 +4380,6 @@ local	Inst__swapSharedTermBetweenUses	local_5c	maskedSelectOutB	INFERRED	SelectW
 local	Inst__swapSharedTermBetweenUses	local_58	composedSelectOutA	INFERRED	SelectWord__compose out value stored to matchFrame[0xe]
 local	Inst__swapSharedTermBetweenUses	local_54	composedSelectOutB	INFERRED	SelectWord__compose out value stored to matchFrame[0xf]
 local	Inst__mergeMovAndMadByLanes	fparam_1	literalValue	INFERRED	float literal (1.0 or 0.0, or the constant just read) replicated into the vec4 literal
-local	Inst__mergeMovAndMadByLanes	local_84	uniformConstantHeader	INFERRED	first word of the IRInst__getUniformSourceConstant out record; also read bytewise as lane mask
-local	Inst__mergeMovAndMadByLanes	local_80	uniformConstantValue	INFERRED	float value word of the IRInst__getUniformSourceConstant out record
 local	Inst__canFuseAddMul	param_3	requireSingleUse	INFERRED	non-zero requires the mul operand to have a single use
 local	Inst__canFuseAddMul	bVar1	firstOperandFusable	INFERRED	the first operand is a plain mul that can be fused
 local	Inst__canFuseAddMul	bVar2	secondOperandFusable	INFERRED	the second operand is a plain mul that can be fused
@@ -4500,8 +4486,6 @@ local	FUN_00175a3c	piVar3	recordVectorSlot	INFERRED	vector slot receiving the ne
 local	IRInst__sourceIsSplatConstant	fparam_1	expectedValue	INFERRED	float the splat constant must equal
 local	IRInst__sourceIsSplatConstant	iVar1	constantFound	INFERRED	IRInst__getUniformSourceConstant result
 local	IRInst__sourceIsSplatConstant	uVar2	isSplat	INFERRED	return value
-local	IRInst__sourceIsSplatConstant	local_48	uniformConstantHeader	INFERRED	first word of the IRInst__getUniformSourceConstant out record (2 = splat)
-local	IRInst__sourceIsSplatConstant	local_44	uniformConstantValue	INFERRED	float value word of the out record
 local	ResourceModel__vslot22	param_2	countA	INFERRED	first count compared against 0x10
 local	ResourceModel__vslot22	param_3	countB	INFERRED	second count compared against 0x10 and scaled by 4
 local	ResourceModel__vslot22	param_4	countC	INFERRED	third count compared against countB * 4
@@ -4704,8 +4688,6 @@ local	ValueKey__initResultLaneValues	iVar5	laneCursor	INFERRED	key + lane * 4: b
 local	IRInst__getOtherOperandIfConstant	param_2	opcode	INFERRED	opcode the inst must have
 local	IRInst__getOtherOperandIfConstant	param_3	unusedArg3	INFERRED	not referenced
 local	IRInst__getOtherOperandIfConstant	fparam_1	expectedValue	INFERRED	float constant one operand must equal
-local	IRInst__getOtherOperandIfConstant	auStack_48	constantHeader	INFERRED	first words of the IRInst__getUniformSourceConstant out record
-local	IRInst__getOtherOperandIfConstant	local_44	constantValue	INFERRED	float value word of the out record
 local	Block__scanBranchConeForFetchAndInterp	iVar10	coneStampArg	INFERRED	cone stamp left in r5 as an extra argument of Block__getBranchInst
 local	FUN_0013f3d4	iVar7	operandIndexC	INFERRED	operand loop index 1..operandCount of the user
 local	FUN_0013f3d4	uVar18	userIndexDown	INFERRED	descending index over the partner's users vector

@@ -3417,10 +3417,7 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   uint vectorRegIndex;
   uint bankIndex;
   int componentUsedFlags [4];
-  byte transferSel0;
-  byte transferSel1;
-  byte transferSel2;
-  byte transferSel3;
+  byte transferSel [4];
   undefined4 identitySwizzle;
   undefined4 newSwizzleWord;
   
@@ -3487,15 +3484,15 @@ setVectorMode:
                ((selectByte = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x713), selectByte != '\x03' &&
                 (selectByte != -1)))))))) {
             _PPCRuntimeCompilerBuildTransferSwizzle
-                      (&transferSel0,compiler + vectorRegIndex * 0xe + 0x1c4,&identitySwizzle);
-            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,&transferSel0);
+                      (&transferSel[0],compiler + vectorRegIndex * 0xe + 0x1c4,&identitySwizzle);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,&transferSel[0]);
             newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)
-                                                   ((int)compiler + (uint)transferSel0 + vectorRecordOffset + 8),
+                                                   ((int)compiler + (uint)transferSel[0] + vectorRecordOffset + 8),
                                                   *(undefined1 *)
-                                                   ((int)compiler + (uint)transferSel1 + vectorRecordOffset + 8)),
-                                         *(undefined1 *)((int)compiler + (uint)transferSel2 + vectorRecordOffset + 8)
+                                                   ((int)compiler + (uint)transferSel[1] + vectorRecordOffset + 8)),
+                                         *(undefined1 *)((int)compiler + (uint)transferSel[2] + vectorRecordOffset + 8)
                                         ),
-                                *(undefined1 *)((int)compiler + (uint)transferSel3 + vectorRecordOffset + 8));
+                                *(undefined1 *)((int)compiler + (uint)transferSel[3] + vectorRecordOffset + 8));
             compiler[vectorRegIndex * 0xe + 0x1c4] = newSwizzleWord;
           }
           if (((uint)regRecord[0x1c4] >> 8 != (regRecord[0x1c4] & 0xffffffU)) &&
@@ -3506,12 +3503,12 @@ setVectorMode:
                 (*(char *)((int)regRecord + 0x712) != -1)))) ||
               ((*(char *)((int)regRecord + 0x713) != '\x03' && (*(char *)((int)regRecord + 0x713) != -1)
                ))))) {
-            _PPCRuntimeCompilerBuildTransferSwizzle(&transferSel0,regRecord + 0x1c4,&identitySwizzle);
-            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,loopIndex2,&transferSel0);
-            newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)regRecord + transferSel0 + 0x710),
-                                                  *(undefined1 *)((int)regRecord + transferSel1 + 0x710)),
-                                         *(undefined1 *)((int)regRecord + transferSel2 + 0x710)),
-                                *(undefined1 *)((int)regRecord + transferSel3 + 0x710));
+            _PPCRuntimeCompilerBuildTransferSwizzle(&transferSel[0],regRecord + 0x1c4,&identitySwizzle);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,loopIndex2,&transferSel[0]);
+            newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)regRecord + transferSel[0] + 0x710),
+                                                  *(undefined1 *)((int)regRecord + transferSel[1] + 0x710)),
+                                         *(undefined1 *)((int)regRecord + transferSel[2] + 0x710)),
+                                *(undefined1 *)((int)regRecord + transferSel[3] + 0x710));
             regRecord[0x1c4] = newSwizzleWord;
           }
           componentUsedFlags[3] = 0;

@@ -1739,8 +1739,7 @@ int Inst__matchScaledSource(inst, outSourceDef, outAddendSource, outScale, outSo
   int sourceOpcode;
   int *sourceInst;
   int *innerSource;
-  undefined1 uniformConstantHeader [4];
-  float uniformConstantValue;
+  struct { int header; float value; } uniformConstant;
   longlong constantAsLongLong;
   undefined4 doubleHighWord;
   uint doubleLowWord;
@@ -1795,16 +1794,16 @@ int Inst__matchScaledSource(inst, outSourceDef, outAddendSource, outScale, outSo
               return 0;
             }
             operandRecord = IRInst__getOperandRecord(sourceInst,0);
-            uniformSourceConstant = IRInst__getUniformSourceConstant(inst1,srcIndex,*(undefined4 *)(operandRecord + 0x10),uniformConstantHeader);
+            uniformSourceConstant = IRInst__getUniformSourceConstant(inst1,srcIndex,*(undefined4 *)(operandRecord + 0x10),(&uniformConstant.header));
             if (uniformSourceConstant == 0) {
               *outAddendSource = addendSource;
             }
             else {
               doubleHighWord = 0x43300000;
-              constantIntValue = (uint)(int)uniformConstantValue;
+              constantIntValue = (uint)(int)uniformConstant.value;
               constantAsLongLong = (longlong)(int)constantIntValue;
               doubleLowWord = constantIntValue ^ 0x80000000;
-              if (uniformConstantValue != (float)((double)CONCAT44(0x43300000,doubleLowWord) - 4503601774854144.0))
+              if (uniformConstant.value != (float)((double)CONCAT44(0x43300000,doubleLowWord) - 4503601774854144.0))
               {
                 return 0;
               }
@@ -2655,17 +2654,10 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
   int operandSelect;
   int nodeOperand1Select;
   int counterSave [3];
-  int partnerOperand2Copy [5];
-  undefined4 partnerOperand2CopyEnd;
-  undefined4 nodeOperand2Copy;
-  undefined4 nodeOperand2Copy1;
-  undefined4 nodeOperand2CopyEnd;
-  undefined4 nodeOperand1Copy;
-  undefined4 nodeOperand1Copy1;
-  undefined4 nodeOperand1CopyEnd;
-  undefined4 partnerOperand1Copy;
-  undefined4 partnerOperand1Copy1;
-  undefined4 partnerOperand1CopyEnd;
+  int partnerOperand2Copy [6];
+  undefined4 nodeOperand2Copy [6];
+  undefined4 nodeOperand1Copy [6];
+  undefined4 partnerOperand1Copy [6];
   undefined4 lastOperandBuf0;
   int lastOperandSourceSave;
   undefined4 lastOperandBuf2;
@@ -2766,26 +2758,26 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
           operandSelectB = *(undefined4 *)(operandRecord2 + 0x10);
           operandRecord2 = IRInst__getOperandRecord(newConstInstB,1);
           *(undefined4 *)(operandRecord2 + 0x10) = operandSelectB;
-          partnerOperand1Copy = 0;
-          partnerOperand1Copy1 = 0;
-          partnerOperand1CopyEnd = 0;
+          partnerOperand1Copy[0] = 0;
+          partnerOperand1Copy[1] = 0;
+          partnerOperand1Copy[5] = 0;
           partnerOperand2Copy[0] = 0;
           partnerOperand2Copy[1] = 0;
-          partnerOperand2CopyEnd = 0;
-          nodeOperand1Copy = 0;
-          nodeOperand1Copy1 = 0;
-          nodeOperand1CopyEnd = 0;
-          nodeOperand2Copy = 0;
-          nodeOperand2Copy1 = 0;
-          nodeOperand2CopyEnd = 0;
+          partnerOperand2Copy[5] = 0;
+          nodeOperand1Copy[0] = 0;
+          nodeOperand1Copy[1] = 0;
+          nodeOperand1Copy[5] = 0;
+          nodeOperand2Copy[0] = 0;
+          nodeOperand2Copy[1] = 0;
+          nodeOperand2Copy[5] = 0;
           operandRecord = IRInst__getOperandRecord(a0,1);
-          IROperand__copyFrom(&partnerOperand1Copy,operandRecord);
+          IROperand__copyFrom(&partnerOperand1Copy[0],operandRecord);
           operandRecord = IRInst__getOperandRecord(a0,2);
           IROperand__copyFrom(partnerOperand2Copy,operandRecord);
           operandRecord = IRInst__getOperandRecord(node,1);
-          IROperand__copyFrom(&nodeOperand1Copy,operandRecord);
+          IROperand__copyFrom(&nodeOperand1Copy[0],operandRecord);
           operandRecord = IRInst__getOperandRecord(node,2);
-          IROperand__copyFrom(&nodeOperand2Copy,operandRecord);
+          IROperand__copyFrom(&nodeOperand2Copy[0],operandRecord);
           operandRecord2 = IRInst__getOperandRecord(node,1);
           nodeOperand1Select = *(int *)(operandRecord2 + 0x10);
           operandRecord2 = IRInst__getOperandRecord(a0,1);
@@ -2809,9 +2801,9 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
           node[0x48] = a0[0x48];
           node[0x49] = partnerOutputScale;
           operandRecord = IRInst__getOperandRecord(node,3);
-          IROperand__copyFrom(operandRecord,&nodeOperand1Copy);
+          IROperand__copyFrom(operandRecord,&nodeOperand1Copy[0]);
           operandRecord = IRInst__getOperandRecord(node,1);
-          IROperand__copyFrom(operandRecord,&nodeOperand2Copy);
+          IROperand__copyFrom(operandRecord,&nodeOperand2Copy[0]);
           operandRecord = IRInst__getOperandRecord(node,2);
           IROperand__copyFrom(operandRecord,partnerOperand2Copy);
           IRInst__setOperandSource(node,1,newConstInstA,0,*(undefined4 *)(pass + 8));
@@ -3082,16 +3074,16 @@ setSourceDef5:
             operandIndex = operandIndex + 1;
           } while (operandIndex <= node[0x21]);
         }
-        nodeOperand1CopyEnd = 0;
-        nodeOperand2Copy = 0;
-        nodeOperand2Copy1 = 0;
-        nodeOperand2CopyEnd = 0;
-        nodeOperand1Copy = 0;
-        nodeOperand1Copy1 = 0;
+        nodeOperand1Copy[5] = 0;
+        nodeOperand2Copy[0] = 0;
+        nodeOperand2Copy[1] = 0;
+        nodeOperand2Copy[5] = 0;
+        nodeOperand1Copy[0] = 0;
+        nodeOperand1Copy[1] = 0;
         operandRecord = IRInst__getOperandRecord(inst2,operandIndex4);
-        IROperand__copyFrom(&nodeOperand2Copy,operandRecord);
+        IROperand__copyFrom(&nodeOperand2Copy[0],operandRecord);
         operandRecord = IRInst__getOperandRecord(inst2,operandIndex3);
-        IROperand__copyFrom(&nodeOperand1Copy,operandRecord);
+        IROperand__copyFrom(&nodeOperand1Copy[0],operandRecord);
         afterInst = node[1];
         DList__unlink(node);
         IRInst__reinitAsBinary(node,0x12,*(undefined4 *)(pass + 8));
@@ -3106,7 +3098,7 @@ setSourceDef5:
         node[0x25] = savedNodeField53;
         node[0x26] = savedNodeField26;
         operandRecord = IRInst__getOperandRecord(node,operandIndex4);
-        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand2Copy);
+        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand2Copy[0]);
         IRInst__setOperandSource(node,operandIndex4,vslot73Result,0,*(undefined4 *)(pass + 8));
         destSelectSaved = operandSelect;
         if (notTrackingUses) {
@@ -3125,7 +3117,7 @@ setSourceDef5:
           *(int *)(operandRecord3 + 0x10) = destSelectSaved;
         }
         operandRecord = IRInst__getOperandRecord(node,operandIndex3);
-        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand1Copy);
+        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand1Copy[0]);
         IRInst__setOperandSource(node,operandIndex3,sourceDef2,0,*(undefined4 *)(pass + 8));
         selectWordCopy = partnerOperand2Copy[0];
         if (notTrackingUses) {
@@ -3286,8 +3278,7 @@ undefined4 IRInst__getOtherOperandIfConstant(int inst,int opcode,undefined4 unus
   undefined4 operandVReg;
   undefined4 operandSelect;
   undefined4 operandSelectB;
-  undefined1 constantHeader [4];
-  float constantValue;
+  struct { int header; float value; } constant;
   
   if (((((*(int *)(inst + 0x120) == 0) && (*(int *)(inst + 0x124) == 0)) &&
        ((*(uint *)(inst + 0xb8) & 1) == 0)) &&
@@ -3295,8 +3286,8 @@ undefined4 IRInst__getOtherOperandIfConstant(int inst,int opcode,undefined4 unus
      (((*(uint *)(inst + 0xd0) & 2) == 0 && (*(int *)(*(int *)(inst + 0x88) + 8) == opcode)))
      ) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,1,*(undefined4 *)(operandRecord + 0x10),constantHeader);
-    if ((uniformSourceConstant != 0) && (expectedValue == (double)constantValue)) {
+    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,1,*(undefined4 *)(operandRecord + 0x10),(&constant.header));
+    if ((uniformSourceConstant != 0) && (expectedValue == (double)constant.value)) {
       operandVReg = IRInst__getOperandSource(inst,2);
       operandRecord = IRInst__getOperandRecord(inst,2);
       operandSelectB = *(undefined4 *)(operandRecord + 0x10);
@@ -3312,8 +3303,8 @@ undefined4 IRInst__getOtherOperandIfConstant(int inst,int opcode,undefined4 unus
       return operandVReg;
     }
     operandRecord = IRInst__getOperandRecord(inst,0);
-    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,2,*(undefined4 *)(operandRecord + 0x10),constantHeader);
-    if ((uniformSourceConstant != 0) && ((double)constantValue == expectedValue)) {
+    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,2,*(undefined4 *)(operandRecord + 0x10),(&constant.header));
+    if ((uniformSourceConstant != 0) && ((double)constant.value == expectedValue)) {
       operandVReg = IRInst__getOperandSource(inst,1);
       return operandVReg;
     }
@@ -6568,8 +6559,7 @@ int Inst__mergeMovAndMadByLanes(node, pass)
   undefined4 lastOperandRecord;
   int lastOperandSource;
   undefined4 lastOperandRecord5;
-  undefined4 uniformConstantHeader;
-  float uniformConstantValue;
+  struct { int header; float value; } uniformConstant;
   
   if ((*(uint *)(node + 0x14) & 0x200) == 0) {
     return 0;
@@ -6591,11 +6581,11 @@ int Inst__mergeMovAndMadByLanes(node, pass)
     }
     operandRecord2 = IRInst__getOperandRecord(node,0);
     laneScan = 0;
-    uniformConstantHeader = *(undefined4 *)(operandRecord2 + 0x10);
+    uniformConstant.header = *(undefined4 *)(operandRecord2 + 0x10);
     lanesLeft = 4;
     do {
       if (*(char *)((int)&extraSourceSelect + laneScan) == '\x04') {
-        if (*(char *)((int)&uniformConstantHeader + laneScan) == '\0') {
+        if (*(char *)((int)&uniformConstant.header + laneScan) == '\0') {
           *(char *)((int)&extraSourceSelect + laneScan) = (char)laneScan;
         }
       }
@@ -6827,8 +6817,8 @@ checkMovSrcResolved2:
       srcIndexA = 2;
       do {
         operandRecord2 = IRInst__getOperandRecord(madSrcA,0);
-        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcA,srcIndexA,*(undefined4 *)(operandRecord2 + 0x10),&uniformConstantHeader);
-        if ((uniformSourceConstant != 0) && (literalValue == (double)uniformConstantValue)) {
+        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcA,srcIndexA,*(undefined4 *)(operandRecord2 + 0x10),&uniformConstant.header);
+        if ((uniformSourceConstant != 0) && (literalValue == (double)uniformConstant.value)) {
           selectLaneA = -1;
           laneScan4 = 0;
           do {
@@ -6938,8 +6928,8 @@ setIsMixB:
       srcIndexB = 2;
       do {
         operandRecord2 = IRInst__getOperandRecord(madSrcB,0);
-        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcB,srcIndexB,*(undefined4 *)(operandRecord2 + 0x10),&uniformConstantHeader);
-        if ((uniformSourceConstant != 0) && (uniformConstantValue == 0.0)) {
+        uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcB,srcIndexB,*(undefined4 *)(operandRecord2 + 0x10),&uniformConstant.header);
+        if ((uniformSourceConstant != 0) && (uniformConstant.value == 0.0)) {
           selectLaneB = -1;
           laneScan5 = 0;
           do {

@@ -4314,8 +4314,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
   uint *operandFlagsPtr;
   int operandIndex;
   uint lane1Select;
-  undefined1 chainList [8];
-  int listNode;
+  int chainList [6];
   uint laneSelect3;
   uint laneSelect2;
   uint laneSelect1;
@@ -4813,7 +4812,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
       indexPlusOne = indexPlusOne + -2;
     } while (0 < (int)pairLoopIndex);
   }
-  leftNode = listNode;
+  leftNode = chainList[2];
   if (pairLoopIndex == 0) {
     firstJoinInst = IRInst__create(opcode,*compiler);
     selectConstA = swizzleYYYX_001b0210;
@@ -5132,8 +5131,8 @@ code_r0x001836f0:
     elementRef = (int *)vectorAlloc[3];
   }
   if (inst == *elementRef) {
-    lookaheadNode = *(int *)(listNode + 8);
-    moveNode = listNode;
+    lookaheadNode = *(int *)(chainList[2] + 8);
+    moveNode = chainList[2];
     while (nextNode = lookaheadNode, nextNode != 0) {
       DList__unlink(moveNode);
       Block__insertInstBefore(block,inst,moveNode);
@@ -5189,11 +5188,11 @@ code_r0x001836f0:
     *(undefined4 *)(operandRecord + 0x10) = selectConstC;
     IROperand__setModifierBits(inst + 0xa4,1,0);
     IROperand__setModifierBits(inst + 0xa4,2,0);
-    lookaheadNode3 = *(int *)(listNode + 8);
+    lookaheadNode3 = *(int *)(chainList[2] + 8);
     while (lookaheadNode2 = lookaheadNode3, lookaheadNode2 != 0) {
-      DList__unlink(listNode);
-      Block__insertInstBefore(block,inst,listNode);
-      listNode = lookaheadNode2;
+      DList__unlink(chainList[2]);
+      Block__insertInstBefore(block,inst,chainList[2]);
+      chainList[2] = lookaheadNode2;
       lookaheadNode3 = *(int *)(lookaheadNode2 + 8);
     }
     IRInst__setOperandSource(inst,2,*(undefined4 *)(inst + 4),0,*compiler);

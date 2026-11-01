@@ -11,9 +11,6 @@ local	FUN_0014acb8	local_54	onesLane1	CONFIRMED	second float of the 1.0 vector a
 local	FUN_0014acb8	local_50	onesLane2	CONFIRMED	third float of the 1.0 vector at &local_58
 local	FUN_0014acb8	local_4c	onesLane3	CONFIRMED	fourth float of the 1.0 vector at &local_58
 local	FUN_0014acb8	local_68	scalarSelectWord	CONFIRMED	select word (+0x10) of the mul operand that is not the dot; its bytes are scanned for the splat lane
-local	FUN_0014acb8	local_64	savedCounters0	CONFIRMED	3-word buffer filled by IRInst__saveCounters(inst, &local_64, -1) and replayed by IRInst__restoreCounters after the rebuild
-local	FUN_0014acb8	local_60	savedCounters1	CONFIRMED	second word of the saveCounters buffer
-local	FUN_0014acb8	local_5c	savedCounters2	CONFIRMED	third word of the saveCounters buffer
 use	FUN_0014acb8	iVar1	sourceOpcode	CONFIRMED	opcode (opcode-info +8) of mul source 1 tested against 0x1c / 0x1d (IrDot3 / IrDot4)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x88\)\ \+\ 8\);$	+1	all	all
 use	FUN_0014acb8	iVar1	lanesWritten	INFERRED	FUN_000f48ec(inst, 1): every lane read through source 1 is written by its definition	^\s*\(iVar1\ =\ FUN_000f48ec\(param_1,1\),\ iVar1\ !=\ 0\)\)\ \{$	+0	all	all
 use	FUN_0014acb8	iVar1	isSplat	INFERRED	FUN_000f2c5c(select word of the other operand): all used lanes select the same component	^\s*iVar1\ =\ FUN_000f2c5c\(\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\);$	+1	all	all
@@ -530,24 +527,15 @@ local	FUN_00128430	puVar4	fillCursor	CONFIRMED	walks the four words of the unifo
 local	FUN_00128430	iVar10	lanesLeft2	INFERRED	countdown of the four lanes while the uniform vector is filled
 local	FUN_00128430	uVar8	constantPool	CONFIRMED	*(program+0x3ac): the Program constant pool passed to FUN_000f5f94 / FUN_000f5248 / FUN_000f57f0
 local	FUN_00128430	local_50	uniformValueCopy	INFERRED	stack copy of the uniform value written in the fill loop (never read)
-local	FUN_00128430	local_b8	constVec0	INFERRED	first word of the 7-word constant descriptor / uniform vector buffer
-local	FUN_00128430	uStack_b4	constVec1	INFERRED	second word of the constant descriptor buffer
-local	FUN_00128430	uStack_b0	constVec2	INFERRED	third word of the constant descriptor buffer
-local	FUN_00128430	uStack_ac	constVec3	INFERRED	fourth word of the constant descriptor buffer
-local	FUN_00128430	local_a8	constVec4	INFERRED	fifth word of the constant descriptor buffer (passed by value to FUN_000f5248)
-local	FUN_00128430	local_a4	constVec5	INFERRED	sixth word of the constant descriptor buffer
-local	FUN_00128430	local_a0	constVec6	INFERRED	seventh word of the constant descriptor buffer
 use	FUN_00128430	piVar3	laneCursor	CONFIRMED	walks the four select bytes of laneSwizzle	^\s*piVar3\ =\ param_4;$	+15	all	all
 use	FUN_00128430	piVar3	laneSwizzleArg	INFERRED	copy of laneSwizzle left in a register and passed on as a stack argument of FUN_000f5f94 / FUN_000f57f0	^\s*piVar3\ =\ param_4;$@2	+39	all	all
 use	FUN_00128430	iVar6	isUniform	CONFIRMED	cleared when two used lanes hold different values; also read as a pass-through argument of FUN_000f5f94	^\s*iVar6\ =\ 1;$	+45	all	rhs
 use	FUN_00128430	iVar6	foundConstant	INFERRED	FUN_000f5f94(constant pool, constants, laneSwizzle): existing constant instruction, returned when non-zero	^\s*iVar6\ =\ FUN_000f5f94\(uVar8,param_3,param_4,piVar3,pcVar5,iVar6,pdVar7\);$	+2	lhs	all
-use	FUN_00128430	iVar6	foundExact	INFERRED	FUN_000f5248(pool, constant descriptor): result for the special (0,1,0,0) vector	^\s*iVar6\ =\ FUN_000f5248\(uVar8,local_b8,uStack_b4,uStack_b0,uStack_ac,local_a8,local_a4,local_a0\);$	+1	all	all
 use	FUN_00128430	iVar6	candidate	INFERRED	FUN_000f57f0(pool, constants, laneSwizzle): candidate constant, returned if HwLimits slot 64 (0x100) accepts laneSwizzle	^\s*iVar6\ =\ FUN_000f57f0\(uVar8,param_3,param_4,piVar3\);$	+2	all	all
 use	FUN_00128430	iVar9	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar9\ =\ 4;$	+18	all	all
 use	FUN_00128430	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, constants, select): an existing constant instruction with these lane values, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,param_3,\*param_4\);$	+0	all	all
 use	FUN_00128430	iVar9	lanesLeft	INFERRED	countdown of the four lanes while the uniform vector is initialised	^\s*iVar9\ =\ 4;$@2	+6	all	all
 use	FUN_00128430	iVar9	byteOffset	INFERRED	byte offset into the uniform vector buffer	^\s*iVar9\ =\ 0;$	+5	all	all
-use	FUN_00128430	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, uniform vector, 0x10203): an existing constant instruction, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,\&local_b8,0x10203\);$	+3	all	all
 use	FUN_00128430	iVar9	acceptsSwizzle	CONFIRMED	HwLimits slot 64 (0x100) result for laneSwizzle	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x100\)\)\(param_1,param_4\),\ iVar9\ !=\ 0\)\)\ \{$	+0	all	all
 local	FUN_00129eb4	fVar1	uniformValue	CONFIRMED	value of the first used lane; every other used lane must equal it for the vector to be uniform
 local	FUN_00129eb4	bVar2	firstLane	CONFIRMED	true until the first lane whose select byte is not 4 has been read
@@ -555,7 +543,6 @@ local	FUN_00129eb4	puVar4	fillCursor	CONFIRMED	walks the four words of the unifo
 local	FUN_00129eb4	iVar10	lanesLeft2	INFERRED	countdown of the four lanes while the uniform vector is filled
 local	FUN_00129eb4	uVar8	constantPool	CONFIRMED	*(program+0x3ac): the Program constant pool passed to FUN_000f5f94 / FUN_000f57f0
 local	FUN_00129eb4	local_20	uniformValueCopy	INFERRED	stack copy of the uniform value written in the fill loop (never read)
-local	FUN_00129eb4	local_38	uniformVec0	CONFIRMED	first word of the 4-word uniform vector buffer passed as &local_38 to FUN_000f6a04
 use	FUN_00129eb4	piVar3	laneCursor	CONFIRMED	walks the four select bytes of laneSwizzle	^\s*piVar3\ =\ param_4;$	+15	all	all
 use	FUN_00129eb4	piVar3	laneSwizzleArg	INFERRED	copy of laneSwizzle left in a register and passed on as a stack argument of FUN_000f5f94 / FUN_000f57f0	^\s*piVar3\ =\ param_4;$@2	+32	all	all
 use	FUN_00129eb4	iVar6	isUniform	CONFIRMED	cleared when two used lanes hold different values; also read as a pass-through argument of FUN_000f5f94	^\s*iVar6\ =\ 1;$	+45	all	rhs
@@ -565,7 +552,6 @@ use	FUN_00129eb4	iVar9	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar9\
 use	FUN_00129eb4	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, constants, select): an existing constant instruction with these lane values, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,param_3,\*param_4\);$	+0	all	all
 use	FUN_00129eb4	iVar9	lanesLeft	INFERRED	countdown of the four lanes while the uniform vector is initialised	^\s*iVar9\ =\ 4;$@2	+6	all	all
 use	FUN_00129eb4	iVar9	byteOffset	INFERRED	byte offset into the uniform vector buffer	^\s*iVar9\ =\ 0;$	+5	all	all
-use	FUN_00129eb4	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, uniform vector, 0x10203): an existing constant instruction, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,\&local_38,0x10203\);$	+3	all	all
 local	FUN_0012873c	uVar1	laneMask	CONFIRMED	laneSwizzle with its four bytes reversed (big-endian word to byte lanes): mask argument of IRInst__sourceMatchesConstant, byte 0 = lane must match
 local	FUN_0012873c	local_64	constValues	CONFIRMED	four floats of the candidate hardware constant (table at DAT_001aff08, 6 floats per entry, preset to the unknown marker 0x7fff0000)
 local	FUN_0012873c	local_54	negatedValues	CONFIRMED	the candidate constant with every lane negated, tried when IRInst vslot 35 allows a negated source

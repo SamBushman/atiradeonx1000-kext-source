@@ -18,7 +18,6 @@ use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the 
 use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@4	+1
 use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*piVar8\ =\ \(int\ \*\)\(iVar19\ \+\ puVar7\[3\]\);$@2	+1
 use	FUN_00181f00	iVar19	elementByteOffset	INFERRED	byte offset (index*4) of the current entry in the element vectors, decremented by 8 per pair	^\s*iVar19\ =\ iVar19\ \+\ \-8;$	+1
-use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*iVar19\ =\ local_80;$	+1
 use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*FUN_00106004\(iVar10,1,iVar19,0,iVar4\);$	+1
 use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar19\ \+\ 8\);$	+1
 use	FUN_00181f00	iVar19	leftNode	INFERRED	left node of the chain walk: starts at the first list node, then takes the next node	^\s*while\ \(iVar10\ =\ \*\(int\ \*\)\(iVar19\ \+\ 8\),\ \*\(int\ \*\)\(iVar10\ \+\ 8\)\ !=\ 0\)\ \{$	+1
@@ -31,7 +30,6 @@ use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the
 use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*puVar11\ =\ \(undefined4\ \*\)\(iVar19\ \+\ puVar6\[3\]\);$@3	+1
 use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*piVar12\ =\ \(int\ \*\)\(iVar19\ \+\ puVar7\[3\]\);$	+1
 use	FUN_00181f00	iVar19	elementByteOffset2	INFERRED	byte offset (index*4) of the entry in the write-back loop, decremented by 4	^\s*iVar19\ =\ iVar19\ \+\ \-4;$	+1
-use	FUN_00181f00	iVar19	lookaheadNode	INFERRED	the node after nextNode while splicing	^\s*iVar19\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+1
 use	FUN_00181f00	iVar19	lookaheadNode	INFERRED	the node after nextNode while splicing	^\s*while\ \(iVar15\ =\ iVar19,\ iVar15\ !=\ 0\)\ \{$	+1
 use	FUN_00181f00	iVar19	lookaheadNode	INFERRED	the node after nextNode while splicing	^\s*iVar19\ =\ \*\(int\ \*\)\(iVar15\ \+\ 8\);$	+1
 use	FUN_00181f00	iVar19	useOperandIndex	INFERRED	operand index read from the operand-index vector for inst	^\s*iVar19\ =\ \*piVar8;$	+2
@@ -113,9 +111,7 @@ use	FUN_00181f00	iVar3	operandByteOffset	INFERRED	operand index * 0x18 byte offs
 use	FUN_00181f00	iVar3	operandByteOffset	INFERRED	operand index * 0x18 byte offset (0x18, 0x30) into the instruction	^\s*iVar3\ =\ iVar3\ \+\ 0x18;$	+1
 use	FUN_00181f00	iVar3	instOpcode	INFERRED	opcode of inst (inst->+0x88->+8)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x88\)\ \+\ 8\);$	+2
 use	FUN_00181f00	iVar3	instOpcode	INFERRED	opcode of inst (inst->+0x88->+8)	^\s*if\ \(iVar3\ !=\ 0x12\)\ \{$	+1
-use	FUN_00181f00	iVar3	moveNode	INFERRED	DList node being unlinked and inserted before inst	^\s*iVar3\ =\ local_80;$	+1
 use	FUN_00181f00	iVar3	moveNode	INFERRED	DList node being unlinked and inserted before inst	^\s*FUN_0019401c\(iVar3\);$	+3
-use	FUN_00181f00	iVar3	lookaheadNode3	INFERRED	node after local_80 in the splice loop	^\s*iVar3\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+2
 use	FUN_00181f00	iVar3	lookaheadNode3	INFERRED	node after local_80 in the splice loop	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar19\ \+\ 8\);$	+1
 use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*bVar1\ =\ iVar4\ !=\ 2;$	+1
 use	FUN_00181f00	bVar1	moreOperands	INFERRED	loop condition: operand counter != 2	^\s*\}\ while\ \(bVar1\);$	+1
@@ -265,10 +261,6 @@ use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from
 use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$@3	+1
 use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*uVar21\ =\ \*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\);$@2	+1
 use	FUN_00181f00	uVar21	savedSelectWord	INFERRED	select word (+0x10) copied from one operand record to another	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$@4	+1
-use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*iVar19\ =\ local_80;$	+1
-use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*iVar19\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+2
-use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*iVar3\ =\ \*\(int\ \*\)\(local_80\ \+\ 8\);$	+1
-use	FUN_00181f00	local_80	listNode	INFERRED	first node of the instruction list (auStack_88 + 8), then the node being moved	^\s*FUN_0019401c\(local_80\);$	+3
 local	FUN_00181f00	auStack_88	chainList	INFERRED	DList header (DListNode__init) collecting the new instructions
 local	FUN_00181f00	local_60	laneSelect1	INFERRED	out-parameter of FUN_000f33f8 (select word -> lane select)
 local	FUN_00181f00	local_64	laneSelect2	INFERRED	out-parameter of FUN_000f33f8 (select word -> lane select)
@@ -352,4 +344,3 @@ use	FUN_00181f00	iVar15	nextNode	INFERRED	DList node following moveNode while th
 use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord(newInst2,2)	^\s*iVar19\ =\ FUN_001054ec\(iVar3,2\);$	+1
 use	FUN_00181f00	iVar19	operandRecord7	INFERRED	IRInst__getOperandRecord(newInst2,2)	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar21;$@4	+1
 use	FUN_00181f00	iVar19	lookaheadNode2	INFERRED	node after local_80 in the splice loop	^\s*while\ \(iVar19\ =\ iVar3,\ iVar19\ !=\ 0\)\ \{$	+1
-use	FUN_00181f00	iVar19	lookaheadNode2	INFERRED	node after local_80 in the splice loop	^\s*local_80\ =\ iVar19;$	+2

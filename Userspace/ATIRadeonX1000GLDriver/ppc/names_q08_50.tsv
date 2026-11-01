@@ -15,5 +15,4 @@ use	FudoPs__vslot85_findOrEncodeConstantVector	iVar6	foundVector	INFERRED	Regist
 use	FudoPs__vslot85_findOrEncodeConstantVector	uVar8	registerMap	INFERRED	program +0x3ac register map	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\);$	+2
 use	FudoPs__vslot85_findOrEncodeConstantVector	uVar8	registerMap	INFERRED	program +0x3ac register map	^\s*iVar6\ =\ FUN_000f57f0\(uVar8,param_3,param_4,piVar3\);$	+1
 local	FudoPs__vslot85_findOrEncodeConstantVector	fVar1	splatValue	INFERRED	value shared by every used lane
-local	FudoPs__vslot85_findOrEncodeConstantVector	local_38	splatVec4	INFERRED	vec4 {splatValue x4}, address passed to Program__findOrCreateConstInst (whole variable)
 local	FudoPs__vslot85_findOrEncodeConstantVector	local_20	lastSplatStore	INFERRED	frame copy of the last lane written to splatVec4

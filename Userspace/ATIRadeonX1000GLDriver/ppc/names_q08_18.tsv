@@ -67,8 +67,6 @@ use	FUN_001922c4	iVar12	savedField10	INFERRED	inst[4] (+0x10) kept across the re
 use	FUN_001922c4	iVar12	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar12\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x14\)\)\(param_3\),\ iVar12\ <=\ iVar6;$	+3
 use	FUN_001922c4	iVar2	opcode	INFERRED	opcode of inst: the 0x27..0x2a / 0x5b..0x5e compare opcodes	^\s*iVar2\ =\ \*\(int\ \*\)\(param_3\[0x22\]\ \+\ 8\);$	+5
 use	FUN_001922c4	iVar6	operandCount	INFERRED	operand count of inst (vtable +0x14)	^\s*for\ \(iVar12\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x14\)\)\(param_3\),\ iVar12\ <=\ iVar6;$	+2
-local	FUN_001922c4	local_40	savedCounters2	INFERRED	third word of the saved counter record (IRInst__saveCounters)
-local	FUN_001922c4	local_44	savedCounters1	INFERRED	second word of the saved counter record
 local	FUN_001922c4	local_48	savedCounters	INFERRED	saved counter record written by IRInst__saveCounters
 use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*uVar10\ =\ 2;$	+1
 use	FUN_001922c4	uVar10	literalIndexOne	INFERRED	operand index of the literal 1.0 operand (2 or 3)	^\s*uVar10\ =\ 3;$	+1

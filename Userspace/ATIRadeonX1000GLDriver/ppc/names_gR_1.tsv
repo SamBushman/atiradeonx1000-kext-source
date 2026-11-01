@@ -904,8 +904,6 @@ use	extvsEmitMmul	uVar3	newInstArray	INFERRED	result of the ctx allocator callba
 use	extvsEmitMmul	uVar3	newInstArray	INFERRED	result of the ctx allocator callback (+0xc): the grown hardware instruction array that replaces hwProgram[+0x1c]	^\s*\(uVar3,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x1c\),\*\(int\ \*\)\(iVar4\ \+\ 0x20\)\ <<\ 4\);$	+1
 use	extvsEmitMmul	uVar3	newInstArray	INFERRED	result of the ctx allocator callback (+0xc): the grown hardware instruction array that replaces hwProgram[+0x1c]	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x1c\)\ =\ uVar3;$	+1
 use	extvsEmitMmul	uVar3	tempIndex	INFERRED	index of a freshly allocated temporary register (extvsAllocTempSlot)	^\s*uVar3\ =\ FUN_00057b80\(param_1,param_2\);$	+1
-use	extvsEmitMmul	uVar3	tempIndex	INFERRED	index of a freshly allocated temporary register (extvsAllocTempSlot)	^\s*uStack_84\ =\ uVar3;$	+1
-use	extvsEmitMmul	uVar3	tempIndex	INFERRED	index of a freshly allocated temporary register (extvsAllocTempSlot)	^\s*uStack_68\ =\ uVar3;$	+1
 use	extvsEmitMmul	iVar4	src0Operand	INFERRED	instRecord + 0x20: first source operand of the instruction record	^\s*iVar4\ =\ param_3\ \+\ 0x20;$	+1
 use	extvsEmitMmul	iVar4	src0Operand	INFERRED	instRecord + 0x20: first source operand of the instruction record	^\s*iVar2\ =\ FUN_00057af0\(piVar5,iVar4,iVar6\);$	+1
 use	extvsEmitMmul	iVar4	src0Operand	INFERRED	instRecord + 0x20: first source operand of the instruction record	^\s*FUN_00057340\(param_2,piVar5,iVar4,iVar9\ \+\ 4,0\);$	+1
@@ -916,8 +914,6 @@ use	extvsEmitMmul	iVar4	hwProgram	INFERRED	the shader's hardware program record,
 use	extvsEmitMmul	iVar4	hwProgram	INFERRED	the shader's hardware program record, **(int**)(*(ctx+0x118c)*4 + *shader): +0x18 instruction count, +0x1c instruction array, +0x20 capacity in bytes	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x18\);$@2	+3
 use	extvsEmitMmul	iVar4	hwProgram	INFERRED	the shader's hardware program record, **(int**)(*(ctx+0x118c)*4 + *shader): +0x18 instruction count, +0x1c instruction array, +0x20 capacity in bytes	^\s*\(uVar3,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x1c\),\*\(int\ \*\)\(iVar4\ \+\ 0x20\)\ <<\ 4\);$	+5
 use	extvsEmitMmul	iVar4	hwProgram	INFERRED	the shader's hardware program record, **(int**)(*(ctx+0x118c)*4 + *shader): +0x18 instruction count, +0x1c instruction array, +0x20 capacity in bytes	^\s*iVar4\ =\ iVar6\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 0x1c\);$	+1	rhs	none
-use	extvsEmitMmul	iVar4	instSlot	INFERRED	instCount*0x10 + hwProgram[+0x1c]: the 16-byte slot (4 words) of the next hardware instruction	^\s*FUN_00056f20\(param_1,param_2,\&uStack_88,iVar4,3,0,0\);$	+8
-use	extvsEmitMmul	iVar4	instSlot	INFERRED	instCount*0x10 + hwProgram[+0x1c]: the 16-byte slot (4 words) of the next hardware instruction	^\s*FUN_00057340\(param_2,piVar5,\&uStack_6c,iVar4\ \+\ 0x18,0\);$	+17
 use	extvsEmitMmul	iVar4	instSlot	INFERRED	instCount*0x10 + hwProgram[+0x1c]: the 16-byte slot (4 words) of the next hardware instruction	^\s*iVar4\ =\ iVar6\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 0x1c\);$	+1	lhs	none
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*piVar5\ =\ param_2\ \+\ 7;$	+1
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*iVar2\ =\ FUN_00057af0\(piVar5,iVar4,iVar6\);$	+1
@@ -928,7 +924,6 @@ use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the s
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*piVar5\ =\ param_2\ \+\ 7;$@2	+1
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*FUN_00057340\(param_2,piVar5,param_3\ \+\ 0x3c,iVar4\ \+\ 4,0\);$	+1
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x14,0\);$	+1
-use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*FUN_00057340\(param_2,piVar5,\&uStack_6c,iVar4\ \+\ 0x18,0\);$	+1
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x24,1\);$	+2
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x34,2\);$	+2
 use	extvsEmitMmul	piVar5	symbolList	INFERRED	shader + 7 words (shader[7]): the shader symbol list	^\s*FUN_00057340\(param_2,piVar5,iVar2,iVar4\ \+\ 0x44,3\);$	+2
@@ -2464,17 +2459,12 @@ use	fragmentTranslateAll	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *buffe
 use	fragmentTranslateAll	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\ =\ \(undefined4\ \*\)\(iVar9\ \*\ 4\ \+\ \*piVar10\);$@2	+4
 use	fragmentTranslateAll	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\[3\]\ =\ \*puVar8;$	+1
 use	fragmentTranslateAll	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\[4\]\ =\ \*puVar7;$	+2
-use	fragmentTranslateAll	puVar7	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar7\ =\ \&local_4c;$	+1
 use	fragmentTranslateAll	puVar7	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\[3\]\ =\ \*puVar7;$	+3
-use	fragmentTranslateAll	puVar8	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar8\ =\ \&local_4c;$	+1
 use	fragmentTranslateAll	puVar8	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar7\ =\ puVar8;$	+1
 use	fragmentTranslateAll	puVar8	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\[3\]\ =\ \*puVar8;$	+3
-use	fragmentTranslateAll	puVar8	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(puVar8\ !=\ \&uStack_44\);$	+1
 use	fragmentTranslateAny	puVar1	recordWordNext	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar1\ =\ puVar4\ \+\ 3;$	+1
 use	fragmentTranslateAny	puVar1	recordWordNext	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar6\[4\]\ =\ \*puVar1;$	+1
-use	fragmentTranslateAny	puVar4	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar4\ =\ \&local_4c;$	+1
 use	fragmentTranslateAny	puVar4	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\[3\]\ =\ \*puVar4;$	+3
-use	fragmentTranslateAny	puVar4	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(\&uStack_44\ !=\ puVar4\);$	+1
 use	fragmentTranslateAny	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\ =\ \(undefined4\ \*\)\(iVar2\ \*\ 4\ \+\ \*piVar7\);$	+4
 use	fragmentTranslateAny	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\[3\]\ =\ \*puVar4;$	+1
 use	fragmentTranslateAny	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\[4\]\ =\ \*puVar1;$	+2
@@ -2570,20 +2560,13 @@ use	fragmentTranslateDsl	ppuVar7	recordWordNext4	INFERRED	record read cursor + 3
 use	fragmentTranslateDsl	ppuVar7	recordWordNext4	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar10\[4\]\ =\ \(uint\)\*ppuVar7;$	+1
 use	fragmentTranslateDsl	ppuVar8	recordWordNext5	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*ppuVar8\ =\ ppuVar7\ \+\ 3;$	+1
 use	fragmentTranslateDsl	ppuVar8	recordWordNext5	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar5\[4\]\ =\ \*ppuVar8;$	+1
-use	fragmentTranslateDsl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar5\ =\ \&local_a0;$	+1
-use	fragmentTranslateDsl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,iVar11\ \+\ 0x18,puVar5,\&local_94\);$	+1
 use	fragmentTranslateDsl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\ =\ puVar5;$	+1
 use	fragmentTranslateDsl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\ =\ puVar5;$@2	+1
 use	fragmentTranslateDsl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar9\[3\]\ =\ \*puVar5;$	+3
-use	fragmentTranslateDsl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(\&uStack_98\ !=\ puVar5\);$	+1
-use	fragmentTranslateDsl	ppuVar7	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*ppuVar7\ =\ \(undefined\ \*\*\)\&local_58;$	+1
 use	fragmentTranslateDsl	ppuVar7	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar5\[3\]\ =\ \*ppuVar7;$	+3
-use	fragmentTranslateDsl	ppuVar7	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(\&local_4c\ !=\ ppuVar7\);$	+1
-use	fragmentTranslateDsl	ppuVar8	recordPtr3	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*ppuVar8\ =\ \(undefined\ \*\*\)\&local_7c;$	+1
 use	fragmentTranslateDsl	ppuVar8	recordPtr3	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*ppuVar7\ =\ ppuVar8;$	+1
 use	fragmentTranslateDsl	ppuVar8	recordPtr3	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*ppuVar7\ =\ ppuVar8;$@2	+1
 use	fragmentTranslateDsl	ppuVar8	recordPtr3	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar10\[3\]\ =\ \(uint\)\*ppuVar8;$	+3
-use	fragmentTranslateDsl	ppuVar8	recordPtr3	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(local_70\ !=\ ppuVar8\);$	+1
 use	fragmentTranslateDsl	puVar5	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar5\ =\ \(undefined4\ \*\)\(iVar3\ \*\ 4\ \+\ \*piVar12\);$	+4
 use	fragmentTranslateDsl	puVar5	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar5\[3\]\ =\ \*ppuVar7;$	+1
 use	fragmentTranslateDsl	puVar5	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar5\[4\]\ =\ \*ppuVar8;$	+2
@@ -2637,18 +2620,10 @@ use	fragmentTranslateRfl	puVar1	recordWordNext	INFERRED	record read cursor + 3 w
 use	fragmentTranslateRfl	puVar1	recordWordNext	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar6\[4\]\ =\ \*puVar1;$@3	+1
 use	fragmentTranslateRfl	puVar1	recordWordNext	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar1\ =\ puVar5\ \+\ 3;$@4	+1
 use	fragmentTranslateRfl	puVar1	recordWordNext	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar6\[4\]\ =\ \*puVar1;$@4	+1
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar5\ =\ \&uStack_4c;$	+1
 use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\[3\]\ =\ \*puVar5;$	+3
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(\&uStack_44\ !=\ puVar5\);$	+1
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar5\ =\ \&uStack_4c;$@2	+1
 use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\[3\]\ =\ \*puVar5;$@2	+3
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(\&uStack_44\ !=\ puVar5\);$@2	+1
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar5\ =\ \&uStack_4c;$@3	+1
 use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\[3\]\ =\ \*puVar5;$@3	+3
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(puVar5\ !=\ \&uStack_44\);$	+1
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar5\ =\ \&uStack_4c;$@4	+1
 use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\[3\]\ =\ \*puVar5;$@4	+3
-use	fragmentTranslateRfl	puVar5	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(puVar5\ !=\ \&uStack_44\);$@2	+1
 use	fragmentTranslateRfl	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\ =\ \(undefined4\ \*\)\(iVar3\ \*\ 4\ \+\ \*piVar7\);$	+4
 use	fragmentTranslateRfl	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\[3\]\ =\ \*puVar5;$	+1
 use	fragmentTranslateRfl	puVar6	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar6\[4\]\ =\ \*puVar1;$	+2
@@ -2748,17 +2723,12 @@ use	fragmentTranslateSel	puVar9	recordWordNext3	INFERRED	record read cursor + 3 
 use	fragmentTranslateSel	puVar9	recordWordNext3	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar13\[4\]\ =\ \*puVar9;$	+1
 use	fragmentTranslateSel	ppuVar10	recordWordNext4	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*ppuVar10\ =\ ppuVar11\ \+\ 3;$	+1
 use	fragmentTranslateSel	ppuVar10	recordWordNext4	INFERRED	record read cursor + 3 words: the second word of the pair copied per loop iteration	^\s*puVar14\[4\]\ =\ \(uint\)\*ppuVar10;$	+1
-use	fragmentTranslateSel	puVar6	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar6\ =\ \&local_7c;$	+1
-use	fragmentTranslateSel	puVar6	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,iVar16\ \+\ 0x18,puVar6,\&local_70\);$	+1
 use	fragmentTranslateSel	puVar6	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar9\ =\ puVar6;$	+1
 use	fragmentTranslateSel	puVar6	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar9\ =\ puVar6;$@2	+1
 use	fragmentTranslateSel	puVar6	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar13\[3\]\ =\ \*puVar6;$	+3
-use	fragmentTranslateSel	puVar6	recordPtr	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(\&uStack_74\ !=\ puVar6\);$	+1
-use	fragmentTranslateSel	ppuVar11	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*ppuVar11\ =\ \(undefined\ \*\*\)\&local_58;$	+1
 use	fragmentTranslateSel	ppuVar11	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*ppuVar10\ =\ ppuVar11;$	+1
 use	fragmentTranslateSel	ppuVar11	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*ppuVar10\ =\ ppuVar11;$@2	+1
 use	fragmentTranslateSel	ppuVar11	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*puVar14\[3\]\ =\ \(uint\)\*ppuVar11;$	+3
-use	fragmentTranslateSel	ppuVar11	recordPtr2	INFERRED	pointer into the stack copy of the IL instruction record being appended (start of its words; also stepped as the copy cursor)	^\s*\}\ while\ \(ppuVar11\ !=\ \&local_4c\);$	+1
 use	fragmentTranslateSel	puVar12	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar12\ =\ \(uint\ \*\)\(iVar3\ \*\ 4\ \+\ \*piVar15\);$	+4
 use	fragmentTranslateSel	puVar12	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar12\[3\]\ =\ \(uint\)\*ppuVar10;$	+1
 use	fragmentTranslateSel	puVar12	tokenWritePtr	INFERRED	(bufferCount * 4 + *bufferDataPtr): write cursor into the emitter's token buffer, advanced two words per record entry	^\s*puVar12\[4\]\ =\ \(uint\)\*ppuVar2;$	+2

@@ -31,7 +31,7 @@ use	__ZN12BindingTableC4Ej	uVar2	loopIndex2	INFERRED	initialised to a literal, s
 use	__ZN12BindingTableC4Ej	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+23	all	all
 use	BindingTable__GetString	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#80	+42	all	all
 use	TGenericLinker__RemoveUnreachableFunctions	iVar9	stage	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+104	all	all
-use	TGenericLinker__FixOutputReads	iVar8	stage	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#22	+139	all	all
+use	TGenericLinker__FixOutputReads	iVar8	stage	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#9	+139	all	all
 use	TGenericLinker__link	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	^\s*iVar2\ =\ 0;$	+17	all	all
 use	AddressTempAllocator__getTemporary	uVar9	slot	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+51	all	all
 use	TemporaryAllocator__getTemporary	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+57	all	all
@@ -62,15 +62,15 @@ use	TPPStreamCompiler__getConstantAsSourceVar	uVar3	loopIndex	INFERRED	initialis
 use	FunctionTable__clear	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+8	all	all
 use	FunctionTable__addFunction	iVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#5	+22	all	all
 use	FunctionTable__updateForRemovingChunk	iVar1	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+19	all	all
-use	_InterpreterEmulateOp	uVar17	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#567	+1440	all	all
-use	_InterpreterEmulateOp	uVar20	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2062	+21	all	all
-use	_InterpreterEmulateOp	uVar20	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2096	+22	all	all
-use	_InterpreterEmulateOp	uVar20	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2129	+21	all	all
+use	_InterpreterEmulateOp	uVar17	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#564	+1440	all	all
+use	_InterpreterEmulateOp	uVar20	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2059	+21	all	all
+use	_InterpreterEmulateOp	uVar20	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2093	+22	all	all
+use	_InterpreterEmulateOp	uVar20	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2126	+21	all	all
 use	_InterpreterNoiseGeneratorInitialise	uVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+12	all	all
 use	_PPCRuntimeCompilerInitialiseVariableInfo	uVar3	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#20	+13	all	all
 use	_PPCRuntimeCompilerInitialiseVariableInfo	uVar5	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#22	+7	all	all
-use	_PPCRuntimeCompilerBackupRegister	uVar19	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#17	+30	all	all
-use	_PPCRuntimeCompilerBackupRegister	uVar20	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#51	+142	all	all
+use	_PPCRuntimeCompilerBackupRegister	uVar19	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#14	+30	all	all
+use	_PPCRuntimeCompilerBackupRegister	uVar20	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#48	+142	all	all
 use	_PPCRuntimeCompilerSaveAllTemporariesToMemory	uVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+11	all	all
 use	_PPCRuntimeCompilerDirtyRegistersWithIndirectData	uVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#5	+9	all	all
 use	_PPCRuntimeCompilerDirtyRegistersContainingAttributes	uVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#5	+9	all	all
@@ -205,7 +205,7 @@ use	_RegistersFree	uVar2	recordIndex	INFERRED	initialised to a literal, stepped 
 use	_BlocksFree	uVar2	blockIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+8	all	all
 use	_FlattenIf	uVar18	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#84	+320	all	all
 use	_EmulateOp	iVar18	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#14	+20	all	all
-use	_DetectConstantLoopsSimple	uVar8	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#317	+87	all	all
+use	_DetectConstantLoopsSimple	uVar8	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#271	+87	all	all
 use	_UnrollConstantLoopsSimple	uVar9	newOpIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#82	+113	all	all
 use	_PPParserMacroCreateFromMacro	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+14	all	all
 use	_PPParserParseAddressDeclaration	uVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#3	+35	all	all

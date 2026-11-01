@@ -236,12 +236,11 @@ undefined4 IRInst__sourceIsSplatConstant(undefined4 inst,undefined4 srcIndex,dou
   int operandRecord;
   int constantFound;
   undefined4 isSplat;
-  int uniformConstantHeader;
-  float uniformConstantValue;
+  struct { int header; float value; } uniformConstant;
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  constantFound = IRInst__getUniformSourceConstant(inst,srcIndex,*(undefined4 *)(operandRecord + 0x10),&uniformConstantHeader);
-  if (((constantFound == 0) || ((double)uniformConstantValue != expectedValue)) || (isSplat = 1, uniformConstantHeader != 2)) {
+  constantFound = IRInst__getUniformSourceConstant(inst,srcIndex,*(undefined4 *)(operandRecord + 0x10),&uniformConstant.header);
+  if (((constantFound == 0) || ((double)uniformConstant.value != expectedValue)) || (isSplat = 1, uniformConstant.header != 2)) {
     isSplat = 0;
   }
   return isSplat;
