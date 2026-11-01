@@ -66,6 +66,8 @@ local	ffvpSelectLitProgramVariant	in_r6	scratchR6	UNKNOWN	copy of a context flag
 local	ffvpSelectLitProgramVariant	in_r7	scratchR7	UNKNOWN	copy of variantKeyHeader, only actually read at the fpVariantCacheInsert call (the later call site re-passes variantKeyHeader directly instead); see notes_r27_remaining.md
 local	ffvpSelectLitProgramVariant	in_r8	scratchR8	UNKNOWN	copy of variantKeyWords[0], paired with scratchR7; see notes_r27_remaining.md
 local	ffvpSelectLitProgramVariant	in_r10	staleArgR10	INFERRED	never assigned; forwarded unchanged into ffvpBuildProgram(...)
+local	ffvpSelectLitProgramVariant	extraout_r4	calleeStaleR4	INFERRED	leftover r4 immediately after a call, copied straight into the existing staleArgR4 local; Ghidra splits each call site into its own extraout_r4_NN artifact
+local	ffvpSelectLitProgramVariant	extraout_r4_00	calleeStaleR4_00	INFERRED	same as calleeStaleR4, a different call site
 local	ffvpSelectPassThroughVariant	in_r7	staleArgR7	INFERRED	never assigned; forwarded unchanged into ffvpEmitTexCoordPassThrough(...)
 local	ffvpSelectPassThroughVariant	in_r8	staleArgR8	INFERRED	same as staleArgR7 for r8
 local	ffvpSelectPassThroughVariant	in_r9	scratchR9	UNKNOWN	small computed bit/offset contribution, assigned and consumed twice in disjoint branches for different purposes (a variantKeyFlags bit, later a register-offset term); see notes_r27_remaining.md
