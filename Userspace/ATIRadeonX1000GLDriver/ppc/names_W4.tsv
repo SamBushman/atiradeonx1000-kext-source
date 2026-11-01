@@ -100,18 +100,15 @@ local	_gldTestMemoryPluginData	uVar1	isComplete	INFERRED	returned 1/0 or FUN_000
 local	_gldTestMemoryPluginData	iVar2	pluginRecord	INFERRED	*pluginData
 local	_gldDestroyMemoryPluginData	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldDestroyMemoryPluginData	param_2	pluginData	INFERRED	pointer to the plug-in record pointer; freed at the end
-local	_gldDestroyMemoryPluginData	iVar1	updatedRefCount	INFERRED	result of the store-conditional that subtracts 0x10000 from record+0x10
 local	_gldDestroyMemoryPluginData	piVar2	refCountSlot	INFERRED	&pluginRecord[+0x10], decremented atomically by 0x10000
 local	_gldDestroyMemoryPluginData	iVar3	oldRefCount	INFERRED	value read before the atomic decrement; ==0x10000 means last reference -> selector 0xb release
 local	_gldDestroyMemoryPluginData	iVar4	pluginRecord	INFERRED	*pluginData
 local	_gldDestroyMemoryPluginData	bVar5	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldReclaimBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldReclaimBuffer	param_2	buffer	INFERRED	as _gldFlushBuffer; buffer+8 holds the plug-in data pointer
-local	_gldReclaimBuffer	iVar1	updatedRefCount	INFERRED	store-conditional result
 local	_gldReclaimBuffer	piVar2	pluginData	INFERRED	*(buffer+8); later reused as &pluginRecord[+0x10] (refCountSlot)
 local	_gldReclaimBuffer	iVar3	oldRefCount	INFERRED	value before the atomic decrement of 0x10000
 local	_gldReclaimBuffer	iVar4	pluginRecord	INFERRED	*pluginData
-local	_gldReclaimBuffer	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldDestroyBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldDestroyBuffer	param_2	buffer	CONFIRMED	reclaimed with _gldReclaimBuffer, then freed
 local	_gldDestroyContext	param_1	ctx	CONFIRMED	freed at the end; *(ctx+4) passed to _IOServiceClose
@@ -251,9 +248,6 @@ local	_gldGetRendererInfo	iVar4	listCount	INFERRED	library+4 count, later _IOSer
 local	_gldGetRendererInfo	iVar5	rendererIndex	INFERRED	index of the chosen service in the list; stored in the top byte of rendererInfo[1]
 local	_gldGetRendererInfo	local_38	outCount	CONFIRMED	scalarO count (3) passed as &local_38
 local	_gldGetRendererInfo	local_34	connection	CONFIRMED	io_connect_t returned by _IOServiceOpen
-local	_gldGetRendererInfo	local_30	scalarOut0	CONFIRMED	first scalarO word (array passed as local_30)
-local	_gldGetRendererInfo	local_2c	scalarOut1	CONFIRMED	second scalarO word, stored in rendererInfo[0xd]
-local	_gldGetRendererInfo	local_28	scalarOut2	CONFIRMED	third scalarO word, stored in rendererInfo[0xc]
 local	_gldGetTextureLevelInfo	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldGetTextureLevelInfo	param_2	texture	INFERRED	texture record
 local	_gldGetTextureLevelInfo	param_3	face	UNKNOWN	forwarded to FUN_00030f60 which fills the info block
@@ -278,19 +272,15 @@ local	_gldDeleteTextureLevel	param_2	texture	INFERRED	texture record, flags byte
 local	_gldDeleteTextureLevel	param_3	face	INFERRED	indexes the ushort level-mask array at texture+0x24
 local	_gldDeleteTextureLevel	param_4	level	INFERRED	0xffffffff = whole texture
 local	_gldDeleteTextureLevel	uVar1	oldLevelMask	INFERRED	face mask before the update
-local	_gldDeleteTextureLevel	iVar2	updatedRefCount	INFERRED	store-conditional result of the atomic decrement
 local	_gldDeleteTextureLevel	piVar3	refCountSlot	INFERRED	&resident[+0x10]
 local	_gldDeleteTextureLevel	iVar4	oldRefCount	INFERRED	==0x10000 means last reference -> selector 0xb release
 local	_gldDeleteTextureLevel	iVar5	faceEntry	INFERRED	texture + face*2; later the resident memory record texture+0x34
-local	_gldDeleteTextureLevel	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldReclaimTexture	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldReclaimTexture	param_2	texture	INFERRED	texture record; +0x34 resident memory, +0x18 list of attached records
 local	_gldReclaimTexture	bVar1	moreUnits	CONFIRMED	loop continues while unit != 0xf
-local	_gldReclaimTexture	iVar2	updatedRefCount	INFERRED	store-conditional result
 local	_gldReclaimTexture	piVar3	refCountSlot	INFERRED	&resident[+0x10], later the list node
 local	_gldReclaimTexture	piVar4	listNeighbour	INFERRED	node[1], later &memory[+0x10]
 local	_gldReclaimTexture	iVar6	unitSlotCursor	INFERRED	ctx + 4*unit (bound texture slots at ctx+0x18c), later resident record
-local	_gldReclaimTexture	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldCreateVertexArray	param_1	ctx	INFERRED	unused
 local	_gldCreateVertexArray	param_2	vertexArrayOut	CONFIRMED	receives the calloc(1,0x244) record
 local	_gldCreateVertexArray	param_3	initialWord0	UNKNOWN	stored in record[0]
@@ -307,18 +297,15 @@ local	_gldFlushVertexArray	param_8	flushArg7	UNKNOWN	forwarded
 local	_gldModifyVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldModifyVertexArray	param_2	vertexArray	INFERRED	vertex array record; +0x228 holds the backing memory record
 local	_gldModifyVertexArray	bVar1	retired	INFERRED	loop-exit flag (also reused as the store-conditional success flag)
-local	_gldModifyVertexArray	iVar2	updatedRefCount	INFERRED	store-conditional result
 local	_gldModifyVertexArray	uVar3	stateMismatch	INFERRED	vertexArray[0x8c] xor the expected value 6/7 selected by the state word at *(vertexArray)+0x312
 local	_gldModifyVertexArray	piVar4	refCountSlot	INFERRED	&backing[+0x10]
 local	_gldModifyVertexArray	iVar5	backing	INFERRED	param_2[0x8a], the backing memory record
 local	_gldModifyVertexArray	iVar6	oldRefCount	INFERRED	==0x10000 means last reference -> selector 0xb release
 local	_gldReclaimVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldReclaimVertexArray	param_2	vertexArray	INFERRED	vertex array record; ctx+0x1d4 is the bound one
-local	_gldReclaimVertexArray	iVar1	updatedRefCount	INFERRED	store-conditional result
 local	_gldReclaimVertexArray	piVar2	refCountSlot	INFERRED	&backing[+0x10]
 local	_gldReclaimVertexArray	iVar3	oldRefCount	INFERRED	==0x10000 means last reference
 local	_gldReclaimVertexArray	iVar4	backing	INFERRED	*(vertexArray+0x228)
-local	_gldReclaimVertexArray	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldDestroyVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldDestroyVertexArray	param_2	vertexArray	CONFIRMED	reclaimed with _gldReclaimVertexArray then freed
 local	_gldFlush	param_1	ctx	INFERRED	ctx+0x1dc command-buffer limit, ctx+0x1e4 command-buffer state
@@ -349,10 +336,6 @@ local	_gldSetInteger	iVar2	statusOrObject	INFERRED	FUN_00017100 result, call sta
 local	_gldSetInteger	uVar3	connectionOrError	INFERRED	error code to return on call failure, later the io_connect_t
 local	_gldSetInteger	uVar4	selector	CONFIRMED	external method selector (0x10 or 0xf) used by the shared tail call
 local	_gldSetInteger	bVar5	enable	INFERRED	pname 0xc9: *values != 0
-local	_gldSetInteger	local_28	scalarIn0	CONFIRMED	first word of the scalar-in array passed as &local_28
-local	_gldSetInteger	local_24	scalarIn1	CONFIRMED	second word
-local	_gldSetInteger	local_20	scalarIn2	CONFIRMED	third word
-local	_gldSetInteger	local_1c	scalarIn3	CONFIRMED	fourth word
 local	_gldGetInteger	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 6
 local	_gldGetInteger	param_2	pname	INFERRED	GLD integer-state selector (0xc8, 0xc9, 0xcb, 0xde, 0x126, 0x132, 0x29a, 0x3e3)
 local	_gldGetInteger	param_3	values	CONFIRMED	pointer to the output value(s); NULL returns 0x271e
@@ -363,9 +346,6 @@ local	_gldGetInteger	iVar1	status	CONFIRMED	FUN_00032100 / _io_connect_method_sc
 local	_gldGetInteger	uVar2	returnCode	CONFIRMED	0 or 0x2722
 local	_gldGetInteger	uVar3	texture	INFERRED	*values on pname 0x126: texture record pointer
 local	_gldGetInteger	local_28	outCount	CONFIRMED	scalarO count (3) passed as &local_28
-local	_gldGetInteger	local_24	scalarOut0	CONFIRMED	first scalarO word; low nibble selects the pixel format cases
-local	_gldGetInteger	local_20	scalarOut1	CONFIRMED	second scalarO word, copied to values[2]
-local	_gldGetInteger	local_1c	scalarOut2	CONFIRMED	third scalarO word, copied to values[3]
 local	_gldChoosePixelFormat	param_1	formatListOut	CONFIRMED	*param_1 receives the malloc(n*0x34) list of matching pixel-format records (NULL return 0x271e)
 local	_gldChoosePixelFormat	param_2	attribList	CONFIRMED	attribute list: enum word (+ value word for sized ones), terminated by 0, at most 0x94 bytes
 local	_gldChoosePixelFormat	puVar1	library	CONFIRMED	PTR_DAT_001e88ac library record (+4 renderer count, +8 renderer service list)
@@ -463,10 +443,6 @@ local	_gldAttachDrawable	uVar10	drawableHigh	CONFIRMED	(drawableIds >> 8) & 0xff
 local	_gldAttachDrawable	uVar11	returnCode	CONFIRMED	0, 1, 2, 3 (drawable change codes) or an error such as 0x2715/0x271a/0x2720
 local	_gldAttachDrawable	local_68	outCount	CONFIRMED	scalarO count passed as &local_68
 local	_gldAttachDrawable	local_64	callWords	CONFIRMED	three consecutive words: [0] scalar in / count, [1] output count (&local_64[1]), [2] output word (local_64+2)
-local	_gldAttachDrawable	local_58	scalarIn0	CONFIRMED	first word of the scalar-in array passed as &local_58
-local	_gldAttachDrawable	local_54	scalarIn1	CONFIRMED	second word: ctx flags & 0xffff3fc0 (or & 0x803f for selector 7)
-local	_gldAttachDrawable	local_50	scalarIn2	CONFIRMED	third word: drawableHigh
-local	_gldAttachDrawable	local_4c	scalarIn3	CONFIRMED	fourth word: drawableIds & 0xff
 local	_gldAttachDrawable	local_48	drawableWidth	INFERRED	first scalarO word, stored in ctx[0x41]; used as width in the 4/8-byte-per-pixel buffer size
 local	_gldAttachDrawable	local_44	drawableHeight	INFERRED	second scalarO word, stored in ctx[0x42]
 local	_gldAttachDrawable	local_40	drawableExtra0	UNKNOWN	third scalarO word, stored in ctx[0x47]
@@ -484,18 +460,12 @@ local	_gldAllocVertexBuffer	uVar7	kernelKind	CONFIRMED	9..0xe stored at chunk+0x
 local	_gldAllocVertexBuffer	iVar8	currentChunk	INFERRED	*(ctx+0x210)+0x10: head chunk record
 local	_gldAllocVertexBuffer	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldAllocVertexBuffer	local_48	structOutSize	CONFIRMED	output struct size (8) passed as &local_48
-local	_gldAllocVertexBuffer	local_44	chunk	CONFIRMED	first output word: new chunk record; stored at ctx+0x210
-local	_gldAllocVertexBuffer	local_40	chunkMemory	CONFIRMED	second output word: memory record, refcount at +0x10, flag at +0x14
-local	_gldAllocVertexBuffer	local_3c	structIn0	CONFIRMED	first word of the 0x14-byte input struct (value 2)
-local	_gldAllocVertexBuffer	local_38	structIn1	CONFIRMED	second word of the input struct (0x16000, the chunk byte size)
 local	_gldPageoffBuffer	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t; ctx+0xc mutex
 local	_gldPageoffBuffer	param_2	buffer	INFERRED	buffer record: +8 holds the memory-plugin data pointer
 local	_gldPageoffBuffer	cVar1	kind	INFERRED	record kind byte at +0x16 (6 or 7)
 local	_gldPageoffBuffer	iVar2	waitStatus	INFERRED	FUN_0001a0d0 result for the second handle
 local	_gldPageoffBuffer	puVar3	pluginRecord	INFERRED	**(buffer+8)
 local	_gldPageoffBuffer	iVar4	handleOwner	INFERRED	memory-handle holder; kind 6 path status, kind 7 path *(pluginData+4)
-local	_gldPageoffBuffer	local_28	scalarIn0	CONFIRMED	first scalar of selector 0xd (record id)
-local	_gldPageoffBuffer	local_24	scalarIn1	CONFIRMED	second scalar of selector 0xd (0)
 local	_gldInitDispatch	param_1	ctx	INFERRED	ctx+0x104..0x118 snapshot copied to savedState; ctx+0x1c receives dispatch
 local	_gldInitDispatch	param_2	dispatch	CONFIRMED	GL dispatch table of function pointers being filled
 local	_gldInitDispatch	param_3	savedState	CONFIRMED	receives six words copied from ctx+0x104..0x118
@@ -623,24 +593,18 @@ local	FUN_00009b70	param_1	ctx	CONFIRMED	ctx+0x234 receives the calloc(1,0x18) r
 local	FUN_00009b70	uVar1	returnCode	CONFIRMED	0x2720 on allocation failure, else 0
 local	FUN_00009b70	iVar2	record	CONFIRMED	calloc(1,0x18) result
 local	FUN_00009cd0	param_1	ctx	CONFIRMED	*(ctx+0x234) is the pending record; selector 0xb releases its memory
-local	FUN_00009cd0	iVar1	updatedRefCount	INFERRED	store-conditional result
 local	FUN_00009cd0	piVar2	refCountSlot	INFERRED	&memory[+0x10]
 local	FUN_00009cd0	iVar3	oldRefCount	INFERRED	==0x10000 means last reference
 local	FUN_00009cd0	iVar4	memory	INFERRED	**(ctx+0x234) memory record
-local	FUN_00009cd0	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	FUN_00009d70	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 10 (structureI_structureO)
 local	FUN_00009d70	param_2	record	CONFIRMED	slot record: [0] memory, [1]=6 kind, [2..4] address/size/limit
 local	FUN_00009d70	param_3	addressWord	INFERRED	stored in record[2]
 local	FUN_00009d70	param_4	sizeWord	INFERRED	stored in record[3]
 local	FUN_00009d70	param_5	limitWord	INFERRED	stored in record[4]
-local	FUN_00009d70	iVar1	updatedRefCount	INFERRED	store-conditional result (release of the previous memory)
 local	FUN_00009d70	piVar2	refCountSlot	INFERRED	&memory[+0x10]
 local	FUN_00009d70	iVar3	status	CONFIRMED	_io_connect_method_structureI_structureO result; later old refcount
 local	FUN_00009d70	iVar4	oldMemory	CONFIRMED	previous record[0], released after the new one is installed
-local	FUN_00009d70	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	FUN_00009d70	local_28	structOutSize	CONFIRMED	output struct size (8) passed as &local_28
-local	FUN_00009d70	auStack_24	structOut0	CONFIRMED	first output word (unused)
-local	FUN_00009d70	local_20	newMemory	CONFIRMED	second output word: the new memory record stored in record[0]
 local	FUN_0000b750	param_1	ctx	INFERRED	ctx+0x1d4 bound vertex array, +0x18 shared state
 local	FUN_0000b750	iVar1	arrayState	INFERRED	*vertexArray header; +0x300/+0x308 and +0x304/+0x30c mask pairs; later FUN_0001dc10/FUN_0001e730 result
 local	FUN_0000b750	iVar2	previousArray	CONFIRMED	*(ctx+0x1d4) before the update

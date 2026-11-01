@@ -250,7 +250,6 @@ use	FUN_000369f0	puVar40	packetEndB	CONFIRMED	packet + 0xce: end of the textured
 use	FUN_000369f0	puVar40	packetEndB	CONFIRMED	packet + 0xce: end of the textured-draw setup in the surface-copy path	^\s*puVar30\[1\]\ =\ \(int\)puVar40\ \-\ \(int\)puVar29\ >>\ 2;$	+1
 use	FUN_000369f0	puVar40	packetEndB	CONFIRMED	packet + 0xce: end of the textured-draw setup in the surface-copy path	^\s*\*puVar23\ =\ \(int\)puVar40\ \-\ \(int\)puVar23\ >>\ 2\ \|\ \*puVar23;$@2	+2
 use	FUN_000369f0	piVar36	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*piVar36\ =\ puVar40\ \+\ 4;$	+1
-use	FUN_000369f0	piVar36	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*iVar20\ =\ storeWordConditionalIndexed\(\*piVar36\ \+\ 0x10000,0,piVar36\);$	+2
 local	FUN_000369f0	puVar30	texPacket	CONFIRMED	pointer to each packet allocated with streamAllocate: header word, then the register-write pairs
 use	FUN_000369f0	bVar1	lastChunk	CONFIRMED	(height <= rowEnd): the final chunk of the upload loop	^\s*bVar1\ =\ \(int\)param_9\ <=\ iStack_114;$	+1
 use	FUN_000369f0	bVar1	lastChunk	CONFIRMED	(height <= rowEnd): the final chunk of the upload loop	^\s*if\ \(bVar1\)\ break;$	+1

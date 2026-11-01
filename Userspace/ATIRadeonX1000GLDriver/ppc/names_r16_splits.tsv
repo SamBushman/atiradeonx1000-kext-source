@@ -53,11 +53,7 @@ use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of th
 use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of the clear-binding loop	^\s*FUN_000307a0\(param_1,iVar5\);$	+1
 use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of the clear-binding loop	^\s*bVar1\ =\ iVar5\ !=\ 0xf;$	+1
 use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of the clear-binding loop	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
-use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar5\ =\ \*piVar3;$	+1
-use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar2\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+1
 use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$	+1
-use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar5\ =\ \*piVar4;$	+1
-use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar2\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar4\);$	+1
 use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$@2	+1
 use	gld_buildVertexStreamCache	uVar8	streamPairIndex	INFERRED	stream index >> 1: which pair of vertex streams the attribute belongs to	^\s*uVar8\ =\ uVar30\ >>\ 1;$	+1
 use	gld_buildVertexStreamCache	uVar8	streamPairIndex	INFERRED	stream index >> 1: which pair of vertex streams the attribute belongs to	^\s*iVar14\ =\ uVar8\ \*\ 4\ \+\ param_1;$	+1

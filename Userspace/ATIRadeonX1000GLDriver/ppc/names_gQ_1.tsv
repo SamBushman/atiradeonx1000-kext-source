@@ -1528,27 +1528,16 @@ local	gld_setBufferNewTextureBacking	param_4	requestArg1	INFERRED	value stored i
 local	gld_setBufferNewTextureBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setBufferNewTextureBacking	param_6	requestArg3	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setBufferNewTextureBacking	local_48	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_setBufferNewTextureBacking	local_44	outHandle	INFERRED	output word 0: backing handle stored in the object
-local	gld_setBufferNewTextureBacking	local_40	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_setBufferNewTextureBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_setBufferNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_setBufferNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
-use	gld_setBufferNewTextureBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
-use	gld_setBufferNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setBufferNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
 use	gld_setBufferNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
 local	gld_setBufferNewTextureBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
 use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 8\);$	+2
 use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \(int\ \*\)_malloc\(8\);$	+2
 use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*iVar5\ =\ \*piVar2;$	+1
 use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*\*piVar2\ =\ 0;$	+1
-use	gld_setBufferNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_40\ \+\ 0x10\);$	+1
-use	gld_setBufferNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
 use	gld_setBufferNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
-use	gld_setBufferNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setBufferNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
 local	gld_setBufferNewTextureBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
-local	gld_setBufferNewTextureBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_setTextureNewTextureBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_setTextureNewTextureBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
 local	gld_setTextureNewTextureBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
@@ -1556,50 +1545,28 @@ local	gld_setTextureNewTextureBacking	param_4	requestArg1	INFERRED	value stored 
 local	gld_setTextureNewTextureBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setTextureNewTextureBacking	param_6	requestArg3	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setTextureNewTextureBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_setTextureNewTextureBacking	local_34	outHandle	INFERRED	output word 0: backing handle stored in the object
-local	gld_setTextureNewTextureBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_setTextureNewTextureBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_setTextureNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_setTextureNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
-use	gld_setTextureNewTextureBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
-use	gld_setTextureNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setTextureNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
 use	gld_setTextureNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
 local	gld_setTextureNewTextureBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
-use	gld_setTextureNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
-use	gld_setTextureNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
 use	gld_setTextureNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
-use	gld_setTextureNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setTextureNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
 local	gld_setTextureNewTextureBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
-local	gld_setTextureNewTextureBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_setBufferAgpRefBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_setBufferAgpRefBacking	param_2	buffer	INFERRED	buffer object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
 local	gld_setBufferAgpRefBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setBufferAgpRefBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setBufferAgpRefBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setBufferAgpRefBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_setBufferAgpRefBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
-local	gld_setBufferAgpRefBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_setBufferAgpRefBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_setBufferAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_setBufferAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
-use	gld_setBufferAgpRefBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
-use	gld_setBufferAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setBufferAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
 use	gld_setBufferAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
 local	gld_setBufferAgpRefBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
 use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 8\);$	+2
 use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \(int\ \*\)_malloc\(8\);$	+2
 use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*iVar5\ =\ \*piVar2;$	+1
 use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*\*piVar2\ =\ 0;$	+1
-use	gld_setBufferAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
-use	gld_setBufferAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
 use	gld_setBufferAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
-use	gld_setBufferAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setBufferAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
 local	gld_setBufferAgpRefBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
-local	gld_setBufferAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_setVertexArrayNewTextureBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_setVertexArrayNewTextureBacking	param_2	vertexArray	INFERRED	vertexArray object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
 local	gld_setVertexArrayNewTextureBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
@@ -1607,138 +1574,78 @@ local	gld_setVertexArrayNewTextureBacking	param_4	requestArg1	INFERRED	value sto
 local	gld_setVertexArrayNewTextureBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setVertexArrayNewTextureBacking	param_6	requestArg3	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setVertexArrayNewTextureBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_setVertexArrayNewTextureBacking	local_34	outHandle	INFERRED	output word 0: backing handle stored in the object
-local	gld_setVertexArrayNewTextureBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_setVertexArrayNewTextureBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_setVertexArrayNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_setVertexArrayNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
-use	gld_setVertexArrayNewTextureBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
-use	gld_setVertexArrayNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setVertexArrayNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
 use	gld_setVertexArrayNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
 local	gld_setVertexArrayNewTextureBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
-use	gld_setVertexArrayNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
-use	gld_setVertexArrayNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
 use	gld_setVertexArrayNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
-use	gld_setVertexArrayNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setVertexArrayNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
 local	gld_setVertexArrayNewTextureBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
-local	gld_setVertexArrayNewTextureBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_setTextureAgpRefBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_setTextureAgpRefBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
 local	gld_setTextureAgpRefBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setTextureAgpRefBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setTextureAgpRefBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setTextureAgpRefBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_setTextureAgpRefBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
-local	gld_setTextureAgpRefBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_setTextureAgpRefBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_setTextureAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_setTextureAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
-use	gld_setTextureAgpRefBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
-use	gld_setTextureAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setTextureAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
 use	gld_setTextureAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
 local	gld_setTextureAgpRefBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
-use	gld_setTextureAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
-use	gld_setTextureAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
 use	gld_setTextureAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
-use	gld_setTextureAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setTextureAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
 local	gld_setTextureAgpRefBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
-local	gld_setTextureAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_setVertexArrayAgpRefBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_setVertexArrayAgpRefBacking	param_2	vertexArray	INFERRED	vertexArray object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
 local	gld_setVertexArrayAgpRefBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setVertexArrayAgpRefBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setVertexArrayAgpRefBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_setVertexArrayAgpRefBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_setVertexArrayAgpRefBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
-local	gld_setVertexArrayAgpRefBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_setVertexArrayAgpRefBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_setVertexArrayAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_setVertexArrayAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
-use	gld_setVertexArrayAgpRefBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
-use	gld_setVertexArrayAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setVertexArrayAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
 use	gld_setVertexArrayAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
 local	gld_setVertexArrayAgpRefBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
-use	gld_setVertexArrayAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
-use	gld_setVertexArrayAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
 use	gld_setVertexArrayAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
-use	gld_setVertexArrayAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
-use	gld_setVertexArrayAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
 local	gld_setVertexArrayAgpRefBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
-local	gld_setVertexArrayAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_ensureTextureSurfaceBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_ensureTextureSurfaceBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
 local	gld_ensureTextureSurfaceBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_ensureTextureSurfaceBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_ensureTextureSurfaceBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_ensureTextureSurfaceBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_ensureTextureSurfaceBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
-local	gld_ensureTextureSurfaceBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_ensureTextureSurfaceBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_ensureTextureSurfaceBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*iVar4\ =\ param_2\[0xd\];$	+3
 use	gld_ensureTextureSurfaceBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+2
 use	gld_ensureTextureSurfaceBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),0xb,iVar4,1,0,0\);$	+1
 use	gld_ensureTextureSurfaceBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*iVar4\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_ensureTextureSurfaceBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+1
-use	gld_ensureTextureSurfaceBacking	iVar4	newRefCountStored	INFERRED	ensure-backing logic: newRefCountStored	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
-use	gld_ensureTextureSurfaceBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar5\ =\ \*piVar3;$	+1
-use	gld_ensureTextureSurfaceBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+1
 use	gld_ensureTextureSurfaceBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$	+1
 use	gld_ensureTextureSurfaceBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ 0x10\);$	+1
-use	gld_ensureTextureSurfaceBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar5\ =\ \*piVar3;$	+1
-use	gld_ensureTextureSurfaceBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+2
-use	gld_ensureTextureSurfaceBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
-use	gld_ensureTextureSurfaceBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
 use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*if\ \(\(\(\(iVar4\ ==\ 0\)\ \|\|\ \(\*\(char\ \*\)\(iVar4\ \+\ 0x16\)\ !=\ '\\0'\)\)\ \|\|\ \(param_3\ !=\ param_2\[2\]\)\)\ \|\|$	+2
 use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 0;$	+1
 use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 1;$	+1
 use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*return\ uVar2;$	+1
-local	gld_ensureTextureSurfaceBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_ensureTextureGlobalBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_ensureTextureGlobalBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
 local	gld_ensureTextureGlobalBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
 local	gld_ensureTextureGlobalBacking	local_28	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
-local	gld_ensureTextureGlobalBacking	auStack_24	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
-local	gld_ensureTextureGlobalBacking	local_20	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
-local	gld_ensureTextureGlobalBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
 use	gld_ensureTextureGlobalBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*iVar4\ =\ param_2\[0xd\];$	+2
 use	gld_ensureTextureGlobalBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+2
 use	gld_ensureTextureGlobalBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),0xb,iVar4,1,0,0\);$	+1
 use	gld_ensureTextureGlobalBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*iVar4\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_ensureTextureGlobalBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+1
-use	gld_ensureTextureGlobalBacking	iVar4	newRefCountStored	INFERRED	ensure-backing logic: newRefCountStored	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
-use	gld_ensureTextureGlobalBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar5\ =\ \*piVar3;$	+1
-use	gld_ensureTextureGlobalBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+1
 use	gld_ensureTextureGlobalBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$	+1
 use	gld_ensureTextureGlobalBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ 0x10\);$	+1
-use	gld_ensureTextureGlobalBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar5\ =\ \*piVar3;$	+1
-use	gld_ensureTextureGlobalBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+2
-use	gld_ensureTextureGlobalBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(local_20\ \+\ 0x10\);$	+1
-use	gld_ensureTextureGlobalBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
 use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*if\ \(\(\(iVar4\ ==\ 0\)\ \|\|\ \(\*\(char\ \*\)\(iVar4\ \+\ 0x16\)\ !=\ '\\x01'\)\)\ \|\|\ \(uVar2\ =\ 1,\ param_3\ !=\ param_2\[2\]\)\)\ \{$	+1
 use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 0;$	+1
 use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 1;$	+1
 use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*return\ uVar2;$	+1
-local	gld_ensureTextureGlobalBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
 local	gld_ensureTextureBackingSized2	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4
 local	gld_ensureTextureBackingSized2	param_2	texture	INFERRED	texture object whose backing is checked and replaced if needed
 local	gld_ensureTextureBackingSized2	param_3	requestArg0	INFERRED	compared with / stored into the request structure sent with selector 10 (request word 0)
 local	gld_ensureTextureBackingSized2	param_4	requestArg1	INFERRED	compared with / stored into the request structure sent with selector 10 (request word 1)
 local	gld_ensureTextureBackingSized2	local_38	outSize	INFERRED	in/out size of the output structure
-local	gld_ensureTextureBackingSized2	local_34	outHandle	INFERRED	output word 0: backing handle stored in the texture
-local	gld_ensureTextureBackingSized2	local_30	newBacking	INFERRED	output word 1: new shared backing record (refcount at +0x10)
-use	gld_ensureTextureBackingSized2	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar9\ =\ \*piVar5;$	+1
-use	gld_ensureTextureBackingSized2	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+1
 use	gld_ensureTextureBackingSized2	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*if\ \(iVar9\ ==\ 0x10000\)\ \{$	+1
 use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*iVar9\ =\ param_2\[0xc\];$	+1
 use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar9\ \+\ 0x6c\);$	+1
 use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*if\ \(\(ushort\)\(\(\*\(ushort\ \*\)\(iVar10\ \+\ 0x1c\)\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ 0x28\)\)\ \&$	+2
 use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*puVar4\ =\ \(ushort\ \*\)\(iVar9\ \+\ 0x7e\);$	+2
-use	gld_ensureTextureBackingSized2	iVar7	oldRefCountStored	INFERRED	value written by the store-conditional decrement	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
 use	gld_ensureTextureBackingSized2	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*iVar7\ =\ iVar10;$	+1
 use	gld_ensureTextureBackingSized2	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar7\ \+\ 0x2a\);$	+3
 use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar10\ =\ param_2\[0xd\];$	+3
@@ -1753,12 +1660,7 @@ use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: 
 use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ 0x14\)\ =\ 1;$	+1
 use	gld_ensureTextureBackingSized2	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*iVar10\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_ensureTextureBackingSized2	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*if\ \(iVar10\ ==\ 0\)\ \{$	+1
-use	gld_ensureTextureBackingSized2	iVar10	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
 use	gld_ensureTextureBackingSized2	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(iVar10\ \+\ 0x10\);$	+1
-use	gld_ensureTextureBackingSized2	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar9\ =\ \*piVar5;$	+1
-use	gld_ensureTextureBackingSized2	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
-use	gld_ensureTextureBackingSized2	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
-use	gld_ensureTextureBackingSized2	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
 local	gld_ensureTextureBackingSized2	puVar2	backingMaskPtrB	INFERRED	ushort at backing+0x2a (+2 per step)
 local	gld_ensureTextureBackingSized2	puVar3	backingMaskPtrA	INFERRED	ushort at backing+0x1e (+2 per step)
 local	gld_ensureTextureBackingSized2	puVar4	texImagesMaskPtr	INFERRED	ushort at texImages+0x7e (+2 per step)
@@ -1770,16 +1672,11 @@ local	gld_ensureTextureAgpRefBacking	param_1	ctx	INFERRED	kernel connection hold
 local	gld_ensureTextureAgpRefBacking	param_2	texture	INFERRED	texture object whose backing is checked and replaced if needed
 local	gld_ensureTextureAgpRefBacking	param_3	requestArg2	INFERRED	compared with / stored into the request structure sent with selector 10 (request word 2)
 local	gld_ensureTextureAgpRefBacking	uStack_38	outSize	INFERRED	in/out size of the output structure
-local	gld_ensureTextureAgpRefBacking	uStack_34	outHandle	INFERRED	output word 0: backing handle stored in the texture
-local	gld_ensureTextureAgpRefBacking	iStack_30	newBacking	INFERRED	output word 1: new shared backing record (refcount at +0x10)
-use	gld_ensureTextureAgpRefBacking	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar9\ =\ \*piVar5;$	+1
-use	gld_ensureTextureAgpRefBacking	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+1
 use	gld_ensureTextureAgpRefBacking	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*if\ \(iVar9\ ==\ 0x10000\)\ \{$	+1
 use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*iVar9\ =\ param_2\[0xc\];$	+1
 use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar9\ \+\ 0x6c\);$	+1
 use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*if\ \(\(ushort\)\(\(\*\(ushort\ \*\)\(iVar10\ \+\ 0x1c\)\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ 0x28\)\)\ \&$	+2
 use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*puVar4\ =\ \(ushort\ \*\)\(iVar9\ \+\ 0x7e\);$	+2
-use	gld_ensureTextureAgpRefBacking	iVar7	oldRefCountStored	INFERRED	value written by the store-conditional decrement	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
 use	gld_ensureTextureAgpRefBacking	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*iVar7\ =\ iVar10;$	+1
 use	gld_ensureTextureAgpRefBacking	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar7\ \+\ 0x2a\);$	+3
 use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar10\ =\ param_2\[0xd\];$	+3
@@ -1794,12 +1691,7 @@ use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: 
 use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ 0x14\)\ =\ 1;$	+1
 use	gld_ensureTextureAgpRefBacking	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*iVar10\ =\ _io_connect_method_structureI_structureO$	+1
 use	gld_ensureTextureAgpRefBacking	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*if\ \(iVar10\ ==\ 0\)\ \{$	+1
-use	gld_ensureTextureAgpRefBacking	iVar10	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
 use	gld_ensureTextureAgpRefBacking	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(iVar10\ \+\ 0x10\);$	+1
-use	gld_ensureTextureAgpRefBacking	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar9\ =\ \*piVar5;$	+1
-use	gld_ensureTextureAgpRefBacking	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
-use	gld_ensureTextureAgpRefBacking	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(iStack_30\ \+\ 0x10\);$	+1
-use	gld_ensureTextureAgpRefBacking	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
 local	gld_ensureTextureAgpRefBacking	puVar2	backingMaskPtrB	INFERRED	ushort at backing+0x2a (+2 per step)
 local	gld_ensureTextureAgpRefBacking	puVar3	backingMaskPtrA	INFERRED	ushort at backing+0x1e (+2 per step)
 local	gld_ensureTextureAgpRefBacking	puVar4	texImagesMaskPtr	INFERRED	ushort at texImages+0x7e (+2 per step)

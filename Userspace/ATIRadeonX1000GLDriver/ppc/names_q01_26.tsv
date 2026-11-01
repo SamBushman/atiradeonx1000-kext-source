@@ -9,7 +9,3 @@ local	FUN_0002c230	puVar1	bufferEnumPtr	INFERRED	address of the draw-buffer enum
 local	FUN_0002c230	puVar6	statePacket	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2758, 0x22d words) for the 0x29000000 draw-buffer packet
 local	FUN_0002c230	puVar4	lastHeader	INFERRED	engine +0x1d8: header word of the previous packet, patched with the packet length
 local	FUN_0002c230	pcVar3	setCurrentFn	INFERRED	callback at stream+0x275c that installs the new current stream pointer
-local	FUN_0002c230	local_48	scalarIn0	INFERRED	scalar 0 of kernel selector 0: drawable word
-local	FUN_0002c230	local_44	scalarIn1	INFERRED	scalar 1: drawable flags & 0xffff3fc0
-local	FUN_0002c230	local_40	scalarIn2	INFERRED	scalar 2: drawableIdHigh
-local	FUN_0002c230	local_3c	scalarIn3	INFERRED	scalar 3: drawableIdLow

@@ -2450,7 +2450,6 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
   undefined4 *packetEnd;
   int *targetSlot;
   int unitOffset;
-  int storeResult;
   int prepareResult;
   undefined4 ga_point_size;
   undefined4 sc_scissor1;
@@ -2530,7 +2529,6 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
   int unitIndex;
   int ring;
   int hwFormat;
-  char reservation;
   byte loopExitFlagWord;
   int targetsLeft;
   uint rowBytes;
@@ -2862,13 +2860,7 @@ checkX1000:
   *packet = 0x40000000;
   surfaceObject = *(undefined4 **)surfaceInfo[2];
   surfaceRefPtr = surfaceObject + 4;
-  do {
-    if (reservation != '\0') {
-      storeResult = storeWordConditionalIndexed(*surfaceRefPtr + 0x10000,0,surfaceRefPtr);
-      *surfaceRefPtr = storeResult;
-      loopExitFlagWord = 2;
-    }
-  } while (!(bool)(loopExitFlagWord >> 1 & 1));
+  atomicAddWord(surfaceRefPtr,0x10000);
   packet[2] = *surfaceObject;
   packet[3] = dstAddress - *(int *)*surfaceInfo;
   readSurfaceCode = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + GLD_engineState)),
@@ -4319,7 +4311,6 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
   int unitObject;
   int unitIndex;
   int unitOffset;
-  int storeResult;
   int unitSlotPtr;
   int prepareResult;
   byte formatIndex;
@@ -4396,7 +4387,6 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
   int hwFormat;
   int ring;
   int scratchInt34;
-  char reservation;
   byte scratchFlag35;
   int targetsLeft;
   double oneD;
@@ -4662,14 +4652,8 @@ callPthreadMutexLock:
       *packet = 0x3f000000;
       surfaceObject = *(undefined4 **)surfaceInfo[2];
       surfaceRefPtr = surfaceObject + 4;
-      do {
-        if (reservation != '\0') {
-          storeResult = storeWordConditionalIndexed(*surfaceRefPtr + 0x10000,0,surfaceRefPtr);
-          *surfaceRefPtr = storeResult;
-          scratchFlag35 = 2;
-        }
-        hwContextTemplate = ptrTo_hwContextStateTemplate_001e88d0;
-      } while (!(bool)(scratchFlag35 >> 1 & 1));
+      atomicAddWord(surfaceRefPtr,0x10000);
+      hwContextTemplate = ptrTo_hwContextStateTemplate_001e88d0;
       packet[2] = *surfaceObject;
       packet[3] = dstAddress - *(int *)*surfaceInfo;
       _memcpy(packet + 4,hwContextTemplate,0x2f4);
@@ -5240,8 +5224,6 @@ int gld_emitQueryBeginPacket(ctx, writeCursor)
   undefined4 *queryRecordWord;
   int slotIndex;
   bool carry;
-  char reservation;
-  byte crField0;
   int scratchInt16;
   
   queryPool = *(int **)(ctx + 0x224);
@@ -5327,13 +5309,7 @@ int gld_emitQueryBeginPacket(ctx, writeCursor)
     *(undefined4 *)((int)queryPool + scratchInt16 + 0x10) = 0;
     *(undefined4 *)((int)queryPool + scratchInt16 + 0x20) = 0;
     *(undefined4 *)((int)queryPool + scratchInt16 + 0x18) = 0;
-    do {
-      if (reservation != '\0') {
-        scratchInt16 = storeWordConditionalIndexed(*scratchPtr3 + 0x10000,0,scratchPtr3);
-        *scratchPtr3 = scratchInt16;
-        crField0 = 2;
-      }
-    } while (!(bool)(crField0 >> 1 & 1));
+    atomicAddWord(scratchPtr3,0x10000);
     packetBody = (undefined4 *)((uint)(writeCursor + 0xb) & 0xffffffe0);
     packetCursor = packetBody + 4;
     *writeCursor = (((int)packetBody - (int)writeCursor) + -8) * 0x4000 | 0xc0001000;
@@ -5393,7 +5369,6 @@ int gld_emitQueryBeginPacket(ctx, writeCursor)
 /* gld_emitStampFencePacket @ 0x2bbc4 (564 bytes) */
 void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThroughArg3,undefined4 passThroughArg4,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  int fenceUpdated;
   undefined4 *packet;
   int *fenceWord;
   uint *ringTailLink;
@@ -5410,8 +5385,6 @@ void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThr
   undefined4 *scratchPtr14;
   int scratchInt15;
   int entryCount;
-  char reservation;
-  byte crField0;
   undefined4 in_LR;
   
   entryCount = *(int *)(ctx + 0x2610);
@@ -5431,13 +5404,7 @@ void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThr
     entryWords = entryCount << 2;
   }
   fenceWord = scratchPtr14 + 4;
-  do {
-    if (reservation != '\0') {
-      fenceUpdated = storeWordConditionalIndexed(*fenceWord + 0x10000,0,fenceWord);
-      *fenceWord = fenceUpdated;
-      crField0 = 2;
-    }
-  } while (!(bool)(crField0 >> 1 & 1));
+  atomicAddWord(fenceWord,0x10000);
   staleArgR8 = *(uint **)(ctx + 0x1dc);
   param2AfterFlush = stampSource;
   if (*(uint **)(ctx + 0x1e0) <= staleArgR8 + entryWords + 0x15) {
@@ -5772,10 +5739,7 @@ int gld_validateStreamState(stream, dirtyBits)
   int bufferSlot;
   int scratchInt12;
   int bufferEnumOffset;
-  undefined4 scalarIn0;
-  uint scalarIn1;
-  undefined4 scalarIn2;
-  undefined4 scalarIn3;
+  uint scalarIn [4];
   
   scratchUint8 = dirtyBits[3];
   engineObjects = *(int *)(stream + 4);
@@ -5825,7 +5789,7 @@ loopSetScratchUint7:
         if (*(int *)(engineObjectsAlias + 0x1e4) + 0x28U < *(uint *)(engineObjectsAlias + 0x1dc)) {
           gld_submitRing(engineObjectsAlias,0x1000000);
         }
-        scalarBlockPtr = &scalarIn0;
+        scalarBlockPtr = scalarIn;
         scalarCount = 4;
         scratchUint7 = 0xffff3fc0;
         structOutPtr = 0;
@@ -5833,10 +5797,10 @@ loopSetScratchUint7:
         scratchUint8 = *(uint *)(engineObjectsAlias + 0x3c) | 0x800;
         *(uint *)(engineObjectsAlias + 0x154) = scratchUint8;
         *(uint *)(engineObjectsAlias + 0x3c) = scratchUint8;
-        scalarIn0 = *(undefined4 *)(*(int *)(engineObjectsAlias + 0xf8) + 8);
-        scalarIn1 = *(uint *)(engineObjectsAlias + 0x3c) & 0xffff3fc0;
-        scalarIn2 = *(undefined4 *)(engineObjectsAlias + 0xfc);
-        scalarIn3 = *(undefined4 *)(engineObjectsAlias + 0x100);
+        scalarIn[0] = *(undefined4 *)(*(int *)(engineObjectsAlias + 0xf8) + 8);
+        scalarIn[1] = *(uint *)(engineObjectsAlias + 0x3c) & 0xffff3fc0;
+        scalarIn[2] = *(undefined4 *)(engineObjectsAlias + 0xfc);
+        scalarIn[3] = *(undefined4 *)(engineObjectsAlias + 0x100);
         _io_connect_method_scalarI_structureI(*(undefined4 *)(engineObjectsAlias + 4),0,scalarBlockPtr,4,0,0);
         statePacket = (undefined4 *)(**(code **)(stream + 0x2758))(stream,0x22d);
         scratchInt12 = *(int *)(stream + 0x2460);
@@ -5978,11 +5942,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   undefined4 initParam2;
   undefined4 initParam3;
   undefined4 initParam4;
-  undefined4 queryResult0;
-  undefined4 queryResult1;
-  undefined4 queryResult2;
-  undefined4 queryResult3;
-  undefined4 queryResult4;
+  uint queryResult [5];
   
   engineBase = ctx + 0x240;
   _memset(engineBase,0,0x2950);
@@ -6013,17 +5973,17 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   *(undefined4 *)(ctx + 0x2610) = 1;
   scratchUint5 = 0;
   *(undefined4 *)(ctx + 0x29d8) = 0xfff0;
-  queryResult2 = queryResultInit2_001aa504;
-  queryResult0 = queryResultInit0_001aa4fc;
+  queryResult[2] = queryResultInit2_001aa504;
+  queryResult[0] = queryResultInit0_001aa4fc;
   queryOutCount = 5;
-  queryResult1 = queryResultInit1_001aa500;
-  queryResult3 = queryResultInit3_001aa508;
-  queryResult4 = queryResultInit4_001aa50c;
-  _io_connect_method_scalarI_scalarO(*(undefined4 *)(ctx + 4),0x14,0,0,&queryResult0,&queryOutCount);
-  *(undefined4 *)(ctx + 0x2614) = queryResult1;
-  *(undefined4 *)(ctx + 0x2618) = queryResult2;
-  *(undefined4 *)(ctx + 0x261c) = queryResult3;
-  *(undefined4 *)(ctx + 0x2610) = queryResult0;
+  queryResult[1] = queryResultInit1_001aa500;
+  queryResult[3] = queryResultInit3_001aa508;
+  queryResult[4] = queryResultInit4_001aa50c;
+  _io_connect_method_scalarI_scalarO(*(undefined4 *)(ctx + 4),0x14,0,0,queryResult,&queryOutCount);
+  *(undefined4 *)(ctx + 0x2614) = queryResult[1];
+  *(undefined4 *)(ctx + 0x2618) = queryResult[2];
+  *(undefined4 *)(ctx + 0x261c) = queryResult[3];
+  *(undefined4 *)(ctx + 0x2610) = queryResult[0];
   scratchInt8 = *(int *)(ctx + 0x1e4);
   *(int *)(ctx + 0x1dc) = scratchInt8 + 0x20;
   *(int *)(ctx + 0x1d8) = scratchInt8 + 0x1c;
@@ -6213,13 +6173,10 @@ int gld_emitUnitObjectPacket(ctx, unitObject, opcodeCount, packetCursor)
   int opcodeCount;
   uint *packetCursor;
 {
-  int storeResult;
   int *packet;
-  bool fenceUpdated;
   uint unitFlags;
   uint *scratchPtr5;
   int *fenceWord;
-  char reservation;
   
   if (unitObject == 0) {
     scratchPtr5 = *(uint **)(ctx + 0x1d8);
@@ -6237,14 +6194,7 @@ int gld_emitUnitObjectPacket(ctx, unitObject, opcodeCount, packetCursor)
   *packet = opcodeCount * 0x1000000 + 0x6000000;
   packet[1] = **(int **)(unitObject + 0x34);
   fenceWord = (int *)(*(int *)(unitObject + 0x34) + 0x10);
-  fenceUpdated = false;
-  do {
-    if (reservation != '\0') {
-      storeResult = storeWordConditionalIndexed(*fenceWord + 0x10000,0,fenceWord);
-      *fenceWord = storeResult;
-      fenceUpdated = true;
-    }
-  } while (!fenceUpdated);
+  atomicAddWord(fenceWord,0x10000);
   unitFlags = *(uint *)(unitObject + 200);
   packet[2] = *(int *)(unitObject + 0x40);
   if ((unitFlags & 0xc00000) == 0) {

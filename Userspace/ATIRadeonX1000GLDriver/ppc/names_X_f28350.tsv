@@ -1,6 +1,5 @@
 # FUN_00028350: fork X
 use	FUN_00028350	iVar24	prepareResult	INFERRED	return value of FUN_0001e280(ctx, surfaceInfo, 1), tested against 0	^\s*if\ \(\(\(\(\(\*\(int\ \*\)param_10\[1\]\ !=\ 0\)\ \&\&\ \(iVar24\ =\ FUN_0001e280\(param_1,param_10,1\),\ iVar24\ ==\ 0\)\)\ \|\|$	+6
-use	FUN_00028350	iVar24	storeResult	CONFIRMED	result of the store-conditional that bumps the +0x10 word of the surface object (reservation loop)	^\s*iVar24\ =\ storeWordConditionalIndexed\(\*piVar23\ \+\ 0x10000,0,piVar23\);$	+2
 use	FUN_00028350	iVar24	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table (5 target slots of 4 bytes)	^\s*iVar24\ =\ 0;$	+1
 use	FUN_00028350	iVar24	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table (5 target slots of 4 bytes)	^\s*piVar23\ =\ \(int\ \*\)\(iVar24\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\);$	+1
 use	FUN_00028350	iVar24	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table (5 target slots of 4 bytes)	^\s*iVar24\ =\ iVar24\ \+\ 0x14;$	+1
@@ -19,7 +18,6 @@ use	FUN_00028350	iVar28	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound tex
 use	FUN_00028350	iVar43	targetsLeft	CONFIRMED	5 targets per unit row: loop counter over the 5 slots	^\s*iVar43\ =\ 5;$	+1
 use	FUN_00028350	iVar43	targetsLeft	CONFIRMED	5 targets per unit row: loop counter over the 5 slots	^\s*iVar43\ =\ iVar43\ \+\ \-1;$	+2
 use	FUN_00028350	piVar23	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*piVar23\ =\ puVar32\ \+\ 4;$	+1
-use	FUN_00028350	piVar23	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*iVar24\ =\ storeWordConditionalIndexed\(\*piVar23\ \+\ 0x10000,0,piVar23\);$	+2
 use	FUN_00028350	piVar23	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects, compared with the unit object	^\s*piVar23\ =\ \(int\ \*\)\(iVar24\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\);$	+1
 use	FUN_00028350	piVar23	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects, compared with the unit object	^\s*if\ \(iVar28\ ==\ \*piVar23\)\ \{$	+1
 use	FUN_00028350	piVar23	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects, compared with the unit object	^\s*piVar23\ =\ piVar23\ \+\ 1;$	+1

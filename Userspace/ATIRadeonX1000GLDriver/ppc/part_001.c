@@ -75,10 +75,7 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
   undefined4 returnCode;
   undefined4 outCount;
   int callWords [3];
-  uint scalarIn0;
-  uint scalarIn1;
-  uint scalarIn2;
-  uint scalarIn3;
+  uint scalarIn [4];
   uint drawableWidth;
   int drawableHeight;
   int drawableExtra0;
@@ -139,17 +136,17 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
     }
     status = (*attachCallback)(status,rendererIndex,drawable[2],ctxFlags & 0x803f,*(undefined4 *)(ownRendererIndex * 4 + serviceList));
     if (status == 0) {
-      scalarIn0 = drawable[2];
-      scalarIn1 = ctx[GLD_drawableFlags / 4] & 0xffff3fc0;
-      scalarIn2 = drawableHigh;
-      scalarIn3 = drawableIds & 0xff;
-      status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
+      scalarIn[0] = drawable[2];
+      scalarIn[1] = ctx[GLD_drawableFlags / 4] & 0xffff3fc0;
+      scalarIn[2] = drawableHigh;
+      scalarIn[3] = drawableIds & 0xff;
+      status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,scalarIn,4,0,0);
       if ((status == 0) &&
          ((*(char *)((int)ctx + GLD_scaleEnabled) == '\0' ||
           (status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0xe,ctx + GLD_scaleFlags / 4,3,0,0),
           status == 0)))) {
-        scalarIn0 = (uint)*(byte *)((int)ctx + GLD_surfaceVolatile);
-        _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0x10,&scalarIn0,1,0,0);
+        scalarIn[0] = (uint)*(byte *)((int)ctx + GLD_surfaceVolatile);
+        _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0x10,scalarIn,1,0,0);
 loopSetOutCount:
         outCount = 4;
         returnCode = 0x2715;
@@ -243,17 +240,17 @@ loopSetOutCount:
       library = ptrTo_rendererLibraryState_001e88ac;
       status = *(int *)(ptrTo_rendererLibraryState_001e88ac + 0xc);
       ptrTo_rendererLibraryState_001e88ac[rendererIndex + 0x98] = ptrTo_rendererLibraryState_001e88ac[rendererIndex + 0x98] + '\x01';
-      scalarIn0 = (uint)*(byte *)(status + *ctx);
+      scalarIn[0] = (uint)*(byte *)(status + *ctx);
       callWords[0] = 0;
-      scalarIn1 = ctx[GLD_drawableFlags / 4] & 0x803f;
+      scalarIn[1] = ctx[GLD_drawableFlags / 4] & 0x803f;
       ctxFlags = _io_connect_method_scalarI_scalarO
-                        (*(undefined4 *)(library + *ctx * 4 + 0x18),7,&scalarIn0,2,0,callWords);
+                        (*(undefined4 *)(library + *ctx * 4 + 0x18),7,scalarIn,2,0,callWords);
       if (ctxFlags == 0) {
-        scalarIn0 = ~(uint)*(byte *)(*(int *)(library + 0xc) + *ctx);
-        scalarIn1 = ctx[GLD_drawableFlags / 4] & 0xffff3fc0;
-        scalarIn2 = ctxFlags;
-        scalarIn3 = ctxFlags;
-        status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
+        scalarIn[0] = ~(uint)*(byte *)(*(int *)(library + 0xc) + *ctx);
+        scalarIn[1] = ctx[GLD_drawableFlags / 4] & 0xffff3fc0;
+        scalarIn[2] = ctxFlags;
+        scalarIn[3] = ctxFlags;
+        status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,scalarIn,4,0,0);
         if (status == 0) goto loopSetOutCount;
       }
 returnCode1:
@@ -306,9 +303,9 @@ returnCode2:
   returnCode = 0x2715;
 callGldDetachDrawable:
   ((int (*)())gld_detachDrawable)(ctx);
-  scalarIn1 = 0;
-  scalarIn0 = 0;
-  _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
+  scalarIn[1] = 0;
+  scalarIn[0] = 0;
+  _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,scalarIn,4,0,0);
   return returnCode;
 }
 
@@ -571,18 +568,14 @@ int gld_bindCurrentFramebuffer(ctx, dispatch, dirtyBits, scratchR6, scratchR7, s
   undefined4 scratchR7;
   undefined4 scratchR8;
 {
-  int casResult2;
   int oldAttachmentsLeft;
   int attachmentsLeft;
   int validateResult;
   bool hadFramebuffer;
   bool noNewFramebuffer;
-  int casResult;
   int oldAttachmentCursor;
   int *refCountWord;
   int *newFramebuffer;
-  char reservation;
-  byte crField0;
   
   oldAttachmentCursor = *(int *)(ctx + 0x150);
   hadFramebuffer = oldAttachmentCursor != 0;
@@ -592,13 +585,7 @@ int gld_bindCurrentFramebuffer(ctx, dispatch, dirtyBits, scratchR6, scratchR7, s
     do {
       if (*(int *)(oldAttachmentCursor + 0x4c) != 0) {
         refCountWord = (int *)(*(int *)(oldAttachmentCursor + 0x4c) + 0x10);
-        do {
-          if (reservation != '\0') {
-            casResult = storeWordConditionalIndexed(*refCountWord + -0x10000,0,refCountWord);
-            *refCountWord = casResult;
-            crField0 = 2;
-          }
-        } while (!(bool)(crField0 >> 1 & 1));
+        atomicAddWord(refCountWord,-0x10000);
       }
       oldAttachmentCursor = oldAttachmentCursor + 4;
       oldAttachmentsLeft = oldAttachmentsLeft + -1;
@@ -623,13 +610,7 @@ storeCtx:
     do {
       if (newFramebuffer[0x13] != 0) {
         refCountWord = (int *)(newFramebuffer[0x13] + 0x10);
-        do {
-          if (reservation != '\0') {
-            casResult2 = storeWordConditionalIndexed(*refCountWord + 0x10000,0,refCountWord);
-            *refCountWord = casResult2;
-            crField0 = 2;
-          }
-        } while (!(bool)(crField0 >> 1 & 1));
+        atomicAddWord(refCountWord,0x10000);
       }
       newFramebuffer = newFramebuffer + 1;
       attachmentsLeft = attachmentsLeft + -1;
@@ -1265,9 +1246,7 @@ int _gldGetRendererInfo(rendererInfo, rendererMask, unused3, unused4, unused5, u
   int renderersLeft;
   undefined4 outCount;
   undefined4 connection;
-  undefined1 scalarOut0 [4];
-  undefined4 scalarOut1;
-  undefined4 scalarOut2;
+  uint scalarOut [3];
   
   if (((*(uint *)ptrTo_rendererLibraryState_001e88ac & rendererMask) == 0) || ((rendererMask & ~*(uint *)ptrTo_rendererLibraryState_001e88ac) != 0))
   {
@@ -1309,7 +1288,7 @@ setServiceList:
     returnCode = 0x271f;
     if (listCount == 0) {
       outCount = 3;
-      listCount = _io_connect_method_scalarI_scalarO(connection,3,0,0,scalarOut0,&outCount);
+      listCount = _io_connect_method_scalarI_scalarO(connection,3,0,0,scalarOut,&outCount);
       if (listCount == 0) {
         *rendererInfo = 0;
         rendererStatusFlags = gld_rendererStatusFlags(rendererIndex);
@@ -1319,8 +1298,8 @@ setServiceList:
         *(undefined2 *)((int)rendererInfo + 0x26) = 0;
         *(undefined2 *)(rendererInfo + 10) = 0;
         rendererInfo[0xb] = 0;
-        rendererInfo[0xc] = scalarOut2;
-        rendererInfo[0xd] = scalarOut1;
+        rendererInfo[0xc] = scalarOut[2];
+        rendererInfo[0xd] = scalarOut[1];
         rendererInfo[3] = 0xd;
         rendererInfo[2] = 0xa513;
         rendererInfo[1] = rendererStatusFlags | rendererIndex << 0x18;
@@ -1329,7 +1308,7 @@ setServiceList:
         rendererInfo[5] = 0x808000;
         *(undefined1 *)((int)rendererInfo + 0x2a) = 0;
         rendererInfo[7] = 0x80;
-        gld_fillMaxPixelFormat(rendererInfo);
+        gld_fillMaxPixelFormat(rendererInfo,scalarOut[0]);
         _IOServiceClose(connection);
         returnCode = 0;
       }
@@ -1595,12 +1574,9 @@ int _gldDeleteTextureLevel(ctx, texture, face, level)
   uint level;
 {
   ushort oldLevelMask;
-  int updatedRefCount;
   int *refCountSlot;
   int oldRefCount;
   int faceEntry;
-  char reservation;
-  byte crBits;
   
   if (level == 0xffffffff) {
     *(byte *)(texture + 0x39) = *(byte *)(texture + 0x39) | 0x43;
@@ -1617,14 +1593,7 @@ int _gldDeleteTextureLevel(ctx, texture, face, level)
       _gldFlush(ctx);
     }
     refCountSlot = (int *)(faceEntry + 0x10);
-    do {
-      oldRefCount = *refCountSlot;
-      if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
-        *refCountSlot = updatedRefCount;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountSlot,-0x10000);
     if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,faceEntry,1,0,0);
     }
@@ -1639,14 +1608,11 @@ int _gldReclaimTexture(ctx, texture)
   int texture;
 {
   bool moreUnits;
-  int updatedRefCount;
   int *refCountSlot;
   int *listNeighbour;
   int unitIndex;
   int oldRefCount;
   int unitSlotCursor;
-  char reservation;
-  byte crBits;
   
   unitIndex = 0;
   unitSlotCursor = ctx;
@@ -1666,14 +1632,7 @@ int _gldReclaimTexture(ctx, texture)
     }
     gld_waitTextureStamp(ctx,texture);
     refCountSlot = (int *)(unitSlotCursor + 0x10);
-    do {
-      oldRefCount = *refCountSlot;
-      if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
-        *refCountSlot = updatedRefCount;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountSlot,-0x10000);
     if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,unitSlotCursor,1,0,0);
     }
@@ -1691,14 +1650,7 @@ int _gldReclaimTexture(ctx, texture)
     if (refCountSlot == (int *)0x0) break;
     unitSlotCursor = refCountSlot[4];
     listNeighbour = (int *)(unitSlotCursor + 0x10);
-    do {
-      oldRefCount = *listNeighbour;
-      if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,listNeighbour);
-        *listNeighbour = updatedRefCount;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    oldRefCount = atomicAddWord(listNeighbour,-0x10000);
     if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,unitSlotCursor,1,0,0);
     }
@@ -2301,25 +2253,15 @@ int _gldDestroyQuery(ctx, query)
 int gld_releaseQueryMemory(ctx)
   int ctx;
 {
-  int updatedRefCount;
   int *refCountSlot;
   int oldRefCount;
   int memory;
-  char reservation;
-  byte crBits;
   
   memory = **(int **)(ctx + GLD_queryRecord);
   if (memory != 0) {
     ((int (*)())gld_waitQueryStamp)(ctx);
     refCountSlot = (int *)(memory + 0x10);
-    do {
-      oldRefCount = *refCountSlot;
-      if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
-        *refCountSlot = updatedRefCount;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountSlot,-0x10000);
     if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,memory,1,0,0);
       **(undefined4 **)(ctx + GLD_queryRecord) = 0;
@@ -2336,15 +2278,11 @@ int gld_setQueryAgpRefBacking(ctx, record, addressWord, sizeWord, limitWord)
   int sizeWord;
   int limitWord;
 {
-  int updatedRefCount;
   int *refCountSlot;
   int status;
   int oldMemory;
-  char reservation;
-  byte crBits;
   undefined4 structOutSize;
-  undefined1 structOut0 [4];
-  int newMemory;
+  int structOut [2];
   
   record[2] = addressWord;
   record[3] = sizeWord;
@@ -2354,29 +2292,16 @@ int gld_setQueryAgpRefBacking(ctx, record, addressWord, sizeWord, limitWord)
   *record = 0;
   structOutSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + GLD_connect),10,record + 1,0x14,structOut0,&structOutSize);
+                    (*(undefined4 *)(ctx + GLD_connect),10,record + 1,0x14,structOut,&structOutSize);
   if (status == 0) {
-    *record = newMemory;
-    refCountSlot = (int *)(newMemory + 0x10);
-    do {
-      if (reservation != '\0') {
-        status = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
-        *refCountSlot = status;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
-    *(undefined1 *)(newMemory + 0x14) = 1;
+    *record = structOut[1];
+    refCountSlot = (int *)(structOut[1] + 0x10);
+    atomicAddWord(refCountSlot,0x10000);
+    *(undefined1 *)(structOut[1] + 0x14) = 1;
   }
   if (oldMemory != 0) {
     refCountSlot = (int *)(oldMemory + 0x10);
-    do {
-      status = *refCountSlot;
-      if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(status + -0x10000,0,refCountSlot);
-        *refCountSlot = updatedRefCount;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    status = atomicAddWord(refCountSlot,-0x10000);
     if (status == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,oldMemory,1,0,0);
     }
