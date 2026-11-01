@@ -108,3 +108,16 @@ local	Program__translateILInstruction	local_94	sourceTokenWords	INFERRED	3-word 
 local	Program__translateILInstruction	local_88	hwInputSelectWord	INFERRED	filled by the hw-description vtable call at +0xa0 (get input select info, same call as Program__emitInputMerge's inputSelectWords), then copied into operandRecord2+0x10
 local	Program__translateILInstruction	local_84	hwInputSelectWordB	INFERRED	same hw-description +0xa0 call at a different call site, same role as hwInputSelectWord
 local	Program__translateILInstruction	local_80	laneSelectBytes	INFERRED	filled from operandRecord3+0x10, then indexed byte-wise (&local_80 + extensionSelectLane) as a per-lane splat-table index
+local	Program__translateILStream	auStack_154	pendingListBStorage	CONFIRMED	0x18-byte sentinel-list header storage for pendingListB (DListNode__init writes 6 words incl. the self-referential empty-list head at +8, aliased as pendingListBHead); already extended to the real 0x18-byte size per the issue #64 comment in this file
+local	Program__translateILStream	auStack_16c	pendingListAStorage	CONFIRMED	same role as pendingListBStorage, for pendingListA (2nd independent instance of the same fix)
+local	Program__translateILStream	local_14c	pendingListBHead	CONFIRMED	#define alias into pendingListBStorage+8: the self-referential empty-list head DListNode__init writes, read as a list head in four unlink loops
+local	Program__translateILStream	local_164	pendingListAHead	CONFIRMED	#define alias into pendingListAStorage+8: same role as pendingListBHead, for pendingListA
+local	Program__translateILStream	local_138	unusedInit1	INFERRED	set to 0 once at function entry, never read anywhere in the function (dead store, same category as Compiler__clearOutputChunks's deadClearFlag)
+local	Program__translateILStream	local_134	unusedInit2	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_130	unusedInit3	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_12c	unusedInit4	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_128	unusedInit5	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_170	unusedTracker	INFERRED	initialised to the sentinel 0x1010101 at entry (same style as lastDeclRegister's 0xffffffff), later overwritten from stagedSelectWord, but never read anywhere in the function
+local	Program__translateILStream	local_118	unusedTemplateMode	INFERRED	assigned from templateModeWord once, never read afterward
+local	Program__translateILStream	puVar13	unusedPtr13	INFERRED	declared but has no use anywhere in the function body (only referenced in a nearby comment discussing a different variable)
+local	Program__translateILStream	iVar23	operandScratch23	INFERRED	3 disjoint roles far apart in this huge function: an operand-byte-count loop-bound value, a separate for-loop counter, and (much later) an operand-record pointer; kept as one name (not use-split: local-variable-rename anchors in this function are reverted to Ghidra originals the same way function-name anchors are, and the 3 sites share no safe unique textual anchor)

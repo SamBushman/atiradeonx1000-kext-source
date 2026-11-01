@@ -5226,7 +5226,7 @@ int Program__translateILStream(program, ilReader)
   uint bitmapWordCount;
   uint *****rewrittenSelect;
   uint *movVector;
-  undefined4 *puVar13;
+  undefined4 *unusedPtr13;
   undefined4 *vectorAllocation;
   uint *****ifStackStorage;
   void *ifConditionObject;
@@ -5235,7 +5235,7 @@ int Program__translateILStream(program, ilReader)
   uint ******interpRegisterNumber;
   int registerEndB;
   int laneLoopIndex;
-  int iVar23;
+  int operandScratch23;
   undefined4 *exportInst;
   int operandByteLimit;
   undefined2 *fetchDescriptor2;
@@ -5275,39 +5275,39 @@ int Program__translateILStream(program, ilReader)
   int *templateCursor;
   undefined4 stagedSelectWord;
   uint ****lastDeclRegister;
-  uint *****local_170;
-  /* issue #64 live-repro (2nd instance, same function): DListNode__init(pendingListA=auStack_16c), two lines
-   * below DListNode__init(pendingListB=auStack_154) which already got this fix, writes the same 6-word/0x18-byte
-   * sentinel-list header (see the comment on auStack_154 just below) - word[2] (self-referential "next",
-   * program[2] = program+3) is what `local_164`'s four loops read as the list head, same shape as
-   * local_14c's. auStack_16c was declared only 8 bytes with local_164 as a separate scalar 8 bytes in;
-   * live-confirmed the pointer this yields (local_164, still holding the list head's own address) is a
-   * real puVar13 but reads back as MallocPreScribble's 0xAA fill - i.e. never received the init write,
-   * same root cause as local_14c's, just missed by that fix since it's a second, independent instance.
+  uint *****unusedTracker;
+  /* issue #64 live-repro (2nd instance, same function): DListNode__init(pendingListA=pendingListAStorage), two lines
+   * below DListNode__init(pendingListB=pendingListBStorage) which already got this fix, writes the same 6-word/0x18-byte
+   * sentinel-list header (see the comment on pendingListBStorage just below) - word[2] (self-referential "next",
+   * program[2] = program+3) is what `pendingListAHead`'s four loops read as the list head, same shape as
+   * pendingListBHead's. pendingListAStorage was declared only 8 bytes with pendingListAHead as a separate scalar 8 bytes in;
+   * live-confirmed the pointer this yields (pendingListAHead, still holding the list head's own address) is a
+   * real unusedPtr13 but reads back as MallocPreScribble's 0xAA fill - i.e. never received the init write,
+   * same root cause as pendingListBHead's, just missed by that fix since it's a second, independent instance.
    * Merged into one 0x18-byte buffer the same way, aliased back to the original name. */
-  unsigned char auStack_16c [0x18];
-#define local_164 (*(int *)(auStack_16c + 0x08))
-  /* issue #64 live-repro: DListNode__init (called below via pendingListB=auStack_154) writes program[0]
-   * through program[5] - 6 words, 0x18 bytes - into whatever auStack_154 points to, including a
-   * self-referential empty-list-head init at program[2] (offset 8: *(auStack_154+8) = auStack_154+12).
-   * auStack_154 was declared only 8 bytes; local_14c (used as a list head in four separate loops
+  unsigned char pendingListAStorage [0x18];
+#define pendingListAHead (*(int *)(pendingListAStorage + 0x08))
+  /* issue #64 live-repro: DListNode__init (called below via pendingListB=pendingListBStorage) writes program[0]
+   * through program[5] - 6 words, 0x18 bytes - into whatever pendingListBStorage points to, including a
+   * self-referential empty-list-head init at program[2] (offset 8: *(pendingListBStorage+8) = pendingListBStorage+12).
+   * pendingListBStorage was declared only 8 bytes; pendingListBHead (used as a list head in four separate loops
    * later in this function) sits exactly at that offset-8 slot by its own hex name (0x154-0x14c=8),
    * and the 12 bytes after it (up to movByRegister, 0x154-0x13c=0x18) are the same buffer's remaining
-   * two words, never individually named. Left separate, local_14c never receives its initializer at
+   * two words, never individually named. Left separate, pendingListBHead never receives its initializer at
    * all in the rebuild (confirmed live: read as garbage/uninitialized), corrupting every one of the
    * four unlink loops that use it as a list head - traced down to a crash in DList__unlink, a plain
    * linked-list unlink helper, dereferencing garbage. Merged into one 0x18-byte buffer. */
-  unsigned char auStack_154 [0x18];
-#define local_14c (*(int *)(auStack_154 + 0x08))
+  unsigned char pendingListBStorage [0x18];
+#define pendingListBHead (*(int *)(pendingListBStorage + 0x08))
   uint *movByRegister;
-  undefined4 local_138;
-  undefined4 local_134;
-  undefined4 local_130;
-  undefined4 local_12c;
-  undefined4 local_128;
+  undefined4 unusedInit1;
+  undefined4 unusedInit2;
+  undefined4 unusedInit3;
+  undefined4 unusedInit4;
+  undefined4 unusedInit5;
   undefined4 templateModeWord;
   int pendingListHead;
-  uint ****local_118;
+  uint ****unusedTemplateMode;
   undefined4 tempIndexCache;
   int sharedTempIndex;
   undefined4 composedSelectOut;
@@ -5420,13 +5420,13 @@ int Program__translateILStream(program, ilReader)
   vectorAllocation[3] = vectorStorage;
   constantsBaseC = &constPoolAnchor_001ad5d8;
   previousBlock = *(uint ******)(program + 0x3a0);
-  local_128 = 0;
-  local_170 = (uint *****)0x1010101;
+  unusedInit5 = 0;
+  unusedTracker = (uint *****)0x1010101;
   lastDeclRegister = (uint ****)0xffffffff;
-  local_138 = 0;
-  local_134 = 0;
-  local_130 = 0;
-  local_12c = 0;
+  unusedInit1 = 0;
+  unusedInit2 = 0;
+  unusedInit3 = 0;
+  unusedInit4 = 0;
   compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
   movByRegister = vectorAllocation + 1;
   blockAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
@@ -5435,9 +5435,9 @@ int Program__translateILStream(program, ilReader)
   Block__ctor_ea020(newBlockC,*(undefined4 *)(program + 8));
   currentBlock = (uint *****)newBlockC;
   Program__insertBlockAfter(program,previousBlock,newBlockC);
-  pendingListA = auStack_16c;
+  pendingListA = pendingListAStorage;
   Block__connect(previousBlock,currentBlock);
-  pendingListB = auStack_154;
+  pendingListB = pendingListBStorage;
   previousBlock = currentBlock;
   DListNode__init(pendingListA);
   DListNode__init(pendingListB);
@@ -5761,7 +5761,7 @@ code_r0x000fed00:
         nextListNode = *(int *)(flushNode + 8);
       }
       templateModeWord = (uint *****)(ptrTo_DListNode__vtable_001e8b48 + 8);
-      local_118 = (uint ****)templateModeWord;
+      unusedTemplateMode = (uint ****)templateModeWord;
       goto readNextInstruction;
     case 0x1b:
       laneKind = Program__laneKindOfIlType(program,(uint)*tokenWords >> 0x10 & 0x1f);
@@ -5993,8 +5993,8 @@ code_r0x000fed00:
       argR6 = (uint ******)((int)((unsigned char *)0x0) + 1);
       argR7 = createdMov;
       ((int (*)())Program__applySourceTokenToOperand)(program,&stagedSelectWord,*ilReader[0x1b],1,createdMov);
-      nextListNode = *(int *)(local_14c + 8);
-      pendingInst = local_14c;
+      nextListNode = *(int *)(pendingListBHead + 8);
+      pendingInst = pendingListBHead;
       while (flushNodeC = nextListNode, flushNodeC != 0) {
         DList__unlink(pendingInst);
         ((int (*)())Program__appendInst)(program,pendingInst,currentBlock);
@@ -6263,7 +6263,7 @@ code_r0x000feeb8:
             swizzleTable = &laneWord01010100_001aa9bc;
           }
           stagedSelectWord = (uint ******)*swizzleTable;
-          local_170 = (uint *****)stagedSelectWord;
+          unusedTracker = (uint *****)stagedSelectWord;
         }
       }
       else {
@@ -6487,8 +6487,8 @@ code_r0x000ff070:
       stagedSelectWord = (uint ******)0x3030303;
       argR7 = instOpcode0xb4;
       ((int (*)())Program__applySourceTokenToOperand)(program,selectWordPtr,*ilReader[0x1b],3,instOpcode0xb4);
-      nextListNode = *(int *)(local_14c + 8);
-      pendingInst = local_14c;
+      nextListNode = *(int *)(pendingListBHead + 8);
+      pendingInst = pendingListBHead;
       while (flushNodeC = nextListNode, flushNodeC != 0) {
         DList__unlink(pendingInst);
         ((int (*)())Program__appendInst)(program,pendingInst,currentBlock);
@@ -6558,8 +6558,8 @@ code_r0x000febe0:
       do {
         operandByteOffset = (int)operandNumber << 2;
         for (laneLoopIndex = 0;
-            iVar23 = ((int (*)())OpcodeRecord__getOperandByte)(ilOpcode,operandNumber,
-                                  *(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)), laneLoopIndex <= iVar23
+            operandScratch23 = ((int (*)())OpcodeRecord__getOperandByte)(ilOpcode,operandNumber,
+                                  *(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)), laneLoopIndex <= operandScratch23
             ; laneLoopIndex = laneLoopIndex + 1) {
           argR6 = loopStackData;
           argR7 = (uint ******)outputSlotCounter;
@@ -6576,9 +6576,9 @@ code_r0x000febe0:
       do {
         operandByteOffsetC = operandIndexB << 2;
         laneMaskPtr = (undefined1 *)((int)destOperandCount + operandIndexB);
-        for (iVar23 = 0;
+        for (operandScratch23 = 0;
             operandByteLimit = ((int (*)())OpcodeRecord__getOperandByte)(ilOpcode,laneMaskPtr,*(undefined4 *)(*(int *)(compilerRef + 0x30c) + 0xc)),
-            iVar23 <= operandByteLimit; iVar23 = iVar23 + 1) {
+            operandScratch23 <= operandByteLimit; operandScratch23 = operandScratch23 + 1) {
           argR6 = *(uint *******)((int)ilReader[0x1b] + operandByteOffsetC);
           argR8 = (uint ******)&lastDeclRegister;
           argR7 = loopStackData;
@@ -6589,8 +6589,8 @@ code_r0x000febe0:
         operandIndexB = operandIndexB + 1;
       } while (opcodeOperandCount != operandIndexB);
     }
-    nextListNodeB = *(int *)(local_14c + 8);
-    pendingInstB = local_14c;
+    nextListNodeB = *(int *)(pendingListBHead + 8);
+    pendingInstB = pendingListBHead;
     while (flushNodeB = nextListNodeB, flushNodeB != 0) {
       DList__unlink(pendingInstB);
       ((int (*)())Program__appendInst)(program,pendingInstB,currentBlock);
@@ -8271,8 +8271,8 @@ code_r0x00101d1c:
                 }
               }
               rewrittenSelect = templateModeWord;
-              iVar23 = IRInst__getOperandRecord(copiedInst,operandLoopIndex);
-              *(uint ******)(iVar23 + 0x10) = rewrittenSelect;
+              operandScratch23 = IRInst__getOperandRecord(copiedInst,operandLoopIndex);
+              *(uint ******)(operandScratch23 + 0x10) = rewrittenSelect;
             }
             operandLoopIndex = (uint ******)((int)operandLoopIndex + 1);
           } while (operandCountPlusOne != operandLoopIndex);
@@ -8375,8 +8375,8 @@ code_r0x001002dc:
     operandRecord = IRInst__getOperandRecord(movFloatInst,1);
     *(uint ******)(operandRecord + 0x10) = savedExtraWord;
   }
-  nextListNode = *(int *)(local_14c + 8);
-  pendingInst = local_14c;
+  nextListNode = *(int *)(pendingListBHead + 8);
+  pendingInst = pendingListBHead;
   while (flushNodeC = nextListNode, flushNodeC != 0) {
     DList__unlink(pendingInst);
     ((int (*)())Program__appendInst)(program,pendingInst,currentBlock);
@@ -8387,8 +8387,8 @@ code_r0x001002dc:
   if (movFloatInst != (void *)0x0) {
     ((int (*)())Program__appendInst)(program,movFloatInst,currentBlock);
   }
-  nextListNode = *(int *)(local_164 + 8);
-  pendingInst = local_164;
+  nextListNode = *(int *)(pendingListAHead + 8);
+  pendingInst = pendingListAHead;
   while (flushNodeC = nextListNode, flushNodeC != 0) {
     DList__unlink(pendingInst);
     ((int (*)())Program__appendInst)(program,pendingInst,currentBlock);
@@ -8414,8 +8414,8 @@ code_r0x00103b3c:
   templateCursor = (int *)((int)templateCursor + 1);
   goto code_r0x001005f4;
 code_r0x00103bb0:
-  nextListNode = *(int *)(local_164 + 8);
-  pendingInst = local_164;
+  nextListNode = *(int *)(pendingListAHead + 8);
+  pendingInst = pendingListAHead;
   while (flushNodeC = nextListNode, flushNodeC != 0) {
     DList__unlink(pendingInst);
     ((int (*)())Program__appendInst)(program,pendingInst,currentBlock);
@@ -8432,5 +8432,5 @@ code_r0x00103bb0:
   }
   goto readNextInstruction;
 }
-#undef local_14c
-#undef local_164
+#undef pendingListBHead
+#undef pendingListAHead
