@@ -158,7 +158,6 @@ local	FUN_0002bbc4	iVar16	entryCount	INFERRED	ctx+0x2610: number of register ent
 local	FUN_0002bbc4	iVar10	entryWords	INFERRED	ring words needed for the entries (4 per entry, 8 for the two-entry variant)
 local	FUN_0002bbc4	uVar13	ctxWord1cf8	INFERRED	ctx+0x1cf8, value written into the final entry of the two-entry variant
 local	FUN_0002bbc4	piVar3	fenceWord	INFERRED	scratchPtr14+4: word updated with store-conditional (+0x10000) before the packet is built
-local	FUN_0002bbc4	iVar1	fenceUpdated	INFERRED	result of the store-conditional on the fence word
 local	FUN_0002bbc4	puVar2	packet	INFERRED	32-byte aligned packet start in the ring (header 0x3b000000)
 local	FUN_0002bbc4	puVar4	ringTailLink	INFERRED	ctx+0x1d8, link word of the previous packet, patched with the new offset
 local	FUN_0002bbc4	uVar5	stampValue	INFERRED	first word of the stamp record (**(ctx+0x234)) stored at packet[1]
@@ -229,11 +228,6 @@ local	gld_initContextHardwareState	puVar2	vectorConstArea	INFERRED	PTR_DAT_001e8
 local	gld_initContextHardwareState	uVar7	permuteIndex	INFERRED	row counter of the permute-row loop (replicated into every byte)
 local	gld_initContextHardwareState	uVar9	maskShiftBias	INFERRED	starts at -0x60, +8 per row: shift amount bias of the mask rows
 local	gld_initContextHardwareState	local_58	queryOutCount	INFERRED	output scalar count (5) for IOConnect method 0x14
-local	gld_initContextHardwareState	local_40	queryResult0	INFERRED	scalar 0 of IOConnect method 0x14 (input DAT_001aa4fc, output stored to ctx+0x2610)
-local	gld_initContextHardwareState	local_3c	queryResult1	INFERRED	scalar 1 (DAT_001aa500, output to ctx+0x2614)
-local	gld_initContextHardwareState	local_38	queryResult2	INFERRED	scalar 2 (DAT_001aa504, output to ctx+0x2618)
-local	gld_initContextHardwareState	local_34	queryResult3	INFERRED	scalar 3 (DAT_001aa508, output to ctx+0x261c)
-local	gld_initContextHardwareState	local_30	queryResult4	INFERRED	scalar 4 (DAT_001aa50c)
 local	gld_initContextHardwareState	local_54	initParam0	INFERRED	argument 0 block passed by address to FUN_000a9ac0 (DAT_001aa4e8)
 local	gld_initContextHardwareState	local_50	initParam1	INFERRED	DAT_001aa4ec
 local	gld_initContextHardwareState	local_4c	initParam2	INFERRED	DAT_001aa4f0
@@ -514,7 +508,6 @@ local	glFlush_impl_withSurfaceUpdate	param_4	scratchArg4	INFERRED	argument slot 
 local	glFlush_impl_withSurfaceUpdate	param_5	scratchArg5	INFERRED	argument slot reused for 0 (IOConnect struct size)
 local	glFlush_impl_withSurfaceUpdate	param_6	scratchArg6	INFERRED	argument slot reused for 0
 local	glFlush_impl_withSurfaceUpdate	param_7	scratchArg7	INFERRED	argument slot reused for the surface id (*(ctx+0xf8)+8), also scalarIn0
-local	glFlush_impl_withSurfaceUpdate	uStack_24	scalarIn1	INFERRED	second scalar of the IOConnect call: old ctx+0x3c flags masked with 0xffff37c0
 local	FUN_0002a260	param_2	drawStateSave	INFERRED	buffer passed to FUN_000a6140 (saved internal draw state)
 local	FUN_0002a260	uVar1	pointSizeFixed	INFERRED	ring+8 point size converted through the 2^52 bias and scaled, packed as (size<<16 | size&0xffff)
 local	FUN_0002a260	dVar2	i2dBias	INFERRED	DOUBLE_001aa250 int->double conversion constant
@@ -534,9 +527,7 @@ local	gld_emitStreamAddressRegisters	iVar2	addrPairIndex	INFERRED	index into the
 local	gld_emitStreamAddressRegisters	iVar4	addrByteOffset	INFERRED	8-byte offset into the paired address array (ctx+0x26d8)
 local	gld_emitStreamAddressRegisters	puVar5	cursor	INFERRED	write cursor after the 0x831 header
 func	FUN_0002a260	gld_enterPointDrawState	INFERRED	enters the internal draw state (FUN_000a6140), emits the point size and stream-control registers and commits
-local	gld_emitUnitObjectPacket	iVar1	storeResult	INFERRED	result of the store-conditional on the fence word
 local	gld_emitUnitObjectPacket	piVar2	packet	INFERRED	32-byte aligned packet start in the ring
-local	gld_emitUnitObjectPacket	bVar3	fenceUpdated	INFERRED	set when the store-conditional on the fence word has run
 local	gld_emitUnitObjectPacket	uVar4	unitFlags	INFERRED	unit object +0xc8 flags: bits 22-23 select the extended packet word
 local	gld_emitUnitObjectPacket	piVar6	fenceWord	INFERRED	storage +0x10 word incremented by 0x10000 with a store-conditional
 local	gld_drawPixelsDispatch	param_5	format	INFERRED	GL pixel format forwarded to glDrawPixels_impl / gld_drawPixelsFromClientSurface

@@ -2603,10 +2603,7 @@ int _gldSetInteger(ctx, pname, values)
   undefined4 connectionOrError;
   undefined4 selector;
   bool enable;
-  uint scalarIn0;
-  uint scalarIn1;
-  uint scalarIn2;
-  uint scalarIn3;
+  uint scalarIn [4];
   
   if (values == (uint *)0x0) {
     return 0x271e;
@@ -2616,8 +2613,8 @@ int _gldSetInteger(ctx, pname, values)
     return 0;
   }
   if (pname == 0x124) {
-    scalarIn0 = *values;
-    statusOrObject = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xc,&scalarIn0,1,0,0);
+    scalarIn[0] = *values;
+    statusOrObject = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xc,scalarIn,1,0,0);
     connectionOrError = 0x2719;
 joined_r0x000058fc:
     if (statusOrObject != 0) {
@@ -2627,27 +2624,27 @@ joined_r0x000058fc:
   else {
     if (pname < 0x125) {
       if (pname == 0xcb) {
-        scalarIn0 = (uint)*(byte *)(ctx + GLD_swapIntervalNumerator);
-        scalarIn1 = *values;
-        *(char *)(ctx + GLD_swapIntervalDenominator) = (char)scalarIn1;
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),2,&scalarIn0,2,0,0);
+        scalarIn[0] = (uint)*(byte *)(ctx + GLD_swapIntervalNumerator);
+        scalarIn[1] = *values;
+        *(char *)(ctx + GLD_swapIntervalDenominator) = (char)scalarIn[1];
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),2,scalarIn,2,0,0);
         return 0;
       }
       if (pname < 0xcc) {
         if (pname == 200) {
           if ((-1 < (int)values[2]) && (-1 < (int)values[3])) {
-            scalarIn0 = *values;
-            *(uint *)(ctx + GLD_swapRectX) = scalarIn0;
-            scalarIn1 = values[1];
-            *(uint *)(ctx + GLD_swapRectY) = scalarIn1;
-            scalarIn2 = values[2];
-            *(uint *)(ctx + GLD_swapRectWidth) = scalarIn2;
-            scalarIn3 = values[3];
-            *(uint *)(ctx + GLD_swapRectHeight) = scalarIn3;
+            scalarIn[0] = *values;
+            *(uint *)(ctx + GLD_swapRectX) = scalarIn[0];
+            scalarIn[1] = values[1];
+            *(uint *)(ctx + GLD_swapRectY) = scalarIn[1];
+            scalarIn[2] = values[2];
+            *(uint *)(ctx + GLD_swapRectWidth) = scalarIn[2];
+            scalarIn[3] = values[3];
+            *(uint *)(ctx + GLD_swapRectHeight) = scalarIn[3];
             if (*(char *)(ctx + GLD_swapRectEnabled) == '\0') {
               return 0;
             }
-            _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),1,&scalarIn0,4,0,0);
+            _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),1,scalarIn,4,0,0);
             return 0;
           }
           return 0x2718;
@@ -2659,27 +2656,27 @@ joined_r0x000058fc:
           }
           *(bool *)(ctx + GLD_swapRectEnabled) = enable;
           if (enable) {
-            scalarIn0 = *(uint *)(ctx + GLD_swapRectX);
-            scalarIn1 = *(undefined4 *)(ctx + GLD_swapRectY);
-            scalarIn2 = *(undefined4 *)(ctx + GLD_swapRectWidth);
-            scalarIn3 = *(undefined4 *)(ctx + GLD_swapRectHeight);
+            scalarIn[0] = *(uint *)(ctx + GLD_swapRectX);
+            scalarIn[1] = *(undefined4 *)(ctx + GLD_swapRectY);
+            scalarIn[2] = *(undefined4 *)(ctx + GLD_swapRectWidth);
+            scalarIn[3] = *(undefined4 *)(ctx + GLD_swapRectHeight);
           }
           else {
-            scalarIn0 = 0;
-            scalarIn1 = 0;
-            scalarIn2 = 0;
-            scalarIn3 = 0;
+            scalarIn[0] = 0;
+            scalarIn[1] = 0;
+            scalarIn[2] = 0;
+            scalarIn[3] = 0;
           }
-          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),1,&scalarIn0,4,0,0);
+          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),1,scalarIn,4,0,0);
           return 0;
         }
       }
       else {
         if (pname == 0xde) {
-          scalarIn0 = *values;
-          scalarIn1 = (uint)*(byte *)(ctx + GLD_swapIntervalDenominator);
-          *(char *)(ctx + GLD_swapIntervalNumerator) = (char)scalarIn0;
-          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),2,&scalarIn0,2,0,0);
+          scalarIn[0] = *values;
+          scalarIn[1] = (uint)*(byte *)(ctx + GLD_swapIntervalDenominator);
+          *(char *)(ctx + GLD_swapIntervalNumerator) = (char)scalarIn[0];
+          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),2,scalarIn,2,0,0);
           return 0;
         }
         if (pname == 0xec) {
@@ -2705,7 +2702,7 @@ loopSetConnectionOrError:
       if (pname != 0x132) goto loopSetConnectionOrError;
       connectionOrError = *(undefined4 *)(ctx + GLD_connect);
       selector = 0x10;
-      scalarIn0 = (uint)(*values != 0);
+      scalarIn[0] = (uint)(*values != 0);
       *(bool *)(ctx + GLD_surfaceVolatile) = *values != 0;
     }
     else {
@@ -2714,13 +2711,13 @@ loopSetConnectionOrError:
         if (statusOrObject == 0) {
           return 0;
         }
-        scalarIn0 = *(uint *)(statusOrObject + 0x228);
+        scalarIn[0] = *(uint *)(statusOrObject + 0x228);
       }
       else {
         if (pname == 0x1f96) {
-          scalarIn0 = *values;
-          scalarIn1 = values[1];
-          if (scalarIn0 == 0) {
+          scalarIn[0] = *values;
+          scalarIn[1] = values[1];
+          if (scalarIn[0] == 0) {
             *(uint *)(ctx + GLD_drawableFlags) = *(uint *)(ctx + GLD_drawableFlags) & 0xffffffef;
             *(undefined1 *)(*(int *)(ctx + GLD_capsBlock) + 0x26) = 0;
           }
@@ -2729,7 +2726,7 @@ loopSetConnectionOrError:
             *(undefined1 *)(*(int *)(ctx + GLD_capsBlock) + 0x26) = 1;
           }
           statusOrObject = _io_connect_method_scalarI_structureI
-                            (*(undefined4 *)(ctx + GLD_connect),0x13,&scalarIn0,2,0,0);
+                            (*(undefined4 *)(ctx + GLD_connect),0x13,scalarIn,2,0,0);
           connectionOrError = 0x2712;
           goto joined_r0x000058fc;
         }
@@ -2765,15 +2762,15 @@ loopSetConnectionOrError:
         if (statusOrObject == 0) {
           return 0;
         }
-        scalarIn0 = *(uint *)(statusOrObject + 0x34);
+        scalarIn[0] = *(uint *)(statusOrObject + 0x34);
       }
-      if (scalarIn0 == 0) {
+      if (scalarIn[0] == 0) {
         return 0;
       }
       connectionOrError = *(undefined4 *)(ctx + GLD_connect);
       selector = 0xf;
     }
-    _io_connect_method_scalarI_structureI(connectionOrError,selector,&scalarIn0,1,0,0);
+    _io_connect_method_scalarI_structureI(connectionOrError,selector,scalarIn,1,0,0);
   }
   return 0;
 }
@@ -2791,9 +2788,7 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
   undefined4 returnCode;
   uint texture;
   undefined4 outCount;
-  uint scalarOut0;
-  uint scalarOut1;
-  uint scalarOut2;
+  uint scalarOut [3];
   
   if (values == (uint *)0x0) {
     return 0x271e;
@@ -2846,9 +2841,9 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
   }
   outCount = 3;
   status = _io_connect_method_scalarI_scalarO
-                    (*(undefined4 *)(ctx + GLD_connect),6,values,1,&scalarOut0,&outCount);
+                    (*(undefined4 *)(ctx + GLD_connect),6,values,1,scalarOut,&outCount);
   if (status == 0) {
-    switch(scalarOut0 & 0xf) {
+    switch(scalarOut[0] & 0xf) {
     case 3:
       *values = 0x1908;
       values[1] = 0x8366;
@@ -2883,8 +2878,8 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
       values[1] = (uint)((unsigned char *)0x00001406U);
     }
     returnCode = 0;
-    values[2] = scalarOut1;
-    values[3] = scalarOut2;
+    values[2] = scalarOut[1];
+    values[3] = scalarOut[2];
   }
   else {
 setReturnCode2722:
@@ -3123,11 +3118,9 @@ int _gldDestroyMemoryPluginData(ctx, pluginData)
   int ctx;
   int *pluginData;
 {
-  int updatedRefCount;
   int *refCountSlot;
   int oldRefCount;
   int pluginRecord;
-  char reservation;
   byte crBits;
   
   crBits = (pluginData == (int *)0x0) << 1;
@@ -3139,14 +3132,7 @@ int _gldDestroyMemoryPluginData(ctx, pluginData)
       }
       ((int (*)())_gldFinishMemoryPluginData)(ctx,pluginData);
       refCountSlot = (int *)(pluginRecord + 0x10);
-      do {
-        oldRefCount = *refCountSlot;
-        if (reservation != '\0') {
-          updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
-          *refCountSlot = updatedRefCount;
-          crBits = 2;
-        }
-      } while (!(bool)(crBits >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountSlot,-0x10000);
       if (oldRefCount == 0x10000) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,pluginRecord,1,0,0);
       }
@@ -3163,12 +3149,9 @@ int _gldReclaimBuffer(ctx, buffer)
   int ctx;
   int buffer;
 {
-  int updatedRefCount;
   int *pluginData;
   int oldRefCount;
   int pluginRecord;
-  char reservation;
-  byte crBits;
   
   pluginData = *(int **)(buffer + 8);
   if (pluginData != (int *)0x0) {
@@ -3179,14 +3162,7 @@ int _gldReclaimBuffer(ctx, buffer)
       }
       ((int (*)())gld_waitBufferStamp)(ctx,buffer);
       pluginData = (int *)(pluginRecord + 0x10);
-      do {
-        oldRefCount = *pluginData;
-        if (reservation != '\0') {
-          updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,pluginData);
-          *pluginData = updatedRefCount;
-          crBits = 2;
-        }
-      } while (!(bool)(crBits >> 1 & 1));
+      oldRefCount = atomicAddWord(pluginData,-0x10000);
       if (oldRefCount == 0x10000) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,pluginRecord,1,0,0);
       }
@@ -3221,17 +3197,12 @@ int gld_setBufferAgpRefBacking(ctx, buffer, requestArg0, requestArg1, requestArg
   int *oldRefCountPtr;
   int *newRefCountPtr;
   int oldRefCountValue;
-  int newRefCountStored;
-  int oldRefCountStored;
   int *backingRecord;
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined1 outHandleUnused [4];
-  int newBacking;
+  int outStruct [2];
   
   backingRecord = *(int **)(buffer + 8);
   if (backingRecord == (int *)0x0) {
@@ -3251,30 +3222,17 @@ int gld_setBufferAgpRefBacking(ctx, buffer, requestArg0, requestArg1, requestArg
   *(undefined4 *)(buffer + 0x1c) = requestArg2;
   outSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + 4),10,buffer + 0x10,0x14,outHandleUnused,&outSize);
+                    (*(undefined4 *)(ctx + 4),10,buffer + 0x10,0x14,outStruct,&outSize);
   if (status == 0) {
-    **(int **)(buffer + 8) = newBacking;
-    newRefCountPtr = (int *)(newBacking + 0x10);
-    do {
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    **(int **)(buffer + 8) = outStruct[1];
+    newRefCountPtr = (int *)(outStruct[1] + 0x10);
+    atomicAddWord(newRefCountPtr,0x10000);
     succeeded = 1;
-    *(undefined1 *)(newBacking + 0x14) = 1;
+    *(undefined1 *)(outStruct[1] + 0x14) = 1;
   }
   if (oldBacking != 0) {
     oldRefCountPtr = (int *)(oldBacking + 0x10);
-    do {
-      oldRefCountValue = *oldRefCountPtr;
-      if (reservation != '\0') {
-        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-        *oldRefCountPtr = oldRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
     if (oldRefCountValue == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
@@ -3294,17 +3252,12 @@ int gld_setBufferNewTextureBacking(ctx, buffer, requestArg0, requestArg1, reques
   int *oldRefCountPtr;
   int *newRefCountPtr;
   int oldRefCountValue;
-  int newRefCountStored;
-  int oldRefCountStored;
   int *backingRecord;
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined4 outHandle;
-  int newBacking;
+  int outStruct [2];
   
   backingRecord = *(int **)(buffer + 8);
   if (backingRecord == (int *)0x0) {
@@ -3325,31 +3278,18 @@ int gld_setBufferNewTextureBacking(ctx, buffer, requestArg0, requestArg1, reques
   *(undefined4 *)(buffer + 0x20) = requestArg3;
   outSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + 4),10,buffer + 0x10,0x14,&outHandle,&outSize);
+                    (*(undefined4 *)(ctx + 4),10,buffer + 0x10,0x14,outStruct,&outSize);
   if (status == 0) {
-    newRefCountPtr = (int *)(newBacking + 0x10);
-    **(int **)(buffer + 8) = newBacking;
-    do {
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    newRefCountPtr = (int *)(outStruct[1] + 0x10);
+    **(int **)(buffer + 8) = outStruct[1];
+    atomicAddWord(newRefCountPtr,0x10000);
     succeeded = 1;
-    *(undefined1 *)(newBacking + 0x14) = 1;
-    *(undefined4 *)(*(int *)(buffer + 8) + 4) = outHandle;
+    *(undefined1 *)(outStruct[1] + 0x14) = 1;
+    *(undefined4 *)(*(int *)(buffer + 8) + 4) = outStruct[0];
   }
   if (oldBacking != 0) {
     oldRefCountPtr = (int *)(oldBacking + 0x10);
-    do {
-      oldRefCountValue = *oldRefCountPtr;
-      if (reservation != '\0') {
-        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-        *oldRefCountPtr = oldRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
     if (oldRefCountValue == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }

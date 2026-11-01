@@ -34,7 +34,6 @@ use	FUN_0002a3d0	iVar22	prepareResult	INFERRED	return value of FUN_0001e280(ctx,
 use	FUN_0002a3d0	iVar22	unitSlotPtr	CONFIRMED	ctx, then -4 per iteration: walks the unit object slots from the top	^\s*iVar22\ =\ param_1;$	+1
 use	FUN_0002a3d0	iVar22	unitSlotPtr	CONFIRMED	ctx, then -4 per iteration: walks the unit object slots from the top	^\s*if\ \(\*\(int\ \*\)\(iVar22\ \+\ 0x1c8\)\ !=\ 0\)\ \{$	+1
 use	FUN_0002a3d0	iVar22	unitSlotPtr	CONFIRMED	ctx, then -4 per iteration: walks the unit object slots from the top	^\s*iVar22\ =\ iVar22\ \+\ \-4;$	+1
-use	FUN_0002a3d0	iVar22	storeResult	CONFIRMED	result of the store-conditional that bumps the +0x10 word of the surface object	^\s*iVar22\ =\ storeWordConditionalIndexed\(\*piVar21\ \+\ 0x10000,0,piVar21\);$	+2
 use	FUN_0002a3d0	iVar22	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table	^\s*iVar22\ =\ 0;$	+1
 use	FUN_0002a3d0	iVar22	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table	^\s*if\ \(\(iVar22\ ==\ 0\)\ \|\|\ \(iVar34\ !=\ 0\)\)\ \{$	+2
 use	FUN_0002a3d0	iVar22	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table	^\s*bVar1\ =\ iVar22\ !=\ 0xf;$	+1
@@ -49,7 +48,6 @@ use	FUN_0002a3d0	iVar34	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound tex
 use	FUN_0002a3d0	iVar34	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit	^\s*if\ \(\(iVar22\ ==\ 0\)\ \|\|\ \(iVar34\ !=\ 0\)\)\ \{$	+2
 local	FUN_0002a3d0	iVar36	targetsLeft	CONFIRMED	5 targets per unit row: loop counter over the 5 slots
 use	FUN_0002a3d0	piVar21	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*piVar21\ =\ puVar30\ \+\ 4;$	+1
-use	FUN_0002a3d0	piVar21	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*iVar22\ =\ storeWordConditionalIndexed\(\*piVar21\ \+\ 0x10000,0,piVar21\);$	+2
 use	FUN_0002a3d0	piVar21	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects	^\s*piVar21\ =\ \(int\ \*\)\(iVar26\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\);$	+1
 use	FUN_0002a3d0	piVar21	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects	^\s*if\ \(iVar34\ ==\ \*piVar21\)\ \{$	+1
 use	FUN_0002a3d0	piVar21	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects	^\s*piVar21\ =\ piVar21\ \+\ 1;$	+1

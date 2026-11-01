@@ -488,7 +488,6 @@ int gld_ensureTextureBackingSized2(ctx, texture, requestArg0, requestArg1)
   int requestArg1;
 {
   int *newRefCountPtr;
-  int newRefCountStored;
   int status;
   int backingCursor;
   int texImages;
@@ -499,15 +498,12 @@ int gld_ensureTextureBackingSized2(ctx, texture, requestArg0, requestArg1)
   ushort *texImagesMaskPtr;
   int *oldRefCountPtr;
   uint maskCount;
-  int oldRefCountStored;
   undefined4 succeeded;
   int oldRefCountValue;
   int currentBacking;
-  char reservation;
   byte cr0Bits;
   undefined4 outSize;
-  undefined4 outHandle;
-  int newBacking;
+  int outStruct [2];
   
   currentBacking = texture[0xd];
   if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x03')) || (requestArg0 != texture[2])) ||
@@ -516,14 +512,7 @@ loopStoreTexture:
     *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     if (currentBacking != 0) {
       oldRefCountPtr = (int *)(currentBacking + 0x10);
-      do {
-        oldRefCountValue = *oldRefCountPtr;
-        if (reservation != '\0') {
-          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-          *oldRefCountPtr = oldRefCountStored;
-          cr0Bits = 2;
-        }
-      } while (!(bool)(cr0Bits >> 1 & 1));
+      oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
       if (oldRefCountValue == 0x10000) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
@@ -534,21 +523,15 @@ loopStoreTexture:
     texture[1] = 3;
     outSize = 8;
     status = _io_connect_method_structureI_structureO
-                       (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,&outHandle,&outSize);
+                       (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outStruct,&outSize);
     succeeded = 0;
     if (status == 0) {
-      texture[0xd] = newBacking;
-      newRefCountPtr = (int *)(newBacking + 0x10);
-      do {
-        if (reservation != '\0') {
-          newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-          *newRefCountPtr = newRefCountStored;
-          cr0Bits = 2;
-        }
-      } while (!(bool)(cr0Bits >> 1 & 1));
+      texture[0xd] = outStruct[1];
+      newRefCountPtr = (int *)(outStruct[1] + 0x10);
+      atomicAddWord(newRefCountPtr,0x10000);
       succeeded = 1;
-      *texture = outHandle;
-      *(undefined1 *)(newBacking + 0x14) = 1;
+      *texture = outStruct[0];
+      *(undefined1 *)(outStruct[1] + 0x14) = 1;
     }
   }
   else {
@@ -600,7 +583,6 @@ int gld_ensureTextureAgpRefBacking(ctx, texture, requestArg2)
   int requestArg2;
 {
   int *newRefCountPtr;
-  int newRefCountStored;
   int status;
   int backingCursor;
   int texImages;
@@ -611,15 +593,12 @@ int gld_ensureTextureAgpRefBacking(ctx, texture, requestArg2)
   ushort *texImagesMaskPtr;
   int *oldRefCountPtr;
   uint maskCount;
-  int oldRefCountStored;
   undefined4 succeeded;
   int oldRefCountValue;
   int currentBacking;
-  char reservation;
   byte cr0Bits;
   undefined4 outSize;
-  undefined4 outHandle;
-  int newBacking;
+  int outStruct [2];
   
   currentBacking = texture[0xd];
   if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x06')) || (texture[2] != 0)) ||
@@ -628,14 +607,7 @@ loopStoreTexture:
     *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     if (currentBacking != 0) {
       oldRefCountPtr = (int *)(currentBacking + 0x10);
-      do {
-        oldRefCountValue = *oldRefCountPtr;
-        if (reservation != '\0') {
-          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-          *oldRefCountPtr = oldRefCountStored;
-          cr0Bits = 2;
-        }
-      } while (!(bool)(cr0Bits >> 1 & 1));
+      oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
       if (oldRefCountValue == 0x10000) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
@@ -647,21 +619,15 @@ loopStoreTexture:
     texture[2] = 0;
     outSize = 8;
     status = _io_connect_method_structureI_structureO
-                       (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,&outHandle,&outSize);
+                       (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outStruct,&outSize);
     succeeded = 0;
     if (status == 0) {
-      texture[0xd] = newBacking;
-      newRefCountPtr = (int *)(newBacking + 0x10);
-      do {
-        if (reservation != '\0') {
-          newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-          *newRefCountPtr = newRefCountStored;
-          cr0Bits = 2;
-        }
-      } while (!(bool)(cr0Bits >> 1 & 1));
+      texture[0xd] = outStruct[1];
+      newRefCountPtr = (int *)(outStruct[1] + 0x10);
+      atomicAddWord(newRefCountPtr,0x10000);
       succeeded = 1;
-      *texture = outHandle;
-      *(undefined1 *)(newBacking + 0x14) = 1;
+      *texture = outStruct[0];
+      *(undefined1 *)(outStruct[1] + 0x14) = 1;
     }
   }
   else {
@@ -716,17 +682,12 @@ int gld_setTextureAgpRefBacking(ctx, texture, requestArg0, requestArg1, requestA
 {
   int *oldRefCountPtr;
   int oldRefCountValue;
-  int newRefCountStored;
-  int oldRefCountStored;
   int *newRefCountPtr;
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined1 outHandleUnused [4];
-  int newBacking;
+  int outStruct [2];
   
   succeeded = 0;
   texture[2] = requestArg0;
@@ -738,33 +699,20 @@ int gld_setTextureAgpRefBacking(ctx, texture, requestArg0, requestArg1, requestA
   texture[0xd] = 0;
   outSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outHandleUnused,&outSize);
+                    (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outStruct,&outSize);
   if (status == 0) {
-    texture[0xd] = newBacking;
-    newRefCountPtr = (int *)(newBacking + 0x10);
-    do {
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    texture[0xd] = outStruct[1];
+    newRefCountPtr = (int *)(outStruct[1] + 0x10);
+    atomicAddWord(newRefCountPtr,0x10000);
     succeeded = 1;
-    *(undefined1 *)(newBacking + 0x14) = 1;
-    if (oldBacking != newBacking) {
+    *(undefined1 *)(outStruct[1] + 0x14) = 1;
+    if (oldBacking != outStruct[1]) {
       *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     }
   }
   if (oldBacking != 0) {
     oldRefCountPtr = (int *)(oldBacking + 0x10);
-    do {
-      oldRefCountValue = *oldRefCountPtr;
-      if (reservation != '\0') {
-        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-        *oldRefCountPtr = oldRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
     if (oldRefCountValue == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
@@ -783,17 +731,12 @@ int gld_setTextureNewTextureBacking(ctx, texture, requestArg0, requestArg1, requ
 {
   int *oldRefCountPtr;
   int oldRefCountValue;
-  int newRefCountStored;
-  int oldRefCountStored;
   int *newRefCountPtr;
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined4 outHandle;
-  int newBacking;
+  int outStruct [2];
   
   succeeded = 0;
   texture[2] = requestArg0;
@@ -806,34 +749,21 @@ int gld_setTextureNewTextureBacking(ctx, texture, requestArg0, requestArg1, requ
   texture[0xd] = 0;
   outSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,&outHandle,&outSize);
+                    (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outStruct,&outSize);
   if (status == 0) {
-    texture[0xd] = newBacking;
-    newRefCountPtr = (int *)(newBacking + 0x10);
-    do {
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    texture[0xd] = outStruct[1];
+    newRefCountPtr = (int *)(outStruct[1] + 0x10);
+    atomicAddWord(newRefCountPtr,0x10000);
     succeeded = 1;
-    *(byte *)(newBacking + 0x14) = *(byte *)(newBacking + 0x14) | 1;
-    *texture = outHandle;
-    if (oldBacking != newBacking) {
+    *(byte *)(outStruct[1] + 0x14) = *(byte *)(outStruct[1] + 0x14) | 1;
+    *texture = outStruct[0];
+    if (oldBacking != outStruct[1]) {
       *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     }
   }
   if (oldBacking != 0) {
     oldRefCountPtr = (int *)(oldBacking + 0x10);
-    do {
-      oldRefCountValue = *oldRefCountPtr;
-      if (reservation != '\0') {
-        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-        *oldRefCountPtr = oldRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
     if (oldRefCountValue == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
@@ -850,18 +780,13 @@ int gld_ensureTextureSurfaceBacking(ctx, texture, requestArg0, requestArg1, requ
   int requestArg2;
 {
   int *newRefCountPtr;
-  int newRefCountStored;
   int status;
-  int oldRefCountStored;
   undefined4 backingStillValid;
   int *oldRefCountPtr;
   int currentBacking;
   int oldRefCountValue;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined1 outHandleUnused [4];
-  int newBacking;
+  int outStruct [2];
   
   currentBacking = texture[0xd];
   if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\0')) || (requestArg0 != texture[2])) ||
@@ -869,14 +794,7 @@ int gld_ensureTextureSurfaceBacking(ctx, texture, requestArg0, requestArg1, requ
     *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     if (currentBacking != 0) {
       oldRefCountPtr = (int *)(currentBacking + 0x10);
-      do {
-        oldRefCountValue = *oldRefCountPtr;
-        if (reservation != '\0') {
-          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-          *oldRefCountPtr = oldRefCountStored;
-          cr0Bits = 2;
-        }
-      } while (!(bool)(cr0Bits >> 1 & 1));
+      oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
       if (oldRefCountValue == 0x10000) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
@@ -888,15 +806,12 @@ int gld_ensureTextureSurfaceBacking(ctx, texture, requestArg0, requestArg1, requ
     texture[1] = 0;
     outSize = 8;
     status = _io_connect_method_structureI_structureO
-                      (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outHandleUnused,&outSize);
+                      (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outStruct,&outSize);
     backingStillValid = 0;
     if (status == 0) {
-      texture[0xd] = newBacking;
-      newRefCountPtr = (int *)(newBacking + 0x10);
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-      }
+      texture[0xd] = outStruct[1];
+      newRefCountPtr = (int *)(outStruct[1] + 0x10);
+      atomicAddWord(newRefCountPtr,0x10000);
       *texture = 0;
       backingStillValid = 1;
     }
@@ -911,32 +826,20 @@ int gld_ensureTextureGlobalBacking(ctx, texture, requestArg0)
   int requestArg0;
 {
   int *newRefCountPtr;
-  int newRefCountStored;
   int status;
-  int oldRefCountStored;
   undefined4 backingStillValid;
   int *oldRefCountPtr;
   int currentBacking;
   int oldRefCountValue;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined1 outHandleUnused [4];
-  int newBacking;
+  int outStruct [2];
   
   currentBacking = texture[0xd];
   if (((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x01')) || (backingStillValid = 1, requestArg0 != texture[2])) {
     *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     if (currentBacking != 0) {
       oldRefCountPtr = (int *)(currentBacking + 0x10);
-      do {
-        oldRefCountValue = *oldRefCountPtr;
-        if (reservation != '\0') {
-          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-          *oldRefCountPtr = oldRefCountStored;
-          cr0Bits = 2;
-        }
-      } while (!(bool)(cr0Bits >> 1 & 1));
+      oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
       if (oldRefCountValue == 0x10000) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
@@ -946,15 +849,12 @@ int gld_ensureTextureGlobalBacking(ctx, texture, requestArg0)
     texture[1] = 1;
     outSize = 8;
     status = _io_connect_method_structureI_structureO
-                      (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outHandleUnused,&outSize);
+                      (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outStruct,&outSize);
     backingStillValid = 0;
     if (status == 0) {
-      texture[0xd] = newBacking;
-      newRefCountPtr = (int *)(newBacking + 0x10);
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-      }
+      texture[0xd] = outStruct[1];
+      newRefCountPtr = (int *)(outStruct[1] + 0x10);
+      atomicAddWord(newRefCountPtr,0x10000);
       *texture = 0;
       backingStillValid = 1;
     }
@@ -1162,12 +1062,10 @@ int _gldModifyVertexArray(ctx, vertexArray)
   int *vertexArray;
 {
   bool retired;
-  int updatedRefCount;
   uint stateMismatch;
   int *refCountSlot;
   int backing;
   int oldRefCount;
-  char reservation;
   
   _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
   backing = vertexArray[0x8a];
@@ -1183,14 +1081,7 @@ int _gldModifyVertexArray(ctx, vertexArray)
       if (stateMismatch == 0) goto callPthreadMutexUnlock;
     }
     refCountSlot = (int *)(backing + 0x10);
-    do {
-      oldRefCount = *refCountSlot;
-      if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
-        *refCountSlot = updatedRefCount;
-        retired = true;
-      }
-    } while (!retired);
+    oldRefCount = atomicAddWord(refCountSlot,-0x10000);
     if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,backing,1,0,0);
     }
@@ -1206,12 +1097,9 @@ int _gldReclaimVertexArray(ctx, vertexArray)
   int ctx;
   int vertexArray;
 {
-  int updatedRefCount;
   int *refCountSlot;
   int oldRefCount;
   int backing;
-  char reservation;
-  byte crBits;
   
   if (*(int *)(ctx + GLD_currentVertexArray) == vertexArray) {
     *(undefined4 *)(ctx + GLD_currentVertexArray) = 0;
@@ -1224,14 +1112,7 @@ int _gldReclaimVertexArray(ctx, vertexArray)
     }
     ((int (*)())gld_waitVertexArrayStamp)(ctx,vertexArray);
     refCountSlot = (int *)(backing + 0x10);
-    do {
-      oldRefCount = *refCountSlot;
-      if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
-        *refCountSlot = updatedRefCount;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountSlot,-0x10000);
     if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,backing,1,0,0);
     }
@@ -1260,17 +1141,12 @@ int gld_setVertexArrayAgpRefBacking(ctx, vertexArray, requestArg0, requestArg1, 
 {
   int *oldRefCountPtr;
   int oldRefCountValue;
-  int newRefCountStored;
-  int oldRefCountStored;
   int *newRefCountPtr;
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined1 outHandleUnused [4];
-  int newBacking;
+  int outStruct [2];
   
   succeeded = 0;
   *(undefined4 *)(vertexArray + 0x234) = requestArg0;
@@ -1282,30 +1158,17 @@ int gld_setVertexArrayAgpRefBacking(ctx, vertexArray, requestArg0, requestArg1, 
   *(undefined4 *)(vertexArray + 0x228) = 0;
   outSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + 4),10,vertexArray + 0x230,0x14,outHandleUnused,&outSize);
+                    (*(undefined4 *)(ctx + 4),10,vertexArray + 0x230,0x14,outStruct,&outSize);
   if (status == 0) {
-    *(int *)(vertexArray + 0x228) = newBacking;
-    newRefCountPtr = (int *)(newBacking + 0x10);
-    do {
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    *(int *)(vertexArray + 0x228) = outStruct[1];
+    newRefCountPtr = (int *)(outStruct[1] + 0x10);
+    atomicAddWord(newRefCountPtr,0x10000);
     succeeded = 1;
-    *(undefined1 *)(newBacking + 0x14) = 1;
+    *(undefined1 *)(outStruct[1] + 0x14) = 1;
   }
   if (oldBacking != 0) {
     oldRefCountPtr = (int *)(oldBacking + 0x10);
-    do {
-      oldRefCountValue = *oldRefCountPtr;
-      if (reservation != '\0') {
-        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-        *oldRefCountPtr = oldRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
     if (oldRefCountValue == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
@@ -1324,17 +1187,12 @@ int gld_setVertexArrayNewTextureBacking(ctx, vertexArray, requestArg0, requestAr
 {
   int *oldRefCountPtr;
   int oldRefCountValue;
-  int newRefCountStored;
-  int oldRefCountStored;
   int *newRefCountPtr;
   int status;
   undefined4 succeeded;
   int oldBacking;
-  char reservation;
-  byte cr0Bits;
   undefined4 outSize;
-  undefined4 outHandle;
-  int newBacking;
+  int outStruct [2];
   
   succeeded = 0;
   *(undefined4 *)(vertexArray + 0x234) = requestArg0;
@@ -1347,31 +1205,18 @@ int gld_setVertexArrayNewTextureBacking(ctx, vertexArray, requestArg0, requestAr
   *(undefined4 *)(vertexArray + 0x228) = 0;
   outSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + 4),10,vertexArray + 0x230,0x14,&outHandle,&outSize);
+                    (*(undefined4 *)(ctx + 4),10,vertexArray + 0x230,0x14,outStruct,&outSize);
   if (status == 0) {
-    *(int *)(vertexArray + 0x228) = newBacking;
-    newRefCountPtr = (int *)(newBacking + 0x10);
-    do {
-      if (reservation != '\0') {
-        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
-        *newRefCountPtr = newRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    *(int *)(vertexArray + 0x228) = outStruct[1];
+    newRefCountPtr = (int *)(outStruct[1] + 0x10);
+    atomicAddWord(newRefCountPtr,0x10000);
     succeeded = 1;
-    *(undefined1 *)(newBacking + 0x14) = 1;
-    *(undefined4 *)(vertexArray + 0x22c) = outHandle;
+    *(undefined1 *)(outStruct[1] + 0x14) = 1;
+    *(undefined4 *)(vertexArray + 0x22c) = outStruct[0];
   }
   if (oldBacking != 0) {
     oldRefCountPtr = (int *)(oldBacking + 0x10);
-    do {
-      oldRefCountValue = *oldRefCountPtr;
-      if (reservation != '\0') {
-        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
-        *oldRefCountPtr = oldRefCountStored;
-        cr0Bits = 2;
-      }
-    } while (!(bool)(cr0Bits >> 1 & 1));
+    oldRefCountValue = atomicAddWord(oldRefCountPtr,-0x10000);
     if (oldRefCountValue == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }

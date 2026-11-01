@@ -2288,8 +2288,7 @@ int gld_readbackTextureLevel(ctx, texture, face, mipLevel, surfaceFormat, surfac
   int convertWidth;
   int convertHeight;
   undefined1 convertByte;
-  undefined4 requestHandle;
-  uint requestFaceLevel;
+  uint requestWords [2];
   int destAddress;
   undefined4 lookupField9c;
   
@@ -2366,9 +2365,9 @@ int gld_readbackTextureLevel(ctx, texture, face, mipLevel, surfaceFormat, surfac
   }
   if ((((uint)*(ushort *)((int)storage + face * 2 + 0x28) &
        ~(uint)*(ushort *)((int)storage + face * 2 + 0x1c)) >> (mipLevel & 0x3f) & 1) != 0) {
-    requestHandle = *storage;
-    requestFaceLevel = mipLevel | face << 0x10;
-    _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xd,&requestHandle,2,0,0);
+    requestWords[0] = *storage;
+    requestWords[1] = mipLevel | face << 0x10;
+    _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xd,requestWords,2,0,0);
   }
   if ((*(uint *)(scratchInt14 + 0x20) & 0x10000000) != 0) {
     gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(scratchInt14 + 0x1c));
@@ -2397,7 +2396,7 @@ int gld_readbackTextureLevel(ctx, texture, face, mipLevel, surfaceFormat, surfac
   lookupOut1Ptr = lookupOut1;
   blockRows = blockRows / (int)(uint)*(ushort *)(scratchInt13 + 2);
   lookupOut2Ptr = lookupOut2;
-  ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,&requestHandle,lookupOut0,lookupOut1Ptr,lookupOut2Ptr,
+  ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,requestWords,lookupOut0,lookupOut1Ptr,lookupOut2Ptr,
                lookupOut3,lookupOut4,lookupOut5);
   scratchUint10 = 0;
   convertMode = 2;
@@ -5798,7 +5797,6 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
   int scratchInt43;
   uint scratchUint44;
   int scratchInt45;
-  char reservation;
   byte scratchFlag46;
   uint scratchStack248;
   int srcSkipBytes;
@@ -6853,14 +6851,8 @@ loopCallPthreadMutexUnlock:
   *texPacket = 0x3e000000;
   surfaceObjectRef = *(undefined4 **)sourceSurface[2];
   surfaceRefPtr = surfaceObjectRef + 4;
-  do {
-    if (reservation != '\0') {
-      scratchInt20 = storeWordConditionalIndexed(*surfaceRefPtr + 0x10000,0,surfaceRefPtr);
-      *surfaceRefPtr = scratchInt20;
-      scratchFlag46 = 2;
-    }
-    hwContextTemplate = ptrTo_hwContextStateTemplate_001e88d0;
-  } while (!(bool)(scratchFlag46 >> 1 & 1));
+  atomicAddWord(surfaceRefPtr,0x10000);
+  hwContextTemplate = ptrTo_hwContextStateTemplate_001e88d0;
   texPacket[2] = *surfaceObjectRef;
   scratchInt20 = *(int *)*sourceSurface;
   texPacket[4] = level | face << 0x10;

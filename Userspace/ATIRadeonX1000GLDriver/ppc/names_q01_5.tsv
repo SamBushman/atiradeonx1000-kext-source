@@ -19,8 +19,6 @@ use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for th
 use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for the 0x800000 / 0x2000000 / 0x8000000 extra-variant bits	^\s*if\ \(\(uVar3\ \&\ 0x800000\)\ !=\ 0\)\ \{$	+1
 use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for the 0x800000 / 0x2000000 / 0x8000000 extra-variant bits	^\s*if\ \(\(uVar3\ \&\ 0x2000000\)\ !=\ 0\)\ \{$	+1
 use	FUN_0001ae20	uVar3	bufferMask	INFERRED	pixel-format word +0x10 tested for the 0x800000 / 0x2000000 / 0x8000000 extra-variant bits	^\s*if\ \(\(uVar3\ \&\ 0x8000000\)\ !=\ 0\)\ \{$	+1
-local	FUN_0001bac0	in_RESERVE	reservation	INFERRED	PowerPC reservation bit set by the lwarx of the compare-and-store loop (same idiom as _gldAllocVertexBuffer)
-local	FUN_0001bac0	in_cr0	crBits	INFERRED	cr0 as produced by the stwcx. of the compare-and-store loop
 local	FUN_0001bac0	puVar2	packetBody	INFERRED	32-byte aligned body of the framebuffer-state packet {0x41000000, 4, width, height, ...}
 local	FUN_0001bac0	iVar9	attachmentsLeft	INFERRED	countdown of the four colour attachments
 local	FUN_0001bac0	uVar7	attachmentEnum	INFERRED	GL colour-attachment enum stored in framebufferObj[0..] (0x8ce0 + n); 0 = unused
@@ -32,26 +30,17 @@ use	FUN_0001bac0	puVar4	lastHeader	INFERRED	ctx+0x1d8: header word of the previo
 use	FUN_0001bac0	iVar5	attachmentIndex	INFERRED	index 0..3 of the colour attachment being described	^\s*iVar5\ =\ 0;$	+1
 use	FUN_0001bac0	iVar5	attachmentIndex	INFERRED	index 0..3 of the colour attachment being described	^\s*uVar7\ =\ \(uint\)\*\(ushort\ \*\)\(iVar5\ \*\ 2\ \+\ \*param_2\ \+\ 0x90\);$	+1
 use	FUN_0001bac0	iVar5	attachmentIndex	INFERRED	index 0..3 of the colour attachment being described	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
-use	FUN_0001bac0	iVar5	releaseResult	INFERRED	result of the store-conditional that drops the texture refcount	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
 use	FUN_0001bac0	iVar1	attachmentSlotOffset	INFERRED	(enum - 0x8ce0) * 4: byte offset into the attachment pointer array	^\s*iVar1\ =\ \(uVar7\ \-\ 0x8ce0\)\ \*\ 4;$	+1
 use	FUN_0001bac0	iVar1	attachmentSlotOffset	INFERRED	(enum - 0x8ce0) * 4: byte offset into the attachment pointer array	^\s*piVar6\[5\]\ =\ \(uint\)\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ param_2\[1\]\)\ \+\ 0x38\);$	+3
-use	FUN_0001bac0	iVar1	releaseStatus	INFERRED	result of the store-conditional that drops the texture refcount	^\s*iVar1\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
 use	FUN_0001bac0	piVar3	nextEntry	INFERRED	next free entry of the packet body	^\s*piVar3\ =\ puVar2\ \+\ 6;$	+1
 use	FUN_0001bac0	piVar3	nextEntry	INFERRED	next free entry of the packet body	^\s*piVar6\ =\ piVar3;$	+1
 use	FUN_0001bac0	piVar3	nextEntry	INFERRED	next free entry of the packet body	^\s*piVar3\ =\ piVar6\ \+\ 6;$	+1
 use	FUN_0001bac0	piVar3	nextEntry	INFERRED	depth entry slot of the packet body	^\s*\*piVar3\ =\ \-1;$	+1
 use	FUN_0001bac0	piVar3	nextEntry	INFERRED	depth entry slot of the packet body	^\s*\*piVar3\ =\ param_2\[0x2f\];$	+1
 use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ param_2\[1\]\)\ \+\ 0x34\)\ \+\ 0x10\);$	+1
-use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*iVar1\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+1
 use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_2\[1\]\ \+\ 0x10\)\ \+\ 0x34\)\ \+\ 0x10\);$	+1
-use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+1
 use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_2\[1\]\ \+\ 0x14\)\ \+\ 0x34\)\ \+\ 0x10\);$	+1
-use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$@2	+1
-use	FUN_0001bac0	iVar5	releaseResult	INFERRED	result of the store-conditional that drops the texture refcount	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$@2	+2
 use	FUN_0001ae20	uVar3	depthStencilPolicyBits	INFERRED	pixel-format word +0x18 before it is narrowed to a single depth choice (0x1c01 mask, bits 1/0x400/0x800)	^\s*else\ if\ \(\(uVar3\ \&\ 1\)\ ==\ 0\)\ \{$	+1
-use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*\*piVar3\ =\ iVar1;$	+1
-use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*\*piVar3\ =\ iVar5;$	+1
-use	FUN_0001bac0	piVar3	refCountWord	INFERRED	refcount word (texture backing +0x10) decremented by the store-conditional loop	^\s*\*piVar3\ =\ iVar5;$@2	+1
 local	FUN_0001c1c0	auStack_28	endpointRgb	INFERRED	the two 565 endpoints expanded to 8 bits: {r0, g0, b0, r1, g1, b1}
 local	FUN_0001c1c0	uVar1	texelBlue	INFERRED	blue byte of the looked-up endpoint (index 0 or 1)
 local	FUN_0001c1c0	iVar8	redSum	INFERRED	weighted sum of the red endpoints (1/3 or 2/3 mix numerator)

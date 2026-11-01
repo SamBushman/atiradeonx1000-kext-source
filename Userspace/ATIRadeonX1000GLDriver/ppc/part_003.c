@@ -55,13 +55,10 @@ int gld_applySampleConfiguration(ctx, sampleCount, sampleModeSelector)
   undefined4 sampleCount;
   int sampleModeSelector;
 {
-  uint scalarIn1;
+  uint scalarIn [4];
   bool usesPrimaryConfig;
   int pendingSampleCount;
-  uint scalarIn0;
   uint newDrawableFlags;
-  int scalarIn2;
-  int scalarIn3;
   
   if (ctx == (int *)0x0) {
     return 0;
@@ -119,15 +116,15 @@ checkCtx:
     ctx[0x55] = newDrawableFlags;
   }
   if ((newDrawableFlags & 0x20) == 0) {
-    scalarIn0 = ~(uint)*(byte *)(*(int *)(ptrTo_rendererLibraryState_001e88ac + 0xc) + *ctx);
+    scalarIn[0] = ~(uint)*(byte *)(*(int *)(ptrTo_rendererLibraryState_001e88ac + 0xc) + *ctx);
   }
   else {
-    scalarIn0 = *(uint *)(ctx[0x3e] + 8);
+    scalarIn[0] = *(uint *)(ctx[0x3e] + 8);
   }
-  scalarIn1 = newDrawableFlags & 0xffff3fc0;
-  scalarIn2 = ctx[0x3f];
-  scalarIn3 = ctx[0x40];
-  _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
+  scalarIn[1] = newDrawableFlags & 0xffff3fc0;
+  scalarIn[2] = ctx[0x3f];
+  scalarIn[3] = ctx[0x40];
+  _io_connect_method_scalarI_structureI(ctx[1],0,scalarIn,4,0,0);
   ((int (*)())gld_updateSampleConfig)(ctx);
   ((int (*)())gld_emitDirtyStatePackets)(ctx,0);
   *(undefined1 *)(ctx + 0xa91) = 1;
@@ -258,8 +255,7 @@ int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8
   uint pendingSampleFlag;
   undefined4 *drawable;
   uint *lastHeader;
-  uint scalarIn0;
-  uint scalarIn1;
+  uint scalarIn [2];
   
   needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,0,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
@@ -298,18 +294,18 @@ int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8
     if (*(char *)(ctx + 0x2a80) != pendingSwapIntervalMode) {
       *(char *)(ctx + 0x2a80) = pendingSwapIntervalMode;
       if (pendingSwapIntervalMode == '\x01') {
-        scalarIn1 = 0;
-        scalarIn0 = 0;
+        scalarIn[1] = 0;
+        scalarIn[0] = 0;
       }
       else if (pendingSwapIntervalMode == '\x02') {
-        scalarIn1 = 1;
-        scalarIn0 = 1;
+        scalarIn[1] = 1;
+        scalarIn[0] = 1;
       }
       else {
-        scalarIn0 = (uint)*(byte *)(ctx + 0x142);
-        scalarIn1 = (uint)*(byte *)(ctx + 0x146);
+        scalarIn[0] = (uint)*(byte *)(ctx + 0x142);
+        scalarIn[1] = (uint)*(byte *)(ctx + 0x146);
       }
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,&scalarIn0,2,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,scalarIn,2,0,0);
     }
     pendingSampleCount = *(int *)(ctx + 0x2a70);
     if (*(int *)(ctx + 0x2a84) == pendingSampleCount) {
@@ -340,30 +336,27 @@ int glFlush_impl_withSurfaceUpdate(ctx, passThroughArg2, scratchArg3, scratchArg
 {
   uint clearedFlags;
   undefined4 r4AfterIoCall;
-  undefined4 scalarIn0;
-  uint scalarIn1;
-  undefined4 scalarIn2;
-  undefined4 scalarIn3;
+  uint scalarIn [4];
   
   if (((*(uint *)(ctx + 0x154) & 0x800) != 0) && (*(int *)(ctx + 0x26a0) != 1)) {
     if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
       ((int (*)())gld_submitRing)(ctx,0x1000000);
     }
-    scalarIn1 = *(uint *)(ctx + 0x3c);
-    clearedFlags = scalarIn1 & 0xfffff7ff;
+    scalarIn[1] = *(uint *)(ctx + 0x3c);
+    clearedFlags = scalarIn[1] & 0xfffff7ff;
     *(uint *)(ctx + 0x3c) = clearedFlags;
     if (*(int *)(ctx + 0x150) == 0) {
       *(uint *)(ctx + 0x154) = clearedFlags;
     }
-    scalarIn2 = *(undefined4 *)(ctx + 0xfc);
-    scalarIn3 = *(undefined4 *)(ctx + 0x100);
-    scratchArg3 = &scalarIn0;
+    scalarIn[2] = *(undefined4 *)(ctx + 0xfc);
+    scalarIn[3] = *(undefined4 *)(ctx + 0x100);
+    scratchArg3 = scalarIn;
     scratchArg4 = 4;
     scratchArg5 = 0;
     scratchArg7 = *(undefined4 *)(*(int *)(ctx + 0xf8) + 8);
-    scalarIn1 = scalarIn1 & 0xffff37c0;
+    scalarIn[1] = scalarIn[1] & 0xffff37c0;
     scratchArg6 = 0;
-    scalarIn0 = scratchArg7;
+    scalarIn[0] = scratchArg7;
     _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0,scratchArg3,4,0,0);
     passThroughArg2 = r4AfterIoCall;
   }
@@ -441,8 +434,7 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
   uint pendingSampleFlag;
   undefined4 *drawable;
   uint *lastHeader;
-  uint scalarIn0;
-  uint scalarIn1;
+  uint scalarIn [2];
   
   needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
@@ -484,18 +476,18 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
     if (*(char *)(ctx + 0x2a80) != pendingSwapIntervalMode) {
       *(char *)(ctx + 0x2a80) = pendingSwapIntervalMode;
       if (pendingSwapIntervalMode == '\x01') {
-        scalarIn1 = 0;
-        scalarIn0 = 0;
+        scalarIn[1] = 0;
+        scalarIn[0] = 0;
       }
       else if (pendingSwapIntervalMode == '\x02') {
-        scalarIn1 = 1;
-        scalarIn0 = 1;
+        scalarIn[1] = 1;
+        scalarIn[0] = 1;
       }
       else {
-        scalarIn0 = (uint)*(byte *)(ctx + 0x142);
-        scalarIn1 = (uint)*(byte *)(ctx + 0x146);
+        scalarIn[0] = (uint)*(byte *)(ctx + 0x142);
+        scalarIn[1] = (uint)*(byte *)(ctx + 0x146);
       }
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,&scalarIn0,2,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,scalarIn,2,0,0);
     }
     pendingSampleCount = *(int *)(ctx + 0x2a70);
     if (*(int *)(ctx + 0x2a84) == pendingSampleCount) {
@@ -531,8 +523,7 @@ int gld_swapBuffersImpl(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3
   uint pendingSampleFlag;
   undefined4 *drawable;
   uint *lastHeader;
-  uint scalarIn0;
-  uint scalarIn1;
+  uint scalarIn [2];
   
   needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1,dirtyBitsArg,scratchR6,dirtyWord3,staleArgR8,staleArgR9);
   if (needsResolve != 0) {
@@ -571,18 +562,18 @@ int gld_swapBuffersImpl(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3
     if (*(char *)(ctx + 0x2a80) != pendingSwapIntervalMode) {
       *(char *)(ctx + 0x2a80) = pendingSwapIntervalMode;
       if (pendingSwapIntervalMode == '\x01') {
-        scalarIn1 = 0;
-        scalarIn0 = 0;
+        scalarIn[1] = 0;
+        scalarIn[0] = 0;
       }
       else if (pendingSwapIntervalMode == '\x02') {
-        scalarIn1 = 1;
-        scalarIn0 = 1;
+        scalarIn[1] = 1;
+        scalarIn[0] = 1;
       }
       else {
-        scalarIn0 = (uint)*(byte *)(ctx + 0x142);
-        scalarIn1 = (uint)*(byte *)(ctx + 0x146);
+        scalarIn[0] = (uint)*(byte *)(ctx + 0x142);
+        scalarIn[1] = (uint)*(byte *)(ctx + 0x146);
       }
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,&scalarIn0,2,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,scalarIn,2,0,0);
     }
     pendingSampleCount = *(int *)(ctx + 0x2a70);
     if (*(int *)(ctx + 0x2a84) == pendingSampleCount) {
@@ -854,13 +845,10 @@ int _gldAllocVertexBuffer(ctx, bufferKind, sizeInOut)
   byte *retireCounter;
   undefined4 kernelKind;
   int currentChunk;
-  char reservation;
   byte crBits;
   undefined4 structOutSize;
-  int chunk;
-  int chunkMemory;
-  undefined4 structIn0;
-  undefined4 structIn1;
+  int chunkOut [2];
+  uint structIn [5];
   
   requestedSize = *sizeInOut;
   structOutSize = 8;
@@ -893,25 +881,19 @@ int _gldAllocVertexBuffer(ctx, bufferKind, sizeInOut)
     kernelKind = 0xe;
   }
   if (*(int *)(ctx + GLD_vertexChunkList) == 0) {
-    structIn0 = 2;
-    structIn1 = 0x16000;
+    structIn[0] = 2;
+    structIn[1] = 0x16000;
     requestedSize = _io_connect_method_structureI_structureO
-                      (*(undefined4 *)(ctx + GLD_connect),10,&structIn0,0x14,&chunk,&structOutSize);
+                      (*(undefined4 *)(ctx + GLD_connect),10,structIn,0x14,chunkOut,&structOutSize);
     if (requestedSize != 0) {
       return 0;
     }
-    refCountSlot = (int *)(chunkMemory + 0x10);
-    *(int *)(chunk + 0x1c) = chunkMemory;
-    do {
-      if (reservation != '\0') {
-        requestedSize = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
-        *refCountSlot = requestedSize;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
-    *(undefined1 *)(chunkMemory + 0x14) = 1;
+    refCountSlot = (int *)(chunkOut[1] + 0x10);
+    *(int *)(chunkOut[0] + 0x1c) = chunkOut[1];
+    atomicAddWord(refCountSlot,0x10000);
+    *(undefined1 *)(chunkOut[1] + 0x14) = 1;
     *(undefined4 *)(ctx + GLD_vertexChunkCount) = 1;
-    *(int *)(chunk + 0x10) = chunk;
+    *(int *)(chunkOut[0] + 0x10) = chunkOut[0];
     goto setRequestedSize;
   }
   currentChunk = *(int *)(*(int *)(ctx + GLD_vertexChunkList) + 0x10);
@@ -921,27 +903,21 @@ int _gldAllocVertexBuffer(ctx, bufferKind, sizeInOut)
       return 0;
     }
 loopSetStructIn0:
-    structIn0 = 2;
-    structIn1 = 0x16000;
+    structIn[0] = 2;
+    structIn[1] = 0x16000;
     requestedSize = _io_connect_method_structureI_structureO
-                      (*(undefined4 *)(ctx + GLD_connect),10,&structIn0,0x14,&chunk,&structOutSize);
+                      (*(undefined4 *)(ctx + GLD_connect),10,structIn,0x14,chunkOut,&structOutSize);
     if (requestedSize != 0) {
 returnZero:
       return 0;
     }
-    refCountSlot = (int *)(chunkMemory + 0x10);
-    *(int *)(chunk + 0x1c) = chunkMemory;
-    do {
-      if (reservation != '\0') {
-        requestedSize = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
-        *refCountSlot = requestedSize;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
-    *(undefined1 *)(chunkMemory + 0x14) = 1;
+    refCountSlot = (int *)(chunkOut[1] + 0x10);
+    *(int *)(chunkOut[0] + 0x1c) = chunkOut[1];
+    atomicAddWord(refCountSlot,0x10000);
+    *(undefined1 *)(chunkOut[1] + 0x14) = 1;
     *(int *)(ctx + GLD_vertexChunkCount) = *(int *)(ctx + GLD_vertexChunkCount) + 1;
-    *(undefined4 *)(chunk + 0x10) = *(undefined4 *)(*(int *)(ctx + GLD_vertexChunkList) + 0x10);
-    *(int *)(*(int *)(ctx + GLD_vertexChunkList) + 0x10) = chunk;
+    *(undefined4 *)(chunkOut[0] + 0x10) = *(undefined4 *)(*(int *)(ctx + GLD_vertexChunkList) + 0x10);
+    *(int *)(*(int *)(ctx + GLD_vertexChunkList) + 0x10) = chunkOut[0];
   }
   else {
     if (*(int *)(currentChunk + 0x18) == *(int *)(ctx + GLD_submitEpoch)) {
@@ -973,15 +949,15 @@ returnZero:
       }
     }
     *(undefined4 *)(currentChunk + 0x14) = 0;
-    chunk = currentChunk;
+    chunkOut[0] = currentChunk;
   }
 setRequestedSize:
   requestedSize = *(int *)(ctx + GLD_submitEpoch);
-  *(int *)(ctx + GLD_vertexChunkList) = chunk;
-  *(undefined4 *)(chunk + 0xc) = kernelKind;
-  *(int *)(chunk + 0x18) = requestedSize + -1;
+  *(int *)(ctx + GLD_vertexChunkList) = chunkOut[0];
+  *(undefined4 *)(chunkOut[0] + 0xc) = kernelKind;
+  *(int *)(chunkOut[0] + 0x18) = requestedSize + -1;
   *sizeInOut = 0x800;
-  return chunk + 0x80;
+  return chunkOut[0] + 0x80;
 }
 
 /* gld_updateYInvertedFlag @ 0x1b4b0 (44 bytes) */
@@ -1288,8 +1264,6 @@ int gld_emitFramebufferState(ctx, framebufferObj)
 {
   int *refCountWord;
   int *nextEntry;
-  int releaseStatus;
-  int releaseResult;
   uint *lastHeader;
   int attachmentSlotOffset;
   undefined4 *packetBody;
@@ -1298,8 +1272,6 @@ int gld_emitFramebufferState(ctx, framebufferObj)
   int *entry;
   uint attachmentEnum;
   int attachmentDesc;
-  char reservation;
-  byte crBits;
   int attachmentsLeft;
   
   ((unsigned char *)0x00002b7c)[ctx] = 0;
@@ -1342,13 +1314,7 @@ int gld_emitFramebufferState(ctx, framebufferObj)
       entry[5] = (uint)*(byte *)(*(int *)(attachmentSlotOffset + framebufferObj[1]) + 0x38);
       *(undefined1 *)(*(int *)(attachmentSlotOffset + framebufferObj[1]) + 200) = 0;
       refCountWord = (int *)(*(int *)(*(int *)(attachmentSlotOffset + framebufferObj[1]) + 0x34) + 0x10);
-      do {
-        if (reservation != '\0') {
-          releaseStatus = storeWordConditionalIndexed(*refCountWord + 0x10000,0,refCountWord);
-          *refCountWord = releaseStatus;
-          crBits = 2;
-        }
-      } while (!(bool)(crBits >> 1 & 1));
+      atomicAddWord(refCountWord,0x10000);
     }
     nextEntry = entry + 6;
     attachmentIndex = attachmentIndex + 1;
@@ -1371,13 +1337,7 @@ int gld_emitFramebufferState(ctx, framebufferObj)
     entry[0xb] = (uint)*(byte *)(*(int *)(framebufferObj[1] + 0x10) + 0x38);
     *(undefined1 *)(*(int *)(framebufferObj[1] + 0x10) + 200) = 0;
     refCountWord = (int *)(*(int *)(*(int *)(framebufferObj[1] + 0x10) + 0x34) + 0x10);
-    do {
-      if (reservation != '\0') {
-        releaseResult = storeWordConditionalIndexed(*refCountWord + 0x10000,0,refCountWord);
-        *refCountWord = releaseResult;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    atomicAddWord(refCountWord,0x10000);
   }
   if (*(int *)(framebufferObj[1] + 0x14) == 0) {
     entry[0x11] = 0;
@@ -1396,13 +1356,7 @@ int gld_emitFramebufferState(ctx, framebufferObj)
     entry[0x11] = (uint)*(byte *)(*(int *)(framebufferObj[1] + 0x14) + 0x38);
     *(undefined1 *)(*(int *)(framebufferObj[1] + 0x14) + 200) = 0;
     refCountWord = (int *)(*(int *)(*(int *)(framebufferObj[1] + 0x14) + 0x34) + 0x10);
-    do {
-      if (reservation != '\0') {
-        releaseResult = storeWordConditionalIndexed(*refCountWord + 0x10000,0,refCountWord);
-        *refCountWord = releaseResult;
-        crBits = 2;
-      }
-    } while (!(bool)(crBits >> 1 & 1));
+    atomicAddWord(refCountWord,0x10000);
   }
   *(int **)(ctx + 0x298c) = entry + 0x4b;
   (**(code **)(ctx + 0x299c))(ctx + 0x240,entry + 0x4b);
@@ -2944,8 +2898,7 @@ int _gldPageoffBuffer(ctx, buffer)
   int waitStatus;
   undefined4 *pluginRecord;
   int handleOwner;
-  undefined4 scalarIn0;
-  undefined4 scalarIn1;
+  uint scalarIn [2];
   
   if (*(int *)(buffer + 8) != 0) {
     _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
@@ -2973,9 +2926,9 @@ int _gldPageoffBuffer(ctx, buffer)
         ((int (*)())gld_submitRing)(ctx,0x1000000);
       }
       if ((*(ushort *)(pluginRecord + 10) & ~*(ushort *)(pluginRecord + 7) & 1) != 0) {
-        scalarIn0 = *pluginRecord;
-        scalarIn1 = 0;
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xd,&scalarIn0,2,0,0);
+        scalarIn[0] = *pluginRecord;
+        scalarIn[1] = 0;
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xd,scalarIn,2,0,0);
       }
       handleOwner = *(int *)(*(int *)(buffer + 8) + 4);
       if ((*(uint *)(handleOwner + 0x20) & 0x10000000) != 0) {
@@ -3669,7 +3622,6 @@ int gld_drawVertexArray(ctx, drawKind, primitiveMode, first, count, indexType, d
   undefined *chunkCount;
   uint *refCountWord;
   int ring;
-  char reservation;
   uint scratchUint35;
   int scratchInt36;
   double staleFpr1;
@@ -3899,18 +3851,12 @@ code_r0x0001f1ac:
           packetPtr = drawPacket + 9;
           drawPacket[8] = *(undefined4 *)(*(int **)(ctx + GLD_currentVertexArray))[0x8a];
           scratchPtr28 = (int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 0x228) + 0x10);
-          if (reservation != '\0') {
-            casResult2 = storeWordConditionalIndexed(*scratchPtr28 + 0x10000,0,scratchPtr28);
-            *scratchPtr28 = casResult2;
-          }
+          atomicAddWord(scratchPtr28,0x10000);
           if (elementsInBuffer != 0) {
             packetPtr = drawPacket + 10;
             drawPacket[9] = **(undefined4 **)(*(int *)(ctx + GLD_currentVertexArray) + 0x228);
             scratchPtr28 = (int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 0x228) + 0x10);
-            if (reservation != '\0') {
-              casResult2 = storeWordConditionalIndexed(*scratchPtr28 + 0x10000,0,scratchPtr28);
-              *scratchPtr28 = casResult2;
-            }
+            atomicAddWord(scratchPtr28,0x10000);
           }
         }
         else {
@@ -3927,13 +3873,7 @@ code_r0x0001f1ac:
               refCountWord = scratchPtr15 + 4;
               *packetPtr = *scratchPtr15;
               packetPtr = packetPtr + 1;
-              do {
-                if (reservation != '\0') {
-                  casResult = storeWordConditionalIndexed(*refCountWord + 0x10000,0,refCountWord);
-                  *refCountWord = casResult;
-                  needStatePacket = true;
-                }
-              } while (!needStatePacket);
+              atomicAddWord(refCountWord,0x10000);
               scratchUint35 = scratchUint35 - 1;
             } while (scratchUint35 != 0);
           }
@@ -3943,13 +3883,7 @@ code_r0x0001f1ac:
             packetPtr = packetPtr + 1;
             scratchPtr28 = (int *)(**(int **)(*(int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 4) + 0x80) +
                                         8) + 0x10);
-            do {
-              if (reservation != '\0') {
-                casResult2 = storeWordConditionalIndexed(*scratchPtr28 + 0x10000,0,scratchPtr28);
-                *scratchPtr28 = casResult2;
-                needStatePacket = true;
-              }
-            } while (!needStatePacket);
+            atomicAddWord(scratchPtr28,0x10000);
           }
         }
         drawPacket[5] = ((int)packetPtr - (int)drawPacket >> 2) + 2;
