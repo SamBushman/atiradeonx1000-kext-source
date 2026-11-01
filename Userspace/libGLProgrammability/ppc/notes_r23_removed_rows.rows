@@ -1,0 +1,53 @@
+names_D6_art.tsv:47	local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:46	local	std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:45	local	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:44	local	std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux	bVar13	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:43	local	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase	bVar6	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:42	local	std__allocator_char___allocate	bVar4	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:41	local	TIntermAggregate__compileNode	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+names_D6_art.tsv:40	local	_updateExtensionBehavior	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+names_D6_art.tsv:39	local	_CPPWarningToInfoLog	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:38	local	TSymbolTable__dump	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:37	local	_ShCompile	bVar15	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:36	local	initializeSymbolTable	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:35	local	TParseContext__initializeExtensionBehavior	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+names_D6_art.tsv:34	local	TParseContext__addConstVectorNode	bVar12	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:33	local	TParseContext__extensionErrorCheck	bVar12	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:32	local	TParseContext__extensionErrorCheck	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+names_D6_art.tsv:31	local	TParseContext__nonInitErrorCheck	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+names_D6_art.tsv:28	local	TParseContext__constructorErrorCheck	bVar22	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:27	local	TParseContext__reservedErrorCheck	bVar8	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:25	local	TParseContext__error	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:23	local	ParseBranch	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:21	local	ParseLoop	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:19	local	ParseSelection	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:18	local	ParseAggregate	bVar7	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:16	local	ParseUnary	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:14	local	ParseBinary	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:13	local	ParseSymbol	bVar18	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:11	local	OutputConstantUnion	bVar11	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:10	local	OutputTreeText	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:9	local	TIntermediate__promoteConstantUnion	bVar11	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:8	local	TIntermBinary__promote	bVar13	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:7	local	TIntermediate__growAggregate	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+names_D6_art.tsv:6	local	TIntermediate__addConversion	bVar20	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:5	local	TIntermediate__setAggregateOperator	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:4	local	TIntermediate__addUnaryMath	bVar15	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:3	local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_D6_art.tsv:2	local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	bVar17	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+names_L1_fold.tsv:52	local	TIntermConstantUnion__fold	bVar32	reservationOk	INFERRED	lwarx/stwcx decrement loop of the std::string rep refcount: set to 2 once the conditional store succeeded, loop ends when bit 1 is set
+names_D6_execinit.tsv:25	use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*bVar30\ =\ \(ppuVar11\ ==\ \(undefined\ \*\*\)0x0\)\ <<\ 1;$	+1
+names_D6_execinit.tsv:3	local	TParseContext__executeInitializer	bVar30	cr0Flags	INFERRED	Ghidra models the condition register: (x==0)<<1 / the lwarx-stwcx loop test
+names_D6_arrayerr.tsv:128	use	TParseContext__arrayErrorCheck	ppuVar12	structTypeNameString	CONFIRMED	3Dlabs ParseHelper.cpp TParseContext::arrayErrorCheck (variant taking the TPublicType by value in registers/stack words); TString built from the struct type name	^\s*bVar22\ =\ \(ppuVar12\ ==\ \(undefined\ \*\*\)0x0\)\ <<\ 1;$	+1
+names_D6_arrayerr.tsv:13	local	TParseContext__arrayErrorCheck	in_cr0	cr0Reg	INFERRED	3Dlabs ParseHelper.cpp TParseContext::arrayErrorCheck (variant taking the TPublicType by value in registers/stack words); Ghidra condition-register artifact
+names_D6_arrayerr.tsv:12	local	TParseContext__arrayErrorCheck	bVar22	cr0Flags	INFERRED	3Dlabs ParseHelper.cpp TParseContext::arrayErrorCheck (variant taking the TPublicType by value in registers/stack words); Ghidra condition-register flag
+names_L1_yyparse.tsv:2	local	yyparse	in_cr0	cr0	INFERRED	condition-register field 0 of the lwarx/stwcx refcount decrement loops: set to 2 (EQ) after a successful conditional store, also the result of (x == 0) << 1
+names_D7_yy.tsv:21	use	yyparse	pTVar3	findFunctionResult	INFERRED	result of the call to TParseContext::findFunction (named by the dylib symbol)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$@4	+1	rhs	none
+names_D7_yy.tsv:11	use	yyparse	pTVar3	parseVectorFieldsResult	INFERRED	result of the call to TParseContext::parseVectorFields (named by the dylib symbol)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$@3	+1	rhs	none
+names_R1b.tsv:513	use	yyparse	psVar10	newString	INFERRED	pool allocation of 8 bytes (std::basic_string with pool_allocator is {allocator, _M_p}) on which the basic_string constructor C1 is run	^\s*in_cr0\ =\ \(psVar10\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$@4	+1	rhs	none
+names_R1b.tsv:489	use	yyparse	psVar10	newString	INFERRED	pool allocation of 8 bytes (std::basic_string with pool_allocator is {allocator, _M_p}) on which the basic_string constructor C1 is run	^\s*in_cr0\ =\ \(psVar10\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$@3	+1	rhs	none
+names_R1b.tsv:247	use	yyparse	psVar10	newString	INFERRED	pool allocation of 8 bytes (std::basic_string with pool_allocator is {allocator, _M_p}) on which the basic_string constructor C1 is run	^\s*in_cr0\ =\ \(psVar10\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$@2	+1	rhs	none
+names_R1b.tsv:231	use	yyparse	psVar10	newString	INFERRED	pool allocation of 8 bytes (std::basic_string with pool_allocator is {allocator, _M_p}) on which the basic_string constructor C1 is run	^\s*in_cr0\ =\ \(psVar10\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$	+1	rhs	none
+names_lpA_yyw.tsv:229	use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;$@2	+2
+names_lpA_yyw.tsv:221	use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;$	+2
+names_lpA_yyw5.tsv:15	use	yyparse	iVar55	queryResult	INFERRED	result of a virtual query (isArray/isMatrix/isVector/getBasicType/getAsConstantUnion/...) tested or dereferenced in this branch	^\s*in_cr0\ =\ \(iVar55\ ==\ 0\)\ <<\ 1;$	+4

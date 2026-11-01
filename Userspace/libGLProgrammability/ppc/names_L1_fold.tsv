@@ -49,7 +49,6 @@ local	TIntermConstantUnion__fold	local_f8	tailTypeWord6	UNKNOWN	word 6 of the TT
 local	TIntermConstantUnion__fold	local_f4	tailTypeWord7	UNKNOWN	word 7 of the TType copy
 local	TIntermConstantUnion__fold	local_f0	tailTypeWord8	UNKNOWN	word 8 of the TType copy
 local	TIntermConstantUnion__fold	local_ec	tailTypeBits	INFERRED	TType bit-field word (basic type in bits 19-24: 1 float, 2 int, 3 bool; qualifier/size bits below), copied into new TIntermConstantUnion nodes
-local	TIntermConstantUnion__fold	bVar32	reservationOk	INFERRED	lwarx/stwcx decrement loop of the std::string rep refcount: set to 2 once the conditional store succeeded, loop ends when bit 1 is set
 local	TIntermConstantUnion__fold	ppuVar29	refCountPtr	INFERRED	pointer to the std::string rep refcount word (string data pointer - 4), read and conditionally stored in the decrement loop
 local	TIntermConstantUnion__fold	ppuVar4	refCountPtrCopy	INFERRED	same refcount word pointer, copy used in the decrement loop of a second string temporary
 local	TIntermConstantUnion__fold	pcVar30	message	CONFIRMED	every definition is a string literal ("Constant folding cannot be done for ...", "Invalid operator ...") appended to the info sink

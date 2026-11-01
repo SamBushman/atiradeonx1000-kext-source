@@ -200,10 +200,7 @@ int std__allocator_char___allocate(alloc, n)
   uint freeListOffset;
   undefined4 *result;
   int getenvResult;
-  byte cr0Flags;
   undefined1 lock [28];
-  
-  cr0Flags = (n == (void *)0x0) << 1;
   result = (undefined4 *)0x0;
   if (n != (void *)0x0) {
     if (__default_alloc_template_true_0____S_force_new == 0) {

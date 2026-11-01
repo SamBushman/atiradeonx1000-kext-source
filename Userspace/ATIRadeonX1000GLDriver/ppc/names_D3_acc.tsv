@@ -7,7 +7,6 @@ use	FUN_000e3968	iVar1	operandRecord	CONFIRMED	IRInst__getOperandRecord: address
 use	FUN_000e3b88	iVar10	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar10\ =\ FUN_001054ec\(piVar5,0\);$@1	+1	all	all
 use	FUN_000e3b88	iVar6	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar6\ =\ FUN_001054ec\(piVar8,0\);$@1	+1	all	all
 use	FUN_000e3b88	iVar6	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar6\ =\ FUN_001054ec\(iVar14,0\);$@1	+1	all	all
-use	FUN_000e3b88	uVar11	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar11\ =\ FUN_00105594\(local_54\[0\],local_54\[0\]\[0x21\]\);$@1	+11	all	all
 use	FUN_000e7d5c	iVar2	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*iVar2\ =\ FUN_00105594\(iVar1,1\);$@1	+4	all	all
 use	FUN_000ec5b8	iVar2	listCount	CONFIRMED	DList__count: number of nodes	^\s*iVar2\ =\ FUN_00194034\(param_1\ \+\ 0x37c\);$@1	+14	all	all
 use	FUN_000ec658	iVar1	listCount	CONFIRMED	DList__count: number of nodes	^\s*iVar1\ =\ FUN_00194034\(iVar3\ \+\ 0x90\);$@1	+2	all	all

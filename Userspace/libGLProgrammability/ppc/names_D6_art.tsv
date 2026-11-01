@@ -1,47 +1,10 @@
 # local rows, fork D6: Ghidra register-model artifacts
-local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	bVar17	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TIntermediate__addUnaryMath	bVar15	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TIntermediate__setAggregateOperator	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TIntermediate__addConversion	bVar20	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TIntermediate__growAggregate	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
-local	TIntermBinary__promote	bVar13	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TIntermediate__promoteConstantUnion	bVar11	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	OutputTreeText	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	OutputConstantUnion	bVar11	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	ParseSymbol	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
-local	ParseSymbol	bVar18	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	ParseBinary	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	FUN_97b9907c	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	ParseUnary	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	FUN_97b99274	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	ParseAggregate	bVar7	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	ParseSelection	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	FUN_97b9989c	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	ParseLoop	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	FUN_97b99eb8	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	ParseBranch	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	FUN_97b9a04c	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TParseContext__error	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	FUN_97b9a844	bVar6	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TParseContext__reservedErrorCheck	bVar8	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TParseContext__constructorErrorCheck	bVar22	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	TParseContext__insertBuiltInArrayAtGlobalLevel	bVar18	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
 local	TParseContext__arraySetMaxSize	bVar9	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TParseContext__nonInitErrorCheck	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
-local	TParseContext__extensionErrorCheck	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
-local	TParseContext__extensionErrorCheck	bVar12	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TParseContext__addConstVectorNode	bVar12	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TParseContext__initializeExtensionBehavior	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
-local	initializeSymbolTable	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	_ShCompile	bVar15	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	TSymbolTable__dump	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	_CPPWarningToInfoLog	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	_updateExtensionBehavior	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
-local	TIntermAggregate__compileNode	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
-local	std__allocator_char___allocate	bVar4	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase	bVar6	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux	bVar13	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
-local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it

@@ -3211,48 +3211,13 @@ int glReadPixels_entry(ctx, rectX, rectY, width, height, format, pixelType, pixe
   uint transferMode8;
   int *boundFramebuffer;
   int *scratchPtr20;
-  uint layoutRowBytes;
-  int layoutPixelBytes;
-  int layoutSkipBytes [3];
-  int requestY;
-  int requestWidth;
-  int requestHeight;
-  int requestFormat;
-  uint requestAddress;
-  uint requestPitch;
-  uint procPixels;
-  uint procPitch;
-  uint procChannelFormat;
-  uint procChannelSize;
-  uint dstAddress;
-  uint srcRowBytes;
-  undefined1 convertOutA [4];
-  undefined1 convertOutB [4];
-  undefined4 procMode;
-  uint procFlags;
-  undefined *procMask;
-  int procWidth;
-  int procHeight;
-  undefined4 procZero88;
-  undefined4 procZero84;
-  uint scratchStack80;
-  uint scratchStack7c;
-  uint scratchStack78;
-  undefined4 scratchStack74;
-  uint scratchStack70;
-  uint scratchStack6c;
-  uint scratchStack68;
-  undefined4 scratchStack64;
-  uint scratchStack60;
-  uint scratchStack5c;
-  uint scratchStack58;
-  undefined4 scratchStack54;
-  undefined1 procEnd;
+  struct { uint layoutRowBytes; int layoutPixelBytes; int layoutSkipOffset; int layoutReplySize; int requestX; int requestY; int requestWidth; int requestHeight; int requestFormat; uint requestAddress; uint requestPitch; } layoutState;
+  struct { uint procPixels; uint procPitch; uint procChannelFormat; uint procChannelSize; uint dstAddress; uint srcRowBytes; undefined1 convertOutA [4]; undefined1 convertOutB [4]; undefined4 procMode; uint procFlags; undefined * procMask; int procWidth; int procHeight; undefined4 procZero88; undefined4 procZero84; uint scratchStack80; uint scratchStack7c; uint scratchStack78; undefined4 scratchStack74; uint scratchStack70; uint scratchStack6c; uint scratchStack68; undefined4 scratchStack64; uint scratchStack60; uint scratchStack5c; uint scratchStack58; undefined4 scratchStack54; undefined1 procEnd; undefined1 procEndPad [3]; } procDesc;
   
   commandStream = ctx + GLD_commandStream;
-  procZero84 = 0;
-  layoutSkipBytes[1] = 0;
-  procZero88 = 0;
+  procDesc.procZero84 = 0;
+  layoutState.layoutReplySize = 0;
+  procDesc.procZero88 = 0;
   transferMode8 = transferMode & 0xff;
   engineState = *(int *)(ctx + GLD_engineState);
   readSurfaceCode = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + engineState),*(undefined4 *)(ctx + GLD_renderFlags));
@@ -3285,22 +3250,22 @@ setScratchInt6:
     else {
       packStateArg = (undefined *)0x0;
     }
-    layoutRowBytesPtr = &layoutRowBytes;
-    scratchPtr20 = &layoutPixelBytes;
+    layoutRowBytesPtr = &layoutState.layoutRowBytes;
+    scratchPtr20 = &layoutState.layoutPixelBytes;
     scratchInt17 = height;
-    gld_computePixelStoreLayout(ctx,format,pixelType,width - scratchInt6,height,layoutRowBytesPtr,scratchPtr20,layoutSkipBytes,packStateArg);
-    dstAddress = pixels + layoutSkipBytes[0];
+    gld_computePixelStoreLayout(ctx,format,pixelType,width - scratchInt6,height,layoutRowBytesPtr,scratchPtr20,&layoutState.layoutSkipOffset,packStateArg);
+    procDesc.dstAddress = pixels + layoutState.layoutSkipOffset;
     if (rectY < 0) {
       height = height + rectY;
-      yOffsetBytes0 = rectY * layoutRowBytes;
+      yOffsetBytes0 = rectY * layoutState.layoutRowBytes;
       rectY = 0;
-      dstAddress = dstAddress - yOffsetBytes0;
+      procDesc.dstAddress = procDesc.dstAddress - yOffsetBytes0;
     }
     if (rectX < 0) {
       width = width + rectX;
-      layoutPixelBytes = rectX * layoutPixelBytes;
+      layoutState.layoutPixelBytes = rectX * layoutState.layoutPixelBytes;
       rectX = 0;
-      dstAddress = dstAddress - layoutPixelBytes;
+      procDesc.dstAddress = procDesc.dstAddress - layoutState.layoutPixelBytes;
     }
     if (*(int *)(ctx + GLD_renderHeight) < rectY + height) {
       height = *(int *)(ctx + GLD_renderHeight) - rectY;
@@ -3311,39 +3276,39 @@ setScratchInt6:
     if ((0 < width) && (0 < height)) {
       if (convertPixels) {
         if (transferMode8 == 0) {
-          procFlags = 0x20000;
+          procDesc.procFlags = 0x20000;
         }
         else {
-          procFlags = 0;
+          procDesc.procFlags = 0;
         }
         packState = ((unsigned char *)0x00002e48) + engineState;
-        procMask = ((unsigned char *)0x0007efff);
+        procDesc.procMask = ((unsigned char *)0x0007efff);
         if (((unsigned char *)0x00002e68)[engineState] != '\0') {
-          procFlags = procFlags | 2;
+          procDesc.procFlags = procDesc.procFlags | 2;
         }
         if (((unsigned char *)0x00002e69)[engineState] != '\0') {
-          procFlags = procFlags | 8;
+          procDesc.procFlags = procDesc.procFlags | 8;
         }
       }
       else {
         packState = (undefined *)0x0;
-        procMask = (undefined *)0x0;
-        procFlags = 0;
+        procDesc.procMask = (undefined *)0x0;
+        procDesc.procFlags = 0;
       }
-      procEnd = 0;
-      procMode = 2;
-      convertOutAPtr = convertOutA;
-      convertOutBPtr = convertOutB;
-      srcRowBytes = layoutRowBytes;
-      procWidth = width;
-      procHeight = height;
+      procDesc.procEnd = 0;
+      procDesc.procMode = 2;
+      convertOutAPtr = procDesc.convertOutA;
+      convertOutBPtr = procDesc.convertOutB;
+      procDesc.srcRowBytes = layoutState.layoutRowBytes;
+      procDesc.procWidth = width;
+      procDesc.procHeight = height;
       _glgConvertType(format,pixelType,convertOutAPtr,convertOutBPtr);
       boundFramebuffer = *(int **)(ctx + GLD_boundFramebuffer);
       if (boundFramebuffer == (int *)0x0) {
-        layoutSkipBytes[2] = rectX;
-        requestY = rectY;
-        requestWidth = width;
-        requestHeight = height;
+        layoutState.requestX = rectX;
+        layoutState.requestY = rectY;
+        layoutState.requestWidth = width;
+        layoutState.requestHeight = height;
         if (format == 0x1901) {
           renderFlags = *(uint *)(ctx + GLD_renderFlags);
           if ((renderFlags & 0x30000) == 0x30000) {
@@ -3351,21 +3316,21 @@ setScratchInt6:
               gld_submitRing(ctx,0x1000000);
               renderFlags = *(uint *)(ctx + GLD_renderFlags);
             }
-            procPitch = (width + 0xf) * 4 & 0xffffffc0;
-            procChannelSize = 0x14;
-            procChannelFormat = 0xf;
+            procDesc.procPitch = (width + 0xf) * 4 & 0xffffffc0;
+            procDesc.procChannelSize = 0x14;
+            procDesc.procChannelFormat = 0xf;
             if ((renderFlags & 0x2000) == 0) {
 loopSetRequestFormat:
-              requestFormat = 4;
+              layoutState.requestFormat = 4;
             }
             else {
 loopCheckReadSurfaceCode:
               if (readSurfaceCode == 7) {
-                requestFormat = 10;
+                layoutState.requestFormat = 10;
               }
               else {
                 if (readSurfaceCode != 8) goto loopSetRequestFormat;
-                requestFormat = 0xb;
+                layoutState.requestFormat = 0xb;
               }
             }
 loopCheckSendAttachments:
@@ -3373,11 +3338,11 @@ loopCheckSendAttachments:
                ((((convertPixels && (((*(uint *)(((unsigned char *)0x000030b4) + engineState) & 0xff1) != 0 ||
                              ((*(uint *)(((unsigned char *)0x00002e68U) + engineState) & 0xffff0000) != 0)))) ||
                  (format - 0x1901U < 2)) ||
-                ((((srcRowBytes & 0x3f) != 0 || (0x1fff < (int)srcRowBytes)) ||
-                 ((dstAddress & 0x1f) != 0)))))) {
+                ((((procDesc.srcRowBytes & 0x3f) != 0 || (0x1fff < (int)procDesc.srcRowBytes)) ||
+                 ((procDesc.dstAddress & 0x1f) != 0)))))) {
 loopSetRequestPitch:
-              requestPitch = procPitch;
-              scratchBytes = height * procPitch + 0xfff & 0xfffff000;
+              layoutState.requestPitch = procDesc.procPitch;
+              scratchBytes = height * procDesc.procPitch + 0xfff & 0xfffff000;
               if (*(uint *)(((unsigned char *)GLD_readScratchSize) + ctx) < scratchBytes) {
                 if (*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx) != 0) {
                   _vfree(*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx));
@@ -3386,8 +3351,8 @@ loopSetRequestPitch:
                 *(uint *)(((unsigned char *)GLD_readScratchSize) + ctx) = scratchBytes;
                 *(void **)(((unsigned char *)GLD_readScratchBuffer) + ctx) = scratchBuffer;
               }
-              requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
-              if (requestAddress == 0) goto setResult;
+              layoutState.requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
+              if (layoutState.requestAddress == 0) goto setResult;
               directCopy = false;
             }
             else {
@@ -3397,33 +3362,33 @@ loopSetRequestPitch:
               else if ((((renderFlags & 0xf) != 3) || (format != 0x80e1)) || (pixelType != 0x8366))
               goto loopSetRequestPitch;
               directCopy = true;
-              requestPitch = srcRowBytes;
-              requestAddress = dstAddress;
+              layoutState.requestPitch = procDesc.srcRowBytes;
+              layoutState.requestAddress = procDesc.dstAddress;
             }
-            procPixels = requestAddress;
+            procDesc.procPixels = layoutState.requestAddress;
             if (sendAttachments) {
               engineObjects = *(int *)(ctx + GLD_engineObjects);
               scratchInt7 = *(int *)(*(int *)(engineObjects + 0x140) + 0x30);
-              scratchStack80 = (uint)*(ushort *)(scratchInt7 + 0x98);
-              scratchStack7c = (uint)*(ushort *)(scratchInt7 + 0x9a);
-              scratchStack78 = (uint)*(ushort *)(scratchInt7 + 0x8c);
-              scratchStack74 = *(undefined4 *)(scratchInt7 + 0x9c);
+              procDesc.scratchStack80 = (uint)*(ushort *)(scratchInt7 + 0x98);
+              procDesc.scratchStack7c = (uint)*(ushort *)(scratchInt7 + 0x9a);
+              procDesc.scratchStack78 = (uint)*(ushort *)(scratchInt7 + 0x8c);
+              procDesc.scratchStack74 = *(undefined4 *)(scratchInt7 + 0x9c);
               scratchInt7 = *(int *)(*(int *)(engineObjects + 0x148) + 0x30);
-              scratchStack70 = (uint)*(ushort *)(scratchInt7 + 0x98);
-              scratchStack6c = (uint)*(ushort *)(scratchInt7 + 0x9a);
-              scratchStack68 = (uint)*(ushort *)(scratchInt7 + 0x8c);
-              scratchStack64 = *(undefined4 *)(scratchInt7 + 0x9c);
+              procDesc.scratchStack70 = (uint)*(ushort *)(scratchInt7 + 0x98);
+              procDesc.scratchStack6c = (uint)*(ushort *)(scratchInt7 + 0x9a);
+              procDesc.scratchStack68 = (uint)*(ushort *)(scratchInt7 + 0x8c);
+              procDesc.scratchStack64 = *(undefined4 *)(scratchInt7 + 0x9c);
               scratchInt7 = *(int *)(*(int *)(engineObjects + 0x144) + 0x30);
-              scratchStack60 = (uint)*(ushort *)(scratchInt7 + 0x98);
-              scratchStack5c = (uint)*(ushort *)(scratchInt7 + 0x9a);
-              scratchStack58 = (uint)*(ushort *)(scratchInt7 + 0x8c);
-              scratchStack54 = *(undefined4 *)(scratchInt7 + 0x9c);
+              procDesc.scratchStack60 = (uint)*(ushort *)(scratchInt7 + 0x98);
+              procDesc.scratchStack5c = (uint)*(ushort *)(scratchInt7 + 0x9a);
+              procDesc.scratchStack58 = (uint)*(ushort *)(scratchInt7 + 0x8c);
+              procDesc.scratchStack54 = *(undefined4 *)(scratchInt7 + 0x9c);
             }
             status = _io_connect_method_structureI_structureO
-                              (*(undefined4 *)(ctx + GLD_connect),7,layoutSkipBytes + 2,0x1c,0,layoutSkipBytes + 1);
+                              (*(undefined4 *)(ctx + GLD_connect),7,&layoutState.requestX,0x1c,0,&layoutState.layoutReplySize);
             if (status != 0) goto setResult;
             if (!directCopy) {
-              _glgProcessPixels(packState,&procPixels);
+              _glgProcessPixels(packState,&procDesc.procPixels);
               return 1;
             }
           }
@@ -3454,11 +3419,11 @@ loopSetRequestPitch:
             }
             formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
             renderFlags = *(uint *)(ctx + GLD_renderFlags);
-            procPitch = (width << (*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
+            procDesc.procPitch = (width << (*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
-            procChannelSize = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
-            procChannelFormat = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
-            requestFormat = readSurfaceCode;
+            procDesc.procChannelSize = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
+            procDesc.procChannelFormat = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
+            layoutState.requestFormat = readSurfaceCode;
             goto loopCheckSendAttachments;
           }
           renderFlags = *(uint *)(ctx + GLD_renderFlags);
@@ -3468,19 +3433,19 @@ loopSetRequestPitch:
               renderFlags = *(uint *)(ctx + GLD_renderFlags);
             }
             if ((renderFlags & 0x20000) == 0) {
-              procChannelSize = 2;
-              procPitch = (width + 0x1f) * 2 & 0xffffffc0;
-              procChannelFormat = 0xd;
+              procDesc.procChannelSize = 2;
+              procDesc.procPitch = (width + 0x1f) * 2 & 0xffffffc0;
+              procDesc.procChannelFormat = 0xd;
             }
             else {
-              procPitch = (width + 0xf) * 4 & 0xffffffc0;
+              procDesc.procPitch = (width + 0xf) * 4 & 0xffffffc0;
               if ((renderFlags & 0x30000) == 0x30000) {
-                procChannelFormat = 0xf;
-                procChannelSize = 0x14;
+                procDesc.procChannelFormat = 0xf;
+                procDesc.procChannelSize = 0x14;
               }
               else {
-                procChannelFormat = 0xd;
-                procChannelSize = 4;
+                procDesc.procChannelFormat = 0xd;
+                procDesc.procChannelSize = 4;
               }
             }
             if ((renderFlags & 0x2000) != 0) goto loopCheckReadSurfaceCode;
@@ -3491,28 +3456,28 @@ loopSetRequestPitch:
       else {
         attachmentIndex = 5;
         if ((format != 0x1901) && (attachmentIndex = 4, format != 0x1902)) {
-          procFlags = procFlags | 0x60000;
-          procMask = (undefined *)((uint)procMask | 0x68002);
+          procDesc.procFlags = procDesc.procFlags | 0x60000;
+          procDesc.procMask = (undefined *)((uint)procDesc.procMask | 0x68002);
           attachmentIndex = *(ushort *)(*boundFramebuffer + 0x98) - 0x8ce0;
           if ((convertPixels) &&
              (((*(uint *)(packState + 0x268) & 0x1ff) != 0 ||
               ((*(uint *)(packState + 0x26c) & 0xff0000) != 0)))) {
             scratchInt16 = *(int *)(ctx + GLD_engineObjects);
             scratchInt14 = *(int *)(*(int *)(scratchInt16 + 0x140) + 0x30);
-            scratchStack80 = (uint)*(ushort *)(scratchInt14 + 0x98);
-            scratchStack7c = (uint)*(ushort *)(scratchInt14 + 0x9a);
-            scratchStack78 = (uint)*(ushort *)(scratchInt14 + 0x8c);
-            scratchStack74 = *(undefined4 *)(scratchInt14 + 0x9c);
+            procDesc.scratchStack80 = (uint)*(ushort *)(scratchInt14 + 0x98);
+            procDesc.scratchStack7c = (uint)*(ushort *)(scratchInt14 + 0x9a);
+            procDesc.scratchStack78 = (uint)*(ushort *)(scratchInt14 + 0x8c);
+            procDesc.scratchStack74 = *(undefined4 *)(scratchInt14 + 0x9c);
             scratchInt14 = *(int *)(*(int *)(scratchInt16 + 0x148) + 0x30);
-            scratchStack70 = (uint)*(ushort *)(scratchInt14 + 0x98);
-            scratchStack6c = (uint)*(ushort *)(scratchInt14 + 0x9a);
-            scratchStack68 = (uint)*(ushort *)(scratchInt14 + 0x8c);
-            scratchStack64 = *(undefined4 *)(scratchInt14 + 0x9c);
+            procDesc.scratchStack70 = (uint)*(ushort *)(scratchInt14 + 0x98);
+            procDesc.scratchStack6c = (uint)*(ushort *)(scratchInt14 + 0x9a);
+            procDesc.scratchStack68 = (uint)*(ushort *)(scratchInt14 + 0x8c);
+            procDesc.scratchStack64 = *(undefined4 *)(scratchInt14 + 0x9c);
             scratchInt14 = *(int *)(*(int *)(scratchInt16 + 0x144) + 0x30);
-            scratchStack60 = (uint)*(ushort *)(scratchInt14 + 0x98);
-            scratchStack5c = (uint)*(ushort *)(scratchInt14 + 0x9a);
-            scratchStack58 = (uint)*(ushort *)(scratchInt14 + 0x8c);
-            scratchStack54 = *(undefined4 *)(scratchInt14 + 0x9c);
+            procDesc.scratchStack60 = (uint)*(ushort *)(scratchInt14 + 0x98);
+            procDesc.scratchStack5c = (uint)*(ushort *)(scratchInt14 + 0x9a);
+            procDesc.scratchStack58 = (uint)*(ushort *)(scratchInt14 + 0x8c);
+            procDesc.scratchStack54 = *(undefined4 *)(scratchInt14 + 0x9c);
           }
         }
         attachObject = *(int **)(boundFramebuffer[1] + attachmentIndex * 4);
@@ -3525,17 +3490,17 @@ loopSetRequestPitch:
           levelRecord = attachLevel * 0x18 + attachFace * 0x168 + attachObject[0xc];
           surfaceType = (uint)*(ushort *)(levelRecord + 0xb2);
           surfaceFormat = (uint)*(ushort *)(levelRecord + 0xb0);
-          _glgConvertType(surfaceFormat,surfaceType,&procChannelFormat,&procChannelSize);
+          _glgConvertType(surfaceFormat,surfaceType,&procDesc.procChannelFormat,&procDesc.procChannelSize);
           renderWidth = *(int *)(ctx + GLD_renderWidth);
           bytesPerPixel = gldPixelUnitBytes(surfaceFormat,surfaceType);
-          procPitch = renderWidth * bytesPerPixel;
-          renderHeight = procPitch * *(int *)(ctx + GLD_renderHeight);
+          procDesc.procPitch = renderWidth * bytesPerPixel;
+          renderHeight = procDesc.procPitch * *(int *)(ctx + GLD_renderHeight);
           levelBuffer = _valloc((uint)sliceCount * renderHeight);
-          gld_readbackTextureLevel(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
-          yOffsetBytes = rectY * procPitch;
+          gld_readbackTextureLevel(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procDesc.procPitch);
+          yOffsetBytes = rectY * procDesc.procPitch;
           bytesPerPixel2 = gldPixelUnitBytes(surfaceFormat,surfaceType);
-          procPixels = (int)levelBuffer + rectX * bytesPerPixel2 + attachZOffset * renderHeight + yOffsetBytes;
-          _glgProcessPixels(packState,&procPixels);
+          procDesc.procPixels = (int)levelBuffer + rectX * bytesPerPixel2 + attachZOffset * renderHeight + yOffsetBytes;
+          _glgProcessPixels(packState,&procDesc.procPixels);
           _vfree(levelBuffer);
           return 1;
         }
@@ -3610,48 +3575,13 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
   uint flags;
   int *replySizePtr;
   int *layoutPixelBytesPtr;
-  uint layoutRowBytes;
-  int layoutPixelBytes;
-  int layoutSkipBytes [3];
-  int requestY;
-  int requestWidth;
-  int requestHeight;
-  dword *requestSurfaceCode;
-  uint requestAddress;
-  uint requestPitch;
-  uint procSrcAddress;
-  uint procPitch;
-  uint targetFormatA;
-  uint targetFormatB;
-  uint dstAddress;
-  uint srcRowBytes;
-  dword convertOutA;
-  undefined1 convertOutB [4];
-  undefined4 procMode;
-  uint procFlags;
-  undefined *procMask;
-  int procWidth;
-  int procHeight;
-  undefined4 procZero88;
-  undefined4 procZero84;
-  uint scratchStack80;
-  uint scratchStack7c;
-  uint scratchStack78;
-  undefined4 scratchStack74;
-  uint scratchStack70;
-  uint scratchStack6c;
-  uint scratchStack68;
-  undefined4 scratchStack64;
-  uint scratchStack60;
-  uint scratchStack5c;
-  uint scratchStack58;
-  undefined4 scratchStack54;
-  undefined1 procEnd;
+  struct { uint layoutRowBytes; int layoutPixelBytes; int layoutSkipOffset; int layoutReplySize; int requestX; int requestY; int requestWidth; int requestHeight; dword * requestSurfaceCode; uint requestAddress; uint requestPitch; } layoutState;
+  struct { uint procSrcAddress; uint procPitch; uint targetFormatA; uint targetFormatB; uint dstAddress; uint srcRowBytes; dword convertOutA; undefined1 convertOutB [4]; undefined4 procMode; uint procFlags; undefined * procMask; int procWidth; int procHeight; undefined4 procZero88; undefined4 procZero84; uint scratchStack80; uint scratchStack7c; uint scratchStack78; undefined4 scratchStack74; uint scratchStack70; uint scratchStack6c; uint scratchStack68; undefined4 scratchStack64; uint scratchStack60; uint scratchStack5c; uint scratchStack58; undefined4 scratchStack54; undefined1 procEnd; undefined1 procEndPad [3]; } procDesc;
   
   ring = ctx + GLD_commandStream;
-  procZero84 = 0;
-  layoutSkipBytes[1] = 0;
-  procZero88 = 0;
+  procDesc.procZero84 = 0;
+  layoutState.layoutReplySize = 0;
+  procDesc.procZero88 = 0;
   flags = transferMode & 0xff;
   ctxState = *(int *)(ctx + GLD_engineState);
   readSurfaceCode = (dword *)gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + ctxState),
@@ -3685,22 +3615,22 @@ setScratchInt6:
     else {
       packStateArg = (undefined *)0x0;
     }
-    layoutRowBytesPtr = &layoutRowBytes;
-    layoutPixelBytesPtr = &layoutPixelBytes;
+    layoutRowBytesPtr = &layoutState.layoutRowBytes;
+    layoutPixelBytesPtr = &layoutState.layoutPixelBytes;
     savedHeight = height;
-    gld_computePixelStoreLayout(ctx,format,pixelType,width - scratchInt6,height,layoutRowBytesPtr,layoutPixelBytesPtr,layoutSkipBytes,packStateArg);
-    dstOffsetAddress = pixels + layoutSkipBytes[0];
+    gld_computePixelStoreLayout(ctx,format,pixelType,width - scratchInt6,height,layoutRowBytesPtr,layoutPixelBytesPtr,&layoutState.layoutSkipOffset,packStateArg);
+    dstOffsetAddress = pixels + layoutState.layoutSkipOffset;
     if (rectY < 0) {
       height = height + rectY;
-      yOffsetBytes0 = rectY * layoutRowBytes;
+      yOffsetBytes0 = rectY * layoutState.layoutRowBytes;
       rectY = 0;
       dstOffsetAddress = dstOffsetAddress - yOffsetBytes0;
     }
     if (rectX < 0) {
       width = width + rectX;
-      layoutPixelBytes = rectX * layoutPixelBytes;
+      layoutState.layoutPixelBytes = rectX * layoutState.layoutPixelBytes;
       rectX = 0;
-      dstOffsetAddress = dstOffsetAddress - layoutPixelBytes;
+      dstOffsetAddress = dstOffsetAddress - layoutState.layoutPixelBytes;
     }
     if (*(int *)(ctx + GLD_renderHeight) < rectY + height) {
       height = *(int *)(ctx + GLD_renderHeight) - rectY;
@@ -3711,40 +3641,40 @@ setScratchInt6:
     if ((0 < width) && (0 < height)) {
       if (convertPixels) {
         if (flags == 0) {
-          procFlags = 0x20000;
+          procDesc.procFlags = 0x20000;
         }
         else {
-          procFlags = 0;
+          procDesc.procFlags = 0;
         }
         packState = ((unsigned char *)0x00002e48) + ctxState;
-        procMask = ((unsigned char *)0x0007efffU);
+        procDesc.procMask = ((unsigned char *)0x0007efffU);
         if (((unsigned char *)0x00002e68)[ctxState] != '\0') {
-          procFlags = procFlags | 2;
+          procDesc.procFlags = procDesc.procFlags | 2;
         }
         if (((unsigned char *)0x00002e69)[ctxState] != '\0') {
-          procFlags = procFlags | 8;
+          procDesc.procFlags = procDesc.procFlags | 8;
         }
       }
       else {
         packState = (undefined *)0x0;
-        procMask = (undefined *)0x0;
-        procFlags = 0;
+        procDesc.procMask = (undefined *)0x0;
+        procDesc.procFlags = 0;
       }
-      procEnd = 0;
-      procMode = 2;
-      convertOutAPtr = &convertOutA;
-      convertOutBPtr = convertOutB;
-      srcRowBytes = layoutRowBytes;
-      dstAddress = dstOffsetAddress;
-      procWidth = width;
-      procHeight = height;
+      procDesc.procEnd = 0;
+      procDesc.procMode = 2;
+      convertOutAPtr = &procDesc.convertOutA;
+      convertOutBPtr = procDesc.convertOutB;
+      procDesc.srcRowBytes = layoutState.layoutRowBytes;
+      procDesc.dstAddress = dstOffsetAddress;
+      procDesc.procWidth = width;
+      procDesc.procHeight = height;
       _glgConvertType(format,pixelType,convertOutAPtr,convertOutBPtr,savedHeight,layoutRowBytesPtr,layoutPixelBytesPtr,dstOffsetAddress);
       boundFramebuffer = *(int **)(ctx + GLD_boundFramebuffer);
       if (boundFramebuffer == (int *)0x0) {
-        layoutSkipBytes[2] = rectX;
-        requestY = rectY;
-        requestWidth = width;
-        requestHeight = height;
+        layoutState.requestX = rectX;
+        layoutState.requestY = rectY;
+        layoutState.requestWidth = width;
+        layoutState.requestHeight = height;
         if (format == 0x1901) {
           flags = *(uint *)(ctx + GLD_renderFlags);
           if ((flags & 0x30000) == 0x30000) {
@@ -3752,21 +3682,21 @@ setScratchInt6:
               gld_submitRing(ctx,0x1000000);
               flags = *(uint *)(ctx + GLD_renderFlags);
             }
-            procPitch = (width + 0xf) * 4 & 0xffffffc0;
-            targetFormatB = 0x14;
-            targetFormatA = 0xf;
+            procDesc.procPitch = (width + 0xf) * 4 & 0xffffffc0;
+            procDesc.targetFormatB = 0x14;
+            procDesc.targetFormatA = 0xf;
             if ((flags & 0x2000) == 0) {
 loopSetRequestSurfaceCode:
-              requestSurfaceCode = ((unsigned char *)0x4);
+              layoutState.requestSurfaceCode = ((unsigned char *)0x4);
             }
             else {
 loopCheckReadSurfaceCode:
               if (readSurfaceCode == (dword *)((int)((unsigned char *)0x4) + 3)) {
-                requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 2);
+                layoutState.requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 2);
               }
               else {
                 if (readSurfaceCode != ((unsigned char *)0x8)) goto loopSetRequestSurfaceCode;
-                requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 3);
+                layoutState.requestSurfaceCode = (dword *)((int)((unsigned char *)0x8) + 3);
               }
             }
 loopSetScratchUint12:
@@ -3775,12 +3705,12 @@ loopSetScratchUint12:
                ((((convertPixels && (((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff1) != 0 ||
                              ((*(uint *)(((unsigned char *)0x00002e68U) + ctxState) & 0xffff0000) != 0)))) ||
                  (format - 0x1901U < 2)) ||
-                ((((srcRowBytes & 0x3f) != 0 || (0x1fff < (int)srcRowBytes)) ||
-                 ((dstAddress & 0x1f) != 0)))))) {
+                ((((procDesc.srcRowBytes & 0x3f) != 0 || (0x1fff < (int)procDesc.srcRowBytes)) ||
+                 ((procDesc.dstAddress & 0x1f) != 0)))))) {
 loopSetScratchUint122:
               scratchUint12 = *(uint *)(((unsigned char *)GLD_readScratchSize) + ctx);
-              requestPitch = procPitch;
-              scratchBytes = height * procPitch + 0xfff & 0xfffff000;
+              layoutState.requestPitch = procDesc.procPitch;
+              scratchBytes = height * procDesc.procPitch + 0xfff & 0xfffff000;
               if (scratchUint12 < scratchBytes) {
                 if (*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx) != 0) {
                   _vfree(*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx));
@@ -3789,8 +3719,8 @@ loopSetScratchUint122:
                 *(uint *)(((unsigned char *)GLD_readScratchSize) + ctx) = scratchBytes;
                 *(undefined4 *)(((unsigned char *)GLD_readScratchBuffer) + ctx) = scratchBuffer;
               }
-              requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
-              if (requestAddress == 0) goto setResult;
+              layoutState.requestAddress = *(uint *)(((unsigned char *)GLD_readScratchBuffer) + ctx);
+              if (layoutState.requestAddress == 0) goto setResult;
               directCopy = false;
             }
             else {
@@ -3800,38 +3730,38 @@ loopSetScratchUint122:
               else if (((scratchUint12 != 3) || (format != 0x80e1)) || (pixelType != 0x8366))
               goto loopSetScratchUint122;
               directCopy = true;
-              requestPitch = srcRowBytes;
-              requestAddress = dstAddress;
+              layoutState.requestPitch = procDesc.srcRowBytes;
+              layoutState.requestAddress = procDesc.dstAddress;
             }
-            procSrcAddress = requestAddress;
+            procDesc.procSrcAddress = layoutState.requestAddress;
             if (sendAttachments) {
               flags = *(uint *)(ctx + GLD_engineObjects);
               ring = *(int *)(*(int *)(flags + 0x140) + 0x30);
-              scratchStack80 = (uint)*(ushort *)(ring + 0x98);
-              scratchStack7c = (uint)*(ushort *)(ring + 0x9a);
-              scratchStack78 = (uint)*(ushort *)(ring + 0x8c);
-              scratchStack74 = *(undefined4 *)(ring + 0x9c);
+              procDesc.scratchStack80 = (uint)*(ushort *)(ring + 0x98);
+              procDesc.scratchStack7c = (uint)*(ushort *)(ring + 0x9a);
+              procDesc.scratchStack78 = (uint)*(ushort *)(ring + 0x8c);
+              procDesc.scratchStack74 = *(undefined4 *)(ring + 0x9c);
               ring = *(int *)(*(int *)(flags + 0x148) + 0x30);
-              scratchStack70 = (uint)*(ushort *)(ring + 0x98);
-              scratchStack6c = (uint)*(ushort *)(ring + 0x9a);
-              scratchStack68 = (uint)*(ushort *)(ring + 0x8c);
-              scratchStack64 = *(undefined4 *)(ring + 0x9c);
+              procDesc.scratchStack70 = (uint)*(ushort *)(ring + 0x98);
+              procDesc.scratchStack6c = (uint)*(ushort *)(ring + 0x9a);
+              procDesc.scratchStack68 = (uint)*(ushort *)(ring + 0x8c);
+              procDesc.scratchStack64 = *(undefined4 *)(ring + 0x9c);
               scratchUint12 = *(uint *)(flags + 0x144);
               ring = *(int *)(scratchUint12 + 0x30);
-              scratchStack60 = (uint)*(ushort *)(ring + 0x98);
-              scratchStack5c = (uint)*(ushort *)(ring + 0x9a);
-              scratchStack58 = (uint)*(ushort *)(ring + 0x8c);
-              scratchStack54 = *(undefined4 *)(ring + 0x9c);
+              procDesc.scratchStack60 = (uint)*(ushort *)(ring + 0x98);
+              procDesc.scratchStack5c = (uint)*(ushort *)(ring + 0x9a);
+              procDesc.scratchStack58 = (uint)*(ushort *)(ring + 0x8c);
+              procDesc.scratchStack54 = *(undefined4 *)(ring + 0x9c);
             }
-            requestPtr = layoutSkipBytes + 2;
+            requestPtr = &layoutState.requestX;
             requestBytes = 0x1c;
             staleArgR10 = 0;
-            replySizePtr = layoutSkipBytes + 1;
+            replySizePtr = &layoutState.layoutReplySize;
             ring = _io_connect_method_structureI_structureO
                                (*(undefined4 *)(ctx + GLD_connect),7,requestPtr,0x1c,0,replySizePtr);
             if (ring != 0) goto setResult;
             if (!directCopy) {
-              _glgProcessPixels(packState,&procSrcAddress,requestPtr,requestBytes,staleArgR10,replySizePtr,scratchUint12,flags);
+              _glgProcessPixels(packState,&procDesc.procSrcAddress,requestPtr,requestBytes,staleArgR10,replySizePtr,scratchUint12,flags);
               return 1;
             }
           }
@@ -3867,11 +3797,11 @@ loopSetScratchUint122:
             }
             formatIndex = ((unsigned char *)GLD_colorFormatIndex)[ctx];
             flags = *(uint *)(ctx + GLD_renderFlags);
-            procPitch = (width << (*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
+            procDesc.procPitch = (width << (*(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
-            targetFormatB = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
-            targetFormatA = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
-            requestSurfaceCode = readSurfaceCode;
+            procDesc.targetFormatB = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
+            procDesc.targetFormatA = *(uint *)(ptrTo_textureFormatTable_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
+            layoutState.requestSurfaceCode = readSurfaceCode;
             goto loopSetScratchUint12;
           }
           flags = *(uint *)(ctx + GLD_renderFlags);
@@ -3881,19 +3811,19 @@ loopSetScratchUint122:
               flags = *(uint *)(ctx + GLD_renderFlags);
             }
             if ((flags & 0x20000) == 0) {
-              targetFormatB = 2;
-              procPitch = (width + 0x1f) * 2 & 0xffffffc0;
-              targetFormatA = 0xd;
+              procDesc.targetFormatB = 2;
+              procDesc.procPitch = (width + 0x1f) * 2 & 0xffffffc0;
+              procDesc.targetFormatA = 0xd;
             }
             else {
-              procPitch = (width + 0xf) * 4 & 0xffffffc0;
+              procDesc.procPitch = (width + 0xf) * 4 & 0xffffffc0;
               if ((flags & 0x30000) == 0x30000) {
-                targetFormatA = 0xf;
-                targetFormatB = 0x14;
+                procDesc.targetFormatA = 0xf;
+                procDesc.targetFormatB = 0x14;
               }
               else {
-                targetFormatA = 0xd;
-                targetFormatB = 4;
+                procDesc.targetFormatA = 0xd;
+                procDesc.targetFormatB = 4;
               }
             }
             if ((flags & 0x2000) != 0) goto loopCheckReadSurfaceCode;
@@ -3904,28 +3834,28 @@ loopSetScratchUint122:
       else {
         ring = 5;
         if ((format != 0x1901) && (ring = 4, format != 0x1902)) {
-          procFlags = procFlags | 0x60000;
-          procMask = (undefined *)((uint)procMask | 0x68002);
+          procDesc.procFlags = procDesc.procFlags | 0x60000;
+          procDesc.procMask = (undefined *)((uint)procDesc.procMask | 0x68002);
           ring = *(ushort *)(*boundFramebuffer + 0x98) - 0x8ce0;
           if ((convertPixels) &&
              (((*(uint *)(packState + 0x268) & 0x1ff) != 0 ||
               ((*(uint *)(packState + 0x26c) & 0xff0000) != 0)))) {
             dstOffsetAddress = *(uint *)(ctx + GLD_engineObjects);
             ctxState = *(int *)(*(int *)(dstOffsetAddress + 0x140) + 0x30);
-            scratchStack80 = (uint)*(ushort *)(ctxState + 0x98);
-            scratchStack7c = (uint)*(ushort *)(ctxState + 0x9a);
-            scratchStack78 = (uint)*(ushort *)(ctxState + 0x8c);
-            scratchStack74 = *(undefined4 *)(ctxState + 0x9c);
+            procDesc.scratchStack80 = (uint)*(ushort *)(ctxState + 0x98);
+            procDesc.scratchStack7c = (uint)*(ushort *)(ctxState + 0x9a);
+            procDesc.scratchStack78 = (uint)*(ushort *)(ctxState + 0x8c);
+            procDesc.scratchStack74 = *(undefined4 *)(ctxState + 0x9c);
             ctxState = *(int *)(*(int *)(dstOffsetAddress + 0x148) + 0x30);
-            scratchStack70 = (uint)*(ushort *)(ctxState + 0x98);
-            scratchStack6c = (uint)*(ushort *)(ctxState + 0x9a);
-            scratchStack68 = (uint)*(ushort *)(ctxState + 0x8c);
-            scratchStack64 = *(undefined4 *)(ctxState + 0x9c);
+            procDesc.scratchStack70 = (uint)*(ushort *)(ctxState + 0x98);
+            procDesc.scratchStack6c = (uint)*(ushort *)(ctxState + 0x9a);
+            procDesc.scratchStack68 = (uint)*(ushort *)(ctxState + 0x8c);
+            procDesc.scratchStack64 = *(undefined4 *)(ctxState + 0x9c);
             ctxState = *(int *)(*(int *)(dstOffsetAddress + 0x144) + 0x30);
-            scratchStack60 = (uint)*(ushort *)(ctxState + 0x98);
-            scratchStack5c = (uint)*(ushort *)(ctxState + 0x9a);
-            scratchStack58 = (uint)*(ushort *)(ctxState + 0x8c);
-            scratchStack54 = *(undefined4 *)(ctxState + 0x9c);
+            procDesc.scratchStack60 = (uint)*(ushort *)(ctxState + 0x98);
+            procDesc.scratchStack5c = (uint)*(ushort *)(ctxState + 0x9a);
+            procDesc.scratchStack58 = (uint)*(ushort *)(ctxState + 0x8c);
+            procDesc.scratchStack54 = *(undefined4 *)(ctxState + 0x9c);
           }
         }
         attachObject = *(int **)(boundFramebuffer[1] + ring * 4);
@@ -3938,21 +3868,21 @@ loopSetScratchUint122:
           ctxState = attachLevel * 0x18 + attachFace * 0x168 + attachObject[0xc];
           surfaceType = (uint)*(ushort *)(ctxState + 0xb2);
           surfaceFormat = (uint)*(ushort *)(ctxState + 0xb0);
-          _glgConvertType(surfaceFormat,surfaceType,&targetFormatA,&targetFormatB,savedHeight,ring,*attachObject,dstOffsetAddress);
+          _glgConvertType(surfaceFormat,surfaceType,&procDesc.targetFormatA,&procDesc.targetFormatB,savedHeight,ring,*attachObject,dstOffsetAddress);
           ctxState = *(int *)(ctx + GLD_renderWidth);
           ring = gldPixelUnitBytes(surfaceFormat,surfaceType);
-          procPitch = ctxState * ring;
-          renderHeight = procPitch * *(int *)(ctx + GLD_renderHeight);
+          procDesc.procPitch = ctxState * ring;
+          renderHeight = procDesc.procPitch * *(int *)(ctx + GLD_renderHeight);
           levelBuffer = _valloc((uint)sliceCount * renderHeight);
           flags = surfaceFormat;
           scratchUint12 = surfaceType;
           ring = levelBuffer;
-          scratchUint13 = procPitch;
-          gld_readbackTextureLevel(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
-          ctxState = rectY * procPitch;
+          scratchUint13 = procDesc.procPitch;
+          gld_readbackTextureLevel(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procDesc.procPitch);
+          ctxState = rectY * procDesc.procPitch;
           bytesPerPixel = gldPixelUnitBytes(surfaceFormat,surfaceType);
-          procSrcAddress = levelBuffer + attachZOffset * renderHeight + ctxState + rectX * bytesPerPixel;
-          _glgProcessPixels(packState,&procSrcAddress,attachFace,attachLevel,flags,scratchUint12,ring,scratchUint13);
+          procDesc.procSrcAddress = levelBuffer + attachZOffset * renderHeight + ctxState + rectX * bytesPerPixel;
+          _glgProcessPixels(packState,&procDesc.procSrcAddress,attachFace,attachLevel,flags,scratchUint12,ring,scratchUint13);
           _vfree(levelBuffer);
           return 1;
         }

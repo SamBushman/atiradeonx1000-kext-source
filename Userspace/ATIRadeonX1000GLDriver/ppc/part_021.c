@@ -1718,9 +1718,7 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
   undefined4 slotId;
   int *scanInst;
   int pendingCountOrMovInst;
-  undefined4 writtenLanes;
-  int *pendingInsts [4];
-  undefined4 mergedLanes [3];
+  struct { undefined4 writtenLanes; int *pendingInsts [4]; undefined4 mergedLanes [3]; } pendFrame;
   
   *changedOut = 0;
   if ((beforeInst == *(int **)(block + 8)) || ((*(uint *)(beforeInst[1] + 0x14) & 4) == 0)) {
@@ -1730,7 +1728,7 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
       do {
         instFlags = scanInst[5];
         if ((instFlags & 1) != 0) {
-          pendingInsts[pendingCountOrMovInst] = (int *)0x0;
+          pendFrame.pendingInsts[pendingCountOrMovInst] = (int *)0x0;
           if ((scanInst[5] & 0x200U) != 0) {
             if ((scanInst[5] & 2U) == 0) {
               operandVReg4 = (int *)IRInst__getOperandSource(scanInst,scanInst[0x21]);
@@ -1739,7 +1737,7 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
                 instKeyB = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),scanInst);
                 queryResult = ((int (*)())IRInst__lastSourceKeyEquals)(scanInst,instKeyB,*ctx);
                 if (queryResult == 0) {
-                  pendingInsts[pendingCountOrMovInst] = scanInst;
+                  pendFrame.pendingInsts[pendingCountOrMovInst] = scanInst;
                   pendingCountOrMovInst = pendingCountOrMovInst + 1;
                   scanInst[5] = scanInst[5] | 0x800000;
                 }
@@ -1769,15 +1767,15 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
       scanInst = (int *)0x0;
       pendingCountOrMovInst = 0;
     }
-    firstPending = pendingInsts[0];
+    firstPending = pendFrame.pendingInsts[0];
     scanInst = (int *)scanInst[1];
     if (pendingCountOrMovInst != 0) {
       hasTwoPending = pendingCountOrMovInst == 2;
       if (hasTwoPending) {
-        pendingCountOrMovInst = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),pendingInsts[0]);
+        pendingCountOrMovInst = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),pendFrame.pendingInsts[0]);
         operandVReg3 = (int *)IRInst__getOperandSource(firstPending,firstPending[0x21]);
-        secondPending = pendingInsts[1];
-        secondPendingKey = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),pendingInsts[1]);
+        secondPending = pendFrame.pendingInsts[1];
+        secondPendingKey = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),pendFrame.pendingInsts[1]);
         operandVReg2 = (int *)IRInst__getOperandSource(secondPending,secondPending[0x21]);
         if ((pendingCountOrMovInst == secondPendingKey) && (operandVReg3 == operandVReg2)) {
           ctx[1] = ctx[1] + 1;
@@ -1792,7 +1790,7 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
           ctx[1] = ctx[1] + 1;
           firstPending = (int *)((int (*)())IRInst__createMovForDest)(firstPending,operandVReg3,*ctx);
           Block__insertInstAfter(scanInst[0x56],scanInst,firstPending);
-          pendingInsts[0] = secondPending;
+          pendFrame.pendingInsts[0] = secondPending;
           scanInst = firstPending;
         }
         else {
@@ -1809,7 +1807,7 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
             ctx[1] = ctx[1] + 1;
             firstPending = (int *)((int (*)())IRInst__createMovForDest)(firstPending,secondPending,*ctx);
             Block__insertInstAfter(scanInst[0x56],scanInst,firstPending);
-            pendingInsts[0] = secondPending;
+            pendFrame.pendingInsts[0] = secondPending;
             scanInst = firstPending;
           }
           else {
@@ -1830,8 +1828,8 @@ int Block__materializePendingMovs(ctx, block, beforeInst, changedOut)
         needsClone = true;
         if (pendingCountOrMovInst != 1) {
 loopSetFirstPending:
-          firstPending = pendingInsts[0];
-          sourceDef = IRInst__getOperandSource(pendingInsts[0],pendingInsts[0][0x21]);
+          firstPending = pendFrame.pendingInsts[0];
+          sourceDef = IRInst__getOperandSource(pendFrame.pendingInsts[0],pendFrame.pendingInsts[0][0x21]);
           ctx[2] = ctx[2] + 1;
           savedRegisterFile = firstPending[0x26];
           savedRegisterNumber = firstPending[0x25];
@@ -1840,13 +1838,13 @@ loopSetFirstPending:
           Block__insertInstBefore(beforeInst[0x56],beforeInst,pendingCountOrMovInst);
           insertAfterInst = scanInst;
           if (hasTwoPending) {
-            sourceDef = IRInst__getOperandSource(pendingInsts[1],pendingInsts[1][0x21]);
+            sourceDef = IRInst__getOperandSource(pendFrame.pendingInsts[1],pendFrame.pendingInsts[1][0x21]);
             ctx[1] = ctx[1] + 1;
-            insertAfterInst = (int *)((int (*)())IRInst__createMovForDest)(pendingInsts[1],sourceDef,*ctx);
+            insertAfterInst = (int *)((int (*)())IRInst__createMovForDest)(pendFrame.pendingInsts[1],sourceDef,*ctx);
             Block__insertInstAfter(scanInst[0x56],scanInst,insertAfterInst);
-            IRInst__setOperandSource(pendingInsts[1],pendingInsts[1][0x21],0,0,*ctx);
-            pendingInsts[1][0x21] = pendingInsts[1][0x21] + -1;
-            pendingInsts[1][5] = pendingInsts[1][5] & 0xfffffdff;
+            IRInst__setOperandSource(pendFrame.pendingInsts[1],pendFrame.pendingInsts[1][0x21],0,0,*ctx);
+            pendFrame.pendingInsts[1][0x21] = pendFrame.pendingInsts[1][0x21] + -1;
+            pendFrame.pendingInsts[1][5] = pendFrame.pendingInsts[1][5] & 0xfffffdff;
           }
           if (needsClone) {
             ctx[1] = ctx[1] + 1;
@@ -1884,10 +1882,10 @@ loopSetFirstPending:
           return pendingCountOrMovInst;
         }
       }
-      firstPending = pendingInsts[0];
-      pendingCountOrMovInst = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),pendingInsts[0]);
+      firstPending = pendFrame.pendingInsts[0];
+      pendingCountOrMovInst = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),pendFrame.pendingInsts[0]);
       operandRecord = IRInst__getOperandRecord(firstPending,0);
-      writtenLanes = *(undefined4 *)(operandRecord + 0x10);
+      pendFrame.writtenLanes = *(undefined4 *)(operandRecord + 0x10);
       operandVReg = (int *)IRInst__getOperandSource(firstPending,firstPending[0x21]);
       sourceKey = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),operandVReg);
       if (beforeInst != (int *)0x0) {
@@ -1905,11 +1903,11 @@ loopSetFirstPending:
             }
             else {
               scanKey = thunk_FUN_00134de8(*(undefined4 *)(*ctx + 0x6c4),scanCursor);
-              writtenLanesCopy = writtenLanes;
+              writtenLanesCopy = pendFrame.writtenLanes;
               if (pendingCountOrMovInst == scanKey) {
                 operandRecord2 = IRInst__getOperandRecord(scanCursor,0);
-                SelectWord__mergeWrittenLanes(pendingInsts + 3,writtenLanesCopy,*(undefined4 *)(operandRecord2 + 0x10));
-                writtenLanes = pendingInsts[3];
+                SelectWord__mergeWrittenLanes(pendFrame.pendingInsts + 3,writtenLanesCopy,*(undefined4 *)(operandRecord2 + 0x10));
+                pendFrame.writtenLanes = pendFrame.pendingInsts[3];
                 instFlags = scanCursor[5];
               }
               else {
@@ -1957,19 +1955,19 @@ loopSetHasTwoPending:
       lanesLeft = 4;
       laneIndex = 0;
       do {
-        if (*(char *)((int)&writtenLanes + laneIndex) == '\x01') {
-          *(undefined1 *)((int)&writtenLanes + laneIndex) = 0;
+        if (*(char *)((int)&pendFrame.writtenLanes + laneIndex) == '\x01') {
+          *(undefined1 *)((int)&pendFrame.writtenLanes + laneIndex) = 0;
         }
         else {
-          *(undefined1 *)((int)&writtenLanes + laneIndex) = 1;
+          *(undefined1 *)((int)&pendFrame.writtenLanes + laneIndex) = 1;
         }
         laneIndex = laneIndex + 1;
         lanesLeft = lanesLeft + -1;
       } while (lanesLeft != 0);
       operandRecord = IRInst__getOperandRecord(pendingCountOrMovInst,0);
-      SelectWord__markLanesWhereSecondIsOne(mergedLanes,*(undefined4 *)(operandRecord + 0x10),writtenLanes);
-      writtenLanes = mergedLanes[0];
-      *(undefined4 *)(pendingCountOrMovInst + 0x9c) = mergedLanes[0];
+      SelectWord__markLanesWhereSecondIsOne(pendFrame.mergedLanes,*(undefined4 *)(operandRecord + 0x10),pendFrame.writtenLanes);
+      pendFrame.writtenLanes = pendFrame.mergedLanes[0];
+      *(undefined4 *)(pendingCountOrMovInst + 0x9c) = pendFrame.mergedLanes[0];
       Block__insertInstAfter(scanInst[0x56],scanInst,pendingCountOrMovInst);
       return pendingCountOrMovInst;
     }

@@ -1168,7 +1168,6 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
   undefined4 xWord1;
   undefined4 *copyDest;
   uint lenBytes;
-  byte cr0Flags;
   undefined4 *newFinish [2];
   undefined4 *newStart;
   void *destroyCursor;
@@ -1179,7 +1178,6 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
     oldStart = *(int *)this;
     len = 1;
     oldSize = (int)finish - oldStart >> 3;
-    cr0Flags = (oldSize == 0) << 1;
     if (oldSize != 0) {
       len = oldSize << 1;
     }
@@ -1303,10 +1301,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
   int *refCountPtr;
   int oldRefCount;
   int keyData;
-  byte cr0Flags;
   undefined4 allocatorCopy [4];
-  
-  cr0Flags = (node == (unsigned char *)0x0) << 1;
   if (node != (unsigned char *)0x0) {
     do {
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase)(this,*(unsigned char **)(node + 0xc));
@@ -1347,7 +1342,6 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
   uint lenBytes;
   undefined4 xValue;
   size_t frontBytes;
-  byte cr0Flags;
   
   forceNewFlagPtr = PTR__S_force_new_a7b7c0e8;
   finish = *(undefined4 **)(this + 4);
@@ -1355,7 +1349,6 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
     oldStart = *(void **)this;
     len = 1;
     oldSize = (int)finish - (int)oldStart >> 2;
-    cr0Flags = (oldSize == 0) << 1;
     if (oldSize != 0) {
       len = oldSize << 1;
     }

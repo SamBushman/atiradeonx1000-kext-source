@@ -1692,7 +1692,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
   void *nameString;
   undefined *variableVtable;
   undefined4 symbolTableLevel;
-  byte cr0Flags;
   undefined8 nameStringAllocationPair;
   undefined4 poolAllocatorArg [4];
   undefined **stackType;
@@ -1836,7 +1835,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     passThroughR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (nameStringAllocation != (void *)0x0) {
       poolAllocatorArgE[0] = GetGlobalPoolAllocator();
@@ -1905,7 +1903,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     passThroughR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (nameStringAllocation != (void *)0x0) {
       poolAllocatorArgF[0] = GetGlobalPoolAllocator();
@@ -1973,7 +1970,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     passThroughR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (nameStringAllocation != (void *)0x0) {
       poolAllocatorArgG[0] = GetGlobalPoolAllocator();
@@ -2043,7 +2039,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     passThroughR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (nameStringAllocation != (void *)0x0) {
       poolAllocatorArg[0] = GetGlobalPoolAllocator();
@@ -2112,7 +2107,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     passThroughR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (nameStringAllocation != (void *)0x0) {
       poolAllocatorArgB[0] = GetGlobalPoolAllocator();
@@ -2181,7 +2175,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     passThroughR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (nameStringAllocation != (void *)0x0) {
       poolAllocatorArgC[0] = GetGlobalPoolAllocator();
@@ -2250,7 +2243,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     nameStringAllocation = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     passThroughR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (nameStringAllocation == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (nameStringAllocation != (void *)0x0) {
       poolAllocatorArgD[0] = GetGlobalPoolAllocator();
@@ -2506,7 +2498,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
   undefined4 scratchR8;
   int uniqueId;
   undefined4 symbolTableLevel;
-  byte cr0Flags;
   undefined8 nameStringAllocationPair;
   undefined4 allocatorArg [4];
   undefined4 insertResultFirst;
@@ -2527,7 +2518,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
     nameStringAllocationPair = TPoolAllocator__allocate(poolAllocator,8);
     this = (void *)((ulonglong)nameStringAllocationPair >> 0x20);
     staleR4 = (undefined4)nameStringAllocationPair;
-    cr0Flags = (this == (void *)0x0) << 1;
     nameString = (void *)0x0;
     if (this != (void *)0x0) {
       allocatorArg[0] = GetGlobalPoolAllocator();
@@ -3270,7 +3260,6 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
   undefined4 r4Out6;
   unsigned char * symbolTableCopy;
   void *infoSink;
-  byte cr0Flags;
   undefined **stackType;
   undefined4 stackTypeArraySize;
   undefined4 stackTypeStructure;
@@ -3296,7 +3285,6 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
                     
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"INTERNAL ERROR: ");
     lineInString = sourceLoc & 0xffff;
-    cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
       _sprintf(stackTypeTailBytes,"%d:? ",(int)sourceLoc >> 0x10);
     }
@@ -3538,10 +3526,7 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
   unsigned char * sequence;
   undefined4 *sequenceFinish;
   code *getSequenceFn;
-  byte cr0Flags;
   unsigned char * intermNodeSpill;
-  
-  cr0Flags = (intermNode == (unsigned char *)0x0) << 1;
   intermNodeSpill = intermNode;
   if (intermNode == (unsigned char *)0x0) {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -3588,7 +3573,6 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
   }
   else {
     aggregateNode = (int *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode);
-    cr0Flags = (aggregateNode == (int *)0x0) << 1;
     if ((aggregateNode == (int *)0x0) || (noLine = line == 0, aggregateNode[0xc] != 0)) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       aggregateNode = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
@@ -3707,7 +3691,6 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   undefined4 *childCursor;
   uint childBasicType;
   void *infoSink;
-  byte cr0Flags;
   undefined **stackType;
   int stackTypeArraySize;
   int stackTypeStructure;
@@ -3984,7 +3967,6 @@ loopSetStackTypeBits3:
 override_jmp_97b8ea8c_case_0:
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"INTERNAL ERROR: ");
     childBasicType = targetBasicType & 0xffff;
-    cr0Flags = (childBasicType == 0) << 1;
     if (childBasicType == 0) {
       _sprintf(locTextBuf,"%d:? ",(int)targetBasicType >> 0x10);
     }
@@ -4087,7 +4069,6 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   int sequenceAllocator;
   unsigned char * sequence;
   undefined4 *sequenceFinish;
-  byte cr0Reg;
   unsigned char * intermNode1Spill;
   unsigned char * intermNode2Spill;
   
@@ -4098,7 +4079,6 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   intermNode2Spill = intermNode2;
   if (intermNode1 != (unsigned char *)0x0) {
     aggregateNode = (int *)(**(code **)(*(int *)intermNode1 + 0x1c))(intermNode1);
-    cr0Reg = (aggregateNode == (int *)0x0) << 1;
     if ((aggregateNode != (int *)0x0) && (aggregateNode[0xc] == 0)) goto checkIntermNode2Spill;
   }
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();

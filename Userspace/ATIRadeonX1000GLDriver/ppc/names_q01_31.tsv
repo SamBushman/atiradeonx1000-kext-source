@@ -222,7 +222,6 @@ local	gld_initContextHardwareState	local_44	initParam4	INFERRED	DAT_001aa4f8
 local	glReadPixels_impl	uVar11	staleArgR10	INFERRED	constant 0, only forwarded as stale argument register to _glgProcessPixels
 local	glReadPixels_impl	uStack_e8	layoutRowBytes	INFERRED	row bytes output of gld_computePixelStoreLayout (becomes srcRowBytes)
 local	glReadPixels_impl	iStack_e4	layoutPixelBytes	INFERRED	pixel bytes output of gld_computePixelStoreLayout; reused for the rectX byte offset of negative rects
-local	glReadPixels_impl	aiStack_e0	layoutSkipBytes	INFERRED	[0] skip-bytes output of gld_computePixelStoreLayout; [1] reply size and [2] rectX of the IOConnect request that continue the same stack block
 local	glReadPixels_impl	a5	layoutRowBytesPtr	INFERRED	&layoutRowBytes
 local	glReadPixels_impl	a2	convertOutAPtr	INFERRED	&convertOutA
 local	glReadPixels_impl	a3	convertOutBPtr	INFERRED	&convertOutB
@@ -345,7 +344,6 @@ local	glReadPixels_entry	puVar12	convertOutBPtr	INFERRED	&convertOutB
 local	glReadPixels_entry	puVar13	layoutRowBytesPtr	INFERRED	&layoutRowBytes
 local	glReadPixels_entry	uStack_e8	layoutRowBytes	INFERRED	row bytes output of gld_computePixelStoreLayout (becomes srcRowBytes)
 local	glReadPixels_entry	iStack_e4	layoutPixelBytes	INFERRED	pixel bytes output of gld_computePixelStoreLayout; reused for the rectX byte offset of negative rects
-local	glReadPixels_entry	aiStack_e0	layoutSkipBytes	INFERRED	[0] skip-bytes output of gld_computePixelStoreLayout; [1] reply size and [2] rectX of the IOConnect request that continue the same stack block
 local	glReadPixels_entry	auStack_a4	convertOutA	INFERRED	_glgConvertType output A
 local	glReadPixels_entry	auStack_a0	convertOutB	INFERRED	_glgConvertType output B
 local	glReadPixels_entry	uStack_9c	procMode	INFERRED	constant 2 in the processor descriptor

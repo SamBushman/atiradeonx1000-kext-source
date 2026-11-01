@@ -3121,9 +3121,6 @@ int _gldDestroyMemoryPluginData(ctx, pluginData)
   int *refCountSlot;
   int oldRefCount;
   int pluginRecord;
-  byte crBits;
-  
-  crBits = (pluginData == (int *)0x0) << 1;
   if (pluginData != (int *)0x0) {
     pluginRecord = *pluginData;
     if (pluginRecord != 0) {

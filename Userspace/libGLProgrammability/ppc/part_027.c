@@ -1067,11 +1067,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
   int oldRefCount;
   int secondData;
   unsigned char * leftChild;
-  byte cr0Flags;
   undefined4 secondAlloc [4];
   undefined4 firstAlloc [5];
-  
-  cr0Flags = (node == (unsigned char *)0x0) << 1;
   if (node != (unsigned char *)0x0) {
     do {
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase)(this,*(unsigned char **)(node + 0xc));

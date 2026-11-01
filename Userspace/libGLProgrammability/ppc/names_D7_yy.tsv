@@ -8,7 +8,6 @@ use	yyparse	local_808	setStructSizeResult	INFERRED	result of the call to TType::
 use	yyparse	iVar55	parseMatrixFieldsResult	INFERRED	result of the call to TParseContext::parseMatrixFields (named by the dylib symbol)	^\s*iVar55\ =\ TParseContext__parseMatrixFields\s*$	+1	lhs	none
 use	yyparse	iVar55	parseMatrixFieldsResult	INFERRED	result of the call to TParseContext::parseMatrixFields (named by the dylib symbol)	^\s*if\ \(iVar55\ ==\ 0\)\ \{\s*$@7	+1	all	none
 use	yyparse	pTVar3	parseVectorFieldsResult	INFERRED	result of the call to TParseContext::parseVectorFields (named by the dylib symbol)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)\s*$@4	+1	lhs	none
-use	yyparse	pTVar3	parseVectorFieldsResult	INFERRED	result of the call to TParseContext::parseVectorFields (named by the dylib symbol)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$@3	+1	rhs	none
 use	yyparse	pTVar3	parseVectorFieldsResult	INFERRED	result of the call to TParseContext::parseVectorFields (named by the dylib symbol)	^\s*if\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{\s*$@3	+1	all	none
 use	yyparse	pTVar3	parseVectorFieldsResult	INFERRED	result of the call to TParseContext::parseVectorFields (named by the dylib symbol)	^\s*local_850\ =\ pTVar3;\s*$@2	+1	rhs	none
 use	yyparse	iVar55	lValueError	INFERRED	result of TParseContext::lValueErrorCheck (3Dlabs ParseHelper: returns true when it reported an error, after which the action calls TParseContext::recover)	^\s*iVar55\ =\ TParseContext__lValueErrorCheck\s*$	+1	lhs	none
@@ -18,7 +17,6 @@ use	yyparse	iVar55	lValueError	INFERRED	result of TParseContext::lValueErrorChec
 use	yyparse	iVar55	constructorError	INFERRED	result of TParseContext::constructorErrorCheck (3Dlabs ParseHelper: returns true when it reported an error, after which the action calls TParseContext::recover)	^\s*iVar55\ =\ TParseContext__constructorErrorCheck\s*$	+1	lhs	none
 use	yyparse	iVar55	constructorError	INFERRED	result of TParseContext::constructorErrorCheck (3Dlabs ParseHelper: returns true when it reported an error, after which the action calls TParseContext::recover)	^\s*if\ \(iVar55\ ==\ 0\)\ \{\s*$@8	+1	all	none
 use	yyparse	pTVar3	findFunctionResult	INFERRED	result of the call to TParseContext::findFunction (named by the dylib symbol)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)\s*$@5	+1	lhs	none
-use	yyparse	pTVar3	findFunctionResult	INFERRED	result of the call to TParseContext::findFunction (named by the dylib symbol)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;\s*$@4	+1	rhs	none
 use	yyparse	pTVar3	findFunctionResult	INFERRED	result of the call to TParseContext::findFunction (named by the dylib symbol)	^\s*if\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{\s*$@4	+1	all	none
 use	yyparse	pTVar3	findFunctionResult	INFERRED	result of the call to TParseContext::findFunction (named by the dylib symbol)	^\s*local_84c\ =\ pTVar3;\s*$@4	+1	rhs	none
 use	yyparse	pTVar3	findFunctionResult	INFERRED	result of the call to TParseContext::findFunction (named by the dylib symbol)	^\s*local_848\ =\ pTVar3;\s*$@4	+1	rhs	none

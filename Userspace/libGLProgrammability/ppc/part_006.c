@@ -623,7 +623,6 @@ int TSymbolTable__dump(this, infoSink)
   int oldRefCount;
   unsigned char * sinkBase;
   int levelIdx;
-  byte cr0Flags;
   undefined4 levelNumStrAlloc;
   int levelNumStrData;
   char levelText [16];
@@ -634,7 +633,6 @@ int TSymbolTable__dump(this, infoSink)
   if (-1 < levelIdx) {
     sinkBase = infoSink + 8;
     do {
-      cr0Flags = (levelIdx == 0) << 1;
       __ZN13TInfoSinkBase6appendEPKc(sinkBase,"LEVEL ");
       _sprintf(levelText,"%d",levelIdx);
       ctorAlloc[0] = GetGlobalPoolAllocator();
@@ -1983,7 +1981,6 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int paramList;
   int *callTarget;
   char *opName;
-  byte cr0;
   ulonglong yylexResult;
   undefined8 nodePair;
   unsigned char yyssBeforeInit [2];
@@ -2712,7 +2709,6 @@ setYyvalNode:
     queryResult = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))
                        (*(int **)(yyvsp + -0x7c),(int)nodePair,scratchR5,scratchR6,scratchR7,staleR8Value,
                         staleR9Value);
-    cr0 = (queryResult == 0) << 1;
     if (queryResult == 0) {
       queryResult = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x50))(*(int **)(yyvsp + -0x7c));
       if (queryResult != 0) {
@@ -2733,7 +2729,6 @@ setYyvalNode:
       }
       isMatrix2 = (unsigned char *)
                (**(code **)(**(int **)(yyvsp + -0x7c) + 0x50))(*(int **)(yyvsp + -0x7c));
-      cr0 = (isMatrix2 == (unsigned char *)0x0) << 1;
       if (isMatrix2 != (unsigned char *)0x0) {
         basicType3 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x40))(*(int **)(yyvsp + -0x7c));
         nominalSize3 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x48))(*(int **)(yyvsp + -0x7c));
@@ -2858,7 +2853,6 @@ setTypeTmp2VtableOrPubArray:
     typeTmp5ArraySizeOrStr4Data[*(int *)(typeTmp5ArraySizeOrStr4Data + -0xc)] = **(char **)(picBase + -0x7cc4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringMem = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-    cr0 = (stringMem == (unsigned char *)0x0) << 1;
     typeNameString = (unsigned char *)0x0;
     if (stringMem != (unsigned char *)0x0) {
       ctorAlloc1[0] = GetGlobalPoolAllocator();
@@ -2902,7 +2896,6 @@ setTypeTmp2VtableOrPubArray:
     }
     isVector2 = (unsigned char *)
              (**(code **)(**(int **)(yyvsp + -0x50) + 0x58))(*(int **)(yyvsp + -0x50));
-    cr0 = (isVector2 == (unsigned char *)0x0) << 1;
     if (isVector2 == (unsigned char *)0x0) {
       queryResult = (**(code **)(**(int **)(yyvsp + -0x50) + 0x50))
                          (*(int **)(yyvsp + -0x50),r4In6,scratchR5,scratchR6,scratchR7,staleR8Value,staleR9Value);
@@ -3038,7 +3031,6 @@ setTypeTmp2VtableOrPubArray:
              TParseContext__parseVectorFields
                        (parseContext,*(unsigned char **)(yyvsp + 4),nominalSize,(unsigned char *)&typeTmp1VtableOrStr1Alloc,
                         (int)scratchR7);
-    cr0 = (parseVectorFieldsResult == (unsigned char *)0x0) << 1;
     if (parseVectorFieldsResult == (unsigned char *)0x0) {
       typeTmp1TypeNameOrStr2Alloc = (unsigned char *)0x1;
       typeTmp1VtableOrStr1Alloc = parseVectorFieldsResult;
@@ -3211,7 +3203,6 @@ yynCase6:
       picBase2 = (unsigned char *)0xa7b8374c;
       typeTmp1Word20OrPubType = (unsigned char *)0x0;
       typeTmp1BitsOrPubQualifier = (unsigned char *)((uint)typeTmp1BitsOrPubQualifier & 0x9ff | 0x800);
-      cr0 = (typeTmp1BitsOrPubQualifier == (unsigned char *)0x0) << 1;
       typeTmp1VtableOrStr1Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
       typeTmp1ArraySizeOrStr1Data = (unsigned char *)0x0;
       typeTmp1StructureOrPubSize = (unsigned char *)0x0;
@@ -3250,7 +3241,6 @@ yynCase6:
     findFunctionResult = (unsigned char *)
              TParseContext__findFunction
                        (parseContext,*(uint *)yyvsp,stackNode,(bool *)&outFlag,scratchR7,staleR8Value);
-    cr0 = (findFunctionResult == (unsigned char *)0x0) << 1;
     if (findFunctionResult == (unsigned char *)0x0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       constArray = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
@@ -3441,7 +3431,6 @@ setYyvalNodeReg2:
     if (paramFinish == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (newString == (unsigned char *)0x0) << 1;
       mangledString = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
         ctorAlloc2[0] = GetGlobalPoolAllocator();
@@ -3499,7 +3488,6 @@ setYyvalNodeReg2:
     if (paramFinish == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (newString == (unsigned char *)0x0) << 1;
       mangledString = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
         ctorAlloc3[0] = GetGlobalPoolAllocator();
@@ -3555,7 +3543,6 @@ loopSetYyvalNodeReg:
       emptyRep = emptyStringRepPtr_a7b7ba84;
       *(uint *)(newFunction + 0x20) = 0;
       clearedTypeBits = *(uint *)(newFunction + 0x40) & 0x9ff | 0x800;
-      cr0 = (clearedTypeBits == 0) << 1;
       *(uint *)(newFunction + 0x24) = 0;
       *(uint *)(newFunction + 0x40) = clearedTypeBits;
       emptyRepRefCount = (int *)(emptyRep + 8);
@@ -3642,7 +3629,6 @@ loopSetYyvalNodeReg:
       TParseContext__recover(parseContext);
     }
     typeTmp1BitsOrPubQualifier = (unsigned char *)((uint)typeTmp1BitsOrPubQualifier & 0x9ff | 0x800);
-    cr0 = (typeTmp1BitsOrPubQualifier == (unsigned char *)0x0) << 1;
     typeTmp1VtableOrStr1Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
     typeTmp1ArraySizeOrStr1Data = (unsigned char *)0x0;
     typeTmp1StructureOrPubSize = (unsigned char *)0x0;
@@ -4975,7 +4961,6 @@ loopSetStackNode:
     if (paramFinish == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (newString == (unsigned char *)0x0) << 1;
       mangledString = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
         ctorAlloc5[0] = GetGlobalPoolAllocator();
@@ -5045,7 +5030,6 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
     if (paramFinish == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (newString == (unsigned char *)0x0) << 1;
       mangledString = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
         ctorAlloc6[0] = GetGlobalPoolAllocator();
@@ -5134,7 +5118,6 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
       typeNameData = *(char **)(typeNameStr2 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       stringMem = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (stringMem == (unsigned char *)0x0) << 1;
       typeNameStr = (unsigned char *)0x0;
       if (stringMem != (unsigned char *)0x0) {
         ctorAlloc7[0] = GetGlobalPoolAllocator();
@@ -5251,7 +5234,6 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
       typeNameData = *(char **)(typeNameStr2 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (stringMem2 == (void *)0x0) << 1;
       fieldTypeName = (void *)0x0;
       if (stringMem2 != (void *)0x0) {
         ctorAlloc8[0] = GetGlobalPoolAllocator();
@@ -5322,7 +5304,6 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
         typeNameData = *(char **)(typeNameStr2 + 4);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         stringMem = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-        cr0 = (stringMem == (unsigned char *)0x0) << 1;
         typeWord20Value = (unsigned char *)0x0;
         if (stringMem != (unsigned char *)0x0) {
           ctorAlloc9[0] = GetGlobalPoolAllocator();
@@ -5402,7 +5383,6 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
       typeNameData = *(char **)(typeNameStr2 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (stringMem2 == (void *)0x0) << 1;
       fieldTypeName = (void *)0x0;
       if (stringMem2 != (void *)0x0) {
         ctorAlloc10[0] = GetGlobalPoolAllocator();
@@ -5525,7 +5505,6 @@ loopCallTParseContext_recover4:
       typeNameData = *(char **)(typeNameStr2 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (stringMem2 == (void *)0x0) << 1;
       fieldTypeName = (void *)0x0;
       if (stringMem2 != (void *)0x0) {
         ctorAlloc11[0] = GetGlobalPoolAllocator();
@@ -5595,7 +5574,6 @@ loopCallTParseContext_recover4:
         typeNameData = *(char **)(typeNameStr2 + 4);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         stringMem = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-        cr0 = (stringMem == (unsigned char *)0x0) << 1;
         typeWord20Value = (unsigned char *)0x0;
         if (stringMem != (unsigned char *)0x0) {
           ctorAlloc12[0] = GetGlobalPoolAllocator();
@@ -5670,7 +5648,6 @@ loopCallTParseContext_recover4:
       typeNameData = *(char **)(typeNameStr2 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (stringMem2 == (void *)0x0) << 1;
       fieldTypeName = (void *)0x0;
       if (stringMem2 != (void *)0x0) {
         ctorAlloc13[0] = GetGlobalPoolAllocator();
@@ -6365,7 +6342,6 @@ setTypeTmp1BitsOrPubQualifier3:
     typeTmp1Word14OrStr2Data[(int)*(unsigned char **)(typeTmp1Word14OrStr2Data + -0xc)] = *stringTerminalPtr_a7b7ba88;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    cr0 = (stringMem2 == (void *)0x0) << 1;
     fieldTypeName = (void *)0x0;
     if (stringMem2 != (void *)0x0) {
       ctorAlloc14[0] = GetGlobalPoolAllocator();
@@ -6504,7 +6480,6 @@ setTypeTmp1BitsOrPubQualifier3:
     typeTmp1Word14OrStr2Data[(int)*(unsigned char **)(typeTmp1Word14OrStr2Data + -0xc)] = *stringTerminalPtr_a7b7ba88;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringMem2 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    cr0 = (stringMem2 == (void *)0x0) << 1;
     fieldTypeName = (void *)0x0;
     if (stringMem2 != (void *)0x0) {
       ctorAlloc16[0] = GetGlobalPoolAllocator();
@@ -6581,7 +6556,6 @@ setTypeTmp1BitsOrPubQualifier3:
         }
         scratchR5 = (char *)*shorterLenPtr;
         fieldNameStr3 = _memcmp(*(undefined4 *)(fieldNameStr3 + 4),*(undefined4 *)(fieldNameStr + 4),scratchR5);
-        cr0 = (fieldNameStr3 == 0) << 1;
         if (fieldNameStr3 == 0) {
           fieldNameStr3 = nameLenB - secondNameLen;
         }
@@ -6651,7 +6625,6 @@ setTypeTmp1BitsOrPubQualifier3:
   case 0xa3:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     typeListMem = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x10);
-    cr0 = (typeListMem == (unsigned char *)0x0) << 1;
     typeList = (unsigned char *)(unsigned char *)0x0;
     if (typeListMem != (unsigned char *)0x0) {
       allocatorArg5 = GetGlobalPoolAllocator();
@@ -6695,7 +6668,6 @@ setYyvalTypeOrFunction2:
     typeVtablePtr = &PTR___ZN5TTypeD1Ev_a7b7d640;
     *(undefined ***)newTypeMem = &PTR___ZN5TTypeD1Ev_a7b7d640;
     typeBitsWord2 = (unsigned char *)((uint)*(unsigned char **)(newTypeMem + 0x24) & 0x9ff | 0x800);
-    cr0 = (typeBitsWord2 == (unsigned char *)0x0) << 1;
     *(unsigned char **)(newTypeMem + 0x20) = (unsigned char *)0x0;
     *(unsigned char **)(newTypeMem + 0x24) = typeBitsWord2;
     *(unsigned char **)(newTypeMem + 4) = (unsigned char *)0x0;
@@ -6717,7 +6689,6 @@ setYyvalTypeOrFunction2:
     typeVtablePtr = &PTR___ZN5TTypeD1Ev_a7b7d640;
     *(undefined ***)yyvalTypeOrFunction = &PTR___ZN5TTypeD1Ev_a7b7d640;
     typeBitsWord = (unsigned char *)((uint)*(unsigned char **)(yyvalTypeOrFunction + 0x24) & 0x9ff | 0x800);
-    cr0 = (typeBitsWord == (unsigned char *)0x0) << 1;
     *(unsigned char **)(yyvalTypeOrFunction + 0x20) = (unsigned char *)0x0;
     *(unsigned char **)(yyvalTypeOrFunction + 0x24) = typeBitsWord;
     *(unsigned char **)(yyvalTypeOrFunction + 4) = (unsigned char *)0x0;
@@ -7148,7 +7119,6 @@ storeParseContext2:
     paramVectorPtr = functionSymbol + 3;
     if (mainNameCompare == 0) {
       paramCount = functionSymbol[5] - functionSymbol[4] >> 3;
-      cr0 = (paramCount == 0) << 1;
       if (0 < paramCount) {
         nameString = functionSymbol[1];
         stringData2 = *(int *)(nameString + 4);
@@ -7551,7 +7521,6 @@ loopCheckTypeTmp1StructureCopy2:
   }
   scratchR5 = (char *)*shorterLenPtr;
   fieldNameStr2 = _memcmp(*(undefined4 *)(fieldNameStr2 + 4),*(undefined4 *)(*(uint *)(yyvsp + 4) + 4),scratchR5);
-  cr0 = (fieldNameStr2 == 0) << 1;
   if (fieldNameStr2 == 0) {
     fieldNameStr2 = declaredNameLen2 - nameLenB;
   }

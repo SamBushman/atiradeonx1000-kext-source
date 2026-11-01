@@ -27,10 +27,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
   int *refCountPtr;
   int oldRefCount;
   int keyData;
-  byte cr0Flags;
   undefined4 allocatorCopy [4];
-  
-  cr0Flags = (node == (unsigned char *)0x0) << 1;
   if (node != (unsigned char *)0x0) {
     do {
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase)(this,*(unsigned char **)(node + 0xc));

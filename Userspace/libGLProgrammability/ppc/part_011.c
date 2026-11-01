@@ -2909,7 +2909,6 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
   unsigned char * childOperand;
   undefined4 *childCursor;
   void *operandTemp;
-  byte cr0Reg;
   undefined8 resultAndR4Pair;
   uint opHeaderAndFlags [2];
   undefined **opDest0;
@@ -2991,7 +2990,6 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
     }
     (**(code **)(*(int *)this + 0x38))(&stackType,this);
     returnTypeBits = stackTypeBits & 0x1f80000;
-    cr0Reg = (returnTypeBits == 0) << 1;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d730;
     carriedR4 = r4In0;
     if (returnTypeBits != 0) {

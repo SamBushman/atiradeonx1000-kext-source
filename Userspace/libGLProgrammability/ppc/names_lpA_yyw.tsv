@@ -218,7 +218,6 @@ use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive afte
 use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@14	+1
 use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*if\ \(!bVar37\)\ \{$@5	+1
 use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)$@2	+1
-use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;$	+2
 use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_7ec\ =\ pTVar3;$	+8
 use	yyparse	pTVar3	typeTmp1StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_848;$	+1
 use	yyparse	pTVar3	typeTmp1StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_800\ =\ pTVar3;$	+1
@@ -226,7 +225,6 @@ use	yyparse	pTVar3	typeTmp3StructureCopy	INFERRED	named after the shape of its d
 use	yyparse	pTVar3	typeTmp3StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_818\ =\ pTVar3;$	+1
 use	yyparse	pTVar3	typeTmp3StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_808\ =\ \(unsigned\ char\ \*\)TType__setStructSize\(\(unsigned\ char\ \*\)\&local_820,\(unsigned\ char\ \*\)pTVar3\);$	+1
 use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)$@3	+1
-use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;$@2	+2
 use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_850\ =\ pTVar3;$	+4
 use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_83c\ =\ pTVar3;$@3	+8
 use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_83c\ =\ pTVar3;$@4	+8

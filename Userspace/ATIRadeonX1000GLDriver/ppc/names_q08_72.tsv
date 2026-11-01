@@ -39,6 +39,4 @@ use	R520MachineAssembler__vslot27_assembleIf	iVar1	thenBlock	INFERRED	first succ
 use	R520MachineAssembler__vslot27_assembleIf	iVar1	thenBlock	INFERRED	first successor block	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 300\)\ \+\ 0x134\),uVar3,param_2\);$	+1
 local	ValueKey__foldMulByPlusMinusOne	bVar1	notLastOperand	INFERRED	operand index != 2 loop continue flag
 local	ValueKey__foldMulByPlusMinusOne	iVar2	keptOperand	INFERRED	the other operand (3 - the operand equal to +-1)
-local	R520SchedModel__vslot4_addInstruction	local_38	freeSlotsA	INFERRED	out of PackState__countFreeSlots, first count (adjacent to freeSlotsB, whole variables)
-local	R520SchedModel__vslot4_addInstruction	local_34	freeSlotsB	INFERRED	out of PackState__countFreeSlots, second count
 local	R520SchedModel__vslot4_addInstruction	uVar2	constantLimit	INFERRED	schedModel +100 constant limit (0 when none)

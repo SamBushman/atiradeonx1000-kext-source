@@ -45,9 +45,6 @@ use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002e69\)\[iVar16\]\ !=\ '\\0'\)\ \{$	+1
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*if\ \(\(bVar4\)\ \|\|$	+6
 use	FUN_00029290	iVar6	renderWidth	INFERRED	copy of ctx field GLD_renderWidth	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_renderWidth\);$	+1
-use	FUN_00029290	iVar6	renderWidth	INFERRED	copy of ctx field GLD_renderWidth	^\s*uStack_b8\ =\ iVar6\ \*\ iVar7;$	+1
-use	FUN_00029290	iVar6	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*iVar6\ =\ uStack_b8\ \*\ \*\(int\ \*\)\(param_1\ \+\ GLD_renderHeight\);$	+2
-use	FUN_00029290	iVar6	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*uStack_bc\ =\ \(int\)pvVar9\ \+\ param_2\ \*\ iVar14\ \+\ iVar17\ \*\ iVar6\ \+\ iVar7;$	+1
 use	FUN_00029290	piVar19	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar19\ =\ \*\(int\ \*\*\)\(param_1\ \+\ GLD_boundFramebuffer\);$	+2
 use	FUN_00029290	piVar19	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*iVar7\ =\ \*\(ushort\ \*\)\(\*piVar19\ \+\ 0x98\)\ \-\ 0x8ce0;$	+1
 use	FUN_00029290	piVar19	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar20\ =\ \*\(int\ \*\*\)\(piVar19\[1\]\ \+\ iVar7\ \*\ 4\);$	+1
@@ -63,8 +60,6 @@ use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^
 use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
 use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0x30000\)\ ==\ 0x30000\)\ \{$@2	+1
 use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0x2000\)\ !=\ 0\)\ goto\ LAB_00029878;$	+1
-use	FUN_00029294	iVar19	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*iVar19\ =\ uStack_b8\ \*\ \*\(int\ \*\)\(param_1\ \+\ GLD_renderHeight\);$	+2
-use	FUN_00029294	iVar19	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*uStack_bc\ =\ iVar6\ \+\ iVar21\ \*\ iVar19\ \+\ iVar20\ \+\ param_2\ \*\ iVar9;$	+1
 use	FUN_00029294	piVar23	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar23\ =\ \*\(int\ \*\*\)\(param_1\ \+\ GLD_boundFramebuffer\);$	+2
 use	FUN_00029294	piVar23	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*iVar16\ =\ \*\(ushort\ \*\)\(\*piVar23\ \+\ 0x98\)\ \-\ 0x8ce0;$	+1
 use	FUN_00029294	piVar23	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar24\ =\ \*\(int\ \*\*\)\(piVar23\[1\]\ \+\ iVar16\ \*\ 4\);$	+1

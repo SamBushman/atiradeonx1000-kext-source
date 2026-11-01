@@ -5009,8 +5009,7 @@ int R520SchedModel__vslot4_addInstruction(schedModel, inst)
 {
   int callResult;
   undefined4 constantLimit;
-  undefined4 freeSlotsA;
-  undefined4 freeSlotsB;
+  int freeSlots [2];
   
   if ((inst[5] & 0x8000U) == 0) {
     callResult = (**(code **)(*inst + 0x28))(inst);
@@ -5018,13 +5017,13 @@ int R520SchedModel__vslot4_addInstruction(schedModel, inst)
       ((int (*)())SchedModel__classifySlotUse)(inst,schedModel + 0x18,schedModel + 0x20);
       ((int (*)())PackState__tryPlaceInstructionSources)(inst,schedModel + 0x1c,schedModel + 0x24,schedModel + 0x28,*(undefined4 *)(schedModel + 8)
                   );
-      ((int (*)())PackState__countFreeSlots)(schedModel + 0x28,&freeSlotsA);
+      ((int (*)())PackState__countFreeSlots)(schedModel + 0x28,&freeSlots[0]);
       constantLimit = 0;
       if (*(int *)(schedModel + 100) != 0) {
-        ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,freeSlotsA,freeSlotsB);
+        ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,freeSlots[0],freeSlots[1]);
         constantLimit = *(undefined4 *)(schedModel + 100);
       }
-      ((int (*)())SchedModel__assignConstantSelectors)(schedModel,constantLimit,inst,freeSlotsA,freeSlotsB);
+      ((int (*)())SchedModel__assignConstantSelectors)(schedModel,constantLimit,inst,freeSlots[0],freeSlots[1]);
       if (*(int *)(schedModel + 100) == 0) {
         *(int **)(schedModel + 100) = inst;
       }
@@ -5056,12 +5055,8 @@ int R520SchedModel__vslot3_canAddInstruction(schedModel, inst)
   int *inst;
 {
   int callResult;
-  undefined4 modelStateWord0;
-  undefined4 modelStateWord1;
-  undefined4 modelStateWord2;
-  undefined4 modelStateWord3;
-  undefined4 freeSlotsA;
-  undefined4 freeSlotsB;
+  undefined4 modelState [4];
+  int freeSlots [2];
   undefined1 packStateCopy [80];
   
   if ((inst[5] & 0x8000U) == 0) {
@@ -5069,17 +5064,17 @@ int R520SchedModel__vslot3_canAddInstruction(schedModel, inst)
     if (callResult != 0) {
       return *(int *)(schedModel + 4) == 0;
     }
-    modelStateWord0 = *(undefined4 *)(schedModel + 0x18);
-    modelStateWord1 = *(undefined4 *)(schedModel + 0x1c);
-    modelStateWord2 = *(undefined4 *)(schedModel + 0x20);
-    modelStateWord3 = *(undefined4 *)(schedModel + 0x24);
+    modelState[0] = *(undefined4 *)(schedModel + 0x18);
+    modelState[1] = *(undefined4 *)(schedModel + 0x1c);
+    modelState[2] = *(undefined4 *)(schedModel + 0x20);
+    modelState[3] = *(undefined4 *)(schedModel + 0x24);
     ((int (*)())PackState__copy)(packStateCopy,schedModel + 0x28);
-    callResult = ((int (*)())SchedModel__classifySlotUse)(inst,&modelStateWord0,&modelStateWord2);
+    callResult = ((int (*)())SchedModel__classifySlotUse)(inst,&modelState[0],&modelState[2]);
     if ((((callResult == 0) ||
-         (callResult = ((int (*)())PackState__tryPlaceInstructionSources)(inst,&modelStateWord1,&modelStateWord3,packStateCopy,*(undefined4 *)(schedModel + 8)),
-         callResult == 0)) || (callResult = ((int (*)())PackState__countFreeSlots)(packStateCopy,&freeSlotsA), callResult == 0)) ||
+         (callResult = ((int (*)())PackState__tryPlaceInstructionSources)(inst,&modelState[1],&modelState[3],packStateCopy,*(undefined4 *)(schedModel + 8)),
+         callResult == 0)) || (callResult = ((int (*)())PackState__countFreeSlots)(packStateCopy,&freeSlots[0]), callResult == 0)) ||
        ((*(int *)(schedModel + 100) != 0 &&
-        (callResult = ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,freeSlotsA,freeSlotsB), callResult == 0
+        (callResult = ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,freeSlots[0],freeSlots[1]), callResult == 0
         )))) {
       return false;
     }

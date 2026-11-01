@@ -102,7 +102,6 @@ int TIntermBinary__promote(this, infoSink, scratchR5, scratchR6, scratchR7, scra
   undefined4 r4Out8;
   undefined4 r4Out9;
   code *setTypeFn;
-  byte cr0Flags;
   undefined **stackType;
   int stackTypeArraySize;
   int stackTypeStructure;
@@ -290,7 +289,6 @@ checkOperandTypesMatch:
                     
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
           leftBasicType = resultNominalSize & 0xffff;
-          cr0Flags = (leftBasicType == 0) << 1;
           if (leftBasicType == 0) {
             _sprintf(typeTempOverlay,"%d:? ",(int)resultNominalSize >> 0x10);
           }
@@ -399,7 +397,6 @@ setSetTypeFn:
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
             leftBasicType = resultNominalSize & 0xffff;
-            cr0Flags = (leftBasicType == 0) << 1;
             if (leftBasicType == 0) {
               _sprintf((char *)&stackTypeTypeName,"%d:? ",(int)resultNominalSize >> 0x10);
             }
@@ -709,7 +706,6 @@ int TIntermConstantUnion__fold(this, op, rightOperand, infoSink, swapOperands, u
   undefined **refCountPtr;
   char *message;
   bool canFold;
-  byte reservationOk;
   int columnsLeft;
   undefined8 allocPair;
   undefined **unaryTypeVtbl;
@@ -917,7 +913,6 @@ override_jmp_97b95640_case_0:
     message = "Unary operation not folded into constant";
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
     sourceLine = sourceLoc & 0xffff;
-    reservationOk = (sourceLine == 0) << 1;
     if (sourceLine == 0) {
       _sprintf((char *)&unaryTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
     }
@@ -985,7 +980,6 @@ operatorOffsetCase17:
 override_jmp_97b9198c_case_0:
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
             sourceLine = sourceLoc & 0xffff;
-            reservationOk = (sourceLine == 0) << 1;
             if (sourceLine == 0) {
               _sprintf((char *)&binaryTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
             }
@@ -1065,7 +1059,6 @@ LAB_97b919a8: ;
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 sourceLine = sourceLoc & 0xffff;
-                reservationOk = (sourceLine == 0) << 1;
                 if (sourceLine == 0) {
                   _sprintf((char *)&binaryTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
                 }
@@ -1097,7 +1090,6 @@ LAB_97b919a8: ;
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 sourceLine = sourceLoc & 0xffff;
-                reservationOk = (sourceLine == 0) << 1;
                 if (sourceLine == 0) {
                   _sprintf((char *)&binaryTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
                 }
@@ -1139,7 +1131,6 @@ LAB_97b919a8: ;
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 sourceLine = sourceLoc & 0xffff;
-                reservationOk = (sourceLine == 0) << 1;
                 if (sourceLine == 0) {
                   _sprintf((char *)&binaryTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
                 }
@@ -1171,7 +1162,6 @@ LAB_97b919a8: ;
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 sourceLine = sourceLoc & 0xffff;
-                reservationOk = (sourceLine == 0) << 1;
                 if (sourceLine == 0) {
                   _sprintf((char *)&binaryTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
                 }
@@ -1227,7 +1217,6 @@ LAB_97b919a8: ;
                     
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
               sourceLine = sourceLoc & 0xffff;
-              reservationOk = (sourceLine == 0) << 1;
               if (sourceLine == 0) {
                 _sprintf((char *)rightTypeOverlay,"%d:? ",(int)sourceLoc >> 0x10);
               }
@@ -1359,7 +1348,6 @@ operatorOffsetCase15:
                     
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
     sourceLine = sourceLoc & 0xffff;
-    reservationOk = (sourceLine == 0) << 1;
     if (sourceLine == 0) {
       _sprintf((char *)&binaryTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
     }
@@ -1403,7 +1391,6 @@ operatorOffsetCase172:
 override_jmp_97b938f4_case_0:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       sourceLine = sourceLoc & 0xffff;
-      reservationOk = (sourceLine == 0) << 1;
       if (sourceLine == 0) {
         _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
       }
@@ -1444,7 +1431,6 @@ code_r0x97b945f4:
                     
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
           sourceLine = sourceLoc & 0xffff;
-          reservationOk = (sourceLine == 0) << 1;
           if (sourceLine == 0) {
             _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
           }
@@ -1499,7 +1485,6 @@ setR4Value:
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
             sourceLine = sourceLoc & 0xffff;
-            reservationOk = (sourceLine == 0) << 1;
             if (sourceLine == 0) {
               _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
             }
@@ -1546,7 +1531,6 @@ setR4Value:
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
                 sourceLine = sourceLoc & 0xffff;
-                reservationOk = (sourceLine == 0) << 1;
                 if (sourceLine == 0) {
                   _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
                 }
@@ -1599,7 +1583,6 @@ code_r0x97b93828:
 override_jmp_97b93698_case_0:
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
               sourceLine = sourceLoc & 0xffff;
-              reservationOk = (sourceLine == 0) << 1;
               if (sourceLine == 0) {
                 _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
               }
@@ -1629,7 +1612,6 @@ override_jmp_97b93698_case_0:
 override_jmp_97b93868_case_0:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
           sourceLine = sourceLoc & 0xffff;
-          reservationOk = (sourceLine == 0) << 1;
           if (sourceLine == 0) {
             _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
           }
@@ -1661,7 +1643,6 @@ code_r0x97b93640:
 override_jmp_97b934a8_case_0:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
           sourceLine = sourceLoc & 0xffff;
-          reservationOk = (sourceLine == 0) << 1;
           if (sourceLine == 0) {
             _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
           }
@@ -1752,7 +1733,6 @@ setMessage:
 override_jmp_97b94180_case_0:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       sourceLine = sourceLoc & 0xffff;
-      reservationOk = (sourceLine == 0) << 1;
       if (sourceLine == 0) {
         _sprintf((char *)&compareTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
       }
@@ -1870,7 +1850,6 @@ loopSetFoldNodeVtable:
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
         sourceLine = sourceLoc & 0xffff;
-        reservationOk = (sourceLine == 0) << 1;
         if (sourceLine == 0) {
           _sprintf((char *)locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
         }
@@ -2074,7 +2053,6 @@ loopSetFoldNodeVtable:
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       sourceLine = sourceLoc & 0xffff;
-      reservationOk = (sourceLine == 0) << 1;
       if (sourceLine == 0) {
         _sprintf(locTextBuf2,"%d:? ",(int)sourceLoc >> 0x10);
       }
@@ -2219,7 +2197,6 @@ loopSetEqualityResult:
 override_jmp_97b95280_case_0:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       sourceLine = sourceLoc & 0xffff;
-      reservationOk = (sourceLine == 0) << 1;
       if (sourceLine == 0) {
         _sprintf((char *)&tailTypeWord4Overlay,"%d:? ",(int)sourceLoc >> 0x10);
       }
@@ -2272,7 +2249,6 @@ setMessage2:
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
         sourceLine = operatorOffset & 0xffff;
-        reservationOk = (sourceLine == 0) << 1;
         if (sourceLine == 0) {
           _sprintf((char *)&tailTypeWord4Overlay,"%d:? ",(int)operatorOffset >> 0x10);
         }
@@ -2385,7 +2361,6 @@ code_r0x97b95098:
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
       sourceLine = sourceLoc & 0xffff;
-      reservationOk = (sourceLine == 0) << 1;
       if (sourceLine == 0) {
         _sprintf(locTextBuf3,"%d:? ",(int)sourceLoc >> 0x10);
       }
@@ -2693,7 +2668,6 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   char *errorText;
   int componentIndex;
   void *infoSink;
-  byte cr0Flags;
   double i2dBias;
   undefined **typeTempOverlay [4];
   unsigned char allocatorDummy [20];
@@ -2765,7 +2739,6 @@ loopSetInfoSink:
 override_jmp_97b960f0_case_0:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
           sourceLine = sourceLoc & 0xffff;
-          cr0Flags = (sourceLine == 0) << 1;
           if (sourceLine == 0) {
             _sprintf((char *)&stackType,"%d:? ",(int)sourceLoc >> 0x10);
           }
@@ -3317,14 +3290,12 @@ int OutputTreeText(infoSink, intermNode, depth)
   int oldRefCount;
   uint sourceLoc;
   uint sourceLine;
-  byte cr0Flags;
   int locString [4];
   char locTextBuf [64];
   unsigned char allocatorDummy [28];
   
   sourceLoc = (*(code *)**(undefined4 **)intermNode)(intermNode,intermNode,depth);
   sourceLine = sourceLoc & 0xffff;
-  cr0Flags = (sourceLine == 0) << 1;
   if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
@@ -3589,7 +3560,6 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   int componentIndex;
   unsigned char * lineSink;
   unsigned char * infoSink;
-  byte cr0Flags;
   double scratchF3;
   double scratchF4;
   double scratchF5;
@@ -3674,7 +3644,6 @@ loopSetLineSink:
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
         sourceLine = sourceLoc & 0xffff;
-        cr0Flags = (sourceLine == 0) << 1;
         if (sourceLine == 0) {
           _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
         }
@@ -4107,7 +4076,6 @@ int ParseSymbol(intermSymbol, intermTraverser)
   int level;
   int levelIndex;
   byte cr0Reg;
-  byte cr0Flags;
   double i2dBias;
   undefined8 constArrayAlloc;
   undefined **stackType;
@@ -4271,7 +4239,6 @@ code_r0x97b98bfc:
 override_jmp_97b98aec_case_0:
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
               lineInString = sourceLoc & 0xffff;
-              cr0Flags = (lineInString == 0) << 1;
               if (lineInString == 0) {
                 _sprintf((char *)locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
               }
@@ -4309,7 +4276,6 @@ code_r0x97b98dd8:
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
       lineInString = sourceLoc & 0xffff;
-      cr0Flags = (lineInString == 0) << 1;
       if (lineInString == 0) {
         _sprintf(locTextBuf2,"%d:? ",(int)sourceLoc >> 0x10);
       }
@@ -4344,7 +4310,6 @@ code_r0x97b98dd8:
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
       lineInString = sourceLoc & 0xffff;
-      cr0Flags = (lineInString == 0) << 1;
       if (lineInString == 0) {
         _sprintf(locTextBuf3,"%d:? ",(int)sourceLoc >> 0x10);
       }
@@ -4381,7 +4346,6 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
   uint sourceLoc;
   uint lineInString;
   void *infoSink;
-  byte cr0Flags;
   undefined **stackType;
   int stackTypeArraySize;
   unsigned char locTextBuf [20];
@@ -4398,7 +4362,6 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
     sourceLoc = (*(code *)**(undefined4 **)intermBinary)(intermBinary);
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
     lineInString = sourceLoc & 0xffff;
-    cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
       _sprintf((char *)locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
     }
@@ -4432,7 +4395,6 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
     sourceLoc = (*(code *)**(undefined4 **)intermBinary)(intermBinary);
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
     lineInString = sourceLoc & 0xffff;
-    cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
       _sprintf(locTextBuf2,"%d:? ",(int)sourceLoc >> 0x10);
     }
@@ -4501,7 +4463,6 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  byte cr0Flags;
   char messageBuf [208];
   char *typeString;
   int typeStringChars;
@@ -4523,7 +4484,6 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   sourceLoc = (*(code *)**(undefined4 **)intermUnary)(intermUnary);
   __ZN13TInfoSinkBase6appendEPKc(this,"ERROR: ");
   sourceLine = sourceLoc & 0xffff;
-  cr0Flags = (sourceLine == 0) << 1;
   if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
@@ -4605,7 +4565,6 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
   int firstChildVtable;
   void *this;
   undefined4 *childCursor;
-  byte cr0Flags;
   undefined8 isConstructorResult;
   undefined **typeTemp1 [9];
   uint typeTemp1Bits;
@@ -4636,7 +4595,6 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
                     
     __ZN13TInfoSinkBase6appendEPKc(this,"ERROR: ");
     sourceLine = sourceLoc & 0xffff;
-    cr0Flags = (sourceLine == 0) << 1;
     if (sourceLine == 0) {
       _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
     }
@@ -4738,7 +4696,6 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  byte cr0Flags;
   char *locString [4];
   char locTextBuf [64];
   unsigned char allocatorDummy [28];
@@ -4747,7 +4704,6 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   sourceLoc = (*(code *)**(undefined4 **)intermSelection)(intermSelection,intermSelection,intermTraverser);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
   sourceLine = sourceLoc & 0xffff;
-  cr0Flags = (sourceLine == 0) << 1;
   if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
@@ -5035,7 +4991,6 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  byte cr0Flags;
   char *locString [4];
   char locTextBuf [64];
   unsigned char allocatorDummy [28];
@@ -5044,7 +4999,6 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   sourceLoc = (*(code *)**(undefined4 **)intermLoop)(intermLoop,intermLoop,intermTraverser);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
   sourceLine = sourceLoc & 0xffff;
-  cr0Flags = (sourceLine == 0) << 1;
   if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
@@ -5114,7 +5068,6 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  byte cr0Flags;
   char *locString [4];
   char locTextBuf [64];
   unsigned char allocatorDummy [28];
@@ -5123,7 +5076,6 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   sourceLoc = (*(code *)**(undefined4 **)intermBranch)(intermBranch,intermBranch,intermTraverser);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
   sourceLine = sourceLoc & 0xffff;
-  cr0Flags = (sourceLine == 0) << 1;
   if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
@@ -5508,7 +5460,6 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   int oldRefCount;
   uint sourceLine;
   void *infoSink;
-  byte cr0Flags;
   char formattedInfoBuf [400];
   char *locString [4];
   char locTextBuf [64];
@@ -5521,7 +5472,6 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   __ZN13TInfoSinkBase6appendEPKc(*(void **)(this + 8),"ERROR: ");
   infoSink = *(void **)(this + 8);
   sourceLine = (uint)sourceLoc & 0xffff;
-  cr0Flags = (sourceLine == 0) << 1;
   if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
@@ -5883,7 +5833,6 @@ int TParseContext__reservedErrorCheck(this, sourceLoc, text)
   undefined4 scratchR10;
   uint reservedPrefixLength;
   uint namePrefixLength;
-  byte cr0Flags;
   undefined4 namePrefix;
   int namePrefixChars;
   undefined4 reservedPrefix;
@@ -5909,7 +5858,6 @@ int TParseContext__reservedErrorCheck(this, sourceLoc, text)
       minLengthPtr = &prefixLength;
     }
     compareResult = _memcmp(reservedPrefixChars,namePrefixChars,*minLengthPtr);
-    cr0Flags = (compareResult == 0) << 1;
     if (compareResult == 0) {
       compareResult = reservedPrefixLength - namePrefixLength;
     }
@@ -5991,7 +5939,6 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   int scratchR10;
   unsigned char * structFieldList;
   int paramIndex;
-  byte cr0Flags;
   undefined8 allocPair;
   undefined **stackType;
   int stackTypeArraySize;
@@ -6140,7 +6087,6 @@ setConstructorScratch2:
     allocPair = TPoolAllocator__allocate(poolAllocator,8);
     newTypeNameString = (void *)((ulonglong)allocPair >> 0x20);
     paramSizeResult = (int)allocPair;
-    cr0Flags = (newTypeNameString == (void *)0x0) << 1;
     stackTypeTypeName = (void *)0x0;
     if (newTypeNameString != (void *)0x0) {
       allocatorArg[0] = GetGlobalPoolAllocator();

@@ -391,7 +391,6 @@ int _CPPWarningToInfoLog(str)
   int stringNo;
   uint lineInString;
   void *this;
-  byte cr0Flags;
   char *lineStr [4];
   char lineBuf [64];
   unsigned char lineStrAlloc [16];
@@ -401,7 +400,6 @@ int _CPPWarningToInfoLog(str)
                     
   __ZN13TInfoSinkBase6appendEPKc(this,"WARNING: ");
   lineInString = lineNo & 0xffff;
-  cr0Flags = (lineInString == 0) << 1;
   stringNo = (int)lineNo >> 0x10;
   if (lineInString == 0) {
     _sprintf(lineBuf,"%d:? ",stringNo);
@@ -862,7 +860,6 @@ int _updateExtensionBehavior(extensionName, behaviorName)
   undefined4 staleR8;
   undefined4 staleR9;
   void *infoSink;
-  byte cr0Reg;
   int extIter [4];
   undefined4 msgStrAlloc;
   char *msgStrData;
@@ -1032,7 +1029,6 @@ loopSetRefCountPtr:
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
       column = lineNo & 0xffff;
-      cr0Reg = (column == 0) << 1;
       stringNo = (int)lineNo >> 0x10;
       if (column == 0) {
         _sprintf(lineText,"%d:? ",stringNo);

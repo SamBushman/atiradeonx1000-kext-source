@@ -7,12 +7,6 @@ local	ValueKey__foldMulByZero	local_38	zeroVec4X	INFERRED	vec4 {0,0,0,0} handed 
 local	ValueKey__foldMulByZero	local_34	zeroVec4Y	INFERRED	see zeroVec4X
 local	ValueKey__foldMulByZero	local_30	zeroVec4Z	INFERRED	see zeroVec4X
 local	ValueKey__foldMulByZero	local_2c	zeroVec4W	INFERRED	see zeroVec4X
-local	R520SchedModel__vslot3_canAddInstruction	local_78	modelStateWord0	INFERRED	copy of schedModel +0x18 (adjacent state words, whole variables)
-local	R520SchedModel__vslot3_canAddInstruction	local_74	modelStateWord1	INFERRED	copy of schedModel +0x1c
-local	R520SchedModel__vslot3_canAddInstruction	local_70	modelStateWord2	INFERRED	copy of schedModel +0x20
-local	R520SchedModel__vslot3_canAddInstruction	local_6c	modelStateWord3	INFERRED	copy of schedModel +0x24
-local	R520SchedModel__vslot3_canAddInstruction	local_68	freeSlotsA	INFERRED	out of PackState__countFreeSlots, first count
-local	R520SchedModel__vslot3_canAddInstruction	local_64	freeSlotsB	INFERRED	out of PackState__countFreeSlots, second count
 local	R520SchedModel__vslot3_canAddInstruction	auStack_60	packStateCopy	INFERRED	copy of the model's PackState (schedModel +0x28) that the instruction is trial-placed into
 use	R520MachineAssembler__vslot74_setPredicateSetDestination	iVar1	recordTable	INFERRED	this+0xa8: base of the 0x48-byte record table	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xa8\);$	+1
 use	R520MachineAssembler__vslot74_setPredicateSetDestination	iVar1	recordTable	INFERRED	this+0xa8: base of the 0x48-byte record table	^\s*\*\(undefined1\ \*\)\(iVar7\ \*\ 0x48\ \+\ iVar1\ \+\ 0x15\)\ =\ uVar4;$	+1

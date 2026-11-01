@@ -397,8 +397,6 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
   int *existingSymbol;
   undefined4 symbolTableLevel;
   int *symbolTableLevels;
-  byte cr0Reg;
-  byte cr0Flags;
   undefined8 variableAllocation;
   undefined **stackType;
   char *stackTypeArraySize;
@@ -479,7 +477,6 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
       }
       if ((existingSymbol == (int *)0x0) || (sameScope == 0)) {
         stackTypeArraySize = (char *)TParseContext__reservedErrorCheck((unsigned char *)parseContext,(int)line,text);
-        cr0Flags = (stackTypeArraySize == (char *)0x0) << 1;
         if (stackTypeArraySize != (char *)0x0) {
           return 1;
         }
@@ -531,7 +528,6 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
           typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
           structTypeNameString = (undefined **)((ulonglong)typeNameAllocation >> 0x20);
           passThroughR4 = (undefined4)typeNameAllocation;
-          cr0Flags = (structTypeNameString == (undefined **)0x0) << 1;
           structTypeName = (undefined **)0x0;
           if (structTypeNameString != (undefined **)0x0) {
             poolAllocatorArg1[0] = ((int (*)())GetGlobalPoolAllocator)();
@@ -767,7 +763,6 @@ storeIdentifierChars:
       structTypeNameChars2 = *(char **)(structTypeNameStringRef + 4);
       poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
       this = (void *)((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
-      cr0Reg = (this == (void *)0x0) << 1;
       typeNameString = (void *)0x0;
       if (this != (void *)0x0) {
         destroyAllocator2[0] = ((int (*)())GetGlobalPoolAllocator)();
@@ -999,7 +994,6 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
   int *symbolTable;
   char *structTypeNameChars;
   undefined4 symbolTableLevel;
-  byte cr0Reg;
   undefined8 structSizeResult;
   undefined **stackType;
   int stackTypeArraySize;
@@ -1084,7 +1078,6 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
     typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
     newTypeNameString = (void *)((ulonglong)typeNameAllocation >> 0x20);
     staleR4 = (undefined4)typeNameAllocation;
-    cr0Reg = (newTypeNameString == (void *)0x0) << 1;
     typeNameString = (void *)0x0;
     if (newTypeNameString != (void *)0x0) {
       allocatorArg[0] = ((int (*)())GetGlobalPoolAllocator)();
@@ -1226,8 +1219,6 @@ int TParseContext__extensionErrorCheck(this, sourceLoc, str)
   void *infoSink;
   uint nodeKeyLength;
   uint keyLength;
-  byte cr0Reg;
-  byte cr0Flags;
   undefined4 extensionKey;
   int extensionKeyChars;
   int allocatorOverlay [4];
@@ -1299,7 +1290,6 @@ loopStoreInsertHintCopy:
       minLengthPtr = &lenKeyA;
     }
     compareResult = _memcmp(extensionKeyChars,*(undefined4 *)(mapIterOverlay + 0x14),*minLengthPtr);
-    cr0Reg = (compareResult == 0) << 1;
     if (compareResult == 0) {
       compareResult = keyLength - nodeKeyLength;
     }
@@ -1330,7 +1320,6 @@ loopStoreInsertHintCopy:
                     
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
     lineInString = sourceLoc & 0xffff;
-    cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
       _sprintf(locTextBuf,"%d:? ",sourceLoc >> 0x10);
     }
@@ -1387,7 +1376,6 @@ loopStoreInsertHintCopy:
       minLengthPtr = &lenKeyB;
     }
     compareResult = _memcmp(extensionKeyChars,*(undefined4 *)(allocatorOverlay[0] + 0x14),*minLengthPtr);
-    cr0Reg = (compareResult == 0) << 1;
     if (compareResult == 0) {
       compareResult = keyLength - nodeKeyLength;
     }
@@ -1590,7 +1578,6 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   int currentLevel;
   char *typeNameChars;
   unsigned char * newNodeType;
-  byte cr0Flags;
   undefined8 variableAllocation;
   undefined **stackType;
   uint voidErrorResult;
@@ -1634,7 +1621,6 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     return 1;
   }
   voidErrorResult = TParseContext__voidErrorCheck(this,line,identifier,publicType);
-  cr0Flags = (voidErrorResult == 0) << 1;
   if (voidErrorResult != 0) {
     return 1;
   }
@@ -1687,7 +1673,6 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
     structTypeNameString = (undefined **)((ulonglong)typeNameAllocation >> 0x20);
     passThroughR4 = (undefined4)typeNameAllocation;
-    cr0Flags = (structTypeNameString == (undefined **)0x0) << 1;
     structTypeName = (undefined **)0x0;
     if (structTypeNameString != (undefined **)0x0) {
       poolAllocatorArg1[0] = ((int (*)())GetGlobalPoolAllocator)();
@@ -1794,7 +1779,6 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   (**(code **)(*(int *)initializer + 0x38))((unsigned char *)&stackType,initializer);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   qualifierIsNotConst = -((int)-((uint)stackTypeBits >> 0x19 ^ 2) >> 0x1f);
-  cr0Flags = (qualifierIsNotConst == 0) << 1;
   if (qualifierIsNotConst != 0) {
     TType__getCompleteString(&ptCopyType,newNodeType);
     stringTerminator = *stringTerminalPtr_a7b7ba18;
@@ -1829,7 +1813,6 @@ loopCallNewNodeVirtual28:
   stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   stackTypeStructure = (undefined **)0x0;
   stackTypeStructureSize = 0;
-  cr0Flags = 2;
   typeStringChars = qualifierIsNotConst;
   stackTypeFieldName = qualifierIsNotConst;
   structTypeName = (undefined **)0x0;
@@ -1859,7 +1842,6 @@ loopCallNewNodeVirtual28:
     typeNameChars = *(char **)(structTypeNameStringRef + 4);
     poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
     structTypeNameString = (undefined **)((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
-    cr0Flags = (structTypeNameString == (undefined **)0x0) << 1;
     structTypeName = (undefined **)0x0;
     if (structTypeNameString != (undefined **)0x0) {
       poolAllocatorArg2[0] = ((int (*)())GetGlobalPoolAllocator)();
@@ -2473,7 +2455,6 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   unsigned char * constArray;
   void *infoSink;
   int lineCopy;
-  byte cr0Flags;
   undefined **typeTempOverlay [4];
   char locTextBuf [20];
   uint typeTempBits;
@@ -2490,7 +2471,6 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       sourceLine = line & 0xffff;
-      cr0Flags = (sourceLine == 0) << 1;
       if (sourceLine == 0) {
         _sprintf(locTextBuf,"%d:? ",line >> 0x10);
       }
@@ -2848,7 +2828,6 @@ int TParseContext__initializeExtensionBehavior(this)
   uint *minLengthPtr;
   uint keyLength;
   uint nodeKeyLength;
-  byte cr0Reg;
   undefined4 extensionKey;
   int extensionKeyChars;
   undefined4 allocatorArg [4];
@@ -2881,7 +2860,6 @@ int TParseContext__initializeExtensionBehavior(this)
       minLengthPtr = &lenKey;
     }
     compareResult = _memcmp(extensionKeyChars,*(undefined4 *)(lowerBound[0] + 0x14),*minLengthPtr);
-    cr0Reg = (compareResult == 0) << 1;
     if (compareResult == 0) {
       compareResult = keyLength - nodeKeyLength;
     }
@@ -3682,7 +3660,6 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
   char **stringArray;
   undefined4 result;
   uint arrayIndex;
-  byte cr0Flags;
   void **pcIntermediate;
   unsigned char * pcSymbolTable;
   void *pcInfoSink;
@@ -3753,7 +3730,6 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
   emptyStringAllocatorCopy = emptyStringAllocator;
   setInitialState();
   levelCount = *(int *)(this + 4) - *(int *)this >> 2;
-  cr0Flags = (levelCount != 0) << 1;
   if ((levelCount != 0) && (levelCount != 1)) {
     ___eprintf("%s:%u: failed assertion `%s\'\n",
                "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/ShaderLang.cpp"
@@ -3911,7 +3887,6 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
   uint success;
   char *stringRepData;
   uint *this;
-  byte cr0Flags;
   void *symbolTableLevelsBegin;
   int *symbolTableLevelsEnd;
   int *symbolTableLevelsCapacityEnd;
@@ -3956,7 +3931,6 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
     return 0;
   }
   compiler = (int *)(**(code **)(*handle + 8))(handle);
-  cr0Flags = (compiler == (int *)0x0) << 1;
   if (compiler == (int *)0x0) {
     return 0;
   }
@@ -4115,7 +4089,6 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
       }
       if (optLevel != 0) {
         noDebugOutput = (debugOptions & 1) == 0;
-        cr0Flags = noDebugOutput << 1;
         if (!noDebugOutput) {
           TIntermediate__outputTree((unsigned char *)&intermediate,treeRoot);
         }
@@ -4150,7 +4123,6 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
     }
     __ZN13TInfoSinkBase6appendEPKc(infoSinkRef,messageText);
     noDebugOutput = (debugOptions & 1) == 0;
-    cr0Flags = noDebugOutput << 1;
     if (!noDebugOutput) {
       TIntermediate__outputTree((unsigned char *)&intermediate,treeRoot);
     }

@@ -845,7 +845,6 @@ int _gldAllocVertexBuffer(ctx, bufferKind, sizeInOut)
   byte *retireCounter;
   undefined4 kernelKind;
   int currentChunk;
-  byte crBits;
   undefined4 structOutSize;
   int chunkOut [2];
   uint structIn [5];
@@ -937,7 +936,6 @@ returnZero:
       retireCounter = *(byte **)(ctx + GLD_retireCounter);
       retiredStamp = (uint)retireCounter[3] << 0x18 | (uint)retireCounter[2] << 0x10 | (uint)retireCounter[1] << 8 |
               (uint)*retireCounter;
-      crBits = (chunkStamp == retiredStamp) << 1;
       if (0 < (int)(chunkStamp - retiredStamp)) {
         if (*(uint *)(ctx + GLD_vertexChunkCount) < 0x80) goto loopSetStructIn0;
         requestedSize = 0xf4241;

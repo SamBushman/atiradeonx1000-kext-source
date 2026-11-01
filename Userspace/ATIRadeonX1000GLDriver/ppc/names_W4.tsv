@@ -103,7 +103,6 @@ local	_gldDestroyMemoryPluginData	param_2	pluginData	INFERRED	pointer to the plu
 local	_gldDestroyMemoryPluginData	piVar2	refCountSlot	INFERRED	&pluginRecord[+0x10], decremented atomically by 0x10000
 local	_gldDestroyMemoryPluginData	iVar3	oldRefCount	INFERRED	value read before the atomic decrement; ==0x10000 means last reference -> selector 0xb release
 local	_gldDestroyMemoryPluginData	iVar4	pluginRecord	INFERRED	*pluginData
-local	_gldDestroyMemoryPluginData	bVar5	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldReclaimBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldReclaimBuffer	param_2	buffer	INFERRED	as _gldFlushBuffer; buffer+8 holds the plug-in data pointer
 local	_gldReclaimBuffer	piVar2	pluginData	INFERRED	*(buffer+8); later reused as &pluginRecord[+0x10] (refCountSlot)
@@ -458,7 +457,6 @@ local	_gldAllocVertexBuffer	uVar5	chunkStamp	INFERRED	stamp stored in the chunk 
 local	_gldAllocVertexBuffer	pbVar6	retireCounter	INFERRED	byte pointer to ctx[0x238]: the retire counter assembled byte by byte
 local	_gldAllocVertexBuffer	uVar7	kernelKind	CONFIRMED	9..0xe stored at chunk+0xc
 local	_gldAllocVertexBuffer	iVar8	currentChunk	INFERRED	*(ctx+0x210)+0x10: head chunk record
-local	_gldAllocVertexBuffer	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldAllocVertexBuffer	local_48	structOutSize	CONFIRMED	output struct size (8) passed as &local_48
 local	_gldPageoffBuffer	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t; ctx+0xc mutex
 local	_gldPageoffBuffer	param_2	buffer	INFERRED	buffer record: +8 holds the memory-plugin data pointer
