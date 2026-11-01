@@ -1401,8 +1401,8 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
   uint negate0;
   int tempRegister;
   uint negate1;
-  undefined4 unaff_r21;
-  undefined4 unaff_r22;
+  undefined4 savedDstMask;
+  undefined4 savedDstToken;
   uint componentCount;
   uint *dstMaskPtr;
   uint *swizzlePtr;
@@ -1416,8 +1416,8 @@ int fragmentTranslateScalarMath(translator, slot, ilInstr)
   srcSwizzleWord = ilInstr[6];
   if (1 < componentCount) {
     tempRegister = translator[8];
-    unaff_r22 = ilInstr[1];
-    unaff_r21 = ilInstr[2];
+    savedDstToken = ilInstr[1];
+    savedDstMask = ilInstr[2];
     ilInstr[1] = 0x40000;
     *(short *)((int)ilInstr + 6) = (short)tempRegister;
     ilInstr[2] = 0x55;
@@ -1617,8 +1617,8 @@ setTempRegister:
   ilInstr[3] = ilInstr[3] | 0x400000;
   *swizzlePtr = *swizzlePtr & 0xffff0000 | 0x3210;
   *ilInstr = 0;
-  ilInstr[1] = unaff_r22;
-  ilInstr[2] = unaff_r21;
+  ilInstr[1] = savedDstToken;
+  ilInstr[2] = savedDstMask;
   *(undefined2 *)((int)ilInstr + 2) = 0x47;
   translatorError = translator[9];
   if (translatorError == 0) {
@@ -1688,8 +1688,8 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr, unusedArg4, unuse
   uint negate0;
   int tempRegister;
   uint negate1;
-  undefined4 unaff_r21;
-  undefined4 unaff_r22;
+  undefined4 savedDstMask;
+  undefined4 savedDstToken;
   uint componentCount;
   uint *dstMaskPtr;
   uint *swizzlePtr;
@@ -1703,8 +1703,8 @@ int fragmentTranslateScalarMathBody(translator, slot, ilInstr, unusedArg4, unuse
   srcSwizzleWord = ilInstr[6];
   if (1 < componentCount) {
     tempRegister = translator[8];
-    unaff_r22 = ilInstr[1];
-    unaff_r21 = ilInstr[2];
+    savedDstToken = ilInstr[1];
+    savedDstMask = ilInstr[2];
     ilInstr[1] = 0x40000;
     *(short *)((int)ilInstr + 6) = (short)tempRegister;
     ilInstr[2] = 0x55;
@@ -1904,8 +1904,8 @@ setTempRegister:
   ilInstr[3] = ilInstr[3] | 0x400000;
   *swizzlePtr = *swizzlePtr & 0xffff0000 | 0x3210;
   *ilInstr = 0;
-  ilInstr[1] = unaff_r22;
-  ilInstr[2] = unaff_r21;
+  ilInstr[1] = savedDstToken;
+  ilInstr[2] = savedDstMask;
   *(undefined2 *)((int)ilInstr + 2) = 0x47;
   translatorError = translator[9];
   if (translatorError == 0) {
@@ -1986,8 +1986,8 @@ int fragmentTranslateScalarMath2Src(translator, slot, ilInstr, unusedArg4, unuse
   uint src1NegateComp0;
   uint src0NegateComp1;
   undefined4 *tokenWritePtr;
-  undefined4 unaff_r19;
-  undefined4 unaff_r20;
+  undefined4 savedDstMask;
+  undefined4 savedDstToken;
   uint repeatCount;
   uint *dstMaskPtr;
   uint *srcSwizzle1Ptr;
@@ -2005,8 +2005,8 @@ int fragmentTranslateScalarMath2Src(translator, slot, ilInstr, unusedArg4, unuse
   srcSwizzle1 = ilInstr[7];
   if (repeatCount >= 2) {
     tempRegister = translator[8];
-    unaff_r20 = ilInstr[1];
-    unaff_r19 = ilInstr[2];
+    savedDstToken = ilInstr[1];
+    savedDstMask = ilInstr[2];
     ilInstr[1] = 0x40000;
     *(short *)((int)ilInstr + 6) = (short)tempRegister;
     ilInstr[2] = 0x55;
@@ -2269,8 +2269,8 @@ setTempRegister:
   ilInstr[3] = ilInstr[3] | 0x400000;
   *srcSwizzle0Ptr = *srcSwizzle0Ptr & 0xffff0000 | 0x3210;
   *ilInstr = 0;
-  ilInstr[1] = unaff_r20;
-  ilInstr[2] = unaff_r19;
+  ilInstr[1] = savedDstToken;
+  ilInstr[2] = savedDstMask;
   *(undefined2 *)((int)ilInstr + 2) = 0x47;
   translatorError = translator[9];
   if (translatorError == 0) {
@@ -2707,12 +2707,12 @@ int fragmentTranslateAtn(emitter, slot, instr)
   undefined *swz0Saved;
   uint capacity;
   int bufferCount;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
+  undefined4 retR4a;
+  undefined4 retR4b;
+  undefined4 retR4c;
+  undefined4 retR4d;
+  undefined4 retR4e;
+  undefined4 retR4f;
   undefined4 staleArgR4;
   uint srcRegWord1;
   undefined *ilInstASrc0OrStaleR7;
@@ -2994,7 +2994,7 @@ setRecordPtr4:
   emitter[8] = emitter[8] + -3;
   _memset(&entryHeader,0,0x24);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
-  ((int (*)())fpilEmitAngleConstants)(emitter,extraout_r4,staleArgR4,srcRegWord1,ilInstASrc0OrStaleR7,srcCursorOrStaleR8,dstMaskOrStaleR9);
+  ((int (*)())fpilEmitAngleConstants)(emitter,retR4a,staleArgR4,srcRegWord1,ilInstASrc0OrStaleR7,srcCursorOrStaleR8,dstMaskOrStaleR9);
   tempRegisterHalf = (short)emitter[8];
   ilInstASrc1 = (undefined *)CONCAT22(4,tempRegisterHalf + 1);
   ilInstADst = CONCAT22(4,tempRegisterHalf + 2);
@@ -3006,7 +3006,7 @@ setRecordPtr4:
   ilInstASrc1 = (undefined *)((uint)ilInstASrc1 | 0x400000);
   ilInstASrc0 = (undefined *)((uint)ilInstASrc0 | 0x400000);
   ilInstASwzArray[0] = ((unsigned char *)0x00001111);
-  staleArgR4 = extraout_r4_00;
+  staleArgR4 = retR4b;
   if (bufferCount == 0) {
     bufferDataPtr = emitter + 10;
     bufferCount = emitter[0xb];
@@ -3022,11 +3022,11 @@ setRecordPtr4:
       }
       if (*bufferDataPtr == 0) {
         bufferCount = _malloc(tokenCapacity << 2);
-        staleArgR4 = extraout_r4_01;
+        staleArgR4 = retR4c;
       }
       else {
         bufferCount = _realloc(*bufferDataPtr,tokenCapacity << 2);
-        staleArgR4 = extraout_r4_02;
+        staleArgR4 = retR4d;
       }
       if (bufferCount == 0) {
         bufferCount = emitter[9];
@@ -3091,11 +3091,11 @@ setEntryHeader:
       }
       if (*bufferDataPtr == 0) {
         bufferCount = _malloc(tokenCapacity << 2);
-        staleArgR4 = extraout_r4_03;
+        staleArgR4 = retR4e;
       }
       else {
         bufferCount = _realloc(*bufferDataPtr,tokenCapacity << 2);
-        staleArgR4 = extraout_r4_04;
+        staleArgR4 = retR4f;
       }
       if (bufferCount == 0) {
         if (emitter[9] == 0) {
@@ -6889,21 +6889,21 @@ int fragmentProgramToIL(translator)
   int constRecordPtr;
   int tokensLeft;
   uint texTargetsLow;
-  undefined4 in_r4;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
-  undefined4 extraout_r4_08;
-  undefined4 extraout_r4_09;
-  undefined4 extraout_r4_10;
-  int in_r5;
-  undefined4 in_r6;
+  undefined4 staleArgR4;
+  undefined4 retR4a;
+  undefined4 retR4b;
+  undefined4 retR4c;
+  undefined4 retR4d;
+  undefined4 retR4e;
+  undefined4 retR4f;
+  undefined4 retR4g;
+  undefined4 retR4h;
+  undefined4 retR4i;
+  undefined4 retR4j;
+  undefined4 retR4k;
+  undefined4 retR4l;
+  int hasAttribKind5;
+  undefined4 zeroArg;
   undefined4 *tokenWritePtr;
   dword *tokenWord1Ptr;
   int wordOffset;
@@ -6977,11 +6977,11 @@ loopStoreTranslator:
     }
     if (*tokenDataPtrAddr == 0) {
       allocation = _malloc(tokenCapacity << 2);
-      in_r4 = extraout_r4;
+      staleArgR4 = retR4a;
     }
     else {
       allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
-      in_r4 = extraout_r4_00;
+      staleArgR4 = retR4b;
     }
     if (allocation != 0) {
       *tokenDataPtrAddr = allocation;
@@ -7066,11 +7066,11 @@ setAttribRemaining:
     }
     if (*tokenDataPtrAddr == 0) {
       allocation2 = _malloc(tokenCapacity << 2);
-      in_r4 = extraout_r4_01;
+      staleArgR4 = retR4c;
     }
     else {
       allocation2 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
-      in_r4 = extraout_r4_02;
+      staleArgR4 = retR4d;
     }
     if (allocation2 == 0) goto loopCheckTranslator2;
     *tokenDataPtrAddr = allocation2;
@@ -7095,11 +7095,11 @@ loopCheckTranslator:
         }
         if (*tokenDataPtrAddr == 0) {
           allocation = _malloc(tokenCapacity << 2);
-          in_r4 = extraout_r4_03;
+          staleArgR4 = retR4e;
         }
         else {
           allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
-          in_r4 = extraout_r4_04;
+          staleArgR4 = retR4f;
         }
         if (allocation == 0) goto loopCheckTranslator2;
         *tokenDataPtrAddr = allocation;
@@ -7113,7 +7113,7 @@ loopCheckTranslator:
     }
   }
   else {
-    in_r5 = 0;
+    hasAttribKind5 = 0;
     do {
       attribBinding = *(ushort *)attribEntry;
       if ((attribBinding & 0xf) == 1) {
@@ -7135,7 +7135,7 @@ setAttribSourceToken:
           attribSourceToken = (undefined *)0x130000;
           break;
         case 5:
-          in_r5 = 1;
+          hasAttribKind5 = 1;
           attribSourceToken = (undefined *)0x100000;
           break;
         case 7:
@@ -7147,8 +7147,8 @@ setAttribSourceToken:
       tokenWritePtr = tokenWritePtr + 2;
       attribEntry = attribEntry + 2;
     } while (attribRemaining != 0);
-    in_r6 = 0;
-    if (in_r5 == 0) goto loopCheckTranslator;
+    zeroArg = 0;
+    if (hasAttribKind5 == 0) goto loopCheckTranslator;
   }
   texTargetsHigh = translator[1];
   texTargetsLow = translator[2];
@@ -7203,11 +7203,11 @@ setAttribSourceToken:
     }
     if (*tokenDataPtrAddr == 0) {
       allocation2 = _malloc(tokenCapacity << 2);
-      in_r4 = extraout_r4_05;
+      staleArgR4 = retR4g;
     }
     else {
       allocation2 = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
-      in_r4 = extraout_r4_06;
+      staleArgR4 = retR4h;
     }
     if (allocation2 != 0) {
       *tokenDataPtrAddr = allocation2;
@@ -7271,11 +7271,11 @@ setTokenCopyOffset:
           }
           if (*tokenDataPtrAddr == 0) {
             allocation = _malloc(tokenCapacity4 << 2);
-            in_r4 = extraout_r4_07;
+            staleArgR4 = retR4i;
           }
           else {
             allocation = _realloc(*tokenDataPtrAddr,tokenCapacity4 << 2);
-            in_r4 = extraout_r4_08;
+            staleArgR4 = retR4j;
           }
           if (allocation == 0) goto loopCheckTranslator2;
           *tokenDataPtrAddr = allocation;
@@ -7336,11 +7336,11 @@ setTokenCopyOffset:
     }
     if (*tokenDataPtrAddr == 0) {
       allocation = _malloc(tokenCapacity << 2);
-      in_r4 = extraout_r4_09;
+      staleArgR4 = retR4k;
     }
     else {
       allocation = _realloc(*tokenDataPtrAddr,tokenCapacity << 2);
-      in_r4 = extraout_r4_10;
+      staleArgR4 = retR4l;
     }
     if (allocation == 0) {
 loopCheckTranslator2:
@@ -7370,7 +7370,7 @@ checkTranslatorError3:
   if (translatorError3 != 0) {
     return translatorError3;
   }
-  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,in_r4,in_r5,in_r6,tokenWritePtr,tokenCount,paramKind,tokenWritePtr2);
+  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,staleArgR4,hasAttribKind5,zeroArg,tokenWritePtr,tokenCount,paramKind,tokenWritePtr2);
   if (tokenCount != 0) goto returnTranslator;
   programObj2 = *translator;
   outputCount = *(uint *)(programObj2 + 0x30);
@@ -8452,10 +8452,10 @@ int gldClearBoundSlot(glContext, slotIndex)
   int slotIndex;
 {
   int slotAddr;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   code *a6;
   undefined4 registerDirty;
   
@@ -8465,10 +8465,10 @@ int gldClearBoundSlot(glContext, slotIndex)
     *(undefined4 *)(glContext + 0x23e0) = 0;
     **(undefined1 **)(((unsigned char *)0x00001448) + slotAddr) = 0;
     (**(code **)(((unsigned char *)0x00001290) + glContext))
-              (glContext,*(undefined4 *)(((unsigned char *)0x00001448) + slotAddr),in_r5,in_r6,in_r7,in_r8,0);
+              (glContext,*(undefined4 *)(((unsigned char *)0x00001448) + slotAddr),staleArgR5,staleArgR6,staleArgR7,staleArgR8,0);
     a6 = *(code **)(((unsigned char *)0x00001330) + glContext);
     *(uint *)(glContext + 0x1f2c) = *(uint *)(glContext + 0x1f2c) & 0xfffff800 | 0x80;
-    (*a6)(glContext,0xc0100000,in_r5,in_r6,in_r7,in_r8,a6);
+    (*a6)(glContext,0xc0100000,staleArgR5,staleArgR6,staleArgR7,staleArgR8,a6);
     *(undefined4 *)(glContext + 0x1930) = registerDirty;
   }
   return;

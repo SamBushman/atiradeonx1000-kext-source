@@ -71,3 +71,34 @@ local	extvsEndShader	in_r5	staleArgR5	INFERRED	stale r5 forwarded unchanged thro
 local	extvsEndShader	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the vtable call at ctx+0x119c
 local	extvsEndShader	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the vtable call at ctx+0x119c
 local	extvsEndShader	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the vtable call at ctx+0x119c
+local	gldClearBoundSlot	in_r5	staleArgR5	INFERRED	stale r5 forwarded unchanged through two vtable calls (glContext+0x1290, glContext+0x1330)
+local	gldClearBoundSlot	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the same two vtable calls
+local	gldClearBoundSlot	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the same two vtable calls
+local	gldClearBoundSlot	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the same two vtable calls
+local	fragmentTranslateScalarMath	unaff_r22	savedDstToken	CONFIRMED	saves ilInstr[1] before it is temporarily repurposed as scratch for sub-instruction emission; restored into ilInstr[1] at the end of the function
+local	fragmentTranslateScalarMath	unaff_r21	savedDstMask	CONFIRMED	saves ilInstr[2] before it is temporarily repurposed as scratch; restored into ilInstr[2] at the end of the function
+local	fragmentTranslateScalarMathBody	unaff_r22	savedDstToken	CONFIRMED	same save/restore role as fragmentTranslateScalarMath's unaff_r22 (ilInstr[1])
+local	fragmentTranslateScalarMathBody	unaff_r21	savedDstMask	CONFIRMED	same save/restore role as fragmentTranslateScalarMath's unaff_r21 (ilInstr[2])
+local	fragmentTranslateScalarMath2Src	unaff_r20	savedDstToken	CONFIRMED	same save/restore role, using r20 (ilInstr[1])
+local	fragmentTranslateScalarMath2Src	unaff_r19	savedDstMask	CONFIRMED	same save/restore role, using r19 (ilInstr[2])
+local	fragmentTranslateAtn	extraout_r4	retR4a	INFERRED	leftover r4 after fragmentTranslateScalarMath, passed straight through as fpilEmitAngleConstants's 2nd arg
+local	fragmentTranslateAtn	extraout_r4_00	retR4b	INFERRED	leftover r4 after the fpilEmitAngleConstants call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_01	retR4c	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_02	retR4d	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_03	retR4e	INFERRED	leftover r4 after a 2nd _malloc call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_04	retR4f	INFERRED	leftover r4 after a 2nd _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	in_r4	staleArgR4	INFERRED	stale leftover r4 (whichever malloc/realloc ran last) forwarded as fragmentInstructionToIL's 2nd arg; the callee does not depend on it
+local	fragmentProgramToIL	in_r5	hasAttribKind5	CONFIRMED	0 by default, set to 1 only when an attribute binding's low nibble == 5; forwarded as fragmentInstructionToIL's 3rd arg
+local	fragmentProgramToIL	in_r6	zeroArg	INFERRED	always set to 0 just before use, never otherwise assigned; forwarded as fragmentInstructionToIL's 4th arg
+local	fragmentProgramToIL	extraout_r4	retR4a	INFERRED	leftover r4 after an earlier call, assigned into staleArgR4 (1st of 12 such call-site artifacts in this function)
+local	fragmentProgramToIL	extraout_r4_00	retR4b	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_01	retR4c	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_02	retR4d	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_03	retR4e	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_04	retR4f	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_05	retR4g	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_06	retR4h	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_07	retR4i	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_08	retR4j	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_09	retR4k	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_10	retR4l	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
