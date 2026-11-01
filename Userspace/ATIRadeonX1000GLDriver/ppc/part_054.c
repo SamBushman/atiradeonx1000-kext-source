@@ -380,8 +380,8 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
   undefined4 src1SelectWord;
   byte formatCode;
   uint src2SelectWord;
-  undefined4 unaff_r21;
-  undefined4 unaff_r22;
+  undefined4 composedSelectSaved;
+  undefined4 instSelectWord;
   int *mixInst;
   int loopRemaining;
   int recordPtr;
@@ -401,15 +401,15 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
     loopRemaining = IRInst__getOperandRecord(src1Inst,1);
     src1SelectWord = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = IRInst__getOperandRecord(inst,1);
-    unaff_r22 = *(undefined4 *)(loopRemaining + 0x10);
-    SelectWord__compose(&composedSelectOut,src1SelectWord,unaff_r22);
+    instSelectWord = *(undefined4 *)(loopRemaining + 0x10);
+    SelectWord__compose(&composedSelectOut,src1SelectWord,instSelectWord);
     effectiveSrc1 = (int *)IRInst__getOperandSource(src1Inst,1);
     IRInst__setOperandSource(inst,1,effectiveSrc1,0,compiler);
     loopRemaining = IRInst__getOperandRecord(src1Inst,1);
     src1SelectWord = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(loopRemaining + 0x10) = src1SelectWord;
-    unaff_r21 = composedSelectOut;
+    composedSelectSaved = composedSelectOut;
     mixInst = src1Inst;
   }
   else {
@@ -563,12 +563,12 @@ setOperandRecord:
       src1IsMix = src1IsMix + 4;
       loopRemaining = loopRemaining + -1;
     } while (loopRemaining != 0);
-    (**(code **)(*this + 0xf8))(this,1,mixSelectScratch,rgbMixWords,0,unaff_r21);
-    (**(code **)(*this + 0x108))(this,1,rgbMixWords,mixInst,unaff_r22);
-    (**(code **)(*this + 0x10c))(this,1,alphaMixWords,mixInst,unaff_r22);
+    (**(code **)(*this + 0xf8))(this,1,mixSelectScratch,rgbMixWords,0,composedSelectSaved);
+    (**(code **)(*this + 0x108))(this,1,rgbMixWords,mixInst,instSelectWord);
+    (**(code **)(*this + 0x10c))(this,1,alphaMixWords,mixInst,instSelectWord);
     IRInst__setOperandSource(inst,1,mixInst,0,compiler);
     src1IsMix = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(src1IsMix + 0x10) = unaff_r22;
+    *(undefined4 *)(src1IsMix + 0x10) = instSelectWord;
     src1IsMix = this[0x18] * 0x48 + this[0x2a];
     *(uint *)(src1IsMix + 0x14) = (rgbMixWords[1] & 3) << 0x16 | *(uint *)(src1IsMix + 0x14) & 0xff3fffff;
     src1IsMix = this[0x18] * 0x48 + this[0x2a];

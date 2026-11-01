@@ -5855,9 +5855,9 @@ int ffvpBuildProgram(ctx, passThroughArg2, passThroughArg3, constRegCountOut, pa
   int regAfterFour;
   int regPlus4;
   int paramKinds;
-  int unaff_r17;
-  int unaff_r18;
-  float unaff_r19;
+  int matrixElem13;
+  int matrixElem14;
+  float matrixElem15;
   undefined4 ctxFlag400Active;
   int stateBlock;
   int stateBlockCopy;
@@ -5924,7 +5924,7 @@ setProgramFlag:
           FLOAT_001aa0e8 != matrixElem0) ||
          (((matrixElems1to4[3] != 0 || matrixElem6 != 0) || matrixElem7 != 0) || FLOAT_001aa0e8 != matrixElem5)) ||
         (((matrixElem8 != 0 || matrixElem9 != 0) || matrixElem11 != 0) || FLOAT_001aa0e8 != matrixElem10)) ||
-        (((matrixElem12 != 0 || unaff_r17 != 0) || unaff_r18 != 0) || FLOAT_001aa0e8 != unaff_r19)) {
+        (((matrixElem12 != 0 || matrixElem13 != 0) || matrixElem14 != 0) || FLOAT_001aa0e8 != matrixElem15)) {
       *(undefined4 *)(programRecord + 0xa4) = 0;
       nextConstReg = 4;
       *(undefined4 *)(paramList[2] * 4 + *paramList) = 0;
@@ -5959,7 +5959,7 @@ setProgramFlag:
               FLOAT_001aa0e8 != matrixCursor) ||
              (((matrixElems1to4[3] != 0 || matrixElem6 != 0) || matrixElem7 != 0) || FLOAT_001aa0e8 != matrixElem5))
             || (((matrixElem8 != 0 || matrixElem9 != 0) || matrixElem11 != 0) || FLOAT_001aa0e8 != matrixElem10))
-            || (((matrixElem12 != 0 || unaff_r17 != 0) || unaff_r18 != 0) || FLOAT_001aa0e8 != unaff_r19
+            || (((matrixElem12 != 0 || matrixElem13 != 0) || matrixElem14 != 0) || FLOAT_001aa0e8 != matrixElem15
                )) {
           *mapCursorA = nextConstReg;
           nextConstReg = nextConstReg + 4;
@@ -6341,7 +6341,7 @@ setProgramFlag:
           FLOAT_001aa0e8 == matrixElem0) &&
          (((matrixElems1to4[3] == 0 && matrixElem6 == 0) && matrixElem7 == 0) && FLOAT_001aa0e8 == matrixElem5)) &&
         (((matrixElem8 == 0 && matrixElem9 == 0) && matrixElem11 == 0) && FLOAT_001aa0e8 == matrixElem10)) &&
-        (((matrixElem12 == 0 && unaff_r17 == 0) && unaff_r18 == 0) && FLOAT_001aa0e8 == unaff_r19)) {
+        (((matrixElem12 == 0 && matrixElem13 == 0) && matrixElem14 == 0) && FLOAT_001aa0e8 == matrixElem15)) {
       ffvpEmitPositionPassThrough(programRecord,ctxFlag400Active,ctxByte11d2);
     }
     else {
