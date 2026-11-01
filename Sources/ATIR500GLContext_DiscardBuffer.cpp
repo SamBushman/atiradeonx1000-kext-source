@@ -43,8 +43,8 @@ void ATIR500GLContext::discard_command_buffer() {
   UInt32 header;
   UInt32 *packet;
   UInt8 *slotCursor;
-  char in_RESERVE;
-  UInt8 in_cr0;
+  char reservation;
+  UInt8 crBits;
   SInt32 textures [22];
   SInt32 slot;
   bool flag80Clear;
@@ -140,7 +140,7 @@ bindTextureSlot:
               }
               packetWords = header & 0xffffff;
               flag80Clear = (M<UInt32>(self + kIOATIR500GLContext_surfaceFlagsBitmask) & 0x80) == 0;
-              in_cr0 = flag80Clear << 1;
+              crBits = flag80Clear << 1;
               if (!flag80Clear) {
                 mode = packet[1];
                 if ((mode == 7) || (mode == 8)) {
@@ -258,7 +258,7 @@ bindTextureSlot:
                 if (M<SInt32>(texture + 0x54) != 0) {
                   useCount = M<SInt32 *>(M<SInt32>(texture + 0x54) + 8);
                   useCount = (SInt32 *)VCALL(*useCount, 0x14c)(useCount,GH_kernel_task,0,1,0,0);
-                  in_cr0 = (useCount == (SInt32 *)0x0) << 1;
+                  crBits = (useCount == (SInt32 *)0x0) << 1;
                   if (useCount != (SInt32 *)0x0) {
                     texture = VCALL(*useCount, 0xd0)(useCount);
                     texture = opcode * 0x20 + texture;

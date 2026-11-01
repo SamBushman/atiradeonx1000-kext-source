@@ -38,8 +38,8 @@ void ATIR500GLContext::get_texture(UInt32*record, VendorTextureBuffer *texture, 
   SInt32 prev;
   UInt32 stamp;
   UInt32 blockHeader;
-  char in_RESERVE;
-  UInt8 in_cr0;
+  char reservation;
+  UInt8 crBits;
   
   header = M<SInt32>(textureBytes + 0x14);
   if (M<char>(header + 0x14) != '\0') {
