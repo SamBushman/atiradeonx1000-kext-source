@@ -1002,7 +1002,7 @@ int arbParseSwizzleSuffix(parser, operand)
   int signValue;
   int suffixLength;
   undefined4 componentIndex;
-  undefined4 in_r5;
+  undefined4 staleArgR5;
   char *suffixText;
   
   signValue = arbParseOptionalSign(parser);
@@ -1012,7 +1012,7 @@ int arbParseSwizzleSuffix(parser, operand)
   else {
     *(undefined1 *)(operand + 0x14) = 0;
   }
-  ((int (*)())arbParseSourceRegister)(parser,operand,in_r5);
+  ((int (*)())arbParseSourceRegister)(parser,operand,staleArgR5);
   if (*(int *)(parser + 0x14) != 0x11) {
     *(undefined4 *)(operand + 4) = 0;
     *(undefined4 *)(operand + 0x10) = 3;
@@ -1070,7 +1070,7 @@ int arbfpParseScalarSourceOperand(parser, operand)
 {
   int sign;
   undefined4 componentIndex;
-  undefined4 in_r5;
+  undefined4 staleArgR5;
   
   sign = arbParseOptionalSign(parser);
   if (sign == -1) {
@@ -1079,7 +1079,7 @@ int arbfpParseScalarSourceOperand(parser, operand)
   else {
     *(undefined1 *)(operand + 0x14) = 0;
   }
-  ((int (*)())arbParseSourceRegister)(parser,operand,in_r5);
+  ((int (*)())arbParseSourceRegister)(parser,operand,staleArgR5);
   arbExpectToken(parser,0x11);
   componentIndex = ((int (*)())arbParseComponentToken)(parser);
   *(undefined4 *)(operand + 0x10) = componentIndex;
@@ -1574,8 +1574,8 @@ int arbValidateProgram(callbacks, program, sourceLength, sourceText)
   undefined4 errorMsgBuf;
   int fogBias;
   int *a2;
-  int *in_r7;
-  uint *in_r8;
+  int *scratchR7;
+  uint *scratchR8;
   int sourceCopy;
   int *stageR9;
   uint writtenHi;
@@ -1724,12 +1724,12 @@ loopSetDeclNode:
               declKind = declNode[6];
               if (declKind == 1) {
                 a2 = workArea + 0x9149;
-                in_r8 = (uint *)(declNode + 6);
-                in_r7 = typeTagTable + -0x1a48;
+                scratchR8 = (uint *)(declNode + 6);
+                scratchR7 = typeTagTable + -0x1a48;
                 stageR9 = fogOptionCopy;
                 stageR10 = typeTagTable;
                 internStatus = ((int (*)())arbfpInternParameter)(workArea,workArea + 0x9117,a2,
-                                     *(int *)(((unsigned char *)0x000011ec) + limits) - (int)fogOptionCopy,in_r7,in_r8);
+                                     *(int *)(((unsigned char *)0x000011ec) + limits) - (int)fogOptionCopy,scratchR7,scratchR8);
                 if (internStatus < 0) goto storeX00001124;
               }
               else if (declKind == 0) {
@@ -1755,12 +1755,12 @@ loopSetDeclNode:
                     else {
                       fogBias = 2;
                     }
-                    in_r8 = (uint *)(byteOffset + declNode[5]);
-                    in_r7 = typeTagTableB + -0x1a4f;
+                    scratchR8 = (uint *)(byteOffset + declNode[5]);
+                    scratchR7 = typeTagTableB + -0x1a4f;
                     a2 = attrListBase;
                     stageR10 = typeTagTableB;
                     fogBias = ((int (*)())arbfpInternParameter)(workArea,paramListBase,attrListBase,
-                                          *(int *)(((unsigned char *)0x000011e4) + limits) - fogBias,in_r7,in_r8);
+                                          *(int *)(((unsigned char *)0x000011e4) + limits) - fogBias,scratchR7,scratchR8);
                     if (fogBias < 0) goto storeX00001124;
                     loopCounter = loopCounter + 1;
                     byteOffset = byteOffset + 0x14;
@@ -1820,8 +1820,8 @@ checkWorkArea:
                 stageR10 = unitTarget;
                 writtenLo = 0;
                 writtenHi = 0;
-                in_r7 = (int *)0x0;
-                in_r8 = (uint *)0x0;
+                scratchR7 = (int *)0x0;
+                scratchR8 = (uint *)0x0;
                 hasKill = 0;
                 loopCounterD = 1;
                 a2 = (int *)0x0;
@@ -1844,8 +1844,8 @@ loopCheckInst:
                         bitIndex = 0;
                         maskBit = 1 << (maskBit & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | maskBit);
-                      in_r8 = (uint *)((uint)in_r8 | bitIndex);
+                      scratchR7 = (int *)((uint)scratchR7 | maskBit);
+                      scratchR8 = (uint *)((uint)scratchR8 | bitIndex);
                     }
                     srcSym1 = *(int *)(inst + 0x28);
                     if ((srcSym1 != 0) && (*(int *)(srcSym1 + 0x18) == 0)) {
@@ -1859,8 +1859,8 @@ loopCheckInst:
                         maskBit = 0;
                         bitIndex = 1 << (bitIndex & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | bitIndex);
-                      in_r8 = (uint *)((uint)in_r8 | maskBit);
+                      scratchR7 = (int *)((uint)scratchR7 | bitIndex);
+                      scratchR8 = (uint *)((uint)scratchR8 | maskBit);
                     }
                     srcSym2 = *(int *)(inst + 0x44);
                     if ((srcSym2 != 0) && (*(int *)(srcSym2 + 0x18) == 0)) {
@@ -1873,8 +1873,8 @@ loopCheckInst:
                         maskBit = 0;
                         bitIndex = 1 << (bitIndex & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | bitIndex);
-                      in_r8 = (uint *)((uint)in_r8 | maskBit);
+                      scratchR7 = (int *)((uint)scratchR7 | bitIndex);
+                      scratchR8 = (uint *)((uint)scratchR8 | maskBit);
                     }
                     stageR9 = *(int **)(inst + 4);
                     if (stageR9[6] == 0) {
@@ -1887,8 +1887,8 @@ loopCheckInst:
                         maskHiTmp = (int *)0x0;
                         maskLoTmp = 1 << (bitIndex & 0x3f);
                       }
-                      in_r7 = (int *)((uint)in_r7 | maskLoTmp);
-                      in_r8 = (uint *)((uint)in_r8 | (uint)maskHiTmp);
+                      scratchR7 = (int *)((uint)scratchR7 | maskLoTmp);
+                      scratchR8 = (uint *)((uint)scratchR8 | (uint)maskHiTmp);
                       precisionCountNeg = maskHiTmp;
                     }
                     if (opcode == 0xb) goto setA2;
@@ -1928,8 +1928,8 @@ loopSetLoopCounterD:
                       if (opcode != 0xb) {
                         writtenLo = 0;
                         writtenHi = 0;
-                        in_r7 = (int *)0x0;
-                        in_r8 = (uint *)0x0;
+                        scratchR7 = (int *)0x0;
+                        scratchR8 = (uint *)0x0;
 loopSetStageR9:
                         stageR9 = (int *)(*(int *)(inst + 0x40) * 4);
                         precisionCountNeg = stageR10;
@@ -1949,8 +1949,8 @@ loopSetStageR9:
                       writtenLo = 0;
                       writtenHi = 0;
                       hasKill = 1;
-                      in_r7 = (int *)0x0;
-                      in_r8 = (uint *)0x0;
+                      scratchR7 = (int *)0x0;
+                      scratchR8 = (uint *)0x0;
                     }
                     else {
 checkOpcode:
@@ -1958,11 +1958,11 @@ checkOpcode:
                         if (*(int *)(*(int *)(inst + 4) + 0x18) == 0) {
                           stageR9 = *(int **)(*(int *)(inst + 4) + 0x1c);
                           if ((int)(stageR9 + -8) < 0) {
-                            shiftedBits = ((int)in_r7 << 1) << (0x1fU - (int)stageR9 & 0x3f) |
-                                     (uint)in_r8 >> ((uint)stageR9 & 0x3f);
+                            shiftedBits = ((int)scratchR7 << 1) << (0x1fU - (int)stageR9 & 0x3f) |
+                                     (uint)scratchR8 >> ((uint)stageR9 & 0x3f);
                           }
                           else {
-                            shiftedBits = (uint)in_r7 >> ((uint)(stageR9 + -8) & 0x3f);
+                            shiftedBits = (uint)scratchR7 >> ((uint)(stageR9 + -8) & 0x3f);
                           }
                           precisionCountNeg = (int *)(shiftedBits & 1);
                           if (precisionCountNeg != (int *)0x0) goto loopSetLoopCounterD;
@@ -1986,7 +1986,7 @@ setA2:
                 hasKillFlag = hasKill;
                 codeBuffer = (**(code **)(limits + 0xc))
                                   (totalInsts * 0x70 + (int)(workArea[0x9149] + (int)stageR9) * 0x14 +
-                                   workArea[0x9116] * 0x10 + 0x70,hasKill,a2,totalInsts,in_r7,in_r8,stageR9)
+                                   workArea[0x9116] * 0x10 + 0x70,hasKill,a2,totalInsts,scratchR7,scratchR8,stageR9)
                 ;
                 *(int *)(program + 0x60) = codeBuffer;
                 if (codeBuffer != 0) {
@@ -2053,11 +2053,11 @@ setA2:
                     srcByteOffset = 0;
                     do {
                       outInsts = *(int *)(program + 100);
-                      in_r7 = (int *)((int)instBase + srcByteOffset);
+                      scratchR7 = (int *)((int)instBase + srcByteOffset);
                       outInst = (uint *)(outInstOffset + outInsts);
                       _memset(outInst,0,0x70);
                       *(undefined4 *)(outInstOffset + outInsts) = *(undefined4 *)((int)instBase + srcByteOffset);
-                      srcRec = in_r7[1];
+                      srcRec = scratchR7[1];
                       *(undefined1 *)(loopCounterC + *(int *)(program + 0x94)) = 0;
                       if (srcRec != 0) {
                         dstIndex = *(uint *)(srcRec + 0x1c);
@@ -2074,15 +2074,15 @@ setA2:
                         }
                       }
                       sourceIndex = 0;
-                      outInst[3] = in_r7[2];
-                      in_r8 = outInst;
+                      outInst[3] = scratchR7[2];
+                      scratchR8 = outInst;
                       do {
-                        symbolRef = in_r7[3];
+                        symbolRef = scratchR7[3];
                         if (symbolRef == 0) {
                           opcodeWord = *outInst;
                           if ((0x1c < opcodeWord) &&
                              (((opcodeWord < 0x20 || (opcodeWord - 0x3d < 3)) &&
-                              (in_r8[0xb] = in_r7[9], sourceIndex == 1)))) {
+                              (scratchR8[0xb] = scratchR7[9], sourceIndex == 1)))) {
                             *(uint *)(program + 0x10) =
                                  1 << (outInst[0x13] & 0x3f) | *(uint *)(program + 0x10);
                           }
@@ -2091,19 +2091,19 @@ setA2:
                           if (*(int *)(symbolRef + 0xc) == 0) {
                             symIndex = *(uint *)(symbolRef + 0x1c);
                             entryFieldA = *(uint *)(symbolRef + 0x18);
-                            in_r8[0xb] = 0;
-                            in_r8[5] = symIndex;
-                            in_r8[4] = entryFieldA;
+                            scratchR8[0xb] = 0;
+                            scratchR8[5] = symIndex;
+                            scratchR8[4] = entryFieldA;
                           }
                           else {
-                            entryType = *(uint *)(in_r7[9] * 0x14 + *(int *)(symbolRef + 0x14));
-                            stageR10 = *(int **)(in_r7[9] * 0x14 + *(int *)(symbolRef + 0x14) + 4);
-                            in_r8[0xb] = 0;
-                            in_r8[4] = entryType;
-                            in_r8[5] = (uint)stageR10;
+                            entryType = *(uint *)(scratchR7[9] * 0x14 + *(int *)(symbolRef + 0x14));
+                            stageR10 = *(int **)(scratchR7[9] * 0x14 + *(int *)(symbolRef + 0x14) + 4);
+                            scratchR8[0xb] = 0;
+                            scratchR8[4] = entryType;
+                            scratchR8[5] = (uint)stageR10;
                           }
-                          if (in_r8[4] == 1) {
-                            paramEntry = in_r8[5] * 0x14 + *(int *)(program + 0x78);
+                          if (scratchR8[4] == 1) {
+                            paramEntry = scratchR8[5] * 0x14 + *(int *)(program + 0x78);
                             paramEntryType = *(int *)(paramEntry + 8);
                             if (paramEntryType == 1) {
                               if (*(int *)(paramEntry + 0xc) == 1) {
@@ -2121,18 +2121,18 @@ setA2:
                               program[2] = 1;
                             }
                           }
-                          swizzleA = in_r7[5];
-                          swizzleB = in_r7[6];
-                          swizzleC = in_r7[7];
-                          in_r8[6] = in_r7[4];
-                          in_r8[7] = swizzleA;
-                          in_r8[8] = swizzleB;
-                          in_r8[9] = swizzleC;
-                          *(undefined1 *)(in_r8 + 10) = *(undefined1 *)(in_r7 + 8);
+                          swizzleA = scratchR7[5];
+                          swizzleB = scratchR7[6];
+                          swizzleC = scratchR7[7];
+                          scratchR8[6] = scratchR7[4];
+                          scratchR8[7] = swizzleA;
+                          scratchR8[8] = swizzleB;
+                          scratchR8[9] = swizzleC;
+                          *(undefined1 *)(scratchR8 + 10) = *(undefined1 *)(scratchR7 + 8);
                         }
                         moreSources = sourceIndex != 2;
-                        in_r7 = in_r7 + 7;
-                        in_r8 = in_r8 + 8;
+                        scratchR7 = scratchR7 + 7;
+                        scratchR8 = scratchR8 + 8;
                         sourceIndex = sourceIndex + 1;
                       } while (moreSources);
                       loopCounterC = loopCounterC + 1;
@@ -2173,7 +2173,7 @@ storeX00001124:
   errorMsgBuf = (**(code **)(callbacks + 0xc))(msgLen + 0xb);
   *(undefined4 *)(((unsigned char *)0x00001128) + callbacks) = errorMsgBuf;
   if ((uint)workArea[0xb] < 10000) {
-    printf_LDBLStub_1a32d0(errorMsgBuf,"line %d: %s",workArea[0xb],workArea[0xc],in_r7,in_r8,stageR9,stageR10);
+    printf_LDBLStub_1a32d0(errorMsgBuf,"line %d: %s",workArea[0xb],workArea[0xc],scratchR7,scratchR8,stageR9,stageR10);
   }
   else {
     _strcpy(errorMsgBuf,workArea[0xc]);
@@ -2595,10 +2595,10 @@ int arbfpProgramObjectInit(context, programObject)
   int loopIndex;
   undefined1 *unitSlotPtr;
   undefined4 instanceTable;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int compiledProgram;
   int compiledProgramCopy;
   int unitCount;
@@ -2638,7 +2638,7 @@ int arbfpProgramObjectInit(context, programObject)
   *(undefined4 *)(compiledProgramCopy + 0x60) = 0;
   *(undefined4 *)(*(int *)(programObject + 0x74) + 0x58) = 0;
   unitCount = *(int *)(((unsigned char *)0x000011d4) + context);
-  compiledProgramCopy = (**(code **)(context + 0x10))(unitCount,1,in_r5,in_r6,in_r7,in_r8,compiledProgramCopy);
+  compiledProgramCopy = (**(code **)(context + 0x10))(unitCount,1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,compiledProgramCopy);
   *(int *)(compiledProgram + 0x94) = compiledProgramCopy;
   if (0 < unitCount) {
     compiledProgram = 0;
@@ -2735,7 +2735,7 @@ int arbfpProgramString(context, format, length, text)
   int newProgram;
   int compareResult;
   undefined4 textCopy;
-  undefined4 extraout_r4;
+  undefined4 staleArgR4;
   undefined4 savedWord70;
   uint savedByte6c;
   undefined4 savedWord68;
@@ -2845,7 +2845,7 @@ int arbfpProgramString(context, format, length, text)
           savedWord58 = savedWord58 + 4;
         } while (newProgram < (int)(uint)*(byte *)((int)context + 0x13b1));
       }
-      ((int (*)())arbfpUpdateStateForProgram)(context,extraout_r4,savedWord70,savedByte6c,savedWord68,savedWord64,savedWord58,savedWord60);
+      ((int (*)())arbfpUpdateStateForProgram)(context,staleArgR4,savedWord70,savedByte6c,savedWord68,savedWord64,savedWord58,savedWord60);
       *(undefined1 *)(context + 0x474) = 1;
     }
   }
@@ -3562,13 +3562,13 @@ int arbfpInitProgramState(context)
 {
   int loopIndex;
   undefined4 programObject;
-  undefined4 in_r4;
+  undefined4 staleArgR4;
   undefined4 a1;
   undefined4 a1_00;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int slotIndex;
   int slotTable;
   int stateHolder;
@@ -3579,7 +3579,7 @@ int arbfpInitProgramState(context)
   *(undefined4 *)(((unsigned char *)0x0000126c) + context) = 1;
   *(undefined4 *)(((unsigned char *)0x00001220) + context) = 2;
   (**(code **)(((unsigned char *)0x00001274) + context))
-            (context,in_r4,in_r5,in_r6,in_r7,in_r8,*(code **)(((unsigned char *)0x00001274) + context));
+            (context,staleArgR4,staleArgR5,staleArgR6,staleArgR7,staleArgR8,*(code **)(((unsigned char *)0x00001274) + context));
   ((unsigned char *)0x000011d3)[context] = 0;
   *(undefined4 *)(((unsigned char *)0x00001228) + context) = 0;
   if (((unsigned char *)0x000013b1)[context] != '\0') {
@@ -3595,7 +3595,7 @@ int arbfpInitProgramState(context)
   *(undefined4 *)(*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8)) = 0;
   slotIndex = *(int *)(((unsigned char *)0x0000126c) + context);
   slotTable = *(int *)(stateHolder + 8);
-  programObject = (**(code **)(context + 0xc))(0x78,a1,in_r5,in_r6,in_r7,in_r8,slotTable);
+  programObject = (**(code **)(context + 0xc))(0x78,a1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,slotTable);
   *(undefined4 *)(slotIndex * 0x18 + slotTable + 0x14) = programObject;
   ((int (*)())arbfpProgramObjectInit)(context,*(undefined4 *)
                         (*(int *)(((unsigned char *)0x0000126c) + context) * 0x18 + *(int *)(stateHolder + 8) + 0x14));
@@ -3604,7 +3604,7 @@ int arbfpInitProgramState(context)
   *(undefined4 *)(*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8)) = 0;
   slotIndex = *(int *)(((unsigned char *)0x00001220) + context);
   slotTable = *(int *)(stateHolder + 8);
-  programObject = (**(code **)(context + 0xc))(0x78,a1_00,in_r5,in_r6,in_r7,in_r8,slotTable);
+  programObject = (**(code **)(context + 0xc))(0x78,a1_00,staleArgR5,staleArgR6,staleArgR7,staleArgR8,slotTable);
   *(undefined4 *)(slotIndex * 0x18 + slotTable + 0x14) = programObject;
   return ((int (*)())arbfpProgramObjectInit)(context,*(undefined4 *)
                         (*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8) + 0x14));
@@ -3636,10 +3636,10 @@ int arbfpLoadDefaultProgram(context)
 {
   undefined4 defaultLength;
   char *defaultText;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int stateHolder;
-  undefined4 in_r10;
+  undefined4 staleArgR10;
   
   defaultLength = 0xf;
   ((unsigned char *)0x000011d0)[context] = 1;
@@ -3653,8 +3653,8 @@ int arbfpLoadDefaultProgram(context)
   ((int (*)())arbValidateProgram)(context,*(undefined4 *)
                         (*(int *)(*(int *)(((unsigned char *)0x00001220) + context) * 0x18 + *(int *)(stateHolder + 8) +
                                  0x14) + 0x74),0xf,"!!ARBfp1.0\nEND\n");
-  return ((int (*)())arbfpBindProgram)(context,*(undefined4 *)(((unsigned char *)0x0000126c) + context),defaultLength,defaultText,in_r7,in_r8,stateHolder,
-               in_r10);
+  return ((int (*)())arbfpBindProgram)(context,*(undefined4 *)(((unsigned char *)0x0000126c) + context),defaultLength,defaultText,staleArgR7,staleArgR8,stateHolder,
+               staleArgR10);
 }
 
 /* gldDrawInternalRect @ 0x8f7f0 (884 bytes) */
@@ -3683,7 +3683,7 @@ int gldDrawInternalRect(ctx, unusedArg2, passThroughArg3, rect, passThroughArg5)
   int a1;
   undefined4 *packet;
   undefined4 packetWords;
-  undefined4 extraout_r4;
+  undefined4 staleArgR4;
   undefined4 stageArgA;
   uint *a3;
   undefined4 a3_00;
@@ -3790,7 +3790,7 @@ int gldDrawInternalRect(ctx, unusedArg2, passThroughArg3, rect, passThroughArg5)
   packet[0xf] = *(undefined4 *)(ctx + 0x1ccc);
   *(undefined4 **)(0x00002748 + ctx + 4) = a1_00;
   (**(code **)(ctx + 0x275c))(ctx,a1_00,packet,a3_00,((unsigned char *)0x00001087U),a1_00,a6,0xc0083500);
-  gldValidateVertexProgramState(ctx,extraout_r4,packet,a3_00,stageArgB,a1_00,a6);
+  gldValidateVertexProgramState(ctx,staleArgR4,packet,a3_00,stageArgB,a1_00,a6);
   gldLeaveInternalDrawState(ctx,savedDrawState);
   if (recordCommands) {
     *(int *)(a1 + 4) = *(int *)(0x00002748 + ctx + 4) - recordBase >> 2;
@@ -3803,9 +3803,9 @@ int gldFlushProgramStateForDraw(ctx)
   int ctx;
 {
   int stateRecord;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int reg1b7cBefore;
   
   if (*(int *)(((unsigned char *)0x00003e28) + *(int *)(*(int *)(ctx + 4) + 0x10)) != 0) {
@@ -3821,7 +3821,7 @@ int gldFlushProgramStateForDraw(ctx)
   else if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
     stateRecord = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + **(int **)(((unsigned char *)0x00001168) + ctx));
     (**(code **)((int)((unsigned char *)0x00001294) + ctx))
-              (ctx,stateRecord + 0x13c,*(undefined4 *)(stateRecord + 0x130),in_r6,in_r7,in_r8,
+              (ctx,stateRecord + 0x13c,*(undefined4 *)(stateRecord + 0x130),staleArgR6,staleArgR7,staleArgR8,
                *(int *)(((unsigned char *)0x0000118c) + ctx) * 4);
   }
   ffvpRunStateHook(ctx);
@@ -4109,29 +4109,29 @@ int ffvpComputeOutputMasks(glContext)
 }
 
 /* gldValidateState @ 0x90470 (952 bytes) */
-void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double fparam_9)
+void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9)
 {
   uint dirtyMask;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
-  undefined4 extraout_r4_08;
-  undefined4 extraout_r4_09;
-  undefined4 extraout_r4_10;
-  undefined4 extraout_r4_11;
-  undefined4 extraout_r4_12;
-  undefined4 extraout_r4_13;
-  undefined4 extraout_r4_14;
-  undefined4 extraout_r4_15;
-  undefined4 extraout_r4_16;
-  undefined4 extraout_r4_17;
-  undefined4 extraout_r4_18;
+  undefined4 calleeStaleR4;
+  undefined4 calleeStaleR4_00;
+  undefined4 calleeStaleR4_01;
+  undefined4 calleeStaleR4_02;
+  undefined4 calleeStaleR4_03;
+  undefined4 calleeStaleR4_04;
+  undefined4 calleeStaleR4_05;
+  undefined4 calleeStaleR4_06;
+  undefined4 calleeStaleR4_07;
+  undefined4 calleeStaleR4_08;
+  undefined4 calleeStaleR4_09;
+  undefined4 calleeStaleR4_10;
+  undefined4 calleeStaleR4_11;
+  undefined4 calleeStaleR4_12;
+  undefined4 calleeStaleR4_13;
+  undefined4 calleeStaleR4_14;
+  undefined4 calleeStaleR4_15;
+  undefined4 calleeStaleR4_16;
+  undefined4 calleeStaleR4_17;
+  undefined4 calleeStaleR4_18;
   uint dirtyMask2;
   double forwarded_in_stack_ffffffb8;
   
@@ -4146,7 +4146,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
   dirtyMask2 = *(uint *)(glContext + 0x1808) & 0x20000000;
   if (dirtyMask2 != 0) {
     forwardedFloatArg1 = (double)gld_buildSmoothPointMask(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5);
-    forwardedArg2 = extraout_r4;
+    forwardedArg2 = calleeStaleR4;
   }
   dirtyMask = *(uint *)(glContext + 0x38);
   if (dirtyMask != 0) {
@@ -4154,72 +4154,72 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedFloatArg1 = (double)((double (*)())gldValidatePolygonMode)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
                                       forwardedFloatArg7,forwardedFloatArg8);
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_00;
+      forwardedArg2 = calleeStaleR4_00;
     }
     if ((dirtyMask & 2) != 0) {
       forwardedFloatArg1 = (double)gldValidatePolygonOffset(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,dirtyMask2);
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_01;
+      forwardedArg2 = calleeStaleR4_01;
     }
     if ((dirtyMask & 8) != 0) {
       forwardedFloatArg1 = (double)gldValidatePointSize(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_02;
+      forwardedArg2 = calleeStaleR4_02;
     }
     if ((dirtyMask & 0x400) != 0) {
       forwardedFloatArg1 = (double)((double (*)())gldValidateViewport)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
                                       forwardedFloatArg7,forwardedFloatArg8);
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_03;
+      forwardedArg2 = calleeStaleR4_03;
     }
     if ((dirtyMask & 0x100) != 0) {
       ((void (*)())gldValidateFog)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
-      forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext,extraout_r4_04,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
+      forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext,calleeStaleR4_04,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_05;
+      forwardedArg2 = calleeStaleR4_05;
     }
     if ((dirtyMask & 0x800) != 0) {
       forwardedFloatArg1 = (double)ffvpBuildBlendKey(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_06;
+      forwardedArg2 = calleeStaleR4_06;
     }
     if ((dirtyMask & 0x4000) != 0) {
       forwardedFloatArg1 = (double)gldValidateCullFace(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_07;
+      forwardedArg2 = calleeStaleR4_07;
     }
     if ((dirtyMask & 0x2200) != 0) {
       forwardedFloatArg1 = (double)((double (*)())gldValidateTextureUnits)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
                                       forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,forwarded_in_stack_ffffffb8
                                      );
       dirtyMask = *(uint *)(glContext + 0x38);
-      forwardedArg2 = extraout_r4_08;
+      forwardedArg2 = calleeStaleR4_08;
     }
     if ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0) {
       if ((dirtyMask & 0x20000) != 0) {
         forwardedFloatArg1 = (double)gldSyncClipPlaneEnables(glContext);
         dirtyMask = *(uint *)(glContext + 0x38);
-        forwardedArg2 = extraout_r4_09;
+        forwardedArg2 = calleeStaleR4_09;
       }
       if ((dirtyMask & 0x20) != 0) {
         ((void (*)())gld_emitLightingStatePacket)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
         dirtyMask = *(uint *)(glContext + 0x38);
-        forwardedArg2 = extraout_r4_10;
+        forwardedArg2 = calleeStaleR4_10;
       }
       if ((dirtyMask & 0x1000) != 0) {
         if (*(char *)(glContext + 0x1868) == '\0') {
           extvsValidateProgramState(glContext,forwardedArg2);
-          forwardedArg2 = extraout_r4_12;
+          forwardedArg2 = calleeStaleR4_12;
         }
         else {
           (**(code **)((int)((unsigned char *)0x000011cc) + glContext))(glContext);
-          forwardedArg2 = extraout_r4_11;
+          forwardedArg2 = calleeStaleR4_11;
         }
       }
     }
     else if ((dirtyMask & 0x20) != 0) {
       ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
-      forwardedArg2 = extraout_r4_13;
+      forwardedArg2 = calleeStaleR4_13;
     }
   }
   dirtyMask2 = *(uint *)(glContext + 0x3c);
@@ -4227,27 +4227,27 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
     if ((dirtyMask2 & 1) != 0) {
       gldValidateDepthTest(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      forwardedArg2 = extraout_r4_14;
+      forwardedArg2 = calleeStaleR4_14;
     }
     if ((dirtyMask2 & 2) != 0) {
       gldValidateScissor(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      forwardedArg2 = extraout_r4_15;
+      forwardedArg2 = calleeStaleR4_15;
     }
     if ((dirtyMask2 & 8) != 0) {
       gldValidateBlend(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      forwardedArg2 = extraout_r4_16;
+      forwardedArg2 = calleeStaleR4_16;
     }
     if ((dirtyMask2 & 0x10) != 0) {
       gldValidateAlphaTest(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      forwardedArg2 = extraout_r4_17;
+      forwardedArg2 = calleeStaleR4_17;
     }
     if ((dirtyMask2 & 0x20) != 0) {
       gldValidateStencil(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
-      forwardedArg2 = extraout_r4_18;
+      forwardedArg2 = calleeStaleR4_18;
     }
     if ((dirtyMask2 & 0x40) != 0) {
       gldValidateColorMask(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
