@@ -155,7 +155,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   undefined4 registerMap;
   int loopRemaining2;
   int loopRemaining;
-  uint splatVec4;
+  uint splatVec [4];
   float lastSplatStore;
   
   if (*laneSwizzle != 0x4040404) {
@@ -187,7 +187,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     else {
       staleArg5 = (undefined *)0x4;
       loopRemaining2 = 4;
-      loopPtr2 = &splatVec4;
+      loopPtr2 = &splatVec[0];
       do {
         *loopPtr2 = 0x7ffffffe;
         loopPtr2 = loopPtr2 + 1;
@@ -198,11 +198,11 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       loopRemaining = 4;
       do {
         lastSplatStore = splatValue;
-        *(float *)(loopRemaining2 + (int)&splatVec4) = splatValue;
+        *(float *)(loopRemaining2 + (int)&splatVec[0]) = splatValue;
         loopRemaining2 = loopRemaining2 + 4;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
-      loopRemaining2 = Program__findOrCreateConstInst(program,&splatVec4,0x10203);
+      loopRemaining2 = Program__findOrCreateConstInst(program,&splatVec[0],0x10203);
     }
     if (loopRemaining2 != 0) {
       return loopRemaining2;
@@ -610,9 +610,7 @@ int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
   undefined4 compilerArena;
   int savedField10;
   double literalOne;
-  undefined4 savedCounters;
-  undefined4 savedCounters1;
-  undefined4 savedCounters2;
+  undefined4 savedCounters [3];
   
   compilerArena = *(undefined4 *)(program + 8);
   opcode = *(int *)(inst[0x22] + 8);
@@ -694,10 +692,10 @@ int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
     }
     *(int *)(inst2 + 0x158) = inst[0x56];
     newSource = 0;
-    savedCounters2 = 0;
-    savedCounters = 0;
-    savedCounters1 = 0;
-    IRInst__saveCounters(inst,&savedCounters,0xffffffff);
+    savedCounters[2] = 0;
+    savedCounters[0] = 0;
+    savedCounters[1] = 0;
+    IRInst__saveCounters(inst,&savedCounters[0],0xffffffff);
     if ((inst[5] & 0x200U) != 0) {
       newSource = IRInst__getOperandSource(inst,inst[0x21]);
     }
@@ -706,7 +704,7 @@ int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
     IRInst__setOperandSource(inst,1,0,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     IRInst__setOperandSource(inst,2,0,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     IRInst__reinitAsTrinary(inst,0x25,*(undefined4 *)(program + 8));
-    IRInst__restoreCounters(inst,&savedCounters);
+    IRInst__restoreCounters(inst,&savedCounters[0]);
     inst[4] = savedField10;
     IRInst__setOperandSource(inst,1,inst2,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     loopIndex = 0;

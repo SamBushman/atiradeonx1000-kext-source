@@ -1010,20 +1010,7 @@ int TGenericLinker__FixOutputReads(this)
   undefined4 opChunkScratchWord;
   int tempUsageWord2;
   int tempUsageWord3;
-  undefined4 opHeader;
-  uint opFlags;
-  uint opDest0;
-  uint opDest1;
-  uint opSrc0A;
-  uint opSrc0B;
-  undefined4 opSrc1A;
-  undefined4 opSrc1B;
-  undefined4 opSrc2A;
-  undefined4 opSrc2B;
-  undefined4 opAuxA;
-  undefined4 opAuxB;
-  undefined4 opLine;
-  undefined4 opWord13;
+  uint opRecord [14];
   
   stage = 0;
   stageOffset = 0;
@@ -1112,43 +1099,43 @@ int TGenericLinker__FixOutputReads(this)
               }
               if ((mainReached) && ((chunkHeader & 0x3fc0000) == 0x1340000)) {
                 componentCount = tempUsageFlags >> 0x18 & 3;
-                opDest0 = componentCount << 10 | 0x6c;
-                opSrc1A = 0;
-                opSrc1B = 0;
-                opSrc2A = 0;
-                opSrc2B = 0;
-                opAuxA = 0;
-                opAuxB = 0;
-                opLine = *(undefined4 *)(opChunk + 0x3c);
-                opHeader = 0x20000000;
-                opWord13 = 0;
+                opRecord[2] = componentCount << 10 | 0x6c;
+                opRecord[6] = 0;
+                opRecord[7] = 0;
+                opRecord[8] = 0;
+                opRecord[9] = 0;
+                opRecord[10] = 0;
+                opRecord[11] = 0;
+                opRecord[12] = *(undefined4 *)(opChunk + 0x3c);
+                opRecord[0] = 0x20000000;
+                opRecord[13] = 0;
                 if (componentCount == 1) {
 loopSetOpDest0:
-                  opDest0 = opDest0 | 0x4000;
+                  opRecord[2] = opRecord[2] | 0x4000;
 loopSetOpDest02:
-                  opDest0 = opDest0 | 0x2000;
+                  opRecord[2] = opRecord[2] | 0x2000;
                 }
                 else {
                   if (componentCount == 0) goto loopSetOpDest02;
                   if (componentCount == 2) {
 loopSetOpDest03:
-                    opDest0 = opDest0 | 0x8000;
+                    opRecord[2] = opRecord[2] | 0x8000;
                     goto loopSetOpDest0;
                   }
                   if (componentCount == 3) {
-                    opDest0 = 0x10c6c;
+                    opRecord[2] = 0x10c6c;
                     goto loopSetOpDest03;
                   }
                 }
                 componentCount = tempUsageFlags >> 0x18 & 3;
-                opFlags = (tempUsageFlags >> 0x1d & 3) << 0x12 |
+                opRecord[1] = (tempUsageFlags >> 0x1d & 3) << 0x12 |
                            componentCount << 0x1a | (tempUsageFlags >> 0x1a & 7) << 0x17;
-                opDest0 = opDest0 | 0x60000;
-                opSrc0A = componentCount << 0xc | 0x8d8000;
-                opSrc0B = opChunkScratchWord & 0xffff;
-                opDest1 = (uint)outputReg;
+                opRecord[2] = opRecord[2] | 0x60000;
+                opRecord[4] = componentCount << 0xc | 0x8d8000;
+                opRecord[5] = opChunkScratchWord & 0xffff;
+                opRecord[3] = (uint)outputReg;
                 insertedOp = _PPStreamInsertOperationAfterChunk
-                                  (*(undefined4 *)(this + stageOffset + 0x30),&opHeader,0,0,
+                                  (*(undefined4 *)(this + stageOffset + 0x30),opRecord,0,0,
                                    *(undefined4 *)(opChunk + 4));
                 _PPStreamChangeBranchTargets
                           (*(undefined4 *)(this + stageOffset + 0x30),*(uint *)(opChunk + 0xc) & 0x3ffff,

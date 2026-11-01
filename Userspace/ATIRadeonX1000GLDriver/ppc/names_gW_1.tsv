@@ -942,7 +942,6 @@ use	FUN_0015b8b8	iVar2	inst	INFERRED	web passed only as callee parameter inst (2
 use	FUN_0015b8b8	iVar2	inst	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*iVar2\ =\ FUN_00105594\(iVar2,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x84\)\);$	+1
 use	FUN_0015b8b8	iVar2	inst	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*\*param_1\ =\ iVar2;$	+1
 use	FUN_0015b974	piVar3	inst1	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*piVar3\ =\ local_68;$	+1
-use	FUN_0015b974	piVar3	inst1	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar1\ =\ FUN_000f5cf0\(piVar3,uVar4,\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\),auStack_60\);$	+1
 use	FUN_0015b974	piVar3	inst2	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*piVar3\ =\ local_64;$	+1
 use	FUN_0015b974	piVar3	inst2	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*piVar3\ =\ local_64;$@2	+1
 use	FUN_0015b974	piVar3	inst2	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*piVar3\ =\ local_68;$@2	+1
@@ -952,7 +951,6 @@ use	FUN_0015b974	uVar2	operandIndex	INFERRED	web passed only as callee parameter
 use	FUN_0015b974	uVar2	operandIndex	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar1\ =\ FUN_001054ec\(local_68,uVar2\);$	+1
 use	FUN_0015b974	uVar4	srcIndex	INFERRED	web passed only as callee parameter srcIndex (1 uses, unanimous)	^\s*uVar4\ =\ 1;$	+1
 use	FUN_0015b974	uVar4	srcIndex	INFERRED	web passed only as callee parameter srcIndex (1 uses, unanimous)	^\s*uVar4\ =\ 2;$	+1
-use	FUN_0015b974	uVar4	srcIndex	INFERRED	web passed only as callee parameter srcIndex (1 uses, unanimous)	^\s*iVar1\ =\ FUN_000f5cf0\(piVar3,uVar4,\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\),auStack_60\);$	+1
 local	Inst__collapseAlgebraic_0015c6d4	param_2	program	INFERRED	passed as parameter program of callees (1 uses, unanimous)
 use	Inst__collapseAlgebraic_0015c6d4	iVar5	operandIndex	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar5\ =\ FUN_00105594\(param_1,param_1\[0x21\]\);$	+2
 use	Inst__collapseAlgebraic_0015c6d4	iVar5	operandIndex	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*if\ \(\(iVar6\ ==\ iVar5\)\ \&\&\ \(\(param_1\[uVar17\ \*\ 6\ \+\ 0x28\]\ \&\ 2U\)\ ==\ 0\)\)\ \{$	+1

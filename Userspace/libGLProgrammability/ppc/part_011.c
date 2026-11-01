@@ -2473,59 +2473,32 @@ int TIntermUnary__compileNode(this, compiler, unusedArg3, scratchArg4, scratchAr
   unsigned char * scratchPtr7;
   uint operatorCode;
   int logicalSize;
-  uint op1Header;
-  uint op1Flags;
-  uint op1Dest0;
-  undefined4 op1Dest1;
-  uint op1Src0A;
-  undefined4 op1Src0B;
-  uint op1Src1A;
-  undefined4 op1Src1B;
-  undefined4 op1Src2A;
-  undefined4 op1Src2B;
-  undefined4 op1AuxA;
-  undefined4 op1AuxB;
-  undefined4 op1Line;
-  undefined4 op1Word13;
-  uint operandDesc;
-  undefined4 operandDescB;
-  uint op2Header;
-  uint op2Flags;
-  uint op2Dest0;
-  undefined4 op2Dest1;
-  uint op2Src0A;
-  undefined4 op2Src0B;
-  uint op2Src1A;
-  undefined4 op2Src1B;
-  undefined4 op2Src2A;
-  undefined4 op2Src2B;
-  undefined4 op2AuxA;
-  undefined4 op2AuxB;
-  undefined4 op2Line;
-  undefined4 op2Word13;
+  uint op1Record [14];
+  uint operandDesc [2];
+  uint op2Record [14];
   unsigned char * resultOperand;
   unsigned char * operand;
-  undefined4 constValue [2];
+  undefined4 constValue [1];
   
   scratchPtr7 = (unsigned char *)0x0;
-  op1AuxA = 0;
-  op1AuxB = 0;
-  op1Header = 0;
-  op1Flags = 0;
-  op1Dest0 = 0;
-  op1Dest1 = 0;
+  op1Record[10] = 0;
+  op1Record[11] = 0;
+  op1Record[0] = 0;
+  op1Record[1] = 0;
+  op1Record[2] = 0;
+  op1Record[3] = 0;
   emitFinalOp = true;
-  op1Src0A = 0;
-  op1Src0B = 0;
-  op1Src1A = 0;
-  op1Src1B = 0;
-  op1Src2A = 0;
-  op1Src2B = 0;
-  op1Word13 = 0;
+  op1Record[4] = 0;
+  op1Record[5] = 0;
+  op1Record[6] = 0;
+  op1Record[7] = 0;
+  op1Record[8] = 0;
+  op1Record[9] = 0;
+  op1Record[13] = 0;
   resultOperand = (unsigned char *)0x0;
-  op1Line = 0;
-  op1Line = (*(code *)**(undefined4 **)this)(this,compiler,unusedArg3,scratchArg4,scratchArg5,scratchArg6);
-  op1Header = op1Header & 0x1fffffff | 0x20000000;
+  op1Record[12] = 0;
+  op1Record[12] = (*(code *)**(undefined4 **)this)(this,compiler,unusedArg3,scratchArg4,scratchArg5,scratchArg6);
+  op1Record[0] = op1Record[0] & 0x1fffffff | 0x20000000;
   currentLine = (*(code *)**(undefined4 **)this)(this);
   *(undefined4 *)(compiler + 0x90) = currentLine;
   operand = (unsigned char *)
@@ -2549,15 +2522,15 @@ int TIntermUnary__compileNode(this, compiler, unusedArg3, scratchArg4, scratchAr
       __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_
                 (compiler,&resultOperand,&operand);
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&operandDesc,compiler,operand,scratchArg4,scratchArg5,scratchArg6,scratchPtr7,operatorCode);
-      op1Src0A = operandDesc;
-      op1Src0B = operandDescB;
+                ((unsigned char *)&operandDesc[0],compiler,operand,scratchArg4,scratchArg5,scratchArg6,scratchPtr7,operatorCode);
+      op1Record[4] = operandDesc[0];
+      op1Record[5] = operandDesc[1];
       TPPStreamCompiler__getOperandAsDestVar
-                ((unsigned char *)&operandDesc,compiler,resultOperand,scratchArg4,scratchArg5,scratchArg6);
-      op1Flags = (operandDesc >> 0xc & 1) << 0x1c | op1Flags & 0xefffffff;
-      op1Header = op1Header & 0xfc03ffff;
-      op1Dest1 = operandDescB;
-      op1Dest0 = operandDesc;
+                ((unsigned char *)&operandDesc[0],compiler,resultOperand,scratchArg4,scratchArg5,scratchArg6);
+      op1Record[1] = (operandDesc[0] >> 0xc & 1) << 0x1c | op1Record[1] & 0xefffffff;
+      op1Record[0] = op1Record[0] & 0xfc03ffff;
+      op1Record[3] = operandDesc[1];
+      op1Record[2] = operandDesc[0];
       if (*(int *)resultOperand == 0) {
         glType = *(ushort *)(resultOperand + 0x18);
       }
@@ -2566,30 +2539,30 @@ int TIntermUnary__compileNode(this, compiler, unusedArg3, scratchArg4, scratchAr
       }
       scratchPtr7 = resultOperand;
       ppStreamType = GetPPStreamTypeForGLType((uint)glType);
-      op1Flags = (ppStreamType & 7) << 0x17 | op1Flags & 0xfc7fffff;
+      op1Record[1] = (ppStreamType & 7) << 0x17 | op1Record[1] & 0xfc7fffff;
       logicalSize = ParseOperand__GetLogicalSize(resultOperand);
-      op1Flags = (logicalSize + -1) * 0x4000000 & 0xc000000U | op1Flags & 0xf3ffffff;
-      recordPtrArg = (unsigned char *)&op1Header;
+      op1Record[1] = (logicalSize + -1) * 0x4000000 & 0xc000000U | op1Record[1] & 0xf3ffffff;
+      recordPtrArg = (unsigned char *)&op1Record[0];
       callArgScratch = 0;
       constGlType = 0;
       TPPStreamCompiler__AddOperation(compiler,&resultOperand,recordPtrArg,(char *)0x0,0);
-      op2AuxA = 0;
-      op2AuxB = 0;
-      op2Header = 0;
-      op2Flags = 0;
-      op2Dest0 = 0;
-      op2Dest1 = 0;
-      op2Src0A = 0;
-      op2Src0B = 0;
-      op2Src1A = 0;
-      op2Src1B = 0;
-      op2Src2A = 0;
-      op2Src2B = 0;
-      op2Word13 = 0;
-      op2Line = 0;
-      op2Line = (*(code *)**(undefined4 **)this)
+      op2Record[10] = 0;
+      op2Record[11] = 0;
+      op2Record[0] = 0;
+      op2Record[1] = 0;
+      op2Record[2] = 0;
+      op2Record[3] = 0;
+      op2Record[4] = 0;
+      op2Record[5] = 0;
+      op2Record[6] = 0;
+      op2Record[7] = 0;
+      op2Record[8] = 0;
+      op2Record[9] = 0;
+      op2Record[13] = 0;
+      op2Record[12] = 0;
+      op2Record[12] = (*(code *)**(undefined4 **)this)
                            (this,r4In1,recordPtrArg,callArgScratch,constGlType,scratchArg6,*(undefined4 **)this);
-      op2Header = op2Header & 0x1fffffff | 0x40000000;
+      op2Record[0] = op2Record[0] & 0x1fffffff | 0x40000000;
       if (*(int *)operand == 0) {
         glType = *(ushort *)(operand + 0x18);
       }
@@ -2605,9 +2578,9 @@ loopStoreConstValue:
 loopSetCallArgScratch:
         callArgScratch = 1;
         TPPStreamCompiler__getConstantAsSourceVar
-                  ((unsigned char *)&operandDesc,(uint)compiler,constValue,1,constGlType);
-        op2Src1A = operandDesc;
-        op2Src1B = operandDescB;
+                  ((unsigned char *)&operandDesc[0],(uint)compiler,constValue,1,constGlType);
+        op2Record[6] = operandDesc[0];
+        op2Record[7] = operandDesc[1];
       }
       else if (ppStreamType < 4) {
         if (ppStreamType == 1) {
@@ -2623,16 +2596,16 @@ loopSetCallArgScratch:
       __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_
                 (compiler,&operand,&operand);
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&operandDesc,compiler,operand,callArgScratch,constGlType,scratchArg6,callArgOperand,scratchPtr7);
-      op2Src0A = operandDesc;
-      op2Src0B = operandDescB;
+                ((unsigned char *)&operandDesc[0],compiler,operand,callArgScratch,constGlType,scratchArg6,callArgOperand,scratchPtr7);
+      op2Record[4] = operandDesc[0];
+      op2Record[5] = operandDesc[1];
       TPPStreamCompiler__getOperandAsDestVar
-                ((unsigned char *)&operandDesc,compiler,operand,callArgScratch,constGlType,scratchArg6);
+                ((unsigned char *)&operandDesc[0],compiler,operand,callArgScratch,constGlType,scratchArg6);
       scratchArg6 = *(uint *)(&_operatorToken + *(int *)(this + 0x30) * 4);
-      operatorCode = (scratchArg6 & 0xff) << 0x12 | op2Header & 0xfc03ffff;
-      op2Flags = (op1Dest0 >> 0xc & 1) << 0x1c | op2Flags & 0xefffffff;
-      op2Dest0 = operandDesc;
-      op2Dest1 = operandDescB;
+      operatorCode = (scratchArg6 & 0xff) << 0x12 | op2Record[0] & 0xfc03ffff;
+      op2Record[1] = (op1Record[2] >> 0xc & 1) << 0x1c | op2Record[1] & 0xefffffff;
+      op2Record[2] = operandDesc[0];
+      op2Record[3] = operandDesc[1];
       if (*(int *)operand == 0) {
         glType = *(ushort *)(operand + 0x18);
       }
@@ -2640,20 +2613,20 @@ loopSetCallArgScratch:
         glType = *(ushort *)(*(int *)operand + 0x2c);
       }
       scratchPtr7 = operand;
-      op2Header = operatorCode;
+      op2Record[0] = operatorCode;
       streamType = GetPPStreamTypeForGLType((uint)glType);
-      op2Flags = (streamType & 7) << 0x17 | op2Flags & 0xfc7fffff;
+      op2Record[1] = (streamType & 7) << 0x17 | op2Record[1] & 0xfc7fffff;
       emitFinalOp = false;
       logicalSize = ParseOperand__GetLogicalSize(operand);
-      op2Flags = (logicalSize + -1) * 0x4000000 & 0xc000000U | op2Flags & 0xf3ffffff;
+      op2Record[1] = (logicalSize + -1) * 0x4000000 & 0xc000000U | op2Record[1] & 0xf3ffffff;
       scratchArg4 = 0;
       scratchArg5 = 0;
       TPPStreamCompiler__AddOperation
-                (compiler,&operand,(unsigned char *)&op2Header,(char *)0x0,0);
+                (compiler,&operand,(unsigned char *)&op2Record[0],(char *)0x0,0);
       break;
     case 0xb:
     case 0xc:
-      op1Header = op1Header & 0x1fffffff | 0x40000000;
+      op1Record[0] = op1Record[0] & 0x1fffffff | 0x40000000;
       if (*(int *)operand == 0) {
         glType = *(ushort *)(operand + 0x18);
       }
@@ -2668,9 +2641,9 @@ loopStoreConstValue2:
 loopSetScratchArg4:
         scratchArg4 = 1;
         TPPStreamCompiler__getConstantAsSourceVar
-                  ((unsigned char *)&operandDesc,(uint)compiler,constValue,1,scratchArg5);
-        op1Src1A = operandDesc;
-        op1Src1B = operandDescB;
+                  ((unsigned char *)&operandDesc[0],(uint)compiler,constValue,1,scratchArg5);
+        op1Record[6] = operandDesc[0];
+        op1Record[7] = operandDesc[1];
       }
       else if (streamType < 4) {
         if (streamType == 1) {
@@ -2696,16 +2669,16 @@ operatorCodeCase6:
     __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_(compiler,&resultOperand,&operand)
     ;
     TPPStreamCompiler__getOperandAsSourceVar
-              ((unsigned char *)&operandDesc,compiler,operand,scratchArg4,scratchArg5,scratchArg6,scratchPtr7,operatorCode);
-    op1Src0A = operandDesc;
-    op1Src0B = operandDescB;
+              ((unsigned char *)&operandDesc[0],compiler,operand,scratchArg4,scratchArg5,scratchArg6,scratchPtr7,operatorCode);
+    op1Record[4] = operandDesc[0];
+    op1Record[5] = operandDesc[1];
     callArgOperand = resultOperand;
     TPPStreamCompiler__getOperandAsDestVar
-              ((unsigned char *)&operandDesc,compiler,resultOperand,scratchArg4,scratchArg5,scratchArg6);
+              ((unsigned char *)&operandDesc[0],compiler,resultOperand,scratchArg4,scratchArg5,scratchArg6);
     opReload = *(int *)(this + 0x30);
-    op1Header = (*(uint *)(&_operatorToken + opReload * 4) & 0xff) << 0x12 | op1Header & 0xfc03ffff;
-    op1Dest1 = operandDescB;
-    op1Dest0 = operandDesc;
+    op1Record[0] = (*(uint *)(&_operatorToken + opReload * 4) & 0xff) << 0x12 | op1Record[0] & 0xfc03ffff;
+    op1Record[3] = operandDesc[1];
+    op1Record[2] = operandDesc[0];
     scratchPtr7 = *(unsigned char **)resultOperand;
     resultParseType = *(int **)(scratchPtr7 + 0xc);
     if (resultParseType == (int *)0x0) goto checkOpReload;
@@ -2728,7 +2701,7 @@ checkOpReload:
   if (emitFinalOp) {
     opReload = *(int *)(this + 0x30);
     if (((opReload == 0x4b) || (opReload == 0x57)) || (opReload == 0x58)) {
-      op1Flags = (op1Src0A >> 0xe & 1) << 0x1c | op1Flags & 0xefffffff;
+      op1Record[1] = (op1Record[4] >> 0xe & 1) << 0x1c | op1Record[1] & 0xefffffff;
       if (*(int *)operand == 0) {
         glType = *(ushort *)(operand + 0x18);
       }
@@ -2739,7 +2712,7 @@ checkOpReload:
       sizeOperand = operand;
     }
     else {
-      op1Flags = (op1Dest0 >> 0xc & 1) << 0x1c | op1Flags & 0xefffffff;
+      op1Record[1] = (op1Record[2] >> 0xc & 1) << 0x1c | op1Record[1] & 0xefffffff;
       if (*(int *)resultOperand == 0) {
         glType = *(ushort *)(resultOperand + 0x18);
       }
@@ -2749,10 +2722,10 @@ checkOpReload:
       ppStreamType = GetPPStreamTypeForGLType((uint)glType);
       sizeOperand = resultOperand;
     }
-    op1Flags = (ppStreamType & 7) << 0x17 | op1Flags & 0xfc7fffff;
+    op1Record[1] = (ppStreamType & 7) << 0x17 | op1Record[1] & 0xfc7fffff;
     logicalSize = ParseOperand__GetLogicalSize(sizeOperand);
-    op1Flags = (logicalSize + -1) * 0x4000000 & 0xc000000U | op1Flags & 0xf3ffffff;
-    TPPStreamCompiler__AddOperation(compiler,&resultOperand,(unsigned char *)&op1Header,(char *)0x0,0)
+    op1Record[1] = (logicalSize + -1) * 0x4000000 & 0xc000000U | op1Record[1] & 0xf3ffffff;
+    TPPStreamCompiler__AddOperation(compiler,&resultOperand,(unsigned char *)&op1Record[0],(char *)0x0,0)
     ;
   }
   operandToFree = operand;

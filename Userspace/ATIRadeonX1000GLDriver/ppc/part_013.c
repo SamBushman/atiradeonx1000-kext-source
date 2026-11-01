@@ -110,9 +110,7 @@ int arbParseParamBinding(parser, variable, allowRange, isArrayElement)
   undefined4 elementField8;
   undefined4 elementField12;
   double constantValue;
-  float constVecX;
-  float constVecY;
-  float constVecZ;
+  float constVec [4];
   
   if (0x1a < (uint)parser[5]) {
 loopSetErrorMessage:
@@ -570,30 +568,33 @@ loopCallArbSetError2:
   tokenBit = 1 << (parser[5] & 0x3fU);
   if ((tokenBit & 0x6018000) != 0) {
     constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-    constVecX = (float)constantValue;
-    constVecY = constVecX;
-    constVecZ = constVecX;
-    stateKind = arbInternConstant(parser,&constVecX);
+    constVec[0] = (float)constantValue;
+    constVec[1] = constVec[0];
+    constVec[2] = constVec[0];
+    constVec[3] = constVec[0];
+    stateKind = arbInternConstant(parser,&constVec[0]);
     binding[3] = stateKind;
     return;
   }
   if ((tokenBit & 0x800000) == 0) goto loopCallArbSetError2;
   arbNextToken(parser);
-  constVecZ = 0.0;
-  constVecY = 0.0;
+  constVec[3] = 1.0;
+  constVec[2] = 0.0;
+  constVec[1] = 0.0;
   constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-  constVecX = (float)constantValue;
+  constVec[0] = (float)constantValue;
   if (parser[5] == 0x13) {
     arbNextToken(parser);
     constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-    constVecY = (float)constantValue;
+    constVec[1] = (float)constantValue;
     if (parser[5] == 0x13) {
       arbNextToken(parser);
       constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-      constVecZ = (float)constantValue;
+      constVec[2] = (float)constantValue;
       if (parser[5] == 0x13) {
         arbNextToken(parser);
-        ((double (*)())arbParseFloatConstant)(parser);
+        constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
+        constVec[3] = (float)constantValue;
         goto callArbExpectToken;
       }
     }
@@ -606,7 +607,7 @@ loopCallArbSetError2:
   }
 callArbExpectToken:
   arbExpectToken(parser,0x18);
-  stateKind = arbInternConstant(parser,&constVecX);
+  stateKind = arbInternConstant(parser,&constVec[0]);
   binding[3] = stateKind;
   return;
 }

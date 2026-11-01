@@ -2481,9 +2481,7 @@ int Inst__collapseMulSplatByDotOnes(inst, program)
   int destRegister;
   int scalarSourceIndex;
   undefined4 scalarSelectWord;
-  undefined4 savedCounters0;
-  undefined4 savedCounters1;
-  undefined4 savedCounters2;
+  undefined4 savedCounters [3];
   undefined4 onesLane0;
   undefined4 onesLane1;
   undefined4 onesLane2;
@@ -2581,15 +2579,15 @@ setExtraSource:
     if ((inst[5] & 0x200U) != 0) {
       extraSource = IRInst__getOperandSource(inst,inst[0x21]);
     }
-    savedCounters0 = 0;
-    savedCounters1 = 0;
-    savedCounters2 = 0;
-    IRInst__saveCounters(inst,&savedCounters0,0xffffffff);
+    savedCounters[0] = 0;
+    savedCounters[1] = 0;
+    savedCounters[2] = 0;
+    IRInst__saveCounters(inst,&savedCounters[0],0xffffffff);
     destRegister = inst[0x53];
     prevNode = inst[1];
     DList__unlink(inst);
     IRInst__reinitAsBinary(inst,*(undefined4 *)(*(int *)(sourceDef + 0x88) + 8),*(undefined4 *)(program + 8));
-    IRInst__restoreCounters(inst,&savedCounters0);
+    IRInst__restoreCounters(inst,&savedCounters[0]);
     Block__insertInstAfter(*(undefined4 *)(prevNode + 0x158),prevNode,inst);
     dotSaturate = *(int *)(sourceDef + 0x120);
     inst[0x49] = *(int *)(sourceDef + 0x124);
@@ -6677,9 +6675,7 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
   int lastOperandBuf [5];
   int *inst1;
   undefined4 lastOperandBuf0;
-  undefined4 scaleOut;
-  undefined4 zeroWordA;
-  undefined4 zeroWordB;
+  undefined4 scaleOut [6];
   int mergeOut [3];
   
   vcall64Result = (**(code **)(*inst + 100))(inst,inst2,program);
@@ -6813,12 +6809,12 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
                 loopIndex = loopIndex + 1;
               } while (moreComponents);
               a0[0x27] = constSelectWord;
-              scaleOut = 0;
+              scaleOut[0] = 0;
               createWithConstantOperandsResult[0x27] = lastOperandBuf[0];
-              zeroWordA = 0;
-              zeroWordB = 0;
+              scaleOut[1] = 0;
+              scaleOut[5] = 0;
               operandRecord2 = IRInst__getOperandRecord(inst,1);
-              IROperand__copyFrom(&scaleOut,operandRecord2);
+              IROperand__copyFrom(&scaleOut[0],operandRecord2);
               lastOperandBuf[1] = 0;
               lastOperandBuf[2] = 0;
               lastOperandBuf[3] = 0;
@@ -6835,7 +6831,7 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
               inst[0x49] = resultScaleCode;
               inst[0x26] = 0;
               operandRecord2 = IRInst__getOperandRecord(inst,1);
-              IROperand__copyFrom(operandRecord2,&scaleOut);
+              IROperand__copyFrom(operandRecord2,&scaleOut[0]);
               IRInst__setOperandSource(inst,1,a0,0,*(undefined4 *)(program + 8));
               IROperand__setModifierBits(inst + 0x29,1,inst2[0x2e] & 1);
               IRInst__copyOperandFrom(inst,2,inst2,1);
@@ -7066,15 +7062,9 @@ int Inst__mergeAddWithSharedConstant_00152ea8(inst, inst2, program)
   undefined4 lastOperandRecord;
   int lastOperandSource;
   undefined4 lastOperandTail;
-  undefined4 operandCopyA;
-  undefined4 operandCopyAWord1;
-  undefined4 operandCopyAWord5;
-  undefined4 operandCopyB;
-  undefined4 operandCopyBWord1;
-  undefined4 operandCopyBWord5;
-  undefined4 operandCopyC;
-  undefined4 operandCopyCWord1;
-  undefined4 operandCopyCWord5;
+  undefined4 operandCopyA [6];
+  undefined4 operandCopyB [6];
+  undefined4 operandCopyC [6];
   undefined4 readSelectOut;
   int selectWhereOut;
   int mergedLanesOut;
@@ -7616,21 +7606,21 @@ setIsLastComponent:
                       if ((inst2[5] & 0x200U) != 0) {
                         IRInst__readLastOperand(inst2,&lastOperandRecord);
                       }
-                      operandCopyA = 0;
-                      operandCopyAWord1 = 0;
-                      operandCopyAWord5 = 0;
-                      operandCopyB = 0;
-                      operandCopyBWord1 = 0;
-                      operandCopyBWord5 = 0;
-                      operandCopyC = 0;
-                      operandCopyCWord1 = 0;
-                      operandCopyCWord5 = 0;
+                      operandCopyA[0] = 0;
+                      operandCopyA[1] = 0;
+                      operandCopyA[5] = 0;
+                      operandCopyB[0] = 0;
+                      operandCopyB[1] = 0;
+                      operandCopyB[5] = 0;
+                      operandCopyC[0] = 0;
+                      operandCopyC[1] = 0;
+                      operandCopyC[5] = 0;
                       operandRecord2 = IRInst__getOperandRecord(inst3,1);
-                      IROperand__copyFrom(&operandCopyC,operandRecord2);
+                      IROperand__copyFrom(&operandCopyC[0],operandRecord2);
                       operandRecord2 = IRInst__getOperandRecord(inst4,1);
-                      IROperand__copyFrom(&operandCopyA,operandRecord2);
+                      IROperand__copyFrom(&operandCopyA[0],operandRecord2);
                       operandRecord2 = IRInst__getOperandRecord(inst4,2);
-                      IROperand__copyFrom(&operandCopyB,operandRecord2);
+                      IROperand__copyFrom(&operandCopyB[0],operandRecord2);
                       counterSave0 = 0;
                       counterSave1 = 0;
                       counterSave2 = 0;
@@ -7646,14 +7636,14 @@ setIsLastComponent:
                       inst[0x27] = mergedLanes;
                       inst[0x49] = resultScaleCode;
                       operandRecord2 = IRInst__getOperandRecord(inst,1);
-                      IROperand__copyFrom(operandRecord2,&operandCopyA);
+                      IROperand__copyFrom(operandRecord2,&operandCopyA[0]);
                       IRInst__setOperandSource(inst,1,newSrcA,0,compiler);
                       Block__insertInstBefore(inst[0x56],inst,newSrcA);
                       selectWordToStore = srcSelectA;
                       operandRecord = IRInst__getOperandRecord(inst,1);
                       *(undefined4 *)(operandRecord + 0x10) = selectWordToStore;
                       operandRecord2 = IRInst__getOperandRecord(inst,2);
-                      IROperand__copyFrom(operandRecord2,&operandCopyB);
+                      IROperand__copyFrom(operandRecord2,&operandCopyB[0]);
                       IRInst__setOperandSource(inst,2,newSrcB,0,compiler);
                       Block__insertInstBefore(inst[0x56],inst,newSrcB);
                       selectWordToStore = srcSelectB;
@@ -7661,7 +7651,7 @@ setIsLastComponent:
                       *(undefined4 *)(operandRecord + 0x10) = selectWordToStore;
                       IROperand__setModifierBits(inst + 0x2f,1,0);
                       operandRecord2 = IRInst__getOperandRecord(inst,3);
-                      IROperand__copyFrom(operandRecord2,&operandCopyC);
+                      IROperand__copyFrom(operandRecord2,&operandCopyC[0]);
                       IRInst__setOperandSource(inst,3,newSrcC,0,compiler);
                       Block__insertInstBefore(inst[0x56],inst,newSrcC);
                       selectWordToStore = srcSelectC;

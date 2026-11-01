@@ -1,7 +1,4 @@
 local	arbParseParamBinding	bVar1	notRangeToken	INFERRED	role read off the function body (see notes_gld_q03.md)
-local	arbParseParamBinding	local_28	constVecX	INFERRED	role read off the function body (see notes_gld_q03.md)
-local	arbParseParamBinding	local_24	constVecY	INFERRED	role read off the function body (see notes_gld_q03.md)
-local	arbParseParamBinding	local_20	constVecZ	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	ffvpAssignOutputSlots	uVar6	colorSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
 use	ffvpAssignOutputSlots	iVar7	slotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ 1;$	+1
 use	ffvpAssignOutputSlots	iVar7	slotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar7\ =\ 2;$	+1

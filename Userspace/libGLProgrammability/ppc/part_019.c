@@ -2202,49 +2202,17 @@ int _DetectConstantLoopsSimple(stream)
   undefined1 src0Info [40];
   undefined1 src123Infos [120];
   undefined1 destInfo [48];
-  undefined1 stepInfo [12];
-  int stepInfoType;
-  int stepInfoSize;
-  int stepInfoIsConstant;
-  int stepInfoValueX;
-  undefined1 counterInfo [12];
-  int counterInfoType;
-  int counterInfoSize;
-  undefined1 initInfo [12];
-  int initInfoType;
-  int initInfoSize;
-  undefined1 limitInfo [12];
-  int limitInfoType;
-  int limitInfoSize;
-  undefined4 loopTempARegister;
-  uint loopTempABank;
-  uint loopTempAPrecision;
-  uint loopTempAType;
-  uint loopTempASize;
-  undefined4 loopTempB [2];
-  undefined4 loopTempBPrecision;
-  undefined4 loopTempBType;
-  undefined4 loopTempBSize;
-  undefined4 loopTempC [2];
-  undefined4 loopTempCPrecision;
-  undefined4 loopTempCType;
-  undefined4 loopTempCSize;
-  undefined4 loopTempD [2];
-  undefined4 loopTempDPrecision;
-  undefined4 loopTempDType;
-  undefined4 loopTempDSize;
-  undefined4 loopTempE [2];
-  undefined4 loopTempEPrecision;
-  undefined4 loopTempEType;
-  undefined4 loopTempESize;
-  undefined4 loopTempF [2];
-  undefined4 loopTempFPrecision;
-  undefined4 loopTempFType;
-  undefined4 loopTempFSize;
-  undefined4 loopTempG [2];
-  undefined4 loopTempGPrecision;
-  undefined4 loopTempGType;
-  undefined4 loopTempGSize;
+  undefined4 stepInfo [12];
+  undefined4 counterInfo [12];
+  undefined4 initInfo [12];
+  undefined4 limitInfo [12];
+  undefined4 loopTempA [12];
+  undefined4 loopTempB [12];
+  undefined4 loopTempC [12];
+  undefined4 loopTempD [12];
+  undefined4 loopTempE [12];
+  undefined4 loopTempF [12];
+  undefined4 loopTempG [12];
   uint opcodeTable [12];
   int emitEnabledTable [7];
   int emitEnabledTable7;
@@ -2274,21 +2242,7 @@ int _DetectConstantLoopsSimple(stream)
   undefined4 *destPtrTable6;
   undefined4 *destPtrTable7;
   undefined4 *destPtrTable8;
-  uint opHeader;
-  uint opFlags;
-  uint opDest0;
-  uint opDest1;
-  uint opSrc0A;
-  undefined4 opSrc0B;
-  undefined2 opSrc0BHigh;
-  undefined4 opSrc1A;
-  undefined4 opSrc1B;
-  undefined4 opSrc2A;
-  undefined4 opSrc2B;
-  undefined4 opAuxA;
-  undefined4 opAuxB;
-  undefined4 opLine;
-  undefined4 opWord13;
+  uint opRecord [14];
   int scopeDepth;
   int loopEndOp;
   
@@ -2451,14 +2405,14 @@ loopSetBodyIsSimple:
         }
       }
       loopEndOp = endOpCandidate;
-      if (((counterInfoType != 3) || (initInfoType != 3)) || ((limitInfoType != 3 || (stepInfoType != 3)))) {
+      if (((counterInfo[3] != 3) || (initInfo[3] != 3)) || ((limitInfo[3] != 3 || (stepInfo[3] != 3)))) {
         notEligible = 1;
       }
-      if ((((counterInfoSize != 0) || (initInfoSize != 0)) || (limitInfoSize != 0)) || (stepInfoSize != 0)) {
+      if ((((counterInfo[4] != 0) || (initInfo[4] != 0)) || (limitInfo[4] != 0)) || (stepInfo[4] != 0)) {
         notEligible = 1;
       }
-      notEligible = notEligible | stepInfoIsConstant == 0;
-      if (stepInfoValueX < 0) {
+      notEligible = notEligible | stepInfo[5] == 0;
+      if (stepInfo[6] < 0) {
         stepIsSubtract = stepIsSubtract ^ 1;
       }
       if (countsDown) {
@@ -2469,24 +2423,24 @@ setNotEligible:
         notEligible = 1;
       }
       if (((notEligible == 0) && (foundStep)) && (((foundEndif && ((ifOpCursor != 0 && (endifOp != 0)))) && (bodyIsSimple)))) {
-        loopTempABank = 1;
-        loopTempAType = 1;
-        loopTempAPrecision = notEligible;
-        loopTempASize = notEligible;
-        loopTempARegister = _AddTempRegister(stream,0,1,0);
-        _memcpy(loopTempB,&loopTempARegister,0x28);
-        loopTempB[0] = _AddTempRegister(stream,loopTempBPrecision,loopTempBType,loopTempBSize);
-        _memcpy(loopTempC,&loopTempARegister,0x28);
-        loopTempC[0] = _AddTempRegister(stream,loopTempCPrecision,loopTempCType,loopTempCSize);
-        _memcpy(loopTempD,&loopTempARegister,0x28);
-        loopTempD[0] = _AddTempRegister(stream,loopTempDPrecision,loopTempDType,loopTempDSize);
-        _memcpy(loopTempE,&loopTempARegister,0x28);
-        loopTempE[0] = _AddTempRegister(stream,loopTempEPrecision,loopTempEType,loopTempESize);
+        loopTempA[1] = 1;
+        loopTempA[3] = 1;
+        loopTempA[2] = notEligible;
+        loopTempA[4] = notEligible;
+        loopTempA[0] = _AddTempRegister(stream,0,1,0);
+        _memcpy(loopTempB,&loopTempA[0],0x28);
+        loopTempB[0] = _AddTempRegister(stream,loopTempB[2],loopTempB[3],loopTempB[4]);
+        _memcpy(loopTempC,&loopTempA[0],0x28);
+        loopTempC[0] = _AddTempRegister(stream,loopTempC[2],loopTempC[3],loopTempC[4]);
+        _memcpy(loopTempD,&loopTempA[0],0x28);
+        loopTempD[0] = _AddTempRegister(stream,loopTempD[2],loopTempD[3],loopTempD[4]);
+        _memcpy(loopTempE,&loopTempA[0],0x28);
+        loopTempE[0] = _AddTempRegister(stream,loopTempE[2],loopTempE[3],loopTempE[4]);
         if (isInclusive != 0) {
-          _memcpy(loopTempF,&loopTempARegister,0x28);
-          loopTempF[0] = _AddTempRegister(stream,loopTempFPrecision,loopTempFType,loopTempFSize);
-          _memcpy(loopTempG,&loopTempARegister,0x28);
-          loopTempG[0] = _AddTempRegister(stream,loopTempGPrecision,loopTempGType,loopTempGSize);
+          _memcpy(loopTempF,&loopTempA[0],0x28);
+          loopTempF[0] = _AddTempRegister(stream,loopTempF[2],loopTempF[3],loopTempF[4]);
+          _memcpy(loopTempG,&loopTempA[0],0x28);
+          loopTempG[0] = _AddTempRegister(stream,loopTempG[2],loopTempG[3],loopTempG[4]);
         }
         _memcpy(opcodeTable,&detectConstantLoopsOpcodeTableInit_97c3aa40,0x24);
         emitEnabledTable[5] = 1;
@@ -2519,16 +2473,16 @@ setNotEligible:
         loopIndex = 0;
         destPtrTable[2] = loopTempE;
         destPtrTable[3] = loopTempB;
-        destPtrTable8 = &loopTempARegister;
+        destPtrTable8 = &loopTempA[0];
         srcPtrTable8 = loopTempB;
         srcPtrTable9 = loopTempE;
-        srcPtrTable10 = &loopTempARegister;
-        srcPtrTable12 = &loopTempARegister;
+        srcPtrTable10 = &loopTempA[0];
+        srcPtrTable12 = &loopTempA[0];
         srcPtrTable13 = loopTempE;
         srcPtrTable15 = loopTempB;
-        srcPtrTable16 = &loopTempARegister;
-        destPtrTable4 = &loopTempARegister;
-        destPtrTable5 = &loopTempARegister;
+        srcPtrTable16 = &loopTempA[0];
+        destPtrTable4 = &loopTempA[0];
+        destPtrTable5 = &loopTempA[0];
         destPtrTable6 = loopTempF;
         destPtrTable7 = loopTempG;
         srcPtrTable11 = 0;
@@ -2536,70 +2490,70 @@ setNotEligible:
         srcPtrTable17 = loopTempG;
         do {
           if (*(int *)(tableBase + 0x310) != 0) {
-            opSrc0A = 0;
-            opSrc0B = 0;
-            opSrc1A = 0;
-            opSrc1B = 0;
-            opSrc2A = 0;
-            opSrc2B = 0;
-            opAuxA = 0;
-            opAuxB = 0;
-            opFlags = 0;
-            opLine = 0;
-            opHeader = (*(uint *)(tableBase + 0x2e0) & 0xff) << 0x12;
+            opRecord[4] = 0;
+            opRecord[5] = 0;
+            opRecord[6] = 0;
+            opRecord[7] = 0;
+            opRecord[8] = 0;
+            opRecord[9] = 0;
+            opRecord[10] = 0;
+            opRecord[11] = 0;
+            opRecord[1] = 0;
+            opRecord[12] = 0;
+            opRecord[0] = (*(uint *)(tableBase + 0x2e0) & 0xff) << 0x12;
             emitSourceCount = *(uint *)(tableBase + 0x340);
-            opDest0 = 0;
-            opDest1 = 0;
-            opLine = *(undefined4 *)(whileOp + 0x3c);
-            opHeader = emitSourceCount << 0x1d | opHeader;
-            opWord13 = 0;
+            opRecord[2] = 0;
+            opRecord[3] = 0;
+            opRecord[12] = *(undefined4 *)(whileOp + 0x3c);
+            opRecord[0] = emitSourceCount << 0x1d | opRecord[0];
+            opRecord[13] = 0;
             destSizeShifted = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3) << 10;
-            opDest0 = destSizeShifted | 0x6c;
+            opRecord[2] = destSizeShifted | 0x6c;
             destSizeBits = *(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3;
             if (destSizeBits == 1) {
 loopSetOpDest0:
-              opDest0 = opDest0 | 0x4000;
+              opRecord[2] = opRecord[2] | 0x4000;
 loopSetOpDest02:
-              opDest0 = opDest0 | 0x2000;
+              opRecord[2] = opRecord[2] | 0x2000;
             }
             else {
               if (1 < destSizeBits) {
                 if (destSizeBits != 2) {
                   if (destSizeBits != 3) goto setOpDest0;
-                  opDest0 = destSizeShifted | 0x1006c;
+                  opRecord[2] = destSizeShifted | 0x1006c;
                 }
-                opDest0 = opDest0 | 0x8000;
+                opRecord[2] = opRecord[2] | 0x8000;
                 goto loopSetOpDest0;
               }
               if (destSizeBits == 0) goto loopSetOpDest02;
             }
 setOpDest0:
-            opDest0 = (*(uint *)(*(int *)(tableBase + 0x3c0) + 4) & 7) << 0x11 | opDest0;
-            opDest1 = (uint)*(ushort *)(*(int *)(tableBase + 0x3c0) + 2);
+            opRecord[2] = (*(uint *)(*(int *)(tableBase + 0x3c0) + 4) & 7) << 0x11 | opRecord[2];
+            opRecord[3] = (uint)*(ushort *)(*(int *)(tableBase + 0x3c0) + 2);
             sourceIndex = 0;
-            destWordCopy = opDest0;
+            destWordCopy = opRecord[2];
             if ((emitSourceCount & 7) != 0) {
               do {
-                oldOperandWord = (&opSrc0A)[sourceIndex * 2];
+                oldOperandWord = (&opRecord[4])[sourceIndex * 2];
                 srcSizeShifted = (destWordCopy >> 10 & 3) << 0xc;
                 srcTableIndex = loopIndex * 2 + sourceIndex;
-                (&opSrc0A)[sourceIndex * 2] = srcSizeShifted | oldOperandWord & 0xff804fff | 0xd8000;
+                (&opRecord[4])[sourceIndex * 2] = srcSizeShifted | oldOperandWord & 0xff804fff | 0xd8000;
                 nextSourceIndex = sourceIndex + 1;
                 srcPrecisionShifted = (*(uint *)((&srcPtrTable)[srcTableIndex] + 4) & 7) << 0x17;
-                (&opSrc0A)[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xfc004fff | 0xd8000;
+                (&opRecord[4])[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xfc004fff | 0xd8000;
                 registerNumber16 = *(undefined2 *)((&srcPtrTable)[srcTableIndex] + 2);
-                (&opSrc0A)[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xf4004fff | 0xd8000;
-                (&opSrc0BHigh)[sourceIndex * 4] = registerNumber16;
+                (&opRecord[4])[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xf4004fff | 0xd8000;
+                ((undefined2 *)&opRecord[5])[1 + sourceIndex * 4] = registerNumber16;
                 sourceIndex = nextSourceIndex;
-                destWordCopy = opDest0;
+                destWordCopy = opRecord[2];
               } while (nextSourceIndex < (int)(emitSourceCount & 7));
             }
             flagsSizeShifted = (*(uint *)(*(int *)(tableBase + 0x3c0) + 8) & 3) << 0x12;
-            opFlags = flagsSizeShifted;
+            opRecord[1] = flagsSizeShifted;
             typeShifted = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0xc) & 7) << 0x17;
-            opFlags = typeShifted | flagsSizeShifted;
-            opFlags = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3) << 0x1a | typeShifted | flagsSizeShifted;
-            _PPStreamInsertOperationBeforeChunk(stream,&opHeader,0,0,whileOp);
+            opRecord[1] = typeShifted | flagsSizeShifted;
+            opRecord[1] = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3) << 0x1a | typeShifted | flagsSizeShifted;
+            _PPStreamInsertOperationBeforeChunk(stream,&opRecord[0],0,0,whileOp);
           }
           loopIndex = loopIndex + 1;
           tableBase = tableBase + 4;
@@ -2612,18 +2566,18 @@ setOpDest0:
         }
         whileSrcWord = *(uint *)(whileOp + 0x1c);
         *(uint *)(whileOp + 0xc) = *(uint *)(whileOp + 0xc) & 0x1c03ffff | 0x215c0000;
-        sizeShifted = (loopTempASize & 3) << 0xc;
+        sizeShifted = (loopTempA[4] & 3) << 0xc;
         *(uint *)(whileOp + 0x1c) = sizeShifted | whileSrcWord & 0xff85cfff | 0xd8000;
-        whileSrcPrecisionShifted = (loopTempABank & 7) << 0x17;
+        whileSrcPrecisionShifted = (loopTempA[1] & 7) << 0x17;
         *(uint *)(whileOp + 0x1c) = whileSrcPrecisionShifted | sizeShifted | whileSrcWord & 0xfc05cfff | 0xd8000;
         *(uint *)(whileOp + 0x1c) = whileSrcPrecisionShifted | sizeShifted | whileSrcWord & 0xf405cfff | 0xd8000;
-        *(undefined2 *)(whileOp + 0x22) = (*(unsigned short *)((unsigned char *)&(loopTempARegister) + 2));
+        *(undefined2 *)(whileOp + 0x22) = (*(unsigned short *)((unsigned char *)&(loopTempA[0]) + 2));
         whileSrcWord = *(uint *)(whileOp + 0x10);
-        precisionShifted = (loopTempAPrecision & 3) << 0x12;
+        precisionShifted = (loopTempA[2] & 3) << 0x12;
         *(uint *)(whileOp + 0x10) = precisionShifted | whileSrcWord & 0xfff3ffff;
-        whileDestPrecisionShifted = (loopTempAType & 7) << 0x17;
+        whileDestPrecisionShifted = (loopTempA[3] & 7) << 0x17;
         *(uint *)(whileOp + 0x10) = whileDestPrecisionShifted | precisionShifted | whileSrcWord & 0xfc73ffff;
-        *(uint *)(whileOp + 0x10) = (loopTempASize & 3) << 0x1a | whileDestPrecisionShifted | precisionShifted | whileSrcWord & 0xf073ffff;
+        *(uint *)(whileOp + 0x10) = (loopTempA[4] & 3) << 0x1a | whileDestPrecisionShifted | precisionShifted | whileSrcWord & 0xf073ffff;
         *(uint *)(loopEndOp + 0xc) = *(uint *)(loopEndOp + 0xc) & 0xfc03ffff | 0x16c0000;
       }
     }
