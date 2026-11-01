@@ -1,0 +1,6 @@
+# r36: the 2 LAB_<addr> labels names_r08_labels.tsv's own header deliberately left alone ("Left alone: LAB_97b919a8
+# (before `}` break;) and LAB_97c1aba8 (before `goto checkX3f;`)"). On inspection they fit the SAME verb+target
+# convention as the other 21 rows in that file; naming them removes the only 2 remaining Ghidra placeholders in
+# libGLProgrammability.
+local	_execute_stack_op	LAB_97c1aba8	gotoCheckX3f	INFERRED	merge point of 2 ways of setting `operand` (fallthrough from the byte-offset case, or a forward goto from case 0x14); both converge here and immediately `goto checkX3f;` - no other statement in between
+local	TIntermConstantUnion__fold	LAB_97b919a8	loopContinueAfterIntAdd	INFERRED	empty statement (`;`) at the bottom of the component for-loop body, reached by a forward goto from the integer-add case (typeBasicTypeField == 2) to skip the float-add fallthrough and the error-message path; a loop-continue point

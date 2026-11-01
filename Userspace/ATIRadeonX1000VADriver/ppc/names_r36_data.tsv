@@ -1,0 +1,7 @@
+# r36: the 2 DAT_<addr> globals names_r06_data_remaining.md flagged as "Not named" (write-only copies of ctx+0x57c/
+# ctx+0x578 made in ava_setup_decode; nothing reads them). ctx+0x578/ctx+0x57c are used as width/height everywhere
+# else in this corpus (e.g. part_001.c:1301-1302 `height = *(uint *)(ctx + 0x57c); width = *(uint *)(ctx + 0x578);`,
+# and dozens more call sites); naming these shadow copies after that role is more informative than leaving them
+# as bare DAT_, even though their purpose beyond "a copy" is still not stated by the code.
+data	DAT_0000f1a8	lastDecodeWidth_0000f1a8	CONFIRMED	write-only shadow copy of ctx+0x578 (width, used as such throughout this corpus), set in ava_setup_decode; nothing reads it back
+data	DAT_0000f1a4	lastDecodeHeight_0000f1a4	CONFIRMED	write-only shadow copy of ctx+0x57c (height, used as such throughout this corpus), set in ava_setup_decode; nothing reads it back

@@ -512,8 +512,8 @@ int ava_setup_decode(ctx, sizeInfo, requestedCount)
             ((void (*)())ava_build_stage_programs)(ctx,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,
                          fpPassThrough9,fpPassThrough10);
             ((int (*)())ava_build_block_grid)(ctx,r4AfterCall,bufferOrStatus,widthOrCount,allocOrRowBase,allocAlign,allocFlags,planeTableA);
-            DAT_0000f1a8 = *(undefined4 *)(ctx + 0x578);
-            DAT_0000f1a4 = *(undefined4 *)(ctx + 0x57c);
+            lastDecodeWidth_0000f1a8 = *(undefined4 *)(ctx + 0x578);
+            lastDecodeHeight_0000f1a4 = *(undefined4 *)(ctx + 0x57c);
             do {
               *(undefined4 *)(descCursor + 0x38) = *(undefined4 *)(ctx + 0x578);
               *(undefined4 *)(descCursor + 0x3c) = *(undefined4 *)(ctx + 0x57c);

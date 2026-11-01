@@ -246,7 +246,7 @@ setOperand:
     case 0x14:
       if (1 < (int)stackElt) {
         operand = (uint *)stackFrameWords[stackElt + 1];
-        goto LAB_97c1aba8;
+        goto gotoCheckX3f;
       }
       goto opCase4;
     case 0x15:
@@ -256,7 +256,7 @@ setOperand:
         stackByteOffset = (stackElt - decodedImmediate) * 4;
 setOperand2:
         operand = *(uint **)((int)stackFrameWords + stackByteOffset + 8);
-LAB_97c1aba8:
+gotoCheckX3f:
         goto checkX3f;
       }
       goto opCase4;
@@ -477,7 +477,7 @@ loopSetResult3:
       stackByteOffset = regNumber;
 setOperand3:
       operand = (uint *)**(uint **)(context + stackByteOffset * 4);
-      goto LAB_97c1aba8;
+      goto gotoCheckX3f;
     case 0x92:
       lebValue = _read_uleb128_97c1a3ec(opPtrNext,&regNumber);
       opPtrNext = (ushort *)_read_sleb128_97c1a41c(lebValue,&decodedImmediate);

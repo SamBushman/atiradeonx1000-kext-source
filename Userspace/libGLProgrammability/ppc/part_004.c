@@ -972,7 +972,7 @@ operatorOffsetCase17:
             if (typeBasicTypeField == 2) {
               *(int *)(componentLoopIndex * 4 + newComponentArray) =
                    *(int *)(thisUnion + componentLoopIndex * 4) + **(int **)(rightUnionNode + 0x30);
-              goto LAB_97b919a8;
+              goto loopContinueAfterIntAdd;
             }
             message = "Constant folding cannot be done for \"+\"";
             sourceLoc = (*(code *)**(undefined4 **)this)(this,r4In0,rightOperandArg,infoSinkArg,operandTypeQuery,unusedArg6,picBase);
@@ -998,7 +998,7 @@ override_jmp_97b9198c_case_0:
           }
           *(float *)(newComponentArray + componentLoopIndex * 4) =
                *(float *)(thisUnion + componentLoopIndex * 4) + **(float **)(rightUnionNode + 0x30);
-LAB_97b919a8: ;
+loopContinueAfterIntAdd: ;
         }
         break;
       case 1:

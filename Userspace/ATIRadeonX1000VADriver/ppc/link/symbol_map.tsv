@@ -119,6 +119,6 @@ ptrTo_ava_setup_subpicture_0000f194	0xf194	__DATA,__nl_symbol_ptr	pointer	4	exte
 ptrTo_ava_get_property_0000f198	0xf198	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ava_get_property_0000f198 asm("ptrTo_ava_get_property_0000f198");	pointer -> ava_get_property	data.s
 ptrTo_cpuCapabilities_0000f19c	0xf19c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_cpuCapabilities_0000f19c asm("ptrTo_cpuCapabilities_0000f19c");	pointer -> __cpu_capabilities	data.s
 ptrTo_machTaskSelf_0000f1a0	0xf1a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_machTaskSelf_0000f1a0 asm("ptrTo_machTaskSelf_0000f1a0");	pointer -> _mach_task_self_	data.s
-DAT_0000f1a4	0xf1a4	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000f1a4 asm("DAT_0000f1a4");		data.s
-DAT_0000f1a8	0xf1a8	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000f1a8 asm("DAT_0000f1a8");		data.s
+lastDecodeHeight_0000f1a4	0xf1a4	__DATA,__bss	undefined4	4	extern unsigned int lastDecodeHeight_0000f1a4 asm("lastDecodeHeight_0000f1a4");		data.s
+lastDecodeWidth_0000f1a8	0xf1a8	__DATA,__bss	undefined4	4	extern unsigned int lastDecodeWidth_0000f1a8 asm("lastDecodeWidth_0000f1a8");		data.s
 subpictureSlotIndex_0000f1ac	0xf1ac	__DATA,__bss	undefined4	4	extern unsigned int subpictureSlotIndex_0000f1ac asm("subpictureSlotIndex_0000f1ac");		data.s
