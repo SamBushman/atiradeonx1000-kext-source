@@ -1,0 +1,4 @@
+local	gld_beginQuerySlot	in_LR	staleFprArg9Hi	INFERRED	upper 32 bits of the CONCAT44 double reconstruction of the already-named stale forwarded 9th float argument (staleFprArg9); a link-register misread artifact of the FPR stack-forwarding idiom, not a meaningful value
+local	gld_emitStampFencePacket	in_LR	staleFprArg9Hi	INFERRED	same CONCAT44/staleFprArg9 double-reconstruction artifact as gld_beginQuerySlot
+local	IRInst__foldCompareResultIntoCopy	fparam_1	foldedCompareValue	INFERRED	a double copy of foldedCompareResult[0], forwarded as the FPR argument to IRInst__findConstantOperandWithValue/IRInst__setLiteralOperandAndSource
+local	IRInst__convertCompareToBinaryAlu	iVar5	operandOrder	INFERRED	looked up from ptrTo_compareConditionOperandOrderTable_001e8c6c, selects which operand goes first below
