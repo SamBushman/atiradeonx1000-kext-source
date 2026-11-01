@@ -48,14 +48,14 @@ int R520MachineAssembler__vslot30_assembleThenTerminate(this, node, block)
   undefined4 block;
 {
   bool emittedNothing;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int recordIndexBefore;
   
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))
-            (this,block,*(undefined4 *)(node + 0xdc),in_r6,in_r7,in_r8,
+            (this,block,*(undefined4 *)(node + 0xdc),staleArg6,staleArg7,staleArg8,
              *(code **)(*this + 0x34));
   if ((*(int *)(node + 0xdc) == 0) || (emittedNothing = true, recordIndexBefore != this[0x18])) {
     emittedNothing = false;
@@ -678,10 +678,10 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
 {
   int recordIndex;
   int *elementRef;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int recordTable;
   uint vectorFilledCount;
   uint *vector;
@@ -690,7 +690,7 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0xe) = 1;
   *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x18) = (char)loopCount;
-  (**(code **)(*this + 0x15c))(this,loopCount,in_r5,in_r6,in_r7,in_r8,*this);
+  (**(code **)(*this + 0x15c))(this,loopCount,staleArg5,staleArg6,staleArg7,staleArg8,*this);
   *(short *)(this[0x18] * 0x48 + this[0x2a] + -0x3c) = (short)this[0x18] + -1;
   recordIndex = this[0x18];
   vector = *(uint **)(this[4] + 0x28);
@@ -828,14 +828,14 @@ int R520MachineAssembler__vslot32_assembleBranchEnd(this, node, block)
   undefined4 block;
 {
   bool emittedNothing;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int recordIndexBefore;
   
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))
-            (this,block,*(undefined4 *)(node + 0xdc),in_r6,in_r7,in_r8,
+            (this,block,*(undefined4 *)(node + 0xdc),staleArg6,staleArg7,staleArg8,
              *(code **)(*this + 0x34));
   if ((*(int *)(node + 0xdc) == 0) || (emittedNothing = true, recordIndexBefore != this[0x18])) {
     emittedNothing = false;
@@ -938,10 +938,10 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   int *successorHead;
   undefined4 a1;
   uint pendingCount;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int pendingRecord;
   int stackVector;
   uint *vector;
@@ -963,7 +963,7 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   }
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0xe) = 0;
-  stackVector = (**(code **)(*node + 0x40))(node,a1,in_r5,in_r6,in_r7,in_r8,*node);
+  stackVector = (**(code **)(*node + 0x40))(node,a1,staleArg5,staleArg6,staleArg7,staleArg8,*node);
   if (stackVector == 0) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0;
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x15) = 1;

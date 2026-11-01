@@ -5246,10 +5246,10 @@ int fpVariantCacheFlush(ctx)
   int bucketOffset;
   int bucketTable;
   undefined4 a1;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   uint loopIndex;
   int a0;
   
@@ -5266,7 +5266,7 @@ int fpVariantCacheFlush(ctx)
           (**(code **)(ctx + 0x18))(*(int *)(a0 + 0x4c));
         }
         (**(code **)(ctx + 0x18))(*(undefined4 *)(a0 + 0x50));
-        (**(code **)(ctx + 0x18))(a0,a1,in_r5,in_r6,in_r7,in_r8,*(code **)(ctx + 0x18));
+        (**(code **)(ctx + 0x18))(a0,a1,staleArg5,staleArg6,staleArg7,staleArg8,*(code **)(ctx + 0x18));
         bucketTable = *(int *)(((unsigned char *)0x00001118) + ctx);
         a0 = *(int *)(bucketOffset + bucketTable);
       }
@@ -7676,7 +7676,7 @@ int glBindProgramARB_impl(ctx, target, programId, unusedArg4, unusedArg5, unused
   undefined4 programObject;
   undefined4 a1;
   int a2;
-  undefined4 in_r10;
+  undefined4 staleArg10;
   int entryPtr;
   int programTable;
   
@@ -7708,7 +7708,7 @@ int glBindProgramARB_impl(ctx, target, programId, unusedArg4, unusedArg5, unused
           *(undefined4 *)(entryPtr + 0x14) = programObject;
           arbfpProgramObjectInit(ctx,*(undefined4 *)
                                 (*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 0x14));
-          arbfpBindProgram(ctx,*(undefined4 *)(programTable + 4),a2,unusedArg4,unusedArg5,unusedArg6,entriesBase,in_r10);
+          arbfpBindProgram(ctx,*(undefined4 *)(programTable + 4),a2,unusedArg4,unusedArg5,unusedArg6,entriesBase,staleArg10);
         }
         *(int *)(programTable + 4) = *(int *)(programTable + 4) + 1;
         return;
@@ -7724,7 +7724,7 @@ int glBindProgramARB_impl(ctx, target, programId, unusedArg4, unusedArg5, unused
       if (programIndex == 0) {
         programIndex = *(int *)(((unsigned char *)0x0000126c) + ctx);
       }
-      arbfpBindProgram(ctx,programIndex,a2,unusedArg4,unusedArg5,unusedArg6,entries,in_r10);
+      arbfpBindProgram(ctx,programIndex,a2,unusedArg4,unusedArg5,unusedArg6,entries,staleArg10);
       return;
     }
   }
@@ -8123,9 +8123,9 @@ int glDeleteProgramsARB_impl(ctx, count, ids)
   int *ids;
 {
   uint entryIndex;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int entries;
   int loopIndex;
   int entryOffset;
@@ -8141,7 +8141,7 @@ int glDeleteProgramsARB_impl(ctx, count, ids)
         entryOffset = entryIndex * 0x18;
         if ((*(int *)(entries + entryOffset + 4) == 0x8804) &&
            (*(int *)(*(int *)(((unsigned char *)0x00001270) + ctx) * 0x18 + entries) == *ids)) {
-          ((int (*)())glBindProgramARB_impl)(ctx,0x8804,0,in_r6,in_r7,in_r8,*ids);
+          ((int (*)())glBindProgramARB_impl)(ctx,0x8804,0,staleArg6,staleArg7,staleArg8,*ids);
           entries = *(int *)(programTable + 8);
         }
         ((int (*)())arbProgramEntryFree)(ctx,entryOffset + entries);
