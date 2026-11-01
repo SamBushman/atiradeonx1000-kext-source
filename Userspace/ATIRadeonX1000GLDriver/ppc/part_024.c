@@ -121,12 +121,12 @@ int Program__interpSlotOfIlType(program, ilType)
   return *(undefined4 *)(ptrTo_ilTypeToInterpSlotTable_001e8b5c + ilType * 4);
 }
 
-/* Program__lookupTable8b68 @ 0xec27c (36 bytes) */
-int Program__lookupTable8b68(program, ilType)
+/* Program__laneKindOfIlType @ 0xec27c (36 bytes) */
+int Program__laneKindOfIlType(program, ilType)
   undefined4 program;
   int ilType;
 {
-  return *(undefined4 *)(ptrTo_ilTypeLookupTable_001e8b68 + ilType * 4);
+  return *(undefined4 *)(ptrTo_ilTypeToLaneKindTable_001e8b68 + ilType * 4);
 }
 
 /* Program__laneKindOfInterpSlot @ 0xec2a0 (36 bytes) */
@@ -355,23 +355,23 @@ int Program__splitMixedSourceKinds(program)
   int loopIndex;
   int sourceCursor;
   int loopIndex2;
-  int instOrSourceCount;
+  int nodeOrCount;
   int blockWalkNode;
   int candidateInst;
   int sourcesLeft;
   
   block = *(int *)(program + 900);
   for (blockWalkNode = *(int *)(*(int *)(program + 900) + 8); blockWalkNode != 0; blockWalkNode = *(int *)(blockWalkNode + 8)) {
-    instOrSourceCount = *(int *)(*(int *)(block + 0x98) + 8);
+    nodeOrCount = *(int *)(*(int *)(block + 0x98) + 8);
     candidateInst = *(int *)(block + 0x98);
-    if (instOrSourceCount != 0) {
+    if (nodeOrCount != 0) {
       do {
-        instWalkNode = instOrSourceCount;
-        if (((*(uint *)(candidateInst + 0x14) & 1) != 0) && (instOrSourceCount = *(int *)(candidateInst + 0x84), 0 < instOrSourceCount)) {
+        instWalkNode = nodeOrCount;
+        if (((*(uint *)(candidateInst + 0x14) & 1) != 0) && (nodeOrCount = *(int *)(candidateInst + 0x84), 0 < nodeOrCount)) {
           loopIndex = 0;
           loopIndex2 = 0;
           sourceCursor = candidateInst;
-          sourcesLeft = instOrSourceCount;
+          sourcesLeft = nodeOrCount;
           do {
             if (*(int *)(sourceCursor + 0xb0) - 2U < 3) {
               loopIndex2 = loopIndex2 + 1;
@@ -402,11 +402,11 @@ int Program__splitMixedSourceKinds(program)
                 Block__insertInstBefore(*(undefined4 *)(candidateInst + 0x158),candidateInst,inst);
               }
               sourceCursor2 = sourceCursor2 + 0x18;
-            } while (instOrSourceCount != loopIndex3);
+            } while (nodeOrCount != loopIndex3);
             instWalkNode = *(int *)(candidateInst + 8);
           }
         }
-        instOrSourceCount = *(int *)(instWalkNode + 8);
+        nodeOrCount = *(int *)(instWalkNode + 8);
         candidateInst = instWalkNode;
       } while (*(int *)(instWalkNode + 8) != 0);
       blockWalkNode = *(int *)(block + 8);

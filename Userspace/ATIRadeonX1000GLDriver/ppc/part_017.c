@@ -5298,7 +5298,7 @@ int psnDecRecomputeSourceUsage(entry)
         *(undefined2 *)((int)usageCursor + 0x22) = 1;
         *(undefined2 *)(usageCursor + 8) = 1;
         usageCursor[7] = usageFlags & 0xffffffe5;
-        defaultScaleBits = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+        defaultScaleBits = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
         *(undefined2 *)(usageCursor + 5) = 0;
         usageCursor[-3] = defaultScaleBits;
         usageCursor[-1] = defaultScaleBits;
@@ -5528,7 +5528,7 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
         defaultOperandWord = (*(unsigned int *)&psnDefaultOperandWord_001dbf90);
         *(undefined2 *)(peepholeHalf + 0x38) = 1;
         *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
-        *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+        *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
       }
       if ((((opcode == 7) && (*(short *)(peepholeHalf + 8) == *(short *)(peepholeHalf + 0xc))) &&
           (*(int *)(peepholeHalf + 8) == *(int *)(peepholeHalf + 0x10))) &&
@@ -5542,7 +5542,7 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
         defaultOperandWord = (*(unsigned int *)&psnDefaultOperandWord_001dbf90);
         *(undefined2 *)(peepholeHalf + 0x38) = 1;
         *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
-        *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+        *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
       }
       if (opcode == 0) {
         source1FlagsOld = *(ushort *)(peepholeHalf + 0x36);
@@ -5559,7 +5559,7 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
           source2Flags = 1;
           *(undefined2 *)(peepholeHalf + 0x38) = 1;
           *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
-          *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+          *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
         }
         source0FlagsNew = source1FlagsOld;
         if (((*(ushort *)(peepholeHalf + 8) & 0x300) == 0) && ((source1FlagsOld & 2) == 0)) {
@@ -5595,7 +5595,7 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
              (outputScale = *(float *)(peepholeHalf + 0x2c), outputScale < FLOAT_001aa100)) {
             entryChanged = true;
             *(undefined2 *)(peepholeHalf + 0x38) = 1;
-            defaultOperandWord2 = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+            defaultOperandWord2 = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
             *(float *)(peepholeHalf + 0x2c) = outputScale + outputScale;
             *(undefined4 *)(peepholeHalf + 0x10) = defaultOperandWord2;
           }
@@ -5911,7 +5911,7 @@ checkOldHalfFlags:
               *(undefined2 *)((int)usageCursor + 0x22) = 1;
               *(undefined2 *)(usageCursor + 8) = 1;
               usageCursor[7] = sourceIndex & 0xffffffe5;
-              defaultScaleBits = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+              defaultScaleBits = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
               *(undefined2 *)(usageCursor + 5) = 0;
               usageCursor[-3] = defaultScaleBits;
               usageCursor[-1] = defaultScaleBits;
@@ -6123,11 +6123,11 @@ int psnDecDecodeHwInstruction(decoded, wordsMode0, wordsMode2)
     do {
       recordPtr[0x3a] = 1;
       recordPtr[0x1a] = 1;
-      defaultOperandWord2 = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+      defaultOperandWord2 = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
       loopContinue = groupSetupCounter != 2;
       recordPtr = recordPtr + 1;
       groupSetupCounter = groupSetupCounter + 1;
-      *(undefined4 *)(slotWordPtr + 4) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+      *(undefined4 *)(slotWordPtr + 4) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
       *(undefined4 *)(slotWordPtr + 0x24) = defaultOperandWord2;
       slotWordPtr = slotWordPtr + 2;
     } while (loopContinue);
@@ -6314,7 +6314,7 @@ loopStoreDecoded:
             defaultOperandWord = (*(unsigned int *)&psnDefaultOperandWord_001dbf90);
             *(undefined2 *)(peepholeHalf + 0x38) = 1;
             *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
-            *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+            *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
           }
           if ((((opcode == 7) && (*(short *)(peepholeHalf + 8) == *(short *)(peepholeHalf + 0xc))) &&
               (*(int *)(peepholeHalf + 8) == *(int *)(peepholeHalf + 0x10))) &&
@@ -6328,7 +6328,7 @@ loopStoreDecoded:
             defaultOperandWord = (*(unsigned int *)&psnDefaultOperandWord_001dbf90);
             *(undefined2 *)(peepholeHalf + 0x38) = 1;
             *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
-            *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+            *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
           }
           if (opcode == 0) {
             source1FlagsOld = *(ushort *)(peepholeHalf + 0x36);
@@ -6345,7 +6345,7 @@ loopStoreDecoded:
               source2Flags = 1;
               *(undefined2 *)(peepholeHalf + 0x38) = 1;
               *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
-              *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+              *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
             }
             source0FlagsNew = source1FlagsOld;
             if (((*(ushort *)(peepholeHalf + 8) & 0x300) == 0) && ((source1FlagsOld & 2) == 0)) {
@@ -6382,7 +6382,7 @@ loopStoreDecoded:
                  (outputScale = *(float *)(peepholeHalf + 0x2c), outputScale < FLOAT_001aa100)) {
                 entryChanged = true;
                 *(undefined2 *)(peepholeHalf + 0x38) = 1;
-                defaultOperandWord2 = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+                defaultOperandWord2 = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
                 *(float *)(peepholeHalf + 0x2c) = outputScale + outputScale;
                 *(undefined4 *)(peepholeHalf + 0x10) = defaultOperandWord2;
               }
@@ -6703,7 +6703,7 @@ checkAlphaOpTableOffset:
                 recordPtr[0x11] = 1;
                 recordPtr[0x10] = 1;
                 *(uint *)(recordPtr + 0xe) = fieldAccum & 0xffffffe5;
-                defaultOperandWord2 = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+                defaultOperandWord2 = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
                 recordPtr[10] = 0;
                 *(undefined4 *)(recordPtr + -6) = defaultOperandWord2;
                 *(undefined4 *)(recordPtr + -2) = defaultOperandWord2;
@@ -8917,11 +8917,11 @@ loopStoreEntry:
         do {
           defaultSlotPtr2[0x3a] = 1;
           defaultSlotPtr2[0x1a] = 1;
-          defaultOperandWord2 = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+          defaultOperandWord2 = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
           loopContinue = slotCounter != 2;
           defaultSlotPtr2 = defaultSlotPtr2 + 1;
           slotCounter = slotCounter + 1;
-          *(undefined4 *)(defaultSlotPtr + 4) = (*(unsigned int *)&psnDefaultScaleBits_001dbf94);
+          *(undefined4 *)(defaultSlotPtr + 4) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
           *(undefined4 *)(defaultSlotPtr + 0x24) = defaultOperandWord2;
           defaultSlotPtr = defaultSlotPtr + 2;
         } while (loopContinue);

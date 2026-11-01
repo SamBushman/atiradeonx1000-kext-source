@@ -1448,7 +1448,7 @@
 0xec1ec	28	callTargetSlot25	part_024	converted
 0xec208	80	Program__registerFileOfIlType	part_024	converted
 0xec258	36	Program__interpSlotOfIlType	part_024	converted
-0xec27c	36	Program__lookupTable8b68	part_024	converted
+0xec27c	36	Program__laneKindOfIlType	part_024	converted
 0xec2a0	36	Program__laneKindOfInterpSlot	part_024	converted
 0xec2c4	36	Table__interpolatorKindToCode	part_024	converted
 0xec2e8	136	Program__freeWorkArrays	part_024	converted

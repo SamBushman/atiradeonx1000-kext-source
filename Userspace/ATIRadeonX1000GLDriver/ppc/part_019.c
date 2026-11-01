@@ -402,12 +402,12 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   uint tokenIndex;
   uint textureUnitCount;
   uint loopCounter;
-  int declContextTable;
+  int stateBlock;
   uint loopIndex;
   uint *countPtr;
   
   countPtr = (uint *)(ilBuilder + 4);
-  declContextTable = *(int *)(*(int *)(ctx + 4) + 0x10);
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   if (*(uint *)(ilBuilder + 8) <= *(uint *)(ilBuilder + 4)) {
     newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
     if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -434,7 +434,7 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   tokenIndex = *countPtr + 1;
   *countPtr = tokenIndex;
   if (((*(uint *)(ctx + 0x44) & 0xa00000) != 0) ||
-     (((int)*(uint *)(ctx + 0x44) < 0 && (*(short *)(((unsigned char *)0x00002d48) + declContextTable) == -0x7e06)))) {
+     (((int)*(uint *)(ctx + 0x44) < 0 && (*(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06)))) {
     if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
       newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
       if (*(int *)(ilBuilder + 0xc) != 0) {

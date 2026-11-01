@@ -4019,7 +4019,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
   dword *curTempRegisterC;
   dword *curTempRegisterB;
   dword *destTempRegister;
-  dword *extensionWordPtr;
+  dword *regWordBasePtr;
   dword *createdSourceVReg;
   dword *fullSourceRegisterNumber;
   int loadVertexInst;
@@ -4068,7 +4068,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
   int operandRecord2;
   undefined4 arenaAt374;
   ushort sourceRegisterWord;
-  bool isIndexedLoadVariant;
+  bool isRegisterType20;
   bool rewriteDescriptorAtEnd;
   dword laneLiteralSelectWord;
   undefined *laneWordSplatTable;
@@ -4102,7 +4102,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
   undefined4 callResidualR4_15;
   undefined4 callResidualR4_16;
   undefined4 callResidualR4_17;
-  dword *scratchInstOrOperandIndex;
+  dword *scratchPtrOrConst;
   dword *scratchSourcePtrOrZero;
   uint scaleValue;
   int compilerContext;
@@ -4147,7 +4147,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
   }
   registerType = descriptorWord >> 0x10 & 0x3f;
   r4Sink = list;
-  scratchInstOrOperandIndex = tokenWords;
+  scratchPtrOrConst = tokenWords;
   scratchSourcePtrOrZero = descriptor;
   tokenIndexOrConstant = argR8;
   resultRegisterNumber = descriptorRegisterNumber;
@@ -4172,7 +4172,7 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
       scratchSourcePtrOrZero = (dword *)0x0;
       registerType = 0x22;
       createdSourceVReg = (dword *)VRegPool__findOrCreate(*(undefined4 *)(program + 0x3ac),0x25,(uint)sourceRegisterWord,0);
-      scratchInstOrOperandIndex = createdSourceVReg;
+      scratchPtrOrConst = createdSourceVReg;
       IRInst__setOperandRef(newInstObj,1,createdSourceVReg);
       modifierSelectWord = *(undefined4 *)(ptrTo_laneWordSplatTable_001aa818_001e8b8c + (descriptorWord >> 0x11 & 7) * 4);
       operandRecord2 = IRInst__getOperandRecord(newInstObj,1);
@@ -4200,14 +4200,14 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
-        scratchInstOrOperandIndex = allocation + 1;
-        IRInst__ctor_10502c(scratchInstOrOperandIndex,0x82,*(undefined4 *)(program + 8));
-        IRInst__setOperandRef(scratchInstOrOperandIndex,0,createdVReg);
-        IRInst__setOperandRef(scratchInstOrOperandIndex,1,virtualRegister);
+        scratchPtrOrConst = allocation + 1;
+        IRInst__ctor_10502c(scratchPtrOrConst,0x82,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(scratchPtrOrConst,0,createdVReg);
+        IRInst__setOperandRef(scratchPtrOrConst,1,virtualRegister);
         registerType = 0x23;
-        Block__appendInst(loopBlock,scratchInstOrOperandIndex);
-        VReg__appendUser(createdVReg,scratchInstOrOperandIndex);
-        VReg__addUse(virtualRegister,1,scratchInstOrOperandIndex);
+        Block__appendInst(loopBlock,scratchPtrOrConst);
+        VReg__appendUser(createdVReg,scratchPtrOrConst);
+        VReg__addUse(virtualRegister,1,scratchPtrOrConst);
         r4Sink = callResidualR4_0;
       }
       else {
@@ -4236,14 +4236,14 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
-        scratchInstOrOperandIndex = allocation + 1;
-        IRInst__ctor_10502c(scratchInstOrOperandIndex,0x82,*(undefined4 *)(program + 8));
-        IRInst__setOperandRef(scratchInstOrOperandIndex,0,createdVReg);
-        IRInst__setOperandRef(scratchInstOrOperandIndex,1,virtualRegister);
+        scratchPtrOrConst = allocation + 1;
+        IRInst__ctor_10502c(scratchPtrOrConst,0x82,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(scratchPtrOrConst,0,createdVReg);
+        IRInst__setOperandRef(scratchPtrOrConst,1,virtualRegister);
         registerType = 0x24;
-        Block__appendInst(loopBlock,scratchInstOrOperandIndex);
-        VReg__appendUser(createdVReg,scratchInstOrOperandIndex);
-        VReg__addUse(virtualRegister,1,scratchInstOrOperandIndex);
+        Block__appendInst(loopBlock,scratchPtrOrConst);
+        VReg__appendUser(createdVReg,scratchPtrOrConst);
+        VReg__addUse(virtualRegister,1,scratchPtrOrConst);
         r4Sink = callResidualR4_0B;
       }
     }
@@ -4253,25 +4253,25 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
   if (((descriptorWord & 0x3f0000) == 0x1c0000) &&
      ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 8) == 0)) {
     *descriptor = descriptorWord & 0xffc0ffff | 0x10000;
-    extensionWordPtr = descriptor;
+    regWordBasePtr = descriptor;
     if ((descriptorWord & 0x400000) != 0) {
-      extensionWordPtr = descriptor + 1;
+      regWordBasePtr = descriptor + 1;
     }
     rewriteDescriptorAtEnd = false;
-    *(short *)((int)descriptor + 2) = (short)extensionWordPtr[1];
+    *(short *)((int)descriptor + 2) = (short)regWordBasePtr[1];
     descriptorWord = *descriptor & 0xfbffffff;
     *descriptor = descriptorWord;
   }
   else {
     rewriteDescriptorAtEnd = true;
   }
-  if ((registerType == 0x20) && (isIndexedLoadVariant = true, (descriptorWord & 0x1800000) == 0x1000000)) {
+  if ((registerType == 0x20) && (isRegisterType20 = true, (descriptorWord & 0x1800000) == 0x1000000)) {
 releaseTempRegister:
     destTempRegister = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(program + 8) + 0x3ac) = destTempRegister;
     descriptorWord = *descriptor;
     registerType2 = descriptorWord >> 0x10 & 0x3f;
-    if (!isIndexedLoadVariant) {
+    if (!isRegisterType20) {
       opcodeNumber = 0xfe;
       if (registerType2 != 0x1c) {
         opcodeNumber = 0xfb;
@@ -4291,20 +4291,20 @@ releaseTempRegister:
     }
     if ((descriptorWord & 0x1800000) == 0x1000000) {
       firstTokenPtr = descriptor + loopCounter;
-      if (!isIndexedLoadVariant) {
+      if (!isRegisterType20) {
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
         allocation = allocation + 1;
         IRMemLoad__ctor_107980(allocation,opcodeNumber,*(undefined4 *)(program + 8));
         registerFile = Program__registerFileOfIlType(program,registerType2);
-        scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 2);
+        scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 2);
         operandRecord3 = IRInst__getOperandRecord(allocation,1);
         *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
         *(dword **)(operandRecord3 + 8) = fullSourceRegisterNumber;
       }
       else {
-        scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+        scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
         allocation = IRInst__create(opcodeNumber,*(undefined4 *)(program + 8));
         allocation[0x27] = 0;
         allocation[0x50] = 0x10203;
@@ -4321,7 +4321,7 @@ releaseTempRegister:
       if ((*descriptor & 0x4000000) == 0) {
         tokenWord = *firstTokenPtr;
         registerFile = Program__registerFileOfIlType(program,*firstTokenPtr >> 0x10 & 0x3f);
-        operandRecord2 = IRInst__getOperandRecord(allocation,scratchInstOrOperandIndex);
+        operandRecord2 = IRInst__getOperandRecord(allocation,scratchPtrOrConst);
         *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)tokenWord));
       }
@@ -4340,12 +4340,12 @@ releaseTempRegister:
         ((int (*)())IRInst__setIntConstantOperand4)(inst,program,2,tokenIndexOrConstant,tokenIndexOrConstant,tokenIndexOrConstant,tokenIndexOrConstant);
         DList__pushBack(list,inst);
         registerFile = Program__registerFileOfIlType(program,4);
-        operandRecord2 = IRInst__getOperandRecord(allocation,scratchInstOrOperandIndex);
+        operandRecord2 = IRInst__getOperandRecord(allocation,scratchPtrOrConst);
         *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = destTempRegister;
       }
       local_98 = 0x10203;
-      ((int (*)())Program__applySourceTokenToOperand)(program,&local_98,firstTokenPtr,scratchInstOrOperandIndex,allocation);
+      ((int (*)())Program__applySourceTokenToOperand)(program,&local_98,firstTokenPtr,scratchPtrOrConst,allocation);
     }
     else if ((descriptorWord & 0x1800000) == 0) {
       tokenIndexOrConstant = (dword *)descriptor[loopCounter];
@@ -4363,18 +4363,18 @@ releaseTempRegister:
       *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(dword **)(operandRecord2 + 8) = fullSourceRegisterNumber;
       ((int (*)())IRInst__setIntConstantOperand4)(allocation,program,2,tokenIndexOrConstant,tokenIndexOrConstant,tokenIndexOrConstant,tokenIndexOrConstant);
-      scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+      scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
     }
     else {
       allocation = (undefined4 *)0x0;
-      scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+      scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
     }
-    operandRecord2 = IRInst__getOperandRecord(allocation,scratchInstOrOperandIndex);
+    operandRecord2 = IRInst__getOperandRecord(allocation,scratchPtrOrConst);
     local_94[0] = *(dword *)(operandRecord2 + 0x10);
     scratchSourcePtrOrZero = local_94;
     param_5 = (dword *)0x0;
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
-    hwAcceptsLoadResult = (**(code **)(*hwDescription + 0x104))(hwDescription,allocation,scratchInstOrOperandIndex,scratchSourcePtrOrZero,0);
+    hwAcceptsLoadResult = (**(code **)(*hwDescription + 0x104))(hwDescription,allocation,scratchPtrOrConst,scratchSourcePtrOrZero,0);
     if (hwAcceptsLoadResult == 0) {
       newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
@@ -4409,7 +4409,7 @@ releaseTempRegister:
   else {
     if (((undefined4 *)(descriptorWord & 0x3f0000) == (undefined4 *)0x1c0000) ||
        ((undefined4 *)(descriptorWord & 0x3f0000) == 0x001b0000)) {
-      isIndexedLoadVariant = false;
+      isRegisterType20 = false;
       goto releaseTempRegister;
     }
     destTempRegister = (dword *)0x0;
@@ -4428,7 +4428,7 @@ releaseTempRegister:
         param_5 = (dword *)((int)((unsigned char *)0x0) + 3);
       }
       if ((descriptorWord & 0x1800000) == 0x1000000) {
-        scratchInstOrOperandIndex = descriptor + (int)tokenIndexOrConst;
+        scratchPtrOrConst = descriptor + (int)tokenIndexOrConst;
         scratchSourcePtrOrZero = descriptor + (int)param_5;
         tokenIndexOrConst = (dword *)((int)tokenIndexOrConstant + 2);
         if ((descriptorWord & 0x4000000) == 0) {
@@ -4442,7 +4442,7 @@ releaseTempRegister:
         }
       }
       else {
-        scratchInstOrOperandIndex = (dword *)0x0;
+        scratchPtrOrConst = (dword *)0x0;
         scratchSourcePtrOrZero = (dword *)0x0;
         thirdTokenIndexBase = tokenIndexOrConstant;
       }
@@ -4459,7 +4459,7 @@ releaseTempRegister:
         thirdSourceTokenPtr = (dword *)0x0;
         scaleTokenPtr = (dword *)0x0;
       }
-      if (scratchInstOrOperandIndex == (dword *)0x0) {
+      if (scratchPtrOrConst == (dword *)0x0) {
         if (fourthSourceTokenPtr != (dword *)0x0) {
           if ((scratchSourcePtrOrZero != (dword *)0x0) || (thirdSourceTokenPtr == (dword *)0x0)) goto callProgram_emitInputMerge;
           newInst4 = IRInst__create(0xe6,*(undefined4 *)(program + 8));
@@ -4524,7 +4524,7 @@ releaseTempRegister:
           *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(dword **)(operandRecord2 + 8) = destTempRegister;
           *(undefined4 *)((int)inst + 0x130) = 0;
-          scratchInstOrOperandIndex = fourthSourceTokenPtr;
+          scratchPtrOrConst = fourthSourceTokenPtr;
 loopStoreInst:
           *(undefined4 *)((int)inst + 0x140) = 0x10203;
           registerFile = Program__registerFileOfIlType(program,4);
@@ -4556,10 +4556,10 @@ loopStoreInst:
           *(undefined4 *)(operandRecord2 + 0xc) = 0x1f;
           operandRecord2 = IRInst__getOperandRecord(inst,1);
           *(undefined4 *)(operandRecord2 + 0x10) = local_88;
-          scratchInstOrOperandIndex = inputRegisterNumber;
+          scratchPtrOrConst = inputRegisterNumber;
           if (descriptorWord == *argR8) {
-            scratchInstOrOperandIndex = *(dword **)(program + 8);
-            hwSelectedRegister = (**(code **)(*(*(int * *)(scratchInstOrOperandIndex + (0xc3))) + 0xa8))((*(int * *)(scratchInstOrOperandIndex + (0xc3))),&local_98);
+            scratchPtrOrConst = *(dword **)(program + 8);
+            hwSelectedRegister = (**(code **)(*(*(int * *)(scratchPtrOrConst + (0xc3))) + 0xa8))((*(int * *)(scratchPtrOrConst + (0xc3))),&local_98);
             extraMovInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
             registerFile = Program__registerFileOfIlType(program,4);
             operandRecord2 = IRInst__getOperandRecord(extraMovInst,0);
@@ -4593,8 +4593,8 @@ loopStoreInst:
         if (descriptorWord < *movTableVector) {
           movTableCount = movTableVector[1];
           if (movTableCount <= descriptorWord) {
-            scratchInstOrOperandIndex = (dword *)((descriptorWord - movTableCount) * 4 + 4);
-            _memset(movTableCount * 4 + movTableVector[2],0,scratchInstOrOperandIndex);
+            scratchPtrOrConst = (dword *)((descriptorWord - movTableCount) * 4 + 4);
+            _memset(movTableCount * 4 + movTableVector[2],0,scratchPtrOrConst);
             movTableVector[1] = descriptorWord + 1;
             r4Sink = callResidualR4_4;
           }
@@ -4614,15 +4614,15 @@ loopStoreInst:
           *(undefined4 *)(operandRecord + 0xc) = 0;
           *(dword **)(loadVertexInst + 0x130) = inputRegisterNumber;
           *(uint *)(loadVertexInst + 300) = descriptorWord;
-          scratchInstOrOperandIndex = *(dword **)(program + 0x3a0);
-          ((int (*)())Program__appendInst)(program,loadVertexInst,scratchInstOrOperandIndex);
+          scratchPtrOrConst = *(dword **)(program + 0x3a0);
+          ((int (*)())Program__appendInst)(program,loadVertexInst,scratchPtrOrConst);
           movTableVector = *(uint **)(movTableByteOffset + movByRegisterPtr);
           if (descriptorWord < *movTableVector) {
             movTableCount = movTableVector[1];
             r4Sink = callResidualR4_5;
             if (movTableCount <= descriptorWord) {
-              scratchInstOrOperandIndex = (dword *)((descriptorWord - movTableCount) * 4 + 4);
-              _memset(movTableCount * 4 + movTableVector[2],0,scratchInstOrOperandIndex);
+              scratchPtrOrConst = (dword *)((descriptorWord - movTableCount) * 4 + 4);
+              _memset(movTableCount * 4 + movTableVector[2],0,scratchPtrOrConst);
               movTableVector[1] = descriptorWord + 1;
               r4Sink = callResidualR4_6;
             }
@@ -4638,8 +4638,8 @@ loopStoreInst:
         if (descriptorWord < *movTableVector) {
           movTableCount = movTableVector[1];
           if (movTableCount <= descriptorWord) {
-            scratchInstOrOperandIndex = (dword *)((descriptorWord - movTableCount) * 4 + 4);
-            _memset(movTableCount * 4 + movTableVector[2],0,scratchInstOrOperandIndex);
+            scratchPtrOrConst = (dword *)((descriptorWord - movTableCount) * 4 + 4);
+            _memset(movTableCount * 4 + movTableVector[2],0,scratchPtrOrConst);
             movTableVector[1] = descriptorWord + 1;
             r4Sink = callResidualR4_7;
           }
@@ -4655,7 +4655,7 @@ loopStoreInst:
         if (((scratchSourcePtrOrZero != (dword *)0x0) && (fourthSourceTokenPtr == (dword *)0x0)) && (thirdSourceTokenPtr == (dword *)0x0)) {
           tokenIndexOrConstant = ((unsigned char *)0x4);
           param_5 = destTempRegister;
-          ((int (*)())Program__emitInputMerge)(program,list,scratchInstOrOperandIndex,scratchSourcePtrOrZero,destTempRegister,4,*(undefined4 *)(program + 0x400));
+          ((int (*)())Program__emitInputMerge)(program,list,scratchPtrOrConst,scratchSourcePtrOrZero,destTempRegister,4,*(undefined4 *)(program + 0x400));
           inputRegisterWord = *(ushort *)((int)descriptor + (int)tokenIndexOrConst * 4 + 2);
           inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
           registerFile = Program__registerFileOfIlType(program,4);
@@ -4666,7 +4666,7 @@ loopStoreInst:
           goto loopStoreInst;
         }
 callProgram_emitInputMerge:
-        ((int (*)())Program__emitInputMerge)(program,list,scratchInstOrOperandIndex,scratchSourcePtrOrZero,destTempRegister,4,*(undefined4 *)(program + 0x400));
+        ((int (*)())Program__emitInputMerge)(program,list,scratchPtrOrConst,scratchSourcePtrOrZero,destTempRegister,4,*(undefined4 *)(program + 0x400));
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) - 1;
         *(uint *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
         swizzleWord = (uint)(ushort)*fourthSourceTokenPtr;
@@ -4693,7 +4693,7 @@ callProgram_emitInputMerge:
         registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(newInst2,0);
         *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
-        scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+        scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
         newInst2[0x27] = 0x10101;
         scratchSourcePtrOrZero = ((unsigned char *)0x4);
         param_5 = ((unsigned char *)0x4);
@@ -4709,7 +4709,7 @@ callProgram_emitInputMerge:
           scratchSourcePtrOrZero = (dword *)((int)((unsigned char *)0x0) + 2);
           param_5 = newInst2;
           ((int (*)())Program__applySourceTokenToOperand)(program,&local_98,fourthSourceTokenPtr,2,newInst2);
-          scratchInstOrOperandIndex = fourthSourceTokenPtr;
+          scratchPtrOrConst = fourthSourceTokenPtr;
         }
         else {
           operandRecord2 = IRInst__getOperandRecord(newInst2,2);
@@ -4796,7 +4796,7 @@ callDList_pushBack:
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = destTempRegister;
-    scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+    scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,1,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4);
     *(undefined4 *)((int)inst + 0x9c) = local_98;
     DList__pushBack(list,inst);
@@ -4829,7 +4829,7 @@ callDList_pushBack:
     resultInTempRegister = true;
     inst = IRInst__create(0xcb,*(undefined4 *)(program + 8));
     operandRecord2 = IRInst__getOperandRecord(inst,0);
-    scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 2);
+    scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 2);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = curTempRegisterB;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,0.0,0.0,0.0,0.0);
@@ -4863,7 +4863,7 @@ callDList_pushBack:
     if (!resultInTempRegister) {
       ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
     }
-    scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 2);
+    scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 2);
     registerType = 4;
     resultInTempRegister = true;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,1.0,1.0,1.0,1.0);
@@ -4891,7 +4891,7 @@ callDList_pushBack:
       if (!resultInTempRegister) {
         ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
       }
-      scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 2);
+      scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 2);
       ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,2.0,2.0,2.0,2.0);
       resultRegisterNumberB = destTempRegister;
     }
@@ -4913,7 +4913,7 @@ callDList_pushBack:
         ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
       }
       ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,0.5,0.5,0.5,0.5);
-      scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+      scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
       IROperand__setModifierBits((int)inst + 0xbc,1,1);
       resultRegisterNumberB = destTempRegister;
     }
@@ -4945,7 +4945,7 @@ callDList_pushBack:
     resultInTempRegister = true;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,2.0,2.0,2.0,2.0);
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,3,1.0,1.0,1.0,1.0);
-    scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+    scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
     DList__pushBack(list,inst);
     descriptorWord = *descriptor;
@@ -4992,7 +4992,7 @@ code_r0x000fcda8:
     *(dword **)(operandRecord2 + 8) = curTempRegisterC;
     resultInTempRegister = true;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,3,1.0,1.0,1.0,1.0);
-    scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 1);
+    scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
     DList__pushBack(list,inst);
     descriptorWord = *descriptor;
@@ -5005,9 +5005,9 @@ code_r0x000fcda8:
     hwVtableCallPair = (**(code **)(extensionWordOrCompiler + 0xb4))();
     r4Sink = (undefined4)hwVtableCallPair;
     if (((int)((ulonglong)hwVtableCallPair >> 0x20) == 0) ||
-       ((scratchInstOrOperandIndex = (dword *)(uint)(ushort)*tokenWords,
-        (uint *)((int)&(*(GhidraMachOSection *)0x00000098).size + 2) < scratchInstOrOperandIndex ||
-        (scratchInstOrOperandIndex != (dword *)((*(GhidraMachOSection *)0x00000054).sectname + 9))))) {
+       ((scratchPtrOrConst = (dword *)(uint)(ushort)*tokenWords,
+        (uint *)((int)&(*(GhidraMachOSection *)0x00000098).size + 2) < scratchPtrOrConst ||
+        (scratchPtrOrConst != (dword *)((*(GhidraMachOSection *)0x00000054).sectname + 9))))) {
       if (hasExtensionWord == 4) {
 code_r0x000fd284:
         descriptorWord = *descriptor;
@@ -5111,7 +5111,7 @@ code_r0x000fd284:
       hwVirtualSlot88 = *(code **)(*newInst3 + 0x88);
       operandRecord2 = IRInst__getOperandRecord(newInst3,1);
       scratchSourcePtrOrZero = (dword *)(uint)*(byte *)(operandRecord2 + 0x12);
-      scratchInstOrOperandIndex = (dword *)((int)((unsigned char *)0x0) + 3);
+      scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 3);
       (*hwVirtualSlot88)(newInst3,1);
       DList__pushBack(list,newInst3);
       descriptorWord = *descriptor;
@@ -5122,7 +5122,7 @@ code_r0x000fd284:
   }
   resultRegisterNumber = curTempRegisterD;
   if (((((descriptorWord & 0x400000) != 0) && ((*extensionWordPtr2 & 0x8888) != 0)) &&
-      (descriptorWord = psnPackedNegateMask(descriptor,r4Sink,scratchInstOrOperandIndex,scratchSourcePtrOrZero,param_5,tokenIndexOrConstant,extensionWordOrCompiler), descriptorWord != 0))
+      (descriptorWord = psnPackedNegateMask(descriptor,r4Sink,scratchPtrOrConst,scratchSourcePtrOrZero,param_5,tokenIndexOrConstant,extensionWordOrCompiler), descriptorWord != 0))
      && (descriptorWord != 0x8888)) {
     resultRegisterNumber = destTempRegister;
     if (!resultInTempRegister) {
@@ -5894,7 +5894,7 @@ code_r0x000fed00:
       }
       goto readNextInstruction;
     case 0x17:
-      laneKindValue = (uint ******)Program__lookupTable8b68(program,(uint)*tokenWords >> 0x10 & 0x1f);
+      laneKindValue = (uint ******)Program__laneKindOfIlType(program,(uint)*tokenWords >> 0x10 & 0x1f);
       interpIndexValue = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
       if ((int)*tokenWords < 0) {
         modifierTokenWord = ilReader[0x24];
@@ -6050,7 +6050,7 @@ code_r0x000fed00:
       local_118 = (uint ****)templateModeWord;
       goto readNextInstruction;
     case 0x1b:
-      laneKind = Program__lookupTable8b68(program,(uint)*tokenWords >> 0x10 & 0x1f);
+      laneKind = Program__laneKindOfIlType(program,(uint)*tokenWords >> 0x10 & 0x1f);
       interpIndexField = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
       stagedSelectWord = (uint ******)0x0;
       if ((int)*tokenWords < 0) {
@@ -6405,7 +6405,7 @@ code_r0x000fed00:
           stagedSelectWord = (uint ******)0x0;
           declRegister = (uint ******)(int)*(short *)((int)destTokenPtr + 2);
           registerFile = Program__registerFileOfIlType(program,(uint)*destTokenPtr >> 0x10 & 0x3f);
-          laneKind = Program__lookupTable8b68(program,(uint)*tokenWords >> 0x10 & 0x3fff);
+          laneKind = Program__laneKindOfIlType(program,(uint)*tokenWords >> 0x10 & 0x3fff);
           if (laneKind == 0) {
             *(uint *******)(*(int *)(program + 0x3ac) + 0x44) = declRegister;
           }
@@ -6475,7 +6475,7 @@ code_r0x000fed00:
       goto readNextInstruction;
     case 0x7e:
       declKindField = (uint)*tokenWords >> 0xe & 0x1f;
-      laneKindValue = (uint ******)Program__lookupTable8b68(program,declKindField);
+      laneKindValue = (uint ******)Program__laneKindOfIlType(program,declKindField);
       tokenModeField = (uint)*tokenWords >> 0x13 & 7;
       if (tokenModeField == 3) {
         clearsInfoFlag1 = true;
@@ -6938,13 +6938,13 @@ code_r0x001005f4:
     case 0x16:
       tokenIndexField = (uint)*tokenWords >> 0x10 & 0x3fff;
       if (templateToken == 0x14) {
-        argR7 = (uint ******)(templateTablePtrsToken14_001dc78c)[tokenIndexField];
+        argR7 = (uint ******)(opcodeTemplateTablePtrsToken14_001dc78c)[tokenIndexField];
       }
       else if (templateToken == 0x15) {
-        argR7 = (uint ******)(templateTablePtrsToken15_001dc77c)[tokenIndexField];
+        argR7 = (uint ******)(opcodeTemplateTablePtrsToken15_001dc77c)[tokenIndexField];
       }
       else {
-        argR7 = (uint ******)(templateTablePtrsToken16_001dc76c)[tokenIndexField];
+        argR7 = (uint ******)(opcodeTemplateTablePtrsToken16_001dc76c)[tokenIndexField];
       }
       goto code_r0x001022b4;
     case 0x17:

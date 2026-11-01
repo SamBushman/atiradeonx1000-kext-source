@@ -885,18 +885,18 @@ use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-
 use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$@5	+3
 use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*iVar34\ =\ local_164;$@2	+1
 use	FUN_000fd5c8	iVar34	pendingInst	INFERRED	instruction taken from the pending-instruction list (local list head), unlinked and appended to the current block	^\s*FUN_0019401c\(iVar34\);$@6	+3
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*iVar34\ =\ FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x1f\);$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*if\ \(iVar34\ ==\ 0\)\ \{$@2	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 1\)\ \{$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*FUN_00104104\(uVar46,iVar43,iVar34,ppppppuVar19\);$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*iVar34\ =\ FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x3fff\);$	+2
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 1\)\ \{$@2	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*if\ \(iVar34\ ==\ 0xd\)\ \{$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xe\)\ \{$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xb\)\ \{$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xc\)\ \{$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xf\)\ \{$	+1
-use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__lookupTable8b68 kind of the declaration, selects how the lanes are set	^\s*FUN_00104104\(iVar43,iVar47,iVar34,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*iVar34\ =\ FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x1f\);$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*if\ \(iVar34\ ==\ 0\)\ \{$@2	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 1\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*FUN_00104104\(uVar46,iVar43,iVar34,ppppppuVar19\);$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*iVar34\ =\ FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x3fff\);$	+2
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 1\)\ \{$@2	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*if\ \(iVar34\ ==\ 0xd\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xe\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xb\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xc\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*else\ if\ \(iVar34\ ==\ 0xf\)\ \{$	+1
+use	FUN_000fd5c8	iVar34	laneKind	INFERRED	Program__laneKindOfIlType kind of the declaration, selects how the lanes are set	^\s*FUN_00104104\(iVar43,iVar47,iVar34,ppppppuVar19\);$	+1
 use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ 0xf;$	+1
 use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*iVar34\ =\ \(int\)\*\(short\ \*\)\(\(int\)param_2\[0x1b\]\[1\]\ \+\ 2\);$	+1
 use	FUN_000fd5c8	iVar34	destRegisterNumber	INFERRED	destination register number: 0xf when the hardware flag 0x80 applies, otherwise token[1] short	^\s*\*\(int\ \*\)\(iVar43\ \+\ 8\)\ =\ iVar34;$	+1
@@ -1168,12 +1168,12 @@ use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of t
 use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*iVar34\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),uVar46,ppppppuVar19,0\);$	+1
 use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*FUN_001041d0\(iVar34,0,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 3,in_r6,ppppppuVar19\);$	+5
 use	FUN_000fd5c8	ppppppuVar19	interpRegisterNumber	INFERRED	register number of the interpolant declaration (0xf with hardware flag 0x80, else token short)	^\s*\*\(uint\ \*\*\*\*\*\*\*\)\(iVar34\ \+\ 0x148\)\ =\ ppppppuVar19;$	+1
-use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x1f\);$	+1
-use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*in_r6\ =\ ppppppuVar19;$	+1
-use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*FUN_001041d0\(iVar34,iVar43,\(uint\)\*\(byte\ \*\)\(iVar43\ \+\ \(int\)local_70\),ppppppuVar19,$	+2
-use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)FUN_000ec27c\(param_1,uVar44\);$	+1
-use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*in_r6\ =\ ppppppuVar19;$@4	+1
-use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__lookupTable8b68 value for the declaration kind bits of the token	^\s*FUN_001041d0\(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__laneKindOfIlType value for the declaration kind bits of the token	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)FUN_000ec27c\(param_1,\(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x1f\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__laneKindOfIlType value for the declaration kind bits of the token	^\s*in_r6\ =\ ppppppuVar19;$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__laneKindOfIlType value for the declaration kind bits of the token	^\s*FUN_001041d0\(iVar34,iVar43,\(uint\)\*\(byte\ \*\)\(iVar43\ \+\ \(int\)local_70\),ppppppuVar19,$	+2
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__laneKindOfIlType value for the declaration kind bits of the token	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)FUN_000ec27c\(param_1,uVar44\);$	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__laneKindOfIlType value for the declaration kind bits of the token	^\s*in_r6\ =\ ppppppuVar19;$@4	+1
+use	FUN_000fd5c8	ppppppuVar19	laneKindValue	INFERRED	Program__laneKindOfIlType value for the declaration kind bits of the token	^\s*FUN_001041d0\(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48\);$	+1
 use	FUN_000fd5c8	ppppppuVar19	interpIndexField	INFERRED	bits 21-28 of the token word: interpolant index passed to IRLoadInterp setters	^\s*ppppppuVar19\ =\ \(uint\ \*\*\*\*\*\*\)\(\(uint\)\*ppppppuVar49\ >>\ 0x15\ \&\ 0xff\);$	+1
 use	FUN_000fd5c8	ppppppuVar19	interpIndexField	INFERRED	bits 21-28 of the token word: interpolant index passed to IRLoadInterp setters	^\s*in_r6\ =\ ppppppuVar19;$@2	+2
 use	FUN_000fd5c8	ppppppuVar19	tokenCursor	INFERRED	cursor over the staged token words (ilReader + 0x23 + count)	^\s*ppppppuVar19\ =\ param_2\ \+\ \(int\)param_2\[0x16\]\ \+\ 0x23;$	+1
@@ -1558,8 +1558,8 @@ use	FUN_000fd5c8	uVar44	modifierBit10	INFERRED	bit 10 of the extension token wor
 use	FUN_000fd5c8	uVar44	modifierBit10	INFERRED	bit 10 of the extension token word	^\s*if\ \(uVar44\ !=\ 0\)\ \{$	+1
 use	FUN_000fd5c8	uVar44	selectByteB	INFERRED	selectIndex + 4: select byte merged into the staged select word	^\s*uVar44\ =\ uVar10\ \+\ 4;$	+1
 use	FUN_000fd5c8	uVar44	selectByteB	INFERRED	selectIndex + 4: select byte merged into the staged select word	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(uVar44\ \|\ \(uint\)in_r7\ \&\ 0xffffff00\);$	+1
-use	FUN_000fd5c8	uVar44	declKindField	INFERRED	bits 14-18 of the token word: declaration kind, looked up in Program__lookupTable8b68	^\s*uVar44\ =\ \(uint\)\*ppppppuVar49\ >>\ 0xe\ \&\ 0x1f;$	+2
-use	FUN_000fd5c8	uVar44	declKindField	INFERRED	bits 14-18 of the token word: declaration kind, looked up in Program__lookupTable8b68	^\s*if\ \(uVar44\ ==\ 10\)\ \{$	+1
+use	FUN_000fd5c8	uVar44	declKindField	INFERRED	bits 14-18 of the token word: declaration kind, looked up in Program__laneKindOfIlType	^\s*uVar44\ =\ \(uint\)\*ppppppuVar49\ >>\ 0xe\ \&\ 0x1f;$	+2
+use	FUN_000fd5c8	uVar44	declKindField	INFERRED	bits 14-18 of the token word: declaration kind, looked up in Program__laneKindOfIlType	^\s*if\ \(uVar44\ ==\ 10\)\ \{$	+1
 use	FUN_000fd5c8	uVar44	movVectorSize	INFERRED	logical size of the mov vector before zero-fill	^\s*uVar44\ =\ local_13c\[1\];$	+3
 use	FUN_000fd5c8	uVar44	tokenIndexField	INFERRED	bits 16-29 of the token word: index into the static select/remap tables	^\s*uVar44\ =\ \(uint\)\*ppppppuVar49\ >>\ 0x10\ \&\ 0x3fff;$	+1
 use	FUN_000fd5c8	uVar44	tokenIndexField	INFERRED	bits 16-29 of the token word: index into the static select/remap tables	^\s*in_r7\ =\ \(uint\ \*\*\*\*\*\*\)\(PTR_DAT_001dc78c\)\[uVar44\];$	+1

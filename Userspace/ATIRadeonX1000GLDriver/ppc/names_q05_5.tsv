@@ -1151,7 +1151,7 @@ use	FUN_000fd5c8	uVar50	arenaA	INFERRED	role read off the defining expressions o
 use	FUN_000fd5c8	uVar50	arenaA	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar50\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$@4	+3
 func	FUN_000ec258	Program__interpSlotOfIlType	INFERRED	table lookup (PTR_DAT_001e8b5c[index]): first step of the attribute -> interpolator lane kind mapping used with IRLoadInterp__setLaneKindAndIndex
 func	FUN_000ec2a0	Program__laneKindOfInterpSlot	INFERRED	table lookup (PTR_DAT_001e8b6c[index]): second step of the attribute -> interpolator lane kind mapping (always applied to the result of Program__interpSlotOfIlType)
-func	FUN_000ec27c	Program__lookupTable8b68	INFERRED	table lookup PTR_DAT_001e8b68[index] (IL type indexed)
+func	FUN_000ec27c	Program__laneKindOfIlType	INFERRED	table lookup PTR_DAT_001e8b68[index] (IL type indexed)
 func	FUN_000e79e8	Block__hasSuccessors	INFERRED	the successor vector at +0xd0 has a non-zero count
 func	FUN_000ec5b8	Program__getBlocksArray	INFERRED	lazily builds, caches at program+0x398 and returns an array of the block pointers of the block list at +0x37c (first element plus the list in reverse)
 func	FUN_000e78c0	Block__setField0xb8AndChildren	INFERRED	stores a value in block+0xb8 and in the blocks referenced at +0x134/+0x138/+0x13c
@@ -1164,7 +1164,7 @@ local	Program__interpSlotOfIlType	param_1	program	INFERRED	Program (unused)
 local	Program__interpSlotOfIlType	param_2	ilType	INFERRED	IL register type / attribute number indexing the table
 local	Program__laneKindOfInterpSlot	param_1	program	INFERRED	Program (unused)
 local	Program__laneKindOfInterpSlot	param_2	interpSlot	INFERRED	result of Program__interpSlotOfIlType
-local	Program__lookupTable8b68	param_2	ilType	INFERRED	index into PTR_DAT_001e8b68
+local	Program__laneKindOfIlType	param_2	ilType	INFERRED	index into PTR_DAT_001e8b68
 local	Block__hasSuccessors	param_1	block	INFERRED	block whose successor vector (+0xd0) is tested
 local	Program__getBlocksArray	param_1	program	INFERRED	Program owning the block list
 local	Block__setField0xb8AndChildren	param_1	block	INFERRED	block to update

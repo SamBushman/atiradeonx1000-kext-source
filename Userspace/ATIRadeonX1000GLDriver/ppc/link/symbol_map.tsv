@@ -759,9 +759,9 @@ irClassMaskTable_001dc58c	0x1dc58c	__DATA,__data	undefined4	4	extern unsigned ch
 ilSampleOpcodeRecords_rec0_opcode_001dc660	0x1dc660	__DATA,__data	undefined4	4	extern unsigned int ilSampleOpcodeRecords_rec0_opcode_001dc660 asm("ilSampleOpcodeRecords_rec0_opcode_001dc660");	0x0000008a	data.s
 ilSampleOpcodeRecords_rec1_opcode_001dc66c	0x1dc66c	__DATA,__data	undefined4	4	extern unsigned int ilSampleOpcodeRecords_rec1_opcode_001dc66c asm("ilSampleOpcodeRecords_rec1_opcode_001dc66c");	0x00000089	data.s
 templateTablePtrsCase4a_001dc75c	0x1dc75c	__DATA,__data	undefined *	4	extern unsigned char templateTablePtrsCase4a_001dc75c[] asm("templateTablePtrsCase4a_001dc75c");	pointer -> LD_1ae874	data.s
-templateTablePtrsToken16_001dc76c	0x1dc76c	__DATA,__data	undefined *	4	extern unsigned char *templateTablePtrsToken16_001dc76c[] asm("templateTablePtrsToken16_001dc76c");	pointer -> LD_1ad470	data.s
-templateTablePtrsToken15_001dc77c	0x1dc77c	__DATA,__data	undefined *	4	extern unsigned char *templateTablePtrsToken15_001dc77c[] asm("templateTablePtrsToken15_001dc77c");	pointer -> LD_1ad020	data.s
-templateTablePtrsToken14_001dc78c	0x1dc78c	__DATA,__data	undefined *	4	extern unsigned char *templateTablePtrsToken14_001dc78c[] asm("templateTablePtrsToken14_001dc78c");	pointer -> LD_1ad1a0	data.s
+opcodeTemplateTablePtrsToken16_001dc76c	0x1dc76c	__DATA,__data	undefined *	4	extern unsigned char *opcodeTemplateTablePtrsToken16_001dc76c[] asm("opcodeTemplateTablePtrsToken16_001dc76c");	pointer -> LD_1ad470	data.s
+opcodeTemplateTablePtrsToken15_001dc77c	0x1dc77c	__DATA,__data	undefined *	4	extern unsigned char *opcodeTemplateTablePtrsToken15_001dc77c[] asm("opcodeTemplateTablePtrsToken15_001dc77c");	pointer -> LD_1ad020	data.s
+opcodeTemplateTablePtrsToken14_001dc78c	0x1dc78c	__DATA,__data	undefined *	4	extern unsigned char *opcodeTemplateTablePtrsToken14_001dc78c[] asm("opcodeTemplateTablePtrsToken14_001dc78c");	pointer -> LD_1ad1a0	data.s
 KhanPsOpcodeTraits_001dca64	0x1dca64	__DATA,__data	-	-	extern unsigned char KhanPsOpcodeTraits_001dca64 asm("KhanPsOpcodeTraits_001dca64");	0x00000008	data.s
 KhanVsOpcodeTraits_001df1fc	0x1df1fc	__DATA,__data	-	-	extern unsigned char KhanVsOpcodeTraits_001df1fc asm("KhanVsOpcodeTraits_001df1fc");	0x00000008	data.s
 s_MUL_V_001df634	0x1df634	__DATA,__data	string	6	extern char s_MUL_V_001df634[] asm("s_MUL_V_001df634");	0x4d554c5f	data.s
@@ -984,7 +984,7 @@ ptrTo_AnyBlock__vtable_001e8b58	0x1e8b58	__DATA,__nl_symbol_ptr	pointer	4	extern
 ptrTo_ilTypeToInterpSlotTable_001e8b5c	0x1e8b5c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTypeToInterpSlotTable_001e8b5c asm("ptrTo_ilTypeToInterpSlotTable_001e8b5c");	pointer -> LD_1dc860	data.s
 ptrTo_interpolatorKindToCodeTable_001e8b60	0x1e8b60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_interpolatorKindToCodeTable_001e8b60 asm("ptrTo_interpolatorKindToCodeTable_001e8b60");	pointer -> LD_1aaa50	data.s
 ptrTo_laneSelectWordTable_001e8b64	0x1e8b64	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_laneSelectWordTable_001e8b64 asm("ptrTo_laneSelectWordTable_001e8b64");	pointer -> LD_1aa828	data.s
-ptrTo_ilTypeLookupTable_001e8b68	0x1e8b68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTypeLookupTable_001e8b68 asm("ptrTo_ilTypeLookupTable_001e8b68");	pointer -> LD_1aaafc	data.s
+ptrTo_ilTypeToLaneKindTable_001e8b68	0x1e8b68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTypeToLaneKindTable_001e8b68 asm("ptrTo_ilTypeToLaneKindTable_001e8b68");	pointer -> LD_1aaafc	data.s
 ptrTo_interpSlotToLaneKindTable_001e8b6c	0x1e8b6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_interpSlotToLaneKindTable_001e8b6c asm("ptrTo_interpSlotToLaneKindTable_001e8b6c");	pointer -> LD_1aaa94	data.s
 ptrTo_defaultOperandData_001e8b70	0x1e8b70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_defaultOperandData_001e8b70 asm("ptrTo_defaultOperandData_001e8b70");	pointer -> LD_1af9b4	data.s
 ptrTo_ilTemplateCase21Kind5_001e8b74	0x1e8b74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *ptrTo_ilTemplateCase21Kind5_001e8b74 asm("ptrTo_ilTemplateCase21Kind5_001e8b74");	pointer -> LD_1ae694	data.s
