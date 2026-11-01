@@ -1426,8 +1426,8 @@ int ___cxa_get_globals()
   }
   allocation = (undefined4 *)_malloc(8);
   if (allocation != (undefined4 *)0x0) {
-    if ((*(int *)(PTR_DAT_a7b7c190 + 8) == 0) ||
-       (*(ushort *)(*(int *)(PTR_DAT_a7b7c190 + 8) + 4) < 4)) {
+    if ((*(int *)(PTR____keymgr_global_a7b7c190 + 8) == 0) ||
+       (*(ushort *)(*(int *)(PTR____keymgr_global_a7b7c190 + 8) + 4) < 4)) {
       __keymgr_set_per_thread_data(0xd,allocation);
       goto storeAllocation;
     }
@@ -1450,8 +1450,8 @@ int ___eprintf(format, arg1, arg2, arg3)
 {
   undefined *stderrBase;
   
-  stderrBase = PTR_DAT_a7b7c0bc;
-  _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),format,arg1,arg2,arg3);
+  stderrBase = PTR____sF_a7b7c0bc;
+  _fprintf((FILE *)(PTR____sF_a7b7c0bc + 0xb0),format,arg1,arg2,arg3);
   _fflush(stderrBase + 0xb0);
                     
   _abort();

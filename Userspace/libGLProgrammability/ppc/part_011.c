@@ -1624,7 +1624,7 @@ int ParseSymbolTable__Dump(this)
   undefined *fileTable;
   int symbolCursor;
   
-  fileTable = PTR_DAT_a7b7c0bc;
+  fileTable = PTR____sF_a7b7c0bc;
   for (symbolCursor = *(int *)this; symbolCursor != 0; symbolCursor = *(int *)(symbolCursor + 8)) {
     _fflush(fileTable + 0x58);
   }

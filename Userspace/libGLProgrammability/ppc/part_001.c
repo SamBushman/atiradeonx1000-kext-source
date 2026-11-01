@@ -475,11 +475,11 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, ppStream)
     }
     optionChunk = *(int *)(optionChunk + 8);
   }
-  if ((emulator[0xc] != 0) || (*(int *)PTR_DAT_a7b7c100 == 0)) {
+  if ((emulator[0xc] != 0) || (*(int *)PTR___cpu_has_altivec_a7b7c100 == 0)) {
     engineFlags = 7;
   }
   if ((emulator[0xb] != 0) ||
-     ((*(int *)PTR_DAT_a7b7c100 == 0 && ((emulator[0xe] - 0x8b30 < 2 || (emulator[0xe] == 0x8804))))))
+     ((*(int *)PTR___cpu_has_altivec_a7b7c100 == 0 && ((emulator[0xe] - 0x8b30 < 2 || (emulator[0xe] == 0x8804))))))
   {
     engineFlags = engineFlags & 0xfffffffd;
   }

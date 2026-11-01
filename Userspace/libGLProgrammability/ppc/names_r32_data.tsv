@@ -1,0 +1,9 @@
+# r32: the 4 remaining PTR_DAT_<addr> symbols (libGLProgrammability). All 4 are slots in __DATA,__nl_symbol_ptr (non-lazy
+# symbol pointers): confirmed via Tools/userspace/data_sections.py against the real stock binary
+# (~/Documents/ATI-X1900-Decomp/tiger-hd-pull/libGLProgrammability.dylib), whose indirect-symbol table names each slot's
+# target Mach-O symbol directly. New names follow the project's existing PTR_<MachO symbol verbatim>_<addr> convention
+# (e.g. PTR__gll_cc_a2f27020, PTR___mh_dylib_header_a2f27018).
+data	PTR_DAT_a7b7c0a8	PTR___DefaultRuneLocale_a7b7c0a8	CONFIRMED	__DATA,__nl_symbol_ptr slot +0x8 (0xa7b7c0a8), real stock binary's indirect-symbol table names it __DefaultRuneLocale (libc's `_DefaultRuneLocale` ctype/rune-classification table); used to build the ctype/alnum lookup in part_002.c/part_003.c
+data	PTR_DAT_a7b7c0bc	PTR____sF_a7b7c0bc	CONFIRMED	__DATA,__nl_symbol_ptr slot +0x1c (0xa7b7c0bc), real stock binary's indirect-symbol table names it ___sF (libc's `__sF` stdio FILE array, stdout/stderr at +0x58/+0xb0 = 1*/2*sizeof(FILE)); used as stdFiles/fileTable in part_003.c/part_007.c/part_011.c
+data	PTR_DAT_a7b7c100	PTR___cpu_has_altivec_a7b7c100	CONFIRMED	__DATA,__nl_symbol_ptr slot +0x60 (0xa7b7c100), real stock binary's indirect-symbol table names it __cpu_has_altivec (libSystem's AltiVec-capability flag); checked as a boolean gate in part_001.c's shader-emulator setup and in part_026.c's save_world (the PowerPC ABI register-save runtime helper, which only needs to save vector registers when AltiVec is present)
+data	PTR_DAT_a7b7c190	PTR____keymgr_global_a7b7c190	CONFIRMED	__DATA,__nl_symbol_ptr slot +0xf0 (0xa7b7c190), real stock binary's indirect-symbol table names it ___keymgr_global (libSystem's cross-image Key Manager global); read in part_025.c's ___cxa_get_globals (C++ runtime per-thread globals, consistent with the surrounding __keymgr_get_per_thread_data/__keymgr_set_per_thread_data calls)

@@ -1048,12 +1048,12 @@ dyld_lazy_symbol_binding_entry_point	0xa7b7c098	__DATA,__dyld	undefined4	4		0x8f
 dyld_func_lookup_pointer	0xa7b7c09c	__DATA,__dyld	undefined4	4		0x8fe01008	toolchain (crt/dyld data)
 PTR___mh_dylib_header_a7b7c0a0	0xa7b7c0a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___mh_dylib_header_a7b7c0a0 asm("PTR___mh_dylib_header_a7b7c0a0");	pointer -> __mh_dylib_header	data.s
 PTR__cpp_a7b7c0a4	0xa7b7c0a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__cpp_a7b7c0a4 asm("PTR__cpp_a7b7c0a4");	pointer -> _cpp	data.s
-PTR_DAT_a7b7c0a8	0xa7b7c0a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c0a8 asm("PTR_DAT_a7b7c0a8");	pointer -> __DefaultRuneLocale	data.s
+PTR___DefaultRuneLocale_a7b7c0a8	0xa7b7c0a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___DefaultRuneLocale_a7b7c0a8 asm("PTR___DefaultRuneLocale_a7b7c0a8");	pointer -> __DefaultRuneLocale	data.s
 PTR__atable_a7b7c0ac	0xa7b7c0ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__atable_a7b7c0ac asm("PTR__atable_a7b7c0ac");	pointer -> _atable	data.s
 PTR__operatorStrings_a7b7c0b0	0xa7b7c0b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__operatorStrings_a7b7c0b0 asm("PTR__operatorStrings_a7b7c0b0");	pointer -> _operatorStrings	data.s
 PTR_vtable_a7b7c0b4	0xa7b7c0b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0b4 asm("PTR_vtable_a7b7c0b4");	pointer -> __ZTV9TVariable	data.s
 PTR__S_terminal_a7b7c0b8	0xa7b7c0b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__S_terminal_a7b7c0b8 asm("PTR__S_terminal_a7b7c0b8");	pointer -> LD_97c3acb0	data.s
-PTR_DAT_a7b7c0bc	0xa7b7c0bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c0bc asm("PTR_DAT_a7b7c0bc");	pointer -> ___sF	data.s
+PTR____sF_a7b7c0bc	0xa7b7c0bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR____sF_a7b7c0bc asm("PTR____sF_a7b7c0bc");	pointer -> ___sF	data.s
 PTR_vtable_a7b7c0c0	0xa7b7c0c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0c0 asm("PTR_vtable_a7b7c0c0");	pointer -> __ZTV13TIntermBranch	data.s
 PTR_vtable_a7b7c0c4	0xa7b7c0c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0c4 asm("PTR_vtable_a7b7c0c4");	pointer -> __ZTV11TIntermLoop	data.s
 PTR_vtable_a7b7c0c8	0xa7b7c0c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0c8 asm("PTR_vtable_a7b7c0c8");	pointer -> __ZTV20TIntermConstantUnion	data.s
@@ -1069,7 +1069,7 @@ PTR__S_empty_rep_storage_a7b7c0f0	0xa7b7c0f0	__DATA,__nl_symbol_ptr	pointer	4	ex
 PTR_vtable_a7b7c0f4	0xa7b7c0f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0f4 asm("PTR_vtable_a7b7c0f4");	pointer -> __ZTV9TFunction	data.s
 PTR_addressTempAllocator_a7b7c0f8	0xa7b7c0f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_addressTempAllocator_a7b7c0f8 asm("PTR_addressTempAllocator_a7b7c0f8");	pointer -> __ZN12ParseOperand20addressTempAllocatorE	data.s
 PTR_temporaryAllocator_a7b7c0fc	0xa7b7c0fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_temporaryAllocator_a7b7c0fc asm("PTR_temporaryAllocator_a7b7c0fc");	pointer -> __ZN12ParseOperand18temporaryAllocatorE	data.s
-PTR_DAT_a7b7c100	0xa7b7c100	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c100 asm("PTR_DAT_a7b7c100");	pointer -> __cpu_has_altivec	data.s
+PTR___cpu_has_altivec_a7b7c100	0xa7b7c100	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___cpu_has_altivec_a7b7c100 asm("PTR___cpu_has_altivec_a7b7c100");	pointer -> __cpu_has_altivec	data.s
 PTR__InterpreterRun_a7b7c104	0xa7b7c104	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__InterpreterRun_a7b7c104 asm("PTR__InterpreterRun_a7b7c104");	pointer -> _InterpreterRun	data.s
 PTR__ppstreamOpString_a7b7c108	0xa7b7c108	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__ppstreamOpString_a7b7c108 asm("PTR__ppstreamOpString_a7b7c108");	pointer -> _ppstreamOpString	data.s
 PTR___ZNSt15underflow_errorD1Ev_a7b7c110	0xa7b7c110	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt15underflow_errorD1Ev_a7b7c110 asm("PTR___ZNSt15underflow_errorD1Ev_a7b7c110");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
@@ -1104,7 +1104,7 @@ PTR_typeinfo_a7b7c180	0xa7b7c180	__DATA,__nl_symbol_ptr	pointer	4	extern unsigne
 PTR_vtable_a7b7c184	0xa7b7c184	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c184 asm("PTR_vtable_a7b7c184");	pointer -> LD_a7b7dfc8	data.s
 PTR___terminate_handler_a7b7c188	0xa7b7c188	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___terminate_handler_a7b7c188 asm("PTR___terminate_handler_a7b7c188");	pointer -> LD_a7b7c070	data.s
 PTR___unexpected_handler_a7b7c18c	0xa7b7c18c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___unexpected_handler_a7b7c18c asm("PTR___unexpected_handler_a7b7c18c");	pointer -> LD_a7b7c074	data.s
-PTR_DAT_a7b7c190	0xa7b7c190	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c190 asm("PTR_DAT_a7b7c190");	pointer -> ___keymgr_global	data.s
+PTR____keymgr_global_a7b7c190	0xa7b7c190	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR____keymgr_global_a7b7c190 asm("PTR____keymgr_global_a7b7c190");	pointer -> ___keymgr_global	data.s
 PTR_LAB_a7b7c1b4	0xa7b7c1b4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1b4)() asm("PTR_LAB_a7b7c1b4");	pointer -> _realloc	data.s
 PTR_LAB_a7b7c1c4	0xa7b7c1c4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1c4)() asm("PTR_LAB_a7b7c1c4");	pointer -> _free	data.s
 PTR_LAB_a7b7c1c8	0xa7b7c1c8	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1c8)() asm("PTR_LAB_a7b7c1c8");	pointer -> _malloc	data.s

@@ -973,7 +973,7 @@ int _idstr(srcCursor, pool)
   else {
     copy = (byte *)_mem_Alloc(pool,length + 1);
   }
-  runeLocale = PTR_DAT_a7b7c0a8;
+  runeLocale = PTR___DefaultRuneLocale_a7b7c0a8;
   ch = *srcCursor;
   dstCursor = copy;
   do {
@@ -2596,7 +2596,7 @@ int __ZN13TInfoSinkBase6appendEPKc(this, str)
     targetFlags = *(uint *)((int)this + 4);
   }
   if ((targetFlags & 2) != 0) {
-    _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0x58),"%s",str);
+    _fprintf((FILE *)(PTR____sF_a7b7c0bc + 0x58),"%s",str);
     return;
   }
   return;
@@ -2621,7 +2621,7 @@ int __ZN13TInfoSinkBase6appendEic(this, count, ch)
     targetFlags = *(uint *)((int)this + 4);
   }
   if ((targetFlags & 2) != 0) {
-    _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0x58),"%c",ch);
+    _fprintf((FILE *)(PTR____sF_a7b7c0bc + 0x58),"%c",ch);
     return;
   }
   return;
@@ -2645,7 +2645,7 @@ int __ZN13TInfoSinkBase6appendERKSs(this, text)
     __ZNSs6appendERKSs(this,text);
     targetFlags = *(uint *)((int)this + 4);
   }
-  stdFiles = PTR_DAT_a7b7c0bc;
+  stdFiles = PTR____sF_a7b7c0bc;
   if ((targetFlags & 2) != 0) {
     *(undefined *)(*(int *)text + *(int *)(*(int *)text + -0xc)) = *PTR__S_terminal_a7b7c0b8;
     _fprintf((FILE *)(stdFiles + 0x58),"%s",*(undefined4 *)text);
@@ -2680,7 +2680,7 @@ int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this
     __ZNSs6appendEPKcm(this,textPtr,length);
     targetFlags = *(uint *)((int)this + 4);
   }
-  stdFiles = PTR_DAT_a7b7c0bc;
+  stdFiles = PTR____sF_a7b7c0bc;
   if ((targetFlags & 2) != 0) {
     *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *stringTerminalPtr_a7b7b720;
     _fprintf((FILE *)(stdFiles + 0x58),"%s",*(undefined4 *)(text + 4));

@@ -7631,10 +7631,10 @@ int yylex(yYSTYPE, parseContext)
       _yy_start = 1;
     }
     if (_yyin == (unsigned char *)0x0) {
-      _yyin = (unsigned char *)PTR_DAT_a7b7c0bc;
+      _yyin = (unsigned char *)PTR____sF_a7b7c0bc;
     }
     if (_yyout == (undefined *)0x0) {
-      _yyout = PTR_DAT_a7b7c0bc + 0x58;
+      _yyout = PTR____sF_a7b7c0bc + 0x58;
     }
     if (_yy_current_buffer == (unsigned char *)0x0) {
       _yy_current_buffer = (unsigned char *)((int (*)())yy_create_buffer)(_yyin,0x4000);

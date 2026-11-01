@@ -2611,7 +2611,7 @@ int save_world()
   int r11In;
   int globalWord;
   
-  globalWord = *(int *)PTR_DAT_a7b7c100;
+  globalWord = *(int *)PTR___cpu_has_altivec_a7b7c100;
   *(unsigned char **)(&STACKARG(0x0) + r11In) = ((unsigned int)__builtin_frame_address(0));
   if (globalWord == 0) {
     return;

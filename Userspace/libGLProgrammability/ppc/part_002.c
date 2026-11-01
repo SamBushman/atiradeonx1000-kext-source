@@ -206,7 +206,7 @@ int _InitCPP()
   _macros = _NewScopeInPool(mem_CreatePoolResult);
   builtin_strncpy(profileName,"PROFILE_",9);
   length = _strlen(profileName);
-  ctypeTable = PTR_DAT_a7b7c0a8;
+  ctypeTable = PTR___DefaultRuneLocale_a7b7c0a8;
   profileWrite = profileName + length;
   profileRead = *(char **)(*(int *)PTR__cpp_a7b7c0a4 + 4);
   while( true ) {

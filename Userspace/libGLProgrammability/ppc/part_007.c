@@ -131,7 +131,7 @@ int yy_scan_bytes(bytes, len)
 int yy_fatal_error(str)
   char *str;
 {
-  _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),"%s\n",str);
+  _fprintf((FILE *)(PTR____sF_a7b7c0bc + 0xb0),"%s\n",str);
                     
   _exit(2);
 }
