@@ -1,7 +1,6 @@
 # use/local rows, fork D6 (round 3): TParseContext::executeInitializer
 local	TParseContext__executeInitializer	bVar1	stringTerminator	INFERRED	3Dlabs ParseHelper.cpp TParseContext::executeInitializer (same control flow here); byte *DAT_a7b7ba18 stored at data[length] before reading c_str() of a TString
 local	TParseContext__executeInitializer	bVar30	cr0Flags	INFERRED	Ghidra models the condition register: (x==0)<<1 / the lwarx-stwcx loop test
-local	TParseContext__executeInitializer	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store
 use	TParseContext__executeInitializer	uVar31	variableAllocation	CONFIRMED	result of TPoolAllocator__allocate(pool, 0x40): the new TVariable record (0x40 bytes, built field by field below)	^\s*uVar31\ =\ \(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,0x40\);$	+3
 use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*uVar31\ =\ TType__setStructSize\(\(unsigned\ char\ \*\)\&local_150,\*\(unsigned\ char\ \*\*\)\(paVar15\ \+\ 8\)\);$	+2
 use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$	+1
@@ -142,8 +141,6 @@ use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType
 use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)	^\s*piVar6\[0xc\]\ =\ uVar2\ \|\ uVar21\ \|\ uVar4\ \&\ 0x7ffff;$	+1
 use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)	^\s*piVar6\[0xc\]\ =\ uVar7\ \|\ uVar2\ \|\ uVar21\ \|\ uVar4\ \&\ 0x7ff;$	+1
 use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)	^\s*piVar6\[0xc\]\ =\ uVar3\ \|\ uVar7\ \|\ uVar2\ \|\ uVar21\ \|\ uVar4\ \&\ 0x3ff;$	+2
-use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar21\ =\ iVar8\ \-\ 1;$	+1
-use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*iVar22\ =\ storeWordConditionalIndexed\(uVar21,0,piVar5\);$	+1
 use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar21\ =\ \(uint\)\*DAT_a7b7ba18;$	+1
 use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(piVar6\[3\]\ \+\ 0x24\)\)\(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7\);$	+1
 use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar21\ =\ 0;$	+1

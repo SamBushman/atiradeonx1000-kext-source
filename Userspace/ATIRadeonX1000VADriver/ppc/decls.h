@@ -142,7 +142,6 @@ extern int _puts();
 extern double _sin();
 extern int _strcmp();
 extern int _strlcpy();
-extern int storeWordConditionalIndexed();
 extern unsigned char hueSaturationShaderProgram_0000ea9c;
 extern unsigned char brightnessContrastShaderProgram_0000eafc;
 extern unsigned char convertAndSourceRectShaderConstants_0000eb2c;

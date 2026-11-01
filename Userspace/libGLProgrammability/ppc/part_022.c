@@ -576,14 +576,11 @@ int __ZNSs4_Rep9_S_createEmRKSaIcE(capacity, alloc)
   undefined *freeListBase;
   uint extraBytes;
   int getenvResult;
-  undefined4 atomicStore;
   undefined *forceNewPtr;
   uint adjSize;
   undefined4 *rep;
   int freeListIndex;
   ulong allocSize;
-  char reservation;
-  byte cr0Reg;
   
   if (0x3ffffffc < capacity) {
     std____throw_length_error("basic_string::_S_create");
@@ -606,22 +603,10 @@ setRep:
     if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
       getenvResult = _getenv("GLIBCPP_FORCE_NEW");
       if (getenvResult == 0) {
-        do {
-          if (reservation != '\0') {
-            atomicStore = storeWordConditionalIndexed(*(int *)forceNewPtr + -1,0,forceNewPtr);
-            *(undefined4 *)forceNewPtr = atomicStore;
-            cr0Reg = 2;
-          }
-        } while (!(bool)(cr0Reg >> 1 & 1));
+        atomicAddWord(forceNewPtr,-1);
       }
       else {
-        do {
-          if (reservation != '\0') {
-            atomicStore = storeWordConditionalIndexed(*(int *)forceNewPtr + 1,0,forceNewPtr);
-            *(undefined4 *)forceNewPtr = atomicStore;
-            cr0Reg = 2;
-          }
-        } while (!(bool)(cr0Reg >> 1 & 1));
+        atomicAddWord(forceNewPtr,1);
       }
     }
     freeListBase = PTR__S_free_list_a7b7c0e4;
@@ -1100,16 +1085,9 @@ int __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcES
   ulong *data;
   ulong *rep;
   ulong dnew;
-  char reservation;
-  byte cr0Reg;
   
   if (beg == end) {
-    do {
-      if (reservation != '\0') {
-        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(&emptyStringRepRefcount_a7b7bf8c,1);
     data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
@@ -1134,16 +1112,9 @@ int std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__stri
   ulong *data;
   ulong *rep;
   ulong dnew;
-  char reservation;
-  byte cr0Reg;
   
   if (beg == end) {
-    do {
-      if (reservation != '\0') {
-        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(&emptyStringRepRefcount_a7b7bf8c,1);
     data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
@@ -1168,16 +1139,9 @@ int std__string___S_construct_char__(beg, end, alloc, allocator)
   ulong *data;
   ulong *rep;
   ulong dnew;
-  char reservation;
-  byte cr0Reg;
   
   if (beg == end) {
-    do {
-      if (reservation != '\0') {
-        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(&emptyStringRepRefcount_a7b7bf8c,1);
     data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {
@@ -1204,16 +1168,9 @@ int __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag(beg, end, a
   ulong *data;
   ulong *rep;
   ulong dnew;
-  char reservation;
-  byte cr0Reg;
   
   if (beg == end) {
-    do {
-      if (reservation != '\0') {
-        emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(&emptyStringRepRefcount_a7b7bf8c,1);
     data = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {

@@ -116,21 +116,11 @@ int __ZNSs4_Rep10_M_disposeERKSaIcE(this, alloc)
   unsigned char * this;
   uint alloc;
 {
-  int atomicStore;
   unsigned char * refCountPtr;
   int oldRefCount;
-  char reservation;
-  byte cr0Reg;
   
   refCountPtr = this + 8;
-  do {
-    oldRefCount = *(int *)refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *(int *)refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (0 < oldRefCount) {
     return;
   }
@@ -154,7 +144,6 @@ int __ZNSs9_M_mutateEmmm(this, pos, n, n2)
 {
   int data;
   int oldRefCount;
-  int atomicStore;
   uint repCapacity;
   int *refCountPtr;
   int curData;
@@ -162,8 +151,6 @@ int __ZNSs9_M_mutateEmmm(this, pos, n, n2)
   int tailSrc;
   int tailLen;
   uint newSize;
-  char reservation;
-  byte cr0Reg;
   unsigned char allocatorTmp [32];
   
   curData = *(int *)this;
@@ -197,14 +184,7 @@ int __ZNSs9_M_mutateEmmm(this, pos, n, n2)
   }
   data = *(int *)this;
   refCountPtr = (int *)(data + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)allocatorTmp);
   }
@@ -291,19 +271,10 @@ int __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this, str, allocator)
 int __ZNSs4_Rep10_M_refcopyEv(this)
   void *this;
 {
-  int atomicStore;
   int *refCountPtr;
-  char reservation;
-  byte cr0Reg;
   
   refCountPtr = (int *)((int)this + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*refCountPtr + 1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(refCountPtr,1);
   return (int)this + 0xc;
 }
 
@@ -311,16 +282,9 @@ int __ZNSs4_Rep10_M_refcopyEv(this)
 int __ZNSsC4Ev(this)
   void *this;
 {
-  char reservation;
-  byte cr0Reg;
   unsigned char stringAllocator [28];
   
-  do {
-    if (reservation != '\0') {
-      emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(&emptyStringRepRefcount_a7b7bf8c,1);
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,&emptyStringRepData_freeListBase_a7b7bf90,stringAllocator);
 }
 
@@ -364,11 +328,8 @@ int __ZNSsC1ERKSs(this, text)
   void *this;
   unsigned char * text;
 {
-  int atomicStore;
   int *refCountPtr;
   char *data;
-  char reservation;
-  byte cr0Reg;
   unsigned char cloneAlloc [32];
   unsigned char hiderAlloc [28];
   
@@ -379,13 +340,7 @@ int __ZNSsC1ERKSs(this, text)
   }
   else {
     refCountPtr = (int *)(data + -4);
-    do {
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*refCountPtr + 1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(refCountPtr,1);
   }
   ((int (*)())__ZNKSs13get_allocatorEv)();
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,data,hiderAlloc);
@@ -397,23 +352,14 @@ int __ZNSs4_Rep7_M_grabERKSaIcES2_(this, allocator1)
   unsigned char * allocator1;
 {
   unsigned char * refCountPtr;
-  int atomicStore;
   unsigned char * cloned;
-  char reservation;
-  byte cr0Reg;
   
   if (*(int *)(this + 8) < 0) {
     cloned = (unsigned char *)__ZNSs4_Rep8_M_cloneERKSaIcEm(this,allocator1,0);
     return cloned;
   }
   refCountPtr = this + 8;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*(int *)refCountPtr + 1,0,refCountPtr);
-      *(int *)refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(refCountPtr,1);
   return this + 0xc;
 }
 
@@ -422,11 +368,8 @@ int __ZNSsC4ERKSs(this, text)
   void *this;
   unsigned char * text;
 {
-  int atomicStore;
   int *refCountPtr;
   char *data;
-  char reservation;
-  byte cr0Reg;
   unsigned char cloneAlloc [32];
   unsigned char hiderAlloc [28];
   
@@ -437,13 +380,7 @@ int __ZNSsC4ERKSs(this, text)
   }
   else {
     refCountPtr = (int *)(data + -4);
-    do {
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*refCountPtr + 1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(refCountPtr,1);
   }
   ((int (*)())__ZNKSs13get_allocatorEv)();
   return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,data,hiderAlloc);
@@ -693,25 +630,15 @@ int __ZNSsD1Ev(this)
 int __ZNSsD4Ev(this)
   void *this;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int data;
-  char reservation;
-  byte cr0Reg;
   undefined1 stringAllocator [20];
   
   data = *(int *)this;
   ((int (*)())__ZNKSs13get_allocatorEv)();
   refCountPtr = (int *)(data + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)stringAllocator);
   }

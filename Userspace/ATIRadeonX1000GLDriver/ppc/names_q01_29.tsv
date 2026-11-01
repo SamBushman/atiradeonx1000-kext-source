@@ -160,7 +160,6 @@ local	gld_drawPixelsFromClientSurface	uVar25	scratchUint25	INFERRED	register-all
 local	gld_drawPixelsFromClientSurface	iVar26	scratchInt26	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	gld_drawPixelsFromClientSurface	uVar28	scratchUint28	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	gld_drawPixelsFromClientSurface	iVar34	scratchInt34	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
-local	gld_drawPixelsFromClientSurface	bVar35	scratchFlag35	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	gld_drawPixelsFromClientSurface	dVar39	scratchDouble39	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	gld_emitQueryBeginPacket	uVar2	scratchUint2	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
 local	gld_emitQueryBeginPacket	piVar3	scratchPtr3	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)

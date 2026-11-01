@@ -1667,7 +1667,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
   undefined *operatorStrings;
   char *nameChars;
   int levelsBegin;
-  int atomicStore;
   uint oldVariableBits;
   uint basicTypeField;
   int uniqueId;
@@ -1693,7 +1692,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
   void *nameString;
   undefined *variableVtable;
   undefined4 symbolTableLevel;
-  char reservation;
   byte cr0Flags;
   undefined8 nameStringAllocationPair;
   undefined4 poolAllocatorArg [4];
@@ -1894,14 +1892,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol = (int *)(nameCopyCharsE + -4);
     insertResultFlagCopyE = insertResultFlagE;
     destroyAllocatorE[0] = nameCopyE;
-    do {
-      oldRefCount = *symbol;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
-        *symbol = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(symbol,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyCharsE + -0xc),destroyAllocatorE);
@@ -1969,14 +1960,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol = (int *)(nameCopyCharsF + -4);
     insertResultFlagCopyF = insertResultFlagF;
     destroyAllocatorF[0] = nameCopyF;
-    do {
-      oldRefCount = *symbol;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
-        *symbol = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(symbol,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyCharsF + -0xc),destroyAllocatorF);
@@ -2044,14 +2028,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol = (int *)(nameCopyCharsG + -4);
     insertResultFlagCopyG = insertResultFlagG;
     destroyAllocatorG[0] = nameCopyG;
-    do {
-      oldRefCount = *symbol;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
-        *symbol = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(symbol,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyCharsG + -0xc),destroyAllocatorG);
@@ -2122,14 +2099,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol = (int *)(nameCopyChars + -4);
     insertResultFlagCopy = insertResultFlag;
     destroyAllocator[0] = nameCopy;
-    do {
-      oldRefCount = *symbol;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
-        *symbol = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(symbol,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyChars + -0xc),destroyAllocator);
@@ -2198,14 +2168,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol = (int *)(nameCopyCharsB + -4);
     insertResultFlagCopyB = insertResultFlagB;
     destroyAllocatorB[0] = nameCopyB;
-    do {
-      oldRefCount = *symbol;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
-        *symbol = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(symbol,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyCharsB + -0xc),destroyAllocatorB);
@@ -2274,14 +2237,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol = (int *)(nameCopyCharsC + -4);
     insertResultFlagCopyC = insertResultFlagC;
     destroyAllocatorC[0] = nameCopyC;
-    do {
-      oldRefCount = *symbol;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
-        *symbol = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(symbol,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyCharsC + -0xc),destroyAllocatorC);
@@ -2348,14 +2304,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable(language, symbolTable)
     symbol = (int *)(nameCopyCharsD + -4);
     insertResultFlagCopyD = insertResultFlagD;
     destroyAllocatorD[0] = nameCopyD;
-    do {
-      oldRefCount = *symbol;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,symbol);
-        *symbol = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(symbol,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyCharsD + -0xc),destroyAllocatorD);
@@ -2543,7 +2492,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
   int fragDataArraySize;
   int *refCountPtr;
   int oldRefCount;
-  int atomicStore;
   char *nameChars;
   void *nameString;
   uint oldTypeBits;
@@ -2558,7 +2506,6 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
   undefined4 scratchR8;
   int uniqueId;
   undefined4 symbolTableLevel;
-  char reservation;
   byte cr0Flags;
   undefined8 nameStringAllocationPair;
   undefined4 allocatorArg [4];
@@ -2622,14 +2569,7 @@ int __Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource(langua
     refCountPtr = (int *)(nameCopyChars + -4);
     insertResultSecond = mapInsertSecond;
     destroyAllocatorArg[0] = nameCopyAllocator;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopyChars + -0xc),destroyAllocatorArg);
@@ -2768,7 +2708,6 @@ int TIntermediate__addSymbol(this, id, text, type, line)
   int line;
 {
   int stringAllocator;
-  int atomicStore;
   int emptyStringRep;
   uint typeSizeBits;
   uint typeQualifierBits;
@@ -2787,8 +2726,6 @@ int TIntermediate__addSymbol(this, id, text, type, line)
   int typeTypeName;
   int typeFieldName;
   int typeStructure;
-  char reservation;
-  byte cr0Reg;
   
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   newSymbolNode = (int *)TPoolAllocator__allocate(poolAllocator,0x3c);
@@ -2827,13 +2764,7 @@ int TIntermediate__addSymbol(this, id, text, type, line)
   emptyRepRefCount = (int *)(emptyStringRep + 8);
   *newSymbolNode = (int)(intermSymbolVtable + 8);
   newSymbolNode[0xc] = id;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   stringAllocator = GetGlobalPoolAllocator();
   newSymbolNode[0xd] = stringAllocator;
   newSymbolNode[0xe] = emptyStringRep + 0xc;
@@ -3313,7 +3244,6 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
   int childConstantUnion;
   bool typeTemp1Live;
   undefined *oldRefCount;
-  undefined *atomicStore;
   bool typeTemp4Live;
   bool typeTemp3Live;
   bool typeTemp2Live;
@@ -3340,7 +3270,6 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
   undefined4 r4Out6;
   unsigned char * symbolTableCopy;
   void *infoSink;
-  char reservation;
   byte cr0Flags;
   undefined **stackType;
   undefined4 stackTypeArraySize;
@@ -3378,14 +3307,7 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,(char *)stackType);
     refCountPtr = stackType + -1;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),stackTypeTailBytes);
     }
@@ -3613,11 +3535,9 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
   int *aggregateNode;
   unsigned char * poolAllocator;
   int sequenceAllocator;
-  int atomicStore;
   unsigned char * sequence;
   undefined4 *sequenceFinish;
   code *getSequenceFn;
-  char reservation;
   byte cr0Flags;
   unsigned char * intermNodeSpill;
   
@@ -3658,13 +3578,7 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
     aggregateNode[0x12] = 0;
     emptyRepRefCount = (int *)(emptyStringRep + 8);
     aggregateNode[0x13] = 0;
-    do {
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-        *emptyRepRefCount = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    atomicAddWord(emptyRepRefCount,1);
     stringAllocator = GetGlobalPoolAllocator();
     aggregateNode[0x16] = emptyStringRep + 0xc;
     noLine = line == 0;
@@ -3710,13 +3624,7 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
       aggregateNode[0x12] = 0;
       emptyRepRefCount = (int *)(emptyStringRep + 8);
       aggregateNode[0x13] = 0;
-      do {
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-          *emptyRepRefCount = atomicStore;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      atomicAddWord(emptyRepRefCount,1);
       stringAllocator = GetGlobalPoolAllocator();
       aggregateNode[0x16] = emptyStringRep + 0xc;
       aggregateNode[0x15] = stringAllocator;
@@ -3770,7 +3678,6 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   undefined4 line;
   undefined4 scratchR4;
   undefined *oldRefCount;
-  undefined *atomicStore;
   bool isAggregateOnly;
   undefined **refCountPtr;
   undefined *intermUnaryVtable;
@@ -3800,7 +3707,6 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   undefined4 *childCursor;
   uint childBasicType;
   void *infoSink;
-  char reservation;
   byte cr0Flags;
   undefined **stackType;
   int stackTypeArraySize;
@@ -4089,14 +3995,7 @@ override_jmp_97b8ea8c_case_0:
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,(char *)stackType);
     refCountPtr = stackType + -1;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),(unsigned char *)&stackTypeTypeName);
     }
@@ -4186,10 +4085,8 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   int *aggregateNode;
   unsigned char * poolAllocator;
   int sequenceAllocator;
-  int atomicStore;
   unsigned char * sequence;
   undefined4 *sequenceFinish;
-  char reservation;
   byte cr0Reg;
   unsigned char * intermNode1Spill;
   unsigned char * intermNode2Spill;
@@ -4238,13 +4135,7 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   aggregateNode[0x12] = 0;
   emptyRepRefCount = (int *)(emptyStringRep + 8);
   aggregateNode[0x13] = 0;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   stringAllocator = GetGlobalPoolAllocator();
   aggregateNode[0x16] = emptyStringRep + 0xc;
   aggregateNode[0x15] = stringAllocator;
@@ -4308,13 +4199,10 @@ int TIntermediate__makeAggregate(this, intermNode, line)
   int *newAggregateNode;
   unsigned char * poolAllocator;
   int sequenceAllocator;
-  int atomicStore;
   unsigned char * sequence;
   undefined4 *sequenceInsertSlot;
   undefined4 *r4Out0;
   code *getSequenceFn;
-  char reservation;
-  byte cr0Reg;
   unsigned char * intermNodeSpill;
   
   newAggregateNode = (int *)0x0;
@@ -4354,13 +4242,7 @@ int TIntermediate__makeAggregate(this, intermNode, line)
     newAggregateNode[0x12] = 0;
     emptyRepRefCount = (int *)(emptyStringRep + 8);
     newAggregateNode[0x13] = 0;
-    do {
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-        *emptyRepRefCount = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(emptyRepRefCount,1);
     stringAllocator = GetGlobalPoolAllocator();
     newAggregateNode[0x16] = emptyStringRep + 0xc;
     newAggregateNode[0x15] = stringAllocator;
@@ -4686,7 +4568,6 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   int line;
 {
   int fieldIndex;
-  int atomicStore;
   undefined *intermAggregateVtable;
   uint oldTypeBits;
   int *emptyRepRefCount;
@@ -4699,8 +4580,6 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   code *setLineFn;
   int emptyStringRep;
   unsigned char * fieldCursor;
-  char reservation;
-  byte cr0Reg;
   undefined **stackType;
   undefined4 stackTypeArraySize;
   undefined4 stackTypeStructure;
@@ -4760,13 +4639,7 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   newAggregateNode[0x12] = 0;
   emptyRepRefCount = (int *)(emptyStringRep + 8);
   newAggregateNode[0x13] = 0;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   stringAllocator = GetGlobalPoolAllocator();
   newAggregateNode[0x16] = emptyStringRep + 0xc;
   fieldIndex = 0;

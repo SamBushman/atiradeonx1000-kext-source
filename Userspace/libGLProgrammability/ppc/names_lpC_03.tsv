@@ -13,7 +13,6 @@ local	TIntermediate__addSymbol	iVar11	typeStructureSize	INFERRED	inlined TType c
 local	TIntermediate__addSymbol	iVar10	typeWord1c	INFERRED	inlined TType copy of type+0x1c
 use	TIntermediate__addSymbol	iVar9	typeWord20	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*iVar9\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x20\);$	+1
 use	TIntermediate__addSymbol	iVar9	typeWord20	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*a0\[10\]\ =\ iVar9;$	+1
-use	TIntermediate__addSymbol	iVar9	atomicStore	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*iVar9\ =\ storeWordConditionalIndexed\(\*piVar8\ \+\ 1,0,piVar8\);$	+2
 use	TIntermediate__addSymbol	iVar9	stringAllocator	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*iVar9\ =\ GetGlobalPoolAllocator\(\);$	+2
 local	TIntermediate__addSymbol	uVar1	typeSizeBits	INFERRED	type bit-field word & 0x7f800: nominal size field
 local	TIntermediate__addSymbol	uVar2	typeQualifierBits	INFERRED	type bit-field word & 0xfe000000: qualifier field

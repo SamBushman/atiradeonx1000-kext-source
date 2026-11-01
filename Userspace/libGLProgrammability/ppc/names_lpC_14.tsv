@@ -50,13 +50,7 @@ local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar3	typeBasicTypeBits	INF
 local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar4	typeMatrixBit	INFERRED	matrix bit of the copied TType bit-field word
 local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar6	oldTypeBits	INFERRED	bit-field word of the new variable's TType before the field-wise copy
 local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar16	symbolTableLevel	INFERRED	last TSymbolTableLevel of the table (the global level the variable is inserted into)
-use	TParseContext__arrayErrorCheck	iVar17	atomicStore	INFERRED	atomic refcount store result	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$	+2
-use	TParseContext__arrayErrorCheck	iVar17	atomicStore	INFERRED	atomic refcount store result	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$@2	+2
-use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar9\ =\ \*piVar7;$	+1
-use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$	+1
 use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*if\ \(iVar9\ <\ 1\)\ \{$	+1
-use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar9\ =\ \*piVar7;$@2	+1
-use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$@2	+1
 use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*if\ \(iVar9\ <\ 1\)\ \{$@2	+1
 use	TParseContext__arrayErrorCheck	local_100	stackTypeBWord20	INFERRED	word +0x20 of the second stack TType, zero-initialised	^\s*local_100\ =\ 0;$	+1
 use	TParseContext__arrayErrorCheck	local_fc	stackTypeBBits	INFERRED	bit-field word of the second stack TType built from the TPublicType (array, matrix, size, basic type, qualifier)	^\s*local_fc\ =\ \(param_8\ \&\ 1\)\ <<\ 9\ \|$	+1
@@ -80,11 +74,7 @@ use	TParseContext__arrayErrorCheck	pcVar14	typeNameString	INFERRED	TString alloc
 use	TParseContext__arrayErrorCheck	pcVar14	typeNameString	INFERRED	TString allocated for the type name of the struct TType (0 when not a struct)	^\s*pcVar14\ =\ this;$	+1
 use	TParseContext__arrayErrorCheck	pcVar14	typeNameString	INFERRED	TString allocated for the type name of the struct TType (0 when not a struct)	^\s*local_110\ =\ pcVar14;$	+1
 use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*piVar7\ =\ \(int\ \*\)\(local_6c\ \+\ \-4\);$	+1
-use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar9\ =\ \*piVar7;$	+1
-use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$	+2
 use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*piVar7\ =\ \(int\ \*\)\(local_12c\ \+\ \-4\);$	+1
-use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar9\ =\ \*piVar7;$@2	+1
-use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$@2	+2
 local	TParseContext__arrayErrorCheck	psVar11	nameStringRef	INFERRED	variable name string reference
 use	TParseContext__arrayErrorCheck	uVar15	scratchR7	UNKNOWN	register leftover reloaded from the home slot	^\s*uVar15\ =\ \(\*\(uint\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 16\)\);$	+1
 use	TParseContext__arrayErrorCheck	uVar15	scratchR7	UNKNOWN	register leftover reloaded from the home slot	^\s*\(local_cc,\(int\)uVar23,uVar13,uVar16,uVar15,param_6,\*\(int\ \*\)local_cc\)$	+1

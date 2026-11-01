@@ -5,7 +5,6 @@ local	TParseContext__error	param_5	extraInfoFormat	INFERRED	printf-style format 
 local	TParseContext__error	param_6	varArg1	INFERRED	first variadic argument, spilled to the va_list area
 local	TParseContext__error	param_7	varArg2	INFERRED	second variadic argument
 local	TParseContext__error	param_8	varArg3	INFERRED	third variadic argument
-local	TParseContext__error	iVar1	atomicStore	INFERRED	atomic refcount store result
 local	TParseContext__error	iVar3	oldRefCount	INFERRED	std::string rep refcount before the decrement
 local	TParseContext__error	piVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the location text is appended
 use	TParseContext__error	pvVar4	infoSink	INFERRED	info sink (this+8) the message is appended to	^\s*pvVar4\ =\ \*\(void\ \*\*\)\(param_1\ \+\ 8\);$	+1

@@ -141,8 +141,6 @@ int ava_acquire_image(ctx, syncId)
   int mapBaseOrCount;
   int *refCounter;
   int *cmdWrite;
-  char reservationHeld;
-  byte condReg0;
   
   taskPortPtr = ptrTo_machTaskSelf_0000f1a0;
   cmdWrite = *(int **)(ctx + 0x34);
@@ -204,13 +202,7 @@ setRefCounter:
     fillCursor = cmdWrite + 2;
     *payload = *refCounter;
     refCounter = refCounter + 4;
-    do {
-      if (reservationHeld != '\0') {
-        mapBaseOrCount = storeWordConditionalIndexed(*refCounter + 1,0,refCounter);
-        *refCounter = mapBaseOrCount;
-        condReg0 = 2;
-      }
-    } while (!(bool)(condReg0 >> 1 & 1));
+    atomicAddWord(refCounter,1);
   default:
     goto syncIdDefault;
   }
@@ -218,13 +210,7 @@ setRefCounter:
   refCounter = (int *)*refCounter;
   *payload = *refCounter;
   refCounter = refCounter + 4;
-  do {
-    if (reservationHeld != '\0') {
-      mapBaseOrCount = storeWordConditionalIndexed(*refCounter + 1,0,refCounter);
-      *refCounter = mapBaseOrCount;
-      condReg0 = 2;
-    }
-  } while (!(bool)(condReg0 >> 1 & 1));
+  atomicAddWord(refCounter,1);
 syncIdDefault:
   mapBaseOrCount = 6;
   do {

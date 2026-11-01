@@ -48,7 +48,6 @@ use	yyparse	iVar55	errorCheckResult	INFERRED	result of a TParseContext::*ErrorCh
 use	yyparse	iVar55	errorCheckResult	INFERRED	result of a TParseContext::*ErrorCheck call tested right after	^\s*iVar55\ =\ TParseContext__nonInitErrorCheck$	+1
 use	yyparse	iVar55	errorCheckResult	INFERRED	result of a TParseContext::*ErrorCheck call tested right after	^\s*iVar55\ =\ TParseContext__arrayErrorCheck$	+1
 use	yyparse	iVar55	errorCheckResult	INFERRED	result of a TParseContext::*ErrorCheck call tested right after	^\s*iVar55\ =\ __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped$@3	+1
-use	yyparse	iVar55	objVtable	INFERRED	vtable pointer of the object	^\s*iVar55\ =\ \*piVar61;$@4	+1
 use	yyparse	iVar55	objVtable	INFERRED	vtable pointer of the object	^\s*\(\*\*\(code\ \*\*\)\(iVar55\ \+\ 0x68\)\)\(piVar61,uVar16\);$	+1
 use	yyparse	iVar55	objVtable	INFERRED	vtable pointer of the object	^\s*iVar55\ =\ \*piVar50;$	+1
 use	yyparse	iVar55	objVtable	INFERRED	vtable pointer of the object	^\s*\(\*\*\(code\ \*\*\)\(iVar55\ \+\ 0x10\)\)\(piVar50,uVar16\);$	+1
@@ -94,7 +93,6 @@ use	yyparse	iVar55	emptyRep	INFERRED	shared empty string rep (data at +0xc, refc
 use	yyparse	iVar55	emptyRep	INFERRED	shared empty string rep (data at +0xc, refcount at +8)	^\s*iVar55\ =\ DAT_a7b7ba84;$@2	+1
 use	yyparse	iVar55	emptyRep	INFERRED	shared empty string rep (data at +0xc, refcount at +8)	^\s*piVar50\ =\ \(int\ \*\)\(iVar55\ \+\ 8\);$	+1
 use	yyparse	iVar55	emptyRep	INFERRED	shared empty string rep (data at +0xc, refcount at +8)	^\s*\*\(int\ \*\)\(pTVar20\ \+\ 0x58\)\ =\ iVar55\ \+\ 0xc;$	+1
-use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*iVar55\ =\ \*piVar61;$@5	+2
 use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*iVar55\ =\ \*piVar50;$@2	+2
 use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*iVar60\ =\ \*\(int\ \*\)\(iVar55\ \+\ iVar54\ \*\ 4\);$	+2
 use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*iVar55\ =\ \*\(int\ \*\)\(local_320\[0\]\ \+\ 0x18\);$	+1
@@ -103,7 +101,6 @@ use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	
 use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*\*\(undefined4\ \*\)\(iVar55\ \+\ 0x50\)\ =\ 1;$	+1
 use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*\*\(int\ \*\)\(\(int\)param_1\ \+\ 0x28\)\ =\ iVar55\ \+\ 0x1c;$	+1
 use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*iVar60\ =\ \*\(int\ \*\)\(iVar55\ \+\ iVar54\ \*\ 4\);$@2	+1
-use	yyparse	iVar55	levelsBegin	INFERRED	symbol table level vector begin pointer	^\s*iVar55\ =\ \*piVar61;$@7	+1
 use	yyparse	iVar55	binaryNode	INFERRED	TIntermNode::getAsBinaryNode() of the operand	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ 0x14\)\ \+\ 0x20\)\)$	+1
 use	yyparse	iVar55	binaryNode	INFERRED	TIntermNode::getAsBinaryNode() of the operand	^\s*if\ \(iVar55\ ==\ 0\)\ \{$@11	+1
 use	yyparse	iVar55	binaryNode	INFERRED	TIntermNode::getAsBinaryNode() of the operand	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ 0x14\)\ \+\ 0x20\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ 0x14\)\);$	+2
@@ -166,6 +163,5 @@ use	yyparse	iVar55	foundSymbol	INFERRED	symbol found by the map lookup (iterator
 use	yyparse	iVar55	foundSymbol	INFERRED	symbol found by the map lookup (iterator +0x18)	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar55\ \+\ 0x40\)\ \&\ 0x1fffe00\)\ ==\ \(\*\(uint\ \*\)\(uVar57\ \+\ 0x40\)\ \&\ 0x1fffe00\)\)\ \&\&$	+2
 use	yyparse	iVar55	foundSymbol	INFERRED	symbol found by the map lookup (iterator +0x18)	^\s*for\ \(iVar54\ =\ 0;\ iVar54\ <\ \*\(int\ \*\)\(iVar55\ \+\ 0x14\)\ \-\ \*\(int\ \*\)\(iVar55\ \+\ 0x10\)\ >>\ 3;$	+2
 use	yyparse	iVar55	foundSymbol	INFERRED	symbol found by the map lookup (iterator +0x18)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar55\ \+\ 0x10\)\ \+\ iVar60\ \+\ 4\);$	+1
-use	yyparse	iVar55	fieldNameStr2	INFERRED	name string of the struct field	^\s*iVar55\ =\ \*piVar61;$@9	+3
 use	yyparse	iVar55	fieldNameStr2	INFERRED	name string of the struct field	^\s*iVar55\ =\ _memcmp\(\*\(undefined4\ \*\)\(iVar55\ \+\ 4\),\*\(undefined4\ \*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ 4\)\ \+\ 4\),param_3\);$	+4
 use	yyparse	iVar55	fieldNameStr2	INFERRED	name string of the struct field	^\s*if\ \(iVar55\ !=\ 0\)\ \{$@38	+1

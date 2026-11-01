@@ -122,25 +122,15 @@ int __ZNSt13runtime_errorD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int stringData;
-  char reservation;
-  byte cr0Reg;
   undefined1 allocScratch [20];
   
   stringData = *(int *)((int)this + 4);
   *(int *)this = runtimeErrorVtablePtr_a7b7c010 + 8;
   refCountPtr = (int *)(stringData + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringData + -0xc),allocScratch);
   }

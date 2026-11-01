@@ -214,8 +214,6 @@ use	TParseContext__addConstVectorNode	piVar6	nodeAggregate	INFERRED	node->getAsA
 use	TParseContext__addConstVectorNode	piVar6	firstChildTyped	INFERRED	node->getAsAggregate(); first child getAsTyped()	^\s*piVar6\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(iVar3\ \+\ 0x14\)\)$	+1
 use	TParseContext__addConstVectorNode	piVar6	firstChildTyped	INFERRED	node->getAsAggregate(); first child getAsTyped()	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x18\)\)\(piVar6\);$	+1
 use	TParseContext__addConstVectorNode	ppuVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar2\ =\ local_90\[0\]\ \+\ \-1;$	+1
-use	TParseContext__addConstVectorNode	ppuVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar4\ =\ \*ppuVar2;$	+1
-use	TParseContext__addConstVectorNode	ppuVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar1\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar4\ \+\ \-1,0,ppuVar2\);$	+2
 local	TParseContext__addConstMatrixNode	param_2	columnIndex	INFERRED	matrix column selected (reset to 0 when out of range)
 local	TParseContext__addConstMatrixNode	param_4	line	INFERRED	source line for error messages and addConstantUnion
 local	TParseContext__addConstMatrixNode	iVar4	columnOffset	INFERRED	column index actually used (0 after an out-of-range error)

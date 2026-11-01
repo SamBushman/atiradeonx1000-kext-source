@@ -3410,36 +3410,21 @@ int __ZN14TGenericLinkerC2Ei(this, debugOptions)
   void *this;
   int debugOptions;
 {
-  int atomicStore;
   undefined *emptyRep;
   int *emptyRepRefCount;
   undefined4 *allocation;
   void *bindingTable;
   int lastStageSlot;
-  char reservation;
-  byte cr0Reg;
   
   *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
   emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
   emptyRepRefCount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   allocation[1] = 4;
   *allocation = emptyRep + 0xc;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   allocation[2] = emptyRep + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
@@ -3473,36 +3458,21 @@ int __ZN14TGenericLinkerC1Ei(this, debugOptions)
   void *this;
   int debugOptions;
 {
-  int atomicStore;
   undefined *emptyRep;
   int *emptyRepRefCount;
   undefined4 *allocation;
   void *bindingTable;
   int lastStageSlot;
-  char reservation;
-  byte cr0Reg;
   
   *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
   emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
   emptyRepRefCount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   allocation[1] = 4;
   *allocation = emptyRep + 0xc;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   allocation[2] = emptyRep + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
@@ -3536,36 +3506,21 @@ int __ZN14TGenericLinkerC4Ei(this, debugOptions)
   void *this;
   int debugOptions;
 {
-  int atomicStore;
   undefined *emptyRep;
   int *emptyRepRefCount;
   undefined4 *allocation;
   void *bindingTable;
   int lastStageSlot;
-  char reservation;
-  byte cr0Reg;
   
   *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
   *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
   emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
   emptyRepRefCount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   allocation[1] = 4;
   *allocation = emptyRep + 0xc;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   allocation[2] = emptyRep + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
@@ -3621,14 +3576,11 @@ int __ZN14TGenericLinkerD4Ev(this, deleteFlag)
   uint deleteFlag;
 {
   int firstData;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int secondData;
   int *infoSinkData;
   void *bindingTable;
-  char reservation;
-  byte cr0Reg;
   undefined1 allocScratch [28];
   
   *(int *)this = TGenericLinkerVtablePtr_a7b7bba0 + 8;
@@ -3637,27 +3589,13 @@ int __ZN14TGenericLinkerD4Ev(this, deleteFlag)
   if (infoSinkData != (int *)0x0) {
     secondData = infoSinkData[2];
     refCountPtr = (int *)(secondData + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(secondData + -0xc),allocScratch);
     }
     firstData = *infoSinkData;
     refCountPtr = (int *)(firstData + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(firstData + -0xc),allocScratch);
     }

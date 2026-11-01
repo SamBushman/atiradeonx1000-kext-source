@@ -1,0 +1,2 @@
+names_S2.tsv:581	local	FUN_00003cd0	in_cr0	condReg0	CONFIRMED	Ghidra's modelling of CR0 after stwcx. (bit 1 = EQ = store succeeded)
+names_S2.tsv:580	local	FUN_00003cd0	in_RESERVE	reservationHeld	CONFIRMED	Ghidra's modelling of the lwarx/stwcx. reservation bit (retry loop)

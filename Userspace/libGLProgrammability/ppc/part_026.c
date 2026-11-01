@@ -2688,12 +2688,9 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_(this, text)
   void *this;
   unsigned char * text;
 {
-  int atomicStore;
   int *refCountPtr;
   undefined4 allocWord;
   int adoptedData;
-  char reservation;
-  byte cr0Reg;
   int globalAlloc [4];
   int srcPool;
   
@@ -2705,13 +2702,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_(this, text)
   }
   else {
     refCountPtr = (int *)(adoptedData + -4);
-    do {
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*refCountPtr + 1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(refCountPtr,1);
   }
   allocWord = *(undefined4 *)text;
   *(int *)((int)this + 4) = adoptedData;
@@ -2824,26 +2815,17 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS
   void *last;
   unsigned char * alloc;
 {
-  int atomicStore;
   int emptyRep;
   int *refCountPtr;
   int globalPool;
   ulong *rep;
   ulong length;
   ulong *newData;
-  char reservation;
-  byte cr0Reg;
   
   if ((first == last) &&
      (globalPool = GetGlobalPoolAllocator(), emptyRep = (*(int *)&emptyStringRepPtr_a7b7b71c), *(int *)alloc == globalPool)) {
     refCountPtr = (int *)((*(int *)&emptyStringRepPtr_a7b7b71c) + 8);
-    do {
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*refCountPtr + 1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(refCountPtr,1);
     return (char *)(emptyRep + 0xc);
   }
   if (first == (void *)0x0) {

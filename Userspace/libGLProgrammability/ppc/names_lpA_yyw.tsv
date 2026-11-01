@@ -117,7 +117,6 @@ use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the 
 use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(uint\ \*\)local_878\ \+\ 0x1c\)\)\(local_878\);$@2	+2
 use	yyparse	piVar61	argType	INFERRED	argument type from the parameter list	^\s*piVar61\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ iVar55\ \*\ 4\);$	+3
 use	yyparse	piVar61	emptyRepRefCount	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*piVar61\ =\ \(int\ \*\)\(iVar55\ \+\ 8\);$	+1
-use	yyparse	piVar61	emptyRepRefCount	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar61\ \+\ 1,0,piVar61\);$	+2
 use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(local_870\ \+\ 4\)\ \+\ uVar28\ \*\ 8\);$	+2
 use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*\(piVar61,puVar18,param_3,param_4,param_5,pTVar33,iVar54\);$	+5
 use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ 0x10\)\ \+\ 4\)\ \+\ iVar55\);$@2	+2
@@ -218,7 +217,6 @@ use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive afte
 use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*if\ \(!bVar37\)\ \{$@4	+1
 use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@14	+1
 use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*if\ \(!bVar37\)\ \{$@5	+1
-use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ iVar55;$	+1
 use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)$@2	+1
 use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;$	+2
 use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_7ec\ =\ pTVar3;$	+8
@@ -355,8 +353,6 @@ use	yyparse	pTVar34	constructorIdentifierUserDefWordc	INFERRED	named after the s
 use	yyparse	pTVar34	constructorIdentifierUserDefWordc	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar7\ \+\ 0x28\)\ =\ pTVar34;$	+1
 use	yyparse	uVar53	isMatrix22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar53\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$	+1
 use	yyparse	uVar53	isMatrix22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(uVar53\ \&\ 1\)\ <<\ 10\ \|$	+2
-use	yyparse	iVar54	storeWordConditionalIndexedResult	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar61\ \+\ 1,0,piVar61\);$	+2
-use	yyparse	iVar54	storeWordConditionalIndexedResult	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar50\ \+\ 1,0,piVar50\);$	+2
 use	yyparse	iVar54	newTypeWord8	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar54\ =\ \*\(int\ \*\)\(pTVar12\ \+\ 8\);$	+1
 use	yyparse	iVar54	newTypeWord8	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\[5\]\ =\ iVar54;$	+1
 use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$	+1

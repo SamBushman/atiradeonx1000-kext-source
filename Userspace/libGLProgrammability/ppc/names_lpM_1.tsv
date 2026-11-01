@@ -60,21 +60,9 @@ use	TParseContext__extensionErrorCheck	iVar10	extBehavior	INFERRED	behavior valu
 use	TParseContext__extensionErrorCheck	iVar10	extBehavior	INFERRED	behavior value read from the map node (+0x18): 1 require,2 enable,3 warn,... compared with 2 / 3	^\s*if\ \(iVar10\ ==\ 2\)\ \{$	+1
 use	TParseContext__extensionErrorCheck	iVar10	extBehavior	INFERRED	behavior value read from the map node (+0x18): 1 require,2 enable,3 warn,... compared with 2 / 3	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$@2	+1	lhs	none
 use	TParseContext__extensionErrorCheck	iVar10	extBehavior	INFERRED	behavior value read from the map node (+0x18): 1 require,2 enable,3 warn,... compared with 2 / 3	^\s*bVar1\ =\ iVar10\ ==\ 3;$	+1
-use	TParseContext__extensionErrorCheck	iVar10	newRefCount	INFERRED	atomic conditional store result for the std::string reference count decrement	^\s*iVar10\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-1,0,piVar4\);$	+1
-use	TParseContext__extensionErrorCheck	iVar10	newRefCount	INFERRED	atomic conditional store result for the std::string reference count decrement	^\s*\*piVar4\ =\ iVar10;$	+1
-use	TParseContext__extensionErrorCheck	iVar10	newRefCount	INFERRED	atomic conditional store result for the std::string reference count decrement	^\s*iVar10\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-1,0,piVar4\);$@2	+1
-use	TParseContext__extensionErrorCheck	iVar10	newRefCount	INFERRED	atomic conditional store result for the std::string reference count decrement	^\s*\*piVar4\ =\ iVar10;$@2	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar10\ =\ \*piVar4;$	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar5\ =\ storeWordConditionalIndexed\(iVar10\ \+\ \-1,0,piVar4\);$	+1
 use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*if\ \(iVar10\ <\ 1\)\ \{$	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar10\ =\ \*piVar4;$@2	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar5\ =\ storeWordConditionalIndexed\(iVar10\ \+\ \-1,0,piVar4\);$@2	+1
 use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*if\ \(iVar10\ <\ 1\)\ \{$@2	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar10\ =\ \*piVar4;$@3	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar5\ =\ storeWordConditionalIndexed\(iVar10\ \+\ \-1,0,piVar4\);$@3	+1
 use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*if\ \(iVar10\ <\ 1\)\ \{$@3	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar10\ =\ \*piVar4;$@4	+1
-use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*iVar5\ =\ storeWordConditionalIndexed\(iVar10\ \+\ \-1,0,piVar4\);$@4	+1
 use	TParseContext__extensionErrorCheck	iVar10	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement (destroy when < 1)	^\s*if\ \(iVar10\ <\ 1\)\ \{$@4	+1
 use	ParseSymbol	iVar11	levelsBegin	INFERRED	start of the symbol table level vector (*levelsVector); level index = (end-begin)>>2 - 1	^\s*iVar11\ =\ \*piVar3;$	+2
 use	ParseSymbol	iVar11	levelsBegin	INFERRED	start of the symbol table level vector (*levelsVector); level index = (end-begin)>>2 - 1	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar11\ \+\ iVar17\ \*\ 4\);$	+1
@@ -117,7 +105,6 @@ use	TParseContext__arraySetMaxSize	iVar3	lookedUpVariable	INFERRED	TVariable fou
 use	TParseContext__arraySetMaxSize	iVar3	lookedUpVariable	INFERRED	TVariable found by the second lookup (+0x18 of the find result)	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0x14\)\ ==\ 0\)\ \{$	+2
 use	TParseContext__arraySetMaxSize	iVar3	lookedUpVariable	INFERRED	TVariable found by the second lookup (+0x18 of the find result)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x24\);$	+1
 use	TParseContext__arraySetMaxSize	iVar3	lookedUpVariable	INFERRED	TVariable found by the second lookup (+0x18 of the find result)	^\s*\*\(int\ \*\*\)\(iVar3\ \+\ 0x38\)\ =\ piVar7;$	+1
-use	TParseContext__arraySetMaxSize	iVar3	atomicStore	INFERRED	storeWordConditionalIndexed result of the string refcount decrement	^\s*iVar3\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-1,0,piVar7\);$	+2
 use	TParseContext__arraySetMaxSize	iVar3	undeclaredNameRef	INFERRED	std::string returned by the intermSymbol vtable +0x60 call (name of the undeclared identifier)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x60\)\)\(param_2\);$	+1
 use	TParseContext__arraySetMaxSize	iVar3	undeclaredNameRef	INFERRED	std::string returned by the intermSymbol vtable +0x60 call (name of the undeclared identifier)	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ bVar9;$	+2
 use	TParseContext__executeInitializer	iVar8	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)local_ec\ \+\ 0x18\)\)$	+1
@@ -161,9 +148,6 @@ use	TParseContext__executeInitializer	iVar8	ptBasicType	CONFIRMED	*(publicType):
 use	TParseContext__executeInitializer	iVar8	ptBasicType	CONFIRMED	*(publicType): TPublicType.type compared with 1/2/3 (float/int/bool)	^\s*else\ if\ \(iVar8\ ==\ 3\)\ goto\ LAB_97b9e3bc;$	+1
 use	TParseContext__executeInitializer	iVar8	constantUnionNodeArray	INFERRED	getAsConstantUnion() result whose first union element is copied (+0x30 = union array)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5,ppuVar13,local_12c,1\);$	+2
 use	TParseContext__executeInitializer	iVar8	constantUnionNodeArray	INFERRED	getAsConstantUnion() result whose first union element is copied (+0x30 = union array)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5\);$@2	+2
-use	TParseContext__executeInitializer	iVar8	oldRefCount	INFERRED	std::string copy-on-write release idiom (pool_allocator basic_string): P = data pointer - 4 is the _Rep refcount word, old = *P is read, then an lwarx/stwcx loop stores old - 1 through storeWordConditionalIndexed; old < 1 means the last reference, so the rep is destroyed	^\s*iVar8\ =\ \*piVar5;$@1	+9	all	all
-use	TParseContext__executeInitializer	iVar8	oldRefCount	INFERRED	std::string copy-on-write release idiom (pool_allocator basic_string): P = data pointer - 4 is the _Rep refcount word, old = *P is read, then an lwarx/stwcx loop stores old - 1 through storeWordConditionalIndexed; old < 1 means the last reference, so the rep is destroyed	^\s*iVar8\ =\ \*piVar6;$@1	+50	all	all
-use	TParseContext__executeInitializer	iVar8	oldRefCount	INFERRED	std::string copy-on-write release idiom (pool_allocator basic_string): P = data pointer - 4 is the _Rep refcount word, old = *P is read, then an lwarx/stwcx loop stores old - 1 through storeWordConditionalIndexed; old < 1 means the last reference, so the rep is destroyed	^\s*iVar8\ =\ \*piVar5;$@3	+7	all	all
 use	TParseContext__executeInitializer	iVar8	reservedErrorCheckResult	INFERRED	every definition of the web is the result of a call to TParseContext__reservedErrorCheck	^\s*iVar8\ =\ TParseContext__reservedErrorCheck\(this,param_2,param_3\);$@1	+1	all	all
 use	TParseContext__executeInitializer	iVar8	levelsBegin2	INFERRED	start of the symbol table level vector	^\s*iVar8\ =\ \*piVar26;$	+2
 use	TParseContext__executeInitializer	iVar8	levelsBegin2	INFERRED	start of the symbol table level vector	^\s*iVar28\ =\ \*\(int\ \*\)\(iVar8\ \+\ iVar22\ \*\ 4\);$	+1
@@ -610,48 +594,18 @@ use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loa
 use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@6	+1
 use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@9	+1
 use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@7	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar4;$	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar4\);$	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar4;$@2	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar4\);$@2	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@6	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@6	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@2	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@2	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@2	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@3	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@3	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@3	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@4	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@4	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@4	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@5	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@5	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@5	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@7	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@7	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$@2	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@8	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@8	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@6	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@9	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@9	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@7	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar4;$@3	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar4\);$@3	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$@3	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@10	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@10	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@8	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@11	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@11	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@9	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@12	+1
-use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@12	+1
 use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@10	+1
 use	TIntermConstantUnion__fold	puVar8	typeVtable	INFERRED	TType vtable pointer	^\s*puVar8\ =\ \&TType__vtable;$	+1
 use	TIntermConstantUnion__fold	puVar8	typeVtable	INFERRED	TType vtable pointer	^\s*puVar8\ =\ \(undefined\ \*\)\(local_4c\ \-\ 0x4744\);$	+1

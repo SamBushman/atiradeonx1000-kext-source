@@ -2821,7 +2821,6 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
   int functionIndex;
   int *refCountPtr;
   int oldRefCount;
-  int newRefCount;
   int name2;
   int name;
   int name3;
@@ -2877,7 +2876,6 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, stra
   unsigned char * childOperand;
   undefined4 *childCursor;
   void *operandTemp;
-  char reservation;
   byte cr0Reg;
   undefined8 resultAndR4Pair;
   uint opHeaderAndFlags [2];
@@ -3096,14 +3094,7 @@ operatorCodeCase0:
                *(undefined4 *)(this + 4),(uint)terminalChar,r10In0);
     refCountPtr = (int *)(stackTypeArraySize - 4);
     destroyAllocatorArg[0] = stackType;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = newRefCount;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(stackTypeArraySize - 0xc),destroyAllocatorArg);

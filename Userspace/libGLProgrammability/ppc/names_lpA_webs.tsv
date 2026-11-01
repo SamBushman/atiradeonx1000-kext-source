@@ -77,7 +77,6 @@ use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
 use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*\*\(unsigned\ char\ \*\*\)\(iVar8\ \+\ \-4\)\ =\ this_01;$	+1
 local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uStack_60	emptyParamName	INFERRED	name word of the empty TParameter pushed with _M_insert_aux
 local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uStack_5c	emptyParamType	INFERRED	type word of the empty TParameter pushed with _M_insert_aux
-use	TSymbolTableLevel__clone	iVar2	oldRefCount	INFERRED	refcount of the key string before the decrement	^\s*iVar2\ =\ \*piVar6;$	+2
 use	TSymbolTableLevel__clone	iVar2	oldRefCount	INFERRED	refcount of the key string before the decrement	^\s*if\ \(iVar2\ <\ 1\)\ \{$	+1
 local	TSymbolTableLevel__clone	in_r5	insertKeyPtr	INFERRED	pointer to the key/value pair passed to the tree insert
 use	TSymbolTableLevel__clone	local_6c	unusedInsertWord	INFERRED	word stored (0 then the insert result) and never read	^\s*local_6c\ =\ 0;$	+1

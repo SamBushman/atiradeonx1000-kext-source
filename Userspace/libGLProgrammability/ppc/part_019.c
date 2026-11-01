@@ -4816,12 +4816,9 @@ int std____throw_bad_typeid()
 int std____throw_logic_error(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -4830,14 +4827,7 @@ int std____throw_logic_error(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt11logic_errorC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -4849,12 +4839,9 @@ int std____throw_logic_error(str)
 int std____throw_domain_error(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -4863,14 +4850,7 @@ int std____throw_domain_error(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12domain_errorC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -4882,12 +4862,9 @@ int std____throw_domain_error(str)
 int std____throw_invalid_argument(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -4896,14 +4873,7 @@ int std____throw_invalid_argument(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt16invalid_argumentC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -4915,12 +4885,9 @@ int std____throw_invalid_argument(str)
 int std____throw_length_error(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -4929,14 +4896,7 @@ int std____throw_length_error(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12length_errorC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -4948,12 +4908,9 @@ int std____throw_length_error(str)
 int std____throw_out_of_range(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -4962,14 +4919,7 @@ int std____throw_out_of_range(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt12out_of_rangeC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -4981,12 +4931,9 @@ int std____throw_out_of_range(str)
 int std____throw_runtime_error(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -4995,14 +4942,7 @@ int std____throw_runtime_error(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt13runtime_errorC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -5014,12 +4954,9 @@ int std____throw_runtime_error(str)
 int std____throw_range_error(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -5028,14 +4965,7 @@ int std____throw_range_error(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt11range_errorC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -5047,12 +4977,9 @@ int std____throw_range_error(str)
 int std____throw_overflow_error(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -5061,14 +4988,7 @@ int std____throw_overflow_error(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt14overflow_errorC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
@@ -5080,12 +5000,9 @@ int std____throw_overflow_error(str)
 int std____throw_underflow_error(str)
   char *str;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *this;
-  char reservation;
-  byte cr0Reg;
   int messageString [4];
   unsigned char stringAllocator [16];
   undefined1 destroyAllocator [24];
@@ -5094,14 +5011,7 @@ int std____throw_underflow_error(str)
   this = (void *)___cxa_allocate_exception(8);
   __ZNSt15underflow_errorC1ERKSs(this,(unsigned char *)messageString);
   refCountPtr = (int *)(messageString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }

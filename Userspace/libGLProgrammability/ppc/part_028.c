@@ -65,13 +65,10 @@ int TIntermUnary__getOperand(this)
 int __ZN16TIntermAggregateD1Ev(this)
   void *this;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int nameData;
   unsigned char * symbolTable;
-  char reservation;
-  byte cr0Reg;
   undefined4 allocatorCopy [5];
   
   symbolTable = *(unsigned char
@@ -86,14 +83,7 @@ int __ZN16TIntermAggregateD1Ev(this)
   nameData = *(int *)((int)this + 0x58);
   allocatorCopy[0] = *(undefined4 *)((int)this + 0x54);
   refCountPtr = (int *)(nameData + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(nameData + -0xc),allocatorCopy);
@@ -107,13 +97,10 @@ int __ZN16TIntermAggregateD1Ev(this)
 int __ZN16TIntermAggregateD0Ev(this)
   void *this;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int nameData;
   unsigned char * symbolTable;
-  char reservation;
-  byte cr0Reg;
   undefined4 allocatorCopy [5];
   
   symbolTable = *(unsigned char
@@ -128,14 +115,7 @@ int __ZN16TIntermAggregateD0Ev(this)
   nameData = *(int *)((int)this + 0x58);
   allocatorCopy[0] = *(undefined4 *)((int)this + 0x54);
   refCountPtr = (int *)(nameData + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(nameData + -0xc),allocatorCopy);
@@ -354,26 +334,16 @@ int __ZN20TIntermConstantUnionD0Ev(this)
 int __ZN13TIntermSymbolD1Ev(this)
   void *this;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int nameData;
-  char reservation;
-  byte cr0Reg;
   undefined4 allocatorCopy [6];
   
   nameData = *(int *)((int)this + 0x38);
   allocatorCopy[0] = *(undefined4 *)((int)this + 0x34);
   *(undefined ***)this = &PTR_getLine_a7b7d390;
   refCountPtr = (int *)(nameData + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(nameData + -0xc),allocatorCopy);
@@ -387,26 +357,16 @@ int __ZN13TIntermSymbolD1Ev(this)
 int __ZN13TIntermSymbolD0Ev(this)
   void *this;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int nameData;
-  char reservation;
-  byte cr0Reg;
   undefined4 allocatorCopy [6];
   
   nameData = *(int *)((int)this + 0x38);
   allocatorCopy[0] = *(undefined4 *)((int)this + 0x34);
   *(undefined ***)this = &PTR_getLine_a7b7d390;
   refCountPtr = (int *)(nameData + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(nameData + -0xc),allocatorCopy);
@@ -563,26 +523,17 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_(this, 
   unsigned char * str;
   unsigned char * text;
 {
-  int atomicStore;
   int emptyRepStorage;
   int *emptyRepRefcount;
   uint newSize;
   size_t length;
   undefined4 poolAllocator;
   unsigned char *data;
-  char reservation;
-  byte cr0Reg;
   
   length = _strlen((char *)str);
   emptyRepStorage = emptyStringRepPtr_a7b7ba14;
   emptyRepRefcount = (int *)(emptyStringRepPtr_a7b7ba14 + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-      *emptyRepRefcount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefcount,1);
   poolAllocator = GetGlobalPoolAllocator();
   *(undefined4 *)this = poolAllocator;
   *(int *)(this + 4) = emptyRepStorage + 0xc;
@@ -812,26 +763,17 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__
   void *last;
   unsigned char * alloc;
 {
-  int atomicStore;
   int emptyRepStorage;
   int *emptyRepRefcount;
   int poolAllocator;
   ulong *rep;
   ulong length;
   ulong *repData;
-  char reservation;
-  byte cr0Reg;
   
   if ((first == last) &&
      (poolAllocator = GetGlobalPoolAllocator(), emptyRepStorage = emptyStringRepPtr_a7b7ba14, *(int *)alloc == poolAllocator)) {
     emptyRepRefcount = (int *)(emptyStringRepPtr_a7b7ba14 + 8);
-    do {
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-        *emptyRepRefcount = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    atomicAddWord(emptyRepRefcount,1);
     return (char *)(emptyRepStorage + 0xc);
   }
   length = (int)last - (int)first;
@@ -850,13 +792,10 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm(this, res)
   ulong res;
 {
   int oldData;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int data;
   undefined4 clonedData;
-  char reservation;
-  byte cr0Reg;
   undefined4 allocatorCopy [4];
   
   data = *(int *)((int)this + 4);
@@ -874,14 +813,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm(this, res)
                       );
     oldData = *(int *)((int)this + 4);
     refCountPtr = (int *)(oldData + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(oldData + -0xc),(unsigned char *)allocatorCopy);
@@ -922,12 +854,9 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_
   char *first;
   char *last;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   unsigned char *result;
-  char reservation;
-  byte cr0Reg;
   undefined4 tempAllocator;
   int tempData;
   undefined4 allocatorArg [4];
@@ -938,14 +867,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_
   result = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_)(this,i1,i2,tempData,tempData + *(int *)(tempData + -0xc));
   refCountPtr = (int *)(tempData + -4);
   allocatorCopy[0] = tempAllocator;
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(tempData + -0xc),allocatorCopy);
@@ -1144,7 +1066,6 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm(this, pos, len1
   ulong len2;
 {
   int oldData;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *data;
@@ -1153,8 +1074,6 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm(this, pos, len1
   void *tailSrc;
   size_t tailBytes;
   uint newSize;
-  char reservation;
-  byte cr0Reg;
   undefined4 allocatorCopy [8];
   
   data = *(void **)((int)this + 4);
@@ -1185,14 +1104,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm(this, pos, len1
     }
     oldData = *(int *)((int)this + 4);
     refCountPtr = (int *)(oldData + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(oldData + -0xc),allocatorCopy);
@@ -1245,7 +1157,6 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
   int freeListIndex;
   undefined *freeListBase;
   undefined4 *finish;
-  undefined4 atomicStore;
   undefined *forceNewFlagPtr;
   int oldSize;
   int len;
@@ -1257,7 +1168,6 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
   undefined4 xWord1;
   undefined4 *copyDest;
   uint lenBytes;
-  char reservation;
   byte cr0Flags;
   undefined4 *newFinish [2];
   undefined4 *newStart;
@@ -1280,22 +1190,10 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
         getenvResult = _getenv("GLIBCPP_FORCE_NEW");
         if (getenvResult == (char *)0x0) {
-          do {
-            if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + -1,0,forceNewFlagPtr);
-              *(undefined4 *)forceNewFlagPtr = atomicStore;
-              cr0Flags = 2;
-            }
-          } while (!(bool)(cr0Flags >> 1 & 1));
+          atomicAddWord(forceNewFlagPtr,-1);
         }
         else {
-          do {
-            if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + 1,0,forceNewFlagPtr);
-              *(undefined4 *)forceNewFlagPtr = atomicStore;
-              cr0Flags = 2;
-            }
-          } while (!(bool)(cr0Flags >> 1 & 1));
+          atomicAddWord(forceNewFlagPtr,1);
         }
       }
       freeListBase = PTR__S_free_list_a7b7c0e4;
@@ -1402,11 +1300,9 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
                 *this, unsigned char *node)
 
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int keyData;
-  char reservation;
   byte cr0Flags;
   undefined4 allocatorCopy [4];
   
@@ -1418,14 +1314,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
       keyData = *(int *)(node + 0x14);
       refCountPtr = (int *)(keyData + -4);
       node = *(unsigned char **)(node + 8);
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = atomicStore;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(keyData + -0xc),allocatorCopy);
@@ -1449,7 +1338,6 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
   undefined *freeListBase;
   undefined4 *finish;
   int oldFinish;
-  undefined4 atomicStore;
   undefined *forceNewFlagPtr;
   int oldSize;
   undefined4 *newStart;
@@ -1459,7 +1347,6 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
   uint lenBytes;
   undefined4 xValue;
   size_t frontBytes;
-  char reservation;
   byte cr0Flags;
   
   forceNewFlagPtr = PTR__S_force_new_a7b7c0e8;
@@ -1479,22 +1366,10 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
         getenvResult = _getenv("GLIBCPP_FORCE_NEW");
         if (getenvResult == (char *)0x0) {
-          do {
-            if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + -1,0,forceNewFlagPtr);
-              *(undefined4 *)forceNewFlagPtr = atomicStore;
-              cr0Flags = 2;
-            }
-          } while (!(bool)(cr0Flags >> 1 & 1));
+          atomicAddWord(forceNewFlagPtr,-1);
         }
         else {
-          do {
-            if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + 1,0,forceNewFlagPtr);
-              *(undefined4 *)forceNewFlagPtr = atomicStore;
-              cr0Flags = 2;
-            }
-          } while (!(bool)(cr0Flags >> 1 & 1));
+          atomicAddWord(forceNewFlagPtr,1);
         }
       }
       freeListBase = PTR__S_free_list_a7b7c0e4;

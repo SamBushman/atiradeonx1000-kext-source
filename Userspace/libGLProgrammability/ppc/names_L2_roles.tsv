@@ -80,53 +80,6 @@ use	_ReadToken	uVar3	byteValue	INFERRED	every definition is the result of a call
 use	_ReadToken	uVar3	byteValue	INFERRED	every definition is the result of a call whose name says it returns this	#48	+9	all	all
 use	_ReadToken	uVar3	byteValue	INFERRED	every definition is the result of a call whose name says it returns this	#75	+3	all	all
 use	_ReadToken	uVar3	byteValue	INFERRED	every definition is the result of a call whose name says it returns this	#98	+8	all	all
-use	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#225	+455	all	all
-use	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#78	+1	all	all
-use	TIntermediate__addUnaryMath	puVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#63	+1	all	all
-use	TIntermediate__addConversion	puVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#320	+1	all	all
-use	TIntermediate__addSwizzle	iVar4	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#71	+1	all	all
-use	TIntermBinary__promote	puVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#224	+117	all	all
-use	TIntermediate__promoteConstantUnion	puVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#106	+1	all	all
-use	OutputTreeText	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all
-use	OutputSymbol	iVar4	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#22	+1	all	all
-use	OutputBinary	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar2\);$	+1	all	all
-use	OutputUnary	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
-use	OutputAggregate	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#30	+1	all	all
-use	OutputSelection	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all
-use	OutputConstantUnion	puVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#110	+1	all	all
-use	ParseSymbol	puVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#198	+95	all	all
-use	ParseBinary	iVar1	atomicStore2	INFERRED	every definition is the result of a call whose name says it returns this	#60	+1	all	all
-use	ParseBinary	puVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#39	+49	all	all
-use	FUN_97b9907c	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+1	all	all
-use	ParseUnary	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#15	+28	all	all
-use	FUN_97b99274	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+1	all	all
-use	ParseSelection	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#22	+1	all	all
-use	FUN_97b9989c	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+1	all	all
-use	ParseLoop	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#22	+1	all	all
-use	FUN_97b99eb8	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+1	all	all
-use	ParseBranch	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#22	+1	all	all
-use	FUN_97b9a04c	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+1	all	all
-use	FUN_97b9a844	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#17	+1	all	all
-use	TParseContext__reservedErrorCheck	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#30	+15	all	all
-use	TParseContext__nonInitErrorCheck	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#154	+1	all	all
-use	TParseContext__extensionErrorCheck	iVar2	atomicStore2	INFERRED	every definition is the result of a call whose name says it returns this	#98	+148	all	all
-use	TParseContext__extensionErrorCheck	iVar5	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#138	+45	all	all
-use	TParseContext__addConstVectorNode	puVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#48	+1	all	all
-use	TParseContext__initializeExtensionBehavior	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#48	+1	all	all
-use	TParseContext__initializeExtensionBehavior	iVar3	atomicStore2	INFERRED	every definition is the result of a call whose name says it returns this	#66	+1	all	all
-use	_ShInitialize	iVar1	atomicStore2	INFERRED	every definition is the result of a call whose name says it returns this	#54	+13	all	all
-use	_ShInitialize	iVar3	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+10	all	all
-use	initializeSymbolTable	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#140	+57	all	all
-use	initializeSymbolTable	iVar3	atomicStore2	INFERRED	every definition is the result of a call whose name says it returns this	#77	+1	all	all
-use	_ShCompile	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#248	+47	all	all
-use	TSymbolTable__dump	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#27	+1	all	all
-use	__ZN9TFunctionD4Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#18	+1	all	all
-use	TSymbolTableLevel__clone	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#56	+1	all	all
-use	TSymbolTable__copyTable	uVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+10	all	all
-use	_CPPWarningToInfoLog	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#24	+1	all	all
-use	_StoreStr	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#23	+68	all	all
-use	_GetBehavior	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#37	+29	all	all
-use	_updateExtensionBehavior	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#38	+233	all	all
 use	_updateExtensionBehavior	uVar6	behavior2	INFERRED	every definition is the result of a call whose name says it returns this	#33	+141	all	all
 use	PrintAttribute	iVar3	copyEnd	INFERRED	every definition is the result of a call whose name says it returns this	#3	+74	all	all
 use	PrintParam	iVar2	copyEnd	INFERRED	every definition is the result of a call whose name says it returns this	#3	+214	all	all
@@ -157,10 +110,6 @@ use	BindingTable__FindUniformBindingByLocation	uVar3	bindingBasicSize	INFERRED	e
 use	BindingTable__GetString	iVar3	stringValue	INFERRED	every definition is the result of a call whose name says it returns this	#104	+68	all	all
 use	TGenericLinker__GetFullTableString	uVar1	remapTableString	INFERRED	every definition is the result of a call whose name says it returns this	#0	+8	all	all
 use	TGenericLinker__GetFullTableString	uVar2	bindingTableString	INFERRED	every definition is the result of a call whose name says it returns this	#1	+6	all	all
-use	__ZN14TGenericLinkerC2Ei	iVar4	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$	+10	all	all
-use	__ZN14TGenericLinkerC1Ei	iVar4	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$	+10	all	all
-use	__ZN14TGenericLinkerC4Ei	iVar4	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$	+10	all	all
-use	__ZN14TGenericLinkerD4Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar2\);$	+14	all	all
 use	__ZN11ParseSymbolC2ERKS_	uVar4	directIndex	INFERRED	every definition is the result of a call whose name says it returns this	#57	+2	all	all
 use	__ZN11ParseSymbolC1ERKS_	uVar4	directIndex	INFERRED	every definition is the result of a call whose name says it returns this	#57	+2	all	all
 use	__ZN11ParseSymbolC4ERKS_	uVar4	directIndex	INFERRED	every definition is the result of a call whose name says it returns this	#57	+2	all	all
@@ -177,10 +126,6 @@ use	ParseOperand__GetAsDestVar	uVar1	isMatrix	INFERRED	every definition is the r
 use	ParseOperand__GetAsSourceVar	iVar3	isMatrix	INFERRED	every definition is the result of a call whose name says it returns this	#36	+2	all	all
 use	ParseOperand__GetAsSourceVar	iVar3	logicalSize	INFERRED	every definition is the result of a call whose name says it returns this	#103	+2	all	all
 use	TPPStreamCompiler__getConstantAsSourceVar	iVar4	chunk	INFERRED	every definition is the result of a call whose name says it returns this	#21	+110	all	all
-use	__ZN17TPPStreamCompilerC2E11EShLanguagei	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+10	all	all
-use	__ZN17TPPStreamCompilerC1E11EShLanguagei	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+10	all	all
-use	__ZN17TPPStreamCompilerC4E11EShLanguagei	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+10	all	all
-use	__ZN17TPPStreamCompilerD4Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#57	+14	all	all
 use	GetChunkForSymbol	uVar7	builtInInitialSwizzle	INFERRED	every definition is the result of a call whose name says it returns this	#61	+20	all	all
 use	_InterpreterPackPixel	fVar2	floatValue	INFERRED	every definition is the result of a call whose name says it returns this	#79	+0	all	all
 use	_InterpreterPackPixel	fVar2	floatValue	INFERRED	every definition is the result of a call whose name says it returns this	#160	+3	all	all
@@ -470,27 +415,6 @@ use	_DetectConstantLoopsSimple	uVar9	isBadUsage	INFERRED	every definition is the
 use	_DetectConstantLoopsSimple	uVar9	isBadUsage	INFERRED	every definition is the result of a call whose name says it returns this	#180	+3	all	all
 use	_glp_dtostr	dVar10	floorResult	INFERRED	every definition is the result of a call whose name says it returns this	#47	+10	all	all
 use	_glp_dtostr	dVar9	floorResult2	INFERRED	every definition is the result of a call whose name says it returns this	#76	+27	all	all
-use	std____throw_logic_error	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_domain_error	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_invalid_argument	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_length_error	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_out_of_range	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_runtime_error	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_range_error	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_overflow_error	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	std____throw_underflow_error	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	__ZNSs4_Rep10_M_disposeERKSaIcE	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
-use	__ZNSs9_M_mutateEmmm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#36	+1	all	all
-use	__ZNSs4_Rep10_M_refcopyEv	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#3	+1	all	all
-use	__ZNSsC1ERKSs	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#12	+1	all	all
-use	__ZNSs4_Rep7_M_grabERKSaIcES2_	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	(iVar1|atomicStore) = \w*storeWordConditionalIndexed	+1	all	all
-use	__ZNSsC4ERKSs	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#12	+1	all	all
-use	__ZNSsD4Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#8	+1	all	all
-use	__ZNSs7reserveEm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
-use	__ZNSs6assignERKSs	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#12	+1	all	all
-use	__ZNSs4_Rep9_S_createEmRKSaIcE	uVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#23	+10	all	all
-use	__ZNSt11logic_errorD4Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar2\);$	+1	all	all
-use	__ZNSt13runtime_errorD4Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar2\);$	+1	all	all
 use	__Z21base_of_encoded_valuehP15_Unwind_Context	uVar3	regionStart	INFERRED	every definition is the result of a call whose name says it returns this	#14	+1	all	all
 use	_base_of_encoded_value	uVar3	regionStart	INFERRED	every definition is the result of a call whose name says it returns this	#14	+1	all	all
 use	_extract_cie_info	uVar6	lebValue	INFERRED	every definition is the result of a call whose name says it returns this	#12	+1	all	all
@@ -505,22 +429,6 @@ use	_search_object	uVar3	baseAddress	INFERRED	every definition is the result of 
 use	_search_object	uVar3	baseAddress	INFERRED	every definition is the result of a call whose name says it returns this	#59	+0	rhs	rhs
 use	__Unwind_Find_registered_FDE	uVar5	baseAddress	INFERRED	every definition is the result of a call whose name says it returns this	#44	+1	all	all
 use	_examine_objects	uVar5	baseAddress	INFERRED	every definition is the result of a call whose name says it returns this	#67	+1	all	all
-use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$	+1	all	all
-use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	iVar1	atomicStore2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar2\);$	+1	all	all
-use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	iVar5	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$	+1	all	all
-use	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar2\);$	+16	all	all
-use	__ZN16TIntermAggregateD1Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
-use	__ZN16TIntermAggregateD0Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
-use	__ZN13TIntermSymbolD1Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
-use	__ZN13TIntermSymbolD0Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
-use	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	iVar1 = storeWordConditionalIndexed\(\*piVar3 \+ 1,0,piVar3\);	+1	all	all
-use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
-use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	iVar1 = storeWordConditionalIndexed\(iVar3 \+ -1,0,piVar2\);	+1	all	all
-use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#33	+1	all	all
-use	std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux	uVar4	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#23	+10	all	all
-use	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#13	+1	all	all
-use	std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux	uVar8	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#19	+10	all	all
-use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#13	+1	all	all
 use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar5	chunkWordCount	INFERRED	every definition is the result of a call whose name says it returns this	#75	+3	all	all
 use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar5	chunkWordCount	INFERRED	every definition is the result of a call whose name says it returns this	#79	+0	rhs	rhs
 use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar5	chunkWordCount	INFERRED	every definition is the result of a call whose name says it returns this	#101	+4	all	all

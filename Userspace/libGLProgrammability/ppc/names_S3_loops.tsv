@@ -25,7 +25,6 @@ use	_byte_scan	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one
 use	_ReadToken	iVar2	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#72	+11	all	all
 use	_ReadToken	iVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#12	+98	all	all
 use	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	iVar9	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#39	+15	all	all
-use	TSymbolTable__copyTable	uVar5	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#50	+1	all	all
 use	__ZN12BindingTableC2Ej	uVar2	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#27	+8	all	all
 use	__ZN12BindingTableC2Ej	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+23	all	all
 use	__ZN12BindingTableC4Ej	uVar2	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#27	+8	all	all

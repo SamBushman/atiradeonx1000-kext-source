@@ -9,7 +9,6 @@ local	TIntermConstantUnion__fold	a3	infoSinkArg	INFERRED	copy of param_4 (infoSi
 local	TIntermConstantUnion__fold	a0	rightConstUnion	INFERRED	result of param_3->getAsConstantUnion() (vtable +0x18), vtable +0x38 getType and +0x40 getBasicType/getSize called on it
 local	TIntermConstantUnion__fold	local_4c	picBase	INFERRED	always 0xa7b81734, the PIC base from which TType vtable addresses are formed (local_4c - 0x473c)
 local	TIntermConstantUnion__fold	puVar15	resultBool	INFERRED	every definition is TPoolAllocator__allocate(...,4) followed by *puVar15 = a bool result
-local	TIntermConstantUnion__fold	in_RESERVE	reservation	INFERRED	Ghidra register-reservation flag of the lwarx/stwcx loop that decrements the std::string rep refcount
 local	TIntermConstantUnion__fold	local_1d0	unaryTypeVtbl	INFERRED	this->getType() copy in the unary-operation path (EOpNegative / EOpLogicalNot) - first word of the TType object (vtable pointer)
 local	TIntermConstantUnion__fold	local_1cc	unaryTypeWord1	UNKNOWN	word 1 of the TType copy
 local	TIntermConstantUnion__fold	local_1c8	unaryTypeWord2	UNKNOWN	word 2 of the TType copy
@@ -53,7 +52,6 @@ local	TIntermConstantUnion__fold	local_ec	tailTypeBits	INFERRED	TType bit-field 
 local	TIntermConstantUnion__fold	bVar32	reservationOk	INFERRED	lwarx/stwcx decrement loop of the std::string rep refcount: set to 2 once the conditional store succeeded, loop ends when bit 1 is set
 local	TIntermConstantUnion__fold	ppuVar29	refCountPtr	INFERRED	pointer to the std::string rep refcount word (string data pointer - 4), read and conditionally stored in the decrement loop
 local	TIntermConstantUnion__fold	ppuVar4	refCountPtrCopy	INFERRED	same refcount word pointer, copy used in the decrement loop of a second string temporary
-local	TIntermConstantUnion__fold	puVar2	newRefCount	INFERRED	result of storeWordConditionalIndexed(refcount - 1): the decremented refcount stored back
 local	TIntermConstantUnion__fold	pcVar30	message	CONFIRMED	every definition is a string literal ("Constant folding cannot be done for ...", "Invalid operator ...") appended to the info sink
 local	TIntermConstantUnion__fold	paVar20	stringRep	INFERRED	std::string data pointer - 12: the _Rep passed to _Rep::_M_destroy when the refcount drops to zero
 local	TIntermConstantUnion__fold	paVar22	locText	INFERRED	address of the "%d:%d" source-location sprintf buffer, passed as the std::string constructor text and as the allocator argument

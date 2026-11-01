@@ -1,4 +1,3 @@
-use	gld_readPixelsViaBlit	bVar42	loopExitFlagWord	INFERRED	bit 1 of the byte is tested by the do-while; set from (unitIndex==0)<<1 and later forced to 2	^\s*bVar42\ =\ \(iVar39\ ==\ 0\)\ <<\ 1;$	+1
 use	ffpsEmitDeclarations	iVar6	declContextTable	INFERRED	*(*(ctx+4)+0x10): table base the 0x2d48-offset halfword is compared against	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
 use	ffpsEmitDeclarations	iVar6	declContextTable	INFERRED	*(*(ctx+4)+0x10): table base the 0x2d48-offset halfword is compared against	^\s*if\ \(\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0xa00000\)\ !=\ 0\)\ \|\|$	+2
 use	ffpsEmitDeclarations	iVar6	ctxFieldCursor	INFERRED	starts at ctx and advances by 4 over the per-slot fields tested at +0x13f8	^\s*iVar6\ =\ param_1;$	+1

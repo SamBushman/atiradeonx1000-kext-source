@@ -20,13 +20,10 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   uint deleteFlags;
 {
   int stringRep;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int emptyTest;
   void *owned;
-  char reservation;
-  byte cr0Reg;
   undefined1 stringAllocator [24];
   
   *(int *)this = TPPStreamCompilerVtablePtr_a7b7bd98 + 8;
@@ -81,27 +78,13 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   }
   stringRep = *(int *)((int)this + 0xb8);
   refCountPtr = (int *)(stringRep + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringRep + -0xc),stringAllocator);
   }
   stringRep = *(int *)((int)this + 0xb0);
   refCountPtr = (int *)(stringRep + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringRep + -0xc),stringAllocator);
   }

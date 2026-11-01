@@ -466,14 +466,10 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, text)
   unsigned char * text;
 {
   int *refCountPtr;
-  int atomicStore;
-  int atomicStore2;
   int *srcRefCountPtr;
   int oldRefCount;
   int adoptedData;
   int oldData;
-  char reservation;
-  byte cr0Reg;
   int thisAlloc [4];
   int srcPool;
   
@@ -487,24 +483,11 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, text)
     }
     else {
       srcRefCountPtr = (int *)(adoptedData + -4);
-      do {
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(*srcRefCountPtr + 1,0,srcRefCountPtr);
-          *srcRefCountPtr = atomicStore;
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      atomicAddWord(srcRefCountPtr,1);
     }
     oldData = *(int *)((int)this + 4);
     refCountPtr = (int *)(oldData + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore2 = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore2;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(oldData + -0xc),(unsigned char *)thisAlloc);
@@ -1080,12 +1063,10 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
 
 {
   int firstData;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int secondData;
   unsigned char * leftChild;
-  char reservation;
   byte cr0Flags;
   undefined4 secondAlloc [4];
   undefined4 firstAlloc [5];
@@ -1098,14 +1079,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       secondData = *(int *)(node + 0x1c);
       refCountPtr = (int *)(secondData + -4);
       leftChild = *(unsigned char **)(node + 8);
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = atomicStore;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(secondData + -0xc),secondAlloc);
@@ -1113,14 +1087,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       firstData = *(int *)(node + 0x14);
       firstAlloc[0] = *(undefined4 *)(node + 0x10);
       refCountPtr = (int *)(firstData + -4);
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = atomicStore;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(firstData + -0xc),firstAlloc);

@@ -265,13 +265,10 @@ int __ZNSs7reserveEm(this, res)
   void *this;
   ulong res;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   undefined4 newData;
   int data;
-  char reservation;
-  byte cr0Reg;
   unsigned char allocatorTmp [20];
   
   data = *(int *)this;
@@ -289,14 +286,7 @@ int __ZNSs7reserveEm(this, res)
                        res - *(int *)(*(int *)this + -0xc));
     data = *(int *)this;
     refCountPtr = (int *)(data + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)allocatorTmp);
     }
@@ -518,13 +508,10 @@ int __ZNSs6assignERKSs(this, text)
   unsigned char * text;
 {
   int data;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   undefined4 newData;
   int textData;
-  char reservation;
-  byte cr0Reg;
   unsigned char allocatorTmp [44];
   
   if (*(int *)this + -0xc != *(int *)text + -0xc) {
@@ -534,14 +521,7 @@ int __ZNSs6assignERKSs(this, text)
     newData = __ZNSs4_Rep7_M_grabERKSaIcES2_((unsigned char *)(textData + -0xc),allocatorTmp);
     data = *(int *)this;
     refCountPtr = (int *)(data + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc));
     }
@@ -1013,12 +993,9 @@ int std__string___S_construct(n, c, alloc)
 {
   ulong *resultData;
   ulong *rep;
-  char reservation;
   
   if (n == 0) {
-    if (reservation != '\0') {
-      emptyStringRepRefcount_a7b7bf8c = storeWordConditionalIndexed(emptyStringRepRefcount_a7b7bf8c + 1,0,0xa7b7bf8c);
-    }
+    atomicAddWord(&emptyStringRepRefcount_a7b7bf8c,1);
     resultData = (ulong *)&emptyStringRepData_freeListBase_a7b7bf90;
   }
   else {

@@ -4406,7 +4406,6 @@ extern int rsq();
 extern int s();
 extern double sin();
 extern int sop();
-extern int storeWordConditionalIndexed();
 extern int te();
 extern int thunk_FUN_00053b60();
 extern int thunk_FUN_00054a90();

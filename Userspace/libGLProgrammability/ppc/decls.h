@@ -1899,7 +1899,6 @@ extern int pop();
 extern int reset();
 extern int s();
 extern int sine();
-extern int storeWordConditionalIndexed();
 extern unsigned char typeQualifierConstInit_97c356fc;
 extern unsigned char typeQualifierAttributeInit_97c35718;
 extern unsigned char typeQualifierUniformInit_97c35750;

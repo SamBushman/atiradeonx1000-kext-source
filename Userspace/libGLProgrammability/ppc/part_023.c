@@ -160,27 +160,15 @@ int std____default_alloc_template_true_0___allocate(n)
   uint freeListOffset;
   int getenvResult;
   undefined4 *result;
-  char reservation;
-  byte cr0Reg;
   undefined1 lock [28];
   
   if (_S_force_new == 0) {
     getenvResult = _getenv("GLIBCPP_FORCE_NEW");
     if (getenvResult == 0) {
-      do {
-        if (reservation != '\0') {
-          _S_force_new = storeWordConditionalIndexed(_S_force_new + -1,0,0xa7b7c00c);
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      atomicAddWord(&_S_force_new,-1);
     }
     else {
-      do {
-        if (reservation != '\0') {
-          _S_force_new = storeWordConditionalIndexed(_S_force_new + 1,0,0xa7b7c00c);
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      atomicAddWord(&_S_force_new,1);
     }
   }
   if ((n < 0x81) && (_S_force_new < 1)) {
@@ -212,7 +200,6 @@ int std__allocator_char___allocate(alloc, n)
   uint freeListOffset;
   undefined4 *result;
   int getenvResult;
-  char reservation;
   byte cr0Flags;
   undefined1 lock [28];
   
@@ -222,24 +209,10 @@ int std__allocator_char___allocate(alloc, n)
     if (__default_alloc_template_true_0____S_force_new == 0) {
       getenvResult = _getenv("GLIBCPP_FORCE_NEW");
       if (getenvResult == 0) {
-        do {
-          if (reservation != '\0') {
-            __default_alloc_template_true_0____S_force_new =
-                 storeWordConditionalIndexed
-                           (__default_alloc_template_true_0____S_force_new + -1,0,0xa7b7c00c);
-            cr0Flags = 2;
-          }
-        } while (!(bool)(cr0Flags >> 1 & 1));
+        atomicAddWord(&__default_alloc_template_true_0____S_force_new,-1);
       }
       else {
-        do {
-          if (reservation != '\0') {
-            __default_alloc_template_true_0____S_force_new =
-                 storeWordConditionalIndexed
-                           (__default_alloc_template_true_0____S_force_new + 1,0,0xa7b7c00c);
-            cr0Flags = 2;
-          }
-        } while (!(bool)(cr0Flags >> 1 & 1));
+        atomicAddWord(&__default_alloc_template_true_0____S_force_new,1);
       }
     }
     if ((n < (void *)0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
@@ -635,25 +608,15 @@ int __ZNSt11logic_errorD4Ev(this, deleteFlag)
   void *this;
   uint deleteFlag;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int stringData;
-  char reservation;
-  byte cr0Reg;
   undefined1 allocScratch [20];
   
   stringData = *(int *)((int)this + 4);
   *(int *)this = logicErrorVtablePtr_a7b7c014 + 8;
   refCountPtr = (int *)(stringData + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringData + -0xc),allocScratch);
   }

@@ -619,12 +619,10 @@ int TSymbolTable__dump(this, infoSink)
   unsigned char * this;
   unsigned char * infoSink;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   unsigned char * sinkBase;
   int levelIdx;
-  char reservation;
   byte cr0Flags;
   undefined4 levelNumStrAlloc;
   int levelNumStrData;
@@ -646,14 +644,7 @@ int TSymbolTable__dump(this, infoSink)
                 (sinkBase,(unsigned char *)&levelNumStrAlloc);
       refCountPtr = (int *)(levelNumStrData + -4);
       destroyAlloc[0] = levelNumStrAlloc;
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = atomicStore;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(levelNumStrData + -0xc),destroyAlloc);
@@ -693,12 +684,9 @@ int __ZN9TFunctionD4Ev(this)
 {
   int *refCountPtr;
   int oldRefCount;
-  int atomicStore;
   int paramEnd;
   int *paramType;
   int paramPtr;
-  char reservation;
-  byte cr0Reg;
   undefined4 destroyAlloc [5];
   
   paramPtr = *(int *)((int)this + 0x10);
@@ -714,14 +702,7 @@ int __ZN9TFunctionD4Ev(this)
   paramEnd = *(int *)((int)this + 0x48);
   destroyAlloc[0] = *(undefined4 *)((int)this + 0x44);
   refCountPtr = (int *)(paramEnd + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(paramEnd + -0xc),destroyAlloc);
@@ -1193,8 +1174,6 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   uint paramIdx;
   char *nameText;
   unsigned char * srcParamType;
-  char reservation;
-  byte cr0Reg;
   undefined4 emptyParamName;
   undefined4 emptyParamType;
   undefined4 stringAllocator [4];
@@ -1209,13 +1188,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(undefined4 *)((int)this + 0x14) = 0;
   emptyRepRefCount = (int *)(emptyRep + 8);
   *(undefined ***)((int)this + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d590;
-  do {
-    if (reservation != '\0') {
-      srcParams = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = srcParams;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = emptyRep + 0xc;
@@ -1292,8 +1265,6 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   uint paramIdx;
   char *nameText;
   unsigned char * srcParamType;
-  char reservation;
-  byte cr0Reg;
   undefined4 emptyParamName;
   undefined4 emptyParamType;
   undefined4 stringAllocator [4];
@@ -1308,13 +1279,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(undefined4 *)((int)this + 0x14) = 0;
   emptyRepRefCount = (int *)(emptyRep + 8);
   *(undefined ***)((int)this + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d590;
-  do {
-    if (reservation != '\0') {
-      srcParams = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = srcParams;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = emptyRep + 0xc;
@@ -1391,8 +1356,6 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   uint paramIdx;
   char *nameText;
   unsigned char * srcParamType;
-  char reservation;
-  byte cr0Reg;
   undefined4 emptyParamName;
   undefined4 emptyParamType;
   undefined4 nameCtorAlloc [4];
@@ -1407,13 +1370,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(undefined4 *)((int)this + 0x14) = 0;
   emptyRepRefCount = (int *)(emptyRep + 8);
   *(undefined ***)((int)this + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d590;
-  do {
-    if (reservation != '\0') {
-      srcParams = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-      *emptyRepRefCount = srcParams;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefCount,1);
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = emptyRep + 0xc;
@@ -1488,7 +1445,6 @@ int TSymbolTableLevel__clone(this, map)
 {
   int headerOrNewRefCount;
   int *refCountPtr;
-  int atomicStore;
   int oldRefCount;
   unsigned char * poolAllocator;
   undefined4 *newLevel;
@@ -1499,8 +1455,6 @@ int TSymbolTableLevel__clone(this, map)
   undefined4 staleR6;
   undefined4 staleR7;
   undefined4 staleR8;
-  char reservation;
-  byte cr0Reg;
   int iter [4];
   int treeEnd;
   undefined4 insertIter;
@@ -1541,15 +1495,7 @@ int TSymbolTableLevel__clone(this, map)
       refCountPtr = (int *)(nameCopyData + -4);
       unusedInsertWord = insertResultData;
       destroyAlloc[0] = nameCopyAlloc;
-      do {
-        oldRefCount = *refCountPtr;
-        headerOrNewRefCount = oldRefCount + -1;
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(headerOrNewRefCount,0,refCountPtr);
-          *refCountPtr = atomicStore;
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(nameCopyData + -0xc),destroyAlloc);
@@ -1568,13 +1514,10 @@ int TSymbolTable__copyTable(this, symbolTable)
 {
   undefined *freeListPtr;
   int getenvResult;
-  undefined4 atomicStore;
   undefined *forceNewPtr;
   int vecFinish;
   undefined4 *treeHeader;
   uint loopIndex;
-  char reservation;
-  byte cr0Reg;
   undefined4 *typeMap;
   int typeMapCount;
   undefined4 clonedLevel [5];
@@ -1584,22 +1527,10 @@ int TSymbolTable__copyTable(this, symbolTable)
   if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
     getenvResult = _getenv("GLIBCPP_FORCE_NEW");
     if (getenvResult == 0) {
-      do {
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(*(int *)forceNewPtr + -1,0,forceNewPtr);
-          *(undefined4 *)forceNewPtr = atomicStore;
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      atomicAddWord(forceNewPtr,-1);
     }
     else {
-      do {
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(*(int *)forceNewPtr + 1,0,forceNewPtr);
-          *(undefined4 *)forceNewPtr = atomicStore;
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      atomicAddWord(forceNewPtr,1);
     }
   }
   freeListPtr = PTR__S_free_list_a7b7c0e4;
@@ -1781,7 +1712,6 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   uint findFunctionResultWord4c;
   uint basicType3;
   int newTypeWord8;
-  int storeWordConditionalIndexedResult;
   uint isMatrix22;
   unsigned char *constructorIdentifierUserDefWordc;
   unsigned char *constructorIdentifierUserDefWord20;
@@ -1849,8 +1779,6 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int *refCountPtr3;
   int oldRefCount5;
   int oldRefCount4;
-  int newRefCount4;
-  int newRefCount5;
   int nextUniqueId2;
   unsigned char * addSymbolResult;
   undefined8 addBranchResult;
@@ -1937,7 +1865,6 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int isMatrix;
   int isVector;
   char *leftBracketLine;
-  uint newRefCount;
   uint oldRefCount;
   unsigned char * refCountPtr;
   int *symbolTable;
@@ -2056,7 +1983,6 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int paramList;
   int *callTarget;
   char *opName;
-  char reservation;
   byte cr0;
   ulonglong yylexResult;
   undefined8 nodePair;
@@ -2465,14 +2391,7 @@ setYyruleByteOffset:
       refCountPtr = typeTmp2BitsOrPub3Qualifier + -4;
       typeTmp2ArraySizeOrPubUserDef = typeTmp2Word14OrPubUserDef2;
       typeTmp3VtableOrPub3Array = typeTmp2Word20OrPub3Type;
-      do {
-        oldRefCount = *(uint *)refCountPtr;
-        if (reservation != '\0') {
-          newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-          *(uint *)refCountPtr = newRefCount;
-          cr0 = 2;
-        }
-      } while (!(bool)(cr0 >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if ((int)oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(typeTmp2BitsOrPub3Qualifier + -0xc),&typeTmp3VtableOrPub3Array);
@@ -2949,14 +2868,7 @@ setTypeTmp2VtableOrPubArray:
     }
     refCountPtr2 = (int *)(typeTmp5ArraySizeOrStr4Data + -4);
     destroyAlloc1[0] = typeTmp5VtableOrStr4Alloc;
-    do {
-      oldRefCount4 = *refCountPtr2;
-      if (reservation != '\0') {
-        newRefCount4 = storeWordConditionalIndexed(oldRefCount4 + -1,0,refCountPtr2);
-        *refCountPtr2 = newRefCount4;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount4 = atomicAddWord(refCountPtr2,-1);
     typeTmp2TypeNameOrPubArray2 = typeNameString;
     if (oldRefCount4 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
@@ -2966,14 +2878,7 @@ setTypeTmp2VtableOrPubArray:
     typeTmp3VtableReg = picBase2 + -0x610c;
     destroyAlloc2[0] = typeStr3Alloc;
     refCountPtr2 = (int *)(typeTmp4BitsOrStr3Data - 4);
-    do {
-      oldRefCount4 = *refCountPtr2;
-      if (reservation != '\0') {
-        newRefCount4 = storeWordConditionalIndexed(oldRefCount4 + -1,0,refCountPtr2);
-        *refCountPtr2 = newRefCount4;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount4 = atomicAddWord(refCountPtr2,-1);
     yyvalNodeReg = yyvalNode;
     typeTmp2VtableOrPubArray = typeTmp3VtableReg;
     typeTmp7VtableReg = typeTmp3VtableReg;
@@ -3229,14 +3134,7 @@ loopSetTypeTmp3TypeNameOrTypeTmp4Vtable:
     refCountPtr = typeTmp2BitsOrPub3Qualifier + -4;
     destroyAlloc3[0] = typeTmp2Word20OrPub3Type;
     destroyRep = (unsigned char *)(typeTmp2BitsOrPub3Qualifier + -0xc);
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc3;
     typeTmp3VtableOrPub3Array = typeVtable2;
@@ -3263,14 +3161,7 @@ loopSetTypeTmp3TypeNameOrTypeTmp4Vtable:
     TParseContext__unaryOpError(parseContext,*(uint *)yyvsp,"++",scratchR6);
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyAlloc4[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       destroyAllocArg = destroyAlloc4;
 loopDestroyTypeTmp1StringRep:
@@ -3300,14 +3191,7 @@ loopDestroyTypeTmp1StringRep:
     TParseContext__unaryOpError(parseContext,*(uint *)yyvsp,"--",scratchR6);
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyAlloc5[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     destroyAllocArg = destroyAlloc5;
     if ((int)oldRefCount2 < 1) goto loopDestroyTypeTmp1StringRep;
 callTParseContext_recover:
@@ -3482,14 +3366,7 @@ yynCase6:
                    "built in unary operator function.  Type: %s",staleR8Value,typeTmp1ArraySizeCopy,scratchR10);
         refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
         destroyAlloc6[0] = typeTmp1VtableOrStr1Alloc;
-        do {
-          yyn = *(uint *)refCountPtr;
-          if (reservation != '\0') {
-            newRefCount = storeWordConditionalIndexed(yyn - 1,0,refCountPtr);
-            *(uint *)refCountPtr = newRefCount;
-            cr0 = 2;
-          }
-        } while (!(bool)(cr0 >> 1 & 1));
+        yyn = atomicAddWord(refCountPtr,-1);
         scratchR4 = r4Out9;
         if ((int)yyn < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
@@ -3583,14 +3460,7 @@ setYyvalNodeReg2:
               ((unsigned char *)(functionCallHeaderFunction + 0x44),(unsigned char *)&typeTmp1TypeNameOrStr2Alloc);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc7[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc7);
@@ -3648,14 +3518,7 @@ setYyvalNodeReg2:
               ((unsigned char *)(functionCallHeaderWithParametersFunction + 0x44),(unsigned char *)&typeTmp1TypeNameOrStr2Alloc);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc8[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc8);
@@ -3702,13 +3565,7 @@ loopSetYyvalNodeReg:
       *(uint *)(newFunction + 0x34) = 0;
       *(uint *)(newFunction + 0x38) = 0;
       *(uint *)(newFunction + 0x3c) = 0;
-      do {
-        if (reservation != '\0') {
-          storeWordConditionalIndexedResult = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
-          *emptyRepRefCount = storeWordConditionalIndexedResult;
-          cr0 = 2;
-        }
-      } while (!(bool)(cr0 >> 1));
+      atomicAddWord(emptyRepRefCount,1);
       allocatorArg2 = GetGlobalPoolAllocator();
       *(uint *)(newFunction + 0x48) = emptyRep + 0xc;
       *(uint *)(newFunction + 0x44) = allocatorArg2;
@@ -3774,14 +3631,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyAlloc9[0] = typeTmp1VtableOrStr1Alloc;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
-    do {
-      oldRefCount3 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount3 = (unsigned char *)storeWordConditionalIndexed(oldRefCount3 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount3;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount3 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount3;
     destroyAllocArg = destroyAlloc9;
     yyvalTypeOrFunction = newFunction;
@@ -4051,14 +3901,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc10[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc10;
     goto checkStillShared3;
@@ -4085,14 +3928,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc11[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       destroyAllocArg = destroyAlloc11;
       goto callZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS2;
@@ -4129,14 +3965,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc12[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc12;
     goto checkStillShared3;
@@ -4191,14 +4020,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"*",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc13[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc13);
@@ -4206,14 +4028,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc14[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc14;
     goto checkStillShared;
@@ -4241,14 +4056,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"/",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc15[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc15);
@@ -4256,14 +4064,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc16[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc16;
     goto checkStillShared;
@@ -4291,14 +4092,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"%",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc17[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc17);
@@ -4306,14 +4100,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc18[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc18;
     goto checkStillShared;
@@ -4335,14 +4122,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"+",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc19[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc19);
@@ -4350,14 +4130,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc20[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc20;
     goto checkStillShared;
@@ -4379,14 +4152,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"-",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc21[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc21);
@@ -4394,14 +4160,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc22[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc22;
     goto checkStillShared;
@@ -4429,14 +4188,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"<<",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc23[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc23);
@@ -4444,14 +4196,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc24[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc24;
     goto checkStillShared;
@@ -4479,14 +4224,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),">>",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc25[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc25);
@@ -4494,14 +4232,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc26[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc26;
     goto checkStillShared;
@@ -4522,14 +4253,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"<",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc27[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc27);
@@ -4537,14 +4261,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc28[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc28;
     goto checkStillShared2;
@@ -4565,14 +4282,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),">",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc29[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc29);
@@ -4580,14 +4290,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc30[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc30;
     goto checkStillShared2;
@@ -4608,14 +4311,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"<=",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc31[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc31);
@@ -4623,14 +4319,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc32[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc32;
     goto checkStillShared2;
@@ -4651,14 +4340,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),">=",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc33[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc33);
@@ -4666,14 +4348,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc34[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc34;
     goto checkStillShared2;
@@ -4694,14 +4369,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"==",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc35[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc35);
@@ -4709,14 +4377,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc36[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc36;
     goto checkStillShared2;
@@ -4737,14 +4398,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"!=",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc37[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc37);
@@ -4752,14 +4406,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc38[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc38;
     goto checkStillShared2;
@@ -4787,14 +4434,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"&",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc39[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc39);
@@ -4802,14 +4442,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc40[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc40;
     goto checkStillShared;
@@ -4837,14 +4470,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"^",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc41[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc41);
@@ -4852,14 +4478,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc42[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc42;
     goto checkStillShared;
@@ -4887,14 +4506,7 @@ loopSetYyvalNodeReg:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"|",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc43[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc43);
@@ -4902,14 +4514,7 @@ loopSetYyvalNodeReg:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc44[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc44;
 checkStillShared:
@@ -4940,14 +4545,7 @@ loopCallTParseContext_recover2:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"&&",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc45[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc45);
@@ -4955,14 +4553,7 @@ loopCallTParseContext_recover2:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc46[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc46;
     goto checkStillShared2;
@@ -4983,14 +4574,7 @@ loopCallTParseContext_recover2:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"^^",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc47[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc47);
@@ -4998,14 +4582,7 @@ loopCallTParseContext_recover2:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc48[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount;
     destroyAllocArg = destroyAlloc48;
 checkStillShared2:
@@ -5056,14 +4633,7 @@ setTypeTmp1VtableCopy:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"||",&typeTmp1TypeNameOrStr2Alloc,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc49[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc49);
@@ -5071,14 +4641,7 @@ setTypeTmp1VtableCopy:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc50[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount < 1) {
       destroyAllocArg = destroyAlloc50;
       goto loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS22;
@@ -5122,14 +4685,7 @@ setTypeTmp1VtableCopy:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x84),":",scratchR6,typeTmp1VtableAddr);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc51[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount3 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount3 = (unsigned char *)storeWordConditionalIndexed(oldRefCount3 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount3;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount3 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount3 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc51);
@@ -5137,14 +4693,7 @@ setTypeTmp1VtableCopy:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc52[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount3 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount3 = (unsigned char *)storeWordConditionalIndexed(oldRefCount3 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount3;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount3 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount3;
     destroyAllocArg = destroyAlloc52;
     scratchR7 = (char *)typeTmp1VtableAddr;
@@ -5173,14 +4722,7 @@ setTypeTmp1VtableCopy:
     TParseContext__assignError(parseContext,*(uint *)(yyvsp + -0x2c),"assign",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc53[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc53);
@@ -5188,14 +4730,7 @@ setTypeTmp1VtableCopy:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc54[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if (0 < (int)oldRefCount2) goto loopCallTParseContext_recover2;
     destroyAllocArg = destroyAlloc54;
     goto loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS2;
@@ -5348,14 +4883,7 @@ setTypeTmp1VtableCopy:
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),",",scratchR6,scratchR7);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc55[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc55);
@@ -5363,14 +4891,7 @@ setTypeTmp1VtableCopy:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc56[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc56;
 checkStillShared3:
@@ -5474,14 +4995,7 @@ loopSetStackNode:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc58[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     stillShared = 0 < (int)oldRefCount2;
     destroyAllocArg = destroyAlloc58;
 loopSetYyvalNodeReg2:
@@ -5551,14 +5065,7 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc59[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     yyvalNodeReg = yyvalNode;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
@@ -5832,14 +5339,7 @@ loopCallZNSbIcSt11charTraitsIcE14poolAllocatorIcEE4Rep10MDestroyERKS23:
                  (char *)typeTmp1ArraySizeOrStr1Data,"",picBase,typeTmp1ArraySizeOrStr1Data,picBaseArg);
       refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
       destroyAlloc60[0] = typeTmp1VtableOrStr1Alloc;
-      do {
-        oldRefCount = *(uint *)refCountPtr;
-        if (reservation != '\0') {
-          newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-          *(uint *)refCountPtr = newRefCount;
-          cr0 = 2;
-        }
-      } while (!(bool)(cr0 >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if ((int)oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc60);
@@ -6112,14 +5612,7 @@ loopCallTParseContext_recover4:
                  (char *)typeTmp1ArraySizeOrStr1Data,"",picBase,typeTmp1ArraySizeOrStr1Data,picBaseArg);
       refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
       destroyAlloc61[0] = typeTmp1VtableOrStr1Alloc;
-      do {
-        oldRefCount = *(uint *)refCountPtr;
-        if (reservation != '\0') {
-          newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-          *(uint *)refCountPtr = newRefCount;
-          cr0 = 2;
-        }
-      } while (!(bool)(cr0 >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if ((int)oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc61);
@@ -6883,28 +6376,14 @@ setTypeTmp1BitsOrPubQualifier3:
     *(void **)(newType + 0x10) = fieldTypeName;
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc62[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc62);
     }
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyAlloc63[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc63);
@@ -6960,14 +6439,7 @@ setTypeTmp1BitsOrPubQualifier3:
     refCountPtr2 = (int *)(variableKeyStrData + -4);
     typeTmp1ArraySizeOrStr1Data = typeTmp1Word14OrStr2Data;
     destroyAlloc64[0] = variableKeyStrAlloc;
-    do {
-      oldRefCount4 = *refCountPtr2;
-      if (reservation != '\0') {
-        newRefCount4 = storeWordConditionalIndexed(oldRefCount4 + -1,0,refCountPtr2);
-        *refCountPtr2 = newRefCount4;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount4 = atomicAddWord(refCountPtr2,-1);
     if (oldRefCount4 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(variableKeyStrData + -0xc),destroyAlloc64);
@@ -7043,28 +6515,14 @@ setTypeTmp1BitsOrPubQualifier3:
     *(void **)(newType + 0x10) = fieldTypeName;
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc65[0] = typeTmp1TypeNameOrStr2Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1Word14OrStr2Data + -0xc),destroyAlloc65);
     }
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyAlloc66[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount = *(uint *)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-        *(uint *)refCountPtr = newRefCount;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc66);
@@ -7788,13 +7246,7 @@ storeParseContext2:
     *(undefined4 *)(newDeclNode + 0x48) = 0;
     refCountPtr4 = (int *)(emptyRep + 8);
     *(undefined4 *)(newDeclNode + 0x4c) = 0;
-    do {
-      if (reservation != '\0') {
-        storeWordConditionalIndexedResult = storeWordConditionalIndexed(*refCountPtr4 + 1,0,refCountPtr4);
-        *refCountPtr4 = storeWordConditionalIndexedResult;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    atomicAddWord(refCountPtr4,1);
     allocatorArg8 = GetGlobalPoolAllocator();
     *(int *)(newDeclNode + 0x58) = emptyRep + 0xc;
     *(undefined4 *)(newDeclNode + 0x68) = 0;
@@ -7819,14 +7271,7 @@ storeParseContext2:
                             (*(unsigned char **)parseContext,newDeclNode,addSymbolResult,*(uint *)yyvsp);
         refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
         destroyAlloc69[0] = typeTmp1VtableOrStr1Alloc;
-        do {
-          oldRefCount = *(uint *)refCountPtr;
-          if (reservation != '\0') {
-            newRefCount = storeWordConditionalIndexed(oldRefCount - 1,0,refCountPtr);
-            *(uint *)refCountPtr = newRefCount;
-            cr0 = 2;
-          }
-        } while (!(bool)(cr0 >> 1 & 1));
+        oldRefCount = atomicAddWord(refCountPtr,-1);
         if ((int)oldRefCount < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                     ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc69);
@@ -7884,14 +7329,7 @@ storeParseContext2:
         refCountPtr3 = (int *)(nodeKeyStrData + -4);
         typeTmp1ArraySizeOrStr1Data = typeTmp1Word14OrStr2Data;
         destroyAlloc68[0] = nodeKeyStrAlloc;
-        do {
-          oldRefCount5 = *refCountPtr3;
-          if (reservation != '\0') {
-            newRefCount5 = storeWordConditionalIndexed(oldRefCount5 + -1,0,refCountPtr3);
-            *refCountPtr3 = newRefCount5;
-            cr0 = 2;
-          }
-        } while (!(bool)(cr0 >> 1 & 1));
+        oldRefCount5 = atomicAddWord(refCountPtr3,-1);
         if (oldRefCount5 < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                     ((unsigned char *)(nodeKeyStrData + -0xc),destroyAlloc68);
@@ -7966,14 +7404,7 @@ storeParseContext2:
     (**(code **)(*aggregateNode + 0x68))(aggregateNode,&typeTmp1VtableOrStr1Alloc);
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyAlloc70[0] = typeTmp1VtableOrStr1Alloc;
-    do {
-      oldRefCount2 = *(unsigned char **)refCountPtr;
-      if (reservation != '\0') {
-        newRefCount2 = (unsigned char *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *(unsigned char **)refCountPtr = newRefCount2;
-        cr0 = 2;
-      }
-    } while (!(bool)(cr0 >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc70);
@@ -8094,14 +7525,7 @@ setFunctionHeader:
   refCountPtr2 = (int *)(symbolKeyStrData + -4);
   typeTmp1ArraySizeOrStr1Data = typeTmp1Word14OrStr2Data;
   destroyAlloc57[0] = symbolKeyStrAlloc;
-  do {
-    oldRefCount4 = *refCountPtr2;
-    if (reservation != '\0') {
-      newRefCount4 = storeWordConditionalIndexed(oldRefCount4 + -1,0,refCountPtr2);
-      *refCountPtr2 = newRefCount4;
-      cr0 = 2;
-    }
-  } while (!(bool)(cr0 >> 1 & 1));
+  oldRefCount4 = atomicAddWord(refCountPtr2,-1);
   stillShared = 0 < oldRefCount4;
   destroyAllocArg = destroyAlloc57;
   goto loopSetYyvalNodeReg2;

@@ -39,4 +39,3 @@ extern int __ZNSs4_Rep10_M_destroyERKSaIcE();
 extern int __ZNSsC1EPKcRKSaIcE();
 extern int _sprintf();
 extern int dyld_stub_binding_helper();
-extern int storeWordConditionalIndexed();

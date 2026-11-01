@@ -50,14 +50,12 @@ int _op_neg(param_1)
 int ParseBinary__errorReportTail__prefixErrorEntry_97b99088()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
   void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f99c));
@@ -73,14 +71,7 @@ int ParseBinary__errorReportTail__prefixErrorEntry_97b99088()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -94,14 +85,12 @@ int ParseBinary__errorReportTail__prefixErrorEntry_97b99088()
 int ParseBinary__errorReportTail__prefixUnimplementedEntry_97b990a0()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
   void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9b8));
@@ -117,14 +106,7 @@ int ParseBinary__errorReportTail__prefixUnimplementedEntry_97b990a0()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -138,14 +120,12 @@ int ParseBinary__errorReportTail__prefixUnimplementedEntry_97b990a0()
 int ParseBinary__errorReportTail__prefixNoteEntry_97b990ac()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
   void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9c8));
@@ -161,14 +141,7 @@ int ParseBinary__errorReportTail__prefixNoteEntry_97b990ac()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -182,7 +155,6 @@ int ParseBinary__errorReportTail__prefixNoteEntry_97b990ac()
 int ParseUnary__errorReportTail__prefixInternalErrorEntry_97b9928c()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   void *unaff_r27;
@@ -190,7 +162,6 @@ int ParseUnary__errorReportTail__prefixInternalErrorEntry_97b9928c()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f610));
@@ -206,14 +177,7 @@ int ParseUnary__errorReportTail__prefixInternalErrorEntry_97b9928c()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc));
   }
@@ -228,7 +192,6 @@ int ParseUnary__errorReportTail__prefixInternalErrorEntry_97b9928c()
 int ParseUnary__errorReportTail__prefixUnimplementedEntry_97b99298()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   void *unaff_r27;
@@ -236,7 +199,6 @@ int ParseUnary__errorReportTail__prefixUnimplementedEntry_97b99298()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f624));
@@ -252,14 +214,7 @@ int ParseUnary__errorReportTail__prefixUnimplementedEntry_97b99298()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc));
   }
@@ -274,7 +229,6 @@ int ParseUnary__errorReportTail__prefixUnimplementedEntry_97b99298()
 int ParseUnary__errorReportTail__prefixNoteEntry_97b992a4()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   void *unaff_r27;
@@ -282,7 +236,6 @@ int ParseUnary__errorReportTail__prefixNoteEntry_97b992a4()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f634));
@@ -298,14 +251,7 @@ int ParseUnary__errorReportTail__prefixNoteEntry_97b992a4()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc));
   }
@@ -320,7 +266,6 @@ int ParseUnary__errorReportTail__prefixNoteEntry_97b992a4()
 int ParseSelection__errorReportTail__prefixErrorEntry_97b998a8()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -328,7 +273,6 @@ int ParseSelection__errorReportTail__prefixErrorEntry_97b998a8()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8ef74));
@@ -344,14 +288,7 @@ int ParseSelection__errorReportTail__prefixErrorEntry_97b998a8()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -366,7 +303,6 @@ int ParseSelection__errorReportTail__prefixErrorEntry_97b998a8()
 int ParseSelection__errorReportTail__prefixUnimplementedEntry_97b998c0()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -374,7 +310,6 @@ int ParseSelection__errorReportTail__prefixUnimplementedEntry_97b998c0()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8ef90));
@@ -390,14 +325,7 @@ int ParseSelection__errorReportTail__prefixUnimplementedEntry_97b998c0()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -412,7 +340,6 @@ int ParseSelection__errorReportTail__prefixUnimplementedEntry_97b998c0()
 int ParseSelection__errorReportTail__prefixNoteEntry_97b998cc()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -420,7 +347,6 @@ int ParseSelection__errorReportTail__prefixNoteEntry_97b998cc()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8efa0));
@@ -436,14 +362,7 @@ int ParseSelection__errorReportTail__prefixNoteEntry_97b998cc()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -458,7 +377,6 @@ int ParseSelection__errorReportTail__prefixNoteEntry_97b998cc()
 int ParseLoop__errorReportTail__prefixErrorEntry_97b99ec4()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -466,7 +384,6 @@ int ParseLoop__errorReportTail__prefixErrorEntry_97b99ec4()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e958));
@@ -482,14 +399,7 @@ int ParseLoop__errorReportTail__prefixErrorEntry_97b99ec4()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -504,7 +414,6 @@ int ParseLoop__errorReportTail__prefixErrorEntry_97b99ec4()
 int ParseLoop__errorReportTail__prefixUnimplementedEntry_97b99edc()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -512,7 +421,6 @@ int ParseLoop__errorReportTail__prefixUnimplementedEntry_97b99edc()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e974));
@@ -528,14 +436,7 @@ int ParseLoop__errorReportTail__prefixUnimplementedEntry_97b99edc()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -550,7 +451,6 @@ int ParseLoop__errorReportTail__prefixUnimplementedEntry_97b99edc()
 int ParseLoop__errorReportTail__prefixNoteEntry_97b99ee8()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -558,7 +458,6 @@ int ParseLoop__errorReportTail__prefixNoteEntry_97b99ee8()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e984));
@@ -574,14 +473,7 @@ int ParseLoop__errorReportTail__prefixNoteEntry_97b99ee8()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -596,7 +488,6 @@ int ParseLoop__errorReportTail__prefixNoteEntry_97b99ee8()
 int ParseBranch__errorReportTail__prefixErrorEntry_97b9a058()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -604,7 +495,6 @@ int ParseBranch__errorReportTail__prefixErrorEntry_97b9a058()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7c4));
@@ -620,14 +510,7 @@ int ParseBranch__errorReportTail__prefixErrorEntry_97b9a058()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -642,7 +525,6 @@ int ParseBranch__errorReportTail__prefixErrorEntry_97b9a058()
 int ParseBranch__errorReportTail__prefixUnimplementedEntry_97b9a070()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -650,7 +532,6 @@ int ParseBranch__errorReportTail__prefixUnimplementedEntry_97b9a070()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7e0));
@@ -666,14 +547,7 @@ int ParseBranch__errorReportTail__prefixUnimplementedEntry_97b9a070()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -688,7 +562,6 @@ int ParseBranch__errorReportTail__prefixUnimplementedEntry_97b9a070()
 int ParseBranch__errorReportTail__prefixNoteEntry_97b9a07c()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   int unaff_r27;
@@ -696,7 +569,6 @@ int ParseBranch__errorReportTail__prefixNoteEntry_97b9a07c()
   uint unaff_r29;
   void *unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7f0));
@@ -712,14 +584,7 @@ int ParseBranch__errorReportTail__prefixNoteEntry_97b9a07c()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -735,7 +600,6 @@ int TParseContext__error__tail__prefixInternalErrorEntry_97b9a85c(param_1)
   void *param_1;
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r26;
@@ -744,7 +608,6 @@ int TParseContext__error__tail__prefixInternalErrorEntry_97b9a85c(param_1)
   void *pvVar5;
   int unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar6;
   
   __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8dfe4));
@@ -761,14 +624,7 @@ int TParseContext__error__tail__prefixInternalErrorEntry_97b9a85c(param_1)
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
   __ZN13TInfoSinkBase6appendEPKc(pvVar5,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar6 = 2;
-    }
-  } while (!(bool)(bVar6 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc));
   }
@@ -790,7 +646,6 @@ int TParseContext__error__tail__prefixUnimplementedEntry_97b9a868(param_1)
   void *param_1;
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r26;
@@ -799,7 +654,6 @@ int TParseContext__error__tail__prefixUnimplementedEntry_97b9a868(param_1)
   void *pvVar5;
   int unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar6;
   
   __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8dff8));
@@ -816,14 +670,7 @@ int TParseContext__error__tail__prefixUnimplementedEntry_97b9a868(param_1)
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
   __ZN13TInfoSinkBase6appendEPKc(pvVar5,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar6 = 2;
-    }
-  } while (!(bool)(bVar6 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc));
   }
@@ -845,7 +692,6 @@ int TParseContext__error__tail__prefixNoteEntry_97b9a874(param_1)
   void *param_1;
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r26;
@@ -854,7 +700,6 @@ int TParseContext__error__tail__prefixNoteEntry_97b9a874(param_1)
   void *pvVar5;
   int unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar6;
   
   __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8e008));
@@ -871,14 +716,7 @@ int TParseContext__error__tail__prefixNoteEntry_97b9a874(param_1)
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
   __ZN13TInfoSinkBase6appendEPKc(pvVar5,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar6 = 2;
-    }
-  } while (!(bool)(bVar6 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc));
   }
@@ -899,14 +737,12 @@ int TParseContext__error__tail__prefixNoteEntry_97b9a874(param_1)
 int _CPPWarningToInfoLog__prefixErrorEntry_97bae35c()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
   void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4c0));
@@ -922,14 +758,7 @@ int _CPPWarningToInfoLog__prefixErrorEntry_97bae35c()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -943,14 +772,12 @@ int _CPPWarningToInfoLog__prefixErrorEntry_97bae35c()
 int _CPPWarningToInfoLog__prefixInternalErrorEntry_97bae368()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
   void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4c8));
@@ -966,14 +793,7 @@ int _CPPWarningToInfoLog__prefixInternalErrorEntry_97bae368()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -987,14 +807,12 @@ int _CPPWarningToInfoLog__prefixInternalErrorEntry_97bae368()
 int _CPPWarningToInfoLog__prefixUnimplementedEntry_97bae374()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
   void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4dc));
@@ -1010,14 +828,7 @@ int _CPPWarningToInfoLog__prefixUnimplementedEntry_97bae374()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -1031,14 +842,12 @@ int _CPPWarningToInfoLog__prefixUnimplementedEntry_97bae374()
 int _CPPWarningToInfoLog__prefixNoteEntry_97bae380()
 {
   bool bVar1;
-  int iVar2;
   int *piVar3;
   int iVar4;
   char *unaff_r28;
   void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
-  char in_RESERVE;
   byte bVar5;
   
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4ec));
@@ -1054,14 +863,7 @@ int _CPPWarningToInfoLog__prefixNoteEntry_97bae380()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
   __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   piVar3 = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    iVar4 = *piVar3;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar4 + -1,0,piVar3);
-      *piVar3 = iVar2;
-      bVar5 = 2;
-    }
-  } while (!(bool)(bVar5 >> 1 & 1));
+  iVar4 = atomicAddWord(piVar3,-1);
   if (iVar4 < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }

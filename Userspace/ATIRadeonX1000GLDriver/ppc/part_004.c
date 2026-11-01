@@ -2529,7 +2529,6 @@ int gld_readPixelsViaBlit(ctx, rectX, rectY, width, height, format, pixelType, p
   int unitIndex;
   int ring;
   int hwFormat;
-  byte loopExitFlagWord;
   int targetsLeft;
   uint rowBytes;
   undefined1 layoutOut [4];
@@ -2847,7 +2846,6 @@ checkX1000:
       streamPtr = ((int (*)())gld_emitUnitObjectPacket)(ctx,0,unitIndex,streamPtr);
     }
     unitIndex = unitIndex + -1;
-    loopExitFlagWord = (unitIndex == 0) << 1;
     scratchInt24 = scratchInt24 + -4;
   } while (unitIndex != 0);
   packetRaw = (uint *)((int (*)())gld_emitUnitObjectPacket)(ctx,0,0,streamPtr);
@@ -4387,7 +4385,6 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
   int hwFormat;
   int ring;
   int scratchInt34;
-  byte scratchFlag35;
   int targetsLeft;
   double oneD;
   double quadWidthMinusOne;
@@ -4639,7 +4636,6 @@ callPthreadMutexLock:
           scratchUint25 = ((int (*)())gld_emitUnitObjectPacket)(ctx,0,unitIndex,scratchUint25);
         }
         unitIndex = unitIndex + -1;
-        scratchFlag35 = (unitIndex == 0) << 1;
         unitSlotPtr = unitSlotPtr + -4;
       } while (unitIndex != 0);
       packetRaw = (uint *)((int (*)())gld_emitUnitObjectPacket)(ctx,0,0,scratchUint25);

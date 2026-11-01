@@ -41,11 +41,7 @@ local	TIntermBinary__promote	local_68	typeTempStructure	INFERRED	structure point
 local	TIntermBinary__promote	local_70	typeTempOverlay	INFERRED	address-taken frame array: the getType() TType temporary and the sprintf/text buffer occupy the same slot in different lifetimes; apply_names cannot split address-taken locals
 local	TIntermBinary__promote	pcVar12	setTypeFn	INFERRED	TIntermTyped::setType (vtable +0x34)
 use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar3\ =\ local_a0\ \+\ \-1;$	+1
-use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar5\ =\ \*ppuVar3;$	+1
-use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar3\);$	+2
 use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar3\ =\ local_a0\ \+\ \-1;$@2	+1
-use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar5\ =\ \*ppuVar3;$@2	+1
-use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar3\);$@2	+2
 use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ extraout_r4;$	+1
 use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*if\ \(\(uVar9\ !=\ uVar6\)\ \&\&$@2	+3
 use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4,param_3,param_4,param_5,param_6,iVar7\);$	+1
@@ -131,8 +127,6 @@ use	OutputConstantUnion	uVar3	sourceLoc	INFERRED	w0 basic type of the constant (
 local	OutputConstantUnion	uVar6	getTypeResult	INFERRED	return value of the getType vtable call
 local	OutputConstantUnion	pcVar7	boolText	INFERRED	"true" or "false"
 use	OutputConstantUnion	ppuVar4	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*ppuVar4\ =\ local_1c0\[0\]\ \+\ \-1;$	+1
-use	OutputConstantUnion	ppuVar4	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*puVar5\ =\ \*ppuVar4;$	+1
-use	OutputConstantUnion	ppuVar4	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*puVar1\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar4\);$	+2
 local	OutputConstantUnion	in_f3	scratchF3	UNKNOWN	register leftover forwarded to _glp_dtostr
 local	OutputConstantUnion	in_f4	scratchF4	UNKNOWN	register leftover forwarded to _glp_dtostr
 local	OutputConstantUnion	in_f5	scratchF5	UNKNOWN	register leftover forwarded to _glp_dtostr

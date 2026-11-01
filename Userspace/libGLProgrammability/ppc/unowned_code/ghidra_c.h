@@ -104,6 +104,13 @@ extern vec16 vectorPermute(), vectorConditionalSelect();
 #define dataCacheBlockFlush(a) __asm__ __volatile__("dcbf 0,%0" :: "r"(a) : "memory")
 #define dataCacheBlockStore(a) __asm__ __volatile__("dcbst 0,%0" :: "r"(a) : "memory")
 #define dataCacheBlockTouch(a) __asm__ __volatile__("dcbt 0,%0" :: "r"(a) : "memory")
+/* lwarx/stwcx. atomic add: Ghidra shows the inline `lwarx rD,0,rP; add rT,rD,rK; stwcx. rT,0,rP; bne- retry` loop as a call to the pseudo-function
+ * storeWordConditionalIndexed plus an unwritten `reservation` flag and a hand-made retry loop (`if (reservation != 0) {...; crBits = 2;}`), which compiled as a call to a
+ * symbol that exists nowhere and read uninitialized variables. atomicAddWord(p, d) adds d to the word at p
+ * atomically and yields the word's OLD value (the lwarx result), exactly what the stock loop leaves in rD. */
+#define atomicAddWord(p, d) ({ int *aaw_p__ = (int *)(p); int aaw_old__, aaw_new__; \
+  __asm__ __volatile__("1: lwarx %0,0,%2\n\tadd %1,%0,%3\n\tstwcx. %1,0,%2\n\tbne- 1b" : "=&r"(aaw_old__), "=&r"(aaw_new__) : "r"(aaw_p__), "r"((int)(d)) : "cr0", "memory"); \
+  aaw_old__; })
 #define enforceInOrderExecutionIO() __asm__ __volatile__("eieio" ::: "memory")
 #define trap(x) __asm__ __volatile__("trap")
 #define halt_baddata() __builtin_trap()

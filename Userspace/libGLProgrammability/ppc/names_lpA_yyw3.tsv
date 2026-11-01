@@ -324,7 +324,6 @@ use	yyparse	piVar50	paramEntry	INFERRED	parameter / field entry object	^\s*\(piV
 use	yyparse	piVar50	paramEntry	INFERRED	parameter / field entry object	^\s*piVar50\ =\ \*\(int\ \*\*\)\(\*\(uint\ \*\)\(local_870\ \+\ 4\)\ \+\ uVar57\ \*\ 8\);$	+2
 use	yyparse	piVar50	paramEntry	INFERRED	parameter / field entry object	^\s*\(\*\*\(code\ \*\*\)\(iVar55\ \+\ 0x10\)\)\(piVar50,uVar16\);$	+1
 use	yyparse	piVar50	refCountPtr4	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*piVar50\ =\ \(int\ \*\)\(iVar55\ \+\ 8\);$	+1
-use	yyparse	piVar50	refCountPtr4	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar50\ \+\ 1,0,piVar50\);$	+2
 use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*uVar53\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar54\ \+\ 4\)\ \+\ \-0xc\);$	+2
 use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*if\ \(uVar53\ <=\ uVar58\)\ \{$	+1
 use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*iVar54\ =\ uVar53\ \-\ uVar58;$	+1
@@ -333,7 +332,6 @@ use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*if\ \(
 use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*iVar55\ =\ uVar28\ \-\ uVar53;$	+1
 use	yyparse	iVar54	qualifier1	INFERRED	TType::getQualifier() result	^\s*iVar54\ =\ \*piVar50;$	+4
 use	yyparse	iVar54	qualifier1	INFERRED	TType::getQualifier() result	^\s*local_84\ =\ iVar54;$	+1
-use	yyparse	iVar54	qualifier1	INFERRED	TType::getQualifier() result	^\s*\*piVar61\ =\ iVar54;$@3	+1
 use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar54\ =\ \(piVar61\[1\]\ \-\ iVar55\ >>\ 2\)\ \+\ \-1;$	+1
 use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar54\ =\ \(piVar50\[1\]\ \-\ iVar55\ >>\ 2\)\ \+\ \-1;$	+1
 use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar60\ =\ \*\(int\ \*\)\(iVar55\ \+\ iVar54\ \*\ 4\);$	+1

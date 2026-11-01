@@ -65,8 +65,6 @@ use	TIntermediate__promoteConstantUnion	pcVar5	newConstArray	INFERRED	freshly al
 use	TIntermediate__promoteConstantUnion	pcVar5	newConstArray	INFERRED	freshly allocated array of promoted components	^\s*uVar7\ =\ TIntermediate__addConstantUnion\(this,pcVar5,\(unsigned\ char\ \*\)\&local_80,iVar8\);$	+1
 local	TIntermediate__promoteConstantUnion	pcVar9	errorText	INFERRED	message appended to the internal error ("Cannot promote" / "Incorrect data type found")
 use	TIntermediate__promoteConstantUnion	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*ppuVar3\ =\ local_c0\[0\]\ \+\ \-1;$	+1
-use	TIntermediate__promoteConstantUnion	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*puVar4\ =\ \*ppuVar3;$	+1
-use	TIntermediate__promoteConstantUnion	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*puVar1\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar4\ \+\ \-1,0,ppuVar3\);$	+2
 use	TIntermediate__promoteConstantUnion	uVar6	srcBasicType	INFERRED	basic type of the constant being promoted; w2 raw source component; w3 node getLine() for the internal error	^\s*uVar6\ =\ local_9c\ >>\ 0x13\ \&\ 0x3f;$	+1
 use	TIntermediate__promoteConstantUnion	uVar6	srcBasicType	INFERRED	basic type of the constant being promoted; w2 raw source component; w3 node getLine() for the internal error	^\s*if\ \(uVar6\ ==\ 2\)\ \{$	+1
 use	TIntermediate__promoteConstantUnion	uVar6	srcBasicType	INFERRED	basic type of the constant being promoted; w2 raw source component; w3 node getLine() for the internal error	^\s*if\ \(2\ <\ uVar6\)\ \{$	+2

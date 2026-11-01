@@ -4413,11 +4413,8 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, language, debugOptions)
   undefined4 language;
   undefined4 debugOptions;
 {
-  int atomicStore;
   undefined *emptyRepStorage;
   int *emptyRepRefcount;
-  char reservation;
-  byte cr0Reg;
   
   *(undefined4 *)((int)this + 8) = language;
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
@@ -4430,22 +4427,10 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, language, debugOptions)
   ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
   emptyRepStorage = PTR__S_empty_rep_storage_a7b7c0f0;
   emptyRepRefcount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-      *emptyRepRefcount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefcount,1);
   *(undefined4 *)((int)this + 0xb4) = 4;
   *(undefined **)((int)this + 0xb0) = emptyRepStorage + 0xc;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-      *emptyRepRefcount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefcount,1);
   *(undefined4 *)((int)this + 0xbc) = 4;
   *(undefined **)((int)this + 0xb8) = emptyRepStorage + 0xc;
   *(undefined4 *)((int)this + 0xc0) = debugOptions;
@@ -4471,11 +4456,8 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, language, debugOptions)
   undefined4 language;
   undefined4 debugOptions;
 {
-  int atomicStore;
   undefined *emptyRepStorage;
   int *emptyRepRefcount;
-  char reservation;
-  byte cr0Reg;
   
   *(undefined4 *)((int)this + 8) = language;
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
@@ -4488,22 +4470,10 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, language, debugOptions)
   ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
   emptyRepStorage = PTR__S_empty_rep_storage_a7b7c0f0;
   emptyRepRefcount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-      *emptyRepRefcount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefcount,1);
   *(undefined4 *)((int)this + 0xb4) = 4;
   *(undefined **)((int)this + 0xb0) = emptyRepStorage + 0xc;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-      *emptyRepRefcount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefcount,1);
   *(undefined4 *)((int)this + 0xbc) = 4;
   *(undefined **)((int)this + 0xb8) = emptyRepStorage + 0xc;
   *(undefined4 *)((int)this + 0xc0) = debugOptions;
@@ -4529,11 +4499,8 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, language, debugOptions)
   undefined4 language;
   undefined4 debugOptions;
 {
-  int atomicStore;
   undefined *emptyRepStorage;
   int *emptyRepRefcount;
-  char reservation;
-  byte cr0Reg;
   
   *(undefined4 *)((int)this + 8) = language;
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
@@ -4546,22 +4513,10 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, language, debugOptions)
   ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
   emptyRepStorage = PTR__S_empty_rep_storage_a7b7c0f0;
   emptyRepRefcount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-      *emptyRepRefcount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefcount,1);
   *(undefined4 *)((int)this + 0xb4) = 4;
   *(undefined **)((int)this + 0xb0) = emptyRepStorage + 0xc;
-  do {
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*emptyRepRefcount + 1,0,emptyRepRefcount);
-      *emptyRepRefcount = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  atomicAddWord(emptyRepRefcount,1);
   *(undefined4 *)((int)this + 0xbc) = 4;
   *(undefined **)((int)this + 0xb8) = emptyRepStorage + 0xc;
   *(undefined4 *)((int)this + 0xc0) = debugOptions;

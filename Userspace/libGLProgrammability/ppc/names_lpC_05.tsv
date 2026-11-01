@@ -11,7 +11,6 @@ use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TInt
 use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ 0;$@2	+1
 use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ \*\(int\ \*\)\(pvVar6\ \+\ 8\);$@2	+1
 use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*\*\(int\ \*\)\(pvVar6\ \+\ 8\)\ =\ iVar4\ \+\ 4;$@2	+1
-use	TIntermediate__growAggregate	iVar5	atomicStore	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 1,0,piVar3\);$	+2
 use	TIntermediate__growAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ GetGlobalPoolAllocator\(\);$	+1
 use	TIntermediate__growAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*a0\[0x15\]\ =\ iVar5;$	+1
 local	TIntermediate__growAggregate	piVar3	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented
@@ -43,7 +42,6 @@ use	TIntermediate__makeAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TInt
 use	TIntermediate__makeAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*\*\(int\ \*\)\(this_01\ \+\ 8\)\ =\ iVar4\ \+\ 4;$	+1
 use	TIntermediate__makeAggregate	iVar4	nodeVtable	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*iVar4\ =\ \*a0;$	+1
 use	TIntermediate__makeAggregate	iVar4	nodeVtable	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*pcVar6\ =\ \*\(code\ \*\*\)\(iVar4\ \+\ 4\);$	+1
-use	TIntermediate__makeAggregate	iVar5	atomicStore	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 1,0,piVar3\);$	+2
 use	TIntermediate__makeAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ GetGlobalPoolAllocator\(\);$	+1
 use	TIntermediate__makeAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*a0\[0x15\]\ =\ iVar5;$	+1
 use	TIntermediate__makeAggregate	pcVar6	getSequenceFn	INFERRED	w1 TIntermAggregate::getSequence (vtable +100); w2 TIntermNode::setLine (vtable +4)	^\s*pcVar6\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 100\);$	+1

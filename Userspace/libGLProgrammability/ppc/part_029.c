@@ -24,11 +24,9 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
                 *this, unsigned char *node)
 
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int keyData;
-  char reservation;
   byte cr0Flags;
   undefined4 allocatorCopy [4];
   
@@ -40,14 +38,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
       keyData = *(int *)(node + 0x14);
       refCountPtr = (int *)(keyData + -4);
       node = *(unsigned char **)(node + 8);
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = atomicStore;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(keyData + -0xc),allocatorCopy);

@@ -81,7 +81,6 @@ int TIntermBinary__promote(this, infoSink, scratchR5, scratchR6, scratchR7, scra
   int leftMatrixFlag;
   int rightMatrixFlag;
   bool operandTypesMatch;
-  undefined *atomicStore;
   undefined **refCountPtr;
   undefined4 scratchR4;
   undefined *oldRefCount;
@@ -103,7 +102,6 @@ int TIntermBinary__promote(this, infoSink, scratchR5, scratchR6, scratchR7, scra
   undefined4 r4Out8;
   undefined4 r4Out9;
   code *setTypeFn;
-  char reservation;
   byte cr0Flags;
   undefined **stackType;
   int stackTypeArraySize;
@@ -303,14 +301,7 @@ checkOperandTypesMatch:
           *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
           __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
           refCountPtr = stackType + -1;
-          do {
-            oldRefCount = *refCountPtr;
-            if (reservation != '\0') {
-              atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-              *refCountPtr = atomicStore;
-              cr0Flags = 2;
-            }
-          } while (!(bool)(cr0Flags >> 1 & 1));
+          oldRefCount = atomicAddWord(refCountPtr,-1);
           if ((int)oldRefCount < 1) {
             __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),(unsigned char *)&stackTypeTypeName);
           }
@@ -419,14 +410,7 @@ setSetTypeFn:
             *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
             __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
             refCountPtr = stackType + -1;
-            do {
-              oldRefCount = *refCountPtr;
-              if (reservation != '\0') {
-                atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-                *refCountPtr = atomicStore;
-                cr0Flags = 2;
-              }
-            } while (!(bool)(cr0Flags >> 1 & 1));
+            oldRefCount = atomicAddWord(refCountPtr,-1);
             if ((int)oldRefCount < 1) {
               __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),&stackTypeTypeName);
             }
@@ -668,7 +652,6 @@ int TIntermConstantUnion__fold(this, op, rightOperand, infoSink, swapOperands, u
   float *rightFloats;
   unsigned char *thisComponentCursor;
   bool sizeFlag;
-  undefined *newRefCount;
   uint typeBit10;
   undefined **refCountPtrCopy;
   float leftValue;
@@ -726,7 +709,6 @@ int TIntermConstantUnion__fold(this, op, rightOperand, infoSink, swapOperands, u
   undefined **refCountPtr;
   char *message;
   bool canFold;
-  char reservation;
   byte reservationOk;
   int columnsLeft;
   undefined8 allocPair;
@@ -950,15 +932,7 @@ override_jmp_97b95640_case_0:
     refCountPtr = unaryTypeVtbl;
 code_r0x97b95b60:
     refCountPtrCopy = refCountPtr + -1;
-    do {
-      oldRefCount = *refCountPtrCopy;
-                    
-      if (reservation != '\0') {
-        newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtrCopy);
-        *refCountPtrCopy = newRefCount;
-        reservationOk = 2;
-      }
-    } while (!(bool)(reservationOk >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtrCopy,-1);
 joined_r0x97b95b7c:
     if ((int)oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(refCountPtr + -3),locText);
@@ -1024,14 +998,7 @@ override_jmp_97b9198c_case_0:
             __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
             refCountPtr = binaryTypeVtbl + -1;
             stringRep = (unsigned char *)(binaryTypeVtbl + -3);
-            do {
-              oldRefCount = *refCountPtr;
-              if (reservation != '\0') {
-                newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-                *refCountPtr = newRefCount;
-                reservationOk = 2;
-              }
-            } while (!(bool)(reservationOk >> 1 & 1));
+            oldRefCount = atomicAddWord(refCountPtr,-1);
             refCountPositive = 0 < (int)oldRefCount;
             goto code_r0x97b93fb8;
           }
@@ -1109,14 +1076,7 @@ LAB_97b919a8: ;
                 *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
                 refCountPtr = binaryTypeVtbl + -1;
-                do {
-                  oldRefCount = *refCountPtr;
-                  if (reservation != '\0') {
-                    newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-                    *refCountPtr = newRefCount;
-                    reservationOk = 2;
-                  }
-                } while (!(bool)(reservationOk >> 1 & 1));
+                oldRefCount = atomicAddWord(refCountPtr,-1);
                 if ((int)oldRefCount < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4Overlay);
                 }
@@ -1148,14 +1108,7 @@ LAB_97b919a8: ;
                 *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
                 refCountPtr = binaryTypeVtbl + -1;
-                do {
-                  oldRefCount = *refCountPtr;
-                  if (reservation != '\0') {
-                    newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-                    *refCountPtr = newRefCount;
-                    reservationOk = 2;
-                  }
-                } while (!(bool)(reservationOk >> 1 & 1));
+                oldRefCount = atomicAddWord(refCountPtr,-1);
                 if ((int)oldRefCount < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4Overlay);
                 }
@@ -1197,14 +1150,7 @@ LAB_97b919a8: ;
                 *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
                 refCountPtr = binaryTypeVtbl + -1;
-                do {
-                  oldRefCount = *refCountPtr;
-                  if (reservation != '\0') {
-                    newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-                    *refCountPtr = newRefCount;
-                    reservationOk = 2;
-                  }
-                } while (!(bool)(reservationOk >> 1 & 1));
+                oldRefCount = atomicAddWord(refCountPtr,-1);
                 if ((int)oldRefCount < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4Overlay);
                 }
@@ -1236,14 +1182,7 @@ LAB_97b919a8: ;
                 *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
                 refCountPtr = binaryTypeVtbl + -1;
-                do {
-                  oldRefCount = *refCountPtr;
-                  if (reservation != '\0') {
-                    newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-                    *refCountPtr = newRefCount;
-                    reservationOk = 2;
-                  }
-                } while (!(bool)(reservationOk >> 1 & 1));
+                oldRefCount = atomicAddWord(refCountPtr,-1);
                 if ((int)oldRefCount < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4Overlay);
                 }
@@ -1432,15 +1371,8 @@ operatorOffsetCase15:
     *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
     __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
     refCountPtrCopy = binaryTypeVtbl + -1;
-    do {
-      oldRefCount = *refCountPtrCopy;
-      if (reservation != '\0') {
-        newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtrCopy);
-        *refCountPtrCopy = newRefCount;
-        reservationOk = 2;
-      }
-      refCountPtr = binaryTypeVtbl;
-    } while (!(bool)(reservationOk >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtrCopy,-1);
+    refCountPtr = binaryTypeVtbl;
     goto joined_r0x97b95b7c;
   }
 setRightUnionNode:
@@ -1483,14 +1415,7 @@ code_r0x97b945f4:
       *(undefined *)((int)compareTypeVtbl + (int)compareTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
       refCountPtr = compareTypeVtbl + -1;
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = newRefCount;
-          reservationOk = 2;
-        }
-      } while (!(bool)(reservationOk >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       locText = (unsigned char *)&compareTypeWord4Overlay;
       refCountPtr = compareTypeVtbl;
       goto joined_r0x97b95b7c;
@@ -1533,14 +1458,7 @@ code_r0x97b93f6c:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
           refCountPtr = compareTypeVtbl + -1;
           stringRep = (unsigned char *)(compareTypeVtbl + -3);
-          do {
-            oldRefCount = *refCountPtr;
-            if (reservation != '\0') {
-              newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-              *refCountPtr = newRefCount;
-              reservationOk = 2;
-            }
-          } while (!(bool)(reservationOk >> 1 & 1));
+          oldRefCount = atomicAddWord(refCountPtr,-1);
           refCountPositive = 0 < (int)oldRefCount;
           locText = (unsigned char *)&compareTypeWord4Overlay;
           goto code_r0x97b93fb8;
@@ -1692,14 +1610,7 @@ override_jmp_97b93698_case_0:
               *(undefined *)((int)compareTypeVtbl + (int)compareTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
               __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
               refCountPtr = compareTypeVtbl + -1;
-              do {
-                oldRefCount = *refCountPtr;
-                if (reservation != '\0') {
-                  newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-                  *refCountPtr = newRefCount;
-                  reservationOk = 2;
-                }
-              } while (!(bool)(reservationOk >> 1 & 1));
+              oldRefCount = atomicAddWord(refCountPtr,-1);
               if ((int)oldRefCount < 1) {
                 __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(compareTypeVtbl + -3),&compareTypeWord4Overlay);
               }
@@ -1761,14 +1672,7 @@ override_jmp_97b934a8_case_0:
           *(undefined *)((int)compareTypeVtbl + (int)compareTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
           __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
           refCountPtr = compareTypeVtbl + -1;
-          do {
-            oldRefCount = *refCountPtr;
-            if (reservation != '\0') {
-              newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-              *refCountPtr = newRefCount;
-              reservationOk = 2;
-            }
-          } while (!(bool)(reservationOk >> 1 & 1));
+          oldRefCount = atomicAddWord(refCountPtr,-1);
           if ((int)oldRefCount < 1) {
             __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(compareTypeVtbl + -3),&compareTypeWord4Overlay);
           }
@@ -2185,14 +2089,7 @@ loopSetFoldNodeVtable:
 code_r0x97b932f0:
       refCountPtrCopy = refCountPtr + -1;
       stringRep = (unsigned char *)(refCountPtr + -3);
-      do {
-        oldRefCount = *refCountPtrCopy;
-        if (reservation != '\0') {
-          newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtrCopy);
-          *refCountPtrCopy = newRefCount;
-          reservationOk = 2;
-        }
-      } while (!(bool)(reservationOk >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtrCopy,-1);
       refCountPositive = 0 < (int)oldRefCount;
 code_r0x97b93fb8:
       if (!refCountPositive) goto code_r0x97b95524;
@@ -2336,15 +2233,7 @@ override_jmp_97b95280_case_0:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)tailTypeVtbl);
       refCountPtr = tailTypeVtbl + -1;
       stringRep = (unsigned char *)(tailTypeVtbl + -3);
-      do {
-        oldRefCount = *refCountPtr;
-                    
-        if (reservation != '\0') {
-          newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = newRefCount;
-          reservationOk = 2;
-        }
-      } while (!(bool)(reservationOk >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if ((int)oldRefCount < 1) {
 code_r0x97b95524:
         __ZNSs4_Rep10_M_destroyERKSaIcE(stringRep,locText);
@@ -2394,14 +2283,7 @@ setMessage2:
         *(undefined *)((int)tailTypeVtbl + (int)tailTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
         __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)tailTypeVtbl);
         refCountPtr = tailTypeVtbl + -1;
-        do {
-          oldRefCount = *refCountPtr;
-          if (reservation != '\0') {
-            newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-            *refCountPtr = newRefCount;
-            reservationOk = 2;
-          }
-        } while (!(bool)(reservationOk >> 1 & 1));
+        oldRefCount = atomicAddWord(refCountPtr,-1);
         if ((int)oldRefCount < 1) {
           __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(tailTypeVtbl + -3),&tailTypeWord4Overlay);
         }
@@ -2514,14 +2396,7 @@ code_r0x97b95098:
       *(undefined *)((int)tailTypeVtbl + (int)tailTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)tailTypeVtbl);
       refCountPtr = tailTypeVtbl + -1;
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          newRefCount = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = newRefCount;
-          reservationOk = 2;
-        }
-      } while (!(bool)(reservationOk >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if ((int)oldRefCount < 1) {
         __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(tailTypeVtbl + -3),(unsigned char *)&tailTypeWord4Overlay);
       }
@@ -2798,7 +2673,6 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   uint sourceLoc;
   uint srcValue;
   int line;
-  undefined *atomicStore;
   int componentCount;
   undefined **refCountPtr;
   undefined *oldRefCount;
@@ -2819,7 +2693,6 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   char *errorText;
   int componentIndex;
   void *infoSink;
-  char reservation;
   byte cr0Flags;
   double i2dBias;
   undefined **typeTempOverlay [4];
@@ -2903,14 +2776,7 @@ override_jmp_97b960f0_case_0:
           *(undefined *)((int)typeTempOverlay[0] + (int)typeTempOverlay[0][-3]) = *PTR__S_terminal_a7b7c0b8;
           __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)typeTempOverlay[0]);
           refCountPtr = typeTempOverlay[0] + -1;
-          do {
-            oldRefCount = *refCountPtr;
-            if (reservation != '\0') {
-              atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-              *refCountPtr = atomicStore;
-              cr0Flags = 2;
-            }
-          } while (!(bool)(cr0Flags >> 1 & 1));
+          oldRefCount = atomicAddWord(refCountPtr,-1);
           if ((int)oldRefCount < 1) {
             __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOverlay[0] + -3),allocatorDummy);
           }
@@ -3447,12 +3313,10 @@ int OutputTreeText(infoSink, intermNode, depth)
   unsigned char * intermNode;
   int depth;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
   uint sourceLine;
-  char reservation;
   byte cr0Flags;
   int locString [4];
   char locTextBuf [64];
@@ -3470,14 +3334,7 @@ int OutputTreeText(infoSink, intermNode, depth)
   __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
   __ZN13TInfoSinkBase6appendERKSs(infoSink + 8,(unsigned char *)locString);
   refCountPtr = (int *)(locString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
@@ -3500,7 +3357,6 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   undefined4 scratchR8;
 {
   int oldRefCount;
-  int atomicStore;
   undefined1 *stringTerminal;
   int *refCountPtr;
   int typeCharsCopy;
@@ -3511,8 +3367,6 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   int traverserDepth;
   int symbolNameChars;
   undefined4 nameChars;
-  char reservation;
-  byte cr0Reg;
   char symbolTextBuf [112];
   undefined4 typeString;
   int typeStringChars;
@@ -3532,14 +3386,7 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   _sprintf(symbolTextBuf,"\'%s\' (%s) id: %d\n",nameChars,typeCharsCopy,symbolId);
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
@@ -3554,13 +3401,10 @@ int OutputBinary(preVisit, intermBinary, intermTraverser)
   unsigned char * intermTraverser;
 {
   unsigned char *debugSink;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   char *opName;
   unsigned char *infoSink;
-  char reservation;
-  byte cr0Reg;
   undefined4 typeString;
   int typeStringChars;
   undefined4 destroyAllocatorArg [5];
@@ -3582,14 +3426,7 @@ int OutputBinary(preVisit, intermBinary, intermTraverser)
   __ZN13TInfoSinkBase6appendEPKc(debugSink,")");
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
@@ -3604,12 +3441,9 @@ int OutputUnary(preVisit, intermUnary, intermTraverser)
   unsigned char * intermUnary;
   unsigned char * intermTraverser;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   unsigned char * this;
-  char reservation;
-  byte cr0Reg;
   undefined4 typeString;
   int typeStringChars;
   undefined4 destroyAllocatorArg [4];
@@ -3624,14 +3458,7 @@ int OutputUnary(preVisit, intermUnary, intermTraverser)
   __ZN13TInfoSinkBase6appendEPKc(this,")");
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
@@ -3646,13 +3473,10 @@ int OutputAggregate(preVisit, intermAggregate, intermTraverser)
   unsigned char * intermAggregate;
   unsigned char * intermTraverser;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   unsigned char * infoSink;
   unsigned char * debugSink;
-  char reservation;
-  byte cr0Reg;
   undefined4 typeString;
   int typeStringChars;
   undefined4 destroyAllocatorArg [5];
@@ -3676,14 +3500,7 @@ int OutputAggregate(preVisit, intermAggregate, intermTraverser)
       __ZN13TInfoSinkBase6appendEPKc(debugSink,")");
       refCountPtr = (int *)(typeStringChars + -4);
       destroyAllocatorArg[0] = typeString;
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = atomicStore;
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
@@ -3706,12 +3523,9 @@ int OutputSelection(preVisit, intermSelection, intermTraverser)
   int trueBlockTest;
   int *refCountPtr;
   int oldRefCount;
-  int atomicStore;
   int *condition;
   int depth;
   unsigned char * this;
-  char reservation;
-  byte cr0Reg;
   undefined4 typeString;
   int typeStringChars;
   undefined4 destroyAllocatorArg [4];
@@ -3725,14 +3539,7 @@ int OutputSelection(preVisit, intermSelection, intermTraverser)
   __ZN13TInfoSinkBase6appendEPKc(this,")\n");
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
@@ -3770,7 +3577,6 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   unsigned char * intermTraverser;
 {
   uint sourceLoc;
-  undefined *atomicStore;
   int componentCount;
   uint componentBasicType;
   undefined **refCountPtr;
@@ -3783,7 +3589,6 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   int componentIndex;
   unsigned char * lineSink;
   unsigned char * infoSink;
-  char reservation;
   byte cr0Flags;
   double scratchF3;
   double scratchF4;
@@ -3880,14 +3685,7 @@ loopSetLineSink:
         *(undefined *)((int)typeTemp1Overlay[0] + (int)typeTemp1Overlay[0][-3]) = *PTR__S_terminal_a7b7c0b8;
         __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)typeTemp1Overlay[0]);
         refCountPtr = typeTemp1Overlay[0] + -1;
-        do {
-          oldRefCount = *refCountPtr;
-          if (reservation != '\0') {
-            atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-            *refCountPtr = atomicStore;
-            cr0Flags = 2;
-          }
-        } while (!(bool)(cr0Flags >> 1 & 1));
+        oldRefCount = atomicAddWord(refCountPtr,-1);
         if ((int)oldRefCount < 1) {
           __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTemp1Overlay[0] + -3));
         }
@@ -4287,10 +4085,8 @@ int ParseSymbol(intermSymbol, intermTraverser)
   int variableBasicType;
   int symbolName;
   int *refCountPtr;
-  int newRefCount;
   int oldRefCount;
   bool isNotMatrix;
-  undefined *atomicStore;
   int *levelsVector;
   undefined **refCountPtr2;
   undefined *oldRefCount2;
@@ -4310,7 +4106,6 @@ int ParseSymbol(intermSymbol, intermTraverser)
   void *infoSink;
   int level;
   int levelIndex;
-  char reservation;
   byte cr0Reg;
   byte cr0Flags;
   double i2dBias;
@@ -4487,14 +4282,7 @@ override_jmp_97b98aec_case_0:
               *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
               __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
               refCountPtr2 = stackType + -1;
-              do {
-                oldRefCount2 = *refCountPtr2;
-                if (reservation != '\0') {
-                  atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr2);
-                  *refCountPtr2 = atomicStore;
-                  cr0Flags = 2;
-                }
-              } while (!(bool)(cr0Flags >> 1 & 1));
+              oldRefCount2 = atomicAddWord(refCountPtr2,-1);
               if ((int)oldRefCount2 < 1) {
                 __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3));
               }
@@ -4532,14 +4320,7 @@ code_r0x97b98dd8:
       locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(infoSink,locString[0]);
       refCountPtr = (int *)(locString[0] + -4);
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          newRefCount = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = newRefCount;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc));
       }
@@ -4553,14 +4334,7 @@ code_r0x97b98dd8:
       _sprintf((char *)messageText,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
       refCountPtr = (int *)(stackTypeArraySize + -4);
       destroyAllocatorArg[0] = stackType;
-      do {
-        oldRefCount = *refCountPtr;
-        if (reservation != '\0') {
-          newRefCount = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-          *refCountPtr = newRefCount;
-          cr0Reg = 2;
-        }
-      } while (!(bool)(cr0Reg >> 1 & 1));
+      oldRefCount = atomicAddWord(refCountPtr,-1);
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(stackTypeArraySize + -0xc),destroyAllocatorArg);
@@ -4581,14 +4355,7 @@ code_r0x97b98dd8:
       *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
       refCountPtr2 = stackType + -1;
-      do {
-        oldRefCount2 = *refCountPtr2;
-        if (reservation != '\0') {
-          atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr2);
-          *refCountPtr2 = atomicStore;
-          cr0Flags = 2;
-        }
-      } while (!(bool)(cr0Flags >> 1 & 1));
+      oldRefCount2 = atomicAddWord(refCountPtr2,-1);
       if ((int)oldRefCount2 < 1) {
         __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3));
       }
@@ -4607,8 +4374,6 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
   unsigned char * intermBinary;
   unsigned char * intermTraverser;
 {
-  int atomicStore2;
-  undefined *atomicStore;
   int *refCountPtr;
   undefined **refCountPtr2;
   int oldRefCount2;
@@ -4616,8 +4381,6 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
   uint sourceLoc;
   uint lineInString;
   void *infoSink;
-  char reservation;
-  byte cr0Reg;
   byte cr0Flags;
   undefined **stackType;
   int stackTypeArraySize;
@@ -4646,14 +4409,7 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
     refCountPtr2 = stackType + -1;
-    do {
-      oldRefCount = *refCountPtr2;
-      if (reservation != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr2);
-        *refCountPtr2 = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr2,-1);
     if ((int)oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),locTextBuf);
     }
@@ -4667,14 +4423,7 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
     _sprintf(messageBuf,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
     refCountPtr = (int *)(stackTypeArraySize + -4);
     destroyAllocatorArg[0] = stackType;
-    do {
-      oldRefCount2 = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore2 = storeWordConditionalIndexed(oldRefCount2 + -1,0,refCountPtr);
-        *refCountPtr = atomicStore2;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount2 = atomicAddWord(refCountPtr,-1);
     if (oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(stackTypeArraySize + -0xc),destroyAllocatorArg);
@@ -4694,14 +4443,7 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
     refCountPtr2 = stackType + -1;
-    do {
-      oldRefCount = *refCountPtr2;
-      if (reservation != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr2);
-        *refCountPtr2 = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr2,-1);
     if ((int)oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),locTextBuf);
     }
@@ -4717,14 +4459,12 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
 int ParseBinary__errorReportTail()
 {
   bool columnIsZero;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   char *messageText;
   void *infoSink;
   uint sourceLoc;
   int picBase;
-  char reservation;
   byte cr0Flags;
   
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8f990));
@@ -4740,14 +4480,7 @@ int ParseBinary__errorReportTail()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe32a4);
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -4763,14 +4496,11 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   unsigned char * intermUnary;
   unsigned char * intermTraverser;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  char reservation;
-  byte cr0Reg;
   byte cr0Flags;
   char messageBuf [208];
   char *typeString;
@@ -4784,14 +4514,7 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   _sprintf(messageBuf,"\'constructor\' : assigning non-constant to \'%s\'",typeStringChars);
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Reg = 2;
-    }
-  } while (!(bool)(cr0Reg >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
@@ -4811,14 +4534,7 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   typeString[*(int *)(typeString + -0xc)] = *PTR__S_terminal_a7b7c0b8;
   __ZN13TInfoSinkBase6appendEPKc(this,typeString);
   refCountPtr = (int *)(typeString + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeString + -0xc));
   }
@@ -4833,7 +4549,6 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
 int ParseUnary__errorReportTail()
 {
   bool columnIsZero;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   void *locStringObj;
@@ -4841,7 +4556,6 @@ int ParseUnary__errorReportTail()
   uint sourceLoc;
   void *infoSink;
   int picBase;
-  char reservation;
   byte cr0Flags;
   
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8f5fc));
@@ -4857,14 +4571,7 @@ int ParseUnary__errorReportTail()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc)] = **(char **)(picBase + 0xffe2f10);
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc));
   }
@@ -4887,7 +4594,6 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
   int objectSize;
   int firstChildConstUnion;
   int *refCountPtr;
-  int newRefCount;
   int oldRefCount;
   bool singleConstantParam;
   int *firstChildTyped;
@@ -4899,8 +4605,6 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
   int firstChildVtable;
   void *this;
   undefined4 *childCursor;
-  char reservation;
-  byte cr0Reg;
   byte cr0Flags;
   undefined8 isConstructorResult;
   undefined **typeTemp1 [9];
@@ -4922,14 +4626,7 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
     _sprintf((char *)typeTemp1,"\'constructor\' : assigning non-constant to \'%s\'",typeStringChars);
     refCountPtr = (int *)(typeStringChars + -4);
     destroyAllocatorArg[0] = typeString;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = newRefCount;
-        cr0Reg = 2;
-      }
-    } while (!(bool)(cr0Reg >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
@@ -4950,14 +4647,7 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
     typeString[*(int *)(typeString + -0xc)] = *PTR__S_terminal_a7b7c0b8;
     __ZN13TInfoSinkBase6appendEPKc(this,typeString);
     refCountPtr = (int *)(typeString + -4);
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = newRefCount;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeString + -0xc));
     }
@@ -5043,13 +4733,11 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   unsigned char * intermSelection;
   unsigned char * intermTraverser;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  char reservation;
   byte cr0Flags;
   char *locString [4];
   char locTextBuf [64];
@@ -5070,14 +4758,7 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
   __ZN13TInfoSinkBase6appendEPKc(this,locString[0]);
   refCountPtr = (int *)(locString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
@@ -5092,7 +4773,6 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
 int ParseSelection__errorReportTail()
 {
   bool columnIsZero;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int traverser;
@@ -5100,7 +4780,6 @@ int ParseSelection__errorReportTail()
   uint sourceLoc;
   void *infoSink;
   int picBase;
-  char reservation;
   byte cr0Flags;
   
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8ef68));
@@ -5116,14 +4795,7 @@ int ParseSelection__errorReportTail()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe287c);
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -5358,13 +5030,11 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   unsigned char * intermLoop;
   unsigned char * intermTraverser;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  char reservation;
   byte cr0Flags;
   char *locString [4];
   char locTextBuf [64];
@@ -5385,14 +5055,7 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
   __ZN13TInfoSinkBase6appendEPKc(this,locString[0]);
   refCountPtr = (int *)(locString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
@@ -5407,7 +5070,6 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
 int ParseLoop__errorReportTail()
 {
   bool columnIsZero;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int traverser;
@@ -5415,7 +5077,6 @@ int ParseLoop__errorReportTail()
   uint sourceLoc;
   void *infoSink;
   int picBase;
-  char reservation;
   byte cr0Flags;
   
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8e94c));
@@ -5431,14 +5092,7 @@ int ParseLoop__errorReportTail()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe2260);
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -5455,13 +5109,11 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   unsigned char * intermBranch;
   unsigned char * intermTraverser;
 {
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
   uint sourceLine;
   void *this;
-  char reservation;
   byte cr0Flags;
   char *locString [4];
   char locTextBuf [64];
@@ -5482,14 +5134,7 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
   __ZN13TInfoSinkBase6appendEPKc(this,locString[0]);
   refCountPtr = (int *)(locString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
@@ -5504,7 +5149,6 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
 int ParseBranch__errorReportTail()
 {
   bool columnIsZero;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   int traverser;
@@ -5512,7 +5156,6 @@ int ParseBranch__errorReportTail()
   uint sourceLoc;
   void *infoSink;
   int picBase;
-  char reservation;
   byte cr0Flags;
   
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8e7b8));
@@ -5528,14 +5171,7 @@ int ParseBranch__errorReportTail()
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe20cc);
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
@@ -5868,12 +5504,10 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   undefined4 varArg3;
 {
   unsigned int ghidra_home[8] = { this, sourceLoc, reason, str, extraInfoFormat, varArg1, varArg2, varArg3 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   uint sourceLine;
   void *infoSink;
-  char reservation;
   byte cr0Flags;
   char formattedInfoBuf [400];
   char *locString [4];
@@ -5898,14 +5532,7 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
   __ZN13TInfoSinkBase6appendEPKc(infoSink,locString[0]);
   refCountPtr = (int *)(locString[0] + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc));
   }
@@ -5927,7 +5554,6 @@ int TParseContext__error__tail(infoSink)
   void *infoSink;
 {
   bool columnIsZero;
-  int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   char *reason;
@@ -5936,7 +5562,6 @@ int TParseContext__error__tail(infoSink)
   void *infoSink2;
   int parseContext;
   int picBase;
-  char reservation;
   byte cr0Flags;
   
   __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8dfd0));
@@ -5953,14 +5578,7 @@ int TParseContext__error__tail(infoSink)
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc)] = **(char **)(picBase + 0xffe18e4);
   __ZN13TInfoSinkBase6appendEPKc(infoSink2,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -4);
-  do {
-    oldRefCount = *refCountPtr;
-    if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-      *refCountPtr = atomicStore;
-      cr0Flags = 2;
-    }
-  } while (!(bool)(cr0Flags >> 1 & 1));
+  oldRefCount = atomicAddWord(refCountPtr,-1);
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc));
   }
@@ -6257,7 +5875,6 @@ int TParseContext__reservedErrorCheck(this, sourceLoc, text)
   unsigned char * text;
 {
   int compareResult;
-  int atomicStore;
   int levelCount;
   int *refCountPtr;
   int oldRefCount;
@@ -6266,7 +5883,6 @@ int TParseContext__reservedErrorCheck(this, sourceLoc, text)
   undefined4 scratchR10;
   uint reservedPrefixLength;
   uint namePrefixLength;
-  char reservation;
   byte cr0Flags;
   undefined4 namePrefix;
   int namePrefixChars;
@@ -6299,28 +5915,14 @@ int TParseContext__reservedErrorCheck(this, sourceLoc, text)
     }
     refCountPtr = (int *)(reservedPrefixChars + -4);
     destroyArgA[0] = reservedPrefix;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(reservedPrefixChars + -0xc),destroyArgA);
     }
     refCountPtr = (int *)(namePrefixChars + -4);
     destroyArgB[0] = namePrefix;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = atomicStore;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(namePrefixChars + -0xc),destroyArgB);
@@ -6351,7 +5953,6 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   int paramSizeResult;
   int *refCountPtr;
   int oldRefCount;
-  int newRefCount;
   int paramOffset;
   bool full;
   bool constType;
@@ -6390,7 +5991,6 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   int scratchR10;
   unsigned char * structFieldList;
   int paramIndex;
-  char reservation;
   byte cr0Flags;
   undefined8 allocPair;
   undefined **stackType;
@@ -6552,14 +6152,7 @@ setConstructorScratch2:
     }
     refCountPtr = (int *)(nameCopy2Chars + -4);
     destroyArgA[0] = nameCopy2;
-    do {
-      oldRefCount = *refCountPtr;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
-        *refCountPtr = newRefCount;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopy2Chars + -0xc),destroyArgA);
@@ -6580,15 +6173,7 @@ setConstructorScratch2:
     type[8] = stackTypeWord20;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
     destroyArgB[0] = nameCopy1;
-    do {
-      oldRefCount = *refCountPtr;
-      constructorScratch = oldRefCount - 1;
-      if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(constructorScratch,0,refCountPtr);
-        *refCountPtr = newRefCount;
-        cr0Flags = 2;
-      }
-    } while (!(bool)(cr0Flags >> 1 & 1));
+    oldRefCount = atomicAddWord(refCountPtr,-1);
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(savedR10 + -0xc),destroyArgB);

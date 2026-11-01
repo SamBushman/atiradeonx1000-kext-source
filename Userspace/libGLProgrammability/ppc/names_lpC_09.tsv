@@ -47,11 +47,7 @@ use	ParseSymbol	piVar3	levelsVector	INFERRED	symbol table level vector (traverse
 use	ParseSymbol	piVar3	levelsVector	INFERRED	symbol table level vector (traverser +0x70)	^\s*iVar11\ =\ \*piVar3;$	+2
 use	ParseSymbol	piVar3	levelsVector	INFERRED	symbol table level vector (traverser +0x70)	^\s*iVar11\ =\ \*piVar3;$@2	+1
 use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_1b0\ \+\ \-1;$	+1
-use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar5\ =\ \*ppuVar4;$	+1
-use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar4\);$	+2
 use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_1b0\ \+\ \-1;$@2	+1
-use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar5\ =\ \*ppuVar4;$@2	+1
-use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar4\);$@2	+2
 use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$	+1
 use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$@2	+1
 use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$@3	+1
@@ -110,11 +106,7 @@ use	ParseSymbol	uVar7	lineInString	INFERRED	w1 variable basic type compared with
 local	ParseBinary	param_1	preVisit	INFERRED	traversal visit flag
 local	ParseBinary	local_70	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
 use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_170\ \+\ \-1;$	+1
-use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar6\ =\ \*ppuVar4;$	+1
-use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar6\ \+\ \-1,0,ppuVar4\);$	+2
 use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_170\ \+\ \-1;$@2	+1
-use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar6\ =\ \*ppuVar4;$@2	+1
-use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar6\ \+\ \-1,0,ppuVar4\);$@2	+2
 use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar9\ =\ \*\(void\ \*\*\)\(param_3\ \+\ 0x6c\);$	+1
 use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,"INTERNAL\ ERROR:\ "\);$	+1
 use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,\(char\ \*\)local_170\);$	+1

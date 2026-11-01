@@ -577,8 +577,6 @@ local	FUN_0000bfc0	iVar4	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory
 local	FUN_00001ff8	uStack00000018	functionHome	INFERRED	home-slot copy of function
 local	FUN_00001ff8	uStack0000001c	argumentHome	INFERRED	home-slot copy of argument
 local	FUN_00001ff8	uStack00000020	dsoHandleHome	INFERRED	home-slot copy of dsoHandle
-local	FUN_00003cd0	in_RESERVE	reservationHeld	CONFIRMED	Ghidra's modelling of the lwarx/stwcx. reservation bit (retry loop)
-local	FUN_00003cd0	in_cr0	condReg0	CONFIRMED	Ghidra's modelling of CR0 after stwcx. (bit 1 = EQ = store succeeded)
 local	FUN_00004340	in_f2	fpPassThrough2	UNKNOWN	Ghidra: unspecified float register forwarded to FUN_00006d90
 local	FUN_00004340	in_f3	fpPassThrough3	UNKNOWN	Ghidra: unspecified float register forwarded to FUN_00006d90
 local	FUN_00004340	in_f4	fpPassThrough4	UNKNOWN	Ghidra: unspecified float register forwarded to FUN_00006d90

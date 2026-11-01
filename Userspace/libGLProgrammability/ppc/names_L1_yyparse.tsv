@@ -1,6 +1,5 @@
 # local rows for yyparse (L1): single-role variables and Ghidra register artifacts; the reused scratch variables of the grammar actions stay unnamed (see report)
 local	yyparse	in_cr0	cr0	INFERRED	condition-register field 0 of the lwarx/stwcx refcount decrement loops: set to 2 (EQ) after a successful conditional store, also the result of (x == 0) << 1
-local	yyparse	in_RESERVE	reservation	INFERRED	Ghidra register-reservation flag of the lwarx/stwcx loop that decrements the std::string rep refcount
 local	yyparse	a0	stackNode	INFERRED	value read from yyvsp+0x10 (a node pointer of the right-hand symbol), tested for NULL and released via its virtual destructor
 local	yyparse	a0_00	newNode	INFERRED	TPoolAllocator__allocate(...,0x40) result: node whose fields 7..9 receive the pass-through registers
 local	yyparse	a3	r6Pass	UNKNOWN	register r6 left by the previous call, stored into newNode[9]
