@@ -1,0 +1,15 @@
+# r28: part_026.c small functions (names for remaining Ghidra placeholders)
+local	IRInst__canFoldConstantSource	iVar3	recordKind	CONFIRMED	read once from *(sourceDef+0x98), compared to 0xc/0x33/2; same field+0x98==0xc test appears in Program__dumpConstantRegisters
+local	Compiler__getOrCreateLoadConstN	aiStack_9c	lookupKeyWords	INFERRED	5-word key array (compiler[2..5]) passed to HashTable__find(lookupKeyWords[constCount], compiler[10]); same role/shape as Compiler__getOrCreateConstVectorN's auStack_8c
+local	Compiler__getOrCreateLoadConstN	local_8c	lookupKeyWord4	INFERRED	#define alias of lookupKeyWords[4] (5th key word, extended per the issue #64 comment above)
+local	Compiler__getOrCreateConstVectorN	auStack_8c	lookupKeyWords	INFERRED	5-word key array (owner+8/0xc/0x10/0x14) passed to HashTable__find(lookupKeyWords[constCount], owner+0x28); sibling of Compiler__getOrCreateLoadConstN's aiStack_9c
+local	Compiler__getOrCreateConstVectorN	local_7c	lookupKeyWord4	INFERRED	#define alias of lookupKeyWords[4]
+local	Compiler__getOrCreateConstVectorN	iVar4	resultVReg	CONFIRMED	set from VRegPool__create or an existing entry's +0x8c field in both branches; returned directly
+local	IRInst__operandIsNonNegativeFloatConst	local_34	laneKind	CONFIRMED	sourceVReg[lane*6+7], compared to 2; word0 of the 6-word ConstOps-shaped record (kind,value,word2..word5 convention named in IRInst__setConstantOperand's constOperandNKind/Value/Word2-5 params)
+local	IRInst__operandIsNonNegativeFloatConst	local_30	laneValue	CONFIRMED	sourceVReg[lane*6+8] via GH_U2F; word1 (value) of the same per-lane record
+local	IRInst__operandIsNonNegativeFloatConst	local_2c	laneWord2	INFERRED	sourceVReg[lane*6+9]; word2 of the per-lane record, read but not otherwise used in this function
+local	IRInst__operandIsNonNegativeFloatConst	local_28	laneWord3	INFERRED	sourceVReg[lane*6+10]; word3 of the per-lane record
+local	IRInst__operandIsNonNegativeFloatConst	local_24	laneWord4	INFERRED	sourceVReg[lane*6+11]; word4 of the per-lane record
+local	IRInst__operandIsNonNegativeFloatConst	local_20	laneWord5	INFERRED	sourceVReg[lane*6+12]; word5 of the per-lane record
+local	Program__dumpConstantRegisters	auStack_b8	logScratchBuf	INFERRED	148-byte stack buffer never written before its address is passed to Compiler__logf's "%s" arg; uninitialised read matches stock, not a bug to fix here
+local	IRInst__setConstantOperand	local_274	operand0Ptr	INFERRED	pointer slot for constant operand 0's record, parallel to operandPtrTable[0..2] = &constOperand1Kind/&constOperand2Kind/&constOperand3Kind; addressed via operandCursor = &local_274

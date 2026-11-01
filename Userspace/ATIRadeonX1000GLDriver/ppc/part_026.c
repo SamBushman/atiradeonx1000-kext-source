@@ -126,22 +126,22 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, ops)
   uint loopIndex;
   int loopCounterB;
   /* issue #64 live-repro: same defect as Compiler__getOrCreateConstVectorN in this file (fixed earlier this session) -
-   * called below as aiStack_9c[constCount] with constCount observed as 4, one past this array's declared
-   * 4 elements; local_8c (assigned right after, from compiler[5]) sits exactly at the missing 5th
-   * index by its own hex offset (0x9c-0x8c=0x10). Extended to 5 elements; local_8c aliased to
+   * called below as lookupKeyWords[constCount] with constCount observed as 4, one past this array's declared
+   * 4 elements; lookupKeyWord4 (assigned right after, from compiler[5]) sits exactly at the missing 5th
+   * index by its own hex offset (0x9c-0x8c=0x10). Extended to 5 elements; lookupKeyWord4 aliased to
    * index 4. */
-  int aiStack_9c [5];
-#define local_8c aiStack_9c[4]
+  int lookupKeyWords [5];
+#define lookupKeyWord4 lookupKeyWords[4]
   undefined4 constRecords [29];
   
-  aiStack_9c[1] = compiler[2];
-  aiStack_9c[2] = compiler[3];
+  lookupKeyWords[1] = compiler[2];
+  lookupKeyWords[2] = compiler[3];
   loopCounterB = 4;
   loopCounter = 0;
   loopIndex = 0;
   *(ConstOps4 *)constRecords = ops;
-  aiStack_9c[3] = compiler[4];
-  local_8c = compiler[5];
+  lookupKeyWords[3] = compiler[4];
+  lookupKeyWord4 = compiler[5];
   keyRecordCursor = constRecords;
   do {
     if ((int)loopIndex < constCount) {
@@ -159,7 +159,7 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, ops)
     loopCounter = loopCounter + 0x18;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  cachedInst = (undefined4 *)HashTable__find(aiStack_9c[constCount],compiler[10]);
+  cachedInst = (undefined4 *)HashTable__find(lookupKeyWords[constCount],compiler[10]);
   if (cachedInst == (undefined4 *)0x0) {
     arena = *(undefined4 *)(*compiler + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
@@ -201,7 +201,7 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, ops)
   }
   return cachedInst;
 }
-#undef local_8c
+#undef lookupKeyWord4
 
 /* Compiler__getOrCreateLoadConst4 @ 0xf5248 (376 bytes) */
 int Compiler__getOrCreateLoadConst4(compiler, ops)
@@ -366,7 +366,7 @@ int IRInst__canFoldConstantSource(inst, operandIndex, inst2, program)
   int sourceDef;
   bool notLastLane;
   uint negateFlag;
-  int iVar3;
+  int recordKind;
   undefined4 foldable;
   int constEncodable;
   uint selectedComponentB;
@@ -379,8 +379,8 @@ int IRInst__canFoldConstantSource(inst, operandIndex, inst2, program)
   negateFlag = *(uint *)(operandIndex * 0x18 + inst + 0xa0) & 1;
   IRInst__getOperandRecord(inst2,0);
   sourceDef = IRInst__getOperandSource(inst,operandIndex);
-  iVar3 = *(int *)(sourceDef + 0x98);
-  if (iVar3 == 0xc) {
+  recordKind = *(int *)(sourceDef + 0x98);
+  if (recordKind == 0xc) {
 loopSetSourceDef:
     sourceDef = IRInst__getOperandSource(inst,operandIndex);
     hardwareInfo = *(int **)(*(int *)(program + 8) + 0x30c);
@@ -409,7 +409,7 @@ loopSetFoldable:
     foldable = 1;
   }
   else {
-    if (iVar3 == 0x33) {
+    if (recordKind == 0x33) {
       if (negateFlag == 0) {
         sourceDef = IRInst__getOperandSource(inst,operandIndex);
         loopCounter = 0;
@@ -430,7 +430,7 @@ loopSetFoldable:
         goto loopSetFoldable;
       }
     }
-    else if (iVar3 == 2) goto loopSetSourceDef;
+    else if (recordKind == 2) goto loopSetSourceDef;
 setFoldable:
     foldable = 0;
   }
@@ -576,12 +576,12 @@ int IRInst__operandIsNonNegativeFloatConst(inst, operandIndex)
   int loopCounterB;
   uint laneComponent;
   undefined4 operandSelectBytes;
-  int local_34;
-  float local_30;
-  int local_2c;
-  int local_28;
-  int local_24;
-  int local_20;
+  int laneKind;
+  float laneValue;
+  int laneWord2;
+  int laneWord3;
+  int laneWord4;
+  int laneWord5;
   
   sourceVReg = (int *)IRInst__getOperandSource(inst,operandIndex);
   isConstantSource = (**(code **)(*sourceVReg + 0x48))(sourceVReg);
@@ -597,12 +597,12 @@ loopSetResult:
     do {
       laneComponent = (uint)*(byte *)((int)&operandSelectBytes + loopCounterB);
       if (laneComponent < 4) {
-        local_30 = GH_U2F((unsigned int)(sourceVReg[laneComponent * 6 + 8]));
-        local_2c = sourceVReg[laneComponent * 6 + 9];
-        local_28 = sourceVReg[laneComponent * 6 + 10];
-        local_34 = sourceVReg[laneComponent * 6 + 7];
-        local_20 = sourceVReg[laneComponent * 6 + 0xc];
-        local_24 = sourceVReg[laneComponent * 6 + 0xb];
+        laneValue = GH_U2F((unsigned int)(sourceVReg[laneComponent * 6 + 8]));
+        laneWord2 = sourceVReg[laneComponent * 6 + 9];
+        laneWord3 = sourceVReg[laneComponent * 6 + 10];
+        laneKind = sourceVReg[laneComponent * 6 + 7];
+        laneWord5 = sourceVReg[laneComponent * 6 + 0xc];
+        laneWord4 = sourceVReg[laneComponent * 6 + 0xb];
         if (((sourceVReg[laneComponent * 6 + 7] != 2) || (((int)*(char *)(sourceVReg + 0x57) >> (laneComponent & 0x3f) & 1U) == 0))
            || (GH_U2F((unsigned int)(sourceVReg[laneComponent * 6 + 8])) < 0.0)) goto loopSetResult;
       }
@@ -692,7 +692,7 @@ int Program__dumpConstantRegisters(program, compiler)
   uint nextRecordIndex;
   uint *constRecords;
   int constRecord;
-  undefined1 auStack_b8 [148];
+  undefined1 logScratchBuf [148];
   
   constRecords = *(uint **)(program + 0x3c8);
   recordCount = constRecords[1];
@@ -725,7 +725,7 @@ int Program__dumpConstantRegisters(program, compiler)
         Compiler__logf(compiler,"(%d)  %d, regnum = %s[%d]: ",logArg,recordIndex,"k",destRegisterId,staleArgR9,staleArgR10);
         do {
           if (((int)*(char *)(constRecord + 0x15c) >> (loopCounter & 0x3f) & 1U) == 0) break;
-          logArg = auStack_b8;
+          logArg = logScratchBuf;
           Compiler__logf(compiler,"  %s ",logArg,recordIndex,registerFileName,destRegisterId,staleArgR9,staleArgR10);
           notLastLane = loopCounter != 3;
           loopCounter = loopCounter + 1;
@@ -754,34 +754,34 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, ops)
   undefined4 recordWord0;
   int recordDest;
   int *vectorSlot;
-  int iVar4;
+  int resultVReg;
   uint loopIndex;
   int recordCursor;
   int constInst;
   int loopCounterD;
-  /* issue #64 live-repro: called below as auStack_8c[constCount] with constCount observed as 4 - one
+  /* issue #64 live-repro: called below as lookupKeyWords[constCount] with constCount observed as 4 - one
    * past this array's declared 4 elements (indices 0-3). Confirmed in stock's own disassembly: the
    * word this 5th index reads (entry-sp-0x8c+0x10, by this array's own hex name) is the exact same
-   * stack slot as local_7c (entry-sp-0x7c), which the very next line fills with a real value
+   * stack slot as lookupKeyWord4 (entry-sp-0x7c), which the very next line fills with a real value
    * (*(owner+0x14)) - stock never writes a separate word for index 0 either (genuinely padding/
    * unused there), so this is the same locals-that-must-be-contiguous defect as elsewhere this
-   * session, just one array cell short instead of a raw address. Left separate, auStack_8c[4] read
-   * whatever unrelated word happened to follow it on this build's stack instead of local_7c's real
+   * session, just one array cell short instead of a raw address. Left separate, lookupKeyWords[4] read
+   * whatever unrelated word happened to follow it on this build's stack instead of lookupKeyWord4's real
    * value, corrupting a callback-table lookup several frames down (HashTable__find called through a
-   * garbage function pointer, jumping into stack memory as code). Extended to 5 elements; local_7c
+   * garbage function pointer, jumping into stack memory as code). Extended to 5 elements; lookupKeyWord4
    * aliased to index 4 so both names reach the same word. */
-  undefined4 auStack_8c [5];
-#define local_7c auStack_8c[4]
+  undefined4 lookupKeyWords [5];
+#define lookupKeyWord4 lookupKeyWords[4]
   undefined4 constRecords [26];
   
-  auStack_8c[1] = *(undefined4 *)(owner + 8);
-  auStack_8c[2] = *(undefined4 *)(owner + 0xc);
+  lookupKeyWords[1] = *(undefined4 *)(owner + 8);
+  lookupKeyWords[2] = *(undefined4 *)(owner + 0xc);
   loopCounterC = 4;
   loopCounterB = 0;
   loopIndex = 0;
   *(ConstOps4 *)constRecords = ops;
-  auStack_8c[3] = *(undefined4 *)(owner + 0x10);
-  local_7c = *(undefined4 *)(owner + 0x14);
+  lookupKeyWords[3] = *(undefined4 *)(owner + 0x10);
+  lookupKeyWord4 = *(undefined4 *)(owner + 0x14);
   do {
     if ((int)loopIndex < constCount) {
       *(byte *)(*(int *)(owner + 0x28) + 0x15c) =
@@ -799,11 +799,11 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, ops)
     loopCounterB = loopCounterB + 0x18;
     loopCounterC = loopCounterC + -1;
   } while (loopCounterC != 0);
-  foundEntry = HashTable__find(auStack_8c[constCount],*(undefined4 *)(owner + 0x28));
+  foundEntry = HashTable__find(lookupKeyWords[constCount],*(undefined4 *)(owner + 0x28));
   if (foundEntry == 0) {
     newInstId = RegisterMap__nextTempIndex(owner);
-    iVar4 = VRegPool__create(owner,0xc,newInstId,0);
-    vectorSlot = *(int **)(iVar4 + 0x18);
+    resultVReg = VRegPool__create(owner,0xc,newInstId,0);
+    vectorSlot = *(int **)(resultVReg + 0x18);
     if (*vectorSlot == 0) {
       vectorSlot = (int *)Vector__elementRefGrow(vectorSlot,0);
     }
@@ -837,11 +837,11 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, ops)
     ((int (*)())ConstRecord__insertSwizzleVariants)(owner,constCount,constInst);
   }
   else {
-    iVar4 = *(int *)(foundEntry + 0x8c);
+    resultVReg = *(int *)(foundEntry + 0x8c);
   }
-  return iVar4;
+  return resultVReg;
 }
-#undef local_7c
+#undef lookupKeyWord4
 
 /* Compiler__getOrCreateConstVector4 @ 0xf645c (376 bytes) */
 int Compiler__getOrCreateConstVector4(owner, ops)
@@ -1104,7 +1104,7 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   undefined4 finalSelect;
   undefined4 laneUniqueIndex;
   undefined4 sortOrder;
-  int *local_274;
+  int *operand0Ptr;
   int *operandPtrTable [11];
   ConstOps2 constVec2Ops;
   ConstOps1 constVec1Ops;
@@ -1166,12 +1166,12 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   candidateOperand = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   laneUniqueIndex = swizzleXYZW_001aa868;
   operandPtrTable[0] = &constOperand1Kind;
-  operandCursor = &local_274;
+  operandCursor = &operand0Ptr;
   laneIndex = 0;
   operandPtrTable[1] = &constOperand2Kind;
   operandPtrTable[2] = &constOperand3Kind;
   operandPtrTable[6] = (int *)ptrTo_defaultOperandData_001e8b70;
-  local_274 = candidateOperand;
+  operand0Ptr = candidateOperand;
   operandPtrTable[3] = (int *)ptrTo_defaultOperandData_001e8b70;
   operandPtrTable[4] = (int *)ptrTo_defaultOperandData_001e8b70;
   operandPtrTable[5] = (int *)ptrTo_defaultOperandData_001e8b70;
