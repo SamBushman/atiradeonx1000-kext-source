@@ -19,3 +19,95 @@ local	extvsUploadProgramConstants	in_r7	literalOne	CONFIRMED	always the literal 
 local	extvsUploadProgramConstants	in_r8	entryBOffset	CONFIRMED	`*(int *)(entryB + 4) * 0x10`, the same shape as the already-named entryCOffset computed for entryC two lines later; reused past the unpack loop as a ring-packet word
 local	extvsPrepareHardwareProgram	in_r7	slotFlag	INFERRED	small 0/1 flag reused across several structurally similar slot-allocation branches; one occurrence reaches a realloc-style call (ctx+0x10 vtable slot) with a stale value from an unrelated branch - see notes_r27_remaining.md
 local	extvsPrepareHardwareProgram	in_r8	slotScanCursor	INFERRED	reused across the same branches as both a byte-offset snapshot (briefly, dead before being overwritten) and an incrementing scan counter; same register, not independently splittable - see notes_r27_remaining.md
+local	gldAllocAndUploadConstants	in_r5	staleArgR5	INFERRED	never assigned; forwarded unchanged to the ring-buffer streamAlloc/streamSetCurrent commit calls
+local	gldAllocAndUploadConstants	in_r6	staleArgR6	INFERRED	same as staleArgR5 for r6
+local	gldEmitProgramConstants	fparam_1	unusedFloatArg1	INFERRED	never read, only forwarded to programFillStateConstants; matches the existing unusedFloatArgN convention of sibling ffvpValidateProgram
+local	gldEmitProgramConstants	in_f2	unusedFloatArg2	INFERRED	same as unusedFloatArg1
+local	gldEmitProgramConstants	in_f3	unusedFloatArg3	INFERRED	same as unusedFloatArg1
+local	gldEmitProgramConstants	in_f4	unusedFloatArg4	INFERRED	same as unusedFloatArg1
+local	gldEmitProgramConstants	in_f5	unusedFloatArg5	INFERRED	same as unusedFloatArg1
+local	gldEmitProgramConstants	in_f6	unusedFloatArg6	INFERRED	same as unusedFloatArg1
+local	gldEmitProgramConstants	in_f7	unusedFloatArg7	INFERRED	same as unusedFloatArg1
+local	gldEmitProgramConstants	in_f8	unusedFloatArg8	INFERRED	same as unusedFloatArg1
+local	gldEmitProgramConstants	in_stack_ffffffa8	unusedFloatArg9	INFERRED	same as unusedFloatArg1, 9th incoming FPR arg spilled to the stack
+local	gldEmitProgramConstants	in_stack_ffffffb0	unusedFloatArg10	INFERRED	same as unusedFloatArg9
+local	gldEmitProgramConstants	in_stack_ffffffb8	unusedFloatArg11	INFERRED	same as unusedFloatArg9
+local	gldEmitProgramConstants	in_stack_ffffffc0	unusedFloatArg12	INFERRED	same as unusedFloatArg9
+local	gldEmitProgramConstants	in_stack_ffffffc8	unusedFloatArg13	INFERRED	same as unusedFloatArg9
+local	vpFillConstantBank	in_stack_ffffffa8	fprF9Stack	CONFIRMED	Ghidra's raw stack-offset duplicate read of the already-declared formal parameter fprF9 (same caller stack slot, 9th incoming float arg); the plain name fprF9 is taken by the signature's own parameter
+local	vpFillConstantBank	in_stack_ffffffb0	fprF10Stack	CONFIRMED	same as fprF9Stack, for fprF10
+local	vpFillConstantBank	in_stack_ffffffb8	fprF11Stack	CONFIRMED	same as fprF9Stack, for fprF11
+local	vpFillConstantBank	in_stack_ffffffc0	fprF12Stack	CONFIRMED	same as fprF9Stack, for fprF12
+local	vpFillConstantBank	in_stack_ffffffc8	fprF13Stack	CONFIRMED	same as fprF9Stack, for fprF13
+local	arbParseSwizzleSuffix	in_r5	staleArgR5	INFERRED	never assigned; forwarded unchanged to arbParseSourceRegister(...)
+local	arbfpParseScalarSourceOperand	in_r5	staleArgR5	INFERRED	never assigned; forwarded unchanged to arbParseSourceRegister(...)
+local	arbfpProgramObjectInit	in_r5	staleArgR5	INFERRED	never assigned; forwarded unchanged to the (ctx+0x10) realloc-style callback
+local	arbfpProgramObjectInit	in_r6	staleArgR6	INFERRED	same as staleArgR5 for r6
+local	arbfpProgramObjectInit	in_r7	staleArgR7	INFERRED	same as staleArgR5 for r7
+local	arbfpProgramObjectInit	in_r8	staleArgR8	INFERRED	same as staleArgR5 for r8
+local	arbfpProgramString	extraout_r4	staleArgR4	INFERRED	leftover r4 after the previous call, forwarded unchanged into arbfpUpdateStateForProgram(...); same artifact already named staleArgR4 elsewhere in this file
+local	arbfpInitProgramState	in_r4	staleArgR4	INFERRED	never assigned; forwarded unchanged to the (ctx+0x1274) vtable callback
+local	arbfpInitProgramState	in_r5	staleArgR5	INFERRED	never assigned; forwarded unchanged to the (ctx+0xc) allocator callback (both call sites)
+local	arbfpInitProgramState	in_r6	staleArgR6	INFERRED	same as staleArgR5 for r6
+local	arbfpInitProgramState	in_r7	staleArgR7	INFERRED	same as staleArgR5 for r7
+local	arbfpInitProgramState	in_r8	staleArgR8	INFERRED	same as staleArgR5 for r8
+local	arbfpLoadDefaultProgram	in_r7	staleArgR7	INFERRED	never assigned; forwarded unchanged to arbfpBindProgram(...)
+local	arbfpLoadDefaultProgram	in_r8	staleArgR8	INFERRED	same as staleArgR7 for r8
+local	arbfpLoadDefaultProgram	in_r10	staleArgR10	INFERRED	same as staleArgR7 for r10
+local	gldDrawInternalRect	extraout_r4	staleArgR4	INFERRED	leftover r4 after the previous call, forwarded unchanged into gldValidateVertexProgramState(...)
+local	gldFlushProgramStateForDraw	in_r6	staleArgR6	INFERRED	never assigned; forwarded unchanged to the (ctx+0x1294) vtable callback
+local	gldFlushProgramStateForDraw	in_r7	staleArgR7	INFERRED	same as staleArgR6 for r7
+local	gldFlushProgramStateForDraw	in_r8	staleArgR8	INFERRED	same as staleArgR6 for r8
+local	gldValidateState	fparam_9	forwardedFloatArg9	CONFIRMED	completes this function's own existing forwardedArg2..7/forwardedFloatArg1..8 convention; never read, just the 9th incoming float arg
+local	arbValidateProgram	in_r7	scratchR7	UNKNOWN	one register, three disjoint roles in this 3768-byte function: (1) ~L1728 a typeTagTable-derived pointer argument to arbfpInternParameter, (2) ~L1823-2103 low half of a 64-bit read-register-usage bitmask accumulator paired with writtenLo/writtenHi, (3) ~L2176 unread varargs padding to a printf-style error stub; not split because the three regions are reached via a shared goto-driven error path - see notes_r27_remaining.md
+local	arbValidateProgram	in_r8	scratchR8	UNKNOWN	same register pairing as scratchR7 (role 2 is the high half of the bitmask accumulator); see notes_r27_remaining.md
+local	ffvpSelectLitProgramVariant	in_r5	scratchR5	UNKNOWN	two disjoint roles: the ffvpBuildProgram(...) result forwarded into fpVariantCacheInsert, and later a field of `variant` forwarded into a vtable call; see notes_r27_remaining.md
+local	ffvpSelectLitProgramVariant	in_r6	scratchR6	UNKNOWN	copy of a context flag byte, forwarded into fpVariantCacheInsert and a later vtable call; paired with scratchR5 - see notes_r27_remaining.md
+local	ffvpSelectLitProgramVariant	in_r7	scratchR7	UNKNOWN	copy of variantKeyHeader, only actually read at the fpVariantCacheInsert call (the later call site re-passes variantKeyHeader directly instead); see notes_r27_remaining.md
+local	ffvpSelectLitProgramVariant	in_r8	scratchR8	UNKNOWN	copy of variantKeyWords[0], paired with scratchR7; see notes_r27_remaining.md
+local	ffvpSelectLitProgramVariant	in_r10	staleArgR10	INFERRED	never assigned; forwarded unchanged into ffvpBuildProgram(...)
+local	ffvpSelectPassThroughVariant	in_r7	staleArgR7	INFERRED	never assigned; forwarded unchanged into ffvpEmitTexCoordPassThrough(...)
+local	ffvpSelectPassThroughVariant	in_r8	staleArgR8	INFERRED	same as staleArgR7 for r8
+local	ffvpSelectPassThroughVariant	in_r9	scratchR9	UNKNOWN	small computed bit/offset contribution, assigned and consumed twice in disjoint branches for different purposes (a variantKeyFlags bit, later a register-offset term); see notes_r27_remaining.md
+local	recordProgramAllocateAndEmit	extraout_r4	calleeStaleR4	INFERRED	leftover r4 immediately after a call, copied straight into the existing stageR4 local; Ghidra splits each call site into its own extraout_r4_NN artifact
+local	recordProgramAllocateAndEmit	extraout_r4_00	calleeStaleR4_00	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramAllocateAndEmit	extraout_r4_01	calleeStaleR4_01	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramAllocateAndEmit	extraout_r4_02	calleeStaleR4_02	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	in_r6	recordPtr	INFERRED	general-purpose scratch pointer reused across many disjoint branches, each assignment consumed immediately in the same branch (record/array pointers, often a copy of the existing `arena` local)
+local	recordProgramBuildDependencies	extraout_r4	calleeStaleR4	INFERRED	leftover r4 immediately after a call, copied straight into the existing scratchArg2 local; Ghidra splits each call site into its own extraout_r4_NN artifact
+local	recordProgramBuildDependencies	extraout_r4_00	calleeStaleR4_00	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_01	calleeStaleR4_01	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_02	calleeStaleR4_02	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_03	calleeStaleR4_03	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_04	calleeStaleR4_04	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_05	calleeStaleR4_05	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_06	calleeStaleR4_06	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_07	calleeStaleR4_07	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_08	calleeStaleR4_08	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_09	calleeStaleR4_09	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_10	calleeStaleR4_10	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_11	calleeStaleR4_11	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_12	calleeStaleR4_12	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_13	calleeStaleR4_13	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_14	calleeStaleR4_14	INFERRED	same as calleeStaleR4, a different call site
+local	recordProgramBuildDependencies	extraout_r4_15	calleeStaleR4_15	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4	calleeStaleR4	INFERRED	leftover r4 immediately after a call, copied straight into the existing forwardedArg2 local; Ghidra splits each call site into its own extraout_r4_NN artifact
+local	gldValidateState	extraout_r4_00	calleeStaleR4_00	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_01	calleeStaleR4_01	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_02	calleeStaleR4_02	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_03	calleeStaleR4_03	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_04	calleeStaleR4_04	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_05	calleeStaleR4_05	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_06	calleeStaleR4_06	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_07	calleeStaleR4_07	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_08	calleeStaleR4_08	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_09	calleeStaleR4_09	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_10	calleeStaleR4_10	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_11	calleeStaleR4_11	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_12	calleeStaleR4_12	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_13	calleeStaleR4_13	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_14	calleeStaleR4_14	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_15	calleeStaleR4_15	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_16	calleeStaleR4_16	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_17	calleeStaleR4_17	INFERRED	same as calleeStaleR4, a different call site
+local	gldValidateState	extraout_r4_18	calleeStaleR4_18	INFERRED	same as calleeStaleR4, a different call site

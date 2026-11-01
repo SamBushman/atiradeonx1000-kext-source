@@ -5380,13 +5380,13 @@ int ffvpSelectLitProgramVariant(glContext)
   undefined4 staleArgR4;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
-  undefined4 in_r5;
-  uint in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 scratchR5;
+  uint scratchR6;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
   int lightKeyA;
   code *a6;
-  undefined4 in_r10;
+  undefined4 staleArgR10;
   undefined8 lookupResult;
   undefined4 variantKeyHeader;
   undefined4 variantKeyWords [8];
@@ -5428,22 +5428,22 @@ callVariantSelectCallback:
   variant = (int)((ulonglong)lookupResult >> 0x20);
   staleArgR4 = (undefined4)lookupResult;
   if (variant == 0) {
-    ffvpUpdateLightModelFlags(glContext,staleArgR4,in_r5,in_r6,in_r7,in_r8);
+    ffvpUpdateLightModelFlags(glContext,staleArgR4,scratchR5,scratchR6,scratchR7,scratchR8);
     paramList = paramListCreate(glContext);
     (**(code **)(((unsigned char *)0x000012b4) + glContext))(glContext);
-    in_r5 = ffvpBuildProgram(glContext,1,&variantKeyHeader,variantKeyWords,paramList,in_r8,lightKeyA,in_r10);
-    in_r6 = (uint)*(byte *)(glContext + 0x131);
-    lookupResult = fpVariantCacheInsert(glContext,glContext + 0x1874,in_r5,in_r6,variantKeyHeader,variantKeyWords[0],paramList,
+    scratchR5 = ffvpBuildProgram(glContext,1,&variantKeyHeader,variantKeyWords,paramList,scratchR8,lightKeyA,staleArgR10);
+    scratchR6 = (uint)*(byte *)(glContext + 0x131);
+    lookupResult = fpVariantCacheInsert(glContext,glContext + 0x1874,scratchR5,scratchR6,variantKeyHeader,variantKeyWords[0],paramList,
                          (uint)*(byte *)(glContext + 0x126));
     variant = (int)((ulonglong)lookupResult >> 0x20);
-    in_r7 = variantKeyHeader;
-    in_r8 = variantKeyWords[0];
+    scratchR7 = variantKeyHeader;
+    scratchR8 = variantKeyWords[0];
     if (*(char *)(glContext + 0x126) != '\0') {
       a6 = *(code **)(((unsigned char *)0x0000133c) + glContext);
       *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000000;
       *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x1020;
       *(undefined1 *)(glContext + 0x29) = 1;
-      (*a6)(glContext,(int)lookupResult,in_r5,in_r6,variantKeyHeader,variantKeyWords[0],a6);
+      (*a6)(glContext,(int)lookupResult,scratchR5,scratchR6,variantKeyHeader,variantKeyWords[0],a6);
       goto callVariantSelectCallback;
     }
   }
@@ -5455,8 +5455,8 @@ callVariantSelectCallback:
     staleArgR4 = extraout_r4;
   }
   else {
-    in_r5 = *(undefined4 *)(variant + 0x3c);
-    (**(code **)((int)((unsigned char *)0x00001294) + glContext))(glContext,variant,in_r5);
+    scratchR5 = *(undefined4 *)(variant + 0x3c);
+    (**(code **)((int)((unsigned char *)0x00001294) + glContext))(glContext,variant,scratchR5);
     staleArgR4 = extraout_r4_00;
   }
   if (*(char *)(*(int *)(variant + 0x54) + 0x752) == '\0') {
@@ -5467,7 +5467,7 @@ storeGlContext:
   *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x40000000;
   *(undefined1 *)(glContext + 0x126) = 1;
   *(undefined1 *)(glContext + 0x29) = 1;
-  (**(code **)(((unsigned char *)0x0000133c) + glContext))(glContext,staleArgR4,in_r5,in_r6,in_r7,in_r8,1);
+  (**(code **)(((unsigned char *)0x0000133c) + glContext))(glContext,staleArgR4,scratchR5,scratchR6,scratchR7,scratchR8,1);
   (**(code **)(((unsigned char *)0x000012dc) + glContext))(glContext);
   return;
 }
@@ -5514,9 +5514,9 @@ int ffvpSelectPassThroughVariant(glContext)
   undefined4 *builder;
   undefined4 texCoordMode;
   undefined4 texCoordFlag;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint in_r9;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
+  uint scratchR9;
   uint ctxFlags;
   uint nextOutputReg2;
   uint outputMask;
@@ -5532,8 +5532,8 @@ int ffvpSelectPassThroughVariant(glContext)
   variantKeyOutputMask = *(undefined4 *)(glContext + 0x1804);
   variantKey[0] = variantKey[0] | 8;
   if ((ctxFlags & 0xc00) != 0) {
-    in_r9 = ctxFlags >> 9 & 2;
-    variantKeyFlags = ctxFlags >> 0xb & 1 | in_r9 | (uint)(byte)((unsigned char *)0x000011d3)[glContext] << 2;
+    scratchR9 = ctxFlags >> 9 & 2;
+    variantKeyFlags = ctxFlags >> 0xb & 1 | scratchR9 | (uint)(byte)((unsigned char *)0x000011d3)[glContext] << 2;
   }
   currentVariant = *(int *)(glContext + 0x14c);
   if ((currentVariant == 0) || (keyCompare = _memcmp(currentVariant,variantKey,0x30), variant = currentVariant, keyCompare != 0)) {
@@ -5553,8 +5553,8 @@ int ffvpSelectPassThroughVariant(glContext)
       else {
         backColorOut = outputMask >> 3 & 1;
         pointSizeOut = outputMask >> 1 & 1;
-        in_r9 = (outputMask & 1) + pointSizeOut;
-        nextOutputReg2 = (uint)positionOutReg + backColorOut * 2 + in_r9 + 2;
+        scratchR9 = (outputMask & 1) + pointSizeOut;
+        nextOutputReg2 = (uint)positionOutReg + backColorOut * 2 + scratchR9 + 2;
       }
       ffvpEmitPositionPassThrough(builder,positionPassThrough,(uint)positionOutReg);
       if (pointSizeOut == 0) {
@@ -5608,7 +5608,7 @@ int ffvpSelectPassThroughVariant(glContext)
           loopIndex = loopIndex + 1;
           nextTexReg = nextTexReg + 1;
           unitCursor = unitCursor + 4;
-          ffvpEmitTexCoordPassThrough(builder,texUnit,texCoordMode,texCoordFlag,in_r7,in_r8,in_r9);
+          ffvpEmitTexCoordPassThrough(builder,texUnit,texCoordMode,texCoordFlag,staleArgR7,staleArgR8,scratchR9);
         } while (outputMask >> 4 != loopIndex);
       }
       ffvpFinishProgram(builder);
@@ -5645,11 +5645,11 @@ void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefine
   undefined4 constantData;
   undefined4 *constantOut;
   int clearWordsLeft;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
+  double fprF9Stack;
+  double fprF10Stack;
+  double fprF11Stack;
+  double fprF12Stack;
+  double fprF13Stack;
   
   clearWordsLeft = 8;
   programData = *(int *)(variant + 0x54);
@@ -5668,8 +5668,8 @@ void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefine
     if (*(int *)(variant + 0x48) != 0) {
       constantData = *(undefined4 *)(variant + 0x4c);
       ((void (*)())programFillStateConstants)(glContext,variant,unusedArg3,unusedArg4,unusedArg5,unusedArg6,glStateExt,unusedArg8,fprF1,fprF2,
-                   fprF3,fprF4,fprF5,fprF6,fprF7,fprF8,in_stack_ffffffa8,
-                   in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8);
+                   fprF3,fprF4,fprF5,fprF6,fprF7,fprF8,fprF9Stack,
+                   fprF10Stack,fprF11Stack,fprF12Stack,fprF13Stack);
       _memcpy(constantOut,constantData,*(int *)(variant + 0x48) << 4);
       constantCount = *(int *)(variant + 0x48);
       if (0 < constantCount) {

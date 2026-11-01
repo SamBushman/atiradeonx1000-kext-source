@@ -3076,10 +3076,10 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   int *bindingChainHead;
   byte sourceFileIs1;
   byte hasFile1SourceFirst;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
+  undefined4 calleeStaleR4;
+  undefined4 calleeStaleR4_00;
+  undefined4 calleeStaleR4_01;
+  undefined4 calleeStaleR4_02;
   undefined4 outWord2;
   int opcodeInfoOffset;
   int *dependencyListHead;
@@ -3341,7 +3341,7 @@ setLiveCountSnapshot:
   liveIndexByte = (code *)0x0;
   ((int (*)())recordClearBindingTables)(alloc);
   liveListPtrB = 0x00024870 + alloc;
-  stageR4 = extraout_r4;
+  stageR4 = calleeStaleR4;
   while (liveIndexByte < *(code **)(alloc + 0x26870)) {
     scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
     scratchArg3 = liveIndexByte;
@@ -3362,7 +3362,7 @@ setLiveCountSnapshot:
       recordCount = retiredRecord * 4 + alloc;
       ((int (*)())arrayRemoveAt)(liveIndexByte,alloc + 0x26870,scratchArg3);
       *(uint *)(recordCount + 0x3348c) = *(uint *)(recordCount + 0x3348c) & 0xfffeffff | 0x20000;
-      stageR4 = extraout_r4_00;
+      stageR4 = calleeStaleR4_00;
     }
   }
   while (*(uint *)(alloc + 0x2a878) < liveCountSnapshot) {
@@ -3666,7 +3666,7 @@ setChainSource2:
     liveIndexByteB = (code *)0x0;
     ((int (*)())recordClearBindingTables)(alloc);
     liveListPtrB = 0x00024870 + alloc;
-    stageR4 = extraout_r4_01;
+    stageR4 = calleeStaleR4_01;
     while (liveIndexByteB < *(code **)(alloc + 0x26870)) {
       scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
       scratchArg3 = liveIndexByteB;
@@ -3687,7 +3687,7 @@ setChainSource2:
         recordCount = retiredRecord * 4 + alloc;
         ((int (*)())arrayRemoveAt)(liveIndexByteB,alloc + 0x26870,scratchArg3);
         *(uint *)(recordCount + 0x3348c) = *(uint *)(recordCount + 0x3348c) & 0xfffeffff | 0x20000;
-        stageR4 = extraout_r4_02;
+        stageR4 = calleeStaleR4_02;
       }
     }
     if ((*configPtr & 0x10) != 0) {
@@ -4030,25 +4030,25 @@ int recordProgramBuildDependencies(alloc)
   int componentsLeftC;
   dword *recordIndex;
   dword *lastRecordIndexValue;
-  uint *extraout_r4;
-  uint *extraout_r4_00;
-  uint *extraout_r4_01;
-  uint *extraout_r4_02;
-  uint *extraout_r4_03;
-  uint *extraout_r4_04;
-  uint *extraout_r4_05;
-  uint *extraout_r4_06;
-  uint *extraout_r4_07;
-  uint *extraout_r4_08;
-  uint *extraout_r4_09;
-  uint *extraout_r4_10;
-  uint *extraout_r4_11;
-  uint *extraout_r4_12;
-  uint *extraout_r4_13;
-  uint *extraout_r4_14;
-  uint *extraout_r4_15;
+  uint *calleeStaleR4;
+  uint *calleeStaleR4_00;
+  uint *calleeStaleR4_01;
+  uint *calleeStaleR4_02;
+  uint *calleeStaleR4_03;
+  uint *calleeStaleR4_04;
+  uint *calleeStaleR4_05;
+  uint *calleeStaleR4_06;
+  uint *calleeStaleR4_07;
+  uint *calleeStaleR4_08;
+  uint *calleeStaleR4_09;
+  uint *calleeStaleR4_10;
+  uint *calleeStaleR4_11;
+  uint *calleeStaleR4_12;
+  uint *calleeStaleR4_13;
+  uint *calleeStaleR4_14;
+  uint *calleeStaleR4_15;
   dword *scratchArg3;
-  dword *in_r6;
+  dword *recordPtr;
   uint *srcWordPtr0Copy;
   uint inputWord1;
   dword *arena;
@@ -4180,13 +4180,13 @@ int recordProgramBuildDependencies(alloc)
     alloc[0x8a1b] = alloc[2];
     scratchArg3 = (dword *)(alloc[2] << 4);
     _memcpy(alloc + 0x4a1b,alloc[1],scratchArg3);
-    scratchArg2 = extraout_r4_00;
+    scratchArg2 = calleeStaleR4_00;
   }
   else {
     inputCount = alloc[2];
     alloc[0x8a1b] = inputCount;
     alloc[0x8a1b] = 0;
-    scratchArg2 = extraout_r4;
+    scratchArg2 = calleeStaleR4;
     if (inputCount != 0) {
       scratchArg3 = alloc + 0x4a1b;
       inputRecords = (uint *)alloc[1];
@@ -4204,7 +4204,7 @@ int recordProgramBuildDependencies(alloc)
         alloc[0x8a1b] = outputIndexPlus1;
         if ((*inputRecords & 0x10000000) != 0) {
           inputWord3Ptr = inputRecords + 3;
-          in_r6 = scratchArg3 + outputIndexPlus1 * 4;
+          recordPtr = scratchArg3 + outputIndexPlus1 * 4;
           opcodeInfoOffset = (inputRecords[3] >> 0x15 & 0xf) * 0x14;
           if (0x7ff < outputIndexPlus1) {
             return 10;
@@ -4212,10 +4212,10 @@ int recordProgramBuildDependencies(alloc)
           scratchArg8[3] = 0x124800;
           *scratchArg8 = *scratchArg8 & 0xefffffff;
           scratchArg3[outputIndexPlus1 * 4] = 0;
-          in_r6[3] = 0x124800;
-          in_r6[1] = 0x124800;
-          in_r6[2] = 0x124800;
-          *(byte *)((int)in_r6 + 3) = (byte)(inputRecords[3] >> 0x15) & 0xf | 0x40;
+          recordPtr[3] = 0x124800;
+          recordPtr[1] = 0x124800;
+          recordPtr[2] = 0x124800;
+          *(byte *)((int)recordPtr + 3) = (byte)(inputRecords[3] >> 0x15) & 0xf | 0x40;
           outputWordOldB = scratchArg3[outputIndexPlus1 * 4];
           scratchArg3[outputIndexPlus1 * 4] = outputWordOldB & 0xfffff0ff | 0x400;
           outputWordOldB = (inputRecords[3] >> 0x13 & 3) << 0xd | outputWordOldB & 0xff0010ff | 0x400;
@@ -4235,38 +4235,38 @@ int recordProgramBuildDependencies(alloc)
           else if (inputModeBits == 3) {
             scratchArg3[outputIndexPlus1 * 4] = outputWordOldB | 0x800000;
           }
-          *in_r6 = *in_r6 & 0xefffffff;
+          *recordPtr = *recordPtr & 0xefffffff;
           srcOperandIndexA = *(uint *)(&recordOpcodeInfoTable_srcOperandIndexA_001aa5f8 + opcodeInfoOffset);
           if (srcOperandIndexA < 3) {
-            outputWordOld = in_r6[srcOperandIndexA + 1];
+            outputWordOld = recordPtr[srcOperandIndexA + 1];
             srcFileBitsC = *inputWord3Ptr & 3;
-            in_r6[srcOperandIndexA + 1] = srcFileBitsC | outputWordOld & 0xfffffff0;
+            recordPtr[srcOperandIndexA + 1] = srcFileBitsC | outputWordOld & 0xfffffff0;
             srcFileBit4C = *inputWord3Ptr & 0x10;
-            in_r6[srcOperandIndexA + 1] = srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffffe0;
+            recordPtr[srcOperandIndexA + 1] = srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffffe0;
             srcIndexBitsC = *inputWord3Ptr & 0x1fe0;
-            in_r6[srcOperandIndexA + 1] = srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffe000;
+            recordPtr[srcOperandIndexA + 1] = srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffe000;
             srcTopBitsC = *inputWord3Ptr & 0x60000000;
-            in_r6[srcOperandIndexA + 1] = srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x9fffe000;
+            recordPtr[srcOperandIndexA + 1] = srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x9fffe000;
             srcBitsShifted = (*inputWord3Ptr & 0x2000000) << 3;
-            in_r6[srcOperandIndexA + 1] = srcBitsShifted | srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x8fffe000;
-            in_r6[srcOperandIndexA + 1] =
+            recordPtr[srcOperandIndexA + 1] = srcBitsShifted | srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x8fffe000;
+            recordPtr[srcOperandIndexA + 1] =
                  (*inputWord3Ptr & 0xe000) << 9 |
                  srcBitsShifted | srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x8e3fe000;
           }
           srcOperandIndexB = *(uint *)(&recordOpcodeInfoTable_srcOperandIndexB_001aa5fc + opcodeInfoOffset);
           if (srcOperandIndexB < 3) {
-            outputWordOld = in_r6[srcOperandIndexB + 1];
+            outputWordOld = recordPtr[srcOperandIndexB + 1];
             srcFileBitsC = *inputWord3Ptr & 3;
-            in_r6[srcOperandIndexB + 1] = srcFileBitsC | outputWordOld & 0xfffffff0;
+            recordPtr[srcOperandIndexB + 1] = srcFileBitsC | outputWordOld & 0xfffffff0;
             srcFileBit4C = *inputWord3Ptr & 0x10;
-            in_r6[srcOperandIndexB + 1] = srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffffe0;
+            recordPtr[srcOperandIndexB + 1] = srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffffe0;
             srcIndexBitsC = *inputWord3Ptr & 0x1fe0;
-            in_r6[srcOperandIndexB + 1] = srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffe000;
+            recordPtr[srcOperandIndexB + 1] = srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0xffffe000;
             srcTopBitsC = *inputWord3Ptr & 0x60000000;
-            in_r6[srcOperandIndexB + 1] = srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x9fffe000;
+            recordPtr[srcOperandIndexB + 1] = srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x9fffe000;
             srcBitsShifted = (*inputWord3Ptr & 0x4000000) << 2;
-            in_r6[srcOperandIndexB + 1] = srcBitsShifted | srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x8fffe000;
-            in_r6[srcOperandIndexB + 1] =
+            recordPtr[srcOperandIndexB + 1] = srcBitsShifted | srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x8fffe000;
+            recordPtr[srcOperandIndexB + 1] =
                  (*(ushort *)inputWord3Ptr & 7) << 0x16 |
                  srcBitsShifted | srcTopBitsC | srcIndexBitsC | srcFileBit4C | srcFileBitsC | outputWordOld & 0x8e3fe000;
           }
@@ -4372,7 +4372,7 @@ loopSetRecordIsSpecialWrite:
               }
             }
             scratchArg3 = recordIndex;
-            in_r6 = recordWriteMask;
+            recordPtr = recordWriteMask;
             edgeStatus = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
             if (edgeStatus != 0) {
               return edgeStatus;
@@ -4406,7 +4406,7 @@ loopSetConfigFlagsPtr2:
           }
         }
         scratchArg3 = recordIndex;
-        in_r6 = recordWriteMask;
+        recordPtr = recordWriteMask;
         edgeStatus = ((int (*)())depListAddEdge)(alloc,alloc + 0x4114,recordIndex,recordWriteMask,0,0,arena);
         if (edgeStatus != 0) {
           return edgeStatus;
@@ -4569,10 +4569,10 @@ loopSetSourceIsRegisterFile:
                   scratchArg2 = (uint *)callResultPair;
                   if ((int)((ulonglong)callResultPair >> 0x20) == 0) goto loopSetSourceIsRegisterFile;
                   scratchArg3 = (dword *)(lastRecordIndex + -(int)scanPtr);
-                  in_r6 = (dword *)(1 << (srcSelectBits & 0x3f));
-                  ((int (*)())depListAddEdge)(alloc,dependentsBase,scratchArg3,in_r6,0,0,arena);
+                  recordPtr = (dword *)(1 << (srcSelectBits & 0x3f));
+                  ((int (*)())depListAddEdge)(alloc,dependentsBase,scratchArg3,recordPtr,0,0,arena);
                   sourceIsRegisterFile = true;
-                  scratchArg2 = extraout_r4_13;
+                  scratchArg2 = calleeStaleR4_13;
                 }
                 if ((scanPtr == lastRecordIndex) || (scanPtr = scanPtr + 1, sourceIsRegisterFile)) break;
                 configFlagsPtrB = (uint *)alloc[0xd];
@@ -4590,9 +4590,9 @@ loopSetSourceIsRegisterFile:
             scratchArg2 = (uint *)callResultPair;
             if ((int)((ulonglong)callResultPair >> 0x20) != 4) {
               scratchArg3 = outRecordsOut;
-              in_r6 = arena;
+              recordPtr = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-              scratchArg2 = extraout_r4_08;
+              scratchArg2 = calleeStaleR4_08;
             }
             moreComponents = componentIndex != 3;
             componentIndex = componentIndex + 1;
@@ -4610,9 +4610,9 @@ loopSetSourceIsRegisterFile:
                 scratchArg2 = (uint *)callResultPair;
                 if ((int)((ulonglong)callResultPair >> 0x20) != 4) {
                   scratchArg3 = outRecordsOut;
-                  in_r6 = arena;
+                  recordPtr = arena;
                   ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-                  scratchArg2 = extraout_r4_10;
+                  scratchArg2 = calleeStaleR4_10;
                 }
               }
             }
@@ -4624,9 +4624,9 @@ loopSetSourceIsRegisterFile:
                 scratchArg2 = (uint *)callResultPair;
                 if ((int)((ulonglong)callResultPair >> 0x20) != 4) {
                   scratchArg3 = outRecordsOut;
-                  in_r6 = arena;
+                  recordPtr = arena;
                   ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,0);
-                  scratchArg2 = extraout_r4_09;
+                  scratchArg2 = calleeStaleR4_09;
                 }
               }
             }
@@ -4655,9 +4655,9 @@ loopSetSourceIsRegisterFile:
               scratchArg2 = (uint *)callResultPair;
               if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
                 scratchArg3 = outRecordsOut;
-                in_r6 = arena;
+                recordPtr = arena;
                 ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-                scratchArg2 = extraout_r4_12;
+                scratchArg2 = calleeStaleR4_12;
               }
             }
             else if (componentIndex == 0) {
@@ -4665,9 +4665,9 @@ loopSetSourceIsRegisterFile:
               scratchArg2 = (uint *)callResultPair;
               if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
                 scratchArg3 = outRecordsOut;
-                in_r6 = arena;
+                recordPtr = arena;
                 ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,0);
-                scratchArg2 = extraout_r4_11;
+                scratchArg2 = calleeStaleR4_11;
               }
             }
             moreComponentsC = componentIndex != 3;
@@ -4684,9 +4684,9 @@ loopSetCallResultPair:
                 scratchArg2 = (uint *)callResultPair;
                 if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
                   scratchArg3 = outRecordsOut;
-                  in_r6 = arena;
+                  recordPtr = arena;
                   ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
-                  scratchArg2 = extraout_r4_07;
+                  scratchArg2 = calleeStaleR4_07;
                 }
               }
             }
@@ -4709,16 +4709,16 @@ loopSetCallResultPair:
         case 'I':
           if ((configBit6B & 1) != 0) goto recordCase41;
           scratchArg3 = outRecordsOut;
-          in_r6 = arena;
+          recordPtr = arena;
           ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,0);
-          scratchArg2 = extraout_r4_04;
+          scratchArg2 = calleeStaleR4_04;
           break;
         case 'D':
           componentIndex = 0;
           if ((configBit6B & 1) == 0) {
             do {
               scratchArg3 = outRecordsOut;
-              in_r6 = arena;
+              recordPtr = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
               componentsLeftC = 4 - componentIndex;
               if (4 < componentIndex + 1) {
@@ -4727,7 +4727,7 @@ loopSetCallResultPair:
               do {
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
-                scratchArg2 = extraout_r4_01;
+                scratchArg2 = calleeStaleR4_01;
                 if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (componentIndex == 2);
             } while( true );
@@ -4738,7 +4738,7 @@ loopSetCallResultPair:
                (componentIndex = 0, configBit6B == (*srcWordPtr2 & 0x1fe0))))))) {
             do {
               scratchArg3 = outRecordsOut;
-              in_r6 = arena;
+              recordPtr = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
               componentsLeftC = 4 - componentIndex;
               if (4 < componentIndex + 1) {
@@ -4747,7 +4747,7 @@ loopSetCallResultPair:
               do {
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
-                scratchArg2 = extraout_r4_02;
+                scratchArg2 = calleeStaleR4_02;
                 if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (componentIndex == 2);
             } while( true );
@@ -4761,7 +4761,7 @@ loopSetCallResultPair:
           if ((configBit6B & 1) == 0) {
             do {
               scratchArg3 = outRecordsOut;
-              in_r6 = arena;
+              recordPtr = arena;
               ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
               componentsLeftC = 3 - componentIndex;
               if (3 < componentIndex + 1) {
@@ -4770,35 +4770,35 @@ loopSetCallResultPair:
               do {
                 componentIndex = componentIndex + 1;
                 componentsLeftC = componentsLeftC + -1;
-                scratchArg2 = extraout_r4_03;
+                scratchArg2 = calleeStaleR4_03;
                 if (componentsLeftC == 0) goto addSourceDependencyEdges;
               } while (((componentIndex == 1) && ((char)*record != '\r')) && ((char)*record != '\x0e'));
             } while( true );
           }
 recordCase41:
           scratchArg3 = outRecordsOut;
-          in_r6 = arena;
+          recordPtr = arena;
           ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,3);
-          scratchArg2 = extraout_r4_06;
+          scratchArg2 = calleeStaleR4_06;
           break;
         case 'J':
           if ((configBit6B & 1) != 0) goto recordCase41;
           componentIndex = 0;
           do {
             scratchArg3 = outRecordsOut;
-            in_r6 = arena;
+            recordPtr = arena;
             ((int (*)())recordLinkSourceToDefinition)(alloc,records,outRecordsOut,arena,recordIndex,sourceSlot,componentIndex);
             moreComponentsB = componentIndex != 1;
             componentIndex = componentIndex + 1;
-            scratchArg2 = extraout_r4_05;
+            scratchArg2 = calleeStaleR4_05;
           } while (moreComponentsB);
         }
 addSourceDependencyEdges:
         for (sourceDepNode = (int *)*perSourceDepHead; sourceDepNode != (int *)0x0;
             sourceDepNode = *(int **)((int)sourceDepNode + 0x10)) {
-          in_r6 = *(dword **)((int)sourceDepNode + 4);
+          recordPtr = *(dword **)((int)sourceDepNode + 4);
           scratchArg3 = recordIndex;
-          callResultPair = ((int (*)())depListAddEdge)(alloc,alloc + *sourceDepNode + 0x2914,recordIndex,in_r6,
+          callResultPair = ((int (*)())depListAddEdge)(alloc,alloc + *sourceDepNode + 0x2914,recordIndex,recordPtr,
                                 *(int *)((int)sourceDepNode + 8),0,arena);
           componentIndex = (int)((ulonglong)callResultPair >> 0x20);
           scratchArg2 = (uint *)callResultPair;
@@ -4850,10 +4850,10 @@ setMoreSources:
             } while (listPosB != (dword *)0x0);
             while (scanFlag != (dword *)0x0) {
               if (listIndex != *scratchArg3) {
-                in_r6 = (*(dword * *)(scratchArg3 + (1)));
+                recordPtr = (*(dword * *)(scratchArg3 + (1)));
                 scratchArg6 = (int *)0x0;
                 lastRecordIndexValue = arena;
-                status = ((int (*)())depListAddEdge)(alloc,dependencyHeadPtr,*scratchArg3,in_r6,0,0,arena);
+                status = ((int (*)())depListAddEdge)(alloc,dependencyHeadPtr,*scratchArg3,recordPtr,0,0,arena);
                 if (status != 0) {
                   return status;
                 }
@@ -4876,12 +4876,12 @@ setMoreSources:
     do {
       scratchArg3 = (unsigned int *)0x800;
       _memset(allocTail + 0x314,0,0x800);
-      scratchArg2 = extraout_r4_14;
+      scratchArg2 = calleeStaleR4_14;
       for (edgeNode = (int *)*tablePtr; edgeNode != (int *)0x0; edgeNode = (int *)edgeNode[4]) {
         scratchArg3 = (dword *)*edgeNode;
-        in_r6 = (dword *)edgeNode[1];
-        ((int (*)())recordAddTransitiveDependencies)(alloc,loopIndex,scratchArg3,in_r6);
-        scratchArg2 = extraout_r4_15;
+        recordPtr = (dword *)edgeNode[1];
+        ((int (*)())recordAddTransitiveDependencies)(alloc,loopIndex,scratchArg3,recordPtr);
+        scratchArg2 = calleeStaleR4_15;
       }
       loopIndex = loopIndex + 1;
       tablePtr = tablePtr + 1;
@@ -4917,7 +4917,7 @@ setMoreSources:
     } while (scratchArg8 != recordCount);
   }
   if ((*alloc & 0x100) == 0) {
-    status = ((int (*)())recordProgramAllocateAndEmit)(alloc,scratchArg2,scratchArg3,in_r6,scratchArg5,scratchArg6,lastRecordIndexValue,scratchArg8);
+    status = ((int (*)())recordProgramAllocateAndEmit)(alloc,scratchArg2,scratchArg3,recordPtr,scratchArg5,scratchArg6,lastRecordIndexValue,scratchArg8);
     return status;
   }
   return 0;
@@ -8899,8 +8899,8 @@ int gldAllocAndUploadConstants(glContext, program)
   int limitRaw;
   code *streamSetCurrent;
   undefined4 *dstWords;
-  undefined4 in_r5;
-  undefined4 in_r6;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
   uint oldBase;
   undefined4 oldOffset;
   uint newOffset;
@@ -8935,7 +8935,7 @@ loopSetOldBase:
     reg1b94Value = oldBase & 0x3ff | *(uint *)(glContext + 0x1b94) & 0xfffffc00;
     *(uint *)(glContext + 0x1b94) = reg1b94Value;
     *(char *)(glContext + 0x1b8d) = (char)*(undefined4 *)(program + 0x48);
-    packet = (undefined4 *)(*streamAlloc)(glContext,4,in_r5,in_r6,oldOffset,streamAlloc,oldBase,reg1b94Value);
+    packet = (undefined4 *)(*streamAlloc)(glContext,4,staleArgR5,staleArgR6,oldOffset,streamAlloc,oldBase,reg1b94Value);
     *(undefined4 **)(0x00002748 + glContext + 4) = packet;
     *packet = 0x208b4;
     packet[1] = *(undefined4 *)(glContext + 0x1b90);
@@ -8944,7 +8944,7 @@ loopSetOldBase:
     streamSetCurrent = *(code **)(glContext + 0x275c);
     cmdPos = *(int *)(0x00002748 + glContext + 4) + 0x10;
     *(int *)(0x00002748 + glContext + 4) = cmdPos;
-    (*streamSetCurrent)(glContext,cmdPos,in_r5,in_r6,oldOffset,streamAlloc,cmdPos);
+    (*streamSetCurrent)(glContext,cmdPos,staleArgR5,staleArgR6,oldOffset,streamAlloc,cmdPos);
     packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
     *(undefined4 **)(0x00002748 + glContext + 4) = packet;
     *packet = 0x8b7;
@@ -8952,7 +8952,7 @@ loopSetOldBase:
     cmdPos = *(int *)(0x00002748 + glContext + 4);
     streamSetCurrent = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = cmdPos + 8;
-    (*streamSetCurrent)(glContext,cmdPos + 8,in_r5,in_r6,oldOffset,streamAlloc,packet);
+    (*streamSetCurrent)(glContext,cmdPos + 8,staleArgR5,staleArgR6,oldOffset,streamAlloc,packet);
     gldSetVertexPacketLimits(glContext,*(undefined4 *)(program + 0x3c),*(undefined4 *)(program + 0x40),
                  *(undefined4 *)(program + 0x44));
     return;
@@ -9054,19 +9054,19 @@ int gldEmitProgramConstants(ctx, program, unusedArg3, unusedArg4, unusedArg5, un
   uint loopIndex;
   int stateBlock;
   undefined4 *srcConstants;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
-  double in_stack_ffffffc8;
+  double unusedFloatArg1;
+  double unusedFloatArg2;
+  double unusedFloatArg3;
+  double unusedFloatArg4;
+  double unusedFloatArg5;
+  double unusedFloatArg6;
+  double unusedFloatArg7;
+  double unusedFloatArg8;
+  double unusedFloatArg9;
+  double unusedFloatArg10;
+  double unusedFloatArg11;
+  double unusedFloatArg12;
+  double unusedFloatArg13;
   
   stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   packet = (undefined4 *)
@@ -9084,9 +9084,9 @@ int gldEmitProgramConstants(ctx, program, unusedArg3, unusedArg4, unusedArg5, un
       return;
     }
     srcConstants = *(undefined4 **)(program + 0x4c);
-    ((void (*)())programFillStateConstants)(ctx,program,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7,unusedArg8,fparam_1,in_f2,
-                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffa8,in_stack_ffffffb0,
-                 in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8);
+    ((void (*)())programFillStateConstants)(ctx,program,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7,unusedArg8,unusedFloatArg1,unusedFloatArg2,
+                 unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedFloatArg9,unusedFloatArg10,
+                 unusedFloatArg11,unusedFloatArg12,unusedFloatArg13);
     packetWords = *(int *)(program + 0x48) * 4 + 3;
     packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,packetWords);
     *(undefined4 **)(0x00002748 + ctx + 4) = packet;
