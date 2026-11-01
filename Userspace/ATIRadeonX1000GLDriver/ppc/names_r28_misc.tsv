@@ -36,3 +36,7 @@ local	Compiler__clearOutputChunks	auStack_b8	chunkCopyBuf	INFERRED	128-byte scra
 local	Compiler__clearOutputChunks	local_38	deadClearFlag	INFERRED	written to 0 each loop iteration, never read anywhere in the function
 local	ildisPrintHeader	auStack_118	formattedHeaderLine	CONFIRMED	268-byte buffer filled by printf_LDBLStub_1a32d0 ("il_%s_%d_%d") then passed to ildisAppendf
 local	ildisDisassembleTokens	auStack_248	disContext	CONFIRMED	passed to ildisInitContext and ildisPrintProgram as the disassembler context object
+local	ildisPrintSourceOperand	unaff_r23	addressModeWord	CONFIRMED	the extra token word read from *disassembler[2] when relativeMode==0x800000 (register-relative addressing); masked for the address register index and component-select bits
+local	ildisPrintSourceOperand	unaff_r28	modifierWord	CONFIRMED	the optional 2nd token word (modifier bits: swizzle/negate/write-mask-style flags), read from tokenPtr[1] or fmtArgR9[1] depending on path
+local	ildisPrintDestinationOperand	unaff_r24	addressModeWord	CONFIRMED	same role as ildisPrintSourceOperand's unaff_r23: extra token word for register-relative addressing
+local	ildisPrintDestinationOperand	unaff_r25	modifierWord	CONFIRMED	same role as ildisPrintSourceOperand's unaff_r28: optional 2nd token word of result modifiers/write mask

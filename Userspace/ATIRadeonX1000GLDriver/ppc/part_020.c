@@ -1014,10 +1014,10 @@ int ildisPrintSourceOperand(disassembler, passThroughR4, printedValue, fmtArgR6,
   undefined4 r4AfterCall;
   uint addressRegisterIndex;
   undefined4 staleArgR10;
-  uint unaff_r23;
+  uint addressModeWord;
   uint extraOperandCount;
   uint relativeMode;
-  uint unaff_r28;
+  uint modifierWord;
   uint loopIndex;
   uint operandWord;
   undefined1 formatBuffer [64];
@@ -1028,12 +1028,12 @@ int ildisPrintSourceOperand(disassembler, passThroughR4, printedValue, fmtArgR6,
   disassembler[2] = (int)(tokenPtr + 1);
   noModifierWord = (operandWord & 0x400000) == 0;
   if (!noModifierWord) {
-    unaff_r28 = tokenPtr[1];
+    modifierWord = tokenPtr[1];
     disassembler[2] = (int)(tokenPtr + 2);
   }
   relativeMode = operandWord & 0x1800000;
   if (relativeMode == 0x800000) {
-    unaff_r23 = *(uint *)disassembler[2];
+    addressModeWord = *(uint *)disassembler[2];
     disassembler[2] = (int)((uint *)disassembler[2] + 1);
   }
   extraOperandCount = operandWord >> 0x19 & 1;
@@ -1076,13 +1076,13 @@ loopCheckRelativeMode:
       else {
         if (relativeMode == 0x800000) {
           ildisAppendf(disassembler,"[",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-          if ((unaff_r23 & 0x10000) == 0) {
-            addressRegisterIndex = unaff_r23 & 0xffff;
+          if ((addressModeWord & 0x10000) == 0) {
+            addressRegisterIndex = addressModeWord & 0xffff;
             printf_LDBLStub_1a32d0(formatBuffer,"a%d",addressRegisterIndex,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
             ildisAppendf(disassembler,formatBuffer,addressRegisterIndex,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-            if ((unaff_r23 & 0xe0000) != 0) {
+            if ((addressModeWord & 0xe0000) != 0) {
               letterStyle = returnZero_da8fc(disassembler,operandWord);
-              componentChar = ildisComponentSelectChar(disassembler,unaff_r23 >> 0x11 & 7,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,
+              componentChar = ildisComponentSelectChar(disassembler,addressModeWord >> 0x11 & 7,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,
                                    fmtArgR9,staleArgR10);
               printf_LDBLStub_1a32d0(formatBuffer,".%c",componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
               ildisAppendf(disassembler,formatBuffer,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
@@ -1130,13 +1130,13 @@ setLoopIndex:
     operandWord = *fmtArgR9;
     disassembler[2] = (int)(fmtArgR9 + 1);
     if ((operandWord & 0x400000) != 0) {
-      unaff_r28 = fmtArgR9[1];
+      modifierWord = fmtArgR9[1];
       disassembler[2] = (int)(fmtArgR9 + 2);
     }
     relativeMode = operandWord & 0x1800000;
     extraOperandCount = operandWord >> 0x19 & 1;
     if (relativeMode == 0x800000) {
-      unaff_r23 = *(uint *)disassembler[2];
+      addressModeWord = *(uint *)disassembler[2];
       disassembler[2] = (int)((uint *)disassembler[2] + 1);
     }
     goto loopCheckRelativeMode;
@@ -1146,28 +1146,28 @@ checkNoModifierWord:
     return;
   }
   letterStyle = returnZero_da8fc(disassembler,operandWord);
-  ildisPrintSwizzle(disassembler,unaff_r28,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-  ildisPrintNegateComponents(disassembler,unaff_r28,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-  if ((unaff_r28 & 0x10000) != 0) {
+  ildisPrintSwizzle(disassembler,modifierWord,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
+  ildisPrintNegateComponents(disassembler,modifierWord,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
+  if ((modifierWord & 0x10000) != 0) {
     ildisAppendf(disassembler,"_invert",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
   }
-  if ((unaff_r28 & 0x80000) != 0) {
+  if ((modifierWord & 0x80000) != 0) {
     ildisAppendf(disassembler,"_sign",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
   }
-  if ((unaff_r28 & 0x100000) != 0) {
+  if ((modifierWord & 0x100000) != 0) {
     ildisAppendf(disassembler,"_abs",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
   }
-  if ((unaff_r28 & 0x20000) != 0) {
+  if ((modifierWord & 0x20000) != 0) {
     ildisAppendf(disassembler,"_bias",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
   }
-  if ((unaff_r28 & 0x40000) != 0) {
+  if ((modifierWord & 0x40000) != 0) {
     ildisAppendf(disassembler,"_x2",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
   }
-  if ((unaff_r28 & 0xe00000) == 0) {
+  if ((modifierWord & 0xe00000) == 0) {
     return;
   }
   ildisAppendf(disassembler,"_divcomp(",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
-  divCompSelect = unaff_r28 >> 0x15 & 7;
+  divCompSelect = modifierWord >> 0x15 & 7;
   if (divCompSelect == 2) {
     ildisAppendf(disassembler,"z",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,staleArgR10);
     goto callIldisAppendf;
@@ -1214,8 +1214,8 @@ int ildisPrintDestinationOperand(disassembler, passThroughR4, printedValue, fmtA
   uint *tokenPtr;
   undefined4 r4AfterCall;
   undefined4 indexValue;
-  uint unaff_r24;
-  uint unaff_r25;
+  uint addressModeWord;
+  uint modifierWord;
   uint operandWordOrIndex;
   uint relativeModeOrWord;
   undefined1 formatBuffer [64];
@@ -1226,16 +1226,16 @@ int ildisPrintDestinationOperand(disassembler, passThroughR4, printedValue, fmtA
   disassembler[2] = (int)(tokenPtr + 1);
   noModifierWord = (operandWordOrIndex >> 0x16 & 1) == 0;
   if (!noModifierWord) {
-    unaff_r25 = tokenPtr[1];
+    modifierWord = tokenPtr[1];
     disassembler[2] = (int)(tokenPtr + 2);
   }
   relativeModeOrWord = operandWordOrIndex & 0x1800000;
   if (relativeModeOrWord == 0x800000) {
-    unaff_r24 = *(uint *)disassembler[2];
+    addressModeWord = *(uint *)disassembler[2];
     disassembler[2] = (int)((uint *)disassembler[2] + 1);
   }
   if (!noModifierWord) {
-    ildisPrintResultModifiers(disassembler,unaff_r25,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    ildisPrintResultModifiers(disassembler,modifierWord,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
   ildisAppendf(disassembler," ",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   letterStyle = returnZero_da8f4(disassembler,operandWordOrIndex);
@@ -1283,13 +1283,13 @@ int ildisPrintDestinationOperand(disassembler, passThroughR4, printedValue, fmtA
     else {
       if (relativeModeOrWord == 0x800000) {
         ildisAppendf(disassembler,"[",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-        if ((unaff_r24 & 0x10000) == 0) {
-          relativeModeOrWord = unaff_r24 & 0xffff;
+        if ((addressModeWord & 0x10000) == 0) {
+          relativeModeOrWord = addressModeWord & 0xffff;
           printf_LDBLStub_1a32d0(formatBuffer,"a%d",relativeModeOrWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
           ildisAppendf(disassembler,formatBuffer,relativeModeOrWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-          if ((unaff_r24 & 0xe0000) != 0) {
+          if ((addressModeWord & 0xe0000) != 0) {
             componentChar = returnZero_da8f4(disassembler,operandWordOrIndex);
-            componentChar = ildisComponentSelectChar(disassembler,unaff_r24 >> 0x11 & 7,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9
+            componentChar = ildisComponentSelectChar(disassembler,addressModeWord >> 0x11 & 7,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9
                                  ,fmtArgR10);
             printf_LDBLStub_1a32d0(formatBuffer,".%c",componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
             ildisAppendf(disassembler,formatBuffer,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
@@ -1340,7 +1340,7 @@ int ildisPrintDestinationOperand(disassembler, passThroughR4, printedValue, fmtA
   }
 joined_r0x000dda5c:
   if (!noModifierWord) {
-    ildisPrintDestinationWriteMask(disassembler,unaff_r25,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    ildisPrintDestinationWriteMask(disassembler,modifierWord,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
   return;
 }
