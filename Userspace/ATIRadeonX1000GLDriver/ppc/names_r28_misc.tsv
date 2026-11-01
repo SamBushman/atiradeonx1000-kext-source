@@ -13,3 +13,12 @@ local	IRInst__operandIsNonNegativeFloatConst	local_24	laneWord4	INFERRED	sourceV
 local	IRInst__operandIsNonNegativeFloatConst	local_20	laneWord5	INFERRED	sourceVReg[lane*6+12]; word5 of the per-lane record
 local	Program__dumpConstantRegisters	auStack_b8	logScratchBuf	INFERRED	148-byte stack buffer never written before its address is passed to Compiler__logf's "%s" arg; uninitialised read matches stock, not a bug to fix here
 local	IRInst__setConstantOperand	local_274	operand0Ptr	INFERRED	pointer slot for constant operand 0's record, parallel to operandPtrTable[0..2] = &constOperand1Kind/&constOperand2Kind/&constOperand3Kind; addressed via operandCursor = &local_274
+local	Program__emitInputMerge	param_6	destIlType	INFERRED	fed to Program__registerFileOfIlType to pick the merge-result's register file
+local	Program__emitInputMerge	param_7	inputArityCode	INFERRED	switch selects inputRegisterCount (1/2/3/4/6) from this code's value 0-4
+local	Program__emitInputMerge	puVar8	loadTempInst	CONFIRMED	new IRLoadTemp instance (IRLoadTemp__ctor_109428), appended to the entry block each loop iteration, same naming pattern as inst/mergeInst in this function
+local	Program__emitInputMerge	local_68	sourceToken	INFERRED	4-word buffer, word0 = 0x10203 (component-select token), passed to Program__applySourceTokenToOperand as its token argument
+local	Program__emitInputMerge	local_58	inputSelectWords	INFERRED	4-word buffer filled by the hw-description vtable call at +0xa0 (get input select info); only word0 is read back here
+local	Program__loadDefaultConstants	local_48	constScratch0	CONFIRMED	word0 of the per-kind const-read scratch: single bool value in the bool loop, then word0 of the 4-word int-const buffer in the int loop (local_44/local_40/local_3c, words 1-3); kept as ONE name - splitting it broke gate ADDRESS-TAKEN (lowest frame slot, folded array base) at frame offset 120
+local	Program__loadDefaultConstants	local_44	intConstWord1	CONFIRMED	word1 of the int-const buffer (ILReader__appendIntConst 2nd const word)
+local	Program__loadDefaultConstants	local_40	intConstWord2	CONFIRMED	word2 of the int-const buffer
+local	Program__loadDefaultConstants	local_3c	intConstWord3	CONFIRMED	word3 of the int-const buffer

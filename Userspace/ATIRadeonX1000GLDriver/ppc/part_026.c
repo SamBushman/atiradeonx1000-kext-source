@@ -2561,14 +2561,14 @@ int Program__appendInst(program, inst, block)
 }
 
 /* Program__emitInputMerge @ 0xf94dc (968 bytes) */
-int Program__emitInputMerge(program, list, descriptor, unusedArg4, projectionDestRegister, param_6, param_7)
+int Program__emitInputMerge(program, list, descriptor, unusedArg4, projectionDestRegister, destIlType, inputArityCode)
   int program;
   undefined4 list;
   uint *descriptor;
   undefined4 unusedArg4;
   undefined4 projectionDestRegister;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 destIlType;
+  undefined4 inputArityCode;
 {
   int inputTempId;
   undefined4 *projectionInst;
@@ -2590,19 +2590,19 @@ int Program__emitInputMerge(program, list, descriptor, unusedArg4, projectionDes
   void *inst;
   int operandRecord;
   int *hwDescription;
-  undefined4 *puVar8;
+  undefined4 *loadTempInst;
   uint inputRegisterCount;
   undefined4 *secondMerge;
   int secondMergeIndex;
   undefined4 *mergeInst;
   int hwRegister;
   undefined4 arenaA;
-  undefined4 local_68 [4];
-  undefined4 local_58 [4];
+  undefined4 sourceToken [4];
+  undefined4 inputSelectWords [4];
   
   if (*(int *)(program + 0x374) == 0) {
     inputRegisterCount = 0;
-    switch(param_7) {
+    switch(inputArityCode) {
     case 0:
       inputRegisterCount = 1;
       break;
@@ -2654,8 +2654,8 @@ int Program__emitInputMerge(program, list, descriptor, unusedArg4, projectionDes
         *(undefined4 *)(operandRecord + 8) = hwInputRegister;
         *(undefined4 *)(operandRecord + 0xc) = 0x1f;
         hwDescription = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
-        (**(code **)(*hwDescription + 0xa0))(local_58,hwDescription,loopIndex,*(int *)(program + PROG_compiler));
-        inputSelectWord = local_58[0];
+        (**(code **)(*hwDescription + 0xa0))(inputSelectWords,hwDescription,loopIndex,*(int *)(program + PROG_compiler));
+        inputSelectWord = inputSelectWords[0];
         operandRecord = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(operandRecord + 0x10) = inputSelectWord;
         ((int (*)())Program__appendInst)(program,inst,successor);
@@ -2697,15 +2697,15 @@ int Program__emitInputMerge(program, list, descriptor, unusedArg4, projectionDes
         arenaA = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
         instAlloc = (undefined4 *)Arena__alloc(arenaA,0x168);
         *instAlloc = arenaA;
-        puVar8 = instAlloc + 1;
-        IRLoadTemp__ctor_109428(puVar8,0x7a,*(undefined4 *)(program + PROG_compiler));
-        operandRecord = IRInst__getOperandRecord(puVar8,0);
+        loadTempInst = instAlloc + 1;
+        IRLoadTemp__ctor_109428(loadTempInst,0x7a,*(undefined4 *)(program + PROG_compiler));
+        operandRecord = IRInst__getOperandRecord(loadTempInst,0);
         *(undefined4 *)(operandRecord + 0xc) = 0x10;
         loopIndex = loopIndex + 1;
         *(int *)(operandRecord + 8) = hwRegister;
         loopIndex2 = loopIndex2 + 1;
         secondMergeIndex = secondMergeIndex + 1;
-        ((int (*)())Program__appendInst)(program,puVar8,*(undefined4 *)(program + PROG_entryBlock));
+        ((int (*)())Program__appendInst)(program,loadTempInst,*(undefined4 *)(program + PROG_entryBlock));
       } while (inputRegisterCount != loopIndex);
     }
     ((int (*)())Program__appendInst)(program,mergeInst,successor);
@@ -2737,12 +2737,12 @@ int Program__emitInputMerge(program, list, descriptor, unusedArg4, projectionDes
   operandRecord2 = IRInst__getOperandRecord(projectionInst,1);
   *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
   *(uint *)(operandRecord2 + 8) = (uint)(ushort)descriptorWord;
-  local_68[0] = 0x10203;
-  ((int (*)())Program__applySourceTokenToOperand)(program,local_68,descriptor,1,projectionInst);
+  sourceToken[0] = 0x10203;
+  ((int (*)())Program__applySourceTokenToOperand)(program,sourceToken,descriptor,1,projectionInst);
   allocation[0x4d] = 1;
   DList__pushBack(list,projectionInst);
   inst = IRInst__create(0x31,*(undefined4 *)(program + PROG_compiler));
-  registerFile = Program__registerFileOfIlType(program,param_6);
+  registerFile = Program__registerFileOfIlType(program,destIlType);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
   *(undefined4 *)(operandRecord2 + 8) = projectionDestRegister;
@@ -3663,10 +3663,10 @@ int Program__loadDefaultConstants(program, ilReader)
   uint programKindSet;
   int nextConstIndex;
   int constIndex;
-  int local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
+  int constScratch0;
+  undefined4 intConstWord1;
+  undefined4 intConstWord2;
+  undefined4 intConstWord3;
   float defaultFloatX;
   float defaultFloatY;
   float defaultFloatZ;
@@ -3677,10 +3677,10 @@ int Program__loadDefaultConstants(program, ilReader)
   if (0 < boolConstCount) {
     constIndex = 0;
     do {
-      CompileInput__readBoolConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,1,&local_48);
-      ILReader__appendBoolConst(ilReader,constIndex,(uint)(local_48 != 0));
+      CompileInput__readBoolConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,1,&constScratch0);
+      ILReader__appendBoolConst(ilReader,constIndex,(uint)(constScratch0 != 0));
       nextConstIndex = constIndex + 1;
-      ((int (*)())Program__createConstantVReg)(program,0,constIndex,1,&local_48);
+      ((int (*)())Program__createConstantVReg)(program,0,constIndex,1,&constScratch0);
       constIndex = nextConstIndex;
     } while (boolConstCount != nextConstIndex);
   }
@@ -3688,10 +3688,10 @@ int Program__loadDefaultConstants(program, ilReader)
   if (0 < intConstCount) {
     constIndex = 0;
     do {
-      CompileInput__readIntConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&local_48);
-      ILReader__appendIntConst(ilReader,constIndex,local_48,local_44,local_40,local_3c);
+      CompileInput__readIntConst(*(undefined4 *)(*(int *)(program + 8) + 0x398),programKindSet,constIndex,4,&constScratch0);
+      ILReader__appendIntConst(ilReader,constIndex,constScratch0,intConstWord1,intConstWord2,intConstWord3);
       nextConstIndex = constIndex + 1;
-      ((int (*)())Program__createConstantVReg)(program,2,constIndex,4,&local_48);
+      ((int (*)())Program__createConstantVReg)(program,2,constIndex,4,&constScratch0);
       constIndex = nextConstIndex;
     } while (intConstCount != nextConstIndex);
   }
