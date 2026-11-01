@@ -106,15 +106,10 @@ int ConstRecord__insertSwizzleVariants(constTables, variantStart, constRecord)
 }
 
 /* Compiler__getOrCreateLoadConstN @ 0xf4fdc (352 bytes) */
-int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstConstValue, firstConstWord2, firstConstWord3, firstConstWord4, firstConstWord5)
+int Compiler__getOrCreateLoadConstN(compiler, constCount, ops)
   int *compiler;
   int constCount;
-  undefined4 firstConstKind;
-  undefined4 firstConstValue;
-  undefined4 firstConstWord2;
-  undefined4 firstConstWord3;
-  undefined4 firstConstWord4;
-  undefined4 firstConstWord5;
+  ConstOps4 ops;
 {
   undefined4 *instRecordCursor;
   undefined4 recordWord;
@@ -130,12 +125,6 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstC
   int loopCounter;
   uint loopIndex;
   int loopCounterB;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   /* issue #64 live-repro: same defect as Compiler__getOrCreateConstVectorN in this file (fixed earlier this session) -
    * called below as aiStack_9c[constCount] with constCount observed as 4, one past this array's declared
    * 4 elements; local_8c (assigned right after, from compiler[5]) sits exactly at the missing 5th
@@ -150,8 +139,7 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstC
   loopCounterB = 4;
   loopCounter = 0;
   loopIndex = 0;
-  constRecords[0] = firstConstKind;
-  constRecords[1] = firstConstValue;
+  *(ConstOps4 *)constRecords = ops;
   aiStack_9c[3] = compiler[4];
   local_8c = compiler[5];
   keyRecordCursor = constRecords;
@@ -171,12 +159,6 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstC
     loopCounter = loopCounter + 0x18;
     loopCounterB = loopCounterB + -1;
   } while (loopCounterB != 0);
-  uStack00000020 = firstConstKind;
-  uStack00000024 = firstConstValue;
-  uStack00000028 = firstConstWord2;
-  uStack0000002c = firstConstWord3;
-  uStack00000030 = firstConstWord4;
-  uStack00000034 = firstConstWord5;
   cachedInst = (undefined4 *)HashTable__find(aiStack_9c[constCount],compiler[10]);
   if (cachedInst == (undefined4 *)0x0) {
     arena = *(undefined4 *)(*compiler + 0x374);
@@ -222,118 +204,53 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, firstConstKind, firstC
 #undef local_8c
 
 /* Compiler__getOrCreateLoadConst4 @ 0xf5248 (376 bytes) */
-int Compiler__getOrCreateLoadConst4(compiler, constVec0, constVec1, constVec2, constVec3, constVec4, constVec5, constVec6)
+int Compiler__getOrCreateLoadConst4(compiler, ops)
   undefined4 compiler;
-  undefined4 constVec0;
-  undefined4 constVec1;
-  undefined4 constVec2;
-  undefined4 constVec3;
-  undefined4 constVec4;
-  undefined4 constVec5;
-  undefined4 constVec6;
+  ConstOps4 ops;
 {
-  undefined4 loadConstResult;
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
-  
-  uStack0000001c = constVec0;
-  uStack00000020 = constVec1;
-  uStack00000024 = constVec2;
-  uStack00000028 = constVec3;
-  uStack0000002c = constVec4;
-  uStack00000030 = constVec5;
-  uStack00000034 = constVec6;
-  loadConstResult = ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,4,constVec0,constVec1,constVec2,constVec3,constVec4,constVec5);
-  return loadConstResult;
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,4,ops);
 }
 
 /* Compiler__getOrCreateLoadConst3 @ 0xf53c0 (396 bytes) */
-int Compiler__getOrCreateLoadConst3(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+int Compiler__getOrCreateLoadConst3(compiler, ops)
   undefined4 compiler;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
-  undefined4 operandWord6;
+  ConstOps3 ops;
 {
-  undefined4 operandWord0Home;
-  undefined4 operandWord1Home;
-  undefined4 operandWord2Home;
-  undefined4 operandWord3Home;
-  undefined4 operandWord4Home;
-  undefined4 operandWord5Home;
-  undefined4 operandWord6Home;
+  ConstOps4 fullOps;
+  int i;
   
-  operandWord0Home = operandWord0;
-  operandWord1Home = operandWord1;
-  operandWord2Home = operandWord2;
-  operandWord3Home = operandWord3;
-  operandWord4Home = operandWord4;
-  operandWord5Home = operandWord5;
-  operandWord6Home = operandWord6;
-  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,3,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
+  for (i = 0; i < 18; i++) {
+    fullOps.w[i] = ops.w[i];
+  }
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,3,fullOps);
 }
 
 /* Compiler__getOrCreateLoadConst2 @ 0xf554c (352 bytes) */
-int Compiler__getOrCreateLoadConst2(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+int Compiler__getOrCreateLoadConst2(compiler, ops)
   undefined4 compiler;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
-  undefined4 operandWord6;
+  ConstOps2 ops;
 {
-  undefined4 operandWord0Home;
-  undefined4 operandWord1Home;
-  undefined4 operandWord2Home;
-  undefined4 operandWord3Home;
-  undefined4 operandWord4Home;
-  undefined4 operandWord5Home;
-  undefined4 operandWord6Home;
+  ConstOps4 fullOps;
+  int i;
   
-  operandWord0Home = operandWord0;
-  operandWord1Home = operandWord1;
-  operandWord2Home = operandWord2;
-  operandWord3Home = operandWord3;
-  operandWord4Home = operandWord4;
-  operandWord5Home = operandWord5;
-  operandWord6Home = operandWord6;
-  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,2,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
+  for (i = 0; i < 12; i++) {
+    fullOps.w[i] = ops.w[i];
+  }
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,2,fullOps);
 }
 
 /* Compiler__getOrCreateLoadConst1 @ 0xf56ac (324 bytes) */
-int Compiler__getOrCreateLoadConst1(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+int Compiler__getOrCreateLoadConst1(compiler, ops)
   undefined4 compiler;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
+  ConstOps1 ops;
 {
-  undefined4 operandWord0Home;
-  undefined4 operandWord1Home;
-  undefined4 operandWord2Home;
-  undefined4 operandWord3Home;
-  undefined4 operandWord4Home;
-  undefined4 operandWord5Home;
+  ConstOps4 fullOps;
+  int i;
   
-  operandWord0Home = operandWord0;
-  operandWord1Home = operandWord1;
-  operandWord2Home = operandWord2;
-  operandWord3Home = operandWord3;
-  operandWord4Home = operandWord4;
-  operandWord5Home = operandWord5;
-  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,1,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
+  for (i = 0; i < 6; i++) {
+    fullOps.w[i] = ops.w[i];
+  }
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,1,fullOps);
 }
 
 /* RegisterMap__findConstVector @ 0xf57f0 (540 bytes) */
@@ -823,15 +740,10 @@ int Program__dumpConstantRegisters(program, compiler)
 }
 
 /* Compiler__getOrCreateConstVectorN @ 0xf6248 (532 bytes) */
-int Compiler__getOrCreateConstVectorN(owner, constCount, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+int Compiler__getOrCreateConstVectorN(owner, constCount, ops)
   int owner;
   int constCount;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
+  ConstOps4 ops;
 {
   undefined4 recordWord0B;
   undefined4 newInstId;
@@ -847,12 +759,6 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, operandWord0, operandWo
   int recordCursor;
   int constInst;
   int loopCounterD;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   /* issue #64 live-repro: called below as auStack_8c[constCount] with constCount observed as 4 - one
    * past this array's declared 4 elements (indices 0-3). Confirmed in stock's own disassembly: the
    * word this 5th index reads (entry-sp-0x8c+0x10, by this array's own hex name) is the exact same
@@ -873,8 +779,7 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, operandWord0, operandWo
   loopCounterC = 4;
   loopCounterB = 0;
   loopIndex = 0;
-  constRecords[0] = operandWord0;
-  constRecords[1] = operandWord1;
+  *(ConstOps4 *)constRecords = ops;
   auStack_8c[3] = *(undefined4 *)(owner + 0x10);
   local_7c = *(undefined4 *)(owner + 0x14);
   do {
@@ -894,12 +799,6 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, operandWord0, operandWo
     loopCounterB = loopCounterB + 0x18;
     loopCounterC = loopCounterC + -1;
   } while (loopCounterC != 0);
-  uStack00000020 = operandWord0;
-  uStack00000024 = operandWord1;
-  uStack00000028 = operandWord2;
-  uStack0000002c = operandWord3;
-  uStack00000030 = operandWord4;
-  uStack00000034 = operandWord5;
   foundEntry = HashTable__find(auStack_8c[constCount],*(undefined4 *)(owner + 0x28));
   if (foundEntry == 0) {
     newInstId = RegisterMap__nextTempIndex(owner);
@@ -945,118 +844,53 @@ int Compiler__getOrCreateConstVectorN(owner, constCount, operandWord0, operandWo
 #undef local_7c
 
 /* Compiler__getOrCreateConstVector4 @ 0xf645c (376 bytes) */
-int Compiler__getOrCreateConstVector4(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+int Compiler__getOrCreateConstVector4(owner, ops)
   undefined4 owner;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
-  undefined4 operandWord6;
+  ConstOps4 ops;
 {
-  undefined4 constVectorResult;
-  undefined4 operandWord0Home;
-  undefined4 operandWord1Home;
-  undefined4 operandWord2Home;
-  undefined4 operandWord3Home;
-  undefined4 operandWord4Home;
-  undefined4 operandWord5Home;
-  undefined4 operandWord6Home;
-  
-  operandWord0Home = operandWord0;
-  operandWord1Home = operandWord1;
-  operandWord2Home = operandWord2;
-  operandWord3Home = operandWord3;
-  operandWord4Home = operandWord4;
-  operandWord5Home = operandWord5;
-  operandWord6Home = operandWord6;
-  constVectorResult = ((int (*)())Compiler__getOrCreateConstVectorN)(owner,4,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
-  return constVectorResult;
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,4,ops);
 }
 
 /* Compiler__getOrCreateConstVector3 @ 0xf65d4 (396 bytes) */
-int Compiler__getOrCreateConstVector3(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+int Compiler__getOrCreateConstVector3(owner, ops)
   undefined4 owner;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
-  undefined4 operandWord6;
+  ConstOps3 ops;
 {
-  undefined4 operandWord0Home;
-  undefined4 operandWord1Home;
-  undefined4 operandWord2Home;
-  undefined4 operandWord3Home;
-  undefined4 operandWord4Home;
-  undefined4 operandWord5Home;
-  undefined4 operandWord6Home;
+  ConstOps4 fullOps;
+  int i;
   
-  operandWord0Home = operandWord0;
-  operandWord1Home = operandWord1;
-  operandWord2Home = operandWord2;
-  operandWord3Home = operandWord3;
-  operandWord4Home = operandWord4;
-  operandWord5Home = operandWord5;
-  operandWord6Home = operandWord6;
-  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,3,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
+  for (i = 0; i < 18; i++) {
+    fullOps.w[i] = ops.w[i];
+  }
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,3,fullOps);
 }
 
 /* Compiler__getOrCreateConstVector2 @ 0xf6760 (352 bytes) */
-int Compiler__getOrCreateConstVector2(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+int Compiler__getOrCreateConstVector2(owner, ops)
   undefined4 owner;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
-  undefined4 operandWord6;
+  ConstOps2 ops;
 {
-  undefined4 operandWord0Home;
-  undefined4 operandWord1Home;
-  undefined4 operandWord2Home;
-  undefined4 operandWord3Home;
-  undefined4 operandWord4Home;
-  undefined4 operandWord5Home;
-  undefined4 operandWord6Home;
+  ConstOps4 fullOps;
+  int i;
   
-  operandWord0Home = operandWord0;
-  operandWord1Home = operandWord1;
-  operandWord2Home = operandWord2;
-  operandWord3Home = operandWord3;
-  operandWord4Home = operandWord4;
-  operandWord5Home = operandWord5;
-  operandWord6Home = operandWord6;
-  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,2,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
+  for (i = 0; i < 12; i++) {
+    fullOps.w[i] = ops.w[i];
+  }
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,2,fullOps);
 }
 
 /* Compiler__getOrCreateConstVector1 @ 0xf68c0 (324 bytes) */
-int Compiler__getOrCreateConstVector1(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+int Compiler__getOrCreateConstVector1(owner, ops)
   undefined4 owner;
-  undefined4 operandWord0;
-  undefined4 operandWord1;
-  undefined4 operandWord2;
-  undefined4 operandWord3;
-  undefined4 operandWord4;
-  undefined4 operandWord5;
+  ConstOps1 ops;
 {
-  undefined4 operandWord0Home;
-  undefined4 operandWord1Home;
-  undefined4 operandWord2Home;
-  undefined4 operandWord3Home;
-  undefined4 operandWord4Home;
-  undefined4 operandWord5Home;
+  ConstOps4 fullOps;
+  int i;
   
-  operandWord0Home = operandWord0;
-  operandWord1Home = operandWord1;
-  operandWord2Home = operandWord2;
-  operandWord3Home = operandWord3;
-  operandWord4Home = operandWord4;
-  operandWord5Home = operandWord5;
-  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,1,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
+  for (i = 0; i < 6; i++) {
+    fullOps.w[i] = ops.w[i];
+  }
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,1,fullOps);
 }
 
 /* Program__findOrCreateConstInst @ 0xf6a04 (588 bytes) */
@@ -1272,126 +1106,14 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   undefined4 sortOrder;
   int *local_274;
   int *operandPtrTable [11];
-  undefined4 constVec2Op0Kind;
-  undefined4 constVec2Op0Value;
-  undefined4 constVec2Op0Word2;
-  undefined4 constVec2Op0Word3;
-  undefined4 constVec2Op0Word4;
-  undefined4 constVec2Op0Word5;
-  undefined4 constVec1Op0Kind;
-  undefined4 constVec1Op0Value;
-  undefined4 constVec1Op0Word2;
-  undefined4 constVec1Op0Word3;
-  undefined4 constVec1Op0Word4;
-  undefined4 constVec1Op0Word5;
-  undefined4 loadConst4Op3Kind;
-  undefined4 loadConst4Op3Value;
-  undefined4 loadConst4Op3Word2;
-  undefined4 loadConst4Op3Word3;
-  undefined4 loadConst4Op3Word4;
-  undefined4 loadConst4Op3Word5;
-  undefined4 loadConst4Op2Kind;
-  undefined4 loadConst4Op2Value;
-  undefined4 loadConst4Op2Word2;
-  undefined4 loadConst4Op2Word3;
-  undefined4 loadConst4Op2Word4;
-  undefined4 loadConst4Op2Word5;
-  undefined4 loadConst4Op1Kind;
-  undefined4 loadConst4Op1Value;
-  undefined4 loadConst4Op1Word2;
-  undefined4 loadConst4Op1Word3;
-  undefined4 loadConst4Op1Word4;
-  undefined4 loadConst4Op1Word5;
-  undefined4 loadConst4Op0Kind;
-  undefined4 loadConst4Op0Value;
-  undefined4 loadConst4Op0Word2;
-  undefined4 loadConst4Op0Word3;
-  undefined4 loadConst4Op0Word4;
-  undefined4 loadConst4Op0Word5;
-  undefined4 constVec4Op3Kind;
-  undefined4 constVec4Op3Value;
-  undefined4 constVec4Op3Word2;
-  undefined4 constVec4Op3Word3;
-  undefined4 constVec4Op3Word4;
-  undefined4 constVec4Op3Word5;
-  undefined4 loadConst3Op1Kind;
-  undefined4 loadConst3Op1Value;
-  undefined4 loadConst3Op1Word2;
-  undefined4 loadConst3Op1Word3;
-  undefined4 loadConst3Op1Word4;
-  undefined4 loadConst3Op1Word5;
-  undefined4 loadConst3Op0Kind;
-  undefined4 loadConst3Op0Value;
-  undefined4 loadConst3Op0Word2;
-  undefined4 loadConst3Op0Word3;
-  undefined4 loadConst3Op0Word4;
-  undefined4 loadConst3Op0Word5;
-  undefined4 loadConst2Op1Kind;
-  undefined4 loadConst2Op1Value;
-  undefined4 loadConst2Op1Word2;
-  undefined4 loadConst2Op1Word3;
-  undefined4 loadConst2Op1Word4;
-  undefined4 loadConst2Op1Word5;
-  undefined4 loadConst2Op0Kind;
-  undefined4 loadConst2Op0Value;
-  undefined4 loadConst2Op0Word2;
-  undefined4 loadConst2Op0Word3;
-  undefined4 loadConst2Op0Word4;
-  undefined4 loadConst2Op0Word5;
-  undefined4 loadConst1Op0Kind;
-  undefined4 loadConst1Op0Value;
-  undefined4 loadConst1Op0Word2;
-  undefined4 loadConst1Op0Word3;
-  undefined4 loadConst1Op0Word4;
-  undefined4 loadConst1Op0Word5;
-  undefined4 loadConst3Op2Kind;
-  undefined4 loadConst3Op2Value;
-  undefined4 loadConst3Op2Word2;
-  undefined4 loadConst3Op2Word3;
-  undefined4 loadConst3Op2Word4;
-  undefined4 loadConst3Op2Word5;
-  undefined4 constVec4Op2Kind;
-  undefined4 constVec4Op2Value;
-  undefined4 constVec4Op2Word2;
-  undefined4 constVec4Op2Word3;
-  undefined4 constVec4Op2Word4;
-  undefined4 constVec4Op2Word5;
-  undefined4 constVec4Op1Kind;
-  undefined4 constVec4Op1Value;
-  undefined4 constVec4Op1Word2;
-  undefined4 constVec4Op1Word3;
-  undefined4 constVec4Op1Word4;
-  undefined4 constVec4Op1Word5;
-  undefined4 constVec4Op0Kind;
-  undefined4 constVec4Op0Value;
-  undefined4 constVec4Op0Word2;
-  undefined4 constVec4Op0Word3;
-  undefined4 constVec4Op0Word4;
-  undefined4 constVec4Op0Word5;
-  undefined4 constVec3Op2Kind;
-  undefined4 constVec3Op2Value;
-  undefined4 constVec3Op2Word2;
-  undefined4 constVec3Op2Word3;
-  undefined4 constVec3Op2Word4;
-  undefined4 constVec3Op2Word5;
-  undefined4 constVec3Op1Kind;
-  undefined4 constVec3Op1Value;
-  undefined4 constVec3Op1Word2;
-  undefined4 constVec3Op1Word3;
-  undefined4 constVec3Op1Word4;
-  undefined4 constVec3Op1Word5;
-  undefined4 constVec3Op0Kind;
-  undefined4 constVec3Op0Value;
-  undefined4 constVec3Op0Word2;
-  undefined4 constVec3Op0Word3;
-  undefined4 constVec3Op0Word4;
-  undefined4 constVec3Op0Word5;
-  undefined4 constVec2Op1Kind;
-  undefined4 constVec2Op1Value;
-  undefined4 constVec2Op1Word2;
-  undefined4 constVec2Op1Word3;
-  undefined4 constVec2Op1Word4;
-  undefined4 constVec2Op1Word5;
+  ConstOps2 constVec2Ops;
+  ConstOps1 constVec1Ops;
+  ConstOps4 loadConst4Ops;
+  ConstOps4 constVec4Ops;
+  ConstOps3 loadConst3Ops;
+  ConstOps2 loadConst2Ops;
+  ConstOps1 loadConst1Ops;
+  ConstOps3 constVec3Ops;
   
   compiler = *(undefined4 *)(program + 8);
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = operandIndex;
@@ -1527,31 +1249,29 @@ loopSetLanesLeft:
         programFlags = *(uint *)(program + 0x30);
         if ((programFlags & 8) == 0) {
           if (uniqueCount == 2) {
-            constVec2Op0Kind = *operandPtrTable[3];
-            constVec2Op0Value = operandPtrTable[3][1];
-            constVec2Op0Word2 = operandPtrTable[3][2];
-            constVec2Op0Word3 = operandPtrTable[3][3];
-            constVec2Op0Word5 = operandPtrTable[3][5];
-            constVec2Op0Word4 = operandPtrTable[3][4];
-            constVec2Op1Kind = *operandPtrTable[4];
-            constVec2Op1Value = operandPtrTable[4][1];
-            constVec2Op1Word2 = operandPtrTable[4][2];
-            constVec2Op1Word3 = operandPtrTable[4][3];
-            constVec2Op1Word5 = operandPtrTable[4][5];
-            constVec2Op1Word4 = operandPtrTable[4][4];
-            constantHandle = ((int (*)())Compiler__getOrCreateConstVector2)(*(undefined4 *)(program + 0x3ac),constVec2Op0Kind,constVec2Op0Value,constVec2Op0Word2,
-                                  constVec2Op0Word3,constVec2Op0Word4,constVec2Op0Word5,constVec2Op1Kind);
+            constVec2Ops.w[0] = *operandPtrTable[3];
+            constVec2Ops.w[1] = operandPtrTable[3][1];
+            constVec2Ops.w[2] = operandPtrTable[3][2];
+            constVec2Ops.w[3] = operandPtrTable[3][3];
+            constVec2Ops.w[5] = operandPtrTable[3][5];
+            constVec2Ops.w[4] = operandPtrTable[3][4];
+            constVec2Ops.w[6] = *operandPtrTable[4];
+            constVec2Ops.w[7] = operandPtrTable[4][1];
+            constVec2Ops.w[8] = operandPtrTable[4][2];
+            constVec2Ops.w[9] = operandPtrTable[4][3];
+            constVec2Ops.w[11] = operandPtrTable[4][5];
+            constVec2Ops.w[10] = operandPtrTable[4][4];
+            constantHandle = ((int (*)())Compiler__getOrCreateConstVector2)(*(undefined4 *)(program + 0x3ac),constVec2Ops);
           }
           else if (uniqueCount < 3) {
             if (uniqueCount == 1) {
-              constVec1Op0Kind = *operandPtrTable[3];
-              constVec1Op0Value = operandPtrTable[3][1];
-              constVec1Op0Word2 = operandPtrTable[3][2];
-              constVec1Op0Word3 = operandPtrTable[3][3];
-              constVec1Op0Word5 = operandPtrTable[3][5];
-              constVec1Op0Word4 = operandPtrTable[3][4];
-              constantHandle = ((int (*)())Compiler__getOrCreateConstVector1)(*(undefined4 *)(program + 0x3ac),constVec1Op0Kind,constVec1Op0Value,constVec1Op0Word2,
-                                    constVec1Op0Word3,constVec1Op0Word4,constVec1Op0Word5);
+              constVec1Ops.w[0] = *operandPtrTable[3];
+              constVec1Ops.w[1] = operandPtrTable[3][1];
+              constVec1Ops.w[2] = operandPtrTable[3][2];
+              constVec1Ops.w[3] = operandPtrTable[3][3];
+              constVec1Ops.w[5] = operandPtrTable[3][5];
+              constVec1Ops.w[4] = operandPtrTable[3][4];
+              constantHandle = ((int (*)())Compiler__getOrCreateConstVector1)(*(undefined4 *)(program + 0x3ac),constVec1Ops);
             }
             else {
 loopSetConstantHandle:
@@ -1559,86 +1279,82 @@ loopSetConstantHandle:
             }
           }
           else if (uniqueCount == 3) {
-            constVec3Op0Kind = *operandPtrTable[3];
-            constVec3Op0Value = operandPtrTable[3][1];
-            constVec3Op0Word2 = operandPtrTable[3][2];
-            constVec3Op0Word3 = operandPtrTable[3][3];
-            constVec3Op0Word5 = operandPtrTable[3][5];
-            constVec3Op0Word4 = operandPtrTable[3][4];
-            constVec3Op1Value = operandPtrTable[4][1];
-            constVec3Op1Word2 = operandPtrTable[4][2];
-            constVec3Op1Word3 = operandPtrTable[4][3];
-            constVec3Op1Kind = *operandPtrTable[4];
-            constVec3Op1Word5 = operandPtrTable[4][5];
-            constVec3Op1Word4 = operandPtrTable[4][4];
-            constVec3Op2Word2 = operandPtrTable[5][2];
-            constVec3Op2Word3 = operandPtrTable[5][3];
-            constVec3Op2Kind = *operandPtrTable[5];
-            constVec3Op2Value = operandPtrTable[5][1];
-            constVec3Op2Word5 = operandPtrTable[5][5];
-            constVec3Op2Word4 = operandPtrTable[5][4];
-            constantHandle = ((int (*)())Compiler__getOrCreateConstVector3)(*(undefined4 *)(program + 0x3ac),constVec3Op0Kind,constVec3Op0Value,constVec3Op0Word2,
-                                  constVec3Op0Word3,constVec3Op0Word4,constVec3Op0Word5,constVec3Op1Kind);
+            constVec3Ops.w[0] = *operandPtrTable[3];
+            constVec3Ops.w[1] = operandPtrTable[3][1];
+            constVec3Ops.w[2] = operandPtrTable[3][2];
+            constVec3Ops.w[3] = operandPtrTable[3][3];
+            constVec3Ops.w[5] = operandPtrTable[3][5];
+            constVec3Ops.w[4] = operandPtrTable[3][4];
+            constVec3Ops.w[7] = operandPtrTable[4][1];
+            constVec3Ops.w[8] = operandPtrTable[4][2];
+            constVec3Ops.w[9] = operandPtrTable[4][3];
+            constVec3Ops.w[6] = *operandPtrTable[4];
+            constVec3Ops.w[11] = operandPtrTable[4][5];
+            constVec3Ops.w[10] = operandPtrTable[4][4];
+            constVec3Ops.w[14] = operandPtrTable[5][2];
+            constVec3Ops.w[15] = operandPtrTable[5][3];
+            constVec3Ops.w[12] = *operandPtrTable[5];
+            constVec3Ops.w[13] = operandPtrTable[5][1];
+            constVec3Ops.w[17] = operandPtrTable[5][5];
+            constVec3Ops.w[16] = operandPtrTable[5][4];
+            constantHandle = ((int (*)())Compiler__getOrCreateConstVector3)(*(undefined4 *)(program + 0x3ac),constVec3Ops);
           }
           else {
             if (uniqueCount != 4) goto loopSetConstantHandle;
-            constVec4Op0Kind = *operandPtrTable[3];
-            constVec4Op0Value = operandPtrTable[3][1];
-            constVec4Op0Word2 = operandPtrTable[3][2];
-            constVec4Op0Word3 = operandPtrTable[3][3];
-            constVec4Op0Word5 = operandPtrTable[3][5];
-            constVec4Op0Word4 = operandPtrTable[3][4];
-            constVec4Op1Value = operandPtrTable[4][1];
-            constVec4Op1Word2 = operandPtrTable[4][2];
-            constVec4Op1Word3 = operandPtrTable[4][3];
-            constVec4Op1Kind = *operandPtrTable[4];
-            constVec4Op1Word5 = operandPtrTable[4][5];
-            constVec4Op1Word4 = operandPtrTable[4][4];
-            constVec4Op2Word2 = operandPtrTable[5][2];
-            constVec4Op2Word3 = operandPtrTable[5][3];
-            constVec4Op2Kind = *operandPtrTable[5];
-            constVec4Op2Value = operandPtrTable[5][1];
-            constVec4Op2Word5 = operandPtrTable[5][5];
-            constVec4Op2Word4 = operandPtrTable[5][4];
-            constVec4Op3Kind = *operandPtrTable[6];
-            constVec4Op3Value = operandPtrTable[6][1];
-            constVec4Op3Word2 = operandPtrTable[6][2];
-            constVec4Op3Word3 = operandPtrTable[6][3];
-            constVec4Op3Word5 = operandPtrTable[6][5];
-            constVec4Op3Word4 = operandPtrTable[6][4];
-            constantHandle = ((int (*)())Compiler__getOrCreateConstVector4)(*(undefined4 *)(program + 0x3ac),constVec4Op0Kind,constVec4Op0Value,constVec4Op0Word2,
-                                  constVec4Op0Word3,constVec4Op0Word4,constVec4Op0Word5,constVec4Op1Kind);
+            constVec4Ops.w[0] = *operandPtrTable[3];
+            constVec4Ops.w[1] = operandPtrTable[3][1];
+            constVec4Ops.w[2] = operandPtrTable[3][2];
+            constVec4Ops.w[3] = operandPtrTable[3][3];
+            constVec4Ops.w[5] = operandPtrTable[3][5];
+            constVec4Ops.w[4] = operandPtrTable[3][4];
+            constVec4Ops.w[7] = operandPtrTable[4][1];
+            constVec4Ops.w[8] = operandPtrTable[4][2];
+            constVec4Ops.w[9] = operandPtrTable[4][3];
+            constVec4Ops.w[6] = *operandPtrTable[4];
+            constVec4Ops.w[11] = operandPtrTable[4][5];
+            constVec4Ops.w[10] = operandPtrTable[4][4];
+            constVec4Ops.w[14] = operandPtrTable[5][2];
+            constVec4Ops.w[15] = operandPtrTable[5][3];
+            constVec4Ops.w[12] = *operandPtrTable[5];
+            constVec4Ops.w[13] = operandPtrTable[5][1];
+            constVec4Ops.w[17] = operandPtrTable[5][5];
+            constVec4Ops.w[16] = operandPtrTable[5][4];
+            constVec4Ops.w[18] = *operandPtrTable[6];
+            constVec4Ops.w[19] = operandPtrTable[6][1];
+            constVec4Ops.w[20] = operandPtrTable[6][2];
+            constVec4Ops.w[21] = operandPtrTable[6][3];
+            constVec4Ops.w[23] = operandPtrTable[6][5];
+            constVec4Ops.w[22] = operandPtrTable[6][4];
+            constantHandle = ((int (*)())Compiler__getOrCreateConstVector4)(*(undefined4 *)(program + 0x3ac),constVec4Ops);
           }
           IRInst__setOperandRef(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),constantHandle);
           goto setOperandRecordB;
         }
         if (uniqueCount == 2) {
-          loadConst2Op0Word2 = operandPtrTable[3][2];
-          loadConst2Op0Kind = *operandPtrTable[3];
-          loadConst2Op0Value = operandPtrTable[3][1];
-          loadConst2Op0Word3 = operandPtrTable[3][3];
-          loadConst2Op0Word5 = operandPtrTable[3][5];
-          loadConst2Op0Word4 = operandPtrTable[3][4];
-          loadConst2Op1Kind = *operandPtrTable[4];
-          loadConst2Op1Value = operandPtrTable[4][1];
-          loadConst2Op1Word2 = operandPtrTable[4][2];
-          loadConst2Op1Word3 = operandPtrTable[4][3];
-          loadConst2Op1Word5 = operandPtrTable[4][5];
-          loadConst2Op1Word4 = operandPtrTable[4][4];
-          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst2)(*(undefined4 *)(program + 0x3ac),loadConst2Op0Kind,loadConst2Op0Value,loadConst2Op0Word2,
-                               loadConst2Op0Word3,loadConst2Op0Word4,loadConst2Op0Word5,loadConst2Op1Kind);
+          loadConst2Ops.w[2] = operandPtrTable[3][2];
+          loadConst2Ops.w[0] = *operandPtrTable[3];
+          loadConst2Ops.w[1] = operandPtrTable[3][1];
+          loadConst2Ops.w[3] = operandPtrTable[3][3];
+          loadConst2Ops.w[5] = operandPtrTable[3][5];
+          loadConst2Ops.w[4] = operandPtrTable[3][4];
+          loadConst2Ops.w[6] = *operandPtrTable[4];
+          loadConst2Ops.w[7] = operandPtrTable[4][1];
+          loadConst2Ops.w[8] = operandPtrTable[4][2];
+          loadConst2Ops.w[9] = operandPtrTable[4][3];
+          loadConst2Ops.w[11] = operandPtrTable[4][5];
+          loadConst2Ops.w[10] = operandPtrTable[4][4];
+          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst2)(*(undefined4 *)(program + 0x3ac),loadConst2Ops);
           programFlags = *(uint *)(program + 0x30);
         }
         else if (uniqueCount < 3) {
           if (uniqueCount == 1) {
-            loadConst1Op0Word2 = operandPtrTable[3][2];
-            loadConst1Op0Kind = *operandPtrTable[3];
-            loadConst1Op0Value = operandPtrTable[3][1];
-            loadConst1Op0Word3 = operandPtrTable[3][3];
-            loadConst1Op0Word5 = operandPtrTable[3][5];
-            loadConst1Op0Word4 = operandPtrTable[3][4];
-            loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst1)(*(undefined4 *)(program + 0x3ac),loadConst1Op0Kind,loadConst1Op0Value,loadConst1Op0Word2,
-                                 loadConst1Op0Word3,loadConst1Op0Word4,loadConst1Op0Word5);
+            loadConst1Ops.w[2] = operandPtrTable[3][2];
+            loadConst1Ops.w[0] = *operandPtrTable[3];
+            loadConst1Ops.w[1] = operandPtrTable[3][1];
+            loadConst1Ops.w[3] = operandPtrTable[3][3];
+            loadConst1Ops.w[5] = operandPtrTable[3][5];
+            loadConst1Ops.w[4] = operandPtrTable[3][4];
+            loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst1)(*(undefined4 *)(program + 0x3ac),loadConst1Ops);
             programFlags = *(uint *)(program + 0x30);
           }
           else {
@@ -1647,56 +1363,54 @@ loopSetLoadConstSource:
           }
         }
         else if (uniqueCount == 3) {
-          loadConst3Op0Word2 = operandPtrTable[3][2];
-          loadConst3Op0Kind = *operandPtrTable[3];
-          loadConst3Op0Value = operandPtrTable[3][1];
-          loadConst3Op0Word3 = operandPtrTable[3][3];
-          loadConst3Op0Word5 = operandPtrTable[3][5];
-          loadConst3Op0Word4 = operandPtrTable[3][4];
-          loadConst3Op1Value = operandPtrTable[4][1];
-          loadConst3Op1Kind = *operandPtrTable[4];
-          loadConst3Op1Word2 = operandPtrTable[4][2];
-          loadConst3Op1Word3 = operandPtrTable[4][3];
-          loadConst3Op1Word5 = operandPtrTable[4][5];
-          loadConst3Op1Word4 = operandPtrTable[4][4];
-          loadConst3Op2Kind = *operandPtrTable[5];
-          loadConst3Op2Word2 = operandPtrTable[5][2];
-          loadConst3Op2Word3 = operandPtrTable[5][3];
-          loadConst3Op2Value = operandPtrTable[5][1];
-          loadConst3Op2Word5 = operandPtrTable[5][5];
-          loadConst3Op2Word4 = operandPtrTable[5][4];
-          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst3)(*(undefined4 *)(program + 0x3ac),loadConst3Op0Kind,loadConst3Op0Value,loadConst3Op0Word2,
-                               loadConst3Op0Word3,loadConst3Op0Word4,loadConst3Op0Word5,loadConst3Op1Kind);
+          loadConst3Ops.w[2] = operandPtrTable[3][2];
+          loadConst3Ops.w[0] = *operandPtrTable[3];
+          loadConst3Ops.w[1] = operandPtrTable[3][1];
+          loadConst3Ops.w[3] = operandPtrTable[3][3];
+          loadConst3Ops.w[5] = operandPtrTable[3][5];
+          loadConst3Ops.w[4] = operandPtrTable[3][4];
+          loadConst3Ops.w[7] = operandPtrTable[4][1];
+          loadConst3Ops.w[6] = *operandPtrTable[4];
+          loadConst3Ops.w[8] = operandPtrTable[4][2];
+          loadConst3Ops.w[9] = operandPtrTable[4][3];
+          loadConst3Ops.w[11] = operandPtrTable[4][5];
+          loadConst3Ops.w[10] = operandPtrTable[4][4];
+          loadConst3Ops.w[12] = *operandPtrTable[5];
+          loadConst3Ops.w[14] = operandPtrTable[5][2];
+          loadConst3Ops.w[15] = operandPtrTable[5][3];
+          loadConst3Ops.w[13] = operandPtrTable[5][1];
+          loadConst3Ops.w[17] = operandPtrTable[5][5];
+          loadConst3Ops.w[16] = operandPtrTable[5][4];
+          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst3)(*(undefined4 *)(program + 0x3ac),loadConst3Ops);
           programFlags = *(uint *)(program + 0x30);
         }
         else {
           if (uniqueCount != 4) goto loopSetLoadConstSource;
-          loadConst4Op0Word2 = operandPtrTable[3][2];
-          loadConst4Op0Kind = *operandPtrTable[3];
-          loadConst4Op0Value = operandPtrTable[3][1];
-          loadConst4Op0Word3 = operandPtrTable[3][3];
-          loadConst4Op0Word5 = operandPtrTable[3][5];
-          loadConst4Op0Word4 = operandPtrTable[3][4];
-          loadConst4Op1Value = operandPtrTable[4][1];
-          loadConst4Op1Kind = *operandPtrTable[4];
-          loadConst4Op1Word2 = operandPtrTable[4][2];
-          loadConst4Op1Word3 = operandPtrTable[4][3];
-          loadConst4Op1Word5 = operandPtrTable[4][5];
-          loadConst4Op1Word4 = operandPtrTable[4][4];
-          loadConst4Op2Kind = *operandPtrTable[5];
-          loadConst4Op2Word2 = operandPtrTable[5][2];
-          loadConst4Op2Word3 = operandPtrTable[5][3];
-          loadConst4Op2Value = operandPtrTable[5][1];
-          loadConst4Op2Word5 = operandPtrTable[5][5];
-          loadConst4Op2Word4 = operandPtrTable[5][4];
-          loadConst4Op3Kind = *operandPtrTable[6];
-          loadConst4Op3Value = operandPtrTable[6][1];
-          loadConst4Op3Word2 = operandPtrTable[6][2];
-          loadConst4Op3Word3 = operandPtrTable[6][3];
-          loadConst4Op3Word5 = operandPtrTable[6][5];
-          loadConst4Op3Word4 = operandPtrTable[6][4];
-          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst4)(*(undefined4 *)(program + 0x3ac),loadConst4Op0Kind,loadConst4Op0Value,loadConst4Op0Word2,
-                               loadConst4Op0Word3,loadConst4Op0Word4,loadConst4Op0Word5,loadConst4Op1Kind);
+          loadConst4Ops.w[2] = operandPtrTable[3][2];
+          loadConst4Ops.w[0] = *operandPtrTable[3];
+          loadConst4Ops.w[1] = operandPtrTable[3][1];
+          loadConst4Ops.w[3] = operandPtrTable[3][3];
+          loadConst4Ops.w[5] = operandPtrTable[3][5];
+          loadConst4Ops.w[4] = operandPtrTable[3][4];
+          loadConst4Ops.w[7] = operandPtrTable[4][1];
+          loadConst4Ops.w[6] = *operandPtrTable[4];
+          loadConst4Ops.w[8] = operandPtrTable[4][2];
+          loadConst4Ops.w[9] = operandPtrTable[4][3];
+          loadConst4Ops.w[11] = operandPtrTable[4][5];
+          loadConst4Ops.w[10] = operandPtrTable[4][4];
+          loadConst4Ops.w[12] = *operandPtrTable[5];
+          loadConst4Ops.w[14] = operandPtrTable[5][2];
+          loadConst4Ops.w[15] = operandPtrTable[5][3];
+          loadConst4Ops.w[13] = operandPtrTable[5][1];
+          loadConst4Ops.w[17] = operandPtrTable[5][5];
+          loadConst4Ops.w[16] = operandPtrTable[5][4];
+          loadConst4Ops.w[18] = *operandPtrTable[6];
+          loadConst4Ops.w[19] = operandPtrTable[6][1];
+          loadConst4Ops.w[20] = operandPtrTable[6][2];
+          loadConst4Ops.w[21] = operandPtrTable[6][3];
+          loadConst4Ops.w[23] = operandPtrTable[6][5];
+          loadConst4Ops.w[22] = operandPtrTable[6][4];
+          loadConstSource = ((int (*)())Compiler__getOrCreateLoadConst4)(*(undefined4 *)(program + 0x3ac),loadConst4Ops);
           programFlags = *(uint *)(program + 0x30);
         }
         IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),loadConstSource,programFlags >> 7 & 1,compiler);

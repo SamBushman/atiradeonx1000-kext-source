@@ -323,12 +323,6 @@ use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over
 use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\[4\]\ =\ \*\(undefined4\ \*\)\(\(int\)local_88\ \+\ iVar7\ \+\ 4\);$	+2
 use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\ =\ puVar6\ \+\ 6;$	+1
 local	Compiler__getOrCreateLoadConstN	param_2	constCount	INFERRED	number of constants (1-4); selects the per-count hash table compiler[1+constCount]
-local	Compiler__getOrCreateLoadConstN	param_3	firstConstKind	INFERRED	word 0 of constant record 0 (24-byte records)
-local	Compiler__getOrCreateLoadConstN	param_4	firstConstValue	INFERRED	word 1 of constant record 0
-local	Compiler__getOrCreateLoadConstN	param_5	firstConstWord2	INFERRED	word 2 of constant record 0
-local	Compiler__getOrCreateLoadConstN	param_6	firstConstWord3	INFERRED	word 3 of constant record 0
-local	Compiler__getOrCreateLoadConstN	param_7	firstConstWord4	INFERRED	word 4 of constant record 0
-local	Compiler__getOrCreateLoadConstN	param_8	firstConstWord5	INFERRED	word 5 of constant record 0
 local	Compiler__getOrCreateLoadConstN	local_88	constRecords	INFERRED	stack copy of the constant records (24 bytes each); first two words from param_3/param_4, the rest are the caller's stack arguments
 use	IRInst__computeSourceLaneMask	iVar4	sourceType	INFERRED	type (+0x98) of the source operand, or of the operand's record when it has no source; 0x3b/0x42 mean no lanes are read	^\s*iVar4\ =\ FUN_00105594\(param_2,param_3\);$	+3
 use	IRInst__computeSourceLaneMask	iVar4	sourceType	INFERRED	type (+0x98) of the source operand, or of the operand's record when it has no source; 0x3b/0x42 mean no lanes are read	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x98\);$	+1

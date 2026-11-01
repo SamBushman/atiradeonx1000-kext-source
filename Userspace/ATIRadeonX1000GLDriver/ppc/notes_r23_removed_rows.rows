@@ -1,0 +1,300 @@
+names_X_f18a40.tsv:188	local	FUN_00018a40	local_144	procZoomFlags	INFERRED	bit 14 = zoom x != 1.0, bit 15 = zoom y != 1.0 inside the copied state
+names_X_f18a40.tsv:187	local	FUN_00018a40	local_3ac	procZoomY	INFERRED	pixel zoom y copied over the second float
+names_X_f18a40.tsv:186	local	FUN_00018a40	local_3b0	procZoomX	INFERRED	pixel zoom x copied over the first float of the 0x274-byte pixel-store state
+names_X_f18a40.tsv:185	use	FUN_00018a40	local_404	procChannelSize	INFERRED	descriptor channel size: 7 depth, 0x11 colour, 0 stencil	^\s*local_404\ =\ 0;$	+1
+names_X_f18a40.tsv:184	use	FUN_00018a40	local_404	procChannelSize	INFERRED	descriptor channel size: 7 depth, 0x11 colour, 0 stencil	^\s*local_404\ =\ 0x11;$	+1
+names_X_f18a40.tsv:183	use	FUN_00018a40	local_404	procChannelSize	INFERRED	descriptor channel size: 7 depth, 0x11 colour, 0 stencil	^\s*local_404\ =\ 7;$	+1
+names_X_f18a40.tsv:182	use	FUN_00018a40	local_408	procChannelFormat	INFERRED	descriptor channel format: 0xd depth, 6 colour, 0xe stencil	^\s*local_408\ =\ 0xe;$	+1
+names_X_f18a40.tsv:181	use	FUN_00018a40	local_408	procChannelFormat	INFERRED	descriptor channel format: 0xd depth, 6 colour, 0xe stencil	^\s*local_408\ =\ 6;$	+1
+names_X_f18a40.tsv:180	use	FUN_00018a40	local_408	procChannelFormat	INFERRED	descriptor channel format: 0xd depth, 6 colour, 0xe stencil	^\s*local_408\ =\ 0xd;$	+1
+names_X_f18a40.tsv:177	use	FUN_00018a40	local_3fc	procFlags	INFERRED	pixel-store flags: 1 swapBytes, 4 lsbFirst (engineState+0x2e84/0x2e85)	^\s*local_3fc\ =\ local_3fc\ \|\ 4;$	+1
+names_X_f18a40.tsv:176	use	FUN_00018a40	local_3fc	procFlags	INFERRED	pixel-store flags: 1 swapBytes, 4 lsbFirst (engineState+0x2e84/0x2e85)	^\s*local_3fc\ =\ \(uint\)\(\(\(unsigned\ char\ \*\)0x00002e84\)\[iVar33\]\ !=\ '\\0'\);$	+1
+names_X_f18a40.tsv:175	use	FUN_00018a40	local_3fc	procFlags	INFERRED	pixel-store flags: 1 swapBytes, 4 lsbFirst (engineState+0x2e84/0x2e85)	^\s*local_3fc\ =\ 0;$	+1
+names_X_f18a40.tsv:174	use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+names_X_f18a40.tsv:173	use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*iVar10\ =\ iVar15\ \+\ local_3f0\ \+\ \-1;$	+1
+names_X_f18a40.tsv:172	use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*local_3f0\ =\ uVar20;$	+1
+names_X_f18a40.tsv:171	use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*local_3f0\ =\ uVar9;$	+1
+names_X_f18a40.tsv:170	use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*local_3f0\ =\ param_4;$	+1
+names_X_f18a40.tsv:169	use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+names_X_f18a40.tsv:168	use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*local_3f4\ =\ uVar19;$	+1
+names_X_f18a40.tsv:167	use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*local_3f4\ =\ uVar13;$	+1
+names_X_f18a40.tsv:166	use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*local_3f4\ =\ param_3;$	+1
+names_X_f18a40.tsv:140	use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*local_3f0\ =\ uVar9;$	+1
+names_X_f18a40.tsv:133	use	FUN_00018a40	uVar9	zoomXFlag	INFERRED	0x4000 when the x zoom is not 1.0	^\s*local_144\ =\ \(uint\)\(fVar6\ !=\ 1\.0\)\ <<\ 0xf\ \|\ uVar9\ \|\ local_144\ \&\ 0xffff3fff;$	+1
+names_X_f18a40.tsv:130	use	FUN_00018a40	uVar12	stateBytes	CONFIRMED	0x274: size of the pixel-store state block copied into the descriptor	^\s*_glgProcessPixels\(\&local_3b0,\&local_420,uVar12,puVar17,uVar19,piVar18,"ret_logicalnz\ ",pcVar26$	+2
+names_X_f18a40.tsv:122	use	FUN_00018a40	fVar6	zoomYScaledB	INFERRED	engineState pixel-zoom y (+0x2e4c) * ctx+0x2a58	^\s*local_3ac\ =\ fVar6;$	+1
+names_X_f18a40.tsv:121	use	FUN_00018a40	fVar6	zoomYScaledB	INFERRED	engineState pixel-zoom y (+0x2e4c) * ctx+0x2a58	^\s*local_144\ =\ \(uint\)\(fVar6\ !=\ 1\.0\)\ <<\ 0xf\ \|\ uVar9\ \|\ local_144\ \&\ 0xffff3fff;$	+1
+names_X_f18a40.tsv:112	use	FUN_00018a40	fVar4	zoomXScaledB	INFERRED	engineState pixel-zoom x (+0x2e48) * ctx+0x2a54	^\s*local_3b0\ =\ fVar4;$	+1
+names_X_f18a40.tsv:107	use	FUN_00018a40	fVar4	rasterXScaled	INFERRED	raster position x * ctx+0x2a54 (window x scale)	^\s*fVar4\ =\ local_3ec\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2a54\);$	+2
+names_X_f18a40.tsv:106	use	FUN_00018a40	iVar23	tileX	CONFIRMED	tileColumn * tileWidth: x offset of the tile	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+names_X_f18a40.tsv:105	use	FUN_00018a40	iVar23	tileX	CONFIRMED	tileColumn * tileWidth: x offset of the tile	^\s*local_420\ =\ iVar28\ \*\ iVar23\ \-\ local_41c\ \*\ iVar10;$	+1
+names_X_f18a40.tsv:104	use	FUN_00018a40	iVar23	tileX	CONFIRMED	tileColumn * tileWidth: x offset of the tile	^\s*local_420\ =\ iVar15\ \*\ local_41c\ \+\ iVar28\ \*\ iVar23;$	+1
+names_X_f18a40.tsv:102	use	FUN_00018a40	iVar15	tileRowStart	CONFIRMED	tileHeight * tileRow: first row of the tile	^\s*iVar10\ =\ iVar15\ \+\ local_3f0\ \+\ \-1;$	+1
+names_X_f18a40.tsv:101	use	FUN_00018a40	iVar15	tileRowStart	CONFIRMED	tileHeight * tileRow: first row of the tile	^\s*local_420\ =\ iVar15\ \*\ local_41c\ \+\ iVar28\ \*\ iVar23;$	+1
+names_X_f18a40.tsv:97	use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+names_X_f18a40.tsv:86	use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*local_41c\ =\ \-iVar31;$	+1
+names_X_f18a40.tsv:85	use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*local_41c\ =\ iVar31;$	+1
+names_X_f18a40.tsv:84	use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*local_40c\ =\ iVar31;$	+1
+names_X_f18a40.tsv:79	use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+names_X_f18a40.tsv:78	use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*local_420\ =\ iVar28\ \*\ iVar23\ \-\ local_41c\ \*\ iVar10;$	+1
+names_X_f18a40.tsv:77	use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*local_420\ =\ iVar15\ \*\ local_41c\ \+\ iVar28\ \*\ iVar23;$	+1
+names_X_f18a40.tsv:70	use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+names_X_f18a40.tsv:51	use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*local_3f0\ =\ uVar20;$	+1
+names_X_f18a40.tsv:35	use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*local_3f4\ =\ uVar19;$	+1
+names_X_f18a40.tsv:28	use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*_glgProcessPixels\(\&local_3b0,\&local_420,uVar12,puVar17,uVar19,piVar18,"ret_logicalnz\ ",pcVar26$	+2
+names_X_f18a40.tsv:27	use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*_glgProcessPixels\(0,\&local_420,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+1
+names_q01_31.tsv:90	local	glDrawPixels_impl	local_3b8	procRec2F9c	INFERRED	processor record 2: word at pixel-state +0x9c
+names_q01_31.tsv:89	local	glDrawPixels_impl	local_3bc	procRec2F8c	INFERRED	processor record 2: ushort at pixel-state +0x8c
+names_q01_31.tsv:88	local	glDrawPixels_impl	local_3c0	procRec2F9a	INFERRED	processor record 2: ushort at pixel-state +0x9a
+names_q01_31.tsv:87	local	glDrawPixels_impl	local_3c4	procRec2F98	INFERRED	processor record 2: ushort at pixel-state +0x98
+names_q01_31.tsv:86	local	glDrawPixels_impl	local_3c8	procRec1F9c	INFERRED	processor record 1: word at pixel-state +0x9c
+names_q01_31.tsv:85	local	glDrawPixels_impl	local_3cc	procRec1F8c	INFERRED	processor record 1: ushort at pixel-state +0x8c
+names_q01_31.tsv:84	local	glDrawPixels_impl	local_3d0	procRec1F9a	INFERRED	processor record 1: ushort at pixel-state +0x9a
+names_q01_31.tsv:83	local	glDrawPixels_impl	local_3d4	procRec1F98	INFERRED	processor record 1: ushort at pixel-state +0x98
+names_q01_31.tsv:82	local	glDrawPixels_impl	local_3d8	procRec0F9c	INFERRED	processor record 0: word at pixel-state +0x9c
+names_q01_31.tsv:81	local	glDrawPixels_impl	local_3dc	procRec0F8c	INFERRED	processor record 0: ushort at pixel-state +0x8c
+names_q01_31.tsv:80	local	glDrawPixels_impl	local_3e0	procRec0F9a	INFERRED	processor record 0: ushort at pixel-state +0x9a
+names_q01_31.tsv:79	local	glDrawPixels_impl	local_3e4	procRec0F98	INFERRED	processor record 0: ushort at pixel-state +0x98
+names_q05_4.tsv:780	use	FUN_000f6d14	uVar8	loadConstSource	INFERRED	source created by the load-constant helper for the non-literal path	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f5248\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_1cc,local_1c8,local_1c4,$	+2
+names_q05_4.tsv:779	use	FUN_000f6d14	uVar8	loadConstSource	INFERRED	source created by the load-constant helper for the non-literal path	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f53c0\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_184,local_180,local_17c,$	+2
+names_q05_4.tsv:777	use	FUN_000f6d14	uVar8	loadConstSource	INFERRED	source created by the load-constant helper for the non-literal path	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f56ac\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_13c,local_138,local_134,$	+2
+names_q05_4.tsv:776	use	FUN_000f6d14	uVar8	loadConstSource	INFERRED	source created by the load-constant helper for the non-literal path	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f554c\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_154,local_150,local_14c,$	+2
+names_q05_4.tsv:774	use	FUN_000f6d14	uVar13	constantHandle	INFERRED	handle of the constant vector / load-constant source created for the operands	^\s*uVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f645c\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_dc,local_d8,local_d4,$	+2
+names_q05_4.tsv:773	use	FUN_000f6d14	uVar13	constantHandle	INFERRED	handle of the constant vector / load-constant source created for the operands	^\s*uVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f65d4\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_94,local_90,local_8c,$	+2
+names_q05_4.tsv:771	use	FUN_000f6d14	uVar13	constantHandle	INFERRED	handle of the constant vector / load-constant source created for the operands	^\s*uVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f68c0\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_22c,local_228,local_224,$	+2
+names_q05_4.tsv:770	use	FUN_000f6d14	uVar13	constantHandle	INFERRED	handle of the constant vector / load-constant source created for the operands	^\s*uVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f6760\)\(\*\(undefined4\ \*\)\(param_2\ \+\ 0x3ac\),local_244,local_240,local_23c,$	+2
+names_q05_4.tsv:744	local	FUN_000f6d14	local_204	loadConst4Op3Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:743	local	FUN_000f6d14	local_200	loadConst4Op3Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:742	local	FUN_000f6d14	local_208	loadConst4Op3Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:741	local	FUN_000f6d14	local_20c	loadConst4Op3Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:740	local	FUN_000f6d14	local_210	loadConst4Op3Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:739	local	FUN_000f6d14	local_214	loadConst4Op3Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:738	local	FUN_000f6d14	local_1ec	loadConst4Op2Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:737	local	FUN_000f6d14	local_1e8	loadConst4Op2Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:736	local	FUN_000f6d14	local_1f8	loadConst4Op2Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:735	local	FUN_000f6d14	local_1f0	loadConst4Op2Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:734	local	FUN_000f6d14	local_1f4	loadConst4Op2Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:733	local	FUN_000f6d14	local_1fc	loadConst4Op2Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:732	local	FUN_000f6d14	local_1d4	loadConst4Op1Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:731	local	FUN_000f6d14	local_1d0	loadConst4Op1Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:730	local	FUN_000f6d14	local_1d8	loadConst4Op1Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:729	local	FUN_000f6d14	local_1dc	loadConst4Op1Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:728	local	FUN_000f6d14	local_1e4	loadConst4Op1Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:727	local	FUN_000f6d14	local_1e0	loadConst4Op1Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:726	local	FUN_000f6d14	local_1bc	loadConst4Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:725	local	FUN_000f6d14	local_1b8	loadConst4Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:724	local	FUN_000f6d14	local_1c0	loadConst4Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:723	local	FUN_000f6d14	local_1c8	loadConst4Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:722	local	FUN_000f6d14	local_1cc	loadConst4Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:721	local	FUN_000f6d14	local_1c4	loadConst4Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst4 call
+names_q05_4.tsv:720	local	FUN_000f6d14	local_114	loadConst3Op2Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:719	local	FUN_000f6d14	local_110	loadConst3Op2Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:718	local	FUN_000f6d14	local_120	loadConst3Op2Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:717	local	FUN_000f6d14	local_118	loadConst3Op2Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:716	local	FUN_000f6d14	local_11c	loadConst3Op2Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:715	local	FUN_000f6d14	local_124	loadConst3Op2Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:714	local	FUN_000f6d14	local_18c	loadConst3Op1Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:713	local	FUN_000f6d14	local_188	loadConst3Op1Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:712	local	FUN_000f6d14	local_190	loadConst3Op1Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:711	local	FUN_000f6d14	local_194	loadConst3Op1Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:710	local	FUN_000f6d14	local_19c	loadConst3Op1Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:709	local	FUN_000f6d14	local_198	loadConst3Op1Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:708	local	FUN_000f6d14	local_174	loadConst3Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:707	local	FUN_000f6d14	local_170	loadConst3Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:706	local	FUN_000f6d14	local_178	loadConst3Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:705	local	FUN_000f6d14	local_180	loadConst3Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:704	local	FUN_000f6d14	local_184	loadConst3Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:703	local	FUN_000f6d14	local_17c	loadConst3Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst3 call
+names_q05_4.tsv:702	local	FUN_000f6d14	local_12c	loadConst1Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst1 call
+names_q05_4.tsv:701	local	FUN_000f6d14	local_128	loadConst1Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst1 call
+names_q05_4.tsv:700	local	FUN_000f6d14	local_130	loadConst1Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst1 call
+names_q05_4.tsv:699	local	FUN_000f6d14	local_138	loadConst1Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst1 call
+names_q05_4.tsv:698	local	FUN_000f6d14	local_13c	loadConst1Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst1 call
+names_q05_4.tsv:697	local	FUN_000f6d14	local_134	loadConst1Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst1 call
+names_q05_4.tsv:696	local	FUN_000f6d14	local_15c	loadConst2Op1Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:695	local	FUN_000f6d14	local_158	loadConst2Op1Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:694	local	FUN_000f6d14	local_160	loadConst2Op1Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:693	local	FUN_000f6d14	local_164	loadConst2Op1Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:692	local	FUN_000f6d14	local_168	loadConst2Op1Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:691	local	FUN_000f6d14	local_16c	loadConst2Op1Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:690	local	FUN_000f6d14	local_144	loadConst2Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:689	local	FUN_000f6d14	local_140	loadConst2Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:688	local	FUN_000f6d14	local_148	loadConst2Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:687	local	FUN_000f6d14	local_150	loadConst2Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:686	local	FUN_000f6d14	local_154	loadConst2Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:685	local	FUN_000f6d14	local_14c	loadConst2Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the loadConst2 call
+names_q05_4.tsv:684	local	FUN_000f6d14	local_1a4	constVec4Op3Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:683	local	FUN_000f6d14	local_1a0	constVec4Op3Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:682	local	FUN_000f6d14	local_1a8	constVec4Op3Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:681	local	FUN_000f6d14	local_1ac	constVec4Op3Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:680	local	FUN_000f6d14	local_1b0	constVec4Op3Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:679	local	FUN_000f6d14	local_1b4	constVec4Op3Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:678	local	FUN_000f6d14	local_fc	constVec4Op2Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:677	local	FUN_000f6d14	local_f8	constVec4Op2Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:676	local	FUN_000f6d14	local_108	constVec4Op2Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:675	local	FUN_000f6d14	local_10c	constVec4Op2Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:674	local	FUN_000f6d14	local_100	constVec4Op2Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:673	local	FUN_000f6d14	local_104	constVec4Op2Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:672	local	FUN_000f6d14	local_e4	constVec4Op1Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:671	local	FUN_000f6d14	local_e0	constVec4Op1Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:670	local	FUN_000f6d14	local_f4	constVec4Op1Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:669	local	FUN_000f6d14	local_e8	constVec4Op1Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:668	local	FUN_000f6d14	local_ec	constVec4Op1Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:667	local	FUN_000f6d14	local_f0	constVec4Op1Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:666	local	FUN_000f6d14	local_cc	constVec4Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:665	local	FUN_000f6d14	local_c8	constVec4Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:664	local	FUN_000f6d14	local_d0	constVec4Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:663	local	FUN_000f6d14	local_d4	constVec4Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:662	local	FUN_000f6d14	local_d8	constVec4Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:661	local	FUN_000f6d14	local_dc	constVec4Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec4 call
+names_q05_4.tsv:660	local	FUN_000f6d14	local_b4	constVec3Op2Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:659	local	FUN_000f6d14	local_b0	constVec3Op2Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:658	local	FUN_000f6d14	local_c0	constVec3Op2Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:657	local	FUN_000f6d14	local_c4	constVec3Op2Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:656	local	FUN_000f6d14	local_b8	constVec3Op2Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:655	local	FUN_000f6d14	local_bc	constVec3Op2Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:654	local	FUN_000f6d14	local_9c	constVec3Op1Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:653	local	FUN_000f6d14	local_98	constVec3Op1Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:652	local	FUN_000f6d14	local_ac	constVec3Op1Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:651	local	FUN_000f6d14	local_a0	constVec3Op1Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:650	local	FUN_000f6d14	local_a4	constVec3Op1Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:649	local	FUN_000f6d14	local_a8	constVec3Op1Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:648	local	FUN_000f6d14	local_84	constVec3Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:647	local	FUN_000f6d14	local_80	constVec3Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:646	local	FUN_000f6d14	local_88	constVec3Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:645	local	FUN_000f6d14	local_8c	constVec3Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:644	local	FUN_000f6d14	local_90	constVec3Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:643	local	FUN_000f6d14	local_94	constVec3Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec3 call
+names_q05_4.tsv:642	local	FUN_000f6d14	local_21c	constVec1Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec1 call
+names_q05_4.tsv:641	local	FUN_000f6d14	local_218	constVec1Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec1 call
+names_q05_4.tsv:640	local	FUN_000f6d14	local_220	constVec1Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec1 call
+names_q05_4.tsv:639	local	FUN_000f6d14	local_224	constVec1Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec1 call
+names_q05_4.tsv:638	local	FUN_000f6d14	local_228	constVec1Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec1 call
+names_q05_4.tsv:637	local	FUN_000f6d14	local_22c	constVec1Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec1 call
+names_q05_4.tsv:636	local	FUN_000f6d14	local_6c	constVec2Op1Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:635	local	FUN_000f6d14	local_68	constVec2Op1Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:634	local	FUN_000f6d14	local_70	constVec2Op1Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:633	local	FUN_000f6d14	local_74	constVec2Op1Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:632	local	FUN_000f6d14	local_78	constVec2Op1Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:631	local	FUN_000f6d14	local_7c	constVec2Op1Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:630	local	FUN_000f6d14	local_234	constVec2Op0Word4	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:629	local	FUN_000f6d14	local_230	constVec2Op0Word5	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:628	local	FUN_000f6d14	local_238	constVec2Op0Word3	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:627	local	FUN_000f6d14	local_23c	constVec2Op0Word2	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:626	local	FUN_000f6d14	local_240	constVec2Op0Value	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_q05_4.tsv:625	local	FUN_000f6d14	local_244	constVec2Op0Kind	INFERRED	a word of the constant operand record copied into the argument slots of the constVec2 call
+names_I4_wrap.tsv:102	local	Compiler__getOrCreateConstVector1	uStack00000030	operandWord5Home	CONFIRMED	home-area copy of operandWord5 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:101	local	Compiler__getOrCreateConstVector1	param_7	operandWord5	INFERRED	word 5 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r9)
+names_I4_wrap.tsv:100	local	Compiler__getOrCreateConstVector1	uStack0000002c	operandWord4Home	CONFIRMED	home-area copy of operandWord4 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:99	local	Compiler__getOrCreateConstVector1	param_6	operandWord4	INFERRED	word 4 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r8)
+names_I4_wrap.tsv:98	local	Compiler__getOrCreateConstVector1	uStack00000028	operandWord3Home	CONFIRMED	home-area copy of operandWord3 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:97	local	Compiler__getOrCreateConstVector1	param_5	operandWord3	INFERRED	word 3 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r7)
+names_I4_wrap.tsv:96	local	Compiler__getOrCreateConstVector1	uStack00000024	operandWord2Home	CONFIRMED	home-area copy of operandWord2 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:95	local	Compiler__getOrCreateConstVector1	param_4	operandWord2	INFERRED	word 2 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r6)
+names_I4_wrap.tsv:94	local	Compiler__getOrCreateConstVector1	uStack00000020	operandWord1Home	CONFIRMED	home-area copy of operandWord1 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:93	local	Compiler__getOrCreateConstVector1	param_3	operandWord1	INFERRED	word 1 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r5)
+names_I4_wrap.tsv:92	local	Compiler__getOrCreateConstVector1	uStack0000001c	operandWord0Home	CONFIRMED	home-area copy of operandWord0 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:91	local	Compiler__getOrCreateConstVector1	param_2	operandWord0	INFERRED	word 0 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r4)
+names_I4_wrap.tsv:89	local	Compiler__getOrCreateConstVector2	uStack00000034	operandWord6Home	CONFIRMED	home-area copy of operandWord6 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:88	local	Compiler__getOrCreateConstVector2	param_8	operandWord6	INFERRED	word 6 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r10)
+names_I4_wrap.tsv:87	local	Compiler__getOrCreateConstVector2	uStack00000030	operandWord5Home	CONFIRMED	home-area copy of operandWord5 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:86	local	Compiler__getOrCreateConstVector2	param_7	operandWord5	INFERRED	word 5 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r9)
+names_I4_wrap.tsv:85	local	Compiler__getOrCreateConstVector2	uStack0000002c	operandWord4Home	CONFIRMED	home-area copy of operandWord4 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:84	local	Compiler__getOrCreateConstVector2	param_6	operandWord4	INFERRED	word 4 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r8)
+names_I4_wrap.tsv:83	local	Compiler__getOrCreateConstVector2	uStack00000028	operandWord3Home	CONFIRMED	home-area copy of operandWord3 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:82	local	Compiler__getOrCreateConstVector2	param_5	operandWord3	INFERRED	word 3 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r7)
+names_I4_wrap.tsv:81	local	Compiler__getOrCreateConstVector2	uStack00000024	operandWord2Home	CONFIRMED	home-area copy of operandWord2 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:80	local	Compiler__getOrCreateConstVector2	param_4	operandWord2	INFERRED	word 2 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r6)
+names_I4_wrap.tsv:79	local	Compiler__getOrCreateConstVector2	uStack00000020	operandWord1Home	CONFIRMED	home-area copy of operandWord1 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:78	local	Compiler__getOrCreateConstVector2	param_3	operandWord1	INFERRED	word 1 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r5)
+names_I4_wrap.tsv:77	local	Compiler__getOrCreateConstVector2	uStack0000001c	operandWord0Home	CONFIRMED	home-area copy of operandWord0 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:76	local	Compiler__getOrCreateConstVector2	param_2	operandWord0	INFERRED	word 0 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r4)
+names_I4_wrap.tsv:74	local	Compiler__getOrCreateConstVector3	uStack00000034	operandWord6Home	CONFIRMED	home-area copy of operandWord6 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:73	local	Compiler__getOrCreateConstVector3	param_8	operandWord6	INFERRED	word 6 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r10)
+names_I4_wrap.tsv:72	local	Compiler__getOrCreateConstVector3	uStack00000030	operandWord5Home	CONFIRMED	home-area copy of operandWord5 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:71	local	Compiler__getOrCreateConstVector3	param_7	operandWord5	INFERRED	word 5 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r9)
+names_I4_wrap.tsv:70	local	Compiler__getOrCreateConstVector3	uStack0000002c	operandWord4Home	CONFIRMED	home-area copy of operandWord4 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:69	local	Compiler__getOrCreateConstVector3	param_6	operandWord4	INFERRED	word 4 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r8)
+names_I4_wrap.tsv:68	local	Compiler__getOrCreateConstVector3	uStack00000028	operandWord3Home	CONFIRMED	home-area copy of operandWord3 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:67	local	Compiler__getOrCreateConstVector3	param_5	operandWord3	INFERRED	word 3 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r7)
+names_I4_wrap.tsv:66	local	Compiler__getOrCreateConstVector3	uStack00000024	operandWord2Home	CONFIRMED	home-area copy of operandWord2 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:65	local	Compiler__getOrCreateConstVector3	param_4	operandWord2	INFERRED	word 2 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r6)
+names_I4_wrap.tsv:64	local	Compiler__getOrCreateConstVector3	uStack00000020	operandWord1Home	CONFIRMED	home-area copy of operandWord1 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:63	local	Compiler__getOrCreateConstVector3	param_3	operandWord1	INFERRED	word 1 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r5)
+names_I4_wrap.tsv:62	local	Compiler__getOrCreateConstVector3	uStack0000001c	operandWord0Home	CONFIRMED	home-area copy of operandWord0 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:61	local	Compiler__getOrCreateConstVector3	param_2	operandWord0	INFERRED	word 0 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r4)
+names_I4_wrap.tsv:59	local	Compiler__getOrCreateConstVector4	uStack00000034	operandWord6Home	CONFIRMED	home-area copy of operandWord6 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:58	local	Compiler__getOrCreateConstVector4	param_8	operandWord6	INFERRED	word 6 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r10)
+names_I4_wrap.tsv:57	local	Compiler__getOrCreateConstVector4	uStack00000030	operandWord5Home	CONFIRMED	home-area copy of operandWord5 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:56	local	Compiler__getOrCreateConstVector4	param_7	operandWord5	INFERRED	word 5 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r9)
+names_I4_wrap.tsv:55	local	Compiler__getOrCreateConstVector4	uStack0000002c	operandWord4Home	CONFIRMED	home-area copy of operandWord4 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:54	local	Compiler__getOrCreateConstVector4	param_6	operandWord4	INFERRED	word 4 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r8)
+names_I4_wrap.tsv:53	local	Compiler__getOrCreateConstVector4	uStack00000028	operandWord3Home	CONFIRMED	home-area copy of operandWord3 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:52	local	Compiler__getOrCreateConstVector4	param_5	operandWord3	INFERRED	word 3 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r7)
+names_I4_wrap.tsv:51	local	Compiler__getOrCreateConstVector4	uStack00000024	operandWord2Home	CONFIRMED	home-area copy of operandWord2 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:50	local	Compiler__getOrCreateConstVector4	param_4	operandWord2	INFERRED	word 2 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r6)
+names_I4_wrap.tsv:49	local	Compiler__getOrCreateConstVector4	uStack00000020	operandWord1Home	CONFIRMED	home-area copy of operandWord1 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:48	local	Compiler__getOrCreateConstVector4	param_3	operandWord1	INFERRED	word 1 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r5)
+names_I4_wrap.tsv:47	local	Compiler__getOrCreateConstVector4	uStack0000001c	operandWord0Home	CONFIRMED	home-area copy of operandWord0 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:46	local	Compiler__getOrCreateConstVector4	param_2	operandWord0	INFERRED	word 0 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r4)
+names_I4_wrap.tsv:44	local	Compiler__getOrCreateLoadConst1	uStack00000030	operandWord5Home	CONFIRMED	home-area copy of operandWord5 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:43	local	Compiler__getOrCreateLoadConst1	param_7	operandWord5	INFERRED	word 5 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r9)
+names_I4_wrap.tsv:42	local	Compiler__getOrCreateLoadConst1	uStack0000002c	operandWord4Home	CONFIRMED	home-area copy of operandWord4 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:41	local	Compiler__getOrCreateLoadConst1	param_6	operandWord4	INFERRED	word 4 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r8)
+names_I4_wrap.tsv:40	local	Compiler__getOrCreateLoadConst1	uStack00000028	operandWord3Home	CONFIRMED	home-area copy of operandWord3 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:39	local	Compiler__getOrCreateLoadConst1	param_5	operandWord3	INFERRED	word 3 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r7)
+names_I4_wrap.tsv:38	local	Compiler__getOrCreateLoadConst1	uStack00000024	operandWord2Home	CONFIRMED	home-area copy of operandWord2 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:37	local	Compiler__getOrCreateLoadConst1	param_4	operandWord2	INFERRED	word 2 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r6)
+names_I4_wrap.tsv:36	local	Compiler__getOrCreateLoadConst1	uStack00000020	operandWord1Home	CONFIRMED	home-area copy of operandWord1 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:35	local	Compiler__getOrCreateLoadConst1	param_3	operandWord1	INFERRED	word 1 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r5)
+names_I4_wrap.tsv:34	local	Compiler__getOrCreateLoadConst1	uStack0000001c	operandWord0Home	CONFIRMED	home-area copy of operandWord0 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:33	local	Compiler__getOrCreateLoadConst1	param_2	operandWord0	INFERRED	word 0 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r4)
+names_I4_wrap.tsv:31	local	Compiler__getOrCreateLoadConst2	uStack00000034	operandWord6Home	CONFIRMED	home-area copy of operandWord6 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:30	local	Compiler__getOrCreateLoadConst2	param_8	operandWord6	INFERRED	word 6 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r10)
+names_I4_wrap.tsv:29	local	Compiler__getOrCreateLoadConst2	uStack00000030	operandWord5Home	CONFIRMED	home-area copy of operandWord5 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:28	local	Compiler__getOrCreateLoadConst2	param_7	operandWord5	INFERRED	word 5 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r9)
+names_I4_wrap.tsv:27	local	Compiler__getOrCreateLoadConst2	uStack0000002c	operandWord4Home	CONFIRMED	home-area copy of operandWord4 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:26	local	Compiler__getOrCreateLoadConst2	param_6	operandWord4	INFERRED	word 4 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r8)
+names_I4_wrap.tsv:25	local	Compiler__getOrCreateLoadConst2	uStack00000028	operandWord3Home	CONFIRMED	home-area copy of operandWord3 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:24	local	Compiler__getOrCreateLoadConst2	param_5	operandWord3	INFERRED	word 3 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r7)
+names_I4_wrap.tsv:23	local	Compiler__getOrCreateLoadConst2	uStack00000024	operandWord2Home	CONFIRMED	home-area copy of operandWord2 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:22	local	Compiler__getOrCreateLoadConst2	param_4	operandWord2	INFERRED	word 2 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r6)
+names_I4_wrap.tsv:21	local	Compiler__getOrCreateLoadConst2	uStack00000020	operandWord1Home	CONFIRMED	home-area copy of operandWord1 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:20	local	Compiler__getOrCreateLoadConst2	param_3	operandWord1	INFERRED	word 1 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r5)
+names_I4_wrap.tsv:19	local	Compiler__getOrCreateLoadConst2	uStack0000001c	operandWord0Home	CONFIRMED	home-area copy of operandWord0 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:18	local	Compiler__getOrCreateLoadConst2	param_2	operandWord0	INFERRED	word 0 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r4)
+names_I4_wrap.tsv:16	local	Compiler__getOrCreateLoadConst3	uStack00000034	operandWord6Home	CONFIRMED	home-area copy of operandWord6 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:15	local	Compiler__getOrCreateLoadConst3	param_8	operandWord6	INFERRED	word 6 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r10)
+names_I4_wrap.tsv:14	local	Compiler__getOrCreateLoadConst3	uStack00000030	operandWord5Home	CONFIRMED	home-area copy of operandWord5 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:13	local	Compiler__getOrCreateLoadConst3	param_7	operandWord5	INFERRED	word 5 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r9)
+names_I4_wrap.tsv:12	local	Compiler__getOrCreateLoadConst3	uStack0000002c	operandWord4Home	CONFIRMED	home-area copy of operandWord4 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:11	local	Compiler__getOrCreateLoadConst3	param_6	operandWord4	INFERRED	word 4 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r8)
+names_I4_wrap.tsv:10	local	Compiler__getOrCreateLoadConst3	uStack00000028	operandWord3Home	CONFIRMED	home-area copy of operandWord3 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:9	local	Compiler__getOrCreateLoadConst3	param_5	operandWord3	INFERRED	word 3 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r7)
+names_I4_wrap.tsv:8	local	Compiler__getOrCreateLoadConst3	uStack00000024	operandWord2Home	CONFIRMED	home-area copy of operandWord2 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:7	local	Compiler__getOrCreateLoadConst3	param_4	operandWord2	INFERRED	word 2 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r6)
+names_I4_wrap.tsv:6	local	Compiler__getOrCreateLoadConst3	uStack00000020	operandWord1Home	CONFIRMED	home-area copy of operandWord1 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:5	local	Compiler__getOrCreateLoadConst3	param_3	operandWord1	INFERRED	word 1 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r5)
+names_I4_wrap.tsv:4	local	Compiler__getOrCreateLoadConst3	uStack0000001c	operandWord0Home	CONFIRMED	home-area copy of operandWord0 (the builder reads the descriptors beyond the first from the contiguous spill area starting here)
+names_I4_wrap.tsv:3	local	Compiler__getOrCreateLoadConst3	param_2	operandWord0	INFERRED	word 0 of the first 0x18-byte operand descriptor handed to the N-operand builder (register r4)
+names_r14_misc2.tsv:93	use	Compiler__getOrCreateConstVector4	uVar1	constVectorResult	INFERRED	Compiler__getOrCreateConstVectorN(owner,4,...) result returned	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f6248\)\(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7\);$	+2
+names_r14_misc2.tsv:92	use	Compiler__getOrCreateLoadConst4	uVar1	loadConstResult	INFERRED	Compiler__getOrCreateLoadConstN(compiler,4,...) result returned	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f4fdc\)\(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7\);$	+2
+names_gU_c1_1.tsv:43	local	FUN_000f5248	param_8	constVec6	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec6
+names_gU_c1_1.tsv:42	local	FUN_000f5248	param_7	constVec5	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec5
+names_gU_c1_1.tsv:41	local	FUN_000f5248	param_6	constVec4	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec4
+names_gU_c1_1.tsv:40	local	FUN_000f5248	param_5	constVec3	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec3
+names_gU_c1_1.tsv:39	local	FUN_000f5248	param_4	constVec2	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec2
+names_gU_c1_1.tsv:38	local	FUN_000f5248	param_3	constVec1	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec1
+names_gU_c1_1.tsv:37	local	FUN_000f5248	param_2	constVec0	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec0
+names_gU_c1_1.tsv:25	local	Compiler__getOrCreateConstVectorN	param_8	operandWord5	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord5
+names_gU_c1_1.tsv:24	local	Compiler__getOrCreateConstVectorN	param_7	operandWord4	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord4
+names_gU_c1_1.tsv:23	local	Compiler__getOrCreateConstVectorN	param_6	operandWord3	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord3
+names_gU_c1_1.tsv:22	local	Compiler__getOrCreateConstVectorN	param_5	operandWord2	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord2
+names_gU_c1_1.tsv:21	local	Compiler__getOrCreateConstVectorN	param_4	operandWord1	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord1
+names_gU_c1_1.tsv:20	local	Compiler__getOrCreateConstVectorN	param_3	operandWord0	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord0
+names_q05_6.tsv:331	local	Compiler__getOrCreateLoadConstN	param_8	firstConstWord5	INFERRED	word 5 of constant record 0
+names_q05_6.tsv:330	local	Compiler__getOrCreateLoadConstN	param_7	firstConstWord4	INFERRED	word 4 of constant record 0
+names_q05_6.tsv:329	local	Compiler__getOrCreateLoadConstN	param_6	firstConstWord3	INFERRED	word 3 of constant record 0
+names_q05_6.tsv:328	local	Compiler__getOrCreateLoadConstN	param_5	firstConstWord2	INFERRED	word 2 of constant record 0
+names_q05_6.tsv:327	local	Compiler__getOrCreateLoadConstN	param_4	firstConstValue	INFERRED	word 1 of constant record 0
+names_q05_6.tsv:326	local	Compiler__getOrCreateLoadConstN	param_3	firstConstKind	INFERRED	word 0 of constant record 0 (24-byte records)

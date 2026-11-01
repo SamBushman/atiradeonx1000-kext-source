@@ -388,7 +388,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
          (GH_U2F((unsigned int)(constants[1])) == 1.0)) && ((GH_U2F((unsigned int)(constants[2])) == 0.0 && (GH_U2F((unsigned int)(constants[3])) == 0.0))))
        && (*laneSwizzle == 0x10203)) {
       ConstRecords__fillFloat4(constants,&constVec[constVec0_IDX]);
-      foundExact = Compiler__getOrCreateLoadConst4(constantPool,constVec[constVec0_IDX],constVec[constVec1_IDX],constVec[constVec2_IDX],constVec[constVec3_IDX],constVec[constVec4_IDX],constVec[constVec5_IDX],constVec[constVec6_IDX]);
+      foundExact = Compiler__getOrCreateLoadConst4(constantPool,*(ConstOps4 *)&constVec[constVec0_IDX]);
       return foundExact;
     }
     candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle,laneSwizzleArg);

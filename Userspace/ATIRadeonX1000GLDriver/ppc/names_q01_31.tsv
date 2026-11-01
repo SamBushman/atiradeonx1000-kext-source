@@ -76,18 +76,6 @@ local	glDrawPixels_impl	puVar21	layoutOutPtr	INFERRED	&layoutOut
 local	glDrawPixels_impl	piVar18	srcRowBytesPtr	INFERRED	&srcRowBytes, output of gld_computePixelStoreLayout
 local	glDrawPixels_impl	piVar25	srcSkipBytesPtr	INFERRED	&srcSkipBytes, output of gld_computePixelStoreLayout
 local	glDrawPixels_impl	local_420	srcCursor	INFERRED	address of the current source pixels, handed by pointer to _glgProcessPixels or to gld_drawPixelsAsPoints
-local	glDrawPixels_impl	local_3e4	procRec0F98	INFERRED	processor record 0: ushort at pixel-state +0x98
-local	glDrawPixels_impl	local_3e0	procRec0F9a	INFERRED	processor record 0: ushort at pixel-state +0x9a
-local	glDrawPixels_impl	local_3dc	procRec0F8c	INFERRED	processor record 0: ushort at pixel-state +0x8c
-local	glDrawPixels_impl	local_3d8	procRec0F9c	INFERRED	processor record 0: word at pixel-state +0x9c
-local	glDrawPixels_impl	local_3d4	procRec1F98	INFERRED	processor record 1: ushort at pixel-state +0x98
-local	glDrawPixels_impl	local_3d0	procRec1F9a	INFERRED	processor record 1: ushort at pixel-state +0x9a
-local	glDrawPixels_impl	local_3cc	procRec1F8c	INFERRED	processor record 1: ushort at pixel-state +0x8c
-local	glDrawPixels_impl	local_3c8	procRec1F9c	INFERRED	processor record 1: word at pixel-state +0x9c
-local	glDrawPixels_impl	local_3c4	procRec2F98	INFERRED	processor record 2: ushort at pixel-state +0x98
-local	glDrawPixels_impl	local_3c0	procRec2F9a	INFERRED	processor record 2: ushort at pixel-state +0x9a
-local	glDrawPixels_impl	local_3bc	procRec2F8c	INFERRED	processor record 2: ushort at pixel-state +0x8c
-local	glDrawPixels_impl	local_3b8	procRec2F9c	INFERRED	processor record 2: word at pixel-state +0x9c
 local	glDrawPixels_impl	local_3b4	procRecEnd	INFERRED	byte set to 1 after the processor records
 local	FUN_0003c400	uVar4	srcRegisterFile	INFERRED	instruction word bits 0x17..0x19: 0 = constant array (hwProgram[4]), 1 = temporaries (hwProgram[2]), 2 = parameter array (hwProgram[10], optional relative offset)
 local	FUN_0003c400	iVar8	swizzleX	CONFIRMED	GL_X_EXT..GL_W_EXT (0x87d5..0x87d8) or GL_NEGATIVE_X_EXT.. (0x87d9..) symbol for source component X, from instruction bits 0x15-0x16

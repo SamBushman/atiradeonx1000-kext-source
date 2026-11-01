@@ -89,8 +89,6 @@ use	IRInst__sourceLanesAllWritten	bVar1	allLanesChecked	INFERRED	loopCounter == 
 use	IRInst__sourceLanesAllWritten	bVar2	laneSelectByte	INFERRED	select byte for the lane (4 = unused)	^\s*while\ \(\(bVar2\ =\ \*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar5\),\ bVar2\ ==\ 4\ \|\|$	+2
 use	IRInst__writeMasksOverlap	iVar1	isProjectionOfOpcode2a	INFERRED	IRInst__isProjectionOfOpcode2a(inst2) result	^\s*iVar1\ =\ FUN_001055cc\(param_2\);$	+2
 use	RegisterMap__nextTempIndex	iVar1	tempIndex	INFERRED	registerMap+0x30 before decrement: the temp register number handed out	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x30\);$	+3
-use	Compiler__getOrCreateLoadConst4	uVar1	loadConstResult	INFERRED	Compiler__getOrCreateLoadConstN(compiler,4,...) result returned	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f4fdc\)\(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7\);$	+2
-use	Compiler__getOrCreateConstVector4	uVar1	constVectorResult	INFERRED	Compiler__getOrCreateConstVectorN(owner,4,...) result returned	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f6248\)\(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7\);$	+2
 use	DominatorTree__free_f7f1c	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar1\ =\ uVar4\ \*\ 4;$	+2
 use	DominatorTree__free_f7f1c	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*\*\(int\ \*\)\(iVar1\ \+\ param_1\[5\]\)\ =\ iVar5;$	+1
 use	DominatorTree__free_f7f1c	iVar1	bucketOffsetOrNode	INFERRED	loopIndex*4 byte offset into the bucket arrays, then reloaded as the bucket head node (same register)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar3\);$@2	+1

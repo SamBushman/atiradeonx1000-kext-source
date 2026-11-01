@@ -7,6 +7,12 @@
  * data symbols to resolve to the name it actually expects. Renaming each identifier
  * via #define (applied to its declaration AND every call/reference site,
  * transparently) so the compiled symbol matches exactly. */
+/* by-value operand-record aggregates (6 words per operand record: kind,value,word2..word5), passed by value
+ * to the Compiler__getOrCreate{LoadConst,ConstVector}{1,2,3,4,N} family (stock: r4..r10 + stack param area). */
+typedef struct { unsigned int w[6]; } ConstOps1;
+typedef struct { unsigned int w[12]; } ConstOps2;
+typedef struct { unsigned int w[18]; } ConstOps3;
+typedef struct { unsigned int w[24]; } ConstOps4;
 #define _aniso aniso
 #define _aoffimmi aoffimmi
 #define _calloc calloc

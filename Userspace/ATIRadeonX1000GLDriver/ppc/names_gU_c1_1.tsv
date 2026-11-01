@@ -17,12 +17,6 @@ local	FUN_000fd50c	param_3	templateCursorPtr	INFERRED	callers pass &templateCurs
 local	PostLoopFooter__ctor_ea828	param_3	enclosingLoopHeader	INFERRED	every one of the 1 call site(s) passes a value its caller names enclosingLoopHeader
 local	PostLoopFooter__ctor_ea828	param_4	argR6	INFERRED	every one of the 1 call site(s) passes a value its caller names argR6
 local	Compiler__getOrCreateConstVectorN	param_1	owner	INFERRED	every one of the 4 call site(s) passes a value its caller names owner
-local	Compiler__getOrCreateConstVectorN	param_3	operandWord0	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord0
-local	Compiler__getOrCreateConstVectorN	param_4	operandWord1	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord1
-local	Compiler__getOrCreateConstVectorN	param_5	operandWord2	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord2
-local	Compiler__getOrCreateConstVectorN	param_6	operandWord3	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord3
-local	Compiler__getOrCreateConstVectorN	param_7	operandWord4	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord4
-local	Compiler__getOrCreateConstVectorN	param_8	operandWord5	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord5
 local	FUN_000fb230	param_1	program	INFERRED	every one of the 1 call site(s) passes a value its caller names program
 local	FUN_000fb230	param_2	ilReader	INFERRED	every one of the 1 call site(s) passes a value its caller names ilReader
 local	FUN_000e5e70	param_1	ilReader	INFERRED	every one of the 2 call site(s) passes a value its caller names ilReader
@@ -34,11 +28,4 @@ local	FUN_000f8980	param_1	ilOpcode	INFERRED	every one of the 1 call site(s) pas
 local	FUN_000e47f4	param_1	ilReader	INFERRED	every one of the 3 call site(s) passes a value its caller names ilReader
 local	FUN_000f9140	param_1	program	INFERRED	every one of the 2 call site(s) passes a value its caller names program
 local	FUN_000f9140	param_2	ilOpcode	INFERRED	every one of the 2 call site(s) passes a value its caller names ilOpcode
-local	FUN_000f5248	param_2	constVec0	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec0
-local	FUN_000f5248	param_3	constVec1	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec1
-local	FUN_000f5248	param_4	constVec2	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec2
-local	FUN_000f5248	param_5	constVec3	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec3
-local	FUN_000f5248	param_6	constVec4	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec4
-local	FUN_000f5248	param_7	constVec5	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec5
-local	FUN_000f5248	param_8	constVec6	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec6
 local	FUN_000e3b88	param_2	block	INFERRED	every one of the 2 call site(s) passes a value its caller names block

@@ -10135,37 +10135,8 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   float *rasterPosArg;
   undefined1 layoutOut [4];
   int srcSkipBytes;
-  int srcCursor;
-  int srcRowBytes;
-  undefined1 convertOutA [4];
-  undefined1 convertOutB [4];
-  int procPixels;
-  int procPitch;
-  undefined4 procChannelFormat;
-  undefined4 procChannelSize;
-  undefined4 procMode;
-  uint procFlags;
-  undefined4 procMask;
-  uint procWidth;
-  uint procHeight;
-  float scratchStack3ec;
-  float scratchStack3e8;
-  uint procRec0F98;
-  uint procRec0F9a;
-  uint procRec0F8c;
-  undefined4 procRec0F9c;
-  uint procRec1F98;
-  uint procRec1F9a;
-  uint procRec1F8c;
-  undefined4 procRec1F9c;
-  uint procRec2F98;
-  uint procRec2F9a;
-  uint procRec2F8c;
-  undefined4 procRec2F9c;
-  undefined1 procRecEnd;
-  float procZoomX;
-  float procZoomY;
-  uint procZoomFlags;
+  struct { int srcCursor; int srcRowBytes; undefined1 convertOutA [4]; undefined1 convertOutB [4]; int procPixels; int procPitch; undefined4 procChannelFormat; undefined4 procChannelSize; undefined4 procMode; uint procFlags; undefined4 procMask; uint procWidth; uint procHeight; float scratchStack3ec; float scratchStack3e8; uint rec0F98; uint rec0F9a; uint rec0F8c; undefined4 rec0F9c; uint rec1F98; uint rec1F9a; uint rec1F8c; undefined4 rec1F9c; uint rec2F98; uint rec2F9a; uint rec2F8c; undefined4 rec2F9c; undefined1 procRecEnd; undefined1 procRecPad [3]; } procDesc;
+  struct { float zoomX; float zoomY; uint zoomPad [153]; uint zoomFlags; uint zoomPadEnd; } procZoom;
   longlong fctiwzSlot0;
   longlong fctiwzSlot1;
   longlong fctiwzSlot2;
@@ -10335,46 +10306,46 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
        ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)))))) {
     gld_needsMultisampleResolve(ctx,*(undefined4 *)(ctx + 0x26a0),widthCopy,heightArg,formatArg,typeArg,ctxState);
   }
-  scratchStack3e8 = 0.0;
-  procFlags = 0;
-  procMask = 0x7ffff;
-  scratchStack3ec = 0.0;
+  procDesc.scratchStack3e8 = 0.0;
+  procDesc.procFlags = 0;
+  procDesc.procMask = 0x7ffff;
+  procDesc.scratchStack3ec = 0.0;
   unpackState = (undefined *)0x0;
   if (rawTransfer == 0) {
     ctxState = *(int *)(ctx + GLD_engineState);
     unpackState = ((unsigned char *)0x00002e6c) + ctxState;
-    procFlags = (uint)(((unsigned char *)0x00002e84)[ctxState] != '\0');
+    procDesc.procFlags = (uint)(((unsigned char *)0x00002e84)[ctxState] != '\0');
     if (((unsigned char *)0x00002e85)[ctxState] != '\0') {
-      procFlags = procFlags | 4;
+      procDesc.procFlags = procDesc.procFlags | 4;
     }
   }
-  srcRowBytesPtr = &srcRowBytes;
+  srcRowBytesPtr = &procDesc.srcRowBytes;
   layoutOutPtr = layoutOut;
   srcSkipBytesPtr = &srcSkipBytes;
   notStencil = format != 0x1901;
   heightCopy = height;
   ((int (*)())gld_computePixelStoreLayout)(ctx,format,pixelType,width,height,srcRowBytesPtr,layoutOutPtr,srcSkipBytesPtr,unpackState);
   ((int (*)())gldPixelUnitBytes)(format,pixelType);
-  convertOutAPtr = convertOutA;
-  convertOutBPtr = convertOutB;
+  convertOutAPtr = procDesc.convertOutA;
+  convertOutBPtr = procDesc.convertOutB;
   convResult = _glgConvertType(format,pixelType,convertOutAPtr,convertOutBPtr,heightCopy,srcRowBytesPtr,layoutOutPtr,srcSkipBytesPtr);
   if (notStencil) {
     if (format == 0x1902) {
-      procChannelFormat = 0xd;
-      procChannelSize = 7;
+      procDesc.procChannelFormat = 0xd;
+      procDesc.procChannelSize = 7;
     }
     else {
-      procChannelFormat = 6;
-      procChannelSize = 0x11;
+      procDesc.procChannelFormat = 6;
+      procDesc.procChannelSize = 0x11;
     }
   }
   else {
-    procChannelFormat = 0xe;
-    procChannelSize = 0;
+    procDesc.procChannelFormat = 0xe;
+    procDesc.procChannelSize = 0;
   }
-  scratchStack3ec = *rasterPosArg;
-  procMode = 2;
-  rasterXScaled = scratchStack3ec * *(float *)(ctx + GLD_rasterScaleX);
+  procDesc.scratchStack3ec = *rasterPosArg;
+  procDesc.procMode = 2;
+  rasterXScaled = procDesc.scratchStack3ec * *(float *)(ctx + GLD_rasterScaleX);
   rasterXRounded = rasterXScaled + 0.5;
   if (0.0 <= rasterXRounded) {
     ctxState = (int)rasterXRounded;
@@ -10386,8 +10357,8 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   }
   if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
     rasterYWork = *(float *)(ctx + GLD_rasterScaleY);
-    scratchStack3e8 = rasterPosArg[1];
-    scratchFloat5 = scratchStack3e8 * rasterYWork + 0.5;
+    procDesc.scratchStack3e8 = rasterPosArg[1];
+    scratchFloat5 = procDesc.scratchStack3e8 * rasterYWork + 0.5;
     scratchR10 = (char *)rasterPosArg;
     if (0.0 <= scratchFloat5) {
       windowY = (uint)(int)scratchFloat5;
@@ -10400,8 +10371,8 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   }
   else {
     rasterYWork = *(float *)(ctx + GLD_rasterScaleY);
-    scratchStack3e8 = rasterPosArg[1];
-    scratchFloat5 = scratchStack3e8 * rasterYWork - 0.5;
+    procDesc.scratchStack3e8 = rasterPosArg[1];
+    scratchFloat5 = procDesc.scratchStack3e8 * rasterYWork - 0.5;
     scratchR10 = "ret_logicalnz ";
     if (0.0 <= scratchFloat5) {
       windowY = (uint)(int)scratchFloat5;
@@ -10423,8 +10394,8 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   scratchR9 = "ret_logicalnz ";
   if ((zoomXScaled == 1.0) && (zoomYScaled == 1.0)) {
     convRowBytes = bytesPerPixel * width;
-    scratchStack3e8 = 0.0;
-    scratchStack3ec = 0.0;
+    procDesc.scratchStack3e8 = 0.0;
+    procDesc.scratchStack3ec = 0.0;
     convBuffer = height * convRowBytes;
     xDir = 1;
     yDir = 1;
@@ -10433,7 +10404,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     goto setConvBuffer;
   }
   scratchR10 = "ret_logicalnz ";
-  rasterYWork = rasterYWork * scratchStack3e8;
+  rasterYWork = rasterYWork * procDesc.scratchStack3e8;
   if (zoomXScaled < 0.0) {
     rasterXScaled = rasterXScaled - 0.5;
     if (0.0 <= rasterXScaled) {
@@ -10531,16 +10502,16 @@ setScratchR9:
       windowY = windowY - 1;
     }
   }
-  fctiwzSlot18 = (longlong)(int)scratchStack3ec;
-  fctiwzSlot19 = (longlong)(int)scratchStack3e8;
+  fctiwzSlot18 = (longlong)(int)procDesc.scratchStack3ec;
+  fctiwzSlot19 = (longlong)(int)procDesc.scratchStack3e8;
   widthI2dLo = width ^ 0x80000000;
   rasterXTruncI2dHi = 0x43300000;
   widthI2dHi = 0x43300000;
   rasterYTruncI2dHi = 0x43300000;
-  rasterXTruncI2dLo = (int)scratchStack3ec ^ 0x80000000;
-  rasterYTruncI2dLo = (int)scratchStack3e8 ^ 0x80000000;
-  scratchStack3ec = scratchStack3ec - (float)((double)CONCAT44(0x43300000,rasterXTruncI2dLo) - 4503601774854144.0);
-  scratchStack3e8 = scratchStack3e8 - (float)((double)CONCAT44(0x43300000,rasterYTruncI2dLo) - 4503601774854144.0);
+  rasterXTruncI2dLo = (int)procDesc.scratchStack3ec ^ 0x80000000;
+  rasterYTruncI2dLo = (int)procDesc.scratchStack3e8 ^ 0x80000000;
+  procDesc.scratchStack3ec = procDesc.scratchStack3ec - (float)((double)CONCAT44(0x43300000,rasterXTruncI2dLo) - 4503601774854144.0);
+  procDesc.scratchStack3e8 = procDesc.scratchStack3e8 - (float)((double)CONCAT44(0x43300000,rasterYTruncI2dLo) - 4503601774854144.0);
   scaledWidth = _glgPixelCenters(convResult,r4AfterCall,convertOutAPtr,convertOutBPtr,heightCopy,srcRowBytesPtr,scratchR9,scratchR10);
   heightI2dLo = height ^ 0x80000000;
   heightI2dHi = 0x43300000;
@@ -10550,14 +10521,14 @@ setScratchR9:
 setConvBuffer:
   convBuffer = _malloc(convBuffer);
   if (convBuffer != 0) {
-    procRecEnd = 1;
-    procHeight = height;
-    procWidth = width;
-    srcCursor = pixels + srcSkipBytes;
-    procPixels = convBuffer;
-    procPitch = convRowBytes;
+    procDesc.procRecEnd = 1;
+    procDesc.procHeight = height;
+    procDesc.procWidth = width;
+    procDesc.srcCursor = pixels + srcSkipBytes;
+    procDesc.procPixels = convBuffer;
+    procDesc.procPitch = convRowBytes;
     if (skipPixelStore) {
-      _glgProcessPixels(0,&srcCursor,convertOutAPtr,convertOutBPtr,heightCopy,srcRowBytesPtr,scratchR9,scratchR10);
+      _glgProcessPixels(0,&procDesc.srcCursor,convertOutAPtr,convertOutBPtr,heightCopy,srcRowBytesPtr,scratchR9,scratchR10);
     }
     else {
       engineState = *(int *)(ctx + GLD_engineState);
@@ -10577,38 +10548,38 @@ setConvBuffer:
         }
         scratchR10 = *(char **)(ctx + GLD_engineObjects);
         scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x140) + 0x30);
-        procRec0F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
-        procRec0F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
-        procRec0F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
-        procRec0F9c = *(undefined4 *)(scratchInt23 + 0x9c);
+        procDesc.rec0F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
+        procDesc.rec0F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
+        procDesc.rec0F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
+        procDesc.rec0F9c = *(undefined4 *)(scratchInt23 + 0x9c);
         scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x148) + 0x30);
-        procRec1F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
-        procRec1F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
-        procRec1F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
-        procRec1F9c = *(undefined4 *)(scratchInt23 + 0x9c);
+        procDesc.rec1F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
+        procDesc.rec1F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
+        procDesc.rec1F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
+        procDesc.rec1F9c = *(undefined4 *)(scratchInt23 + 0x9c);
         scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x144) + 0x30);
-        procRec2F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
-        procRec2F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
-        procRec2F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
-        procRec2F9c = *(undefined4 *)(scratchInt23 + 0x9c);
+        procDesc.rec2F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
+        procDesc.rec2F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
+        procDesc.rec2F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
+        procDesc.rec2F9c = *(undefined4 *)(scratchInt23 + 0x9c);
       }
       stateBytes = 0x274;
       zoomXScaledB = *(float *)(((unsigned char *)0x00002e48) + engineState) * *(float *)(ctx + GLD_rasterScaleX);
       zoomYScaledB = *(float *)(((unsigned char *)0x00002e4c) + engineState) * *(float *)(ctx + GLD_rasterScaleY);
-      _memcpy(&procZoomX,((unsigned char *)0x00002e48) + engineState,0x274);
+      _memcpy(&procZoom,((unsigned char *)0x00002e48) + engineState,0x274);
       zoomXFlag = 0x4000;
       if (zoomXScaledB == 1.0) {
         zoomXFlag = 0;
       }
-      procZoomFlags = (uint)(zoomYScaledB != 1.0) << 0xf | zoomXFlag | procZoomFlags & 0xffff3fff;
-      procZoomX = zoomXScaledB;
-      procZoomY = zoomYScaledB;
-      _glgProcessPixels(&procZoomX,&srcCursor,stateBytes,convertOutBPtr,heightCopy,srcRowBytesPtr,"ret_logicalnz ",scratchR10
+      procZoom.zoomFlags = (uint)(zoomYScaledB != 1.0) << 0xf | zoomXFlag | procZoom.zoomFlags & 0xffff3fff;
+      procZoom.zoomX = zoomXScaledB;
+      procZoom.zoomY = zoomYScaledB;
+      _glgProcessPixels(&procZoom,&procDesc.srcCursor,stateBytes,convertOutBPtr,heightCopy,srcRowBytesPtr,"ret_logicalnz ",scratchR10
                        );
     }
-    srcRowBytes = convRowBytes;
+    procDesc.srcRowBytes = convRowBytes;
     if (((unsigned char *)GLD_yInverted)[ctx] != '\0') {
-      srcRowBytes = -convRowBytes;
+      procDesc.srcRowBytes = -convRowBytes;
     }
     tileWidth = scaledWidth;
     if (0x7fe < scaledWidth) {
@@ -10640,27 +10611,27 @@ setConvBuffer:
           tileColumn = 0;
           tileRowOffset = yDir * tileRowStart;
           do {
-            procHeight = tileHeight;
+            procDesc.procHeight = tileHeight;
             if (tileRow == tileRows - 1) {
-              procHeight = scaledHeight;
+              procDesc.procHeight = scaledHeight;
             }
-            procWidth = scaledWidth;
+            procDesc.procWidth = scaledWidth;
             if (tileColumn != tileColumns - 1) {
-              procWidth = tileWidth;
+              procDesc.procWidth = tileWidth;
             }
             tileX = tileColumn * tileWidth;
             if (((unsigned char *)GLD_yInverted)[ctx] == '\0') {
-              srcCursor = tileRowStart * srcRowBytes + bytesPerPixel * tileX;
+              procDesc.srcCursor = tileRowStart * procDesc.srcRowBytes + bytesPerPixel * tileX;
               tileWindowYOffset = tileRowOffset;
             }
             else {
-              tileWindowYOffset = tileRowStart + procHeight + -1;
-              srcCursor = bytesPerPixel * tileX - srcRowBytes * tileWindowYOffset;
+              tileWindowYOffset = tileRowStart + procDesc.procHeight + -1;
+              procDesc.srcCursor = bytesPerPixel * tileX - procDesc.srcRowBytes * tileWindowYOffset;
               tileWindowYOffset = -(yDir * tileWindowYOffset);
             }
-            srcCursor = srcCursor + convBuffer;
+            procDesc.srcCursor = procDesc.srcCursor + convBuffer;
             tileColumn = tileColumn + 1;
-            gld_drawPixelsAsPoints(ctx,srcCursor,procWidth,procHeight,srcRowBytes,bytesPerPixel,
+            gld_drawPixelsAsPoints(ctx,procDesc.srcCursor,procDesc.procWidth,procDesc.procHeight,procDesc.srcRowBytes,bytesPerPixel,
                          ctxState + xDir * tileX,windowY + tileWindowYOffset,rasterPosArg,format,transferMode8);
           } while (tileColumns != tileColumn);
         }
