@@ -102,3 +102,9 @@ local	fragmentProgramToIL	extraout_r4_07	retR4i	INFERRED	leftover r4 after a _ma
 local	fragmentProgramToIL	extraout_r4_08	retR4j	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
 local	fragmentProgramToIL	extraout_r4_09	retR4k	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
 local	fragmentProgramToIL	extraout_r4_10	retR4l	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	Program__translateILInstruction	param_5	evalStackOrScratch	INFERRED	dual role: the incoming 5th parameter is read as an operand-stack pointer (param_5[1]=count, param_5[2]=base) at the very start, then from line ~4089 on the SAME slot is reused purely as scratch (pointer offsets, newInst/newInst2/newInst4, destTempRegister) before being forwarded to psnPackedNegateMask; a parameter cannot be use-split, so kept as one name
+local	Program__translateILInstruction	local_98	sourceToken	CONFIRMED	= 0x10203 (component-select token), passed to Program__applySourceTokenToOperand as its token argument; same role/value as Program__emitInputMerge's sourceToken
+local	Program__translateILInstruction	local_94	sourceTokenWords	INFERRED	3-word array holding the same kind of source-token/selector info as sourceToken, used via scratchSourcePtrOrZero and passed to IRInst__literalForLane
+local	Program__translateILInstruction	local_88	hwInputSelectWord	INFERRED	filled by the hw-description vtable call at +0xa0 (get input select info, same call as Program__emitInputMerge's inputSelectWords), then copied into operandRecord2+0x10
+local	Program__translateILInstruction	local_84	hwInputSelectWordB	INFERRED	same hw-description +0xa0 call at a different call site, same role as hwInputSelectWord
+local	Program__translateILInstruction	local_80	laneSelectBytes	INFERRED	filled from operandRecord3+0x10, then indexed byte-wise (&local_80 + extensionSelectLane) as a per-lane splat-table index

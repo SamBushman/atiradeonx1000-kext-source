@@ -3711,12 +3711,12 @@ int Program__loadDefaultConstants(program, ilReader)
 }
 
 /* Program__translateILInstruction @ 0xfb3d4 (2560 bytes) */
-int Program__translateILInstruction(program, list, tokenWords, descriptor, param_5, argR8, movByRegisterPtr)
+int Program__translateILInstruction(program, list, tokenWords, descriptor, evalStackOrScratch, argR8, movByRegisterPtr)
   int program;
   undefined4 list;
   dword *tokenWords;
   dword *descriptor;
-  dword *param_5;
+  dword *evalStackOrScratch;
   dword *argR8;
   int movByRegisterPtr;
 {
@@ -3843,11 +3843,11 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
   double staleFprArg3;
   double staleFprArg4;
   undefined8 movTableElementRefA;
-  undefined4 local_98;
-  dword local_94 [3];
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
+  undefined4 sourceToken;
+  dword sourceTokenWords [3];
+  undefined4 hwInputSelectWord;
+  undefined4 hwInputSelectWordB;
+  undefined4 laneSelectBytes;
   
   descriptorWord = *descriptor;
   hasExtensionWord = descriptorWord >> 0x16 & 1;
@@ -3897,9 +3897,9 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, param
     }
     else {
       stackTopEntry = (int *)0x0;
-      stackTopIndex = param_5[1] - 1;
-      if (stackTopIndex < param_5[1]) {
-        stackTopEntry = (int *)(stackTopIndex * 4 + param_5[2]);
+      stackTopIndex = evalStackOrScratch[1] - 1;
+      if (stackTopIndex < evalStackOrScratch[1]) {
+        stackTopEntry = (int *)(stackTopIndex * 4 + evalStackOrScratch[2]);
       }
       loopBlock = *stackTopEntry;
       *(undefined4 *)(loopBlock + 0x140) = 1;
@@ -4058,8 +4058,8 @@ releaseTempRegister:
         *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = destTempRegister;
       }
-      local_98 = 0x10203;
-      ((int (*)())Program__applySourceTokenToOperand)(program,&local_98,firstTokenPtr,scratchPtrOrConst,allocation);
+      sourceToken = 0x10203;
+      ((int (*)())Program__applySourceTokenToOperand)(program,&sourceToken,firstTokenPtr,scratchPtrOrConst,allocation);
     }
     else if ((descriptorWord & 0x1800000) == 0) {
       tokenIndexOrConstant = (dword *)descriptor[loopCounter];
@@ -4084,9 +4084,9 @@ releaseTempRegister:
       scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
     }
     operandRecord2 = IRInst__getOperandRecord(allocation,scratchPtrOrConst);
-    local_94[0] = *(dword *)(operandRecord2 + 0x10);
-    scratchSourcePtrOrZero = local_94;
-    param_5 = (dword *)0x0;
+    sourceTokenWords[0] = *(dword *)(operandRecord2 + 0x10);
+    scratchSourcePtrOrZero = sourceTokenWords;
+    evalStackOrScratch = (dword *)0x0;
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
     hwAcceptsLoadResult = (**(code **)(*hwDescription + 0x104))(hwDescription,allocation,scratchPtrOrConst,scratchSourcePtrOrZero,0);
     if (hwAcceptsLoadResult == 0) {
@@ -4134,24 +4134,24 @@ releaseTempRegister:
       if ((descriptorWord & 0x400000) == 0) {
         tokenIndexOrConstant = (dword *)((int)((unsigned char *)0x0) + 1);
         tokenIndexOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
-        param_5 = (dword *)((int)((unsigned char *)0x0) + 2);
+        evalStackOrScratch = (dword *)((int)((unsigned char *)0x0) + 2);
       }
       else {
         tokenIndexOrConstant = (dword *)((int)((unsigned char *)0x0) + 2);
         tokenIndexOrConst = (dword *)((int)((unsigned char *)0x0) + 2);
-        param_5 = (dword *)((int)((unsigned char *)0x0) + 3);
+        evalStackOrScratch = (dword *)((int)((unsigned char *)0x0) + 3);
       }
       if ((descriptorWord & 0x1800000) == 0x1000000) {
         scratchPtrOrConst = descriptor + (int)tokenIndexOrConst;
-        scratchSourcePtrOrZero = descriptor + (int)param_5;
+        scratchSourcePtrOrZero = descriptor + (int)evalStackOrScratch;
         tokenIndexOrConst = (dword *)((int)tokenIndexOrConstant + 2);
         if ((descriptorWord & 0x4000000) == 0) {
-          param_5 = (dword *)((int)tokenIndexOrConstant + 3);
+          evalStackOrScratch = (dword *)((int)tokenIndexOrConstant + 3);
           thirdTokenIndexBase = tokenIndexOrConst;
         }
         else {
           tokenIndexOrConst = (dword *)((int)tokenIndexOrConstant + 3);
-          param_5 = tokenIndexOrConstant + 1;
+          evalStackOrScratch = tokenIndexOrConstant + 1;
           thirdTokenIndexBase = tokenIndexOrConst;
         }
       }
@@ -4161,7 +4161,7 @@ releaseTempRegister:
         thirdTokenIndexBase = tokenIndexOrConstant;
       }
       if ((descriptor[(int)tokenIndexOrConst] & 0x1800000) == 0x1000000) {
-        fourthSourceTokenPtr = descriptor + (int)param_5;
+        fourthSourceTokenPtr = descriptor + (int)evalStackOrScratch;
         scaleTokenPtr = (dword *)0x0;
         thirdSourceTokenPtr = descriptor + (int)((int)thirdTokenIndexBase + 2);
         if ((descriptor[(int)tokenIndexOrConst] & 0x4000000) != 0) {
@@ -4181,7 +4181,7 @@ releaseTempRegister:
           hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
           hwInputRegister = (**(code **)(*hwDescription + 0x9c))(hwDescription,(short)tokenWord);
           hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
-          (**(code **)(*hwDescription + 0xa0))(&local_84,hwDescription,(short)tokenWord);
+          (**(code **)(*hwDescription + 0xa0))(&hwInputSelectWordB,hwDescription,(short)tokenWord);
           registerFile2 = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(newInst4,0);
           tokenIndexOrConstant = ((unsigned char *)0x4);
@@ -4194,9 +4194,9 @@ releaseTempRegister:
           *(undefined4 *)(operandRecord2 + 0xc) = registerFile2;
           *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)tokenWord));
           scratchSourcePtrOrZero = (dword *)((int)((unsigned char *)0x0) + 2);
-          local_98 = 0x10203;
-          param_5 = newInst4;
-          ((int (*)())Program__applySourceTokenToOperand)(program,&local_98,fourthSourceTokenPtr,2,newInst4);
+          sourceToken = 0x10203;
+          evalStackOrScratch = newInst4;
+          ((int (*)())Program__applySourceTokenToOperand)(program,&sourceToken,fourthSourceTokenPtr,2,newInst4);
           DList__pushBack(list,newInst4);
           if ((scaleTokenPtr != (dword *)0x0) && (*scaleTokenPtr != 0)) {
             inst = IRInst__create(0xc6,*(undefined4 *)(program + 8));
@@ -4210,11 +4210,11 @@ releaseTempRegister:
             fourthSourceTokenPtr = (dword *)((int)((unsigned char *)0x0) + 2);
             *(dword **)(operandRecord2 + 8) = destTempRegister;
             scratchSourcePtrOrZero = (dword *)(*scaleTokenPtr << 2);
-            param_5 = scratchSourcePtrOrZero;
+            evalStackOrScratch = scratchSourcePtrOrZero;
             tokenIndexOrConstant = scratchSourcePtrOrZero;
             ((int (*)())IRInst__setIntConstantOperand4)(inst,program,2,scratchSourcePtrOrZero,scratchSourcePtrOrZero,scratchSourcePtrOrZero,scratchSourcePtrOrZero);
             operandRecord2 = IRInst__getOperandRecord(inst,2);
-            *(undefined4 *)(operandRecord2 + 0x10) = local_84;
+            *(undefined4 *)(operandRecord2 + 0x10) = hwInputSelectWordB;
             DList__pushBack(list,inst);
           }
           inst = IRInst__create(0xc6,*(undefined4 *)(program + 8));
@@ -4230,7 +4230,7 @@ releaseTempRegister:
           *(undefined4 *)(operandRecord2 + 0xc) = 0x1f;
           *(undefined4 *)(operandRecord2 + 8) = hwInputRegister;
           operandRecord2 = IRInst__getOperandRecord(inst,2);
-          *(undefined4 *)(operandRecord2 + 0x10) = local_84;
+          *(undefined4 *)(operandRecord2 + 0x10) = hwInputSelectWordB;
           DList__pushBack(list,inst);
           inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
           registerFile = Program__registerFileOfIlType(program,4);
@@ -4264,16 +4264,16 @@ loopStoreInst:
           hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
           hwInputRegister = (**(code **)(*hwDescription + 0x9c))(hwDescription,inputRegisterNumber);
           scratchSourcePtrOrZero = *(dword **)(program + 8);
-          (**(code **)(*(*(int * *)(scratchSourcePtrOrZero + (0xc3))) + 0xa0))(&local_88);
+          (**(code **)(*(*(int * *)(scratchSourcePtrOrZero + (0xc3))) + 0xa0))(&hwInputSelectWord);
           operandRecord2 = IRInst__getOperandRecord(inst,1);
           *(undefined4 *)(operandRecord2 + 8) = hwInputRegister;
           *(undefined4 *)(operandRecord2 + 0xc) = 0x1f;
           operandRecord2 = IRInst__getOperandRecord(inst,1);
-          *(undefined4 *)(operandRecord2 + 0x10) = local_88;
+          *(undefined4 *)(operandRecord2 + 0x10) = hwInputSelectWord;
           scratchPtrOrConst = inputRegisterNumber;
           if (descriptorWord == *argR8) {
             scratchPtrOrConst = *(dword **)(program + 8);
-            hwSelectedRegister = (**(code **)(*(*(int * *)(scratchPtrOrConst + (0xc3))) + 0xa8))((*(int * *)(scratchPtrOrConst + (0xc3))),&local_98);
+            hwSelectedRegister = (**(code **)(*(*(int * *)(scratchPtrOrConst + (0xc3))) + 0xa8))((*(int * *)(scratchPtrOrConst + (0xc3))),&sourceToken);
             extraMovInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
             registerFile = Program__registerFileOfIlType(program,4);
             operandRecord2 = IRInst__getOperandRecord(extraMovInst,0);
@@ -4281,7 +4281,7 @@ loopStoreInst:
             *(dword **)(operandRecord2 + 8) = destTempRegister;
             *(dword *)((int)extraMovInst + 0x9c) = argR8[1];
             operandRecord2 = IRInst__getOperandRecord(extraMovInst,1);
-            literalSelectWord = local_98;
+            literalSelectWord = sourceToken;
             *(undefined4 *)(operandRecord2 + 0xc) = 0x1f;
             *(undefined4 *)(operandRecord2 + 8) = hwSelectedRegister;
             operandRecord2 = IRInst__getOperandRecord(extraMovInst,1);
@@ -4368,7 +4368,7 @@ loopStoreInst:
       else {
         if (((scratchSourcePtrOrZero != (dword *)0x0) && (fourthSourceTokenPtr == (dword *)0x0)) && (thirdSourceTokenPtr == (dword *)0x0)) {
           tokenIndexOrConstant = ((unsigned char *)0x4);
-          param_5 = destTempRegister;
+          evalStackOrScratch = destTempRegister;
           ((int (*)())Program__emitInputMerge)(program,list,scratchPtrOrConst,scratchSourcePtrOrZero,destTempRegister,4,*(undefined4 *)(program + 0x400));
           inputRegisterWord = *(ushort *)((int)descriptor + (int)tokenIndexOrConst * 4 + 2);
           inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
@@ -4397,8 +4397,8 @@ callProgram_emitInputMerge:
           operandRecord2 = IRInst__getOperandRecord(inst,2);
           *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(uint *)(operandRecord2 + 8) = swizzleWord;
-          local_94[0] = 0x10203;
-          ((int (*)())Program__applySourceTokenToOperand)(program,local_94,fourthSourceTokenPtr,2,inst);
+          sourceTokenWords[0] = 0x10203;
+          ((int (*)())Program__applySourceTokenToOperand)(program,sourceTokenWords,fourthSourceTokenPtr,2,inst);
           DList__pushBack(list,inst);
           *fourthSourceTokenPtr = *fourthSourceTokenPtr & 0xffc0ffff | 0x40000;
           swizzleWord = newTempIndex2;
@@ -4410,7 +4410,7 @@ callProgram_emitInputMerge:
         scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
         newInst2[0x27] = 0x10101;
         scratchSourcePtrOrZero = ((unsigned char *)0x4);
-        param_5 = ((unsigned char *)0x4);
+        evalStackOrScratch = ((unsigned char *)0x4);
         tokenIndexOrConstant = ((unsigned char *)0x4);
         *(uint *)(operandRecord2 + 8) = newTempIndex2;
         ((int (*)())IRInst__setIntConstantOperand4)(newInst2,program,1,4,4,4,4);
@@ -4418,11 +4418,11 @@ callProgram_emitInputMerge:
         operandRecord2 = IRInst__getOperandRecord(newInst2,2);
         *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(uint *)(operandRecord2 + 8) = swizzleWord;
-        local_98 = 0x10203;
+        sourceToken = 0x10203;
         if (scaleTokenPtr == (dword *)0x0) {
           scratchSourcePtrOrZero = (dword *)((int)((unsigned char *)0x0) + 2);
-          param_5 = newInst2;
-          ((int (*)())Program__applySourceTokenToOperand)(program,&local_98,fourthSourceTokenPtr,2,newInst2);
+          evalStackOrScratch = newInst2;
+          ((int (*)())Program__applySourceTokenToOperand)(program,&sourceToken,fourthSourceTokenPtr,2,newInst2);
           scratchPtrOrConst = fourthSourceTokenPtr;
         }
         else {
@@ -4486,7 +4486,7 @@ callDList_pushBack:
     psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,1);
     psnPackedLaneSourceResult2 = psnPackedLaneSource(descriptor,2);
     psnPackedLaneSourceResult3 = psnPackedLaneSource(descriptor,3);
-    scratchSourcePtrOrZero = local_94;
+    scratchSourcePtrOrZero = sourceTokenWords;
     destTempRegister = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(program + 8) + 0x3ac) = destTempRegister;
     inst = IRInst__create(0x31,*(undefined4 *)(program + 8));
@@ -4497,12 +4497,12 @@ callDList_pushBack:
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = registerFile4;
     *(dword **)(operandRecord2 + 8) = resultRegisterNumber;
-    local_94[0] = 0x10203;
-    staleFprArg1 = (double)((double (*)())IRInst__literalForLane)(packedLaneSource0,0,&local_98,scratchSourcePtrOrZero);
-    staleFprArg2 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult,1,&local_98,scratchSourcePtrOrZero);
-    staleFprArg3 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult2,2,&local_98,scratchSourcePtrOrZero);
-    staleFprArg4 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult3,3,&local_98,scratchSourcePtrOrZero);
-    laneLiteralSelectWord = local_94[0];
+    sourceTokenWords[0] = 0x10203;
+    staleFprArg1 = (double)((double (*)())IRInst__literalForLane)(packedLaneSource0,0,&sourceToken,scratchSourcePtrOrZero);
+    staleFprArg2 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult,1,&sourceToken,scratchSourcePtrOrZero);
+    staleFprArg3 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult2,2,&sourceToken,scratchSourcePtrOrZero);
+    staleFprArg4 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult3,3,&sourceToken,scratchSourcePtrOrZero);
+    laneLiteralSelectWord = sourceTokenWords[0];
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword *)(operandRecord2 + 0x10) = laneLiteralSelectWord;
     DList__pushBack(list,inst);
@@ -4512,7 +4512,7 @@ callDList_pushBack:
     *(dword **)(operandRecord2 + 8) = destTempRegister;
     scratchPtrOrConst = (dword *)((int)((unsigned char *)0x0) + 1);
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,1,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4);
-    *(undefined4 *)((int)inst + 0x9c) = local_98;
+    *(undefined4 *)((int)inst + 0x9c) = sourceToken;
     DList__pushBack(list,inst);
     descriptorWord = *descriptor;
     r4Sink = callResidualR4_10;
@@ -4787,9 +4787,9 @@ code_r0x000fd284:
         *(undefined4 *)(operandRecord3 + 0x10) = splatSelectWord0;
         operandRecord3 = IRInst__getOperandRecord(newInst,1);
         extensionWordOrCompiler = &STACKARG(0xffffff30) + extensionSelectLane;
-        local_80 = *(undefined4 *)(operandRecord3 + 0x10);
+        laneSelectBytes = *(undefined4 *)(operandRecord3 + 0x10);
         resultInTempRegister = true;
-        splatSelectWord = *(undefined4 *)(laneWordSplatTable + (uint)*(byte *)((int)&local_80 + extensionSelectLane) * 4);
+        splatSelectWord = *(undefined4 *)(laneWordSplatTable + (uint)*(byte *)((int)&laneSelectBytes + extensionSelectLane) * 4);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(operandRecord2 + 0x10) = splatSelectWord;
         *(undefined4 *)((int)newInst + 0x9c) = constantSelectWord2;
@@ -4836,7 +4836,7 @@ code_r0x000fd284:
   }
   resultRegisterNumber = curTempRegisterD;
   if (((((descriptorWord & 0x400000) != 0) && ((*extensionWordPtr2 & 0x8888) != 0)) &&
-      (descriptorWord = psnPackedNegateMask(descriptor,r4Sink,scratchPtrOrConst,scratchSourcePtrOrZero,param_5,tokenIndexOrConstant,extensionWordOrCompiler), descriptorWord != 0))
+      (descriptorWord = psnPackedNegateMask(descriptor,r4Sink,scratchPtrOrConst,scratchSourcePtrOrZero,evalStackOrScratch,tokenIndexOrConstant,extensionWordOrCompiler), descriptorWord != 0))
      && (descriptorWord != 0x8888)) {
     resultRegisterNumber = destTempRegister;
     if (!resultInTempRegister) {
