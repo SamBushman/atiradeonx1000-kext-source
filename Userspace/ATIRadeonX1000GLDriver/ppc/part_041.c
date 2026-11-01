@@ -2164,8 +2164,8 @@ int NeighbourList__locateAppendSlot(neighbourList, slotOut, blockOut)
 }
 
 /* pairIndex @ 0x134b1c (60 bytes) */
-int pairIndex(param_1, nodeA, nodeBThenMax)
-  undefined4 param_1;
+int pairIndex(unusedArg1, nodeA, nodeBThenMax)
+  undefined4 unusedArg1;
   int nodeA;
   int nodeBThenMax;
 {

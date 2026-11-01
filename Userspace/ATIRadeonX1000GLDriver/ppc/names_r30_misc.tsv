@@ -1,0 +1,3 @@
+local	pairIndex	param_1	unusedArg1	INFERRED	caller-supplied register argument the callee never reads (only nodeA/nodeBThenMax are used; called via a 3-arg function-pointer cast elsewhere)
+local	VRegPool__destroyEntries	local_28	iterNode	INFERRED	the hash-table iterator's current node pointer (word at auStack_38+0x10), checked for null and passed to the per-node vtable destructor
+local	IRInst__swapOperands	extraout_r4	retR4	INFERRED	secondary return register from the vtable call at *inst+0x14, used as the updated operandA index for the second call
