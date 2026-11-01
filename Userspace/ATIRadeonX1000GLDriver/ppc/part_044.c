@@ -1565,7 +1565,7 @@ int Inst__foldMovIntoProducer(inst, pass)
         do {
           operandRecord3 = IRInst__getOperandRecord(inst,0);
           if ((((*(char *)(loopIndex + operandRecord3 + 0x10) != '\x01') &&
-               (remapLaneCheck = (uint)laneRemapBytes[loopIndex - 4], remapLaneCheck != 4)) && (loopIndex != remapLaneCheck)) &&
+               (remapLaneCheck = (uint)((byte *)&operandSelect)[loopIndex], remapLaneCheck != 4)) && (loopIndex != remapLaneCheck)) &&
              (operandRecord3 = IRInst__getOperandRecord(sourceInst,0), *(char *)(remapLaneCheck + operandRecord3 + 0x10) != '\x01')) {
             return;
           }
@@ -1608,7 +1608,7 @@ int Inst__foldMovIntoProducer(inst, pass)
         do {
           operandRecord2 = IRInst__getOperandRecord(inst,0);
           if (*(char *)(loopIndex2 + operandRecord2 + 0x10) != '\x01') {
-            remapLaneByte = laneRemapBytes[loopIndex2 - 4];
+            remapLaneByte = ((byte *)&operandSelect)[loopIndex2];
             remapLane = (uint)remapLaneByte;
             if ((remapLane != 4) && (remapLane != loopIndex2)) {
               operandIndex2 = 1;
@@ -2451,7 +2451,7 @@ loopSetLiteralValueD:
               do {
                 if (*(char *)((int)&operandSelectB + operandIndex) != '\x01') {
                   if (*(char *)((int)&operandSelect + operandIndex) == '\x04') {
-                    (**(code **)(*vslot73Result + 0x88))(vslot73Result,1,operandIndex,uniformConstOut[operandIndex + -4]);
+                    (**(code **)(*vslot73Result + 0x88))(vslot73Result,1,operandIndex,((char *)&operandSelectC)[operandIndex]);
                     setLaneOperandIdx = 2;
                     setLaneFn = *(code **)(*vslot73Result + 0x88);
                   }

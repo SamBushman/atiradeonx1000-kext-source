@@ -152,13 +152,17 @@ class Block:
 
 def build_blocks(f):
     ins = f.ins; n = len(ins)
-    tgt = lambda x: f.labels.get(x.strip('"'))
+    def tgt(x, i=None):
+        x = x.strip('"')
+        m = re.fullmatch(r'\$([+-]\d+)', x)          # pc-relative branch ($+8 = skip one instruction): 4-byte instructions
+        if m and i is not None and int(m.group(1)) % 4 == 0: return i + int(m.group(1)) // 4
+        return f.labels.get(x)
     leaders = {0}
     for i, x in enumerate(ins):
         mn = x.mn
         if mn == 'b' or BRANCH_COND.match(mn) and mn not in ('bl',) or mn in ('blr', 'bctr', 'bctrl') and False:
             if mn not in ('bl', 'bctrl', 'bcl'):
-                t = tgt(x.ops[-1]) if x.ops else None
+                t = tgt(x.ops[-1], i) if x.ops else None
                 if t is not None: leaders.add(t)
                 if i + 1 < n: leaders.add(i + 1)
         if mn in ('blr', 'bctr'):
@@ -173,14 +177,14 @@ def build_blocks(f):
     for b in blocks:
         last = ins[b.hi - 1]; mn = last.mn
         if mn == 'b':
-            t = tgt(last.ops[-1]); b.kind = 'b'; b.succ = [at[t]] if t is not None else []
+            t = tgt(last.ops[-1], b.hi - 1); b.kind = 'b'; b.succ = [at[t]] if t is not None else []
             if t is None: raise Inconclusive('branch to unknown label %s' % last.ops[-1])
         elif mn == 'blr': b.kind = 'ret'; b.succ = []
         elif mn == 'bctr':
             b.kind = 'switch'; b.succ = [at[tgt(x)] for x in f.tables.get(b.hi - 1, []) if tgt(x) in at]
             if not f.tables.get(b.hi - 1): raise Inconclusive('bctr without jump table')
         elif BRANCH_COND.match(mn) and mn not in ('bl',) and mn not in ('bctrl',):
-            t = tgt(last.ops[-1]); b.kind = 'bc'
+            t = tgt(last.ops[-1], b.hi - 1); b.kind = 'bc'
             if t is None: raise Inconclusive('conditional branch to unknown label')
             b.succ = [at[t]] + ([b.k + 1] if b.k + 1 < len(blocks) else [])
         else:
@@ -357,7 +361,13 @@ class Eval:
                 if mn == 'stmw': self.do_store(self.get('r%d' % r), 4, a, ra, None if disp is None else disp + 4 * i)
                 else: self.do_load('r%d' % r, 4, a, ra, None if disp is None else disp + 4 * i, 'lwz')
             return
-        if mn in ('lswi', 'stswi', 'lswx', 'stswx', 'lwarx', 'stwcx.', 'dcbz', 'dcbt', 'dcbtst', 'dcbf', 'dcbi', 'dcbst', 'icbi', 'sync', 'isync', 'eieio', 'lscbx'):
+        if mn in ('dcbt', 'dcbtst', 'dcba'): return      # prefetch hints: no architectural effect
+        if mn == 'dcbz':                          # zero one 32-byte cache block at the (32-aligned) effective address: an external 32-byte zero store
+            ra, rb = o[0], o[1]
+            ea = mk_add(C(0) if ra == 'r0' else self.get(ra), self.get(rb))
+            if ea[0] == 'sp' or ea[0] == 'add' and any(p[0] == 'sp' for p in ea[2:]): raise Inconclusive('dcbz into the frame')
+            self.ext_event('st', 32, T('op', 'andi32', ea), C(0)); return
+        if mn in ('lswi', 'stswi', 'lswx', 'stswx', 'lwarx', 'stwcx.', 'dcbf', 'dcbi', 'dcbst', 'icbi', 'sync', 'isync', 'eieio', 'lscbx'):
             if mn in ('sync', 'isync', 'eieio'): self.ext_event('barrier', 0, T('sym', 'raw', mn)); return
             raise Inconclusive('unmodelled memory instruction ' + mn)
         # ---- moves, ALU

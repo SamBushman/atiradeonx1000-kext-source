@@ -1,0 +1,916 @@
+### vn_Userspace_ATIRadeonX1000GA_ppc_a18_ATIRadeonX1000GA part_000
+DIFFERENT _FUN_00000c64 - block 8: observable value differs: base ('rgn' 44) | cand ('rgn' 52)
+UNINIT __atexit_common
+sem_equiv: 4 EQUIVALENT, 54 IDENTICAL-CODE, 1 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GA_ppc_a18_ATIRadeonX1000GA part_001
+INCONCLUSIVE ___AllocateSurface - block 11: no consistent slot correspondence for the events and the values its successors need
+DIFFERENT __radeonCopy - block 3: observable value differs: base ('rgn' 276) | cand ('rgn' 284)
+DIFFERENT _FUN_000055a4 - block 0: observable value differs: base ('rgn' 44) | cand ('rgn' 40)
+DIFFERENT __radeonFill - block 5: observable value differs: base ('rgn' 792) | cand ('rgn' 796)
+DIFFERENT __radeonHighlight - block 4: observable value differs: base ('rgn' 540) | cand ('rgn' 536)
+DIFFERENT __radeonSolidScanlines - block 8: observable value differs: base ('rgn' 328) | cand ('rgn' 336)
+sem_equiv: 1 EQUIVALENT, 14 IDENTICAL-CODE, 0 UNINIT-PAIRED, 5 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_000
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_001
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_002
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_003
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_004
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_005
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_006
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_007
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_008
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver landing_pads_part_009
+sem_equiv: 0 EQUIVALENT, 26 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_000
+DIFFERENT _FUN_00001da4 - block 8: observable value differs: base ('rgn' 44) | cand ('rgn' 52)
+INCONCLUSIVE _FUN_000027d0 - partial overlap of frame accesses at ('a', -84, 4)
+INCONCLUSIVE _FUN_00002ae0 - partial overlap of frame accesses at ('a', -812, 4)
+UNINIT _FUN_00006470
+UNINIT _FUN_000065b0
+sem_equiv: 3 EQUIVALENT, 52 IDENTICAL-CODE, 2 UNINIT-PAIRED, 1 DIFFERENT, 2 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_001
+UNINIT _FUN_00007d50
+UNINIT _gldGetRendererInfo
+UNINIT _gldReclaimTexture
+sem_equiv: 0 EQUIVALENT, 57 IDENTICAL-CODE, 3 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_002
+UNINIT _FUN_0000acb0
+UNINIT _FUN_0000aef4
+UNINIT _FUN_0000b150
+UNINIT _FUN_0000b270
+UNINIT _FUN_0000b3a0
+UNINIT _FUN_0000b4f0
+UNINIT _FUN_0000bc60
+UNINIT _FUN_0000bd60
+INCONCLUSIVE _FUN_0000bfa0 - partial overlap of frame accesses at ('a', -216, 4)
+INCONCLUSIVE _FUN_0000c500 - partial overlap of frame accesses at ('a', -84, 4)
+DIFFERENT _FUN_0000f620 - block 1: observable value differs: base ('rgn' 68) | cand ('rgn' 72)
+DIFFERENT _FUN_00016670 - block 0: observable value differs: base ('rgn' 150) | cand ('rgn' 148)
+DIFFERENT _FUN_00017310 - block 9: observable value differs: base ('rgn' 20) | cand ('rgn' 12)
+INCONCLUSIVE _FUN_00018120 - partial overlap of frame accesses at ('a', -724, 4)
+DIFFERENT _FUN_00018a40 - block 78: observable value differs: base ('rgn' 14) | cand ('rgn' 12)
+sem_equiv: 5 EQUIVALENT, 42 IDENTICAL-CODE, 8 UNINIT-PAIRED, 4 DIFFERENT, 3 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_003
+DIFFERENT _FUN_00019db0 - block 1: observable value differs: base ('rgn' 12) | cand ('rgn' 8)
+UNINIT _FUN_0001bac0
+DIFFERENT _FUN_0001be50 - block 8: observable value differs: base ('rgn' 93) | cand ('rgn' 109)
+DIFFERENT _FUN_0001dc10 - block 3: observable value differs: base ('rgn' 36) | cand ('rgn' 28)
+DIFFERENT _FUN_0001e280 - block 3: observable value differs: base ('rgn' 40) | cand ('rgn' 48)
+INCONCLUSIVE _FUN_0001e890 - unmodelled instruction dcba 0,r0
+INCONCLUSIVE _FUN_0001e8a0 - unmodelled instruction dcba 0,r0
+UNINIT _FUN_0001ecd0
+INCONCLUSIVE _gldUpdateDispatch - partial overlap of frame accesses at ('a', -64, 8)
+sem_equiv: 17 EQUIVALENT, 36 IDENTICAL-CODE, 2 UNINIT-PAIRED, 4 DIFFERENT, 3 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_004
+UNINIT _FUN_00024970
+DIFFERENT _FUN_00024fe0 - block 0: observable value differs: base ('rgn' 32) | cand ('rgn' 28)
+UNINIT _FUN_00025ec0
+UNINIT _FUN_000269a0
+UNINIT _FUN_00026f80
+DIFFERENT _FUN_00028350 - block 12: observable value differs: base ('rgn' 376) | cand ('rgn' 368)
+DIFFERENT _FUN_00029290 - block 72: observable value differs: base ('rgn' 52) | cand ('rgn' 48)
+DIFFERENT _FUN_00029294 - block 72: observable value differs: base ('rgn' 52) | cand ('rgn' 44)
+DIFFERENT _FUN_00029c00 - block 14: observable value differs: base ('rgn' 408) | cand ('rgn' 404)
+DIFFERENT _FUN_0002a3d0 - block 7: observable value differs: base ('rgn' 344) | cand ('rgn' 348)
+UNINIT _FUN_0002c230
+DIFFERENT _FUN_0002c790 - block 2: observable value differs: base ('rgn' 16) | cand ('rgn' 24)
+INCONCLUSIVE _FUN_0002d2b0 - partial overlap of frame accesses at ('a', -396, 4)
+sem_equiv: 6 EQUIVALENT, 43 IDENTICAL-CODE, 5 UNINIT-PAIRED, 7 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_005
+DIFFERENT _FUN_00030c50 - block 1: observable value differs: base ('rgn' 118) | cand ('rgn' 130)
+DIFFERENT _FUN_00031340 - block 2: observable value differs: base ('rgn' 46) | cand ('rgn' 48)
+DIFFERENT _FUN_00031940 - block 20: observable value differs: base ('rgn' 36) | cand ('rgn' 44)
+DIFFERENT _FUN_00032100 - block 47: observable value differs: base ('rgn' 712) | cand ('rgn' 728)
+INCONCLUSIVE _FUN_00034200 - partial overlap of frame accesses at ('a', -180, 4)
+INCONCLUSIVE _FUN_000353a0 - partial overlap of frame accesses at ('a', -580, 4)
+INCONCLUSIVE _FUN_000369f0 - block 37: no consistent slot correspondence for the events and the values its successors need
+UNINIT _FUN_00039330
+UNINIT _FUN_00039610
+UNINIT _FUN_0003a8c0
+UNINIT _FUN_0003ae80
+DIFFERENT _FUN_0003b870 - block 14: observable value differs: base ('rgn' 52) | cand ('rgn' 44)
+DIFFERENT _FUN_0003d590 - block 25: observable value differs: base ('rgn' 396) | cand ('rgn' 388)
+sem_equiv: 4 EQUIVALENT, 45 IDENTICAL-CODE, 4 UNINIT-PAIRED, 6 DIFFERENT, 3 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_006
+UNINIT _FUN_0003e600
+UNINIT _FUN_00040370
+UNINIT _FUN_00040374
+UNINIT _FUN_00040ac4
+UNINIT _FUN_00041310
+DIFFERENT _FUN_00041c00 - block 157: observable value differs: base ('rgn' 60) | cand ('rgn' 56)
+DIFFERENT _FUN_00044500 - block 65: observable value differs: base ('rgn' 16) | cand ('rgn' 24)
+DIFFERENT _FUN_00044ac0 - block 3: observable value differs: base ('rgn' 40) | cand ('rgn' 44)
+DIFFERENT _FUN_00044c90 - block 2: observable value differs: base ('rgn' 84) | cand ('rgn' 80)
+DIFFERENT _FUN_000457f0 - block 1: observable value differs: base ('rgn' 56) | cand ('rgn' 52)
+DIFFERENT _FUN_00046180 - block 7: observable value differs: base ('rgn' 32) | cand ('rgn' 36)
+DIFFERENT _FUN_000467a0 - block 17: observable value differs: base ('rgn' 28) | cand ('rgn' 40)
+DIFFERENT _FUN_00046a30 - block 14: observable value differs: base ('rgn' 72) | cand ('rgn' 68)
+DIFFERENT _FUN_00046e90 - block 30: observable value differs: base ('rgn' 112) | cand ('rgn' 108)
+DIFFERENT _FUN_00048da0 - block 2: observable value differs: base ('rgn' 244) | cand ('rgn' 248)
+DIFFERENT _FUN_0004ac90 - block 8: observable value differs: base ('rgn' 12) | cand ('rgn' 20)
+sem_equiv: 25 EQUIVALENT, 21 IDENTICAL-CODE, 5 UNINIT-PAIRED, 11 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_007
+UNINIT _FUN_0004c560
+INCONCLUSIVE _FUN_0004c720 - block 68: no consistent slot correspondence for the events and the values its successors need
+UNINIT _FUN_0004d100
+INCONCLUSIVE _FUN_0004def0 - partial overlap of frame accesses at ('a', -192, 8)
+INCONCLUSIVE _FUN_0004eba0 - partial overlap of frame accesses at ('a', -68, 4)
+INCONCLUSIVE _FUN_0004ed90 - partial overlap of frame accesses at ('a', -68, 4)
+INCONCLUSIVE _FUN_0004f160 - partial overlap of frame accesses at ('a', -60, 4)
+UNINIT _FUN_0004fd80
+UNINIT _FUN_00050300
+INCONCLUSIVE _FUN_00051420 - partial overlap of frame accesses at ('a', -108, 4)
+sem_equiv: 13 EQUIVALENT, 37 IDENTICAL-CODE, 4 UNINIT-PAIRED, 0 DIFFERENT, 6 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_008
+INCONCLUSIVE _FUN_00056f20 - block 8: no consistent slot correspondence for the events and the values its successors need
+DIFFERENT _FUN_00057cf0 - block 7: observable value differs: base ('rgn' 8) | cand ('rgn' 12)
+sem_equiv: 29 EQUIVALENT, 29 IDENTICAL-CODE, 0 UNINIT-PAIRED, 1 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_009
+DIFFERENT _FUN_0005c600 - block 6: observable value differs: base ('rgn' 12) | cand ('rgn' 16)
+DIFFERENT _FUN_0005e7f0 - block 0: observable value differs: base ('rgn' 40) | cand ('rgn' 64)
+DIFFERENT _FUN_0005f810 - block 405: observable value differs: base ('rgn' 16) | cand ('rgn' 8)
+UNINIT _FUN_00064a10
+UNINIT _FUN_00064f40
+UNINIT _FUN_000651e0
+UNINIT _FUN_00065370
+UNINIT _FUN_000656b0
+UNINIT _FUN_000659d0
+DIFFERENT _FUN_000684c0 - block 22: observable value differs: base ('rgn' 24) | cand ('rgn' 20)
+UNINIT _FUN_00069330
+sem_equiv: 31 EQUIVALENT, 18 IDENTICAL-CODE, 7 UNINIT-PAIRED, 4 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_010
+DIFFERENT _FUN_0006ec10 - block 129: observable value differs: base ('rgn' 20) | cand ('rgn' 16)
+UNINIT _FUN_00071bc0
+DIFFERENT _FUN_00074b30 - block 3: observable value differs: base ('rgn' 16) | cand ('rgn' 12)
+DIFFERENT _FUN_00074c00 - block 3: observable value differs: base ('rgn' 12) | cand ('rgn' 8)
+DIFFERENT _FUN_00074ed0 - block 1: observable value differs: base ('rgn' 12) | cand ('rgn' 20)
+DIFFERENT _FUN_00075060 - block 1: observable value differs: base ('rgn' 8) | cand ('rgn' 4)
+DIFFERENT _FUN_000764a0 - block 3: observable value differs: base ('rgn' 12) | cand ('rgn' 8)
+sem_equiv: 16 EQUIVALENT, 37 IDENTICAL-CODE, 1 UNINIT-PAIRED, 6 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_011
+DIFFERENT _FUN_00077d90 - block 0: observable value differs: base ('rgn' 24) | cand ('rgn' 96)
+DIFFERENT _FUN_00078f80 - block 0: observable value differs: base ('rgn' 20) | cand ('rgn' 24)
+UNINIT _FUN_00079e70
+INCONCLUSIVE _FUN_0007a4a0 - block 33: no consistent slot correspondence for the events and the values its successors need
+DIFFERENT _FUN_0007aae0 - block 0: observable value differs: base ('rgn' 6) | cand ('rgn' 4)
+DIFFERENT _FUN_0007b0d0 - block 92: observable value differs: base ('rgn' 58) | cand ('rgn' 52)
+INCONCLUSIVE _FUN_0007c760 - block 113: no consistent slot correspondence for the events and the values its successors need
+UNINIT _FUN_00082900
+UNINIT _FUN_00082c50
+sem_equiv: 12 EQUIVALENT, 39 IDENTICAL-CODE, 3 UNINIT-PAIRED, 4 DIFFERENT, 2 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_012
+UNINIT _FUN_00083470
+DIFFERENT _FUN_00083870 - block 0: observable value differs: base ('rgn' 28) | cand ('rgn' 32)
+UNINIT _FUN_00086840
+INCONCLUSIVE _FUN_00086ba0 - partial overlap of frame accesses at ('a', -132, 4)
+UNINIT _FUN_000872e0
+UNINIT _FUN_00087800
+DIFFERENT _FUN_00087e80 - block 1: observable value differs: base ('rgn' 28) | cand ('rgn' 36)
+INCONCLUSIVE _FUN_000885b0 - partial overlap of frame accesses at ('a', -84, 4)
+sem_equiv: 23 EQUIVALENT, 30 IDENTICAL-CODE, 4 UNINIT-PAIRED, 2 DIFFERENT, 2 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_013
+DIFFERENT _FUN_0008aa40 - block 26: observable value differs: base ('rgn' 12) | cand ('rgn' 16)
+UNINIT _FUN_0008b6d0
+UNINIT _FUN_0008c590
+UNINIT _FUN_0008dc50
+UNINIT _FUN_0008df50
+DIFFERENT _FUN_0008ebb0 - block 0: observable value differs: base ('rgn' 216) | cand ('rgn' 220)
+UNINIT _FUN_0008f520
+UNINIT _FUN_0008f7f0
+DIFFERENT _FUN_00092570 - block 3: observable value differs: base ('rgn' 64) | cand ('rgn' 60)
+DIFFERENT _FUN_000928a0 - block 7: observable value differs: base ('rgn' 60) | cand ('rgn' 52)
+UNINIT _FUN_00093390
+sem_equiv: 12 EQUIVALENT, 37 IDENTICAL-CODE, 7 UNINIT-PAIRED, 4 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_014
+INCONCLUSIVE _FUN_000934f0 - address-taken frame slots on one side only
+DIFFERENT _FUN_00093510 - block 1: observable value differs: base ('rgn' 60) | cand ('rgn' 56)
+DIFFERENT _FUN_00093a40 - block 1: observable value differs: base ('rgn' 83) | cand ('rgn' 72)
+DIFFERENT _FUN_00094840 - block 1: observable value differs: base ('rgn' 72) | cand ('rgn' 76)
+DIFFERENT _FUN_00095dd0 - block 1: observable value differs: base ('rgn' 19) | cand ('rgn' 16)
+DIFFERENT _FUN_00096600 - block 2: observable value differs: base ('rgn' 130) | cand ('rgn' 120)
+DIFFERENT _FUN_00096d80 - block 3: observable value differs: base ('rgn' 56) | cand ('rgn' 48)
+DIFFERENT _FUN_00097440 - block 12: observable value differs: base ('rgn' 316) | cand ('rgn' 304)
+DIFFERENT _FUN_00098500 - block 1: observable value differs: base ('rgn' 400) | cand ('rgn' 392)
+UNINIT _FUN_00099e50
+DIFFERENT _FUN_0009a590 - block 1: observable value differs: base ('rgn' 16) | cand ('rgn' 12)
+DIFFERENT _FUN_0009aa00 - block 1: observable value differs: base ('rgn' 48) | cand ('rgn' 44)
+UNINIT _FUN_0009afc0
+DIFFERENT _FUN_0009b430 - block 25: observable value differs: base ('rgn' 24) | cand ('rgn' 12)
+DIFFERENT _FUN_0009d410 - block 14: observable value differs: base ('rgn' 120) | cand ('rgn' 172)
+DIFFERENT _FUN_0009f0b0 - block 0: observable value differs: base ('rgn' 12) | cand ('rgn' 4)
+UNINIT _FUN_000a0380
+sem_equiv: 8 EQUIVALENT, 37 IDENTICAL-CODE, 3 UNINIT-PAIRED, 13 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_015
+DIFFERENT _FUN_000a2e90 - block 29: observable value differs: base ('rgn' 60) | cand ('rgn' 72)
+DIFFERENT _FUN_000a3160 - block 20: observable value differs: base ('rgn' 68) | cand ('rgn' 76)
+INCONCLUSIVE _FUN_000a3790 - partial overlap of frame accesses at ('a', -180, 4)
+INCONCLUSIVE _FUN_000a4770 - partial overlap of frame accesses at ('a', -116, 4)
+INCONCLUSIVE _FUN_000a4980 - block 250: no consistent slot correspondence for the events and the values its successors need
+INCONCLUSIVE _FUN_000a5c40 - partial overlap of frame accesses at ('a', -76, 4)
+INCONCLUSIVE _FUN_000a5ec0 - partial overlap of frame accesses at ('a', -52, 4)
+UNINIT _FUN_000a6500
+DIFFERENT _FUN_000a6860 - block 0: observable value differs: base ('rgn' 444) | cand ('rgn' 436)
+UNINIT _FUN_000a7050
+sem_equiv: 11 EQUIVALENT, 39 IDENTICAL-CODE, 2 UNINIT-PAIRED, 3 DIFFERENT, 5 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_016
+INCONCLUSIVE _FUN_000a8630 - address of the outgoing area is taken (addi r2,r1,24)
+INCONCLUSIVE _FUN_000a9640 - partial overlap of frame accesses at ('a', -132, 4)
+INCONCLUSIVE _FUN_000a9ac0 - partial overlap of frame accesses at ('a', -288, 8)
+DIFFERENT _FUN_000abd10 - block 1: observable value differs: base ('rgn' 80) | cand ('rgn' 84)
+DIFFERENT _FUN_000ac720 - block 0: observable value differs: base ('rgn' 96) | cand ('rgn' 268)
+DIFFERENT _FUN_000aec40 - block 11: observable value differs: base ('rgn' 100) | cand ('rgn' 108)
+DIFFERENT _FUN_000afe40 - block 0: observable value differs: base ('rgn' 325) | cand ('rgn' 324)
+DIFFERENT _FUN_000b3630 - block 38: observable value differs: base ('rgn' 20) | cand ('rgn' 24)
+DIFFERENT _FUN_000b4400 - block 11: observable value differs: base ('rgn' 8) | cand ('rgn' 40)
+UNINIT _FUN_000b4cd0
+UNINIT _FUN_000b5400
+UNINIT _FUN_000b6580
+INCONCLUSIVE _FUN_000b6f20 - partial overlap of frame accesses at ('a', -116, 4)
+sem_equiv: 19 EQUIVALENT, 30 IDENTICAL-CODE, 3 UNINIT-PAIRED, 6 DIFFERENT, 4 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_017
+DIFFERENT _FUN_000b9f10 - block 156: observable value differs: base ('rgn' 47) | cand ('rgn' 40)
+DIFFERENT _FUN_000bef40 - block 7: observable value differs: base ('rgn' 60) | cand ('rgn' 68)
+DIFFERENT _FUN_000bfed0 - block 1: observable value differs: base ('rgn' 24) | cand ('rgn' 16)
+INCONCLUSIVE _FUN_000c0fd0 - block 70: no consistent slot correspondence for the events and the values its successors need
+INCONCLUSIVE _FUN_000c1780 - block 115: no consistent slot correspondence for the events and the values its successors need
+INCONCLUSIVE _FUN_000c1f80 - partial overlap of frame accesses at ('a', -44, 4)
+DIFFERENT _FUN_000c2834 - block 16: observable value differs: base ('rgn' 16) | cand ('rgn' 8)
+DIFFERENT _FUN_000c3240 - block 2: observable value differs: base ('rgn' 132) | cand ('rgn' 164)
+DIFFERENT _FUN_000c38a0 - block 0: observable value differs: base ('rgn' 52) | cand ('rgn' 92)
+UNINIT _FUN_000c3fd0
+UNINIT _FUN_000c42f0
+INCONCLUSIVE _FUN_000c4ce0 - partial overlap of frame accesses at ('a', -36, 4)
+DIFFERENT _FUN_000c5e60 - block 4: observable value differs: base ('rgn' 36) | cand ('rgn' 44)
+DIFFERENT _FUN_000c6470 - block 0: observable value differs: base ('rgn' 80) | cand ('rgn' 96)
+sem_equiv: 10 EQUIVALENT, 37 IDENTICAL-CODE, 2 UNINIT-PAIRED, 8 DIFFERENT, 4 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_018
+INCONCLUSIVE _FUN_000c8110 - block 11: no consistent slot correspondence for the events and the values its successors need
+DIFFERENT _FUN_000c8e50 - block 1: observable value differs: base ('add' ('c' 0) ('ld' 'lwz' 0 4 ('rgn' 420)) ('rgn' 544)) | cand ('add' ('c' 0) ('ld' 'lwz' 0 4 ('rgn' 420)) ('rgn' 768))
+INCONCLUSIVE _FUN_000cdc3c - partial overlap of frame accesses at ('a', -248, 4)
+DIFFERENT _FUN_000ce148 - block 17: observable value differs: base ('rgn' 47) | cand ('rgn' 36)
+DIFFERENT _FUN_000ce514 - block 1: observable value differs: base ('rgn' 87) | cand ('rgn' 95)
+DIFFERENT _FUN_000ced58 - block 1: observable value differs: base ('rgn' 47) | cand ('rgn' 36)
+DIFFERENT _FUN_000d0488 - block 10: observable value differs: base ('rgn' 40) | cand ('rgn' 36)
+DIFFERENT _FUN_000d0888 - block 25: observable value differs: base ('rgn' 28) | cand ('rgn' 24)
+UNINIT _FUN_000d13a4
+INCONCLUSIVE _FUN_000d183c - block 386: no consistent slot correspondence for the events and the values its successors need
+sem_equiv: 9 EQUIVALENT, 41 IDENTICAL-CODE, 1 UNINIT-PAIRED, 6 DIFFERENT, 3 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_019
+DIFFERENT _FUN_000d6340 - block 0: observable value differs: base ('rgn' 96) | cand ('rgn' 116)
+DIFFERENT _FUN_000d8450 - block 8: observable value differs: base ('rgn' 44) | cand ('rgn' 60)
+DIFFERENT _FUN_000db574 - block 0: observable value differs: base ('rgn' 256) | cand ('rgn' 268)
+sem_equiv: 8 EQUIVALENT, 49 IDENTICAL-CODE, 0 UNINIT-PAIRED, 3 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_020
+UNINIT _FUN_000dcdf4
+UNINIT _FUN_000dd1f8
+UNINIT _FUN_000dd6bc
+UNINIT _FUN_000ddbcc
+sem_equiv: 1 EQUIVALENT, 56 IDENTICAL-CODE, 4 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_021
+UNINIT _FUN_000e2094
+UNINIT _FUN_000e36bc
+DIFFERENT _FUN_000e3b88 - block 5: observable value differs: base ('add' ('c' 56) ('op' 'slwi' ('ld' 'lwz' 0 4 (.. ..)) ('c' 2)) ('rgn' 0)) | cand ('add' ('c' 128) ('op' 'slwi' ('ld' 'lwz' 0 4 (.. ..)) ('c' 2)) ('rgn' 0))
+sem_equiv: 16 EQUIVALENT, 42 IDENTICAL-CODE, 2 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_022
+UNINIT _FUN_000e5e70
+sem_equiv: 15 EQUIVALENT, 45 IDENTICAL-CODE, 1 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_023
+UNINIT _FUN_000e9d68
+UNINIT _FUN_000e9f00
+UNINIT _FUN_000ea020
+UNINIT _FUN_000ea148
+sem_equiv: 6 EQUIVALENT, 50 IDENTICAL-CODE, 4 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_024
+UNINIT _FUN_000ed29c
+UNINIT _FUN_000ed7e4
+DIFFERENT _FUN_000ee7a0 - block 1: observable value differs: base ('rgn' 20) | cand ('rgn' 40)
+UNINIT _FUN_000ef498
+DIFFERENT _FUN_000f07a8 - block 4: observable value differs: base ('rgn' 56) | cand ('rgn' 136)
+DIFFERENT _FUN_000f14f8 - block 13: observable value differs: base ('rgn' 48) | cand ('rgn' 44)
+DIFFERENT _FUN_000f1d7c - block 8: observable value differs: base ('rgn' 75) | cand ('rgn' 72)
+UNINIT _FUN_000f29f4
+sem_equiv: 20 EQUIVALENT, 33 IDENTICAL-CODE, 4 UNINIT-PAIRED, 4 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_025
+DIFFERENT _FUN_000f3b10 - block 2: observable value differs: base ('rgn' 40) | cand ('rgn' 52)
+DIFFERENT _FUN_000f3b68 - block 2: observable value differs: base ('rgn' 40) | cand ('rgn' 52)
+DIFFERENT _FUN_000f3c30 - block 11: observable value differs: base ('rgn' 64) | cand ('rgn' 60)
+sem_equiv: 8 EQUIVALENT, 50 IDENTICAL-CODE, 0 UNINIT-PAIRED, 3 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_026
+DIFFERENT _FUN_000f4ddc - block 0: observable value differs: base ('rgn' 180) | cand ('rgn' 188)
+DIFFERENT _FUN_000f4fdc - block 0: observable value differs: base ('rgn' 64) | cand ('rgn' 84)
+INCONCLUSIVE _FUN_000f5a0c - partial overlap of frame accesses at ('a', -32, 4)
+DIFFERENT _FUN_000f5cf0 - block 5: observable value differs: base ('rgn' 48) | cand ('rgn' 40)
+UNINIT _FUN_000f60c4
+DIFFERENT _FUN_000f6248 - block 0: observable value differs: base ('rgn' 60) | cand ('rgn' 84)
+DIFFERENT _FUN_000f6d14 - block 0: observable value differs: base ('rgn' 540) | cand ('rgn' 604)
+DIFFERENT _FUN_000f8d50 - block 0: observable value differs: base ('rgn' 44) | cand ('rgn' 64)
+DIFFERENT _FUN_000f9a58 - block 27: observable value differs: base ('rgn' 60) | cand ('rgn' 52)
+DIFFERENT _FUN_000fa958 - block 18: observable value differs: base ('rgn' 20) | cand ('rgn' 12)
+UNINIT _FUN_000fb230
+DIFFERENT _FUN_000fb3d4 - block 43: observable value differs: base ('rgn' 32) | cand ('rgn' 44)
+UNINIT _FUN_000fd5c8
+sem_equiv: 17 EQUIVALENT, 32 IDENTICAL-CODE, 3 UNINIT-PAIRED, 9 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_027
+INCONCLUSIVE _FUN_00103d78 - partial overlap of frame accesses at ('a', -92, 4)
+sem_equiv: 5 EQUIVALENT, 54 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_028
+sem_equiv: 12 EQUIVALENT, 48 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_029
+sem_equiv: 2 EQUIVALENT, 58 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_030
+UNINIT _FUN_0010ac38
+sem_equiv: 6 EQUIVALENT, 54 IDENTICAL-CODE, 1 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_031
+DIFFERENT _FUN_0010c47c - block 26: observable value differs: base ('rgn' 36) | cand ('rgn' 32)
+UNINIT _FUN_0010c670
+UNINIT _FUN_0010cb48
+DIFFERENT _FUN_0010cfcc - block 7: observable value differs: base ('rgn' 12) | cand ('rgn' 8)
+UNINIT _FUN_0010d358
+UNINIT _FUN_0010d4cc
+DIFFERENT _FUN_0010ead4 - block 6: observable value differs: base ('rgn' 20) | cand ('rgn' 40)
+DIFFERENT _FUN_0010ecb8 - block 4: observable value differs: base ('rgn' 36) | cand ('rgn' 48)
+sem_equiv: 9 EQUIVALENT, 44 IDENTICAL-CODE, 4 UNINIT-PAIRED, 4 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_032
+DIFFERENT _FUN_0010fb54 - block 9: observable value differs: base ('add' ('c' 36) ('op' 'slwi' ('ld' 'lwz' 0 4 (.. ..)) ('c' 2)) ('rgn' 0)) | cand ('add' ('c' 40) ('op' 'slwi' ('ld' 'lwz' 0 4 (.. ..)) ('c' 2)) ('rgn' 0))
+DIFFERENT _FUN_0010fc88 - block 7: observable value differs: base ('add' ('c' 32) ('op' 'slwi' ('ld' 'lwz' 12 4 (.. ..)) ('c' 2)) ('rgn' 0)) | cand ('add' ('c' 36) ('op' 'slwi' ('ld' 'lwz' 12 4 (.. ..)) ('c' 2)) ('rgn' 0))
+DIFFERENT _FUN_0010fd98 - block 0: observable value differs: base ('rgn' 32) | cand ('rgn' 44)
+DIFFERENT _FUN_001102e0 - block 0: observable value differs: base ('rgn' 64) | cand ('rgn' 156)
+DIFFERENT _FUN_001121b4 - block 0: observable value differs: base ('rgn' 44) | cand ('rgn' 128)
+DIFFERENT _FUN_001128a0 - block 11: observable value differs: base ('rgn' 72) | cand ('rgn' 156)
+sem_equiv: 6 EQUIVALENT, 48 IDENTICAL-CODE, 0 UNINIT-PAIRED, 6 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_033
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_034
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_035
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_036
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_037
+UNINIT _FUN_0011f2f8
+DIFFERENT _FUN_0011f578 - block 18: observable value differs: base ('rgn' 16) | cand ('rgn' 28)
+DIFFERENT _FUN_0011ff7c - block 155: observable value differs: base ('rgn' 12) | cand ('rgn' 4)
+DIFFERENT _FUN_00121000 - block 0: observable value differs: base ('rgn' 77) | cand ('rgn' 148)
+DIFFERENT _FUN_001214fc - block 87: observable value differs: base ('rgn' 40) | cand ('rgn' 44)
+UNINIT _FUN_00123c08
+UNINIT _FUN_0012499c
+UNINIT _FUN_00125db8
+sem_equiv: 22 EQUIVALENT, 31 IDENTICAL-CODE, 4 UNINIT-PAIRED, 4 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_038
+sem_equiv: 3 EQUIVALENT, 57 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_039
+DIFFERENT _FUN_001281f0 - block 8: observable value differs: base ('rgn' 44) | cand ('rgn' 36)
+DIFFERENT _FUN_00128430 - block 4: observable value differs: base ('rgn' 16) | cand ('rgn' 20)
+DIFFERENT _FUN_0012873c - block 6: observable value differs: base ('rgn' 64) | cand ('rgn' 56)
+DIFFERENT _FUN_00129854 - block 13: observable value differs: base ('rgn' 48) | cand ('rgn' 52)
+DIFFERENT _FUN_00129a0c - block 7: observable value differs: base ('rgn' 20) | cand ('rgn' 12)
+DIFFERENT _FUN_00129b48 - block 1: observable value differs: base ('add' ('c' 0) ('ld' 'lwz' 2 4 ('rgn' 28)) ('rgn' 40)) | cand ('add' ('c' 0) ('ld' 'lwz' 2 4 ('rgn' 28)) ('rgn' 68))
+DIFFERENT _FUN_00129eb4 - block 4: observable value differs: base ('rgn' 8) | cand ('rgn' 20)
+sem_equiv: 14 EQUIVALENT, 41 IDENTICAL-CODE, 0 UNINIT-PAIRED, 7 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_040
+UNINIT _FUN_0012b6a8
+UNINIT _FUN_0012bb48
+UNINIT _FUN_0012c2dc
+DIFFERENT _FUN_0012c59c - block 3: observable value differs: base ('rgn' 36) | cand ('rgn' 32)
+DIFFERENT _FUN_0012c7c0 - block 4: observable value differs: base ('rgn' 36) | cand ('rgn' 32)
+DIFFERENT _FUN_0012c908 - block 1: observable value differs: base ('rgn' 32) | cand ('rgn' 44)
+UNINIT _FUN_0012ccc0
+DIFFERENT _FUN_0012d2f0 - block 75: observable value differs: base ('rgn' 7) | cand ('rgn' 4)
+UNINIT _FUN_0012dd58
+UNINIT _FUN_0012df90
+INCONCLUSIVE _FUN_0012f0f8 - block 140: no consistent slot correspondence for the events and the values its successors need
+UNINIT _FUN_00130abc
+DIFFERENT _FUN_00131008 - block 0: observable value differs: base ('rgn' 24) | cand ('rgn' 32)
+sem_equiv: 19 EQUIVALENT, 29 IDENTICAL-CODE, 7 UNINIT-PAIRED, 5 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_041
+UNINIT _FUN_00131d08
+DIFFERENT _FUN_001322a8 - block 31: observable value differs: base ('rgn' 52) | cand ('rgn' 44)
+DIFFERENT _FUN_0013323c - block 17: observable value differs: base ('rgn' 108) | cand ('rgn' 100)
+DIFFERENT _FUN_00138694 - block 33: observable value differs: base ('rgn' 36) | cand ('rgn' 24)
+sem_equiv: 24 EQUIVALENT, 32 IDENTICAL-CODE, 1 UNINIT-PAIRED, 3 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_042
+DIFFERENT _FUN_001396d0 - block 8: observable value differs: base ('rgn' 36) | cand ('rgn' 24)
+DIFFERENT _FUN_00139838 - block 0: observable value differs: base ('rgn' 4) | cand ('rgn' 16)
+DIFFERENT _FUN_001398b4 - block 1: observable value differs: base ('rgn' 36) | cand ('rgn' 44)
+UNINIT _FUN_00139f84
+DIFFERENT _FUN_0013a240 - block 12: observable value differs: base ('rgn' 12) | cand ('rgn' 16)
+DIFFERENT _FUN_0013a38c - block 1: observable value differs: base ('rgn' 56) | cand ('rgn' 52)
+UNINIT _FUN_0013a774
+UNINIT _FUN_0013a8a4
+DIFFERENT _FUN_0013c210 - block 44: observable value differs: base ('rgn' 43) | cand ('rgn' 36)
+UNINIT _FUN_0013caf4
+DIFFERENT _FUN_0013fc38 - block 108: observable value differs: base ('rgn' 60) | cand ('rgn' 56)
+DIFFERENT _FUN_00141100 - block 5: observable value differs: base ('rgn' 44) | cand ('rgn' 40)
+DIFFERENT _FUN_00141930 - block 1: observable value differs: base ('rgn' 16) | cand ('rgn' 200)
+DIFFERENT _FUN_00142974 - block 1: observable value differs: base ('rgn' 60) | cand ('rgn' 64)
+DIFFERENT _FUN_00142fdc - block 0: observable value differs: base ('rgn' 100) | cand ('rgn' 116)
+DIFFERENT _FUN_0014375c - block 0: observable value differs: base ('rgn' 0) | cand ('rgn' 4)
+INCONCLUSIVE _FUN_001440e4 - simulation relation did not converge
+DIFFERENT _FUN_00145670 - block 227: observable value differs: base ('rgn' 16) | cand ('rgn' 28)
+sem_equiv: 24 EQUIVALENT, 19 IDENTICAL-CODE, 4 UNINIT-PAIRED, 13 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_043
+UNINIT _FUN_001474c8
+UNINIT _FUN_00147704
+DIFFERENT _FUN_00147f54 - block 4: observable value differs: base ('rgn' 32) | cand ('rgn' 28)
+DIFFERENT _FUN_0014846c - block 23: observable value differs: base ('rgn' 44) | cand ('rgn' 36)
+DIFFERENT _FUN_001486e8 - block 24: observable value differs: base ('rgn' 40) | cand ('rgn' 32)
+UNINIT _FUN_00148980
+DIFFERENT _FUN_00148d8c - block 0: observable value differs: base ('rgn' 28) | cand ('rgn' 52)
+DIFFERENT _FUN_001494dc - block 13: observable value differs: base ('rgn' 64) | cand ('rgn' 68)
+DIFFERENT _FUN_00149de4 - block 9: observable value differs: base ('rgn' 36) | cand ('rgn' 40)
+DIFFERENT _FUN_0014a918 - block 18: observable value differs: base ('rgn' 36) | cand ('rgn' 32)
+DIFFERENT _FUN_0014acb8 - block 1: observable value differs: base ('rgn' 16) | cand ('rgn' 12)
+DIFFERENT _FUN_0014b150 - block 8: observable value differs: base ('rgn' 68) | cand ('rgn' 64)
+DIFFERENT _FUN_0014b82c - block 15: observable value differs: base ('rgn' 24) | cand ('rgn' 28)
+DIFFERENT _FUN_0014bdbc - block 26: observable value differs: base ('rgn' 44) | cand ('rgn' 40)
+DIFFERENT _FUN_0014caec - block 19: observable value differs: base ('rgn' 52) | cand ('rgn' 48)
+UNINIT _FUN_0014cec8
+UNINIT _FUN_0014e6e4
+DIFFERENT _FUN_0014e9e4 - block 0: observable value differs: base ('rgn' 4) | cand ('rgn' 148)
+DIFFERENT _FUN_0014f420 - block 0: observable value differs: base ('rgn' 80) | cand ('rgn' 308)
+UNINIT _FUN_001506d0
+UNINIT _FUN_001507d0
+DIFFERENT _FUN_00150b94 - block 22: observable value differs: base ('rgn' 24) | cand ('rgn' 32)
+DIFFERENT _FUN_00150d38 - block 13: observable value differs: base ('rgn' 44) | cand ('rgn' 48)
+DIFFERENT _FUN_00151a74 - block 7: observable value differs: base ('rgn' 92) | cand ('rgn' 88)
+DIFFERENT _FUN_001524b8 - block 7: observable value differs: base ('rgn' 72) | cand ('rgn' 68)
+DIFFERENT _FUN_00152ea8 - block 4: observable value differs: base ('rgn' 92) | cand ('rgn' 96)
+DIFFERENT _FUN_001541f0 - block 4: observable value differs: base ('rgn' 108) | cand ('rgn' 104)
+UNINIT _FUN_00154dc0
+DIFFERENT _FUN_00155654 - block 2: observable value differs: base ('rgn' 20) | cand ('rgn' 12)
+UNINIT _FUN_00156d48
+DIFFERENT _FUN_0015800c - block 13: observable value differs: base ('rgn' 24) | cand ('rgn' 20)
+DIFFERENT _FUN_00158264 - block 36: observable value differs: base ('rgn' 28) | cand ('rgn' 20)
+sem_equiv: 19 EQUIVALENT, 10 IDENTICAL-CODE, 9 UNINIT-PAIRED, 23 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_044
+DIFFERENT _FUN_00158c3c - block 34: observable value differs: base ('rgn' 52) | cand ('rgn' 56)
+DIFFERENT _FUN_001595f0 - block 9: observable value differs: base ('rgn' 32) | cand ('rgn' 36)
+DIFFERENT _FUN_00159794 - block 16: observable value differs: base ('rgn' 12) | cand ('rgn' 24)
+DIFFERENT _FUN_00159b58 - block 20: observable value differs: base ('rgn' 92) | cand ('rgn' 88)
+DIFFERENT _FUN_0015a68c - block 36: observable value differs: base ('rgn' 24) | cand ('rgn' 20)
+DIFFERENT _FUN_0015b4a4 - block 1: observable value differs: base ('rgn' 44) | cand ('rgn' 60)
+DIFFERENT _FUN_0015b974 - block 9: observable value differs: base ('rgn' 40) | cand ('rgn' 36)
+DIFFERENT _FUN_0015bd40 - block 1: observable value differs: base ('rgn' 44) | cand ('rgn' 32)
+DIFFERENT _FUN_0015c6d4 - block 1: observable value differs: base ('rgn' 128) | cand ('rgn' 208)
+DIFFERENT _FUN_0015ceb0 - block 1: observable value differs: base ('rgn' 72) | cand ('rgn' 76)
+DIFFERENT _FUN_0015e2f4 - block 0: observable value differs: base ('rgn' 12) | cand ('rgn' 4)
+DIFFERENT _FUN_0015e494 - block 1: observable value differs: base ('rgn' 100) | cand ('rgn' 196)
+DIFFERENT _FUN_0015ea3c - block 17: observable value differs: base ('rgn' 72) | cand ('rgn' 68)
+DIFFERENT _FUN_0015f44c - block 8: observable value differs: base ('rgn' 60) | cand ('rgn' 52)
+DIFFERENT _FUN_00160320 - block 3: observable value differs: base ('rgn' 60) | cand ('rgn' 52)
+DIFFERENT _FUN_00160eb0 - block 14: observable value differs: base ('rgn' 80) | cand ('rgn' 88)
+UNINIT _FUN_00161748
+DIFFERENT _FUN_001621c8 - block 1: observable value differs: base ('rgn' 100) | cand ('rgn' 92)
+DIFFERENT _FUN_00162dfc - block 0: observable value differs: base ('rgn' 36) | cand ('rgn' 88)
+DIFFERENT _FUN_00163994 - block 1: observable value differs: base ('rgn' 36) | cand ('rgn' 44)
+DIFFERENT _FUN_0016629c - block 4: observable value differs: base ('rgn' 36) | cand ('rgn' 32)
+DIFFERENT _FUN_001670fc - block 0: observable value differs: base ('rgn' 20) | cand ('rgn' 228)
+DIFFERENT _FUN_00167b68 - block 27: observable value differs: base ('rgn' 60) | cand ('rgn' 68)
+DIFFERENT _FUN_00167ef4 - block 28: observable value differs: base ('rgn' 36) | cand ('rgn' 32)
+DIFFERENT _FUN_00168468 - block 0: observable value differs: base ('rgn' 72) | cand ('rgn' 76)
+DIFFERENT _FUN_00168d80 - block 1: observable value differs: base ('rgn' 28) | cand ('rgn' 24)
+DIFFERENT _FUN_00169e30 - block 56: observable value differs: base ('rgn' 12) | cand ('rgn' 20)
+DIFFERENT _FUN_0016a568 - block 99: observable value differs: base ('rgn' 30) | cand ('rgn' 36)
+sem_equiv: 21 EQUIVALENT, 12 IDENTICAL-CODE, 1 UNINIT-PAIRED, 27 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_045
+DIFFERENT _FUN_0016cdc4 - block 19: observable value differs: base ('rgn' 40) | cand ('rgn' 28)
+DIFFERENT _FUN_0016d538 - block 13: observable value differs: base ('rgn' 72) | cand ('rgn' 80)
+UNINIT _FUN_0016ee90
+DIFFERENT _FUN_0016ff54 - block 34: observable value differs: base ('rgn' 62) | cand ('rgn' 60)
+DIFFERENT _FUN_00170e6c - block 34: observable value differs: base ('rgn' 44) | cand ('rgn' 36)
+UNINIT _FUN_00171714
+UNINIT _FUN_00171e68
+DIFFERENT _FUN_001725c4 - block 7: observable value differs: base ('rgn' 24) | cand ('rgn' 32)
+DIFFERENT _FUN_00173164 - block 6: observable value differs: base ('rgn' 28) | cand ('rgn' 24)
+sem_equiv: 15 EQUIVALENT, 36 IDENTICAL-CODE, 3 UNINIT-PAIRED, 6 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_046
+UNINIT _FUN_00173f1c
+DIFFERENT _FUN_00174e0c - block 0: observable value differs: base ('rgn' 52) | cand ('rgn' 228)
+UNINIT _FUN_00175b40
+DIFFERENT _FUN_00176a94 - block 16: observable value differs: base ('rgn' 72) | cand ('rgn' 64)
+UNINIT _FUN_00176c40
+sem_equiv: 18 EQUIVALENT, 38 IDENTICAL-CODE, 3 UNINIT-PAIRED, 2 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_047
+DIFFERENT _FUN_001781a4 - block 15: observable value differs: base ('rgn' 68) | cand ('rgn' 80)
+DIFFERENT _FUN_00178338 - block 12: observable value differs: base ('rgn' 44) | cand ('rgn' 40)
+DIFFERENT _FUN_00178648 - block 13: observable value differs: base ('rgn' 44) | cand ('rgn' 36)
+DIFFERENT _FUN_00178e90 - block 13: observable value differs: base ('rgn' 60) | cand ('rgn' 68)
+DIFFERENT _FUN_001793d8 - block 7: observable value differs: base ('rgn' 68) | cand ('rgn' 72)
+DIFFERENT _FUN_0017a3d4 - block 11: observable value differs: base ('rgn' 56) | cand ('rgn' 52)
+DIFFERENT _FUN_0017a748 - block 14: observable value differs: base ('rgn' 32) | cand ('rgn' 44)
+DIFFERENT _FUN_0017a8a4 - block 9: observable value differs: base ('rgn' 16) | cand ('rgn' 4)
+DIFFERENT _FUN_0017ab4c - block 12: observable value differs: base ('rgn' 52) | cand ('rgn' 44)
+DIFFERENT _FUN_0017b12c - block 4: observable value differs: base ('rgn' 224) | cand ('rgn' 304)
+DIFFERENT _FUN_0017b96c - block 2: observable value differs: base ('rgn' 32) | cand ('rgn' 40)
+sem_equiv: 26 EQUIVALENT, 25 IDENTICAL-CODE, 0 UNINIT-PAIRED, 11 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_048
+DIFFERENT _FUN_0017c910 - block 6: observable value differs: base ('rgn' 44) | cand ('rgn' 40)
+DIFFERENT _FUN_0017cb14 - block 6: observable value differs: base ('rgn' 44) | cand ('rgn' 40)
+DIFFERENT _FUN_0017e1f4 - block 8: observable value differs: base ('rgn' 44) | cand ('rgn' 36)
+UNINIT _FUN_0017e338
+DIFFERENT _FUN_0017ee68 - block 4: observable value differs: base ('rgn' 36) | cand ('rgn' 32)
+DIFFERENT _FUN_0017f1f8 - block 10: observable value differs: base ('rgn' 56) | cand ('rgn' 64)
+DIFFERENT _FUN_00180250 - block 38: observable value differs: base ('rgn' 60) | cand ('rgn' 48)
+DIFFERENT _FUN_00180830 - block 1: observable value differs: base ('rgn' 96) | cand ('rgn' 100)
+DIFFERENT _FUN_00181f00 - block 119: observable value differs: base ('rgn' 11) | cand ('rgn' 8)
+DIFFERENT _FUN_00183b9c - block 22: observable value differs: base ('rgn' 52) | cand ('rgn' 48)
+UNINIT _FUN_0018401c
+DIFFERENT _FUN_00184ef0 - block 29: observable value differs: base ('rgn' 148) | cand ('rgn' 144)
+sem_equiv: 25 EQUIVALENT, 25 IDENTICAL-CODE, 2 UNINIT-PAIRED, 10 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_049
+DIFFERENT _FUN_00186510 - block 1: observable value differs: base ('rgn' 80) | cand ('rgn' 76)
+DIFFERENT _FUN_00186a88 - block 1: observable value differs: base ('rgn' 76) | cand ('rgn' 80)
+DIFFERENT _FUN_001875a8 - block 5: observable value differs: base ('rgn' 52) | cand ('rgn' 48)
+DIFFERENT _FUN_00187ad8 - block 56: observable value differs: base ('rgn' 12) | cand ('rgn' 8)
+DIFFERENT _FUN_0018896c - block 25: observable value differs: base ('rgn' 32) | cand ('rgn' 24)
+DIFFERENT _FUN_001899ac - block 9: observable value differs: base ('add' ('c' 44) ('op' 'slwi' ('ld' 'lwz' 0 4 (.. ..)) ('c' 2)) ('rgn' 0)) | cand ('add' ('c' 48) ('op' 'slwi' ('ld' 'lwz' 0 4 (.. ..)) ('c' 2)) ('rgn' 0))
+DIFFERENT _FUN_0018a440 - block 66: observable value differs: base ('rgn' 32) | cand ('rgn' 36)
+UNINIT _FUN_0018ad08
+UNINIT _FUN_0018b1bc
+DIFFERENT _FUN_0018b654 - block 8: observable value differs: base ('rgn' 16) | cand ('rgn' 20)
+UNINIT _FUN_0018b9cc
+DIFFERENT _FUN_0018bc94 - block 13: observable value differs: base ('rgn' 76) | cand ('rgn' 64)
+DIFFERENT _FUN_0018c1c8 - block 12: observable value differs: base ('rgn' 84) | cand ('rgn' 80)
+DIFFERENT _FUN_0018d4b4 - block 5: observable value differs: base ('rgn' 44) | cand ('rgn' 36)
+DIFFERENT _FUN_0018dabc - block 3: observable value differs: base ('rgn' 62) | cand ('rgn' 60)
+DIFFERENT _FUN_0018e1a8 - block 4: observable value differs: base ('rgn' 100) | cand ('rgn' 224)
+UNINIT _FUN_001906c8
+DIFFERENT _FUN_00190990 - block 17: observable value differs: base ('rgn' 80) | cand ('rgn' 88)
+sem_equiv: 15 EQUIVALENT, 28 IDENTICAL-CODE, 4 UNINIT-PAIRED, 14 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_050
+DIFFERENT _FUN_001919d8 - block 4: observable value differs: base ('rgn' 8) | cand ('rgn' 16)
+DIFFERENT _FUN_001922c4 - block 8: observable value differs: base ('rgn' 16) | cand ('rgn' 4)
+sem_equiv: 13 EQUIVALENT, 47 IDENTICAL-CODE, 0 UNINIT-PAIRED, 2 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_051
+DIFFERENT _FUN_00196e90 - block 8: observable value differs: base ('rgn' 12) | cand ('rgn' 16)
+sem_equiv: 8 EQUIVALENT, 51 IDENTICAL-CODE, 0 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_052
+DIFFERENT _FUN_001981ac - block 0: observable value differs: base ('rgn' 104) | cand ('rgn' 288)
+UNINIT _FUN_0019c130
+UNINIT _FUN_0019ca78
+sem_equiv: 13 EQUIVALENT, 44 IDENTICAL-CODE, 2 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_053
+DIFFERENT _FUN_0019f98c - block 7: observable value differs: base ('rgn' 32) | cand ('rgn' 44)
+sem_equiv: 14 EQUIVALENT, 46 IDENTICAL-CODE, 0 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_054
+UNINIT _FUN_001a1d24
+DIFFERENT _FUN_001a25a8 - block 0: observable value differs: base ('rgn' 48) | cand ('rgn' 40)
+UNINIT _FUN_001a3000
+sem_equiv: 5 EQUIVALENT, 52 IDENTICAL-CODE, 2 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_055
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_056
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_057
+sem_equiv: 2 EQUIVALENT, 58 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_058
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_059
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_060
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_061
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_062
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_063
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_064
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_065
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_066
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver part_067
+sem_equiv: 0 EQUIVALENT, 13 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_000
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_001
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_002
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_003
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_004
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_005
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_006
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_007
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000GLDriver_ppc_a18_ATIRadeonX1000GLDriver unowned_code_part_008
+sem_equiv: 0 EQUIVALENT, 14 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000VADriver_ppc_a18_ATIRadeonX1000VADriver part_000
+sem_equiv: 0 EQUIVALENT, 61 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_ATIRadeonX1000VADriver_ppc_a18_ATIRadeonX1000VADriver part_001
+INCONCLUSIVE _FUN_00004740 - partial overlap of frame accesses at ('a', -40, 8)
+INCONCLUSIVE _FUN_00009ac0 - partial overlap of frame accesses at ('a', -308, 4)
+DIFFERENT _FUN_00009c80 - block 4: observable value differs: base ('rgn' 120) | cand ('rgn' 116)
+DIFFERENT _FUN_0000a110 - block 4: observable value differs: base ('rgn' 4) | cand ('rgn' 16)
+DIFFERENT _FUN_0000a4e0 - block 12: observable value differs: base ('rgn' 28) | cand ('rgn' 36)
+DIFFERENT _FUN_0000aa00 - block 4: observable value differs: base ('rgn' 48) | cand ('rgn' 56)
+DIFFERENT _FUN_0000ae80 - block 0: observable value differs: base ('rgn' 20) | cand ('rgn' 8)
+DIFFERENT _FUN_0000b7f0 - block 4: observable value differs: base ('rgn' 100) | cand ('rgn' 96)
+DIFFERENT _FUN_0000bbc0 - block 7: observable value differs: base ('rgn' 36) | cand ('rgn' 40)
+INCONCLUSIVE _FUN_0000c160 - partial overlap of frame accesses at ('a', -324, 4)
+DIFFERENT _FUN_0000cb00 - block 0: observable value differs: base ('rgn' 128) | cand ('rgn' 120)
+sem_equiv: 0 EQUIVALENT, 49 IDENTICAL-CODE, 0 UNINIT-PAIRED, 8 DIFFERENT, 3 INCONCLUSIVE
+### vn_Userspace_libGL_ppc_a18_libGL part_000
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGL_ppc_a18_libGL part_001
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGL_ppc_a18_libGL part_003
+sem_equiv: 0 EQUIVALENT, 60 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability landing_pads_part_000
+sem_equiv: 0 EQUIVALENT, 44 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_000
+INCONCLUSIVE __PPParserPreprocessString - block 133: no consistent slot correspondence for the events and the values its successors need
+DIFFERENT __PPParserParseVersion - block 3: observable value differs: base ('rgn' 264) | cand ('rgn' 276)
+DIFFERENT __PPParserParseOptionIdentifier - block 1: observable value differs: base ('rgn' 272) | cand ('rgn' 268)
+DIFFERENT __PPParserParseStatement - block 1: observable value differs: base ('rgn' 276) | cand ('rgn' 284)
+DIFFERENT __PPParserValidateName - block 5: observable value differs: base ('rgn' 24) | cand ('rgn' 36)
+DIFFERENT __PPParserParseParamBinding - block 2: observable value differs: base ('rgn' 302) | cand ('rgn' 300)
+DIFFERENT __PPParserParseAttributeBinding - block 1: observable value differs: base ('rgn' 299) | cand ('rgn' 300)
+DIFFERENT __PPParserParseOutputBinding - block 1: observable value differs: base ('rgn' 43) | cand ('rgn' 36)
+DIFFERENT __PPParserParseOperation - block 0: observable value differs: base ('rgn' 533) | cand ('rgn' 532)
+DIFFERENT __PPParserParseDestination - block 1: observable value differs: base ('rgn' 260) | cand ('rgn' 264)
+DIFFERENT __PPParserParseSwizzleSourceVar - block 7: observable value differs: base ('rgn' 280) | cand ('rgn' 272)
+DIFFERENT __PPParserParseSourceVar - block 1: observable value differs: base ('rgn' 274) | cand ('rgn' 276)
+sem_equiv: 9 EQUIVALENT, 39 IDENTICAL-CODE, 0 UNINIT-PAIRED, 11 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_001
+DIFFERENT __PPParserParseTempDeclaration - block 2: observable value differs: base ('rgn' 292) | cand ('rgn' 288)
+INCONCLUSIVE __PPParserParseTextureSourceVar - unmodelled instruction trap
+DIFFERENT __PPParserParseAliasDeclaration - block 7: observable value differs: base ('rgn' 260) | cand ('rgn' 264)
+DIFFERENT __PPParserParseSwizzleCode - block 2: observable value differs: base ('rgn' 8) | cand ('rgn' 16)
+DIFFERENT __FindHashLoc - block 4: observable value differs: base ('rgn' 24) | cand ('rgn' 28)
+UNINIT __IncreaseHashTableSize
+sem_equiv: 5 EQUIVALENT, 49 IDENTICAL-CODE, 1 UNINIT-PAIRED, 4 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_002
+UNINIT __CPPdefine
+UNINIT __CPPundef
+UNINIT __CPPelse
+UNINIT __eval
+UNINIT __CPPif
+UNINIT __CPPifdef
+UNINIT __CPPline
+UNINIT __CPPerror
+UNINIT __CPPpragma
+UNINIT __CPPversion
+DIFFERENT __CPPextension - block 7: observable value differs: base ('rgn' 100) | cand ('rgn' 96)
+UNINIT __readCPPline
+UNINIT __MacroExpand
+sem_equiv: 9 EQUIVALENT, 39 IDENTICAL-CODE, 12 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_003
+INCONCLUSIVE __lFloatConst - block 18: no consistent slot correspondence for the events and the values its successors need
+DIFFERENT __byte_scan - block 18: observable value differs: base ('rgn' 234) | cand ('rgn' 248)
+UNINIT __yylex_CPP
+DIFFERENT __ReadToken - block 1: observable value differs: base ('rgn' 744) | cand ('rgn' 760)
+DIFFERENT ___Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable - block 2: observable value differs: base ('rgn' 316) | cand ('rgn' 324)
+DIFFERENT ___Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource - block 2: observable value differs: base ('rgn' 48) | cand ('rgn' 52)
+UNINIT _TIntermediate__addSymbol
+DIFFERENT _TIntermediate__addBinaryMath - block 1: observable value differs: base ('rgn' 80) | cand ('rgn' 76)
+DIFFERENT _TIntermediate__addAssign - block 4: observable value differs: base ('rgn' 16) | cand ('rgn' 8)
+UNINIT _TIntermediate__addUnaryMath
+UNINIT _TIntermediate__setAggregateOperator
+UNINIT _TIntermediate__addConversion
+UNINIT _TIntermediate__growAggregate
+UNINIT _TIntermediate__makeAggregate
+UNINIT _TIntermediate__addComma
+DIFFERENT ___ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i - block 2: observable value differs: base ('rgn' 16) | cand ('rgn' 8)
+UNINIT _TIntermediate__addSwizzle
+sem_equiv: 8 EQUIVALENT, 35 IDENTICAL-CODE, 9 UNINIT-PAIRED, 7 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_004
+DIFFERENT _TIntermUnary__promote - block 3: observable value differs: base ('rgn' 59) | cand ('rgn' 68)
+DIFFERENT _TIntermBinary__promote - block 3: observable value differs: base ('rgn' 44) | cand ('rgn' 48)
+UNINIT _compareStructure
+DIFFERENT _TIntermConstantUnion__fold - block 11: observable value differs: base ('rgn' 316) | cand ('rgn' 312)
+UNINIT _TIntermediate__changeAggrToTempConst
+DIFFERENT _TIntermediate__promoteConstantUnion - block 12: observable value differs: base ('rgn' 40) | cand ('rgn' 44)
+UNINIT ___ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate
+UNINIT ___ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate
+UNINIT _TIntermediate__removeMatrixConstNode
+UNINIT _OutputSymbol
+UNINIT _OutputBinary
+UNINIT _OutputSelection
+DIFFERENT _OutputConstantUnion - block 19: observable value differs: base ('rgn' 384) | cand ('rgn' 380)
+DIFFERENT _ParseSymbol - block 32: observable value differs: base ('rgn' 360) | cand ('rgn' 368)
+DIFFERENT _ParseAggregate - block 9: observable value differs: base ('rgn' 176) | cand ('rgn' 172)
+UNINIT _ParseConstantUnion
+DIFFERENT _TParseContext__parseVectorFields - block 3: observable value differs: base ('rgn' 24) | cand ('rgn' 32)
+DIFFERENT _TParseContext__lValueErrorCheck - block 13: observable value differs: base ('rgn' 56) | cand ('rgn' 68)
+DIFFERENT _TParseContext__reservedErrorCheck - block 5: observable value differs: base ('rgn' 84) | cand ('rgn' 80)
+DIFFERENT _TParseContext__constructorErrorCheck - block 26: observable value differs: base ('rgn' 72) | cand ('rgn' 68)
+sem_equiv: 3 EQUIVALENT, 39 IDENTICAL-CODE, 9 UNINIT-PAIRED, 11 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_005
+UNINIT _TParseContext__samplerErrorCheck
+UNINIT _TParseContext__structQualifierErrorCheck
+UNINIT _TParseContext__insertBuiltInArrayAtGlobalLevel
+DIFFERENT _TParseContext__arrayErrorCheck - block 0: observable value differs: base ('rgn' 0) | cand ('rgn' 4)
+UNINIT _TParseContext__arraySetMaxSize
+DIFFERENT _TParseContext__nonInitErrorCheck - block 6: observable value differs: base ('rgn' 60) | cand ('rgn' 52)
+DIFFERENT _TParseContext__extensionErrorCheck - block 10: observable value differs: base ('rgn' 368) | cand ('rgn' 360)
+UNINIT _TParseContext__findFunction
+DIFFERENT _TParseContext__executeInitializer - block 1: observable value differs: base ('rgn' 196) | cand ('rgn' 184)
+DIFFERENT _TParseContext__addConstructor - block 1: observable value differs: base ('rgn' 31) | cand ('rgn' 28)
+UNINIT _TParseContext__constructStruct
+DIFFERENT _TParseContext__addConstVectorNode - block 3: observable value differs: base ('rgn' 56) | cand ('rgn' 64)
+DIFFERENT _TParseContext__addConstMatrixNode - block 3: observable value differs: base ('rgn' 48) | cand ('rgn' 40)
+UNINIT _TParseContext__addConstStruct
+UNINIT _TParseContext__initializeExtensionBehavior
+INCONCLUSIVE _TPoolAllocator__allocate - partial overlap of frame accesses at ('a', -40, 8)
+UNINIT __ShInitialize
+DIFFERENT _initializeSymbolTable - block 5: observable value differs: base ('rgn' 108) | cand ('rgn' 116)
+DIFFERENT __ShCompile - block 1: observable value differs: base ('rgn' 124) | cand ('rgn' 120)
+sem_equiv: 5 EQUIVALENT, 37 IDENTICAL-CODE, 9 UNINIT-PAIRED, 9 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_006
+DIFFERENT _TType__buildMangledName - block 5: observable value differs: base ('rgn' 24) | cand ('rgn' 28)
+UNINIT ___ZN9TFunctionD4Ev
+UNINIT ___ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE
+UNINIT ___ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE
+UNINIT ___ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE
+UNINIT _TSymbolTableLevel__clone
+UNINIT _TSymbolTable__copyTable
+INCONCLUSIVE _yyparse - address of the outgoing area is taken (addi r2,r1,72)
+sem_equiv: 9 EQUIVALENT, 43 IDENTICAL-CODE, 6 UNINIT-PAIRED, 1 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_007
+DIFFERENT __CPPWarningToInfoLog - block 1: observable value differs: base ('rgn' 100) | cand ('rgn' 96)
+UNINIT __HandlePragma
+UNINIT __StoreStr
+UNINIT __GetBehavior
+DIFFERENT __updateExtensionBehavior - block 68: observable value differs: base ('rgn' 332) | cand ('rgn' 340)
+sem_equiv: 11 EQUIVALENT, 44 IDENTICAL-CODE, 3 UNINIT-PAIRED, 2 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_008
+DIFFERENT _BindingTable__InsertUniformArray - block 1: observable value differs: base ('rgn' 67) | cand ('rgn' 68)
+sem_equiv: 14 EQUIVALENT, 45 IDENTICAL-CODE, 0 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_009
+DIFFERENT _TGenericLinker__AllocateTextureUnitsForVaryings - block 4: observable value differs: base ('rgn' 88) | cand ('rgn' 168)
+DIFFERENT _TGenericLinker__BuildSymbolTableList - block 0: observable value differs: base ('rgn' 88) | cand ('rgn' 132)
+UNINIT ___ZN14TGenericLinkerC2Ei
+UNINIT ___ZN14TGenericLinkerC1Ei
+UNINIT ___ZN14TGenericLinkerC4Ei
+UNINIT ___ZN14TGenericLinkerD4Ev
+UNINIT _getOpenGLTypeFromTType
+sem_equiv: 23 EQUIVALENT, 30 IDENTICAL-CODE, 5 UNINIT-PAIRED, 2 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_010
+UNINIT _ParseSymbol__ResolveOpenGLType
+INCONCLUSIVE _ParseOperand__GetAsSourceVar - block 41: no consistent slot correspondence for the events and the values its successors need
+sem_equiv: 18 EQUIVALENT, 40 IDENTICAL-CODE, 1 UNINIT-PAIRED, 0 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_011
+UNINIT _ParseOperand__GetString
+DIFFERENT _ParseSymbolTable__InsertSingleSymbol - block 9: observable value differs: base ('rgn' 32) | cand ('rgn' 40)
+DIFFERENT _ParseSymbolTable__InsertSymbol - block 1: observable value differs: base ('rgn' 35) | cand ('rgn' 20)
+UNINIT _ParseSymbolTable__FindFirstElement
+UNINIT _TIntermSymbol__compileNode
+UNINIT _TIntermBinary__compileNode
+DIFFERENT _TIntermUnary__compileNode - block 2: observable value differs: base ('rgn' 28) | cand ('rgn' 36)
+DIFFERENT _TIntermAggregate__compileNode - block 10: observable value differs: base ('rgn' 72) | cand ('rgn' 60)
+DIFFERENT _TIntermSelection__compileNode - block 0: observable value differs: base ('rgn' 83) | cand ('rgn' 80)
+DIFFERENT _TIntermLoop__compileNode - block 0: observable value differs: base ('rgn' 138) | cand ('rgn' 136)
+UNINIT _TIntermBranch__compileNode
+UNINIT _TIntermSymbol__indirectNode
+UNINIT _TIntermBinary__indirectNode
+sem_equiv: 12 EQUIVALENT, 35 IDENTICAL-CODE, 7 UNINIT-PAIRED, 6 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_012
+DIFFERENT _TPPStreamCompiler__newIndirectOperandFromConstant - block 4: observable value differs: base ('rgn' 476) | cand ('rgn' 468)
+DIFFERENT _TPPStreamCompiler__equalOperands - block 0: observable value differs: base ('rgn' 212) | cand ('rgn' 276)
+DIFFERENT _TPPStreamCompiler__assignOperands - block 0: observable value differs: base ('rgn' 100) | cand ('rgn' 120)
+UNINIT _TPPStreamCompiler__constructReplicate
+UNINIT _TPPStreamCompiler__constructDiagonal
+DIFFERENT _TPPStreamCompiler__constructElement - block 0: observable value differs: base ('rgn' 140) | cand ('rgn' 136)
+DIFFERENT _TPPStreamCompiler__constructFromOperand - block 10: observable value differs: base ('rgn' 17) | cand ('rgn' 16)
+DIFFERENT _TPPStreamCompiler__construct - block 18: observable value differs: base ('rgn' 28) | cand ('rgn' 40)
+UNINIT _TPPStreamCompiler__FinishScalerSelect
+UNINIT ___ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi
+INCONCLUSIVE ___ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i - indexed access into the frame
+DIFFERENT _TPPStreamCompiler__getNewConstantSourceVar - block 0: observable value differs: base ('rgn' 44) | cand ('rgn' 48)
+DIFFERENT _TPPStreamCompiler__getConstantAsSourceVar - block 1: observable value differs: base ('rgn' 21) | cand ('rgn' 44)
+UNINIT _TPPStreamCompiler__getOperandAsSourceVar
+DIFFERENT _TPPStreamCompiler__copyPropagateCompilerTemp - block 0: observable value differs: base ('rgn' 36) | cand ('rgn' 28)
+UNINIT _TPPStreamCompiler__parseIntermediateTree
+sem_equiv: 3 EQUIVALENT, 41 IDENTICAL-CODE, 6 UNINIT-PAIRED, 9 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_013
+UNINIT ___ZN17TPPStreamCompilerD4Ev
+INCONCLUSIVE __InterpreterPackPixel - partial overlap of frame accesses at ('a', -184, 8)
+DIFFERENT __InterpreterEmulateOp - block 0: observable value differs: base ('rgn' 384) | cand ('rgn' 672)
+INCONCLUSIVE __InterpreterRun - partial overlap of frame accesses at ('a', -96, 8)
+sem_equiv: 10 EQUIVALENT, 48 IDENTICAL-CODE, 1 UNINIT-PAIRED, 1 DIFFERENT, 2 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_014
+DIFFERENT __InterpreterTextureSamplerSampleTexel1D - block 0: observable value differs: base ('rgn' 20) | cand ('rgn' 16)
+DIFFERENT __InterpreterTextureSamplerSampleTexel2D - block 0: observable value differs: base ('rgn' 12) | cand ('rgn' 8)
+DIFFERENT __InterpreterTextureSamplerSampleTexel3D - block 0: observable value differs: base ('rgn' 20) | cand ('rgn' 16)
+INCONCLUSIVE __InterpreterTextureSamplerCalculateLambda1D - partial overlap of frame accesses at ('a', -32, 4)
+INCONCLUSIVE __InterpreterTextureSamplerCalculateLambda2D - partial overlap of frame accesses at ('a', -32, 4)
+INCONCLUSIVE __InterpreterTextureSamplerCalculateLambda3D - partial overlap of frame accesses at ('a', -32, 4)
+DIFFERENT __InterpreterTextureSamplerSampleTexel1DFromLevel - block 0: observable value differs: base ('rgn' 16) | cand ('rgn' 20)
+DIFFERENT __InterpreterTextureSamplerSampleTexel2DFromLevel - block 0: observable value differs: base ('rgn' 32) | cand ('rgn' 36)
+UNINIT __InterpreterTextureSamplerSampleTexel3DFromLevel
+UNINIT __InterpreterTextureSamplerSampleTexelRECTFromLevel
+DIFFERENT __InterpreterNoiseGeneratorInterpolatedNoise2D - block 0: observable value differs: base ('rgn' 104) | cand ('rgn' 100)
+UNINIT __InterpreterNoiseGeneratorInterpolatedNoise3D
+DIFFERENT __InterpreterNoiseGeneratorCalculate3D - block 0: observable value differs: base ('rgn' 20) | cand ('rgn' 8)
+INCONCLUSIVE __InterpreterRasterOpMachine_AlphaTest - partial overlap of frame accesses at ('a', -232, 8)
+DIFFERENT __InterpreterRasterOpMachine_Blending - block 10: observable value differs: base ('rgn' 36) | cand ('rgn' 28)
+INCONCLUSIVE __InterpreterRasterOpMachine_LogicOp - partial overlap of frame accesses at ('a', -116, 4)
+DIFFERENT __PPCRuntimeCompilerBackupRegister - block 23: observable value differs: base ('rgn' 44) | cand ('rgn' 40)
+UNINIT __PPCRuntimeCompilerSaveRegisterToMemory
+DIFFERENT __PPCRuntimeCompilerRegisterContainsData - block 7: observable value differs: base ('rgn' 68) | cand ('rgn' 56)
+sem_equiv: 8 EQUIVALENT, 34 IDENTICAL-CODE, 4 UNINIT-PAIRED, 10 DIFFERENT, 5 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_015
+UNINIT __PPCRuntimeCompilerWriteDestinationAV
+UNINIT __PPCRuntimeCompilerCompileNO
+UNINIT __PPCRuntimeCompilerCompileAV
+INCONCLUSIVE __PPCRasterOpMachine_AlphaTestRTCAV - partial overlap of frame accesses at ('a', -68, 4)
+sem_equiv: 25 EQUIVALENT, 31 IDENTICAL-CODE, 3 UNINIT-PAIRED, 0 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_016
+DIFFERENT __glpPPDisassemble - block 0: observable value differs: base ('rgn' 808) | cand ('rgn' 1108)
+sem_equiv: 19 EQUIVALENT, 41 IDENTICAL-CODE, 0 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_017
+INCONCLUSIVE __glpDisassemble2Op - block 126: no consistent slot correspondence for the events and the values its successors need
+UNINIT __glpPPShaderToProgramString
+UNINIT __InlineFunctionsBranch
+sem_equiv: 16 EQUIVALENT, 42 IDENTICAL-CODE, 2 UNINIT-PAIRED, 0 DIFFERENT, 1 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_018
+UNINIT __HashSetAdd
+UNINIT __HashSetGet
+UNINIT __HashSetRemove
+UNINIT __HashTableAdd
+UNINIT __HashTableGet
+DIFFERENT __BuildInterferenceSets - block 7: observable value differs: base ('sym' 'call' 'L__BitSetFirstSetBit$stub') | cand ('sym' 'call' 'L_orph_97c08028$stub')
+DIFFERENT __RegistersReInterfere - block 0: observable value differs: base ('sym' 'call' 'L__BitSetFirstSetBit$stub') | cand ('sym' 'call' 'L_orph_97c08028$stub')
+DIFFERENT __InstructionAdd - block 0: observable value differs: base ('rgn' 52) | cand ('rgn' 40)
+sem_equiv: 16 EQUIVALENT, 38 IDENTICAL-CODE, 5 UNINIT-PAIRED, 3 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_019
+INCONCLUSIVE __GetRegisterTypeInfo - partial overlap of frame accesses at ('a', -228, 4)
+DIFFERENT __FlattenIf - block 0: observable value differs: base ('rgn' 500) | cand ('rgn' 620)
+DIFFERENT __EmulateOp - block 0: observable value differs: base ('rgn' 168) | cand ('rgn' 452)
+DIFFERENT __DetectConstantLoopsSimple - block 30: observable value differs: base ('rgn' 465) | cand ('rgn' 464)
+DIFFERENT __UnrollConstantLoopsSimple - block 6: observable value differs: base ('rgn' 168) | cand ('rgn' 164)
+DIFFERENT __ConstantPropagateFold - block 5: observable value differs: base ('rgn' 8) | cand ('rgn' 4)
+DIFFERENT __PPParserParseDefaultArray - block 6: observable value differs: base ('rgn' 264) | cand ('rgn' 260)
+DIFFERENT __PPParserParseIndirectArray - block 1: observable value differs: base ('rgn' 271) | cand ('rgn' 268)
+DIFFERENT __PPParserParseAddressDeclaration - block 2: observable value differs: base ('rgn' 288) | cand ('rgn' 292)
+DIFFERENT __PPParserParseAddressDestination - block 10: observable value differs: base ('rgn' 270) | cand ('rgn' 260)
+DIFFERENT __PPParserParseBranchCondition - block 2: observable value differs: base ('rgn' 265) | cand ('rgn' 256)
+DIFFERENT __PPParserParseMacroDeclaration - block 5: observable value differs: base ('rgn' 268) | cand ('rgn' 260)
+DIFFERENT __PPParserExpandMacro - block 2: observable value differs: base ('rgn' 260) | cand ('rgn' 268)
+INCONCLUSIVE __glp_strtod - partial overlap of frame accesses at ('a', -84, 4)
+INCONCLUSIVE __glp_dtostr - partial overlap of frame accesses at ('a', -256, 4)
+sem_equiv: 9 EQUIVALENT, 36 IDENTICAL-CODE, 0 UNINIT-PAIRED, 12 DIFFERENT, 3 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_020
+UNINIT ___ZNSs9_M_mutateEmmm
+UNINIT ___ZNSs4_Rep7_M_grabERKSaIcES2_
+sem_equiv: 3 EQUIVALENT, 55 IDENTICAL-CODE, 2 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_021
+UNINIT ___ZNSs6resizeEmc
+UNINIT ___ZNSs6assignERKSs
+sem_equiv: 5 EQUIVALENT, 53 IDENTICAL-CODE, 2 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_022
+UNINIT ___ZNSs4_Rep9_S_createEmRKSaIcE
+sem_equiv: 5 EQUIVALENT, 54 IDENTICAL-CODE, 1 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_023
+sem_equiv: 2 EQUIVALENT, 58 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_024
+sem_equiv: 2 EQUIVALENT, 58 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_025
+DIFFERENT ___cxxabiv1____vmi_class_type_info____do_dyncast - block 4: observable value differs: base ('rgn' 20) | cand ('rgn' 8)
+DIFFERENT ____gxx_personality_v0 - block 1: observable value differs: base ('rgn' 44) | cand ('rgn' 48)
+UNINIT _FUN_97c19d00
+sem_equiv: 7 EQUIVALENT, 50 IDENTICAL-CODE, 1 UNINIT-PAIRED, 2 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_026
+DIFFERENT __extract_cie_info - block 8: observable value differs: base ('rgn' 28) | cand ('rgn' 24)
+DIFFERENT ____frame_state_for - block 0: observable value differs: base ('rgn' 451) | cand ('rgn' 448)
+DIFFERENT __uw_update_context_1 - block 0: observable value differs: base ('rgn' 16) | cand ('rgn' 24)
+DIFFERENT ___Unwind_ForcedUnwind_Phase2 - block 3: observable value differs: base ('rgn' 920) | cand ('rgn' 916)
+DIFFERENT __get_cie_encoding - block 8: observable value differs: base ('rgn' 27) | cand ('rgn' 20)
+DIFFERENT __search_object - block 2: observable value differs: base ('rgn' 24) | cand ('rgn' 36)
+UNINIT __init_object
+DIFFERENT __examine_objects - block 2: observable value differs: base ('rgn' 60) | cand ('rgn' 68)
+DIFFERENT _std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique - block 19: observable value differs: base ('rgn' 64) | cand ('rgn' 76)
+UNINIT ___ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag
+sem_equiv: 5 EQUIVALENT, 45 IDENTICAL-CODE, 2 UNINIT-PAIRED, 8 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_027
+UNINIT ___ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
+DIFFERENT _std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase - block 1: observable value differs: base ('rgn' 40) | cand ('rgn' 36)
+sem_equiv: 10 EQUIVALENT, 48 IDENTICAL-CODE, 1 UNINIT-PAIRED, 1 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_028
+UNINIT ___ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__normal_iteratorIPcS3_EEEES7_T_S9_RKS2_St20forward_iterator_tag
+UNINIT ___ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm
+DIFFERENT ___ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_ - block 19: observable value differs: base ('rgn' 64) | cand ('rgn' 76)
+UNINIT ___ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm
+DIFFERENT _std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux - block 2: observable value differs: base ('rgn' 20) | cand ('rgn' 8)
+UNINIT _std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
+sem_equiv: 3 EQUIVALENT, 51 IDENTICAL-CODE, 4 UNINIT-PAIRED, 2 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability part_029
+sem_equiv: 6 EQUIVALENT, 53 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+### vn_Userspace_libGLProgrammability_ppc_a18_libGLProgrammability unowned_code_part_000
+sem_equiv: 0 EQUIVALENT, 32 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE

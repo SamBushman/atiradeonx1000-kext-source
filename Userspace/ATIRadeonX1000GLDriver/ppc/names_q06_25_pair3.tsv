@@ -2,9 +2,7 @@ local	FUN_00131008	param_1	maxDistance	INFERRED	how many instructions down the c
 use	FUN_00131008	bVar1	atLastLane	INFERRED	loop latch: lane index equals 3	^\s*bVar1\ =\ iVar2\ ==\ 3;$	+1
 use	FUN_00131008	bVar1	atLastLane	INFERRED	loop latch: lane index equals 3	^\s*if\ \(bVar1\)\ \{$	+1
 use	FUN_00131008	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*iVar2\ =\ 0;$	+1
-use	FUN_00131008	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*if\ \(\(auStack_44\[iVar2\ \+\ \-4\]\ !=\ '\\0'\)\ \&\&$	+2
 use	FUN_00131008	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar2\ ==\ 3;$	+2
-use	FUN_00131008	uVar4	laneDefinition	INFERRED	FUN_001382b8: definition of the source lane	^\s*if\ \(\(auStack_44\[iVar2\ \+\ \-4\]\ !=\ '\\0'\)\ \&\&$	+2
 use	FUN_00131008	uVar4	laneDefinition	INFERRED	FUN_001382b8: definition of the source lane	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130a78\)\(a0,uVar4\);$	+1
 use	FUN_00131008	a0	chainInst	INFERRED	instruction reached by following the single-definition chain (FUN_001307cc)	^\s*a0\ =\ param_2;$	+1
 use	FUN_00131008	a0	chainInst	INFERRED	instruction reached by following the single-definition chain (FUN_001307cc)	^\s*a0\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_001307cc\)\(a0\);$	+7
