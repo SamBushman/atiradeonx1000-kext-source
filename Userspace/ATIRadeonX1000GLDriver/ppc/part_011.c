@@ -2177,10 +2177,10 @@ int recordFindScheduleConflict(alloc, useDistinctCheck)
   bool conflictFound;
   uint recordWord0;
   byte opcodeClass;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   uint opcodeBit;
   undefined4 resultCode;
   uint queueCount;
@@ -2208,7 +2208,7 @@ int recordFindScheduleConflict(alloc, useDistinctCheck)
       if ((((checkDistinct) && ((**(uint **)(alloc + 0x34) & 0x40) != 0)) &&
           (opcodeClass = (char)*record + 0xbc, opcodeClass < 0xb)) &&
          (opcodeBit = 1 << ((int)(char)opcodeClass & 0x3fU) & 0x601, opcodeBit != 0)) {
-        callResultPair = ((int (*)())recordSourcesAreDistinctTemps)(record,useDistinctCheck,in_r5,in_r6,in_r7,in_r8,opcodeBit);
+        callResultPair = ((int (*)())recordSourcesAreDistinctTemps)(record,useDistinctCheck,staleArgR5,staleArgR6,staleArgR7,staleArgR8,opcodeBit);
         useDistinctCheck = (int)callResultPair;
         if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
           conflictFound = true;

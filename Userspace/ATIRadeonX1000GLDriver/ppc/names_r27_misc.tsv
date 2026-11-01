@@ -1,0 +1,21 @@
+local	gldCopyRouteRegisters	in_r5	staleArgR5	INFERRED	never assigned in this function; Ghidra in_rN artifact for whatever the caller left in r5, forwarded unchanged into the (*a7)(...) callback call
+local	gldCopyRouteRegisters	in_r6	staleArgR6	INFERRED	same as staleArgR5 for r6
+local	gldCopyRouteRegisters	in_r7	staleArgR7	INFERRED	same as staleArgR5 for r7
+local	recordFindScheduleConflict	in_r5	staleArgR5	INFERRED	never assigned in this function; forwarded unchanged into the recordSourcesAreDistinctTemps(...) call
+local	recordFindScheduleConflict	in_r6	staleArgR6	INFERRED	same as staleArgR5 for r6
+local	recordFindScheduleConflict	in_r7	staleArgR7	INFERRED	same as staleArgR5 for r7
+local	recordFindScheduleConflict	in_r8	staleArgR8	INFERRED	same as staleArgR5 for r8
+local	extvsValidateProgramState	in_r5	staleArgR5	INFERRED	never assigned; forwarded unchanged to the ring-buffer (*commitCallback)(...) call, which ignores these trailing words for this opcode
+local	extvsValidateProgramState	in_r6	staleArgR6	INFERRED	same as staleArgR5 for r6
+local	extvsValidateProgramState	in_r7	staleArgR7	INFERRED	same as staleArgR5 for r7
+local	extvsValidateProgramState	in_r8	staleArgR8	INFERRED	same as staleArgR5 for r8
+local	extvsFlushConstantUploads	in_r5	staleArgR5	INFERRED	never assigned; forwarded unchanged to the ring-buffer (*commitCallback)(...) call, which ignores these trailing words for this opcode
+local	extvsFlushConstantUploads	in_r6	staleArgR6	INFERRED	same as staleArgR5 for r6
+local	extvsFlushConstantUploads	in_r7	staleArgR7	INFERRED	same as staleArgR5 for r7
+local	extvsFlushConstantUploads	in_r8	staleArgR8	INFERRED	same as staleArgR5 for r8
+local	extvsUploadProgramConstants	in_r5	programStateArg	INFERRED	copy of programState (line `in_r5 = programState;`), re-materialised to pass as a ring-packet word to (*commitCallback)(...)
+local	extvsUploadProgramConstants	in_r6	constantBlockArg	INFERRED	copy of constantBlock (= hwProgramSlot[0x22], same value as the local constantBlock computed earlier), re-materialised for the commit call
+local	extvsUploadProgramConstants	in_r7	literalOne	CONFIRMED	always the literal 1 at every definition site; passed as a ring-packet word
+local	extvsUploadProgramConstants	in_r8	entryBOffset	CONFIRMED	`*(int *)(entryB + 4) * 0x10`, the same shape as the already-named entryCOffset computed for entryC two lines later; reused past the unpack loop as a ring-packet word
+local	extvsPrepareHardwareProgram	in_r7	slotFlag	INFERRED	small 0/1 flag reused across several structurally similar slot-allocation branches; one occurrence reaches a realloc-style call (ctx+0x10 vtable slot) with a stale value from an unrelated branch - see notes_r27_remaining.md
+local	extvsPrepareHardwareProgram	in_r8	slotScanCursor	INFERRED	reused across the same branches as both a byte-offset snapshot (briefly, dead before being overwritten) and an incrementing scan counter; same register, not independently splittable - see notes_r27_remaining.md

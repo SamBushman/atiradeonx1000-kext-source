@@ -2125,8 +2125,8 @@ int extvsPrepareHardwareProgram(ctx, shader)
   int writeEnableSnapshot;
   uint symbolIndex;
   int symbolOffset;
-  uint in_r7;
-  uint in_r8;
+  uint slotFlag;
+  uint slotScanCursor;
   uint slotByteOffset;
   int outputIndexScaled;
   int recordOffsetOrCount;
@@ -2215,14 +2215,14 @@ loopStoreShader:
         recordOrOffsetScratch = symbolIndex * 0x10;
         symbolIndex = symbolIndex + 1;
         symbolOffset = symbolOffset + 0x74;
-        in_r7 = *(uint *)(instrRecords + 0x18);
+        slotFlag = *(uint *)(instrRecords + 0x18);
         recordOffsetOrCount = recordOrOffsetScratch + writeEnableSnapshot;
         maskWord1 = *(undefined4 *)(instrRecords + 0x10);
-        in_r8 = *(uint *)(instrRecords + 0x14);
+        slotScanCursor = *(uint *)(instrRecords + 0x14);
         *(undefined4 *)(writeEnableSnapshot + recordOrOffsetScratch) = *(undefined4 *)(instrRecords + 0xc);
-        *(uint *)(recordOffsetOrCount + 0xc) = in_r7;
+        *(uint *)(recordOffsetOrCount + 0xc) = slotFlag;
         *(undefined4 *)(recordOffsetOrCount + 4) = maskWord1;
-        *(uint *)(recordOffsetOrCount + 8) = in_r8;
+        *(uint *)(recordOffsetOrCount + 8) = slotScanCursor;
       } while (symbolIndex < (uint)shader[5]);
     }
     if ((*(char *)((int)shader + 0x7a) == '\0') ||
@@ -2246,15 +2246,15 @@ loopStoreShader:
       *(undefined1 *)((int)shader + 0x6f) = 0;
     }
     if ((*(char *)((int)shader + 0x7a) != '\0') && ((*(uint *)(ctx + 0x44) & 0x800) != 0)) {
-      in_r7 = (uint)(byte)((unsigned char *)0x000011d1)[ctx];
-      in_r8 = in_r7 + (int)shader;
-      if (*(char *)(in_r8 + 0x71) != '\0') {
+      slotFlag = (uint)(byte)((unsigned char *)0x000011d1)[ctx];
+      slotScanCursor = slotFlag + (int)shader;
+      if (*(char *)(slotScanCursor + 0x71) != '\0') {
         instrCount = shader[5];
         slotScanIndex = 0;
         if (instrCount != 0) {
           do {
             instrRecord = slotScanIndex * 0x74 + shader[6];
-            if ((*(int *)(instrRecord + 4) == 1) && (*(int *)(instrRecord + 8) == in_r7 + 0x879d)) {
+            if ((*(int *)(instrRecord + 4) == 1) && (*(int *)(instrRecord + 8) == slotFlag + 0x879d)) {
               *(undefined4 *)(instrRecord + 0x18) = 0;
               *(undefined4 *)(instrRecord + 0xc) = 0;
               *(undefined4 *)(instrRecord + 0x10) = 0;
@@ -2265,14 +2265,14 @@ loopStoreShader:
           } while (slotScanIndex < instrCount);
         }
       }
-      *(undefined1 *)(in_r8 + 0x71) = 0xf;
+      *(undefined1 *)(slotScanCursor + 0x71) = 0xf;
     }
     if ((*(char *)(shader + 0x1b) != '\0') && ((*(uint *)(ctx + 0x44) & 0x400) != 0)) {
       positionCopyUnit = ((unsigned char *)0x000011d2)[ctx];
       copyUnit = (uint)positionCopyUnit;
       if ((*(char *)((int)shader + positionCopyUnit + 0x71) != '\0') && (instrCount = shader[5], instrCount != 0)) {
-        in_r8 = 0;
-        in_r7 = 0;
+        slotScanCursor = 0;
+        slotFlag = 0;
         instrByteOffset = 0;
         symbolOffset = positionCopyUnit + 0x879d;
         do {
@@ -2284,9 +2284,9 @@ loopStoreShader:
             *(undefined4 *)(instrRecord2 + 0x14) = 0;
             instrCount = shader[5];
           }
-          in_r8 = in_r8 + 1;
+          slotScanCursor = slotScanCursor + 1;
           instrByteOffset = instrByteOffset + 0x74;
-        } while (in_r8 < instrCount);
+        } while (slotScanCursor < instrCount);
         copyUnit = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
       }
       *(undefined1 *)((int)shader + copyUnit + 0x71) = 0xf;
@@ -2385,7 +2385,7 @@ checkInstrByteOffset:
               symbolDataType = *(int *)(slotFieldPtr + 0x24);
               *(undefined1 *)(slotFieldPtr + 0x3d) = 1;
               if (symbolDataType == 0x87bf) {
-                in_r8 = 0;
+                slotScanCursor = 0;
                 slotScanIndex2 = 0;
                 slotScanOffset = 0;
                 searching = true;
@@ -2393,7 +2393,7 @@ checkInstrByteOffset:
                 while (slotScanIndex2 < *(uint *)(programState + 0x58)) {
                   if (!searching) goto storeSlotFieldPtr;
                   if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
-                    in_r8 = 1;
+                    slotScanCursor = 1;
                     searching = false;
                   }
                   else {
@@ -2402,7 +2402,7 @@ checkInstrByteOffset:
                   }
                 }
                 if (searching) {
-                  *(char *)(shader + 4) = (char)in_r8;
+                  *(char *)(shader + 4) = (char)slotScanCursor;
                   slotCount = *(int *)(programState + 0x58);
                   newSlotArray = (**(code **)(ctx + 0x10))(slotCount + 0x10,0x28);
                   symbolIndex = *(int *)(programState + 0x58) * 0x28;
@@ -2444,12 +2444,12 @@ setSlotWriteOffset:
                   slotEntry3 = slotWriteOffset + *(int *)(programState + 0x54);
                   if (((*(char *)(slotEntry3 + 0x38) == '\0') && (*(char *)(slotEntry3 + 0x60) == '\0')) &&
                      (*(char *)(slotEntry3 + 0x88) == '\0')) {
-                    in_r8 = 0;
+                    slotScanCursor = 0;
                     rowsLeft = 4;
-                    in_r7 = 1;
+                    slotFlag = 1;
                     do {
-                      slotNumber4 = slotScanIndex2 + in_r8;
-                      in_r8 = in_r8 + 1;
+                      slotNumber4 = slotScanIndex2 + slotScanCursor;
+                      slotScanCursor = slotScanCursor + 1;
                       *(int *)(slotFieldPtr + 0x10) = slotNumber4;
                       slotFieldPtr = slotFieldPtr + 4;
                       slotEntry6 = slotWriteOffset + *(int *)(programState + 0x54);
@@ -2470,7 +2470,7 @@ setSlotWriteOffset:
                 slotWriteOffset = slotCount3 * 0x28;
                 rowsLeft2 = 4;
                 rowIndex = 0;
-                in_r8 = 1;
+                slotScanCursor = 1;
                 *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                 do {
                   slotNumber = rowIndex + slotCount3;
@@ -2558,16 +2558,16 @@ checkSymbolByteOffset2:
 setSlotByteOffset:
                           slotByteOffset = slotIndex * 0x28;
                           slotEntry6 = slotByteOffset + *(int *)(programState + 0x54);
-                          in_r8 = slotByteOffset;
+                          slotScanCursor = slotByteOffset;
                           if (((*(char *)(slotEntry6 + 0x38) == '\0') &&
                               (*(char *)(slotEntry6 + 0x60) == '\0')) &&
                              (*(char *)(slotEntry6 + 0x88) == '\0')) {
-                            in_r8 = 0;
+                            slotScanCursor = 0;
                             rowsLeft4 = 4;
-                            in_r7 = 1;
+                            slotFlag = 1;
                             do {
-                              slotNumber3 = slotIndex + in_r8;
-                              in_r8 = in_r8 + 1;
+                              slotNumber3 = slotIndex + slotScanCursor;
+                              slotScanCursor = slotScanCursor + 1;
                               *(int *)(slotFieldPtr + 0x10) = slotNumber3;
                               slotFieldPtr = slotFieldPtr + 4;
                               slotEntry4 = *(int *)(programState + 0x54) + slotByteOffset;
@@ -2581,7 +2581,7 @@ setSlotByteOffset:
                         *(undefined1 *)(shader + 4) = 0;
                         oldSlotCount = *(int *)(programState + 0x58);
                         newSlotArray = (**(code **)(ctx + 0x10))
-                                           (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,in_r7,in_r8,0);
+                                           (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,slotFlag,slotScanCursor,0);
                         symbolIndex = *(int *)(programState + 0x58) * 0x28;
                         (**(code **)(((unsigned char *)0x00001344) + ctx))
                                   (newSlotArray,*(undefined4 *)(programState + 0x54),symbolIndex);
@@ -2590,7 +2590,7 @@ setSlotByteOffset:
                         newSlotOffset = oldSlotCount * 0x28;
                         rowsRemaining = 4;
                         rowIndex4 = 0;
-                        in_r8 = 1;
+                        slotScanCursor = 1;
                         *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                         do {
                           slotNumber2 = rowIndex4 + oldSlotCount;
@@ -2643,7 +2643,7 @@ loopStoreSlotFieldPtr2:
                       }
                       goto setSymbolRecords2;
                     }
-                    in_r8 = 0;
+                    slotScanCursor = 0;
                     slotIndex = 0;
                     slotScanOffset3 = 0;
                     searching = true;
@@ -2651,7 +2651,7 @@ loopStoreSlotFieldPtr2:
                     while (slotIndex < *(uint *)(programState + 0x58)) {
                       if (!searching) goto loopStoreSlotFieldPtr3;
                       if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-                        in_r8 = 1;
+                        slotScanCursor = 1;
                         searching = false;
                       }
                       else {
@@ -2661,7 +2661,7 @@ loopStoreSlotFieldPtr2:
                     }
 loopCheckSearching2:
                     if (searching) {
-                      *(char *)(shader + 4) = (char)in_r8;
+                      *(char *)(shader + 4) = (char)slotScanCursor;
                       slotCount3 = *(int *)(programState + 0x58);
                       newSlotArray = (**(code **)(ctx + 0x10))(slotCount3 + 0x10,0x28);
                       symbolIndex = *(int *)(programState + 0x58) * 0x28;
@@ -2686,7 +2686,7 @@ loopStoreSlotFieldPtr3:
                     *(undefined1 *)(slotFieldPtr + 0x3d) = 1;
                     symbolDataType3 = *(int *)(slotFieldPtr + 0x24);
                     if (symbolDataType3 == 0x87bf) {
-                      in_r8 = 0;
+                      slotScanCursor = 0;
                       slotIndex = 0;
                       slotScanOffset3 = 0;
                       searching = true;
@@ -2694,7 +2694,7 @@ loopStoreSlotFieldPtr3:
                       while (slotIndex < *(uint *)(programState + 0x58)) {
                         if (!searching) goto loopStoreSlotFieldPtr3;
                         if (*(char *)(slotScanOffset3 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-                          in_r8 = 1;
+                          slotScanCursor = 1;
                           searching = false;
                         }
                         else {
@@ -2723,16 +2723,16 @@ loopStoreSlotFieldPtr3:
 setSlotByteOffset2:
                         slotByteOffset = slotIndex * 0x28;
                         slotEntry6 = slotByteOffset + *(int *)(programState + 0x54);
-                        in_r8 = slotByteOffset;
+                        slotScanCursor = slotByteOffset;
                         if (((*(char *)(slotEntry6 + 0x38) == '\0') &&
                             (*(char *)(slotEntry6 + 0x60) == '\0')) &&
                            (*(char *)(slotEntry6 + 0x88) == '\0')) {
-                          in_r8 = 0;
+                          slotScanCursor = 0;
                           rowsLeft4 = 4;
-                          in_r7 = 1;
+                          slotFlag = 1;
                           do {
-                            slotNumber3 = in_r8 + slotIndex;
-                            in_r8 = in_r8 + 1;
+                            slotNumber3 = slotScanCursor + slotIndex;
+                            slotScanCursor = slotScanCursor + 1;
                             *(int *)(slotFieldPtr + 0x10) = slotNumber3;
                             slotFieldPtr = slotFieldPtr + 4;
                             slotEntry4 = *(int *)(programState + 0x54) + slotByteOffset;
@@ -2746,7 +2746,7 @@ setSlotByteOffset2:
                       *(undefined1 *)(shader + 4) = 0;
                       oldSlotCount = *(int *)(programState + 0x58);
                       newSlotArray = (**(code **)(ctx + 0x10))
-                                         (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,in_r7,in_r8,0);
+                                         (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,slotFlag,slotScanCursor,0);
                       symbolIndex = *(int *)(programState + 0x58) * 0x28;
                       (**(code **)(((unsigned char *)0x00001344) + ctx))(newSlotArray,*(undefined4 *)(programState + 0x54),symbolIndex);
                       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
@@ -2754,7 +2754,7 @@ setSlotByteOffset2:
                       newSlotOffset = oldSlotCount * 0x28;
                       rowsRemaining = 4;
                       rowIndex4 = 0;
-                      in_r8 = 1;
+                      slotScanCursor = 1;
                       *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                       do {
                         slotNumber2 = rowIndex4 + oldSlotCount;
@@ -2817,7 +2817,7 @@ checkInstrByteOffset2:
                 symbolDataType = *(int *)(recordOffsetOrCount + 0x24);
                 *(undefined1 *)(recordOffsetOrCount + 0x3d) = 1;
                 if (symbolDataType == 0x87bf) {
-                  in_r8 = 0;
+                  slotScanCursor = 0;
                   slotScanIndex2 = 0;
                   slotScanOffset = 0;
                   searching = true;
@@ -2825,7 +2825,7 @@ checkInstrByteOffset2:
                   while (slotScanIndex2 < *(uint *)(programState + 0x58)) {
                     if (!searching) goto storeRecordOffsetOrCount;
                     if (*(char *)(slotScanOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
-                      in_r8 = 1;
+                      slotScanCursor = 1;
                       searching = false;
                     }
                     else {
@@ -2834,7 +2834,7 @@ checkInstrByteOffset2:
                     }
                   }
                   if (searching) {
-                    *(char *)(shader + 4) = (char)in_r8;
+                    *(char *)(shader + 4) = (char)slotScanCursor;
                     slotCount = *(int *)(programState + 0x58);
                     newSlotArray = (**(code **)(ctx + 0x10))(slotCount + 0x10,0x28);
                     symbolIndex = *(int *)(programState + 0x58) * 0x28;
@@ -2874,12 +2874,12 @@ setSlotWriteOffset2:
                     slotEntry5 = slotWriteOffset + *(int *)(programState + 0x54);
                     if (((*(char *)(slotEntry5 + 0x38) == '\0') && (*(char *)(slotEntry5 + 0x60) == '\0'))
                        && (*(char *)(slotEntry5 + 0x88) == '\0')) {
-                      in_r8 = 0;
+                      slotScanCursor = 0;
                       rowsLeft3 = 4;
-                      in_r7 = 1;
+                      slotFlag = 1;
                       do {
-                        slotNumber4 = in_r8 + slotScanIndex2;
-                        in_r8 = in_r8 + 1;
+                        slotNumber4 = slotScanCursor + slotScanIndex2;
+                        slotScanCursor = slotScanCursor + 1;
                         *(int *)(recordOffsetOrCount + 0x10) = slotNumber4;
                         recordOffsetOrCount = recordOffsetOrCount + 4;
                         slotEntry6 = slotWriteOffset + *(int *)(programState + 0x54);
@@ -2900,7 +2900,7 @@ setSlotWriteOffset2:
                   slotWriteOffset2 = slotCount3 * 0x28;
                   rowsLeft2 = 4;
                   rowIndex2 = 0;
-                  in_r8 = 1;
+                  slotScanCursor = 1;
                   *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                   do {
                     slotNumber = rowIndex2 + slotCount3;
@@ -2990,16 +2990,16 @@ storeRecordOffsetOrCount2:
 setSlotByteOffset3:
                         slotByteOffset = slotIndex * 0x28;
                         slotEntry5 = slotByteOffset + *(int *)(programState + 0x54);
-                        in_r8 = slotByteOffset;
+                        slotScanCursor = slotByteOffset;
                         if (((*(char *)(slotEntry5 + 0x38) == '\0') &&
                             (*(char *)(slotEntry5 + 0x60) == '\0')) &&
                            (*(char *)(slotEntry5 + 0x88) == '\0')) {
-                          in_r8 = 0;
+                          slotScanCursor = 0;
                           rowsLeft3 = 4;
-                          in_r7 = 1;
+                          slotFlag = 1;
                           do {
-                            slotNumber3 = in_r8 + slotIndex;
-                            in_r8 = in_r8 + 1;
+                            slotNumber3 = slotScanCursor + slotIndex;
+                            slotScanCursor = slotScanCursor + 1;
                             *(int *)(slotFieldPtr2 + 0x10) = slotNumber3;
                             slotFieldPtr2 = slotFieldPtr2 + 4;
                             slotEntry4 = *(int *)(programState + 0x54) + slotByteOffset;
@@ -3013,7 +3013,7 @@ setSlotByteOffset3:
                       *(undefined1 *)(shader + 4) = 0;
                       oldSlotCount = *(int *)(programState + 0x58);
                       newSlotArray = (**(code **)(ctx + 0x10))
-                                         (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,in_r7,in_r8,0);
+                                         (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,slotFlag,slotScanCursor,0);
                       symbolIndex = *(int *)(programState + 0x58) * 0x28;
                       (**(code **)(((unsigned char *)0x00001344) + ctx))(newSlotArray,*(undefined4 *)(programState + 0x54),symbolIndex);
                       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
@@ -3021,7 +3021,7 @@ setSlotByteOffset3:
                       newSlotOffset = oldSlotCount * 0x28;
                       rowsRemaining = 4;
                       rowIndex3 = 0;
-                      in_r8 = 1;
+                      slotScanCursor = 1;
                       *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                       do {
                         slotNumber2 = oldSlotCount + rowIndex3;
@@ -3073,7 +3073,7 @@ loopStoreSlotFieldPtr21:
                     }
                     goto setSymbolRecords;
                   }
-                  in_r8 = 0;
+                  slotScanCursor = 0;
                   slotIndex = 0;
                   slotScanOffset2 = 0;
                   searching = true;
@@ -3081,7 +3081,7 @@ loopStoreSlotFieldPtr21:
                   while (slotIndex < *(uint *)(programState + 0x58)) {
                     if (!searching) goto loopStoreSlotFieldPtr22;
                     if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-                      in_r8 = 1;
+                      slotScanCursor = 1;
                       searching = false;
                     }
                     else {
@@ -3091,7 +3091,7 @@ loopStoreSlotFieldPtr21:
                   }
 loopCheckSearching4:
                   if (searching) {
-                    *(char *)(shader + 4) = (char)in_r8;
+                    *(char *)(shader + 4) = (char)slotScanCursor;
                     slotCount2 = *(int *)(programState + 0x58);
                     newSlotArray = (**(code **)(ctx + 0x10))(slotCount2 + 0x10,0x28);
                     symbolIndex = *(int *)(programState + 0x58) * 0x28;
@@ -3116,7 +3116,7 @@ loopStoreSlotFieldPtr22:
                   *(undefined1 *)(slotFieldPtr2 + 0x3d) = 1;
                   symbolDataType2 = *(int *)(slotFieldPtr2 + 0x24);
                   if (symbolDataType2 == 0x87bf) {
-                    in_r8 = 0;
+                    slotScanCursor = 0;
                     slotIndex = 0;
                     slotScanOffset2 = 0;
                     searching = true;
@@ -3124,7 +3124,7 @@ loopStoreSlotFieldPtr22:
                     while (slotIndex < *(uint *)(programState + 0x58)) {
                       if (!searching) goto loopStoreSlotFieldPtr22;
                       if (*(char *)(slotScanOffset2 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-                        in_r8 = 1;
+                        slotScanCursor = 1;
                         searching = false;
                       }
                       else {
@@ -3153,15 +3153,15 @@ loopStoreSlotFieldPtr22:
 setSlotByteOffset4:
                       slotByteOffset = slotIndex * 0x28;
                       slotEntry5 = slotByteOffset + *(int *)(programState + 0x54);
-                      in_r8 = slotByteOffset;
+                      slotScanCursor = slotByteOffset;
                       if (((*(char *)(slotEntry5 + 0x38) == '\0') && (*(char *)(slotEntry5 + 0x60) == '\0'))
                          && (*(char *)(slotEntry5 + 0x88) == '\0')) {
-                        in_r8 = 0;
+                        slotScanCursor = 0;
                         rowsLeft3 = 4;
-                        in_r7 = 1;
+                        slotFlag = 1;
                         do {
-                          slotNumber3 = in_r8 + slotIndex;
-                          in_r8 = in_r8 + 1;
+                          slotNumber3 = slotScanCursor + slotIndex;
+                          slotScanCursor = slotScanCursor + 1;
                           *(int *)(slotFieldPtr2 + 0x10) = slotNumber3;
                           slotFieldPtr2 = slotFieldPtr2 + 4;
                           slotEntry4 = *(int *)(programState + 0x54) + slotByteOffset;
@@ -3175,7 +3175,7 @@ setSlotByteOffset4:
                     *(undefined1 *)(shader + 4) = 0;
                     oldSlotCount = *(int *)(programState + 0x58);
                     newSlotArray = (**(code **)(ctx + 0x10))
-                                       (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,in_r7,in_r8,0);
+                                       (oldSlotCount + 0x10,0x28,symbolIndex,symbolOffset,slotFlag,slotScanCursor,0);
                     symbolIndex = *(int *)(programState + 0x58) * 0x28;
                     (**(code **)(((unsigned char *)0x00001344) + ctx))(newSlotArray,*(undefined4 *)(programState + 0x54),symbolIndex);
                     (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
@@ -3183,7 +3183,7 @@ setSlotByteOffset4:
                     newSlotOffset = oldSlotCount * 0x28;
                     rowsRemaining = 4;
                     rowIndex3 = 0;
-                    in_r8 = 1;
+                    slotScanCursor = 1;
                     *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                     do {
                       slotNumber2 = oldSlotCount + rowIndex3;
@@ -3404,7 +3404,7 @@ setSlotScanIndex2X:
             tempInstr[tempInstrDstMaskZ_IDX] = dstOperandKind;
             tempInstr[tempInstrDstMaskW_IDX] = dstOperandKind;
             symbolRecordOrCallResult = (*(code *)ptrTo_extvsEmitMov_001dba14)
-                               (ctx,shader,tempInstr,recordOrOffsetScratch,in_r7,in_r8,hwInstrCountCopy);
+                               (ctx,shader,tempInstr,recordOrOffsetScratch,slotFlag,slotScanCursor,hwInstrCountCopy);
             *(int *)(programState + 0x18) = symbolRecordOrCallResult + *(int *)(programState + 0x18);
             glContextWord44 = *(uint *)(ctx + 0x44);
           }
@@ -3414,7 +3414,7 @@ setSlotScanIndex2X:
           _memcpy(tempInstr,symbolRecordOrCallResult,0x74);
           tempInstr[tempInstrDstId_IDX] = (byte)((unsigned char *)0x000011d2)[ctx] + 0x879d;
           recordOrOffsetScratch = (*(code *)(ptrTo_extvsEmitIndex_001db9b8)[opIndex])
-                             (ctx,shader,tempInstr,recordOrOffsetScratch,in_r7,in_r8,
+                             (ctx,shader,tempInstr,recordOrOffsetScratch,slotFlag,slotScanCursor,
                               (ptrTo_extvsEmitIndex_001db9b8)[opIndex]);
           *(int *)(programState + 0x18) = recordOrOffsetScratch + *(int *)(programState + 0x18);
         }
@@ -4862,9 +4862,9 @@ int gldCopyRouteRegisters(glContext)
   undefined4 *constWordPtr;
   byte unitFlagByte;
   int routeCount;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
   int programState;
   int routeDst;
   undefined4 a6;
@@ -4902,7 +4902,7 @@ int gldCopyRouteRegisters(glContext)
       unitFlagByte = *(byte *)(programState + 0x36);
       *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x40000;
       *(uint *)(glContext + 0x1b78) = unitFlagByte & 3;
-      (*a7)(glContext,1,in_r5,in_r6,in_r7,programState,a6,a7);
+      (*a7)(glContext,1,staleArgR5,staleArgR6,staleArgR7,programState,a6,a7);
       *(undefined1 *)(glContext + 0x2435) = 1;
     }
   }
@@ -5000,11 +5000,11 @@ int extvsUploadProgramConstants(glContext, shader)
   undefined8 *valueC;
   undefined4 *cmdBufferB;
   undefined8 *valueB;
-  char *in_r5;
+  char *programStateArg;
   undefined8 *valueA;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  int in_r8;
+  undefined4 constantBlockArg;
+  undefined4 literalOne;
+  int entryBOffset;
   int constantBlock;
   int entryCOffset;
   undefined8 *valueD;
@@ -5059,15 +5059,15 @@ loopCheckRegionHeight:
               valueBHigh = valueB[1];
               valueDHigh = valueD[1];
               valueBLow = *valueB;
-              in_r8 = *(int *)(entryB + 4) * 0x10;
+              entryBOffset = *(int *)(entryB + 4) * 0x10;
               valueCLow = *valueC;
               valueDLow = *valueD;
               entryCOffset = *(int *)(entryC + 4) * 0x10;
               entryD = *(int *)(entryD + 4) * 0x10;
               *(undefined8 *)(constantBlock + entryA) = *valueA;
               *(undefined8 *)(constantBlock + entryA + 8) = valueAHigh;
-              *(undefined8 *)(constantBlock + in_r8) = valueBLow;
-              *(undefined8 *)(constantBlock + in_r8 + 8) = valueBHigh;
+              *(undefined8 *)(constantBlock + entryBOffset) = valueBLow;
+              *(undefined8 *)(constantBlock + entryBOffset + 8) = valueBHigh;
               *(undefined8 *)(constantBlock + entryCOffset) = valueCLow;
               *(undefined8 *)(constantBlock + entryCOffset + 8) = valueCHigh;
               *(undefined8 *)(constantBlock + entryD) = valueDLow;
@@ -5091,10 +5091,10 @@ loopCheckRegionHeight:
           commitCallback = *(code **)(glContext + 0x275c);
           *(int *)(0x00002748 + glContext + 4) = cmdEnd + 8;
           (*commitCallback)(glContext,cmdEnd + 8);
-          in_r6 = hwProgramSlot[0x22];
-          in_r7 = 1;
-          in_r5 = programState;
-          ((int (*)())vpUploadConstantsWithFog)(glContext,shader,programState,in_r6,1);
+          constantBlockArg = hwProgramSlot[0x22];
+          literalOne = 1;
+          programStateArg = programState;
+          ((int (*)())vpUploadConstantsWithFog)(glContext,shader,programState,constantBlockArg,1);
         }
         oldWord1b90 = *(uint *)(glContext + 0x1b90);
         topSlot = '\0';
@@ -5124,7 +5124,7 @@ loopCheckRegionHeight:
         cmdEnd = *(int *)(0x00002748 + glContext + 4);
         commitCallback = *(code **)(glContext + 0x275c);
         *(int *)(0x00002748 + glContext + 4) = cmdEnd + 0x10;
-        (*commitCallback)(glContext,cmdEnd + 0x10,in_r5,in_r6,in_r7,in_r8,commitCallback);
+        (*commitCallback)(glContext,cmdEnd + 0x10,programStateArg,constantBlockArg,literalOne,entryBOffset,commitCallback);
         cmdBuffer = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
         *(undefined4 **)(0x00002748 + glContext + 4) = cmdBuffer;
         *cmdBuffer = 0x8b7;
@@ -5133,7 +5133,7 @@ loopCheckRegionHeight:
         cmdEnd = *(int *)(0x00002748 + glContext + 4);
         commitCallback = *(code **)(glContext + 0x275c);
         *(int *)(0x00002748 + glContext + 4) = cmdEnd + 8;
-        (*commitCallback)(glContext,cmdEnd + 8,in_r5,in_r6,in_r7,in_r8,cmdEndB);
+        (*commitCallback)(glContext,cmdEnd + 8,programStateArg,constantBlockArg,literalOne,entryBOffset,cmdEndB);
         gldSetVertexPacketLimits(glContext,*(undefined4 *)(programState + 0x2a4),*(undefined4 *)(programState + 0x2a8),
                      *(undefined4 *)(programState + 0x2ac));
         ((int (*)())gldCopyRouteRegisters)(glContext);
@@ -5180,7 +5180,7 @@ findConstantRegion:
               commitCallback = *(code **)(glContext + 0x275c);
               cmdEnd = *(int *)(0x00002748 + glContext + 4) + 8;
               *(int *)(0x00002748 + glContext + 4) = cmdEnd;
-              (*commitCallback)(glContext,cmdEnd,in_r5,in_r6,in_r7,in_r8,cmdEnd);
+              (*commitCallback)(glContext,cmdEnd,programStateArg,constantBlockArg,literalOne,entryBOffset,cmdEnd);
               *constAlloc = 0;
               constAlloc[1] = *(int *)(glContext + 0x2448);
               ((int (*)())gldFreeListNodes)(glContext);
@@ -5220,10 +5220,10 @@ int extvsValidateProgramState(glContext, arg2)
   code *commitCallback;
   undefined4 *cmdBuffer;
   uint stateKey;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int currentVariant;
   bool forceRebuild;
   int *variantTable;
@@ -5251,7 +5251,7 @@ int extvsValidateProgramState(glContext, arg2)
       commitCallback = *(code **)(glContext + 0x275c);
       cmdEndSaved = *(int *)(0x00002748 + glContext + 4) + 8;
       *(int *)(0x00002748 + glContext + 4) = cmdEndSaved;
-      (*commitCallback)(glContext,cmdEndSaved,in_r5,in_r6,in_r7,in_r8,cmdEndSaved);
+      (*commitCallback)(glContext,cmdEndSaved,staleArgR5,staleArgR6,staleArgR7,staleArgR8,cmdEndSaved);
       *constantAlloc = 0;
       constantAlloc[1] = *(undefined4 *)(glContext + 0x2448);
       ((int (*)())gldFreeListNodes)(glContext);
@@ -5324,10 +5324,10 @@ int extvsFlushConstantUploads(glContext)
   undefined4 *hwProgramSlot;
   int cmdEnd;
   undefined4 *cmdBuffer;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   code *commitCallback;
   int a6;
   char *programState;
@@ -5351,7 +5351,7 @@ int extvsFlushConstantUploads(glContext)
     cmdEnd = *(int *)(0x00002748 + glContext + 4);
     commitCallback = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = cmdEnd + 0x10;
-    (*commitCallback)(glContext,cmdEnd + 0x10,in_r5,in_r6,in_r7,in_r8,commitCallback);
+    (*commitCallback)(glContext,cmdEnd + 0x10,staleArgR5,staleArgR6,staleArgR7,staleArgR8,commitCallback);
     cmdBuffer = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
     *(undefined4 **)(0x00002748 + glContext + 4) = cmdBuffer;
     *cmdBuffer = 0x8b7;
@@ -5360,7 +5360,7 @@ int extvsFlushConstantUploads(glContext)
     cmdEnd = *(int *)(0x00002748 + glContext + 4);
     commitCallback = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = cmdEnd + 8;
-    (*commitCallback)(glContext,cmdEnd + 8,in_r5,in_r6,in_r7,in_r8,a6);
+    (*commitCallback)(glContext,cmdEnd + 8,staleArgR5,staleArgR6,staleArgR7,staleArgR8,a6);
     gldSetVertexPacketLimits(glContext,*(undefined4 *)(programState + 0x2a4),*(undefined4 *)(programState + 0x2a8),
                  *(undefined4 *)(programState + 0x2ac));
     ((int (*)())vpUploadConstantsWithFog)(glContext,shader,programState,hwProgramSlot[0x22],1);
