@@ -1,3 +1,11 @@
 local	pairIndex	param_1	unusedArg1	INFERRED	caller-supplied register argument the callee never reads (only nodeA/nodeBThenMax are used; called via a 3-arg function-pointer cast elsewhere)
 local	VRegPool__destroyEntries	local_28	iterNode	INFERRED	the hash-table iterator's current node pointer (word at auStack_38+0x10), checked for null and passed to the per-node vtable destructor
 local	IRInst__swapOperands	extraout_r4	retR4	INFERRED	secondary return register from the vtable call at *inst+0x14, used as the updated operandA index for the second call
+local	R300SchedModel__vslot16	in_r7	scratchR7	INFERRED	stale register live at this +0x88 vtable call site; the same vtable slot is called elsewhere in this file with only 3 real args (obj,idx,value), proving the real callee ignores r7/r8
+local	R300SchedModel__vslot16	in_r8	scratchR8	INFERRED	stale register live at this +0x88 vtable call site; see scratchR7 evidence
+local	R300SchedModel__vslot11	in_r7	scratchR7	INFERRED	stale register live at the +0x88 vtable call; the same vtable slot is called immediately after with only 3 real args (obj,idx,value), proving the real callee ignores r7/r8
+local	R300SchedModel__vslot11	in_r8	scratchR8	INFERRED	stale register, explicitly zeroed once before the loop but never consumed by the real 3-arg callee; see scratchR7 evidence
+local	R300SchedModel__vslot14	in_r7	scratchR7	INFERRED	stale register live at the +0x88 vtable call; the same vtable slot pattern is proven 3-arg elsewhere in this file
+local	R300SchedModel__vslot14	in_r8	scratchR8	INFERRED	stale register, see scratchR7 evidence
+local	R300VSchedModel__vslot3_canAddInstruction	in_r5	passThroughArg3	INFERRED	inbound register forwarded unmodified from the caller straight into the +0x4c vtable call as its 3rd argument; this function's own 2-param K&R declaration doesn't name it
+local	R300VSchedModel__vslot3_canAddInstruction	in_r6	passThroughArg4	INFERRED	inbound register forwarded unmodified from the caller straight into the +0x4c vtable call as its 4th argument; see passThroughArg3
