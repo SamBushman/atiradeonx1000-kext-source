@@ -43,16 +43,16 @@ int KhanPs__createSchedModels(this, compiler)
 }
 
 /* LandingPad__resume_127fd8 @ 0x127fd8 (32 bytes) */
-int LandingPad__resume_127fd8(param_1)
-  undefined4 param_1;
+int LandingPad__resume_127fd8(exceptionObject)
+  undefined4 exceptionObject;
 {
-  int extraout_r3;
-  int unaff_r27;
-  int *unaff_r30;
+  int deadReturnR3;
+  int savedR27;
+  int *savedR30;
   
-  *unaff_r30 = *(int *)(((unsigned char *)0x000011d0U) + unaff_r27) + 8;
-  __Unwind_Resume(param_1);
-  *(undefined4 *)(*(int *)(extraout_r3 + 8) + 0x2c) = 0x100;
+  *savedR30 = *(int *)(((unsigned char *)0x000011d0U) + savedR27) + 8;
+  __Unwind_Resume(exceptionObject);
+  *(undefined4 *)(*(int *)(deadReturnR3 + 8) + 0x2c) = 0x100;
   return;
 }
 
@@ -1980,12 +1980,12 @@ int IfHeader__swapArms(program, ifHeader)
   int ifHeader;
 {
   int condition;
-  undefined4 extraout_r4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
   undefined4 branchInst;
   
   branchInst = *(undefined4 *)(ifHeader + 0x134);
@@ -1993,7 +1993,7 @@ int IfHeader__swapArms(program, ifHeader)
   *(undefined4 *)(ifHeader + 0x138) = branchInst;
   DList__unlink(branchInst);
   DList__insertBefore(branchInst,*(undefined4 *)(ifHeader + 0x13c));
-  branchInst = Block__getBranchInst(ifHeader,extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
+  branchInst = Block__getBranchInst(ifHeader,unusedArg2,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7);
   condition = IRInst__getCompareCondition(branchInst);
   IRInst__setCompareCondition(branchInst,*(undefined4 *)(ptrTo_compareConditionInvertTable_001e912c + condition * 4));
   return ifHeader;
