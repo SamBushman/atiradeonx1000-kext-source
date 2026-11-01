@@ -384,11 +384,18 @@ def main():
     if tgts:
         used = set(IDENT.findall(dtext))
         for r_ in funcs: used.update((r_[2], r_[3]))
+        data_addr = {}   # new name of a `data` row -> the address (int) its old DAT_/PTR_<addr> name carries, if any
+        for _r in load_datas(d):
+            _m = re.search(r'_?([0-9a-f]{6,8})$', _r[2])
+            if _m: data_addr[_r[3]] = int(_m.group(1), 16)
         seen_t, seen_a = {}, {}
         for (f, n, old, new, tier, ev) in tgts:
             if new in seen_t or old in seen_a: print('%s:%d: target %s / %s is already used by the row at %s' % (f, n, old, new, seen_t.get(new) or seen_a[old])); errors += 1; continue
             seen_t[new] = seen_a[old] = '%s:%d' % (f, n)
-            if new in used: print('%s:%d: target name %s already occurs in the corpus' % (f, n, new)); errors += 1; continue
+            # a target name that already occurs is fine when it is the SAME object's existing `data`-row name (the link layer's LD_<addr>
+            # label and a `data DAT_<addr>` row can name the identical address; `ld()` in link_corpus.py only reads target rows, so this one
+            # still has to exist for the pointer-reached side to resolve, even though the corpus text already declares the name)
+            if new in used and data_addr.get(new) != int(old[3:], 16): print('%s:%d: target name %s already occurs in the corpus' % (f, n, new)); errors += 1; continue
             applied += 1
     print('%d renames %s, %d already applied, %d errors' % (pending, 'pending' if check else 'applied', applied, errors))
     sys.exit(1 if errors or (check and pending) else 0)

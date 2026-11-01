@@ -1,0 +1,14 @@
+# r35: target rows for the last 7 genuinely-unnamed LD_<addr> anonymous link-layer objects in GLDriver (confirmed via
+# re-running Tools/userspace/link_corpus.py: 409 were stale cached LD_ labels in the committed link/symbol_map.tsv that
+# the link layer had already resolved once r24/r26's target rows were written; regenerating dropped the count to 8).
+# 6 of these 7 already have a real name via an existing `data` row for the same address (DAT_<addr> -> name); this adds
+# the matching `target` row so the link layer's LD_<addr> label (reached only through a pointer word, not literally in
+# the C source) also resolves to that name. LD_1fa5e8 (the 8th) is deliberately left alone per notes_r24_remaining.md:
+# it already has a real name (zeroWords4_001fa5e8) and is kept as a `.set` alias by design.
+target	LD_1d9f34	textureFormatTable_001d9f34	CONFIRMED	same object already named by names_r07_data.tsv's `data DAT_001d9f34 textureFormatTable_001d9f34` row (base of the texture format table, 0x24-byte records); the __DATA,__nl_symbol_ptr slot ptrTo_textureFormatTable_001e88c8 reaches it only by address, so the link layer's own LD_1d9f34 label needed this separate target row
+target	LD_1aa818	laneWordSplatTable_001aa818	INFERRED	same object already named by names_r11_data.tsv's `data DAT_001aa818 laneWordSplatTable_001aa818` row (component-select-word splat table); the __TEXT,__const nl_symbol_ptr slot reaches it only by address
+target	LD_1dca64	KhanPsOpcodeTraits_001dca64	CONFIRMED	same object already named by names_r07_data.tsv's `data DAT_001dca64 KhanPsOpcodeTraits_001dca64` row (returned by KhanPs__getOpcodeTraits); the __DATA,__nl_symbol_ptr slot ptrTo_KhanPsOpcodeTraits_001e913c reaches it only by address
+target	LD_1df1fc	KhanVsOpcodeTraits_001df1fc	CONFIRMED	same object already named by names_r07_data.tsv's `data DAT_001df1fc KhanVsOpcodeTraits_001df1fc` row (returned by KhanVs__getOpcodeTraits); the __DATA,__nl_symbol_ptr slot ptrTo_KhanVsOpcodeTraits_001e9140 reaches it only by address
+target	LD_1a4524	s_1D_1a4524	CONFIRMED	anonymous C string at 0x1a4524: "1D" (texture-target keyword, part of arbfpKeywordTable_001e9158's string set alongside "2D"/"3D" at the adjacent addresses); reached only through that keyword table's pointer word, never literally in the C source, so it had no name at all (not even a data row) until now
+target	LD_1dbd84	swizzleWordsYYYX_001dbd84	INFERRED	same object already named by names_r07_data.tsv's `data DAT_001dbd84 swizzleWordsYYYX_001dbd84` row (4-word lane-select array); the __DATA,__const nl_symbol_ptr slot reaches it only by address
+target	LD_1dbd14	swizzleWordsXYZW_001dbd14	INFERRED	same object already named by names_r07_data.tsv's `data DAT_001dbd14 swizzleWordsXYZW_001dbd14` row (4-word lane-select array); the __DATA,__const nl_symbol_ptr slot reaches it only by address
