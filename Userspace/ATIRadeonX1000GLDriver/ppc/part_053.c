@@ -1541,9 +1541,9 @@ int R520MachineAssembler__vslot38_appendBranchRecord(this, condition, branchArg)
   int condition;
   undefined4 branchArg;
 {
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0xe) = 0;
@@ -1556,7 +1556,7 @@ int R520MachineAssembler__vslot38_appendBranchRecord(this, condition, branchArg)
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x14) = 0;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x15) = 0;
   *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x17) = (char)branchArg;
-  (**(code **)(*this + 0x15c))(this,condition,branchArg,in_r6,in_r7,in_r8,*this);
+  (**(code **)(*this + 0x15c))(this,condition,branchArg,staleArg6,staleArg7,staleArg8,*this);
   return this[0x18] + -1;
 }
 
@@ -1764,16 +1764,16 @@ int R520MachineAssembler__vslot31_assembleChildrenAndMark(this, node, block)
   undefined4 block;
 {
   int child;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   uint loopIndex;
   int childByteOffset;
   int recordIndexBefore;
   
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))
-            (this,block,*(undefined4 *)(node + 0xdc),in_r6,in_r7,in_r8,
+            (this,block,*(undefined4 *)(node + 0xdc),staleArg6,staleArg7,staleArg8,
              *(code **)(*this + 0x34));
   if ((*(int *)(node + 0xdc) != 0) && (recordIndexBefore == this[0x18])) {
     recordIndexBefore = *(int *)(node + 0xd0);
@@ -1797,15 +1797,15 @@ int R520MachineAssembler__vslot24_assembleWithTarget(this, node, block)
 {
   bool emittedNothing;
   undefined4 targetId;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int recordIndexBefore;
   code *slotFunction;
   
   recordIndexBefore = this[0x18];
   (**(code **)(*this + 0x34))
-            (this,block,*(undefined4 *)(node + 0xdc),in_r6,in_r7,in_r8,
+            (this,block,*(undefined4 *)(node + 0xdc),staleArg6,staleArg7,staleArg8,
              *(code **)(*this + 0x34));
   if ((*(int *)(node + 0xdc) == 0) || (emittedNothing = true, recordIndexBefore != this[0x18])) {
     emittedNothing = false;

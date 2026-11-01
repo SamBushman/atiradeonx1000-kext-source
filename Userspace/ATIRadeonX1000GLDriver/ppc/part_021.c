@@ -898,16 +898,16 @@ int IfFooterStatic__accept(this, traversal)
 }
 
 /* Block__getOrAllocSlotId @ 0xe2a04 (64 bytes) */
-int Block__getOrAllocSlotId(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int Block__getOrAllocSlotId(block, regClass)
+  int block;
+  undefined4 regClass;
 {
   int cachedId;
   
-  cachedId = *(int *)(param_1 + 0x30);
+  cachedId = *(int *)(block + 0x30);
   if (cachedId < 0) {
-    cachedId = RegAlloc__allocateFirstFreeInClass(*(undefined4 *)(param_1 + 0x34),param_2);
-    *(int *)(param_1 + 0x30) = cachedId;
+    cachedId = RegAlloc__allocateFirstFreeInClass(*(undefined4 *)(block + 0x34),regClass);
+    *(int *)(block + 0x30) = cachedId;
   }
   return cachedId;
 }
@@ -1263,10 +1263,10 @@ int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
 }
 
 /* MachineAssembler__visitIfHeaderStatic @ 0xe3140 (260 bytes) */
-int MachineAssembler__visitIfHeaderStatic(this, block, param_3, compiler, unusedArg5, unusedArg6, unusedArg7)
+int MachineAssembler__visitIfHeaderStatic(this, block, headerNode, compiler, unusedArg5, unusedArg6, unusedArg7)
   int *this;
   int block;
-  undefined4 param_3;
+  undefined4 headerNode;
   int compiler;
   undefined4 unusedArg5;
   undefined4 unusedArg6;
@@ -1282,12 +1282,12 @@ int MachineAssembler__visitIfHeaderStatic(this, block, param_3, compiler, unused
   uint stackSize;
   uint *resultStack;
   
-  branchInst = Block__getBranchInst(block,block,param_3,compiler,unusedArg5,unusedArg6,unusedArg7);
+  branchInst = Block__getBranchInst(block,block,headerNode,compiler,unusedArg5,unusedArg6,unusedArg7);
   currentProgram = *(undefined4 *)(compiler + 0x6c4);
   branchFlag = *(int *)(branchInst + 300);
   sourceDef = IRInst__getOperandSource(branchInst,1);
   conditionRegister = thunk_FUN_00134de8(currentProgram,sourceDef);
-  (**(code **)(*this + 0x34))(this,param_3,*(undefined4 *)(block + 0xdc));
+  (**(code **)(*this + 0x34))(this,headerNode,*(undefined4 *)(block + 0xdc));
   emittedBranch = (**(code **)(*this + 0x98))(this,branchFlag != 1,conditionRegister,0);
   resultStack = *(uint **)(this[4] + 0x24);
   stackSize = resultStack[1];
@@ -1505,14 +1505,14 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   undefined4 staleArgR8;
   undefined4 staleArgR9;
   undefined4 staleArgR10;
-  /* NOTE (issue #64): auStack_78/auStack_74/local_54 declared as 3 separate adjacent locals sharing one
-   * real stock stack region. "local_54" is NOT a separate buffer after auStack_74 - per stock disassembly
-   * (r1+0x3c=auStack_74, r1+0x5c=local_54, frame size 0xb0) it's simply the name for auStack_74's own
+  /* NOTE (issue #64): auStack_78/auStack_74/codeSink declared as 3 separate adjacent locals sharing one
+   * real stock stack region. "codeSink" is NOT a separate buffer after auStack_74 - per stock disassembly
+   * (r1+0x3c=auStack_74, r1+0x5c=codeSink, frame size 0xb0) it's simply the name for auStack_74's own
    * word index 8 (0x74-0x54=0x20=8 words in). EncoderState__init(auStack_74,...) writes auStack_74[0] through
    * auStack_74[0xd] (up to +0x34 bytes, i.e. through frame offset r1+0x70) - CONFIRMED by reading that
    * callee's own body - so auStack_74's real required size is 0x38 bytes, not the 0x20 the auStack_74..
-   * local_54 gap alone would suggest (an earlier version of this fix under-sized it at 0x28 total, which
-   * still let EncoderState__init's tail writes (words 9-0xd, past local_54) overflow past this whole buffer -
+   * codeSink gap alone would suggest (an earlier version of this fix under-sized it at 0x28 total, which
+   * still let EncoderState__init's tail writes (words 9-0xd, past codeSink) overflow past this whole buffer -
    * confirmed live: that overflow was clobbering a saved register in the CALLER's (Compiler__compileStages's) frame,
    * corrupting its r30 and causing a second crash further into gldCreateContext). Those extra words are
    * never read back by any other statement in this function (no name exists for them, hence no overflow
@@ -1522,10 +1522,10 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
   undefined1 auStack_e36bc_combined [0x40];
 #define auStack_78 (auStack_e36bc_combined + 0x0)
 #define auStack_74 (auStack_e36bc_combined + 0x4)
-#define local_54 (*(int **)(auStack_e36bc_combined + 0x24))
+#define codeSink (*(int **)(auStack_e36bc_combined + 0x24))
   
   ((int (*)())EncoderState__init)(auStack_74,writer,outSize);
-  (**(code **)(*local_54 + 0x18))(local_54,*writer);
+  (**(code **)(*codeSink + 0x18))(codeSink,*writer);
   block = (int *)writer[0xe1];
   for (nextBlock = (int *)((int *)writer[0xe1])[2]; nextBlock != (int *)0x0; nextBlock = (int *)nextBlock[2]) {
     blockIsIfHeader = (**(code **)(*block + 0x24))(block);
@@ -1557,8 +1557,8 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
     }
     block = nextBlock;
   }
-  (**(code **)(*local_54 + 0x10))(local_54);
-  sizeBeforeCompression = (**(code **)(*local_54 + 0x20))(local_54);
+  (**(code **)(*codeSink + 0x10))(codeSink);
+  sizeBeforeCompression = (**(code **)(*codeSink + 0x20))(codeSink);
   writer[1] = sizeBeforeCompression;
   ((int (*)())MachineCodeWriter__accumulateStats)(writer,auStack_74);
   programTooLarge = ((int (*)())EncoderState__sinkIsOverflowed)(auStack_74);
@@ -1570,7 +1570,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
     if (*writer == 0) {
       *writer = 1;
       sizeBeforeCompression = writer[1];
-      (**(code **)(*local_54 + 0xc))(local_54);
+      (**(code **)(*codeSink + 0xc))(codeSink);
       ((int (*)())MachineCodeWriter__encodeProgram)(writer,outBuffer,outSize);
       ((int (*)())EncoderState__sinkIsOverflowed)(auStack_74);
       Compiler__logf(writer[2],"Compression : size reduced from %d to %d  (%%%d)\n",sizeBeforeCompression,
@@ -1580,13 +1580,13 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
 callCompiler_fail:
     Compiler__fail(writer[2],5);
   }
-  (**(code **)(*local_54 + 0x24))(local_54,outBuffer,outSize);
+  (**(code **)(*codeSink + 0x24))(codeSink,outBuffer,outSize);
 returnEncoderState__destroy_e3308:
   return ((int (*)())EncoderState__destroy_e3308)(auStack_74);
 }
 #undef auStack_78
 #undef auStack_74
-#undef local_54
+#undef codeSink
 
 /* IRInst__createMovForDest @ 0xe3968 (396 bytes) */
 int IRInst__createMovForDest(inst, inst2, compiler)
@@ -1602,7 +1602,7 @@ int IRInst__createMovForDest(inst, inst2, compiler)
   undefined4 mergedSelect;
   int loopCounterB;
   undefined4 destMask [4];
-  undefined4 local_28;
+  undefined4 mergedSelectScratch;
   int markedSelect [3];
   
   newInst = (int *)IRInst__create(0x31,compiler);
@@ -1632,8 +1632,8 @@ int IRInst__createMovForDest(inst, inst2, compiler)
     do {
       inst2 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
       operandRecord = IRInst__getOperandRecord(inst2,0);
-      SelectWord__mergeWrittenLanes(&local_28,mergedSelect,*(undefined4 *)(operandRecord + 0x10));
-      mergedSelect = local_28;
+      SelectWord__mergeWrittenLanes(&mergedSelectScratch,mergedSelect,*(undefined4 *)(operandRecord + 0x10));
+      mergedSelect = mergedSelectScratch;
     } while ((*(uint *)(inst2 + 0x14) & 0x200) != 0);
   }
   loopCounter = 0;
