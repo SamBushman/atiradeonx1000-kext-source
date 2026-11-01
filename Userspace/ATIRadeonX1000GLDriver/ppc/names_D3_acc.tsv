@@ -26,7 +26,6 @@ use	FUN_000eec50	iVar5	newInst	CONFIRMED	IRInst__create: factory result	^\s*iVar
 use	FUN_000eec50	iVar6	operandRecord3	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar6\ =\ FUN_001054ec\(iVar5,1\);$@1	+5	all	all
 use	FUN_000eec50	iVar7	operandRecord4	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar7\ =\ FUN_001054ec\(puVar11,0\);$@1	+4	all	all
 use	FUN_000eee4c	iVar6	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar6\ =\ FUN_001054ec\(piVar12,0\);$@1	+0	all	all
-use	FUN_000eee4c	iVar6	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar6\ =\ \(\*pcVar10\)\(piVar4,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\),param_1\);$@1	+0	rhs	rhs
 use	FUN_000eee4c	iVar7	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar7\ =\ FUN_001054ec\(piVar12,0\);$@1	+1	all	all
 use	FUN_000f07a8	iVar15	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar15\ =\ FUN_001054ec\(piVar3,0\);$@1	+2	all	all
 use	FUN_000f07a8	iVar4	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar4\ =\ FUN_001054ec\(param_3,1\);$@1	+3	all	all

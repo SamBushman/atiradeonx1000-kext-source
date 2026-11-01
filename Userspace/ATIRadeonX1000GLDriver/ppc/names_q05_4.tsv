@@ -164,7 +164,6 @@ use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register rang
 use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register range being projected	^\s*if\ \(iVar3\ <\ \*\(int\ \*\)\(param_1\ \+\ 0x3ec\)\)\ \{$	+1
 use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register range being projected	^\s*piVar4\ =\ \(int\ \*\)FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),$	+2
 use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register range being projected	^\s*puVar5\[0x4b\]\ =\ iVar3;$	+1
-use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register range being projected	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x10\)\ =\ iVar3;$	+1
 use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register range being projected	^\s*FUN_00130444\(param_1,iVar3\);$	+2
 use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register range being projected	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
 use	FUN_000eee4c	iVar3	hwRegIndex	INFERRED	program+1000 .. +0x3ec: register range being projected	^\s*\}\ while\ \(iVar3\ <\ \*\(int\ \*\)\(param_1\ \+\ 0x3ec\)\);$	+1
@@ -179,7 +178,6 @@ use	FUN_000eee4c	piVar4	followingInst	INFERRED	instruction after the current one
 use	FUN_000eee4c	piVar4	followingInst	INFERRED	instruction after the current one	^\s*piVar2\ =\ \(int\ \*\)piVar4\[2\];$	+3
 use	FUN_000eee4c	piVar4	subVReg	INFERRED	virtual register created for one register of the range	^\s*piVar4\ =\ \(int\ \*\)FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),$	+2
 use	FUN_000eee4c	piVar4	subVReg	INFERRED	virtual register created for one register of the range	^\s*pcVar10\ =\ \*\(code\ \*\*\)\(\*piVar4\ \+\ 0x28\);$	+1
-use	FUN_000eee4c	piVar4	subVReg	INFERRED	virtual register created for one register of the range	^\s*iVar6\ =\ \(\*pcVar10\)\(piVar4,\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\),param_1\);$	+1
 use	FUN_000eee4c	piVar4	subVReg	INFERRED	virtual register created for one register of the range	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x2c\)\)\(piVar4\);$	+1
 local	FUN_000eee4c	piVar8	projection	INFERRED	IRProjection (opcode 0x84) created for the register
 local	FUN_000eee4c	a0	hwDescriptionObj	INFERRED	compiler hardware description (+0x30c)
