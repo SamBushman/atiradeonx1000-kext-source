@@ -5378,8 +5378,8 @@ int ffvpSelectLitProgramVariant(glContext)
   char stateDirty;
   int lightKeyB;
   undefined4 staleArgR4;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 calleeStaleR4;
+  undefined4 calleeStaleR4_00;
   undefined4 scratchR5;
   uint scratchR6;
   undefined4 scratchR7;
@@ -5452,12 +5452,12 @@ callVariantSelectCallback:
   (**(code **)(((unsigned char *)0x000012c4) + glContext))(glContext,variant);
   if (*(int *)(variant + 0x54) + 0x750 == *(int *)(((unsigned char *)0x0000148c) + glContext)) {
     (**(code **)((int)((unsigned char *)0x000012a0) + glContext))(glContext);
-    staleArgR4 = extraout_r4;
+    staleArgR4 = calleeStaleR4;
   }
   else {
     scratchR5 = *(undefined4 *)(variant + 0x3c);
     (**(code **)((int)((unsigned char *)0x00001294) + glContext))(glContext,variant,scratchR5);
-    staleArgR4 = extraout_r4_00;
+    staleArgR4 = calleeStaleR4_00;
   }
   if (*(char *)(*(int *)(variant + 0x54) + 0x752) == '\0') {
     return;
