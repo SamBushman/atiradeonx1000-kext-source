@@ -202,9 +202,9 @@ int gldSetCurrentProgramObject(glContext, programObj)
   undefined4 cmdBuffer;
   undefined4 *cmdAfterState;
   uint stageFlag;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   undefined4 *cmdCursor;
   int wordsLeft;
   
@@ -261,7 +261,7 @@ int gldSetCurrentProgramObject(glContext, programObj)
     cmdCursor[3] = ((unsigned char *)0x000010c0U);
     cmdCursor[4] = *(undefined4 *)(glContext + 0x1f2c);
     *(undefined4 **)(0x00002748 + glContext + 4) = cmdEnd;
-    (**(code **)(glContext + 0x275c))(glContext,cmdEnd,stageFlag,in_r6,in_r7,in_r8,cmdEnd);
+    (**(code **)(glContext + 0x275c))(glContext,cmdEnd,stageFlag,staleArgR6,staleArgR7,staleArgR8,cmdEnd);
   }
   *(int *)(glContext + 0x1e64) = programObj;
   return;
@@ -1326,8 +1326,8 @@ double gldValidateTextureUnits(int glContext,undefined4 unusedArg2,uint unitInde
   int unitEnableCursor;
   uint unitIndexCounter;
   int texRegCursor;
-  double extraout_f1;
-  double in_stack_ffffff28;
+  double retF1;
+  double stackArg28;
   
   activeUnitMask = *(ushort *)(glContext + 0x32) | *(ushort *)(glContext + 0x34);
   pendingUnitBits = (uint)activeUnitMask;
@@ -1393,7 +1393,7 @@ loopStoreGlContext:
             unitIndexArg = loopIndex;
             fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3
                                             ,fprF4,fprF5,fprF6,fprF7,fprF8,
-                                            in_stack_ffffff28);
+                                            stackArg28);
           }
         }
         else {
@@ -1538,7 +1538,7 @@ loopSetLodBiasFromProgram:
             else {
               lodBiasField = ((int (*)())gldLodBiasToFixed)(glContext,(double)*(float *)(unitInfoCursor + 0x470),fprF2);
               texFilterWord = (lodBiasField & 0x3ff) << 3 | texFilterWord & 0xffffe007;
-              fprF1 = extraout_f1;
+              fprF1 = retF1;
             }
           }
           *(uint *)(texRegCursor + 0x1d1c) = texFilterWord;
@@ -1546,7 +1546,7 @@ loopSetLodBiasFromProgram:
           unitIndexArg = loopIndex;
           fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3,
                                           fprF4,fprF5,fprF6,fprF7,fprF8,
-                                          in_stack_ffffff28);
+                                          stackArg28);
           texFormatWord = *(uint *)(texObj + 0x14);
           if ((texFormatWord & 0x1e00) == 0xa00) {
             if ((texFormatWord & 7) == 4) {
@@ -1784,16 +1784,16 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
   int glState;
   int glContextWord8;
   int glContextWord2768;
-  double extraout_f1;
-  double extraout_f1_00;
+  double retF1;
+  double retF1B;
   double fprResidualF1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double staleArgF2;
+  double staleArgF3;
+  double staleArgF4;
+  double staleArgF5;
+  double staleArgF6;
+  double staleArgF7;
+  double staleArgF8;
   
   glContextWord4 = *(int *)(glContext + 4);
   glContextWord2768 = *(int *)(glContext + 0x2768);
@@ -1807,7 +1807,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
     drawSurface = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
     *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * depthBiasScale) >> 1);
     resolveFlag = gld_needsMultisampleResolve(*(int *)(glContext + 4),drawSurface,staleArgR5,staleArgR6,staleArgR7,staleArgR8,glState);
-    fprResidualF1 = extraout_f1_00;
+    fprResidualF1 = retF1B;
     if (resolveFlag == 0) {
       *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x20000;
     }
@@ -1818,7 +1818,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
   else {
     *(short *)(glContext + 0x1b42) = (short)*(undefined4 *)(glContextWord2768 + 0x18);
     *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x30000;
-    fprResidualF1 = extraout_f1;
+    fprResidualF1 = retF1;
   }
   glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00002e2c)[glStateBlock] != '\0') && ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) &&
@@ -1834,7 +1834,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
     *(undefined4 *)(glContext + 0x1b70) = *(undefined4 *)(glContextWord2768 + 0x24);
   }
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x4000;
-  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprResidualF1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprResidualF1,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,staleArgF7,staleArgF8);
   return;
 }
 
@@ -1853,13 +1853,13 @@ int gldValidatePointSize(glContext)
   int glContextWord8;
   int glContextWord2768;
   double fprF1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
+  double staleArgF2;
+  double staleArgF3;
+  double staleArgF4;
+  double staleArgF5;
+  double staleArgF6;
+  double staleArgF7;
+  double staleArgF8;
   
   glContextWord2768 = *(int *)(glContext + 0x2768);
   glContextWord8 = *(int *)(glContext + 8);
@@ -1936,7 +1936,7 @@ storeGlContext:
   registerDirty = *(uint *)(glContext + 0x1930);
 storeGlContext2:
   *(uint *)(glContext + 0x1930) = registerDirty | 0xc08000;
-  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprF1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
+  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprF1,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,staleArgF7,staleArgF8);
   return;
 }
 
@@ -2417,10 +2417,10 @@ int extvsUpdateVertexAttributeConstants(glContext)
   int attribVectorOffset;
   code *streamSetCurrent;
   uint *cmdBuffer;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int cacheEntry;
   int cachedAttribPtr;
   int currentShader;
@@ -2461,7 +2461,7 @@ int extvsUpdateVertexAttributeConstants(glContext)
         *(uint *)(ctxCursor + 0x1f3c) = attribY;
         *(uint *)(ctxCursor + 8000) = attribZ;
         *(uint *)(ctxCursor + 0x1f44) = attribW;
-        cmdBuffer = (uint *)(**(code **)(glContext + 0x2758))(glContext,5,in_r5,in_r6,in_r7,in_r8,cacheEntry);
+        cmdBuffer = (uint *)(**(code **)(glContext + 0x2758))(glContext,5,staleArgR5,staleArgR6,staleArgR7,staleArgR8,cacheEntry);
         *(uint **)(0x00002748 + glContext + 4) = cmdBuffer;
         cmdBuffer[4] = attribW;
         *cmdBuffer = (uint)attribRegister | 0x30000;
@@ -3151,8 +3151,8 @@ int gldSetVertexPacketLimits(glContext, elementSizeA, elementSizeB, elementSizeC
   uint glContextWord1b7c;
   undefined4 *a6;
   int streamPos;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   uint primaryLimit;
   uint secondaryLimit;
   
@@ -3182,7 +3182,7 @@ int gldSetVertexPacketLimits(glContext, elementSizeA, elementSizeB, elementSizeC
     streamPos = *(int *)(0x00002748 + glContext + 4);
     streamSetCurrent = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = streamPos + 0x10;
-    (*streamSetCurrent)(glContext,streamPos + 0x10,elementSizeB,elementSizeC,in_r7,in_r8,a6);
+    (*streamSetCurrent)(glContext,streamPos + 0x10,elementSizeB,elementSizeC,staleArgR7,staleArgR8,a6);
     *(undefined1 *)(glContext + 0x23ec) = 0;
   }
   return;
@@ -4887,10 +4887,10 @@ int extvsBeginShader(ctx)
 int extvsEndShader(ctx)
   int ctx;
 {
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   int a1;
   
   if (((unsigned char *)0x00001170)[ctx] != '\0') {
@@ -4900,7 +4900,7 @@ int extvsEndShader(ctx)
     (**(code **)(((unsigned char *)0x00001190) + ctx))(ctx,a1);
     (**(code **)(((unsigned char *)0x00001194) + ctx))(ctx,a1);
     (**(code **)(((unsigned char *)0x0000119c) + ctx))
-              (ctx,a1,in_r5,in_r6,in_r7,in_r8,*(code **)(((unsigned char *)0x0000119c) + ctx));
+              (ctx,a1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,*(code **)(((unsigned char *)0x0000119c) + ctx));
     *(undefined4 *)(((unsigned char *)0x00001174) + ctx) = *(undefined4 *)(a1 + 0x54);
     *(undefined4 *)(((unsigned char *)0x0000117c) + ctx) = *(undefined4 *)(a1 + 0x58);
     *(undefined4 *)(((unsigned char *)0x00001178) + ctx) = *(undefined4 *)(a1 + 0x5c);

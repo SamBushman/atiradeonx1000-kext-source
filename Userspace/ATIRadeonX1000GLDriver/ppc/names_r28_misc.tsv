@@ -40,3 +40,34 @@ local	ildisPrintSourceOperand	unaff_r23	addressModeWord	CONFIRMED	the extra toke
 local	ildisPrintSourceOperand	unaff_r28	modifierWord	CONFIRMED	the optional 2nd token word (modifier bits: swizzle/negate/write-mask-style flags), read from tokenPtr[1] or fmtArgR9[1] depending on path
 local	ildisPrintDestinationOperand	unaff_r24	addressModeWord	CONFIRMED	same role as ildisPrintSourceOperand's unaff_r23: extra token word for register-relative addressing
 local	ildisPrintDestinationOperand	unaff_r25	modifierWord	CONFIRMED	same role as ildisPrintSourceOperand's unaff_r28: optional 2nd token word of result modifiers/write mask
+local	gldValidatePolygonOffset	extraout_f1	retF1	INFERRED	leftover FPR1 value after the gld_needsMultisampleResolve call in the if-condition chain; assigned straight into fprResidualF1
+local	gldValidatePolygonOffset	extraout_f1_00	retF1B	INFERRED	leftover FPR1 value after the 2nd gld_needsMultisampleResolve call; assigned straight into fprResidualF1
+local	gldValidatePolygonOffset	in_f2	staleArgF2	INFERRED	stale FPR2 forwarded unchanged to gldValidateViewportPolygonOffset (function takes no float params of its own)
+local	gldValidatePolygonOffset	in_f3	staleArgF3	INFERRED	stale FPR3 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f4	staleArgF4	INFERRED	stale FPR4 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f5	staleArgF5	INFERRED	stale FPR5 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f6	staleArgF6	INFERRED	stale FPR6 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f7	staleArgF7	INFERRED	stale FPR7 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f8	staleArgF8	INFERRED	stale FPR8 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f2	staleArgF2	INFERRED	stale FPR2 forwarded unchanged to gldValidateViewportPolygonOffset (gldValidatePointSize takes only glContext)
+local	gldValidatePointSize	in_f3	staleArgF3	INFERRED	stale FPR3 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f4	staleArgF4	INFERRED	stale FPR4 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f5	staleArgF5	INFERRED	stale FPR5 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f6	staleArgF6	INFERRED	stale FPR6 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f7	staleArgF7	INFERRED	stale FPR7 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f8	staleArgF8	INFERRED	stale FPR8 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldSetCurrentProgramObject	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the vtable call at glContext+0x275c
+local	gldSetCurrentProgramObject	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the vtable call at glContext+0x275c
+local	gldSetCurrentProgramObject	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the vtable call at glContext+0x275c
+local	gldValidateTextureUnits	extraout_f1	retF1	INFERRED	leftover FPR1 value after the gldLodBiasToFixed call; assigned straight into fprF1
+local	gldValidateTextureUnits	in_stack_ffffff28	stackArg28	INFERRED	stale stack-passed float argument forwarded unchanged to both gld_updateUnitBiasRegisters call sites
+local	extvsUpdateVertexAttributeConstants	in_r5	staleArgR5	INFERRED	stale r5 forwarded unchanged through the vtable call at glContext+0x2758
+local	extvsUpdateVertexAttributeConstants	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the vtable call at glContext+0x2758
+local	extvsUpdateVertexAttributeConstants	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the vtable call at glContext+0x2758
+local	extvsUpdateVertexAttributeConstants	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the vtable call at glContext+0x2758
+local	gldSetVertexPacketLimits	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the streamSetCurrent callback
+local	gldSetVertexPacketLimits	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the streamSetCurrent callback
+local	extvsEndShader	in_r5	staleArgR5	INFERRED	stale r5 forwarded unchanged through the vtable call at ctx+0x119c
+local	extvsEndShader	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the vtable call at ctx+0x119c
+local	extvsEndShader	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the vtable call at ctx+0x119c
+local	extvsEndShader	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the vtable call at ctx+0x119c
