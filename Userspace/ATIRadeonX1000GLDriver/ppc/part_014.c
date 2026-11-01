@@ -301,10 +301,10 @@ int ffvpEmitBlendedClipPosition(programBuilder, matrixSelectors, matrixCount, im
   int src1File;
   int deadSrc1File;
   int deadEmitFn12ec;
-  int iVarS7;
+  int deadSrc1Index;
   int deadEmitFn12f4;
   int deadEmitFn12f4B;
-  int iVarS10;
+  int deadSrc1IndexB;
   int deadEmitFn12f4C;
   int emit17Src1Index;
   int emit17Src1Select;
@@ -614,7 +614,7 @@ loopSetMatrixIndex:
       emit17Src1Select = (int)constBase64 + -32128;
       (**(code **)(((unsigned char *)0x000012ec) + glCtx))
                 (programBuilder,srcTempFileB,blendTemp1[blendTemp1Reg_IDX],negateConstPtr,srcTempFile,blendTemp3[blendTemp6Reg_IDX],selectConstPtr,negateConstPtr2,srcTempFileB,emit17Src1Index,emit17Src1Select,negateConstPtr2);
-      iVarS7 = *(int *)((int)programBuilder + 1376);
+      deadSrc1Index = *(int *)((int)programBuilder + 1376);
       deadEmitFn12f4 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4852);
       src1IndexB = *(int *)((int)programBuilder + 1376);
       emit18Src1Select = (int)constBase58 + -32096;
@@ -632,7 +632,7 @@ loopSetMatrixIndex:
                   (programBuilder,copyDstFile,copySrcReg,negateConstPtr,srcTempFile,blendTemp3[blendTemp3Reg_IDX],selectConstPtr,negateConstPtr2,srcTempFile,emit20Src1Index,emit20Src1Select,negateConstPtr2,srcTempFile,emit20Src2Index,selectConstPtr,negateConstPtr2);
       }
       else {
-        iVarS10 = *(int *)((int)programBuilder + 1376);
+        deadSrc1IndexB = *(int *)((int)programBuilder + 1376);
         deadEmitFn12f4C = *(int *)((int)*(int *)((int)programBuilder + 980) + 4852);
         emit21Src1Index = *(int *)((int)programBuilder + 1376);
         emit21Src1Select = (int)constBase60 + 27556;
@@ -1226,7 +1226,7 @@ int ffvpEmitProjectedPosition(programBuilder, copyEnabled, copyOutIndex)
   int emit10Src1Select;
   int deadEmitFn12f4;
   int deadSrcTempFile;
-  int iVarS12;
+  int deadSrc1Index;
   int deadSelectConst;
   int deadSrcTempFileB;
   int deadEmitFn12f4B;
@@ -1352,7 +1352,7 @@ loopSetDstReg:
                 (programBuilder,dstTempFile,dstFile,&swizzleWordsYYYY_001dbd24,constFile2,projectionConstReg + 1,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,dstTempFile,emit11Src1Index,emit11Src1Select,&zeroWords4_001fa5e8,dstTempFile,dstFile,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
       if ((*(char *)(programBuilder + 0x744) == '\0') || (*(int *)(programBuilder + 0x6a0) != -1)) {
         deadSrcTempFile = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-        iVarS12 = *(int *)((int)programBuilder + 1016);
+        deadSrc1Index = *(int *)((int)programBuilder + 1016);
         deadSelectConst = &zeroWords4_001fa5f8;
         deadSrcTempFileB = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
         deadEmitFn12f4B = *(int *)((int)*(int *)((int)programBuilder + 980) + 4852);
@@ -1776,8 +1776,8 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
   char wantsInvWTemp;
   undefined4 status;
   int allocStatus;
-  int iVarSa;
-  int iVarSb;
+  int texGenSrc1File;
+  int texGenSrc1Index;
   undefined4 *dstFileTable;
   undefined4 *srcFileTable;
   int texgenSrcReg;
@@ -1927,17 +1927,17 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
       }
       /* #70 stack words: case 1 (stock 0x969a8) passes (rec[0], *(programBuilder + 0x3f8)) as the 9th / 10th arguments below, case 2
        * (0x96988) passes (rec[4], *programBuilder); the 11th / 12th are the PIC constants on both paths */
-      iVarSa = *srcFileTable;
-      iVarSb = *(int *)(programBuilder + 0x3f8);
+      texGenSrc1File = *srcFileTable;
+      texGenSrc1Index = *(int *)(programBuilder + 0x3f8);
       goto setIssue;
     case 2:
-      iVarSa = srcFileTable[1];
-      iVarSb = *(int *)programBuilder;
+      texGenSrc1File = srcFileTable[1];
+      texGenSrc1Index = *(int *)programBuilder;
 setIssue:
       /* issue #79 class: the stock sets r9 / r10 (`addi r9,r11,0x5700`, `addi r10,r10,0x3fd4` from the PIC base 0x96614 =
        * &swizzleWordsXYZW_001dbd14 / &zeroWords4_001fa5e8) for the `bctrl` at 0x96a20 - the same 7th / 8th arguments every sibling call through
        * this slot passes - and stores them again as stack words, which is why the same-block count stopped at r8 */
-      (**(code **)(((unsigned char *)0x000012e4) + glCtx))(programBuilder,genDstFile,genDstReg,maskCursor,constFile,planeReg,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,iVarSa,iVarSb,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+      (**(code **)(((unsigned char *)0x000012e4) + glCtx))(programBuilder,genDstFile,genDstReg,maskCursor,constFile,planeReg,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,texGenSrc1File,texGenSrc1Index,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
       goto nextTexCoordComponent;
     case 3:
       texgenSrcReg = *(int *)(programBuilder + 0x4e8);
@@ -2069,17 +2069,17 @@ int ffvpEmitSceneColor(programBuilder)
   int primaryColorBase;
   int *ambientRegs;
   int alphaTableBaseA;
-  int iVarS1;
-  int iVarS2;
-  int iVarS3;
-  int iVarS4;
-  int iVarS5;
-  int iVarS6;
-  int iVarS7;
-  int iVarS8;
-  int iVarS9;
-  int iVarS10;
-  int iVarS11;
+  int deadStagedSlot1;
+  int deadStagedSlot2;
+  int deadStagedSlot3;
+  int deadStagedSlot4;
+  int deadStagedSlot5;
+  int deadStagedSlot6;
+  int deadStagedSlot7;
+  int deadStagedSlot8;
+  int deadStagedSlot9;
+  int deadStagedSlot10;
+  int deadStagedSlot11;
   int emit7Src1File;
   int emit7Src1Index;
   int emit7Src1Select;
@@ -2355,19 +2355,19 @@ int ffvpEmitDirectionalLight(programBuilder, lightIndex, isFirstLight, isLastLig
   undefined1 *tempAPtr;
   undefined1 *tempASelectPtr;
   undefined1 *tempEPtr;
-  int iVarS10;
-  int iVarS11;
+  int deadEmitFn12e4;
+  int deadStagedSlot11;
   int deadSrcTempFile;
-  int iVarS13;
-  int iVarS14;
-  int iVarS15;
+  int deadEmitFn12f0;
+  int deadTempBRegBase;
+  int deadEmitFn132c;
   int deadSelectConst;
-  int iVarS17;
-  int iVarS18;
-  int iVarS19;
-  int iVarS20;
-  int iVarS21;
-  int iVarS22;
+  int deadStagedSlot17;
+  int deadStagedSlot18;
+  int deadStagedSlot19;
+  int deadStagedSlot20;
+  int deadStagedSlot21;
+  int deadStagedSlot22;
   int emit7Src1Select;
   int emit8Src1File;
   int emit8Src1Index;
@@ -2379,8 +2379,8 @@ int ffvpEmitDirectionalLight(programBuilder, lightIndex, isFirstLight, isLastLig
   int emit11Src1Index;
   int emit11Src1Select;
   int src2Index;
-  int iVarS34;
-  int iVarS35;
+  int deadStagedSlot34;
+  int deadStagedSlot35;
   int emit15Src1File;
   int emit15Src1Index;
   int emit15Src1Select;
@@ -2393,10 +2393,10 @@ int ffvpEmitDirectionalLight(programBuilder, lightIndex, isFirstLight, isLastLig
   int emit3Src1File;
   int emit3Src1Index;
   int emit3Src2File;
-  int iVarS48;
-  int iVarS49;
-  int iVarS50;
-  int iVarS51;
+  int deadStagedSlot48;
+  int deadStagedSlot49;
+  int deadStagedSlot50;
+  int deadStagedSlot51;
   int srcTempFileArg;
   int emit9Src1Index;
   int emit9Src1Select;
@@ -2411,12 +2411,12 @@ int ffvpEmitDirectionalLight(programBuilder, lightIndex, isFirstLight, isLastLig
   int emit6Src2Index;
   int emit6Src2Select;
   int emit6Src2Negate;
-  int iVarS66;
-  int iVarS67;
+  int deadStagedSlot66;
+  int deadStagedSlot67;
   int srcTempFileArgB;
   int emit12Src1Index;
-  int iVarS70;
-  int iVarS71;
+  int deadStagedSlot70;
+  int deadStagedSlot71;
   
   lightRecord = programBuilder + 0xf8 + lightIndex * 0x3c;
   glCtxB = *(int *)(programBuilder + 0x3d4);
@@ -2574,7 +2574,7 @@ loopCallFfvpResolveFixedSource:
             ffvpResolveFixedSource(programBuilder,*lightRecCursorE,&materialFile,materialRegPtr,&materialSelect0);
             sideOffset = sideIndex * 0x28;
             sideIndex = sideIndex + 1;
-            iVarS15 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4908);
+            deadEmitFn132c = *(int *)((int)*(int *)((int)programBuilder + 980) + 4908);
             deadSelectConst = &swizzleWords5555_001dbdb4;
             emit6Src1Index = tempAReg;
             emit6Src1Select = tempASelectPtr;
@@ -2789,8 +2789,8 @@ emitTempScaleMul:
             materialRegPtr = &materialReg;
             tempBRegBase = &tempBReg;
             deadSrcTempFile = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-            iVarS13 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4848);
-            iVarS14 = &tempBReg;
+            deadEmitFn12f0 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4848);
+            deadTempBRegBase = &tempBReg;
             emit19Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
             emit19Src1Index = *(int *)((int)programBuilder + 1056);
             emit19Src1Negate = &onesWords4_001dbd94;
@@ -2799,7 +2799,7 @@ emitTempScaleMul:
             tempASelectPtr = tempASelect0;
             (**(code **)(((unsigned char *)0x000012e4) + glCtx))
                       (programBuilder,dstTempFile,tempCReg,tempCMask,srcFileInput,tempBReg,tempBSelect0,&zeroWords4_001fa5e8,srcFileInput,tempBReg,tempBSelect0,&zeroWords4_001fa5e8);
-            iVarS10 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+            deadEmitFn12e4 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
             emit21Src1Select = &swizzleWordsXYZ4_001dbd74;
             (**(code **)(((unsigned char *)0x000012e4) + glCtx))
                       (programBuilder,dstTempFile,tempDReg,tempDMask,srcFileInput,tempBReg,tempBSelect0,&zeroWords4_001fa5e8,src1File,(*(char *)(glCtx + 0x128) == '\0' ? (*(char *)(glCtx + 300) == '\0' ? (*(char *)(glCtx + 0x12a) == '\0' ? *(int *)(programBuilder + 4) : *(int *)(programBuilder + 0x448)) : *(int *)(programBuilder + 0x470)) : *(int *)(programBuilder + 0x498)),emit21Src1Select,&zeroWords4_001fa5e8);
@@ -2947,13 +2947,13 @@ int ffvpEmitLight(programBuilder, lightIndex, isFirstLight, isLastLight, needsSp
   undefined *constBase64;
   code *constBase60;
   int deadSrcTempFile;
-  int iVarS2;
-  int iVarS3;
+  int deadEmitFn12e4;
+  int deadSwizzleSelect0Ptr;
   int deadSrcTempFileB;
-  int iVarS5;
-  int iVarS6;
+  int deadEmitFn12e4B;
+  int deadEmitFn12e4C;
   int emit19Src1File;
-  int iVarS8;
+  int deadEmitFn12f0;
   int emit25Src1Index;
   int emit25Src1Negate;
   int emit1Src1File;
@@ -2983,7 +2983,7 @@ int ffvpEmitLight(programBuilder, lightIndex, isFirstLight, isLastLight, needsSp
   int emit36Src1Index;
   int emit36Src1Select;
   int emit36Src1Negate;
-  int iVarS38;
+  int deadStagedSlot38;
   int emit39Src1File;
   int emit39Src1Index;
   int emit39Src1Select;
@@ -3003,10 +3003,10 @@ int ffvpEmitLight(programBuilder, lightIndex, isFirstLight, isLastLight, needsSp
   int emit3Src2Negate;
   int emit22Src1Index;
   int emit22Src1Select;
-  int iVarS58;
-  int iVarS59;
-  int iVarS60;
-  int iVarS61;
+  int deadStagedSlot58;
+  int deadStagedSlot59;
+  int deadStagedSlot60;
+  int deadStagedSlot61;
   int emit12Src1File;
   int emit12Src1Index;
   int emit12Src1Select;
@@ -3022,8 +3022,8 @@ int ffvpEmitLight(programBuilder, lightIndex, isFirstLight, isLastLight, needsSp
   int emit30Src2Index;
   int emit30Src2Select;
   int emit30Src2Negate;
-  int iVarS77;
-  int iVarS78;
+  int deadStagedSlot77;
+  int deadStagedSlot78;
   int srcTempFileArgB;
   int emit40Src1Index;
   int emit40Src1Select;
@@ -3041,8 +3041,8 @@ int ffvpEmitLight(programBuilder, lightIndex, isFirstLight, isLastLight, needsSp
   int emit11Src1Index;
   int emit27Src1Select;
   int emit24Src1Select;
-  int iVarS96;
-  int iVarS97;
+  int deadStagedSlot96;
+  int deadStagedSlot97;
   
   if (programBuilder == 0) {
     return 1;
@@ -3221,8 +3221,8 @@ setSrcInputReg:
     swizzleSelect3 = 4;
     swizzleSelect0 = localViewer;
     deadSrcTempFile = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-    iVarS2 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
-    iVarS3 = &swizzleSelect0;
+    deadEmitFn12e4 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+    deadSwizzleSelect0Ptr = &swizzleSelect0;
     emit8Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
     emit8Src1Index = tempBReg;
     emit8Src1Select = &swizzleSelect0;
@@ -3255,7 +3255,7 @@ setSrcInputReg:
     }
     selectConstPtr = 0x000020d4 + (int)constBase64;
     deadSrcTempFileB = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
-    iVarS5 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+    deadEmitFn12e4B = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
     emit11Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 0);
     emit11Src1Index = tempAReg;
     (**(code **)(((unsigned char *)0x000012e4) + lightRecCursorC))
@@ -3403,7 +3403,7 @@ emitColorMad:
         swizzleSelect1 = 4;
         swizzleSelect3 = 4;
         swizzleSelect2 = 5;
-        iVarS8 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4848);
+        deadEmitFn12f0 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4848);
         emit24Src1Select = &swizzleSelect0;
         (**(code **)(((unsigned char *)0x000012f0) + lightRecCursorC))
                   (programBuilder,dstTempFile,tempGReg,tempGMask,srcTempFile,tempAReg,constBase60 + 0x3800,0x000020d4 + (int)constBase64,srcTempFile,tempAReg,emit24Src1Select,0x000020d4 + (int)constBase64);
@@ -3422,7 +3422,7 @@ emitColorMad:
       selectConstPtr = 0x000020d4 + (int)constBase64;
       (**(code **)(((unsigned char *)0x000012e4) + lightRecCursorC))
                 (programBuilder,dstTempFile,tempBReg,tempBMask,srcTempFile,tempGReg,tempGSelect0,selectConstPtr,srcTempFile,tempGReg,tempGSelect0,selectConstPtr);
-      iVarS6 = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
+      deadEmitFn12e4C = *(int *)((int)*(int *)((int)programBuilder + 980) + 4836);
       emit27Src1Select = (int)constBase74 + 14432;
       (**(code **)(((unsigned char *)0x000012e4) + lightRecCursorC))
                 (programBuilder,dstTempFile,tempFReg,tempFMask,srcTempFile,tempGReg,tempGSelect0,selectConstPtr,srcTempFile,(*(char *)(lightRecCursorC + 0x128) == '\0' ? (*(char *)(lightRecCursorC + 300) == '\0' ? *(int *)(programBuilder + 0x448) : *(int *)(programBuilder + 0x470)) : *(int *)(programBuilder + 0x498)),emit27Src1Select,selectConstPtr);
@@ -3734,15 +3734,15 @@ int ffvpEmitPointSizeAttenuation(programBuilder, sizeSource, useDistanceSquared)
   int deadSrcTempFileB;
   int deadEmitFnSlotB;
   int deadSelectPtr;
-  int iVarS6;
+  int deadSrc1File;
   int deadEmitFn12ec;
   int deadSelectConst;
   int deadSelectPtrB;
-  int iVarS10;
-  int iVarS11;
-  int iVarS12;
-  int iVarS13;
-  int iVarS14;
+  int deadSrc1Select;
+  int deadStagedSlot11;
+  int deadStagedSlot12;
+  int deadStagedSlot13;
+  int deadStagedSlot14;
   int emit1Src1File;
   int emit1Src1Index;
   int emit1Src1Select;
@@ -3810,7 +3810,7 @@ joined_r0x00099f10:
   srcTempFile = *fileTable;
   a4_00 = fileTable[1];
   if (sizeSource == 0) {
-    iVarS6 = *(int *)((int)*(int *)((int)programBuilder + 1004) + 8);
+    deadSrc1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 8);
     deadEmitFn12ec = *(int *)((int)*(int *)((int)programBuilder + 980) + 4844);
     deadSelectConst = &swizzleWordsZZZZ_001dbcf4;
     emit1Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 8);
@@ -3843,7 +3843,7 @@ joined_r0x00099f10:
       selectArrC2 = useDistanceSquared;
       selectArrC3 = useDistanceSquared;
       deadSelectPtrB = &tempAMask;
-      iVarS10 = (int)programBuilder + 1316;
+      deadSrc1Select = (int)programBuilder + 1316;
       emit2Src1Index = *(int *)((int)programBuilder + 1296);
       emit2Src1Select = (int)programBuilder + 1316;
       (**(code **)(((unsigned char *)0x000012ec) + glCtx))

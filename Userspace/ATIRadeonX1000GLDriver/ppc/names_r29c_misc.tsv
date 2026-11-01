@@ -1,0 +1,57 @@
+local	ffvpEmitBlendedClipPosition	iVarS7	deadSrc1Index	INFERRED	dead duplicate read of programBuilder+1376, same field as emit17Src1Index/src1IndexB a few lines later; never read back
+local	ffvpEmitBlendedClipPosition	iVarS10	deadSrc1IndexB	INFERRED	dead duplicate read of programBuilder+1376 in the else branch; never read back
+local	ffvpEmitProjectedPosition	iVarS12	deadSrc1Index	INFERRED	dead duplicate read of programBuilder+1016, same field as emit12Src1Index two lines later; never read back
+local	ffvpEmitTexCoordGen	iVarSa	texGenSrc1File	INFERRED	9th call argument per the #70 comment (rec[0] for genMode 1 / rec[4] for genMode 2); real use
+local	ffvpEmitTexCoordGen	iVarSb	texGenSrc1Index	INFERRED	10th call argument per the #70 comment (*(programBuilder+0x3f8) for genMode 1 / *programBuilder for genMode 2); real use
+local	ffvpEmitSceneColor	iVarS1	deadStagedSlot1	INFERRED	declared, never assigned or read anywhere in the function (ph.py's regex missed iVarS<N>, see project README)
+local	ffvpEmitSceneColor	iVarS2	deadStagedSlot2	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS3	deadStagedSlot3	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS4	deadStagedSlot4	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS5	deadStagedSlot5	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS6	deadStagedSlot6	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS7	deadStagedSlot7	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS8	deadStagedSlot8	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS9	deadStagedSlot9	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS10	deadStagedSlot10	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitSceneColor	iVarS11	deadStagedSlot11	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS10	deadEmitFn12e4	INFERRED	dead read of the programBuilder+980 callback table at offset 0x12e4, same slot as other named deadEmitFn12e4-family reads in this file
+local	ffvpEmitDirectionalLight	iVarS13	deadEmitFn12f0	INFERRED	dead read of the programBuilder+980 callback table at offset 0x12f0
+local	ffvpEmitDirectionalLight	iVarS14	deadTempBRegBase	INFERRED	dead duplicate of tempBRegBase = &tempBReg, assigned one line above
+local	ffvpEmitDirectionalLight	iVarS15	deadEmitFn132c	INFERRED	dead read of the programBuilder+980 callback table at offset 0x132c
+local	ffvpEmitDirectionalLight	iVarS11	deadStagedSlot11	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS17	deadStagedSlot17	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS18	deadStagedSlot18	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS19	deadStagedSlot19	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS20	deadStagedSlot20	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS21	deadStagedSlot21	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS22	deadStagedSlot22	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS34	deadStagedSlot34	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS35	deadStagedSlot35	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS48	deadStagedSlot48	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS49	deadStagedSlot49	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS50	deadStagedSlot50	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS51	deadStagedSlot51	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS66	deadStagedSlot66	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS67	deadStagedSlot67	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS70	deadStagedSlot70	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitDirectionalLight	iVarS71	deadStagedSlot71	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS2	deadEmitFn12e4	INFERRED	dead read of the programBuilder+980 callback table at offset 0x12e4
+local	ffvpEmitLight	iVarS3	deadSwizzleSelect0Ptr	INFERRED	dead copy of &swizzleSelect0
+local	ffvpEmitLight	iVarS5	deadEmitFn12e4B	INFERRED	dead read of the programBuilder+980 callback table at offset 0x12e4 (second call site)
+local	ffvpEmitLight	iVarS6	deadEmitFn12e4C	INFERRED	dead read of the programBuilder+980 callback table at offset 0x12e4 (third call site)
+local	ffvpEmitLight	iVarS8	deadEmitFn12f0	INFERRED	dead read of the programBuilder+980 callback table at offset 0x12f0
+local	ffvpEmitLight	iVarS38	deadStagedSlot38	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS58	deadStagedSlot58	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS59	deadStagedSlot59	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS60	deadStagedSlot60	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS61	deadStagedSlot61	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS77	deadStagedSlot77	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS78	deadStagedSlot78	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS96	deadStagedSlot96	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitLight	iVarS97	deadStagedSlot97	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitPointSizeAttenuation	iVarS6	deadSrc1File	INFERRED	dead duplicate read of (programBuilder+1004)+8, same field as emit1Src1File two lines later
+local	ffvpEmitPointSizeAttenuation	iVarS10	deadSrc1Select	INFERRED	dead duplicate of programBuilder+1316, same as emit2Src1Select one line later
+local	ffvpEmitPointSizeAttenuation	iVarS11	deadStagedSlot11	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitPointSizeAttenuation	iVarS12	deadStagedSlot12	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitPointSizeAttenuation	iVarS13	deadStagedSlot13	INFERRED	declared, never assigned or read anywhere in the function
+local	ffvpEmitPointSizeAttenuation	iVarS14	deadStagedSlot14	INFERRED	declared, never assigned or read anywhere in the function
