@@ -6235,7 +6235,7 @@ code_r0x000fed00:
       newBlockB = (uint *****)(blockAllocation + 1);
       Block__ctor_ea148(newBlockB,*(undefined4 *)(program + 8));
       blockAllocation[0x4c] = trailingToken;
-      blockAllocation[1] = ptrTo_ilBlockTemplateCase6e_001e8bd0 + 8;
+      blockAllocation[1] = ptrTo_FuncEndBlock__vtable_001e8bd0 + 8;
       currentBlock = newBlockB;
       Program__insertBlockAfter(program,previousBlock,newBlockB);
       Block__connect(previousBlock,currentBlock);

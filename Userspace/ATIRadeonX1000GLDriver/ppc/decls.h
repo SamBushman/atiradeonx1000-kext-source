@@ -6483,7 +6483,7 @@ extern unsigned char *ptrTo_ilTemplateCase23Kind0_001e8bc0;
 extern unsigned char *ptrTo_ilTemplateCase23Kind4_001e8bc4;
 extern unsigned char *ptrTo_descriptorLaneSelectTable_001e8bc8;
 extern unsigned char *ptrTo_ilTemplateCase21Kind3_001e8bcc;
-extern unsigned char *ptrTo_ilBlockTemplateCase6e_001e8bd0;
+extern unsigned char *ptrTo_FuncEndBlock__vtable_001e8bd0;
 extern unsigned char *ptrTo_ilDefaultTemplateTable_001e8bd4;
 extern unsigned char *ptrTo_ilTemplateCase6bDefault_001e8bd8;
 extern unsigned char *ptrTo_IRLoadVertex__vtable_001e8bdc;
