@@ -3374,6 +3374,10 @@ callPPCRuntimeCompilerSwizzleRegisterAV:
   return;
 }
 
+#define transferSel0_IDX 0
+#define transferSel1_IDX 1
+#define transferSel2_IDX 2
+#define transferSel3_IDX 3
 /* _PPCRuntimeCompilerBackupRegister @ 0x97bd8b14 (2144 bytes) */
 int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   int *compiler;
@@ -3484,15 +3488,15 @@ setVectorMode:
                ((selectByte = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x713), selectByte != '\x03' &&
                 (selectByte != -1)))))))) {
             _PPCRuntimeCompilerBuildTransferSwizzle
-                      (&transferSel[0],compiler + vectorRegIndex * 0xe + 0x1c4,&identitySwizzle);
-            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,&transferSel[0]);
+                      (&transferSel[transferSel0_IDX],compiler + vectorRegIndex * 0xe + 0x1c4,&identitySwizzle);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,&transferSel[transferSel0_IDX]);
             newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)
-                                                   ((int)compiler + (uint)transferSel[0] + vectorRecordOffset + 8),
+                                                   ((int)compiler + (uint)transferSel[transferSel0_IDX] + vectorRecordOffset + 8),
                                                   *(undefined1 *)
-                                                   ((int)compiler + (uint)transferSel[1] + vectorRecordOffset + 8)),
-                                         *(undefined1 *)((int)compiler + (uint)transferSel[2] + vectorRecordOffset + 8)
+                                                   ((int)compiler + (uint)transferSel[transferSel1_IDX] + vectorRecordOffset + 8)),
+                                         *(undefined1 *)((int)compiler + (uint)transferSel[transferSel2_IDX] + vectorRecordOffset + 8)
                                         ),
-                                *(undefined1 *)((int)compiler + (uint)transferSel[3] + vectorRecordOffset + 8));
+                                *(undefined1 *)((int)compiler + (uint)transferSel[transferSel3_IDX] + vectorRecordOffset + 8));
             compiler[vectorRegIndex * 0xe + 0x1c4] = newSwizzleWord;
           }
           if (((uint)regRecord[0x1c4] >> 8 != (regRecord[0x1c4] & 0xffffffU)) &&
@@ -3503,12 +3507,12 @@ setVectorMode:
                 (*(char *)((int)regRecord + 0x712) != -1)))) ||
               ((*(char *)((int)regRecord + 0x713) != '\x03' && (*(char *)((int)regRecord + 0x713) != -1)
                ))))) {
-            _PPCRuntimeCompilerBuildTransferSwizzle(&transferSel[0],regRecord + 0x1c4,&identitySwizzle);
-            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,loopIndex2,&transferSel[0]);
-            newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)regRecord + transferSel[0] + 0x710),
-                                                  *(undefined1 *)((int)regRecord + transferSel[1] + 0x710)),
-                                         *(undefined1 *)((int)regRecord + transferSel[2] + 0x710)),
-                                *(undefined1 *)((int)regRecord + transferSel[3] + 0x710));
+            _PPCRuntimeCompilerBuildTransferSwizzle(&transferSel[transferSel0_IDX],regRecord + 0x1c4,&identitySwizzle);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,loopIndex2,&transferSel[transferSel0_IDX]);
+            newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)regRecord + transferSel[transferSel0_IDX] + 0x710),
+                                                  *(undefined1 *)((int)regRecord + transferSel[transferSel1_IDX] + 0x710)),
+                                         *(undefined1 *)((int)regRecord + transferSel[transferSel2_IDX] + 0x710)),
+                                *(undefined1 *)((int)regRecord + transferSel[transferSel3_IDX] + 0x710));
             regRecord[0x1c4] = newSwizzleWord;
           }
           componentUsedFlags[3] = 0;
@@ -3701,6 +3705,10 @@ setCodeCursor2:
   return;
 }
 
+#undef transferSel0_IDX
+#undef transferSel1_IDX
+#undef transferSel2_IDX
+#undef transferSel3_IDX
 /* _PPCRuntimeCompilerSaveAllTemporariesToMemory @ 0x97bd9374 (120 bytes) */
 int _PPCRuntimeCompilerSaveAllTemporariesToMemory(compiler)
   int compiler;

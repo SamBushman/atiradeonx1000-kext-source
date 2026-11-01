@@ -4185,6 +4185,14 @@ setSrcPairIndex:
   return 0;
 }
 
+#define ilInstAOpcode_IDX 0
+#define ilInstADst_IDX 1
+#define ilInstADstMask_IDX 2
+#define ilInstASrc0_IDX 3
+#define ilInstASrc1_IDX 4
+#define ilInstASrc2_IDX 5
+#define ilInstASwz0_IDX 6
+#define ilInstASwz1_IDX 7
 /* fragmentTranslateRfl @ 0x44500 (1432 bytes) */
 int fragmentTranslateRfl(translator, slot, ilInstr)
   int translator;
@@ -4202,17 +4210,17 @@ int fragmentTranslateRfl(translator, slot, ilInstr)
   int *tokenDataPtrAddr;
   uint ilInstA [9];
   
-  _memset(&ilInstA[0],0,0x24);
+  _memset(&ilInstA[ilInstAOpcode_IDX],0,0x24);
   translatorError = *(int *)(translator + 0x24);
   tempRegister = (undefined2)*(undefined4 *)(translator + 0x20);
-  ilInstA[1] = CONCAT22(4,tempRegister);
-  ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),0x23);
-  ilInstA[2] = 0x55;
-  ilInstA[3] = *(undefined4 *)(ilInstr + 0xc);
-  ilInstA[6] = (undefined *)*(undefined4 *)(ilInstr + 0x18);
-  ilInstA[4] = *(undefined4 *)(ilInstr + 0x10);
-  ilInstA[7] = (undefined *)*(undefined4 *)(ilInstr + 0x1c);
-  ilInstA[1] = ilInstA[1] | 0x400000;
+  ilInstA[ilInstADst_IDX] = CONCAT22(4,tempRegister);
+  ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),0x23);
+  ilInstA[ilInstADstMask_IDX] = 0x55;
+  ilInstA[ilInstASrc0_IDX] = *(undefined4 *)(ilInstr + 0xc);
+  ilInstA[ilInstASwz0_IDX] = (undefined *)*(undefined4 *)(ilInstr + 0x18);
+  ilInstA[ilInstASrc1_IDX] = *(undefined4 *)(ilInstr + 0x10);
+  ilInstA[ilInstASwz1_IDX] = (undefined *)*(undefined4 *)(ilInstr + 0x1c);
+  ilInstA[ilInstADst_IDX] = ilInstA[ilInstADst_IDX] | 0x400000;
   if (translatorError == 0) {
     tokenDataPtrAddr = (int *)(translator + 0x28);
     tokenCount = *(int *)(translator + 0x2c);
@@ -4245,27 +4253,27 @@ int fragmentTranslateRfl(translator, slot, ilInstr)
       *(uint *)(translator + 0x30) = tokenCapacity;
       tokenCount = *(int *)(translator + 0x2c);
     }
-    recordPtr = &ilInstA[3];
+    recordPtr = &ilInstA[ilInstASrc0_IDX];
     *(int *)(translator + 0x2c) = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = ilInstA[0];
-    tokenWritePtr[1] = ilInstA[1];
-    tokenWritePtr[2] = ilInstA[2];
+    *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
     do {
       tokenWritePtr[3] = *recordPtr;
       recordWordNext = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (&ilInstA[5] != recordPtr);
+    } while (&ilInstA[ilInstASrc2_IDX] != recordPtr);
     tempRegister = (undefined2)*(undefined4 *)(translator + 0x20);
     translatorError = *(int *)(translator + 0x24);
   }
 setIlInstASrc0:
-  ilInstA[3] = CONCAT22(4,tempRegister);
-  ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),0x49);
-  ilInstA[6] = ((unsigned char *)0x00003210);
-  ilInstA[3] = ilInstA[3] | 0x400000;
+  ilInstA[ilInstASrc0_IDX] = CONCAT22(4,tempRegister);
+  ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),0x49);
+  ilInstA[ilInstASwz0_IDX] = ((unsigned char *)0x00003210);
+  ilInstA[ilInstASrc0_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
   if (translatorError == 0) {
     tokenDataPtrAddr = (int *)(translator + 0x28);
     tokenCount = *(int *)(translator + 0x2c);
@@ -4298,27 +4306,27 @@ setIlInstASrc0:
       *(uint *)(translator + 0x30) = tokenCapacity;
       tokenCount = *(int *)(translator + 0x2c);
     }
-    recordPtr = &ilInstA[3];
+    recordPtr = &ilInstA[ilInstASrc0_IDX];
     *(int *)(translator + 0x2c) = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = ilInstA[0];
-    tokenWritePtr[1] = ilInstA[1];
-    tokenWritePtr[2] = ilInstA[2];
+    *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
     do {
       tokenWritePtr[3] = *recordPtr;
       recordWordNext = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (&ilInstA[5] != recordPtr);
+    } while (&ilInstA[ilInstASrc2_IDX] != recordPtr);
     tempRegister = (undefined2)*(undefined4 *)(translator + 0x20);
     translatorError = *(int *)(translator + 0x24);
   }
 setIlInstASrc1:
-  ilInstA[4] = CONCAT22(4,tempRegister);
-  ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),3);
-  ilInstA[7] = ((unsigned char *)0x00003210);
-  ilInstA[4] = ilInstA[4] | 0x400000;
+  ilInstA[ilInstASrc1_IDX] = CONCAT22(4,tempRegister);
+  ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),3);
+  ilInstA[ilInstASwz1_IDX] = ((unsigned char *)0x00003210);
+  ilInstA[ilInstASrc1_IDX] = ilInstA[ilInstASrc1_IDX] | 0x400000;
   if (translatorError == 0) {
     tokenDataPtrAddr = (int *)(translator + 0x28);
     tokenCount = *(int *)(translator + 0x2c);
@@ -4350,27 +4358,27 @@ setIlInstASrc1:
       *(uint *)(translator + 0x30) = tokenCapacity;
       tokenCount = *(int *)(translator + 0x2c);
     }
-    recordPtr = &ilInstA[3];
+    recordPtr = &ilInstA[ilInstASrc0_IDX];
     *(int *)(translator + 0x2c) = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = ilInstA[0];
-    tokenWritePtr[1] = ilInstA[1];
-    tokenWritePtr[2] = ilInstA[2];
+    *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
     do {
       tokenWritePtr[3] = *recordPtr;
       recordWordNext = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (recordPtr != &ilInstA[5]);
+    } while (recordPtr != &ilInstA[ilInstASrc2_IDX]);
     translatorError = *(int *)(translator + 0x24);
   }
 setIlInstADst:
-  ilInstA[1] = *(undefined4 *)(ilInstr + 4);
-  ilInstA[2] = *(undefined4 *)(ilInstr + 8);
-  ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),0x5b);
-  ilInstA[6] = (undefined *)*(undefined4 *)(ilInstr + 0x18);
-  ilInstA[3] = *(undefined4 *)(ilInstr + 0xc);
+  ilInstA[ilInstADst_IDX] = *(undefined4 *)(ilInstr + 4);
+  ilInstA[ilInstADstMask_IDX] = *(undefined4 *)(ilInstr + 8);
+  ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),0x5b);
+  ilInstA[ilInstASwz0_IDX] = (undefined *)*(undefined4 *)(ilInstr + 0x18);
+  ilInstA[ilInstASrc0_IDX] = *(undefined4 *)(ilInstr + 0xc);
   if (translatorError == 0) {
     tokenDataPtrAddr = (int *)(translator + 0x28);
     tokenCount = *(int *)(translator + 0x2c);
@@ -4401,24 +4409,32 @@ setIlInstADst:
       *(uint *)(translator + 0x30) = tokenCapacity;
       tokenCount = *(int *)(translator + 0x2c);
     }
-    recordPtr = &ilInstA[3];
+    recordPtr = &ilInstA[ilInstASrc0_IDX];
     *(int *)(translator + 0x2c) = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = ilInstA[0];
-    tokenWritePtr[1] = ilInstA[1];
-    tokenWritePtr[2] = ilInstA[2];
+    *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
     do {
       tokenWritePtr[3] = *recordPtr;
       recordWordNext = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (recordPtr != &ilInstA[5]);
+    } while (recordPtr != &ilInstA[ilInstASrc2_IDX]);
     translatorError = *(int *)(translator + 0x24);
   }
   return translatorError;
 }
 
+#undef ilInstAOpcode_IDX
+#undef ilInstADst_IDX
+#undef ilInstADstMask_IDX
+#undef ilInstASrc0_IDX
+#undef ilInstASrc1_IDX
+#undef ilInstASrc2_IDX
+#undef ilInstASwz0_IDX
+#undef ilInstASwz1_IDX
 /* fragmentTranslateWhile @ 0x44ac0 (440 bytes) */
 int fragmentTranslateWhile(translator, slot, ilInstr)
   int translator;
@@ -4497,6 +4513,28 @@ storeTokenWritePtr:
   return 0;
 }
 
+#define ilInstAOpcode_IDX 0
+#define ilInstADst_IDX 1
+#define ilInstADstMask_IDX 2
+#define ilInstASrc0_IDX 3
+#define ilInstASrc1_IDX 4
+#define ilInstASrc2_IDX 5
+#define ilInstASwz0_IDX 6
+#define ilInstASwz1_IDX 7
+#define ilInstBOpcode_IDX 0
+#define ilInstBDst_IDX 1
+#define ilInstBDstMask_IDX 2
+#define ilInstBSrc0_IDX 3
+#define ilInstBSrc1_IDX 4
+#define ilInstBSrc2_IDX 5
+#define swizzleSlots_IDX 6
+#define ilInstCOpcode_IDX 0
+#define ilInstCDst_IDX 1
+#define ilInstCDstMask_IDX 2
+#define ilInstCSrc0_IDX 3
+#define ilInstCSrc2_IDX 5
+#define ilInstCSwz0_IDX 6
+#define ilInstCSwz2_IDX 8
 /* fragmentTranslateDsl @ 0x44c90 (2856 bytes) */
 int fragmentTranslateDsl(emitter, recordIndex)
   int *emitter;
@@ -4530,19 +4568,19 @@ int fragmentTranslateDsl(emitter, recordIndex)
   undefined1 srcSwizzle [4];
   
   opRecord = *emitter;
-  recordPtr = &ilInstA[3];
+  recordPtr = &ilInstA[ilInstASrc0_IDX];
   bufferCount = *(int *)(opRecord + 0x54);
-  _memset(&ilInstA[0],0,0x24);
+  _memset(&ilInstA[ilInstAOpcode_IDX],0,0x24);
   opRecord = opRecord + bufferCount * 8 + recordIndex * 8;
-  _memset(&ilInstB[0],0,0x24);
-  ilInstA[1] = CONCAT22(4,(short)emitter[8]);
-  ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),0x5b);
-  ilInstA[2] = 0x55;
-  ilInstA[1] = ilInstA[1] | 0x400000;
-  bufferCount = ((int (*)())fpilTranslateSource)(emitter,opRecord + 0x18,recordPtr,&ilInstA[6]);
+  _memset(&ilInstB[ilInstBOpcode_IDX],0,0x24);
+  ilInstA[ilInstADst_IDX] = CONCAT22(4,(short)emitter[8]);
+  ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),0x5b);
+  ilInstA[ilInstADstMask_IDX] = 0x55;
+  ilInstA[ilInstADst_IDX] = ilInstA[ilInstADst_IDX] | 0x400000;
+  bufferCount = ((int (*)())fpilTranslateSource)(emitter,opRecord + 0x18,recordPtr,&ilInstA[ilInstASwz0_IDX]);
   if (bufferCount == 0) {
-    ilInstA[7] = ((unsigned char *)0x00005555U);
-    ilInstA[4] = 0x440000;
+    ilInstA[ilInstASwz1_IDX] = ((unsigned char *)0x00005555U);
+    ilInstA[ilInstASrc1_IDX] = 0x440000;
     if (emitter[9] != 0) {
       return emitter[9];
     }
@@ -4571,9 +4609,9 @@ int fragmentTranslateDsl(emitter, recordIndex)
     }
     emitter[0xb] = bufferCount + 7;
     tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
-    *tokenWritePtr2 = ilInstA[0];
-    tokenWritePtr2[1] = ilInstA[1];
-    tokenWritePtr2[2] = ilInstA[2];
+    *tokenWritePtr2 = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr2[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr2[2] = ilInstA[ilInstADstMask_IDX];
     srcCursor = recordPtr;
     do {
       tokenWritePtr2[3] = *srcCursor;
@@ -4581,19 +4619,19 @@ int fragmentTranslateDsl(emitter, recordIndex)
       srcCursor = srcCursor + 1;
       tokenWritePtr2[4] = *recordWordNext;
       tokenWritePtr2 = tokenWritePtr2 + 2;
-    } while (&ilInstA[5] != srcCursor);
-    ilInstB[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstB[0]) + 0)),0xd);
-    ilInstB[1] = CONCAT22(4,(short)emitter[8] + 1);
-    ilInstB[3] = (undefined *)CONCAT22(4,(short)emitter[8]);
-    ilInstB[0] = ilInstB[0] & 0xc000ffff | 0x20000;
-    ilInstB[1] = ilInstB[1] | 0x400000;
-    ilInstB[2] = 0x55;
-    ilInstB[6] = ((unsigned char *)0x00003210);
-    ilInstB[7] = ((unsigned char *)0x00004454);
-    ilInstB[8] = ((unsigned char *)0x00004445);
-    ilInstB[3] = (undefined *)((uint)ilInstB[3] | 0x400000);
-    ilInstB[4] = 0x440000;
-    ilInstB[5] = 0x440000;
+    } while (&ilInstA[ilInstASrc2_IDX] != srcCursor);
+    ilInstB[ilInstBOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstB[ilInstBOpcode_IDX]) + 0)),0xd);
+    ilInstB[ilInstBDst_IDX] = CONCAT22(4,(short)emitter[8] + 1);
+    ilInstB[ilInstBSrc0_IDX] = (undefined *)CONCAT22(4,(short)emitter[8]);
+    ilInstB[ilInstBOpcode_IDX] = ilInstB[ilInstBOpcode_IDX] & 0xc000ffff | 0x20000;
+    ilInstB[ilInstBDst_IDX] = ilInstB[ilInstBDst_IDX] | 0x400000;
+    ilInstB[ilInstBDstMask_IDX] = 0x55;
+    ilInstB[swizzleSlots_IDX] = ((unsigned char *)0x00003210);
+    ilInstB[swizzleSlots_IDX + 1] = ((unsigned char *)0x00004454);
+    ilInstB[swizzleSlots_IDX + 2] = ((unsigned char *)0x00004445);
+    ilInstB[ilInstBSrc0_IDX] = (undefined *)((uint)ilInstB[ilInstBSrc0_IDX] | 0x400000);
+    ilInstB[ilInstBSrc1_IDX] = 0x440000;
+    ilInstB[ilInstBSrc2_IDX] = 0x440000;
     if (emitter[9] != 0) {
       return emitter[9];
     }
@@ -4619,12 +4657,12 @@ int fragmentTranslateDsl(emitter, recordIndex)
       emitter[0xc] = capacity;
       bufferCount = emitter[0xb];
     }
-    recordPtr3 = (undefined **)&ilInstB[3];
+    recordPtr3 = (undefined **)&ilInstB[ilInstBSrc0_IDX];
     emitter[0xb] = bufferCount + 9;
     tokenWritePtr3 = (uint *)(bufferCount * 4 + *bufferDataPtr);
-    *tokenWritePtr3 = ilInstB[0];
-    tokenWritePtr3[1] = ilInstB[1];
-    tokenWritePtr3[2] = ilInstB[2];
+    *tokenWritePtr3 = ilInstB[ilInstBOpcode_IDX];
+    tokenWritePtr3[1] = ilInstB[ilInstBDst_IDX];
+    tokenWritePtr3[2] = ilInstB[ilInstBDstMask_IDX];
     swizzleCursor = recordPtr3;
     do {
       tokenWritePtr3[3] = (uint)*swizzleCursor;
@@ -4632,11 +4670,11 @@ int fragmentTranslateDsl(emitter, recordIndex)
       swizzleCursor = swizzleCursor + 1;
       tokenWritePtr3[4] = (uint)*recordWordNext2;
       tokenWritePtr3 = tokenWritePtr3 + 2;
-    } while ((&ilInstB[6]) != swizzleCursor);
+    } while ((&ilInstB[swizzleSlots_IDX]) != swizzleCursor);
     if (1 < (*(uint *)(opRecord + 4) >> 0x1a & 3)) {
-      ilInstA[3] = CONCAT22(4,(short)emitter[8]);
-      ilInstA[6] = ((unsigned char *)0x00003210);
-      ilInstA[3] = ilInstA[3] | 0x400000;
+      ilInstA[ilInstASrc0_IDX] = CONCAT22(4,(short)emitter[8]);
+      ilInstA[ilInstASwz0_IDX] = ((unsigned char *)0x00003210);
+      ilInstA[ilInstASrc0_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
       if (emitter[9] != 0) {
         return emitter[9];
       }
@@ -4664,9 +4702,9 @@ int fragmentTranslateDsl(emitter, recordIndex)
       }
       emitter[0xb] = bufferCount + 7;
       tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
-      *tokenWritePtr2 = ilInstA[0];
-      tokenWritePtr2[1] = ilInstA[1];
-      tokenWritePtr2[2] = ilInstA[2];
+      *tokenWritePtr2 = ilInstA[ilInstAOpcode_IDX];
+      tokenWritePtr2[1] = ilInstA[ilInstADst_IDX];
+      tokenWritePtr2[2] = ilInstA[ilInstADstMask_IDX];
       srcCursor = recordPtr;
       do {
         tokenWritePtr2[3] = *srcCursor;
@@ -4674,11 +4712,11 @@ int fragmentTranslateDsl(emitter, recordIndex)
         srcCursor = srcCursor + 1;
         tokenWritePtr2[4] = *recordWordNext;
         tokenWritePtr2 = tokenWritePtr2 + 2;
-      } while (&ilInstA[5] != srcCursor);
-      ilInstB[5] = CONCAT22(4,(short)emitter[8] + 1);
-      ilInstB[7] = (undefined *)((uint)ilInstB[7] & 0xfffff88f | 0x540);
-      ilInstB[8] = ((unsigned char *)0x00003210);
-      ilInstB[5] = ilInstB[5] | 0x400000;
+      } while (&ilInstA[ilInstASrc2_IDX] != srcCursor);
+      ilInstB[ilInstBSrc2_IDX] = CONCAT22(4,(short)emitter[8] + 1);
+      ilInstB[swizzleSlots_IDX + 1] = (undefined *)((uint)ilInstB[swizzleSlots_IDX + 1] & 0xfffff88f | 0x540);
+      ilInstB[swizzleSlots_IDX + 2] = ((unsigned char *)0x00003210);
+      ilInstB[ilInstBSrc2_IDX] = ilInstB[ilInstBSrc2_IDX] | 0x400000;
       if (emitter[9] != 0) {
         return emitter[9];
       }
@@ -4706,9 +4744,9 @@ int fragmentTranslateDsl(emitter, recordIndex)
       }
       emitter[0xb] = bufferCount + 9;
       tokenWritePtr3 = (uint *)(bufferCount * 4 + *bufferDataPtr);
-      *tokenWritePtr3 = ilInstB[0];
-      tokenWritePtr3[1] = ilInstB[1];
-      tokenWritePtr3[2] = ilInstB[2];
+      *tokenWritePtr3 = ilInstB[ilInstBOpcode_IDX];
+      tokenWritePtr3[1] = ilInstB[ilInstBDst_IDX];
+      tokenWritePtr3[2] = ilInstB[ilInstBDstMask_IDX];
       swizzleCursor = recordPtr3;
       do {
         tokenWritePtr3[3] = (uint)*swizzleCursor;
@@ -4716,7 +4754,7 @@ int fragmentTranslateDsl(emitter, recordIndex)
         swizzleCursor = swizzleCursor + 1;
         tokenWritePtr3[4] = (uint)*recordWordNext2;
         tokenWritePtr3 = tokenWritePtr3 + 2;
-      } while ((&ilInstB[6]) != swizzleCursor);
+      } while ((&ilInstB[swizzleSlots_IDX]) != swizzleCursor);
       if ((*(uint *)(opRecord + 4) & 0xc000000) == 0xc000000) {
         if (emitter[9] != 0) {
           return emitter[9];
@@ -4745,17 +4783,17 @@ int fragmentTranslateDsl(emitter, recordIndex)
         }
         emitter[0xb] = bufferCount + 7;
         tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
-        *tokenWritePtr2 = ilInstA[0];
-        tokenWritePtr2[1] = ilInstA[1];
-        tokenWritePtr2[2] = ilInstA[2];
+        *tokenWritePtr2 = ilInstA[ilInstAOpcode_IDX];
+        tokenWritePtr2[1] = ilInstA[ilInstADst_IDX];
+        tokenWritePtr2[2] = ilInstA[ilInstADstMask_IDX];
         do {
           tokenWritePtr2[3] = *recordPtr;
           recordWordNext3 = recordPtr + 3;
           recordPtr = recordPtr + 1;
           tokenWritePtr2[4] = *recordWordNext3;
           tokenWritePtr2 = tokenWritePtr2 + 2;
-        } while (&ilInstA[5] != recordPtr);
-        ilInstB[7] = (undefined *)((uint)ilInstB[7] & 0xffff88ff | 0x5400);
+        } while (&ilInstA[ilInstASrc2_IDX] != recordPtr);
+        ilInstB[swizzleSlots_IDX + 1] = (undefined *)((uint)ilInstB[swizzleSlots_IDX + 1] & 0xffff88ff | 0x5400);
         if (emitter[9] != 0) {
           return emitter[9];
         }
@@ -4783,26 +4821,26 @@ int fragmentTranslateDsl(emitter, recordIndex)
         }
         emitter[0xb] = bufferCount + 9;
         tokenWritePtr3 = (uint *)(bufferCount * 4 + *bufferDataPtr);
-        *tokenWritePtr3 = ilInstB[0];
-        tokenWritePtr3[1] = ilInstB[1];
-        tokenWritePtr3[2] = ilInstB[2];
+        *tokenWritePtr3 = ilInstB[ilInstBOpcode_IDX];
+        tokenWritePtr3[1] = ilInstB[ilInstBDst_IDX];
+        tokenWritePtr3[2] = ilInstB[ilInstBDstMask_IDX];
         do {
           tokenWritePtr3[3] = (uint)*recordPtr3;
           recordWordNext4 = recordPtr3 + 3;
           recordPtr3 = recordPtr3 + 1;
           tokenWritePtr3[4] = (uint)*recordWordNext4;
           tokenWritePtr3 = tokenWritePtr3 + 2;
-        } while ((&ilInstB[6]) != recordPtr3);
+        } while ((&ilInstB[swizzleSlots_IDX]) != recordPtr3);
       }
     }
-    _memset(&ilInstC[0],0,0x24);
-    ilInstC[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstC[0]) + 0)),0xd);
-    ilInstB[0] = ilInstB[0] & 0xc000ffff | 0x30000;
-    bufferCount = ((int (*)())fpilTranslateDestination)(emitter,opRecord + 8,&ilInstC[1],&ilInstC[2],*(uint *)(opRecord + 4) >> 0x14 & 1);
+    _memset(&ilInstC[ilInstCOpcode_IDX],0,0x24);
+    ilInstC[ilInstCOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstC[ilInstCOpcode_IDX]) + 0)),0xd);
+    ilInstB[ilInstBOpcode_IDX] = ilInstB[ilInstBOpcode_IDX] & 0xc000ffff | 0x30000;
+    bufferCount = ((int (*)())fpilTranslateDestination)(emitter,opRecord + 8,&ilInstC[ilInstCDst_IDX],&ilInstC[ilInstCDstMask_IDX],*(uint *)(opRecord + 4) >> 0x14 & 1);
     if (bufferCount == 0) {
-      ilInstC[3] = (undefined *)CONCAT22(4,(short)emitter[8] + 1);
-      ilInstC[6] = ((unsigned char *)0x00003210);
-      ilInstC[3] = (undefined *)((uint)ilInstC[3] | 0x400000);
+      ilInstC[ilInstCSrc0_IDX] = (undefined *)CONCAT22(4,(short)emitter[8] + 1);
+      ilInstC[ilInstCSwz0_IDX] = ((unsigned char *)0x00003210);
+      ilInstC[ilInstCSrc0_IDX] = (undefined *)((uint)ilInstC[ilInstCSrc0_IDX] | 0x400000);
       bufferCount = ((int (*)())fpilTranslateSource)(emitter,opRecord + 0x10,srcToken,srcSwizzle);
       if (bufferCount == 0) {
         bufferCount = ((int (*)())fpilBuildDestinationToken)(emitter,opRecord + 8,dstTokenHeader,dstMask,0);
@@ -4825,8 +4863,8 @@ int fragmentTranslateDsl(emitter, recordIndex)
             ((int (*)())fpilSetComponentSelect)(3,capacity >> 2 & 3,&composedSwizzle);
           }
           bufferCount = emitter[9];
-          ilInstC[5] = dstRegister | 0x440000;
-          ilInstC[8] = composedSwizzle;
+          ilInstC[ilInstCSrc2_IDX] = dstRegister | 0x440000;
+          ilInstC[ilInstCSwz2_IDX] = composedSwizzle;
         }
         else {
           bufferCount = emitter[9];
@@ -4863,19 +4901,19 @@ checkEmitter:
           emitter[0xc] = capacity;
           bufferCount = emitter[0xb];
         }
-        recordPtr2 = (undefined **)&ilInstC[3];
+        recordPtr2 = (undefined **)&ilInstC[ilInstCSrc0_IDX];
         emitter[0xb] = bufferCount + 9;
         tokenWritePtr = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
-        *tokenWritePtr = ilInstC[0];
-        tokenWritePtr[1] = ilInstC[1];
-        tokenWritePtr[2] = ilInstC[2];
+        *tokenWritePtr = ilInstC[ilInstCOpcode_IDX];
+        tokenWritePtr[1] = ilInstC[ilInstCDst_IDX];
+        tokenWritePtr[2] = ilInstC[ilInstCDstMask_IDX];
         do {
           tokenWritePtr[3] = *recordPtr2;
           recordWordNext5 = recordPtr2 + 3;
           recordPtr2 = recordPtr2 + 1;
           tokenWritePtr[4] = *recordWordNext5;
           tokenWritePtr = tokenWritePtr + 2;
-        } while (&ilInstC[6] != recordPtr2);
+        } while (&ilInstC[ilInstCSwz0_IDX] != recordPtr2);
         return 0;
       }
     }
@@ -4883,6 +4921,45 @@ checkEmitter:
   return emitter[9];
 }
 
+#undef ilInstAOpcode_IDX
+#undef ilInstADst_IDX
+#undef ilInstADstMask_IDX
+#undef ilInstASrc0_IDX
+#undef ilInstASrc1_IDX
+#undef ilInstASrc2_IDX
+#undef ilInstASwz0_IDX
+#undef ilInstASwz1_IDX
+#undef ilInstBOpcode_IDX
+#undef ilInstBDst_IDX
+#undef ilInstBDstMask_IDX
+#undef ilInstBSrc0_IDX
+#undef ilInstBSrc1_IDX
+#undef ilInstBSrc2_IDX
+#undef swizzleSlots_IDX
+#undef ilInstCOpcode_IDX
+#undef ilInstCDst_IDX
+#undef ilInstCDstMask_IDX
+#undef ilInstCSrc0_IDX
+#undef ilInstCSrc2_IDX
+#undef ilInstCSwz0_IDX
+#undef ilInstCSwz2_IDX
+#define ilInstAOpcode_IDX 0
+#define ilInstADst_IDX 1
+#define ilInstADstMask_IDX 2
+#define ilInstASrc0_IDX 3
+#define ilInstASrc1_IDX 4
+#define ilInstASrc2_IDX 5
+#define ilInstASwz0_IDX 6
+#define ilInstASwz1_IDX 7
+#define ilInstBOpcode_IDX 0
+#define ilInstBDst_IDX 1
+#define ilInstBDstMask_IDX 2
+#define ilInstBSrc0_IDX 3
+#define ilInstBSrc1_IDX 4
+#define ilInstBSrc2_IDX 5
+#define ilInstBSwz0_IDX 6
+#define ilInstBSwz1_IDX 7
+#define ilInstBSwz2_IDX 8
 /* fragmentTranslateSel @ 0x457f0 (2412 bytes) */
 int fragmentTranslateSel(emitter, recordIndex)
   int *emitter;
@@ -4918,9 +4995,9 @@ int fragmentTranslateSel(emitter, recordIndex)
   
   opRecord = *emitter;
   bufferCount = *(int *)(opRecord + 0x54);
-  _memset(&ilInstA[0],0,0x24);
+  _memset(&ilInstA[ilInstAOpcode_IDX],0,0x24);
   opRecord = opRecord + bufferCount * 8 + recordIndex * 8;
-  _memset(&ilInstB[0],0,0x24);
+  _memset(&ilInstB[ilInstBOpcode_IDX],0,0x24);
   bufferCount = ((int (*)())fpilTranslateDestination)(emitter,opRecord + 8,&translatedDst,&translatedDstMask,*(uint *)(opRecord + 4) >> 0x14 & 1);
   if (bufferCount != 0) {
 loopReturnEmitter:
@@ -4929,15 +5006,15 @@ loopReturnEmitter:
   srcRecordPtr = (uint *)(opRecord + 0x10);
   bufferCount = ((int (*)())fpilTranslateSource)(emitter,srcRecordPtr,&translatedSrcToken,&translatedSrcSwizzle);
   if (bufferCount != 0) goto loopReturnEmitter;
-  recordPtr = &ilInstA[3];
-  ilInstA[1] = CONCAT22(4,(short)emitter[8]);
-  ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),0x5b);
-  ilInstA[2] = 0x55;
-  ilInstA[1] = ilInstA[1] | 0x400000;
-  bufferCount = ((int (*)())fpilTranslateSource)(emitter,opRecord + 0x18,recordPtr,&ilInstA[6]);
+  recordPtr = &ilInstA[ilInstASrc0_IDX];
+  ilInstA[ilInstADst_IDX] = CONCAT22(4,(short)emitter[8]);
+  ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),0x5b);
+  ilInstA[ilInstADstMask_IDX] = 0x55;
+  ilInstA[ilInstADst_IDX] = ilInstA[ilInstADst_IDX] | 0x400000;
+  bufferCount = ((int (*)())fpilTranslateSource)(emitter,opRecord + 0x18,recordPtr,&ilInstA[ilInstASwz0_IDX]);
   if (bufferCount != 0) goto loopReturnEmitter;
-  ilInstA[7] = ((unsigned char *)0x00005555U);
-  ilInstA[4] = 0x440000;
+  ilInstA[ilInstASwz1_IDX] = ((unsigned char *)0x00005555U);
+  ilInstA[ilInstASrc1_IDX] = 0x440000;
   if (emitter[9] != 0) {
     return emitter[9];
   }
@@ -4966,9 +5043,9 @@ loopReturnEmitter:
   }
   emitter[0xb] = bufferCount + 7;
   tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
-  *tokenWritePtr2 = ilInstA[0];
-  tokenWritePtr2[1] = ilInstA[1];
-  tokenWritePtr2[2] = ilInstA[2];
+  *tokenWritePtr2 = ilInstA[ilInstAOpcode_IDX];
+  tokenWritePtr2[1] = ilInstA[ilInstADst_IDX];
+  tokenWritePtr2[2] = ilInstA[ilInstADstMask_IDX];
   srcCursor = recordPtr;
   do {
     tokenWritePtr2[3] = *srcCursor;
@@ -4976,34 +5053,34 @@ loopReturnEmitter:
     srcCursor = srcCursor + 1;
     tokenWritePtr2[4] = *recordWordNext;
     tokenWritePtr2 = tokenWritePtr2 + 2;
-  } while (&ilInstA[5] != srcCursor);
-  ilInstB[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstB[0]) + 0)),0xd);
-  ilInstB[0] = ilInstB[0] & 0xc000ffff | 0x20000;
+  } while (&ilInstA[ilInstASrc2_IDX] != srcCursor);
+  ilInstB[ilInstBOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstB[ilInstBOpcode_IDX]) + 0)),0xd);
+  ilInstB[ilInstBOpcode_IDX] = ilInstB[ilInstBOpcode_IDX] & 0xc000ffff | 0x20000;
   if ((*srcRecordPtr & 0x3000) == 0x1000) {
     tempRegister = (short)emitter[8];
-    ilInstB[1] = translatedDst;
-    ilInstB[2] = translatedDstMask;
+    ilInstB[ilInstBDst_IDX] = translatedDst;
+    ilInstB[ilInstBDstMask_IDX] = translatedDstMask;
   }
   else {
     tempRegister = (short)emitter[8];
-    ilInstB[1] = CONCAT22(4,tempRegister + 1);
-    ilInstB[2] = 0x55;
-    ilInstB[1] = ilInstB[1] | 0x400000;
+    ilInstB[ilInstBDst_IDX] = CONCAT22(4,tempRegister + 1);
+    ilInstB[ilInstBDstMask_IDX] = 0x55;
+    ilInstB[ilInstBDst_IDX] = ilInstB[ilInstBDst_IDX] | 0x400000;
   }
   select1 = translatedSrcSwizzle >> 4 & 7;
   negate1 = translatedSrcSwizzle >> 7 & 1;
-  ilInstB[3] = (undefined *)CONCAT22(4,tempRegister);
+  ilInstB[ilInstBSrc0_IDX] = (undefined *)CONCAT22(4,tempRegister);
   capacity = translatedSrcSwizzle >> 3 & 1;
-  ilInstB[6] = ((unsigned char *)0x00003210);
-  ilInstB[5] = translatedSrcToken;
-  ilInstB[8] = (undefined *)
+  ilInstB[ilInstBSwz0_IDX] = ((unsigned char *)0x00003210);
+  ilInstB[ilInstBSrc2_IDX] = translatedSrcToken;
+  ilInstB[ilInstBSwz2_IDX] = (undefined *)
              (capacity << 0xf |
              (translatedSrcSwizzle & 7) << 0xc |
              capacity << 0xb |
              (translatedSrcSwizzle & 7) << 8 | capacity << 7 | (translatedSrcSwizzle & 7) << 4 | translatedSrcSwizzle & 0xffff000f);
-  ilInstB[4] = translatedSrcToken;
-  ilInstB[3] = (undefined *)((uint)ilInstB[3] | 0x400000);
-  ilInstB[7] = negate1 << 0xf |
+  ilInstB[ilInstBSrc1_IDX] = translatedSrcToken;
+  ilInstB[ilInstBSrc0_IDX] = (undefined *)((uint)ilInstB[ilInstBSrc0_IDX] | 0x400000);
+  ilInstB[ilInstBSwz1_IDX] = negate1 << 0xf |
              select1 << 0xc |
              negate1 << 0xb |
              select1 << 8 | negate1 << 7 | select1 << 4 | negate1 << 3 | translatedSrcSwizzle & 0xffff0000 | select1;
@@ -5032,12 +5109,12 @@ loopReturnEmitter:
     emitter[0xc] = capacity;
     bufferCount = emitter[0xb];
   }
-  recordPtr2 = (undefined **)&ilInstB[3];
+  recordPtr2 = (undefined **)&ilInstB[ilInstBSrc0_IDX];
   emitter[0xb] = bufferCount + 9;
   tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
-  *tokenWritePtr = ilInstB[0];
-  tokenWritePtr[1] = ilInstB[1];
-  tokenWritePtr[2] = ilInstB[2];
+  *tokenWritePtr = ilInstB[ilInstBOpcode_IDX];
+  tokenWritePtr[1] = ilInstB[ilInstBDst_IDX];
+  tokenWritePtr[2] = ilInstB[ilInstBDstMask_IDX];
   swizzleCursor = recordPtr2;
   do {
     tokenWritePtr[3] = (uint)*swizzleCursor;
@@ -5045,11 +5122,11 @@ loopReturnEmitter:
     swizzleCursor = swizzleCursor + 1;
     tokenWritePtr[4] = (uint)*recordWordNext2;
     tokenWritePtr = tokenWritePtr + 2;
-  } while (&ilInstB[6] != swizzleCursor);
+  } while (&ilInstB[ilInstBSwz0_IDX] != swizzleCursor);
   if (1 < (*srcRecordPtr >> 0xc & 3)) {
-    ilInstA[3] = CONCAT22(4,(short)emitter[8]);
-    ilInstA[6] = ((unsigned char *)0x00003210);
-    ilInstA[3] = ilInstA[3] | 0x400000;
+    ilInstA[ilInstASrc0_IDX] = CONCAT22(4,(short)emitter[8]);
+    ilInstA[ilInstASwz0_IDX] = ((unsigned char *)0x00003210);
+    ilInstA[ilInstASrc0_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
     if (emitter[9] != 0) {
       return emitter[9];
     }
@@ -5077,9 +5154,9 @@ loopReturnEmitter:
     }
     emitter[0xb] = bufferCount + 7;
     tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
-    *tokenWritePtr2 = ilInstA[0];
-    tokenWritePtr2[1] = ilInstA[1];
-    tokenWritePtr2[2] = ilInstA[2];
+    *tokenWritePtr2 = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr2[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr2[2] = ilInstA[ilInstADstMask_IDX];
     srcCursor = recordPtr;
     do {
       tokenWritePtr2[3] = *srcCursor;
@@ -5087,20 +5164,20 @@ loopReturnEmitter:
       srcCursor = srcCursor + 1;
       tokenWritePtr2[4] = *recordWordNext;
       tokenWritePtr2 = tokenWritePtr2 + 2;
-    } while (&ilInstA[5] != srcCursor);
+    } while (&ilInstA[ilInstASrc2_IDX] != srcCursor);
     if ((*srcRecordPtr & 0x3000) == 0x2000) {
-      ilInstB[1] = translatedDst;
-      ilInstB[2] = translatedDstMask;
+      ilInstB[ilInstBDst_IDX] = translatedDst;
+      ilInstB[ilInstBDstMask_IDX] = translatedDstMask;
     }
     capacity = translatedSrcSwizzle >> 8 & 7;
     negate2 = translatedSrcSwizzle >> 0xb & 1;
-    ilInstB[5] = CONCAT22(4,(short)emitter[8] + 1);
-    ilInstB[8] = ((unsigned char *)0x00003210);
-    ilInstB[5] = ilInstB[5] | 0x400000;
-    ilInstB[7] = negate2 << 0xf |
+    ilInstB[ilInstBSrc2_IDX] = CONCAT22(4,(short)emitter[8] + 1);
+    ilInstB[ilInstBSwz2_IDX] = ((unsigned char *)0x00003210);
+    ilInstB[ilInstBSrc2_IDX] = ilInstB[ilInstBSrc2_IDX] | 0x400000;
+    ilInstB[ilInstBSwz1_IDX] = negate2 << 0xf |
                capacity << 0xc |
                negate2 << 0xb |
-               capacity << 8 | negate2 << 7 | capacity << 4 | negate2 << 3 | capacity | ilInstB[7] & 0xffff0000;
+               capacity << 8 | negate2 << 7 | capacity << 4 | negate2 << 3 | capacity | ilInstB[ilInstBSwz1_IDX] & 0xffff0000;
     if (emitter[9] != 0) {
       return emitter[9];
     }
@@ -5128,9 +5205,9 @@ loopReturnEmitter:
     }
     emitter[0xb] = bufferCount + 9;
     tokenWritePtr = (uint *)(bufferCount * 4 + *bufferDataPtr);
-    *tokenWritePtr = ilInstB[0];
-    tokenWritePtr[1] = ilInstB[1];
-    tokenWritePtr[2] = ilInstB[2];
+    *tokenWritePtr = ilInstB[ilInstBOpcode_IDX];
+    tokenWritePtr[1] = ilInstB[ilInstBDst_IDX];
+    tokenWritePtr[2] = ilInstB[ilInstBDstMask_IDX];
     swizzleCursor = recordPtr2;
     do {
       tokenWritePtr[3] = (uint)*swizzleCursor;
@@ -5138,7 +5215,7 @@ loopReturnEmitter:
       swizzleCursor = swizzleCursor + 1;
       tokenWritePtr[4] = (uint)*recordWordNext2;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (&ilInstB[6] != swizzleCursor);
+    } while (&ilInstB[ilInstBSwz0_IDX] != swizzleCursor);
     if ((*srcRecordPtr & 0x3000) != 0x3000) {
       return 0;
     }
@@ -5169,24 +5246,24 @@ loopReturnEmitter:
     }
     emitter[0xb] = bufferCount + 7;
     tokenWritePtr2 = (undefined4 *)(bufferCount * 4 + *bufferDataPtr);
-    *tokenWritePtr2 = ilInstA[0];
-    tokenWritePtr2[1] = ilInstA[1];
-    tokenWritePtr2[2] = ilInstA[2];
+    *tokenWritePtr2 = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr2[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr2[2] = ilInstA[ilInstADstMask_IDX];
     do {
       tokenWritePtr2[3] = *recordPtr;
       recordWordNext3 = recordPtr + 3;
       recordPtr = recordPtr + 1;
       tokenWritePtr2[4] = *recordWordNext3;
       tokenWritePtr2 = tokenWritePtr2 + 2;
-    } while (&ilInstA[5] != recordPtr);
+    } while (&ilInstA[ilInstASrc2_IDX] != recordPtr);
     select3 = translatedSrcSwizzle >> 0xc & 7;
     capacity = translatedSrcSwizzle >> 0xf & 1;
-    ilInstB[1] = translatedDst;
-    ilInstB[2] = translatedDstMask;
-    ilInstB[7] = capacity << 0xf |
+    ilInstB[ilInstBDst_IDX] = translatedDst;
+    ilInstB[ilInstBDstMask_IDX] = translatedDstMask;
+    ilInstB[ilInstBSwz1_IDX] = capacity << 0xf |
                select3 << 0xc |
                capacity << 0xb |
-               select3 << 8 | capacity << 7 | select3 << 4 | capacity << 3 | select3 | ilInstB[7] & 0xffff0000;
+               select3 << 8 | capacity << 7 | select3 << 4 | capacity << 3 | select3 | ilInstB[ilInstBSwz1_IDX] & 0xffff0000;
     if (emitter[9] != 0) {
       return emitter[9];
     }
@@ -5221,20 +5298,45 @@ checkEmitter:
     }
     emitter[0xb] = bufferCount + 9;
     tokenWritePtr3 = (uint *)(bufferCount * 4 + *bufferDataPtr);
-    *tokenWritePtr3 = ilInstB[0];
-    tokenWritePtr3[1] = ilInstB[1];
-    tokenWritePtr3[2] = ilInstB[2];
+    *tokenWritePtr3 = ilInstB[ilInstBOpcode_IDX];
+    tokenWritePtr3[1] = ilInstB[ilInstBDst_IDX];
+    tokenWritePtr3[2] = ilInstB[ilInstBDstMask_IDX];
     do {
       tokenWritePtr3[3] = (uint)*recordPtr2;
       recordWordNext4 = recordPtr2 + 3;
       recordPtr2 = recordPtr2 + 1;
       tokenWritePtr3[4] = (uint)*recordWordNext4;
       tokenWritePtr3 = tokenWritePtr3 + 2;
-    } while (recordPtr2 != &ilInstB[6]);
+    } while (recordPtr2 != &ilInstB[ilInstBSwz0_IDX]);
   }
   return 0;
 }
 
+#undef ilInstAOpcode_IDX
+#undef ilInstADst_IDX
+#undef ilInstADstMask_IDX
+#undef ilInstASrc0_IDX
+#undef ilInstASrc1_IDX
+#undef ilInstASrc2_IDX
+#undef ilInstASwz0_IDX
+#undef ilInstASwz1_IDX
+#undef ilInstBOpcode_IDX
+#undef ilInstBDst_IDX
+#undef ilInstBDstMask_IDX
+#undef ilInstBSrc0_IDX
+#undef ilInstBSrc1_IDX
+#undef ilInstBSrc2_IDX
+#undef ilInstBSwz0_IDX
+#undef ilInstBSwz1_IDX
+#undef ilInstBSwz2_IDX
+#define ilInstAOpcode_IDX 0
+#define ilInstADst_IDX 1
+#define ilInstADstMask_IDX 2
+#define ilInstASrc0_IDX 3
+#define ilInstASrc1_IDX 4
+#define ilInstASrc2_IDX 5
+#define ilInstASwz0_IDX 6
+#define ilInstASwz1_IDX 7
 /* fragmentTranslateAll @ 0x46180 (1528 bytes) */
 int fragmentTranslateAll(translator, slot, componentCount)
   int *translator;
@@ -5266,35 +5368,35 @@ int fragmentTranslateAll(translator, slot, componentCount)
   
   countFromSlot = componentCount == 0;
   opRecord = *translator + *(int *)(*translator + 0x54) * 8;
-  _memset(&ilInstA[0],0,0x24);
+  _memset(&ilInstA[ilInstAOpcode_IDX],0,0x24);
   if (countFromSlot) {
     componentCount = (*(uint *)(slot * 8 + opRecord + 4) >> 0x1a & 3) + 1;
   }
   if (componentCount < 3) {
     if (componentCount == 1) {
-      (*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 2)) = 0x47;
+      (*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 2)) = 0x47;
     }
     else {
-      (*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 2)) = 0x49;
+      (*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 2)) = 0x49;
     }
     opRecord = opRecord + slot * 8;
-    destResult = ((int (*)())fpilTranslateDestination)(translator,opRecord + 8,&ilInstA[1],&ilInstA[2],1);
+    destResult = ((int (*)())fpilTranslateDestination)(translator,opRecord + 8,&ilInstA[ilInstADst_IDX],&ilInstA[ilInstADstMask_IDX],1);
     if (destResult != 0) {
 loopReturnTranslator:
       return translator[9];
     }
     if (countFromSlot) {
-      opRecord = ((int (*)())fpilTranslateSource)(translator,opRecord + 0x10,&ilInstA[3],&ilInstA[6]);
+      opRecord = ((int (*)())fpilTranslateSource)(translator,opRecord + 0x10,&ilInstA[ilInstASrc0_IDX],&ilInstA[ilInstASwz0_IDX]);
       if (opRecord != 0) goto loopReturnTranslator;
     }
     else {
-      ilInstA[3] = CONCAT22(4,(short)translator[8]);
-      ilInstA[6] = ((unsigned char *)0x00003210);
-      ilInstA[3] = ilInstA[3] | 0x400000;
+      ilInstA[ilInstASrc0_IDX] = CONCAT22(4,(short)translator[8]);
+      ilInstA[ilInstASwz0_IDX] = ((unsigned char *)0x00003210);
+      ilInstA[ilInstASrc0_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
     }
     if (componentCount == 2) {
-      ilInstA[4] = ilInstA[3];
-      ilInstA[7] = (uint)ilInstA[6] >> 4 & 8 | (uint)ilInstA[6] >> 4 & 7 | (uint)ilInstA[6] & 0xfffffff0;
+      ilInstA[ilInstASrc1_IDX] = ilInstA[ilInstASrc0_IDX];
+      ilInstA[ilInstASwz1_IDX] = (uint)ilInstA[ilInstASwz0_IDX] >> 4 & 8 | (uint)ilInstA[ilInstASwz0_IDX] >> 4 & 7 | (uint)ilInstA[ilInstASwz0_IDX] & 0xfffffff0;
     }
     if (translator[9] != 0) {
       return translator[9];
@@ -5326,11 +5428,11 @@ loopReturnTranslator:
     }
     translator[0xb] = instrWords + tokenCount2;
     tokenWritePtr = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = ilInstA[0];
-    tokenWritePtr[1] = ilInstA[1];
-    tokenWritePtr[2] = ilInstA[2];
+    *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
     if (0 < componentCount) {
-      recordPtr = &ilInstA[3];
+      recordPtr = &ilInstA[ilInstASrc0_IDX];
       do {
         tokenWritePtr[3] = *recordPtr;
         recordWordNext3 = recordPtr + 3;
@@ -5342,27 +5444,27 @@ loopReturnTranslator:
     }
   }
   else {
-    ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),0x49);
-    ilInstA[2] = ilInstA[2] & 0xffffff00 | 0x111;
-    ilInstA[1] = CONCAT22((short)(ilInstA[1] >> 0x10),(short)translator[8]) & 0xffc0ffff | 0x440000;
+    ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),0x49);
+    ilInstA[ilInstADstMask_IDX] = ilInstA[ilInstADstMask_IDX] & 0xffffff00 | 0x111;
+    ilInstA[ilInstADst_IDX] = CONCAT22((short)(ilInstA[ilInstADst_IDX] >> 0x10),(short)translator[8]) & 0xffc0ffff | 0x440000;
     if (countFromSlot) {
-      srcResult = ((int (*)())fpilTranslateSource)(translator,opRecord + slot * 8 + 0x10,&ilInstA[3],&ilInstA[6]);
+      srcResult = ((int (*)())fpilTranslateSource)(translator,opRecord + slot * 8 + 0x10,&ilInstA[ilInstASrc0_IDX],&ilInstA[ilInstASwz0_IDX]);
       if (srcResult != 0) goto loopReturnTranslator;
     }
     else {
-      ilInstA[3] = CONCAT22(4,(short)translator[8]);
-      ilInstA[6] = ((unsigned char *)0x00003210);
-      ilInstA[3] = ilInstA[3] | 0x400000;
+      ilInstA[ilInstASrc0_IDX] = CONCAT22(4,(short)translator[8]);
+      ilInstA[ilInstASwz0_IDX] = ((unsigned char *)0x00003210);
+      ilInstA[ilInstASrc0_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
     }
-    ilInstA[4] = ilInstA[3];
-    swizzleSel1 = (uint)ilInstA[6] >> 4 & 7;
-    swizzleNeg1 = (uint)ilInstA[6] >> 4 & 8;
+    ilInstA[ilInstASrc1_IDX] = ilInstA[ilInstASrc0_IDX];
+    swizzleSel1 = (uint)ilInstA[ilInstASwz0_IDX] >> 4 & 7;
+    swizzleNeg1 = (uint)ilInstA[ilInstASwz0_IDX] >> 4 & 8;
     if (componentCount == 3) {
-      ilInstA[7] = swizzleNeg1 | swizzleSel1 | (uint)ilInstA[6] & 0xfffff0f0 | 0x500;
+      ilInstA[ilInstASwz1_IDX] = swizzleNeg1 | swizzleSel1 | (uint)ilInstA[ilInstASwz0_IDX] & 0xfffff0f0 | 0x500;
     }
     else {
-      ilInstA[7] = ((uint)ilInstA[6] & 0xfffff8f0) >> 4 & 0x800 |
-                 (uint)ilInstA[6] >> 4 & 0x700 | swizzleNeg1 | swizzleSel1 | (uint)ilInstA[6] & 0xfffff0f0;
+      ilInstA[ilInstASwz1_IDX] = ((uint)ilInstA[ilInstASwz0_IDX] & 0xfffff8f0) >> 4 & 0x800 |
+                 (uint)ilInstA[ilInstASwz0_IDX] >> 4 & 0x700 | swizzleNeg1 | swizzleSel1 | (uint)ilInstA[ilInstASwz0_IDX] & 0xfffff0f0;
     }
     if (translator[9] != 0) {
       return translator[9];
@@ -5390,12 +5492,12 @@ loopReturnTranslator:
       translator[0xc] = tokenCapacity;
       tokenCount = translator[0xb];
     }
-    recordPtr2 = &ilInstA[3];
+    recordPtr2 = &ilInstA[ilInstASrc0_IDX];
     translator[0xb] = tokenCount + 7;
     tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = ilInstA[0];
-    tokenWritePtr[1] = ilInstA[1];
-    tokenWritePtr[2] = ilInstA[2];
+    *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
     srcCursor = recordPtr2;
     do {
       tokenWritePtr[3] = *srcCursor;
@@ -5403,14 +5505,14 @@ loopReturnTranslator:
       srcCursor = srcCursor + 1;
       tokenWritePtr[4] = *recordWordNext;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (&ilInstA[5] != srcCursor);
-    opRecord = ((int (*)())fpilTranslateDestination)(translator,opRecord + slot * 8 + 8,&ilInstA[1],&ilInstA[2],1);
+    } while (&ilInstA[ilInstASrc2_IDX] != srcCursor);
+    opRecord = ((int (*)())fpilTranslateDestination)(translator,opRecord + slot * 8 + 8,&ilInstA[ilInstADst_IDX],&ilInstA[ilInstADstMask_IDX],1);
     if (opRecord != 0) goto loopReturnTranslator;
-    ilInstA[3] = CONCAT22(4,(short)translator[8]);
-    ilInstA[6] = (undefined *)0x0;
-    ilInstA[7] = ilInstA[7] & 0xfffffff8 | 2;
-    ilInstA[4] = ilInstA[3] | 0x400000;
-    ilInstA[3] = ilInstA[3] | 0x400000;
+    ilInstA[ilInstASrc0_IDX] = CONCAT22(4,(short)translator[8]);
+    ilInstA[ilInstASwz0_IDX] = (undefined *)0x0;
+    ilInstA[ilInstASwz1_IDX] = ilInstA[ilInstASwz1_IDX] & 0xfffffff8 | 2;
+    ilInstA[ilInstASrc1_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
+    ilInstA[ilInstASrc0_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
     if (translator[9] != 0) {
       return translator[9];
     }
@@ -5445,20 +5547,36 @@ checkTranslator:
     }
     translator[0xb] = tokenCount2 + 7;
     tokenWritePtr = (undefined4 *)(tokenCount2 * 4 + *tokenDataPtrAddr);
-    *tokenWritePtr = ilInstA[0];
-    tokenWritePtr[1] = ilInstA[1];
-    tokenWritePtr[2] = ilInstA[2];
+    *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+    tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+    tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
     do {
       tokenWritePtr[3] = *recordPtr2;
       recordWordNext2 = recordPtr2 + 3;
       recordPtr2 = recordPtr2 + 1;
       tokenWritePtr[4] = *recordWordNext2;
       tokenWritePtr = tokenWritePtr + 2;
-    } while (recordPtr2 != &ilInstA[5]);
+    } while (recordPtr2 != &ilInstA[ilInstASrc2_IDX]);
   }
   return 0;
 }
 
+#undef ilInstAOpcode_IDX
+#undef ilInstADst_IDX
+#undef ilInstADstMask_IDX
+#undef ilInstASrc0_IDX
+#undef ilInstASrc1_IDX
+#undef ilInstASrc2_IDX
+#undef ilInstASwz0_IDX
+#undef ilInstASwz1_IDX
+#define ilInstAOpcode_IDX 0
+#define ilInstADst_IDX 1
+#define ilInstADstMask_IDX 2
+#define ilInstASrc0_IDX 3
+#define ilInstASrc1_IDX 4
+#define ilInstASrc2_IDX 5
+#define ilInstASwz0_IDX 6
+#define ilInstASwz1_IDX 7
 /* fragmentTranslateAny @ 0x467a0 (632 bytes) */
 int fragmentTranslateAny(translator, slot, useTempSource)
   int *translator;
@@ -5482,25 +5600,25 @@ int fragmentTranslateAny(translator, slot, useTempSource)
   
   opRecord = *translator;
   opTableOffset = *(int *)(opRecord + 0x54);
-  _memset(&ilInstA[0],0,0x24);
+  _memset(&ilInstA[ilInstAOpcode_IDX],0,0x24);
   opRecord = opRecord + opTableOffset * 8 + slot * 8;
-  ilInstA[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[0]) + 0)),0x23);
-  destResult = ((int (*)())fpilTranslateDestination)(translator,opRecord + 8,&ilInstA[1],&ilInstA[2],1);
+  ilInstA[ilInstAOpcode_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstAOpcode_IDX]) + 0)),0x23);
+  destResult = ((int (*)())fpilTranslateDestination)(translator,opRecord + 8,&ilInstA[ilInstADst_IDX],&ilInstA[ilInstADstMask_IDX],1);
   if (destResult == 0) {
     if (useTempSource == 0) {
-      srcResult = ((int (*)())fpilTranslateSource)(translator,opRecord + 0x10,&ilInstA[3],&ilInstA[6]);
+      srcResult = ((int (*)())fpilTranslateSource)(translator,opRecord + 0x10,&ilInstA[ilInstASrc0_IDX],&ilInstA[ilInstASwz0_IDX]);
       if (srcResult != 0) goto setTranslatorError;
       tempRegister = (undefined2)translator[8];
     }
     else {
       tempRegister = (undefined2)translator[8];
-      ilInstA[3] = CONCAT22(4,tempRegister);
-      ilInstA[6] = ((unsigned char *)0x00003210);
-      ilInstA[3] = ilInstA[3] | 0x400000;
+      ilInstA[ilInstASrc0_IDX] = CONCAT22(4,tempRegister);
+      ilInstA[ilInstASwz0_IDX] = ((unsigned char *)0x00003210);
+      ilInstA[ilInstASrc0_IDX] = ilInstA[ilInstASrc0_IDX] | 0x400000;
     }
     translatorError = translator[9];
-    ilInstA[7] = ilInstA[7] & 0xffff0000 | 0x5555;
-    ilInstA[4] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[4]) + 0)),tempRegister) & 0xffc0ffff | 0x440000;
+    ilInstA[ilInstASwz1_IDX] = ilInstA[ilInstASwz1_IDX] & 0xffff0000 | 0x5555;
+    ilInstA[ilInstASrc1_IDX] = CONCAT22((*(unsigned short *)((unsigned char *)&(ilInstA[ilInstASrc1_IDX]) + 0)),tempRegister) & 0xffc0ffff | 0x440000;
     if (translatorError == 0) {
       tokenDataPtrAddr = translator + 10;
       tokenCount = translator[0xb];
@@ -5531,19 +5649,19 @@ int fragmentTranslateAny(translator, slot, useTempSource)
         translator[0xc] = tokenCapacity;
         tokenCount = translator[0xb];
       }
-      recordPtr = &ilInstA[3];
+      recordPtr = &ilInstA[ilInstASrc0_IDX];
       translator[0xb] = tokenCount + 7;
       tokenWritePtr = (undefined4 *)(tokenCount * 4 + *tokenDataPtrAddr);
-      *tokenWritePtr = ilInstA[0];
-      tokenWritePtr[1] = ilInstA[1];
-      tokenWritePtr[2] = ilInstA[2];
+      *tokenWritePtr = ilInstA[ilInstAOpcode_IDX];
+      tokenWritePtr[1] = ilInstA[ilInstADst_IDX];
+      tokenWritePtr[2] = ilInstA[ilInstADstMask_IDX];
       do {
         tokenWritePtr[3] = *recordPtr;
         recordWordNext = recordPtr + 3;
         recordPtr = recordPtr + 1;
         tokenWritePtr[4] = *recordWordNext;
         tokenWritePtr = tokenWritePtr + 2;
-      } while (&ilInstA[5] != recordPtr);
+      } while (&ilInstA[ilInstASrc2_IDX] != recordPtr);
       translatorError = 0;
     }
   }
@@ -5554,6 +5672,14 @@ setTranslatorError:
   return translatorError;
 }
 
+#undef ilInstAOpcode_IDX
+#undef ilInstADst_IDX
+#undef ilInstADstMask_IDX
+#undef ilInstASrc0_IDX
+#undef ilInstASrc1_IDX
+#undef ilInstASrc2_IDX
+#undef ilInstASwz0_IDX
+#undef ilInstASwz1_IDX
 /* fragmentTranslateArithmetic @ 0x46a30 (1080 bytes) */
 int fragmentTranslateArithmetic(translator, slot)
   int *translator;

@@ -324,6 +324,20 @@ int extvsEmitCrs(ctx, shader, instRecord)
   return emittedInstCount;
 }
 
+#define operandAKind_IDX 0
+#define operandAIndex_IDX 1
+#define operandASelX_IDX 2
+#define operandASelY_IDX 3
+#define operandASelZ_IDX 4
+#define operandASelW_IDX 5
+#define operandAFlag_IDX 6
+#define operandBKind_IDX 0
+#define operandBIndex_IDX 1
+#define operandBSelX_IDX 2
+#define operandBSelY_IDX 3
+#define operandBSelZ_IDX 4
+#define operandBSelW_IDX 5
+#define operandBFlag_IDX 6
 /* extvsEmitMmul @ 0x5c600 (1552 bytes) */
 int extvsEmitMmul(ctx, shader, instRecord)
   int ctx;
@@ -418,14 +432,14 @@ int extvsEmitMmul(ctx, shader, instRecord)
   dstOperand = instRecord + 4;
   instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
   tempIndex = extvsAllocTempSlot(ctx,shader);
-  operandA[0] = 3;
-  (*(undefined1 *)&operandA[6]) = 0;
-  operandA[5] = 1;
-  operandA[2] = 1;
-  operandA[3] = 1;
-  operandA[4] = 1;
-  operandA[1] = tempIndex;
-  extvsEncodeSourceOperand(ctx,shader,&operandA[0],instSlot,3,0,0);
+  operandA[operandAKind_IDX] = 3;
+  (*(undefined1 *)&operandA[operandAFlag_IDX]) = 0;
+  operandA[operandASelW_IDX] = 1;
+  operandA[operandASelX_IDX] = 1;
+  operandA[operandASelY_IDX] = 1;
+  operandA[operandASelZ_IDX] = 1;
+  operandA[operandAIndex_IDX] = tempIndex;
+  extvsEncodeSourceOperand(ctx,shader,&operandA[operandAKind_IDX],instSlot,3,0,0);
   extvsEncodeSourceSwizzle(shader,symbolList,instRecord + 0x3c,instSlot + 4,0);
   swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
   *(uint *)(instSlot + 0xc) = swizzleWord;
@@ -433,33 +447,47 @@ int extvsEmitMmul(ctx, shader, instRecord)
   extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x10,1,0,0);
   *(uint *)(instSlot + 0x10) = *(uint *)(instSlot + 0x10) & 0xff1fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,src0Operand2,instSlot + 0x14,0);
-  operandB[0] = 3;
-  (*(undefined1 *)&operandB[6]) = 0;
-  operandB[3] = 0x87d6;
-  operandB[2] = 0x87d5;
-  operandB[4] = 0x87d7;
-  operandB[5] = 0x87d8;
-  operandB[1] = tempIndex;
-  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[0],instSlot + 0x18,0);
+  operandB[operandBKind_IDX] = 3;
+  (*(undefined1 *)&operandB[operandBFlag_IDX]) = 0;
+  operandB[operandBSelY_IDX] = 0x87d6;
+  operandB[operandBSelX_IDX] = 0x87d5;
+  operandB[operandBSelZ_IDX] = 0x87d7;
+  operandB[operandBSelW_IDX] = 0x87d8;
+  operandB[operandBIndex_IDX] = tempIndex;
+  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[operandBKind_IDX],instSlot + 0x18,0);
   *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
   extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x20,1,0,0);
   *(uint *)(instSlot + 0x20) = *(uint *)(instSlot + 0x20) & 0xff2fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,src0Operand2,instSlot + 0x24,1);
-  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[0],instSlot + 0x28,0);
+  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[operandBKind_IDX],instSlot + 0x28,0);
   *(undefined4 *)(instSlot + 0x2c) = *(undefined4 *)(instSlot + 0x28);
   extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x30,1,0,0);
   *(uint *)(instSlot + 0x30) = *(uint *)(instSlot + 0x30) & 0xff4fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,src0Operand2,instSlot + 0x34,2);
-  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[0],instSlot + 0x38,0);
+  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[operandBKind_IDX],instSlot + 0x38,0);
   *(undefined4 *)(instSlot + 0x3c) = *(undefined4 *)(instSlot + 0x38);
   extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot + 0x40,1,0,0);
   *(uint *)(instSlot + 0x40) = *(uint *)(instSlot + 0x40) & 0xff8fffff;
   extvsEncodeSourceSwizzle(shader,symbolList,src0Operand2,instSlot + 0x44,3);
-  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[0],instSlot + 0x48,0);
+  extvsEncodeSourceSwizzle(shader,symbolList,&operandB[operandBKind_IDX],instSlot + 0x48,0);
   *(undefined4 *)(instSlot + 0x4c) = *(undefined4 *)(instSlot + 0x48);
   return 5;
 }
 
+#undef operandAKind_IDX
+#undef operandAIndex_IDX
+#undef operandASelX_IDX
+#undef operandASelY_IDX
+#undef operandASelZ_IDX
+#undef operandASelW_IDX
+#undef operandAFlag_IDX
+#undef operandBKind_IDX
+#undef operandBIndex_IDX
+#undef operandBSelX_IDX
+#undef operandBSelY_IDX
+#undef operandBSelZ_IDX
+#undef operandBSelW_IDX
+#undef operandBFlag_IDX
 /* extvsEmitMov @ 0x5cc20 (320 bytes) */
 int extvsEmitMov(ctx, shader, instRecord)
   int ctx;
@@ -1999,6 +2027,15 @@ int extvsRewriteHardwareInstructions(ctx, shader)
   return;
 }
 
+#define tempInstrDstId_IDX 2
+#define tempInstrDstMaskX_IDX 3
+#define tempInstrDstMaskY_IDX 4
+#define tempInstrDstMaskZ_IDX 5
+#define tempInstrDstMaskW_IDX 6
+#define tempInstrSrc0SwizzleX_IDX 10
+#define tempInstrSrc0SwizzleY_IDX 11
+#define tempInstrSrc0SwizzleZ_IDX 12
+#define tempInstrSrc0SwizzleW_IDX 13
 /* extvsPrepareHardwareProgram @ 0x5f810 (9624 bytes) */
 /* 14 of its vtable+0x1344 dispatch calls dropped a
  * genuine 3rd argument (the already-declared symbolIndex) that stock passes (found auditing #70 via
@@ -3349,23 +3386,23 @@ setSlotScanIndex2X:
           if ((dstOperandKind == 1) && (*(int *)(symbolRecordOrCallResult + 8) == 0x87bd)) {
             fogCopyUnit = ((unsigned char *)0x000011d1)[ctx];
             _memcpy(tempInstr,symbolRecordOrCallResult,0x74);
-            tempInstr[4] = 0;
-            tempInstr[5] = 0;
-            tempInstr[6] = 0;
-            tempInstr[2] = fogCopyUnit + 0x879d;
-            tempInstr[3] = dstOperandKind;
+            tempInstr[tempInstrDstMaskY_IDX] = 0;
+            tempInstr[tempInstrDstMaskZ_IDX] = 0;
+            tempInstr[tempInstrDstMaskW_IDX] = 0;
+            tempInstr[tempInstrDstId_IDX] = fogCopyUnit + 0x879d;
+            tempInstr[tempInstrDstMaskX_IDX] = dstOperandKind;
             symbolRecordOrCallResult = (*(code *)(ptrTo_extvsEmitIndex_001db9b8)[opIndex])(ctx,shader,tempInstr);
             hwInstrCountCopy = *(int *)(programState + 0x18);
             *(int *)(programState + 0x18) = symbolRecordOrCallResult + hwInstrCountCopy;
-            tempInstr[13] = 0x87de;
+            tempInstr[tempInstrSrc0SwizzleW_IDX] = 0x87de;
             tempInstr[0] = 0x8799;
-            tempInstr[3] = 0;
-            tempInstr[10] = 0x87dd;
-            tempInstr[11] = 0x87dd;
-            tempInstr[12] = 0x87dd;
-            tempInstr[4] = dstOperandKind;
-            tempInstr[5] = dstOperandKind;
-            tempInstr[6] = dstOperandKind;
+            tempInstr[tempInstrDstMaskX_IDX] = 0;
+            tempInstr[tempInstrSrc0SwizzleX_IDX] = 0x87dd;
+            tempInstr[tempInstrSrc0SwizzleY_IDX] = 0x87dd;
+            tempInstr[tempInstrSrc0SwizzleZ_IDX] = 0x87dd;
+            tempInstr[tempInstrDstMaskY_IDX] = dstOperandKind;
+            tempInstr[tempInstrDstMaskZ_IDX] = dstOperandKind;
+            tempInstr[tempInstrDstMaskW_IDX] = dstOperandKind;
             symbolRecordOrCallResult = (*(code *)ptrTo_extvsEmitMov_001dba14)
                                (ctx,shader,tempInstr,recordOrOffsetScratch,in_r7,in_r8,hwInstrCountCopy);
             *(int *)(programState + 0x18) = symbolRecordOrCallResult + *(int *)(programState + 0x18);
@@ -3375,7 +3412,7 @@ setSlotScanIndex2X:
         if ((((glContextWord44 & 0x400) != 0) && (symbolRecordOrCallResult = instrByteOffset + shader[6], *(int *)(symbolRecordOrCallResult + 4) == 1)) &&
            (*(int *)(symbolRecordOrCallResult + 8) == 0x879a)) {
           _memcpy(tempInstr,symbolRecordOrCallResult,0x74);
-          tempInstr[2] = (byte)((unsigned char *)0x000011d2)[ctx] + 0x879d;
+          tempInstr[tempInstrDstId_IDX] = (byte)((unsigned char *)0x000011d2)[ctx] + 0x879d;
           recordOrOffsetScratch = (*(code *)(ptrTo_extvsEmitIndex_001db9b8)[opIndex])
                              (ctx,shader,tempInstr,recordOrOffsetScratch,in_r7,in_r8,
                               (ptrTo_extvsEmitIndex_001db9b8)[opIndex]);
@@ -3519,6 +3556,15 @@ setSlotScanIndex2X:
   return success;
 }
 
+#undef tempInstrDstId_IDX
+#undef tempInstrDstMaskX_IDX
+#undef tempInstrDstMaskY_IDX
+#undef tempInstrDstMaskZ_IDX
+#undef tempInstrDstMaskW_IDX
+#undef tempInstrSrc0SwizzleX_IDX
+#undef tempInstrSrc0SwizzleY_IDX
+#undef tempInstrSrc0SwizzleZ_IDX
+#undef tempInstrSrc0SwizzleW_IDX
 /* vpUploadConstantArray @ 0x61dc0 (224 bytes) */
 int vpUploadConstantArray(glContext, programState)
   int glContext;

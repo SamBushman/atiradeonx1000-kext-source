@@ -981,6 +981,19 @@ joined_r0x97bb3b94:
   return;
 }
 
+#define opFlags_IDX 1
+#define opDest0_IDX 2
+#define opDest1_IDX 3
+#define opSrc0A_IDX 4
+#define opSrc0B_IDX 5
+#define opSrc1A_IDX 6
+#define opSrc1B_IDX 7
+#define opSrc2A_IDX 8
+#define opSrc2B_IDX 9
+#define opAuxA_IDX 10
+#define opAuxB_IDX 11
+#define opLine_IDX 12
+#define opWord13_IDX 13
 /* TGenericLinker__FixOutputReads @ 0x97bb3d14 (1160 bytes) */
 int TGenericLinker__FixOutputReads(this)
   unsigned char * this;
@@ -1099,41 +1112,41 @@ int TGenericLinker__FixOutputReads(this)
               }
               if ((mainReached) && ((chunkHeader & 0x3fc0000) == 0x1340000)) {
                 componentCount = tempUsageFlags >> 0x18 & 3;
-                opRecord[2] = componentCount << 10 | 0x6c;
-                opRecord[6] = 0;
-                opRecord[7] = 0;
-                opRecord[8] = 0;
-                opRecord[9] = 0;
-                opRecord[10] = 0;
-                opRecord[11] = 0;
-                opRecord[12] = *(undefined4 *)(opChunk + 0x3c);
+                opRecord[opDest0_IDX] = componentCount << 10 | 0x6c;
+                opRecord[opSrc1A_IDX] = 0;
+                opRecord[opSrc1B_IDX] = 0;
+                opRecord[opSrc2A_IDX] = 0;
+                opRecord[opSrc2B_IDX] = 0;
+                opRecord[opAuxA_IDX] = 0;
+                opRecord[opAuxB_IDX] = 0;
+                opRecord[opLine_IDX] = *(undefined4 *)(opChunk + 0x3c);
                 opRecord[0] = 0x20000000;
-                opRecord[13] = 0;
+                opRecord[opWord13_IDX] = 0;
                 if (componentCount == 1) {
 loopSetOpDest0:
-                  opRecord[2] = opRecord[2] | 0x4000;
+                  opRecord[opDest0_IDX] = opRecord[opDest0_IDX] | 0x4000;
 loopSetOpDest02:
-                  opRecord[2] = opRecord[2] | 0x2000;
+                  opRecord[opDest0_IDX] = opRecord[opDest0_IDX] | 0x2000;
                 }
                 else {
                   if (componentCount == 0) goto loopSetOpDest02;
                   if (componentCount == 2) {
 loopSetOpDest03:
-                    opRecord[2] = opRecord[2] | 0x8000;
+                    opRecord[opDest0_IDX] = opRecord[opDest0_IDX] | 0x8000;
                     goto loopSetOpDest0;
                   }
                   if (componentCount == 3) {
-                    opRecord[2] = 0x10c6c;
+                    opRecord[opDest0_IDX] = 0x10c6c;
                     goto loopSetOpDest03;
                   }
                 }
                 componentCount = tempUsageFlags >> 0x18 & 3;
-                opRecord[1] = (tempUsageFlags >> 0x1d & 3) << 0x12 |
+                opRecord[opFlags_IDX] = (tempUsageFlags >> 0x1d & 3) << 0x12 |
                            componentCount << 0x1a | (tempUsageFlags >> 0x1a & 7) << 0x17;
-                opRecord[2] = opRecord[2] | 0x60000;
-                opRecord[4] = componentCount << 0xc | 0x8d8000;
-                opRecord[5] = opChunkScratchWord & 0xffff;
-                opRecord[3] = (uint)outputReg;
+                opRecord[opDest0_IDX] = opRecord[opDest0_IDX] | 0x60000;
+                opRecord[opSrc0A_IDX] = componentCount << 0xc | 0x8d8000;
+                opRecord[opSrc0B_IDX] = opChunkScratchWord & 0xffff;
+                opRecord[opDest1_IDX] = (uint)outputReg;
                 insertedOp = _PPStreamInsertOperationAfterChunk
                                   (*(undefined4 *)(this + stageOffset + 0x30),opRecord,0,0,
                                    *(undefined4 *)(opChunk + 4));
@@ -1157,6 +1170,19 @@ loopSetOpDest03:
   } while( true );
 }
 
+#undef opFlags_IDX
+#undef opDest0_IDX
+#undef opDest1_IDX
+#undef opSrc0A_IDX
+#undef opSrc0B_IDX
+#undef opSrc1A_IDX
+#undef opSrc1B_IDX
+#undef opSrc2A_IDX
+#undef opSrc2B_IDX
+#undef opAuxA_IDX
+#undef opAuxB_IDX
+#undef opLine_IDX
+#undef opWord13_IDX
 /* TGenericLinker__OptimizeFunctionIO @ 0x97bb419c (696 bytes) */
 int TGenericLinker__OptimizeFunctionIO(this)
   unsigned char * this;

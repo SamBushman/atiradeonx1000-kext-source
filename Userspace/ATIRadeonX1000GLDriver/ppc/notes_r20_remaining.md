@@ -30,3 +30,32 @@ the callee (WriteMask__fromSelectWord) writes only 4 bytes, so the scanner's 16-
 - Runtime-indexed arrays from r19 (slotOwnerRegister x2, seenConstants, ilAssembleProgram tables): bounds proofs not attempted.
 - TIntermUnary__compileNode / _InterpreterEmulateOp: generated code was already identical, frame gaps between records (stock
   8-byte pads) are not reproduced; behaviour unaffected.
+
+## Follow-up evidence (coordinator's three points)
+
+### (1) ffvpEmitTexCoordGen (FUN_00096600) CODE difference
+Full normalised .dis diff (stack offsets of r30/r1 and L/LC labels normalised) shows exactly two kinds of difference:
+(a) 4 `addi rN,r30,K` where K is the address of a rewritten local (&texTempA/&texTempB; expected: the objects moved),
+(b) 4 sites `lwz r0,0(r2); stw r0,X(r30)` -> `lwz r2,0(r2); stw r2,X(r30)`: same load address, same stack store, only the
+scratch register differs (r2 is dead afterwards; the next instruction is the branch, gcc -O0 keeps every value on the stack).
+Same stores, calls, arguments and returns; the register pick is gcc allocator noise from the changed local layout.
+
+### (2) naming: placeholders / named decls per rewritten function -> counts_result.txt
+Placeholders 148 -> 148 (unchanged; the 148 were already there, e.g. extvsPrepareHardwareProgram 85, _InterpreterEmulateOp 41).
+Named decls 1609 -> 1376 because 233 loose member names became array/struct elements. Their roles are kept: every folded
+member is a function-scoped `#define <oldName>_IDX <word>` before the function (and `#undef` after it), and the array is indexed
+`arr[<oldName>_IDX]` (256 constants in 28 functions; struct rewrites keep field names). Generated code is unchanged by this
+(tier-1 vs the previous commit: 0 problems in all 15 touched parts).
+
+### (3) mechanical per-function evidence (Tools/userspace/audit_layout/r20/)
+- `inv.py`: reverse-substitutes every logged rewrite (and expands the `_IDX` constants) in the NEW body and compares it with
+  the OLD body (pre-r20 main, aaec42e4): 31/32 identical; arbParseParamBinding differs only by the intended new W stores.
+  (Documented one-off manual edits are folded in as explicit reverse rules: BlendedClipPosition blendTemp3Reg, FixOutputReads
+  opHeader pointer use, _DetectConstantLoopsSimple opSrc0BHigh.)
+- `offs.py`: maps each old member back to its Ghidra local (via the removed local rows), converts to the stock sp offset
+  (frame - NN) and checks base + 4*word is the same base for all members and that base is a stock address-taken object:
+  60/62 arrays pass; the other two (Block__flattenAndRebuildAddMulTree chainList, TIntermUnary__compileNode constValue) have no
+  renamed members and were checked by hand against the stock object (6-word DListNode, single word at sp+0xd8).
+- arbParseParamBinding W stores vs stock 0x89864: splat path stores the same float to sp+0x44,0x38,0x3c,0x40; default path
+  stores 1.0 to 0x44 and 0.0 to 0x40,0x3c; a 4th parsed component stores to 0x44. The C matches (store order on the stack
+  frame differs from stock only in the splat path: W first in stock, X first here; not externally observable).

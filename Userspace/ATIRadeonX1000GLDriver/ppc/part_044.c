@@ -2574,6 +2574,16 @@ setLoopIndex:
   goto loopSetVcall14Result;
 }
 
+#define partnerOperand1Copy_IDX 0
+#define partnerOperand1Copy1_IDX 1
+#define partnerOperand1CopyEnd_IDX 5
+#define partnerOperand2CopyEnd_IDX 5
+#define nodeOperand1Copy_IDX 0
+#define nodeOperand1Copy1_IDX 1
+#define nodeOperand1CopyEnd_IDX 5
+#define nodeOperand2Copy_IDX 0
+#define nodeOperand2Copy1_IDX 1
+#define nodeOperand2CopyEnd_IDX 5
 /* Inst__collapseAlgebraic_0015ceb0 @ 0x15ceb0 (3720 bytes) */
 int Inst__collapseAlgebraic_0015ceb0(node, pass)
   int *node;
@@ -2758,26 +2768,26 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
           operandSelectB = *(undefined4 *)(operandRecord2 + 0x10);
           operandRecord2 = IRInst__getOperandRecord(newConstInstB,1);
           *(undefined4 *)(operandRecord2 + 0x10) = operandSelectB;
-          partnerOperand1Copy[0] = 0;
-          partnerOperand1Copy[1] = 0;
-          partnerOperand1Copy[5] = 0;
+          partnerOperand1Copy[partnerOperand1Copy_IDX] = 0;
+          partnerOperand1Copy[partnerOperand1Copy1_IDX] = 0;
+          partnerOperand1Copy[partnerOperand1CopyEnd_IDX] = 0;
           partnerOperand2Copy[0] = 0;
           partnerOperand2Copy[1] = 0;
-          partnerOperand2Copy[5] = 0;
-          nodeOperand1Copy[0] = 0;
-          nodeOperand1Copy[1] = 0;
-          nodeOperand1Copy[5] = 0;
-          nodeOperand2Copy[0] = 0;
-          nodeOperand2Copy[1] = 0;
-          nodeOperand2Copy[5] = 0;
+          partnerOperand2Copy[partnerOperand2CopyEnd_IDX] = 0;
+          nodeOperand1Copy[nodeOperand1Copy_IDX] = 0;
+          nodeOperand1Copy[nodeOperand1Copy1_IDX] = 0;
+          nodeOperand1Copy[nodeOperand1CopyEnd_IDX] = 0;
+          nodeOperand2Copy[nodeOperand2Copy_IDX] = 0;
+          nodeOperand2Copy[nodeOperand2Copy1_IDX] = 0;
+          nodeOperand2Copy[nodeOperand2CopyEnd_IDX] = 0;
           operandRecord = IRInst__getOperandRecord(a0,1);
-          IROperand__copyFrom(&partnerOperand1Copy[0],operandRecord);
+          IROperand__copyFrom(&partnerOperand1Copy[partnerOperand1Copy_IDX],operandRecord);
           operandRecord = IRInst__getOperandRecord(a0,2);
           IROperand__copyFrom(partnerOperand2Copy,operandRecord);
           operandRecord = IRInst__getOperandRecord(node,1);
-          IROperand__copyFrom(&nodeOperand1Copy[0],operandRecord);
+          IROperand__copyFrom(&nodeOperand1Copy[nodeOperand1Copy_IDX],operandRecord);
           operandRecord = IRInst__getOperandRecord(node,2);
-          IROperand__copyFrom(&nodeOperand2Copy[0],operandRecord);
+          IROperand__copyFrom(&nodeOperand2Copy[nodeOperand2Copy_IDX],operandRecord);
           operandRecord2 = IRInst__getOperandRecord(node,1);
           nodeOperand1Select = *(int *)(operandRecord2 + 0x10);
           operandRecord2 = IRInst__getOperandRecord(a0,1);
@@ -2801,9 +2811,9 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
           node[0x48] = a0[0x48];
           node[0x49] = partnerOutputScale;
           operandRecord = IRInst__getOperandRecord(node,3);
-          IROperand__copyFrom(operandRecord,&nodeOperand1Copy[0]);
+          IROperand__copyFrom(operandRecord,&nodeOperand1Copy[nodeOperand1Copy_IDX]);
           operandRecord = IRInst__getOperandRecord(node,1);
-          IROperand__copyFrom(operandRecord,&nodeOperand2Copy[0]);
+          IROperand__copyFrom(operandRecord,&nodeOperand2Copy[nodeOperand2Copy_IDX]);
           operandRecord = IRInst__getOperandRecord(node,2);
           IROperand__copyFrom(operandRecord,partnerOperand2Copy);
           IRInst__setOperandSource(node,1,newConstInstA,0,*(undefined4 *)(pass + 8));
@@ -3074,16 +3084,16 @@ setSourceDef5:
             operandIndex = operandIndex + 1;
           } while (operandIndex <= node[0x21]);
         }
-        nodeOperand1Copy[5] = 0;
-        nodeOperand2Copy[0] = 0;
-        nodeOperand2Copy[1] = 0;
-        nodeOperand2Copy[5] = 0;
-        nodeOperand1Copy[0] = 0;
-        nodeOperand1Copy[1] = 0;
+        nodeOperand1Copy[nodeOperand1CopyEnd_IDX] = 0;
+        nodeOperand2Copy[nodeOperand2Copy_IDX] = 0;
+        nodeOperand2Copy[nodeOperand2Copy1_IDX] = 0;
+        nodeOperand2Copy[nodeOperand2CopyEnd_IDX] = 0;
+        nodeOperand1Copy[nodeOperand1Copy_IDX] = 0;
+        nodeOperand1Copy[nodeOperand1Copy1_IDX] = 0;
         operandRecord = IRInst__getOperandRecord(inst2,operandIndex4);
-        IROperand__copyFrom(&nodeOperand2Copy[0],operandRecord);
+        IROperand__copyFrom(&nodeOperand2Copy[nodeOperand2Copy_IDX],operandRecord);
         operandRecord = IRInst__getOperandRecord(inst2,operandIndex3);
-        IROperand__copyFrom(&nodeOperand1Copy[0],operandRecord);
+        IROperand__copyFrom(&nodeOperand1Copy[nodeOperand1Copy_IDX],operandRecord);
         afterInst = node[1];
         DList__unlink(node);
         IRInst__reinitAsBinary(node,0x12,*(undefined4 *)(pass + 8));
@@ -3098,7 +3108,7 @@ setSourceDef5:
         node[0x25] = savedNodeField53;
         node[0x26] = savedNodeField26;
         operandRecord = IRInst__getOperandRecord(node,operandIndex4);
-        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand2Copy[0]);
+        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand2Copy[nodeOperand2Copy_IDX]);
         IRInst__setOperandSource(node,operandIndex4,vslot73Result,0,*(undefined4 *)(pass + 8));
         destSelectSaved = operandSelect;
         if (notTrackingUses) {
@@ -3117,7 +3127,7 @@ setSourceDef5:
           *(int *)(operandRecord3 + 0x10) = destSelectSaved;
         }
         operandRecord = IRInst__getOperandRecord(node,operandIndex3);
-        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand1Copy[0]);
+        IROperand__copyModifiersAndSelect(operandRecord,&nodeOperand1Copy[nodeOperand1Copy_IDX]);
         IRInst__setOperandSource(node,operandIndex3,sourceDef2,0,*(undefined4 *)(pass + 8));
         selectWordCopy = partnerOperand2Copy[0];
         if (notTrackingUses) {
@@ -3157,6 +3167,16 @@ setSourceDef5:
   return 0;
 }
 
+#undef partnerOperand1Copy_IDX
+#undef partnerOperand1Copy1_IDX
+#undef partnerOperand1CopyEnd_IDX
+#undef partnerOperand2CopyEnd_IDX
+#undef nodeOperand1Copy_IDX
+#undef nodeOperand1Copy1_IDX
+#undef nodeOperand1CopyEnd_IDX
+#undef nodeOperand2Copy_IDX
+#undef nodeOperand2Copy1_IDX
+#undef nodeOperand2CopyEnd_IDX
 /* Inst__collapseMulOfExps @ 0x15df44 (600 bytes) */
 int Inst__collapseMulOfExps(inst, program)
   int *inst;

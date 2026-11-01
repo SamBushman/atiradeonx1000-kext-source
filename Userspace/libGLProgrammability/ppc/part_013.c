@@ -3152,6 +3152,10 @@ int _InterpreterTestCR(machine, operandWord0, operandWord1, operandWord2, operan
   return passes;
 }
 
+#define texelX_IDX 0
+#define texelY_IDX 1
+#define texelZ_IDX 2
+#define texelW_IDX 3
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
 int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
@@ -4953,29 +4957,29 @@ setProgramInfo:
         textureTarget = inst[0x44];
         if (textureTarget == 2) {
           _InterpreterTextureSamplerSampleTexelRECT
-                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0]);
+                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[texelX_IDX]);
         }
         else if (textureTarget < 3) {
           if (textureTarget == 1) {
-            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0],texLodBias,scratchF2,scratchF3,
+            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[texelX_IDX],texLodBias,scratchF2,scratchF3,
                        scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                        leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
           }
         }
         else if (textureTarget == 3) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0],texLodBias,scratchF2,scratchF3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[texelX_IDX],texLodBias,scratchF2,scratchF3,
                      scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                      leftoverStackArg1,leftoverStackArg2,leftoverStackArg3,leftoverStackArg4);
         }
         else if (textureTarget == 4) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[0],texLodBias,scratchF2,scratchF3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texel[texelX_IDX],texLodBias,scratchF2,scratchF3,
                      scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                      leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
         }
-        opVec[0] = texel[0];
-        opVec[1] = texel[1];
-        opVec[2] = texel[2];
-        opVec[3] = texel[3];
+        opVec[0] = texel[texelX_IDX];
+        opVec[1] = texel[texelY_IDX];
+        opVec[2] = texel[texelZ_IDX];
+        opVec[3] = texel[texelW_IDX];
         break;
       case 0x48:
       case 0x49:
@@ -5425,6 +5429,10 @@ callInterpreterWriteDestination:
   return nextInst;
 }
 
+#undef texelX_IDX
+#undef texelY_IDX
+#undef texelZ_IDX
+#undef texelW_IDX
 /* _InterpreterWriteFinalFragmentToBuffer @ 0x97bd3068 (376 bytes) */
 int _InterpreterWriteFinalFragmentToBuffer(machine, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, viewportScaleBias)
   int *machine;

@@ -1,0 +1,3 @@
+CHECK Block__flattenAndRebuildAddMulTree chainList base None {} in_esc None unk [('listNode', 'listNode')]
+CHECK TIntermUnary__compileNode constValue base None {} in_esc None unk []
+{'arr': 62, 'ok': 60, 'inconsistent': 0, 'noraw': 2}
