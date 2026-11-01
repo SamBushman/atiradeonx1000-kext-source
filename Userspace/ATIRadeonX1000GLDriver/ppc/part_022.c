@@ -2527,35 +2527,35 @@ int Block__verify(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedAr
 }
 
 /* LoopHeader__verify @ 0xe86f0 (236 bytes) */
-int LoopHeader__verify(this, param_2, param_3, param_4, param_5, param_6, param_7)
+int LoopHeader__verify(this, verifyResultCode, unusedArg3, unusedArg4, unusedArg5, unusedArg6, hasFlagBit)
   int this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  uint param_7;
+  undefined4 verifyResultCode;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  uint hasFlagBit;
 {
   int *currentInst;
   int *nextInst;
   undefined4 r4AfterCall;
   undefined8 queryResult;
-  
+
   currentInst = *(int **)(this + 0x98);
   for (nextInst = (int *)(*(int **)(this + 0x98))[2]; nextInst != (int *)0x0;
       nextInst = (int *)nextInst[2]) {
-    param_7 = currentInst[5] & 1;
-    if (param_7 != 0) {
+    hasFlagBit = currentInst[5] & 1;
+    if (hasFlagBit != 0) {
       queryResult = (**(code **)(*currentInst + 0x34))(currentInst);
-      param_2 = (undefined4)queryResult;
+      verifyResultCode = (undefined4)queryResult;
       if (((((int)((ulonglong)queryResult >> 0x20) == 0) &&
-           (queryResult = (**(code **)(*currentInst + 0x38))(currentInst), param_2 = (undefined4)queryResult,
+           (queryResult = (**(code **)(*currentInst + 0x38))(currentInst), verifyResultCode = (undefined4)queryResult,
            (int)((ulonglong)queryResult >> 0x20) == 0)) && (*(int *)(currentInst[0x22] + 8) != 0x8e)) &&
-         (queryResult = (**(code **)(*currentInst + 0x78))(currentInst), param_2 = (undefined4)queryResult,
+         (queryResult = (**(code **)(*currentInst + 0x78))(currentInst), verifyResultCode = (undefined4)queryResult,
          (int)((ulonglong)queryResult >> 0x20) == 0)) {
         (**(code **)(*currentInst + 0x3c))(currentInst);
         nextInst = (int *)currentInst[2];
-        param_2 = r4AfterCall;
+        verifyResultCode = r4AfterCall;
       }
       else {
         nextInst = (int *)currentInst[2];
@@ -2563,7 +2563,7 @@ int LoopHeader__verify(this, param_2, param_3, param_4, param_5, param_6, param_
     }
     currentInst = nextInst;
   }
-  return ((int (*)())Block__verify)(this,param_2,param_3,param_4,param_5,param_6,param_7);
+  return ((int (*)())Block__verify)(this,verifyResultCode,unusedArg3,unusedArg4,unusedArg5,unusedArg6,hasFlagBit);
 }
 
 /* IfHeader__canFlatten @ 0xe87e4 (340 bytes) */

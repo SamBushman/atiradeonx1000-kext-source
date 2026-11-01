@@ -147,7 +147,6 @@ int Program__insertPhiNodes(program)
   int frontierByteOffset;
   int *definedInBlocks;
   uint frontierWordOffset;
-  int iVar13;
   undefined4 *phiNode;
   int blockCount;
   undefined4 predecessorCount;
@@ -3479,10 +3478,10 @@ int Interpolator__vslot10(this, laneMask, program)
 }
 
 /* ValueKey__createConstantMov @ 0x123c08 (984 bytes) */
-int ValueKey__createConstantMov(compiler, block, param_3)
+int ValueKey__createConstantMov(compiler, block, unusedArg3)
   int compiler;
   int *block;
-  uint param_3;
+  uint unusedArg3;
 {
   int *keyVectorElemRef;
   int newVRegId;

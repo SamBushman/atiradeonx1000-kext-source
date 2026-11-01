@@ -91,13 +91,13 @@ loopSetLoopIndex:
 }
 
 /* Block__splitEdgeAndConnect @ 0xe9910 (56 bytes) */
-int Block__splitEdgeAndConnect(block, toBlock, param_3, fromBlock)
+int Block__splitEdgeAndConnect(block, toBlock, newBlock, fromBlock)
   undefined4 block;
   undefined4 toBlock;
-  undefined4 param_3;
+  undefined4 newBlock;
   undefined4 fromBlock;
 {
-  ((int (*)())Block__splitOutgoingEdge)(block,toBlock,param_3);
+  ((int (*)())Block__splitOutgoingEdge)(block,toBlock,newBlock);
   return Block__connect(fromBlock,toBlock);
 }
 
@@ -1343,20 +1343,20 @@ int IfHeaderStatic__clone(this)
 }
 
 /* IfHeaderStatic__ctor_eb9e0 @ 0xeb9e0 (168 bytes) */
-int IfHeaderStatic__ctor_eb9e0(this, inst, param_3, compiler)
+int IfHeaderStatic__ctor_eb9e0(this, inst, ifFooterBlock, compiler)
   undefined4 *this;
   undefined4 inst;
-  undefined4 param_3;
+  undefined4 ifFooterBlock;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
-  
+
   ((int (*)())IfHeader__ctor_ea600)(this,compiler);
   this[0x4c] = inst;
   *this = &ptrTo_IfHeader__dtor_1ce1e4_001e9d18;
   Block__appendInst(this,inst);
-  this[0x50] = param_3;
+  this[0x50] = ifFooterBlock;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
@@ -1368,20 +1368,20 @@ int IfHeaderStatic__ctor_eb9e0(this, inst, param_3, compiler)
 }
 
 /* IfHeaderStatic__ctor_ebac8 @ 0xebac8 (168 bytes) */
-int IfHeaderStatic__ctor_ebac8(this, inst, param_3, compiler)
+int IfHeaderStatic__ctor_ebac8(this, inst, ifFooterBlock, compiler)
   undefined4 *this;
   undefined4 inst;
-  undefined4 param_3;
+  undefined4 ifFooterBlock;
   int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
-  
+
   ((int (*)())IfHeader__ctor_ea600)(this,compiler);
   this[0x4c] = inst;
   *this = &ptrTo_IfHeader__dtor_1ce1e4_001e9d18;
   Block__appendInst(this,inst);
-  this[0x50] = param_3;
+  this[0x50] = ifFooterBlock;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;

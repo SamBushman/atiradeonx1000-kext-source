@@ -840,9 +840,9 @@ int IRInst__bindOperandRegisters(program, inst)
 }
 
 /* Program__beginPass @ 0xed7e4 (184 bytes) */
-int Program__beginPass(program, param_2)
+int Program__beginPass(program, passArg)
   int program;
-  uint param_2;
+  uint passArg;
 {
   int instructionVector;
   int nextBlockLink;
@@ -851,13 +851,13 @@ int Program__beginPass(program, param_2)
   int loopCounter;
   int *a0;
   uint loopIndex;
-  
+
   a0 = *(int **)(program + PROG_blockListHead);
   nextBlockLink = a0[2];
   while (nextBlockLink != 0) {
-    (**(code **)(*a0 + 0x48))(a0,param_2);
+    (**(code **)(*a0 + 0x48))(a0,passArg);
     a0 = (int *)a0[2];
-    param_2 = r4AfterCall;
+    passArg = r4AfterCall;
     nextBlockLink = a0[2];
   }
   instructionVector = *(int *)(program + PROG_instructionVector);
@@ -1977,7 +1977,7 @@ int Program__expandSpecialDestinations(program)
   int nextBlock;
   int *followingInst;
   undefined4 *allocation;
-  int iVar6;
+  int subRegVReg;
   int *hwDescriptionObj;
   int supportsProjection;
   int *projection;
@@ -2030,25 +2030,25 @@ int Program__expandSpecialDestinations(program)
                 allocation[0x4b] = hwRegIndex;
                 createSubReg = *(code **)(*subVReg + 0x28);
                 operandRecord = IRInst__getOperandRecord(inst,0);
-                iVar6 = (*createSubReg)(subVReg,*(undefined4 *)(operandRecord + 0x10),program);
+                subRegVReg = (*createSubReg)(subVReg,*(undefined4 *)(operandRecord + 0x10),program);
                 hwDescriptionObj = *(int **)(*(int *)(program + 8) + 0x30c);
                 supportsProjection = (**(code **)(*hwDescriptionObj + 0xd8))(hwDescriptionObj);
                 if (supportsProjection != 0) {
-                  *(int *)(iVar6 + 0x10) = hwRegIndex;
-                  *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 2;
+                  *(int *)(subRegVReg + 0x10) = hwRegIndex;
+                  *(uint *)(subRegVReg + 0x24) = *(uint *)(subRegVReg + 0x24) | 2;
                   Program__markHwRegUsed(program,hwRegIndex);
                   RegAlloc__clearBit430(program,hwRegIndex);
                 }
                 resultVRegCopy = inst[0x23];
-                IRInst__setOperandRef(projection,0,iVar6);
+                IRInst__setOperandRef(projection,0,subRegVReg);
                 hwRegIndex = hwRegIndex + 1;
                 operandRecord2 = IRInst__getOperandRecord(inst,0);
                 allocation[0x28] = *(undefined4 *)(operandRecord2 + 0x10);
-                VReg__appendUser(iVar6,projection);
+                VReg__appendUser(subRegVReg,projection);
                 IRInst__setOperandRef(projection,1,resultVRegCopy);
                 VReg__addUse(resultVRegCopy,1,projection);
-                IRInst__appendSource(projection,iVar6);
-                VReg__addUse(iVar6,2,projection);
+                IRInst__appendSource(projection,subRegVReg);
+                VReg__addUse(subRegVReg,2,projection);
                 Block__insertInstAfter(block,insertAfterInst,projection);
                 regInfo = (**(code **)(*subVReg + 0x2c))(subVReg);
                 *(undefined4 *)(regInfo + 0x144) = 1;

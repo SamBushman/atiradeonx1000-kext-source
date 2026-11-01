@@ -28,25 +28,25 @@ int scDumpPixelProgramToStringStub()
 }
 
 /* scDumpPixelProgram @ 0xd4e8c (60 bytes) */
-int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR8, param_7)
+int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR8, unusedArg7)
   undefined4 sinkContext;
   undefined4 shaderState;
   undefined4 optionsArg;
   undefined4 sinkFn;
   undefined4 argR7;
   undefined4 argR8;
-  undefined4 param_7;
+  undefined4 unusedArg7;
 {
   undefined4 sinkFnCopy;
   undefined4 staleArgR10;
   undefined4 sinkFnField;
   undefined4 sinkContextField;
-  
+
   sinkFnCopy = sinkFn;
   psnClearSinkRecord2(&sinkFnField);
   sinkFnField = sinkFn;
   sinkContextField = sinkContext;
-  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,argR7,argR8,param_7,staleArgR10);
+  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,argR7,argR8,unusedArg7,staleArgR10);
   return 0;
 }
 
@@ -2645,9 +2645,9 @@ int Compiler__bumpStatsCounter100(compiler, selector)
 }
 
 /* Compiler__createFromRequest_da0c0 @ 0xda0c0 (192 bytes) */
-int Compiler__createFromRequest_da0c0(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+int Compiler__createFromRequest_da0c0(outState, request)
+  undefined4 *outState;
+  undefined4 *request;
 {
   int hardwareKind;
   int setjmpResult;
@@ -2658,10 +2658,10 @@ int Compiler__createFromRequest_da0c0(param_1, param_2)
   int limitForObject8;
   undefined4 *stateOutHome;
   undefined4 *requestHome;
-  
-  stateOutHome = param_1;
-  requestHome = param_2;
-  compilerObj = (*(code *)param_2[0xc])(param_2[0xb],0x6c8);
+
+  stateOutHome = outState;
+  requestHome = request;
+  compilerObj = (*(code *)request[0xc])(request[0xb],0x6c8);
   requestArena = requestHome[0xd];
   *stateOutHome = requestArena;
   requestOwner = requestHome[0xb];
