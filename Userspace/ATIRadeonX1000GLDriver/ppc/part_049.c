@@ -2743,8 +2743,8 @@ int R300SchedModel__vslot16(this, inst, trialSelect, resultLane)
   int opcode;
   int *newInst;
   undefined4 operandRecord;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
   code *setSourceSelect;
   int trialSelectValue;
   
@@ -2798,7 +2798,7 @@ int R300SchedModel__vslot16(this, inst, trialSelect, resultLane)
       operandRecord = IRInst__getOperandRecord(inst,2);
       IRInst__getOrCreateOperandRecord(newInst,2,operandRecord,this[2]);
       (**(code **)(*newInst + 0x88))(newInst,1,3,4);
-      (**(code **)(*newInst + 0x88))(newInst,2,3,4,in_r7,in_r8,*(code **)(*newInst + 0x88));
+      (**(code **)(*newInst + 0x88))(newInst,2,3,4,scratchR7,scratchR8,*(code **)(*newInst + 0x88));
       newInst[3] = 0;
       *(undefined1 *)(newInst + 3) = 1;
       canAdd = (**(code **)(*this + 0xc))(this,newInst);
@@ -3046,8 +3046,8 @@ int R300SchedModel__vslot11(this, node, writerArrays)
   uint groupMaskWord;
   int groupReg;
   int writerNode;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
   byte *groupBytes;
   int loopIndex;
   int *nodeInst;
@@ -3065,7 +3065,7 @@ int R300SchedModel__vslot11(this, node, writerArrays)
     if (-1 < groupReg) {
       loopRemaining = 4;
       loopIndex = 0;
-      in_r8 = 0;
+      scratchR8 = 0;
       do {
         writerNode = *(int *)(groupReg * 4 + *(int *)(writerArrays + loopIndex * 4));
         if ((writerNode != 0) && (*(int *)(loopIndex * 4 + writerNode + 0x48) != 0)) {
@@ -3123,7 +3123,7 @@ int R300SchedModel__vslot11(this, node, writerArrays)
     for (; loopRemaining = (**(code **)(*nodeInst + 0x14))(nodeInst), sourceNumber <= loopRemaining; sourceNumber = sourceNumber + 1) {
       loopRemaining = IRInst__getOperandRecord(nodeInst,sourceNumber);
       laneSelect = *(undefined1 *)(targetLane + loopRemaining + 0x10);
-      (**(code **)(*nodeInst + 0x88))(nodeInst,sourceNumber,targetLane,4,in_r7,in_r8,targetLane + loopRemaining);
+      (**(code **)(*nodeInst + 0x88))(nodeInst,sourceNumber,targetLane,4,scratchR7,scratchR8,targetLane + loopRemaining);
       (**(code **)(*nodeInst + 0x88))(nodeInst,sourceNumber,loopIndex,laneSelect);
     }
   }
@@ -3139,7 +3139,7 @@ int R300SchedModel__vslot11(this, node, writerArrays)
       for (; loopRemaining = (**(code **)(*nodeInst + 0x14))(nodeInst), sourceNumber <= loopRemaining; sourceNumber = sourceNumber + 1) {
         loopRemaining = IRInst__getOperandRecord(nodeInst,sourceNumber);
         laneSelect = *(undefined1 *)(loopIndex + loopRemaining + 0x10);
-        (**(code **)(*nodeInst + 0x88))(nodeInst,sourceNumber,loopIndex,4,in_r7,in_r8,loopIndex + loopRemaining);
+        (**(code **)(*nodeInst + 0x88))(nodeInst,sourceNumber,loopIndex,4,scratchR7,scratchR8,loopIndex + loopRemaining);
         (**(code **)(*nodeInst + 0x88))(nodeInst,sourceNumber,targetLane,laneSelect);
       }
     }
@@ -3166,8 +3166,8 @@ int R300SchedModel__vslot14(this, node)
   undefined1 *loopPtr2;
   int flagBit0Result;
   int operandRecord;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
   int loopIndex;
   int a2;
   int opcodeCategory;
@@ -3240,7 +3240,7 @@ int R300SchedModel__vslot14(this, node)
     for (; operandRecord = (**(code **)(*nodeInst + 0x14))(nodeInst), loopIndex <= operandRecord; loopIndex = loopIndex + 1) {
       operandRecord = IRInst__getOperandRecord(nodeInst,loopIndex);
       laneSelect = *(undefined1 *)(a2 + operandRecord + 0x10);
-      (**(code **)(*nodeInst + 0x88))(nodeInst,loopIndex,a2,4,in_r7,in_r8,a2 + operandRecord);
+      (**(code **)(*nodeInst + 0x88))(nodeInst,loopIndex,a2,4,scratchR7,scratchR8,a2 + operandRecord);
       (**(code **)(*nodeInst + 0x88))(nodeInst,loopIndex,resultLane,laneSelect);
     }
     if ((opcodeCategory == 0) && (opcodeCategory = IRInst__countWrittenComponents(nodeInst), 1 < opcodeCategory)) {
@@ -5698,8 +5698,8 @@ int R300VSchedModel__vslot3_canAddInstruction(this, inst)
   int resourceClass;
   int callResult;
   undefined4 fits;
-  undefined4 in_r5;
-  undefined4 in_r6;
+  undefined4 passThroughArg3;
+  undefined4 passThroughArg4;
   int slot0Bank;
   int slot1Bank;
   int slot2Bank;
@@ -5714,7 +5714,7 @@ int R300VSchedModel__vslot3_canAddInstruction(this, inst)
   slot1Index = this[0xc];
   slot2Index[0] = this[0xd];
   resourceClass = (**(code **)(*this + 0x4c))
-                    (this,inst,in_r5,in_r6,*this,slot2Index[0],slot2Bank,slot1Index);
+                    (this,inst,passThroughArg3,passThroughArg4,*this,slot2Index[0],slot2Bank,slot1Index);
   if (resourceClass == 0) {
 loopSetFits:
     fits = 1;

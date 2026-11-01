@@ -722,19 +722,19 @@ int VRegPool__destroyEntries(owner)
 {
   /* issue #64 live-repro: same iterator-object split as Program__insertPhiNodes (part_037.c), fixed earlier
    * this session - auStack_38 is walked by HashTableIterator__advance/HashTableIterator__begin as owner[0..4] (0x14 bytes)
-   * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
-   * own continuation value. Separated, HashTableIterator__advance's real update never reached local_28, so the
-   * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
+   * but declared only 16 bytes; iterNode, the missing 5th word, is what this loop reads back as its
+   * own continuation value. Separated, HashTableIterator__advance's real update never reached iterNode, so the
+   * loop never saw it become null - not just a hang: the same (unchanging) iterNode object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
    * elsewhere on this issue (Program__hoistInstructions: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
   unsigned char auStack_38 [0x14];
-#define local_28 (*(int **)(auStack_38 + 0x10))
+#define iterNode (*(int **)(auStack_38 + 0x10))
   
   HashTableIterator__begin(auStack_38,*(undefined4 *)(owner + 4));
-  while (local_28 != (int *)0x0) {
-    (**(code **)(*local_28 + 4))(local_28);
+  while (iterNode != (int *)0x0) {
+    (**(code **)(*iterNode + 4))(iterNode);
     HashTableIterator__advance(auStack_38);
   }
   return;

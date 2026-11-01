@@ -1233,13 +1233,13 @@ int R520SchedModel__vslot21(this, hwLimits, inst, latencyOut)
 {
   int callResult;
   undefined4 result;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int opcode;
   
   opcode = *(int *)(*(int *)(inst + 0x88) + 8);
   callResult = (**(code **)(*hwLimits + 0x24))
-                    (hwLimits,hwLimits,inst,latencyOut,in_r7,in_r8,*(int *)(inst + 0x88));
+                    (hwLimits,hwLimits,inst,latencyOut,staleArg7,staleArg8,*(int *)(inst + 0x88));
   if ((callResult == 0) || (3 < opcode - 0x9eU)) {
     result = 0;
   }

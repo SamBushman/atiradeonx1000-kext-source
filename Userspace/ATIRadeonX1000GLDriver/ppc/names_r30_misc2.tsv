@@ -1,0 +1,10 @@
+local	LandingPad__resume_127fd8	param_1	exceptionObject	INFERRED	the exception object pointer passed straight through to __Unwind_Resume, whose own parameter is named exception_object elsewhere in this project (libGLProgrammability part_026.c)
+local	LandingPad__resume_127fd8	unaff_r27	savedR27	INFERRED	non-volatile register inherited from the unwinding function's own frame (this landing-pad fragment runs in that frame, not a fresh call), not set by any statement here
+local	LandingPad__resume_127fd8	unaff_r30	savedR30	INFERRED	non-volatile register inherited from the unwinding function's own frame, used as a pointer written to right before the resume; see savedR27
+local	LandingPad__resume_127fd8	extraout_r3	deadReturnR3	INFERRED	dead code: __Unwind_Resume never returns, so this read of its "return value" is unreachable in practice
+local	IfHeader__swapArms	extraout_r4	unusedArg2	INFERRED	forwarded unmodified to Block__getBranchInst's 2nd parameter, itself already named unusedArg2 (part_022.c) since that callee ignores it
+local	IfHeader__swapArms	in_r5	unusedArg3	INFERRED	forwarded unmodified to Block__getBranchInst's unusedArg3 parameter
+local	IfHeader__swapArms	in_r6	unusedArg4	INFERRED	forwarded unmodified to Block__getBranchInst's unusedArg4 parameter
+local	IfHeader__swapArms	in_r7	unusedArg5	INFERRED	forwarded unmodified to Block__getBranchInst's unusedArg5 parameter
+local	IfHeader__swapArms	in_r8	unusedArg6	INFERRED	forwarded unmodified to Block__getBranchInst's unusedArg6 parameter
+local	IfHeader__swapArms	in_r9	unusedArg7	INFERRED	forwarded unmodified to Block__getBranchInst's unusedArg7 parameter

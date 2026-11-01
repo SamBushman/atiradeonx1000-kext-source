@@ -711,7 +711,7 @@ int IRInst__swapOperands(inst, operandA, operandB, compiler)
   int recAHeader;
   int vslotArgA;
   int vslotArgB;
-  int extraout_r4;
+  int retR4;
   int recARegOffset;
   int recBRegOffset;
   int recAReg;
@@ -724,7 +724,7 @@ int IRInst__swapOperands(inst, operandA, operandB, compiler)
   vslotArgB = operandB;
   if (0 < operandA) {
     (**(code **)(*inst + 0x14))(inst,operandA,operandB,compiler);
-    vslotArgA = extraout_r4;
+    vslotArgA = retR4;
   }
   if (0 < operandB) {
     (**(code **)(*inst + 0x14))(inst,vslotArgA,vslotArgB,compiler);

@@ -2164,8 +2164,8 @@ int NeighbourList__locateAppendSlot(neighbourList, slotOut, blockOut)
 }
 
 /* pairIndex @ 0x134b1c (60 bytes) */
-int pairIndex(param_1, nodeA, nodeBThenMax)
-  undefined4 param_1;
+int pairIndex(unusedArg1, nodeA, nodeBThenMax)
+  undefined4 unusedArg1;
   int nodeA;
   int nodeBThenMax;
 {
@@ -4723,7 +4723,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   int *block;
   uint zeroWordsLeft;
   undefined4 usedComponents;
-  int local_64;
+  int unusedSuccessorCount;
   undefined4 swizzleComponentUse [3];
   
   bitCount = regCount * 4;
@@ -4762,7 +4762,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
             }
             isFirstSuccessor = true;
             successorByteOffset = 0;
-            local_64 = 0;
+            unusedSuccessorCount = 0;
             for (successorOrdinal = 1; successorOrdinal <= *(uint *)(block[0x34] + 4); successorOrdinal = successorOrdinal + 1) {
               successorBlock = *(int *)(*(int *)(block[0x34] + 8) + successorByteOffset);
               if (successorBlock != 0) {

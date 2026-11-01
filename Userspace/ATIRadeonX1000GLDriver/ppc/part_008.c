@@ -370,15 +370,15 @@ int extvsMakeShaderCurrent(glContext, shader)
   int shader;
 {
   int symbolRecord;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg4;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
   int symbolByteOffset;
   uint loopIndex;
   
   (**(code **)(((unsigned char *)0x000011ac) + glContext))(glContext,shader,0);
   (**(code **)(((unsigned char *)0x000011a4) + glContext))
-            (glContext,shader,*(undefined4 *)(((unsigned char *)0x0000118c) + glContext),in_r6,in_r7,in_r8,
+            (glContext,shader,*(undefined4 *)(((unsigned char *)0x0000118c) + glContext),staleArg4,staleArg5,staleArg6,
              *(code **)(((unsigned char *)0x000011a4) + glContext));
   *(undefined4 *)(shader + 100) = 0;
   *(undefined4 *)(shader + 0x54) = 0;

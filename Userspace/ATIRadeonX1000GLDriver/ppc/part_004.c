@@ -5103,7 +5103,7 @@ void gld_beginQuerySlot(int ctx,int *queryIdPtr,undefined4 passThroughArg3,undef
   int queryEntries;
   undefined4 *packetCursor;
   int queryPool;
-  undefined4 in_LR;
+  undefined4 staleFprArg9Hi;
   
   queryPool = *(int *)(ctx + 0x224);
   queryEntries = queryPool + 0x210;
@@ -5126,7 +5126,7 @@ void gld_beginQuerySlot(int ctx,int *queryIdPtr,undefined4 passThroughArg3,undef
   ((unsigned char *)0x00002b7e)[ctx] = 1;
   ((void (*)())gldValidateState)(ctx + 0x240,queryIdPtr,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,packetCursor,staleFprArg1,staleFprArg2,
                staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,
-               (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
+               (double)CONCAT44(staleFprArg9Hi,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
   return;
 }
 
@@ -5311,7 +5311,7 @@ void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThr
   undefined4 *scratchPtr14;
   int scratchInt15;
   int entryCount;
-  undefined4 in_LR;
+  undefined4 staleFprArg9Hi;
   
   entryCount = *(int *)(ctx + 0x2610);
   scratchInt15 = *(int *)(ctx + 0x261c);
@@ -5400,7 +5400,7 @@ void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThr
   ((unsigned char *)0x00002b7e)[ctx] = 0;
   ((void (*)())gldValidateState)(ctx + 0x240,param2AfterFlush,passThroughArg3,passThroughArg4,staleArgR7,staleArgR8,scratchPtr11,staleFprArg1,staleFprArg2,
                staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,
-               (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
+               (double)CONCAT44(staleFprArg9Hi,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
   return;
 }
 

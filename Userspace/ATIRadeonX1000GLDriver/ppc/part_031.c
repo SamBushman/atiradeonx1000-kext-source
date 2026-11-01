@@ -527,7 +527,7 @@ int IRInst__foldCompareResultIntoCopy(inst, pass)
   uint laneSelector;
   int *copyInst;
   int operandNumber;
-  double fparam_1;
+  double foldedCompareValue;
   undefined8 constantSearchResult;
   int destMaskWord;
   undefined4 sourceDestMaskWord;
@@ -627,14 +627,14 @@ setCopyListCursor:
       for (operandNumberB = 1; operandCountLimit = (**(code **)(*operandVReg + 0x14))(operandVReg), operandNumberB <= operandCountLimit;
           operandNumberB = operandNumberB + 1) {
         IRInst__foldCompareConstResult(foldedCompareResult,operandVReg,operandNumberB,fallbackSourceValue,pass);
-        fparam_1 = (double)foldedCompareResult[0];
+        foldedCompareValue = (double)foldedCompareResult[0];
         copyInstFromList = (int *)*copyListCursor;
-        constantSearchResult = ((int (*)())IRInst__findConstantOperandWithValue)(copyInstFromList,staleArg4,foundOperandSlots,fparam_1);
+        constantSearchResult = ((int (*)())IRInst__findConstantOperandWithValue)(copyInstFromList,staleArg4,foundOperandSlots,foldedCompareValue);
         operandCountLimit = foundOperandSlots[0];
         foundOperand = (int)((ulonglong)constantSearchResult >> 0x20);
         if (foundOperand == 0) {
           operandCountLimit = copyInstFromList[0x21];
-          ((void (*)())IRInst__setLiteralOperandAndSource)(copyInstFromList,(int)constantSearchResult,operandCountLimit + 1,pass,fparam_1);
+          ((void (*)())IRInst__setLiteralOperandAndSource)(copyInstFromList,(int)constantSearchResult,operandCountLimit + 1,pass,foldedCompareValue);
           (**(code **)(*copyInstFromList + 0x88))(copyInstFromList,operandCountLimit + 1,laneNumber,laneNumber);
         }
         else {
@@ -882,7 +882,7 @@ int IRInst__convertCompareToBinaryAlu(inst, compiler)
   uint negate2;
   undefined4 defaultSelect;
   undefined4 operandVReg;
-  int iVar5;
+  int operandOrder;
   undefined4 operandVReg2;
   undefined4 newOpcode;
   undefined4 staleR5;
@@ -919,13 +919,13 @@ int IRInst__convertCompareToBinaryAlu(inst, compiler)
   DList__unlink(inst);
   compareCondition = IRInst__getCompareCondition(inst);
   newOpcode = *(undefined4 *)(ptrTo_compareConditionToBinaryOpcodeTable_001e8c70 + compareCondition * 4);
-  iVar5 = *(int *)(ptrTo_compareConditionOperandOrderTable_001e8c6c + compareCondition * 4);
+  operandOrder = *(int *)(ptrTo_compareConditionOperandOrderTable_001e8c6c + compareCondition * 4);
   *(int *)(*(int *)(compiler + 0x6c4) + 0x21c) = *(int *)(*(int *)(compiler + 0x6c4) + 0x21c) + 1;
   IRInst__reinitAsBinary(inst,newOpcode,compiler);
   *(undefined4 *)(inst + 0x94) = instId;
   *(undefined4 *)(inst + 0x98) = 0;
   *(undefined4 *)(inst + 0x9c) = defaultSelect;
-  if (iVar5 == 0) {
+  if (operandOrder == 0) {
     IRInst__setOperandSource(inst,1,operandVReg,0,compiler);
     IROperand__setModifierBits(inst + 0xa4,1,negate1);
     IROperand__setModifierBits(inst + 0xa4,2,abs1);

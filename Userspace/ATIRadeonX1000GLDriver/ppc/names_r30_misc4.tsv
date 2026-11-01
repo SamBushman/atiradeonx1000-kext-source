@@ -1,0 +1,1 @@
+local	HwLimits__computeBlockLiveness	local_64	unusedSuccessorCount	INFERRED	write-only dead store: zeroed immediately before the successor-walk loop but never read (the loop tracks state via isFirstSuccessor/successorByteOffset instead); named rather than removed per established policy for provably write-only dead locals
