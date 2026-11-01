@@ -22,3 +22,17 @@ local	Program__loadDefaultConstants	local_48	constScratch0	CONFIRMED	word0 of th
 local	Program__loadDefaultConstants	local_44	intConstWord1	CONFIRMED	word1 of the int-const buffer (ILReader__appendIntConst 2nd const word)
 local	Program__loadDefaultConstants	local_40	intConstWord2	CONFIRMED	word2 of the int-const buffer
 local	Program__loadDefaultConstants	local_3c	intConstWord3	CONFIRMED	word3 of the int-const buffer
+local	ildisPrintOutputTopology	local_38	topoSuffixWord0	INFERRED	first 4 bytes of a format-string suffix copied byte-wise from an s__<name> string constant, passed as the base of the ildisAppendf format arg (contiguous with local_34/acStack_33/local_30/local_2c below it)
+local	ildisPrintOutputTopology	local_34	topoSuffixByte4	INFERRED	byte 4 of the same format-string suffix buffer
+local	ildisPrintOutputTopology	local_30	topoSuffixWord8	INFERRED	bytes 8-11 of the same format-string suffix buffer
+local	ildisPrintOutputTopology	local_2c	topoSuffixTail	INFERRED	bytes 12-51 (tail) of the same format-string suffix buffer
+local	ildisPrintInputPrimitive	local_38	primSuffixWord0	INFERRED	first 4 bytes of a format-string suffix copied byte-wise from an s__<name> string constant, passed as the base of the ildisAppendf format arg (contiguous with local_34/acStack_33/local_30/local_2c below it)
+local	ildisPrintInputPrimitive	local_34	primSuffixByte4	INFERRED	byte 4 of the same format-string suffix buffer (some switch cases write a wider value here; a pure rename, no behaviour change)
+local	ildisPrintInputPrimitive	acStack_33	primSuffixBytes5to7	INFERRED	bytes 5-7 of the same format-string suffix buffer
+local	ildisPrintInputPrimitive	local_30	primSuffixWord8	INFERRED	bytes 8-11 of the same format-string suffix buffer
+local	ildisPrintInputPrimitive	local_2c	primSuffixTail	INFERRED	bytes 12-51 (tail) of the same format-string suffix buffer
+local	ildisPrintInstruction	acStack_132	mnemonicBuf	CONFIRMED	266-byte scratch buffer built by printf_LDBLStub_1a32d0 ("%s, " prefix) then walked by mnemonic = mnemonicBuf + fieldOffset
+local	Compiler__clearOutputChunks	auStack_b8	chunkCopyBuf	INFERRED	128-byte scratch destination of a _memcpy from the output-chunk list (compiler+0x3a0); copy result is never read afterward
+local	Compiler__clearOutputChunks	local_38	deadClearFlag	INFERRED	written to 0 each loop iteration, never read anywhere in the function
+local	ildisPrintHeader	auStack_118	formattedHeaderLine	CONFIRMED	268-byte buffer filled by printf_LDBLStub_1a32d0 ("il_%s_%d_%d") then passed to ildisAppendf
+local	ildisDisassembleTokens	auStack_248	disContext	CONFIRMED	passed to ildisInitContext and ildisPrintProgram as the disassembler context object

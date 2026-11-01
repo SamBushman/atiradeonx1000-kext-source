@@ -402,33 +402,33 @@ int ildisPrintOutputTopology(disassembler, instructionToken, fmtArgR5, fmtArgR6,
   undefined4 fmtArgR10;
 {
   uint topologyKind;
-  char local_38 [4];
-  char local_34 [4];
-  char local_30 [4];
-  char local_2c [40];
+  char topoSuffixWord0 [4];
+  char topoSuffixByte4 [4];
+  char topoSuffixWord8 [4];
+  char topoSuffixTail [40];
   
   topologyKind = instructionToken >> 0x10 & 0x3fff;
   if (topologyKind == 1) {
     fmtArgR9 = "_line_strip";
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 0));
-    *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 4));
-    *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 8));
+    *(unsigned int *)topoSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 0));
+    *(unsigned int *)topoSuffixByte4 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 4));
+    *(unsigned int *)topoSuffixWord8 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 8));
   }
   else if (topologyKind == 0) {
     fmtArgR9 = "_point_list";
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 0));
-    *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 4));
-    *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 8));
+    *(unsigned int *)topoSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 0));
+    *(unsigned int *)topoSuffixByte4 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 4));
+    *(unsigned int *)topoSuffixWord8 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 8));
   }
   else if (topologyKind == 2) {
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 0));
-    *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 4));
-    *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 8));
-    (*(unsigned int *)((unsigned char *)&(local_2c) + 0)) = (*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 12));
+    *(unsigned int *)topoSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 0));
+    *(unsigned int *)topoSuffixByte4 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 4));
+    *(unsigned int *)topoSuffixWord8 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 8));
+    (*(unsigned int *)((unsigned char *)&(topoSuffixTail) + 0)) = (*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 12));
     fmtArgR9 = (char *)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 0));
     fmtArgR10 = (*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 12));
   }
-  return ildisAppendf(disassembler,local_38,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  return ildisAppendf(disassembler,topoSuffixWord0,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
 }
 
 /* ildisPrintInputPrimitive @ 0xdc71c (268 bytes) */
@@ -442,45 +442,45 @@ int ildisPrintInputPrimitive(disassembler, instructionToken, fmtArgR5, fmtArgR6,
   char *fmtArgR9;
   uint fmtArgR10;
 {
-  char local_38 [4];
-  char local_34;
-  char acStack_33 [3];
-  char local_30 [4];
-  char local_2c [40];
+  char primSuffixWord0 [4];
+  char primSuffixByte4;
+  char primSuffixBytes5to7 [3];
+  char primSuffixWord8 [4];
+  char primSuffixTail [40];
   
   switch(instructionToken >> 0x10 & 0x3fff) {
   case 0:
     fmtArgR9 = "_point";
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_001a82e0) + 0));
-    (*(unsigned short *)((unsigned char *)&(acStack_33) + 0)) = (*(unsigned short *)((unsigned char *)&(s__point_001a82e0) + 5));
-    local_34 = s__point_001a82e0[4];
+    *(unsigned int *)primSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_001a82e0) + 0));
+    (*(unsigned short *)((unsigned char *)&(primSuffixBytes5to7) + 0)) = (*(unsigned short *)((unsigned char *)&(s__point_001a82e0) + 5));
+    primSuffixByte4 = s__point_001a82e0[4];
     break;
   case 1:
     fmtArgR9 = "_line";
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_001a82e8) + 0));
-    local_34 = (*(unsigned short *)((unsigned char *)&(s__line_001a82e8) + 4));
+    *(unsigned int *)primSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_001a82e8) + 0));
+    primSuffixByte4 = (*(unsigned short *)((unsigned char *)&(s__line_001a82e8) + 4));
     break;
   case 2:
     fmtArgR9 = "_triangle";
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_001a82f0) + 0));
-    local_34 = (*(unsigned int *)((unsigned char *)&(s__triangle_001a82f0) + 4));
-    (*(unsigned short *)((unsigned char *)&(local_30) + 0)) = (*(unsigned short *)((unsigned char *)&(s__triangle_001a82f0) + 8));
+    *(unsigned int *)primSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_001a82f0) + 0));
+    primSuffixByte4 = (*(unsigned int *)((unsigned char *)&(s__triangle_001a82f0) + 4));
+    (*(unsigned short *)((unsigned char *)&(primSuffixWord8) + 0)) = (*(unsigned short *)((unsigned char *)&(s__triangle_001a82f0) + 8));
     break;
   case 3:
     fmtArgR9 = "_line_adj";
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_adj_001a82fc) + 0));
-    local_34 = (*(unsigned int *)((unsigned char *)&(s__line_adj_001a82fc) + 4));
-    (*(unsigned short *)((unsigned char *)&(local_30) + 0)) = (*(unsigned short *)((unsigned char *)&(s__line_adj_001a82fc) + 8));
+    *(unsigned int *)primSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_adj_001a82fc) + 0));
+    primSuffixByte4 = (*(unsigned int *)((unsigned char *)&(s__line_adj_001a82fc) + 4));
+    (*(unsigned short *)((unsigned char *)&(primSuffixWord8) + 0)) = (*(unsigned short *)((unsigned char *)&(s__line_adj_001a82fc) + 8));
     break;
   case 4:
     fmtArgR10 = (uint)(ushort)(*(unsigned short *)((unsigned char *)&(s__triangle_adj_001a8308) + 12));
-    *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 0));
-    local_34 = (*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 4));
-    *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 8));
-    (*(unsigned short *)((unsigned char *)&(local_2c) + 0)) = (*(unsigned short *)((unsigned char *)&(s__triangle_adj_001a8308) + 12));
+    *(unsigned int *)primSuffixWord0 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 0));
+    primSuffixByte4 = (*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 4));
+    *(unsigned int *)primSuffixWord8 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 8));
+    (*(unsigned short *)((unsigned char *)&(primSuffixTail) + 0)) = (*(unsigned short *)((unsigned char *)&(s__triangle_adj_001a8308) + 12));
     fmtArgR9 = (char *)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 0));
   }
-  ildisAppendf(disassembler,local_38,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ildisAppendf(disassembler,primSuffixWord0,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
@@ -800,7 +800,7 @@ int ildisPrintHeader(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtAr
   uint minorVersion;
   char shaderTypeChar0;
   char shaderTypeCharsRest [15];
-  undefined1 auStack_118 [268];
+  undefined1 formattedHeaderLine [268];
   
   headerToken = **(uint **)(disassembler + 8);
   *(uint **)(disassembler + 8) = *(uint **)(disassembler + 8) + 1;
@@ -826,9 +826,9 @@ int ildisPrintHeader(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtAr
   minorVersion = headerToken & 0xff;
   shaderTypeText = &shaderTypeChar0;
   majorVersion = headerToken >> 8 & 0xff;
-  printf_LDBLStub_1a32d0(auStack_118,"il_%s_%d_%d",shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  printf_LDBLStub_1a32d0(formattedHeaderLine,"il_%s_%d_%d",shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
   *(uint *)(disassembler + 0x218) = (uint)(shaderType == 1);
-  ildisAppendf(disassembler,auStack_118,shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
+  ildisAppendf(disassembler,formattedHeaderLine,shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
   return ildisFlushLine(disassembler,r4AfterCall,shaderTypeText,majorVersion,minorVersion,fmtArgR8,shaderTypeTextArg,fmtArgR10);
 }
 
@@ -1716,7 +1716,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
   char textBufferByte1;
   uint *instructionPtr;
   uint opcode;
-  char acStack_132 [266];
+  char mnemonicBuf [266];
   undefined4 result;
   
   instructionPtr = (uint *)disassembler[2];
@@ -1978,11 +1978,11 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
         disassembler[2] = (int)(defFloatPtr + 4);
         textBuffer = s___001a44f4[0];
         textBufferByte1 = s___001a44f4[1];
-        acStack_132[0] = s___001a44f4[2];
+        mnemonicBuf[0] = s___001a44f4[2];
         defPtrAlias = defFloat3Bits;
         ((char * (*)())vsdisFormatFloat)(declResult,10,fmtArgR5,(double)defFloat0);
-        fieldOffset = printf_LDBLStub_1a32d0(acStack_132,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
-        mnemonic = acStack_132 + fieldOffset;
+        fieldOffset = printf_LDBLStub_1a32d0(mnemonicBuf,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
+        mnemonic = mnemonicBuf + fieldOffset;
         ((char * (*)())vsdisFormatFloat)(fieldOffset,10,fmtArgR5,(double)defFloat1);
         fieldOffset = printf_LDBLStub_1a32d0(mnemonic,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
         ((char * (*)())vsdisFormatFloat)(fieldOffset,10,fmtArgR5,(double)defFloat2);
@@ -3263,15 +3263,15 @@ int ildisDisassembleTokens(sinkArg, tokenStart, tokenCount, sinkRecord)
   int tokenCount;
   int sinkRecord;
 {
-  undefined1 auStack_248 [528];
+  undefined1 disContext [528];
   int sinkRecordField;
   undefined4 sinkArgField;
   
   if (((sinkRecord != 0) && (tokenStart != 0)) && (tokenCount != 0)) {
-    ildisInitContext(auStack_248);
+    ildisInitContext(disContext);
     sinkRecordField = sinkRecord;
     sinkArgField = sinkArg;
-    ((int (*)())ildisPrintProgram)(auStack_248,tokenStart,tokenCount);
+    ((int (*)())ildisPrintProgram)(disContext,tokenStart,tokenCount);
   }
   return;
 }
@@ -3543,15 +3543,15 @@ int Compiler__clearOutputChunks(compiler)
   int compiler;
 {
   int loopCounter;
-  undefined1 auStack_b8 [128];
-  undefined1 local_38;
+  undefined1 chunkCopyBuf [128];
+  undefined1 deadClearFlag;
   
   if (0 < *(int *)(compiler + 0x3a4)) {
     loopCounter = 0;
     do {
-      _memcpy(auStack_b8,loopCounter + *(int *)(compiler + 0x3a0),0x80);
+      _memcpy(chunkCopyBuf,loopCounter + *(int *)(compiler + 0x3a0),0x80);
       loopCounter = loopCounter + 0x80;
-      local_38 = 0;
+      deadClearFlag = 0;
     } while (loopCounter < *(int *)(compiler + 0x3a4));
   }
   *(undefined4 *)(compiler + 0x3a8) = 0;
