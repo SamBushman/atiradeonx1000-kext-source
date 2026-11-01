@@ -1,0 +1,31 @@
+# r30: final tail of GLDriver variable-placeholder naming
+
+Scope: part_049/021/053/039/017/048/038/004/031/044/050/008/041/003/030/018/016 (the last items from the r27-r29 handoff list). All 17 are now at 0 real placeholders.
+
+## Correction to the handoff's placeholder counts
+`ph.py`'s counts for part_003/016/017/018/044 (2/1/8/1/3) were ALL false positives, confirming the same class of bug r29 already found: the regex matches placeholder-shaped tokens inside `/* ... */` historical investigation comments, and inside already-chosen descriptive names that happen to retain a `local_<hex>` stylistic prefix (e.g. `local_7c_buf`, `local_c08c_buf`, `local_68vec_158c3c` - these are real, deliberately chosen names from earlier sessions, not Ghidra placeholders). No code changes were needed in those 5 files. A sixth false-positive source found this round: placeholder-shaped text inside a `printf`-style string literal (part_041.c's `"Register puVar7 : ..."` debug format string) - `ph.py`/simple regexes don't exclude string literals either.
+
+## Real work (6 commits, all gates IDENTICAL)
+- **part_030/038/041 (batch 1)**: `IRInst__swapOperands`'s `extraout_r4`→`retR4` (secondary return register from the `*inst+0x14` vtable call); `VRegPool__destroyEntries`'s `local_28`→`iterNode` (hash-table iterator current-node pointer, `#define` overlay); `pairIndex`'s `param_1`→`unusedArg1` (caller argument the callee never reads).
+- **part_049 (batch 2)**: `R300SchedModel__vslot11/14/16`'s `in_r7`/`in_r8`→`scratchR7`/`scratchR8` (stale registers at a `this+0x88` vtable call proven 3-arg by a sibling call in the same function); `R300VSchedModel__vslot3_canAddInstruction`'s `in_r5`/`in_r6`→`passThroughArg3`/`passThroughArg4` (inbound registers forwarded straight into the `this+0x4c` vtable call; this function's own 2-param K&R declaration doesn't name them - left as locals rather than promoted to formal params, lower risk, same observable behavior).
+- **part_021/053/048/008/050 (batch 3)**: `Block__getOrAllocSlotId` params →`block`/`regClass`; `MachineAssembler__visitIfHeaderStatic`'s `param_3`→`headerNode` (INFERRED, see caveat below); `MachineCodeWriter__encodeProgram`'s `local_54`→`codeSink` (INFERRED, see caveat below); `IRInst__createMovForDest`'s `local_28`→`mergedSelectScratch`; and 18 `in_rN`→`staleArgN` renames across `R520MachineAssembler__vslot38/31/24`, `ValueKey__foldMulPowerOfTwoIntoOutputScale/foldEqualSourcesIntoOutputScale`, `extvsMakeShaderCurrent`, `R520SchedModel__vslot21` - all matched to the **existing** `staleArgN` convention already used for the identical vtable-call-with-trailing-stale-registers shape in part_047.c/part_054.c (same binary, earlier round).
+- **part_039 (batch 4)**: `LandingPad__resume_127fd8` (a C++ EH landing-pad fragment) - `param_1`→`exceptionObject`, `unaff_r27`→`savedR27`, `unaff_r30`→`savedR30` (non-volatile registers inherited from the unwinding function's own frame, not set by this fragment), `extraout_r3`→`deadReturnR3` (dead code after the no-return `__Unwind_Resume` call). `IfHeader__swapArms`'s `extraout_r4`/`in_r5..in_r9`→`unusedArg2..unusedArg7`, propagated directly from `Block__getBranchInst`'s own already-named `unusedArg2..7` parameters (same callee, direct call, positions match exactly).
+- **part_004/031 (batch 5)**: `gld_beginQuerySlot`/`gld_emitStampFencePacket`'s `in_LR`→`staleFprArg9Hi` (link-register misread half of the `CONCAT44` double-reconstruction of the already-named `staleFprArg9`); `IRInst__foldCompareResultIntoCopy`'s `fparam_1`→`foldedCompareValue`; `IRInst__convertCompareToBinaryAlu`'s `iVar5`→`operandOrder` (table lookup result).
+- **part_041 (batch 6)**: `HwLimits__computeBlockLiveness`'s `local_64`→`unusedSuccessorCount` (write-only dead store, named not removed - missed in batch 1's pass, found by the final sweep).
+
+## Caveats (lower-confidence INFERRED names, not hybrids - no splitting issue, just semantic uncertainty)
+- `MachineAssembler__visitIfHeaderStatic`'s `headerNode`: forwarded to a vtable slot whose sibling call sites elsewhere pass `block`/`node`, but this function's OWN `block` parameter is a *different* value passed separately in the same statement - so `headerNode` is a distinct object playing an analogous positional role, not literally the same thing as `block`. No direct callers were found (vtable-dispatched only) to confirm further.
+- `MachineCodeWriter__encodeProgram`'s `codeSink`: an object pointer read from EncoderState word index 8, dispatched via vtable slots 0x18/0x10/0x20/0xc/0x24 in a begin/finish/getSize/reset/write-looking sequence around the block-encoding loop. The exact class/interface was not identified beyond that call shape.
+- 2 of the `staleArgN` numeric suffixes (part_053/subject-to-part_054's `staleArg6/7/8`, part_048/008-subject-to-part_047's `staleArg4/5/6`) were chosen to match the *nearest existing sibling precedent's numbering* in each case, not independently re-derived from register-position arithmetic (the two precedents themselves use different numbering schemes for what looks like the same mechanical pattern - likely just two different earlier rounds' conventions, not a real semantic difference). Did not attempt to reconcile/renumber the earlier rounds' choices.
+
+## Final repo-wide sweep result (per directive)
+A clean sweep (comments and string literals stripped before matching, same placeholder-pattern set used all round, covering every `part_*.c` in this directory) found:
+- **17/17 assigned files: 0 placeholders.**
+- **6 files OUTSIDE this round's assignment still have real, uncommented placeholders - these were never assigned to r27/r28/r29/r30 and I did NOT touch them (out of scope, flagging per directive rather than expanding scope unilaterally):**
+  - `part_019.c`: 11 (`param_1`, `param_2`, `param_7`)
+  - `part_022.c`: 24 (`param_2..param_7`) - note this file defines `Block__getBranchInst`, the callee referenced throughout this round's `unusedArgN` evidence; its own placeholder params were not in scope here.
+  - `part_023.c`: 9 (`param_3`)
+  - `part_024.c`: 13 (`iVar6`, `param_2`)
+  - `part_037.c`: 3 (`iVar13`, `param_3`)
+
+So GLDriver as a whole is **not yet** at zero placeholders - these 5 files (60 occurrences) are the honest remainder for a future round (call it r31) to pick up.
