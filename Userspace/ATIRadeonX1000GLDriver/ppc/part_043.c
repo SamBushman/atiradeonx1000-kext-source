@@ -2443,6 +2443,9 @@ int Inst__tryCopyPropagate(inst, program, foldStatus)
   return result;
 }
 
+#define savedCounters0_IDX 0
+#define savedCounters1_IDX 1
+#define savedCounters2_IDX 2
 /* Inst__collapseMulSplatByDotOnes @ 0x14acb8 (852 bytes) */
 int Inst__collapseMulSplatByDotOnes(inst, program)
   int *inst;
@@ -2579,15 +2582,15 @@ setExtraSource:
     if ((inst[5] & 0x200U) != 0) {
       extraSource = IRInst__getOperandSource(inst,inst[0x21]);
     }
-    savedCounters[0] = 0;
-    savedCounters[1] = 0;
-    savedCounters[2] = 0;
-    IRInst__saveCounters(inst,&savedCounters[0],0xffffffff);
+    savedCounters[savedCounters0_IDX] = 0;
+    savedCounters[savedCounters1_IDX] = 0;
+    savedCounters[savedCounters2_IDX] = 0;
+    IRInst__saveCounters(inst,&savedCounters[savedCounters0_IDX],0xffffffff);
     destRegister = inst[0x53];
     prevNode = inst[1];
     DList__unlink(inst);
     IRInst__reinitAsBinary(inst,*(undefined4 *)(*(int *)(sourceDef + 0x88) + 8),*(undefined4 *)(program + 8));
-    IRInst__restoreCounters(inst,&savedCounters[0]);
+    IRInst__restoreCounters(inst,&savedCounters[savedCounters0_IDX]);
     Block__insertInstAfter(*(undefined4 *)(prevNode + 0x158),prevNode,inst);
     dotSaturate = *(int *)(sourceDef + 0x120);
     inst[0x49] = *(int *)(sourceDef + 0x124);
@@ -2636,6 +2639,9 @@ setExtraSource:
   return 0;
 }
 
+#undef savedCounters0_IDX
+#undef savedCounters1_IDX
+#undef savedCounters2_IDX
 /* Inst__collapseAddIntoMadMulAddend @ 0x14b150 (1696 bytes) */
 int Inst__collapseAddIntoMadMulAddend(inst, program)
   int inst;
@@ -6614,6 +6620,9 @@ int Inst__mergeSplatSourceInsts_00151a74(inst, inst2, program)
   return 0;
 }
 
+#define scaleOut_IDX 0
+#define zeroWordA_IDX 1
+#define zeroWordB_IDX 5
 /* Inst__mergeSplatSourceInsts_001524b8 @ 0x1524b8 (1648 bytes) */
 int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
   int *inst;
@@ -6809,12 +6818,12 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
                 loopIndex = loopIndex + 1;
               } while (moreComponents);
               a0[0x27] = constSelectWord;
-              scaleOut[0] = 0;
+              scaleOut[scaleOut_IDX] = 0;
               createWithConstantOperandsResult[0x27] = lastOperandBuf[0];
-              scaleOut[1] = 0;
-              scaleOut[5] = 0;
+              scaleOut[zeroWordA_IDX] = 0;
+              scaleOut[zeroWordB_IDX] = 0;
               operandRecord2 = IRInst__getOperandRecord(inst,1);
-              IROperand__copyFrom(&scaleOut[0],operandRecord2);
+              IROperand__copyFrom(&scaleOut[scaleOut_IDX],operandRecord2);
               lastOperandBuf[1] = 0;
               lastOperandBuf[2] = 0;
               lastOperandBuf[3] = 0;
@@ -6831,7 +6840,7 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
               inst[0x49] = resultScaleCode;
               inst[0x26] = 0;
               operandRecord2 = IRInst__getOperandRecord(inst,1);
-              IROperand__copyFrom(operandRecord2,&scaleOut[0]);
+              IROperand__copyFrom(operandRecord2,&scaleOut[scaleOut_IDX]);
               IRInst__setOperandSource(inst,1,a0,0,*(undefined4 *)(program + 8));
               IROperand__setModifierBits(inst + 0x29,1,inst2[0x2e] & 1);
               IRInst__copyOperandFrom(inst,2,inst2,1);
@@ -6943,6 +6952,18 @@ int Inst__mergeSplatSourceInsts_001524b8(inst, inst2, program)
   return 0;
 }
 
+#undef scaleOut_IDX
+#undef zeroWordA_IDX
+#undef zeroWordB_IDX
+#define operandCopyA_IDX 0
+#define operandCopyAWord1_IDX 1
+#define operandCopyAWord5_IDX 5
+#define operandCopyB_IDX 0
+#define operandCopyBWord1_IDX 1
+#define operandCopyBWord5_IDX 5
+#define operandCopyC_IDX 0
+#define operandCopyCWord1_IDX 1
+#define operandCopyCWord5_IDX 5
 /* Inst__mergeAddWithSharedConstant_00152ea8 @ 0x152ea8 (4720 bytes) */
 int Inst__mergeAddWithSharedConstant_00152ea8(inst, inst2, program)
   int *inst;
@@ -7606,21 +7627,21 @@ setIsLastComponent:
                       if ((inst2[5] & 0x200U) != 0) {
                         IRInst__readLastOperand(inst2,&lastOperandRecord);
                       }
-                      operandCopyA[0] = 0;
-                      operandCopyA[1] = 0;
-                      operandCopyA[5] = 0;
-                      operandCopyB[0] = 0;
-                      operandCopyB[1] = 0;
-                      operandCopyB[5] = 0;
-                      operandCopyC[0] = 0;
-                      operandCopyC[1] = 0;
-                      operandCopyC[5] = 0;
+                      operandCopyA[operandCopyA_IDX] = 0;
+                      operandCopyA[operandCopyAWord1_IDX] = 0;
+                      operandCopyA[operandCopyAWord5_IDX] = 0;
+                      operandCopyB[operandCopyB_IDX] = 0;
+                      operandCopyB[operandCopyBWord1_IDX] = 0;
+                      operandCopyB[operandCopyBWord5_IDX] = 0;
+                      operandCopyC[operandCopyC_IDX] = 0;
+                      operandCopyC[operandCopyCWord1_IDX] = 0;
+                      operandCopyC[operandCopyCWord5_IDX] = 0;
                       operandRecord2 = IRInst__getOperandRecord(inst3,1);
-                      IROperand__copyFrom(&operandCopyC[0],operandRecord2);
+                      IROperand__copyFrom(&operandCopyC[operandCopyC_IDX],operandRecord2);
                       operandRecord2 = IRInst__getOperandRecord(inst4,1);
-                      IROperand__copyFrom(&operandCopyA[0],operandRecord2);
+                      IROperand__copyFrom(&operandCopyA[operandCopyA_IDX],operandRecord2);
                       operandRecord2 = IRInst__getOperandRecord(inst4,2);
-                      IROperand__copyFrom(&operandCopyB[0],operandRecord2);
+                      IROperand__copyFrom(&operandCopyB[operandCopyB_IDX],operandRecord2);
                       counterSave0 = 0;
                       counterSave1 = 0;
                       counterSave2 = 0;
@@ -7636,14 +7657,14 @@ setIsLastComponent:
                       inst[0x27] = mergedLanes;
                       inst[0x49] = resultScaleCode;
                       operandRecord2 = IRInst__getOperandRecord(inst,1);
-                      IROperand__copyFrom(operandRecord2,&operandCopyA[0]);
+                      IROperand__copyFrom(operandRecord2,&operandCopyA[operandCopyA_IDX]);
                       IRInst__setOperandSource(inst,1,newSrcA,0,compiler);
                       Block__insertInstBefore(inst[0x56],inst,newSrcA);
                       selectWordToStore = srcSelectA;
                       operandRecord = IRInst__getOperandRecord(inst,1);
                       *(undefined4 *)(operandRecord + 0x10) = selectWordToStore;
                       operandRecord2 = IRInst__getOperandRecord(inst,2);
-                      IROperand__copyFrom(operandRecord2,&operandCopyB[0]);
+                      IROperand__copyFrom(operandRecord2,&operandCopyB[operandCopyB_IDX]);
                       IRInst__setOperandSource(inst,2,newSrcB,0,compiler);
                       Block__insertInstBefore(inst[0x56],inst,newSrcB);
                       selectWordToStore = srcSelectB;
@@ -7651,7 +7672,7 @@ setIsLastComponent:
                       *(undefined4 *)(operandRecord + 0x10) = selectWordToStore;
                       IROperand__setModifierBits(inst + 0x2f,1,0);
                       operandRecord2 = IRInst__getOperandRecord(inst,3);
-                      IROperand__copyFrom(operandRecord2,&operandCopyC[0]);
+                      IROperand__copyFrom(operandRecord2,&operandCopyC[operandCopyC_IDX]);
                       IRInst__setOperandSource(inst,3,newSrcC,0,compiler);
                       Block__insertInstBefore(inst[0x56],inst,newSrcC);
                       selectWordToStore = srcSelectC;
@@ -7697,6 +7718,15 @@ setIsLastComponent:
   return 0;
 }
 
+#undef operandCopyA_IDX
+#undef operandCopyAWord1_IDX
+#undef operandCopyAWord5_IDX
+#undef operandCopyB_IDX
+#undef operandCopyBWord1_IDX
+#undef operandCopyBWord5_IDX
+#undef operandCopyC_IDX
+#undef operandCopyCWord1_IDX
+#undef operandCopyCWord5_IDX
 /* Inst__mergeMulWithSharedConstant_001541f0 @ 0x1541f0 (2132 bytes) */
 int Inst__mergeMulWithSharedConstant_001541f0(node, inst, pass)
   int *node;

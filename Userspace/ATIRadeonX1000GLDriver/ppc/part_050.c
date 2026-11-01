@@ -136,6 +136,7 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
   return callResult;
 }
 
+#define splatVec4_IDX 0
 /* FudoPs__vslot85_findOrEncodeConstantVector @ 0x1919d8 (344 bytes) */
 int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwizzle)
   undefined4 this;
@@ -187,7 +188,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     else {
       staleArg5 = (undefined *)0x4;
       loopRemaining2 = 4;
-      loopPtr2 = &splatVec[0];
+      loopPtr2 = &splatVec[splatVec4_IDX];
       do {
         *loopPtr2 = 0x7ffffffe;
         loopPtr2 = loopPtr2 + 1;
@@ -198,11 +199,11 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       loopRemaining = 4;
       do {
         lastSplatStore = splatValue;
-        *(float *)(loopRemaining2 + (int)&splatVec[0]) = splatValue;
+        *(float *)(loopRemaining2 + (int)&splatVec[splatVec4_IDX]) = splatValue;
         loopRemaining2 = loopRemaining2 + 4;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
-      loopRemaining2 = Program__findOrCreateConstInst(program,&splatVec[0],0x10203);
+      loopRemaining2 = Program__findOrCreateConstInst(program,&splatVec[splatVec4_IDX],0x10203);
     }
     if (loopRemaining2 != 0) {
       return loopRemaining2;
@@ -220,6 +221,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   return 0;
 }
 
+#undef splatVec4_IDX
 /* FudoPs__vslot59_tryEncodeSourceConstant @ 0x191b30 (316 bytes) */
 int FudoPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, compiler)
   undefined4 this;
@@ -581,6 +583,9 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   return;
 }
 
+#define savedCounters_IDX 0
+#define savedCounters1_IDX 1
+#define savedCounters2_IDX 2
 /* Inst__rewriteSetOpcodesWithLiterals @ 0x1922c4 (1016 bytes) */
 int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
   undefined4 staleArg1;
@@ -692,10 +697,10 @@ int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
     }
     *(int *)(inst2 + 0x158) = inst[0x56];
     newSource = 0;
-    savedCounters[2] = 0;
-    savedCounters[0] = 0;
-    savedCounters[1] = 0;
-    IRInst__saveCounters(inst,&savedCounters[0],0xffffffff);
+    savedCounters[savedCounters2_IDX] = 0;
+    savedCounters[savedCounters_IDX] = 0;
+    savedCounters[savedCounters1_IDX] = 0;
+    IRInst__saveCounters(inst,&savedCounters[savedCounters_IDX],0xffffffff);
     if ((inst[5] & 0x200U) != 0) {
       newSource = IRInst__getOperandSource(inst,inst[0x21]);
     }
@@ -704,7 +709,7 @@ int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
     IRInst__setOperandSource(inst,1,0,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     IRInst__setOperandSource(inst,2,0,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     IRInst__reinitAsTrinary(inst,0x25,*(undefined4 *)(program + 8));
-    IRInst__restoreCounters(inst,&savedCounters[0]);
+    IRInst__restoreCounters(inst,&savedCounters[savedCounters_IDX]);
     inst[4] = savedField10;
     IRInst__setOperandSource(inst,1,inst2,*(uint *)(program + 0x30) >> 7 & 1,compilerArena);
     loopIndex = 0;
@@ -741,6 +746,9 @@ int Inst__rewriteSetOpcodesWithLiterals(staleArg1, staleArg2, inst, program)
   return inst;
 }
 
+#undef savedCounters_IDX
+#undef savedCounters1_IDX
+#undef savedCounters2_IDX
 /* FudoPs__peepholeCombine @ 0x19286c (2512 bytes) */
 int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passThroughR8, passThroughR9)
   undefined4 this;

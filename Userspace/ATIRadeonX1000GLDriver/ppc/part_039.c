@@ -296,6 +296,13 @@ int KhanPs__vslot74_seedConstantValueNumbers(this, compiler)
   return;
 }
 
+#define constVec0_IDX 0
+#define constVec1_IDX 1
+#define constVec2_IDX 2
+#define constVec3_IDX 3
+#define constVec4_IDX 4
+#define constVec5_IDX 5
+#define constVec6_IDX 6
 /* KhanPs__vslot85_findOrEncodeConstantVector @ 0x128430 (780 bytes) */
 int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwizzle)
   int *this;
@@ -352,7 +359,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     else {
       staleArg5 = "";
       lanesLeft = 4;
-      fillCursor = &constVec[0];
+      fillCursor = &constVec[constVec0_IDX];
       do {
         *fillCursor = 0x7ffffffe;
         fillCursor = fillCursor + 1;
@@ -363,11 +370,11 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       lanesLeft2 = 4;
       do {
         uniformValueCopy = uniformValue;
-        *(float *)(byteOffset + (int)&constVec[0]) = uniformValue;
+        *(float *)(byteOffset + (int)&constVec[constVec0_IDX]) = uniformValue;
         byteOffset = byteOffset + 4;
         lanesLeft2 = lanesLeft2 + -1;
       } while (lanesLeft2 != 0);
-      existingConstant = Program__findOrCreateConstInst(program,&constVec[0],0x10203);
+      existingConstant = Program__findOrCreateConstInst(program,&constVec[constVec0_IDX],0x10203);
     }
     if (existingConstant != 0) {
       return existingConstant;
@@ -380,8 +387,8 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     if ((((((*(uint *)(program + 0x30) & 0x100) != 0) && (GH_U2F((unsigned int)(*constants)) == 0.0)) &&
          (GH_U2F((unsigned int)(constants[1])) == 1.0)) && ((GH_U2F((unsigned int)(constants[2])) == 0.0 && (GH_U2F((unsigned int)(constants[3])) == 0.0))))
        && (*laneSwizzle == 0x10203)) {
-      ConstRecords__fillFloat4(constants,&constVec[0]);
-      foundExact = Compiler__getOrCreateLoadConst4(constantPool,constVec[0],constVec[1],constVec[2],constVec[3],constVec[4],constVec[5],constVec[6]);
+      ConstRecords__fillFloat4(constants,&constVec[constVec0_IDX]);
+      foundExact = Compiler__getOrCreateLoadConst4(constantPool,constVec[constVec0_IDX],constVec[constVec1_IDX],constVec[constVec2_IDX],constVec[constVec3_IDX],constVec[constVec4_IDX],constVec[constVec5_IDX],constVec[constVec6_IDX]);
       return foundExact;
     }
     candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle,laneSwizzleArg);
@@ -392,6 +399,13 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   return 0;
 }
 
+#undef constVec0_IDX
+#undef constVec1_IDX
+#undef constVec2_IDX
+#undef constVec3_IDX
+#undef constVec4_IDX
+#undef constVec5_IDX
+#undef constVec6_IDX
 /* KhanPs__vslot59_tryEncodeSourceConstant @ 0x12873c (500 bytes) */
 int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, compiler)
   undefined4 this;
@@ -1399,6 +1413,7 @@ nextSourceSlot:
   } while( true );
 }
 
+#define uniformVec0_IDX 0
 /* KhanVs__vslot85_findOrEncodeConstantVector @ 0x129eb4 (344 bytes) */
 int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwizzle)
   undefined4 this;
@@ -1453,7 +1468,7 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     else {
       staleArg5 = "";
       lanesLeft = 4;
-      fillCursor = &uniformVec[0];
+      fillCursor = &uniformVec[uniformVec0_IDX];
       do {
         *fillCursor = 0x7ffffffe;
         fillCursor = fillCursor + 1;
@@ -1464,11 +1479,11 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       lanesLeft2 = 4;
       do {
         uniformValueCopy = uniformValue;
-        *(float *)(byteOffset + (int)&uniformVec[0]) = uniformValue;
+        *(float *)(byteOffset + (int)&uniformVec[uniformVec0_IDX]) = uniformValue;
         byteOffset = byteOffset + 4;
         lanesLeft2 = lanesLeft2 + -1;
       } while (lanesLeft2 != 0);
-      existingConstant = Program__findOrCreateConstInst(program,&uniformVec[0],0x10203);
+      existingConstant = Program__findOrCreateConstInst(program,&uniformVec[uniformVec0_IDX],0x10203);
     }
     if (existingConstant != 0) {
       return existingConstant;
@@ -1486,6 +1501,7 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   return 0;
 }
 
+#undef uniformVec0_IDX
 /* KhanVs__vslot9_createCompareInst @ 0x12a00c (480 bytes) */
 int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, src1IlType, src2Register, src2IlType, sourceTokenWord, sourceTokens, insertAfter, compiler)
   undefined4 this;

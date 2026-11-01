@@ -4200,6 +4200,7 @@ int RebuildState__computeNodeLevels(rebuildState, block, maxLevelOut, schedCostO
   return;
 }
 
+#define listNode_IDX 2
 /* Block__flattenAndRebuildAddMulTree @ 0x181f00 (220 bytes) */
 int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
   int *compiler;
@@ -4812,7 +4813,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
       indexPlusOne = indexPlusOne + -2;
     } while (0 < (int)pairLoopIndex);
   }
-  leftNode = chainList[2];
+  leftNode = chainList[listNode_IDX];
   if (pairLoopIndex == 0) {
     firstJoinInst = IRInst__create(opcode,*compiler);
     selectConstA = swizzleYYYX_001b0210;
@@ -5131,8 +5132,8 @@ code_r0x001836f0:
     elementRef = (int *)vectorAlloc[3];
   }
   if (inst == *elementRef) {
-    lookaheadNode = *(int *)(chainList[2] + 8);
-    moveNode = chainList[2];
+    lookaheadNode = *(int *)(chainList[listNode_IDX] + 8);
+    moveNode = chainList[listNode_IDX];
     while (nextNode = lookaheadNode, nextNode != 0) {
       DList__unlink(moveNode);
       Block__insertInstBefore(block,inst,moveNode);
@@ -5188,11 +5189,11 @@ code_r0x001836f0:
     *(undefined4 *)(operandRecord + 0x10) = selectConstC;
     IROperand__setModifierBits(inst + 0xa4,1,0);
     IROperand__setModifierBits(inst + 0xa4,2,0);
-    lookaheadNode3 = *(int *)(chainList[2] + 8);
+    lookaheadNode3 = *(int *)(chainList[listNode_IDX] + 8);
     while (lookaheadNode2 = lookaheadNode3, lookaheadNode2 != 0) {
-      DList__unlink(chainList[2]);
-      Block__insertInstBefore(block,inst,chainList[2]);
-      chainList[2] = lookaheadNode2;
+      DList__unlink(chainList[listNode_IDX]);
+      Block__insertInstBefore(block,inst,chainList[listNode_IDX]);
+      chainList[listNode_IDX] = lookaheadNode2;
       lookaheadNode3 = *(int *)(lookaheadNode2 + 8);
     }
     IRInst__setOperandSource(inst,2,*(undefined4 *)(inst + 4),0,*compiler);
@@ -5218,6 +5219,7 @@ code_r0x001836f0:
   return 1;
 }
 
+#undef listNode_IDX
 /* ObjectVector__freeAllElements @ 0x183ac8 (212 bytes) */
 int ObjectVector__freeAllElements(owner)
   int owner;

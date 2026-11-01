@@ -2147,6 +2147,53 @@ checkOperationChunk:
   return;
 }
 
+#define stepInfoType_IDX 3
+#define stepInfoSize_IDX 4
+#define stepInfoIsConstant_IDX 5
+#define stepInfoValueX_IDX 6
+#define counterInfoType_IDX 3
+#define counterInfoSize_IDX 4
+#define initInfoType_IDX 3
+#define initInfoSize_IDX 4
+#define limitInfoType_IDX 3
+#define limitInfoSize_IDX 4
+#define loopTempARegister_IDX 0
+#define loopTempABank_IDX 1
+#define loopTempAPrecision_IDX 2
+#define loopTempAType_IDX 3
+#define loopTempASize_IDX 4
+#define loopTempBPrecision_IDX 2
+#define loopTempBType_IDX 3
+#define loopTempBSize_IDX 4
+#define loopTempCPrecision_IDX 2
+#define loopTempCType_IDX 3
+#define loopTempCSize_IDX 4
+#define loopTempDPrecision_IDX 2
+#define loopTempDType_IDX 3
+#define loopTempDSize_IDX 4
+#define loopTempEPrecision_IDX 2
+#define loopTempEType_IDX 3
+#define loopTempESize_IDX 4
+#define loopTempFPrecision_IDX 2
+#define loopTempFType_IDX 3
+#define loopTempFSize_IDX 4
+#define loopTempGPrecision_IDX 2
+#define loopTempGType_IDX 3
+#define loopTempGSize_IDX 4
+#define opHeader_IDX 0
+#define opFlags_IDX 1
+#define opDest0_IDX 2
+#define opDest1_IDX 3
+#define opSrc0A_IDX 4
+#define opSrc0B_IDX 5
+#define opSrc1A_IDX 6
+#define opSrc1B_IDX 7
+#define opSrc2A_IDX 8
+#define opSrc2B_IDX 9
+#define opAuxA_IDX 10
+#define opAuxB_IDX 11
+#define opLine_IDX 12
+#define opWord13_IDX 13
 /* _DetectConstantLoopsSimple @ 0x97c0f184 (2520 bytes) */
 int _DetectConstantLoopsSimple(stream)
   int stream;
@@ -2405,14 +2452,14 @@ loopSetBodyIsSimple:
         }
       }
       loopEndOp = endOpCandidate;
-      if (((counterInfo[3] != 3) || (initInfo[3] != 3)) || ((limitInfo[3] != 3 || (stepInfo[3] != 3)))) {
+      if (((counterInfo[counterInfoType_IDX] != 3) || (initInfo[initInfoType_IDX] != 3)) || ((limitInfo[limitInfoType_IDX] != 3 || (stepInfo[stepInfoType_IDX] != 3)))) {
         notEligible = 1;
       }
-      if ((((counterInfo[4] != 0) || (initInfo[4] != 0)) || (limitInfo[4] != 0)) || (stepInfo[4] != 0)) {
+      if ((((counterInfo[counterInfoSize_IDX] != 0) || (initInfo[initInfoSize_IDX] != 0)) || (limitInfo[limitInfoSize_IDX] != 0)) || (stepInfo[stepInfoSize_IDX] != 0)) {
         notEligible = 1;
       }
-      notEligible = notEligible | stepInfo[5] == 0;
-      if (stepInfo[6] < 0) {
+      notEligible = notEligible | stepInfo[stepInfoIsConstant_IDX] == 0;
+      if (stepInfo[stepInfoValueX_IDX] < 0) {
         stepIsSubtract = stepIsSubtract ^ 1;
       }
       if (countsDown) {
@@ -2423,24 +2470,24 @@ setNotEligible:
         notEligible = 1;
       }
       if (((notEligible == 0) && (foundStep)) && (((foundEndif && ((ifOpCursor != 0 && (endifOp != 0)))) && (bodyIsSimple)))) {
-        loopTempA[1] = 1;
-        loopTempA[3] = 1;
-        loopTempA[2] = notEligible;
-        loopTempA[4] = notEligible;
-        loopTempA[0] = _AddTempRegister(stream,0,1,0);
-        _memcpy(loopTempB,&loopTempA[0],0x28);
-        loopTempB[0] = _AddTempRegister(stream,loopTempB[2],loopTempB[3],loopTempB[4]);
-        _memcpy(loopTempC,&loopTempA[0],0x28);
-        loopTempC[0] = _AddTempRegister(stream,loopTempC[2],loopTempC[3],loopTempC[4]);
-        _memcpy(loopTempD,&loopTempA[0],0x28);
-        loopTempD[0] = _AddTempRegister(stream,loopTempD[2],loopTempD[3],loopTempD[4]);
-        _memcpy(loopTempE,&loopTempA[0],0x28);
-        loopTempE[0] = _AddTempRegister(stream,loopTempE[2],loopTempE[3],loopTempE[4]);
+        loopTempA[loopTempABank_IDX] = 1;
+        loopTempA[loopTempAType_IDX] = 1;
+        loopTempA[loopTempAPrecision_IDX] = notEligible;
+        loopTempA[loopTempASize_IDX] = notEligible;
+        loopTempA[loopTempARegister_IDX] = _AddTempRegister(stream,0,1,0);
+        _memcpy(loopTempB,&loopTempA[loopTempARegister_IDX],0x28);
+        loopTempB[0] = _AddTempRegister(stream,loopTempB[loopTempBPrecision_IDX],loopTempB[loopTempBType_IDX],loopTempB[loopTempBSize_IDX]);
+        _memcpy(loopTempC,&loopTempA[loopTempARegister_IDX],0x28);
+        loopTempC[0] = _AddTempRegister(stream,loopTempC[loopTempCPrecision_IDX],loopTempC[loopTempCType_IDX],loopTempC[loopTempCSize_IDX]);
+        _memcpy(loopTempD,&loopTempA[loopTempARegister_IDX],0x28);
+        loopTempD[0] = _AddTempRegister(stream,loopTempD[loopTempDPrecision_IDX],loopTempD[loopTempDType_IDX],loopTempD[loopTempDSize_IDX]);
+        _memcpy(loopTempE,&loopTempA[loopTempARegister_IDX],0x28);
+        loopTempE[0] = _AddTempRegister(stream,loopTempE[loopTempEPrecision_IDX],loopTempE[loopTempEType_IDX],loopTempE[loopTempESize_IDX]);
         if (isInclusive != 0) {
-          _memcpy(loopTempF,&loopTempA[0],0x28);
-          loopTempF[0] = _AddTempRegister(stream,loopTempF[2],loopTempF[3],loopTempF[4]);
-          _memcpy(loopTempG,&loopTempA[0],0x28);
-          loopTempG[0] = _AddTempRegister(stream,loopTempG[2],loopTempG[3],loopTempG[4]);
+          _memcpy(loopTempF,&loopTempA[loopTempARegister_IDX],0x28);
+          loopTempF[0] = _AddTempRegister(stream,loopTempF[loopTempFPrecision_IDX],loopTempF[loopTempFType_IDX],loopTempF[loopTempFSize_IDX]);
+          _memcpy(loopTempG,&loopTempA[loopTempARegister_IDX],0x28);
+          loopTempG[0] = _AddTempRegister(stream,loopTempG[loopTempGPrecision_IDX],loopTempG[loopTempGType_IDX],loopTempG[loopTempGSize_IDX]);
         }
         _memcpy(opcodeTable,&detectConstantLoopsOpcodeTableInit_97c3aa40,0x24);
         emitEnabledTable[5] = 1;
@@ -2473,16 +2520,16 @@ setNotEligible:
         loopIndex = 0;
         destPtrTable[2] = loopTempE;
         destPtrTable[3] = loopTempB;
-        destPtrTable8 = &loopTempA[0];
+        destPtrTable8 = &loopTempA[loopTempARegister_IDX];
         srcPtrTable8 = loopTempB;
         srcPtrTable9 = loopTempE;
-        srcPtrTable10 = &loopTempA[0];
-        srcPtrTable12 = &loopTempA[0];
+        srcPtrTable10 = &loopTempA[loopTempARegister_IDX];
+        srcPtrTable12 = &loopTempA[loopTempARegister_IDX];
         srcPtrTable13 = loopTempE;
         srcPtrTable15 = loopTempB;
-        srcPtrTable16 = &loopTempA[0];
-        destPtrTable4 = &loopTempA[0];
-        destPtrTable5 = &loopTempA[0];
+        srcPtrTable16 = &loopTempA[loopTempARegister_IDX];
+        destPtrTable4 = &loopTempA[loopTempARegister_IDX];
+        destPtrTable5 = &loopTempA[loopTempARegister_IDX];
         destPtrTable6 = loopTempF;
         destPtrTable7 = loopTempG;
         srcPtrTable11 = 0;
@@ -2490,70 +2537,70 @@ setNotEligible:
         srcPtrTable17 = loopTempG;
         do {
           if (*(int *)(tableBase + 0x310) != 0) {
-            opRecord[4] = 0;
-            opRecord[5] = 0;
-            opRecord[6] = 0;
-            opRecord[7] = 0;
-            opRecord[8] = 0;
-            opRecord[9] = 0;
-            opRecord[10] = 0;
-            opRecord[11] = 0;
-            opRecord[1] = 0;
-            opRecord[12] = 0;
-            opRecord[0] = (*(uint *)(tableBase + 0x2e0) & 0xff) << 0x12;
+            opRecord[opSrc0A_IDX] = 0;
+            opRecord[opSrc0B_IDX] = 0;
+            opRecord[opSrc1A_IDX] = 0;
+            opRecord[opSrc1B_IDX] = 0;
+            opRecord[opSrc2A_IDX] = 0;
+            opRecord[opSrc2B_IDX] = 0;
+            opRecord[opAuxA_IDX] = 0;
+            opRecord[opAuxB_IDX] = 0;
+            opRecord[opFlags_IDX] = 0;
+            opRecord[opLine_IDX] = 0;
+            opRecord[opHeader_IDX] = (*(uint *)(tableBase + 0x2e0) & 0xff) << 0x12;
             emitSourceCount = *(uint *)(tableBase + 0x340);
-            opRecord[2] = 0;
-            opRecord[3] = 0;
-            opRecord[12] = *(undefined4 *)(whileOp + 0x3c);
-            opRecord[0] = emitSourceCount << 0x1d | opRecord[0];
-            opRecord[13] = 0;
+            opRecord[opDest0_IDX] = 0;
+            opRecord[opDest1_IDX] = 0;
+            opRecord[opLine_IDX] = *(undefined4 *)(whileOp + 0x3c);
+            opRecord[opHeader_IDX] = emitSourceCount << 0x1d | opRecord[opHeader_IDX];
+            opRecord[opWord13_IDX] = 0;
             destSizeShifted = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3) << 10;
-            opRecord[2] = destSizeShifted | 0x6c;
+            opRecord[opDest0_IDX] = destSizeShifted | 0x6c;
             destSizeBits = *(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3;
             if (destSizeBits == 1) {
 loopSetOpDest0:
-              opRecord[2] = opRecord[2] | 0x4000;
+              opRecord[opDest0_IDX] = opRecord[opDest0_IDX] | 0x4000;
 loopSetOpDest02:
-              opRecord[2] = opRecord[2] | 0x2000;
+              opRecord[opDest0_IDX] = opRecord[opDest0_IDX] | 0x2000;
             }
             else {
               if (1 < destSizeBits) {
                 if (destSizeBits != 2) {
                   if (destSizeBits != 3) goto setOpDest0;
-                  opRecord[2] = destSizeShifted | 0x1006c;
+                  opRecord[opDest0_IDX] = destSizeShifted | 0x1006c;
                 }
-                opRecord[2] = opRecord[2] | 0x8000;
+                opRecord[opDest0_IDX] = opRecord[opDest0_IDX] | 0x8000;
                 goto loopSetOpDest0;
               }
               if (destSizeBits == 0) goto loopSetOpDest02;
             }
 setOpDest0:
-            opRecord[2] = (*(uint *)(*(int *)(tableBase + 0x3c0) + 4) & 7) << 0x11 | opRecord[2];
-            opRecord[3] = (uint)*(ushort *)(*(int *)(tableBase + 0x3c0) + 2);
+            opRecord[opDest0_IDX] = (*(uint *)(*(int *)(tableBase + 0x3c0) + 4) & 7) << 0x11 | opRecord[opDest0_IDX];
+            opRecord[opDest1_IDX] = (uint)*(ushort *)(*(int *)(tableBase + 0x3c0) + 2);
             sourceIndex = 0;
-            destWordCopy = opRecord[2];
+            destWordCopy = opRecord[opDest0_IDX];
             if ((emitSourceCount & 7) != 0) {
               do {
-                oldOperandWord = (&opRecord[4])[sourceIndex * 2];
+                oldOperandWord = (&opRecord[opSrc0A_IDX])[sourceIndex * 2];
                 srcSizeShifted = (destWordCopy >> 10 & 3) << 0xc;
                 srcTableIndex = loopIndex * 2 + sourceIndex;
-                (&opRecord[4])[sourceIndex * 2] = srcSizeShifted | oldOperandWord & 0xff804fff | 0xd8000;
+                (&opRecord[opSrc0A_IDX])[sourceIndex * 2] = srcSizeShifted | oldOperandWord & 0xff804fff | 0xd8000;
                 nextSourceIndex = sourceIndex + 1;
                 srcPrecisionShifted = (*(uint *)((&srcPtrTable)[srcTableIndex] + 4) & 7) << 0x17;
-                (&opRecord[4])[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xfc004fff | 0xd8000;
+                (&opRecord[opSrc0A_IDX])[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xfc004fff | 0xd8000;
                 registerNumber16 = *(undefined2 *)((&srcPtrTable)[srcTableIndex] + 2);
-                (&opRecord[4])[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xf4004fff | 0xd8000;
-                ((undefined2 *)&opRecord[5])[1 + sourceIndex * 4] = registerNumber16;
+                (&opRecord[opSrc0A_IDX])[sourceIndex * 2] = srcPrecisionShifted | srcSizeShifted | oldOperandWord & 0xf4004fff | 0xd8000;
+                ((undefined2 *)&opRecord[opSrc0B_IDX])[1 + sourceIndex * 4] = registerNumber16;
                 sourceIndex = nextSourceIndex;
-                destWordCopy = opRecord[2];
+                destWordCopy = opRecord[opDest0_IDX];
               } while (nextSourceIndex < (int)(emitSourceCount & 7));
             }
             flagsSizeShifted = (*(uint *)(*(int *)(tableBase + 0x3c0) + 8) & 3) << 0x12;
-            opRecord[1] = flagsSizeShifted;
+            opRecord[opFlags_IDX] = flagsSizeShifted;
             typeShifted = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0xc) & 7) << 0x17;
-            opRecord[1] = typeShifted | flagsSizeShifted;
-            opRecord[1] = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3) << 0x1a | typeShifted | flagsSizeShifted;
-            _PPStreamInsertOperationBeforeChunk(stream,&opRecord[0],0,0,whileOp);
+            opRecord[opFlags_IDX] = typeShifted | flagsSizeShifted;
+            opRecord[opFlags_IDX] = (*(uint *)(*(int *)(tableBase + 0x3c0) + 0x10) & 3) << 0x1a | typeShifted | flagsSizeShifted;
+            _PPStreamInsertOperationBeforeChunk(stream,&opRecord[opHeader_IDX],0,0,whileOp);
           }
           loopIndex = loopIndex + 1;
           tableBase = tableBase + 4;
@@ -2566,18 +2613,18 @@ setOpDest0:
         }
         whileSrcWord = *(uint *)(whileOp + 0x1c);
         *(uint *)(whileOp + 0xc) = *(uint *)(whileOp + 0xc) & 0x1c03ffff | 0x215c0000;
-        sizeShifted = (loopTempA[4] & 3) << 0xc;
+        sizeShifted = (loopTempA[loopTempASize_IDX] & 3) << 0xc;
         *(uint *)(whileOp + 0x1c) = sizeShifted | whileSrcWord & 0xff85cfff | 0xd8000;
-        whileSrcPrecisionShifted = (loopTempA[1] & 7) << 0x17;
+        whileSrcPrecisionShifted = (loopTempA[loopTempABank_IDX] & 7) << 0x17;
         *(uint *)(whileOp + 0x1c) = whileSrcPrecisionShifted | sizeShifted | whileSrcWord & 0xfc05cfff | 0xd8000;
         *(uint *)(whileOp + 0x1c) = whileSrcPrecisionShifted | sizeShifted | whileSrcWord & 0xf405cfff | 0xd8000;
-        *(undefined2 *)(whileOp + 0x22) = (*(unsigned short *)((unsigned char *)&(loopTempA[0]) + 2));
+        *(undefined2 *)(whileOp + 0x22) = (*(unsigned short *)((unsigned char *)&(loopTempA[loopTempARegister_IDX]) + 2));
         whileSrcWord = *(uint *)(whileOp + 0x10);
-        precisionShifted = (loopTempA[2] & 3) << 0x12;
+        precisionShifted = (loopTempA[loopTempAPrecision_IDX] & 3) << 0x12;
         *(uint *)(whileOp + 0x10) = precisionShifted | whileSrcWord & 0xfff3ffff;
-        whileDestPrecisionShifted = (loopTempA[3] & 7) << 0x17;
+        whileDestPrecisionShifted = (loopTempA[loopTempAType_IDX] & 7) << 0x17;
         *(uint *)(whileOp + 0x10) = whileDestPrecisionShifted | precisionShifted | whileSrcWord & 0xfc73ffff;
-        *(uint *)(whileOp + 0x10) = (loopTempA[4] & 3) << 0x1a | whileDestPrecisionShifted | precisionShifted | whileSrcWord & 0xf073ffff;
+        *(uint *)(whileOp + 0x10) = (loopTempA[loopTempASize_IDX] & 3) << 0x1a | whileDestPrecisionShifted | precisionShifted | whileSrcWord & 0xf073ffff;
         *(uint *)(loopEndOp + 0xc) = *(uint *)(loopEndOp + 0xc) & 0xfc03ffff | 0x16c0000;
       }
     }
@@ -2585,6 +2632,53 @@ setOpDest0:
   } while( true );
 }
 
+#undef stepInfoType_IDX
+#undef stepInfoSize_IDX
+#undef stepInfoIsConstant_IDX
+#undef stepInfoValueX_IDX
+#undef counterInfoType_IDX
+#undef counterInfoSize_IDX
+#undef initInfoType_IDX
+#undef initInfoSize_IDX
+#undef limitInfoType_IDX
+#undef limitInfoSize_IDX
+#undef loopTempARegister_IDX
+#undef loopTempABank_IDX
+#undef loopTempAPrecision_IDX
+#undef loopTempAType_IDX
+#undef loopTempASize_IDX
+#undef loopTempBPrecision_IDX
+#undef loopTempBType_IDX
+#undef loopTempBSize_IDX
+#undef loopTempCPrecision_IDX
+#undef loopTempCType_IDX
+#undef loopTempCSize_IDX
+#undef loopTempDPrecision_IDX
+#undef loopTempDType_IDX
+#undef loopTempDSize_IDX
+#undef loopTempEPrecision_IDX
+#undef loopTempEType_IDX
+#undef loopTempESize_IDX
+#undef loopTempFPrecision_IDX
+#undef loopTempFType_IDX
+#undef loopTempFSize_IDX
+#undef loopTempGPrecision_IDX
+#undef loopTempGType_IDX
+#undef loopTempGSize_IDX
+#undef opHeader_IDX
+#undef opFlags_IDX
+#undef opDest0_IDX
+#undef opDest1_IDX
+#undef opSrc0A_IDX
+#undef opSrc0B_IDX
+#undef opSrc1A_IDX
+#undef opSrc1B_IDX
+#undef opSrc2A_IDX
+#undef opSrc2B_IDX
+#undef opAuxA_IDX
+#undef opAuxB_IDX
+#undef opLine_IDX
+#undef opWord13_IDX
 /* _UnrollConstantLoopsSimple @ 0x97c0fb5c (1808 bytes) */
 int _UnrollConstantLoopsSimple(stream, allowRepify)
   int stream;
