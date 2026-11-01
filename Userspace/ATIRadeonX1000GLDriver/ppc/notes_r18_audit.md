@@ -26,7 +26,34 @@ DIFFERENT by binary: GLDriver 249, libGLProg 103, VA 8, GA 6 (INCONCLUSIVE 53/21
 - _gldGetRendererInfo / _gldSetInteger / _gldReclaimTexture: not touched.
 
 ## 28 TIGHT functions (binary part function: base pair -> cand pair)
-
+ATIRadeonX1000GLDriver part_002 _FUN_00018a40 TIGHT', [(530, 536, 604, 608)]
+ATIRadeonX1000GLDriver part_005 _FUN_00031340 TIGHT', [(222, 228, 236, 240)]
+ATIRadeonX1000GLDriver part_011 _FUN_0007aae0 TIGHT', [(171, 176, 245, 248)]
+ATIRadeonX1000GLDriver part_011 _FUN_0007b0d0 TIGHT', [(290, 296, 664, 668)]
+ATIRadeonX1000GLDriver part_014 _FUN_00093a40 TIGHT', [(357, 364, 432, 436)]
+ATIRadeonX1000GLDriver part_016 _FUN_000afe40 TIGHT', [(375, 384, 568, 576)]
+ATIRadeonX1000GLDriver part_018 _FUN_000ce514 TIGHT', [(102, 136, 112, 144)]
+ATIRadeonX1000GLDriver part_024 _FUN_000f1d7c TIGHT', [(173, 192, 336, 352)]
+ATIRadeonX1000GLDriver part_037 _FUN_00121000 TIGHT', [(137, 156, 208, 224)]
+ATIRadeonX1000GLDriver part_040 _FUN_0012d2f0 TIGHT', [(197, 204, 360, 364)]
+ATIRadeonX1000GLDriver part_040 _FUN_00131008 TIGHT', [(85, 100, 100, 112)]
+ATIRadeonX1000GLDriver part_042 _FUN_0014375c TIGHT', [(164, 168, 228, 260)]
+ATIRadeonX1000GLDriver part_045 _FUN_0016ff54 TIGHT', [(218, 236, 780, 796)]
+ATIRadeonX1000GLDriver part_048 _FUN_00181f00 TIGHT', [(165, 176, 496, 504)]
+libGLProgrammability part_000 __PPParserParseAttributeBinding TIGHT', [(77, 336, 108, 364)]
+libGLProgrammability part_000 __PPParserParseOutputBinding TIGHT', [(77, 80, 100, 104)]
+libGLProgrammability part_000 __PPParserParseOperation TIGHT', [(375, 632, 388, 644)]
+libGLProgrammability part_000 __PPParserParseSourceVar TIGHT', [(70, 328, 84, 340)]
+libGLProgrammability part_005 _TParseContext__arrayErrorCheck TIGHT', [(344, 348, 476, 508)]
+libGLProgrammability part_005 _TParseContext__addConstructor TIGHT', [(121, 128, 156, 160)]
+libGLProgrammability part_008 _BindingTable__InsertUniformArray TIGHT', [(141, 176, 180, 216)]
+libGLProgrammability part_011 _TIntermSelection__compileNode TIGHT', [(265, 300, 284, 316)]
+libGLProgrammability part_011 _TIntermLoop__compileNode TIGHT', [(326, 360, 384, 416)]
+libGLProgrammability part_012 _TPPStreamCompiler__constructFromOperand TIGHT', [(183, 200, 248, 264)]
+libGLProgrammability part_019 __FlattenIf TIGHT', [(422, 472, 544, 592)]
+libGLProgrammability part_019 __DetectConstantLoopsSimple TIGHT', [(635, 648, 752, 764)]
+libGLProgrammability part_019 __PPParserParseIndirectArray TIGHT', [(73, 332, 92, 348)]
+libGLProgrammability part_026 ____frame_state_for TIGHT', [(105, 556, 112, 560)]
 
 ## Counts
 audited: 5 binaries, 126 parts. OK (EQUIVALENT/IDENTICAL/UNINIT, plus SHIFT-only and separated-pair LAYOUT): all except 28 TIGHT + 6 indexed (overlap possible) + 2 name-only + 78 INCONCLUSIVE (not hand-reviewed). Reverted: 0.
