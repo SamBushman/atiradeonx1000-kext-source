@@ -108,9 +108,9 @@ use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecOffset	INFERRED	b
 use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*FUN_00103d50\(iVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0xc,1,0\);$	+2
 use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar5\ =\ iVar5\ \+\ 0x18;$	+1
 use	ValueKey__foldDotPowerOfTwoIntoOutputScale	iVar5	operandRecAddr	INFERRED	address of the operand record of the other operand	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ \(\(iVar6\ ==\ 1\)\ \-\ 1\)\ \*\ 0x18\ \+\ 0xb0;$	+2
-local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r6	staleArg4	INFERRED	stale argument register r6 forwarded to the limits call
-local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r7	staleArg5	INFERRED	stale argument register r7 forwarded to the limits call
-local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r8	staleArg6	INFERRED	stale argument register r8 forwarded to the limits call
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r8	staleArg8	CONFIRMED	stale argument register r8 forwarded to the limits call (r33: text already carried the wrong intermediate name staleArg6, fixed by direct text edit; row kept against the true Ghidra original so other rows' anchors still normalise correctly)
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r7	staleArg7	CONFIRMED	stale argument register r7 forwarded to the limits call (r33: text already carried the wrong intermediate name staleArg5, fixed by direct text edit)
+local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r6	staleArg6	CONFIRMED	stale argument register r6 forwarded to the limits call (r33: text already carried the wrong intermediate name staleArg4, fixed by direct text edit)
 local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_48	laneValue	INFERRED	lane constant written by FUN_00178d78
 local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_4c	unitConst3	INFERRED	constant 1.0 (word 3 of the unit vector)
 local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_50	unitConst2	INFERRED	constant 1.0 (word 2 of the unit vector)

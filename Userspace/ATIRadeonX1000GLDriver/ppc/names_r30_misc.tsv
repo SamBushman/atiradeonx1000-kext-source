@@ -11,8 +11,8 @@ local	R300VSchedModel__vslot3_canAddInstruction	in_r5	passThroughArg3	INFERRED	i
 local	R300VSchedModel__vslot3_canAddInstruction	in_r6	passThroughArg4	INFERRED	inbound register forwarded unmodified from the caller straight into the +0x4c vtable call as its 4th argument; see passThroughArg3
 local	Block__getOrAllocSlotId	param_1	block	INFERRED	the block object: cached-slot-id field read/written at +0x30 and its register-class field read at +0x34
 local	Block__getOrAllocSlotId	param_2	regClass	INFERRED	register class passed straight through to RegAlloc__allocateFirstFreeInClass
-local	MachineAssembler__visitIfHeaderStatic	param_3	headerNode	INFERRED	forwarded to Block__getBranchInst's ignored 3rd arg and to the this+0x34 vtable call, whose sibling call sites elsewhere (part_053/054, same vtable slot) pass their block/node argument in this position
-local	MachineCodeWriter__encodeProgram	local_54	codeSink	INFERRED	object pointer at EncoderState word index 8 (byte offset 0x20), dispatched via vtable for begin/finish/getSize/reset/write-style methods around the block-encoding loop
+local	MachineAssembler__visitIfHeaderStatic	param_3	headerBlock	CONFIRMED	forwarded to Block__getBranchInst's ignored 3rd arg and, at the this+0x34 vtable call, directly into R300MachineAssembler__assembleBlock's own declared `block` parameter (r33: ground-truthed via the real stock vtable slot 13 target, verified with Tools/userspace/data_sections.py against ATIRadeonX1000GLDriver.bundle.bin; upgraded from INFERRED "headerNode"; text already carried the wrong intermediate name headerNode, fixed by direct text edit; row kept against the true Ghidra original so other rows' anchors still normalise correctly)
+local	MachineCodeWriter__encodeProgram	local_54	sinkObject	CONFIRMED	object pointer at EncoderState word index 8 (byte offset 0x20), dispatched via vtable for begin/finish/getSize/reset/write-style methods around the block-encoding loop (r33: renamed from "codeSink" to match EncoderState__destroy_e3244/e3308 in the same file, which already name this exact field sinkObject when releasing it; text already carried the wrong intermediate name codeSink, fixed by direct text edit)
 local	IRInst__createMovForDest	local_28	mergedSelectScratch	INFERRED	output parameter of SelectWord__mergeWrittenLanes, immediately copied into mergedSelect
 local	R520MachineAssembler__vslot38_appendBranchRecord	in_r6	staleArg6	INFERRED	stale register live at the this+0x15c vtable call; sibling call in this same vtable slot (part_054 R520MachineAssembler__vslot39_appendLoopStartRecord) names the same positional registers staleArg6/7/8
 local	R520MachineAssembler__vslot38_appendBranchRecord	in_r7	staleArg7	INFERRED	see staleArg6 evidence
@@ -23,14 +23,14 @@ local	R520MachineAssembler__vslot31_assembleChildrenAndMark	in_r8	staleArg8	INFE
 local	R520MachineAssembler__vslot24_assembleWithTarget	in_r6	staleArg6	INFERRED	stale register live at the identical this,block,node+0xdc,... vtable call shape named staleArg6/7/8 elsewhere in this binary (part_054)
 local	R520MachineAssembler__vslot24_assembleWithTarget	in_r7	staleArg7	INFERRED	see staleArg6 evidence
 local	R520MachineAssembler__vslot24_assembleWithTarget	in_r8	staleArg8	INFERRED	see staleArg6 evidence
-local	ValueKey__foldMulPowerOfTwoIntoOutputScale	in_r6	staleArg4	INFERRED	stale register at the same a0+0xfc vtable slot/call shape already named staleArg4/5/6 in part_047.c (ValueKey family, same binary)
-local	ValueKey__foldMulPowerOfTwoIntoOutputScale	in_r7	staleArg5	INFERRED	see staleArg4 evidence
-local	ValueKey__foldMulPowerOfTwoIntoOutputScale	in_r8	staleArg6	INFERRED	see staleArg4 evidence
-local	ValueKey__foldEqualSourcesIntoOutputScale	in_r6	staleArg4	INFERRED	stale register at the same a0+0xfc vtable slot already named staleArg4/5/6 in part_047.c (ValueKey family, same binary)
-local	ValueKey__foldEqualSourcesIntoOutputScale	in_r7	staleArg5	INFERRED	see staleArg4 evidence
-local	ValueKey__foldEqualSourcesIntoOutputScale	in_r8	staleArg6	INFERRED	see staleArg4 evidence
-local	extvsMakeShaderCurrent	in_r6	staleArg4	INFERRED	stale register forwarded to a raw function-pointer call with the same 3-real-args-then-3-stale shape as the ValueKey__fold*/part_047 staleArg4/5/6 precedent
-local	extvsMakeShaderCurrent	in_r7	staleArg5	INFERRED	see staleArg4 evidence
-local	extvsMakeShaderCurrent	in_r8	staleArg6	INFERRED	see staleArg4 evidence
+local	ValueKey__foldMulPowerOfTwoIntoOutputScale	in_r8	staleArg8	CONFIRMED	stale register r8 at the same a0+0xfc vtable slot/call shape (r33: text already carried the wrong intermediate name staleArg6, fixed by direct text edit; the matching part_047.c precedent is itself now staleArg6/7/8, see names_q08_22.tsv)
+local	ValueKey__foldMulPowerOfTwoIntoOutputScale	in_r7	staleArg7	CONFIRMED	stale register r7 (r33: text already carried the wrong intermediate name staleArg5, fixed by direct text edit)
+local	ValueKey__foldMulPowerOfTwoIntoOutputScale	in_r6	staleArg6	CONFIRMED	stale register r6 (r33: text already carried the wrong intermediate name staleArg4, fixed by direct text edit)
+local	ValueKey__foldEqualSourcesIntoOutputScale	in_r8	staleArg8	CONFIRMED	stale register r8 at the same a0+0xfc vtable slot (r33: text already carried the wrong intermediate name staleArg6, fixed by direct text edit; the matching part_047.c precedent is itself now staleArg6/7/8, see names_q08_22.tsv)
+local	ValueKey__foldEqualSourcesIntoOutputScale	in_r7	staleArg7	CONFIRMED	stale register r7 (r33: text already carried the wrong intermediate name staleArg5, fixed by direct text edit)
+local	ValueKey__foldEqualSourcesIntoOutputScale	in_r6	staleArg6	CONFIRMED	stale register r6 (r33: text already carried the wrong intermediate name staleArg4, fixed by direct text edit)
+local	extvsMakeShaderCurrent	in_r8	staleArg8	CONFIRMED	stale register r8 forwarded to a raw function-pointer call (r33: text already carried the wrong intermediate name staleArg6, fixed by direct text edit; the matching ValueKey__fold*/part_047 precedent is itself now staleArg6/7/8, see names_q08_22.tsv)
+local	extvsMakeShaderCurrent	in_r7	staleArg7	CONFIRMED	stale register r7 (r33: text already carried the wrong intermediate name staleArg5, fixed by direct text edit)
+local	extvsMakeShaderCurrent	in_r6	staleArg6	CONFIRMED	stale register r6 (r33: text already carried the wrong intermediate name staleArg4, fixed by direct text edit)
 local	R520SchedModel__vslot21	in_r7	staleArg7	INFERRED	stale register at register position r7 in the hwLimits vtable call (hwLimits,hwLimits,inst,latencyOut,X,Y,...); position matches register number exactly
 local	R520SchedModel__vslot21	in_r8	staleArg8	INFERRED	see staleArg7 evidence

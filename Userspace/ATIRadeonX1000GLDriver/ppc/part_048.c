@@ -1224,8 +1224,8 @@ int ValueKey__replaceWithLaneConstants(ctx, laneConstants)
   int loopRemaining2;
   int *hwLimits;
   undefined4 limitsFailed;
-  undefined4 staleArg5;
-  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   float *loopPtr3;
   float commonValue;
   int loopRemaining;
@@ -1241,8 +1241,8 @@ int ValueKey__replaceWithLaneConstants(ctx, laneConstants)
   loopIndex = *(int *)(ctx + 0x238);
   destSelectMask = maskedSelect[0];
   loopIndex = (**(code **)(**(int **)(loopIndex + 0x30c) + 0x154))
-                    (*(int **)(loopIndex + 0x30c),*(undefined4 *)(loopIndex + 0x6c4),laneConstants,&destSelectMask,staleArg5
-                     ,staleArg6,loopIndex);
+                    (*(int **)(loopIndex + 0x30c),*(undefined4 *)(loopIndex + 0x6c4),laneConstants,&destSelectMask,staleArg7
+                     ,staleArg8,loopIndex);
   if (loopIndex == 0) {
     loopIndex = 4;
     loopPtr2 = (float *)&negatedConstants;
@@ -1735,9 +1735,9 @@ int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
   bool isPositive;
   int isOutputScale;
   int scaleAccepted;
-  undefined4 staleArg4;
-  undefined4 staleArg5;
   undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int *a0;
   int loopIndex;
   double magnitude;
@@ -1759,7 +1759,7 @@ int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
         scaleExponent = ((int (*)())outputScaleExponent)(magnitude);
         a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
         scaleExponent = scaleExponent + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
-        scaleAccepted = (**(code **)(*a0 + 0xfc))(a0,scaleExponent,*(int *)(ctx + 0xb0),staleArg4,staleArg5,staleArg6,a0);
+        scaleAccepted = (**(code **)(*a0 + 0xfc))(a0,scaleExponent,*(int *)(ctx + 0xb0),staleArg6,staleArg7,staleArg8,a0);
         if (scaleAccepted != 0) {
           loopIndex = (loopIndex == 1) + 1;
           if (!isPositive) {
@@ -1786,9 +1786,9 @@ int ValueKey__foldEqualSourcesIntoOutputScale(ctx)
   int lanesAllSatisfy;
   int inst;
   int *a0;
-  undefined4 staleArg4;
-  undefined4 staleArg5;
   undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int a1;
   
   lanesAllSatisfy = Inst__allWrittenLanesSatisfy(ctx,1,2);
@@ -1798,7 +1798,7 @@ int ValueKey__foldEqualSourcesIntoOutputScale(ctx)
        ((*(uint *)(inst + 0xb8) >> 1 & 1) == (*(uint *)(inst + 0xd0) >> 1 & 1))) {
       a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
       a1 = *(int *)(inst + 0x124) + 1;
-      limitAccepted = (**(code **)(*a0 + 0xfc))(a0,a1,inst,staleArg4,staleArg5,staleArg6,*(int *)(inst + 0x124));
+      limitAccepted = (**(code **)(*a0 + 0xfc))(a0,a1,inst,staleArg6,staleArg7,staleArg8,*(int *)(inst + 0x124));
       if (limitAccepted != 0) {
         ((int (*)())ValueKey__rewriteAsMovOfOperandWithScale)(ctx,2,a1);
         ValueKey__rebuild(ctx);
@@ -2373,8 +2373,8 @@ int ValueKey__foldMulOfConstants(ctx)
   int valueNumber;
   float *exprRecord;
   undefined4 productNegated;
-  undefined4 staleArg5;
-  undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int *valueNumberPtr;
   int loopIndex;
   int loopRemaining;
@@ -2433,7 +2433,7 @@ int ValueKey__foldMulOfConstants(ctx)
   destMask = maskedSelect[0];
   loopIndex = (**(code **)(**(int **)(loopIndex + 0x30c) + 0x154))
                     (*(int **)(loopIndex + 0x30c),*(undefined4 *)(loopIndex + 0x6c4),&laneProducts,&destMask,
-                     staleArg5,staleArg6,loopIndex);
+                     staleArg7,staleArg8,loopIndex);
   if (loopIndex == 0) {
     loopIndex = 0;
     loopPtr2 = (float *)&laneProducts;

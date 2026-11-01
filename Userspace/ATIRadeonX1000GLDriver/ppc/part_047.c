@@ -1293,11 +1293,11 @@ storeResultOut:
 }
 
 /* ValueKey__evalLitLane @ 0x178e90 (468 bytes) */
-int ValueKey__evalLitLane(resultOut, key, lane, staleArg4)
+int ValueKey__evalLitLane(resultOut, key, lane, unusedArg4)
   float *resultOut;
   int key;
   int lane;
-  uint staleArg4;
+  uint unusedArg4;
 {
   float clampHigh;
   float clampedExponent;
@@ -2538,9 +2538,9 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
   int scaleCodeOrFlag;
   int limitsOk;
   undefined4 literalValueNumber;
-  undefined4 staleArg4;
-  undefined4 staleArg5;
   undefined4 staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int *a0;
   int operandRecOffset;
   int loopIndex;
@@ -2569,7 +2569,7 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
         scaleCodeOrFlag = ((int (*)())outputScaleExponent)(absValue);
         a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
         scaleCodeOrFlag = scaleCodeOrFlag + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
-        limitsOk = (**(code **)(*a0 + 0xfc))(a0,scaleCodeOrFlag,*(int *)(ctx + 0xb0),staleArg4,staleArg5,staleArg6,a0);
+        limitsOk = (**(code **)(*a0 + 0xfc))(a0,scaleCodeOrFlag,*(int *)(ctx + 0xb0),staleArg6,staleArg7,staleArg8,a0);
         if (limitsOk != 0) {
           unitConst0 = 0x3f800000;
           unitConst1 = 0x3f800000;
