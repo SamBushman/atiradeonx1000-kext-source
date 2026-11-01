@@ -2272,13 +2272,13 @@ int OpcodeTemplate__lookup(ilOpcode, compiler, variant)
   hwTemplateQuery = (**(code **)(**(int **)(compiler + 0x30c) + 0xdc))
                     (*(int **)(compiler + 0x30c),compiler,variant);
   if (hwTemplateQuery == 0) {
-    templateTable = (ptrTo_ilOpcodeTemplateTableNoHwTemplate_001e9f7c)[ilOpcode * 3];
+    templateTable = (ilTemplateStreamTable_Op0NoHw_001e9f7c)[ilOpcode * 3];
   }
   else if (variant == 0) {
-    templateTable = (ptrTo_ilOpcodeTemplateTableVariant0_001e9f80)[ilOpcode * 3];
+    templateTable = (ilTemplateStreamTable_Op0Variant0_001e9f80)[ilOpcode * 3];
   }
   else {
-    templateTable = (ptrTo_ilOpcodeTemplateTableVariantN_001e9f78)[ilOpcode * 3];
+    templateTable = (ilTemplateStreamTable_Op0VariantN_001e9f78)[ilOpcode * 3];
   }
   return templateTable;
 }
