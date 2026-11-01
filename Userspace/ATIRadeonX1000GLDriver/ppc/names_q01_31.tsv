@@ -49,8 +49,6 @@ local	FUN_00031340	auStack_130	lookupOut4	INFERRED	gldTextureFormatLookup output
 local	FUN_00031340	auStack_12c	lookupOut5	INFERRED	gldTextureFormatLookup output 5
 local	FUN_00031340	auStack_110	convertOutA	INFERRED	_glgConvertType output A
 local	FUN_00031340	auStack_10c	convertOutB	INFERRED	_glgConvertType output B
-local	FUN_00031340	local_b8	requestHandle	INFERRED	first word of the {storage handle, face<<16|level} request passed to the IOConnect method 0xd and to the format lookup
-local	FUN_00031340	local_b4	requestFaceLevel	INFERRED	face<<16 | mipLevel
 local	FUN_00031340	local_a0	destAddress	INFERRED	running destination address (advanced by height*pitch per slice)
 local	FUN_00031340	local_9c	lookupField9c	INFERRED	second field of the lookup result copied to local_11c
 local	FUN_00031340	local_128	srcAddress	INFERRED	running source address inside the texture level, advanced by rows*srcRowStride

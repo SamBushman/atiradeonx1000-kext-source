@@ -1,6 +1,6 @@
 # r17: GLDriver transcription flaws (contiguous scalar blocks, store-conditional pseudo-calls)
 
-Scope asked: `_gldGetRendererInfo`, `_gldSetInteger`, `_gldReclaimTexture`. Directive also said to check sibling functions for the same pattern and fix or report. The siblings below were fixed because they have the SAME defect (a block the callee/kernel treats as contiguous, or an inline lwarx/stwcx. loop, transcribed as something that is not that). 40 functions changed in total (not 3); the tables below say exactly which and why.
+Scope asked: `_gldGetRendererInfo`, `_gldSetInteger`, `_gldReclaimTexture`. Directive also said to check sibling functions for the same pattern and fix or report. The siblings below were fixed because they have the SAME defect (a block the callee/kernel treats as contiguous, or an inline lwarx/stwcx. loop, transcribed as something that is not that). 41 functions changed in total (not 3); the tables below say exactly which and why.
 
 ## Flaw classes (what was wrong)
 - **A. lwarx/add/stwcx. loop transcribed as a call to `storeWordConditionalIndexed`** plus an unwritten `reservation` flag, a made-up `crBits` loop and an unused "stored value" local. `storeWordConditionalIndexed` exists nowhere (the object calls an undefined symbol - same family as issue #64 dcbz/dcba) and `reservation` was read uninitialized. Fix: new macro `atomicAddWord(p,d)` in `ghidra_c.h` (inline `lwarx / add / stwcx. / bne-`, yields the OLD word = the lwarx result). 47 sites in 28 functions, all converted.
@@ -12,16 +12,16 @@ Scope asked: `_gldGetRendererInfo`, `_gldSetInteger`, `_gldReclaimTexture`. Dire
 ## Evidence that the new C matches STOCK
 Honest limit first: a tier-1 (`split_equiv.py`) or tier-2 (`sem_equiv.py`) comparison against the stock binary is NOT possible - stock is optimized code (bdnz loops, different block graph, stmw/lmw frames) and the corpus is compiled -O0, so the CFG shapes differ for every function; `sem_equiv` would report DIFFERENT/INCONCLUSIVE for any function regardless of correctness. What was done instead, per class, all from the real stock Mach-O (`tiger-hd-pull/ATIRadeonX1000GLDriver.bundle.bin`, machoutil + Capstone, per-word decode):
 - **A**: scanned every `lwarx` in stock `__text`: 47, each exactly `lwarx / add / stwcx. / bne <back to lwarx>`, delta +-0x10000 (4 sites use a register delta set earlier; the C passes +0x10000 there). Compiled the new C on the G5 and extracted the same signature: all 28 functions have identical lwarx count and identical delta multiset to stock (script output `functions 28 mismatch 0`). Spot read of `_gldReclaimTexture` stock 0x9338 / 0x938c: old value (lwarx dest) compared with 0x10000 -> `_io_connect_method_scalarI_structureI(conn,0xb,...)`, matches `oldRefCount = atomicAddWord(p,-0x10000); if (oldRefCount == 0x10000)`.
-- **B**: for every scalarI_* call in stock the input pointer is `addi r5,r1,0x38` with count N (2 or 4) and the words are stored at consecutive ascending 0x38.. offsets; `_gldGetInteger` out ptr r1+0x3c, count slot r1+0x38, count 3; `gld_initContextHardwareState` out ptr r1+0x50, count 5, stores at 0x50..0x60; `_gldGetRendererInfo` scalarOut at 0x40..0x48 (0x48 -> rendererInfo+0x30, 0x44 -> +0x34, 0x40 -> r4 of gld_fillMaxPixelFormat). Array sizes equal the count each call passes.
+- **B**: for every scalarI_* call in stock the input pointer is `addi r5,r1,0x38` with count N (2 or 4) and the words are stored at consecutive ascending 0x38.. offsets; `_gldGetInteger` out ptr r1+0x3c, count slot r1+0x38, count 3; `gld_initContextHardwareState` out ptr r1+0x50, count 5, stores at 0x50..0x60; `_gldGetRendererInfo` scalarOut at 0x40..0x48 (0x48 -> rendererInfo+0x30, 0x44 -> +0x34, 0x40 -> r4 of gld_fillMaxPixelFormat). `gld_readbackTextureLevel` (found by the coordinator): stock 0x31528..0x31548: `addi r5,r1,0xd8; li r6,2; stw r2,0xd8(r1); stw r0,0xdc(r1); bl scalarI_structureI(sel 0xd)`, and the same `r1+0xd8` pointer is r5 of the format lookup (0x31170) -> `requestHandle`/`requestFaceLevel` are one `uint requestWords [2]`. Array sizes equal the count each call passes.
 - **C/D**: all 12 stock `structureI_structureO` calls (stub 0x1a3780): output ptr `addi r7,r1,0x3c`, size slot r1+0x38 = 8, backing read from r1+0x40, handle from r1+0x3c; `_gldAllocVertexBuffer` input `addi r5,r1,0x44`, stores only 0x44 (=2) and 0x48 (=0x16000), size 0x14.
 - **Compiler check**: -Wuninitialized warnings in parts 000-005 fell 25/37/59/71/55/31 -> 14/24/32/65/48/30 (the `scalarOut1/2`, `newBacking`, `reservation` warnings are gone).
 
 ## Nothing outside the intended fix changed
-- Only the 40 functions below differ in `part_000..005.c` (+ `ghidra_c.h` macro, + stale rows removed). 
+- Only the 41 functions below differ in `part_000..005.c` (+ `ghidra_c.h` macro, + stale rows removed). 
 - Base-vs-candidate, compiled on the G5 (Tiger): after normalising local label numbers (they shift when earlier functions shrink - the plain gate prints those as CODE lines and cannot be read as pass/fail), tier-1 `split_equiv.py` reports problems ONLY in changed functions (0 unexpected function in all six parts); tier-2 `sem_equiv.py` reports every unchanged function IDENTICAL-CODE (54/53/52/53/55/61 per part) and all DIFFERENT/INCONCLUSIVE ones are changed functions (sem_equiv does not model lwarx/stwcx. and the frame blocks moved, so these cannot be EQUIVALENT by construction). 
 - Parts 006+ do not use the new macro (ghidra_c.h is only extended).
 
-## The 40 changed functions
+## The 41 changed functions
 Columns: class(es) / rows removed / Ghidra-style placeholder count before -> after / locals removed and added.
 
 | function | class | rows removed | placeholders | locals |
@@ -53,6 +53,7 @@ Columns: class(es) / rows removed / Ghidra-style placeholder count before -> aft
 | glFlush_impl | B | 2 | 0 -> 0 | removed: scalarIn0, scalarIn1; added: scalarIn |
 | glFlush_impl_withSurfaceUpdate | B | 4 | 0 -> 0 | removed: scalarIn0, scalarIn1, scalarIn2, scalarIn3; added: scalarIn |
 | glFinish_impl | B | 2 | 0 -> 0 | removed: scalarIn0, scalarIn1; added: scalarIn |
+| gld_readbackTextureLevel | B | 2 | 0 -> 0 | removed: requestFaceLevel, requestHandle; added: requestWords |
 | gld_swapBuffersImpl | B | 2 | 0 -> 0 | removed: scalarIn0, scalarIn1; added: scalarIn |
 | _gldAllocVertexBuffer | A+D | 5 | 0 -> 0 | removed: chunk, chunkMemory, reservation, structIn0, structIn1; added: chunkOut, structIn |
 | gld_emitFramebufferState | A | 11 | 0 -> 0 | removed: crBits, releaseResult, releaseStatus, reservation |
@@ -68,8 +69,8 @@ Columns: class(es) / rows removed / Ghidra-style placeholder count before -> aft
 | glTexSubImage_impl | A | 2 | 0 -> 0 | removed: reservation |
 The five functions that look "extra" (gld_releaseQueryMemory, gld_setQueryAgpRefBacking, gld_drawVertexArray, gld_bindCurrentFramebuffer, gld_emitFramebufferState) are class A (and C for gld_setQueryAgpRefBacking) sites; their older rows are keyed by the pre-rename names FUN_00009cd0, FUN_00009d70, FUN_0001ecd0, FUN_00007d50, FUN_0001bac0 (ledger-resolved).
 
-## Removed rows (225)
-Rows only recorded renames of identifiers that no longer exist in the rewritten text (`reservation`, `crBits`, the "stored value" locals, `outHandle`, `newBacking`, `scalarInN`, ...), or anchored on the deleted `storeWordConditionalIndexed(...)` lines. 168 were removed first, 57 more after the second `--check` (cascade); every flagged function was resolved through the ledger and had to be in the rewritten set (the loop stops otherwise; it never stopped). Count outside the 40 rewritten functions: **0**. Full list (file, kind, function, old, new): `removed_rows_r17.tsv` (also inlined below). Names are NOT lost: they are carried in the part files; no placeholder identifier remains in these functions to re-name (before/after column: 3 -> 3, the 3 are `in_LR`-style artifacts in `gld_emitStampFencePacket` (2) and `gld_validateStreamState` (1), unchanged).
+## Removed rows (227)
+Rows only recorded renames of identifiers that no longer exist in the rewritten text (`reservation`, `crBits`, the "stored value" locals, `outHandle`, `newBacking`, `scalarInN`, ...), or anchored on the deleted `storeWordConditionalIndexed(...)` lines. 168 were removed first, 57 more after the second `--check` (cascade), 2 for gld_readbackTextureLevel; every flagged function was resolved through the ledger and had to be in the rewritten set (the loop stops otherwise; it stopped once, on 19 `func`-row errors that turned out to be caused by my own audit file being scanned as corpus text - it is now named `notes_r17_...` which the scanner skips - not on a stale row), +2 rows for `gld_readbackTextureLevel` after the coordinator pointed it out. Count outside the 41 rewritten functions: **0**. Full list (file, kind, function, old, new): `notes_r17_removed_rows.txt` (also inlined below). Names are NOT lost: they are carried in the part files; no placeholder identifier remains in these functions to re-name (before/after column: 3 -> 3, the 3 are `in_LR`-style artifacts in `gld_emitStampFencePacket` (2) and `gld_validateStreamState` (1), unchanged).
 
 ```
 file	kind	function(now)	old	new
@@ -298,6 +299,8 @@ names_q01_26.tsv	local	gld_validateStreamState	local_48	scalarIn0
 names_q01_26.tsv	local	gld_validateStreamState	local_44	scalarIn1
 names_q01_26.tsv	local	gld_validateStreamState	local_40	scalarIn2
 names_q01_26.tsv	local	gld_validateStreamState	local_3c	scalarIn3
+names_q01_31.tsv	local	FUN_00031340	gld_readbackTextureLevel	local_b8	requestHandle
+names_q01_31.tsv	local	FUN_00031340	gld_readbackTextureLevel	local_b4	requestFaceLevel
 ```
 
 ## Open / reported, not fixed

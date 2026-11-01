@@ -224,3 +224,5 @@ names_q01_26.tsv	local	FUN_0002c230	gld_validateStreamState	local_48	scalarIn0
 names_q01_26.tsv	local	FUN_0002c230	gld_validateStreamState	local_44	scalarIn1
 names_q01_26.tsv	local	FUN_0002c230	gld_validateStreamState	local_40	scalarIn2
 names_q01_26.tsv	local	FUN_0002c230	gld_validateStreamState	local_3c	scalarIn3
+names_q01_31.tsv	local	FUN_00031340	gld_readbackTextureLevel	local_b8	requestHandle
+names_q01_31.tsv	local	FUN_00031340	gld_readbackTextureLevel	local_b4	requestFaceLevel
