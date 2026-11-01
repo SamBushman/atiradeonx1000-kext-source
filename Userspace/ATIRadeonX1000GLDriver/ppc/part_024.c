@@ -3128,7 +3128,7 @@ code_r0x000f1384:
             lanesLeft = 4;
             do {
               if (*(byte *)((int)&moveSelect + laneIndex) != 4) {
-                if (consumerDestMaskView[*(byte *)((int)&moveSelect + laneIndex) - 4] == '\x01') {
+                if (((char *)&consumerDestMask)[*(byte *)((int)&moveSelect + laneIndex)] == '\x01') {
                   *(undefined1 *)((int)&writtenLanesSelect + laneIndex) = 4;
                 }
                 else {

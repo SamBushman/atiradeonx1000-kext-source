@@ -1429,7 +1429,7 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
           if (*(byte *)(loopCounterB + operandRecord + 0x10) < 4) {
             operandRecord = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
             laneByte = (uint)*(byte *)(loopCounterB + operandRecord + 0x10);
-            uniqueRank[laneByte - 4] = 0;
+            ((char *)&existingSelect)[laneByte] = 0;
             *(byte *)(existingConstInst + laneByte + 0xc) =
                  (byte)(1 << (laneByte & 0x3f)) | *(byte *)(existingConstInst + laneByte + 0xc);
           }

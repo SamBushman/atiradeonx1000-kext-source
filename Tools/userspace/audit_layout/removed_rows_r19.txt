@@ -1,0 +1,4 @@
+# rows removed by r19 (stale anchors after fixing out-of-object subscripts); file:line<TAB>row
+names_q06_25_pair3.tsv	use	FUN_00131008	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*if\ \(\(auStack_44\[iVar2\ \+\ \-4\]\ !=\ '\\0'\)\ \&\&$	+2
+names_q06_25_pair3.tsv	use	FUN_00131008	uVar4	laneDefinition	INFERRED	FUN_001382b8: definition of the source lane	^\s*if\ \(\(auStack_44\[iVar2\ \+\ \-4\]\ !=\ '\\0'\)\ \&\&$	+2
+names_q07_6.tsv	use	Inst__collapseAlgebraic_0015c6d4	piVar9	vslot73Result	INFERRED	role read off the web definition: result of a call to a named function / virtual slot	^\s*\(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x88\)\)\(piVar9,1,iVar5,auStack_78\[iVar5\ \+\ \-4\]\);$	+1

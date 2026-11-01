@@ -1,0 +1,13 @@
+POSITIVE rename   sem_equiv: 40 EQUIVALENT, 0 IDENTICAL-CODE, 20 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 40 EQUIVALENT, 0 IDENTICAL-CODE, 20 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 40 EQUIVALENT, 0 IDENTICAL-CODE, 20 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'DIFFERENT': 70}
+   callarg   {'EQUIVALENT': 1, 'DIFFERENT': 62, 'uninit': 1}
+   const     {'DIFFERENT': 101, 'INCONCLUSIVE': 15}
+   dropcall  {'DIFFERENT': 52}
+   dropst    {'DIFFERENT': 74}
+   reg       {'DIFFERENT': 61, 'INCONCLUSIVE': 3}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_gldFinishObject', ' NOOP(same instruction already sets r4)', ('\tbl L_FUN_0001a0d0$stub', '\tmr r4,r0'), 65)
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 1

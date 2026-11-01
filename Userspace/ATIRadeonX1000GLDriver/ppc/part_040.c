@@ -3791,7 +3791,7 @@ int RegAlloc__laneDependsOnChain(maxDistance, inst, operandIndex)
   operandVReg = IRInst__getOperandSource(inst,operandIndex);
   laneIndex = 0;
   do {
-    if ((laneDefOut[laneIndex + -4] != '\0') &&
+    if ((((char *)&laneMaskWord)[laneIndex] != '\0') &&
        (laneDefinition = IRInst__findLaneDefinition(operandVReg,laneIndex,laneDefOut), -1 < maxDistance)) {
       loopIndex = 0;
       chainInst = inst;
