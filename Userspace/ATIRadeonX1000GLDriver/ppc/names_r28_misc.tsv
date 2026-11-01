@@ -1,0 +1,123 @@
+# r28: part_026.c small functions (names for remaining Ghidra placeholders)
+local	IRInst__canFoldConstantSource	iVar3	recordKind	CONFIRMED	read once from *(sourceDef+0x98), compared to 0xc/0x33/2; same field+0x98==0xc test appears in Program__dumpConstantRegisters
+local	Compiler__getOrCreateLoadConstN	aiStack_9c	lookupKeyWords	INFERRED	5-word key array (compiler[2..5]) passed to HashTable__find(lookupKeyWords[constCount], compiler[10]); same role/shape as Compiler__getOrCreateConstVectorN's auStack_8c
+local	Compiler__getOrCreateLoadConstN	local_8c	lookupKeyWord4	INFERRED	#define alias of lookupKeyWords[4] (5th key word, extended per the issue #64 comment above)
+local	Compiler__getOrCreateConstVectorN	auStack_8c	lookupKeyWords	INFERRED	5-word key array (owner+8/0xc/0x10/0x14) passed to HashTable__find(lookupKeyWords[constCount], owner+0x28); sibling of Compiler__getOrCreateLoadConstN's aiStack_9c
+local	Compiler__getOrCreateConstVectorN	local_7c	lookupKeyWord4	INFERRED	#define alias of lookupKeyWords[4]
+local	Compiler__getOrCreateConstVectorN	iVar4	resultVReg	CONFIRMED	set from VRegPool__create or an existing entry's +0x8c field in both branches; returned directly
+local	IRInst__operandIsNonNegativeFloatConst	local_34	laneKind	CONFIRMED	sourceVReg[lane*6+7], compared to 2; word0 of the 6-word ConstOps-shaped record (kind,value,word2..word5 convention named in IRInst__setConstantOperand's constOperandNKind/Value/Word2-5 params)
+local	IRInst__operandIsNonNegativeFloatConst	local_30	laneValue	CONFIRMED	sourceVReg[lane*6+8] via GH_U2F; word1 (value) of the same per-lane record
+local	IRInst__operandIsNonNegativeFloatConst	local_2c	laneWord2	INFERRED	sourceVReg[lane*6+9]; word2 of the per-lane record, read but not otherwise used in this function
+local	IRInst__operandIsNonNegativeFloatConst	local_28	laneWord3	INFERRED	sourceVReg[lane*6+10]; word3 of the per-lane record
+local	IRInst__operandIsNonNegativeFloatConst	local_24	laneWord4	INFERRED	sourceVReg[lane*6+11]; word4 of the per-lane record
+local	IRInst__operandIsNonNegativeFloatConst	local_20	laneWord5	INFERRED	sourceVReg[lane*6+12]; word5 of the per-lane record
+local	Program__dumpConstantRegisters	auStack_b8	logScratchBuf	INFERRED	148-byte stack buffer never written before its address is passed to Compiler__logf's "%s" arg; uninitialised read matches stock, not a bug to fix here
+local	IRInst__setConstantOperand	local_274	operand0Ptr	INFERRED	pointer slot for constant operand 0's record, parallel to operandPtrTable[0..2] = &constOperand1Kind/&constOperand2Kind/&constOperand3Kind; addressed via operandCursor = &local_274
+local	Program__emitInputMerge	param_6	destIlType	INFERRED	fed to Program__registerFileOfIlType to pick the merge-result's register file
+local	Program__emitInputMerge	param_7	inputArityCode	INFERRED	switch selects inputRegisterCount (1/2/3/4/6) from this code's value 0-4
+local	Program__emitInputMerge	puVar8	loadTempInst	CONFIRMED	new IRLoadTemp instance (IRLoadTemp__ctor_109428), appended to the entry block each loop iteration, same naming pattern as inst/mergeInst in this function
+local	Program__emitInputMerge	local_68	sourceToken	INFERRED	4-word buffer, word0 = 0x10203 (component-select token), passed to Program__applySourceTokenToOperand as its token argument
+local	Program__emitInputMerge	local_58	inputSelectWords	INFERRED	4-word buffer filled by the hw-description vtable call at +0xa0 (get input select info); only word0 is read back here
+local	Program__loadDefaultConstants	local_48	constScratch0	CONFIRMED	word0 of the per-kind const-read scratch: single bool value in the bool loop, then word0 of the 4-word int-const buffer in the int loop (local_44/local_40/local_3c, words 1-3); kept as ONE name - splitting it broke gate ADDRESS-TAKEN (lowest frame slot, folded array base) at frame offset 120
+local	Program__loadDefaultConstants	local_44	intConstWord1	CONFIRMED	word1 of the int-const buffer (ILReader__appendIntConst 2nd const word)
+local	Program__loadDefaultConstants	local_40	intConstWord2	CONFIRMED	word2 of the int-const buffer
+local	Program__loadDefaultConstants	local_3c	intConstWord3	CONFIRMED	word3 of the int-const buffer
+local	ildisPrintOutputTopology	local_38	topoSuffixWord0	INFERRED	first 4 bytes of a format-string suffix copied byte-wise from an s__<name> string constant, passed as the base of the ildisAppendf format arg (contiguous with local_34/acStack_33/local_30/local_2c below it)
+local	ildisPrintOutputTopology	local_34	topoSuffixByte4	INFERRED	byte 4 of the same format-string suffix buffer
+local	ildisPrintOutputTopology	local_30	topoSuffixWord8	INFERRED	bytes 8-11 of the same format-string suffix buffer
+local	ildisPrintOutputTopology	local_2c	topoSuffixTail	INFERRED	bytes 12-51 (tail) of the same format-string suffix buffer
+local	ildisPrintInputPrimitive	local_38	primSuffixWord0	INFERRED	first 4 bytes of a format-string suffix copied byte-wise from an s__<name> string constant, passed as the base of the ildisAppendf format arg (contiguous with local_34/acStack_33/local_30/local_2c below it)
+local	ildisPrintInputPrimitive	local_34	primSuffixByte4	INFERRED	byte 4 of the same format-string suffix buffer (some switch cases write a wider value here; a pure rename, no behaviour change)
+local	ildisPrintInputPrimitive	acStack_33	primSuffixBytes5to7	INFERRED	bytes 5-7 of the same format-string suffix buffer
+local	ildisPrintInputPrimitive	local_30	primSuffixWord8	INFERRED	bytes 8-11 of the same format-string suffix buffer
+local	ildisPrintInputPrimitive	local_2c	primSuffixTail	INFERRED	bytes 12-51 (tail) of the same format-string suffix buffer
+local	ildisPrintInstruction	acStack_132	mnemonicBuf	CONFIRMED	266-byte scratch buffer built by printf_LDBLStub_1a32d0 ("%s, " prefix) then walked by mnemonic = mnemonicBuf + fieldOffset
+local	Compiler__clearOutputChunks	auStack_b8	chunkCopyBuf	INFERRED	128-byte scratch destination of a _memcpy from the output-chunk list (compiler+0x3a0); copy result is never read afterward
+local	Compiler__clearOutputChunks	local_38	deadClearFlag	INFERRED	written to 0 each loop iteration, never read anywhere in the function
+local	ildisPrintHeader	auStack_118	formattedHeaderLine	CONFIRMED	268-byte buffer filled by printf_LDBLStub_1a32d0 ("il_%s_%d_%d") then passed to ildisAppendf
+local	ildisDisassembleTokens	auStack_248	disContext	CONFIRMED	passed to ildisInitContext and ildisPrintProgram as the disassembler context object
+local	ildisPrintSourceOperand	unaff_r23	addressModeWord	CONFIRMED	the extra token word read from *disassembler[2] when relativeMode==0x800000 (register-relative addressing); masked for the address register index and component-select bits
+local	ildisPrintSourceOperand	unaff_r28	modifierWord	CONFIRMED	the optional 2nd token word (modifier bits: swizzle/negate/write-mask-style flags), read from tokenPtr[1] or fmtArgR9[1] depending on path
+local	ildisPrintDestinationOperand	unaff_r24	addressModeWord	CONFIRMED	same role as ildisPrintSourceOperand's unaff_r23: extra token word for register-relative addressing
+local	ildisPrintDestinationOperand	unaff_r25	modifierWord	CONFIRMED	same role as ildisPrintSourceOperand's unaff_r28: optional 2nd token word of result modifiers/write mask
+local	gldValidatePolygonOffset	extraout_f1	retF1	INFERRED	leftover FPR1 value after the gld_needsMultisampleResolve call in the if-condition chain; assigned straight into fprResidualF1
+local	gldValidatePolygonOffset	extraout_f1_00	retF1B	INFERRED	leftover FPR1 value after the 2nd gld_needsMultisampleResolve call; assigned straight into fprResidualF1
+local	gldValidatePolygonOffset	in_f2	staleArgF2	INFERRED	stale FPR2 forwarded unchanged to gldValidateViewportPolygonOffset (function takes no float params of its own)
+local	gldValidatePolygonOffset	in_f3	staleArgF3	INFERRED	stale FPR3 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f4	staleArgF4	INFERRED	stale FPR4 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f5	staleArgF5	INFERRED	stale FPR5 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f6	staleArgF6	INFERRED	stale FPR6 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f7	staleArgF7	INFERRED	stale FPR7 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePolygonOffset	in_f8	staleArgF8	INFERRED	stale FPR8 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f2	staleArgF2	INFERRED	stale FPR2 forwarded unchanged to gldValidateViewportPolygonOffset (gldValidatePointSize takes only glContext)
+local	gldValidatePointSize	in_f3	staleArgF3	INFERRED	stale FPR3 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f4	staleArgF4	INFERRED	stale FPR4 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f5	staleArgF5	INFERRED	stale FPR5 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f6	staleArgF6	INFERRED	stale FPR6 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f7	staleArgF7	INFERRED	stale FPR7 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldValidatePointSize	in_f8	staleArgF8	INFERRED	stale FPR8 forwarded unchanged to gldValidateViewportPolygonOffset
+local	gldSetCurrentProgramObject	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the vtable call at glContext+0x275c
+local	gldSetCurrentProgramObject	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the vtable call at glContext+0x275c
+local	gldSetCurrentProgramObject	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the vtable call at glContext+0x275c
+local	gldValidateTextureUnits	extraout_f1	retF1	INFERRED	leftover FPR1 value after the gldLodBiasToFixed call; assigned straight into fprF1
+local	gldValidateTextureUnits	in_stack_ffffff28	stackArg28	INFERRED	stale stack-passed float argument forwarded unchanged to both gld_updateUnitBiasRegisters call sites
+local	extvsUpdateVertexAttributeConstants	in_r5	staleArgR5	INFERRED	stale r5 forwarded unchanged through the vtable call at glContext+0x2758
+local	extvsUpdateVertexAttributeConstants	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the vtable call at glContext+0x2758
+local	extvsUpdateVertexAttributeConstants	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the vtable call at glContext+0x2758
+local	extvsUpdateVertexAttributeConstants	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the vtable call at glContext+0x2758
+local	gldSetVertexPacketLimits	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the streamSetCurrent callback
+local	gldSetVertexPacketLimits	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the streamSetCurrent callback
+local	extvsEndShader	in_r5	staleArgR5	INFERRED	stale r5 forwarded unchanged through the vtable call at ctx+0x119c
+local	extvsEndShader	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the vtable call at ctx+0x119c
+local	extvsEndShader	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the vtable call at ctx+0x119c
+local	extvsEndShader	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the vtable call at ctx+0x119c
+local	gldClearBoundSlot	in_r5	staleArgR5	INFERRED	stale r5 forwarded unchanged through two vtable calls (glContext+0x1290, glContext+0x1330)
+local	gldClearBoundSlot	in_r6	staleArgR6	INFERRED	stale r6 forwarded unchanged through the same two vtable calls
+local	gldClearBoundSlot	in_r7	staleArgR7	INFERRED	stale r7 forwarded unchanged through the same two vtable calls
+local	gldClearBoundSlot	in_r8	staleArgR8	INFERRED	stale r8 forwarded unchanged through the same two vtable calls
+local	fragmentTranslateScalarMath	unaff_r22	savedDstToken	CONFIRMED	saves ilInstr[1] before it is temporarily repurposed as scratch for sub-instruction emission; restored into ilInstr[1] at the end of the function
+local	fragmentTranslateScalarMath	unaff_r21	savedDstMask	CONFIRMED	saves ilInstr[2] before it is temporarily repurposed as scratch; restored into ilInstr[2] at the end of the function
+local	fragmentTranslateScalarMathBody	unaff_r22	savedDstToken	CONFIRMED	same save/restore role as fragmentTranslateScalarMath's unaff_r22 (ilInstr[1])
+local	fragmentTranslateScalarMathBody	unaff_r21	savedDstMask	CONFIRMED	same save/restore role as fragmentTranslateScalarMath's unaff_r21 (ilInstr[2])
+local	fragmentTranslateScalarMath2Src	unaff_r20	savedDstToken	CONFIRMED	same save/restore role, using r20 (ilInstr[1])
+local	fragmentTranslateScalarMath2Src	unaff_r19	savedDstMask	CONFIRMED	same save/restore role, using r19 (ilInstr[2])
+local	fragmentTranslateAtn	extraout_r4	retR4a	INFERRED	leftover r4 after fragmentTranslateScalarMath, passed straight through as fpilEmitAngleConstants's 2nd arg
+local	fragmentTranslateAtn	extraout_r4_00	retR4b	INFERRED	leftover r4 after the fpilEmitAngleConstants call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_01	retR4c	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_02	retR4d	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_03	retR4e	INFERRED	leftover r4 after a 2nd _malloc call, assigned into staleArgR4
+local	fragmentTranslateAtn	extraout_r4_04	retR4f	INFERRED	leftover r4 after a 2nd _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	in_r4	staleArgR4	INFERRED	stale leftover r4 (whichever malloc/realloc ran last) forwarded as fragmentInstructionToIL's 2nd arg; the callee does not depend on it
+local	fragmentProgramToIL	in_r5	hasAttribKind5	CONFIRMED	0 by default, set to 1 only when an attribute binding's low nibble == 5; forwarded as fragmentInstructionToIL's 3rd arg
+local	fragmentProgramToIL	in_r6	zeroArg	INFERRED	always set to 0 just before use, never otherwise assigned; forwarded as fragmentInstructionToIL's 4th arg
+local	fragmentProgramToIL	extraout_r4	retR4a	INFERRED	leftover r4 after an earlier call, assigned into staleArgR4 (1st of 12 such call-site artifacts in this function)
+local	fragmentProgramToIL	extraout_r4_00	retR4b	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_01	retR4c	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_02	retR4d	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_03	retR4e	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_04	retR4f	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_05	retR4g	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_06	retR4h	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_07	retR4i	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_08	retR4j	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_09	retR4k	INFERRED	leftover r4 after a _malloc call, assigned into staleArgR4
+local	fragmentProgramToIL	extraout_r4_10	retR4l	INFERRED	leftover r4 after a _realloc call, assigned into staleArgR4
+local	Program__translateILInstruction	param_5	evalStackOrScratch	INFERRED	dual role: the incoming 5th parameter is read as an operand-stack pointer (param_5[1]=count, param_5[2]=base) at the very start, then from line ~4089 on the SAME slot is reused purely as scratch (pointer offsets, newInst/newInst2/newInst4, destTempRegister) before being forwarded to psnPackedNegateMask; a parameter cannot be use-split, so kept as one name
+local	Program__translateILInstruction	local_98	sourceToken	CONFIRMED	= 0x10203 (component-select token), passed to Program__applySourceTokenToOperand as its token argument; same role/value as Program__emitInputMerge's sourceToken
+local	Program__translateILInstruction	local_94	sourceTokenWords	INFERRED	3-word array holding the same kind of source-token/selector info as sourceToken, used via scratchSourcePtrOrZero and passed to IRInst__literalForLane
+local	Program__translateILInstruction	local_88	hwInputSelectWord	INFERRED	filled by the hw-description vtable call at +0xa0 (get input select info, same call as Program__emitInputMerge's inputSelectWords), then copied into operandRecord2+0x10
+local	Program__translateILInstruction	local_84	hwInputSelectWordB	INFERRED	same hw-description +0xa0 call at a different call site, same role as hwInputSelectWord
+local	Program__translateILInstruction	local_80	laneSelectBytes	INFERRED	filled from operandRecord3+0x10, then indexed byte-wise (&local_80 + extensionSelectLane) as a per-lane splat-table index
+local	Program__translateILStream	auStack_154	pendingListBStorage	CONFIRMED	0x18-byte sentinel-list header storage for pendingListB (DListNode__init writes 6 words incl. the self-referential empty-list head at +8, aliased as pendingListBHead); already extended to the real 0x18-byte size per the issue #64 comment in this file
+local	Program__translateILStream	auStack_16c	pendingListAStorage	CONFIRMED	same role as pendingListBStorage, for pendingListA (2nd independent instance of the same fix)
+local	Program__translateILStream	local_14c	pendingListBHead	CONFIRMED	#define alias into pendingListBStorage+8: the self-referential empty-list head DListNode__init writes, read as a list head in four unlink loops
+local	Program__translateILStream	local_164	pendingListAHead	CONFIRMED	#define alias into pendingListAStorage+8: same role as pendingListBHead, for pendingListA
+local	Program__translateILStream	local_138	unusedInit1	INFERRED	set to 0 once at function entry, never read anywhere in the function (dead store, same category as Compiler__clearOutputChunks's deadClearFlag)
+local	Program__translateILStream	local_134	unusedInit2	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_130	unusedInit3	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_12c	unusedInit4	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_128	unusedInit5	INFERRED	set to 0 once at function entry, never read anywhere in the function
+local	Program__translateILStream	local_170	unusedTracker	INFERRED	initialised to the sentinel 0x1010101 at entry (same style as lastDeclRegister's 0xffffffff), later overwritten from stagedSelectWord, but never read anywhere in the function
+local	Program__translateILStream	local_118	unusedTemplateMode	INFERRED	assigned from templateModeWord once, never read afterward
+local	Program__translateILStream	puVar13	unusedPtr13	INFERRED	declared but has no use anywhere in the function body (only referenced in a nearby comment discussing a different variable)
+local	Program__translateILStream	iVar23	operandScratch23	INFERRED	3 disjoint roles far apart in this huge function: an operand-byte-count loop-bound value, a separate for-loop counter, and (much later) an operand-record pointer; kept as one name (not use-split: local-variable-rename anchors in this function are reverted to Ghidra originals the same way function-name anchors are, and the 3 sites share no safe unique textual anchor)
