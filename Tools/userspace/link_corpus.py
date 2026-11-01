@@ -764,6 +764,9 @@ def fn_symbol_for(addr):
 targets = set()        # data addresses that need a label
 for _nm, _sp in cfg.get('data_anchors', {}).items():
     targets.add(int(_sp['base'], 16))      # the object a PIC anchor is measured from needs a label
+# data objects no pointer word and no anchor reaches (a token stream nothing in the stock references) get their LD_<address> label from the config, so a `target` row can name them
+for _a in cfg.get('extra_data_labels', []):
+    targets.add(int(_a, 16))
 ghidra_ptr_words = []
 prebound_import_words, ext_addend_fixed = [], []   # external-reloc words: prebound import values dropped / addends corrected
 unresolved_ptr_words = []   # (address, value) of relocated data words whose target has no symbol in the link

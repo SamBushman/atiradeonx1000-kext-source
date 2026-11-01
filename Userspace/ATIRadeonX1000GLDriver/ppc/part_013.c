@@ -1713,11 +1713,11 @@ loopSetDeclNode:
         do {
           if (declNode != (int *)0x0) {
             stageR9 = workArea + 0x914a;
-            typeTagTableB = (int *)&arbTypeTagTable_001ac5a4;
+            typeTagTableB = (int *)&constPoolAnchor_001ac5a4;
             noFogOption = hasFogOption == (int *)0x0;
             fogOptionCopy = hasFogOption;
             stageR10 = workArea + 0x928a;
-            typeTagTable = (int *)&arbTypeTagTable_001ac5a4;
+            typeTagTable = (int *)&constPoolAnchor_001ac5a4;
             paramListBase = stageR9;
             attrListBase = stageR10;
             do {

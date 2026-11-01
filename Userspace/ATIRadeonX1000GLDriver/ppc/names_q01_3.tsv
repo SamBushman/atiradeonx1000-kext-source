@@ -21,7 +21,7 @@ local	powerOfTenDouble	param_3	exponentPtr	INFERRED	callers pass their variable 
 local	powerOfTenDouble	param_4	outCapacity	INFERRED	callers pass their variable `outCapacity` here (2 call site(s), e.g. in textPrintDoubleShortest)
 local	powerOfTenDouble	param_5	argReg7	INFERRED	callers pass their variable `argReg7` here (2 call site(s), e.g. in textPrintDoubleShortest)
 local	powerOfTenDouble	param_6	argReg8	INFERRED	callers pass their variable `argReg8` here (2 call site(s), e.g. in textPrintDoubleShortest)
-local	powerOfTenDouble	param_7	pow10Table	INFERRED	callers pass their variable `pow10Table` here (2 call site(s), e.g. in textPrintDoubleShortest)
+local	powerOfTenDouble	param_7	picAnchor	INFERRED	callers pass their variable `picAnchor` here (2 call site(s), e.g. in textPrintDoubleShortest)
 local	gld_setIntegerEngineParam	param_2	pname	INFERRED	callers pass their variable `pname` here (1 call site(s), e.g. in _gldSetInteger)
 local	gld_setIntegerEngineParam	param_3	values	INFERRED	callers pass their variable `values` here (1 call site(s), e.g. in _gldSetInteger)
 local	gld_fillCapsBlock	param_1	ctx	INFERRED	callers pass their variable `ctx` here (1 call site(s), e.g. in _gldCreateContext)

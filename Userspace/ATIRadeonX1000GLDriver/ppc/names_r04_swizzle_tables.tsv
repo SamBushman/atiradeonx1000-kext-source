@@ -48,7 +48,7 @@ data	DAT_001b2d4c	swizzleWWWW_001b2d4c	INFERRED	4-byte select word (one byte per
 data	DAT_001b2d50	swizzleYYYX_001b2d50	INFERRED	4-byte select word (one byte per lane: 0=x 1=y 2=z 3=w 4=unused) 0x01010100, loaded as a swizzle/select operand (e.g. `callResult = DAT_001b2d50;`); the value is the read-only constant at this address
 data	DAT_001aa3a8	powerOfTenDoubleTable	CONFIRMED	powerOfTenDouble(exponent) multiplies by the double at table[exponent] (8-byte stride)
 data	DAT_001aa4c4	programRecordSizeByType	INFERRED	gld_bindProgramObject/gld_bindProgramRecord/gld_bindFragmentProgramRecord/gld_getProgramParameter calloc(1, table[programObject[7]] + 0x14): per-program-type record size (4-byte stride)
-data	DAT_001abfb4	textPrintDoubleShortest_pow10Table	INFERRED	textPrintDoubleShortest keeps its address in a local named pow10Table (powers of ten for double printing)
+data	DAT_001abfb4	constPoolAnchor_001abfb4	INFERRED	PIC base, not a table: textPrintDoubleShortest holds 0x1abfb4 as a gcc picbase (r31=0xbfb4 + addis 0x1a) and the callee powerOfTenDouble indexes from it; the real power-of-ten table is powerOfTenDoubleTable
 data	DAT_001ea4fc	irInstFactoryTable	INFERRED	IRInst__create(opcode, compiler) calls the function at table[...] (8-byte stride) to construct the IR instruction of that class
 data	DAT_001ea904	regKindInfo_flagsWord	INFERRED	RegKind__flagBit0/6/7/8 test single bits of the word at (kind*0x10) in this table
 data	DAT_001ea908	regKindInfo_byte4	INFERRED	RegKind__byte4 returns the byte at (kind*0x10) in this table

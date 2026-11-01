@@ -21,7 +21,7 @@ local	FUN_0000bfa0	fparam_2	tolerance	INFERRED	relative precision: digit generat
 local	FUN_0000bfa0	cVar1	swapChar	CONFIRMED	temporary of the in-place reversal of a digit run
 local	FUN_0000bfa0	iVar2	swapsLeft	INFERRED	number of swaps left in the in-place reversal of the integer digits
 local	FUN_0000bfa0	puVar4	exponentPtr	CONFIRMED	&local_78: the int exponent out-parameter of frexp
-local	FUN_0000bfa0	puVar5	pow10Table	INFERRED	&DAT_001abfb4: table address passed to FUN_0000be70 (10^n)
+local	FUN_0000bfa0	puVar5	picAnchor	INFERRED	&DAT_001abfb4: picbase address (not a table) passed to FUN_0000be70 (10^n)
 local	FUN_0000bfa0	in_r7	argReg7	UNKNOWN	Ghidra register input forwarded to FUN_0000be70
 local	FUN_0000bfa0	in_r8	argReg8	UNKNOWN	Ghidra register input forwarded to FUN_0000be70
 local	FUN_0000bfa0	pcVar6	reverseTail	CONFIRMED	tail pointer of the in-place reversal of a digit run

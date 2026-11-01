@@ -42,7 +42,7 @@ data	DAT_001aa86c	swizzleVariantStartTable_001aa86c	INFERRED	word table indexed 
 data	DAT_001aa87c	swizzleVariantTemplate_001aa87c	CONFIRMED	300-byte block copied into `variantTable` by `_memcpy(variantTable,&DAT_001aa87c,300)` in ConstRecord__insertSwizzleVariants
 data	DAT_001aa9e4	ilOpcodeTemplateOffsetTable_001aa9e4	CONFIRMED	`return *(undefined4 *)(&DAT_001aa9e4 + tableIndex * 4)` in OpcodeTemplate__tableOffsetForIlOpcode
 data	DAT_001aa9fc	setupLiteralFloatTable_001aa9fc	INFERRED	float table indexed by `setupLiteralIndex` (read as `*(float *)(&DAT_001aa9fc + setupLiteralIndex * 4)`) in Program__lowerDestinationToken
-data	DAT_001ac5a4	arbTypeTagTable_001ac5a4	INFERRED	table whose address is held as `typeTagTable` / `typeTagTableB` by arbValidateProgram
+data	DAT_001ac5a4	constPoolAnchor_001ac5a4	INFERRED	PIC base, not a table: arbValidateProgram (0x8c590) does mflr r31 = 0x8c5a4 then addis rN,r31,0x12 (+ negative offsets) which yields 0x1ac5a4 as the base for its string and data references
 data	DAT_001af9e0	outputScaleTable_001af9e0	INFERRED	float table (first entry 0.125) held as `scaleTablePtr` by isOutputScaleValue / outputScaleExponent
 data	DAT_001af9ec	outputScaleByExponent_001af9ec	CONFIRMED	`return (double)*(float *)(&DAT_001af9ec + exponent * 4)` in outputScaleFromExponent (entry 0 = 1.0)
 data	DAT_001aff4c	immediateConstantMultiples_001aff4c	INFERRED	float table (0.125, 0.25 ...) walked by `multipleCursor` in KhanPs__vslot75_registerConstantMultiples

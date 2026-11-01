@@ -1225,7 +1225,7 @@ int gld_setVertexArrayNewTextureBacking(ctx, vertexArray, requestArg0, requestAr
 }
 
 /* powerOfTenDouble @ 0xbe70 (272 bytes) */
-double powerOfTenDouble(int exponent,undefined4 unusedArg2,undefined4 exponentPtr,undefined4 outCapacity,undefined4 argReg7,undefined4 argReg8,undefined4 pow10Table)
+double powerOfTenDouble(int exponent,undefined4 unusedArg2,undefined4 exponentPtr,undefined4 outCapacity,undefined4 argReg7,undefined4 argReg8,undefined4 picAnchor)
 {
   int blocks;
   double result;
@@ -1283,7 +1283,7 @@ char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char 
   uint *exponentPtr;
   undefined4 argReg7;
   undefined4 argReg8;
-  undefined *pow10Table;
+  undefined *picAnchor;
   char *reverseTail;
   char *outEnd;
   char *runStart;
@@ -1313,7 +1313,7 @@ char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char 
     runStart = outBuffer + 1;
     *outBuffer = '-';
   }
-  pow10Table = &textPrintDoubleShortest_pow10Table;
+  picAnchor = &constPoolAnchor_001abfb4;
   scaledValue = value;
   if (value <= DOUBLE_001aa228) {
     decimalExponent[0] = 0;
@@ -1328,8 +1328,8 @@ char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char 
       roundedExponent = _round(((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0) * DOUBLE_001aa218);
       decimalExponent[0] = (uint)(int)roundedExponent;
       fixConvScratch1 = (longlong)(int)decimalExponent[0];
-      pow10Exponent = (double)((double (*)())powerOfTenDouble)(decimalExponent[0],r4AfterCall,exponentPtr,outCapacity,argReg7,argReg8,pow10Table);
-      negPow10 = (double)((double (*)())powerOfTenDouble)(-decimalExponent[0],r4AfterCall2,exponentPtr,outCapacity,argReg7,argReg8,pow10Table);
+      pow10Exponent = (double)((double (*)())powerOfTenDouble)(decimalExponent[0],r4AfterCall,exponentPtr,outCapacity,argReg7,argReg8,picAnchor);
+      negPow10 = (double)((double (*)())powerOfTenDouble)(-decimalExponent[0],r4AfterCall2,exponentPtr,outCapacity,argReg7,argReg8,picAnchor);
       scaledValue = value * negPow10;
       scaledTolerance = tolerance * pow10Exponent;
     }
