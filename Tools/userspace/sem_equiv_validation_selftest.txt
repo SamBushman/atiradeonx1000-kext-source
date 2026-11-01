@@ -1,0 +1,138 @@
+=== /home/sam/g5logs/tmp_r16/fg__4ing9x3/base_part_044.c.dis
+POSITIVE rename   sem_equiv: 49 EQUIVALENT, 0 IDENTICAL-CODE, 12 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 49 EQUIVALENT, 0 IDENTICAL-CODE, 12 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 49 EQUIVALENT, 0 IDENTICAL-CODE, 12 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'DIFFERENT': 117}
+   callarg   {'DIFFERENT': 97, 'uninit': 2, 'EQUIVALENT': 9}
+   const     {'DIFFERENT': 103, 'INCONCLUSIVE': 14, 'EQUIVALENT': 1}
+   dropcall  {'DIFFERENT': 108}
+   dropst    {'DIFFERENT': 100}
+   reg       {'DIFFERENT': 110}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_Scheduler__freeNodes', ' NOOP(same instruction already sets r4)', ('\tbl L_Arena__free$stub', '\tmr r4,r0'), 514)
+    ('callarg', '_Scheduler__buildCoScheduleGroups', ' NOOP(same instruction already sets r4)', ('\tbl L_Vector__elementRefGrow$stub', '\tmr r4,r0'), 280)
+    ('const', '_Inst__mergeAddAndMadSharedOperands', '', ('\tli r0,0', '\tli r0,1'), None)
+    ('callarg', '_Scheduler__computeBlockRegisterSets', ' NOOP(same instruction already sets r4)', ('\tbl L_Arena__alloc$stub', '\tmr r4,r0'), 42)
+    ('callarg', '_Inst__shiftTargetField', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__getOperandSource$stub', '\tmr r4,r0'), 246)
+    ('callarg', '_Inst__hoistScalarMulOutOfDot', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__readLastOperand$stub', '\tmr r4,r0'), 317)
+    ('callarg', '_Inst__hoistScalarMulOutOfDot', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__saveCounters$stub', '\tmr r4,r0'), 352)
+    ('callarg', '_Inst__collapseAlgebraic_0015c6d4', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__clone$stub', '\tmr r4,r0'), 747)
+    ('callarg', '_Inst__tryCollapseSimilar', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__dropCounterAndDeleteIfUnused$stub', '\tmr r4,r0'), 77)
+    ('callarg', '_Scheduler__createCopyNode', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__create$stub', '\tmr r4,r0'), 21)
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 10
+=== /home/sam/g5logs/tmp_r16/fg_g6pzpgvd/base_part_021.c.dis
+POSITIVE rename   sem_equiv: 58 EQUIVALENT, 0 IDENTICAL-CODE, 2 UNINIT-PAIRED, 0 DIFFERENT, 1 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 58 EQUIVALENT, 0 IDENTICAL-CODE, 2 UNINIT-PAIRED, 0 DIFFERENT, 1 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 58 EQUIVALENT, 0 IDENTICAL-CODE, 2 UNINIT-PAIRED, 0 DIFFERENT, 1 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'DIFFERENT': 70, 'INCONCLUSIVE': 2}
+   callarg   {'DIFFERENT': 64, 'EQUIVALENT': 6, 'INCONCLUSIVE': 2}
+   const     {'DIFFERENT': 104, 'INCONCLUSIVE': 8}
+   dropcall  {'DIFFERENT': 61, 'INCONCLUSIVE': 1}
+   dropst    {'DIFFERENT': 61, 'INCONCLUSIVE': 2}
+   reg       {'DIFFERENT': 85, 'INCONCLUSIVE': 1}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_ILReader__dtor_e4830', ' NOOP(same instruction already sets r4)', ('\tbl L_Arena__free$stub', '\tmr r4,r0'), 129)
+    ('callarg', '_EncoderState__destroy_e3308', ' NOOP(same instruction already sets r4)', ('\tbl L_Arena__free$stub', '\tmr r4,r0'), 110)
+    ('callarg', '_ILReader__fetchToken', ' NOOP(same instruction already sets r4)', ('\tbl L_Vector__removeAt$stub', '\tmr r4,r0'), 255)
+    ('callarg', '_IRInst__dropAppendedSources', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__setOperandSource$stub', '\tmr r4,r0'), 37)
+    ('callarg', '_ILReader__dtor_e4934', ' NOOP(same instruction already sets r4)', ('\tbl L_Arena__free$stub', '\tmr r4,r0'), 117)
+    ('callarg', '_ILReader__dtor_e4934', ' NOOP(same instruction already sets r4)', ('\tbl L_Arena__free$stub', '\tmr r4,r0'), 151)
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 6
+=== /home/sam/g5logs/tmp_r16/fg_gu0ys6d0/base_part_000.c.dis
+POSITIVE rename   sem_equiv: 50 EQUIVALENT, 0 IDENTICAL-CODE, 8 UNINIT-PAIRED, 0 DIFFERENT, 2 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 50 EQUIVALENT, 0 IDENTICAL-CODE, 8 UNINIT-PAIRED, 0 DIFFERENT, 2 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 50 EQUIVALENT, 0 IDENTICAL-CODE, 8 UNINIT-PAIRED, 0 DIFFERENT, 2 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'INCONCLUSIVE': 4, 'DIFFERENT': 63}
+   callarg   {'DIFFERENT': 90, 'EQUIVALENT': 6, 'INCONCLUSIVE': 2}
+   const     {'INCONCLUSIVE': 11, 'DIFFERENT': 61, 'EQUIVALENT': 2}
+   dropcall  {'DIFFERENT': 76, 'INCONCLUSIVE': 2}
+   dropst    {'INCONCLUSIVE': 4, 'DIFFERENT': 48}
+   reg       {'INCONCLUSIVE': 4, 'DIFFERENT': 58}
+   swapst    {'INCONCLUSIVE': 2}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_gldTestMemoryPluginData', ' NOOP(same instruction already sets r4)', ('\tbl L_gld_isStampRetired$stub', '\tmr r4,r0'), 71)
+    ('callarg', '_gldCreateShared', ' NOOP(same instruction already sets r4)', ('\tbl L_pthread_mutex_init$stub', '\tmr r4,r0'), 34)
+    ('callarg', '_find_atexit_10_3_stub_00001da4', ' NOOP(same instruction already sets r4)', ('\tbl _dyld_func_lookup_stub', '\tmr r4,r0'), 28)
+    ('callarg', '_find_atexit_10_3_stub_00001da4', ' NOOP(same instruction already sets r4)', ('\tbl _dyld_func_lookup_stub', '\tmr r4,r0'), 18)
+    ('callarg', '_gldFinishMemoryPluginData', ' NOOP(same instruction already sets r4)', ('\tbl L_gld_isStampRetired$stub', '\tmr r4,r0'), 50)
+    ('callarg', '_gldFinishMemoryPluginData', ' NOOP(same instruction already sets r4)', ('\tbl L_gld_isStampRetired$stub', '\tmr r4,r0'), 79)
+    ('const', '_atexit', '', ('\tli r0,0', '\tli r0,1'), None)
+    ('const', '_cxa_atexit', '', ('\tli r0,1', '\tli r0,2'), None)
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 8
+=== /home/sam/g5logs/tmp_r16/fg_iwufzvl8/base_part_028.c.dis
+POSITIVE rename   sem_equiv: 60 EQUIVALENT, 0 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 60 EQUIVALENT, 0 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 60 EQUIVALENT, 0 IDENTICAL-CODE, 0 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'DIFFERENT': 44}
+   callarg   {'DIFFERENT': 115, 'EQUIVALENT': 5}
+   const     {'DIFFERENT': 111, 'INCONCLUSIVE': 5}
+   dropcall  {'DIFFERENT': 93}
+   dropst    {'DIFFERENT': 80}
+   reg       {'DIFFERENT': 62, 'INCONCLUSIVE': 2}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_IRInst__setLastOperandFromRecord', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__getOperandRecord$stub', '\tmr r4,r0'), 43)
+    ('callarg', '_IRInst__setLastOperandFromRecord', ' NOOP(same instruction already sets r4)', ('\tbl _IRInst__setExtraOperandSource', '\tmr r4,r0'), 18)
+    ('callarg', '_IRInst__removeFromListEx', ' NOOP(same instruction already sets r4)', ('\tbl _IRInst__detachWhenTracking', '\tmr r4,r0'), 41)
+    ('callarg', '_IRInst__deleteIfUnused', ' NOOP(same instruction already sets r4)', ('\tbl L_IRInst__useCount$stub', '\tmr r4,r0'), 116)
+    ('callarg', '_IRInst__removeFromList', ' NOOP(same instruction already sets r4)', ('\tbl _IRInst__removeFromSourceUserLists', '\tmr r4,r0'), 39)
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 5
+=== /home/sam/g5logs/tmp_r16/fg_w5krfdge/base_part_018.c.dis
+POSITIVE rename   sem_equiv: 50 EQUIVALENT, 0 IDENTICAL-CODE, 7 UNINIT-PAIRED, 0 DIFFERENT, 3 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 50 EQUIVALENT, 0 IDENTICAL-CODE, 7 UNINIT-PAIRED, 0 DIFFERENT, 3 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 50 EQUIVALENT, 0 IDENTICAL-CODE, 7 UNINIT-PAIRED, 0 DIFFERENT, 3 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'DIFFERENT': 80, 'INCONCLUSIVE': 4}
+   callarg   {'DIFFERENT': 76, 'INCONCLUSIVE': 4, 'uninit': 1, 'EQUIVALENT': 1}
+   const     {'DIFFERENT': 100, 'INCONCLUSIVE': 16}
+   dropcall  {'DIFFERENT': 69, 'INCONCLUSIVE': 4}
+   dropst    {'DIFFERENT': 73, 'INCONCLUSIVE': 4}
+   reg       {'DIFFERENT': 84, 'INCONCLUSIVE': 4}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_vsDisassembleLine', ' NOOP(same instruction already sets r4)', ('\tbl _vsdisPrintFlowInstruction', '\tmr r4,r0'), 85)
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 1
+=== fg_vyse8bxz/base_part_001.c.dis
+POSITIVE rename   sem_equiv: 40 EQUIVALENT, 0 IDENTICAL-CODE, 20 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 40 EQUIVALENT, 0 IDENTICAL-CODE, 20 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 40 EQUIVALENT, 0 IDENTICAL-CODE, 20 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'DIFFERENT': 70}
+   callarg   {'DIFFERENT': 60, 'EQUIVALENT': 3, 'uninit': 1}
+   const     {'INCONCLUSIVE': 15, 'DIFFERENT': 101}
+   dropcall  {'DIFFERENT': 52}
+   dropst    {'DIFFERENT': 74}
+   reg       {'DIFFERENT': 60, 'INCONCLUSIVE': 4}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_gldTestObject', 'len 111->112')
+    ('callarg', '_gldFinishObject', 'len 142->143')
+    ('callarg', '_gldCreateFence', 'len 253->254')
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 3
+=== fg_33ubib7c/base_part_041.c.dis
+POSITIVE rename   sem_equiv: 59 EQUIVALENT, 0 IDENTICAL-CODE, 1 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE commute  sem_equiv: 59 EQUIVALENT, 0 IDENTICAL-CODE, 1 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+POSITIVE frame    sem_equiv: 59 EQUIVALENT, 0 IDENTICAL-CODE, 1 UNINIT-PAIRED, 0 DIFFERENT, 0 INCONCLUSIVE
+NEGATIVE results (verdict counts per mutation kind):
+   branch    {'DIFFERENT': 97}
+   callarg   {'EQUIVALENT': 13, 'DIFFERENT': 85}
+   const     {'DIFFERENT': 101, 'INCONCLUSIVE': 15}
+   dropcall  {'DIFFERENT': 90}
+   dropst    {'DIFFERENT': 76}
+   reg       {'DIFFERENT': 94}
+SURVIVORS (mutants not rejected: judge by hand):
+    ('callarg', '_InterferenceGraph__mergeNeighbourLists', 'len 288->289')
+    ('callarg', '_InterferenceGraph__addEdgesForInst', 'len 187->188')
+    ('callarg', '_pass_color_graph', 'len 2472->2473')
+    ('callarg', '_RegAlloc__getCachedLoadFa', 'len 49->50')
+    ('callarg', '_InterferenceGraph__dtor_1357d4', 'len 193->194')
+    ('callarg', '_InterferenceGraph__addNodes', 'len 345->346')
+    ('callarg', '_IRInst__laneWrittenInChain', 'len 61->62')
+    ('callarg', '_InterferenceGraph__resolveNode', 'len 45->46')
+    ('callarg', '_NeighbourList__removeResolvedNode', 'len 111->112')
+    ('callarg', '_InterferenceGraph__dtor_135900', 'len 193->194')
+    ('callarg', '_Program__freeBlockBitsets', 'len 111->112')
+    ('callarg', '_HwLimits__buildInterferenceGraph', 'len 2071->2072')
+    ('callarg', '_NeighbourList__free_135090', 'len 71->72')
+summary: positives DIFFERENT = {'rename': 0, 'commute': 0, 'frame': 0}; survivors = 13

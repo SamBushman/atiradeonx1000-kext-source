@@ -246,11 +246,9 @@ local	_gldGetRendererInfo	param_6	unused6	UNKNOWN	not used
 local	_gldGetRendererInfo	param_7	unused7	UNKNOWN	not used
 local	_gldGetRendererInfo	param_8	unused8	UNKNOWN	not used
 local	_gldGetRendererInfo	uVar1	returnCode	CONFIRMED	0x2719 bad mask, 0x271f open/call failure, 0 success
-local	_gldGetRendererInfo	uVar2	bitOrId	INFERRED	bit index while searching the mask; later FUN_00017720 result stored in rendererInfo[1]
 local	_gldGetRendererInfo	piVar3	serviceList	INFERRED	library+8 list of device service entries
 local	_gldGetRendererInfo	iVar4	listCount	INFERRED	library+4 count, later _IOServiceOpen / call status
 local	_gldGetRendererInfo	iVar5	rendererIndex	INFERRED	index of the chosen service in the list; stored in the top byte of rendererInfo[1]
-local	_gldGetRendererInfo	iVar6	offsetOrService	INFERRED	byte offset into the list, then the chosen service passed to _IOServiceOpen
 local	_gldGetRendererInfo	local_38	outCount	CONFIRMED	scalarO count (3) passed as &local_38
 local	_gldGetRendererInfo	local_34	connection	CONFIRMED	io_connect_t returned by _IOServiceOpen
 local	_gldGetRendererInfo	local_30	scalarOut0	CONFIRMED	first scalarO word (array passed as local_30)
@@ -291,7 +289,6 @@ local	_gldReclaimTexture	bVar1	moreUnits	CONFIRMED	loop continues while unit != 
 local	_gldReclaimTexture	iVar2	updatedRefCount	INFERRED	store-conditional result
 local	_gldReclaimTexture	piVar3	refCountSlot	INFERRED	&resident[+0x10], later the list node
 local	_gldReclaimTexture	piVar4	listNeighbour	INFERRED	node[1], later &memory[+0x10]
-local	_gldReclaimTexture	iVar5	unitOrOldRefCount	INFERRED	texture-unit index 0..0xf, then old refcount (reused role)
 local	_gldReclaimTexture	iVar6	unitSlotCursor	INFERRED	ctx + 4*unit (bound texture slots at ctx+0x18c), later resident record
 local	_gldReclaimTexture	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
 local	_gldCreateVertexArray	param_1	ctx	INFERRED	unused

@@ -4372,7 +4372,6 @@ local	ValueKey__propagateLaneValues	cVar2	laneKind	INFERRED	dest select byte for
 local	ValueKey__propagateLaneValues	puVar5	laneCursor	INFERRED	walks the four lane columns of the key (one word per step)
 local	FUN_0017343c	param_2	block	INFERRED	block whose live-in bit set (+0x128) tracks the register
 local	FUN_0017343c	iVar1	liveSetWordRef	INFERRED	one register: bit set base, then the address of the register's bit-set word
-local	FUN_0017343c	iVar2	instOrProgramRef	INFERRED	one register: the inst at ctx+0xb0, the program statistics record and the compiler at ctx+0x238
 local	FUN_0017343c	uVar3	registerId	INFERRED	register number (a0[7]) whose bit is set or cleared in the live set
 local	FUN_0013c210	local_58	walkInst	INFERRED	inst currently walked on the rewrite stack; reused as the operand source it descends into
 local	FUN_00151a74	iVar2	operandSelectWord	INFERRED	select word of the operand record, or the all-unused default 0x1010101
@@ -4478,7 +4477,6 @@ local	FUN_00146624	param_2	selectB	INFERRED	second select word, spilled into the
 local	FUN_00146624	pcVar1	selectBBytePtr	INFERRED	byte pointer walking selectB
 local	FUN_00146624	pcVar2	selectABytePtr	INFERRED	byte pointer walking selectA
 local	FUN_00176954	param_2	row	INFERRED	operand row; each row is four words
-local	FUN_00176954	uVar4	literalOrResult	INFERRED	one register: float bits 1.0/0.0 for the folded literal, then the return flag
 local	FUN_00176954	iVar5	rowBase	INFERRED	key + row * 4: base of this row's value numbers
 local	FUN_001768d4	param_1	key	INFERRED	value key with per-row value numbers at +0x178
 local	FUN_001768d4	param_2	row	INFERRED	operand row

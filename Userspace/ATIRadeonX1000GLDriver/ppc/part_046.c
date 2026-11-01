@@ -41,21 +41,22 @@ int ValueKey__markRegisterLiveInBlock(ctx, block)
 {
   int vcall18Result;
   int liveSetWordRef;
-  int instOrProgramRef;
+  int liveInst;
+  int compilerOptions;
   int *a0;
   uint registerId;
   
   a0 = *(int **)(*(int *)(ctx + 0xb0) + 0x8c);
   vcall18Result = (**(code **)(*a0 + 0x18))(a0,block);
   if (vcall18Result != 0) {
-    instOrProgramRef = *(int *)(ctx + 0xb0);
+    liveInst = *(int *)(ctx + 0xb0);
     registerId = a0[7];
     liveSetWordRef = *(int *)(block + 0x128);
-    if ((((*(int *)(*(int *)(instOrProgramRef + 0x88) + 8) == 0x12) && (*(int *)(instOrProgramRef + 0x120) == 0)) &&
-        ((*(uint *)(instOrProgramRef + 0x14) & 0x200) == 0)) &&
-       (((*(uint *)(instOrProgramRef + 0xb8) & 1) != 0 && ((*(uint *)(instOrProgramRef + 0xd0) & 1) == 0)))) {
-      instOrProgramRef = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
-      *(int *)(instOrProgramRef + 0xa8) = *(int *)(instOrProgramRef + 0xa8) + 1;
+    if ((((*(int *)(*(int *)(liveInst + 0x88) + 8) == 0x12) && (*(int *)(liveInst + 0x120) == 0)) &&
+        ((*(uint *)(liveInst + 0x14) & 0x200) == 0)) &&
+       (((*(uint *)(liveInst + 0xb8) & 1) != 0 && ((*(uint *)(liveInst + 0xd0) & 1) == 0)))) {
+      compilerOptions = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
+      *(int *)(compilerOptions + 0xa8) = *(int *)(compilerOptions + 0xa8) + 1;
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,0);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xbc,1,1);
       liveSetWordRef = (registerId >> 3 & 0x1ffffffc) + liveSetWordRef;
@@ -2469,7 +2470,8 @@ int ValueKey__foldCompareLiterals(ctx, row)
   float *exprRecordForValueNumberResult;
   float *exprRecordForValueNumberResultB;
   undefined4 valueNumberForExprResult;
-  undefined4 literalOrResult;
+  undefined4 compareResultBits;
+  undefined4 folded;
   int rowBase;
   int evaluateCompareFloatsResult;
   
@@ -2478,18 +2480,18 @@ int ValueKey__foldCompareLiterals(ctx, row)
     exprRecordForValueNumberResult = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(rowBase + 0x178));
     exprRecordForValueNumberResultB = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(rowBase + 0x188));
     evaluateCompareFloatsResult = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecordForValueNumberResult,(double)*exprRecordForValueNumberResultB);
-    literalOrResult = 0x3f800000;
+    compareResultBits = 0x3f800000;
     if (evaluateCompareFloatsResult == 0) {
-      literalOrResult = 0;
+      compareResultBits = 0;
     }
-    valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),literalOrResult);
-    literalOrResult = 1;
+    valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),compareResultBits);
+    folded = 1;
     *(undefined4 *)(row * 4 + ctx + 0x30) = valueNumberForExprResult;
   }
   else {
-    literalOrResult = 0;
+    folded = 0;
   }
-  return literalOrResult;
+  return folded;
 }
 
 /* ValueKey__getRowLaneValue @ 0x1769f4 (160 bytes) */

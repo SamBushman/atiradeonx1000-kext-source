@@ -737,7 +737,8 @@ int IRInst__setExtraOperandSource(inst, newSource, trackUses, compilerCtx)
   int compilerCtx;
 {
   undefined4 extraOperandSwizzle;
-  uint flagsOrCount;
+  uint instFlags;
+  uint vectorSize;
   int oldSource;
   int *elementRef;
   int options;
@@ -746,18 +747,18 @@ int IRInst__setExtraOperandSource(inst, newSource, trackUses, compilerCtx)
   
   options = *(int *)(compilerCtx + 0x6c4);
   if (trackUses != 0) {
-    flagsOrCount = *(uint *)(inst + 0x14);
-    if ((flagsOrCount & 0x200) == 0) goto checkFlagsOrCount;
+    instFlags = *(uint *)(inst + 0x14);
+    if ((instFlags & 0x200) == 0) goto checkFlagsOrCount;
     oldSource = IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
     if (oldSource != 0) {
       vectorHeader = *(uint **)(oldSource + 0x10);
-      flagsOrCount = vectorHeader[1];
-      if (0 < (int)flagsOrCount) {
+      vectorSize = vectorHeader[1];
+      if (0 < (int)vectorSize) {
         loopIndex = 0;
         do {
           if (loopIndex < *vectorHeader) {
-            if (flagsOrCount <= loopIndex) {
-              _memset(flagsOrCount * 4 + vectorHeader[2],0,(loopIndex - flagsOrCount) * 4 + 4);
+            if (vectorSize <= loopIndex) {
+              _memset(vectorSize * 4 + vectorHeader[2],0,(loopIndex - vectorSize) * 4 + 4);
               vectorHeader[1] = loopIndex + 1;
             }
             elementRef = (int *)(loopIndex * 4 + vectorHeader[2]);
@@ -767,20 +768,20 @@ int IRInst__setExtraOperandSource(inst, newSource, trackUses, compilerCtx)
           }
           if (inst == *elementRef) {
             Vector__removeAt(vectorHeader,loopIndex);
-            flagsOrCount = *(uint *)(inst + 0x14);
+            instFlags = *(uint *)(inst + 0x14);
             *(int *)(oldSource + 0x160) = *(int *)(oldSource + 0x160) + -1;
             goto checkFlagsOrCount;
           }
-          flagsOrCount = vectorHeader[1];
+          vectorSize = vectorHeader[1];
           loopIndex = loopIndex + 1;
-        } while ((int)loopIndex < (int)flagsOrCount);
+        } while ((int)loopIndex < (int)vectorSize);
       }
     }
   }
-  flagsOrCount = *(uint *)(inst + 0x14);
+  instFlags = *(uint *)(inst + 0x14);
 checkFlagsOrCount:
-  if ((flagsOrCount & 0x200) == 0) {
-    *(uint *)(inst + 0x14) = flagsOrCount | 0x200;
+  if ((instFlags & 0x200) == 0) {
+    *(uint *)(inst + 0x14) = instFlags | 0x200;
     extraOperandSwizzle = swizzleAllUnused_001af9c4;
     oldSource = *(int *)(inst + 0x84) + 1;
     *(int *)(inst + 0x84) = oldSource;
@@ -790,14 +791,14 @@ checkFlagsOrCount:
   IRInst__setOperandSourceRaw(inst,*(undefined4 *)(inst + 0x84),newSource,compilerCtx);
   if ((trackUses != 0) && (newSource != 0)) {
     vectorHeader = *(uint **)(newSource + 0x10);
-    flagsOrCount = vectorHeader[1];
-    if (flagsOrCount < *vectorHeader) {
-      _memset(flagsOrCount * 4 + vectorHeader[2],0,4);
-      elementRef = (int *)(flagsOrCount * 4 + vectorHeader[2]);
-      vectorHeader[1] = flagsOrCount + 1;
+    vectorSize = vectorHeader[1];
+    if (vectorSize < *vectorHeader) {
+      _memset(vectorSize * 4 + vectorHeader[2],0,4);
+      elementRef = (int *)(vectorSize * 4 + vectorHeader[2]);
+      vectorHeader[1] = vectorSize + 1;
     }
     else {
-      elementRef = (int *)Vector__elementRefGrow(vectorHeader,flagsOrCount);
+      elementRef = (int *)Vector__elementRefGrow(vectorHeader,vectorSize);
     }
     *elementRef = inst;
     options = *(int *)(options + 0x478);

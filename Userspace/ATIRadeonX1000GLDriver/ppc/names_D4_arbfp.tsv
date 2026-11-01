@@ -46,7 +46,6 @@ local	FUN_00089320	fVar1	valueX	INFERRED	finds or appends a literal vec4 in the 
 local	FUN_00089320	fVar2	valueY	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
 local	FUN_00089320	fVar3	valueZ	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
 local	FUN_00089430	param_1	parser	CONFIRMED	declares a new named variable (errors 'reserved variable name', 'redeclared variable name'); allocates a 0x2c-byte entry and appends it to the variable list parser+0x3c/+0x40
-local	FUN_00089430	iVar1	keywordOrFound	INFERRED	declares a new named variable (errors 'reserved variable name', 'redeclared variable name'); allocates a 0x2c-byte entry and appends it to the variable list parser+0x3c/+0x40
 local	FUN_00089430	puVar2	variable	CONFIRMED	declares a new named variable (errors 'reserved variable name', 'redeclared variable name'); allocates a 0x2c-byte entry and appends it to the variable list parser+0x3c/+0x40
 local	FUN_00089740	param_1	parser	CONFIRMED	consumes '+' or '-' and returns +1 or -1 (+1 when none)
 local	FUN_00089740	uVar1	sign	CONFIRMED	consumes '+' or '-' and returns +1 or -1 (+1 when none)
@@ -111,7 +110,6 @@ local	FUN_0008b4b0	bVar1	sameStyle	INFERRED	destination register plus optional '
 local	FUN_0008b4b0	pbVar7	letter	INFERRED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
 local	FUN_0008b6d0	param_1	parser	CONFIRMED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')
 local	FUN_0008b6d0	param_2	operand	CONFIRMED	7-word source operand: +0 variable, +4/+8/+0xc/+0x10 swizzle x/y/z/w, +0x14 negate, +0x18 array index
-local	FUN_0008b6d0	iVar2	signOrSuffixLength	INFERRED	sign result of arbfpParseOptionalSign, then reused for the swizzle suffix length
 local	FUN_0008b6d0	uVar3	componentIndex	INFERRED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')
 local	FUN_0008b6d0	cVar1	letter	INFERRED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')
 local	FUN_0008b6d0	pcVar4	suffixText	INFERRED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')

@@ -2951,7 +2951,7 @@ int ColorGraph__removeNodeUpdateDegrees(graph, node, workList, colorLimit, regis
   int neighborByteOffset;
   uint neighbor;
   int *elementRef;
-  uint countOrScratch;
+  uint vectorSize;
   int loopIndex;
   int nodeRecord;
   int chunk;
@@ -2985,9 +2985,9 @@ int ColorGraph__removeNodeUpdateDegrees(graph, node, workList, colorLimit, regis
       vectorHeader = *(uint **)(graph + 4);
       neighbor = *(uint *)(chunk + slotInChunk * 4);
       if (neighbor < *vectorHeader) {
-        countOrScratch = vectorHeader[1];
-        if (countOrScratch <= neighbor) {
-          _memset(countOrScratch * 4 + vectorHeader[2],0,(neighbor - countOrScratch) * 4 + 4);
+        vectorSize = vectorHeader[1];
+        if (vectorSize <= neighbor) {
+          _memset(vectorSize * 4 + vectorHeader[2],0,(neighbor - vectorSize) * 4 + 4);
           vectorHeader[1] = neighbor + 1;
         }
         elementRef = (int *)(neighbor * 4 + vectorHeader[2]);
@@ -3000,9 +3000,9 @@ int ColorGraph__removeNodeUpdateDegrees(graph, node, workList, colorLimit, regis
          )) {
         vectorHeader = *(uint **)(graph + 4);
         if (neighbor < *vectorHeader) {
-          countOrScratch = vectorHeader[1];
-          if (countOrScratch <= neighbor) {
-            _memset(countOrScratch * 4 + vectorHeader[2],0,(neighbor - countOrScratch) * 4 + 4);
+          vectorSize = vectorHeader[1];
+          if (vectorSize <= neighbor) {
+            _memset(vectorSize * 4 + vectorHeader[2],0,(neighbor - vectorSize) * 4 + 4);
             vectorHeader[1] = neighbor + 1;
           }
           elementRef = (int *)(neighborByteOffset + vectorHeader[2]);
@@ -3013,9 +3013,9 @@ int ColorGraph__removeNodeUpdateDegrees(graph, node, workList, colorLimit, regis
         *(int *)(*elementRef + 0xc) = *(int *)(*elementRef + 0xc) + -1;
         vectorHeader = *(uint **)(graph + 4);
         if (neighbor < *vectorHeader) {
-          countOrScratch = vectorHeader[1];
-          if (countOrScratch <= neighbor) {
-            _memset(countOrScratch * 4 + vectorHeader[2],0,(neighbor - countOrScratch) * 4 + 4);
+          vectorSize = vectorHeader[1];
+          if (vectorSize <= neighbor) {
+            _memset(vectorSize * 4 + vectorHeader[2],0,(neighbor - vectorSize) * 4 + 4);
             vectorHeader[1] = neighbor + 1;
           }
           elementRef = (int *)(neighborByteOffset + vectorHeader[2]);
@@ -3024,14 +3024,14 @@ int ColorGraph__removeNodeUpdateDegrees(graph, node, workList, colorLimit, regis
           elementRef = (int *)Vector__elementRefGrow(vectorHeader,neighbor);
         }
         if (*(int *)(*elementRef + 0xc) == colorLimit + -1) {
-          countOrScratch = workList[1];
-          if (countOrScratch < *workList) {
-            _memset(countOrScratch * 4 + workList[2],0,4);
-            vectorHeader = (uint *)(countOrScratch * 4 + workList[2]);
-            workList[1] = countOrScratch + 1;
+          vectorSize = workList[1];
+          if (vectorSize < *workList) {
+            _memset(vectorSize * 4 + workList[2],0,4);
+            vectorHeader = (uint *)(vectorSize * 4 + workList[2]);
+            workList[1] = vectorSize + 1;
           }
           else {
-            vectorHeader = (uint *)Vector__elementRefGrow(workList,countOrScratch);
+            vectorHeader = (uint *)Vector__elementRefGrow(workList,vectorSize);
           }
           *vectorHeader = neighbor;
         }

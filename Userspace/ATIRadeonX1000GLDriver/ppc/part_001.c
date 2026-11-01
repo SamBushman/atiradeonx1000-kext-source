@@ -1256,11 +1256,13 @@ int _gldGetRendererInfo(rendererInfo, rendererMask, unused3, unused4, unused5, u
   undefined4 unused8;
 {
   undefined4 returnCode;
-  uint bitOrId;
+  uint rendererBitIndex;
+  uint rendererStatusFlags;
   int *serviceList;
   int listCount;
   int rendererIndex;
-  int offsetOrService;
+  int serviceOffsetOrPort;
+  int renderersLeft;
   undefined4 outCount;
   undefined4 connection;
   undefined1 scalarOut0 [4];
@@ -1274,25 +1276,25 @@ int _gldGetRendererInfo(rendererInfo, rendererMask, unused3, unused4, unused5, u
   else {
     listCount = *(int *)(ptrTo_rendererLibraryState_001e88ac + 4);
     if ((listCount == 0) || ((rendererMask & 1) != 0)) {
-      offsetOrService = 0;
+      serviceOffsetOrPort = 0;
     }
     else {
-      bitOrId = 0;
-      offsetOrService = listCount;
+      rendererBitIndex = 0;
+      renderersLeft = listCount;
       do {
-        bitOrId = bitOrId + 1;
-        offsetOrService = offsetOrService + -1;
-        if (offsetOrService == 0) {
-          offsetOrService = listCount << 2;
+        rendererBitIndex = rendererBitIndex + 1;
+        renderersLeft = renderersLeft + -1;
+        if (renderersLeft == 0) {
+          serviceOffsetOrPort = listCount << 2;
           goto setServiceList;
         }
-      } while ((rendererMask & 1 << (bitOrId & 0x3f)) == 0);
-      offsetOrService = bitOrId * 4;
+      } while ((rendererMask & 1 << (rendererBitIndex & 0x3f)) == 0);
+      serviceOffsetOrPort = rendererBitIndex * 4;
     }
 setServiceList:
     serviceList = *(int **)(ptrTo_rendererLibraryState_001e88ac + 8);
-    offsetOrService = *(int *)((int)serviceList + offsetOrService);
-    if ((listCount == 0) || (offsetOrService == *serviceList)) {
+    serviceOffsetOrPort = *(int *)((int)serviceList + serviceOffsetOrPort);
+    if ((listCount == 0) || (serviceOffsetOrPort == *serviceList)) {
       rendererIndex = 0;
     }
     else {
@@ -1301,16 +1303,16 @@ setServiceList:
         rendererIndex = rendererIndex + 1;
         listCount = listCount + -1;
         if (listCount == 0) break;
-      } while (offsetOrService != serviceList[rendererIndex]);
+      } while (serviceOffsetOrPort != serviceList[rendererIndex]);
     }
-    listCount = _IOServiceOpen(offsetOrService,*(undefined4 *)ptrTo_machTaskSelf_001e88b4,1,&connection);
+    listCount = _IOServiceOpen(serviceOffsetOrPort,*(undefined4 *)ptrTo_machTaskSelf_001e88b4,1,&connection);
     returnCode = 0x271f;
     if (listCount == 0) {
       outCount = 3;
       listCount = _io_connect_method_scalarI_scalarO(connection,3,0,0,scalarOut0,&outCount);
       if (listCount == 0) {
         *rendererInfo = 0;
-        bitOrId = gld_rendererStatusFlags(rendererIndex);
+        rendererStatusFlags = gld_rendererStatusFlags(rendererIndex);
         *(undefined2 *)(rendererInfo + 8) = 0;
         *(undefined2 *)((int)rendererInfo + 0x22) = 0;
         *(undefined2 *)(rendererInfo + 9) = 0;
@@ -1321,7 +1323,7 @@ setServiceList:
         rendererInfo[0xd] = scalarOut1;
         rendererInfo[3] = 0xd;
         rendererInfo[2] = 0xa513;
-        rendererInfo[1] = bitOrId | rendererIndex << 0x18;
+        rendererInfo[1] = rendererStatusFlags | rendererIndex << 0x18;
         rendererInfo[6] = 0x1c01;
         rendererInfo[4] = 0x8400;
         rendererInfo[5] = 0x808000;
@@ -1640,21 +1642,22 @@ int _gldReclaimTexture(ctx, texture)
   int updatedRefCount;
   int *refCountSlot;
   int *listNeighbour;
-  int unitOrOldRefCount;
+  int unitIndex;
+  int oldRefCount;
   int unitSlotCursor;
   char reservation;
   byte crBits;
   
-  unitOrOldRefCount = 0;
+  unitIndex = 0;
   unitSlotCursor = ctx;
   do {
     if (texture == *(int *)(unitSlotCursor + 0x18c)) {
       *(undefined4 *)(unitSlotCursor + 0x18c) = 0;
-      gld_emitUnitClearPacket(ctx,unitOrOldRefCount);
+      gld_emitUnitClearPacket(ctx,unitIndex);
     }
-    moreUnits = unitOrOldRefCount != 0xf;
+    moreUnits = unitIndex != 0xf;
     unitSlotCursor = unitSlotCursor + 4;
-    unitOrOldRefCount = unitOrOldRefCount + 1;
+    unitIndex = unitIndex + 1;
   } while (moreUnits);
   unitSlotCursor = *(int *)(texture + 0x34);
   if (unitSlotCursor != 0) {
@@ -1664,14 +1667,14 @@ int _gldReclaimTexture(ctx, texture)
     gld_waitTextureStamp(ctx,texture);
     refCountSlot = (int *)(unitSlotCursor + 0x10);
     do {
-      unitOrOldRefCount = *refCountSlot;
+      oldRefCount = *refCountSlot;
       if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(unitOrOldRefCount + -0x10000,0,refCountSlot);
+        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
       }
     } while (!(bool)(crBits >> 1 & 1));
-    if (unitOrOldRefCount == 0x10000) {
+    if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,unitSlotCursor,1,0,0);
     }
     *(undefined4 *)(texture + 0x34) = 0;
@@ -1689,14 +1692,14 @@ int _gldReclaimTexture(ctx, texture)
     unitSlotCursor = refCountSlot[4];
     listNeighbour = (int *)(unitSlotCursor + 0x10);
     do {
-      unitOrOldRefCount = *listNeighbour;
+      oldRefCount = *listNeighbour;
       if (reservation != '\0') {
-        updatedRefCount = storeWordConditionalIndexed(unitOrOldRefCount + -0x10000,0,listNeighbour);
+        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,listNeighbour);
         *listNeighbour = updatedRefCount;
         crBits = 2;
       }
     } while (!(bool)(crBits >> 1 & 1));
-    if (unitOrOldRefCount == 0x10000) {
+    if (oldRefCount == 0x10000) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,unitSlotCursor,1,0,0);
     }
     refCountSlot[4] = 0;

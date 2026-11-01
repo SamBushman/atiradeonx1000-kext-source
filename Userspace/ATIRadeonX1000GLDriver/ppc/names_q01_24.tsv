@@ -17,4 +17,3 @@ local	FUN_00027990	iVar26	attrByteOffset	INFERRED	attrIndex * 4
 local	FUN_00027990	iVar32	attrsLeft	INFERRED	countdown of the 16 attributes in the main loop
 local	FUN_00027990	uVar12	hwAttrId	INFERRED	hardware attribute id 0..0x2f (0x30 = unsupported)
 local	FUN_00027990	uVar24	descriptorWord	INFERRED	program input descriptor word (type bits in 14..17)
-local	FUN_00027990	uVar8	pairIndexOrFormatIndex	INFERRED	streamIndex >> 1, later the per-attribute format index

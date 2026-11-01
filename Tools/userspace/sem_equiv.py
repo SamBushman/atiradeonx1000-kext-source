@@ -227,8 +227,8 @@ def taken_min(f, N):
 class Eval:
     """symbolic state of one block of one program (side 'b' or 'c')"""
 
-    def __init__(self, side, f, N, blk, first, amin=None):
-        self.amin = amin
+    def __init__(self, side, f, N, blk, first, amin=None, absmode=False):
+        self.amin = amin; self.rbase = 0 if absmode else (amin or 0)
         self.side = side; self.f = f; self.N = N; self.blk = blk
         self.regs = {}; self.slots = {}; self.events = []; self.entry_slots = {}; self.entry_regs = set()
         self.fp = T('sp', -N) if N is not None else None
@@ -282,7 +282,7 @@ class Eval:
         if a is None: return ('ext', None)
         if a >= 0: return ('ext', None)           # caller frame: incoming stack arguments, saved LR
         if self.amin is not None and a >= self.amin and basereg == 'r30':
-            return ('rgn', T('rgn', a - self.amin))      # the object whose address escaped (and everything above it): an externally observable region, addressed relative to its lowest escaped byte
+            return ('rgn', T('rgn', a - self.rbase))      # the object whose address escaped (and everything above it): an externally observable region, addressed relative to its lowest escaped byte
         if self.N is not None and basereg == 'r1' and self.regs.get('r1') == self.fp and disp is not None and 0 <= disp < 0x70: return ('slot', ('out', disp, size))
         return ('slot', ('a', a, size))
 
@@ -373,7 +373,7 @@ class Eval:
             b = C(0) if (ra == 'r0' and mn == 'addi') else self.get(ra)
             dv = self.imm(d)
             if (mn == 'addi' and o[1] == 'r30' or mn == 'la' and ra == 'r30') and self.amin is not None and dv[0] == 'c':
-                self.put(o[0], T('rgn', sgn(dv[1]) - self.N - self.amin)); return
+                self.put(o[0], T('rgn', sgn(dv[1]) - self.N - self.rbase)); return
             if mn == 'addi' and o[1] in ('r30', 'r1') or mn == 'la' and ra in ('r30', 'r1'): raise Inconclusive('address of a frame slot is taken (%s)' % x.text)
             self.put(o[0], mk_add(b, dv)); return
         if mn == 'addis':
@@ -632,6 +632,15 @@ def positional_hints(eb_blk, ec_blk, fb, fc, Nb, Nc, amb, amc):
 
 
 def check_function(fb, fc, verbose=False):
+    """escaped-frame region layout: first as offsets relative to the lowest escaped address (survives a new local below the region), then as absolute
+    distances from the entry stack pointer (survives a new local below everything); either one proves the layout the pointee can reach is unchanged"""
+    try: return check_function1(fb, fc, verbose, False)
+    except (Different, Inconclusive) as e1:
+        try: return check_function1(fb, fc, verbose, True)
+        except (Different, Inconclusive): raise e1
+
+
+def check_function1(fb, fc, verbose=False, absmode=False):
     if fb.name != fc.name: raise Inconclusive('name mismatch')
     if identical(fb, fc) and not NOSHORT: return 'IDENTICAL'
     Nb, Nc = frame_size(fb), frame_size(fc)
@@ -644,7 +653,7 @@ def check_function(fb, fc, verbose=False):
         if x.kind != y.kind or x.succ != y.succ: raise Different('block %d shape differs (%s %s vs %s %s)' % (x.k, x.kind, x.succ, y.kind, y.succ))
     EB, EC = [], []
     for x, y in zip(Bb, Bc):
-        eb = Eval('b', fb, Nb, x, x.k == 0, amb); ec = Eval('c', fc, Nc, y, y.k == 0, amc)
+        eb = Eval('b', fb, Nb, x, x.k == 0, amb, absmode); ec = Eval('c', fc, Nc, y, y.k == 0, amc, absmode)
         for i in range(x.lo, x.hi): eb.step(fb.ins[i], False)
         for i in range(y.lo, y.hi): ec.step(fc.ins[i], False)
         EB.append(eb); EC.append(ec)

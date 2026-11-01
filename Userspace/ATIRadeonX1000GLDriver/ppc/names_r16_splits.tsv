@@ -1,0 +1,68 @@
+use	ValueKey__foldCompareLiterals	uVar4	compareResultBits	INFERRED	the compare result as an IEEE float bit pattern (1.0f = 0x3f800000, else 0) that is value-numbered into the row's constant slot	^\s*uVar4\ =\ 0x3f800000;$	+1
+use	ValueKey__foldCompareLiterals	uVar4	compareResultBits	INFERRED	the compare result as an IEEE float bit pattern (1.0f = 0x3f800000, else 0) that is value-numbered into the row's constant slot	^\s*uVar4\ =\ 0;$	+1
+use	ValueKey__foldCompareLiterals	uVar4	compareResultBits	INFERRED	the compare result as an IEEE float bit pattern (1.0f = 0x3f800000, else 0) that is value-numbered into the row's constant slot	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_00173e10\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),uVar4\);$	+1
+use	ValueKey__foldCompareLiterals	uVar4	folded	INFERRED	the function's return value: 1 when both operands were literals and the row was folded, else 0	^\s*uVar4\ =\ 1;$	+1
+use	ValueKey__foldCompareLiterals	uVar4	folded	INFERRED	the function's return value: 1 when both operands were literals and the row was folded, else 0	^\s*uVar4\ =\ 0;$@2	+1
+use	ValueKey__foldCompareLiterals	uVar4	folded	INFERRED	the function's return value: 1 when both operands were literals and the row was folded, else 0	^\s*return\ uVar4;$	+1
+use	ValueKey__markRegisterLiveInBlock	iVar2	liveInst	INFERRED	the instruction at ctx+0xb0 whose opcode/flags select the fused-modifier path	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+1
+use	ValueKey__markRegisterLiveInBlock	iVar2	liveInst	INFERRED	the instruction at ctx+0xb0 whose opcode/flags select the fused-modifier path	^\s*if\ \(\(\(\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x12\)\ \&\&\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x120\)\ ==\ 0\)\)\ \&\&$	+3
+use	ValueKey__markRegisterLiveInBlock	iVar2	compilerOptions	INFERRED	the compiler options record at compiler+0x6c4 whose counter at +0xa8 is incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+2
+use	IRInst__setExtraOperandSource	uVar2	instFlags	INFERRED	the instruction's flag word at +0x14 (bit 0x200 = has an extra operand)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x14\);$	+2
+use	IRInst__setExtraOperandSource	uVar2	instFlags	INFERRED	the instruction's flag word at +0x14 (bit 0x200 = has an extra operand)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x14\);$@2	+1
+use	IRInst__setExtraOperandSource	uVar2	instFlags	INFERRED	the instruction's flag word at +0x14 (bit 0x200 = has an extra operand)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x14\);$@3	+1
+use	IRInst__setExtraOperandSource	uVar2	instFlags	INFERRED	the instruction's flag word at +0x14 (bit 0x200 = has an extra operand)	^\s*if\ \(\(uVar2\ \&\ 0x200\)\ ==\ 0\)\ \{$	+2
+use	IRInst__setExtraOperandSource	uVar2	vectorSize	INFERRED	element count (vector header word 1) of the use vector being searched / appended	^\s*uVar2\ =\ puVar7\[1\];$	+2
+use	IRInst__setExtraOperandSource	uVar2	vectorSize	INFERRED	element count (vector header word 1) of the use vector being searched / appended	^\s*if\ \(uVar2\ <=\ uVar6\)\ \{$	+2
+use	IRInst__setExtraOperandSource	uVar2	vectorSize	INFERRED	element count (vector header word 1) of the use vector being searched / appended	^\s*uVar2\ =\ puVar7\[1\];$@2	+1
+use	IRInst__setExtraOperandSource	uVar2	vectorSize	INFERRED	element count (vector header word 1) of the use vector being searched / appended	^\s*\}\ while\ \(\(int\)uVar6\ <\ \(int\)uVar2\);$	+1
+use	IRInst__setExtraOperandSource	uVar2	vectorSize	INFERRED	element count (vector header word 1) of the use vector being searched / appended	^\s*uVar2\ =\ puVar7\[1\];$@3	+5
+use	IRInst__setExtraOperandSource	uVar2	vectorSize	INFERRED	element count (vector header word 1) of the use vector being searched / appended	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar7,uVar2\);$	+1
+use	LoopInfo__init	iVar2	nextInst	INFERRED	the loop cursor: the next instruction in the header block's list (+8)	^\s*for\ \(iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x98\)\ \+\ 8\);\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\)\ \{$	+1
+use	LoopInfo__init	iVar2	nextInst	INFERRED	the loop cursor: the next instruction in the header block's list (+8)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$	+1
+use	LoopInfo__init	iVar2	nextInst	INFERRED	the loop cursor: the next instruction in the header block's list (+8)	^\s*iVar1\ =\ iVar2;$	+1
+use	LoopInfo__init	iVar2	operandSourceOrValue	INFERRED	the compare operand's source register record, then (x = f(x)) its constant value at +0x20, which becomes loopInfo+0x20	^\s*iVar2\ =\ FUN_00105594\(iVar1,1\);$	+2
+use	LoopInfo__init	iVar2	operandSourceOrValue	INFERRED	the compare operand's source register record, then (x = f(x)) its constant value at +0x20, which becomes loopInfo+0x20	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 0x1c\)\ !=\ 3\)\ \{$	+1
+use	LoopInfo__init	iVar2	operandSourceOrValue	INFERRED	the compare operand's source register record, then (x = f(x)) its constant value at +0x20, which becomes loopInfo+0x20	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x20\);$	+3
+use	R300MachineAssembler__rgbSelectForSourceSwizzle	uVar2	comparableSwizzle	INFERRED	the swizzle with its low byte forced to 4, compared against the four uniform swizzle constants	^\s*uVar2\ =\ param_6\ \&\ 0xffffff00\ \|\ 4;$	+2
+use	R300MachineAssembler__rgbSelectForSourceSwizzle	uVar2	comparableSwizzle	INFERRED	the swizzle with its low byte forced to 4, compared against the four uniform swizzle constants	^\s*iVar1\ =\ FUN_000f2d18\(uVar2,DAT_001b2abc\);$	+1
+use	R300MachineAssembler__rgbSelectForSourceSwizzle	uVar2	comparableSwizzle	INFERRED	the swizzle with its low byte forced to 4, compared against the four uniform swizzle constants	^\s*iVar1\ =\ FUN_000f2d18\(uVar2,DAT_001b2ab8\);$	+1
+use	R300MachineAssembler__rgbSelectForSourceSwizzle	uVar2	comparableSwizzle	INFERRED	the swizzle with its low byte forced to 4, compared against the four uniform swizzle constants	^\s*iVar1\ =\ FUN_000f2d18\(uVar2,DAT_001b2ab4\);$	+1
+use	R300MachineAssembler__rgbSelectForSourceSwizzle	uVar2	swizzleKind	INFERRED	the top byte of the swizzle word (1/2/3 select the constant-source encodings)	^\s*uVar2\ =\ param_6\ >>\ 0x18;$	+2
+use	R300MachineAssembler__rgbSelectForSourceSwizzle	uVar2	swizzleKind	INFERRED	the top byte of the swizzle word (1/2/3 select the constant-source encodings)	^\s*if\ \(uVar2\ !=\ 3\)\ \{$	+2
+use	arbDeclareVariable	iVar1	tokenKind	INFERRED	the current token kind parser[6]; reserved keywords are rejected	^\s*iVar1\ =\ param_1\[6\];$	+3
+use	arbDeclareVariable	iVar1	nameFound	INFERRED	result of arbParseVariableName: non-zero when the name was already declared	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00088fd0\)\(param_1\);$	+2
+use	arbDeclareVariable	iVar1	nameStart	INFERRED	parser[2], the start of the identifier text stored in the new variable record	^\s*iVar1\ =\ param_1\[2\];$	+1
+use	arbDeclareVariable	iVar1	nameStart	INFERRED	parser[2], the start of the identifier text stored in the new variable record	^\s*puVar2\[1\]\ =\ iVar1;$	+1
+use	_gldGetRendererInfo	uVar2	rendererBitIndex	INFERRED	loop counter over the renderer bit mask	^\s*uVar2\ =\ 0;$	+1
+use	_gldGetRendererInfo	uVar2	rendererBitIndex	INFERRED	loop counter over the renderer bit mask	^\s*uVar2\ =\ uVar2\ \+\ 1;$	+1
+use	_gldGetRendererInfo	uVar2	rendererBitIndex	INFERRED	loop counter over the renderer bit mask	^\s*\}\ while\ \(\(param_2\ \&\ 1\ <<\ \(uVar2\ \&\ 0x3f\)\)\ ==\ 0\);$	+2
+use	_gldGetRendererInfo	uVar2	rendererStatusFlags	INFERRED	result of gld_rendererStatusFlags, OR-ed with the renderer index into rendererInfo[1]	^\s*uVar2\ =\ FUN_00017720\(iVar5\);$	+1
+use	_gldGetRendererInfo	uVar2	rendererStatusFlags	INFERRED	result of gld_rendererStatusFlags, OR-ed with the renderer index into rendererInfo[1]	^\s*param_1\[1\]\ =\ uVar2\ \|\ iVar5\ <<\ 0x18;$	+1
+use	_gldGetRendererInfo	iVar6	serviceOffsetOrPort	INFERRED	byte offset of the selected renderer in the service list, then (x = f(x)) the I/O service port loaded from that offset	^\s*iVar6\ =\ 0;$	+1
+use	_gldGetRendererInfo	iVar6	serviceOffsetOrPort	INFERRED	byte offset of the selected renderer in the service list, then (x = f(x)) the I/O service port loaded from that offset	^\s*iVar6\ =\ iVar4\ <<\ 2;$	+1
+use	_gldGetRendererInfo	iVar6	serviceOffsetOrPort	INFERRED	byte offset of the selected renderer in the service list, then (x = f(x)) the I/O service port loaded from that offset	^\s*iVar6\ =\ uVar2\ \*\ 4;$	+1
+use	_gldGetRendererInfo	iVar6	serviceOffsetOrPort	INFERRED	byte offset of the selected renderer in the service list, then (x = f(x)) the I/O service port loaded from that offset	^\s*iVar6\ =\ \*\(int\ \*\)\(\(int\)piVar3\ \+\ iVar6\);$	+2
+use	_gldGetRendererInfo	iVar6	serviceOffsetOrPort	INFERRED	byte offset of the selected renderer in the service list, then (x = f(x)) the I/O service port loaded from that offset	^\s*\}\ while\ \(iVar6\ !=\ piVar3\[iVar5\]\);$	+1
+use	_gldGetRendererInfo	iVar6	serviceOffsetOrPort	INFERRED	byte offset of the selected renderer in the service list, then (x = f(x)) the I/O service port loaded from that offset	^\s*iVar4\ =\ _IOServiceOpen\(iVar6,\*\(undefined4\ \*\)PTR_001e88b4,1,\&local_34\);$	+1
+use	_gldGetRendererInfo	iVar6	renderersLeft	INFERRED	countdown of the renderers still to test while scanning the mask	^\s*iVar6\ =\ iVar4;$	+1
+use	_gldGetRendererInfo	iVar6	renderersLeft	INFERRED	countdown of the renderers still to test while scanning the mask	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+local	IRInst__operandSelectIsNotDefault	bVar2	selectIsDefault	INFERRED	true when the operand's select word (record +0x10) equals the default select (laneWord00000000 for operand 0, laneWord00010203 otherwise); the function returns the negation. Both defs reach the one use at the return, so this is a single web
+use	arbParseSwizzleSuffix	iVar2	signValue	INFERRED	result of arbParseOptionalSign: -1 when the operand is negated	^\s*iVar2\ =\ FUN_00089740\(param_1\);$	+2
+use	arbParseSwizzleSuffix	iVar2	suffixLength	INFERRED	length of the swizzle suffix text (end - start): 1 or 4 characters are valid	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \-\ \(int\)\*\(byte\ \*\*\)\(param_1\ \+\ 8\);$	+2
+use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of the clear-binding loop	^\s*iVar5\ =\ 0;$	+1
+use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of the clear-binding loop	^\s*FUN_000307a0\(param_1,iVar5\);$	+1
+use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of the clear-binding loop	^\s*bVar1\ =\ iVar5\ !=\ 0xf;$	+1
+use	_gldReclaimTexture	iVar5	unitIndex	INFERRED	texture unit counter 0..15 of the clear-binding loop	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar5\ =\ \*piVar3;$	+1
+use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar2\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+1
+use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$	+1
+use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar5\ =\ \*piVar4;$	+1
+use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*iVar2\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar4\);$	+1
+use	_gldReclaimTexture	iVar5	oldRefCount	INFERRED	reference count word loaded before the atomic decrement of 0x10000; the old value 0x10000 means the last reference	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$@2	+1
+use	gld_buildVertexStreamCache	uVar8	streamPairIndex	INFERRED	stream index >> 1: which pair of vertex streams the attribute belongs to	^\s*uVar8\ =\ uVar30\ >>\ 1;$	+1
+use	gld_buildVertexStreamCache	uVar8	streamPairIndex	INFERRED	stream index >> 1: which pair of vertex streams the attribute belongs to	^\s*iVar14\ =\ uVar8\ \*\ 4\ \+\ param_1;$	+1
+use	gld_buildVertexStreamCache	uVar8	streamPairIndex	INFERRED	stream index >> 1: which pair of vertex streams the attribute belongs to	^\s*iVar14\ =\ uVar8\ \*\ 4\ \+\ param_1;$@2	+1
+use	gld_buildVertexStreamCache	uVar8	streamPairIndex	INFERRED	stream index >> 1: which pair of vertex streams the attribute belongs to	^\s*iVar14\ =\ uVar8\ \*\ 4;$	+1
+use	gld_buildVertexStreamCache	uVar8	formatIndex	INFERRED	the vertex type's stream format bits (low 16 bits of vertexTypeStreamFormatTable), shifted into the stream descriptor half-word	^\s*uVar8\ =\ 0;$	+1
+use	gld_buildVertexStreamCache	uVar8	formatIndex	INFERRED	the vertex type's stream format bits (low 16 bits of vertexTypeStreamFormatTable), shifted into the stream descriptor half-word	^\s*uVar8\ =\ \*\(uint\ \*\)\(\&DAT_001d9dac\ \+\ iVar4\)\ \&\ 0xffff;$	+1
+use	gld_buildVertexStreamCache	uVar8	formatIndex	INFERRED	the vertex type's stream format bits (low 16 bits of vertexTypeStreamFormatTable), shifted into the stream descriptor half-word	^\s*\*\(ushort\ \*\)\(puVar21\ \+\ iVar10\ \*\ 2\ \+\ 4\)\ =\ uVar19\ \|\ \(ushort\)\(uVar8\ <<\ 6\)\ \|\ \(ushort\)iVar23;$	+1

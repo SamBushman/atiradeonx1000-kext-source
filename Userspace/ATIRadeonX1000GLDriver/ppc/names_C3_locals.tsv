@@ -67,7 +67,6 @@ local	FUN_001959fc	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGC
 local	FUN_001959fc	param_4	unused	CONFIRMED	select codes follow R300_ALU_ARGC_* order
 local	FUN_001959fc	param_5	sourceNumber	CONFIRMED	select codes follow R300_ALU_ARGC_* order
 local	FUN_001959fc	param_6	swizzle	CONFIRMED	select codes follow R300_ALU_ARGC_* order
-local	FUN_001959fc	uVar2	swizzleOrLane	CONFIRMED	select codes follow R300_ALU_ARGC_* order
 local	FUN_00195b4c	param_1	this	CONFIRMED	select codes follow R300_ALU_ARGA_* order
 local	FUN_00195b4c	param_2	sourceIndex	CONFIRMED	select codes follow R300_ALU_ARGA_* order
 local	FUN_00195b4c	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGA_* order

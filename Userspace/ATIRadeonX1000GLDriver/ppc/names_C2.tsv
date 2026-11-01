@@ -33,7 +33,7 @@ local	FUN_00135d24	iVar9	slotInChunk	INFERRED	ColorGraph::removeNode helper: for
 local	FUN_00135d24	uVar3	neighbor	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
 local	FUN_00135d24	puVar10	vectorHeader	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
 local	FUN_00135d24	piVar4	elementRef	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
-local	FUN_00135d24	uVar5	countOrScratch	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	uVar5	vectorSize	INFERRED	element count (header word 1) of the growable vector in each inlined Vector element-ref expansion (the graph's node vector, the work list); every web has this one role
 local	FUN_00135d24	iVar2	neighborByteOffset	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
 local	FUN_00135d24	bVar1	slotWrapped	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
 local	FUN_00134ce8	param_1	nodeRecord	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
@@ -115,7 +115,6 @@ local	FUN_00106804	iVar5	options	CONFIRMED	sets the trailing extra operand (inde
 local	FUN_00106804	iVar3	oldSource	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
 local	FUN_00106804	piVar4	elementRef	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
 local	FUN_00106804	puVar7	vectorHeader	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
-local	FUN_00106804	uVar2	flagsOrCount	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
 local	FUN_00106804	uVar1	extraOperandSwizzle	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
 local	FUN_00105f04	param_2	program	CONFIRMED	when the program keeps def-use lists (flag 0x80 at +0x30) adds inst to the user vector of every operand source and bumps their use counts
 local	FUN_00105f04	iVar3	operandIndex	CONFIRMED	when the program keeps def-use lists (flag 0x80 at +0x30) adds inst to the user vector of every operand source and bumps their use counts
@@ -271,7 +270,6 @@ local	FUN_0012ccc0	local_44	loopInfoProgram	INFERRED	pass_loop_trans: counted lo
 local	FUN_0012ba58	param_1	loopInfo	INFERRED	loop shape test: header with 2 predecessors, +0x13c==0, +0x138>0; finds the opcode 0x81 loop-start instruction whose source 1 is a constant of type 3 with value 0xff or 0xffff (stored at info+0x20 / +0x3c)
 local	FUN_0012ba58	param_2	header	INFERRED	loop shape test: header with 2 predecessors, +0x13c==0, +0x138>0; finds the opcode 0x81 loop-start instruction whose source 1 is a constant of type 3 with value 0xff or 0xffff (stored at info+0x20 / +0x3c)
 local	FUN_0012ba58	iVar1	inst	INFERRED	loop shape test: header with 2 predecessors, +0x13c==0, +0x138>0; finds the opcode 0x81 loop-start instruction whose source 1 is a constant of type 3 with value 0xff or 0xffff (stored at info+0x20 / +0x3c)
-local	FUN_0012ba58	iVar2	nextOrSource	INFERRED	loop shape test: header with 2 predecessors, +0x13c==0, +0x138>0; finds the opcode 0x81 loop-start instruction whose source 1 is a constant of type 3 with value 0xff or 0xffff (stored at info+0x20 / +0x3c)
 local	FUN_0012b35c	param_1	loopInfo	INFERRED	records the counter phi at info+0x34 and its lane at +0x38; sets info[0]=1 unless the counter has exactly two uses
 local	FUN_0012b35c	iVar2	lane	INFERRED	records the counter phi at info+0x34 and its lane at +0x38; sets info[0]=1 unless the counter has exactly two uses
 local	FUN_0012b35c	bVar1	notLastLane	INFERRED	records the counter phi at info+0x34 and its lane at +0x38; sets info[0]=1 unless the counter has exactly two uses

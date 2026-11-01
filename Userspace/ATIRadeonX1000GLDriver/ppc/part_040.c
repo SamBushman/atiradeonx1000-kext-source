@@ -295,30 +295,31 @@ int LoopInfo__init(loopInfo, header)
   int header;
 {
   int inst;
-  int nextOrSource;
+  int nextInst;
+  int operandSourceOrValue;
   
   inst = Block__predecessorCount(header);
   if (((inst == 2) && (*(int *)(header + 0x13c) == 0)) && (0 < *(int *)(header + 0x138))) {
     *(int *)(loopInfo + 0x2c) = header;
     inst = *(int *)(header + 0x98);
-    for (nextOrSource = *(int *)(*(int *)(header + 0x98) + 8); nextOrSource != 0; nextOrSource = *(int *)(nextOrSource + 8)) {
+    for (nextInst = *(int *)(*(int *)(header + 0x98) + 8); nextInst != 0; nextInst = *(int *)(nextInst + 8)) {
       if (((*(uint *)(inst + 0x14) & 1) != 0) && (*(int *)(*(int *)(inst + 0x88) + 8) == 0x81)) {
-        nextOrSource = IRInst__getOperandSource(inst,1);
-        if ((*(byte *)(nextOrSource + 0x15c) & 1) == 0) {
+        operandSourceOrValue = IRInst__getOperandSource(inst,1);
+        if ((*(byte *)(operandSourceOrValue + 0x15c) & 1) == 0) {
           return 0;
         }
-        if (*(int *)(nextOrSource + 0x1c) != 3) {
+        if (*(int *)(operandSourceOrValue + 0x1c) != 3) {
           return 0;
         }
-        nextOrSource = *(int *)(nextOrSource + 0x20);
-        *(int *)(loopInfo + 0x20) = nextOrSource;
-        if ((nextOrSource == 0xff) || (nextOrSource == 0xffff)) {
+        operandSourceOrValue = *(int *)(operandSourceOrValue + 0x20);
+        *(int *)(loopInfo + 0x20) = operandSourceOrValue;
+        if ((operandSourceOrValue == 0xff) || (operandSourceOrValue == 0xffff)) {
           *(int *)(loopInfo + 0x3c) = inst;
           return 1;
         }
-        nextOrSource = *(int *)(inst + 8);
+        nextInst = *(int *)(inst + 8);
       }
-      inst = nextOrSource;
+      inst = nextInst;
     }
   }
   return 0;

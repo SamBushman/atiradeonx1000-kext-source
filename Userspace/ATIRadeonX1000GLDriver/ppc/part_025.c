@@ -963,17 +963,17 @@ int IRInst__operandSelectIsNotDefault(inst, operandIndex)
   int operandIndex;
 {
   int operandRecord;
-  bool bVar2;
+  bool selectIsDefault;
   
   if (operandIndex == 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    bVar2 = *(int *)(operandRecord + 0x10) == _laneWord00000000_001aa84c;
+    selectIsDefault = *(int *)(operandRecord + 0x10) == _laneWord00000000_001aa84c;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    bVar2 = *(int *)(operandRecord + 0x10) == _laneWord00010203_001aa848;
+    selectIsDefault = *(int *)(operandRecord + 0x10) == _laneWord00010203_001aa848;
   }
-  return 1 - (uint)bVar2;
+  return 1 - (uint)selectIsDefault;
 }
 
 /* IRInst__computeSourceLaneMask @ 0xf3c30 (972 bytes) */

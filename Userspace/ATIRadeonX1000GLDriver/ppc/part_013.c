@@ -992,13 +992,14 @@ int arbParseSwizzleSuffix(parser, operand)
   int operand;
 {
   char letter;
-  int signOrSuffixLength;
+  int signValue;
+  int suffixLength;
   undefined4 componentIndex;
   undefined4 in_r5;
   char *suffixText;
   
-  signOrSuffixLength = arbParseOptionalSign(parser);
-  if (signOrSuffixLength == -1) {
+  signValue = arbParseOptionalSign(parser);
+  if (signValue == -1) {
     *(undefined1 *)(operand + 0x14) = 1;
   }
   else {
@@ -1014,8 +1015,8 @@ int arbParseSwizzleSuffix(parser, operand)
   }
   arbNextToken(parser);
   if (*(int *)(parser + 0x14) == 0) {
-    signOrSuffixLength = *(int *)(parser + 0xc) - (int)*(byte **)(parser + 8);
-    if ((signOrSuffixLength == 1) || (signOrSuffixLength == 4)) {
+    suffixLength = *(int *)(parser + 0xc) - (int)*(byte **)(parser + 8);
+    if ((suffixLength == 1) || (suffixLength == 4)) {
       componentIndex = arbComponentLetterToIndex(parser,(uint)**(byte **)(parser + 8));
       *(undefined4 *)(operand + 4) = componentIndex;
       if (*(int *)(parser + 0xc) - *(int *)(parser + 8) < 2) {

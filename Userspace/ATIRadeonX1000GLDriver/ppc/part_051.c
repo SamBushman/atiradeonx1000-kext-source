@@ -430,37 +430,38 @@ int R300MachineAssembler__rgbSelectForSourceSwizzle(this, sourceIndex, selectOut
   uint swizzle;
 {
   int callResult;
-  uint swizzleOrLane;
+  uint comparableSwizzle;
+  uint swizzleKind;
   
-  swizzleOrLane = swizzle & 0xffffff00 | 4;
-  callResult = SelectWord__areCompatible(swizzleOrLane,swizzleXYZW_001b2ac0);
+  comparableSwizzle = swizzle & 0xffffff00 | 4;
+  callResult = SelectWord__areCompatible(comparableSwizzle,swizzleXYZW_001b2ac0);
   if (callResult != 0) {
     *(int *)(sourceIndex * 4 + selectOut) = sourceNumber << 2;
     return;
   }
-  callResult = SelectWord__areCompatible(swizzleOrLane,swizzleXXXX_001b2abc);
+  callResult = SelectWord__areCompatible(comparableSwizzle,swizzleXXXX_001b2abc);
   if (callResult != 0) {
     *(int *)(selectOut + sourceIndex * 4) = sourceNumber * 4 + 1;
     return;
   }
-  callResult = SelectWord__areCompatible(swizzleOrLane,swizzleYYYY_001b2ab8);
+  callResult = SelectWord__areCompatible(comparableSwizzle,swizzleYYYY_001b2ab8);
   if (callResult != 0) {
     *(int *)(selectOut + sourceIndex * 4) = sourceNumber * 4 + 2;
     return;
   }
-  callResult = SelectWord__areCompatible(swizzleOrLane,swizzleZZZZ_001b2ab4);
+  callResult = SelectWord__areCompatible(comparableSwizzle,swizzleZZZZ_001b2ab4);
   if (callResult != 0) {
     *(int *)(selectOut + sourceIndex * 4) = sourceNumber * 4 + 3;
     return;
   }
-  swizzleOrLane = swizzle >> 0x18;
-  if (swizzleOrLane == 1) {
+  swizzleKind = swizzle >> 0x18;
+  if (swizzleKind == 1) {
 loopStoreSourceIndex:
     *(int *)(sourceIndex * 4 + selectOut) = sourceNumber + 0x17;
   }
   else {
-    if (swizzleOrLane != 3) {
-      if ((swizzleOrLane == 2) || ((swizzle >> 0x10 & 0xff) == 0)) {
+    if (swizzleKind != 3) {
+      if ((swizzleKind == 2) || ((swizzle >> 0x10 & 0xff) == 0)) {
         *(int *)(sourceIndex * 4 + selectOut) = sourceNumber + 0x1a;
         return;
       }

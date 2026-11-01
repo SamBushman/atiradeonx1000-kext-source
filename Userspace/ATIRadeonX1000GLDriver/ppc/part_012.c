@@ -4874,26 +4874,28 @@ int arbInternConstant(parser, constant)
 int arbDeclareVariable(parser)
   int *parser;
 {
-  int keywordOrFound;
+  int tokenKind;
+  int nameStart;
+  int nameFound;
   undefined4 *variable;
   
   if (parser[5] == 0) {
-    keywordOrFound = parser[6];
-    if ((((keywordOrFound == 0xc) || (keywordOrFound == 0x1d)) || (keywordOrFound == 0x20)) ||
-       ((keywordOrFound == 0x27 || (keywordOrFound == 0x2a)))) {
+    tokenKind = parser[6];
+    if ((((tokenKind == 0xc) || (tokenKind == 0x1d)) || (tokenKind == 0x20)) ||
+       ((tokenKind == 0x27 || (tokenKind == 0x2a)))) {
       variable = (undefined4 *)0x0;
       ((int (*)())arbSetError)(parser,"reserved variable name");
     }
     else {
-      keywordOrFound = ((int (*)())arbParseVariableName)(parser);
-      if (keywordOrFound == 0) {
+      nameFound = ((int (*)())arbParseVariableName)(parser);
+      if (nameFound == 0) {
         variable = (undefined4 *)(**(code **)(*parser + 0xc))(0x2c);
         if (variable == (undefined4 *)0x0) {
           ((int (*)())arbErrorOutOfMemory)(parser);
         }
         else {
           variable[2] = parser[3] - parser[2];
-          keywordOrFound = parser[2];
+          nameStart = parser[2];
           variable[5] = variable + 6;
           variable[6] = 4;
           variable[8] = 0x36;
@@ -4901,7 +4903,7 @@ int arbDeclareVariable(parser)
           *variable = 0;
           variable[3] = 0;
           variable[4] = 0;
-          variable[1] = keywordOrFound;
+          variable[1] = nameStart;
           variable[7] = 0;
           variable[9] = 0;
           if (parser[0xf] == 0) {

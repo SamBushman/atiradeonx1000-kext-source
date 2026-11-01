@@ -2055,7 +2055,8 @@ int gld_buildVertexStreamCache(stream)
   int typeSizeOffset;
   ushort dataTypeBits;
   int arrayDesc;
-  uint pairIndexOrFormatIndex;
+  uint streamPairIndex;
+  uint formatIndex;
   uint swizzleSelectX;
   int scratchInt10;
   uint swizzleSelectY;
@@ -2269,7 +2270,7 @@ loopCheckHwAttrId:
   if ((scratchFlag1) && ((hwAttrId == 0 || (scratchInt10 = slotCounter, hwAttrId == 0x10)))) {
     scratchInt10 = 0;
   }
-  pairIndexOrFormatIndex = loopIndex >> 1;
+  streamPairIndex = loopIndex >> 1;
   if (scratchFlag2) {
     scratchUint18 = *(uint *)(attrByteOffset + 0x1d9edc) & 0xffff;
   }
@@ -2278,16 +2279,16 @@ loopCheckHwAttrId:
   }
   scratchFlag2 = (loopIndex & 1) == 0;
   if (scratchFlag2) {
-    scratchInt14 = pairIndexOrFormatIndex * 4 + stream;
+    scratchInt14 = streamPairIndex * 4 + stream;
     *(uint *)(scratchInt14 + 0x2640) = (streamCount & 0x1f) << 10 | *(uint *)(scratchInt14 + 0x2640) & 0xffff8080 | 4
     ;
   }
   else {
-    scratchInt14 = pairIndexOrFormatIndex * 4 + stream;
+    scratchInt14 = streamPairIndex * 4 + stream;
     *(uint *)(scratchInt14 + 0x2640) =
          (streamCount & 0x1f) << 0x1a | *(uint *)(scratchInt14 + 0x2640) & 0x8080ffff | 0x40000;
   }
-  scratchInt14 = pairIndexOrFormatIndex * 4;
+  scratchInt14 = streamPairIndex * 4;
   dataTypeBits = (ushort)(scratchUint20 << 10);
   streamDescHalf = (ushort)(scratchUint18 << 8) | dataTypeBits;
   *(int *)(loopIndex * 4 + stream + 0x2660) = streamByteOffset;
@@ -2310,7 +2311,7 @@ loopCheckHwAttrId:
       swizzleSelectY = 1;
       swizzleSelectZ = 2;
       swizzleSelectW = 3;
-      pairIndexOrFormatIndex = 0;
+      formatIndex = 0;
     }
     else {
       typeRowOffset = ((arrayTypeWord & 0xffff7fff) - 0x1400) * 4;
@@ -2319,7 +2320,7 @@ loopCheckHwAttrId:
       streamDescHalf = (ushort)(*(int *)(&vertexTypeComponentCountMinusOneTable_001d9cfc + typeSizeOffset) << 8) | dataTypeBits;
       hwAttrId = (uint)(arrayTypeWord >> 0xf);
       scratchUint20 = *(uint *)(&vertexTypeFlagsTableCopy_001d9b9c + typeSizeOffset) & 0xff;
-      pairIndexOrFormatIndex = *(uint *)(&vertexTypeStreamFormatTable_001d9dac + typeRowOffset) & 0xffff;
+      formatIndex = *(uint *)(&vertexTypeStreamFormatTable_001d9dac + typeRowOffset) & 0xffff;
       scratchUint18 = *(uint *)(&vertexTypeSignedTableCopy_001d9b70 + typeRowOffset) & 0xff;
       swizzleSelectX = *(uint *)(&vertexTypeSwizzleSelectXTable_001d9ac0 + typeSizeOffset) & 0xff;
       extWordBits = scratchUint33 & 0xff;
@@ -2356,7 +2357,7 @@ loopCheckHwAttrId:
            (swizzleSelectZ & 7) << 0x16 |
            (swizzleSelectY & 7) << 0x13 | (swizzleSelectX & 7) << 0x10 | *(uint *)(scratchInt14 + 0x26c4) & 0xf000ffff;
     }
-    *(ushort *)(streamBlockB + scratchInt10 * 2 + 4) = streamDescHalf | (ushort)(pairIndexOrFormatIndex << 6) | (ushort)wordOffset;
+    *(ushort *)(streamBlockB + scratchInt10 * 2 + 4) = streamDescHalf | (ushort)(formatIndex << 6) | (ushort)wordOffset;
   }
   *(uint *)(scratchInt16 + 0x259c) = loopIndex;
   streamByteOffset = streamByteOffset + 4;
