@@ -155,25 +155,32 @@ for _r in apply_names.load_targets(corpus):
 def ld(a):
     return TARGET_NAME.get(a, 'LD_%x' % a)
 
-# STACK-LOCAL RENAMES. rewrites.mirror_frame / fix_byte_buffers / fix_struct_blocks / fix_pointer_records recognise a stack variable by its Ghidra name (`local_48`,
-# `acStack_210`: the number is the variable's distance below the caller's sp), so a `local` / `use` row that gave it a real name (`scalarOut`) silently switched the
-# frame mirroring off for that function (GLDriver: 556 mirrored functions before the naming work, 33 after) and the rebuilt image lost the stock stack layout. Take
-# every renamed stack variable back to its Ghidra name before the rewrites run; the C source in the corpus keeps its real names. STACK_RENAMES[function] = {new: old}.
-STACK_RE = re.compile(r'^(?:local|\w*Stack)_[0-9a-f]+(?:_buf)?$')
-STACK_RENAMES = collections.defaultdict(dict)
+# LOCAL / PARAMETER RENAMES vs the link-time rewrites. rewrites.mirror_frame / fix_byte_buffers / fix_struct_blocks / fix_pointer_records recognise a stack variable by its
+# Ghidra name (`local_48`, `acStack_210`: the number is the variable's distance below the caller's sp), and rewrite_float_stores / rewrite_pair_results / bind_calls /
+# rewrite_float_args key on `fVarN` / `uVarN` / `param_N` shapes. A `local` / `use` row that gave a variable a real name silently switched those rewrites off for the
+# function (GLDriver: 561 mirrored frames before the naming work, 542 after; first bad commit 30b76756, cgl_probe read 170,170,170,170 instead of the triangle).
+# So, per function: take every renamed variable back to its Ghidra name, run the whole rewrite chain, then give the survivors their real names again (the
+# linked source keeps the corpus's names). A mirrored frame turns its variables into `ghidra_frame` accesses (the names vanish), so the function gets a comment
+# listing real name = Ghidra name. A Ghidra name that was split into several real names (`use` rows) cannot be given back unambiguously: it keeps the Ghidra name.
+# LOCAL_RENAMES[function] = {new: old}.
+LOCAL_RENAMES = collections.defaultdict(dict)
 _func_old = apply_names.func_roots(apply_names.load_funcs(corpus))
 for _r in apply_names.load_rows(corpus):
-    _fn, _old, _new = _r[2], _r[3], _r[4]
-    if STACK_RE.match(_old):
-        STACK_RENAMES[_fn][_new] = _old
+    LOCAL_RENAMES[_r[2]][_r[4]] = _r[3]
 for _new_fn, _old_fn in _func_old.items():                  # rows keep the OLD function name; the header comment carries the new one
-    if _old_fn in STACK_RENAMES:
-        STACK_RENAMES[_new_fn].update(STACK_RENAMES[_old_fn])
+    if _old_fn in LOCAL_RENAMES:
+        LOCAL_RENAMES[_new_fn].update(LOCAL_RENAMES[_old_fn])
+STACK_RE = re.compile(r'^(?:local|\w*Stack)_[0-9a-f]+(?:_buf)?$')
+VAR_DECL = re.compile(r'^\s+[A-Za-z_][\w *]*?\b[A-Za-z_]\w*(?:\s*\[[^\]]*\])?;\s*$')
 
-def unrename_stack_locals(txt, fn):
-    m_ = STACK_RENAMES.get(fn)
-    if not m_:
-        return txt, 0
+def unrename_locals(txt, fn):
+    """-> (txt with every renamed variable back at its Ghidra name, {ghidra name: real name} for the names that can be given back, count)"""
+    m_all = LOCAL_RENAMES.get(fn)
+    if not m_all:
+        return txt, {}, 0
+    cnt_ = collections.Counter(m_all.values())
+    # a non-stack variable that was split into several real names stays split (their declarations may differ in type); stack variables must all go back
+    m_ = {new_: old_ for new_, old_ in m_all.items() if cnt_[old_] == 1 or STACK_RE.match(old_)}
     n_ = [0]
     def sub_(t):
         o_ = m_.get(t.group(0))
@@ -182,20 +189,38 @@ def unrename_stack_locals(txt, fn):
         n_[0] += 1
         return o_
     txt = re.sub(r'[A-Za-z_][A-Za-z0-9_]*', sub_, txt)
-    # a local split into several roles had one declaration per role: they all carry the Ghidra name again, keep the first of identical lines
+    # a variable split into several roles had one declaration per role: they all carry the Ghidra name again, keep the first of identical lines (only inside the
+    # declaration block right after the `{`: it ends at the first line that is not a declaration)
     k_ = txt.find('\n{')
     if k_ >= 0:
-        e_ = txt.find('\n\n', k_ + 2)
-        e_ = len(txt) if e_ < 0 else e_
-        seen_, out_ = set(), []
-        for ln_ in txt[k_:e_].split('\n'):
-            if ln_ in seen_ and STACK_DECL.match(ln_):
+        lines_ = txt[k_ + 1:].split('\n')
+        seen_, out_, i_ = set(), [lines_[0]], 1
+        while i_ < len(lines_) and (VAR_DECL.match(lines_[i_]) or not lines_[i_].strip()) and not re.match(r'^\s+(?:return|break|continue|goto|else|case|default)\b', lines_[i_]):
+            if lines_[i_] in seen_ and lines_[i_].strip():
+                i_ += 1
                 continue
-            seen_.add(ln_)
-            out_.append(ln_)
-        txt = txt[:k_] + '\n'.join(out_) + txt[e_:]
-    return txt, n_[0]
-STACK_DECL = re.compile(r'^\s+[A-Za-z_][\w *]*?\b(?:local|\w*Stack)_[0-9a-f]+(?:_buf)?(?:\s*\[[^\]]*\])?;')
+            seen_.add(lines_[i_])
+            out_.append(lines_[i_])
+            i_ += 1
+        txt = txt[:k_ + 1] + '\n'.join(out_ + lines_[i_:])
+    by_old = collections.defaultdict(set)
+    for new_, old_ in m_.items():
+        by_old[old_].add(new_)
+    fwd_ = {old_: next(iter(news_)) for old_, news_ in by_old.items() if len(news_) == 1}
+    return txt, fwd_, n_[0]
+
+def rename_back(txt, fwd, fn):
+    """give the variables that survived the rewrites their real names again; list the stack variables a mirrored frame swallowed"""
+    if not fwd:
+        return txt
+    frame_ = []
+    if 'ghidra_frame[' in txt:
+        m_ = LOCAL_RENAMES.get(fn, {})
+        frame_ = sorted(((old_, new_) for new_, old_ in m_.items() if STACK_RE.match(old_)), key=lambda x: x[0])
+    txt = re.sub(r'[A-Za-z_][A-Za-z0-9_]*', lambda t: fwd.get(t.group(0), t.group(0)), txt)
+    if frame_:
+        txt = re.sub(r'(?m)^(\s*unsigned long long ghidra_frame\[\d+\] = \{ 0 \};.*)$', lambda x: x.group(1) + '\n' + x.group(0)[:len(x.group(0)) - len(x.group(0).lstrip())] + '/* frame slots (real name = Ghidra name): ' + ', '.join('%s = %s' % (new_, old_) for old_, new_ in frame_) + ' */', txt, count=1)
+    return txt
 
 def addr_of_name(n):
     mm = re.search(r'_([0-9a-f]{8})$', DATA_ROOT.get(n, n))
@@ -1185,7 +1210,7 @@ for pdir_, f in _part_files:
             continue
         if mm:
             txt = '\n'.join(ch)
-            txt, _nun = unrename_stack_locals(txt, mm.group(1))
+            txt, _fwd, _nun = unrename_locals(txt, mm.group(1))
             unrenamed_total[0] += _nun
             for vn_, vt_ in void_valued.items():
                 if vn_ in txt:
@@ -1270,6 +1295,7 @@ for pdir_, f in _part_files:
             if nfst:
                 uses_link = True
                 fstores_total[0] += nfst
+            txt = rename_back(txt, _fwd, mm.group(1))
             ch = txt.split('\n')
         if mm and gl_protos is not None and mm.group(1).startswith('_gl') and not mm.group(1).startswith('_gll'):
             new_ch, status = fix_gl_stubs.patch_function('\n'.join(ch), mm.group(1), gl_protos)
@@ -1348,7 +1374,7 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('stack records Ghidra declared as separate scalars, merged into one block: %d\n' % blocks_total[0])
     w.write('  of which records with pointer members (rewrites.fix_pointer_records): %d\n' % ptr_blocks_total[0])
     w.write('functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): %d\n' % mirrored_total[0])
-    w.write('stack variables taken back to their Ghidra names before the rewrites (STACK_RENAMES): %d\n' % unrenamed_total[0])
+    w.write('renamed variables taken back to their Ghidra names for the rewrite chain and renamed again afterwards (LOCAL_RENAMES): %d\n' % unrenamed_total[0])
     w.write('external-relocation data words whose stored (prebound) value was not an addend, corrected: %d (%d of them prebound imports)\n' % (len(ext_addend_fixed), len(prebound_import_words)))
     w.write('CONCATnn(in_register_x, param) replaced by the parameter: %d; biased table-base literals anchored to the next section: %d\n' % (concat_inreg_total[0], len(biased_bases)))
     w.write('string literals used with arithmetic, put back as the number / address they stand for: %d sites\n' % len(strlit_fixed))
