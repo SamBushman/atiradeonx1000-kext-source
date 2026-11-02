@@ -427,7 +427,11 @@ def mirror_frame(chunk, stackaddr=True):
     nq = (total + 7) // 8
     first = True
     for d in sorted(decls, key=lambda d: -d['off']):
-        repl = ('%sunsigned long long ghidra_frame[%d] = { 0 };   /* the stock frame, variables at their offsets: rewrites.mirror_frame */' % (re.match(r'\s*', d['line']).group(0), nq)) if first else None
+        ind = re.match(r'\s*', d['line']).group(0)
+        # zeroed with explicit stores: gcc 4.0.1 turns `= { 0 }` on a 100-200 byte array into a memcpy from a zero constant block, and that call per function
+        # entry was 3% of Doom 3 CPU (issue #209)
+        zero = ''.join('%sghidra_frame[%d] = 0;\n' % (ind, i) for i in range(nq)) if nq <= 48 else '%s{ int zi_; for (zi_ = 0; zi_ < %d; zi_++) ghidra_frame[zi_] = 0; }\n' % (ind, nq)
+        repl = ('%sunsigned long long ghidra_frame[%d];   /* the stock frame, variables at their offsets: rewrites.mirror_frame */\n%s' % (ind, nq, zero.rstrip('\n'))) if first else None
         body = body.replace(d['line'] + '\n', (repl + '\n') if repl else '', 1)
         first = False
     body = _NEG_STACKADDR.sub(lambda m: '((unsigned char *)ghidra_frame + %d)' % (top - (0x100000000 - int(m.group(1), 16)) + pad), body)

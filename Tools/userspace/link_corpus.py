@@ -224,7 +224,7 @@ def rename_back(txt, fwd, fn):
         frame_ = sorted(((old_, new_) for new_, old_ in m_.items() if STACK_RE.match(old_)), key=lambda x: x[0])
     txt = re.sub(r'[A-Za-z_][A-Za-z0-9_]*', lambda t: fwd.get(t.group(0), t.group(0)), txt)
     if frame_:
-        txt = re.sub(r'(?m)^(\s*unsigned long long ghidra_frame\[\d+\] = \{ 0 \};.*)$', lambda x: x.group(1) + '\n' + x.group(0)[:len(x.group(0)) - len(x.group(0).lstrip())] + '/* frame slots (real name = Ghidra name): ' + ', '.join('%s = %s' % (new_, old_) for old_, new_ in frame_) + ' */', txt, count=1)
+        txt = re.sub(r'(?m)^(\s*unsigned long long ghidra_frame\[\d+\](?: = \{ 0 \})?;.*)$', lambda x: x.group(1) + '\n' + x.group(0)[:len(x.group(0)) - len(x.group(0).lstrip())] + '/* frame slots (real name = Ghidra name): ' + ', '.join('%s = %s' % (new_, old_) for old_, new_ in frame_) + ' */', txt, count=1)
     return txt
 
 def addr_of_name(n):
