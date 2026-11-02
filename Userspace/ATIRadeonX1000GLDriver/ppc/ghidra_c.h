@@ -119,6 +119,8 @@ extern vec16 vectorPermute(), vectorConditionalSelect();
  * dyld failed at the first actual call with "Symbol not found: _dataCacheBlockClearToZero".
  * Added using the same inline-asm pattern as their siblings above. */
 #define dataCacheBlockClearToZero(a) __asm__ __volatile__("dcbz 0,%0" :: "r"(a) : "memory")
+/* dcbzl: clears a whole 128-byte PPC970 cache line (plain dcbz clears 32 bytes there); stock uses it in copyIndices16Swapped, gld_reserveDrawSpace and gld_emitProgramConstantUpdates */
+#define dataCacheBlockClearToZeroLine(a) __asm__ __volatile__("dcbzl 0,%0" :: "r"(a) : "memory")
 #define dataCacheBlockAllocate(a) __asm__ __volatile__("dcba 0,%0" :: "r"(a) : "memory")
 /* lwarx/stwcx. atomic add: Ghidra shows the inline `lwarx rD,0,rP; add rT,rD,rK; stwcx. rT,0,rP; bne- retry` loop as a call to the pseudo-function
  * storeWordConditionalIndexed plus an unwritten `reservation` flag and a hand-made retry loop (`if (reservation != 0) {...; crBits = 2;}`), which compiled as a call to a

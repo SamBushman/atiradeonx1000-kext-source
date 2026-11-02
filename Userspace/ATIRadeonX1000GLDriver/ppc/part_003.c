@@ -3401,7 +3401,7 @@ int copyIndices16Swapped_dcbz_entry(dst, src, count)
   dstEnd = (uint *)(dst + (count & 0x7ffffffe) * 2);
   for (dcbzAddress = dst + 0x7f & 0xffffff80; dcbzAddress < ((uint)dstEnd & 0xffffff80);
       dcbzAddress = dcbzAddress + 0x80) {
-    dataCacheBlockClearToZero(dcbzAddress);
+    dataCacheBlockClearToZeroLine(dcbzAddress);
   }
   dstMisalign = dst & 0xf;
   dstCursor = (uint *)(dst - dstMisalign);
@@ -3493,7 +3493,7 @@ int copyIndices16Swapped_dcbz(dst, src, count)
   dstEnd = (uint *)(dst + (count & 0x7ffffffe) * 2);
   for (dcbzAddress = dst + 0x7f & 0xffffff80; dcbzAddress < ((uint)dstEnd & 0xffffff80);
       dcbzAddress = dcbzAddress + 0x80) {
-    dataCacheBlockClearToZero(dcbzAddress);
+    dataCacheBlockClearToZeroLine(dcbzAddress);
   }
   dstMisalign = dst & 0xf;
   dstCursor = (uint *)(dst - dstMisalign);

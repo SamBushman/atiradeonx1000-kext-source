@@ -1457,6 +1457,7 @@ static inline vec16 GH_VSEL(vec16 a, vec16 b, vec16 c) {
 #define vectorPermute GH_VPERM
 #define vectorConditionalSelect GH_VSEL
 #define dataCacheBlockClearToZero(p) GH_DCBZ((unsigned int)(p))
+#define dataCacheBlockClearToZeroLine(p) __asm__ __volatile__("dcbzl 0,%0" : : "r"((unsigned int)(p)) : "memory")
 #define dataCacheBlockAllocate(p) ((void)0)
 static inline int ghidra_cas32(void *p, int oldv, int newv) {
     int cur;

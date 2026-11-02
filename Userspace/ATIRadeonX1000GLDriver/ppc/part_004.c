@@ -2020,14 +2020,14 @@ storeCountInOut:
     if (scratchUint18 < scratchUint17) {
       fittingCount = scratchUint17 - scratchUint18;
       for (vertexStride = fittingCount >> 9; vertexStride != 0; vertexStride = vertexStride - 1) {
-        dataCacheBlockClearToZero(scratchUint18);
-        dataCacheBlockClearToZero(scratchUint18 + scratchUint8);
-        dataCacheBlockClearToZero(scratchUint18 + scratchUint8 * 2);
-        dataCacheBlockClearToZero(scratchUint18 + scratchUint8 * 3);
+        dataCacheBlockClearToZeroLine(scratchUint18);
+        dataCacheBlockClearToZeroLine(scratchUint18 + scratchUint8);
+        dataCacheBlockClearToZeroLine(scratchUint18 + scratchUint8 * 2);
+        dataCacheBlockClearToZeroLine(scratchUint18 + scratchUint8 * 3);
         scratchUint18 = scratchUint18 + 0x200;
       }
       for (vertexStride = fittingCount >> 7 & 3; vertexStride != 0; vertexStride = vertexStride - 1) {
-        dataCacheBlockClearToZero(scratchUint18);
+        dataCacheBlockClearToZeroLine(scratchUint18);
         scratchUint18 = scratchUint18 + 0x80;
       }
       if ((modeBit & 1) == 0) {

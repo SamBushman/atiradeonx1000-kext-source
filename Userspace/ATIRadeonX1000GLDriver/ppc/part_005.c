@@ -9858,7 +9858,7 @@ int gld_emitProgramConstantUpdates(ctx, passThroughArg2, passThroughArg3, operan
     cmdEndAligned = cacheLineAddr & (uint)cmdEnd;
     for (cacheLineAddr = cacheLineMask + (int)cmdCursor & cacheLineAddr; cacheLineAddr < cmdEndAligned;
         cacheLineAddr = cacheLineAddr + *(byte *)(ctx + GLD_cacheLineSize)) {
-      dataCacheBlockClearToZero(cacheLineAddr);
+      dataCacheBlockClearToZeroLine(cacheLineAddr);
     }
     *(uint *)(ctx + 0x2834) = cmdEndAligned;
   }
