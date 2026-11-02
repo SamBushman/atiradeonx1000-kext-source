@@ -1638,11 +1638,7 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
   int scratchInt52;
   int scratchIncoming00000024;
   byte scratchStack508 [4];
-  byte scratchStack504;
-  byte scratchStack503;
-  byte scratchStack502;
-  byte scratchStack501;
-  byte scratchStack500;
+  byte scratchStack50[5];
   byte scratchStack4ff;
   byte scratchStack4fe;
   byte scratchStack4fd;
@@ -1755,7 +1751,7 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
     scratchFlag3 = 0 < width;
   }
   scratchFlag4 = scratchInt47 != 4;
-  scratchStack68 = &scratchStack500;
+  scratchStack68 = &scratchStack50[0];
   scratchStack5c = srcPixels + scratchInt46;
   scratchStack58 = scratchStackArr478;
   scratchStack54 = scratchStack4d0;
@@ -2070,31 +2066,31 @@ setScratchFlag6:
         scratchFlag31 = (byte)scratchUint44;
         scratchFlag22 = (byte)scratchUint21;
         scratchFlag45 = (byte)scratchUint19;
-        scratchStack502 = (byte)scratchUint14;
+        scratchStack50[2] = (byte)scratchUint14;
         scratchFlag7 = (byte)(scratchUint18 >> 8);
-        scratchStack501 = (byte)(scratchUint15 >> 8);
+        scratchStack50[1] = (byte)(scratchUint15 >> 8);
         if (scratchFlag5) {
           if (scratchUint14 < scratchUint19) {
             scratchStack4fc = scratchFlag30;
             scratchStack4fb = scratchFlag27;
             scratchStack4fa = scratchFlag24;
             scratchStack4f9 = scratchFlag36;
-            scratchStack503 = scratchFlag7;
+            scratchStack50[3] = scratchFlag7;
             scratchStack4f8 = scratchFlag31;
             scratchStack4f7 = scratchFlag22;
-            scratchStack504 = scratchFlag45;
+            scratchStack50[4] = scratchFlag45;
           }
           else {
             scratchStack4f9 = scratchFlag30;
             scratchStack4f8 = scratchFlag27;
             scratchStack4f7 = scratchFlag24;
             scratchStack4fc = scratchFlag36;
-            scratchStack503 = scratchStack501;
-            scratchStack501 = scratchFlag7;
+            scratchStack50[3] = scratchStack50[1];
+            scratchStack50[1] = scratchFlag7;
             scratchStack4fb = scratchFlag31;
             scratchStack4fa = scratchFlag22;
-            scratchStack504 = scratchStack502;
-            scratchStack502 = scratchFlag45;
+            scratchStack50[4] = scratchStack50[2];
+            scratchStack50[2] = scratchFlag45;
           }
           scratchStack4f6 = (char)((ulonglong)
                              ((longlong)(int)((uint)scratchStack4fc * 2 + (uint)scratchStack4f9) *
@@ -2121,29 +2117,29 @@ setScratchFlag6:
             scratchStack4fb = scratchFlag31;
             scratchStack4fa = scratchFlag22;
             scratchStack4f9 = scratchFlag30;
-            scratchStack503 = scratchStack501;
-            scratchStack501 = scratchFlag7;
+            scratchStack50[3] = scratchStack50[1];
+            scratchStack50[1] = scratchFlag7;
             scratchStack4f8 = scratchFlag27;
             scratchStack4f7 = scratchFlag24;
-            scratchStack504 = scratchStack502;
-            scratchStack502 = scratchFlag45;
+            scratchStack50[4] = scratchStack50[2];
+            scratchStack50[2] = scratchFlag45;
           }
           else {
             scratchStack4f9 = scratchFlag36;
             scratchStack4f8 = scratchFlag31;
             scratchStack4f7 = scratchFlag22;
             scratchStack4fc = scratchFlag30;
-            scratchStack503 = scratchFlag7;
+            scratchStack50[3] = scratchFlag7;
             scratchStack4fb = scratchFlag27;
             scratchStack4fa = scratchFlag24;
-            scratchStack504 = scratchFlag45;
+            scratchStack50[4] = scratchFlag45;
           }
           scratchStack4f6 = (char)((int)((uint)scratchStack4fc + (uint)scratchStack4f9) >> 1);
           scratchStack4f5 = (char)((int)((uint)scratchStack4fb + (uint)scratchStack4f8) >> 1);
           scratchStack4f4 = (char)((int)((uint)scratchStack4fa + (uint)scratchStack4f7) >> 1);
         }
         scratchStack4fd = 0;
-        scratchStack500 = 0;
+        scratchStack50[0] = 0;
         scratchStack4ff = 0;
         scratchStack4fe = 0;
         if (scratchFlag5) {
@@ -2246,11 +2242,11 @@ setScratchFlag6:
           dstBlocks = (byte *)((int (*)())dxt5EncodeAlphaBlock)(scratchStack4b8,dstBlocks);
         }
         scratchStack74 = scratchStack74 + 4;
-        *dstBlocks = scratchStack504;
-        dstBlocks[1] = scratchStack503;
-        dstBlocks[2] = scratchStack502;
-        dstBlocks[3] = scratchStack501;
-        dstBlocks[4] = scratchStack500;
+        *dstBlocks = scratchStack50[4];
+        dstBlocks[1] = scratchStack50[3];
+        dstBlocks[2] = scratchStack50[2];
+        dstBlocks[3] = scratchStack50[1];
+        dstBlocks[4] = scratchStack50[0];
         dstBlocks[5] = scratchStack4ff;
         dstBlocks[6] = scratchStack4fe;
         dstBlocks[7] = scratchStack4fd;
@@ -5633,11 +5629,7 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   double staleStackArg_ffffffa8;
   double staleStackArg_ffffffb0;
   double staleStackArg_ffffffb8;
-  undefined4 defaultState0;
-  undefined4 defaultState1;
-  undefined4 defaultState2;
-  undefined4 defaultState3;
-  undefined4 defaultState4;
+  undefined4 defaultState[5];
   
   unit = 0;
   word1 = *(undefined4 *)(ctx + GLD_drawableHeight);
@@ -5648,12 +5640,12 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   *savedState = word0;
   savedState[3] = word2;
   word0 = dispatchDefaultState4_001aa4c0;
-  defaultState0 = dispatchDefaultState0_001aa4b0;
-  defaultState1 = dispatchDefaultState1_001aa4b4;
-  defaultState2 = dispatchDefaultState2_001aa4b8;
+  defaultState[0] = dispatchDefaultState0_001aa4b0;
+  defaultState[1] = dispatchDefaultState1_001aa4b4;
+  defaultState[2] = dispatchDefaultState2_001aa4b8;
   word1 = *(undefined4 *)(ctx + 0x118);
-  defaultState3 = dispatchDefaultState3_001aa4bc;
-  defaultState4 = dispatchDefaultState4_001aa4c0;
+  defaultState[3] = dispatchDefaultState3_001aa4bc;
+  defaultState[4] = dispatchDefaultState4_001aa4c0;
   savedState[4] = *(undefined4 *)(ctx + 0x114);
   savedState[5] = word1;
   *(undefined4 **)(ctx + GLD_dispatchTable) = dispatch;
@@ -5694,7 +5686,7 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   dispatch[0x1a] = ptrTo_gld_beginQuerySlot_001e896c;
   dispatch[0x1b] = entry;
   dispatch[0x20] = ptrTo_returnZero_1e270_001e88d8;
-  return ((uint (*)())_gldUpdateDispatch)(ctx,dispatch,&defaultState0,updateArg3,updateArg4,word0,staleFprArg1,staleFpr2,staleFpr3,staleFpr4,
+  return ((uint (*)())_gldUpdateDispatch)(ctx,dispatch,&defaultState[0],updateArg3,updateArg4,word0,staleFprArg1,staleFpr2,staleFpr3,staleFpr4,
                      staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff98,staleStackArg_ffffffa0,staleStackArg_ffffffa8,
                      staleStackArg_ffffffb0,staleStackArg_ffffffb8);
 }

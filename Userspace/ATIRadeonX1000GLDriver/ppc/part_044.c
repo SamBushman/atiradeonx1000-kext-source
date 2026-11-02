@@ -3630,9 +3630,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
   int operandSelectB;
   undefined4 selectBytes;
   int operandSelect;
-  uint savedCounters0;
-  uint savedCounters1;
-  uint savedCounters2;
+  uint savedCounters[3];
   undefined4 destWriteMask1;
   undefined4 maskedSelect1;
   undefined4 destWriteMask2;
@@ -3655,10 +3653,10 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           *(int *)(pass + 0x228) = *(int *)(pass + 0x228) + 1;
           prevNode = node[1];
           DList__unlink(node);
-          savedCounters0 = zeroWord;
-          savedCounters1 = zeroWord;
-          savedCounters2 = zeroWord;
-          IRInst__saveCounters(node,&savedCounters0,0xffffffff);
+          savedCounters[0] = zeroWord;
+          savedCounters[1] = zeroWord;
+          savedCounters[2] = zeroWord;
+          IRInst__saveCounters(node,&savedCounters[0],0xffffffff);
           cloneResult = IRInst__clone(node,*(undefined4 *)(pass + 8),0);
           *(int *)(cloneResult + 0x160) = *(int *)(pass + 0x478) + 1;
           *(undefined4 *)(cloneResult + 0x94) = *(undefined4 *)(cloneResult + 0x14c);
@@ -3698,7 +3696,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           node[0x27] = operandSelectB;
           node[0x25] = node[0x53];
           node[0x26] = 0x36;
-          IRInst__restoreCounters(node,&savedCounters0);
+          IRInst__restoreCounters(node,&savedCounters[0]);
           node[0x21] = 2;
           IRInst__setOperandSource(node,1,cloneResult,0,*(undefined4 *)(pass + 8));
           WriteMask__fromSelectWord(&destWriteMask1,cloneDestSelect);
@@ -3750,10 +3748,10 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
             return 0;
           }
           *(int *)(pass + 0x228) = *(int *)(pass + 0x228) + 1;
-          savedCounters0 = zeroWord;
-          savedCounters1 = zeroWord;
-          savedCounters2 = zeroWord;
-          IRInst__saveCounters(node,&savedCounters0,0xffffffff);
+          savedCounters[0] = zeroWord;
+          savedCounters[1] = zeroWord;
+          savedCounters[2] = zeroWord;
+          IRInst__saveCounters(node,&savedCounters[0],0xffffffff);
           sourceDef = IRInst__getOperandSource(node,1);
           operandRecord = IRInst__getOperandRecord(node,0);
           operandSelect = *(int *)(operandRecord + 0x10);
@@ -3784,7 +3782,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           nodeSrc1Select = *(undefined4 *)(operandRecord + 0x10);
           DList__unlink(node);
           IRMix__ctor_10a1c0(node,0xa2,*(undefined4 *)(pass + 8));
-          IRInst__restoreCounters(node,&savedCounters0);
+          IRInst__restoreCounters(node,&savedCounters[0]);
           node[0x26] = 0x36;
           node[0x25] = node[0x53];
           node[0x27] = operandSelect;
@@ -3802,10 +3800,10 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
         }
         else {
           *(int *)(pass + 0x228) = *(int *)(pass + 0x228) + 1;
-          savedCounters2 = 0;
-          savedCounters0 = 0;
-          savedCounters1 = 0;
-          IRInst__saveCounters(node,&savedCounters0,0xffffffff);
+          savedCounters[2] = 0;
+          savedCounters[0] = 0;
+          savedCounters[1] = 0;
+          IRInst__saveCounters(node,&savedCounters[0],0xffffffff);
           sourceDef = IRInst__getOperandSource(node,1);
           operandRecord2 = IRInst__getOperandRecord(node,0);
           operandSelectB = *(int *)(operandRecord2 + 0x10);
@@ -3845,7 +3843,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           DList__unlink(node);
           compilerArg = *(undefined4 *)(pass + 8);
           IRMix__ctor_10a1c0(node,0xa2,compilerArg);
-          IRInst__restoreCounters(node,&savedCounters0);
+          IRInst__restoreCounters(node,&savedCounters[0]);
           node[0x26] = 0x36;
           node[0x25] = node[0x53];
           node[0x27] = operandSelectB;
@@ -4920,9 +4918,7 @@ int Inst__foldPowOfConstant(foldCtxA, foldCtxB, inst, program)
   undefined4 chainSplat3;
   undefined4 selectBytes;
   int *baseInst;
-  undefined4 counterSave0;
-  undefined4 counterSave1;
-  undefined4 counterSave2;
+  undefined4 counterSave[3];
   int mergedLanesOut;
   int mergedLanesOutB;
   
@@ -5101,11 +5097,11 @@ int Inst__foldPowOfConstant(foldCtxA, foldCtxB, inst, program)
         if (-1 < thirdSplat) {
           *(char *)((int)&selectBytes + thirdSplat) = (char)chainSplat3;
         }
-        counterSave0 = 0;
-        counterSave1 = 0;
-        counterSave2 = 0;
+        counterSave[0] = 0;
+        counterSave[1] = 0;
+        counterSave[2] = 0;
         afterInst = *(int *)(inst + 4);
-        IRInst__saveCounters(inst,&counterSave0,0xffffffff);
+        IRInst__saveCounters(inst,&counterSave[0],0xffffffff);
         DList__unlink(inst);
         foldResult = 0;
         if (chainComponent == 0) {
@@ -5113,7 +5109,7 @@ int Inst__foldPowOfConstant(foldCtxA, foldCtxB, inst, program)
           *(int *)(inst + 0x9c) = selectWord;
           Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,inst);
           ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,1,1.0,1.0,1.0,1.0);
-          IRInst__restoreCounters(inst,&counterSave0);
+          IRInst__restoreCounters(inst,&counterSave[0]);
           if (newSource != (int *)0x0) {
             IRInst__setExtraOperandSource(inst,newSource,0,*(undefined4 *)(program + 8));
           }
@@ -5122,7 +5118,7 @@ int Inst__foldPowOfConstant(foldCtxA, foldCtxB, inst, program)
           if (chainComponent != 1) {
             IRInst__reinitAsBinary(inst,0x13,*(undefined4 *)(program + 8));
             *(int *)(inst + 0x9c) = selectWord;
-            IRInst__restoreCounters(inst,&counterSave0);
+            IRInst__restoreCounters(inst,&counterSave[0]);
             Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,inst);
             IRInst__setOperandSource(inst,1,baseInst,0,*(undefined4 *)(program + 8));
             IRInst__setOperandSource(inst,2,baseInst2,0,*(undefined4 *)(program + 8));
@@ -5141,7 +5137,7 @@ int Inst__foldPowOfConstant(foldCtxA, foldCtxB, inst, program)
             return 1;
           }
           IRInst__reinitAsMov(inst,0x31,*(undefined4 *)(program + 8));
-          IRInst__restoreCounters(inst,&counterSave0);
+          IRInst__restoreCounters(inst,&counterSave[0]);
           *(int *)(inst + 0x9c) = selectWord;
           Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,inst);
           IRInst__setOperandSource(inst,1,baseInst,0,*(undefined4 *)(program + 8));
@@ -5620,9 +5616,7 @@ int Inst__mergeSplatSourceInsts_001621c8(inst, inst2, pass)
   undefined4 newSelectB;
   float literalVecB [4];
   float literalVecA [4];
-  undefined4 lastOperandBuf0;
-  undefined4 lastOperandBuf1;
-  undefined4 lastOperandBuf2;
+  undefined4 lastOperandBuf[3];
   undefined4 writeMaskOutA;
   undefined4 maskedUnusedA;
   undefined4 writeMaskOutB;
@@ -5725,14 +5719,14 @@ int Inst__mergeSplatSourceInsts_001621c8(inst, inst2, pass)
           extraSourceA = IRInst__getOperandSource(inst2,inst2[0x21]);
           inst2Flags = inst2[5];
         }
-        lastOperandBuf2 = 0;
-        lastOperandBuf0 = 0;
-        lastOperandBuf1 = 0;
+        lastOperandBuf[2] = 0;
+        lastOperandBuf[0] = 0;
+        lastOperandBuf[1] = 0;
         if ((inst2Flags & 0x200) != 0) {
-          IRInst__readLastOperand(inst2,&lastOperandBuf0);
+          IRInst__readLastOperand(inst2,&lastOperandBuf[0]);
         }
         if (extraSourceA != 0) {
-          IRInst__setLastOperandFromRecord(inst,&lastOperandBuf0,0,*(undefined4 *)(pass + 8));
+          IRInst__setLastOperandFromRecord(inst,&lastOperandBuf[0],0,*(undefined4 *)(pass + 8));
           if (*(int *)(pass + 0x478) < *(int *)(extraSourceA + 0x160)) {
             *(int *)(extraSourceA + 0x160) = *(int *)(extraSourceA + 0x160) + 1;
           }
@@ -5860,7 +5854,7 @@ setSource1Flags:
     loopIndex = loopIndex + 1;
   } while (moreComponentsB);
 setLastOperandBufPtr:
-  lastOperandBufPtr = &lastOperandBuf0;
+  lastOperandBufPtr = &lastOperandBuf[0];
   countdown = 4;
   literalCursor = literalCursorA;
   do {
@@ -5953,9 +5947,9 @@ setLastOperandBufPtr:
       extraSourceB = IRInst__getOperandSource(inst2,inst2[0x21]);
       inst2FlagsB = inst2[5];
     }
-    lastOperandBuf2 = 0;
-    lastOperandBuf0 = 0;
-    lastOperandBuf1 = 0;
+    lastOperandBuf[2] = 0;
+    lastOperandBuf[0] = 0;
+    lastOperandBuf[1] = 0;
     if ((inst2FlagsB & 0x200) != 0) {
       IRInst__readLastOperand(inst2,lastOperandBufPtr);
     }
@@ -6340,9 +6334,7 @@ int Inst__hoistScalarMulOutOfDot(consumer, consumerSrcIndex, inst, program)
   undefined4 scalarSelect;
   undefined4 mulVectorSelect;
   undefined4 dotOperandSelect;
-  undefined4 savedCounters0;
-  undefined4 savedCounters1;
-  undefined4 savedCounters2;
+  undefined4 savedCounters[3];
   undefined4 lastOperandRecord;
   int lastOperandSource;
   undefined4 lastOperandRecord5;
@@ -6420,10 +6412,10 @@ setMulOperandRecord:
             inst[0x21] = inst[0x21] + -1;
             inst[5] = inst[5] & 0xfffffdff;
           }
-          savedCounters0 = 0;
-          savedCounters1 = 0;
-          savedCounters2 = 0;
-          IRInst__saveCounters(inst,&savedCounters0,0xffffffff);
+          savedCounters[0] = 0;
+          savedCounters[1] = 0;
+          savedCounters[2] = 0;
+          IRInst__saveCounters(inst,&savedCounters[0],0xffffffff);
           savedResultScale = inst[0x49];
           savedSaturate = inst[0x48];
           inst[0x49] = 0;
@@ -6466,7 +6458,7 @@ setMulOperandRecord:
           if (lastOperandSource != 0) {
             IRInst__setLastOperandFromRecord(newMul,&lastOperandRecord,0,compiler);
           }
-          IRInst__restoreCounters(newMul,&savedCounters0);
+          IRInst__restoreCounters(newMul,&savedCounters[0]);
           newMul[0x48] = savedSaturate;
           newMul[0x49] = savedResultScale;
           laneIndex2 = 0;

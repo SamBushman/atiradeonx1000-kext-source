@@ -684,14 +684,13 @@ int ffpsEmitTexEnvCombine(ctx, ilBuilder, baseFormat, unit, textureObject, isFir
   undefined1 srcSwizzle2 [4];
   uint alphaSrcTokens [2];
   undefined1 alphaSrcToken2 [4];
-  uint alphaSwizzle0;
-  uint alphaSwizzle1;
+  uint alphaSwizzle[2];
   undefined1 alphaSwizzle2 [4];
   int argOrder [4];
   uint *alphaSwizzlesPtr;
   
   unitState = 0;
-  alphaSwizzlesPtr = &alphaSwizzle0;
+  alphaSwizzlesPtr = &alphaSwizzle[0];
   do {
     *(undefined4 *)(unitState + (int)srcTokens) = 0;
     *(undefined4 *)(unitState + (int)srcSwizzles) = 0;
@@ -997,7 +996,7 @@ loopSetDstWriteWord:
   ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x45c),(uint)*(ushort *)(unitState + 0x468),alphaSrcTokens,
                alphaSwizzlesPtr,unit,baseFormat,isFirstUnit,previousUnit);
   ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x45e),(uint)*(ushort *)(unitState + 0x46a),
-               alphaSrcTokens + 1,&alphaSwizzle1,unit,baseFormat,isFirstUnit,previousUnit);
+               alphaSrcTokens + 1,&alphaSwizzle[1],unit,baseFormat,isFirstUnit,previousUnit);
   ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x460),(uint)*(ushort *)(unitState + 0x46c),alphaSrcToken2,
                alphaSwizzle2,unit,baseFormat,isFirstUnit,previousUnit);
   combineAlphaMode = *(ushort *)(unitState + 0x452);
@@ -1008,10 +1007,10 @@ loopSetDstWriteWord:
     argOrder[1] = 1;
     if ((alphaSrcTokens[1] & 0x400000) == 0) {
       alphaSrcTokens[1] = alphaSrcTokens[1] | 0x400000;
-      alphaSwizzle1 = alphaSwizzle1 & 0xffff8fff | 0x3000;
+      alphaSwizzle[1] = alphaSwizzle[1] & 0xffff8fff | 0x3000;
     }
     unitState = 2;
-    alphaSwizzle1 = alphaSwizzle1 | 0x20000;
+    alphaSwizzle[1] = alphaSwizzle[1] | 0x20000;
   }
   else if (combineAlphaMode < 0x8575) {
     if (combineAlphaMode == 0x1e01) {
@@ -1062,10 +1061,10 @@ loopSetUnitState:
     argOrder[1] = 2;
     if ((alphaSrcTokens[1] & 0x400000) == 0) {
       alphaSrcTokens[1] = alphaSrcTokens[1] | 0x400000;
-      alphaSwizzle1 = alphaSwizzle1 & 0xffff8fff | 0x3000;
+      alphaSwizzle[1] = alphaSwizzle[1] & 0xffff8fff | 0x3000;
     }
     unitState = 3;
-    alphaSwizzle1 = alphaSwizzle1 | 0x20000;
+    alphaSwizzle[1] = alphaSwizzle[1] | 0x20000;
   }
   else {
     if (combineAlphaMode != 0x8746) goto loopSetUnitState;
@@ -1075,10 +1074,10 @@ loopSetUnitState:
     argOrder[2] = 1;
     if ((alphaSrcTokens[1] & 0x400000) == 0) {
       alphaSrcTokens[1] = alphaSrcTokens[1] | 0x400000;
-      alphaSwizzle1 = alphaSwizzle1 & 0xffff8fff | 0x3000;
+      alphaSwizzle[1] = alphaSwizzle[1] & 0xffff8fff | 0x3000;
     }
     unitState = 3;
-    alphaSwizzle1 = alphaSwizzle1 | 0x8000;
+    alphaSwizzle[1] = alphaSwizzle[1] | 0x8000;
   }
 setTextureUnitCount:
   textureUnitCount = ((unsigned char *)0x000013b2)[ctx];
@@ -1090,7 +1089,7 @@ setTextureUnitCount:
       }
       else {
         dstWriteWord = 0x740;
-        alphaSwizzle0 = alphaSwizzle0 | 0x40000;
+        alphaSwizzle[0] = alphaSwizzle[0] | 0x40000;
       }
       goto setTokenIndex;
     }

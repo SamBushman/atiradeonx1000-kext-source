@@ -2895,10 +2895,7 @@ int gld_scanProgramTokens(glContext, a12, tokenInfo)
   int inputByteOffset;
   int tokenBytes;
   float *tokenCursor;
-  float operandScratch0;
-  float operandScratch1;
-  float operandScratch2;
-  float operandScratch3;
+  float operandScratch[4];
   undefined4 i2dHi0;
   float negConstLo0;
   undefined4 i2dHi1;
@@ -3089,18 +3086,18 @@ setInputKindDefault:
         if (constKind == 2) {
           i2dHi0 = 0x43300000;
           negConstLo0 = -tokenCursor[2];
-          operandScratch0 = (float)((double)CONCAT44(0x43300000,negConstLo0) - 4503601774854144.0);
+          operandScratch[0] = (float)((double)CONCAT44(0x43300000,negConstLo0) - 4503601774854144.0);
           i2dHi1 = 0x43300000;
           negConstLo1 = -tokenCursor[3];
-          operandScratch1 = (float)((double)CONCAT44(0x43300000,negConstLo1) - 4503601774854144.0);
+          operandScratch[1] = (float)((double)CONCAT44(0x43300000,negConstLo1) - 4503601774854144.0);
           i2dHi2 = 0x43300000;
           negConstLo2 = -tokenCursor[4];
-          operandScratch2 = (float)((double)CONCAT44(0x43300000,negConstLo2) - 4503601774854144.0);
+          operandScratch[2] = (float)((double)CONCAT44(0x43300000,negConstLo2) - 4503601774854144.0);
           i2dHi3 = 0x43300000;
           negConstLo3 = -tokenCursor[5];
-          operandScratch3 = (float)((double)CONCAT44(0x43300000,negConstLo3) - 4503601774854144.0);
+          operandScratch[3] = (float)((double)CONCAT44(0x43300000,negConstLo3) - 4503601774854144.0);
           (**(code **)(((unsigned char *)0x00001280) + glContext))
-                    (glContext,slotRecord,(uint)GH_F2U(constToken) & 0xffff,(uint)GH_F2U(constToken) & 0xffff,&operandScratch0,1,0,
+                    (glContext,slotRecord,(uint)GH_F2U(constToken) & 0xffff,(uint)GH_F2U(constToken) & 0xffff,&operandScratch[0],1,0,
                      *(code **)(((unsigned char *)0x00001280) + glContext));
           afterConstCursor = tokenCursor + 6;
         }
@@ -3134,14 +3131,14 @@ setInputKindDefault:
       if (((uint)GH_F2U(cursorWord0) & 0x400000) != 0) {
         secondOperandPtr = cursor + 2;
       }
-      operandScratch0 = *secondOperandPtr;
+      operandScratch[0] = *secondOperandPtr;
       tokenCursor = secondOperandPtr + 1;
-      if (((uint)GH_F2U(operandScratch0) & 0x400000) != 0) {
+      if (((uint)GH_F2U(operandScratch[0]) & 0x400000) != 0) {
         tokenCursor = secondOperandPtr + 2;
       }
-      if (((uint)GH_F2U(operandScratch0) >> 0x10 & 0x3f) - 1 < 2) {
+      if (((uint)GH_F2U(operandScratch[0]) >> 0x10 & 0x3f) - 1 < 2) {
         a12Ptr74 = *(int *)(a12 + 0x74);
-        operandRegCount = ((uint)GH_F2U(operandScratch0) & 0xffff) + 1;
+        operandRegCount = ((uint)GH_F2U(operandScratch[0]) & 0xffff) + 1;
         if (*(int *)(a12Ptr74 + 0x84) < operandRegCount) {
 loopStoreA12Ptr74:
           *(int *)(a12Ptr74 + 0x84) = operandRegCount;
@@ -3164,25 +3161,25 @@ loopStoreA12Ptr74:
       if (((uint)GH_F2U(cursor2Word0) & 0x400000) != 0) {
         tokenCursor = cursor2 + 2;
       }
-      operandScratch0 = *tokenCursor;
+      operandScratch[0] = *tokenCursor;
       afterOperandCursor = tokenCursor + 1;
-      if (((uint)GH_F2U(operandScratch0) & 0x400000) != 0) {
+      if (((uint)GH_F2U(operandScratch[0]) & 0x400000) != 0) {
         afterOperandCursor = tokenCursor + 2;
       }
-      if (((uint)GH_F2U(operandScratch0) >> 0x10 & 0x3f) - 1 < 2) {
-        operandRegCountB = ((uint)GH_F2U(operandScratch0) & 0xffff) + 1;
+      if (((uint)GH_F2U(operandScratch[0]) >> 0x10 & 0x3f) - 1 < 2) {
+        operandRegCountB = ((uint)GH_F2U(operandScratch[0]) & 0xffff) + 1;
         if (*(int *)(*(int *)(a12 + 0x74) + 0x84) < operandRegCountB) {
           *(int *)(*(int *)(a12 + 0x74) + 0x84) = operandRegCountB;
         }
       }
-      operandScratch1 = *afterOperandCursor;
+      operandScratch[1] = *afterOperandCursor;
       tokenCursor = afterOperandCursor + 1;
-      if (((uint)GH_F2U(operandScratch1) & 0x400000) != 0) {
+      if (((uint)GH_F2U(operandScratch[1]) & 0x400000) != 0) {
         tokenCursor = afterOperandCursor + 2;
       }
-      if (((uint)GH_F2U(operandScratch1) >> 0x10 & 0x3f) - 1 < 2) {
+      if (((uint)GH_F2U(operandScratch[1]) >> 0x10 & 0x3f) - 1 < 2) {
         a12Ptr74 = *(int *)(a12 + 0x74);
-        operandRegCount = ((uint)GH_F2U(operandScratch1) & 0xffff) + 1;
+        operandRegCount = ((uint)GH_F2U(operandScratch[1]) & 0xffff) + 1;
         if (*(int *)(a12Ptr74 + 0x84) < operandRegCount) goto loopStoreA12Ptr74;
       }
     }
@@ -4875,16 +4872,15 @@ int gld_emitInstructionTokens(glContext, a1Ptr74, wordVector, opcode, destOperan
   uint *cursor;
   undefined4 stackArgSwizzle0;
   uint opcodeToken;
-  undefined4 operandToken0;
-  uint operandToken1;
+  undefined4 operandToken[2];
   uint swizzleTokens [14];
   
   extraFlagBits = 0;
   destKind = destOperand[1];
   opcodeToken = 0;
-  operandToken0 = 0;
+  operandToken[0] = 0;
   swizzleTokens[0] = 0;
-  operandToken1 = 0;
+  operandToken[1] = 0;
   swizzleTokens[1] = 0;
   if (destKind != 0x17) {
     destOperandWord = (destKind & 0x3f) << 0x10 | *destOperand & 0xffff;
@@ -5187,15 +5183,15 @@ int gld_emitInstructionTokens(glContext, a1Ptr74, wordVector, opcode, destOperan
          (packedSwizzle & 0xfffff777 ^ 0x8000) & 0x8000 |
          (packedSwizzle & 0xffffff77 ^ 0x800) & 0x800 |
          (packedSwizzle & 0xfffffff7 ^ 0x80) & 0x80 | (packedSwizzle ^ 8) & 8 | packedSwizzle & 0xffff7777;
-    operandToken0 = CONCAT22((*(unsigned short *)((unsigned char *)&(operandToken0) + 0)),(short)maxRegisterPlusOne);
+    operandToken[0] = CONCAT22((*(unsigned short *)((unsigned char *)&(operandToken[0]) + 0)),(short)maxRegisterPlusOne);
     swizzleTokens[0] = swizzleTokens[0] & 0xffff8888 | 0x3210;
     tokenCountA = *wordVector + 1;
     *wordVector = tokenCountA;
-    operandToken0 = operandToken0 & 0xffc0ffff | 0x40000;
+    operandToken[0] = operandToken[0] & 0xffc0ffff | 0x40000;
 loopSetSwizzleTokenCount:
     swizzleTokenCount = 1;
     opcodeToken = 0x5d;
-    operandToken0 = operandToken0 | 0x400000;
+    operandToken[0] = operandToken[0] | 0x400000;
     swizzleTokens[0] = swizzleTokens[0] & 0xff1fffff | 0x600000;
     goto setOpcodeToken;
   }
@@ -5203,8 +5199,8 @@ loopSetSwizzleTokenCount:
   swizzleTokens[4] = swizzleSelect2;
   swizzleTokens[3] = swizzleSelect1;
   swizzleTokens[2] = swizzleSelect0;
-  operandToken0 = *srcOperand & 0xffff;
-  operandToken0 = (srcOperand[1] & 0x3f) << 0x10 | operandToken0 | 0x400000;
+  operandToken[0] = *srcOperand & 0xffff;
+  operandToken[0] = (srcOperand[1] & 0x3f) << 0x10 | operandToken[0] | 0x400000;
   if (srcOperand[1] == 0x10) {
     loopIndex2 = 0;
     remaining2 = 4;
@@ -5458,7 +5454,7 @@ loopSetSwizzleTokenCount:
     swizzleTokenCount = 2;
     opcodeToken = 0x5e;
     tokenCountA = *wordVector;
-    operandToken1 = operandToken0;
+    operandToken[1] = operandToken[0];
     swizzleTokens[1] = swizzleTokens[0];
     break;
   case 0x1f:
@@ -5513,11 +5509,11 @@ checkWordVector:
     *wordVector = tokenCountA;
   }
   if (swizzleTokenCount != 0) {
-    cursor = &operandToken0;
+    cursor = &operandToken[0];
     loopIndex3 = 0;
     loopIndex4 = 0;
     do {
-      operandTokenWord = *(undefined4 *)((int)&operandToken0 + loopIndex4);
+      operandTokenWord = *(undefined4 *)((int)&operandToken[0] + loopIndex4);
       if (wordVector[1] <= tokenCountA) {
         allocation2 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
         if (wordVector[2] != 0) {

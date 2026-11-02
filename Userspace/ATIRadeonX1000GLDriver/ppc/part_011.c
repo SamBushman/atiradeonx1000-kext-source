@@ -3114,14 +3114,8 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
   undefined8 statusAndValue;
   char pickedNeedsRetarget [4];
   undefined4 pickedRegister;
-  char recordAFileCount0;
-  char recordAFileCount1;
-  char recordAFileCount2;
-  char recordAFileCount3;
-  char recordBFileCount0;
-  char recordBFileCount1;
-  char recordBFileCount2;
-  char recordBFileCount3;
+  char recordAFileCount[4];
+  char recordBFileCount[4];
   undefined1 pickScratch [12];
   uint unusedFrame9c [5];
   uint liveCountSnapshot;
@@ -3775,11 +3769,11 @@ loopSetHasFile1SourceFirst:
         *(undefined4 *)(combinedRecord + 0xc) = 0;
         word3Ptr = combinedRecord + 0xc;
         secondRecordWord0 = secondRecordWord0 >> 0x14 & 0xf;
-        ((int (*)())recordCountSourceRegisterFiles)(alloc,&recordAFileCount0,combinedRecord);
-        ((int (*)())recordCountSourceRegisterFiles)(alloc,&recordBFileCount0,partnerRecord);
-        if ((((2 < (int)recordAFileCount0 + (int)recordBFileCount0) || (1 < (int)recordAFileCount1 + (int)recordBFileCount1)) ||
-            (1 < (int)recordAFileCount2 + (int)recordBFileCount2)) ||
-           ((1 < (int)recordAFileCount3 + (int)recordBFileCount3 || ((*(uint *)combinedRecord & 0xf00) == 0x400))))
+        ((int (*)())recordCountSourceRegisterFiles)(alloc,&recordAFileCount[0],combinedRecord);
+        ((int (*)())recordCountSourceRegisterFiles)(alloc,&recordBFileCount[0],partnerRecord);
+        if ((((2 < (int)recordAFileCount[0] + (int)recordBFileCount[0]) || (1 < (int)recordAFileCount[1] + (int)recordBFileCount[1])) ||
+            (1 < (int)recordAFileCount[2] + (int)recordBFileCount[2])) ||
+           ((1 < (int)recordAFileCount[3] + (int)recordBFileCount[3] || ((*(uint *)combinedRecord & 0xf00) == 0x400))))
         goto loopSetHasFile1SourceFirst;
         word3Before = *(uint *)(combinedRecord + 0xc);
         destModeBits = (*(uint *)partnerRecord & 0x6000) << 6;

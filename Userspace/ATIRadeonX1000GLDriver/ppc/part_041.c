@@ -657,10 +657,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   uint inWorklistWordCount;
   int containsResult;
   int innerIndexOrScratch;
-  int excludedRegs0;
-  undefined4 excludedRegs1;
-  undefined4 excludedRegs2;
-  undefined4 excludedRegs3;
+  int excludedRegs[4];
   int swizzleComponentUse [2];
   
   allocCtxOrBlock = *(int *)(compiler + COMP_currentProgram);
@@ -795,10 +792,10 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                 if ((instFlags & 2) == 0) {
                   isUndefinedResult = (**(code **)(*walkInst + 0x50))(walkInst);
                   if (isUndefinedResult != 0) goto code_r0x00132adc;
-                  excludedRegs0 = excludedRegsInit0_001affec;
-                  excludedRegs1 = excludedRegsInit1_001afff0;
-                  excludedRegs2 = excludedRegsInit2_001afff4;
-                  excludedRegs3 = excludedRegsInit3_001afff8;
+                  excludedRegs[0] = excludedRegsInit0_001affec;
+                  excludedRegs[1] = excludedRegsInit1_001afff0;
+                  excludedRegs[2] = excludedRegsInit2_001afff4;
+                  excludedRegs[3] = excludedRegsInit3_001afff8;
                   regNode = ((int (*)())InterferenceGraph__resolveNode)(graph,walkInst[0x25],useCoalesced);
                   isMovResult = (**(code **)(*walkInst + 100))(walkInst);
                   if (isMovResult != 0) {
@@ -830,7 +827,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                              (noSourceResult = RegKind__flagBit0(cursorInst[0x26]), noSourceResult != 0)))) &&
                            ((cursorInst[5] & 2U) == 0)) &&
                           (noSourceResult = (**(code **)(*cursorInst + 0x50))(cursorInst), noSourceResult == 0)))) {
-                        excludedRegs0 = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
+                        excludedRegs[0] = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
                       }
                     }
                   }
@@ -867,7 +864,7 @@ code_r0x00132828:
                           if ((*(char *)(innerIndexOrScratch + nextRow + 0x10) != '\x01') &&
                              (nextRow = BitSet__testRegisterLane_130958(liveWords,nextBlock,innerIndexOrScratch), nextRow != 0)) {
                             nextRow = ((int (*)())InterferenceGraph__resolveNode)(graph,nextBlock,useCoalesced);
-                            containsResult = Array4__contains(nextRow,&excludedRegs0);
+                            containsResult = Array4__contains(nextRow,&excludedRegs[0]);
                             if (containsResult == 0) goto code_r0x00132970;
                           }
                           moreComponents = innerIndexOrScratch != 3;
@@ -880,7 +877,7 @@ code_r0x00132828:
                         do {
                           nextRow = BitSet__testRegisterLane_130958(liveWords,nextBlock,compCounter);
                           if (((nextRow != 0) &&
-                              (nextRow = ((int (*)())InterferenceGraph__resolveNode)(graph,nextBlock,useCoalesced), nextRow != excludedRegs0))
+                              (nextRow = ((int (*)())InterferenceGraph__resolveNode)(graph,nextBlock,useCoalesced), nextRow != excludedRegs[0]))
                              && ((innerIndexOrScratch != nextRow ||
                                  (compFlagResult = IRInst__isLaneWritten(walkInst,compCounter), compFlagResult != 0))))
                           goto code_r0x00132970;
@@ -1020,13 +1017,13 @@ code_r0x00132ca8: ;
                           (nextRow = ((int (*)())IRInst__chainContainsOperandSource)(walkInst,innerIndexOrScratch,walkInst), nextRow == 0)))))) {
                     srcOperandRecord = IRInst__getOperandRecord(walkInst,innerIndexOrScratch);
                     SelectWord__readMask(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
-                    excludedRegs0 = swizzleComponentUse[0];
+                    excludedRegs[0] = swizzleComponentUse[0];
                     repReg2 = ((int (*)())InterferenceGraph__resolveNode)(graph,cursorInst[0x25],useCoalesced);
                     loopLeft4 = 4;
                     bitIndex = repReg2 << 2;
                     nextRow = 0;
                     do {
-                      if (*(char *)((int)&excludedRegs0 + nextRow) != '\0') {
+                      if (*(char *)((int)&excludedRegs[0] + nextRow) != '\0') {
                         wordOff = bitIndex >> 3 & 0x1ffffffc;
                         *(uint *)((int)liveWords + wordOff + 8) =
                              1 << (bitIndex & 0x1f) | *(uint *)((int)liveWords + wordOff + 8);

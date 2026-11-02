@@ -7354,11 +7354,7 @@ int PostPack__rewriteLaneGroup(pass, inst, inst2, groupSlotCursor)
   int loopIndex4;
   undefined4 *laneGroup;
   int countdownK;
-  undefined4 selectScratch0;
-  undefined4 selectScratch1;
-  undefined4 selectScratch2;
-  undefined4 selectScratch3;
-  undefined4 selectScratch4;
+  undefined4 selectScratch[5];
   undefined4 selectScratch5 [4];
   undefined4 selectScratch9;
   undefined4 remappedSelect [2];
@@ -7387,13 +7383,13 @@ int PostPack__rewriteLaneGroup(pass, inst, inst2, groupSlotCursor)
   scratchPtrC4Plus2 = selectScratch5 + 2;
   scratchPtrC4Plus3 = selectScratch5 + 3;
   scratchPtrB4 = &selectScratch9;
-  scratchPtrD4 = &selectScratch1;
+  scratchPtrD4 = &selectScratch[1];
   loopIndex4 = 0;
 loopSetLaneGroup:
   laneGroup = *(undefined4 **)(groupSlotCursor + 4);
   if (laneGroup != (undefined4 *)0x0) {
     groupCombinedInst = laneGroup[9];
-    scratchBase = &selectScratch0;
+    scratchBase = &selectScratch[0];
     if (groupCombinedInst == 0) {
       countdown5 = 4;
       scanIdx0 = 0;
@@ -7572,18 +7568,18 @@ setInsertBefore:
   if (distinctSourceCount == 2) {
     loopIndex5 = 0;
     selectScratch5[0] = swizzleAllUnused_001b0038;
-    selectScratch4 = swizzleAllUnused_001b0038;
+    selectScratch[4] = swizzleAllUnused_001b0038;
     constTableBaseB = &constPoolAnchor_001b40f0;
     countdown2 = 4;
     constTableBaseA = &constPoolAnchor_001b40f0;
-    selectScratch1 = swizzleYYYY_001b0044;
-    scratchBase = &selectScratch0;
+    selectScratch[1] = swizzleYYYY_001b0044;
+    scratchBase = &selectScratch[0];
     laneSlotCursor = laneGroup;
     do {
       if (firstSource == laneSlotCursor[4]) {
-        *(undefined1 *)((int)&selectScratch1 + (uint)*(byte *)((int)laneGroup + loopIndex5 + 0x20)) = 0;
+        *(undefined1 *)((int)&selectScratch[1] + (uint)*(byte *)((int)laneGroup + loopIndex5 + 0x20)) = 0;
         laneSelectByte = *(byte *)((int)laneGroup + loopIndex5 + 0x20);
-        *(byte *)((int)&selectScratch4 + (uint)laneSelectByte) = laneSelectByte;
+        *(byte *)((int)&selectScratch[4] + (uint)laneSelectByte) = laneSelectByte;
       }
       loopIndex5 = loopIndex5 + 1;
       laneSlotCursor = laneSlotCursor + 1;
@@ -7592,9 +7588,9 @@ setInsertBefore:
     loopIndex5 = 0;
     countdown2 = 4;
     do {
-      if (*(char *)((int)&selectScratch1 + loopIndex5) == '\x01') {
+      if (*(char *)((int)&selectScratch[1] + loopIndex5) == '\x01') {
         *(char *)((int)selectScratch5 + loopIndex5) = (char)loopIndex5;
-        *(undefined1 *)((int)&selectScratch1 + loopIndex5) = 0;
+        *(undefined1 *)((int)&selectScratch[1] + loopIndex5) = 0;
         break;
       }
       loopIndex5 = loopIndex5 + 1;
@@ -7604,7 +7600,7 @@ setInsertBefore:
     *(undefined4 *)(newInstFirst + 0x160) = *(undefined4 *)(blockContext + 0x478);
     operandRecord5 = IRInst__getOperandRecord(newInstFirst,0);
     WriteMask__fromSelectWord(&writeMaskOutA,*(undefined4 *)(operandRecord5 + 0x10));
-    selectWordToStore = selectScratch4;
+    selectWordToStore = selectScratch[4];
     *(undefined4 *)(newInstFirst + 0xc) = writeMaskOutA;
     operandRecord5 = IRInst__getOperandRecord(newInstFirst,1);
     selectWordToStoreB = selectScratch5[0];
@@ -7612,7 +7608,7 @@ setInsertBefore:
     operandRecord5 = IRInst__getOperandRecord(newInstFirst,2);
     loopIndex2 = 0;
     selectScratch5[0] = *(undefined4 *)(constTableBaseB + -0x40ac);
-    selectScratch1 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    selectScratch[1] = *(undefined4 *)(constTableBaseA + -0x40b8);
     *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStoreB;
     countdown6 = 4;
     laneSlotCursor = laneGroup;
@@ -7638,15 +7634,15 @@ setInsertBefore:
       loopIndex5 = loopIndex5 + 1;
       countdown2 = countdown2 + -1;
     } while (countdown2 != 0);
-    selectScratch4 = selectScratch1;
+    selectScratch[4] = selectScratch[1];
     callResult = ((int (*)())IRInst__createWithConstantOperands)(2,selectScratch5[0],secondSource,blockContext,compilerForBlock,(double)FLOAT_001aa0d4);
     *(undefined4 *)(callResult + 0x160) = *(undefined4 *)(blockContext + 0x478);
     operandRecord4 = IRInst__getOperandRecord(callResult,0);
     WriteMask__fromSelectWord(&writeMaskOutB,*(undefined4 *)(operandRecord4 + 0x10));
-    selectWordToStoreB = selectScratch4;
+    selectWordToStoreB = selectScratch[4];
     *(undefined4 *)(callResult + 0xc) = writeMaskOutB;
     operandRecord4 = IRInst__getOperandRecord(callResult,1);
-    selectWordToStore = selectScratch1;
+    selectWordToStore = selectScratch[1];
     *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStoreB;
     operandRecord4 = IRInst__getOperandRecord(callResult,2);
     firstUsedLaneA = 0;
@@ -7658,10 +7654,10 @@ setInsertBefore:
     *(undefined4 *)(newCombinedInst + 0x94) = *(undefined4 *)(newCombinedInst + 0x14c);
     sourceDef = IRInst__getOperandSource(newInstFirst,1);
     operandRecord5 = IRInst__getOperandRecord(newInstFirst,2);
-    selectScratch1 = *(undefined4 *)(operandRecord5 + 0x10);
+    selectScratch[1] = *(undefined4 *)(operandRecord5 + 0x10);
     countdown6 = 4;
     do {
-      if (*(char *)((int)&selectScratch1 + firstUsedLaneA) != '\x04') goto setSourceDef2;
+      if (*(char *)((int)&selectScratch[1] + firstUsedLaneA) != '\x04') goto setSourceDef2;
       firstUsedLaneA = firstUsedLaneA + 1;
       countdown6 = countdown6 + -1;
     } while (countdown6 != 0);
@@ -7670,10 +7666,10 @@ setSourceDef2:
     sourceDef2 = IRInst__getOperandSource(callResult,1);
     operandRecord3 = IRInst__getOperandRecord(callResult,2);
     firstUsedLaneC = 0;
-    selectScratch4 = *(undefined4 *)(operandRecord3 + 0x10);
+    selectScratch[4] = *(undefined4 *)(operandRecord3 + 0x10);
     countdown3 = 4;
     do {
-      if (*(char *)((int)&selectScratch4 + firstUsedLaneC) != '\x04') goto setLoopIndex3;
+      if (*(char *)((int)&selectScratch[4] + firstUsedLaneC) != '\x04') goto setLoopIndex3;
       firstUsedLaneC = firstUsedLaneC + 1;
       countdown3 = countdown3 + -1;
     } while (countdown3 != 0);
@@ -7682,22 +7678,22 @@ setLoopIndex3:
     loopIndex3 = 0;
     selectScratch5[0] = *(undefined4 *)(constTableBaseB + -0x40ac);
     laneSelectCursor = laneGroup + 8;
-    selectScratch2 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    selectScratch[2] = *(undefined4 *)(constTableBaseA + -0x40b8);
     countdown = 4;
     laneSlotCursor = laneGroup;
-    selectScratch3 = selectScratch2;
+    selectScratch[3] = selectScratch[2];
     do {
       if (sourceDef == laneSlotCursor[4]) {
         *(undefined1 *)(loopIndex3 + (int)scratchPtrC4) = 0;
-        scratchPtrCC = &selectScratch3;
-        *(undefined1 *)((int)&selectScratch2 + loopIndex3) = *(undefined1 *)laneSelectCursor;
-        *(char *)(loopIndex3 + (int)&selectScratch3) = (char)firstUsedLaneC;
+        scratchPtrCC = &selectScratch[3];
+        *(undefined1 *)((int)&selectScratch[2] + loopIndex3) = *(undefined1 *)laneSelectCursor;
+        *(char *)(loopIndex3 + (int)&selectScratch[3]) = (char)firstUsedLaneC;
       }
       else if (sourceDef2 == laneSlotCursor[4]) {
-        *(char *)((int)&selectScratch2 + loopIndex3) = (char)firstUsedLaneA;
+        *(char *)((int)&selectScratch[2] + loopIndex3) = (char)firstUsedLaneA;
         *(undefined1 *)(loopIndex3 + (int)scratchPtrC4) = 0;
-        scratchPtrCC = &selectScratch3;
-        *(undefined1 *)(loopIndex3 + (int)&selectScratch3) = *(undefined1 *)laneSelectCursor;
+        scratchPtrCC = &selectScratch[3];
+        *(undefined1 *)(loopIndex3 + (int)&selectScratch[3]) = *(undefined1 *)laneSelectCursor;
       }
       loopIndex3 = loopIndex3 + 1;
       laneSelectCursor = (undefined4 *)((int)laneSelectCursor + 1);
@@ -7708,13 +7704,13 @@ setLoopIndex3:
     IRInst__setOperandSource(newCombinedInst,1,newInstFirst,1,compilerForBlock);
     IROperand__setModifierBits(newCombinedInst + 0xa4,1,0);
     IROperand__setModifierBits(newCombinedInst + 0xa4,2,0);
-    selectWordToStore = selectScratch2;
+    selectWordToStore = selectScratch[2];
     operandRecord4 = IRInst__getOperandRecord(newCombinedInst,1);
     *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStore;
     IRInst__setOperandSource(newCombinedInst,2,callResult,1,compilerForBlock);
     IROperand__setModifierBits(newCombinedInst + 0xbc,1,0);
     IROperand__setModifierBits(newCombinedInst + 0xbc,2,0);
-    selectWordToStore = selectScratch3;
+    selectWordToStore = selectScratch[3];
     operandRecord4 = IRInst__getOperandRecord(newCombinedInst,2);
     *(undefined4 *)(operandRecord4 + 0x10) = selectWordToStore;
     operandRecord4 = IRInst__getOperandRecord(newCombinedInst,0);
@@ -7724,36 +7720,36 @@ setLoopIndex3:
   }
   else {
     if (distinctSourceCount < 2) {
-      scratchBase = &selectScratch0;
+      scratchBase = &selectScratch[0];
       goto setCountdown4;
     }
-    scratchBase = &selectScratch0;
+    scratchBase = &selectScratch[0];
     if (4 < distinctSourceCount) goto setCountdown4;
     constTableBaseB = &constPoolAnchor_001b40f0;
     loopIndex2 = 0;
     constTableBaseA = &constPoolAnchor_001b40f0;
     countdown8 = 4;
     selectScratch5[0] = swizzleAllUnused_001b0038;
-    selectScratch3 = swizzleYYYY_001b0044;
-    selectScratch2 = swizzleAllUnused_001b0038;
+    selectScratch[3] = swizzleYYYY_001b0044;
+    selectScratch[2] = swizzleAllUnused_001b0038;
     laneSlotCursor = laneGroup;
     do {
       if (firstSource == laneSlotCursor[4]) {
-        *(undefined1 *)((int)&selectScratch3 + (uint)*(byte *)((int)laneGroup + loopIndex2 + 0x20)) = 0;
+        *(undefined1 *)((int)&selectScratch[3] + (uint)*(byte *)((int)laneGroup + loopIndex2 + 0x20)) = 0;
         laneSelectByte = *(byte *)((int)laneGroup + loopIndex2 + 0x20);
-        *(byte *)((int)&selectScratch2 + (uint)laneSelectByte) = laneSelectByte;
+        *(byte *)((int)&selectScratch[2] + (uint)laneSelectByte) = laneSelectByte;
       }
       loopIndex2 = loopIndex2 + 1;
       laneSlotCursor = laneSlotCursor + 1;
       countdown8 = countdown8 + -1;
     } while (countdown8 != 0);
-    scratchPtrCC = &selectScratch3;
+    scratchPtrCC = &selectScratch[3];
     countdown8 = 4;
     loopIndex2 = 0;
     do {
       if (*(char *)(loopIndex2 + (int)scratchPtrCC) == '\x01') {
         *(char *)((int)selectScratch5 + loopIndex2) = (char)loopIndex2;
-        *(undefined1 *)((int)&selectScratch3 + loopIndex2) = 0;
+        *(undefined1 *)((int)&selectScratch[3] + loopIndex2) = 0;
         break;
       }
       loopIndex2 = loopIndex2 + 1;
@@ -7763,13 +7759,13 @@ setLoopIndex3:
     *(undefined4 *)(newInstFirstB + 0x160) = *(undefined4 *)(blockContext + 0x478);
     operandRecord2 = IRInst__getOperandRecord(newInstFirstB,0);
     WriteMask__fromSelectWord(&writeMaskOutD,*(undefined4 *)(operandRecord2 + 0x10));
-    selectWordToStore = selectScratch2;
+    selectWordToStore = selectScratch[2];
     *(undefined4 *)(newInstFirstB + 0xc) = writeMaskOutD;
     operandRecord2 = IRInst__getOperandRecord(newInstFirstB,1);
     selectWordToStoreB = selectScratch5[0];
     *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStore;
     operandRecord2 = IRInst__getOperandRecord(newInstFirstB,2);
-    selectScratch2 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    selectScratch[2] = *(undefined4 *)(constTableBaseA + -0x40b8);
     loopIndex7 = 0;
     selectScratch5[0] = *(undefined4 *)(constTableBaseB + -0x40ac);
     *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStoreB;
@@ -7808,27 +7804,27 @@ setLoopIndex3:
       loopIndex2 = loopIndex2 + 1;
       countdown8 = countdown8 + -1;
     } while (countdown8 != 0);
-    selectScratch3 = selectScratch2;
-    selectScratch4 = selectScratch2;
+    selectScratch[3] = selectScratch[2];
+    selectScratch[4] = selectScratch[2];
     newInstSecond = ((int (*)())IRInst__createWithConstantOperands)(3,selectScratch5[0],secondSource,blockContext,compilerForBlock,(double)FLOAT_001aa0e8);
     *(undefined4 *)(newInstSecond + 0x160) = *(undefined4 *)(blockContext + 0x478);
     operandRecord2 = IRInst__getOperandRecord(newInstSecond,0);
     WriteMask__fromSelectWord(&writeMaskOutE,*(undefined4 *)(operandRecord2 + 0x10));
-    selectWordToStore = selectScratch2;
+    selectWordToStore = selectScratch[2];
     *(undefined4 *)(newInstSecond + 0xc) = writeMaskOutE;
     operandRecord2 = IRInst__getOperandRecord(newInstSecond,1);
-    selectWordToStoreB = selectScratch3;
+    selectWordToStoreB = selectScratch[3];
     *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStore;
     operandRecord2 = IRInst__getOperandRecord(newInstSecond,2);
-    selectWordToStore = selectScratch4;
+    selectWordToStore = selectScratch[4];
     *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStoreB;
     operandRecord2 = IRInst__getOperandRecord(newInstSecond,3);
     loopIndex7 = 0;
-    selectScratch4 = *(undefined4 *)(constTableBaseB + -0x40ac);
-    selectScratch2 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    selectScratch[4] = *(undefined4 *)(constTableBaseB + -0x40ac);
+    selectScratch[2] = *(undefined4 *)(constTableBaseA + -0x40b8);
     *(undefined4 *)(operandRecord2 + 0x10) = selectWordToStore;
     countdown2 = 4;
-    selectScratch3 = selectScratch2;
+    selectScratch[3] = selectScratch[2];
     laneSlotCursor = laneGroup;
     do {
       if (thirdSource == laneSlotCursor[4]) {
@@ -7843,7 +7839,7 @@ setLoopIndex3:
     loopIndex2 = 0;
     countdown8 = 4;
     do {
-      if (*(char *)((int)&selectScratch4 + loopIndex2) == '\x01') {
+      if (*(char *)((int)&selectScratch[4] + loopIndex2) == '\x01') {
         *(char *)((int)scratchBase + loopIndex2 + 8) = (char)loopIndex2;
         *(undefined1 *)((int)scratchBase + loopIndex2 + 0x10) = 0;
         break;
@@ -7851,15 +7847,15 @@ setLoopIndex3:
       loopIndex2 = loopIndex2 + 1;
       countdown8 = countdown8 + -1;
     } while (countdown8 != 0);
-    callResult = ((int (*)())IRInst__createWithConstantOperands)(2,selectScratch4,thirdSource,blockContext,compilerForBlock,(double)FLOAT_001aa0d4);
+    callResult = ((int (*)())IRInst__createWithConstantOperands)(2,selectScratch[4],thirdSource,blockContext,compilerForBlock,(double)FLOAT_001aa0d4);
     *(undefined4 *)(callResult + 0x160) = *(undefined4 *)(blockContext + 0x478);
     firstUsedLaneB = 0;
     operandRecord5 = IRInst__getOperandRecord(callResult,0);
     WriteMask__fromSelectWord(&writeMaskOutF,*(undefined4 *)(operandRecord5 + 0x10));
-    selectWordToStoreB = selectScratch3;
+    selectWordToStoreB = selectScratch[3];
     *(undefined4 *)(callResult + 0xc) = writeMaskOutF;
     operandRecord5 = IRInst__getOperandRecord(callResult,1);
-    selectWordToStore = selectScratch2;
+    selectWordToStore = selectScratch[2];
     *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStoreB;
     operandRecord5 = IRInst__getOperandRecord(callResult,2);
     *(undefined4 *)(operandRecord5 + 0x10) = selectWordToStore;
@@ -7870,10 +7866,10 @@ setLoopIndex3:
     *(undefined4 *)(newCombinedInst + 0x94) = *(undefined4 *)(newCombinedInst + 0x14c);
     operandSource = IRInst__getOperandSource(newInstFirstB,1);
     operandRecord5 = IRInst__getOperandRecord(newInstFirstB,2);
-    selectScratch2 = *(undefined4 *)(operandRecord5 + 0x10);
+    selectScratch[2] = *(undefined4 *)(operandRecord5 + 0x10);
     countdown6 = 4;
     do {
-      if (*(char *)((int)&selectScratch2 + firstUsedLaneB) != '\x04') goto setOperandSourceB;
+      if (*(char *)((int)&selectScratch[2] + firstUsedLaneB) != '\x04') goto setOperandSourceB;
       firstUsedLaneB = firstUsedLaneB + 1;
       countdown6 = countdown6 + -1;
     } while (countdown6 != 0);
@@ -7881,10 +7877,10 @@ setLoopIndex3:
 setOperandSourceB:
     operandSourceB = IRInst__getOperandSource(newInstSecond,1);
     operandRecord5 = IRInst__getOperandRecord(newInstSecond,2);
-    selectScratch3 = *(undefined4 *)(operandRecord5 + 0x10);
+    selectScratch[3] = *(undefined4 *)(operandRecord5 + 0x10);
     firstUsedLaneD = 0;
     operandRecord5 = IRInst__getOperandRecord(newInstSecond,3);
-    selectScratch4 = *(undefined4 *)(operandRecord5 + 0x10);
+    selectScratch[4] = *(undefined4 *)(operandRecord5 + 0x10);
     countdown6 = 4;
     do {
       if (*(char *)(firstUsedLaneD + (int)scratchPtrCC) != '\x04') goto setFirstUsedLaneF;
@@ -7896,7 +7892,7 @@ setFirstUsedLaneF:
     firstUsedLaneF = 0;
     countdown9 = 4;
     do {
-      if (*(char *)((int)&selectScratch4 + firstUsedLaneF) != '\x04') goto setSourceDef3;
+      if (*(char *)((int)&selectScratch[4] + firstUsedLaneF) != '\x04') goto setSourceDef3;
       firstUsedLaneF = firstUsedLaneF + 1;
       countdown9 = countdown9 + -1;
     } while (countdown9 != 0);
@@ -7914,7 +7910,7 @@ setSourceDef3:
     } while (countdown != 0);
     firstUsedLaneE = -1;
 setSelectScratch1:
-    selectScratch1 = *(undefined4 *)(constTableBaseA + -0x40b8);
+    selectScratch[1] = *(undefined4 *)(constTableBaseA + -0x40b8);
     laneSelectCursor = laneGroup + 8;
     selectScratch5[1] = *(undefined4 *)(constTableBaseB + -0x40ac);
     countdownK = 4;
@@ -7951,9 +7947,9 @@ setSelectScratch1:
       countdownK = countdownK + -1;
     } while (countdownK != 0);
     *(undefined4 *)(newCombinedInst + 0x9c) = selectScratch5[1];
-    selectScratch5[2] = selectScratch1;
-    selectScratch5[3] = selectScratch1;
-    selectScratch9 = selectScratch1;
+    selectScratch5[2] = selectScratch[1];
+    selectScratch5[3] = selectScratch[1];
+    selectScratch9 = selectScratch[1];
     IRInst__setOperandSource(newCombinedInst,1,newInstFirstB,1,compilerForBlock);
     IROperand__setModifierBits(newCombinedInst + 0xa4,1,0);
     IROperand__setModifierBits(newCombinedInst + 0xa4,2,0);
@@ -7979,7 +7975,7 @@ setSelectScratch1:
     }
     else {
       IRInst__setExtraOperandSource(newCombinedInst,fourthSource,1,compilerForBlock);
-      extraSelectWord = selectScratch1;
+      extraSelectWord = selectScratch[1];
       operandRecord5 = IRInst__getOperandRecord(newCombinedInst,4);
       selectWordToStore = swizzleYYYY_001b0048;
       *(undefined4 *)(operandRecord5 + 0x10) = extraSelectWord;
@@ -8038,7 +8034,7 @@ storeRemappedSelect:
   }
   operandRecord4 = IRInst__getOperandRecord(inst2,loopIndex4);
   loopIndex5 = 0;
-  selectScratch0 = *(undefined4 *)(operandRecord4 + 0x10);
+  selectScratch[0] = *(undefined4 *)(operandRecord4 + 0x10);
   do {
     operandComponent = *(char *)(loopIndex5 + (int)scratchBase);
     if (operandComponent != '\x04') {
@@ -8059,7 +8055,7 @@ storeRemappedSelect:
 storeLoopIndex5:
       *(undefined1 *)(loopIndex5 + (int)scratchBase) = matchedSlotIndex;
     }
-    selectWordToStore = selectScratch0;
+    selectWordToStore = selectScratch[0];
     moreComponents = loopIndex5 != 3;
     loopIndex5 = loopIndex5 + 1;
   } while (moreComponents);

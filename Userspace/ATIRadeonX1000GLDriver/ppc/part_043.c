@@ -2485,10 +2485,7 @@ int Inst__collapseMulSplatByDotOnes(inst, program)
   int scalarSourceIndex;
   undefined4 scalarSelectWord;
   undefined4 savedCounters [3];
-  undefined4 onesLane0;
-  undefined4 onesLane1;
-  undefined4 onesLane2;
-  undefined4 onesLane3;
+  undefined4 onesLane[4];
   
   compiler = *(undefined4 *)(program + 8);
   if (inst == (int *)0x0) {
@@ -2540,13 +2537,13 @@ int Inst__collapseMulSplatByDotOnes(inst, program)
 setSourceDef:
   sourceDef = IRInst__getOperandSource(inst,dotSourceIndex);
   laneCheckMask = laneWord00000000_001b0170;
-  onesLane3 = 0x3f800000;
-  onesLane0 = 0x3f800000;
-  onesLane1 = 0x3f800000;
-  onesLane2 = 0x3f800000;
-  isOnesConstant = IRInst__sourceMatchesConstant(sourceDef,1,laneWord00000000_001b0170,&onesLane0);
+  onesLane[3] = 0x3f800000;
+  onesLane[0] = 0x3f800000;
+  onesLane[1] = 0x3f800000;
+  onesLane[2] = 0x3f800000;
+  isOnesConstant = IRInst__sourceMatchesConstant(sourceDef,1,laneWord00000000_001b0170,&onesLane[0]);
   if (isOnesConstant == 0) {
-    isOnesConstant = IRInst__sourceMatchesConstant(sourceDef,2,laneCheckMask,&onesLane0);
+    isOnesConstant = IRInst__sourceMatchesConstant(sourceDef,2,laneCheckMask,&onesLane[0]);
     if (isOnesConstant == 0) {
       return 0;
     }
@@ -5880,10 +5877,7 @@ int Inst__collapseAddOfScaledMov(inst, program)
   undefined4 scaleSelect;
   undefined4 scaleDestSelect;
   undefined4 scaleSelectCopy;
-  float scaleLane0;
-  float scaleLane1;
-  float scaleLane2;
-  float scaleLane3;
+  float scaleLane[4];
   undefined4 destWriteMask;
   undefined4 unusedMaskedSelect;
   undefined4 composedSelect;
@@ -5905,10 +5899,10 @@ int Inst__collapseAddOfScaledMov(inst, program)
       isMov = (**(code **)(*a0 + 100))(a0);
       if (((isMov != 0) && (a0[0x48] == 0)) && (((a0[5] & 0x200U) == 0 && (a0[0x49] != 0)))) {
         scaleFactor = (double)((double (*)())outputScaleFromExponent)(a0[0x49]);
-        scaleLane3 = (float)scaleFactor;
-        scaleLane0 = (float)scaleFactor;
-        scaleLane1 = (float)scaleFactor;
-        scaleLane2 = (float)scaleFactor;
+        scaleLane[3] = (float)scaleFactor;
+        scaleLane[0] = (float)scaleFactor;
+        scaleLane[1] = (float)scaleFactor;
+        scaleLane[2] = (float)scaleFactor;
         operandRecord2 = IRInst__getOperandRecord(inst,0);
         destSelectWord = *(undefined4 *)(operandRecord2 + 0x10);
         operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -5916,7 +5910,7 @@ int Inst__collapseAddOfScaledMov(inst, program)
         SelectWord__maskUnused(&unusedMaskedSelect,0x10203,destWriteMask);
         scaleSelect = unusedMaskedSelect;
         scaleConstant = (**(code **)(**(int **)(compiler + 0x30c) + 0x154))
-                          (*(int **)(compiler + 0x30c),program,&scaleLane0,&scaleSelect);
+                          (*(int **)(compiler + 0x30c),program,&scaleLane[0],&scaleSelect);
         if (scaleConstant != 0) {
           prevNode = *(int *)(inst + 4);
           useCount = IRInst__useCount(inst,program);
@@ -6124,9 +6118,7 @@ int Inst__mergeSplatSourceInsts_00151370(inst, inst2, program)
   undefined4 newSrcBOperand2Select;
   undefined4 instOperand1Select;
   undefined4 instOperand2Select;
-  undefined4 counterSave0;
-  undefined4 counterSave1;
-  undefined4 counterSave2;
+  undefined4 counterSave[3];
   undefined4 lastOperandRecord;
   int lastOperandSource;
   undefined4 lastOperandTail;
@@ -6235,15 +6227,15 @@ int Inst__mergeSplatSourceInsts_00151370(inst, inst2, program)
           resultScaleCode = inst[0x49];
           operandRecord2 = IRInst__getOperandRecord(inst,1);
           IROperand__copyFrom(&operandCopy,operandRecord2);
-          counterSave0 = 0;
-          counterSave1 = 0;
-          counterSave2 = 0;
-          IRInst__saveCounters(inst,&counterSave0,0xffffffff);
+          counterSave[0] = 0;
+          counterSave[1] = 0;
+          counterSave[2] = 0;
+          IRInst__saveCounters(inst,&counterSave[0],0xffffffff);
           afterInst = inst[1];
           DList__unlink(inst);
           IRInst__reinitAsBinary(inst,0x12,*(undefined4 *)(program + 8));
           Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,inst);
-          IRInst__restoreCounters(inst,&counterSave0);
+          IRInst__restoreCounters(inst,&counterSave[0]);
           saturate = inst2[0x48];
           inst[0x49] = resultScaleCode;
           inst[0x48] = saturate;
@@ -7077,9 +7069,7 @@ int Inst__mergeAddWithSharedConstant_00152ea8(inst, inst2, program)
   undefined4 oneSelectB;
   undefined4 zeroSelectB;
   undefined4 zeroSelectC;
-  undefined4 counterSave0;
-  undefined4 counterSave1;
-  undefined4 counterSave2;
+  undefined4 counterSave[3];
   undefined4 lastOperandRecord;
   int lastOperandSource;
   undefined4 lastOperandTail;
@@ -7642,17 +7632,17 @@ setIsLastComponent:
                       IROperand__copyFrom(&operandCopyA[operandCopyA_IDX],operandRecord2);
                       operandRecord2 = IRInst__getOperandRecord(inst4,2);
                       IROperand__copyFrom(&operandCopyB[operandCopyB_IDX],operandRecord2);
-                      counterSave0 = 0;
-                      counterSave1 = 0;
-                      counterSave2 = 0;
-                      IRInst__saveCounters(inst,&counterSave0,0xffffffff);
+                      counterSave[0] = 0;
+                      counterSave[1] = 0;
+                      counterSave[2] = 0;
+                      IRInst__saveCounters(inst,&counterSave[0],0xffffffff);
                       afterInst = inst[1];
                       DList__unlink(inst);
                       IRInst__reinitAsTrinary(inst,0x14,compiler);
                       Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,inst);
                       inst[0x26] = 0;
                       inst[0x25] = inst[0x53];
-                      IRInst__restoreCounters(inst,&counterSave0);
+                      IRInst__restoreCounters(inst,&counterSave[0]);
                       inst[0x48] = inst2[0x48];
                       inst[0x27] = mergedLanes;
                       inst[0x49] = resultScaleCode;
@@ -8190,10 +8180,7 @@ int Inst__mergeComponentMovsIntoCnd(inst, program)
   int lastDestSelect;
   undefined4 instSrc1Select;
   undefined4 partnerSrc1Select;
-  undefined4 maskLane0;
-  undefined4 maskLane1;
-  undefined4 maskLane2;
-  undefined4 maskLane3;
+  undefined4 maskLane[4];
   int parentBlock;
   int prevNode;
   
@@ -8247,13 +8234,13 @@ int Inst__mergeComponentMovsIntoCnd(inst, program)
             laneIndex = laneIndex + 1;
             lanesLeft = lanesLeft + -1;
           } while (lanesLeft != 0);
-          maskLane1 = 0x3f800000;
-          maskLane3 = 0;
+          maskLane[1] = 0x3f800000;
+          maskLane[3] = 0;
           maskSelect = 0x10203;
-          maskLane0 = 0;
-          maskLane2 = 0;
+          maskLane[0] = 0;
+          maskLane[2] = 0;
           maskConstant = (**(code **)(**(int **)(compiler + 0x30c) + 0x154))
-                            (*(int **)(compiler + 0x30c),program,&maskLane0,&maskSelect,staleArg7,staleArg8,
+                            (*(int **)(compiler + 0x30c),program,&maskLane[0],&maskSelect,staleArg7,staleArg8,
                              0x10203);
           if (maskConstant != 0) {
             lastSplatComponent = SelectWord__splatComponent(lastDestSelect);
@@ -8724,21 +8711,10 @@ int Inst__collapseAlgebraic_00155a60(inst, pass)
   int outputScale;
   int *inst1;
   undefined4 savedField94B;
-  undefined4 constOne0;
-  undefined4 constOne1;
-  undefined4 constOne2;
-  undefined4 constOne3;
-  undefined4 constHalf0;
-  undefined4 constHalf1;
-  undefined4 constHalf2;
-  undefined4 constHalf3;
-  undefined4 constTwo0;
-  undefined4 constTwo1;
-  undefined4 constTwo2;
-  undefined4 constTwo3;
-  undefined4 lastOperandBuf0;
-  undefined4 lastOperandBuf1;
-  undefined4 lastOperandBuf2;
+  undefined4 constOne[4];
+  undefined4 constHalf[4];
+  undefined4 constTwo[4];
+  undefined4 lastOperandBuf[3];
   uint readMaskB;
   uint writeMaskB;
   uint readMaskC;
@@ -8753,18 +8729,18 @@ int Inst__collapseAlgebraic_00155a60(inst, pass)
   int useCountResult;
   uint negateOperand3Saved;
   
-  constOne3 = 0x3f800000;
-  constOne0 = 0x3f800000;
-  constOne1 = 0x3f800000;
-  constOne2 = 0x3f800000;
-  constHalf3 = 0x3f000000;
-  constTwo3 = 0x40000000;
-  constHalf0 = 0x3f000000;
-  constHalf1 = 0x3f000000;
-  constHalf2 = 0x3f000000;
-  constTwo0 = 0x40000000;
-  constTwo1 = 0x40000000;
-  constTwo2 = 0x40000000;
+  constOne[3] = 0x3f800000;
+  constOne[0] = 0x3f800000;
+  constOne[1] = 0x3f800000;
+  constOne[2] = 0x3f800000;
+  constHalf[3] = 0x3f000000;
+  constTwo[3] = 0x40000000;
+  constHalf[0] = 0x3f000000;
+  constHalf[1] = 0x3f000000;
+  constHalf[2] = 0x3f000000;
+  constTwo[0] = 0x40000000;
+  constTwo[1] = 0x40000000;
+  constTwo[2] = 0x40000000;
   instOpcode = *(int *)(*(int *)((int)inst + 0x88) + 8);
   if (instOpcode == 0x12) {
 loopSetResult:
@@ -8783,10 +8759,10 @@ loopSetResult:
 loopSetOutputScale:
       outputScale = *(int *)((int)inst + 0x124);
       operandRecord = IRInst__getOperandRecord(inst,0);
-      matchesConstantResult = IRInst__sourceMatchesConstant(inst,otherOperandIdx,*(undefined4 *)(operandRecord + 0x10),&constHalf0);
+      matchesConstantResult = IRInst__sourceMatchesConstant(inst,otherOperandIdx,*(undefined4 *)(operandRecord + 0x10),&constHalf[0]);
       if (matchesConstantResult == 0) {
         operandRecord = IRInst__getOperandRecord(inst,0);
-        matchesConstantResult = IRInst__sourceMatchesConstant(inst,otherOperandIdx,*(undefined4 *)(operandRecord + 0x10),&constTwo0);
+        matchesConstantResult = IRInst__sourceMatchesConstant(inst,otherOperandIdx,*(undefined4 *)(operandRecord + 0x10),&constTwo[0]);
         if (matchesConstantResult == 0) {
           return 0;
         }
@@ -8982,13 +8958,13 @@ setSourceDef6:
         goto loopSetOutputScale;
       }
       destRecordC = IRInst__getOperandRecord(inst,0);
-      constMatchResultB = IRInst__sourceMatchesConstant(inst,2,*(undefined4 *)(destRecordC + 0x10),&constOne0);
+      constMatchResultB = IRInst__sourceMatchesConstant(inst,2,*(undefined4 *)(destRecordC + 0x10),&constOne[0]);
       if (constMatchResultB == 0) {
         return 0;
       }
       if (*(int *)((int)inst + 0x124) == 1) {
         destRecordD = IRInst__getOperandRecord(inst,0);
-        constMatchResultC = IRInst__sourceMatchesConstant(inst,3,*(undefined4 *)(destRecordD + 0x10),&constHalf0);
+        constMatchResultC = IRInst__sourceMatchesConstant(inst,3,*(undefined4 *)(destRecordD + 0x10),&constHalf[0]);
         if (constMatchResultC != 0) {
           return 0;
         }
@@ -9185,14 +9161,14 @@ code_r0x00156744:
   operandModBitsA = *(uint *)((int)inst + operandIndex5 * 0x18 + 0xa0);
   negateOperand3 = operandModBitsA & 1;
   absOperand3 = operandModBitsA >> 1 & 1;
-  lastOperandBuf2 = 0;
-  lastOperandBuf0 = 0;
-  lastOperandBuf1 = 0;
+  lastOperandBuf[2] = 0;
+  lastOperandBuf[0] = 0;
+  lastOperandBuf[1] = 0;
   operandSelect3 = *(undefined4 *)(operandRecord4 + 0x10);
   savedField120B = *(undefined4 *)((int)inst + 0x120);
   savedField124B = *(undefined4 *)((int)inst + 0x124);
   if (hasExtraSource) {
-    IRInst__readLastOperand(inst,&lastOperandBuf0);
+    IRInst__readLastOperand(inst,&lastOperandBuf[0]);
   }
   useCount = IRInst__useCount(inst,pass);
   afterInst3 = *(int *)((int)inst + 4);
@@ -9250,7 +9226,7 @@ code_r0x00156744:
   IROperand__setModifierBits((int)newInst + 0xd4,2,absOperand3);
   IROperand__setModifierBits((int)newInst + 0xd4,1,negateOperand3);
   if (hasExtraSource) {
-    IRInst__setLastOperandFromRecord(newInst,&lastOperandBuf0,0,*(undefined4 *)(pass + 8));
+    IRInst__setLastOperandFromRecord(newInst,&lastOperandBuf[0],0,*(undefined4 *)(pass + 8));
   }
   *(int *)((int)newInst + 0x160) = useCount + *(int *)(pass + 0x478);
   if (setOperandSourceIfLegalResult != 0 && (setOperandSourceIfLegalResult2 != 0 && setOperandSourceIfLegalResult3 != 0)) {

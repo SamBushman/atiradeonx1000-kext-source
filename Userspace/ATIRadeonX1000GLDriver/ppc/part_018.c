@@ -765,11 +765,8 @@ int ilMarkInstructionRegistersUsed(tokens, hasDestination, sourceCount, programR
   uint opcodeWord;
   uint *cursor;
   uint destinationWord;
-  uint sourceWord0;
-  uint sourceWord1;
-  uint sourceWord2;
-  uint sourceExtraWord0;
-  uint sourceExtraWord1;
+  uint sourceWord[3];
+  uint sourceExtraWord[2];
   uint sourceExtraWord2 [6];
   
   cursor = tokens + 1;
@@ -792,43 +789,43 @@ int ilMarkInstructionRegistersUsed(tokens, hasDestination, sourceCount, programR
     }
   }
   if (0 < sourceCount) {
-    sourceWord0 = *cursor;
+    sourceWord[0] = *cursor;
     nextCursor = cursor + 1;
-    if ((sourceWord0 & 0x400000) != 0) {
-      sourceExtraWord0 = cursor[1];
+    if ((sourceWord[0] & 0x400000) != 0) {
+      sourceExtraWord[0] = cursor[1];
       nextCursor = cursor + 2;
     }
     cursor = nextCursor;
-    if ((sourceWord0 & 0x1800000) != 0) {
+    if ((sourceWord[0] & 0x1800000) != 0) {
       cursor = cursor + 1;
     }
-    ((int (*)())ilMarkOperandRegisterUsed)(&sourceWord0,&sourceExtraWord0,programRecord);
+    ((int (*)())ilMarkOperandRegisterUsed)(&sourceWord[0],&sourceExtraWord[0],programRecord);
   }
   if (1 < sourceCount) {
-    sourceWord1 = *cursor;
+    sourceWord[1] = *cursor;
     nextCursor = cursor + 1;
-    if ((sourceWord1 & 0x400000) != 0) {
-      sourceExtraWord1 = cursor[1];
+    if ((sourceWord[1] & 0x400000) != 0) {
+      sourceExtraWord[1] = cursor[1];
       nextCursor = cursor + 2;
     }
     cursor = nextCursor;
-    if ((sourceWord1 & 0x1800000) != 0) {
+    if ((sourceWord[1] & 0x1800000) != 0) {
       cursor = cursor + 1;
     }
-    ((int (*)())ilMarkOperandRegisterUsed)(&sourceWord1,&sourceExtraWord1,programRecord);
+    ((int (*)())ilMarkOperandRegisterUsed)(&sourceWord[1],&sourceExtraWord[1],programRecord);
   }
   nextCursor = cursor;
   if (2 < sourceCount) {
-    sourceWord2 = *cursor;
+    sourceWord[2] = *cursor;
     nextCursor = cursor + 1;
-    if ((sourceWord2 & 0x400000) != 0) {
+    if ((sourceWord[2] & 0x400000) != 0) {
       sourceExtraWord2[0] = cursor[1];
       nextCursor = cursor + 2;
     }
-    if ((sourceWord2 & 0x1800000) != 0) {
+    if ((sourceWord[2] & 0x1800000) != 0) {
       nextCursor = nextCursor + 1;
     }
-    ((int (*)())ilMarkOperandRegisterUsed)(&sourceWord2,sourceExtraWord2,programRecord);
+    ((int (*)())ilMarkOperandRegisterUsed)(&sourceWord[2],sourceExtraWord2,programRecord);
   }
   return nextCursor;
 }
@@ -850,11 +847,8 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
   undefined4 *srcStart;
   uint *srcCursor;
   uint destinationWord;
-  uint sourceWord0;
-  uint sourceWord1;
-  uint sourceWord2;
-  uint sourceExtraWord0;
-  uint sourceExtraWord1;
+  uint sourceWord[3];
+  uint sourceExtraWord[2];
   uint sourceExtraWord2 [8];
   
   srcStart = (undefined4 *)*srcCursorPtr;
@@ -898,22 +892,22 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
     }
   }
   if (0 < sourceCount) {
-    sourceWord0 = *srcCursor;
+    sourceWord[0] = *srcCursor;
     nextSrcCursor = srcCursor + 1;
-    if ((sourceWord0 & 0x400000) != 0) {
-      sourceExtraWord0 = srcCursor[1];
+    if ((sourceWord[0] & 0x400000) != 0) {
+      sourceExtraWord[0] = srcCursor[1];
       nextSrcCursor = srcCursor + 2;
     }
     srcCursor = nextSrcCursor;
-    ((int (*)())ilRemapSourceOperandRegister)(&sourceWord0,&sourceExtraWord0,programRecord);
-    *dstCursor = sourceWord0;
+    ((int (*)())ilRemapSourceOperandRegister)(&sourceWord[0],&sourceExtraWord[0],programRecord);
+    *dstCursor = sourceWord[0];
     nextSrcCursor = dstCursor + 1;
-    if ((sourceWord0 & 0x400000) != 0) {
-      dstCursor[1] = sourceExtraWord0;
+    if ((sourceWord[0] & 0x400000) != 0) {
+      dstCursor[1] = sourceExtraWord[0];
       nextSrcCursor = dstCursor + 2;
     }
     dstCursor = nextSrcCursor;
-    if ((sourceWord0 & 0x1800000) != 0) {
+    if ((sourceWord[0] & 0x1800000) != 0) {
       srcCursorWord0 = *srcCursor;
       srcCursor = srcCursor + 1;
       *dstCursor = srcCursorWord0;
@@ -921,22 +915,22 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
     }
   }
   if (1 < sourceCount) {
-    sourceWord1 = *srcCursor;
+    sourceWord[1] = *srcCursor;
     nextSrcCursor = srcCursor + 1;
-    if ((sourceWord1 & 0x400000) != 0) {
-      sourceExtraWord1 = srcCursor[1];
+    if ((sourceWord[1] & 0x400000) != 0) {
+      sourceExtraWord[1] = srcCursor[1];
       nextSrcCursor = srcCursor + 2;
     }
     srcCursor = nextSrcCursor;
-    ((int (*)())ilRemapSourceOperandRegister)(&sourceWord1,&sourceExtraWord1,programRecord);
-    *dstCursor = sourceWord1;
+    ((int (*)())ilRemapSourceOperandRegister)(&sourceWord[1],&sourceExtraWord[1],programRecord);
+    *dstCursor = sourceWord[1];
     nextSrcCursor = dstCursor + 1;
-    if ((sourceWord1 & 0x400000) != 0) {
-      dstCursor[1] = sourceExtraWord1;
+    if ((sourceWord[1] & 0x400000) != 0) {
+      dstCursor[1] = sourceExtraWord[1];
       nextSrcCursor = dstCursor + 2;
     }
     dstCursor = nextSrcCursor;
-    if ((sourceWord1 & 0x1800000) != 0) {
+    if ((sourceWord[1] & 0x1800000) != 0) {
       srcCursorWord0 = *srcCursor;
       srcCursor = srcCursor + 1;
       *dstCursor = srcCursorWord0;
@@ -944,22 +938,22 @@ int ilCopyInstructionRemapped(dstCursorPtr, srcCursorPtr, hasDestination, source
     }
   }
   if (2 < sourceCount) {
-    sourceWord2 = *srcCursor;
+    sourceWord[2] = *srcCursor;
     nextSrcCursor = srcCursor + 1;
-    if ((sourceWord2 & 0x400000) != 0) {
+    if ((sourceWord[2] & 0x400000) != 0) {
       sourceExtraWord2[0] = srcCursor[1];
       nextSrcCursor = srcCursor + 2;
     }
     srcCursor = nextSrcCursor;
-    ((int (*)())ilRemapSourceOperandRegister)(&sourceWord2,sourceExtraWord2,programRecord);
-    *dstCursor = sourceWord2;
+    ((int (*)())ilRemapSourceOperandRegister)(&sourceWord[2],sourceExtraWord2,programRecord);
+    *dstCursor = sourceWord[2];
     nextSrcCursor = dstCursor + 1;
-    if ((sourceWord2 & 0x400000) != 0) {
+    if ((sourceWord[2] & 0x400000) != 0) {
       dstCursor[1] = sourceExtraWord2[0];
       nextSrcCursor = dstCursor + 2;
     }
     dstCursor = nextSrcCursor;
-    if ((sourceWord2 & 0x1800000) != 0) {
+    if ((sourceWord[2] & 0x1800000) != 0) {
       srcCursorWord0 = *srcCursor;
       srcCursor = srcCursor + 1;
       *dstCursor = srcCursorWord0;

@@ -5863,11 +5863,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   double staleStackArg_ffffff90;
   double staleStackArg_ffffff98;
   undefined4 queryOutCount;
-  undefined4 initParam0;
-  undefined4 initParam1;
-  undefined4 initParam2;
-  undefined4 initParam3;
-  undefined4 initParam4;
+  undefined4 initParam[5];
   uint queryResult [5];
   
   engineBase = ctx + 0x240;
@@ -5985,12 +5981,12 @@ int gld_initContextHardwareState(ctx, pixelFormat)
     }
   }
   ((unsigned char *)0x00002b88)[ctx] = 1;
-  initParam0 = contextInitParam0_001aa4e8;
-  initParam1 = contextInitParam1_001aa4ec;
-  initParam4 = contextInitParam4_001aa4f8;
-  initParam2 = contextInitParam2_001aa4f0;
-  initParam3 = contextInitParam3_001aa4f4;
-  ((void (*)())gld_validateDirtyState)(engineBase,&initParam0,scratchUint5,vectorConstTable,permuteIndex,contextInitParam4_001aa4f8,contextInitParam0_001aa4e8,contextInitParam3_001aa4f4,staleFprArg1,
+  initParam[0] = contextInitParam0_001aa4e8;
+  initParam[1] = contextInitParam1_001aa4ec;
+  initParam[4] = contextInitParam4_001aa4f8;
+  initParam[2] = contextInitParam2_001aa4f0;
+  initParam[3] = contextInitParam3_001aa4f4;
+  ((void (*)())gld_validateDirtyState)(engineBase,&initParam[0],scratchUint5,vectorConstTable,permuteIndex,contextInitParam4_001aa4f8,contextInitParam0_001aa4e8,contextInitParam3_001aa4f4,staleFprArg1,
                staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff78,staleStackArg_ffffff80,
                staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
   ((int (*)())gld_buildHardwareStateBuffer)(ctx);

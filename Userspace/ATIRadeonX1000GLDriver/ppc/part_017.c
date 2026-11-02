@@ -4666,10 +4666,7 @@ int psnEncodeHwProgram(psnProgram, rsWords, programImage)
   byte depthWriteAccum;
   uint loopIndex2;
   uint *outCursor;
-  uint fieldTemp0;
-  uint fieldTemp1;
-  uint fieldTemp2;
-  uint fieldTemp3;
+  uint fieldTemp[4];
   uint *fieldTemp3Ptr;
   uint *fieldTemp1Ptr;
   uint *fieldTemp2Ptr;
@@ -4743,11 +4740,11 @@ setRsOutCount:
     hwRecordCountEnd = 1;
   }
   else {
-    fieldTemp3Ptr = &fieldTemp3;
-    fieldTemp2Ptr = &fieldTemp2;
+    fieldTemp3Ptr = &fieldTemp[3];
+    fieldTemp2Ptr = &fieldTemp[2];
     depthWriteAccum = 0;
     inst = (uint *)(loopIndex2 * 0x48 + psnProgram);
-    fieldTemp1Ptr = &fieldTemp1;
+    fieldTemp1Ptr = &fieldTemp[1];
     needEndRecord = true;
     loopIndex = 0;
     hwRecordIndex = 0;
@@ -4860,64 +4857,64 @@ setRsOutCount:
           if ((recShort1e & 0x2000) == 0) {
             signMask1e = 0;
           }
-          fieldTemp3 = (uint)*(byte *)((int)inst + 0x2a);
+          fieldTemp[3] = (uint)*(byte *)((int)inst + 0x2a);
           recByte3f = *(byte *)((int)inst + 0x3f);
           instWord24 = inst[9];
-          fieldTemp2 = instWord24 >> 0x17 & 7;
-          fieldTemp0 = instWord24 >> 0x1d;
-          fieldTemp1 = instWord24 >> 0x1a & 7;
-          ((int (*)())ilRemapSwizzleTriple)(fieldTemp3Ptr,&fieldTemp0,fieldTemp1Ptr,fieldTemp2Ptr);
-          hwWordC_f0 = fieldTemp3 & 3;
-          hwWordC_f2 = fieldTemp0 & 7;
-          hwWordC_f5 = fieldTemp1 & 7;
+          fieldTemp[2] = instWord24 >> 0x17 & 7;
+          fieldTemp[0] = instWord24 >> 0x1d;
+          fieldTemp[1] = instWord24 >> 0x1a & 7;
+          ((int (*)())ilRemapSwizzleTriple)(fieldTemp3Ptr,&fieldTemp[0],fieldTemp1Ptr,fieldTemp2Ptr);
+          hwWordC_f0 = fieldTemp[3] & 3;
+          hwWordC_f2 = fieldTemp[0] & 7;
+          hwWordC_f5 = fieldTemp[1] & 7;
           instWord24_2 = inst[9];
-          hwWordC_f8 = fieldTemp2 & 7;
-          fieldTemp3 = instWord24_2 >> 7 & 7;
-          fieldTemp1 = instWord24_2 >> 0xd & 7;
-          fieldTemp0 = instWord24_2 >> 10 & 7;
-          fieldTemp2 = (uint)*(byte *)((int)inst + 0x2b);
-          ((int (*)())ilRemapSwizzleTriple)(fieldTemp2Ptr,fieldTemp1Ptr,&fieldTemp0,fieldTemp3Ptr);
+          hwWordC_f8 = fieldTemp[2] & 7;
+          fieldTemp[3] = instWord24_2 >> 7 & 7;
+          fieldTemp[1] = instWord24_2 >> 0xd & 7;
+          fieldTemp[0] = instWord24_2 >> 10 & 7;
+          fieldTemp[2] = (uint)*(byte *)((int)inst + 0x2b);
+          ((int (*)())ilRemapSwizzleTriple)(fieldTemp2Ptr,fieldTemp1Ptr,&fieldTemp[0],fieldTemp3Ptr);
           recByte2d = *(byte *)((int)inst + 0x2d);
           recByte2e = *(byte *)((int)inst + 0x2e);
           recByte32 = *(byte *)((int)inst + 0x32);
           recByte16 = *(byte *)((int)inst + 0x16);
           recByte45 = *(byte *)((int)inst + 0x45);
-          hwWordC_f13 = fieldTemp2 & 3;
-          hwWordC_f15 = fieldTemp1 & 7;
-          hwWordC_f18 = fieldTemp0 & 7;
-          hwWordC_f21 = fieldTemp3 & 7;
-          fieldTemp0 = (uint)*(byte *)((int)inst + 0x36);
-          fieldTemp3 = (uint)*(byte *)((int)inst + 0x39);
-          ((int (*)())ilRemapSwizzleSingle)(fieldTemp3Ptr,&fieldTemp0);
-          hwWord10_f12 = fieldTemp3 & 3;
-          hwWord10_f14 = fieldTemp0 & 7;
-          fieldTemp3 = (uint)*(byte *)((int)inst + 0x37);
-          fieldTemp0 = (uint)*(byte *)((int)inst + 0x3a);
-          ((int (*)())ilRemapSwizzleSingle)(&fieldTemp0,fieldTemp3Ptr);
+          hwWordC_f13 = fieldTemp[2] & 3;
+          hwWordC_f15 = fieldTemp[1] & 7;
+          hwWordC_f18 = fieldTemp[0] & 7;
+          hwWordC_f21 = fieldTemp[3] & 7;
+          fieldTemp[0] = (uint)*(byte *)((int)inst + 0x36);
+          fieldTemp[3] = (uint)*(byte *)((int)inst + 0x39);
+          ((int (*)())ilRemapSwizzleSingle)(fieldTemp3Ptr,&fieldTemp[0]);
+          hwWord10_f12 = fieldTemp[3] & 3;
+          hwWord10_f14 = fieldTemp[0] & 7;
+          fieldTemp[3] = (uint)*(byte *)((int)inst + 0x37);
+          fieldTemp[0] = (uint)*(byte *)((int)inst + 0x3a);
+          ((int (*)())ilRemapSwizzleSingle)(&fieldTemp[0],fieldTemp3Ptr);
           instBytef = *(byte *)(inst + 0xf);
           recByte3d = *(byte *)((int)inst + 0x3d);
           instShort3_2 = *(ushort *)(inst + 3);
           recByte41 = *(byte *)((int)inst + 0x41);
           recByte22 = *(byte *)((int)inst + 0x22);
           instShort6 = *(ushort *)(inst + 6);
-          hwWord10_f19 = fieldTemp0 & 3;
+          hwWord10_f19 = fieldTemp[0] & 3;
           recByte23 = *(byte *)((int)inst + 0x23);
           instByte10 = *(byte *)(inst + 0x10);
-          hwWord10_f21 = fieldTemp3 & 7;
+          hwWord10_f21 = fieldTemp[3] & 7;
           recByte31 = *(byte *)((int)inst + 0x31);
           instWord28 = inst[10];
-          fieldTemp0 = instWord28 >> 0x1d;
-          fieldTemp2 = instWord28 >> 0x17 & 7;
-          fieldTemp1 = instWord28 >> 0x1a & 7;
-          fieldTemp3 = (uint)*(byte *)(inst + 0xb);
-          ((int (*)())ilRemapSwizzleTriple)(fieldTemp3Ptr,&fieldTemp0,fieldTemp1Ptr,fieldTemp2Ptr);
-          hwWord14_f12 = fieldTemp3 & 3;
-          hwWord14_f14 = fieldTemp0 & 7;
-          hwWord14_f17 = fieldTemp1 & 7;
-          fieldTemp0 = (uint)*(byte *)(inst + 0xe);
-          hwWord14_f20 = fieldTemp2 & 7;
-          fieldTemp2 = (uint)*(byte *)((int)inst + 0x3b);
-          ((int (*)())ilRemapSwizzleSingle)(fieldTemp2Ptr,&fieldTemp0);
+          fieldTemp[0] = instWord28 >> 0x1d;
+          fieldTemp[2] = instWord28 >> 0x17 & 7;
+          fieldTemp[1] = instWord28 >> 0x1a & 7;
+          fieldTemp[3] = (uint)*(byte *)(inst + 0xb);
+          ((int (*)())ilRemapSwizzleTriple)(fieldTemp3Ptr,&fieldTemp[0],fieldTemp1Ptr,fieldTemp2Ptr);
+          hwWord14_f12 = fieldTemp[3] & 3;
+          hwWord14_f14 = fieldTemp[0] & 7;
+          hwWord14_f17 = fieldTemp[1] & 7;
+          fieldTemp[0] = (uint)*(byte *)(inst + 0xe);
+          hwWord14_f20 = fieldTemp[2] & 7;
+          fieldTemp[2] = (uint)*(byte *)((int)inst + 0x3b);
+          ((int (*)())ilRemapSwizzleSingle)(fieldTemp2Ptr,&fieldTemp[0]);
           needEndRecord = false;
           recByte2f = *(byte *)((int)inst + 0x2f);
           recByte3e = *(byte *)((int)inst + 0x3e);
@@ -4961,8 +4958,8 @@ setRsOutCount:
           *(uint *)(loopIndex + programImage[4] + 0x14) =
                (uint)recByte3e << 0x1e |
                (recByte2f & 3) << 0x17 |
-               (fieldTemp0 & 7) << 0x1b |
-               (fieldTemp2 & 3) << 0x19 |
+               (fieldTemp[0] & 7) << 0x1b |
+               (fieldTemp[2] & 3) << 0x19 |
                hwWord14_f20 << 0x14 |
                hwWord14_f17 << 0x11 |
                hwWord14_f14 << 0xe |
@@ -10249,19 +10246,14 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
   undefined2 releaseOperandMask;
   ushort secondOperandReg;
   undefined2 secondOperandMask;
-  undefined2 *tempTableBank0;
-  undefined2 *tempTableBank1;
+  undefined2 *tempTableBank[2];
   undefined2 tempTableSplit;
   undefined4 tempTablePad;
   undefined4 zeroWordA;
   undefined4 zeroWordB;
   undefined4 zeroWordC;
   uint defOperand;
-  undefined4 defOperandPad0;
-  undefined4 defOperandPad1;
-  undefined4 defOperandPad2;
-  undefined4 defOperandPad3;
-  undefined4 defOperandPad4;
+  undefined4 defOperandPad[5];
   uint collectedRegs [519];
   
   workMask = 0xf;
@@ -10278,14 +10270,14 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
   freeListBase[1] = 0xf;
   freeListCount = 1;
   tempTableSplit = SUB42((unsigned long)useSecondBank,0);
-  tempTableBank0 = freeListBase + *(int *)(psnState + 0x30) * 2;
-  _memset(tempTableBank0,0,*(int *)(psnState + 0x30) << 3);
+  tempTableBank[0] = freeListBase + *(int *)(psnState + 0x30) * 2;
+  _memset(tempTableBank[0],0,*(int *)(psnState + 0x30) << 3);
   if (useSecondBank == (undefined2 *)0x0) {
-    tempTableBank1 = useSecondBank;
+    tempTableBank[1] = useSecondBank;
   }
   else {
-    tempTableBank1 = tempTableBank0 + *(int *)(psnState + 0x30) * 4;
-    _memset(tempTableBank1,0,*(int *)(psnState + 0x30) * 8);
+    tempTableBank[1] = tempTableBank[0] + *(int *)(psnState + 0x30) * 4;
+    _memset(tempTableBank[1],0,*(int *)(psnState + 0x30) * 8);
   }
   psnProgramWord8 = *(int *)(psnProgram + 8);
   if (psnProgramWord8 != 0) {
@@ -10310,12 +10302,12 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
             *(undefined2 *)(inst + 3) = 0;
           }
           else {
-            ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank0,&freeListBase);
+            ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank[0],&freeListBase);
             *(ushort *)(inst + 3) = releaseOperandReg;
           }
           defOperand = CONCAT22(*(undefined2 *)((int)inst + 0xe),
                                 (ushort)*(byte *)((int)inst + 0x1f)) ^ 0xf;
-          ((int (*)())psnRaAssignDefinition)(&defOperand,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+          ((int (*)())psnRaAssignDefinition)(&defOperand,&tempTableBank[0],&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
           workMask = (uint)(*(unsigned short *)((unsigned char *)&(defOperand) + 0));
           *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(defOperand) + 0));
         }
@@ -10369,7 +10361,7 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
             *(undefined1 *)((int)inst + 10) = 0;
           }
           else {
-            ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank0,&freeListBase);
+            ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank[0],&freeListBase);
             *(ushort *)((int)inst + 6) = releaseOperandReg;
             *(byte *)((int)inst + 0xf) = (byte)releaseOperandMask ^ 0xf;
           }
@@ -10380,7 +10372,7 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
             *(undefined1 *)(inst + 2) = 0;
           }
           else {
-            ((int (*)())psnRaReleaseUse)(&secondOperandReg,&tempTableBank0,&freeListBase);
+            ((int (*)())psnRaReleaseUse)(&secondOperandReg,&tempTableBank[0],&freeListBase);
             *(ushort *)(inst + 1) = secondOperandReg;
             *(byte *)((int)inst + 0xe) = (byte)secondOperandMask ^ 0xf;
           }
@@ -10395,18 +10387,18 @@ int psnReallocateTemps(psnState, psnProgram, useSecondBank, passThroughR6, sourc
       if (*(char *)(inst + 8) != '\0') {
         secondOperandMask = 8;
       }
-      ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank0,&freeListBase);
+      ((int (*)())psnRaReleaseUse)(&releaseOperandReg,&tempTableBank[0],&freeListBase);
       *(ushort *)(inst + 3) = releaseOperandReg;
       *(byte *)(inst + 5) = (byte)releaseOperandMask;
-      ((int (*)())psnRaReleaseUse)(&secondOperandReg,&tempTableBank0,&freeListBase);
+      ((int (*)())psnRaReleaseUse)(&secondOperandReg,&tempTableBank[0],&freeListBase);
       workMask = 7;
       zeroWordC = 0;
       defOperand = 0;
-      defOperandPad0 = 0;
-      defOperandPad1 = 0;
-      defOperandPad2 = 0;
-      defOperandPad3 = 0;
-      defOperandPad4 = 0;
+      defOperandPad[0] = 0;
+      defOperandPad[1] = 0;
+      defOperandPad[2] = 0;
+      defOperandPad[3] = 0;
+      defOperandPad[4] = 0;
       tempTablePad = 0;
       zeroWordA = 0;
       zeroWordB = 0;
@@ -10521,30 +10513,30 @@ code_r0x000c6c50:
       destRegBeforeAssign = *(ushort *)((int)inst + 0xe);
       scanIndex = (uint)destRegBeforeAssign;
       defOperand = CONCAT22(destRegBeforeAssign,(*(unsigned short *)((unsigned char *)&(defOperand) + 2)));
-      defOperandPad0 = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(defOperandPad0) + 2)));
-      defOperandPad1 = CONCAT22(*(undefined2 *)((int)inst + 0x12),(*(unsigned short *)((unsigned char *)&(defOperandPad1) + 2)));
-      defOperandPad2 = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(defOperandPad2) + 2)));
+      defOperandPad[0] = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(defOperandPad[0]) + 2)));
+      defOperandPad[1] = CONCAT22(*(undefined2 *)((int)inst + 0x12),(*(unsigned short *)((unsigned char *)&(defOperandPad[1]) + 2)));
+      defOperandPad[2] = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(defOperandPad[2]) + 2)));
       instShort7 = *(ushort *)(inst + 7);
       workMask = (uint)instShort7;
-      defOperandPad3 = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(defOperandPad3) + 2)));
+      defOperandPad[3] = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(defOperandPad[3]) + 2)));
       zeroWordA = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(zeroWordA) + 2)));
       zeroWordB = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(zeroWordB) + 2)));
       tempTablePad = CONCAT22(destRegBeforeAssign,(*(unsigned short *)((unsigned char *)&(tempTablePad) + 2)));
       zeroWordC = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(zeroWordC) + 2)));
-      defOperandPad4 = CONCAT22(*(undefined2 *)((int)inst + 0x1e),(*(unsigned short *)((unsigned char *)&(defOperandPad4) + 2)));
-      ((int (*)())psnRaAssignDefinition)(&defOperand,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      defOperandPad[4] = CONCAT22(*(undefined2 *)((int)inst + 0x1e),(*(unsigned short *)((unsigned char *)&(defOperandPad[4]) + 2)));
+      ((int (*)())psnRaAssignDefinition)(&defOperand,&tempTableBank[0],&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
       *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(defOperand) + 0));
-      ((int (*)())psnRaAssignDefinition)(&defOperandPad0,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
-      *(undefined2 *)(inst + 4) = (*(unsigned short *)((unsigned char *)&(defOperandPad0) + 0));
-      ((int (*)())psnRaAssignDefinition)(&defOperandPad1,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
-      *(undefined2 *)((int)inst + 0x12) = (*(unsigned short *)((unsigned char *)&(defOperandPad1) + 0));
-      ((int (*)())psnRaAssignDefinition)(&defOperandPad2,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
-      *(undefined2 *)((int)inst + 0x1a) = (*(unsigned short *)((unsigned char *)&(defOperandPad2) + 0));
-      ((int (*)())psnRaAssignDefinition)(&defOperandPad3,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
-      *(undefined2 *)(inst + 7) = (*(unsigned short *)((unsigned char *)&(defOperandPad3) + 0));
-      ((int (*)())psnRaAssignDefinition)(&defOperandPad4,&tempTableBank0,&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad[0],&tempTableBank[0],&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)(inst + 4) = (*(unsigned short *)((unsigned char *)&(defOperandPad[0]) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad[1],&tempTableBank[0],&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)((int)inst + 0x12) = (*(unsigned short *)((unsigned char *)&(defOperandPad[1]) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad[2],&tempTableBank[0],&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)((int)inst + 0x1a) = (*(unsigned short *)((unsigned char *)&(defOperandPad[2]) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad[3],&tempTableBank[0],&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
+      *(undefined2 *)(inst + 7) = (*(unsigned short *)((unsigned char *)&(defOperandPad[3]) + 0));
+      ((int (*)())psnRaAssignDefinition)(&defOperandPad[4],&tempTableBank[0],&freeListBase,passThroughR6,sourceUsage,passThroughR8,workMask,scanIndex);
       *(undefined1 *)(inst + 0xd) = 0;
-      *(undefined2 *)((int)inst + 0x1e) = (*(unsigned short *)((unsigned char *)&(defOperandPad4) + 0));
+      *(undefined2 *)((int)inst + 0x1e) = (*(unsigned short *)((unsigned char *)&(defOperandPad[4]) + 0));
       if ((lastVisitedInst != (uint *)0x0) && (*lastVisitedInst - 3 < 2)) {
         loopIndex = 0;
         passThroughR6 = (uint *)(zeroedOperandBlock + 4);

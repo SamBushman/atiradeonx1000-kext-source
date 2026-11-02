@@ -637,9 +637,15 @@ if cfg.get('symbolize_anchors'):
     _hs = list(_hdr.finditer(body))
     for _i, _h in enumerate(_hs):
         _chunk = body[_h.end():_hs[_i + 1].start() if _i + 1 < len(_hs) else len(body)]
-        for _a in re.finditer(r'(?m)^\s*([A-Za-z_]\w*) = (0x[0-9a-f]{5,6}|FUN_00[0-9a-f]{6});', _chunk):
+        _addr_by_fn = {v_: k_ for k_, v_ in fn_by_addr.items()}
+        for _a in re.finditer(r'(?m)^\s*([A-Za-z_]\w*) = (0x[0-9a-f]{5,6}|FUN_00[0-9a-f]{6}|[A-Za-z_]\w*);', _chunk):
             _lv, _lt = _a.group(1), _a.group(2)
-            _L = int(_lt[4:], 16) if _lt.startswith('FUN_') else int(_lt, 16)
+            # a renamed function (`KhanVs__deleting_dtor_1d8514`) used as a folded PIC anchor is the same thing as its FUN_ text
+            if _lt[:2] != '0x' and not _lt.startswith('FUN_'):
+                if _lt not in _addr_by_fn: continue
+                _L = _addr_by_fn[_lt]
+            else:
+                _L = int(_lt[4:], 16) if _lt.startswith('FUN_') else int(_lt, 16)
             if not (0x1000 <= _L < img_hi) or _L & 0xffff == 0 or _lv in [e_[0] for e_ in anchor_edits.get(_h.group(1), [])]: continue
             _al = {_lv}      # the variable and the variables it is copied into (`iVar7 = local_58;`)
             for _r in range(2):

@@ -2546,10 +2546,7 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
   int loopIndex;
   undefined4 *loopPtr2;
   double absValue;
-  undefined4 unitConst0;
-  undefined4 unitConst1;
-  undefined4 unitConst2;
-  undefined4 unitConst3;
+  undefined4 unitConst[4];
   float laneValue [7];
   
   loopIndex = 1;
@@ -2571,11 +2568,11 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
         scaleCodeOrFlag = scaleCodeOrFlag + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
         limitsOk = (**(code **)(*a0 + 0xfc))(a0,scaleCodeOrFlag,*(int *)(ctx + 0xb0),staleArg6,staleArg7,staleArg8,a0);
         if (limitsOk != 0) {
-          unitConst0 = 0x3f800000;
-          unitConst1 = 0x3f800000;
-          unitConst2 = 0x3f800000;
-          unitConst3 = 0x3f800000;
-          literalValueNumber = ((int (*)())ValueKey__setLiteralVec4Operand)(loopIndex,&unitConst0,*(undefined4 *)(ctx + 0xb0),
+          unitConst[0] = 0x3f800000;
+          unitConst[1] = 0x3f800000;
+          unitConst[2] = 0x3f800000;
+          unitConst[3] = 0x3f800000;
+          literalValueNumber = ((int (*)())ValueKey__setLiteralVec4Operand)(loopIndex,&unitConst[0],*(undefined4 *)(ctx + 0xb0),
                                *(undefined4 *)(ctx + 0x238));
           keyInst = *(int *)(ctx + 0xb0);
           *loopPtr2 = literalValueNumber;

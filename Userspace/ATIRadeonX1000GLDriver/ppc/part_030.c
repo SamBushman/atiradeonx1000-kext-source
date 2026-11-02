@@ -1318,8 +1318,7 @@ int IRInst__retargetOpcodeFromOperands(inst, compiler)
   int oldOpcode;
   undefined4 field4;
   int operandCount;
-  int operandWord0;
-  int operandWord1;
+  int operandWord[2];
   int operandWord2 [4];
   
   oldOpcode = *(int *)(inst[0x22] + 8);
@@ -1327,11 +1326,11 @@ int IRInst__retargetOpcodeFromOperands(inst, compiler)
   opcodeInfo = Opcode__getInfo(field4);
   inst[0x22] = opcodeInfo;
   operandCount = (**(code **)(*inst + 0x14))(inst);
-  SelectWord__fillUnusedWithFirstUsed(&operandWord0,inst[0x2d]);
-  inst[0x2d] = operandWord0;
+  SelectWord__fillUnusedWithFirstUsed(&operandWord[0],inst[0x2d]);
+  inst[0x2d] = operandWord[0];
   if (1 < operandCount) {
-    SelectWord__fillUnusedWithFirstUsed(&operandWord1,inst[0x33]);
-    inst[0x33] = operandWord1;
+    SelectWord__fillUnusedWithFirstUsed(&operandWord[1],inst[0x33]);
+    inst[0x33] = operandWord[1];
   }
   if (2 < operandCount) {
     SelectWord__fillUnusedWithFirstUsed(operandWord2,inst[0x39]);

@@ -5825,8 +5825,7 @@ int R300VSchedModel__vslot27(this, inst)
   uint src3CopyOrLaneMask;
   uint src3CopyWord1;
   uint src3CopyWord5;
-  uint src2CopyWord0;
-  uint src2CopyWord1;
+  uint src2CopyWord[2];
   uint src2CopyWord5;
   undefined4 readMask1;
   undefined4 selectMasked1;
@@ -5885,11 +5884,11 @@ int R300VSchedModel__vslot27(this, inst)
     src3CopyOrLaneMask = callResult2;
     src3CopyWord1 = callResult2;
     src3CopyWord5 = callResult2;
-    src2CopyWord0 = callResult2;
-    src2CopyWord1 = callResult2;
+    src2CopyWord[0] = callResult2;
+    src2CopyWord[1] = callResult2;
     src2CopyWord5 = callResult2;
     src2Record = IRInst__getOperandRecord(inst,2);
-    IROperand__copyFrom(&src2CopyWord0,src2Record);
+    IROperand__copyFrom(&src2CopyWord[0],src2Record);
     src3Record = IRInst__getOperandRecord(inst,3);
     IROperand__copyFrom(&src3CopyOrLaneMask,src3Record);
     callResult = IRInst__create(0x29,*(undefined4 *)(this + 8));
@@ -5925,7 +5924,7 @@ int R300VSchedModel__vslot27(this, inst)
     *(undefined4 *)((int)inst3 + 0x9c) = destSelect;
     IRInst__setOperandSource(inst3,1,callResult,0,*(undefined4 *)(this + 8));
     newSrc2Record = IRInst__getOperandRecord(inst3,2);
-    IROperand__copyFrom(newSrc2Record,&src2CopyWord0);
+    IROperand__copyFrom(newSrc2Record,&src2CopyWord[0]);
     *(int *)((int)inst3 + 0x160) = *(int *)(program + 0x478) + 1;
     Block__insertInstBefore(block,inst,inst3);
     levelOffset = inst[0x58] - *(int *)(program + 0x478);
