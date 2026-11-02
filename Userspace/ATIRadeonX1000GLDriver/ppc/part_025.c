@@ -511,89 +511,67 @@ int SelectWord__fillUnusedWithFirstUsed(result, selectWord)
 }
 
 /* SelectWord__canonicalize @ 0xf3470 (340 bytes) */
+/* Hand-rewritten from the stock disassembly (Nov 1, GL feature-suite alignment with stock): the Ghidra-derived body indexed the spilled
+ * selectWord home slot through `unsigned int *` (so lane[i] read 4 bytes apart) and turned the "unused lane -> identity component" stores into
+ * CONCAT12/CONCAT11 forms that stored the NEXT lane's byte instead of 1/2/3, so every texture-op record got swizzle word 0 instead of 0x1b1b0000.
+ * Lanes are the 4 bytes of selectWord, byte 0 = most significant; component 4 = lane unused. */
 int SelectWord__canonicalize(outSelect, selectWord)
   uint *outSelect;
   uint selectWord;
 {
-  byte *laneCursor;
-  bool lane0Unused;
-  int loopCounter;
-  unsigned int ghidra_home[8] = { outSelect, selectWord, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool hasUnusedLane;
-  bool usedLanesAgree;
-  uint lane0Byte;
+  unsigned char lane[4];
   uint splatComponent;
-  int lanesLeft;
-  byte *laterLaneCursor;
-  uint laneComponent;
+  bool usedLanesAgree;
+  bool hasUnusedLane;
   int laneIndex;
-  int nextLane;
-  
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord;
-  lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
-  (*(byte *)((unsigned char *)ghidra_home + 4)) = (byte)(selectWord >> 0x18);
-  splatComponent = (uint)(*(byte *)((unsigned char *)ghidra_home + 4));
-  if (splatComponent == 4) {
-    usedLanesAgree = true;
+  int laterLane;
+
+  lane[0] = (unsigned char)(selectWord >> 0x18);
+  lane[1] = (unsigned char)(selectWord >> 0x10);
+  lane[2] = (unsigned char)(selectWord >> 8);
+  lane[3] = (unsigned char)selectWord;
+  splatComponent = lane[0];
+  usedLanesAgree = true;
+  if (lane[0] == 4) {
+    /* lane 0 unused: the splat component is the first used lane after it; any later used lane that differs breaks the splat */
     laneIndex = 1;
     do {
-      laneComponent = (uint)(&(*(unsigned int *)((unsigned char *)ghidra_home + 4)))[laneIndex];
-      nextLane = laneIndex;
-      if ((laneComponent != 4) && (nextLane = laneIndex + 1, splatComponent = laneComponent, nextLane < 4)) {
-        lanesLeft = 4 - nextLane;
-        laterLaneCursor = (byte *)(&(*(unsigned int *)((unsigned char *)ghidra_home + 5)) + laneIndex);
-        do {
-          if ((*laterLaneCursor != 4) && (laneComponent != *laterLaneCursor)) {
+      if (lane[laneIndex] != 4) {
+        splatComponent = lane[laneIndex];
+        for (laterLane = laneIndex + 1; laterLane < 4; laterLane = laterLane + 1) {
+          if ((lane[laterLane] != 4) && (lane[laneIndex] != lane[laterLane])) {
             usedLanesAgree = false;
           }
-          nextLane = nextLane + 1;
-          laterLaneCursor = laterLaneCursor + 1;
-          lanesLeft = lanesLeft + -1;
-        } while (lanesLeft != 0);
+        }
+        break;
       }
-      laneIndex = nextLane + 1;
+      laneIndex = laneIndex + 1;
     } while (laneIndex < 4);
   }
   else {
     hasUnusedLane = false;
-    loopCounter = 4;
-    usedLanesAgree = true;
-    laneCursor = &(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-    do {
-      if (*laneCursor == 4) {
+    for (laneIndex = 0; laneIndex < 4; laneIndex = laneIndex + 1) {
+      if (lane[laneIndex] == 4) {
         hasUnusedLane = true;
       }
-      else if (splatComponent != *laneCursor) {
+      else if (splatComponent != lane[laneIndex]) {
         usedLanesAgree = false;
       }
-      laneCursor = laneCursor + 1;
-      loopCounter = loopCounter + -1;
-    } while (loopCounter != 0);
-    if (!hasUnusedLane) goto storeLane0;
+    }
+    if (!hasUnusedLane) {
+      *outSelect = selectWord;
+      return;
+    }
   }
   if (usedLanesAgree) {
     *outSelect = (laneWordSplatTable_001aa818)[splatComponent];
     return;
   }
-  lane0Unused = (*(byte *)((unsigned char *)ghidra_home + 4)) == 4;
-  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = lane0Byte;
-  if (lane0Unused) {
-    (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = selectWord & 0xffffff;
-  }
-  if ((*(char *)((unsigned char *)ghidra_home + 5)) == '\x04') {
-    (*(char *)((unsigned char *)ghidra_home + 5)) = CONCAT12(1,(*(char *)((unsigned char *)ghidra_home + 6)));
-  }
-  if ((*(char *)((unsigned char *)ghidra_home + 6)) == '\x04') {
-    (*(char *)((unsigned char *)ghidra_home + 6)) = CONCAT11(2,(*(char *)((unsigned char *)ghidra_home + 7)));
-  }
-  lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
-  if ((*(char *)((unsigned char *)ghidra_home + 7)) == '\x04') {
-    (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = CONCAT31((*(unsigned char *)((unsigned char *)ghidra_home + 4)),3);
-    lane0Byte = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
-  }
-storeLane0:
-  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = lane0Byte;
-  *outSelect = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
+  if (lane[0] == 4) lane[0] = 0;
+  if (lane[1] == 4) lane[1] = 1;
+  if (lane[2] == 4) lane[2] = 2;
+  if (lane[3] == 4) lane[3] = 3;
+  *outSelect = (uint)lane[0] << 0x18 | (uint)lane[1] << 0x10 | (uint)lane[2] << 8 | lane[3];
   return;
 }
 
