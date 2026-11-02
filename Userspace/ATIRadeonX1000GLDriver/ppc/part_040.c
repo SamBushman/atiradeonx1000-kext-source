@@ -1325,7 +1325,7 @@ int pass_flatten_ifs(flattenPass)
         compiler = *(int *)(flattenPass + 8);
         if (*(int *)(compiler + 0x6a8) <= *(int *)(*(int *)(compiler + 0x6c4) + 0x15c)) break;
         ifHeader = block[0x4b];
-        targetCanFlatten = (**(code **)(**(int **)(compiler + 0x30c) + 0x114))(*(int **)(compiler + 0x30c),ifHeader);
+        targetCanFlatten = (**(code **)(**(int **)(compiler + 0x30c) + 0x114))(*(int **)(compiler + 0x30c),ifHeader,compiler);   /* r5 = compiler (mr/lwz 8(r22) at 0x12d360): shouldFlattenIf reads it as optionSource */
         if (targetCanFlatten == 0) break;
         canFlattenResult = IfHeader__canFlatten(ifHeader,canFlattenOut);
         if ((int)((ulonglong)canFlattenResult >> 0x20) != 0) break;
@@ -1593,7 +1593,7 @@ int pass_flatten_ifs(flattenPass)
         branchInst[5] = branchInst[5] & 0xffffffef;
         releaseFn = *(code **)(*branchInst + 0xc);
         compilerArg = *(undefined4 *)(flattenPass + 8);
-        (*releaseFn)(branchInst,*(uint *)(flattenPass + 0x30) >> 7 & 1);
+        (*releaseFn)(branchInst,*(uint *)(flattenPass + 0x30) >> 7 & 1,compilerArg);   /* r5 = flattenPass+8 (lwz 8(r22) at 0x12db30): removeFromListEx reads it as its compiler */
         conditionHasNoUses = IRInst__hasNoUses(conditionSource,flattenPass,compilerArg,staleArg6,staleArg7,staleArg8,releaseFn);
         if (conditionHasNoUses != 0) {
           (**(code **)(*conditionSource + 0xc))

@@ -2038,7 +2038,7 @@ int RegAlloc__run(pass)
       ((int (*)())RegAlloc__addDefinitionNodes)(*(undefined4 *)(pass + 0x3c0));
     }
     backendB = *(int **)(*(int *)(pass + 8) + 0x30c);
-    (**(code **)(*backendB + 0x144))(backendB,*(undefined4 *)(pass + 0x464),pass);
+    (**(code **)(*backendB + 0x144))(backendB,*(undefined4 *)(pass + 0x464),pass,*(undefined4 *)(pass + 8));   /* r6 = compiler (lwz r6,8(r30) at 0x1348e4) */
     ((int (*)())RegAlloc__insertSpillCode)(pass,*(undefined4 *)(pass + 0x3c0));
     ((int (*)())Program__freeBlockBitsets)(pass);
     if (allocationRound != 0) {

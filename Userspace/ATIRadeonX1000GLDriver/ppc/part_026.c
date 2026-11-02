@@ -7632,7 +7632,10 @@ code_r0x00100810:
         argR8 = (uint ******)((uint)sourceToken1Word >> 0x10 & 0x3f);
         ifConditionObject = (void *)(**(code **)(*hwDescription + 0x24))
                                     (hwDescription,(uint)*tokenWords >> 0x10 & 7,sourceRegisterIndexB,
-                                     (uint)sourceToken0Word >> 0x10 & 0x3f,registerIndex,argR8,stagedSelectWord,ilReader);
+                                     (uint)sourceToken0Word >> 0x10 & 0x3f,registerIndex,argR8,stagedSelectWord,ilReader,
+                                     /* stack args 9 and 10 (stw 0x38(r1)/0x3c(r1) at 0x102d4c in stock): the current block and the compiler;
+                                        the callee reads both (insertAfter, compiler), the 8-register prototype from the decompile dropped them */
+                                     currentBlock,compiler);
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
         *blockAllocation4 = compilerArenaA;

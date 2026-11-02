@@ -2756,17 +2756,16 @@ int gld_classifyOperand(operandSpace, operandIndex, unusedArgR5, unusedArgR6, un
 /* gld_uploadParamConstants @ 0xabab0 (164 bytes) */
 void gld_uploadParamConstants(int glContext,int a1,undefined4 a2,double fpPassThrough1)
 {
-  int allocaOffset;
-  undefined1 allocaBase [16];
-  undefined1 constantBuffer [20];
+  int constantCount;
+  unsigned char *constantBuffer;
   
-  allocaOffset = *(int *)(*(int *)(a1 + 0x74) + 0x84) * -0x10;
-  *(unsigned char **)(allocaBase + allocaOffset) = ((unsigned int)__builtin_frame_address(0));
-  ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84),
-               constantBuffer + allocaOffset,fpPassThrough1);
+  /* stock allocates count*0x10 bytes on the stack (alloca: stwux r1,r1,...); the decompile's "buffer minus count*0x10 below a fixed local" wrote below the
+     frame, where the callee's own frame then overwrote the constants (live: gldSetUnitScaleConstants looped on garbage forever) */
+  constantCount = *(int *)(*(int *)(a1 + 0x74) + 0x84);
+  constantBuffer = (unsigned char *)__builtin_alloca(constantCount * 0x10);
+  ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),constantCount,constantBuffer,fpPassThrough1);
   (**(code **)(((unsigned char *)0x00001280) + glContext))
-            (glContext,a2,0,0,constantBuffer + allocaOffset,*(undefined4 *)(*(int *)(a1 + 0x74) + 0x84)
-             ,1);
+            (glContext,a2,0,0,constantBuffer,constantCount,1);
   return;
 }
 

@@ -2328,11 +2328,12 @@ int fragmentTranslateTrig(translator, slot, ilInstr)
   int tokenCount;
   undefined4 tempRegister;
   int *tokenDataPtrAddr;
-  undefined4 ilInstOpcode;
-  undefined4 ilInstDst;
-  undefined4 ilInstDstMask;
-  undefined4 ilInstSrc0;
-  undefined4 ilInstSwz0;
+  undefined4 ilInst_blk[9];   /* one real 0x24-byte IL instruction record (see Tools/userspace/fix_il_inst_blocks.py) */
+#define ilInstOpcode ilInst_blk[0]
+#define ilInstDst ilInst_blk[1]
+#define ilInstDstMask ilInst_blk[2]
+#define ilInstSrc0 ilInst_blk[3]
+#define ilInstSwz0 ilInst_blk[6]
   
   _memcpy(&ilInstOpcode,ilInstr,0x24);
   tempRegister = *(undefined4 *)(translator + 0x20);
@@ -2389,6 +2390,11 @@ storeTranslator:
   *(int *)(translator + 0x20) = *(int *)(translator + 0x20) + -1;
   return *(undefined4 *)(translator + 0x24);
 }
+#undef ilInstOpcode
+#undef ilInstDst
+#undef ilInstDstMask
+#undef ilInstSrc0
+#undef ilInstSwz0
 
 /* fragmentTranslateAngleConvert @ 0x41510 (548 bytes) */
 int fragmentTranslateAngleConvert(emitter, slot, entryHeader, srcRegWord1, unusedArg5, unusedArg6, unusedArg7)
@@ -2507,13 +2513,14 @@ int fragmentTranslateMod(translator, slot, ilInstr)
   dword *tokenWord2Ptr;
   undefined **recordPtr2;
   int *tokenDataPtrAddr;
-  undefined4 ilInstAOpcode;
-  undefined4 ilInstADst;
-  dword ilInstADstMask;
-  undefined4 ilInstASrc[3];
-  undefined *ilInstASwz0;
-  uint ilInstASwz1;
-  undefined4 ilInstASwz2;
+  undefined4 ilInstA_blk[9];   /* one real 0x24-byte IL instruction record (see Tools/userspace/fix_il_inst_blocks.py) */
+#define ilInstAOpcode ilInstA_blk[0]
+#define ilInstADst ilInstA_blk[1]
+#define ilInstADstMask ilInstA_blk[2]
+#define ilInstASrc (&ilInstA_blk[3])
+#define ilInstASwz0 (*(undefined * *)&ilInstA_blk[6])
+#define ilInstASwz1 ilInstA_blk[7]
+#define ilInstASwz2 ilInstA_blk[8]
   
   _memset(&ilInstAOpcode,0,0x24);
   translatorError = *(int *)(translator + 0x24);
@@ -2687,6 +2694,13 @@ setRecordPtr2:
   } while (&ilInstASwz0 != recordPtr2);
   return 0;
 }
+#undef ilInstAOpcode
+#undef ilInstADst
+#undef ilInstADstMask
+#undef ilInstASrc
+#undef ilInstASwz0
+#undef ilInstASwz1
+#undef ilInstASwz2
 
 /* fragmentTranslateAtn @ 0x41c00 (4544 bytes) */
 int fragmentTranslateAtn(emitter, slot, instr)
@@ -5701,15 +5715,16 @@ int fragmentTranslateArithmetic(translator, slot)
   int opTableBase;
   int opRecord;
   int *tokenDataPtrAddr;
-  undefined4 ilInstAOpcode;
-  undefined4 ilInstADst;
-  uint ilInstADstMask;
-  undefined4 ilInstASrc0;
-  undefined1 ilInstASrc1 [2];
-  short ilInstASrc1Hi;
-  uint ilInstASrc2;
-  uint ilInstASwz0;
-  undefined1 ilInstASwz1 [32];
+  undefined4 ilInstA_blk[16];   /* one real 0x24-byte IL instruction record (see Tools/userspace/fix_il_inst_blocks.py) */
+#define ilInstAOpcode ilInstA_blk[0]
+#define ilInstADst ilInstA_blk[1]
+#define ilInstADstMask ilInstA_blk[2]
+#define ilInstASrc0 ilInstA_blk[3]
+#define ilInstASrc1 ((undefined1 *)&ilInstA_blk[4])
+#define ilInstASrc1Hi (*(short *)((char *)&ilInstA_blk[4] + 2))
+#define ilInstASrc2 ilInstA_blk[5]
+#define ilInstASwz0 ilInstA_blk[6]
+#define ilInstASwz1 ((undefined1 *)&ilInstA_blk[7])
   
   opTableBase = *translator + *(int *)(*translator + 0x54) * 8;
   _memset(&ilInstAOpcode,0,0x24);
@@ -5854,6 +5869,15 @@ loopCheckTranslator2:
   }
   return translator[9];
 }
+#undef ilInstAOpcode
+#undef ilInstADst
+#undef ilInstADstMask
+#undef ilInstASrc0
+#undef ilInstASrc1
+#undef ilInstASrc1Hi
+#undef ilInstASrc2
+#undef ilInstASwz0
+#undef ilInstASwz1
 
 /* fragmentInstructionToIL @ 0x46e90 (7800 bytes) */
 int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
@@ -5964,17 +5988,19 @@ int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unus
   uint dstMask2;
   uint *reservedTokens;
   undefined4 tempWord[6];
-  undefined4 ilInstBOpcode;
-  undefined4 ilInstBDst;
-  uint ilInstBDstMask;
-  undefined4 ilInstBSrc[2];
-  undefined *ilInstBSwz0;
-  undefined *ilInstBSwz12 [2];
-  undefined4 ilInstAOpcode;
-  undefined4 ilInstADst;
-  uint ilInstADstMask;
-  undefined4 ilInstASrc[3];
-  undefined *ilInstASwz[3];
+  undefined4 ilInstB_blk[9];   /* one real 0x24-byte IL instruction record (see Tools/userspace/fix_il_inst_blocks.py) */
+#define ilInstBOpcode ilInstB_blk[0]
+#define ilInstBDst ilInstB_blk[1]
+#define ilInstBDstMask ilInstB_blk[2]
+#define ilInstBSrc (&ilInstB_blk[3])
+#define ilInstBSwz0 (*(undefined * *)&ilInstB_blk[6])
+#define ilInstBSwz12 ((undefined **)(ilInstB_blk + 7))
+  undefined4 ilInstA_blk[9];   /* one real 0x24-byte IL instruction record (see Tools/userspace/fix_il_inst_blocks.py) */
+#define ilInstAOpcode ilInstA_blk[0]
+#define ilInstADst ilInstA_blk[1]
+#define ilInstADstMask ilInstA_blk[2]
+#define ilInstASrc (&ilInstA_blk[3])
+#define ilInstASwz ((undefined **)(ilInstA_blk + 6))
   int src1RegSpan;
   int src0RegSpan;
   int dstRegSpan;
@@ -6816,6 +6842,17 @@ joined_r0x0004802c:
   }
   return returnCode;
 }
+#undef ilInstAOpcode
+#undef ilInstADst
+#undef ilInstADstMask
+#undef ilInstASrc
+#undef ilInstASwz
+#undef ilInstBOpcode
+#undef ilInstBDst
+#undef ilInstBDstMask
+#undef ilInstBSrc
+#undef ilInstBSwz0
+#undef ilInstBSwz12
 
 /* fragmentProgramToIL @ 0x48da0 (6552 bytes) */
 int fragmentProgramToIL(translator)
@@ -6911,11 +6948,12 @@ int fragmentProgramToIL(translator)
   int programObj3;
   int tokenCopyOffset;
   int unitsLeft;
-  undefined4 ilInstAOpcode;
-  undefined4 ilInstADst;
-  uint ilInstADstMask;
-  undefined4 ilInstASrc[3];
-  undefined *ilInstASwzWords [10];
+  undefined4 ilInstA_blk[16];   /* one real 0x24-byte IL instruction record (see Tools/userspace/fix_il_inst_blocks.py) */
+#define ilInstAOpcode ilInstA_blk[0]
+#define ilInstADst ilInstA_blk[1]
+#define ilInstADstMask ilInstA_blk[2]
+#define ilInstASrc (&ilInstA_blk[3])
+#define ilInstASwzWords ((undefined **)(ilInstA_blk + 6))
   undefined4 intToDoubleHiA;
   uint intToDoubleLoA;
   undefined4 intToDoubleHiB;
@@ -7880,6 +7918,11 @@ storeTranslator2:
 returnTranslator:
   return translator[9];
 }
+#undef ilInstAOpcode
+#undef ilInstADst
+#undef ilInstADstMask
+#undef ilInstASrc
+#undef ilInstASwzWords
 
 /* floatToFp24 @ 0x4a7d0 (80 bytes) */
 uint floatToFp24(double value)
