@@ -516,7 +516,7 @@ def rewrite_pair_results(chunk, ret64):
     # the right-hand side is parsed, not matched: Ghidra wraps a long call after its name (`uVar64 = TParseContext__addConstMatrixNode\n
     # (param_1,...)`: yyparse's constant-matrix index node came out null - `m[1]` of a `const mat2` typed as `const float`), and an indirect call
     # (`(**(code **)(*p + 0x18))(p)`, `code` returns int) is a 32-bit result too
-    n = 0; out = []; i = 0
+    n = 0; out = []; i = 0; pair_vars = set()
     for m in re.finditer(r'(?m)(?<![\w.])(%s) = ' % '|'.join(sorted(map(re.escape, v64))), body):
         st = m.end()
         if st < i:
@@ -550,9 +550,15 @@ def rewrite_pair_results(chunk, ret64):
             continue       # not a call (an expression, a cast)
         out.append(body[i:m.start()])
         out.append('%s = GH_PAIR_HI((%s), %s)' % (m.group(1), rhs.strip(), m.group(1)))
+        pair_vars.add(m.group(1))
         i = j; n += 1
     out.append(body[i:])
     body = ''.join(out)
+    # the low word `old` is read by GH_PAIR_HI: if the variable was never written before, that read is undefined behaviour, which an optimising
+    # compiler (gcc -O1 tree-ccp) exploits (issue #209: gld_buildSmoothPointMask lost line smoothing/stipple). The stock value is just whatever r4
+    # held, so give the declaration a defined one.
+    for v in sorted(pair_vars):
+        body = re.sub(r'(?m)^(\s+(?:ulonglong|longlong|undefined8|unsigned long long|long long)\s+%s);' % re.escape(v), r'\1 = 0;', body, count=1)
     return head + body, n
 
 
