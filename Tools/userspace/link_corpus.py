@@ -1439,6 +1439,10 @@ static inline unsigned long long GH_D2ULL(double d) { union { double d; unsigned
 static inline void GH_DCBZ(unsigned int p) { __asm__ __volatile__("dcbz 0,%0" : : "r"(p) : "memory"); }
 /* v0-v2 are live only between the lvx and the stvx, but Darwin saves a thread's vector registers across a context switch only for the bits set in VRSAVE (SPR 256):
    without them an interrupt inside the window loses the operands (GLDriver FUN_0001eaf0: 1 in ~15 test runs returned a different checksum). Set v0-v2's bits around the asm, restore after */
+#ifdef __VEC__   /* compiled with -maltivec (build.sh does that for the one file that uses vec16): real vector registers, the compiler handles VRSAVE */
+static inline vec16 GH_VPERM(vec16 a, vec16 b, vec16 c) { return vec_perm(a, b, c); }
+static inline vec16 GH_VSEL(vec16 a, vec16 b, vec16 c) { return vec_sel(a, b, c); }
+#else
 static inline vec16 GH_VPERM(vec16 a, vec16 b, vec16 c) {
     unsigned int vs0, vs1; vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));
     __asm__ __volatile__("mfspr %0,256\\n\\toris %1,%0,0xe000\\n\\tmtspr 256,%1\\n\\tlvx v0,0,%3\\n\\tlvx v1,0,%4\\n\\tlvx v2,0,%5\\n\\tvperm v0,v0,v1,v2\\n\\tstvx v0,0,%2\\n\\tmtspr 256,%0" : "=&r"(vs0), "=&r"(vs1) : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
@@ -1449,6 +1453,7 @@ static inline vec16 GH_VSEL(vec16 a, vec16 b, vec16 c) {
     __asm__ __volatile__("mfspr %0,256\\n\\toris %1,%0,0xe000\\n\\tmtspr 256,%1\\n\\tlvx v0,0,%3\\n\\tlvx v1,0,%4\\n\\tlvx v2,0,%5\\n\\tvsel v0,v0,v1,v2\\n\\tstvx v0,0,%2\\n\\tmtspr 256,%0" : "=&r"(vs0), "=&r"(vs1) : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
     return r;
 }
+#endif
 #define vectorPermute GH_VPERM
 #define vectorConditionalSelect GH_VSEL
 #define dataCacheBlockClearToZero(p) GH_DCBZ((unsigned int)(p))
@@ -1523,7 +1528,7 @@ kind = '-dynamiclib' if m.filetype == 6 else '-bundle'
 ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usage: sh build.sh [OUT_NAME]',
       'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc %s -w -fPIC -fno-common -force_cpusubtype_ALL%s"' % (os.environ.get('LINK_OPT', '-O0'), ' -finstrument-functions' if os.environ.get('COVERAGE') else ''),
       'rm -rf obj; mkdir obj',
-      'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; gcc $CFLAGS -c $f -o obj/${f%.c}.o || echo "COMPILE FAIL $f"; done',
+      'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; XF=; grep -qw vec16 $f && XF=-maltivec; gcc $CFLAGS $XF -c $f -o obj/${f%.c}.o || echo "COMPILE FAIL $f"; done',
       'as -arch ppc -o obj/data.o data.s',
       'as -arch ppc -o obj/code.o code.s',
       '# INSTALL overrides the install name (a dlopen() of a copy that keeps the stock name returns the already-loaded system image)',

@@ -98,8 +98,13 @@ typedef unsigned long long uint64_t_g;
    `param[-2].reserved[2]` is __cxa_exception::terminateHandler) */
 typedef struct _Unwind_Exception { unsigned long long exception_class; void (*exception_cleanup)(); unsigned long private_1, private_2; unsigned long reserved[3]; } __attribute__((aligned(16))) _Unwind_Exception;
 typedef struct dwarf_eh_bases { void *tbase, *dbase, *func; } dwarf_eh_bases;
+#ifdef __VEC__   /* -maltivec: a real vector register (issue #209: the struct form made every vperm a store/lvx/VRSAVE round trip, 6.7% of UT2004 CPU in copyIndices16Swapped) */
+#include <altivec.h>
+typedef __vector unsigned char vec16;
+#else
 typedef struct { unsigned char v[16]; } vec16;   /* AltiVec 128-bit register */
 extern vec16 vectorPermute(), vectorConditionalSelect();
+#endif
 #define ZEXT816(x) (x)
 #define SEXT48(x) ((longlong)(int)(x))
 #define sync(n) __asm__ __volatile__("sync" ::: "memory")
