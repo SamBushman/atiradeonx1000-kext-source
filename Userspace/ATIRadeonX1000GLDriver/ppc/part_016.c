@@ -429,18 +429,18 @@ int gld_copyTexCombinerSources(glContextPtr4, dirtyBitsWord4)
 /* gld_updateInverseMatrix @ 0xa8630 (968 bytes) */
 double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8)
 {
-  double fpPassThrough1 = 0.0;
-  double fpPassThrough2 = 0.0;
-  double fpPassThrough3 = 0.0;
-  double fpPassThrough4 = 0.0;
-  double fpPassThrough5 = 0.0;
-  double fpPassThrough6 = 0.0;
-  double fpPassThrough7 = 0.0;
-  double fpPassThrough8 = 0.0;
+  float fpPassThrough1 = 0.0;
+  float fpPassThrough2 = 0.0;
+  float fpPassThrough3 = 0.0;
+  float fpPassThrough4 = 0.0;
+  float fpPassThrough5 = 0.0;
+  float fpPassThrough6 = 0.0;
+  float fpPassThrough7 = 0.0;
+  float fpPassThrough8 = 0.0;
   uint loopIndex;
   uint glContextWord40;
   uint glContextWord38;
-  double productM03;
+  float productM03;
   float minorA;
   float scaledCofactor2;
   float minorB;
@@ -448,9 +448,9 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
   float minorD;
   float minorE;
   float minorF;
-  double scaledMinorE;
-  double productM02;
-  double productM03B;
+  float scaledMinorE;
+  float productM02;
+  float productM03B;
   float m00;
   float m11;
   float scaledCofactor3;
@@ -471,23 +471,23 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
   uint unitCount;
   int unitsLeft;
   undefined1 inverseValid;
-  double inverseDeterminant;
-  double minorG;
-  double m13;
-  double m23;
-  double minorH;
-  double minorI;
-  double scaledMinorA;
-  double minorJ;
-  double m03;
-  double scaledMinorB;
-  double m33;
-  double m32;
-  double m12;
-  double m02;
-  double scaledMinorC;
-  double m22;
-  double scaledMinorD;
+  float inverseDeterminant;
+  float minorG;
+  float m13;
+  float m23;
+  float minorH;
+  float minorI;
+  float scaledMinorA;
+  float minorJ;
+  float m03;
+  float scaledMinorB;
+  float m33;
+  float m32;
+  float m12;
+  float m02;
+  float scaledMinorC;
+  float m22;
+  float scaledMinorD;
   
   if ((dirtyBitsWord8 & 8) != 0) {
     *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x80;
@@ -496,102 +496,102 @@ double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8
   }
   if (((dirtyBitsWord8 & 0x3f000008) != 0) && (*(int *)(((unsigned char *)0x00003e28) + engineState) != 0)) {
     m00 = *(float *)(engineState + 0x1920);
-    m03 = (double)*(float *)(engineState + 0x192c);
-    m32 = (double)*(float *)(engineState + 0x1958);
-    m33 = (double)*(float *)(engineState + 0x195c);
-    m02 = (double)*(float *)(engineState + 0x1928);
-    m12 = (double)*(float *)(engineState + 0x1938);
-    m22 = (double)*(float *)(engineState + 0x1948);
-    m13 = (double)*(float *)(engineState + 0x193c);
+    m03 = *(float *)(engineState + 0x192c);
+    m32 = *(float *)(engineState + 0x1958);
+    m33 = *(float *)(engineState + 0x195c);
+    m02 = *(float *)(engineState + 0x1928);
+    m12 = *(float *)(engineState + 0x1938);
+    m22 = *(float *)(engineState + 0x1948);
+    m13 = *(float *)(engineState + 0x193c);
     m11 = *(float *)(engineState + 0x1934);
-    minorA = (float)(m02 * m33 - (double)(float)(m03 * m32));
-    minorB = (float)(m02 * m13 - (double)(float)(m03 * m12));
-    minorC = (float)(m12 * m33 - (double)(float)(m13 * m32));
+    minorA = (m02 * m33 - (m03 * m32));
+    minorB = (m02 * m13 - (m03 * m12));
+    minorC = (m12 * m33 - (m13 * m32));
     m01 = *(float *)(engineState + 0x1924);
     m21 = *(float *)(engineState + 0x1944);
-    m23 = (double)*(float *)(engineState + 0x194c);
+    m23 = *(float *)(engineState + 0x194c);
     m31 = *(float *)(engineState + 0x1954);
     m20 = *(float *)(engineState + 0x1940);
-    minorD = (float)(m02 * m23 - (double)(float)(m03 * m22));
+    minorD = (m02 * m23 - (m03 * m22));
     cofactor3 = m31 * minorB + (m01 * minorC - m11 * minorA);
-    minorE = (float)(m12 * m23 - (double)(float)(m13 * m22));
-    minorF = (float)(m22 * m33 - (double)(float)(m23 * m32));
-    minorG = (double)(m00 * m21 - m01 * m20);
+    minorE = (m12 * m23 - (m13 * m22));
+    minorF = (m22 * m33 - (m23 * m32));
+    minorG = (m00 * m21 - m01 * m20);
     cofactor2 = -(m01 * minorE - (m11 * minorD - m21 * minorB));
     cofactor1 = -(m01 * minorF - (m21 * minorA - m31 * minorD));
     m30 = *(float *)(engineState + 0x1950);
     m10 = *(float *)(engineState + 0x1930);
     cofactor0 = m31 * minorE + (m11 * minorF - m21 * minorC);
-    minorJ = (double)(m00 * m31 - m01 * m30);
-    fpPassThrough8 = (double)(m10 * m31 - m11 * m30);
-    minorH = (double)(m00 * m11 - m01 * m10);
-    fpPassThrough3 = (double)(m10 * m21 - m11 * m20);
-    fpPassThrough6 = (double)(float)(minorJ * m23 - (double)(float)(minorG * m33));
+    minorJ = (m00 * m31 - m01 * m30);
+    fpPassThrough8 = (m10 * m31 - m11 * m30);
+    minorH = (m00 * m11 - m01 * m10);
+    fpPassThrough3 = (m10 * m21 - m11 * m20);
+    fpPassThrough6 = (minorJ * m23 - (minorG * m33));
     determinant = m00 * cofactor0 + m10 * cofactor1 + m30 * cofactor2 + m20 * cofactor3;
-    minorI = (double)(m20 * m31 - m21 * m30);
+    minorI = (m20 * m31 - m21 * m30);
     productM03 = fpPassThrough8 * m03;
     productM02 = fpPassThrough8 * m02;
-    fpPassThrough7 = (double)(float)(minorH * m22 +
-                              (double)(float)(fpPassThrough3 * m02 - (double)(float)(minorG * m12)))
+    fpPassThrough7 = (minorH * m22 +
+                              (fpPassThrough3 * m02 - (minorG * m12)))
     ;
-    fpPassThrough4 = -(double)(float)(minorI * m12 -
-                               (double)(float)(fpPassThrough8 * m22 -
-                                              (double)(float)(fpPassThrough3 * m32)));
-    fpPassThrough5 = (double)(float)(fpPassThrough3 * m33 +
-                              (double)(float)(minorI * m13 - (double)(float)(fpPassThrough8 * m23)))
+    fpPassThrough4 = -(minorI * m12 -
+                               (fpPassThrough8 * m22 -
+                                              (fpPassThrough3 * m32)));
+    fpPassThrough5 = (fpPassThrough3 * m33 +
+                              (minorI * m13 - (fpPassThrough8 * m23)))
     ;
     productM03B = fpPassThrough3 * m03;
-    fpPassThrough1 = (double)(float)(minorG * m32 +
-                              (double)(float)(minorI * m02 - (double)(float)(minorJ * m22)));
-    fpPassThrough2 = -(double)(float)(minorI * m03 - fpPassThrough6);
+    fpPassThrough1 = (minorG * m32 +
+                              (minorI * m02 - (minorJ * m22)));
+    fpPassThrough2 = -(minorI * m03 - fpPassThrough6);
     if ((determinant < FLOAT_001aa198) || (inverseValid = 0, FLOAT_001aa19c < determinant)) {
       inverseValid = 1;
-      inverseDeterminant = (double)(FLOAT_001aa0e8 / determinant);
+      inverseDeterminant = (FLOAT_001aa0e8 / determinant);
       scaledMinorA = fpPassThrough7 * inverseDeterminant;
       scaledMinorB = fpPassThrough5 * inverseDeterminant;
-      fpPassThrough6 = (double)(float)scaledMinorB;
-      scaledCofactor3 = (float)((double)cofactor3 * inverseDeterminant);
-      fpPassThrough5 = (double)scaledCofactor3;
+      fpPassThrough6 = scaledMinorB;
+      scaledCofactor3 = (cofactor3 * inverseDeterminant);
+      fpPassThrough5 = scaledCofactor3;
       scaledMinorC = fpPassThrough4 * inverseDeterminant;
-      fpPassThrough4 = (double)(float)scaledMinorC;
+      fpPassThrough4 = scaledMinorC;
       scaledMinorD = fpPassThrough2 * inverseDeterminant;
-      fpPassThrough2 = (double)(float)scaledMinorD;
+      fpPassThrough2 = scaledMinorD;
       scaledMinorE = fpPassThrough1 * inverseDeterminant;
-      fpPassThrough1 = (double)(float)scaledMinorE;
-      scaledCofactor0 = (float)((double)cofactor0 * inverseDeterminant);
-      fpPassThrough8 = (double)scaledCofactor0;
-      scaledCofactor1 = (float)((double)cofactor1 * inverseDeterminant);
-      fpPassThrough7 = (double)scaledCofactor1;
-      *(float *)(((unsigned char *)0x000013a4) + glContext) = (float)scaledMinorA;
+      fpPassThrough1 = scaledMinorE;
+      scaledCofactor0 = (cofactor0 * inverseDeterminant);
+      fpPassThrough8 = scaledCofactor0;
+      scaledCofactor1 = (cofactor1 * inverseDeterminant);
+      fpPassThrough7 = scaledCofactor1;
+      *(float *)(((unsigned char *)0x000013a4) + glContext) = scaledMinorA;
       *(float *)(((unsigned char *)0x0000136c) + glContext) =
-           (float)(inverseDeterminant * -(double)(m10 * minorF - (m20 * minorC - m30 * minorE)));
-      *(float *)(((unsigned char *)0x00001370) + glContext) = (float)scaledMinorB;
+           (inverseDeterminant * -(m10 * minorF - (m20 * minorC - m30 * minorE)));
+      *(float *)(((unsigned char *)0x00001370) + glContext) = scaledMinorB;
       *(float *)(((unsigned char *)0x00001388) + glContext) = scaledCofactor3;
-      *(float *)(((unsigned char *)0x00001374) + glContext) = (float)scaledMinorC;
+      *(float *)(((unsigned char *)0x00001374) + glContext) = scaledMinorC;
       *(float *)(((unsigned char *)0x0000137c) + glContext) =
-           (float)(inverseDeterminant * (double)(m30 * minorD + (m00 * minorF - m20 * minorA)));
-      *(float *)(((unsigned char *)0x00001380) + glContext) = (float)scaledMinorD;
+           (inverseDeterminant * (m30 * minorD + (m00 * minorF - m20 * minorA)));
+      *(float *)(((unsigned char *)0x00001380) + glContext) = scaledMinorD;
       *(float *)(((unsigned char *)0x0000138c) + glContext) =
-           (float)(inverseDeterminant * -(double)(m00 * minorC - (m10 * minorA - m30 * minorB)));
-      *(float *)(((unsigned char *)0x00001384) + glContext) = (float)scaledMinorE;
+           (inverseDeterminant * -(m00 * minorC - (m10 * minorA - m30 * minorB)));
+      *(float *)(((unsigned char *)0x00001384) + glContext) = scaledMinorE;
       *(float *)(((unsigned char *)0x0000139c) + glContext) =
-           (float)(inverseDeterminant * (double)(m20 * minorB + (m00 * minorE - m10 * minorD)));
+           (inverseDeterminant * (m20 * minorB + (m00 * minorE - m10 * minorD)));
       *(float *)(((unsigned char *)0x00001390U) + glContext) =
-           (float)((double)(float)(minorH * m33 +
-                                  (double)(float)(productM03 - (double)(float)(minorJ * m13))) *
+           ((minorH * m33 +
+                                  (productM03 - (minorJ * m13))) *
                   inverseDeterminant);
       *(float *)(((unsigned char *)0x00001368) + glContext) = scaledCofactor0;
       *(float *)(((unsigned char *)0x00001378) + glContext) = scaledCofactor1;
       *(float *)(((unsigned char *)0x00001394) + glContext) =
-           (float)(-(double)(float)(productM02 - (double)(float)(minorJ * m12 -
-                                                           (double)(float)(minorH * m32))) *
+           (-(productM02 - (minorJ * m12 -
+                                                           (minorH * m32))) *
                   inverseDeterminant);
-      scaledCofactor2 = (float)((double)cofactor2 * inverseDeterminant);
-      fpPassThrough3 = (double)scaledCofactor2;
+      scaledCofactor2 = (cofactor2 * inverseDeterminant);
+      fpPassThrough3 = scaledCofactor2;
       *(float *)(((unsigned char *)0x00001398) + glContext) = scaledCofactor2;
       *(float *)(((unsigned char *)0x000013a0) + glContext) =
-           (float)(-(double)(float)(productM03B - (double)(float)(minorG * m13 -
-                                                            (double)(float)(minorH * m23))) *
+           (-(productM03B - (minorG * m13 -
+                                                            (minorH * m23))) *
                   inverseDeterminant);
     }
     glContextWord38 = *(uint *)(glContext + 0x38);
@@ -1316,14 +1316,14 @@ storeGlContext:
 /* gld_validateDirtyState @ 0xa9ac0 (7656 bytes) */
 void gld_validateDirtyState(char *glContext,uint *dirtyBits,char *dirtyBitsArg,undefined *scratchR6,uint dirtyWord3,char *dirtyWord1,undefined4 unusedArgR9,uint dirtyWord4)
 {
-  double fpPassThrough1 = 0.0;
-  double fpPassThrough2 = 0.0;
-  double fpPassThrough3 = 0.0;
-  double fpPassThrough4 = 0.0;
-  double fpPassThrough5 = 0.0;
-  double fpPassThrough6 = 0.0;
-  double fpPassThrough7 = 0.0;
-  double fpPassThrough8 = 0.0;
+  float fpPassThrough1 = 0.0;
+  float fpPassThrough2 = 0.0;
+  float fpPassThrough3 = 0.0;
+  float fpPassThrough4 = 0.0;
+  float fpPassThrough5 = 0.0;
+  float fpPassThrough6 = 0.0;
+  float fpPassThrough7 = 0.0;
+  float fpPassThrough8 = 0.0;
   uint dirtyScissorBits;
   uint zeroFlagC;
   uint dirtyBits4Word;
@@ -1457,19 +1457,19 @@ void gld_validateDirtyState(char *glContext,uint *dirtyBits,char *dirtyBitsArg,u
   uint stateWord2cc;
   byte stateByte2eNew;
   int scissorX;
-  double vecXYSq;
-  double f1AfterCall;
-  double f1AfterCall2;
-  double f1AfterCall3;
-  double vecX;
-  double vecY;
-  double vecZ;
-  double invLength;
-  double staleStackArg_ffffff68;
-  double staleStackArg_ffffff70;
-  double staleStackArg_ffffff78;
-  double staleStackArg_ffffff80;
-  double staleStackArg_ffffff88;
+  float vecXYSq;
+  float f1AfterCall;
+  float f1AfterCall2;
+  float f1AfterCall3;
+  float vecX;
+  float vecY;
+  float vecZ;
+  float invLength;
+  float staleStackArg_ffffff68;
+  float staleStackArg_ffffff70;
+  float staleStackArg_ffffff78;
+  float staleStackArg_ffffff80;
+  float staleStackArg_ffffff88;
   int stackWord64;
   int stackWord60;
   int stackWord5c;
@@ -1489,7 +1489,7 @@ void gld_validateDirtyState(char *glContext,uint *dirtyBits,char *dirtyBitsArg,u
   dirtyBitsWord8 = (char *)dirtyBits[2];
   if ((((dirtyBitsWord0 & 0x20000180) != 0) || (*(int *)(glContextPtr4_2 + 0x2a48) != *(int *)(glContextPtr4_2 + 0x15c))) ||
      (staleR4Chain = dirtyBits, *(int *)(glContextPtr4_2 + 0x2a4c) != *(int *)(glContextPtr4_2 + 0x160))) {
-    fpPassThrough1 = (double)gld_updateSampleConfig(glContextPtr4_2);
+    fpPassThrough1 = gld_updateSampleConfig(glContextPtr4_2);
     staleR4Chain = r4AfterCall;
   }
   if (*(char *)(glContextPtr4_2 + 0x2a43) != '\0') {
@@ -1625,7 +1625,7 @@ setDirtyBits0x7000000:
             dirtyWord1 = (char *)((uint)ctx44Snapshot & 0xfffddfff);
             *(char **)(glContext + 0x44) = dirtyWord1;
             *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xffffbfff;
-            fpPassThrough1 = (double)arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1,dirtyBits0x7000000,
+            fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1,dirtyBits0x7000000,
                                             ctx44Snapshot);
             staleR4Chain = r4AfterCall3;
           }
@@ -1653,7 +1653,7 @@ setDirtyBits0x7000000:
             }
           }
           dirtyBitsArg = (char *)0x0;
-          fpPassThrough1 = (double)gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
+          fpPassThrough1 = gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
           staleR4Chain = r4AfterCall4;
           dirtyWord1 = ctx44Snapshot;
         }
@@ -1679,7 +1679,7 @@ setDirtyBits0x7000000:
           *(uint *)(glContext + 0x1874) = stateWord1874 | 0x4000;
           *(char **)(glContext + 0x44) = dirtyWord1;
           *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x80000000;
-          fpPassThrough1 = (double)arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1,dirtyBits0x7000000,
+          fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1,dirtyBits0x7000000,
                                           ctx44Snapshot);
           staleR4Chain = r4AfterCall5;
         }
@@ -1833,7 +1833,7 @@ checkDirtyBitsWord8:
       }
       if (((uint)dirtyBitsWord8 & 0x3f0000f8) != 0) {
         dirtyBitsArg = dirtyBitsWord8;
-        fpPassThrough1 = (double)((double (*)())gld_updateInverseMatrix)(glContext,engineState,dirtyBitsWord8);
+        fpPassThrough1 = ((double (*)())gld_updateInverseMatrix)(glContext,engineState,dirtyBitsWord8);
         staleR4Chain = r4AfterCall7;
       }
       if ((((uint)dirtyBitsWord8 & 0x800000f0) != 0) &&
@@ -1845,7 +1845,7 @@ checkDirtyBitsWord8:
       }
       dirtyWord3 = (uint)dirtyBitsWord8 & 0x3f000008;
       if (dirtyWord3 != 0) {
-        fpPassThrough1 = (double)((int (*)())gld_transformClipPlanes)(glContextPtr4_2,dirtyBitsWord8);
+        fpPassThrough1 = ((int (*)())gld_transformClipPlanes)(glContextPtr4_2,dirtyBitsWord8);
         staleR4Chain = r4AfterCall8;
       }
     }
@@ -1967,25 +1967,25 @@ checkDirtyBitsWord8:
             }
             if ((((unsigned char *)0x00002d48)[engineState + 5] == '\0') && (((unsigned char *)0x0000150c)[(int)dirtyWord1] == '\0')) {
               if (*(float *)(((unsigned char *)0x000014b0) + (int)dirtyWord1) == 0.0) {
-                vecX = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 4));
-                vecY = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 8));
-                vecZ = (double)*(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 0xc));
-                vecXYSq = (double)(float)(vecX * vecX + (double)(float)(vecY * vecY));
-                lengthSq = (float)(vecZ * vecZ + vecXYSq);
+                vecX = *(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 4));
+                vecY = *(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 8));
+                vecZ = *(float *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 0xc));
+                vecXYSq = (vecX * vecX + (vecY * vecY));
+                lengthSq = (vecZ * vecZ + vecXYSq);
                 if (0.0 < lengthSq) {
                   if (lengthSq == 1.0) {
-                    fpPassThrough8 = (double)(float)(vecZ + 1.0);
+                    fpPassThrough8 = (vecZ + 1.0);
                   }
                   else {
                     rsqrtGuess = GH_U2F(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
                     lengthSq = rsqrtGuess * lengthSq * rsqrtGuess;
                     newtonTerm = 3.0 - lengthSq;
-                    invLength = (double)(newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
-                    vecY = (double)(float)(vecY * invLength);
-                    vecZ = (double)(float)(vecZ * invLength);
-                    vecX = (double)(float)(vecX * invLength);
-                    fpPassThrough8 = (double)(float)(vecZ + 1.0);
-                    vecXYSq = (double)(float)(vecX * vecX + (double)(float)(vecY * vecY));
+                    invLength = (newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
+                    vecY = (vecY * invLength);
+                    vecZ = (vecZ * invLength);
+                    vecX = (vecX * invLength);
+                    fpPassThrough8 = (vecZ + 1.0);
+                    vecXYSq = (vecX * vecX + (vecY * vecY));
                   }
                 }
                 else {
@@ -1995,27 +1995,27 @@ checkDirtyBitsWord8:
                   vecY = invLength;
                   vecZ = invLength;
                 }
-                lengthSq = (float)(fpPassThrough8 * fpPassThrough8 + vecXYSq);
-                *(float *)(((unsigned char *)0x000014fc) + (int)dirtyWord1) = (float)vecZ;
-                *(float *)(((unsigned char *)0x000014f4) + (int)dirtyWord1) = (float)vecX;
-                *(float *)(((unsigned char *)0x000014f8) + (int)dirtyWord1) = (float)vecY;
+                lengthSq = (fpPassThrough8 * fpPassThrough8 + vecXYSq);
+                *(float *)(((unsigned char *)0x000014fc) + (int)dirtyWord1) = vecZ;
+                *(float *)(((unsigned char *)0x000014f4) + (int)dirtyWord1) = vecX;
+                *(float *)(((unsigned char *)0x000014f8) + (int)dirtyWord1) = vecY;
                 if (0.0 < lengthSq) {
                   if (lengthSq == 1.0) {
-                    *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 4)) = (float)vecX;
-                    *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 0xc)) = (float)fpPassThrough8;
-                    *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 8)) = (float)vecY;
+                    *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 4)) = vecX;
+                    *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 0xc)) = fpPassThrough8;
+                    *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 8)) = vecY;
                   }
                   else {
                     rsqrtGuess = GH_U2F(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
                     lengthSq = rsqrtGuess * lengthSq * rsqrtGuess;
                     newtonTerm = 3.0 - lengthSq;
-                    invLength = (double)(newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
+                    invLength = (newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
                     *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 4)) =
-                         (float)(invLength * vecX);
+                         (invLength * vecX);
                     *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 0xc)) =
-                         (float)(fpPassThrough8 * invLength);
+                         (fpPassThrough8 * invLength);
                     *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 8)) =
-                         (float)(invLength * vecY);
+                         (invLength * vecY);
                   }
                 }
                 else {
@@ -2086,11 +2086,11 @@ setDirtyBitsWord4:
     dirtyBitsWord10 = dirtyBits[4];
     if (dirtyBitsWord10 != 0 || (dirtyBitsWord4 & 0xff0000) != 0) {
       if ((dirtyBitsWord4 & 0xff0000) != 0) {
-        fpPassThrough1 = (double)((int (*)())gld_copyTexCombinerSources)(glContextPtr4_2,dirtyBitsWord4);
+        fpPassThrough1 = ((int (*)())gld_copyTexCombinerSources)(glContextPtr4_2,dirtyBitsWord4);
         staleR4Chain = r4AfterCall9;
       }
       if (dirtyBitsWord10 != 0) {
-        fpPassThrough1 = (double)((int (*)())gld_commitTexEnvUnits)(glContextPtr4_2,dirtyBitsWord10);
+        fpPassThrough1 = ((int (*)())gld_commitTexEnvUnits)(glContextPtr4_2,dirtyBitsWord10);
         staleR4Chain = r4AfterCall10;
       }
     }
@@ -2198,11 +2198,11 @@ setDirtyBitsWord4:
       if (dirtyKeepMaskedB != (char *)0x0) {
         if ((dirtyBitsWord0 & 0x1800) != 0) {
           dirtyBitsArg = dirtyKeepMaskedB;
-          fpPassThrough1 = (double)((int (*)())gld_updateLightingFlags)(glContext,engineState,dirtyKeepMaskedB);
+          fpPassThrough1 = ((int (*)())gld_updateLightingFlags)(glContext,engineState,dirtyKeepMaskedB);
           staleR4Chain = r4AfterCall11;
         }
         if ((dirtyBitsWord0 & 0x3000000) != 0) {
-          fpPassThrough1 = (double)((int (*)())gld_updatePolygonModeFlags)(glContext,engineState);
+          fpPassThrough1 = ((int (*)())gld_updatePolygonModeFlags)(glContext,engineState);
           staleR4Chain = r4AfterCall12;
           dirtyBitsArg = dirtyKeepMaskedB;
         }
@@ -2210,7 +2210,7 @@ setDirtyBitsWord4:
           glContext[0x29] = '\x01';
         }
         if ((dirtyBitsWord0 & 0x100) != 0) {
-          fpPassThrough1 = (double)((int (*)())gld_markDirty10)(glContext);
+          fpPassThrough1 = ((int (*)())gld_markDirty10)(glContext);
           staleR4Chain = r4AfterCall13;
         }
         if ((dirtyBitsWord0 & 0x400) != 0) {
@@ -2222,7 +2222,7 @@ setDirtyBitsWord4:
         }
         dirtyWord3 = dirtyBitsWord0 & 0x1c000;
         if (dirtyWord3 != 0) {
-          fpPassThrough1 = (double)((int (*)())gld_updateProgramFlags)(glContext,engineState,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,engineWord3e28);
+          fpPassThrough1 = ((int (*)())gld_updateProgramFlags)(glContext,engineState,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,engineWord3e28);
           staleR4Chain = r4AfterCall14;
         }
         if ((dirtyBitsWord0 & 0x20000) != 0) {
@@ -2375,7 +2375,7 @@ loopSetStateBit23B:
     }
 setDirtyBitsArg:
     dirtyBitsArg = (char *)0x0;
-    fpPassThrough1 = (double)gld_updateProgramConstantsForDirtyBits(glContextPtr4_2,dirtyBits,0);
+    fpPassThrough1 = gld_updateProgramConstantsForDirtyBits(glContextPtr4_2,dirtyBits,0);
     staleR4Chain = r4AfterCall17;
   }
   if ((dirtyBitsWord3 & 0x7000000) == 0) goto checkDirtyKeepSelected;
@@ -2406,7 +2406,7 @@ setDirtyBitsArg:
         engineWord3e28 = ctx44WordB & 0xfffddfff;
         *(uint *)(glContext + 0x44) = engineWord3e28;
         *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xffffbfff;
-        fpPassThrough1 = (double)arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,dirtyHighMask,ctx44WordB
+        fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,dirtyHighMask,ctx44WordB
                                        );
       }
     }
@@ -2432,7 +2432,7 @@ setDirtyBitsArg:
         }
       }
       dirtyBitsArg = (char *)0x0;
-      fpPassThrough1 = (double)gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
+      fpPassThrough1 = gld_updateFragmentProgramState(glContext + -0x240,dirtyBits,0);
       engineWord3e28 = ctx44WordB;
     }
     else if (ctx44Bit13B == 0) {
@@ -2458,7 +2458,7 @@ setDirtyBitsArg:
       *(uint *)(glContext + 0x1874) = stateWord1874B | 0x4000;
       *(undefined **)(glContext + 0x44) = dirtyHighMask;
       *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x80000000;
-      fpPassThrough1 = (double)arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,dirtyHighMask,ctx44WordB);
+      fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,dirtyHighMask,ctx44WordB);
     }
     glContext[0x2475] = '\x01';
   }
@@ -2515,17 +2515,17 @@ checkDirtyKeepSelected:
     if (((uint)dirtyKeepSelected & 0x3f000008) != 0) {
       dirtyBitsArg = dirtyKeepSelected;
       ((double (*)())gld_updateInverseMatrix)(glContext,engineState,dirtyKeepSelected);
-      fpPassThrough1 = (double)((int (*)())gld_transformClipPlanes)(glContextPtr4_2,dirtyKeepSelected);
+      fpPassThrough1 = ((int (*)())gld_transformClipPlanes)(glContextPtr4_2,dirtyKeepSelected);
     }
   }
   dirtyBits4Word = dirtyBits[4];
   dirtyWord4Lights = dirtyBits[1] & 0xff0000;
   if (dirtyBits4Word != 0 || dirtyWord4Lights != 0) {
     if (dirtyWord4Lights != 0) {
-      fpPassThrough1 = (double)((int (*)())gld_copyTexCombinerSources)(glContextPtr4_2,dirtyBits[1]);
+      fpPassThrough1 = ((int (*)())gld_copyTexCombinerSources)(glContextPtr4_2,dirtyBits[1]);
     }
     if (dirtyBits4Word != 0) {
-      fpPassThrough1 = (double)((int (*)())gld_commitTexEnvUnits)(glContextPtr4_2,dirtyBits4Word);
+      fpPassThrough1 = ((int (*)())gld_commitTexEnvUnits)(glContextPtr4_2,dirtyBits4Word);
     }
   }
   if (dirtyBitsWord0 != 0) {
@@ -2626,17 +2626,17 @@ checkDirtyKeepSelected:
     if (dirtyKeepMasked != (char *)0x0) {
       if ((dirtyBitsWord0 & 0x1800) != 0) {
         dirtyBitsArg = dirtyKeepMasked;
-        fpPassThrough1 = (double)((int (*)())gld_updateLightingFlags)(glContext,engineState,dirtyKeepMasked);
+        fpPassThrough1 = ((int (*)())gld_updateLightingFlags)(glContext,engineState,dirtyKeepMasked);
       }
       if ((dirtyBitsWord0 & 0x3000000) != 0) {
-        fpPassThrough1 = (double)((int (*)())gld_updatePolygonModeFlags)(glContext,engineState);
+        fpPassThrough1 = ((int (*)())gld_updatePolygonModeFlags)(glContext,engineState);
         dirtyBitsArg = dirtyKeepMasked;
       }
       if ((dirtyBitsWord0 & 0x38) != 0) {
         glContext[0x29] = '\x01';
       }
       if ((dirtyBitsWord0 & 0x100) != 0) {
-        fpPassThrough1 = (double)((int (*)())gld_markDirty10)(glContext);
+        fpPassThrough1 = ((int (*)())gld_markDirty10)(glContext);
       }
       if ((dirtyBitsWord0 & 0x400) != 0) {
         glContext[0x29] = '\x01';
@@ -2646,7 +2646,7 @@ checkDirtyKeepSelected:
         glContext[0x29] = '\x01';
       }
       if ((dirtyBitsWord0 & 0x1c000) != 0) {
-        fpPassThrough1 = (double)((int (*)())gld_updateProgramFlags)(glContext,engineState,dirtyBitsArg,scratchR6,dirtyBitsWord0 & 0x1c000,dirtyScissorBits,
+        fpPassThrough1 = ((int (*)())gld_updateProgramFlags)(glContext,engineState,dirtyBitsArg,scratchR6,dirtyBitsWord0 & 0x1c000,dirtyScissorBits,
                                         dirtyBits0x8000000);
       }
       if ((dirtyBitsWord0 & 0x20000) != 0) {

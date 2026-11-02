@@ -6280,7 +6280,6 @@ setSwapMode:
             xEndI2dHi = 0x43300000;
             xoffsetI2dHi = 0x43300000;
             scratchStacka8 = IrInt2F__dtor;
-            scratchStack9c = 0x1e6a08;
             levelByteOffset = level * 0x18;
             faceByteOffset = face * 0x168;
             mappingOffsetB = (face * 0xd + level) * 0x20;
@@ -6314,7 +6313,7 @@ setSwapMode:
               scratchStackfc = packet + 1;
               *(undefined4 **)(ctx + GLD_streamCurrent) = packet;
               lastHeader = *(uint **)(ctx + GLD_lastHeader);
-              scratchUint28 = *(undefined4 *)(scratchStack9c + 0x1ec8);
+              scratchUint28 = (undefined4)ptrTo_hwContextStateTemplate_001e88d0;  /* stock: lwz (0x1e6a08 + 0x1ec8) = this slot; the literal base was not relocated, so the rebuilt image dereferenced garbage (issue #211) */
               levelStateRec = levelByteOffset + faceByteOffset + texture[0xc];
               levelHeight = (uint)*(ushort *)(levelStateRec + 0xa6);
               levelWidthC = *(ushort *)(levelStateRec + 0xa4);
