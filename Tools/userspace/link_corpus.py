@@ -1166,6 +1166,7 @@ patches_applied = []
 di3_total = [0]
 cmp_total = [0]
 dbl_total = [0]
+floatlit_total = [0]
 blocks_total = [0]
 concat_inreg_total = [0]
 pair_total = [0]
@@ -1247,6 +1248,9 @@ for pdir_, f in _part_files:
             if nfa:
                 uses_link = True
                 floatargs_total[0] += nfa
+            if os.environ.get('FLOAT_LITERALS', '1') != '0':
+                txt, nfl_ = rewrites.rewrite_float_literals(txt)
+                floatlit_total[0] += nfl_
             txt, ndbl = rewrites.rewrite_double_bits(txt)
             dbl_total[0] += ndbl
             if ndbl:
@@ -1392,6 +1396,7 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('atomic read-modify-write idioms rewritten as compare-and-swap loops: %d\n' % atomics_total[0])
     w.write('byte buffers Ghidra declared as scalars, turned into arrays: %d\n' % bufs_total[0])
     w.write('(double)CONCAT44 bit-pattern constructions: %d\n' % dbl_total[0])
+    w.write('float literals suffixed f: %d\n' % floatlit_total[0])
     w.write('hand text patches applied (config text_patches): %s\n' % ', '.join(patches_applied))
     w.write('64-bit shift helper calls fixed: %d\n' % di3_total[0])
     w.write('narrow-type subtract-and-compare idioms: %d\n' % cmp_total[0])

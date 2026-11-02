@@ -566,6 +566,36 @@ def rewrite_pair_results(chunk, ret64):
     return head + body, n
 
 
+_FLIT = re.compile(r'(?<![\w.])((?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?)(?![\w.])')
+_FSKIP = re.compile(r'/\*.*?\*/|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', re.S)
+
+def rewrite_float_literals(text):
+    """Ghidra prints every FP immediate as an unsuffixed (double) literal, so `floatVar * 0.0625` compiles to double arithmetic (fmul/fsub + frsp) where the stock code
+    used fmuls/fnmsubs on single-precision values (issue #209 follow-up: gld_validateDirtyState, programFillStateConstants, gld_updateInverseMatrix had 70-110 double-precision
+    FP instructions each against none in stock, and their results differed from stock by 1-2 ULP). A literal that is EXACTLY representable as an IEEE single gets the `f` suffix:
+    in an expression with a double operand the value and the result are unchanged (float->double promotion is exact); with float operands the arithmetic is now single precision like
+    the stock instruction (fmuls). Literals that are not exactly representable stay double."""
+    import struct
+    n = [0]
+    def one(m):
+        lit = m.group(1)
+        try:
+            v = float(lit)
+            if struct.unpack('>f', struct.pack('>f', v))[0] != v:
+                return m.group(0)
+        except (OverflowError, ValueError, struct.error):
+            return m.group(0)
+        n[0] += 1
+        return lit + 'f'
+    out, pos = [], 0
+    for sm in _FSKIP.finditer(text):
+        out.append(_FLIT.sub(one, text[pos:sm.start()]))
+        out.append(sm.group(0))
+        pos = sm.end()
+    out.append(_FLIT.sub(one, text[pos:]))
+    return ''.join(out), n[0]
+
+
 def rewrite_double_bits(text):
     """`(double)CONCAT44(hi, lo)` is Ghidra's rendering of building a double from two words (the int->double magic-number idiom, 0x43300000 in the high
     word): a bit-pattern reinterpretation. ghidra_c.h's CONCAT44 yields an integer, so the C cast converted it numerically (~4.5e18)."""
