@@ -8581,10 +8581,8 @@ int extvsDeclareProgramVariables(ctx, hwProgram, variableCount, variableRecords,
   int loopIndex2;
   bool scratchFlag1;
   undefined4 *indexFrameLink;
-  undefined4 *symbolFrameLink;
   int scratchInt4;
   uint scratchUint5;
-  int indexAllocBytes;
   undefined4 scratchUint7;
   undefined1 *kindArray;
   undefined1 *scratchPtr9;
@@ -8625,7 +8623,6 @@ int extvsDeclareProgramVariables(ctx, hwProgram, variableCount, variableRecords,
     scratchInt17 = *(int *)(hwProgram + 0x28);
     variableIndex = 0;
     loopIndex = 0;
-    scratchPtr9 = (undefined1 *)((unsigned int)__builtin_frame_address(0));
     do {
       if (loopIndex < rangeCount) {
         rangeRecord[0] = *(uint *)(loopIndex * 8 + rangeRecords);
@@ -8641,19 +8638,13 @@ setScratchInt15:
       }
       groupRecords = (uint *)(variableIndex * 8 + variableRecords);
       if ((*(uint *)(variableRecords + variableIndex * 8) & 0x1f0000) != 0) {
-        scratchInt4 = -(scratchInt15 + 0x1eU & 0xfffffff0);
-        *(undefined1 **)(&STACKARG(0xffffff70) + scratchInt4) = scratchPtr9;
-        indexAllocBytes = -(scratchInt15 * 4 + 0x1eU & 0xfffffff0);
-        kindArray = (undefined1 *)((int)rangeRecord + scratchInt4);
-        indexFrameLink = (undefined4 *)((int)(&STACKARG(0xffffff70) + scratchInt4) + indexAllocBytes);
-        *indexFrameLink = scratchPtr9;
-        symbolFrameLink = (undefined4 *)((int)indexFrameLink + indexAllocBytes);
-        *symbolFrameLink = scratchPtr9;
-        symbolOut = symbolFrameLink + 0x10;
+        kindArray = (undefined1 *)__builtin_alloca(scratchInt15);
+        indexFrameLink = (undefined4 *)__builtin_alloca(scratchInt15 * 4);
+        symbolOut = (undefined4 *)__builtin_alloca(scratchInt15 * 4);
         recordCursor = groupRecords;
         scratchFlag1 = scratchInt15 != 0;
         scratchPtr9 = kindArray;
-        indexCursor = indexFrameLink + 0x10;
+        indexCursor = indexFrameLink;
         scratchInt4 = scratchInt15;
         while (scratchFlag1) {
           scratchUint5 = *recordCursor;
@@ -8676,7 +8667,7 @@ setScratchInt15:
           scratchInt4 = scratchInt4 + -1;
           scratchFlag1 = scratchInt4 != 0;
         }
-        extvsCreateVectorSymbolChain(ctx,scratchInt15,kindArray,indexFrameLink + 0x10,symbolOut);
+        extvsCreateVectorSymbolChain(ctx,scratchInt15,kindArray,indexFrameLink,symbolOut);
         if (scratchInt15 != 0) {
           loopIndex2 = 0;
           do {
@@ -8692,7 +8683,6 @@ setScratchInt15:
           } while (scratchInt15 != loopIndex2);
           variableIndex = variableIndex + loopIndex2;
         }
-        scratchPtr9 = (undefined1 *)*symbolFrameLink;
         variableIndex = variableIndex - 1;
       }
       variableIndex = variableIndex + 1;
