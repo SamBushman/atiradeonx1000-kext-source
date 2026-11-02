@@ -6988,7 +6988,7 @@ double psDisasmFormatRegister(undefined4 outText,uint registerWord,undefined4 ar
           }
           valueAsFloat = (float)immediateValue;
           i2dHi1 = 0x43300000;
-          i2dLo1 = ((uint)(int)valueAsFloat >> 0x17 & 0xff) - 0x7f ^ 0x80000000;
+          i2dLo1 = (GH_F2U(valueAsFloat) >> 0x17 & 0xff) - 0x7f ^ 0x80000000;
           exponentEstimate = _pow(DOUBLE_001aa2a0,(double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0);
           exponentEstimate = _log(exponentEstimate);
           scaledMantissa = _log(ten);

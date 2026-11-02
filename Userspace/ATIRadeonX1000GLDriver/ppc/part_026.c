@@ -4532,7 +4532,7 @@ callDList_pushBack:
   extensionWordPtr2 = descriptor + 1;
   if (((uint)extensionWordOrCompiler & 0xffff8888) == 0) goto code_r0x000fd490;
   curTempRegisterB = resultRegisterNumber;
-  if (((ushort)*tokenWords - 0x8e < 0x10) && (((uint)extensionWordOrCompiler & 0x8888) != 0)) {
+  if (((uint)((ushort)*tokenWords - 0x8e) < 0x10) && (((uint)extensionWordOrCompiler & 0x8888) != 0)) {
     descriptor[1] = (uint)extensionWordOrCompiler & 0xffff7777;
     curTempRegisterB = destTempRegister;
     if (!resultInTempRegister) {
