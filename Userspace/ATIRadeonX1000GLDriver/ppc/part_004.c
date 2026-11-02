@@ -6313,7 +6313,7 @@ int gld_setSamplerMagFilter(samplerState, magFilter)
 /* gldPackColorForSurfaceFormat @ 0x2d2b0 (2388 bytes) */
 void gldPackColorForSurfaceFormat(int surface,double red,double green,double blue,double alpha)
 {
-  float packedColor;
+  uint packedColor;
   double redScaled;
   int halfAlphaB;
   uint channelInt2;
@@ -6329,7 +6329,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   double blueScaledD;
   double roundedD;
   int channelIntB;
-  float redByteBits;
+  uint redByteBits;
   uint greenByte;
   uint blueByte;
   uint channelInt3;
@@ -6381,10 +6381,10 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   }
   redChannelD = redChannelD * DOUBLE_001aa258;
   if (DOUBLE_001aa1e8 <= redChannelD) {
-    redByteBits = GH_U2F((unsigned int)(((int)(redChannelD - DOUBLE_001aa1e8) + -0x80000000)));
+    redByteBits = ((unsigned int)(((int)(redChannelD - DOUBLE_001aa1e8) + -0x80000000)));
   }
   else {
-    redByteBits = GH_U2F((unsigned int)((int)redChannelD));
+    redByteBits = ((unsigned int)((int)redChannelD));
   }
   greenChannelD = greenChannelD * DOUBLE_001aa258;
   if (DOUBLE_001aa1e8 <= greenChannelD) {
@@ -6402,14 +6402,14 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   }
   alphaChannelD = alphaChannelD * DOUBLE_001aa258;
   if (DOUBLE_001aa1e8 <= alphaChannelD) {
-    packedColor = GH_U2F((unsigned int)(((int)(alphaChannelD - DOUBLE_001aa1e8) + -0x80000000)));
+    packedColor = ((unsigned int)(((int)(alphaChannelD - DOUBLE_001aa1e8) + -0x80000000)));
   }
   else {
-    packedColor = GH_U2F((unsigned int)((int)alphaChannelD));
+    packedColor = ((unsigned int)((int)alphaChannelD));
   }
   switch(*(char *)(surface + 0x37)) {
   default:
-    packedColor = 0.0;
+    packedColor = 0;
     break;
   case '\x01':
   case '\x03':
@@ -6420,17 +6420,17 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   case '\x04':
   case '\x0f':
   case '\x16':
-    packedColor = GH_U2F((unsigned int)(((uint)(int)redByteBits | (int)packedColor << 8)));
+    packedColor = ((unsigned int)((redByteBits | packedColor << 8)));
     break;
   case '\x05':
-    packedColor = GH_U2F((unsigned int)((((uint)(int)redByteBits & 0xf8) << 8 | (greenByte & 0xfc) << 3 | blueByte >> 3)));
+    packedColor = ((unsigned int)(((redByteBits & 0xf8) << 8 | (greenByte & 0xfc) << 3 | blueByte >> 3)));
     break;
   case '\x06':
-    packedColor = GH_U2F((unsigned int)((((uint)(int)packedColor & 0xf0) << 8 | ((uint)(int)redByteBits & 0xf0) << 4 | greenByte & 0xf0 |
+    packedColor = ((unsigned int)(((packedColor & 0xf0) << 8 | (redByteBits & 0xf0) << 4 | greenByte & 0xf0 |
                    blueByte >> 4)));
     break;
   case '\a':
-    packedColor = GH_U2F((unsigned int)((((uint)(int)packedColor & 0x80) << 8 | ((uint)(int)redByteBits & 0xf8) << 7 | (greenByte & 0xf8) << 2 |
+    packedColor = ((unsigned int)(((packedColor & 0x80) << 8 | (redByteBits & 0xf8) << 7 | (greenByte & 0xf8) << 2 |
                    blueByte >> 3)));
     break;
   case '\b':
@@ -6443,14 +6443,14 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   case '\x1d':
   case '&':
   case '\'':
-    packedColor = (float)(blueByte | (int)GH_F2U(packedColor) << 0x18 | (int)GH_F2U(redByteBits) << 0x10 | greenByte << 8);
+    packedColor = (blueByte | packedColor << 0x18 | redByteBits << 0x10 | greenByte << 8);
     break;
   case '\t':
   case '\n':
   case '\x12':
   case '\x18':
   case '\x1e':
-    packedColor = GH_U2F((unsigned int)(((uint)(int)redByteBits | greenByte << 8 | (int)packedColor << 0x18 | blueByte << 0x10)));
+    packedColor = ((unsigned int)((redByteBits | greenByte << 8 | packedColor << 0x18 | blueByte << 0x10)));
     break;
   case '\x10':
     redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
@@ -6464,10 +6464,10 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
     goto setPackedColor;
   case '\x13':
   case '\x15':
-    packedColor = redF;
+    packedColor = GH_F2U(redF);
     break;
   case '\x14':
-    packedColor = alphaF;
+    packedColor = GH_F2U(alphaF);
     break;
   case '\x19':
   case '\x1b':
@@ -6492,7 +6492,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
 setChannelInt:
     channelInt = channelInt & 0xffff;
 setPackedColor:
-    packedColor = GH_U2F((unsigned int)((channelInt | channelInt << 0x10)));
+    packedColor = ((unsigned int)((channelInt | channelInt << 0x10)));
     break;
   case '\x1c':
     redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
@@ -6511,21 +6511,21 @@ setPackedColor:
     else {
       channelIntB = (int)alphaScaled;
     }
-    packedColor = GH_U2F((unsigned int)((channelInt & 0xffff | channelIntB << 0x10)));
+    packedColor = ((unsigned int)((channelInt & 0xffff | channelIntB << 0x10)));
     break;
   case '\x1f':
   case '!':
     halfRed = ((uint (*)())floatToHalfBits)(red);
-    packedColor = GH_U2F((unsigned int)((halfRed << 0x10 | halfRed)));
+    packedColor = ((unsigned int)((halfRed << 0x10 | halfRed)));
     break;
   case ' ':
     halfAlpha = ((uint (*)())floatToHalfBits)(alphaD);
-    packedColor = GH_U2F((unsigned int)((halfAlpha << 0x10 | halfAlpha)));
+    packedColor = ((unsigned int)((halfAlpha << 0x10 | halfAlpha)));
     break;
   case '\"':
     halfRed = ((uint (*)())floatToHalfBits)(red);
     halfAlphaB = ((uint (*)())floatToHalfBits)((double)alphaF);
-    packedColor = GH_U2F((unsigned int)((halfRed | halfAlphaB << 0x10)));
+    packedColor = ((unsigned int)((halfRed | halfAlphaB << 0x10)));
     break;
   case '#':
     redScaled = redClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
@@ -6599,10 +6599,10 @@ setPackedColor:
       channelInt3 = (uint)(int)greenScaled;
     }
 setPackedColor2:
-    packedColor = GH_U2F((unsigned int)((channelInt | channelInt2 | (channelInt3 & 0x3ff) << 10)));
+    packedColor = ((unsigned int)((channelInt | channelInt2 | (channelInt3 & 0x3ff) << 10)));
     break;
   case '(':
-    packedColor = GH_U2F((unsigned int)(((uint)(int)redByteBits & 0xe0 | greenByte >> 3 & 0x1c | blueByte >> 6)));
+    packedColor = ((unsigned int)((redByteBits & 0xe0 | greenByte >> 3 & 0x1c | blueByte >> 6)));
     break;
   case ')':
     redScaled = redClamped * (double)FLOAT_001aa150 + (double)FLOAT_001aa10c;
@@ -6613,9 +6613,9 @@ setPackedColor2:
     else {
       channelIntB = (int)redScaled;
     }
-    packedColor = GH_U2F((unsigned int)((channelIntB << 8)));
+    packedColor = ((unsigned int)((channelIntB << 8)));
   }
-  *(float *)(surface + 0x28) = packedColor;
+  *(uint *)(surface + 0x28) = packedColor;
   return;
 }
 
