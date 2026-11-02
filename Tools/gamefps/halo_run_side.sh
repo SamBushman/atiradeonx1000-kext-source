@@ -43,7 +43,9 @@ while [ $k -le $N ]; do
     for p in `ps auxww | grep "[.]/Halo" | awk '{print $2}'`; do kill $p; done; sleep 3
     rm -f $HOME/Documents/Halo/Timedemo.txt
     # `open -a Halo.app` fails from an ssh session (CFMessagePort bootstrap): run ./Halo from a Terminal .command, which lives in the Aqua session
-    printf '#!/bin/sh\ncd /Applications/Halo.app/Contents/MacOS\n./Halo > %s/stdout_run%s.txt 2>&1\nexit\n' "$OUT" "$k" > $OUT/run.command; chmod +x $OUT/run.command
+    # HALO_ENV=name sources ~/rung3/ut_env_<name> (GLD_REDIRECT_* + DYLD_INSERT_LIBRARIES: run the renamed GLDriver image through gld_redirect.dylib without installing it)
+    ENVLINE=; [ -n "$HALO_ENV" ] && ENVLINE=". $HOME/rung3/ut_env_$HALO_ENV"
+    printf '#!/bin/sh\ncd /Applications/Halo.app/Contents/MacOS\n%s\n./Halo > %s/stdout_run%s.txt 2>&1\nexit\n' "$ENVLINE" "$OUT" "$k" > $OUT/run.command; chmod +x $OUT/run.command
     open -a Terminal $OUT/run.command
     i=0; while [ $i -lt 40 ] && ! ps auxww | grep -q "[.]/Halo"; do sleep 1; i=`expr $i + 1`; done
     sleep 10
