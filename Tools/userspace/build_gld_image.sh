@@ -5,6 +5,9 @@
 # in PATH and -B (the stock ld mis-links this size). Result on the host: ~/rung3/gld_<sha>/gld_link/ATIRadeonX1000GLDriver_renamed (install name = stock's).
 # Needs the stock binary and the Ghidra data dump (paths below); exit 0 only if the host link produced the image.
 H=${1:-G5}; EV=${2:-$HOME/g5logs/gld_image}; SHA=$(git rev-parse --short HEAD) || exit 2
+# optimisation level of the image: -O1 by default (issue #209: -O0 was 20-39% slower than stock in UT2004/Doom 3); LINK_OPT=-O0 gives the old unoptimised image,
+# LINK_OPT="-O2 -mtune=970" the scheduled one (same speed as -O1 in UT2004, same GL-suite parity)
+export LINK_OPT=${LINK_OPT:--O1}
 STOCK=${STOCK_GLD:-$HOME/Documents/ATI-X1900-Decomp/tiger-hd-pull/ATIRadeonX1000GLDriver.bundle.bin}
 GDATA=${GLD_GHIDRA_DATA:-$HOME/Documents/ATI-X1900-Decomp/work-bugwf/link/gld_data.tsv}
 mkdir -p "$EV"; rm -rf "$EV/gld_link"
