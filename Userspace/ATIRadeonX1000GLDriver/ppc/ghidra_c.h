@@ -100,6 +100,9 @@ typedef struct _Unwind_Exception { unsigned long long exception_class; void (*ex
 typedef struct dwarf_eh_bases { void *tbase, *dbase, *func; } dwarf_eh_bases;
 #ifdef __VEC__   /* -maltivec: a real vector register (issue #209: the struct form made every vperm a store/lvx/VRSAVE round trip, 6.7% of UT2004 CPU in copyIndices16Swapped) */
 #include <altivec.h>
+#undef vector   /* altivec.h defines these context keywords as macros; the corpus uses `bool` (a typedef above) and may use the other names */
+#undef pixel
+#undef bool
 typedef __vector unsigned char vec16;
 #else
 typedef struct { unsigned char v[16]; } vec16;   /* AltiVec 128-bit register */
