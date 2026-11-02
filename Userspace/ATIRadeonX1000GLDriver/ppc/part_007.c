@@ -1824,7 +1824,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
   if (((((unsigned char *)0x00002e2c)[glStateBlock] != '\0') && ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) &&
      (*(short *)(((unsigned char *)0x00002e28) + glStateBlock) != -1)) {
     *(uint *)(glContext + 0x1b64) =
-         (uint)(int)(FLOAT_001aa0e8 /
+         GH_F2U(FLOAT_001aa0e8 /
                ((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x00002e24) + glStateBlock) ^ 0x80000000) -
                        DOUBLE_001aa1e0) * FLOAT_001aa0fc *
                (float)((double)CONCAT44(0x43300000,glContextWord8) - DOUBLE_001aa250))) & 0xfffffffc |
