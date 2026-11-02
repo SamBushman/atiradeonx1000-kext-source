@@ -7947,7 +7947,9 @@ int gldReselectProgramStream(glContext, unusedArg2, unusedArg3, unusedArg4, unus
     if (selectedByteFlag == '\0') {
                     
                     
-      (**(code **)(glContext + 0x294c))(glContext);
+      /* stock: r4 still holds *(glContext + 0x1e70) (loaded for the test above) when it tail-calls the slot, so the callee (gldSetCurrentProgramObject) gets that
+       * program object; Ghidra dropped the argument, and the rebuilt call passed a stale r4 (crash: gl_feature_arbprogram_test, 0xc0100000) */
+      (**(code **)(glContext + 0x294c))(glContext,*(undefined4 *)(glContext + 0x1e70));
       return;
     }
   }

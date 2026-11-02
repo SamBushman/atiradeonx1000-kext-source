@@ -70,17 +70,54 @@ def memdiff(w_s, w_r, rs, rr):
         if x == y: continue
         for i in range(0, size, 4):
             u = struct.unpack('>I', x[i:i + 4])[0]; v = struct.unpack('>I', y[i:i + 4])[0]
-            if u != v and norm('s', u) != norm('r', v): out.append(((tag, i), norm('s', u), norm('r', v)))
+            if u != v and norm('s', u) != norm('r', v) and not (isdata(DS, u) and isdata(DR, v)): out.append(((tag, i), norm('s', u), norm('r', v)))
     return out
 
 def normlog(w, rn):
-    return [(c[0], tuple(norm(w, x) for x in c[1])) for c in rn.log]
+    return [(c[0], tuple(('poison',) if (x & 0xfffff000) == POISON else norm(w, x) for x in c[1])) for c in rn.log]
+
+def logsame(ls, lr):
+    if len(ls) != len(lr): return False
+    for a, b in zip(ls, lr):
+        if a[0] != b[0]: return False
+        for x, y in zip(a[1], b[1]):
+            if x != y and x != ('poison',) and not (x[0] == 'int' and y[0] == 'int' and isdata(DS, x[1]) and isdata(DR, y[1])): return False
+    return True
+
+def callp(rn, entry, args, nreal):
+    """Runner.call with every argument register the function does not take set to a poison value, so a call whose argument the rebuilt code leaves stale is visible"""
+    uc = rn.uc; rn.log = []; rn.n = 0; rn.limit = 60000; rn.status = '?'; rn.bad_read = False
+    for i in range(32): uc.reg_write(UC_PPC_REG_0 + i, 0)
+    for i in range(3 + nreal, 13): uc.reg_write(UC_PPC_REG_0 + i, POISON + i)
+    uc.reg_write(UC_PPC_REG_1, STACK + STACK_SIZE - 0x1000)
+    for i, a in enumerate(args): uc.reg_write(UC_PPC_REG_0 + 3 + i, a)
+    uc.reg_write(UC_PPC_REG_LR, emu.STOP)
+    try:
+        uc.emu_start(entry, emu.STOP, count=rn.limit + 10)
+        if rn.status == '?': rn.status = 'RET'
+    except UcError as ex_:
+        rn.status = 'ERR:%s' % ex_
+    return rn.status, uc.reg_read(UC_PPC_REG_3)
 
 S = Runner(Image(stock_bin, None)); R = Runner(Image(reb_bin, None))
+def _dataranges(img):
+    return [(vm, vm + vs) for name, vm, vs, data in img.segs if name != '__TEXT'] + [(a, a + (b - a)) for a, b in []]
+DS, DR = _dataranges(S.img), _dataranges(R.img)
+def isdata(rn_ranges, v): return any(lo <= v < hi for lo, hi in rn_ranges)
+CTXSLOTS = [0x748, 0x74c, 0x2754, 0x2758, 0x275c, 0x294c, 0x2998, 0x299c]      # code pointers stored in the GL context (`(**(code **)(glContext + off))(...)` in the corpus)
+BASE_SLOTS = list(emu.SLOTS); EXTRA_SLOTS = [0x10000 + o for o in CTXSLOTS]
+emu.SLOTS[:] = BASE_SLOTS + EXTRA_SLOTS
 MEM = {}
 def seedmem(seed):
-    if seed not in MEM: MEM[seed] = mkmem(random.Random(seed), {})
+    if seed not in MEM:
+        emu.SLOTS[:] = BASE_SLOTS                      # mkmem lays the A-block dispatch table out from SLOTS
+        ctx, heap, a = mkmem(random.Random(seed), {})
+        emu.SLOTS[:] = BASE_SLOTS + EXTRA_SLOTS
+        ctx = bytearray(ctx)
+        for k, o in enumerate(CTXSLOTS): struct.pack_into('>I', ctx, o, HOOK + 16 * (len(BASE_SLOTS) + k))
+        MEM[seed] = (bytes(ctx), heap, a)
     return MEM[seed]
+POISON = 0xBAD00000
 tot_bad = 0
 for fn in names:
     if fn not in funcs: print(fn, 'NOT IN FUNCS'); continue
@@ -94,18 +131,22 @@ for fn in names:
         args = [rand_arg(rng) for _ in range(max(1, min(nargs, 8)))]
         if rng.random() < 0.5: args[0] = rng.choice([CTXA, BUF, BUF, HEAP + 0x200]) if nargs else args[0]
         buf = bytes(rng.randrange(0, 5) if rng.random() < 0.7 else rng.getrandbits(8) for _ in range(0x200))
+        if os.environ.get('FDIFF_EXHAUST'): args = [seed] + [0] * (len(args) - 1)
         res = []
         for rn, e, w in ((S, es, 's'), (R, er, 'r')):
             rn.reset(ctx, heap, a); rn.uc.mem_write(BUF, buf)
-            st, rv = rn.call(e, list(args), limit=60000)
+            try: st, rv = callp(rn, e, list(args), len(args))
+            except Exception as ex_: st, rv = 'EXC', 0
             res.append((st, norm(w, rv), rawsnap(rn), normlog(w, rn), rn.bad_read))
         if res[0][0] != 'RET' or res[1][0] != 'RET' or res[0][4] or res[1][4]: continue
         tot += 1
         d = memdiff('s', 'r', res[0][2], res[1][2])
-        retdiff = res[0][1] != res[1][1]
-        if not retdiff and not d and res[0][3] == res[1][3]: same += 1; continue
-        key = ('ret' if retdiff else '') + (' mem:' + d[0][0][0] if d else '') + (' calls' if res[0][3] != res[1][3] else '')
+        rs_, rr_ = res[0][1], res[1][1]
+        retdiff = rs_ != rr_ and not (rs_[0] == 'int' and rr_[0] == 'int' and isdata(DS, rs_[1]) and isdata(DR, rr_[1]))
+        if not retdiff and not d and logsame(res[0][3], res[1][3]): same += 1; continue
+        key = ('ret' if retdiff else '') + (' mem:' + d[0][0][0] if d else '') + (' calls' if not logsame(res[0][3], res[1][3]) else '')
         bad[key] += 1
+        if os.environ.get('FDIFF_VERBOSE') and 'calls' in key and key not in ex: print('  stock calls:', res[0][3][:6], '\n  new   calls:', res[1][3][:6])
         ex.setdefault(key, (seed, [hex(x) for x in args], res[0][1], res[1][1], d[:3]))
     flag = '' if tot == same else '  <== DIFFERS'
     print('%-52s compared %3d same %3d%s' % (fn, tot, same, flag))
