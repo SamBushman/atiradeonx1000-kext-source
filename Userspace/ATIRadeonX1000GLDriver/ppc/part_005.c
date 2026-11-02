@@ -2853,21 +2853,8 @@ int gldTextureMakeResident(ctx, texture, scratchArg3, staleArgR6, staleArgR7, sc
   int scratchStack208;
   int scratchStack204;
   int scratchStackArr200 [14];
-  int scratchStackArr1c8 [9];
-  undefined4 scratchStack1a4;
-  uint scratchStack158;
-  uint scratchStack154;
-  undefined1 scratchStackArr150 [4];
-  undefined1 scratchStackArr14c [4];
-  uint scratchStack148;
-  int scratchStack144;
-  undefined4 scratchStack138;
-  uint scratchStack134;
-  undefined4 scratchStack130;
-  uint scratchStack12c;
-  uint scratchStack128;
-  undefined4 scratchStack124;
-  undefined4 scratchStack120;
+  int scratchStackArr1c8 [10];
+  uint lookupBlk [15];
   int *scratchStacke8;
   int scratchStacke4;
   int scratchStacke0;
@@ -3077,7 +3064,7 @@ setScratchFlag412:
       goto checkTexImages;
       scratchFlag41 = *(byte *)(scratchInt25 + 0x5e);
       scratchUint30 = (uint)scratchFlag41;
-      scratchStack1a4 = 0;
+      scratchStackArr1c8[9] = 0;
       scratchPtr17 = &scratchStack218;
       scratchPtr26 = &scratchStack214;
       ((int (*)())gldTextureFormatLookup)((uint)scratchFlag4,texture,scratchStackArr1c8,scratchPtr17,&scratchStack208,&scratchStack208,&scratchStack210,scratchPtr26,
@@ -3312,19 +3299,19 @@ checkTexImages:
           scratchStack7c = (uint)*(byte *)(scratchStack74 + 0x69);
           scratchStack80 = (uint)*(byte *)(scratchStack74 + 0x6b);
           scratchUint27 = *(ushort *)(scratchStack74 + 2);
-          scratchStack134 = 0;
+          lookupBlk[9] = 0;
           if (0x1908 < scratchUint27) {
-            scratchStack134 = 0;
+            lookupBlk[9] = 0;
             if (0x190a < scratchUint27) {
-              scratchStack134 = 0;
+              lookupBlk[9] = 0;
               if (scratchUint27 != 0x8049) goto lookupTextureFormat;
-              scratchStack134 = 0x4000;
+              lookupBlk[9] = 0x4000;
             }
-            scratchStack134 = scratchStack134 | 0x2000;
+            lookupBlk[9] = lookupBlk[9] | 0x2000;
           }
 lookupTextureFormat:
-          scratchStack64 = &scratchStack158;
-          scratchStack138 = 2;
+          scratchStack64 = &lookupBlk[0];
+          lookupBlk[8] = 2;
           ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,scratchStack64,&scratchStack214,&scratchStack208,
                        &scratchStack204,&scratchStack218,&scratchStack210,&scratchStack20c);
           scratchInt11 = (uint)*(byte *)(texture + 0xe) * 0x24;
@@ -3646,7 +3633,7 @@ setFormatInfo3:
                   }
                   scratchInt11 = 1 << (scratchUint20 & 0x3f);
                   scratchStackb0 = 1;
-                  scratchFlag39 = 3 < *(byte *)(texture + 0xe) - 0xc;
+                  scratchFlag39 = 3U < (uint)(*(byte *)(texture + 0xe) - 0xc);
                   scratchStackac = *scratchPtr14 * scratchStack78 + scratchStack94 * (scratchPtr14[1] - *scratchPtr14) + scratchStackc4 +
                              0xa00;
                   if (scratchFlag39) {
@@ -3741,7 +3728,7 @@ checkScratchUint23:
                     scratchUint23 = (uint)*(ushort *)(scratchInt33 + 0xc);
                     scratchFlag39 = scratchUint20 != 0;
                     scratchFlag4 = xerSummaryOverflow & 1;
-                    scratchStack158 = *(uint *)(scratchInt33 + 0x14);
+                    lookupBlk[0] = *(uint *)(scratchInt33 + 0x14);
                     scratchUint8 = scratchInt25 * scratchUint23;
                     if ((*(char *)(scratchInt33 + 10) != '\0') && (scratchFlag39)) {
                       scratchInt29 = 1;
@@ -3749,13 +3736,13 @@ checkScratchUint23:
                          (scratchInt29 = scratchUint23 + 1, *(char *)(scratchStack74 + 0x6f) != '\0')) {
                         scratchInt29 = scratchInt29 + scratchUint23 * *(ushort *)(scratchInt33 + 0xe);
                       }
-                      scratchStack158 = scratchStack158 + scratchInt25 * scratchInt29;
+                      lookupBlk[0] = lookupBlk[0] + scratchInt25 * scratchInt29;
                     }
                     scratchUint23 = *(byte *)(scratchStack74 + 0x60) - scratchUint30;
                     if ((int)scratchUint23 < 0) {
                       scratchUint23 = 0;
                     }
-                    scratchStack12c = 1 << (scratchUint23 & 0x3f);
+                    lookupBlk[11] = 1 << (scratchUint23 & 0x3f);
                     scratchInt25 = *(byte *)(scratchStack74 + 0x61) - scratchUint30;
                     if (scratchInt25 < 0) {
                       scratchInt25 = 0;
@@ -3764,33 +3751,33 @@ checkScratchUint23:
                     if (scratchInt29 < 0) {
                       scratchInt29 = 0;
                     }
-                    scratchStack128 = 1 << (scratchInt25 + scratchInt29 & 0x3fU);
-                    scratchPtr18 = scratchStackArr14c;
+                    lookupBlk[12] = 1 << (scratchInt25 + scratchInt29 & 0x3fU);
+                    scratchPtr18 = (undefined1 *)&lookupBlk[3];
                     scratchFlag40 = (int)scratchStackb0 < 0;
                     scratchFlag1 = 0 < (int)scratchStackb0;
                     scratchFlag2 = scratchStackb0 == 0;
                     scratchFlag3 = xerSummaryOverflow & 1;
                     scratchUint23 = scratchStackb0;
-                    scratchStack154 = scratchUint8;
+                    lookupBlk[1] = scratchUint8;
                     _glgConvertType((uint)*(ushort *)(scratchInt33 + 0x10),
-                                    (uint)*(ushort *)(scratchInt33 + 0x12),scratchStackArr150,scratchPtr18,scratchStack74,
-                                    scratchStackb0,scratchStack158,scratchUint8);
-                    scratchStack144 = scratchInt11;
+                                    (uint)*(ushort *)(scratchInt33 + 0x12),(undefined1 *)&lookupBlk[2],scratchPtr18,scratchStack74,
+                                    scratchStackb0,lookupBlk[0],scratchUint8);
+                    lookupBlk[5] = scratchInt11;
                     if (!scratchFlag2) {
-                      scratchStack144 = scratchStack12c << 2;
+                      lookupBlk[5] = lookupBlk[11] << 2;
                     }
-                    scratchStack148 = scratchStackac + *texture;
-                    scratchStack130 = 0x7ffff;
+                    lookupBlk[4] = scratchStackac + *texture;
+                    lookupBlk[10] = 0x7ffff;
                     scratchUint27 = *(short *)(scratchInt33 + 0x10) + 0xe6fa;
                     scratchFlag43 = (scratchUint27 < 4) << 3 | (4 < scratchUint27) << 2 | (scratchUint27 == 4) << 1 |
                              xerSummaryOverflow & 1;
                     if ((4 >= scratchUint27) &&
                        (scratchUint23 = 1 << ((int)(short)scratchUint27 & 0x3fU) & 0x19, scratchUint23 != 0)) {
-                      scratchStack130 = 0x7dfff;
+                      lookupBlk[10] = 0x7dfff;
                     }
-                    scratchStack120 = 0;
-                    scratchStack124 = 0;
-                    scratchUint36 = scratchStack148;
+                    lookupBlk[14] = 0;
+                    lookupBlk[13] = 0;
+                    scratchUint36 = lookupBlk[4];
                     if (((scratchFlag39) && (!scratchFlag2)) &&
                        (scratchUint36 = scratchStack68, (bool)((byte)(scratchStack68 >> 0x1d) & 1))) {
                       scratchUint23 = 1;
@@ -3813,45 +3800,45 @@ checkScratchUint23:
                     scratchInt25 = 1 << (scratchUint28 + scratchUint22 + scratchUint32 + scratchStack214 & 0x3f);
                     scratchUint20 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)scratchUint27,(uint)scratchUint6,scratchUint15);
                     scratchInt11 = gldPixelUnitBytes((uint)scratchUint27,(uint)scratchUint6);
-                    scratchUint20 = scratchStack154 == scratchInt11 * scratchStack12c & scratchUint20;
-                    if (((scratchUint20 == 0) || (scratchUint23 = scratchStack158 & 0x1f, scratchUint23 != 0)) ||
-                       (scratchUint36 = scratchStack154 & 0x1f, scratchUint36 != 0)) {
+                    scratchUint20 = lookupBlk[1] == scratchInt11 * lookupBlk[11] & scratchUint20;
+                    if (((scratchUint20 == 0) || (scratchUint23 = lookupBlk[0] & 0x1f, scratchUint23 != 0)) ||
+                       (scratchUint36 = lookupBlk[1] & 0x1f, scratchUint36 != 0)) {
                       if (scratchFlag39) {
                         if (scratchFlag2) {
                           _glgProcessPixels(0,scratchStack64,scratchUint15,scratchPtr18,scratchUint20,scratchUint23,scratchUint36,scratchUint8);
                         }
                         else {
                           scratchUint23 = (uint)*(ushort *)(scratchInt33 + 0x10);
-                          scratchStackb4 = scratchStack148;
-                          if (((scratchStack12c != *(ushort *)(scratchInt33 + 0xc)) ||
+                          scratchStackb4 = lookupBlk[4];
+                          if (((lookupBlk[11] != *(ushort *)(scratchInt33 + 0xc)) ||
                               ((*(short *)(scratchInt33 + 0x12) != 0x1401 &&
                                (*(short *)(scratchInt33 + 0x12) != -0x7fcb)))) ||
-                             ((scratchUint15 = scratchStack158, 1 < scratchUint23 - 0x1907 &&
+                             ((scratchUint15 = lookupBlk[0], 1 < scratchUint23 - 0x1907 &&
                               ((scratchUint23 != scratchStack70 && (scratchUint20 = scratchStack70, scratchUint23 != 0x80e0)))))) {
-                            scratchStack148 = scratchStack90;
+                            lookupBlk[4] = scratchStack90;
                             _glgProcessPixels(0,scratchStack64,scratchUint23,scratchPtr18,scratchUint20,scratchStack90,scratchUint36,scratchUint8
                                              );
                             scratchUint23 = 0x1908;
-                            scratchStack148 = scratchStackb4;
+                            lookupBlk[4] = scratchStackb4;
                             scratchUint15 = scratchStack90;
                           }
-                          scratchUint20 = scratchStack12c;
+                          scratchUint20 = lookupBlk[11];
                           scratchPtr18 = (undefined1 *)(uint)*(byte *)(texture + 0xe);
-                          scratchStack148 = scratchStackb4;
+                          lookupBlk[4] = scratchStackb4;
                           if (scratchPtr18 == (undefined1 *)((int)((unsigned char *)0xc) + 3)) {
                             scratchFlag39 = scratchUint23 == 0x1908;
                             scratchFlag41 = (scratchUint23 < 0x1908) << 3 | (0x1908 < scratchUint23) << 2 | scratchFlag39 << 1 |
                                      xerSummaryOverflow & 1;
-                            scratchStackb8 = scratchStack128;
+                            scratchStackb8 = lookupBlk[12];
                             if ((scratchFlag39) || (scratchInt11 = 3, scratchUint23 == scratchStack70)) {
                               scratchInt11 = 4;
                             }
-                            scratchPtr38 = (undefined1 *)(scratchInt11 * scratchStack12c);
+                            scratchPtr38 = (undefined1 *)(scratchInt11 * lookupBlk[11]);
                             if ((scratchFlag39) || (scratchStackbc = 0, scratchUint23 == scratchStack70)) {
                               scratchStackbc = 3;
                             }
-                            if (0 < (int)scratchStack128) {
-                              scratchFlag39 = 0 < (int)scratchStack12c;
+                            if (0 < (int)lookupBlk[12]) {
+                              scratchFlag39 = 0 < (int)lookupBlk[11];
                               scratchInt25 = 0;
                               do {
                                 if (scratchFlag39) {
@@ -3874,34 +3861,34 @@ checkScratchUint23:
                             }
                           }
                           else {
-                            dxtCompressImage(scratchStack12c,scratchStack128,scratchUint23,scratchPtr18,scratchUint15,scratchStackb4);
+                            dxtCompressImage(lookupBlk[11],lookupBlk[12],scratchUint23,scratchPtr18,scratchUint15,scratchStackb4);
                           }
                         }
                       }
                       else if (!scratchFlag2) {
                         scratchPtr18 = (undefined1 *)((int)((unsigned char *)0x0) + 1);
-                        scratchUint20 = ((int (*)())gldCompressedImageBytes)((uint)*(byte *)(texture + 0xe),scratchStack12c,1,1);
+                        scratchUint20 = ((int (*)())gldCompressedImageBytes)((uint)*(byte *)(texture + 0xe),lookupBlk[11],1,1);
                         if (scratchUint20 < 0x20) {
-                          if (scratchStack128 != 0) {
+                          if (lookupBlk[12] != 0) {
                             scratchUint15 = 0;
-                            scratchUint23 = scratchStack158;
-                            scratchUint36 = scratchStack148;
+                            scratchUint23 = lookupBlk[0];
+                            scratchUint36 = lookupBlk[4];
                             do {
                               scratchUint15 = scratchUint15 + 4;
                               scratchUint7 = scratchUint36 + 0x1f & 0xffffffe0;
                               scratchUint36 = scratchUint7 + scratchUint20;
                               _memcpy(scratchUint7,scratchUint23,scratchUint20);
                               scratchUint23 = scratchUint23 + scratchUint20;
-                            } while (scratchUint15 < scratchStack128);
+                            } while (scratchUint15 < lookupBlk[12]);
                           }
                         }
                         else {
-                          _memcpy(scratchStack148,scratchStack158,scratchInt25);
+                          _memcpy(lookupBlk[4],lookupBlk[0],scratchInt25);
                         }
                       }
                     }
                     else {
-                      _memcpy(scratchStack148,scratchStack158,scratchInt25);
+                      _memcpy(lookupBlk[4],lookupBlk[0],scratchInt25);
                     }
                     scratchUint20 = *(uint *)(ctxSaved + 0x24) & 0x82;
                     if (scratchUint20 != 0) {

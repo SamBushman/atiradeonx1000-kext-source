@@ -1931,7 +1931,7 @@ checkDirtyBitsWord8:
                 *(undefined4 *)(scratchR6 + 0xc) = *(undefined4 *)(lightDirPtr + 8);
               }
               else {
-                rsqrtGuessB = (float)(0x5f375a00 - ((uint)GH_F2U(lightDirLengthSq) >> 1));
+                rsqrtGuessB = GH_U2F(0x5f375a00 - ((uint)GH_F2U(lightDirLengthSq) >> 1));
                 lightDirLengthSq = rsqrtGuessB * lightDirLengthSq * rsqrtGuessB;
                 newtonTermA = 3.0 - lightDirLengthSq;
                 lightDirLengthSq = newtonTermA * rsqrtGuessB * 0.0625 * -(newtonTermA * lightDirLengthSq * newtonTermA - 12.0);
@@ -1963,7 +1963,7 @@ checkDirtyBitsWord8:
                     fpPassThrough8 = (double)(float)(vecZ + 1.0);
                   }
                   else {
-                    rsqrtGuess = (float)(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
+                    rsqrtGuess = GH_U2F(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
                     lengthSq = rsqrtGuess * lengthSq * rsqrtGuess;
                     newtonTerm = 3.0 - lengthSq;
                     invLength = (double)(newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
@@ -1992,7 +1992,7 @@ checkDirtyBitsWord8:
                     *(float *)(((unsigned char *)0x000014e0) + (int)(glContext + loopIndex2 + 8)) = (float)vecY;
                   }
                   else {
-                    rsqrtGuess = (float)(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
+                    rsqrtGuess = GH_U2F(0x5f375a00 - ((uint)GH_F2U(lengthSq) >> 1));
                     lengthSq = rsqrtGuess * lengthSq * rsqrtGuess;
                     newtonTerm = 3.0 - lengthSq;
                     invLength = (double)(newtonTerm * rsqrtGuess * 0.0625 * -(newtonTerm * lengthSq * newtonTerm - 12.0));
@@ -2025,7 +2025,7 @@ checkDirtyBitsWord8:
                        *(undefined4 *)(((unsigned char *)0x000014a0) + (int)(glContext + loopIndex2 + 0xc));
                 }
                 else {
-                  rsqrtGuessB = (float)(0x5f375a00 - ((uint)GH_F2U(spotDirLengthSq) >> 1));
+                  rsqrtGuessB = GH_U2F(0x5f375a00 - ((uint)GH_F2U(spotDirLengthSq) >> 1));
                   spotDirLengthSq = rsqrtGuessB * spotDirLengthSq * rsqrtGuessB;
                   newtonTermB = 3.0 - spotDirLengthSq;
                   spotDirLengthSq = newtonTermB * rsqrtGuessB * 0.0625 * -(newtonTermB * spotDirLengthSq * newtonTermB - 12.0);
