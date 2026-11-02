@@ -1395,7 +1395,7 @@ int gld_scalePointSizeToPixels(glContext, addSizeBias)
 }
 
 /* gld_buildCoverageByteTable @ 0xa3790 (716 bytes) */
-void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint tableSize,int outTable,int *outCount,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12)
+void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint tableSize,int outTable,int *outCount,double fpPassThrough1)
 {
   double samplePosF2;
   double sampleIndexF2;
@@ -1485,7 +1485,7 @@ loopSetCoverageValue:
 }
 
 /* gld_buildCoverageRampTable @ 0xa3a60 (372 bytes) */
-void gld_buildCoverageRampTable(undefined4 glContext,undefined4 unusedArgR4,uint tableSize,int outTable,uint *outCount,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
+void gld_buildCoverageRampTable(undefined4 glContext,undefined4 unusedArgR4,uint tableSize,int outTable,uint *outCount,double fpPassThrough1)
 {
   float rampLengthF;
   float rampPosF;
@@ -2620,17 +2620,13 @@ setLevelCount:
           if ((*(uint *)(glContext + 0xe8) & 1) == 0) {
             contextFloatArg = (double)*(float *)(glContext + 0xe0);
             if (cacheEntry[8] != '\0') goto callGldBuildCoverageByteTable;
-            ((void (*)())gld_buildCoverageRampTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
-                         staleArgF6,staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
-                         staleStackArg_fffffed0,staleStackArg_fffffed8);
+            ((void (*)())gld_buildCoverageRampTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg);
             calleeResultLow = r4AfterCall3;
           }
           else {
             contextFloatArg = (double)*(float *)(glContext + 0x104);
 callGldBuildCoverageByteTable:
-            ((void (*)())gld_buildCoverageByteTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg,staleArgF2,staleArgF3,staleArgF4,staleArgF5,
-                         staleArgF6,staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
-                         staleStackArg_fffffed0);
+            ((void (*)())gld_buildCoverageByteTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg);
             calleeResultLow = r4AfterCall2;
           }
           rampAllocPair = CONCAT44(rampAllocHigh,calleeResultLow);
@@ -2765,9 +2761,7 @@ callGldBuildCoverageByteTable:
                                                     4503601774854144.0) + glContextFloat13e8);
           }
           entryWord14High = rampCountWords;
-          ((void (*)())gld_buildCoverageRampTable)(glContext,allocResultLow,sizeBytes,lastRowPtr,entryWord14High,quantizedValue,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,
-                       staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
-                       staleStackArg_fffffed0,staleStackArg_fffffed8);
+          ((void (*)())gld_buildCoverageRampTable)(glContext,allocResultLow,sizeBytes,lastRowPtr,entryWord14High,quantizedValue);
         }
         else {
           engineFloat2e20 = (double)*(float *)(((unsigned char *)0x00002e20) + engineCapsB);
@@ -2786,9 +2780,7 @@ callGldBuildCoverageByteTable:
                                                     4503601774854144.0) + glContextFloat13e8);
           }
           entryWord14High = rampCountWords;
-          ((void (*)())gld_buildCoverageByteTable)(glContext,allocResultLow,sizeBytes,lastRowPtr,entryWord14High,quantizedValue,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,
-                       staleArgF7,staleArgF8,staleStackArg_fffffeb8,staleStackArg_fffffec0,staleStackArg_fffffec8,
-                       staleStackArg_fffffed0);
+          ((void (*)())gld_buildCoverageByteTable)(glContext,allocResultLow,sizeBytes,lastRowPtr,entryWord14High,quantizedValue);
         }
         if (0 < rampCountWords[0]) {
           loopIndex3 = 0;
@@ -3725,7 +3717,7 @@ int noop_a6f80()
 }
 
 /* gld_normalizeVec3 @ 0xa6f90 (168 bytes) */
-void gld_normalizeVec3(float *outVector,float *inVector,double fpPassThrough1)
+void gld_normalizeVec3(float *outVector,float *inVector)
 {
   float scale;
   float inX;

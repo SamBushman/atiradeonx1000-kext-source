@@ -4109,8 +4109,16 @@ int ffvpComputeOutputMasks(glContext)
 }
 
 /* gldValidateState @ 0x90470 (952 bytes) */
-void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7,double forwardedFloatArg1,double forwardedFloatArg2,double forwardedFloatArg3,double forwardedFloatArg4,double forwardedFloatArg5,double forwardedFloatArg6,double forwardedFloatArg7,double forwardedFloatArg8,double forwardedFloatArg9)
+void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwardedArg3,undefined4 forwardedArg4,undefined4 forwardedArg5,undefined4 forwardedArg6,undefined4 forwardedArg7)
 {
+  double forwardedFloatArg1 = 0.0;
+  double forwardedFloatArg2 = 0.0;
+  double forwardedFloatArg3 = 0.0;
+  double forwardedFloatArg4 = 0.0;
+  double forwardedFloatArg5 = 0.0;
+  double forwardedFloatArg6 = 0.0;
+  double forwardedFloatArg7 = 0.0;
+  double forwardedFloatArg8 = 0.0;
   uint dirtyMask;
   undefined4 calleeStaleR4;
   undefined4 calleeStaleR4_00;
@@ -4151,8 +4159,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
   dirtyMask = *(uint *)(glContext + 0x38);
   if (dirtyMask != 0) {
     if ((dirtyMask & 4) != 0) {
-      forwardedFloatArg1 = (double)((double (*)())gldValidatePolygonMode)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
-                                      forwardedFloatArg7,forwardedFloatArg8);
+      forwardedFloatArg1 = (double)((double (*)())gldValidatePolygonMode)(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = calleeStaleR4_00;
     }
@@ -4167,13 +4174,12 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = calleeStaleR4_02;
     }
     if ((dirtyMask & 0x400) != 0) {
-      forwardedFloatArg1 = (double)((double (*)())gldValidateViewport)(glContext,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,
-                                      forwardedFloatArg7,forwardedFloatArg8);
+      forwardedFloatArg1 = (double)((double (*)())gldValidateViewport)(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = calleeStaleR4_03;
     }
     if ((dirtyMask & 0x100) != 0) {
-      ((void (*)())gldValidateFog)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      ((void (*)())gldValidateFog)(glContext,forwardedArg2,forwardedArg3,forwardedArg4);
       forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext,calleeStaleR4_04,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = calleeStaleR4_05;
@@ -4189,9 +4195,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = calleeStaleR4_07;
     }
     if ((dirtyMask & 0x2200) != 0) {
-      forwardedFloatArg1 = (double)((double (*)())gldValidateTextureUnits)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1,forwardedFloatArg2,forwardedFloatArg3,
-                                      forwardedFloatArg4,forwardedFloatArg5,forwardedFloatArg6,forwardedFloatArg7,forwardedFloatArg8,forwarded_in_stack_ffffffb8
-                                     );
+      forwardedFloatArg1 = (double)((double (*)())gldValidateTextureUnits)(glContext,forwardedArg2,forwardedArg3,forwardedArg4);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = calleeStaleR4_08;
     }
@@ -4202,7 +4206,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
         forwardedArg2 = calleeStaleR4_09;
       }
       if ((dirtyMask & 0x20) != 0) {
-        ((void (*)())gld_emitLightingStatePacket)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+        ((void (*)())gld_emitLightingStatePacket)(glContext,forwardedArg2,forwardedArg3,forwardedArg4);
         dirtyMask = *(uint *)(glContext + 0x38);
         forwardedArg2 = calleeStaleR4_10;
       }
@@ -4218,7 +4222,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       }
     }
     else if ((dirtyMask & 0x20) != 0) {
-      ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedFloatArg1);
+      ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,forwardedArg2,forwardedArg3,forwardedArg4);
       forwardedArg2 = calleeStaleR4_13;
     }
   }

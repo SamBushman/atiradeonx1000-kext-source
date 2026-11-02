@@ -549,14 +549,12 @@ int ildisPrintTexldmsModifiers(disassembler, controlWord, passThroughR5, fmtArgR
                                 );
     integerBitsArg = 7;
     fractionBitsArg = 1;
-    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord & 0xff,7,1,staleFprResult,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
-                 staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
+    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord & 0xff,7,1);
     ildisAppendf(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     staleFprResult = (double)ildisAppendf(disassembler,"_yoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     integerBitsArg = 7;
     fractionBitsArg = 1;
-    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord >> 8 & 0xff,7,1,staleFprResult,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
-                 staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
+    ((void (*)())ildisPrintFixedPoint)(disassembler,extraWord >> 8 & 0xff,7,1);
     ildisAppendf(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     return;
   }
@@ -1980,15 +1978,15 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
         textBufferByte1 = s___001a44f4[1];
         mnemonicBuf[0] = s___001a44f4[2];
         defPtrAlias = defFloat3Bits;
-        ((char * (*)())vsdisFormatFloat)(declResult,10,fmtArgR5,(double)defFloat0);
+        ((char * (*)())vsdisFormatFloat)(declResult,10,fmtArgR5);
         fieldOffset = printf_LDBLStub_1a32d0(mnemonicBuf,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
         mnemonic = mnemonicBuf + fieldOffset;
-        ((char * (*)())vsdisFormatFloat)(fieldOffset,10,fmtArgR5,(double)defFloat1);
+        ((char * (*)())vsdisFormatFloat)(fieldOffset,10,fmtArgR5);
         fieldOffset = printf_LDBLStub_1a32d0(mnemonic,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
-        ((char * (*)())vsdisFormatFloat)(fieldOffset,10,fmtArgR5,(double)defFloat2);
+        ((char * (*)())vsdisFormatFloat)(fieldOffset,10,fmtArgR5);
         fieldLength = printf_LDBLStub_1a32d0(mnemonic + fieldOffset,"%s, ",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr)
         ;
-        ((char * (*)())vsdisFormatFloat)(fieldLength,10,fmtArgR5,(double)GH_U2F((unsigned int)(defFloat3Bits)));
+        ((char * (*)())vsdisFormatFloat)(fieldLength,10,fmtArgR5);
         printf_LDBLStub_1a32d0(mnemonic + fieldOffset + fieldLength,"%s",fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,defPtrAlias,nextWordPtr);
       }
       else {

@@ -9078,9 +9078,7 @@ int gldEmitProgramConstants(ctx, program, unusedArg3, unusedArg4, unusedArg5, un
       return;
     }
     srcConstants = *(undefined4 **)(program + 0x4c);
-    ((void (*)())programFillStateConstants)(ctx,program,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7,unusedArg8,unusedFloatArg1,unusedFloatArg2,
-                 unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedFloatArg9,unusedFloatArg10,
-                 unusedFloatArg11,unusedFloatArg12,unusedFloatArg13);
+    ((void (*)())programFillStateConstants)(ctx,program,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7,unusedArg8);
     packetWords = *(int *)(program + 0x48) * 4 + 3;
     packet = (undefined4 *)(**(code **)(ctx + 0x2758))(ctx,packetWords);
     *(undefined4 **)(0x00002748 + ctx + 4) = packet;

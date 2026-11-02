@@ -1164,8 +1164,7 @@ loopStoreIlReader:
         constantRegister = (int)(short)**(uint **)ilReader[0x19];
         destRegisterFile = **(uint **)ilReader[0x19] >> 0x10 & 0x3f;
         if (destRegisterFile == 1) {
-          ((void (*)())ILReader__appendFloatConst)(ilReader,constantRegister,(double)GH_U2F((unsigned int)(ilReader[0x25])),(double)GH_U2F((unsigned int)(ilReader[0x26])),
-                       (double)GH_U2F((unsigned int)(ilReader[0x27])),(double)GH_U2F((unsigned int)(ilReader[0x28])));
+          ((void (*)())ILReader__appendFloatConst)(ilReader,constantRegister);
         }
         else if (destRegisterFile == 2) {
           ILReader__appendIntConst(ilReader,constantRegister,ilReader[0x25],ilReader[0x26],ilReader[0x27],ilReader[0x28]);

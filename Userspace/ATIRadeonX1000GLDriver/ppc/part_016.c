@@ -427,8 +427,16 @@ int gld_copyTexCombinerSources(glContextPtr4, dirtyBitsWord4)
 }
 
 /* gld_updateInverseMatrix @ 0xa8630 (968 bytes) */
-double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
+double gld_updateInverseMatrix(int glContext,int engineState,uint dirtyBitsWord8)
 {
+  double fpPassThrough1 = 0.0;
+  double fpPassThrough2 = 0.0;
+  double fpPassThrough3 = 0.0;
+  double fpPassThrough4 = 0.0;
+  double fpPassThrough5 = 0.0;
+  double fpPassThrough6 = 0.0;
+  double fpPassThrough7 = 0.0;
+  double fpPassThrough8 = 0.0;
   uint loopIndex;
   uint glContextWord40;
   uint glContextWord38;
@@ -1136,8 +1144,9 @@ int gld_commitTexEnvUnits(glContextPtr4, dirtyBitsWord10)
 }
 
 /* gld_updatePointState @ 0xa9640 (1116 bytes) */
-double gld_updatePointState(int glContext,int pointState,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12)
+double gld_updatePointState(int glContext,int pointState)
 {
+  double fpPassThrough1 = 0.0;
   double scaleLength;
   uint pointStateWord;
   float quantizedPointSizeInt;
@@ -1305,8 +1314,16 @@ storeGlContext:
 }
 
 /* gld_validateDirtyState @ 0xa9ac0 (7656 bytes) */
-void gld_validateDirtyState(char *glContext,uint *dirtyBits,char *dirtyBitsArg,undefined *scratchR6,uint dirtyWord3,char *dirtyWord1,undefined4 unusedArgR9,uint dirtyWord4,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9,double fpPassThrough10,double fpPassThrough11,double fpPassThrough12,double fpPassThrough13)
+void gld_validateDirtyState(char *glContext,uint *dirtyBits,char *dirtyBitsArg,undefined *scratchR6,uint dirtyWord3,char *dirtyWord1,undefined4 unusedArgR9,uint dirtyWord4)
 {
+  double fpPassThrough1 = 0.0;
+  double fpPassThrough2 = 0.0;
+  double fpPassThrough3 = 0.0;
+  double fpPassThrough4 = 0.0;
+  double fpPassThrough5 = 0.0;
+  double fpPassThrough6 = 0.0;
+  double fpPassThrough7 = 0.0;
+  double fpPassThrough8 = 0.0;
   uint dirtyScissorBits;
   uint zeroFlagC;
   uint dirtyBits4Word;
@@ -1816,10 +1833,7 @@ checkDirtyBitsWord8:
       }
       if (((uint)dirtyBitsWord8 & 0x3f0000f8) != 0) {
         dirtyBitsArg = dirtyBitsWord8;
-        fpPassThrough1 = (double)((double (*)())gld_updateInverseMatrix)(glContext,engineState,dirtyBitsWord8,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,
-                                        fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,staleStackArg_ffffff68,
-                                        staleStackArg_ffffff70,staleStackArg_ffffff78,staleStackArg_ffffff80,
-                                        staleStackArg_ffffff88);
+        fpPassThrough1 = (double)((double (*)())gld_updateInverseMatrix)(glContext,engineState,dirtyBitsWord8);
         staleR4Chain = r4AfterCall7;
       }
       if ((((uint)dirtyBitsWord8 & 0x800000f0) != 0) &&
@@ -2216,9 +2230,7 @@ setDirtyBitsWord4:
           *(uint *)(glContext + 0x3c) = *(uint *)(glContext + 0x3c) | 8;
         }
         if ((dirtyBitsWord0 & 0x400000) != 0) {
-          ((double (*)())gld_updatePointState)(glContext,engineState,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7
-                       ,fpPassThrough8,staleStackArg_ffffff68,staleStackArg_ffffff70,staleStackArg_ffffff78,
-                       staleStackArg_ffffff80);
+          ((double (*)())gld_updatePointState)(glContext,engineState);
           staleR4Chain = r4AfterCall15;
         }
         if ((dirtyBitsWord0 & 0x20000000) != 0) {
@@ -2502,9 +2514,7 @@ checkDirtyKeepSelected:
     }
     if (((uint)dirtyKeepSelected & 0x3f000008) != 0) {
       dirtyBitsArg = dirtyKeepSelected;
-      ((double (*)())gld_updateInverseMatrix)(glContext,engineState,dirtyKeepSelected,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,
-                   fpPassThrough7,fpPassThrough8,staleStackArg_ffffff68,staleStackArg_ffffff70,staleStackArg_ffffff78,
-                   staleStackArg_ffffff80,staleStackArg_ffffff88);
+      ((double (*)())gld_updateInverseMatrix)(glContext,engineState,dirtyKeepSelected);
       fpPassThrough1 = (double)((int (*)())gld_transformClipPlanes)(glContextPtr4_2,dirtyKeepSelected);
     }
   }
@@ -2644,9 +2654,7 @@ checkDirtyKeepSelected:
         *(uint *)(glContext + 0x3c) = *(uint *)(glContext + 0x3c) | 8;
       }
       if ((dirtyBitsWord0 & 0x400000) != 0) {
-        ((double (*)())gld_updatePointState)(glContext,engineState,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,
-                     fpPassThrough8,staleStackArg_ffffff68,staleStackArg_ffffff70,staleStackArg_ffffff78,
-                     staleStackArg_ffffff80);
+        ((double (*)())gld_updatePointState)(glContext,engineState);
       }
       if ((dirtyBitsWord0 & 0x20000000) != 0) {
         ((int (*)())gld_clearStateBit28MarkDirty)(glContext);
@@ -2754,8 +2762,9 @@ int gld_classifyOperand(operandSpace, operandIndex, unusedArgR5, unusedArgR6, un
 }
 
 /* gld_uploadParamConstants @ 0xabab0 (164 bytes) */
-void gld_uploadParamConstants(int glContext,int a1,undefined4 a2,double fpPassThrough1)
+void gld_uploadParamConstants(int glContext,int a1,undefined4 a2)
 {
+  double fpPassThrough1 = 0.0;
   int constantCount;
   unsigned char *constantBuffer;
   
@@ -2763,7 +2772,7 @@ void gld_uploadParamConstants(int glContext,int a1,undefined4 a2,double fpPassTh
      frame, where the callee's own frame then overwrote the constants (live: gldSetUnitScaleConstants looped on garbage forever) */
   constantCount = *(int *)(*(int *)(a1 + 0x74) + 0x84);
   constantBuffer = (unsigned char *)__builtin_alloca(constantCount * 0x10);
-  ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),constantCount,constantBuffer,fpPassThrough1);
+  ((double (*)())gld_gatherProgramConstants)(*(undefined4 *)(glContext + 4),constantCount,constantBuffer);
   (**(code **)(((unsigned char *)0x00001280) + glContext))
             (glContext,a2,0,0,constantBuffer,constantCount,1);
   return;
@@ -5554,8 +5563,9 @@ checkWordVector:
 }
 
 /* gld_compileFragmentProgram @ 0xafe40 (5932 bytes) */
-undefined4 gld_compileFragmentProgram(int glContext,int forceRecompile,undefined4 unusedArgR5,uint *unused,double fpPassThrough1)
+undefined4 gld_compileFragmentProgram(int glContext,int forceRecompile,undefined4 unusedArgR5,uint *unused)
 {
+  double fpPassThrough1 = 0.0;
   undefined4 allocation26;
   undefined4 allocation25;
   int allocation24;
@@ -6218,7 +6228,7 @@ storeX000011d0:
     }
   }
   else {
-    ((void (*)())gld_uploadParamConstants)(glContext,boundProgram,programInstance,fpPassThrough1);
+    ((void (*)())gld_uploadParamConstants)(glContext,boundProgram,programInstance);
   }
   if (((*(uint *)(glContext + 0x44) & 0x2000) != 0) && (*(char *)(boundProgram + 0x6c) != '\0')) {
     (**(code **)(((unsigned char *)0x00001290) + glContext))(glContext,programInstance);
@@ -9297,7 +9307,7 @@ setGlContextWord1e5c_3:
 #undef ilScHandle
 
 /* gld_updateUnitBiasRegisters @ 0xb6f20 (928 bytes) */
-double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int updateMode,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double fpPassThrough9)
+double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int updateMode)
 {
   double scaledBiasField17;
   double scaledBiasD;

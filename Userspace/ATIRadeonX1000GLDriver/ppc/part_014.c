@@ -6685,8 +6685,9 @@ checkHashFullKey:
 }
 
 /* programFillStateConstants @ 0x9f0b0 (4444 bytes) */
-void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,undefined4 unusedArg8,double scratchProduct,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,undefined4 unusedArg8)
 {
+  double scratchProduct = 0.0;
   undefined4 slotAlt01;
   undefined4 mvpCopy31;
   undefined4 slotAlt12;

@@ -7277,8 +7277,16 @@ int _gldGetString(ctx, name)
 }
 
 /* gldPrimInlineLineStrip @ 0x39330 (724 bytes) */
-void gldPrimInlineLineStrip(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineLineStrip(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 vap_vte_cntl;
   undefined4 element1;
   undefined4 element2;
@@ -7298,8 +7306,7 @@ void gldPrimInlineLineStrip(int ctx,uint data,undefined4 elementCount,undefined4
   undefined4 staleArgR9;
   
   topology = 3;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,primFlag,3,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
-                       ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,primFlag,3,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);
@@ -7396,8 +7403,16 @@ void gldPrimInlineLineStrip(int ctx,uint data,undefined4 elementCount,undefined4
 }
 
 /* gldPrimInlineTriangleFan @ 0x39610 (1092 bytes) */
-void gldPrimInlineTriangleFan(int ctx,uint fanCenterData,uint data,undefined4 elementCount,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineTriangleFan(int ctx,uint fanCenterData,uint data,undefined4 elementCount,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 *elementPtr;
   int innerLeft2;
   int weightTable;
@@ -7426,8 +7441,7 @@ void gldPrimInlineTriangleFan(int ctx,uint fanCenterData,uint data,undefined4 el
   undefined4 staleArgR9;
   
   topology = 6;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,6,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,6,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);
@@ -7578,8 +7592,16 @@ void gldPrimInlineTriangleFan(int ctx,uint fanCenterData,uint data,undefined4 el
 }
 
 /* gldPrimInlineTriangles @ 0x39a60 (724 bytes) */
-void gldPrimInlineTriangles(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineTriangles(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 element1;
   undefined4 element2;
   undefined4 element3;
@@ -7598,8 +7620,7 @@ void gldPrimInlineTriangles(int ctx,uint data,undefined4 elementCount,undefined4
   undefined4 staleArgR9;
   
   topology = 4;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,4,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,4,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -7696,8 +7717,16 @@ void gldPrimInlineTriangles(int ctx,uint data,undefined4 elementCount,undefined4
 }
 
 /* gldPrimInlineTriangleStrip @ 0x39d40 (724 bytes) */
-void gldPrimInlineTriangleStrip(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineTriangleStrip(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 element1;
   undefined4 element2;
   undefined4 element3;
@@ -7716,8 +7745,7 @@ void gldPrimInlineTriangleStrip(int ctx,uint data,undefined4 elementCount,undefi
   undefined4 staleArgR9;
   
   topology = 5;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,5,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,5,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -7814,8 +7842,16 @@ void gldPrimInlineTriangleStrip(int ctx,uint data,undefined4 elementCount,undefi
 }
 
 /* gldPrimInlineQuads @ 0x3a020 (724 bytes) */
-void gldPrimInlineQuads(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineQuads(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 element1;
   undefined4 element2;
   undefined4 element3;
@@ -7834,8 +7870,7 @@ void gldPrimInlineQuads(int ctx,uint data,undefined4 elementCount,undefined4 ext
   undefined4 staleArgR9;
   
   topology = 7;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,7,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,7,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -7932,8 +7967,16 @@ void gldPrimInlineQuads(int ctx,uint data,undefined4 elementCount,undefined4 ext
 }
 
 /* gldPrimInlineQuadStrip @ 0x3a300 (724 bytes) */
-void gldPrimInlineQuadStrip(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineQuadStrip(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 element1;
   undefined4 element2;
   undefined4 element3;
@@ -7952,8 +7995,7 @@ void gldPrimInlineQuadStrip(int ctx,uint data,undefined4 elementCount,undefined4
   undefined4 staleArgR9;
   
   topology = 8;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,8,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,8,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -8050,8 +8092,16 @@ void gldPrimInlineQuadStrip(int ctx,uint data,undefined4 elementCount,undefined4
 }
 
 /* gldPrimInlinePolygon @ 0x3a5e0 (724 bytes) */
-void gldPrimInlinePolygon(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlinePolygon(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 element1;
   undefined4 element2;
   undefined4 element3;
@@ -8070,8 +8120,7 @@ void gldPrimInlinePolygon(int ctx,uint data,undefined4 elementCount,undefined4 e
   undefined4 staleArgR9;
   
   topology = 9;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -8168,8 +8217,16 @@ void gldPrimInlinePolygon(int ctx,uint data,undefined4 elementCount,undefined4 e
 }
 
 /* gldPrimInlinePoints @ 0x3a8c0 (724 bytes) */
-void gldPrimInlinePoints(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlinePoints(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 vap_vte_cntl;
   undefined4 element1;
   undefined4 element2;
@@ -8189,8 +8246,7 @@ void gldPrimInlinePoints(int ctx,uint data,undefined4 elementCount,undefined4 pr
   undefined4 staleArgR9;
   
   topology = 0;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);
@@ -8287,8 +8343,16 @@ void gldPrimInlinePoints(int ctx,uint data,undefined4 elementCount,undefined4 pr
 }
 
 /* gldPrimInlineLines @ 0x3aba0 (724 bytes) */
-void gldPrimInlineLines(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineLines(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 element1;
   undefined4 element2;
   undefined4 element3;
@@ -8307,8 +8371,7 @@ void gldPrimInlineLines(int ctx,uint data,undefined4 elementCount,undefined4 ext
   undefined4 staleArgR9;
   
   topology = 1;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
-                       staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + GLD_currentProgram) + 4);
@@ -8405,8 +8468,16 @@ void gldPrimInlineLines(int ctx,uint data,undefined4 elementCount,undefined4 ext
 }
 
 /* gldPrimInlineLineLoop @ 0x3ae80 (724 bytes) */
-void gldPrimInlineLineLoop(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimInlineLineLoop(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   undefined4 vap_vte_cntl;
   undefined4 element1;
   undefined4 element2;
@@ -8426,8 +8497,7 @@ void gldPrimInlineLineLoop(int ctx,uint data,undefined4 elementCount,undefined4 
   undefined4 staleArgR9;
   
   topology = 2;
-  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,primFlag,2,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
-                       ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,primFlag,2,elementCount,extraArg4,extraArg5,staleArgR9);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
     vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);

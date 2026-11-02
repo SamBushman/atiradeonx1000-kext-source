@@ -4526,10 +4526,10 @@ callScLogToSink:
     do {
       constIndex = nextConstIndex;
       constEntryOffset = constIndex * 0x10;
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0,(double)*(float *)(shaderState[0xc] + constEntryOffset));
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1,(double)*(float *)(shaderState[0xc] + constEntryOffset + 4));
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2,(double)*(float *)(shaderState[0xc] + constEntryOffset + 8));
-      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3,(double)*(float *)(shaderState[0xc] + constEntryOffset + 0xc));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2);
+      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3);
       argR7Text = componentText0;
       nextConstIndex = constIndex + 1;
       argR8Text = componentText1;
@@ -4546,10 +4546,10 @@ callScLogToSink:
     do {
       constIndex = nextConstIndex;
       constEntryOffset = constIndex * 0x10;
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0,(double)*(float *)(shaderState[0xd] + constEntryOffset));
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1,(double)*(float *)(shaderState[0xd] + constEntryOffset + 4));
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2,(double)*(float *)(shaderState[0xd] + constEntryOffset + 8));
-      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3,(double)*(float *)(shaderState[0xd] + constEntryOffset + 0xc));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2);
+      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3);
       argR7Text = componentText0;
       nextConstIndex = constIndex + 1;
       argR8Text = componentText1;
@@ -4565,10 +4565,10 @@ callScLogToSink:
     constIndex = 0;
     do {
       constEntryOffset = constIndex * 0x10;
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0,(double)*(float *)(shaderState[0xe] + constEntryOffset));
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1,(double)*(float *)(shaderState[0xe] + constEntryOffset + 4));
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2,(double)*(float *)(shaderState[0xe] + constEntryOffset + 8));
-      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3,(double)*(float *)(shaderState[0xe] + constEntryOffset + 0xc));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2);
+      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3);
       argR7Text = componentText0;
       nextConstIndex = constIndex + 1;
       argR8Text = componentText1;
@@ -4664,8 +4664,9 @@ int scShaderStateFlag(shaderState)
 }
 
 /* vsdisFormatFloat @ 0xcdc3c (996 bytes) */
-char * vsdisFormatFloat(undefined4 unusedArg,int significantDigits,char *outText,double value)
+char * vsdisFormatFloat(undefined4 unusedArg,int significantDigits,char *outText)
 {
+  double value = 0.0;
   char *exponentCursor;
   uint trimmedEnd;
   uint digitIndex;
@@ -6921,8 +6922,9 @@ int psnSwizzleIsAlphaSourceForm(sourceSwizzle)
 }
 
 /* psDisasmFormatRegister @ 0xd10dc (712 bytes) */
-double psDisasmFormatRegister(undefined4 outText,uint registerWord,undefined4 argR5,undefined4 argR6,undefined4 argR7,undefined4 argR8,undefined4 argR9,undefined4 argR10,double floatArg1)
+double psDisasmFormatRegister(undefined4 outText,uint registerWord,undefined4 argR5,undefined4 argR6,undefined4 argR7,undefined4 argR8,undefined4 argR9,undefined4 argR10)
 {
+  double floatArg1 = 0.0;
   bool moreDigits;
   double i2dMagic;
   double ten;
@@ -6959,7 +6961,7 @@ double psDisasmFormatRegister(undefined4 outText,uint registerWord,undefined4 ar
         printf_LDBLStub_1a32d0(outText,"r%02u",registerWord,argR6,argR7,argR8,argR9,argR10);
       }
       else {
-        immediateValue = (double)((double (*)())MiniFloat__decode)(registerWord & 0xffffdfff,floatArg1);
+        immediateValue = (double)((double (*)())MiniFloat__decode)(registerWord & 0xffffdfff);
         ten = DOUBLE_001aa238;
         i2dMagic = DOUBLE_001aa1e0;
         if (immediateValue == (double)FLOAT_001aa0d4) {
@@ -7116,7 +7118,7 @@ int psDisasmFormatRgbSource(outText, rgbAddrA, rgbAddrB, rgbAddrC, alphaAddrA, a
   sourceSelectCopy = sourceSelect;
   if (rgbOpcode - 0xbU < 2) {
 loopCallPsDisasmFormatRegister:
-    ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrA,rgbAddrB,rgbAddrCSaved,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelectCopy,floatArg1);
+    ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrA,rgbAddrB,rgbAddrCSaved,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelectCopy);
   }
   else {
     rgbAddrBSaved = rgbAddrB;
@@ -7125,7 +7127,7 @@ loopCallPsDisasmFormatRegister:
     auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)(swizzleWord & 0xffff);
     if (auxCheckResult == 0) {
       if (sourceSelect == 1) {
-        ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrB,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
+        ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrB,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy);
         goto setLength2;
       }
       rgbAddrB = rgbAddrBSaved;
@@ -7134,21 +7136,21 @@ loopCallPsDisasmFormatRegister:
       floatArg1 = floatArg1Saved;
       if (sourceSelect == 0) goto loopCallPsDisasmFormatRegister;
       if (sourceSelect == 2) {
-        ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrC,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
+        ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrC,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy);
         goto setLength2;
       }
     }
     else {
       if (sourceSelect == 1) {
-        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrB,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
+        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrB,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy);
         goto setLength2;
       }
       if (sourceSelect == 0) {
-        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrA,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
+        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrA,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy);
         goto setLength2;
       }
       if (sourceSelect == 2) {
-        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrC,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
+        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrC,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy);
         goto setLength2;
       }
     }
@@ -7237,22 +7239,22 @@ int psDisasmFormatAlphaSource(outText, rgbAddrA, rgbAddrB, rgbAddrC, alphaAddrA,
     if (componentCode != 3) {
       if (sourceSelect != 1) {
         if (sourceSelect == 0) {
-          ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrA,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,0,floatArg1);
+          ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrA,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,0);
           goto setLength;
         }
         rgbAddrB = rgbAddrC;
         if (sourceSelect != 2) goto checkSourceSelect;
       }
-      ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrB,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelect,floatArg1);
+      ((double (*)())psDisasmFormatRegister)(operandText,rgbAddrB,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelect);
       goto setLength;
     }
     if (sourceSelect == 1) {
-      ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrB,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,1,floatArg1);
+      ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrB,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,1);
       goto setLength;
     }
     if (sourceSelect != 0) {
       if (sourceSelect == 2) {
-        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrC,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,2,floatArg1);
+        ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrC,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,2);
         goto setLength;
       }
 checkSourceSelect:
@@ -7270,7 +7272,7 @@ checkSourceSelect:
       goto setLength;
     }
   }
-  ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrA,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelect,floatArg1);
+  ((double (*)())psDisasmFormatRegister)(operandText,alphaAddrA,alphaAddrC,rgbAddrC,alphaAddrA,alphaAddrB,modifierPrefix,sourceSelect);
 setLength:
   length = _strlen(outText);
   if (componentCode - 4U < 3) {
@@ -8879,22 +8881,22 @@ loopSetSrcpNeedBit4:
             rgbPreOpKind = *(char *)(instructionRecord2 + 0xc);
             if (rgbPreOpKind == '\x01') {
               printfResultScratch = (double)((double (*)())psDisasmFormatRegister)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
-                                            alphaSelectB,printfResultScratch);
-              ((double (*)())psDisasmFormatRegister)(&srcpTextA,rgbAddrB,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+                                            alphaSelectB);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextA,rgbAddrB,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"%s.rgb-%s.rgb\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (rgbPreOpKind == '\0') {
-              ((double (*)())psDisasmFormatRegister)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"1.0-2.0*%s.rgb\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (rgbPreOpKind == '\x02') {
               printfResultScratch = (double)((double (*)())psDisasmFormatRegister)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
-                                            alphaSelectB,printfResultScratch);
-              ((double (*)())psDisasmFormatRegister)(&srcpTextA,rgbAddrB,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+                                            alphaSelectB);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextA,rgbAddrB,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"%s.rgb+%s.rgb\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (rgbPreOpKind == '\x03') {
-              ((double (*)())psDisasmFormatRegister)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextB,rgbAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"1.0-%s.rgb\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else {
@@ -8909,22 +8911,22 @@ loopSetSrcpNeedBit4:
             alphaPreOp = *(char *)((int)instructionRecord2 + 0x3f);
             if (alphaPreOp == '\x01') {
               printfResultScratch = (double)((double (*)())psDisasmFormatRegister)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
-                                            alphaSelectB,printfResultScratch);
-              ((double (*)())psDisasmFormatRegister)(&srcpTextA,argR8,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+                                            alphaSelectB);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextA,argR8,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"%s.a-%s.a\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (alphaPreOp == '\0') {
-              ((double (*)())psDisasmFormatRegister)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"1.0-2.0*%s.a\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (alphaPreOp == '\x02') {
               printfResultScratch = (double)((double (*)())psDisasmFormatRegister)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,
-                                            alphaSelectB,printfResultScratch);
-              ((double (*)())psDisasmFormatRegister)(&srcpTextA,argR8,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+                                            alphaSelectB);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextA,argR8,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"%s.a+%s.a\n",&srcpTextA,&srcpTextB,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else if (alphaPreOp == '\x03') {
-              ((double (*)())psDisasmFormatRegister)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB,printfResultScratch);
+              ((double (*)())psDisasmFormatRegister)(&srcpTextB,alphaAddrA,instructionNumberArg,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
               ((int (*)())psnReportError)(0,"1.0-%s.a\n",&srcpTextB,aluIndexArg,alphaUseBitB,alphaSelectC,rgbSelectCRaw,alphaSelectB);
             }
             else {

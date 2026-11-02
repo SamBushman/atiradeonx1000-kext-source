@@ -300,8 +300,16 @@ int gldEmitVertexRoutingPackets(ctx)
 }
 
 /* ffvpValidateProgram @ 0x83870 (1012 bytes) */
-void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9)
+void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7)
 {
+  double unusedFloatArg1 = 0.0;
+  double unusedFloatArg2 = 0.0;
+  double unusedFloatArg3 = 0.0;
+  double unusedFloatArg4 = 0.0;
+  double unusedFloatArg5 = 0.0;
+  double unusedFloatArg6 = 0.0;
+  double unusedFloatArg7 = 0.0;
+  double unusedFloatArg8 = 0.0;
   int program;
   int recordCountdown;
   int variant;
@@ -333,8 +341,7 @@ void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,und
   *(undefined1 *)(ctx + 0x126) = 0;
   *(undefined4 *)(ctx + 0x1b98) = 0;
   dirtyFlag = *(char *)(ctx + 0x29);
-  ((void (*)())gldValidateState)(ctx,unusedArg2,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7,unusedFloatArg1,unusedFloatArg2,unusedFloatArg3,
-               unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
+  ((void (*)())gldValidateState)(ctx,unusedArg2,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7);
   if (dirtyFlag == '\0') {
     programKind = *(int *)(ctx + 0x13c);
     if (programKind == *(int *)(ctx + 0x140)) {
@@ -443,8 +450,7 @@ loopCheckVariant:
       *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1020;
       validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x29) = 1;
-      ((void (*)())gldValidateState)(ctx,retR4,depRecordCopy,depElemSize,builtConstBytes,constRegCount[0],paramList,validateResult,unusedFloatArg2,
-                   unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
+      ((void (*)())gldValidateState)(ctx,retR4,depRecordCopy,depElemSize,builtConstBytes,constRegCount[0],paramList);
     }
     else {
       if (*(char *)(variant + 0x59) == '\0') goto loopCheckVariant;
@@ -454,8 +460,7 @@ loopCheckVariant:
       validateResult = (double)gld_buildActiveUnitList(ctx);
       *(undefined1 *)(ctx + 0x126) = 1;
       *(undefined1 *)(ctx + 0x29) = 1;
-      ((void (*)())gldValidateState)(ctx,retR4b,unusedArg3,unusedArg4,unusedArg5,unusedArg6,programKind,validateResult,unusedFloatArg2,
-                   unusedFloatArg3,unusedFloatArg4,unusedFloatArg5,unusedFloatArg6,unusedFloatArg7,unusedFloatArg8,unusedStackArg);
+      ((void (*)())gldValidateState)(ctx,retR4b,unusedArg3,unusedArg4,unusedArg5,unusedArg6,programKind);
     }
   }
   ((int (*)())gldEmitVertexRoutingPackets)(ctx);
@@ -463,11 +468,19 @@ loopCheckVariant:
 }
 
 /* ffvpValidateProgramForced @ 0x83c80 (12 bytes) */
-void ffvpValidateProgramForced(int ctx,undefined4 passThroughArg2,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7,double passThroughFloatArg1,double passThroughFloatArg2,double passThroughFloatArg3,double passThroughFloatArg4,double passThroughFloatArg5,double passThroughFloatArg6,double passThroughFloatArg7,double passThroughFloatArg8,double passThroughFloatArg9)
+void ffvpValidateProgramForced(int ctx,undefined4 passThroughArg2,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7)
 {
+  double passThroughFloatArg1 = 0.0;
+  double passThroughFloatArg2 = 0.0;
+  double passThroughFloatArg3 = 0.0;
+  double passThroughFloatArg4 = 0.0;
+  double passThroughFloatArg5 = 0.0;
+  double passThroughFloatArg6 = 0.0;
+  double passThroughFloatArg7 = 0.0;
+  double passThroughFloatArg8 = 0.0;
+  double passThroughFloatArg9 = 0.0;
   *(undefined1 *)(ctx + 0x29) = 1;
-  ((void (*)())ffvpValidateProgram)(ctx,passThroughArg2,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7,passThroughFloatArg1,passThroughFloatArg2,passThroughFloatArg3,
-               passThroughFloatArg4,passThroughFloatArg5,passThroughFloatArg6,passThroughFloatArg7,passThroughFloatArg8,passThroughFloatArg9);
+  ((void (*)())ffvpValidateProgram)(ctx,passThroughArg2,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
   return;
 }
 
@@ -3543,7 +3556,7 @@ storeDrawStateWords:
     drawStateWords[7] = 0;
     drawStateWords[0x54b] = 0;
   }
-  ((void (*)())gldRebindCurrentProgram)(glContext,retR4,staleArg5,staleArg6,staleFpArg1);
+  ((void (*)())gldRebindCurrentProgram)(glContext,retR4,staleArg5,staleArg6);
   (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) & 0x3fefffff;
   packet = (undefined4 *)

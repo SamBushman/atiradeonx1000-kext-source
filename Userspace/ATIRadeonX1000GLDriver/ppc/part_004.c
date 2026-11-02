@@ -1,12 +1,21 @@
 #include "decls.h"
 
 /* gldPrimWrapperTriangleFan_23a24 @ 0x243f0 (112 bytes) */
-void gldPrimWrapperTriangleFan_23a24(int ctx,undefined4 extraVertexAttribs,int vertexAttribs,undefined4 elementCount,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperTriangleFan_23a24(int ctx,undefined4 extraVertexAttribs,int vertexAttribs,undefined4 elementCount,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,6,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,6,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,5,extraVertexAttribs,vertexAttribs,vertexCount,extraArg4);
   }
@@ -14,12 +23,21 @@ void gldPrimWrapperTriangleFan_23a24(int ctx,undefined4 extraVertexAttribs,int v
 }
 
 /* gldPrimWrapperQuads_23a24 @ 0x24470 (112 bytes) */
-void gldPrimWrapperQuads_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperQuads_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,7,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,7,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,13,0,vertexAttribs,vertexCount,extraArg);
   }
@@ -27,12 +45,21 @@ void gldPrimWrapperQuads_23a24(int ctx,int vertexAttribs,undefined4 elementCount
 }
 
 /* gldPrimWrapperQuadStrip_23a24 @ 0x244f0 (112 bytes) */
-void gldPrimWrapperQuadStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperQuadStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,8,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,8,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,14,0,vertexAttribs,vertexCount,extraArg);
   }
@@ -40,12 +67,21 @@ void gldPrimWrapperQuadStrip_23a24(int ctx,int vertexAttribs,undefined4 elementC
 }
 
 /* gldPrimWrapperPolygon_23a24 @ 0x24570 (112 bytes) */
-void gldPrimWrapperPolygon_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPolygon_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,15,0,vertexAttribs,vertexCount,extraArg);
   }
@@ -53,12 +89,21 @@ void gldPrimWrapperPolygon_23a24(int ctx,int vertexAttribs,undefined4 elementCou
 }
 
 /* gldPrimWrapperPolygon_24190 @ 0x245f0 (108 bytes) */
-void gldPrimWrapperPolygon_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPolygon_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitImmediateVertexList(ctx + 0x240,15,vertexData,vertexCount,extraArg);
   }
@@ -66,12 +111,21 @@ void gldPrimWrapperPolygon_24190(int ctx,undefined4 *vertexData,undefined4 eleme
 }
 
 /* gldPrimWrapperPoints_23a24 @ 0x24670 (108 bytes) */
-void gldPrimWrapperPoints_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPoints_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,1,0,vertexAttribs,vertexCount,0);
   }
@@ -79,12 +133,21 @@ void gldPrimWrapperPoints_23a24(int ctx,int vertexAttribs,undefined4 elementCoun
 }
 
 /* gldPrimWrapperPoints_24190 @ 0x246f0 (104 bytes) */
-void gldPrimWrapperPoints_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPoints_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitImmediateVertexList(ctx + 0x240,1,vertexData,vertexCount,0);
   }
@@ -92,12 +155,21 @@ void gldPrimWrapperPoints_24190(int ctx,undefined4 *vertexData,undefined4 elemen
 }
 
 /* gldPrimWrapperLines_23a24 @ 0x24770 (108 bytes) */
-void gldPrimWrapperLines_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLines_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,2,0,vertexAttribs,vertexCount,0);
   }
@@ -105,12 +177,21 @@ void gldPrimWrapperLines_23a24(int ctx,int vertexAttribs,undefined4 elementCount
 }
 
 /* gldPrimWrapperLines_24190 @ 0x247f0 (104 bytes) */
-void gldPrimWrapperLines_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLines_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitImmediateVertexList(ctx + 0x240,2,vertexData,vertexCount,0);
   }
@@ -118,12 +199,21 @@ void gldPrimWrapperLines_24190(int ctx,undefined4 *vertexData,undefined4 element
 }
 
 /* gldPrimWrapperLineLoop_23a24 @ 0x24870 (112 bytes) */
-void gldPrimWrapperLineLoop_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 closeFlag,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLineLoop_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 closeFlag,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,closeFlag,2,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,closeFlag,2,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,12,0,vertexAttribs,vertexCount,closeFlag);
   }
@@ -131,12 +221,21 @@ void gldPrimWrapperLineLoop_23a24(int ctx,int vertexAttribs,undefined4 elementCo
 }
 
 /* gldPrimWrapperLineStrip_23a24 @ 0x248f0 (112 bytes) */
-void gldPrimWrapperLineStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 closeFlag,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLineStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 closeFlag,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
   
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,closeFlag,3,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,closeFlag,3,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,3,0,vertexAttribs,vertexCount,closeFlag);
   }
@@ -144,8 +243,16 @@ void gldPrimWrapperLineStrip_23a24(int ctx,int vertexAttribs,undefined4 elementC
 }
 
 /* gld_drawElementsImmediate @ 0x24970 (1588 bytes) */
-void gld_drawElementsImmediate(int ctx,int glStateBlock,int primitiveMode,int indexBias,undefined4 indexCount,undefined *indexType,uint *indices,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gld_drawElementsImmediate(int ctx,int glStateBlock,int primitiveMode,int indexBias,undefined4 indexCount,undefined *indexType,uint *indices)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   int blockCount;
   uint lastIndex;
   uint primitiveFlags;
@@ -169,8 +276,7 @@ void gld_drawElementsImmediate(int ctx,int glStateBlock,int primitiveMode,int in
 
   cacheLineSize = (uint)*(byte *)(ctx + 8);
   dataCacheBlockTouch(*(undefined4 *)(ctx + 0x1d8));
-  trimmedCount = ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,indexCount,indexCount,indexType,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
-                       ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff88);
+  trimmedCount = ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,indexCount,indexCount,indexType,staleArgR9);
   if (trimmedCount != 0) {
     scratchInt9 = 5;
     *(undefined4 *)(glStateBlock + -0x68) = *(undefined4 *)(*(int *)(ctx + 0x244) + 0x23c);
@@ -390,8 +496,9 @@ int noop_24fd0()
 }
 
 /* gld_gatherProgramConstants @ 0x24fe0 (2908 bytes) */
-double gld_gatherProgramConstants(int ctx,int maxCount,float *outConstants,double staleFprArg1)
+double gld_gatherProgramConstants(int ctx,int maxCount,float *outConstants)
 {
+  double staleFprArg1 = 0.0;
   int stateBlockB;
   int stateRowPtr;
   int engineStateB;
@@ -1654,8 +1761,16 @@ storeCtx3:
 }
 
 /* gld_reserveVertexBufferSpace @ 0x26f80 (460 bytes) */
-void gld_reserveVertexBufferSpace(int ctx,uint *primitiveInfo,uint *vertexLimitPtr,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gld_reserveVertexBufferSpace(int ctx,uint *primitiveInfo,uint *vertexLimitPtr,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,undefined4 passThroughArg7)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   uint refillCount;
   uint fittingVertices;
   uint vertexCapacity;
@@ -1677,8 +1792,7 @@ void gld_reserveVertexBufferSpace(int ctx,uint *primitiveInfo,uint *vertexLimitP
     staleFprArg1 = (double)((int (*)())gld_forwardToStream)(ctx,1,primitiveInfo,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,primitiveInfo,activeCountPtr,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7,staleFprArg1,staleFprArg2,
-                 staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
+    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,primitiveInfo,activeCountPtr,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
   }
   if ((*vertexLimitPtr == 0) || (*(int *)(*(int *)(ctx + 0x14) + 0x120) == 0)) {
     vertexStrideWords = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + ctx) + 2);
@@ -1818,8 +1932,16 @@ int gld_drawArraysStream(ctx, staleArgR4, primitiveMode, vertexCount)
 }
 
 /* gld_reserveDrawSpace @ 0x273a0 (1484 bytes) */
-uint gld_reserveDrawSpace(int ctx,uint *altCountPtr,uint *countInOut,undefined4 staleArgR6,undefined4 staleArgR7,undefined4 staleArgR8,undefined4 staleArgR9,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+uint gld_reserveDrawSpace(int ctx,uint *altCountPtr,uint *countInOut,undefined4 staleArgR6,undefined4 staleArgR7,undefined4 staleArgR8,undefined4 staleArgR9)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   byte vertexStrideWords;
   bool usesSecondRecord;
   undefined1 recordSelector;
@@ -1846,8 +1968,7 @@ uint gld_reserveDrawSpace(int ctx,uint *altCountPtr,uint *countInOut,undefined4 
     staleFprArg1 = (double)((int (*)())gld_forwardToStream)(ctx,1,altCountPtr,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,altCountPtr,activeCountPtr,staleArgR6,staleArgR7,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,
-                 staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
+    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,altCountPtr,activeCountPtr,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
   }
   if ((*countInOut == 0) || (*(int *)(*(int *)(ctx + 0x14) + 0x120) == 0)) {
     usesSecondRecord = false;
@@ -5096,8 +5217,17 @@ int _gldGetQueryInfo(ctx, query, pname, valueOut)
 }
 
 /* gld_beginQuerySlot @ 0x2b740 (172 bytes) */
-void gld_beginQuerySlot(int ctx,int *queryIdPtr,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gld_beginQuerySlot(int ctx,int *queryIdPtr,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   int queryEntry;
   int *r4AfterCall;
   int queryEntries;
@@ -5124,9 +5254,7 @@ void gld_beginQuerySlot(int ctx,int *queryIdPtr,undefined4 passThroughArg3,undef
   packetCursor[1] = 0;
   *packetCursor = ((unsigned char *)0x000013d6U);
   ((unsigned char *)0x00002b7e)[ctx] = 1;
-  ((void (*)())gldValidateState)(ctx + 0x240,queryIdPtr,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,packetCursor,staleFprArg1,staleFprArg2,
-               staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,
-               (double)CONCAT44(staleFprArg9Hi,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
+  ((void (*)())gldValidateState)(ctx + 0x240,queryIdPtr,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,packetCursor);
   return;
 }
 
@@ -5293,8 +5421,17 @@ int gld_emitQueryBeginPacket(ctx, writeCursor)
 }
 
 /* gld_emitStampFencePacket @ 0x2bbc4 (564 bytes) */
-void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThroughArg3,undefined4 passThroughArg4,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThroughArg3,undefined4 passThroughArg4)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   undefined4 *packet;
   int *fenceWord;
   uint *ringTailLink;
@@ -5398,9 +5535,7 @@ void gld_emitStampFencePacket(int ctx,undefined4 *stampSource,undefined4 passThr
   }
   *(undefined4 **)(ctx + 0x1dc) = writeCursor;
   ((unsigned char *)0x00002b7e)[ctx] = 0;
-  ((void (*)())gldValidateState)(ctx + 0x240,param2AfterFlush,passThroughArg3,passThroughArg4,staleArgR7,staleArgR8,scratchPtr11,staleFprArg1,staleFprArg2,
-               staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,
-               (double)CONCAT44(staleFprArg9Hi,(*(unsigned int *)((unsigned char *)&(staleFprArg9) + 4))));
+  ((void (*)())gldValidateState)(ctx + 0x240,param2AfterFlush,passThroughArg3,passThroughArg4,staleArgR7,staleArgR8,scratchPtr11);
   return;
 }
 
@@ -5535,8 +5670,16 @@ int gldTrimVertexCountToPrimitiveMin(ctx, mode, count)
 }
 
 /* gld_revalidateStreamProgram @ 0x2c020 (148 bytes) */
-void gld_revalidateStreamProgram(int stream,int streamFlag,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,uint scratchUint7,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gld_revalidateStreamProgram(int stream,int streamFlag,undefined4 passThroughArg3,undefined4 passThroughArg4,undefined4 passThroughArg5,undefined4 passThroughArg6,uint scratchUint7)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   uint oldProgramFlags;
   int forcedState;
   double staleStackArg_ffffffb8;
@@ -5551,8 +5694,7 @@ void gld_revalidateStreamProgram(int stream,int streamFlag,undefined4 passThroug
     forcedState = 0;
   }
   if (forcedState != *(int *)(stream + 0x192c)) {
-    ((void (*)())ffvpValidateProgramForced)(stream,streamFlag,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,scratchUint7,staleFprArg1,staleFprArg2,staleFprArg3,
-                 staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffb8);
+    ((void (*)())ffvpValidateProgramForced)(stream,streamFlag,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,scratchUint7);
     gldClearHwTclFlag(stream);
     *(int *)(stream + 0x192c) = forcedState;
   }
@@ -5986,9 +6128,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   initParam[4] = contextInitParam4_001aa4f8;
   initParam[2] = contextInitParam2_001aa4f0;
   initParam[3] = contextInitParam3_001aa4f4;
-  ((void (*)())gld_validateDirtyState)(engineBase,&initParam[0],scratchUint5,vectorConstTable,permuteIndex,contextInitParam4_001aa4f8,contextInitParam0_001aa4e8,contextInitParam3_001aa4f4,staleFprArg1,
-               staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff78,staleStackArg_ffffff80,
-               staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
+  ((void (*)())gld_validateDirtyState)(engineBase,&initParam[0],scratchUint5,vectorConstTable,permuteIndex,contextInitParam4_001aa4f8,contextInitParam0_001aa4e8,contextInitParam3_001aa4f4);
   ((int (*)())gld_buildHardwareStateBuffer)(ctx);
   return;
 }
@@ -6040,8 +6180,16 @@ int gld_submitRingIfNeeded(ctx)
  * caller (including this file's own dispatch-wrapper family) passes 0, matching what real stock callers
  * themselves forward. */
 /* gld_prepareDrawCount @ 0x2cc30 (276 bytes) */
-uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint vertexCount,undefined4 extraArg4,undefined4 extraArg5,uint drawFlags,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint vertexCount,undefined4 extraArg4,undefined4 extraArg5,uint drawFlags)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   int primitiveClassBits;
   uint modeForward;
   uint vertexCountForward;
@@ -6081,8 +6229,7 @@ checkX00002b80:
     staleFprArg1 = (double)gld_setPrimitiveInputRegisters(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit,staleFprArg1,staleFprArg2,
-                 staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
+    ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
   }
   *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
   return trimmedCount;

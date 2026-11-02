@@ -3702,8 +3702,7 @@ setDrawFlagsArg:
    * 25) that supplies a genuine 7th argument - verified via real stock disassembly
    * (`lwz r9,0xa8(r10)`, matching this stack store just above). */
   scratchPtr19 = (undefined *)
-            ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,count,count,scratchPtr19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
-                         staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff68);
+            ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,count,count,scratchPtr19,drawFlags);
   hasVertices = 0 < (int)scratchPtr19;
   hasElements = scratchPtr19 != (undefined *)0x0;
   needStatePacket = hasElements;
@@ -5156,8 +5155,16 @@ int noop_22280()
 }
 
 /* _gldUpdateDispatch @ 0x22290 (2632 bytes) */
-uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR6,undefined4 scratchR7,undefined4 scratchR8,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4,double fpPassThrough5,double fpPassThrough6,double fpPassThrough7,double fpPassThrough8,double staleFprArg9,double staleFprArg10,double staleFprArg11,double staleFprArg12,double staleFprArg13)
+uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR6,undefined4 scratchR7,undefined4 scratchR8)
 {
+  double fpPassThrough1 = 0.0;
+  double fpPassThrough2 = 0.0;
+  double fpPassThrough3 = 0.0;
+  double fpPassThrough4 = 0.0;
+  double fpPassThrough5 = 0.0;
+  double fpPassThrough6 = 0.0;
+  double fpPassThrough7 = 0.0;
+  double fpPassThrough8 = 0.0;
   int *programObject;
   uint dirtyWord2;
   uint dirtyWord4;
@@ -5465,9 +5472,7 @@ setScratchUint24:
        ) {
       dirtyBits[2] = dirtyWord2;
       *dirtyWord3Ptr = scratchUint26;
-      ((void (*)())gld_validateDirtyState)(ctx + GLD_commandStream,dirtyBits,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,scratchUint24,dirtyWord4,fpPassThrough1,
-                   fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,staleStackArg_ffffff78,
-                   staleStackArg_ffffff80,staleStackArg_ffffff88,staleStackArg_ffffff90,staleStackArg_ffffff98);
+      ((void (*)())gld_validateDirtyState)(ctx + GLD_commandStream,dirtyBits,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,scratchUint24,dirtyWord4);
       framebufferObj = r4Out4;
     }
     if ((scratchUint26 & 0x10000000) != *(uint *)(ctx + GLD_lastDirtyBit28) ||
@@ -5686,9 +5691,7 @@ int _gldInitDispatch(ctx, dispatch, savedState, updateArg3, updateArg4)
   dispatch[0x1a] = ptrTo_gld_beginQuerySlot_001e896c;
   dispatch[0x1b] = entry;
   dispatch[0x20] = ptrTo_returnZero_1e270_001e88d8;
-  return ((uint (*)())_gldUpdateDispatch)(ctx,dispatch,&defaultState[0],updateArg3,updateArg4,word0,staleFprArg1,staleFpr2,staleFpr3,staleFpr4,
-                     staleFpr5,staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff98,staleStackArg_ffffffa0,staleStackArg_ffffffa8,
-                     staleStackArg_ffffffb0,staleStackArg_ffffffb8);
+  return ((uint (*)())_gldUpdateDispatch)(ctx,dispatch,&defaultState[0],updateArg3,updateArg4,word0);
 }
 
 /* gld_emitDirtyStatePackets @ 0x22eb0 (536 bytes) */
@@ -6450,12 +6453,20 @@ int gld_emitImmediateVertexList(ctx, primitiveType, vertexAttribs, vertexCount, 
  * misreading of this function's own real 7th argument (see gld_prepareDrawCount): no real caller here sets r9
  * either, it just forwards garbage like the rest of the dispatch-wrapper family. */
 /* gldPrimWrapperTriangles_23a24 @ 0x242f0 (116 bytes) */
-void gldPrimWrapperTriangles_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8)
+void gldPrimWrapperTriangles_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
 
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,4,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,4,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,4,0,vertexAttribs,vertexCount,extraArg);
   }
@@ -6466,12 +6477,21 @@ void gldPrimWrapperTriangles_23a24(int ctx,int vertexAttribs,undefined4 elementC
  * had been overwritten with unrelated gldPrimInlineLineStrip-family content). Rewritten from real stock disassembly,
  * same as the part_004.c siblings. */
 /* gldPrimWrapperTriangleStrip_23a24 @ 0x24370 (112 bytes) */
-void gldPrimWrapperTriangleStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperTriangleStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8)
 {
+  double staleFprArg1 = 0.0;
+  double staleFprArg2 = 0.0;
+  double staleFprArg3 = 0.0;
+  double staleFprArg4 = 0.0;
+  double staleFprArg5 = 0.0;
+  double staleFprArg6 = 0.0;
+  double staleFprArg7 = 0.0;
+  double staleFprArg8 = 0.0;
+  double staleFprArg9 = 0.0;
   uint vertexCount;
   undefined4 staleArgR9;
 
-  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,5,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,5,elementCount,extraArg4,staleArgR8,staleArgR9);
   if (vertexCount != 0) {
     return gld_emitPrimitiveVertices(ctx + 0x240,6,0,vertexAttribs,vertexCount,extraArg);
   }

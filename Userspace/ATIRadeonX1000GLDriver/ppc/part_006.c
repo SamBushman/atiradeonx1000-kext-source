@@ -7985,8 +7985,9 @@ int gldReselectProgramStream(glContext, unusedArg2, unusedArg3, unusedArg4, unus
 }
 
 /* gldRebindCurrentProgram @ 0x4a8f0 (140 bytes) */
-void gldRebindCurrentProgram(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+void gldRebindCurrentProgram(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused)
 {
+  double fprF1 = 0.0;
   if ((*(uint *)(glContext + 0x44) & 0x20000) == 0) {
     ffpsBuildProgram(glContext,0);
                     
@@ -7995,7 +7996,7 @@ void gldRebindCurrentProgram(int glContext,undefined4 unusedArg2,undefined4 unus
     return;
   }
   if ((*(uint *)(glContext + 0x44) & 0x2000) != 0) {
-    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused,fprF1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused);
     return;
   }
   atifsCompileCurrentShader(glContext);

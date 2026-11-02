@@ -8,7 +8,7 @@ The corpora are compile-clean C that makes the same calls as the stock code; som
   * call sites Ghidra prints by SHORT C++ name (`error(...)`, `TFunction(this, ...)`, `append(...)`): the callee is one of several functions of that
     short name. `bind_calls` resolves each against the callees the stock machine code of the same function really makes.
 """
-import re
+import re, os
 
 ATOMIC = re.compile(
     r"(?P<ind>[ \t]*)do \{\n"
@@ -428,9 +428,11 @@ def mirror_frame(chunk, stackaddr=True):
     first = True
     for d in sorted(decls, key=lambda d: -d['off']):
         ind = re.match(r'\s*', d['line']).group(0)
-        # zeroed with explicit stores: gcc 4.0.1 turns `= { 0 }` on a 100-200 byte array into a memcpy from a zero constant block, and that call per function
-        # entry was 3% of Doom 3 CPU (issue #209)
-        zero = ''.join('%sghidra_frame[%d] = 0;\n' % (ind, i) for i in range(nq)) if nq <= 48 else '%s{ int zi_; for (zi_ = 0; zi_ < %d; zi_++) ghidra_frame[zi_] = 0; }\n' % (ind, nq)
+        # The stock frame is not zeroed (issue #209): zeroing it cost 20-100 stores per call of every function that has a mirror, and that was the main reason the rebuilt state-validation
+        # paths and the UT2004 frames around the per-effect hitches ran 3-10 % slower than stock; the GL suite is byte-identical without it. FRAME_ZERO=1 restores the zeroing (explicit stores:
+        # gcc 4.0.1 turns `= { 0 }` on a 100-200 byte array into a memcpy from a zero constant block).
+        nq_zero = nq if os.environ.get('FRAME_ZERO', '0') == '1' else 0
+        zero = ''.join('%sghidra_frame[%d] = 0;\n' % (ind, i) for i in range(nq_zero)) if nq <= 48 else ('%s{ int zi_; for (zi_ = 0; zi_ < %d; zi_++) ghidra_frame[zi_] = 0; }\n' % (ind, nq) if nq_zero else '')
         repl = ('%sunsigned long long ghidra_frame[%d];   /* the stock frame, variables at their offsets: rewrites.mirror_frame */\n%s' % (ind, nq, zero.rstrip('\n'))) if first else None
         body = body.replace(d['line'] + '\n', (repl + '\n') if repl else '', 1)
         first = False

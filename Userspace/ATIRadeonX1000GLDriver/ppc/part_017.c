@@ -2957,8 +2957,9 @@ setMatMulSearchIndex:
 }
 
 /* gld_emitLightingStatePacket @ 0xbd9a0 (160 bytes) */
-void gld_emitLightingStatePacket(int glContext,undefined4 passArgR4,undefined4 passArgR5,undefined4 passArgR6,double fpPassThrough1)
+void gld_emitLightingStatePacket(int glContext,undefined4 passArgR4,undefined4 passArgR5,undefined4 passArgR6)
 {
+  double fpPassThrough1 = 0.0;
   code *glContextPtr275c;
   int packetPtr;
   undefined4 *packetStart;
@@ -2981,7 +2982,7 @@ void gld_emitLightingStatePacket(int glContext,undefined4 passArgR4,undefined4 p
     fpPassThrough1 = (double)ffvpBuildLightKey(glContext);
     passArgR4 = r4AfterCall;
   }
-  ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,passArgR4,passArgR5,passArgR6,fpPassThrough1);
+  ((void (*)())gldMarkProgramsDirtyByFlag)(glContext,passArgR4,passArgR5,passArgR6);
   return;
 }
 

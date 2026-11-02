@@ -5631,8 +5631,16 @@ int ffvpSelectPassThroughVariant(glContext)
 }
 
 /* vpFillConstantBank @ 0x659d0 (612 bytes) */
-void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,undefined4 unusedArg8,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8,double fprF9,double fprF10,double fprF11,double fprF12,double fprF13)
+void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,undefined4 unusedArg8)
 {
+  double fprF1 = 0.0;
+  double fprF2 = 0.0;
+  double fprF3 = 0.0;
+  double fprF4 = 0.0;
+  double fprF5 = 0.0;
+  double fprF6 = 0.0;
+  double fprF7 = 0.0;
+  double fprF8 = 0.0;
   int maskWordPtr;
   int maskWordIndex;
   int constantCount;
@@ -5667,9 +5675,7 @@ void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefine
     constantCount = 0;
     if (*(int *)(variant + 0x48) != 0) {
       constantData = *(undefined4 *)(variant + 0x4c);
-      ((void (*)())programFillStateConstants)(glContext,variant,unusedArg3,unusedArg4,unusedArg5,unusedArg6,glStateExt,unusedArg8,fprF1,fprF2,
-                   fprF3,fprF4,fprF5,fprF6,fprF7,fprF8,fprF9Stack,
-                   fprF10Stack,fprF11Stack,fprF12Stack,fprF13Stack);
+      ((void (*)())programFillStateConstants)(glContext,variant,unusedArg3,unusedArg4,unusedArg5,unusedArg6,glStateExt,unusedArg8);
       _memcpy(constantOut,constantData,*(int *)(variant + 0x48) << 4);
       constantCount = *(int *)(variant + 0x48);
       if (0 < constantCount) {

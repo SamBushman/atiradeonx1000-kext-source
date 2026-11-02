@@ -1264,8 +1264,10 @@ double powerOfTenDouble(int exponent,undefined4 unusedArg2,undefined4 exponentPt
 }
 
 /* textPrintDoubleShortest @ 0xbfa0 (1332 bytes) */
-char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,uint outCapacity,double value,double tolerance)
+char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,uint outCapacity)
 {
+  double value = 0.0;
+  double tolerance = 0.0;
   int reversalSwaps;
   int capacityLeft;
   int digitRunLength;
@@ -5077,8 +5079,7 @@ loadConstantVector:
           outCursor = outCursor + emitLength3;
           commaSeparatorBase = 0x19f634;
           floatPrintResult = ((char * (*)())textPrintDoubleShortest)((int)(printResult >> 0x20),(int)printResult,outCursor,
-                                (outBuffer + outCapacity[0]) - (int)outCursor,(double)*constantVector,
-                                DOUBLE_001aa248);
+                                (outBuffer + outCapacity[0]) - (int)outCursor);
           floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
           curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
           separatorNotEmpty = curChar != '\0';
@@ -5098,7 +5099,7 @@ loadConstantVector:
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
           floatPrintResult = ((char * (*)())textPrintDoubleShortest)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
-                                ,(double)constantVector[1],DOUBLE_001aa248);
+                                );
           floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
           if (separatorNotEmpty) {
             emitLength2 = 0;
@@ -5116,7 +5117,7 @@ loadConstantVector:
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
           floatPrintResult = ((char * (*)())textPrintDoubleShortest)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
-                                ,(double)constantVector[2],DOUBLE_001aa248);
+                                );
           floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
           if (separatorNotEmpty) {
             emitLength2 = 0;
@@ -5133,8 +5134,7 @@ loadConstantVector:
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
           argReg6 = (uint *)((outBuffer + outCapacity[0]) - (int)outCursor);
-          floatTextCursor = ((char * (*)())textPrintDoubleShortest)(floatTextCursor,(int)floatPrintResult,outCursor,argReg6,(double)constantVector[3],DOUBLE_001aa248
-                               );
+          floatTextCursor = ((char * (*)())textPrintDoubleShortest)(floatTextCursor,(int)floatPrintResult,outCursor,argReg6);
           emitLength2 = 0;
           if (s___001a49e0[0] != '\0') {
             srcCursor = "}";
@@ -8154,8 +8154,10 @@ callFree:
 }
 
 /* glBitmap_impl @ 0x16670 (2312 bytes) */
-void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleArgR7,undefined4 staleArgR8,int bitmap,int tightlyPacked,double xOrigin,double yOrigin)
+void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleArgR7,undefined4 staleArgR8,int bitmap,int tightlyPacked)
 {
+  double xOrigin = 0.0;
+  double yOrigin = 0.0;
   uint lsbBit;
   int rowBytesLeft;
   int trailerOffset;

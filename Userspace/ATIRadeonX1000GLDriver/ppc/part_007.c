@@ -901,8 +901,9 @@ checkWord1a4cOrFlag:
 }
 
 /* gldMarkProgramsDirtyByFlag @ 0x4d620 (328 bytes) */
-void gldMarkProgramsDirtyByFlag(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+void gldMarkProgramsDirtyByFlag(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused)
 {
+  double fprF1 = 0.0;
   uint loopIndex;
   int programEntry;
   char wantFlag;
@@ -919,7 +920,7 @@ void gldMarkProgramsDirtyByFlag(int glContext,undefined4 unusedArg2,undefined4 u
     return;
   }
   if ((glContextWord44 & 0x2000) != 0) {
-    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused,fprF1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused);
     return;
   }
   if ((glContextWord44 & 0x80100000) == 0x80000000) {
@@ -954,7 +955,7 @@ setProgramTable:
 }
 
 /* gldValidateViewportPolygonOffset @ 0x4d770 (840 bytes) */
-void gldValidateViewportPolygonOffset(int glContext,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8)
+void gldValidateViewportPolygonOffset(int glContext)
 {
   float polyOffsetUnits;
   float polyOffsetUnitScale;
@@ -1282,8 +1283,16 @@ int gldSetUnitScaleConstants(glContext, programEntry, unusedArg3, firstUnit, uni
 }
 
 /* gldValidateTextureUnits @ 0x4def0 (2428 bytes) */
-double gldValidateTextureUnits(int glContext,undefined4 unusedArg2,uint unitIndexArg,undefined4 unitFormatArg,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8,double fprF9)
+double gldValidateTextureUnits(int glContext,undefined4 unusedArg2,uint unitIndexArg,undefined4 unitFormatArg)
 {
+  double fprF1 = 0.0;
+  double fprF2 = 0.0;
+  double fprF3 = 0.0;
+  double fprF4 = 0.0;
+  double fprF5 = 0.0;
+  double fprF6 = 0.0;
+  double fprF7 = 0.0;
+  double fprF8 = 0.0;
   int boundProgramEntry;
   int boundProgramTexState;
   uint lodBiasField;
@@ -1391,9 +1400,7 @@ loopStoreGlContext:
                  (*(ushort *)(unitInfoCursor + 0x46e) & 0x3ff) << 3 | *(uint *)(texObj + 0x18) & 0xffffe007;
             unitFormatArg = *(undefined4 *)(&textureUnitFormatArgTable_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
             unitIndexArg = loopIndex;
-            fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3
-                                            ,fprF4,fprF5,fprF6,fprF7,fprF8,
-                                            stackArg28);
+            fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg);
           }
         }
         else {
@@ -1544,9 +1551,7 @@ loopSetLodBiasFromProgram:
           *(uint *)(texRegCursor + 0x1d1c) = texFilterWord;
           unitFormatArg = *(undefined4 *)(&textureUnitFormatArgTable_001db98c + (uint)*(byte *)(glContext + 0x2941) * 4);
           unitIndexArg = loopIndex;
-          fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg,fprF1,fprF2,fprF3,
-                                          fprF4,fprF5,fprF6,fprF7,fprF8,
-                                          stackArg28);
+          fprF1 = (double)((double (*)())gld_updateUnitBiasRegisters)(glContext,texObj,loopIndex,unitFormatArg);
           texFormatWord = *(uint *)(texObj + 0x14);
           if ((texFormatWord & 0x1e00) == 0xa00) {
             if ((texFormatWord & 7) == 4) {
@@ -1648,7 +1653,7 @@ setPendingUnitBits:
     atifsCompileCurrentShader(glContext);
     return;
   }
-  ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unitIndexArg,unitFormatArg,fprF1);
+  ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unitIndexArg,unitFormatArg);
   return;
 }
 
@@ -1716,8 +1721,16 @@ int gldDepthBiasScaledInt(glContext)
 }
 
 /* gldValidatePolygonMode @ 0x4ea70 (260 bytes) */
-double gldValidatePolygonMode(int glContext,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8)
+double gldValidatePolygonMode(int glContext)
 {
+  double fprF1 = 0.0;
+  double fprF2 = 0.0;
+  double fprF3 = 0.0;
+  double fprF4 = 0.0;
+  double fprF5 = 0.0;
+  double fprF6 = 0.0;
+  double fprF7 = 0.0;
+  double fprF8 = 0.0;
   short backPolygonMode;
   short frontPolygonMode;
   uint newModeWord;
@@ -1762,7 +1775,7 @@ double gldValidatePolygonMode(int glContext,double fprF1,double fprF2,double fpr
   if (oldModeWord != newModeWord) {
     *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x2000;
   }
-  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprF1,fprF2,fprF3,fprF4,fprF5,fprF6,fprF7,fprF8);
+  ((void (*)())gldValidateViewportPolygonOffset)(glContext);
   return;
 }
 
@@ -1834,7 +1847,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
     *(undefined4 *)(glContext + 0x1b70) = *(undefined4 *)(glContextWord2768 + 0x24);
   }
   *(uint *)(glContext + 0x1930) = *(uint *)(glContext + 0x1930) | 0x4000;
-  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprResidualF1,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,staleArgF7,staleArgF8);
+  ((void (*)())gldValidateViewportPolygonOffset)(glContext);
   return;
 }
 
@@ -1936,7 +1949,7 @@ storeGlContext:
   registerDirty = *(uint *)(glContext + 0x1930);
 storeGlContext2:
   *(uint *)(glContext + 0x1930) = registerDirty | 0xc08000;
-  ((void (*)())gldValidateViewportPolygonOffset)(glContext,fprF1,staleArgF2,staleArgF3,staleArgF4,staleArgF5,staleArgF6,staleArgF7,staleArgF8);
+  ((void (*)())gldValidateViewportPolygonOffset)(glContext);
   return;
 }
 
@@ -2032,8 +2045,9 @@ returnHighBits:
 }
 
 /* gldValidateFog @ 0x4f2e0 (616 bytes) */
-void gldValidateFog(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused,double fprF1)
+void gldValidateFog(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,undefined4 unused)
 {
+  double fprF1 = 0.0;
   byte colorFormatIndex;
   short fogMode;
   undefined *colorFormatTable;
@@ -2091,7 +2105,7 @@ void gldValidateFog(int glContext,undefined4 unusedArg2,undefined4 unusedArgR5,u
     atifsCompileCurrentShader(glContext);
   }
   else {
-    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused,fprF1);
+    ((undefined4 (*)())gld_compileFragmentProgram)(glContext,0,unusedArgR5,unused);
   }
   fogColorWord0 = ((int (*)())gldFogColorChannelByte)(glContext,*(uint *)(colorFormatTable + (uint)colorFormatIndex * 0x24 + 0x1c) >> 0x1e);
   *(uint *)(glContext + 0x1a54) = fogColorWord0 & 0x3ff | *(uint *)(glContext + 0x1a54) & 0xfffffc00;
@@ -3882,7 +3896,7 @@ checkX00002ddc:
 }
 
 /* gldValidateViewport @ 0x520c0 (436 bytes) */
-double gldValidateViewport(int glContext,double fprF1,double fprF2,double fprF3,double fprF4,double fprF5,double fprF6,double fprF7,double fprF8)
+double gldValidateViewport(int glContext)
 {
   float yPixelScale;
   float xPixelScale;
