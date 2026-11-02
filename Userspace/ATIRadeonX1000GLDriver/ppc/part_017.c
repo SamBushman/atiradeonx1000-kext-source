@@ -10910,7 +10910,12 @@ int ilAllocLowestFreeBit8(programRecord, passThroughR4, passThroughR5, passThrou
 int ilNextCounterValue(programRecord)
   int programRecord;
 {
-  *(int *)(programRecord + 0x50) = *(int *)(programRecord + 0x50) + 1;
-  return;
+  int counter;
+  
+  /* stock 0xc73a0: lwz r3,0x50(r3); addi r0,r3,1; stw r0,0x50(r2); blr - returns the counter BEFORE the increment (the decompile ended in a bare `return;`,
+   * so the rebuilt function returned its own argument and ilEmitPrologue's remap table filled with the programRecord address). */
+  counter = *(int *)(programRecord + 0x50);
+  *(int *)(programRecord + 0x50) = counter + 1;
+  return counter;
 }
 
