@@ -61,8 +61,7 @@ int R300SchedModel__vslot5(param_1)
 {
                     
                     
-  (**(code **)(*param_1 + 8))();
-  return;
+  return (**(code **)(*param_1 + 8))(param_1);
 }
 
 /* R300SchedModel__vslot8 @ 0x1d88a8 (24 bytes) */
@@ -81,15 +80,14 @@ int R300SchedModel__vslot18(param_1, param_2)
     *(undefined4 *)(param_2 + 0x5c) = 0;
   }
   if (*(int *)(param_2 + 0x5c) == 0) {
-    return;
+    return (int)param_1;
   }
   if ((*(int *)(param_2 + 0x58) != 3) && (*(int *)(param_2 + 0x58) != 1)) {
-    return;
+    return (int)param_1;
   }
                     
                     
-  (**(code **)(*param_1 + 0x38))();
-  return;
+  return (**(code **)(*param_1 + 0x38))(param_1,param_2);
 }
 
 /* R300SchedModel__dtor_1d8910 @ 0x1d8910 (52 bytes) */
