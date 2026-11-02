@@ -1,0 +1,30 @@
+Date / Time: 11/2/26 1:29:43 (0ms)
+2500MHz, 16384MB
+C:\Applications\Halo.app Frames=4700
+Total Time=47.68s
+Average frame rate=98.58fps
+Below  5fps= 8% (time)  0% (frames) (3.836s spent in 4 frames)
+Below 10fps= 9% (time)  0% (frames)
+Below 15fps= 10% (time)  0% (frames)
+Below 20fps= 11% (time)  0% (frames)
+Below 25fps= 11% (time)  0% (frames)
+Below 30fps= 12% (time)  0% (frames)
+Below 40fps= 13% (time)  1% (frames)
+Below 50fps= 14% (time)  1% (frames)
+Below 60fps= 24% (time)  6% (frames)
+###Sound Options###
+Hardware Acceleration= No
+Sound Quality= Low
+Environmental Sound= No
+Sound Variety= Medium
+###Video Options###
+Resolution= 640 x 480
+Refresh rate= 0 Hz
+Framerate throttle= No Vsync
+Specular= No
+Shadows= No
+Decals= No
+Particles= Off
+Texture Quality= Medium
+
+For further information, please visit the timedemo FAQ at: http://halo.bungie.net/site/halo/features/hpcperformancefaq.html 
