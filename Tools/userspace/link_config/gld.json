@@ -31,7 +31,8 @@
  "label_overrides": {
   "builtin_strncpy": "_strncpy",
   "operator_delete": "__ZdlPv",
-  "FUN_00002748": "_gld_atexit_shim"
+  "FUN_00002748": "_gld_atexit_shim",
+  "atexit": "_gld_atexit_shim"
  },
  "data_anchors": {
   "DAT_001b2eb8": {

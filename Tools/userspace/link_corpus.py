@@ -409,6 +409,8 @@ extra_lines = [l for l in extra_lines if not any(re.search(r'\b%s\b' % re.escape
 open(os.path.join(out, 'extra_decls.h'), 'w').write('\n'.join(transform(extra_lines)) + '\n' if extra_lines else '')
 if os.path.exists(os.path.join(corpus, 'ghidra_c.h')):
     open(os.path.join(out, 'ghidra_c.h'), 'w').write(open(os.path.join(corpus, 'ghidra_c.h')).read())
+for _fh in glob.glob(os.path.join(corpus, '*_fields.h')):   # decls.h #includes the per-context field headers (gld_/arb_/prog_/comp_ctx_fields.h)
+    open(os.path.join(out, os.path.basename(_fh)), 'w').write(open(_fh).read())
 
 # ---------------------------------------------------------------------------------------------- which data symbols need a definition
 needed = {}      # name -> address
@@ -723,7 +725,8 @@ def clipped_word(addr, w):
         return 'bc%s %d,%d,%s' % ('l' if w & 1 else '', (w >> 21) & 31, (w >> 16) & 31, clip_stub(addr, n_))
     return '.long 0x%08x' % w
 for _n in sorted({n_ for n_ in re.findall(r'\bthunk_(FUN_[0-9a-f]+)\b', _all_body)}):
-    code_alias.append('#define thunk_%s %s' % (_n, _n))
+    # the thunk targets the function at the address in its name; once that function has been renamed (FUN_00134de8 -> RegAlloc__registerOfInst) `FUN_<addr>` no longer exists
+    code_alias.append('#define thunk_%s %s' % (_n, fn_by_addr.get(int(_n[4:], 16), _n)))
 if code_alias:
     with open(os.path.join(out, 'decls.h'), 'a') as f:
         f.write('\n'.join(code_alias) + '\n')
@@ -912,7 +915,8 @@ def emit_label(a):
         defined.add(nm)
         S.append('.globl %s' % nm)
         S.append('%s:' % nm)
-    if a in targets:
+    if a in targets and ld(a) not in defined:   # a `target` row naming the object a `data` row already labelled (r35) must not label it twice
+        defined.add(ld(a))
         S.append('%s:' % ld(a))
 
 label_positions = sorted(set(a2 for a2 in names_at if names_at[a2]) | set(targets))
