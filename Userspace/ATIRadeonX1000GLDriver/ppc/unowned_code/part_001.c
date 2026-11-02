@@ -38,8 +38,7 @@ int orph_e7650(param_1, param_2)
   *(int *)(param_2[1] + 8) = iVar2;
                     
                     
-  (**(code **)(iVar1 + 4))();
-  return;
+  return (**(code **)(iVar1 + 4))(param_2);
 }
 
 /* orph_ec1e4 @ 0xec1e4 (8 bytes) */

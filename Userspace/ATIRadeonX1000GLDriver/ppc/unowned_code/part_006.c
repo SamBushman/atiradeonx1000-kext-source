@@ -239,8 +239,7 @@ int ResourceModel__vslot5(param_1)
 {
                     
                     
-  (**(code **)(*param_1 + 8))();
-  return;
+  return (**(code **)(*param_1 + 8))(param_1);
 }
 
 /* ResourceModel__vslot6 @ 0x1d86fc (8 bytes) */

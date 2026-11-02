@@ -230,8 +230,7 @@ int R300MachineAssembler__callSlot14(this)
 {
                     
                     
-  (**(code **)(*this + 0x38))();
-  return;
+  return (**(code **)(*this + 0x38))(this);
 }
 
 /* R300MachineAssembler__vslot16_noOp @ 0x1956f8 (4 bytes) */

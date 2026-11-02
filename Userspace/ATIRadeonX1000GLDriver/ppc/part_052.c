@@ -1437,8 +1437,7 @@ int R300VMachineAssembler__vslot18_callSlot14(this)
 {
                     
                     
-  (**(code **)(*this + 0x38))();
-  return;
+  return (**(code **)(*this + 0x38))(this);
 }
 
 /* R300VMachineAssembler__vslot19_callSlot14 @ 0x19a8bc (16 bytes) */
@@ -1447,8 +1446,7 @@ int R300VMachineAssembler__vslot19_callSlot14(this)
 {
                     
                     
-  (**(code **)(*this + 0x38))();
-  return;
+  return (**(code **)(*this + 0x38))(this);
 }
 
 /* R300VMachineAssembler__vslot43_beginLoop @ 0x19a8d4 (128 bytes) */

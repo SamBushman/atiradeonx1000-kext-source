@@ -1538,8 +1538,7 @@ int DListNode__unlinkAndDelete(node)
   *(int *)(node[1] + 8) = nextNode;
                     
                     
-  (**(code **)(nodeVtable + 4))();
-  return;
+  return (**(code **)(nodeVtable + 4))(node);
 }
 
 /* DList__insertBefore @ 0x193f44 (32 bytes) */
