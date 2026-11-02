@@ -3924,7 +3924,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
   float windowXStart;
   double scratchDouble6;
   double uintBiasD;
-  float pixelValueF;
+  uint pixelBits;
   int scratchInt9;
   undefined4 *packetAlloc;
   undefined4 *packetCursor;
@@ -4069,15 +4069,15 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
             }
             else {
               depthZ = *(float *)(rasterPosRecord + 8);
-              pixelValueF = *srcCursor;
+              pixelBits = *(uint *)srcCursor; /* raw 32-bit pixel word (stock lwz): the decompile read it as a float and converted by value */
               alphaI2dHi = 0x43300000;
               redI2dHi = 0x43300000;
               greenI2dHi = 0x43300000;
               blueI2dHi = 0x43300000;
-              blueI2dLo = (uint)(int)pixelValueF & 0xff;
-              alphaI2dLo = (uint)(int)pixelValueF >> 0x18;
-              scratchPtr16 = (float *)((uint)(int)pixelValueF >> 0x10 & 0xff);
-              greenI2dLo = (uint)(int)pixelValueF >> 8 & 0xff;
+              blueI2dLo = pixelBits & 0xff;
+              alphaI2dLo = pixelBits >> 0x18;
+              scratchPtr16 = (float *)(pixelBits >> 0x10 & 0xff);
+              greenI2dLo = pixelBits >> 8 & 0xff;
               colorA = (float)((double)CONCAT44(0x43300000,alphaI2dLo) - scratchDouble6) / scratchFloat18;
               colorB = (float)((double)CONCAT44(0x43300000,blueI2dLo) - scratchDouble6) / scratchFloat18;
               colorR = (float)((double)CONCAT44(0x43300000,scratchPtr16) - scratchDouble6) / scratchFloat18;
@@ -4132,7 +4132,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
             alphaByte = *(byte *)scratchPtr16;
             *vertexCursor = GH_U2F((unsigned int)(((unsigned char *)0x000013c2U)));
             scratchPtr16 = (float *)((int)scratchPtr16 + bytesPerPixel);
-            scratchFloat18 = GH_U2F((unsigned int)(((uint)alphaByte | (uint)(int)scratchFloat18 & 0xffffff00)));
+            scratchFloat18 = GH_U2F((unsigned int)(((uint)alphaByte | GH_F2U(scratchFloat18) & 0xffffff00)));
             vertexCursor[1] = scratchFloat18;
             pointSizeI2dLo2 = *(undefined4 *)(ctx + 0x248);
             pointSizeI2dHi2 = 0x43300000;
