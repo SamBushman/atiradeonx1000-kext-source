@@ -28,6 +28,11 @@
   "int gld_atexit_shim(void (*f)(void)) asm(\"_gld_atexit_shim\");",
   "int gld_atexit_shim(void (*f)(void)) { return __cxa_atexit((void (*)(void *))f, 0, &gld_mach_header); }"
  ],
+ "frame_blocks": {
+  "gld_readbackTextureLevel": {
+   "requestWords": "local_b8"
+  }
+ },
  "label_overrides": {
   "builtin_strncpy": "_strncpy",
   "operator_delete": "__ZdlPv",

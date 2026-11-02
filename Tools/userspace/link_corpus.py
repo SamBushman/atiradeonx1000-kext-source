@@ -170,6 +170,11 @@ for _r in apply_names.load_rows(corpus):
 for _new_fn, _old_fn in _func_old.items():                  # rows keep the OLD function name; the header comment carries the new one
     if _old_fn in LOCAL_RENAMES:
         LOCAL_RENAMES[_new_fn].update(LOCAL_RENAMES[_old_fn])
+# frame_blocks (gld.json): {function: {block: ghidra name}} - a block the corpus merged from several adjacent stock locals by hand (b5e19899: `uint requestWords [2]`
+# for `local_b8`/`local_b4`) is declared under a real name no row records. Naming the stock slot it starts at lets mirror_frame put it into the frame at its stock
+# offset; as a separate -O0 local it was only 8 bytes, and gldTextureFormatLookup (handed it as a 0x28-byte descriptor) wrote over the saved r29..r31.
+for _fn, _blocks in cfg.get('frame_blocks', {}).items():
+    LOCAL_RENAMES[_fn].update(_blocks)
 STACK_RE = re.compile(r'^(?:local|\w*Stack)_[0-9a-f]+(?:_buf)?$')
 VAR_DECL = re.compile(r'^\s+[A-Za-z_][\w *]*?\b[A-Za-z_]\w*(?:\s*\[[^\]]*\])?;\s*$')
 
