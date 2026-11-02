@@ -155,6 +155,48 @@ for _r in apply_names.load_targets(corpus):
 def ld(a):
     return TARGET_NAME.get(a, 'LD_%x' % a)
 
+# STACK-LOCAL RENAMES. rewrites.mirror_frame / fix_byte_buffers / fix_struct_blocks / fix_pointer_records recognise a stack variable by its Ghidra name (`local_48`,
+# `acStack_210`: the number is the variable's distance below the caller's sp), so a `local` / `use` row that gave it a real name (`scalarOut`) silently switched the
+# frame mirroring off for that function (GLDriver: 556 mirrored functions before the naming work, 33 after) and the rebuilt image lost the stock stack layout. Take
+# every renamed stack variable back to its Ghidra name before the rewrites run; the C source in the corpus keeps its real names. STACK_RENAMES[function] = {new: old}.
+STACK_RE = re.compile(r'^(?:local|\w*Stack)_[0-9a-f]+(?:_buf)?$')
+STACK_RENAMES = collections.defaultdict(dict)
+_func_old = apply_names.func_roots(apply_names.load_funcs(corpus))
+for _r in apply_names.load_rows(corpus):
+    _fn, _old, _new = _r[2], _r[3], _r[4]
+    if STACK_RE.match(_old):
+        STACK_RENAMES[_fn][_new] = _old
+for _new_fn, _old_fn in _func_old.items():                  # rows keep the OLD function name; the header comment carries the new one
+    if _old_fn in STACK_RENAMES:
+        STACK_RENAMES[_new_fn].update(STACK_RENAMES[_old_fn])
+
+def unrename_stack_locals(txt, fn):
+    m_ = STACK_RENAMES.get(fn)
+    if not m_:
+        return txt, 0
+    n_ = [0]
+    def sub_(t):
+        o_ = m_.get(t.group(0))
+        if o_ is None:
+            return t.group(0)
+        n_[0] += 1
+        return o_
+    txt = re.sub(r'[A-Za-z_][A-Za-z0-9_]*', sub_, txt)
+    # a local split into several roles had one declaration per role: they all carry the Ghidra name again, keep the first of identical lines
+    k_ = txt.find('\n{')
+    if k_ >= 0:
+        e_ = txt.find('\n\n', k_ + 2)
+        e_ = len(txt) if e_ < 0 else e_
+        seen_, out_ = set(), []
+        for ln_ in txt[k_:e_].split('\n'):
+            if ln_ in seen_ and STACK_DECL.match(ln_):
+                continue
+            seen_.add(ln_)
+            out_.append(ln_)
+        txt = txt[:k_] + '\n'.join(out_) + txt[e_:]
+    return txt, n_[0]
+STACK_DECL = re.compile(r'^\s+[A-Za-z_][\w *]*?\b(?:local|\w*Stack)_[0-9a-f]+(?:_buf)?(?:\s*\[[^\]]*\])?;')
+
 def addr_of_name(n):
     mm = re.search(r'_([0-9a-f]{8})$', DATA_ROOT.get(n, n))
     return int(mm.group(1), 16) if mm else None
@@ -1080,6 +1122,7 @@ blocks_total = [0]
 concat_inreg_total = [0]
 pair_total = [0]
 mirrored_total = [0]
+unrenamed_total = [0]
 ptr_blocks_total = [0]
 placed_clipped = []
 unresolved_calls = []
@@ -1142,6 +1185,8 @@ for pdir_, f in _part_files:
             continue
         if mm:
             txt = '\n'.join(ch)
+            txt, _nun = unrename_stack_locals(txt, mm.group(1))
+            unrenamed_total[0] += _nun
             for vn_, vt_ in void_valued.items():
                 if vn_ in txt:
                     txt = txt.replace('((void (*)())%s)' % vn_, '((%s (*)())%s)' % (vt_, vn_))
@@ -1303,6 +1348,7 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('stack records Ghidra declared as separate scalars, merged into one block: %d\n' % blocks_total[0])
     w.write('  of which records with pointer members (rewrites.fix_pointer_records): %d\n' % ptr_blocks_total[0])
     w.write('functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): %d\n' % mirrored_total[0])
+    w.write('stack variables taken back to their Ghidra names before the rewrites (STACK_RENAMES): %d\n' % unrenamed_total[0])
     w.write('external-relocation data words whose stored (prebound) value was not an addend, corrected: %d (%d of them prebound imports)\n' % (len(ext_addend_fixed), len(prebound_import_words)))
     w.write('CONCATnn(in_register_x, param) replaced by the parameter: %d; biased table-base literals anchored to the next section: %d\n' % (concat_inreg_total[0], len(biased_bases)))
     w.write('string literals used with arithmetic, put back as the number / address they stand for: %d sites\n' % len(strlit_fixed))
