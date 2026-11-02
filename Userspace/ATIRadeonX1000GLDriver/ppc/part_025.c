@@ -467,10 +467,10 @@ int SelectWord__readMask(outMask, selectWord)
     *(undefined1 *)((int)outMask + laneComponent) = 1;
   }
   if (3 < (selectWord & 0xff)) {
-    return;
+    return (int)outMask;
   }
   *(undefined1 *)((int)outMask + (selectWord & 0xff)) = 1;
-  return;
+  return (int)outMask; /* stock 0xf3398 never touches r3 (works on a copy in r9): it returns outMask, and tryOutputScaleExponent's caller passes it on */
 }
 
 /* SelectWord__fillUnusedWithFirstUsed @ 0xf33f8 (120 bytes) */

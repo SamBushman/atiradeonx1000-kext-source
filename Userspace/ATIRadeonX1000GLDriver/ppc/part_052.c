@@ -3212,7 +3212,7 @@ int R300VMachineAssembler__getOrAllocateScratchRegister(this, registerAllocator)
     scratchRegister = RegAlloc__allocateFirstFreeInClass(registerAllocator,0);
     *(undefined4 *)(this + 0x8c) = scratchRegister;
   }
-  return;
+  return *(int *)(this + 0x8c); /* stock 0x19d430 returns the scratch register (r3 = lwz 0x8c(this), or the allocator result); callers 0x19d9a0/0x19da78 store it */
 }
 
 /* R520VMachineAssembler__vslot33_noOp @ 0x19d474 (4 bytes) */

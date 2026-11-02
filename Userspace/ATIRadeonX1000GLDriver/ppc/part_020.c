@@ -3904,7 +3904,7 @@ int Compiler__setQueriedTableEntry4d4(compiler, queryArg, tableIndex)
   queryResult = (**(code **)(**(int **)(compiler + 0x30c) + 0x174))
                     (*(int **)(compiler + 0x30c),queryArg,tableIndex,compiler);
   *(undefined4 *)(tableIndex * 4 + compiler + 0x4d4) = queryResult;
-  return;
+  return queryResult; /* stock 0xe14e4: r3 (the vslot result) is still live at the blr, and three callers store it (0x1963e4, 0x19ad60, 0x19ef8c) */
 }
 
 /* Compiler__fail @ 0xe1534 (48 bytes) */
