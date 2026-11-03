@@ -6687,7 +6687,7 @@ checkHashFullKey:
 /* programFillStateConstants @ 0x9f0b0 (4444 bytes) */
 void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefined4 unusedArg4,undefined4 unusedArg5,undefined4 unusedArg6,undefined4 unusedArg7,undefined4 unusedArg8)
 {
-  double scratchProduct = 0.0;
+  float scratchProduct = 0.0;
   undefined4 slotAlt01;
   undefined4 mvpCopy31;
   undefined4 slotAlt12;
@@ -6753,14 +6753,14 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
   float minor5;
   float minor4;
   float minor3;
-  double minor13;
-  double mulSlot30;
-  double mulSlot20;
-  double mulSlot10;
-  double invSrc23;
-  double minor8;
-  double minor7;
-  double invSrc13;
+  float minor13;
+  float mulSlot30;
+  float mulSlot20;
+  float mulSlot10;
+  float invSrc23;
+  float minor8;
+  float minor7;
+  float invSrc13;
   float mvp11;
   float mvp12;
   float mvp13;
@@ -6807,22 +6807,22 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
   uint elementIndex;
   int *paramList;
   undefined8 valueXY;
-  double mvp03;
-  double mvp02;
-  double mvp01;
-  double mvp00;
-  double minor11;
-  double mulSlot00;
-  double minor10;
-  double minor12;
-  double minor9;
+  float mvp03;
+  float mvp02;
+  float mvp01;
+  float mvp00;
+  float minor11;
+  float mulSlot00;
+  float minor10;
+  float minor12;
+  float minor9;
   undefined8 valueZW;
-  double invSrc33;
-  double invSrc32;
-  double invSrc03;
-  double invSrc12;
-  double invSrc02;
-  double invSrc22;
+  float invSrc33;
+  float invSrc32;
+  float invSrc03;
+  float invSrc12;
+  float invSrc02;
+  float invSrc22;
   float stateVecX;
   float stateVecY;
   float stateVecZ;
@@ -6869,17 +6869,17 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
       elementIndex = *(uint *)(paramList[1] + paramOffset);
       switch(*(undefined4 *)(*paramList + paramOffset)) {
       case 0:
-        mvp00 = (double)*(float *)(stateBlock + 0x1920);
+        mvp00 = *(float *)(stateBlock + 0x1920);
         slotMatrix = stateBlock + 0x1860 + elementIndex * 0x40;
         mvp10 = *(float *)(stateBlock + 0x1930);
         mvp11 = *(float *)(stateBlock + 0x1934);
         mvp12 = *(float *)(stateBlock + 0x1938);
         mvp13 = *(float *)(stateBlock + 0x193c);
-        mulSlot00 = (double)*(float *)(slotMatrix + 0x100);
-        mvp01 = (double)*(float *)(stateBlock + 0x1924);
+        mulSlot00 = *(float *)(slotMatrix + 0x100);
+        mvp01 = *(float *)(stateBlock + 0x1924);
         mulSlot01 = *(float *)(slotMatrix + 0x104);
-        mvp02 = (double)*(float *)(stateBlock + 0x1928);
-        mvp03 = (double)*(float *)(stateBlock + 0x192c);
+        mvp02 = *(float *)(stateBlock + 0x1928);
+        mvp03 = *(float *)(stateBlock + 0x192c);
         mvp20 = *(float *)(stateBlock + 0x1940);
         mvp21 = *(float *)(stateBlock + 0x1944);
         mvp22 = *(float *)(stateBlock + 0x1948);
@@ -6891,49 +6891,49 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
         mvp32 = *(float *)(stateBlock + 0x1958);
         mulSlot03 = *(float *)(slotMatrix + 0x10c);
         result30 = mvp33 * mulSlot03 +
-                    mvp23 * mulSlot02 + (float)(mvp03 * mulSlot00 + (double)(mvp13 * mulSlot01));
+                    mvp23 * mulSlot02 + (mvp03 * mulSlot00 + (mvp13 * mulSlot01));
         result00 = mvp30 * mulSlot03 +
-                    mvp20 * mulSlot02 + (float)(mvp00 * mulSlot00 + (double)(mvp10 * mulSlot01));
+                    mvp20 * mulSlot02 + (mvp00 * mulSlot00 + (mvp10 * mulSlot01));
         result10 = mvp31 * mulSlot03 +
-                    mvp21 * mulSlot02 + (float)(mvp01 * mulSlot00 + (double)(mvp11 * mulSlot01));
+                    mvp21 * mulSlot02 + (mvp01 * mulSlot00 + (mvp11 * mulSlot01));
         result20 = mvp32 * mulSlot03 +
-                    mvp22 * mulSlot02 + (float)(mvp02 * mulSlot00 + (double)(mvp12 * mulSlot01));
+                    mvp22 * mulSlot02 + (mvp02 * mulSlot00 + (mvp12 * mulSlot01));
         mulSlot11 = *(float *)(slotMatrix + 0x114);
-        mulSlot10 = (double)*(float *)(slotMatrix + 0x110);
+        mulSlot10 = *(float *)(slotMatrix + 0x110);
         mulSlot12 = *(float *)(slotMatrix + 0x118);
         mulSlot13 = *(float *)(slotMatrix + 0x11c);
         result31 = mvp33 * mulSlot13 +
-                    mvp23 * mulSlot12 + (float)(mvp03 * mulSlot10 + (double)(mvp13 * mulSlot11));
+                    mvp23 * mulSlot12 + (mvp03 * mulSlot10 + (mvp13 * mulSlot11));
         result01 = mvp30 * mulSlot13 +
-                    mvp20 * mulSlot12 + (float)(mvp00 * mulSlot10 + (double)(mvp10 * mulSlot11));
+                    mvp20 * mulSlot12 + (mvp00 * mulSlot10 + (mvp10 * mulSlot11));
         result11 = mvp31 * mulSlot13 +
-                    mvp21 * mulSlot12 + (float)(mvp01 * mulSlot10 + (double)(mvp11 * mulSlot11));
+                    mvp21 * mulSlot12 + (mvp01 * mulSlot10 + (mvp11 * mulSlot11));
         result21 = mvp32 * mulSlot13 +
-                    mvp22 * mulSlot12 + (float)(mvp02 * mulSlot10 + (double)(mvp12 * mulSlot11));
+                    mvp22 * mulSlot12 + (mvp02 * mulSlot10 + (mvp12 * mulSlot11));
         mulSlot21 = *(float *)(slotMatrix + 0x124);
-        mulSlot20 = (double)*(float *)(slotMatrix + 0x120);
+        mulSlot20 = *(float *)(slotMatrix + 0x120);
         mulSlot22 = *(float *)(slotMatrix + 0x128);
         mulSlot23 = *(float *)(slotMatrix + 300);
         result32 = mvp33 * mulSlot23 +
-                    mvp23 * mulSlot22 + (float)(mvp03 * mulSlot20 + (double)(mvp13 * mulSlot21));
+                    mvp23 * mulSlot22 + (mvp03 * mulSlot20 + (mvp13 * mulSlot21));
         result02 = mvp30 * mulSlot23 +
-                    mvp20 * mulSlot22 + (float)(mvp00 * mulSlot20 + (double)(mvp10 * mulSlot21));
+                    mvp20 * mulSlot22 + (mvp00 * mulSlot20 + (mvp10 * mulSlot21));
         result12 = mvp31 * mulSlot23 +
-                    mvp21 * mulSlot22 + (float)(mvp01 * mulSlot20 + (double)(mvp11 * mulSlot21));
+                    mvp21 * mulSlot22 + (mvp01 * mulSlot20 + (mvp11 * mulSlot21));
         result22 = mvp32 * mulSlot23 +
-                    mvp22 * mulSlot22 + (float)(mvp02 * mulSlot20 + (double)(mvp12 * mulSlot21));
+                    mvp22 * mulSlot22 + (mvp02 * mulSlot20 + (mvp12 * mulSlot21));
         mulSlot31 = *(float *)(slotMatrix + 0x134);
-        mulSlot30 = (double)*(float *)(slotMatrix + 0x130);
+        mulSlot30 = *(float *)(slotMatrix + 0x130);
         mulSlot32 = *(float *)(slotMatrix + 0x138);
         mulSlot33 = *(float *)(slotMatrix + 0x13c);
-        scratchProduct = (double)(mvp11 * mulSlot31);
+        scratchProduct = (mvp11 * mulSlot31);
         result33 = mvp33 * mulSlot33 +
-                    mvp23 * mulSlot32 + (float)(mvp03 * mulSlot30 + (double)(mvp13 * mulSlot31));
+                    mvp23 * mulSlot32 + (mvp03 * mulSlot30 + (mvp13 * mulSlot31));
         result03 = mvp30 * mulSlot33 +
-                    mvp20 * mulSlot32 + (float)(mvp00 * mulSlot30 + (double)(mvp10 * mulSlot31));
-        result13 = mvp31 * mulSlot33 + mvp21 * mulSlot32 + (float)(mvp01 * mulSlot30 + scratchProduct);
+                    mvp20 * mulSlot32 + (mvp00 * mulSlot30 + (mvp10 * mulSlot31));
+        result13 = mvp31 * mulSlot33 + mvp21 * mulSlot32 + (mvp01 * mulSlot30 + scratchProduct);
         result23 = mvp32 * mulSlot33 +
-                    mvp22 * mulSlot32 + (float)(mvp02 * mulSlot30 + (double)(mvp12 * mulSlot31));
+                    mvp22 * mulSlot32 + (mvp02 * mulSlot30 + (mvp12 * mulSlot31));
         constOffset = *(int *)(elementIndex * 4 + paramMapEntries) * 0x10;
         constAddr = constantBuffer + constOffset;
         if ((*(uint *)(((unsigned char *)0x000013c0) + ctx) & 4) == 0) {
@@ -7036,73 +7036,73 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
       case 2:
         slotMatrix = stateBlock + 0x1860 + elementIndex * 0x40;
         invSrc00 = *(float *)(slotMatrix + 0x100);
-        invSrc32 = (double)*(float *)(slotMatrix + 0x138);
-        invSrc13 = (double)*(float *)(slotMatrix + 0x11c);
-        invSrc12 = (double)*(float *)(slotMatrix + 0x118);
-        invSrc33 = (double)*(float *)(slotMatrix + 0x13c);
-        invSrc03 = (double)*(float *)(slotMatrix + 0x10c);
-        invSrc02 = (double)*(float *)(slotMatrix + 0x108);
-        invSrc22 = (double)*(float *)(slotMatrix + 0x128);
+        invSrc32 = *(float *)(slotMatrix + 0x138);
+        invSrc13 = *(float *)(slotMatrix + 0x11c);
+        invSrc12 = *(float *)(slotMatrix + 0x118);
+        invSrc33 = *(float *)(slotMatrix + 0x13c);
+        invSrc03 = *(float *)(slotMatrix + 0x10c);
+        invSrc02 = *(float *)(slotMatrix + 0x108);
+        invSrc22 = *(float *)(slotMatrix + 0x128);
         invSrc01 = *(float *)(slotMatrix + 0x104);
         invSrc11 = *(float *)(slotMatrix + 0x114);
         invSrc21 = *(float *)(slotMatrix + 0x124);
-        minor1 = (float)(invSrc12 * invSrc33 - (double)(float)(invSrc13 * invSrc32));
-        minor2 = (float)(invSrc02 * invSrc33 - (double)(float)(invSrc03 * invSrc32));
-        minor3 = (float)(invSrc02 * invSrc13 - (double)(float)(invSrc03 * invSrc12));
-        invSrc23 = (double)*(float *)(slotMatrix + 300);
+        minor1 = (invSrc12 * invSrc33 - (invSrc13 * invSrc32));
+        minor2 = (invSrc02 * invSrc33 - (invSrc03 * invSrc32));
+        minor3 = (invSrc02 * invSrc13 - (invSrc03 * invSrc12));
+        invSrc23 = *(float *)(slotMatrix + 300);
         invSrc31 = *(float *)(slotMatrix + 0x134);
         invSrc20 = *(float *)(slotMatrix + 0x120);
-        minor4 = (float)(invSrc02 * invSrc23 - (double)(float)(invSrc03 * invSrc22));
-        minor5 = (float)(invSrc12 * invSrc23 - (double)(float)(invSrc13 * invSrc22));
+        minor4 = (invSrc02 * invSrc23 - (invSrc03 * invSrc22));
+        minor5 = (invSrc12 * invSrc23 - (invSrc13 * invSrc22));
         cofactor20 = invSrc31 * minor3 + (invSrc01 * minor1 - invSrc11 * minor2);
-        minor6 = (float)(invSrc22 * invSrc33 - (double)(float)(invSrc23 * invSrc32));
-        minor7 = (double)(invSrc00 * invSrc21 - invSrc01 * invSrc20);
+        minor6 = (invSrc22 * invSrc33 - (invSrc23 * invSrc32));
+        minor7 = (invSrc00 * invSrc21 - invSrc01 * invSrc20);
         cofactor30 = -(invSrc01 * minor5 - (invSrc11 * minor4 - invSrc21 * minor3));
         cofactor10 = -(invSrc01 * minor6 - (invSrc21 * minor2 - invSrc31 * minor4));
         cofactor00 = invSrc31 * minor5 + (invSrc11 * minor6 - invSrc21 * minor1);
         invSrc30 = *(float *)(slotMatrix + 0x130);
         invSrc10 = *(float *)(slotMatrix + 0x110);
-        minor8 = (double)(invSrc10 * invSrc21 - invSrc11 * invSrc20);
-        minor9 = (double)(invSrc00 * invSrc31 - invSrc01 * invSrc30);
-        minor10 = (double)(invSrc00 * invSrc11 - invSrc01 * invSrc10);
-        minor11 = (double)(invSrc10 * invSrc31 - invSrc11 * invSrc30);
-        minor12 = (double)(invSrc20 * invSrc31 - invSrc21 * invSrc30);
+        minor8 = (invSrc10 * invSrc21 - invSrc11 * invSrc20);
+        minor9 = (invSrc00 * invSrc31 - invSrc01 * invSrc30);
+        minor10 = (invSrc00 * invSrc11 - invSrc01 * invSrc10);
+        minor11 = (invSrc10 * invSrc31 - invSrc11 * invSrc30);
+        minor12 = (invSrc20 * invSrc31 - invSrc21 * invSrc30);
         determinant = invSrc00 * cofactor00 + invSrc10 * cofactor10 + invSrc30 * cofactor30 + invSrc20 * cofactor20;
-        minorProduct = (float)(minor11 * invSrc23);
-        scratchProduct = (double)(float)(minor7 * invSrc13 - (double)(float)(minor10 * invSrc23));
+        minorProduct = (minor11 * invSrc23);
+        scratchProduct = (minor7 * invSrc13 - (minor10 * invSrc23));
         minor13 = minor8 * invSrc03 - scratchProduct;
         if (determinant != FLOAT_001aa0d4) {
           invDeterminant = FLOAT_001aa0e8 / determinant;
           result00 = cofactor00 * invDeterminant;
           result02 = cofactor20 * invDeterminant;
           result01 = cofactor10 * invDeterminant;
-          result30 = -(float)(minor12 * invSrc12 -
-                              (double)(float)(minor11 * invSrc22 - (double)(float)(minor8 * invSrc32))) *
+          result30 = -(minor12 * invSrc12 -
+                              (minor11 * invSrc22 - (minor8 * invSrc32))) *
                       invDeterminant;
-          result33 = (float)(minor10 * invSrc22 +
-                             (double)(float)(minor8 * invSrc02 - (double)(float)(minor7 * invSrc12))) *
+          result33 = (minor10 * invSrc22 +
+                             (minor8 * invSrc02 - (minor7 * invSrc12))) *
                       invDeterminant;
           result10 = invDeterminant * -(invSrc10 * minor6 - (invSrc20 * minor1 - invSrc30 * minor5));
-          result20 = (float)(minor8 * invSrc33 + (double)(float)(minor12 * invSrc13 - (double)minorProduct))
+          result20 = (minor8 * invSrc33 + (minor12 * invSrc13 - minorProduct))
                       * invDeterminant;
           result11 = invDeterminant * (invSrc30 * minor4 + (invSrc00 * minor6 - invSrc20 * minor2));
-          result21 = -(float)(minor12 * invSrc03 -
-                              (double)(float)(minor9 * invSrc23 - (double)(float)(minor7 * invSrc33))) *
+          result21 = -(minor12 * invSrc03 -
+                              (minor9 * invSrc23 - (minor7 * invSrc33))) *
                       invDeterminant;
           result12 = invDeterminant * -(invSrc00 * minor1 - (invSrc10 * minor2 - invSrc30 * minor3));
-          result31 = (float)(minor7 * invSrc32 +
-                             (double)(float)(minor12 * invSrc02 - (double)(float)(minor9 * invSrc22))) *
+          result31 = (minor7 * invSrc32 +
+                             (minor12 * invSrc02 - (minor9 * invSrc22))) *
                       invDeterminant;
           result13 = invDeterminant * (invSrc20 * minor3 + (invSrc00 * minor5 - invSrc10 * minor4));
           result03 = cofactor30 * invDeterminant;
-          result32 = -(float)(minor11 * invSrc02 -
-                              (double)(float)(minor9 * invSrc12 - (double)(float)(minor10 * invSrc32))) *
+          result32 = -(minor11 * invSrc02 -
+                              (minor9 * invSrc12 - (minor10 * invSrc32))) *
                       invDeterminant;
-          result22 = (float)(minor10 * invSrc33 +
-                             (double)(float)(minor11 * invSrc03 - (double)(float)(minor9 * invSrc13))) *
+          result22 = (minor10 * invSrc33 +
+                             (minor11 * invSrc03 - (minor9 * invSrc13))) *
                       invDeterminant;
-          scratchProduct = (double)result22;
-          result23 = -(float)minor13 * invDeterminant;
+          scratchProduct = result22;
+          result23 = -minor13 * invDeterminant;
         }
         constOffset = *(int *)(elementIndex * 4 + paramMapEntries + 0x20) * 0x10;
         constAddr = constantBuffer + constOffset;
@@ -7248,7 +7248,7 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
             }
           }
           else {
-            scratchProduct = (double)(**(code **)(((unsigned char *)0x00001348) + ctx))
+            scratchProduct = (**(code **)(((unsigned char *)0x00001348) + ctx))
                                          (&stateVecX,elementIndex * 0x10 + ctx + 0x298);
           }
           stateVecW = 0x3f800000;
@@ -7273,7 +7273,7 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
             }
           }
           else {
-            scratchProduct = (double)(**(code **)(((unsigned char *)0x00001348) + ctx))
+            scratchProduct = (**(code **)(((unsigned char *)0x00001348) + ctx))
                                          (scratchProduct,&stateVecX,elementIndex * 0x10 + ctx + 0x318);
           }
           stateVecW = 0x3f800000;
@@ -7448,8 +7448,8 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
           intToDoubleHiA = 0x43300000;
           intToDoubleLoA = *(uint *)(ctx + 0x108) ^ 0x80000000;
           intToDoubleLoB = *(uint *)(ctx + 0x10c) ^ 0x80000000;
-          stateVecX = (float)((double)CONCAT44(0x43300000,intToDoubleLoA) - DOUBLE_001aa1e0);
-          stateVecY = (float)((double)CONCAT44(0x43300000,intToDoubleLoB) - DOUBLE_001aa1e0);
+          stateVecX = (CONCAT44(0x43300000,intToDoubleLoA) - DOUBLE_001aa1e0);
+          stateVecY = (CONCAT44(0x43300000,intToDoubleLoB) - DOUBLE_001aa1e0);
         }
         else {
           stateVecX = *(float *)(ctx + 0x100);

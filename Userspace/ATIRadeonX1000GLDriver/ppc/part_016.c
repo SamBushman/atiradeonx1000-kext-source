@@ -8070,10 +8070,10 @@ void gld_storeConstantVec4(int constantBank,int constantIndex,undefined4 unusedA
   }
   else {
     constantSlot = constantIndex * 0x10 + constantBank;
-    *(float *)(constantSlot + 0x98) = (float)fpPassThrough4;
-    *(float *)(constantSlot + 0x8c) = (float)fpPassThrough1;
-    *(float *)(constantSlot + 0x90) = (float)fpPassThrough2;
-    *(float *)(constantSlot + 0x94) = (float)fpPassThrough3;
+    *(float *)(constantSlot + 0x98) = fpPassThrough4;
+    *(float *)(constantSlot + 0x8c) = fpPassThrough1;
+    *(float *)(constantSlot + 0x90) = fpPassThrough2;
+    *(float *)(constantSlot + 0x94) = fpPassThrough3;
   }
   return;
 }
