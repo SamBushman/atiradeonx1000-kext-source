@@ -8,6 +8,9 @@ H=${1:-G5}; EV=${2:-$HOME/g5logs/gld_image}; SHA=$(git rev-parse --short HEAD) |
 # optimisation level of the image: -O2 -mtune=970 by default (stock's own code has the -mtune=970 nop padding; issue #209: -O0 was 20-39% slower than stock in UT2004/Doom 3,
 # -O1 left state-change paths 5-9% slower). LINK_OPT=-O1 / -O0 give the older images; the GL suite is byte-identical to stock at -O1 and -O2 -mtune=970.
 export LINK_OPT=${LINK_OPT:--O2 -mtune=970}
+# code model: stock reaches its globals with direct pc-relative/absolute addressing; -fPIC adds a non-lazy-pointer load per global access (1862 NL pointers), which cost
+# the state-change draw paths 5-8% (pcd microbench: arb env +7.5% -> -0.1%, UT2004 DM-Antalus_high min -5.0% -> -1.9%). -mdynamic-no-pic matches stock. LINK_PIC=-fPIC restores the old image.
+export LINK_PIC=${LINK_PIC:--mdynamic-no-pic}
 STOCK=${STOCK_GLD:-$HOME/Documents/ATI-X1900-Decomp/tiger-hd-pull/ATIRadeonX1000GLDriver.bundle.bin}
 GDATA=${GLD_GHIDRA_DATA:-$HOME/Documents/ATI-X1900-Decomp/work-bugwf/link/gld_data.tsv}
 mkdir -p "$EV"; rm -rf "$EV/gld_link"

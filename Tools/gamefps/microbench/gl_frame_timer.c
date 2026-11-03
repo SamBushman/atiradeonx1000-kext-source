@@ -13,14 +13,14 @@
 typedef unsigned long W;
 static void *real[NSLOT]; static char *names[NSLOT]; static int nslots = 0;
 static unsigned long cnt[MAXF][NSLOT]; static double us_[MAXF][NSLOT];
-static double swap_us[MAXF]; static double wall_us[MAXF]; static int frame = 0; static double tick_us = 0;
+static float maxus[MAXF][NSLOT]; static double swap_us[MAXF]; static double wall_us[MAXF]; static int frame = 0; static double tick_us = 0;
 typedef W (*fn_t)(W,W,W,W,W,W,W,W,W,W,W,W,double,double,double,double,double,double,double,double,double,double,double,double,double);
 #define ARGS W a0,W a1,W a2,W a3,W a4,W a5,W a6,W a7,W a8,W a9,W a10,W a11,double d1,double d2,double d3,double d4,double d5,double d6,double d7,double d8,double d9,double d10,double d11,double d12,double d13
 static inline W go(int k, ARGS) {
     uint64_t t0 = mach_absolute_time();
     W r = ((fn_t)real[k])(a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13);
     uint64_t t1 = mach_absolute_time();
-    if (frame < MAXF) { cnt[frame][k]++; us_[frame][k] += (double)(t1 - t0) * tick_us; }
+    if (frame < MAXF) { double u = (double)(t1 - t0) * tick_us; cnt[frame][k]++; us_[frame][k] += u; if (u > maxus[frame][k]) maxus[frame][k] = (float)u; }
     return r;
 }
 static W w0(ARGS) { return go(0,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,a10,a11,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13); }
@@ -429,6 +429,7 @@ static void dump(void) {
     const char *o = getenv("GLT_OUT"); FILE *f = o ? fopen(o, "w") : NULL; int fr, k; if (!f) return;
     for (k = 0; k < nslots; k++) fprintf(f, "N\t%d\t%s\n", k, names[k]);
     for (fr = 0; fr < MAXF && fr <= frame; fr++) for (k = 0; k < nslots; k++) if (cnt[fr][k]) fprintf(f, "F\t%d\t%d\t%lu\t%.2f\n", fr, k, cnt[fr][k], us_[fr][k]);
+    for (fr = 0; fr < MAXF && fr <= frame; fr++) for (k = 0; k < nslots; k++) if (maxus[fr][k] > 500.0f) fprintf(f, "M\t%d\t%d\t%.0f\n", fr, k, maxus[fr][k]);
     for (fr = 0; fr < MAXF && fr < frame; fr++) fprintf(f, "S\t%d\t%.2f\t%.2f\n", fr, swap_us[fr], wall_us[fr]);
     fprintf(f, "SWAPS\t%d\n", frame); fclose(f);
 }
