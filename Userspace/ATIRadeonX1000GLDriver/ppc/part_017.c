@@ -3030,7 +3030,7 @@ int gld_updateTexCombinerState(glContext, unusedArgR4, dirtyBitsArg, scratchR6, 
   
   glContextWord44 = *(uint *)(glContext + 0x44);
   if (((((glContextWord44 & 0x2000) == 0) || ((*(byte *)(glContext + 0x2e) & 1) != 0)) ||
-      ((*(uint *)(glContext + 0x38) & 0x8000) != 0)) || (*(short *)(glContext + 0x42) != 0)) {
+      ((*(uint *)(glContext + 0x38) & 0x8000) != 0)) || (*(ushort *)(glContext + 0x42) != 0x0)) {
     glContextByte13b0 = ((unsigned char *)0x000013b0)[glContext];
     unitWordCursor = glContext + 0x44;
     *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) & 0xf07fffff;
@@ -3111,7 +3111,7 @@ int gld_updateTexCombinerState(glContext, unusedArgR4, dirtyBitsArg, scratchR6, 
             unitFlagsAddr = loopIndex2 * 2 + glContext;
             slotUsesSpecialSrc = (((ushort)(*(short *)(unitEnvBlock + 0x3c) + 0x7aefU) < 2 || envSlot1Code == -0x7aee) ||
                      envSlot1Code == -0x7aef) | slotUsesSpecialSrc;
-            slotUses2402 = (uint)(*(short *)(unitEnvBlock + 0x3c) == 0x2402 || envSlot1Code == 0x2402);
+            slotUses2402 = (uint)(*(ushort *)(unitEnvBlock + 0x3c) == 0x2402 || envSlot1Code == 0x2402);
             slotUsesSpecial = slotUsesSpecialSrc | slotUses2402;
             *(ushort *)(unitFlagsAddr + 0x187c) =
                  *(ushort *)(unitFlagsAddr + 0x187c) & 0xc003 | (ushort)(slotCodeBits << 2) & 0x3ffc;
@@ -3123,10 +3123,10 @@ int gld_updateTexCombinerState(glContext, unusedArgR4, dirtyBitsArg, scratchR6, 
             combineBits26 = (slotUses2402 | (glContextWord8c & 0xf7ffffff) >> 0x1a & 1) << 0x1a;
             *(uint *)(glContext + 0x8c) = combineBits26 | slotUsesSpecialSrc | glContextWord8c & 0xf3ffffff;
             texCombineStateWord = ((glContextWord8c & 0x2000000) >> 0x19 |
-                     slotUsesSpecial | *(short *)(unitEnvBlock + 0x3c) == 0x2400 & texCombineStateWord |
-                              *(short *)(unitEnvBlock + 0x60) == 0x2400 & slot1Enabled |
-                              *(short *)(unitEnvBlock + 0x84) == 0x2400 & slot2Enabled |
-                              (uint)(*(short *)(unitEnvBlock + 0xa8) == 0x2400) & slotEnableBits >> 8) << 0x19 |
+                     slotUsesSpecial | *(ushort *)(unitEnvBlock + 0x3c) == 0x2400 & texCombineStateWord |
+                              *(ushort *)(unitEnvBlock + 0x60) == 0x2400 & slot1Enabled |
+                              *(ushort *)(unitEnvBlock + 0x84) == 0x2400 & slot2Enabled |
+                              (uint)(*(ushort *)(unitEnvBlock + 0xa8) == 0x2400) & slotEnableBits >> 8) << 0x19 |
                      combineBits26 | slotUsesSpecialSrc | glContextWord8c & 0xf1ffffff;
             *(uint *)(glContext + 0x8c) = texCombineStateWord;
           }
@@ -3766,7 +3766,7 @@ int psnCheckLimitsAndGenerate(psnProgram, passThroughR4, passThroughR5, unusedAr
     if (*(ushort *)(psnProgram + 0x18) < 0x11) {
       if (*(ushort *)(psnProgram + 0x1a) < 0x21) {
         if (*(ushort *)(psnProgram + 0x1e) < 0x41) {
-          if (*(short *)(psnProgram + 0x20) == 0) {
+          if (*(ushort *)(psnProgram + 0x20) == 0x0) {
             if (*(ushort *)(psnProgram + 0x22) < 0x20) {
               if (*(ushort *)(psnProgram + 0x24) < 0x20) {
                 ((int (*)())psnEncodeHwProgramPhased)(psnProgram,passThroughR4,passThroughR5,0,passThroughR7,passThroughR8,passThroughR9);
@@ -3851,7 +3851,7 @@ int psnRemapTempRegisters(psnProgram, passThroughR4, passThroughR5, unusedArgR6,
     if (*(ushort *)(psnProgram + 0x18) < 0x11) {
       if (*(ushort *)(psnProgram + 0x1a) < 0x201) {
         if (*(ushort *)(psnProgram + 0x1e) < 0x201) {
-          if (*(short *)(psnProgram + 0x20) == 0) {
+          if (*(ushort *)(psnProgram + 0x20) == 0x0) {
             if (*(ushort *)(psnProgram + 0x22) < 0x40) {
               if (*(ushort *)(psnProgram + 0x24) < 0x40) {
                 scanRecordPtr = &(*(GhidraMachOCommand *)0x0000001c).filesize;
@@ -4173,13 +4173,13 @@ setTexRegCount:
   }
   loopIndex3 = 1;
 checkPsnProgram:
-  if ((*(short *)(psnProgram + 0x20) == 0) && (*(short *)(psnProgram + 0x12) == 0)) {
+  if ((*(ushort *)(psnProgram + 0x20) == 0x0) && (*(ushort *)(psnProgram + 0x12) == 0x0)) {
     *(short *)(psnProgram + 0x12) = (short)loopIndex3 + -1;
   }
   if (!splittable) {
     *(undefined2 *)(psnProgram + 0x28) = 1;
   }
-  if ((*(short *)(psnProgram + 0x28) != 0) && (*(short *)(psnProgram + 0x22) == 0)) {
+  if ((*(ushort *)(psnProgram + 0x28) != 0x0) && (*(ushort *)(psnProgram + 0x22) == 0x0)) {
     *(undefined2 *)(psnProgram + 0x22) = 1;
   }
   if (loopIndex <= recordCount) {
@@ -4264,7 +4264,7 @@ loopSetNextPendingRecord:
       *(undefined1 *)(psnProgram + pendingRecordPtr + 4) = 1;
     }
   }
-  if (((hasHighAddress != 0) || (usedFlags != 0)) || (*(short *)(psnProgram + 0x20) != 0)) {
+  if (((hasHighAddress != 0) || (usedFlags != 0)) || (*(ushort *)(psnProgram + 0x20) != 0x0)) {
     wantedPhaseCount = wantedPhaseCount | wantedPhaseCount << 4;
   }
   *(char *)(psnProgram + 0xf) = (char)wantedPhaseCount;
@@ -5266,7 +5266,7 @@ int psnDecRecomputeSourceUsage(entry)
   halfIndex = 0;
   halfCursor = entry;
   do {
-    if ((*(short *)(halfCursor + 2) == 0 && *(short *)(halfCursor + 6) == 0) &&
+    if ((*(ushort *)(halfCursor + 2) == 0x0 && *(ushort *)(halfCursor + 6) == 0x0) &&
        ((*(uint *)(halfCursor + 0x30) & 1) == 0)) {
       *(uint *)(halfCursor + 0x30) = *(uint *)(halfCursor + 0x30) & 0xfffffffb;
     }
@@ -5282,7 +5282,7 @@ int psnDecRecomputeSourceUsage(entry)
     if ((srcpSelectsUsed & halfIndex * 0x100) == 0) {
       *(undefined2 *)((int)usageCursor + 0x16) = 0;
     }
-    if ((*(short *)((int)usageCursor + -0x12) == 0 && *(short *)((int)usageCursor + -0xe) == 0) &&
+    if ((*(ushort *)((int)usageCursor + -0x12) == 0x0 && *(ushort *)((int)usageCursor + -0xe) == 0x0) &&
        (usageFlags = usageCursor[7], (usageFlags & 1) == 0)) {
       usageCursor[4] = 0;
       *usageCursor = 0;
@@ -5309,10 +5309,10 @@ int psnDecRecomputeSourceUsage(entry)
   halfIndex = 0;
   halfCursor = entry;
   do {
-    if (((*(short *)(halfCursor + 2) != 0 || *(short *)(halfCursor + 6) != 0) ||
+    if (((*(ushort *)(halfCursor + 2) != 0x0 || *(ushort *)(halfCursor + 6) != 0x0) ||
         ((*(uint *)(halfCursor + 0x30) & 1) != 0)) &&
-       ((*(short *)(entry + 0x1a) != 0 || *(short *)(entry + 0x1c) != 0) ||
-        *(short *)(entry + 0x1e) != 0)) {
+       ((*(ushort *)(entry + 0x1a) != 0x0 || *(ushort *)(entry + 0x1c) != 0x0) ||
+        *(ushort *)(entry + 0x1e) != 0x0)) {
       *(uint *)(halfCursor + 0x30) = *(uint *)(halfCursor + 0x30) | 2;
     }
     loopContinue = halfIndex != 1;
@@ -5419,8 +5419,8 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
   groupNumber = 1;
   groupSlots = entry;
   do {
-    if ((*(short *)(groupSlots + 0x82) != -1) &&
-       (*(short *)(groupSlots + 0x80) == *(short *)(groupSlots + 0x82))) {
+    if ((*(ushort *)(groupSlots + 0x82) != 0xffff) &&
+       (*(ushort *)(groupSlots + 0x80) == *(ushort *)(groupSlots + 0x82))) {
       halfByteOffset = 0;
       rewriteSelectKey = (groupNumber & 0xff) << 8 | 1;
       do {
@@ -5528,7 +5528,7 @@ int psnDecCanonicalizeEntry(entry, unusedArgR4, unusedArgR5, unusedArgR6, oldAdd
         *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
         *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
       }
-      if ((((opcode == 7) && (*(short *)(peepholeHalf + 8) == *(short *)(peepholeHalf + 0xc))) &&
+      if ((((opcode == 7) && (*(ushort *)(peepholeHalf + 8) == *(ushort *)(peepholeHalf + 0xc))) &&
           (*(int *)(peepholeHalf + 8) == *(int *)(peepholeHalf + 0x10))) &&
          ((*(ushort *)(peepholeHalf + 10) ^ *(ushort *)(peepholeHalf + 0xe)) == 0x1000)) {
         opcode = 0;
@@ -5879,7 +5879,7 @@ checkOldHalfFlags:
         halfIndex = 0;
         halfCursor = entry;
         do {
-          if ((*(short *)(halfCursor + 2) == 0 && *(short *)(halfCursor + 6) == 0) &&
+          if ((*(ushort *)(halfCursor + 2) == 0x0 && *(ushort *)(halfCursor + 6) == 0x0) &&
              ((*(uint *)(halfCursor + 0x30) & 1) == 0)) {
             *(uint *)(halfCursor + 0x30) = *(uint *)(halfCursor + 0x30) & 0xfffffffb;
           }
@@ -5895,7 +5895,7 @@ checkOldHalfFlags:
           if ((srcpSelectsUsed & halfIndex * 0x100) == 0) {
             *(undefined2 *)((int)usageCursor + 0x16) = 0;
           }
-          if ((*(short *)((int)usageCursor + -0x12) == 0 && *(short *)((int)usageCursor + -0xe) == 0) &&
+          if ((*(ushort *)((int)usageCursor + -0x12) == 0x0 && *(ushort *)((int)usageCursor + -0xe) == 0x0) &&
              (sourceIndex = usageCursor[7], (sourceIndex & 1) == 0)) {
             usageCursor[4] = 0;
             *usageCursor = 0;
@@ -5922,10 +5922,10 @@ checkOldHalfFlags:
         halfIndex = 0;
         halfCursor = entry;
         do {
-          if (((*(short *)(halfCursor + 2) != 0 || *(short *)(halfCursor + 6) != 0) ||
+          if (((*(ushort *)(halfCursor + 2) != 0x0 || *(ushort *)(halfCursor + 6) != 0x0) ||
               ((*(uint *)(halfCursor + 0x30) & 1) != 0)) &&
-             ((*(short *)(entry + 0x1a) != 0 || *(short *)(entry + 0x1c) != 0) ||
-              *(short *)(entry + 0x1e) != 0)) {
+             ((*(ushort *)(entry + 0x1a) != 0x0 || *(ushort *)(entry + 0x1c) != 0x0) ||
+              *(ushort *)(entry + 0x1e) != 0x0)) {
             *(uint *)(halfCursor + 0x30) = *(uint *)(halfCursor + 0x30) | 2;
           }
           loopContinue = halfIndex != 1;
@@ -6314,7 +6314,7 @@ loopStoreDecoded:
             *(undefined4 *)(peepholeHalf + 0xc) = defaultOperandWord;
             *(undefined4 *)(peepholeHalf + 0x10) = (*(unsigned int *)&psnDefaultOperandWord2_001dbf94);
           }
-          if ((((opcode == 7) && (*(short *)(peepholeHalf + 8) == *(short *)(peepholeHalf + 0xc))) &&
+          if ((((opcode == 7) && (*(ushort *)(peepholeHalf + 8) == *(ushort *)(peepholeHalf + 0xc))) &&
               (*(int *)(peepholeHalf + 8) == *(int *)(peepholeHalf + 0x10))) &&
              ((*(ushort *)(peepholeHalf + 10) ^ *(ushort *)(peepholeHalf + 0xe)) == 0x1000)) {
             opcode = 0;
@@ -6807,7 +6807,7 @@ int psnDecTrySwapAddressSlots(entry, group, slotA, slotB)
   }
   if (slotA == 0) {
     slotMaskBase = group * 4 + entry;
-    if (*(short *)(slotMaskBase + 0x20) != 0 || *(short *)(slotMaskBase + 0x60) != 0) {
+    if (*(ushort *)(slotMaskBase + 0x20) != 0x0 || *(ushort *)(slotMaskBase + 0x60) != 0x0) {
       return 0;
     }
 loopCheckSlotB:
@@ -6815,7 +6815,7 @@ loopCheckSlotB:
   }
   else if (slotA != 1) goto loopCheckSlotB;
   slotMaskBase = group * 4 + entry;
-  if (*(short *)(slotMaskBase + 0x22) != 0 || *(short *)(slotMaskBase + 0x62) != 0) {
+  if (*(ushort *)(slotMaskBase + 0x22) != 0x0 || *(ushort *)(slotMaskBase + 0x62) != 0x0) {
     return 0;
   }
 setHalfByteOffset:
@@ -6947,7 +6947,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
         oldWordValue = *(uint *)(texWordPtr + 0x18);
         newFieldBits = (destRegField & 0x1f) << 6;
         *(uint *)(texWordPtr + 0x18) = newFieldBits | oldWordValue & 0xfffff83f;
-        if ((*(short *)(entry + 2) == 0 && *(short *)(entry + 6) == 0) &&
+        if ((*(ushort *)(entry + 2) == 0x0 && *(ushort *)(entry + 6) == 0x0) &&
            ((*(uint *)(entry + 0x30) & 1) == 0)) {
           *(uint *)(texWordPtr + 0x18) = newFieldBits | oldWordValue & 0xfffc783f;
         }
@@ -6968,7 +6968,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
         newFieldBits = (destRegField & 0x7f) << 0x12;
         newFieldBitsB = (alphaDestReg & 0x7f) << 5;
         *(uint *)(texWordPtrB + 4) = newFieldBitsB | newFieldBits | oldWordValueC & 0xfe03f01f;
-        if ((*(short *)(entry + 2) == 0 && *(short *)(entry + 6) == 0) &&
+        if ((*(ushort *)(entry + 2) == 0x0 && *(ushort *)(entry + 6) == 0x0) &&
            ((*(uint *)(entry + 0x30) & 1) == 0)) {
           *(uint *)(texWordPtrB + 4) = newFieldBitsB | newFieldBits | oldWordValueC & 0xfe00f01f;
         }
@@ -6982,7 +6982,7 @@ int psnDecEncodeHwWords(decodedProgram, rsWords, programImage)
             *(uint *)(recordIndexBytes + rsWords + 4) = *(uint *)(recordIndexBytes + rsWords + 4) & 0xfffcffff | 0x10000;
           }
         }
-        if ((*(short *)(entry + 0x42) != 0 || *(short *)(entry + 0x46) != 0) ||
+        if ((*(ushort *)(entry + 0x42) != 0x0 || *(ushort *)(entry + 0x46) != 0x0) ||
            (alphaWritten = 0, (*(uint *)(entry + 0x70) & 1) != 0)) {
           alphaWritten = 1;
         }
@@ -7366,7 +7366,7 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
         *(undefined2 *)(halfCursor + 6) = 0xf;
       }
       destMapEntry[1] = destMapEntry[1] & ~writeMaskLive;
-      if ((*(short *)(halfCursor + 2) == 0 && *(short *)(halfCursor + 6) == 0) &&
+      if ((*(ushort *)(halfCursor + 2) == 0x0 && *(ushort *)(halfCursor + 6) == 0x0) &&
          ((*(uint *)(halfCursor + 0x30) & 1) == 0)) {
         *(undefined4 *)(halfCursor + 0x24) = 0;
         *(undefined4 *)(halfCursor + 0x14) = 0;
@@ -7423,11 +7423,11 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
       addressSlotOffset = addressSlotOffset + 6;
       halfCounter = halfCounter + 1;
     } while (loopContinue);
-    if (*(short *)(entry + 6) == 0) {
+    if (*(ushort *)(entry + 6) == 0x0) {
       mappedRgbDest = 0;
     }
     *(undefined2 *)(entry + 4) = mappedRgbDest;
-    if (*(short *)(entry + 0x46) == 0) {
+    if (*(ushort *)(entry + 0x46) == 0x0) {
       mappedAlphaDest = 0;
     }
     *(undefined2 *)(entry + 0x44) = mappedAlphaDest;
@@ -7470,9 +7470,9 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
     loopIndex = 0;
     do {
       scanEntry = decodedProgram[2] + loopIndex2 * 0xa0;
-      if (((*(short *)(scanEntry + 2) != 0 || *(short *)(scanEntry + 6) != 0) ||
+      if (((*(ushort *)(scanEntry + 2) != 0x0 || *(ushort *)(scanEntry + 6) != 0x0) ||
           ((*(uint *)(scanEntry + 0x30) & 1) != 0)) ||
-         ((*(short *)(scanEntry + 0x42) != 0 || *(short *)(scanEntry + 0x46) != 0 ||
+         ((*(ushort *)(scanEntry + 0x42) != 0x0 || *(ushort *)(scanEntry + 0x46) != 0x0 ||
           ((*(uint *)(scanEntry + 0x70) & 1) != 0)))) {
         if (loopIndex < loopIndex2) {
           _memcpy(loopIndex * 0xa0 + decodedProgram[2],scanEntry,0xa0);
@@ -7680,7 +7680,7 @@ int psnDecFirstFreeAddressSlot(entry)
   
   loopIndex = 0;
   do {
-    if (*(short *)(entry + 0x86) == -1) {
+    if (*(ushort *)(entry + 0x86) == 0xffff) {
       return loopIndex;
     }
     loopContinue = loopIndex != 2;
@@ -8264,10 +8264,10 @@ checkSourceSelectWord:
             *(ushort *)((slotRowBase + (sourceSelectWord & 3)) * 2 + entry + 0x80) == oldAddressValue)) &&
            ((*sourceSlotCursor & 0x1f & (uint)sourceUsageMask & ~excludeMask) != 0)) {
           halfBase = (int)slotRef * 6 + entry;
-          slot1Free = *(short *)(halfBase + 0x82) == -1;
+          slot1Free = *(ushort *)(halfBase + 0x82) == 0xffff;
           freeSlotIndex = (uint)slot1Free;
           slotRef = (ushort *)(int)(short)(ushort)slot1Free;
-          if (*(short *)(halfBase + 0x84) == -1) {
+          if (*(ushort *)(halfBase + 0x84) == 0xffff) {
             freeSlotIndex = 2;
             slotRef = (ushort *)((int)((unsigned char *)0x0) + 2);
           }
@@ -8589,7 +8589,7 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, staleArgR6, unus
           staleArgR9 = entry;
           do {
             slotFound = 0;
-            if (*(short *)(staleArgR9 + 0x80) == -1) {
+            if (*(ushort *)(staleArgR9 + 0x80) == 0xffff) {
               if ((otherSelect & 3) == 3) {
                 return 0;
               }
@@ -8618,7 +8618,7 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, staleArgR6, unus
           staleArgR9 = entry;
           do {
             slotFound = 0;
-            if (*(short *)(staleArgR9 + 0x86) == -1) {
+            if (*(ushort *)(staleArgR9 + 0x86) == 0xffff) {
               if ((otherSelect & 3) == 3) {
                 return 0;
               }
@@ -9155,7 +9155,7 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         *(undefined2 *)(previousRecord + 0x15) = rgbDestReg;
         *outRecord = 2;
         *(undefined2 *)((int)previousRecord + 0x56) = *(undefined2 *)(entry + 0x80);
-        if ((*(short *)(entry + 2) == 0 && *(short *)(entry + 6) == 0) &&
+        if ((*(ushort *)(entry + 2) == 0x0 && *(ushort *)(entry + 6) == 0x0) &&
            ((*(uint *)(entry + 0x30) & 1) == 0)) {
           *(undefined1 *)((int)previousRecord + 0x61) = 0;
           *(undefined1 *)((int)previousRecord + 0x62) = 0;
@@ -9173,7 +9173,7 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
         *(undefined2 *)((int)previousRecord + 0x4e) = rgbDestReg;
         *(undefined2 *)(previousRecord + 0x13) = alphaDestReg;
         *outRecord = 1;
-        if ((*(short *)(entry + 2) == 0 && *(short *)(entry + 6) == 0) &&
+        if ((*(ushort *)(entry + 2) == 0x0 && *(ushort *)(entry + 6) == 0x0) &&
            ((*(uint *)(entry + 0x30) & 1) == 0)) {
           *(undefined1 *)((int)previousRecord + 0x53) = 0;
         }
@@ -9186,18 +9186,18 @@ int psnDecodedToProgram(decodedProgram, previousRecord, outStatus)
             *(undefined1 *)((int)previousRecord + 0x53) = 1;
           }
         }
-        if ((*(short *)(entry + 0x42) != 0 || *(short *)(entry + 0x46) != 0) ||
+        if ((*(ushort *)(entry + 0x42) != 0x0 || *(ushort *)(entry + 0x46) != 0x0) ||
            (alphaWriteFlag = 0, (*(uint *)(entry + 0x70) & 1) != 0)) {
           alphaWriteFlag = 1;
         }
         *(undefined1 *)((int)previousRecord + 0x51) = alphaWriteFlag;
-        if (*(short *)(entry + 0x80) == -1) {
+        if (*(ushort *)(entry + 0x80) == 0xffff) {
           *(undefined1 *)((int)previousRecord + 0x52) = 0;
         }
         else {
           *(char *)((int)previousRecord + 0x52) = (char)*(short *)(entry + 0x80);
         }
-        if (*(short *)(entry + 0x86) == -1) {
+        if (*(ushort *)(entry + 0x86) == 0xffff) {
           *(undefined1 *)(previousRecord + 0x14) = 0;
         }
         else {
@@ -9731,7 +9731,7 @@ int psnRaReleaseUse(operand, tempTable, freeList)
   if (*(short *)(freeListBaseEnd + prevEntryOffset) != expectedPrevReg) {
     return;
   }
-  if (*(short *)(freeListBaseEnd + prevEntryOffset + 2) == 0xf) {
+  if (*(ushort *)(freeListBaseEnd + prevEntryOffset + 2) == 0xf) {
     scanIndex = freeCountU - 1;
     while( true ) {
       prevEntryOffset = prevEntryOffset + -4;
@@ -9743,7 +9743,7 @@ int psnRaReleaseUse(operand, tempTable, freeList)
       }
       expectedPrevReg = expectedPrevReg + -1;
       if (*(short *)(prevEntryOffset + freeListBaseEnd) != expectedPrevReg) break;
-      if (*(short *)(prevEntryOffset + freeListBaseEnd + 2) != 0xf) {
+      if (*(ushort *)(prevEntryOffset + freeListBaseEnd + 2) != 0xf) {
         return;
       }
     }
@@ -9831,7 +9831,7 @@ int psnRaAssignDefinition(operand, tempTable, freeList, unusedArgR6, unusedArgR7
         allocatedReg = *freeEntry;
         freeEntry[1] = entryFreeMask & ~bankMaskBits;
         if (*(ushort *)(freeList + 1) == freeEntryCount) {
-          if (*(short *)(freeByteOffset + *freeList + 2) != 0) {
+          if (*(ushort *)(freeByteOffset + *freeList + 2) != 0x0) {
             *(short *)(freeList + 1) = (short)freeEntryCount + 1;
             freePos = freeEntryCount;
           }
@@ -9840,7 +9840,7 @@ int psnRaAssignDefinition(operand, tempTable, freeList, unusedArgR6, unusedArgR7
         }
         else {
           freeListBase = *freeList;
-          if ((*(short *)(freeListBase + freeByteOffset + 2) == 0) &&
+          if ((*(ushort *)(freeListBase + freeByteOffset + 2) == 0x0) &&
              (freeEntryCount = *(ushort *)(freeList + 1) - 1, *(short *)(freeList + 1) = (short)freeEntryCount,
              freePos < (freeEntryCount & 0xffff))) {
             freeShiftOffset = freePos << 2;

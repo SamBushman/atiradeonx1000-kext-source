@@ -3930,7 +3930,7 @@ int ffvpAssignOutputSlots(ctx)
   }
   ctxFlags44 = *(uint *)(ctx + 0x44);
 checkCtxFlags44:
-  if (((ctxFlags44 & 0x1000800) != 0) && (*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7baf)) {
+  if (((ctxFlags44 & 0x1000800) != 0) && (*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) == 0x8451)) {
     ffvpSetOutputRoute(ctx,nextSlot,3,0,nextSlot,0,0,0);
     *(uint *)(ctx + 0x1ec) = nextSlot;
     nextSlot = nextSlot + 1;
@@ -4008,7 +4008,7 @@ int ffvpComputeOutputMasks(glContext)
       *(uint *)(glContext + 0x1ca0) = outMask1ca0 | 0xc;
     }
   }
-  if (((stateFlags & 0x1000800) != 0) && (*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7baf)) {
+  if (((stateFlags & 0x1000800) != 0) && (*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) == 0x8451)) {
     *(uint *)(glContext + 0x1ca0) = *(uint *)(glContext + 0x1ca0) | 0x40000;
   }
   if (((unsigned char *)0x00004301)[stateBlock] != '\0') {
@@ -4019,7 +4019,7 @@ int ffvpComputeOutputMasks(glContext)
   *(undefined4 *)(glContext + 0x1ba0) = 0;
   stateFlagsB = *(uint *)(glContext + 0x44);
   if ((int)stateFlagsB < 0) {
-    if (*(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06) {
+    if (*(ushort *)(((unsigned char *)0x00002d48) + stateBlock) == 0x81fa) {
       *(undefined4 *)(glContext + 0x1b9c) = 7;
     }
     if (((unsigned char *)0x00002d48)[stateBlock + 4] == '\0') {
@@ -4267,7 +4267,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
   }
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
     if ((*(uint *)(glContext + 0x8c) & 0x40000000) == 0) {
-      if ((((*(uint *)(glContext + 0x38) & 0x4b928) != 0) || (*(short *)(glContext + 0x34) != 0)) ||
+      if ((((*(uint *)(glContext + 0x38) & 0x4b928) != 0) || (*(ushort *)(glContext + 0x34) != 0x0)) ||
          (*(char *)(glContext + 299) != '\0')) {
         ((int (*)())ffvpComputeOutputMasks)(glContext);
       }
@@ -5470,7 +5470,7 @@ int ffvpEmitFogExp2(programBuilder)
     fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
     dstFile = **(undefined4 **)(programBuilder + 0x3f0);
     constFile = fileTable[2];
-    if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == -0x7bae) {
+    if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == 0x8452) {
       fogCoordReg = *(int *)(programBuilder + 0x3f8);
       if (fogCoordReg == -1) {
         if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
@@ -5515,8 +5515,8 @@ int ffvpEmitFogExp2(programBuilder)
       if (allocStatus == 0) {
         glCtxCopy = *(int *)(programBuilder + 0x3d4);
         stateBlock = *(int *)(*(int *)(glCtxCopy + 4) + 0x10);
-        if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7bae) &&
-           (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5)) {
+        if ((*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) == 0x8452) &&
+           (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) == 0x855b)) {
           (**(code **)(((unsigned char *)0x000012e4) + glCtxCopy))
                     (programBuilder,dstFile,fogTempReg,fogTempMask,fogCoordFile,fogCoordReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,fogCoordFile,fogCoordReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
         }

@@ -4192,7 +4192,7 @@ int arbfpBindFragmentProgram(ctx, fpState)
         fpState[0x120f] = '\0';
       }
       if ((*(int *)(fpState + 0x374c) != 0) &&
-         (*(short *)(ctx + 0x34) != 0 || *(short *)(ctx + 0x32) != 0)) {
+         (*(ushort *)(ctx + 0x34) != 0x0 || *(ushort *)(ctx + 0x32) != 0x0)) {
         gld_emitTextureUnitScaleParams(ctx,fpState + 0x18a8,fpState + 0x1784);
         fpState[0x120f] = '\0';
       }

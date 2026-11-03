@@ -659,10 +659,10 @@ int gldValidateHyperZ(glContext)
       hizFunc = 0x200;
     }
     if (((*(int *)(((unsigned char *)0x000031c0) + glStateBlock) == 0) ||
-        ((((*(short *)(((unsigned char *)0x000031a2) + glStateBlock) == 0x1e00 &&
-           (*(short *)(((unsigned char *)0x000031a4) + glStateBlock) == 0x1e00)) &&
-          (*(short *)(((unsigned char *)0x000031ba) + glStateBlock) == 0x1e00)) &&
-         (*(short *)(((unsigned char *)0x000031bc) + glStateBlock) == 0x1e00)))) && (!hizBlocksFunc)) {
+        ((((*(ushort *)(((unsigned char *)0x000031a2) + glStateBlock) == 0x1e00 &&
+           (*(ushort *)(((unsigned char *)0x000031a4) + glStateBlock) == 0x1e00)) &&
+          (*(ushort *)(((unsigned char *)0x000031ba) + glStateBlock) == 0x1e00)) &&
+         (*(ushort *)(((unsigned char *)0x000031bc) + glStateBlock) == 0x1e00)))) && (!hizBlocksFunc)) {
       if (hizFunc == 0x204) {
         scHyperzEn = *(uint *)(glContext + 0x1ae0) | 3;
         *(uint *)(glContext + 0x1ae0) = scHyperzEn;
@@ -739,7 +739,7 @@ int gldValidateAlphaBlendEarlyZ(glContext)
   }
   if (((unsigned char *)0x00002d66)[glState] == '\0') {
     blendEnabled = '\0';
-    if (((*(short *)(((unsigned char *)0x00002d80) + glState) != -0x7ffa) ||
+    if (((*(ushort *)(((unsigned char *)0x00002d80) + glState) != 0x8006) ||
         (*(int *)(((unsigned char *)0x00002d68) + glState) != *(int *)(((unsigned char *)0x00002d6c) + glState))) ||
        (((unsigned char *)0x00002b7e)[*(int *)(glContext + 4)] != '\0')) {
 loopCheckBlendEnabled:
@@ -775,7 +775,7 @@ storeGlContext:
   }
   else {
 checkX00002d64:
-    if (*(short *)(((unsigned char *)0x00002d64) + glState) == 0x207) {
+    if (*(ushort *)(((unsigned char *)0x00002d64) + glState) == 0x207) {
 setFlag18a4Bit4:
       flag18a4Bit4 = false;
       newAlphaFuncWord = *(uint *)(glContext + 0x1a4c) & 0xfffff7ff;
@@ -835,10 +835,10 @@ loopCallFfpsBuildProgram:
       }
       glContextWord4 = *(int *)(glContextWord4 + 0x10);
       if (((((((unsigned char *)0x00002e2c)[glContextWord4] == '\0') || ((glContextWord44 & 0x20000) != 0)) ||
-           (*(short *)(((unsigned char *)0x00002e28) + glContextWord4) == -1)) &&
+           (*(ushort *)(((unsigned char *)0x00002e28) + glContextWord4) == 0xffff)) &&
           (((((unsigned char *)0x00003178)[glContextWord4] == '\0' || ((glContextWord44 & 0x20000) != 0)) ||
-           ((*(short *)(((unsigned char *)0x00003170) + glContextWord4) != 0x1b02 &&
-            (*(short *)(((unsigned char *)0x00003172) + glContextWord4) != 0x1b02)))))) &&
+           ((*(ushort *)(((unsigned char *)0x00003170) + glContextWord4) != 0x1b02 &&
+            (*(ushort *)(((unsigned char *)0x00003172) + glContextWord4) != 0x1b02)))))) &&
          (((word1a4cOrFlag & 0x10000) == 0 && ((glContextWord44 & 0x2000100) == 0)))) goto checkWord1a4cOrFlag;
     }
   }
@@ -924,7 +924,7 @@ void gldMarkProgramsDirtyByFlag(int glContext,undefined4 unusedArg2,undefined4 u
     return;
   }
   if ((glContextWord44 & 0x80100000) == 0x80000000) {
-    if (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == -0x7e06)
+    if (*(ushort *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x81fa)
     goto setWantFlag;
   }
   else if ((glContextWord44 & 0x800000) != 0) {
@@ -1028,31 +1028,31 @@ void gldValidateViewportPolygonOffset(int glContext)
      && ((*(float *)(((unsigned char *)0x0000316c) + glStateBlock) != FLOAT_001aa0d4 ||
          (*(float *)(((unsigned char *)0x00003168) + glStateBlock) != FLOAT_001aa0d4)))) {
     if (((unsigned char *)0x0000317b)[glStateBlock] != '\0') {
-      if (*(short *)(((unsigned char *)0x00003170) + glStateBlock) == 0x1b00) {
+      if (*(ushort *)(((unsigned char *)0x00003170) + glStateBlock) == 0x1b00) {
         newPolyOffsetBits = newPolyOffsetBits | 1;
         *(uint *)(0x00001b14 + glContext) = newPolyOffsetBits;
       }
-      if (*(short *)(((unsigned char *)0x00003172) + glStateBlock) == 0x1b00) {
+      if (*(ushort *)(((unsigned char *)0x00003172) + glStateBlock) == 0x1b00) {
         newPolyOffsetBits = newPolyOffsetBits | 2;
         *(uint *)(0x00001b14 + glContext) = newPolyOffsetBits;
       }
     }
     if (((unsigned char *)0x0000317c)[glStateBlock] != '\0') {
-      if (*(short *)(((unsigned char *)0x00003170) + glStateBlock) == 0x1b01) {
+      if (*(ushort *)(((unsigned char *)0x00003170) + glStateBlock) == 0x1b01) {
         newPolyOffsetBits = newPolyOffsetBits | 1;
         *(uint *)(0x00001b14 + glContext) = newPolyOffsetBits;
       }
-      if (*(short *)(((unsigned char *)0x00003172) + glStateBlock) == 0x1b01) {
+      if (*(ushort *)(((unsigned char *)0x00003172) + glStateBlock) == 0x1b01) {
         newPolyOffsetBits = newPolyOffsetBits | 2;
         *(uint *)(0x00001b14 + glContext) = newPolyOffsetBits;
       }
     }
     if (((unsigned char *)0x0000317d)[glStateBlock] != '\0') {
-      if (*(short *)(((unsigned char *)0x00003170) + glStateBlock) == 0x1b02) {
+      if (*(ushort *)(((unsigned char *)0x00003170) + glStateBlock) == 0x1b02) {
         newPolyOffsetBits = newPolyOffsetBits | 1;
         *(uint *)(0x00001b14 + glContext) = newPolyOffsetBits;
       }
-      if (*(short *)(((unsigned char *)0x00003172) + glStateBlock) == 0x1b02) {
+      if (*(ushort *)(((unsigned char *)0x00003172) + glStateBlock) == 0x1b02) {
         newPolyOffsetBits = newPolyOffsetBits | 2;
         *(uint *)(0x00001b14 + glContext) = newPolyOffsetBits;
       }
@@ -1500,10 +1500,10 @@ loopSetLodBiasFromProgram:
               if (texBaseFormat == 0x1902) {
                 depthKeyBase = (*(ushort *)(texObj + 0x5c) - 0x200) * 2;
                 depthModeKey = depthKeyBase | 1;
-                if (*(short *)(texObj + 0x58) == 0x1909) {
+                if (*(ushort *)(texObj + 0x58) == 0x1909) {
                   depthModeKey = depthKeyBase | 0x11;
                 }
-                else if (*(short *)(texObj + 0x58) == -0x7fb7) {
+                else if (*(ushort *)(texObj + 0x58) == 0x8049) {
                   depthModeKey = depthKeyBase | 0x21;
                 }
               }
@@ -1835,7 +1835,7 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
   }
   glStateBlock = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00002e2c)[glStateBlock] != '\0') && ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) &&
-     (*(short *)(((unsigned char *)0x00002e28) + glStateBlock) != -1)) {
+     (*(ushort *)(((unsigned char *)0x00002e28) + glStateBlock) != 0xffff)) {
     *(uint *)(glContext + 0x1b64) =
          GH_F2U(FLOAT_001aa0e8 /
                ((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x00002e24) + glStateBlock) ^ 0x80000000) -
@@ -1963,9 +1963,9 @@ int gldValidateCullFace(glContext)
   
   glState = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((unsigned char *)0x000013b8)[glContext] == '\0') {
-    if (*(short *)(((unsigned char *)0x00003174) + glState) == 0x900) goto setFaceControl;
+    if (*(ushort *)(((unsigned char *)0x00003174) + glState) == 0x900) goto setFaceControl;
   }
-  else if (*(short *)(((unsigned char *)0x00003174) + glState) != 0x900) {
+  else if (*(ushort *)(((unsigned char *)0x00003174) + glState) != 0x900) {
 setFaceControl:
     faceControl = *(uint *)(glContext + 0x1b30) & 0xfffffffb;
     *(uint *)(glContext + 0x1b30) = faceControl;
@@ -3410,8 +3410,8 @@ int gldValidateBlend(glContext)
   *(uint *)(glContext + 0x1a80) = oldBlendWord0Saved & 0x3ffffffe;
   if (((((unsigned char *)0x00002d84)[glState] == '\0') || (((unsigned char *)0x00002e33)[glState] != '\0')) ||
      ((*(int *)(((unsigned char *)0x00002d80) + glState) == -0x7ff97ffa &&
-      ((((*(short *)(((unsigned char *)0x00002d68) + glState) == 1 && (*(short *)(((unsigned char *)0x00002d6c) + glState) == 1)) &&
-        (*(short *)(((unsigned char *)0x00002d6a) + glState) == 0)) && (*(short *)(((unsigned char *)0x00002d6e) + glState) == 0))))))
+      ((((*(ushort *)(((unsigned char *)0x00002d68) + glState) == 0x1 && (*(ushort *)(((unsigned char *)0x00002d6c) + glState) == 0x1)) &&
+        (*(ushort *)(((unsigned char *)0x00002d6a) + glState) == 0x0)) && (*(ushort *)(((unsigned char *)0x00002d6e) + glState) == 0x0))))))
   goto checkX00002ddc;
   equationRgb = *(ushort *)(((unsigned char *)0x00002d80) + glState);
   if (equationRgb == 0x8008) {
@@ -5043,7 +5043,7 @@ int extvsBindShader(glContext, shaderId)
       oldStateWord = *(uint *)(glContext + 0x18a4);
       if ((ctxFlags & 0x100000) == 0) {
         if ((((int)ctxFlags < 0) &&
-            (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == -0x7e06)) ||
+            (*(ushort *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x81fa)) ||
            (vertexProgramEnable = 0, (ctxFlags & 0x80800000) == 0x800000)) {
           vertexProgramEnable = 1;
         }

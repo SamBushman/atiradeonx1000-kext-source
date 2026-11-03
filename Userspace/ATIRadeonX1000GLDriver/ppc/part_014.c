@@ -1731,8 +1731,7 @@ int ffvpPrepareFogExp2(programBuilder)
   if ((*(int *)(programBuilder + 0x330) == -1) || (fogReg = *(int *)(programBuilder + 0x70), fogReg == -1)) {
     return 2;
   }
-  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) ==
-      -0x7baf) {
+  if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) == 0x8451) {
     if (*(int *)(programBuilder + 0x50) == -1) {
       return 2;
     }
@@ -2232,7 +2231,7 @@ emitAddMaterialTerm:
           }
         }
         if (*(char *)(glCtx + 0x12d) != '\0') {
-          if (*(short *)(((unsigned char *)0x00002d48) + stateBlockB) == -0x7e06) {
+          if (*(ushort *)(((unsigned char *)0x00002d48) + stateBlockB) == 0x81fa) {
             allocStatus = ffvpAllocTempRegister(programBuilder,1,programBuilder + 0x5fc + colorSlotOffset);
             if (allocStatus != 0) {
               return 7;
@@ -3974,7 +3973,7 @@ int ffvpEmitFogDistance(programBuilder)
   if (fogOutReg != -1) {
     glCtx = *(int *)(programBuilder + 0x3d4);
     outputFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x18);
-    if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == -0x7bae) {
+    if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == 0x8452) {
       eyePositionReg = *(int *)(programBuilder + 0x3f8);
       if (eyePositionReg == -1) {
         if ((*(uint *)(((unsigned char *)0x000013c0) + glCtx) & 4) == 0) {
@@ -3991,14 +3990,14 @@ int ffvpEmitFogDistance(programBuilder)
       }
       stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
       srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
-      if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) != -0x7bae) ||
-         (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa4)) {
+      if ((*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) != 0x8452) ||
+         (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) == 0x855c)) {
         emit1Src1Negate = &onesWords4_001dbd94;
         (**(code **)(((unsigned char *)0x00001304) + glCtx))
                   (programBuilder,outputFile,fogOutReg,&swizzleWordsYXXX_001dbd04,srcTempFile,eyePositionReg,&swizzleWordsZZZZ_001dbcf4,&zeroWords4_001fa5e8,srcTempFile,eyePositionReg,&swizzleWordsZZZZ_001dbcf4,emit1Src1Negate);
         return 0;
       }
-      if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) != -0x7aa5) {
+      if (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) != 0x855b) {
         (**(code **)(((unsigned char *)0x000012e8) + glCtx))
                   (programBuilder,outputFile,fogOutReg,&swizzleWordsYXXX_001dbd04,srcTempFile,eyePositionReg,&swizzleWordsZZZZ_001dbcf4,&onesWords4_001dbd94);
         return 0;
@@ -4140,7 +4139,7 @@ int ffvpEmitFogLinear(programBuilder)
   fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
   dstFile = **(undefined4 **)(programBuilder + 0x3f0);
   constFile = fileTable[2];
-  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == -0x7bae) {
+  if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == 0x8452) {
     fogCoordReg = *(int *)(programBuilder + 0x3f8);
     if (fogCoordReg == -1) {
       if ((*(uint *)(((unsigned char *)0x000013c0) + glCtxB) & 4) == 0) {
@@ -4185,9 +4184,9 @@ int ffvpEmitFogLinear(programBuilder)
     if (allocStatus == 0) {
       glCtx = *(int *)(programBuilder + 0x3d4);
       stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
-      if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7bae) &&
-         (*(short *)(((unsigned char *)0x00002e08) + stateBlock) != -0x7aa4)) {
-        if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5) {
+      if ((*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) == 0x8452) &&
+         (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) != 0x855c)) {
+        if (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) == 0x855b) {
           dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
           srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
           allocStatus = ffvpAllocTempRegister(programBuilder,1,tempB);
@@ -4281,8 +4280,7 @@ int ffvpPrepareFogLinear(programBuilder)
   if ((*(int *)(programBuilder + 0x330) == -1) || (fogReg = *(int *)(programBuilder + 0x70), fogReg == -1)) {
     return 2;
   }
-  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) ==
-      -0x7baf) {
+  if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) == 0x8451) {
     if (*(int *)(programBuilder + 0x50) == -1) {
       return 2;
     }
@@ -4340,7 +4338,7 @@ int ffvpEmitFogExp(programBuilder)
   fogParamConstReg = *(undefined4 *)(programBuilder + 0x330);
   dstFile = **(undefined4 **)(programBuilder + 0x3f0);
   constFile = fileTable[2];
-  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == -0x7bae) {
+  if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtxB + 4) + 0x10)) == 0x8452) {
     fogCoordReg = *(int *)(programBuilder + 0x3f8);
     if (fogCoordReg == -1) {
       if ((*(uint *)(((unsigned char *)0x000013c0) + glCtxB) & 4) == 0) {
@@ -4386,9 +4384,9 @@ int ffvpEmitFogExp(programBuilder)
     if (allocStatus == 0) {
       glCtx = *(int *)(programBuilder + 0x3d4);
       stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
-      if ((*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7bae) &&
-         (*(short *)(((unsigned char *)0x00002e08) + stateBlock) != -0x7aa4)) {
-        if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5) {
+      if ((*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) == 0x8452) &&
+         (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) != 0x855c)) {
+        if (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) == 0x855b) {
           dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
           srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
           allocStatus = ffvpAllocTempRegister(programBuilder,1,tempB);
@@ -4507,13 +4505,13 @@ int ffvpEmitColorOutputs(programBuilder, noLights)
                   (programBuilder,*(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0xc),primaryOutReg,constBase68 + 0x8e4,
                    srcTempFile,primaryColorReg,constBase64 + 0x984,&zeroWords4_001fa5e8,emit1Src1File,emit1Src1Index,emit1Src1Select,&zeroWords4_001fa5e8);
       }
-      if ((((*(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06) && (*(char *)(glCtx + 0x12d) != '\0')
+      if ((((*(ushort *)(((unsigned char *)0x00002d48) + stateBlock) == 0x81fa) && (*(char *)(glCtx + 0x12d) != '\0')
            ) || (((*(uint *)(glCtx + 0x44) & 0x1000000) != 0 && (*(char *)(glCtx + 0x121) == '\0')
                  ))) || ((*(uint *)(glCtx + 0x44) & 0xa10000) != 0)) {
         secondaryOutReg = *(int *)(builderRegCursor + 0x7c);
         secondaryOutFile = *(undefined4 *)(*(int *)(programBuilder + 0x3f0) + 0x10);
         ffvpResolveMaterialSource(programBuilder,*(undefined4 *)(ctxWordCursor + 0x288),3,&materialFile,&materialReg);
-        if (((*(short *)(((unsigned char *)0x00002d48) + stateBlock) != -0x7e06) ||
+        if (((*(ushort *)(((unsigned char *)0x00002d48) + stateBlock) != 0x81fa) ||
             (*(char *)(glCtx + 0x12d) == '\0')) || (noLights == 0)) {
           selectPtr = constBase5c + 0x964;
           secondaryColorReg = materialReg;
@@ -4591,8 +4589,7 @@ int ffvpPrepareFogExp(programBuilder)
   if ((*(int *)(programBuilder + 0x330) == -1) || (fogReg = *(int *)(programBuilder + 0x70), fogReg == -1)) {
     return 2;
   }
-  if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) ==
-      -0x7baf) {
+  if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(*(int *)(programBuilder + 0x3d4) + 4) + 0x10)) == 0x8451) {
     if (*(int *)(programBuilder + 0x50) == -1) {
       return 2;
     }
@@ -4641,20 +4638,20 @@ int ffvpEmitFogTexCoord(programBuilder, texUnit)
       selectCopy[0] = swizzleWords4445_001dbda4;
       selectCopy[2] = swizzleWords4445_001dbda4_lane2_001dbdac;
       selectCopy[3] = swizzleWords4445_001dbda4_lane3_001dbdb0;
-      if (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == -0x7bae) {
+      if (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(glCtx + 4) + 0x10)) == 0x8452) {
         eyePositionReg = *(int *)(programBuilder + 0x3f8);
         if (eyePositionReg != -1) {
 loopSetSrcTempFileB:
           srcTempFileB = **(undefined4 **)(programBuilder + 0x3ec);
           selectCopy[0] = 2;
           stateBlock = *(int *)(*(int *)(glCtx + 4) + 0x10);
-          if (*(short *)(((unsigned char *)0x00002e06) + stateBlock) != -0x7bae) {
+          if (*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) != 0x8452) {
             emit1Src1Negate = &onesWords4_001dbd94;
             (**(code **)(((unsigned char *)0x00001304) + glCtx))
                       (programBuilder,texOutFile,texOutReg,&swizzleWordsYYYY_001dbd24,srcTempFileB,eyePositionReg,&selectCopy[0],&zeroWords4_001fa5e8,srcTempFileB,eyePositionReg,&selectCopy[0],emit1Src1Negate);
             return 0;
           }
-          if (*(short *)(((unsigned char *)0x00002e08) + stateBlock) == -0x7aa5) {
+          if (*(ushort *)(((unsigned char *)0x00002e08) + stateBlock) == 0x855b) {
             srcTempFile = **(undefined4 **)(programBuilder + 0x3ec);
             dstTempFile = **(undefined4 **)(programBuilder + 0x3f0);
             stateBlock = ffvpAllocTempRegister(programBuilder,1,tempA);
@@ -4923,7 +4920,7 @@ int ffvpAnalyzeLightState(ctx)
   }
   ctxFlags1874Ptr = (uint *)(ctx + 0x1874);
   stateFlag2d4d = ((unsigned char *)0x00002d48)[stateBlock + 5];
-  secondaryColorNeeded = *(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06;
+  secondaryColorNeeded = *(ushort *)(((unsigned char *)0x00002d48) + stateBlock) == 0x81fa;
   secondaryColorBits = (uint)secondaryColorNeeded;
   colorMaterialLookup = *(undefined4 *)
            (&colorMaterialLookupTable_001dbed4 +
@@ -5475,7 +5472,7 @@ int ffvpBuildLightKey(ctx)
     lightKeyCursor = (ushort *)(ctx + 0x1894);
     lightWordOffset = 0;
     lightControlBase = ctx + 0x3a8;
-    keyBit10 = (uint)(*(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06) << 10;
+    keyBit10 = (uint)(*(ushort *)(((unsigned char *)0x00002d48) + stateBlock) == 0x81fa) << 10;
     *(uint *)(ctx + 0x1874) = keyBit10 | keyBit24 | keyBit26 | keyBit29 | oldKey & 0xdafffbff | 0x800;
     *(uint *)(ctx + 0x1874) =
          (*(byte *)(ctx + 0x12d) & 1) << 8 |
@@ -5552,7 +5549,7 @@ int ffvpBuildFogKey(ctx, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedA
       fogCode = (uint)(fogMode == 0x800);
     }
     *(uint *)(ctx + 0x1874) =
-         (uint)(*(short *)(((unsigned char *)0x00002e06) + stateBlock) == -0x7baf) << 4 |
+         (uint)(*(ushort *)(((unsigned char *)0x00002e06) + stateBlock) == 0x8451) << 4 |
          fogCode << 5 | *(uint *)(ctx + 0x1874) & 0xffffff8f;
     fogDistanceMode = *(short *)(((unsigned char *)0x00002e08) + stateBlock);
     if (fogDistanceMode == -0x7aa5) {
@@ -5663,7 +5660,7 @@ int ffvpUpdateLightModelFlags(ctx, unusedArg2, unusedArg3, unusedArg4, unusedArg
       lightStateCursor = stateBlock;
       do {
         if ((lightMaskShifting & 1) != 0) {
-          if ((((*lightControlCursor & 0xc000000) == 0) || (*(short *)(((unsigned char *)0x00002d48) + stateBlock) != -0x7e06)) ||
+          if ((((*lightControlCursor & 0xc000000) == 0) || (*(ushort *)(((unsigned char *)0x00002d48) + stateBlock) != 0x81fa)) ||
              (separateSpecularLight = 1, ((unsigned char *)0x00002d48)[stateBlock + 5] == '\0')) {
             separateSpecularLight = 0;
           }
@@ -7473,7 +7470,7 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
         texUnit = elementIndex >> 2;
         if (texGenComponent == 1) {
           texUnitState = texUnit * 0xcc + ctx;
-          if (*(short *)(texUnitState + 0x4b0) == 0x2401) {
+          if (*(ushort *)(texUnitState + 0x4b0) == 0x2401) {
             texGenPlane = (undefined8 *)(texUnitState + 0x4c4);
           }
           else {
@@ -7482,7 +7479,7 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
         }
         else if (texGenComponent == 0) {
           texUnitState = texUnit * 0xcc + ctx;
-          if (*(short *)(texUnitState + 0x48c) == 0x2401) {
+          if (*(ushort *)(texUnitState + 0x48c) == 0x2401) {
             texGenPlane = (undefined8 *)(texUnitState + 0x4a0);
           }
           else {
@@ -7491,7 +7488,7 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
         }
         else if (texGenComponent == 2) {
           texUnitState = texUnit * 0xcc + ctx;
-          if (*(short *)(texUnitState + 0x4d4) == 0x2401) {
+          if (*(ushort *)(texUnitState + 0x4d4) == 0x2401) {
             texGenPlane = (undefined8 *)(texUnitState + 0x4e8);
           }
           else {
@@ -7502,7 +7499,7 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
           texGenPlane = (undefined8 *)0x0;
           if (texGenComponent == 3) {
             texUnitState = texUnit * 0xcc + ctx;
-            if (*(short *)(texUnitState + 0x4f8) == 0x2401) {
+            if (*(ushort *)(texUnitState + 0x4f8) == 0x2401) {
               texGenPlane = (undefined8 *)(texUnitState + 0x50c);
             }
             else {

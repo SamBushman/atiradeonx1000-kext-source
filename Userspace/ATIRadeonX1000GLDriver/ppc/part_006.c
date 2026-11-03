@@ -8186,7 +8186,7 @@ int gldUploadProgramState(glContext)
     texBindingCursor = glContext;
     do {
       texObj = *(int *)(((unsigned char *)0x000013f8) + texBindingCursor);
-      if (((texObj != 0) && (*(short *)(texObj + 0x38) == 0x1902)) &&
+      if (((texObj != 0) && (*(ushort *)(texObj + 0x38) == 0x1902)) &&
          (depthCompareValue = (double)*(float *)(texObj + 0x50), depthCompareValue != 0.0)) {
         depthGroup = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
         if (depthGroup == 1) {
@@ -8611,7 +8611,7 @@ int gldFlushProgramCache(glContext)
   int loopIndex;
   undefined *entryByteOffset;
   
-  if (*(short *)(glContext + 0x1e6c) != 0) {
+  if (*(ushort *)(glContext + 0x1e6c) != 0x0) {
     loopIndex = 0;
     entryByteOffset = (undefined *)0x0;
     do {
@@ -8978,7 +8978,7 @@ loopStoreGlContext:
       glContextWord1e6c = *(ushort *)(glContext + 0x1e6c);
       hashTableForSlot = *(int *)(((unsigned char *)0x00001114) + glContext);
       *(uint *)(glContext + 0x1e5c) = allocation + (uint)glContextWord1e6c * 0x3754 + -0x3754;
-      if (*(short *)(bucketByteOffset + hashTableForSlot) == -1) {
+      if (*(ushort *)(bucketByteOffset + hashTableForSlot) == 0xffff) {
         *(ushort *)(bucketByteOffset + hashTableForSlot) = glContextWord1e6c - 1;
       }
       else {

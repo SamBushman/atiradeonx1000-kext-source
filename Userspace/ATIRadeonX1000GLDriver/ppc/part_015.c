@@ -760,7 +760,7 @@ int atifsCreateShaderTable(ctx)
   defaultConstants = (undefined1 *)
            (**(code **)(ctx + 0xc))((uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx) * 0x14);
   if (defaultConstants != (undefined1 *)0x0) {
-    if (*(short *)(((unsigned char *)0x0000114a) + ctx) != 0) {
+    if (*(ushort *)(((unsigned char *)0x0000114a) + ctx) != 0x0) {
       loopIndex = 0;
       constantCursor = defaultConstants;
       do {
@@ -981,7 +981,7 @@ int atifsInitShader(ctx, shader)
   }
   newBuffer = (**(code **)(ctx + 0xc))((uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx) * 0x14);
   *(undefined4 *)(shader + 0x28) = newBuffer;
-  if (*(short *)(((unsigned char *)0x0000114a) + ctx) != 0) {
+  if (*(ushort *)(((unsigned char *)0x0000114a) + ctx) != 0x0) {
     loopIndex = 0;
     constantOffset = 0;
     do {
@@ -1384,7 +1384,7 @@ int gld_scalePointSizeToPixels(glContext, addSizeBias)
   
   if (addSizeBias != 0) {
     sizeBias = FLOAT_001aa0e8;
-    if (*(short *)(((unsigned char *)0x00002e0e) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x1102) {
+    if (*(ushort *)(((unsigned char *)0x00002e0e) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x1102) {
       sizeBias = FLOAT_001aa108;
     }
     return (int)((float)((double)CONCAT44(0x43300000,*(undefined4 *)(glContext + 8)) - DOUBLE_001aa250
@@ -2077,7 +2077,7 @@ int gld_computePointSizePixels(glContext, unusedArgR4, staleArgR5, staleArgR6, s
       pointSizeClamped = quantizedSize;
     }
     modeScale = FLOAT_001aa0e8;
-    if (*(short *)(((unsigned char *)0x00002e10) + engineCaps) == 0x1102) {
+    if (*(ushort *)(((unsigned char *)0x00002e10) + engineCaps) == 0x1102) {
       modeScale = FLOAT_001aa108;
     }
     pixelSize = (uint)(int)((float)((double)CONCAT44(0x43300000,glContextWord8) - DOUBLE_001aa250) * FLOAT_001aa10c *
@@ -2273,10 +2273,10 @@ int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5, staleArgR6, sta
     }
     glContextPtr4_2 = *(int *)(glContextPtr4_2 + 0x10);
     if ((((((unsigned char *)0x00002e2c)[glContextPtr4_2] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-        (*(short *)(((unsigned char *)0x00002e28) + glContextPtr4_2) == -1)) &&
+        (*(ushort *)(((unsigned char *)0x00002e28) + glContextPtr4_2) == 0xffff)) &&
        (((((unsigned char *)0x00003178)[glContextPtr4_2] == '\0' || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-        ((*(short *)(((unsigned char *)0x00003170) + glContextPtr4_2) != 0x1b02 &&
-         (*(short *)(((unsigned char *)0x00003172) + glContextPtr4_2) != 0x1b02)))))) {
+        ((*(ushort *)(((unsigned char *)0x00003170) + glContextPtr4_2) != 0x1b02 &&
+         (*(ushort *)(((unsigned char *)0x00003172) + glContextPtr4_2) != 0x1b02)))))) {
       if (*(int *)(glContext + 0x2768) == 0) {
         return 0;
       }
@@ -2357,7 +2357,7 @@ loopSetSizeAttenuated:
   }
   if (((((unsigned char *)0x00002e2c)[*(int *)(glContextPtr4_4 + 0x10)] == '\0') ||
       ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (sizeClamped = '\x01', *(short *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4_4 + 0x10)) == -1)) {
+     (sizeClamped = '\x01', *(ushort *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4_4 + 0x10)) == 0xffff)) {
     sizeClamped = '\0';
   }
   pointSizePixelsB = ((int (*)())gld_computePointSizePixels)(glContext,calleeResultLow,staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,engineState3);
@@ -2381,8 +2381,8 @@ loopSetSizeAttenuated:
   engineState4 = *(int *)(glContextPtr4_5 + 0x10);
   if (((((unsigned char *)0x00003178)[engineState4] == '\0') ||
       (engineState3 = *(uint *)(glContext + 0x44) & 0x20000, engineState3 != 0)) ||
-     ((*(short *)(((unsigned char *)0x00003170) + engineState4) != 0x1b02 &&
-      (*(short *)(((unsigned char *)0x00003172) + engineState4) != 0x1b02)))) {
+     ((*(ushort *)(((unsigned char *)0x00003170) + engineState4) != 0x1b02 &&
+      (*(ushort *)(((unsigned char *)0x00003172) + engineState4) != 0x1b02)))) {
     fillPolygonMode = '\0';
   }
   else {
@@ -2441,7 +2441,7 @@ setCacheEntry:
                         staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,engineState3);
   calleeResultLow = (undefined4)callResultPair;
   cacheEntry[1] = (int)((ulonglong)callResultPair >> 0x20) == 0;
-  cacheEntry[8] = *(short *)(((unsigned char *)0x00002e0e) + engineState2) == 0x1102;
+  cacheEntry[8] = *(ushort *)(((unsigned char *)0x00002e0e) + engineState2) == 0x1102;
   glContextPtr4 = *(int *)(glContext + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4 + 0x10)] == '\0') ||
      (negPointMode = (char *)(*(uint *)(glContext + 0x44) & 0x20000), negPointMode != (char *)0x0)) {
@@ -2455,7 +2455,7 @@ loopSetSizeAttenuated2:
     if ((int)((ulonglong)callResultPair >> 0x20) != 0) goto loopSetSizeAttenuated2;
   }
   cacheEntry[0x14] = sizeAttenuated;
-  cacheEntry[0x1c] = *(short *)(((unsigned char *)0x00002e10) + engineState2) == 0x1102;
+  cacheEntry[0x1c] = *(ushort *)(((unsigned char *)0x00002e10) + engineState2) == 0x1102;
   engineState2Float2e20 = *(float *)(((unsigned char *)0x00002e20) + engineState2);
   glContextFloat13e8_3 = *(float *)(((unsigned char *)0x000013e8) + glContext);
   quantizedPointSize = glContextFloat13e8_3;
@@ -2473,14 +2473,14 @@ loopSetSizeAttenuated2:
   *(float *)(cacheEntry + 0x20) = quantizedPointSize;
   engineState = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00002e2c)[engineState] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (entryFlag15 = 1, *(short *)(((unsigned char *)0x00002e28) + engineState) == -1)) {
+     (entryFlag15 = 1, *(ushort *)(((unsigned char *)0x00002e28) + engineState) == 0xffff)) {
     entryFlag15 = 0;
   }
   cacheEntry[0x15] = (char)entryFlag15;
   engineState = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00003178)[engineState] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     ((*(short *)(((unsigned char *)0x00003170) + engineState) != 0x1b02 &&
-      (*(short *)(((unsigned char *)0x00003172) + engineState) != 0x1b02)))) {
+     ((*(ushort *)(((unsigned char *)0x00003170) + engineState) != 0x1b02 &&
+      (*(ushort *)(((unsigned char *)0x00003172) + engineState) != 0x1b02)))) {
     sizeAttenuated = '\0';
   }
   else {
@@ -4151,7 +4151,7 @@ int gld_updateDrawBufferConfig(ctx)
     remaining = 4;
     attachmentRegCursor = streamBase;
     do {
-      if (*(short *)(((unsigned char *)0x00002dba) + loopIndex * 2 + *(int *)(ctx + 0x10)) == 0) {
+      if (*(ushort *)(((unsigned char *)0x00002dba) + loopIndex * 2 + *(int *)(ctx + 0x10)) == 0x0) {
         *(undefined4 *)(attachmentRegCursor + 0x233c) = 0xf;
       }
       else {
@@ -4170,7 +4170,7 @@ int gld_updateDrawBufferConfig(ctx)
     remaining2 = 4;
     attachmentRegCursorFbo = streamBase;
     do {
-      if (*(short *)(loopIndex2 * 2 + *drawFramebuffer + 0x90) == 0) {
+      if (*(ushort *)(loopIndex2 * 2 + *drawFramebuffer + 0x90) == 0x0) {
         *(undefined4 *)(attachmentRegCursorFbo + 0x233c) = 0xf;
       }
       else {

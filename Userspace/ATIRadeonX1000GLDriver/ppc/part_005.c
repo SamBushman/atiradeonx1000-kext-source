@@ -426,10 +426,10 @@ storeTexture2:
   scratchInt28 = texture[0xc];
   scratchShort10 = *(short *)(scratchInt28 + 2);
   if (scratchShort10 == 0x1902) {
-    if (*(short *)(scratchInt26 + 0x48) == -0x7fb7) {
+    if (*(ushort *)(scratchInt26 + 0x48) == 0x8049) {
       *(undefined1 *)((int)texture + 0x6b) = 5;
     }
-    else if (*(short *)(scratchInt26 + 0x48) == 0x1906) {
+    else if (*(ushort *)(scratchInt26 + 0x48) == 0x1906) {
       *(undefined1 *)((int)texture + 0x6b) = 0;
     }
     else {
@@ -518,7 +518,7 @@ int gld_applyAnisotropyOverride(ctx, unitIndex)
   if (*(int *)(ctx + 0x2a90) != 0) {
     texture = *(int *)(unitIndex * 4 + ctx + 0x18c);
     filterWord = (uint)*(ushort *)(texture + 0xa0);
-    if ((((*(short *)(*(int *)(texture + 0x30) + 0x18) != 0x2600) &&
+    if ((((*(ushort *)(*(int *)(texture + 0x30) + 0x18) != 0x2600) &&
          (filterKind = *(short *)(*(int *)(texture + 0x30) + 0x16), filterKind != 0x2600)) && (filterKind != 0x2702))
        && (filterKind != 0x2700)) {
       *(uint *)(texture + 0x50) =
@@ -727,10 +727,10 @@ storeTexture2:
   }
   baseFormatCode = *(short *)(*(int *)(texture + 0x30) + 2);
   if (baseFormatCode == 0x1902) {
-    if (*(short *)(texImages + 0x48) == -0x7fb7) {
+    if (*(ushort *)(texImages + 0x48) == 0x8049) {
       *(undefined1 *)(texture + 0x6b) = 5;
     }
-    else if (*(short *)(texImages + 0x48) == 0x1906) {
+    else if (*(ushort *)(texImages + 0x48) == 0x1906) {
       *(undefined1 *)(texture + 0x6b) = 0;
     }
     else {
@@ -2117,7 +2117,7 @@ int gld_getTextureFormatInfo(ctx, texture, face, level, formatInfoOut)
   if ((formatFlags & 0x3f0000) != 0) {
     if ((formatFlags & 0xfc00) != 0) {
       if ((((formatFlags & 0x3f0) != 0) && (*(uint *)(&textureFormatTable_field14_001d9f48 + scratchInt4) >> 0x1a != 0)) &&
-         (*(short *)(*(int *)(texture + 0x30) + 2) == 0x1907)) {
+         (*(ushort *)(*(int *)(texture + 0x30) + 2) == 0x1907)) {
         hwFormatCode = *(ushort *)(&textureFormatTable_field0A_001d9f3e + scratchInt4);
         formatInfoOut[4] = 0;
         *formatInfoOut = (uint)hwFormatCode;
@@ -2301,7 +2301,7 @@ int gld_readbackTextureLevel(ctx, texture, face, mipLevel, surfaceFormat, surfac
   scratchArgA1 = surfaceFormat;
   scratchUint10 = surfaceType;
   scratchArgA7 = procPitch;
-  if ((*(short *)(texture[0xc] + 2) == 0x1902) && (*(char *)(texture + 0x32) == '\x01')) {
+  if ((*(ushort *)(texture[0xc] + 2) == 0x1902) && (*(char *)(texture + 0x32) == '\x01')) {
     scratchInt13 = face;
     packet = (undefined4 *)(**(code **)(ctx + 0x2998))(ctx + 0x240,0x3fa);
     *(undefined4 **)(ctx + 0x298c) = packet;
@@ -2434,7 +2434,7 @@ setConvertFlags:
   }
   convertFlags = convertFlags | 0x40000;
 checkScratchInt13:
-  if (*(short *)(scratchInt13 + 2) != 0) {
+  if (*(ushort *)(scratchInt13 + 2) != 0x0) {
     loopIndex = 0;
     do {
       if (0 < blockRows) {
@@ -3053,7 +3053,7 @@ setScratchFlag412:
                             scratchArg3);
       scratchUint16 = (undefined4)scratchUint44;
       scratchInt25 = texture[0xc];
-      if (*(short *)(scratchInt25 + 0x1a) == -0x7a41) {
+      if (*(ushort *)(scratchInt25 + 0x1a) == 0x85bf) {
         scratchFlag39 = (undefined *)(uint)scratchUint27 < ((unsigned char *)0x00004001);
       }
       else {
@@ -3106,7 +3106,7 @@ setScratchFlag412:
         scratchInt25 = scratchUint8 - scratchUint23;
         scratchUint20 = scratchUint23;
       }
-      if ((*(short *)(scratchInt29 + 0x1a) == -0x7a41) &&
+      if ((*(ushort *)(scratchInt29 + 0x1a) == 0x85bf) &&
          ((*(char *)(scratchInt29 + 0x6d) != '\0' || (scratchInt33 * scratchInt11 == scratchUint28)))) {
         *(short *)((int)texture + 0x3e) = (short)(scratchUint28 >> (scratchStack218 & 0x3f));
         gld_setTextureAgpRefBackingResult = gld_setTextureAgpRefBacking(ctxSaved,texture,scratchUint32,scratchUint20,scratchInt25);
@@ -3811,8 +3811,8 @@ checkScratchUint23:
                           scratchUint23 = (uint)*(ushort *)(scratchInt33 + 0x10);
                           scratchStackb4 = lookupBlk[4];
                           if (((lookupBlk[11] != *(ushort *)(scratchInt33 + 0xc)) ||
-                              ((*(short *)(scratchInt33 + 0x12) != 0x1401 &&
-                               (*(short *)(scratchInt33 + 0x12) != -0x7fcb)))) ||
+                              ((*(ushort *)(scratchInt33 + 0x12) != 0x1401 &&
+                               (*(ushort *)(scratchInt33 + 0x12) != 0x8035)))) ||
                              ((scratchUint15 = lookupBlk[0], 1 < scratchUint23 - 0x1907 &&
                               ((scratchUint23 != scratchStack70 && (scratchUint20 = scratchStack70, scratchUint23 != 0x80e0)))))) {
                             lookupBlk[4] = scratchStack90;
@@ -4890,7 +4890,7 @@ loopCallPthreadMutexUnlock:
   }
   scratchInt33 = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
                         *(undefined4 *)(ctx + 0x154));
-  scratchFlag12 = *(short *)(scratchInt47 + 2) != 0x1902;
+  scratchFlag12 = *(ushort *)(scratchInt47 + 2) != 0x1902;
   if ((!scratchFlag12) &&
      (((*(int *)(ctx + 0x150) == 0 &&
        (scratchInt34 = gld_needsMultisampleResolve(ctx,scratchInt33,scratchInt35,scratchUint49,scratchUint39,scratchUint50,scratchInt34), scratchInt34 != 0)) ||

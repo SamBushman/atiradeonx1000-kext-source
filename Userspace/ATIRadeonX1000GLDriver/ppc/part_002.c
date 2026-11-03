@@ -343,7 +343,7 @@ loopSetTexture:
         if (4 < targetSlot) goto loopSetTexture;
 setTexture:
         texture = *(int *)(unitObjectOffset + *(int *)(ctx + 0x18) + targetSlot * 4);
-        if ((*(short *)(*(int *)(texture + 0x30) + 0x5c) == 0) ||
+        if ((*(ushort *)(*(int *)(texture + 0x30) + 0x5c) == 0x0) ||
            (((*(byte *)(texture + 0x39) & 0x87) != 0 &&
             (makeResidentResult = gldTextureMakeResident(ctx,texture,staleArgR5,staleArgR6,staleArgR7,staleArgR8), makeResidentResult == 0))))
         goto loopSetTexture;
@@ -967,7 +967,7 @@ int gld_updateCurrentVertexArray(ctx)
   if ((*(uint *)(arrayState + 0x308) & *(uint *)(arrayState + 0x300)) == 0 &&
       (*(uint *)(arrayState + 0x30c) & *(uint *)(arrayState + 0x304)) == 0) {
     if ((((unsigned char *)0x000042fc)[*(int *)(ctx + GLD_engineState)] != '\0') ||
-       (*(short *)(arrayState + 0x312) != -0x7a4c)) {
+       (*(ushort *)(arrayState + 0x312) != 0x85b4)) {
       if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto storeCtx;
       arrayState = gld_prepareVertexArrayBacking(ctx,vertexArray);
       goto joined_r0x0000b814;
@@ -1072,7 +1072,7 @@ int _gldModifyVertexArray(ctx, vertexArray)
   if (backing != 0) {
     retired = ((*(uint *)(vertexArray[1] + 0x88) ^ 1) & 1) == 0;
     if (!retired) {
-      if (*(short *)(*vertexArray + 0x312) == -0x7a42) {
+      if (*(ushort *)(*vertexArray + 0x312) == 0x85be) {
         stateMismatch = vertexArray[0x8c] ^ 7;
       }
       else {
@@ -9005,19 +9005,19 @@ int gld_encodePixelFormatFlags(flagsInOut, pixelFormat, unused3, unused4, unused
   if ((*(uint *)(pixelFormat + 8) & 8) != 0) {
     flags = flags | 0x80000000;
   }
-  if (*(short *)(pixelFormat + 0x24) != 0) {
+  if (*(ushort *)(pixelFormat + 0x24) != 0x0) {
     if (((flags & 0xf) == 4) && (*(int *)(pixelFormat + 0x28) != 1)) {
-      if (*(short *)(pixelFormat + 0x26) == 6) {
+      if (*(ushort *)(pixelFormat + 0x26) == 0x6) {
         flags = flags | 0x400000;
       }
-      else if (*(short *)(pixelFormat + 0x26) == 4) {
+      else if (*(ushort *)(pixelFormat + 0x26) == 0x4) {
         flags = flags | 0x200000;
       }
       else {
         flags = flags | 0x100000;
       }
     }
-    else if ((*(short *)(pixelFormat + 0x26) == 4) || (*(short *)(pixelFormat + 0x26) == 6)) {
+    else if ((*(ushort *)(pixelFormat + 0x26) == 0x4) || (*(ushort *)(pixelFormat + 0x26) == 0x6)) {
       flags = flags | 0x80000;
     }
     else {
@@ -9344,10 +9344,10 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
   if ((((unsigned char *)0x00002d84)[engineState] == '\0') ||
      ((((((*(int *)(((unsigned char *)0x00002d68) + engineState) == 0x10000 &&
           (*(int *)(((unsigned char *)0x00002d6c) + engineState) == 0x10000)) &&
-         (*(short *)(((unsigned char *)0x00002d80) + engineState) != -0x7ff5)) &&
-        ((*(short *)(((unsigned char *)0x00002d80) + engineState) != -0x7ff9 &&
-         (*(short *)(((unsigned char *)0x00002d82) + engineState) != -0x7ff5)))) &&
-       (*(short *)(((unsigned char *)0x00002d82) + engineState) != -0x7ff9)) || (((unsigned char *)0x00002e33)[engineState] != '\0')))) {
+         (*(ushort *)(((unsigned char *)0x00002d80) + engineState) != 0x800b)) &&
+        ((*(ushort *)(((unsigned char *)0x00002d80) + engineState) != 0x8007 &&
+         (*(ushort *)(((unsigned char *)0x00002d82) + engineState) != 0x800b)))) &&
+       (*(ushort *)(((unsigned char *)0x00002d82) + engineState) != 0x8007)) || (((unsigned char *)0x00002e33)[engineState] != '\0')))) {
     scratchUint41 = *(uint *)(ctx + 0x26b0) & 0xfffffffd;
     *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
@@ -9380,7 +9380,7 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
     *(uint *)(ctx + 0x26b0) = scratchUint41;
   }
   if ((((*(uint *)(((unsigned char *)0x000031c0) + engineState) & 1) == 0) || ((*(uint *)(ctx + 0x154) & 0x80) == 0))
-     || ((*(short *)(((unsigned char *)0x000031a0) + engineState) == 0x207 &&
+     || ((*(ushort *)(((unsigned char *)0x000031a0) + engineState) == 0x207 &&
          (*(int *)(((unsigned char *)0x000031a4) + engineState) == 0x1e001e00)))) {
     scratchUint41 = scratchUint41 & 0xfffeffff;
     *(uint *)(ctx + 0x26b0) = scratchUint41;
@@ -9435,7 +9435,7 @@ int glCopyPixels_impl(ctx, rasterPos, srcX, srcY, width, height, copyType)
     scratchPtr42 = (undefined *)(scratchUint41 & 0xfffffbff);
     *(undefined **)(ctx + 0x26b0) = scratchPtr42;
   }
-  if (*(short *)(((unsigned char *)0x00002dba) + engineState) == *(short *)(((unsigned char *)0x00002db8) + engineState)) {
+  if (*(ushort *)(((unsigned char *)0x00002dba) + engineState) == *(ushort *)(((unsigned char *)0x00002db8) + engineState)) {
     scratchInt40 = srcX + width;
     scratchInt38 = srcY + height;
     scratchInt33 = (int)*rasterPos;
@@ -9463,7 +9463,7 @@ setSrcDstOverlap:
   if (((copyType == 0x1801) && ((*(uint *)(ctx + 0x154) & 0x30000) != 0)) &&
      ((scratchInt33 = *(int *)(ctx + 0x10), *(int *)(((unsigned char *)0x00002e40U) + scratchInt33) == 0 &&
       ((((((unsigned char *)0x00002e44)[scratchInt33] != '\0' && (((uint)scratchPtr42 & 0x10001) == 0)) &&
-        (((uint)scratchPtr42 & 0x10) != 0)) && (*(short *)(((unsigned char *)0x00002dc4) + scratchInt33) == 0x207)))))) {
+        (((uint)scratchPtr42 & 0x10) != 0)) && (*(ushort *)(((unsigned char *)0x00002dc4) + scratchInt33) == 0x207)))))) {
     scratchInt33 = gld_needsMultisampleResolve(ctx,4,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
     if (scratchInt33 == 0) {
       scratchInt33 = 3;
@@ -10176,10 +10176,10 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   if ((((unsigned char *)0x00002d84)[ctxState] == '\0') ||
      (((((*(int *)(((unsigned char *)0x00002d68) + ctxState) == 0x10000 &&
          (*(int *)(((unsigned char *)0x00002d6c) + ctxState) == 0x10000)) &&
-        (*(short *)(((unsigned char *)0x00002d80) + ctxState) != -0x7ff5)) &&
-       (((*(short *)(((unsigned char *)0x00002d80) + ctxState) != -0x7ff9 &&
-         (*(short *)(((unsigned char *)0x00002d82) + ctxState) != -0x7ff5)) &&
-        (*(short *)(((unsigned char *)0x00002d82) + ctxState) != -0x7ff9)))) || (((unsigned char *)0x00002e33)[ctxState] != '\0')))) {
+        (*(ushort *)(((unsigned char *)0x00002d80) + ctxState) != 0x800b)) &&
+       (((*(ushort *)(((unsigned char *)0x00002d80) + ctxState) != 0x8007 &&
+         (*(ushort *)(((unsigned char *)0x00002d82) + ctxState) != 0x800b)) &&
+        (*(ushort *)(((unsigned char *)0x00002d82) + ctxState) != 0x8007)))) || (((unsigned char *)0x00002e33)[ctxState] != '\0')))) {
     pathFlags = *(uint *)(ctx + GLD_drawPixelsFlags) & 0xfffffffd;
     *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
@@ -10212,7 +10212,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
     *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
   }
   if ((((*(uint *)(((unsigned char *)0x000031c0) + ctxState) & 1) == 0) || ((*(uint *)(ctx + GLD_renderFlags) & 0x80) == 0))
-     || ((*(short *)(((unsigned char *)0x000031a0) + ctxState) == 0x207 &&
+     || ((*(ushort *)(((unsigned char *)0x000031a0) + ctxState) == 0x207 &&
          (*(int *)(((unsigned char *)0x000031a4) + ctxState) == 0x1e001e00)))) {
     pathFlags = pathFlags & 0xfffeffff;
     *(uint *)(ctx + GLD_drawPixelsFlags) = pathFlags;
@@ -10535,12 +10535,12 @@ setConvBuffer:
          ) {
         if ((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 2) == 0) {
           if (((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 4) != 0) &&
-             (*(short *)(((unsigned char *)0x00002fe8) + engineState) == -0x7fea)) {
+             (*(ushort *)(((unsigned char *)0x00002fe8) + engineState) == 0x8016)) {
             scaledHeight = (scaledHeight - *(int *)(((unsigned char *)0x00002ff4) + engineState)) + 1;
             scaledWidth = (scaledWidth - *(int *)(((unsigned char *)0x00002ff0) + engineState)) + 1;
           }
         }
-        else if (*(short *)(((unsigned char *)0x00002fa8) + engineState) == -0x7fea) {
+        else if (*(ushort *)(((unsigned char *)0x00002fa8) + engineState) == 0x8016) {
           scaledHeight = (scaledHeight - *(int *)(((unsigned char *)0x00002fb4) + engineState)) + 1;
           scaledWidth = (scaledWidth - *(int *)(((unsigned char *)0x00002fb0) + engineState)) + 1;
         }

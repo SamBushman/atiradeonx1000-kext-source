@@ -2739,12 +2739,12 @@ int ilRewriteForTextureState(ctx, compileOutput, compileRecord, ilSource, scHand
     ilWordCount = ctx;
     do {
       shadowExtraWords = *(int *)(((unsigned char *)0x000013f8) + ilWordCount);
-      if ((shadowExtraWords != 0) && (*(short *)(shadowExtraWords + 0x38) == 0x1902)) {
+      if ((shadowExtraWords != 0) && (*(ushort *)(shadowExtraWords + 0x38) == 0x1902)) {
         accumBits = 1 << ((uint)staleArgR8 & 0x3f);
         depthTextureUnitMask = accumBits | depthTextureUnitMask;
         *scanCursor = (uint)*(ushort *)(shadowExtraWords + 0x58);
         scanCursor[0x10] = (uint)*(ushort *)(shadowExtraWords + 0x5c);
-        if (*(short *)(shadowExtraWords + 0x5a) != 0) {
+        if (*(ushort *)(shadowExtraWords + 0x5a) != 0x0) {
           shadowCompareUnitMask = accumBits | shadowCompareUnitMask;
         }
       }
@@ -2782,7 +2782,7 @@ int ilRewriteForTextureState(ctx, compileOutput, compileRecord, ilSource, scHand
   oneWord = (uint *******)((int)((unsigned char *)0x0) + 1);
   neverSetFlagA = 0;
   featureSelector = compileRecord[0x45];
-  if ((loopContinue) || (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(ctx + 4) + 0x10)) != -0x7baf)) {
+  if ((loopContinue) || (*(ushort *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(ctx + 4) + 0x10)) != 0x8451)) {
     legacyShadowMode = 0;
   }
   else {
@@ -6799,13 +6799,13 @@ callPsnReportError:
   }
   usInstructionNumber = 1;
 checkPsn:
-  if ((*(short *)(psn + 0x20) == 0) && (*(short *)(psn + 0x12) == 0)) {
+  if ((*(ushort *)(psn + 0x20) == 0x0) && (*(ushort *)(psn + 0x12) == 0x0)) {
     *(short *)(psn + 0x12) = (short)usInstructionNumber + -1;
   }
   if (!r300Compatible) {
     *(undefined2 *)(psn + 0x28) = 1;
   }
-  if ((*(short *)(psn + 0x28) != 0) && (*(short *)(psn + 0x22) == 0)) {
+  if ((*(ushort *)(psn + 0x28) != 0x0) && (*(ushort *)(psn + 0x22) == 0x0)) {
     *(undefined2 *)(psn + 0x22) = 1;
   }
   if (loopIndex <= recordCount) {
@@ -6903,7 +6903,7 @@ loopSetNextPendingTexIndex:
       *(undefined1 *)(psn + pendingTexRecord + 4) = 1;
     }
   }
-  if (((texCustomEnables != 0) || (waitFlagsOr != 0)) || (*(short *)(psn + 0x20) != 0)) {
+  if (((texCustomEnables != 0) || (waitFlagsOr != 0)) || (*(ushort *)(psn + 0x20) != 0x0)) {
     level = level | level << 4;
   }
   *(char *)(psn + 0xf) = (char)level;
@@ -7545,7 +7545,7 @@ int psnDumpPixelShader(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR
     dumpIdArg = dumpIdSlot;
     ((int (*)())psnReportError)(0,"======== Begin Loki NSF pixel shader dump: %s: %d ========\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
-    if (*(short *)(pixelShader + 5) == 0) {
+    if (*(ushort *)(pixelShader + 5) == 0x0) {
       ((int (*)())psnReportError)(0," Shader stats not valid\n \n",dumpLabelArg,dumpIdArg,argR7,argR8,argR9,argR10);
     }
     else {
@@ -8223,7 +8223,7 @@ reportUnknownAlphaOp:
     recordCount2 = neutralRecordCountArg;
     ((int (*)())psnReportError)(0,"======== Begin r520 neutral format pixel shader: %d =============\n",
                  dumpIdSlot,argR6,neutralRecordCountArg,argR8,argR9,argR10);
-    if (*(short *)(pixelShader + 5) == 0) {
+    if (*(ushort *)(pixelShader + 5) == 0x0) {
       ((int (*)())psnReportError)(0," Shader stats not valid\n \n",neutralLineArg0,argR6,neutralRecordCountArg,argR8,argR9,argR10);
     }
     else {

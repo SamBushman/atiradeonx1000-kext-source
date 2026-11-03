@@ -619,7 +619,7 @@ int gld_validatePixelFormat(pixelFormat)
       return 0x2716;
     }
   }
-  if ((((((*(uint *)(pixelFormat + 4) & 0xff00) == 0x1900) && (*(short *)(pixelFormat + 0x20) == 0)) &&
+  if ((((((*(uint *)(pixelFormat + 4) & 0xff00) == 0x1900) && (*(ushort *)(pixelFormat + 0x20) == 0x0)) &&
        (((*(uint *)(pixelFormat + 0xc) & 2) == 0 || (singleRenderer)))) && (*(ushort *)(pixelFormat + 0x22) < 3)) &&
      ((((surfaceFlags & 0x2000) == 0 || (*(int *)(pixelFormat + 0x24) == 0)) &&
       (sampleBuffers = *(ushort *)(pixelFormat + 0x24), sampleBuffers < 2)))) {
@@ -629,7 +629,7 @@ int gld_validatePixelFormat(pixelFormat)
         return 0x2712;
       }
     }
-    else if (*(short *)(pixelFormat + 0x26) != 0) {
+    else if (*(ushort *)(pixelFormat + 0x26) != 0x0) {
       return 0x2712;
     }
     if (((((surfaceFlags & 0xffffd064) == 0) &&
@@ -734,8 +734,8 @@ storeCandidateRow2:
     *(undefined2 *)(candidateRow + 0x26) = 0;
   }
   sampleCountCode = 0;
-  if (*(short *)(candidateRow + 0x24) != 0) {
-    if (*(short *)(candidateRow + 0x24) != 1) {
+  if (*(ushort *)(candidateRow + 0x24) != 0x0) {
+    if (*(ushort *)(candidateRow + 0x24) != 0x1) {
       *(undefined2 *)(candidateRow + 0x24) = 1;
     }
     if (4 < *(short *)(candidateRow + 0x26)) {
@@ -1087,7 +1087,7 @@ loopStoreFramebufferObj:
     }
     else {
       formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x14);
-      if ((formatBits >> 0x1a == 0) || (*(short *)(*(int *)(colorTexture + 0x30) + 2) != 0x1907))
+      if ((formatBits >> 0x1a == 0) || (*(ushort *)(*(int *)(colorTexture + 0x30) + 2) != 0x1907))
       goto loopStoreFramebufferObj;
       framebufferObj[9] = 0;
     }
@@ -2761,7 +2761,7 @@ int gld_prepareVertexArrayBacking(ctx, vertexArray)
     return 1;
   }
   if ((vertexArray[0x8a] != 0) && (((dirtyBits ^ 1) & 1) != 0)) {
-    if (*(short *)(arrayDesc + 0x312) == -0x7a42) {
+    if (*(ushort *)(arrayDesc + 0x312) == 0x85be) {
       if (vertexArray[0x8c] == 7) {
         if ((dirtyBits & 2) != 0) {
           *(undefined1 *)(vertexArray[0x8a] + 0x14) = 1;
@@ -2794,7 +2794,7 @@ storeDirtyState:
       vertexCount = *(uint *)(arrayDesc + 0x318);
       tailBytes = (vertexCount - (vertexCount / chunkVerts[0]) * chunkVerts[0]) + 3 & 0xfffffffc;
     }
-    if ((*(short *)(arrayDesc + 0x312) == -0x7a42) && (tailMode < 0x4f)) {
+    if ((*(ushort *)(arrayDesc + 0x312) == 0x85be) && (tailMode < 0x4f)) {
       gld_setVertexArrayNewTextureBackingResult = gld_setVertexArrayNewTextureBacking(ctx,vertexArray,(tailMode * 0x12 + 0xc) * 4,
                            tailBytes + chunkVerts[0] * chunkCount,*(undefined4 *)(arrayDesc + 0x314),vertexCount);
       if (gld_setVertexArrayNewTextureBackingResult != 0) goto checkVertexArray;
@@ -2998,7 +2998,7 @@ loopStoreChunkVerts:
       tailBytes = (scratchUint7 - (scratchUint7 / chunkVerts[0]) * chunkVerts[0]) + 3 & 0xfffffffc;
     }
     scratchArg5 = scratchUint7;
-    if ((*(short *)(bufferDesc + 3) == -0x771c) && (tailMode < 0x4f)) {
+    if ((*(ushort *)(bufferDesc + 3) == 0x88e4) && (tailMode < 0x4f)) {
       if (isDefaultMode) {
         scratchInt4 = 0;
       }
@@ -3089,7 +3089,7 @@ setScratchUint3:
     tailBytes = *dirtyState;
     packetEnd = (undefined4 *)(tailBytes ^ 1);
     if (((uint)packetEnd & 1) == 0) goto loopStoreChunkVerts;
-    if (*(short *)(bufferDesc + 3) != -0x771c) {
+    if (*(ushort *)(bufferDesc + 3) != 0x88e4) {
       if (bufferObject[4] == 6) {
         if (((tailBytes & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
           gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,scratchInt4,dirtyState,0,tailBytes & 2);
@@ -3642,8 +3642,8 @@ int gld_drawVertexArray(ctx, drawKind, primitiveMode, first, count, indexType, d
       return 1;
     }
   }
-  else if (((*(short *)(((unsigned char *)0x00003170) + *(int *)(ctx + GLD_engineState)) == 0x1b02) ||
-           (*(short *)(((unsigned char *)0x00003172) + *(int *)(ctx + GLD_engineState)) == 0x1b02)) && (primitiveMode - 4U < 6))
+  else if (((*(ushort *)(((unsigned char *)0x00003170) + *(int *)(ctx + GLD_engineState)) == 0x1b02) ||
+           (*(ushort *)(((unsigned char *)0x00003172) + *(int *)(ctx + GLD_engineState)) == 0x1b02)) && (primitiveMode - 4U < 6))
   goto setScratchUint17;
   arrayStateB = *scratchPtr28;
   elementBinding = *(int *)(scratchPtr28[1] + 0x80);
@@ -4798,7 +4798,7 @@ int gld_emitCopyRectPacket(ctx, srcX, srcY, width, height, dstX, dstY, surfaceHa
   channelMask = 0;
   *packet = 0xd07;
   engineState = *(int *)(ctx + 0x10);
-  if (*(short *)(((unsigned char *)0x00002dba) + engineState) != 0) {
+  if (*(ushort *)(((unsigned char *)0x00002dba) + engineState) != 0x0) {
     if ((*(uint *)(ctx + 0x154) & 0xf) == 3) {
       scratchUint6 = 0x7c00;
       if (((unsigned char *)0x00002e40)[engineState] == '\0') {

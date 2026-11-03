@@ -434,7 +434,7 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   tokenIndex = *countPtr + 1;
   *countPtr = tokenIndex;
   if (((*(uint *)(ctx + 0x44) & 0xa00000) != 0) ||
-     (((int)*(uint *)(ctx + 0x44) < 0 && (*(short *)(((unsigned char *)0x00002d48) + stateBlock) == -0x7e06)))) {
+     (((int)*(uint *)(ctx + 0x44) < 0 && (*(ushort *)(((unsigned char *)0x00002d48) + stateBlock) == 0x81fa)))) {
     if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
       newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
       if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -921,7 +921,7 @@ loopSetDstWriteWord:
       loopCounter = loopCounter + 1;
     } while (argCount != loopCounter);
   }
-  if ((*(short *)(unitState + 0x454) == -0x78bf) || (*(short *)(unitState + 0x454) == -0x7951)) {
+  if ((*(ushort *)(unitState + 0x454) == 0x8741) || (*(ushort *)(unitState + 0x454) == 0x86af)) {
     if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
       ilOpcode = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
       if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -1695,7 +1695,7 @@ int ffpsEmitTextureSamples(ctx, ilBuilder, useUnitFlags)
           hasNoCompareMode = *(char *)(unit + *(int *)(((unsigned char *)0x00001168) + ctx) + 0x71) == '\0';
         }
         if (((int)(uint)*(byte *)(ctx + 0x20) >> (unit & 0x3f) & 1U) == 0) {
-          if ((*(short *)(unitRecordCursor + 0x450) != -0x7a90) || (*(short *)(texEnvRecord + 4) != -0x7885)) {
+          if ((*(ushort *)(unitRecordCursor + 0x450) != 0x8570) || (*(ushort *)(texEnvRecord + 4) != 0x877b)) {
             tokenIndex = *countPtr;
             if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
               newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);

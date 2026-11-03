@@ -3350,11 +3350,11 @@ int glReadPixels_entry(ctx, rectX, rectY, width, height, format, pixelType, pixe
   }
   else if ((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 2) == 0) {
     if (((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 4) == 0) ||
-       (*(short *)(((unsigned char *)0x00002fe8) + engineState) != -0x7fea)) goto setScratchInt6;
+       (*(ushort *)(((unsigned char *)0x00002fe8) + engineState) != 0x8016)) goto setScratchInt6;
     sendAttachments = true;
     scratchInt6 = *(int *)(((unsigned char *)0x00002ff0) + engineState) + -1;
   }
-  else if (*(short *)(((unsigned char *)0x00002fa8) + engineState) == -0x7fea) {
+  else if (*(ushort *)(((unsigned char *)0x00002fa8) + engineState) == 0x8016) {
     sendAttachments = true;
     scratchInt6 = *(int *)(((unsigned char *)0x00002fb0) + engineState) + -1;
   }
@@ -3715,11 +3715,11 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
   }
   else if ((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 2) == 0) {
     if (((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 4) == 0) ||
-       (*(short *)(((unsigned char *)0x00002fe8) + ctxState) != -0x7fea)) goto setScratchInt6;
+       (*(ushort *)(((unsigned char *)0x00002fe8) + ctxState) != 0x8016)) goto setScratchInt6;
     sendAttachments = true;
     scratchInt6 = *(int *)(((unsigned char *)0x00002ff0) + ctxState) + -1;
   }
-  else if (*(short *)(((unsigned char *)0x00002fa8) + ctxState) == -0x7fea) {
+  else if (*(ushort *)(((unsigned char *)0x00002fa8) + ctxState) == 0x8016) {
     sendAttachments = true;
     scratchInt6 = *(int *)(((unsigned char *)0x00002fb0) + ctxState) + -1;
   }
@@ -5921,7 +5921,7 @@ loopSetScratchUint7:
        * was tripping over. Fixed by passing the value the call site had already prepared. */
       (*setCurrentFn)(stream,*(undefined4 *)(0x00002748 + stream + 4));
     }
-    if (*(short *)((int)dirtyBits + 6) != 0) {
+    if (*(ushort *)((int)dirtyBits + 6) != 0x0) {
       ((int (*)())gld_emitUnitObjectPackets)(stream,dirtyBits);
     }
     if (*(char *)(stream + 0x2435) == '\0') goto loopSetScratchUint7;
@@ -6294,7 +6294,7 @@ int gld_emitUnitObjectPackets(stream, unitMaskRecord)
   scratchInt6 = glContext;
   for (scratchUint7 = (uint)*(ushort *)(unitMaskRecord + 6); scratchUint7 != 0; scratchUint7 = scratchUint7 >> 1) {
     if (((((scratchUint7 & 1) != 0) && (scratchInt4 = *(int *)(scratchInt6 + 0x18c), scratchInt4 != 0)) &&
-        (*(short *)(*(int *)(scratchInt4 + 0x30) + 2) == 0x1902)) && (*(char *)(scratchInt4 + 200) == '\x01')) {
+        (*(ushort *)(*(int *)(scratchInt4 + 0x30) + 2) == 0x1902)) && (*(char *)(scratchInt4 + 200) == '\x01')) {
       packet = (undefined4 *)(**(code **)(stream + 0x2758))(stream,0x3fa);
       *(undefined4 **)(0x00002748 + stream + 4) = packet;
       packetEnd = packet + 0x3f8;

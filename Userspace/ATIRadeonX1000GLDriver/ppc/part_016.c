@@ -19,7 +19,7 @@ int gld_buildActiveUnitList(glContext)
   
   ctx44Word = *(uint *)(glContext + 0x44);
   if ((((int)ctx44Word < 0) &&
-      (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == -0x7e06)) ||
+      (*(ushort *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x81fa)) ||
      (baseCost = 0, (ctx44Word & 0xa10000) != 0)) {
     baseCost = 1;
   }
@@ -216,7 +216,7 @@ int gld_updateTextureUnitState(ctx, unitMask)
                (texField68 & 1) << 0x14 |
                (texField69 & 7) << 0x15 |
                (texField6a & 1) << 0x13 | (texField6b & 7) << 4 | *(uint *)(unitRegBase8Bound + 0x18ac) & 0xff07ff8f;
-          if (*(short *)(boundTexture + 0x74) == 0x1902) {
+          if (*(ushort *)(boundTexture + 0x74) == 0x1902) {
             *(uint *)(ctx + 0x1a48) = *(uint *)(ctx + 0x1a48) | 0x80000000;
           }
           if ((**(ushort **)(boundTexture + 0x30) & 0xf) == 2) {
@@ -770,7 +770,7 @@ setGlContextWord1928:
   *(uint *)(glContext + 0x1928) = glContextWord1928 & 0xffffffef | flagChange | programFlag << 4;
   if (((((unsigned char *)0x00002e2c)[*(int *)(glContextPtr4 + 0x10)] == '\0') ||
       ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (sampleFlag = 1, *(short *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4 + 0x10)) == -1)) {
+     (sampleFlag = 1, *(ushort *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4 + 0x10)) == 0xffff)) {
     sampleFlag = 0;
   }
   *(undefined1 *)(glContext + 0x29) = 1;
@@ -797,7 +797,7 @@ int gld_updatePolygonModeFlags(glContext, stateRecord)
   *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 4;
   currentStateRecord = *(int *)(*(int *)(glContext + 4) + 0x10);
   if (((((unsigned char *)0x00003178)[currentStateRecord] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     ((*(short *)(((unsigned char *)0x00003170) + currentStateRecord) != 0x1b02 && (*(short *)(((unsigned char *)0x00003172) + currentStateRecord) != 0x1b02))
+     ((*(ushort *)(((unsigned char *)0x00003170) + currentStateRecord) != 0x1b02 && (*(ushort *)(((unsigned char *)0x00003172) + currentStateRecord) != 0x1b02))
      )) {
     lineModeFlag = 0;
   }
@@ -867,7 +867,7 @@ checkCtx44Word:
     if (((unsigned char *)0x00004304)[engineCaps] == '\0') {
       if ((int)*(uint *)(glContext + 0x44) < 0) {
         glContextWord18a4 = *(uint *)(glContext + 0x18a4);
-        chipVariantBit = (uint)(*(short *)(((unsigned char *)0x00002d48) + engineCaps) == -0x7e06) << 2;
+        chipVariantBit = (uint)(*(ushort *)(((unsigned char *)0x00002d48) + engineCaps) == 0x81fa) << 2;
         *(uint *)(glContext + 0x18a4) = chipVariantBit | glContextWord18a4 & 0xfffffffb;
         *(uint *)(glContext + 0x18a4) =
              ((byte)((unsigned char *)0x00002d48)[engineCaps + 4] & 1) << 1 | chipVariantBit | glContextWord18a4 & 0xfffffff9;
@@ -1269,7 +1269,7 @@ double gld_updatePointState(int glContext,int pointState)
       ;
     }
   }
-  if (*(short *)(((unsigned char *)0x000030e2) + pointState) == 0x60b4) {
+  if (*(ushort *)(((unsigned char *)0x000030e2) + pointState) == 0x60b4) {
     pointStateWord = pointStateWord & 0xfffffff7;
     *(uint *)(glContext + 0xe8) = pointStateWord;
   }
@@ -1708,7 +1708,7 @@ loopSetZeroFlagA:
       *(uint *)(glContext + 0x1928) = glContextWord1928_2 & 0xffffffef | flagChange | zeroFlagA << 4;
       if (((((unsigned char *)0x00002e2c)[*(int *)(glContextPtr4 + 0x10)] == '\0') ||
           ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-         (sampleCountFlag = 1, *(short *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4 + 0x10)) == -1)) {
+         (sampleCountFlag = 1, *(ushort *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4 + 0x10)) == 0xffff)) {
         sampleCountFlag = 0;
       }
       glContext[0x2e] = stateByte2eNew;
@@ -1864,7 +1864,7 @@ checkDirtyBitsWord8:
         if (((unsigned char *)0x00004304)[engineState] == '\0') {
           if ((int)capsFlag2d4a < 0) {
             glContextWord18a4_3 = *(uint *)(glContext + 0x18a4);
-            chipVariantBit2 = (uint)(*(short *)(((unsigned char *)0x00002d48) + engineState) == -0x7e06) << 2;
+            chipVariantBit2 = (uint)(*(ushort *)(((unsigned char *)0x00002d48) + engineState) == 0x81fa) << 2;
             *(uint *)(glContext + 0x18a4) = chipVariantBit2 | glContextWord18a4_3 & 0xfffffffb;
             chipVariantBit2 = ((byte)((unsigned char *)0x00002d48)[engineState + 4] & 1) << 1 | chipVariantBit2 | glContextWord18a4_3 & 0xfffffff9;
             *(uint *)(glContext + 0x18a4) = chipVariantBit2;
@@ -1896,7 +1896,7 @@ checkDirtyBitsWord8:
               *(uint *)(glContext + 0x18a4) = capsFlag2d4a >> 0x15 & 4 | chipVariantBit2 & 0xfffffff9;
             }
             else {
-              chipVariantBitC = (uint)(*(short *)(((unsigned char *)0x00002d48) + engineState) == -0x7e06) << 2;
+              chipVariantBitC = (uint)(*(ushort *)(((unsigned char *)0x00002d48) + engineState) == 0x81fa) << 2;
               *(uint *)(glContext + 0x18a4) = chipVariantBitC | chipVariantBit2 & 0xfffffffb;
               *(uint *)(glContext + 0x18a4) =
                    ((byte)((unsigned char *)0x00002d48)[engineState + 4] & 1) << 1 | chipVariantBitC | chipVariantBit2 & 0xfffffff9;
@@ -2163,8 +2163,8 @@ setDirtyBitsWord4:
         engineCapsC = *(int *)(*(int *)(glContext + 4) + 0x10);
         if (((((unsigned char *)0x00003178)[engineCapsC] == '\0') ||
             (dirtyWord3 = *(uint *)(glContext + 0x44) & 0x20000, dirtyWord3 != 0)) ||
-           ((*(short *)(((unsigned char *)0x00003170) + engineCapsC) != 0x1b02 &&
-            (*(short *)(((unsigned char *)0x00003172) + engineCapsC) != 0x1b02)))) {
+           ((*(ushort *)(((unsigned char *)0x00003170) + engineCapsC) != 0x1b02 &&
+            (*(ushort *)(((unsigned char *)0x00003172) + engineCapsC) != 0x1b02)))) {
           zeroFlag = 0;
         }
         else {
@@ -2251,7 +2251,7 @@ setDirtyBitsWord4:
     engineCapsD = *(int *)(glContextPtr4_2 + 0x10);
     if (((*(uint *)(glContextPtr4_2 + 0x284) & 0x80000800) != 0) ||
        (((((*(uint *)(glContextPtr4_2 + 0x284) & 0x1000000) != 0 &&
-          (*(short *)(((unsigned char *)0x00002e06) + engineCapsD) == -0x7bae)) || ((*(uint *)(glContextPtr4_2 + 0x328) & 1) != 0)
+          (*(ushort *)(((unsigned char *)0x00002e06) + engineCapsD) == 0x8452)) || ((*(uint *)(glContextPtr4_2 + 0x328) & 1) != 0)
          ) || ((*(int *)(((unsigned char *)0x00003e28) + engineCapsD) != 0 || (feedbackFlag = 0, (stateWord2cc & 0xe000000) != 0)))))
        ) {
       feedbackFlag = 1;
@@ -2484,7 +2484,7 @@ loopSetZeroFlagB:
   *(uint *)(glContext + 0x1928) = glContextWord1928 & 0xffffffef | flagChangeB | zeroFlagB << 4;
   if (((((unsigned char *)0x00002e2c)[*(int *)(glContextPtr4 + 0x10)] == '\0') ||
       ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (oneFlag = 1, *(short *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4 + 0x10)) == -1)) {
+     (oneFlag = 1, *(ushort *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4 + 0x10)) == 0xffff)) {
     oneFlag = 0;
   }
   glContext[0x2e] = stateByte2eNewB;
@@ -2593,8 +2593,8 @@ checkDirtyKeepSelected:
     if ((dirtyBitsWord0 & 0x800000) != 0) {
       engineCapsG = *(int *)(*(int *)(glContext + 4) + 0x10);
       if (((((unsigned char *)0x00003178)[engineCapsG] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-         ((*(short *)(((unsigned char *)0x00003170) + engineCapsG) != 0x1b02 &&
-          (*(short *)(((unsigned char *)0x00003172) + engineCapsG) != 0x1b02)))) {
+         ((*(ushort *)(((unsigned char *)0x00003170) + engineCapsG) != 0x1b02 &&
+          (*(ushort *)(((unsigned char *)0x00003172) + engineCapsG) != 0x1b02)))) {
         zeroFlagC = 0;
       }
       else {
@@ -7038,7 +7038,7 @@ int atifsEmitInputDeclarations(ctx, tokenBuf, fsState, shaderDef)
   *tokenBuf = pushIndex;
   if (*(char *)(shaderDef + 0x6c) == '\0') {
     if ((*(uint *)(ctx + 0x44) & 0x80100000) == 0x80000000) {
-      if (*(short *)(((unsigned char *)0x00002d48) + rendererRec) != -0x7e06) goto setTextureUnitCount;
+      if (*(ushort *)(((unsigned char *)0x00002d48) + rendererRec) != 0x81fa) goto setTextureUnitCount;
     }
     else if ((*(uint *)(ctx + 0x44) & 0x800000) == 0) goto setTextureUnitCount;
   }
@@ -7202,7 +7202,7 @@ int atifsCompileCurrentShader(ctx)
   if (compiledProgram != (undefined1 *)0x0) {
     ctxFlags = *(uint *)(ctx + 0x44);
     if ((ctxFlags & 0x100000) == 0) {
-      if ((((int)ctxFlags < 0) && (*(short *)(((unsigned char *)0x00002d48) + rendererRec) == -0x7e06)) ||
+      if ((((int)ctxFlags < 0) && (*(ushort *)(((unsigned char *)0x00002d48) + rendererRec) == 0x81fa)) ||
          (wantSecondaryAdd = '\0', (ctxFlags & 0x80800000) == 0x800000)) {
         wantSecondaryAdd = '\x01';
       }
@@ -7461,7 +7461,7 @@ flushRedirectedColorDst:
     } while (passCount != passIndex);
   }
   if ((*(uint *)(ctx + 0x44) & 0x80100000) == 0x80000000) {
-    if (*(short *)(((unsigned char *)0x00002d48) + rendererRec) == -0x7e06) goto callAtifsEmitAddSecondaryColor;
+    if (*(ushort *)(((unsigned char *)0x00002d48) + rendererRec) == 0x81fa) goto callAtifsEmitAddSecondaryColor;
 loopStoreCompiledProgram:
     compiledProgram[0x118] = 0;
   }
@@ -8655,7 +8655,7 @@ int gld_bindProgramStateAndEmit(glContext, programObj, updateArg)
             *(uint *)(glContext + 0x1ca0) = unitUseBits;
           }
         }
-        if (((glContextWord44 & 0x1000800) != 0) && (*(short *)(((unsigned char *)0x00002e06) + engineCaps) == -0x7baf)) {
+        if (((glContextWord44 & 0x1000800) != 0) && (*(ushort *)(((unsigned char *)0x00002e06) + engineCaps) == 0x8451)) {
           unitUseBits = unitUseBits | 0x40000;
           *(uint *)(glContext + 0x1ca0) = unitUseBits;
         }
@@ -9146,7 +9146,7 @@ setGlContextWord1e5c_3:
   glContextWord44 = *(uint *)(glContext + 0x44);
   if ((glContextWord44 & 0x100000) == 0) {
     if ((((int)glContextWord44 < 0) &&
-        (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == -0x7e06)) ||
+        (*(ushort *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == 0x81fa)) ||
        (needsFogTokens = false, (glContextWord44 & 0x80800000) == 0x800000)) {
       needsFogTokens = true;
     }
