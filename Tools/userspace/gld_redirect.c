@@ -20,6 +20,8 @@
 #include <string.h>
 #include <dlfcn.h>
 #include <mach-o/dyld.h>
+#include <mach-o/getsect.h>
+#include <mach-o/loader.h>
 
 static NSObjectFileImageReturnCode (*real_NSCreate)(const char *, NSObjectFileImage *) = NULL;
 static const char *g_from = NULL, *g_to = NULL;
@@ -49,8 +51,36 @@ static NSObjectFileImageReturnCode my_NSCreate(const char *pathName, NSObjectFil
     return r;
 }
 
+
+/* Experiment for issue #209 (hitch frames): GLD_BINDNOW=1 links the driver with NSLINKMODULE_OPTION_BINDNOW (no lazy symbol binding at first call);
+ * GLD_PRETOUCH=1 reads every page of the freshly linked ATIRadeonX1000GLDriver image(s) (__TEXT, __DATA) so first-use code paths do not take page faults mid-frame. */
+static NSModule (*real_NSLink)(NSObjectFileImage, const char *, unsigned long) = NULL;
+static NSModule my_NSLink(NSObjectFileImage img, const char *moduleName, unsigned long options) {
+    if (!real_NSLink) real_NSLink = (NSModule (*)(NSObjectFileImage, const char *, unsigned long)) dlsym(RTLD_NEXT, "NSLinkModule");
+    if (getenv("GLD_BINDNOW")) options |= NSLINKMODULE_OPTION_BINDNOW;
+    NSModule m = real_NSLink(img, moduleName, options);
+    if (getenv("GLD_PRETOUCH")) {
+        uint32_t i, n = _dyld_image_count(); unsigned long pages = 0; volatile unsigned long sink = 0;
+        for (i = 0; i < n; i++) {
+            const char *nm = _dyld_get_image_name(i);
+            if (!nm || !strstr(nm, "ATIRadeonX1000GLDriver")) continue;
+            const struct mach_header *mh = _dyld_get_image_header(i); unsigned long slide = _dyld_get_image_vmaddr_slide(i);
+            const struct load_command *lc = (const struct load_command *)((const char *)mh + sizeof(struct mach_header)); uint32_t c;
+            for (c = 0; c < mh->ncmds; c++, lc = (const struct load_command *)((const char *)lc + lc->cmdsize)) {
+                if (lc->cmd != LC_SEGMENT) continue;
+                const struct segment_command *sc = (const struct segment_command *)lc;
+                if (strcmp(sc->segname, "__TEXT") && strcmp(sc->segname, "__DATA")) continue;
+                unsigned long a; for (a = sc->vmaddr + slide; a < sc->vmaddr + slide + sc->vmsize; a += 4096) { sink += *(volatile unsigned char *)a; pages++; }
+            }
+        }
+        if (g_log) fprintf(g_log, "gld_redirect: pretouched %lu pages\n", pages);
+    }
+    return m;
+}
+
 typedef struct { void *replacement; void *replacee; } interpose_t;
 __attribute__((used))
 static const interpose_t interposers[] __attribute__((section("__DATA,__interpose"))) = {
     { (void*)my_NSCreate, (void*)NSCreateObjectFileImageFromFile },
+    { (void*)my_NSLink, (void*)NSLinkModule },
 };
