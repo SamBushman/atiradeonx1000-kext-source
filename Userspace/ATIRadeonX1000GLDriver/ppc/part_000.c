@@ -2972,15 +2972,11 @@ int gld_isBufferBackingIdle(ctx, buffer)
 }
 
 /* _gldFlushBuffer @ 0x5f70 (164 bytes) */
-int _gldFlushBuffer(ctx, buffer, flushRegion, flushArg4, flushArg5, flushArg6, flushArg7, flushArg8)
+int _gldFlushBuffer(ctx, buffer, flushRegion, flushArg4)
   undefined4 ctx;
   int buffer;
   int flushRegion;
   undefined4 flushArg4;
-  undefined4 flushArg5;
-  undefined4 flushArg6;
-  undefined4 flushArg7;
-  undefined4 flushArg8;
 {
   int *pluginData;
   int pluginRecord;
@@ -2988,7 +2984,7 @@ int _gldFlushBuffer(ctx, buffer, flushRegion, flushArg4, flushArg5, flushArg6, f
   pluginData = *(int **)(buffer + 8);
   if ((pluginData != (int *)0x0) && (*pluginData != 0)) {
     if (flushRegion != 0) {
-      gldFlushDataCacheRange(ctx,flushRegion,flushArg4,flushArg4,flushArg5,flushArg6,flushArg7,flushArg8);
+      gldFlushDataCacheRange(ctx,flushRegion,flushArg4);
       pluginData = *(int **)(buffer + 8);
     }
     if (*(char *)(*pluginData + 0x16) == '\a') {
@@ -3502,7 +3498,7 @@ storeCtx:
                 if (0 < *(short *)(pixelFormat + 0x24)) {
                   ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x1000;
                 }
-                gld_encodePixelFormatFlags(ctx + GLD_drawableFlags / 4,pixelFormat,scratch2,fenceTablePtr,fenceTableSize,mapOptions,scratch1);
+                gld_encodePixelFormatFlags(ctx + GLD_drawableFlags / 4,pixelFormat);
                 scratch2 = ctx[GLD_drawableFlags / 4];
                 ctx[0xe] = 0x4000;
                 if ((scratch2 & 0x40) != 0) {

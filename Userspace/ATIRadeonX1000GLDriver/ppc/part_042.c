@@ -547,7 +547,7 @@ int Block__scanBranchConeForFetchAndInterp(block, vector, coneStamp)
   if (vcall40Result != 0) {
     return;
   }
-  branchInst = Block__getBranchInst(block,retR4,coneStampArg,staleArg6,staleArg7,staleArg8,staleArg9);
+  branchInst = Block__getBranchInst(block);
   stackCount = vector[1];
   if (stackCount < *vector) {
     _memset(stackCount * 4 + vector[2],0,4);
@@ -2009,8 +2009,7 @@ int Program__runPeepholeRewrite(program)
       (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x39), isOptionEnabledResult == 0)) &&
      (isOptionEnabledResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1b), isOptionEnabledResult == 0)) {
     Compiler__logf(*(undefined4 *)(program + 8),
-                 "Special : all peephole flags off -> bypass Rewrite()\n",staleArg5,staleArg6,staleArg7,staleArg8,
-                 staleArg9,staleArg10);
+                 "Special : all peephole flags off -> bypass Rewrite()\n",staleArg5,staleArg6,staleArg7);
   }
   *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
   vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
@@ -2418,9 +2417,9 @@ int IfHeader__convertInnerIfToCmov(block, program, compiler)
   if (armsSimpleResult != 0) {
     isStatic = (**(code **)(*block + 0x40))(block);
     if ((int)((ulonglong)isStatic >> 0x20) == 0) {
-      branchInstPair = Block__getBranchInst(block,(int)isStatic,staleArg3,staleArg6,staleArg7,staleArg8,staleScratch9);
+      branchInstPair = Block__getBranchInst(block);
       if ((*(int *)(*(int *)((int)((ulonglong)branchInstPair >> 0x20) + 0x88) + 8) == 0x8b) ||
-         (branchInstB = Block__getBranchInst(block,(int)branchInstPair,staleArg3,staleArg6,staleArg7,staleArg8,staleScratch9),
+         (branchInstB = Block__getBranchInst(block),
          *(int *)(*(int *)(branchInstB + 0x88) + 8) == 0x8c)) {
         joinBlock = block[0x4f];
         thenBlock = block[0x4d];
@@ -2533,7 +2532,7 @@ setStaleArg32:
            (phiCount != 0)) {
           predecessor = Block__getPredecessor(block,0);
           predecessorBlock = (undefined4)((ulonglong)predecessor >> 0x20);
-          branchInstOrRef = Block__getBranchInst(block,(int)predecessor,staleArg3,staleArg6,staleArg7,staleArg8,staleScratch9);
+          branchInstOrRef = Block__getBranchInst(block);
           compareSelectWord = 0;
           if (*(int *)(*(int *)(branchInstOrRef + 0x88) + 8) == 0x8c) {
             operandRecord = IRInst__getOperandRecord(branchInstOrRef,1);

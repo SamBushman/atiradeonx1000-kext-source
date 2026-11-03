@@ -1342,7 +1342,7 @@ checkScratchFlag3:
             return 0;
           }
           length = _strlen(scratchInt9);
-          glProgramStringARB_impl(commandStream,0x8804,0x8875,length,scratchInt9,literalPool,scratchInt10,scratchInt12);
+          glProgramStringARB_impl(commandStream,0x8804,0x8875,length,scratchInt9);
           _free(scratchInt9);
           translateOk = *commandStream != 0;
         }
@@ -1536,7 +1536,7 @@ loopSetContextRecord:
       if (scratchInt4 != 0) {
         if (contextRecord[3] != programObject[5]) {
           contextRecord[3] = programObject[5];
-          scratchInt4 = atifsReplayProgram(ctx + 0x240,*(undefined4 *)(*programObject + 4),contextRecord + 5);
+          scratchInt4 = atifsReplayProgram(ctx + 0x240,*(undefined4 *)(*programObject + 4));
           if (scratchInt4 == 0) {
             return 0;
           }
@@ -1614,12 +1614,11 @@ switchPname:
 }
 
 /* gld_drawArraysDirect @ 0x26bf0 (876 bytes) */
-int gld_drawArraysDirect(ctx, staleArgR4, primitiveMode, vertexCount, staleArgR7)
+int gld_drawArraysDirect(ctx, staleArgR4, primitiveMode, vertexCount)
   int ctx;
   undefined4 staleArgR4;
   int primitiveMode;
   int vertexCount;
-  undefined4 staleArgR7;
 {
   uint streamCountField;
   byte vertexStrideWords;
@@ -1753,7 +1752,7 @@ storeCtx2:
   *(undefined4 **)(ctx + 0x298c) = packetEnd;
   *(undefined4 **)(ctx + 0x1dc) = packetEnd;
   if (((*(uint *)(ctx + 0x27d8) & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
-    gldFlushDataCacheRange(ctx,scratchInt12,scratchInt7,vertexCount,staleArgR7,streamCountField,0xc0003400,packetEnd);
+    gldFlushDataCacheRange(ctx,scratchInt12,scratchInt7);
   }
 storeCtx3:
   *(undefined1 *)(ctx + 0x2a5e) = 1;
@@ -1789,7 +1788,7 @@ void gld_reserveVertexBufferSpace(int ctx,uint *primitiveInfo,uint *vertexLimitP
   activeCountPtr = vertexLimitPtr;
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
     activeCountPtr = primitiveInfo;
-    staleFprArg1 = (double)((int (*)())gld_forwardToStream)(ctx,1,primitiveInfo,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
+    staleFprArg1 = (double)((int (*)())gld_forwardToStream)(ctx,1,primitiveInfo,passThroughArg4,passThroughArg5,passThroughArg6);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
     ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,primitiveInfo,activeCountPtr,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
@@ -1965,7 +1964,7 @@ uint gld_reserveDrawSpace(int ctx,uint *altCountPtr,uint *countInOut,undefined4 
   activeCountPtr = countInOut;
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
     activeCountPtr = altCountPtr;
-    staleFprArg1 = (double)((int (*)())gld_forwardToStream)(ctx,1,altCountPtr,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+    staleFprArg1 = (double)((int (*)())gld_forwardToStream)(ctx,1,altCountPtr,staleArgR6,staleArgR7,staleArgR8);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
     ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,altCountPtr,activeCountPtr,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
@@ -2955,7 +2954,7 @@ checkX1000:
     return 0;
   }
   if (surfaceBase != 0) {
-    gldFlushDataCacheRangeSync(ctx,surfaceBase,clampedHeight * rowBytes,widthArg,heightArg,lastHeader,0,scratchUint34);
+    gldFlushDataCacheRangeSync(ctx,surfaceBase,clampedHeight * rowBytes);
   }
   ring = ctx + GLD_commandStream;
   unitIndex = 0xf;
@@ -3265,8 +3264,7 @@ checkUnitIndex:
         gld_submitRing(ctx,0x1000000);
       }
       if (*(int *)*surfaceInfo != 0) {
-        gldFlushDataCacheRangeSync(ctx,*(int *)*surfaceInfo,clampedHeight * rowBytes,packet,packetConst110f8,packetConstAaaa,surfaceInfo,
-                     packetHeaderC0221000);
+        gldFlushDataCacheRangeSync(ctx,*(int *)*surfaceInfo,clampedHeight * rowBytes);
         return 1;
       }
       return 1;
@@ -3516,7 +3514,7 @@ loopSetRequestPitch:
         }
         else {
           if (format != 0x1902) {
-            prepareResult = gld_needsMultisampleResolve(ctx,readSurfaceCode,convertOutAPtr,convertOutBPtr,scratchInt17,layoutRowBytesPtr,scratchPtr20);
+            prepareResult = gld_needsMultisampleResolve(ctx,readSurfaceCode);
             if (prepareResult != 0) {
               gld_emitSurfaceCopyPacket(ctx,0,readSurfaceCode,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
                            *(undefined4 *)(ctx + GLD_renderHeight));
@@ -3889,7 +3887,7 @@ loopSetScratchUint122:
         }
         else {
           if (format != 0x1902) {
-            prepareResult = gld_needsMultisampleResolve(ctx,readSurfaceCode,convertOutAPtr,convertOutBPtr,savedHeight,layoutRowBytesPtr,layoutPixelBytesPtr);
+            prepareResult = gld_needsMultisampleResolve(ctx,readSurfaceCode);
             if (prepareResult != 0) {
               convertOutBPtr = (undefined1 *)0x0;
               savedHeight = 0;
@@ -4289,7 +4287,7 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
   *(float **)(ctx + 0x298c) = vertexCursor + 2;
   pointSizeI2dLo = pointSizeWord;
   (**(code **)(ctx + 0x299c))(commandStream,vertexCursor + 2);
-  gldValidateVertexProgramState(commandStream,r4AfterCall,scratchPtr13,scratchInt9,scratchPtr14,vertexCursor,scratchPtr16);
+  gldValidateVertexProgramState(commandStream);
   return gldLeaveInternalDrawState(commandStream,internalDrawStateSave);
 }
 
@@ -5579,16 +5577,15 @@ int noop_2be80()
 }
 
 /* gld_forwardToStream @ 0x2be90 (12 bytes) */
-int gld_forwardToStream(ctx, unusedArg2, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6, passThroughArg7)
+int gld_forwardToStream(ctx, unusedArg2, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6)
   int ctx;
   undefined4 unusedArg2;
   undefined4 passThroughArg3;
   undefined4 passThroughArg4;
   undefined4 passThroughArg5;
   undefined4 passThroughArg6;
-  undefined4 passThroughArg7;
 {
-  return gld_setPrimitiveInputRegisters(ctx + 0x240,passThroughArg3,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,passThroughArg7);
+  return gld_setPrimitiveInputRegisters(ctx + 0x240,passThroughArg3,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6);
 }
 
 /* gldTrimVertexCountToPrimitive @ 0x2bea0 (116 bytes) */
@@ -5874,7 +5871,7 @@ loopSetScratchUint7:
         scratchInt12 = *(int *)(stream + 0x2460);
         *(undefined4 **)(0x00002748 + stream + 4) = statePacket;
       }
-      scratchInt12 = gld_needsMultisampleResolve(engineObjectsAlias,scratchInt12,scalarBlockPtr,scalarCount,structOutPtr,structOutSize,scratchUint7);
+      scratchInt12 = gld_needsMultisampleResolve(engineObjectsAlias,scratchInt12);
       if (scratchInt12 == 0) {
         lastHeader = *(uint **)(engineObjectsAlias + 0x1d8);
         *lastHeader = (int)statePacket - (int)lastHeader >> 2 | *lastHeader;
@@ -6226,7 +6223,7 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
   }
 checkX00002b80:
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
-    staleFprArg1 = (double)gld_setPrimitiveInputRegisters(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
+    staleFprArg1 = (double)gld_setPrimitiveInputRegisters(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
     ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);

@@ -234,7 +234,7 @@ int ffvpBuildPassThroughProgram(ctx)
             loopIndex = loopIndex + 1;
             ctxCursor = ctxCursor + 4;
             nextTexOutSlot = nextTexOutSlot + 1;
-            ffvpEmitTexCoordPassThrough(builder,texUnitIndex,colorInputIndex,sideFlag,staleArg7,staleArg8,extraSlotCount);
+            ffvpEmitTexCoordPassThrough(builder,texUnitIndex);
           } while (outputMask >> 4 != loopIndex);
         }
         ffvpFinishProgram(builder);
@@ -367,9 +367,9 @@ void ffvpValidateProgram(int ctx,undefined4 unusedArg2,undefined4 unusedArg3,und
     lookupResult = fpVariantCacheLookup(ctx,ctx + 0x1874);
     variant = (int)((ulonglong)lookupResult >> 0x20);
     if (variant == 0) {
-      ffvpUpdateLightModelFlags(ctx,(int)lookupResult,unusedArg3,unusedArg4,unusedArg5,unusedArg6);
+      ffvpUpdateLightModelFlags(ctx);
       paramList = paramListCreate(ctx);
-      programKind = ffvpBuildProgram(ctx,0,&builtConstBytes,constRegCount,paramList,unusedArg6,programKind,staleArg10);
+      programKind = ffvpBuildProgram(ctx,0,&builtConstBytes,constRegCount,paramList);
       variant = fpVariantCacheInsert(ctx,ctx + 0x1874,programKind,(uint)*(byte *)(ctx + 0x131),builtConstBytes
                            ,constRegCount[0],paramList,(uint)*(byte *)(ctx + 0x126));
       depRecord = (undefined4 *)

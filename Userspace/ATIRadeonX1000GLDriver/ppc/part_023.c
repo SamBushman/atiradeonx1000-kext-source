@@ -343,7 +343,7 @@ int Block__ctor_e9d68(this, owner)
   this[0x41] = 0;
   Block__initVectors(this);
   Block__createEntryExitInsts(this);
-  bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
+  bitSetIndex = Program__allocateBitSetIndex(this[0x2b]);
   this[0x2d] = bitSetIndex;
   return;
 }
@@ -414,7 +414,7 @@ int Block__ctor_e9f00(this, owner)
   this[0x41] = 0;
   Block__initVectors(this);
   Block__createEntryExitInsts(this);
-  bitSetIndex = Program__allocateBitSetIndex(this[0x2b],r4AfterCall,staleArgR5,staleArgR6,staleArgR7,ownerField0x110,ownerField0xdc);
+  bitSetIndex = Program__allocateBitSetIndex(this[0x2b]);
   this[0x2d] = bitSetIndex;
   return;
 }
@@ -469,8 +469,7 @@ int Block__ctor_ea020(this, compiler)
     clearCursor = clearCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
-                       0x20);
+  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4));
   this[0x2d] = bitSetIndex;
   return;
 }
@@ -525,8 +524,7 @@ int Block__ctor_ea148(this, compiler)
     clearCursor = clearCursor + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,
-                       0x20);
+  bitSetIndex = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4));
   this[0x2d] = bitSetIndex;
   return;
 }

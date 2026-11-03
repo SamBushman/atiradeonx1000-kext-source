@@ -268,12 +268,9 @@ int gldSetCurrentProgramObject(glContext, programObj)
 }
 
 /* gldValidateVertexStreams @ 0x4c720 (1632 bytes) */
-int gldValidateVertexStreams(glContext, forceUpdate, unusedArg3, unusedArg4, unusedArg5)
+int gldValidateVertexStreams(glContext, forceUpdate)
   int glContext;
   int forceUpdate;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
 {
   uint flagsNot2000;
   uint wField;
@@ -820,7 +817,7 @@ loopCallFfpsBuildProgram:
     glContextWord44 = *(uint *)(glContext + 0x44);
     if ((glContextWord44 & 0x60020000) != 0x40000000) {
       if ((((unsigned char *)0x00002e2d)[*(int *)(glContextWord4 + 0x10)] != '\0') && ((glContextWord44 & 0x20000) == 0)) {
-        glContextWord4 = gld_needsMultisampleResolve(glContextWord4,*(undefined4 *)(glContextWord4 + 0x26a0),blendSrcFactor,blendDstFactor,fgAlphaFunc,zbCntl,word1a4cOrFlag);
+        glContextWord4 = gld_needsMultisampleResolve(glContextWord4,*(undefined4 *)(glContextWord4 + 0x26a0));
         if (glContextWord4 == 0) {
           zbCntl = *(uint *)(glContext + 0x1aa0);
           word1a4cOrFlag = *(uint *)(glContext + 0x1a4c);
@@ -864,8 +861,7 @@ checkWord1a4cOrFlag:
   if (*(int *)(glContext + 0x23dc) != 1) {
     oldWord1bd4 = *(uint *)(glContext + 0x1bd4);
     zbZstencilcntl = *(uint *)(glContext + 0x1aa4);
-    earlyZCheckResult = gld_needsMultisampleResolve(*(undefined4 *)(glContext + 4),*(undefined4 *)(glContext + 0x2460),blendSrcFactor,blendDstFactor,
-                         fgAlphaFunc,zbCntl,word1a4cOrFlag);
+    earlyZCheckResult = gld_needsMultisampleResolve(*(undefined4 *)(glContext + 4),*(undefined4 *)(glContext + 0x2460));
     if (earlyZCheckResult == 0) {
       if ((*(uint *)(glContext + 0x1ab8) & 1) == 0) {
         newWord1bd4 = *(uint *)(glContext + 0x1bd4) & 0xfffffffe;
@@ -1780,14 +1776,8 @@ double gldValidatePolygonMode(int glContext)
 }
 
 /* gldValidatePolygonOffset @ 0x4eba0 (476 bytes) */
-int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int gldValidatePolygonOffset(glContext)
   int glContext;
-  undefined4 unusedArg2;
-  undefined4 staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
-  undefined4 staleArgR8;
-  undefined4 staleArgR9;
 {
   int glContextWord4;
   int glStateBlock;
@@ -1813,13 +1803,12 @@ int gldValidatePolygonOffset(glContext, unusedArg2, staleArgR5, staleArgR6, stal
   glContextWord8 = *(int *)(glContext + 8);
   if ((((((unsigned char *)0x00002e2d)[*(int *)(glContextWord4 + 0x10)] == '\0') ||
        ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-      (glContextWord4 = gld_needsMultisampleResolve(glContextWord4,*(undefined4 *)(glContextWord4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
-                            staleArgR9), glContextWord4 != 0)) || (glContextWord2768 == 0)) {
+      (glContextWord4 = gld_needsMultisampleResolve(glContextWord4,*(undefined4 *)(glContextWord4 + 0x26a0)), glContextWord4 != 0)) || (glContextWord2768 == 0)) {
     glState = *(int *)(glContext + 4);
     depthBiasScale = ((uint (*)())gld_quantizePointSizeInt)(glContext,(double)*(float *)(((unsigned char *)0x00002e20) + *(int *)(glState + 0x10)));
     drawSurface = *(undefined4 *)(*(int *)(glContext + 4) + 0x26a0);
     *(short *)(glContext + 0x1b42) = (short)((uint)(glContextWord8 * depthBiasScale) >> 1);
-    resolveFlag = gld_needsMultisampleResolve(*(int *)(glContext + 4),drawSurface,staleArgR5,staleArgR6,staleArgR7,staleArgR8,glState);
+    resolveFlag = gld_needsMultisampleResolve(*(int *)(glContext + 4),drawSurface);
     fprResidualF1 = retF1B;
     if (resolveFlag == 0) {
       *(uint *)(glContext + 0x1b40) = *(uint *)(glContext + 0x1b40) & 0xfffcffff | 0x20000;
@@ -2571,13 +2560,8 @@ int gldValidateAlphaTest(glContext)
 }
 
 /* gldValidateColorMask @ 0x50140 (424 bytes) */
-int gldValidateColorMask(glContext, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+int gldValidateColorMask(glContext)
   int glContext;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
 {
   uint glContextWord1b2c;
   byte colorFormatIndex;
@@ -4475,7 +4459,7 @@ int extvsSetStreamAndValidate(glContext, arg2, unusedArg3)
   *(uint *)(glContext + 0x44) =
        (unusedArg3 & 1) << 0x13 | (unusedArg3 & 1) << 0x14 | *(uint *)(glContext + 0x44) & 0xffe7ffff;
   if (*(char *)(glContext + 0x1868) == '\0') {
-    extvsValidateProgramState(glContext,arg2);
+    extvsValidateProgramState(glContext);
   }
   else {
     (**(code **)((int)((unsigned char *)0x000011cc) + glContext))(glContext);

@@ -132,14 +132,9 @@ checkCtx:
 }
 
 /* gld_needsMultisampleResolve @ 0x1a010 (176 bytes) */
-int gld_needsMultisampleResolve(ctx, readSurfaceCode, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int gld_needsMultisampleResolve(ctx, readSurfaceCode)
   int ctx;
   int readSurfaceCode;
-  undefined4 staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
-  undefined4 staleArgR8;
-  undefined4 staleArgR9;
 {
   bool needsResolve;
   uint renderFlags;
@@ -239,14 +234,8 @@ int gld_submitRing(ctx, terminatorWord)
 }
 
 /* glFlush_impl @ 0x1a280 (588 bytes) */
-int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int glFlush_impl(ctx)
   int ctx;
-  undefined4 staleArgR4;
-  undefined4 staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
-  undefined4 staleArgR8;
-  undefined4 staleArgR9;
 {
   undefined4 *writeCursor;
   int pendingSampleCount;
@@ -257,7 +246,7 @@ int glFlush_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8
   uint *lastHeader;
   uint scalarIn [2];
   
-  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,0,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,0);
   if (needsResolve != 0) {
     ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,0,1,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
@@ -417,14 +406,8 @@ int gld_signalFence(ctx, fence)
 }
 
 /* glFinish_impl @ 0x1a750 (636 bytes) */
-int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int glFinish_impl(ctx)
   int ctx;
-  undefined4 staleArgR4;
-  undefined4 staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
-  undefined4 staleArgR8;
-  undefined4 staleArgR9;
 {
   undefined4 *writeCursor;
   int pendingSampleCount;
@@ -436,7 +419,7 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
   uint *lastHeader;
   uint scalarIn [2];
   
-  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1);
   if (needsResolve != 0) {
     ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
@@ -507,14 +490,8 @@ int glFinish_impl(ctx, staleArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR
 }
 
 /* gld_swapBuffersImpl @ 0x1a9d0 (588 bytes) */
-int gld_swapBuffersImpl(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3, staleArgR8, staleArgR9)
+int gld_swapBuffersImpl(ctx)
   int ctx;
-  undefined4 framebufferObj;
-  undefined4 dirtyBitsArg;
-  undefined4 scratchR6;
-  undefined4 dirtyWord3;
-  undefined4 staleArgR8;
-  undefined4 staleArgR9;
 {
   undefined4 *writeCursor;
   int pendingSampleCount;
@@ -525,7 +502,7 @@ int gld_swapBuffersImpl(ctx, framebufferObj, dirtyBitsArg, scratchR6, dirtyWord3
   uint *lastHeader;
   uint scalarIn [2];
   
-  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1,dirtyBitsArg,scratchR6,dirtyWord3,staleArgR8,staleArgR9);
+  needsResolve = ((int (*)())gld_needsMultisampleResolve)(ctx,1);
   if (needsResolve != 0) {
     ((int (*)())gld_emitSurfaceCopyPacket)(ctx,0,1,0,0,0,*(undefined4 *)(ctx + 0x15c),*(undefined4 *)(ctx + 0x160)
                 );
@@ -3082,7 +3059,7 @@ setScratchUint3:
     *(undefined1 *)(scratchInt4 + 0x14) = 1;
     dirtyState = (uint *)bufferObject[1];
     if (((*dirtyState & 2) == 0) || ((*(uint *)(ctx + 0x24) & 2) == 0)) goto storeDirtyState;
-    gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],scratchUint3,scratchArg5,dirtyState,scratchInt4,packetEnd);
+    gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2]);
   }
   else {
     dirtyState = (uint *)bufferObject[1];
@@ -3092,7 +3069,7 @@ setScratchUint3:
     if (*(ushort *)(bufferDesc + 3) != 0x88e4) {
       if (bufferObject[4] == 6) {
         if (((tailBytes & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
-          gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,scratchInt4,dirtyState,0,tailBytes & 2);
+          gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2]);
           dirtyState = (uint *)bufferObject[1];
         }
         goto storeDirtyState;
@@ -3106,7 +3083,7 @@ setScratchUint3:
     backingRecord = *(int *)bufferObject[2];
     *(ushort *)(backingRecord + 0x28) = *(ushort *)(backingRecord + 0x28) & 0xfffe;
     if ((*(uint *)(ctx + 0x24) & 2) != 0) {
-      gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,scratchInt4,dirtyState,backingRecord,tailBytes & 2);
+      gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2]);
       dirtyState = (uint *)bufferObject[1];
       goto storeDirtyState;
     }
@@ -5512,7 +5489,7 @@ setScratchUint24:
           *(undefined **)(dispatch + 0x60) = ptrTo_glFlush_impl_001e8934;
         }
         else if (*(int *)(ctx + 0x26a0) == 0) {
-          ((int (*)())gld_swapBuffersImpl)(ctx,framebufferObj,dirtyBitsArg,scratchR6,dirtyWord3,scratchUint9,renderFlags & 0x800);
+          ((int (*)())gld_swapBuffersImpl)(ctx);
           scratchPtr4 = ptrTo_gldFlush_001e897c;
           *(undefined **)(dispatch + 0x58) = ptrTo_gldFinish_001e8978;
           *(undefined **)(dispatch + 0x5c) = scratchPtr4;

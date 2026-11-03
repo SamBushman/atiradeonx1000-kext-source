@@ -75,17 +75,14 @@ int KhanVs__vslot16()
 }
 
 /* KhanPs__vslot86 @ 0x12841c (20 bytes) */
-int KhanPs__vslot86(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int KhanPs__vslot86(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   int param_5;
-  undefined4 param_6;
-  undefined4 param_7;
 {
-  Emitter__allocateConstantSlot(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4,param_4,param_5,
-               param_6,param_7);
+  Emitter__allocateConstantSlot(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4);
   return;
 }
 
@@ -96,17 +93,14 @@ int KhanVs__vslot78()
 }
 
 /* KhanVs__vslot86 @ 0x129ea0 (20 bytes) */
-int KhanVs__vslot86(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int KhanVs__vslot86(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   int param_5;
-  undefined4 param_6;
-  undefined4 param_7;
 {
-  Emitter__allocateConstantSlot(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4,param_4,param_5,
-               param_6,param_7);
+  Emitter__allocateConstantSlot(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),param_3,param_4);
   return;
 }
 

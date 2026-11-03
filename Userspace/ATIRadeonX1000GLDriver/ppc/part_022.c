@@ -343,13 +343,12 @@ loopStoreTokenIndexPtr2:
 }
 
 /* ILReader__beginRewrittenReplay_e5384 @ 0xe5384 (248 bytes) */
-int ILReader__beginRewrittenReplay_e5384(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, unusedR8)
+int ILReader__beginRewrittenReplay_e5384(ilReader, opcodeToken, tokenIndex, replacementToken, argR7)
   int ilReader;
   undefined4 opcodeToken;
   int tokenIndex;
   undefined4 replacementToken;
   undefined4 argR7;
-  undefined4 unusedR8;
 {
   undefined4 windowToken;
   int loopIndex;
@@ -397,13 +396,11 @@ int ILReader__beginRewrittenReplay_e5384(ilReader, opcodeToken, tokenIndex, repl
 }
 
 /* ILReader__beginRewrittenReplay_e547c @ 0xe547c (244 bytes) */
-int ILReader__beginRewrittenReplay_e547c(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, unusedR8)
+int ILReader__beginRewrittenReplay_e547c(ilReader, opcodeToken, tokenIndex, replacementToken)
   int ilReader;
   undefined4 opcodeToken;
   int tokenIndex;
   undefined4 replacementToken;
-  undefined4 argR7;
-  undefined4 unusedR8;
 {
   undefined4 windowToken;
   int loopIndex;
@@ -1041,7 +1038,7 @@ loopStoreIlReader:
     goto returnInstructionRead;
   case 7:
     leftConstant = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x34,tokenCount,6,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x34,tokenCount,6);
     break;
   case 8:
     replayStack = (uint *)ilReader[0x22];
@@ -1142,7 +1139,7 @@ loopStoreIlReader:
     scratchRegister = tokenCount + -1;
     argR7 = ilReader[tokenCount + 0x22];
     tokenCount = scratchRegister;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,scratchRegister,8,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,scratchRegister,8,argR7);
     break;
   default:
     goto returnInstructionRead;
@@ -1375,25 +1372,25 @@ setIfResultStack:
     goto dispatchOpcodeCase53;
   case 0x65:
     leftConstant = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,tokenCount,6,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,tokenCount,6);
     break;
   case 0x66:
     leftConstant = 6;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,tokenCount,6,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,tokenCount,6);
     break;
   case 0x67:
     leftConstant = 8;
     scratchRegister = tokenCount + -1;
     argR7 = ilReader[tokenCount + 0x22];
     tokenCount = scratchRegister;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,scratchRegister,8,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,scratchRegister,8,argR7);
     break;
   case 0x68:
     leftConstant = 8;
     scratchRegister = tokenCount + -1;
     argR7 = ilReader[tokenCount + 0x22];
     tokenCount = scratchRegister;
-    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,scratchRegister,8,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,scratchRegister,8,argR7);
     break;
   case 0x69:
     scopeStackTop = (int *)0x0;
@@ -1678,11 +1675,11 @@ dispatchOpcodeCase53:
     break;
   case 0x74:
     leftConstant = 0x73;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,tokenCount,0x73,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,tokenCount,0x73);
     break;
   case 0x75:
     leftConstant = 0x73;
-    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,tokenCount,0x73,argR7,staleArgR8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,tokenCount,0x73);
   }
   goto readNextToken;
 checkX14:
@@ -1784,14 +1781,8 @@ int Scope__setBreakTarget(scope, breakTarget)
 }
 
 /* Block__getBranchInst @ 0xe7804 (188 bytes) */
-int Block__getBranchInst(block, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int Block__getBranchInst(block)
   int block;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int *inst;
   int *nextInst;
@@ -2275,14 +2266,8 @@ int Block__nextUnvisitedSuccessor(block, visitStamp)
 }
 
 /* Program__allocateBitSetIndex @ 0xe8124 (664 bytes) */
-int Program__allocateBitSetIndex(program, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int Program__allocateBitSetIndex(program)
   int program;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   uint wordOffsetOfBit;
   uint bitsLeft2;
@@ -2460,14 +2445,8 @@ int Block__insertAtStart(block, inst)
 }
 
 /* Block__verify @ 0xe84fc (468 bytes) */
-int Block__verify(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int Block__verify(this)
   int this;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int compiler;
   bool isFirstFlagged;

@@ -5206,9 +5206,8 @@ setFreeWidth:
 }
 
 /* extvsValidateProgramState @ 0x64f40 (708 bytes) */
-int extvsValidateProgramState(glContext, arg2)
+int extvsValidateProgramState(glContext)
   int glContext;
-  undefined4 arg2;
 {
   int cmdEndSaved;
   int cmdEnd;
@@ -5428,10 +5427,10 @@ callVariantSelectCallback:
   variant = (int)((ulonglong)lookupResult >> 0x20);
   staleArgR4 = (undefined4)lookupResult;
   if (variant == 0) {
-    ffvpUpdateLightModelFlags(glContext,staleArgR4,scratchR5,scratchR6,scratchR7,scratchR8);
+    ffvpUpdateLightModelFlags(glContext);
     paramList = paramListCreate(glContext);
     (**(code **)(((unsigned char *)0x000012b4) + glContext))(glContext);
-    scratchR5 = ffvpBuildProgram(glContext,1,&variantKeyHeader,variantKeyWords,paramList,scratchR8,lightKeyA,staleArgR10);
+    scratchR5 = ffvpBuildProgram(glContext,1,&variantKeyHeader,variantKeyWords,paramList);
     scratchR6 = (uint)*(byte *)(glContext + 0x131);
     lookupResult = fpVariantCacheInsert(glContext,glContext + 0x1874,scratchR5,scratchR6,variantKeyHeader,variantKeyWords[0],paramList,
                          (uint)*(byte *)(glContext + 0x126));
@@ -5608,7 +5607,7 @@ int ffvpSelectPassThroughVariant(glContext)
           loopIndex = loopIndex + 1;
           nextTexReg = nextTexReg + 1;
           unitCursor = unitCursor + 4;
-          ffvpEmitTexCoordPassThrough(builder,texUnit,texCoordMode,texCoordFlag,staleArgR7,staleArgR8,scratchR9);
+          ffvpEmitTexCoordPassThrough(builder,texUnit);
         } while (outputMask >> 4 != loopIndex);
       }
       ffvpFinishProgram(builder);
@@ -5742,14 +5741,9 @@ void vpFillConstantBank(int glContext,int variant,undefined4 unusedArg3,undefine
 }
 
 /* ffvpUploadVariantConstants @ 0x65c40 (52 bytes) */
-int ffvpUploadVariantConstants(glContext, variant, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int ffvpUploadVariantConstants(glContext, variant)
   int glContext;
   int variant;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   if (((*(uint *)(glContext + 0x44) & 0x100000) != 0) && (*(char *)(glContext + 0x124) == '\0')) {
     return;

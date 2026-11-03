@@ -1869,7 +1869,7 @@ loopSetKeyOpcodeInfo:
         }
         splitRgbAlphaEnabled = Compiler__isOptionEnabled(valueKey[0x8e],0x30);
         if (((splitRgbAlphaEnabled == 0) || (loopIndex != 3)) &&
-           (fun113734Result = OpcodeTraits__instFlagBit2_113734(valueKey[0x8e],valueKey[0x2c],topSlot,staleArg6,staleArg7,staleArg8,keyOpcodeInfo),
+           (fun113734Result = OpcodeTraits__instFlagBit2_113734(valueKey[0x8e],valueKey[0x2c]),
            fun113734Result == 0)) {
           *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
                *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;

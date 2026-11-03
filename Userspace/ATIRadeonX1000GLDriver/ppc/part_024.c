@@ -1822,9 +1822,8 @@ int Program__pinInputRegisters(program)
 }
 
 /* Program__emitDepthExportScale @ 0xeec50 (1072 bytes) */
-int Program__emitDepthExportScale(program, unusedArg2)
+int Program__emitDepthExportScale(program)
   int program;
-  undefined4 unusedArg2;
 {
   undefined4 mulResultReg;
   undefined4 finalResultReg;
@@ -2350,7 +2349,7 @@ int Program__initAndTranslate(program, ilReader)
   hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*hwDescription + 0x14))(hwDescription,shaderKind,*(int *)(program + 8));
   if (shaderKind2 == 1) {
-    ((int (*)())Program__emitDepthExportScale)(program,r4AfterCall2);
+    ((int (*)())Program__emitDepthExportScale)(program);
   }
   else if ((shaderKind2 == 2) || (shaderKind2 == 0)) {
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
@@ -2597,14 +2596,8 @@ code_r0x000efce4:
 }
 
 /* Program__insertExitMarkerAndFlagBlocks @ 0xefde4 (536 bytes) */
-int Program__insertExitMarkerAndFlagBlocks(program, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int Program__insertExitMarkerAndFlagBlocks(program)
   int program;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int *queueFront;
   int queuedBlock;
@@ -4184,7 +4177,7 @@ int pass_assign_slots(program)
   }
   else {
     ((int (*)())Program__propagateBlockFlagsFromSuccessors)(program);
-    ((int (*)())Program__insertExitMarkerAndFlagBlocks)(program,r4AfterCall,staleArgR5,staleArgR6,staleArgR7,staleArgR8,hwVtable);
+    ((int (*)())Program__insertExitMarkerAndFlagBlocks)(program);
     instCursorB = *(int **)(*(int *)(program + 0x3a8) + 0x98);
     nextInstCursor = (int *)instCursorB[2];
     if (nextInstCursor == (int *)0x0) {

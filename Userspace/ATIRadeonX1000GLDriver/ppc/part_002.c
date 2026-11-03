@@ -863,15 +863,10 @@ int gld_ensureTextureGlobalBacking(ctx, texture, requestArg0)
 }
 
 /* gldFlushDataCacheRange @ 0xb620 (72 bytes) */
-int gldFlushDataCacheRange(ctx, address, length, unused4, unused5, unused6, unused7, unused8)
+int gldFlushDataCacheRange(ctx, address, length)
   int ctx;
   uint address;
   int length;
-  undefined4 unused4;
-  undefined4 unused5;
-  undefined4 unused6;
-  undefined4 unused7;
-  undefined4 unused8;
 {
   int offset;
   int span;
@@ -891,15 +886,10 @@ int gldFlushDataCacheRange(ctx, address, length, unused4, unused5, unused6, unus
 }
 
 /* gldFlushDataCacheRangeSync @ 0xb670 (80 bytes) */
-int gldFlushDataCacheRangeSync(ctx, surfaceBase, byteCount, unusedArg4, unusedArg5, lastHeader, unusedArg7, a7)
+int gldFlushDataCacheRangeSync(ctx, surfaceBase, byteCount)
   int ctx;
   uint surfaceBase;
   int byteCount;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 lastHeader;
-  undefined4 unusedArg7;
-  undefined4 a7;
 {
   int lineOffset;
   int lastLineLimit;
@@ -937,18 +927,15 @@ int _gldCreateVertexArray(ctx, vertexArrayOut, initialWord0, initialWord1)
 }
 
 /* _gldFlushVertexArray @ 0xb710 (56 bytes) */
-int _gldFlushVertexArray(ctx, unused2, flushArg2, flushArg3, doFlush, flushArg5, flushArg6, flushArg7)
+int _gldFlushVertexArray(ctx, unused2, flushArg2, flushArg3, doFlush)
   undefined4 ctx;
   undefined4 unused2;
   undefined4 flushArg2;
   undefined4 flushArg3;
   int doFlush;
-  undefined4 flushArg5;
-  undefined4 flushArg6;
-  undefined4 flushArg7;
 {
   if (doFlush != 0) {
-    ((int (*)())gldFlushDataCacheRange)(ctx,flushArg3,flushArg2,flushArg3,doFlush,flushArg5,flushArg6,flushArg7);
+    ((int (*)())gldFlushDataCacheRange)(ctx,flushArg3,flushArg2);
   }
   return doFlush != 0;
 }
@@ -8525,7 +8512,7 @@ setPixelY:
     *(undefined **)(writeCursor + trailerOffset) = ((unsigned char *)0x00001087U);
     gaPointSizeValue = *(undefined4 *)(ring + 0x1ccc);
     *(undefined4 *)(writeCursor + 4 + trailerOffset) = gaPointSizeValue;
-    gldValidateVertexProgramState(ring,staleArgR4Forward,width,trailerOffset,packetStart,packetVertexCount,gaPointSizeValue);
+    gldValidateVertexProgramState(ring);
     gldLeaveInternalDrawState(ring,internalDrawStateSavePtr);
   }
   return;
@@ -8899,13 +8886,13 @@ int gld_fillCapsBlock(ctx, stateBlock, pixelFormat)
   *(char *)((int)stateBlock + 0x26) = (char)pixelFormatFlag1;
   *(byte *)((int)stateBlock + 0x27) = (byte)(-(uint)(*(uint *)(pixelFormat + 0x10) & 0x3f000000) >> 0x1f);
   pixelFormatHome = pixelFormat;
-  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x10),&channelBits[0],pixelFormat,staleArgR6,staleArgR7,staleArgR8,pixelFormatFlag1);
+  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x10),&channelBits[0]);
   stateBlock[10] = (int)channelBits[4];
   stateBlock[0xb] = (int)channelBits[0];
   stateBlock[0xc] = (int)channelBits[1];
   stateBlock[0xd] = (int)channelBits[2];
   stateBlock[0xe] = (int)channelBits[3];
-  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x14),&channelBits[0],pixelFormatHome,staleArgR6,staleArgR7,staleArgR8,(int)channelBits[2]);
+  gld_channelBitsForFormat(*(undefined4 *)(pixelFormat + 0x14),&channelBits[0]);
   stateBlock[0x11] = (int)channelBits[0];
   stateBlock[0x12] = (int)channelBits[1];
   stateBlock[0x13] = (int)channelBits[2];
@@ -8977,14 +8964,9 @@ int gld_fillCapsBlock(ctx, stateBlock, pixelFormat)
 }
 
 /* gld_encodePixelFormatFlags @ 0x17a40 (200 bytes) */
-int gld_encodePixelFormatFlags(flagsInOut, pixelFormat, unused3, unused4, unused5, unused6, unused7)
+int gld_encodePixelFormatFlags(flagsInOut, pixelFormat)
   uint *flagsInOut;
   int pixelFormat;
-  undefined4 unused3;
-  undefined4 unused4;
-  undefined4 unused5;
-  undefined4 unused6;
-  undefined4 unused7;
 {
   int depthMask;
   uint flags;
@@ -9464,7 +9446,7 @@ setSrcDstOverlap:
      ((scratchInt33 = *(int *)(ctx + 0x10), *(int *)(((unsigned char *)0x00002e40U) + scratchInt33) == 0 &&
       ((((((unsigned char *)0x00002e44)[scratchInt33] != '\0' && (((uint)scratchPtr42 & 0x10001) == 0)) &&
         (((uint)scratchPtr42 & 0x10) != 0)) && (*(ushort *)(((unsigned char *)0x00002dc4) + scratchInt33) == 0x207)))))) {
-    scratchInt33 = gld_needsMultisampleResolve(ctx,4,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
+    scratchInt33 = gld_needsMultisampleResolve(ctx,4);
     if (scratchInt33 == 0) {
       scratchInt33 = 3;
       goto checkCtx;
@@ -9491,10 +9473,9 @@ checkCtx:
   if ((srcDstOverlap) && (scratchInt33 - 2U < 2)) {
     scratchInt33 = 0;
   }
-  scratchInt24 = gld_needsMultisampleResolve(ctx,scratchUint32,scratchInt34,scratchInt29,scratchInt38,scratchInt40,scratchPtr42);
+  scratchInt24 = gld_needsMultisampleResolve(ctx,scratchUint32);
   if (((scratchInt24 == 0) &&
-      (scratchInt34 = gld_needsMultisampleResolve(ctx,*(undefined4 *)(ctx + 0x26a0),scratchInt34,scratchInt29,scratchInt38,scratchInt40,
-                             scratchPtr42), scratchInt34 == 0)) && (scratchInt33 != 0)) {
+      (scratchInt34 = gld_needsMultisampleResolve(ctx,*(undefined4 *)(ctx + 0x26a0)), scratchInt34 == 0)) && (scratchInt33 != 0)) {
     scratchFloat1 = *rasterPos + FLOAT_001aa10c;
     if (scratchFloat1 < FLOAT_001aa0d4) {
       scratchFloat1 = scratchFloat1 - FLOAT_001aa118;
@@ -10302,7 +10283,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
      ((1 < format - 0x1901U &&
       (((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 0x1ff) == 0 &&
        ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)))))) {
-    gld_needsMultisampleResolve(ctx,*(undefined4 *)(ctx + 0x26a0),widthCopy,heightArg,formatArg,typeArg,ctxState);
+    gld_needsMultisampleResolve(ctx,*(undefined4 *)(ctx + 0x26a0));
   }
   procDesc.scratchStack3e8 = 0.0;
   procDesc.procFlags = 0;

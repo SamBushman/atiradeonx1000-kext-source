@@ -1645,14 +1645,10 @@ int isRegKindBelow21(regWord)
 }
 
 /* Emitter__allocateConstantSlot @ 0xf4a84 (324 bytes) */
-int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure)
   int *emitter;
   int slotKind;
   int allowFailure;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int emitContext;
   int slotTableBase;
@@ -1665,7 +1661,7 @@ int Emitter__allocateConstantSlot(emitter, slotKind, allowFailure, unusedArg4, u
     else {
       slotTableBase = *(int *)(emitContext + 0x30);
     }
-    emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x58,emitter[0xe],unusedArg4,unusedArg5,unusedArg6,unusedArg7);
+    emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x58,emitter[0xe]);
     if (-1 < emitContext) {
       emitter[0xe] = emitter[0xe] + 1;
     }
@@ -1687,7 +1683,7 @@ loopSetEmitContext:
       else {
         slotTableBase = *(int *)(emitContext + 0x30);
       }
-      emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x98,emitter[0x10],unusedArg4,unusedArg5,unusedArg6,unusedArg7);
+      emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x98,emitter[0x10]);
       if (-1 < emitContext) {
         emitter[0x10] = emitter[0x10] + 1;
       }
@@ -1702,7 +1698,7 @@ loopSetEmitContext:
   else {
     slotTableBase = *(int *)(emitContext + 0x30);
   }
-  emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x78,emitter[0xf],unusedArg4,unusedArg5,unusedArg6,unusedArg7);
+  emitContext = BitSet256__findNthSetBit(emitContext,slotTableBase + 0x78,emitter[0xf]);
   if (-1 < emitContext) {
     emitter[0xf] = emitter[0xf] + 1;
   }
@@ -1766,13 +1762,9 @@ int noop_f4c44()
 }
 
 /* ConstKey__compareOrdered @ 0xf4c48 (268 bytes) */
-int ConstKey__compareOrdered(keyA, keyB, passThroughR5, passThroughR6, passThroughR7, passThroughR8)
+int ConstKey__compareOrdered(keyA, keyB)
   int keyA;
   int keyB;
-  undefined4 passThroughR5;
-  undefined4 passThroughR6;
-  undefined4 passThroughR7;
-  undefined4 passThroughR8;
 {
   uint kindA;
   int operandIndex;
@@ -1833,14 +1825,8 @@ loopCheckAIsLess:
 }
 
 /* ConstKey__countPresentOperands @ 0xf4d54 (44 bytes) */
-int ConstKey__countPresentOperands(constInst, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int ConstKey__countPresentOperands(constInst)
   int constInst;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   uint loopCounterB;
   int loopCounter;

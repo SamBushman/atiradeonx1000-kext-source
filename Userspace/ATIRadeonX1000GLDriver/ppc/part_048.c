@@ -1594,7 +1594,7 @@ loopSetCannotFold:
       foldFlags[0] = 0;
       loopRemaining = ValueKey__sourceSignKnown(ctx,loopIndex2);
       if (loopRemaining != 0) {
-        ValueKey__evalLitLane(&laneResultOutD,ctx,loopIndex2,(uint)foldFlags);
+        ValueKey__evalLitLane(&laneResultOutD,ctx,loopIndex2);
         *loopPtr3 = laneResultOutD;
         if (laneResultOutD != 0x7ffffffe) {
           exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),laneResultOutD);
@@ -3670,7 +3670,7 @@ loopSetLoopPtr82:
                   }
                   else {
                     loopIndex5 = *(int *)(*(int *)(key + 0x238) + 0x6c4);
-                    loopIndex5 = ValueKey__createConstantMov(loopIndex5,*(undefined4 *)(loopIndex5 + 0x3a0),0);
+                    loopIndex5 = ValueKey__createConstantMov(loopIndex5,*(undefined4 *)(loopIndex5 + 0x3a0));
                     loopIndex5 = *(int *)(loopIndex5 + 0xb0);
                     IRInst__setOperandRef(inst2,1,*(undefined4 *)(loopIndex5 + 0x8c));
                     IRInst__setOperandSource(inst2,1,loopIndex5,0,*(undefined4 *)(key + 0x238));
@@ -3694,7 +3694,7 @@ loopSetLoopPtr82:
           }
           else {
             zeroInst = *(int *)(*(int *)(key + 0x238) + 0x6c4);
-            zeroInst = ValueKey__createConstantMov(zeroInst,*(undefined4 *)(zeroInst + 0x3a0),0);
+            zeroInst = ValueKey__createConstantMov(zeroInst,*(undefined4 *)(zeroInst + 0x3a0));
             zeroInst = *(int *)(zeroInst + 0xb0);
             inst1 = *(undefined4 *)(key + 0xb0);
             *(int *)(keyWordPtr2 + 0x214) = zeroInst;
@@ -3996,14 +3996,9 @@ int Inst__compareScheduleSlack(inst, inst2)
 }
 
 /* Pass__recordFlaggedInstructions @ 0x181ab0 (208 bytes) */
-int Pass__recordFlaggedInstructions(pass, block, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int Pass__recordFlaggedInstructions(pass, block)
   int *pass;
   int block;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int nextLink;
   int nextNode;
@@ -4048,14 +4043,11 @@ int Pass__recordFlaggedInstructions(pass, block, unusedArg3, unusedArg4, unusedA
 }
 
 /* RebuildState__computeNodeLevels @ 0x181b80 (896 bytes) */
-int RebuildState__computeNodeLevels(rebuildState, block, maxLevelOut, schedCostOut, staleArg5, staleArg6, staleArg7)
+int RebuildState__computeNodeLevels(rebuildState, block, maxLevelOut, schedCostOut)
   int rebuildState;
   int block;
   int *maxLevelOut;
   undefined4 *schedCostOut;
-  undefined4 staleArg5;
-  undefined4 staleArg6;
-  undefined4 staleArg7;
 {
   int newLevel;
   undefined4 *elementRef2;
@@ -5292,9 +5284,9 @@ int Block__rebuildAddMulTreesWhereProfitable(rebuildState, block, staleArg3, sta
   int costLow;
   int costHigh [8];
   
-  ((int (*)())Pass__recordFlaggedInstructions)(rebuildState,block,staleArg3,staleArg4,staleArg5,staleArg6,opcodeInfo);
+  ((int (*)())Pass__recordFlaggedInstructions)(rebuildState,block);
 loopCallRebuildState_computeNodeLevels:
-  ((int (*)())RebuildState__computeNodeLevels)(rebuildState,block,&costLow,costHigh,staleArg5,staleArg6,opcodeInfo);
+  ((int (*)())RebuildState__computeNodeLevels)(rebuildState,block,&costLow,costHigh);
   if ((costLow < costHigh[0]) &&
      (nodeRec = *(int *)(rebuildState + 8),
      *(int *)(nodeRec + 0x14) < *(int *)(nodeRec + 0xc) - *(int *)(nodeRec + 0x10))) {

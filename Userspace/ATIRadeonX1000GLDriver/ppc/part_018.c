@@ -100,7 +100,7 @@ storeOutCursor:
 }
 
 /* ilEmitShadowCompare @ 0xc7650 (680 bytes) */
-int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinateExtraWordPtr, unitIndex, copyExtraWord, outCursor, unusedArgR10)
+int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinateExtraWordPtr, unitIndex, copyExtraWord, outCursor)
   int programRecord;
   undefined4 unusedArgR4;
   uint *coordinateOperand;
@@ -108,7 +108,6 @@ int ilEmitShadowCompare(programRecord, unusedArgR4, coordinateOperand, coordinat
   uint unitIndex;
   int copyExtraWord;
   uint *outCursor;
-  undefined4 unusedArgR10;
 {
   uint coordinateOperandWord0;
   uint programRecordWord184;
@@ -414,15 +413,9 @@ int ilEmitShadowStateTokens(tokenCursor, ilState, scanTokenWord, unusedArgR6, un
 }
 
 /* ilEmitPrologue @ 0xc8110 (1252 bytes) */
-int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passThroughR7, passThroughR8, passThroughR9, passThroughR10)
+int ilEmitPrologue(outCursor, programRecord)
   uint *outCursor;
   int programRecord;
-  undefined4 passThroughR5;
-  undefined4 passThroughR6;
-  undefined4 passThroughR7;
-  undefined4 passThroughR8;
-  undefined4 passThroughR9;
-  undefined4 passThroughR10;
 {
   int slotMapCursor;
   int counterTableCursor;
@@ -465,7 +458,7 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   allocationResult = ilNextCounterValue(programRecord);
   *(int *)(programRecord + 0x2208) = (int)((ulonglong)allocationResult >> 0x20);
   if (*(int *)(programRecord + 100) != 0) {
-    registerNumber = ilAllocLowestFreeBit8(programRecord,(int)allocationResult,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
+    registerNumber = ilAllocLowestFreeBit8(programRecord);
     *(undefined4 *)(programRecord + 0x68) = registerNumber;
   }
   if (*(int *)(programRecord + 0x22fc) != 0) {
@@ -494,7 +487,7 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     *(undefined4 *)(programRecord + 0x58) = registerNumber;
     allocationResult = ((int (*)())ilPopFreeRegister)(programRecord);
     *(int *)(programRecord + 0x5c) = (int)((ulonglong)allocationResult >> 0x20);
-    registerNumber = ilAllocLowestFreeBit8(programRecord,(int)allocationResult,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
+    registerNumber = ilAllocLowestFreeBit8(programRecord);
     *(undefined4 *)(programRecord + 0x60) = registerNumber;
     *outCursor = 0x1ff0016;
     programRecordWord60 = *(uint *)(programRecord + 0x60);
@@ -2035,8 +2028,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
-                                opcodeTimes4,scratchCursorB);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState);
     }
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,1,&scanState);
@@ -2063,8 +2055,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
-                                opcodeTimes4,scratchCursorB);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState);
     }
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,2,&scanState);
@@ -2123,8 +2114,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
-                                opcodeTimes4,scratchCursorB);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState);
     }
     scanTokenWord = (uint *******)((int)((unsigned char *)0x0) + 1);
     srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,3,&scanState);
@@ -2226,8 +2216,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
-                                opcodeTimes4,scratchCursorB);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState);
       readToken = srcCursor;
     }
     texTokenWord = (uint ******)*readToken;
@@ -2334,7 +2323,7 @@ loopCheckShadowCompareUnitMask:
       scanTokenWord = (uint *******)&operandWord2ba4;
       dstCursor = (uint *******)
                    ((int (*)())ilEmitShadowCompare)(&scanState,operandPtrA,scanTokenWord,&operandWord2bb0,texUnit,projectiveFlag,
-                                dstCursor,scratchCursorB);
+                                dstCursor);
       scratchCursorA = projectiveFlag;
     }
     unitBit = unitBit & shadowCompareUnitMask;
@@ -2344,8 +2333,7 @@ loopCheckShadowCompareUnitMask:
     if (prologuePending) {
       prologuePending = false;
       dstCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,scanTokenWord,readToken,readToken,scratchCursorA,
-                                opcodeTimes4,scratchCursorB);
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState);
       readToken = srcCursor;
     }
     texTokenWord = (uint ******)*readToken;
@@ -2451,7 +2439,7 @@ storeDstCursor:
       scanTokenWord = (uint *******)&operandWord2ba4;
       dstCursor = (uint *******)
                    ((int (*)())ilEmitShadowCompare)(&scanState,&operandWord2b98,scanTokenWord,&operandWord2bb0,texUnit,
-                                scratchCursorA,dstCursor,scratchCursorB);
+                                scratchCursorA,dstCursor);
     }
     unitBit = unitBit & shadowCompareUnitMask;
     texExtraWord = calleeSavedR14;
@@ -3622,8 +3610,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr,compileRecordAlias,secondReadCursor,secondReadCursor,staleArgR8,ilUsageStatePtr,
-                                savedWriteCursor);
+                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr);
     }
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 1);
     readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,1,ilUsageStatePtr);
@@ -3651,8 +3638,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr,compileRecordAlias,secondReadCursor,secondReadCursor,staleArgR8,ilUsageStatePtr,
-                                savedWriteCursor);
+                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr);
     }
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 1);
     readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,2,ilUsageStatePtr);
@@ -3712,8 +3698,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr,compileRecordAlias,secondReadCursor,secondReadCursor,staleArgR8,ilUsageStatePtr,
-                                savedWriteCursor);
+                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr);
     }
     compileRecordAlias = (uint *******)((int)((unsigned char *)0x0) + 1);
     readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,3,ilUsageStatePtr);
@@ -3816,8 +3801,7 @@ exitOnInvalidOpcode:
     if (prologuePending) {
       prologuePending = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr,compileRecordAlias,secondReadCursor,secondReadCursor,staleArgR8,ilUsageStatePtr,
-                                savedWriteCursor);
+                   ((int (*)())ilEmitPrologue)(writeCursor,ilUsageStatePtr);
       secondReadCursor = readCursor;
     }
     tokenWord = (uint ******)*secondReadCursor;
@@ -3924,7 +3908,7 @@ loopCheckDepthTextureUnitMask:
       compileRecordAlias = (uint *******)&operandTokenA;
       writeCursor = (uint *******)
                    ((int (*)())ilEmitShadowCompare)(ilUsageStatePtr,operandPtrLocal,compileRecordAlias,&operandExtA,sizeBytesC,writeCursorNext,
-                                writeCursor,savedWriteCursor);
+                                writeCursor);
       staleArgR8 = writeCursorNext;
     }
     unitBitMaskB = unitBitMaskB & depthTextureUnitMask;
@@ -3934,8 +3918,7 @@ loopCheckDepthTextureUnitMask:
     if (prologuePending) {
       prologuePending = false;
       writeCursor = (uint *******)
-                   ((int (*)())ilEmitPrologue)(writeCursor,&ilUsageState,compileRecordAlias,secondReadCursor,secondReadCursor,staleArgR8,
-                                scratchWord * 4,savedWriteCursor);
+                   ((int (*)())ilEmitPrologue)(writeCursor,&ilUsageState);
       secondReadCursor = readCursor;
     }
     tokenWord = (uint ******)*secondReadCursor;
@@ -4040,7 +4023,7 @@ storeWriteCursor:
       compileRecordAlias = (uint *******)&operandTokenA;
       writeCursor = (uint *******)
                    ((int (*)())ilEmitShadowCompare)(&ilUsageState,&operandTokenB,compileRecordAlias,&operandExtA,sizeBytesC,staleArgR8,
-                                writeCursor,savedWriteCursor);
+                                writeCursor);
     }
     unitBitMaskB = unitBitMaskB & depthTextureUnitMask;
     tokenWord = calleeSavedR14;
@@ -4590,14 +4573,13 @@ callScLogToSink:
 }
 
 /* scDumpShaderImpl @ 0xcdba4 (64 bytes) */
-int scDumpShaderImpl(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, argR9)
+int scDumpShaderImpl(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8)
   undefined4 sinkArg;
   int shaderState;
   undefined4 optionsArg;
   undefined4 argR6;
   int sinkFn;
   undefined4 argR8;
-  undefined4 argR9;
 {
   if (shaderState == 0) {
     return;
@@ -4615,18 +4597,17 @@ int scDumpShaderImpl(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, arg
   if (*(int *)(shaderState + 0xf8) != 1) {
     return;
   }
-  return scDumpPixelProgram(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8,shaderState);
+  return scDumpPixelProgram(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8);
 }
 
 /* scDumpShaderToStringImpl @ 0xcdbe4 (60 bytes) */
-int scDumpShaderToStringImpl(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
+int scDumpShaderToStringImpl(sinkArg, shaderState, sinkFn, argR6, argR7, argR8)
   undefined4 sinkArg;
   int shaderState;
   int sinkFn;
   undefined4 argR6;
   undefined4 argR7;
   undefined4 argR8;
-  undefined4 argR9;
 {
   if (shaderState == 0) {
     return;

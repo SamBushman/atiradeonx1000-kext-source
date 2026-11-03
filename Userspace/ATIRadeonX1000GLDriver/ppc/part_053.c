@@ -1,14 +1,13 @@
 #include "decls.h"
 
 /* R520VMachineAssembler__vslot27_assembleLoopHeader @ 0x19d858 (1008 bytes) */
-int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, staleArg4, traversal, compiler, staleArg7)
+int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, staleArg4, traversal, compiler)
   int *this;
   int node;
   undefined4 block;
   undefined4 staleArg4;
   undefined4 traversal;
   undefined4 compiler;
-  undefined4 staleArg7;
 {
   int *predicatedInst;
   int *predSetNEInst;
@@ -34,7 +33,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, staleAr
   
   program = *(int **)(node + 0xac);
   a5 = compiler;
-  branchInst = Block__getBranchInst(node,node,block,staleArg4,traversal,compiler,staleArg7);
+  branchInst = Block__getBranchInst(node);
   if (*program != 0) goto callAssembleBlockVfn34;
   loopStackSlot = (uint *)0x0;
   condSwizzle = *(uint *)(this[0x25] + 4);
@@ -405,14 +404,11 @@ int R520VMachineAssembler__vslot31_assembleWithPredicateRestore(this, node, bloc
 }
 
 /* R520VMachineAssembler__vslot25_assembleConditionalBlock @ 0x19e318 (840 bytes) */
-int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, compiler, extra2, extra3, extra4)
+int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, compiler)
   int *this;
   int node;
   undefined4 block;
   undefined4 compiler;
-  undefined4 extra2;
-  undefined4 extra3;
-  undefined4 extra4;
 {
   undefined4 predSetOpcode;
   uint pushIndex;
@@ -433,7 +429,7 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   bool unpredicated;
   
   program = *(int **)(node + 0xac);
-  branchInst = (int *)Block__getBranchInst(node,node,block,compiler,extra2,extra3,extra4);
+  branchInst = (int *)Block__getBranchInst(node);
   if (*program != 0) goto callAssembleBlockVfn34;
   (**(code **)(*branchInst + 0x14))(branchInst);
   topKindSlot = (int *)0x0;
@@ -755,14 +751,8 @@ int psnPackedLaneSource(descriptor, lane)
 }
 
 /* psnPackedNegateMask @ 0x19eaa4 (32 bytes) */
-int psnPackedNegateMask(descriptor, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int psnPackedNegateMask(descriptor)
   uint *descriptor;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   if ((*descriptor & 0x400000) == 0) {
     return 0;
@@ -1569,15 +1559,10 @@ int R520MachineAssembler__vslot80_setRecordByte9(this)
 }
 
 /* R520MachineAssembler__vslot55_tryEncodeImmediateLiteral @ 0x19f98c (204 bytes) */
-int R520MachineAssembler__vslot55_tryEncodeImmediateLiteral(this, node, immediateOut, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int R520MachineAssembler__vslot55_tryEncodeImmediateLiteral(this, node, immediateOut)
   int this;
   int node;
   uint *immediateOut;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   int encoded;
   float literalValue;
@@ -2380,14 +2365,13 @@ int R520MachineAssembler__vslot29_patchBranchTarget(this)
 }
 
 /* R520MachineAssembler__vslot26_assembleThenAppendRecord @ 0x1a11f0 (328 bytes) */
-int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, compiler, unusedArg5, unusedArg6, unusedArg7)
+int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, compiler, unusedArg5, unusedArg6)
   int *this;
   int node;
   undefined4 block;
   int compiler;
   undefined4 unusedArg5;
   undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   undefined4 recordId;
   int inst;
@@ -2403,7 +2387,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   uint *vector;
   
   a3 = compiler;
-  inst = Block__getBranchInst(node,node,block,compiler,unusedArg5,unusedArg6,unusedArg7);
+  inst = Block__getBranchInst(node);
   program = *(undefined4 *)(compiler + COMP_currentProgram);
   branchKind = *(int *)(inst + 300);
   sourceDef = IRInst__getOperandSource(inst,1);

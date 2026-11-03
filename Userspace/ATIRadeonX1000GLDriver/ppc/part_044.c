@@ -4345,7 +4345,7 @@ setCompilerCtx:
   node[0x21] = node[0x21] + -1;
   node[5] = node[5] & 0xfffffdff;
   producer[0x58] = producerRefCount + -1;
-  hasNoUsesResult = IRInst__hasNoUses(producer,pass,zeroArg,zeroArgB,compilerCtx,staleArg8,producerRefCount + -1);
+  hasNoUsesResult = IRInst__hasNoUses(producer,pass);
   producerUnused = hasNoUsesResult != 0;
   if (producerUnused) {
     (**(code **)(*producer + 0xc))(producer,0,*(undefined4 *)(pass + 8));
@@ -10874,7 +10874,7 @@ setNextInst2:
     } while (*(int *)(walkCursor + 8) != 0);
   }
   Compiler__logf(*scheduler,"Scheduler : %d out of %d instructions are marked global\n",globalCount,instCount,
-               compilerCtx,staleArg8,0,staleArg10);
+               compilerCtx);
   Arena__free(*(undefined4 *)(*scheduler + 0x378),rootIsGlobal);
   return Arena__free(*(undefined4 *)(*scheduler + 0x378),unionFindParents);
 }

@@ -1324,14 +1324,9 @@ uint gld_quantizePointSizeInt(int glContext,double fpPassThrough1)
 }
 
 /* gld_roundUpToPowerOfTwo @ 0xa3610 (88 bytes) */
-int gld_roundUpToPowerOfTwo(glContext, value, unusedArgR5, unusedArgR6, unusedArgR7, unusedArgR8, unusedArgR9)
+int gld_roundUpToPowerOfTwo(glContext, value)
   int glContext;
   uint value;
-  undefined4 unusedArgR5;
-  undefined4 unusedArgR6;
-  undefined4 unusedArgR7;
-  undefined4 unusedArgR8;
-  undefined4 unusedArgR9;
 {
   uint powerOfTwo;
   int bitsLeft;
@@ -1533,14 +1528,13 @@ void gld_buildCoverageRampTable(undefined4 glContext,undefined4 unusedArgR4,uint
 }
 
 /* gld_setPrimitiveInputRegisters @ 0xa3be0 (2056 bytes) */
-int gld_setPrimitiveInputRegisters(glContext, primitiveMode, unitCounter, unusedArgR6, tableCursor, extraArg5, staleArgR9)
+int gld_setPrimitiveInputRegisters(glContext, primitiveMode, unitCounter, unusedArgR6, tableCursor, extraArg5)
   uint glContext;
   int primitiveMode;
   uint unitCounter;
   undefined4 unusedArgR6;
   uint tableCursor;
   undefined4 *extraArg5;
-  undefined4 staleArgR9;
 {
   uint ctxCursorC;
   undefined4 *packetD;
@@ -2021,14 +2015,8 @@ int gld_getActiveSampleIndex(ctx)
 }
 
 /* gld_computePointSizePixels @ 0xa4770 (504 bytes) */
-int gld_computePointSizePixels(glContext, unusedArgR4, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int gld_computePointSizePixels(glContext)
   int glContext;
-  undefined4 unusedArgR4;
-  undefined4 staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
-  undefined4 staleArgR8;
-  undefined4 staleArgR9;
 {
   float quantizedSize;
   float pointSizeClamped;
@@ -2045,8 +2033,7 @@ int gld_computePointSizePixels(glContext, unusedArgR4, staleArgR5, staleArgR6, s
   glContextWord8 = *(int *)(glContext + 8);
   engineCaps = *(int *)(glContextPtr4 + 0x10);
   if (((((unsigned char *)0x00002e2d)[engineCaps] == '\0') || ((*(uint *)(glContext + 0x44) & 0x20000) != 0)) ||
-     (glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
-                           staleArgR9), glContextPtr4 != 0)) {
+     (glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0)), glContextPtr4 != 0)) {
     pixelSize = *(uint *)(((unsigned char *)0x000013e0) + glContext);
     pointSizeRequested = *(float *)(((unsigned char *)0x00002e20) + engineCaps);
     if (((float)((double)CONCAT44(0x43300000,pixelSize ^ 0x80000000) - DOUBLE_001aa1e0) < pointSizeRequested) &&
@@ -2087,12 +2074,10 @@ int gld_computePointSizePixels(glContext, unusedArgR4, staleArgR5, staleArgR6, s
 }
 
 /* gld_buildSmoothPointMask @ 0xa4980 (4768 bytes) */
-int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5, staleArgR6, staleArgR7)
+int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5)
   int glContext;
   undefined4 unusedArgR4;
   undefined4 staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
 {
   undefined4 maskLevelWordb4;
   uint loopIndex7;
@@ -2266,8 +2251,7 @@ int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5, staleArgR6, sta
   if ((glContextWord44 & 0x60020000) != 0x40000000) {
     glContextPtr4_2 = *(int *)(glContext + 4);
     if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4_2 + 0x10)] != '\0') && ((glContextWord44 & 0x20000) == 0)) {
-      glContextPtr4_2 = gld_needsMultisampleResolve(glContextPtr4_2,*(undefined4 *)(glContextPtr4_2 + 0x26a0),staleArgR5,staleArgR6,staleArgR7,staleArgR8,
-                            glContextWord44);
+      glContextPtr4_2 = gld_needsMultisampleResolve(glContextPtr4_2,*(undefined4 *)(glContextPtr4_2 + 0x26a0));
       if (glContextPtr4_2 == 0) goto setGlContextPtr276c;
       glContextPtr4_2 = *(int *)(glContext + 4);
     }
@@ -2333,8 +2317,7 @@ setGlContextPtr276c:
   engineState = *(int *)(glContextPtr4_3 + 0x10);
   pointModeBits = *(uint *)(glContext + 0x44) & 0x60020000 ^ 0x40000000;
   negPointMode = (char *)-pointModeBits;
-  glContextPtr4_3 = gld_needsMultisampleResolve(glContextPtr4_3,*(undefined4 *)(glContextPtr4_3 + 0x26a0),staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,
-                        glContextWord38);
+  glContextPtr4_3 = gld_needsMultisampleResolve(glContextPtr4_3,*(undefined4 *)(glContextPtr4_3 + 0x26a0));
   callResultPair = ((int (*)())gld_scalePointSizeToPixels)(glContext,(uint)(glContextPtr4_3 == 0));
   calleeResultLow = (undefined4)callResultPair;
   glContextPtr4_4 = *(int *)(glContext + 4);
@@ -2345,8 +2328,7 @@ loopSetSizeAttenuated:
     sizeAttenuated = '\0';
   }
   else {
-    callResultPair2 = gld_needsMultisampleResolve(glContextPtr4_4,*(undefined4 *)(glContextPtr4_4 + 0x26a0),staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,
-                          engineState3);
+    callResultPair2 = gld_needsMultisampleResolve(glContextPtr4_4,*(undefined4 *)(glContextPtr4_4 + 0x26a0));
     calleeResultLow = (undefined4)callResultPair2;
     if ((int)((ulonglong)callResultPair2 >> 0x20) != 0) {
       glContextPtr4_4 = *(int *)(glContext + 4);
@@ -2360,7 +2342,7 @@ loopSetSizeAttenuated:
      (sizeClamped = '\x01', *(ushort *)(((unsigned char *)0x00002e28) + *(int *)(glContextPtr4_4 + 0x10)) == 0xffff)) {
     sizeClamped = '\0';
   }
-  pointSizePixelsB = ((int (*)())gld_computePointSizePixels)(glContext,calleeResultLow,staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,engineState3);
+  pointSizePixelsB = ((int (*)())gld_computePointSizePixels)(glContext);
   engineStateFloat2e20 = *(float *)(((unsigned char *)0x00002e20) + engineState);
   glContextFloat13e8_2 = *(float *)(((unsigned char *)0x000013e8) + glContext);
   engineStateShort2e10 = *(short *)(((unsigned char *)0x00002e10) + engineState);
@@ -2437,8 +2419,7 @@ setCacheEntry:
   cacheEntry = (char *)(**(code **)(glContext + 0x10))(1,0x13c);
   if (cacheEntry == (char *)0x0) goto callGldMarkBoundObjectsDirty;
   *cacheEntry = (*(uint *)(glContext + 0x44) & 0x60020000) == 0x40000000;
-  callResultPair = gld_needsMultisampleResolve(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0),
-                        staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,engineState3);
+  callResultPair = gld_needsMultisampleResolve(*(int *)(glContext + 4),*(undefined4 *)(*(int *)(glContext + 4) + 0x26a0));
   calleeResultLow = (undefined4)callResultPair;
   cacheEntry[1] = (int)((ulonglong)callResultPair >> 0x20) == 0;
   cacheEntry[8] = *(ushort *)(((unsigned char *)0x00002e0e) + engineState2) == 0x1102;
@@ -2449,7 +2430,7 @@ loopSetSizeAttenuated2:
     sizeAttenuated = '\0';
   }
   else {
-    callResultPair = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),staleArgR5,staleArgR6,0,dirtyUnitMask,engineState3);
+    callResultPair = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0));
     calleeResultLow = (undefined4)callResultPair;
     sizeAttenuated = '\x01';
     if ((int)((ulonglong)callResultPair >> 0x20) != 0) goto loopSetSizeAttenuated2;
@@ -2526,7 +2507,7 @@ setLevelBytes:
       maxSizeShort = *(undefined2 *)(((unsigned char *)0x00002e28) + engineState2);
     }
     *(undefined2 *)(cacheEntry + 0x28) = maxSizeShort;
-    pointSizePixelsA = ((int (*)())gld_computePointSizePixels)(glContext,calleeResultLow,staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,entryFlag15);
+    pointSizePixelsA = ((int (*)())gld_computePointSizePixels)(glContext);
     *(int *)(cacheEntry + 0x18) = pointSizePixelsA;
     if (levelBytes < pointSizePixelsA << 2) {
       smoothLevelBytes = pointSizePixelsA << 2;
@@ -2551,8 +2532,8 @@ setLevelCount:
     }
     levelCount = levelCount + 1;
   }
-  calleeResultLow = ((int (*)())gld_roundUpToPowerOfTwo)(glContext,levelBytes,staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,entryFlag15);
-  entryFlag15 = ((int (*)())gld_roundUpToPowerOfTwo)(glContext,minLevelBytes,staleArgR5,staleArgR6,negPointMode,dirtyUnitMask,entryFlag15);
+  calleeResultLow = ((int (*)())gld_roundUpToPowerOfTwo)(glContext,levelBytes);
+  entryFlag15 = ((int (*)())gld_roundUpToPowerOfTwo)(glContext,minLevelBytes);
   levelCountClamped = levelCount;
   if (1 < levelCount) {
     levelCountClamped = 4;
@@ -3595,7 +3576,7 @@ int gld_emitInternalViewportPacket(glContext, dirtyMask)
   packet[0xf] = *(undefined4 *)(glContext + 0x1ccc);
   *(undefined4 **)(0x00002748 + glContext + 4) = packetEnd;
   (**(code **)(glContext + 0x275c))(glContext,packetEnd);
-  gldValidateVertexProgramState(glContext,r4AfterCall,drawFlagACopy,staleArgR6,packetEnd,staleArgR7,extentXFixed);
+  gldValidateVertexProgramState(glContext);
   gldLeaveInternalDrawState(glContext,savedDrawState);
   return;
 }

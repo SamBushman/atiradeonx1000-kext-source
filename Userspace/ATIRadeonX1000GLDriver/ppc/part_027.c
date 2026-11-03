@@ -701,14 +701,9 @@ int IRInst__hasTwoUses(inst, program)
 }
 
 /* IRInst__hasNoUses @ 0x1049c4 (36 bytes) */
-int IRInst__hasNoUses(inst, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int IRInst__hasNoUses(inst, program)
   int inst;
   int program;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   return *(int *)(inst + 0x160) - *(int *)(program + 0x478) < 0 ||
          *(int *)(inst + 0x160) == *(int *)(program + 0x478);

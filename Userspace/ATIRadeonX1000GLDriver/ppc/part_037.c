@@ -1578,8 +1578,7 @@ int Program__eliminatePhiCopies(pass)
   }
   if (tempCount[0] != 0) {
     Compiler__logf(*(undefined4 *)(pass + 8),
-                 "SSA : Phi Replace -> %d added temps to break cycles\n",tempCount[0],staleArg6,staleArg7,
-                 staleArg8,staleArg9,staleTempCountRef);
+                 "SSA : Phi Replace -> %d added temps to break cycles\n",tempCount[0],staleArg6,staleArg7);
   }
   *(uint *)(pass + 0x30) = *(uint *)(pass + 0x30) & 0xfffffffb | 0x40;
   return;
@@ -3478,10 +3477,9 @@ int Interpolator__vslot10(this, laneMask, program)
 }
 
 /* ValueKey__createConstantMov @ 0x123c08 (984 bytes) */
-int ValueKey__createConstantMov(compiler, block, unusedArg3)
+int ValueKey__createConstantMov(compiler, block)
   int compiler;
   int *block;
-  uint unusedArg3;
 {
   int *keyVectorElemRef;
   int newVRegId;
@@ -3686,7 +3684,7 @@ int TempValue__clone(this, block, compiler)
     ((int (*)())IRInst__bindSourceFromValue)(this,newInst);
     return valueKey;
   }
-  foldedValue = (undefined4 *)((int (*)())ValueKey__createConstantMov)(*(undefined4 *)(compiler + COMP_currentProgram),block,this);
+  foldedValue = (undefined4 *)((int (*)())ValueKey__createConstantMov)(*(undefined4 *)(compiler + COMP_currentProgram),block);
   return foldedValue;
 }
 

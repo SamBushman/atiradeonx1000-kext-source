@@ -134,14 +134,9 @@ storeInst:
 }
 
 /* Use__sourceIsPlainSingleUse @ 0x146cd8 (264 bytes) */
-int Use__sourceIsPlainSingleUse(use, program, staleArg3, staleArg4, staleArg5, staleArg6, staleArg7)
+int Use__sourceIsPlainSingleUse(use, program)
   int *use;
   undefined4 program;
-  undefined4 staleArg3;
-  undefined4 staleArg4;
-  undefined4 staleArg5;
-  undefined4 staleArg6;
-  undefined4 staleArg7;
 {
   uint sourceHasResultModifier;
   int operandVReg;
@@ -152,7 +147,7 @@ int Use__sourceIsPlainSingleUse(use, program, staleArg3, staleArg4, staleArg5, s
   operandVReg = IRInst__getOperandSource(*use,use[1]);
   if (((*(uint *)(operandVReg + 0x14) & 0x200) == 0) &&
      ((useCheck = IRInst__hasSingleUse(operandVReg,program), useCheck != 0 ||
-      (useCheck = IRInst__hasNoUses(operandVReg,program,staleArg3,staleArg4,staleArg5,staleArg6,staleArg7), useCheck != 0)))) {
+      (useCheck = IRInst__hasNoUses(operandVReg,program), useCheck != 0)))) {
     sourceIsReusable = 1;
   }
   else {
@@ -4567,9 +4562,9 @@ int Inst__reassociate_14e6e4(inst, program)
     operandVReg3 = IRInst__getOperandSource(inst,2);
     useCheck = IRInst__hasSingleUse(operandVReg2,program);
     if ((useCheck == 0) &&
-       (((useCheck = IRInst__hasNoUses(operandVReg2,program,staleArg5,staleArg6,staleArg7,staleArg8,staleArg9), useCheck == 0 &&
+       (((useCheck = IRInst__hasNoUses(operandVReg2,program), useCheck == 0 &&
          (useCheck = IRInst__hasSingleUse(operandVReg3,program), useCheck == 0)) &&
-        (vecCount = IRInst__hasNoUses(operandVReg3,program,staleArg5,staleArg6,staleArg7,staleArg8,staleArg9), vecCount == 0)))) {
+        (vecCount = IRInst__hasNoUses(operandVReg3,program), vecCount == 0)))) {
       vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
       vecCapacity = 2;
       vecData = Arena__alloc(vecArena,8);
@@ -4939,7 +4934,7 @@ loopCheckConsumerIsMul:
               compilerCtx = *(undefined4 *)(pass + 8);
               staleArg4Value = 1;
               IRInst__setOperandSource(inst4,operandIndex,operandVReg2,1,compilerCtx);
-              hasNoUsesResult = IRInst__hasNoUses(operandVReg,pass,operandVReg2,staleArg4Value,compilerCtx,nextTermSlotACopy,matchFramePtr);
+              hasNoUsesResult = IRInst__hasNoUses(operandVReg,pass);
               if (hasNoUsesResult != 0) {
                 (**(code **)(*operandVReg + 0xc))(operandVReg,1,*(undefined4 *)(pass + 8));
                 return 1;
@@ -5544,7 +5539,7 @@ setOperandRecord2:
     operandRecord2 = IRInst__getOperandRecord(inst3,operandIndex2);
     *(undefined4 *)(operandRecord2 + 0x10) = copiedSelectWord;
   }
-  newSource = IRInst__hasNoUses(updatedSourceInst,programHome,newSource,allowRewrite,compilerCtx,termA,termSlotPtrB);
+  newSource = IRInst__hasNoUses(updatedSourceInst,programHome);
   if (newSource == 0) {
     return 1;
   }
@@ -5569,8 +5564,8 @@ int Inst__reassociateUsePair(useA, useB, pass)
   undefined4 staleArg9;
   
   programCopy = pass;
-  useAPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useA,pass,pass,staleArg6,staleArg7,staleArg8,staleArg9);
-  useBPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useB,pass,programCopy,staleArg6,staleArg7,staleArg8,staleArg9);
+  useAPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useA,pass);
+  useBPrecheck = ((int (*)())Use__sourceIsPlainSingleUse)(useB,pass);
   if ((((useAPrecheck == 0) || (swapSharedTermBetweenUsesResult = ((int (*)())Inst__swapSharedTermBetweenUses)(useB,useA,pass,1,1), swapSharedTermBetweenUsesResult == 0)) &&
       ((useBPrecheck == 0 || (swapSharedTermBetweenUsesResult = ((int (*)())Inst__swapSharedTermBetweenUses)(useA,useB,pass,1,1), swapSharedTermBetweenUsesResult == 0)))) &&
      (((useAPrecheck == 0 || (useBPrecheck == 0)) ||
@@ -5643,11 +5638,11 @@ int Inst__findReassociatePair(useA, foundUse, program)
     termOffsetB = 0;
     consumerDesc = *(int *)(*useA + 0x88);
     consumerKind = *(int *)(consumerDesc + 8);
-    useAIsPlainSingleUse = ((int (*)())Use__sourceIsPlainSingleUse)(useA,program,programAlias,staleArg4,staleArg5,staleArg6,consumerDesc);
+    useAIsPlainSingleUse = ((int (*)())Use__sourceIsPlainSingleUse)(useA,program);
     useAIsPlain = useAIsPlainSingleUse != 0;
     do {
       term = *(int *)((int)termSources + termOffsetB);
-      hasNoUsesResult = IRInst__hasNoUses(term,program,programAlias,staleArg4,staleArg5,staleArg6,consumerDesc);
+      hasNoUsesResult = IRInst__hasNoUses(term,program);
       if ((hasNoUsesResult == 0) && (hasNoUsesResult = IRInst__hasSingleUse(term,program), hasNoUsesResult == 0)) {
         vector = *(uint **)(term + 0x10);
         loopIndex = 0;
@@ -5679,7 +5674,7 @@ int Inst__findReassociatePair(useA, foundUse, program)
                 if (canCombine != 0) {
                   *foundUse = inst;
                   foundUse[1] = 2;
-                  foundIsPlainSingleUse = ((int (*)())Use__sourceIsPlainSingleUse)(foundUse,program,programAlias,staleArg4,staleArg5,staleArg6,consumerDesc);
+                  foundIsPlainSingleUse = ((int (*)())Use__sourceIsPlainSingleUse)(foundUse,program);
                   if (useAIsPlain) {
                     staleArg4 = 0;
                     staleArg5 = 0;
@@ -5719,7 +5714,7 @@ int Inst__findReassociatePair(useA, foundUse, program)
                 if (producerOfUse != 0) {
                   *foundUse = inst;
                   foundUse[1] = 1;
-                  foundIsPlainSingleUseB = ((int (*)())Use__sourceIsPlainSingleUse)(foundUse,program,programAlias,staleArg4,staleArg5,staleArg6,consumerDesc);
+                  foundIsPlainSingleUseB = ((int (*)())Use__sourceIsPlainSingleUse)(foundUse,program);
                   if (useAIsPlain) {
                     staleArg4 = 0;
                     staleArg5 = 0;

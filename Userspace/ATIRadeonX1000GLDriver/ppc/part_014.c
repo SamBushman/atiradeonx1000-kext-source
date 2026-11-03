@@ -1801,7 +1801,7 @@ int ffvpEmitTexCoordGen(programBuilder, texUnit, useXyz1Select, texUnitAlias, te
   noTexMatrix = texMatrixEnabled == 0;
   uStack00000020 = useXyz1Select;
   if ((noTexMatrix) && (texGenModes == 0)) {
-    status = ffvpEmitTexCoordPassThrough(programBuilder,texUnit,useXyz1Select,texUnitAlias,0,texMatrixUnit,0);
+    status = ffvpEmitTexCoordPassThrough(programBuilder,texUnit);
     return status;
   }
   if (programBuilder == 0) {
@@ -5528,13 +5528,8 @@ int ffvpBuildLightKey(ctx)
 }
 
 /* ffvpBuildFogKey @ 0x9cf10 (224 bytes) */
-int ffvpBuildFogKey(ctx, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+int ffvpBuildFogKey(ctx)
   int ctx;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
 {
   short fogDistanceMode;
   short fogMode;
@@ -5598,13 +5593,8 @@ int ffvpBuildBlendKey(ctx)
 }
 
 /* ffvpUpdateLightModelFlags @ 0x9d080 (596 bytes) */
-int ffvpUpdateLightModelFlags(ctx, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+int ffvpUpdateLightModelFlags(ctx)
   int ctx;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
 {
   uint texGenNeedsNormal;
   uint lightMaskShifting;
@@ -5732,14 +5722,8 @@ int ffvpRunStateHook(ctx)
 }
 
 /* gldValidateVertexProgramState @ 0x9d3b0 (64 bytes) */
-int gldValidateVertexProgramState(ctx, arg2, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6, passThroughArg7)
+int gldValidateVertexProgramState(ctx)
   int ctx;
-  undefined4 arg2;
-  undefined4 passThroughArg3;
-  undefined4 passThroughArg4;
-  undefined4 passThroughArg5;
-  undefined4 passThroughArg6;
-  undefined4 passThroughArg7;
 {
   if (ctx == 0) {
     return;
@@ -5752,7 +5736,7 @@ int gldValidateVertexProgramState(ctx, arg2, passThroughArg3, passThroughArg4, p
       (**(code **)((int)((unsigned char *)0x000011cc) + ctx))();
       return;
     }
-    extvsValidateProgramState(ctx,arg2);
+    extvsValidateProgramState(ctx);
     return;
   }
   ((int (*)())ffvpRunStateHook)(ctx);
@@ -5760,15 +5744,12 @@ int gldValidateVertexProgramState(ctx, arg2, passThroughArg3, passThroughArg4, p
 }
 
 /* ffvpBuildProgram @ 0x9d410 (5944 bytes) */
-int ffvpBuildProgram(ctx, passThroughArg2, passThroughArg3, constRegCountOut, paramList, unusedArg6, unusedArg7, unusedArg8)
+int ffvpBuildProgram(ctx, passThroughArg2, passThroughArg3, constRegCountOut, paramList)
   int ctx;
   undefined4 passThroughArg2;
   undefined4 passThroughArg3;
   int *constRegCountOut;
   int *paramList;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   int lightIndex;
   int ctxUnitCursor;
@@ -7586,15 +7567,12 @@ int arbProgramFindIndex(ctx, programTable, programId)
 }
 
 /* glProgramStringARB_impl @ 0xa0300 (80 bytes) */
-int glProgramStringARB_impl(ctx, target, format, length, text, unusedArg6, unusedArg7, unusedArg8)
+int glProgramStringARB_impl(ctx, target, format, length, text)
   int ctx;
   int target;
   int format;
   int length;
   undefined4 text;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   *(undefined4 *)(((unsigned char *)0x00001124) + ctx) = 0xffffffff;
   **(undefined1 **)(((unsigned char *)0x00001128) + ctx) = 0;
@@ -7673,7 +7651,7 @@ int glBindProgramARB_impl(ctx, target, programId, unusedArg4, unusedArg5, unused
           *(undefined4 *)(entryPtr + 0x14) = programObject;
           arbfpProgramObjectInit(ctx,*(undefined4 *)
                                 (*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 0x14));
-          arbfpBindProgram(ctx,*(undefined4 *)(programTable + 4),a2,unusedArg4,unusedArg5,unusedArg6,entriesBase,staleArg10);
+          arbfpBindProgram(ctx,*(undefined4 *)(programTable + 4));
         }
         *(int *)(programTable + 4) = *(int *)(programTable + 4) + 1;
         return;
@@ -7689,7 +7667,7 @@ int glBindProgramARB_impl(ctx, target, programId, unusedArg4, unusedArg5, unused
       if (programIndex == 0) {
         programIndex = *(int *)(((unsigned char *)0x0000126c) + ctx);
       }
-      arbfpBindProgram(ctx,programIndex,a2,unusedArg4,unusedArg5,unusedArg6,entries,staleArg10);
+      arbfpBindProgram(ctx,programIndex);
       return;
     }
   }

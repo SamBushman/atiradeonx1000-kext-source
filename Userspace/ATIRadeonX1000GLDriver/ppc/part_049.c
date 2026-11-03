@@ -421,9 +421,9 @@ checkInst:
           lanesLeft = lanesLeft + -1;
         } while (lanesLeft != 0);
         valueNumberTable = *(undefined4 *)(program + 0x3ac);
-        scratchInst = (int *)RegisterMap__findConstVectorExact(valueNumberTable,constLanes,constTable,programCopy,compilerCtx,checkFitsCopy,laneCursor);
+        scratchInst = (int *)RegisterMap__findConstVectorExact(valueNumberTable,constLanes,constTable);
         if (scratchInst == (int *)0x0) {
-          scratchInst = (int *)RegisterMap__findConstVector(valueNumberTable,constLanes,constTable,programCopy);
+          scratchInst = (int *)RegisterMap__findConstVector(valueNumberTable,constLanes,constTable);
         }
         selectWord = constTable[0];
         if (scratchInst == (int *)0x0) {
@@ -509,9 +509,9 @@ checkInst:
           lanesRemaining = lanesRemaining + -1;
         } while (lanesRemaining != 0);
         programValueTable = *(undefined4 *)(program + 0x3ac);
-        constTable[1] = (int *)RegisterMap__findConstVectorExact(programValueTable,constLanes,constTable,constantKindPtr,compilerCtx,checkFitsCopy,loopPtr3);
+        constTable[1] = (int *)RegisterMap__findConstVectorExact(programValueTable,constLanes,constTable);
         if (constTable[1] == (int *)0x0) {
-          constTable[1] = (int *)RegisterMap__findConstVector(programValueTable,constLanes,constTable,constantKindPtr);
+          constTable[1] = (int *)RegisterMap__findConstVector(programValueTable,constLanes,constTable);
         }
         selectWord = constTable[0];
         if (constTable[1] == (int *)0x0) {
@@ -2264,14 +2264,9 @@ setResult:
 }
 
 /* R300SchedModel__vslot19 @ 0x189fd4 (172 bytes) */
-int R300SchedModel__vslot19(this, inst, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int R300SchedModel__vslot19(this, inst)
   undefined4 this;
   int *inst;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int callResult;
   undefined4 resourceClass;
@@ -5217,14 +5212,9 @@ int R300VSchedModel__vslot13(this, node)
 }
 
 /* R300VSchedModel__vslot28 @ 0x18f984 (596 bytes) */
-int R300VSchedModel__vslot28(this, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int R300VSchedModel__vslot28(this, program)
   int *this;
   int program;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int numSources;
   int slot12Result;

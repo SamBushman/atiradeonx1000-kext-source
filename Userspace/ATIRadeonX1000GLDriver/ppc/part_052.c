@@ -1159,15 +1159,9 @@ int R300VMachineAssembler__nextInstruction(this)
 }
 
 /* R300VMachineAssembler__logStatistics @ 0x19a3bc (172 bytes) */
-int R300VMachineAssembler__logStatistics(this, quiet, unused1, unused2, unused3, printfArg6, printfArg7, printfArg8)
+int R300VMachineAssembler__logStatistics(this, quiet)
   int this;
   int quiet;
-  undefined4 unused1;
-  undefined4 unused2;
-  undefined4 unused3;
-  undefined4 printfArg6;
-  undefined4 printfArg7;
-  undefined4 printfArg8;
 {
   int candidateAluCount;
   int totalCount;
@@ -1176,11 +1170,10 @@ int R300VMachineAssembler__logStatistics(this, quiet, unused1, unused2, unused3,
   totalCount = *(int *)(this + 0x5c) + *(int *)(this + 0x58);
   Compiler__logf(*(undefined4 *)(this + 0xc),
                "Assembler : emits %d cf, %d alu -> %d total instruction(s)\n",
-               *(int *)(this + 0x5c),*(int *)(this + 0x58),totalCount,printfArg6,printfArg7,printfArg8);
+               *(int *)(this + 0x5c),*(int *)(this + 0x58));
   Compiler__logf(*(undefined4 *)(this + 0xc),
                "INFO:# of control flow %d, # of exec %d instructions\n",
-               *(undefined4 *)(this + 0x5c),*(undefined4 *)(this + 0x58),totalCount,printfArg6,printfArg7
-               ,printfArg8);
+               *(undefined4 *)(this + 0x5c),*(undefined4 *)(this + 0x58));
   if (quiet == 0) {
     candidateAluCount = *(int *)(this + 0x78);
     packedPercent = 0;
@@ -1189,7 +1182,7 @@ int R300VMachineAssembler__logStatistics(this, quiet, unused1, unused2, unused3,
     }
     Compiler__logf(*(undefined4 *)(this + 0xc),
                  "Assembler : of %d candidate alu instruction(s), %d are packed (%%%d)\n",candidateAluCount,
-                 *(int *)(this + 0x74),packedPercent,printfArg6,printfArg7,printfArg8);
+                 *(int *)(this + 0x74));
     return;
   }
   return;
@@ -1311,21 +1304,13 @@ int R300VMachineAssembler__transitionState(this, event)
 }
 
 /* R300VMachineAssembler__vslot2_exceedsLimits @ 0x19a618 (120 bytes) */
-int R300VMachineAssembler__vslot2_exceedsLimits(this, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int R300VMachineAssembler__vslot2_exceedsLimits(this)
   int this;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   undefined4 exceeds;
   
   Compiler__logf(*(int *)(this + 0xc),"next_sp = %d, max = %d\n",*(undefined4 *)(this + 0x58),
-               *(undefined4 *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40),unusedArg5,unusedArg6,
-               unusedArg7,unusedArg8);
+               *(undefined4 *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40));
   if ((*(int *)(*(int *)(*(int *)(this + 0xc) + 0x30c) + 0x40) < *(int *)(this + 0x58)) ||
      (exceeds = 0, 0x10 < *(int *)(this + 0x5c))) {
     exceeds = 1;

@@ -3423,10 +3423,9 @@ code_r0x00171ba0:
       Program__markHwRegUsed(scheduler[1],hwRegister2);
     } while (loopIndex <= scheduler[0x69]);
   }
-  Compiler__logf(*scheduler,"Scheduler : Total cycles %d\n",scheduler[100],staleArg6,staleArg7,staleArg8,registerCount,staleArg10)
+  Compiler__logf(*scheduler,"Scheduler : Total cycles %d\n",scheduler[100],staleArg6,staleArg7)
   ;
-  Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],staleArg6,staleArg7,
-               staleArg8,registerCount,staleArg10);
+  Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],staleArg6,staleArg7);
   Program__beginPass(scheduler[1],(int)"schedule_inst");
   Program__freeBlockBitsets(program);
   liveOutSet = scheduler[0x4c];

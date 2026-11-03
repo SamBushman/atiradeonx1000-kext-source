@@ -209,11 +209,11 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       return loopRemaining2;
     }
     registerMap = *(undefined4 *)(program + 0x3ac);
-    allLanesEqual = RegisterMap__findConstVectorExact(registerMap,constants,laneSwizzle,laneSwizzleArg,staleArg5,allLanesEqual,loopPtr);
+    allLanesEqual = RegisterMap__findConstVectorExact(registerMap,constants,laneSwizzle);
     if (allLanesEqual != 0) {
       return allLanesEqual;
     }
-    foundVector = RegisterMap__findConstVector(registerMap,constants,laneSwizzle,laneSwizzleArg);
+    foundVector = RegisterMap__findConstVector(registerMap,constants,laneSwizzle);
     if (foundVector != 0) {
       return foundVector;
     }

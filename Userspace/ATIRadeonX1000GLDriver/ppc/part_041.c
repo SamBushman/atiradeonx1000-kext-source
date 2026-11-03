@@ -583,7 +583,7 @@ loopSetInstNextA:
   Arena__free(*(undefined4 *)(compiler + 0x378),classBaseOffsets);
   return Compiler__logf(*(undefined4 *)(program + 8),
                "Register puVar7 : Repartition -> %d physical + %d virtual = %d regs\n",physicalRegCount,
-               virtualRegCount,totalRegCount,wordOrClassIndex,logTrailingArg,bitsetOrCursor);
+               virtualRegCount,totalRegCount);
 }
 
 /* HwLimits__buildInterferenceGraph @ 0x1322a8 (416 bytes) */

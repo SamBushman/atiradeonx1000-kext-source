@@ -28,14 +28,13 @@ int scDumpPixelProgramToStringStub()
 }
 
 /* scDumpPixelProgram @ 0xd4e8c (60 bytes) */
-int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR8, unusedArg7)
+int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR8)
   undefined4 sinkContext;
   undefined4 shaderState;
   undefined4 optionsArg;
   undefined4 sinkFn;
   undefined4 argR7;
   undefined4 argR8;
-  undefined4 unusedArg7;
 {
   undefined4 sinkFnCopy;
   undefined4 staleArgR10;
@@ -46,7 +45,7 @@ int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR
   psnClearSinkRecord2(&sinkFnField);
   sinkFnField = sinkFn;
   sinkContextField = sinkContext;
-  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,argR7,argR8,unusedArg7,staleArgR10);
+  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,argR7,argR8,0,staleArgR10);
   return 0;
 }
 
@@ -2210,14 +2209,10 @@ int ffpsEmitTextureSamples(ctx, ilBuilder, useUnitFlags)
 }
 
 /* BitSet256__findNthSetBit @ 0xd9b58 (84 bytes) */
-int BitSet256__findNthSetBit(unusedArg1, bitWords, nthSetBit, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int BitSet256__findNthSetBit(unusedArg1, bitWords, nthSetBit)
   undefined4 unusedArg1;
   uint *bitWords;
   int nthSetBit;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   bool notLastWord;
   uint wordBits;

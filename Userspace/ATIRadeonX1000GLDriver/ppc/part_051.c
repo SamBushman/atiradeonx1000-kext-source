@@ -871,10 +871,9 @@ int R300MachineAssembler__noteFetchTextureUnit(this, sourceIndex, inst)
 }
 
 /* R300MachineAssembler__emitFetchRecord @ 0x19651c (640 bytes) */
-int R300MachineAssembler__emitFetchRecord(assembler, inst, staleArg3)
+int R300MachineAssembler__emitFetchRecord(assembler, inst)
   int *assembler;
   int inst;
-  uint staleArg3;
 {
   undefined4 registerIndex;
   code *emitSlotBFn;
@@ -1531,7 +1530,7 @@ checkGroupHasFlag0x80:
               }
               predicate4c = (**(code **)(*cursorInst + 0x4c))(cursorInst);
               if (predicate4c != 0) {
-                ((int (*)())R300MachineAssembler__emitFetchRecord)(this,cursorInst,this[3]);
+                ((int (*)())R300MachineAssembler__emitFetchRecord)(this,cursorInst);
               }
               predicate38 = (**(code **)(*cursorInst + 0x38))(cursorInst);
               if ((predicate38 != 0) && (this[0x23] == 1)) {

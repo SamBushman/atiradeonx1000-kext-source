@@ -370,14 +370,10 @@ int recordAllocCreate(allocFn, allocArg)
 }
 
 /* recordCollectDependencies @ 0x77560 (228 bytes) */
-int recordCollectDependencies(alloc, recordIndex, depth, unusedArg4, unusedArg5, parentSlotBase, parentSourceBit)
+int recordCollectDependencies(alloc, recordIndex, depth)
   int alloc;
   int recordIndex;
   uint depth;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 parentSlotBase;
-  undefined4 parentSourceBit;
 {
   int callerSlotBase;
   bool moreSlots;
@@ -405,7 +401,7 @@ int recordCollectDependencies(alloc, recordIndex, depth, unusedArg4, unusedArg5,
       if (sourceMaskBit != 0) {
         for (depNode = (undefined4 *)*sourceListHead; depNode != (undefined4 *)0x0;
             depNode = (undefined4 *)depNode[4]) {
-          ((int (*)())recordCollectDependencies)(alloc,*depNode,depth + 1,unusedArg4,unusedArg5,callerSlotBase,sourceMaskBit);
+          ((int (*)())recordCollectDependencies)(alloc,*depNode,depth + 1);
         }
       }
       moreSlots = sourceSlot != 2;
@@ -707,12 +703,11 @@ int regBindingSet(ctx, valueId, reg, componentMask, strict)
 }
 
 /* regBindingSetFixedRegister @ 0x77c40 (124 bytes) */
-int regBindingSetFixedRegister(alloc, valueId, componentMask, strict, unusedArg5)
+int regBindingSetFixedRegister(alloc, valueId, componentMask, strict)
   int alloc;
   int valueId;
   uint componentMask;
   int strict;
-  undefined4 unusedArg5;
 {
   byte boundMaskByte;
   uint componentBit;
@@ -2142,14 +2137,8 @@ setLinked2:
 }
 
 /* recordSourcesAreDistinctTemps @ 0x79e10 (88 bytes) */
-int recordSourcesAreDistinctTemps(record, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int recordSourcesAreDistinctTemps(record)
   int record;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   uint src0Index;
   uint src1Index;
@@ -2208,7 +2197,7 @@ int recordFindScheduleConflict(alloc, useDistinctCheck)
       if ((((checkDistinct) && ((**(uint **)(alloc + 0x34) & 0x40) != 0)) &&
           (opcodeClass = (char)*record + 0xbc, opcodeClass < 0xb)) &&
          (opcodeBit = 1 << ((int)(char)opcodeClass & 0x3fU) & 0x601, opcodeBit != 0)) {
-        callResultPair = ((int (*)())recordSourcesAreDistinctTemps)(record,useDistinctCheck,staleArgR5,staleArgR6,staleArgR7,staleArgR8,opcodeBit);
+        callResultPair = ((int (*)())recordSourcesAreDistinctTemps)(record);
         useDistinctCheck = (int)callResultPair;
         if ((int)((ulonglong)callResultPair >> 0x20) != 0) {
           conflictFound = true;
@@ -2957,15 +2946,13 @@ int recordPickNextToEmit(ctx, registerCount, readyCycle, keepFlag, chosenReg, pr
 }
 
 /* recordProgramAllocateAndEmit @ 0x7b0d0 (5660 bytes) */
-int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, scratchArg5, scratchArg6, unusedArg7, unusedArg8)
+int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, scratchArg5, scratchArg6)
   int alloc;
   undefined4 unusedArg2;
   code *scratchArg3;
   code *scratchArg4;
   int *scratchArg5;
   code *scratchArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   undefined4 *retiredMoveCursor;
   uint opcodeRewriteIndex;
@@ -3210,7 +3197,7 @@ int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, sc
     while( true ) {
       chainNodeLast = lastChainNodeB;
       scratchArg3 = (code *)0x0;
-      ((int (*)())recordCollectDependencies)(alloc,*(undefined4 *)chainNodeLast,0,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
+      ((int (*)())recordCollectDependencies)(alloc,*(undefined4 *)chainNodeLast,0);
       configBit6Arg = *(code **)(alloc + 0x10450);
       if ((configBit6Arg == (code *)0x0) || (chainNodeLast == configBit6Arg)) break;
       lastChainNodeB = configBit6Arg;
@@ -3431,7 +3418,7 @@ setLoopIndex:
       if (recordIsFixed != 0) {
         scratchArg3 = (code *)((int (*)())recordGetWriteMask)(recordPtr);
         scratchArg4 = (code *)((int)((unsigned char *)0x0) + 1);
-        calleeStatus = ((int (*)())regBindingSetFixedRegister)(alloc,recordCount,scratchArg3,1,scratchArg5);
+        calleeStatus = ((int (*)())regBindingSetFixedRegister)(alloc,recordCount,scratchArg3,1);
         if (calleeStatus != 0) {
           return calleeStatus;
         }
@@ -3439,7 +3426,7 @@ setLoopIndex:
             dependencyNodeB = (undefined4 *)dependencyNodeB[4]) {
           scratchArg3 = (code *)dependencyNodeB[1];
           scratchArg4 = (code *)((int)((unsigned char *)0x0) + 1);
-          calleeStatus = ((int (*)())regBindingSetFixedRegister)(alloc,*dependencyNodeB,scratchArg3,1,scratchArg5);
+          calleeStatus = ((int (*)())regBindingSetFixedRegister)(alloc,*dependencyNodeB,scratchArg3,1);
           if (calleeStatus != 0) {
             return calleeStatus;
           }
@@ -3448,7 +3435,7 @@ setLoopIndex:
             dependencyNodeB = (undefined4 *)dependencyNodeB[4]) {
           scratchArg3 = (code *)dependencyNodeB[1];
           scratchArg4 = (code *)((int)((unsigned char *)0x0) + 1);
-          ((int (*)())regBindingSetFixedRegister)(alloc,*dependencyNodeB,scratchArg3,1,scratchArg5);
+          ((int (*)())regBindingSetFixedRegister)(alloc,*dependencyNodeB,scratchArg3,1);
         }
         bindingListSlot = (int *)(alloc + 0x30b7c);
         componentCounter = 0;
@@ -3698,7 +3685,7 @@ setChainSource2:
     opcodeRewriteIndex = 0;
     recordCursorB = records;
     do {
-      statusAndValue = ((int (*)())recordSourcesAreDistinctTemps)(recordCursorB,stageR4,scratchArg3,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
+      statusAndValue = ((int (*)())recordSourcesAreDistinctTemps)(recordCursorB);
       stageR4 = (undefined4)statusAndValue;
       if ((int)((ulonglong)statusAndValue >> 0x20) != 0) {
         if (recordCursorB[3] == (code *)0x4) {
@@ -4911,7 +4898,7 @@ setMoreSources:
     } while (scratchArg8 != recordCount);
   }
   if ((*alloc & 0x100) == 0) {
-    status = ((int (*)())recordProgramAllocateAndEmit)(alloc,scratchArg2,scratchArg3,recordPtr,scratchArg5,scratchArg6,lastRecordIndexValue,scratchArg8);
+    status = ((int (*)())recordProgramAllocateAndEmit)(alloc,scratchArg2,scratchArg3,recordPtr,scratchArg5,scratchArg6);
     return status;
   }
   return 0;

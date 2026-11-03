@@ -1,13 +1,8 @@
 #include "decls.h"
 
 /* gldTextureHasNonPowerOfTwoSize2 @ 0x2dcf0 (236 bytes) */
-int gldTextureHasNonPowerOfTwoSize2(texture, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+int gldTextureHasNonPowerOfTwoSize2(texture)
   int texture;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
 {
   uint leftoverBits;
   uint levelDepth;
@@ -214,7 +209,7 @@ int gld_buildTextureHardwareState(ctxSaved, texture)
     texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,scratchUint21 & 0xffff) - scratchDouble31));
     break;
   case 3:
-    scratchInt26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,scratchUint18,scratchUint19,scratchUint22,scratchUint20,scratchUint21);
+    scratchInt26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture);
     if (scratchInt26 == 0) {
       *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - scratchUint15 & 0x3f));
       *(short *)(texture + 0x1e) = (short)(1 << (*(byte *)((int)texImages + 0x65) - scratchUint14 & 0x3f));
@@ -240,7 +235,7 @@ int gld_buildTextureHardwareState(ctxSaved, texture)
          (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)texture + 0x76)) - scratchDouble31));
     break;
   case 4:
-    scratchInt26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,scratchUint18,scratchUint19,scratchUint22,scratchUint20,scratchUint21);
+    scratchInt26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture);
     if (scratchInt26 == 0) {
       *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - scratchUint15 & 0x3f));
     }
@@ -1902,13 +1897,8 @@ int gld_emitRenderTargetPacket(cmd, colorFormat, colorPitch, blockPitch, tileFla
 }
 
 /* gldTextureHasNonPowerOfTwoSize @ 0x30b50 (236 bytes) */
-int gldTextureHasNonPowerOfTwoSize(texture, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+int gldTextureHasNonPowerOfTwoSize(texture)
   int texture;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
 {
   uint leftoverBits;
   uint levelDepth;
@@ -2352,7 +2342,7 @@ int gld_readbackTextureLevel(ctx, texture, face, mipLevel, surfaceFormat, surfac
       _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,storage + 3,1,0,0);
     }
     if ((levelBuffer != 0) && ((*(uint *)(ctx + 0x24) & 0x82) != 0)) {
-      gldFlushDataCacheRangeSync(ctx,levelBuffer,texture[4],scratchUint17,scratchArgA1,scratchUint10,scratchInt13,scratchArgA7);
+      gldFlushDataCacheRangeSync(ctx,levelBuffer,texture[4]);
     }
     *(ushort *)((int)storage + scratchInt14 + 0x1c) =
          *(ushort *)((int)storage + scratchInt14 + 0x1c) | *(ushort *)((int)storage + scratchInt14 + 0x28);
@@ -2639,7 +2629,7 @@ int gld_uploadTextureLevel(ctxSaved, texture)
       } while (loopIndex < descHeight);
     }
     if ((*(uint *)(ctxSaved + 0x24) & 0x82) != 0) {
-      gldFlushDataCacheRange(ctxSaved,cacheFlushStart + 0x20,scratchInt7,convertBlockPtr,outputBlockPtr,scratchUint18,cacheFlushStart,staleArgR10);
+      gldFlushDataCacheRange(ctxSaved,cacheFlushStart + 0x20,scratchInt7);
     }
   }
   if ((*(byte *)((int)texture + 0x39) & 3) == 0) goto storeTexture;
@@ -2896,7 +2886,7 @@ int gldTextureMakeResident(ctx, texture, scratchArg3, staleArgR6, staleArgR7, sc
   
   texImages = (ushort *)texture[0xc];
   ctxSaved = ctx;
-  scratchInt11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,texture,scratchArg3,staleArgR6,staleArgR7,scratchArg6);
+  scratchInt11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture);
   if (scratchInt11 != 0) {
     scratchInt25 = texture[0xc];
     scratchFlag41 = *(byte *)(scratchInt25 + 1);
@@ -3093,7 +3083,7 @@ setScratchFlag412:
           scratchUint8 = scratchUint32;
           do {
             scratchUint36 = scratchUint36 + 1;
-            gldFlushDataCacheRange(ctxSaved,scratchUint8,scratchInt11 * scratchInt33,scratchPtr17,scratchUint20,scratchUint16,scratchUint23,scratchPtr26);
+            gldFlushDataCacheRange(ctxSaved,scratchUint8,scratchInt11 * scratchInt33);
             scratchUint8 = scratchUint8 + scratchUint28;
           } while (scratchUint36 < scratchUint22);
           scratchInt29 = texture[0xc];
@@ -3292,7 +3282,7 @@ setFormatInfo2:
     else {
 checkTexImages:
       if (*(char *)((int)texImages + 0x6d) == '\0') {
-        scratchInt11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,scratchUint16,scratchArg3,staleArgR6,scratchUint19,scratchArg6);
+        scratchInt11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture);
         if (scratchInt11 == 0) {
           scratchStack74 = texture[0xc];
           scratchStack78 = (uint)*(byte *)(scratchStack74 + 0x6c);
@@ -3894,8 +3884,7 @@ checkScratchUint23:
                     if (scratchUint20 != 0) {
                       gldFlushDataCacheRange(ctxSaved,scratchStackac + *texture,
                                    (uint)*(ushort *)((int)scratchStack5c + scratchStackc8 + 2) *
-                                   *(int *)((int)scratchStack5c + scratchStackc8 + 0xc),scratchPtr18,scratchStackc8,
-                                   scratchStack5c,scratchUint20,scratchUint8);
+                                   *(int *)((int)scratchStack5c + scratchStackc8 + 0xc));
                     }
                   }
                   if (0 < (int)scratchUint22) {
@@ -4070,12 +4059,10 @@ int gld_makeTextureResidentOrDelete(glContext, textureHandle, passThroughArg3, p
 }
 
 /* glGenerateMipmap_impl @ 0x34200 (4472 bytes) */
-int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
+int glGenerateMipmap_impl(ctx, texture, face)
   int ctx;
   int *texture;
   int face;
-  undefined4 passThroughArg4;
-  undefined4 passThroughArg5;
 {
   int vap_vte_cntl;
   float sliceCoord;
@@ -4177,7 +4164,7 @@ int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
     lastLevel = *(byte *)((int)levelTable + 0x6b);
   }
   levelCount = lastLevel - baseLevel;
-  faceArg = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,r4AfterCall,faceArg,passThroughArg4,passThroughArg5,staleArgR8);
+  faceArg = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture);
   if (faceArg != 0) {
 loopCallPthreadMutexUnlock:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
@@ -4893,7 +4880,7 @@ loopCallPthreadMutexUnlock:
   scratchFlag12 = *(ushort *)(scratchInt47 + 2) != 0x1902;
   if ((!scratchFlag12) &&
      (((*(int *)(ctx + 0x150) == 0 &&
-       (scratchInt34 = gld_needsMultisampleResolve(ctx,scratchInt33,scratchInt35,scratchUint49,scratchUint39,scratchUint50,scratchInt34), scratchInt34 != 0)) ||
+       (scratchInt34 = gld_needsMultisampleResolve(ctx,scratchInt33), scratchInt34 != 0)) ||
       ((*(uint *)(ctx + 0x154) & 0x30000) == 0)))) goto loopCallPthreadMutexUnlock;
   scratchInt34 = level * 0x18 + face * 0x168 + texture[0xc];
   scratchUint48 = (uint)*(ushort *)(scratchInt34 + 0xa4);
@@ -5002,7 +4989,7 @@ loopCallPthreadMutexUnlock:
   goto loopCallPthreadMutexUnlock;
   boundFramebuffer = *(int *)(ctx + 0x150);
   if (boundFramebuffer == 0) {
-    scratchInt35 = gld_needsMultisampleResolve(ctx,scratchInt33,scratchInt35,scratchUint49,scratchUint39,scratchUint50,0);
+    scratchInt35 = gld_needsMultisampleResolve(ctx,scratchInt33);
     if (scratchInt35 == 0) {
       boundFramebuffer = *(int *)(ctx + 0x150);
     }
@@ -5610,13 +5597,12 @@ checkScratchInt35:
     scratchUint9 = *(ushort *)(scratchInt34 + 0xc);
     scratchInt35 = gldPixelUnitBytes((uint)*(ushort *)(scratchInt34 + 0x10),(uint)*(ushort *)(scratchInt34 + 0x12));
     if (*(int *)(scratchInt34 + 0x14) != 0) {
-      gldFlushDataCacheRangeSync(ctx,*(int *)(scratchInt34 + 0x14),(uint)scratchUint9 * scratchInt35 * scratchUint46,scratchUint39,scratchUint41,
-                   scratchUint42,sc_scissor1,scratchUint43);
+      gldFlushDataCacheRangeSync(ctx,*(int *)(scratchInt34 + 0x14),(uint)scratchUint9 * scratchInt35 * scratchUint46);
     }
   }
   if (((*(uint *)(texture[0xc] + 0x48) & 0x8000) != 0) &&
      (level == *(byte *)(texture[0xc] + 0x5e))) {
-    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,scratchUint39,scratchUint41);
+    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face);
     return 1;
   }
   return 1;
@@ -6704,7 +6690,7 @@ loopSetTiledFlag:
           if (level != *(byte *)(texture[0xc] + 0x5e)) {
             return 1;
           }
-          ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,levelArg,scratchUint44);
+          ((int (*)())glGenerateMipmap_impl)(ctx,texture,face);
           return 1;
         }
       }
@@ -7183,7 +7169,7 @@ checkStorageRecord:
   _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
   if (((*(uint *)(texture[0xc] + 0x48) & 0x8000) != 0) &&
      (level == *(byte *)(texture[0xc] + 0x5e))) {
-    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face,scratchUint26,scratchUint31);
+    ((int (*)())glGenerateMipmap_impl)(ctx,texture,face);
     return 1;
   }
   return 1;

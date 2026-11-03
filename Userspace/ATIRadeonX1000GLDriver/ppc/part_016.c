@@ -726,14 +726,9 @@ int gld_transformClipPlanes(glContextPtr4, dirtyBitsWord8)
 }
 
 /* gld_updateProgramFlags @ 0xa8c00 (356 bytes) */
-int gld_updateProgramFlags(glContext, engineCaps, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord1, staleArgR9)
+int gld_updateProgramFlags(glContext, engineCaps)
   int glContext;
   int engineCaps;
-  undefined4 dirtyBitsArg;
-  undefined4 scratchR6;
-  undefined4 dirtyWord3;
-  undefined4 dirtyWord1;
-  undefined4 staleArgR9;
 {
   uint flagChange;
   uint glContextWord1928;
@@ -754,8 +749,7 @@ int gld_updateProgramFlags(glContext, engineCaps, dirtyBitsArg, scratchR6, dirty
   glContextPtr4 = *(int *)(glContext + 4);
   if ((((unsigned char *)0x00002e2d)[*(int *)(glContextPtr4 + 0x10)] != '\0') &&
      ((*(uint *)(glContext + 0x44) & 0x20000) == 0)) {
-    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,
-                         staleArgR9);
+    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0));
     if (glContextPtr4 == 0) {
       glContextPtr4 = *(int *)(glContext + 4);
       programFlag = 1;
@@ -1625,8 +1619,7 @@ setDirtyBits0x7000000:
             dirtyWord1 = (char *)((uint)ctx44Snapshot & 0xfffddfff);
             *(char **)(glContext + 0x44) = dirtyWord1;
             *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xffffbfff;
-            fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1,dirtyBits0x7000000,
-                                            ctx44Snapshot);
+            fpPassThrough1 = arbfpUpdateStateForProgram(glContext);
             staleR4Chain = r4AfterCall3;
           }
         }
@@ -1635,8 +1628,7 @@ setDirtyBits0x7000000:
             if (ctx44Bit13 != 0) {
               *(uint *)(glContext + 0x44) = (uint)ctx44Snapshot & 0xfffddfff;
               *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xffffbfff;
-              arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyBits0x4400000,(uint)ctx44Snapshot & 0xfffddfff,0,
-                           ctx44Snapshot);
+              arbfpUpdateStateForProgram(glContext);
               ctx44Snapshot = *(char **)(glContext + 0x44);
             }
             glContextPtr1144 = *(int *)(((unsigned char *)0x00001144) + (int)glContext);
@@ -1679,8 +1671,7 @@ setDirtyBits0x7000000:
           *(uint *)(glContext + 0x1874) = stateWord1874 | 0x4000;
           *(char **)(glContext + 0x44) = dirtyWord1;
           *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x80000000;
-          fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1,dirtyBits0x7000000,
-                                          ctx44Snapshot);
+          fpPassThrough1 = arbfpUpdateStateForProgram(glContext);
           staleR4Chain = r4AfterCall5;
         }
         glContext[0x2475] = '\x01';
@@ -1692,8 +1683,7 @@ loopSetZeroFlagA:
         zeroFlagA = 0;
       }
       else {
-        glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyBits0x4400000,dirtyWord1
-                              ,dirtyBits0x7000000);
+        glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0));
         staleR4Chain = r4AfterCall6;
         fpPassThrough1 = f1AfterCall2;
         if (glContextPtr4 != 0) {
@@ -2222,7 +2212,7 @@ setDirtyBitsWord4:
         }
         dirtyWord3 = dirtyBitsWord0 & 0x1c000;
         if (dirtyWord3 != 0) {
-          fpPassThrough1 = ((int (*)())gld_updateProgramFlags)(glContext,engineState,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,engineWord3e28);
+          fpPassThrough1 = ((int (*)())gld_updateProgramFlags)(glContext,engineState);
           staleR4Chain = r4AfterCall14;
         }
         if ((dirtyBitsWord0 & 0x20000) != 0) {
@@ -2240,7 +2230,7 @@ setDirtyBitsWord4:
       }
     }
     if (*(char *)(glContextPtr4_2 + 0x26b5) != '\0') {
-      gld_updateTexCombinerState(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyWord3,dirtyWord1,engineWord3e28,dirtyWord4);
+      gld_updateTexCombinerState(glContext);
       *(undefined1 *)(glContextPtr4_2 + 0x26b5) = 0;
     }
     if ((((dirtyBitsWord0 & 0x401800) == 0 && (dirtyBitsWord4 & 0xffffff) == 0) && ((uint)dirtyBitsWord8 & 0x3fff0008) == 0
@@ -2406,8 +2396,7 @@ setDirtyBitsArg:
         engineWord3e28 = ctx44WordB & 0xfffddfff;
         *(uint *)(glContext + 0x44) = engineWord3e28;
         *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xffffbfff;
-        fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,dirtyHighMask,ctx44WordB
-                                       );
+        fpPassThrough1 = arbfpUpdateStateForProgram(glContext);
       }
     }
     else if (dirtyHighMask == (undefined *)0x0) {
@@ -2415,7 +2404,7 @@ setDirtyBitsArg:
         if (ctx44Bit13B != 0) {
           *(uint *)(glContext + 0x44) = ctx44WordB & 0xfffddfff;
           *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xffffbfff;
-          arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyKeepAny,ctx44WordB & 0xfffddfff,0,ctx44WordB);
+          arbfpUpdateStateForProgram(glContext);
           ctx44WordB = *(uint *)(glContext + 0x44);
         }
         glContextPtr1144 = *(int *)(((unsigned char *)0x00001144) + (int)glContext);
@@ -2458,7 +2447,7 @@ setDirtyBitsArg:
       *(uint *)(glContext + 0x1874) = stateWord1874B | 0x4000;
       *(undefined **)(glContext + 0x44) = dirtyHighMask;
       *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) | 0x80000000;
-      fpPassThrough1 = arbfpUpdateStateForProgram(glContext,staleR4Chain,dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,dirtyHighMask,ctx44WordB);
+      fpPassThrough1 = arbfpUpdateStateForProgram(glContext);
     }
     glContext[0x2475] = '\x01';
   }
@@ -2469,8 +2458,7 @@ loopSetZeroFlagB:
     zeroFlagB = 0;
   }
   else {
-    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0),dirtyBitsArg,scratchR6,dirtyKeepAny,engineWord3e28,
-                          dirtyHighMask);
+    glContextPtr4 = gld_needsMultisampleResolve(glContextPtr4,*(undefined4 *)(glContextPtr4 + 0x26a0));
     fpPassThrough1 = f1AfterCall3;
     if (glContextPtr4 != 0) {
       glContextPtr4 = *(int *)(glContext + 4);
@@ -2646,8 +2634,7 @@ checkDirtyKeepSelected:
         glContext[0x29] = '\x01';
       }
       if ((dirtyBitsWord0 & 0x1c000) != 0) {
-        fpPassThrough1 = ((int (*)())gld_updateProgramFlags)(glContext,engineState,dirtyBitsArg,scratchR6,dirtyBitsWord0 & 0x1c000,dirtyScissorBits,
-                                        dirtyBits0x8000000);
+        fpPassThrough1 = ((int (*)())gld_updateProgramFlags)(glContext,engineState);
       }
       if ((dirtyBitsWord0 & 0x20000) != 0) {
         glContext[0x29] = '\x01';

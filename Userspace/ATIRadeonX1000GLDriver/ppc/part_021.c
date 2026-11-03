@@ -354,14 +354,8 @@ int Compiler__setHardwareFamily(compiler, chipFamily)
 }
 
 /* Program__forwardMulOperandToUsers @ 0xe1c50 (916 bytes) */
-int Program__forwardMulOperandToUsers(program, passThroughR4, unusedArg3, argR6, unusedArg5, unusedArg6, unusedArg7)
+int Program__forwardMulOperandToUsers(program)
   int program;
-  undefined4 passThroughR4;
-  undefined4 unusedArg3;
-  undefined4 argR6;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int *userSlot;
   int *replacementSource;
@@ -626,7 +620,7 @@ int Compiler__compileStages(compiler, compileRequest)
     }
     deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
     if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
-      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,compilerArg,argR6,staleArgR7,staleArgR8,sourceTable);
+      ((int (*)())Program__forwardMulOperandToUsers)(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) = *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80
     ;
@@ -1263,14 +1257,11 @@ int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
 }
 
 /* MachineAssembler__visitIfHeaderStatic @ 0xe3140 (260 bytes) */
-int MachineAssembler__visitIfHeaderStatic(this, block, headerBlock, compiler, unusedArg5, unusedArg6, unusedArg7)
+int MachineAssembler__visitIfHeaderStatic(this, block, headerBlock, compiler)
   int *this;
   int block;
   undefined4 headerBlock;
   int compiler;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   undefined4 emittedBranch;
   undefined4 sourceDef;
@@ -1282,7 +1273,7 @@ int MachineAssembler__visitIfHeaderStatic(this, block, headerBlock, compiler, un
   uint stackSize;
   uint *resultStack;
   
-  branchInst = Block__getBranchInst(block,block,headerBlock,compiler,unusedArg5,unusedArg6,unusedArg7);
+  branchInst = Block__getBranchInst(block);
   currentProgram = *(undefined4 *)(compiler + 0x6c4);
   branchFlag = *(int *)(branchInst + 300);
   sourceDef = IRInst__getOperandSource(branchInst,1);
@@ -1574,7 +1565,7 @@ int MachineCodeWriter__encodeProgram(writer, outBuffer, outSize)
       ((int (*)())MachineCodeWriter__encodeProgram)(writer,outBuffer,outSize);
       ((int (*)())EncoderState__sinkIsOverflowed)(auStack_74);
       Compiler__logf(writer[2],"Compression : size reduced from %d to %d  (%%%d)\n",sizeBeforeCompression,
-                   writer[1],(int)((sizeBeforeCompression - writer[1]) * 100) / (int)sizeBeforeCompression,staleArgR8,staleArgR9,staleArgR10);
+                   writer[1],(int)((sizeBeforeCompression - writer[1]) * 100) / (int)sizeBeforeCompression);
       goto returnEncoderState__destroy_e3308;
     }
 callCompiler_fail:

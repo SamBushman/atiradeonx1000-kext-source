@@ -380,7 +380,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       return existingConstant;
     }
     constantPool = *(undefined4 *)(program + 0x3ac);
-    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,staleArg5,isUniform,constantCursor);
+    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle);
     if (foundConstant != 0) {
       return foundConstant;
     }
@@ -391,7 +391,7 @@ int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       foundExact = Compiler__getOrCreateLoadConst4(constantPool,*(ConstOps4 *)&constVec[constVec0_IDX]);
       return foundExact;
     }
-    candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle,laneSwizzleArg);
+    candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle);
     if ((candidate != 0) && (acceptsSwizzle = (**(code **)(*this + 0x100))(this,laneSwizzle), acceptsSwizzle != 0)) {
       return candidate;
     }
@@ -605,14 +605,10 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
 }
 
 /* KhanPs__vslot75_registerConstantMultiples @ 0x128d7c (596 bytes) */
-int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler)
   undefined4 this;
   float *constRecord;
   undefined4 compiler;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   bool moreMultiples;
   int exprRecord2;
@@ -1489,11 +1485,11 @@ int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       return existingConstant;
     }
     constantPool = *(undefined4 *)(program + 0x3ac);
-    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle,laneSwizzleArg,staleArg5,isUniform,constantCursor);
+    foundConstant = RegisterMap__findConstVectorExact(constantPool,constants,laneSwizzle);
     if (foundConstant != 0) {
       return foundConstant;
     }
-    candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle,laneSwizzleArg);
+    candidate = RegisterMap__findConstVector(constantPool,constants,laneSwizzle);
     if (candidate != 0) {
       return candidate;
     }
@@ -1672,14 +1668,10 @@ int KhanVs__vslot89_assignLoadBindings(this, program)
 }
 
 /* KhanVs__vslot75_registerConstantMultiples @ 0x12a3c0 (248 bytes) */
-int KhanVs__vslot75_registerConstantMultiples(this, constRecord, compiler, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int KhanVs__vslot75_registerConstantMultiples(this, constRecord, compiler)
   undefined4 this;
   int constRecord;
   undefined4 compiler;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   undefined4 recordValueBits;
   byte kindFlags;
@@ -1993,7 +1985,7 @@ int IfHeader__swapArms(program, ifHeader)
   *(undefined4 *)(ifHeader + 0x138) = branchInst;
   DList__unlink(branchInst);
   DList__insertBefore(branchInst,*(undefined4 *)(ifHeader + 0x13c));
-  branchInst = Block__getBranchInst(ifHeader,unusedArg2,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7);
+  branchInst = Block__getBranchInst(ifHeader);
   condition = IRInst__getCompareCondition(branchInst);
   IRInst__setCompareCondition(branchInst,*(undefined4 *)(ptrTo_compareConditionInvertTable_001e912c + condition * 4));
   return ifHeader;
@@ -2065,14 +2057,8 @@ int Block__footerTargetOrSelf(block)
 }
 
 /* Block__hasInstWithQuery28 @ 0x12ae6c (132 bytes) */
-int Block__hasInstWithQuery28(block, optionResult, armLimitKind, staleArg4, staleArg5, staleArg6, staleArg7)
+int Block__hasInstWithQuery28(block)
   int block;
-  undefined4 optionResult;
-  undefined4 armLimitKind;
-  undefined4 staleArg4;
-  undefined4 staleArg5;
-  undefined4 staleArg6;
-  undefined4 staleArg7;
 {
   int *inst;
   int *nextInstLink;

@@ -3523,15 +3523,12 @@ int Compiler__applyRequestFlags(compiler, requestFlags)
 }
 
 /* Compiler__logf @ 0xe0e0c (28 bytes) */
-int Compiler__logf(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int Compiler__logf(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5)
   undefined4 unusedArg1;
   undefined4 unusedArg2;
   undefined4 unusedArg3;
   undefined4 unusedArg4;
   undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   return;
 }
@@ -3564,15 +3561,8 @@ int noop_e0e9c()
 }
 
 /* noop_e0ea0 @ 0xe0ea0 (28 bytes) */
-int noop_e0ea0(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int noop_e0ea0(unusedArg1)
   undefined4 unusedArg1;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   return;
 }
@@ -3793,15 +3783,8 @@ int noop_e1388()
 }
 
 /* noop_e138c @ 0xe138c (28 bytes) */
-int noop_e138c(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int noop_e138c(unusedArg1)
   undefined4 unusedArg1;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   return;
 }

@@ -1226,15 +1226,9 @@ int _gldDestroyPixelFormat(pixelFormat)
 }
 
 /* _gldGetRendererInfo @ 0x8a50 (500 bytes) */
-int _gldGetRendererInfo(rendererInfo, rendererMask, unused3, unused4, unused5, unused6, unused7, unused8)
+int _gldGetRendererInfo(rendererInfo, rendererMask)
   undefined4 *rendererInfo;
   uint rendererMask;
-  undefined4 unused3;
-  undefined4 unused4;
-  undefined4 unused5;
-  undefined4 unused6;
-  undefined4 unused7;
-  undefined4 unused8;
 {
   undefined4 returnCode;
   uint rendererBitIndex;
@@ -2166,13 +2160,10 @@ int gld_decodeProgramOperandOffset_frag_00009810(operandWord, staleArgR4, offset
 }
 
 /* gld_decodeProgramOperandOffset_frag_00009880 @ 0x9880 (48 bytes) */
-int gld_decodeProgramOperandOffset_frag_00009880(operandWord, staleArgR4, offsetOut, byteSizeOut, staleArgR7, staleArgR8)
+int gld_decodeProgramOperandOffset_frag_00009880(operandWord, staleArgR4, offsetOut)
   undefined4 operandWord;
   undefined4 staleArgR4;
   int *offsetOut;
-  undefined4 byteSizeOut;
-  undefined4 staleArgR7;
-  int staleArgR8;
 {
   uint operandWordReg;
   
@@ -2446,14 +2437,8 @@ int gld_bitsFromRenderFlags(renderFlags)
 }
 
 /* gldFormatAlphaBits @ 0xa120 (92 bytes) */
-int gldFormatAlphaBits(formatMask, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int gldFormatAlphaBits(formatMask)
   uint formatMask;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   if ((formatMask & 0x400) != 0) {
     return 1;
@@ -2477,14 +2462,9 @@ int gldFormatAlphaBits(formatMask, unusedArg2, unusedArg3, unusedArg4, unusedArg
 }
 
 /* gld_channelBitsForFormat @ 0xa180 (344 bytes) */
-int gld_channelBitsForFormat(formatWord, bitsOut, staleArgR5, staleArgR6, staleArgR7, staleArgR8, staleArgR9)
+int gld_channelBitsForFormat(formatWord, bitsOut)
   uint formatWord;
   undefined2 *bitsOut;
-  undefined4 staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
-  undefined4 staleArgR8;
-  undefined4 staleArgR9;
 {
   undefined2 alphaBits;
   
@@ -2555,7 +2535,7 @@ int gld_channelBitsForFormat(formatWord, bitsOut, staleArgR5, staleArgR6, staleA
     bitsOut[2] = 2;
     *bitsOut = 3;
   }
-  alphaBits = ((int (*)())gldFormatAlphaBits)(formatWord,bitsOut,staleArgR5,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+  alphaBits = ((int (*)())gldFormatAlphaBits)(formatWord);
   bitsOut[3] = alphaBits;
   return 1;
 }

@@ -296,10 +296,9 @@ checkArgCount:
 }
 
 /* atifsReplayProgram @ 0x3eb70 (296 bytes) */
-int atifsReplayProgram(ctx, shader, unusedArg3)
+int atifsReplayProgram(ctx, shader)
   int ctx;
   uint *shader;
-  undefined4 unusedArg3;
 {
   ushort constDataBaseWords;
   uint constWord;
@@ -325,10 +324,10 @@ int atifsReplayProgram(ctx, shader, unusedArg3)
       loopIndex = loopIndex + 1;
     } while (constCount != loopIndex);
   }
-  ((int (*)())atifsReplayTextureOps)(ctx,unusedArg3,shader[1] >> 0x10 & 0xff,shader + (shader[1] & 0xffff));
-  ((int (*)())atifsReplayColorAlphaOps)(ctx,unusedArg3,shader[2] >> 0x10 & 0xff,shader + (shader[2] & 0xffff));
-  ((int (*)())atifsReplayTextureOps)(ctx,unusedArg3,shader[3] >> 0x10 & 0xff,shader + (shader[3] & 0xffff));
-  ((int (*)())atifsReplayColorAlphaOps)(ctx,unusedArg3,shader[4] >> 0x10 & 0xff,shader + (shader[4] & 0xffff));
+  ((int (*)())atifsReplayTextureOps)(ctx,0,shader[1] >> 0x10 & 0xff,shader + (shader[1] & 0xffff));
+  ((int (*)())atifsReplayColorAlphaOps)(ctx,0,shader[2] >> 0x10 & 0xff,shader + (shader[2] & 0xffff));
+  ((int (*)())atifsReplayTextureOps)(ctx,0,shader[3] >> 0x10 & 0xff,shader + (shader[3] & 0xffff));
+  ((int (*)())atifsReplayColorAlphaOps)(ctx,0,shader[4] >> 0x10 & 0xff,shader + (shader[4] & 0xffff));
   glEndFragmentShaderATI_impl(ctx);
   compiledProgram = gld_getFragmentShaderKind(ctx);
   *(undefined4 *)(ctx + 0x27b8) = compiledProgram;
@@ -336,14 +335,8 @@ int atifsReplayProgram(ctx, shader, unusedArg3)
 }
 
 /* fpilEmitAngleConstants @ 0x3eca0 (164 bytes) */
-int fpilEmitAngleConstants(emitter, opRecordOffset, entryHeader, srcRegWord1, unusedArg5, unusedArg6, unusedArg7)
+int fpilEmitAngleConstants(emitter)
   int *emitter;
-  undefined4 opRecordOffset;
-  undefined4 entryHeader;
-  undefined4 srcRegWord1;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   float angleConst0;
   float angleConst1;
@@ -1664,15 +1657,10 @@ setTempRegister:
 }
 
 /* fragmentTranslateScalarMathBody @ 0x40374 (1800 bytes) */
-int fragmentTranslateScalarMathBody(translator, slot, ilInstr, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int fragmentTranslateScalarMathBody(translator, slot, ilInstr)
   int *translator;
   int slot;
   undefined4 *ilInstr;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   uint negate3;
   uint negate2;
@@ -1951,15 +1939,10 @@ setTempRegister:
 }
 
 /* fragmentTranslateScalarMath2Src @ 0x40ac4 (2096 bytes) */
-int fragmentTranslateScalarMath2Src(translator, slot, ilInstr, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int fragmentTranslateScalarMath2Src(translator, slot, ilInstr)
   int *translator;
   int slot;
   undefined4 *ilInstr;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   uint src1SelectComp3;
   uint src1NegateComp3;
@@ -2397,14 +2380,10 @@ storeTranslator:
 #undef ilInstSwz0
 
 /* fragmentTranslateAngleConvert @ 0x41510 (548 bytes) */
-int fragmentTranslateAngleConvert(emitter, slot, entryHeader, srcRegWord1, unusedArg5, unusedArg6, unusedArg7)
+int fragmentTranslateAngleConvert(emitter, slot, entryHeader)
   int *emitter;
   int slot;
   undefined4 *entryHeader;
-  undefined4 srcRegWord1;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   uint tokenCapacity;
   int translatorError;
@@ -2423,7 +2402,7 @@ int fragmentTranslateAngleConvert(emitter, slot, entryHeader, srcRegWord1, unuse
   
   opRecordOffset = (slot + *(int *)(*emitter + 0x54)) * 8;
   opWord = *(uint *)(opRecordOffset + *emitter);
-  ((int (*)())fpilEmitAngleConstants)(emitter,opRecordOffset,entryHeader,srcRegWord1,unusedArg5,unusedArg6,unusedArg7);
+  ((int (*)())fpilEmitAngleConstants)(emitter);
   tempRegister = *(undefined4 *)(*emitter + 0x28);
   entryHeader[7] = 0;
   entryHeader[4] = 0x10000;
@@ -3004,7 +2983,7 @@ setRecordPtr4:
   emitter[8] = emitter[8] + -3;
   _memset(&entryHeader,0,0x24);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
-  ((int (*)())fpilEmitAngleConstants)(emitter,retR4a,staleArgR4,srcRegWord1,ilInstASrc0OrStaleR7,srcCursorOrStaleR8,dstMaskOrStaleR9);
+  ((int (*)())fpilEmitAngleConstants)(emitter);
   tempRegisterHalf = (short)emitter[8];
   ilInstASrc[1] = (undefined *)CONCAT22(4,tempRegisterHalf + 1);
   ilInstADst = CONCAT22(4,tempRegisterHalf + 2);
@@ -3136,7 +3115,7 @@ setEntryHeader:
 setEntryHeader2:
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
   entryHeader = entryHeader & 0xc000ffff;
-  ((int (*)())fpilEmitAngleConstants)(emitter,staleArgR4,entryHeader,dstMaskOrStaleR9,ilInstASrc0OrStaleR7,swzCursorOrStaleR8,tokenCountOrWritePtr);
+  ((int (*)())fpilEmitAngleConstants)(emitter);
   tempRegisterHalf = (short)emitter[8];
   ilInstASrc[0] = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
   ilInstADst = CONCAT22(4,tempRegisterHalf + 2);
@@ -5880,15 +5859,8 @@ loopCheckTranslator2:
 #undef ilInstASwz1
 
 /* fragmentInstructionToIL @ 0x46e90 (7800 bytes) */
-int fragmentInstructionToIL(translator, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int fragmentInstructionToIL(translator)
   int *translator;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   int maxRegSpan;
   int regSpan;
@@ -7390,7 +7362,7 @@ checkTranslatorError3:
   if (translatorError3 != 0) {
     return translatorError3;
   }
-  tokenCount = ((int (*)())fragmentInstructionToIL)(translator,staleArgR4,hasAttribKind5,zeroArg,tokenWritePtr,tokenCount,paramKind,tokenWritePtr2);
+  tokenCount = ((int (*)())fragmentInstructionToIL)(translator);
   if (tokenCount != 0) goto returnTranslator;
   programObj2 = *translator;
   outputCount = *(uint *)(programObj2 + 0x30);
@@ -7951,14 +7923,8 @@ double fp24ToFloat(uint fp24Bits)
 }
 
 /* gldReselectProgramStream @ 0x4a860 (112 bytes) */
-int gldReselectProgramStream(glContext, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int gldReselectProgramStream(glContext)
   int glContext;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   char selectedByteFlag;
   

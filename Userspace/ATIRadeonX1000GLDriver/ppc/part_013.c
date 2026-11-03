@@ -713,10 +713,9 @@ int arbParseComponentToken(parser)
 }
 
 /* arbParseSourceRegister @ 0x8b160 (864 bytes) */
-int arbParseSourceRegister(parser, operand, unused)
+int arbParseSourceRegister(parser, operand)
   int parser;
   int *operand;
-  undefined4 unused;
 {
   int variable;
   int variableKind;
@@ -1012,7 +1011,7 @@ int arbParseSwizzleSuffix(parser, operand)
   else {
     *(undefined1 *)(operand + 0x14) = 0;
   }
-  ((int (*)())arbParseSourceRegister)(parser,operand,staleArgR5);
+  ((int (*)())arbParseSourceRegister)(parser,operand);
   if (*(int *)(parser + 0x14) != 0x11) {
     *(undefined4 *)(operand + 4) = 0;
     *(undefined4 *)(operand + 0x10) = 3;
@@ -1079,7 +1078,7 @@ int arbfpParseScalarSourceOperand(parser, operand)
   else {
     *(undefined1 *)(operand + 0x14) = 0;
   }
-  ((int (*)())arbParseSourceRegister)(parser,operand,staleArgR5);
+  ((int (*)())arbParseSourceRegister)(parser,operand);
   arbExpectToken(parser,0x11);
   componentIndex = ((int (*)())arbParseComponentToken)(parser);
   *(undefined4 *)(operand + 0x10) = componentIndex;
@@ -1208,7 +1207,7 @@ loopCheckTokenKind:
                               arbNextToken(parser);
                               ((int (*)())arbParseDestRegister)(parser,instructionRecord + 1);
                               arbExpectToken(parser,0x13);
-                              ((int (*)())arbParseSourceRegister)(parser,instructionRecord + 3,passThroughR5);
+                              ((int (*)())arbParseSourceRegister)(parser,instructionRecord + 3);
                               arbExpectToken(parser,0x13);
                               selectorSign[0] = 0xffffffff;
                               value = ((int (*)())arbParseExtendedSwizzleSelector)(parser,selectorSign);
@@ -2212,15 +2211,8 @@ storeX00001124:
 }
 
 /* arbfpUpdateStateForProgram @ 0x8d470 (1744 bytes) */
-int arbfpUpdateStateForProgram(context, passThroughArg2, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6, passThroughArg7, passThroughArg8)
+int arbfpUpdateStateForProgram(context)
   int context;
-  undefined4 passThroughArg2;
-  undefined4 passThroughArg3;
-  undefined4 passThroughArg4;
-  undefined4 passThroughArg5;
-  undefined4 passThroughArg6;
-  undefined4 passThroughArg7;
-  undefined4 passThroughArg8;
 {
   uint stateWord48Masked;
   uint clearedFlags;
@@ -2554,15 +2546,9 @@ storeContext4:
 }
 
 /* arbfpBindProgram @ 0x8dbd0 (100 bytes) */
-int arbfpBindProgram(context, programSlot, passThroughArg3, passThroughArg4, passThroughArg5, passThroughArg6, passThroughArg7, passThroughArg8)
+int arbfpBindProgram(context, programSlot)
   int context;
   int programSlot;
-  undefined4 passThroughArg3;
-  undefined4 passThroughArg4;
-  undefined4 passThroughArg5;
-  undefined4 passThroughArg6;
-  undefined4 passThroughArg7;
-  undefined4 passThroughArg8;
 {
   undefined4 programObject;
   
@@ -2571,7 +2557,7 @@ int arbfpBindProgram(context, programSlot, passThroughArg3, passThroughArg4, pas
     programObject = *(undefined4 *)(programSlot * 0x18 + *(int *)(*(int *)(((unsigned char *)0x0000112c) + context) + 8) + 0x14)
     ;
     *(undefined4 *)(((unsigned char *)0x0000121c) + context) = programObject;
-    ((int (*)())arbfpUpdateStateForProgram)(context,programSlot,passThroughArg3,passThroughArg4,passThroughArg5,passThroughArg6,programObject,passThroughArg8);
+    ((int (*)())arbfpUpdateStateForProgram)(context);
     ((unsigned char *)0x000011d0)[context] = 1;
   }
   return;
@@ -2845,7 +2831,7 @@ int arbfpProgramString(context, format, length, text)
           savedWord58 = savedWord58 + 4;
         } while (newProgram < (int)(uint)*(byte *)((int)context + 0x13b1));
       }
-      ((int (*)())arbfpUpdateStateForProgram)(context,staleArgR4,savedWord70,savedByte6c,savedWord68,savedWord64,savedWord58,savedWord60);
+      ((int (*)())arbfpUpdateStateForProgram)(context);
       *(undefined1 *)(context + 0x474) = 1;
     }
   }
@@ -3790,7 +3776,7 @@ int gldDrawInternalRect(ctx, unusedArg2, passThroughArg3, rect, passThroughArg5)
   packet[0xf] = *(undefined4 *)(ctx + 0x1ccc);
   *(undefined4 **)(0x00002748 + ctx + 4) = a1_00;
   (**(code **)(ctx + 0x275c))(ctx,a1_00,packet,a3_00,((unsigned char *)0x00001087U),a1_00,a6,0xc0083500);
-  gldValidateVertexProgramState(ctx,staleArgR4,packet,a3_00,stageArgB,a1_00,a6);
+  gldValidateVertexProgramState(ctx);
   gldLeaveInternalDrawState(ctx,savedDrawState);
   if (recordCommands) {
     *(int *)(a1 + 4) = *(int *)(0x00002748 + ctx + 4) - recordBase >> 2;
@@ -4153,7 +4139,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
   }
   dirtyMask2 = *(uint *)(glContext + 0x1808) & 0x20000000;
   if (dirtyMask2 != 0) {
-    forwardedFloatArg1 = (double)gld_buildSmoothPointMask(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5);
+    forwardedFloatArg1 = (double)gld_buildSmoothPointMask(glContext,forwardedArg2,forwardedArg3);
     forwardedArg2 = calleeStaleR4;
   }
   dirtyMask = *(uint *)(glContext + 0x38);
@@ -4164,7 +4150,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = calleeStaleR4_00;
     }
     if ((dirtyMask & 2) != 0) {
-      forwardedFloatArg1 = (double)gldValidatePolygonOffset(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6,dirtyMask2);
+      forwardedFloatArg1 = (double)gldValidatePolygonOffset(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = calleeStaleR4_01;
     }
@@ -4180,7 +4166,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
     }
     if ((dirtyMask & 0x100) != 0) {
       ((void (*)())gldValidateFog)(glContext,forwardedArg2,forwardedArg3,forwardedArg4);
-      forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext,calleeStaleR4_04,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
+      forwardedFloatArg1 = (double)ffvpBuildFogKey(glContext);
       dirtyMask = *(uint *)(glContext + 0x38);
       forwardedArg2 = calleeStaleR4_05;
     }
@@ -4212,7 +4198,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       }
       if ((dirtyMask & 0x1000) != 0) {
         if (*(char *)(glContext + 0x1868) == '\0') {
-          extvsValidateProgramState(glContext,forwardedArg2);
+          extvsValidateProgramState(glContext);
           forwardedArg2 = calleeStaleR4_12;
         }
         else {
@@ -4254,7 +4240,7 @@ void gldValidateState(int glContext,undefined4 forwardedArg2,undefined4 forwarde
       forwardedArg2 = calleeStaleR4_18;
     }
     if ((dirtyMask2 & 0x40) != 0) {
-      gldValidateColorMask(glContext,forwardedArg2,forwardedArg3,forwardedArg4,forwardedArg5,forwardedArg6);
+      gldValidateColorMask(glContext);
       dirtyMask2 = *(uint *)(glContext + 0x3c);
     }
     if ((dirtyMask2 & 0x400) != 0) {
@@ -4808,15 +4794,8 @@ int ffvpResolveFixedSource(programBuilder, sourceKind, fileOut, regOut, selectOu
 }
 
 /* noop_914c0 @ 0x914c0 (28 bytes) */
-int noop_914c0(unusedArg1, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7, unusedArg8)
+int noop_914c0(unusedArg1)
   undefined4 unusedArg1;
-  undefined4 unusedArg2;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
-  undefined4 unusedArg8;
 {
   return;
 }
@@ -5687,14 +5666,9 @@ int ffvpEmitColorPassThrough(programBuilder, colorKind, inputAttrib, sideIndex)
 }
 
 /* ffvpEmitTexCoordPassThrough @ 0x93000 (288 bytes) */
-int ffvpEmitTexCoordPassThrough(programBuilder, texUnit, useXyz1Select, texUnitAlias, texMatrixEnabled, texMatrixUnit, texGenModes)
+int ffvpEmitTexCoordPassThrough(programBuilder, texUnit)
   int programBuilder;
   uint texUnit;
-  undefined4 useXyz1Select;
-  undefined4 texUnitAlias;
-  undefined4 texMatrixEnabled;
-  undefined4 texMatrixUnit;
-  undefined4 texGenModes;
 {
   bool noInvW;
   int texInputReg;

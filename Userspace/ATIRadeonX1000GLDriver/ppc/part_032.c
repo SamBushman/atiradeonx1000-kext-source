@@ -2780,14 +2780,9 @@ int OpcodeSetup__mode2(setup, inst)
 }
 
 /* OpcodeTraits__instFlagBit2_113734 @ 0x113734 (104 bytes) */
-int OpcodeTraits__instFlagBit2_113734(compiler, inst, unusedArg3, destDescriptor, unusedArg5, foldedResult, unusedArg7)
+int OpcodeTraits__instFlagBit2_113734(compiler, inst)
   int compiler;
   int inst;
-  undefined4 unusedArg3;
-  undefined4 destDescriptor;
-  undefined4 unusedArg5;
-  undefined4 foldedResult;
-  undefined4 unusedArg7;
 {
   uint flagBit2;
   int *targetObject;

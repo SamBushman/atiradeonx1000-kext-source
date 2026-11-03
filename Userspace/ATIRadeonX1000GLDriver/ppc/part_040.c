@@ -139,14 +139,9 @@ int Block__bridgePredecessorToSuccessor(block)
 }
 
 /* LoopInfo__convertToHardwareLoop @ 0x12b6a8 (224 bytes) */
-int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight, passThroughR5, passThroughR6, passThroughR7, passThroughR8, passThroughR9)
+int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight)
   int *loopInfo;
   int boundOnRight;
-  undefined4 passThroughR5;
-  undefined4 passThroughR6;
-  undefined4 passThroughR7;
-  undefined4 passThroughR8;
-  undefined4 passThroughR9;
 {
   int predecessorByteOffset;
   undefined4 staleArg4B;
@@ -172,7 +167,7 @@ int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight, passThroughR5, passT
   int inputBase;
   undefined8 predecessor;
   
-  constRegister = Emitter__allocateConstantSlot(*(undefined4 *)(loopInfo[0x10] + 0x3ac),3,1,passThroughR6,passThroughR7,passThroughR8,passThroughR9);
+  constRegister = Emitter__allocateConstantSlot(*(undefined4 *)(loopInfo[0x10] + 0x3ac),3,1);
   if (constRegister < 0) {
 loopSetConversionResult:
     conversionResult = 0;
@@ -278,7 +273,7 @@ loopSetConversionResult:
       (**(code **)(*(int *)loopInfo[0xc] + 0xc))((int *)loopInfo[0xc],0);
       staleArg4A = staleArg4E;
     }
-    callResult = (int *)Block__getBranchInst(loopInfo[10],staleArg4A,constInst,staleArg5,oldSource,passThroughR8,predecessorNumber);
+    callResult = (int *)Block__getBranchInst(loopInfo[10]);
     if (callResult != (int *)0x0) {
       (**(code **)(*callResult + 0xc))(callResult,0,*(undefined4 *)(loopInfo[0x10] + 8));
       *(undefined4 *)(loopInfo[10] + 0x130) = 0;
@@ -364,9 +359,9 @@ int Program__collapseIfRegion(pass, block)
   if ((block[3] & 0x400U) == 0) {
     thenBlock = block[0x4d];
     elseBlock = block[0x4e];
-    branchInst2 = Block__getBranchInst(block,staleArg4A,staleArg5,staleArg6,staleArg7,staleArg8,a6);
+    branchInst2 = Block__getBranchInst(block);
     if (((((((int)((ulonglong)branchInst2 >> 0x20) != 0) &&
-           (footerBlock = Block__getBranchInst(block,(int)branchInst2,staleArg5,staleArg6,staleArg7,staleArg8,a6),
+           (footerBlock = Block__getBranchInst(block),
            *(int *)(*(int *)(footerBlock + 0x88) + 8) == 0x8b)) &&
           (footerBlock = IfHeader__armsAreSimple(block), footerBlock != 0)) &&
          ((footerBlock = block[0x4f], block[0x43] == 0 && (block[0x44] == 0)))) &&
@@ -386,7 +381,7 @@ int Program__collapseIfRegion(pass, block)
       Program__insertBlockBefore(pass,block,mergedBlock);
       mergedBlockArg = mergedBlock;
       Block__replaceRegionEdges(block,footerBlock,mergedBlock);
-      branchInst = Block__getBranchInst(block,staleArg4B,mergedBlockArg,staleArg6,staleArg7,staleArg8,a6);
+      branchInst = Block__getBranchInst(block);
       block[0x4c] = 0;
       branchInstFlags = *(uint *)(branchInst + 0x14);
       *(undefined4 *)(branchInst + 0x80) = 1;
@@ -511,14 +506,10 @@ int Program__hasKillTexture(program)
 }
 
 /* FudoPs__vslot69_shouldFlattenIf @ 0x12c134 (424 bytes) */
-int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, staleArg5, staleArg6, staleArg7)
+int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource)
   undefined4 this;
   int ifHeader;
   undefined4 optionSource;
-  undefined4 staleArg4;
-  undefined4 staleArg5;
-  undefined4 staleArg6;
-  undefined4 staleArg7;
 {
   int elseNotFlattenable;
   int thenHasKillTexture;
@@ -544,11 +535,11 @@ int FudoPs__vslot69_shouldFlattenIf(this, ifHeader, optionSource, staleArg4, sta
       optionResult = Compiler__isCurrentHandle(optionSource,0,3);
       if ((int)((ulonglong)optionResult >> 0x20) == 0) {
         if ((*(uint *)(ifHeader + 0xc) & 0x800) == 0) {
-          optionResult = Block__hasInstWithQuery28(thenBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
+          optionResult = Block__hasInstWithQuery28(thenBlock);
           if ((int)((ulonglong)optionResult >> 0x20) != 0) {
             return 0;
           }
-          elseNotFlattenable = Block__hasInstWithQuery28(elseBlock,(int)optionResult,armLimitKind,staleArg4,staleArg5,staleArg6,staleArg7);
+          elseNotFlattenable = Block__hasInstWithQuery28(elseBlock);
           if (elseNotFlattenable != 0) {
             return 0;
           }
@@ -611,7 +602,7 @@ int Program__isTrivialBranchRegion(program, block)
       if (successorInstCount != 0) {
         successor3 = Block__getSuccessor(successor,0);
         successorBlock = (int)((ulonglong)successor3 >> 0x20);
-        branchInst = Block__getBranchInst(successorBlock,(int)successor3,staleArg5,staleArg6,staleArg7,staleArg8,staleArg9);
+        branchInst = Block__getBranchInst(successorBlock);
         if ((((*(uint *)(program + 0x30) & 8) == 0) && (*(int *)(branchInst + 0x84) == 2)) &&
            (*(int *)(branchInst + 0xa4) == *(int *)(branchInst + 0xbc))) {
           successor2 = (int *)Block__getSuccessor(*(undefined4 *)(successorBlock + 0x134),0);
@@ -896,7 +887,7 @@ int LoopInfo__matchExit(loopInfo, inst, branchHeader, outBoundOnRight)
       laneSwizzleBytes[2] = 4;
       laneSwizzleBytes[3] = 4;
       laneSwizzleBytes[lane] = boundLaneSwizzle;
-      boundDefinition = (int *)RegisterMap__findConstVector(vregList,&constVectorWord,laneSwizzleBytes,staleOutFlagRef);
+      boundDefinition = (int *)RegisterMap__findConstVector(vregList,&constVectorWord,laneSwizzleBytes);
       *(uint *)(loopInfo + 0x14) = (uint)laneSwizzleBytes[*(int *)(loopInfo + 0x14)];
       if (boundDefinition == (int *)0x0) {
         return 0;
@@ -1065,7 +1056,7 @@ int pass_loop_trans(program)
                 else {
 setExitBlock:
                   exitBlock = exitCandidateBlock;
-                  staleArg4 = Block__getBranchInst(exitBlock,staleArg4,staleFooterArg,boundOnRightPtr,staleArg7,staleArg8,staleArg9);
+                  staleArg4 = Block__getBranchInst(exitBlock);
                   footerCursor = (int *)exitBlock[0x4f];
                   boundOnRightPtr = &boundOnRight;
                   boundOnRight = 0;
@@ -1092,7 +1083,7 @@ setExitBlock:
                         footerCursor = (int *)footerCursor[2];
                       } while (exitCandidateBlock != footerCursor);
                     }
-                    phiInst = ((int (*)())LoopInfo__convertToHardwareLoop)(loopInfo,boundOnRight,exitBlock,boundOnRightPtr,staleArg7,staleArg8,staleArg9);
+                    phiInst = ((int (*)())LoopInfo__convertToHardwareLoop)(loopInfo,boundOnRight);
                     changed = changed || phiInst != 0;
                     if (phiInst != 0) {
                       Program__beginPass(program,(int)"loop_trans");
@@ -1461,7 +1452,7 @@ int pass_flatten_ifs(flattenPass)
         *(int *)(thenBlock + 0xf0) = blockBeforeIf;
         *(int *)(elseBlock + 0xf0) = thenEndBlock;
         *(int *)(blockAfterIf + 0xf0) = elseEndBlock;
-        branchInst = (int *)Block__getBranchInst(ifHeader,(int)predElementRefPair,compiler,staleArg6,staleArg7,staleArg8,blockBeforeIfCopy);
+        branchInst = (int *)Block__getBranchInst(ifHeader);
         if (*(int *)(branchInst[0x22] + 8) == 0x8b) {
           isOperandConstZero = IRInst__isOperandConstZero(branchInst,2);
           if (isOperandConstZero == 0) {
@@ -1594,7 +1585,7 @@ int pass_flatten_ifs(flattenPass)
         releaseFn = *(code **)(*branchInst + 0xc);
         compilerArg = *(undefined4 *)(flattenPass + 8);
         (*releaseFn)(branchInst,*(uint *)(flattenPass + 0x30) >> 7 & 1,compilerArg);   /* r5 = flattenPass+8 (lwz 8(r22) at 0x12db30): removeFromListEx reads it as its compiler */
-        conditionHasNoUses = IRInst__hasNoUses(conditionSource,flattenPass,compilerArg,staleArg6,staleArg7,staleArg8,releaseFn);
+        conditionHasNoUses = IRInst__hasNoUses(conditionSource,flattenPass);
         if (conditionHasNoUses != 0) {
           (**(code **)(*conditionSource + 0xc))
                     (conditionSource,*(uint *)(flattenPass + 0x30) >> 7 & 1,*(undefined4 *)(flattenPass + 8));
@@ -1717,7 +1708,7 @@ int Program__detachRegion(program, currentBlock, regionEnd)
     }
     branchHeaderQuery = (**(code **)(*currentBlock + 0x24))(currentBlock);
     if (((int)((ulonglong)branchHeaderQuery >> 0x20) != 0) &&
-       (workSlotRef = (int *)Block__getBranchInst(currentBlock,(int)branchHeaderQuery,extraArg,staleArg6,staleArg7,staleArg8,visitStampOrCount),
+       (workSlotRef = (int *)Block__getBranchInst(currentBlock),
        workSlotRef != (int *)0x0)) {
       Program__removeInst(program,workSlotRef);
       extraArg = *(int *)(program + 8);
@@ -1888,7 +1879,7 @@ int Program__foldConstantIfRegion(program, ifHeader, ifFooter, outSurvivingEntry
     Block__detach(deadBlock);
     staleArg4c = staleArg4b;
   }
-  staleOutEntry = (int *)Block__getBranchInst(ifHeader,staleArg4c,staleArg5,staleOutEntry,staleArg7,staleArg8,compiler);
+  staleOutEntry = (int *)Block__getBranchInst(ifHeader);
   ifHeader[0x4c] = 0;
   Program__removeInst(program,staleOutEntry);
   (**(code **)(*staleOutEntry + 0xc))(staleOutEntry,0,*(undefined4 *)(program + PROG_compiler));
@@ -2635,8 +2626,7 @@ int Program__unrollLoop(pass, loopStack, block, lastBlockRef, newBlockOut, block
                       }
                       isIfHeader = (**(code **)(*origBlock + 0x24))(origBlock);
                       if (((int)((ulonglong)isIfHeader >> 0x20) != 0) &&
-                         (nextInstRef = (int *)Block__getBranchInst(origBlock,(int)isIfHeader,extraBranchArg,loopStepArg,blockArg,
-                                                        counterRefArg,instLinkedFlag), srcInst == nextInstRef)) {
+                         (nextInstRef = (int *)Block__getBranchInst(origBlock), srcInst == nextInstRef)) {
                         *(int *)(clonedBlock + 0x130) = cloneResult;
                       }
                       isLoopHeader = (**(code **)(*origBlock + 0x2c))(origBlock);
@@ -3094,7 +3084,7 @@ int pass_remove_empty_graphs(program)
           }
         }
         else {
-          successorOrNextBlock = (int *)Block__getBranchInst(block,(int)regionResult,testResult,staleArg6,staleArg7,staleArg8,vtableDispatchFn);
+          successorOrNextBlock = (int *)Block__getBranchInst(block);
           if (successorOrNextBlock != (int *)0x0) {
             Program__removeInst(program,successorOrNextBlock);
             successorOrNextBlock[5] = successorOrNextBlock[5] & 0xffffffef;

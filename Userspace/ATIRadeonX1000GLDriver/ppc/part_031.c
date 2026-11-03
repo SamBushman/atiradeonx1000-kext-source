@@ -714,7 +714,7 @@ int IRInst__foldMovSourceSelect(outSelect, inst, operandIndex, program)
         compilerArg = *(undefined4 *)(program + 8);
         trackUses = 1;
         IRInst__setOperandSource(inst,operandIndex,sourceDef,1,compilerArg);
-        hasNoUsesResult = IRInst__hasNoUses(a0,program,sourceDef,trackUses,compilerArg,staleR8,staleR9);
+        hasNoUsesResult = IRInst__hasNoUses(a0,program);
         if (hasNoUsesResult != 0) {
           (**(code **)(*a0 + 0xc))(a0,1,*(undefined4 *)(program + 8));
         }
@@ -913,7 +913,7 @@ int IRInst__convertCompareToBinaryAlu(inst, compiler)
   instId = *(undefined4 *)(inst + 0x14c);
   blockQuery = (**(code **)(*block + 0x24))(block);
   if ((int)((ulonglong)blockQuery >> 0x20) != 0) {
-    Block__getBranchInst(block,(int)blockQuery,staleR5,staleR6,staleR7,staleR8,staleR9);
+    Block__getBranchInst(block);
     block[0x4c] = 0;
   }
   DList__unlink(inst);
@@ -1882,14 +1882,9 @@ int Program__callBackendFinish(program)
 }
 
 /* PsBackend__bindExportRegisters @ 0x10ead4 (484 bytes) */
-int PsBackend__bindExportRegisters(hwState, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int PsBackend__bindExportRegisters(hwState, program)
   int hwState;
   int program;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int otherExportInst;
   int outputBaseC;
@@ -2110,14 +2105,9 @@ int KhanPs__vslot87_assignInterpolatorBindings(this, program)
 }
 
 /* PsBackend__assignInterpolatorRegisters @ 0x10ef68 (1052 bytes) */
-int PsBackend__assignInterpolatorRegisters(psBackend, program, unusedArg3, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int PsBackend__assignInterpolatorRegisters(psBackend, program)
   int *psBackend;
   int program;
-  undefined4 unusedArg3;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   int loadInst;
   int isInterpLoadB;

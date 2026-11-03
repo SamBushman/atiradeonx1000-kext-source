@@ -1293,11 +1293,10 @@ storeResultOut:
 }
 
 /* ValueKey__evalLitLane @ 0x178e90 (468 bytes) */
-int ValueKey__evalLitLane(resultOut, key, lane, unusedArg4)
+int ValueKey__evalLitLane(resultOut, key, lane)
   float *resultOut;
   int key;
   int lane;
-  uint unusedArg4;
 {
   float clampHigh;
   float clampedExponent;

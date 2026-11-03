@@ -172,7 +172,7 @@ int Compiler__getOrCreateLoadConstN(compiler, constCount, ops)
       allocation[0x27] = 0xc;
     }
     else {
-      constantSlot = Emitter__allocateConstantSlot(compiler,constRecords[0],0,keyRecordCursor,loopCounter,loopIndex,*compiler);
+      constantSlot = Emitter__allocateConstantSlot(compiler,constRecords[0],0);
       allocation[0x26] = constantSlot;
       allocation[0x27] = 0xc;
     }
@@ -254,11 +254,10 @@ int Compiler__getOrCreateLoadConst1(compiler, ops)
 }
 
 /* RegisterMap__findConstVector @ 0xf57f0 (540 bytes) */
-int RegisterMap__findConstVector(registerMap, values, selectBytes, unusedArg)
+int RegisterMap__findConstVector(registerMap, values, selectBytes)
   int *registerMap;
   int values;
   char *selectBytes;
-  undefined4 unusedArg;
 {
   bool notLastLane;
   uint selectedComponent;
@@ -615,14 +614,10 @@ loopSetResult:
 }
 
 /* RegisterMap__findConstVectorExact @ 0xf5f94 (304 bytes) */
-int RegisterMap__findConstVectorExact(registerMap, values, selectBytes, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
+int RegisterMap__findConstVectorExact(registerMap, values, selectBytes)
   int registerMap;
   int values;
   byte *selectBytes;
-  undefined4 unusedArg4;
-  undefined4 unusedArg5;
-  undefined4 unusedArg6;
-  undefined4 unusedArg7;
 {
   uint selectedComponent;
   uint vectorSize;
@@ -722,15 +717,15 @@ int Program__dumpConstantRegisters(program, compiler)
         logArg = *(undefined1 **)(constRecord + 0x14c);
         destRegisterId = *(undefined4 *)(constRecord + 0x94);
         registerFileName = "k";
-        Compiler__logf(compiler,"(%d)  %d, regnum = %s[%d]: ",logArg,recordIndex,"k",destRegisterId,staleArgR9,staleArgR10);
+        Compiler__logf(compiler,"(%d)  %d, regnum = %s[%d]: ",logArg,recordIndex);
         do {
           if (((int)*(char *)(constRecord + 0x15c) >> (loopCounter & 0x3f) & 1U) == 0) break;
           logArg = logScratchBuf;
-          Compiler__logf(compiler,"  %s ",logArg,recordIndex,registerFileName,destRegisterId,staleArgR9,staleArgR10);
+          Compiler__logf(compiler,"  %s ",logArg,recordIndex,registerFileName);
           notLastLane = loopCounter != 3;
           loopCounter = loopCounter + 1;
         } while (notLastLane);
-        Compiler__logf(compiler,"\n",logArg,recordIndex,registerFileName,destRegisterId,staleArgR9,staleArgR10);
+        Compiler__logf(compiler,"\n",logArg,recordIndex,registerFileName);
       }
       recordCount = constRecords[1];
       recordIndex = nextRecordIndex;
@@ -3382,7 +3377,7 @@ loopCheckUseDestTable:
   *(int *)(operandRecord + 8) = registerIndex2;
   foldedResult = inst;
   ((int (*)())IRInst__applyDescriptorSelects)(program,loopStackData,modeWord,destDescriptor,0,inst,flagB);
-  foldedResult = OpcodeTraits__instFlagBit2_113734(*(undefined4 *)(program + 8),inst,modeWord,destDescriptor,zeroArg,foldedResult,flagB);
+  foldedResult = OpcodeTraits__instFlagBit2_113734(*(undefined4 *)(program + 8),inst);
   if (foldedResult != 0) {
     operandRecord4 = IRInst__getOperandRecord(inst,0);
     loopIndex = 0;
@@ -4835,7 +4830,7 @@ code_r0x000fd284:
   }
   resultRegisterNumber = curTempRegisterD;
   if (((((descriptorWord & 0x400000) != 0) && ((*extensionWordPtr2 & 0x8888) != 0)) &&
-      (descriptorWord = psnPackedNegateMask(descriptor,r4Sink,scratchPtrOrConst,scratchSourcePtrOrZero,evalStackOrScratch,tokenIndexOrConstant,extensionWordOrCompiler), descriptorWord != 0))
+      (descriptorWord = psnPackedNegateMask(descriptor), descriptorWord != 0))
      && (descriptorWord != 0x8888)) {
     resultRegisterNumber = destTempRegister;
     if (!resultInTempRegister) {
@@ -7983,7 +7978,7 @@ code_r0x001022b4:
       textureStageIndex = (uint *****)(uint)ilRegisterIndex;
       if ((*(uint *)((int)usedRegisterBitmap + (ilRegisterIndex >> 3 & 0x1c) + 8) >> (ilRegisterIndex & 0x1f) & 1) == 0) {
         Compiler__logf(*(undefined4 *)(program + 8),"TextureStage %d misses DCLPT\n",textureStageIndex,argR6
-                     ,argR7,argR8,ilRegisterIndex & 0x1f,0);
+                     ,argR7);
       }
       maxTextureStage = *(uint ******)(program + 0x7c);
       if ((int)*(uint ******)(program + 0x7c) < (int)textureStageIndex) {

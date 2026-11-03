@@ -582,11 +582,10 @@ setOperandRecord:
 }
 
 /* R520MachineAssembler__emitCompareToPredicate @ 0x1a25a8 (692 bytes) */
-int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
+int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg)
   int *this;
   int inst;
   undefined4 blockArg;
-  uint flag;
 {
   undefined4 src2SelectWord;
   uint source2Flags;
@@ -770,7 +769,7 @@ int R520MachineAssembler__emitConditionalBranch(this, branchCount, inst, variant
   callResult = evaluateConstantComparison(inst,comparisonKnown);
   if (comparisonKnown[0] == 0) {
     predecessor = Block__getPredecessor(parentNode,0);
-    ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,inst,blockFlag,predecessor);
+    ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,inst,blockFlag);
     ((int (*)())R520MachineAssembler__appendBranchEndRecord)(this,branchCount + -1,variant);
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + -0x36) = 0xf0;
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + -0x3d) = 1;
@@ -782,14 +781,13 @@ int R520MachineAssembler__emitConditionalBranch(this, branchCount, inst, variant
 }
 
 /* R520MachineAssembler__vslot27_assembleIf @ 0x1a2c08 (264 bytes) */
-int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, extra3, extra4)
+int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, extra3)
   int *this;
   int node;
   undefined4 block;
   undefined4 extra1;
   undefined4 extra2;
   undefined4 extra3;
-  undefined4 extra4;
 {
   int thenBlock;
   int successorList;
@@ -798,7 +796,7 @@ int R520MachineAssembler__vslot27_assembleIf(this, node, block, extra1, extra2, 
   undefined4 emittedAny;
   int recordIndexBefore;
   
-  a0 = (int *)Block__getBranchInst(node,node,block,extra1,extra2,extra3,extra4);
+  a0 = (int *)Block__getBranchInst(node);
   (**(code **)(*a0 + 0x14))(a0);
   DList__unlink(a0);
   *(undefined4 *)(node + 0x130) = 0;
@@ -884,14 +882,13 @@ int R520MachineAssembler__appendLoopRecord(this, hasSecondCondition)
 }
 
 /* R520MachineAssembler__vslot25_assembleLoop @ 0x1a2ee4 (284 bytes) */
-int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2, extra3, extra4)
+int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2, extra3)
   int *this;
   int node;
   undefined4 block;
   undefined4 extra1;
   undefined4 extra2;
   undefined4 extra3;
-  undefined4 extra4;
 {
   int *conditionNode;
   uint predecessor;
@@ -899,7 +896,7 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
   int recordIndexBefore;
   int loopBlock;
   
-  conditionNode = (int *)Block__getBranchInst(node,node,block,extra1,extra2,extra3,extra4);
+  conditionNode = (int *)Block__getBranchInst(node);
   (**(code **)(*conditionNode + 0x14))(conditionNode);
   DList__unlink(conditionNode);
   *(undefined4 *)(node + 0x130) = 0;
@@ -911,7 +908,7 @@ int R520MachineAssembler__vslot25_assembleLoop(this, node, block, extra1, extra2
     hasCondition = 0;
   }
   predecessor = Block__getPredecessor(node,0);
-  ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,conditionNode,hasCondition,predecessor);
+  ((int (*)())R520MachineAssembler__emitCompareToPredicate)(this,conditionNode,hasCondition);
   loopBlock = *(int *)(node + 0x138);
   recordIndexBefore = DList__count(loopBlock + 0x90);
   if ((recordIndexBefore < 3) && (recordIndexBefore = Block__hasSuccessors(loopBlock), recordIndexBefore != 0)) {
