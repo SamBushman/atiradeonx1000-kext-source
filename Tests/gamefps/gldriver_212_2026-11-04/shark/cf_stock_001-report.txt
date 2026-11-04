@@ -1,0 +1,1494 @@
+
+================================================================================
+Session
+================================================================================
+Authored by: System Administrator on 2026-11-04 07:06:29 -0800 (started 2026-11-04 07:06:00 -0800)
+Version: Shark 4.5.0 (Session v0.2.2)
+Host: sam-bushmans-power-mac-g5.local
+Operating System: Mac OS X 10.4.11 (8S165)
+Machine Class: PowerMac11,2
+Memory: 16384 MB
+Processor: 4 x 2500/1250 MHz PPC 970MP v1.1
+Memory Controller: Kodiak v2
+IO Controller: Shasta
+CHUD.framework: v4.5.0
+CHUDProf.kext: v156
+CHUDUtils.kext: v156
+
+================================================================================
+Sampling Configuration
+================================================================================
+Timed Samples & Counters
+-Sampling begins immediately.
+-A sample is taken every 1ms.
+
+
+================================================================================
+Module: SharkProfileAnalysis
+================================================================================
+REPORT:
+
+
+================================================================================
+Active Process Summary
+================================================================================
+Process [PID]                     % Total
+-----------------------------------------
+perf_baseline [527]                100.0%
+-----------------------------------------
+Total                              100.0%
+
+Process [PID]                     # Total
+-----------------------------------------
+perf_baseline [527]                 21523
+-----------------------------------------
+Total                               21523
+
+===============================================================================================
+  perf_baseline [527]
+    % Total                               Symbol                  Library      Address   Length
+-----------------------------------------------------------------------------------------------
+      13.9%            ml_set_interrupts_enabled              mach_kernel      0xaf280     0x80
+       5.8%                           hw_rem_map              mach_kernel      0x9d300    0xd20
+       4.5% void glgVectorConvert_32_32<GLGConverter_ARGB8_RGBA8, (GLGMemory)2>(GLGOperation const*, GLDPixelMode const*)         libGLImage.dylib   0x94591fc0    0x55c
+       4.3%                           hw_add_map              mach_kernel      0x9cf80    0x380
+       4.0%                     mulckPatch_eieio              mach_kernel      0xa4b24     0xdc
+       3.8%       tws_traverse_address_hash_list              mach_kernel      0x5fd44    0x1b4
+       3.7%                          _mutex_lock              mach_kernel      0xa43a0     0x34
+       2.9%                              __bzero commpage [libSystem.B.dylib]   0xffff8600    0x180
+       1.9%                             __memcpy commpage [libSystem.B.dylib]   0xffff87a0    0x7e0
+       1.6%                   _enable_preemption              mach_kernel      0xa4ca0     0xc0
+       1.4%        tws_traverse_object_hash_list              mach_kernel      0x5fef8    0x168
+       1.3%                             vm_fault              mach_kernel      0x625d0   0x1728
+       1.0%                             shandler              mach_kernel      0xabc20    0x41c
+       0.9%                      mlckPatch_isync              mach_kernel      0xa43d4    0x2ec
+       0.8%                           ml_restore              mach_kernel      0xaeda0     0x20
+       0.8%                        mach_msg_trap        libSystem.B.dylib   0x9000af40     0x24
+       0.8%                     0x12772f4 [768B]   ATIRadeonX1000GLDriver    0x12772f4    0x300
+       0.7%                       vm_page_lookup              mach_kernel      0x81e68    0x1a8
+       0.7%                           szone_free        libSystem.B.dylib   0x9000648c   0x11d4
+       0.7%                         mapping_make              mach_kernel      0x99f80    0x34c
+       0.7%                         szone_calloc        libSystem.B.dylib   0x90008c5c   0x1640
+       0.7% ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor*, unsigned long*, unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x55fd80    0x250
+       0.7%                   0x125bfa0 [33.8KB]   ATIRadeonX1000GLDriver    0x125bfa0   0x8748
+       0.6%                        lck_spin_lock              mach_kernel      0xa4dc0     0x34
+       0.6%                    0x11c2754 [2.8KB]   ATIRadeonX1000GLDriver    0x11c2754    0xb28
+       0.5%                         vm_map_enter              mach_kernel      0x66d24    0xb90
+       0.5%                            mutex_try              mach_kernel      0xa4820     0x28
+       0.5%                  vm_map_lookup_entry              mach_kernel      0x66520    0x184
+       0.5%                         szone_malloc        libSystem.B.dylib   0x90003538   0x1628
+       0.4%                         vm_page_grab              mach_kernel      0x823cc    0x1ac
+       0.4%                    0x1211de0 [4.1KB]   ATIRadeonX1000GLDriver    0x1211de0   0x1070
+       0.4%                     0x12d9d94 [128B]   ATIRadeonX1000GLDriver    0x12d9d94     0x80
+       0.3%              mach_msg_overwrite_trap              mach_kernel      0x22820   0x1110
+       0.3%                 gleCreateSharedState                 GLEngine    0x100b1b4    0x224
+       0.3%                      zalloc_canblock              mach_kernel      0x3ff90    0x3c0
+       0.3%                       vm_page_remove              mach_kernel      0x81cec    0x17c
+       0.3%                           szone_size        libSystem.B.dylib   0x9000621c    0x270
+       0.3%                gleReleaseSharedState                 GLEngine    0x10389d4    0x120
+       0.3%                    __CFSetDeallocate           CoreFoundation   0x907d7488    0x1b8
+       0.3%                    0x12674d0 [6.2KB]   ATIRadeonX1000GLDriver    0x12674d0   0x18fc
+       0.3%                           tws_insert              mach_kernel      0x5dd84    0x978
+       0.3%                  memcpy_nop_if_32bit              mach_kernel      0xacbf8    0x618
+       0.3%                          __CFSetGrow           CoreFoundation   0x907d6b78    0x29c
+       0.3%                        vm_fault_page              mach_kernel      0x60864   0x1d6c
+       0.3%                      0x12d9e18 [88B]   ATIRadeonX1000GLDriver    0x12d9e18     0x58
+       0.3%                         vm_page_free              mach_kernel      0x82738    0x320
+       0.3%                      rwldPatch_eieio              mach_kernel      0xa52e4     0xe8
+       0.2%                      gldInitDispatch   ATIRadeonX1000GLDriver    0x1168ce0   0x88c0
+       0.2%                                zfree              mach_kernel      0x40424    0x150
+       0.2%                    0x11efac0 [7.6KB]   ATIRadeonX1000GLDriver    0x11efac0   0x1e38
+       0.2%                    0x11fa3f4 [2.0KB]   ATIRadeonX1000GLDriver    0x11fa3f4    0x7f4
+       0.2%                 vm_map_lookup_locked              mach_kernel      0x70564    0xe4c
+       0.2%                   ipc_kobject_server              mach_kernel      0x290f0    0x2f0
+       0.2%                 gliExecDispatchTable                 GLEngine    0x1013f80   0x5c40
+       0.2%                         current_proc              mach_kernel     0x2ad288     0xa8
+       0.2% IOATIR500GLContext::init_context_buffer_header(VendorContextBufferHeader*, unsigned long) com.apple.ATIRadeonX1000     0x549490     0x40
+       0.2% ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor*, unsigned long) com.apple.ATIRadeonX1000     0x55d540    0x160
+       0.2%             vm_map_submap_pmap_clean              mach_kernel      0x6aa48    0xdc4
+       0.2%                    0x12d19cc [2.0KB]   ATIRadeonX1000GLDriver    0x12d19cc    0x7f8
+       0.2%                     0x124b4ec [164B]   ATIRadeonX1000GLDriver    0x124b4ec     0xa4
+       0.2%                gldDestroyVertexArray   ATIRadeonX1000GLDriver    0x1151c20   0xe9a0
+       0.2%                               copyin              mach_kernel      0xab540    0x280
+       0.2%                        hw_purge_phys              mach_kernel      0x9e020    0x120
+       0.2%               vm_object_iopl_request              mach_kernel      0x7f840    0xab8
+       0.2%                      slckPatch_isync              mach_kernel      0xa4df4     0xec
+       0.2%                                stats            perf_baseline       0x2e70    0x1d0
+       0.2%                    0x12afe30 [7.8KB]   ATIRadeonX1000GLDriver    0x12afe30   0x1f3c
+       0.2%             gleCreateEnableHashTable                 GLEngine    0x100b3d8    0x82c
+       0.2%                      gldGetQueryInfo   ATIRadeonX1000GLDriver    0x11715a0   0x62f0
+       0.2%                       vm_page_insert              mach_kernel      0x819bc    0x118
+       0.2%                  MapUserMemoryWindow              mach_kernel      0x9999c     0xf8
+       0.2%                     dyld_stub_memcpy   ATIRadeonX1000GLDriver    0x12e97e0     0x20
+       0.2%                    mltlckPatch_isync              mach_kernel      0xa4848    0x178
+       0.2%                    0x1283a3c [6.4KB]   ATIRadeonX1000GLDriver    0x1283a3c   0x197c
+       0.1%                     0x126e04c [352B]   ATIRadeonX1000GLDriver    0x126e04c    0x160
+       0.1%                     OSCompareAndSwap              mach_kernel      0xa4060     0x1c
+       0.1%              tws_startup_list_lookup              mach_kernel      0x5f390    0x1b0
+       0.1%                       mapping_remove              mach_kernel      0x99e48    0x138
+       0.1%                gleAllocVertexMachine                 GLEngine    0x100c034     0xe4
+       0.1%                                 free        libSystem.B.dylib   0x90005ee0    0x33c
+       0.1%                vm_object_reaper_init              mach_kernel      0x75844    0xc50
+       0.1%                   __CFDictionaryGrow           CoreFoundation   0x907d2af8    0x488
+       0.1%                       ipc_kmsg_alloc              mach_kernel      0x1a24c    0x10c
+       0.1%                     0x12da834 [256B]   ATIRadeonX1000GLDriver    0x12da834    0x100
+       0.1%                      0x12d9cc0 [84B]   ATIRadeonX1000GLDriver    0x12d9cc0     0x54
+       0.1%                         mapping_free              mach_kernel      0x9aba0    0x280
+       0.1%                            lock_read              mach_kernel      0xa50e0     0x18
+       0.1%                 iokit_server_routine              mach_kernel      0x8a7b0   0x6268
+       0.1%            gleDestroyEnableHashTable                 GLEngine    0x103915c     0x68
+       0.1%                     0x122e4fc [464B]   ATIRadeonX1000GLDriver    0x122e4fc    0x1d0
+       0.1%                                 trap              mach_kernel      0xa7c9c    0xb54
+       0.1% IOATIR500Surface::init_swap_buffer_header(VendorSwapBufferHeader*, unsigned long) com.apple.ATIRadeonX1000     0x552b40     0x40
+       0.1%                      get_procrustime              mach_kernel     0x258f74     0x54
+       0.1%                    0x12de1ac [8.3KB]   ATIRadeonX1000GLDriver    0x12de1ac   0x2130
+       0.1%                               memcpy        libSystem.B.dylib   0x90130b60      0x8
+       0.1%                        mapping_alloc              mach_kernel      0x9ae20    0x450
+       0.1%            mach_make_memory_entry_64              mach_kernel      0x879b8    0xebc
+       0.1%               glePushInstructionsPPC                 GLEngine    0x111326c     0x48
+       0.1%                    0x124c2c0 [1.0KB]   ATIRadeonX1000GLDriver    0x124c2c0    0x424
+       0.1%                      0x12267dc [80B]   ATIRadeonX1000GLDriver    0x12267dc     0x50
+       0.1%                               random        libSystem.B.dylib   0x9002e5e0    0x104
+       0.1%                      gleInitGLDState                 GLEngine    0x100c57c    0xc04
+       0.1%                               calloc        libSystem.B.dylib   0x90008964    0x2f8
+       0.1%                  tws_internal_lookup              mach_kernel      0x5d824    0x198
+       0.1%  InterpreterNoiseGeneratorInitialise libGLProgrammability.dylib   0x97bd57a0    0x118
+       0.1%                    0x12b9f1c [1.6KB]   ATIRadeonX1000GLDriver    0x12b9f1c    0x68c
+       0.1%                 gleFreeTextureObject                 GLEngine    0x10283a0    0x100
+       0.1%                    0x11d258c [3.7KB]   ATIRadeonX1000GLDriver    0x11d258c    0xed0
+       0.1%                    vm_page_zero_fill              mach_kernel      0x8337c      0x8
+       0.1%                lck_rw_lock_exclusive              mach_kernel      0xa50a0     0x18
+       0.1%       gleCreatePipelineProgramObject                 GLEngine    0x100e0cc    0x1e0
+       0.1%                          __spin_lock commpage [libSystem.B.dylib]   0xffff8260     0x40
+       0.1%                  __cxa_guard_acquire        libstdc++.6.dylib   0x94c6b154     0x88
+       0.1%                    0x12ad0fc [2.6KB]   ATIRadeonX1000GLDriver    0x12ad0fc    0xa68
+       0.1%                    0x1281d68 [1.2KB]   ATIRadeonX1000GLDriver    0x1281d68    0x4a4
+       0.1%                      0x125946c [76B]   ATIRadeonX1000GLDriver    0x125946c     0x4c
+       0.1%                          OSAddAtomic              mach_kernel     0x30a868     0x18
+       0.1%    IOGeneralMemoryDescriptor::free()              mach_kernel     0x2d6e18    0x11c
+       0.1%                     gliCreateContext                 GLEngine    0x100ad18    0x458
+       0.1%               gleDeletePluginTexture                 GLEngine    0x10284a0     0x78
+       0.1%                     dyld_stub_memset        libSystem.B.dylib   0x90197460     0x20
+       0.1%        dyld_stub___cxa_guard_acquire   ATIRadeonX1000GLDriver    0x12ea020     0x20
+       0.1%                     0x12d775c [436B]   ATIRadeonX1000GLDriver    0x12d775c    0x1b4
+       0.1%          PPCNoiseGeneratorInitialise libGLProgrammability.dylib   0x97be3f6c    0x118
+       0.1% OSObject::taggedRelease(void const*, int) const              mach_kernel     0x2fbda4     0xf0
+       0.1%                  mapping_phys_lookup              mach_kernel      0x9a880     0x84
+       0.1%                            glColor3f              libGL.dylib   0x92f2b2a8     0xa0
+       0.1% ATIRadeonX1000::submit_empty_buffer() com.apple.ATIRadeonX1000     0x55dca0     0x80
+       0.1% ATIR500GLContext::process_command_buffer(VendorCommandDescriptor*) com.apple.ATIRadeonX1000     0x56d820   0x5db0
+       0.1%           __CFStringEncodeByteStream           CoreFoundation   0x907bd888    0xfa0
+       0.1%                     0x12da2d4 [156B]   ATIRadeonX1000GLDriver    0x12da2d4     0x9c
+       0.1%                    0x12d34b4 [1.4KB]   ATIRadeonX1000GLDriver    0x12d34b4    0x590
+       0.1%                    0x12b6e6c [2.2KB]   ATIRadeonX1000GLDriver    0x12b6e6c    0x8a4
+       0.1%                    0x11962f4 [3.0KB]   ATIRadeonX1000GLDriver    0x11962f4    0xbf8
+       0.1%                large_and_huge_malloc        libSystem.B.dylib   0x90016210   0x1258
+       0.1%                      kalloc_canblock              mach_kernel      0x2bcf8     0xe8
+       0.1%               gleInitializeGLTexture                 GLEngine    0x100da90    0x354
+       0.1%                          bsd_uprofil              mach_kernel     0x258eb0     0xc4
+       0.1%                     0x127661c [112B]   ATIRadeonX1000GLDriver    0x127661c     0x70
+       0.1%                     0x124b1b0 [384B]   ATIRadeonX1000GLDriver    0x124b1b0    0x180
+       0.1%                    0x11ef06c [1.4KB]   ATIRadeonX1000GLDriver    0x11ef06c    0x5c4
+       0.1%                           pmap_enter              mach_kernel      0x98f14     0x94
+       0.1%                           hw_map_seg              mach_kernel      0xa0a80    0x140
+       0.1%                    0x1191bec [1.3KB]   ATIRadeonX1000GLDriver    0x1191bec    0x504
+       0.1%                    vm_object_destroy              mach_kernel      0x76494   0x1364
+       0.1%                        vm_map_create              mach_kernel      0x6632c    0x164
+       0.1%                  vm_external_destroy              mach_kernel      0x6031c     0x6c
+       0.1%                     upl_commit_range              mach_kernel      0x7e204    0x89c
+       0.1%                     mulckPatch_isync              mach_kernel      0xa4b20      0x4
+       0.1%                   mig_get_reply_port        libSystem.B.dylib   0x9000adb8     0xa8
+       0.1%                    gldReclaimTexture   ATIRadeonX1000GLDriver    0x114f290    0x190
+       0.1%                   get_bsdthread_info              mach_kernel      0x4119c      0x8
+       0.1%                    0x12dd1f8 [1.6KB]   ATIRadeonX1000GLDriver    0x12dd1f8    0x670
+       0.1%                        vm_map_unwire              mach_kernel      0x6a870    0x1d8
+       0.1%                          pmap_remove              mach_kernel      0x98c60     0x80
+       0.1%                               malloc        libSystem.B.dylib   0x90002f88    0x2f8
+       0.1%                 gliInitDispatchTable                 GLEngine    0x1011ff8   0x1f88
+       0.1%                  gleFreeFenceMachine                 GLEngine    0x10380c4     0x88
+       0.1%                       __CFStringHash           CoreFoundation   0x907cabe0    0x5c0
+       0.1%                     0x12b9e10 [264B]   ATIRadeonX1000GLDriver    0x12b9e10    0x108
+       0.1%                     0x1268dd0 [232B]   ATIRadeonX1000GLDriver    0x1268dd0     0xe8
+       0.1%                     0x1210e84 [952B]   ATIRadeonX1000GLDriver    0x1210e84    0x3b8
+       0.1%                      vm_page_release              mach_kernel      0x82578     0x9c
+       0.1%               vm_object_pager_create              mach_kernel      0x77b7c    0xe88
+       0.1%                         unix_syscall              mach_kernel     0x2abac4    0x540
+       0.1%                        ipc_kmsg_free              mach_kernel      0x1a358    0x118
+       0.1% IOGeneralMemoryDescriptor::getSourceSegment(unsigned long, unsigned long*)              mach_kernel     0x2d75e4    0x1d0
+       0.1%                hwcsatomicPatch_isync              mach_kernel      0xa407c     0x24
+       0.1%                          gleDCBAlloc                 GLEngine    0x100b170     0x44
+       0.1%         ATIR500Surface::build_swap() com.apple.ATIRadeonX1000     0x580ec0   0x2290
+       0.1% AppleDART::tlbInvalidate(unsigned, unsigned long) com.apple.driver.AppleMacRiscPCI     0x795654    0x188
+       0.1% AppleDART::flushMappings(void volatile*, unsigned long) com.apple.driver.AppleMacRiscPCI     0x795d44     0x60
+       0.1%                    0x12d886c [4.2KB]   ATIRadeonX1000GLDriver    0x12d886c   0x10d4
+       0.1%                    0x12d41a8 [4.6KB]   ATIRadeonX1000GLDriver    0x12d41a8   0x1280
+       0.1%                    0x12d21c8 [1.4KB]   ATIRadeonX1000GLDriver    0x12d21c8    0x59c
+       0.1%                    0x12bae0c [2.7KB]   ATIRadeonX1000GLDriver    0x12bae0c    0xac8
+       0.1%                      0x1276478 [40B]   ATIRadeonX1000GLDriver    0x1276478     0x28
+       0.1%                         vm_page_init              mach_kernel      0x82148     0x40
+       0.1%                  vm_map_entry_insert              mach_kernel      0x72c48    0x938
+       0.1%                           tws_lookup              mach_kernel      0x5d9bc     0x70
+       0.1%                           PowerInner        libSystem.B.dylib   0x90048c20    0x7b8
+       0.1%                    pmap_page_protect              mach_kernel      0x98ce0     0xe4
+       0.1% OSSet::getNextObjectForIterator(void*, OSObject**) const              mach_kernel     0x304640     0x78
+       0.1%                     OSObject::free()              mach_kernel     0x30aa40   0x2208
+       0.1% OSCollectionIterator::withCollection(OSCollection const*)              mach_kernel     0x2fdff4     0x7c
+       0.1% IORegistryEntry::breakLink(IORegistryEntry*, unsigned, IORegistryPlane const*) const              mach_kernel     0x2b968c    0x104
+       0.1%                       __gettimeofday commpage [libSystem.B.dylib]   0xffff82e0    0x200
+       0.1%                    0x12e6b3c [1.2KB]   ATIRadeonX1000GLDriver    0x12e6b3c    0x4a4
+       0.1%                    0x12bbdac [1.2KB]   ATIRadeonX1000GLDriver    0x12bbdac    0x4b4
+       0.1%                    0x12b4828 [1.6KB]   ATIRadeonX1000GLDriver    0x12b4828    0x664
+       0.1%                     0x12abfa8 [752B]   ATIRadeonX1000GLDriver    0x12abfa8    0x2f0
+       0.1%                    0x123427c [1.2KB]   ATIRadeonX1000GLDriver    0x123427c    0x500
+       0.1%                     sulckPatch_eieio              mach_kernel      0xa4f68     0x18
+       0.1% OSDictionary::getObject(OSSymbol const*) const              mach_kernel     0x300248     0x58
+       0.1%           memory_object_iopl_request              mach_kernel      0x5c468    0x30c
+       0.1%                          mach_vm_map              mach_kernel      0x86750    0x6b0
+       0.1%                                kfree              mach_kernel      0x2c088     0xb4
+       0.1% IOGeneralMemoryDescriptor::initWithOptions(void*, unsigned long, unsigned long, task*, unsigned long, IOMapper*)              mach_kernel     0x2d6868    0x5b0
+       0.1% IOBufferMemoryDescriptor::initWithOptions(unsigned long, unsigned, unsigned, task*)              mach_kernel     0x2dcf2c    0x320
+       0.1%                  gleInitFenceMachine                 GLEngine    0x100e664     0x24
+       0.1%                  gleFreeQueryMachine                 GLEngine    0x103803c     0x88
+       0.1% ATIRadeonX1000::submit_buffer(unsigned long*, unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x562980    0x360
+       0.1%                     0x12dad44 [252B]   ATIRadeonX1000GLDriver    0x12dad44     0xfc
+       0.1%                    0x12ae468 [2.3KB]   ATIRadeonX1000GLDriver    0x12ae468    0x914
+       0.1%                     0x126ed7c [592B]   ATIRadeonX1000GLDriver    0x126ed7c    0x250
+       0.1%                    0x1243e84 [9.9KB]   ATIRadeonX1000GLDriver    0x1243e84   0x2798
+       0.1%                    0x123fa58 [3.7KB]   ATIRadeonX1000GLDriver    0x123fa58    0xefc
+       0.0%                vm_map_server_routine              mach_kernel      0x575f8   0x2b34
+       0.0%                        vm_deallocate        libSystem.B.dylib   0x90022300    0x140
+       0.0% OSSet::removeObject(OSMetaClassBase const*)              mach_kernel     0x304378     0x90
+       0.0% is_io_connect_method_scalarI_scalarO              mach_kernel     0x2ebd28    0x37c
+       0.0%                         ipc_kmsg_get              mach_kernel      0x1a880    0x15c
+       0.0% IOATIR500Surface::freeAllSwapBuffers(unsigned long) com.apple.ATIRadeonX1000     0x552860    0x1f0
+       0.0% IOATIR500GLContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**) com.apple.ATIRadeonX1000     0x54c160    0xeb0
+       0.0% IOATIR500Accelerator::init_command_buffer_header(VendorCommandBufferHeader*, unsigned long) com.apple.ATIRadeonX1000     0x544350     0x90
+       0.0%                    gldUpdateDispatch   ATIRadeonX1000GLDriver    0x1168290    0xa50
+       0.0%         dyld_stub_mig_get_reply_port                    IOKit   0x90b4b1e0     0x20
+       0.0%                     dyld_stub_malloc                 GLEngine    0x110fe98     0x20
+       0.0%                       dyld_stub_free                 GLEngine    0x110fe58     0x20
+       0.0%                    cglAssignDispatch                   OpenGL   0x93707c60     0x38
+       0.0%                          bufferWrite           CoreFoundation   0x907ef1bc    0x174
+       0.0% ATIR500GLContext::write_kernel_context_buffer_regs(unsigned long*, unsigned long, unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x56a8e0    0x9c0
+       0.0%                    _CG_spin_lock_try             CoreGraphics   0x90375c30     0x28
+       0.0%                     0x12d2768 [136B]   ATIRadeonX1000GLDriver    0x12d2768     0x88
+       0.0%                    0x12d0440 [2.2KB]   ATIRadeonX1000GLDriver    0x12d0440    0x8c4
+       0.0%                     0x12cfdf4 [476B]   ATIRadeonX1000GLDriver    0x12cfdf4    0x1dc
+       0.0%                    0x12c57ec [1.8KB]   ATIRadeonX1000GLDriver    0x12c57ec    0x734
+       0.0%                    0x12b7714 [1.8KB]   ATIRadeonX1000GLDriver    0x12b7714    0x750
+       0.0%                    0x12ab014 [1.5KB]   ATIRadeonX1000GLDriver    0x12ab014    0x5ec
+       0.0%                     0x127e130 [268B]   ATIRadeonX1000GLDriver    0x127e130    0x10c
+       0.0%                      0x124b594 [52B]   ATIRadeonX1000GLDriver    0x124b594     0x34
+       0.0%                     0x11d3c4c [336B]   ATIRadeonX1000GLDriver    0x11d3c4c    0x150
+       0.0% write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000*, unsigned long*, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned char, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long, unsigned char, long, long, long, long, unsigned long, unsigned long, bool) com.apple.ATIRadeonX1000     0x583150   0x1930
+       0.0%                      vm_page_convert              mach_kernel      0x822ec     0xc0
+       0.0%                          vm_allocate        libSystem.B.dylib   0x90017468    0x19c
+       0.0%                      rwlsPatch_isync              mach_kernel      0xa50f8     0x28
+       0.0%                ipc_port_release_send              mach_kernel      0x1f170     0xcc
+       0.0%                   ipc_kobject_notify              mach_kernel      0x29484    0x110
+       0.0%                     ipc_entry_lookup              mach_kernel      0x18f7c     0xc8
+       0.0%   IOATIR500Surface::stop(IOService*) com.apple.ATIRadeonX1000     0x5554b0    0x450
+       0.0%             gleUpdateViewScissorData                 GLEngine    0x1011644    0x764
+       0.0%                gleMakeIdentityMatrix                 GLEngine    0x100d180     0x4c
+       0.0%                     dyld_stub_random libGLProgrammability.dylib   0x97c22440     0x20
+       0.0%      ATIR500Surface::shape_surface() com.apple.ATIRadeonX1000     0x57e130    0xe30
+       0.0%  AppleDART::iovmAlloc(unsigned long) com.apple.driver.AppleMacRiscPCI     0x79547c    0x1d8
+       0.0%             __CFDictionaryDeallocate           CoreFoundation   0x907d4eb8    0x2d0
+       0.0%         __CFBinaryPlistWriteToStream           CoreFoundation   0x907ee27c    0xab0
+       0.0%                    0x12c6830 [4.2KB]   ATIRadeonX1000GLDriver    0x12c6830   0x10f4
+       0.0%                    0x12b5f54 [2.6KB]   ATIRadeonX1000GLDriver    0x12b5f54    0xa38
+       0.0%                    0x12833b8 [1.1KB]   ATIRadeonX1000GLDriver    0x12833b8    0x464
+       0.0%                     0x12652f8 [636B]   ATIRadeonX1000GLDriver    0x12652f8    0x27c
+       0.0%                    0x12435c8 [1.3KB]   ATIRadeonX1000GLDriver    0x12435c8    0x528
+       0.0%                    0x11fc580 [2.4KB]   ATIRadeonX1000GLDriver    0x11fc580    0x994
+       0.0%                    0x11fc014 [1.3KB]   ATIRadeonX1000GLDriver    0x11fc014    0x544
+       0.0%                    0x11c10c4 [5.6KB]   ATIRadeonX1000GLDriver    0x11c10c4   0x168c
+       0.0%                        vm_page_alloc              mach_kernel      0x826e0     0x58
+       0.0%                     vm_fault_cleanup              mach_kernel      0x604e0    0x384
+       0.0%                            thread_go              mach_kernel      0x31868    0x114
+       0.0%                               strlen              mach_kernel     0x30a9a0     0xa0
+       0.0%                          sigprocmask        libSystem.B.dylib   0x90001980     0x40
+       0.0%                  pthread_setspecific        libSystem.B.dylib   0x9000a29c     0x98
+       0.0%                                  pow        libSystem.B.dylib   0x90048600    0x620
+       0.0% OSObject::taggedRetain(void const*) const              mach_kernel     0x2fbcfc     0x94
+       0.0%                      ml_set_physical              mach_kernel      0xaed68     0x38
+       0.0%                             mach_msg        libSystem.B.dylib   0x9000ae60     0xe0
+       0.0% IOGeneralMemoryDescriptor::wireVirtual(IODirection)              mach_kernel     0x2d7b24    0x580
+       0.0%    io_connect_method_scalarI_scalarO                    IOKit   0x90af3390    0x258
+       0.0%                      gleInitGLIState                 GLEngine    0x100d1cc    0x308
+       0.0%          convert_port_to_locked_task              mach_kernel      0x2adec     0xb4
+       0.0%                          __CFSetInit           CoreFoundation   0x907d5f24    0x610
+       0.0%           __CFDictionaryFindBuckets2           CoreFoundation   0x907ca97c    0x184
+       0.0%                     0x12cffd4 [168B]   ATIRadeonX1000GLDriver    0x12cffd4     0xa8
+       0.0%                    0x12c6250 [1.5KB]   ATIRadeonX1000GLDriver    0x12c6250    0x5dc
+       0.0%                     0x12b8204 [196B]   ATIRadeonX1000GLDriver    0x12b8204     0xc4
+       0.0%                     0x127df14 [360B]   ATIRadeonX1000GLDriver    0x127df14    0x168
+       0.0%                     0x12764a4 [196B]   ATIRadeonX1000GLDriver    0x12764a4     0xc4
+       0.0%                     0x12760b0 [864B]   ATIRadeonX1000GLDriver    0x12760b0    0x360
+       0.0%                     0x124abe8 [336B]   ATIRadeonX1000GLDriver    0x124abe8    0x150
+       0.0%                    0x1205ecc [2.4KB]   ATIRadeonX1000GLDriver    0x1205ecc    0x9a4
+       0.0%                      wait_queue_init              mach_kernel      0x3daf4     0x58
+       0.0%                         vm_page_wire              mach_kernel      0x82c44    0x194
+       0.0%                     rwlesPatch_eieio              mach_kernel      0xa5184     0x7c
+       0.0%                     run_queue_remove              mach_kernel      0x33bcc    0x454
+       0.0%                              realloc        libSystem.B.dylib   0x90017f48    0x5bc
+       0.0%             OSObject::retain() const              mach_kernel     0x2fbea8     0x14
+       0.0%            OSObject::release() const              mach_kernel     0x2fbe94     0x14
+       0.0% OSMetaClass::checkMetaCast(OSMetaClassBase const*) const              mach_kernel     0x2fb3f4     0x64
+       0.0% OSCollectionIterator::initWithCollection(OSCollection const*)              mach_kernel     0x2fdf70     0x84
+       0.0%   OSArray::getObject(unsigned) const              mach_kernel     0x2fcddc     0x24
+       0.0%             ml_set_physical_disabled              mach_kernel      0xaed40     0x20
+       0.0%                              memmove              mach_kernel      0xacbe0     0x18
+       0.0%                             mapSetUp              mach_kernel      0xa0ea0     0x80
+       0.0%                 ipc_kmsg_copyin_body              mach_kernel      0x1b1f4    0x74c
+       0.0%                  IORecursiveLockLock              mach_kernel     0x2b2824     0x60
+       0.0% IOMemoryDescriptor::doMap(vm_map*, unsigned*, unsigned long, unsigned long, unsigned long)              mach_kernel     0x2d8f5c    0x2bc
+       0.0% IOATIR500GLContext::stop(IOService*) com.apple.ATIRadeonX1000     0x549fa0    0x410
+       0.0%                        hw_atomic_add              mach_kernel      0xa40a0     0x20
+       0.0%              gleClearPipelineProgram                 GLEngine    0x10385b0    0x16c
+       0.0%               dyld_stub_pthread_self        libSystem.B.dylib   0x901977a0     0x20
+       0.0%              dyld_stub_mach_msg_trap        libSystem.B.dylib   0x9019b980     0x20
+       0.0%                  convert_port_to_map              mach_kernel      0x2af70     0x7c
+       0.0%                        CFSetAddValue           CoreFoundation   0x907d693c    0x23c
+       0.0% ATIR500Surface::dealloc_surface(unsigned long) com.apple.ATIRadeonX1000     0x57ff70    0x2c0
+       0.0% ATIR500GLContext::submit_context_buffer() com.apple.ATIRadeonX1000     0x56c8b0    0x360
+       0.0% _IOMemoryMap::copyCompatible(IOMemoryDescriptor*, task*, unsigned, unsigned long, unsigned long, unsigned long)              mach_kernel     0x2d9a48    0x160
+       0.0%                      _CG_spin_unlock             CoreGraphics   0x90375c58     0x18
+       0.0%                           _CFRelease           CoreFoundation   0x907bec64    0x258
+       0.0%      __CFArrayRepositionDequeRegions           CoreFoundation   0x907c9270    0x498
+       0.0%                     0x12cf9ac [564B]   ATIRadeonX1000GLDriver    0x12cf9ac    0x234
+       0.0%                    0x12c3bdc [1.1KB]   ATIRadeonX1000GLDriver    0x12c3bdc    0x44c
+       0.0%                     0x12bace0 [296B]   ATIRadeonX1000GLDriver    0x12bace0    0x128
+       0.0%                      0x12b8af4 [52B]   ATIRadeonX1000GLDriver    0x12b8af4     0x34
+       0.0%                    0x12accfc [1020B]   ATIRadeonX1000GLDriver    0x12accfc    0x3fc
+       0.0%                     0x12ab788 [624B]   ATIRadeonX1000GLDriver    0x12ab788    0x270
+       0.0%                    0x12a068c [3.5KB]   ATIRadeonX1000GLDriver    0x12a068c    0xe14
+       0.0%                    0x128df54 [1.3KB]   ATIRadeonX1000GLDriver    0x128df54    0x514
+       0.0%                    0x1285c38 [4.5KB]   ATIRadeonX1000GLDriver    0x1285c38   0x1208
+       0.0%                    0x12825d4 [1.1KB]   ATIRadeonX1000GLDriver    0x12825d4    0x470
+       0.0%                     0x127f6d0 [356B]   ATIRadeonX1000GLDriver    0x127f6d0    0x164
+       0.0%                     0x124e918 [272B]   ATIRadeonX1000GLDriver    0x124e918    0x110
+       0.0%                     0x123ddbc [348B]   ATIRadeonX1000GLDriver    0x123ddbc    0x15c
+       0.0%                    0x12367a8 [3.3KB]   ATIRadeonX1000GLDriver    0x12367a8    0xd4c
+       0.0%                    0x1235498 [1.2KB]   ATIRadeonX1000GLDriver    0x1235498    0x4d4
+       0.0%                     0x1229524 [372B]   ATIRadeonX1000GLDriver    0x1229524    0x174
+       0.0%                     0x1192544 [464B]   ATIRadeonX1000GLDriver    0x1192544    0x1d0
+       0.0%                                 zget              mach_kernel      0x403b8     0x6c
+       0.0%                        vm_map_remove              mach_kernel      0x6b80c     0xec
+       0.0%                               strcmp              mach_kernel      0x91d14     0x38
+       0.0%                   pthread_mutex_lock        libSystem.B.dylib   0x90001638    0x2c0
+       0.0%                       OSSpinLockLock        libSystem.B.dylib   0x9012adf4      0x4
+       0.0%           OSArray::flushCollection()              mach_kernel     0x2fc8e8     0x78
+       0.0%                               memset        libSystem.B.dylib   0x90129660    0x100
+       0.0%                     malloc_zone_free        libSystem.B.dylib   0x900144e0    0x2c0
+       0.0%                                 main            perf_baseline       0x3040    0x510
+       0.0%               ipc_right_copyin_check              mach_kernel      0x20854     0xdc
+       0.0% IOMachPort::noMoreSendersForObject(OSObject*, unsigned, unsigned*)              mach_kernel     0x2e82a8     0xdc
+       0.0%            iokit_lookup_connect_port              mach_kernel      0x8a060     0x80
+       0.0% IOGeneralMemoryDescriptor::doMap(vm_map*, unsigned*, unsigned long, unsigned long, unsigned long)              mach_kernel     0x2d8264    0x36c
+       0.0% IOBufferMemoryDescriptor::withOptions(unsigned long, unsigned, unsigned)              mach_kernel     0x2dd2f4     0x90
+       0.0% IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer*) com.apple.ATIRadeonX1000     0x543f10     0xc0
+       0.0%                    glReadPixels_Exec                 GLEngine    0x104dbcc    0x59c
+       0.0%         gliAttachDrawableWithOptions                 GLEngine    0x101a50c    0x290
+       0.0%               gleUpdatePrimitiveData                 GLEngine    0x100e6d8    0x788
+       0.0%                gleNullMemoryPointers                 GLEngine    0x100be94    0x1a0
+       0.0%                  gleInitQueryMachine                 GLEngine    0x100e688     0x28
+       0.0%                 gleInitializeContext                 GLEngine    0x100bc80    0x214
+       0.0%                          gleGetState                 GLEngine    0x101ab80   0x33ec
+       0.0%                    gldAttachDrawable   ATIRadeonX1000GLDriver    0x114d0d0    0x760
+       0.0%                dyld_stub_vm_allocate        libSystem.B.dylib   0x90198e40     0x20
+       0.0%               dyld_stub_gettimeofday            perf_baseline       0x3be0     0x20
+       0.0%                     dyld_stub_calloc   ATIRadeonX1000GLDriver    0x12e9700     0x20
+       0.0%                        CGLSetPBuffer                   OpenGL   0x9370a108    0x6e0
+       0.0%                    cglConvertAttribs                   OpenGL   0x937050c8    0x63c
+       0.0%                             CFRetain           CoreFoundation   0x907c1368     0xf0
+       0.0%                    CFMachPortGetPort           CoreFoundation   0x907de098     0xc4
+       0.0%                                bzero              mach_kernel      0xac78c    0x1f4
+       0.0%   ATIRadeonX1000::submit_ring_data() com.apple.ATIRadeonX1000     0x561030    0x1b0
+       0.0% ATIR500Surface::copy_buffer_using_DMA(long, long, long, long, unsigned long, unsigned long, ATIR500SurfaceBuffer*, VendorTransferBuffer*, unsigned long, unsigned long, IODirection, unsigned long) com.apple.ATIRadeonX1000     0x584a80    0x8c0
+       0.0%                       0x1314af0 [4B]   ATIRadeonX1000GLDriver    0x1314af0      0x4
+       0.0%                     0x12d9d18 [120B]   ATIRadeonX1000GLDriver    0x12d9d18     0x78
+       0.0%                    0x12d8438 [1.0KB]   ATIRadeonX1000GLDriver    0x12d8438    0x430
+       0.0%                     0x12d5674 [428B]   ATIRadeonX1000GLDriver    0x12d5674    0x1ac
+       0.0%                    0x12cca88 [2.7KB]   ATIRadeonX1000GLDriver    0x12cca88    0xafc
+       0.0%                     0x12c9ac8 [208B]   ATIRadeonX1000GLDriver    0x12c9ac8     0xd0
+       0.0%                     0x12c7ab0 [204B]   ATIRadeonX1000GLDriver    0x12c7ab0     0xcc
+       0.0%                      0x12b8b48 [36B]   ATIRadeonX1000GLDriver    0x12b8b48     0x24
+       0.0%                    0x12b2dc4 [1.5KB]   ATIRadeonX1000GLDriver    0x12b2dc4    0x5e8
+       0.0%                     0x12aadf4 [132B]   ATIRadeonX1000GLDriver    0x12aadf4     0x84
+       0.0%                    0x129e264 [1.8KB]   ATIRadeonX1000GLDriver    0x129e264    0x720
+       0.0%                     0x1290918 [704B]   ATIRadeonX1000GLDriver    0x1290918    0x2c0
+       0.0%                     0x128038c [692B]   ATIRadeonX1000GLDriver    0x128038c    0x2b4
+       0.0%                     0x12748c0 [520B]   ATIRadeonX1000GLDriver    0x12748c0    0x208
+       0.0%                     0x1272cc0 [736B]   ATIRadeonX1000GLDriver    0x1272cc0    0x2e0
+       0.0%                      0x1259174 [72B]   ATIRadeonX1000GLDriver    0x1259174     0x48
+       0.0%                     0x123e16c [604B]   ATIRadeonX1000GLDriver    0x123e16c    0x25c
+       0.0%                     0x1235de4 [948B]   ATIRadeonX1000GLDriver    0x1235de4    0x3b4
+       0.0%                     0x1234e4c [948B]   ATIRadeonX1000GLDriver    0x1234e4c    0x3b4
+       0.0%                     0x122969c [680B]   ATIRadeonX1000GLDriver    0x122969c    0x2a8
+       0.0%                     0x1227888 [444B]   ATIRadeonX1000GLDriver    0x1227888    0x1bc
+       0.0%                     0x1212e8c [460B]   ATIRadeonX1000GLDriver    0x1212e8c    0x1cc
+       0.0%                    0x120d928 [2.0KB]   ATIRadeonX1000GLDriver    0x120d928    0x7d8
+       0.0%                     0x120cfe8 [484B]   ATIRadeonX1000GLDriver    0x120cfe8    0x1e4
+       0.0%                      0x120ce40 [52B]   ATIRadeonX1000GLDriver    0x120ce40     0x34
+       0.0%                     0x11ee334 [748B]   ATIRadeonX1000GLDriver    0x11ee334    0x2ec
+       0.0%                    0x11ed044 [2.3KB]   ATIRadeonX1000GLDriver    0x11ed044    0x91c
+       0.0%                    0x11c3488 [2.1KB]   ATIRadeonX1000GLDriver    0x11c3488    0x838
+       0.0%                    0x11c0ad8 [1.5KB]   ATIRadeonX1000GLDriver    0x11c0ad8    0x5e8
+       0.0%                    0x11980c0 [3.0KB]   ATIRadeonX1000GLDriver    0x11980c0    0xbf8
+       0.0%                    0x119571c [1.3KB]   ATIRadeonX1000GLDriver    0x119571c    0x560
+       0.0%                     0x11952d4 [628B]   ATIRadeonX1000GLDriver    0x11952d4    0x274
+       0.0%                   vm_page_deactivate              mach_kernel      0x82edc    0x2a4
+       0.0%                               vm_map              mach_kernel      0x86ea0     0xa4
+       0.0%                           upl_commit              mach_kernel      0x7f508    0x338
+       0.0%         updateAllDisplayInfoAsNeeded             CoreGraphics   0x903b89a0    0x2b8
+       0.0%                        szone_realloc        libSystem.B.dylib   0x90018504   0x10bc
+       0.0%                      rwlePatch_isync              mach_kernel      0xa50b8     0x28
+       0.0% OSSymbol::taggedRelease(void const*) const              mach_kernel     0x306620     0x10
+       0.0% OSSet::member(OSMetaClassBase const*) const              mach_kernel     0x304458     0x68
+       0.0% OSObject::operator new(unsigned long)              mach_kernel     0x2fbfcc     0x6c
+       0.0%                       munge_wwwwwwww              mach_kernel     0x2ace20     0x80
+       0.0%                          mapSetLists              mach_kernel      0xa3760     0x4c
+       0.0%                   malloc_zone_malloc        libSystem.B.dylib   0x90003280    0x2b8
+       0.0%                   malloc_zone_calloc        libSystem.B.dylib   0x90015cf4    0x2c8
+       0.0% is_io_connect_method_scalarI_structureI              mach_kernel     0x2ec3bc    0x31c
+       0.0%             is_io_connect_map_memory              mach_kernel     0x2eb8ec    0x13c
+       0.0%             ipc_kmsg_get_from_kernel              mach_kernel      0x1a9dc    0x16c
+       0.0%               ipc_kmsg_copyin_header              mach_kernel      0x1ad1c    0x4d8
+       0.0% IORegistryEntry::makeLink(IORegistryEntry*, unsigned, IORegistryPlane const*) const              mach_kernel     0x2b9574    0x118
+       0.0% IORegistryEntry::init(OSDictionary*)              mach_kernel     0x2b6f38    0x16c
+       0.0% IORegistryEntry::getChildSetReference(IORegistryPlane const*) const              mach_kernel     0x2b9958     0x28
+       0.0% IORegistryEntry::attachToParent(IORegistryEntry*, IORegistryPlane const*)              mach_kernel     0x2ba03c    0x1b8
+       0.0%                IORecursiveLockUnlock              mach_kernel     0x2b28f8     0x24
+       0.0%              IOPageableMapForAddress              mach_kernel     0x2b2338     0x94
+       0.0% IOMemoryDescriptor::removeMapping(IOMemoryMap*)              mach_kernel     0x2da480     0x1c
+       0.0% IOMemoryDescriptor::makeMapping(IOMemoryDescriptor*, task*, unsigned, unsigned long, unsigned long, unsigned long)              mach_kernel     0x2da074    0x398
+       0.0%                  iokit_add_reference              mach_kernel     0x2e860c     0x18
+       0.0%        IOConnectMethodScalarIScalarO                    IOKit   0x90aedfb8     0x94
+       0.0% IOBufferMemoryDescriptor::IOBufferMemoryDescriptor[in-charge]()              mach_kernel     0x2dceb8     0x4c
+       0.0%     IOBufferMemoryDescriptor::free()              mach_kernel     0x2dd4e8    0x158
+       0.0%    IOATIR500Surface::prune_buffers() com.apple.ATIRadeonX1000     0x554e80    0x330
+       0.0% IOATIR500GLContext::freeAllContextBuffers() com.apple.ATIRadeonX1000     0x549000    0x130
+       0.0% IOATIR500GLContext::allocAllContextBuffers(unsigned long) com.apple.ATIRadeonX1000     0x5494d0    0x1c0
+       0.0% IOATIR500Accelerator::newUserClient(task*, void*, unsigned long, IOUserClient**) com.apple.ATIRadeonX1000     0x544070    0x2a0
+       0.0%                IOAccelDestroyAccelID                    IOKit   0x90afcd44     0x48
+       0.0%         gleIterateHashMachineObjects                 GLEngine    0x1038b18     0x6c
+       0.0%                           gleDCBFree                 GLEngine    0x1037cb8      0xc
+       0.0%            gldDestroyPipelineProgram   ATIRadeonX1000GLDriver    0x114f570    0x710
+       0.0%                       gldCreateQuery   ATIRadeonX1000GLDriver    0x114fe70   0x1850
+       0.0%                         glBegin_Exec                 GLEngine    0x1024acc    0x2c0
+       0.0%                              glBegin              libGL.dylib   0x92f28a4c     0x7c
+       0.0%                 enter_funnel_section              mach_kernel      0xa4fa0     0x48
+       0.0%              dyld_stub_vm_deallocate        libSystem.B.dylib   0x90198f00     0x20
+       0.0%                         current_task              mach_kernel      0x391d8      0xc
+       0.0%            convert_port_entry_to_map              mach_kernel      0x74fa4    0x11c
+       0.0%                 CGSNewRegionWithRect             CoreGraphics   0x9037d72c    0x1c8
+       0.0%                cglSetContextDefaults                   OpenGL   0x93704318    0x188
+       0.0%                    CFStringGetLength           CoreFoundation   0x907bfe74     0xe8
+       0.0%                            CFRelease           CoreFoundation   0x907beb7c     0xe8
+       0.0%                               CFLog2           CoreFoundation   0x907c9708    0x4d0
+       0.0%                          CFGetTypeID           CoreFoundation   0x907d66e4     0xa8
+       0.0%                 CFDictionaryGetValue           CoreFoundation   0x907d076c    0x104
+       0.0% ATIRadeonX1000::waitForTimeStamp(unsigned long) com.apple.ATIRadeonX1000     0x5671e0    0x180
+       0.0% ATIR500Memory::dealloc(GLKMemoryElement*) com.apple.ATIRadeonX1000     0x55b7d0    0x140
+       0.0% _IOMemoryMap::initWithDescriptor(IOMemoryDescriptor*, task*, unsigned, unsigned long, unsigned long, unsigned long)              mach_kernel     0x2d8be8    0x374
+       0.0%             _CFRuntimeCreateInstance           CoreFoundation   0x907bcfbc    0x1c4
+       0.0%                _CFArrayReplaceValues           CoreFoundation   0x907c0c4c    0x714
+       0.0%        __CFXNotificationSendToServer           CoreFoundation   0x907f59d0    0x394
+       0.0%                       0x131e2d0 [4B]   ATIRadeonX1000GLDriver    0x131e2d0      0x4
+       0.0%                     0x12e4f50 [320B]   ATIRadeonX1000GLDriver    0x12e4f50    0x140
+       0.0%                     0x12dce3c [952B]   ATIRadeonX1000GLDriver    0x12dce3c    0x3b8
+       0.0%                      0x12db2d8 [84B]   ATIRadeonX1000GLDriver    0x12db2d8     0x54
+       0.0%                     0x12da938 [344B]   ATIRadeonX1000GLDriver    0x12da938    0x158
+       0.0%                      0x12da034 [40B]   ATIRadeonX1000GLDriver    0x12da034     0x28
+       0.0%                      0x12cf560 [60B]   ATIRadeonX1000GLDriver    0x12cf560     0x3c
+       0.0%                    0x12cdad8 [1.9KB]   ATIRadeonX1000GLDriver    0x12cdad8    0x7c8
+       0.0%                     0x12be87c [340B]   ATIRadeonX1000GLDriver    0x12be87c    0x154
+       0.0%                     0x12be648 [360B]   ATIRadeonX1000GLDriver    0x12be648    0x168
+       0.0%                     0x12b2640 [812B]   ATIRadeonX1000GLDriver    0x12b2640    0x32c
+       0.0%                    0x12b21e4 [1.1KB]   ATIRadeonX1000GLDriver    0x12b21e4    0x458
+       0.0%                     0x12acba8 [336B]   ATIRadeonX1000GLDriver    0x12acba8    0x150
+       0.0%                    0x12a6320 [2.9KB]   ATIRadeonX1000GLDriver    0x12a6320    0xb8c
+       0.0%                    0x12a544c [3.7KB]   ATIRadeonX1000GLDriver    0x12a544c    0xed0
+       0.0%                    0x12a2eb0 [4.1KB]   ATIRadeonX1000GLDriver    0x12a2eb0   0x1090
+       0.0%                    0x12938f8 [2.5KB]   ATIRadeonX1000GLDriver    0x12938f8    0x9e0
+       0.0%                     0x1282210 [960B]   ATIRadeonX1000GLDriver    0x1282210    0x3c0
+       0.0%                    0x126b7b0 [1.1KB]   ATIRadeonX1000GLDriver    0x126b7b0    0x45c
+       0.0%                     0x1269424 [152B]   ATIRadeonX1000GLDriver    0x1269424     0x98
+       0.0%                    0x1267000 [1.2KB]   ATIRadeonX1000GLDriver    0x1267000    0x4cc
+       0.0%                    0x1264aa0 [1.0KB]   ATIRadeonX1000GLDriver    0x1264aa0    0x424
+       0.0%                      0x1259090 [72B]   ATIRadeonX1000GLDriver    0x1259090     0x48
+       0.0%                    0x1254f68 [1.0KB]   ATIRadeonX1000GLDriver    0x1254f68    0x418
+       0.0%                      0x1253c9c [24B]   ATIRadeonX1000GLDriver    0x1253c9c     0x18
+       0.0%                      0x124a5e4 [92B]   ATIRadeonX1000GLDriver    0x124a5e4     0x5c
+       0.0%                     0x123f2fc [476B]   ATIRadeonX1000GLDriver    0x123f2fc    0x1dc
+       0.0%                    0x123cd14 [2.5KB]   ATIRadeonX1000GLDriver    0x123cd14    0xa04
+       0.0%                     0x123c0c4 [384B]   ATIRadeonX1000GLDriver    0x123c0c4    0x180
+       0.0%                     0x12389b8 [672B]   ATIRadeonX1000GLDriver    0x12389b8    0x2a0
+       0.0%                     0x12337e4 [180B]   ATIRadeonX1000GLDriver    0x12337e4     0xb4
+       0.0%                      0x122f730 [72B]   ATIRadeonX1000GLDriver    0x122f730     0x48
+       0.0%                    0x1226850 [1.1KB]   ATIRadeonX1000GLDriver    0x1226850    0x454
+       0.0%                      0x1226794 [32B]   ATIRadeonX1000GLDriver    0x1226794     0x20
+       0.0%                    0x12113d4 [2.1KB]   ATIRadeonX1000GLDriver    0x12113d4    0x874
+       0.0%                    0x12039a0 [1.2KB]   ATIRadeonX1000GLDriver    0x12039a0    0x4cc
+       0.0%                    0x11ee624 [1.4KB]   ATIRadeonX1000GLDriver    0x11ee624    0x5cc
+       0.0%                     0x11eda60 [508B]   ATIRadeonX1000GLDriver    0x11eda60    0x1fc
+       0.0%                     0x11cde78 [776B]   ATIRadeonX1000GLDriver    0x11cde78    0x308
+       0.0%                     0x11cca08 [104B]   ATIRadeonX1000GLDriver    0x11cca08     0x68
+       0.0%                     0x1190b54 [312B]   ATIRadeonX1000GLDriver    0x1190b54    0x138
+       0.0%                               zalloc              mach_kernel      0x40350      0x8
+       0.0%            vm_object_hash_entry_free              mach_kernel      0x755a0    0x2a4
+       0.0%                    vm_map_deallocate              mach_kernel      0x75238     0x84
+       0.0%                    vm_map_create_upl              mach_kernel      0x7d708    0x5f0
+       0.0%                               valloc        libSystem.B.dylib   0x90047fe4    0x2ec
+       0.0%                         pthread_self        libSystem.B.dylib   0x900013a0     0x14
+       0.0%                       pmap_zero_page              mach_kernel      0xaafe0     0x60
+       0.0% OSSymbol::isEqualTo(OSMetaClassBase const*) const              mach_kernel     0x3066fc   0x1314
+       0.0%          OSSet::iteratorSize() const              mach_kernel     0x304628      0x8
+       0.0% OSObject::taggedRelease(void const*) const              mach_kernel     0x2fbd90     0x14
+       0.0% OSMetaClassBase::safeMetaCast(OSMetaClassBase const*, OSMetaClass const*)              mach_kernel     0x2f9e60      0xc
+       0.0%                    OSIncrementAtomic              mach_kernel     0x30a860      0x8
+       0.0%      OSCollectionIterator::isValid()              mach_kernel     0x2fe1e0     0xe0
+       0.0%                               memcmp        libSystem.B.dylib   0x901311a0    0x118
+       0.0%               mach_notify_no_senders              mach_kernel      0x49084     0x60
+       0.0%               mach_make_memory_entry              mach_kernel      0x888c4     0x6c
+       0.0%            mach_destroy_memory_entry              mach_kernel      0x88c74     0x98
+       0.0%                     ipc_right_copyin              mach_kernel      0x20930    0x3c0
+       0.0%                ipc_kmsg_copyout_body              mach_kernel      0x1c098    0x4f4
+       0.0%                ipc_hash_local_lookup              mach_kernel      0x19d90     0x88
+       0.0%  IOService::lockForArbitration(bool)              mach_kernel     0x2bdb24    0x36c
+       0.0% IORegistryEntry::detachFromParent(IORegistryEntry*, IORegistryPlane const*)              mach_kernel     0x2ba304    0x110
+       0.0% IOGeneralMemoryDescriptor::complete(IODirection)              mach_kernel     0x2d810c    0x158
+       0.0%  IOATIR500Surface::start(IOService*) com.apple.ATIRadeonX1000     0x5539f0    0x460
+       0.0% IOATIR500GLContext::get_status(unsigned long*) com.apple.ATIRadeonX1000     0x54d250    0x1f0
+       0.0%                io_connect_map_memory                    IOKit   0x90af3028    0x1c8
+       0.0%                 gleVectorNormalizeNO                 GLEngine    0x100f6c0     0xcc
+       0.0%                    gleUpdatePolyMode                 GLEngine    0x1011404    0x198
+       0.0%                     gleTexEnableBits                 GLEngine    0x110b79c     0xc0
+       0.0%          gleInitPipelineProgramState                 GLEngine    0x100de5c    0x270
+       0.0%                  gleFreeTextureState                 GLEngine    0x103885c    0x178
+       0.0%               gleCreateFuncCacheElem                 GLEngine    0x1025e88     0x9c
+       0.0%             gleBeginPrimitiveTCLFunc                 GLEngine    0x1025120     0xa8
+       0.0%                     gldCreateContext   ATIRadeonX1000GLDriver    0x114c700    0x6d0
+       0.0%        dyld_stub_pthread_setspecific              libGL.dylib   0x92f45f80     0x20
+       0.0%       dyld_stub_pthread_mutex_unlock                   OpenGL   0x9370de00     0x20
+       0.0%                   dyld_stub_mach_msg                    IOKit   0x90b4afa0     0x20
+       0.0%                 dyld_stub_glVertex2f            perf_baseline       0x3c80     0x20
+       0.0%        dyld_stub_glcPluginDisconnect                   OpenGL   0x9370ea20     0x20
+       0.0%    dyld_stub___commpage_gettimeofday        libSystem.B.dylib   0x9019c460     0x20
+       0.0%                    current_processor              mach_kernel      0xafea0     0x20
+       0.0%                               CFHash           CoreFoundation   0x907cab00     0xa8
+       0.0%                              CFEqual           CoreFoundation   0x907c6bc0    0x148
+       0.0%         CFDictionaryGetKeysAndValues           CoreFoundation   0x907d8bac    0x168
+       0.0% ATIR500GLContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**) com.apple.ATIRadeonX1000     0x569000     0xa0
+       0.0% AppleDART::iovmFree(unsigned, unsigned long) com.apple.driver.AppleMacRiscPCI     0x7958b4    0x1f8
+       0.0% _IOMemoryMap::taggedRelease(void const*) const              mach_kernel     0x2d9894     0x58
+       0.0%                         _CGSLogTrace             CoreGraphics   0x9037f078     0xe0
+       0.0%                          __floatdidf           CoreFoundation   0x907dee7c     0x60
+       0.0%                  __CFSetFindBuckets2           CoreFoundation   0x907d6e14    0x184
+       0.0%                       0x131d8e0 [4B]   ATIRadeonX1000GLDriver    0x131d8e0      0x4
+       0.0%                       0x13149ac [4B]   ATIRadeonX1000GLDriver    0x13149ac      0x4
+       0.0%                      0x1313c88 [24B]   ATIRadeonX1000GLDriver    0x1313c88     0x18
+       0.0%                      0x12e4ec4 [48B]   ATIRadeonX1000GLDriver    0x12e4ec4     0x30
+       0.0%                       0x12db574 [8B]   ATIRadeonX1000GLDriver    0x12db574      0x8
+       0.0%                    0x12c9b9c [1.1KB]   ATIRadeonX1000GLDriver    0x12c9b9c    0x47c
+       0.0%                     0x12c196c [744B]   ATIRadeonX1000GLDriver    0x12c196c    0x2e8
+       0.0%                     0x12bcc40 [296B]   ATIRadeonX1000GLDriver    0x12bcc40    0x128
+       0.0%                     0x12b986c [200B]   ATIRadeonX1000GLDriver    0x12b986c     0xc8
+       0.0%                     0x12b7e68 [404B]   ATIRadeonX1000GLDriver    0x12b7e68    0x194
+       0.0%                     0x12b33b0 [388B]   ATIRadeonX1000GLDriver    0x12b33b0    0x184
+       0.0%                     0x12afb70 [700B]   ATIRadeonX1000GLDriver    0x12afb70    0x2bc
+       0.0%                      0x12aabd8 [16B]   ATIRadeonX1000GLDriver    0x12aabd8     0x10
+       0.0%                    0x12a9478 [1.3KB]   ATIRadeonX1000GLDriver    0x12a9478    0x518
+       0.0%                    0x12a4494 [1.4KB]   ATIRadeonX1000GLDriver    0x12a4494    0x5a4
+       0.0%                     0x12a1974 [968B]   ATIRadeonX1000GLDriver    0x12a1974    0x3c8
+       0.0%                    0x1291dbc [1.9KB]   ATIRadeonX1000GLDriver    0x1291dbc    0x774
+       0.0%                     0x128e46c [632B]   ATIRadeonX1000GLDriver    0x128e46c    0x278
+       0.0%                      0x12769dc [40B]   ATIRadeonX1000GLDriver    0x12769dc     0x28
+       0.0%                     0x1270b04 [104B]   ATIRadeonX1000GLDriver    0x1270b04     0x68
+       0.0%                      0x126e030 [24B]   ATIRadeonX1000GLDriver    0x126e030     0x18
+       0.0%                    0x126d994 [1.2KB]   ATIRadeonX1000GLDriver    0x126d994    0x4b0
+       0.0%                     0x126b0dc [624B]   ATIRadeonX1000GLDriver    0x126b0dc    0x270
+       0.0%                     0x126979c [296B]   ATIRadeonX1000GLDriver    0x126979c    0x128
+       0.0%                     0x1266cb8 [836B]   ATIRadeonX1000GLDriver    0x1266cb8    0x344
+       0.0%                    0x1265f68 [3.3KB]   ATIRadeonX1000GLDriver    0x1265f68    0xd4c
+       0.0%                     0x1265578 [640B]   ATIRadeonX1000GLDriver    0x1265578    0x280
+       0.0%                     0x1264988 [276B]   ATIRadeonX1000GLDriver    0x1264988    0x114
+       0.0%                     0x125979c [120B]   ATIRadeonX1000GLDriver    0x125979c     0x78
+       0.0%                      0x124abbc [40B]   ATIRadeonX1000GLDriver    0x124abbc     0x28
+       0.0%                    0x12413d4 [8.5KB]   ATIRadeonX1000GLDriver    0x12413d4   0x21f0
+       0.0%                     0x123ed50 [564B]   ATIRadeonX1000GLDriver    0x123ed50    0x234
+       0.0%                     0x123eaa0 [484B]   ATIRadeonX1000GLDriver    0x123eaa0    0x1e4
+       0.0%                    0x123a114 [1.2KB]   ATIRadeonX1000GLDriver    0x123a114    0x4e0
+       0.0%                     0x12391e8 [108B]   ATIRadeonX1000GLDriver    0x12391e8     0x6c
+       0.0%                      0x12390d4 [48B]   ATIRadeonX1000GLDriver    0x12390d4     0x30
+       0.0%                     0x1234c50 [504B]   ATIRadeonX1000GLDriver    0x1234c50    0x1f8
+       0.0%                    0x12333a4 [1.1KB]   ATIRadeonX1000GLDriver    0x12333a4    0x43c
+       0.0%                     0x122f3ac [896B]   ATIRadeonX1000GLDriver    0x122f3ac    0x380
+       0.0%                     0x122ea08 [384B]   ATIRadeonX1000GLDriver    0x122ea08    0x180
+       0.0%                      0x122d770 [76B]   ATIRadeonX1000GLDriver    0x122d770     0x4c
+       0.0%                     0x122be70 [828B]   ATIRadeonX1000GLDriver    0x122be70    0x33c
+       0.0%                    0x122b570 [1.1KB]   ATIRadeonX1000GLDriver    0x122b570    0x47c
+       0.0%                     0x122aa38 [516B]   ATIRadeonX1000GLDriver    0x122aa38    0x204
+       0.0%                    0x1228084 [1.2KB]   ATIRadeonX1000GLDriver    0x1228084    0x49c
+       0.0%                     0x1227fe4 [156B]   ATIRadeonX1000GLDriver    0x1227fe4     0x9c
+       0.0%                     0x11e81c4 [108B]   ATIRadeonX1000GLDriver    0x11e81c4     0x6c
+       0.0%                     0x11d6468 [980B]   ATIRadeonX1000GLDriver    0x11d6468    0x3d4
+       0.0%                     0x11ce184 [748B]   ATIRadeonX1000GLDriver    0x11ce184    0x2ec
+       0.0%                     0x11c8c44 [756B]   ATIRadeonX1000GLDriver    0x11c8c44    0x2f4
+       0.0%                     0x11c8900 [832B]   ATIRadeonX1000GLDriver    0x11c8900    0x340
+       0.0%                    0x11bef78 [2.4KB]   ATIRadeonX1000GLDriver    0x11bef78    0x968
+       0.0%                     0x11aaf34 [672B]   ATIRadeonX1000GLDriver    0x11aaf34    0x2a0
+       0.0%                     0x119aa88 [136B]   ATIRadeonX1000GLDriver    0x119aa88     0x88
+       0.0%                     0x119554c [460B]   ATIRadeonX1000GLDriver    0x119554c    0x1cc
+       0.0%                     0x1194a68 [800B]   ATIRadeonX1000GLDriver    0x1194a68    0x320
+       0.0%                     0x1193770 [836B]   ATIRadeonX1000GLDriver    0x1193770    0x344
+       0.0%                     vm_map_enter_cpm              mach_kernel      0x678b4    0x3b0
+       0.0%                      task_deallocate              mach_kernel      0x38160     0x90
+       0.0%                               scalbn        libSystem.B.dylib   0x90050800    0x360
+       0.0%                   pthread_mutex_init        libSystem.B.dylib   0x90014c78     0xa4
+       0.0%     PPCConstantsAndScratchInitialise libGLProgrammability.dylib   0x97be5700    0x4ac
+       0.0% OSSet::containsObject(OSMetaClassBase const*) const              mach_kernel     0x304408     0x50
+       0.0% OSObject::OSObject[not-in-charge](OSMetaClass const*)              mach_kernel     0x2fb8f4     0x44
+       0.0% OSObject::operator delete(void*, unsigned long)              mach_kernel     0x2fc038    0x118
+       0.0% OSMetaClass::instanceDestructed() const              mach_kernel     0x2facc4     0x80
+       0.0% OSDictionary::setObject(OSSymbol const*, OSMetaClassBase const*)              mach_kernel     0x2ffee0    0x180
+       0.0%       OSData::withCapacity(unsigned)              mach_kernel     0x2fe964     0x7c
+       0.0%   OSData::initWithCapacity(unsigned)              mach_kernel     0x2fe6f0    0x100
+       0.0%       OSData::getBytesNoCopy() const              mach_kernel     0x2feea4     0x1c
+       0.0% OSData::appendBytes(void const*, unsigned)              mach_kernel     0x2fed38     0xb8
+       0.0%      OSArray::removeObject(unsigned)              mach_kernel     0x2fcc04     0xb0
+       0.0%                         new_obj_hash              mach_kernel      0x6014c     0x84
+       0.0%                         mutex_unlock              mach_kernel      0xa49c0     0x20
+       0.0%                           mutex_init              mach_kernel      0xa41a0     0x40
+       0.0%                                 log2    libmathCommon.A.dylib   0x90216de0    0x380
+       0.0%                      ipc_right_check              mach_kernel      0x1fb3c     0xb8
+       0.0%        ipc_object_copyin_from_kernel              mach_kernel      0x1e128    0x158
+       0.0%                ipc_notify_no_senders              mach_kernel      0x1d9e8     0x64
+       0.0%                        ipc_kmsg_send              mach_kernel      0x1ab48    0x148
+       0.0%          ipc_kmsg_copyin_from_kernel              mach_kernel      0x1b9b8    0x218
+       0.0% IOUserClient::removeMappingForDescriptor(IOMemoryDescriptor*)              mach_kernel     0x2eba28     0xe0
+       0.0% IOSubMemoryDescriptor::makeMapping(IOMemoryDescriptor*, task*, unsigned, unsigned long, unsigned long, unsigned long)              mach_kernel     0x2dacbc     0xe4
+       0.0%        IOService::attach(IOService*)              mach_kernel     0x2bcb6c    0x128
+       0.0% IOMemoryDescriptor::IOMemoryDescriptor[not-in-charge](OSMetaClass const*)              mach_kernel     0x2d5ca0     0x3c
+       0.0%                IOIteratePageableMaps              mach_kernel     0x2b20f8    0x1a4
+       0.0% IOGeneralMemoryDescriptor::getPhysicalSegment(unsigned long, unsigned long*)              mach_kernel     0x2d71e0    0x308
+       0.0% IOGeneralMemoryDescriptor::doUnmap(vm_map*, unsigned, unsigned long)              mach_kernel     0x2d85d0     0xec
+       0.0% IOATIR500Surface::set_volatile_state(eSurfaceVolatileState) com.apple.ATIRadeonX1000     0x557b70    0x140
+       0.0% IOATIR500Surface::remove_gl_context_from_list(IOATIR500GLContext*) com.apple.ATIRadeonX1000     0x555ec0     0x90
+       0.0%             IOATIR500Surface::free() com.apple.ATIRadeonX1000     0x552a50     0x70
+       0.0% IOATIR500Surface::dealloc_surface(unsigned long) com.apple.ATIRadeonX1000     0x554580     0xc0
+       0.0% IOATIR500GLContext::read_buffer(sIOGLContextReadBufferData*, unsigned long) com.apple.ATIRadeonX1000     0x54ad10    0x520
+       0.0% IOATIR500Accelerator::getVRAMDescriptor(unsigned long) com.apple.ATIRadeonX1000     0x542290     0xe0
+       0.0% IOAccelerationUserClient::getMetaClass() const com.apple.iokit.IOGraphicsFamily     0x508470      0xc
+       0.0%     gliSetCurrentPluginDispatchTable                 GLEngine    0x1011ed8    0x120
+       0.0%                    gliDestroyContext                 GLEngine    0x103793c    0x12c
+       0.0%            gleUpdateTextureTransform                 GLEngine    0x1010b84    0x110
+       0.0%               gleUpdateLightPosition                 GLEngine    0x100f4a4    0x21c
+       0.0%            gleUpdateLightAttenuation                 GLEngine    0x100fb78    0x118
+       0.0%                  gleInitDerivedState                 GLEngine    0x100d4d4    0x2d8
+       0.0%             gleFreeVertexArrayObject                 GLEngine    0x1038200     0xc4
+       0.0%              gleFreeFramebufferState                 GLEngine    0x10d6bc0    0x100
+       0.0%                 gleBuildVertexFuncNO                 GLEngine    0x10252d4    0xb58
+       0.0%                gldReclaimVertexArray   ATIRadeonX1000GLDriver    0x1151b40     0xe0
+       0.0%                     glcLoadRenderers                   OpenGL   0x93705e14    0x2d0
+       0.0%                    glcInitializeNoop                   OpenGL   0x937040dc    0x23c
+       0.0%                         glcGetPlugin                   OpenGL   0x937065a4     0x98
+       0.0%         dyld_stub_pthread_mutex_lock                   OpenGL   0x9370de40     0x20
+       0.0%             dyld_stub_OSSpinLockLock           CoreFoundation   0x9086cbc0     0x20
+       0.0%                    dyld_stub_memmove           CoreFoundation   0x9086c8c0     0x20
+       0.0%         dyld_stub_malloc_zone_malloc           CoreFoundation   0x9086cf20     0x20
+       0.0%      dyld_stub_IOAccelDestroyAccelID                   OpenGL   0x9370f060     0x20
+       0.0%                  dyld_stub_glColor3f            perf_baseline       0x3e20     0x20
+       0.0%                       current_thread              mach_kernel      0xaff00     0x20
+       0.0%       CGOpenGLDisplayMaskToDisplayID             CoreGraphics   0x90494f24     0xb4
+       0.0%                    cglSetAnyDrawable                   OpenGL   0x93709540    0x138
+       0.0%              cglRequestedPixelFormat                   OpenGL   0x937057cc    0x584
+       0.0%                 cglInitializeContext                   OpenGL   0x9370787c    0x360
+       0.0%                    CGLDestroyContext                   OpenGL   0x93709c5c    0x160
+       0.0%                     CGLCreateContext                   OpenGL   0x937075d4    0x2a8
+       0.0%                       CFNumberCreate           CoreFoundation   0x907d5abc    0x364
+       0.0%                 CFDictionaryAddValue           CoreFoundation   0x907ca590    0x3ec
+       0.0%                CFAllocatorDeallocate           CoreFoundation   0x907bf038    0x100
+       0.0%                  CFAllocatorAllocate           CoreFoundation   0x907bd180    0x13c
+       0.0%                   bindDisplayMapping             CoreGraphics   0x903b42c8    0x1d8
+       0.0% ATIRadeonX1000::removeFromGART(IOMemoryDescriptor*, unsigned long) com.apple.ATIRadeonX1000     0x55d6a0     0x30
+       0.0%     ATIR500Surface::stop(IOService*) com.apple.ATIRadeonX1000     0x57d0c0    0x250
+       0.0% ATIR500Surface::copy_from_buffer(long, long, long, long, unsigned long, unsigned long, ATIR500SurfaceBuffer*, unsigned long, VendorTransferBuffer*, unsigned long, unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x585730    0x730
+       0.0%          ATIR500Memory::total_free() com.apple.ATIRadeonX1000     0x55b910     0x60
+       0.0% ATIR500Memory::alloc(GLKMemoryElement*, unsigned long, unsigned long, unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x55b5f0    0x1e0
+       0.0%       ATIR500GLContext::invalidate() com.apple.ATIRadeonX1000     0x568fb0     0x20
+       0.0% ATIR500GLContext::getMetaClass() const com.apple.ATIRadeonX1000     0x568aa0     0x10
+       0.0%        _CFXNotificationGetHostCenter           CoreFoundation   0x907f3bc0     0x74
+       0.0%                            _CFRetain           CoreFoundation   0x907c1458    0x10c
+       0.0%             _CFDictionarySetCapacity           CoreFoundation   0x907db858     0x50
+       0.0%     __CFXNotificationUnregisterTable           CoreFoundation   0x90808b4c    0x36c
+       0.0%                      __CFStringEqual           CoreFoundation   0x907c6d08    0x3d8
+       0.0%     __CFStringCreateImmutableFunnel3           CoreFoundation   0x907bc738    0x884
+       0.0%          __CFDictionaryFindBuckets1a           CoreFoundation   0x907db9d0     0x68
+       0.0%                        __CFArrayInit           CoreFoundation   0x907c0798    0x3c4
+       0.0%                      0x131e824 [16B]   ATIRadeonX1000GLDriver    0x131e824     0x10
+       0.0%                      0x131e660 [80B]   ATIRadeonX1000GLDriver    0x131e660     0x50
+       0.0%                     0x131d974 [248B]   ATIRadeonX1000GLDriver    0x131d974     0xf8
+       0.0%                     0x1315a08 [120B]   ATIRadeonX1000GLDriver    0x1315a08     0x78
+       0.0%                       0x1313768 [4B]   ATIRadeonX1000GLDriver    0x1313768      0x4
+       0.0%                       0x1313760 [4B]   ATIRadeonX1000GLDriver    0x1313760      0x4
+       0.0%                       0x1313700 [4B]   ATIRadeonX1000GLDriver    0x1313700      0x4
+       0.0%                     0x12e7b64 [444B]   ATIRadeonX1000GLDriver    0x12e7b64    0x1bc
+       0.0%                     0x12dd86c [244B]   ATIRadeonX1000GLDriver    0x12dd86c     0xf4
+       0.0%                      0x12da0a8 [68B]   ATIRadeonX1000GLDriver    0x12da0a8     0x44
+       0.0%                     0x12d555c [276B]   ATIRadeonX1000GLDriver    0x12d555c    0x114
+       0.0%                     0x12cf840 [360B]   ATIRadeonX1000GLDriver    0x12cf840    0x168
+       0.0%                     0x12cee24 [252B]   ATIRadeonX1000GLDriver    0x12cee24     0xfc
+       0.0%                     0x12c7b80 [892B]   ATIRadeonX1000GLDriver    0x12c7b80    0x37c
+       0.0%                     0x12be338 [316B]   ATIRadeonX1000GLDriver    0x12be338    0x13c
+       0.0%                     0x12b9af8 [156B]   ATIRadeonX1000GLDriver    0x12b9af8     0x9c
+       0.0%                     0x12b9938 [444B]   ATIRadeonX1000GLDriver    0x12b9938    0x1bc
+       0.0%                      0x12b8ee8 [16B]   ATIRadeonX1000GLDriver    0x12b8ee8     0x10
+       0.0%                     0x12b8d1c [164B]   ATIRadeonX1000GLDriver    0x12b8d1c     0xa4
+       0.0%                      0x12b8ba0 [44B]   ATIRadeonX1000GLDriver    0x12b8ba0     0x2c
+       0.0%                    0x12b3f8c [2.1KB]   ATIRadeonX1000GLDriver    0x12b3f8c    0x898
+       0.0%                    0x12b1d70 [1.1KB]   ATIRadeonX1000GLDriver    0x12b1d70    0x470
+       0.0%                     0x12aaa74 [308B]   ATIRadeonX1000GLDriver    0x12aaa74    0x134
+       0.0%                    0x12a1d40 [2.4KB]   ATIRadeonX1000GLDriver    0x12a1d40    0x990
+       0.0%                    0x129ba60 [4.6KB]   ATIRadeonX1000GLDriver    0x129ba60   0x1254
+       0.0%                     0x129b46c [484B]   ATIRadeonX1000GLDriver    0x129b46c    0x1e4
+       0.0%                     0x1296b94 [416B]   ATIRadeonX1000GLDriver    0x1296b94    0x1a0
+       0.0%                     0x12946e4 [764B]   ATIRadeonX1000GLDriver    0x12946e4    0x2fc
+       0.0%                     0x1292aec [984B]   ATIRadeonX1000GLDriver    0x1292aec    0x3d8
+       0.0%                     0x1283160 [596B]   ATIRadeonX1000GLDriver    0x1283160    0x254
+       0.0%                     0x1282a48 [168B]   ATIRadeonX1000GLDriver    0x1282a48     0xa8
+       0.0%                    0x12813f0 [2.4KB]   ATIRadeonX1000GLDriver    0x12813f0    0x974
+       0.0%                    0x127a658 [1.1KB]   ATIRadeonX1000GLDriver    0x127a658    0x44c
+       0.0%                    0x1274acc [1.5KB]   ATIRadeonX1000GLDriver    0x1274acc    0x628
+       0.0%                    0x12732d8 [2.5KB]   ATIRadeonX1000GLDriver    0x12732d8    0xa14
+       0.0%                     0x1270970 [112B]   ATIRadeonX1000GLDriver    0x1270970     0x70
+       0.0%                     0x126d534 [104B]   ATIRadeonX1000GLDriver    0x126d534     0x68
+       0.0%                     0x1265b94 [976B]   ATIRadeonX1000GLDriver    0x1265b94    0x3d0
+       0.0%                     0x1253358 [368B]   ATIRadeonX1000GLDriver    0x1253358    0x170
+       0.0%                     0x124f938 [160B]   ATIRadeonX1000GLDriver    0x124f938     0xa0
+       0.0%                    0x124cba0 [1.1KB]   ATIRadeonX1000GLDriver    0x124cba0    0x458
+       0.0%                     0x124c9e8 [348B]   ATIRadeonX1000GLDriver    0x124c9e8    0x15c
+       0.0%                     0x124b334 [436B]   ATIRadeonX1000GLDriver    0x124b334    0x1b4
+       0.0%                      0x124a104 [60B]   ATIRadeonX1000GLDriver    0x124a104     0x3c
+       0.0%                    0x12498ec [1.1KB]   ATIRadeonX1000GLDriver    0x12498ec    0x460
+       0.0%                     0x123e8b4 [168B]   ATIRadeonX1000GLDriver    0x123e8b4     0xa8
+       0.0%                     0x1239d38 [768B]   ATIRadeonX1000GLDriver    0x1239d38    0x300
+       0.0%                     0x1239c30 [196B]   ATIRadeonX1000GLDriver    0x1239c30     0xc4
+       0.0%                      0x1239a30 [92B]   ATIRadeonX1000GLDriver    0x1239a30     0x5c
+       0.0%                      0x1239154 [56B]   ATIRadeonX1000GLDriver    0x1239154     0x38
+       0.0%                      0x1238c5c [68B]   ATIRadeonX1000GLDriver    0x1238c5c     0x44
+       0.0%                     0x123619c [820B]   ATIRadeonX1000GLDriver    0x123619c    0x334
+       0.0%                     0x1235204 [656B]   ATIRadeonX1000GLDriver    0x1235204    0x290
+       0.0%                     0x1232728 [440B]   ATIRadeonX1000GLDriver    0x1232728    0x1b8
+       0.0%                     0x1232370 [380B]   ATIRadeonX1000GLDriver    0x1232370    0x17c
+       0.0%                     0x1231cfc [368B]   ATIRadeonX1000GLDriver    0x1231cfc    0x170
+       0.0%                      0x1230b70 [72B]   ATIRadeonX1000GLDriver    0x1230b70     0x48
+       0.0%                     0x122e938 [204B]   ATIRadeonX1000GLDriver    0x122e938     0xcc
+       0.0%                     0x122e124 [660B]   ATIRadeonX1000GLDriver    0x122e124    0x294
+       0.0%                     0x122ac40 [232B]   ATIRadeonX1000GLDriver    0x122ac40     0xe8
+       0.0%                    0x1229b88 [2.1KB]   ATIRadeonX1000GLDriver    0x1229b88    0x860
+       0.0%                     0x1228524 [320B]   ATIRadeonX1000GLDriver    0x1228524    0x140
+       0.0%                      0x12267b8 [32B]   ATIRadeonX1000GLDriver    0x12267b8     0x20
+       0.0%                    0x121b900 [2.6KB]   ATIRadeonX1000GLDriver    0x121b900    0xa38
+       0.0%                     0x120eaa0 [828B]   ATIRadeonX1000GLDriver    0x120eaa0    0x33c
+       0.0%                    0x12053f4 [1.3KB]   ATIRadeonX1000GLDriver    0x12053f4    0x510
+       0.0%                     0x11eded4 [988B]   ATIRadeonX1000GLDriver    0x11eded4    0x3dc
+       0.0%                     0x11ebec0 [636B]   ATIRadeonX1000GLDriver    0x11ebec0    0x27c
+       0.0%                    0x11e8918 [1.1KB]   ATIRadeonX1000GLDriver    0x11e8918    0x438
+       0.0%                     0x11e4dcc [736B]   ATIRadeonX1000GLDriver    0x11e4dcc    0x2e0
+       0.0%                    0x11d575c [1.0KB]   ATIRadeonX1000GLDriver    0x11d575c    0x410
+       0.0%                     0x11d3da0 [416B]   ATIRadeonX1000GLDriver    0x11d3da0    0x1a0
+       0.0%                    0x11cd2e0 [1.3KB]   ATIRadeonX1000GLDriver    0x11cd2e0    0x518
+       0.0%                    0x11c97b0 [1.2KB]   ATIRadeonX1000GLDriver    0x11c97b0    0x4c0
+       0.0%                     0x11bfbc8 [572B]   ATIRadeonX1000GLDriver    0x11bfbc8    0x23c
+       0.0%                     0x11bf90c [264B]   ATIRadeonX1000GLDriver    0x11bf90c    0x108
+       0.0%                      0x11be990 [52B]   ATIRadeonX1000GLDriver    0x11be990     0x34
+       0.0%                     0x119ba60 [228B]   ATIRadeonX1000GLDriver    0x119ba60     0xe4
+       0.0%                     0x119ab14 [248B]   ATIRadeonX1000GLDriver    0x119ab14     0xf8
+       0.0%                     0x1198cc0 [392B]   ATIRadeonX1000GLDriver    0x1198cc0    0x188
+       0.0%                     0x1193d38 [120B]   ATIRadeonX1000GLDriver    0x1193d38     0x78
+       0.0%                    0x1192718 [1.7KB]   ATIRadeonX1000GLDriver    0x1192718    0x6c0
+       0.0%                       vm_page_unwire              mach_kernel      0x82e64     0x78
+       0.0%              vm_page_grab_fictitious              mach_kernel      0x82188     0x64
+       0.0%                            task_wire              mach_kernel      0x88930    0x14c
+       0.0%                     space_deallocate              mach_kernel      0x2b234      0xc
+       0.0%                               setjmp        libSystem.B.dylib   0x900c7114     0x6c
+       0.0%                               saveFP                 GLEngine    0x101079c     0x50
+       0.0%                     rwlsePatch_isync              mach_kernel      0xa5144     0x3c
+       0.0%                      rwldPatch_isync              mach_kernel      0xa52e0      0x4
+       0.0%                                 rint        libSystem.B.dylib   0x90043100     0xf0
+       0.0%                          rgn_release             CoreGraphics   0x903802f4    0x134
+       0.0%                 pthread_mutex_unlock        libSystem.B.dylib   0x900011c8    0x1d8
+       0.0%             ppc_usimple_unlock_rwcmb              mach_kernel      0xa4f60      0x4
+       0.0% OSSymbolPool::findSymbol(char const*) const              mach_kernel     0x305a08    0x100
+       0.0% OSSymbol::taggedRelease(void const*, int) const              mach_kernel     0x306630     0x64
+       0.0%    OSSet::initWithCapacity(unsigned)              mach_kernel     0x303dec     0x60
+       0.0%          OSSet::getMetaClass() const              mach_kernel     0x303bec      0xc
+       0.0% OSIterator::OSIterator[not-in-charge](OSMetaClass const*)              mach_kernel     0x300d44     0x3c
+       0.0% OSDictionary::withCapacity(unsigned)              mach_kernel     0x2ffa9c     0x7c
+       0.0% OSDictionary::removeObject(OSSymbol const*)              mach_kernel     0x300060     0xfc
+       0.0% OSDictionary::initWithCapacity(unsigned)              mach_kernel     0x2ff720     0xa0
+       0.0%                 OSDictionary::free()              mach_kernel     0x2ffcc4     0x98
+       0.0%          OSData::OSData[in-charge]()              mach_kernel     0x2fe624     0x4c
+       0.0% OSCollectionIterator::getNextObject()              mach_kernel     0x2fe2c0    0x14c
+       0.0% OSCollection::~OSCollection [not-in-charge]()              mach_kernel     0x2fd96c     0x2c
+       0.0%          OSCollection::haveUpdated()              mach_kernel     0x2fdb3c     0x6c
+       0.0% OSBoolean::taggedRetain(void const*) const              mach_kernel     0x2fd728      0x4
+       0.0%      OSBoolean::getMetaClass() const              mach_kernel     0x2fd3bc      0xc
+       0.0%      OSArray::withCapacity(unsigned)              mach_kernel     0x2fc5dc     0x7c
+       0.0%                  malloc_zone_realloc        libSystem.B.dylib   0x90032e84    0x2c8
+       0.0%                        lookupDisplay             CoreGraphics   0x903b8e84    0x168
+       0.0%                          lockDisplay             CoreGraphics   0x903b4138     0x80
+       0.0%                         lck_mtx_free              mach_kernel      0x97b50     0x34
+       0.0%                      lck_mtx_destroy              mach_kernel      0x97c90     0x64
+       0.0%                               kalloc              mach_kernel      0x2bde0      0x8
+       0.0%                  is_io_service_close              mach_kernel     0x2eb75c     0x78
+       0.0% is_io_connect_method_structureI_structureO              mach_kernel     0x2ec6d8    0x1c8
+       0.0%                ipc_hash_local_delete              mach_kernel      0x19e74     0xd8
+       0.0%                    ipc_entry_dealloc              mach_kernel      0x193b8    0x21c
+       0.0%                       IOServiceClose                    IOKit   0x90aeeb98     0x50
+       0.0% IOMemoryDescriptor::map(unsigned long)              mach_kernel     0x2d9dc0     0x68
+       0.0% IOMachPort::portForObject(OSObject*, unsigned)              mach_kernel     0x2e816c    0x13c
+       0.0%  IOMachPort::IOMachPort[in-charge]()              mach_kernel     0x2e80bc     0x4c
+       0.0%     IOMachPort::getMetaClass() const              mach_kernel     0x2e7f88      0xc
+       0.0% IOGeneralMemoryDescriptor::IOGeneralMemoryDescriptor[not-in-charge](OSMetaClass const*)              mach_kernel     0x2d5e38     0x3c
+       0.0% IOATIR500Surface::set_shape(eIOAccelSurfaceShapeBits, unsigned long, IOAccelDeviceRegion*, unsigned long) com.apple.ATIRadeonX1000     0x5579a0     0x50
+       0.0% IOATIR500Surface::set_id_mode(unsigned long, eIOSurfaceModeBits) com.apple.ATIRadeonX1000     0x5562b0    0x5b0
+       0.0%     IOATIR500Surface::reset_access() com.apple.ATIRadeonX1000     0x552de0    0x150
+       0.0% IOATIR500Surface::IOATIR500Surface[not-in-charge](OSMetaClass const*) com.apple.ATIRadeonX1000     0x5525e0     0x60
+       0.0%      IOATIR500Surface::clientClose() com.apple.ATIRadeonX1000     0x552ac0     0x80
+       0.0%              IOATIR500Shared::init() com.apple.ATIRadeonX1000     0x558aa0     0x90
+       0.0%     IOATIR500Shared::alloc_handles() com.apple.ATIRadeonX1000     0x558910    0x190
+       0.0% IOATIR500GLContext::start(IOService*) com.apple.ATIRadeonX1000     0x549690    0x330
+       0.0% IOATIR500GLContext::set_surface(unsigned long, eIOGLContextModeBits, unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x54a7b0    0x400
+       0.0% IOATIR500GLContext::IOATIR500GLContext[not-in-charge](OSMetaClass const*) com.apple.ATIRadeonX1000     0x548d80     0x60
+       0.0% IOATIR500GLContext::get_config(unsigned long*, unsigned long*, unsigned long*) com.apple.ATIRadeonX1000     0x54d010    0x240
+       0.0% IOATIR500Accelerator::removeTransferFromGART(VendorTransferBuffer*) com.apple.ATIRadeonX1000     0x5454f0     0x90
+       0.0% IOATIR500Accelerator::getVRAMDescriptors() com.apple.ATIRadeonX1000     0x546d20     0xa0
+       0.0%                 IOAccelCreateAccelID                    IOKit   0x90afcc78     0xcc
+       0.0%                      io_service_open                    IOKit   0x90af2d7c    0x170
+       0.0%                     io_service_close                    IOKit   0x90af0948    0x124
+       0.0% InterpreterRasterOpMachineInitialise libGLProgrammability.dylib   0x97bd63f0     0x10
+       0.0% HZMEM_GetBlockOffset(_HZDATA*, unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x587790     0x80
+       0.0%                      glViewport_Exec                 GLEngine    0x101df6c     0x88
+       0.0%                           glViewport              libGL.dylib   0x92f27cf4     0x94
+       0.0%                              glOrtho              libGL.dylib   0x92f2f658     0x9c
+       0.0%                   glGetIntegerv_Exec                 GLEngine    0x101aa34    0x14c
+       0.0%                   glGetBooleanv_Exec                 GLEngine    0x1038cbc    0x110
+       0.0%             gleUpdateTextureCoordGen                 GLEngine    0x1010d30    0x460
+       0.0%                    gleUpdateEvalData                 GLEngine    0x101159c     0xa8
+       0.0%             gleUpdateDrawArraysFuncs                 GLEngine    0x1024d8c    0x394
+       0.0%                gleStoreDataElementNO                 GLEngine    0x10261a4    0xa4c
+       0.0%          gleSetFunctionIDFromCurrent                 GLEngine    0x1025e2c     0x5c
+       0.0%                        gleMultMatrix                 GLEngine    0x10107ec    0x344
+       0.0%           gleCreateVertexArrayObject                 GLEngine    0x100e434    0x1ac
+       0.0%               gleCreateTextureObject                 GLEngine    0x100d9fc     0x94
+       0.0%                        gleBlockClear                 GLEngine    0x11132b4     0x1c
+       0.0%                 gleAddEnableHashFunc                 GLEngine    0x100bc04     0x7c
+       0.0%                    gldReclaimContext   ATIRadeonX1000GLDriver    0x114cf90    0x140
+       0.0%                  gldFlushVertexArray   ATIRadeonX1000GLDriver    0x1151710    0x330
+       0.0%                            gldFinish   ATIRadeonX1000GLDriver    0x11605e0    0xbd0
+       0.0%                    gldDestroyContext   ATIRadeonX1000GLDriver    0x114cdd0     0xf0
+       0.0%                  glcPluginDisconnect                   OpenGL   0x93708cfc     0x9c
+       0.0%            glColor3f_NoColorMat_Exec                 GLEngine    0x10629e0     0x18
+       0.0%                      glcAttribMatchQ                   OpenGL   0x9370874c     0x74
+       0.0%                         gettimeofday        libSystem.B.dylib   0x90004e40    0x100
+       0.0%                     get_bsdtask_info              mach_kernel      0x4118c      0x8
+       0.0%                          findDisplay             CoreGraphics   0x90408f78     0x74
+       0.0%                     dyld_stub_strlen           CoreFoundation   0x9086cde0     0x20
+       0.0%           dyld_stub_OSSpinLockUnlock           CoreFoundation   0x9086cba0     0x20
+       0.0% dyld_stub_InterpreterTextureSamplerCreate libGLProgrammability.dylib   0x97c222a0     0x20
+       0.0% dyld_stub_CGOpenGLDisplayMaskToDisplayID                   OpenGL   0x9370e7c0     0x20
+       0.0%                dyld_stub___floatdidf           CoreFoundation   0x9086e060     0x20
+       0.0%                      CGSRegionsEqual             CoreGraphics   0x9039e4d8     0x80
+       0.0%                         CGSNewRegion             CoreGraphics   0x9037dac4     0xc8
+       0.0%               CGSGetNumberOfDisplays             CoreGraphics   0x9040be38     0xcc
+       0.0%                 CGLSetCurrentContext              libGL.dylib   0x92f279e4     0x60
+       0.0%                   cglScoreErrorBasic                   OpenGL   0x937073bc    0x130
+       0.0%       CGDisplayIDToOpenGLDisplayMask             CoreGraphics   0x90494e8c     0x98
+       0.0%                     CFStringGetBytes           CoreFoundation   0x907c5908    0x294
+       0.0%                        CFSetGetCount           CoreFoundation   0x907dc580     0xac
+       0.0%   CFNotificationCenterRemoveObserver           CoreFoundation   0x9081eea0     0xa4
+       0.0%                CFAllocatorReallocate           CoreFoundation   0x907d7e84    0x224
+       0.0%                                bcopy              mach_kernel      0xacba0     0x14
+       0.0%    ATIR500Surface::start(IOService*) com.apple.ATIRadeonX1000     0x57f3f0     0xd0
+       0.0%  ATIR500GLContext::start(IOService*) com.apple.ATIRadeonX1000     0x56a540    0x1c0
+       0.0%    ATIR500GLContext::build_scissor() com.apple.ATIRadeonX1000     0x569ee0     0xf0
+       0.0% AppleDART::iovmInsert(unsigned, unsigned long, upl_page_info*, unsigned long) com.apple.driver.AppleMacRiscPCI     0x795ca0     0xa4
+       0.0%                              _CFHash           CoreFoundation   0x907caba8     0x38
+       0.0%                       __pthread_self commpage [libSystem.B.dylib]   0xffff8580     0x40
+       0.0%         __CFZombifyDeallocatedMemory           CoreFoundation   0x907befb0     0x88
+       0.0%            __CFTypeCollectionRelease           CoreFoundation   0x907c201c      0x8
+       0.0%                       __CFNumberHash           CoreFoundation   0x907f5d64    0x198
+       0.0%                   __CFNumberGetValue           CoreFoundation   0x907e574c    0x2a8
+       0.0%                 __CFNumberEqualValue           CoreFoundation   0x907ed730    0x138
+       0.0%                   __CFDictionaryInit           CoreFoundation   0x907c9c3c    0x818
+       0.0%          __CFDictionaryFindBuckets1b           CoreFoundation   0x907d0870    0x154
+       0.0%                  __CFArrayDeallocate           CoreFoundation   0x907c1afc    0x130
+       0.0%                  __CF_FAULT_CALLBACK           CoreFoundation   0x907ca454     0x90
+       0.0%                     0x1316db4 [296B]   ATIRadeonX1000GLDriver    0x1316db4    0x128
+       0.0%                       0x1315ff8 [4B]   ATIRadeonX1000GLDriver    0x1315ff8      0x4
+       0.0%                       0x1314b30 [4B]   ATIRadeonX1000GLDriver    0x1314b30      0x4
+       0.0%                       0x13146ac [4B]   ATIRadeonX1000GLDriver    0x13146ac      0x4
+       0.0%                     0x131448c [136B]   ATIRadeonX1000GLDriver    0x131448c     0x88
+       0.0%                       0x1313c24 [4B]   ATIRadeonX1000GLDriver    0x1313c24      0x4
+       0.0%                       0x1313758 [4B]   ATIRadeonX1000GLDriver    0x1313758      0x4
+       0.0%                       0x1313740 [4B]   ATIRadeonX1000GLDriver    0x1313740      0x4
+       0.0%                       0x13136f0 [4B]   ATIRadeonX1000GLDriver    0x13136f0      0x4
+       0.0%                      0x13136b4 [40B]   ATIRadeonX1000GLDriver    0x13136b4     0x28
+       0.0%                      0x12e922c [76B]   ATIRadeonX1000GLDriver    0x12e922c     0x4c
+       0.0%                    0x12e60b4 [1.5KB]   ATIRadeonX1000GLDriver    0x12e60b4    0x60c
+       0.0%                     0x12e5df0 [140B]   ATIRadeonX1000GLDriver    0x12e5df0     0x8c
+       0.0%                     0x12e5b84 [316B]   ATIRadeonX1000GLDriver    0x12e5b84    0x13c
+       0.0%                     0x12e543c [824B]   ATIRadeonX1000GLDriver    0x12e543c    0x338
+       0.0%                      0x12e4f2c [28B]   ATIRadeonX1000GLDriver    0x12e4f2c     0x1c
+       0.0%                     0x12e4b30 [160B]   ATIRadeonX1000GLDriver    0x12e4b30     0xa0
+       0.0%                      0x12e4a68 [56B]   ATIRadeonX1000GLDriver    0x12e4a68     0x38
+       0.0%                     0x12dd988 [420B]   ATIRadeonX1000GLDriver    0x12dd988    0x1a4
+       0.0%                     0x12db474 [252B]   ATIRadeonX1000GLDriver    0x12db474     0xfc
+       0.0%                      0x12db34c [96B]   ATIRadeonX1000GLDriver    0x12db34c     0x60
+       0.0%                     0x12d9fb4 [124B]   ATIRadeonX1000GLDriver    0x12d9fb4     0x7c
+       0.0%                     0x12d9bd0 [236B]   ATIRadeonX1000GLDriver    0x12d9bd0     0xec
+       0.0%                      0x12d9ae4 [84B]   ATIRadeonX1000GLDriver    0x12d9ae4     0x54
+       0.0%                     0x12d9944 [108B]   ATIRadeonX1000GLDriver    0x12d9944     0x6c
+       0.0%                     0x12d7e28 [192B]   ATIRadeonX1000GLDriver    0x12d7e28     0xc0
+       0.0%                      0x12d7c6c [12B]   ATIRadeonX1000GLDriver    0x12d7c6c      0xc
+       0.0%                     0x12d542c [300B]   ATIRadeonX1000GLDriver    0x12d542c    0x12c
+       0.0%                     0x12d27f4 [392B]   ATIRadeonX1000GLDriver    0x12d27f4    0x188
+       0.0%                     0x12ce2a4 [404B]   ATIRadeonX1000GLDriver    0x12ce2a4    0x194
+       0.0%                    0x12cd588 [1.3KB]   ATIRadeonX1000GLDriver    0x12cd588    0x54c
+       0.0%                    0x12ca01c [2.6KB]   ATIRadeonX1000GLDriver    0x12ca01c    0xa94
+       0.0%                     0x12bf3d8 [556B]   ATIRadeonX1000GLDriver    0x12bf3d8    0x22c
+       0.0%                     0x12be4f8 [332B]   ATIRadeonX1000GLDriver    0x12be4f8    0x14c
+       0.0%                     0x12bd1b0 [232B]   ATIRadeonX1000GLDriver    0x12bd1b0     0xe8
+       0.0%                     0x12bd0e4 [200B]   ATIRadeonX1000GLDriver    0x12bd0e4     0xc8
+       0.0%                     0x12bc7d8 [120B]   ATIRadeonX1000GLDriver    0x12bc7d8     0x78
+       0.0%                      0x12bc29c [28B]   ATIRadeonX1000GLDriver    0x12bc29c     0x1c
+       0.0%                     0x12ba888 [192B]   ATIRadeonX1000GLDriver    0x12ba888     0xc0
+       0.0%                     0x12ba6c8 [248B]   ATIRadeonX1000GLDriver    0x12ba6c8     0xf8
+       0.0%                     0x12b9638 [280B]   ATIRadeonX1000GLDriver    0x12b9638    0x118
+       0.0%                      0x12b9360 [60B]   ATIRadeonX1000GLDriver    0x12b9360     0x3c
+       0.0%                      0x12b9330 [44B]   ATIRadeonX1000GLDriver    0x12b9330     0x2c
+       0.0%                     0x12b9278 [180B]   ATIRadeonX1000GLDriver    0x12b9278     0xb4
+       0.0%                      0x12b8fb8 [92B]   ATIRadeonX1000GLDriver    0x12b8fb8     0x5c
+       0.0%                     0x12b8bd0 [328B]   ATIRadeonX1000GLDriver    0x12b8bd0    0x148
+       0.0%                      0x12b8b2c [24B]   ATIRadeonX1000GLDriver    0x12b8b2c     0x18
+       0.0%                      0x12b8a90 [68B]   ATIRadeonX1000GLDriver    0x12b8a90     0x44
+       0.0%                     0x12b8a1c [112B]   ATIRadeonX1000GLDriver    0x12b8a1c     0x70
+       0.0%                     0x12b812c [212B]   ATIRadeonX1000GLDriver    0x12b812c     0xd4
+       0.0%                      0x12b8000 [16B]   ATIRadeonX1000GLDriver    0x12b8000     0x10
+       0.0%                     0x12b6bcc [464B]   ATIRadeonX1000GLDriver    0x12b6bcc    0x1d0
+       0.0%                    0x12b4e90 [1.5KB]   ATIRadeonX1000GLDriver    0x12b4e90    0x5f0
+       0.0%                     0x12aae7c [320B]   ATIRadeonX1000GLDriver    0x12aae7c    0x140
+       0.0%                    0x12a9994 [3.8KB]   ATIRadeonX1000GLDriver    0x12a9994    0xf14
+       0.0%                     0x12a93f8 [124B]   ATIRadeonX1000GLDriver    0x12a93f8     0x7c
+       0.0%                    0x12a4a3c [2.5KB]   ATIRadeonX1000GLDriver    0x12a4a3c    0xa0c
+       0.0%                     0x12a42f4 [412B]   ATIRadeonX1000GLDriver    0x12a42f4    0x19c
+       0.0%                     0x12a03b0 [728B]   ATIRadeonX1000GLDriver    0x12a03b0    0x2d8
+       0.0%                    0x129fb58 [2.1KB]   ATIRadeonX1000GLDriver    0x129fb58    0x83c
+       0.0%                    0x129ec3c [2.4KB]   ATIRadeonX1000GLDriver    0x129ec3c    0x9b0
+       0.0%                     0x127f22c [100B]   ATIRadeonX1000GLDriver    0x127f22c     0x64
+       0.0%                     0x127aef0 [204B]   ATIRadeonX1000GLDriver    0x127aef0     0xcc
+       0.0%                      0x1273cf0 [84B]   ATIRadeonX1000GLDriver    0x1273cf0     0x54
+       0.0%                     0x1270ef0 [244B]   ATIRadeonX1000GLDriver    0x1270ef0     0xf4
+       0.0%                     0x1270b70 [228B]   ATIRadeonX1000GLDriver    0x1270b70     0xe4
+       0.0%                     0x126f130 [348B]   ATIRadeonX1000GLDriver    0x126f130    0x15c
+       0.0%                     0x126efd0 [348B]   ATIRadeonX1000GLDriver    0x126efd0    0x15c
+       0.0%                     0x126ead4 [676B]   ATIRadeonX1000GLDriver    0x126ead4    0x2a4
+       0.0%                      0x126c760 [40B]   ATIRadeonX1000GLDriver    0x126c760     0x28
+       0.0%                     0x12696e4 [180B]   ATIRadeonX1000GLDriver    0x12696e4     0xb4
+       0.0%                     0x12694c0 [244B]   ATIRadeonX1000GLDriver    0x12694c0     0xf4
+       0.0%                    0x1264ec8 [1.0KB]   ATIRadeonX1000GLDriver    0x1264ec8    0x42c
+       0.0%                     0x1264894 [176B]   ATIRadeonX1000GLDriver    0x1264894     0xb0
+       0.0%                      0x1258f54 [32B]   ATIRadeonX1000GLDriver    0x1258f54     0x20
+       0.0%                      0x12543e4 [64B]   ATIRadeonX1000GLDriver    0x12543e4     0x40
+       0.0%                      0x124ed5c [72B]   ATIRadeonX1000GLDriver    0x124ed5c     0x48
+       0.0%                     0x124bdbc [148B]   ATIRadeonX1000GLDriver    0x124bdbc     0x94
+       0.0%                     0x124b5cc [124B]   ATIRadeonX1000GLDriver    0x124b5cc     0x7c
+       0.0%                      0x124aa94 [44B]   ATIRadeonX1000GLDriver    0x124aa94     0x2c
+       0.0%                      0x124a97c [32B]   ATIRadeonX1000GLDriver    0x124a97c     0x20
+       0.0%                      0x124a644 [84B]   ATIRadeonX1000GLDriver    0x124a644     0x54
+       0.0%                      0x124a1d0 [68B]   ATIRadeonX1000GLDriver    0x124a1d0     0x44
+       0.0%                      0x123e9a4 [12B]   ATIRadeonX1000GLDriver    0x123e9a4      0xc
+       0.0%                     0x123e044 [292B]   ATIRadeonX1000GLDriver    0x123e044    0x124
+       0.0%                     0x123d9c4 [328B]   ATIRadeonX1000GLDriver    0x123d9c4    0x148
+       0.0%                     0x123ca04 [780B]   ATIRadeonX1000GLDriver    0x123ca04    0x30c
+       0.0%                     0x1234a24 [552B]   ATIRadeonX1000GLDriver    0x1234a24    0x228
+       0.0%                     0x1232fac [372B]   ATIRadeonX1000GLDriver    0x1232fac    0x174
+       0.0%                     0x1232c1c [264B]   ATIRadeonX1000GLDriver    0x1232c1c    0x108
+       0.0%                     0x1232920 [236B]   ATIRadeonX1000GLDriver    0x1232920     0xec
+       0.0%                      0x1232208 [76B]   ATIRadeonX1000GLDriver    0x1232208     0x4c
+       0.0%                     0x123024c [364B]   ATIRadeonX1000GLDriver    0x123024c    0x16c
+       0.0%                     0x1230124 [292B]   ATIRadeonX1000GLDriver    0x1230124    0x124
+       0.0%                     0x122f20c [132B]   ATIRadeonX1000GLDriver    0x122f20c     0x84
+       0.0%                     0x122dde4 [168B]   ATIRadeonX1000GLDriver    0x122dde4     0xa8
+       0.0%                     0x122dcf0 [104B]   ATIRadeonX1000GLDriver    0x122dcf0     0x68
+       0.0%                    0x122c7d0 [3.6KB]   ATIRadeonX1000GLDriver    0x122c7d0    0xe7c
+       0.0%                  0x1228880 [unknown]   ATIRadeonX1000GLDriver    0x1228880      0x1
+       0.0%                      0x1228838 [16B]   ATIRadeonX1000GLDriver    0x1228838     0x10
+       0.0%                      0x1220394 [64B]   ATIRadeonX1000GLDriver    0x1220394     0x40
+       0.0%                     0x121305c [244B]   ATIRadeonX1000GLDriver    0x121305c     0xf4
+       0.0%                     0x120e908 [404B]   ATIRadeonX1000GLDriver    0x120e908    0x194
+       0.0%                    0x11ef634 [1.1KB]   ATIRadeonX1000GLDriver    0x11ef634    0x488
+       0.0%                     0x11eee18 [540B]   ATIRadeonX1000GLDriver    0x11eee18    0x21c
+       0.0%                     0x11eed64 [176B]   ATIRadeonX1000GLDriver    0x11eed64     0xb0
+       0.0%                     0x11ea484 [200B]   ATIRadeonX1000GLDriver    0x11ea484     0xc8
+       0.0%                     0x11e9560 [160B]   ATIRadeonX1000GLDriver    0x11e9560     0xa0
+       0.0%                    0x11e33e8 [5.9KB]   ATIRadeonX1000GLDriver    0x11e33e8   0x17a0
+       0.0%                     0x11e2f04 [200B]   ATIRadeonX1000GLDriver    0x11e2f04     0xc8
+       0.0%                     0x11e26f8 [256B]   ATIRadeonX1000GLDriver    0x11e26f8    0x100
+       0.0%                    0x11dbdcc [1.8KB]   ATIRadeonX1000GLDriver    0x11dbdcc    0x72c
+       0.0%                     0x11d8be8 [332B]   ATIRadeonX1000GLDriver    0x11d8be8    0x14c
+       0.0%                    0x11d4cc4 [2.6KB]   ATIRadeonX1000GLDriver    0x11d4cc4    0xa94
+       0.0%                     0x11d19e4 [576B]   ATIRadeonX1000GLDriver    0x11d19e4    0x240
+       0.0%                     0x11ce9f8 [336B]   ATIRadeonX1000GLDriver    0x11ce9f8    0x150
+       0.0%                     0x11ce480 [296B]   ATIRadeonX1000GLDriver    0x11ce480    0x128
+       0.0%                    0x11ccb9c [1.8KB]   ATIRadeonX1000GLDriver    0x11ccb9c    0x740
+       0.0%                     0x11cc7b0 [136B]   ATIRadeonX1000GLDriver    0x11cc7b0     0x88
+       0.0%                     0x11ca0c4 [556B]   ATIRadeonX1000GLDriver    0x11ca0c4    0x22c
+       0.0%                     0x11c9c74 [400B]   ATIRadeonX1000GLDriver    0x11c9c74    0x190
+       0.0%                     0x11bedf4 [236B]   ATIRadeonX1000GLDriver    0x11bedf4     0xec
+       0.0%                     0x11bea08 [368B]   ATIRadeonX1000GLDriver    0x11bea08    0x170
+       0.0%                     0x11bd8f4 [680B]   ATIRadeonX1000GLDriver    0x11bd8f4    0x2a8
+       0.0%                     0x11bd6a4 [184B]   ATIRadeonX1000GLDriver    0x11bd6a4     0xb8
+       0.0%                     0x11a856c [616B]   ATIRadeonX1000GLDriver    0x11a856c    0x268
+       0.0%                     0x119bb48 [432B]   ATIRadeonX1000GLDriver    0x119bb48    0x1b0
+       0.0%                    0x119b608 [1.0KB]   ATIRadeonX1000GLDriver    0x119b608    0x418
+       0.0%                     0x1198e4c [132B]   ATIRadeonX1000GLDriver    0x1198e4c     0x84
+       0.0%                    0x1197418 [2.8KB]   ATIRadeonX1000GLDriver    0x1197418    0xb5c
+       0.0%                     0x1194d8c [968B]   ATIRadeonX1000GLDriver    0x1194d8c    0x3c8
+       0.0%                     0x119225c [732B]   ATIRadeonX1000GLDriver    0x119225c    0x2dc
+       0.0%                     0x11915ac [340B]   ATIRadeonX1000GLDriver    0x11915ac    0x154
+       0.0%                    0x1190c90 [1.2KB]   ATIRadeonX1000GLDriver    0x1190c90    0x4f4
+       0.0%                          vm_pool_low              mach_kernel      0x823ac     0x20
+       0.0%                           vm_pageout              mach_kernel      0x7c188    0x3c0
+       0.0%                     vm_page_activate              mach_kernel      0x83180    0x14c
+       0.0%                                vfree        libSystem.B.dylib   0x9012c390    0x328
+       0.0%                  validateDisplayInfo             CoreGraphics   0x90408fec     0x5c
+       0.0%                thread_syscall_return              mach_kernel      0xa8c14     0x84
+       0.0%                         thread_block              mach_kernel      0x32eec      0xc
+       0.0%                                 sqrt        libSystem.B.dylib   0x90162f70     0x30
+       0.0%                       shape_is_equal             CoreGraphics   0x9039e558    0x11c
+       0.0%                   shape_alloc_bounds             CoreGraphics   0x9037d99c     0xe4
+       0.0%                  retfsectPatch_eieio              mach_kernel      0xa504c     0x54
+       0.0%            pthread_mutexattr_settype        libSystem.B.dylib   0x9004a308     0x58
+       0.0%               pthread_mutexattr_init        libSystem.B.dylib   0x900436f8     0x3c
+       0.0%                pthread_mutex_destroy        libSystem.B.dylib   0x90031ee0     0xc0
+       0.0%                  pthread_getspecific        libSystem.B.dylib   0x90008940     0x24
+       0.0%                       PPEmulatorFree libGLProgrammability.dylib   0x97b84bec     0x3c
+       0.0%                     OSSpinLockUnlock        libSystem.B.dylib   0x9012adf8      0x4
+       0.0%                        OSSet::free()              mach_kernel     0x30416c     0x74
+       0.0% OSObject::~OSObject [not-in-charge]()              mach_kernel     0x2fb97c     0x2c
+       0.0%                     OSObject::init()              mach_kernel     0x2fbcec      0x8
+       0.0% OSMetaClassBase::OSMetaClassBase[not-in-charge]()              mach_kernel     0x2f9ee0     0x10
+       0.0% OSMetaClass::instanceConstructed() const              mach_kernel     0x2fac7c     0x48
+       0.0% OSIterator::~OSIterator [not-in-charge]()              mach_kernel     0x300dbc     0x2c
+       0.0% OSDictionary::~OSDictionary [in-charge deleting]()              mach_kernel     0x2ff4e0     0x40
+       0.0% OSDictionary::setCapacityIncrement(unsigned)              mach_kernel     0x2ffd74     0x18
+       0.0%   OSDictionary::iteratorSize() const              mach_kernel     0x300790      0x8
+       0.0%   OSDictionary::getMetaClass() const              mach_kernel     0x2ff520      0xc
+       0.0%      OSDictionary::flushCollection()              mach_kernel     0x2ffe44     0x9c
+       0.0%         OSData::getMetaClass() const              mach_kernel     0x2fe4f0      0xc
+       0.0%            OSData::getLength() const              mach_kernel     0x2fec60      0x8
+       0.0% OSArray::setObject(unsigned, OSMetaClassBase const*)              mach_kernel     0x2fc978     0xf8
+       0.0% OSArray::initWithObjects(OSObject const**, unsigned, unsigned)              mach_kernel     0x2fc4d4     0xdc
+       0.0%        OSArray::getMetaClass() const              mach_kernel     0x2fc234      0xc
+       0.0%    OSArray::ensureCapacity(unsigned)              mach_kernel     0x2fc830     0xb8
+       0.0%                               now_ms            perf_baseline       0x2de0     0x90
+       0.0%             mach_port_server_routine              mach_kernel      0x49238   0x2608
+       0.0%                 mach_port_deallocate        libSystem.B.dylib   0x9002e22c    0x154
+       0.0%            mach_msg_send_from_kernel              mach_kernel      0x29594     0x68
+       0.0%                  lookupMasterDisplay             CoreGraphics   0x903da984     0xa4
+       0.0%                   lock_read_to_write              mach_kernel      0xa5120     0x24
+       0.0%                   lck_mtx_alloc_init              mach_kernel      0x97b04     0x4c
+       0.0%                       isStrongMemory           CoreFoundation   0x908499e0     0x14
+       0.0%                   is_io_service_open              mach_kernel     0x2eb6d8     0x84
+       0.0%                     IS_64BIT_PROCESS              mach_kernel     0x26dd28     0x20
+       0.0%                  ipc_space_reference              mach_kernel      0x21210     0x3c
+       0.0%               ipc_right_lookup_write              mach_kernel      0x1f714     0x84
+       0.0%                    ipc_right_dealloc              mach_kernel      0x2005c    0x2e8
+       0.0%                    ipc_right_copyout              mach_kernel      0x20ee4    0x1ac
+       0.0%                   ipc_port_timestamp              mach_kernel      0x1e6fc     0x50
+       0.0%                     ipc_port_destroy              mach_kernel      0x1ecb4     0xf0
+       0.0%                      ipc_mqueue_send              mach_kernel      0x1ccf8    0x1d0
+       0.0%                      ipc_mqueue_post              mach_kernel      0x1cf4c    0x1a0
+       0.0%                      ipc_mqueue_init              mach_kernel      0x1caac     0x64
+       0.0%                   ipc_mqueue_destroy              mach_kernel      0x1d5c8    0x108
+       0.0%                  ipc_kobject_destroy              mach_kernel      0x29448     0x3c
+       0.0% IOUserClient::~IOUserClient [not-in-charge]()              mach_kernel     0x2e95a8     0x2c
+       0.0% IOUserClient::IOUserClient[not-in-charge](OSMetaClass const*)              mach_kernel     0x2e9530     0x3c
+       0.0%                 IOUserClient::free()              mach_kernel     0x2e9998     0x54
+       0.0%           IOUserClient::clientDied()              mach_kernel     0x2e99ec     0x10
+       0.0%    IOService::unlockForArbitration()              mach_kernel     0x2bde90    0x170
+       0.0%          IOService::stop(IOService*)              mach_kernel     0x2bcb08      0x4
+       0.0%                    IOService::free()              mach_kernel     0x2bcb0c     0x60
+       0.0%        IOService::detach(IOService*)              mach_kernel     0x2bcca0    0x22c
+       0.0% IORegistryEntry::IORegistryEntry[not-in-charge](OSMetaClass const*)              mach_kernel     0x2b625c     0x3c
+       0.0% IORegistryEntry::getPropertyTable() const              mach_kernel     0x2bb244    0x1e4
+       0.0% IORegistryEntry::getProperty(OSSymbol const*) const              mach_kernel     0x2b7bac     0x64
+       0.0% IORegistryEntry::getParentSetReference(IORegistryPlane const*) const              mach_kernel     0x2b9790     0x28
+       0.0%              IORegistryEntry::free()              mach_kernel     0x2b7254    0x144
+       0.0% IORegistryEntry::detachFromChild(IORegistryEntry*, IORegistryPlane const*)              mach_kernel     0x2ba414    0x110
+       0.0% IORegistryEntry::attachToChild(IORegistryEntry*, IORegistryPlane const*)              mach_kernel     0x2ba1f4    0x110
+       0.0% IOMemoryMap::IOMemoryMap[not-in-charge](OSMetaClass const*)              mach_kernel     0x2d86bc     0x3c
+       0.0%           IOMemoryDescriptor::free()              mach_kernel     0x2d9c88     0x54
+       0.0% IOMemoryDescriptor::addMapping(IOMemoryMap*)              mach_kernel     0x2da40c     0x74
+       0.0%                             IOMalloc              mach_kernel     0x2b1b50     0x44
+       0.0%                   IOMachPort::free()              mach_kernel     0x2e85c4     0x48
+       0.0%    IOMachPort::dictForType(unsigned)              mach_kernel     0x2e8108     0x64
+       0.0%                         iokit_notify              mach_kernel      0x8a4ec     0x84
+       0.0%                 iokit_mod_send_right              mach_kernel      0x8a3f8     0xf4
+       0.0%              iokit_make_connect_port              mach_kernel      0x8a1e8     0x64
+       0.0% IOGeneralMemoryDescriptor::IOGeneralMemoryDescriptor[in-charge]()              mach_kernel     0x2d6050     0x4c
+       0.0% IOGeneralMemoryDescriptor::initWithAddress(unsigned, unsigned long, IODirection, task*)              mach_kernel     0x2d67a0     0x24
+       0.0%                        IOFreeAligned              mach_kernel     0x2b1cf4     0x94
+       0.0%                               IOFree              mach_kernel     0x2b1b94     0x44
+       0.0%                   IOConnectMapMemory                    IOKit   0x90aedfac      0x4
+       0.0% IOBufferMemoryDescriptor::getMetaClass() const              mach_kernel     0x2dcd84      0xc
+       0.0%  IOATIR500Surface::update_contexts() com.apple.ATIRadeonX1000     0x553580     0xc0
+       0.0% IOATIR500Surface::map_transfer_to_GART(VendorTransferBuffer*) com.apple.ATIRadeonX1000     0x552be0     0x80
+       0.0% IOATIR500Surface::invalidate_contexts() com.apple.ATIRadeonX1000     0x554050     0xc0
+       0.0% IOATIR500Surface::convert_surface_bits(unsigned long) com.apple.ATIRadeonX1000     0x554320    0x150
+       0.0% IOATIR500Surface::allocMasterSwapBuffer(unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x5538e0    0x110
+       0.0% IOATIR500Surface::allocAllSlaveSwapBuffers(unsigned long, unsigned long) com.apple.ATIRadeonX1000     0x553e50    0x200
+       0.0% IOATIR500Surface::alloc_surface(unsigned long, bool) com.apple.ATIRadeonX1000     0x555360    0x150
+       0.0% IOATIR500Shared::getMetaClass() const com.apple.ATIRadeonX1000     0x5586d0     0x10
+       0.0%      IOATIR500Shared::free_handles() com.apple.ATIRadeonX1000     0x558b30     0x80
+       0.0%              IOATIR500Shared::free() com.apple.ATIRadeonX1000     0x55a4d0    0x240
+       0.0% IOATIR500GLContext::~IOATIR500GLContext [not-in-charge]() com.apple.ATIRadeonX1000     0x548e40     0x50
+       0.0% IOATIR500GLContext::set_surface_volatile_state(unsigned long) com.apple.ATIRadeonX1000     0x549c50     0x50
+       0.0% IOATIR500GLContext::get_surface_info(unsigned long, long*, long*, long*) com.apple.ATIRadeonX1000     0x54abb0    0x160
+       0.0%    IOATIR500GLContext::clientClose() com.apple.ATIRadeonX1000     0x549130     0x80
+       0.0% IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer*, unsigned long) com.apple.ATIRadeonX1000     0x5443e0     0xc0
+       0.0% IOATIR500Accelerator::addToGART(IOMemoryDescriptor*, unsigned long*) com.apple.ATIRadeonX1000     0x547220     0x50
+       0.0%                IOAccelWaitForSurface                    IOKit   0x90afd1a0      0x8
+       0.0% IOAccelerationUserClient::extDestroy(unsigned long, long) com.apple.iokit.IOGraphicsFamily     0x508b0c    0x168
+       0.0% IOAccelerationUserClient::extCreate(unsigned long, long, long*) com.apple.iokit.IOGraphicsFamily     0x508ad8     0x34
+       0.0% io_connect_method_structureI_structureO                    IOKit   0x90af3804    0x220
+       0.0% io_connect_method_scalarI_structureI                    IOKit   0x90af0d0c    0x1a4
+       0.0%      InterpreterTextureSamplerCreate libGLProgrammability.dylib   0x97bd35dc      0xc
+       0.0%                      InterpreterFree libGLProgrammability.dylib   0x97bccde8     0x30
+       0.0%                         hw_lock_init              mach_kernel      0xa3c80     0x20
+       0.0%                        hw_atomic_sub              mach_kernel      0xa40c0     0x20
+       0.0%                           glVertex2f              libGL.dylib   0x92f2a284     0x90
+       0.0%                         glOrtho_Exec                 GLEngine    0x101e190    0x268
+       0.0%                    glMatrixMode_Exec                 GLEngine    0x101dff4     0xec
+       0.0% glgGetColorConvertSpecialization(GLDPixelMode const*, GLGOperation const*, unsigned long, unsigned long)         libGLImage.dylib   0x9455eda8    0xe54
+       0.0%                              glFlush              libGL.dylib   0x92f29ac8     0x70
+       0.0%                  gleUpdateMatrixFunc                 GLEngine    0x100fe48    0x82c
+       0.0%              gleUpdateLightModelFunc                 GLEngine    0x100f824     0xd0
+       0.0%              gleUpdateLightExponents                 GLEngine    0x100f9d0    0x1a8
+       0.0%              gleUpdateLightDirection                 GLEngine    0x100f8f4     0xdc
+       0.0%              gleUpdateDepthRangeData                 GLEngine    0x1010c94     0x9c
+       0.0%            gleSetColorMaterialEnable                 GLEngine    0x100f214    0x290
+       0.0%            gleRenderPrimitiveTCLFunc                 GLEngine    0x1026d50     0xe8
+       0.0%                                glEnd              libGL.dylib   0x92f28b68     0x70
+       0.0%               gleInitVectorConstants                 GLEngine    0x100c544     0x38
+       0.0%                  gleInitTextureState                 GLEngine    0x100d7ac    0x250
+       0.0%                     gleInitConstants                 GLEngine    0x100c484     0xc0
+       0.0%     gleGenerateMatrixIdentifierGLASM                 GLEngine    0x1116f08    0x19c
+       0.0%                 gleFreeVertexMachine                 GLEngine    0x1037c30     0x88
+       0.0%                  gleFreeVertexArrays                 GLEngine    0x1037f40     0x44
+       0.0%                      gleFreePixelMap                 GLEngine    0x1037cc4    0x10c
+       0.0%          gleFreePipelineProgramState                 GLEngine    0x1038498     0xd0
+       0.0%                     gleFreeMaterials                 GLEngine    0x1037dd0     0x8c
+       0.0%      gleDestroyPluginPipelineProgram                 GLEngine    0x103871c     0x78
+       0.0%               gleCreatePluginTexture                 GLEngine    0x100dde4     0x78
+       0.0%       gleCreatePluginPipelineProgram                 GLEngine    0x100e2b8     0x78
+       0.0%                  gleCalculateOptions                 GLEngine    0x1025f24    0x1d4
+       0.0%                    gleAllocMaterials                 GLEngine    0x100c118     0x3c
+       0.0%                    gleAllocFunctions                 GLEngine    0x100c2c0    0x1c4
+       0.0%                     gldPageoffBuffer   ATIRadeonX1000GLDriver    0x1164080   0x4210
+       0.0%                gldDestroyFramebuffer   ATIRadeonX1000GLDriver    0x114dcf0    0x3c0
+       0.0%                 gldCreateVertexArray   ATIRadeonX1000GLDriver    0x11516c0     0x50
+       0.0%                     glcPluginConnect                   OpenGL   0x937066d4    0x170
+       0.0%           glcPluginChoosePixelFormat                   OpenGL   0x93706350    0x254
+       0.0%                         glcPixelSize                   OpenGL   0x93707584     0x50
+       0.0%                    glClearColor_Exec                 GLEngine    0x102a490     0xe4
+       0.0%                glcGetFormatFromCache                   OpenGL   0x9370663c     0x98
+       0.0%                       glcBindSurface                   OpenGL   0x93709a48    0x110
+       0.0%                         get_task_map              mach_kernel      0x41390      0x8
+       0.0%                                 fmod        libSystem.B.dylib   0x900431f0    0x470
+       0.0%                  exit_funnel_section              mach_kernel      0xa5020     0x28
+       0.0%                       dyld_stub_sqrt   ATIRadeonX1000GLDriver    0x12e9ca0     0x20
+       0.0%     dyld_stub_pthread_mutexattr_init   ATIRadeonX1000GLDriver    0x12e9840     0x20
+       0.0%      dyld_stub_pthread_mutex_destroy                 GLEngine    0x1110498     0x20
+       0.0%        dyld_stub_pthread_getspecific           CoreFoundation   0x9086cdc0     0x20
+       0.0%             dyld_stub_PPEmulatorFree                 GLEngine    0x11108d8     0x20
+       0.0%           dyld_stub_PPEmulatorCreate                 GLEngine    0x11108f8     0x20
+       0.0%                        dyld_stub_pow   ATIRadeonX1000GLDriver    0x12e9f60     0x20
+       0.0%            dyld_stub_OSMemoryBarrier           CoreFoundation   0x9086ca20     0x20
+       0.0%   dyld_stub_OSAtomicCompareAndSwap32           CoreFoundation   0x9086ca40     0x20
+       0.0%              dyld_stub_IOServiceOpen   ATIRadeonX1000GLDriver    0x12e9820     0x20
+       0.0%         dyld_stub_IOConnectMapMemory   ATIRadeonX1000GLDriver    0x12e9800     0x20
+       0.0%      dyld_stub_IOAccelDestroySurface                   OpenGL   0x9370eca0     0x20
+       0.0% dyld_stub_InterpreterTextureSamplerFree libGLProgrammability.dylib   0x97c22240     0x20
+       0.0%            dyld_stub_InterpreterFree libGLProgrammability.dylib   0x97c22be0     0x20
+       0.0%               dyld_stub_glReadPixels            perf_baseline       0x3d60     0x20
+       0.0%             dyld_stub_glgConvertType   ATIRadeonX1000GLDriver    0x12e9c40     0x20
+       0.0%    dyld_stub_CGSGetOnlineDisplayList                   OpenGL   0x9370eba0     0x20
+       0.0%       dyld_stub_CGLSetCurrentContext            perf_baseline       0x3e80     0x20
+       0.0%      dyld_stub_CGLDestroyPixelFormat            perf_baseline       0x3e00     0x20
+       0.0% dyld_stub_CGDisplayIDToOpenGLDisplayMask                   OpenGL   0x9370e640     0x20
+       0.0%                 convert_port_to_task              mach_kernel      0x2aea0     0x78
+       0.0%                   CGSUnlockShmemLock             CoreGraphics   0x903a3864     0xdc
+       0.0%       CGSShmemRWLockUnlockForReading             CoreGraphics   0x903b4afc     0x74
+       0.0%                     CGSReleaseRegion             CoreGraphics   0x9037f9d0     0x80
+       0.0%          CGSLockShmemLockWithTimeout             CoreGraphics   0x903a3760    0x104
+       0.0%                   CGSGetDisplayDepth             CoreGraphics   0x9040c26c     0xdc
+       0.0%    CGSGetDenyWindowServerConnections             CoreGraphics   0x903a9b58     0x20
+       0.0%         CGSDisplayMappingChangedSeed             CoreGraphics   0x903b4a50     0x64
+       0.0%                CGSDisplayChangedSeed             CoreGraphics   0x903b49ec     0x64
+       0.0%                  cglScorePixelFormat                   OpenGL   0x93706f84    0x3f4
+       0.0%                   cglReleaseDrawable                   OpenGL   0x93709678     0xe0
+       0.0%                    CGLDestroyPBuffer                   OpenGL   0x9370aa7c     0xd8
+       0.0%                     CGLCreatePBuffer                   OpenGL   0x93709f20    0x1bc
+       0.0%                     cglContextValidQ                   OpenGL   0x93708280     0x6c
+       0.0%                 cglChoosePixelFormat                   OpenGL   0x93704880    0x848
+       0.0%                    CFStringGetTypeID           CoreFoundation   0x907be90c     0x1c
+       0.0%                CFStringGetCStringPtr           CoreFoundation   0x907be928    0x254
+       0.0%                   CFStringCreateCopy           CoreFoundation   0x907c29b4    0x298
+       0.0%                     CFSetRemoveValue           CoreFoundation   0x907d716c    0x2b4
+       0.0%                   CFSetCreateMutable           CoreFoundation   0x907d5f04     0x20
+       0.0%                     CFNumberGetValue           CoreFoundation   0x907e55b4    0x198
+       0.0%                      CFNumberGetType           CoreFoundation   0x907d9f2c     0xb0
+       0.0% CFNotificationCenterPostNotification           CoreFoundation   0x90810460     0x20
+       0.0%                       CFGetAllocator           CoreFoundation   0x907c28f8     0xbc
+       0.0%                   CFDictionaryCreate           CoreFoundation   0x907f3798     0x9c
+       0.0%                     CFDataGetBytePtr           CoreFoundation   0x907db2f0     0xac
+       0.0%                    CFDataAppendBytes           CoreFoundation   0x907d7c1c     0xe4
+       0.0%                      CFArrayGetCount           CoreFoundation   0x907c18e8     0xac
+       0.0%                   CFArrayAppendValue           CoreFoundation   0x907c0b70     0xdc
+       0.0% ATIRadeonX1000::submit_commands(VendorCommandDescriptor*) com.apple.ATIRadeonX1000     0x562ce0     0x50
+       0.0% ATIRadeonX1000::sleepForTimeStampNoLock(unsigned long) com.apple.ATIRadeonX1000     0x567ae0    0x180
+       0.0% ATIRadeonX1000::removeTransferFromGART(VendorTransferBuffer*) com.apple.ATIRadeonX1000     0x55c530     0x30
+       0.0% ATIRadeonX1000::noop_buffer(unsigned long*) com.apple.ATIRadeonX1000     0x560000     0x30
+       0.0% ATIRadeonX1000::addTransferToGART(VendorTransferBuffer*) com.apple.ATIRadeonX1000     0x55c4d0     0x60
+       0.0% ATIR500Surface::getTargetAndMethodForIndex(IOService**, unsigned long) com.apple.ATIRadeonX1000     0x57cc80     0x30
+       0.0% ATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer*, unsigned long, unsigned long, long*, long*, long*) com.apple.ATIRadeonX1000     0x57f150     0xb0
+       0.0% ATIR500Surface::alloc_surface_buffer(ATIR500SurfaceBuffer*) com.apple.ATIRadeonX1000     0x580230    0x390
+       0.0% ATIR500GLContext::~ATIR500GLContext [in-charge deleting]() com.apple.ATIRadeonX1000     0x568a30     0x70
+       0.0% ATIR500GLContext::WriteVertexArrayOffset(unsigned long*, unsigned long) com.apple.ATIRadeonX1000     0x569470    0x110
+       0.0%   ATIR500GLContext::stop(IOService*) com.apple.ATIRadeonX1000     0x56a700     0x80
+       0.0% ATIR500GLContext::getTargetAndMethodForIndex(IOService**, unsigned long) com.apple.ATIRadeonX1000     0x568db0     0x40
+       0.0% ATIR500GLContext::discard_command_buffer() com.apple.ATIRadeonX1000     0x569580    0x960
+       0.0% ATIR500GLContext::ATIR500GLContext[in-charge]() com.apple.ATIRadeonX1000     0x568b90     0x70
+       0.0% AppleDART::invalidateDART(unsigned, unsigned long) com.apple.driver.AppleMacRiscPCI     0x7957dc     0xd8
+       0.0%                              _setjmp        libSystem.B.dylib   0x900019c0    0x160
+       0.0%                _IOMemoryMap::unmap()              mach_kernel     0x2d9790     0xa8
+       0.0%  _IOMemoryMap::getMemoryDescriptor()              mach_kernel     0x2d9a40      0x8
+       0.0%                 _IOMemoryMap::free()              mach_kernel     0x2d98ec    0x114
+       0.0%                        _flattenPlist           CoreFoundation   0x907eef18    0x2a4
+       0.0%                  _disable_preemption              mach_kernel      0xa4d60     0x20
+       0.0% _CreateID(queue_entry*, unsigned long, long, long*) com.apple.iokit.IOGraphicsFamily     0x50890c    0x1cc
+       0.0%           _CFXNotificationUnregister           CoreFoundation   0x908088a4    0x2a8
+       0.0%             _CFXNotificationRegister           CoreFoundation   0x907f3dac    0x580
+       0.0%                  _cfnoteinfo_operate           CoreFoundation   0x907f98e8     0xe4
+       0.0%         _CFKeyedArchiverUIDGetTypeID           CoreFoundation   0x907d67fc     0x1c
+       0.0%               _CFAllocatorAllocateGC           CoreFoundation   0x907c920c     0x64
+       0.0%                        __spin_unlock commpage [libSystem.B.dylib]   0xffff82a0     0x20
+       0.0%                 __mach_absolute_time commpage [libSystem.B.dylib]   0xffff8200     0x20
+       0.0%                 __compare_and_swap32 commpage [libSystem.B.dylib]   0xffff8080     0x40
+       0.0%           __CFZombifyAllocatedMemory           CoreFoundation   0x907bd2c8     0x78
+       0.0%             __CFTypeCollectionRetain           CoreFoundation   0x907c1360      0x8
+       0.0%                   __CFDataDeallocate           CoreFoundation   0x907db448     0xcc
+       0.0%               0x4ffc070 [unreadable]                             0x4ffc070      0x4
+       0.0%               0x4d57050 [unreadable]                             0x4d57050      0x4
+       0.0%               0x4bbd660 [unreadable]                             0x4bbd660      0x4
+       0.0%               0x3f4b650 [unreadable]                             0x3f4b650      0x4
+       0.0%               0x3e66c50 [unreadable]                             0x3e66c50      0x4
+       0.0%               0x380c250 [unreadable]                             0x380c250      0x4
+       0.0%               0x280b470 [unreadable]                             0x280b470      0x4
+       0.0%                      0x131ee24 [16B]   ATIRadeonX1000GLDriver    0x131ee24     0x10
+       0.0%                       0x131ec04 [4B]   ATIRadeonX1000GLDriver    0x131ec04      0x4
+       0.0%                      0x131eab4 [16B]   ATIRadeonX1000GLDriver    0x131eab4     0x10
+       0.0%                      0x131e8c0 [76B]   ATIRadeonX1000GLDriver    0x131e8c0     0x4c
+       0.0%                      0x131e8a8 [20B]   ATIRadeonX1000GLDriver    0x131e8a8     0x14
+       0.0%                       0x131e790 [4B]   ATIRadeonX1000GLDriver    0x131e790      0x4
+       0.0%                       0x131e758 [4B]   ATIRadeonX1000GLDriver    0x131e758      0x4
+       0.0%                     0x131de84 [120B]   ATIRadeonX1000GLDriver    0x131de84     0x78
+       0.0%                     0x131dd8c [120B]   ATIRadeonX1000GLDriver    0x131dd8c     0x78
+       0.0%                  0x1316200 [unknown]   ATIRadeonX1000GLDriver    0x1316200      0x1
+       0.0%                  0x13161f8 [unknown]   ATIRadeonX1000GLDriver    0x13161f8      0x1
+       0.0%                       0x1316184 [4B]   ATIRadeonX1000GLDriver    0x1316184      0x4
+       0.0%                       0x13160f0 [4B]   ATIRadeonX1000GLDriver    0x13160f0      0x4
+       0.0%                       0x13160b8 [4B]   ATIRadeonX1000GLDriver    0x13160b8      0x4
+       0.0%                     0x1315a84 [120B]   ATIRadeonX1000GLDriver    0x1315a84     0x78
+       0.0%                     0x13157e4 [120B]   ATIRadeonX1000GLDriver    0x13157e4     0x78
+       0.0%                     0x1314dec [336B]   ATIRadeonX1000GLDriver    0x1314dec    0x150
+       0.0%                      0x1314c6c [28B]   ATIRadeonX1000GLDriver    0x1314c6c     0x1c
+       0.0%                       0x13147d0 [4B]   ATIRadeonX1000GLDriver    0x13147d0      0x4
+       0.0%                       0x13146d0 [4B]   ATIRadeonX1000GLDriver    0x13146d0      0x4
+       0.0%                     0x1313e34 [100B]   ATIRadeonX1000GLDriver    0x1313e34     0x64
+       0.0%                       0x1313c44 [4B]   ATIRadeonX1000GLDriver    0x1313c44      0x4
+       0.0%                       0x1313c2c [4B]   ATIRadeonX1000GLDriver    0x1313c2c      0x4
+       0.0%                       0x1313790 [4B]   ATIRadeonX1000GLDriver    0x1313790      0x4
+       0.0%                       0x1313738 [4B]   ATIRadeonX1000GLDriver    0x1313738      0x4
+       0.0%                       0x13136f8 [4B]   ATIRadeonX1000GLDriver    0x13136f8      0x4
+       0.0%                      0x12e927c [80B]   ATIRadeonX1000GLDriver    0x12e927c     0x50
+       0.0%                     0x12e5ccc [288B]   ATIRadeonX1000GLDriver    0x12e5ccc    0x120
+       0.0%                     0x12e5310 [296B]   ATIRadeonX1000GLDriver    0x12e5310    0x128
+       0.0%                     0x12e5110 [204B]   ATIRadeonX1000GLDriver    0x12e5110     0xcc
+       0.0%                      0x12e50cc [64B]   ATIRadeonX1000GLDriver    0x12e50cc     0x40
+       0.0%                      0x12e4e74 [76B]   ATIRadeonX1000GLDriver    0x12e4e74     0x4c
+       0.0%                      0x12db5d0 [72B]   ATIRadeonX1000GLDriver    0x12db5d0     0x48
+       0.0%                       0x12db3b0 [4B]   ATIRadeonX1000GLDriver    0x12db3b0      0x4
+       0.0%                  0x12d9f60 [unknown]   ATIRadeonX1000GLDriver    0x12d9f60      0x1
+       0.0%                    0x12d7eec [1.1KB]   ATIRadeonX1000GLDriver    0x12d7eec    0x468
+       0.0%                       0x12d7708 [4B]   ATIRadeonX1000GLDriver    0x12d7708      0x4
+       0.0%                      0x12d5824 [40B]   ATIRadeonX1000GLDriver    0x12d5824     0x28
+       0.0%                    0x12d3abc [1.7KB]   ATIRadeonX1000GLDriver    0x12d3abc    0x6e8
+       0.0%                     0x12d3a48 [112B]   ATIRadeonX1000GLDriver    0x12d3a48     0x70
+       0.0%                      0x12cf604 [88B]   ATIRadeonX1000GLDriver    0x12cf604     0x58
+       0.0%                      0x12c6154 [76B]   ATIRadeonX1000GLDriver    0x12c6154     0x4c
+       0.0%                     0x12bd29c [220B]   ATIRadeonX1000GLDriver    0x12bd29c     0xdc
+       0.0%                     0x12bc350 [144B]   ATIRadeonX1000GLDriver    0x12bc350     0x90
+       0.0%                      0x12bc264 [24B]   ATIRadeonX1000GLDriver    0x12bc264     0x18
+       0.0%                     0x12bbb40 [616B]   ATIRadeonX1000GLDriver    0x12bbb40    0x268
+       0.0%                     0x12bb8d8 [352B]   ATIRadeonX1000GLDriver    0x12bb8d8    0x160
+       0.0%                     0x12ba5ac [280B]   ATIRadeonX1000GLDriver    0x12ba5ac    0x118
+       0.0%                      0x12b961c [24B]   ATIRadeonX1000GLDriver    0x12b961c     0x18
+       0.0%                     0x12b956c [172B]   ATIRadeonX1000GLDriver    0x12b956c     0xac
+       0.0%                     0x12b93a0 [152B]   ATIRadeonX1000GLDriver    0x12b93a0     0x98
+       0.0%                      0x12b8e04 [84B]   ATIRadeonX1000GLDriver    0x12b8e04     0x54
+       0.0%                      0x12b8ad8 [24B]   ATIRadeonX1000GLDriver    0x12b8ad8     0x18
+       0.0%                     0x12b881c [412B]   ATIRadeonX1000GLDriver    0x12b881c    0x19c
+       0.0%                      0x12b83fc [40B]   ATIRadeonX1000GLDriver    0x12b83fc     0x28
+       0.0%                      0x12aafc0 [72B]   ATIRadeonX1000GLDriver    0x12aafc0     0x48
+       0.0%                    0x12a8dfc [1.5KB]   ATIRadeonX1000GLDriver    0x12a8dfc    0x5f8
+       0.0%                    0x12a6eb0 [2.1KB]   ATIRadeonX1000GLDriver    0x12a6eb0    0x894
+       0.0%                     0x12a3f44 [940B]   ATIRadeonX1000GLDriver    0x12a3f44    0x3ac
+       0.0%                    0x12a26d4 [2.0KB]   ATIRadeonX1000GLDriver    0x12a26d4    0x7d8
+       0.0%                     0x129f5f0 [416B]   ATIRadeonX1000GLDriver    0x129f5f0    0x1a0
+       0.0%                    0x129b654 [1.0KB]   ATIRadeonX1000GLDriver    0x129b654    0x408
+       0.0%                    0x1296d38 [1.5KB]   ATIRadeonX1000GLDriver    0x1296d38    0x5dc
+       0.0%                    0x1293274 [1.6KB]   ATIRadeonX1000GLDriver    0x1293274    0x680
+       0.0%                     0x1292ec8 [936B]   ATIRadeonX1000GLDriver    0x1292ec8    0x3a8
+       0.0%                    0x129182c [1.4KB]   ATIRadeonX1000GLDriver    0x129182c    0x58c
+       0.0%                    0x1291150 [1.7KB]   ATIRadeonX1000GLDriver    0x1291150    0x6d8
+       0.0%                    0x1290cb8 [1.1KB]   ATIRadeonX1000GLDriver    0x1290cb8    0x494
+       0.0%                     0x1290bdc [216B]   ATIRadeonX1000GLDriver    0x1290bdc     0xd8
+       0.0%                     0x128d0dc [344B]   ATIRadeonX1000GLDriver    0x128d0dc    0x158
+       0.0%                     0x1283820 [536B]   ATIRadeonX1000GLDriver    0x1283820    0x218
+       0.0%                     0x127fd40 [576B]   ATIRadeonX1000GLDriver    0x127fd40    0x240
+       0.0%                     0x127fc78 [196B]   ATIRadeonX1000GLDriver    0x127fc78     0xc4
+       0.0%                     0x127f294 [172B]   ATIRadeonX1000GLDriver    0x127f294     0xac
+       0.0%                      0x127f190 [64B]   ATIRadeonX1000GLDriver    0x127f190     0x40
+       0.0%                     0x127efb4 [124B]   ATIRadeonX1000GLDriver    0x127efb4     0x7c
+       0.0%                     0x1271520 [296B]   ATIRadeonX1000GLDriver    0x1271520    0x128
+       0.0%                     0x126e39c [124B]   ATIRadeonX1000GLDriver    0x126e39c     0x7c
+       0.0%                      0x126e348 [80B]   ATIRadeonX1000GLDriver    0x126e348     0x50
+       0.0%                      0x126d814 [56B]   ATIRadeonX1000GLDriver    0x126d814     0x38
+       0.0%                     0x126d470 [192B]   ATIRadeonX1000GLDriver    0x126d470     0xc0
+       0.0%                      0x126d40c [96B]   ATIRadeonX1000GLDriver    0x126d40c     0x60
+       0.0%                       0x126d2cc [4B]   ATIRadeonX1000GLDriver    0x126d2cc      0x4
+       0.0%                     0x126ca9c [136B]   ATIRadeonX1000GLDriver    0x126ca9c     0x88
+       0.0%                     0x126ca10 [136B]   ATIRadeonX1000GLDriver    0x126ca10     0x88
+       0.0%                     0x126c984 [136B]   ATIRadeonX1000GLDriver    0x126c984     0x88
+       0.0%                      0x126c734 [40B]   ATIRadeonX1000GLDriver    0x126c734     0x28
+       0.0%                      0x126c708 [40B]   ATIRadeonX1000GLDriver    0x126c708     0x28
+       0.0%                      0x126ae04 [96B]   ATIRadeonX1000GLDriver    0x126ae04     0x60
+       0.0%                     0x126a724 [376B]   ATIRadeonX1000GLDriver    0x126a724    0x178
+       0.0%                     0x12698c8 [328B]   ATIRadeonX1000GLDriver    0x12698c8    0x148
+       0.0%                     0x1268fa4 [196B]   ATIRadeonX1000GLDriver    0x1268fa4     0xc4
+       0.0%                      0x12591c0 [72B]   ATIRadeonX1000GLDriver    0x12591c0     0x48
+       0.0%                      0x1258f78 [72B]   ATIRadeonX1000GLDriver    0x1258f78     0x48
+       0.0%                     0x12541c4 [196B]   ATIRadeonX1000GLDriver    0x12541c4     0xc4
+       0.0%                       0x1253dcc [8B]   ATIRadeonX1000GLDriver    0x1253dcc      0x8
+       0.0%                      0x1250afc [48B]   ATIRadeonX1000GLDriver    0x1250afc     0x30
+       0.0%                      0x124ee40 [72B]   ATIRadeonX1000GLDriver    0x124ee40     0x48
+       0.0%                      0x124dcec [72B]   ATIRadeonX1000GLDriver    0x124dcec     0x48
+       0.0%                      0x124d1a8 [80B]   ATIRadeonX1000GLDriver    0x124d1a8     0x50
+       0.0%                      0x124d0f8 [88B]   ATIRadeonX1000GLDriver    0x124d0f8     0x58
+       0.0%                     0x124c6e8 [764B]   ATIRadeonX1000GLDriver    0x124c6e8    0x2fc
+       0.0%                     0x124c004 [424B]   ATIRadeonX1000GLDriver    0x124c004    0x1a8
+       0.0%                     0x124bd04 [180B]   ATIRadeonX1000GLDriver    0x124bd04     0xb4
+       0.0%                     0x124ba44 [308B]   ATIRadeonX1000GLDriver    0x124ba44    0x134
+       0.0%                     0x124b02c [384B]   ATIRadeonX1000GLDriver    0x124b02c    0x180
+       0.0%                      0x124ab6c [44B]   ATIRadeonX1000GLDriver    0x124ab6c     0x2c
+       0.0%                     0x124a69c [144B]   ATIRadeonX1000GLDriver    0x124a69c     0x90
+       0.0%                     0x124a45c [128B]   ATIRadeonX1000GLDriver    0x124a45c     0x80
+       0.0%                  0x124a140 [unknown]   ATIRadeonX1000GLDriver    0x124a140      0x1
+       0.0%                     0x1241230 [416B]   ATIRadeonX1000GLDriver    0x1241230    0x1a0
+       0.0%                     0x123f288 [112B]   ATIRadeonX1000GLDriver    0x123f288     0x70
+       0.0%                     0x123f140 [164B]   ATIRadeonX1000GLDriver    0x123f140     0xa4
+       0.0%                     0x123e5d0 [736B]   ATIRadeonX1000GLDriver    0x123e5d0    0x2e0
+       0.0%                      0x123aa24 [52B]   ATIRadeonX1000GLDriver    0x123aa24     0x34
+       0.0%                     0x123a03c [148B]   ATIRadeonX1000GLDriver    0x123a03c     0x94
+       0.0%                      0x1239908 [92B]   ATIRadeonX1000GLDriver    0x1239908     0x5c
+       0.0%                      0x1239398 [92B]   ATIRadeonX1000GLDriver    0x1239398     0x5c
+       0.0%                      0x1239340 [84B]   ATIRadeonX1000GLDriver    0x1239340     0x54
+       0.0%                      0x1238e18 [52B]   ATIRadeonX1000GLDriver    0x1238e18     0x34
+       0.0%                      0x1232258 [32B]   ATIRadeonX1000GLDriver    0x1232258     0x20
+       0.0%                      0x1230ae8 [64B]   ATIRadeonX1000GLDriver    0x1230ae8     0x40
+       0.0%                     0x122f184 [132B]   ATIRadeonX1000GLDriver    0x122f184     0x84
+       0.0%                      0x122ee4c [92B]   ATIRadeonX1000GLDriver    0x122ee4c     0x5c
+       0.0%                     0x122ed5c [116B]   ATIRadeonX1000GLDriver    0x122ed5c     0x74
+       0.0%                     0x122e6d0 [612B]   ATIRadeonX1000GLDriver    0x122e6d0    0x264
+       0.0%                      0x122e098 [48B]   ATIRadeonX1000GLDriver    0x122e098     0x30
+       0.0%                  0x122da20 [unknown]   ATIRadeonX1000GLDriver    0x122da20      0x1
+       0.0%                       0x122d9dc [8B]   ATIRadeonX1000GLDriver    0x122d9dc      0x8
+       0.0%                      0x122d6c4 [56B]   ATIRadeonX1000GLDriver    0x122d6c4     0x38
+       0.0%                     0x122d650 [112B]   ATIRadeonX1000GLDriver    0x122d650     0x70
+       0.0%                    0x122ad8c [1.5KB]   ATIRadeonX1000GLDriver    0x122ad8c    0x5f4
+       0.0%                     0x122a934 [256B]   ATIRadeonX1000GLDriver    0x122a934    0x100
+       0.0%                       0x122a408 [4B]   ATIRadeonX1000GLDriver    0x122a408      0x4
+       0.0%                     0x1229948 [424B]   ATIRadeonX1000GLDriver    0x1229948    0x1a8
+       0.0%                     0x1229308 [192B]   ATIRadeonX1000GLDriver    0x1229308     0xc0
+       0.0%                     0x1227a48 [292B]   ATIRadeonX1000GLDriver    0x1227a48    0x124
+       0.0%                     0x122780c [120B]   ATIRadeonX1000GLDriver    0x122780c     0x78
+       0.0%                     0x1227534 [128B]   ATIRadeonX1000GLDriver    0x1227534     0x80
+       0.0%                     0x12273b4 [148B]   ATIRadeonX1000GLDriver    0x12273b4     0x94
+       0.0%                  0x1226e00 [unknown]   ATIRadeonX1000GLDriver    0x1226e00      0x1
+       0.0%                     0x12200c0 [720B]   ATIRadeonX1000GLDriver    0x12200c0    0x2d0
+       0.0%                      0x121ffc0 [16B]   ATIRadeonX1000GLDriver    0x121ffc0     0x10
+       0.0%                    0x121e444 [5.8KB]   ATIRadeonX1000GLDriver    0x121e444   0x1710
+       0.0%                     0x120e7c8 [304B]   ATIRadeonX1000GLDriver    0x120e7c8    0x130
+       0.0%                    0x120e104 [1.2KB]   ATIRadeonX1000GLDriver    0x120e104    0x4ec
+       0.0%                     0x120be1c [392B]   ATIRadeonX1000GLDriver    0x120be1c    0x188
+       0.0%                      0x11fc55c [20B]   ATIRadeonX1000GLDriver    0x11fc55c     0x14
+       0.0%                  0x11fb190 [unknown]   ATIRadeonX1000GLDriver    0x11fb190      0x1
+       0.0%                      0x11f192c [16B]   ATIRadeonX1000GLDriver    0x11f192c     0x10
+       0.0%                      0x11ecf70 [16B]   ATIRadeonX1000GLDriver    0x11ecf70     0x10
+       0.0%                     0x11e8524 [300B]   ATIRadeonX1000GLDriver    0x11e8524    0x12c
+       0.0%                      0x11e7028 [40B]   ATIRadeonX1000GLDriver    0x11e7028     0x28
+       0.0%                     0x11e6ee4 [156B]   ATIRadeonX1000GLDriver    0x11e6ee4     0x9c
+       0.0%                     0x11e6c5c [260B]   ATIRadeonX1000GLDriver    0x11e6c5c    0x104
+       0.0%                      0x11e33a4 [64B]   ATIRadeonX1000GLDriver    0x11e33a4     0x40
+       0.0%                      0x11e3384 [28B]   ATIRadeonX1000GLDriver    0x11e3384     0x1c
+       0.0%                     0x11e2ff0 [104B]   ATIRadeonX1000GLDriver    0x11e2ff0     0x68
+       0.0%                    0x11e1e00 [2.2KB]   ATIRadeonX1000GLDriver    0x11e1e00    0x8f4
+       0.0%                     0x11e1cf8 [100B]   ATIRadeonX1000GLDriver    0x11e1cf8     0x64
+       0.0%                     0x11e0988 [108B]   ATIRadeonX1000GLDriver    0x11e0988     0x6c
+       0.0%                     0x11d8ea0 [340B]   ATIRadeonX1000GLDriver    0x11d8ea0    0x154
+       0.0%                     0x11d6b6c [292B]   ATIRadeonX1000GLDriver    0x11d6b6c    0x124
+       0.0%                     0x11d6840 [272B]   ATIRadeonX1000GLDriver    0x11d6840    0x110
+       0.0%                    0x11d5c6c [1.0KB]   ATIRadeonX1000GLDriver    0x11d5c6c    0x424
+       0.0%                     0x11d5b70 [248B]   ATIRadeonX1000GLDriver    0x11d5b70     0xf8
+       0.0%                     0x11d3460 [212B]   ATIRadeonX1000GLDriver    0x11d3460     0xd4
+       0.0%                    0x11d1c54 [2.0KB]   ATIRadeonX1000GLDriver    0x11d1c54    0x82c
+       0.0%                     0x11cf134 [152B]   ATIRadeonX1000GLDriver    0x11cf134     0x98
+       0.0%                      0x11cde54 [16B]   ATIRadeonX1000GLDriver    0x11cde54     0x10
+       0.0%                     0x11cc930 [212B]   ATIRadeonX1000GLDriver    0x11cc930     0xd4
+       0.0%                     0x11cc710 [148B]   ATIRadeonX1000GLDriver    0x11cc710     0x94
+       0.0%                     0x11c8f54 [424B]   ATIRadeonX1000GLDriver    0x11c8f54    0x1a8
+       0.0%                    0x11c0494 [1.6KB]   ATIRadeonX1000GLDriver    0x11c0494    0x640
+       0.0%                      0x11be2d4 [28B]   ATIRadeonX1000GLDriver    0x11be2d4     0x1c
+       0.0%                     0x11bd4c0 [152B]   ATIRadeonX1000GLDriver    0x11bd4c0     0x98
+       0.0%                     0x11a87d8 [348B]   ATIRadeonX1000GLDriver    0x11a87d8    0x15c
+       0.0%                     0x119b1ec [260B]   ATIRadeonX1000GLDriver    0x119b1ec    0x104
+       0.0%                     0x1196ef0 [280B]   ATIRadeonX1000GLDriver    0x1196ef0    0x118
+       0.0%                      0x1195f6c [92B]   ATIRadeonX1000GLDriver    0x1195f6c     0x5c
+       0.0%                     0x1195158 [376B]   ATIRadeonX1000GLDriver    0x1195158    0x178
+       0.0%                      0x1194968 [24B]   ATIRadeonX1000GLDriver    0x1194968     0x18
+       0.0%                    0x1193eec [2.3KB]   ATIRadeonX1000GLDriver    0x1193eec    0x964
+       0.0%                    0x1193100 [1.3KB]   ATIRadeonX1000GLDriver    0x1193100    0x510
+       0.0%                      0x1192ddc [72B]   ATIRadeonX1000GLDriver    0x1192ddc     0x48
+       0.0%                  0x1192540 [unknown]   ATIRadeonX1000GLDriver    0x1192540      0x1
+       0.0%                     0x1190a90 [192B]   ATIRadeonX1000GLDriver    0x1190a90     0xc0
+       0.0%                      0x1190990 [96B]   ATIRadeonX1000GLDriver    0x1190990     0x60
+       0.0%                     0x11908e4 [168B]   ATIRadeonX1000GLDriver    0x11908e4     0xa8
+       0.0%                     0x1190858 [108B]   ATIRadeonX1000GLDriver    0x1190858     0x6c
+
+===============================================================================================

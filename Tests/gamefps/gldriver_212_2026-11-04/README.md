@@ -1,0 +1,20 @@
+# #212: GLDriver first-flush overhead - attribution and fix (2026-11-04)
+
+Question: why is the rebuilt system +7-8 % on `glcycle.Clear+Flush` / `Draw100Tri+Flush` on a fresh boot (#212), and can the userspace GLDriver be fixed?
+
+## Findings
+1. **Attribution (2026-11-03, `kab/`, on #212):** kext effect with the stock GLDriver is +0.5 % on both metrics; the GLDriver accounts for the gap.
+2. **What the gap is:** `cfwarm.c` (this directory's tool, `Tools/gamefps/microbench/`) times each `clear+flush` / 100-triangle draw+flush *ordinal* per fresh pbuffer context. Stock: first clear+flush ~190-202 us, 2nd..6th ~56-64 us; the steady-state flush path of the rebuilt GLDriver is at parity (-3..+1.7 %). The whole gap is the **first flush on a new context**, i.e. the shader-compiler pipeline that runs then (Shark of the benchmark, `shark/`: the top GLDriver symbols of the rebuilt image are `Compiler__initStaticLocals`, `RegAlloc__initRegisterTables`, `ilRewriteForTextureState`, `recordProgramBuildDependencies`, `Arena__grow`, `pass_ssa_build`, `Scheduler__*`, `PackState__*`; GLDriver is 9.7 % of samples on stock, 10.6 % on 525fa848). The stale-argument strip (525fa848) is source-level and already in.
+3. **Code generation knob:** the rebuilt image is ~10 % larger than stock. `-Os` everywhere shrinks it 3.7 % and speeds the compiler path (first clear +1.6 % vs +3.7 % over stock) but slows the draw/state paths (draw100 +3..4 %, `cfw_fresh1.txt`). So: `LINK_OPT_ALT_FILES` (new, `Tools/userspace/link_corpus.py`) builds only the parts that are >=80 % shader-compiler code (`part_008 009 017 024 036 039 040 043-052 056`) at `-Os` and the rest at `-O2 -mtune=970` = image `mix` (`2915f27a` makes it the default of `build_gld_image.sh`). Variants tried and rejected: wider -Os set `mix2` (parts >=50 %: draw +1.4..1.9 %, no clear gain), compiler parts `-O1 -mtune=970` `mixB` (draw +2..3 %); `-Os` without `-mtune` is byte-identical to `-Os -mtune=970`.
+
+## Results (mix = renamed-or-stock kext + GLDriver md5 d988e2c5...)
+Fresh-boot interleaved A/B of GLDriver images (`cfw.sh`, 6-8 rounds x 600 contexts, sd ~1 us), mix vs stock, first clear+flush / first draw100+flush: `cfw_mix1.txt` +1.6 / +1.6 %, `cfw_mix2.txt` (13 min uptime) +1.8 / 0.0 %, `cfw_mixB.txt` +1.1 / +0.8 %.
+Ordered `perf_collect` (5 reps, `perf_compare.py`), stock kext, fresh boot: `pc3/` stock 189, mix 197, stock 192 us Clear+Flush (+4.2 / +2.6 %), Draw100Tri 118/119/119 (+0.8 / 0 %); `pc4/` (reversed order) Clear+Flush stock 195, mix 197/198 (+1.0 / +1.5 %), Draw100Tri 120/120/120 (0 %).
+Full system (renamed kext + mix, hot-swapped; control = stock kext hot-swapped the same way; `kabm/`): Clear+Flush stock 190 / 193 (before/after), mix 197 (+3.7 / +2.1 %); Draw100Tri stock 186 / 189, mix 188 (+1.1 / -0.5 %). Kext effect with stock GLDriver 190 -> 193 (+1.6 %) / 186 -> 186. `perf_compare`: 24 OK in every comparison.
+Stock-vs-stock drift between bookends is itself 1.6-1.7 % on Clear+Flush, so single ordered comparisons wobble by +-2 %.
+
+## Correctness of the mix image (installed, per-process load, stock restored afterwards)
+GL feature suite: no output diffs vs stock (82 programs; the same 3 non-zero exits as stock: accum, runtime_quirks, tex3d_cubemap) - `gls_mix_summary.tsv`. UT2004 (2 visits x 4 map/preset, interleaved): 0 regressions, avg -0.4..-1.0 % (`ut_mix/`). Doom 3 (2 interleaved rounds x 4 configs): 0 regressions, -1.0..+1.1 % (`d3_mix/`).
+
+## Residual
+Clear+Flush first-flush on a fresh context: pooled estimate +2.4 % (range +1.0..+4.2 % across 9 comparisons); Draw100Tri +0.3 %. The remainder is spread thinly over the compiler pipeline (no single hot function; fncmp per-function instruction counts are unreliable because of label gaps and stock's Shark rows are unsymbolized), consistent with the rebuilt code being ~10 % larger/less tightly scheduled than stock's. Next candidates if more is wanted: rlwimi-friendly bitfield expressions, double-typed FP (#210), per-part -Os/-O2 choice by profile instead of by function-name share.

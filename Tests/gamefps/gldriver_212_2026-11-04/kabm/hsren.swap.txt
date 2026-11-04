@@ -1,0 +1,6 @@
+   77    0 0x541000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <76 75 16 11>
+kextload: /tmp/kswap/ATIRadeonX1000.kext loaded successfully
+  103    0 0x6a2f8000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <76 75 16 11>
+force_mode_change: done, exit 0
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  103    0 0x6a2f8000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <76 75 16 11>

@@ -1,0 +1,19 @@
+perf_methods: 50000 calls/metric, 200 open/close cycles, timer tick 0.0300 us
+METRIC gl.get_config.sel3 n=50000 min_us=3.66 p10_us=3.72 median_us=3.78 p90_us=3.81 max_us=8.07
+METRIC gl.get_status.sel4 n=50000 min_us=3.60 p10_us=3.63 median_us=3.69 p90_us=3.72 max_us=6.93
+METRIC gl.get_hw_info.sel20 n=50000 min_us=3.60 p10_us=3.63 median_us=3.69 p90_us=3.75 max_us=7.71
+METRIC 2d.get_config.sel1 n=50000 min_us=3.48 p10_us=3.54 median_us=3.60 p90_us=3.63 max_us=5.88
+METRIC 2d.get_surface_info.sel2 n=50000 min_us=3.66 p10_us=3.72 median_us=3.78 p90_us=3.87 max_us=7.86
+METRIC 2d.read_regs_1.sel16 n=50000 min_us=4.29 p10_us=4.41 median_us=4.47 p90_us=4.56 max_us=8.67
+METRIC 2d.read_regs_2.sel16 n=50000 min_us=4.74 p10_us=4.86 median_us=4.95 p90_us=5.04 max_us=8.88
+METRIC dvd.get_config.sel1 n=50000 min_us=3.45 p10_us=3.51 median_us=3.57 p90_us=3.63 max_us=6.00
+METRIC dvd.get_status.sel2 n=50000 min_us=3.45 p10_us=3.51 median_us=3.54 p90_us=3.60 max_us=5.88
+METRIC dvd.read_regs.sel13 n=50000 min_us=4.29 p10_us=4.35 median_us=4.41 p90_us=4.47 max_us=8.34
+METRIC dvd.check_stamps.sel20 n=50000 min_us=3.39 p10_us=3.48 median_us=3.54 p90_us=3.60 max_us=5.79
+METRIC surface.get_state.sel2 n=50000 min_us=3.54 p10_us=3.57 median_us=3.63 p90_us=3.66 max_us=6.03
+METRIC surface.query_lock.sel11 n=50000 min_us=3.60 p10_us=3.63 median_us=3.69 p90_us=3.75 max_us=7.86
+METRIC open_close.surface n=200 min_us=61.44 p10_us=61.68 median_us=61.95 p90_us=62.28 max_us=76.72
+METRIC open_close.gl n=200 min_us=288.95 p10_us=292.19 median_us=294.68 p90_us=297.47 max_us=330.35
+METRIC open_close.2d n=200 min_us=96.67 p10_us=97.84 median_us=98.47 p90_us=99.16 max_us=105.01
+METRIC open_close.dvd n=200 min_us=158.98 p10_us=160.06 median_us=160.96 p90_us=162.01 max_us=167.05
+RESULT: PASS (0 call(s) returned an unexpected code)

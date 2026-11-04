@@ -1,0 +1,9 @@
+perf_baseline: 100 iterations, 256x256 pbuffer, 100 triangles/draw phase
+ChoosePixelFormat        min=0.031ms median=0.033ms max=30.510ms mean=0.338ms (n=100)
+CreateContext            min=1.948ms median=1.978ms max=2.795ms mean=1.986ms (n=100)
+SetPBuffer               min=1.883ms median=1.928ms max=2.175ms mean=1.930ms (n=100)
+Clear+Flush              min=0.193ms median=0.198ms max=0.239ms mean=0.199ms (n=100)
+Draw100Tri+Flush         min=0.115ms median=0.120ms max=0.138ms mean=0.120ms (n=100)
+ReadPixels               min=1.445ms median=1.528ms max=1.920ms mean=1.532ms (n=100)
+Teardown                 min=0.893ms median=0.919ms max=8.809ms mean=2.423ms (n=100)
+RESULT: PASS

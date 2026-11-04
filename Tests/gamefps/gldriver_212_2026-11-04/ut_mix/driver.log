@@ -1,0 +1,18 @@
+stock_v1/DM-Antalus_high: 20.417919 / 73.507927 / 98.556046 fps         rand[650988771] Score = 72.394920 
+rebuilt_v1/DM-Antalus_high: 19.839943 / 72.631142 / 97.663986 fps         rand[650988771] Score = 71.668449 
+stock_v1/DM-Antalus_low: 26.432962 / 86.984863 / 115.888847 fps         rand[650988771] Score = 78.147202 
+rebuilt_v1/DM-Antalus_low: 26.664539 / 86.483475 / 115.603119 fps         rand[650988771] Score = 78.091385 
+stock_v1/ONS-Torlan_high: 5.797544 / 65.241051 / 79.337700 fps         rand[2118218666] Score = 65.277588 
+rebuilt_v1/ONS-Torlan_high: 8.514195 / 65.087425 / 78.304726 fps         rand[2118218666] Score = 65.125854 
+stock_v1/ONS-Torlan_low: 9.319128 / 68.269356 / 81.684647 fps         rand[827666382] Score = 68.303413 
+rebuilt_v1/ONS-Torlan_low: 9.307242 / 67.834793 / 81.105751 fps         rand[827666382] Score = 67.871689 
+rebuilt_v2/DM-Antalus_high: 19.403074 / 72.854088 / 97.726288 fps         rand[650988771] Score = 71.874016 
+stock_v2/DM-Antalus_high: 19.580276 / 73.453850 / 98.187302 fps         rand[650988771] Score = 72.346268 
+rebuilt_v2/DM-Antalus_low: 26.144049 / 86.149368 / 115.074081 fps         rand[650988771] Score = 77.997437 
+stock_v2/DM-Antalus_low: 25.260393 / 86.293816 / 115.704742 fps         rand[650988771] Score = 78.031059 
+rebuilt_v2/ONS-Torlan_high: 8.396518 / 65.033775 / 78.340897 fps         rand[2118218666] Score = 65.069115 
+stock_v2/ONS-Torlan_high: 8.491725 / 65.568352 / 78.893272 fps         rand[2118218666] Score = 65.605339 
+rebuilt_v2/ONS-Torlan_low: 9.221202 / 67.931625 / 81.115120 fps         rand[827666382] Score = 67.966171 
+stock_v2/ONS-Torlan_low: 9.215655 / 68.311012 / 81.742958 fps         rand[827666382] Score = 68.344894 
+stock restored md5 ok
+done: /var/home/sam/g5logs/nov2_209/ut_mix
