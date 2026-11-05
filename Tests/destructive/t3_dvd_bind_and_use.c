@@ -97,6 +97,13 @@ static const char *body(dtest_t *t, io_service_t svc) {
 
     /* the real open question: 0x18 with both slots genuinely bound, matching the real emitter's word[1]=slot4, word[2]=slot3(constant) shape */
     r = flush_and_log(t, d, &addr, &size, 0x18, 4, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x18 failed"); goto out; }
+    /* #150/#151: 0x43 and 0x44 through the bound slot (word[1] = buffer record 16, word[2] = bound texture slot 3, word[3] = first field, word[4] = flags 0). Both only emit a register-write record. */
+    r = flush_and_log(t, d, &addr, &size, 0x43, 16, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x43 failed"); goto out; }
+    r = flush_and_log(t, d, &addr, &size, 0x44, 16, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x44 failed"); goto out; }
+    if (getenv("NEG_BUFIDX")) {   /* #219 negative check (rebuilt kext only: stock reads kernel memory at index*0x78): an out-of-range buffer index must end the stream, record untouched */
+        r = flush_and_log(t, d, &addr, &size, 0x43, 0x7fffffff, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x43 with buffer index 0x7fffffff failed"); goto out; }
+        dtest_note(t, "0x43 with out-of-range buffer index: record %s", g_rec_unchanged ? "unchanged (stream ended, as designed)" : "was rewritten (UNEXPECTED)"); if (!g_rec_unchanged) bad++;
+    }
 out:
     T3CALL(t, r, "DVD set_surface(0) detaches", IOConnectMethodScalarIStructureI(d, 0, 3, 0, 0, 0, 0, NULL));
     IOServiceClose(d); IOServiceClose(s);

@@ -36,6 +36,11 @@ extern "C" UInt32 GH_OSDecrementAtomic(...) asm("_OSDecrementAtomic");
  * an empty slot as "nothing there"; a record that names one is a malformed stream and is ended the same way the bind path ends one (endStream). Live: t3_dvd_bind_and_use
  * (declare_image ids passed as handles, so no bind landed) panicked here on the rebuilt kext; the same record killed the stock kernel in the original #144 runs, whose
  * panic screen was never read (Tiger sits on a panic until reset, system.log goes silent), which is why it looked like a total lockup rather than a NULL dereference. */
+/* Root cause (#219): the buffer records of the bound surface (23 of them, 0x78 bytes each) are addressed as `index * 0x78 + boundSurface` with `index` a client-chosen record word at sixteen
+ * sites below, and the result was dereferenced without a range check (the vendor's own surface code tests `index < 0x17` before using a slot index, #123): an index >= 23 reads (and, through the
+ * patched records, writes) kernel memory at a client-chosen offset. An out-of-range index is a malformed stream and is ended like an invalid bind handle (endStream). */
+static const UInt32 kDVDSurfaceBufferCount = 23;
+
 static const UInt32 kDVDTextureSlotCount = 18;
 
 /* real addr 0x357c0 */
@@ -345,6 +350,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
                     fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
                     if ((M<SInt16>(surfaceInfo + kATIR500Surface_overlayRight) != M<SInt16>(surfaceInfo + kATIR500Surface_overlayLeft)) && (fieldHeight != 0)) {
+                      if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
                       bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
                       if ((recordCursor[3] & 2) == 0) {
                         if (recordCursor[2] == 0) {
@@ -467,6 +473,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
             }
             else if (opcode == 0x13000000) {
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+              if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               plane0Address = M<UInt32>(bufferInfo + 0x560);
               pitch = M<UInt16>(bufferInfo + 0x570);
@@ -578,6 +585,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                              M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4);
                   }
                   surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+                  if (destBufferIndex >= kDVDSurfaceBufferCount || srcIndexA >= kDVDSurfaceBufferCount || srcIndexB >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer indexes (#219) */
                   destBufferInfo = destBufferIndex * 0x78 + surfaceInfo;
                   buffer17PitchBytes = (UInt32)M<UInt16>(surfaceInfo + 0x8b8);
                   firstBlockWords = recordCursor + firstBlockOffset;
@@ -771,7 +779,9 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                 goto keepRecordLength;
               }
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+              if (recordCursor[2] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
               secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
+              if (recordCursor[3] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
               bufferInfo = recordCursor[3] * 0x78 + surfaceInfo;
               fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
               recordWord4 = recordCursor[4];
@@ -890,6 +900,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
           if (opcode == 0x5000000) {
             clearByte = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+            if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             overlayHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             if (recordCursor[2] == 0) {
@@ -931,6 +942,7 @@ writeFillSize:
             if (opcode != 0x6000000) goto keepRecordLength;
             clearByte = (UInt32)M<UInt8>((SInt32)recordCursor + 0xf);
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+            if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             overlayHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             if (recordCursor[2] == 0) {
@@ -1446,7 +1458,9 @@ endStream:
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             fieldParity = recordCursor[3];
             modeFlag = recordCursor[4];
+            if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
+            if (recordCursor[2] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
             secondBufferInfo = recordCursor[2] * 0x78 + surfaceInfo;
             secondBlockOffset = recordCursor[6];
             fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
@@ -1629,6 +1643,7 @@ endStream:
           if (opcode == 0x43000000) {
             selectFlags = recordCursor[4];
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+            if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
             texture = (recordCursor[2] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[2] * 4 + 0x104) : (UInt8 *)0x0;
             if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
@@ -1695,6 +1710,7 @@ joined_r0x000381c4:
           else if (opcode < 0x43000001) {
             if (opcode == 0x3f000000) {
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+              if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               if (recordCursor[2] == 0) {
                 plane0Address = M<UInt32>(bufferInfo + 0x560);
@@ -1718,6 +1734,7 @@ joined_r0x000381c4:
             }
             else if (opcode == 0x42000000) {
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+              if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
               if (recordCursor[2] == 0) {
@@ -1751,6 +1768,7 @@ joined_r0x000381c4:
               overlayBottom = M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom);
               texture = (recordCursor[2] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[2] * 4 + 0x104) : (UInt8 *)0x0;
               if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
+              if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               if ((M<SInt32>(texture + 4) != 0) ||
                  (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
@@ -1826,6 +1844,7 @@ joined_r0x000381c4:
               if (opcode != 0x44000000) goto keepRecordLength;
               selectFlags = recordCursor[4];
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
+              if (recordCursor[1] >= kDVDSurfaceBufferCount) goto endStream;   /* client-chosen buffer index (#219) */
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               texture = (recordCursor[2] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[2] * 4 + 0x104) : (UInt8 *)0x0;
               if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
