@@ -123,12 +123,10 @@ storeTiledPitchWord:
                  M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x50);
             M<UInt32>(self + kIOATIR5002DContext_lastBoundTexture) = 0;
           }
-#if ATI_FIX_STOCK_BUGS
           /* Root cause (#152): sharedAllocator (+0x88) is created lazily by create_image/declare_image/create_transfer, so until one of them has run there are no
            * image objects at all and every image id in the stream is invalid. The vendor's answer to an invalid id is abortStream; but its validation reads
            * allocator->count (+0x14) first and so dereferences the NULL allocator (DAR=0x14). Route "no allocator" into the same abortStream exit. */
           if (M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) == 0) goto abortStream;
-#endif
           if ((M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x14) <= recordCursor[1]) ||
              (texture = *(UInt8 **)
                         (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x10)),
@@ -199,12 +197,10 @@ bindTextureRecord:
                M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x50);
           M<UInt32>(self + kIOATIR5002DContext_lastBoundTexture) = 0;
         }
-#if ATI_FIX_STOCK_BUGS
         /* Root cause (#152): sharedAllocator (+0x88) is created lazily by create_image/declare_image/create_transfer, so until one of them has run there are no
          * image objects at all and every image id in the stream is invalid. The vendor's answer to an invalid id is abortStream; but its validation reads
          * allocator->count (+0x14) first and so dereferences the NULL allocator (DAR=0x14). Route "no allocator" into the same abortStream exit. */
         if (M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) == 0) goto abortStream;
-#endif
         if ((M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x14) <= recordCursor[1]) ||
            (bindTexture = *(UInt8 **)
                         (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x10)),
@@ -425,12 +421,10 @@ storePitchTilingRecord:
                M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x50);
           M<UInt32>(self + kIOATIR5002DContext_lastBoundTexture) = 0;
         }
-#if ATI_FIX_STOCK_BUGS
         /* Root cause (#152): sharedAllocator (+0x88) is created lazily by create_image/declare_image/create_transfer, so until one of them has run there are no
          * image objects at all and every image id in the stream is invalid. The vendor's answer to an invalid id is abortStream; but its validation reads
          * allocator->count (+0x14) first and so dereferences the NULL allocator (DAR=0x14). Route "no allocator" into the same abortStream exit. */
         if (M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) == 0) goto abortStream;
-#endif
         if ((M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x14) <= recordCursor[1]) ||
            (bindTexture = *(UInt8 **)
                         (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x10)),
@@ -484,12 +478,10 @@ storePitchTilingRecord:
              M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x50);
         M<UInt32>(self + kIOATIR5002DContext_lastBoundTexture) = 0;
       }
-#if ATI_FIX_STOCK_BUGS
       /* Root cause (#152): sharedAllocator (+0x88) is created lazily by create_image/declare_image/create_transfer, so until one of them has run there are no
        * image objects at all and every image id in the stream is invalid. The vendor's answer to an invalid id is abortStream; but its validation reads
        * allocator->count (+0x14) first and so dereferences the NULL allocator (DAR=0x14). Route "no allocator" into the same abortStream exit. */
       if (M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) == 0) goto abortStream;
-#endif
       if ((recordCursor[1] < M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x14)) &&
          (texture = *(UInt8 **)
                     (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + kIOATIR5002DContext_sharedAllocator) + 0x10)),

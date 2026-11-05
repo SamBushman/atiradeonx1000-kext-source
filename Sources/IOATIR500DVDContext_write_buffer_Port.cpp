@@ -81,13 +81,11 @@ IOReturn IOATIR500DVDContext::write_buffer(sIODVDContextWriteBufferData *data, U
   bufferSlotOffset = (0x10 - (unsigned int)(M<int>(dataBytes + 0x10) == 0)) * 4;
   GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
   surface = M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface);
-#if ATI_FIX_STOCK_BUGS
   /* Root cause (#146): the vendor source already treats an unbound surface as a failure (the `surface == 0` test below -> 0xe00002cc), but the shipped
    * code loads surface->buffers[] BEFORE that test (the compiler hoisted the load above its guard). With boundSurface NULL - the normal state of a
    * fresh connection and of one whose surface was invalidated (remove_surface, vtable slot 0x5a4) - that load is a kernel NULL dereference.
    * Fix: restore the vendor's own order, i.e. test first. Same result code, no new behaviour. */
   if (surface == (UInt8 *)0x0) goto unlockAndFail;
-#endif
   bufferBit = 0x40000000;
   surfaceBuffer = M<int>(surface + bufferSlotOffset + 0xb70);
   bufferIndex = (surfaceBuffer - (int)(surface + kIOATIR500Surface_buffers) >> 3) * -0x11111111;

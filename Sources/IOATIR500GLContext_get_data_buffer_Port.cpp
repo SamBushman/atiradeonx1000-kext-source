@@ -230,10 +230,8 @@ appendToList:
     if (mapping == (int *)0x0) {
       *outHandle = 0;
       *outAddress = 0;
-#if ATI_FIX_STOCK_BUGS
       /* #99: the shipped code returns here with the accelerator command lock still held (the other two NoResources exits unlock) */
       GH_IOLockUnlock(M<UInt32>(M<int>(self + kIOATIR500GLContext_accelerator) + 0x840));
-#endif
       return 0xe00002be;
     }
     M<int *>(buffer + 0x10) = mapping;

@@ -120,7 +120,6 @@ void ATIRadeonX1000::stop(IOService *provider) {
     this->stop_xdct_engine();
   }
   this->stop_promo4_engine();
-#if ATI_FIX_STOCK_BUGS
   /* Root cause (#218): stop() frees the rings, the stamp page and the GART mappings the GPU reads, but never puts the GPU into a defined state first.
    * stop_promo4_engine() only asks the CP to stop (WPTR=0, ring disable) and polls the vendor idle predicate for a bounded 3 x 100 ms, ignoring the result. If the
    * CP / 3D pipe is mid-work (the DVD IDCT composite wedge, #142/#149/#190: the waitForTimeStamp above has just timed out), it keeps running against memory that is
@@ -171,7 +170,6 @@ void ATIRadeonX1000::stop(IOService *provider) {
 #undef ATI_GPU_BUSY
     }
   }
-#endif
   if (M<int>(self + kIOATIR500Accelerator_swdsPanel0Flag) != 0) {
     surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddress);
     mmioBase = M<int>(self + kIOATIR500Accelerator_mmioBase);
@@ -262,7 +260,6 @@ void ATIRadeonX1000::stop(IOService *provider) {
     VCALL(*M<int *>(self + kIOATIR500Accelerator_gpuSensorFunction), 0x18)(M<int *>(self + kIOATIR500Accelerator_gpuSensorFunction));
     M<UInt32>(self + kIOATIR500Accelerator_gpuSensorFunction) = 0;
   }
-#if ATI_FIX_STOCK_BUGS
   /* Root cause (#179, stock panic DAR 0xC6C in removeFromPCIeGART): teardown order. The textures still on the orphan list (client textures freed by a closing
    * client are only queued here; the garbage collector frees them later) are mapped in the PCIe GART, and freeing one (free_texvert -> vslot 0x5ac ->
    * removeTransferFromGART -> removeFromPCIeGART) clears its entries in pcieGartTable. Stock drains that list in the BASE class stop(), which this function calls
@@ -308,7 +305,6 @@ void ATIRadeonX1000::stop(IOService *provider) {
   this->freeAllCommandBuffers(0);
   this->freeAllCommandBuffers(1);
   this->freeAllDataBuffers();
-#endif
   this->shutdownPCIeGART();
   M<UInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) = 0;
   if (M<int>(self + kIOATIR500Accelerator_pcieGartTable) != 0) {

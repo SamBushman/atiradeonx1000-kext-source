@@ -10,12 +10,6 @@
 #ifndef GHIDRACOMPAT_H
 #define GHIDRACOMPAT_H
 
-/* ATI_FIX_STOCK_BUGS: 1 (default) = fix the defects Apple's shipped kext has on its own failure paths (command-lock leaks #98/#99, the allocAllSlaveSwapBuffers
- * unwind loop #32, ...). 0 = the parity build that reproduces the shipped behaviour bug for bug (use it for difftest against the stock kext: -DATI_FIX_STOCK_BUGS=0). */
-#ifndef ATI_FIX_STOCK_BUGS
-#define ATI_FIX_STOCK_BUGS 1
-#endif
-
 #include "ATIRadeonX1000Types.h"
 
 template <class T, class A> inline volatile T &M(A address) { return *reinterpret_cast<volatile T *>(static_cast<UInt32>(reinterpret_cast<unsigned long>(address))); }

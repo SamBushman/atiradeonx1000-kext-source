@@ -57,10 +57,10 @@ cannot be provoked by running one function; that is for the hardware soak tests.
 `STOCK_KEXT` is the shipped kext binary (extract it from your own install); `REBUILT_KEXT` overrides the default `build/difftest/rebuilt.bin`.
 Exit status 0 = every run identical.
 
-## Fixed build vs parity build (`ATI_FIX_STOCK_BUGS`)
+## Rebuilt vs stock: the intended divergences (bug-for-bug parity = the `Stock` git tag)
 
-The rebuilt kext fixes defects of Apple's shipped code on its own failure paths (`Headers/GhidraCompat.h`: `ATI_FIX_STOCK_BUGS`, default 1). Difftest against the stock kext
-therefore reports exactly these divergences for a default build, and nothing else (911 cases: 892 PASS, these 19 FAIL; the parity build passes all 911; `SWDSFunc [hand H2]` is the unreproduced load flake described below, not a divergence):
+The rebuilt kext fixes defects of Apple's shipped code on its own failure paths (there is no compile-time switch: the faithful port is the git tag `Stock`). Difftest against the stock kext
+therefore reports exactly these divergences, and nothing else (911 cases: 892 PASS, these 19 FAIL; bug-for-bug parity is what the `Stock` tag represents, not re-run since the macro was removed; `SWDSFunc [hand H2]` is the unreproduced load flake described below, not a divergence):
 
 | case | divergence (all intended) | issue |
 |---|---|---|
@@ -77,7 +77,7 @@ therefore reports exactly these divergences for a default build, and nothing els
 
 Root causes, not guards: each of these fixes the reason the bad value arises. #146 - boundSurface is legitimately empty before `set_surface` and after `remove_surface`, and the two methods lacked the precondition that every sibling enforces (write_buffer: the vendor's own check existed but the load was ordered before it). #152 - the shared allocator is created lazily by create_image/declare_image/create_transfer, so before that every image id is invalid, which the vendor already answers with abortStream. #125 - a client-supplied stream word must not be a kernel pointer; the only emitter of the record in the shipped GLDriver is never enabled. #179 - teardown order: resources that live in the GART must be released while the GART exists; the base class releases them after the derived class has already destroyed it. #123 - a panel surface's attachment buffer is the accelerator's scanout record (display-owned VRAM), not a surface slot; the slot index recovered from the pointer is meaningless for it and the vendor's own sibling code already tests `index < 0x17`. One case (`ATIRadeonX1000::SWDSFunc [hand H2]`) diverged on a single seed during two loaded `-j 8` full runs and passed 247/247 every time in isolation on the same binary; not related to these fixes.
 
-For the bug-for-bug parity run build with `WARN="-w -DATI_FIX_STOCK_BUGS=0" sh Tools/difftest/build_rebuilt.sh`: every case PASSes again.
+For a bug-for-bug parity run, check out the `Stock` tag in a separate worktree (`git worktree add ../kext-stock Stock`) and build the rebuilt kext from that tree with the same `Tools/difftest/build_rebuilt.sh` (expected: every case PASSes; not yet re-verified against the tag). Fixes are unconditional in the main tree; do not add compile-time switches for new ones.
 
 ## Writing a case (`Tests/difftest/*_cases.py`)
 

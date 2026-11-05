@@ -698,7 +698,6 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     destTilingByte1 = M<UInt8>(destBufferInfo + 0x591);
                     linkWords = firstBlockWords[0x10];
                     do {
-#if ATI_FIX_STOCK_BUGS
                       /* #142 ROOT CAUSE (the forward-predicted-macroblock "completion fence never posts" hang): entry word [1] is the offset, in words, from
                        * the entry's payload to the (RB3D_COLOROFFSET, RB3D_COLORPITCH) value pair this loop patches. The shipped code overwrites words [0] and [1] with
                        * PACKET2 fillers FIRST and then reads [1] to find the pair (stock disassembly 0x36390-0x3639c: stwx cursor[1]=0x80000000, then lwz cursor[1]), so it
@@ -721,18 +720,6 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                         firstChainTarget[1] = (tilingByte0Shifted & 3) << 0x11 | tilingBit0 << 0x10 | firstChainTarget[1] & 0x3ffe |
                                      (destTilingByte1 & 3) << 0x13 | 0x1200000;
                       }
-#else
-                      *firstChainCursor = 0x80000000;
-                      firstChainCursor[1] = 0x80000000;
-                      firstChainTarget = firstChainCursor + firstChainCursor[1] + 2;
-                      chainAddress = destPlane0Address;
-                      if (firstChainCursor[firstChainCursor[1] + 2] != 0) {
-                        chainAddress = destPlane0Address + destPitch;
-                      }
-                      *firstChainTarget = chainAddress & 0xffffffe0;
-                      firstChainTarget[1] = (tilingByte0Shifted & 3) << 0x11 | tilingBit0 << 0x10 | firstChainTarget[1] & 0x3ffe |
-                                   (destTilingByte1 & 3) << 0x13 | 0x1200000;
-#endif
                       firstChainTarget = firstChainCursor + linkWords + 2;
                       firstChainCursor = firstChainCursor + linkWords + 2;
                       linkWords = *firstChainTarget;
@@ -744,7 +731,6 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     destTilingByte1 = M<UInt8>(destBufferInfo + 0x591);
                     linkWords = secondBlockWords[0x10];
                     do {
-#if ATI_FIX_STOCK_BUGS
                       /* #142: same read-after-clobber as the first chain above (the second field's chain, stock 0x3643c-0x36440); the offset is read before the fillers
                        * overwrite it, and must keep the pair inside the entry. */
                       UInt32 pairOffset = secondChainCursor[1];
@@ -761,18 +747,6 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                         secondChainTarget[1] = (tilingByte0Shifted & 3) << 0x11 | tilingBit0 << 0x10 | secondChainTarget[1] & 0x3ffe |
                                      (destTilingByte1 & 3) << 0x13 | 0x1a00000;
                       }
-#else
-                      *secondChainCursor = 0x80000000;
-                      secondChainCursor[1] = 0x80000000;
-                      secondChainTarget = secondChainCursor + secondChainCursor[1] + 2;
-                      chainAddress = secondDestPlane0Address;
-                      if (secondChainCursor[secondChainCursor[1] + 2] != 0) {
-                        chainAddress = destPitch + secondDestPlane0Address;
-                      }
-                      *secondChainTarget = chainAddress & 0xffffffe0;
-                      secondChainTarget[1] = (tilingByte0Shifted & 3) << 0x11 | tilingBit0 << 0x10 | secondChainTarget[1] & 0x3ffe |
-                                   (destTilingByte1 & 3) << 0x13 | 0x1a00000;
-#endif
                       secondChainTarget = secondChainCursor + linkWords + 2;
                       secondChainCursor = secondChainCursor + linkWords + 2;
                       linkWords = *secondChainTarget;

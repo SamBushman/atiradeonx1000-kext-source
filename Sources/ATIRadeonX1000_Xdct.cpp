@@ -85,13 +85,11 @@ bool ATIRadeonX1000::start_xdct_engine() {
       pollCount = pollCount + 1;
       if (pollLimitReached) break;
     } while (readPointer < writePointer);
-#if ATI_FIX_STOCK_BUGS
     /* #127: the shipped code falls through to "ready" even when the poll timed out with the ring still behind (read pointer < write pointer). Leave the
        running flag clear and report failure, so the flag-gated paths (doIDCT, opcode 0x12, ...) refuse instead of running on a ring that never settled. */
     if (readPointer < writePointer) {
       return 0;
     }
-#endif
   }
   M<UInt32>(self + kIOATIR500Accelerator_xdctEngineRunning) = 1;
   return 1;
