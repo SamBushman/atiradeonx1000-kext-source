@@ -80,7 +80,7 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, setupbuf = 0, readback = 0, dumpimg = 0, getframe = 0, pstruct_override = -1, writebuf_sel = -1, prelock_delay_ms = 0, prime_surface = 0; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, setupbuf = 0, readback = 0, dumpimg = 0, getframe = 0, pstruct_override = -1, pstruct_n = 0, pstruct_list[8] = {0}, writebuf_sel = -1, prelock_delay_ms = 0, prime_surface = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
@@ -97,7 +97,7 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[k], "--height") && k + 1 < argc) height_arg = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--repeat") && k + 1 < argc) repeat = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--dst") && k + 1 < argc) dst_override = atoi(argv[++k]);
-        else if (!strcmp(argv[k], "--pstruct") && k + 1 < argc) pstruct_override = atoi(argv[++k]);   /* #141 criterion 4: desc[2] picture_structure (1 top field, 2 bottom field, 3 frame - the hardcoded default) */
+        else if (!strcmp(argv[k], "--pstruct") && k + 1 < argc) { char *t, *v = strdup(argv[++k]); pstruct_n = 0; for (t = strtok(v, ","); t && pstruct_n < 8; t = strtok(NULL, ",")) pstruct_list[pstruct_n++] = atoi(t); pstruct_override = pstruct_list[0]; }   /* "1,2" = per --repeat iteration: top field then bottom field into the same surface */   /* #141 criterion 4: desc[2] picture_structure (1 top field, 2 bottom field, 3 frame - the hardcoded default) */
         else if (!strcmp(argv[k], "--pictures") && k + 1 < argc) { char *t, *v = strdup(argv[++k]); picmask = 0; for (t = strtok(v, ","); t; t = strtok(NULL, ",")) picmask |= 1u << atoi(t); }
     }
     if (height_arg) rect[2] = (short)height_arg;   /* open/decode rectangle height (default VEC_H) */
@@ -167,7 +167,7 @@ int main(int argc, char **argv) {
         unsigned char desc[0x20]; size_t nrec = VEC_NMB * 0x1c; unsigned char *recs = malloc(nrec); unsigned *coefs = malloc((vec_pics[i].ncoefs + 1) * 4);
         memcpy(recs, vec_pics[i].recs, nrec); memcpy(coefs, vec_pics[i].coefs, vec_pics[i].ncoefs * 4);
         memset(desc, 0, sizeof desc);
-        desc[0] = vec_pics[i].ptype; desc[2] = pstruct_override >= 0 ? (unsigned char)pstruct_override : 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = dst_override != 1000 ? (unsigned char)dst_override : vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = vec_pics[i].bwd;
+        desc[0] = vec_pics[i].ptype; desc[2] = pstruct_n > 0 ? (unsigned char)pstruct_list[rep < pstruct_n ? rep : pstruct_n - 1] : 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = dst_override != 1000 ? (unsigned char)dst_override : vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = vec_pics[i].bwd;
         *(unsigned char **)(desc + 0x0c) = recs; *(unsigned **)(desc + 0x10) = coefs;
         printf("picture %d '%s': type %d alt %d dst %d fwd %d bwd %d, %d coefficient dwords, pstruct %d\n", i, vec_pics[i].name, vec_pics[i].ptype, vec_pics[i].alt, vec_pics[i].dst, vec_pics[i].fwd, vec_pics[i].bwd, vec_pics[i].ncoefs, (int)desc[2]); fflush(stdout);
         MARK("decode: calling DVDDriverDecodeImpl"); DVDDriverDecodeImpl(dev, desc, rect); MARK("decode: DVDDriverDecodeImpl returned");
@@ -182,7 +182,7 @@ int main(int argc, char **argv) {
             for (gq = 0; gq < gsz; gq++) if (gb[gq] != 0xAA) { gnz++; if (gfirst < 0) gfirst = (long)gq; glast = (long)gq; }
             printf("  GetFrame rc=%d: %ld bytes changed from the 0xAA fill (first 0x%lx, last 0x%lx)\n", grc, gnz, gfirst, glast);
             for (gy = 0; gy < 6; gy++) { int gx; printf("  row %d:", gy); for (gx = 0; gx < 32; gx++) printf(" %02x", gb[gy * grow + gx]); printf("\n"); }
-            if (getenv("RB_DUMP")) { char gf[300]; FILE *gfp; snprintf(gf, sizeof gf, "%s_gf_p%d_m%d.bin", getenv("RB_DUMP"), i, getframe); gfp = fopen(gf, "wb"); if (gfp) { fwrite(gb, 1, glast >= 0 ? (size_t)glast + 1 : 0, gfp); fclose(gfp); printf("  dumped %s\n", gf); } }
+            if (getenv("RB_DUMP")) { char gf[300]; FILE *gfp; if (rep) snprintf(gf, sizeof gf, "%s_gf_p%d_r%d_m%d.bin", getenv("RB_DUMP"), i, rep, getframe); else snprintf(gf, sizeof gf, "%s_gf_p%d_m%d.bin", getenv("RB_DUMP"), i, getframe); gfp = fopen(gf, "wb"); if (gfp) { fwrite(gb, 1, glast >= 0 ? (size_t)glast + 1 : 0, gfp); fclose(gfp); printf("  dumped %s\n", gf); } }
             fflush(stdout); free(gb);
         }
         if (dumpimg && guard_dump_images && getenv("RB_DUMP")) { char pf[300]; sleep(1); snprintf(pf, sizeof pf, "%s_after_p%d", getenv("RB_DUMP"), i); printf("dump-images: wrote %d (after picture %d)\n", guard_dump_images(pf), i); fflush(stdout); }

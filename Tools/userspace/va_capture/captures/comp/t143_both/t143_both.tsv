@@ -1,0 +1,107 @@
+# iokit_guard start pid=1523
+1	1523	212	IOServiceOpen	connect=0x230b	ctype=2	sel=-1	FWD	type=2 out=0x230b	0
+2	1523	262	scalarI_scalarO	connect=0x230b	ctype=2	sel=1	FWD		0
+3	1523	301	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=1 addr=0x24000 size=0x1000	0
+4	1523	353	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=0 addr=0x25000 size=0x1000	0
+5	1523	377	scalarI_structureO	connect=0x230b	ctype=2	sel=0	FWD	00000000 00000000 	0
+6	1523	590	IOServiceOpen	connect=0x2403	ctype=3	sel=-1	FWD	type=3 out=0x2403	0
+7	1523	616	scalarI_scalarO	connect=0x2403	ctype=3	sel=1	FWD		0
+8	1523	642	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=1 addr=0x520000 size=0x80000	0
+9	1523	817	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=4 addr=0x705000 size=0x80000	0
+10	1523	839	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=5 addr=0x1008000 size=0x80000	0
+11	1523	858	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=2 addr=0x26000 size=0x1000	0
+12	1523	1090	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	106e620a 00004000 00000001 	0
+13	1523	1209	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00027c00 	0
+14	1523	1225	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	106e620a 00004000 00000001 	0
+15	1523	1304	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00294000 00007800 	0
+16	1523	6742	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+17	1523	146744	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=398	0
+18	1523	229752	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0029c000 00004800 	0
+19	1523	235728	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+20	1523	371826	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=325	0
+21	1523	446463	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0280ee00 00003000 	0
+22	1523	446495	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02812800 00003000 	0
+23	1523	446513	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02815a00 00003000 	0
+24	1523	446532	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02818c00 00003000 	0
+25	1523	446550	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0281be00 00003000 	0
+26	1523	448959	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002a1000 00016800 	0
+27	1523	449003	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002ca000 00016800 	0
+28	1523	449022	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005a0000 00016800 	0
+29	1523	449041	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005c9000 00016800 	0
+30	1523	449060	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00785000 00016800 	0
+31	1523	449079	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007a0000 00016800 	0
+32	1523	449097	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007c9000 00016800 	0
+33	1523	449116	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01108000 00016800 	0
+34	1523	449135	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02801200 00000800 	0
+35	1523	455174	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+36	1523	596719	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=77	0
+37	1523	671638	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00037c00 	0
+38	1523	671707	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	106e620a 00004000 00000001 	0
+39	1523	683411	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+40	1523	821736	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=83	0
+41	1523	909382	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+42	1523	1055082	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=66	0
+43	1523	1130667	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: calling DVDDriverDecodeImpl	0
+44	1523	1196844	structureI_structureO	connect=0x2403	ctype=3	sel=18	ABOUT-TO-CALL(doIDCT FORWARDED)	in=56	params=0000000100000000000000000000000000000003000100a00000000041544956414472690018004000000000000000000000000000000000	-
+45	1523	1338878	structureI_structureO	connect=0x2403	ctype=3	sel=18	RESULT(doIDCT FORWARDED)	rc=0x00000000	kernel_call_us=539	out=0
+46	1523	1424924	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=4 addr=0x705000 size=0x80000	0
+47	1523	1435350	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+48	1523	1571838	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=124	0
+49	1523	1646683	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: DVDDriverDecodeImpl returned	0
+50	1523	1713384	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer allocated	0
+51	1523	1793975	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer filled	0
+52	1523	2855073	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: settle sleep done, calling DVDDriverGetFrameImpl	0
+53	1523	2913586	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01123000 00001800 	0
+54	1523	2925196	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+55	1523	3071910	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=79	0
+56	1523	3167340	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+57	1523	3305177	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=49	0
+58	1523	3388454	scalarI_structureI	connect=0x2403	ctype=3	sel=19	FWD	00000000 0000003c 	0
+59	1523	3400039	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+60	1523	3538820	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=65	0
+61	1523	3621833	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000010 	0
+62	1523	3621902	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: DVDDriverGetFrameImpl returned	0
+63	1523	3796375	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: calling DVDDriverDecodeImpl	0
+64	1523	3855019	structureI_structureO	connect=0x2403	ctype=3	sel=18	ABOUT-TO-CALL(doIDCT FORWARDED)	in=56	params=0000000100000001000000000000000000000003000100a000000000900032000000003b00180040000005f3bffff1500001cf58bffff1b0	-
+65	1523	4071903	structureI_structureO	connect=0x2403	ctype=3	sel=18	RESULT(doIDCT FORWARDED)	rc=0x00000000	kernel_call_us=34	out=0
+66	1523	4158343	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=4 addr=0x705000 size=0x80000	0
+67	1523	4168578	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+68	1523	4305242	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=63	0
+69	1523	4388472	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: DVDDriverDecodeImpl returned	0
+70	1523	4455182	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer allocated	0
+71	1523	4536251	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer filled	0
+72	1523	5596867	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: settle sleep done, calling DVDDriverGetFrameImpl	0
+73	1523	5655280	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01123000 00001800 	0
+74	1523	5666865	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+75	1523	5822057	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=75	0
+76	1523	5909175	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+77	1523	6047115	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=61	0
+78	1523	6121930	scalarI_structureI	connect=0x2403	ctype=3	sel=19	FWD	00000000 00000040 	0
+79	1523	6133507	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+80	1523	6272004	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=42	0
+81	1523	6346948	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000010 	0
+82	1523	6346982	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: DVDDriverGetFrameImpl returned	0
+83	1523	8513429	IOServiceClose	connect=0x230b	ctype=2	sel=-1	FWD	-	0
+84	1523	8525241	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+85	1523	8697170	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=55	0
+86	1523	8772119	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000f 	0
+87	1523	8772208	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000007 	0
+88	1523	8772272	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000008 	0
+89	1523	8772336	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000009 	0
+90	1523	8772398	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000a 	0
+91	1523	8772459	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000b 	0
+92	1523	8772521	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000c 	0
+93	1523	8772583	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000d 	0
+94	1523	8772643	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000e 	0
+95	1523	8772728	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000002 	0
+96	1523	8772766	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000003 	0
+97	1523	8772804	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000004 	0
+98	1523	8772881	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000005 	0
+99	1523	8772935	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000006 	0
+100	1523	8784496	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+101	1523	8913813	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=45	0
+102	1523	8988745	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000000 	0
+103	1523	9000295	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+104	1523	9130601	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=53	0
+105	1523	9213796	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000001 	0
+106	1523	9214947	IOServiceClose	connect=0x2403	ctype=3	sel=-1	FWD	-	0
