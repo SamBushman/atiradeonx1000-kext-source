@@ -92,15 +92,22 @@ static const char *body(dtest_t *t, io_service_t svc) {
 
     STOP_IF("maps")
     /* 0xb, 0xd first: real-usage pattern (word[2]=1 -> safe branch), zero bind precondition needed */
+    if (!getenv("SKIP_B_D")) {   /* SKIP_B_D: leave out 0xb/0xd (they wedge the CP when the bound surface has no allocated buffer; see FILL_VARIANT) */
     r = flush_and_log(t, d, &addr, &size, 0x0b, 2, 1, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0xb failed, stopping"); goto out; }
     STOP_IF("0xb")
     r = flush_and_log(t, d, &addr, &size, 0x0d, 2, 1, 1, 1, 1); if (r != 0) { bad++; dtest_note(t, "0xd failed, stopping"); goto out; }
+    }
     STOP_IF("0xb0xd")
 
     /* real bind: opcode 0x19+N binds word[1]'s image id into slot N (self+0x104+N*4). 0x1c -> slot 3, 0x1d -> slot 4. */
     r = flush_and_log(t, d, &addr, &size, 0x1c, forced ? imgSlot3 : (imgSlot3 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged && !forced) { bad++; dtest_note(t, "0x1c bind did NOT land (record unchanged): stopping before 0x18 (it would dereference the empty slot)"); goto out; } if (r != 0) { bad++; dtest_note(t, "0x1c (bind slot 3) failed, stopping"); goto out; }
     r = flush_and_log(t, d, &addr, &size, 0x1d, forced ? imgSlot4 : (imgSlot4 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged && !forced) { bad++; dtest_note(t, "0x1d bind did NOT land (record unchanged): stopping before 0x18"); goto out; } if (r != 0) { bad++; dtest_note(t, "0x1d (bind slot 4) failed, stopping"); goto out; }
     STOP_IF("bind")
+    if (getenv("FILL_VARIANT")) {   /* wedge isolation: opcode 0xd with the TEXTURE (slot 3, bound above) as the paint target: FILL_VARIANT=valid -> 64x48 rect, pitch 0x100; =zero -> width/height/pitch all 0; each then ends the sequence */
+        int zero = !strcmp(getenv("FILL_VARIANT"), "zero");
+        r = flush_and_log(t, d, &addr, &size, 0x0d, 3, 0, zero ? 0 : 64, zero ? 0 : 48, zero ? 0 : 0x100); if (r != 0) { bad++; dtest_note(t, "0xd (texture target) failed"); }
+        dtest_note(t, "FILL_VARIANT=%s: 0xd to slot 3 done, record %s", getenv("FILL_VARIANT"), g_rec_unchanged ? "unchanged (stream ended)" : "rewritten"); goto out;
+    }
 
     /* the real open question: 0x18 with both slots genuinely bound, matching the real emitter's word[1]=slot4, word[2]=slot3(constant) shape */
     r = flush_and_log(t, d, &addr, &size, 0x18, 4, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x18 failed"); goto out; }
