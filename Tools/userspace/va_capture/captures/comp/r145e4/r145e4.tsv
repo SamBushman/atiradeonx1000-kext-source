@@ -1,0 +1,68 @@
+# iokit_guard start pid=777
+1	777	223	IOServiceOpen	connect=0x230b	ctype=2	sel=-1	FWD	type=2 out=0x230b	0
+2	777	276	scalarI_scalarO	connect=0x230b	ctype=2	sel=1	FWD		0
+3	777	315	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=1 addr=0x24000 size=0x1000	0
+4	777	369	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=0 addr=0x25000 size=0x1000	0
+5	777	393	scalarI_structureO	connect=0x230b	ctype=2	sel=0	FWD	00000000 00000000 	0
+6	777	618	IOServiceOpen	connect=0x2403	ctype=3	sel=-1	FWD	type=3 out=0x2403	0
+7	777	637	scalarI_scalarO	connect=0x2403	ctype=3	sel=1	FWD		0
+8	777	663	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=1 addr=0x520000 size=0x80000	0
+9	777	845	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=4 addr=0x705000 size=0x80000	0
+10	777	867	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=5 addr=0x1008000 size=0x80000	0
+11	777	887	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=2 addr=0x26000 size=0x1000	0
+12	777	1130	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	10606e16 00004000 00000001 	0
+13	777	1247	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00027c00 	0
+14	777	1264	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	10606e16 00004000 00000001 	0
+15	777	1350	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00294000 00007800 	0
+16	777	6736	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+17	777	247612	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=419	0
+18	777	322284	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0029c000 00004800 	0
+19	777	328216	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+20	777	481699	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=614	0
+21	777	564594	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0280dc00 00003000 	0
+22	777	564659	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02811a00 00003000 	0
+23	777	564696	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02814c00 00003000 	0
+24	777	564732	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02817e00 00003000 	0
+25	777	564768	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0281b000 00003000 	0
+26	777	569574	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002a1000 00016800 	0
+27	777	569651	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002ca000 00016800 	0
+28	777	569690	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005a0000 00016800 	0
+29	777	569728	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005c9000 00016800 	0
+30	777	569765	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00785000 00016800 	0
+31	777	569802	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007a0000 00016800 	0
+32	777	569838	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007c9000 00016800 	0
+33	777	569875	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01108000 00016800 	0
+34	777	569914	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02810e00 00000800 	0
+35	777	581812	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+36	777	714494	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=87	0
+37	777	780871	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00037c00 	0
+38	777	780938	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	10606e16 00004000 00000001 	0
+39	777	792635	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+40	777	939541	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=106	0
+41	777	1026065	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+42	777	1156126	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=67	0
+43	777	1231721	scalarI_structureO	connect=0x2403	ctype=3	sel=4	SWALLOW	00000000 	0
+44	777	1232224	IOServiceClose	connect=0x230b	ctype=2	sel=-1	FWD	-	0
+45	777	1245400	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+46	777	1372801	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=73	0
+47	777	1447583	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000f 	0
+48	777	1447757	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000007 	0
+49	777	1447823	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000008 	0
+50	777	1447887	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000009 	0
+51	777	1447953	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000a 	0
+52	777	1448017	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000b 	0
+53	777	1448083	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000c 	0
+54	777	1448148	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000d 	0
+55	777	1448212	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000e 	0
+56	777	1448306	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000002 	0
+57	777	1448346	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000003 	0
+58	777	1448385	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000004 	0
+59	777	1448450	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000005 	0
+60	777	1448504	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000006 	0
+61	777	1460182	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+62	777	1581021	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=62	0
+63	777	1655914	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000000 	0
+64	777	1667617	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+65	777	1797847	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=69	0
+66	777	1881097	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000001 	0
+67	777	1882128	IOServiceClose	connect=0x2403	ctype=3	sel=-1	FWD	-	0
