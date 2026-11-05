@@ -10526,17 +10526,17 @@ setConvBuffer:
           scaledWidth = (scaledWidth - *(int *)(((unsigned char *)0x00002fb0) + engineState)) + 1;
         }
         scratchR10 = *(char **)(ctx + GLD_engineObjects);
-        scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x140) + 0x30);
+        scratchInt23 = *(int *)(*(int *)((int)scratchR10 + 0x140) + 0x30);
         procDesc.rec0F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
         procDesc.rec0F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
         procDesc.rec0F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
         procDesc.rec0F9c = *(undefined4 *)(scratchInt23 + 0x9c);
-        scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x148) + 0x30);
+        scratchInt23 = *(int *)(*(int *)((int)scratchR10 + 0x148) + 0x30);
         procDesc.rec1F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
         procDesc.rec1F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
         procDesc.rec1F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
         procDesc.rec1F9c = *(undefined4 *)(scratchInt23 + 0x9c);
-        scratchInt23 = *(int *)((int)*(float *)((int)scratchR10 + 0x144) + 0x30);
+        scratchInt23 = *(int *)(*(int *)((int)scratchR10 + 0x144) + 0x30);
         procDesc.rec2F98 = (uint)*(ushort *)(scratchInt23 + 0x98);
         procDesc.rec2F9a = (uint)*(ushort *)(scratchInt23 + 0x9a);
         procDesc.rec2F8c = (uint)*(ushort *)(scratchInt23 + 0x8c);
