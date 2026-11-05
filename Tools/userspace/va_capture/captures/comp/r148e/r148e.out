@@ -1,0 +1,15 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=53211 -> wid=119 rc=0
+CGSAddSurface -> sid=272738413 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x280b400 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=37 swallow=0 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+picture 2 'P0 frame, forward MB + intra MB': type 2 alt 0 dst 2 fwd 0 bwd 0, 2 coefficient dwords, pstruct 3
+  decode returned (repeat 0)
+  [guard after decode] fwd=40 swallow=2 dvd_opens=1 doIDCT(sel18)=2 remaps=8
+HOLD-AFTER 45 s (take the 'after' screenshot now)
+  [guard after close] fwd=61 swallow=2 dvd_opens=1 doIDCT(sel18)=2 remaps=11
+ava_drive: done
+EXIT=0

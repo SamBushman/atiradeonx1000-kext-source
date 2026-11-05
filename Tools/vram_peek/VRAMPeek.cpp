@@ -30,6 +30,18 @@
 #ifndef TARGET_SLOT
 #define TARGET_SLOT 16   /* matches the --write-buffer 1 case (bufferSelect != 0) in IOATIR500DVDContext::write_buffer */
 #endif
+#ifndef TARGET_RECOFF
+#define TARGET_RECOFF 0x8a0   /* stream-1 residual record; 0x558 + idx*0x78 = the destination-frame records stream 0 writes into */
+#endif
+#ifndef TARGET_FBBASE
+#define TARGET_FBBASE 0   /* #148: subtracted from raw+apertureBase (the GPU-side VRAM base, e.g. MC_FB_LOCATION 0x08000000, if the record offsets are GPU addresses rather than offsets into the mapping) */
+#endif
+#ifndef TARGET_ROWS
+#define TARGET_ROWS 20
+#endif
+#ifndef TARGET_ROWBYTES
+#define TARGET_ROWBYTES 48
+#endif
 #ifndef TARGET_LEN
 #define TARGET_LEN 0x100  /* kept small deliberately: a first full-size (0x3000) dump showed only its LAST ~20 lines survived in system.log - the
                             * kernel's own IOLog message buffer drops earlier lines under a burst this large. */
@@ -104,8 +116,17 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
     IOLog("VRAMPeek: surface+0xbf8(pending)=0x%08x dvdCtx+0x88(request)=0x%08x bit0x20000000=%s\n",
           (unsigned)pendingMask, (unsigned)reqMask, (pendingMask & 0x20000000) ? "SET(blocks lock_all_buffers)" : "clear");
 
+#ifdef TARGET_RESIDUAL
+    /* #148: stream 1 (the motion-compensation residual plane) is NOT in the surface+0xb70 pointer array: doIDCT (infoBytes+0xc == 1) takes its
+     * destination record inline at surface+0x8a0 (start = *(record+8) at info+0x2c, pitch = u16 *(record+0x18)). Read that record directly. */
+    UInt32 bufPtr = surface + TARGET_RECOFF;
+    IOLog("VRAMPeek: inline record (surface+0x%x)=0x%08x, +8=0x%08x +0x18(pitch u16)=0x%x +0x14=0x%x +0x16=0x%x +0x1c=0x%x +0x1e=0x%x +0x24(backing)=0x%08x\n", (unsigned)TARGET_RECOFF, (unsigned)bufPtr,
+          (unsigned)*(UInt32 *)(bufPtr + 8), (unsigned)*(UInt16 *)(bufPtr + 0x18), (unsigned)*(UInt16 *)(bufPtr + 0x14), (unsigned)*(UInt16 *)(bufPtr + 0x16),
+          (unsigned)*(UInt16 *)(bufPtr + 0x1c), (unsigned)*(UInt16 *)(bufPtr + 0x1e), (unsigned)*(UInt32 *)(bufPtr + 0x24));
+#else
     UInt32 bufPtr = *(UInt32 *)(surface + TARGET_SLOT * 4 + 0xb70);
     IOLog("VRAMPeek: bufPtr(surface+slot*4+0xb70)=0x%08x\n", (unsigned)bufPtr);
+#endif
     if (bufPtr == 0) { IOLog("VRAMPeek: slot %d buffer record not allocated\n", (int)TARGET_SLOT); accelSvc->release(); return KERN_SUCCESS; }
 
     UInt32 raw8 = *(UInt32 *)(bufPtr + 8);
@@ -113,12 +134,24 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
     UInt16 bpp   = *(UInt16 *)(bufPtr + 0x16);
     UInt16 width = *(UInt16 *)(bufPtr + 0x1c);
     UInt16 height = *(UInt16 *)(bufPtr + 0x1e);
-    UInt32 realAddr = raw8 + apertureBase;
+    UInt32 realAddr = raw8 + apertureBase - (UInt32)TARGET_FBBASE;
     IOLog("VRAMPeek: raw8(bufPtr+8)=0x%08x pitch=0x%x bpp=0x%x w=%u h=%u\n",
           (unsigned)raw8, (unsigned)pitch, (unsigned)bpp, (unsigned)width, (unsigned)height);
     IOLog("VRAMPeek: realAddr = raw8 + apertureBase = 0x%08x\n", (unsigned)realAddr);
 
+#ifdef TARGET_RESIDUAL
+    {   /* TARGET_ROWS rows of TARGET_ROWBYTES bytes at the record's own pitch (u16 +0x18), one IOLog line per row */
+        unsigned rp = *(UInt16 *)(bufPtr + 0x18);
+        IOLog("VRAMPeek: residual realAddr = *(rec+8) + apertureBase = 0x%08x, pitch 0x%x, dumping %d rows x %d bytes\n", (unsigned)realAddr, rp, (int)TARGET_ROWS, (int)TARGET_ROWBYTES);
+        for (unsigned r = 0; r < (unsigned)TARGET_ROWS; r++) {
+            volatile UInt8 *q = (volatile UInt8 *)(realAddr + r * rp); char ln[160]; int lo = 0;
+            for (unsigned i = 0; i < (unsigned)TARGET_ROWBYTES; i++) lo += snprintf(ln + lo, sizeof(ln) - lo, "%02x", q[i]);
+            ln[lo] = 0; IOLog("VRAMPeek[row %02d]: %s\n", (int)r, ln);
+        }
+    }
+#else
     dump_at(realAddr, (unsigned)TARGET_LEN);
+#endif
     IOLog("VRAMPeek: dump done\n");
 
     accelSvc->release();

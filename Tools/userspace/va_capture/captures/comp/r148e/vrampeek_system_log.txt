@@ -1,0 +1,242 @@
+Nov  5 12:21:02 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:21:02 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:21:02 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:21:02 VRAMPeek: accel=0x105c7000 dvdCtx(accel+0x68)=0x11f2c000
+Nov  5 12:21:02 VRAMPeek: DVD-context list length=1
+Nov  5 12:21:02 VRAMPeek: surface(dvdCtx+0xf8)=0x11f88000
+Nov  5 12:21:02 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x11f88120
+Nov  5 12:21:02 VRAMPeek: apertureBase(surface+0xc10)=0x6ffde000
+Nov  5 12:21:02 VRAMPeek: surface+0xbf8(pending)=0x107c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:21:02 VRAMPeek: bufPtr(surface+slot*4+0xb70)=0x11f88828
+Nov  5 12:21:02 VRAMPeek: raw8(bufPtr+8)=0x08025000 pitch=0x300 bpp=0x4 w=720 h=480
+Nov  5 12:21:02 VRAMPeek: realAddr = raw8 + apertureBase = 0x78003000
+Nov  5 12:21:02 VRAMPeek[+0x0000]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek[+0x0020]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek[+0x0040]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek[+0x0060]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek[+0x0080]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek[+0x00a0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek[+0x00c0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek[+0x00e0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:21:02 VRAMPeek: dump done
+Nov  5 12:21:03 VRAMPeek: stop
+Nov  5 12:22:27 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:22:27 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:22:27 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:22:27 VRAMPeek: accel=0x105c7000 dvdCtx(accel+0x68)=0x11f6f800
+Nov  5 12:22:27 VRAMPeek: DVD-context list length=1
+Nov  5 12:22:27 VRAMPeek: surface(dvdCtx+0xf8)=0x11f88000
+Nov  5 12:22:27 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x11f88120
+Nov  5 12:22:27 VRAMPeek: apertureBase(surface+0xc10)=0x6ffde000
+Nov  5 12:22:27 VRAMPeek: surface+0xbf8(pending)=0x107c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:22:27 VRAMPeek: bufPtr(surface+slot*4+0xb70)=0x11f88828
+Nov  5 12:22:27 VRAMPeek: raw8(bufPtr+8)=0x08025000 pitch=0x300 bpp=0x4 w=720 h=480
+Nov  5 12:22:27 VRAMPeek: realAddr = raw8 + apertureBase = 0x78003000
+Nov  5 12:22:27 VRAMPeek[+0x0000]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek[+0x0020]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek[+0x0040]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek[+0x0060]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek[+0x0080]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek[+0x00a0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek[+0x00c0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek[+0x00e0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:22:27 VRAMPeek: dump done
+Nov  5 12:22:28 VRAMPeek: stop
+Nov  5 12:29:20 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:29:20 VRAMPeek: openDVDCount(accel+0x73c)=0
+Nov  5 12:29:20 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000000
+Nov  5 12:29:20 VRAMPeek: accel=0x105c7000 dvdCtx(accel+0x68)=0x00000000
+Nov  5 12:29:20 VRAMPeek: DVD-context list length=0
+Nov  5 12:29:20 VRAMPeek: no active DVD context
+Nov  5 12:29:22 VRAMPeek: stop
+Nov  5 12:38:23 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:38:23 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:38:23 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:38:23 VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x10b6b600
+Nov  5 12:38:23 VRAMPeek: DVD-context list length=1
+Nov  5 12:38:23 VRAMPeek: surface(dvdCtx+0xf8)=0x10cb1000
+Nov  5 12:38:23 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x10cb1120
+Nov  5 12:38:23 VRAMPeek: apertureBase(surface+0xc10)=0x7051e000
+Nov  5 12:38:23 VRAMPeek: surface+0xbf8(pending)=0x107c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:38:23 VRAMPeek: bufPtr(surface+slot*4+0xb70)=0x10cb1828
+Nov  5 12:38:23 VRAMPeek: raw8(bufPtr+8)=0x08e76000 pitch=0x300 bpp=0x4 w=720 h=480
+Nov  5 12:38:23 VRAMPeek: realAddr = raw8 + apertureBase = 0x79394000
+Nov  5 12:38:23 VRAMPeek[+0x0000]: 00 00 03 5e 00 00 03 5d ff 01 00 28 00 00 00 06 00 00 4f 84 00 00 00 04 00 00 00 00 4f 83 00 0f 
+Nov  5 12:38:23 VRAMPeek[+0x0020]: 00 61 00 63 00 63 00 65 00 73 00 73 00 54 00 69 00 67 00 65 00 72 00 2e 00 63 00 73 00 73 00 06 
+Nov  5 12:38:23 VRAMPeek[+0x0040]: 00 00 4f 85 00 00 00 04 00 00 00 00 4f 83 00 0c 00 67 00 65 00 6e 00 6c 00 69 00 73 00 74 00 2e 
+Nov  5 12:38:23 VRAMPeek[+0x0060]: 00 68 00 74 00 6d 00 6c 00 06 00 00 4f 86 00 00 00 04 00 00 00 00 4f 83 00 11 00 67 00 65 00 6e 
+Nov  5 12:38:23 VRAMPeek[+0x0080]: 00 6c 00 69 00 73 00 74 00 5f 00 73 00 74 00 79 00 6c 00 65 00 2e 00 63 00 73 00 73 00 06 00 00 
+Nov  5 12:38:23 VRAMPeek[+0x00a0]: 4f 87 00 00 00 04 00 00 00 00 4f 83 00 09 00 69 00 6e 00 64 00 65 00 78 00 2e 00 63 00 73 00 73 
+Nov  5 12:38:23 VRAMPeek[+0x00c0]: 00 06 00 00 4f 88 00 00 00 04 00 00 00 00 4f 83 00 0e 00 74 00 61 00 73 00 6b 00 5f 00 73 00 74 
+Nov  5 12:38:23 VRAMPeek[+0x00e0]: 00 79 00 6c 00 65 00 2e 00 63 00 73 00 73 00 06 00 00 4f 89 00 00 00 03 00 00 00 00 4f 61 00 04 
+Nov  5 12:38:23 VRAMPeek: dump done
+Nov  5 12:38:24 VRAMPeek: stop
+Nov  5 12:39:44 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:39:44 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:39:44 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:39:44 VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x1117ce00
+Nov  5 12:39:44 VRAMPeek: DVD-context list length=1
+Nov  5 12:39:44 VRAMPeek: surface(dvdCtx+0xf8)=0x10bb2000
+Nov  5 12:39:44 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x10bb2120
+Nov  5 12:39:44 VRAMPeek: apertureBase(surface+0xc10)=0x7051e000
+Nov  5 12:39:44 VRAMPeek: surface+0xbf8(pending)=0x107c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:39:44 VRAMPeek: bufPtr(surface+slot*4+0xb70)=0x10bb2828
+Nov  5 12:39:44 VRAMPeek: raw8(bufPtr+8)=0x08f2e000 pitch=0x300 bpp=0x4 w=720 h=480
+Nov  5 12:39:44 VRAMPeek: realAddr = raw8 + apertureBase = 0x7944c000
+Nov  5 12:39:44 VRAMPeek[+0x0000]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek[+0x0020]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek[+0x0040]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek[+0x0060]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek[+0x0080]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek[+0x00a0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek[+0x00c0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek[+0x00e0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 VRAMPeek: dump done
+Nov  5 12:39:46 VRAMPeek: stop
+Nov  5 12:41:03 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:41:03 VRAMPeek: openDVDCount(accel+0x73c)=0
+Nov  5 12:41:03 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000000
+Nov  5 12:41:03 VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x00000000
+Nov  5 12:41:03 VRAMPeek: DVD-context list length=0
+Nov  5 12:41:03 VRAMPeek: no active DVD context
+Nov  5 12:41:04 VRAMPeek: stop
+Nov  5 12:45:31 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:45:31 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:45:31 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:45:31 VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x10855000
+Nov  5 12:45:31 VRAMPeek: DVD-context list length=1
+Nov  5 12:45:31 VRAMPeek: surface(dvdCtx+0xf8)=0x107cf000
+Nov  5 12:45:31 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x107cf120
+Nov  5 12:45:31 VRAMPeek: apertureBase(surface+0xc10)=0x7051e000
+Nov  5 12:45:31 VRAMPeek: surface+0xbf8(pending)=0x007c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:45:31 VRAMPeek: residual record (surface+0x8a0)=0x107cf8a0, +8=0x0801c000 +0x18(pitch u16)=0x200 +0x14=0x100 +0x16=0x2 +0x1c=0x40 +0x1e=0x48 +0x24(backing)=0x00000000
+Nov  5 12:45:31 VRAMPeek: raw8(bufPtr+8)=0x0801c000 pitch=0x100 bpp=0x2 w=64 h=72
+Nov  5 12:45:31 VRAMPeek: realAddr = raw8 + apertureBase = 0x7853a000
+Nov  5 12:45:31 VRAMPeek: residual realAddr = *(rec+8) + apertureBase = 0x7853a000, pitch 0x200, dumping 20 rows x 48 bytes
+Nov  5 12:45:31 VRAMPeek[row 00]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 01]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 02]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 03]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 04]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 05]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 06]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 07]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 08]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 09]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 10]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 11]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 12]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 13]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 14]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 15]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 16]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 17]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 18]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek[row 19]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:45:31 VRAMPeek: dump done
+Nov  5 12:45:32 VRAMPeek: stop
+Nov  5 12:47:11 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:47:11 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:47:11 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:47:11 VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x10379000
+Nov  5 12:47:11 VRAMPeek: DVD-context list length=1
+Nov  5 12:47:11 VRAMPeek: surface(dvdCtx+0xf8)=0x10910000
+Nov  5 12:47:11 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x10910120
+Nov  5 12:47:11 VRAMPeek: apertureBase(surface+0xc10)=0x7051e000
+Nov  5 12:47:11 VRAMPeek: surface+0xbf8(pending)=0x007c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:47:11 VRAMPeek: inline record (surface+0x648)=0x10910648, +8=0x0800d000 +0x18(pitch u16)=0x100 +0x14=0x100 +0x16=0x1 +0x1c=0x40 +0x1e=0x48 +0x24(backing)=0x00000000
+Nov  5 12:47:11 VRAMPeek: raw8(bufPtr+8)=0x0800d000 pitch=0x100 bpp=0x1 w=64 h=72
+Nov  5 12:47:11 VRAMPeek: realAddr = raw8 + apertureBase = 0x7852b000
+Nov  5 12:47:11 VRAMPeek: residual realAddr = *(rec+8) + apertureBase = 0x7852b000, pitch 0x100, dumping 20 rows x 48 bytes
+Nov  5 12:47:11 VRAMPeek[row 00]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 01]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 02]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 03]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 04]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 05]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 06]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 07]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 08]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 09]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 10]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 11]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 12]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 13]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 14]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 15]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 16]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 17]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 18]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek[row 19]: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+Nov  5 12:47:11 VRAMPeek: dump done
+Nov  5 12:47:12 VRAMPeek: stop
+Nov  5 12:48:53 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:48:53 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:48:53 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:48:53 VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x10924e00
+Nov  5 12:48:53 VRAMPeek: DVD-context list length=1
+Nov  5 12:48:53 VRAMPeek: surface(dvdCtx+0xf8)=0x10912000
+Nov  5 12:48:53 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x10912120
+Nov  5 12:48:53 VRAMPeek: apertureBase(surface+0xc10)=0x7051e000
+Nov  5 12:48:53 VRAMPeek: surface+0xbf8(pending)=0x007c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:48:53 VRAMPeek: inline record (surface+0x648)=0x10912648, +8=0x0800d000 +0x18(pitch u16)=0x100 +0x14=0x100 +0x16=0x1 +0x1c=0x40 +0x1e=0x48 +0x24(backing)=0x00000000
+Nov  5 12:48:53 VRAMPeek: raw8(bufPtr+8)=0x0800d000 pitch=0x100 bpp=0x1 w=64 h=72
+Nov  5 12:48:53 VRAMPeek: realAddr = raw8 + apertureBase = 0x7052b000
+Nov  5 12:48:53 VRAMPeek: residual realAddr = *(rec+8) + apertureBase = 0x7052b000, pitch 0x100, dumping 20 rows x 48 bytes
+Nov  5 12:48:53 VRAMPeek[row 00]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 01]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 02]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 03]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 04]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 05]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 06]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 07]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 08]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 09]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 10]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 11]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 12]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 13]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 14]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 15]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 16]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 17]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 18]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek[row 19]: 00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf00bfbfbf
+Nov  5 12:48:53 VRAMPeek: dump done
+Nov  5 12:48:55 VRAMPeek: stop
+Nov  5 12:48:56 VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:48:56 VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:48:56 VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:48:56 VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x10924e00
+Nov  5 12:48:56 VRAMPeek: DVD-context list length=1
+Nov  5 12:48:56 VRAMPeek: surface(dvdCtx+0xf8)=0x10912000
+Nov  5 12:48:56 VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x10912120
+Nov  5 12:48:56 VRAMPeek: apertureBase(surface+0xc10)=0x7051e000
+Nov  5 12:48:56 VRAMPeek: surface+0xbf8(pending)=0x007c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:48:56 VRAMPeek: inline record (surface+0x8a0)=0x109128a0, +8=0x0801c000 +0x18(pitch u16)=0x200 +0x14=0x100 +0x16=0x2 +0x1c=0x40 +0x1e=0x48 +0x24(backing)=0x00000000
+Nov  5 12:48:56 VRAMPeek: raw8(bufPtr+8)=0x0801c000 pitch=0x100 bpp=0x2 w=64 h=72
+Nov  5 12:48:56 VRAMPeek: realAddr = raw8 + apertureBase = 0x7053a000
+Nov  5 12:48:56 VRAMPeek: residual realAddr = *(rec+8) + apertureBase = 0x7053a000, pitch 0x200, dumping 20 rows x 48 bytes
+Nov  5 12:48:56 VRAMPeek[row 00]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 01]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 02]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 03]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 04]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 05]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 06]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 07]: fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 08]: fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3ffa1a1a1
+Nov  5 12:48:56 VRAMPeek[row 09]: fff1f1f1fff1f1f1fff1f1f1fff1f1f1fff1f1f1fff1f1f1fff1f1f1fff1f1f1fff3f3f3fff3f3f3fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 10]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3ff4a4a4aff3e3e3e
+Nov  5 12:48:56 VRAMPeek[row 11]: fff3f3f3ffa5a5a5ff000000ffedededfff3f3f3ffa5a5a5ff000000ffedededfff3f3f3fff2f2f2fff3f3f3fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 12]: fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3ffbdbdbdff000000ffd3d3d3fff3f3f3fff2f2f2fff3f3f3
+Nov  5 12:48:56 VRAMPeek[row 13]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2
+Nov  5 12:48:56 VRAMPeek[row 14]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2
+Nov  5 12:48:56 VRAMPeek[row 15]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2
+Nov  5 12:48:56 VRAMPeek[row 16]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2
+Nov  5 12:48:56 VRAMPeek[row 17]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2
+Nov  5 12:48:56 VRAMPeek[row 18]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2
+Nov  5 12:48:56 VRAMPeek[row 19]: fff3f3f3fff3f3f3fff3f3f3fff2f2f2fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff3f3f3fff2f2f2
+Nov  5 12:48:56 VRAMPeek: dump done
+Nov  5 12:48:57 VRAMPeek: stop

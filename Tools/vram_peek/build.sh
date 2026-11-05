@@ -3,6 +3,7 @@
 # the persistent ~/rung3 scratch area (never /tmp - wiped on reboot).
 #
 #   sh Tools/vram_peek/build.sh                          # walks accel->dvdCtx->surface->buffer record live, no address to supply
+#   TARGET_RESIDUAL=1 [TARGET_ROWS=20 TARGET_ROWBYTES=48] sh Tools/vram_peek/build.sh   # #148: dump the stream-1 residual record (surface+0x8a0) instead of a slot
 #   TARGET_SLOT=15 sh Tools/vram_peek/build.sh           # optional: pick a different surface buffer slot (default 16)
 #   sudo kextload ~/rung3/vrampeek/VRAMPeek.kext        # see system.log for the IOLog output
 #   sudo kextunload -b com.sambushman.VRAMPeek
@@ -15,6 +16,8 @@ KFW=/System/Library/Frameworks/Kernel.framework/Headers
 GCCLIB=/usr/lib/gcc/powerpc-apple-darwin8/4.0.1
 EXTRA_DEFS=""
 if [ -n "$TARGET_SLOT" ]; then EXTRA_DEFS="$EXTRA_DEFS -DTARGET_SLOT=$TARGET_SLOT"; fi
+if [ -n "$TARGET_RESIDUAL" ]; then EXTRA_DEFS="$EXTRA_DEFS -DTARGET_RESIDUAL=1 -DTARGET_ROWS=${TARGET_ROWS:-20} -DTARGET_ROWBYTES=${TARGET_ROWBYTES:-48}"; [ -n "$TARGET_RECOFF" ] && EXTRA_DEFS="$EXTRA_DEFS -DTARGET_RECOFF=$TARGET_RECOFF"; fi
+if [ -n "$TARGET_FBBASE" ]; then EXTRA_DEFS="$EXTRA_DEFS -DTARGET_FBBASE=$TARGET_FBBASE"; fi
 if [ -n "$TARGET_LEN" ]; then EXTRA_DEFS="$EXTRA_DEFS -DTARGET_LEN=$TARGET_LEN"; fi
 COMMON="-arch ppc -static -fno-common -mlongcall -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE $EXTRA_DEFS -I$KFW -w"
 CXXFLAGS="$COMMON -fno-rtti -fno-exceptions -fapple-kext -Doverride= -Dnullptr=0 -Dstatic_assert(a,b)="
