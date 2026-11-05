@@ -1304,8 +1304,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        accumFixedValueA16S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
-        fixedValue = (int)accumFixedValueA16S32;
+        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1315,14 +1314,14 @@ void glAccum_impl(int glContext,undefined4 op,double value)
             for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
               pixelWord = *readbackWordCursor;
               readbackWordCursor = readbackWordCursor + 1;
-              *accumShortCursor = (short)((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
-                                0xf) + *accumShortCursor;
-              accumShortCursor[3] = (short)((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >> 0xf
-                                  ) + accumShortCursor[3];
-              accumShortCursor[1] = (short)((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
-                                  0xf) + accumShortCursor[1];
-              accumShortCursor[2] = (short)((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
-                                  0xf) + accumShortCursor[2];
+              *accumShortCursor = (short)GH_SAT16(((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
+                                0xf) + *accumShortCursor);
+              accumShortCursor[3] = (short)GH_SAT16(((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >> 0xf
+                                  ) + accumShortCursor[3]);
+              accumShortCursor[1] = (short)GH_SAT16(((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
+                                  0xf) + accumShortCursor[1]);
+              accumShortCursor[2] = (short)GH_SAT16(((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
+                                  0xf) + accumShortCursor[2]);
             }
             rowCounter = rowCounter + 1;
             rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
@@ -1407,8 +1406,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        accumFixedValueA16S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
-        fixedValue = (int)accumFixedValueA16S16;
+        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1419,14 +1417,13 @@ void glAccum_impl(int glContext,undefined4 op,double value)
               texel16 = *readbackHalfCursor;
               readbackHalfCursor = readbackHalfCursor + 1;
               texelShl5 = (uint)texel16 << 5;
-              accumShortCursor[1] = (short)((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
-                                                  texel16 >> 5 & 0x1f)) >> 0xf) + accumShortCursor[1];
-              accumShortCursor[3] = (short)((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0xf) +
-                           accumShortCursor[3];
-              *accumShortCursor = (short)((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
-                                                texel16 >> 10 & 0x1f)) >> 0xf) + *accumShortCursor;
-              accumShortCursor[2] = (short)((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
-                                                  texel16 & 0x1f)) >> 0xf) + accumShortCursor[2];
+              accumShortCursor[1] = (short)GH_SAT16(((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
+                                                  texel16 >> 5 & 0x1f)) >> 0xf) + accumShortCursor[1]);
+              accumShortCursor[3] = (short)GH_SAT16(((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0xf) + accumShortCursor[3]);
+              *accumShortCursor = (short)GH_SAT16(((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
+                                                texel16 >> 10 & 0x1f)) >> 0xf) + *accumShortCursor);
+              accumShortCursor[2] = (short)GH_SAT16(((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
+                                                  texel16 & 0x1f)) >> 0xf) + accumShortCursor[2]);
             }
             rowCounter = rowCounter + 1;
             rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
@@ -1558,8 +1555,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        loadFixedValueA16S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
-        fixedValue = (int)loadFixedValueA16S32;
+        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1569,13 +1565,13 @@ void glAccum_impl(int glContext,undefined4 op,double value)
             for (; accumRaw16Cursor < accumRaw16End; accumRaw16Cursor = accumRaw16Cursor + 4) {
               pixelWord = *readbackWordCursor;
               readbackWordCursor = readbackWordCursor + 1;
-              *accumRaw16Cursor = (short)((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
+              *accumRaw16Cursor = (short)GH_SAT16((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
                                 0xf);
-              accumRaw16Cursor[3] = (short)((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >> 0xf
+              accumRaw16Cursor[3] = (short)GH_SAT16((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >> 0xf
                                   );
-              accumRaw16Cursor[1] = (short)((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
+              accumRaw16Cursor[1] = (short)GH_SAT16((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
                                   0xf);
-              accumRaw16Cursor[2] = (short)((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
+              accumRaw16Cursor[2] = (short)GH_SAT16((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
                                   0xf);
             }
             rowCounter = rowCounter + 1;
@@ -1704,8 +1700,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        loadFixedValueA16S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
-        fixedValue = (int)loadFixedValueA16S16;
+        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1716,12 +1711,12 @@ void glAccum_impl(int glContext,undefined4 op,double value)
               texel16 = *readbackHalfCursor;
               readbackHalfCursor = readbackHalfCursor + 1;
               texelShl5 = (uint)texel16 << 5;
-              accumRaw16Cursor[1] = (short)((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
+              accumRaw16Cursor[1] = (short)GH_SAT16((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
                                                   texel16 >> 5 & 0x1f)) >> 0xf);
-              accumRaw16Cursor[3] = (short)((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0xf);
-              *accumRaw16Cursor = (short)((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
+              accumRaw16Cursor[3] = (short)GH_SAT16((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0xf);
+              *accumRaw16Cursor = (short)GH_SAT16((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
                                                 texel16 >> 10 & 0x1f)) >> 0xf);
-              accumRaw16Cursor[2] = (short)((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
+              accumRaw16Cursor[2] = (short)GH_SAT16((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
                                                   texel16 & 0x1f)) >> 0xf);
             }
             rowCounter = rowCounter + 1;
@@ -1985,6 +1980,18 @@ code_r0x00003264:
                                                      - intBiasD));
                     if (alphaOut <= scaledSampleD) {
                       alphaOut = (double)(float)(scaledSampleD * channelMax255D);
+                    }
+                    if (redOut > FLOAT_001aa0f0) {
+                      redOut = FLOAT_001aa0f0;
+                    }
+                    if (greenOut > (double)FLOAT_001aa0f0) {
+                      greenOut = (double)FLOAT_001aa0f0;
+                    }
+                    if (blueOut > (double)FLOAT_001aa0f0) {
+                      blueOut = (double)FLOAT_001aa0f0;
+                    }
+                    if (alphaOut > (double)FLOAT_001aa0f0) {
+                      alphaOut = (double)FLOAT_001aa0f0;
                     }
                     if (DOUBLE_001aa1e8 <= alphaOut) {
                       alphaByte = (int)(alphaOut - DOUBLE_001aa1e8) + -0x80000000;
@@ -2254,6 +2261,18 @@ code_r0x00003264:
                     if (FLOAT_001aa0d4 <= scaledSample) {
                       alpha1Out = scaledSample * alphaScale;
                     }
+                    if (red5Out > channelMax31) {
+                      red5Out = channelMax31;
+                    }
+                    if (green5Out > channelMax31) {
+                      green5Out = channelMax31;
+                    }
+                    if (blue5Out > channelMax31) {
+                      blue5Out = channelMax31;
+                    }
+                    if (alpha1Out > alphaScale) {
+                      alpha1Out = alphaScale;
+                    }
                     accumShortCursor = accumShortCursor + 4;
                     *readbackHalfCursor = (ushort)(int)blue5Out |
                                (ushort)((int)alpha1Out << 0xf) | (ushort)((int)red5Out << 10) |
@@ -2430,19 +2449,19 @@ code_r0x00004f90:
         accumShortCursor = (short *)(rectXThenRowStartB * 8 + accumBuffer);
         accumShortEnd = accumShortCursor + rectWidth * 4;
         for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-          *accumShortCursor = (short)(int)(value *
+          *accumShortCursor = (short)GH_SAT16D(value *
                                  (double)(float)((double)CONCAT44(0x43300000,
                                                                   (int)*accumShortCursor ^ 0x80000000) -
                                                 intBiasD));
-          accumShortCursor[1] = (short)(int)(value *
+          accumShortCursor[1] = (short)GH_SAT16D(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)accumShortCursor[1] ^ 0x80000000) -
                                                   intBiasD));
-          accumShortCursor[2] = (short)(int)(value *
+          accumShortCursor[2] = (short)GH_SAT16D(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)accumShortCursor[2] ^ 0x80000000) -
                                                   intBiasD));
-          accumShortCursor[3] = (short)(int)(value *
+          accumShortCursor[3] = (short)GH_SAT16D(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)accumShortCursor[3] ^ 0x80000000) -
                                                   intBiasD));
@@ -2494,10 +2513,10 @@ code_r0x0000510c:
         accumShortCursor = (short *)(rectXThenRowStartB * 8 + accumBuffer);
         accumShortEnd = accumShortCursor + rectWidth * 4;
         for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-          *accumShortCursor = (short)((int)*accumShortCursor << shiftCount);
-          accumShortCursor[1] = (short)((int)accumShortCursor[1] << shiftCount);
-          accumShortCursor[2] = (short)((int)accumShortCursor[2] << shiftCount);
-          accumShortCursor[3] = (short)((int)accumShortCursor[3] << shiftCount);
+          *accumShortCursor = (short)GH_SAT16((int)*accumShortCursor << shiftCount);
+          accumShortCursor[1] = (short)GH_SAT16((int)accumShortCursor[1] << shiftCount);
+          accumShortCursor[2] = (short)GH_SAT16((int)accumShortCursor[2] << shiftCount);
+          accumShortCursor[3] = (short)GH_SAT16((int)accumShortCursor[3] << shiftCount);
         }
         rowCounterB = rowCounterB + 1;
         rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
@@ -2568,17 +2587,17 @@ code_r0x0000510c:
         }
       }
       else {
-        addFixedValueA8 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
         if (rectTopAdd < rectHeightThenBottom) {
           rowCounterB = 0;
           while( true ) {
             accumShortCursor = (short *)(rectXThenRowStartB * 8 + accumBuffer);
             accumShortEnd = accumShortCursor + rectWidth * 4;
             for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-              *accumShortCursor = addFixedValueA8 + *accumShortCursor;
-              accumShortCursor[1] = addFixedValueA8 + accumShortCursor[1];
-              accumShortCursor[2] = addFixedValueA8 + accumShortCursor[2];
-              accumShortCursor[3] = addFixedValueA8 + accumShortCursor[3];
+              *accumShortCursor = (short)GH_SAT16(fixedValue + *accumShortCursor);
+              accumShortCursor[1] = (short)GH_SAT16(fixedValue + accumShortCursor[1]);
+              accumShortCursor[2] = (short)GH_SAT16(fixedValue + accumShortCursor[2]);
+              accumShortCursor[3] = (short)GH_SAT16(fixedValue + accumShortCursor[3]);
             }
             rowCounterB = rowCounterB + 1;
             rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
@@ -3477,7 +3496,8 @@ storeCtx:
                   ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x80;
                 }
                 if (*(int *)(pixelFormat + 0x14) == 0x8000) {
-                  *(undefined1 *)((int)ctx + GLD_softwareBufferFormat) = 1;
+                  /* 8-bit-per-channel accumulation request: back it with the 16-bit (15-bit magnitude) store. The 8-bit store keeps only 7 magnitude bits (1.0 == 127) and wraps on overflow; the 16-bit one is exact to +-1/255 for 8-bit framebuffers. */
+                  *(undefined1 *)((int)ctx + GLD_softwareBufferFormat) = 2;
                 }
                 else if (*(int *)(pixelFormat + 0x14) == 0x800000) {
                   *(undefined1 *)((int)ctx + GLD_softwareBufferFormat) = 2;

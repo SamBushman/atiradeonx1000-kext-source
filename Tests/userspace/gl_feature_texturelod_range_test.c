@@ -2,7 +2,10 @@
  * clamps which mip levels the sampler is allowed to select, independent of GL_TEXTURE_BASE_LEVEL/MAX_LEVEL
  * (which restrict the levels that EXIST). Never checked before.
  *
- * CONFIRMED REAL DRIVER BUG (quirk 26/#139, see diag_lodrange.c): GL_TEXTURE_MAX_LOD is accepted with no
+ * FIXED in the rebuilt GLDriver (#139): the stock level-count computation in gld_buildTextureHardwareState used the
+ * default MIN_LOD (-1000) unclamped, so MAX_LOD never reduced the hardware level count; the rebuilt driver clamps it.
+ * The check below therefore now expects the clamp to be APPLIED (red); on the stock driver it prints MISMATCH.
+ * (Original stock finding: GL_TEXTURE_MAX_LOD is accepted with no
  * GL error and reads back exactly as set (0.0), but the sampler still selects a smaller mip level for a
  * tiny on-screen footprint, completely ignoring the clamp - the same class of bug as quirks 18/19/24 (state
  * correctly stored, but never actually consulted by the relevant pipeline stage). A full 7-level chain with
@@ -73,10 +76,10 @@ int main(void) {
     glFinish();
     glReadPixels(0,0,W,H,GL_RGBA,GL_UNSIGNED_BYTE,buf);
     GLubyte *clamped = buf + (H/2*W+W/2)*4;
-    /* regression check for the confirmed bug: clamp NOT applied (green, not red) is the expected result */
-    int ok = (clamped[1] > 200 && clamped[0] < 20) && e==GL_NO_ERROR;
-    printf("TEXTURE_MAX_LOD=0, same tiny footprint: got %d,%d,%d - clamp NOT applied (expected, quirk 26) %s\n",
-           clamped[0],clamped[1],clamped[2], ok?"OK (confirmed still-broken)":"MISMATCH (clamp may now work - re-verify!)");
+    /* #139 fixed: MAX_LOD=0 must force level 0 (red) even for a tiny footprint */
+    int ok = (clamped[0] > 200 && clamped[1] < 20) && e==GL_NO_ERROR;
+    printf("TEXTURE_MAX_LOD=0, same tiny footprint: got %d,%d,%d - want 255,0,0 (level 0) %s\n",
+           clamped[0],clamped[1],clamped[2], ok?"OK":"MISMATCH (clamp not applied - stock behaviour)");
 
     printf("RESULT: %s\n", ok?"PASS":"FAIL");
     return ok?0:1;

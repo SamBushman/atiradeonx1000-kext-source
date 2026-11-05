@@ -44,6 +44,10 @@ int main(void) {
         vol[idx*3+1] = y ? 200 : 20;
         vol[idx*3+2] = z ? 200 : 20;
     }
+    /* #130: the volume above is TIGHTLY packed (6 bytes per 2-texel RGB row), but GL_UNPACK_ALIGNMENT defaults to 4,
+     * which makes GL read each row at an 8-byte stride (and row 3 past the end of vol[]). That alone reproduces the
+     * whole "wrong texel" pattern byte for byte; it is not a driver defect. Tell GL the data is packed. */
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     GLuint tex; glGenTextures(1, &tex); glBindTexture(GL_TEXTURE_3D, tex);
     glTexImage3D(GL_TEXTURE_3D, 0, GL_RGB, 2, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, vol);
     glFinish();   /* lesson from the FBO diagnostic: this driver can need an explicit barrier between an upload and a dependent sample */

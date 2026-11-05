@@ -475,6 +475,12 @@ storeTexture2:
   scratchUint14 = (uint)*(byte *)((int)texture + 0xa5);
   scratchUint15 = (uint)(int)(*(float *)(scratchInt28 + 0x34) + FLOAT_001aa10c);
   scratchUint17 = (uint)(int)(*(float *)(scratchInt28 + 0x30) + FLOAT_001aa10c);
+  /* #139: the default GL_TEXTURE_MIN_LOD is -1000; the level count below, (max - min) + 1, needs a
+   * non-negative minimum. Stock left it negative, so the count was ~1000, fell back to the full
+   * chain, and GL_TEXTURE_MAX_LOD never reduced the hardware level count (TX_FORMAT0 max mip level). */
+  if ((int)scratchUint17 < 0) {
+    scratchUint17 = 0;
+  }
   if ((int)scratchUint14 < (int)scratchUint15) {
     scratchUint15 = scratchUint14;
   }

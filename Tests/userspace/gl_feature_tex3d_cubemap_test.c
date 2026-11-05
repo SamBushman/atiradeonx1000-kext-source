@@ -47,6 +47,9 @@ int main(void) {
             {255,0,255},{0,255,255},{128,128,128},{255,255,255}
         };
         for (i = 0; i < 8; i++) { vol[i*3]=colours[i][0]; vol[i*3+1]=colours[i][1]; vol[i*3+2]=colours[i][2]; }
+        /* #130: vol[] is tightly packed (6 bytes per row); the default GL_UNPACK_ALIGNMENT of 4 would read rows at an
+         * 8-byte stride (and row 3 past the end of vol[]), shifting every texel -- the old "MISMATCH 255,255,128". */
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         GLuint tex; glGenTextures(1, &tex); glBindTexture(GL_TEXTURE_3D, tex);
         glTexImage3D(GL_TEXTURE_3D, 0, GL_RGB, 2, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, vol);
         glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);

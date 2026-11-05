@@ -122,3 +122,11 @@ extern vec16 vectorPermute(), vectorConditionalSelect();
    pointer held in a float-typed variable) */
 static inline unsigned int GH_F2U(float f) { union { float f; unsigned int u; } x; x.f = f; return x.u; }
 static inline float GH_U2F(unsigned int u) { union { unsigned int u; float f; } x; x.u = u; return x.f; }
+
+/* glAccum_impl (16-bit accumulation store: 15-bit magnitude, 32767 == 1.0): saturating helpers. GH_SAT16 clamps an int to the signed 16-bit range (accumulation
+ * is a saturating fixed-point store, not a wrapping one); GH_SAT16D is the same for a double (truncates toward zero like a C cast, clamps first so an
+ * out-of-range double is never converted); GH_FIX16 converts a GL accumulation operand to the store's fixed-point scale, rounding to nearest and
+ * bounding |x| to 2.0 (65536) so that operand * 15-bit sample cannot overflow an int. */
+static inline int GH_SAT16(int x) { if (x > 32767) return 32767; if (x < -32768) return -32768; return x; }
+static inline int GH_SAT16D(double d) { if (d >= 32767.0) return 32767; if (d <= -32768.0) return -32768; return (int)d; }
+static inline int GH_FIX16(double d) { if (d >= 65536.0) return 65536; if (d <= -65536.0) return -65536; return (int)(d < 0.0 ? d - 0.5 : d + 0.5); }
