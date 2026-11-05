@@ -54,11 +54,19 @@ static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0;
     vm_address_t addr = 0; vm_size_t size = 0;
     unsigned imgSlot3 = 0xffffffff, imgSlot4 = 0xffffffff;
-    if (t3_surface(t, svc, &s, 4, 4) != KERN_SUCCESS) return "DIVERGENCE";
+    int prep = getenv("PREP_BUFFERS") != NULL;   /* #144 differential: give the context real VRAM for slot 16 (the 0x18 render target) the way the proven GetFrame flow does */
+    if (t3_surface(t, svc, &s, prep ? 64 : 4, prep ? 48 : 4) != KERN_SUCCESS) return "DIVERGENCE";
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
     if (r != KERN_SUCCESS) { IOServiceClose(s); return "DIVERGENCE"; }
     T3CALL(t, r, "DVD set_surface(1,0,0) binds", IOConnectMethodScalarIStructureI(d, 0, 3, 0, 1, 0, 0, NULL)); bad += t3_expect(t, "bind", r, 0);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
+    if (prep) {
+        IOByteCount osz = 0; UInt32 out[64];
+        T3CALL(t, r, "DVD setup_buffers(0,64,48,0,0x27c00)", IOConnectMethodScalarIScalarO(d, 21, 5, 0, 0, 64, 48, 0, 0x27c00)); bad += t3_expect(t, "setup_buffers #1", r, 0);
+        if (r == 0) { T3CALL(t, r, "DVD setup_buffers(0,64,48,0,0x37c00)", IOConnectMethodScalarIScalarO(d, 21, 5, 0, 0, 64, 48, 0, 0x37c00)); bad += t3_expect(t, "setup_buffers #2", r, 0); }
+        if (r == 0) { osz = sizeof out; memset(out, 0, sizeof out); T3CALL(t, r, "DVD lock_all_buffers(0)", IOConnectMethodScalarIStructureO(d, 4, 1, &osz, 0, out)); dtest_note(t, "lock_all_buffers -> r=0x%08x outSize=%u", (unsigned)r, (unsigned)osz); }
+        if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
+    }
     T3CALL(t, r, "DVD declare_image(4,4) #1 (for slot 3)", IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, 4, 4, &imgSlot3));
     bad += t3_expect(t, "declare_image #1", r, 0);
     dtest_note(t, "declare_image #1 -> r=0x%08x imgId=0x%x", (unsigned)r, imgSlot3);
