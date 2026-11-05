@@ -1,0 +1,7 @@
+Nov  5 12:19:38 sam-bushmans-power-mac-g5 kernel[0]: PowerMac11_2_SlewCtrlLoop::setVoltageSlewIndex - slew request timed out
+Nov  5 12:19:39 sam-bushmans-power-mac-g5 kernel[0]: PowerMac11_2_SlewCtrlLoop::setVoltageSlewIndex - slew request timed out
+Nov  5 12:19:40 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/sbin/kextload /Users/bushmas/rung3/vrampeek/VRAMPeek.kext
+Nov  5 12:19:41 sam-bushmans-power-mac-g5 kernel[0]: PowerMac11_2_SlewCtrlLoop::setVoltageSlewIndex - slew request timed out
+Nov  5 12:19:43 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/sbin/kextunload -b com.sambushman.VRAMPeek
+Nov  5 12:19:43 sam-bushmans-power-mac-g5 kernel[0]: PowerMac11_2_SlewCtrlLoop::setVoltageSlewIndex - slew request timed out
+Nov  5 12:20:15 sam-bushmans-power-mac-g5 kernel[0]: PowerMac11_2_SlewCtrlLoop::setVoltageSlewIndex - slew request timed out

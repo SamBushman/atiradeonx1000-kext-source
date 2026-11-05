@@ -1,0 +1,68 @@
+# iokit_guard start pid=29749
+1	29749	238	IOServiceOpen	connect=0x230b	ctype=2	sel=-1	FWD	type=2 out=0x230b	0
+2	29749	290	scalarI_scalarO	connect=0x230b	ctype=2	sel=1	FWD		0
+3	29749	330	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=1 addr=0x24000 size=0x1000	0
+4	29749	382	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=0 addr=0x25000 size=0x1000	0
+5	29749	409	scalarI_structureO	connect=0x230b	ctype=2	sel=0	FWD	00000000 00000000 	0
+6	29749	626	IOServiceOpen	connect=0x2403	ctype=3	sel=-1	FWD	type=3 out=0x2403	0
+7	29749	644	scalarI_scalarO	connect=0x2403	ctype=3	sel=1	FWD		0
+8	29749	669	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=1 addr=0x520000 size=0x80000	0
+9	29749	840	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=4 addr=0x705000 size=0x80000	0
+10	29749	861	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=5 addr=0x1008000 size=0x80000	0
+11	29749	881	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=2 addr=0x26000 size=0x1000	0
+12	29749	1126	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	1069a312 00004000 00000001 	0
+13	29749	1254	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00027c00 	0
+14	29749	1270	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	1069a312 00004000 00000001 	0
+15	29749	1353	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00294000 00007800 	0
+16	29749	6757	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+17	29749	210364	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=415	0
+18	29749	276587	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0029c000 00004800 	0
+19	29749	282460	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+20	29749	435286	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=317	0
+21	29749	510076	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0280dc00 00003000 	0
+22	29749	510112	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02811a00 00003000 	0
+23	29749	510130	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02814c00 00003000 	0
+24	29749	510149	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02817e00 00003000 	0
+25	29749	510167	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0281b000 00003000 	0
+26	29749	512605	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002a1000 00016800 	0
+27	29749	512649	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002ca000 00016800 	0
+28	29749	512668	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005a0000 00016800 	0
+29	29749	512687	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005c9000 00016800 	0
+30	29749	512706	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00785000 00016800 	0
+31	29749	512725	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007a0000 00016800 	0
+32	29749	512743	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007c9000 00016800 	0
+33	29749	512761	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01108000 00016800 	0
+34	29749	512781	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02810e00 00000800 	0
+35	29749	519332	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+36	29749	677230	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=84	0
+37	29749	752028	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00037c00 	0
+38	29749	752104	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	1069a312 00004000 00000001 	0
+39	29749	763788	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+40	29749	919685	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=113	0
+41	29749	1013858	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+42	29749	1168855	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=67	0
+43	29749	1252843	scalarI_structureO	connect=0x2403	ctype=3	sel=4	SWALLOW	00000000 	0
+44	29749	1253327	IOServiceClose	connect=0x230b	ctype=2	sel=-1	FWD	-	0
+45	29749	1266336	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+46	29749	1402120	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=76	0
+47	29749	1477143	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000f 	0
+48	29749	1477317	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000007 	0
+49	29749	1477380	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000008 	0
+50	29749	1477439	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000009 	0
+51	29749	1477500	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000a 	0
+52	29749	1477563	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000b 	0
+53	29749	1477626	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000c 	0
+54	29749	1477692	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000d 	0
+55	29749	1477751	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000e 	0
+56	29749	1477844	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000002 	0
+57	29749	1477884	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000003 	0
+58	29749	1477923	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000004 	0
+59	29749	1477983	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000005 	0
+60	29749	1478035	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000006 	0
+61	29749	1489667	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+62	29749	1627244	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=64	0
+63	29749	1710481	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000000 	0
+64	29749	1722118	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+65	29749	1877224	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=63	0
+66	29749	1960471	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000001 	0
+67	29749	1961435	IOServiceClose	connect=0x2403	ctype=3	sel=-1	FWD	-	0
