@@ -25,6 +25,8 @@
 #include "../Headers/GhidraLiterals.h"
 
 extern "C" UInt32 GH_IOFreeAligned(...) asm("_IOFreeAligned");
+extern "C" UInt32 GH_IODelay(...) asm("_IODelay");
+extern "C" UInt32 GH_IOLog(...) asm("_IOLog");
 
 UInt32 HZMEM_Destroy(_HZDATA *hz);
 
@@ -118,6 +120,58 @@ void ATIRadeonX1000::stop(IOService *provider) {
     this->stop_xdct_engine();
   }
   this->stop_promo4_engine();
+#if ATI_FIX_STOCK_BUGS
+  /* Root cause (#218): stop() frees the rings, the stamp page and the GART mappings the GPU reads, but never puts the GPU into a defined state first.
+   * stop_promo4_engine() only asks the CP to stop (WPTR=0, ring disable) and polls the vendor idle predicate for a bounded 3 x 100 ms, ignoring the result. If the
+   * CP / 3D pipe is mid-work (the DVD IDCT composite wedge, #142/#149/#190: the waitForTimeStamp above has just timed out), it keeps running against memory that is
+   * being freed, and it is still running when the NEXT instance's start() tries to bring the hardware up: start_promo4_engine() polls RBBM_STATUS & 0x10200 with
+   * IOSleep(1) up to 0xf4241 times (~17 min) and setupR520Pipes() spins on the vendor idle predicate with no bound at all, so ATIRadeonX1000 stays !registered with
+   * the PCI parent busy (live 2/2 before this change; RBBM_STATUS read here at teardown: 0x90010140 and 0xB8034100). A teardown must leave the hardware quiescent,
+   * so it now ALWAYS runs AMD's documented reset (R5xx_Acceleration 10.1.9 / 10.2.1) after the halt and before anything the GPU reads is freed: RBBM_SOFTRESET =
+   * 0x32005 (GA+CP+VAP), read back, = 0; then, as the procedure says, if the 3D pipe is still not idle GA_SOFT_RESET (0x429c, the register the vendor start() also
+   * writes) = 0x200 and wait for idle. The status is logged only when the GPU was not idle (evidence of a wedge); a normal unload resets an idle GPU. This does not
+   * remove the cause of the wedge itself (the composite that never completes, #142/#149); it removes the lifecycle defect that carried the wedge into the next load. */
+  {
+    int resetMmio = M<int>(self + kIOATIR500Accelerator_mmioBase);
+    if (resetMmio != 0) {
+      UInt32 rbbmStatus = loadWordByteReversed(&M<UInt8>(resetMmio + 0xe40));
+      UInt32 gaStatus = loadWordByteReversed(&M<UInt8>(resetMmio + 0x1720));
+      UInt32 afterStatus, afterGa;
+#define ATI_GPU_BUSY(rbbm, ga) (((SInt32)(rbbm) < 0) || (((ga) & 0x10000) == 0) || (((rbbm) & 0x60000) != 0) || (((ga) & 0x20000) == 0) || (((rbbm) & 0x380000) != 0))
+      bool wasBusy = ATI_GPU_BUSY(rbbmStatus, gaStatus);
+      if (wasBusy) {
+        GH_IOLog("ATIRadeonX1000::stop: GPU not idle after halt (RBBM_STATUS=%lX, 0x1720=%lX) - resetting before freeing the rings\n", (unsigned long)rbbmStatus, (unsigned long)gaStatus);
+      }
+      storeWordByteReversed(&M<UInt8>(resetMmio + 0xf0), 0x32005);
+      enforceInOrderExecutionIO();
+      (void)loadWordByteReversed(&M<UInt8>(resetMmio + 0xf0));
+      GH_IODelay(500);
+      M<UInt32>(resetMmio + 0xf0) = 0;
+      enforceInOrderExecutionIO();
+      (void)loadWordByteReversed(&M<UInt8>(resetMmio + 0xf0));
+      GH_IODelay(1000);
+      afterStatus = loadWordByteReversed(&M<UInt8>(resetMmio + 0xe40));
+      afterGa = loadWordByteReversed(&M<UInt8>(resetMmio + 0x1720));
+      if (wasBusy) {
+        GH_IOLog("ATIRadeonX1000::stop: RBBM_STATUS after RBBM soft reset = %lX (0x1720=%lX)\n", (unsigned long)afterStatus, (unsigned long)afterGa);
+      }
+      if (ATI_GPU_BUSY(afterStatus, afterGa)) {
+        SInt32 settleTries = 100;
+        storeWordByteReversed(&M<UInt8>(resetMmio + 0x429c), 0x200);
+        enforceInOrderExecutionIO();
+        GH_IODelay(1000);
+        do {
+          afterStatus = loadWordByteReversed(&M<UInt8>(resetMmio + 0xe40));
+          afterGa = loadWordByteReversed(&M<UInt8>(resetMmio + 0x1720));
+          if (!ATI_GPU_BUSY(afterStatus, afterGa)) break;
+          GH_IODelay(1000);
+        } while (--settleTries != 0);
+        GH_IOLog("ATIRadeonX1000::stop: RBBM_STATUS after GA_SOFT_RESET = %lX (0x1720=%lX)\n", (unsigned long)afterStatus, (unsigned long)afterGa);
+      }
+#undef ATI_GPU_BUSY
+    }
+  }
+#endif
   if (M<int>(self + kIOATIR500Accelerator_swdsPanel0Flag) != 0) {
     surfaceAddress = M<unsigned int>(self + kIOATIR500Accelerator_display1SurfaceAddress);
     mmioBase = M<int>(self + kIOATIR500Accelerator_mmioBase);
