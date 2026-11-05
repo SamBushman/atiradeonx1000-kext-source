@@ -1376,7 +1376,7 @@ int RegAlloc__insertSpillCode(pass, copyState)
                       }
                       if (((*(uint *)(*(int *)(*(int *)(pass + 8) + 0x30c) + 8) & 0x200) == 0) ||
                          ((inst[5] & 0x40000000U) == 0)) {
-                        (**(code **)(*inst + 0xc))(inst,0);
+                        (**(code **)(*inst + 0xc))(inst,0,*(undefined4 *)(pass + 8));
                         instFlags = inst[5];
                         changedFlag = 1;
                       }
