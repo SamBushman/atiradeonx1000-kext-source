@@ -5,7 +5,7 @@ import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
 import idct_stream as S, gen_ava_vectors as G, decode_px as D
 W, H = 64, 48; RB = W * 4
-b = open(sys.argv[1], 'rb').read(); a = open(sys.argv[2], 'rb').read(); name, pt, alt, dst, fwd, mbs = G.PICTURES[int(sys.argv[3])]
+b = open(sys.argv[1], 'rb').read(); a = open(sys.argv[2], 'rb').read(); name, pt, alt, dst, fwd, mbs, *_ = G.PICTURES[int(sys.argv[3])]
 addr, blocks, motion, fld = mbs[0]
 o, _, _ = S.mb_oracle(blocks, fld, alt, intra=False)
 exp = [[max(0, min(255, o[r][x] + 128)) if blocks.get((r // 8) * 2 + x // 8) else 0 for x in range(16)] for r in range(16)]

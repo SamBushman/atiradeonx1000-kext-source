@@ -167,9 +167,9 @@ int main(int argc, char **argv) {
         unsigned char desc[0x20]; size_t nrec = VEC_NMB * 0x1c; unsigned char *recs = malloc(nrec); unsigned *coefs = malloc((vec_pics[i].ncoefs + 1) * 4);
         memcpy(recs, vec_pics[i].recs, nrec); memcpy(coefs, vec_pics[i].coefs, vec_pics[i].ncoefs * 4);
         memset(desc, 0, sizeof desc);
-        desc[0] = vec_pics[i].ptype; desc[2] = pstruct_override >= 0 ? (unsigned char)pstruct_override : 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = dst_override != 1000 ? (unsigned char)dst_override : vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = 0;
+        desc[0] = vec_pics[i].ptype; desc[2] = pstruct_override >= 0 ? (unsigned char)pstruct_override : 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = dst_override != 1000 ? (unsigned char)dst_override : vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = vec_pics[i].bwd;
         *(unsigned char **)(desc + 0x0c) = recs; *(unsigned **)(desc + 0x10) = coefs;
-        printf("picture %d '%s': type %d alt %d dst %d fwd %d, %d coefficient dwords, pstruct %d\n", i, vec_pics[i].name, vec_pics[i].ptype, vec_pics[i].alt, vec_pics[i].dst, vec_pics[i].fwd, vec_pics[i].ncoefs, (int)desc[2]); fflush(stdout);
+        printf("picture %d '%s': type %d alt %d dst %d fwd %d bwd %d, %d coefficient dwords, pstruct %d\n", i, vec_pics[i].name, vec_pics[i].ptype, vec_pics[i].alt, vec_pics[i].dst, vec_pics[i].fwd, vec_pics[i].bwd, vec_pics[i].ncoefs, (int)desc[2]); fflush(stdout);
         MARK("decode: calling DVDDriverDecodeImpl"); DVDDriverDecodeImpl(dev, desc, rect); MARK("decode: DVDDriverDecodeImpl returned");
         printf("  decode returned (repeat %d)\n", rep); stats("after decode");
         if (getframe) {

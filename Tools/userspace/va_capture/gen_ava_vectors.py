@@ -33,7 +33,8 @@ def coef_A(blocks):
 
 
 PICTURES = [
-    # name, pic_type, alt_scan, dst, fwd, list of (mb_index, blocks, motion, field_dct)
+    # name, pic_type, alt_scan, dst, fwd, list of (mb_index, blocks, motion, field_dct) [, bwd = backward reference frame, B pictures only; default 0]
+    # motion byte (record +0x14, see ava_emit_mb_motion_vectors): 1 forward, 2 backward, 3 bidirectional (5/6/7 = field-motion variants)
     ('I0 frame, zigzag', 1, 0, 0, 0, [
         (0, {0: [(0, 1024)]}, 0, 0),
         (1, {0: [(0, 1024), (3, 160)]}, 0, 0),
@@ -68,14 +69,23 @@ PICTURES = [
         (0, {0: [(0, 1024)]}, 0, 0),
         (1, {0: [(0, 512)], 4: [(0, 64)]}, 0, 0)]),
     ('P2 frame, forward MB without residual (motion, no coefficients)', 2, 0, 2, 0, [
-        (0, {}, 1, 0)])
+        (0, {}, 1, 0)]),
+    # #142 wrap-up: B pictures (ptype 3) - the test disc has none. Run after I0/I1 so refs 0 and 1 exist: forward ref 0, backward ref 1, destination 2.
+    ('B0 frame, backward-only MB (motion 2), no residual', 3, 0, 2, 0, [
+        (0, {}, 2, 0)], 1),
+    ('B1 frame, bidirectional MB (motion 3) + residual, plus an intra MB', 3, 0, 2, 0, [
+        (0, {0: [(0, -64)]}, 3, 0),
+        (1, {0: [(0, 1024)]}, 0, 0)], 1),
+    ('B2 frame, forward MB (motion 1), backward MB (motion 2), bidirectional MB (motion 3) in one picture', 3, 0, 2, 0, [
+        (0, {}, 1, 0), (1, {}, 2, 0), (2, {}, 3, 0)], 1)
 ]
 
 
 def build():
     nmb = MBW * MBH
     pics, exp = [], []
-    for name, ptype, alt, dst, fwd, mbs in PICTURES:
+    for name, ptype, alt, dst, fwd, mbs, *_bw in PICTURES:
+        bwd = _bw[0] if _bw else 0
         recs = [mb_record({}) for _ in range(nmb)]
         coefs = []
         by_idx = {m[0]: m for m in mbs}
@@ -87,7 +97,7 @@ def build():
                 coefs += coef_A(blocks)
                 pkt = S.mb_packet(i, MBW, blocks, fld, alt)
                 (s1 if motion else s0).extend(pkt)
-        pics.append(dict(name=name, ptype=ptype, alt=alt, dst=dst, fwd=fwd, recs=b''.join(recs), coefs=coefs))
+        pics.append(dict(name=name, ptype=ptype, alt=alt, dst=dst, fwd=fwd, bwd=bwd, recs=b''.join(recs), coefs=coefs))
         exp.append(dict(name=name, dst=dst, alt=alt, ptype=ptype, stream0=['%08x' % d for d in s0], stream1=['%08x' % d for d in s1],
                         expected_doidct=[dict(stream=0, dwords=len(s0), flag='%08x' % (0x10080 | alt << 3 | 0x20), mode='%08x' % 0)] * bool(s0) +
                                         [dict(stream=1, dwords=len(s1), flag='%08x' % (0x10080 | alt << 3), mode='%08x' % 0x8000)] * bool(s1)))
@@ -101,9 +111,9 @@ def write_header(pics, path):
             f.write('static const unsigned char vec%d_recs[] = {%s};\n' % (i, ','.join(str(b) for b in p['recs'])))
             f.write('static const unsigned int vec%d_coefs[] = {%s};\n' % (i, ','.join('0x%08xU' % c for c in p['coefs']) or '0'))
             f.write('static const int vec%d_ncoefs = %d;\n' % (i, len(p['coefs'])))
-        f.write('static const struct { const char *name; int ptype, alt, dst, fwd; const unsigned char *recs; const unsigned int *coefs; int ncoefs; } vec_pics[] = {\n')
+        f.write('static const struct { const char *name; int ptype, alt, dst, fwd, bwd; const unsigned char *recs; const unsigned int *coefs; int ncoefs; } vec_pics[] = {\n')
         for i, p in enumerate(pics):
-            f.write('  {"%s", %d, %d, %d, %d, vec%d_recs, vec%d_coefs, %d},\n' % (p['name'], p['ptype'], p['alt'], p['dst'], p['fwd'], i, i, len(p['coefs'])))
+            f.write('  {"%s", %d, %d, %d, %d, %d, vec%d_recs, vec%d_coefs, %d},\n' % (p['name'], p['ptype'], p['alt'], p['dst'], p['fwd'], p['bwd'], i, i, len(p['coefs'])))
         f.write('};\n')
 
 

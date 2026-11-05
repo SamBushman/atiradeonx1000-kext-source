@@ -352,6 +352,54 @@
    "stream0": [],
    "stream1": [],
    "expected_doidct": []
+  },
+  {
+   "name": "B0 frame, backward-only MB (motion 2), no residual",
+   "dst": 2,
+   "alt": 0,
+   "ptype": 3,
+   "stream0": [],
+   "stream1": [],
+   "expected_doidct": []
+  },
+  {
+   "name": "B1 frame, bidirectional MB (motion 3) + residual, plus an intra MB",
+   "dst": 2,
+   "alt": 0,
+   "ptype": 3,
+   "stream0": [
+    "00000800",
+    "00000010",
+    "04000001"
+   ],
+   "stream1": [
+    "00000800",
+    "00000000",
+    "ffc00001"
+   ],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 3,
+     "flag": "000100a0",
+     "mode": "00000000"
+    },
+    {
+     "stream": 1,
+     "dwords": 3,
+     "flag": "00010080",
+     "mode": "00008000"
+    }
+   ]
+  },
+  {
+   "name": "B2 frame, forward MB (motion 1), backward MB (motion 2), bidirectional MB (motion 3) in one picture",
+   "dst": 2,
+   "alt": 0,
+   "ptype": 3,
+   "stream0": [],
+   "stream1": [],
+   "expected_doidct": []
   }
  ]
 }

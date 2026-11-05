@@ -2,7 +2,7 @@
 #define VEC_W 64
 #define VEC_H 48
 #define VEC_NMB 12
-#define VEC_NPIC 14
+#define VEC_NPIC 17
 static const unsigned char vec0_recs[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static const unsigned int vec0_coefs[] = {0x00000400U,0x00000400U,0x020000a0U,0x00000100U,0x00000200U,0x00000300U,0x00000400U,0x00000180U,0x00000280U,0x00000400U,0x00000200U};
 static const int vec0_ncoefs = 11;
@@ -45,19 +45,31 @@ static const int vec12_ncoefs = 3;
 static const unsigned char vec13_recs[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 static const unsigned int vec13_coefs[] = {0};
 static const int vec13_ncoefs = 0;
-static const struct { const char *name; int ptype, alt, dst, fwd; const unsigned char *recs; const unsigned int *coefs; int ncoefs; } vec_pics[] = {
-  {"I0 frame, zigzag", 1, 0, 0, 0, vec0_recs, vec0_coefs, 11},
-  {"I1 frame, alternate scan", 1, 1, 1, 0, vec1_recs, vec1_coefs, 5},
-  {"P0 frame, forward MB + intra MB", 2, 0, 2, 0, vec2_recs, vec2_coefs, 2},
-  {"R3a one intra MB, DC only (rung 3)", 1, 0, 0, 0, vec3_recs, vec3_coefs, 1},
-  {"R3b gain/tile probe: Y0 DC64+vertical, Y1 DC64+horizontal, Y2 DC32+vertical, Y3 DC96", 1, 0, 0, 0, vec4_recs, vec4_coefs, 7},
-  {"R3c alternate scan: Y0 idx1, Y1 idx2, Y2 idx3, Y3 idx4 (each DC64 + 40)", 1, 1, 0, 0, vec5_recs, vec5_coefs, 8},
-  {"R3d runs/clip: Y0 DC64+idx5,20,63 (runs 4,14,42), Y1 DC-400, Y2 DC2000, Y3 DC-2000", 1, 0, 0, 0, vec6_recs, vec6_coefs, 7},
-  {"R3e field DCT: the R3b content with field_dct set", 1, 0, 0, 0, vec7_recs, vec7_coefs, 7},
-  {"R3f CBP subset: only Y1 (DC128) and Y2 (DC-128) coded", 1, 0, 0, 0, vec8_recs, vec8_coefs, 2},
-  {"R3g MB address 1 (column 1): the R3b content", 1, 0, 0, 0, vec9_recs, vec9_coefs, 7},
-  {"R3h MB address 4 (row 1, column 0): the R3b content", 1, 0, 0, 0, vec10_recs, vec10_coefs, 7},
-  {"R3i chroma probe (run with --height 32): Y flat 64, Cb DC64+vertical, Cr DC-64+horizontal", 1, 0, 0, 0, vec11_recs, vec11_coefs, 8},
-  {"P1 frame, intra MBs only (stream 0 only, P picture type)", 2, 0, 2, 0, vec12_recs, vec12_coefs, 3},
-  {"P2 frame, forward MB without residual (motion, no coefficients)", 2, 0, 2, 0, vec13_recs, vec13_coefs, 0},
+static const unsigned char vec14_recs[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static const unsigned int vec14_coefs[] = {0};
+static const int vec14_ncoefs = 0;
+static const unsigned char vec15_recs[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static const unsigned int vec15_coefs[] = {0x0000ffc0U,0x00000400U};
+static const int vec15_ncoefs = 2;
+static const unsigned char vec16_recs[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+static const unsigned int vec16_coefs[] = {0};
+static const int vec16_ncoefs = 0;
+static const struct { const char *name; int ptype, alt, dst, fwd, bwd; const unsigned char *recs; const unsigned int *coefs; int ncoefs; } vec_pics[] = {
+  {"I0 frame, zigzag", 1, 0, 0, 0, 0, vec0_recs, vec0_coefs, 11},
+  {"I1 frame, alternate scan", 1, 1, 1, 0, 0, vec1_recs, vec1_coefs, 5},
+  {"P0 frame, forward MB + intra MB", 2, 0, 2, 0, 0, vec2_recs, vec2_coefs, 2},
+  {"R3a one intra MB, DC only (rung 3)", 1, 0, 0, 0, 0, vec3_recs, vec3_coefs, 1},
+  {"R3b gain/tile probe: Y0 DC64+vertical, Y1 DC64+horizontal, Y2 DC32+vertical, Y3 DC96", 1, 0, 0, 0, 0, vec4_recs, vec4_coefs, 7},
+  {"R3c alternate scan: Y0 idx1, Y1 idx2, Y2 idx3, Y3 idx4 (each DC64 + 40)", 1, 1, 0, 0, 0, vec5_recs, vec5_coefs, 8},
+  {"R3d runs/clip: Y0 DC64+idx5,20,63 (runs 4,14,42), Y1 DC-400, Y2 DC2000, Y3 DC-2000", 1, 0, 0, 0, 0, vec6_recs, vec6_coefs, 7},
+  {"R3e field DCT: the R3b content with field_dct set", 1, 0, 0, 0, 0, vec7_recs, vec7_coefs, 7},
+  {"R3f CBP subset: only Y1 (DC128) and Y2 (DC-128) coded", 1, 0, 0, 0, 0, vec8_recs, vec8_coefs, 2},
+  {"R3g MB address 1 (column 1): the R3b content", 1, 0, 0, 0, 0, vec9_recs, vec9_coefs, 7},
+  {"R3h MB address 4 (row 1, column 0): the R3b content", 1, 0, 0, 0, 0, vec10_recs, vec10_coefs, 7},
+  {"R3i chroma probe (run with --height 32): Y flat 64, Cb DC64+vertical, Cr DC-64+horizontal", 1, 0, 0, 0, 0, vec11_recs, vec11_coefs, 8},
+  {"P1 frame, intra MBs only (stream 0 only, P picture type)", 2, 0, 2, 0, 0, vec12_recs, vec12_coefs, 3},
+  {"P2 frame, forward MB without residual (motion, no coefficients)", 2, 0, 2, 0, 0, vec13_recs, vec13_coefs, 0},
+  {"B0 frame, backward-only MB (motion 2), no residual", 3, 0, 2, 0, 1, vec14_recs, vec14_coefs, 0},
+  {"B1 frame, bidirectional MB (motion 3) + residual, plus an intra MB", 3, 0, 2, 0, 1, vec15_recs, vec15_coefs, 2},
+  {"B2 frame, forward MB (motion 1), backward MB (motion 2), bidirectional MB (motion 3) in one picture", 3, 0, 2, 0, 1, vec16_recs, vec16_coefs, 0},
 };

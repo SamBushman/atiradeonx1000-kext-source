@@ -26,7 +26,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 3:
         sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
         import gen_ava_vectors as G
-        name, ptype, alt, dst, fwd, mbs = G.PICTURES[int(sys.argv[3])]
+        name, ptype, alt, dst, fwd, mbs, *_ = G.PICTURES[int(sys.argv[3])]
         blocks = mbs[0][1]; fld = mbs[0][3]
         o, _, _ = S.mb_oracle(blocks, fld, alt, intra=False)     # raw IDCT without clipping
         worst = 0; hist = {}
