@@ -42,7 +42,11 @@
 #include <mach/mach.h>
 static int g_rec_unchanged;   /* set by flush_and_log: the kernel left the injected record untouched (a bind that did not land leaves its record as written) */
 static kern_return_t flush_and_log(dtest_t *t, io_connect_t d, vm_address_t *addr, vm_size_t *size, unsigned op, unsigned w1, unsigned w2, unsigned w3, unsigned w4, unsigned w5) {
-    volatile unsigned *p = (volatile unsigned *)(*addr + 0x1c); vm_address_t oldaddr = *addr; vm_size_t nsz = 0; unsigned j; kern_return_t r;
+    /* The kernel starts the submitted dword range at commandBufferHeader + 0x20 and counts pendingWords from -1: every real stream (AppleVA) begins with a one-word sentinel record 0x00000001 at +0x1c and the first real record at +0x20.
+     * Writing the record at +0x1c (what this helper did until Nov 5 2026) makes the CP skip the record's first dword, read the value words as packet headers and end up mid-packet: RBBM_STATUS 0x90010140 and a stalled GPU (NO_SENTINEL=1 reproduces that). */
+    unsigned base = getenv("NO_SENTINEL") ? 0x1c : 0x20;
+    volatile unsigned *p = (volatile unsigned *)(*addr + base); vm_address_t oldaddr = *addr; vm_size_t nsz = 0; unsigned j; kern_return_t r;
+    if (base == 0x20) *(volatile unsigned *)(*addr + 0x1c) = 1;
     unsigned words[16] = {0}; words[0] = w1; words[1] = w2; words[2] = w3; words[3] = w4; words[4] = w5;
     /* the real emitters pad every unused word of a record with 0x80000000 (PACKET2 filler) and the kernel only rewrites the leading words; zeros there are type-0 packets that write register 0 (found Nov 5 2026: a zero tail left the CP busy, RBBM_STATUS 0x90010140, after the very first flush). PAD_ZERO=1 restores the old zero tail for the comparison run. */
     if (!getenv("PAD_ZERO")) for (j = 5; j < 15; j++) words[j] = 0x80000000u;
@@ -53,9 +57,9 @@ static kern_return_t flush_and_log(dtest_t *t, io_connect_t d, vm_address_t *add
     *addr = 0; r = IOConnectMapMemory(d, 1, mach_task_self(), addr, &nsz, kIOMapAnywhere);
     dtest_result(t, r, "flush after injecting 0x%02x", op);
     { char line[300]; int k, o = 0;
-      for (k = 0; k < 17 && o < 280; k++) o += snprintf(line + o, sizeof line - o, " %08x", ((volatile unsigned *)(oldaddr + 0x1c))[k]);
+      for (k = 0; k < 17 && o < 280; k++) o += snprintf(line + o, sizeof line - o, " %08x", ((volatile unsigned *)(oldaddr + base))[k]);
       dtest_note(t, "0x%02x: flush r=0x%08x; words after the kernel ran the buffer:%s", op, (unsigned)r, line); }
-    g_rec_unchanged = (((volatile unsigned *)(oldaddr + 0x1c))[0] == ((op << 24) | 16));
+    g_rec_unchanged = (((volatile unsigned *)(oldaddr + base))[0] == ((op << 24) | 16));
     if (nsz) *size = nsz;
     return r;
 }
