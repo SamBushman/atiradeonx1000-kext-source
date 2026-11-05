@@ -1,5 +1,5 @@
 /* Live confirmation of the #152 fix (issue #87 protocol; Phase R only - on STOCK the first image record panics the kernel: self+0x88 (sharedAllocator) is NULL until declare_image/create_image/create_transfer, DAR 0x14).
- * t3_2d_inject without its declare_image priming: the image opcodes 0x03/0x04/0x08/0x13/0x10 with an invalid id (0xdead), each followed by the 0x07 discard guard. Expected on the fixed rebuilt kernel: each stream is
+ * t3_2d_inject without its declare_image priming: the six affected image opcodes 0x03/0x04/0x07/0x08/0x13/0x10 with an invalid id (0xdead), each followed by the 0x07 discard guard. Expected on the fixed rebuilt kernel: each stream is
  * aborted through the vendor's own invalid-reference exit; no panic. */
 #include "t3common.h"
 #include <mach/mach.h>
@@ -7,12 +7,13 @@ typedef struct { const char *name; unsigned nw; unsigned w[8]; } rec_t;
 static const rec_t recs[] = {
     { "0x03 (image, invalid id)",          2, { 0x03000002, 0xdead } },
     { "0x04 (image, invalid id)",          2, { 0x04000002, 0xdead } },
+    { "0x07 (image, invalid id)",          2, { 0x07000002, 0xdead } },   /* the sixth affected opcode (#152); here it is also the trailing guard, so the stream is 0x07,0x07 */
     { "0x08 (image, invalid id)",          2, { 0x08000002, 0xdead } },
     { "0x13 (image, invalid id)",          6, { 0x13000006, 0xdead, 0, 0, 0, 0 } },
     { "0x10 (image, invalid id)",          4, { 0x10000004, 0xdead, 0, 0 } },
 };
 static const char *body(dtest_t *t, io_service_t svc) {
-    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0; unsigned i, j; IOByteCount osz; unsigned char out[0x30]; unsigned imgId = 0xffffffff;
+    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0; unsigned i, j; IOByteCount osz; unsigned char out[0x30];
     vm_address_t addr = 0; vm_size_t size = 0;
     if (t3_surface(t, svc, &s, 4, 4) != KERN_SUCCESS) return "DIVERGENCE";
     T3CALL(t, r, "open 2D connection", open_user_client(svc, CLIENT_TYPE_2D, &d));
