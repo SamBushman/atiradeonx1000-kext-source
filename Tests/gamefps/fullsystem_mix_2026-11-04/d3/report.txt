@@ -1,0 +1,9 @@
+== 1024x768_high_demo1  (stock n=3, rebuilt n=3)
+   fps  stock   33.77  rebuilt   33.40  delta   -1.1%  tol  5.0%  noise  0.2%  OK
+== 1024x768_low_demo1  (stock n=3, rebuilt n=3)
+   fps  stock   34.10  rebuilt   33.93  delta   -0.5%  tol  5.0%  noise  0.0%  OK
+== 1920x1080_high_demo1  (stock n=3, rebuilt n=3)
+   fps  stock   30.93  rebuilt   31.20  delta   +0.9%  tol  5.0%  noise  1.5%  OK
+== 1920x1080_low_demo1  (stock n=3, rebuilt n=3)
+   fps  stock   31.57  rebuilt   31.43  delta   -0.4%  tol  5.0%  noise  0.2%  OK
+REGRESSIONS: 0

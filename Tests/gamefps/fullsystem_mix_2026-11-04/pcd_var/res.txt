@@ -1,0 +1,48 @@
+stock 1 PCD arb prog env param change    median 1.930 us/draw  min 1.930 max 1.931
+stock 1 PCD matrix change + draw         median 1.708 us/draw  min 1.708 max 1.711
+stock 1 PCD tex rebind each draw         median 2.697 us/draw  min 2.696 max 2.700
+stock 1 PCD lighting move light          median 2.631 us/draw  min 2.630 max 2.631
+fe83266b 1 PCD arb prog env param change    median 2.014 us/draw  min 2.014 max 2.014
+fe83266b 1 PCD matrix change + draw         median 1.858 us/draw  min 1.858 max 1.859
+fe83266b 1 PCD tex rebind each draw         median 2.776 us/draw  min 2.775 max 2.787
+fe83266b 1 PCD lighting move light          median 2.843 us/draw  min 2.836 max 2.843
+525fa848 1 PCD arb prog env param change    median 2.059 us/draw  min 2.058 max 2.059
+525fa848 1 PCD matrix change + draw         median 1.974 us/draw  min 1.973 max 1.975
+525fa848 1 PCD tex rebind each draw         median 2.789 us/draw  min 2.788 max 2.791
+525fa848 1 PCD lighting move light          median 2.841 us/draw  min 2.841 max 2.841
+mix 1 PCD arb prog env param change    median 2.084 us/draw  min 2.080 max 2.085
+mix 1 PCD matrix change + draw         median 1.805 us/draw  min 1.781 max 1.805
+mix 1 PCD tex rebind each draw         median 2.736 us/draw  min 2.732 max 2.751
+mix 1 PCD lighting move light          median 2.776 us/draw  min 2.768 max 2.778
+mix 2 PCD arb prog env param change    median 2.079 us/draw  min 2.074 max 2.080
+mix 2 PCD matrix change + draw         median 1.777 us/draw  min 1.777 max 1.799
+mix 2 PCD tex rebind each draw         median 2.738 us/draw  min 2.735 max 2.740
+mix 2 PCD lighting move light          median 2.779 us/draw  min 2.747 max 2.784
+525fa848 2 PCD arb prog env param change    median 2.059 us/draw  min 2.058 max 2.061
+525fa848 2 PCD matrix change + draw         median 1.974 us/draw  min 1.973 max 1.975
+525fa848 2 PCD tex rebind each draw         median 2.806 us/draw  min 2.806 max 2.807
+525fa848 2 PCD lighting move light          median 2.839 us/draw  min 2.838 max 2.840
+fe83266b 2 PCD arb prog env param change    median 2.017 us/draw  min 2.008 max 2.018
+fe83266b 2 PCD matrix change + draw         median 1.871 us/draw  min 1.871 max 1.872
+fe83266b 2 PCD tex rebind each draw         median 2.787 us/draw  min 2.782 max 2.791
+fe83266b 2 PCD lighting move light          median 2.845 us/draw  min 2.835 max 2.845
+stock 2 PCD arb prog env param change    median 1.943 us/draw  min 1.943 max 1.944
+stock 2 PCD matrix change + draw         median 1.710 us/draw  min 1.703 max 1.713
+stock 2 PCD tex rebind each draw         median 2.713 us/draw  min 2.707 max 2.715
+stock 2 PCD lighting move light          median 2.628 us/draw  min 2.626 max 2.628
+525fa848 3 PCD arb prog env param change    median 2.059 us/draw  min 2.059 max 2.061
+525fa848 3 PCD matrix change + draw         median 1.972 us/draw  min 1.971 max 1.973
+525fa848 3 PCD tex rebind each draw         median 2.802 us/draw  min 2.802 max 2.802
+525fa848 3 PCD lighting move light          median 2.831 us/draw  min 2.831 max 2.832
+mix 3 PCD arb prog env param change    median 2.070 us/draw  min 2.067 max 2.075
+mix 3 PCD matrix change + draw         median 1.841 us/draw  min 1.840 max 1.843
+mix 3 PCD tex rebind each draw         median 2.742 us/draw  min 2.741 max 2.743
+mix 3 PCD lighting move light          median 2.772 us/draw  min 2.770 max 2.781
+stock 3 PCD arb prog env param change    median 1.936 us/draw  min 1.935 max 1.937
+stock 3 PCD matrix change + draw         median 1.717 us/draw  min 1.715 max 1.720
+stock 3 PCD tex rebind each draw         median 2.706 us/draw  min 2.704 max 2.710
+stock 3 PCD lighting move light          median 2.636 us/draw  min 2.635 max 2.637
+fe83266b 3 PCD arb prog env param change    median 2.015 us/draw  min 2.015 max 2.016
+fe83266b 3 PCD matrix change + draw         median 1.858 us/draw  min 1.856 max 1.865
+fe83266b 3 PCD tex rebind each draw         median 2.784 us/draw  min 2.783 max 2.789
+fe83266b 3 PCD lighting move light          median 2.829 us/draw  min 2.824 max 2.838

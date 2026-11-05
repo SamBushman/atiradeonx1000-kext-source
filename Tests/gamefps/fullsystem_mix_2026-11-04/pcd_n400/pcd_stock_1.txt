@@ -1,0 +1,11 @@
+PCD arrays 3tri                  median 0.325 us/draw  min 0.324 max 0.331
+PCD arrays 100tri                median 6.034 us/draw  min 6.031 max 6.037
+PCD elements 300idx ushort       median 6.037 us/draw  min 6.036 max 6.038
+PCD elements 900idx ushort       median 18.103 us/draw  min 18.098 max 18.106
+PCD elements col+tex 300         median 7.767 us/draw  min 7.766 max 7.768
+PCD tex rebind each draw         median 2.739 us/draw  min 2.735 max 2.740
+PCD blend toggle + draw          median 2.054 us/draw  min 2.051 max 2.069
+PCD lighting move light          median 2.671 us/draw  min 2.670 max 2.687
+PCD matrix change + draw         median 1.750 us/draw  min 1.748 max 1.753
+PCD immediate quad               median 0.301 us/draw  min 0.301 max 0.301
+PCD arb prog env param change    median 1.952 us/draw  min 1.951 max 1.955

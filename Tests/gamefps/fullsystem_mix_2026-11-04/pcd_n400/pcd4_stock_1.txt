@@ -1,0 +1,6 @@
+PCD DXT1 1024 mip chain draw     median 2049.432 us/draw  min 2043.881 max 2054.511
+PCD DXT5 1024 mip chain draw     median 4336.209 us/draw  min 4323.065 max 4354.762
+PCD RGBA 1024 base only          median 13541.192 us/draw  min 13308.146 max 13755.389
+PCD BGRA rev 1024 base only      median 13564.224 us/draw  min 13450.937 max 14028.917
+PCD texSub RGBA 1024             median 6520.427 us/draw  min 6512.449 max 6524.680
+rc=0

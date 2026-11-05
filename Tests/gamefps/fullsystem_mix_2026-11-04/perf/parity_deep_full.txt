@@ -1,0 +1,157 @@
+-- GL T1 --
+[OK] GL get_config(sel 3) succeeds r=0x00000000
+[OK] GL get_config(sel 3) is repeatable {8454208,259817472,268435456} vs {8454208,259817472,268435456}
+[OK] GL get_config out[2] (VRAM bytes) is a power of two >= 64 MB out[2]=0x10000000
+[OK] GL get_config out[1] (usable VRAM) is within out[2] and >= half of it out[1]=0xf7c8000 out[2]=0x10000000
+[OK] GL get_status(sel 4) succeeds r=0x00000000
+[OK] GL get_status(sel 4) == 0 on an idle device (stock baseline) status=0x0
+[OK] GL get_hw_info(sel 20) succeeds r=0x00000000
+[OK] GL get_hw_info chip id == 0x7240 (R580, the stock value on this X1900) hw={0x3,0x7240,0xc,0x1,0x0}
+[OK] GL get_hw_info pipe counts are plausible (1..16, z pipes >= 1) numPipes-ish=3,12 zPipes-ish=1
+[OK] GL get_hw_info(sel 20) is repeatable
+-- 2D T1 --
+[OK] 2D get_config(sel 1) succeeds r=0x00000000
+[OK] 2D get_config == GL get_config {out[0], out[2]} 2D={8454208,268435456} GL out0=8454208 out2=268435456
+[OK] 2D get_surface_info(panel 0) succeeds, 0x30 bytes r=0x00000000 outSize=48
+[OK] 2D get_surface_info packs width/height consistently (d[1] == d[2]<<16 | d[3]) and a real mode (>= 640x480) d[1]=0x7800438 w=1920 h=1080
+[OK] 2D get_surface_info(panel 0) is repeatable
+[OK] 2D read_regs(sel 16) of CONFIG_MEMSIZE 0x00f8 + RBBM_STATUS 0x0e40 succeeds r=0x00000000
+[OK] 2D read_regs CONFIG_MEMSIZE == the VRAM size reported by get_config reg=0x10000000 vram=0x10000000
+[OK] 2D read_regs RBBM_STATUS(0x0e40) is a live register read (neither 0 nor all ones: a dead or unmapped device reads 0xffffffff; bit 31 = GUI active, which varies, so the value itself is not pinned)
+[OK] 2D read_regs one register: CONFIG_MEMSIZE is repeatable 0x10000000 vs 0x10000000
+-- DVD T1 --
+[OK] DVD get_config(sel 1) == 2D get_config DVD={8454208,268435456}
+[OK] DVD get_status(sel 2) == 0 with nothing bound (stock baseline) r=0x00000000 out0=0
+[OK] DVD read_regs(sel 13) CONFIG_MEMSIZE == the VRAM size reported by get_config r=0x00000000 reg=0x10000000
+[OK] DVD check_stamps(sel 20, 0, 0): both done r=0x00000000 both=1
+-- Surface T1 --
+[OK] Surface get_state(sel 2) == 1 (stock baseline) r=0x00000000 state=1
+[OK] Surface surface_query_lock(sel 11) with no lock held -> CannotLock r=0xe00002cc
+[OK] Surface get_state(sel 2) unchanged after the query state=1
+-- Surface T2: read-lock round trip (lockOptions 0) --
+[OK] Surface set_id_mode(0,0x4) [precondition] r=0x00000000
+[OK] Surface query_lock after set_id_mode: available (0) - the record is valid and nothing is held r=0x00000000
+[OK] Surface surface_read_lock_options(lockOptions=0) succeeds, 0x44 bytes r=0x00000000 size=68
+[OK] Surface query_lock while the read lock is held -> CannotLock r=0xe00002cc
+[OK] Surface second read lock on the same connection while held -> CannotLock (lock byte already set) r=0xe00002cc
+[OK] Surface surface_read_unlock_options after the lock succeeds r=0x00000000
+[OK] Surface query_lock after the unlock: available again r=0x00000000
+[OK] Surface surface_read_unlock_options a second time -> CannotLock (nothing held) r=0xe00002cc
+[OK] Surface read lock again after unlock: same output struct as the first lock (deterministic) r=0x00000000
+[OK] Surface read unlock (cleanup, so close leaves no lock) r=0x00000000
+[OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- GL T2: bind a registered surface, read it back, detach --
+[OK] Surface set_id_mode(1,0x0) [precondition] r=0x00000000
+[OK] Surface set_id_mode(1,0x20) [precondition] r=0x00000000
+[OK] Surface set_shape(sel 9) [precondition] r=0x00000000
+[OK] GL get_surface_size before binding -> Error (stock baseline) r=0xe00002bc
+[OK] GL set_surface(1, modeBits 0) binds the registered surface r=0x00000000
+[OK] GL get_surface_size with a surface bound == the 4x4 shape set by set_shape (stock: {4,4,4,4}) r=0x00000000 size={4,4,4,4}
+[OK] GL get_surface_size is repeatable
+[OK] GL get_surface_info(sel 6, id 1) == {32,4,4} (stock observed: 32 = bits per pixel, then the 4x4 shape) r=0x00000000 info={32,4,4}
+[OK] GL set_surface(0) detaches r=0x00000000
+[OK] GL get_surface_size after detaching -> Error again r=0xe00002bc
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- DVD T2: bind a registered surface, bound-surface rows, detach --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] DVD show_buffer(sel 10) unbound -> Error (stock baseline) r=0xe00002bc
+[OK] DVD set_surface(1, modeBits 0, 0) binds the registered surface r=0x00000000
+[OK] DVD get_surface_size with a surface bound == {768,576} (stock observed: the default 768x576 buffer record at surface+0xa8/+0x120, not the 4x4 shape) r=0x00000000 size={768,576}
+[OK] DVD get_surface_size is repeatable
+[OK] DVD show_buffer(sel 10) bound -> success (stub body) r=0x00000000
+[OK] DVD dvd_enable_overlay(sel 12, 0) bound -> success (stub body) r=0x00000000
+[OK] DVD dvd_setup_subpicture(sel 15, 0,0,0,0) bound -> success (stub body) r=0x00000000
+[OK] DVD set_surface(0) detaches r=0x00000000
+[OK] DVD get_surface_size after detaching -> Error again r=0xe00002bc
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- Surface T2: unlock variants after a read lock --
+[OK] Surface set_id_mode(0,0x4) [precondition] r=0x00000000
+[OK] Surface read lock (lockOptions 0) r=0x00000000
+[OK] Surface write_unlock_options(sel 4) while only the READ lock is held -> CannotLock r=0xe00002cc
+[OK] Surface surface_write_unlock(sel 15) while only the READ lock is held -> CannotLock r=0xe00002cc
+[OK] Surface query_lock: the read lock is still held after the two refused write unlocks -> CannotLock r=0xe00002cc
+[OK] Surface surface_read_unlock(sel 13) releases the read lock r=0x00000000
+[OK] Surface query_lock after sel 13 -> available r=0x00000000
+[OK] Surface surface_read_unlock(sel 13) a second time -> CannotLock r=0xe00002cc
+[OK] Surface read lock again r=0x00000000
+[OK] Surface read_unlock_options(sel 1) releases it (cleanup) r=0x00000000
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+-- Surface T2: set_id_mode error paths --
+[OK] Surface set_id_mode(0, 0x40): a mode bit outside the accepted set -> BadArgument r=0xe00002c2
+[OK] Surface set_id_mode(0, 0x80000000) -> BadArgument r=0xe00002c2
+[OK] Surface set_id_mode(0, 0x4) [precondition] r=0x00000000
+[OK] Surface read lock (lockOptions 0) r=0x00000000
+[OK] Surface set_id_mode(0, 0x4) while the read lock is held -> CannotLock r=0xe00002cc
+[OK] Surface read_unlock_options releases the lock r=0x00000000
+[OK] Surface set_id_mode(0, 0x4) after the unlock succeeds again r=0x00000000
+-- GL T2: set_swap_rect / set_swap_interval with a bound surface --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] GL set_surface(1, 0, 0, 0) binds r=0x00000000
+[OK] GL set_swap_rect(0,0,4,4) with a surface bound -> success r=0x00000000
+[OK] GL set_swap_interval(1,0) with a surface bound -> success r=0x00000000
+[OK] GL set_swap_rect(0,0,0,0) restores the defaults r=0x00000000
+[OK] GL set_swap_interval(0,0) restores the defaults r=0x00000000
+[OK] GL set_surface(0) detaches r=0x00000000
+-- 2D T2: bind a registered surface by id, read its info, detach --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] 2D set_surface(panel 0) [the #42 baseline call] succeeds r=0x00000000
+[OK] 2D set_surface(id 1, mode 0x800) binds the registered surface, 0x30-byte info r=0x00000000 size=48
+[INFO] bound info d[2..7]={4,4,0x100,0,0,1}
+[OK] 2D bound info d[2], d[3] are the surface's recorded size (the 4x4 shape) d[2]=4 d[3]=4
+[OK] 2D get_surface_info(id 1, mode 0x800) returns the same info r=0x00000000
+[OK] 2D set_surface(0, mode 0x800) detaches and returns the panel info of the baseline call r=0x00000000
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+-- GL T2: wait_for_stamp / finish --
+[OK] GL wait_for_stamp(0) -> 0 (baseline) r=0x00000000
+[OK] GL wait_for_stamp(5) -> 0 (a stamp the GPU has already passed) r=0x00000000
+[OK] GL wait_for_stamp(0x7fffffff) -> Timeout 0xe00002d6 (a stamp that was never submitted; bounded wait) r=0xe00002d6
+[OK] GL finish -> 0 r=0x00000000
+-- DVD T2: check_stamps with real values --
+[OK] DVD check_stamps(5,5) call succeeds and writes a 0/1 result r=0x00000000 both=1 (recorded: 0 on stock)
+[OK] DVD check_stamps(0x7fffffff,0) -> not done (first stamp never submitted) r=0x00000000 both=0
+[OK] DVD check_stamps(0,0x7fffffff) -> not done (second stamp never submitted) r=0x00000000 both=0
+-- DVD T2: setup_overlay / enable_deint / setup_buffers on a bound surface --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] DVD dvd_setup_overlay unbound -> Error (stock: 0xe00002bc) r=0xe00002bc
+[OK] DVD dvd_enable_deint unbound -> Error r=0xe00002bc
+[OK] DVD setup_buffers unbound -> NotReady (0xe00002d8: no surface = same code as hardware-down) r=0xe00002d8
+[OK] DVD set_surface(1,0,0) binds r=0x00000000
+[OK] DVD dvd_setup_overlay(0,0,16,16, enable 0) bound -> success r=0x00000000
+[OK] DVD dvd_enable_deint(1) bound -> success r=0x00000000
+[OK] DVD dvd_enable_deint(0) bound -> success r=0x00000000
+[OK] DVD setup_buffers(0,0,16,16,0) bound -> success r=0x00000000
+[OK] DVD set_surface(0) detaches r=0x00000000
+[OK] leak check: driver class instance counts identical before/after
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- 2D T2: finish modes --
+[OK] 2D finish(3) -> BadArgument (stock) r=0xe00002c2
+[OK] 2D finish(0) -> 0 (baseline) r=0x00000000
+[OK] 2D finish(1) -> success or Timeout (bounded wait on the accelerator's last stamp) r=0x00000000
+[OK] 2D finish(2) -> success or Timeout (bounded wait on the accelerator's last stamp) r=0x00000000
+-- DVD T2: wait_for_stamps / finish --
+[OK] DVD wait_for_stamps(0,0) -> 0 (baseline) r=0x00000000
+[OK] DVD wait_for_stamps(0,5) -> 0 (second stamp already passed) r=0x00000000
+[OK] DVD wait_for_stamps(5,5) -> 0 (both already passed) r=0x00000000
+[OK] DVD finish -> 0 or Timeout (this+0x7c is 0 on a fresh connection) r=0x00000000
+-- Surface T2: set_shape with other dimensions, read back through a bound 2D connection --
+[OK] Surface set_id_mode x2 r=0x00000000
+[OK] Surface set_shape(region WxH) -> success r=0x00000000 64x64
+[OK] 2D get_surface_info(id 1) d[2],d[3] == the new size r=0x00000000 d[2]=64 d[3]=64 want 64x64
+[OK] Surface set_shape(region WxH) -> success r=0x00000000 16x8
+[OK] 2D get_surface_info(id 1) d[2],d[3] == the new size r=0x00000000 d[2]=16 d[3]=8 want 16x8
+[OK] Surface set_shape(region WxH) -> success r=0x00000000 4x4
+[OK] 2D get_surface_info(id 1) d[2],d[3] == the new size r=0x00000000 d[2]=4 d[3]=4 want 4x4
+[OK] Surface set_shape with a negative width -> Error 0xe00002bc (before anything is touched) r=0xe00002bc
+[OK] leak check: driver class instance counts identical before/after
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- T2: reject paths (unregistered surface id, bad scaling size, bad backing length) --
+[OK] GL set_surface(unregistered id) -> BadArgument r=0xe00002c2
+[OK] 2D set_surface(unregistered id) -> BadArgument r=0xe00002c2
+[OK] DVD set_surface(unregistered id) -> BadArgument r=0xe00002c2
+[OK] Surface set_scale with an 8-byte structure -> BadArgument (size must be 0 or 0x2c) r=0xe00002c2
+[OK] Surface set_shape_backing_length(param4=1, param5=0) -> Error 0xe00002bc (param5 < param4*dim, before the forward) r=0xe00002bc
+
+136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
