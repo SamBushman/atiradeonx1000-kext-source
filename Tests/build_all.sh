@@ -21,7 +21,8 @@ fw_for() {
     f=$1; inc="$f"
     [ -f common.h ] && grep -q '"common.h"' "$f" && inc="$inc common.h"
     [ -f userspace/glstress.h ] && grep -q '"glstress.h"' "$f" && inc="$inc userspace/glstress.h"
-    gl=0; io=0; app=0; cf=0
+    gl=0; io=0; app=0; cf=0; cocoa=0
+    grep -qE '<Cocoa/|<AppKit/' $inc 2>/dev/null && cocoa=1     # the window probes (gl_quirks_window_probe.m, gl_polysmooth_msaa_window_probe.m) import <Cocoa/Cocoa.h>
     grep -qE '<OpenGL/|<GLUT/|<AGL/' $inc 2>/dev/null && gl=1
     grep -qE '<IOKit/' $inc 2>/dev/null && io=1
     grep -qE '<ApplicationServices/|<CoreGraphics/|<Carbon/' $inc 2>/dev/null && app=1
@@ -30,6 +31,7 @@ fw_for() {
     [ $io = 1 ] && { cf=1; echo "-framework IOKit"; }
     [ $app = 1 ] && echo "-framework ApplicationServices"
     [ $cf = 1 ] && echo "-framework CoreFoundation"
+    [ $cocoa = 1 ] && echo "-framework Cocoa"
 }
 
 try() {   # try SRC OUT [extra link inputs...] : compile with the detected frameworks, retrying without -std=gnu99
