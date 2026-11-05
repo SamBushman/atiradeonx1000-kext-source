@@ -63,6 +63,8 @@ static const char *body(dtest_t *t, io_service_t svc) {
     unsigned imgSlot3 = 0xffffffff, imgSlot4 = 0xffffffff; vm_address_t img3 = 0, img4 = 0;
     int forced = getenv("FORCE_UNBOUND_0x18") != NULL;   /* #144 negative check: pass the declare_image ids as bind handles (the original test mistake) so the binds are rejected and 0x18 names empty slots: the fixed kernel must end the stream, the unfixed one panics */
     int prep = getenv("PREP_BUFFERS") != NULL;   /* #144 differential: give the context real VRAM for slot 16 (the 0x18 render target) the way the proven GetFrame flow does */
+    const char *stop = getenv("STOP_AFTER");   /* bisection knob (#150/#151 wedge check): prep | maps | 0xb0xd | bind | 0x18 | slot17 | 0x43 | 0x44 - end the injected sequence after that step, then detach and close as usual */
+#define STOP_IF(name) if (stop && !strcmp(stop, name)) { dtest_note(t, "STOP_AFTER=%s: ending the sequence here", name); goto out; }
     if (t3_surface(t, svc, &s, prep ? 64 : 4, prep ? 48 : 4) != KERN_SUCCESS) return "DIVERGENCE";
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
     if (r != KERN_SUCCESS) { IOServiceClose(s); return "DIVERGENCE"; }
@@ -74,6 +76,7 @@ static const char *body(dtest_t *t, io_service_t svc) {
         if (r == 0) { T3CALL(t, r, "DVD setup_buffers(0,64,48,0,0x37c00)", IOConnectMethodScalarIScalarO(d, 21, 5, 0, 0, 64, 48, 0, 0x37c00)); bad += t3_expect(t, "setup_buffers #2", r, 0); }
         if (r == 0) { osz = sizeof out; memset(out, 0, sizeof out); T3CALL(t, r, "DVD lock_all_buffers(0)", IOConnectMethodScalarIStructureO(d, 4, 1, &osz, 0, out)); dtest_note(t, "lock_all_buffers -> r=0x%08x outSize=%u", (unsigned)r, (unsigned)osz); }
         if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
+        STOP_IF("prep")
     }
     T3CALL(t, r, "DVD declare_image(4,4) #1 (for slot 3)", (vm_allocate(mach_task_self(), &img3, 0x10000, TRUE), memset((void *)img3, 0x40, 0x10000), IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, img3, 0x10000, &imgSlot3)));
     bad += t3_expect(t, "declare_image #1", r, 0);
@@ -87,25 +90,32 @@ static const char *body(dtest_t *t, io_service_t svc) {
     bad += t3_expect(t, "map buffer", r, 0);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
 
+    STOP_IF("maps")
     /* 0xb, 0xd first: real-usage pattern (word[2]=1 -> safe branch), zero bind precondition needed */
     r = flush_and_log(t, d, &addr, &size, 0x0b, 2, 1, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0xb failed, stopping"); goto out; }
     r = flush_and_log(t, d, &addr, &size, 0x0d, 2, 1, 1, 1, 1); if (r != 0) { bad++; dtest_note(t, "0xd failed, stopping"); goto out; }
+    STOP_IF("0xb0xd")
 
     /* real bind: opcode 0x19+N binds word[1]'s image id into slot N (self+0x104+N*4). 0x1c -> slot 3, 0x1d -> slot 4. */
     r = flush_and_log(t, d, &addr, &size, 0x1c, forced ? imgSlot3 : (imgSlot3 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged && !forced) { bad++; dtest_note(t, "0x1c bind did NOT land (record unchanged): stopping before 0x18 (it would dereference the empty slot)"); goto out; } if (r != 0) { bad++; dtest_note(t, "0x1c (bind slot 3) failed, stopping"); goto out; }
     r = flush_and_log(t, d, &addr, &size, 0x1d, forced ? imgSlot4 : (imgSlot4 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged && !forced) { bad++; dtest_note(t, "0x1d bind did NOT land (record unchanged): stopping before 0x18"); goto out; } if (r != 0) { bad++; dtest_note(t, "0x1d (bind slot 4) failed, stopping"); goto out; }
+    STOP_IF("bind")
 
     /* the real open question: 0x18 with both slots genuinely bound, matching the real emitter's word[1]=slot4, word[2]=slot3(constant) shape */
     r = flush_and_log(t, d, &addr, &size, 0x18, 4, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x18 failed"); goto out; }
+    STOP_IF("0x18")
     /* #150/#151: the real emitters (VA driver ava_render_convert_frame / _yuv2, part_001.c:3697 and :3838) write word[1] = frame buffer index, word[2] = 0x11 (texture slot 17, bound with opcode 0x19+17 = 0x2a),
      * word[3] = (frame buffer attached ? 1 : 0), word[4] = a context flags word. Bind a third real buffer into slot 17, then run 0x43 and 0x44 with both word[3] values; each only emits a register-write record. */
     {   vm_address_t img17 = 0; unsigned id17 = 0xffffffff; int f;
         T3CALL(t, r, "DVD declare_image(real 64 KiB buffer) #3 (for slot 17)", (vm_allocate(mach_task_self(), &img17, 0x10000, TRUE), memset((void *)img17, 0x40, 0x10000), IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, img17, 0x10000, &id17)));
         bad += t3_expect(t, "declare_image #3", r, 0); if (r != 0) goto out;
         r = flush_and_log(t, d, &addr, &size, 0x2a, forced ? id17 : (id17 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged) { bad++; dtest_note(t, "0x2a bind did NOT land: stopping"); goto out; } if (r != 0) { bad++; goto out; }
+        STOP_IF("slot17")
         for (f = 0; f < 2; f++) {
             r = flush_and_log(t, d, &addr, &size, 0x43, 0, 0x11, f, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x43 failed"); goto out; }
+            STOP_IF("0x43")
             r = flush_and_log(t, d, &addr, &size, 0x44, 0, 0x11, f, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x44 failed"); goto out; }
+            STOP_IF("0x44")
         }
     }
     if (getenv("NEG_BUFIDX")) {   /* #219 negative check (rebuilt kext only: stock reads kernel memory at index*0x78): an out-of-range buffer index must end the stream, record untouched */
