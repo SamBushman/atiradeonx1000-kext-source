@@ -1113,3 +1113,34 @@ def w_dvd_pcb_bufidx(op):
 for _op in (0x43, 0x44, 0x3d):
     CASES.append(Case('ATIR500DVDContext::process_command_buffer', w_dvd_pcb_bufidx(_op), ret='u32', name='process_command_buffer (out-of-range buffer index, opcode 0x%02x, #219)' % _op,
                       seeds=60, mock=new_mock, ignore_args=REL, limit=300000, plain_words=True))
+
+
+def w_dvd_pcb_indomain(op):
+    """#144/#219 isolation: the guards must fire ONLY outside the valid domain. Every texture slot bound and every record rebuilt 0x18 words long with every operand word in 0..17 (a valid slot AND a valid
+    buffer index; long records so a handler never reads an operand from the next record's header), so none of the guard conditions can hold: stock and rebuilt must agree on every DVD opcode. (The H1 'stream' / 'high-bit' families feed random words, which hit the guards.)"""
+    def world(m, rng):
+        from hand_cases_H1 import dvd_world
+        args = dvd_world(op, False)(m, rng)
+        c = args[0]
+        for idx in range(18):
+            if m.r32(c + 0x104 + 4 * idx) == 0:
+                t = m.alloc(0x100); fill_words(m, t, 0x100, rng)
+                hdr = m.alloc(0x40); fill_words(m, hdr, 0x40, rng); m.w32(t + 0x14, hdr)
+                for off in (0x34, 0x38): m.w32(t + off, obj(m, rng, 'ATIR500DVDContext', 0x100))
+                m.w32(t + 4, 0x10000000)
+                m.w32(c + 0x104 + 4 * idx, t)
+        a = m.r32(c + 0xa4) + 0x1c
+        for _ in range(rng.choice([1, 2, 3])):                                       # rebuild the stream: records long enough (0x18 words) that no handler reads an operand from the NEXT record's header
+            n = 0x18
+            m.w32(a, (op << 24) | n)
+            for j in range(1, n): m.w32(a + 4 * j, rng.randrange(0, 18))
+            a += 4 * n
+        for j in range(0x20): m.w32(a + 4 * j, 0)                                    # terminator + zero tail (0 is a valid slot AND buffer index)
+        return args
+    return world
+
+
+from hand_cases_H1 import DVD_OPS as _DVD_OPS
+for _op in _DVD_OPS:
+    CASES.append(Case('ATIR500DVDContext::process_command_buffer', w_dvd_pcb_indomain(_op), ret='u32', name='process_command_buffer (in-domain operands, opcode 0x%02x, #144/#219)' % _op,
+                      seeds=60, mock=new_mock, ignore_args=REL, limit=300000, plain_words=True))
