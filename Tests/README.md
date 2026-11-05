@@ -64,7 +64,8 @@ marked CONFIRMED in the test files; the rest use the class header's declared sig
 ## Safety
 
 A broad sweep of call shapes against the live stock driver once caused a kernel panic: `ATIR500DVDContext::set_macrovision` dereferences its unbound
-surface (`this+0xf8 == NULL`), reachable by one call on a fresh DVD connection. The harness therefore only calls methods whose bodies were traced first
+surface (`this+0xf8 == NULL`), reachable by one call on a fresh DVD connection. (The rebuilt kext's default build no longer has this hazard: #146 added the unbound-surface
+precondition its sibling methods already had, so it returns 0xe00002bc; the stock kext still panics, and the rule below still applies to it.) The harness therefore only calls methods whose bodies were traced first
 (see the policy at the top of `common.h`). Rules for extending it:
 
 - Do not turn a skipped test into a live one without establishing a real, valid setup sequence (an actually created and bound surface, etc.).

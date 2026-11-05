@@ -2806,6 +2806,16 @@ markTextureUsed:
                M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x50);
         }
         else if (opcode == 0x36000000) {
+#if ATI_FIX_STOCK_BUGS
+          /* Root cause (#125): every other record in this stream names the resource it uses by a handle the kernel validates (a shared-allocator table index
+           * checked against the table count, then NULL-checked; an invalid one takes abortStream). Opcode 0x36 alone carries a raw VendorTransferBuffer *
+           * in record word 1 and writes through it (+0xe, +0x48, +0x5c, and map_transfer_to_GART on it) with no validation: a stream the client controls
+           * becomes an arbitrary kernel write (live: injecting the get_data_buffer value 0xa000 corrupted kernel memory, deferred panic in
+           * remove_texture_from_stream). A client cannot legitimately know a kernel pointer, and the only emitter in the shipped GLDriver is never enabled
+           * (its context gate byte at 0x2b82 is only ever stored 0), so no legitimate stream uses this record. Do not trust the word: reject the record
+           * as an invalid reference, through the same abortStream exit every other invalid reference uses. */
+          goto abortStream;
+#endif
           previousPinned = M<SInt32>(self + kATIR500GLContext_pinnedTexture);
           transferBuffer = (UInt8 *)recordCursor[1];
           if ((previousPinned != 0) && (M<SInt32>(previousPinned + 0x48) == 0)) {

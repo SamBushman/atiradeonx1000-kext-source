@@ -60,7 +60,7 @@ Exit status 0 = every run identical.
 ## Fixed build vs parity build (`ATI_FIX_STOCK_BUGS`)
 
 The rebuilt kext fixes defects of Apple's shipped code on its own failure paths (`Headers/GhidraCompat.h`: `ATI_FIX_STOCK_BUGS`, default 1). Difftest against the stock kext
-therefore reports exactly these divergences for a default build, and nothing else (907 cases: 902 PASS, these FAIL):
+therefore reports exactly these divergences for a default build, and nothing else (909 cases: 896 PASS, these 13 FAIL; the parity build passes all 909):
 
 | case | divergence (all intended) | issue |
 |---|---|---|
@@ -68,6 +68,12 @@ therefore reports exactly these divergences for a default build, and nothing els
 | `IOATIR500GLContext::get_data_buffer` (both worlds) | extra `_IOLockUnlock` on the third NoResources exit | #99 |
 | `IOATIR500Surface::allocAllSlaveSwapBuffers` | stock TIMEOUT / wild read in the failure unwind, rebuilt releases the descriptors and returns 0 | #32 |
 | `ATIRadeonX1000::start_xdct_engine [hand H2]` | poll timeout: stock returns 1 and sets `xdctEngineRunning`, rebuilt returns 0 and leaves it clear | #127 |
+| `ATIR500DVDContext::set_macrovision` | stock calls `getFramebufferIndex()` with `this == NULL` (boundSurface unbound: panic, DAR 0xD64); rebuilt unlocks and returns 0xe00002bc like the other nine boundSurface methods | #146 |
+| `IOATIR500DVDContext::write_buffer` | stock loads `boundSurface->buffers[]` before its own `boundSurface == 0` test (wild read); rebuilt tests first and returns 0xe00002cc | #146 |
+| `ATIR5002DContext::process_command_buffer (no shared allocator yet, #152)` | stock reads `sharedAllocator->count` with the lazily-created allocator still NULL (DAR 0x14); rebuilt takes the existing `abortStream` exit | #152 |
+| GL `process_command_buffer`: `opcode 0x36`, `H1 high-bit operands, opcode 0x36`, `opcode 0x36 with a client-chosen pointer`, and the `random streams` case when it draws 0x36 | stock treats record word 1 as a kernel `VendorTransferBuffer *` and writes through it (`map_transfer_to_GART`, `+0xe`, `+0x5c`); rebuilt rejects the record via `abortStream` | #125 |
+
+Root causes, not guards: each of these fixes the reason the bad value arises. #146 - boundSurface is legitimately empty before `set_surface` and after `remove_surface`, and the two methods lacked the precondition that every sibling enforces (write_buffer: the vendor's own check existed but the load was ordered before it). #152 - the shared allocator is created lazily by create_image/declare_image/create_transfer, so before that every image id is invalid, which the vendor already answers with abortStream. #125 - a client-supplied stream word must not be a kernel pointer; the only emitter of the record in the shipped GLDriver is never enabled. One case (`ATIRadeonX1000::SWDSFunc [hand H2]`) diverged on a single seed during one loaded `-j 8` full run and passed 247/247 twice in isolation on the same binary; not related to these fixes.
 
 For the bug-for-bug parity run build with `WARN="-w -DATI_FIX_STOCK_BUGS=0" sh Tools/difftest/build_rebuilt.sh`: every case PASSes again.
 

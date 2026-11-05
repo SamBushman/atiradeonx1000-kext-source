@@ -84,7 +84,16 @@ def w_2d_pcb(m, rng):
     return [c, m.alloc(0x40)]
 
 
+def w_2d_pcb_unprimed(m, rng):
+    """the same world on a connection that never ran create_image/declare_image/create_transfer: the lazily-created shared allocator (+0x88) is still NULL (#152)"""
+    args = w_2d_pcb(m, rng)
+    m.w32(args[0] + 0x88, 0)
+    return args
+
+
 CASES = [
     Case('ATIR5002DContext::process_command_buffer', w_2d_pcb, ret='u32', seeds=400, mock=pcb_mock, ignore_args=REL, limit=400000, plain_words=True,
          name='ATIR5002DContext::process_command_buffer (hand world)'),
+    Case('ATIR5002DContext::process_command_buffer', w_2d_pcb_unprimed, ret='u32', seeds=400, mock=pcb_mock, ignore_args=REL, limit=400000, plain_words=True,
+         name='ATIR5002DContext::process_command_buffer (no shared allocator yet, #152)'),
 ]

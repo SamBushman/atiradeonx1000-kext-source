@@ -627,6 +627,21 @@ for _op in KNOWN_OPCODES:
                       plain_words=True, stack_args=PCB_TRACK_READS, name='process_command_buffer (opcode 0x%02x)' % _op))
 
 
+def pcb_special_client_pointer(m, rng, op, texs):
+    """opcode 0x36 whose word 1 is whatever the client chose, not a transfer buffer the kernel made (#125; the live injection put the get_data_buffer value 0xa000 there)"""
+    ptr = rng.choice([0x0a00a000, 0x0a00a000, 0x0a001000, 0x0a012340, 0x0a030000])   # outside the emulated kext image (the harness treats image addresses as code); the live injection used 0xa000
+    for page in (ptr & ~0xfff, (ptr & ~0xfff) + 0x1000):       # the addresses the stock handler reads/writes at ptr+4..ptr+0x5c exist, so stock runs to the end and the diff shows its writes
+        try:
+            m.uc.mem_map(page, 0x1000)
+        except Exception:
+            pass
+    return [(op << 24) | 9, ptr, 1, rng.choice([0, 0x100]), 0, 1, 2, 0, 0]
+
+
+CASES.append(Case('ATIR500GLContext::process_command_buffer', pcb_world_with(lambda rng: 0x36, (1, 2), special=pcb_special_client_pointer), ret='u32', seeds=40, mock=scripted_mock,
+                  plain_words=True, stack_args=PCB_TRACK_READS, name='process_command_buffer (opcode 0x36 with a client-chosen pointer, #125)'))
+
+
 def pcb_bind_special(m, rng, op, texs):
     """texture bind (opcodes 0x06-0x15) in the mode that derives the texture size field from the format table: [hdr, texture index, mode 1 << 30 | bits, format id << 24 | size]
     - the shift applied to the size is (format table entry >> 12) & 7, so the format id (hence the table entry; ati_format_info_table has 48 entries) must vary and the mode must be 1"""

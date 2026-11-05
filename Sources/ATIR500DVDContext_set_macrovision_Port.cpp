@@ -44,6 +44,15 @@ IOReturn ATIR500DVDContext::set_macrovision(UInt32 attribute, UInt32 value) {
   if (M<char>(accelAddr + kIOATIR500Accelerator_active) == '\0') {
     result = 0xe00002d8;
   }
+#if ATI_FIX_STOCK_BUGS
+  /* Root cause (#146): boundSurface is legitimately NULL until set_surface binds one, and again after remove_surface (vtable slot 0x5a4, called by
+   * IOATIR500Surface::invalidate_contexts) unbinds it - so a well-behaved client can reach this state. The vendor code never tests for it before calling
+   * getFramebufferIndex() on the NULL surface (DAR=0xD64 panic). All nine sibling methods that read boundSurface (get_surface_size, dvd_enable_overlay,
+   * dvd_setup_subpicture, ...) test it first and return 0xe00002bc; this method lacked the same precondition. */
+  else if (M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface) == (UInt8 *)0x0) {
+    result = 0xe00002bc;
+  }
+#endif
   else {
     framebufferIndex = ((ATIR500Surface *)(M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface)))->getFramebufferIndex();
     framebuffer = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(M<UInt32>(framebufferIndex * 0x20 + M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0xd4),

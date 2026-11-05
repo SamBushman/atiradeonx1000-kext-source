@@ -322,6 +322,26 @@ def w_dvd_write_buffer(m, rng):
     return [c, p, word(rng)]
 
 
+def dvd_macro_mock(m, name, k):
+    """getFramebufferIndex() is an index into the accelerator's two panel slots; OSMetaClassBase::safeMetaCast hands its object back (or NULL for a NULL slot)"""
+    if 'getFramebufferIndex' in name:
+        return (m.seed * 7 + k) & 1
+    if 'safeMetaCast' in name:
+        from unicorn.ppc_const import UC_PPC_REG_3
+        return m.uc.reg_read(UC_PPC_REG_3)
+    return new_mock(m, name, k)
+
+
+def w_dvd_set_macrovision(m, rng):
+    """ATIR500DVDContext::set_macrovision(attribute, value): boundSurface (+0xf8) is NULL before set_surface and after remove_surface (#146)"""
+    c, A = dvd(m, rng)
+    m.w8(A + 0x80, rng.choice([0, 1, 1]))
+    for i in range(2):
+        m.w32(A + 0xd4 + 0x20 * i, rng.choice([0, plain(m, rng, 0x800)]))
+    m.w32(c + 0xf8, rng.choice([0, obj(m, rng, 'ATIR500Surface', 0x1000), obj(m, rng, 'ATIR500Surface', 0x1000)]))
+    return [c, rng.choice([0, 1, 2, 3]), word(rng)]
+
+
 def w_gl_read_buffer(m, rng):
     """IOATIR500GLContext::read_buffer(readData, size): +0xc8 accelerator, +0x290 bound surface (same buffer-record layout the DVD context sees), +0x8c buffer mask"""
     c = obj(m, rng, 'ATIR500GLContext', 0x400)
@@ -737,6 +757,7 @@ CASES = [
     Case('IOATIR500DVDContext::freeAllContextBuffers', w_dvd_free_all, ret='void', seeds=20, mock=new_mock),
     Case('IOATIR500DVDContext::stop', w_dvd_stop, ret='void', seeds=40, mock=new_mock, ignore_args=REL),
     Case('IOATIR500GLContext::read_buffer', w_gl_read_buffer, ret='u32', seeds=300, mock=new_mock, ignore_args=REL, out_extents=XFER_RECORD, name='read_buffer (hand world)'),
+    Case('ATIR500DVDContext::set_macrovision', w_dvd_set_macrovision, ret='u32', seeds=60, mock=dvd_macro_mock, ignore_args=REL),
     Case('IOATIR500DVDContext::write_buffer', w_dvd_write_buffer, ret='u32', seeds=300, mock=new_mock, ignore_args=REL, out_extents=XFER_RECORD),
     Case('IOATIR500DVDContext::create_shared', lambda m, rng: [dvd(m, rng)[0]], ret='bool', seeds=20, mock=new_mock),
     Case('ATIR500DVDContext::submit_context_buffer', w_dvd_submit, ret='void', seeds=80, mock=new_mock),
