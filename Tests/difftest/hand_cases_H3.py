@@ -241,6 +241,49 @@ CASES += [
 ]
 
 
+def foreign_buffer(m, rng, S, A, buf):
+    """move the attachment buffer out of the surface: a panel surface's attachment (+0xb70) is the accelerator's scanout record (accel + 0x12c + panel*0x78) - the same
+    record layout, but display-owned VRAM, not one of the surface's 23 slots (#123). Copies the fields the lock path reads so the world stays the same otherwise."""
+    foreign = A + 0x12c + 0x78 * rng.choice([0, 1])
+    for off in range(0, 0x78, 4):
+        m.w32(foreign + off, m.r32(buf + off))
+    m.w32(foreign + 0x08, rng.choice([0x100, 0x2000, 0x800000]))   # GpuBaseAddress overlays the pool-element offset word: non-zero whether or not the scanout was reserved
+    m.w32(S + 0xb70, foreign)
+    return foreign
+
+
+def w_lock_options_foreign(m, rng):
+    S, A, buf = lock_surface(m, rng)
+    foreign_buffer(m, rng, S, A, buf)
+    data = m.alloc(0x60); fill_words(m, data, 0x60, rng)
+    return [S, rng.choice([1, 2, 2, 2]), rng.choice([0, 0, 1, 2, 3]), data, 0x44]
+
+
+def w_move_buffer(m, rng):
+    S, A, buf = lock_surface(m, rng)
+    if rng.random() < 0.5:
+        buf = foreign_buffer(m, rng, S, A, buf)
+    else:
+        buf = S + 0xa8 + 0x78 * rng.randrange(0, 23)
+    return [S, buf]
+
+
+def move_mock(m, name, k):
+    if 'copy_buffer_to_backing_store' in name:
+        return 1 if (m.seed + k) % 4 else 0
+    if slot(name, 0x5cc):
+        return 1
+    return lock_mock(m, name, k)
+
+
+CASES += [
+    Case('IOATIR500Surface::surface_lock_options', w_lock_options_foreign, ret='u32', name='IOATIR500Surface::surface_lock_options (attachment is a scanout record, #123)', seeds=300,
+         mock=lock_mock, plain_words=True, ignore_args=REL, out_extents={'vtable slot +0xdc': {2: 4}}),
+    Case('IOATIR500Surface::move_buffer_to_backing_store', w_move_buffer, ret='u32', name='IOATIR500Surface::move_buffer_to_backing_store (own slot or scanout record, #123)', seeds=120,
+         mock=move_mock, plain_words=True, ignore_args=REL),
+]
+
+
 def w_unlock_options(m, rng):
     S, A, buf = lock_surface(m, rng)
     m.w32(S + 0xd8c, rng.choice([0, 0, plain(m, rng, 0x40)]))                      # orphaned backing stores

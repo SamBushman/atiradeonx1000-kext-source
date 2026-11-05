@@ -47,6 +47,10 @@ bool IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer *buffer) 
     M<SInt32>(backingStore + 0x54) = M<SInt32>(self + kIOATIR500Surface_stamp) + -1;
   }
   else {
+#if ATI_FIX_STOCK_BUGS
+    /* Same cause as move_buffer_to_backing_store (#123): a scanout-record buffer has no surface slot to release. */
+    if ((UInt32)(((SInt32)bufferBytes - (SInt32)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111) < 0x17)
+#endif
     VCALL(M<SInt32>(self), 0x5cc)(self,((SInt32)bufferBytes - (SInt32)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111)
     ;
   }

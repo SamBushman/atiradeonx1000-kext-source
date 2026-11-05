@@ -34,6 +34,20 @@ bool IOATIR500Surface::move_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer
   UInt32 result;
   
   result = this->copy_buffer_to_backing_store((ATIR500SurfaceBuffer *)(bufferBytes));
+#if ATI_FIX_STOCK_BUGS
+/* Root cause (#123): the buffer passed in is not necessarily one of THIS surface's own 23 slots. A panel surface's attachment pointer
+   (surface+0xb70, set by set_id_mode) points at the accelerator's scanout record (accel+0x12c+panel*0x78), which has the same record layout
+   but is display-owned VRAM (reserved once at HardwareInit), not a surface slot. The slot index recovered below by pointer arithmetic is only
+   meaningful for the surface's own buffers: for the scanout record it names a bogus slot (here: the record 4 bytes before the scanout element -
+   its +0 is the unrelated word at accel+0x128 = NULL, its +4 the scanout's own next link, its +8 the scanout's prev link), so dealloc_surface
+   -> ATIR500Memory::dealloc follows a NULL link (DAR 0xc) and panics. The vendor's own sibling code (IOATIR500DVDContext::write_buffer,
+   IOATIR500GLContext::read_buffer) already treats `index >= 0x17` as "not one of the surface's slots"; there is simply no slot (and no pool
+   element of this surface) to release for such a buffer - the display keeps its VRAM. */
+  if ((UInt32)(((SInt32)bufferBytes - (SInt32)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111) < 0x17) {
+    VCALL(M<SInt32>(self), 0x5cc)(self,((SInt32)bufferBytes - (SInt32)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111);
+  }
+#else
   VCALL(M<SInt32>(self), 0x5cc)(self,((SInt32)bufferBytes - (SInt32)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111);
+#endif
   return result;
 }

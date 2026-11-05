@@ -210,7 +210,12 @@ checkTransferStamp:
           if (((transferBuffer == 0) || (M<int>(transferBuffer + 0x54) != M<int>(self + kIOATIR500Surface_stamp))) ||
              (stampPending = false, M<char>(transferBuffer + 0x58) == '\0')) goto moveToBackingStore;
         }
-        if (lockType == 2) {
+        if (lockType == 2
+#if ATI_FIX_STOCK_BUGS
+            /* Same cause as move_buffer_to_backing_store (#123): a scanout-record buffer has no surface slot to release (the display keeps its VRAM). */
+            && (UInt32)(((int)surfaceBuffer - (int)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111) < 0x17
+#endif
+           ) {
           VCALL(M<int>(self), 0x5cc)
                     (self,((int)surfaceBuffer - (int)(self + kIOATIR500Surface_buffers) >> 3) * -0x11111111);
         }
