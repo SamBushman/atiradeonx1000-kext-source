@@ -254,6 +254,13 @@ def w_stop(m, rng):
     m.w32(a + 3000, some()); m.w32(a + 0xc4c, 0x32000000 if some() else 0); m.w32(a + 0x830, 4 * 0x400)
     if some():
         m.w32(a + 0x8b8, 0x33000000)
+    # the orphan texture list (start() makes it an empty circular list; client textures freed by a closing client wait on it for the garbage collector): head at
+    # +0x63c, nodes linked through +0x24 (prev) / +0x28 (next), so the head's next word is +0x664 (#179)
+    head = a + 0x63c
+    nodes = [m.alloc(0x100) for _ in range(rng.choice([0, 0, 1, 2]))]
+    ring = [head] + nodes
+    for i, n in enumerate(ring):
+        m.w32(n + 0x28, ring[(i + 1) % len(ring)]); m.w32(n + 0x24, ring[i - 1])
     return [a, plain(m, rng)]
 
 

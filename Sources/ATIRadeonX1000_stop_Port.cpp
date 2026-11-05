@@ -208,6 +208,53 @@ void ATIRadeonX1000::stop(IOService *provider) {
     VCALL(*M<int *>(self + kIOATIR500Accelerator_gpuSensorFunction), 0x18)(M<int *>(self + kIOATIR500Accelerator_gpuSensorFunction));
     M<UInt32>(self + kIOATIR500Accelerator_gpuSensorFunction) = 0;
   }
+#if ATI_FIX_STOCK_BUGS
+  /* Root cause (#179, stock panic DAR 0xC6C in removeFromPCIeGART): teardown order. The textures still on the orphan list (client textures freed by a closing
+   * client are only queued here; the garbage collector frees them later) are mapped in the PCIe GART, and freeing one (free_texvert -> vslot 0x5ac ->
+   * removeTransferFromGART -> removeFromPCIeGART) clears its entries in pcieGartTable. Stock drains that list in the BASE class stop(), which this function calls
+   * LAST - after it has already shut the GART down and freed pcieGartTable (set to NULL below). removeFromPCIeGART then stores the "empty" entry at
+   * NULL + entry*4 (0xC6C = entry 0x31B): a kernel data abort. It needs client activity because with no client textures the list is empty. Fix: release the
+   * GART-mapped textures (and stop the two collectors that would race with that) while the GART still exists. Every pointer used here is zeroed after use, so
+   * the base stop() later finds nothing left to do and its own copy of this code is a no-op. */
+  if (M<int>(self + kIOATIR500Accelerator_garbageCollectorSource) != 0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + kIOATIR500Accelerator_garbageCollectorSource));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_garbageCollectorSource), 0x18)(M<int *>(self + kIOATIR500Accelerator_garbageCollectorSource));
+    M<UInt32>(self + kIOATIR500Accelerator_garbageCollectorSource) = 0;
+  }
+  if (M<int>(self + kIOATIR500Accelerator_garbageCollectorTimer) != 0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + kIOATIR500Accelerator_garbageCollectorTimer));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_garbageCollectorTimer), 0x18)(M<int *>(self + kIOATIR500Accelerator_garbageCollectorTimer));
+    M<UInt32>(self + kIOATIR500Accelerator_garbageCollectorTimer) = 0;
+  }
+  if (M<int>(self + kIOATIR500Accelerator_gartCollectorSource) != 0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + kIOATIR500Accelerator_gartCollectorSource));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_gartCollectorSource), 0x18)(M<int *>(self + kIOATIR500Accelerator_gartCollectorSource));
+    M<UInt32>(self + kIOATIR500Accelerator_gartCollectorSource) = 0;
+  }
+  if (M<int>(self + kIOATIR500Accelerator_gartCollectorTimer) != 0) {
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_workLoop), 0xe8)(M<int *>(self + kIOATIR500Accelerator_workLoop), M<int *>(self + kIOATIR500Accelerator_gartCollectorTimer));
+    VCALL(*M<int *>(self + kIOATIR500Accelerator_gartCollectorTimer), 0x18)(M<int *>(self + kIOATIR500Accelerator_gartCollectorTimer));
+    M<UInt32>(self + kIOATIR500Accelerator_gartCollectorTimer) = 0;
+  }
+  {
+    UInt8 *orphan = M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_next);
+    while (orphan != (UInt8 *)(self + kIOATIR500Accelerator_orphanTextureList)) {
+      int orphanPrev = M<int>(orphan + 0x24);
+      M<UInt32>(orphanPrev + 0x28) = M<UInt32>(orphan + 0x28);
+      int orphanNext = M<int>(orphan + 0x28);
+      M<UInt8 *>(orphan + 0x28) = orphan;
+      M<int>(orphanNext + 0x24) = orphanPrev;
+      M<UInt8 *>(orphan + 0x24) = orphan;
+      IOATIR500Shared::free_texvert(reinterpret_cast<IOATIR500Accelerator *>(self), reinterpret_cast<IOTextureBuffer *>(orphan));
+      orphan = M<UInt8 *>(self + kIOATIR500Accelerator_orphanTextureList_next);
+    }
+  }
+  /* The command buffers (freeCommandBuffer -> vslot 0x5ac when mapped) and the cached data buffers are GART-mapped the same way and are also released by the
+   * base stop() only after the table is gone. freeAllCommandBuffers/freeAllDataBuffers zero their counts and list heads, so the base stop() repeats them as no-ops. */
+  this->freeAllCommandBuffers(0);
+  this->freeAllCommandBuffers(1);
+  this->freeAllDataBuffers();
+#endif
   this->shutdownPCIeGART();
   M<UInt32>(self + kIOATIR500Accelerator_gartTableCpuAddress) = 0;
   if (M<int>(self + kIOATIR500Accelerator_pcieGartTable) != 0) {
