@@ -33,6 +33,7 @@ static long g_seq = 0;
 static struct timeval g_t0;
 static int g_pid = 0;
 
+static unsigned long g_maps_addr[32], g_maps_size[32]; static int g_nmaps = 0, g_dumped_maps = 0;
 static unsigned long g_cb_addr = 0, g_cb_size = 0, g_cb_bytes = 0x8000; static char g_logpath[300];
 static void ensure_log(void) {
     if (g_log) return;
@@ -137,7 +138,11 @@ static kern_return_t my_IOConnectMapMemory(io_connect_t connect, uint32_t memory
         fprintf(g_log, "%ld\t%d\t%ld\tSNAPSHOT cb\tconnect=0x%x\taddr=0x%lx\tbytes=0x%lx\t-\t-\t%s\t-\n", g_seq + 1, g_pid, usec_since_start(), (unsigned)connect, (unsigned long)g_cb_addr, (unsigned long)n, fn); fflush(g_log);
     }
     kern_return_t r = real_IOConnectMapMemory(connect, memoryType, intoTask, atAddress, ofSize, options);
-    if (memoryType == 1 && r == 0 && atAddress && ofSize) { g_cb_addr = *atAddress; g_cb_size = *ofSize; }
+    if (memoryType == 1 && r == 0 && atAddress && ofSize) {
+        int q, known = 0; g_cb_addr = *atAddress; g_cb_size = *ofSize;
+        for (q = 0; q < g_nmaps; q++) if (g_maps_addr[q] == *atAddress) { known = 1; g_maps_size[q] = *ofSize; }
+        if (!known && g_nmaps < 32) { g_maps_addr[g_nmaps] = *atAddress; g_maps_size[g_nmaps] = *ofSize; g_nmaps++; }
+    }
     fprintf(g_log, "%ld\t%d\t%ld\tIOConnectMapMemory\tconnect=0x%x\tmemType=%u\toptions=0x%x\t-\t%d\taddr=0x%lx\tsize=0x%lx\n",
             ++g_seq, g_pid, usec_since_start(), (unsigned)connect, memoryType, (unsigned)options, r,
             atAddress ? (unsigned long)*atAddress : 0, ofSize ? (unsigned long)*ofSize : 0);
@@ -163,6 +168,16 @@ static kern_return_t my_scalarI_structureI(mach_port_t connect, int selector, in
     hexdump(g_outhex, sizeof g_outhex, inputStruct, inputStructCnt, 0);
     WRITE_AHEAD("scalarI_structureI", connect, selector, inputCnt, g_inhex);
     kern_return_t r = real_scalarI_structureI(connect, selector, input, inputCnt, inputStruct, inputStructCnt);
+    /* #214: first stamp wait (selector 9) that times out = the GPU is wedged: dump every command-buffer mapping IN FULL (the kernel patches/executes these in
+     * place, so this is the stream the CP is stuck in), <log>.map<N>_<addr>.bin */
+    if (selector == 9 && r != 0 && !g_dumped_maps) {
+        int q; g_dumped_maps = 1;
+        for (q = 0; q < g_nmaps; q++) {
+            char fn[400]; FILE *f; snprintf(fn, sizeof fn, "%s.map%d_%lx.bin", g_logpath, q, g_maps_addr[q]);
+            f = fopen(fn, "wb"); if (f) { fwrite((void *)g_maps_addr[q], 1, g_maps_size[q], f); fflush(f); fclose(f); }
+            fprintf(g_log, "# wedge dump map %d addr=0x%lx size=0x%lx -> %s\n", q, g_maps_addr[q], g_maps_size[q], fn); fflush(g_log);
+        }
+    }
     fprintf(g_log, "%ld\t%d\t%ld\tscalarI_structureI\tconnect=0x%x\tsel=%d\t%u\tstruct=%u\t%d\t%s\t%s\n",
             ++g_seq, g_pid, usec_since_start(), (unsigned)connect, selector, inputCnt, inputStructCnt, r, g_inhex, g_outhex);
     return r;
