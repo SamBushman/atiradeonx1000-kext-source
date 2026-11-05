@@ -170,7 +170,8 @@ static kern_return_t my_scalarI_structureI(mach_port_t connect, int selector, in
     kern_return_t r = real_scalarI_structureI(connect, selector, input, inputCnt, inputStruct, inputStructCnt);
     /* #214: first stamp wait (selector 9) that times out = the GPU is wedged: dump every command-buffer mapping IN FULL (the kernel patches/executes these in
      * place, so this is the stream the CP is stuck in), <log>.map<N>_<addr>.bin */
-    if (selector == 9 && r != 0 && !g_dumped_maps) {
+    /* IOKIT_RECORD_DUMP_AT_SEQ=N: also dump the mappings once the call sequence number reaches N (to capture the stream of a run that does NOT wedge, for comparison) */
+    if (!g_dumped_maps && ((selector == 9 && r != 0) || (getenv("IOKIT_RECORD_DUMP_AT_SEQ") && g_seq >= atol(getenv("IOKIT_RECORD_DUMP_AT_SEQ"))))) {
         int q; g_dumped_maps = 1;
         for (q = 0; q < g_nmaps; q++) {
             char fn[400]; FILE *f; snprintf(fn, sizeof fn, "%s.map%d_%lx.bin", g_logpath, q, g_maps_addr[q]);

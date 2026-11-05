@@ -87,6 +87,17 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
         IOLog("VRAMPeek: accel+0x80(hwUp)=0x%02x accel+0x8bc(ringReady)=0x%08x\n", (unsigned)hwUp, (unsigned)ringReady);
     }
 
+#ifdef VRAM_OFFS
+    /* #214: dump TARGET_LEN bytes of low VRAM (the CPU aperture, accel+0xe4 = kIOATIR500Accelerator_vramApertureBase) at each byte offset in VRAM_OFFS (comma list). Used on a wedged G5 to see
+     * whether the VBO vertex data the stream points at (the type-7 buffer's VRAM copy, texture+0x48) was ever written. */
+    {
+        UInt32 ap = *(UInt32 *)(accel + 0xe4);
+        static const UInt32 offs[] = { VRAM_OFFS };
+        IOLog("VRAMPeek vram: apertureBase(accel+0xe4)=0x%08x, %d offsets, len 0x%x\n", (unsigned)ap, (int)(sizeof offs / sizeof offs[0]), (unsigned)TARGET_LEN);
+        if (ap) for (unsigned k = 0; k < sizeof offs / sizeof offs[0]; k++) { IOLog("VRAMPeek vram: ---- VRAM+0x%08x ----\n", (unsigned)offs[k]); dump_at(ap + offs[k], (unsigned)TARGET_LEN); }
+        accelSvc->release(); return KERN_SUCCESS;
+    }
+#endif
 #ifdef TARGET_RING
     /* #214: read-only dump of the main CP ring (accel+0x900 = kernel virtual ring memory, accel+0x914/0x918 = software index/cursor, accel+0xba0 = size)
      * at dword indexes [RING_FROM, RING_TO), 8 dwords per IOLog line, then stop. Used on a wedged G5 to see the packet the CP is stuck on. */
