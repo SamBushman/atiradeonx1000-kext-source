@@ -63,7 +63,7 @@ static const char *body(dtest_t *t, io_service_t svc) {
     unsigned imgSlot3 = 0xffffffff, imgSlot4 = 0xffffffff; vm_address_t img3 = 0, img4 = 0;
     int forced = getenv("FORCE_UNBOUND_0x18") != NULL;   /* #144 negative check: pass the declare_image ids as bind handles (the original test mistake) so the binds are rejected and 0x18 names empty slots: the fixed kernel must end the stream, the unfixed one panics */
     int prep = getenv("PREP_BUFFERS") != NULL;   /* #144 differential: give the context real VRAM for slot 16 (the 0x18 render target) the way the proven GetFrame flow does */
-    const char *stop = getenv("STOP_AFTER");   /* bisection knob (#150/#151 wedge check): prep | maps | 0xb0xd | bind | 0x18 | slot17 | 0x43 | 0x44 - end the injected sequence after that step, then detach and close as usual */
+    const char *stop = getenv("STOP_AFTER");   /* bisection knob (#150/#151 wedge check): prep | maps | 0xb | 0xb0xd | bind | 0x18 | slot17 | 0x43 | 0x44 - end the injected sequence after that step, then detach and close as usual */
 #define STOP_IF(name) if (stop && !strcmp(stop, name)) { dtest_note(t, "STOP_AFTER=%s: ending the sequence here", name); goto out; }
     if (t3_surface(t, svc, &s, prep ? 64 : 4, prep ? 48 : 4) != KERN_SUCCESS) return "DIVERGENCE";
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
@@ -93,6 +93,7 @@ static const char *body(dtest_t *t, io_service_t svc) {
     STOP_IF("maps")
     /* 0xb, 0xd first: real-usage pattern (word[2]=1 -> safe branch), zero bind precondition needed */
     r = flush_and_log(t, d, &addr, &size, 0x0b, 2, 1, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0xb failed, stopping"); goto out; }
+    STOP_IF("0xb")
     r = flush_and_log(t, d, &addr, &size, 0x0d, 2, 1, 1, 1, 1); if (r != 0) { bad++; dtest_note(t, "0xd failed, stopping"); goto out; }
     STOP_IF("0xb0xd")
 
