@@ -39,6 +39,62 @@ leaves undefined itself (`ATIRadeonX1000::system_will_sleep` / `did_wake`).
 If you build from another machine and drive the Tiger box over SSH, `Tools/remote_build.sh [ssh-host]` and `Tools/check_ledger.sh [ssh-host]` do
 the copy/build/pull for you; the host name is an argument.
 
+## Building the userspace GLDriver
+
+The rebuilt `ATIRadeonX1000GLDriver` bundle executable is produced from the C corpus in `Userspace/ATIRadeonX1000GLDriver/ppc/` in two places: the
+corpus is turned into a linkable build directory on any machine with Python 3, and that directory is compiled and linked on a Tiger PPC machine.
+
+| requirement | notes |
+|---|---|
+| a dev machine with Python 3, `xz`, `ssh`/`scp`, `tar` | runs `link_corpus.py` / `fix_link_tree.py`; any OS |
+| a Tiger PPC machine reachable as an SSH host (default alias `G5`), with `~/rung3/` created | Apple gcc 4.0.1 and **ld64** at `/usr/local/opt/ld64/bin` (Tigerbrew `ld64`; the stock linker mis-links an image this size) |
+| the shipped GLDriver executable | Apple's file, not in this repo: copy `/System/Library/Extensions/ATIRadeonX1000GLDriver.bundle/Contents/MacOS/ATIRadeonX1000GLDriver` from your own Tiger 10.4.11 install (md5 `5d63b5e3d86e770daa6aee657bc784c2`) |
+
+The Ghidra data table the link needs (`gs/DumpData.java` output) is archived as `Userspace/ATIRadeonX1000GLDriver/ppc/ghidra/gld_data.tsv.xz`, so Ghidra
+is not required. From the repository root on the dev machine:
+
+    STOCK_GLD=/path/to/ATIRadeonX1000GLDriver sh Tools/userspace/build_gld_image.sh [ssh-host=G5] [scratch-dir]
+
+It links the corpus, ships the build directory to the host, runs `build.sh` there and prints
+`BUILT <sha>: ~/rung3/gld_<sha>/gld_link/ATIRadeonX1000GLDriver_renamed` (exit 0 only if the link produced the image; a compile failure prints
+`COMPILE FAIL <part>`). The image keeps the stock install name, so it replaces the bundle's executable directly. Optimisation recipe (the defaults):
+
+| knob | default | meaning |
+|---|---|---|
+| `LINK_OPT` | `-O2 -mtune=970` | flags for the draw/state parts |
+| `LINK_OPT_ALT` + `LINK_OPT_ALT_FILES` | `-Os -mtune=970` on `part_008 009 017 024 036 039 040 043-052 056` | the shader-compiler parts, which run on the first flush of a context, are faster at `-Os` (issue #212); set `LINK_OPT_ALT_FILES=` to build everything at `LINK_OPT` |
+| `LINK_PIC` | `-mdynamic-no-pic` | matches the stock code model; `-fPIC` costs the state-change paths 5-8 % |
+
+`-O0`/`-O1` images also build (`LINK_OPT=-O1`); they are slower than stock and were used to find latent undefined behaviour in the transcription (#209).
+
+## Installing, testing and restoring a build
+
+Do this only on a machine you can reset (see Safety). Keep the stock files: back up the kext binary, the GLDriver executable, `/System/Library/Extensions.mkext`,
+`/System/Library/Extensions.kextcache` and `/System/Library/Caches/com.apple.kernelcaches/kernelcache.*` first, and verify their md5s.
+
+1. **Stage and build everything** (commit first; the staging directory is named after `HEAD`): `sh Tools/stage_for_test.sh [ssh-host]` builds the kext (`-Os`) and every
+   test program on the Tiger host under `~/rung3/` without loading anything.
+2. **Kext**: `Tests/boot_time_install_procedure.md` is the full procedure (replace only the binary inside the stock bundle, keep the stock `Info.plist`,
+   `touch /System/Library/Extensions`, reboot; after a second reboot the kext loads from the regenerated prelinked cache). Send the steps one at a time.
+3. **GLDriver**: it is loaded per process, so no reboot is needed: copy the image over the bundle executable (`root:wheel`, mode 755) and start a new GL process.
+4. **Check it** (on the Tiger host, from `Tests/`; start from a fresh boot and an idle GPU):
+
+        sh compare_to_baseline.sh            # external-method parity vs the recorded stock baseline; DEEP=1 for the deep paths
+        sh run_gl_feature_suite.sh OUTDIR    # self-checking GL programs; compare two runs with compare_gl_feature_runs.sh
+        sh perf_collect.sh OUTDIR 5          # repeatable performance baseline; compare runs with python3 ../Tools/perf_compare.py A B
+        sh soak.sh 14400                     # 4 h sustained workload (watch from the dev machine with Tools/stability_watch.sh)
+
+   `Tests/full_evaluation_runbook.md` lists the whole campaign; `Tests/gamefps/` holds the game benchmark scripts and recorded results. Compare against stock on the
+   same boot (or interleave the two), not against a number from another day: the GL cycle microbenchmarks drift by tens of percent with uptime.
+   `compare_to_baseline.sh --deep` can differ in one line (`DVD check_stamps(5,5) both=`) after any DVD workload; that is GPU counter state and occurs on the stock driver too.
+5. **Restore**: put the backed-up kext binary, GLDriver executable, mkext, kextcache and kernelcache back (`root:wheel`, same modes), `touch /System/Library/Extensions`,
+   reboot twice, and confirm the installed kext binary md5 is `9c7a9fff5ee767ed5280e58d55df92cd` and the GLDriver md5 is `5d63b5e3d86e770daa6aee657bc784c2` (the load size does not tell stock from rebuilt: both are `0x4f000`), then that `compare_to_baseline.sh` is identical.
+
+## Tags
+
+`Stock` marks the tree at which the rebuilt (labeled) kext and userspace GLDriver reproduce the shipped driver's behaviour on the test hardware; the
+evidence is under `Tests/gamefps/fullsystem_mix_2026-11-04/` and `Tests/gamefps/gldriver_212_2026-11-04/`. `git checkout Stock` gives exactly that tree.
+
 ## Verifying a build
 
 `Tools/check_ledger.sh` regenerates the completeness ledger (`Ledger/kext_ppc_ledger.tsv`) and diffs the vtables against the shipped kext; set

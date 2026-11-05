@@ -18,6 +18,13 @@ export LINK_OPT_ALT=${LINK_OPT_ALT:--Os -mtune=970}
 export LINK_OPT_ALT_FILES=${LINK_OPT_ALT_FILES-part_008 part_009 part_017 part_024 part_036 part_039 part_040 part_043 part_044 part_045 part_046 part_047 part_048 part_049 part_050 part_051 part_052 part_056}
 STOCK=${STOCK_GLD:-$HOME/Documents/ATI-X1900-Decomp/tiger-hd-pull/ATIRadeonX1000GLDriver.bundle.bin}
 GDATA=${GLD_GHIDRA_DATA:-$HOME/Documents/ATI-X1900-Decomp/work-bugwf/link/gld_data.tsv}
+# GLD_GHIDRA_DATA (Ghidra gs/DumpData.java output for the stock GLDriver) is archived in the repo; use that unless a local copy is given.
+if [ ! -f "$GDATA" ]; then
+    mkdir -p "$EV"; xz -dc Userspace/ATIRadeonX1000GLDriver/ppc/ghidra/gld_data.tsv.xz > "$EV/gld_data.tsv" || { echo "cannot read the archived Ghidra data (need xz, run from the repository root)"; exit 2; }
+    GDATA="$EV/gld_data.tsv"
+fi
+# the stock binary is Apple's and is not in the repo: copy /System/Library/Extensions/ATIRadeonX1000GLDriver.bundle/Contents/MacOS/ATIRadeonX1000GLDriver from your own Tiger 10.4.11 install (md5 5d63b5e3d86e770daa6aee657bc784c2) and pass STOCK_GLD=
+[ -f "$STOCK" ] || { echo "stock GLDriver binary not found at $STOCK (set STOCK_GLD=/path/to/ATIRadeonX1000GLDriver)"; exit 2; }
 mkdir -p "$EV"; rm -rf "$EV/gld_link"
 python3 Tools/userspace/link_corpus.py Userspace/ATIRadeonX1000GLDriver/ppc "$STOCK" "$GDATA" "$EV/gld_link" --config Tools/userspace/link_config/gld.json > "$EV/link.log" 2>&1 || { tail -5 "$EV/link.log"; exit 2; }
 python3 Tools/userspace/fix_link_tree.py "$EV/gld_link" || exit 2
