@@ -57,6 +57,20 @@ cannot be provoked by running one function; that is for the hardware soak tests.
 `STOCK_KEXT` is the shipped kext binary (extract it from your own install); `REBUILT_KEXT` overrides the default `build/difftest/rebuilt.bin`.
 Exit status 0 = every run identical.
 
+## Fixed build vs parity build (`ATI_FIX_STOCK_BUGS`)
+
+The rebuilt kext fixes defects of Apple's shipped code on its own failure paths (`Headers/GhidraCompat.h`: `ATI_FIX_STOCK_BUGS`, default 1). Difftest against the stock kext
+therefore reports exactly these divergences for a default build, and nothing else (907 cases: 902 PASS, these FAIL):
+
+| case | divergence (all intended) | issue |
+|---|---|---|
+| `ATIR500DVDContext::doIDCT` (both worlds) | extra `_IOLockUnlock(accelerator lock)` on the BadArgument exit | #98 |
+| `IOATIR500GLContext::get_data_buffer` (both worlds) | extra `_IOLockUnlock` on the third NoResources exit | #99 |
+| `IOATIR500Surface::allocAllSlaveSwapBuffers` | stock TIMEOUT / wild read in the failure unwind, rebuilt releases the descriptors and returns 0 | #32 |
+| `ATIRadeonX1000::start_xdct_engine [hand H2]` | poll timeout: stock returns 1 and sets `xdctEngineRunning`, rebuilt returns 0 and leaves it clear | #127 |
+
+For the bug-for-bug parity run build with `WARN="-w -DATI_FIX_STOCK_BUGS=0" sh Tools/difftest/build_rebuilt.sh`: every case PASSes again.
+
 ## Writing a case (`Tests/difftest/*_cases.py`)
 
     Case('IOATIR500Surface::set_scaling', world, ret='u32', stack_args={'tmpAllocVRAM': {1: 16}})

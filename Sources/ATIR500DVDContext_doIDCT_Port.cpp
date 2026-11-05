@@ -61,6 +61,10 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize) {
     }
     else {
       if (M<SInt32>(infoBytes + 0xc) != 1) {
+#if ATI_FIX_STOCK_BUGS
+        /* #98: the shipped code returns here with the accelerator command lock (taken above) still held */
+        GH_IOLockUnlock(M<UInt32>(accelAddr + 0x840));
+#endif
         return 0xe00002c2;
       }
       bufferSlot = (UInt8 *)(self + kATIR500DVDContext_idctChromaBuffer0);

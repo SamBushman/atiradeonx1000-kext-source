@@ -54,6 +54,29 @@ UInt32 IOATIR500Surface::allocAllSlaveSwapBuffers(UInt32 panel, UInt32 swapBuffe
 unwindSlots:
         /* Failure unwind: release the slots allocated so far, walking backwards from entries[slotNumber]. The shipped code has no exit condition here
            (issue #32: it keeps walking down through memory until it faults); the loop is kept exactly that way. */
+#if ATI_FIX_STOCK_BUGS
+        /* #32: release every descriptor allocated so far (entries[1 .. slotNumber + buffers per panel]; unallocated entries have memory == 0) and report failure.
+           The shipped code below never leaves the loop. */
+        {
+          UInt32 lastIndex = slotNumber + M<UInt32>(counterOffset + accelerator + 0x114);
+          UInt32 idx;
+          for (idx = 1; idx <= lastIndex; idx++) {
+            SwapBufferEntry *e = &rec->entries[idx];
+            if (e->memory != (void *)0x0) {
+              VCALL(*(SInt32 *)e->memory, 0x18)((SInt32 *)e->memory);
+            }
+            e->lockCount = 0;
+            e->usageKind = 2;
+            e->unknown_0x00 = 0;
+            e->gartOffset = 0;
+            e->memory = (void *)0x0;
+            e->stamp = 0;
+            e->header = (VendorSwapBufferHeader *)0x0;
+            e->rectWordIndex = 0;
+          }
+          return 0;
+        }
+#endif
         victim = &rec->entries[slotNumber];
         do {
           if (M<SInt32>(counterOffset + accelerator + 0x114) != 0) {
