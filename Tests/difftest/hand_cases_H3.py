@@ -1047,3 +1047,44 @@ def w_filter_init(m, rng):
 CASES += [
     Case('ATIR500Surface::filter_init', w_filter_init, ret='void', name='ATIR500Surface::filter_init values H3', seeds=200, plain_words=True),
 ]
+
+
+# ---------------------------------------------------------------- ATIR500DVDContext::process_command_buffer: the 0x12 composite record WITH chain entries (#142)
+# The existing random-stream cases never build a chain entry, so they could not see the stock bug: the two chain loops overwrite entry words [0]/[1] with PACKET2 fillers and
+# THEN read [1] (the offset to the RB3D_COLOROFFSET/COLORPITCH pair), so stock always patches words [2]/[3] (the 0x1393 DSTCACHE_CTLSTAT header + value of the real record,
+# Tools/userspace/va_capture/captures/comp/g11). The fixed build must patch the pair at [1]+2 instead (the parity build must stay identical to stock).
+def w_dvd_pcb_chain(m, rng):
+    from hand_cases_H1 import dvd_world
+    args = dvd_world(0x12, False)(m, rng)
+    c = args[0]
+    buf = m.r32(c + 0xa4)
+    for idx in (3, 7):                                          # the two transfer buffers the record names (words [1] and [5]), already mapped (t+4 != 0)
+        t = m.r32(c + 0x104 + 4 * idx)
+        if t == 0:
+            t = m.alloc(0x100); fill_words(m, t, 0x100, rng)
+            hdr = m.alloc(0x40); fill_words(m, hdr, 0x40, rng); m.w32(t + 0x14, hdr)
+            for off in (0x34, 0x38): m.w32(t + off, obj(m, rng, 'ATIR500DVDContext', 0x100))
+            m.w32(c + 0x104 + 4 * idx, t)
+        m.w32(t + 4, 0x10000000); m.w32(t + 0x50, rng.choice([0, 0x100]))
+    a = buf + 0x1c
+    OFFA, OFFB, N0, TOTAL = 28, 77, 16, 112
+    w = [0x80000000] * TOTAL
+    w[0] = 0x12000000 | TOTAL
+    w[1] = 3; w[2] = rng.choice([0, 1]); w[3] = rng.choice([0, 1]); w[4] = 0; w[5] = 7; w[6] = OFFA; w[7] = OFFB; w[8] = rng.randrange(0, 0x40)
+    w[9] = rng.randrange(0, 23); w[10] = rng.randrange(0, 23); w[11] = rng.randrange(0, 23); w[12] = rng.choice([0, 0, 1]); w[13] = 1
+    for base in (OFFA, OFFB):
+        for j in range(16): w[base + j] = 0                    # block words (the kernel fills these); the chain head is word [0x10]
+        entry = base + 16
+        n1 = rng.choice([0, 4, 8, 14, 14, 8, 20, 0x7fff])       # 20 / 0x7fff: a pair outside the entry (the fixed build must not write there)
+        w[entry] = N0; w[entry + 1] = n1
+        for j in range(N0): w[entry + 2 + j] = rng.choice([0x1393, 0xa, word(rng), 0x1040, 0]) if j % 3 else word(rng)
+        if n1 + 3 < N0 + 2:                                      # flag word then pitch word at [n1+2], [n1+3]
+            w[entry + n1 + 2] = rng.choice([0, 0, 1, word(rng)]); w[entry + n1 + 3] = word(rng)
+        w[entry + N0 + 2] = 0                                    # chain terminator
+    for j, x in enumerate(w): m.w32(a + 4 * j, x)
+    m.w32(a + 4 * TOTAL, 0)
+    return args
+
+
+CASES.append(Case('ATIR500DVDContext::process_command_buffer', w_dvd_pcb_chain, ret='u32', name='process_command_buffer (0x12 composite record with chain entries, #142)', seeds=120, mock=new_mock, ignore_args=REL,
+                  limit=400000, plain_words=True))
