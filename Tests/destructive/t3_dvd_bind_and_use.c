@@ -1,3 +1,8 @@
+/* *** 2026-11-05 (#144 root cause) *** declare_image's scalar args are (unused, ADDRESS, LENGTH), not (width, height): this test declared two images at user address 4, and it passed the returned
+ * "image id" (the user address of the client-shared record, 0xc000/0xc040 = chunk base + handle*0x40) as the bind handle, but the 0x19..0x24 bind opcodes take the table HANDLE (the word stored
+ * at that address; handle < sharedAllocator->count). The bind was therefore rejected (endStream, flush returns 0, record left unchanged), slots 3/4 stayed NULL and 0x18 dereferenced NULL+4 (DAR 4):
+ * a kernel PANIC, not a lockup (Tiger waits on the panic screen; system.log goes quiet). Reproduced live on the rebuilt kext 2026-11-05 (panic PC in process_command_buffer 0x18, see #144).
+ * Fixed here: real page-aligned buffers are declared and the handle is derived from the returned address ((id & 0xfff) >> 6, valid for the first chunk). The kernel now ends such a stream instead. */
 /* *** RESULT 2026-10-05 (#144), 3 live attempts *** 0xb and 0xd completed cleanly every time (live-verified, register writes matched the static
  * derivation below exactly). Attempt 1: the bind step (0x1c) hung, 0x18 never reached. Attempts 2 and 3 (after the declare_image fix carried no
  * change - same args each time): 0x1c AND 0x1d both completed cleanly, and the hang moved to 0x18 instead - reproduced 2-for-2. 0x18 is the real,
@@ -35,6 +40,7 @@
  * Issue #100 protocol #87: crashes are an acceptable, expected cost of this investigation (standing instruction) - proceed. */
 #include "t3common.h"
 #include <mach/mach.h>
+static int g_rec_unchanged;   /* set by flush_and_log: the kernel left the injected record untouched (a bind that did not land leaves its record as written) */
 static kern_return_t flush_and_log(dtest_t *t, io_connect_t d, vm_address_t *addr, vm_size_t *size, unsigned op, unsigned w1, unsigned w2, unsigned w3, unsigned w4, unsigned w5) {
     volatile unsigned *p = (volatile unsigned *)(*addr + 0x1c); vm_address_t oldaddr = *addr; vm_size_t nsz = 0; unsigned j; kern_return_t r;
     unsigned words[16] = {0}; words[0] = w1; words[1] = w2; words[2] = w3; words[3] = w4; words[4] = w5;
@@ -47,13 +53,15 @@ static kern_return_t flush_and_log(dtest_t *t, io_connect_t d, vm_address_t *add
     { char line[300]; int k, o = 0;
       for (k = 0; k < 17 && o < 280; k++) o += snprintf(line + o, sizeof line - o, " %08x", ((volatile unsigned *)(oldaddr + 0x1c))[k]);
       dtest_note(t, "0x%02x: flush r=0x%08x; words after the kernel ran the buffer:%s", op, (unsigned)r, line); }
+    g_rec_unchanged = (((volatile unsigned *)(oldaddr + 0x1c))[0] == ((op << 24) | 16));
     if (nsz) *size = nsz;
     return r;
 }
 static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0;
     vm_address_t addr = 0; vm_size_t size = 0;
-    unsigned imgSlot3 = 0xffffffff, imgSlot4 = 0xffffffff;
+    unsigned imgSlot3 = 0xffffffff, imgSlot4 = 0xffffffff; vm_address_t img3 = 0, img4 = 0;
+    int forced = getenv("FORCE_UNBOUND_0x18") != NULL;   /* #144 negative check: pass the declare_image ids as bind handles (the original test mistake) so the binds are rejected and 0x18 names empty slots: the fixed kernel must end the stream, the unfixed one panics */
     int prep = getenv("PREP_BUFFERS") != NULL;   /* #144 differential: give the context real VRAM for slot 16 (the 0x18 render target) the way the proven GetFrame flow does */
     if (t3_surface(t, svc, &s, prep ? 64 : 4, prep ? 48 : 4) != KERN_SUCCESS) return "DIVERGENCE";
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
@@ -67,11 +75,11 @@ static const char *body(dtest_t *t, io_service_t svc) {
         if (r == 0) { osz = sizeof out; memset(out, 0, sizeof out); T3CALL(t, r, "DVD lock_all_buffers(0)", IOConnectMethodScalarIStructureO(d, 4, 1, &osz, 0, out)); dtest_note(t, "lock_all_buffers -> r=0x%08x outSize=%u", (unsigned)r, (unsigned)osz); }
         if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
     }
-    T3CALL(t, r, "DVD declare_image(4,4) #1 (for slot 3)", IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, 4, 4, &imgSlot3));
+    T3CALL(t, r, "DVD declare_image(4,4) #1 (for slot 3)", (vm_allocate(mach_task_self(), &img3, 0x10000, TRUE), memset((void *)img3, 0x40, 0x10000), IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, img3, 0x10000, &imgSlot3)));
     bad += t3_expect(t, "declare_image #1", r, 0);
     dtest_note(t, "declare_image #1 -> r=0x%08x imgId=0x%x", (unsigned)r, imgSlot3);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
-    T3CALL(t, r, "DVD declare_image(4,4) #2 (for slot 4)", IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, 4, 4, &imgSlot4));
+    T3CALL(t, r, "DVD declare_image(4,4) #2 (for slot 4)", (vm_allocate(mach_task_self(), &img4, 0x10000, TRUE), memset((void *)img4, 0x40, 0x10000), IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, img4, 0x10000, &imgSlot4)));
     bad += t3_expect(t, "declare_image #2", r, 0);
     dtest_note(t, "declare_image #2 -> r=0x%08x imgId=0x%x", (unsigned)r, imgSlot4);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
@@ -84,8 +92,8 @@ static const char *body(dtest_t *t, io_service_t svc) {
     r = flush_and_log(t, d, &addr, &size, 0x0d, 2, 1, 1, 1, 1); if (r != 0) { bad++; dtest_note(t, "0xd failed, stopping"); goto out; }
 
     /* real bind: opcode 0x19+N binds word[1]'s image id into slot N (self+0x104+N*4). 0x1c -> slot 3, 0x1d -> slot 4. */
-    r = flush_and_log(t, d, &addr, &size, 0x1c, imgSlot3, 0, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x1c (bind slot 3) failed, stopping"); goto out; }
-    r = flush_and_log(t, d, &addr, &size, 0x1d, imgSlot4, 0, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x1d (bind slot 4) failed, stopping"); goto out; }
+    r = flush_and_log(t, d, &addr, &size, 0x1c, forced ? imgSlot3 : (imgSlot3 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged && !forced) { bad++; dtest_note(t, "0x1c bind did NOT land (record unchanged): stopping before 0x18 (it would dereference the empty slot)"); goto out; } if (r != 0) { bad++; dtest_note(t, "0x1c (bind slot 3) failed, stopping"); goto out; }
+    r = flush_and_log(t, d, &addr, &size, 0x1d, forced ? imgSlot4 : (imgSlot4 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged && !forced) { bad++; dtest_note(t, "0x1d bind did NOT land (record unchanged): stopping before 0x18"); goto out; } if (r != 0) { bad++; dtest_note(t, "0x1d (bind slot 4) failed, stopping"); goto out; }
 
     /* the real open question: 0x18 with both slots genuinely bound, matching the real emitter's word[1]=slot4, word[2]=slot3(constant) shape */
     r = flush_and_log(t, d, &addr, &size, 0x18, 4, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x18 failed"); goto out; }
