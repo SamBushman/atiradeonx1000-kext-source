@@ -129,10 +129,10 @@ static kern_return_t my_IOConnectMapMemory(io_connect_t connect, uint32_t memory
                                             vm_address_t *atAddress, vm_size_t *ofSize, IOOptionBits options) {
     ensure_log(); RESOLVE(IOConnectMapMemory);
     /* #214: a type-1 re-map is how the GL driver SUBMITS a command buffer (the old mapping holds the commands about to be executed). Snapshot the first
-     * IOKIT_RECORD_CB_BYTES (default 0x8000) of it, write-ahead and flushed, into <log>.cb<seq mod 8>.bin so the buffer that wedges the CP survives the hang. */
+     * IOKIT_RECORD_CB_BYTES (default 0x8000) of it, write-ahead and flushed, into <log>.cbNNN.bin (NNN = call seq mod 100) so the buffer that wedges the CP survives the hang. */
     if (memoryType == 1 && g_cb_addr) {
         char fn[400]; FILE *f; size_t n = g_cb_size < g_cb_bytes ? g_cb_size : g_cb_bytes;
-        snprintf(fn, sizeof fn, "%s.cb%ld.bin", g_logpath, (g_seq + 1) % 8);
+        snprintf(fn, sizeof fn, "%s.cb%03ld.bin", g_logpath, (g_seq + 1) % 100);
         f = fopen(fn, "wb"); if (f) { fwrite((void *)g_cb_addr, 1, n, f); fflush(f); fclose(f); }
         fprintf(g_log, "%ld\t%d\t%ld\tSNAPSHOT cb\tconnect=0x%x\taddr=0x%lx\tbytes=0x%lx\t-\t-\t%s\t-\n", g_seq + 1, g_pid, usec_since_start(), (unsigned)connect, (unsigned long)g_cb_addr, (unsigned long)n, fn); fflush(g_log);
     }

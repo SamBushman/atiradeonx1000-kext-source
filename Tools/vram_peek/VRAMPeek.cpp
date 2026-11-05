@@ -87,6 +87,22 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
         IOLog("VRAMPeek: accel+0x80(hwUp)=0x%02x accel+0x8bc(ringReady)=0x%08x\n", (unsigned)hwUp, (unsigned)ringReady);
     }
 
+#ifdef TARGET_RING
+    /* #214: read-only dump of the main CP ring (accel+0x900 = kernel virtual ring memory, accel+0x914/0x918 = software index/cursor, accel+0xba0 = size)
+     * at dword indexes [RING_FROM, RING_TO), 8 dwords per IOLog line, then stop. Used on a wedged G5 to see the packet the CP is stuck on. */
+    {
+        UInt32 ringMem = *(UInt32 *)(accel + 0x900); UInt32 ringIndex = *(UInt32 *)(accel + 0x914); UInt32 ringCursor = *(UInt32 *)(accel + 0x918);
+        UInt32 ringSize = *(UInt32 *)(accel + 0xba0); UInt32 ptrBase = *(UInt32 *)(accel + 0x90c); UInt32 ptrOff = *(UInt32 *)(accel + 0x910);
+        IOLog("VRAMPeek ring: mem=0x%08x size=0x%x index(+0x914)=0x%x cursor(+0x918)=0x%x ptrBase=0x%08x ptrOff=0x%x\n", (unsigned)ringMem, (unsigned)ringSize, (unsigned)ringIndex, (unsigned)ringCursor, (unsigned)ptrBase, (unsigned)ptrOff);
+        if (ringMem) {
+            volatile UInt32 *rp = (volatile UInt32 *)ringMem;
+            for (unsigned i = RING_FROM; i < (unsigned)RING_TO; i += 8) {
+                IOLog("VRAMPeek ring[%04x]: %08x %08x %08x %08x %08x %08x %08x %08x\n", i, (unsigned)rp[i], (unsigned)rp[i+1], (unsigned)rp[i+2], (unsigned)rp[i+3], (unsigned)rp[i+4], (unsigned)rp[i+5], (unsigned)rp[i+6], (unsigned)rp[i+7]);
+            }
+        }
+        accelSvc->release(); return KERN_SUCCESS;
+    }
+#endif
     UInt32 dvdCtx = *(UInt32 *)(accel + 0x68);
     IOLog("VRAMPeek: accel=0x%08x dvdCtx(accel+0x68)=0x%08x\n", (unsigned)(UInt32)accel, (unsigned)dvdCtx);
     unsigned chainLen = 0;
