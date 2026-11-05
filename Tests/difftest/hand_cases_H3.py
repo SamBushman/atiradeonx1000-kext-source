@@ -1088,3 +1088,28 @@ def w_dvd_pcb_chain(m, rng):
 
 CASES.append(Case('ATIR500DVDContext::process_command_buffer', w_dvd_pcb_chain, ret='u32', name='process_command_buffer (0x12 composite record with chain entries, #142)', seeds=120, mock=new_mock, ignore_args=REL,
                   limit=400000, plain_words=True))
+
+
+def w_dvd_pcb_bufidx(op):
+    """#219: every texture slot bound (so #144's guard cannot fire) and the record's buffer-index word out of range: stock reads/writes at index * 0x78 + boundSurface, rebuilt ends the stream"""
+    def world(m, rng):
+        from hand_cases_H1 import dvd_world
+        args = dvd_world(op, False)(m, rng)
+        c = args[0]
+        for idx in range(18):
+            if m.r32(c + 0x104 + 4 * idx) == 0:
+                t = m.alloc(0x100); fill_words(m, t, 0x100, rng)
+                hdr = m.alloc(0x40); fill_words(m, hdr, 0x40, rng); m.w32(t + 0x14, hdr)
+                for off in (0x34, 0x38): m.w32(t + off, obj(m, rng, 'ATIR500DVDContext', 0x100))
+                m.w32(t + 4, 0x10000000)
+                m.w32(c + 0x104 + 4 * idx, t)
+        a = m.r32(c + 0xa4) + 0x1c
+        m.w32(a + 4, rng.choice([23, 24, 99, 0x1000, 0x7fffffff, 0xffffffff]))      # word[1] of the first record (the buffer index of 0x3d/0x3e/0x43/0x44)
+        m.w32(a + 8, rng.randrange(0, 18))                                           # word[2]: a valid texture slot
+        return args
+    return world
+
+
+for _op in (0x43, 0x44, 0x3d):
+    CASES.append(Case('ATIR500DVDContext::process_command_buffer', w_dvd_pcb_bufidx(_op), ret='u32', name='process_command_buffer (out-of-range buffer index, opcode 0x%02x, #219)' % _op,
+                      seeds=60, mock=new_mock, ignore_args=REL, limit=300000, plain_words=True))
