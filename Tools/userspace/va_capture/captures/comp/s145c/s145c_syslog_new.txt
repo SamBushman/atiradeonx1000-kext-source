@@ -1,0 +1,24 @@
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/sbin/kextload /tmp/vp.kext
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: start, TARGET_SLOT=16 TARGET_LEN=0x100
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: openDVDCount(accel+0x73c)=1
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: accel+0x80(hwUp)=0x01 accel+0x8bc(ringReady)=0x00000001
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: accel=0x105c6000 dvdCtx(accel+0x68)=0x1117ce00
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: DVD-context list length=1
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: surface(dvdCtx+0xf8)=0x10bb2000
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x00000000 surface+0xb70(generic slot0 ptr)=0x10bb2120
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: apertureBase(surface+0xc10)=0x7051e000
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: surface+0xbf8(pending)=0x107c83fd dvdCtx+0x88(request)=0x20037c02 bit0x20000000=clear
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: bufPtr(surface+slot*4+0xb70)=0x10bb2828
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: raw8(bufPtr+8)=0x08f2e000 pitch=0x300 bpp=0x4 w=720 h=480
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: realAddr = raw8 + apertureBase = 0x7944c000
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0000]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0020]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0040]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0060]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0080]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x00a0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x00c0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x00e0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Nov  5 12:39:44 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: dump done
+Nov  5 12:39:46 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/sbin/kextunload -b com.sambushman.VRAMPeek
+Nov  5 12:39:46 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: stop
