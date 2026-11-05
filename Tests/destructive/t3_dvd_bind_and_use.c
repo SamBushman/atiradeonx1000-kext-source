@@ -97,11 +97,19 @@ static const char *body(dtest_t *t, io_service_t svc) {
 
     /* the real open question: 0x18 with both slots genuinely bound, matching the real emitter's word[1]=slot4, word[2]=slot3(constant) shape */
     r = flush_and_log(t, d, &addr, &size, 0x18, 4, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x18 failed"); goto out; }
-    /* #150/#151: 0x43 and 0x44 through the bound slot (word[1] = buffer record 16, word[2] = bound texture slot 3, word[3] = first field, word[4] = flags 0). Both only emit a register-write record. */
-    r = flush_and_log(t, d, &addr, &size, 0x43, 16, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x43 failed"); goto out; }
-    r = flush_and_log(t, d, &addr, &size, 0x44, 16, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x44 failed"); goto out; }
+    /* #150/#151: the real emitters (VA driver ava_render_convert_frame / _yuv2, part_001.c:3697 and :3838) write word[1] = frame buffer index, word[2] = 0x11 (texture slot 17, bound with opcode 0x19+17 = 0x2a),
+     * word[3] = (frame buffer attached ? 1 : 0), word[4] = a context flags word. Bind a third real buffer into slot 17, then run 0x43 and 0x44 with both word[3] values; each only emits a register-write record. */
+    {   vm_address_t img17 = 0; unsigned id17 = 0xffffffff; int f;
+        T3CALL(t, r, "DVD declare_image(real 64 KiB buffer) #3 (for slot 17)", (vm_allocate(mach_task_self(), &img17, 0x10000, TRUE), memset((void *)img17, 0x40, 0x10000), IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, img17, 0x10000, &id17)));
+        bad += t3_expect(t, "declare_image #3", r, 0); if (r != 0) goto out;
+        r = flush_and_log(t, d, &addr, &size, 0x2a, forced ? id17 : (id17 & 0xfff) >> 6, 0, 0, 0, 0); if (r == 0 && g_rec_unchanged) { bad++; dtest_note(t, "0x2a bind did NOT land: stopping"); goto out; } if (r != 0) { bad++; goto out; }
+        for (f = 0; f < 2; f++) {
+            r = flush_and_log(t, d, &addr, &size, 0x43, 0, 0x11, f, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x43 failed"); goto out; }
+            r = flush_and_log(t, d, &addr, &size, 0x44, 0, 0x11, f, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x44 failed"); goto out; }
+        }
+    }
     if (getenv("NEG_BUFIDX")) {   /* #219 negative check (rebuilt kext only: stock reads kernel memory at index*0x78): an out-of-range buffer index must end the stream, record untouched */
-        r = flush_and_log(t, d, &addr, &size, 0x43, 0x7fffffff, 3, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x43 with buffer index 0x7fffffff failed"); goto out; }
+        r = flush_and_log(t, d, &addr, &size, 0x43, 0x7fffffff, 0x11, 0, 0, 0); if (r != 0) { bad++; dtest_note(t, "0x43 with buffer index 0x7fffffff failed"); goto out; }
         dtest_note(t, "0x43 with out-of-range buffer index: record %s", g_rec_unchanged ? "unchanged (stream ended, as designed)" : "was rewritten (UNEXPECTED)"); if (!g_rec_unchanged) bad++;
     }
 out:
