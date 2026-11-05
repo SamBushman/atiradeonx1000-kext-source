@@ -37,6 +37,11 @@
  * dispatch is meant to be reached when compilation just happened - not a stock-vs-rebuilt
  * divergence (both crash identically, bug-for-bug), so not blocking this issue's
  * differential-testing ask, but worth its own separate investigation. See issue #66.
+ *
+ * RESOLVED (#78, Nov 4 2026): not a driver defect. `a6` is NOT a compile-mode flag, it is a data pointer: in real use (Apple Software Renderer, glBegin/glEnd with an ARB
+ * vertex program; Tests/userspace/diag_swvp_realuse.c) gleVPEmulate calls PPEmulatorBuild, Build calls PPCRuntimeCompilerCompileAV and tail-dispatches into the
+ * fresh JIT code with r9 = a valid pointer (0xa0001fa4 observed under gdb), and the program executes correctly. This harness passes 0 as the missing 7th argument,
+ * so the generated `lfs f0,0(r9)` dereferences NULL. Pass a pointer to a zeroed buffer as the 7th argument to run the JIT path.
  */
 #include <stdio.h>
 #include <stdlib.h>
