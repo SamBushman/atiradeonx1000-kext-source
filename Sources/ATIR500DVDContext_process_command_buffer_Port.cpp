@@ -29,6 +29,15 @@ extern "C" UInt32 GH_OSAddAtomic(...) asm("_OSAddAtomic");
 extern "C" UInt32 GH_OSDecrementAtomic(...) asm("_OSDecrementAtomic");
 
 
+/* Root cause (#144): the context's texture slot table (self+0x104, eighteen pointers, filled by the 0x19..0x24 bind opcodes and by nothing else) is indexed by a
+ * client-chosen record word at nine places below and the entry was used as a VendorTextureBuffer* without being checked. A slot that was never bound (or whose bind
+ * the kernel rejected: the bind path ends the stream silently when the image handle is >= the shared allocator's count or names no texture) is NULL, so
+ * 0x18/0xb/0xd/0x12/0x43/0x44 dereferenced NULL+4 (kernel data abort, DAR 0x4) and an index >= 18 read past the table. The vendor's own bind path and the teardown loop already treat
+ * an empty slot as "nothing there"; a record that names one is a malformed stream and is ended the same way the bind path ends one (endStream). Live: t3_dvd_bind_and_use
+ * (declare_image ids passed as handles, so no bind landed) panicked here on the rebuilt kext; the same record killed the stock kernel in the original #144 runs, whose
+ * panic screen was never read (Tiger sits on a panic until reset, system.log goes silent), which is why it looked like a total lockup rather than a NULL dereference. */
+static const UInt32 kDVDTextureSlotCount = 18;
+
 /* real addr 0x357c0 */
 IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *descriptor) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -276,7 +285,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
               targetPitch = recordCursor[5];
               targetIsTextureFlag = (recordCursor[2] == 0) << 1;
               if (recordCursor[2] == 0) {
-                texture = M<UInt8 *>(self + recordCursor[1] * 4 + 0x104);
+                texture = (recordCursor[1] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[1] * 4 + 0x104) : (UInt8 *)0x0;
+                if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
                 if ((M<SInt32>(texture + 4) != 0) ||
                    (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
                    M<SInt32>(texture + 4) != 0)) {
@@ -401,7 +411,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                 goto endStream;
               }
               if (recordCursor[2] == 0) {
-                texture = M<UInt8 *>(self + recordCursor[1] * 4 + 0x104);
+                texture = (recordCursor[1] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[1] * 4 + 0x104) : (UInt8 *)0x0;
+                if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
                 if ((M<SInt32>(texture + 4) != 0) ||
                    (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
                    M<SInt32>(texture + 4) != 0)) {
@@ -504,7 +515,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                   overlayLeft = M<SInt16>(surfaceInfo + kATIR500Surface_overlayLeft);
                   srcIndexB = recordCursor[0xb];
                   recordWord12 = recordCursor[0xc];
-                  texture = M<UInt8 *>(self + recordCursor[1] * 4 + 0x104);
+                  texture = (recordCursor[1] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[1] * 4 + 0x104) : (UInt8 *)0x0;
+                  if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
                   overlayHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
                   if ((M<SInt32>(texture + 4) != 0) ||
                      (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture))
@@ -544,7 +556,8 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
                     blockByteOffset = blockByteOffset + 4;
                     blocksLeft = blocksLeft + -1;
                   } while (blocksLeft != 0);
-                  texture = M<UInt8 *>(self + recordCursor[5] * 4 + 0x104);
+                  texture = (recordCursor[5] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[5] * 4 + 0x104) : (UInt8 *)0x0;
+                  if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
                   if ((M<SInt32>(texture + 4) != 0) ||
                      (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture))
                      , M<SInt32>(texture + 4) != 0)) {
@@ -1047,7 +1060,8 @@ bindTextureToSlot:
         if (opcode < 0x19000001) {
           if (opcode != 0x17000000) {
             if (opcode == 0x18000000) {
-              texture = M<UInt8 *>(self + recordCursor[1] * 4 + 0x104);
+              texture = (recordCursor[1] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[1] * 4 + 0x104) : (UInt8 *)0x0;
+              if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
               if ((M<SInt32>(texture + 4) != 0) ||
                  (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
                  M<SInt32>(texture + 4) != 0)) {
@@ -1067,7 +1081,8 @@ bindTextureToSlot:
                                M<SInt32>(texture + 0x50) + M<SInt32>(M<SInt32>(self + kIOATIR500DVDContext_accelerator) + 0x8a4))
                          >> 5;
               }
-              texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
+              texture = (recordCursor[2] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[2] * 4 + 0x104) : (UInt8 *)0x0;
+              if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
               if ((M<SInt32>(texture + 4) != 0) ||
                  (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
                  M<SInt32>(texture + 4) != 0)) {
@@ -1615,7 +1630,8 @@ endStream:
             selectFlags = recordCursor[4];
             surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
             bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
-            texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
+            texture = (recordCursor[2] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[2] * 4 + 0x104) : (UInt8 *)0x0;
+            if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
             fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
             selectSecondField = recordCursor[3] != 0;
             if ((selectFlags & 2) == 0) {
@@ -1733,7 +1749,8 @@ joined_r0x000381c4:
               targetPitch = recordCursor[3];
               overlayTop = M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
               overlayBottom = M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom);
-              texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
+              texture = (recordCursor[2] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[2] * 4 + 0x104) : (UInt8 *)0x0;
+              if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
               if ((M<SInt32>(texture + 4) != 0) ||
                  (((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture)),
@@ -1810,7 +1827,8 @@ joined_r0x000381c4:
               selectFlags = recordCursor[4];
               surfaceInfo = M<SInt32>(self + kIOATIR500DVDContext_boundSurface);
               bufferInfo = recordCursor[1] * 0x78 + surfaceInfo;
-              texture = M<UInt8 *>(self + recordCursor[2] * 4 + 0x104);
+              texture = (recordCursor[2] < kDVDTextureSlotCount) ? M<UInt8 *>(self + recordCursor[2] * 4 + 0x104) : (UInt8 *)0x0;
+              if (texture == (UInt8 *)0x0) goto endStream;   /* unbound or out-of-range slot (#144): see the comment at kDVDTextureSlotCount */
               fieldHeight = (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayBottom) - (SInt32)M<SInt16>(surfaceInfo + kATIR500Surface_overlayTop);
               selectSecondField = recordCursor[3] != 0;
               if ((selectFlags & 2) == 0) {
