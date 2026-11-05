@@ -1850,6 +1850,9 @@ int gldValidatePointSize(glContext)
   float viewportExtent;
   float sizeScale;
   undefined2 halfSizeFixed;
+  int pointSizeInt;
+  int smoothMaxHalf;
+  int smoothMinHalf;
   int sizeModeOrWidth;
   uint glContextWord44;
   int glContextWord8;
@@ -1868,14 +1871,38 @@ int gldValidatePointSize(glContext)
   sizeModeOrWidth = gld_isPointAttenuationActive(glContext);
   glContextWord44 = *(uint *)(glContext + 0x44);
   if (((glContextWord44 & 0x60020000) == 0x40000000) && (glContextWord2768 != 0)) {
-    *(short *)(glContext + 0x1ccc) = (short)*(undefined4 *)(glContextWord2768 + 4);
-    *(short *)(glContext + 0x1cce) = (short)*(undefined4 *)(glContextWord2768 + 4);
+    pointSizeInt = (int)(short)*(undefined4 *)(glContextWord2768 + 4);
+    if ((*(float *)(glContext + 0xf4) != 0.0f) || (*(float *)(glContext + 0xf8) != 1.0f)) {
+      /* #132: same clamp for the smooth-point record (half size in 1/c8 pixel units, limits as programmed into 0x1cd0/0x1cd2 below) */
+      smoothMaxHalf = (int)(glContextWord8 * (int)(*(float *)(glContext + 0x104) + FLOAT_001aa0e8)) >> 1;
+      smoothMinHalf = (int)(glContextWord8 * (int)(*(float *)(glContext + 0x100) + FLOAT_001aa0e8)) >> 1;
+      if (pointSizeInt > smoothMaxHalf) {
+        pointSizeInt = smoothMaxHalf;
+      }
+      if (pointSizeInt < smoothMinHalf) {
+        pointSizeInt = smoothMinHalf;
+      }
+    }
+    *(short *)(glContext + 0x1ccc) = (short)pointSizeInt;
+    *(short *)(glContext + 0x1cce) = (short)pointSizeInt;
     *(undefined4 *)(glContext + 0x1cc0) = *(undefined4 *)(glContextWord2768 + 0xc);
     *(undefined4 *)(glContext + 0x1cc8) = *(undefined4 *)(glContextWord2768 + 0x10);
   }
   else {
     if (sizeModeOrWidth == 0) {
-      halfSizeFixed = (undefined2)((uint)(glContextWord8 * *(int *)(glContext + 0xe4)) >> 1);
+      /* #132: the hardware point-size min/max registers (0x1cd0/0x1cd2, set below) do not clamp a size that comes from the size register, so
+       * glPointParameter(GL_POINT_SIZE_MIN/MAX) never reached the rasterizer; clamp the size here. The engine's initial state is MIN 0 / MAX 1
+       * (ctx+0xf4/0xf8) and must keep meaning "unclamped", otherwise every default glPointSize(n>1) would become a 1 pixel point. */
+      pointSizeInt = *(int *)(glContext + 0xe4);
+      if ((*(float *)(glContext + 0xf4) != 0.0f) || (*(float *)(glContext + 0xf8) != 1.0f)) {
+        if (pointSizeInt > *(int *)(glContext + 0x10c)) {
+          pointSizeInt = *(int *)(glContext + 0x10c);
+        }
+        if (pointSizeInt < *(int *)(glContext + 0x108)) {
+          pointSizeInt = *(int *)(glContext + 0x108);
+        }
+      }
+      halfSizeFixed = (undefined2)((uint)(glContextWord8 * pointSizeInt) >> 1);
     }
     else {
       halfSizeFixed = (undefined2)((uint)(int)(glContextWord8 * (int)(*(float *)(glContext + 0xf0) + FLOAT_001aa10c)) >> 1);
