@@ -717,7 +717,7 @@ int Program__dumpConstantRegisters(program, compiler)
         logArg = *(undefined1 **)(constRecord + 0x14c);
         destRegisterId = *(undefined4 *)(constRecord + 0x94);
         registerFileName = "k";
-        Compiler__logf(compiler,"(%d)  %d, regnum = %s[%d]: ",logArg,recordIndex);
+        Compiler__logf(compiler,"(%d)  %d, regnum = %s[%d]: ",logArg,recordIndex,registerFileName,destRegisterId);
         do {
           if (((int)*(char *)(constRecord + 0x15c) >> (loopCounter & 0x3f) & 1U) == 0) break;
           logArg = logScratchBuf;

@@ -680,7 +680,7 @@ int Compiler__compileStages(compiler, compileRequest)
     argR6 = compiler;
     (**(code **)(sourceTable + 0x8c))
               (*(undefined4 **)(compiler + COMP_target),*(undefined4 *)(stageByteOffset + 0x524),
-               *(undefined4 *)(stageByteOffset + 0x4d4));
+               *(undefined4 *)(stageByteOffset + 0x4d4),argR6);
     currentProgramValue = *(int *)(compiler + COMP_currentProgram);
     if (currentProgramValue != 0) {
       Program__dtor_ecfac(currentProgramValue);

@@ -73,8 +73,11 @@ def memdiff(w_s, w_r, rs, rr):
             if u != v and norm('s', u) != norm('r', v) and not (isdata(DS, u) and isdata(DR, v)): out.append(((tag, i), norm('s', u), norm('r', v)))
     return out
 
+# Stack-passed words (args 9+) of the function-table dispatch calls: the number of words each slot reads (0x12e4/0x12ec/... 4, 0x12f4/... 8). Comparing them catches a wrong
+# 9th..16th argument (#201: the ffvp blended-position loops passed glCtx where stock passes the selector-derived register).
+NSTK = {0x12e4: 4, 0x12ec: 4, 0x12f0: 4, 0x1300: 4, 0x1304: 4, 0x1308: 4, 0x130c: 4, 0x1324: 4, 0x1328: 4, 0x12f4: 8, 0x12f8: 8, 0x12fc: 8, 0x132c: 8}
 def normlog(w, rn):
-    return [(c[0], tuple(('poison',) if (x & 0xfffff000) == POISON else norm(w, x) for x in c[1])) for c in rn.log]
+    return [(c[0], tuple(('poison',) if (x & 0xfffff000) == POISON else norm(w, x) for x in list(c[1]) + list(c[2][:NSTK.get(c[0], 0)]))) for c in rn.log]
 
 def logsame(ls, lr):
     if len(ls) != len(lr): return False

@@ -1170,7 +1170,7 @@ int R300VMachineAssembler__logStatistics(this, quiet)
   totalCount = *(int *)(this + 0x5c) + *(int *)(this + 0x58);
   Compiler__logf(*(undefined4 *)(this + 0xc),
                "Assembler : emits %d cf, %d alu -> %d total instruction(s)\n",
-               *(int *)(this + 0x5c),*(int *)(this + 0x58));
+               *(int *)(this + 0x5c),*(int *)(this + 0x58),totalCount);
   Compiler__logf(*(undefined4 *)(this + 0xc),
                "INFO:# of control flow %d, # of exec %d instructions\n",
                *(undefined4 *)(this + 0x5c),*(undefined4 *)(this + 0x58));
@@ -1182,7 +1182,7 @@ int R300VMachineAssembler__logStatistics(this, quiet)
     }
     Compiler__logf(*(undefined4 *)(this + 0xc),
                  "Assembler : of %d candidate alu instruction(s), %d are packed (%%%d)\n",candidateAluCount,
-                 *(int *)(this + 0x74));
+                 *(int *)(this + 0x74),packedPercent);
     return;
   }
   return;

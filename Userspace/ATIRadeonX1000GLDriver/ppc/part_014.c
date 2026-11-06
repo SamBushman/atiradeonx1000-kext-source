@@ -254,6 +254,8 @@ int ffvpEmitBlendedClipPosition(programBuilder, matrixSelectors, matrixCount, im
   int *mvpRegCursor2;
   int *mvpRegCursor;
   int glCtx;
+  int selectorValue;
+  int selectorSrcReg;
   int sourceInputRegB;
   int selectorB;
   int mvpReg;
@@ -479,18 +481,26 @@ loopSetMatrixIndex:
               mvpRegCursor = programBuilder + 0x29;
               do {
                 mvpReg = *mvpRegCursor;
+                selectorValue = *(int *)(matrixSelectors + matrixIndex * 4);
+                selectorSrcReg = 0;
+                if (selectorValue == 0) {
+                  selectorSrcReg = *programBuilder;
+                }
+                else if (selectorValue == 1) {
+                  selectorSrcReg = programBuilder[0x18];
+                }
                 matrixIndex = matrixIndex + 1;
                 selectConstPtr = constBase88 + -0x7d40;
                 negateConstPtr = constBase80 + 0x6b94;
                 src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp0[blendTemp0Reg_IDX],maskPtr,constFileB,mvpReg,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp0[blendTemp0Reg_IDX],maskPtr,constFileB,mvpReg,selectConstPtr,negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp1[blendTemp1Reg_IDX],maskPtr,constFileB,mvpReg + 1,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp1[blendTemp1Reg_IDX],maskPtr,constFileB,mvpReg + 1,selectConstPtr,negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp2[blendTemp2Reg_IDX],maskPtr,constFileB,mvpReg + 2,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp2[blendTemp2Reg_IDX],maskPtr,constFileB,mvpReg + 2,selectConstPtr,negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                 (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                          (programBuilder,dstTempFile,blendTemp3[blendTemp3Reg_IDX],maskPtr,constFileB,mvpReg + 3,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                          (programBuilder,dstTempFile,blendTemp3[blendTemp3Reg_IDX],maskPtr,constFileB,mvpReg + 3,selectConstPtr,negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                 if (matrixCount <= matrixIndex) goto loopCheckWriteDirect;
                 if (matrixIndex == 1) {
                   maskPtr = &swizzleWordsXYXX_001dbd64;
@@ -572,6 +582,14 @@ loopSetMatrixIndex:
         do {
           mvpReg = mvpRegCursor2[0x29];
           tempDstFile = *tempRegCursor;
+          selectorValue = *(int *)(matrixSelectors + matrixIndex * 4);
+          selectorSrcReg = 0;
+          if (selectorValue == 0) {
+            selectorSrcReg = *programBuilder;
+          }
+          else if (selectorValue == 1) {
+            selectorSrcReg = programBuilder[0x18];
+          }
           matrixIndex = matrixIndex + 1;
           mvpRegCursor2 = mvpRegCursor2 + 1;
           tempRegCursor = tempRegCursor + 10;
@@ -580,19 +598,19 @@ loopSetMatrixIndex:
           emit13Src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
           emit13Src1Select = (int)constBase64 + -32128;
           (**(code **)(((unsigned char *)0x000012ec) + glCtx))
-                    (programBuilder,dstTempFileB,tempDstFile,&swizzleWordsYYYY_001dbd24,constFile,mvpReg + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit13Src1File,glCtx,emit13Src1Select,&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFileB,tempDstFile,&swizzleWordsYYYY_001dbd24,constFile,mvpReg + 3,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,emit13Src1File,selectorSrcReg,emit13Src1Select,&zeroWords4_001fa5e8);
           src1FileB = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
           emit14Src1Select = (int)constBase58 + -32096;
           (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                     (programBuilder,dstTempFileB,tempDstFile,&swizzleWordsYYYY_001dbd24,constFile,mvpReg + 2,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8
-                    ,src1FileB,glCtx,emit14Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempDstFile,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                    ,src1FileB,selectorSrcReg,emit14Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempDstFile,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
           emit15Src1Select = (int)constBase5c + -32112;
           (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                     (programBuilder,dstTempFileB,tempDstFile,&swizzleWordsYYYY_001dbd24,constFile,mvpReg + 1,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8
-                    ,src1FileB,glCtx,emit15Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempDstFile,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                    ,src1FileB,selectorSrcReg,emit15Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempDstFile,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
           emit16Src1Select = (int)constBase60 + 27556;
           (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                    (programBuilder,dstTempFileB,tempDstFile,&swizzleWordsYYYY_001dbd24,constFile,mvpReg,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,src1FileB,glCtx,emit16Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempDstFile,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFileB,tempDstFile,&swizzleWordsYYYY_001dbd24,constFile,mvpReg,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8,src1FileB,selectorSrcReg,emit16Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempDstFile,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
         } while (matrixCount != matrixIndex);
         dstFileTable = (undefined4 *)programBuilder[0xfc];
         srcFileTable = (undefined4 *)programBuilder[0xfb];
@@ -702,6 +720,8 @@ int ffvpEmitBlendedEyePosition(programBuilder, matrixSelectors, matrixCount, imp
   int eyePositionRegB;
   int modelviewRegB;
   int glCtx;
+  int selectorValue;
+  int selectorSrcReg;
   int sourceInputRegB;
   int selectorB;
   int allocStatus;
@@ -865,21 +885,29 @@ int ffvpEmitBlendedEyePosition(programBuilder, matrixSelectors, matrixCount, imp
                   modelviewRegCursor = programBuilder + 0x2d;
                   while( true ) {
                     modelviewRegB = *modelviewRegCursor;
+                    selectorValue = *(int *)(matrixSelectors + matrixIndex * 4);
+                    selectorSrcReg = 0;
+                    if (selectorValue == 0) {
+                      selectorSrcReg = *programBuilder;
+                    }
+                    else if (selectorValue == 1) {
+                      selectorSrcReg = programBuilder[0x18];
+                    }
                     matrixIndex = matrixIndex + 1;
                     selectConstPtr = constBase88 + 0x74c4;
                     negateConstPtr = constBase8c + 0x1766;
                     src1File = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
                     (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                              (programBuilder,dstTempFile,tempRegSel,constBase6c + 0x74b4,constFile,modelviewRegB,selectConstPtr,negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                              (programBuilder,dstTempFile,tempRegSel,constBase6c + 0x74b4,constFile,modelviewRegB,selectConstPtr,negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                     (**(code **)(((unsigned char *)0x000012e4) + glCtx))
                               (programBuilder,dstTempFile,tempRegSel,constBase68 + 0x7514,constFile,modelviewRegB + 1,selectConstPtr,
-                               negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                               negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                     (**(code **)(((unsigned char *)0x000012e4) + glCtx))
                               (programBuilder,dstTempFile,tempRegSel,constBase64 + 0x7504,constFile,modelviewRegB + 2,selectConstPtr,
-                               negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                               negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                     (**(code **)(((unsigned char *)0x000012e4) + glCtx))
                               (programBuilder,dstTempFile,tempRegSel,constBase70 + 0x74f4,constFile,modelviewRegB + 3,selectConstPtr,
-                               negateConstPtr,src1File,glCtx,selectConstPtr,negateConstPtr);
+                               negateConstPtr,src1File,selectorSrcReg,selectConstPtr,negateConstPtr);
                     if (matrixCount <= matrixIndex) {
                       fileTable = (undefined4 *)programBuilder[0xfb];
                       goto setSrcTempFileB;
@@ -922,18 +950,26 @@ loopSetMatrixIndex:
                 modelviewRegCursor = programBuilder + 0x2d;
                 do {
                   modelviewReg = *modelviewRegCursor;
+                  selectorValue = *(int *)(matrixSelectors + matrixIndex * 4);
+                  selectorSrcReg = 0;
+                  if (selectorValue == 0) {
+                    selectorSrcReg = *programBuilder;
+                  }
+                  else if (selectorValue == 1) {
+                    selectorSrcReg = programBuilder[0x18];
+                  }
                   matrixIndex = matrixIndex + 1;
                   selectConstPtr2 = constBase88 + 0x74c4;
                   negateConstPtr = constBase8c + 0x1766;
                   src1FileB = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
                   (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                            (programBuilder,dstTempFile,blendTemp0Reg,selectConstPtr,constFile,modelviewReg,selectConstPtr2,negateConstPtr,src1FileB,glCtx,selectConstPtr2,negateConstPtr);
+                            (programBuilder,dstTempFile,blendTemp0Reg,selectConstPtr,constFile,modelviewReg,selectConstPtr2,negateConstPtr,src1FileB,selectorSrcReg,selectConstPtr2,negateConstPtr);
                   (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                            (programBuilder,dstTempFile,blendTemp1Reg,selectConstPtr,constFile,modelviewReg + 1,selectConstPtr2,negateConstPtr,src1FileB,glCtx,selectConstPtr2,negateConstPtr);
+                            (programBuilder,dstTempFile,blendTemp1Reg,selectConstPtr,constFile,modelviewReg + 1,selectConstPtr2,negateConstPtr,src1FileB,selectorSrcReg,selectConstPtr2,negateConstPtr);
                   (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                            (programBuilder,dstTempFile,blendTemp2Reg,selectConstPtr,constFile,modelviewReg + 2,selectConstPtr2,negateConstPtr,src1FileB,glCtx,selectConstPtr2,negateConstPtr);
+                            (programBuilder,dstTempFile,blendTemp2Reg,selectConstPtr,constFile,modelviewReg + 2,selectConstPtr2,negateConstPtr,src1FileB,selectorSrcReg,selectConstPtr2,negateConstPtr);
                   (**(code **)(((unsigned char *)0x000012e4) + glCtx))
-                            (programBuilder,dstTempFile,blendTemp3Reg[0],selectConstPtr,constFile,modelviewReg + 3,selectConstPtr2,negateConstPtr,src1FileB,glCtx,selectConstPtr2,negateConstPtr);
+                            (programBuilder,dstTempFile,blendTemp3Reg[0],selectConstPtr,constFile,modelviewReg + 3,selectConstPtr2,negateConstPtr,src1FileB,selectorSrcReg,selectConstPtr2,negateConstPtr);
                   if (matrixCount <= matrixIndex) {
                     fileTable = (undefined4 *)programBuilder[0xfb];
                     goto setSrcTempFileB2;
@@ -1038,6 +1074,14 @@ setSrcTempFileB2:
                 do {
                   modelviewReg = modelviewRegCursor[0x2d];
                   tempRegCursorValue = *tempReg3Cursor;
+                  selectorValue = *(int *)(matrixSelectors + matrixIndex * 4);
+                  selectorSrcReg = 0;
+                  if (selectorValue == 0) {
+                    selectorSrcReg = *programBuilder;
+                  }
+                  else if (selectorValue == 1) {
+                    selectorSrcReg = programBuilder[0x18];
+                  }
                   matrixIndex = matrixIndex + 1;
                   modelviewRegCursor = modelviewRegCursor + 1;
                   tempReg3Cursor = tempReg3Cursor + 10;
@@ -1045,20 +1089,20 @@ setSrcTempFileB2:
                   emit15Src1Select = (int)constBase80 + 29828;
                   (**(code **)(((unsigned char *)0x000012ec) + glCtx))
                             (programBuilder,dstTempFileB,tempRegCursorValue,&swizzleWordsYYYY_001dbd24,constFile,modelviewReg + 3,&swizzleWordsXYZW_001dbd14,
-                             &zeroWords4_001fa5e8,emit15Src1File,glCtx,emit15Src1Select,&zeroWords4_001fa5e8);
+                             &zeroWords4_001fa5e8,emit15Src1File,selectorSrcReg,emit15Src1Select,&zeroWords4_001fa5e8);
                   src1FileC = *(int *)((int)*(int *)((int)programBuilder + 1004) + 4);
                   emit16Src1Select = (int)constBase74 + 29860;
                   (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                             (programBuilder,dstTempFileB,tempRegCursorValue,&swizzleWordsYYYY_001dbd24,constFile,modelviewReg + 2,&swizzleWordsXYZW_001dbd14,
-                             &zeroWords4_001fa5e8,src1FileC,glCtx,emit16Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempRegCursorValue,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                             &zeroWords4_001fa5e8,src1FileC,selectorSrcReg,emit16Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempRegCursorValue,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                   emit17Src1Select = (int)constBase78 + 29844;
                   (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                             (programBuilder,dstTempFileB,tempRegCursorValue,&swizzleWordsYYYY_001dbd24,constFile,modelviewReg + 1,&swizzleWordsXYZW_001dbd14,
-                             &zeroWords4_001fa5e8,src1FileC,glCtx,emit17Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempRegCursorValue,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                             &zeroWords4_001fa5e8,src1FileC,selectorSrcReg,emit17Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempRegCursorValue,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                   emit18Src1Select = (int)constBase7c + 23976;
                   (**(code **)(((unsigned char *)0x000012f4) + glCtx))
                             (programBuilder,dstTempFileB,tempRegCursorValue,&swizzleWordsYYYY_001dbd24,constFile,modelviewReg,&swizzleWordsXYZW_001dbd14,
-                             &zeroWords4_001fa5e8,src1FileC,glCtx,emit18Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempRegCursorValue,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
+                             &zeroWords4_001fa5e8,src1FileC,selectorSrcReg,emit18Src1Select,&zeroWords4_001fa5e8,dstTempFileB,tempRegCursorValue,&swizzleWordsXYZW_001dbd14,&zeroWords4_001fa5e8);
                 } while (matrixCount != matrixIndex);
                 fileTable = (undefined4 *)programBuilder[0xfb];
               }
