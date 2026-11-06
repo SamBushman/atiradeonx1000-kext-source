@@ -292,6 +292,8 @@ for fn in sorted(funcs, key=lambda n: funcs[n]):
         if k: rg[k].append(x)
     for k, lst in sg.items():
         rx_all = list(rg.get(k, [])); used = set()
+        if not rx_all and k[0] == 'x':       # the rebuilt code reaches the same table slot through an address it computed (offset unknown to the decoder): match against those
+            rx_all = list(rg.get(('x', None), [])) + list(rg.get(('v', k[1]), []))
         def sset(sx):
             return [r_ for r_ in sorted(sx[5]) if not regs_unset_on_some_path(sins, sa, sx[0], r_, nparams_of.get(fn, 4))]
         def unset_of(rsx, regs): return {r_: regs_unset_on_some_path(rins, ra, rsx[0], r_, nparams_of.get(fn, 4)) for r_ in regs}
@@ -308,6 +310,10 @@ for fn in sorted(funcs, key=lambda n: funcs[n]):
             else: pend.append((n, sx, regs))
         for n, sx, regs in pend:
             cand = [(j, rsx) for j, rsx in enumerate(rx_all) if j not in used]
+            # the rebuilt code folds several stock copies of a call (unrolled / tail-duplicated blocks) into one shared call: match the stock copy against
+            # any rebuilt call of the same callee / slot instead of giving up (rows say "shared")
+            shared = ' (shared)' if not cand and rx_all else ''
+            if shared: cand = list(enumerate(rx_all))
             if not cand:
                 rowsout.append(('MISSING', fn, k, n, '', 'stock call %x of %s has no unused counterpart (rebuilt makes %d)' % (sx[0], k, len(rx_all)))); cnt['MISSING'] += 1; continue
             j, rsx = min(cand, key=lambda c: sum(1 for v in unset_of(c[1], regs).values() if v)); used.add(j)
@@ -318,16 +324,16 @@ for fn in sorted(funcs, key=lambda n: funcs[n]):
                 else: cands = []
                 if not cands:
                     cnt['UNKNOWN'] += 1
-                    rowsout.append(('UNKNOWN', fn, k, n, 'r%d' % reg, 'stock %x rebuilt %x: no callee set (%s)' % (sx[0], rsx[0], bad[:2]))); continue
+                    rowsout.append(('UNKNOWN', fn, k, n, 'r%d' % reg, 'stock %x rebuilt %x: no callee set (%s)%s' % (sx[0], rsx[0], bad[:2], shared))); continue
                 hits = []
                 for c in cands:
                     r = entry_reads(c, reg)
                     if r: hits.append('%s: %s %s' % (by_addr.get(c, hex(c)), r[0], r[1]))
                 if hits:
                     cnt['CHECK'] += 1
-                    rowsout.append(('CHECK', fn, k, n, 'r%d' % reg, 'stock %x rebuilt %x unset on %s | %d/%d callees read it: %s' % (sx[0], rsx[0], ','.join(sorted(set(bad))[:3]), len(hits), len(cands), '; '.join(hits[:3]))))
+                    rowsout.append(('CHECK', fn, k, n, 'r%d' % reg, 'stock %x rebuilt %x unset on %s | %d/%d callees read it: %s%s' % (sx[0], rsx[0], ','.join(sorted(set(bad))[:3]), len(hits), len(cands), '; '.join(hits[:3]), shared)))
                 else:
                     cnt['BENIGN'] += 1
-                    rowsout.append(('BENIGN', fn, k, n, 'r%d' % reg, 'stock %x rebuilt %x: none of %d callees reads it' % (sx[0], rsx[0], len(cands))))
+                    rowsout.append(('BENIGN', fn, k, n, 'r%d' % reg, 'stock %x rebuilt %x: none of %d callees reads it%s' % (sx[0], rsx[0], len(cands), shared)))
 for r in rowsout: print('\t'.join(str(x) for x in r))
 print('SUMMARY', dict(cnt), file=sys.stderr)
