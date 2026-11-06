@@ -2508,7 +2508,30 @@ slotSelectedOp32:
                   surfaceObject = M<UInt8 *>(self + kIOATIR500GLContext_boundSurface);
                   selectedBuffer = (UInt8 *)(self + kATIR500GLContext_textureDepthBuffer);
                 }
-                emittedWords = ((ATIR500Surface *)(surfaceObject))->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(selectedBuffer),0,(UInt32 *)(recordCursor + -flushRegionWords));
+                /* #214: for a compressed depth buffer decompress_and_flush_depth_buffer() builds a full 3D decompress blit (load_3d_blit) in the
+                   gap the client reserved in front of this record - i.e. a kernel-issued 3D draw in the middle of the client's own IB, straight after
+                   whatever depth-writing draws precede it.  Doom 3's stencil-shadow pass (depth fill, glCopyTexSubImage2D(depth), shadow draw, one
+                   command buffer) wedges the CP on that sequence on stock hardware+driver; any IB boundary before the blit prevents it
+                   (Tests/userspace/gl_doom_replay_probe.c bisect).  Submit everything before the gap as its own IB first, so the blit starts a fresh IB.
+                   submit_buffer() pads the submitted count to a multiple of 8 by writing 0x80000000 just past the end, i.e. into the first words of the
+                   gap, so the blit is emitted after those pad words (wordIndex) and the gap's NOP fill still covers the rest. */
+                emittedWords = 0;
+                if (M<UInt8>(selectedBuffer + 0x34) != 0 && pendingWords >= flushRegionWords && pendingWords - flushRegionWords != 0) {
+                  UInt32 segWords214 = pendingWords - flushRegionWords;
+                  UInt32 padWords214 = (0 - segWords214) & 7;
+                  if (padWords214 + 0x100 <= flushRegionWords) {
+                    M<UInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704) =
+                         segWords214 * 4 + M<SInt32>(M<SInt32>(self + kIOATIR500GLContext_accelerator) + 0x704);
+                    submitStamp = ((ATIRadeonX1000 *)(M<UInt8 *>(self + kIOATIR500GLContext_accelerator)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + kIOATIR500GLContext_commandBufferHeader) + 0x20)
+                                        ,streamOffset + M<SInt32>(self + kIOATIR500GLContext_commandBufferGartOffset) + 0x20,segWords214);
+                    M<UInt32>(self + kIOATIR500GLContext_commandBufferStamp) = submitStamp;
+                    reservedWords = 0;
+                    streamOffset = (segWords214 + padWords214) * 4 + streamOffset;
+                    pendingWords = pendingWords - (segWords214 + padWords214);
+                    emittedWords = padWords214;
+                  }
+                }
+                emittedWords = ((ATIR500Surface *)(surfaceObject))->decompress_and_flush_depth_buffer((ATIR500SurfaceBuffer *)(selectedBuffer),emittedWords,(UInt32 *)(recordCursor + -flushRegionWords));
                 nopHeader = 0x80000000;
                 if (flushRegionWords - emittedWords != 1) {
                   nopHeader = ((flushRegionWords - emittedWords) + -2) * 0x10000 | 0xc0001000;
