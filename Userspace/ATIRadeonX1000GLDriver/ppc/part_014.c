@@ -3699,7 +3699,7 @@ int ffvpEmitPointSizeAttenuation(programBuilder, sizeSource, useDistanceSquared)
   undefined1 tempA [4];
   undefined4 tempAReg;
   undefined1 tempAMask [16];
-  undefined4 tempASelect[4];
+  /* #216: tempASelect is the swizzle half of the tempA operand that ffvpAllocTempRegister fills (stock: tempA + 24, frame slots local_68..local_5c); a separate local array never received the allocator's words, so the RSQ source swizzle was uninitialised stack */
   undefined4 pointSizeOutFile;
   int deadSrcTempFile;
   int deadEmitFnSlot;
@@ -3847,7 +3847,7 @@ joined_r0x00099f10:
                 (programBuilder,dstTempFile,tempAReg,tempAMask,constFile,sizeParamReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,emit4Src1File,emit4Src1Index,emit4Src1Select,&zeroWords4_001fa5e8);
     }
     (**(code **)(((unsigned char *)0x00001318) + glCtx))
-              (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&tempASelect[0],&zeroWords4_001fa5e8);
+              (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,(undefined4 *)(tempA + 24),&zeroWords4_001fa5e8);
   }
   attenParamReg = tempAReg;
   switch(sizeSource) {
@@ -3855,12 +3855,12 @@ joined_r0x00099f10:
     clampMinMax = false;
     selectArrD[0] = swizzleWordsZZZZ_001dbcf4;
     selectArrD[1] = swizzleWordsZZZZ_001dbcf4_lane1_001dbcf8;
-    selectArrA[1] = tempASelect[1];
+    selectArrA[1] = ((undefined4 *)(tempA + 24))[1];
     selectArrD[2] = swizzleWordsZZZZ_001dbcf4_lane2_001dbcfc;
     selectArrD[3] = swizzleWordsZZZZ_001dbcf4_lane3_001dbd00;
-    selectArrA[0] = tempASelect[0];
-    selectArrA[3] = tempASelect[3];
-    selectArrA[2] = tempASelect[2];
+    selectArrA[0] = ((undefined4 *)(tempA + 24))[0];
+    selectArrA[3] = ((undefined4 *)(tempA + 24))[3];
+    selectArrA[2] = ((undefined4 *)(tempA + 24))[2];
     a4_00 = srcTempFile;
     sizeSrcReg = tempBReg;
     break;
@@ -3869,18 +3869,18 @@ joined_r0x00099f10:
     clampMinMax = false;
     selectArrD[0] = zeroWords4_001fa5f8;
     selectArrD[1] = zeroWords4_001fa5f8_lane1_001fa5fc;
-    selectArrA[1] = tempASelect[1];
+    selectArrA[1] = ((undefined4 *)(tempA + 24))[1];
     selectArrD[2] = zeroWords4_001fa5f8_lane2_001fa600;
     selectArrD[3] = zeroWords4_001fa5f8_lane3_001fa604;
-    selectArrA[0] = tempASelect[0];
-    selectArrA[3] = tempASelect[3];
-    selectArrA[2] = tempASelect[2];
+    selectArrA[0] = ((undefined4 *)(tempA + 24))[0];
+    selectArrA[3] = ((undefined4 *)(tempA + 24))[3];
+    selectArrA[2] = ((undefined4 *)(tempA + 24))[2];
     break;
   case 2:
-    selectArrD[1] = tempASelect[1];
-    selectArrD[0] = tempASelect[0];
-    selectArrD[3] = tempASelect[3];
-    selectArrD[2] = tempASelect[2];
+    selectArrD[1] = ((undefined4 *)(tempA + 24))[1];
+    selectArrD[0] = ((undefined4 *)(tempA + 24))[0];
+    selectArrD[3] = ((undefined4 *)(tempA + 24))[3];
+    selectArrD[2] = ((undefined4 *)(tempA + 24))[2];
     goto setClampMinMax;
   case 3:
     tempAReg = *(undefined4 *)(programBuilder + 0x4c);
@@ -7426,8 +7426,9 @@ void programFillStateConstants(int ctx,int program,undefined4 unusedArg3,undefin
           intToDoubleHiA = 0x43300000;
           intToDoubleLoA = *(uint *)(ctx + 0x108) ^ 0x80000000;
           intToDoubleLoB = *(uint *)(ctx + 0x10c) ^ 0x80000000;
-          stateVecX = (CONCAT44(0x43300000,intToDoubleLoA) - DOUBLE_001aa1e0);
-          stateVecY = (CONCAT44(0x43300000,intToDoubleLoB) - DOUBLE_001aa1e0);
+          /* #216: the int -> double magic-number idiom (stock: fsub; frsp), written with the (double)CONCAT44 form that link_corpus rewrites to GH_BITS_D; without the cast gcc converted the 64-bit integer numerically (~4.5e18) and the point min/max constant saturated every attenuated size at MAX */
+          stateVecX = (float)((double)CONCAT44(0x43300000,intToDoubleLoA) - DOUBLE_001aa1e0);
+          stateVecY = (float)((double)CONCAT44(0x43300000,intToDoubleLoB) - DOUBLE_001aa1e0);
         }
         else {
           stateVecX = *(float *)(ctx + 0x100);

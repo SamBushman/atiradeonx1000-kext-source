@@ -5338,7 +5338,7 @@ int ffvpEmitSphereMapCoord(programBuilder)
   undefined1 tempA [4];
   undefined4 tempAReg;
   undefined1 tempAMask [16];
-  undefined4 tempASelect[3];
+  /* #216: tempASelect is the swizzle half of the tempA operand that ffvpAllocTempRegister fills (stock: tempA + 24 = local_90..local_84); as a separate local array it never received the allocator's words */
   undefined1 tempB [4];
   undefined4 tempBReg;
   undefined1 tempBMask [16];
@@ -5374,16 +5374,16 @@ int ffvpEmitSphereMapCoord(programBuilder)
           selectRowA[0] = 4;
           selectRowA[1] = 4;
           selectRowA[3] = 4;
-          selectRowA[2] = tempASelect[2];
+          selectRowA[2] = ((undefined4 *)(tempA + 24))[2];
           emit2Src1Index = *(int *)((int)programBuilder + 1216);
           emit2Src1Select = &swizzleWordsXYZ4_001dbd74;
           emit2Src2Select = &selectRowA[0];
           (**(code **)(((unsigned char *)0x000012f4) + glCtx))
-                    (programBuilder,dstTempFile,sphereMapReg,&swizzleWordsYYYX_001dbd84,srcTempFile,tempAReg,&tempASelect[0],&zeroWords4_001fa5e8,srcTempFile,emit2Src1Index,emit2Src1Select,&zeroWords4_001fa5e8,srcTempFile,tempAReg,emit2Src2Select,&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFile,sphereMapReg,&swizzleWordsYYYX_001dbd84,srcTempFile,tempAReg,(undefined4 *)(tempA + 24),&zeroWords4_001fa5e8,srcTempFile,emit2Src1Index,emit2Src1Select,&zeroWords4_001fa5e8,srcTempFile,tempAReg,emit2Src2Select,&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x000012e4) + glCtx))
                     (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,sphereMapReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8,srcTempFile,sphereMapReg,&swizzleWordsXYZ4_001dbd74,&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x00001318) + glCtx))
-                    (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,&tempASelect[0],&zeroWords4_001fa5e8);
+                    (programBuilder,dstTempFile,tempAReg,tempAMask,srcTempFile,tempAReg,(undefined4 *)(tempA + 24),&zeroWords4_001fa5e8);
           (**(code **)(((unsigned char *)0x0000131c) + glCtx))
                     (programBuilder,dstTempFile,tempBReg,tempBMask,srcTempFile,tempBReg,&swizzleWords5555_001dbdb4,&onesWords4_001dbd94);
           selectRowC[0] = *(undefined4 *)(programBuilder + 0x4d4);
@@ -5391,8 +5391,8 @@ int ffvpEmitSphereMapCoord(programBuilder)
           selectRowB[2] = 4;
           selectRowA[2] = 4;
           selectRowA[3] = 4;
-          selectRowA[0] = tempASelect[0];
-          selectRowA[1] = tempASelect[1];
+          selectRowA[0] = ((undefined4 *)(tempA + 24))[0];
+          selectRowA[1] = ((undefined4 *)(tempA + 24))[1];
           selectRowC[2] = 4;
           selectRowC[3] = 4;
           selectRowB[0] = tempBSelect0;

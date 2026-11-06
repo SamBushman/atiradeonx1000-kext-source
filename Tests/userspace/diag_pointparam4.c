@@ -1,4 +1,4 @@
-/* diag_pointparam4.c - #132 follow-up (new issue): distance-attenuated point size (vertex-program path) sweep over eye distance and a/b/c; every width should follow size*1/sqrt(a+b*d+c*d*d) but the stock and rebuilt driver both saturate at POINT_SIZE_MAX. */
+/* diag_pointparam4.c - #132 follow-up (new issue): distance-attenuated point size (vertex-program path) sweep over eye distance and a/b/c; every width should follow size*1/sqrt(a+b*d+c*d*d) and the STOCK driver does. The rebuilt driver saturated at POINT_SIZE_MAX until #216 was fixed (min/max VP constant built numerically; tempASelect operand not aliased to the allocator's struct). Run against both: widths must match (+-1 px). */
 #include <stdio.h>
 #include <math.h>
 #include <OpenGL/OpenGL.h>
@@ -33,7 +33,7 @@ int main(void) {
       for (j = 0; j < 3; j++) { glLoadIdentity(); glTranslatef(0, 0, zs[j]);
         for (i = 0; i < 5; i++) { char lab[64]; sprintf(lab, "atten sweep eyez=%g (d=%g) expect %.1f", zs[j], -zs[j], 10.0f / sqrtf(1.0f + bs[i] * -zs[j])); run(lab, 0, 64, 1, bs[i], 0, 0, 10); } }
       glLoadIdentity(); glTranslatef(0, 0, -0.5f);
-      run("c term: a=1,b=0,c=4 d=0.5 expect 5.0", 0, 64, 1, 0, 4, 0, 10);
+      run("c term: a=1,b=0,c=4 d=0.5 expect 7.1", 0, 64, 1, 0, 4, 0, 10);
       run("a term: a=4,b=0.0001,c=0 expect 5.0", 0, 64, 4, 0.0001f, 0, 0, 10);
       run("MIN only, atten (1,1,0) size 1 min 6 max 64 expect 6", 6, 64, 1, 1, 0, 0, 1);
       run("MIN only, atten (1,1,0) size 10 min 6 max 64 expect 8", 6, 64, 1, 1, 0, 0, 10); }
