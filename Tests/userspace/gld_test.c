@@ -4,6 +4,7 @@
 #include <dlfcn.h>
 int main(int argc, char **argv) {
     setvbuf(stdout, NULL, _IONBF, 0);
+    if (argc < 4) { fprintf(stderr, "usage: gld_test STOCK_BUNDLE REBUILT_BUNDLE EXPORTS_LIST   (exports.txt of the link tree: one _symbol per line)\n"); return 2; }
     void *a = dlopen(argv[1], RTLD_NOW | RTLD_LOCAL), *b = dlopen(argv[2], RTLD_NOW | RTLD_LOCAL);
     printf("stock dlopen %s, rebuilt dlopen %s\n", a ? "ok" : dlerror(), b ? "ok" : dlerror());
     if (!a || !b) return 1;
@@ -14,6 +15,7 @@ int main(int argc, char **argv) {
         if (pa && pb) both++; else { bad++; if (bad < 10) printf("  %s: stock=%p rebuilt=%p\n", line, pa, pb); }
     }
     printf("exports: %d listed, %d resolve in both, %d not\n", n, both, bad);
+    if (n == 0) { printf("RESULT: FAIL (the exports list %s is empty or unreadable: nothing was compared)\n", argv[3]); return 1; }
     printf("RESULT: %s\n", bad == 0 ? "PASS" : "FAIL");
-    return 0;
+    return bad != 0;
 }

@@ -1478,6 +1478,11 @@ if gl_protos is not None:
         for n, s in unpatched:
             w.write('NOT PATCHED %s: %s\n' % (n, s))
     print('gl stubs: %d patched, %d not patched (gl_stub_patch.txt)' % (len(patched), len(unpatched)))
+    # a stub whose dispatch call the patcher cannot find keeps the decompile's argument order and forwards float arguments as doubles (rebuilt libGL crashed in glClearColor when the
+    # real-name rewrite made the matcher miss all 888): that must never be silent
+    _lost = [n for n, st in unpatched if st in ('no dispatch call', 'unrecognised layout')]
+    if _lost:
+        sys.exit('link_corpus: %d GL dispatch stubs could not be patched (%s ...): see gl_stub_patch.txt' % (len(_lost), ', '.join(_lost[:5])))
 
 # a data name only the dropped (toolchain) functions used is not needed
 _out_ids = set()

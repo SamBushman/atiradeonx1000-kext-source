@@ -48,7 +48,9 @@ def split_params(params):
     return out
 
 
-CALL = re.compile(r'\(\*\(code \*\)puVar\d+\[(0x[0-9a-f]+|\d+)\]\)\(')
+# the dispatch call `(*(code *)<ctx>[slot])(...)`: <ctx> is Ghidra's puVarN, or the real name the corpus now carries (glContext; since 9c944159 the link restores the real names BEFORE this
+# patch runs, and a regex that only knew puVarN patched 0 of 888 stubs, so every float-argument stub forwarded its arguments as doubles again: rebuilt libGL crashed in glClearColor)
+CALL = re.compile(r'\(\*\(code \*\)[A-Za-z_]\w*\[(0x[0-9a-f]+|\d+)\]\)\(')
 
 TEMPLATE = """{
   /* dispatch stub, template derived from the stock machine code (index %(idx)s = ctx offset 0x%(off)x): current context, refreshed from the thread's
