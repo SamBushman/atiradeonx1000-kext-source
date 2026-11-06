@@ -10,6 +10,7 @@
  * dlopen() - a dlopen() interpose here sees nothing, confirmed by an empty redirect log while the driver
  * still loaded.
  *
+ * (GLD_REDIRECT_MAP="from=to,from=to" redirects several bundles; see my_NSCreate.)
  * GLD_REDIRECT_FROM / GLD_REDIRECT_TO name the two paths (substring match on FROM, so both the bundle's
  * .bundle path and its Contents/MacOS/<name> executable path are covered without listing both).
  *
@@ -40,7 +41,25 @@ static NSObjectFileImageReturnCode my_NSCreate(const char *pathName, NSObjectFil
         g_to = getenv("GLD_REDIRECT_TO");
     }
     const char *use = pathName;
-    if (pathName && g_from && g_to && strstr(pathName, g_from)) {
+    /* GLD_REDIRECT_MAP="from1=to1,from2=to2,...": several bundles in one process (GLDriver, GA, VADriver: WindowServer / the video stack load more than one);
+     * the first pair whose FROM is a substring of the path wins.  GLD_REDIRECT_FROM / GLD_REDIRECT_TO stay as the single-pair form. */
+    static char mapbuf[4096]; static int mapread = 0;
+    if (!mapread) { const char *m = getenv("GLD_REDIRECT_MAP"); if (m) { strncpy(mapbuf, m, sizeof(mapbuf) - 1); } mapread = 1; }
+    if (pathName && mapbuf[0]) {
+        char tmp[4096]; strcpy(tmp, mapbuf);
+        char *save = NULL, *pair;
+        for (pair = strtok_r(tmp, ",", &save); pair; pair = strtok_r(NULL, ",", &save)) {
+            char *eq = strchr(pair, '=');
+            if (!eq) continue;
+            *eq = 0;
+            if (strstr(pathName, pair)) {
+                use = strdup(eq + 1);
+                fprintf(g_log, "gld_redirect: NSCreateObjectFileImageFromFile(\"%s\") -> redirected to \"%s\"\n", pathName, use);
+                break;
+            }
+        }
+        if (use == pathName) fprintf(g_log, "gld_redirect: NSCreateObjectFileImageFromFile(\"%s\") passthrough\n", pathName);
+    } else if (pathName && g_from && g_to && strstr(pathName, g_from)) {
         use = g_to;
         fprintf(g_log, "gld_redirect: NSCreateObjectFileImageFromFile(\"%s\") -> redirected to \"%s\"\n", pathName, use);
     } else if (pathName) {
