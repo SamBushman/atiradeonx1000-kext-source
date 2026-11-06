@@ -1,8 +1,3 @@
-local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_4	unusedArg4	INFERRED	unused argument
-local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_5	unusedArg5	INFERRED	unused argument
-local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_6	unusedArg6	INFERRED	unused argument
-local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_7	unusedArg7	INFERRED	unused argument
-local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	param_8	unusedArg8	INFERRED	unused argument
 local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	local_28	immediateHigh	INFERRED	out of FudoPs__encodeImmediateFloat: high field, shifted left 3 into the immediate (adjacent to immediateLow, whole variables)
 local	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	local_24	immediateLow	INFERRED	out of FudoPs__encodeImmediateFloat: low 3 bits of the immediate
 use	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	iVar3	operandCursor	INFERRED	node + 0x18*lane: walks the operand slots looking for a float literal	^\s*iVar3\ =\ param_2;$	+1

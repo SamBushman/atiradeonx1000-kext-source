@@ -7,4 +7,3 @@ data	UNK_001b2a7c	laneWord00010303_001b2a7c	INFERRED	4-byte select word 00010303
 data	UNK_001af9d8	laneWord01010100_001af9d8	INFERRED	4-byte select word 01010100 loaded as defaultSelect (part_030 1055); value-named; r12
 data	UNK_001aa7f8	psnSlotMaskHighWord_001aa7f8	INFERRED	constant 0x200 loaded as slotMaskHigh in the psn decoder (part_017 8297); r12
 data	UNK_001aa7f4	psnSlotMaskLowWord_001aa7f4	INFERRED	constant 0x100 loaded as slotMaskLowB in the psn decoder (part_017 8298); r12
-data	UNK_001ba4e4	ehFrameLabel_unreferencedByCorpus_001ba4e4	INFERRED	label inside __eh_frame with no reference from any corpus code (symbol_map: referenced only by dropped toolchain code); r12

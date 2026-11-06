@@ -129,7 +129,6 @@ use	psnDecEncodeHwWords	iVar5	texWordPtr	INFERRED	texture instruction word pair 
 use	psnDecEncodeHwWords	iVar5	texWordPtrB	INFERRED	texture instruction word pair at programImage + record*4 (second half)	^\s*iVar5\ =\ iVar6\ \+\ param_2;$	+2
 use	psnDecEncodeHwWords	iVar5	texWordPtrB	INFERRED	texture instruction word pair at programImage + record*4 (second half)	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe03f01f;$	+1
 use	psnDecEncodeHwWords	iVar5	texWordPtrB	INFERRED	texture instruction word pair at programImage + record*4 (second half)	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 4\)\ =\ uVar7\ \|\ uVar9\ \|\ uVar16\ \&\ 0xfe00f01f;$	+1
-use	psnDecEncodeHwWords	iVar5	alphaWritten	INFERRED	1 when the alpha part of the entry writes anything	^\s*if\ \(\(\*\(short\ \*\)\(iVar8\ \+\ 0x42\)\ !=\ 0\ \|\|\ \*\(short\ \*\)\(iVar8\ \+\ 0x46\)\ !=\ 0\)\ \|\|$	+3
 use	psnDecEncodeHwWords	iVar5	alphaWritten	INFERRED	1 when the alpha part of the entry writes anything	^\s*uVar9\ =\ iVar5\ <<\ 4;$	+1
 use	psnDecEncodeHwWords	iVar5	slotCursor	INFERRED	entry advanced 2 bytes per slot (rgb register fields)	^\s*iVar5\ =\ iVar8;$	+1
 use	psnDecEncodeHwWords	iVar5	slotCursor	INFERRED	entry advanced 2 bytes per slot (rgb register fields)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 0x80\);$	+1

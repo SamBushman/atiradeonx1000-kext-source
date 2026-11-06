@@ -4,21 +4,17 @@ local	recordProgramAllocateAndEmit	param_3	scratchArg3	INFERRED	incoming argumen
 local	recordProgramAllocateAndEmit	param_4	scratchArg4	INFERRED	incoming argument register reused as scratch for call arguments
 local	recordProgramAllocateAndEmit	param_5	scratchArg5	INFERRED	incoming argument register reused as scratch for call arguments
 local	recordProgramAllocateAndEmit	param_6	scratchArg6	INFERRED	incoming argument register reused as scratch for call arguments
-local	recordProgramAllocateAndEmit	param_7	unusedArg7	INFERRED	never read
-local	recordProgramAllocateAndEmit	param_8	unusedArg8	INFERRED	never read
 use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*pcVar39\ =\ pcVar21;$	+1
 use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*if\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0x4\)\ \{$	+2
 use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*else\ if\ \(\(pcVar15\ !=\ \(code\ \*\)0x0\)\ \&\&\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0xb\)\)\ \{$	+2
 use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*pcVar39\ =\ pcVar39\ \+\ 0x10;$	+1
 use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*pcVar39\ =\ pcVar21;$@2	+1
-use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e10\)\(pcVar39,uVar26,param_3,param_4,param_5,param_6,pcVar15\);$	+1
 use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*if\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0x4\)\ \{$@2	+2
 use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*else\ if\ \(\(\(uVar4\ >>\ 6\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0xb\)\)\ \{$	+2
 use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*pcVar39\ =\ pcVar39\ \+\ 0x10;$@2	+1
 use	recordProgramAllocateAndEmit	pcVar39	chainNode	INFERRED	first node of the chain at alloc+0x10450	^\s*pcVar39\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x10450\);$	+1
 use	recordProgramAllocateAndEmit	pcVar39	chainNode	INFERRED	first node of the chain at alloc+0x10450	^\s*pcVar41\ =\ pcVar39\ \+\ 0x10;$	+3
 use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*pcVar39\ =\ pcVar37;$	+1
-use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077560\)\(param_1,\*\(undefined4\ \*\)pcVar39,0,param_4,param_5,param_6,pcVar15\);$	+1
 use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*if\ \(\(pcVar15\ ==\ \(code\ \*\)0x0\)\ \|\|\ \(pcVar39\ ==\ pcVar15\)\)\ break;$	+1
 use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*for\ \(pcVar41\ =\ \*\(code\ \*\*\)\(pcVar15\ \+\ 0x10\);\ pcVar39\ !=\ pcVar41;$	+2
 use	recordProgramAllocateAndEmit	pcVar39	liveListPtr	INFERRED	alloc+0x24870: live record list cursor	^\s*pcVar39\ =\ 0x00024870\ \+\ param_1;$	+1
@@ -141,4 +137,3 @@ use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar
 use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077860\)\(param_1,pcVar21,pcVar39,param_4\);$	+3
 use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077860\)\(param_1,pcVar21,pcVar39,param_4\);$@2	+3
 use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e70\)\(param_1,0\);$	+3
-use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e10\)\(pcVar39,uVar26,param_3,param_4,param_5,param_6,pcVar15\);$	+3

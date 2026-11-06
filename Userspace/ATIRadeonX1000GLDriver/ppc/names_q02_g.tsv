@@ -112,7 +112,6 @@ use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1
 use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*if\ \(uVar18\ ==\ 0x11\)\ \{$	+1
 use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*uVar18\ =\ iVar27\ \*\ 4\ \+\ \*piVar21;$	+1
 use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*\*\(undefined4\ \*\)\(iVar27\ \+\ uVar18\)\ =\ 0x4b;$	+1
-use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_00046e90\)\(param_1,in_r4,in_r5,in_r6,puVar15,iVar12,uVar18,puVar19\);$	+1
 use	fragmentProgramToIL	uVar9	outputCount	INFERRED	program[0xc] (+0x30): number of OUTPUT entries	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x30\);$	+1
 use	fragmentProgramToIL	uVar9	outputCount	INFERRED	program[0xc] (+0x30): number of OUTPUT entries	^\s*if\ \(0\ <\ \(int\)uVar9\)\ \{$@2	+1
 use	fragmentProgramToIL	uVar9	outputCount	INFERRED	program[0xc] (+0x30): number of OUTPUT entries	^\s*\}\ while\ \(uVar9\ !=\ uVar14\);$@2	+1

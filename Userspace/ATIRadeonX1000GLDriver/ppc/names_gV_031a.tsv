@@ -85,7 +85,6 @@ use	FUN_0010c010	iVar5	newOpcode	INFERRED	opcode of the binary replacement	^\s*F
 use	FUN_0010cfcc	iVar2	isMovLike	INFERRED	virtual slot 0x60 of the source	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x60\)\)\(a0\);$	+2
 use	FUN_0010cfcc	iVar3	srcRecord	INFERRED	operand record of the folded operand	^\s*iVar3\ =\ FUN_001054ec\(param_2,param_3\);$	+2
 use	FUN_0010cfcc	iVar3	srcRecord	INFERRED	operand record of the folded operand	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\),\ iVar2\ <=\ iVar3;\ iVar2\ =\ iVar2\ \+\ 1\)\ \{$	+3
-use	FUN_0010cfcc	iVar3	hasNoUsesResult	INFERRED	IRInst__hasNoUses of the old source	^\s*iVar3\ =\ FUN_001049c4\(a0,param_4,uVar4,uVar5,uVar6,in_r8,in_r9\);$	+2
 use	FUN_0010cfcc	uVar4	innerSelect	INFERRED	select word of the mov's source operand	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\);$	+1
 use	FUN_0010cfcc	uVar4	innerSelect	INFERRED	select word of the mov's source operand	^\s*FUN_000f2bdc\(local_28,uVar4,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\);$	+1
 use	FUN_0010d358	uVar3	destSelect	INFERRED	operand 0 select word	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\);$	+3

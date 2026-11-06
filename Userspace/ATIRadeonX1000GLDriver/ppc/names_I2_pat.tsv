@@ -6,10 +6,6 @@ local	FUN_0014acb8	uVar2	vectorSourceModifiers	INFERRED	flag word of the dot ope
 local	FUN_0014acb8	iVar7	destSelect	CONFIRMED	operand record 0 (+0x10) of inst: the destination select word, restored to inst[0x27] after the in-place rebuild
 local	FUN_0014acb8	iVar10	destRegister	CONFIRMED	inst[0x53] (inst+0x14c), written back to inst[0x25] and inst[0x53] after the rebuild
 local	FUN_0014acb8	uVar6	laneCheckMask	INFERRED	DAT_001b0170: per-lane mask argument of FUN_000f5c0c (byte 0 = lane must equal the given constant)
-local	FUN_0014acb8	local_58	onesLane0	CONFIRMED	first of four floats preset to 1.0 (0x3f800000); &local_58 is the expected constant vector passed to FUN_000f5c0c
-local	FUN_0014acb8	local_54	onesLane1	CONFIRMED	second float of the 1.0 vector at &local_58
-local	FUN_0014acb8	local_50	onesLane2	CONFIRMED	third float of the 1.0 vector at &local_58
-local	FUN_0014acb8	local_4c	onesLane3	CONFIRMED	fourth float of the 1.0 vector at &local_58
 local	FUN_0014acb8	local_68	scalarSelectWord	CONFIRMED	select word (+0x10) of the mul operand that is not the dot; its bytes are scanned for the splat lane
 use	FUN_0014acb8	iVar1	sourceOpcode	CONFIRMED	opcode (opcode-info +8) of mul source 1 tested against 0x1c / 0x1d (IrDot3 / IrDot4)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x88\)\ \+\ 8\);$	+1	all	all
 use	FUN_0014acb8	iVar1	lanesWritten	INFERRED	FUN_000f48ec(inst, 1): every lane read through source 1 is written by its definition	^\s*\(iVar1\ =\ FUN_000f48ec\(param_1,1\),\ iVar1\ !=\ 0\)\)\ \{$	+0	all	all
@@ -19,7 +15,6 @@ use	FUN_0014acb8	iVar1	lanesWritten	INFERRED	FUN_000f48ec(inst, 2): every lane r
 use	FUN_0014acb8	iVar1	isSplat	INFERRED	FUN_000f2c5c(select word of the other operand): all used lanes select the same component	^\s*iVar1\ =\ FUN_000f2c5c\(\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\);$@2	+1	all	all
 use	FUN_0014acb8	uVar8	dotSourceIndex	CONFIRMED	index (1 or 2) of the mul source that is the dot instruction: IRInst__getOperandSource(inst, uVar8)	^\s*uVar8\ =\ 1;$	+49	all	all
 use	FUN_0014acb8	uVar8	splatLane	INFERRED	first lane (byte != 4) of the scalar operand select word, -1 when all bytes are 4; indexes the splat-select table PTR_DAT_001e8b8c	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_68\ \+\ iVar5\);$	+29	all	all
-use	FUN_0014acb8	iVar3	isOnesConstant	CONFIRMED	FUN_000f5c0c(dot, n, mask, 1.0 vector): dot source n is the all-ones constant	^\s*iVar3\ =\ FUN_000f5c0c\(iVar1,1,DAT_001b0170,\&local_58\);$	+3	all	all
 use	FUN_0014acb8	iVar3	onesSourceIndex	CONFIRMED	index (1 or 2) of the dot source that is the all-ones vector; it receives the scalar	^\s*iVar3\ =\ 2;$	+58	all	all
 use	FUN_0014acb8	iVar4	vectorSourceIndex	CONFIRMED	index of the dot source that is not the ones vector; it is copied into the same slot of the rebuilt inst	^\s*iVar4\ =\ 1;$	+74	all	all
 use	FUN_0014acb8	iVar5	laneScanIndex	INFERRED	byte index into the scalar select word while looking for the first lane != 4	^\s*iVar5\ =\ 0;$	+8	all	all
@@ -164,10 +159,6 @@ local	FUN_00150d38	local_98	destSelectWord	CONFIRMED	destination select word of 
 local	FUN_00150d38	local_94	scaleSelect	CONFIRMED	select word of the scale constant: SelectWord__maskUnused(0x10203, destWriteMask), later set to 4 on unwritten lanes; passed as &local_94 to HwLimits slot 85
 local	FUN_00150d38	local_90	scaleDestSelect	INFERRED	copy of the scale constant instruction destination select, lanes selected by scaleSelect set to 0
 local	FUN_00150d38	local_8c	scaleSelectCopy	INFERRED	copy of scaleSelect read byte-wise when clearing the scale constant destination lanes
-local	FUN_00150d38	local_88	scaleLane0	CONFIRMED	first of four floats all equal to the result scale factor: the constant vector passed as &local_88 to HwLimits slot 85
-local	FUN_00150d38	local_84	scaleLane1	CONFIRMED	second scale float
-local	FUN_00150d38	local_80	scaleLane2	CONFIRMED	third scale float
-local	FUN_00150d38	local_7c	scaleLane3	CONFIRMED	fourth scale float
 local	FUN_00150d38	local_78	destWriteMask	CONFIRMED	WriteMask__fromSelectWord(destination select word)
 local	FUN_00150d38	local_74	unusedMaskedSelect	CONFIRMED	SelectWord__maskUnused(0x10203, destWriteMask)
 local	FUN_00150d38	local_70	composedSelect	CONFIRMED	SelectWord__compose(mov source select, add source select): select word for mad source 1
@@ -275,10 +266,6 @@ local	FUN_00154dc0	local_80	mergedDestSelect	CONFIRMED	destination select of the
 local	FUN_00154dc0	local_7c	lastDestSelect	CONFIRMED	destination select word of the last source; 0x1010100 excluded
 local	FUN_00154dc0	local_78	instSrc1Select	CONFIRMED	select word of operand record 1 of inst
 local	FUN_00154dc0	local_74	partnerSrc1Select	CONFIRMED	select word of operand record 1 of the partner (default 0x10203)
-local	FUN_00154dc0	local_70	maskLane0	CONFIRMED	first of four floats of the constant mask vector (0, 1.0, 0, 0) passed as &local_70 to HwLimits slot 85
-local	FUN_00154dc0	local_6c	maskLane1	CONFIRMED	second mask float, preset to 1.0 (0x3f800000)
-local	FUN_00154dc0	local_68	maskLane2	CONFIRMED	third mask float
-local	FUN_00154dc0	local_64	maskLane3	CONFIRMED	fourth mask float
 local	FUN_00154dc0	local_58	parentBlock	CONFIRMED	inst[0x56] (inst+0x158): the block the rebuilt inst is inserted into
 local	FUN_00154dc0	local_54	prevNode	INFERRED	inst[1]: list neighbour after which the rebuilt inst is re-inserted
 use	FUN_00154dc0	piVar8	lastSource	CONFIRMED	IRInst__getOperandSource(inst, numSources): the extra (last) source, itself an instruction with no saturate / result modifier	^\s*\(piVar8\ =\ \(int\ \*\)FUN_00105594\(param_1,param_1\[0x21\]\),\ piVar8\[0x48\]\ ==\ 0\)\)\)\)\ \&\&$	+26	all	all
@@ -530,13 +517,10 @@ local	FUN_00128430	local_50	uniformValueCopy	INFERRED	stack copy of the uniform 
 use	FUN_00128430	piVar3	laneCursor	CONFIRMED	walks the four select bytes of laneSwizzle	^\s*piVar3\ =\ param_4;$	+15	all	all
 use	FUN_00128430	piVar3	laneSwizzleArg	INFERRED	copy of laneSwizzle left in a register and passed on as a stack argument of FUN_000f5f94 / FUN_000f57f0	^\s*piVar3\ =\ param_4;$@2	+39	all	all
 use	FUN_00128430	iVar6	isUniform	CONFIRMED	cleared when two used lanes hold different values; also read as a pass-through argument of FUN_000f5f94	^\s*iVar6\ =\ 1;$	+45	all	rhs
-use	FUN_00128430	iVar6	foundConstant	INFERRED	FUN_000f5f94(constant pool, constants, laneSwizzle): existing constant instruction, returned when non-zero	^\s*iVar6\ =\ FUN_000f5f94\(uVar8,param_3,param_4,piVar3,pcVar5,iVar6,pdVar7\);$	+2	lhs	all
-use	FUN_00128430	iVar6	candidate	INFERRED	FUN_000f57f0(pool, constants, laneSwizzle): candidate constant, returned if HwLimits slot 64 (0x100) accepts laneSwizzle	^\s*iVar6\ =\ FUN_000f57f0\(uVar8,param_3,param_4,piVar3\);$	+2	all	all
 use	FUN_00128430	iVar9	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar9\ =\ 4;$	+18	all	all
 use	FUN_00128430	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, constants, select): an existing constant instruction with these lane values, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,param_3,\*param_4\);$	+0	all	all
 use	FUN_00128430	iVar9	lanesLeft	INFERRED	countdown of the four lanes while the uniform vector is initialised	^\s*iVar9\ =\ 4;$@2	+6	all	all
 use	FUN_00128430	iVar9	byteOffset	INFERRED	byte offset into the uniform vector buffer	^\s*iVar9\ =\ 0;$	+5	all	all
-use	FUN_00128430	iVar9	acceptsSwizzle	CONFIRMED	HwLimits slot 64 (0x100) result for laneSwizzle	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x100\)\)\(param_1,param_4\),\ iVar9\ !=\ 0\)\)\ \{$	+0	all	all
 local	FUN_00129eb4	fVar1	uniformValue	CONFIRMED	value of the first used lane; every other used lane must equal it for the vector to be uniform
 local	FUN_00129eb4	bVar2	firstLane	CONFIRMED	true until the first lane whose select byte is not 4 has been read
 local	FUN_00129eb4	puVar4	fillCursor	CONFIRMED	walks the four words of the uniform vector buffer (preset 0x7ffffffe)
@@ -546,8 +530,6 @@ local	FUN_00129eb4	local_20	uniformValueCopy	INFERRED	stack copy of the uniform 
 use	FUN_00129eb4	piVar3	laneCursor	CONFIRMED	walks the four select bytes of laneSwizzle	^\s*piVar3\ =\ param_4;$	+15	all	all
 use	FUN_00129eb4	piVar3	laneSwizzleArg	INFERRED	copy of laneSwizzle left in a register and passed on as a stack argument of FUN_000f5f94 / FUN_000f57f0	^\s*piVar3\ =\ param_4;$@2	+32	all	all
 use	FUN_00129eb4	iVar6	isUniform	CONFIRMED	cleared when two used lanes hold different values; also read as a pass-through argument of FUN_000f5f94	^\s*iVar6\ =\ 1;$	+45	all	rhs
-use	FUN_00129eb4	iVar6	foundConstant	INFERRED	FUN_000f5f94(constant pool, constants, laneSwizzle): existing constant instruction, returned when non-zero	^\s*iVar6\ =\ FUN_000f5f94\(uVar8,param_3,param_4,piVar3,pcVar5,iVar6,pdVar7\);$	+2	lhs	all
-use	FUN_00129eb4	iVar6	candidate	INFERRED	FUN_000f57f0(pool, constants, laneSwizzle): candidate constant, returned when non-zero	^\s*iVar6\ =\ FUN_000f57f0\(uVar8,param_3,param_4,piVar3\);$	+2	all	all
 use	FUN_00129eb4	iVar9	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar9\ =\ 4;$	+18	all	all
 use	FUN_00129eb4	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, constants, select): an existing constant instruction with these lane values, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,param_3,\*param_4\);$	+0	all	all
 use	FUN_00129eb4	iVar9	lanesLeft	INFERRED	countdown of the four lanes while the uniform vector is initialised	^\s*iVar9\ =\ 4;$@2	+6	all	all
@@ -881,9 +863,6 @@ local	FUN_0015ea3c	bVar1	moreLanes	INFERRED	lane != 3 continue flag
 local	FUN_0015ea3c	iVar10	nextIndex	INFERRED	iVar8 + 1: next source index in the select-clearing loop
 local	FUN_0015ea3c	uVar11	zeroWord	INFERRED	a zero (flag test of an already-zero value) used to zero-initialise the saveCounters buffer
 local	FUN_0015ea3c	local_70	foldStatus	CONFIRMED	status word (zeroed first) passed as the last argument of Inst__foldProducerIntoConsumer
-local	FUN_0015ea3c	local_5c	savedCounters0	CONFIRMED	3-word buffer filled by IRInst__saveCounters(node, buffer, -1) and replayed after the rebuild
-local	FUN_0015ea3c	local_58	savedCounters1	CONFIRMED	second word of the saveCounters buffer
-local	FUN_0015ea3c	local_54	savedCounters2	CONFIRMED	third word of the saveCounters buffer
 local	FUN_0015ea3c	local_6c	srcDestSelect	CONFIRMED	destination select word (record 0 +0x10) of operandVReg, scanned for written lanes
 local	FUN_0015ea3c	local_48	destWriteMask1	CONFIRMED	WriteMask__fromSelectWord(clone destination select)
 local	FUN_0015ea3c	local_44	maskedSelect1	CONFIRMED	SelectWord__maskUnused(0x10203, destWriteMask1): select of mix source 1
@@ -945,9 +924,6 @@ local	FUN_00163478	local_98	destSelectWord	CONFIRMED	destination select word (re
 local	FUN_00163478	local_94	scalarSelect	CONFIRMED	select word of the splat mul operand (the scalar s)
 local	FUN_00163478	local_90	mulVectorSelect	CONFIRMED	select word (+0x10) of the mul operand v that is not the scalar
 local	FUN_00163478	local_8c	dotOperandSelect	CONFIRMED	select word (+0x10) of the dot operand that read the mul, composed with mulVectorSelect
-local	FUN_00163478	local_88	savedCounters0	CONFIRMED	3-word buffer filled by IRInst__saveCounters(dot, buffer, -1) and replayed on newMul
-local	FUN_00163478	local_84	savedCounters1	CONFIRMED	second word of the saveCounters buffer
-local	FUN_00163478	local_80	savedCounters2	CONFIRMED	third word of the saveCounters buffer
 local	FUN_00163478	local_7c	lastOperandRecord	CONFIRMED	buffer filled by IRInst__readLastOperand(dot): the extra source record
 local	FUN_00163478	local_78	lastOperandSource	CONFIRMED	word 1 of the lastOperandRecord buffer (the extra source, tested != 0)
 local	FUN_00163478	local_68	lastOperandRecord5	INFERRED	sixth word of the lastOperandRecord buffer (zeroed before the read)

@@ -1,5 +1,4 @@
 local	R520VMachineAssembler__vslot27_assembleLoopHeader	param_4	staleArg4	INFERRED	stale register argument forwarded to Block__getBranchInst
-local	R520VMachineAssembler__vslot27_assembleLoopHeader	param_7	staleArg7	INFERRED	stale register argument forwarded to Block__getBranchInst
 local	R520VMachineAssembler__vslot24_assembleWithPredicateSet	fparam_1	literalValue	INFERRED	float literal (FLOAT_001aa0d4) replicated into the 4 lanes of the predicate-set literal vec4
 local	R520MachineAssembler__vslot26_assembleThenAppendRecord	iVar3	recordIndexBefore	INFERRED	this[0x18]: record index before assembling the node
 local	R520MachineAssembler__vslot74_setPredicateSetDestination	uVar4	rgbMask	INFERRED	lanesToRgbMask of operand 0's select, stored in the record at +0x15

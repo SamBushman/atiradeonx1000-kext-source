@@ -109,7 +109,6 @@ use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused a
 use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r8\ =\ in_r8\ \+\ 1;$	+1
 use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*\}\ while\ \(\(int\)in_r8\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x30c\)\ \+\ 0x14\)\);$	+1
 use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*in_r8\ =\ 0;$	+1
-use	FUN_00131d08	in_r8	wordOrClassIndex	INFERRED	bit word offset, later reused as the class index (value left in r8)	^\s*return\ FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
 use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ \(int\ \*\)\(1\ <<\ \(uVar9\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(in_r8\ \+\ iVar10\ \+\ 8\)\);$	+2
 use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ piVar6;$	+1
 use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*iVar10\ =\ \*in_r10;$	+1
@@ -120,7 +119,6 @@ use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a c
 use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*in_r10\ =\ \(int\ \*\)piVar1\[0x25\];$	+1
 use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*iVar3\ =\ \(int\)in_r10\ \*\ 4;$	+1
 use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x458\)\ \+\ iVar11\)\ =\ in_r10;$	+1
-use	FUN_00131d08	in_r10	bitsetOrCursor	INFERRED	bitset word, later reused as a cursor (value left in r10)	^\s*return\ FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3
 use	FUN_00131d08	uVar9	registerNumber	INFERRED	instruction destination register number (+0x94)	^\s*uVar9\ =\ piVar13\[0x25\];$	+1
 use	FUN_00131d08	uVar9	registerNumber	INFERRED	instruction destination register number (+0x94)	^\s*in_r8\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$	+3
 use	FUN_00131d08	uVar9	registerNumber	INFERRED	instruction destination register number (+0x94)	^\s*in_r8\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$@2	+3
@@ -175,4 +173,3 @@ use	FUN_00131d08	puVar7	zeroCursor	INFERRED	cursor clearing the per-class virtua
 use	FUN_00131d08	puVar7	zeroCursor	INFERRED	cursor clearing the per-class virtual counters	^\s*\*puVar7\ =\ 0;$	+1
 use	FUN_00131d08	puVar7	zeroCursor	INFERRED	cursor clearing the per-class virtual counters	^\s*puVar7\ =\ puVar7\ \+\ 1;$	+1
 use	FUN_00131d08	uVar5	logTrailingArg	INFERRED	zero passed as a trailing log argument	^\s*uVar5\ =\ 0;$	+1
-use	FUN_00131d08	uVar5	logTrailingArg	INFERRED	zero passed as a trailing log argument	^\s*return\ FUN_000e0e0c\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),$	+3

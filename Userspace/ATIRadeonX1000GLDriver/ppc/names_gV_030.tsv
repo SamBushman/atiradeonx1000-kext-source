@@ -97,8 +97,6 @@ local	FUN_0010bb9c	puVar1	selectTable	INFERRED	PTR_DAT_001e8b8c
 func	FUN_0010bc78	IRInst__retargetOpcodeFromOperands	INFERRED	same retargeting, taking the selects from the operand words via FUN_000f33f8; returns 1 when the old opcode was 0x35
 local	FUN_0010bc78	param_1	inst	INFERRED	
 local	FUN_0010bc78	iVar1	oldOpcode	INFERRED	descriptor opcode before the change
-local	FUN_0010bc78	local_28	operandWord0	INFERRED	
-local	FUN_0010bc78	local_24	operandWord1	INFERRED	
 local	FUN_0010bc78	local_20	operandWord2	INFERRED	
 func	FUN_0010bd50	IRInst__setLiteralOperandAndSource	INFERRED	makes operand operandIndex a literal vec4 float of fparam_1 and, unless program flag 8 is set, creates the ValueKey definition and sets the operand source
 local	FUN_0010bd50	param_2	unusedArg2	INFERRED	

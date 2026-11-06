@@ -2,7 +2,6 @@ use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is t
 use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is the flag recomputed here, bit 24 the sprite/fog flag)	^\s*uVar4\ =\ uVar2\ <<\ 0x18\ \|\ uVar3\ \&\ 0xfeffffff;$	+2
 use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is the flag recomputed here, bit 24 the sprite/fog flag)	^\s*if\ \(\(uVar4\ >>\ 0x17\ \&\ 1\)\ !=\ uVar2\)\ \{$	+1
 use	FUN_000a8e20	uVar4	ctx44Word	INFERRED	glContext+0x44 state word (bit 23 is the flag recomputed here, bit 24 the sprite/fog flag)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ \(uVar2\ \&\ 1\)\ <<\ 0x17\ \|\ uVar4\ \&\ 0xff7fffff;$	+1
-use	FUN_000a8e20	uVar4	chipVariantBit	INFERRED	(engine-caps short at +0x2d48 == -0x7e06) << 2 merged into glContext+0x18a4	^\s*uVar4\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ param_2\)\ ==\ \-0x7e06\)\ <<\ 2;$	+2
 use	FUN_000a8e20	uVar4	chipVariantBit	INFERRED	(engine-caps short at +0x2d48 == -0x7e06) << 2 merged into glContext+0x18a4	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[param_2\ \+\ 4\]\ \&\ 1\)\ <<\ 1\ \|\ uVar4\ \|\ uVar2\ \&\ 0xfffffff9;$	+1
 use	FUN_000a8e20	uVar2	capsFlag2e0b	INFERRED	byte at caps+0x2e0b: wanted value of bit 23	^\s*uVar2\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002e0b\)\[param_2\];$	+1
 use	FUN_000a8e20	uVar2	capsFlag2e0b	INFERRED	byte at caps+0x2e0b: wanted value of bit 23	^\s*uVar2\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002e0b\)\[param_2\];$@2	+1

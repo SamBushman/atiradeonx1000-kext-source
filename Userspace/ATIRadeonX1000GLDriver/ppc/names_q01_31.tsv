@@ -110,8 +110,6 @@ local	FUN_0003b280	param_7	unusedArg7	INFERRED	never read
 local	FUN_0003b280	param_8	literalConstants	INFERRED	16-byte literal constants copied into local-constant symbols
 local	FUN_0003b280	puVar8	kindArray	INFERRED	alloca'd byte array: 0 = uniform/parameter, 1 = literal (kind 0x11), 2 = other; input of FUN_000534c0
 local	FUN_0003b280	puVar2	indexFrameLink	INFERRED	alloca slot holding the saved frame pointer of the index array allocation
-local	FUN_0003b280	puVar3	symbolFrameLink	INFERRED	alloca slot holding the saved frame pointer of the symbol array allocation
-local	FUN_0003b280	iVar6	indexAllocBytes	INFERRED	negated, 16-aligned byte size of the index array allocation
 local	FUN_0003b280	puVar11	indexCursor	INFERRED	write cursor through the index array (puVar2 + 0x10)
 local	FUN_0003b280	puVar16	symbolOut	INFERRED	symbol-id output array of FUN_000534c0 (puVar3 + 0x10), walked in the second loop
 local	FUN_0003b280	puVar12	recordCursor	INFERRED	cursor through the variable records of the current group while building kindArray/indexCursor
@@ -214,11 +212,6 @@ local	gld_initContextHardwareState	puVar2	vectorConstArea	INFERRED	PTR_DAT_001e8
 local	gld_initContextHardwareState	uVar7	permuteIndex	INFERRED	row counter of the permute-row loop (replicated into every byte)
 local	gld_initContextHardwareState	uVar9	maskShiftBias	INFERRED	starts at -0x60, +8 per row: shift amount bias of the mask rows
 local	gld_initContextHardwareState	local_58	queryOutCount	INFERRED	output scalar count (5) for IOConnect method 0x14
-local	gld_initContextHardwareState	local_54	initParam0	INFERRED	argument 0 block passed by address to FUN_000a9ac0 (DAT_001aa4e8)
-local	gld_initContextHardwareState	local_50	initParam1	INFERRED	DAT_001aa4ec
-local	gld_initContextHardwareState	local_4c	initParam2	INFERRED	DAT_001aa4f0
-local	gld_initContextHardwareState	local_48	initParam3	INFERRED	DAT_001aa4f4
-local	gld_initContextHardwareState	local_44	initParam4	INFERRED	DAT_001aa4f8
 local	glReadPixels_impl	uVar11	staleArgR10	INFERRED	constant 0, only forwarded as stale argument register to _glgProcessPixels
 local	glReadPixels_impl	uStack_e8	layoutRowBytes	INFERRED	row bytes output of gld_computePixelStoreLayout (becomes srcRowBytes)
 local	glReadPixels_impl	iStack_e4	layoutPixelBytes	INFERRED	pixel bytes output of gld_computePixelStoreLayout; reused for the rectX byte offset of negative rects
@@ -240,7 +233,6 @@ local	glReadPixels_impl	uStack_84	procZero84	INFERRED	zero field of the processo
 local	glReadPixels_impl	uStack_50	procEnd	INFERRED	zero byte ending the processor descriptor
 local	FUN_00029c00	fVar5	windowXStart	INFERRED	window x of the first pixel of a row (rasterX + half-pixel offset, plus the 1/pixel-zoom term in the stencil path); restarts each row
 local	FUN_00029c00	dVar7	uintBiasD	INFERRED	DOUBLE_001aa250 (2^52 bias) used by the unsigned int -> double conversion
-local	FUN_00029c00	fVar8	pixelValueF	INFERRED	source pixel read as float; its integer value holds the packed RGBA8 colour (unpacked into colorR/G/B/A)
 local	FUN_00029c00	local_158	oneBits	INFERRED	constant 1.0f bit pattern 0x3f800000, never read
 local	FUN_00029c00	local_b8	pointSizeI2dHi	INFERRED	0x43300000: high word of the int->double conversion of pointSizeWord
 local	FUN_00029c00	uStack_b4	pointSizeI2dLo	INFERRED	low word of the int->double conversion: pointSizeWord
@@ -549,7 +541,6 @@ local	FUN_0002be90	param_3	passThroughArg3	INFERRED	forwarded to FUN_000a3be0 tw
 local	FUN_0002be90	param_4	passThroughArg4	INFERRED	forwarded unchanged
 local	FUN_0002be90	param_5	passThroughArg5	INFERRED	forwarded unchanged
 local	FUN_0002be90	param_6	passThroughArg6	INFERRED	forwarded unchanged
-local	FUN_0002be90	param_7	passThroughArg7	INFERRED	forwarded unchanged
 local	gld_testRendererAvailable	uVar1	isAvailable	INFERRED	1 when the service opened and the scalar query succeeded
 local	gld_testRendererAvailable	local_38	connection	INFERRED	io_connect_t out of IOServiceOpen
 local	gld_testRendererAvailable	local_34	outputCount	INFERRED	output scalar count (3) for IOConnect method 3
@@ -629,16 +620,7 @@ func	FUN_0003b5b0	gld_bindVertexShaderSlot	INFERRED	reserves the vertex shader s
 local	gld_decodeProgramOperandOffset	uVar3	operandIndexByte	INFERRED	operandWord & 0xff: record index inside the operand file
 local	gld_decodeProgramOperandOffset	iVar4	stateOffset	INFERRED	byte offset of the operand inside engine state (0x1860 / 0x1e60 based)
 local	gld_waitQueryStamp	iVar2	queryRecord	INFERRED	**(ctx+0x234): query/stamp record (+8 stamp, +0x10 flags)
-local	gldFormatAlphaBits	param_2	unusedArg2	INFERRED	never read
-local	gldFormatAlphaBits	param_3	unusedArg3	INFERRED	never read
-local	gldFormatAlphaBits	param_4	unusedArg4	INFERRED	never read
-local	gldFormatAlphaBits	param_5	unusedArg5	INFERRED	never read
-local	gldFormatAlphaBits	param_6	unusedArg6	INFERRED	never read
-local	gldFormatAlphaBits	param_7	unusedArg7	INFERRED	never read
 local	gldPixelRowBytes	iVar1	rowBytes	INFERRED	computed row bytes (unit bytes * width, or packed bit/byte forms)
-local	gldFlushDataCacheRangeSync	param_4	unusedArg4	INFERRED	never read
-local	gldFlushDataCacheRangeSync	param_5	unusedArg5	INFERRED	never read
-local	gldFlushDataCacheRangeSync	param_7	unusedArg7	INFERRED	never read
 local	powerOfTenDouble	param_2	unusedArg2	INFERRED	never read
 local	returnSecondArgument	param_1	unusedArg1	INFERRED	never read
 local	returnSecondArgument	param_2	value	INFERRED	returned unchanged

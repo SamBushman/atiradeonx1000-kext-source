@@ -7,8 +7,6 @@ local	R300VSchedModel__vslot27	in_r8	staleArg6	INFERRED	stale argument register 
 local	R300VSchedModel__vslot27	local_98	src3CopyOrLaneMask	INFERRED	first word of the copy of operand 3 (IROperand__copyFrom); the same stack slot later accumulates a lane read mask
 local	R300VSchedModel__vslot27	local_94	src3CopyWord1	INFERRED	word 1 of the copy of operand 3
 local	R300VSchedModel__vslot27	local_84	src3CopyWord5	INFERRED	word 5 of the copy of operand 3
-local	R300VSchedModel__vslot27	local_80	src2CopyWord0	INFERRED	word 0 of the copy of operand 2
-local	R300VSchedModel__vslot27	local_7c	src2CopyWord1	INFERRED	word 1 of the copy of operand 2
 local	R300VSchedModel__vslot27	local_6c	src2CopyWord5	INFERRED	word 5 of the copy of operand 2
 local	R300VSchedModel__vslot27	local_68	readMask1	INFERRED	out-parameter of SelectWord__readMask (first absolute-value fix)
 local	R300VSchedModel__vslot27	local_64	selectMasked1	INFERRED	out-parameter of SelectWord__selectWhereMasked

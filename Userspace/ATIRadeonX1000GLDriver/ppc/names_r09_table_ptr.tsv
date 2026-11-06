@@ -18,8 +18,4 @@ data	PTR_DAT_001e913c	ptrTo_KhanPsOpcodeTraits_001e913c	INFERRED	target is named
 data	PTR_DAT_001e9140	ptrTo_KhanVsOpcodeTraits_001e9140	INFERRED	target is named KhanVsOpcodeTraits_001df1fc
 data	PTR_DAT_001e9770	ptrTo_swizzleWordsYYYX_001dbd84_001e9770	CONFIRMED	__const slot holding the address of swizzleWordsYYYX_001dbd84
 data	PTR_DAT_001e9774	ptrTo_swizzleWordsXYZW_001dbd14_001e9774	CONFIRMED	__const slot holding the address of swizzleWordsXYZW_001dbd14
-data	PTR_DAT_001e977c	ptrTo_swizzleWordsXYZW_001dbd14_001e977c	CONFIRMED	__const slot holding the address of swizzleWordsXYZW_001dbd14
-data	PTR_DAT_001e9780	ptrTo_swizzleWordsYYYX_001dbd84_001e9780	CONFIRMED	__const slot holding the address of swizzleWordsYYYX_001dbd84
-data	PTR_DAT_001e9788	ptrTo_swizzleWordsXYZW_001dbd14_001e9788	CONFIRMED	__const slot holding the address of swizzleWordsXYZW_001dbd14
-data	PTR_DAT_001e978c	ptrTo_swizzleWordsYYYX_001dbd84_001e978c	CONFIRMED	__const slot holding the address of swizzleWordsYYYX_001dbd84
 data	PTR_DAT_001e9110	ptrTo_R300VSchedModel__vtable_001e9110	INFERRED	vtable of the vertex sched model allocated (0x3c bytes, R300VSchedModel__vslot2_reset) by FudoVs/KhanVs createSchedModels; target an anonymous object in the const data

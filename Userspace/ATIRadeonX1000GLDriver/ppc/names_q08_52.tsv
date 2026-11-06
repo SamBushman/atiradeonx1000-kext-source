@@ -14,7 +14,6 @@ use	FUN_00177e14	iVar6	src2OperandOffset	INFERRED	operandIndex2 * 0x18 + 0x80	^\
 use	FUN_00177e14	iVar6	src2OperandOffset	INFERRED	operandIndex2 * 0x18 + 0x80	^\s*FUN_00103d50\(iVar2\ \+\ 0xbc,2,\*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar6\ \+\ 0x20\)\ >>\ 1\ \&\ 1\);$	+2
 local	R520MachineAssembler__vslot26_assembleThenAppendRecord	param_5	unusedArg5	INFERRED	stale argument forwarded to Block__getBranchInst and vtable +0x34
 local	R520MachineAssembler__vslot26_assembleThenAppendRecord	param_6	unusedArg6	INFERRED	stale argument forwarded to vtable +0x34
-local	R520MachineAssembler__vslot26_assembleThenAppendRecord	param_7	unusedArg7	INFERRED	stale argument forwarded to Block__getBranchInst
 local	R520MachineAssembler__vslot26_assembleThenAppendRecord	iVar2	branchKind	INFERRED	branch instruction +300 (1 = loop-back kind)
 local	R520MachineAssembler__vslot26_assembleThenAppendRecord	bVar1	flagPrevRecord	INFERRED	node has a successor and the record index did not change
 local	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar7	program	INFERRED	compiler current program

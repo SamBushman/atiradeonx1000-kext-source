@@ -104,10 +104,8 @@ local	FUN_0009bd60	param_2	flag131	INFERRED	role read off the function body (see
 local	FUN_0009d2e0	iVar1	hookArg	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_0009d2e0	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_0009d3b0	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
-local	FUN_0009d3b0	param_2	arg2	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_0009d080	bVar1	anyDirectionalLight	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_0009d080	bVar2	anyPositionalLight	INFERRED	role read off the function body (see notes_gld_q03.md)
-use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\*puVar9\ \&\ 0xc000000\)\ ==\ 0\)\ \|\|\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ iVar6\)\ !=\ \-0x7e06\)\)\ \|\|$	+3
 use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(byte\ \*\)\(param_1\ \+\ 0x130\)\ =\ bVar7\ \|\ \*\(byte\ \*\)\(param_1\ \+\ 0x130\);$	+1
 use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar4\ ==\ 0\)\ \|\|\ \(bVar7\ =\ 1,\ \(\(unsigned\ char\ \*\)0x00002d48\)\[iVar6\ \+\ 5\]\ ==\ '\\0'\)\)\ \{$	+2
 use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar7\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x130\)\ \|\ bVar7;$	+3
@@ -150,7 +148,6 @@ use	FUN_0009cc30	iVar19	lightControlBase	INFERRED	role read off the function bod
 use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar23\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+2
 use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ iVar23;$	+1
 use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar23\ \+\ 5\]\ \&\ 1\)\ <<\ 0x1d;$	+1
-use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ iVar23\)\ ==\ \-0x7e06\)\ <<\ 10;$	+1
 use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar23\ \+\ 4\]\ \&\ 1\)\ <<\ 9\ \|$	+1
 use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \(ushort\)\(\*\(float\ \*\)\(iVar23\ \+\ 0x24fc\)\ !=\ fVar13\)\ <<\ 8;$	+1
 use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \(ushort\)\(\*\(float\ \*\)\(iVar23\ \+\ 0x24fc\)\ ==\ fVar14\)\ <<\ 7;$	+1
@@ -175,7 +172,6 @@ local	FUN_0009cc30	uVar12	lightKeyBit4	INFERRED	role read off the function body 
 local	FUN_0009cc30	uVar15	oldKey	INFERRED	role read off the function body (see notes_gld_q03.md)
 use	FUN_0009cc30	uVar16	keyPartial	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdaffffff;$	+2
 use	FUN_0009cc30	uVar16	keyPartial	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ =\ uVar16\ \|\ 0x800;$	+1
-use	FUN_0009cc30	uVar16	keyBit10	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ iVar23\)\ ==\ \-0x7e06\)\ <<\ 10;$	+2
 use	FUN_0009cc30	uVar16	keyBit10	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ \|\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdafff8ff\ \|\ 0x800;$	+1
 use	FUN_0009cc30	uVar18	ctxFlags44	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
 use	FUN_0009cc30	uVar18	ctxFlags44	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+2

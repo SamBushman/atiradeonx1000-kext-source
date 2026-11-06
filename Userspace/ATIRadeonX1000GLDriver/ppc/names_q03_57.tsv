@@ -106,7 +106,6 @@ use	ffvpEmitLight	puVar12	tempRegCursor	INFERRED	role read off the function body
 use	ffvpEmitLight	puVar12	tempRegCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,\*puVar12,local_68\ \+\ iVar4\ \+\ 8,a4,local_144,\&DAT_001dbd34,$	+2
 use	ffvpEmitLight	puVar12	tempRegCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ puVar12\ \+\ 10;$	+1
 use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \(undefined4\ \*\)\(iVar9\ \+\ 0x290\);$	+1
-use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_000913e0\(param_1,\*puVar12,\&local_228,\&local_21c,\&local_208\);$	+1
 use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar12\ =\ \&local_f4;$@2	+1
 use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,\*puVar12,puVar23,a4,\*\(undefined4\ \*\)\(local_a0\ \+\ 4\),$	+2
 use	ffvpEmitLight	puVar12	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVarS28\ =\ \*\(int\ \*\)\(\(int\)puVar12\ \+\ 0\);$	+1

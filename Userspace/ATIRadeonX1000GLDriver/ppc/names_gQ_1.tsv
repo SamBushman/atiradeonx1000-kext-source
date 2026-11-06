@@ -50,9 +50,7 @@ use	glAccum_impl	puVar24	accumRawByteCursor	INFERRED	walks the 8-bit accumulatio
 use	glAccum_impl	puVar47	accumRawByteEnd	INFERRED	end of the row for accumRawByteCursor	^\s*puVar47\ =\ puVar24\ \+\ uVar20\ \*\ 4;$	+2
 use	glAccum_impl	puVar47	accumRawByteEnd	INFERRED	end of the row for accumRawByteCursor	^\s*puVar47\ =\ puVar24\ \+\ uVar20\ \*\ 4;$@2	+2
 use	glAccum_impl	puVar25	accumRaw16Cursor	INFERRED	walks the 16-bit accumulation buffer storing computed channel words (undefined2 view) in the GL_LOAD loop	^\s*puVar25\ =\ \(undefined2\ \*\)\(iVar23\ \*\ 8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x148\)\);$	+3
-use	glAccum_impl	puVar25	accumRaw16Cursor	INFERRED	walks the 16-bit accumulation buffer storing computed channel words (undefined2 view) in the GL_LOAD loop	^\s*\*puVar25\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
 use	glAccum_impl	puVar25	accumRaw16Cursor	INFERRED	walks the 16-bit accumulation buffer storing computed channel words (undefined2 view) in the GL_LOAD loop	^\s*puVar25\ =\ \(undefined2\ \*\)\(iVar23\ \*\ 8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x148\)\);$@2	+3
-use	glAccum_impl	puVar25	accumRaw16Cursor	INFERRED	walks the 16-bit accumulation buffer storing computed channel words (undefined2 view) in the GL_LOAD loop	^\s*puVar25\[1\]\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ \&\ 0x7c00\ \|\ uVar27\ \&\ 0x3e0\ \|$	+7
 use	glAccum_impl	puVar49	accumRaw16End	INFERRED	end of the row for accumRaw16Cursor	^\s*puVar49\ =\ puVar25\ \+\ uVar20\ \*\ 4;$	+2
 use	glAccum_impl	puVar49	accumRaw16End	INFERRED	end of the row for accumRaw16Cursor	^\s*puVar49\ =\ puVar25\ \+\ uVar20\ \*\ 4;$@2	+2
 use	glAccum_impl	pbVar35	accumUByteCursor	INFERRED	walks the 8-bit accumulation buffer one RGBA8 pixel at a time through an unsigned-byte view (GL_LOAD copy / GL_RETURN write-back)	^\s*pbVar35\ =\ \(byte\ \*\)\(iVar23\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x148\)\);$	+3
@@ -114,9 +112,7 @@ use	glAccum_impl	pcVar30	accumByteCursorRet	INFERRED	walks the 8-bit accumulatio
 use	glAccum_impl	pcVar30	accumByteCursorRet	INFERRED	walks the 8-bit accumulation buffer in the GL_RETURN loop, up to accumByteEndRet	^\s*pcVar30\ =\ pcVar30\ \+\ 4;$	+1
 use	glAccum_impl	pcVar30	accumByteCursorRet	INFERRED	walks the 8-bit accumulation buffer in the GL_RETURN loop, up to accumByteEndRet	^\s*\}\ while\ \(pcVar30\ <\ pcVar37\);$	+1
 use	glAccum_impl	psVar38	accumShortCursor	INFERRED	walks the 16-bit-per-channel accumulation buffer one pixel (4 shorts) at a time	^\s*psVar38\ =\ \(short\ \*\)\(iVar23\ \*\ 8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x148\)\);$	+3
-use	glAccum_impl	psVar38	accumShortCursor	INFERRED	walks the 16-bit-per-channel accumulation buffer one pixel (4 shorts) at a time	^\s*\*psVar38\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
 use	glAccum_impl	psVar38	accumShortCursor	INFERRED	walks the 16-bit-per-channel accumulation buffer one pixel (4 shorts) at a time	^\s*psVar38\ =\ \(short\ \*\)\(iVar23\ \*\ 8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x148\)\);$@2	+3
-use	glAccum_impl	psVar38	accumShortCursor	INFERRED	walks the 16-bit-per-channel accumulation buffer one pixel (4 shorts) at a time	^\s*psVar38\[1\]\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ \&\ 0x7c00\ \|\ uVar27\ \&\ 0x3e0\ \|$	+8
 use	glAccum_impl	psVar38	accumShortCursor	INFERRED	walks the 16-bit-per-channel accumulation buffer one pixel (4 shorts) at a time	^\s*psVar38\ =\ \(short\ \*\)\(iVar34\ \*\ 8\ \+\ iVar36\);$	+1
 use	glAccum_impl	psVar38	accumShortCursor	INFERRED	walks the 16-bit-per-channel accumulation buffer one pixel (4 shorts) at a time	^\s*psVar39\ =\ psVar38\ \+\ uVar20\ \*\ 4;$@3	+1
 use	glAccum_impl	psVar38	accumShortCursor	INFERRED	walks the 16-bit-per-channel accumulation buffer one pixel (4 shorts) at a time	^\s*for\ \(;\ psVar38\ <\ psVar39;\ psVar38\ =\ psVar38\ \+\ 4\)\ \{$@3	+4
@@ -255,22 +251,13 @@ use	glAccum_impl	iVar28	rectHeight	INFERRED	clipped box height: initial fullHeig
 use	glAccum_impl	iVar28	rectHeight	INFERRED	clipped box height: initial fullHeight, then tbl[0x318c]+top, then min(bottom,fullHeight)-top	^\s*FUN_000198b0\(param_1,uVar29,uVar31,uVar20,iVar28,0x8366,$	+4
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_252;$	+1
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*\*pcVar37\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_24a;$	+1
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*\*psVar38\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_262;$	+1
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*pcVar37\[1\]\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(uVar13\ \&\ 0x7c00\ \|\ uVar27\ \&\ 0x3e0\ \|$	+3
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*\*pcVar37\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(uVar27\ \&\ 0x7c00\ \|\ uVar27\ >>\ 5\ \&\ 0x3e0\ \|$	+4
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_25a;$	+1
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*psVar38\[1\]\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ \&\ 0x7c00\ \|\ uVar27\ \&\ 0x3e0\ \|$	+3
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*\*psVar38\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar27\ \&\ 0x7c00\ \|\ uVar27\ >>\ 5\ \&\ 0x3e0\ \|$	+4
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_232;$	+1
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*\*puVar24\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_22a;$	+1
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*\*puVar25\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_242;$	+1
 use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*puVar24\[1\]\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(uVar13\ \&\ 0x7c00\ \|\ uVar27\ \&\ 0x3e0\ \|$	+7
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*iVar28\ =\ \(int\)sStack_23a;$	+1
-use	glAccum_impl	iVar28	fixedValue	INFERRED	glAccum value converted to the (short) fixed-point multiplier (value*32767) from the stack spill slot	^\s*puVar25\[1\]\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ \&\ 0x7c00\ \|\ uVar27\ \&\ 0x3e0\ \|$	+7
 use	glAccum_impl	iVar19	fullWidth	INFERRED	glContext+0x15c drawable width	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x15c\);$	+1
 use	glAccum_impl	iVar19	fullWidth	INFERRED	glContext+0x15c drawable width	^\s*uVar20\ =\ iVar19\ \+\ 7U\ \&\ 0xfffffff8;$	+1
 use	glAccum_impl	iVar19	fullWidth	INFERRED	glContext+0x15c drawable width	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x15c\);$@2	+2
@@ -411,7 +398,6 @@ use	glAccum_impl	iVar26	fullHeightB	INFERRED	drawable height (copy of iVar19 in 
 use	glAccum_impl	iVar26	fullHeightB	INFERRED	drawable height (copy of iVar19 in the unclipped branch, glContext+0x160 otherwise)	^\s*iVar36\ =\ iVar26\ \-\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000318c\)\ \+\ iVar19\)\ \+\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00003184\)\ \+\ iVar19\)\);$@2	+1
 use	glAccum_impl	iVar26	fullHeightB	INFERRED	drawable height (copy of iVar19 in the unclipped branch, glContext+0x160 otherwise)	^\s*iVar19\ =\ iVar26;$@2	+2
 use	glAccum_impl	iVar26	fullHeightB	INFERRED	drawable height (copy of iVar19 in the unclipped branch, glContext+0x160 otherwise)	^\s*iVar34\ =\ iVar34\ \+\ uVar29\ \*\ \(\(iVar26\ \-\ iVar36\)\ \+\ \-1\);$@2	+1
-use	glAccum_impl	iVar26	divisor	INFERRED	(int)(1.0/value): the power-of-two divisor of GL_MULT by 1/2,1/4,1/8,1/16	^\s*iVar26\ =\ \(int\)\(\(double\)FLOAT_001aa0e8\ /\ fparam_1\);$	+1
 use	glAccum_impl	iVar26	divisor	INFERRED	(int)(1.0/value): the power-of-two divisor of GL_MULT by 1/2,1/4,1/8,1/16	^\s*if\ \(iVar26\ !=\ 4\)\ \{$	+2
 use	glAccum_impl	iVar26	divisor	INFERRED	(int)(1.0/value): the power-of-two divisor of GL_MULT by 1/2,1/4,1/8,1/16	^\s*if\ \(iVar26\ ==\ 2\)\ goto\ code_r0x00004f90;$	+1
 use	glAccum_impl	iVar26	divisor	INFERRED	(int)(1.0/value): the power-of-two divisor of GL_MULT by 1/2,1/4,1/8,1/16	^\s*if\ \(\(iVar26\ ==\ 8\)\ \|\|\ \(iVar23\ =\ 4,\ iVar26\ ==\ 0x10\)\)\ goto\ code_r0x00004f90;$	+1
@@ -530,7 +516,6 @@ use	glAccum_impl	iVar23	shiftCount	INFERRED	right-shift amount for GL_MULT by 1/
 use	glAccum_impl	iVar23	shiftCount	INFERRED	right-shift amount for GL_MULT by 1/2^n (1,2,3,4; 5 when value is not an exact power)	^\s*iVar23\ =\ 5;$@2	+1
 use	glAccum_impl	iVar23	shiftCount	INFERRED	right-shift amount for GL_MULT by 1/2^n (1,2,3,4; 5 when value is not an exact power)	^\s*if\ \(\(iVar26\ !=\ 8\)\ \&\&\ \(iVar23\ =\ 4,\ iVar26\ !=\ 0x10\)\)\ goto\ code_r0x0000510c;$	+1
 use	glAccum_impl	iVar23	shiftCount	INFERRED	right-shift amount for GL_MULT by 1/2^n (1,2,3,4; 5 when value is not an exact power)	^\s*\*pcVar37\ =\ \*pcVar37\ <<\ iVar23;$	+4
-use	glAccum_impl	iVar23	shiftCount	INFERRED	right-shift amount for GL_MULT by 1/2^n (1,2,3,4; 5 when value is not an exact power)	^\s*\*psVar38\ =\ \(short\)\(\(int\)\*psVar38\ <<\ iVar23\);$	+4
 use	glAccum_impl	iVar23	shiftCount	INFERRED	right-shift amount for GL_MULT by 1/2^n (1,2,3,4; 5 when value is not an exact power)	^\s*iVar23\ =\ 3;$@2	+1
 use	glAccum_impl	iVar34	rectBottomClamp	INFERRED	min(fullHeight, box bottom) while clipping the box	^\s*iVar34\ =\ iVar26;$	+1
 use	glAccum_impl	iVar34	rectBottomClamp	INFERRED	min(fullHeight, box bottom) while clipping the box	^\s*iVar34\ =\ iVar28;$	+1
@@ -896,7 +881,6 @@ use	glAccum_impl	uVar18	alphaClamped16to32	INFERRED	alpha channel clamped to >= 
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*uVar13\ =\ \*puVar43;$	+1
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*\*pcVar37\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*uVar13\ =\ \*puVar43;$@2	+1
-use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*\*psVar38\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*uVar13\ =\ \*puVar43;$@3	+1
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*\*pbVar35\ =\ \(byte\)\(uVar13\ >>\ 0x11\)\ \&\ 0x7f;$	+4
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*uVar13\ =\ \*puVar43;$@4	+1
@@ -906,15 +890,12 @@ use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 a
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*uVar27\ =\ \(ushort\)\(uVar13\ >>\ 9\);$	+2
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*puVar42\[2\]\ =\ \(ushort\)\(uVar13\ <<\ 7\)\ \&\ 0x7f80\ \|\ uVar41\ \&\ 0x7f;$	+1
 use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*uVar13\ =\ \*puVar43;$@6	+1
-use	glAccum_impl	uVar13	pixelWord	INFERRED	one 32-bit readback pixel (A8R8G8B8 as read with format 0x80e1 type 0x8367)	^\s*\*puVar25\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar13\ >>\ 9\ \&\ 0x7f80\ \|\ uVar13\ >>\ 0x11\ \&\ 0x7f\)\)\ >>$	+8
 use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*uVar13\ =\ \(uint\)uVar27\ <<\ 5;$	+3
 use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*pcVar37\[2\]\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(\(uVar27\ \&\ 0x1f\)\ <<\ 10\ \|\ uVar13\ \&\ 0x3e0\ \|$	+2
 use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*uVar13\ =\ \(uint\)uVar27\ <<\ 5;$@2	+3
-use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*psVar38\[2\]\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(\(uVar27\ \&\ 0x1f\)\ <<\ 10\ \|\ uVar13\ \&\ 0x3e0\ \|$	+2
 use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*uVar13\ =\ \(uint\)uVar27\ <<\ 5;$@3	+3
 use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*puVar24\[2\]\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(\(uVar27\ \&\ 0x1f\)\ <<\ 10\ \|\ uVar13\ \&\ 0x3e0\ \|$	+2
 use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*uVar13\ =\ \(uint\)uVar27\ <<\ 5;$@4	+3
-use	glAccum_impl	uVar13	texelShl5	INFERRED	the 16-bit readback texel shifted left 5 (isolates the red field next to green)	^\s*puVar25\[2\]\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(\(uVar27\ \&\ 0x1f\)\ <<\ 10\ \|\ uVar13\ \&\ 0x3e0\ \|$	+2
 use	glAccum_impl	uVar13	redClamped8to32	INFERRED	red channel clamped to >= 0 (GL_RETURN: 8-bit accum -> 32-bit pixel)	^\s*uVar13\ =\ 0;$	+1
 use	glAccum_impl	uVar13	redClamped8to32	INFERRED	red channel clamped to >= 0 (GL_RETURN: 8-bit accum -> 32-bit pixel)	^\s*uVar13\ =\ \(int\)\(char\)\*pbVar35;$	+1
 use	glAccum_impl	uVar13	redClamped8to32	INFERRED	red channel clamped to >= 0 (GL_RETURN: 8-bit accum -> 32-bit pixel)	^\s*\*puVar43\ =\ iVar15\ <<\ 0x19\ \|\ \(uVar13\ \&\ 0x7f\)\ <<\ 0x11\ \|\ \(uVar44\ \&\ 0x7f\)\ <<\ 9\ \|$	+1
@@ -941,7 +922,6 @@ use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as 
 use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as read with type 0x8366)	^\s*\*pcVar37\ =\ \(char\)\(\(int\)\(iVar28\ \*\ \(uVar27\ \&\ 0x7c00\ \|\ uVar27\ >>\ 5\ \&\ 0x3e0\ \|$	+4
 use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as read with type 0x8366)	^\s*uVar27\ =\ \*puVar42;$@2	+1
 use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as read with type 0x8366)	^\s*uVar13\ =\ \(uint\)uVar27\ <<\ 5;$@2	+4
-use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as read with type 0x8366)	^\s*\*psVar38\ =\ \(short\)\(\(int\)\(iVar28\ \*\ \(uVar27\ \&\ 0x7c00\ \|\ uVar27\ >>\ 5\ \&\ 0x3e0\ \|$	+4
 use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as read with type 0x8366)	^\s*uVar27\ =\ \*puVar42;$@3	+1
 use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as read with type 0x8366)	^\s*bVar3\ =\ \(byte\)\(uVar27\ >>\ 8\);$	+3
 use	glAccum_impl	uVar27	texel16	INFERRED	one 16-bit readback texel (A1R5G5B5 as read with type 0x8366)	^\s*uVar27\ =\ \*puVar42;$@4	+1
@@ -1007,14 +987,11 @@ use	glAccum_impl	cVar14	hasNegativeValues	INFERRED	glContext+0x140: set when a n
 use	glAccum_impl	cVar14	hasNegativeValues	INFERRED	glContext+0x140: set when a negative value was ever accumulated; selects the clamping loop in GL_RETURN	^\s*cVar14\ =\ \*\(char\ \*\)\(param_1\ \+\ 0x140\);$@2	+1
 use	glAccum_impl	cVar14	hasNegativeValues	INFERRED	glContext+0x140: set when a negative value was ever accumulated; selects the clamping loop in GL_RETURN	^\s*if\ \(cVar14\ ==\ '\\0'\)\ \{$@3	+1
 use	glAccum_impl	cVar14	hasNegativeValues	INFERRED	glContext+0x140: set when a negative value was ever accumulated; selects the clamping loop in GL_RETURN	^\s*if\ \(cVar14\ ==\ '\\0'\)\ \{$@4	+1
-use	glAccum_impl	cVar14	valueByte	INFERRED	(char)(int)(value*127): GL_ADD amount for the 8-bit accumulation buffer	^\s*cVar14\ =\ \(char\)\(int\)\(fparam_1\ \*\ \(double\)FLOAT_001aa0f4\);$	+1
 use	glAccum_impl	cVar14	valueByte	INFERRED	(char)(int)(value*127): GL_ADD amount for the 8-bit accumulation buffer	^\s*\*pcVar37\ =\ cVar14\ \+\ \*pcVar37;$	+4
-use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*fVar1\ =\ \(float\)\(fparam_1\ \*\ \(double\)FLOAT_001aa0dc\);$	+1
 use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*dVar50\ =\ \(double\)\(fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
 use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*dVar50\ =\ \(double\)\(fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@2	+3
 use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*dVar50\ =\ \(double\)\(fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@3	+3
 use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*dVar50\ =\ \(double\)\(fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@4	+3
-use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*fVar1\ =\ \(float\)\(fparam_1\ \*\ \(double\)FLOAT_001aa0e4\);$	+1
 use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*dVar50\ =\ \(double\)\(fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@5	+3
 use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*dVar50\ =\ \(double\)\(fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@6	+3
 use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN)	^\s*dVar50\ =\ \(double\)\(fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@7	+3
@@ -1022,7 +999,6 @@ use	glAccum_impl	fVar1	valueScale	INFERRED	value * (1/127) or value * (1/32767):
 use	glAccum_impl	fVar1	alphaScale	INFERRED	FLOAT 1.999: scale of the 1-bit alpha channel in the 16-bit output pixel	^\s*fVar1\ =\ FLOAT_001aa0e0;$	+1
 use	glAccum_impl	fVar1	alphaScale	INFERRED	FLOAT 1.999: scale of the 1-bit alpha channel in the 16-bit output pixel	^\s*fVar6\ =\ fVar5\ \*\ fVar1;$	+1
 use	glAccum_impl	fVar1	alphaScale	INFERRED	FLOAT 1.999: scale of the 1-bit alpha channel in the 16-bit output pixel	^\s*fVar6\ =\ fVar5\ \*\ fVar1;$@2	+1
-use	glAccum_impl	fVar1	reciprocalValue	INFERRED	1.0/value: GL_MULT checks it against the power-of-two reciprocals	^\s*fVar1\ =\ \(float\)\(\(double\)FLOAT_001aa0e8\ /\ fparam_1\);$	+3
 use	glAccum_impl	fVar2	redOut	INFERRED	scaled and clamped red output channel (GL_RETURN 32-bit)	^\s*fVar2\ =\ FLOAT_001aa0d4;$	+1
 use	glAccum_impl	fVar2	redOut	INFERRED	scaled and clamped red output channel (GL_RETURN 32-bit)	^\s*fVar2\ =\ \(float\)\(dVar50\ \*\ dVar53\);$	+1
 use	glAccum_impl	fVar2	redOut	INFERRED	scaled and clamped red output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ \(double\)fVar2\)\ \{$	+2
@@ -1031,12 +1007,10 @@ use	glAccum_impl	fVar2	redOut	INFERRED	scaled and clamped red output channel (GL
 use	glAccum_impl	fVar2	redOut	INFERRED	scaled and clamped red output channel (GL_RETURN 32-bit)	^\s*fVar2\ =\ \(float\)\(dVar50\ \*\ dVar53\);$@2	+1
 use	glAccum_impl	fVar2	redOut	INFERRED	scaled and clamped red output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ \(double\)fVar2\)\ \{$@2	+2
 use	glAccum_impl	fVar2	redOut	INFERRED	scaled and clamped red output channel (GL_RETURN 32-bit)	^\s*iVar16\ =\ \(int\)fVar2;$@2	+1
-use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar2\ =\ \(float\)\(fparam_1\ \*\ \(double\)FLOAT_001aa0dc\);$	+1
 use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar5\ =\ fVar2\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,\(int\)\*pcVar37\ \^\ 0x80000000$	+2
 use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar5\ =\ fVar2\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
 use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar5\ =\ fVar2\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@2	+3
 use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar5\ =\ fVar2\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,$@3	+3
-use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar2\ =\ \(float\)\(fparam_1\ \*\ \(double\)FLOAT_001aa0e4\);$	+1
 use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar5\ =\ fVar2\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,\(int\)\*psVar38\ \^\ 0x80000000\)$	+2
 use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar5\ =\ fVar2\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,\(int\)psVar38\[1\]\ \^\ 0x80000000$	+2
 use	glAccum_impl	fVar2	valueScaleB	INFERRED	value * (1/127) or value * (1/32767): accum sample to colour scale (GL_RETURN 16-bit)	^\s*fVar5\ =\ fVar2\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,\(int\)psVar38\[2\]\ \^\ 0x80000000$	+2
@@ -1126,44 +1100,32 @@ use	glAccum_impl	dVar51	intBiasD	INFERRED	DOUBLE 4503601774854144.0 (0x433000008
 use	glAccum_impl	dVar51	intBiasD	INFERRED	DOUBLE 4503601774854144.0 (0x4330000080000000): sign-flip int-to-double conversion bias	^\s*dVar51\ =\ DOUBLE_001aa1e0;$@5	+1
 use	glAccum_impl	dVar51	intBiasD	INFERRED	DOUBLE 4503601774854144.0 (0x4330000080000000): sign-flip int-to-double conversion bias	^\s*\*pcVar37\ =\ \(char\)\(int\)\(fparam_1\ \*$	+16
 use	glAccum_impl	dVar51	intBiasD	INFERRED	DOUBLE 4503601774854144.0 (0x4330000080000000): sign-flip int-to-double conversion bias	^\s*dVar51\ =\ DOUBLE_001aa1e0;$@6	+1
-use	glAccum_impl	dVar51	intBiasD	INFERRED	DOUBLE 4503601774854144.0 (0x4330000080000000): sign-flip int-to-double conversion bias	^\s*\*psVar38\ =\ \(short\)\(int\)\(fparam_1\ \*$	+16
-use	glAccum_impl	dVar51	zeroD	INFERRED	FLOAT 0.0 compared with value	^\s*dVar51\ =\ \(double\)FLOAT_001aa0d4;$	+2
 use	glAccum_impl	dVar51	zeroD	INFERRED	FLOAT 0.0 compared with value	^\s*if\ \(fparam_1\ !=\ dVar51\)\ \{$	+1
-use	glAccum_impl	dVar52	clampMinD	INFERRED	0.0 lower clamp bound	^\s*dVar52\ =\ \(double\)FLOAT_001aa0d4;$	+1
 use	glAccum_impl	dVar52	clampMinD	INFERRED	0.0 lower clamp bound	^\s*if\ \(dVar52\ <=\ dVar50\)\ \{$	+1
-use	glAccum_impl	dVar52	clampMinD	INFERRED	0.0 lower clamp bound	^\s*dVar52\ =\ \(double\)FLOAT_001aa0d4;$@2	+1
 use	glAccum_impl	dVar52	clampMinD	INFERRED	0.0 lower clamp bound	^\s*if\ \(dVar52\ <=\ dVar50\)\ \{$@2	+1
-use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar53\ =\ \(double\)FLOAT_001aa0f0;$	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*fVar2\ =\ \(float\)\(dVar50\ \*\ dVar53\);$	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar55\ =\ \(double\)\(float\)\(dVar50\ \*\ dVar53\);$	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar54\ =\ \(double\)\(float\)\(dVar50\ \*\ dVar53\);$	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar56\ =\ \(double\)\(float\)\(dVar50\ \*\ dVar53\);$	+1
-use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar53\ =\ \(double\)FLOAT_001aa0f0;$@2	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*fVar2\ =\ \(float\)\(dVar50\ \*\ dVar53\);$@2	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar55\ =\ \(double\)\(float\)\(dVar50\ \*\ dVar53\);$@2	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar54\ =\ \(double\)\(float\)\(dVar50\ \*\ dVar53\);$@2	+1
 use	glAccum_impl	dVar53	channelMax255D	INFERRED	255.0 channel scale	^\s*dVar56\ =\ \(double\)\(float\)\(dVar50\ \*\ dVar53\);$@2	+1
-use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*dVar54\ =\ \(double\)FLOAT_001aa0d4;$	+1
 use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*if\ \(dVar54\ <=\ dVar50\)\ \{$	+2
 use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ dVar54\)\ \{$	+2
 use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*uVar13\ =\ \(uint\)\(int\)dVar54;$	+1
-use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*dVar54\ =\ \(double\)FLOAT_001aa0d4;$@2	+1
 use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*if\ \(dVar54\ <=\ dVar50\)\ \{$@2	+2
 use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ dVar54\)\ \{$@2	+2
 use	glAccum_impl	dVar54	blueOut	INFERRED	scaled and clamped blue output channel (GL_RETURN 32-bit)	^\s*uVar13\ =\ \(uint\)\(int\)dVar54;$@2	+1
-use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*dVar55\ =\ \(double\)FLOAT_001aa0d4;$	+1
 use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*if\ \(dVar55\ <=\ dVar50\)\ \{$	+2
 use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ dVar55\)\ \{$	+2
 use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*iVar17\ =\ \(int\)dVar55;$	+1
-use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*dVar55\ =\ \(double\)FLOAT_001aa0d4;$@2	+1
 use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*if\ \(dVar55\ <=\ dVar50\)\ \{$@2	+2
 use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ dVar55\)\ \{$@2	+2
 use	glAccum_impl	dVar55	greenOut	INFERRED	scaled and clamped green output channel (GL_RETURN 32-bit)	^\s*iVar17\ =\ \(int\)dVar55;$@2	+1
-use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*dVar56\ =\ \(double\)FLOAT_001aa0d4;$	+1
 use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*if\ \(dVar56\ <=\ dVar50\)\ \{$	+2
 use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ dVar56\)\ \{$	+2
 use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*iVar15\ =\ \(int\)dVar56;$	+1
-use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*dVar56\ =\ \(double\)FLOAT_001aa0d4;$@2	+1
 use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*if\ \(dVar56\ <=\ dVar50\)\ \{$@2	+2
 use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*if\ \(DOUBLE_001aa1e8\ <=\ dVar56\)\ \{$@2	+2
 use	glAccum_impl	dVar56	alphaOut	INFERRED	scaled and clamped alpha output channel (GL_RETURN 32-bit)	^\s*iVar15\ =\ \(int\)dVar56;$@2	+1
@@ -1420,10 +1382,8 @@ local	gldPackColorForSurfaceFormat	dVar8	greenClamped	INFERRED	green clamped to 
 local	gldPackColorForSurfaceFormat	dVar9	blueClamped	INFERRED	blue clamped to [0,1]
 local	gldPackColorForSurfaceFormat	dVar10	alphaClamped	INFERRED	alpha clamped to [0,1]
 use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar11\ =\ DOUBLE_001aa228;$	+1
-use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*if\ \(\(dVar7\ <=\ fparam_1\)\ \&\&$	+2
 use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar11\ =\ DOUBLE_001aa200;$	+1
 use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar11\ =\ dVar11\ \*\ DOUBLE_001aa258;$	+3
-use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(int\)dVar11\)\);$	+1
 use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar12\ =\ DOUBLE_001aa228;$	+1
 use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*if\ \(\(dVar8\ <=\ fparam_2\)\ \&\&$	+2
 use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar12\ =\ DOUBLE_001aa200;$	+1
@@ -1443,44 +1403,25 @@ use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the
 use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@10	+3
 use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@11	+3
 use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@12	+3
-use	gldPackColorForSurfaceFormat	dVar11	blueScaledD	INFERRED	blueClamped * scale + 0.5 (10-bit packing)	^\s*dVar11\ =\ dVar9\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	+2
 use	gldPackColorForSurfaceFormat	dVar11	blueScaledD	INFERRED	blueClamped * scale + 0.5 (10-bit packing)	^\s*uVar3\ =\ \(uint\)\(int\)dVar11;$	+1
-use	gldPackColorForSurfaceFormat	dVar11	alphaScaledD	INFERRED	alphaClamped * scale + 0.5 (2-bit alpha packing)	^\s*dVar11\ =\ dVar10\ \*\ \(double\)FLOAT_001aa158\ \+\ \(double\)FLOAT_001aa10c;$	+2
 use	gldPackColorForSurfaceFormat	dVar11	alphaScaledD	INFERRED	alphaClamped * scale + 0.5 (2-bit alpha packing)	^\s*iVar1\ =\ \(int\)dVar11;$	+1
 use	gldPackColorForSurfaceFormat	dVar12	roundedBlueD	INFERRED	(double)(float) of blueScaledD	^\s*dVar12\ =\ \(double\)\(float\)dVar11;$	+3
 use	gldPackColorForSurfaceFormat	dVar12	roundedAlphaD	INFERRED	(double)(float) of alphaScaledD	^\s*dVar12\ =\ \(double\)\(float\)dVar11;$@2	+3
-use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*dVar7\ =\ dVar10\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$	+2
 use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@3	+1
-use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*dVar7\ =\ dVar10\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$@2	+2
 use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*iVar1\ =\ \(int\)dVar7;$	+1
-use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*dVar7\ =\ dVar10\ \*\ \(double\)FLOAT_001aa158\ \+\ \(double\)FLOAT_001aa10c;$	+2
 use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*iVar1\ =\ \(int\)dVar7;$@2	+1
-use	gldPackColorForSurfaceFormat	dVar7	blueScaled	INFERRED	blueClamped * scale + 0.5	^\s*dVar7\ =\ dVar9\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	+2
 use	gldPackColorForSurfaceFormat	dVar7	blueScaled	INFERRED	blueClamped * scale + 0.5	^\s*uVar4\ =\ \(uint\)\(int\)dVar7;$	+1
-use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*dVar7\ =\ dVar8\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	+2
 use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*uVar5\ =\ \(uint\)\(int\)dVar7;$	+1
-use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*dVar7\ =\ dVar8\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$@2	+2
 use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*uVar5\ =\ \(uint\)\(int\)dVar7;$@2	+1
 local	gldPackColorForSurfaceFormat	fVar2	redByteBits	INFERRED	8-bit red (channelD scaled and converted) as raw float bits
 use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*uVar3\ =\ \(int\)\(dVar12\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
 use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*uVar3\ =\ \(uint\)\(int\)dVar12;$	+1
-use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 8\ \|\ \(uVar3\ \&\ 0xfc\)\ <<\ 3\ \|\ uVar4\ >>\ 3\)\)\);$	+1
-use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0xf0\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf0\)\ <<\ 4\ \|\ uVar3\ \&\ 0xf0\ \|$	+2
-use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0x80\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 7\ \|\ \(uVar3\ \&\ 0xf8\)\ <<\ 2\ \|$	+2
-use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ \(float\)\(uVar4\ \|\ \(int\)GH_F2U\(fVar6\)\ <<\ 0x18\ \|\ \(int\)GH_F2U\(fVar2\)\ <<\ 0x10\ \|\ uVar3\ <<\ 8\);$	+1
-use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ uVar3\ <<\ 8\ \|\ \(int\)fVar6\ <<\ 0x18\ \|\ uVar4\ <<\ 0x10\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*case\ '\(':$	+4
 use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*uVar4\ =\ \(int\)\(dVar13\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
 use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*uVar4\ =\ \(uint\)\(int\)dVar13;$	+1
-use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 8\ \|\ \(uVar3\ \&\ 0xfc\)\ <<\ 3\ \|\ uVar4\ >>\ 3\)\)\);$	+1
-use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0xf0\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf0\)\ <<\ 4\ \|\ uVar3\ \&\ 0xf0\ \|$	+2
-use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0x80\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 7\ \|\ \(uVar3\ \&\ 0xf8\)\ <<\ 2\ \|$	+2
-use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ \(float\)\(uVar4\ \|\ \(int\)GH_F2U\(fVar6\)\ <<\ 0x18\ \|\ \(int\)GH_F2U\(fVar2\)\ <<\ 0x10\ \|\ uVar3\ <<\ 8\);$	+1
-use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ uVar3\ <<\ 8\ \|\ \(int\)fVar6\ <<\ 0x18\ \|\ uVar4\ <<\ 0x10\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*case\ '\(':$	+4
 use	gldPackColorForSurfaceFormat	uVar3	halfRed	INFERRED	floatToHalfBits(red)	^\s*uVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(fparam_1\);$	+2
 use	gldPackColorForSurfaceFormat	uVar3	halfRed	INFERRED	floatToHalfBits(red)	^\s*uVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(fparam_1\);$@2	+1
-use	gldPackColorForSurfaceFormat	uVar3	halfRed	INFERRED	floatToHalfBits(red)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ iVar1\ <<\ 0x10\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	uVar3	halfAlpha	INFERRED	floatToHalfBits(alpha)	^\s*uVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(fparam_1_00\);$	+2
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$	+1
@@ -1489,28 +1430,23 @@ use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded ch
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@3	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@3	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ uVar3\ \&\ 0xffff;$	+1
-use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar3\ <<\ 0x10\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@4	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@4	+1
-use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \&\ 0xffff\ \|\ iVar1\ <<\ 0x10\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@5	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@5	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ uVar3\ \&\ 0x3ff;$	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar12\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@2	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar11;$	+1
 use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ uVar3\ \&\ 0x3ff;$@2	+1
-use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar4\ \|\ \(uVar5\ \&\ 0x3ff\)\ <<\ 10\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
 use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(uint\)\(int\)dVar7;$	+1
 use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$	+1
 use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@2	+1
 use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(uint\)\(int\)dVar7;$@2	+1
 use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$@2	+1
-use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar4\ \|\ \(uVar5\ \&\ 0x3ff\)\ <<\ 10\)\)\);$	+1
 local	gldPackColorForSurfaceFormat	uVar5	channelInt3	INFERRED	scaled and rounded channel converted to an unsigned integer
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000;$	+1
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)dVar7;$	+1
-use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \&\ 0xffff\ \|\ iVar1\ <<\ 0x10\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000;$@2	+1
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)dVar7;$@2	+1
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$	+1
@@ -1519,7 +1455,6 @@ use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded c
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$@2	+1
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000;$@3	+1
 use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)dVar7;$@3	+1
-use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar1\ <<\ 8\)\)\);$	+1
 use	gldPackColorForSurfaceFormat	iVar1	halfAlphaB	INFERRED	floatToHalfBits(alpha)	^\s*iVar1\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(\(double\)fStack00000028\);$	+2
 local	gld_setBufferNewTextureBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
 local	gld_setBufferNewTextureBacking	param_2	buffer	INFERRED	buffer object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
@@ -1800,38 +1735,18 @@ use	gldTextureHasNonPowerOfTwoSize2	iVar3	levelRecord	CONFIRMED	texImages + base
 use	gldTextureHasNonPowerOfTwoSize2	uVar4	borderWidth	CONFIRMED	level border width (byte +0xaa of the level record): dimensions exclude twice the border	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 0xaa\);$	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \+\ uVar4\ \*\ \-2;$	all	rhs
 use	gldTextureHasNonPowerOfTwoSize2	uVar4	levelDepth	CONFIRMED	level depth minus twice the border, clamped to >= 1	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \+\ uVar4\ \*\ \-2;$		lhs	none
 local	gldTextureHasNonPowerOfTwoSize	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
-local	gldTextureHasNonPowerOfTwoSize	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
 local	gldTextureHasNonPowerOfTwoSize	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
 local	gldTextureHasNonPowerOfTwoSize	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
 local	gldTextureHasNonPowerOfTwoSize	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
 local	gldTextureHasNonPowerOfTwoSize	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
-local	gldTextureHasNonPowerOfTwoSize	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
 local	gldTextureHasNonPowerOfTwoSize	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
 local	gldTextureHasNonPowerOfTwoSize	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
 local	gldTextureHasNonPowerOfTwoSize	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
 local	gldTextureHasNonPowerOfTwoSize2	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
-local	gldTextureHasNonPowerOfTwoSize2	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
 local	gldTextureHasNonPowerOfTwoSize2	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
 local	gldTextureHasNonPowerOfTwoSize2	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
 local	gldTextureHasNonPowerOfTwoSize2	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
 local	gldTextureHasNonPowerOfTwoSize2	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
-local	gldTextureHasNonPowerOfTwoSize2	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
-local	gldTextureHasNonPowerOfTwoSize2	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
 local	gldTextureHasNonPowerOfTwoSize2	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
 local	gldTextureHasNonPowerOfTwoSize2	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
 local	gldTextureHasNonPowerOfTwoSize2	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
@@ -1897,51 +1812,11 @@ local	gld_drawPixelsAtRasterPos	uStack_14	yBitsDirect	INFERRED	y ^ 0x80000000 (i
 local	gld_drawPixelsAtRasterPos	uStack_18	yHiDirect	INFERRED	0x43300000 (int-to-double high word, unflipped)
 local	gld_drawPixelsAtRasterPos	uStack_1c	yBitsFlipped	INFERRED	(drawable height - y) ^ 0x80000000 (int-to-double low word, flipped)
 local	gld_drawPixelsAtRasterPos	uStack_20	yHiFlipped	INFERRED	0x43300000 (int-to-double high word, flipped)
-use	gldPackColorForSurfaceFormat	dVar7	redClamped	INFERRED	red clamped to [0,1] (0.0 below, 1.0 above)	^\s*dVar7\ =\ \(double\)FLOAT_001aa0d4;$	^\s*dVar11\ =\ DOUBLE_001aa200;$	all	none
-use	gldPackColorForSurfaceFormat	dVar7	redClamped	INFERRED	red clamped to [0,1] (0.0 below, 1.0 above)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	rhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	lhs	none
 use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	^\s*goto\ LAB_0002d9d4;$	all	none
-use	gldPackColorForSurfaceFormat	dVar7	redClamped	INFERRED	red clamped to [0,1] (0.0 below, 1.0 above)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$@2	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	rhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$@2	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	lhs	none
 use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@2	^\s*goto\ LAB_0002d9d0;$	all	none
-use	gldPackColorForSurfaceFormat	dVar7	redClamped	INFERRED	red clamped to [0,1] (0.0 below, 1.0 above)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$@3	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	rhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$@3	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	lhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@4	^\s*dVar7\ =\ dVar10\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$	all	none
-use	gldPackColorForSurfaceFormat	dVar7	redClamped	INFERRED	red clamped to [0,1] (0.0 below, 1.0 above)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	rhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	lhs	none
 use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@6	^\s*uVar3\ =\ uVar3\ \&\ 0x3ff;$	all	none
-use	gldPackColorForSurfaceFormat	dVar7	redClamped	INFERRED	red clamped to [0,1] (0.0 below, 1.0 above)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$@2	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	rhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$@2	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	lhs	none
 use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@10	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$	all	none
-use	gldPackColorForSurfaceFormat	dVar7	redClamped	INFERRED	red clamped to [0,1] (0.0 below, 1.0 above)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa150\ \+\ \(double\)FLOAT_001aa10c;$	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	rhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar7\ =\ dVar7\ \*\ \(double\)FLOAT_001aa150\ \+\ \(double\)FLOAT_001aa10c;$	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	lhs	none
-use	gldPackColorForSurfaceFormat	dVar7	redScaled	INFERRED	redClamped * scale + 0.5 (fixed-point packing)	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@12	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar1\ <<\ 8\)\)\);$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	alpha converted to its 8-bit value, as raw float bits (the packers shift it into place)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(int\)\(dVar14\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000\)\)\);$	^\s*\}$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	alpha converted to its 8-bit value, as raw float bits (the packers shift it into place)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(int\)dVar14\)\);$	^\s*\}$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	alpha converted to its 8-bit value, as raw float bits (the packers shift it into place)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ \(int\)fVar6\ <<\ 8\)\)\);$	^\s*break;$	rhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ \(int\)fVar6\ <<\ 8\)\)\);$	^\s*break;$	lhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	alpha converted to its 8-bit value, as raw float bits (the packers shift it into place)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0xf0\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf0\)\ <<\ 4\ \|\ uVar3\ \&\ 0xf0\ \|$	^\s*uVar4\ >>\ 4\)\)\);$	rhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0xf0\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf0\)\ <<\ 4\ \|\ uVar3\ \&\ 0xf0\ \|$	^\s*uVar4\ >>\ 4\)\)\);$	lhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	alpha converted to its 8-bit value, as raw float bits (the packers shift it into place)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0x80\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 7\ \|\ \(uVar3\ \&\ 0xf8\)\ <<\ 2\ \|$	^\s*uVar4\ >>\ 3\)\)\);$	rhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0x80\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 7\ \|\ \(uVar3\ \&\ 0xf8\)\ <<\ 2\ \|$	^\s*uVar4\ >>\ 3\)\)\);$	lhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	alpha converted to its 8-bit value, as raw float bits (the packers shift it into place)	^\s*fVar6\ =\ \(float\)\(uVar4\ \|\ \(int\)GH_F2U\(fVar6\)\ <<\ 0x18\ \|\ \(int\)GH_F2U\(fVar2\)\ <<\ 0x10\ \|\ uVar3\ <<\ 8\);$	^\s*break;$	rhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ \(float\)\(uVar4\ \|\ \(int\)GH_F2U\(fVar6\)\ <<\ 0x18\ \|\ \(int\)GH_F2U\(fVar2\)\ <<\ 0x10\ \|\ uVar3\ <<\ 8\);$	^\s*break;$	lhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	alpha converted to its 8-bit value, as raw float bits (the packers shift it into place)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ uVar3\ <<\ 8\ \|\ \(int\)fVar6\ <<\ 0x18\ \|\ uVar4\ <<\ 0x10\)\)\);$	^\s*break;$	rhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ uVar3\ <<\ 8\ \|\ \(int\)fVar6\ <<\ 0x18\ \|\ uVar4\ <<\ 0x10\)\)\);$	^\s*break;$	lhs	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ 0\.0;$	^\s*break;$	all	none
 use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ fVar2;$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 8\ \|\ \(uVar3\ \&\ 0xfc\)\ <<\ 3\ \|\ uVar4\ >>\ 3\)\)\);$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ fStack0000001c;$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ fStack00000028;$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar3\ <<\ 0x10\)\)\);$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \&\ 0xffff\ \|\ iVar1\ <<\ 0x10\)\)\);$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ <<\ 0x10\ \|\ uVar3\)\)\);$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ <<\ 0x10\ \|\ uVar3\)\)\);$@2	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ iVar1\ <<\ 0x10\)\)\);$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar4\ \|\ \(uVar5\ \&\ 0x3ff\)\ <<\ 10\)\)\);$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \&\ 0xe0\ \|\ uVar3\ >>\ 3\ \&\ 0x1c\ \|\ uVar4\ >>\ 6\)\)\);$	^\s*break;$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar1\ <<\ 8\)\)\);$	^\s*\}$	all	none
-use	gldPackColorForSurfaceFormat	fVar6	packedColor	INFERRED	the packed colour word being built, stored as a float-typed word at surface+0x28	^\s*\*\(float\ \*\)\(param_1\ \+\ 0x28\)\ =\ fVar6;$	^\s*return;$	all	none
 local	FUN_00023a24	param_1	ctx	CONFIRMED	GL context: +4 kernel connection record, +0x2440/+0x2444 current register block pointers, +0x2758 packet allocator hook, +0x275c packet submit hook
 local	FUN_00023a24	param_2	hwPrimType	INFERRED	hardware primitive type written to register 0x821 (5 = the type that gets one extra leading vertex)
 local	FUN_00023a24	param_3	extraVertexAttribs	INFERRED	attribute block of the extra vertex emitted first when hwPrimType == 5

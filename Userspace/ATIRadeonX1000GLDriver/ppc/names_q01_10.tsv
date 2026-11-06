@@ -80,7 +80,6 @@ local	FUN_00039610	puVar14	weightCursor	INFERRED	walks the weight table backward
 local	FUN_00039610	iVar4	lastElementCenter	INFERRED	vertexStride - 1 while the center vertex is copied
 use	FUN_00039610	iVar6	lastElementRest	INFERRED	vertexStride - 1 while the remaining vertices are copied	^\s*iVar6\ =\ iVar16\ \+\ \-1;$	+1
 use	FUN_00039610	iVar6	lastElementRest	INFERRED	vertexStride - 1 while the remaining vertices are copied	^\s*if\ \(\-1\ <\ iVar6\)\ \{$	+1
-use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*iVar6\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0002cc30\)\(param_1,0,6,param_4,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,$	+1
 use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*if\ \(iVar6\ !=\ 0\)\ \{$	+1
 use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*iVar13\ =\ iVar16\ \*\ \(iVar6\ \*\ 5\ \+\ 5\);$	+1
 use	FUN_00039610	iVar6	unitCount	INFERRED	trimmed vertex count returned by FUN_0002cc30 (0 = nothing to draw)	^\s*iVar6\ \*\ 2\ \+\ iVar13\ \+\ \(\*\(int\ \*\)\(param_1\ \+\ 0x267c\)\ \+\ 1U\ \&\ 0xfffffffe\)\ \+\ 0x18,$	+1

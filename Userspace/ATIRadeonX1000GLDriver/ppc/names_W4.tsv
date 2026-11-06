@@ -74,10 +74,6 @@ local	_gldFlushBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry p
 local	_gldFlushBuffer	param_2	buffer	INFERRED	record created by _gldCreateBuffer; +4 flags pointer, +8 memory-plugin data
 local	_gldFlushBuffer	param_3	flushRegion	UNKNOWN	nonzero -> FUN_0000b620 is called first
 local	_gldFlushBuffer	param_4	flushArg4	UNKNOWN	forwarded to FUN_0000b620
-local	_gldFlushBuffer	param_5	flushArg5	UNKNOWN	forwarded to FUN_0000b620
-local	_gldFlushBuffer	param_6	flushArg6	UNKNOWN	forwarded to FUN_0000b620
-local	_gldFlushBuffer	param_7	flushArg7	UNKNOWN	forwarded to FUN_0000b620
-local	_gldFlushBuffer	param_8	flushArg8	UNKNOWN	forwarded to FUN_0000b620
 local	_gldFlushBuffer	piVar1	pluginData	INFERRED	*(buffer+8), the memory-plugin data pointer
 local	_gldFlushBuffer	iVar2	pluginRecord	INFERRED	**(buffer+8)
 local	_gldGetMemoryPluginData	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
@@ -235,12 +231,6 @@ local	_gldCreateQuery	uVar9	scanCounter	INFERRED	words left, later the bit index
 local	_gldCreateQuery	iVar10	bitsLeft	CONFIRMED	counts 0x20 bits down
 local	_gldGetRendererInfo	param_1	rendererInfo	INFERRED	output record filled with fixed values and the two scalar outputs of selector 3
 local	_gldGetRendererInfo	param_2	rendererMask	INFERRED	must be a non-empty subset of the library display mask PTR_DAT_001e88ac[0]
-local	_gldGetRendererInfo	param_3	unused3	UNKNOWN	not used
-local	_gldGetRendererInfo	param_4	unused4	UNKNOWN	not used
-local	_gldGetRendererInfo	param_5	unused5	UNKNOWN	not used
-local	_gldGetRendererInfo	param_6	unused6	UNKNOWN	not used
-local	_gldGetRendererInfo	param_7	unused7	UNKNOWN	not used
-local	_gldGetRendererInfo	param_8	unused8	UNKNOWN	not used
 local	_gldGetRendererInfo	uVar1	returnCode	CONFIRMED	0x2719 bad mask, 0x271f open/call failure, 0 success
 local	_gldGetRendererInfo	piVar3	serviceList	INFERRED	library+8 list of device service entries
 local	_gldGetRendererInfo	iVar4	listCount	INFERRED	library+4 count, later _IOServiceOpen / call status
@@ -290,9 +280,6 @@ local	_gldFlushVertexArray	param_2	unused2	UNKNOWN	not used
 local	_gldFlushVertexArray	param_3	flushArg2	UNKNOWN	forwarded to FUN_0000b620
 local	_gldFlushVertexArray	param_4	flushArg3	UNKNOWN	forwarded to FUN_0000b620 (twice)
 local	_gldFlushVertexArray	param_5	doFlush	INFERRED	nonzero -> FUN_0000b620 called; returned as a boolean
-local	_gldFlushVertexArray	param_6	flushArg5	UNKNOWN	forwarded
-local	_gldFlushVertexArray	param_7	flushArg6	UNKNOWN	forwarded
-local	_gldFlushVertexArray	param_8	flushArg7	UNKNOWN	forwarded
 local	_gldModifyVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
 local	_gldModifyVertexArray	param_2	vertexArray	INFERRED	vertex array record; +0x228 holds the backing memory record
 local	_gldModifyVertexArray	bVar1	retired	INFERRED	loop-exit flag (also reused as the store-conditional success flag)
@@ -476,11 +463,6 @@ local	_gldInitDispatch	uVar4	word0	UNKNOWN	copied state word
 local	_gldInitDispatch	uVar5	word1	UNKNOWN	copied state word
 local	_gldInitDispatch	uVar6	word2	UNKNOWN	copied state word
 local	_gldInitDispatch	iVar7	unit	CONFIRMED	0..0xf counter passed to FUN_000a82c0
-local	_gldInitDispatch	local_38	defaultState0	CONFIRMED	first of five words copied from DAT_001aa4b0..c0 and passed as &local_38
-local	_gldInitDispatch	local_34	defaultState1	CONFIRMED	second word
-local	_gldInitDispatch	local_30	defaultState2	CONFIRMED	third word
-local	_gldInitDispatch	local_2c	defaultState3	CONFIRMED	fourth word
-local	_gldInitDispatch	local_28	defaultState4	CONFIRMED	fifth word
 local	_gldGetQueryInfo	param_1	ctx	INFERRED	ctx+0x224 query storage, +0x2610 result count, +0x261c mode
 local	_gldGetQueryInfo	param_2	query	CONFIRMED	query record; *query is the id indexing 0x20-byte entries
 local	_gldGetQueryInfo	param_3	pname	CONFIRMED	GL enum: 0x8866 GL_QUERY_RESULT_ARB, 0x8867 GL_QUERY_RESULT_AVAILABLE_ARB
@@ -518,11 +500,6 @@ local	FUN_00007020	puVar2	rendererLibrary	CONFIRMED	PTR_DAT_001e88ac library rec
 local	FUN_0000b620	param_1	ctx	INFERRED	ctx+8 byte = data-cache block size
 local	FUN_0000b620	param_2	address	CONFIRMED	start of the range to flush from the data cache
 local	FUN_0000b620	param_3	length	CONFIRMED	range length in bytes
-local	FUN_0000b620	param_4	unused4	UNKNOWN	not used
-local	FUN_0000b620	param_5	unused5	UNKNOWN	not used
-local	FUN_0000b620	param_6	unused6	UNKNOWN	not used
-local	FUN_0000b620	param_7	unused7	UNKNOWN	not used
-local	FUN_0000b620	param_8	unused8	UNKNOWN	not used
 local	FUN_0000b620	iVar1	offset	CONFIRMED	byte offset stepping by the cache block size (dcbst loop)
 local	FUN_0000b620	iVar2	span	CONFIRMED	range length rounded out to cache blocks
 local	FUN_0000b620	uVar3	cacheBlockSize	CONFIRMED	byte at ctx+8; dataCacheBlockStore/Flush step
@@ -543,11 +520,6 @@ local	FUN_00017100	param_3	values	CONFIRMED	low byte of *values cached; returns 
 local	FUN_00017720	param_1	rendererIndex	INFERRED	passed to FUN_00039100; result OR-ed with 0x1900
 local	FUN_00017a40	param_1	flagsInOut	CONFIRMED	ctx flags word (ctx+0x3c): updated with the pixel-format derived bits
 local	FUN_00017a40	param_2	pixelFormat	CONFIRMED	pixel-format record: +8 surface flags, +0x18/+0x1c masks, +0x24 sample buffers, +0x26 samples, +0x28 antialias mode
-local	FUN_00017a40	param_3	unused3	UNKNOWN	not used
-local	FUN_00017a40	param_4	unused4	UNKNOWN	not used
-local	FUN_00017a40	param_5	unused5	UNKNOWN	not used
-local	FUN_00017a40	param_6	unused6	UNKNOWN	not used
-local	FUN_00017a40	param_7	unused7	UNKNOWN	not used
 local	FUN_00017a40	iVar1	depthMask	INFERRED	pixelFormat+0x18: 1, 0x400, 0x800 or other -> bits 0x10000/0x30000/0x20000
 local	FUN_00017a40	uVar2	flags	CONFIRMED	working copy of *flagsInOut
 local	FUN_0001ac30	param_1	pixelFormat	CONFIRMED	pixel-format record validated: 0 valid, 0x271e NULL, 0x2716 bad renderer mask, 0x2712 invalid combination

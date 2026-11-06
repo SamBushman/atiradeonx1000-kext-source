@@ -4,7 +4,6 @@ local	FUN_000659d0	iVar2	programData	INFERRED	variant+0x54: program data block h
 local	FUN_000659d0	iVar6	constantBank	INFERRED	programData + 0x750: constant bank whose dirty mask words (+0x1018 ..) are cleared and set here
 local	FUN_000659d0	puVar8	constantOut	INFERRED	programData + 0x768: first constant vector of the bank
 use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
-use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*\(\(void\ \(\*\)\(\)\)FUN_0009f0b0\)\(param_1,param_2,param_3,param_4,param_5,param_6,iVar4,param_8,fparam_1,fparam_2,$	+3
 use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*\*puVar8\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x2460\);$	+16
 use	FUN_000659d0	iVar4	glStateExt	INFERRED	*(*(glContext + 4) + 0x10): GL state extension block (material and light state at +0x2460..)	^\s*\*puVar8\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x2460\);$@2	+16
 local	FUN_000659d0	iVar9	clearWordsLeft	INFERRED	8 .. 0: dirty mask words still to clear
@@ -61,7 +60,6 @@ use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted int
 use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*in_r5\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x3c\);$	+2
 use	FUN_00065370	iVar2	variant	INFERRED	program variant found in or inserted into the variant cache (key at glContext+0x1874)	^\s*if\ \(\*\(char\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x54\)\ \+\ 0x752\)\ ==\ '\\0'\)\ \{$	+1
 use	FUN_00065370	uVar3	paramList	INFERRED	parameter list created by paramListCreate for the newly built fixed-function program	^\s*uVar3\ =\ FUN_0009bd00\(param_1\);$	+1
-use	FUN_00065370	uVar3	paramList	INFERRED	parameter list created by paramListCreate for the newly built fixed-function program	^\s*in_r5\ =\ FUN_0009d410\(param_1,1,\&local_38,local_34,uVar3,in_r8,iVar4,in_r10\);$	+1
 use	FUN_00065370	uVar3	paramList	INFERRED	parameter list created by paramListCreate for the newly built fixed-function program	^\s*uVar5\ =\ FUN_0009c800\(param_1,param_1\ \+\ 0x1874,in_r5,in_r6,local_38,local_34\[0\],uVar3,$	+2
 local	FUN_00065370	uVar5	lookupResult	INFERRED	64-bit result of the variant cache lookup/insert: high word is the variant pointer
 local	FUN_00064850	param_1	glContext	INFERRED	GL context

@@ -10,7 +10,8 @@ def main():
     d, lst, out = sys.argv[1:4]
     mx = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 8
     here = os.path.dirname(os.path.abspath(__file__))
-    names = set(x.strip() for x in open(lst) if x.strip())
+    ALL = lst == '--all'      # retire every stale local/use row of the corpus (not only the rewritten functions'): `retire_stale_rows.py DIR --all OUT_NOTES`; data/func/target rows are never touched
+    names = set() if ALL else set(x.strip() for x in open(lst) if x.strip())
     addr = set()
     hdr = re.compile(r'^/\* (\S+) @ 0x([0-9a-f]+) \(')
     for f in glob.glob(d + '/part_*.c') + glob.glob(d + '/unowned_code/part_*.c') + glob.glob(d + '/landing_pads/*.c'):
@@ -19,6 +20,7 @@ def main():
             if m and m.group(1) in names:
                 addr.add(int(m.group(2), 16))
     def allowed(fn):
+        if ALL: return True
         if fn in names: return True
         m = re.match(r'^_?FUN_([0-9a-f]+)$', fn)
         return bool(m and int(m.group(1), 16) in addr)
@@ -31,13 +33,16 @@ def main():
         if not errs:
             break
         rows = collections.defaultdict(set)
-        bad = []
+        bad = []; kept = []
         for l in errs:
             m = re.match(r'^\.?/?([^:\s]+\.tsv):(\d+): ([^:]+): (.*)$', l)
-            if not m: bad.append(l); continue
+            if not m:
+                (kept if ALL else bad).append(l); continue
             f, ln, fn, why = m.groups()
             if not allowed(fn): bad.append(l); continue
             rows[f].add(int(ln))
+        if ALL and not rows:
+            print('%d errors left that are not local/use rows (left alone):' % len(kept)); print('\n'.join(kept[:40])); break
         if bad:
             print('ABORT: errors outside the rewritten functions:'); print('\n'.join(bad[:20])); sys.exit(2)
         for f, lns in rows.items():

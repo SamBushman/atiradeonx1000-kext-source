@@ -67,7 +67,6 @@ use	FUN_00083470	iVar13	colorOutSlotB	INFERRED	role read off the function body (
 use	FUN_00083470	iVar13	colorOutSlotB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar9\ =\ iVar13\ \+\ 2;$	+1
 use	FUN_00083470	iVar13	texUnitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x1824\);$	+2
 use	FUN_00083470	iVar13	texUnitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\[iVar13\ \+\ 0x21\]\ =\ iVar9;$	+1
-use	FUN_00083470	iVar13	texUnitIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_00093000\(puVar5,iVar13,uVar6,uVar7,in_r7,in_r8,in_r9\);$	+1
 local	FUN_00083470	in_r9	extraSlotCount	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00083470	local_68	variantKey	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00083470	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
@@ -122,16 +121,13 @@ use	FUN_00083870	iVar10	recordCountdown	INFERRED	role read off the function body
 use	FUN_00083870	iVar15	programKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x13c\);$	+2
 use	FUN_00083870	iVar15	programKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x13c\);$@2	+1
 use	FUN_00083870	iVar15	programKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x140\)\ =\ iVar15;$	+1
-use	FUN_00083870	iVar15	programKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ FUN_0009d410\(param_1,0,\&local_38,local_34,uVar8,param_6,iVar15,in_r10\);$	+3
 use	FUN_00083870	iVar15	programKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*\(uint\ \*\)\(iVar15\ \+\ 0x3cc\)\ <=\ \*\(uint\ \*\)\(iVar15\ \+\ 0x3e4\)\)\ \{$	+1
-use	FUN_00083870	iVar15	programKind	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(void\ \(\*\)\(\)\)FUN_00090470\)\(param_1,extraout_r4_00,param_3,param_4,param_5,param_6,iVar15,dVar17,fparam_2,$	+2
 use	FUN_00083870	iVar15	program	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x54\);$	+2
 use	FUN_00083870	iVar15	program	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ iVar10\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar15\ \+\ 0x3c8\);$	+1
 use	FUN_00083870	iVar15	program	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x54\);$@2	+1
 use	FUN_00083870	iVar15	program	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(iVar15\ \+\ 0x3c8\);$	+2
 use	FUN_00083870	iVar15	program	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x54\);$@3	+1
 use	FUN_00083870	iVar15	program	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x54\);$@4	+1
-use	FUN_00083870	iVar15	program	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar14\ <\ \*\(uint\ \*\)\(iVar15\ \+\ 0x3cc\)\);$	+1
 local	FUN_00083870	in_stack_ffffff98	unusedStackArg	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00083870	local_34	constRegCount	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00083870	local_38	builtConstBytes	INFERRED	role read off the function body (see notes_gld_q03.md)

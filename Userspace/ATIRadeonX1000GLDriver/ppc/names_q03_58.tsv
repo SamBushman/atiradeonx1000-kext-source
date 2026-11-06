@@ -153,7 +153,6 @@ use	ffvpEmitDirectionalLight	puVar18	constPtrC	INFERRED	role read off the functi
 use	ffvpEmitDirectionalLight	puVar18	constPtrC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,a1,local_134,puVar18,iVar8,\*\(undefined4\ \*\)\(iVar15\ \+\ 8\),$	+2
 use	ffvpEmitDirectionalLight	puVar18	constPtrC	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(param_1,uVar20,uVar5,puVar18,iVar4,uVar7,puVar10,\&DAT_001fa5e8,iVarS68,iVarS69,\&DAT_001dbd14,\&DAT_001fa5e8,iVarS68,iVarS33,\&DAT_001dbd74,\&DAT_001fa5e8\);$	+1
 use	ffvpEmitDirectionalLight	puVar9	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar17\ \+\ 0x290\);$	+1
-use	ffvpEmitDirectionalLight	puVar9	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*FUN_000913e0\(param_1,\*puVar9,\&local_1b8,local_6c,\&local_1a8\);$	+1
 use	ffvpEmitDirectionalLight	puVar9	lightRecCursorE	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ puVar9\ \+\ 1;$	+1
 use	ffvpEmitDirectionalLight	puVar9	selectPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ \&DAT_001dbd14;$	+1
 use	ffvpEmitDirectionalLight	puVar9	selectPtr	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ \(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x000048a0\)\ \+\ local_88\);$@2	+1

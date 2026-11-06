@@ -48,7 +48,6 @@ use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the
 use	psnRaReleaseUse	iVar6	insertByteOffset	INFERRED	insert position * 4 into the free list	^\s*\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ =\ uVar2;$	+2
 use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*iVar6\ =\ \*param_3;$	+1
 use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*sVar10\ =\ \*\(short\ \*\)\(\(uVar1\ \-\ 1\)\ \*\ 4\ \+\ iVar6\)\ \+\ \-1;$	+2
-use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*if\ \(\*\(short\ \*\)\(iVar6\ \+\ iVar11\ \+\ 2\)\ ==\ 0xf\)\ \{$	+1
 use	psnRaReleaseUse	iVar6	freeListBaseEnd	INFERRED	free list base pointer used for the merge-with-neighbour check at the end	^\s*if\ \(\*\(short\ \*\)\(iVar11\ \+\ iVar6\)\ !=\ sVar10\)\ break;$	+2
 use	psnRaReleaseUse	iVar7	shiftOffset	INFERRED	byte offset of the entry being shifted	^\s*iVar7\ =\ uVar9\ <<\ 2;$	+1
 use	psnRaReleaseUse	iVar7	shiftOffset	INFERRED	byte offset of the entry being shifted	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ iVar11\ \+\ \-4\);$	+2
@@ -70,7 +69,6 @@ use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeLi
 use	psnRaReleaseUse	iVar11	freeListBase	INFERRED	free list base pointer (*freeList)	^\s*\*\(ushort\ \*\)\(iVar6\ \+\ iVar11\)\ =\ uVar2;$	+1
 use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*iVar11\ =\ \(uVar1\ \-\ 2\)\ \*\ 4;$	+1
 use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*if\ \(\*\(short\ \*\)\(iVar6\ \+\ iVar11\)\ !=\ sVar10\)\ \{$	+1
-use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*if\ \(\*\(short\ \*\)\(iVar6\ \+\ iVar11\ \+\ 2\)\ ==\ 0xf\)\ \{$	+1
 use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*iVar11\ =\ iVar11\ \+\ \-4;$	+1
 use	psnRaReleaseUse	iVar11	prevEntryOffset	INFERRED	byte offset of the previous free list entry	^\s*if\ \(\*\(short\ \*\)\(iVar11\ \+\ iVar6\)\ !=\ sVar10\)\ break;$	+2
 local	psnRaReleaseUse	uVar12	scanCounter	INFERRED	countdown for the backwards free list scan

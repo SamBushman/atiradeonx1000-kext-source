@@ -26,7 +26,6 @@ use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry
 use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*puVar10\ =\ puVar10\ \+\ uVar3\ \*\ 2;$	+1
 use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar3\ =\ uVar6;$	+1
 use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*\*\(ushort\ \*\)\(\*param_3\ \+\ uVar3\ \*\ 4\)\ =\ uVar1\ \+\ 1;$	+2
-use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*if\ \(\(\*\(short\ \*\)\(iVar8\ \+\ iVar5\ \+\ 2\)\ ==\ 0\)\ \&\&$	+4
 use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+1
 use	psnRaAssignDefinition	uVar3	freePos	INFERRED	free list position of the entry that covers the required components	^\s*if\ \(\*\(ushort\ \*\)\(param_3\ \+\ 1\)\ <=\ uVar3\)\ break;$	+1
 use	psnRaAssignDefinition	iVar5	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*iVar5\ =\ param_2\[1\];$	+1
@@ -35,8 +34,6 @@ use	psnRaAssignDefinition	iVar5	bankBase	INFERRED	base of the temp bank (tempTab
 use	psnRaAssignDefinition	iVar5	bankBase	INFERRED	base of the temp bank (tempTable[1] for the first bank, tempTable[0] for the second)	^\s*\*\(undefined2\ \*\)\(iVar5\ \+\ uVar3\ \*\ 8\)\ =\ 0xffff;$	+1
 use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*iVar5\ =\ 0;$	+1
 use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*iVar5\ =\ uVar3\ \*\ 4;$	+1
-use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*if\ \(\*\(short\ \*\)\(iVar5\ \+\ \*param_3\ \+\ 2\)\ !=\ 0\)\ \{$	+1
-use	psnRaAssignDefinition	iVar5	freeByteOffset	INFERRED	free list position * 4 (0 for the first entry)	^\s*if\ \(\(\*\(short\ \*\)\(iVar8\ \+\ iVar5\ \+\ 2\)\ ==\ 0\)\ \&\&$	+3
 use	psnRaAssignDefinition	iVar5	freeShiftOffset	INFERRED	byte offset used while closing the gap in the free list	^\s*iVar5\ =\ uVar3\ <<\ 2;$	+1
 use	psnRaAssignDefinition	iVar5	freeShiftOffset	INFERRED	byte offset used while closing the gap in the free list	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ iVar8\)\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ iVar8\ \+\ 4\);$	+2
 local	psnRaAssignDefinition	uVar6	freeEntryCount	INFERRED	free list position + 1: entry count needed to reach the chosen entry

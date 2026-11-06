@@ -22,7 +22,6 @@ use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0
 use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*puVar14\[1\]\ =\ iVar20\ <<\ 0x10\ \|\ uVar1\ \&\ 0xffff;$	+1
 use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*iVar20\ =\ \(int\)\(fVar6\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2814\)\ \*\ FLOAT_001aa10c\ \*\ \(fVar3\ \-\ fVar2\)\);$@2	+2
 use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*puVar14\[1\]\ =\ iVar20\ <<\ 0x10\ \|\ uVar1\ \&\ 0xffff;$@2	+1
-use	FUN_000a6860	iVar20	extentXFixed	INFERRED	(int)(screenScale * ctx+0x2814 * 0.5 * (right - left)): horizontal extent written to the high half of packet word 1	^\s*FUN_0009d3b0\(param_1,extraout_r4,iVar16,puVar17,puVar18,uVar19,iVar20\);$	+1
 local	FUN_000a6860	iVar21	drawFlagA	INFERRED	1 when dirty bit 0x100 is set and byte ctx+0x1490 is nonzero
 local	FUN_000a6860	dVar22	depthValue	INFERRED	double at engine caps +0x2d88, packet word 8
 local	FUN_000a6860	auStack_128	savedDrawState	INFERRED	144-byte save area for gldEnterInternalDrawState / gldLeaveInternalDrawState

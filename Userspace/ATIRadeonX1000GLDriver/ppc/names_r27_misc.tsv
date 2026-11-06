@@ -58,7 +58,6 @@ local	gldDrawInternalRect	extraout_r4	staleArgR4	INFERRED	leftover r4 after the 
 local	gldFlushProgramStateForDraw	in_r6	staleArgR6	INFERRED	never assigned; forwarded unchanged to the (ctx+0x1294) vtable callback
 local	gldFlushProgramStateForDraw	in_r7	staleArgR7	INFERRED	same as staleArgR6 for r7
 local	gldFlushProgramStateForDraw	in_r8	staleArgR8	INFERRED	same as staleArgR6 for r8
-local	gldValidateState	fparam_9	forwardedFloatArg9	CONFIRMED	completes this function's own existing forwardedArg2..7/forwardedFloatArg1..8 convention; never read, just the 9th incoming float arg
 local	arbValidateProgram	in_r7	scratchR7	UNKNOWN	one register, three disjoint roles in this 3768-byte function: (1) ~L1728 a typeTagTable-derived pointer argument to arbfpInternParameter, (2) ~L1823-2103 low half of a 64-bit read-register-usage bitmask accumulator paired with writtenLo/writtenHi, (3) ~L2176 unread varargs padding to a printf-style error stub; not split because the three regions are reached via a shared goto-driven error path - see notes_r27_remaining.md
 local	arbValidateProgram	in_r8	scratchR8	UNKNOWN	same register pairing as scratchR7 (role 2 is the high half of the bitmask accumulator); see notes_r27_remaining.md
 local	ffvpSelectLitProgramVariant	in_r5	scratchR5	UNKNOWN	two disjoint roles: the ffvpBuildProgram(...) result forwarded into fpVariantCacheInsert, and later a field of `variant` forwarded into a vtable call; see notes_r27_remaining.md

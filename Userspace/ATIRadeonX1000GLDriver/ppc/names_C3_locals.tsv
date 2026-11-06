@@ -205,12 +205,6 @@ local	FUN_0019a368	param_1	this	CONFIRMED	receiver
 local	FUN_0019a384	param_1	this	CONFIRMED	receiver
 local	FUN_0019a3bc	param_1	this	CONFIRMED	format strings in the body
 local	FUN_0019a3bc	param_2	quiet	CONFIRMED	format strings in the body
-local	FUN_0019a3bc	param_3	unused1	CONFIRMED	format strings in the body
-local	FUN_0019a3bc	param_4	unused2	CONFIRMED	format strings in the body
-local	FUN_0019a3bc	param_5	unused3	CONFIRMED	format strings in the body
-local	FUN_0019a3bc	param_6	printfArg6	CONFIRMED	format strings in the body
-local	FUN_0019a3bc	param_7	printfArg7	CONFIRMED	format strings in the body
-local	FUN_0019a3bc	param_8	printfArg8	CONFIRMED	format strings in the body
 local	FUN_0019a484	param_1	this	INFERRED	entries of 0x1c bytes
 local	FUN_0019a510	param_1	this	CONFIRMED	0x10 bytes per instruction
 local	FUN_0019a510	iVar1	instructionByteOffset	CONFIRMED	0x10 bytes per instruction
@@ -348,9 +342,6 @@ local	FUN_0019e11c	param_3	block	INFERRED	node + 0xac is the predicate stack ent
 local	FUN_0019e318	param_1	this	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
 local	FUN_0019e318	param_2	node	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
 local	FUN_0019e318	param_3	block	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
-local	FUN_0019e318	param_5	extra2	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
-local	FUN_0019e318	param_6	extra3	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
-local	FUN_0019e318	param_7	extra4	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
 local	FUN_0019e660	param_1	this	INFERRED	forwarded to FUN_0019adf8
 local	FUN_0019e660	param_2	enable	INFERRED	forwarded to FUN_0019adf8
 local	FUN_0019e6e0	param_1	this	INFERRED	loop stacks at this+0x94 / this+0x98
@@ -556,7 +547,6 @@ local	FUN_001a1b64	iVar5	destinationIndex	CONFIRMED	record offsets as in the R30
 local	FUN_001a1b64	bVar2	outputFlags	CONFIRMED	record offsets as in the R300 twin
 local	FUN_001a25a8	param_1	this	INFERRED	factory FUN_001043f0(opcode, compiler)
 local	FUN_001a25a8	param_3	blockArg	INFERRED	factory FUN_001043f0(opcode, compiler)
-local	FUN_001a25a8	param_4	flag	INFERRED	factory FUN_001043f0(opcode, compiler)
 local	FUN_001a25a8	uVar7	compareCode	INFERRED	factory FUN_001043f0(opcode, compiler)
 local	FUN_001a2878	param_1	this	INFERRED	kind 5 = control-flow record
 local	FUN_001a2878	param_2	loopCount	INFERRED	kind 5 = control-flow record
@@ -576,7 +566,6 @@ local	FUN_001a2c08	param_3	block	INFERRED	node + 0xdc flags children
 local	FUN_001a2c08	param_4	extra1	INFERRED	node + 0xdc flags children
 local	FUN_001a2c08	param_5	extra2	INFERRED	node + 0xdc flags children
 local	FUN_001a2c08	param_6	extra3	INFERRED	node + 0xdc flags children
-local	FUN_001a2c08	param_7	extra4	INFERRED	node + 0xdc flags children
 local	FUN_001a2c08	iVar4	recordIndexBefore	INFERRED	node + 0xdc flags children
 local	FUN_001a2c08	uVar3	emittedAny	INFERRED	node + 0xdc flags children
 local	FUN_001a2d10	param_1	this	INFERRED	node + 0x130 is the branch count
@@ -595,7 +584,6 @@ local	FUN_001a2ee4	param_3	block	INFERRED	node + 0x138 / +0x13c are the exit blo
 local	FUN_001a2ee4	param_4	extra1	INFERRED	node + 0x138 / +0x13c are the exit blocks
 local	FUN_001a2ee4	param_5	extra2	INFERRED	node + 0x138 / +0x13c are the exit blocks
 local	FUN_001a2ee4	param_6	extra3	INFERRED	node + 0x138 / +0x13c are the exit blocks
-local	FUN_001a2ee4	param_7	extra4	INFERRED	node + 0x138 / +0x13c are the exit blocks
 local	FUN_001a2ee4	piVar1	conditionNode	INFERRED	node + 0x138 / +0x13c are the exit blocks
 local	FUN_001a2ee4	iVar4	recordIndexBefore	INFERRED	node + 0x138 / +0x13c are the exit blocks
 local	FUN_001a2ee4	uVar3	hasCondition	INFERRED	node + 0x138 / +0x13c are the exit blocks

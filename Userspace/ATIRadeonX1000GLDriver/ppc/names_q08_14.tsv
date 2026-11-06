@@ -123,9 +123,6 @@ local	FUN_00181b80	param_1	rebuildState	INFERRED	object with +8 scheduling model
 local	FUN_00181b80	param_2	block	INFERRED	basic block whose instruction list (block+0x98 forward, +0xa0 backward) is walked
 local	FUN_00181b80	param_3	maxLevelOut	INFERRED	out: highest level reached in the backward pass
 local	FUN_00181b80	param_4	schedCostOut	INFERRED	out: result of the scheduling model query (vtable +0x5c)
-local	FUN_00181b80	param_5	staleArg5	INFERRED	unused stale argument register
-local	FUN_00181b80	param_6	staleArg6	INFERRED	unused stale argument register
-local	FUN_00181b80	param_7	staleArg7	INFERRED	unused stale argument register
 use	FUN_00181b80	iVar2	sourceLevelPlusOne	INFERRED	level (node+4) of the source node plus one	^\s*iVar2\ =\ \*\(int\ \*\)\(\*piVar6\ \+\ 4\)\ \+\ 1;$	+1
 use	FUN_00181b80	iVar2	sourceLevelPlusOne	INFERRED	level (node+4) of the source node plus one	^\s*if\ \(\(int\)puVar4\[1\]\ <\ iVar2\)\ \{$	+2
 use	FUN_00181b80	iVar5	nodeDepth	INFERRED	node depth (node[1]) raised to sourceLevelPlusOne	^\s*iVar5\ =\ puVar4\[1\];$	+1

@@ -4,7 +4,6 @@ local	FUN_000a3790	param_1	glContext	INFERRED	callers pass their variable `glCon
 local	FUN_000a3a60	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in FUN_000a4980)
 local	FUN_000a3be0	param_2	primitiveMode	INFERRED	callers pass their variable `primitiveMode` here (1 call site(s), e.g. in FUN_0002cc30)
 local	FUN_000a3be0	param_6	extraArg5	INFERRED	callers pass their variable `extraArg5` here (1 call site(s), e.g. in FUN_0002cc30)
-local	FUN_000a3be0	param_7	staleArgR9	INFERRED	callers pass their variable `staleArgR9` here (1 call site(s), e.g. in FUN_0002cc30)
 local	FUN_000a43f0	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in FUN_000a4980)
 local	FUN_000a4550	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in FUN_000a4980)
 local	FUN_000a46d0	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in FUN_000a4980)
@@ -20,10 +19,6 @@ local	FUN_000a8630	param_3	dirtyBitsWord8	INFERRED	callers pass their variable `
 local	FUN_000a8a00	param_1	glContextPtr4	INFERRED	callers pass their variable `streamPtr4` here (2 call site(s), e.g. in FUN_000a9ac0)
 local	FUN_000a8a00	param_2	dirtyBitsWord8	INFERRED	callers pass their variable `dirtyBitsWord8` here (1 call site(s), e.g. in FUN_000a9ac0)
 local	FUN_000a8c00	param_1	glContext	INFERRED	callers pass their variable `stream` here (2 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000a8c00	param_3	dirtyBitsArg	INFERRED	callers pass their variable `dirtyBitsArg` here (2 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000a8c00	param_4	scratchR6	INFERRED	callers pass their variable `scratchR6` here (2 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000a8c00	param_5	dirtyWord3	INFERRED	callers pass their variable `dirtyWord3` here (1 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000a8c00	param_6	dirtyWord1	INFERRED	callers pass their variable `dirtyWord1` here (1 call site(s), e.g. in FUN_000a9ac0)
 local	FUN_000a8d70	param_1	glContext	INFERRED	callers pass their variable `stream` here (2 call site(s), e.g. in FUN_000a9ac0)
 local	FUN_000a8e20	param_1	glContext	INFERRED	callers pass their variable `stream` here (2 call site(s), e.g. in FUN_000a9ac0)
 local	FUN_000a9070	param_1	glContextPtr4	INFERRED	callers pass their variable `streamPtr4` here (2 call site(s), e.g. in FUN_000a9ac0)
@@ -39,11 +34,6 @@ local	FUN_000aec40	param_2	a1Ptr74	INFERRED	callers pass their variable `a1Ptr74
 local	FUN_000b4400	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in FUN_000b6580)
 local	FUN_000b4400	param_5	glContextWord1e5c	INFERRED	callers pass their variable `glContextWord1e5c` here (2 call site(s), e.g. in FUN_000b6580)
 local	FUN_000bda40	param_1	glContext	INFERRED	callers pass their variable `stream` here (1 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000bda40	param_3	dirtyBitsArg	INFERRED	callers pass their variable `dirtyBitsArg` here (1 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000bda40	param_4	scratchR6	INFERRED	callers pass their variable `scratchR6` here (1 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000bda40	param_5	dirtyWord3	INFERRED	callers pass their variable `dirtyWord3` here (1 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000bda40	param_6	dirtyWord1	INFERRED	callers pass their variable `dirtyWord1` here (1 call site(s), e.g. in FUN_000a9ac0)
-local	FUN_000bda40	param_8	dirtyWord4	INFERRED	callers pass their variable `dirtyWord4` here (1 call site(s), e.g. in FUN_000a9ac0)
 use	FUN_000bde70	uVar6	phaseScan	INFERRED	phase index while counting the instruction records of the later phases	^\s*uVar6\ =\ uVar18;$	+1
 use	FUN_000bde70	uVar6	phaseScan	INFERRED	phase index while counting the instruction records of the later phases	^\s*uVar17\ =\ uVar17\ \+\ \(param_2\[uVar6\ \+\ 2\]\ >>\ 6\ \&\ 0x3f\)\ \+\ 1;$	+3
 use	FUN_000bde70	uVar6	phaseScan	INFERRED	phase index while counting the instruction records of the later phases	^\s*uVar6\ =\ uVar13;$	+1

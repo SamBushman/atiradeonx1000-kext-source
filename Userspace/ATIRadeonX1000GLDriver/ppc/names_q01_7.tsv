@@ -128,11 +128,6 @@ local	FUN_00017750	sVar1	sampleCount	INFERRED	pixelFormat+0x26: samples per pixe
 local	FUN_00017750	iVar3	pixelFormatHome	INFERRED	copy of pixelFormat kept across the first FUN_0000a180 call
 local	FUN_00017750	uVar2	depthStencilBitsValue	INFERRED	FUN_0000a0f0 result for the depth word (+0x18) and then the stencil word (+0x1c)
 local	FUN_00017750	uVar4	pixelFormatFlag1	INFERRED	(pixelFormat+0xc >> 1) & 1, stored at stateBlock+0x26; also forwarded as a stale argument
-local	FUN_00017750	local_58	channelBits0	INFERRED	first short written by FUN_0000a180 (channel size table, five shorts)
-local	FUN_00017750	local_56	channelBits1	INFERRED	second short written by FUN_0000a180
-local	FUN_00017750	local_54	channelBits2	INFERRED	third short written by FUN_0000a180
-local	FUN_00017750	local_52	channelBits3	INFERRED	fourth short written by FUN_0000a180
-local	FUN_00017750	local_50	channelBits4	INFERRED	fifth short written by FUN_0000a180
 local	FUN_00017b20	param_1	ctx	CONFIRMED	GLDContext: ctx+0x2a60 receives the process id, +0x2a64 the display mask
 local	FUN_00017b20	iVar1	distributedCenter	CONFIRMED	CFNotificationCenterGetDistributedCenter()
 local	FUN_00017b20	uVar2	pid	CONFIRMED	getpid(), stored in ctx+0x2a60 and sent as the "pid" value

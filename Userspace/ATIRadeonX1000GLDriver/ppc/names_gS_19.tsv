@@ -178,7 +178,6 @@ use	FUN_0007c760	pdVar14	lastRecordIndexValue	INFERRED	record count - 1	^\s*pdVa
 use	FUN_0007c760	pdVar14	lastRecordIndexValue	INFERRED	record count - 1	^\s*pdVar24\ =\ pdVar14;$	+1
 use	FUN_0007c760	pdVar14	lastRecordIndexValue	INFERRED	record count - 1	^\s*pdVar14\ =\ pdVar18;$	+1
 use	FUN_0007c760	pdVar14	lastRecordIndexValue	INFERRED	record count - 1	^\s*pdVar14\ =\ local_78;$	+1
-use	FUN_0007c760	pdVar14	lastRecordIndexValue	INFERRED	record count - 1	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007b0d0\)\(param_1,puVar27,pdVar15,in_r6,piVar31,piVar32,pdVar14,pdVar20\);$	+1
 use	FUN_0007c760	pdVar14	outRecordCopyPtr	INFERRED	pointer into the output record array (alloc[6] + index*0x10)	^\s*pdVar14\ =\ pdVar25;$	+1
 use	FUN_0007c760	pdVar14	outRecordCopyPtr	INFERRED	pointer into the output record array (alloc[6] + index*0x10)	^\s*\*pdVar14\ =\ uVar10;$	+2
 use	FUN_0007c760	pdVar14	outRecordCopyPtr	INFERRED	pointer into the output record array (alloc[6] + index*0x10)	^\s*pdVar14\ =\ local_74\ \+\ iVar19;$	+1
@@ -306,7 +305,6 @@ use	FUN_0007c760	iVar19	recordWordOffset	INFERRED	record index * 4	^\s*pdVar14\ 
 use	FUN_0007c760	iVar19	recordWordOffset	INFERRED	record index * 4	^\s*pdVar14\ =\ local_74\ \+\ iVar19;$@2	+1
 use	FUN_0007c760	iVar19	recordWordOffset	INFERRED	record index * 4	^\s*iVar19\ =\ iVar19\ \+\ \-4;$	+1
 use	FUN_0007c760	iVar19	status	INFERRED	callee status (returned when non-zero)	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079910\)\(param_1,puVar27,\*pdVar15,in_r6,0,0,pdVar18\);$	+3
-use	FUN_0007c760	iVar19	status	INFERRED	status of the final allocator call	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007b0d0\)\(param_1,puVar27,pdVar15,in_r6,piVar31,piVar32,pdVar14,pdVar20\);$	+2
 use	FUN_0007c760	puVar21	tablePtr	INFERRED	pointer into one of the dependency tables being cleared / walked (alloc+0x3914, +0x2914, +0x3114)	^\s*puVar21\ =\ local_64\ \+\ 0x21f;$	+1
 use	FUN_0007c760	puVar21	tablePtr	INFERRED	pointer into one of the dependency tables being cleared / walked (alloc+0x3914, +0x2914, +0x3114)	^\s*\*\(undefined1\ \*\)puVar21\ =\ 0;$	+1
 use	FUN_0007c760	puVar21	tablePtr	INFERRED	pointer into one of the dependency tables being cleared / walked (alloc+0x3914, +0x2914, +0x3114)	^\s*puVar21\ =\ \(uint\ \*\)\(\(int\)puVar21\ \+\ 1\);$	+1

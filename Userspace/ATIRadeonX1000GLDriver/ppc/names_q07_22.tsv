@@ -9,12 +9,9 @@ local	FUN_00151370	local_70	operandCopy	INFERRED	role read off the web: combine 
 local	FUN_00151370	local_74	lastOperandTail	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_84	lastOperandSource	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_88	lastOperandRecord	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
-local	FUN_00151370	local_90	counterSave1	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
-local	FUN_00151370	local_94	counterSave0	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_98	instOperand2Select	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_5c	operandCopyWord5	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_6c	operandCopyWord1	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
-local	FUN_00151370	local_8c	counterSave2	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_9c	instOperand1Select	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_a0	newSrcBOperand2Select	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources
 local	FUN_00151370	local_a4	newSrcBOperand1Select	INFERRED	role read off the web: combine two independent instructions that read the same source into one binary instruction fed by two new constant-masked sources

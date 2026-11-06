@@ -7,8 +7,6 @@ local	ilCopyInstructionRemapped	uVar2	destRegKind	INFERRED	register kind field (
 local	psnDecRetargetSourceReg	uVar3	scratchBits	INFERRED	alpha-component flag first, later the source swizzle word under test
 local	ilRecordRegisterUse	param_5	hasExtraWord	INFERRED	token bit 22: a destination extension word was present
 local	ilRecordRegisterUse	iVar1	lastRegister	INFERRED	usageInfo[1]: highest register recorded
-local	gld_uploadParamConstants	iVar1	allocaOffset	INFERRED	negative size of the constant buffer allocated on the stack
-local	gld_uploadParamConstants	auStack_70	allocaBase	INFERRED	stack frame base the dynamic constant buffer is placed relative to
 local	gld_uploadParamConstants	auStack_30	constantBuffer	INFERRED	stack buffer receiving the gathered program constants
 local	gld_emitProgramStateAndConstants	param_1	glContext	INFERRED	GL context forwarded to the packet emitters
 local	gld_emitProgramStateAndConstants	param_2	programObj	INFERRED	program object forwarded to the packet emitters

@@ -28,9 +28,7 @@ use	FUN_000bfed0	uVar40	rsWordPartial	INFERRED	RS output word assembled step by 
 use	FUN_000bfed0	uVar40	signMaskE	INFERRED	0xffffff80 when bit 13 of the 16-bit field at +0xe is set (sign extension of the 7-bit register field), else 0	^\s*uVar40\ =\ 0xffffff80;$	+1
 use	FUN_000bfed0	uVar40	signMaskE	INFERRED	0xffffff80 when bit 13 of the 16-bit field at +0xe is set (sign extension of the 7-bit register field), else 0	^\s*uVar40\ =\ 0;$	+1
 use	FUN_000bfed0	uVar40	signMaskE	INFERRED	0xffffff80 when bit 13 of the 16-bit field at +0xe is set (sign extension of the 7-bit register field), else 0	^\s*uVar24\ >>\ 5\ \&\ 0x200\ \|\ uVar24\ >>\ 7\ \&\ 0x100\ \|\ uVar40\ \&\ 0xff\ \|\ uVar24\ \&\ 0x7f;$	+1
-use	FUN_000bfed0	uVar41	hwWordC_f0	INFERRED	bits 0-1 of hardware word +0xc	^\s*uVar41\ =\ local_6c\ \&\ 3;$	+1
 use	FUN_000bfed0	uVar41	hwWordC_f0	INFERRED	bits 0-1 of hardware word +0xc	^\s*uVar29\ <<\ 0xf\ \|\ uVar44\ <<\ 0xd\ \|\ uVar28\ <<\ 8\ \|\ uVar27\ <<\ 5\ \|\ uVar26\ <<\ 2\ \|\ uVar41;$	+1
-use	FUN_000bfed0	uVar42	hwWord14_f12	INFERRED	bits 12-13 of hardware word +0x14	^\s*uVar42\ =\ local_6c\ \&\ 3;$	+1
 use	FUN_000bfed0	uVar42	hwWord14_f12	INFERRED	bits 12-13 of hardware word +0x14	^\s*uVar42\ <<\ 0xc\ \|\ uVar22\ >>\ 3\ \&\ 0x800\ \|\ \(uVar22\ \&\ 0x7f\)\ <<\ 4\ \|\ bVar14\ \&\ 0xf;$	+1
 use	FUN_000bfed0	uVar43	rsOutIndex	INFERRED	number of RS words written so far	^\s*uVar43\ =\ 0;$	+1
 use	FUN_000bfed0	uVar43	rsOutIndex	INFERRED	number of RS words written so far	^\s*uVar48\ =\ uVar43;$	+1
@@ -48,7 +46,6 @@ use	FUN_000bfed0	uVar43	rsOutCount	INFERRED	RS word count (masked), or 1 for the
 use	FUN_000bfed0	uVar43	signMask10	INFERRED	sign extension mask for the 7-bit register field at +0x10	^\s*uVar43\ =\ 0xffffff80;$	+1
 use	FUN_000bfed0	uVar43	signMask10	INFERRED	sign extension mask for the 7-bit register field at +0x10	^\s*uVar43\ =\ 0;$@2	+1
 use	FUN_000bfed0	uVar43	signMask10	INFERRED	sign extension mask for the 7-bit register field at +0x10	^\s*\(uVar43\ \&\ 0xff\ \|\ uVar17\ \&\ 0x7f\)\ <<\ 10\ \|$	+1
-use	FUN_000bfed0	uVar44	hwWordC_f13	INFERRED	bits 13-14 of hardware word +0xc	^\s*uVar44\ =\ local_70\ \&\ 3;$	+1
 use	FUN_000bfed0	uVar44	hwWordC_f13	INFERRED	bits 13-14 of hardware word +0xc	^\s*uVar29\ <<\ 0xf\ \|\ uVar44\ <<\ 0xd\ \|\ uVar28\ <<\ 8\ \|\ uVar27\ <<\ 5\ \|\ uVar26\ <<\ 2\ \|\ uVar41;$	+1
 local	FUN_000bfed0	uVar47	signMask12	INFERRED	sign extension mask for the 7-bit register field at +0x12
 use	FUN_000bfed0	uVar48	rsOutIndexNext	INFERRED	RS word index after this record	^\s*uVar48\ =\ uVar43;$	+1
@@ -65,10 +62,6 @@ local	FUN_000bfed0	uVar51	signMask1e	INFERRED	sign extension mask for the 7-bit 
 local	FUN_000bfed0	uVar54	signMask1c	INFERRED	sign extension mask for the 7-bit register field at +0x1c
 use	FUN_000bfed0	uVar55	firstAddrWord	INFERRED	psnProgram+0x10 & 0x1ff, start address field of programImage[2]	^\s*uVar55\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x10\)\ \&\ 0x1ff;$	+2
 use	FUN_000bfed0	uVar55	firstAddrWord	INFERRED	psnProgram+0x10 & 0x1ff, start address field of programImage[2]	^\s*param_3\[2\]\ =\ \(uVar24\ \&\ 0x1ff\)\ <<\ 0x10\ \|\ uVar55;$	+1
-local	FUN_000bfed0	local_78	fieldTemp0	INFERRED	one of four scratch words handed by address to the selector remap helpers FUN_000bf910 / FUN_000bfcc0
-local	FUN_000bfed0	local_74	fieldTemp1	INFERRED	one of four scratch words handed by address to the selector remap helpers FUN_000bf910 / FUN_000bfcc0
-local	FUN_000bfed0	local_70	fieldTemp2	INFERRED	one of four scratch words handed by address to the selector remap helpers FUN_000bf910 / FUN_000bfcc0
-local	FUN_000bfed0	local_6c	fieldTemp3	INFERRED	one of four scratch words handed by address to the selector remap helpers FUN_000bf910 / FUN_000bfcc0
 local	FUN_000bfed0	local_68	fieldTemp3Ptr	INFERRED	pointer to local_6c passed to the remap helpers
 local	FUN_000bfed0	local_64	fieldTemp1Ptr	INFERRED	pointer to local_74 passed to the remap helpers
 local	FUN_000bfed0	local_60	fieldTemp2Ptr	INFERRED	pointer to local_70 passed to the remap helpers

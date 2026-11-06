@@ -3,8 +3,6 @@ local	psnDecAlphaDestIs	param_1	entry	INFERRED	the decoded entry: two 0x40-byte 
 local	psnDecAlphaDestIs	param_2	registerNumber	INFERRED	register compared with the alpha destination (+0x44)
 local	psnDecAlphaComponentReadsReg	param_1	entry	INFERRED	the decoded entry: two 0x40-byte halves (RGB at +0, alpha at +0x40), six address slots at +0x80..+0x8a, mode at +0x8c
 local	psnDecAlphaComponentReadsReg	param_2	registerNumber	INFERRED	address compared with the source address table
-local	psnDecAlphaComponentReadsReg	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): unused by this function
-local	psnDecAlphaComponentReadsReg	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused by this function
 local	psnDecAnySourceIsReg	param_1	entry	INFERRED	the decoded entry: two 0x40-byte halves (RGB at +0, alpha at +0x40), six address slots at +0x80..+0x8a, mode at +0x8c
 local	psnDecAnySourceIsReg	param_2	usageMask	INFERRED	usage mask tested against every source read mask
 local	psnDecAnySourceIsReg	param_3	address	INFERRED	address slot value compared with the slots at +0x80..
@@ -19,20 +17,12 @@ local	psnDecHasFreeAddressSlot	param_1	entry	INFERRED	the decoded entry: two 0x4
 local	psnDecReadsRegMask	param_1	entry	INFERRED	the decoded entry: two 0x40-byte halves (RGB at +0, alpha at +0x40), six address slots at +0x80..+0x8a, mode at +0x8c
 local	psnDecReadsRegMask	param_2	registerNumber	INFERRED	address compared with the source address table
 local	psnDecReadsRegMask	param_3	componentMask	INFERRED	components that must be read
-local	psnDecReadsRegMask	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused by this function
 local	psnDecSourceHasPartialMask	param_1	entry	INFERRED	the decoded entry: two 0x40-byte halves (RGB at +0, alpha at +0x40), six address slots at +0x80..+0x8a, mode at +0x8c
 local	psnDecSourceHasPartialMask	param_2	address	INFERRED	address slot value
 local	psnDecSourceHasPartialMask	param_3	componentMask	INFERRED	components of the mask
-local	psnDecSourceHasPartialMask	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused by this function
-local	psnDecSourceHasPartialMask	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): unused by this function
-local	psnDecSourceHasPartialMask	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): unused by this function
 local	psnDecDestMatchesRegMask	param_1	entry	INFERRED	the decoded entry: two 0x40-byte halves (RGB at +0, alpha at +0x40), six address slots at +0x80..+0x8a, mode at +0x8c
 local	psnDecDestMatchesRegMask	param_2	registerNumber	INFERRED	destination register to match
 local	psnDecDestMatchesRegMask	param_3	componentMask	INFERRED	components that must overlap the write mask
-local	psnDecDestMatchesRegMask	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused by this function
-local	psnDecDestMatchesRegMask	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): unused by this function
-local	psnDecDestMatchesRegMask	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): unused by this function
-local	psnDecDestMatchesRegMask	param_7	passThroughR9	INFERRED	Ghidra register-argument pass-through (r9): unused by this function
 local	psnDecCanFoldIntoSlot	param_1	entry	INFERRED	the decoded entry: two 0x40-byte halves (RGB at +0, alpha at +0x40), six address slots at +0x80..+0x8a, mode at +0x8c
 local	psnDecCanFoldIntoSlot	param_2	halfSelector	INFERRED	8 selects the alpha half, anything else the RGB half
 local	psnDecCanFoldIntoSlot	param_3	slotCount	INFERRED	count tested against 1 and 2
@@ -46,9 +36,6 @@ local	psnDecSwapAddressSlotsInSources	param_1	entry	INFERRED	the decoded entry: 
 local	psnDecSwapAddressSlotsInSources	param_2	slotA	INFERRED	first address slot
 local	psnDecSwapAddressSlotsInSources	param_3	slotB	INFERRED	second address slot
 local	psnDecSwapAddressSlotsInSources	param_4	group	INFERRED	address group (0 = RGB slots, 1 = alpha slots)
-local	psnDecSwapAddressSlotsInSources	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): unused by this function
-local	psnDecSwapAddressSlotsInSources	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): unused by this function
-local	psnDecSwapAddressSlotsInSources	param_7	passThroughR9	INFERRED	Ghidra register-argument pass-through (r9): unused by this function
 local	psnConstantComponentsAreOne	param_1	constants	INFERRED	constant table (16 bytes per entry)
 local	psnConstantComponentsAreOne	param_2	maskHigh	INFERRED	upper word of the 64-bit usable-constant mask
 local	psnConstantComponentsAreOne	param_3	maskLow	INFERRED	lower word of the 64-bit usable-constant mask

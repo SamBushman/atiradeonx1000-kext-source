@@ -25,19 +25,12 @@ local	psnReallocateTemps	uStack_8a0	releaseOperandReg	INFERRED	register half of 
 local	psnReallocateTemps	uStack_89e	releaseOperandMask	INFERRED	component mask half of the release operand
 local	psnReallocateTemps	uStack_89c	secondOperandReg	INFERRED	register half of the second operand pair on the stack
 local	psnReallocateTemps	uStack_89a	secondOperandMask	INFERRED	component mask half of the second operand pair on the stack
-local	psnReallocateTemps	puStack_898	tempTableBank0	INFERRED	temp table {bank0 pointer, bank1 pointer, split at +8}: first bank pointer (also the struct address)
-local	psnReallocateTemps	puStack_894	tempTableBank1	INFERRED	second bank pointer of the temp table (0 when only one bank is used)
 local	psnReallocateTemps	uStack_890	tempTableSplit	INFERRED	register number where the second bank starts (low half of param_3)
 local	psnReallocateTemps	uStack_88c	tempTablePad	INFERRED	padding word following the temp table struct
 local	psnReallocateTemps	uStack_888	zeroWordA	INFERRED	zero word of the on-stack state block
 local	psnReallocateTemps	uStack_884	zeroWordB	INFERRED	zero word of the on-stack state block
 local	psnReallocateTemps	uStack_880	zeroWordC	INFERRED	zero word of the on-stack state block
 local	psnReallocateTemps	uStack_87c	defOperand	INFERRED	operand {register, mask ^ 0xf} passed to psnRaAssignDefinition
-local	psnReallocateTemps	uStack_878	defOperandPad0	INFERRED	padding of the definition operand struct
-local	psnReallocateTemps	uStack_874	defOperandPad1	INFERRED	padding of the definition operand struct
-local	psnReallocateTemps	uStack_870	defOperandPad2	INFERRED	padding of the definition operand struct
-local	psnReallocateTemps	uStack_86c	defOperandPad3	INFERRED	padding of the definition operand struct
-local	psnReallocateTemps	uStack_868	defOperandPad4	INFERRED	padding of the definition operand struct
 local	psnReallocateTemps	auStack_864	collectedRegs	INFERRED	519 words: list of registers collected for the current instruction group
 local	psnReallocateTemps	param_8	scanIndex	INFERRED	list index while scanning collectedRegs; also forwarded as a stale argument
 local	psnReallocateTemps	param_3	useSecondBank	INFERRED	non-zero when a second temp bank is used (its low half is the split register)

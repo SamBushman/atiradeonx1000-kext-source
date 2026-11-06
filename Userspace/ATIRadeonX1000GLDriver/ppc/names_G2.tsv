@@ -2,8 +2,6 @@
 local	FUN_00034200	param_1	ctx	INFERRED	*(ctx+0xc) is the shared record whose pthread mutex is locked for the whole call and unlocked on every exit
 local	FUN_00034200	param_2	texture	INFERRED	texture record; texture[0xc] (+0x30) is the level table (as _gldGetTextureLevel)
 local	FUN_00034200	param_3	face	INFERRED	passed through to FUN_00030b50/FUN_00031220/FUN_00032100 with texture; same slot as face in _gldCreateTextureLevel
-local	FUN_00034200	param_4	passThroughArg4	UNKNOWN	only forwarded to FUN_00030b50
-local	FUN_00034200	param_5	passThroughArg5	UNKNOWN	only forwarded to FUN_00030b50
 local	FUN_00034200	puVar36	levelTable	INFERRED	texture[0xc]: byte fields at +0x5e/+0x5f/+0x60..0x62/+0x6b are base/max level and log2 sizes
 local	FUN_00034200	uVar35	baseLevel	INFERRED	byte at levelTable+0x5e; subtracted from every per-dimension log2 size and from the max level
 local	FUN_00034200	uVar37	levelCount	INFERRED	max level byte (+0x5f, or +0x6b when flag 0x8000 of levelTable+0x48 is set) minus baseLevel

@@ -172,5 +172,3 @@ local	ILReader__appendFloatConst	fparam_2	constY	INFERRED	stored in record[2]
 local	ILReader__appendFloatConst	fparam_3	constZ	INFERRED	stored in record[3]
 local	ILReader__appendFloatConst	fparam_4	constW	INFERRED	stored in record[4]
 local	ILReader__fetchToken	uVar7	opcode	INFERRED	current opcode word at ilReader+0x8e (clamped to 0 above 0xbe)
-local	ILReader__beginRewrittenReplay_e5384	param_6	unusedR8	INFERRED	passed through unused (register r8 of the caller)
-local	ILReader__beginRewrittenReplay_e547c	param_6	unusedR8	INFERRED	passed through unused (register r8 of the caller)

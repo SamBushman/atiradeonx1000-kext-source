@@ -62,7 +62,6 @@ use	FUN_0014e9e4	iVar14	termIndexB	INFERRED	B term index paired with A term i, r
 use	FUN_0014e9e4	iVar14	termIndexB	INFERRED	B term index paired with A term i, rotated by the loop	^\s*else\ if\ \(\(uVar9\ ==\ local_b8\[iVar14\ \+\ 6\]\)\ \&\&\ \(uVar8\ ==\ local_b8\[iVar11\ \+\ 0xb\]\)\)\ \{$	+2
 use	FUN_0014e9e4	iVar5	selectsCompatibleA	INFERRED	result of FUN_000f2da8 on the A-side select words	^\s*if\ \(\(\(bVar1\)\ \|\|$	+9
 use	FUN_0014e9e4	iVar12	nextTermSlotACopy	INFERRED	copy of iVar11 taken before the second compatibility test	^\s*if\ \(\(\(bVar1\)\ \|\|$	+9
-use	FUN_0014e9e4	iVar12	nextTermSlotACopy	INFERRED	copy of iVar11 taken before the second compatibility test	^\s*iVar16\ =\ FUN_001049c4\(piVar6,param_3,uVar3,uVar4,uVar10,iVar12,puVar13\);$	+1
 use	FUN_0014e9e4	bVar1	consumerIsMul	INFERRED	*(*(consumer+0x88)+8) == 0x13: consumer opcode is IrMulFloat	^\s*bVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar16\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x13;$	+2
 use	FUN_0014e9e4	bVar1	consumerIsMul	INFERRED	*(*(consumer+0x88)+8) == 0x13: consumer opcode is IrMulFloat	^\s*if\ \(!bVar1\)\ \{$	+1
 use	FUN_0014e9e4	bVar1	consumerIsMul	INFERRED	*(*(consumer+0x88)+8) == 0x13: consumer opcode is IrMulFloat	^\s*if\ \(\(\(bVar1\)\ \|\|$	+9

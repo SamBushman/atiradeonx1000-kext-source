@@ -307,7 +307,6 @@ local	IRInst__setConstantOperand	local_278	sortOrder	INFERRED	permutation of uni
 use	Compiler__getOrCreateLoadConstN	uVar1	recordWord0	INFERRED	word 0 (kind) of the constant record being copied into the register map hash key	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)puVar6\ \+\ iVar7\);$	+1
 use	Compiler__getOrCreateLoadConstN	uVar1	recordWord0	INFERRED	word 0 (kind) of the constant record being copied into the register map hash key	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0xc\)\ =\ uVar1;$	+1
 use	Compiler__getOrCreateLoadConstN	uVar1	newInstId	INFERRED	id returned by FUN_000f4a5c for the new load-const instruction	^\s*uVar1\ =\ FUN_000f4a5c\(param_1\);$	+2
-use	Compiler__getOrCreateLoadConstN	uVar1	constantSlot	INFERRED	slot returned by Emitter__allocateConstantSlot	^\s*uVar1\ =\ FUN_000f4a84\(param_1,local_88\[0\],0,puVar6,iVar7,uVar8,\*param_1\);$	+2
 use	Compiler__getOrCreateLoadConstN	uVar1	recordWord	INFERRED	word 0 of the constant record copied into the new instruction	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)local_88\ \+\ iVar7\);$	+1
 use	Compiler__getOrCreateLoadConstN	uVar1	recordWord	INFERRED	word 0 of the constant record copied into the new instruction	^\s*puVar6\[3\]\ =\ uVar1;$	+1
 use	Compiler__getOrCreateLoadConstN	iVar2	recordDest	INFERRED	address of the destination 24-byte constant record in the key instruction (+0x10 + i*0x18)	^\s*iVar2\ =\ iVar7\ \+\ 0x10\ \+\ param_1\[10\];$	+3
@@ -318,7 +317,6 @@ use	Compiler__getOrCreateLoadConstN	puVar3	cachedInst	INFERRED	instruction found
 use	Compiler__getOrCreateLoadConstN	piVar5	blockList	INFERRED	program current-block list object (+0x3a0), called to add the instruction	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0x6c4\)\ \+\ 0x3a0\);$	+2
 use	Compiler__getOrCreateLoadConstN	puVar6	keyRecordCursor	INFERRED	cursor over the constant records on the stack	^\s*puVar6\ =\ local_88;$	+1
 use	Compiler__getOrCreateLoadConstN	puVar6	keyRecordCursor	INFERRED	cursor over the constant records on the stack	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(\(int\)puVar6\ \+\ iVar7\);$	+1
-use	Compiler__getOrCreateLoadConstN	puVar6	keyRecordCursor	INFERRED	cursor over the constant records on the stack	^\s*uVar1\ =\ FUN_000f4a84\(param_1,local_88\[0\],0,puVar6,iVar7,uVar8,\*param_1\);$	+1
 use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\ =\ puVar4\ \+\ 5;$	+1
 use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\[4\]\ =\ \*\(undefined4\ \*\)\(\(int\)local_88\ \+\ iVar7\ \+\ 4\);$	+2
 use	Compiler__getOrCreateLoadConstN	puVar6	instRecordCursor	INFERRED	cursor over the constant records inside the new instruction (+0x14)	^\s*puVar6\ =\ puVar6\ \+\ 6;$	+1
@@ -634,10 +632,6 @@ local	FUN_000d9fc0	param_2	sideSelector	INFERRED	0 = vertex side, nonzero = frag
 local	FUN_000d9b58	param_1	unusedArg1	INFERRED	passed by the caller but not read
 local	FUN_000d9b58	param_2	bitWords	INFERRED	bitmap of eight 32-bit words
 local	FUN_000d9b58	param_3	nthSetBit	INFERRED	how many set bits to skip before the one returned
-local	FUN_000d9b58	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
-local	FUN_000d9b58	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
-local	FUN_000d9b58	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
-local	FUN_000d9b58	param_7	unusedArg7	INFERRED	passed by the caller but not read (register leftovers)
 local	FUN_000d9b58	uVar2	wordBits	INFERRED	bitmap word being shifted
 local	FUN_000d9b58	bVar1	notLastWord	INFERRED	loop continue flag (word offset != 0xe0)
 local	FUN_000d9e58	param_1	unusedArg1	INFERRED	passed by the caller but not read
@@ -730,7 +724,6 @@ use	Block__recordDefinition	uVar4	definitionCount	INFERRED	element count of the 
 use	Block__recordDefinition	uVar4	definitionCount	INFERRED	element count of the definition list	^\s*piVar1\ =\ \(int\ \*\)FUN_0019423c\(puVar3,uVar4\);$	+1
 use	Block__recordDefinition	uVar5	entriesLeft	INFERRED	entries still to compare	^\s*uVar5\ =\ uVar4;$	+1
 use	Block__recordDefinition	uVar5	entriesLeft	INFERRED	entries still to compare	^\s*uVar5\ =\ uVar5\ \-\ 1;$	+2
-use	MachineAssembler__visitIfHeaderStatic	iVar1	branchFlag	INFERRED	branch instruction field at +300: 1 means the condition is not inverted (iVar1 != 1 is passed to vtable +0x98)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 300\);$	+1
 use	MachineAssembler__visitIfHeaderStatic	iVar1	branchFlag	INFERRED	branch instruction field at +300: 1 means the condition is not inverted (iVar1 != 1 is passed to vtable +0x98)	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar1\ !=\ 1,uVar3,0\);$	+1
 use	MachineAssembler__visitIfHeaderStatic	puVar4	vectorSlot	INFERRED	slot appended to the result stack vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar6\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
 use	MachineAssembler__visitIfHeaderStatic	puVar4	vectorSlot	INFERRED	slot appended to the result stack vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar7,uVar6\);$	+1
@@ -773,16 +766,9 @@ use	RegisterMap__findConstVectorExact	uVar1	selectedComponent	INFERRED	component
 local	Block__recordDefinition	param_1	block	INFERRED	block whose definition list (+0xc4) is updated
 local	Block__recordDefinition	param_2	vreg	INFERRED	virtual register defined in the block
 local	Block__recordDefinition	param_3	definition	INFERRED	definition passed to VReg__pushDefinition
-local	RegisterMap__findConstVectorExact	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
-local	RegisterMap__findConstVectorExact	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
-local	RegisterMap__findConstVectorExact	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
-local	RegisterMap__findConstVectorExact	param_7	unusedArg7	INFERRED	passed by the caller but not read (register leftovers)
 use	MachineAssembler__visitIfHeaderStatic	uVar3	conditionRegister	INFERRED	thunk_FUN_00134de8(program, branch source): register holding the condition	^\s*uVar3\ =\ thunk_FUN_00134de8\(uVar5,uVar3\);$	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar1\ !=\ 1,uVar3,0\);$	all	rhs
 use	MachineAssembler__visitIfHeaderStatic	uVar3	emittedBranch	INFERRED	result of vtable +0x98 (emit the branch): pushed on the result stack	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x98\)\)\(param_1,iVar1\ !=\ 1,uVar3,0\);$	^\s*return;$	lhs	none
 local	MachineAssembler__visitIfHeaderStatic	param_4	compiler	INFERRED	compiler: +0x6c4 current program
-local	MachineAssembler__visitIfHeaderStatic	param_5	unusedArg5	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
-local	MachineAssembler__visitIfHeaderStatic	param_6	unusedArg6	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
-local	MachineAssembler__visitIfHeaderStatic	param_7	unusedArg7	INFERRED	forwarded to Block__getBranchInst but not read (register leftovers)
 use	FUN_000ec920	iVar3	blockIsEntryLike	INFERRED	block vtable +0x20 query; blocks answering nonzero are skipped	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x20\)\)\(piVar8\);$	+2
 use	FUN_000ec920	iVar3	oldFlags	INFERRED	flag word block[3] before the successor flags were merged	^\s*iVar3\ =\ piVar8\[3\];$	+1
 use	FUN_000ec920	iVar3	oldFlags	INFERRED	flag word block[3] before the successor flags were merged	^\s*bVar9\ =\ iVar3\ !=\ piVar8\[3\];$	+1
@@ -1857,13 +1843,10 @@ use	Block__ctor_e9f00	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to
 use	Block__ctor_e9f00	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*param_1\[0x2b\]\ =\ uVar1;$	+1
 use	Block__ctor_e9f00	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc0\);$	+1
 use	Block__ctor_e9f00	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*param_1\[0x30\]\ =\ uVar1;$	+1
-use	Block__ctor_e9f00	uVar1	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+2
 use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x110\);$	+1
 use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*param_1\[0x44\]\ =\ uVar3;$	+1
-use	Block__ctor_e9f00	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
 use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xdc\);$	+1
 use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*param_1\[0x37\]\ =\ uVar5;$	+1
-use	Block__ctor_e9f00	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
 use	Block__ctor_e9f00	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x10c\);$	+1
 use	Block__ctor_e9f00	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*param_1\[0x43\]\ =\ uVar6;$	+1
 use	IRInst__sourceMatchesConstant	iVar2	isConstantSource	INFERRED	source virtual register vtable +0x48 query: nonzero for a constant register	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x48\)\)\(a0\);$	+2
@@ -1927,13 +1910,10 @@ use	Block__ctor_e9d68	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to
 use	Block__ctor_e9d68	uVar1	ownerField0xac	INFERRED	word at owner+0xac copied to this[0x2b]	^\s*param_1\[0x2b\]\ =\ uVar1;$	+1
 use	Block__ctor_e9d68	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xc0\);$	+1
 use	Block__ctor_e9d68	uVar1	ownerField0xc0	INFERRED	word at owner+0xc0 copied to this[0x30]	^\s*param_1\[0x30\]\ =\ uVar1;$	+1
-use	Block__ctor_e9d68	uVar1	bitSetIndex	INFERRED	Program__allocateBitSetIndex result stored at this[0x2d]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+2
 use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x110\);$	+1
 use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*param_1\[0x44\]\ =\ uVar3;$	+1
-use	Block__ctor_e9d68	uVar3	ownerField0x110	INFERRED	word at owner+0x110 copied to this[0x44]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
 use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0xdc\);$	+1
 use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*param_1\[0x37\]\ =\ uVar5;$	+1
-use	Block__ctor_e9d68	uVar5	ownerField0xdc	INFERRED	word at owner+0xdc copied to this[0x37]	^\s*uVar1\ =\ FUN_000e8124\(param_1\[0x2b\],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5\);$	+1
 use	Block__ctor_e9d68	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x10c\);$	+1
 use	Block__ctor_e9d68	uVar6	ownerField0x10c	INFERRED	word at owner+0x10c copied to this[0x43]	^\s*param_1\[0x43\]\ =\ uVar6;$	+1
 local	Block__ctor_e9f00	param_2	owner	INFERRED	block/owner object whose fields are copied into the new block
@@ -2066,25 +2046,8 @@ local	Compiler__logf	param_2	unusedArg2	INFERRED	passed by the caller (register 
 local	Compiler__logf	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Compiler__logf	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Compiler__logf	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Compiler__logf	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Compiler__logf	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Compiler__logf	param_8	unusedArg8	INFERRED	passed by the caller (register leftover) but not read in the body
 local	noop_e0ea0	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e0ea0	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e0ea0	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e0ea0	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e0ea0	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e0ea0	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e0ea0	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e0ea0	param_8	unusedArg8	INFERRED	passed by the caller (register leftover) but not read in the body
 local	noop_e138c	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e138c	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e138c	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e138c	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e138c	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e138c	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e138c	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	noop_e138c	param_8	unusedArg8	INFERRED	passed by the caller (register leftover) but not read in the body
 local	FUN_000e13a8	param_1	compiler	INFERRED	compiler whose flag at +0x31c is set
 local	FUN_000e144c	param_1	compiler	INFERRED	compiler whose fields +0x588..+0x598 are set
 local	FUN_000e144c	param_2	value588	INFERRED	stored at compiler+0x588
@@ -2096,42 +2059,13 @@ local	FUN_000e144c	param_7	value594	INFERRED	stored at compiler+0x594
 local	Compiler__setTableEntry534	param_1	compiler	INFERRED	compiler object whose table at +0x534 is written
 local	Compiler__setTableEntry534	param_2	entryIndex	INFERRED	index into the table
 local	Compiler__setTableEntry534	param_3	entryValue	INFERRED	value stored
-local	Program__forwardMulOperandToUsers	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__forwardMulOperandToUsers	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__forwardMulOperandToUsers	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__forwardMulOperandToUsers	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
 local	setWord30	param_1	object	INFERRED	object whose word +0x30 is set
 local	setWord30	param_2	value	INFERRED	stored at object+0x30
 local	FUN_000e77f4	param_1	scope	INFERRED	scope object whose break target (+0x154) and flag (+0x150) are set
 local	FUN_000e77f4	param_2	breakTarget	INFERRED	stored at scope+0x154
-local	Block__getBranchInst	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__getBranchInst	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__getBranchInst	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__getBranchInst	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__getBranchInst	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__getBranchInst	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__allocateBitSetIndex	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__allocateBitSetIndex	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__allocateBitSetIndex	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__allocateBitSetIndex	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__allocateBitSetIndex	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__allocateBitSetIndex	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__verify	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__verify	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__verify	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__verify	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__verify	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Block__verify	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
 local	Table__interpolatorKindToCode	param_1	unusedArg1	INFERRED	passed by the caller (register leftover) but not read in the body
 local	FUN_000ec468	param_2	sourceArray	INFERRED	array of words copied into the program table
 local	HwLimits__vslot43_prependDefaultMov	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	FUN_000eec50	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__insertExitMarkerAndFlagBlocks	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__insertExitMarkerAndFlagBlocks	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__insertExitMarkerAndFlagBlocks	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__insertExitMarkerAndFlagBlocks	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__insertExitMarkerAndFlagBlocks	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	Program__insertExitMarkerAndFlagBlocks	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
 local	laneBytes__mapTwoThreeToOne	param_2	laneBytes	INFERRED	four lane bytes (values 2 and 3 are mapped to 1)
 local	SelectWord__fillUnusedLanes	param_2	selectA	INFERRED	select word A: its unused lanes (4) take the byte of B
 local	SelectWord__fillUnusedLanes	param_3	selectB	INFERRED	select word B
@@ -2150,12 +2084,6 @@ local	FUN_000f3968	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f39d0	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f472c	param_1	outMask	INFERRED	receives the four result bytes
 local	FUN_000f47a8	param_1	outMask	INFERRED	receives the four result bytes
-local	ConstKey__countPresentOperands	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
-local	ConstKey__countPresentOperands	param_3	unusedArg3	INFERRED	passed by the caller (register leftover) but not read in the body
-local	ConstKey__countPresentOperands	param_4	unusedArg4	INFERRED	passed by the caller (register leftover) but not read in the body
-local	ConstKey__countPresentOperands	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
-local	ConstKey__countPresentOperands	param_6	unusedArg6	INFERRED	passed by the caller (register leftover) but not read in the body
-local	ConstKey__countPresentOperands	param_7	unusedArg7	INFERRED	passed by the caller (register leftover) but not read in the body
 local	IRInst__applyDescriptorSelects	param_2	unusedArg2	INFERRED	passed by the caller (register leftover) but not read in the body
 local	IRInst__applyDescriptorSelects	param_5	unusedArg5	INFERRED	passed by the caller (register leftover) but not read in the body
 local	FUN_000f9038	param_2	tempIndex	INFERRED	temp register index stored in operands 0 and 1
@@ -2215,43 +2143,13 @@ local	ILReader__nextInstruction	local_68	tokenCount	INFERRED	out parameter of IL
 local	ILReader__nextInstruction	local_64	leftConstant	INFERRED	left float constant read by ILReader__readFloatConst for the comparison; also receives the staged call-argument stores of the replay calls
 local	ILReader__nextInstruction	local_54	rightConstant	INFERRED	right float constant array read by ILReader__readFloatConst
 use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*iVar8\ =\ 1;$	+1
-use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*uVar7\ =\ \(uint\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\)\[iVar8\];$	+3
-use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*pbVar6\ =\ \(byte\ \*\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 5\)\)\ \+\ iVar8\);$	+1
-use	FUN_000f3470	iVar8	laneIndex	INFERRED	index of the lane being examined (1..3)	^\s*iVar8\ =\ iVar9\ \+\ 1;$	+2
-use	FUN_000f3470	iVar9	nextLane	INFERRED	lane index after the inner scan	^\s*iVar9\ =\ iVar8;$	+3
-use	FUN_000f3470	iVar9	nextLane	INFERRED	lane index after the inner scan	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
-use	FUN_000f3470	iVar9	nextLane	INFERRED	lane index after the inner scan	^\s*iVar8\ =\ iVar9\ \+\ 1;$	+1
 use	FUN_000f3470	bVar1	hasUnusedLane	INFERRED	set when some select byte is 4 (unused)	^\s*bVar1\ =\ false;$	+1
 use	FUN_000f3470	bVar1	hasUnusedLane	INFERRED	set when some select byte is 4 (unused)	^\s*bVar1\ =\ true;$	+1
-use	FUN_000f3470	bVar1	hasUnusedLane	INFERRED	set when some select byte is 4 (unused)	^\s*if\ \(!bVar1\)\ goto\ LAB_000f35b4;$	+1
-use	FUN_000f3470	bVar1	lane0Unused	INFERRED	lane 0 byte of the select word equals 4	^\s*bVar1\ =\ \(\*\(byte\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\ ==\ 4;$	+1
-use	FUN_000f3470	bVar1	lane0Unused	INFERRED	lane 0 byte of the select word equals 4	^\s*if\ \(bVar1\)\ \{$	+1
 use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ true;$	+1
 use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ false;$	+1
-use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ true;$@2	+1
 use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*bVar2\ =\ false;$@2	+1
 use	FUN_000f3470	bVar2	usedLanesAgree	INFERRED	cleared when two used lanes select different components	^\s*if\ \(bVar2\)\ \{$	+1
-use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*uVar3\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+1
-use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*\(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\ =\ uVar3;$	+1
-use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*uVar3\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$@2	+1
-use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*uVar3\ =\ \(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$@3	+1
-use	FUN_000f3470	uVar3	lane0Byte	INFERRED	original lane 0 select byte	^\s*\(\*\(unsigned\ char\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\ =\ uVar3;$@2	+1
-use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*uVar4\ =\ \(uint\)\(\*\(byte\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+2
-use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*if\ \(\(uVar7\ !=\ 4\)\ \&\&\ \(iVar9\ =\ iVar8\ \+\ 1,\ uVar4\ =\ uVar7,\ iVar9\ <\ 4\)\)\ \{$	+1
-use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*else\ if\ \(uVar4\ !=\ \*pbVar6\)\ \{$	+1
 use	FUN_000f3470	uVar4	splatComponent	INFERRED	component selected by the first used lane	^\s*\*param_1\ =\ \(DAT_001aa818\)\[uVar4\];$	+1
-use	FUN_000f3470	iVar5	lanesLeft	INFERRED	lanes still to compare	^\s*iVar5\ =\ 4\ \-\ iVar9;$	+1
-use	FUN_000f3470	iVar5	lanesLeft	INFERRED	lanes still to compare	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
-use	FUN_000f3470	pbVar6	laterLaneCursor	INFERRED	cursor over the select bytes after the first used lane	^\s*pbVar6\ =\ \(byte\ \*\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 5\)\)\ \+\ iVar8\);$	+1
-use	FUN_000f3470	pbVar6	laterLaneCursor	INFERRED	cursor over the select bytes after the first used lane	^\s*if\ \(\(\*pbVar6\ !=\ 4\)\ \&\&\ \(uVar7\ !=\ \*pbVar6\)\)\ \{$	+1
-use	FUN_000f3470	pbVar6	laterLaneCursor	INFERRED	cursor over the select bytes after the first used lane	^\s*pbVar6\ =\ pbVar6\ \+\ 1;$	+1
-use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*pbVar6\ =\ \&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\);$	+1
-use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*if\ \(\*pbVar6\ ==\ 4\)\ \{$	+1
-use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*else\ if\ \(uVar4\ !=\ \*pbVar6\)\ \{$	+1
-use	FUN_000f3470	pbVar6	laneCursor	INFERRED	cursor over all four select bytes	^\s*pbVar6\ =\ pbVar6\ \+\ 1;$@2	+1
-use	FUN_000f3470	uVar7	laneComponent	INFERRED	component selected by the lane being examined	^\s*uVar7\ =\ \(uint\)\(\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\)\[iVar8\];$	+1
-use	FUN_000f3470	uVar7	laneComponent	INFERRED	component selected by the lane being examined	^\s*if\ \(\(uVar7\ !=\ 4\)\ \&\&\ \(iVar9\ =\ iVar8\ \+\ 1,\ uVar4\ =\ uVar7,\ iVar9\ <\ 4\)\)\ \{$	+1
-use	FUN_000f3470	uVar7	laneComponent	INFERRED	component selected by the lane being examined	^\s*if\ \(\(\*pbVar6\ !=\ 4\)\ \&\&\ \(uVar7\ !=\ \*pbVar6\)\)\ \{$	+1
 func	FUN_000f3470	SelectWord__canonicalize	INFERRED	if all used lanes (byte != 4) select the same component the result is that splat (DAT_001aa818 table), otherwise every unused lane byte is replaced by its own lane index
 use	FUN_000da0c0	iVar1	compilerObj	INFERRED	compiler object allocated through request callback (request[0xc](request[0xb], 0x6c8)), initialised by Compiler__init_e1a48 (r34: fixed anchor - request/outState were always the true literal param names, never tracked as param_1/param_2 by any row)	^\s*iVar1\ =\ \(\*\(code\ \*\)request\[0xc\]\)\(request\[0xb\],0x6c8\);$	^\s*iVar1\ =\ _setjmp\(\*\(int\ \*\*\)\(iVar1\ \+\ 4\)\);$	all	rhs
 use	FUN_000da0c0	iVar1	setjmpResult	INFERRED	_setjmp result of the compiler's jump buffer	^\s*iVar1\ =\ _setjmp\(\*\(int\ \*\*\)\(iVar1\ \+\ 4\)\);$	^\s*return;$	lhs	none
@@ -2667,10 +2565,6 @@ local	Compiler__clearOptionBit	iVar1	optionByteAddress	INFERRED	compiler + optio
 local	Compiler__setOptionBit	param_1	compiler	INFERRED	compiler holding the option bit array at +0x59c
 local	Compiler__setOptionBit	param_2	optionBit	INFERRED	option bit number
 local	Compiler__setOptionBit	iVar1	optionByteAddress	INFERRED	compiler + optionBit/8: address (+0x59c) of the byte holding the bit
-local	Emitter__allocateConstantSlot	param_4	unusedArg4	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
-local	Emitter__allocateConstantSlot	param_5	unusedArg5	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
-local	Emitter__allocateConstantSlot	param_6	unusedArg6	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
-local	Emitter__allocateConstantSlot	param_7	unusedArg7	INFERRED	forwarded to BitSet256__findNthSetBit, which ignores it (register leftover)
 use	ildisPrintHeader	uVar3	headerToken	INFERRED	IL header token word (**(disassembler+8)): shader type, major and minor version fields	^\s*uVar3\ =\ \*\*\(uint\ \*\*\)\(param_1\ \+\ 8\);$	^\s*uVar3\ =\ uVar3\ >>\ 8\ \&\ 0xff;$	all	rhs
 use	ildisPrintHeader	uVar3	majorVersion	INFERRED	major version field (bits 8-15) printed in il_%s_%d_%d	^\s*uVar3\ =\ uVar3\ >>\ 8\ \&\ 0xff;$	^\s*\}$	lhs	none
 local	Block__lastBlockOfChain_e7a9c	iVar2	queryResult	INFERRED	scratch for the successive boolean queries of the chain block (Block__hasSuccessors, vtable +0x38/+0x3c/+0x2c/+0x24)

@@ -81,7 +81,6 @@ use	FUN_0018401c	piVar7	passListNode	INFERRED	node of the pass list (program+900
 local	FUN_00178e90	param_1	resultOut	INFERRED	out: float result of the lane (returned)
 local	FUN_00178e90	param_2	key	INFERRED	ValueKey being folded (+0xb0 instruction, +0x178 lane value numbers)
 local	FUN_00178e90	param_3	lane	INFERRED	lane index 0..3 of the LIT result (opcode 0x32)
-local	FUN_00178e90	param_4	unusedArg4	CONFIRMED	never read anywhere in the function body (r33: this is a dead FORMAL PARAMETER, not a mid-function Ghidra in_rN register artifact, so it belongs in the project's unusedArgN category (cf. pairIndex's param_1->unusedArg1) rather than staleArgN, which is reserved for register-forwarding artifacts; text already carried the wrong name staleArg4, fixed by direct text edit)
 local	FUN_00178e90	local_58	litInputs	INFERRED	input constants of the LIT instruction: [0] x, [1] y, [3] w (exponent)
 use	FUN_00178e90	dVar6	logOrPow	INFERRED	log(y) / log(2), then pow(2, w * log2(y))	^\s*dVar6\ =\ _log\(\(double\)local_58\[1\]\);$	+1
 use	FUN_00178e90	dVar6	logOrPow	INFERRED	log(y) / log(2), then pow(2, w * log2(y))	^\s*dVar6\ =\ _pow\(2\.0,\(double\)\(fVar1\ \*\ \(float\)\(dVar6\ /\ dVar7\)\)\);$	+2

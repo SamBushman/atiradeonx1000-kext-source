@@ -5,7 +5,6 @@ use	FUN_00016670	iVar10	engineState	INFERRED	copy of ctx field GLD_engineState	^
 use	FUN_00016670	iVar21	writeCursor	INFERRED	copy of ctx field GLD_writeCursor	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_writeCursor\);$	+3
 use	FUN_00016670	iVar21	writeCursor	INFERRED	copy of ctx field GLD_writeCursor	^\s*\*\(undefined4\ \*\)\(iVar21\ \+\ 4\ \+\ iVar10\)\ =\ uVar15;$	+1
 use	FUN_00018a40	iVar15	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+9
-use	FUN_00018a40	iVar15	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*else\ if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fa8\)\ \+\ iVar15\)\ ==\ \-0x7fea\)\ \{$	+3
 use	FUN_00018a40	iVar15	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*fVar4\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar15\)\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2a54\);$	+3
 use	FUN_0001ecd0	iVar12	currentVertexArray	INFERRED	copy of ctx field GLD_currentVertexArray	^\s*iVar12\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ GLD_currentVertexArray\);$	+2
 use	FUN_0001ecd0	iVar12	currentProgram	INFERRED	copy of ctx field GLD_currentProgram	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_currentProgram\);$	+2
@@ -37,7 +36,6 @@ use	FUN_00029290	iVar14	engineObjects	INFERRED	copy of ctx field GLD_engineObjec
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+5
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*else\ if\ \(\(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000030b0\)\ \+\ iVar16\)\ \&\ 2\)\ ==\ 0\)\ \{$	+3
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002ff0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
-use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*else\ if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fa8\)\ \+\ iVar16\)\ ==\ \-0x7fea\)\ \{$	+1
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fb0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e50\)\ \+\ iVar16;$	+1
 use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar16;$	+1
@@ -141,4 +139,3 @@ use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback:
 use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*uVar22\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_renderFlags\);$	+3
 use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*else\ if\ \(\(uVar22\ \&\ 0x400\)\ ==\ 0\)\ \{$	+1
 use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*else\ if\ \(\(uVar22\ \&\ 0x800\)\ ==\ 0\)\ \{$	+1
-use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001a9d0\)\(param_1,piVar10,puVar11,param_4,uVar20,uVar9,uVar22\ \&\ 0x800\);$	+1

@@ -13,17 +13,12 @@ use	FUN_0012dd58	puVar4	workFirstRef	INFERRED	first element reference of the wor
 use	FUN_0012dd58	puVar4	workFirstRef	INFERRED	first element reference of the work list	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_44,0\);$	+1
 use	FUN_0012dd58	puVar4	workFirstRef	INFERRED	first element reference of the work list	^\s*param_2\ =\ \(int\ \*\)\*puVar4;$	+1
 use	FUN_0012dd58	a2	extraArg	INFERRED	end block, later the compiler, passed as a trailing argument	^\s*a2\ =\ param_3;$	+1
-use	FUN_0012dd58	a2	extraArg	INFERRED	end block, later the compiler, passed as a trailing argument	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012dd58	a2	extraArg	INFERRED	end block, later the compiler, passed as a trailing argument	^\s*a2\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
-use	FUN_0012dd58	in_r6	staleArg6	INFERRED	r6 left over, forwarded to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
-use	FUN_0012dd58	in_r7	staleArg7	INFERRED	r7 left over, forwarded to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
-use	FUN_0012dd58	in_r8	staleArg8	INFERRED	r8 left over, forwarded to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+1
 use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*local_38\ =\ \*\(undefined4\ \*\)\(uVar5\ \+\ 0x378\);$	+1
 use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*if\ \(\(\(iVar2\ !=\ 0\)\ \&\&\ \(uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x474\),\ uVar5\ !=\ \*\(uint\ \*\)\(iVar2\ \+\ 0x118\)\)\)$	+3
 use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*uVar5\ =\ local_40\ \+\ 1;$	+1
 use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*local_40\ =\ uVar5;$	+1
-use	FUN_0012dd58	uVar5	visitStampOrCount	INFERRED	program visit stamp, reused for the work list count after the push	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar7\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012dd58	uVar7	branchHeaderQuery	INFERRED	block vtable slot 0x24 return pair (is an if header)	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x24\)\)\(param_2\);$	+4
 local	FUN_0012dd58	param_3	regionEnd	INFERRED	last block of the region; its successor is reconnected to the region's predecessor
 local	FUN_0012dd58	param_2	currentBlock	INFERRED	block being removed (the region's first block, then each block from the work list)

@@ -2,7 +2,6 @@ use	FUN_000b6f20	fVar1	texObjectBias	INFERRED	float at texture object +0x4c, add
 use	FUN_000b6f20	fVar1	texObjectBias	INFERRED	float at texture object +0x4c, added to the unit bias (ctx unit +0x470) to give the combined bias	^\s*dVar13\ =\ \(double\)\(float\)\(\(double\)\(fVar1\ \+\ fVar2\)\ \+\ dVar11\);$	+1
 use	FUN_000b6f20	fVar1	extentDiff	INFERRED	difference of the two ratios (engine+0x15c)/FLOAT_001aa1b4 and (engine+0x160)/FLOAT_001aa1b8, used to pick the larger	^\s*fVar1\ =\ \(float\)\(dVar14\ \-\ dVar12\);$	+2
 use	FUN_000b6f20	fVar1	extentDiff	INFERRED	difference of the two ratios (engine+0x15c)/FLOAT_001aa1b4 and (engine+0x160)/FLOAT_001aa1b8, used to pick the larger	^\s*if\ \(\-fVar1\ <\ 0\.0\)\ \{$	+1
-use	FUN_000b6f20	fVar1	scaledBias	INFERRED	max ratio * combined bias * FLOAT_001aa1a8 + max ratio	^\s*fVar1\ =\ \(float\)\(\(double\)\(float\)\(dVar14\ \*\ dVar13\)\ \*\ \(double\)FLOAT_001aa1a8\ \+\ dVar14\);$	+1
 use	FUN_000b6f20	fVar1	scaledBias	INFERRED	max ratio * combined bias * FLOAT_001aa1a8 + max ratio	^\s*dVar11\ =\ \(double\)\(fVar1\ \*\ FLOAT_001aa1ac\);$	+1
 use	FUN_000b6f20	fVar1	scaledBias	INFERRED	max ratio * combined bias * FLOAT_001aa1a8 + max ratio	^\s*dVar14\ =\ \(double\)\(fVar1\ \*\ FLOAT_001aa1bc\);$	+2
 use	FUN_000b6f20	fVar1	scaledBias	INFERRED	max ratio * combined bias * FLOAT_001aa1a8 + max ratio	^\s*uVar6\ =\ \(uint\)\(int\)\(fVar1\ \*\ FLOAT_001aa1bc\);$	+1
@@ -10,9 +9,7 @@ local	FUN_000b6f20	fVar2	unitBias	INFERRED	float at ctx + unit*0xcc + 0x470, per
 local	FUN_000b6f20	iVar3	unitWordOffset	INFERRED	unit * 4: offset of the unit registers at +0x1cdc/+0x1d1c
 local	FUN_000b6f20	dVar4	unsignedConvLimit	INFERRED	DOUBLE_001aa1e8 (2^31): threshold of the float->unsigned conversion idiom
 use	FUN_000b6f20	uVar5	field15Bits	INFERRED	2-bit value 3 stored at bit 15 of the unit word +0x1d1c (saturated case)	^\s*uVar5\ =\ 3;$	+1
-use	FUN_000b6f20	uVar5	field15Bits	INFERRED	2-bit value stored at bit 15 of +0x1d1c: float value converted, saturated to 3 or 0	^\s*if\ \(\(dVar12\ <=\ \(double\)FLOAT_001aa158\)\ \&\&\ \(uVar5\ =\ 0,\ \(double\)FLOAT_001aa0d4\ <=\ dVar12\)\)\ \{$	+1
 use	FUN_000b6f20	uVar5	field15Bits	INFERRED	2-bit value stored at bit 15 of +0x1d1c: float value converted, saturated to 3 or 0	^\s*uVar5\ =\ \(int\)\(dVar12\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
-use	FUN_000b6f20	uVar5	field15Bits	INFERRED	2-bit value stored at bit 15 of +0x1d1c: float value converted, saturated to 3 or 0	^\s*uVar5\ =\ \(uint\)\(int\)\(dVar11\ \*\ \(double\)FLOAT_001aa128\);$	+1
 use	FUN_000b6f20	uVar5	field15Bits	INFERRED	2-bit value stored at bit 15 of +0x1d1c: float value converted, saturated to 3 or 0	^\s*uVar5\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
 use	FUN_000b6f20	uVar5	field15Bits	INFERRED	2-bit value stored at bit 15 of +0x1d1c: float value converted, saturated to 3 or 0	^\s*uVar5\ =\ \(uint\)\(int\)dVar11;$	+1
 use	FUN_000b6f20	uVar5	field15Bits	INFERRED	2-bit value stored at bit 15 of +0x1d1c: float value converted, saturated to 3 or 0	^\s*uVar5\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@2	+1
@@ -42,10 +39,8 @@ use	FUN_000b6f20	dVar12	intConvBias	INFERRED	DOUBLE_001aa1e0: 2^52 bias of the i
 use	FUN_000b6f20	dVar12	intConvBias	INFERRED	DOUBLE_001aa1e0: 2^52 bias of the integer->double idiom, later scratch for the second ratio	^\s*dVar14\ =\ \(double\)\(\(float\)\(\(double\)CONCAT44\(0x43300000,\*\(uint\ \*\)\(iVar10\ \+\ 0x15c\)\ \^\ 0x80000000\)\ \-$	+5
 use	FUN_000b6f20	dVar12	intConvBias	INFERRED	DOUBLE_001aa1e0: 2^52 bias of the integer->double idiom, later scratch for the second ratio	^\s*dVar12\ =\ dVar14;$	+1
 use	FUN_000b6f20	dVar12	intConvBias	INFERRED	DOUBLE_001aa1e0: 2^52 bias of the integer->double idiom, later scratch for the second ratio	^\s*dVar14\ =\ dVar12;$	+1
-use	FUN_000b6f20	dVar12	scaledBiasD	INFERRED	biasBase * FLOAT_001aa128 or scaledBias * FLOAT_001aa1b0 * FLOAT_001aa0f8; converted into field23Bits	^\s*dVar12\ =\ \(double\)\(float\)\(dVar11\ \*\ \(double\)FLOAT_001aa128\);$	+4
 use	FUN_000b6f20	dVar12	scaledBiasD	INFERRED	biasBase * FLOAT_001aa128 or scaledBias * FLOAT_001aa1b0 * FLOAT_001aa0f8; converted into field23Bits	^\s*if\ \(\(\(uVar6\ ==\ 0\)\ \&\&\ \(\(uVar8\ >>\ 9\ \&\ 3\)\ ==\ 2\)\)\ \&\&$	+2
 use	FUN_000b6f20	dVar12	scaledBiasD	INFERRED	biasBase * FLOAT_001aa128 or scaledBias * FLOAT_001aa1b0 * FLOAT_001aa0f8; converted into field23Bits	^\s*dVar12\ =\ \(double\)\(fVar1\ \*\ FLOAT_001aa1b0\ \*\ FLOAT_001aa0f8\);$	+1
-use	FUN_000b6f20	dVar12	scaledBiasD	INFERRED	biasBase * FLOAT_001aa128 or scaledBias * FLOAT_001aa1b0 * FLOAT_001aa0f8; converted into field23Bits	^\s*dVar12\ =\ \(double\)FLOAT_001aa0d4;$	+1
 use	FUN_000b6f20	dVar12	scaledBiasD	INFERRED	biasBase * FLOAT_001aa128 or scaledBias * FLOAT_001aa1b0 * FLOAT_001aa0f8; converted into field23Bits	^\s*if\ \(dVar4\ <=\ dVar12\)\ \{$	+2
 use	FUN_000b6f20	dVar12	scaledBiasD	INFERRED	biasBase * FLOAT_001aa128 or scaledBias * FLOAT_001aa1b0 * FLOAT_001aa0f8; converted into field23Bits	^\s*uVar7\ =\ \(uint\)\(int\)dVar12;$	+1
 local	FUN_000b6f20	dVar13	combinedBias	INFERRED	texture-object bias + unit bias (+0.0)
@@ -53,7 +48,6 @@ use	FUN_000b6f20	dVar14	ratioA	INFERRED	(engine+0x15c as float) / FLOAT_001aa1b4
 use	FUN_000b6f20	dVar14	ratioA	INFERRED	(engine+0x15c as float) / FLOAT_001aa1b4	^\s*fVar1\ =\ \(float\)\(dVar14\ \-\ dVar12\);$	+1
 use	FUN_000b6f20	dVar14	ratioA	INFERRED	(engine+0x15c as float) / FLOAT_001aa1b4	^\s*dVar12\ =\ dVar14;$	+1
 use	FUN_000b6f20	dVar14	ratioA	INFERRED	(engine+0x15c as float) / FLOAT_001aa1b4	^\s*dVar14\ =\ dVar12;$	+1
-use	FUN_000b6f20	dVar14	ratioA	INFERRED	(engine+0x15c as float) / FLOAT_001aa1b4	^\s*fVar1\ =\ \(float\)\(\(double\)\(float\)\(dVar14\ \*\ dVar13\)\ \*\ \(double\)FLOAT_001aa1a8\ \+\ dVar14\);$	+1
 use	FUN_000b6f20	dVar14	scaledBiasField17	INFERRED	scaledBias * FLOAT_001aa1bc, converted into field17Bits	^\s*dVar14\ =\ \(double\)\(fVar1\ \*\ FLOAT_001aa1bc\);$	+1
 use	FUN_000b6f20	dVar14	scaledBiasField17	INFERRED	scaledBias * FLOAT_001aa1bc, converted into field17Bits	^\s*if\ \(DOUBLE_001aa1e8\ <=\ dVar14\)\ \{$	+2
 local	FUN_000b6f20	param_4	updateMode	INFERRED	0 = nothing to do, 1 = recompute the bias-derived register fields

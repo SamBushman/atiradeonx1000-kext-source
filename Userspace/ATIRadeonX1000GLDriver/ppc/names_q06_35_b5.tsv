@@ -31,7 +31,6 @@ use	ExportSlot__ctor_12622c	puVar3	exportInst	INFERRED	IRExport inst at allocati
 use	ExportSlot__ctor_12622c	puVar3	exportInst	INFERRED	IRExport inst at allocation+1	^\s*FUN_001236e4\(param_1,1,puVar3\);$	+3
 use	ExportSlot__ctor_12622c	uVar4	exportStreamValue	INFERRED	DAT_001afeec stored in operand record +0x10	^\s*uVar4\ =\ DAT_001afeec;$	+1
 use	ExportSlot__ctor_12622c	uVar4	exportStreamValue	INFERRED	DAT_001afeec stored in operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar4;$	+1
-use	TempValue__clone	puVar2	foldedValue	INFERRED	result of FUN_00123c08 fallback	^\s*puVar2\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00123c08\)\(\*\(undefined4\ \*\)\(param_3\ \+\ COMP_currentProgram\),param_2,param_1\);$	+2
 use	TempValue__clone	iVar1	newInst	INFERRED	target-created inst, operand 0 set to param_1	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_3\ \+\ COMP_target\)\ \+\ 0x50\)\)$	+1
 use	TempValue__clone	iVar1	newInst	INFERRED	target-created inst, operand 0 set to param_1	^\s*FUN_001046c8\(iVar1,0,param_1\);$	+3
 use	TempValue__clone	iVar1	newInst	INFERRED	target-created inst, operand 0 set to param_1	^\s*FUN_00173938\(puVar4,iVar1,param_3\);$	+1

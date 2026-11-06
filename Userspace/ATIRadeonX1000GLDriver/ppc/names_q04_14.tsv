@@ -2,15 +2,11 @@ use	glDeleteFragmentShaderATI_impl	iVar2	loopIndex2	INFERRED	only ever set to a 
 use	glDeleteFragmentShaderATI_impl	iVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(param_2\ ==\ \*\(int\ \*\)\(iVar2\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 0x88\)\)\)\ \{$	+1
 use	glDeleteFragmentShaderATI_impl	iVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar2\ =\ iVar2\ \+\ 0x78;$	+1
 use	FUN_000a3790	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar4\ =\ 0;$	+1
-use	FUN_000a3790	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar10\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,$	+5
-use	FUN_000a3790	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar10\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar2\ \+\ iVar4\ \^\ 0x80000000\)\ \-$	+2
 use	FUN_000a3790	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(char\ \*\)\(iVar4\ \+\ param_4\)\ =\ cStack_19;$	+2
 use	FUN_000a3790	iVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*param_5\ =\ iVar4;$	+1
 use	FUN_000a3790	uVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ 0;$	+1
-use	FUN_000a3790	uVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar10\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,$	+5
 use	FUN_000a3790	uVar2	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ uVar2\ \+\ 1;$	+2
 use	FUN_000a3790	uVar2	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ 0;$@2	+1
-use	FUN_000a3790	uVar2	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar10\ =\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar2\ \+\ iVar4\ \^\ 0x80000000\)\ \-$	+2
 use	FUN_000a3790	uVar2	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar2\ =\ uVar2\ \+\ 1;$@2	+2
 use	FUN_000a3be0	iVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar11\ =\ 0;$@2	+1
 use	FUN_000a3be0	iVar11	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(undefined4\ \*\)\(\(int\)param_6\ \+\ iVar11\)\ =\ \*puVar8;$	+2
@@ -126,11 +122,9 @@ use	FUN_000a7a60	iVar8	remaining	INFERRED	only ever set to a start value and ste
 use	FUN_000a7a60	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ 4;$@2	+1
 use	FUN_000a7a60	iVar8	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$@2	+2
 use	FUN_000a7a60	uVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$	+1
-use	FUN_000a7a60	uVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002dba\)\ \+\ uVar4\ \*\ 2\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x10\)\)\ ==\ 0\)\ \{$	+1
 use	FUN_000a7a60	uVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x1ae4\)\ >>\ 6\ \|\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ \&\ 0xffff\)\ <<\ 6\ \|$	+1
 use	FUN_000a7a60	uVar4	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+1
 use	FUN_000a7a60	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ 0;$@2	+1
-use	FUN_000a7a60	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*if\ \(\*\(short\ \*\)\(uVar4\ \*\ 2\ \+\ \*piVar3\ \+\ 0x90\)\ ==\ 0\)\ \{$	+1
 use	FUN_000a7a60	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\(\(\*\(uint\ \*\)\(param_1\ \+\ 0x1ae4\)\ >>\ 6\ \|\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ \&\ 0xffff\)\ <<\ 6\ \|$@2	+1
 use	FUN_000a7a60	uVar4	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar4\ =\ uVar4\ \+\ 1;$@2	+1
 use	FUN_000a7d10	iVar7	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar7\ =\ 0;$	+1
@@ -179,8 +173,6 @@ use	FUN_000a9ac0	iVar19	loopIndex	INFERRED	only ever set to a start value and st
 use	FUN_000a9ac0	iVar29	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar29\ =\ 8;$	+1
 use	FUN_000a9ac0	iVar29	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar29\ =\ iVar29\ \+\ \-1;$	+2
 use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar5\ =\ 0;$	+1
-use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*dVar31\ =\ \(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014a0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\);$	+3
-use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014e0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\)\ =\ \(float\)dVar31;$	+3
 use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014e0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 4\)\)\ =$	+1
 use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014e0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 0xc\)\)\ =$	+1
 use	FUN_000a9ac0	iVar5	loopIndex2	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000014e0\)\ \+\ \(int\)\(param_1\ \+\ iVar5\ \+\ 8\)\)\ =$	+1
@@ -213,7 +205,6 @@ use	FUN_000aec40	iVar10	loopIndex3	INFERRED	only ever set to a start value and s
 use	FUN_000aec40	iVar10	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
 use	FUN_000aec40	iVar10	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*\}\ while\ \(iVar7\ !=\ iVar10\);$	+1
 use	FUN_000aec40	iVar13	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar13\ =\ 0;$	+1
-use	FUN_000aec40	iVar13	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(\(int\)\&local_84\ \+\ iVar13\);$	+1
 use	FUN_000aec40	iVar13	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(\(int\)local_7c\ \+\ iVar13\);$	+1
 use	FUN_000aec40	iVar13	loopIndex4	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar13\ =\ iVar13\ \+\ 4;$	+1
 use	FUN_000aec40	iVar7	remaining	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 4;$	+1
@@ -222,7 +213,6 @@ use	FUN_000aec40	iVar7	remaining	INFERRED	only ever set to a start value and ste
 use	FUN_000aec40	iVar7	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ 4;$@5	+1
 use	FUN_000aec40	iVar7	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$@2	+1
 use	FUN_000aec40	iVar7	remaining2	INFERRED	only ever set to a start value and stepped (remaining)	^\s*\}\ while\ \(iVar7\ !=\ 0\);$@2	+1
-use	FUN_000aec40	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar14\ =\ \&local_84;$	+1
 use	FUN_000aec40	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*if\ \(\(\*puVar14\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
 use	FUN_000aec40	puVar14	cursor	INFERRED	only ever set to a start value and stepped (cursor)	^\s*puVar14\ =\ puVar14\ \+\ 1;$	+1
 use	FUN_000afe40	iVar11	loopIndex	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*iVar11\ =\ 0;$	+1

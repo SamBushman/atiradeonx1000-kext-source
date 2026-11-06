@@ -1,10 +1,5 @@
 # fork E3 round 4: loop passes, remove_empty_graphs, constant-if folding
 local	pass_loop_trans	local_84	loopInfo	CONFIRMED	the first twelve words of the 0x44-byte LoopInfo record (contiguous locals local_84[12], then loopInfoCounterInit, loopInfoProgram): passed to every LoopInfo__ function
-local	LoopInfo__convertToHardwareLoop	param_3	passThroughR5	UNKNOWN	forwarded unchanged to FUN_000f4a84 and Block__getBranchInst (call-argument registers, not a parameter of its own)
-local	LoopInfo__convertToHardwareLoop	param_4	passThroughR6	UNKNOWN	forwarded unchanged to FUN_000f4a84
-local	LoopInfo__convertToHardwareLoop	param_5	passThroughR7	UNKNOWN	forwarded unchanged to FUN_000f4a84
-local	LoopInfo__convertToHardwareLoop	param_6	passThroughR8	UNKNOWN	forwarded unchanged to FUN_000f4a84 and Block__getBranchInst
-local	LoopInfo__convertToHardwareLoop	param_7	passThroughR9	UNKNOWN	forwarded unchanged to FUN_000f4a84
 local	LoopInfo__matchExit	local_38	swizzleWord	CONFIRMED	the 4-byte swizzle word of an operand record (+0x10), indexed by byte with the counter lane
 local	LoopInfo__matchExit	bVar1	boundLaneSwizzle	INFERRED	swizzle byte of the compare's counter lane, stored to loopInfo+0x14 (bound lane)
 local	LoopInfo__matchExit	fVar2	constantBound	CONFIRMED	GH_U2F of the bound instruction's first constant word: truncated to int and stored to loopInfo+0x18 with the constant flag +0x1c = 1

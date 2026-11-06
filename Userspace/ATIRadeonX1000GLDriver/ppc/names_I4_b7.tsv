@@ -1,10 +1,6 @@
 # Fork I4 batch 7: ConstKey__compareOrdered, psnDecRangeHasConflict, psnDecRetargetSourceReg
 local	ConstKey__compareOrdered	param_1	keyA	CONFIRMED	first scratch key: presence bits in the byte at +0x15c, operand descriptors of 0x18 bytes from +0x10
 local	ConstKey__compareOrdered	param_2	keyB	CONFIRMED	second key compared with the first
-local	ConstKey__compareOrdered	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): unused by this function
-local	ConstKey__compareOrdered	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused
-local	ConstKey__compareOrdered	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): unused
-local	ConstKey__compareOrdered	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): unused
 local	ConstKey__compareOrdered	iVar1	operandA	CONFIRMED	operand descriptor of keyA: key + 0x10 + index*0x18
 local	ConstKey__compareOrdered	iVar3	operandB	CONFIRMED	operand descriptor of keyB
 local	ConstKey__compareOrdered	iVar4	presentOperands	CONFIRMED	number of operands present in keyA (counted over the four presence bits)

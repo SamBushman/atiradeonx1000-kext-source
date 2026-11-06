@@ -21,7 +21,6 @@ local	FUN_00029290	uVar15	surfaceType	INFERRED	ushort at +0xb2 of the attachment
 use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*iVar7\ =\ FUN_0000a2f0\(\(uint\)\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x00002db8\)\ \+\ iVar16\),\*\(undefined4\ \*\)\(param_1\ \+\ GLD_renderFlags\)\);$	+1
 use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*if\ \(iVar7\ ==\ 7\)\ \{$	+1
 use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*if\ \(iVar7\ !=\ 8\)\ goto\ LAB_000298a4;$	+1
-use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*iVar6\ =\ FUN_0001a010\(param_1,iVar7,puVar11,puVar12,iVar17,puVar13,piVar20\);$	+1
 use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*FUN_000230d0\(param_1,0,iVar7,0,0,0,\*\(undefined4\ \*\)\(param_1\ \+\ GLD_renderWidth\),$	+2
 use	FUN_00029290	iVar7	status	CONFIRMED	return value of _io_connect_method_structureI_structureO, tested against 0	^\s*iVar7\ =\ _io_connect_method_structureI_structureO$	+1
 use	FUN_00029290	iVar7	status	CONFIRMED	return value of _io_connect_method_structureI_structureO, tested against 0	^\s*if\ \(iVar7\ !=\ 0\)\ goto\ LAB_00029bd0;$	+1
@@ -44,7 +43,6 @@ use	FUN_00029290	iVar14	bytesPerPixel2	INFERRED	FUN_0000a3f0(format, type): used
 use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+5
 use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*else\ if\ \(\(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000030b0\)\ \+\ iVar16\)\ \&\ 2\)\ ==\ 0\)\ \{$	+3
 use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002ff0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
-use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*else\ if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fa8\)\ \+\ iVar16\)\ ==\ \-0x7fea\)\ \{$	+1
 use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fb0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
 use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e50\)\ \+\ iVar16;$	+1
 use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar16;$	+1
@@ -54,7 +52,6 @@ use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x
 use	FUN_00029290	iVar16	attachFace	CONFIRMED	attachment entry +4; indexes the level table with stride 0x168 (15 levels x 0x18)	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar7\ \+\ 4\);$	+1
 use	FUN_00029290	iVar16	attachFace	CONFIRMED	attachment entry +4; indexes the level table with stride 0x168 (15 levels x 0x18)	^\s*iVar7\ =\ iVar14\ \*\ 0x18\ \+\ iVar16\ \*\ 0x168\ \+\ piVar20\[0xc\];$	+1
 use	FUN_00029290	iVar17	attachZOffset	INFERRED	attachment entry +0xc, multiplied by the slice size to place the 3D/array slice	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0xc\);$	+1
-use	FUN_00029290	iVar6	prepareResult	INFERRED	return value of FUN_0001a010, tested before FUN_000230d0	^\s*iVar6\ =\ FUN_0001a010\(param_1,iVar7,puVar11,puVar12,iVar17,puVar13,piVar20\);$	+2
 use	FUN_00029290	pvVar9	scratchBuffer	CONFIRMED	valloc result stored at ctx+0x2b74 (with its size at +0x2b78): the cached readback scratch buffer	^\s*pvVar9\ =\ _valloc\(uVar18\);$	+1
 use	FUN_00029290	pvVar9	scratchBuffer	CONFIRMED	valloc result stored at ctx+0x2b74 (with its size at +0x2b78): the cached readback scratch buffer	^\s*\*\(void\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00002b74\)\ \+\ param_1\)\ =\ pvVar9;$	+1
 use	FUN_00029290	pvVar9	levelBuffer	CONFIRMED	valloc(slices * sliceBytes) filled by FUN_00031340, read through _glgProcessPixels and vfree()d	^\s*_vfree\(pvVar9\);$	+1

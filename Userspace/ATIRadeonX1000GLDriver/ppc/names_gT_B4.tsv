@@ -114,9 +114,4 @@ use	ilAssembleProgram	iVar39	mapEntryCount	CONFIRMED	*local_2408: number of 7-wo
 use	ilAssembleProgram	iVar39	mapEntryCount	CONFIRMED	*local_2408: number of 7-word map entries	^\s*param_3\[0x151f\]\ =\ \(uint\ \*\*\*\*\*\*\)\(uint\)\(iVar39\ !=\ 0\);$	+3
 use	ilAssembleProgram	iVar39	mapEntryCount	CONFIRMED	*local_2408: number of 7-word map entries	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@8	+2
 use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*iVar39\ =\ uVar32\ \*\ 4;$	+1
-use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$	+2
-use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@2	+2
-use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@3	+2
 use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7930\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,local_2bb4,pppppppuVar20,$	+2
-use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@4	+2
-use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@5	+2

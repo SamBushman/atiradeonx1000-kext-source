@@ -28,7 +28,6 @@ local	FUN_0017dbdc	local_44	laneResultOutC	INFERRED	out-parameter of FUN_00176a9
 local	FUN_0017dbdc	local_48	laneResultOutD	INFERRED	out-parameter of FUN_00178e90: lane result of the compare path
 local	FUN_0017dbdc	local_58	foldFlags	INFERRED	out flags of the per-lane evaluators (non-zero: result depends on a non-constant)
 local	FUN_0019651c	param_1	assembler	INFERRED	machine assembler: [3] compiler, [0x25] next slot A, [0x26] next slot B
-local	FUN_0019651c	param_3	staleArg3	INFERRED	unused stale argument register
 use	FUN_0019651c	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ uVar5\ !=\ 3;$	+1
 use	FUN_0019651c	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$	+1
 use	FUN_0019651c	iVar2	fetchKind	INFERRED	inst->+0x144: fetch instruction kind (0x16/0x17, 0x1b, 0x23, other)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x144\);$	+2

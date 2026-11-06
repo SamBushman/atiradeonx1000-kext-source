@@ -33,9 +33,7 @@ use	FUN_00028350	uVar38	dstAddress	INFERRED	param_8 + the skip offset FUN_0000a6
 use	FUN_00028350	uVar27	surfaceBase	INFERRED	*(uint *)*surfaceInfo: base address of the destination surface; must equal dstAddress	^\s*if\ \(\(\(\(\(\*\(int\ \*\)param_10\[1\]\ !=\ 0\)\ \&\&\ \(iVar24\ =\ FUN_0001e280\(param_1,param_10,1\),\ iVar24\ ==\ 0\)\)\ \|\|$	+6
 use	FUN_00028350	uVar27	surfaceBase	INFERRED	*(uint *)*surfaceInfo: base address of the destination surface; must equal dstAddress	^\s*if\ \(uVar27\ !=\ 0\)\ \{$	+2
 use	FUN_00028350	uVar29	heightArg	INFERRED	copy of the height argument passed on to FUN_0000b670	^\s*uVar29\ =\ param_5;$	+1
-use	FUN_00028350	uVar29	heightArg	INFERRED	copy of the height argument passed on to FUN_0000b670	^\s*FUN_0000b670\(param_1,uVar27,uVar37\ \*\ local_108,uVar33,uVar29,puVar22,0,uVar34\);$	+1
 use	FUN_00028350	uVar33	widthArg	INFERRED	copy of the width argument passed on to FUN_0000b670	^\s*uVar33\ =\ param_4;$	+1
-use	FUN_00028350	uVar33	widthArg	INFERRED	copy of the width argument passed on to FUN_0000b670	^\s*FUN_0000b670\(param_1,uVar27,uVar37\ \*\ local_108,uVar33,uVar29,puVar22,0,uVar34\);$	+1
 local	FUN_00028350	uVar36	clampedWidth	CONFIRMED	width, or 1 when width < 1
 local	FUN_00028350	uVar37	clampedHeight	CONFIRMED	height, or 1 when height < 1
 local	FUN_00028350	local_108	rowBytes	INFERRED	first output of FUN_0000a6e0 (row bytes of the destination): must be 0x20-aligned with the address

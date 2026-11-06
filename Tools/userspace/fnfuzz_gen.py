@@ -53,6 +53,12 @@ for _pf in sorted(glob.glob(os.path.join(link, 'part_*.c'))):
             _mm = re.match(r'(.*?[\s*])(\w+)$', _d)
             if _mm: _decl[_mm.group(2)] = _mm.group(1).strip()
         if _names and all(n in _decl for n in _names): CTYPES[_m.group(1)] = [_decl[n] for n in _names]
+# the function names of the CORPUS, by stock address: the dump (and the Sept ledgers) name functions FUN_<addr>, the renamed corpus has real names, and CTYPES / IMPLICIT / the asm labels
+# are all keyed by the corpus name (without this, a renamed corpus left GA 29 and VA 3 candidates of 33 and 11)
+BYADDR = {}
+for _pf in sorted(glob.glob(os.path.join(link, 'part_*.c'))) + sorted(glob.glob(os.path.join(link, 'x_*_part_*.c'))):
+    for _m in re.finditer(r'(?m)^/\* (\S+) @ 0x([0-9a-f]+) \(\d+ bytes\) \*/', open(_pf).read()):
+        BYADDR.setdefault(int(_m.group(2), 16), _m.group(1))
 def sig_of(entry):
     p = os.path.join(dump, '0x%x.txt' % entry)
     if not os.path.exists(p): return None
@@ -103,6 +109,7 @@ for _pf in sorted(glob.glob(os.path.join(link, 'part_*.c'))):
 ALLOW = set(x for x in os.environ.get('FNFUZZ_ALLOW', '').split(',') if x); ONLY_ALLOWED = bool(os.environ.get('FNFUZZ_ONLY_ALLOWED'))
 rows = []
 for ent, (nm, rs) in sorted(fns.items()):
+    nm = BYADDR.get(ent, nm)
     if nm in IMPLICIT: continue
     bad = None; size = 0; used_allowed = False
     for lo, hi in rs:

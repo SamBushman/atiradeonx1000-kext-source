@@ -18,12 +18,10 @@ use	FUN_00029294	bVar1	directCopy	INFERRED	true when format/type already match t
 local	FUN_00029294	bVar4	sendAttachments	INFERRED	set when the read state carries depth/stencil sources: the three attachment records are sent in the kernel request
 local	FUN_00029294	bVar2	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table PTR_DAT_001e88c8
 use	FUN_00029294	iVar6	yOffsetBytes0	CONFIRMED	y * row bytes returned by FUN_0000a6e0: subtracted from the destination offset when y < 0	^\s*uVar12\ =\ uVar12\ \-\ iVar6;$	+1
-use	FUN_00029294	iVar6	prepareResult	INFERRED	return value of FUN_0001a010, tested before FUN_000230d0	^\s*iVar6\ =\ FUN_0001a010\(param_1,pdVar7,a2,a3,iVar9,a5,piVar24\);$	+2
 use	FUN_00029294	iVar6	levelBuffer	CONFIRMED	valloc(slices * slice size) filled by FUN_00031340 and read through _glgProcessPixels	^\s*iVar16\ =\ iVar6;$	+1
 use	FUN_00029294	iVar6	levelBuffer	CONFIRMED	valloc(slices * slice size) filled by FUN_00031340 and read through _glgProcessPixels	^\s*_vfree\(iVar6\);$	+1
 use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*iVar9\ =\ param_5;$	+1
 use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*_glgConvertType\(param_6,param_7,a2,a3,iVar9,a5,piVar24,uVar12\);$	+1
-use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*iVar6\ =\ FUN_0001a010\(param_1,pdVar7,a2,a3,iVar9,a5,piVar24\);$	+1
 use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*iVar9\ =\ 0;$	+1
 use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar16,a1,a2,a3,iVar9,a5,a1\);$	+1
 use	FUN_00029294	iVar9	bytesPerPixel	INFERRED	FUN_0000a3f0(format, type): the pitch is renderWidth * this	^\s*iVar9\ =\ FUN_0000a3f0\(uVar17,uVar18\);$	+2

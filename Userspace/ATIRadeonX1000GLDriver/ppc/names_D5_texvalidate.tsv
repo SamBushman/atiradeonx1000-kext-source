@@ -8,7 +8,6 @@ use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the
 use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the ctx pointer reloaded for later calls	^\s*iVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_00031940\)\(iStack00000018,param_2\);$	+1
 use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the ctx pointer reloaded for later calls	^\s*bVar39\ =\ uVar28\ <=\ \*\(uint\ \*\)\(iStack00000018\ \+\ 0x29d8\);$	+1
 use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the ctx pointer reloaded for later calls	^\s*uVar23\ =\ \*\(uint\ \*\)\(iStack00000018\ \+\ 0x24\);$	+1
-use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the ctx pointer reloaded for later calls	^\s*FUN_0000b620\(iStack00000018,uVar8,iVar11\ \*\ iVar33,puVar17,uVar20,uVar16,uVar23,puVar26\);$	+1
 use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the ctx pointer reloaded for later calls	^\s*iVar11\ =\ FUN_0000b150\(iStack00000018,param_2,uVar32,uVar20,iVar25\);$	+1
 use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the ctx pointer reloaded for later calls	^\s*iVar25\ =\ FUN_0000b270\(iStack00000018,param_2,0x348,uVar23\ \*\ uVar22,uVar20,iVar25\);$	+1
 use	FUN_00032100	iStack00000018	ctxSaved	CONFIRMED	iStack00000018 = param_1; the ctx pointer reloaded for later calls	^\s*\*\(uint\ \*\)\(iStack00000018\ \+\ 0x29d8\);$	+1

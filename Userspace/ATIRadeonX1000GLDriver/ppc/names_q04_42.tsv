@@ -8,7 +8,6 @@ use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture o
 use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f8\)\ \+\ iVar6\ \+\ iVar15\)\ =\ iVar10\ \+\ 0x3c;$	+1
 use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\(uint\)\*\(byte\ \*\)\(iVar10\ \+\ 0x6c\)\ <<\ 0x1d\ \|\ \*\(uint\ \*\)\(iVar6\ \+\ 0x18a8\)\ \&\ 0x1fffffff;$	+1
 use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x88\)\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x30\)\ \+\ 0x38\);$	+1
-use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*if\ \(\*\(short\ \*\)\(iVar10\ \+\ 0x74\)\ ==\ 0x1902\)\ \{$	+1
 use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*if\ \(\(\*\*\(ushort\ \*\*\)\(iVar10\ \+\ 0x30\)\ \&\ 0xf\)\ ==\ 2\)\ \{$	+1
 use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*if\ \(\*\(float\ \*\)\(iVar10\ \+\ 0x88\)\ !=\ FLOAT_001aa0d4\)\ \{$	+1
 use	FUN_000a7ee0	iVar10	boundTexture	INFERRED	*(ctx + 0x18c + 4*unit): texture object bound to the unit (0 = unbound)	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x2854\)\ =\ \(uint\)\*\(ushort\ \*\)\(iVar10\ \+\ 0xd0\);$	+3

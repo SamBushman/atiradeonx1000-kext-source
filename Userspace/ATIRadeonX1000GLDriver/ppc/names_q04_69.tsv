@@ -22,7 +22,6 @@ use	psnDecodedToProgram	uVar6	sourceSlotWord	INFERRED	16-bit source slot word of
 use	psnDecodedToProgram	uVar6	sourceSlotWord	INFERRED	16-bit source slot word of the decoded entry (register / modifier / swizzle bits)	^\s*uVar13\ =\ \(uVar6\ \&\ 0x3000\)\ >>\ 0xc;$	+1
 use	psnDecodedToProgram	uVar6	sourceSlotWord	INFERRED	16-bit source slot word of the decoded entry (register / modifier / swizzle bits)	^\s*uVar18\ =\ \(uVar6\ \&\ 0x3000\)\ >>\ 0xc;$	+2
 local	psnDecodedToProgram	fVar7	oneF	INFERRED	constant 1.0 (FLOAT_001aa0e8)
-use	psnDecodedToProgram	uVar12	alphaWriteFlag	INFERRED	1 when the alpha or colour part of the entry writes anything	^\s*if\ \(\(\*\(short\ \*\)\(iVar17\ \+\ 0x42\)\ !=\ 0\ \|\|\ \*\(short\ \*\)\(iVar17\ \+\ 0x46\)\ !=\ 0\)\ \|\|$	+3
 use	psnDecodedToProgram	uVar12	alphaWriteFlag	INFERRED	1 when the alpha or colour part of the entry writes anything	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ 0x51\)\ =\ uVar12;$	+1
 use	psnDecodedToProgram	uVar12	alphaSourceSelect	INFERRED	alpha source select byte looked up in the table at 0x1dbfb4	^\s*uVar12\ =\ 0;$	+1
 use	psnDecodedToProgram	uVar12	alphaSourceSelect	INFERRED	alpha source select byte looked up in the table at 0x1dbfb4	^\s*uVar12\ =\ \*\(undefined1\ \*\)\(\(uVar6\ \&\ 0x1f\)\ \*\ 4\ \+\ 0x1dbfb4\ \+\ uVar14\);$	+1

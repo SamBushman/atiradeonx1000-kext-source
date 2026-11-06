@@ -518,18 +518,6 @@ local	FUN_0013f3d4	local_40	extraSelectWord	INFERRED	select word of the extra op
 local	FUN_00142974	local_78	laneMaskWord	INFERRED	byte array of lane flags tested at fromLane/toLane: holds the user write mask, then the needed-lanes mask of the popped inst
 local	FUN_0014375c	local_78	laneSelectBytes	INFERRED	4-byte select word of the user operand rewritten through the remap, then the user remap word (address-taken, one name)
 local	FUN_0013f3d4	local_48	destSelectWord	INFERRED	destination select word of inst, then replaced by the merged-lanes select word (address-taken, one name)
-local	Inst__collapseAlgebraic_00155a60	local_d0	constOne0	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_cc	constOne1	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_c8	constOne2	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_c4	constOne3	INFERRED	initialised 0x3f800000 (1.0f); local_d0..local_c4 are consecutive words, &local_d0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_c0	constHalf0	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_bc	constHalf1	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_b8	constHalf2	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_b4	constHalf3	INFERRED	initialised 0x3f000000 (0.5f); consecutive words, &local_c0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_b0	constTwo0	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_ac	constTwo1	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_a8	constTwo2	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
-local	Inst__collapseAlgebraic_00155a60	local_a4	constTwo3	INFERRED	initialised 0x40000000 (2.0f); consecutive words, &local_b0 passed to IRInst__sourceMatchesConstant
 local	Inst__collapseAlgebraic_00155a60	local_88	readMaskB	INFERRED	out of SelectWord__readMask for operand iVar3 of inst
 local	Inst__collapseAlgebraic_00155a60	local_84	writeMaskB	INFERRED	out of WriteMask__fromSelectWord for the dest select of inst3
 local	Inst__collapseAlgebraic_00155a60	local_80	readMaskC	INFERRED	out of SelectWord__readMask for operand operandIndex4
@@ -1443,7 +1431,6 @@ use	FUN_00175b40	iVar4	flagBit2Result	INFERRED	OpcodeTraits__flagBit2 result	^\s
 use	FUN_00175b40	iVar4	flagBit8Result	INFERRED	OpcodeTraits__flagBit8 result	^\s*iVar4\ =\ FUN_001131c0\(\*\(undefined4\ \*\)\(iVar6\ \+\ 8\),param_1\[0x8e\]\);$	+2
 use	FUN_00175b40	iVar4	flagBit9Result	INFERRED	OpcodeTraits__flagBit9 result	^\s*iVar4\ =\ FUN_0011320c\(\*\(undefined4\ \*\)\(iVar6\ \+\ 8\),param_1\[0x8e\]\);$	+2
 use	FUN_00175b40	iVar4	splitRgbAlphaEnabled	INFERRED	Compiler__isOptionEnabled(compiler,0x30) result	^\s*iVar4\ =\ FUN_000e07dc\(param_1\[0x8e\],0x30\);$	+2
-use	FUN_00175b40	iVar4	fun113734Result	INFERRED	FUN_00113734 result: nonzero keeps the lane	^\s*\(iVar4\ =\ FUN_00113734\(param_1\[0x8e\],param_1\[0x2c\],piVar5,in_r6,in_r7,in_r8,iVar6\),$	+2
 use	FUN_00175b40	iVar4	projectionCheckResult	INFERRED	FUN_000f3154 / IRInst__isProjectionOfOpcode2a results	^\s*iVar4\ =\ FUN_000f3154\(param_1\[0x2c\]\);$	+2
 use	FUN_00175b40	iVar4	keyInst	INFERRED	valueKey[0x2c]: the ValueKey instruction	^\s*iVar4\ =\ FUN_001054ec\(iVar4,0\);$	+1	rhs	none
 use	FUN_00175b40	iVar4	destOperandRecord	INFERRED	IRInst__getOperandRecord(keyInst,0): its +0x10 is the dest select word	^\s*local_38\[0\]\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+1
@@ -1791,7 +1778,6 @@ use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressio
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined1\ \*\)\(\(int\)local_7c\ \+\ \*\(byte\ \*\)\(\(int\)puVar23\ \+\ iVar13\ \+\ 0x20\)\ \+\ 0x14\)\ =\ 0;$	+2
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ iVar13\ \+\ 1;$	+1
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ 0;$@2	+1
-use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_cc\ \+\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar23\ \+\ iVar13\ \+\ 0x20\)\)\ =\ 0;$	+2
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ iVar13\ \+\ 1;$@2	+1
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ 0;$@3	+1
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar13\ \+\ \(int\)local_74\)\ ==\ '\\x01'\)\ \{$	+3
@@ -1803,14 +1789,12 @@ use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressio
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar13\ \+\ \(int\)local_70\)\ ==\ '\\x01'\)\ \{$@2	+3
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ iVar13\ \+\ 1;$@5	+1
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ 0;$@6	+1
-use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_c8\ \+\ iVar13\)\ ==\ '\\x01'\)\ \{$	+3
 use	FUN_001440e4	iVar13	loopIndex2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ iVar13\ \+\ 1;$@6	+1
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_c4\[0\],iVar25,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+3
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0xc\)\ =\ local_a4;$	+2
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar25\ =\ FUN_001054ec\(iVar13,2\);$	+1
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ FUN_00105594\(iVar13,1\);$	+2
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*FUN_00106004\(iVar7,2,iVar13,1,uVar17\);$	+1
-use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_c8,iVar26,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+2
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ FUN_001054ec\(iVar13,0\);$	+1
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0xc\)\ =\ local_94;$	+2
 use	FUN_001440e4	iVar13	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ FUN_001054ec\(iVar13,2\);$	+1
@@ -1830,14 +1814,10 @@ use	FUN_001440e4	iVar13	operandRecord2	INFERRED	role read off the defining expre
 use	FUN_001440e4	iVar13	operandRecord2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar13\ =\ FUN_001054ec\(iVar25,3\);$	+1
 use	FUN_001440e4	iVar13	operandRecord2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar5;$@3	+1
 use	FUN_001440e4	iVar19	operandRecord3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar19\ =\ FUN_001054ec\(iVar13,2\);$	+1
-use	FUN_001440e4	iVar19	operandRecord3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*local_c8\ =\ \*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\);$	+1
 use	FUN_001440e4	iVar19	countdown3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar19\ =\ 4;$	+1
 use	FUN_001440e4	iVar19	countdown3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar19\ =\ iVar19\ \+\ \-1;$	+2
 use	FUN_001440e4	iVar19	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar19\ =\ 0;$	+1
 use	FUN_001440e4	iVar19	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined1\ \*\)\(iVar19\ \+\ \(int\)local_70\)\ =\ 0;$	+1
-use	FUN_001440e4	iVar19	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_d0\ \+\ iVar19\)\ =\ \*\(undefined1\ \*\)puVar16;$	+2
-use	FUN_001440e4	iVar19	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(char\ \*\)\(\(int\)\&local_d0\ \+\ iVar19\)\ =\ \(char\)iVar28;$	+2
-use	FUN_001440e4	iVar19	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined1\ \*\)\(iVar19\ \+\ \(int\)\&local_cc\)\ =\ \*\(undefined1\ \*\)puVar16;$	+1
 use	FUN_001440e4	iVar19	loopIndex3	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar19\ =\ iVar19\ \+\ 1;$	+1
 use	FUN_001440e4	iVar22	loopIndex4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar22\ =\ 0;$	+1
 use	FUN_001440e4	iVar22	loopIndex4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar25\ =\ FUN_001054ec\(param_2,iVar22\);$	+1
@@ -1868,7 +1848,6 @@ use	FUN_001440e4	iVar25	operandRecord4	INFERRED	role read off the defining expre
 use	FUN_001440e4	iVar25	operandRecord4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*local_b0\[0\]\ =\ \*\(undefined4\ \*\)\(iVar25\ \+\ 0x10\);$	+1
 use	FUN_001440e4	iVar25	operandRecord4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar25\ =\ FUN_001054ec\(param_2,iVar22\);$@2	+2
 use	FUN_001440e4	iVar25	operandRecord4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar25\ =\ FUN_001054ec\(param_3,iVar22\);$	+1
-use	FUN_001440e4	iVar25	operandRecord4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*local_d8\ =\ \*\(undefined4\ \*\)\(iVar25\ \+\ 0x10\);$	+1
 use	FUN_001440e4	iVar25	operandRecord4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar25\ =\ FUN_001054ec\(param_3,iVar22\);$@2	+2
 use	FUN_001440e4	iVar25	sourceDef	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar25\ =\ FUN_00105594\(iVar24,1\);$	+1
 use	FUN_001440e4	iVar25	sourceDef	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(iVar25\ ==\ puVar11\[4\]\)\ \{$@2	+1
@@ -1887,10 +1866,8 @@ use	FUN_001440e4	iVar26	countdown6	INFERRED	role read off the defining expressio
 use	FUN_001440e4	iVar26	countdown6	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ 4;$@5	+1
 use	FUN_001440e4	iVar26	countdown6	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ iVar26\ \+\ \-1;$@5	+2
 use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ 0;$@3	+1
-use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_d4\ \+\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar23\ \+\ iVar26\ \+\ 0x20\)\)\ =\ 0;$	+2
 use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ iVar26\ \+\ 1;$@2	+1
 use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ 0;$@4	+1
-use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_d4\ \+\ iVar26\)\ ==\ '\\x01'\)\ \{$	+3
 use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ iVar26\ \+\ 1;$@3	+1
 use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar26\ =\ 0;$@5	+1
 use	FUN_001440e4	iVar26	loopIndex5	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\*\(char\ \*\)\(iVar26\ \+\ \(int\)local_70\)\ ==\ '\\x01'\)\ \{$	+3
@@ -1979,7 +1956,6 @@ use	FUN_001440e4	iVar7	blockContext	INFERRED	piVar21[0x2b]: context of the inser
 use	FUN_001440e4	iVar7	blockContext	INFERRED	piVar21[0x2b]: context of the insert block; +8 is its compiler, +0x478 the pass stamp	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_c4\[0\],iVar25,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+2
 use	FUN_001440e4	iVar7	blockContext	INFERRED	piVar21[0x2b]: context of the insert block; +8 is its compiler, +0x478 the pass stamp	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,uVar5,iVar24,iVar7,uVar17,\(double\)FLOAT_001aa0e8\);$	+2
 use	FUN_001440e4	iVar7	blockContext	INFERRED	piVar21[0x2b]: context of the insert block; +8 is its compiler, +0x478 the pass stamp	^\s*iVar25\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(3,local_c4\[0\],iVar25,iVar7,uVar17,\(double\)FLOAT_001aa0e8\);$	+2
-use	FUN_001440e4	iVar7	blockContext	INFERRED	piVar21[0x2b]: context of the insert block; +8 is its compiler, +0x478 the pass stamp	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_c8,iVar26,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+2
 use	FUN_001440e4	iVar7	newCombinedInst	INFERRED	IRInst__create(0x12/0x14): the combining instruction	^\s*iVar7\ =\ FUN_001043f0\(0x12,uVar17\);$	+5
 use	FUN_001440e4	iVar7	newCombinedInst	INFERRED	IRInst__create(0x12/0x14): the combining instruction	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ local_c4\[0\];$	+4
 use	FUN_001440e4	iVar7	newCombinedInst	INFERRED	IRInst__create(0x12/0x14): the combining instruction	^\s*iVar25\ =\ FUN_001054ec\(iVar7,1\);$	+1
@@ -2077,21 +2053,13 @@ local	FUN_001440e4	puVar23	laneGroup	INFERRED	lane group record: +0x10..0x1c sou
 use	FUN_001440e4	uVar5	defaultSelectWord	INFERRED	DAT_001b0044: default select word passed to IRInst__createWithConstantOperands	^\s*uVar5\ =\ DAT_001b0044;$	+1
 use	FUN_001440e4	uVar5	defaultSelectWord	INFERRED	DAT_001b0044: default select word passed to IRInst__createWithConstantOperands	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,uVar5,iVar24,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+1
 use	FUN_001440e4	uVar5	defaultSelectWord	INFERRED	DAT_001b0044: default select word passed to IRInst__createWithConstantOperands	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,uVar5,iVar24,iVar7,uVar17,\(double\)FLOAT_001aa0e8\);$	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_c8;$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 0x10\)\ =\ uVar5;$	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_d4;$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar25\ \+\ 0x10\)\ =\ uVar5;$	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_d0;$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar25\ \+\ 0x10\)\ =\ uVar5;$@2	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_cc;$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar25\ \+\ 0x10\)\ =\ uVar5;$@3	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_d0;$@2	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar5;$	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_d0;$@3	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar5;$@2	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_c8;$@2	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x10\)\ =\ uVar5;$@3	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_d0;$@4	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 0x10\)\ =\ uVar5;$@2	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_c4\[2\];$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 0x10\)\ =\ uVar5;$@3	+1
@@ -2103,7 +2071,6 @@ use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an oper
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0xc\)\ =\ uVar5;$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_b0\[0\];$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar25\ \+\ 0x10\)\ =\ uVar5;$@4	+1
-use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*uVar5\ =\ local_d8;$	+1
 use	FUN_001440e4	uVar5	selectWordToStore	INFERRED	select word written to an operand record +0x10	^\s*\*\(undefined4\ \*\)\(iVar25\ \+\ 0x10\)\ =\ uVar5;$@5	+1
 local	FUN_001440e4	uVar6	selectWordToStoreB	INFERRED	select word written to an operand record +0x10
 use	FUN_001440e4	uVar9	laneSelectCopy	INFERRED	lane component byte copied from laneSelectCursor	^\s*uVar9\ =\ \*\(undefined1\ \*\)puVar16;$	+1
@@ -2124,13 +2091,11 @@ use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler pa
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*FUN_00106004\(iVar7,2,iVar13,1,uVar17\);$	+1
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,uVar5,iVar24,iVar7,uVar17,\(double\)FLOAT_001aa0e8\);$	+1
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*iVar25\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(3,local_c4\[0\],iVar25,iVar7,uVar17,\(double\)FLOAT_001aa0e8\);$	+1
-use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_c8,iVar26,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+1
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*iVar7\ =\ FUN_001043f0\(0x14,uVar17\);$	+1
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*FUN_00106004\(iVar7,1,iVar24,1,uVar17\);$@2	+1
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*FUN_00106004\(iVar7,2,iVar25,1,uVar17\);$	+1
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*FUN_00106004\(iVar7,3,iVar13,1,uVar17\);$	+1
 use	FUN_001440e4	uVar17	compilerForBlock	INFERRED	*(blockContext+8): compiler passed to the create calls	^\s*FUN_00106804\(iVar7,local_8c,1,uVar17\);$	+1
-use	FUN_001440e4	uVar17	extraSelectWord	INFERRED	local_d4 select word of the extra operand	^\s*uVar17\ =\ local_d4;$	+1
 use	FUN_001440e4	uVar17	extraSelectWord	INFERRED	local_d4 select word of the extra operand	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 0x10\)\ =\ uVar17;$	+1
 use	FUN_001440e4	uVar18	distinctCountIfThird	INFERRED	distinct source count including the third source	^\s*uVar18\ =\ uVar15\ \+\ 1;$	+1
 use	FUN_001440e4	uVar18	distinctCountIfThird	INFERRED	distinct source count including the third source	^\s*uVar15\ =\ uVar18;$	+1
@@ -2172,18 +2137,13 @@ use	FUN_001440e4	iVar27	insertBefore	INFERRED	latest source inst (skipping phis)
 use	FUN_001440e4	iVar27	insertBefore	INFERRED	latest source inst (skipping phis): the new instructions are inserted before it	^\s*FUN_000e7700\(piVar21,iVar27,iVar24\);$@2	+2
 use	FUN_001440e4	iVar27	insertBefore	INFERRED	latest source inst (skipping phis): the new instructions are inserted before it	^\s*FUN_000e7700\(piVar21,iVar27,iVar13\);$	+2
 use	FUN_001440e4	iVar28	firstUsedLaneA	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar28\ =\ 0;$	+1
-use	FUN_001440e4	iVar28	firstUsedLaneA	INFERRED	first lane whose select byte is not 4, or -1	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_d4\ \+\ iVar28\)\ !=\ '\\x04'\)\ goto\ LAB_0014488c;$	+2
 use	FUN_001440e4	iVar28	firstUsedLaneA	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar28\ =\ \-1;$	+1
-use	FUN_001440e4	iVar28	firstUsedLaneA	INFERRED	first lane whose select byte is not 4, or -1	^\s*\*\(char\ \*\)\(\(int\)\&local_d0\ \+\ iVar19\)\ =\ \(char\)iVar28;$	+1
 use	FUN_001440e4	iVar28	firstUsedLaneB	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar28\ =\ 0;$@4	+1
-use	FUN_001440e4	iVar28	firstUsedLaneB	INFERRED	first lane whose select byte is not 4, or -1	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_d0\ \+\ iVar28\)\ !=\ '\\x04'\)\ goto\ LAB_00144dd8;$	+2
 use	FUN_001440e4	iVar28	firstUsedLaneB	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar28\ =\ \-1;$@2	+1
 use	FUN_001440e4	iVar28	firstUsedLaneB	INFERRED	first lane whose select byte is not 4, or -1	^\s*\*\(char\ \*\)\(iVar12\ \+\ \(int\)local_68\)\ =\ \(char\)iVar28;$	+1
 use	FUN_001440e4	iVar28	firstUsedLaneB	INFERRED	first lane whose select byte is not 4, or -1	^\s*\*\(char\ \*\)\(iVar12\ \+\ \(int\)local_68\)\ =\ \(char\)iVar28;$@2	+1
 use	FUN_001440e4	iVar29	firstUsedLaneC	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar29\ =\ 0;$	+1
-use	FUN_001440e4	iVar29	firstUsedLaneC	INFERRED	first lane whose select byte is not 4, or -1	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_c8\ \+\ iVar29\)\ !=\ '\\x04'\)\ goto\ LAB_001448d8;$	+2
 use	FUN_001440e4	iVar29	firstUsedLaneC	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar29\ =\ \-1;$	+1
-use	FUN_001440e4	iVar29	firstUsedLaneC	INFERRED	first lane whose select byte is not 4, or -1	^\s*\*\(char\ \*\)\(iVar19\ \+\ \(int\)\&local_cc\)\ =\ \(char\)iVar29;$	+1
 use	FUN_001440e4	iVar19	firstUsedLaneD	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar19\ =\ 0;$@2	+1
 use	FUN_001440e4	iVar19	firstUsedLaneD	INFERRED	first lane whose select byte is not 4, or -1	^\s*if\ \(\*\(char\ \*\)\(iVar19\ \+\ \(int\)local_74\)\ !=\ '\\x04'\)\ goto\ LAB_00144e38;$	+2
 use	FUN_001440e4	iVar19	firstUsedLaneD	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar19\ =\ \-1;$	+1
@@ -2268,17 +2228,10 @@ use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the l
 use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent)	^\s*iVar27\ =\ \*\(int\ \*\)\(iVar26\ \+\ 8\);$	+1
 use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent)	^\s*FUN_00104800\(iVar26,iVar27\);$	+1
 use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent)	^\s*if\ \(iVar26\ ==\ puVar11\[4\]\)\ \{$	+1
-use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent)	^\s*iVar13\ =\ \(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(2,local_c8,iVar26,iVar7,uVar17,\(double\)FLOAT_001aa0d4\);$	+1
 use	FUN_001440e4	iVar26	thirdSource	INFERRED	third distinct source inst of the lane group (0 when absent)	^\s*iVar26\ =\ puVar23\[iVar26\ \+\ 4\];$	+1	lhs	none
 use	FUN_001440e4	iVar26	firstUsedLaneF	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar26\ =\ 0;$@6	+1
-use	FUN_001440e4	iVar26	firstUsedLaneF	INFERRED	first lane whose select byte is not 4, or -1	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_c8\ \+\ iVar26\)\ !=\ '\\x04'\)\ goto\ LAB_00144e5c;$	+2
 use	FUN_001440e4	iVar26	firstUsedLaneF	INFERRED	first lane whose select byte is not 4, or -1	^\s*iVar26\ =\ \-1;$	+1
 use	FUN_001440e4	iVar26	firstUsedLaneF	INFERRED	first lane whose select byte is not 4, or -1	^\s*\*\(char\ \*\)\(iVar12\ \+\ \(int\)local_64\)\ =\ \(char\)iVar26;$	+1
-local	FUN_001440e4	local_d8	selectScratch0	INFERRED	lane select byte scratch word 0 (7 consecutive words local_d8..local_c4[3]/local_b4 are addressed as one byte buffer through local_7c)
-local	FUN_001440e4	local_d4	selectScratch1	INFERRED	scratch word 1
-local	FUN_001440e4	local_d0	selectScratch2	INFERRED	scratch word 2
-local	FUN_001440e4	local_cc	selectScratch3	INFERRED	scratch word 3
-local	FUN_001440e4	local_c8	selectScratch4	INFERRED	scratch word 4
 local	FUN_001440e4	local_c4	selectScratch5	INFERRED	scratch words 5..8 (array of 4)
 local	FUN_001440e4	local_b4	selectScratch9	INFERRED	scratch word 9: select word of the fourth operand
 local	FUN_001440e4	local_b0	remappedSelect	INFERRED	operand select word rewritten byte by byte through laneGroup
@@ -2360,7 +2313,6 @@ use	FUN_0015f44c	bVar3	hasZeroLanes	INFERRED	some producer operand lane is the c
 local	FUN_0015f44c	bVar4	constSelectByte	INFERRED	component byte of the producer operand select
 local	FUN_0015f44c	fVar5	constantValue	INFERRED	float constant read from the operand source (+0x20 + component*0x18)
 use	FUN_0015f44c	uVar13	zeroArgB	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*uVar13\ =\ 0;$	+1
-use	FUN_0015f44c	uVar13	zeroArgB	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1
 use	FUN_0015f44c	uVar14	nonConstLanes	INFERRED	lanes whose operand constant is neither 0.0 nor 1.0	^\s*uVar14\ =\ 0;$	+1
 use	FUN_0015f44c	uVar14	nonConstLanes	INFERRED	lanes whose operand constant is neither 0.0 nor 1.0	^\s*uVar14\ =\ uVar14\ \|\ 1\ <<\ \(uVar21\ \&\ 0x3f\);$	+1
 use	FUN_0015f44c	uVar14	nonConstLanes	INFERRED	lanes whose operand constant is neither 0.0 nor 1.0	^\s*if\ \(\(uVar14\ ==\ 0\)\ \&\&\ \(\-1\ <\ local_a0\[2\]\)\)\ \{$	+1
@@ -2370,7 +2322,6 @@ use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*uVa
 use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*uVar21\ =\ local_a0\[2\]\ >>\ \(uVar14\ \&\ 0x3f\);$@2	+1
 use	FUN_0015f44c	uVar14	slotIdx	INFERRED	new inst slot 2..0 counted down	^\s*uVar14\ =\ uVar14\ \-\ 1;$	+1
 use	FUN_0015f44c	uVar15	zeroArg	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*uVar15\ =\ 0;$	+1
-use	FUN_0015f44c	uVar15	zeroArg	INFERRED	0: stale argument of IRInst__hasNoUses	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1
 use	FUN_0015f44c	uVar15	producerDestSelectCopy	INFERRED	producer dest select word copied to node operand 1	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\);$	+1
 use	FUN_0015f44c	uVar15	producerDestSelectCopy	INFERRED	producer dest select word copied to node operand 1	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\)\ =\ uVar15;$	+1
 use	FUN_0015f44c	uVar21	nodeSrcModifierBits	INFERRED	node source modifier word (param_3[0x2e] / [0x3a])	^\s*uVar21\ =\ param_3\[0x2e\];$	+1
@@ -2406,8 +2357,6 @@ use	FUN_0015f44c	iVar6	lastOperandSource	INFERRED	IRInst__getOperandSource(node,
 use	FUN_0015f44c	iVar6	producerRefCount	INFERRED	producer[0x58] before it is decremented	^\s*iVar6\ =\ piVar17\[0x58\];$	+1
 use	FUN_0015f44c	iVar6	producerRefCount	INFERRED	producer[0x58] before it is decremented	^\s*piVar17\[0x58\]\ =\ iVar6\ \+\ \-1;$	+1
 use	FUN_0015f44c	iVar6	hasNoUsesResult	INFERRED	IRInst__hasNoUses(producer,...) result	^\s*bVar1\ =\ iVar6\ !=\ 0;$	+1
-use	FUN_0015f44c	iVar6	hasNoUsesResult	INFERRED	IRInst__hasNoUses(producer,...) result	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1	lhs	none
-use	FUN_0015f44c	iVar6	producerRefCount	INFERRED	producer[0x58] - 1 passed as the stale last argument	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1	rhs	none
 use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied between operand records and node[0x27]	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x10\);$	+1
 use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied between operand records and node[0x27]	^\s*param_3\[0x27\]\ =\ iVar9;$	+1
 use	FUN_0015f44c	iVar9	copiedSelectWord	INFERRED	operand select word copied between operand records and node[0x27]	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0x10\)\ =\ iVar9;$	+1
@@ -2536,8 +2485,6 @@ use	Inst__collapseAlgebraic_00155a60	iVar3	operandLoopIdx	INFERRED	operand index
 use	Inst__collapseAlgebraic_00155a60	iVar3	operandLoopIdx	INFERRED	operand index 1..2 loop over the cloned operands	^\s*piVar9\ =\ \(int\ \*\)FUN_00105594\(piVar8,iVar3\);$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar3	operandLoopIdx	INFERRED	operand index 1..2 loop over the cloned operands	^\s*bVar1\ =\ iVar3\ !=\ 2;$	+2
 use	Inst__collapseAlgebraic_00155a60	iVar22	otherOperandIdx	INFERRED	the other operand index of inst (3 - producerOperandIdx)	^\s*iVar22\ =\ 2;$	+1
-use	Inst__collapseAlgebraic_00155a60	iVar22	otherOperandIdx	INFERRED	the other operand index of inst (3 - producerOperandIdx)	^\s*iVar21\ =\ FUN_000f5c0c\(param_1,iVar22,\*\(undefined4\ \*\)\(iVar21\ \+\ 0x10\),\&local_c0\);$	+1
-use	Inst__collapseAlgebraic_00155a60	iVar22	otherOperandIdx	INFERRED	the other operand index of inst (3 - producerOperandIdx)	^\s*iVar21\ =\ FUN_000f5c0c\(param_1,iVar22,\*\(undefined4\ \*\)\(iVar21\ \+\ 0x10\),\&local_b0\);$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar22	otherOperandIdx	INFERRED	the other operand index of inst (3 - producerOperandIdx)	^\s*uVar4\ =\ \*\(uint\ \*\)\(\&DAT_001b0060\ \+$	+5
 use	Inst__collapseAlgebraic_00155a60	iVar22	otherOperandIdx	INFERRED	the other operand index of inst (3 - producerOperandIdx)	^\s*iVar22\ =\ 1;$	+1
 use	Inst__collapseAlgebraic_00155a60	bVar1	swapFirst	INFERRED	operand pair swap flag: producer second source matches the third operand with abs	^\s*bVar1\ =\ true;$	+1
@@ -2571,16 +2518,12 @@ use	Inst__collapseAlgebraic_00155a60	piVar9	candidateSource	INFERRED	operand sou
 use	Inst__collapseAlgebraic_00155a60	piVar9	candidateSource	INFERRED	operand source of inst considered as the producer (piVar8 or the operand at iVar22)	^\s*if\ \(\(\(\(\(\(local_88\ <<\ 0x18\ \|\ \(local_88\ >>\ 8\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(local_88\ >>\ 0x10\ \&\ 0xff\)\ <<\ 8\ \|$	+12
 use	Inst__collapseAlgebraic_00155a60	uVar5	operandModBitsB	INFERRED	*(inst + operand*0x18 + 0xa0): negate/abs bits of the other operand	^\s*uVar5\ =\ \*\(uint\ \*\)\(\(int\)param_1\ \+\ iVar3\ \*\ 0x18\ \+\ 0xa0\);$	+2
 use	Inst__collapseAlgebraic_00155a60	uVar5	operandModBitsB	INFERRED	*(inst + operand*0x18 + 0xa0): negate/abs bits of the other operand	^\s*if\ \(\(uVar5\ \&\ 2\)\ ==\ 0\)\ \{$	+1
-local	Inst__collapseAlgebraic_00155a60	local_a0	lastOperandBuf0	INFERRED	IRInst__readLastOperand out buffer word 0 (zero-initialised)
-local	Inst__collapseAlgebraic_00155a60	local_9c	lastOperandBuf1	INFERRED	last operand buffer word 1
-local	Inst__collapseAlgebraic_00155a60	local_8c	lastOperandBuf2	INFERRED	last operand buffer word 2
 use	Inst__collapseAlgebraic_00155a60	iVar26	outputScale	INFERRED	inst field +0x124 (output scale code), +1 for the 2.0 scale and -1 for the 0.5 scale, checked through target vtable +0xfc	^\s*iVar26\ =\ \*\(int\ \*\)\(\(int\)param_1\ \+\ 0x124\);$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	outputScale	INFERRED	inst field +0x124 (output scale code), +1 for the 2.0 scale and -1 for the 0.5 scale, checked through target vtable +0xfc	^\s*iVar26\ =\ iVar26\ \+\ 1;$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	outputScale	INFERRED	inst field +0x124 (output scale code), +1 for the 2.0 scale and -1 for the 0.5 scale, checked through target vtable +0xfc	^\s*iVar21\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0xfc\)\)\(piVar9,iVar26,param_1\);$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	outputScale	INFERRED	inst field +0x124 (output scale code), +1 for the 2.0 scale and -1 for the 0.5 scale, checked through target vtable +0xfc	^\s*iVar26\ =\ iVar26\ \+\ \-1;$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	outputScale	INFERRED	inst field +0x124 (output scale code), +1 for the 2.0 scale and -1 for the 0.5 scale, checked through target vtable +0xfc	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0xfc\)\)\(piVar9,iVar26,param_1\);$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	outputScale	INFERRED	inst field +0x124 (output scale code), +1 for the 2.0 scale and -1 for the 0.5 scale, checked through target vtable +0xfc	^\s*\*\(int\ \*\)\(\(int\)param_1\ \+\ 0x124\)\ =\ iVar26;$	+1
-use	Inst__collapseAlgebraic_00155a60	iVar21	matchesConstantResult	INFERRED	IRInst__sourceMatchesConstant(inst,otherOperandIdx,dest select,&constHalf0 / &constTwo0)	^\s*iVar21\ =\ FUN_000f5c0c\(param_1,iVar22,\*\(undefined4\ \*\)\(iVar21\ \+\ 0x10\),\&local_c0\);$	+5
 use	Inst__collapseAlgebraic_00155a60	iVar21	scaleUp	INFERRED	1 when the other operand is the constant 2.0, 0 for 0.5: a bit of the table index	^\s*iVar21\ =\ 1;$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar21	scaleUp	INFERRED	1 when the other operand is the constant 2.0, 0 for 0.5: a bit of the table index	^\s*iVar21\ =\ 0;$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar21	scaleUp	INFERRED	1 when the other operand is the constant 2.0, 0 for 0.5: a bit of the table index	^\s*iVar21\ <<\ 5\)\ \*\ 4\);$	+1
@@ -2622,13 +2565,9 @@ use	Inst__collapseAlgebraic_00155a60	iVar26	hasSingleUseResult	INFERRED	IRInst__
 use	Inst__collapseAlgebraic_00155a60	iVar26	flagBit0Result	INFERRED	RegKind__flagBit0 result	^\s*\(\(iVar26\ =\ FUN_00126760\(piVar9\[0x26\]\),\ iVar26\ ==\ 0\ \|\|$	+1	lhs	none
 use	Inst__collapseAlgebraic_00155a60	iVar26	vcall50Result	INFERRED	vtable +0x50 on the candidate source	^\s*\(\(\(piVar9\[5\]\ \&\ 2U\)\ !=\ 0\ \|\|\ \(iVar26\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x50\)\)\(piVar9\),\ iVar26\ !=\ 0\)\)\)\)$	+1	lhs	none
 use	Inst__collapseAlgebraic_00155a60	iVar3	destRecordC	INFERRED	IRInst__getOperandRecord(inst,0)	^\s*iVar3\ =\ FUN_001054ec\(param_1,0\);$@2	+1	lhs	none
-use	Inst__collapseAlgebraic_00155a60	iVar3	destRecordC	INFERRED	IRInst__getOperandRecord(inst,0)	^\s*iVar3\ =\ FUN_000f5c0c\(param_1,2,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\),\&local_d0\);$	+1	rhs	none
 use	Inst__collapseAlgebraic_00155a60	iVar3	constMatchResultB	INFERRED	IRInst__sourceMatchesConstant(inst,2,dest select,&constOne0) result	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
-use	Inst__collapseAlgebraic_00155a60	iVar3	constMatchResultB	INFERRED	IRInst__sourceMatchesConstant(inst,2,dest select,&constOne0) result	^\s*iVar3\ =\ FUN_000f5c0c\(param_1,2,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\),\&local_d0\);$	+1	lhs	none
 use	Inst__collapseAlgebraic_00155a60	iVar3	destRecordD	INFERRED	IRInst__getOperandRecord(inst,0)	^\s*iVar3\ =\ FUN_001054ec\(param_1,0\);$@3	+1	lhs	none
-use	Inst__collapseAlgebraic_00155a60	iVar3	destRecordD	INFERRED	IRInst__getOperandRecord(inst,0)	^\s*iVar3\ =\ FUN_000f5c0c\(param_1,3,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\),\&local_c0\);$	+1	rhs	none
 use	Inst__collapseAlgebraic_00155a60	iVar3	constMatchResultC	INFERRED	IRInst__sourceMatchesConstant(inst,3,dest select,&constHalf0) result	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
-use	Inst__collapseAlgebraic_00155a60	iVar3	constMatchResultC	INFERRED	IRInst__sourceMatchesConstant(inst,3,dest select,&constHalf0) result	^\s*iVar3\ =\ FUN_000f5c0c\(param_1,3,\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\),\&local_c0\);$	+1	lhs	none
 use	Inst__collapseAlgebraic_00155a60	iVar26	useCountB	INFERRED	use count of the second candidate (copy of useCountA before the compare)	^\s*iVar26\ =\ iVar21;$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar12	producerOperandA	INFERRED	operand index (2 or 1) of the producer inst2	^\s*iVar16\ =\ iVar12;$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar21	useCountA	INFERRED	use count of the first candidate	^\s*iVar26\ =\ iVar21;$	+1
@@ -2897,7 +2836,6 @@ use	FUN_0014c604	iVar2	callResult4	INFERRED	role read off the defining expressio
 use	FUN_0014c604	iVar2	callResult4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00146670\(param_4,uVar5,local_68,\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$@4	+2
 use	FUN_0014c604	iVar2	callResult4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00146670\(param_5,uVar5,local_64\[0\],\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$@3	+2
 use	FUN_0014c604	iVar2	callResult4	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00146670\(param_5,uVar5,local_64\[0\],\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$@4	+2
-use	Inst__swapSharedTermBetweenUses	iVar16	hasNoUsesResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar16\ =\ FUN_001049c4\(piVar6,param_3,uVar3,uVar4,uVar10,iVar12,puVar13\);$	+2
 use	Inst__reassociateUsePair	iVar3	swapSharedTermBetweenUsesResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*if\ \(\(\(\(iVar1\ ==\ 0\)\ \|\|\ \(iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0014e9e4\)\(param_2,param_1,param_3,1,1\),\ iVar3\ ==\ 0\)\)\ \&\&$	+4
 use	FUN_001524b8	iVar5	opcodeOrSourcesDifferResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_00146de0\)\(uVar6,uVar7\);$	+2
 use	FUN_001524b8	piVar9	createWithConstantOperandsResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(3,local_48\[0\],uVar6,param_3,\*\(undefined4\ \*\)\(param_3\ \+\ 8\),$	+2
@@ -2921,12 +2859,6 @@ use	FUN_0015b974	iVar1	callResult	INFERRED	role read off the defining expression
 use	Inst__foldProducerIntoConsumer	iVar2	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_00149de4\(param_1,param_2,param_3,\&local_58,\*\(undefined4\ \*\)\(param_4\ \+\ 8\)\);$	+2
 use	FUN_00161748	iVar10	callResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar10\ =\ FUN_00151318\(param_2\);$	+2
 use	FUN_00161748	iVar7	callResult2	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar7\ =\ FUN_00151318\(param_2\);$	+2
-use	FUN_001621c8	dVar21	outputScaleFromExponentResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar6\);$	+1
-use	FUN_001621c8	dVar21	outputScaleFromExponentResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*pfVar4\ =\ \(float\)\(dVar21\ \*\ \(double\)\*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar6\ \+\ 0x20\)\);$	+1
-use	FUN_001621c8	dVar21	outputScaleFromExponentResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar16\);$	+1
-use	FUN_001621c8	dVar21	outputScaleFromExponentResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*pfVar4\ =\ \(float\)\(dVar21\ \*\ \(double\)\*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar7\ \+\ 0x20\)\);$	+1
-use	FUN_001621c8	dVar21	outputScaleFromExponentResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar16\);$@2	+1
-use	FUN_001621c8	dVar21	outputScaleFromExponentResult	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*\*pfVar4\ =\ \(float\)dVar21;$	+1
 use	FUN_001621c8	iVar6	vcall64Result	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1,param_2,param_3\);$	+2
 use	FUN_001621c8	iVar6	vcall64Result	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 100\)\)\(param_2\);$	+2
 use	FUN_00162dfc	iVar2	operandRecord	INFERRED	role read off the defining expressions of the web (counter, operand record / source lookup, operand count vcall, compiler target / arena field)	^\s*iVar2\ =\ FUN_001054ec\(\*param_1,0\);$	+2
@@ -3130,9 +3062,6 @@ local	FUN_001621c8	local_c0	newSelectA	INFERRED	masked select word for the first
 local	FUN_001621c8	local_bc	newSelectB	INFERRED	masked select word for the second new constant inst
 local	FUN_001621c8	local_b8	literalVecB	INFERRED	4 floats: literal of the second constant inst
 local	FUN_001621c8	local_a8	literalVecA	INFERRED	4 floats: literal of the first constant inst
-local	FUN_001621c8	local_98	lastOperandBuf0	INFERRED	IRInst__readLastOperand out word 0
-local	FUN_001621c8	local_94	lastOperandBuf1	INFERRED	IRInst__readLastOperand out word 1
-local	FUN_001621c8	local_84	lastOperandBuf2	INFERRED	IRInst__readLastOperand out word 2
 local	FUN_001621c8	local_78	writeMaskOutA	INFERRED	WriteMask__fromSelectWord out
 local	FUN_001621c8	local_74	maskedUnusedA	INFERRED	SelectWord__maskUnused out
 local	FUN_001621c8	local_70	writeMaskOutB	INFERRED	WriteMask__fromSelectWord out
@@ -3143,7 +3072,6 @@ use	FUN_001621c8	iVar6	destRegisterArg	INFERRED	register (inst2[0x2c] or the sou
 use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*iVar6\ =\ param_2\[0x49\];$	+1
 use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*if\ \(\(iVar7\ ==\ iVar8\)\ \&\&\ \(iVar16\ ==\ iVar6\)\)\ \{$	+1
 use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*if\ \(iVar6\ ==\ 0\)\ \{$@5	+2
-use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar6\);$	+1
 use	FUN_001621c8	iVar6	inst2OutputScale	INFERRED	inst2[0x49]: output scale exponent of inst2	^\s*iVar16\ =\ iVar6;$	+1
 use	FUN_001621c8	iVar6	extraSourceA	INFERRED	extra operand source of inst2 (0 when none)	^\s*iVar6\ =\ 0;$@4	+1
 use	FUN_001621c8	iVar6	extraSourceA	INFERRED	extra operand source of inst2 (0 when none)	^\s*iVar6\ =\ FUN_00105594\(param_2,param_2\[0x21\]\);$	+1
@@ -3156,8 +3084,6 @@ use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; 
 use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*iVar16\ =\ 0;$	+1
 use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*if\ \(iVar16\ !=\ 0\)\ \{$	+1
 use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*iVar16\ =\ iVar6;$	+1
-use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar16\);$	+1
-use	FUN_001621c8	iVar16	outputScaleA	INFERRED	inst[0x49] output scale exponent; reused for the combined exponent (not splittable)	^\s*dVar21\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0010aad4\)\(iVar16\);$@2	+1
 use	FUN_001621c8	iVar7	laneIdx	INFERRED	lane index 0..3	^\s*iVar7\ =\ 0;$	+1
 use	FUN_001621c8	iVar7	laneIdx	INFERRED	lane index 0..3	^\s*if\ \(\(\*\(char\ \*\)\(iVar7\ \+\ iVar8\ \+\ 0x10\)\ ==\ '\\x01'\)\ \&\&$	+2
 use	FUN_001621c8	iVar7	laneIdx	INFERRED	lane index 0..3	^\s*bVar1\ =\ iVar7\ !=\ 3;$	+2
@@ -3186,10 +3112,8 @@ use	FUN_001621c8	uVar13	sourceComponent	INFERRED	component byte of the operand s
 use	FUN_001621c8	uVar13	sourceComponent	INFERRED	component byte of the operand select	^\s*\*pfVar4\ =\ \*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar7\ \+\ 0x20\);$	+1
 use	FUN_001621c8	uVar13	sourceComponentB	INFERRED	component byte of the operand select	^\s*uVar13\ =\ \(uint\)\*\(byte\ \*\)\(iVar7\ \+\ iVar6\ \+\ 0x10\);$	+1
 use	FUN_001621c8	uVar13	sourceComponentB	INFERRED	component byte of the operand select	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar6\ \+\ 0x15c\)\ >>\ \(uVar13\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
-use	FUN_001621c8	uVar13	sourceComponentB	INFERRED	component byte of the operand select	^\s*\*pfVar4\ =\ \(float\)\(dVar21\ \*\ \(double\)\*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar6\ \+\ 0x20\)\);$	+1
 use	FUN_001621c8	uVar13	sourceComponentC	INFERRED	component byte of the operand select	^\s*uVar13\ =\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ iVar7\ \+\ 0x10\);$@2	+1
 use	FUN_001621c8	uVar13	sourceComponentC	INFERRED	component byte of the operand select	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(iVar7\ \+\ 0x15c\)\ >>\ \(uVar13\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$@2	+1
-use	FUN_001621c8	uVar13	sourceComponentC	INFERRED	component byte of the operand select	^\s*\*pfVar4\ =\ \(float\)\(dVar21\ \*\ \(double\)\*\(float\ \*\)\(uVar13\ \*\ 0x18\ \+\ iVar7\ \+\ 0x20\)\);$	+1
 use	FUN_001621c8	uVar14	inst2FlagsB	INFERRED	inst2[5]: flags	^\s*uVar14\ =\ param_2\[5\];$	+1
 use	FUN_001621c8	uVar14	inst2FlagsB	INFERRED	inst2[5]: flags	^\s*if\ \(\(uVar14\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
 use	FUN_001621c8	uVar14	inst2FlagsB	INFERRED	inst2[5]: flags	^\s*uVar14\ =\ param_2\[5\];$@2	+1
@@ -3383,7 +3307,6 @@ use	FUN_00149de4	cVar3	selectByteC	INFERRED	select byte read from the producer o
 use	FUN_00149de4	cVar3	selectByteC	INFERRED	select byte read from the producer operand record	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\)\(piVar7,iVar17,iVar8,cVar3\);$	+1
 local	FUN_00149de4	fparam_1	scaleConstant	INFERRED	float constant read from the source (+0x20 + component*0x18)
 use	FUN_00149de4	iVar9	constByteOffset	INFERRED	byte offset 0x30,0x48.. into the producer source constants	^\s*iVar9\ =\ 0x30;$	+1
-use	FUN_00149de4	iVar9	constByteOffset	INFERRED	byte offset 0x30,0x48.. into the producer source constants	^\s*fparam_1\ =\ \(double\)\*\(float\ \*\)\(iVar9\ \+\ iVar10\ \+\ 0x20\);$	+1
 use	FUN_00149de4	iVar9	constByteOffset	INFERRED	byte offset 0x30,0x48.. into the producer source constants	^\s*iVar9\ =\ iVar9\ \+\ 0x18;$	+1
 local	FUN_00149de4	local_64	selectScratch	INFERRED	scratch select word being rewritten
 local	FUN_00149de4	local_68	composedSelect	INFERRED	select word composed from the operand select and param_4[0]
@@ -3422,7 +3345,6 @@ use	FUN_00149de4	iVar5	countdownM	INFERRED	role read off the web	^\s*while\ \(iV
 use	FUN_00149de4	iVar5	chainOperandCount	INFERRED	role read off the web	^\s*iVar5\ =\ piVar7\[0x21\];$	+1
 use	FUN_00149de4	iVar5	chainOperandCount	INFERRED	role read off the web	^\s*if\ \(0\ <\ iVar5\)\ \{$	+1
 use	FUN_00149de4	iVar5	byteOffsetP	INFERRED	role read off the web	^\s*iVar5\ =\ 0;$	+1
-use	FUN_00149de4	iVar5	byteOffsetP	INFERRED	role read off the web	^\s*if\ \(fparam_1\ ==\ \(double\)\*\(float\ \*\)\(iVar5\ \+\ iVar17\ \+\ 0x20\)\)\ \{$	+1
 use	FUN_00149de4	iVar5	byteOffsetP	INFERRED	role read off the web	^\s*iVar5\ =\ iVar5\ \+\ 0x18;$	+1
 use	FUN_00149de4	iVar5	instLastOperandIdxB	INFERRED	role read off the web	^\s*iVar5\ =\ param_1\[0x21\];$	+1
 use	FUN_00149de4	iVar5	instLastOperandIdxB	INFERRED	role read off the web	^\s*iVar5\ =\ param_1\[0x21\]\ \+\ \-1;$	+1
@@ -3601,7 +3523,6 @@ use	Inst__foldProducerIntoConsumer	iVar2	destRegisterArg	INFERRED	register passe
 use	Inst__foldProducerIntoConsumer	iVar2	destRegisterArg	INFERRED	register passed to RegKind__flagBit7	^\s*iVar2\ =\ FUN_00126708\(iVar2\);$	+1
 local	IfHeader__convertInnerIfToCmov	uVar9	staleArg3	INFERRED	compiler / then block left in the register used as stale 3rd argument of Block__getBranchInst
 use	IfHeader__convertInnerIfToCmov	iVar3	armsSimpleResult	INFERRED	IfHeader__armsAreSimple(block)	^\s*iVar3\ =\ FUN_000e9294\(param_1\);$	+2
-use	IfHeader__convertInnerIfToCmov	iVar3	branchInstB	INFERRED	Block__getBranchInst(block,...) result: second branch inst probe	^\s*\(iVar3\ =\ FUN_000e7804\(param_1,\(int\)uVar18,uVar9,in_r6,in_r7,in_r8,in_r9\),$	+2
 use	IfHeader__convertInnerIfToCmov	iVar3	joinPredicateResult	INFERRED	vtable +0x34 / +0x38 on the join inst	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x34\)\)\(piVar1\);$	+2
 use	IfHeader__convertInnerIfToCmov	iVar4	operandCountIf	INFERRED	vtable +0x14 operand count	^\s*for\ \(iVar5\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x14\)\)\(piVar1\),\ iVar5\ <=\ iVar4;$	+1
 use	IfHeader__convertInnerIfToCmov	iVar4	operandCountIf	INFERRED	vtable +0x14 operand count	^\s*for\ \(iVar5\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x14\)\)\(piVar1\),\ iVar5\ <=\ iVar4;$@2	+1
@@ -4330,11 +4251,6 @@ use	FUN_0013d820	iVar4	vcall64Result	INFERRED	vtable +100 result on inst	^\s*iVa
 use	FUN_0013d820	iVar4	producerCheck	INFERRED	vtable +0x48 and +0x2c results on the operand sources	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x48\)\)\(piVar5\);$	+2
 local	FUN_0013d820	uVar7	compiler	INFERRED	compiler (pass +8) passed to the vtable calls
 local	FUN_0013d820	local_40	selectScratch	INFERRED	select word scratch read bytewise; the lane kinds precede it at -4
-local	Use__sourceIsPlainSingleUse	param_3	staleArg3	INFERRED	r5 left as an extra argument of IRInst__hasNoUses
-local	Use__sourceIsPlainSingleUse	param_4	staleArg4	INFERRED	r6 left as an extra argument of IRInst__hasNoUses
-local	Use__sourceIsPlainSingleUse	param_5	staleArg5	INFERRED	r7 left as an extra argument of IRInst__hasNoUses
-local	Use__sourceIsPlainSingleUse	param_6	staleArg6	INFERRED	r8 left as an extra argument of IRInst__hasNoUses
-local	Use__sourceIsPlainSingleUse	param_7	staleArg7	INFERRED	r9 left as an extra argument of IRInst__hasNoUses
 local	Use__sourceIsPlainSingleUse	iVar3	useCheck	INFERRED	single-use / no-use results in the guard chain
 local	FUN_0014e2dc	param_3	pass	INFERRED	*(param_3+8) is the compiler
 local	FUN_0014e2dc	iVar1	userByteOffset	INFERRED	user index * 4 into the users vector

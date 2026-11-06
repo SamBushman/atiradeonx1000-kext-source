@@ -1,6 +1,5 @@
 # FUN_00034200 (glGenerateMipmap): fork X
 use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*iVar16\ =\ param_3;$	+1
-use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*iVar16\ =\ \(\(int\ \(\*\)\(\)\)FUN_00030b50\)\(param_2,extraout_r4,iVar16,param_4,param_5,in_r8\);$	+2
 use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*iVar16\ =\ param_3;$@2	+1
 use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*if\ \(\(\(iVar17\ ==\ 0\)\ \|\|\ \(\(\*\(uint\ \*\)\(iVar17\ \+\ 0x18\)\ \&\ 0x10000\)\ ==\ 0\)\)\ \|\|$	+4
 use	FUN_00034200	iVar16	levelCountPlus1	INFERRED	levelCount + 1 (or the slice-count sum + 1): table words in the packet size	^\s*iVar16\ =\ uVar37\ \+\ 1;$	+1

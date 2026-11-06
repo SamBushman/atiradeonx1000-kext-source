@@ -31,7 +31,6 @@ use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: i
 use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*iVar17\ =\ iVar10;$	+1
 use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*if\ \(iVar17\ ==\ 0\)\ \{$	+1
 use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar17\ \+\ 0x38\);$	+1
-use	FUN_0001b510	iVar17	colorTexture	INFERRED	last non-NULL colour attachment: its format defines the colour bits	^\s*if\ \(\(uVar5\ >>\ 0x1a\ ==\ 0\)\ \|\|\ \(\*\(short\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0x30\)\ \+\ 2\)\ !=\ 0x1907\)\)$	+1
 use	FUN_0001b510	iVar17	depthTexture	INFERRED	attachment table entry 4: depth texture	^\s*iVar17\ =\ piVar14\[4\];$	+2
 use	FUN_0001b510	iVar17	depthTexture	INFERRED	attachment table entry 4: depth texture	^\s*param_2\[10\]\ =\ \*\(uint\ \*\)\(PTR_DAT_001e88c8\ \+\ \(uint\)\*\(byte\ \*\)\(iVar17\ \+\ 0x38\)\ \*\ 0x24\ \+\ 0x14\)\ >>\ 8\ \&$	+1
 use	FUN_0001b510	iVar17	depthTexture	INFERRED	attachment table entry 4: depth texture	^\s*if\ \(\(\*\(char\ \*\)\(iVar17\ \+\ 0x38\)\ !=\ '\\x10'\)\ \&\&\ \(\*\(char\ \*\)\(iVar17\ \+\ 0x38\)\ !=\ '\)'\)\)$	+1

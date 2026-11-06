@@ -19,7 +19,6 @@ use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw
 use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ =\ uVar19\ \&\ 0xffffffbf;$	+1
 use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ =\ uVar19\ \|\ 0x40;$	+1
 use	FUN_00018a40	uVar19	widthCopy	CONFIRMED	copy of width passed to FUN_0001a010	^\s*uVar19\ =\ param_3;$	+1
-use	FUN_00018a40	uVar19	widthCopy	CONFIRMED	copy of width passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
 use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*uVar19\ =\ param_4;$	+1
 use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*uVar12\ =\ _glgConvertType\(param_5,param_6,puVar16,puVar17,uVar19,piVar18,puVar21,piVar25\);$	+1
 use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*uVar13\ =\ _glgPixelCenters\(uVar12,extraout_r4,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+1
@@ -47,7 +46,6 @@ use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre
 use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*if\ \(uVar20\ ==\ 0\)\ \{$	+2
 local	FUN_00018a40	uVar13	scaledWidth	INFERRED	width after the pixel-zoom centre mapping (_glgPixelCenters); tile columns are cut from it
 use	FUN_00018a40	uVar29	heightArg	CONFIRMED	copy of height passed to FUN_0001a010	^\s*uVar29\ =\ param_4;$	+1
-use	FUN_00018a40	uVar29	heightArg	CONFIRMED	copy of height passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
 use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar5;$	+2
 use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)\(fVar5\ \-\ 0\.999975\);$	+2
 use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar5;$@2	+2
@@ -64,7 +62,6 @@ use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0
 use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uStack_d4\ =\ uVar29\ \^\ 0x80000000;$	+1
 use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ uVar29\ \-\ 1;$	+1
 use	FUN_00018a40	iVar28	formatArg	CONFIRMED	copy of format passed to FUN_0001a010	^\s*iVar28\ =\ param_5;$	+1
-use	FUN_00018a40	iVar28	formatArg	CONFIRMED	copy of format passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
 use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*iVar28\ =\ 4;$	+1
 use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*iVar28\ =\ 1;$	+1
 use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*iVar31\ =\ iVar28\ \*\ param_3;$	+1
@@ -102,7 +99,6 @@ use	FUN_00018a40	fVar6	zoomYScaledB	INFERRED	engineState pixel-zoom y (+0x2e4c) 
 local	FUN_00018a40	fVar7	zoomYScaled	INFERRED	ctx+0x2a58 * engineState pixel-zoom y (+0x2e4c)
 local	FUN_00018a40	puVar8	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0
 use	FUN_00018a40	uVar12	typeArg	CONFIRMED	copy of pixelType passed to FUN_0001a010	^\s*uVar12\ =\ param_6;$	+1
-use	FUN_00018a40	uVar12	typeArg	CONFIRMED	copy of pixelType passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
 use	FUN_00018a40	uVar12	convResult	INFERRED	return value of _glgConvertType	^\s*uVar12\ =\ _glgConvertType\(param_5,param_6,puVar16,puVar17,uVar19,piVar18,puVar21,piVar25\);$	+1
 use	FUN_00018a40	uVar12	convResult	INFERRED	return value of _glgConvertType	^\s*uVar13\ =\ _glgPixelCenters\(uVar12,extraout_r4,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+1
 use	FUN_00018a40	uVar12	stateBytes	CONFIRMED	0x274: size of the pixel-store state block copied into the descriptor	^\s*uVar12\ =\ 0x274;$	+1

@@ -15,13 +15,10 @@ local	vpStateCacheFreeAll	bVar2	moreSlots	INFERRED	role read off the function bo
 local	FUN_00077560	param_1	alloc	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00077560	param_2	recordIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00077560	param_3	depth	INFERRED	role read off the function body (see notes_gld_q03.md)
-local	FUN_00077560	param_4	unusedArg4	INFERRED	role read off the function body (see notes_gld_q03.md)
-local	FUN_00077560	param_5	unusedArg5	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00077560	iVar2	slotBase	INFERRED	role read off the function body (see notes_gld_q03.md)
 use	FUN_00077560	iVar3	liveCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x26870\);$	+1
 use	FUN_00077560	iVar3	liveCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x26870\)\ =\ iVar3\ \+\ 1;$	+2
 use	FUN_00077560	iVar3	callerSlotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar3\ =\ iVar2;$	+1
-use	FUN_00077560	iVar3	callerSlotBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077560\)\(param_1,\*puVar7,param_3\ \+\ 1,param_4,param_5,iVar3,uVar4\);$	+1
 local	FUN_00077560	uVar4	sourceMaskBit	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00077560	uVar5	sourceSlot	INFERRED	role read off the function body (see notes_gld_q03.md)
 local	FUN_00077560	piVar6	sourceListHead	INFERRED	role read off the function body (see notes_gld_q03.md)

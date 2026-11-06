@@ -34,7 +34,6 @@ use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\
 use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078b80\)\(param_1,iVar28,local_b4\);$	+1
 use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078f80\)\(param_1,iVar28,param_3,pcVar21,param_5\);$	+1
 use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ iVar28\ \*\ 4;$	+1
-use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,iVar28,param_3,1,param_5\);$	+1
 use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,iVar28,param_3,uVar26,1\);$	+1
 use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ iVar28\ \*\ 4;$@2	+1
 use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ iVar28\ \*\ 4\ \+\ param_1;$	+1
@@ -250,7 +249,6 @@ use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component
 use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*piVar14\ =\ piVar14\ \+\ 1;$@2	+1
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(uVar33\ >>\ 6\ \&\ 1\);$	+1
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*else\ if\ \(\(pcVar15\ !=\ \(code\ \*\)0x0\)\ \&\&\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0xb\)\)\ \{$	+1
-use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077560\)\(param_1,\*\(undefined4\ \*\)pcVar39,0,param_4,param_5,param_6,pcVar15\);$	+6
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(iVar28\ \-\ iVar27\);$	+2
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(uVar4\ >>\ 0xd\ \&\ 0x7f\);$	+2
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(1\ <<\ \(\(uint\)param_6\ >>\ 0x10\ \&\ 7\)\);$	+1
@@ -266,15 +264,12 @@ use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on t
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ pcVar15\ \+\ 4;$	+1
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x28874\)\ \+\ 1\);$@2	+1
 use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*\*\(code\ \*\*\)\(param_1\ \+\ 0x28874\)\ =\ pcVar15;$@2	+1
-use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e10\)\(pcVar39,uVar26,param_3,param_4,param_5,param_6,pcVar15\);$	+1
 use	FUN_0007b0d0	pcVar15	recordA	INFERRED	first record of a combinable pair	^\s*pcVar15\ =\ pcVar39;$	+1
 use	FUN_0007b0d0	pcVar15	recordA	INFERRED	first record of a combinable pair	^\s*pcVar15\ =\ pcVar15\ \+\ 4;$@2	+1
 use	FUN_0007b0d0	pcVar15	recordA	INFERRED	first record of a combinable pair	^\s*bVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cd0\)\(pcVar15\);$	+1
 use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*pcVar15\ =\ pcVar21\ \+\ local_84\ \*\ 0x10;$	+1
 use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*pcVar15\ =\ pcVar39;$@2	+1
 use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(undefined4\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ 0;$	+2
-use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078a10\)\(param_1,\&local_b0,pcVar15\);$	+1
-use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*if\ \(\(\(\(2\ <\ \(int\)local_b0\ \+\ \(int\)local_ac\)\ \|\|\ \(1\ <\ \(int\)local_af\ \+\ \(int\)local_ab\)\)\ \|\|$	+5
 use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar29\ \|\ uVar5\ \&\ 0xffe7ffff;$	+1
 use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07ffff;$	+1
 use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07fffb;$	+1
@@ -370,9 +365,7 @@ use	FUN_0007b0d0	puVar40	bindingEntryPtr	INFERRED	per-component binding entry (a
 use	FUN_0007b0d0	puVar40	bindingEntryPtr	INFERRED	per-component binding entry (alloc+0x2a87c + register*0x10)	^\s*\*puVar40\ =\ puVar8;$	+2
 use	FUN_0007b0d0	puVar40	bindingEntryPtr	INFERRED	per-component binding entry (alloc+0x2a87c + register*0x10)	^\s*puVar40\ =\ puVar40\ \+\ 1;$	+1
 use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xc418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$	+3
-use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,\*puVar40,param_3,1,param_5\);$	+1
 use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xe418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$	+3
-use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,\*puVar40,param_3,1,param_5\);$	+1
 use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xe418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$@2	+2
 use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*param_4\ =\ \(code\ \*\)puVar40\[1\];$	+1
 use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,\*puVar40,param_3,param_4,0\);$	+1
@@ -395,7 +388,6 @@ use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*
 use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*pcVar41\ =\ pcVar39;$@2	+1
 use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*pcVar41\ =\ pcVar21\ \+\ local_84\ \*\ 0x10;$	+1
 use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*cVar2\ =\ pcVar41\[3\];$	+2
-use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078a10\)\(param_1,\&local_ac,pcVar41\);$	+1
 use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar29\ =\ \(\*\(uint\ \*\)pcVar41\ \&\ 0x6000\)\ <<\ 6;$	+1
 use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar17\ =\ \(\(byte\)pcVar41\[3\]\ \&\ 0xf\)\ <<\ 0x15;$	+1
 use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar7\ =\ \(byte\)pcVar41\[3\]\ >>\ 2\ \&\ 4;$	+1

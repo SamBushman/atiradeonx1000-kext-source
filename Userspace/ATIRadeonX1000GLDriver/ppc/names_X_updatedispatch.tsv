@@ -34,8 +34,6 @@ use	_gldUpdateDispatch	uVar20	pendingTextureMask	CONFIRMED	ctx+0x26b8: units who
 use	_gldUpdateDispatch	uVar20	dirtyWord3	CONFIRMED	*dirtyWord3Ptr	^\s*uVar20\ =\ \*puVar25;$	+2
 use	_gldUpdateDispatch	uVar20	dirtyWord3	CONFIRMED	*dirtyWord3Ptr	^\s*uVar20\ =\ \*puVar25;$@2	+1
 use	_gldUpdateDispatch	uVar20	dirtyWord3	CONFIRMED	*dirtyWord3Ptr	^\s*uVar26\ =\ uVar20\ \|\ uVar24;$	+1
-use	_gldUpdateDispatch	uVar20	dirtyWord3	CONFIRMED	*dirtyWord3Ptr	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a9ac0\)\(param_1\ \+\ GLD_commandStream,param_3,puVar11,param_4,uVar20,uVar14,uVar24,uVar15,fparam_1,$	+3
-use	_gldUpdateDispatch	uVar20	dirtyWord3	CONFIRMED	*dirtyWord3Ptr	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001a9d0\)\(param_1,piVar10,puVar11,param_4,uVar20,uVar9,uVar22\ \&\ 0x800\);$	+1
 use	_gldUpdateDispatch	uVar22	unitIndex	CONFIRMED	texture unit number: counts up with the mask shift	^\s*uVar22\ =\ 0;$	+1
 use	_gldUpdateDispatch	uVar22	unitIndex	CONFIRMED	texture unit number: counts up with the mask shift	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x26b8\)\ \&\ \~\(1\ <<\ \(uVar22\ \&\ 0x3f\)\);$	+1
 use	_gldUpdateDispatch	uVar22	unitIndex	CONFIRMED	texture unit number: counts up with the mask shift	^\s*uVar15\ \|\ \(uint\)\*\(byte\ \*\)\(uVar14\ \+\ 0x44\)\ <<\ \(uVar22\ \&\ 0x3f\);$	+1
@@ -73,7 +71,6 @@ use	_gldUpdateDispatch	uVar14	unitBitsLeft	CONFIRMED	the unit mask shifted right
 use	_gldUpdateDispatch	uVar14	unitBitsLeft	CONFIRMED	the unit mask shifted right once per unit	^\s*\}\ while\ \(uVar14\ !=\ 0\);$	+1
 use	_gldUpdateDispatch	uVar14	dirtyWord1	CONFIRMED	*dirtyWord1Ptr	^\s*uVar14\ =\ \*puVar19;$	+1
 use	_gldUpdateDispatch	uVar14	dirtyWord1	CONFIRMED	*dirtyWord1Ptr	^\s*uVar9\ =\ uVar14;$	+3
-use	_gldUpdateDispatch	uVar14	dirtyWord1	CONFIRMED	*dirtyWord1Ptr	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a9ac0\)\(param_1\ \+\ GLD_commandStream,param_3,puVar11,param_4,uVar20,uVar14,uVar24,uVar15,fparam_1,$	+3
 use	_gldUpdateDispatch	uVar14	dirtyWord1	CONFIRMED	*dirtyWord1Ptr	^\s*if\ \(\(uVar26\ \&\ 0x10000000\)\ !=\ \*\(uint\ \*\)\(param_1\ \+\ 0x29c0\)\ \|\|$	+2
 use	_gldUpdateDispatch	uVar15	pendingMaskCleared	CONFIRMED	ctx+0x26b8 with this unit bit cleared	^\s*uVar15\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x26b8\)\ \&\ \~\(1\ <<\ \(uVar22\ \&\ 0x3f\)\);$	+2
 use	_gldUpdateDispatch	uVar15	pendingMaskCleared	CONFIRMED	ctx+0x26b8 with this unit bit cleared	^\s*uVar15\ \|\ \(uint\)\*\(byte\ \*\)\(uVar14\ \+\ 0x44\)\ <<\ \(uVar22\ \&\ 0x3f\);$	+1
@@ -83,7 +80,6 @@ use	_gldUpdateDispatch	uVar15	unitObjectValue	CONFIRMED	the texture object if it
 use	_gldUpdateDispatch	uVar15	unitObjectValue	CONFIRMED	the texture object if it is complete (+0x3d byte non-zero), else 0: stored into ctx+0x18c+unit*4	^\s*\*\(uint\ \*\)\(iVar8\ \+\ 0x18c\)\ =\ uVar15;$	+1
 use	_gldUpdateDispatch	uVar15	dirtyWord4	CONFIRMED	dirtyBits[4]	^\s*uVar15\ =\ param_3\[4\];$	+1
 use	_gldUpdateDispatch	uVar15	dirtyWord4	CONFIRMED	dirtyBits[4]	^\s*if\ \(\(\(uVar16\ !=\ 0\ \|\|\ \(uVar22\ !=\ 0\ \|\|\ uVar14\ !=\ 0\)\)\ \|\|\ uVar15\ !=\ 0\)\ \|\|\ \(uVar26\ \&\ 0xffefffff\)\ !=\ 0$	+2
-use	_gldUpdateDispatch	uVar15	dirtyWord4	CONFIRMED	dirtyBits[4]	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a9ac0\)\(param_1\ \+\ GLD_commandStream,param_3,puVar11,param_4,uVar20,uVar14,uVar24,uVar15,fparam_1,$	+3
 use	_gldUpdateDispatch	uVar15	dirtyWord4	CONFIRMED	dirtyBits[4]	^\s*if\ \(\(uVar26\ \&\ 0x10000000\)\ !=\ \*\(uint\ \*\)\(param_1\ \+\ 0x29c0\)\ \|\|$	+2
 use	_gldUpdateDispatch	uVar16	boundTexture	CONFIRMED	engineObjects[unit row + target]: the texture object bound to the unit	^\s*uVar16\ =\ \*\(uint\ \*\)\(iVar21\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\ \+\ \(uVar22\ \&\ 0xf\)\ \*\ 4\);$	+3
 use	_gldUpdateDispatch	uVar16	boundTexture	CONFIRMED	engineObjects[unit row + target]: the texture object bound to the unit	^\s*iVar23\ =\ FUN_00032100\(param_1,uVar16,puVar11,param_4,param_5,param_6\);$	+2
@@ -100,7 +96,6 @@ use	_gldUpdateDispatch	piVar10	framebufferObj	CONFIRMED	*(ctx + GLD_boundFramebu
 use	_gldUpdateDispatch	piVar10	framebufferObj	CONFIRMED	*(ctx + GLD_boundFramebuffer)	^\s*piVar10\ =\ extraout_r4_02;$	+1
 use	_gldUpdateDispatch	piVar10	framebufferObj	CONFIRMED	*(ctx + GLD_boundFramebuffer)	^\s*piVar10\ =\ extraout_r4_03;$	+1
 use	_gldUpdateDispatch	piVar10	framebufferObj	CONFIRMED	*(ctx + GLD_boundFramebuffer)	^\s*piVar10\ =\ extraout_r4_04;$	+1
-use	_gldUpdateDispatch	piVar10	framebufferObj	CONFIRMED	*(ctx + GLD_boundFramebuffer)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001a9d0\)\(param_1,piVar10,puVar11,param_4,uVar20,uVar9,uVar22\ \&\ 0x800\);$	+1
 use	_gldUpdateDispatch	piVar10	programObject	INFERRED	engineObjects+0x19c: the current program object	^\s*piVar10\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\ \+\ 0x19c\);$	+2
 use	_gldUpdateDispatch	piVar10	programObject	INFERRED	engineObjects+0x19c: the current program object	^\s*iVar8\ =\ \*piVar10;$	+1
 local	_gldUpdateDispatch	puVar12	currentProgram	INFERRED	engineObjects+0x19c: the current program object (tested against 0)

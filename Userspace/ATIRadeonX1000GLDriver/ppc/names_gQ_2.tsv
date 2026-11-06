@@ -270,7 +270,6 @@ use	FUN_000353a0	uVar49	ga_point_size	INFERRED	copy of GLDContext field ga_point
 use	FUN_000353a0	uVar49	ga_point_size	INFERRED	copy of GLDContext field ga_point_size read from the context (fields_gld.tsv)	^\s*puVar30\[0xb7\]\ =\ uVar49;$	+1
 use	FUN_000353a0	uVar50	sc_scissor1	INFERRED	copy of GLDContext field sc_scissor1 read from the context (fields_gld.tsv)	^\s*uVar50\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1d50\);$	+1
 use	FUN_000353a0	uVar50	sc_scissor1	INFERRED	copy of GLDContext field sc_scissor1 read from the context (fields_gld.tsv)	^\s*puVar30\[0xb5\]\ =\ uVar50;$	+1
-use	FUN_000353a0	uVar50	sc_scissor1	INFERRED	copy of GLDContext field sc_scissor1 read from the context (fields_gld.tsv)	^\s*FUN_0000b670\(param_1,\*\(int\ \*\)\(iVar34\ \+\ 0x14\),\(uint\)uVar9\ \*\ iVar35\ \*\ uVar46,uVar39,uVar41,$	+2
 local	FUN_00039330	param_1	ctx	INFERRED	GLDContext: 13 of 17 uses through it at offsets >= 0x100 are known GLDContext fields (fields_gld.tsv)
 use	FUN_00039330	uVar8	vap_vte_cntl	INFERRED	copy of GLDContext field vap_vte_cntl read from the context (fields_gld.tsv)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(0x00001dc4\ \+\ param_1\);$	+1
 use	FUN_00039330	uVar8	vap_vte_cntl	INFERRED	copy of GLDContext field vap_vte_cntl read from the context (fields_gld.tsv)	^\s*puVar6\[1\]\ =\ uVar8;$	+1

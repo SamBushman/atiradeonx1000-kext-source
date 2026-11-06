@@ -14,13 +14,6 @@ local	ilDestinationOperandWordCount	param_1	operandWords	INFERRED	IL destination
 local	ilDestinationOperandWordCount	uVar1	header	INFERRED	operand header word (bit 22 extra word, bits 23-24 relative address, bit 26 trailing word)
 local	ilDestinationOperandWordCount	puVar2	wordPtr	INFERRED	cursor past the words consumed so far
 local	R300VMachineAssembler__vslot2_exceedsLimits	param_1	this	INFERRED	assembler: +0xc compiler, +0x58 next stack pointer, +0x5c second counter
-local	R300VMachineAssembler__vslot2_exceedsLimits	param_2	unusedArg2	INFERRED	unused argument
-local	R300VMachineAssembler__vslot2_exceedsLimits	param_3	unusedArg3	INFERRED	unused argument
-local	R300VMachineAssembler__vslot2_exceedsLimits	param_4	unusedArg4	INFERRED	unused argument
-local	R300VMachineAssembler__vslot2_exceedsLimits	param_5	unusedArg5	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
-local	R300VMachineAssembler__vslot2_exceedsLimits	param_6	unusedArg6	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
-local	R300VMachineAssembler__vslot2_exceedsLimits	param_7	unusedArg7	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
-local	R300VMachineAssembler__vslot2_exceedsLimits	param_8	unusedArg8	INFERRED	unused argument, forwarded to Compiler__logf as variadic slot
 local	R300VMachineAssembler__vslot2_exceedsLimits	uVar1	exceeds	INFERRED	1 when next_sp exceeds the hardware max (limits +0x40) or the second counter exceeds 0x10
 local	FUN_0017b020	param_2	operandIndex	INFERRED	instruction operand whose defining value-key row is inspected
 local	FUN_0017b020	uVar4	lastElementIndex	INFERRED	vector size - 1

@@ -4,8 +4,6 @@ local	FUN_00186a88	param_7	replacementOut	INFERRED	forwarded to FUN_00185da4 as 
 local	FUN_00186a88	local_a4	constTable	INFERRED	stack record: [0] select word, [1] second source pointer, [2..9] float constants 0.5 / 1.0 (0x3f000000 / 0x3f800000)
 local	FUN_00186a88	local_a8	scratchInst	INFERRED	cloned instruction or first source pointer (address passed to FUN_00162dfc)
 use	FUN_00186a88	uVar9	checkFitsCopy	INFERRED	copy of checkFits (param_6) passed to the constant-vector lookup	^\s*uVar9\ =\ param_6;$	+1
-use	FUN_00186a88	uVar9	checkFitsCopy	INFERRED	copy of checkFits (param_6) passed to the constant-vector lookup	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,loopRemaining,uVar10,uVar9,loopPtr4\);$	+1
-use	FUN_00186a88	uVar9	checkFitsCopy	INFERRED	copy of checkFits (param_6) passed to the constant-vector lookup	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,loopPtr4,uVar10,uVar9,piVar12\);$	+1
 local	FUN_0017ee68	local_58	laneValues	INFERRED	out-parameter of FUN_00178d78: lane constant values of operand n
 use	FUN_0017ee68	bVar1	isLastLane	INFERRED	lane counter == 2	^\s*bVar1\ =\ iVar17\ ==\ 2;$	+1
 use	FUN_0017ee68	bVar1	isLastLane	INFERRED	lane counter == 2	^\s*if\ \(bVar1\)\ \{$	+1

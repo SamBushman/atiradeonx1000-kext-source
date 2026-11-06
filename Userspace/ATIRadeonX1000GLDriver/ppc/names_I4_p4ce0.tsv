@@ -13,12 +13,8 @@ use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded pr
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(undefined2\ \*\)\(\(int\)param_2\ \+\ 0x56\)\ =\ \*\(undefined2\ \*\)\(iVar17\ \+\ 0x80\);$	+3
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x62\)\ =\ \(char\)\*\(undefined2\ \*\)\(iVar17\ \+\ 0x28\);$	+2
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar17\ \+\ 0x15\);$	+1
-use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\(\*\(short\ \*\)\(iVar17\ \+\ 2\)\ ==\ 0\ \&\&\ \*\(short\ \*\)\(iVar17\ \+\ 6\)\ ==\ 0\)\ \&\&$@2	+2
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*sVar9\ =\ \*\(short\ \*\)\(iVar17\ \+\ 0x3a\);$	+1
-use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\(\*\(short\ \*\)\(iVar17\ \+\ 0x42\)\ !=\ 0\ \|\|\ \*\(short\ \*\)\(iVar17\ \+\ 0x46\)\ !=\ 0\)\ \|\|$	+2
-use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\*\(short\ \*\)\(iVar17\ \+\ 0x80\)\ ==\ \-1\)\ \{$	+1
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x52\)\ =\ \(char\)\*\(short\ \*\)\(iVar17\ \+\ 0x80\);$	+1
-use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\*\(short\ \*\)\(iVar17\ \+\ 0x86\)\ ==\ \-1\)\ \{$	+1
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(param_2\ \+\ 0x14\)\ =\ \(char\)\*\(short\ \*\)\(iVar17\ \+\ 0x86\);$	+1
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(bool\ \*\)\(\(int\)param_2\ \+\ 0x55\)\ =\ \*\(float\ \*\)\(iVar17\ \+\ 0x2c\)\ !=\ FLOAT_001aa0e8;$	+2
 use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x5d\)\ =\ \(char\)\*\(undefined2\ \*\)\(iVar17\ \+\ 2\);$	+1

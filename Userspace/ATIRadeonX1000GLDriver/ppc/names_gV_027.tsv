@@ -124,11 +124,6 @@ local	FUN_001049a0	iVar1	useCount	INFERRED	inst+0x160 - program+0x478, floored a
 func	FUN_001049c4	IRInst__hasNoUses	INFERRED	inst+0x160 <= program+0x478 (use count zero); signature shares a virtual slot shape with 5 unused args
 local	FUN_001049c4	param_1	inst	INFERRED	
 local	FUN_001049c4	param_2	program	INFERRED	
-local	FUN_001049c4	param_3	unusedArg3	INFERRED	
-local	FUN_001049c4	param_4	unusedArg4	INFERRED	
-local	FUN_001049c4	param_5	unusedArg5	INFERRED	
-local	FUN_001049c4	param_6	unusedArg6	INFERRED	
-local	FUN_001049c4	param_7	unusedArg7	INFERRED	
 local	IRLoadInterp__laneUsed	param_1	inst	INFERRED	reads the used byte of lane (+0x12c + 4*lane)
 local	IRLoadInterp__laneUsed	param_2	lane	INFERRED	reads the used byte of lane (+0x12c + 4*lane)
 func	FUN_00104ae4	IRLoadInterp__laneSelects	INFERRED	writes 4 select codes: lane used 1 -> 5, used 2 -> 6, else 4
@@ -184,7 +179,6 @@ use	FUN_00103d78	dVar3	maxLimit	INFERRED	upper clamp bound halfRange + FLOAT/(1<
 use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*dVar3\ =\ dVar4;$	+1
 use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*dVar3\ =\ dVar5;$	+1
 use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*dVar3\ =\ dVar4;$@2	+1
-use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*return\ \(int\)\(dVar3\ \*\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
 use	FUN_00103d78	fVar1	distanceToMax	INFERRED	maxLimit - value, sign selects the clamp	^\s*fVar1\ =\ \(float\)\(dVar3\ \-\ fparam_1\);$	+1
 use	FUN_00103d78	fVar1	distanceToMax	INFERRED	maxLimit - value, sign selects the clamp	^\s*if\ \(fVar1\ <\ 0\.0\)\ \{$	+1
 use	FUN_00103d78	fVar1	distanceToMax	INFERRED	maxLimit - value, sign selects the clamp	^\s*if\ \(\-fVar1\ <\ 0\.0\)\ \{$	+1

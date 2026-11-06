@@ -1,10 +1,3 @@
-local	fragmentInstructionToIL	param_2	unusedArg2	INFERRED	stack/register argument the function never reads; the only caller passes the translator
-local	fragmentInstructionToIL	param_3	unusedArg3	INFERRED	argument the function never reads
-local	fragmentInstructionToIL	param_4	unusedArg4	INFERRED	argument the function never reads
-local	fragmentInstructionToIL	param_5	unusedArg5	INFERRED	argument the function never reads
-local	fragmentInstructionToIL	param_6	unusedArg6	INFERRED	argument the function never reads
-local	fragmentInstructionToIL	param_7	unusedArg7	INFERRED	argument the function never reads
-local	fragmentInstructionToIL	param_8	unusedArg8	INFERRED	argument the function never reads
 local	fragmentInstructionToIL	iVar16	instructionCount	INFERRED	*(program + 0x50): number of instructions of the program (the loop ends when instructionIndex reaches it)
 local	fragmentInstructionToIL	iVar17	instructionIndex	INFERRED	0 .. instructionCount: instruction being translated, incremented once per loop iteration
 local	fragmentInstructionToIL	iVar18	recordIndex	INFERRED	index of the current instruction's first 8-byte record inside the instruction block; advanced by recordSpan per instruction
@@ -79,16 +72,8 @@ local	fragmentInstructionToIL	local_60	ilInstBPtr	INFERRED	always &local_d4: poi
 local	fragmentInstructionToIL	local_b0	ilInstAOpcode	INFERRED	word 0 of the 0x24-byte IL instruction record A (opcode in the low half, written last 16 bits = modifiers)
 local	fragmentInstructionToIL	local_ac	ilInstADst	INFERRED	word 1 of record A: destination register word (set from fpilTranslateDestination)
 local	fragmentInstructionToIL	local_a8	ilInstADstMask	INFERRED	word 2 of record A: destination write mask word
-local	fragmentInstructionToIL	local_a4	ilInstASrc0	INFERRED	word 3 of record A: source 0 register word (fpilTranslateSource first output)
-local	fragmentInstructionToIL	local_a0	ilInstASrc1	INFERRED	word 4 of record A: source 1 register word
-local	fragmentInstructionToIL	local_9c	ilInstASrc2	INFERRED	word 5 of record A: source 2 register word
-local	fragmentInstructionToIL	local_98	ilInstASwz0	INFERRED	word 6 of record A: source 0 swizzle/modifier word (fpilTranslateSource second output)
-local	fragmentInstructionToIL	local_94	ilInstASwz1	INFERRED	word 7 of record A: source 1 swizzle/modifier word
-local	fragmentInstructionToIL	local_90	ilInstASwz2	INFERRED	word 8 of record A: source 2 swizzle/modifier word
 local	fragmentInstructionToIL	local_d4	ilInstBOpcode	INFERRED	word 0 of the second 0x24-byte IL instruction record B
 local	fragmentInstructionToIL	local_d0	ilInstBDst	INFERRED	word 1 of record B: destination register word
 local	fragmentInstructionToIL	local_cc	ilInstBDstMask	INFERRED	word 2 of record B: destination write mask word
-local	fragmentInstructionToIL	local_c8	ilInstBSrc0	INFERRED	word 3 of record B: source 0 register word
-local	fragmentInstructionToIL	local_c4	ilInstBSrc1	INFERRED	word 4 of record B: source 1 register word
 local	fragmentInstructionToIL	local_bc	ilInstBSwz0	INFERRED	word 6 of record B: source 0 swizzle/modifier word
 local	fragmentInstructionToIL	local_b8	ilInstBSwz12	INFERRED	words 7 and 8 of record B (swizzle/modifier words of sources 1 and 2; 2-element array)

@@ -65,7 +65,6 @@ local	ILReader__nextInstruction	LAB_000e5e9c	readNextToken	INFERRED	role from th
 local	ILReader__nextInstruction	switchD_000e61ac_caseD_a	returnInstructionRead	INFERRED	role from the following code; r07
 local	Program__foldKind6IntoKind7Inst	LAB_000f1940	callPlacementVfn	INFERRED	role from the following code; r07
 local	Program__propagateMovThroughUses	LAB_000f26b0	walkUsesLoop	INFERRED	role from the following code; r07
-local	SelectWord__canonicalize	LAB_000f35b4	storeLane0	INFERRED	role from the following code; r07
 local	IRInst__setConstantOperand	LAB_000f6f18	uniqueOperandLoop	INFERRED	role from the following code; r07
 local	Program__translateILInstruction	LAB_000fb800	releaseTempRegister	INFERRED	role from the following code; r07
 local	Program__translateILStream	switchD_000fdaf0_caseD_2	readNextInstruction	INFERRED	role from the following code; r07

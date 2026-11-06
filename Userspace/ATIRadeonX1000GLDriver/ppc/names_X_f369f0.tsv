@@ -109,7 +109,6 @@ use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	
 use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_00032100\)\(param_1,param_2,iVar43,uVar26,uVar44,uVar42\);$	+1
 use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*uVar26\ =\ 0;$@2	+1
 use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*uVar26\ =\ param_13;$	+1
-use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*\(\(int\ \(\*\)\(\)\)FUN_00034200\)\(param_1,param_2,param_3,uVar26,uVar44\);$	+1
 use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*uVar26\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x18\)\ >>\ 0x1e\ \^\ 2;$	+1
 use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*uVar26\ =\ uVar26\ \^\ uVar44;$	+1
 use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*if\ \(uVar26\ ==\ 2\)\ \{$	+1

@@ -1,10 +1,5 @@
 local	FUN_00181ab0	param_1	pass	INFERRED	pass object: [0] compiler, [7] result vector
 local	FUN_00181ab0	param_2	block	INFERRED	object whose +0x98 is the head of a list linked through +8 (instruction list)
-local	FUN_00181ab0	param_3	unusedArg3	INFERRED	unused argument
-local	FUN_00181ab0	param_4	unusedArg4	INFERRED	unused argument
-local	FUN_00181ab0	param_5	unusedArg5	INFERRED	unused argument
-local	FUN_00181ab0	param_6	unusedArg6	INFERRED	unused argument
-local	FUN_00181ab0	param_7	unusedArg7	INFERRED	unused argument
 local	FUN_00181ab0	iVar1	nextLink	INFERRED	+8 link of the following node, loop condition
 local	FUN_00181ab0	iVar2	nextNode	INFERRED	node the loop advances to (current node, or its +8 link after a record was made)
 local	FUN_00181ab0	iVar6	currentNode	INFERRED	node being tested (flag bit 0 selects it)

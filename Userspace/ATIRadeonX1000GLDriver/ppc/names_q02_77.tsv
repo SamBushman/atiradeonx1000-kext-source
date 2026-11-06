@@ -1,24 +1,7 @@
 local	FUN_00065c40	param_1	glContext	INFERRED	the GL context
 local	FUN_00065c40	param_2	variant	INFERRED	program variant object (+0x54 program data, constant bank at +0x750)
-local	FUN_00065c40	param_3	unusedArg3	INFERRED	argument the function never reads
-local	FUN_00065c40	param_4	unusedArg4	INFERRED	argument the function never reads
-local	FUN_00065c40	param_5	unusedArg5	INFERRED	argument the function never reads
-local	FUN_00065c40	param_6	unusedArg6	INFERRED	argument the function never reads
-local	FUN_00065c40	param_7	unusedArg7	INFERRED	argument the function never reads
-local	FUN_0004a860	param_2	unusedArg2	INFERRED	argument the function never reads
-local	FUN_0004a860	param_3	unusedArg3	INFERRED	argument the function never reads
-local	FUN_0004a860	param_4	unusedArg4	INFERRED	argument the function never reads
-local	FUN_0004a860	param_5	unusedArg5	INFERRED	argument the function never reads
-local	FUN_0004a860	param_6	unusedArg6	INFERRED	argument the function never reads
-local	FUN_0004a860	param_7	unusedArg7	INFERRED	argument the function never reads
-local	FUN_00050140	param_2	unusedArg2	INFERRED	argument the function never reads
-local	FUN_00050140	param_3	unusedArg3	INFERRED	argument the function never reads
-local	FUN_00050140	param_4	unusedArg4	INFERRED	argument the function never reads
-local	FUN_00050140	param_5	unusedArg5	INFERRED	argument the function never reads
-local	FUN_00050140	param_6	unusedArg6	INFERRED	argument the function never reads
 local	FUN_00062370	param_1	glContext	INFERRED	the GL context
 local	FUN_00062370	param_2	programEntry	INFERRED	program entry whose unit flag bytes (+0x71..) are loaded
-local	FUN_0004eba0	param_2	unusedArg2	INFERRED	argument the function never reads
 local	FUN_0004cde0	param_1	fieldPtr	INFERRED	address of the pointer field to free and clear
 local	FUN_00053190	param_1	glContext	INFERRED	the GL context
 local	FUN_00053040	param_1	unusedArg1	INFERRED	argument the function never reads

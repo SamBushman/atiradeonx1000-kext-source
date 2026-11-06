@@ -12,8 +12,6 @@ use	FUN_000a4980	uVar33	maskHeight	INFERRED	ushort at maskSurface+0x3c, the numb
 use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*uVar33\ =\ iVar40\ \+\ uVar34\ \*\ \(\*\(ushort\ \*\)\(iVar38\ \+\ 0x3c\)\ \-\ 1\);$	+1
 use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*_memset\(uVar33,0xff,uVar34\);$	+1
 use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*uVar26\ =\ uVar33;$	+1
-use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
-use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
 use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*puVar28\ =\ \(undefined1\ \*\)\(uVar33\ \+\ uVar30\);$	+1
 use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*puVar3\ =\ \(undefined1\ \*\)\(iVar38\ \+\ uVar33\);$	+1
 use	FUN_000a4980	uVar33	lastRowPtr	INFERRED	pixel data + width*(height-1): the last row, which is written first and copied upwards	^\s*_memset\(uVar33\ \+\ local_118\[0\],0xff,uVar30\ \+\ local_118\[0\]\ \*\ \-2\);$	+2
@@ -103,24 +101,6 @@ use	FUN_000a4980	uVar15	maskValue	INFERRED	0xff inside the circle, 0 outside	^\s
 use	FUN_000a4980	uVar15	stippleByte	INFERRED	0xff when the pattern bit is set, else 0	^\s*uVar15\ =\ 0xff;$@2	+1
 use	FUN_000a4980	uVar15	stippleByte	INFERRED	0xff when the pattern bit is set, else 0	^\s*uVar15\ =\ 0;$@2	+1
 use	FUN_000a4980	uVar15	stippleByte	INFERRED	0xff when the pattern bit is set, else 0	^\s*\*\(undefined1\ \*\)\(iVar42\ \+\ iVar19\)\ =\ uVar15;$	+1
-use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*dVar44\ =\ \(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e20\)\ \+\ iVar41\);$	+1
-use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$	+3
-use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*uStack_9c\ =\ \(uint\)\(int\)\(\(float\)\(\(double\)\(float\)\(dVar44\ \-\ dVar46\)\ /$	+2
-use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*dVar44\ =\ \(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e20\)\ \+\ iVar41\);$@2	+1
-use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$@2	+3
-use	FUN_000a4980	dVar44	engineFloat2e20	INFERRED	float at engineState+0x2e20 (the value that is quantised to the 0x13e8..0x13ec / step 0x13f0 grid)	^\s*uStack_ac\ =\ \(uint\)\(int\)\(\(float\)\(\(double\)\(float\)\(dVar44\ \-\ dVar46\)\ /$	+2
-use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*dVar45\ =\ \(double\)\*\(float\ \*\)\(param_1\ \+\ 0xe0\);$	+1
-use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
-use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*dVar45\ =\ \(double\)\*\(float\ \*\)\(param_1\ \+\ 0x104\);$	+1
-use	FUN_000a4980	dVar45	contextFloatArg	INFERRED	float at glContext+0xe0 / +0x104 passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ dVar46;$	+1
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$	+3
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ \(double\)\(float\)\(\(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f0\)\ \+\ param_1\)\ \*$	+3
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ dVar46;$@2	+1
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*if\ \(\(dVar46\ <\ dVar44\)\ \&\&$@2	+3
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*dVar45\ =\ \(double\)\(float\)\(\(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x000013f0\)\ \+\ param_1\)\ \*$@2	+3
-use	FUN_000a4980	dVar45	quantizedValue	INFERRED	engineFloat2e20 snapped to min + step*round((v-min)/step), passed to the ramp builders	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,uVar16,uVar30,uVar33,piVar23,dVar45,in_f2,in_f3,in_f4,in_f5,in_f6,$	+3
 use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ 0;$	+1
 use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ 1;$	+1
 use	FUN_000a4980	uVar25	levelCount	INFERRED	number of mask images in use (0, +1 per extra image, max 4 when more than one)	^\s*uVar25\ =\ 1;$@2	+1
@@ -156,16 +136,12 @@ use	FUN_000a4980	uVar26	flagBits114	INFERRED	cacheEntry+0x114 with bit 4 replace
 use	FUN_000a4980	uVar26	flagBits114	INFERRED	cacheEntry+0x114 with bit 4 replaced by the (+0x14 high half != 0) test	^\s*\*\(uint\ \*\)\(pcVar39\ \+\ 0x114\)\ =\ uVar26;$	+2
 use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*if\ \(\(\(\(\(unsigned\ char\ \*\)0x00002e2c\)\[iVar38\]\ ==\ '\\0'\)\ \|\|\ \(\(\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0x20000\)\ !=\ 0\)\)\ \|\|$	+3
 use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*pcVar39\[0x15\]\ =\ \(char\)uVar27;$	+1
-use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*iVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_000a4770\)\(param_1,uVar21,param_3,param_4,pcVar22,pcVar24,uVar27\);$	+1
-use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*uVar21\ =\ \(\(int\ \(\*\)\(\)\)FUN_000a3610\)\(param_1,iVar38,param_3,param_4,pcVar22,pcVar24,uVar27\);$	+2
 use	FUN_000a4980	uVar27	entryFlag15	INFERRED	0/1 test of the 0x2e28 short, stored to cacheEntry[0x15]	^\s*uVar47\ =\ FUN_00030c50\(param_1,uVar21,uVar27,uVar26,0x1909,1,\(\(unsigned\ char\ \*\)0x00001401U\),uVar29\);$	+1
 use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uVar30\ =\ \*\(int\ \*\)\(pcVar39\ \+\ 4\)\ \*\ 2;$	+1
 use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uStack_e4\ =\ uVar30\ \^\ 0x80000000;$	+1
 use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uVar49\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(uVar30\);$	+1
 use	FUN_000a4980	uVar30	entryWord4X2	INFERRED	cacheEntry+4 * 2	^\s*uStack_dc\ =\ uVar30\ \-\ local_118\[0\]\ \^\ 0x80000000;$	+1
 use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*uVar34\ =\ \*\(int\ \*\)\(pcVar39\ \+\ 4\)\ <<\ 2;$	+1
-use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3a60\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
-use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*\(\(void\ \(\*\)\(\)\)FUN_000a3790\)\(param_1,\(int\)uVar49,uVar34,uVar16,local_118,dVar45,in_f2,in_f3,in_f4,in_f5,$	+3
 use	FUN_000a4980	uVar34	entryWord4X4	INFERRED	cacheEntry+4 << 2	^\s*uStack_cc\ =\ uVar34\ \^\ 0x80000000;$	+1
 use	FUN_000a4980	fVar4	entryWord4X2F	INFERRED	entryWord4X2 converted to float (2^52 trick)	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_e4\)\ \-\ 4503601774854144\.0\);$	+1
 use	FUN_000a4980	fVar4	entryWord4X2F	INFERRED	entryWord4X2 converted to float (2^52 trick)	^\s*fVar11\ =\ 0\.5\ \-\ fVar4;$	+1

@@ -1,11 +1,6 @@
 local	FUN_00040ac4	param_1	translator	INFERRED	same translator object as fragmentTranslateScalarMathBody ([5] flags, [8] next temp register, [9] error, [10..12] IL token vector)
 local	FUN_00040ac4	param_2	slot	INFERRED	index of the instruction in the program's instruction block (used to read its repeat count)
 local	FUN_00040ac4	param_3	ilInstr	INFERRED	IL instruction record being built by the caller (words 1/2 destination, 3/4 sources, 6/7 swizzle words)
-local	FUN_00040ac4	param_4	unusedArg4	INFERRED	argument the function never reads
-local	FUN_00040ac4	param_5	unusedArg5	INFERRED	argument the function never reads
-local	FUN_00040ac4	param_6	unusedArg6	INFERRED	argument the function never reads
-local	FUN_00040ac4	param_7	unusedArg7	INFERRED	argument the function never reads
-local	FUN_00040ac4	param_8	unusedArg8	INFERRED	argument the function never reads
 use	FUN_00040ac4	uVar11	repeatCount	INFERRED	1, or (instruction word 1 >> 0x1a & 3) + 1 when translator flag 0x20000000 is set: how many times the sequence is emitted	^\s*uVar11\ =\ 1;$	+1
 use	FUN_00040ac4	uVar11	repeatCount	INFERRED	1, or (instruction word 1 >> 0x1a & 3) + 1 when translator flag 0x20000000 is set: how many times the sequence is emitted	^\s*uVar11\ =\ \(\*\(uint\ \*\)\(param_2\ \*\ 8\ \+\ \*param_1\ \+\ \*\(int\ \*\)\(\*param_1\ \+\ 0x54\)\ \*\ 8\ \+\ 4\)\ >>\ 0x1a\ \&\ 3\)\ \+\ 1$	+1
 use	FUN_00040ac4	uVar11	repeatCount	INFERRED	1, or (instruction word 1 >> 0x1a & 3) + 1 when translator flag 0x20000000 is set: how many times the sequence is emitted	^\s*if\ \(uVar11\ >=\ 2\)\ \{$	+1

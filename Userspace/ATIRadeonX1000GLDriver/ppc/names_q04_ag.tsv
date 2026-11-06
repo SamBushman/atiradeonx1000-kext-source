@@ -9,7 +9,6 @@ use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the thre
 use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*if\ \(\(iVar27\ ==\ 1\)\ \&\&\ \(uVar19\ ==\ 2\)\)\ \{$	+1
 use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*bVar2\ =\ uVar19\ !=\ 2;$	+1
 use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*uVar19\ =\ uVar19\ \+\ 1;$	+1
-use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*if\ \(\(\*\(short\ \*\)\(\(int\)puVar24\ \+\ \-0x12\)\ ==\ 0\ \&\&\ \*\(short\ \*\)\(\(int\)puVar24\ \+\ \-0xe\)\ ==\ 0\)\ \&\&$	+2
 use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*puVar24\[7\]\ =\ uVar19\ \&\ 0xfffffff7;$	+1
 use	psnDecCanonicalizeEntry	uVar19	sourceIndex	INFERRED	loop index over the three sources of the half record	^\s*puVar24\[7\]\ =\ uVar19\ \&\ 0xffffffe5;$	+1
 use	psnDecRecomputeSourceUsage	uVar9	usageFlags	INFERRED	usageCursor[7] flag word read before its bits are cleared	^\s*\(uVar9\ =\ puVar21\[7\],\ \(uVar9\ \&\ 1\)\ ==\ 0\)\)\ \{$	+1

@@ -4,7 +4,6 @@ local	FUN_00026bf0	param_1	ctx	CONFIRMED	GLDContext
 local	FUN_00026bf0	param_2	staleArgR4	INFERRED	incoming register, unused
 local	FUN_00026bf0	param_3	primitiveMode	CONFIRMED	GL primitive mode; indexes the primitive-flags table at DAT_001d9888
 local	FUN_00026bf0	param_4	vertexCount	CONFIRMED	vertices requested; trimmed to whole primitives
-local	FUN_00026bf0	param_5	staleArgR7	INFERRED	forwarded to gldFlushDataCacheRange; unused
 local	FUN_00026bf0	iVar5	trimmedCount	CONFIRMED	vertex count after gldTrimVertexCountToPrimitive[Min] (0 = nothing to draw)
 local	FUN_00026bf0	bVar1	vertexStrideWords	INFERRED	words per vertex taken from the current vertex-array record (+2)
 local	FUN_00026bf0	puVar6	ringCursor	INFERRED	ring write cursor while the draw packets are written
@@ -18,7 +17,6 @@ use	FUN_00026bf0	uVar11	primFlags	INFERRED	primitive-type bits from the table at
 use	FUN_00026bf0	uVar11	primFlags	INFERRED	primitive-type bits from the table at DAT_001d9888 (immediate path)	^\s*puVar6\[3\]\ =\ iVar5\ <<\ 0x10\ \|\ uVar11\ \&\ 0xf\ \|\ 0x30;$	+1
 use	FUN_00026bf0	uVar11	streamCountField	INFERRED	ctx+0x283c & 0x1f: stream count of the current record	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x283c\)\ \&\ 0x1f;$	+1
 use	FUN_00026bf0	uVar11	streamCountField	INFERRED	ctx+0x283c & 0x1f: stream count of the current record	^\s*puVar6\[1\]\ =\ uVar11;$	+1
-use	FUN_00026bf0	uVar11	streamCountField	INFERRED	ctx+0x283c & 0x1f: stream count of the current record	^\s*FUN_0000b620\(param_1,iVar12,iVar7,param_4,param_5,uVar11,0xc0003400,puVar8\);$	+1
 local	FUN_0002b7f0	piVar8	queryPool	CONFIRMED	ctx+0x224: the query pool; word 0 = in use, word 1 = next slot, +0x14.. 32-byte slot records
 local	FUN_0002b7f0	uVar12	queryValue	INFERRED	ctx+0x1cf8: value written with the end-of-query register pair
 local	FUN_0002b7f0	uVar7	counterCount	INFERRED	ctx+0x2610: number of counters (1..4) the query reads (raised to 2 when ctx+0x261c == 2)

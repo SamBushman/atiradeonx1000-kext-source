@@ -58,7 +58,6 @@ use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the s
 use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*iVar13\ =\ iVar21;$@2	+1
 use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*iVar13\ =\ iVar13\ \-\ iVar21;$	+2
 use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*\*\(uint\ \*\)\(\(int\)pfVar12\ \+\ iVar10\ \+\ 8\)\ =\ iVar13\ \*\ 0x80000\ \|\ 0xc0003500;$	+2
-use	FUN_00016670	iVar13	packetVertexCount	INFERRED	copy of vertexBudget at the start of a packet; the header word is (count << 19 | 0xc0003500)	^\s*FUN_0009d3b0\(iStack_b0,uVar11,param_3,iVar10,pfVar12,iVar13,uVar15\);$	+1
 use	FUN_00016670	iVar13	packetBytes	INFERRED	vertexBudget * 0x20: bytes one packet needs, compared with ringLimit	^\s*iVar13\ =\ iVar21\ \*\ 0x20;$	+1
 use	FUN_00016670	iVar13	packetBytes	INFERRED	vertexBudget * 0x20: bytes one packet needs, compared with ringLimit	^\s*iVar13\ =\ 0xffe0;$	+1
 use	FUN_00016670	iVar13	packetBytes	INFERRED	vertexBudget * 0x20: bytes one packet needs, compared with ringLimit	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ GLD_ringLimit\)\ <=\ \(uint\)\(\(int\)pfVar25\ \+\ iVar13\ \+\ 0x10\)\)\ \{$	+1

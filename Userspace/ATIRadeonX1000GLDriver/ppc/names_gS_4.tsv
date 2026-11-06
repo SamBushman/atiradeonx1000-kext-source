@@ -3,9 +3,6 @@ local	FUN_0009d410	param_2	passThroughArg2	INFERRED	only forwarded to the progra
 local	FUN_0009d410	param_3	passThroughArg3	INFERRED	only forwarded to the ctx hook at +0x12c0
 local	FUN_0009d410	param_4	constRegCountOut	INFERRED	receives the number of constant registers allocated (*param_4 = nextConstReg)
 local	FUN_0009d410	param_5	paramList	INFERRED	state-parameter list {kinds, element indices, count} consumed by programFillStateConstants
-local	FUN_0009d410	param_6	unusedArg6	INFERRED	never read
-local	FUN_0009d410	param_7	unusedArg7	INFERRED	never read
-local	FUN_0009d410	param_8	unusedArg8	INFERRED	never read
 use	FUN_0009d410	bVar1	matrixCountByte	INFERRED	byte at state+0x4300: number of tracked matrices; (1<<n)-1 masks the matrix loop	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x00004300\)\[iVar20\];$	+1
 use	FUN_0009d410	bVar1	matrixCountByte	INFERRED	byte at state+0x4300: number of tracked matrices; (1<<n)-1 masks the matrix loop	^\s*if\ \(\(\(1\ <<\ \(bVar1\ \&\ 0x3f\)\)\ \-\ 1U\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
 use	FUN_0009d410	bVar1	lightEnableByte	INFERRED	ctx byte +0x1135/+0x11d3: per-unit enable bits	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x00001135\)\[param_1\];$	+1

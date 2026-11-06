@@ -25,10 +25,5 @@ local	FUN_000096b0	param_3	offsetOut	CONFIRMED	receives the byte offset of the o
 local	FUN_000096b0	param_4	byteSizeOut	CONFIRMED	receives 4 (one component) or 0x10 (a whole vector) for file 0x10
 local	FUN_0000a180	param_1	formatWord	INFERRED	pixel-format colour word; the bit groups 0x3c / 0x1c0 / 0xe00 ... select 5/6/8/10/12/16-bit channels
 local	FUN_0000a180	param_2	bitsOut	CONFIRMED	array of five 16-bit values: red, green, blue bits, alpha bits (gldFormatAlphaBits) and a zero
-local	FUN_0000a180	param_3	staleArgR5	INFERRED	forwarded to gldFormatAlphaBits; unused
-local	FUN_0000a180	param_4	staleArgR6	INFERRED	forwarded to gldFormatAlphaBits; unused
-local	FUN_0000a180	param_5	staleArgR7	INFERRED	forwarded to gldFormatAlphaBits; unused
-local	FUN_0000a180	param_6	staleArgR8	INFERRED	forwarded to gldFormatAlphaBits; unused
-local	FUN_0000a180	param_7	staleArgR9	INFERRED	forwarded to gldFormatAlphaBits; unused
 local	FUN_0000a180	uVar1	alphaBits	CONFIRMED	gldFormatAlphaBits result stored at bitsOut[3]
 use	FUN_00007d50	iVar7	oldAttachmentsLeft	INFERRED	countdown of the six attachments of the old framebuffer	^\s*\}\ while\ \(iVar7\ !=\ 0\);$	+1

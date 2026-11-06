@@ -26,8 +26,6 @@ local	FUN_000b6580	param_1	glContext	INFERRED	callers pass their variable `glCon
 local	FUN_000b6f20	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in FUN_0004def0)
 local	FUN_000b6f20	param_3	loopIndex	INFERRED	callers pass their variable `loopIndex` here (2 call site(s), e.g. in FUN_0004def0)
 local	FUN_000bd9a0	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in gldValidateState)
-local	psnDecCanonicalizeEntry	param_5	oldAddressOffset	INFERRED	callers pass their variable `oldAddressOffset` here (1 call site(s), e.g. in psnDecRetargetSourceReg)
-local	psnDecCanonicalizeEntry	param_7	sourceSwizzlePtr	INFERRED	callers pass their variable `sourceSwizzlePtr` here (1 call site(s), e.g. in psnDecRetargetSourceReg)
 local	FUN_000c5e60	param_1	psnProgram	INFERRED	callers pass their variable `psnProgram` here (1 call site(s), e.g. in psnReallocateTemps)
 local	FUN_000c6ff0	param_1	ctx	INFERRED	callers pass their variable `ctx` here (1 call site(s), e.g. in ilAssembleProgram)
 local	FUN_000c7930	param_3	scanTokenWord	INFERRED	callers pass their variable `scanTokenWord` here (1 call site(s), e.g. in ilAssembleProgram)

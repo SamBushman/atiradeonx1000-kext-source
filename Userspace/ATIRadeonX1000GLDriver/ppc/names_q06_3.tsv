@@ -3,7 +3,6 @@ local	FUN_0012f0f8	param_4	lastBlockRef	INFERRED	cursor to the last block placed
 local	FUN_0012f0f8	param_5	newBlockOut	INFERRED	receives the new trailing block (Block__ctor_ea020 result)
 local	FUN_0012f0f8	param_6	blockCounter	INFERRED	count of blocks in the program, decremented once
 use	FUN_0012f0f8	piVar19	counterRefArg	INFERRED	stale copy of param_6 (blockCounter) passed on to Block__getBranchInst	^\s*piVar19\ =\ param_6;$	+1
-use	FUN_0012f0f8	piVar19	counterRefArg	INFERRED	stale copy of param_6 (blockCounter) passed on to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*piVar19\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x98\);$	+1
 use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*if\ \(\(piVar19\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+3
 use	FUN_0012f0f8	piVar19	bodyInst	INFERRED	instruction iterated over the dead loop blocks	^\s*piVar27\ =\ piVar19;$	+1
@@ -31,7 +30,6 @@ use	FUN_0012f0f8	iVar22	instQuery34	INFERRED	instruction vtable slot 0x34 test	^
 use	FUN_0012f0f8	iVar22	instQuery38	INFERRED	instruction vtable slot 0x38 test	^\s*iVar22\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x38\)\)\(piVar18\);$	+2
 use	FUN_0012f0f8	iVar22	extraBranchArg	INFERRED	stale register argument passed on to Block__getBranchInst	^\s*iVar22\ =\ 0;$	+1
 use	FUN_0012f0f8	iVar22	extraBranchArg	INFERRED	stale register argument passed on to Block__getBranchInst	^\s*iVar22\ =\ param_1;$	+1
-use	FUN_0012f0f8	iVar22	extraBranchArg	INFERRED	stale register argument passed on to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012f0f8	iVar22	successorOffset	INFERRED	byte offset into the successor pointer array	^\s*iVar22\ =\ 0;$@2	+1
 use	FUN_0012f0f8	iVar22	successorOffset	INFERRED	byte offset into the successor pointer array	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar22\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar23\ \+\ 0xd0\)\ \+\ 8\)\);$	+1
 use	FUN_0012f0f8	iVar22	successorOffset	INFERRED	byte offset into the successor pointer array	^\s*iVar22\ =\ iVar22\ \+\ 4;$	+1
@@ -46,7 +44,6 @@ use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks be
 use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*while\ \(bVar2\)\ \{$	+1
 use	FUN_0012f0f8	bVar2	hasBody	INFERRED	param_3 != iVar9: the loop has blocks besides its header	^\s*bVar2\ =\ iVar9\ !=\ iVar25;$	+1
 use	FUN_0012f0f8	iVar4	blockArg	INFERRED	stale copy of param_3 passed on to Block__getBranchInst	^\s*iVar4\ =\ param_3;$	+1
-use	FUN_0012f0f8	iVar4	blockArg	INFERRED	stale copy of param_3 passed on to Block__getBranchInst	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012f0f8	iVar4	instQuery34b	INFERRED	instruction vtable slot 0x34 test	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar19\ \+\ 0x34\)\)\(piVar19\);$	+2
 use	FUN_0012f0f8	iVar4	operandNumber	INFERRED	operand number 1..operandCount	^\s*iVar4\ =\ 1;$	+1
 use	FUN_0012f0f8	iVar4	operandNumber	INFERRED	operand number 1..operandCount	^\s*if\ \(iVar7\ <\ iVar4\)\ break;$	+2
@@ -57,7 +54,6 @@ use	FUN_0012f0f8	iVar4	nextInst	INFERRED	next instruction of the block's instruc
 use	FUN_0012f0f8	iVar4	needsOffsetFix	INFERRED	FUN_0012ab04: instruction needs its offset adjusted	^\s*iVar4\ =\ FUN_0012ab04\(iVar8\);$	+2
 use	FUN_0012f0f8	iVar5	unrollEnabled	INFERRED	compiler option 2 (loop unrolling) is enabled	^\s*iVar5\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),2\);$	+3
 use	FUN_0012f0f8	iVar5	loopStepArg	INFERRED	stale copy of iVar8 (loop step) passed on	^\s*iVar5\ =\ iVar8;$	+1
-use	FUN_0012f0f8	iVar5	loopStepArg	INFERRED	stale copy of iVar8 (loop step) passed on	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012f0f8	iVar5	nextBodyBlock	INFERRED	next block pointer saved before the block is detached	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar9\ \+\ 4\);$	+1
 use	FUN_0012f0f8	iVar5	nextBodyBlock	INFERRED	next block pointer saved before the block is detached	^\s*iVar9\ =\ iVar5;$	+1
 use	FUN_0012f0f8	iVar5	fixupBlock	INFERRED	block cursor during the offset fix-up walk	^\s*iVar5\ =\ param_3;$	+1
@@ -223,7 +219,6 @@ use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s
 use	FUN_0012f0f8	uVar24	cloneIndex	INFERRED	index of the clone being created	^\s*\}\ while\ \(uVar21\ !=\ uVar24\);$	+1
 use	FUN_0012f0f8	uVar24	cloneFilledCountE	INFERRED	filled count of the clone vector	^\s*uVar24\ =\ puVar12\[2\];$	+3
 use	FUN_0012f0f8	uVar24	instLinkedFlag	INFERRED	instruction flag bit 0	^\s*uVar24\ =\ piVar18\[5\]\ \&\ 1;$	+2
-use	FUN_0012f0f8	uVar24	instLinkedFlag	INFERRED	instruction flag bit 0	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar29\ >>\ 0x20\)\ !=\ 0\)\ \&\&$	+3
 use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar23\ \+\ 0xc0\);$	+2
 use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*if\ \(uVar21\ <=\ uVar24\)\ \{$	+3
 use	FUN_0012f0f8	uVar24	targetCloneIndex	INFERRED	ordinal (+0xc0) of the block that a field is redirected to	^\s*puVar17\ =\ \(undefined4\ \*\)\(uVar24\ \*\ 4\ \+\ puVar12\[3\]\);$@2	+1

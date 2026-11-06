@@ -154,7 +154,6 @@ use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is 
 use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0x100000\)\ ==\ 0\)\ \{$	+1
 use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(int\)uVar8\ <\ 0\)\ \{$	+1
 use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0xa10000\)\ !=\ 0\)\ \{$	+1
-use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(\(uVar8\ \&\ 0x1000800\)\ !=\ 0\)\ \&\&\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e06\)\ \+\ iVar7\)\ ==\ \-0x7baf\)\)\ \{$	+1
 use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
 use	FUN_000b5c00	uVar8	glContextWord44	INFERRED	every definition of this web is a load from glContext+0x44 (positional name; no field row)	^\s*if\ \(\(uVar8\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
 use	FUN_000bda40	bVar1	glContextByte13b0	INFERRED	every definition of this web is a load from stream+0x13b0 (positional name; no field row)	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$	+1

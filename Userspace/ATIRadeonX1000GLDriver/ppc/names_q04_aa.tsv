@@ -6,12 +6,9 @@ use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token 
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*if\ \(puVar31\ \+\ iVar38\ <=\ puVar19\)\ \{$	+1
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar19;$	+1
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*puVar26\ =\ puVar19;$	+1
-use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$	+2
-use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@2	+2
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 1;$	+1
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 2;$	+2
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb8\[1\]\ =\ \(uint\ \*\*\*\*\*\*\)puVar19\[1\];$@2	+3
-use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@3	+2
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 2;$@2	+1
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb8\[1\]\ =\ \(uint\ \*\*\*\*\*\*\)puVar19\[1\];$@3	+1
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*for\ \(uVar32\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar19\ \+\ 6\);\ puVar26\ =\ local_2bb4,\ uVar32\ !=\ 0;$	+2
@@ -24,10 +21,8 @@ use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token 
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 1;$@5	+1
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7930\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,local_2bb4,pppppppuVar20,$	+2
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*local_2bb4\ =\ puVar19\ \+\ 2;$@4	+2
-use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@4	+3
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar19;$@2	+2
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*puVar26\ =\ puVar19\ \+\ 2;$	+2
-use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@5	+3
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar19;$@3	+2
 use	ilAssembleProgram	puVar19	readToken	INFERRED	pass-2 pointer to the IL token being re-emitted (tokenCursor copy at the top of the copy loop)	^\s*puVar26\ =\ puVar19\ \+\ 2;$@2	+2
 use	ilAssembleProgram	puVar29	streamPtr	INFERRED	pass-1 scan pointer into the IL stream; after the size pass it is the malloc'd output stream block that is freed at the end	^\s*puVar29\ =\ puVar31;$	+1
@@ -78,21 +73,14 @@ use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar26;$	+3
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\*\(undefined1\ \*\)\(pppppppuVar25\ \+\ 4\)\ =\ 1;$	+2
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ pppppppuVar25\ \+\ 5;$	+1
-use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$	+2
-use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@2	+2
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ local_2bb8\ \+\ 3;$	+1
-use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@3	+2
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ pppppppuVar30;$	+1
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ local_2bb8\ \+\ 5;$	+1
-use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@4	+2
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\*\)\(\(uint\)local_2b74\ \&\ 0x400000\);$	+1
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*if\ \(pppppppuVar25\ !=\ \(uint\ \*\*\*\*\*\*\*\)0x0\)\ \{$	+1
-use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7650\)\(\&local_23e8,local_70,pppppppuVar18,\&local_2bb0,uVar22,pppppppuVar30,$	+2
-use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@5	+2
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\*\)\(\(uint\)local_2b98\ \&\ 0x400000\);$	+1
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*if\ \(pppppppuVar25\ !=\ \(uint\ \*\*\*\*\*\*\*\)0x0\)\ \{$@2	+1
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*if\ \(\(\(uVar7\ ==\ 0x4000000\)\ \|\|\ \(\(uVar7\ ==\ 0x8000000\ \&\&\ \(\(uVar34\ \&\ local_2374\)\ !=\ 0\)\)\)\)\ \&\&$@2	+3
-use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7650\)\(\&local_23e8,\&local_2b98,pppppppuVar18,\&local_2bb0,uVar22,$	+2
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ local_2ba4;$	+1
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*pppppppuVar25\ =\ \(uint\ \*\*\*\*\*\*\*\)\(\(uint\)local_2ba4\ \|\ 0x400000\);$	+1
 use	ilAssembleProgram	pppppppuVar25	scratchCursorB	INFERRED	carried 8th argument of ilEmitPrologue	^\s*\*pppppppuVar20\ =\ \(uint\ \*\*\*\*\*\*\)pppppppuVar25;$	+1

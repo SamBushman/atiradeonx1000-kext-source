@@ -45,9 +45,6 @@ local	FUN_00009810	uStack_18	operandWordReg	INFERRED	operand word as held in a r
 local	FUN_00009810	uVar1	bankSelect	INFERRED	(operand >> 8) & 1: which 0x240-byte bank
 local	FUN_00009810	uVar2	kindSelect	INFERRED	(operand >> 9) & 3: 0/1/2 pick the 0x2910/0x2920/0x2930 table
 local	FUN_00009810	uVar3	registerIndex	INFERRED	operand & 0xff: register index (0x30-byte stride)
-local	FUN_00009880	param_4	byteSizeOut	INFERRED	receives the operand size in bytes (unused in this case)
-local	FUN_00009880	param_5	staleArgR7	INFERRED	incoming register, unused
-local	FUN_00009880	param_6	staleArgR8	INFERRED	incoming register, unused
 local	FUN_00009880	uStack_18	operandWordReg	INFERRED	operand word as held in a register by the parent function
 func	FUN_0000973c	gld_decodeProgramOperandOffset_frag_0000973c	INFERRED	case body of the gld_decodeProgramOperandOffset switch that Ghidra split into its own function
 func	FUN_00009750	gld_decodeProgramOperandOffset_frag_00009750	INFERRED	case body of the gld_decodeProgramOperandOffset switch that Ghidra split into its own function

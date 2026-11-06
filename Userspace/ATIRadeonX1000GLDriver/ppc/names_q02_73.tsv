@@ -33,4 +33,3 @@ use	FUN_00041750	uVar3	srcSwizzleWord	INFERRED	ilInstr+0x1c: source swizzle word
 use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uVar5\ =\ \(undefined2\)\*\(undefined4\ \*\)\(param_1\ \+\ 0x20\);$	+2
 use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uVar5\ =\ \(undefined2\)\*\(undefined4\ \*\)\(param_1\ \+\ 0x20\);$@2	+1
 use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uVar5\ =\ \(undefined2\)\*\(undefined4\ \*\)\(param_1\ \+\ 0x20\);$@3	+1
-use	FUN_00041750	uVar5	tempRegisterHalf	INFERRED	low 16 bits of translator+0x20: temp register index	^\s*uStack_4c\ =\ \(undefined\ \*\)CONCAT22\(4,uVar5\);$	+1

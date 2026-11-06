@@ -112,9 +112,4 @@ local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r8	staleArg8	CONFIRMED	stale
 local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r7	staleArg7	CONFIRMED	stale argument register r7 forwarded to the limits call (r33: text already carried the wrong intermediate name staleArg5, fixed by direct text edit)
 local	ValueKey__foldDotPowerOfTwoIntoOutputScale	in_r6	staleArg6	CONFIRMED	stale argument register r6 forwarded to the limits call (r33: text already carried the wrong intermediate name staleArg4, fixed by direct text edit)
 local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_48	laneValue	INFERRED	lane constant written by FUN_00178d78
-local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_4c	unitConst3	INFERRED	constant 1.0 (word 3 of the unit vector)
-local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_50	unitConst2	INFERRED	constant 1.0 (word 2 of the unit vector)
-local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_54	unitConst1	INFERRED	constant 1.0 (word 1 of the unit vector)
-local	ValueKey__foldDotPowerOfTwoIntoOutputScale	local_58	unitConst0	INFERRED	constant 1.0 (word 0 of the unit vector)
-use	ValueKey__foldDotPowerOfTwoIntoOutputScale	uVar4	literalValueNumber	INFERRED	value number of the replacement literal vector (FUN_0017a130)	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_0017a130\)\(iVar6,\&local_58,\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),$	+2
 use	ValueKey__foldDotPowerOfTwoIntoOutputScale	uVar4	literalValueNumber	INFERRED	value number of the replacement literal vector (FUN_0017a130)	^\s*\*puVar7\ =\ uVar4;$	+1

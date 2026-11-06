@@ -297,7 +297,6 @@ use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter
 use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (2 uses, unanimous)	^\s*FUN_00106004\(iVar13,iVar3,iVar19,1,iVar11\);$	+1
 use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (2 uses, unanimous)	^\s*iVar11\ =\ \*\(int\ \*\)\(iStack00000020\ \+\ 8\);$@6	+1
 use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (2 uses, unanimous)	^\s*FUN_00106004\(iVar13,iVar3,iVar19,1,iVar11\);$@2	+1
-use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (2 uses, unanimous)	^\s*iVar19\ =\ FUN_001049c4\(piVar8,iStack00000020,iVar19,param_4,iVar11,puVar12,puVar16\);$	+1
 use	FUN_0014f420	iVar13	inst	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar13\ =\ \*param_1;$	+1
 use	FUN_0014f420	iVar13	inst	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*FUN_00106004\(iVar13,iVar3,iVar19,1,iVar11\);$	+1
 use	FUN_0014f420	iVar13	operandIndex	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar13\ =\ param_2\[1\];$	+1
@@ -328,7 +327,6 @@ use	FUN_0014f420	iVar19	newSource	INFERRED	web passed only as callee parameter n
 use	FUN_0014f420	iVar19	newSource	INFERRED	web passed only as callee parameter newSource (2 uses, unanimous)	^\s*FUN_00106004\(iVar13,iVar3,iVar19,1,iVar11\);$	+1
 use	FUN_0014f420	iVar19	newSource	INFERRED	web passed only as callee parameter newSource (2 uses, unanimous)	^\s*iVar19\ =\ FUN_00105594\(\*param_1,param_1\[1\]\);$@12	+1
 use	FUN_0014f420	iVar19	newSource	INFERRED	web passed only as callee parameter newSource (2 uses, unanimous)	^\s*FUN_00106004\(iVar13,iVar3,iVar19,1,iVar11\);$@2	+1
-use	FUN_0014f420	iVar19	newSource	INFERRED	web passed only as callee parameter newSource (2 uses, unanimous)	^\s*iVar19\ =\ FUN_001049c4\(piVar8,iStack00000020,iVar19,param_4,iVar11,puVar12,puVar16\);$	+2
 use	FUN_0014f420	iVar3	inst8	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar3\ =\ \*param_1;$	+1
 use	FUN_0014f420	iVar3	inst8	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*local_d8\ =\ \*\(uint\ \*\)\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
 use	FUN_0014f420	iVar3	inst8	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar19\ =\ iVar3\ \+\ uVar9\ \*\ 0x18\ \+\ 0x80;$	+1
@@ -1089,7 +1087,6 @@ use	FUN_0015f44c	uVar12	block	INFERRED	web passed only as callee parameter block
 use	FUN_0015f44c	uVar12	block	INFERRED	web passed only as callee parameter block (1 uses, unanimous)	^\s*FUN_000e7738\(uVar12,uVar15,iVar11\);$	+1
 use	FUN_0015f44c	uVar12	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$	+1
 use	FUN_0015f44c	uVar12	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*FUN_00106004\(param_3,param_3\[0x21\],0,0,uVar12\);$	+1
-use	FUN_0015f44c	uVar12	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*iVar6\ =\ FUN_001049c4\(piVar17,param_4,uVar15,uVar13,uVar12,in_r8,iVar6\ \+\ \-1\);$	+1
 use	FUN_0015f44c	uVar13	inst1	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+1
 use	FUN_0015f44c	uVar13	inst1	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*uVar13\ =\ FUN_00105594\(param_3,iVar16\);$	+1
 use	FUN_0015f44c	uVar13	inst1	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*piVar8\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0010bed0\)\(iVar11,0x1010101,uVar13,param_4,uVar15,fparam_1\);$	+1
@@ -2129,9 +2126,7 @@ use	FUN_00186510	piVar9	inst1	INFERRED	web passed only as callee parameter inst 
 use	FUN_00186510	piVar9	inst1	INFERRED	web passed only as callee parameter inst (5 uses, unanimous)	^\s*piVar9\[0x27\]\ =\ iVar12;$	+1
 use	FUN_00186510	piVar9	inst1	INFERRED	web passed only as callee parameter inst (5 uses, unanimous)	^\s*iVar6\ =\ FUN_001054ec\(piVar9,iVar5\);$@2	+1
 use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*uVar10\ =\ param_5;$	+1
-use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,loopRemaining,uVar10,uVar9,loopPtr4\);$	+1
 use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$	+2
-use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,loopPtr4,uVar10,uVar9,piVar12\);$	+1
 local	Inst__movAndShiftUseVector	param_2	program	INFERRED	passed as parameter program of callees (1 uses, unanimous)
 use	Inst__movAndShiftUseVector	iVar1	operandIndex	INFERRED	web passed only as callee parameter operandIndex (4 uses, unanimous)	^\s*for\ \(iVar1\ =\ 0;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x14\)\)\(piVar13\),\ iVar1\ <=\ iVar8;$	+3
 use	Inst__movAndShiftUseVector	iVar1	operandIndex	INFERRED	web passed only as callee parameter operandIndex (4 uses, unanimous)	^\s*iVar8\ =\ FUN_001054ec\(piVar13,iVar1\);$	+1
@@ -2382,7 +2377,6 @@ use	R300MachineAssembler__assembleAluInstruction	uVar14	registerIndex3	INFERRED	
 local	R520VMachineAssembler__vslot27_assembleLoopHeader	param_5	traversal	INFERRED	passed as parameter traversal of callees (1 uses, unanimous)
 use	evaluateConstantComparison	uVar1	laneMask	INFERRED	web passed only as callee parameter laneMask (1 uses, unanimous)	^\s*uVar1\ =\ DAT_001b2d70;$	+1
 use	evaluateConstantComparison	uVar1	laneMask	INFERRED	web passed only as callee parameter laneMask (1 uses, unanimous)	^\s*if\ \(\(\(\(iVar2\ ==\ 0\)\ \|\|\ \(local_48\ !=\ 2\)\)\ \|\|$	+2
-use	R520MachineAssembler__vslot26_assembleThenAppendRecord	iVar3	inst	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar3\ =\ FUN_000e7804\(param_2,param_2,param_3,param_4,param_5,param_6,param_7\);$	+1
 use	R520MachineAssembler__vslot26_assembleThenAppendRecord	iVar3	inst	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 300\);$	+2
 use	R520MachineAssembler__vslot26_assembleThenAppendRecord	puVar8	vector	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*puVar8\ =\ \*\(uint\ \*\*\)\(param_1\[4\]\ \+\ 0x24\);$	+6
 use	R520MachineAssembler__vslot26_assembleThenAppendRecord	puVar8	vector	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar6\);$	+1

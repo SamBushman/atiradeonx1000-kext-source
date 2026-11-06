@@ -46,4 +46,3 @@ use	recordProgramBuildDependencies	puVar27	scratchArg2	INFERRED	role read off th
 use	recordProgramBuildDependencies	puVar27	scratchArg2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar27\ =\ param_1\ \+\ 0x2114;$	+1
 use	recordProgramBuildDependencies	puVar27	scratchArg2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\*puVar27\ !=\ 0\)\ \{$	+1
 use	recordProgramBuildDependencies	puVar27	scratchArg2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar27\ =\ puVar27\ \+\ 1;$@7	+1
-use	recordProgramBuildDependencies	puVar27	scratchArg2	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007b0d0\)\(param_1,puVar27,pdVar15,in_r6,piVar31,piVar32,pdVar14,pdVar20\);$	+1

@@ -8,7 +8,6 @@ local	FUN_000536a0	param_7	src1Id	INFERRED	forwarded unchanged to parameter `src
 local	FUN_000536a0	param_8	src1Swizzle	INFERRED	forwarded unchanged to parameter `src1Swizzle` of extvsAppendInstruction (1 call(s), unanimous)
 local	FUN_00041510	param_1	emitter	INFERRED	forwarded unchanged to parameter `emitter` of fpilEmitAngleConstants (1 call(s), unanimous)
 local	FUN_00041510	param_3	entryHeader	INFERRED	forwarded unchanged to parameter `entryHeader` of fpilEmitAngleConstants (1 call(s), unanimous)
-local	FUN_00041510	param_4	srcRegWord1	INFERRED	forwarded unchanged to parameter `srcRegWord1` of fpilEmitAngleConstants (1 call(s), unanimous)
 local	FUN_00053730	param_1	glContext	INFERRED	forwarded unchanged to parameter `glContext` of extvsAppendInstruction (1 call(s), unanimous)
 local	FUN_00053730	param_2	op	INFERRED	forwarded unchanged to parameter `op` of extvsAppendInstruction (1 call(s), unanimous)
 local	FUN_00053730	param_3	dstId	INFERRED	forwarded unchanged to parameter `dstId` of extvsAppendInstruction (1 call(s), unanimous)

@@ -100,9 +100,6 @@ use	FUN_0004c560	puVar5	cmdEnd	INFERRED	command cursor after the final 5-word pa
 use	FUN_0004c560	puVar5	cmdEnd	INFERRED	command cursor after the final 5-word packet; handed to the glContext+0x275c commit callback	^\s*\*\(undefined4\ \*\*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ puVar5;$	+2
 local	FUN_0004c560	puVar6	cmdCursor	INFERRED	current command stream write pointer (glContext + 0x274c)
 local	FUN_0004c560	iVar7	wordsLeft	INFERRED	8 .. 0: words of glContext+0x1ee8 still to copy
-local	FUN_0004c720	param_3	unusedArg3	INFERRED	argument the function never reads
-local	FUN_0004c720	param_4	unusedArg4	INFERRED	argument the function never reads
-local	FUN_0004c720	param_5	unusedArg5	INFERRED	argument the function never reads
 local	FUN_0004c720	puVar7	stateBlock	INFERRED	programObj-relative block selected by glContext+0x23e0 (+0x10ec or +0x1318 plus the current program object): holds the cached stream setup (+0x210 .. +0x228) and the 8 stream register entries at +0xc0
 use	FUN_0004c720	puVar10	streamRegEntry	INFERRED	cursor over the 8 four-word stream register entries at stateBlock+0xc0 (the word at +8 is rewritten per stream)	^\s*puVar10\ =\ puVar7\ \+\ 0xc0;$	+1
 use	FUN_0004c720	puVar10	streamRegEntry	INFERRED	cursor over the 8 four-word stream register entries at stateBlock+0xc0 (the word at +8 is rewritten per stream)	^\s*\*\(uint\ \*\)\(puVar10\ \+\ 8\)\ =$	+2

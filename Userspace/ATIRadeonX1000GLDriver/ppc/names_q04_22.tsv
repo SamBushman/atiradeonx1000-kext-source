@@ -43,4 +43,3 @@ use	FUN_000bfed0	uVar43	instWord14	INFERRED	every definition of this web is a lo
 use	FUN_000bfed0	uVar43	instWord14	INFERRED	every definition of this web is a load from inst+0x14 (positional name; no field row)	^\s*\(uVar43\ \&\ 0x3000000\)\ <<\ 6\ \|$	+8
 use	FUN_000bfed0	uVar43	instWord14	INFERRED	every definition of this web is a load from inst+0x14 (positional name; no field row)	^\s*uVar43\ <<\ 0x1e\ \|$	+8
 use	FUN_000bfed0	uVar44	instWord24_2	INFERRED	every definition of this web is a load from inst+0x24 (positional name; no field row)	^\s*uVar44\ =\ puVar60\[9\];$	+1
-use	FUN_000bfed0	uVar44	instWord24_2	INFERRED	every definition of this web is a load from inst+0x24 (positional name; no field row)	^\s*local_6c\ =\ uVar44\ >>\ 7\ \&\ 7;$	+3

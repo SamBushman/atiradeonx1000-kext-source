@@ -14,14 +14,6 @@ local	isLessThan2	param_1	value	INFERRED	unsigned value tested < 2
 local	IRInst__replaceExtraData	param_1	inst	INFERRED	inst+0x13c extra data is freed and replaced
 local	IRInst__dropCounterAndDeleteIfUnused	uVar1	result	INFERRED	IRInst__deleteIfUnused result
 local	IRCmp2__ctor_107fd0	param_2	unusedArg2	INFERRED	unused constructor argument
-local	KhanPs__vslot75_registerConstantMultiples	param_4	unusedArg4	INFERRED	unused virtual-slot argument
-local	KhanPs__vslot75_registerConstantMultiples	param_5	unusedArg5	INFERRED	unused virtual-slot argument
-local	KhanPs__vslot75_registerConstantMultiples	param_6	unusedArg6	INFERRED	unused virtual-slot argument
-local	KhanPs__vslot75_registerConstantMultiples	param_7	unusedArg7	INFERRED	unused virtual-slot argument
-local	KhanVs__vslot75_registerConstantMultiples	param_4	unusedArg4	INFERRED	unused virtual-slot argument
-local	KhanVs__vslot75_registerConstantMultiples	param_5	unusedArg5	INFERRED	unused virtual-slot argument
-local	KhanVs__vslot75_registerConstantMultiples	param_6	unusedArg6	INFERRED	unused virtual-slot argument
-local	KhanVs__vslot75_registerConstantMultiples	param_7	unusedArg7	INFERRED	unused virtual-slot argument
 local	KhanVs__vslot99_matchesRegisterMapEntry	param_2	registerIndex	INFERRED	index into the 0xc-stride register map entries
 local	KhanVs__vslot99_matchesRegisterMapEntry	param_3	program	INFERRED	program+8 compiler tables at +0x524/+0x52c
 local	IRInst__query68AndWord4fNotIn6_7	iVar1	query68	INFERRED	vslot 0x68 result
@@ -70,22 +62,9 @@ local	Vslot__outZeroReturnZero	param_1	unusedArg1	INFERRED	unused argument
 local	Vslot__outZeroReturnZero	param_2	unusedArg2	INFERRED	unused argument
 local	Vslot__outZeroReturnZero	param_3	unusedArg3	INFERRED	unused argument
 local	Vslot__outZeroReturnZero	param_4	out	INFERRED	receives 0
-local	PsBackend__bindExportRegisters	param_3	unusedArg3	INFERRED	unused stale register argument
-local	PsBackend__bindExportRegisters	param_4	unusedArg4	INFERRED	unused stale register argument
-local	PsBackend__bindExportRegisters	param_5	unusedArg5	INFERRED	unused stale register argument
-local	PsBackend__bindExportRegisters	param_6	unusedArg6	INFERRED	unused stale register argument
-local	PsBackend__bindExportRegisters	param_7	unusedArg7	INFERRED	unused stale register argument
-local	PsBackend__assignInterpolatorRegisters	param_3	unusedArg3	INFERRED	unused stale register argument
-local	PsBackend__assignInterpolatorRegisters	param_4	unusedArg4	INFERRED	unused stale register argument
-local	PsBackend__assignInterpolatorRegisters	param_5	unusedArg5	INFERRED	unused stale register argument
-local	PsBackend__assignInterpolatorRegisters	param_6	unusedArg6	INFERRED	unused stale register argument
-local	PsBackend__assignInterpolatorRegisters	param_7	unusedArg7	INFERRED	unused stale register argument
 local	Program__emitLoadVertexAttr	param_1	unusedArg1	INFERRED	unused argument
 local	Program__emitLoadVertexAttr	param_3	unusedArg3	INFERRED	unused argument
 local	Program__emitLoadVertexAttr	param_5	unusedArg5	INFERRED	unused argument
-local	OpcodeTraits__instFlagBit2_113734	param_3	unusedArg3	INFERRED	unused stale register argument
-local	OpcodeTraits__instFlagBit2_113734	param_5	unusedArg5	INFERRED	unused stale register argument
-local	OpcodeTraits__instFlagBit2_113734	param_7	unusedArg7	INFERRED	unused stale register argument
 local	KhanVs__vslot71_canCombineSources	param_5	unusedArg5	INFERRED	unused virtual-slot argument
 local	KhanVs__vslot71_canCombineSources	param_6	unusedArg6	INFERRED	unused virtual-slot argument
 local	KhanPs__vslot9_createCompareInst	param_7	sourceTokenWord	INFERRED	address-taken word handed to Program__applySourceTokenToOperand
