@@ -1,5 +1,5 @@
---- a/Sources/IOATIR500DVDContext_write_buffer_Port.cpp	2026-10-20 21:00:04.723766899 -0700
-+++ b/Sources/IOATIR500DVDContext_write_buffer_Port.cpp	2026-10-20 21:00:04.724661173 -0700
+--- a/Sources/IOATIR500DVDContext_write_buffer_Port.cpp	2026-11-06 13:43:13.311540232 -0800
++++ b/Sources/IOATIR500DVDContext_write_buffer_Port.cpp	2026-11-06 13:43:13.312650946 -0800
 @@ -32,23 +32,13 @@
  /* real addr 0xffe0 */
  IOReturn IOATIR500DVDContext::write_buffer(sIODVDContextWriteBufferData *data, UInt32 byteCount) {
@@ -24,7 +24,7 @@
    UInt32 result;
    int bufferSlotOffset;
    int rectRight;
-@@ -89,30 +79,30 @@
+@@ -89,30 +79,35 @@
    rectHeight = M<int>(dataBytes + 0xc);
    sourceBase = M<int>(dataBytes + 0x14);
    bufferSlotOffset = (0x10 - (unsigned int)(M<int>(dataBytes + 0x10) == 0)) * 4;
@@ -32,6 +32,11 @@
 -  surface = M<UInt8 *>(param_1 + kIOATIR500DVDContext_boundSurface);
 +  GH_IOLockLock(M<UInt32>(M<int>(self + kIOATIR500DVDContext_accelerator) + 0x840));
 +  surface = M<UInt8 *>(self + kIOATIR500DVDContext_boundSurface);
++  /* Root cause (#146): the vendor source already treats an unbound surface as a failure (the `surface == 0` test below -> 0xe00002cc), but the shipped
++   * code loads surface->buffers[] BEFORE that test (the compiler hoisted the load above its guard). With boundSurface NULL - the normal state of a
++   * fresh connection and of one whose surface was invalidated (remove_surface, vtable slot 0x5a4) - that load is a kernel NULL dereference.
++   * Fix: restore the vendor's own order, i.e. test first. Same result code, no new behaviour. */
++  if (surface == (UInt8 *)0x0) goto unlockAndFail;
    bufferBit = 0x40000000;
    surfaceBuffer = M<int>(surface + bufferSlotOffset + 0xb70);
    bufferIndex = (surfaceBuffer - (int)(surface + kIOATIR500Surface_buffers) >> 3) * -0x11111111;
@@ -67,7 +72,7 @@
    }
    rectRight = rectX + rectWidth;
    if ((((0 < rectRight) && (rectBottom = rectY + rectHeight, 0 < rectBottom)) &&
-@@ -144,44 +134,44 @@
+@@ -144,44 +139,44 @@
                                     -GH_page_size &
                                     (GH_page_size +
                                     srcPitch * (rectHeight + -1) + (unsigned int)M<UInt16>(surfaceBuffer + 0x16) * rectWidth

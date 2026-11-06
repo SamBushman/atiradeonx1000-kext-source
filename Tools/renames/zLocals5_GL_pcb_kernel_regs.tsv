@@ -511,7 +511,7 @@ use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	pairCountOp38	INFERR
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	widthPerSample	INFERRED	buffer width divided by the sample count	[A-Za-z0-9_]+\ =\ 0;#96	if\ \(![A-Za-z0-9_]+\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	widthPerSample	INFERRED	buffer width divided by the sample count	[A-Za-z0-9_]+\ =\ \(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x14\)\ /\ \(M<UInt32>\([A-Za-z0-9_]+\ \+\ 0x3c\)\ >>\ 0x14\ \&\ 0xf\)#6	;	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	widthPerSample	INFERRED	buffer width divided by the sample count	if\ \([A-Za-z0-9_]+\ <=\ [A-Za-z0-9_]+\)\ \{#7	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;	2
-use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	widthPerSample	INFERRED	buffer width divided by the sample count	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#248	\}	2
+use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	widthPerSample	INFERRED	buffer width divided by the sample count	[A-Za-z0-9_]+\ =\ [A-Za-z0-9_]+;#251	\}	2
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	tiledFlagBit	INFERRED	bit 31 set when the buffer is tiled (+0x38 >= 2)	[A-Za-z0-9_]+\ =\ 0x80000000;#24	if\ \(\(UInt8\)[A-Za-z0-9_]+\[0x38\]\ <\ 2\)\ \{	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	tiledFlagBit	INFERRED	bit 31 set when the buffer is tiled (+0x38 >= 2)	[A-Za-z0-9_]+\ =\ 0;#97	\(UInt32\)M<UInt16>\([A-Za-z0-9_]+\ \+\ 0x20\)\ \+	
 use	ATIR500GLContext::process_command_buffer@0x2b820	opcode	recordYHi	INFERRED	recordCursor[1] >> 16	[A-Za-z0-9_]+\ =\ recordCursor\[1\]\ >>\ 0x10;	\}	
