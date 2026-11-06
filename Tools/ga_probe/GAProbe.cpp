@@ -45,6 +45,10 @@ static void dump_regs(const char *why) {
     UInt32 vap_status = RD32(g_bar1, 0x2140);
     UInt32 cp_rptr = RD32(g_bar1, 0x0710);
     UInt32 cp_wptr = RD32(g_bar1, 0x0714);
+    /* #214: plain (no CSQ_ADDR/CSQ_DATA queue walk) reads that say which indirect buffer the CP is stuck in */
+    UInt32 cp_rb_base = RD32(g_bar1, 0x0700);
+    UInt32 cp_ib_base = RD32(g_bar1, 0x0738);
+    UInt32 cp_ib_bufsz = RD32(g_bar1, 0x073c);
 
     UInt32 stamp_base = 0, stamp_off = 0, stamp_val = 0xdeadbeef, cached54 = 0;
     if (g_accel) {
@@ -57,6 +61,8 @@ static void dump_regs(const char *why) {
             stamp_val = (UInt32)p[3] << 24 | (UInt32)p[2] << 16 | (UInt32)p[1] << 8 | (UInt32)p[0];
         }
     }
+    IOLog("GAProbe214[%s t=%d]: CP_RB_BASE=0x%08x CP_IB_BASE=0x%08x CP_IB_BUFSZ=0x%08x\n",
+          why, g_tick, (unsigned)cp_rb_base, (unsigned)cp_ib_base, (unsigned)cp_ib_bufsz);
     IOLog("GAProbe[%s t=%d]: RBBM_STATUS=0x%08x RBBM_SOFTRESET=0x%08x GA_IDLE=0x%08x "
           "VAP_CNTL_STATUS=0x%08x CP_RB_RPTR=0x%08x CP_RB_WPTR=0x%08x "
           "STAMP_BASE=0x%08x STAMP_OFF=0x%08x LIVE_STAMP=0x%08x CACHED_0x54=0x%08x\n",

@@ -76,6 +76,7 @@ static GLuint rp_map(GLuint **tab, unsigned *n, GLuint name, int isbuf) {
    log's DRAWE lines) issue the REAL draw (state, matrices, scissor, index array from the dumps; stencil-shadow draws use Doom's shadow.vp), every other DRAWE is skipped.
    dhewm3 wedges with exactly the draws {1329,1382,1383} issued (everything else dropped): 1329/1383 = stencil shadow volumes (vec4 stride-16 VBO 1022, 2502 idx,
    depth-pass DECR_WRAP, colour/depth writes off, scissor, ARB vertex program), 1382 = fixed-function depth fill (VBO 795 stride 60, 2388 idx, tex 2 DXT1). */
+static unsigned long rp_until = 0;
 static unsigned rp_drawN = 0; static int rp_realN = 0, rp_realList[64]; static const char *rp_realDir = NULL;
 static GLuint rp_shadowVP = 0;
 static const char rp_shadowVPsrc[] =
@@ -99,7 +100,9 @@ static void rp_real_draw(int n) {
     snprintf(fn, sizeof fn, "%s/gllog.txt.idx%d.bin", rp_realDir, n);
     f = fopen(fn, "rb"); if (!f) { fprintf(stderr, "FAIL open %s\n", fn); exit(1); }
     fseek(f, 0, SEEK_END); long isz = ftell(f); fseek(f, 0, SEEK_SET); unsigned *idx = (unsigned *)malloc(isz); if (fread(idx, 1, isz, f) != (size_t)isz) { fprintf(stderr, "short idx\n"); exit(1); } fclose(f);
-    int cnt = (int)(isz / 4); unsigned mx = 0; for (int k = 0; k < cnt; k++) if (idx[k] > mx) mx = idx[k];
+    int cnt = (int)(isz / 4);
+    { const char *rc = getenv("REAL_COUNT"); while (rc && *rc) { int dn = atoi(rc); const char *c = strchr(rc, ':'); if (dn == n && c) { cnt = atoi(c + 1) < cnt ? atoi(c + 1) : cnt; } rc = strchr(rc, ','); if (rc) rc++; } }   /* REAL_COUNT="1383:60,..": truncate that draw's index count */
+    unsigned mx = 0; for (int k = 0; k < cnt; k++) if (idx[k] > mx) mx = idx[k];
     int shadow = (n != 1382);
     GLuint vbo = rp_map(&rp_buf, &rp_nbuf, shadow ? 1022 : 795, 1);
     if (rp_nr && getenv("REPLAY_INIT")) {   /* ranged replay: make sure the objects the real draws use have storage even if their defining log lines are outside the ranges */
@@ -127,7 +130,9 @@ static void rp_real_draw(int n) {
         glDepthMask(GL_FALSE); glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE); glDisable(GL_CULL_FACE);
         if (SK("nooffset")) glDisable(GL_POLYGON_OFFSET_FILL); else { glEnable(GL_POLYGON_OFFSET_FILL); glPolygonOffset(0.f, 1.f); }
         glStencilOp(GL_KEEP, GL_KEEP, SK("keepop") ? GL_KEEP : 0x8508 /* DECR_WRAP */);
-        glActiveTextureARB(GL_TEXTURE0); glDisable(GL_TEXTURE_2D); glClientActiveTextureARB(GL_TEXTURE0);
+        glActiveTextureARB(GL_TEXTURE0); glClientActiveTextureARB(GL_TEXTURE0);
+        { const char *rt = getenv("REAL_TEX"); int want = 0; while (rt && *rt) { if (atoi(rt) == n) want = 1; rt = strchr(rt, ','); if (rt) rt++; }   /* REAL_TEX="1383": shadow draw with unit0 TEXTURE_2D ENABLED (tex 2) */
+          if (want) { glBindTexture(GL_TEXTURE_2D, rp_map(&rp_tex, &rp_ntex, 2, 0)); glEnable(GL_TEXTURE_2D); glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); } else glDisable(GL_TEXTURE_2D); }
         glDisableClientState(GL_TEXTURE_COORD_ARRAY); glDisableClientState(GL_COLOR_ARRAY);
         glEnableClientState(GL_VERTEX_ARRAY); glVertexPointer(4, GL_FLOAT, 16, (const void *)0);
     } else {
@@ -148,6 +153,7 @@ static void rp_real_draw(int n) {
 static void replay_gllog(const char *path) {
     FILE *f = fopen(path, "r"); if (!f) { fprintf(stderr, "FAIL open %s\n", path); exit(1); }
     if (getenv("REPLAY_LINES")) { const char *e = getenv("REPLAY_LINES"); while (*e && rp_nr < 64) { char *q; rp_rlo[rp_nr] = strtoul(e, &q, 10); e = q; if (*e == '-') { e++; rp_rhi[rp_nr] = strtoul(e, &q, 10); e = q; } else rp_rhi[rp_nr] = rp_rlo[rp_nr]; rp_nr++; if (*e == ',') e++; } }
+    rp_skip = getenv("MIN_SKIP");
     if (getenv("REPLAY_REAL") && getenv("REPLAY_REALDIR")) { rp_realDir = getenv("REPLAY_REALDIR"); const char *e = getenv("REPLAY_REAL"); while (*e && rp_realN < 64) { rp_realList[rp_realN++] = atoi(e); while (*e && *e != ',') e++; if (*e == ',') e++; } }
     size_t zsz = 64u << 20; unsigned char *zero = (unsigned char *)calloc(zsz, 1);
     if (getenv("REPLAY_FILL")) { const char *m = getenv("REPLAY_FILL"); unsigned r = 12345; for (size_t k = 0; k < zsz; k++) { r = r * 1664525u + 1013904223u; zero[k] = !strcmp(m, "ff") ? 0xff : (unsigned char)(r >> 16); } }
@@ -156,9 +162,10 @@ static void replay_gllog(const char *path) {
     while (fgets(line, sizeof line, f)) {
         ln++;
         if (ln < rp_startLine) continue;
+        if (rp_until && ln > rp_until) goto replay_done;
         if (rp_realN && !strncmp(line, "DRAWE ", 6)) {   /* count every logged draw (range or not); issue the REAL ones, skip the rest */
             rp_drawN++;
-            for (int k = 0; k < rp_realN; k++) if ((int)rp_drawN == rp_realList[k]) { rp_real_draw((int)rp_drawN); if (getenv("REPLAY_FINISH_AFTER") && (int)rp_drawN == atoi(getenv("REPLAY_FINISH_AFTER"))) glFinish(); if (getenv("REPLAY_FLUSH_AFTER") && (int)rp_drawN == atoi(getenv("REPLAY_FLUSH_AFTER"))) glFlush(); if (k == rp_realN - 1) { printf("replay: last REAL draw done at log line %lu\n", ln); goto replay_done; } }
+            for (int k = 0; k < rp_realN; k++) if ((int)rp_drawN == rp_realList[k]) { rp_real_draw((int)rp_drawN); if (getenv("REPLAY_FINISH_AFTER") && (int)rp_drawN == atoi(getenv("REPLAY_FINISH_AFTER"))) glFinish(); if (getenv("REPLAY_FLUSH_AFTER") && (int)rp_drawN == atoi(getenv("REPLAY_FLUSH_AFTER"))) glFlush(); if (k == rp_realN - 1) { printf("replay: last REAL draw done at log line %lu\n", ln); if (getenv("REPLAY_UNTIL")) rp_until = strtoul(getenv("REPLAY_UNTIL"), NULL, 0); else goto replay_done; } }
             continue;
         }
         if (rp_nr) { int in = 0; for (int k = 0; k < rp_nr; k++) if (ln >= rp_rlo[k] && ln <= rp_rhi[k]) in = 1; if (!in) { if (ln > rp_rhi[rp_nr - 1] && ln > rp_rlo[rp_nr - 1]) { int mx = 0; for (int k = 0; k < rp_nr; k++) if (rp_rhi[k] > (unsigned long)mx) mx = (int)rp_rhi[k]; if (ln > (unsigned long)mx) break; } continue; } }
@@ -210,6 +217,8 @@ static void replay_gllog(const char *path) {
         else if (!strcmp(op, "FINISH")) { glFinish(); }
         else if (!strcmp(op, "SWAP")) { /* no swap in pbuffer; fullscreen path flips below if needed */ if (getenv("REPLAY_SWAP")) { if (getenv("WINDOWED")) { gl_window_flush(); gl_window_pump(); } else CGLFlushDrawable(CGLGetCurrentContext()); } }
         (void)b; (void)c; (void)d; (void)e; (void)g; (void)h; (void)i2; (void)x; (void)y;
+        if (getenv("REPLAY_FLUSH_LINE") && ln == strtoul(getenv("REPLAY_FLUSH_LINE"), NULL, 0)) glFlush();
+        if (getenv("REPLAY_FINISH_LINE") && ln == strtoul(getenv("REPLAY_FINISH_LINE"), NULL, 0)) glFinish();
     }
 replay_done:
     fclose(f); free(zero);
