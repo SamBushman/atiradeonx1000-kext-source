@@ -98,7 +98,7 @@ fi
 if want userspace; then
     for f in userspace/*.c userspace/*.cpp userspace/*.m; do
         [ -f "$f" ] || continue
-        case $f in userspace/glwin.m) continue;; esac           # helper compiled into the gl_feature_* tests through glstress.h
+        case $f in userspace/glwin.m|userspace/gl_window_ctx.m) continue;; esac           # helpers: glwin.m is compiled into the gl_feature_* tests through glstress.h, gl_window_ctx.m is linked into gl_doom_replay_probe
         b=${f%.*}
         if [ -n "$(excluded_reason "$f")" ]; then report "$f" excl; continue; fi
         case $f in
@@ -107,6 +107,8 @@ if want userspace; then
                 D=userspace/.libgl_dispatch_build; mkdir -p $D
                 if ( cd userspace && $PY libgl_dispatch_gen.py 4096 > .libgl_dispatch_build/thunks.s && $PY libgl_dispatch_gen_calls.py /System/Library/Frameworks/OpenGL.framework/Headers/gl.h /System/Library/Frameworks/OpenGL.framework/Headers/glext.h > .libgl_dispatch_build/dsp_calls.c ) >> "$ERR" 2>&1 \
                    && $CC -arch ppc -w -std=gnu99 -o userspace/libgl_dispatch_test "$f" $D/dsp_calls.c $D/thunks.s >> "$ERR" 2>&1; then report "$f" ok; else report "$f" fail; fi;;
+            userspace/gl_doom_replay_probe.c)                      # links the on-screen NSWindow + NSOpenGLContext helper (Cocoa)
+                if $CC -arch ppc -std=gnu99 -w -I. -o userspace/gl_doom_replay_probe "$f" userspace/gl_window_ctx.m -framework OpenGL -framework Cocoa -framework ApplicationServices >> "$ERR" 2>&1; then report "$f" ok; else report "$f" fail; fi;;
             *.cpp) if g++ -arch ppc -w -I. -o "$b" "$f" >> "$ERR" 2>&1; then report "$f" ok; else report "$f" fail; fi;;
             *) if try "$f" "$b"; then report "$f" ok; else report "$f" fail; fi;;
         esac
