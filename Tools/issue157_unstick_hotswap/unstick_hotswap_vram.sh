@@ -18,9 +18,13 @@ D=$(cd "$(dirname "$0")" && pwd)
 echo "unstick_hotswap_vram: finding WindowServer..."
 WSPID=$(ps auxww | awk '/[W]indowServer -daemon/{print $2}')
 [ -n "$WSPID" ] || { echo "unstick_hotswap_vram: WindowServer not found"; exit 1; }
+# #220: killing WindowServer makes loginwindow start a NEW pbs and Dock for the session; the old pair is not killed with it - it is re-parented
+# to launchd and lives on (one pair per run; the G5's 100-process per-user limit is reached after ~38).  Remember the old pair and reap it below.
+OLDGUI=$(ps -U "$(id -un)" -o pid,command | awk '/CoreServices\/pbs$/ || /Dock\.app\/Contents\/MacOS\/Dock/ {print $1}')
 echo "unstick_hotswap_vram: killing WindowServer (pid $WSPID) so it restarts fresh against the hot-swapped instance"
 sudo kill -9 "$WSPID"
 sleep 3
+[ -z "$OLDGUI" ] || { echo "unstick_hotswap_vram: reaping the previous session's pbs/Dock ($(echo $OLDGUI))"; kill $OLDGUI 2>/dev/null || true; sleep 1; kill -9 $OLDGUI 2>/dev/null || true; }
 NEWPID=$(ps auxww | awk '/[W]indowServer -daemon/{print $2}')
 [ -n "$NEWPID" ] || { echo "unstick_hotswap_vram: WindowServer did not respawn"; exit 1; }
 echo "unstick_hotswap_vram: WindowServer respawned as pid $NEWPID"

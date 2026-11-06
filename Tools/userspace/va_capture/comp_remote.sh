@@ -1,7 +1,7 @@
 #!/bin/sh
 # comp_remote.sh NAME PICTURES [ava_drive args...]   (runs ON THE G5, started by comp_run.sh through ONE ssh session)
 # Rebuilds the guard / ava_drive only when their sources changed, takes a light pre/post snapshot (uptime, kextstat, vm_stat, DVD/2D registers, system.log tail),
-# launches the run in the console (Terminal) session, waits for EXIT= locally (no network), screenshots, and leaves everything as NAME_* files in ~/rung3/va (persistent) for comp_run.sh to stream back.
+# launches the run in the console (Terminal) session (the command ends with "; exit" so the Terminal window's interactive bash does not outlive the run: #220), waits for EXIT= locally (no network), screenshots, and leaves everything as NAME_* files in ~/rung3/va (persistent) for comp_run.sh to stream back.
 # The heavy checks (diskutil verifyVolume on both volumes) are NOT run per run: run them once per boot and after any anomaly (#87 reset procedure).
 N=$1; P=$2; shift; shift
 V=$HOME/rung3/va; T=$HOME/rung3/Tests/destructive; cd $V || exit 1   # persistent (NOT /tmp: the G5 wipes /tmp on reboot and a crash must not take the evidence with it)
@@ -19,7 +19,7 @@ ps auxww | egrep "[c]rashdump|[a]va_drive|[g]odot" > ${N}_pre.ps
 echo "preflight done; stale processes: `wc -l < ${N}_pre.ps`"
 DELAYENV=; [ -n "$DELAYMS" ] && DELAYENV="GUARD_DELAY_DELETE_MS=$DELAYMS "; [ -n "$GENV" ] && DELAYENV="$DELAYENV$GENV "   # GENV: extra guard knobs, e.g. "GUARD_SYNC_STAMPS=1 GUARD_SYNC_TIMEOUT_MS=5000"
 FWDREMAPENV=; [ "${FWDREMAP:-1}" = 1 ] && FWDREMAPENV="GUARD_FWD_REMAP=1 "
-osascript -e "tell application \"Terminal\" to do script \"GF=${GFSET:-8,9,18,19,20} ${FWDREMAPENV}${DELAYENV}WIN_X=800 WIN_Y=500 WATCHDOG_S=${WATCHDOG_S:-60} sh $V/run_rung3.sh $N --pictures $P --hold-after 2 $*\"" > /dev/null 2>&1
+osascript -e "tell application \"Terminal\" to do script \"GF=${GFSET:-8,9,18,19,20} ${FWDREMAPENV}${DELAYENV}WIN_X=800 WIN_Y=500 WATCHDOG_S=${WATCHDOG_S:-60} sh $V/run_rung3.sh $N --pictures $P --hold-after 2 $*; exit\"" > /dev/null 2>&1
 i=0; while [ $i -lt 150 ]; do grep -q 'EXIT=' $N.out 2>/dev/null && break; sleep 1; i=`expr $i + 1`; done
 echo "waited ${i}s; `tail -1 $N.out 2>/dev/null`"
 screencapture -x ${N}_screen.png 2>/dev/null
