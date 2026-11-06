@@ -5,10 +5,11 @@ record whose value differs between the two seeds carries an argument. Every live
 the positions the stock does not preserve are compared only for information (they are scratch)."""
 import sys, subprocess, re, json, os
 G = '/Volumes/Test HD/claude_bugwf'
+TESTDIR = os.environ.get('DSP_TEST_DIR', G + '/tests')     # the directory holding the built libgl_dispatch_test on the G5 (the staged tree: ~/rung3/src_<sha>/Tests/userspace)
 stock, reb = sys.argv[1:3]
 PROTO = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dsp_protos.json')))    # written by libgl_dispatch_gen_calls.py: parameter classes i / p / f / d per function
 def run(img, seed):
-    return subprocess.run(['ssh', 'G5', 'cd "%s/tests" && ./libgl_dispatch_test "%s" x %d 2>&1' % (G, img, seed)], capture_output=True, text=True).stdout
+    return subprocess.run(['ssh', 'G5', 'cd "%s" && ./libgl_dispatch_test "%s" x %d 2>&1' % (TESTDIR, img, seed)], capture_output=True, text=True).stdout
 def parse(t):
     out = {}; cur = None
     for l in t.split('\n'):
@@ -62,4 +63,5 @@ for name in S0:
             nlive += 1
             if (v0, v1) != (w0, w1): print('%s: %s[%d] stock %s/%s rebuilt %s/%s' % (name, kind, ix, v0, v1, w0, w1)); bad += 1
 print('%d functions, %d argument positions compared (%d of them stack-passed), %d positions where the ABI rule did not match the stock, %d mismatches' % (len(S0), nlive, nstack, rule_bad, bad))
-print('RESULT:', 'PASS' if not bad else 'FAIL')
+print('RESULT:', 'PASS' if not bad and nlive else 'FAIL')
+sys.exit(0 if not bad and nlive else 1)
