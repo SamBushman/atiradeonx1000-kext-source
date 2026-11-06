@@ -1,0 +1,430 @@
+diff --git a/neo/CMakeLists.txt b/neo/CMakeLists.txt
+index 98972d8..dfcb192 100644
+--- a/neo/CMakeLists.txt
++++ b/neo/CMakeLists.txt
+@@ -616,6 +616,7 @@ if(NOT APPLE AND NOT WIN32)
+ endif()
+ 
+ set(src_renderer
++	renderer/gllog214.cpp
+ 	renderer/Cinematic.cpp
+ 	renderer/GuiModel.cpp
+ 	renderer/Image_files.cpp
+diff --git a/neo/renderer/RenderSystem_init.cpp b/neo/renderer/RenderSystem_init.cpp
+index 7914093..39bff76 100644
+--- a/neo/renderer/RenderSystem_init.cpp
++++ b/neo/renderer/RenderSystem_init.cpp
+@@ -389,6 +389,7 @@ R_CheckPortableExtensions
+ 
+ ==================
+ */
++extern void GLLog214_Install( void );
+ static void R_CheckPortableExtensions( void ) {
+ 	glConfig.glVersion = atof( glConfig.version_string );
+ 
+@@ -566,7 +567,7 @@ static void R_CheckPortableExtensions( void ) {
+ 			qglDebugMessageCallbackARB = (PFNGLDEBUGMESSAGECALLBACKARBPROC)GLimp_ExtensionPointer( "glDebugMessageCallbackARB" );
+ 			if ( r_glDebugContext.GetBool() ) {
+ 				common->Printf( "...using GL_ARB_debug_output (r_glDebugContext is set)\n" );
+-				qglDebugMessageCallbackARB(DebugCallback, NULL);
++				qglDebugMessageCallbackARB((GLDEBUGPROCARB)DebugCallback, NULL); // cast: old (10.4) glext.h takes a non-const userParam
+ 				qglEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_ARB);
+ 			} else {
+ 				common->Printf( "...found GL_ARB_debug_output, but not using it (r_glDebugContext is not set)\n" );
+@@ -854,6 +855,7 @@ void R_InitOpenGL( void ) {
+ 
+ 	// recheck all the extensions (FIXME: this might be dangerous)
+ 	R_CheckPortableExtensions();
++	GLLog214_Install();
+ 
+ 	// parse our vertex and fragment programs, possibly disably support for
+ 	// one of the paths if there was an error
+diff --git a/neo/renderer/gllog214.cpp b/neo/renderer/gllog214.cpp
+new file mode 100644
+index 0000000..602b74d
+--- /dev/null
++++ b/neo/renderer/gllog214.cpp
+@@ -0,0 +1,256 @@
++// gllog214.cpp - issue #214 investigation: log every GL call that creates/changes/binds
++// textures and buffers (the objects that become kernel new_texture/delete_texture/page_off
++// events), so a standalone probe can replay Doom 3's exact object history.
++// Enabled by env D3GLLOG=<path>. Installed by GLLog214_Install() after R_CheckPortableExtensions().
++#include "sys/platform.h"
++#include "renderer/tr_local.h"
++#ifndef GL_TEXTURE_RECTANGLE_EXT
++#define GL_TEXTURE_RECTANGLE_EXT 0x84F5
++#endif
++static void (APIENTRY *g214_getAttribiv)( GLuint, GLenum, GLint * ) = NULL;
++#define GSD_ISEN(c) qglIsEnabled( c )
++#define GSD_GETI(p, a) qglGetIntegerv( p, a )
++#define GSD_GETF(p, a) qglGetFloatv( p, a )
++#define GSD_GETIV_ATTRIB(i, p, out) do { if ( !g214_getAttribiv ) g214_getAttribiv = (void (APIENTRY *)( GLuint, GLenum, GLint * ))GLimp_ExtensionPointer( "glGetVertexAttribivARB" ); if ( g214_getAttribiv ) g214_getAttribiv( i, p, out ); } while ( 0 )
++#define GSD_CLIENTACTIVE(u) qglClientActiveTextureARB( GL_TEXTURE0_ARB + (u) )
++#define GSD_ACTIVETEX(u) qglActiveTextureARB( GL_TEXTURE0_ARB + (u) )
++#define GSD_TEXLEVEL(t, l, p, o) qglGetTexLevelParameteriv( t, l, p, o )
++#define GSD_TEXPARAM(t, p, o) qglGetTexParameteriv( t, p, o )
++#define GSD_TEXENV(p, o) qglGetTexEnviv( GL_TEXTURE_ENV, p, o )
++#include "renderer/gl_state_dump.h"
++#include <stdio.h>
++#include <stdlib.h>
++
++static FILE *lf = NULL;
++static int   installed = 0;
++static unsigned long long nlines = 0;
++
++#define W(...) do { if ( lf ) { fprintf( lf, __VA_ARGS__ ); nlines++; } } while (0)
++
++static void (APIENTRYP r_TexImage2D)( GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid * );
++static void (APIENTRYP r_TexSubImage2D)( GLenum, GLint, GLint, GLint, GLsizei, GLsizei, GLenum, GLenum, const GLvoid * );
++static void (APIENTRYP r_CopyTexImage2D)( GLenum, GLint, GLenum, GLint, GLint, GLsizei, GLsizei, GLint );
++static void (APIENTRYP r_CopyTexSubImage2D)( GLenum, GLint, GLint, GLint, GLint, GLint, GLsizei, GLsizei );
++static void (APIENTRYP r_BindTexture)( GLenum, GLuint );
++static void (APIENTRYP r_GenTextures)( GLsizei, GLuint * );
++static void (APIENTRYP r_DeleteTextures)( GLsizei, const GLuint * );
++static void (APIENTRYP r_TexParameteri)( GLenum, GLenum, GLint );
++static void (APIENTRYP r_TexParameterf)( GLenum, GLenum, GLfloat );
++static void (APIENTRYP r_Clear)( GLbitfield );
++static void (APIENTRYP r_Finish)( void );
++static void (APIENTRYP r_DrawElements)( GLenum, GLsizei, GLenum, const GLvoid * );
++static void (APIENTRYP r_CompressedTexImage2DARB)( GLenum, GLint, GLenum, GLsizei, GLsizei, GLint, GLsizei, const GLvoid * );
++static void (APIENTRYP r_BufferDataARB)( GLenum, GLsizeiptrARB, const GLvoid *, GLenum );
++static void (APIENTRYP r_BufferSubDataARB)( GLenum, GLintptrARB, GLsizeiptrARB, const GLvoid * );
++static void (APIENTRYP r_BindBufferARB)( GLenum, GLuint );
++static void (APIENTRYP r_GenBuffersARB)( GLsizei, GLuint * );
++static void (APIENTRYP r_DeleteBuffersARB)( GLsizei, const GLuint * );
++static void (APIENTRYP r_ActiveTextureARB)( GLenum );
++static void (APIENTRYP r_ClientActiveTextureARB)( GLenum );
++
++static void w_TexImage2D( GLenum t, GLint l, GLint i, GLsizei w, GLsizei h, GLint b, GLenum f, GLenum ty, const GLvoid *p ) {
++	W( "TI2D %u %d %d %d %d %d %u %u %d\n", (unsigned)t, (int)l, (int)i, (int)w, (int)h, (int)b, (unsigned)f, (unsigned)ty, p ? 1 : 0 );
++	r_TexImage2D( t, l, i, w, h, b, f, ty, p );
++}
++static void w_TexSubImage2D( GLenum t, GLint l, GLint x, GLint y, GLsizei w, GLsizei h, GLenum f, GLenum ty, const GLvoid *p ) {
++	W( "TSI2D %u %d %d %d %d %d %u %u\n", (unsigned)t, (int)l, (int)x, (int)y, (int)w, (int)h, (unsigned)f, (unsigned)ty );
++	r_TexSubImage2D( t, l, x, y, w, h, f, ty, p );
++}
++static void w_CopyTexImage2D( GLenum t, GLint l, GLenum i, GLint x, GLint y, GLsizei w, GLsizei h, GLint b ) {
++	W( "CTI2D %u %d %u %d %d %d %d %d\n", (unsigned)t, (int)l, (unsigned)i, (int)x, (int)y, (int)w, (int)h, (int)b );
++	r_CopyTexImage2D( t, l, i, x, y, w, h, b );
++}
++static void w_CopyTexSubImage2D( GLenum t, GLint l, GLint xo, GLint yo, GLint x, GLint y, GLsizei w, GLsizei h ) {
++	W( "CTSI2D %u %d %d %d %d %d %d %d\n", (unsigned)t, (int)l, (int)xo, (int)yo, (int)x, (int)y, (int)w, (int)h );
++	r_CopyTexSubImage2D( t, l, xo, yo, x, y, w, h );
++}
++static void w_BindTexture( GLenum t, GLuint n ) {
++	W( "BT %u %u\n", (unsigned)t, (unsigned)n );
++	r_BindTexture( t, n );
++}
++static void w_GenTextures( GLsizei n, GLuint *p ) {
++	r_GenTextures( n, p );
++	W( "GENT %d", (int)n );
++	for ( int i = 0; i < n; i++ ) { W( " %u", (unsigned)p[i] ); }
++	W( "\n" );
++}
++static void w_DeleteTextures( GLsizei n, const GLuint *p ) {
++	W( "DELT %d", (int)n );
++	for ( int i = 0; i < n; i++ ) { W( " %u", (unsigned)p[i] ); }
++	W( "\n" );
++	r_DeleteTextures( n, p );
++}
++static void w_TexParameteri( GLenum t, GLenum pn, GLint v ) {
++	W( "TPI %u %u %d\n", (unsigned)t, (unsigned)pn, (int)v );
++	r_TexParameteri( t, pn, v );
++}
++static void w_TexParameterf( GLenum t, GLenum pn, GLfloat v ) {
++	W( "TPF %u %u %.9g\n", (unsigned)t, (unsigned)pn, (double)v );
++	r_TexParameterf( t, pn, v );
++}
++static void w_Clear( GLbitfield m ) {
++	W( "CLEAR %u\n", (unsigned)m );
++	r_Clear( m );
++}
++static void w_Finish( void ) {
++	W( "FINISH\n" );
++	r_Finish();
++}
++static int onlyCount = -1, drawFrom = -1, drawTo = -1;
++static int finishAt = -1;
++static int keepN = 0, keepLo[256], keepHi[256];   /* D3GL_ONLYCOUNT=N: only glDrawElements calls with exactly N indices are issued (drops the GUI/other draws) */
++static void w_DrawElements( GLenum mode, GLsizei count, GLenum type, const GLvoid *ind ) {
++	W( "DRAWE %u %d %u\n", (unsigned)mode, (int)count, (unsigned)type );
++	static int drawIdx = 0; drawIdx++;
++	{	/* DRAWX: everything the driver sees for this draw (array buffers/pointers/strides, index range + hash) */
++		GLint eb = 0, ab = 0, vsz = 0, vty = 0, vst = 0, vbb = 0, tsz = 0, tty = 0, tst = 0, tbb = 0, csz = 0, cty = 0, cst = 0, cbb = 0, act = 0, cact = 0;
++		GLvoid *vp = 0, *tp = 0, *cp = 0;
++		qglGetIntegerv( GL_ELEMENT_ARRAY_BUFFER_BINDING_ARB, &eb ); qglGetIntegerv( GL_ARRAY_BUFFER_BINDING_ARB, &ab );
++		qglGetIntegerv( GL_VERTEX_ARRAY_SIZE, &vsz ); qglGetIntegerv( GL_VERTEX_ARRAY_TYPE, &vty ); qglGetIntegerv( GL_VERTEX_ARRAY_STRIDE, &vst ); qglGetIntegerv( GL_VERTEX_ARRAY_BUFFER_BINDING_ARB, &vbb ); qglGetPointerv( GL_VERTEX_ARRAY_POINTER, &vp );
++		qglGetIntegerv( GL_TEXTURE_COORD_ARRAY_SIZE, &tsz ); qglGetIntegerv( GL_TEXTURE_COORD_ARRAY_TYPE, &tty ); qglGetIntegerv( GL_TEXTURE_COORD_ARRAY_STRIDE, &tst ); qglGetIntegerv( GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING_ARB, &tbb ); qglGetPointerv( GL_TEXTURE_COORD_ARRAY_POINTER, &tp );
++		qglGetIntegerv( GL_COLOR_ARRAY_SIZE, &csz ); qglGetIntegerv( GL_COLOR_ARRAY_TYPE, &cty ); qglGetIntegerv( GL_COLOR_ARRAY_STRIDE, &cst ); qglGetIntegerv( GL_COLOR_ARRAY_BUFFER_BINDING_ARB, &cbb ); qglGetPointerv( GL_COLOR_ARRAY_POINTER, &cp );
++		qglGetIntegerv( GL_ACTIVE_TEXTURE_ARB, &act ); qglGetIntegerv( GL_CLIENT_ACTIVE_TEXTURE_ARB, &cact );
++		unsigned mn = 0xffffffffu, mx = 0, h = 2166136261u, first[6] = {0,0,0,0,0,0};
++		if ( !eb && ind ) for ( int k = 0; k < count; k++ ) {
++			unsigned v = ( type == GL_UNSIGNED_INT ) ? ((const unsigned *)ind)[k] : ( type == GL_UNSIGNED_SHORT ? ((const unsigned short *)ind)[k] : ((const unsigned char *)ind)[k] );
++			if ( v < mn ) mn = v; if ( v > mx ) mx = v; h = ( h ^ v ) * 16777619u; if ( k < 6 ) first[k] = v;
++		}
++		W( "DRAWX #%d eb=%d ab=%d idxptr=%p min=%u max=%u hash=%08x first=%u,%u,%u,%u,%u,%u | V sz=%d ty=0x%x st=%d bb=%d p=%p | T sz=%d ty=0x%x st=%d bb=%d p=%p | C sz=%d ty=0x%x st=%d bb=%d p=%p | act=0x%x cact=0x%x\n",
++			drawIdx, (int)eb, (int)ab, ind, mn, mx, h, first[0], first[1], first[2], first[3], first[4], first[5],
++			(int)vsz, (unsigned)vty, (int)vst, (int)vbb, vp, (int)tsz, (unsigned)tty, (int)tst, (int)tbb, tp, (int)csz, (unsigned)cty, (int)cst, (int)cbb, cp, (unsigned)act, (unsigned)cact );
++	}
++	{	/* D3GL_STATE_AT="a,b,c": full GL state + matrices + the raw index array for these draws -> <D3GLLOG>.state<N>.txt / .idx<N>.bin */
++		static int nst = -1, st[32];
++		if ( nst < 0 ) { nst = 0; const char *e = getenv( "D3GL_STATE_AT" ); while ( e && *e && nst < 32 ) { st[nst++] = atoi( e ); while ( *e && *e != ',' ) e++; if ( *e == ',' ) e++; } }
++		for ( int k = 0; k < nst; k++ ) if ( st[k] == drawIdx ) {
++			const char *base = getenv( "D3GLLOG" ); char fn[1024];
++			if ( base ) {
++				idStr::snPrintf( fn, sizeof fn, "%s.state%d.txt", base, drawIdx );
++				FILE *fp = fopen( fn, "w" );
++				if ( fp ) {
++					GLfloat m[16]; GLint pb = 0, pf = 0; int q;
++					gsd_dump( fp );
++					qglGetFloatv( GL_MODELVIEW_MATRIX, m ); fprintf( fp, "MODELVIEW" ); for ( q = 0; q < 16; q++ ) fprintf( fp, " %g", m[q] ); fprintf( fp, "\n" );
++					qglGetFloatv( GL_PROJECTION_MATRIX, m ); fprintf( fp, "PROJECTION" ); for ( q = 0; q < 16; q++ ) fprintf( fp, " %g", m[q] ); fprintf( fp, "\n" );
++					fprintf( fp, "draw mode=%u count=%d type=0x%x\n", (unsigned)mode, (int)count, (unsigned)type );
++					fclose( fp );
++				}
++				if ( ind ) {
++					int es = ( type == GL_UNSIGNED_INT ) ? 4 : ( type == GL_UNSIGNED_SHORT ? 2 : 1 );
++					idStr::snPrintf( fn, sizeof fn, "%s.idx%d.bin", base, drawIdx ); FILE *fp = fopen( fn, "wb" ); if ( fp ) { fwrite( ind, es, count, fp ); fclose( fp ); }
++				}
++			}
++		}
++	}
++	if ( lf ) fflush( lf );
++	if ( onlyCount >= 0 && (int)count != onlyCount ) {
++		return;
++	}
++	if ( finishAt >= 0 && drawIdx == finishAt ) {   /* D3GL_FINISH_AT=N: glFinish() right before draw #N (GPU idle when it is submitted) */
++		r_Finish();
++	}
++	if ( keepN > 0 ) {   /* D3GL_KEEPSET="a,b-c,..." : only these draw indices (1-based) plus the wedge draw #1382 are issued */
++		int ok = ( drawIdx == 1382 );
++		for ( int k = 0; k < keepN && !ok; k++ ) if ( drawIdx >= keepLo[k] && drawIdx <= keepHi[k] ) ok = 1;
++		if ( !ok ) return;
++	}
++	if ( drawFrom >= 0 && drawIdx < drawFrom ) {   /* D3GL_DRAW_FROM=k: drop draws #1..k-1 (1-based over every glDrawElements) */
++		return;
++	}
++	if ( drawTo >= 0 && drawIdx > drawTo && drawIdx != 1382 ) {   /* D3GL_DRAW_TO=k: drop draws after #k except the wedge draw (#1382) */
++		return;
++	}
++	r_DrawElements( mode, count, type, ind );
++}
++static void w_CompressedTexImage2DARB( GLenum t, GLint l, GLenum i, GLsizei w, GLsizei h, GLint b, GLsizei sz, const GLvoid *p ) {
++	W( "CTEX2D %u %d %u %d %d %d %d %d\n", (unsigned)t, (int)l, (unsigned)i, (int)w, (int)h, (int)b, (int)sz, p ? 1 : 0 );
++	r_CompressedTexImage2DARB( t, l, i, w, h, b, sz, p );
++}
++static void w_BufferDataARB( GLenum t, GLsizeiptrARB sz, const GLvoid *p, GLenum u ) {
++	W( "BD %u %ld %u %d\n", (unsigned)t, (long)sz, (unsigned)u, p ? 1 : 0 );
++	r_BufferDataARB( t, sz, p, u );
++}
++static void w_BufferSubDataARB( GLenum t, GLintptrARB off, GLsizeiptrARB sz, const GLvoid *p ) {
++	W( "BSD %u %ld %ld\n", (unsigned)t, (long)off, (long)sz );
++	r_BufferSubDataARB( t, off, sz, p );
++}
++static void w_BindBufferARB( GLenum t, GLuint n ) {
++	W( "BB %u %u\n", (unsigned)t, (unsigned)n );
++	r_BindBufferARB( t, n );
++}
++static void w_GenBuffersARB( GLsizei n, GLuint *p ) {
++	r_GenBuffersARB( n, p );
++	W( "GENB %d", (int)n );
++	for ( int i = 0; i < n; i++ ) { W( " %u", (unsigned)p[i] ); }
++	W( "\n" );
++}
++static void w_DeleteBuffersARB( GLsizei n, const GLuint *p ) {
++	W( "DELB %d", (int)n );
++	for ( int i = 0; i < n; i++ ) { W( " %u", (unsigned)p[i] ); }
++	W( "\n" );
++	r_DeleteBuffersARB( n, p );
++}
++static void w_ActiveTextureARB( GLenum t ) {
++	W( "AT %u\n", (unsigned)t );
++	r_ActiveTextureARB( t );
++}
++static void w_ClientActiveTextureARB( GLenum t ) {
++	W( "CAT %u\n", (unsigned)t );
++	r_ClientActiveTextureARB( t );
++}
++
++#define HOOK(real, fn, wrap) do { if ( fn && fn != wrap ) { real = fn; fn = wrap; } } while (0)
++
++void GLLog214_Install( void ) {
++	const char *path = getenv( "D3GLLOG" );
++	if ( !path || !*path || installed ) {
++		return;
++	}
++	lf = fopen( path, "w" );
++	if ( !lf ) {
++		return;
++	}
++	installed = 1;
++	if ( getenv( "D3GL_ONLYCOUNT" ) ) onlyCount = atoi( getenv( "D3GL_ONLYCOUNT" ) );
++	if ( getenv( "D3GL_FINISH_AT" ) ) finishAt = atoi( getenv( "D3GL_FINISH_AT" ) );
++	if ( getenv( "D3GL_KEEPSET" ) ) {
++		const char *q = getenv( "D3GL_KEEPSET" );
++		while ( *q && keepN < 256 ) {
++			int a = (int)strtol( q, (char **)&q, 10 ), b = a;
++			if ( *q == '-' ) { q++; b = (int)strtol( q, (char **)&q, 10 ); }
++			keepLo[keepN] = a; keepHi[keepN] = b; keepN++;
++			if ( *q == ',' ) q++; else break;
++		}
++	}
++	if ( getenv( "D3GL_DRAW_FROM" ) ) drawFrom = atoi( getenv( "D3GL_DRAW_FROM" ) );
++	if ( getenv( "D3GL_DRAW_TO" ) ) drawTo = atoi( getenv( "D3GL_DRAW_TO" ) );
++	HOOK( r_TexImage2D, qglTexImage2D, w_TexImage2D );
++	HOOK( r_TexSubImage2D, qglTexSubImage2D, w_TexSubImage2D );
++	HOOK( r_CopyTexImage2D, qglCopyTexImage2D, w_CopyTexImage2D );
++	HOOK( r_CopyTexSubImage2D, qglCopyTexSubImage2D, w_CopyTexSubImage2D );
++	HOOK( r_BindTexture, qglBindTexture, w_BindTexture );
++	HOOK( r_GenTextures, qglGenTextures, w_GenTextures );
++	HOOK( r_DeleteTextures, qglDeleteTextures, w_DeleteTextures );
++	HOOK( r_TexParameteri, qglTexParameteri, w_TexParameteri );
++	HOOK( r_TexParameterf, qglTexParameterf, w_TexParameterf );
++	HOOK( r_Clear, qglClear, w_Clear );
++	HOOK( r_Finish, qglFinish, w_Finish );
++	HOOK( r_DrawElements, qglDrawElements, w_DrawElements );
++	HOOK( r_CompressedTexImage2DARB, qglCompressedTexImage2DARB, w_CompressedTexImage2DARB );
++	HOOK( r_BufferDataARB, qglBufferDataARB, w_BufferDataARB );
++	HOOK( r_BufferSubDataARB, qglBufferSubDataARB, w_BufferSubDataARB );
++	HOOK( r_BindBufferARB, qglBindBufferARB, w_BindBufferARB );
++	HOOK( r_GenBuffersARB, qglGenBuffersARB, w_GenBuffersARB );
++	HOOK( r_DeleteBuffersARB, qglDeleteBuffersARB, w_DeleteBuffersARB );
++	HOOK( r_ActiveTextureARB, qglActiveTextureARB, w_ActiveTextureARB );
++	HOOK( r_ClientActiveTextureARB, qglClientActiveTextureARB, w_ClientActiveTextureARB );
++	W( "# gllog214 installed\n" );
++	fflush( lf );
++}
++
++void GLLog214_Swap( void ) {
++	if ( lf ) {
++		W( "SWAP\n" );
++		fflush( lf );
++	}
++}
+diff --git a/neo/renderer/tr_backend.cpp b/neo/renderer/tr_backend.cpp
+index cf1c571..e75da4f 100644
+--- a/neo/renderer/tr_backend.cpp
++++ b/neo/renderer/tr_backend.cpp
+@@ -29,6 +29,7 @@ If you have questions concerning this license or the applicable additional terms
+ #include "sys/sys_imgui.h"
+ 
+ #include "renderer/tr_local.h"
++extern void GLLog214_Swap( void );
+ 
+ static idCVar r_fillWindowAlphaChan( "r_fillWindowAlphaChan", "-1", CVAR_SYSTEM | CVAR_NOCHEAT | CVAR_ARCHIVE, "Make sure alpha channel of windows default framebuffer is completely opaque at the end of each frame. Needed at least when using Wayland with older drivers.\n 1: do this, 0: don't do it, -1: let dhewm3 decide (default)" );
+ 
+@@ -607,6 +608,7 @@ const void	RB_SwapBuffers( const void *data ) {
+ 
+ 	// don't flip if drawing to front buffer
+ 	if ( !r_frontBuffer.GetBool() ) {
++		GLLog214_Swap();
+ 		GLimp_SwapBuffers();
+ 	}
+ }
+diff --git a/neo/renderer/tr_render.cpp b/neo/renderer/tr_render.cpp
+index c83ebb5..48ae92b 100644
+--- a/neo/renderer/tr_render.cpp
++++ b/neo/renderer/tr_render.cpp
+@@ -30,7 +30,24 @@ If you have questions concerning this license or the applicable additional terms
+ #include "renderer/VertexCache.h"
+ #include "renderer/Cinematic.h"
+ 
++#include <stdio.h>
++#include <stdlib.h>
+ #include "renderer/tr_local.h"
++/* #214 state dump: shared with the standalone probe (Tests/userspace/gl_state_dump.h in the kext repo) */
++#ifndef GL_TEXTURE_RECTANGLE_EXT
++#define GL_TEXTURE_RECTANGLE_EXT 0x84F5
++#endif
++static void (APIENTRY *d3t_getAttribiv)( GLuint, GLenum, GLint * ) = NULL;
++#define GSD_ISEN(c) qglIsEnabled( c )
++#define GSD_GETI(p, a) qglGetIntegerv( p, a )
++#define GSD_GETF(p, a) qglGetFloatv( p, a )
++#define GSD_GETIV_ATTRIB(i, p, out) do { if ( !d3t_getAttribiv ) d3t_getAttribiv = (void (APIENTRY *)( GLuint, GLenum, GLint * ))GLimp_ExtensionPointer( "glGetVertexAttribivARB" ); if ( d3t_getAttribiv ) d3t_getAttribiv( i, p, out ); } while ( 0 )
++#define GSD_CLIENTACTIVE(u) qglClientActiveTextureARB( GL_TEXTURE0_ARB + (u) )
++#define GSD_ACTIVETEX(u) qglActiveTextureARB( GL_TEXTURE0_ARB + (u) )
++#define GSD_TEXLEVEL(t, l, p, o) qglGetTexLevelParameteriv( t, l, p, o )
++#define GSD_TEXPARAM(t, p, o) qglGetTexParameteriv( t, p, o )
++#define GSD_TEXENV(p, o) qglGetTexEnviv( GL_TEXTURE_ENV, p, o )
++#include "renderer/gl_state_dump.h"
+ 
+ /*
+ 
+@@ -76,7 +93,77 @@ void RB_DrawElementsImmediate( const srfTriangles_t *tri ) {
+ RB_DrawElementsWithCounters
+ ================
+ */
++static void RB_DrawElementsWithCounters_real( const srfTriangles_t *tri );
++
++/* #214 trace: D3TRACE=1 logs every draw before it is issued; D3TRACE=2 also glFinish()es after each (the last
++   "D3T n" line without a matching "done" is the draw the GPU never completes). D3FINISH_EVERY=N glFinish()es after every Nth draw; D3SKIP_GE=N / D3SKIP_ONLY=N drop draws
++   (global draw counter) to bisect. */
+ void RB_DrawElementsWithCounters( const srfTriangles_t *tri ) {
++	static int stateAt = -1; static int dumpLo = -1, dumpHi = -1; static const char *dumpDir = NULL;
++	static int mode = -2, skipGE = -1, skipOnly = -1, n = 0, finishEvery = 0, finishBefore = -1, skipLo = -1, skipHi = -1, keepLo = -1, keepHi = -1;
++	if ( mode == -2 ) {
++		const char *e = getenv( "D3TRACE" );     mode = e ? atoi( e ) : 0;
++		e = getenv( "D3SKIP_GE" );               skipGE = e ? atoi( e ) : -1;
++		e = getenv( "D3SKIP_ONLY" );             skipOnly = e ? atoi( e ) : -1;
++		e = getenv( "D3FINISH_EVERY" );          finishEvery = e ? atoi( e ) : 0;
++		e = getenv( "D3SKIP_LO" );               skipLo = e ? atoi( e ) : -1;
++		e = getenv( "D3SKIP_HI" );               skipHi = e ? atoi( e ) : -1;
++		dumpDir = getenv( "D3DUMP_DIR" );
++		e = getenv( "D3STATE_AT" );              stateAt = e ? atoi( e ) : -1;
++		e = getenv( "D3DUMP_LO" );               dumpLo = e ? atoi( e ) : -1;
++		e = getenv( "D3DUMP_HI" );               dumpHi = e ? atoi( e ) : -1;
++		e = getenv( "D3FINISH_BEFORE" );         finishBefore = e ? atoi( e ) : -1;
++		e = getenv( "D3KEEP_LO" );               keepLo = e ? atoi( e ) : -1;   /* D3KEEP_LO/HI: ONLY draws in [lo,hi] are issued (everything else skipped) */
++		e = getenv( "D3KEEP_HI" );               keepHi = e ? atoi( e ) : -1;
++	}
++	int me = n++;
++	if ( dumpDir && me == stateAt ) {   /* state AT WRAPPER ENTRY (before any skip/finish) */
++		char fn[512]; idStr::snPrintf( fn, sizeof( fn ), "%s/state_%05d.txt", dumpDir, me );
++		FILE *fp = fopen( fn, "w" ); if ( fp ) { gsd_dump( fp ); fclose( fp ); }
++	}
++	if ( me == finishBefore ) {
++		qglFinish();
++	}
++	if ( ( skipGE >= 0 && me >= skipGE ) || me == skipOnly || ( skipLo >= 0 && me >= skipLo && me <= skipHi ) || ( keepLo >= 0 && ( me < keepLo || me > keepHi ) ) ) {
++		return;
++	}
++	if ( mode ) {
++		const vertCache_t *ac = tri->ambientCache;
++		fprintf( stderr, "D3T %d ra=%p idx=%d verts=%d ambient=%s vbo=%d off=%ld size=%d tag=%d state=%x\n", me,
++				 __builtin_return_address( 0 ), tri->numIndexes, tri->numVerts, ac ? "y" : "n",
++				 ac ? (int)ac->vbo : -1, ac ? (long)ac->offset : -1L, ac ? (int)ac->size : -1, ac ? (int)ac->tag : -1,
++				 (unsigned)backEnd.glState.glStateBits );
++		fflush( stderr );
++	}
++	if ( dumpDir && me >= dumpLo && me <= dumpHi && tri->verts && tri->indexes ) {
++		/* D3DUMP_DIR/dNNNNN.bin: int numIndexes, numVerts; float proj[16], modelview[16]; int viewport[4]; int depthTest, depthFunc;
++		   then numVerts*60 bytes of idDrawVert and numIndexes*4 bytes of indexes (little... host byte order = big-endian on PPC) */
++		char fn[512]; idStr::snPrintf( fn, sizeof( fn ), "%s/d%05d.bin", dumpDir, me );
++		FILE *fp = fopen( fn, "wb" );
++		if ( fp ) {
++			float pm[16], mv[16]; GLint vp[4], dt = 0, df = 0;
++			qglGetFloatv( GL_PROJECTION_MATRIX, pm ); qglGetFloatv( GL_MODELVIEW_MATRIX, mv );
++			qglGetIntegerv( GL_VIEWPORT, vp ); dt = (GLint)qglIsEnabled( GL_DEPTH_TEST ); qglGetIntegerv( GL_DEPTH_FUNC, &df );
++			int hdr[2] = { tri->numIndexes, tri->numVerts };
++			fwrite( hdr, sizeof( int ), 2, fp ); fwrite( pm, sizeof( float ), 16, fp ); fwrite( mv, sizeof( float ), 16, fp );
++			fwrite( vp, 4, 4, fp ); fwrite( &dt, 4, 1, fp ); fwrite( &df, 4, 1, fp );
++			fwrite( tri->verts, sizeof( idDrawVert ), tri->numVerts, fp );
++			fwrite( tri->indexes, sizeof( glIndex_t ), tri->numIndexes, fp );
++			fclose( fp );
++		}
++	}
++	RB_DrawElementsWithCounters_real( tri );
++	if ( finishEvery > 0 && ( me % finishEvery ) == finishEvery - 1 ) {
++		qglFinish();
++	}
++	if ( mode >= 2 ) {
++		qglFinish();
++		fprintf( stderr, "D3T %d done\n", me );
++		fflush( stderr );
++	}
++}
++
++static void RB_DrawElementsWithCounters_real( const srfTriangles_t *tri ) {
+ 
+ 	backEnd.pc.c_drawElements++;
+ 	backEnd.pc.c_drawIndexes += tri->numIndexes;
