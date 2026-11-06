@@ -3612,7 +3612,10 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
   }
   intToDoubleHi3 = 0x43300000;
   textBufferPtr = textBuffer;
-  ((char * (*)())vsdisFormatFloat)(disassembler,10,textBufferPtr);
+  ((char * (*)())vsdisFormatFloat)(disassembler,10,textBufferPtr,
+               (double)((float)(DOUBLE_001aa200 /
+                               ((double)CONCAT44(0x43300000,fractionScale) - DOUBLE_001aa250)) *
+                        (float)((double)CONCAT44(0x43300000,fractionField) - DOUBLE_001aa250) + integerPart));
   ((int (*)())ildisAppendf)(disassembler,textBuffer,textBufferPtr,fractionBits,staleArgR7,staleArgR8,fractionBitsWord,staleArgR10);
   return;
 }

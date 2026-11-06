@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """patch_sites.py - issue #71 criterion 3: run patch_sites_test on the stock and the rebuilt libGLProgrammability / GLDriver (on the G5, over ssh) and diff the outputs.
   patch_sites.py NM_STOCK_GLPROG NM_REB_GLPROG NM_STOCK_GLD NM_REB_GLD REB_GLPROG REB_GLD   (nm files are local; the test binary must exist in $G/tests on the G5)"""
-import sys, re, subprocess
+import sys, re, subprocess, os, glob
 G = '/Volumes/Test HD/claude_bugwf'
+TESTDIR = os.environ.get('PATCH_SITES_TEST_DIR', G + '/tests')     # directory holding the built patch_sites_test on the G5 (the staged tree: ~/rung3/src_<sha>/Tests/userspace)
 SYS = '/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib'
 GLD = '/System/Library/Extensions/ATIRadeonX1000GLDriver.bundle/Contents/MacOS/ATIRadeonX1000GLDriver'
 def nm(p):
@@ -11,19 +12,37 @@ def nm(p):
         m = re.match(r'([0-9a-f]{8}) \w (\S+)', l)
         if m: d.setdefault(m.group(2), int(m.group(1), 16))
     return d
-def keys(n, anchor, table):
+def keys(n, anchor, table, mapper=None):
     out = []
     for k, cands in table.items():
-        a = next((n[c] for c in cands if c in n), None)
+        a = next((n[c] for c in ([mapper(x) for x in cands] if mapper else cands) if c in n), None)
         if a is not None: out.append('%s=%d' % (k, a - n[anchor]))
         else: print('missing', k, cands)
     return out
+# the stock-era table above names GLDriver objects FUN_<addr> / PTR_DAT_<addr>; the renamed corpus carries real names (the rebuilt image's symbols), found by stock address
+_REPO = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+_CORPUS = os.path.join(_REPO, 'Userspace', 'ATIRadeonX1000GLDriver', 'ppc')
+_BYADDR = {}
+for _l in open(os.path.join(_CORPUS, 'ledger.tsv')):
+    _f = _l.rstrip('\n').split('\t')
+    if len(_f) >= 3: _BYADDR[int(_f[0], 16)] = _f[2]
+_DATA = {}
+for _fn in glob.glob(os.path.join(_CORPUS, 'names*.tsv')):
+    for _l in open(_fn):
+        _f = _l.rstrip('\n').split('\t')
+        if _f[0] == 'data' and len(_f) >= 3: _DATA[_f[1]] = _f[2]
+def cur(name):
+    m = re.match(r'FUN_([0-9a-f]+)$', name)
+    if m: return _BYADDR.get(int(m.group(1), 16), name)
+    while name in _DATA: name = _DATA[name]
+    return name
+
 GP = {'yfa': ['__Z13yy_flex_allocj'], 'yfr': ['__Z15yy_flex_reallocPvj'], 'yff': ['__Z12yy_flex_freePv'], 'ung': ['_str_ungetch'], 'unl': ['_unlinkScope'], 'cppv': ['_cpp'], 'scopev': ['_ScopeList'],
       'dcba': ['_glpDCBAlloc'], 'dcbr': ['_glpDCBRealloc'], 'dcbf': ['_glpDCBFree'], 'trav': ['__ZN13TIntermSymbol8traverseEP16TIntermTraverser']}
 GD = {'permslot': ['PTR_DAT_001e88cc'], 'avswap': ['FUN_0001e8a0'], 'avcopy': ['FUN_0001eaf0'], 'cmdemit': ['FUN_0002cd50'], 'cflush': ['FUN_0000b620'], 'cflush2': ['FUN_0000b670'], 'cal': ['FUN_000a6f70'], 'cos': ['FUN_001d05b0'], 'sin': ['FUN_001d0794'], 'rsq': ['FUN_001d06ec']}
 sp, rp, sd, rd, rgp, rgd = sys.argv[1:7]
 def run(image, anchor, ks):
-    r = subprocess.run(['ssh', 'G5', 'cd "%s/tests" && ./patch_sites_test "%s" %s %s 2>&1' % (G, image, anchor, ' '.join(ks))], capture_output=True, text=True); return r.stdout
+    r = subprocess.run(['ssh', 'G5', 'cd "%s" && ./patch_sites_test "%s" %s %s 2>&1' % (TESTDIR, image, anchor, ' '.join(ks))], capture_output=True, text=True); return r.stdout
 res = {}
 nsp, nrp, nsd, nrd = nm(sp), nm(rp), nm(sd), nm(rd)
 # stock nm lacks some local symbols: the stock addresses are taken from the ledger names known from the corpus
@@ -31,7 +50,7 @@ for k, v in {'_str_ungetch': 0x97b88a8c, '_unlinkScope': 0x97b89f00, '__ZN13TInt
 for k, v in {'PTR_DAT_001e88cc': 0x1e88cc, 'FUN_0001e8a0': 0x1e8a0, 'FUN_0001eaf0': 0x1eaf0, 'FUN_0002cd50': 0x2cd50, 'FUN_0000b620': 0xb620, 'FUN_0000b670': 0xb670, 'FUN_000a6f70': 0xa6f70, 'FUN_001d05b0': 0x1d05b0, 'FUN_001d0794': 0x1d0794, 'FUN_001d06ec': 0x1d06ec}.items(): nsd.setdefault(k, v)
 out = {}
 out['glprog stock'] = run(SYS, 'glpDCBAlloc', keys(nsp, '_glpDCBAlloc', GP)); out['glprog rebuilt'] = run(rgp, 'glpDCBAlloc', keys(nrp, '_glpDCBAlloc', GP))
-out['gld stock'] = run(GLD, 'gldGetString', keys(nsd, '_gldGetString', GD)); out['gld rebuilt'] = run(rgd, 'gldGetString', keys(nrd, '_gldGetString', GD))
+out['gld stock'] = run(GLD, 'gldGetString', keys(nsd, '_gldGetString', GD)); out['gld rebuilt'] = run(rgd, 'gldGetString', keys(nrd, '_gldGetString', GD, cur))
 bad = 0
 for k in ('glprog', 'gld'):
     a, b = out[k + ' stock'], out[k + ' rebuilt']

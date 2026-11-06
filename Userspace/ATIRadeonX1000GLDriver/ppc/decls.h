@@ -1322,7 +1322,7 @@ extern int scDumpShaderImpl();
 extern int scDumpShaderToStringImpl();
 extern int noop_cdc20();
 extern int scShaderStateFlag();
-extern char * vsdisFormatFloat(undefined4 param_1,int param_2,char *param_3);
+extern char * vsdisFormatFloat(undefined4 param_1,int param_2,char *param_3,double fparam_1);
 extern int vsdisClearSinkRecord();
 extern int vsdisClearSinkRecord2();
 extern int scDisasmPrintf();

@@ -4509,10 +4509,10 @@ callScLogToSink:
     do {
       constIndex = nextConstIndex;
       constEntryOffset = constIndex * 0x10;
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0);
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1);
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2);
-      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0,(double)*(float *)(shaderState[0xc] + constEntryOffset));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1,(double)*(float *)(shaderState[0xc] + constEntryOffset + 4));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2,(double)*(float *)(shaderState[0xc] + constEntryOffset + 8));
+      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3,(double)*(float *)(shaderState[0xc] + constEntryOffset + 0xc));
       argR7Text = componentText0;
       nextConstIndex = constIndex + 1;
       argR8Text = componentText1;
@@ -4529,10 +4529,10 @@ callScLogToSink:
     do {
       constIndex = nextConstIndex;
       constEntryOffset = constIndex * 0x10;
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0);
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1);
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2);
-      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0,(double)*(float *)(shaderState[0xd] + constEntryOffset));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1,(double)*(float *)(shaderState[0xd] + constEntryOffset + 4));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2,(double)*(float *)(shaderState[0xd] + constEntryOffset + 8));
+      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3,(double)*(float *)(shaderState[0xd] + constEntryOffset + 0xc));
       argR7Text = componentText0;
       nextConstIndex = constIndex + 1;
       argR8Text = componentText1;
@@ -4548,10 +4548,10 @@ callScLogToSink:
     constIndex = 0;
     do {
       constEntryOffset = constIndex * 0x10;
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0);
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1);
-      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2);
-      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3);
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText0,(double)*(float *)(shaderState[0xe] + constEntryOffset));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText1,(double)*(float *)(shaderState[0xe] + constEntryOffset + 4));
+      floatTextResult = ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText2,(double)*(float *)(shaderState[0xe] + constEntryOffset + 8));
+      ((char * (*)())vsdisFormatFloat)(floatTextResult,10,componentText3,(double)*(float *)(shaderState[0xe] + constEntryOffset + 0xc));
       argR7Text = componentText0;
       nextConstIndex = constIndex + 1;
       argR8Text = componentText1;
@@ -4645,9 +4645,8 @@ int scShaderStateFlag(shaderState)
 }
 
 /* vsdisFormatFloat @ 0xcdc3c (996 bytes) */
-char * vsdisFormatFloat(undefined4 unusedArg,int significantDigits,char *outText)
+char * vsdisFormatFloat(undefined4 unusedArg,int significantDigits,char *outText,double value)
 {
-  double value = 0.0;
   char *exponentCursor;
   uint trimmedEnd;
   uint digitIndex;
