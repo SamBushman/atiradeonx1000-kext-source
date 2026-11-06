@@ -1978,7 +1978,7 @@ int Inst__tryComposeSelectWithProducer_00149de4(inst, operandIndex8, inst2, comp
   uint componentByte;
   int operandIndex4;
   int *target;
-  double scaleConstant;
+  float scaleConstant;
   undefined4 composedSelect;
   undefined4 selectScratch [3];
   undefined4 composeOut [5];
@@ -2205,12 +2205,12 @@ int Inst__tryComposeSelectWithProducer_00149de4(inst, operandIndex8, inst2, comp
                       if (selectByteC != '\x04') {
                         sourceDef3 = IRInst__getOperandSource(operandVReg,operandIndex2);
                         operandIndex4 = chainProducerCopy[0x21];
-                        scaleConstant = (double)*(float *)(constByteOffset + sourceDef3 + 0x20);
+                        scaleConstant = *(float *)(constByteOffset + sourceDef3 + 0x20);
                         if (1 < operandIndex4) {
                           operandIndex = 2;
                           do {
                             sourceDef5 = IRInst__getOperandSource(chainProducerCopy,operandIndex);
-                            if (scaleConstant == (double)*(float *)(byteOffsetP + sourceDef5 + 0x20)) {
+                            if (scaleConstant == *(float *)(byteOffsetP + sourceDef5 + 0x20)) {
                               (**(code **)(*chainProducerCopy + 0x88))(chainProducerCopy,operandIndex,loopIndex,selectByteC);
                               goto setOperandIndex2;
                             }
@@ -5867,7 +5867,7 @@ int Inst__collapseAddOfScaledMov(inst, program)
   undefined4 destRegisterOffset;
   undefined4 movSelect;
   int otherIndex;
-  double scaleFactor;
+  float scaleFactor;
   undefined4 destSelectWord;
   undefined4 scaleSelect;
   undefined4 scaleDestSelect;
@@ -5893,11 +5893,11 @@ int Inst__collapseAddOfScaledMov(inst, program)
       a0 = (int *)IRInst__getOperandSource(inst,srcIndex);
       isMov = (**(code **)(*a0 + 100))(a0);
       if (((isMov != 0) && (a0[0x48] == 0)) && (((a0[5] & 0x200U) == 0 && (a0[0x49] != 0)))) {
-        scaleFactor = (double)((double (*)())outputScaleFromExponent)(a0[0x49]);
-        scaleLane[3] = (float)scaleFactor;
-        scaleLane[0] = (float)scaleFactor;
-        scaleLane[1] = (float)scaleFactor;
-        scaleLane[2] = (float)scaleFactor;
+        scaleFactor = ((float (*)())outputScaleFromExponent)(a0[0x49]);
+        scaleLane[3] = scaleFactor;
+        scaleLane[0] = scaleFactor;
+        scaleLane[1] = scaleFactor;
+        scaleLane[2] = scaleFactor;
         operandRecord2 = IRInst__getOperandRecord(inst,0);
         destSelectWord = *(undefined4 *)(operandRecord2 + 0x10);
         operandRecord2 = IRInst__getOperandRecord(inst,0);

@@ -8143,8 +8143,8 @@ callFree:
 /* glBitmap_impl @ 0x16670 (2312 bytes) */
 void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleArgR7,undefined4 staleArgR8,int bitmap,int tightlyPacked)
 {
-  double xOrigin = 0.0;
-  double yOrigin = 0.0;
+  float xOrigin = 0.0;
+  float yOrigin = 0.0;
   uint lsbBit;
   int rowBytesLeft;
   int trailerOffset;
@@ -8154,8 +8154,8 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
   int rowLength;
   int zoomY;
   float invertedRowStep;
-  double startY;
-  double startX;
+  float startY;
+  float startX;
   int writeCursor;
   int engineState;
   bool rowHasBytes;
@@ -8190,7 +8190,7 @@ void glBitmap_impl(int ctx,float *vertex,int width,int height,undefined4 staleAr
   uint msbBit;
   uint lsbBitStart;
   float *vertexCursor;
-  double fogFactor;
+  float fogFactor;
   double oneMinusFogFactor;
   int columns;
   int rows;

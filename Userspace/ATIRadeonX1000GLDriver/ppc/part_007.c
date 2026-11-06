@@ -1282,7 +1282,7 @@ int gldSetUnitScaleConstants(glContext, programEntry, unusedArg3, firstUnit, uni
 double gldValidateTextureUnits(int glContext,undefined4 unusedArg2,uint unitIndexArg,undefined4 unitFormatArg)
 {
   double fprF1 = 0.0;
-  double fprF2 = 0.0;
+  float fprF2 = 0.0;
   double fprF3 = 0.0;
   double fprF4 = 0.0;
   double fprF5 = 0.0;
@@ -1534,8 +1534,8 @@ loopSetLodBiasFromProgram:
             texFilterWord = texFilterWord & 0xffffe007;
           }
           else {
-            fprF2 = (double)*(float *)(texObj + 0x4c);
-            if (fprF2 == (double)FLOAT_001aa0d4) {
+            fprF2 = *(float *)(texObj + 0x4c);
+            if (fprF2 == FLOAT_001aa0d4) {
               texFilterWord = (*(ushort *)(unitInfoCursor + 0x46e) & 0x3ff) << 3 | texFilterWord & 0xffffe007;
             }
             else {

@@ -1489,7 +1489,7 @@ int IRInst__setIntConstantOperand4(inst, program, operandIndex, value0, value1, 
 #define FBITS(x) ({ float fbits_ = (float)(x); *(unsigned int *)&fbits_; })
 #endif
 /* IRInst__makeLiteralVec4Float @ 0xf79c4 (332 bytes) */
-void IRInst__makeLiteralVec4Float(undefined4 inst,undefined4 program,undefined4 operandIndex,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4)
+void IRInst__makeLiteralVec4Float(undefined4 inst,undefined4 program,undefined4 operandIndex,float staleFprArg1,float staleFprArg2,float staleFprArg3,float staleFprArg4)
 {
   undefined4 operand0Word2;
   undefined4 operand0Word3;
@@ -2168,7 +2168,7 @@ int remapSelectSmall(selectValue)
 }
 
 /* IRInst__literalForLane @ 0xf8a30 (112 bytes) */
-double IRInst__literalForLane(int sourceSelect,int lane,int literalMask,int selectBytes)
+float IRInst__literalForLane(int sourceSelect,int lane,int literalMask,int selectBytes)
 {
   undefined *selectRemapTable;
   double literalValue;
@@ -3832,10 +3832,10 @@ int Program__translateILInstruction(program, list, tokenWords, descriptor, evalS
   code *hwVirtualSlot88;
   uint *movTableVector;
   int newTempIndexB;
-  double staleFprArg1;
-  double staleFprArg2;
-  double staleFprArg3;
-  double staleFprArg4;
+  float staleFprArg1;
+  float staleFprArg2;
+  float staleFprArg3;
+  float staleFprArg4;
   undefined8 movTableElementRefA;
   undefined4 sourceToken;
   dword sourceTokenWords [3];
@@ -4492,10 +4492,10 @@ callDList_pushBack:
     *(undefined4 *)(operandRecord2 + 0xc) = registerFile4;
     *(dword **)(operandRecord2 + 8) = resultRegisterNumber;
     sourceTokenWords[0] = 0x10203;
-    staleFprArg1 = (double)((double (*)())IRInst__literalForLane)(packedLaneSource0,0,&sourceToken,scratchSourcePtrOrZero);
-    staleFprArg2 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult,1,&sourceToken,scratchSourcePtrOrZero);
-    staleFprArg3 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult2,2,&sourceToken,scratchSourcePtrOrZero);
-    staleFprArg4 = (double)((double (*)())IRInst__literalForLane)(psnPackedLaneSourceResult3,3,&sourceToken,scratchSourcePtrOrZero);
+    staleFprArg1 = ((float (*)())IRInst__literalForLane)(packedLaneSource0,0,&sourceToken,scratchSourcePtrOrZero);
+    staleFprArg2 = ((float (*)())IRInst__literalForLane)(psnPackedLaneSourceResult,1,&sourceToken,scratchSourcePtrOrZero);
+    staleFprArg3 = ((float (*)())IRInst__literalForLane)(psnPackedLaneSourceResult2,2,&sourceToken,scratchSourcePtrOrZero);
+    staleFprArg4 = ((float (*)())IRInst__literalForLane)(psnPackedLaneSourceResult3,3,&sourceToken,scratchSourcePtrOrZero);
     laneLiteralSelectWord = sourceTokenWords[0];
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword *)(operandRecord2 + 0x10) = laneLiteralSelectWord;

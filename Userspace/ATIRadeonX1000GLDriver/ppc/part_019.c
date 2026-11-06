@@ -2243,7 +2243,7 @@ int BitSet256__findNthSetBit(unusedArg1, bitWords, nthSetBit)
 }
 
 /* scStoreConstantComponent @ 0xd9bac (228 bytes) */
-undefined4 scStoreConstantComponent(undefined4 unusedArg1,int constRegister,undefined4 unusedArg3,int lane,int constBlock,int useLiteralTable,double laneValue)
+undefined4 scStoreConstantComponent(undefined4 unusedArg1,int constRegister,undefined4 unusedArg3,int lane,int constBlock,int useLiteralTable,float laneValue)
 {
   int nextEntryOffset;
   uint entryCount;
@@ -2280,7 +2280,7 @@ loopCheckConstBlock:
         } while (*entryCursor != constRegister);
       }
       *(int *)(entryOffset + (int)tableBase) = constRegister;
-      *(float *)((int)tableBase + lane * 4 + entryOffset + 4) = (float)laneValue;
+      *(float *)((int)tableBase + lane * 4 + entryOffset + 4) = laneValue;
       return 1;
     }
   }
@@ -2290,7 +2290,7 @@ loopCheckConstBlock:
       *(uint *)(constBlock + 0x54) = entryCount + 1;
       entryOffset = entryCount * 0x24 + *(int *)(constBlock + 0x60);
       *(int *)(entryCount * 0x24 + *(int *)(constBlock + 0x60)) = constRegister;
-      *(float *)(entryOffset + 0x14) = (float)laneValue;
+      *(float *)(entryOffset + 0x14) = laneValue;
       *(int *)(entryOffset + 4) = lane;
       *(undefined4 *)(entryOffset + 8) = 1;
       return 1;

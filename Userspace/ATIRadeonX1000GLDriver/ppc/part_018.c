@@ -974,15 +974,15 @@ int ilPushDclRecord(listHeadPtr, record)
 }
 
 /* ilStoreFloat4Constant @ 0xc8e30 (28 bytes) */
-void ilStoreFloat4Constant(int programRecord,int constantIndex,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
+void ilStoreFloat4Constant(int programRecord,int constantIndex,float fpPassThrough1,float fpPassThrough2,float fpPassThrough3,float fpPassThrough4)
 {
   int constantSlot;
   
   constantSlot = constantIndex * 0x10 + programRecord;
-  *(float *)(constantSlot + 0x98) = (float)fpPassThrough4;
-  *(float *)(constantSlot + 0x8c) = (float)fpPassThrough1;
-  *(float *)(constantSlot + 0x90) = (float)fpPassThrough2;
-  *(float *)(constantSlot + 0x94) = (float)fpPassThrough3;
+  *(float *)(constantSlot + 0x98) = fpPassThrough4;
+  *(float *)(constantSlot + 0x8c) = fpPassThrough1;
+  *(float *)(constantSlot + 0x90) = fpPassThrough2;
+  *(float *)(constantSlot + 0x94) = fpPassThrough3;
   return;
 }
 

@@ -303,7 +303,7 @@ int ValueKey__sourcesEqualOnWrittenLanes(ctx, sourceA, sourceB)
 }
 
 /* ValueKey__sourceIsSplatOfConstant @ 0x17740c (156 bytes) */
-undefined4 ValueKey__sourceIsSplatOfConstant(int ctx,int sourceIndex,double constantValue)
+undefined4 ValueKey__sourceIsSplatOfConstant(int ctx,int sourceIndex,float constantValue)
 {
   bool lastLane;
   int exprRecord;
@@ -312,7 +312,7 @@ undefined4 ValueKey__sourceIsSplatOfConstant(int ctx,int sourceIndex,double cons
   int loopIndex;
   
   loopPtr2 = (int *)(sourceIndex * 0x10 + ctx + 0x168);
-  exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),GH_F2U((float)constantValue));
+  exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),GH_F2U(constantValue));
   loopIndex = 0;
   while ((operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0),
          *(char *)(loopIndex + operandRecord + 0x10) == '\x01' || (*loopPtr2 == *(int *)(exprRecord + 4)))) {
@@ -501,7 +501,7 @@ int ValueKey__createLaneRecordsForScaledOutput(ctx)
   undefined4 firstLaneRecord;
   int laneWordPtr;
   int loopIndex;
-  double outputScale;
+  float outputScale;
   
   inst = *(int *)(ctx + 0xb0);
   if ((((*(int *)(inst + 0x120) == 0) && ((*(uint *)(inst + 0xb8) & 1) == 0)) &&
@@ -522,8 +522,8 @@ int ValueKey__createLaneRecordsForScaledOutput(ctx)
         *(undefined4 *)(*(int *)(laneWordPtr + 0x40) + 0x14) = 1;
         *(undefined4 *)(*(int *)(laneWordPtr + 0x40) + 0x18) = *(undefined4 *)(laneWordPtr + 0x178);
         laneRecord = *(int *)(laneWordPtr + 0x40);
-        outputScale = (double)((double (*)())outputScaleFromExponent)(*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x124));
-        *(float *)(laneRecord + 0x1c) = (float)outputScale;
+        outputScale = ((float (*)())outputScaleFromExponent)(*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x124));
+        *(float *)(laneRecord + 0x1c) = outputScale;
       }
       lastLane = loopIndex == 3;
       laneWordPtr = laneWordPtr + 4;

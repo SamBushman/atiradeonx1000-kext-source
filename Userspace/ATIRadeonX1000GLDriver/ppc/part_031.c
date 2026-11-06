@@ -1,12 +1,12 @@
 #include "decls.h"
 
 /* IRInst__createWithConstantOperands @ 0x10bed0 (320 bytes) */
-int IRInst__createWithConstantOperands(int operandCount,undefined4 destSelect,undefined4 newSource,int program,undefined4 compiler,double value)
+int IRInst__createWithConstantOperands(int operandCount,undefined4 destSelect,undefined4 newSource,int program,undefined4 compiler,float value)
 {
   undefined4 defaultSelect;
   int newInst;
   int operandRecord;
-  double thirdConstant;
+  float thirdConstant;
   
   *(int *)(program + 0x228) = *(int *)(program + 0x228) + 1;
   newInst = IRLoadConst__vslot73(0xa2,compiler);
@@ -22,9 +22,9 @@ int IRInst__createWithConstantOperands(int operandCount,undefined4 destSelect,un
   operandRecord = IRInst__getOperandRecord(newInst,2);
   *(undefined4 *)(operandRecord + 0x10) = defaultSelect;
   if (operandCount == 3) {
-    thirdConstant = (double)FLOAT_001aa0d4;
+    thirdConstant = FLOAT_001aa0d4;
     if (value == thirdConstant) {
-      thirdConstant = (double)FLOAT_001aa0e8;
+      thirdConstant = FLOAT_001aa0e8;
     }
     ((void (*)())IRInst__makeLiteralVec4Float)(newInst,program,3,thirdConstant,thirdConstant,thirdConstant,thirdConstant);
     defaultSelect = swizzleAllUnused_001af9fc;
@@ -287,7 +287,7 @@ int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
   int *inst2;
   int pass;
 {
-  double constantValueB;
+  float constantValueB;
   uint savedLaneSelectByte;
   uint candidateLaneByteB;
   bool moreLanesB;
@@ -328,7 +328,7 @@ int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
   int inputBase;
   uint candidateLaneByte;
   uint laneSelectByte;
-  double constantValueA;
+  float constantValueA;
   undefined8 findResult;
   undefined4 swizzleWord;
   int foundSlotOut [6];
@@ -396,7 +396,7 @@ int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
               candidateLaneByte = (uint)*(byte *)(laneSelectByte + operandRecord5 + 0x10);
               if (candidateLaneByte != 4) {
                 sourceDef2 = IRInst__getOperandSource(inst,sourceOperandNumber);
-                constantValueA = (double)*(float *)(candidateLaneByte * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
+                constantValueA = *(float *)(candidateLaneByte * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
                 findResult = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueA);
                 foundSlotA = foundSlotOut[0];
                 foundOperandNumberA = (int)((ulonglong)findResult >> 0x20);
@@ -462,7 +462,7 @@ int IRInst__foldConstantSourcesIntoClone(inst, inst2, pass)
           candidateLaneByteB = (uint)*(byte *)(savedLaneSelectByte + operandRecord5 + 0x10);
           if (candidateLaneByteB != 4) {
             sourceDef2 = IRInst__getOperandSource(inst,loopIndex2);
-            constantValueB = (double)*(float *)(candidateLaneByteB * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
+            constantValueB = *(float *)(candidateLaneByteB * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
             findResult = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,foundSlotOut,constantValueB);
             foundSlotB = foundSlotOut[0];
             foundOperandNumberB = (int)((ulonglong)findResult >> 0x20);
@@ -527,7 +527,7 @@ int IRInst__foldCompareResultIntoCopy(inst, pass)
   uint laneSelector;
   int *copyInst;
   int operandNumber;
-  double foldedCompareValue;
+  float foldedCompareValue;
   undefined8 constantSearchResult;
   int destMaskWord;
   undefined4 sourceDestMaskWord;
@@ -627,7 +627,7 @@ setCopyListCursor:
       for (operandNumberB = 1; operandCountLimit = (**(code **)(*operandVReg + 0x14))(operandVReg), operandNumberB <= operandCountLimit;
           operandNumberB = operandNumberB + 1) {
         IRInst__foldCompareConstResult(foldedCompareResult,operandVReg,operandNumberB,fallbackSourceValue,pass);
-        foldedCompareValue = (double)foldedCompareResult[0];
+        foldedCompareValue = foldedCompareResult[0];
         copyInstFromList = (int *)*copyListCursor;
         constantSearchResult = ((int (*)())IRInst__findConstantOperandWithValue)(copyInstFromList,staleArg4,foundOperandSlots,foldedCompareValue);
         operandCountLimit = foundOperandSlots[0];

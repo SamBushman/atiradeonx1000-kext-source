@@ -3164,7 +3164,7 @@ int gldUploadClipPlanes(ctx)
 }
 
 /* gldLodBiasToFixed @ 0x86930 (204 bytes) */
-int gldLodBiasToFixed(int ctx,double texUnitLodBias,double extraBias)
+int gldLodBiasToFixed(int ctx,float texUnitLodBias,float extraBias)
 {
   float biasSum;
   float fixedResult;
@@ -5013,7 +5013,7 @@ int arbParseOptionalSign(parser)
 }
 
 /* arbParseFloatConstant @ 0x897b0 (164 bytes) */
-double arbParseFloatConstant(int parser)
+float arbParseFloatConstant(int parser)
 {
   uint sign;
   double value;

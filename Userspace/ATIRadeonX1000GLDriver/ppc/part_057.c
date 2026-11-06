@@ -202,20 +202,20 @@ int IrLogInternal__fold(this, result, operands)
   float *result;
   int operands;
 {
-  double absOperandOrLn;
-  double lnTwo;
+  float absOperandOrLn;
+  float lnTwo;
   
   if (*(float *)(operands + 4) == FLOAT_001aa0e8) {
     *result = 0.0;
   }
   if (*(int *)(operands + 4) != 0) {
-    absOperandOrLn = (double)*(float *)(operands + 4);
-    if (absOperandOrLn < (double)FLOAT_001aa0d4) {
+    absOperandOrLn = *(float *)(operands + 4);
+    if (absOperandOrLn < FLOAT_001aa0d4) {
       absOperandOrLn = -absOperandOrLn;
     }
-    absOperandOrLn = (double)_logf(absOperandOrLn);
-    lnTwo = (double)_log(DOUBLE_001aa2a0);
-    *result = (float)(absOperandOrLn * (double)(float)(DOUBLE_001aa200 / lnTwo));
+    absOperandOrLn = _logf(absOperandOrLn);
+    lnTwo = _log(DOUBLE_001aa2a0);
+    *result = (absOperandOrLn * (DOUBLE_001aa200 / lnTwo));
   }
   return 1;
 }
@@ -341,10 +341,10 @@ int IrMulAddFloat__fold(this, result, operands)
   float *result;
   int operands;
 {
-  double product;
+  float product;
   
-  product = (double)((double (*)())mulFloatZeroAnnihilates)((double)*(float *)(operands + 4),(double)*(float *)(operands + 8));
-  *result = (float)(product + (double)*(float *)(operands + 0xc));
+  product = mulFloatZeroAnnihilates(*(float *)(operands + 4),*(float *)(operands + 8));
+  *result = (product + *(float *)(operands + 0xc));
   return 1;
 }
 
@@ -383,14 +383,14 @@ int IrDot3__foldVector(this, result, srcA, srcB)
   float *srcA;
   float *srcB;
 {
-  double productX;
-  double productY;
-  double productZ;
+  float productX;
+  float productY;
+  float productZ;
   
-  productX = (double)((double (*)())mulFloatZeroAnnihilates)((double)*srcA,(double)*srcB);
-  productY = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[1],(double)srcB[1]);
-  productZ = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[2],(double)srcB[2]);
-  *result = (float)((double)(float)(productX + productY) + productZ);
+  productX = mulFloatZeroAnnihilates(*srcA,*srcB);
+  productY = mulFloatZeroAnnihilates(srcA[1],srcB[1]);
+  productZ = mulFloatZeroAnnihilates(srcA[2],srcB[2]);
+  *result = ((productX + productY) + productZ);
   return;
 }
 
@@ -401,16 +401,16 @@ int IrDot4__foldVector(this, result, srcA, srcB)
   float *srcA;
   float *srcB;
 {
-  double productX;
-  double productY;
-  double productZ;
-  double productW;
+  float productX;
+  float productY;
+  float productZ;
+  float productW;
   
-  productX = (double)((double (*)())mulFloatZeroAnnihilates)((double)*srcA,(double)*srcB);
-  productY = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[1],(double)srcB[1]);
-  productZ = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[2],(double)srcB[2]);
-  productW = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[3],(double)srcB[3]);
-  *result = (float)((double)(float)((double)(float)(productX + productY) + productZ) + productW);
+  productX = mulFloatZeroAnnihilates(*srcA,*srcB);
+  productY = mulFloatZeroAnnihilates(srcA[1],srcB[1]);
+  productZ = mulFloatZeroAnnihilates(srcA[2],srcB[2]);
+  productW = mulFloatZeroAnnihilates(srcA[3],srcB[3]);
+  *result = (((productX + productY) + productZ) + productW);
   return;
 }
 
@@ -422,12 +422,12 @@ int IrDot2Add__foldVector(this, result, srcA, srcB, addOperand)
   float *srcB;
   int addOperand;
 {
-  double productX;
-  double productY;
+  float productX;
+  float productY;
   
-  productX = (double)((double (*)())mulFloatZeroAnnihilates)((double)*srcA,(double)*srcB);
-  productY = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[1],(double)srcB[1]);
-  *result = (float)(productX + productY) + *(float *)(addOperand + 8);
+  productX = mulFloatZeroAnnihilates(*srcA,*srcB);
+  productY = mulFloatZeroAnnihilates(srcA[1],srcB[1]);
+  *result = (productX + productY) + *(float *)(addOperand + 8);
   return;
 }
 

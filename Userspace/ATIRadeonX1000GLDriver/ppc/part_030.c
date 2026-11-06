@@ -632,7 +632,7 @@ int IREndCallRoutine__ctor_10aa7c(this, compiler)
 }
 
 /* outputScaleFromExponent @ 0x10aad4 (40 bytes) */
-double outputScaleFromExponent(int exponent)
+float outputScaleFromExponent(int exponent)
 {
   return (double)*(float *)(&outputScaleByExponent_001af9ec + exponent * 4);
 }
@@ -823,10 +823,10 @@ int IRInst__scaleByOutputScale(outValue, inst, valueBits)
   unsigned int valueBits;
 {
   float value = GH_U2F(valueBits);
-  double outputScale;
+  float outputScale;
   
-  outputScale = (double)((double (*)())outputScaleFromExponent)(*(undefined4 *)(inst + 0x124));
-  *outValue = (float)(outputScale * (double)value);
+  outputScale = ((float (*)())outputScaleFromExponent)(*(undefined4 *)(inst + 0x124));
+  *outValue = (outputScale * value);
   return outValue;
 }
 
@@ -997,7 +997,7 @@ int IRInst__applyAbsModifier(outValue, inst, operandIndex, valueBits)
 }
 
 /* IRInst__createCompareConstInst @ 0x10b32c (100 bytes) */
-int IRInst__createCompareConstInst(undefined4 compareKind,undefined4 operandWord2,undefined4 operandWord3,undefined4 unusedArg4,int compiler,double value)
+int IRInst__createCompareConstInst(undefined4 compareKind,undefined4 operandWord2,undefined4 operandWord3,undefined4 unusedArg4,int compiler,float value)
 {
   undefined4 defaultSelect;
   undefined4 literalLaneCount;
@@ -1190,16 +1190,16 @@ int IRInst__foldCompareConstResult(outValue, inst, operandSlot, valueBits, compi
   float value = GH_U2F(valueBits);
   uint instFlags;
   float selectedValue;
-  double foldedValue;
+  float foldedValue;
   
-  foldedValue = (double)value;
+  foldedValue = value;
   (**(code **)(**(int **)(compiler + 0x30c) + 0xf0))(foldedValue,*(int **)(compiler + 0x30c));
   switch(*(undefined4 *)(*(int *)(inst + 0x88) + 8)) {
   case 0x12:
     break;
   case 0x13:
     if (operandSlot != 1) {
-      foldedValue = (double)FLOAT_001aa0e8;
+      foldedValue = FLOAT_001aa0e8;
     }
     goto storeOutValue2;
   case 0x14:
@@ -1242,9 +1242,9 @@ joined_r0x0010bad0:
 joined_r0x0010baa4:
     if ((instFlags & 1) != 0) goto storeOutValue2;
   }
-  foldedValue = (double)FLOAT_001aa0d4;
+  foldedValue = FLOAT_001aa0d4;
 storeOutValue2:
-  *outValue = (float)foldedValue;
+  *outValue = foldedValue;
   return outValue;
 }
 
@@ -1343,7 +1343,7 @@ int IRInst__retargetOpcodeFromOperands(inst, compiler)
 }
 
 /* IRInst__setLiteralOperandAndSource @ 0x10bd50 (332 bytes) */
-void IRInst__setLiteralOperandAndSource(int inst,undefined4 unusedArg2,int operandIndex,int compiler,double value)
+void IRInst__setLiteralOperandAndSource(int inst,undefined4 unusedArg2,int operandIndex,int compiler,float value)
 {
   int operandRecord;
   int *elementRef;

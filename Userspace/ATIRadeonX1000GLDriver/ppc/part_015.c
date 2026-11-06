@@ -1311,13 +1311,13 @@ uint gld_quantizePointSizeInt(int glContext,double fpPassThrough1)
   uint quantizedSize;
   
   quantizedSize = *(uint *)(((unsigned char *)0x000013e0) + glContext);
-  if ((double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e0) + glContext) ^ 0x80000000) -
+  if ((float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e0) + glContext) ^ 0x80000000) -
                      DOUBLE_001aa1e0) < fpPassThrough1) {
     quantizedSize = *(uint *)(((unsigned char *)0x000013e4) + glContext);
     if (fpPassThrough1 <
-        (double)(float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
+        (float)((double)CONCAT44(0x43300000,*(uint *)(((unsigned char *)0x000013e4) + glContext) ^ 0x80000000)
                        - DOUBLE_001aa1e0)) {
-      quantizedSize = (uint)(int)(fpPassThrough1 + (double)FLOAT_001aa10c);
+      quantizedSize = (uint)(int)(fpPassThrough1 + FLOAT_001aa10c);
     }
   }
   return quantizedSize;
@@ -1392,31 +1392,31 @@ int gld_scalePointSizeToPixels(glContext, addSizeBias)
 /* gld_buildCoverageByteTable @ 0xa3790 (716 bytes) */
 void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint tableSize,int outTable,int *outCount,double fpPassThrough1)
 {
-  double samplePosF2;
-  double sampleIndexF2;
-  double coverageSum;
-  double tableSizeF;
-  double sampleWeight;
+  float samplePosF2;
+  float sampleIndexF2;
+  float coverageSum;
+  float tableSizeF;
+  float sampleWeight;
   uint loopIndex3;
   float coverageValue;
   uint loopIndex2;
   int halfSize;
   int loopIndex;
-  double clampedSizeF;
-  double clampScratch;
-  double filterWidthF;
-  double oneF;
-  double sampleIndexF;
-  double samplePosF;
+  float clampedSizeF;
+  float clampScratch;
+  float filterWidthF;
+  float oneF;
+  float sampleIndexF;
+  float samplePosF;
   char outByte;
   
-  clampedSizeF = (double)FLOAT_001aa0e8;
+  clampedSizeF = FLOAT_001aa0e8;
   if (clampedSizeF <= fpPassThrough1) {
-    clampedSizeF = (double)(float)((double)CONCAT44(0x43300000,(int)fpPassThrough1 ^ 0x80000000) -
+    clampedSizeF = (float)((double)CONCAT44(0x43300000,(int)fpPassThrough1 ^ 0x80000000) -
                            DOUBLE_001aa1e0);
   }
   loopIndex = 0;
-  oneF = (double)FLOAT_001aa0e8;
+  oneF = FLOAT_001aa0e8;
   halfSize = ((int)tableSize >> 1) + (uint)((int)tableSize < 0 && (tableSize & 1) != 0);
   clampScratch = oneF;
   if ((float)(fpPassThrough1 - oneF) < 0.0) {
@@ -1425,51 +1425,51 @@ void gld_buildCoverageByteTable(undefined4 glContext,undefined4 unusedArgR4,uint
   if (-(float)(fpPassThrough1 - oneF) < 0.0) {
     fpPassThrough1 = clampScratch;
   }
-  tableSizeF = (double)(float)((double)CONCAT44(0x43300000,tableSize ^ 0x80000000) - DOUBLE_001aa1e0);
-  filterWidthF = (double)(float)((double)CONCAT44(0x43300000,
-                                           (int)(tableSizeF / (double)(float)(clampedSizeF + (double)
+  tableSizeF = (float)((double)CONCAT44(0x43300000,tableSize ^ 0x80000000) - DOUBLE_001aa1e0);
+  filterWidthF = (float)((double)CONCAT44(0x43300000,
+                                           (int)(tableSizeF / (float)(clampedSizeF + (double)
                                                   FLOAT_001aa108)) ^ 0x80000000) - DOUBLE_001aa1e0);
-  sampleWeight = (double)(float)(fpPassThrough1 *
-                         (double)(float)(oneF / (double)(float)(filterWidthF * (double)(float)(filterWidthF - 
+  sampleWeight = (float)(fpPassThrough1 *
+                         (float)(oneF / (float)(filterWidthF * (float)(filterWidthF - 
                                                   oneF))));
   if (0 < halfSize) {
     do {
-      coverageSum = (double)FLOAT_001aa0d4;
+      coverageSum = FLOAT_001aa0d4;
       if (filterWidthF <= coverageSum) {
 loopSetCoverageValue:
-        coverageValue = (float)(coverageSum * (double)FLOAT_001aa0f0);
+        coverageValue = (float)(coverageSum * FLOAT_001aa0f0);
       }
       else {
         loopIndex2 = 0;
         sampleIndexF = coverageSum;
         do {
-          samplePosF = (double)(float)((double)CONCAT44(0x43300000,
-                                                    (int)((double)(float)((double)CONCAT44(
+          samplePosF = (float)((double)CONCAT44(0x43300000,
+                                                    (int)((float)((double)CONCAT44(
                                                   0x43300000,loopIndex2 + loopIndex ^ 0x80000000) -
                                                   DOUBLE_001aa1e0) - filterWidthF) ^ 0x80000000) -
                                   DOUBLE_001aa1e0);
-          if ((filterWidthF <= samplePosF) && (samplePosF < (double)(float)(tableSizeF - filterWidthF))) {
-            coverageSum = (double)(float)(sampleWeight * sampleIndexF + coverageSum);
+          if ((filterWidthF <= samplePosF) && (samplePosF < (float)(tableSizeF - filterWidthF))) {
+            coverageSum = (float)(sampleWeight * sampleIndexF + coverageSum);
           }
           loopIndex2 = loopIndex2 + 1;
-          sampleIndexF = (double)(float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - DOUBLE_001aa1e0)
+          sampleIndexF = (float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - DOUBLE_001aa1e0)
           ;
         } while (sampleIndexF < filterWidthF);
         loopIndex3 = 0;
-        sampleIndexF2 = (double)FLOAT_001aa0d4;
+        sampleIndexF2 = FLOAT_001aa0d4;
         do {
-          samplePosF2 = (double)(float)((double)CONCAT44(0x43300000,loopIndex3 + loopIndex ^ 0x80000000) -
+          samplePosF2 = (float)((double)CONCAT44(0x43300000,loopIndex3 + loopIndex ^ 0x80000000) -
                                   DOUBLE_001aa1e0);
-          if ((filterWidthF <= samplePosF2) && (samplePosF2 < (double)(float)(tableSizeF - filterWidthF))) {
-            coverageSum = (double)(float)(sampleWeight * (double)((float)(filterWidthF - sampleIndexF2) - FLOAT_001aa0e8) +
+          if ((filterWidthF <= samplePosF2) && (samplePosF2 < (float)(tableSizeF - filterWidthF))) {
+            coverageSum = (float)(sampleWeight * (double)((float)(filterWidthF - sampleIndexF2) - FLOAT_001aa0e8) +
                                    coverageSum);
           }
           loopIndex3 = loopIndex3 + 1;
-          sampleIndexF2 = (double)(float)((double)CONCAT44(0x43300000,loopIndex3 ^ 0x80000000) - DOUBLE_001aa1e0)
+          sampleIndexF2 = (float)((double)CONCAT44(0x43300000,loopIndex3 ^ 0x80000000) - DOUBLE_001aa1e0)
           ;
         } while (sampleIndexF2 < filterWidthF);
         coverageValue = FLOAT_001aa0f0;
-        if (coverageSum <= (double)FLOAT_001aa0e8) goto loopSetCoverageValue;
+        if (coverageSum <= FLOAT_001aa0e8) goto loopSetCoverageValue;
       }
       outByte = (char)(int)(coverageValue + FLOAT_001aa10c);
       *(char *)(loopIndex + outTable) = outByte;
@@ -1488,18 +1488,18 @@ void gld_buildCoverageRampTable(undefined4 glContext,undefined4 unusedArgR4,uint
   float halfF;
   double intConvBias;
   uint loopIndex;
-  double clampedSizeF;
-  double oneF;
-  double clampScratch;
+  float clampedSizeF;
+  float oneF;
+  float clampScratch;
   
   intConvBias = DOUBLE_001aa1e0;
   halfF = FLOAT_001aa10c;
-  clampedSizeF = (double)FLOAT_001aa0e8;
+  clampedSizeF = FLOAT_001aa0e8;
   if (clampedSizeF <= fpPassThrough1) {
-    clampedSizeF = (double)(float)((double)CONCAT44(0x43300000,(int)fpPassThrough1 ^ 0x80000000) -
+    clampedSizeF = (float)((double)CONCAT44(0x43300000,(int)fpPassThrough1 ^ 0x80000000) -
                            DOUBLE_001aa1e0);
   }
-  oneF = (double)FLOAT_001aa0e8;
+  oneF = FLOAT_001aa0e8;
   loopIndex = 0;
   clampScratch = oneF;
   if ((float)(fpPassThrough1 - oneF) < 0.0) {
@@ -2093,7 +2093,7 @@ int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5)
   uint flagBits114;
   uint flagBits120;
   uint levelFormat;
-  double quantizedValue;
+  float quantizedValue;
   undefined1 stippleByte;
   float rowCoord2;
   float rowCoord;
@@ -2199,25 +2199,25 @@ int gld_buildSmoothPointMask(glContext, unusedArgR4, staleArgR5)
   int pointSizePixelsA;
   int levelRows;
   uint colsLeft;
-  double engineFloat2e20;
-  double contextFloatArg;
-  double glContextFloat13e8;
-  double staleArgF2;
-  double staleArgF3;
-  double staleArgF4;
-  double staleArgF5;
-  double staleArgF6;
-  double staleArgF7;
-  double staleArgF8;
+  float engineFloat2e20;
+  float contextFloatArg;
+  float glContextFloat13e8;
+  float staleArgF2;
+  float staleArgF3;
+  float staleArgF4;
+  float staleArgF5;
+  float staleArgF6;
+  float staleArgF7;
+  float staleArgF8;
   undefined8 callResultPair;
   undefined8 callResultPair2;
   ulonglong rampAllocPair;
   float distSq;
-  double staleStackArg_fffffeb8;
-  double staleStackArg_fffffec0;
-  double staleStackArg_fffffec8;
-  double staleStackArg_fffffed0;
-  double staleStackArg_fffffed8;
+  float staleStackArg_fffffeb8;
+  float staleStackArg_fffffec0;
+  float staleStackArg_fffffec8;
+  float staleStackArg_fffffed0;
+  float staleStackArg_fffffed8;
   int rampCountWords [4];
   longlong fctiwzSlot0;
   undefined4 i2dHi1;
@@ -2599,13 +2599,13 @@ setLevelCount:
         else {
           levelCountClamped = rampAllocHigh;
           if ((*(uint *)(glContext + 0xe8) & 1) == 0) {
-            contextFloatArg = (double)*(float *)(glContext + 0xe0);
+            contextFloatArg = *(float *)(glContext + 0xe0);
             if (cacheEntry[8] != '\0') goto callGldBuildCoverageByteTable;
             ((void (*)())gld_buildCoverageRampTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg);
             calleeResultLow = r4AfterCall3;
           }
           else {
-            contextFloatArg = (double)*(float *)(glContext + 0x104);
+            contextFloatArg = *(float *)(glContext + 0x104);
 callGldBuildCoverageByteTable:
             ((void (*)())gld_buildCoverageByteTable)(glContext,(int)rampAllocPair,entryWord4X4,rampAllocHigh,rampCountWords,contextFloatArg);
             calleeResultLow = r4AfterCall2;
@@ -2726,38 +2726,38 @@ callGldBuildCoverageByteTable:
       else {
         levelCountClamped = lastRowPtr;
         if (cacheEntry[0x1c] == '\0') {
-          engineFloat2e20 = (double)*(float *)(((unsigned char *)0x00002e20) + engineCapsB);
-          glContextFloat13e8 = (double)*(float *)(((unsigned char *)0x000013e8) + glContext);
+          engineFloat2e20 = *(float *)(((unsigned char *)0x00002e20) + engineCapsB);
+          glContextFloat13e8 = *(float *)(((unsigned char *)0x000013e8) + glContext);
           quantizedValue = glContextFloat13e8;
           if ((glContextFloat13e8 < engineFloat2e20) &&
-             (quantizedValue = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
-             engineFloat2e20 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
+             (quantizedValue = *(float *)(((unsigned char *)0x000013ec) + glContext),
+             engineFloat2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
             i2dHi8 = 0x43300000;
-            i2dLo8 = (uint)(int)((float)((double)(float)(engineFloat2e20 - glContextFloat13e8) /
-                                      (double)*(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
+            i2dLo8 = (uint)(int)((float)((float)(engineFloat2e20 - glContextFloat13e8) /
+                                      *(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
             fctiwzSlot3 = (longlong)(int)i2dLo8;
             i2dLo8 = i2dLo8 ^ 0x80000000;
-            quantizedValue = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
-                                     (double)(float)((double)CONCAT44(0x43300000,i2dLo8) -
+            quantizedValue = (float)(*(float *)(((unsigned char *)0x000013f0) + glContext) *
+                                     (float)((double)CONCAT44(0x43300000,i2dLo8) -
                                                     4503601774854144.0) + glContextFloat13e8);
           }
           entryWord14High = rampCountWords;
           ((void (*)())gld_buildCoverageRampTable)(glContext,allocResultLow,sizeBytes,lastRowPtr,entryWord14High,quantizedValue);
         }
         else {
-          engineFloat2e20 = (double)*(float *)(((unsigned char *)0x00002e20) + engineCapsB);
-          glContextFloat13e8 = (double)*(float *)(((unsigned char *)0x000013e8) + glContext);
+          engineFloat2e20 = *(float *)(((unsigned char *)0x00002e20) + engineCapsB);
+          glContextFloat13e8 = *(float *)(((unsigned char *)0x000013e8) + glContext);
           quantizedValue = glContextFloat13e8;
           if ((glContextFloat13e8 < engineFloat2e20) &&
-             (quantizedValue = (double)*(float *)(((unsigned char *)0x000013ec) + glContext),
-             engineFloat2e20 < (double)*(float *)(((unsigned char *)0x000013ec) + glContext))) {
+             (quantizedValue = *(float *)(((unsigned char *)0x000013ec) + glContext),
+             engineFloat2e20 < *(float *)(((unsigned char *)0x000013ec) + glContext))) {
             i2dHi9 = 0x43300000;
-            i2dLo9 = (uint)(int)((float)((double)(float)(engineFloat2e20 - glContextFloat13e8) /
-                                      (double)*(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
+            i2dLo9 = (uint)(int)((float)((float)(engineFloat2e20 - glContextFloat13e8) /
+                                      *(float *)(((unsigned char *)0x000013f0) + glContext)) + 0.5);
             fctiwzSlot4 = (longlong)(int)i2dLo9;
             i2dLo9 = i2dLo9 ^ 0x80000000;
-            quantizedValue = (double)(float)((double)*(float *)(((unsigned char *)0x000013f0) + glContext) *
-                                     (double)(float)((double)CONCAT44(0x43300000,i2dLo9) -
+            quantizedValue = (float)(*(float *)(((unsigned char *)0x000013f0) + glContext) *
+                                     (float)((double)CONCAT44(0x43300000,i2dLo9) -
                                                     4503601774854144.0) + glContextFloat13e8);
           }
           entryWord14High = rampCountWords;

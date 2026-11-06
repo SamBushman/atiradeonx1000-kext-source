@@ -15,18 +15,18 @@ int IROperand__setModifierBits(operandRecord, mask, set)
 }
 
 /* floatToFixedSaturate @ 0x103d78 (220 bytes) */
-int floatToFixedSaturate(undefined4 unusedArg1,int integerBits,uint fractionBits,double value)
+int floatToFixedSaturate(undefined4 unusedArg1,int integerBits,uint fractionBits,float value)
 {
   float distanceAboveMin;
   double clampedValue;
   float distanceToMax;
   uint halfRange;
-  double maxLimit;
-  double cappedAtMax;
-  double minLimit;
+  float maxLimit;
+  float cappedAtMax;
+  float minLimit;
   
   halfRange = 1 << (integerBits - 1U & 0x3f);
-  minLimit = (double)(float)((double)CONCAT44(0x43300000,-halfRange ^ 0x80000000) - DOUBLE_001aa1e0);
+  minLimit = (float)((double)CONCAT44(0x43300000,-halfRange ^ 0x80000000) - DOUBLE_001aa1e0);
   maxLimit = (double)((float)((double)CONCAT44(0x43300000,halfRange ^ 0x80000000) - DOUBLE_001aa1e0) +
                   FLOAT_001aa114 /
                   (float)((double)CONCAT44(0x43300000,1 << (fractionBits - 1 & 0x3f) ^ 0x80000000) -
@@ -47,7 +47,7 @@ int floatToFixedSaturate(undefined4 unusedArg1,int integerBits,uint fractionBits
   if (-distanceAboveMin < 0.0) {
     clampedValue = cappedAtMax;
   }
-  return (int)(clampedValue * (double)(float)((double)CONCAT44(0x43300000,
+  return (int)(clampedValue * (float)((double)CONCAT44(0x43300000,
                                                         1 << (fractionBits & 0x3f) ^ 0x80000000) -
                                       DOUBLE_001aa1e0));
 }
@@ -637,7 +637,7 @@ int Inst__nearestCommonAncestorBlock(instA, instB)
 }
 
 /* IRInst__setExtraFixed3_4_1048d4 @ 0x1048d4 (56 bytes) */
-void IRInst__setExtraFixed3_4_1048d4(int inst,double value)
+void IRInst__setExtraFixed3_4_1048d4(int inst,float value)
 {
   undefined2 fixedValue;
   int extraData;
@@ -649,7 +649,7 @@ void IRInst__setExtraFixed3_4_1048d4(int inst,double value)
 }
 
 /* IRInst__setExtraFixed3_4_10490c @ 0x10490c (56 bytes) */
-void IRInst__setExtraFixed3_4_10490c(int inst,double value)
+void IRInst__setExtraFixed3_4_10490c(int inst,float value)
 {
   undefined2 fixedValue;
   int extraData;
@@ -661,7 +661,7 @@ void IRInst__setExtraFixed3_4_10490c(int inst,double value)
 }
 
 /* IRInst__setExtraFixed3_4_104944 @ 0x104944 (56 bytes) */
-void IRInst__setExtraFixed3_4_104944(int inst,double value)
+void IRInst__setExtraFixed3_4_104944(int inst,float value)
 {
   undefined2 fixedValue;
   int extraData;

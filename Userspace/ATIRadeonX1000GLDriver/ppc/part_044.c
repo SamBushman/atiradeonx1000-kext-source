@@ -2304,7 +2304,7 @@ int Inst__collapseAlgebraic_0015c6d4(inst, program)
   uint loopIndex2;
   uint operandScanIdxOrTrackUses;
   uint *vector;
-  double literalValueD;
+  float literalValueD;
   undefined8 operandRecord2;
   undefined4 operandSelectB;
   undefined4 selectWordTmp;
@@ -2431,7 +2431,7 @@ loopSetOperandRecord3:
           if (loopIndex == oneOperandIdx) {
             literalValue = 1.0;
 loopSetLiteralValueD:
-            literalValueD = (double)literalValue;
+            literalValueD = literalValue;
             literalSource = (int *)IRInst__getOperandSource(inst,loopIndex);
             operandRecord3 = IRInst__getOperandRecord(inst,loopIndex);
             operandSelectC = *(undefined4 *)(operandRecord3 + 0x10);
@@ -2482,7 +2482,7 @@ loopSetLiteralValueD:
                 do {
                   operandRecord3 = IRInst__getOperandRecord(literalSource,0);
                   uniformSourceConstant = IRInst__getUniformSourceConstant(literalSource,operandScanIdx,*(undefined4 *)(operandRecord3 + 0x10),uniformConstOut);
-                  if ((uniformSourceConstant != 0) && (literalValueD == (double)uniformConstValue)) {
+                  if ((uniformSourceConstant != 0) && (literalValueD == uniformConstValue)) {
                     operandIndex = -1;
                     loopIndexB = 0;
                     do {
@@ -5605,7 +5605,7 @@ int Inst__mergeSplatSourceInsts_001621c8(inst, inst2, pass)
   int *inst3;
   int destRegisterOffset;
   int destRegister;
-  double outputScaleFromExponentResult;
+  float outputScaleFromExponentResult;
   undefined4 operandSelectD;
   undefined4 operandSelectC;
   undefined4 operandSelectB;
@@ -5806,7 +5806,7 @@ setSource1Flags:
     inst3 = inst;
     if (outputScaleA != 0) {
       loopIndexB = 0;
-      outputScaleFromExponentResult = (double)((double (*)())outputScaleFromExponent)(inst2OutputScale);
+      outputScaleFromExponentResult = ((float (*)())outputScaleFromExponent)(inst2OutputScale);
       literalCursor = literalVecB;
       do {
         operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -5820,7 +5820,7 @@ setSource1Flags:
           if (((int)*(char *)(sourceDef2 + 0x15c) >> (sourceComponentB & 0x3f) & 1U) == 0) {
             return 0;
           }
-          *literalCursor = (float)(outputScaleFromExponentResult * (double)*(float *)(sourceComponentB * 0x18 + sourceDef2 + 0x20));
+          *literalCursor = (outputScaleFromExponentResult * *(float *)(sourceComponentB * 0x18 + sourceDef2 + 0x20));
         }
         moreLanes = loopIndexB != 3;
         literalCursor = literalCursor + 1;
@@ -5833,7 +5833,7 @@ setSource1Flags:
   }
   outputScaleA = inst2OutputScale;
   loopIndex = 0;
-  outputScaleFromExponentResult = (double)((double (*)())outputScaleFromExponent)(outputScaleA);
+  outputScaleFromExponentResult = ((float (*)())outputScaleFromExponent)(outputScaleA);
   literalCursor = literalVecB;
   do {
     operandRecord2 = IRInst__getOperandRecord(inst3,0);
@@ -5847,7 +5847,7 @@ setSource1Flags:
       if (((int)*(char *)(sourceDef + 0x15c) >> (sourceComponentC & 0x3f) & 1U) == 0) {
         return 0;
       }
-      *literalCursor = (float)(outputScaleFromExponentResult * (double)*(float *)(sourceComponentC * 0x18 + sourceDef + 0x20));
+      *literalCursor = (outputScaleFromExponentResult * *(float *)(sourceComponentC * 0x18 + sourceDef + 0x20));
     }
     moreComponentsB = loopIndex != 3;
     literalCursor = literalCursor + 1;
@@ -5862,7 +5862,7 @@ setLastOperandBufPtr:
     literalCursor = literalCursor + 1;
     countdown = countdown + -1;
   } while (countdown != 0);
-  outputScaleFromExponentResult = (double)((double (*)())outputScaleFromExponent)(outputScaleA);
+  outputScaleFromExponentResult = ((float (*)())outputScaleFromExponent)(outputScaleA);
   loopIndex = 0;
   mergedDestSelect = operandSelectD;
   countdownB = 4;
@@ -5878,7 +5878,7 @@ setLastOperandBufPtr:
   do {
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     if (*(char *)(loopIndex + operandRecord2 + 0x10) == '\0') {
-      *literalCursor = (float)outputScaleFromExponentResult;
+      *literalCursor = outputScaleFromExponentResult;
     }
     else {
       IRInst__getOperandRecord(inst2,0);
@@ -6560,7 +6560,7 @@ int Inst__mergeMovAndMadByLanes(node, pass)
   uint *useVector;
   int extraOpcode;
   int lanesLeft;
-  double literalValue;
+  float literalValue;
   undefined4 extraSourceSelect;
   undefined4 movDestSelect;
   undefined4 madDestSelect;
@@ -6830,7 +6830,7 @@ checkMovSrcResolved2:
       do {
         operandRecord2 = IRInst__getOperandRecord(madSrcA,0);
         uniformSourceConstant = IRInst__getUniformSourceConstant(madSrcA,srcIndexA,*(undefined4 *)(operandRecord2 + 0x10),&uniformConstant.header);
-        if ((uniformSourceConstant != 0) && (literalValue == (double)uniformConstant.value)) {
+        if ((uniformSourceConstant != 0) && (literalValue == uniformConstant.value)) {
           selectLaneA = -1;
           laneScan4 = 0;
           do {

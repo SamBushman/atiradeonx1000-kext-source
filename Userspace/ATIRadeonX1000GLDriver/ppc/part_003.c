@@ -2480,7 +2480,7 @@ code_r0x0001d6b4:
 }
 
 /* floatToHalfBits @ 0x1d7c0 (148 bytes) */
-uint floatToHalfBits(double value)
+uint floatToHalfBits(float value)
 {
   uint halfMantissa;
   float floatValue;
@@ -2488,7 +2488,7 @@ uint floatToHalfBits(double value)
   uint biasedExponent;
   int halfExponent;
   
-  floatValue = (float)value;
+  floatValue = value;
   biasedExponent = (uint)GH_F2U(floatValue) >> 0x17 & 0xff;
   unbiasedExponent = biasedExponent - 0x7f;
   if (unbiasedExponent < 0x11) {

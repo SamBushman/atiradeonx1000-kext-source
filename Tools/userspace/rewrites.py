@@ -571,6 +571,13 @@ def rewrite_pair_results(chunk, ret64):
 _FLIT = re.compile(r'(?<![\w.])((?:\d+\.\d*|\.\d+)(?:[eE][+-]?\d+)?)(?![\w.])')
 _FSKIP = re.compile(r'/\*.*?\*/|"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', re.S)
 
+# Single-precision constants of the stock driver's __literal4 pool whose shortest decimal form is NOT exactly the float (Ghidra prints `0.999975` for the float 0.99997502565).
+# An unsuffixed literal of such a value is the float constant (stock loads it with lfs; the pool has no matching double), so it gets the `f` suffix too: as a double it would
+# differ from stock's constant in the 8th digit (issue #210: glDrawPixels (int)(x + 0.999975)).  0.1 and 1e-06 are excluded: the __literal8 pool holds those as doubles as well.
+# Regenerate: for every float F in __literal4, s = shortest %g that round-trips to F; keep s when float(s) != F and float(s) is not in __literal8.
+_STOCK_FLOAT_LITS = {float(x) for x in ('127.99999', '32767.998', '0.007874016', '1.999', '3.051851e-05', '0.999975', '3.1415927', '1.5707964', '0.017453292', '57.29578',
+                                        '1.442695', '1.2011224', '0.2', '0.3', '0.4', '-0.2', '1.2', '0.15', '6.2831855')}   # (2.1474836e+09 is 2^31: stock uses the __literal8 double 2147483648.0 for the float->uint compare, so it is not a float literal)
+
 def rewrite_float_literals(text):
     """Ghidra prints every FP immediate as an unsuffixed (double) literal, so `floatVar * 0.0625` compiles to double arithmetic (fmul/fsub + frsp) where the stock code
     used fmuls/fnmsubs on single-precision values (issue #209 follow-up: gld_validateDirtyState, programFillStateConstants, gld_updateInverseMatrix had 70-110 double-precision
@@ -583,7 +590,7 @@ def rewrite_float_literals(text):
         lit = m.group(1)
         try:
             v = float(lit)
-            if struct.unpack('>f', struct.pack('>f', v))[0] != v:
+            if struct.unpack('>f', struct.pack('>f', v))[0] != v and v not in _STOCK_FLOAT_LITS:
                 return m.group(0)
         except (OverflowError, ValueError, struct.error):
             return m.group(0)

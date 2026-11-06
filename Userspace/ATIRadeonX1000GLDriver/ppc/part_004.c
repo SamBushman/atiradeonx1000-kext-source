@@ -4435,11 +4435,11 @@ int gld_drawPixelsFromClientSurface(ctx, rasterPosition, width, height, format, 
   int ring;
   int scratchInt34;
   int targetsLeft;
-  double oneD;
-  double quadWidthMinusOne;
+  float oneD;
+  float quadWidthMinusOne;
   double scratchDouble39;
-  double quadWidthD;
-  double quadHeightD;
+  float quadWidthD;
+  float quadHeightD;
   uint srcRowBytes;
   undefined1 layoutOut [4];
   int srcSkipBytes [2];
@@ -4706,7 +4706,7 @@ callPthreadMutexLock:
       quadWidthD = (double)scratchFloat6;
       scratchFloat2 = scratchFloat4 - scratchFloat5;
       quadHeightD = (double)scratchFloat2;
-      oneD = (double)FLOAT_001aa0e8;
+      oneD = FLOAT_001aa0e8;
       packet[0x22] = 0;
       scratchDouble39 = DOUBLE_001aa1e8;
       quadWidthMinusOne = (double)(float)(quadWidthD - oneD);
@@ -4723,14 +4723,14 @@ callPthreadMutexLock:
         scratchUint20 = (uint)(int)(quadWidthD - oneD);
         fctiwzSlot0 = (longlong)(int)scratchUint20;
       }
-      scratchDouble39 = (double)(float)(quadHeightD - (double)FLOAT_001aa0e8);
+      scratchDouble39 = (double)(float)(quadHeightD - FLOAT_001aa0e8);
       if (DOUBLE_001aa1e8 <= scratchDouble39) {
         scratchInt22 = (int)(scratchDouble39 - DOUBLE_001aa1e8);
         fctiwzSlot3 = (longlong)scratchInt22;
         scratchUint28 = scratchInt22 + 0x80000000;
       }
       else {
-        scratchUint28 = (uint)(int)(quadHeightD - (double)FLOAT_001aa0e8);
+        scratchUint28 = (uint)(int)(quadHeightD - FLOAT_001aa0e8);
         fctiwzSlot2 = (longlong)(int)scratchUint28;
       }
       packet[0xaa] = scratchUint20 & 0x7ff | (scratchUint28 & 0x7ff) << 0xb | 0x80000000;
@@ -4780,8 +4780,8 @@ callPthreadMutexLock:
       scratchFloat14 = FLOAT_001aa12c;
       scratchFloat13 = FLOAT_001aa10c;
       packetEnd = packet + 0xcd;
-      scratchFloat6 = (float)((double)FLOAT_001aa0e8 / quadHeightD);
-      scratchFloat2 = (float)((double)FLOAT_001aa0e8 / quadWidthD);
+      scratchFloat6 = (float)(FLOAT_001aa0e8 / quadHeightD);
+      scratchFloat2 = (float)(FLOAT_001aa0e8 / quadWidthD);
       packet[0xb7] = renderWidthClamped - 1 & 0x1fff | (renderHeightClamped - 1) * 0x2000 & 0x3ffe000;
       packet[0xc1] = 0x31080;
       packet[0xc6] = ((unsigned char *)0x00001087U);
@@ -6455,37 +6455,37 @@ int gld_setSamplerMagFilter(samplerState, magFilter)
 }
 
 /* gldPackColorForSurfaceFormat @ 0x2d2b0 (2388 bytes) */
-void gldPackColorForSurfaceFormat(int surface,double red,double green,double blue,double alpha)
+void gldPackColorForSurfaceFormat(int surface,float red,float green,float blue,float alpha)
 {
   uint packedColor;
-  double redScaled;
+  float redScaled;
   int halfAlphaB;
   uint channelInt2;
   uint channelInt;
   uint halfAlpha;
   uint halfRed;
-  double greenScaled;
-  double blueScaled;
-  double alphaScaled;
+  float greenScaled;
+  float blueScaled;
+  float alphaScaled;
   double roundedAlphaD;
   double roundedBlueD;
-  double alphaScaledD;
-  double blueScaledD;
+  float alphaScaledD;
+  float blueScaledD;
   double roundedD;
   int channelIntB;
   uint redByteBits;
   uint greenByte;
   uint blueByte;
   uint channelInt3;
-  double redClamped;
-  double greenClamped;
-  double blueClamped;
-  double alphaClamped;
+  float redClamped;
+  float greenClamped;
+  float blueClamped;
+  float alphaClamped;
   double redChannelD;
   double greenChannelD;
   double blueChannelD;
   double alphaChannelD;
-  double alphaD;
+  float alphaD;
   float redF;
   float alphaF;
   
@@ -6494,33 +6494,33 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   if (*(char *)(surface + 0x37) == '\0') {
     return;
   }
-  redClamped = (double)FLOAT_001aa0d4;
+  redClamped = FLOAT_001aa0d4;
   redChannelD = DOUBLE_001aa228;
   if ((redClamped <= red) &&
-     (redClamped = red, redChannelD = red, (double)FLOAT_001aa0e8 < red)) {
-    redClamped = (double)FLOAT_001aa0e8;
+     (redClamped = red, redChannelD = red, FLOAT_001aa0e8 < red)) {
+    redClamped = FLOAT_001aa0e8;
     redChannelD = DOUBLE_001aa200;
   }
-  greenClamped = (double)FLOAT_001aa0d4;
+  greenClamped = FLOAT_001aa0d4;
   greenChannelD = DOUBLE_001aa228;
   if ((greenClamped <= green) &&
-     (greenClamped = green, greenChannelD = green, (double)FLOAT_001aa0e8 < green)) {
-    greenClamped = (double)FLOAT_001aa0e8;
+     (greenClamped = green, greenChannelD = green, FLOAT_001aa0e8 < green)) {
+    greenClamped = FLOAT_001aa0e8;
     greenChannelD = DOUBLE_001aa200;
   }
-  blueClamped = (double)FLOAT_001aa0d4;
+  blueClamped = FLOAT_001aa0d4;
   blueChannelD = DOUBLE_001aa228;
   if ((blueClamped <= blue) &&
-     (blueClamped = blue, blueChannelD = blue, (double)FLOAT_001aa0e8 < blue)) {
-    blueClamped = (double)FLOAT_001aa0e8;
+     (blueClamped = blue, blueChannelD = blue, FLOAT_001aa0e8 < blue)) {
+    blueClamped = FLOAT_001aa0e8;
     blueChannelD = DOUBLE_001aa200;
   }
   alphaD = (double)alphaF;
-  alphaClamped = (double)FLOAT_001aa0d4;
+  alphaClamped = FLOAT_001aa0d4;
   alphaChannelD = DOUBLE_001aa228;
   if ((alphaClamped <= alphaD) &&
-     (alphaClamped = alphaD, alphaChannelD = alphaD, (double)FLOAT_001aa0e8 < alphaD)) {
-    alphaClamped = (double)FLOAT_001aa0e8;
+     (alphaClamped = alphaD, alphaChannelD = alphaD, FLOAT_001aa0e8 < alphaD)) {
+    alphaClamped = FLOAT_001aa0e8;
     alphaChannelD = DOUBLE_001aa200;
   }
   redChannelD = redChannelD * DOUBLE_001aa258;
@@ -6597,7 +6597,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
     packedColor = ((unsigned int)((redByteBits | greenByte << 8 | packedColor << 0x18 | blueByte << 0x10)));
     break;
   case '\x10':
-    redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    redScaled = redClamped * FLOAT_001aa14c + FLOAT_001aa10c;
     roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6615,7 +6615,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
     break;
   case '\x19':
   case '\x1b':
-    redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    redScaled = redClamped * FLOAT_001aa14c + FLOAT_001aa10c;
     roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6625,7 +6625,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
     }
     goto setChannelInt;
   case '\x1a':
-    alphaScaled = alphaClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    alphaScaled = alphaClamped * FLOAT_001aa14c + FLOAT_001aa10c;
     roundedD = (double)(float)alphaScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6639,7 +6639,7 @@ setPackedColor:
     packedColor = ((unsigned int)((channelInt | channelInt << 0x10)));
     break;
   case '\x1c':
-    redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    redScaled = redClamped * FLOAT_001aa14c + FLOAT_001aa10c;
     roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6647,7 +6647,7 @@ setPackedColor:
     else {
       channelInt = (uint)(int)redScaled;
     }
-    alphaScaled = alphaClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    alphaScaled = alphaClamped * FLOAT_001aa14c + FLOAT_001aa10c;
     roundedD = (double)(float)alphaScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelIntB = (int)(roundedD - DOUBLE_001aa1e8) + -0x80000000;
@@ -6672,7 +6672,7 @@ setPackedColor:
     packedColor = ((unsigned int)((halfRed | halfAlphaB << 0x10)));
     break;
   case '#':
-    redScaled = redClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    redScaled = redClamped * FLOAT_001aa154 + FLOAT_001aa10c;
     roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6681,7 +6681,7 @@ setPackedColor:
       channelInt = (uint)(int)redScaled;
     }
     channelInt = channelInt & 0x3ff;
-    alphaScaled = alphaClamped * (double)FLOAT_001aa158 + (double)FLOAT_001aa10c;
+    alphaScaled = alphaClamped * FLOAT_001aa158 + FLOAT_001aa10c;
     roundedD = (double)(float)alphaScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelIntB = (int)(roundedD - DOUBLE_001aa1e8) + -0x80000000;
@@ -6689,7 +6689,7 @@ setPackedColor:
     else {
       channelIntB = (int)alphaScaled;
     }
-    blueScaled = blueClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    blueScaled = blueClamped * FLOAT_001aa154 + FLOAT_001aa10c;
     roundedD = (double)(float)blueScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt2 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6698,7 +6698,7 @@ setPackedColor:
       channelInt2 = (uint)(int)blueScaled;
     }
     channelInt2 = channelIntB << 0x1e | (channelInt2 & 0x3ff) << 0x14;
-    greenScaled = greenClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    greenScaled = greenClamped * FLOAT_001aa154 + FLOAT_001aa10c;
     roundedD = (double)(float)greenScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt3 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6708,7 +6708,7 @@ setPackedColor:
     }
     goto setPackedColor2;
   case '$':
-    blueScaledD = blueClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    blueScaledD = blueClamped * FLOAT_001aa154 + FLOAT_001aa10c;
     roundedBlueD = (double)(float)blueScaledD;
     if (DOUBLE_001aa1e8 <= roundedBlueD) {
       channelInt = (int)(roundedBlueD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6717,7 +6717,7 @@ setPackedColor:
       channelInt = (uint)(int)blueScaledD;
     }
     channelInt = channelInt & 0x3ff;
-    alphaScaledD = alphaClamped * (double)FLOAT_001aa158 + (double)FLOAT_001aa10c;
+    alphaScaledD = alphaClamped * FLOAT_001aa158 + FLOAT_001aa10c;
     roundedAlphaD = (double)(float)alphaScaledD;
     if (DOUBLE_001aa1e8 <= roundedAlphaD) {
       channelIntB = (int)(roundedAlphaD - DOUBLE_001aa1e8) + -0x80000000;
@@ -6725,7 +6725,7 @@ setPackedColor:
     else {
       channelIntB = (int)alphaScaledD;
     }
-    redScaled = redClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    redScaled = redClamped * FLOAT_001aa154 + FLOAT_001aa10c;
     roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt2 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6734,7 +6734,7 @@ setPackedColor:
       channelInt2 = (uint)(int)redScaled;
     }
     channelInt2 = channelIntB << 0x1e | (channelInt2 & 0x3ff) << 0x14;
-    greenScaled = greenClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    greenScaled = greenClamped * FLOAT_001aa154 + FLOAT_001aa10c;
     roundedD = (double)(float)greenScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt3 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
@@ -6749,7 +6749,7 @@ setPackedColor2:
     packedColor = ((unsigned int)((redByteBits & 0xe0 | greenByte >> 3 & 0x1c | blueByte >> 6)));
     break;
   case ')':
-    redScaled = redClamped * (double)FLOAT_001aa150 + (double)FLOAT_001aa10c;
+    redScaled = redClamped * FLOAT_001aa150 + FLOAT_001aa10c;
     roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelIntB = (int)(roundedD - DOUBLE_001aa1e8) + -0x80000000;

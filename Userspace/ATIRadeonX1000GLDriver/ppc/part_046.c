@@ -1745,7 +1745,7 @@ int Compiler__findInScopes404(valueKey, scopeIndexHigh, scopeIndexLow, program)
 }
 
 /* Compiler__internFloatConstant @ 0x175a3c (260 bytes) */
-undefined4 * Compiler__internFloatConstant(int compiler,undefined4 unusedArg2,undefined4 valueNumber,double constantValue)
+undefined4 * Compiler__internFloatConstant(int compiler,undefined4 unusedArg2,undefined4 valueNumber,float constantValue)
 {
   undefined4 *exprRecord;
   undefined4 *allocation;
@@ -1755,7 +1755,7 @@ undefined4 * Compiler__internFloatConstant(int compiler,undefined4 unusedArg2,un
   uint *vector;
   
   *(undefined4 *)(*(int *)(compiler + 0x3f0) + 4) = valueNumber;
-  **(float **)(compiler + 0x3f0) = (float)constantValue;
+  **(float **)(compiler + 0x3f0) = constantValue;
   exprRecord = (undefined4 *)
            HashTable__find(*(undefined4 *)(compiler + 0x3e4),*(undefined4 *)(compiler + 0x3f0));
   if (exprRecord == (undefined4 *)0x0) {
@@ -1763,7 +1763,7 @@ undefined4 * Compiler__internFloatConstant(int compiler,undefined4 unusedArg2,un
     allocation = (undefined4 *)Arena__alloc(arena,0x2c);
     exprRecord = allocation + 1;
     *allocation = arena;
-    allocation[1] = (float)constantValue;
+    allocation[1] = constantValue;
     allocation[5] = 4;
     allocation[8] = 0;
     *(undefined1 *)(allocation + 3) = 0;
@@ -2117,9 +2117,9 @@ int Compiler__internLaneExprs1to3(compiler)
 }
 
 /* KhanPs__vslot56_scaleFloat @ 0x176304 (32 bytes) */
-double KhanPs__vslot56_scaleFloat(double value)
+float KhanPs__vslot56_scaleFloat(float value)
 {
-  return (double)(float)(value * (double)FLOAT_001aa1cc);
+  return (value * FLOAT_001aa1cc);
 }
 
 /* signToCompareCode @ 0x176324 (44 bytes) */
@@ -2198,7 +2198,7 @@ int ValueKey__rowLanesAllEqual(key, row)
 }
 
 /* ValueKey__findOrInsertLiteral @ 0x176474 (104 bytes) */
-int ValueKey__findOrInsertLiteral(undefined4 unusedArg1,int key,int row,double literal)
+int ValueKey__findOrInsertLiteral(undefined4 unusedArg1,int key,int row,float literal)
 {
   bool isLast;
   int loopIndex;
@@ -2207,10 +2207,10 @@ int ValueKey__findOrInsertLiteral(undefined4 unusedArg1,int key,int row,double l
   loopIndex = 1;
   loopPtr2 = (float *)(key + row * 0x10 + -0xc);
   while( true ) {
-    if ((double)*loopPtr2 == literal) {
+    if (*loopPtr2 == literal) {
       return loopIndex + 1;
     }
-    if ((double)*loopPtr2 == (double)FLOAT_001aa114) break;
+    if (*loopPtr2 == FLOAT_001aa114) break;
     isLast = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
@@ -2218,7 +2218,7 @@ int ValueKey__findOrInsertLiteral(undefined4 unusedArg1,int key,int row,double l
       return 0;
     }
   }
-  *loopPtr2 = (float)literal;
+  *loopPtr2 = literal;
   return loopIndex + 1;
 }
 

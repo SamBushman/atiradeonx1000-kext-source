@@ -8039,7 +8039,7 @@ loopStoreLoopIndex2:
 }
 
 /* gld_storeConstantVec4 @ 0xb4f50 (180 bytes) */
-void gld_storeConstantVec4(int constantBank,int constantIndex,undefined4 unusedArgR5,undefined4 unusedArgR6,undefined4 unusedArgR7,undefined4 unusedArgR8,int storeRawFloat,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
+void gld_storeConstantVec4(int constantBank,int constantIndex,undefined4 unusedArgR5,undefined4 unusedArgR6,undefined4 unusedArgR7,undefined4 unusedArgR8,int storeRawFloat,float fpPassThrough1,float fpPassThrough2,float fpPassThrough3,float fpPassThrough4)
 {
   int constantSlot;
   undefined4 fp24Value;
@@ -8066,7 +8066,7 @@ void gld_storeConstantVec4(int constantBank,int constantIndex,undefined4 unusedA
 }
 
 /* gld_emitSlotParamIfDirty @ 0xb5010 (132 bytes) */
-void gld_emitSlotParamIfDirty(int glContext,int engineState,int *slotRecord,int slotIndex,double fpPassThrough1,double fpPassThrough2,double fpPassThrough3,double fpPassThrough4)
+void gld_emitSlotParamIfDirty(int glContext,int engineState,int *slotRecord,int slotIndex,float fpPassThrough1,float fpPassThrough2,float fpPassThrough3,float fpPassThrough4)
 {
   undefined4 staleArgR7;
   undefined4 staleArgR8;
@@ -9296,8 +9296,8 @@ setGlContextWord1e5c_3:
 /* gld_updateUnitBiasRegisters @ 0xb6f20 (928 bytes) */
 double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int updateMode)
 {
-  double scaledBiasField17;
-  double scaledBiasD;
+  float scaledBiasField17;
+  float scaledBiasD;
   int unitRegAddrFinal;
   uint field23Bits;
   uint field17Bits;
@@ -9313,10 +9313,10 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
   uint unitWord1cdc;
   int unitRegAddr;
   int glContextPtr4;
-  double biasBase;
+  float biasBase;
   double intConvBias;
-  double combinedBias;
-  double ratioA;
+  float combinedBias;
+  float ratioA;
   
   intConvBias = DOUBLE_001aa1e0;
   if (updateMode == 0) {
@@ -9328,7 +9328,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
   unitWord1cdc = *(uint *)(unitRegAddr + 0x1cdc);
   glContextPtr4 = *(int *)(glContext + 4);
   unitBias = *(float *)(loopIndex * 0xcc + glContext + 0x470);
-  biasBase = (double)FLOAT_001aa0d4;
+  biasBase = FLOAT_001aa0d4;
   *(uint *)(unitRegAddr + 0x1d1c) = *(uint *)(unitRegAddr + 0x1d1c) & 0xa0705fff | 0x20100000;
   unsignedConvLimit = DOUBLE_001aa1e8;
   modeBits13 = unitWord1cdc >> 0xd & 3;
@@ -9345,7 +9345,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
   if (-extentDiff < 0.0) {
     ratioA = intConvBias;
   }
-  scaledBias = (float)((double)(float)(ratioA * combinedBias) * (double)FLOAT_001aa1a8 + ratioA);
+  scaledBias = (float)((double)(float)(ratioA * combinedBias) * FLOAT_001aa1a8 + ratioA);
   if (modeBits13 == 2) {
     biasBase = (double)(scaledBias * FLOAT_001aa1ac);
   }
@@ -9355,17 +9355,17 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
   if ((unitWord1cdc >> 0xb & 3) == 3) {
     if (3 < field21Count) {
       field15Bits = 3;
-      scaledBiasD = (double)(float)(biasBase * (double)FLOAT_001aa128);
-      if ((scaledBiasD <= (double)FLOAT_001aa158) && (field15Bits = 0, (double)FLOAT_001aa0d4 <= scaledBiasD)) {
+      scaledBiasD = (double)(float)(biasBase * FLOAT_001aa128);
+      if ((scaledBiasD <= FLOAT_001aa158) && (field15Bits = 0, FLOAT_001aa0d4 <= scaledBiasD)) {
         if (DOUBLE_001aa1e8 <= scaledBiasD) {
           field15Bits = (int)(scaledBiasD - DOUBLE_001aa1e8) + 0x80000000;
         }
         else {
-          field15Bits = (uint)(int)(biasBase * (double)FLOAT_001aa128);
+          field15Bits = (uint)(int)(biasBase * FLOAT_001aa128);
         }
       }
       if (((modeBits13 == 0) && ((unitWord1cdc >> 9 & 3) == 2)) &&
-         (scaledBiasD = (double)FLOAT_001aa0d4, combinedBias == scaledBiasD)) {
+         (scaledBiasD = FLOAT_001aa0d4, combinedBias == scaledBiasD)) {
         field17Bits = 0;
       }
       else {
@@ -9394,7 +9394,7 @@ double gld_updateUnitBiasRegisters(int glContext,int texObject,int loopIndex,int
     field15Bits = (uint)(int)biasBase;
   }
   field17Bits = 0;
-  scaledBiasD = (double)FLOAT_001aa0d4;
+  scaledBiasD = FLOAT_001aa0d4;
 setUnitRegAddrFinal:
   unitRegAddrFinal = unitWordOffset + glContext;
   *(uint *)(unitRegAddrFinal + 0x1cdc) =

@@ -112,7 +112,7 @@ int arbParseParamBinding(parser, variable, allowRange, isArrayElement)
   char *errorMessage;
   undefined4 elementField8;
   undefined4 elementField12;
-  double constantValue;
+  float constantValue;
   float constVec [4];
   
   if (0x1a < (uint)parser[5]) {
@@ -570,8 +570,8 @@ loopCallArbSetError2:
   }
   tokenBit = 1 << (parser[5] & 0x3fU);
   if ((tokenBit & 0x6018000) != 0) {
-    constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-    constVec[constVecX_IDX] = (float)constantValue;
+    constantValue = ((float (*)())arbParseFloatConstant)(parser);
+    constVec[constVecX_IDX] = constantValue;
     constVec[constVecY_IDX] = constVec[constVecX_IDX];
     constVec[constVecZ_IDX] = constVec[constVecX_IDX];
     constVec[3] = constVec[constVecX_IDX];
@@ -584,20 +584,20 @@ loopCallArbSetError2:
   constVec[3] = 1.0;
   constVec[constVecZ_IDX] = 0.0;
   constVec[constVecY_IDX] = 0.0;
-  constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-  constVec[constVecX_IDX] = (float)constantValue;
+  constantValue = ((float (*)())arbParseFloatConstant)(parser);
+  constVec[constVecX_IDX] = constantValue;
   if (parser[5] == 0x13) {
     arbNextToken(parser);
-    constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-    constVec[constVecY_IDX] = (float)constantValue;
+    constantValue = ((float (*)())arbParseFloatConstant)(parser);
+    constVec[constVecY_IDX] = constantValue;
     if (parser[5] == 0x13) {
       arbNextToken(parser);
-      constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-      constVec[constVecZ_IDX] = (float)constantValue;
+      constantValue = ((float (*)())arbParseFloatConstant)(parser);
+      constVec[constVecZ_IDX] = constantValue;
       if (parser[5] == 0x13) {
         arbNextToken(parser);
-        constantValue = (double)((double (*)())arbParseFloatConstant)(parser);
-        constVec[3] = (float)constantValue;
+        constantValue = ((float (*)())arbParseFloatConstant)(parser);
+        constVec[3] = constantValue;
         goto callArbExpectToken;
       }
     }

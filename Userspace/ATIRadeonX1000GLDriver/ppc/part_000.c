@@ -1093,9 +1093,9 @@ int gld_clearSoftwareColorBuffer(ctx, glContext)
 }
 
 /* glAccum_impl @ 0x2ae0 (88 bytes) */
-void glAccum_impl(int glContext,undefined4 op,double value)
+void glAccum_impl(int glContext,undefined4 op,float value)
 {
-  double zeroD;
+  float zeroD;
   float valueScaleB;
   float reciprocalValue;
   float alphaScale;
@@ -1205,13 +1205,13 @@ void glAccum_impl(int glContext,undefined4 op,double value)
   undefined1 *accumRawByteEnd;
   ushort *accumHalfEndSrc16;
   undefined2 *accumRaw16End;
-  double scaledSampleD;
+  float scaledSampleD;
   double intBiasD;
-  double clampMinD;
-  double channelMax255D;
-  double blueOut;
-  double greenOut;
-  double alphaOut;
+  float clampMinD;
+  float channelMax255D;
+  float blueOut;
+  float greenOut;
+  float alphaOut;
   short accumFixedValueA8S16;
   short accumFixedValueA16S16;
   short accumFixedValueA8S32;
@@ -1272,13 +1272,13 @@ void glAccum_impl(int glContext,undefined4 op,double value)
       glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8367,readbackPixels,2,0);
       rectBottomA = rectTop + rectHeight;
-      if (value < (double)FLOAT_001aa0d4) {
+      if (value < FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
       rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        accumFixedValueA8S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        accumFixedValueA8S32 = (short)(int)(value * FLOAT_001aa0d8);
         fixedValue = (int)accumFixedValueA8S32;
         if (rectTop < rectBottomA) {
           rowCounter = 0;
@@ -1304,7 +1304,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
+        fixedValue = GH_FIX16(value * FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1373,13 +1373,13 @@ void glAccum_impl(int glContext,undefined4 op,double value)
       glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8366,readbackPixels,2,0);
       rectBottomA = rectTop + rectHeight;
-      if (value < (double)FLOAT_001aa0d4) {
+      if (value < FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
       rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        accumFixedValueA8S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        accumFixedValueA8S16 = (short)(int)(value * FLOAT_001aa0d8);
         fixedValue = (int)accumFixedValueA8S16;
         if (rectTop < rectBottomA) {
           rowCounter = 0;
@@ -1406,7 +1406,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
+        fixedValue = GH_FIX16(value * FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1477,13 +1477,13 @@ void glAccum_impl(int glContext,undefined4 op,double value)
       glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8367,readbackPixels,2,0);
       rectBottomA = rectTop + rectHeight;
-      if (value < (double)FLOAT_001aa0d4) {
+      if (value < FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
       rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        if (value == (double)FLOAT_001aa0e8) {
+        if (value == FLOAT_001aa0e8) {
           if (rectTop < rectBottomA) {
             rowCounterLoad = 0;
             do {
@@ -1504,7 +1504,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
           }
         }
         else {
-          loadFixedValueA8S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
+          loadFixedValueA8S32 = (short)(int)(value * FLOAT_001aa0d8);
           fixedValue = (int)loadFixedValueA8S32;
           if (rectTop < rectBottomA) {
             rowCounter = 0;
@@ -1530,7 +1530,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
           }
         }
       }
-      else if (value == (double)FLOAT_001aa0e8) {
+      else if (value == FLOAT_001aa0e8) {
         if (rectTop < rectBottomA) {
           rowCounterLoad = 0;
           do {
@@ -1555,7 +1555,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
+        fixedValue = GH_FIX16(value * FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1624,13 +1624,13 @@ void glAccum_impl(int glContext,undefined4 op,double value)
       glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8366,readbackPixels,2,0);
       rectBottomA = rectTop + rectHeight;
-      if (value < (double)FLOAT_001aa0d4) {
+      if (value < FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
       rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        if (value == (double)FLOAT_001aa0e8) {
+        if (value == FLOAT_001aa0e8) {
           if (rectTop < rectBottomA) {
             rowCounterLoad = 0;
             do {
@@ -1653,7 +1653,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
           }
         }
         else {
-          loadFixedValueA8S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
+          loadFixedValueA8S16 = (short)(int)(value * FLOAT_001aa0d8);
           fixedValue = (int)loadFixedValueA8S16;
           if (rectTop < rectBottomA) {
             rowCounter = 0;
@@ -1679,7 +1679,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
           }
         }
       }
-      else if (value == (double)FLOAT_001aa0e8) {
+      else if (value == FLOAT_001aa0e8) {
         if (rectTop < rectBottomA) {
           rowCounterLoad = 0;
           do {
@@ -1700,7 +1700,7 @@ void glAccum_impl(int glContext,undefined4 op,double value)
         }
       }
       else {
-        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
+        fixedValue = GH_FIX16(value * FLOAT_001aa0d8);
         if (rectTop < rectBottomA) {
           rowCounter = 0;
           do {
@@ -1775,7 +1775,7 @@ code_r0x00003264:
           hasNegativeValues = *(char *)(glContext + 0x140);
           rowStartPixelRetB = rectXThenRowStart + paddedWidthA * ((fullHeight - rectTop) + -1);
           if (*(char *)(glContext + 0x141) == '\x01') {
-            if (value == (double)FLOAT_001aa0e8) {
+            if (value == FLOAT_001aa0e8) {
               if (rectTop < rectBottomRet) {
                 accumBufferC = *(int *)(glContext + 0x148);
                 rowCounterD = 0;
@@ -1819,7 +1819,7 @@ code_r0x00003264:
               }
             }
             else {
-              valueScale = (float)(value * (double)FLOAT_001aa0dc);
+              valueScale = (float)(value * FLOAT_001aa0dc);
               if (rectTop < rectBottomRet) {
                 accumBufferD = *(int *)(glContext + 0x148);
                 rowCounterC = 0;
@@ -1829,8 +1829,8 @@ code_r0x00003264:
                   readbackWordCursor = (uint *)((int)readbackPixels + rowStartPixelRetB * 4);
                   accumByteEndRet = accumByteCursorRet + rectWidth * 4;
                   if (accumByteCursorRet < accumByteEndRet) {
-                    clampMinD = (double)FLOAT_001aa0d4;
-                    channelMax255D = (double)FLOAT_001aa0f0;
+                    clampMinD = FLOAT_001aa0d4;
+                    channelMax255D = FLOAT_001aa0f0;
                     do {
                       scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                          (int)*accumByteCursorRet ^ 0x80000000)
@@ -1839,21 +1839,21 @@ code_r0x00003264:
                       if (clampMinD <= scaledSampleD) {
                         redOut = (float)(scaledSampleD * channelMax255D);
                       }
-                      greenOut = (double)FLOAT_001aa0d4;
+                      greenOut = FLOAT_001aa0d4;
                       scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                          (int)accumByteCursorRet[1] ^
                                                                          0x80000000) - intBiasD));
                       if (greenOut <= scaledSampleD) {
                         greenOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
-                      blueOut = (double)FLOAT_001aa0d4;
+                      blueOut = FLOAT_001aa0d4;
                       scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                          (int)accumByteCursorRet[2] ^
                                                                          0x80000000) - intBiasD));
                       if (blueOut <= scaledSampleD) {
                         blueOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
-                      alphaOut = (double)FLOAT_001aa0d4;
+                      alphaOut = FLOAT_001aa0d4;
                       scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                          (int)accumByteCursorRet[3] ^
                                                                          0x80000000) - intBiasD));
@@ -1895,7 +1895,7 @@ code_r0x00003264:
               }
             }
           }
-          else if (value == (double)FLOAT_001aa0e8) {
+          else if (value == FLOAT_001aa0e8) {
             if (rectTop < rectBottomRet) {
               accumBufferC = *(int *)(glContext + 0x148);
               rowCounterD = 0;
@@ -1940,7 +1940,7 @@ code_r0x00003264:
             }
           }
           else {
-            valueScale = (float)(value * (double)FLOAT_001aa0e4);
+            valueScale = (float)(value * FLOAT_001aa0e4);
             if (rectTop < rectBottomRet) {
               accumBufferD = *(int *)(glContext + 0x148);
               rowCounterC = 0;
@@ -1950,8 +1950,8 @@ code_r0x00003264:
                 readbackWordCursor = (uint *)((int)readbackPixels + rowStartPixelRetB * 4);
                 accumShortEndRet = accumShortCursorRet + rectWidth * 4;
                 if (accumShortCursorRet < accumShortEndRet) {
-                  clampMinD = (double)FLOAT_001aa0d4;
-                  channelMax255D = (double)FLOAT_001aa0f0;
+                  clampMinD = FLOAT_001aa0d4;
+                  channelMax255D = FLOAT_001aa0f0;
                   do {
                     scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                        (int)*accumShortCursorRet ^ 0x80000000) -
@@ -1960,21 +1960,21 @@ code_r0x00003264:
                     if (clampMinD <= scaledSampleD) {
                       redOut = (float)(scaledSampleD * channelMax255D);
                     }
-                    greenOut = (double)FLOAT_001aa0d4;
+                    greenOut = FLOAT_001aa0d4;
                     scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                        (int)accumShortCursorRet[1] ^ 0x80000000)
                                                      - intBiasD));
                     if (greenOut <= scaledSampleD) {
                       greenOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
-                    blueOut = (double)FLOAT_001aa0d4;
+                    blueOut = FLOAT_001aa0d4;
                     scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                        (int)accumShortCursorRet[2] ^ 0x80000000)
                                                      - intBiasD));
                     if (blueOut <= scaledSampleD) {
                       blueOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
-                    alphaOut = (double)FLOAT_001aa0d4;
+                    alphaOut = FLOAT_001aa0d4;
                     scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
                                                                        (int)accumShortCursorRet[3] ^ 0x80000000)
                                                      - intBiasD));
@@ -1984,14 +1984,14 @@ code_r0x00003264:
                     if (redOut > FLOAT_001aa0f0) {
                       redOut = FLOAT_001aa0f0;
                     }
-                    if (greenOut > (double)FLOAT_001aa0f0) {
-                      greenOut = (double)FLOAT_001aa0f0;
+                    if (greenOut > FLOAT_001aa0f0) {
+                      greenOut = FLOAT_001aa0f0;
                     }
-                    if (blueOut > (double)FLOAT_001aa0f0) {
-                      blueOut = (double)FLOAT_001aa0f0;
+                    if (blueOut > FLOAT_001aa0f0) {
+                      blueOut = FLOAT_001aa0f0;
                     }
-                    if (alphaOut > (double)FLOAT_001aa0f0) {
-                      alphaOut = (double)FLOAT_001aa0f0;
+                    if (alphaOut > FLOAT_001aa0f0) {
+                      alphaOut = FLOAT_001aa0f0;
                     }
                     if (DOUBLE_001aa1e8 <= alphaOut) {
                       alphaByte = (int)(alphaOut - DOUBLE_001aa1e8) + -0x80000000;
@@ -2081,7 +2081,7 @@ code_r0x00003264:
           rectBottomRet2 = rectTopB + rectHeight;
           rowStartPixelRet = rectXB + paddedRowPixels * ((fullHeight - rectTopB) + -1);
           if (*(char *)(glContext + 0x141) == '\x01') {
-            if (value == (double)FLOAT_001aa0e8) {
+            if (value == FLOAT_001aa0e8) {
               if (rectTopB < rectBottomRet2) {
                 accumBufferB = *(int *)(glContext + 0x148);
                 rowCounterC = 0;
@@ -2125,7 +2125,7 @@ code_r0x00003264:
               }
             }
             else {
-              valueScaleB = (float)(value * (double)FLOAT_001aa0dc);
+              valueScaleB = (float)(value * FLOAT_001aa0dc);
               if (rectTopB < rectBottomRet2) {
                 accumBufferB = *(int *)(glContext + 0x148);
                 rowCounterC = 0;
@@ -2179,7 +2179,7 @@ code_r0x00003264:
               }
             }
           }
-          else if (value == (double)FLOAT_001aa0e8) {
+          else if (value == FLOAT_001aa0e8) {
             if (rectTopB < rectBottomRet2) {
               accumBufferB = *(int *)(glContext + 0x148);
               rowCounterC = 0;
@@ -2224,7 +2224,7 @@ code_r0x00003264:
             }
           }
           else {
-            valueScaleB = (float)(value * (double)FLOAT_001aa0e4);
+            valueScaleB = (float)(value * FLOAT_001aa0e4);
             if (rectTopB < rectBottomRet2) {
               accumBufferB = *(int *)(glContext + 0x148);
               rowCounterC = 0;
@@ -2337,17 +2337,17 @@ code_r0x00003264:
     }
     rowBytes = rectWidth * 4;
     rectHeightThenBottom = rectTopMul + rectHeightThenBottom;
-    zeroD = (double)FLOAT_001aa0d4;
+    zeroD = FLOAT_001aa0d4;
     if (value < zeroD) {
       *(undefined1 *)(glContext + 0x140) = 1;
     }
     paddedWidthB = fullWidthB + 7U & 0xfffffff8;
     rectXThenRowStartB = rectXThenRowStartB + paddedWidthB * ((fullHeightB - rectTopMul) + -1);
     if (value != zeroD) {
-      reciprocalValue = (float)((double)FLOAT_001aa0e8 / value);
+      reciprocalValue = (float)(FLOAT_001aa0e8 / value);
       if ((((reciprocalValue == FLOAT_001aa0f8) || (reciprocalValue == FLOAT_001aa0fc)) || (reciprocalValue == FLOAT_001aa100)) ||
          ((reciprocalValue == FLOAT_001aa104 || (reciprocalValue == FLOAT_001aa108)))) {
-        divisor = (int)((double)FLOAT_001aa0e8 / value);
+        divisor = (int)(FLOAT_001aa0e8 / value);
         shiftCount = 2;
         if (divisor != 4) {
           if (divisor < 5) {
@@ -2403,9 +2403,9 @@ code_r0x00004f90:
         return;
       }
     }
-    if ((((value != (double)FLOAT_001aa0f8) && (value != (double)FLOAT_001aa0fc)) &&
-        (value != (double)FLOAT_001aa100)) &&
-       ((value != (double)FLOAT_001aa104 && (value != (double)FLOAT_001aa108)))) {
+    if ((((value != FLOAT_001aa0f8) && (value != FLOAT_001aa0fc)) &&
+        (value != FLOAT_001aa100)) &&
+       ((value != FLOAT_001aa104 && (value != FLOAT_001aa108)))) {
       if (*(char *)(glContext + 0x141) == '\x01') {
         if (rectHeightThenBottom <= rectTopMul) {
           return;
@@ -2561,13 +2561,13 @@ code_r0x0000510c:
     }
     if ((0 < (int)rectWidth) && (0 < rectHeightThenBottom)) {
       rectHeightThenBottom = rectTopAdd + rectHeightThenBottom;
-      if (value < (double)FLOAT_001aa0d4) {
+      if (value < FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedWidthB = fullWidthB + 7U & 0xfffffff8;
       rectXThenRowStartB = rectXThenRowStartB + paddedWidthB * ((fullHeightB - rectTopAdd) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        valueByte = (char)(int)(value * (double)FLOAT_001aa0f4);
+        valueByte = (char)(int)(value * FLOAT_001aa0f4);
         if (rectTopAdd < rectHeightThenBottom) {
           rowCounterB = 0;
           while( true ) {
@@ -2587,7 +2587,7 @@ code_r0x0000510c:
         }
       }
       else {
-        fixedValue = GH_FIX16(value * (double)FLOAT_001aa0d8);
+        fixedValue = GH_FIX16(value * FLOAT_001aa0d8);
         if (rectTopAdd < rectHeightThenBottom) {
           rowCounterB = 0;
           while( true ) {

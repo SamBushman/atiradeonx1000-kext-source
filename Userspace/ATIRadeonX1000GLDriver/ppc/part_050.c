@@ -57,14 +57,14 @@ undefined4 isLiteralZeroHalfOrOne(double value)
 }
 
 /* FudoPs__encodeImmediateFloat @ 0x191888 (184 bytes) */
-undefined4 FudoPs__encodeImmediateFloat(int this,undefined4 unused,uint *exponentOut,uint *mantissaOut,double value)
+undefined4 FudoPs__encodeImmediateFloat(int this,undefined4 unused,uint *exponentOut,uint *mantissaOut,float value)
 {
   float value32;
   uint loopIndex;
   int loopRemaining;
   
-  if ((double)FLOAT_001aa0d4 < value) {
-    value32 = (float)value;
+  if (FLOAT_001aa0d4 < value) {
+    value32 = value;
     if (((uint)GH_F2U(value32) & 1) == 0) {
       loopIndex = (uint)GH_F2U(value32) >> 1 & 0xff;
       *exponentOut = loopIndex;
@@ -73,7 +73,7 @@ undefined4 FudoPs__encodeImmediateFloat(int this,undefined4 unused,uint *exponen
           loopIndex = 0;
           loopRemaining = 8;
           do {
-            if (value == (double)*(float *)(0x00001740 + this + 4)) {
+            if (value == *(float *)(0x00001740 + this + 4)) {
               *mantissaOut = loopIndex;
               return 1;
             }
@@ -106,25 +106,25 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
   char *loopPtr;
   undefined4 callResult;
   int loopRemaining;
-  double commonValue;
+  float commonValue;
   undefined1 immediateHighOut [4];
   undefined1 immediateLowOut [32];
   
   haveFirstValue = false;
   loopRemaining = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = laneSelectors;
-  commonValue = (double)FLOAT_001aa0d4;
+  commonValue = FLOAT_001aa0d4;
   loopPtr = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     if (*loopPtr != '\x04') {
       if (haveFirstValue) {
-        if ((double)*values != commonValue) {
+        if (*values != commonValue) {
           return 0;
         }
         haveFirstValue = true;
       }
       else {
-        commonValue = (double)*values;
+        commonValue = *values;
         haveFirstValue = true;
       }
     }
@@ -170,10 +170,10 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     do {
       if (*(char *)laneSwizzleCursor != '\x04') {
         if (noLaneSeen) {
-          splatValue = (float)*loopPtr;
+          splatValue = *loopPtr;
           noLaneSeen = false;
         }
-        else if ((float)*loopPtr != splatValue) {
+        else if (*loopPtr != splatValue) {
           allLanesEqual = 0;
         }
       }

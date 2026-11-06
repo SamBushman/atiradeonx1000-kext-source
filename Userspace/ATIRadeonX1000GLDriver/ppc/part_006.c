@@ -7897,13 +7897,13 @@ returnTranslator:
 #undef ilInstASwzWords
 
 /* floatToFp24 @ 0x4a7d0 (80 bytes) */
-uint floatToFp24(double value)
+uint floatToFp24(float value)
 {
   float floatValue;
   uint exponentBits;
   uint signBit;
   
-  floatValue = (float)value;
+  floatValue = value;
   exponentBits = (uint)GH_F2U(floatValue) >> 0x17 & 0xff;
   signBit = (uint)GH_F2U(floatValue) >> 8 & 0x800000;
   if (exponentBits < 0x41) {
@@ -8130,7 +8130,7 @@ int gldUploadProgramState(glContext)
   int texBindingCursor;
   uint *stateBlock;
   int fp24Value;
-  double depthCompareValue;
+  float depthCompareValue;
   undefined4 fogColorR;
   undefined4 fogColorG;
   undefined4 fogColorB;
