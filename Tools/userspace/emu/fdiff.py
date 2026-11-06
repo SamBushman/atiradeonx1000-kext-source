@@ -7,6 +7,7 @@
 FUNCS.tsv = "<stock offset hex>\\t<name>\\t<nparams>" (Tools/userspace/emu/funcs_from_corpus.py writes it). Each seed runs the stock function and the rebuilt one of the SAME name on identical
 random memory (ctx, A, heap, a stack scratch buffer) with identical random register arguments, then compares the return value, every word of the snapshotted memory and the order of the
 dispatch/stub calls. Arguments are drawn from values that matter to the lane/select-word helpers (bytes 0..4, small ints, pointers into the scratch buffer / heap).
+Env: FDIFF_NOSTK=1 skips the stack-word comparison of the dispatch calls; FDIFF_VERBOSE=1 prints the first call-log difference. (The unicorn emulator segfaults now and then: rerun.)
 Output: one line per function (compared / same) and, for each distinct divergence kind, the first example. A run is skipped when either side faults, times out or reads its own code
 (a pointer argument that is not a pointer). Void functions leave garbage in r3: such a 'ret' divergence on its own is NOT a defect (check the declaration).
 """
@@ -77,7 +78,7 @@ def memdiff(w_s, w_r, rs, rr):
 # 9th..16th argument (#201: the ffvp blended-position loops passed glCtx where stock passes the selector-derived register).
 NSTK = {0x12e4: 4, 0x12ec: 4, 0x12f0: 4, 0x1300: 4, 0x1304: 4, 0x1308: 4, 0x130c: 4, 0x1324: 4, 0x1328: 4, 0x12f4: 8, 0x12f8: 8, 0x12fc: 8, 0x132c: 8}
 def normlog(w, rn):
-    return [(c[0], tuple(('poison',) if (x & 0xfffff000) == POISON else norm(w, x) for x in list(c[1]) + list(c[2][:NSTK.get(c[0], 0)]))) for c in rn.log]
+    return [(c[0], tuple(('poison',) if (x & 0xfffff000) == POISON else norm(w, x) for x in list(c[1]) + list(c[2][:0 if os.environ.get('FDIFF_NOSTK') else NSTK.get(c[0], 0)]))) for c in rn.log]
 
 def logsame(ls, lr):
     if len(ls) != len(lr): return False
