@@ -95,6 +95,9 @@ static void scan(conn_t *c, vm_address_t addr, vm_size_t size) {
         for (i = 0; i < 0x80 && (vm_size_t)i < got; i++) fprintf(g_log, "%02x%s", g_buf[i], (i & 3) == 3 ? " " : "");
         fprintf(g_log, "\n");
     }
+    { static int fd_n = -1, fd_seq = 0; static const char *fd_dir;      /* OPCODE_FULLDUMP_DIR=dir [OPCODE_FULLDUMP_N=12]: write the first N scanned buffers verbatim to dir/buf_NN.bin (offline diff of two drivers' command streams) */
+      if (fd_n < 0) { fd_dir = getenv("OPCODE_FULLDUMP_DIR"); fd_n = (fd_dir && getenv("OPCODE_FULLDUMP_N")) ? atoi(getenv("OPCODE_FULLDUMP_N")) : (fd_dir ? 12 : 0); }
+      if (fd_n > 0) { char fn[1024]; FILE *fo; fd_n--; snprintf(fn, sizeof fn, "%s/buf_%02d.bin", fd_dir, fd_seq++); if ((fo = fopen(fn, "wb"))) { fwrite(g_buf, 1, got, fo); fclose(fo); } } }
     p = g_buf + g_start; end = g_buf + got;
     { unsigned lo[16], ln[16], lf[16]; int nl = 0, k;                  /* trace of the last 16 records, printed with any anomaly */
     while (p + 4 <= end) {

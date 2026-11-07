@@ -3347,6 +3347,12 @@ int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateB
     return 0x2716;
   }
   ctx = (uint *)_malloc(((unsigned char *)0x00002b98U));
+  /* #232: stock never initialises the context block (malloc, no memset): every field not stored by gldCreateContext keeps whatever the heap held, and the stock image only works because the
+   * block usually comes back zero. In the rebuilt image the block came back recycled (ctx+0x1d4 = 0xa1b1c1d3), gldUpdateDispatch then believed a vertex array was current, called
+   * gld_startPacket and the kernel NOPed the first buffer's whole register-init record (glCopyPixels 1.46x slower). Zero it like calloc. */
+  if (ctx != (uint *)0x0) {
+    _memset(ctx,0,0x2b98);
+  }
   if (*(int *)(libraryOrTaskPtr + 4) != 0) {
     scalarOut[0] = 0;
     if ((*(uint *)(pixelFormat + 0x30) & 1) == 0) {
