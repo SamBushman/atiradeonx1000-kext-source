@@ -4021,6 +4021,9 @@ setResult:
   return result;
 }
 
+static float gld_u8ToUnitFloat[256];   /* #232: byte / 255.0f, filled on first use by gld_drawPixelsAsPoints (idempotent, so a race between contexts stores the same values) */
+static int gld_u8ToUnitFloatReady;
+
 /* gld_drawPixelsAsPoints @ 0x29c00 (1624 bytes) */
 int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, bytesPerPixel, rasterX, rasterY, rasterPosRecord, format, transferMode8)
   int ctx;
@@ -4164,6 +4167,13 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
     vertexCursor = (float *)(packetCursor + 4);
     packetCursor[2] = scratchInt20 * 0x80000 | 0xc0003500;
     packetCursor[3] = scratchInt20 * 0x10000 | 0x31;
+    if (!gld_u8ToUnitFloatReady) {
+      int tableIndex;
+      for (tableIndex = 0; tableIndex < 0x100; tableIndex = tableIndex + 1) {
+        gld_u8ToUnitFloat[tableIndex] = (float)tableIndex / FLOAT_001aa0f0;
+      }
+      gld_u8ToUnitFloatReady = 1;
+    }
     if (procHeight != 0) {
       i2dLo1 = rasterX ^ 0x80000000;
       i2dHi1 = 0x43300000;
@@ -4189,19 +4199,13 @@ int gld_drawPixelsAsPoints(ctx, srcPixels, procWidth, procHeight, srcRowBytes, b
             else {
               depthZ = *(float *)(rasterPosRecord + 8);
               pixelBits = *(uint *)srcCursor; /* raw 32-bit pixel word (stock lwz): the decompile read it as a float and converted by value */
-              alphaI2dHi = 0x43300000;
-              redI2dHi = 0x43300000;
-              greenI2dHi = 0x43300000;
-              blueI2dHi = 0x43300000;
-              blueI2dLo = pixelBits & 0xff;
-              alphaI2dLo = pixelBits >> 0x18;
-              scratchPtr16 = (float *)(pixelBits >> 0x10 & 0xff);
-              greenI2dLo = pixelBits >> 8 & 0xff;
-              colorA = (float)((double)CONCAT44(0x43300000,alphaI2dLo) - scratchDouble6) / scratchFloat18;
-              colorB = (float)((double)CONCAT44(0x43300000,blueI2dLo) - scratchDouble6) / scratchFloat18;
-              colorR = (float)((double)CONCAT44(0x43300000,scratchPtr16) - scratchDouble6) / scratchFloat18;
-              colorG = (float)((double)CONCAT44(0x43300000,greenI2dLo) - scratchDouble6) / scratchFloat18;
-              redI2dLo = scratchPtr16;
+              /* #232: stock converts the four bytes with four independent int->double magic-number sequences (all stores, then all lfd, then fsub/frsp/fdivs), which the 970 overlaps; gcc -O2
+               * serialised them through one stack slot (a load-hit-store stall each, 2.2x slower per pixel). A table of the SAME values ((float)i / 255.0f, one fdivs per entry, built
+               * once) replaces the conversion and the four divisions: bit-identical colours, no per-pixel stack traffic. */
+              colorA = gld_u8ToUnitFloat[pixelBits >> 0x18];
+              colorB = gld_u8ToUnitFloat[pixelBits & 0xff];
+              colorR = gld_u8ToUnitFloat[pixelBits >> 0x10 & 0xff];
+              colorG = gld_u8ToUnitFloat[pixelBits >> 8 & 0xff];
             }
             srcCursor = (float *)((int)srcCursor + bytesPerPixel);
             *vertexCursor = windowX;
