@@ -2,7 +2,7 @@
 # phase4_fresh_boots.sh OUTROOT (dev machine): runbook Phase 4 in one go, each side from a FRESH BOOT: sides boot (boot-time stock kext + stock userspace), S (CONTROL: stock kext hot-swapped over the boot-time one + unstick, stock userspace: separates hot-swap artifacts from rebuilt-kext differences), K (rebuilt kext hot-swapped + unstick, stock userspace), KU (K + the rebuilt userspace:
 # WindowServer relaunched by hand with the rebuilt GA / GLDriver / VADriver redirect (Tools/userspace/ku_env.sh), every consumer started with the same environment through $HOME/rung3/side_env).
 # Per boot, in this order: installed-application sweep, video (QuickTime, VLC), display sleep, DVD Player on the generated disc LAST (one side per boot, #190). Ends with a reboot to the stock boot state.
-# env: SHA IMG (G5 tree src_<SHA>, images us_<IMG>/gld_<IMG>) REBUILT_DIR (kext_build_<sha>) SIDES (default "boot K KU") SECS_DVD (60). Evidence: OUTROOT/<side>/{sweep,video,dsleep,dvd,proof}.
+# env: SKIP ("sweep video dsleep dvd" = parts to leave out), DIRECT_CONTROL=1 (side S only: the DVD Player is started DIRECTLY by side_launch.command without any rebuilt environment = control for the KU process shape), SHA IMG (G5 tree src_<SHA>, images us_<IMG>/gld_<IMG>) REBUILT_DIR (kext_build_<sha>) SIDES (default "boot K KU") SECS_DVD (60). Evidence: OUTROOT/<side>/{sweep,video,dsleep,dvd,proof}.
 O=${1:?outroot}; SHA=${SHA:?SHA}; IMG=${IMG:-$SHA}; RB=${REBUILT_DIR:?REBUILT_DIR}; SECS_DVD=${SECS_DVD:-60}; T=$(cd "$(dirname "$0")" && pwd); mkdir -p "$O"
 . "$T/reboot_wait.sh"
 R=\$HOME/rung3
@@ -13,6 +13,7 @@ for side in ${SIDES:-boot K KU}; do
   scp -q "$T"/userspace/va_capture/play_with_recorder_*.command "$T/userspace/va_capture/auto_play.command" G5:rung3/va_cap/
   ssh G5 "chmod +x $R/side_launch.command $R/app_sweep.command; : > $R/side_env; rm -f $R/side_launch_app $R/side_launch_done; kextstat | grep ATIRadeonX1000" > "$D/proof/boot_kext.txt" 2>&1
   SIDE_LAUNCH=0
+  if [ $side = S ] && [ "${DIRECT_CONTROL:-0}" = 1 ]; then echo "SIDE_DIRECT=1" > "$D/proof/side_env.local"; scp -q "$D/proof/side_env.local" G5:rung3/side_env; SIDE_LAUNCH=1; fi
   if [ $side = KU ]; then ssh G5 "sh $R/ku_env.sh on $IMG $SHA" > "$D/proof/ku_env.txt" 2>&1 < /dev/null; fi
   SWAPDIR=$RB; [ $side = S ] && SWAPDIR=${STOCK_DIR:-stockkext}
   if [ $side != boot ]; then
@@ -33,12 +34,15 @@ EOE
     ssh G5 "screencapture -x $R/ku_after_ws.png" > /dev/null 2>&1 < /dev/null
     sleep 30
   fi
+  ssh G5 "$R/accel_idle_sample 400 50" > "$D/proof/idle_sample.txt" 2>&1 < /dev/null   # accelerator idle/busy histogram at the idle desktop (Tests/accel_idle_sample.c, built into ~/rung3)
   scp -q G5:rung3/side_env "$D/proof/side_env.txt" 2>/dev/null; scp -q G5:rung3/ku_after_ws.png "$D/proof/" 2>/dev/null
+  case " $SKIP " in *" sweep "*) ;; *)
   APPS=${APPS:-"30|/Applications/Srb2mac.app 30|/Applications/Half-Life_10.4_Tiger-SDL2.app 40|/Applications/Unreal Tournament 2004.app 30|/Applications/Aquaria.app 30|/Applications/VVVVVV.app 30|/Applications/Marathon.app 40|/Applications/Motion.app 30|/Developer/Applications/Graphics Tools/Quartz Composer.app 30|/Applications/Godot.app"}
   echo "$APPS" | sed 's/ \([0-9][0-9]*|\/\)/\n\1/g' | { set --; while IFS= read -r l; do set -- "$@" "$l"; done; SEQ=boot sh "$T/app_sweep.sh" "$D/sweep" "$@"; }
-  SEQ=boot JOBS="quicktime|\$HOME/rung3/va_cap/streams/test_ntsc_720x480.mpg|20 vlc|\$HOME/rung3/va_cap/streams/test_ntsc_dvd.vob|30" sh "$T/video_consumer_compare.sh" "$D/video"
-  sh "$T/display_sleep_test.sh" "$D/dsleep" boot 3
-  CLICK_X=$([ $SIDE_LAUNCH = 1 ] && echo 125 || echo 759) CLICK_Y2=$([ $SIDE_LAUNCH = 1 ] && echo 148 || echo 102) SEQ=boot SIDE_LAUNCH=$SIDE_LAUNCH sh "$T/dvd_disc_compare.sh" "$D/dvd" $SECS_DVD
+  ;; esac
+  case " $SKIP " in *" video "*) ;; *) SEQ=boot JOBS="quicktime|\$HOME/rung3/va_cap/streams/test_ntsc_720x480.mpg|20 vlc|\$HOME/rung3/va_cap/streams/test_ntsc_dvd.vob|30" sh "$T/video_consumer_compare.sh" "$D/video" ;; esac
+  case " $SKIP " in *" dsleep "*) ;; *) sh "$T/display_sleep_test.sh" "$D/dsleep" boot 3 ;; esac
+  case " $SKIP " in *" dvd "*) ;; *) CLICK_X=$([ $SIDE_LAUNCH = 1 ] && echo 125 || echo 759) CLICK_Y2=$([ $SIDE_LAUNCH = 1 ] && echo 148 || echo 102) SEQ=boot SIDE_LAUNCH=$SIDE_LAUNCH sh "$T/dvd_disc_compare.sh" "$D/dvd" $SECS_DVD ;; esac
   for f in side_launch_redirect.log side_launch_dyld.txt; do scp -q G5:rung3/$f "$D/proof/" 2>/dev/null; done
   ssh G5 "cp /Users/Shared/ws_ku_redirect.log $R/final_eval/ws_ku_redirect_$side.log 2>/dev/null; true" >/dev/null 2>&1; scp -q G5:/Users/Shared/ws_ku_redirect.log "$D/proof/ws_redirect_after.log" 2>/dev/null
   echo "$side: done $(date)" >> "$O/sides.log"

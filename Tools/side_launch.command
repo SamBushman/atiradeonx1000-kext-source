@@ -7,7 +7,9 @@ APP="/Applications/$APPNAME.app"
 [ -f $HOME/rung3/side_env ] && . $HOME/rung3/side_env
 EXE=`defaults read "$APP/Contents/Info" CFBundleExecutable 2>/dev/null`
 rm -f $HOME/rung3/side_launch_redirect.log $HOME/rung3/side_launch_dyld.txt
-if [ -n "$SIDE_INSERT" ] && [ -n "$EXE" ]; then
+if [ "$SIDE_DIRECT" = 1 ] && [ -z "$SIDE_INSERT" ] && [ -n "$EXE" ]; then   # CONTROL: direct launch (same process shape as the KU side) without any rebuilt-userspace environment
+  ( cd /; "$APP/Contents/MacOS/$EXE" > $HOME/rung3/side_launch_app.out 2>&1 < /dev/null & )
+elif [ -n "$SIDE_INSERT" ] && [ -n "$EXE" ]; then
   ( cd /; GLD_REDIRECT_LOG=$HOME/rung3/side_launch_redirect.log DYLD_INSERT_LIBRARIES="$SIDE_INSERT" DYLD_PRINT_LIBRARIES=1 "$APP/Contents/MacOS/$EXE" > $HOME/rung3/side_launch_app.out 2> $HOME/rung3/side_launch_dyld.txt < /dev/null & )
 else
   open -a "$APPNAME"
