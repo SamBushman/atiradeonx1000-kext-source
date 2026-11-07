@@ -98,17 +98,41 @@ def fuse(lines, stat):
             else:                                                  # conditional branch (beq, bne, bc, bdnz ...): target and fall through
                 succ[k] = succ[k] + [labels[t] for t in tgt]
                 if not tgt: rd[k] = ALL
-    liveout = [0] * n; livein = [0] * n
-    changed = True
-    while changed:
-        changed = False
-        for k in range(n - 1, -1, -1):
-            lo = 0
-            for t in succ[k]:
-                lo |= livein[t]
-            li = rd[k] | (lo & ~wr[k])
-            if lo != liveout[k] or li != livein[k]:
-                liveout[k] = lo; livein[k] = li; changed = True
+    # what a call reads: at -O0 the argument registers are written in the basic block right before the call; the registers written since the previous call/branch are
+    # the arguments being assembled (a region that starts at a label, e.g. a conditional-expression merge, cannot be seen and reads every argument register)
+    def call_args(k):
+        got = 0
+        q = k - 1
+        while q >= 0:
+            if is_barrier(q):
+                if not (lines[q] and lines[q][0] not in ' \t'):      # previous call/branch: the region is exactly (q, k)
+                    pre = 0                                          # floating-point arguments occupy f1, f2, ... in order: only a written prefix is read
+                    while (got >> (pre + 1)) & 1 and pre < 13:
+                        pre += 1
+                    return ((1 << (pre + 1)) - 2) & ARGS
+                return ARGS                                          # label: unknown predecessors
+            got |= wr[q]
+            q -= 1
+        return ARGS
+    rdreal = list(rd)
+    for k in range(n):
+        if ins[k] and ins[k][0] in ('bl', 'bla', 'bctrl', 'blrl') and rd[k] == ARGS:
+            rdreal[k] = call_args(k)
+    def liveness(rdl):
+        liveout = [0] * n; livein = [0] * n
+        changed = True
+        while changed:
+            changed = False
+            for k in range(n - 1, -1, -1):
+                lo = 0
+                for t in succ[k]:
+                    lo |= livein[t]
+                li = rdl[k] | (lo & ~wr[k])
+                if lo != liveout[k] or li != livein[k]:
+                    liveout[k] = lo; livein[k] = li; changed = True
+        return liveout
+    liveout = liveness(rdreal)
+    liveout_real = liveout
     used = set()
     for k in range(n):
         if ins[k]:
@@ -149,7 +173,7 @@ def fuse(lines, stat):
         if X == D and Y == D:
             stat['both operands'] = stat.get('both operands', 0) + 1; continue
         # D must be dead after j (true liveness over the CFG)
-        if E != D and (liveout[j] >> D) & 1:
+        if E != D and (liveout_real[j] >> D) & 1:
             stat['result live'] = stat.get('result live', 0) + 1; continue
         if mj.startswith('fadd'):
             C = Y if X == D else X; newmn = 'fmadds' if single else 'fmadd'
