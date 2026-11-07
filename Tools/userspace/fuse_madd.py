@@ -66,23 +66,49 @@ def fuse(lines, stat):
         if mn.startswith('b') and not mn.startswith('bi'):
             return True
         return rw(mn, ins[k][1]) is None
-    def dead_from(i, j, x):
-        """True if FP register x is not accessed in (i, j] and the first access after i is a write in the same basic block (so its value at i is dead)"""
-        for k in range(i + 1, min(n, i + 400)):
-            if is_barrier(k):
-                return False
-            if ins[k] is None:
-                continue
-            r = rw(ins[k][0], ins[k][1])
-            if k <= j:
-                if x in r[0] or x in r[1]:
-                    return False
-                continue
-            if x in r[0]:
-                return False
-            if x in r[1]:
-                return True
-        return False
+    # backward liveness of the FP registers over the function's control-flow graph (bit r = f<r>)
+    ALL = (1 << 32) - 1
+    VOL = (1 << 14) - 1                      # f0..f13 are call-clobbered
+    ARGS = VOL & ~1                          # f1..f13 carry call arguments
+    labels = {}
+    for k in range(n):
+        m = re.match(r'([^\s:]+):\s*$', lines[k])
+        if m: labels[m.group(1)] = k
+    rd = [0] * n; wr = [0] * n; succ = [None] * n
+    for k in range(n):
+        succ[k] = [k + 1] if k + 1 < n else []
+        if ins[k] is None:
+            continue
+        mn, ops = ins[k]
+        r = rw(mn, ops)
+        if r is None:
+            rd[k] = ALL; continue
+        rd[k] = sum(1 << x for x in r[0]); wr[k] = sum(1 << x for x in r[1])
+        if mn.startswith('b') and not mn.startswith('bi'):
+            tgt = [o for o in ops if o in labels]
+            if mn in ('blr',):
+                rd[k] = 1 << 1; succ[k] = []                       # returns f1
+            elif mn in ('bctr',):
+                rd[k] = ALL; succ[k] = []                          # unknown target: everything live
+            elif mn in ('bl', 'bla', 'bctrl', 'blrl'):
+                rd[k] = ARGS; wr[k] = VOL                          # call: reads the argument registers, clobbers the volatile ones
+            elif mn == 'b':
+                succ[k] = [labels[t] for t in tgt] if tgt else []
+                if not tgt: rd[k] = ALL
+            else:                                                  # conditional branch (beq, bne, bc, bdnz ...): target and fall through
+                succ[k] = succ[k] + [labels[t] for t in tgt]
+                if not tgt: rd[k] = ALL
+    liveout = [0] * n; livein = [0] * n
+    changed = True
+    while changed:
+        changed = False
+        for k in range(n - 1, -1, -1):
+            lo = 0
+            for t in succ[k]:
+                lo |= livein[t]
+            li = rd[k] | (lo & ~wr[k])
+            if lo != liveout[k] or li != livein[k]:
+                liveout[k] = lo; livein[k] = li; changed = True
     used = set()
     for k in range(n):
         if ins[k]:
@@ -122,22 +148,9 @@ def fuse(lines, stat):
         E, X, Y = [int(FREG.fullmatch(o).group(1)) for o in oj]
         if X == D and Y == D:
             stat['both operands'] = stat.get('both operands', 0) + 1; continue
-        # D must be dead after j (rewritten before any read, or the block ends)
-        dead = True
-        for k in range(j + 1, min(n, j + 40)):
-            if is_barrier(k):
-                break
-            if ins[k] is None:
-                continue
-            r = rw(ins[k][0], ins[k][1])
-            if D in r[0]:
-                dead = False; break
-            if D in r[1]:
-                break
-        if E != D and not dead:
+        # D must be dead after j (true liveness over the CFG)
+        if E != D and (liveout[j] >> D) & 1:
             stat['result live'] = stat.get('result live', 0) + 1; continue
-        if E == D:
-            pass
         if mj.startswith('fadd'):
             C = Y if X == D else X; newmn = 'fmadds' if single else 'fmadd'
         elif X == D:
@@ -151,8 +164,9 @@ def fuse(lines, stat):
             if reg in written:
                 busy = {rg for (a, b, rg) in reserved if not (b < i or a > j)}
                 free = [x for x in range(13, 1, -1) if x not in used and x not in busy and x != D]
-                if not free:                      # every register is mentioned: take one that is provably dead from the multiply on
-                    free = [x for x in range(13, -1, -1) if x not in busy and x != D and x not in (A, B, C, E) and dead_from(i, j, x)]
+                if not free:                      # every register is mentioned: take one that is dead after the multiply and untouched in the window
+                    free = [x for x in range(13, -1, -1) if x not in busy and x != D and x not in (A, B, C, E) and not (liveout[i] >> x) & 1
+                            and not any(((rd[k] | wr[k]) >> x) & 1 for k in range(i + 1, j + 1))]
                 free = [x for x in free if x not in [c[1] for c in copies]]
                 if not free:
                     break
