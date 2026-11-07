@@ -11,6 +11,9 @@ for tag in $SEQ; do
   fi
   sleep $SETTLE
   mkdir -p "$O/$tag"
+  if [ "${SIDE_LAUNCH:-0}" = 1 ]; then   # KU side: DVD Player must be started WITH the rebuilt-userspace environment (the auto-launch on disc mount goes through LaunchServices and would not carry it)
+    timeout 60 ssh G5 "rm -f \$HOME/rung3/side_launch_done; echo 'DVD Player' > \$HOME/rung3/side_launch_app; open -a Terminal \$HOME/rung3/side_launch.command"; sleep 20
+  fi
   timeout 60 ssh G5 "hdiutil attach \$HOME/rung3/dvdgen/test.iso | tail -1; open -a \"DVD Player\"; sh \$HOME/rung3/va_cap/watch_hw_path.sh $SECS \$HOME/rung3/dvd_$tag.watch > /dev/null 2>&1 &" >> "$O/driver.log" 2>&1
   sleep ${PRECLICK:-12}; timeout 30 ssh G5 "screencapture -x \$HOME/rung3/dvd_${tag}_0.png; \$HOME/rung3/gui_input click 759 148; sleep 1; \$HOME/rung3/gui_input click 759 102"   # answer the "previously viewed disc" dialog: click Beginning of Disc (a Return key event does not reach it)
   sleep 5; timeout 30 ssh G5 "screencapture -x \$HOME/rung3/dvd_${tag}_1.png"

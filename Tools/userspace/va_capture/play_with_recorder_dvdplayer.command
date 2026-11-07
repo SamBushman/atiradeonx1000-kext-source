@@ -6,6 +6,7 @@ D=$HOME/rung3/va_cap; cd "$D" || { echo "copy the va_capture folder to $HOME/run
 F=${1:-$D/dvd/disc}
 ts=`date +%H%M%S`
 sh $D/watch_hw_path.sh 90 $D/hw_watch_$ts.log > /dev/null 2>&1 &
+[ -f $HOME/rung3/side_env ] && . $HOME/rung3/side_env; [ -n "$SIDE_INSERT" ] && export GLD_REDIRECT_LOG=$D/redirect_$ts.log   # Phase 4 KU side: rebuilt-userspace environment (empty file on the other sides)
 echo "recording to $D/rec_$ts.tsv  (.mem = mapped-buffer dumps); play the file, then quit the player"
-IOKIT_RECORD_LOG=$D/rec_$ts.tsv VA_DUMP_MAX=64 VA_DUMP_BYTES=4096 DYLD_INSERT_LIBRARIES=$D/iokit_record_va.dylib "/Applications/DVD Player.app/Contents/MacOS/DVD Player" "$F"
+IOKIT_RECORD_LOG=$D/rec_$ts.tsv VA_DUMP_MAX=64 VA_DUMP_BYTES=4096 DYLD_INSERT_LIBRARIES=$D/iokit_record_va.dylib${SIDE_INSERT:+:$SIDE_INSERT} "/Applications/DVD Player.app/Contents/MacOS/DVD Player" "$F"
 echo "player exited; logs:"; ls -l $D/rec_$ts.* $D/hw_watch_$ts.log 2>/dev/null
