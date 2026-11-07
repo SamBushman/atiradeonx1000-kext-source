@@ -2,15 +2,12 @@
  * distance attenuation (GL_POINT_DISTANCE_ATTENUATION, GL_POINT_SIZE_MIN/MAX). Checks for extension
  * availability first and records "not available" rather than assuming, per project convention.
  *
- * POINT_SIZE_MIN/MAX FINDING (confirmed real, see diag_pointparam.c + diag_pointparam2.c): COORD_REPLACE
- * texture-coordinate substitution across a sprite's footprint works correctly (confirmed via diag_pointsprite.c's
- * full-grid scan - this test's own two-corner sample happened to land on a diagonally-symmetric checkerboard
- * texture's matching corners, a test-construction bug, now fixed below). But GL_POINT_SIZE_MIN/MAX (ARB_point_
- * parameters) is a confirmed real no-op: glPointParameterfARB is accepted with no GL error, glGetFloatv reads
- * back exactly the value that was set, yet the rasterizer applies neither the lower nor the upper clamp - a
- * glPointSize(50) with MAX=8 still renders 50px wide, and a glPointSize(1) with MIN=20 still renders 1px wide.
- * Documented as quirk 19 in ~/.claude/skills/ati-x1900-driver-quirks, tracked as issue #132. The clamp check
- * below is a regression test for that finding (expects NO clamping), not an assertion that the feature works. */
+ * POINT_SIZE_MIN/MAX: COORD_REPLACE texture-coordinate substitution across a sprite's footprint works correctly (confirmed via diag_pointsprite.c's
+ * full-grid scan - this test's own two-corner sample once landed on a diagonally-symmetric checkerboard's matching corners, a test-construction bug, fixed below).
+ * GL_POINT_SIZE_MIN/MAX (ARB_point_parameters) was a stock-driver no-op (quirk 19, issue #132): accepted without error, read back as set, but the rasterizer applied no
+ * clamp - glPointSize(50) with MAX=8 rendered 50 px wide, glPointSize(1) with MIN=20 rendered 1 px wide. The rebuilt GLDriver applies both clamps (#132 fix), so since
+ * Nov 6 2026 (stock parity is no longer the pass criterion) the clamp checks assert the SPEC behaviour: a square point of size 8 lights ~64 pixels, of size 20 ~400.
+ * The stock driver therefore FAILS the two clamp checks (known stock bug, quirk 19); a rebuilt stack must pass them. */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -112,13 +109,20 @@ int main(void) {
         glFinish(); glReadPixels(0,0,W,H,GL_RGBA,GL_UNSIGNED_BYTE,buf);
         int lit = 0, x,y;
         for (y=0;y<H;y++) for (x=0;x<W;x++) { GLubyte *p=buf+(y*W+x)*4; if (p[0]>200) lit++; }
-        /* CONFIRMED REAL BUG (diag_pointparam.c/diag_pointparam2.c, quirk 19/#132): GL_POINT_SIZE_MIN/MAX is
-         * accepted with no GL error and reads back exactly as set, but the rasterizer applies no clamp at all
-         * in either direction - a glPointSize(50) with MAX=8 still renders full-size. This is a regression
-         * check for that finding (expects NO clamp), not an assertion the feature works. */
-        int unclamped_area = (int)(50.0*50.0*3.14159/4 * 0.7);   /* generous lower bound for "still roughly full 50px circle" */
-        int ok = lit > unclamped_area;
-        printf("POINT_SIZE_MAX clamp (requested 50, max 8): lit pixel count = %d - clamp NOT applied (expected, quirk 19) = %s\n", lit, ok?"OK (confirmed still-broken)":"MISMATCH (clamp may now work - re-verify!)");
+        /* GL_POINT_SIZE_MAX: size 50 requested, MAX=8 -> an 8x8 point (64 lit pixels; a round point of size 8 would be ~50). Stock (quirk 19, #132) lights ~2500. */
+        int ok = lit >= 36 && lit <= 100;
+        printf("POINT_SIZE_MAX clamp (requested 50, max 8): lit pixel count = %d (want 36..100) = %s\n", lit, ok?"OK":"MISMATCH (clamp not applied: stock quirk 19 / #132)");
+        if (!ok) bad++;
+        /* GL_POINT_SIZE_MIN: size 1 requested, MIN=20 -> a 20x20 point (400 lit pixels). Stock lights 1. */
+        glPointSize(1.0f);
+        glPointParameterfARB(GL_POINT_SIZE_MIN, 20.0f);
+        glPointParameterfARB(GL_POINT_SIZE_MAX, 64.0f);
+        glClear(GL_COLOR_BUFFER_BIT); glColor3f(1,1,1);
+        glBegin(GL_POINTS); glVertex2f(0,0); glEnd();
+        glFinish(); glReadPixels(0,0,W,H,GL_RGBA,GL_UNSIGNED_BYTE,buf);
+        lit = 0; for (y=0;y<H;y++) for (x=0;x<W;x++) { GLubyte *p=buf+(y*W+x)*4; if (p[0]>200) lit++; }
+        ok = lit >= 300 && lit <= 500;
+        printf("POINT_SIZE_MIN clamp (requested 1, min 20): lit pixel count = %d (want 300..500) = %s\n", lit, ok?"OK":"MISMATCH (clamp not applied: stock quirk 19 / #132)");
         if (!ok) bad++;
     }
 
