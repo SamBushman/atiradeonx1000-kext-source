@@ -13,7 +13,7 @@ for f in "$@"; do
     stress:*) sd=`echo "${f#stress:}" | cut -d, -f1`; it=`echo "${f#stress:}" | cut -d, -f2`; f=`echo "$f" | tr ':,' '__'`; cmd="env GLSTRESS_SEED=$sd GLSTRESS_ITERS=$it GLSTRESS_NO=${GLSTRESS_NO:-v} ./glcov stress" ;;   # stress:SEED,ITERS (ARB vertex programs skipped by default)
     *) cmd="./glcov $f" ;;
   esac
-  DYLD_INSERT_LIBRARIES="$P/opcode_recorder.dylib" OPCODE_LOG="$O/$f.tsv" $cmd > "$O/$f.out" 2>&1 &
+  DYLD_INSERT_LIBRARIES="$P/opcode_recorder.dylib${DYLD_INSERT_LIBRARIES:+:$DYLD_INSERT_LIBRARIES}" OPCODE_LOG="$O/$f.tsv" $cmd > "$O/$f.out" 2>&1 &
   pid=$!; i=0
   while kill -0 $pid 2>/dev/null && [ $i -lt 90 ]; do sleep 1; i=`expr $i + 1`; done
   if kill -0 $pid 2>/dev/null; then kill $pid; sleep 2; kill -9 $pid 2>/dev/null; echo "$f: KILLED after 90 s" >> "$O/summary.txt"; echo "STOP: $f killed"; cat "$O/summary.txt"; exit 3; fi
