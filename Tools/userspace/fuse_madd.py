@@ -14,7 +14,7 @@ block, no call) that reads D; it must be fadd[s]/fsub[s] of the same precision, 
 The fused instruction reads A and B where the add stood; -O0 often reloads one of them (typically f0) in between, so such an operand is copied to a scratch
 FP register (one not mentioned anywhere in the function) at the place of the multiply.  A window containing a call, branch or label is left alone.
 Prints '<file>: N fused, M left (reason counts)' to stderr.  Idempotent: already fused code has no fmul left to pair."""
-import re, sys
+import os, re, sys
 
 BRANCH = re.compile(r'^(b|bl|blr|blrl|bctr|bctrl|bdnz|bdz|b[a-z]{1,3}|b[a-z]{1,3}[+-]?)\b')
 FREG = re.compile(r'\bf(\d+)\b')
@@ -100,12 +100,12 @@ def fuse(lines, stat):
                 if not tgt: rd[k] = ALL
     # what a call reads: at -O0 the argument registers are written in the basic block right before the call; the registers written since the previous call/branch are
     # the arguments being assembled (a region that starts at a label, e.g. a conditional-expression merge, cannot be seen and reads every argument register)
-    def call_args(k):
+    def call_args(k, conservative=True):
         got = 0
         q = k - 1
         while q >= 0:
             if is_barrier(q):
-                if not (lines[q] and lines[q][0] not in ' \t'):      # previous call/branch: the region is exactly (q, k)
+                if not conservative or not (lines[q] and lines[q][0] not in ' \t'):      # previous call/branch: the region is exactly (q, k)
                     pre = 0                                          # floating-point arguments occupy f1, f2, ... in order: only a written prefix is read
                     while (got >> (pre + 1)) & 1 and pre < 13:
                         pre += 1
@@ -114,10 +114,10 @@ def fuse(lines, stat):
             got |= wr[q]
             q -= 1
         return ARGS
-    rdreal = list(rd)
+    rdreal = list(rd); rdtemp = list(rd)
     for k in range(n):
         if ins[k] and ins[k][0] in ('bl', 'bla', 'bctrl', 'blrl') and rd[k] == ARGS:
-            rdreal[k] = call_args(k)
+            rdreal[k] = call_args(k); rdtemp[k] = call_args(k, False)
     def liveness(rdl):
         liveout = [0] * n; livein = [0] * n
         changed = True
@@ -131,8 +131,8 @@ def fuse(lines, stat):
                 if lo != liveout[k] or li != livein[k]:
                     liveout[k] = lo; livein[k] = li; changed = True
         return liveout
-    liveout = liveness(rdreal)
-    liveout_real = liveout
+    liveout = liveness(rdreal)            # scratch choice: a call that follows a label may read any argument register
+    liveout_real = liveness(rdtemp)       # the mul temporary: only the arguments assembled in the call's own block
     used = set()
     for k in range(n):
         if ins[k]:
@@ -174,7 +174,9 @@ def fuse(lines, stat):
             stat['both operands'] = stat.get('both operands', 0) + 1; continue
         # D must be dead after j (true liveness over the CFG)
         if E != D and (liveout_real[j] >> D) & 1:
-            stat['result live'] = stat.get('result live', 0) + 1; continue
+            stat['result live'] = stat.get('result live', 0) + 1
+            if os.environ.get('FUSE_DEBUG'): print('RESULT LIVE (D=f%d) window:\n%s\n--- after:\n%s' % (D, '\n'.join(lines[i:j + 1]), '\n'.join(lines[j + 1:j + 12])), file=sys.stderr)
+            continue
         if mj.startswith('fadd'):
             C = Y if X == D else X; newmn = 'fmadds' if single else 'fmadd'
         elif X == D:
@@ -190,6 +192,9 @@ def fuse(lines, stat):
                 free = [x for x in range(13, 1, -1) if x not in used and x not in busy and x != D]
                 if not free:                      # every register is mentioned: take one that is dead after the multiply and untouched in the window
                     free = [x for x in range(13, -1, -1) if x not in busy and x != D and x not in (A, B, C, E) and not (liveout[i] >> x) & 1
+                            and not any(((rd[k] | wr[k]) >> x) & 1 for k in range(i + 1, j + 1))]
+                if not free:                      # still none: f8..f13 only, judged with the block-local argument model (a call with 8+ floating-point arguments assembled across a label does not occur)
+                    free = [x for x in range(13, 7, -1) if x not in busy and x != D and x not in (A, B, C, E) and not (liveout_real[i] >> x) & 1
                             and not any(((rd[k] | wr[k]) >> x) & 1 for k in range(i + 1, j + 1))]
                 free = [x for x in free if x not in [c[1] for c in copies]]
                 if not free:
@@ -215,6 +220,8 @@ def fuse(lines, stat):
                 stat['fused with scratch copy'] = stat.get('fused with scratch copy', 0) + 1
             continue
         stat['no scratch register'] = stat.get('no scratch register', 0) + 1
+        if os.environ.get('FUSE_DEBUG'):
+            print('NO SCRATCH (A=f%d B=f%d C=f%d D=f%d E=f%d) liveout(i)=%s window:\n%s' % (A, B, C, D, E, [x for x in range(14) if (liveout[i] >> x) & 1], '\n'.join(lines[i:j + 1])), file=sys.stderr)
     return out
 
 def main():
