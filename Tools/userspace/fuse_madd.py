@@ -89,7 +89,7 @@ def fuse(lines, stat):
             if mn in ('blr',):
                 rd[k] = 1 << 1; succ[k] = []                       # returns f1
             elif mn in ('bctr',):
-                rd[k] = ALL; succ[k] = []                          # unknown target: everything live
+                rd[k] = 0; succ[k] = []                            # a switch dispatch (-O0 emits bctr only for jump tables): no floating-point register is live across it
             elif mn in ('bl', 'bla', 'bctrl', 'blrl'):
                 rd[k] = ARGS; wr[k] = VOL                          # call: reads the argument registers, clobbers the volatile ones
             elif mn == 'b':
@@ -188,15 +188,13 @@ def fuse(lines, stat):
         copies = []
         for which, reg in (('A', A), ('B', B)):
             if reg in written:
-                busy = {rg for (a, b, rg) in reserved if not (b < i or a > j)}
+                busy = {rg for (a, b, rg) in reserved if not (b < i or a > j)} | {c[1] for c in copies}
+                untouched = lambda x: not any(((rd[k] | wr[k]) >> x) & 1 for k in range(i + 1, j + 1))
                 free = [x for x in range(13, 1, -1) if x not in used and x not in busy and x != D]
                 if not free:                      # every register is mentioned: take one that is dead after the multiply and untouched in the window
-                    free = [x for x in range(13, -1, -1) if x not in busy and x != D and x not in (A, B, C, E) and not (liveout[i] >> x) & 1
-                            and not any(((rd[k] | wr[k]) >> x) & 1 for k in range(i + 1, j + 1))]
+                    free = [x for x in range(13, -1, -1) if x not in busy and x != D and x not in (A, B, C, E) and not (liveout[i] >> x) & 1 and untouched(x)]
                 if not free:                      # still none: f8..f13 only, judged with the block-local argument model (a call with 8+ floating-point arguments assembled across a label does not occur)
-                    free = [x for x in range(13, 7, -1) if x not in busy and x != D and x not in (A, B, C, E) and not (liveout_real[i] >> x) & 1
-                            and not any(((rd[k] | wr[k]) >> x) & 1 for k in range(i + 1, j + 1))]
-                free = [x for x in free if x not in [c[1] for c in copies]]
+                    free = [x for x in range(13, 7, -1) if x not in busy and x != D and x not in (A, B, C, E) and not (liveout_real[i] >> x) & 1 and untouched(x)]
                 if not free:
                     break
                 s = free[0]
@@ -221,7 +219,7 @@ def fuse(lines, stat):
             continue
         stat['no scratch register'] = stat.get('no scratch register', 0) + 1
         if os.environ.get('FUSE_DEBUG'):
-            print('NO SCRATCH (A=f%d B=f%d C=f%d D=f%d E=f%d) liveout(i)=%s window:\n%s' % (A, B, C, D, E, [x for x in range(14) if (liveout[i] >> x) & 1], '\n'.join(lines[i:j + 1])), file=sys.stderr)
+            print('NO SCRATCH (A=f%d B=f%d C=f%d D=f%d E=f%d) liveout(i)=%s real=%s window:\n%s' % (A, B, C, D, E, [x for x in range(14) if (liveout[i] >> x) & 1], [x for x in range(14) if (liveout_real[i] >> x) & 1], '\n'.join(lines[i:j + 1])), file=sys.stderr)
     return out
 
 def main():
