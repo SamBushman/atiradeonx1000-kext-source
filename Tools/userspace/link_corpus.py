@@ -1697,7 +1697,7 @@ else:
     COMPILE_CMD = 'gcc $CF $XF -c $f -o obj/${f%.c}.o'
 kind = '-dynamiclib' if m.filetype == 6 else '-bundle'
 ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usage: sh build.sh [OUT_NAME]',
-      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc %s -w %s -fno-common -force_cpusubtype_ALL%s"' % (os.environ.get('LINK_OPT', '-O0'), os.environ.get('LINK_PIC', '-fPIC'), ' -finstrument-functions' if os.environ.get('COVERAGE') else ''),
+      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc %s -w %s -fno-common -force_cpusubtype_ALL%s"' % (os.environ.get('LINK_OPT', cfg.get('link_opt', '-O0')), os.environ.get('LINK_PIC', '-fPIC'), ' -finstrument-functions' if os.environ.get('COVERAGE') else ''),
       'rm -rf obj; mkdir obj',
       # LINK_OPT_ALT_FILES (space-separated part basenames) are compiled with LINK_OPT_ALT instead of LINK_OPT (issue #212: the shader-compiler parts are faster at -Os, the draw/state parts at -O2)
       'ALTFILES=" %s "; CFLAGS_ALT="-arch ppc %s -w %s -fno-common -force_cpusubtype_ALL"' % (os.environ.get('LINK_OPT_ALT_FILES', ''), os.environ.get('LINK_OPT_ALT', '-Os -mtune=970'), os.environ.get('LINK_PIC', '-fPIC')),

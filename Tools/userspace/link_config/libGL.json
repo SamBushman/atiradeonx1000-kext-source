@@ -1,4 +1,5 @@
 {
+ "link_opt": "-O2 -mtune=970",
  "gl_headers": [
   "${GL_HEADERS}/gl.h",
   "${GL_HEADERS}/glext.h"
