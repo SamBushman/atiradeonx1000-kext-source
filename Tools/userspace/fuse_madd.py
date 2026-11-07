@@ -66,6 +66,23 @@ def fuse(lines, stat):
         if mn.startswith('b') and not mn.startswith('bi'):
             return True
         return rw(mn, ins[k][1]) is None
+    def dead_from(i, j, x):
+        """True if FP register x is not accessed in (i, j] and the first access after i is a write in the same basic block (so its value at i is dead)"""
+        for k in range(i + 1, min(n, i + 400)):
+            if is_barrier(k):
+                return False
+            if ins[k] is None:
+                continue
+            r = rw(ins[k][0], ins[k][1])
+            if k <= j:
+                if x in r[0] or x in r[1]:
+                    return False
+                continue
+            if x in r[0]:
+                return False
+            if x in r[1]:
+                return True
+        return False
     used = set()
     for k in range(n):
         if ins[k]:
@@ -134,6 +151,8 @@ def fuse(lines, stat):
             if reg in written:
                 busy = {rg for (a, b, rg) in reserved if not (b < i or a > j)}
                 free = [x for x in range(13, 1, -1) if x not in used and x not in busy and x != D]
+                if not free:                      # every register is mentioned: take one that is provably dead from the multiply on
+                    free = [x for x in range(13, -1, -1) if x not in busy and x != D and x not in (A, B, C, E) and dead_from(i, j, x)]
                 free = [x for x in free if x not in [c[1] for c in copies]]
                 if not free:
                     break
@@ -146,12 +165,10 @@ def fuse(lines, stat):
             ind = re.match(r'[ \t]*', lines[i]).group(0)
             if Ar == Br and A == B and copies:
                 pass
-            rep = ['%sfmr f%d,f%d\t# fuse_madd #229' % (ind, s, reg) for (_, s, reg) in copies]
-            if not rep:
-                rep = ['%s# fuse_madd #229: %s f%d,f%d,f%d fused into the add below' % (ind, mn, D, A, B)]
-            out[i] = '\n'.join(rep)
+            rep = ['%sfmr f%d,f%d' % (ind, s, reg) for (_, s, reg) in copies]
+            out[i] = '\n'.join(rep)      # no multiply left; no comments (Apple as rejects a trailing '#')
             ind2 = re.match(r'[ \t]*', lines[j]).group(0)
-            out[j] = '%s%s f%d,f%d,f%d,f%d\t# fuse_madd #229' % (ind2, newmn, E, Ar, Br, C)
+            out[j] = '%s%s f%d,f%d,f%d,f%d' % (ind2, newmn, E, Ar, Br, C)
             for (_, s, _) in copies:
                 reserved.append((i, j, s))
             done[i] = True
