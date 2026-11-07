@@ -1552,6 +1552,7 @@ int _PPParserParseTextureSourceVar(parser, operand)
 }
 
 /* ___lshrdi3 @ 0x97b84af0 (96 bytes) */
+/* libgcc helper: the 64-bit value is r3 (high word) : r4 (low word) in and out; the result halves were returned swapped, `CONCAT44(resultLo,resultHi)` (issue #228; Tests/userspace/shift64_test.c) */
 undefined8 ___lshrdi3(valueHi, valueLo, shift)
   uint valueHi;
   uint valueLo;
@@ -1562,7 +1563,7 @@ undefined8 ___lshrdi3(valueHi, valueLo, shift)
   undefined4 resultHi;
   
   if (shift == 0) {
-    return CONCAT44(valueLo,valueHi);
+    return CONCAT44(valueHi,valueLo);
   }
   complementShift = 0x20 - shift;
   if ((int)complementShift < 1) {
@@ -1573,7 +1574,7 @@ undefined8 ___lshrdi3(valueHi, valueLo, shift)
     resultHi = valueHi >> (shift & 0x3f);
     resultLo = valueLo >> (shift & 0x3f) | valueHi << (complementShift & 0x3f);
   }
-  return CONCAT44(resultLo,resultHi);
+  return CONCAT44(resultHi,resultLo);
 }
 
 /* ___ashldi3 @ 0x97b84b50 (96 bytes) */
@@ -1587,7 +1588,7 @@ undefined8 ___ashldi3(valueHi, valueLo, shift)
   undefined4 resultLo;
   
   if (shift == 0) {
-    return CONCAT44(valueLo,valueHi);
+    return CONCAT44(valueHi,valueLo);
   }
   complementShift = 0x20 - shift;
   if ((int)complementShift < 1) {
@@ -1598,7 +1599,7 @@ undefined8 ___ashldi3(valueHi, valueLo, shift)
     resultLo = valueLo << (shift & 0x3f);
     resultHi = valueHi << (shift & 0x3f) | valueLo >> (complementShift & 0x3f);
   }
-  return CONCAT44(resultLo,resultHi);
+  return CONCAT44(resultHi,resultLo);
 }
 
 /* _PPStreamGetTexOperationCount @ 0x97b84bb0 (60 bytes) */

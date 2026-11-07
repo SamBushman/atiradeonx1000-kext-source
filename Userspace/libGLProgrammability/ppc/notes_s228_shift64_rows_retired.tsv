@@ -1,0 +1,2 @@
+names_lpN_1.tsv:183	use	___ashldi3	uVar1	resultHi	INFERRED	high word of the result, returned with the low word	^\s*return\ CONCAT44\(uStack_2c,uVar1\);$	+1
+names_lpN_1.tsv:176	use	___lshrdi3	uVar1	resultLo	INFERRED	low word of the result, returned with the high word	^\s*return\ CONCAT44\(uVar1,uStack_30\);$	+1

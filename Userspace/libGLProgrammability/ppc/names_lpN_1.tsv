@@ -173,14 +173,12 @@ use	___lshrdi3	uVar1	complementShift	INFERRED	-(32 - shift) = shift - 32, the ri
 use	___lshrdi3	uVar1	complementShift	INFERRED	32 - shift, left-shift amount of the bits carried from the high word	^\s*uVar1\ =\ param_2\ >>\ \(param_3\ \&\ 0x3f\)\ \|\ param_1\ <<\ \(uVar1\ \&\ 0x3f\);$	+1	rhs	none
 use	___lshrdi3	uVar1	resultLo	INFERRED	low word of the result: valueHi >> (shift - 32)	^\s*uVar1\ =\ param_1\ >>\ \(\-uVar1\ \&\ 0x3f\);$	+1	lhs	none
 use	___lshrdi3	uVar1	resultLo	INFERRED	low word of the result: valueLo >> shift | valueHi << (32 - shift)	^\s*uVar1\ =\ param_2\ >>\ \(param_3\ \&\ 0x3f\)\ \|\ param_1\ <<\ \(uVar1\ \&\ 0x3f\);$	+1	lhs	none
-use	___lshrdi3	uVar1	resultLo	INFERRED	low word of the result, returned with the high word	^\s*return\ CONCAT44\(uVar1,uStack_30\);$	+1
 use	___ashldi3	uVar1	complementShift	INFERRED	32 - shift, the right-shift amount of the carried bits (<= 0 when shift >= 32)	^\s*uVar1\ =\ 0x20\ \-\ param_3;$	+1	lhs	none
 use	___ashldi3	uVar1	complementShift	INFERRED	32 - shift	^\s*if\ \(\(int\)uVar1\ <\ 1\)\ \{$	+1
 use	___ashldi3	uVar1	complementShift	INFERRED	-(32 - shift) = shift - 32, the left-shift amount for shift >= 32	^\s*uVar1\ =\ param_2\ <<\ \(\-uVar1\ \&\ 0x3f\);$	+1	rhs	none
 use	___ashldi3	uVar1	complementShift	INFERRED	32 - shift, right-shift amount of the bits carried from the low word	^\s*uVar1\ =\ param_1\ <<\ \(param_3\ \&\ 0x3f\)\ \|\ param_2\ >>\ \(uVar1\ \&\ 0x3f\);$	+1	rhs	none
 use	___ashldi3	uVar1	resultHi	INFERRED	high word of the result: valueLo << (shift - 32)	^\s*uVar1\ =\ param_2\ <<\ \(\-uVar1\ \&\ 0x3f\);$	+1	lhs	none
 use	___ashldi3	uVar1	resultHi	INFERRED	high word of the result: valueHi << shift | valueLo >> (32 - shift)	^\s*uVar1\ =\ param_1\ <<\ \(param_3\ \&\ 0x3f\)\ \|\ param_2\ >>\ \(uVar1\ \&\ 0x3f\);$	+1	lhs	none
-use	___ashldi3	uVar1	resultHi	INFERRED	high word of the result, returned with the low word	^\s*return\ CONCAT44\(uStack_2c,uVar1\);$	+1
 local	_MacroExpand	uVar7	expansionNumber	CONFIRMED	the number a __LINE__ (_GetLineNumber) or __FILE__ (_GetStringNumber) macro expands to; stored in yylval and printed with %d
 use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x40\)\)\(param_4,param_2,param_3,param_4\);$	+2
 use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(\(\-1\ <\ iVar6\)\ \&\&\ \(iVar6\ \-\ 5U\ <\ 8\)\)\ \{$	+1
