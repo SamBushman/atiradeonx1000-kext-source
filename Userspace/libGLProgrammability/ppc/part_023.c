@@ -436,7 +436,11 @@ int std____default_alloc_template_true_0____S_refill(n)
   int i;
   undefined4 *currentObj;
   int nobjs [6];
-  
+
+  /* issue #225: the free list has 16 entries (sizes 8..128); stock indexes it with (n+7)/8-1 without checking n, so n == 0 or n > 128 writes outside the table. */
+  if (n - 1 > 0x7f) {
+    return 0;
+  }
   nobjs[0] = 0x14;
   chunk = ((int (*)())std____default_alloc_template_true_0____S_chunk_alloc)(n,nobjs);
   if (nobjs[0] != 1) {
