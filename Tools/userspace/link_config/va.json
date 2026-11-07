@@ -1,4 +1,5 @@
 {
+ "fuse_madd": true,
  "toolchain_addr_ranges": [
   [
    "0x1070",

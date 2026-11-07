@@ -1,4 +1,5 @@
 {
+ "fuse_madd": true,
  "drop_decls": [
   "NAN",
   "_URC_FOREIGN_EXCEPTION_CAUGHT"

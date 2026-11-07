@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+"""fuse_madd.py FILE.s  - rewrite gcc -O0 PowerPC assembly so that a multiply whose only use is the add/subtract that follows it becomes ONE fused
+multiply-add (issue #229).
+
+The shipped libGLProgrammability / VADriver were compiled with an optimising gcc, which contracts `a*b + c` into fmadd(s) (one rounding).  The rebuilt images
+are built -O0 (stack layout; #212, #226), where GCC never contracts: `fmuls t,a,b ; fadds r,t,c` rounds twice and the result differs from the stock in the last
+bit (fnfuzz: _InterpreterNoiseGeneratorInterpolate, 17 of 200 trials).  This pass restores the stock rounding without touching anything else of the -O0 code.
+
+At -O0 every expression temporary is written once and read once, so the pattern is exact: for `fmul[s] D,A,B` find the first later instruction (same basic
+block, no call) that reads D; it must be fadd[s]/fsub[s] of the same precision, D must be dead afterwards, and then
+    fadd[s]  E,D,C / E,C,D  ->  fmadd[s]  E,A,B,C        (A*B + C)
+    fsub[s]  E,D,C          ->  fmsub[s]  E,A,B,C        (A*B - C)
+    fsub[s]  E,C,D          ->  fnmsub[s] E,A,B,C        (C - A*B)
+The fused instruction reads A and B where the add stood; -O0 often reloads one of them (typically f0) in between, so such an operand is copied to a scratch
+FP register (one not mentioned anywhere in the function) at the place of the multiply.  A window containing a call, branch or label is left alone.
+Prints '<file>: N fused, M left (reason counts)' to stderr.  Idempotent: already fused code has no fmul left to pair."""
+import re, sys
+
+BRANCH = re.compile(r'^(b|bl|blr|blrl|bctr|bctrl|bdnz|bdz|b[a-z]{1,3}|b[a-z]{1,3}[+-]?)\b')
+FREG = re.compile(r'\bf(\d+)\b')
+READ_ONLY = re.compile(r'^(stf|fcmp)')
+FOUR = ('fmadd', 'fmadds', 'fmsub', 'fmsubs', 'fnmadd', 'fnmadds', 'fnmsub', 'fnmsubs', 'fsel')
+
+def parse(line):
+    """-> (mnemonic, operands list) for an instruction line, None for anything else"""
+    s = line.split('#')[0].rstrip()
+    if not s.startswith('\t') and not s.startswith(' '):
+        return None
+    t = s.strip()
+    if not t or t.startswith('.') :
+        return None
+    p = t.split(None, 1)
+    return p[0], ([o.strip() for o in p[1].split(',')] if len(p) > 1 else [])
+
+def fregs(ops):
+    return [int(m.group(1)) for o in ops for m in [FREG.fullmatch(o)] if m]
+
+def rw(mn, ops):
+    """FP registers (reads, writes) of an instruction; None = unknown FP instruction (treated as a barrier)"""
+    allf = [int(m.group(1)) for o in ops for m in FREG.finditer(o)]
+    if mn.startswith('lf'):
+        return set(allf[1:]), set(allf[:1])            # the base register of lfsx is a GPR; f-regs in the operand are only the target
+    if mn.startswith('stf'):
+        return set(allf[:1]), set()
+    if mn.startswith('fcmp'):
+        return set(allf), set()
+    if mn.startswith('f') or mn.startswith('mffs'):
+        if mn in ('mtfsf', 'mtfsb0', 'mtfsb1', 'mtfsfi'):
+            return None
+        return set(allf[1:]), set(allf[:1])
+    if mn in ('mtfsf', 'mtfsb0', 'mtfsb1', 'mtfsfi', 'mffs'):
+        return None
+    return set(), set()
+
+def fuse(lines, stat):
+    n = len(lines)
+    ins = [parse(l) for l in lines]
+    # basic-block barriers: labels, branches/calls, unknown FP instructions
+    def is_barrier(k):
+        l = lines[k]
+        if l and not l[0] in ' \t' and l.rstrip().endswith(':'):
+            return True
+        if ins[k] is None:
+            return False
+        mn = ins[k][0]
+        if mn.startswith('b') and not mn.startswith('bi'):
+            return True
+        return rw(mn, ins[k][1]) is None
+    used = set()
+    for k in range(n):
+        if ins[k]:
+            used.update(int(m.group(1)) for o in ins[k][1] for m in FREG.finditer(o))
+    out = list(lines)
+    reserved = []          # (i, j, reg) windows with a scratch register in use
+    done = [False] * n
+    for i in range(n):
+        if ins[i] is None or ins[i][0] not in ('fmul', 'fmuls') or done[i]:
+            continue
+        mn, ops = ins[i]
+        if len(ops) != 3 or not all(FREG.fullmatch(o) for o in ops):
+            continue
+        single = mn == 'fmuls'
+        D, A, B = [int(FREG.fullmatch(o).group(1)) for o in ops]
+        j = None; written = set(); reason = None
+        for k in range(i + 1, min(n, i + 16)):
+            if is_barrier(k):
+                reason = 'barrier'; break
+            if ins[k] is None:
+                continue
+            r = rw(ins[k][0], ins[k][1])
+            if D in r[0]:
+                m2 = ins[k][0]
+                if m2 in (('fadds', 'fsubs') if single else ('fadd', 'fsub')) and len(ins[k][1]) == 3:
+                    j = k
+                else:
+                    reason = 'use is not add/sub'
+                break
+            if D in r[1]:
+                reason = 'result unused'; break
+            written |= r[1]
+        if j is None:
+            stat[reason or 'no use in window'] = stat.get(reason or 'no use in window', 0) + 1
+            continue
+        mj, oj = ins[j]
+        E, X, Y = [int(FREG.fullmatch(o).group(1)) for o in oj]
+        if X == D and Y == D:
+            stat['both operands'] = stat.get('both operands', 0) + 1; continue
+        # D must be dead after j (rewritten before any read, or the block ends)
+        dead = True
+        for k in range(j + 1, min(n, j + 40)):
+            if is_barrier(k):
+                break
+            if ins[k] is None:
+                continue
+            r = rw(ins[k][0], ins[k][1])
+            if D in r[0]:
+                dead = False; break
+            if D in r[1]:
+                break
+        if E != D and not dead:
+            stat['result live'] = stat.get('result live', 0) + 1; continue
+        if E == D:
+            pass
+        if mj.startswith('fadd'):
+            C = Y if X == D else X; newmn = 'fmadds' if single else 'fmadd'
+        elif X == D:
+            C = Y; newmn = 'fmsubs' if single else 'fmsub'
+        else:
+            C = X; newmn = 'fnmsubs' if single else 'fnmsub'
+        # operands the window overwrites must be saved at the multiply
+        Ar, Br = A, B
+        copies = []
+        for which, reg in (('A', A), ('B', B)):
+            if reg in written:
+                busy = {rg for (a, b, rg) in reserved if not (b < i or a > j)}
+                free = [x for x in range(13, 1, -1) if x not in used and x not in busy and x != D]
+                free = [x for x in free if x not in [c[1] for c in copies]]
+                if not free:
+                    break
+                s = free[0]
+                copies.append((which, s, reg))
+        else:
+            for which, s, reg in copies:
+                if which == 'A': Ar = s
+                else: Br = s
+            ind = re.match(r'[ \t]*', lines[i]).group(0)
+            if Ar == Br and A == B and copies:
+                pass
+            rep = ['%sfmr f%d,f%d\t# fuse_madd #229' % (ind, s, reg) for (_, s, reg) in copies]
+            if not rep:
+                rep = ['%s# fuse_madd #229: %s f%d,f%d,f%d fused into the add below' % (ind, mn, D, A, B)]
+            out[i] = '\n'.join(rep)
+            ind2 = re.match(r'[ \t]*', lines[j]).group(0)
+            out[j] = '%s%s f%d,f%d,f%d,f%d\t# fuse_madd #229' % (ind2, newmn, E, Ar, Br, C)
+            for (_, s, _) in copies:
+                reserved.append((i, j, s))
+            done[i] = True
+            stat['fused'] = stat.get('fused', 0) + 1
+            if copies:
+                stat['fused with scratch copy'] = stat.get('fused with scratch copy', 0) + 1
+            continue
+        stat['no scratch register'] = stat.get('no scratch register', 0) + 1
+    return out
+
+def main():
+    path = sys.argv[1]
+    src = open(path).read().split('\n')
+    # functions are separated by their .globl/.align; the scratch search ('not mentioned anywhere in the function') needs per-function text
+    funcs, cur = [], []
+    for l in src:
+        if re.match(r'\t\.(globl|private_extern)\b', l) and cur and any(re.match(r'\t\.align', x) for x in cur[-3:]):
+            funcs.append(cur); cur = []
+        cur.append(l)
+    funcs.append(cur)
+    stat = {}
+    res = []
+    for f in funcs:
+        res.extend(fuse(f, stat))
+    open(path, 'w').write('\n'.join(res))
+    print('%s: %s' % (path, ', '.join('%d %s' % (v, k) for k, v in sorted(stat.items())) or 'nothing to fuse'), file=sys.stderr)
+
+if __name__ == '__main__':
+    main()

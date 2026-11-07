@@ -1687,13 +1687,21 @@ void __cyg_profile_func_enter(void *fn, void *site) {
 }
 void __cyg_profile_func_exit(void *fn, void *site) {}
 ''' % HEADER_SYM)
+# issue #229: the stock images were built by an optimising gcc that contracts a*b+c into one fused multiply-add; the -O0 rebuilt image does not, and rounds twice.
+# cfg "fuse_madd": every part is compiled to assembly, Tools/userspace/fuse_madd.py fuses the mul+add/sub pairs, and that assembly is assembled (the -O0 code is otherwise unchanged).
+if cfg.get('fuse_madd'):
+    import shutil
+    shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fuse_madd.py'), os.path.join(out, 'fuse_madd.py'))
+    COMPILE_CMD = ('{ gcc $CF $XF -S $f -o obj/${f%.c}.s && ${FUSE_PY:-/usr/local/bin/python3} fuse_madd.py obj/${f%.c}.s 2>>obj/fuse_madd.log && gcc $CF $XF -c obj/${f%.c}.s -o obj/${f%.c}.o; }')
+else:
+    COMPILE_CMD = 'gcc $CF $XF -c $f -o obj/${f%.c}.o'
 kind = '-dynamiclib' if m.filetype == 6 else '-bundle'
 ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usage: sh build.sh [OUT_NAME]',
       'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc %s -w %s -fno-common -force_cpusubtype_ALL%s"' % (os.environ.get('LINK_OPT', '-O0'), os.environ.get('LINK_PIC', '-fPIC'), ' -finstrument-functions' if os.environ.get('COVERAGE') else ''),
       'rm -rf obj; mkdir obj',
       # LINK_OPT_ALT_FILES (space-separated part basenames) are compiled with LINK_OPT_ALT instead of LINK_OPT (issue #212: the shader-compiler parts are faster at -Os, the draw/state parts at -O2)
       'ALTFILES=" %s "; CFLAGS_ALT="-arch ppc %s -w %s -fno-common -force_cpusubtype_ALL"' % (os.environ.get('LINK_OPT_ALT_FILES', ''), os.environ.get('LINK_OPT_ALT', '-Os -mtune=970'), os.environ.get('LINK_PIC', '-fPIC')),
-      'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; XF=; grep -qw vec16 $f && XF=-maltivec; CF="$CFLAGS"; case "$ALTFILES" in *" ${f%.c} "*) CF="$CFLAGS_ALT";; esac; gcc $CF $XF -c $f -o obj/${f%.c}.o || echo "COMPILE FAIL $f"; done',
+      'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; XF=; grep -qw vec16 $f && XF=-maltivec; CF="$CFLAGS"; case "$ALTFILES" in *" ${f%.c} "*) CF="$CFLAGS_ALT";; esac; ' + COMPILE_CMD + ' || echo "COMPILE FAIL $f"; done',
       'as -arch ppc -o obj/data.o data.s',
       'as -arch ppc -o obj/code.o code.s',
       '# INSTALL overrides the install name (a dlopen() of a copy that keeps the stock name returns the already-loaded system image)',
