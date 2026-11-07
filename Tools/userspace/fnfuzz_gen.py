@@ -130,6 +130,7 @@ for ent, (nm, rs) in sorted(fns.items()):
         if bad: break
     first = seq[idx[ent]][1:] if ent in idx else ('', '')
     if first[0] in ('stfd', 'lfd') and re.match(r'f(1[4-9]|2\d|3[01])\b', first[1]): continue      # saveFP / restFP millicode entry points (a register-save chain, not a function)
+    if re.search(r'_frag_[0-9a-f]+$', nm): continue                                              # `_frag_` = a clipped piece of a function (a switch case body that reads the parent's registers), not a function
     if key == 'glprog' and ent in (0x97b89f04, 0x97b88a90): continue                                # clipped fragments patched in patches.py (they read the parent's registers)
     if bad or size < 16 or re.match(r'^(eh_|__Unwind|orph_|save_world|rest_world|dyld_stub|_glp?Unwind|_*(lshr|ashl|ashr|mul|div|mod|udiv|umod|cmp|ucmp|fix|float|neg|ffs|clz|ctz|popcount|parity)[a-z]*[ds]i[0-9]?$)', nm): continue
     if ONLY_ALLOWED and not used_allowed: continue
