@@ -1689,7 +1689,7 @@ void __cyg_profile_func_exit(void *fn, void *site) {}
 ''' % HEADER_SYM)
 # issue #229: the stock images were built by an optimising gcc that contracts a*b+c into one fused multiply-add; the -O0 rebuilt image does not, and rounds twice.
 # cfg "fuse_madd": every part is compiled to assembly, Tools/userspace/fuse_madd.py fuses the mul+add/sub pairs, and that assembly is assembled (the -O0 code is otherwise unchanged).
-if cfg.get('fuse_madd'):
+if cfg.get('fuse_madd') and os.environ.get('LINK_OPT', cfg.get('link_opt', '-O0')).split()[0] == '-O0':   # the fuse pass is for the -O0 code; optimised code is already fused by gcc
     import shutil
     shutil.copy(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fuse_madd.py'), os.path.join(out, 'fuse_madd.py'))
     COMPILE_CMD = ('{ gcc $CF $XF -S $f -o obj/${f%.c}.s && ${FUSE_PY:-/usr/local/bin/python3} fuse_madd.py obj/${f%.c}.s 2>>obj/fuse_madd.log && gcc $CF $XF -c obj/${f%.c}.s -o obj/${f%.c}.o; }')
