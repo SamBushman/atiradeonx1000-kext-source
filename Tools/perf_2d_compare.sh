@@ -5,6 +5,7 @@
 #   sh Tools/perf_2d_compare.sh OUTDIR [RUNS=3] [VISITS=4] [TICKS=200] [SEQ="stock rebuilt"]    env: REBUILT_DIR (kext_build_fix) STOCK_DIR (stockkext) SETTLE (60)
 # SEQ lets you run an A/A pilot ("stock stock") or a planted-difference control. Needs ~/rung3/gest2d.sh (Tests/perf_2d_gestures.sh) on the G5.
 O=${1:?outdir}; RUNS=${2:-3}; VISITS=${3:-4}; TICKS=${4:-200}; SEQ=${5:-"stock rebuilt"}; RB=${REBUILT_DIR:-kext_build_fix}; ST=${STOCK_DIR:-stockkext}; SETTLE=${SETTLE:-60}
+# KU arm: env KU_SHA KU_IMG = relaunch WindowServer by hand with the rebuilt GA/GLDriver/VADriver redirect on the rebuilt side (Tools/userspace/ws_relaunch_ku.sh, NOLOG=1: no redirect log in a timed run); the rebuilt side also needs the kext build in REBUILT_DIR
 mkdir -p "$O"; echo "start $(date) runs=$RUNS visits=$VISITS ticks=$TICKS seq=$SEQ" >> "$O/driver.log"
 visit=1
 while [ $visit -le $VISITS ]; do
@@ -12,6 +13,7 @@ while [ $visit -le $VISITS ]; do
     if [ $tag = stock ] || [ $tag = burn ]; then D=$ST; else D=$RB; fi
     if [ $tag = boot ]; then echo "boot: no swap (whatever driver the G5 booted with)" >> "$O/driver.log"; else
     timeout 100 ssh G5 "sh \$HOME/rung3/swap.sh $D 2>&1 | tail -1; sh \$HOME/rung3/srchead/Tools/issue157_unstick_hotswap/unstick_hotswap_vram.sh 2>&1 | tail -1; killall Dock; true" >> "$O/driver.log" 2>&1 || { echo "swap FAILED v$visit $tag" >> "$O/driver.log"; exit 1; }
+    if [ $tag != stock ] && [ $tag != burn ] && [ -n "$KU_SHA" ]; then timeout 120 ssh G5 "NOLOG=1 sh \$HOME/rung3/ws_relaunch_ku.sh ${KU_IMG:-$KU_SHA} $KU_SHA" >> "$O/ws_relaunch_v$visit.txt" 2>&1 < /dev/null || { echo "ws relaunch FAILED v$visit $tag" >> "$O/driver.log"; exit 1; }; fi
     fi
     sleep $SETTLE
     # planted-difference control: BURN_TAGS="rebuilt" runs BURN_N CPU burners on the G5 during that side's warm-up and runs (the burner is the known difference)

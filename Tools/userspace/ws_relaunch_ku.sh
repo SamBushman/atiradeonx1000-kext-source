@@ -3,13 +3,14 @@
 # environment, so the rebuilt GA plug-in (2D), GLDriver (Quartz Extreme / compositing GL) and, if it loads there, the VADriver are the ones WindowServer maps (Phase 4 KU side).
 # Technique and why no plist edit: Tests/windowserver_capture_notes.md ("manual kill + immediate manual relaunch"). The wrapper lives on the BOOT volume (/Users/Shared), the images under ~/rung3.
 # Proof (rule 0): the redirect log lists every NSCreateObjectFileImageFromFile WindowServer did ("redirected to" = a rebuilt image mapped, "passthrough" = stock). Output log: /Users/Shared/ws_ku_redirect.log (copy it into the evidence dir).
+# env NOLOG=1: do not set GLD_REDIRECT_LOG (the log file shifts the heap and slows timed runs, #232); the proof is then `lsof -p <WindowServer pid>` printed at the end.
 IMG=${1:?img}; SHA=${2:?sha}; R=$HOME/rung3; U=$R/us_$IMG
 LOG=/Users/Shared/ws_ku_redirect.log; W=/Users/Shared/ws_ku_wrapper.sh
 cat > $W <<EOW
 #!/bin/sh
 export DYLD_INSERT_LIBRARIES=$R/src_$SHA/Tools/userspace/gld_redirect.dylib
 export GLD_REDIRECT_MAP=ATIRadeonX1000GLDriver=$R/gld_$IMG/gld_link/ATIRadeonX1000GLDriver_renamed,ATIRadeonX1000GA=$U/ga/ATIRadeonX1000GA,ATIRadeonX1000VADriver=$U/va/ATIRadeonX1000VADriver
-export GLD_REDIRECT_LOG=$LOG
+$( [ "$NOLOG" = 1 ] || echo "export GLD_REDIRECT_LOG=$LOG" )
 export DYLD_LIBRARY_PATH=$R/final_eval/dyld_dir_$IMG
 exec /System/Library/Frameworks/ApplicationServices.framework/Frameworks/CoreGraphics.framework/Resources/WindowServer "\$@"
 EOW
@@ -23,3 +24,4 @@ sleep 6
 [ -z "$OLDGUI" ] || { kill $OLDGUI 2>/dev/null; sleep 1; kill -9 $OLDGUI 2>/dev/null; }
 ps auxww | grep "[W]indowServer"
 echo "ws_relaunch_ku: redirect log:"; cat $LOG
+WSNEW=`ps auxww | awk '/[W]indowServer -daemon/{print $2}'`; echo "ws_relaunch_ku: new WindowServer pid $WSNEW; mapped images:"; sudo lsof -p $WSNEW 2>/dev/null | egrep "ATIRadeon|dyld_dir|gld_" 
