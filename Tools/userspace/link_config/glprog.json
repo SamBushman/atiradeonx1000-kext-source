@@ -1,5 +1,6 @@
 {
  "fuse_madd": true,
+ "link_opt": "-O2 -mtune=970",
  "drop_decls": [
   "NAN",
   "_URC_FOREIGN_EXCEPTION_CAUGHT"
