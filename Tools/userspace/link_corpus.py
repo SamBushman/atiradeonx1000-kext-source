@@ -96,7 +96,7 @@ for s in m.syms:
 
 # ---------------------------------------------------------------------------------------------- what the toolchain supplies
 TOOLCHAIN_FN = set(cfg.get('toolchain_functions', [])) | {'dyld_stub_binding_helper', 'cfm_stub_binding_helper', '__dyld_func_lookup', '___initialize_Cplusplus'} | opts['exclude']
-TOOLCHAIN_RE = re.compile(r'^(save|rest)(FP|GP|GPR|VR|F|G)\w*$|^(saveFP|restFP)$')
+TOOLCHAIN_RE = re.compile(r'^(save|rest)(FP|GP|GPR|VR|F|G)\w*$|^(saveFP|restFP)$|^_*dyld_func_lookup_(call|island)\w*$')   # the last: crt long-branch thunks `b __dyld_func_lookup` (issue #227)
 TOOLCHAIN_RANGES = [(int(a, 16), int(b, 16)) for a, b in cfg.get('toolchain_addr_ranges', [])]
 def toolchain_fn(name, addr=None):
     return name in TOOLCHAIN_FN or bool(TOOLCHAIN_RE.match(name)) or (addr is not None and any(lo <= addr < hi for lo, hi in TOOLCHAIN_RANGES))
@@ -719,6 +719,118 @@ if cfg.get('symbolize_anchors'):
     print('%d anchor assignments symbolised in %d functions (%d skipped, %d re-expressed from a function symbol)' % (sum(len(v_) for v_ in anchor_edits.values()), len(anchor_edits), len(anchor_skipped), len(anchor_code_syms)))
     for _s in anchor_skipped: print('  anchor skipped:', _s)
 
+# Folded PIC bases (images at their stock addresses: glprog, libGL; issue #227). The stock reaches a data object / vtable as `lis/addi` (or `addis rX,r31,hi`) off a
+# PIC register; Ghidra, which knows r31, prints the SUM as one constant - `picBase = 0xa7b81734;` ... `(picBase - 0x473c)` (a vtable stored into a new object),
+# `**(undefined1 **)(picBaseConst + -0x7cc4)` (a std::string terminator slot), `terminatorGlobalBase = -0x58488c94;` - or a bare leftover of such a register passed on as an
+# argument nobody reads (`fwdR9 = 0xa7b79cdc;`, `..., scratchR8, 0xa7b7faf0)`). The constant lies in no section (a base is the target minus a 16-bit displacement),
+# so symbolize_literals leaves it, and the rebuilt image, whose sections sit elsewhere, reads and stores STOCK addresses: it works only while the stock image is mapped
+# at the same place (every side-by-side test) and crashes in a process where it is not (Godot's yyparse). A variable assigned such a constant whose uses all add ONE
+# displacement (or several landing in one section) is re-expressed from a label, `v = (int)&SYM_T + (T - T&~3) - K`, so the target follows the rebuilt layout; one whose only
+# uses are bare call arguments / copies is a dead leftover and becomes 0 (no callee can interpret a PIC temporary of the stock layout). Anything else is left alone and
+# caught by the stale-literal gate below.
+pic_base_edits = {}      # function name -> [(variable, rhs text, replacement)]
+pic_base_log = []
+pic_base_skipped = []
+STOCK_SEGS = [(s_['vmaddr'], s_['vmaddr'] + s_['vmsize']) for s_ in m.segs if s_['vmsize'] and s_['name'] != '__PAGEZERO']
+def near_image(v, margin=0x10000):
+    return img_lo >= 0x10000000 and any(a_ - margin <= v < b_ + margin for a_, b_ in STOCK_SEGS)
+def _lit_val(txt):
+    mt = re.fullmatch(r'(?:\(([\w ]+?\s*\**)\))?\s*(-?)0x([0-9a-f]{5,8})', txt.strip())
+    if not mt: return None
+    v = int(mt.group(3), 16)
+    return ((-v) & 0xffffffff if mt.group(2) else v), (mt.group(1) or '')
+if cfg.get('symbolize_pic_bases') and img_lo >= 0x10000000:
+    _hdr = re.compile(r'(?m)^/\* (\S+) @ 0x[0-9a-f]+ \(\d+ bytes\) \*/\n')
+    _hs = list(_hdr.finditer(body))
+    _ASG = re.compile(r'(?m)^(\s*)([A-Za-z_]\w*) = ((?:\([\w ]+?\s*\**\))?\s*-?0x[0-9a-f]{5,8});')
+    for _i, _h in enumerate(_hs):
+        _chunk = body[_h.end():_hs[_i + 1].start() if _i + 1 < len(_hs) else len(body)]
+        _fn = _h.group(1)
+        _groups = collections.OrderedDict()      # variable -> {rhs text: value}
+        for _a in _ASG.finditer(_chunk):
+            _lv = _lit_val(_a.group(3))
+            if _lv is None: continue
+            _L = _lv[0]
+            if not near_image(_L) or (img_lo <= _L < img_hi and m.sec_at(_L) is not None and not in_code(_L)): continue     # symbolize_literals' (a label address)
+            _groups.setdefault(_a.group(2), {})[_a.group(3)] = _L
+        _sib = {}      # constant -> the anchor expression of a variable that holds it and is offset (a dead leftover of the SAME PIC register gets the same value)
+        for _pass in (0, 1):
+            for _v, _rhs in _groups.items():
+                if len(set(_rhs.values())) != 1:
+                    pic_base_skipped.append((_fn, _v, 'assigned different constants')); continue
+                _L = next(iter(_rhs.values()))
+                _dm = re.search(r'(?m)^  ([A-Za-z_][\w ]*?)\s*(\**)\s*%s;' % re.escape(_v), _chunk)
+                _ty = (_dm.group(1) if _dm else '').split()[-1:] or ['']
+                if _dm and (len(_dm.group(2)) + _dm.group(1).count('*')) and _ty[0] not in ('char', 'uchar', 'byte', 'undefined', 'undefined1', 'void'):
+                    pic_base_skipped.append((_fn, _v, 'pointer to a non-byte type: displacements are scaled')); continue
+                _al = {_v}      # the variable and the variables it is copied into (`staleR8Value = picBase;`)
+                for _r in range(3):
+                    _al |= set(re.findall(r'(?m)^\s*([A-Za-z_]\w*) = (?:\([\w ]+?\s*\**\))?(?:%s);' % '|'.join(re.escape(x_) for x_ in _al), _chunk))
+                _ks = collections.Counter(); _other = 0; _nullcmp = 0
+                _forced_dead = any(d_['func'] == _fn and d_['var'] == _v for d_ in cfg.get('pic_base_dead', []))
+                for _x in ([] if _forced_dead else _al):
+                    for _um in re.finditer(r'\b%s\b' % re.escape(_x), _chunk):
+                        _ls = _chunk.rfind('\n', 0, _um.start()) + 1; _le = _chunk.find('\n', _um.end()); _le = len(_chunk) if _le < 0 else _le
+                        _line = _chunk[_ls:_le]; _after = _chunk[_um.end():_um.end() + 40]; _before = _chunk[max(0, _um.start() - 60):_um.start()]
+                        if re.fullmatch(r'\s*[A-Za-z_][\w ]*?\s*\**\s*%s;\s*' % re.escape(_x), _line):
+                            continue                                      # a declaration
+                        if re.match(r'\s*=(?!=)', _after):
+                            continue                                      # `x = ...` the assignment's left-hand side (any statement or comma expression)
+                        _km = re.match(r'\s*([+-])\s*(-?)(0x[0-9a-f]+|\d+)\b', _after)
+                        if _km and not re.match(r'\s*[*/%.\[]', _after[_km.end():]):
+                            _k = int(_km.group(3), 0)
+                            _k = -_k if _km.group(2) else _k
+                            _ks[_k if _km.group(1) == '+' else -_k] += 1
+                            continue
+                        if re.match(r'\s*[,)]', _after) and re.search(r'[(,]\s*(\([\w ]+?\s*\**\))?\s*$', _before):
+                            continue                                      # a bare call argument (the list may continue on the next line)
+                        if re.match(r'\s*;', _after) and re.fullmatch(r'(?s).*\n\s*[A-Za-z_]\w*\s*=\s*(\([\w ]+?\s*\**\))?\s*', '\n' + _before.split('\n')[-1]):
+                            continue                                      # `y = x;` (y is in the alias set)
+                        if re.match(r'\s*[!=]=\s*(\([\w ]+?\s*\**\))?\s*(0x0|0)\b', _after):
+                            _nullcmp += 1; continue                       # a NULL test: true only if the value is 0
+                        _other += 1
+                        pic_base_log.append((_fn, _x, 'unrecognised use', _line.strip()[:120]))
+                if _other:
+                    pic_base_skipped.append((_fn, _v, '%d use(s) of an unrecognised shape' % _other)); continue
+                _rhs_txt = next(iter(_rhs))
+                _cast = re.match(r'(\([\w ]+?\s*\**\))?', _rhs_txt).group(1) or ''
+                if not _ks:
+                    if _pass == 0: continue
+                    if _L in _sib:
+                        pic_base_edits.setdefault(_fn, []).append((_v, _rhs_txt, '%s%s' % (_cast, _sib[_L])))
+                        pic_base_log.append((_fn, _v, hex(_L), 'dead leftover of the PIC register an anchor of this function is built from -> same anchor'))
+                    elif _nullcmp:
+                        pic_base_skipped.append((_fn, _v, 'a NULL test of a value that would become 0')); continue
+                    else:
+                        pic_base_edits.setdefault(_fn, []).append((_v, _rhs_txt, '%s0' % _cast))
+                        pic_base_log.append((_fn, _v, hex(_L), 'dead leftover -> 0'))
+                    continue
+                if _pass == 1: continue
+                _kl = sorted(_ks)
+                _ts = [(_L + k_) & 0xffffffff for k_ in _kl]
+                _secs = [m.sec_at(t_) if img_lo <= t_ < img_hi else None for t_ in _ts]
+                if any(s_ is None or in_code(t_) or s_['name'] in ('__eh_frame', '__gcc_except_tab', '__dyld', '__la_symbol_ptr', '__nl_symbol_ptr') for s_, t_ in zip(_secs, _ts)) or len(set(s_['name'] for s_ in _secs)) != 1:
+                    pic_base_skipped.append((_fn, _v, 'targets %s not all in one data section (%s)' % ([hex(t_) for t_ in _ts], [s_['name'] if s_ else None for s_ in _secs]))); continue
+                _T, _K, _sec = _ts[0], _kl[0], _secs[0]
+                if (_sec['flags'] & 0xff) in (1, 0xc):
+                    _cands = [a_ for a_ in set(a2 for a2 in needed.values() if a2 is not None) | set(nlist_by_addr) if _sec['addr'] <= a_ <= _T]
+                    if not _cands or any(max(a_ for a_ in _cands if a_ <= t_) != max(_cands) for t_ in _ts):
+                        pic_base_skipped.append((_fn, _v, 'zerofill targets span several objects')); continue
+                    _b = max(_cands)
+                else:
+                    _b = _T & ~3
+                needed['SYM_%x' % _b] = _b
+                _sib.setdefault(_L, '((int)&SYM_%x + %d - (%d))' % (_b, _T - _b, _K))
+                pic_base_edits.setdefault(_fn, []).append((_v, _rhs_txt, '%s((int)&SYM_%x + %d - (%d))' % (_cast, _b, _T - _b, _K)))
+                pic_base_log.append((_fn, _v, hex(_L), 'anchor of %s -> &SYM_%x%+d' % ([hex(t_) for t_ in _ts], _b, _T - _b)))
+    with open(os.path.join(out, 'decls.h'), 'a') as f_:
+        for _nm in sorted(set(re.search(r'SYM_[0-9a-f]+', r_[2]).group(0) for v_ in pic_base_edits.values() for r_ in v_ if re.search(r'SYM_[0-9a-f]+', r_[2]))):
+            f_.write('extern unsigned char %s asm("%s");\n' % (_nm, _nm))
+    print('%d folded PIC-base assignments re-expressed in %d functions (%d skipped)' % (sum(len(v_) for v_ in pic_base_edits.values()), len(pic_base_edits), len(pic_base_skipped)))
+    for _s in dict.fromkeys(pic_base_skipped): print('  PIC base skipped:', _s)
+    for _s in pic_base_log:
+        if _s[2] == 'unrecognised use': print('  PIC base unrecognised use:', _s)
+
 # names that are really numeric constants Ghidra labelled as data (`&DAT_00010001` = 0x10001, an address in no section of the image, or `UINT_00002ee0` in code)
 const_names = []
 for nm, a in sorted(needed.items()):
@@ -1174,6 +1286,7 @@ hdr = re.compile(r'^/\* (\S+) @ 0x([0-9a-f]+) \((\d+) bytes\) \*/$')
 atomics_total = [0]
 bufs_total = [0]
 patches_applied = []
+stale_lits = []; dead_arg_lits = []
 di3_total = [0]
 cmp_total = [0]
 dbl_total = [0]
@@ -1283,6 +1396,10 @@ for pdir_, f in _part_files:
                 _lg = LOCAL_RENAMES.get(mm.group(1), {}).get(_lv, _lv)
                 for _lvn in dict.fromkeys((_lg, _lv)):
                     txt = re.sub(r'(?m)^(\s*)%s = %s;' % (re.escape(_lvn), re.escape(_lt)), lambda x_, _lvn=_lvn: '%s%s = %s;' % (x_.group(1), _lvn, _rp), txt)
+            for _lv, _lt, _rp in pic_base_edits.get(mm.group(1), []):
+                _lg = LOCAL_RENAMES.get(mm.group(1), {}).get(_lv, _lv)
+                for _lvn in dict.fromkeys((_lg, _lv)):
+                    txt = re.sub(r'(?<![\w.])%s = %s(?=\s*[;,)])' % (re.escape(_lvn), re.escape(_lt)), lambda x_, _lvn=_lvn: '%s = %s' % (_lvn, _rp), txt)
             if cfg.get('mirror_frames') and mm.group(1) not in cfg.get('mirror_skip', []):
                 txt, nmir = rewrites.mirror_frame(txt, cfg.get('mirror_stackaddr', True))
                 mirrored_total[0] += nmir
@@ -1337,6 +1454,23 @@ for pdir_, f in _part_files:
                 uses_link = True
                 fstores_total[0] += nfst
             txt = rename_back(txt, _fwd, mm.group(1))
+            if img_lo >= 0x10000000:
+                # stale-literal gate (issue #227): a number inside / right next to one of the STOCK image's segments that survived every pass above is an absolute address of the
+                # stock layout. As a bare call argument (`f(a, b, 0xa7b7faf0)`: the PIC temporary the stock left in a register, which the callee does not take) it is a dead
+                # leftover and becomes 0; anywhere else it stops the link - the rebuilt image would read/store the stock layout's address.
+                _nc = re.sub(r'/\*.*?\*/', lambda x_: ' ' * len(x_.group(0)), txt, flags=re.S)
+                _out = []; _last = 0
+                for _lm in re.finditer(r'(?<![\w.])(?:(?<![\w)\]])(-)|)0x([0-9a-f]{8})\b', _nc):
+                    _lvv = int(_lm.group(2), 16)
+                    _lvv = (-_lvv) & 0xffffffff if _lm.group(1) else _lvv
+                    if not near_image(_lvv) or _lvv in fn_by_addr: continue
+                    _bef = _nc[max(0, _lm.start() - 3):_lm.start()]; _aft = _nc[_lm.end():_lm.end() + 3]
+                    if re.search(r'[(,]\s*$', _bef) and re.match(r'\s*[,)]', _aft) and not re.search(r'\b(if|while|switch|return)\s*\(\s*$', _nc[max(0, _lm.start() - 12):_lm.start()]):
+                        _out.append((_lm.start(), _lm.end())); dead_arg_lits.append((mm.group(1), _lm.group(0), hex(_lvv)))
+                    else:
+                        stale_lits.append((mm.group(1), _lm.group(0), _nc[max(0, _lm.start() - 50):_lm.end() + 20].replace('\n', ' ').strip()))
+                for _a_, _b_ in reversed(_out):
+                    txt = txt[:_a_] + '0' + txt[_b_:]
             ch = txt.split('\n')
         if mm and gl_protos is not None and mm.group(1).startswith('_gl') and not mm.group(1).startswith('_gll'):
             new_ch, status = fix_gl_stubs.patch_function('\n'.join(ch), mm.group(1), gl_protos)
@@ -1347,6 +1481,10 @@ for pdir_, f in _part_files:
                 continue
             unpatched.append((mm.group(1), status))
         o.append('\n'.join(ch))
+    if stale_lits:
+        for _x in stale_lits: print('  stale literal: %s: %s [%s]' % _x)
+        sys.exit('link_corpus: %d stale absolute address(es) of the STOCK image survive in the link C (the rebuilt image would read/store the stock layout; issue #227), first: %s' %
+                 (len(stale_lits), '; '.join('%s: %s [%s]' % x_ for x_ in stale_lits[:6])))
     src = '\n'.join(o)
     # the corpus carries `asm(".globl FUN_x"); asm(".set FUN_x, _FUN_x")` / `_thunk_FUN_x` alias pairs for the raw-declaration builds; here every function already has its own
     # asm label (link_decls.h), so the aliases would reference the undefined `_FUN_x`
@@ -1409,6 +1547,9 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('(double)CONCAT44 bit-pattern constructions: %d\n' % dbl_total[0])
     w.write('float literals suffixed f: %d\n' % floatlit_total[0])
     w.write('hand text patches applied (config text_patches): %s\n' % ', '.join(patches_applied))
+    w.write('stale stock-address literals passed as dead call arguments (-> 0): %d; PIC-base assignments re-expressed: %d\n' % (len(dead_arg_lits), sum(len(v_) for v_ in pic_base_edits.values())))
+    for _x in pic_base_log: w.write('  pic base: %s\n' % (_x,))
+    for _x in dead_arg_lits: w.write('  dead arg: %s\n' % (_x,))
     w.write('64-bit shift helper calls fixed: %d\n' % di3_total[0])
     w.write('narrow-type subtract-and-compare idioms: %d\n' % cmp_total[0])
     w.write('float/double call arguments given their true type (integer bit patterns reinterpreted): %d\n' % floatargs_total[0])

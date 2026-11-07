@@ -16,6 +16,10 @@
   "#define NAN (__builtin_nanf(\"\"))"
  ],
  "symbolize_literals": true,
+ "symbolize_pic_bases": true,
+ "pic_base_dead": [
+  {"func": "TPPStreamCompiler__constructFromOperand", "var": "scratchR9", "why": "r9 left over from a PIC temporary, passed as the unread 7th argument of a virtual call; reassigned (string length) before any other use"}
+ ],
  "bind_calls": {
   "orig_index": "${SCRATCH_LINK}/glprog_INDEX.tsv",
   "stock_dis": "${SCRATCH_LINK}/glprog.dis"
