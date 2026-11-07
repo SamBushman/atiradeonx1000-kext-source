@@ -92,7 +92,10 @@ for i, (a, op, arg) in enumerate(seq):
         t = arg.split()[0]
         if not t.startswith('0x'): continue
         ta = int(t, 16)
-        for j in range(i + 1, min(i + 10, len(seq))):
+        # scan on until r3 is read (the result is used), redefined, or the straight-line code ends in a call / return / jump. The cap used to be 10 instructions: the caller
+        # of VA's ava_reserve_list_words (stock 0x83e0) reads the returned write pointer 34 instructions after the call, so the function was classed `v`, its r3 was never
+        # compared, and the rebuilt body that returned nothing passed fnfuzz (#233).
+        for j in range(i + 1, min(i + 400, len(seq))):
             a2, op2, arg2 = seq[j]
             ops2 = [x.strip() for x in arg2.split(';')[0].split(',')]
             if _reads(arg2, 'r3') or (op2.startswith(('st', 'cmp')) and ops2 and ops2[0] == 'r3'):
