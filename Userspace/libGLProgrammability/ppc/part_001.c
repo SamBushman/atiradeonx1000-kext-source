@@ -1446,12 +1446,12 @@ int _PPParserParseTextureSourceVar(parser, operand)
   uint unit;
   int shift;
   int status;
-  uint ashldi3Result;
+  undefined8 shiftedTargets;
+  undefined8 clearMask;
+  undefined8 newTargetBits;
   uint currentUnitBits;
-  uint clearMaskLo;
-  uint newTargetBitsLo;
-  uint unitTargetsLo;
   uint unitTargetsHi;
+  uint unitTargetsLo;
   uint targetCode;
   char partBuf [256];
   uint arrayIndex [6];
@@ -1488,9 +1488,12 @@ int _PPParserParseTextureSourceVar(parser, operand)
           unit = arrayIndex[0];
           status = 0x2d;
           if (part != 0) {
-            unitTargetsLo = *(uint *)(parser + 0x34);
-            unitTargetsHi = *(uint *)(parser + 0x38);
-            ((int (*)())___lshrdi3)(unitTargetsLo,unitTargetsHi,arrayIndex[0] << 2);
+            /* the 16 per-unit target codes (4 bits each) are one 64-bit word at parser+0x34 (high) / +0x38 (low); ___lshrdi3 / ___ashldi3 return a 64-bit
+             * value in r3:r4 (issue #228: the results were dropped, so the unit's current target was read uninitialised) */
+            unitTargetsHi = *(uint *)(parser + 0x34);
+            unitTargetsLo = *(uint *)(parser + 0x38);
+            shiftedTargets = ___lshrdi3(unitTargetsHi,unitTargetsLo,arrayIndex[0] << 2);
+            currentUnitBits = (uint)shiftedTargets;
             compareResult = _memcmp(partBuf,"CUBE",5);
             targetCode = 0;
             if (compareResult != 0) {
@@ -1526,14 +1529,14 @@ int _PPParserParseTextureSourceVar(parser, operand)
             }
             if ((currentUnitBits & 0xf) == 0xf) {
               shift = unit << 2;
-              ashldi3Result = ((int (*)())___ashldi3)(0,0xf,shift);
-              unitTargetsLo = unitTargetsLo & ~ashldi3Result;
-              unitTargetsHi = unitTargetsHi & ~clearMaskLo;
-              *(uint *)(parser + 0x34) = unitTargetsLo;
-              *(uint *)(parser + 0x38) = unitTargetsHi;
-              ashldi3Result = ((int (*)())___ashldi3)(0,targetCode,shift);
-              *(uint *)(parser + 0x34) = unitTargetsLo | ashldi3Result;
-              *(uint *)(parser + 0x38) = unitTargetsHi | newTargetBitsLo;
+              clearMask = ___ashldi3(0,0xf,shift);
+              unitTargetsHi = unitTargetsHi & ~(uint)(clearMask >> 0x20);
+              unitTargetsLo = unitTargetsLo & ~(uint)clearMask;
+              *(uint *)(parser + 0x34) = unitTargetsHi;
+              *(uint *)(parser + 0x38) = unitTargetsLo;
+              newTargetBits = ___ashldi3(0,targetCode,shift);
+              *(uint *)(parser + 0x34) = unitTargetsHi | (uint)(newTargetBits >> 0x20);
+              *(uint *)(parser + 0x38) = unitTargetsLo | (uint)newTargetBits;
             }
             else if ((currentUnitBits & 0xf) != targetCode) {
               return 0x28;

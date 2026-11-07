@@ -1,0 +1,3 @@
+names_lpB_hand21.tsv:19	local	_PPParserParseTextureSourceVar	extraout_r4_01	newTargetBitsLo	INFERRED	low word of targetCode << shift
+names_lpB_hand21.tsv:18	local	_PPParserParseTextureSourceVar	extraout_r4_00	clearMaskLo	INFERRED	low word of 0xf << shift
+names_D7_callee.tsv:42	use	_PPParserParseTextureSourceVar	uVar4	ashldi3Result	INFERRED	every definition of the web is the result of a call to ___ashldi3	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)___ashldi3\)\(0,0xf,iVar2\);$@1	+6	all	all

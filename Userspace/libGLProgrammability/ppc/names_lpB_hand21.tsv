@@ -9,14 +9,12 @@ local	_PPParserParseTextureSourceVar	param_2	operand	CONFIRMED	texture source op
 local	_PPParserParseTextureSourceVar	local_140	partBuf	INFERRED	token text: texture, [, ], target name (1D/2D/3D/CUBE/RECT/SHADOW*)
 local	_PPParserParseTextureSourceVar	local_40	arrayIndex	INFERRED	_PPParserParseArray result: [0] is the texture unit
 local	_PPParserParseTextureSourceVar	uVar1	unit	INFERRED	texture unit index (arrayIndex[0])
-local	_PPParserParseTextureSourceVar	uVar5	unitTargetsLo	INFERRED	low word of the per-unit texture target table (parser+0x34), 4 bits per unit
-local	_PPParserParseTextureSourceVar	uVar6	unitTargetsHi	INFERRED	high word of the per-unit texture target table (parser+0x38)
+local	_PPParserParseTextureSourceVar	uVar5	unitTargetsHi	INFERRED	high word of the per-unit texture target table (parser+0x34; the first argument of ___lshrdi3 is the HIGH word), 4 bits per unit
+local	_PPParserParseTextureSourceVar	uVar6	unitTargetsLo	INFERRED	low word of the per-unit texture target table (parser+0x38)
 local	_PPParserParseTextureSourceVar	uVar7	targetCode	INFERRED	texture target code: CUBE 0, 3D 1, RECT 2, 2D 3, 1D 4, SHADOWRECT 5, SHADOW2D 6, SHADOW1D 7
 local	_PPParserParseTextureSourceVar	iVar2	shift	INFERRED	unit*4: bit position of the unit's target nibble
 local	_PPParserParseTextureSourceVar	iVar3	status	INFERRED	parser status code
 local	_PPParserParseTextureSourceVar	extraout_r4	currentUnitBits	INFERRED	low word of (unitTargets >> shift): the unit's target nibble if already set
-local	_PPParserParseTextureSourceVar	extraout_r4_00	clearMaskLo	INFERRED	low word of 0xf << shift
-local	_PPParserParseTextureSourceVar	extraout_r4_01	newTargetBitsLo	INFERRED	low word of targetCode << shift
 local	_PPParserMacroGetReplaceString	param_2	unusedArg2	INFERRED	unused
 local	_PPParserMacroGetReplaceString	param_3	argStrings	CONFIRMED	actual argument strings, one per macro parameter
 local	_PPParserMacroGetReplaceString	param_4	outBuf	CONFIRMED	receives the expanded body (NULL: only measure it)
