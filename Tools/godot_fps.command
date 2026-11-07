@@ -9,6 +9,6 @@ R="$HOME/rung3/opcode_recorder.dylib"   # built from Tools/userspace/opcode_reco
 EXTRA_INSERT=""; [ -f $HOME/rung3/gd_env ] && . $HOME/rung3/gd_env
 DYLD_INSERT_LIBRARIES="$R${EXTRA_INSERT:+:$EXTRA_INSERT}" OPCODE_LOG="$O/game.tsv" "$G" --path "$PROJ" Main.tscn > "$O/game.out" 2>&1 < /dev/null &
 pid=$!; i=0
-while kill -0 $pid 2>/dev/null && [ $i -lt $SECS ]; do sleep 1; i=`expr $i + 1`; if [ $i -eq 20 ]; then screencapture -x $O/shot.png; vmmap $pid > $O/vmmap.txt 2>&1; fi; done
+while kill -0 $pid 2>/dev/null && [ $i -lt $SECS ]; do sleep 1; i=`expr $i + 1`; if [ $i -eq 20 ]; then screencapture -x $O/shot.png; fi; done
 kill $pid 2>/dev/null; sleep 3; kill -9 $pid 2>/dev/null
 echo "ran ${i}s" > $O/summary.txt; echo DONE >> $O/summary.txt
