@@ -1616,9 +1616,7 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
   int scratchIncoming00000024;
   byte scratchStack508 [4];
   byte scratchStack50[5];
-  byte scratchStack4ff;
-  byte scratchStack4fe;
-  byte scratchStack4fd;
+  byte blockIndexBytes[4];
   byte scratchStack4fc;
   byte scratchStack4fb;
   byte scratchStack4fa;
@@ -1655,7 +1653,6 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
   int scratchStack74;
   int scratchStack70;
   int scratchStack6c;
-  byte *scratchStack68;
   uint *scratchStack64;
   int scratchStack60;
   undefined1 *scratchStack5c;
@@ -1728,7 +1725,6 @@ int dxtCompressImage(width, height, sourceFormat, compressionCode, srcPixels, ds
     scratchFlag3 = 0 < width;
   }
   scratchFlag4 = scratchInt47 != 4;
-  scratchStack68 = &scratchStack50[0];
   scratchStack5c = srcPixels + scratchInt46;
   scratchStack58 = scratchStackArr478;
   scratchStack54 = scratchStack4d0;
@@ -2115,10 +2111,11 @@ setScratchFlag6:
           scratchStack4f5 = (char)((int)((uint)scratchStack4fb + (uint)scratchStack4f8) >> 1);
           scratchStack4f4 = (char)((int)((uint)scratchStack4fa + (uint)scratchStack4f7) >> 1);
         }
-        scratchStack4fd = 0;
-        scratchStack50[0] = 0;
-        scratchStack4ff = 0;
-        scratchStack4fe = 0;
+        /* issue #226: the four index bytes follow the two endpoint colours in the block; stock keeps them in consecutive stack bytes and the loop below walks them with a pointer */
+        blockIndexBytes[0] = 0;
+        blockIndexBytes[1] = 0;
+        blockIndexBytes[2] = 0;
+        blockIndexBytes[3] = 0;
         if (scratchFlag5) {
           scratchUint26 = 4;
         }
@@ -2129,7 +2126,7 @@ setScratchFlag6:
         scratchPtr43 = scratchStack4b8 + 2;
         scratchPtr39 = scratchStack4b8 + 1;
         scratchPtr51 = scratchStack4b8 + 3;
-        scratchPtr33 = scratchStack68;
+        scratchPtr33 = blockIndexBytes;
         do {
           scratchUint34 = (uint)*scratchPtr33;
           scratchUint40 = 0;
@@ -2223,10 +2220,10 @@ setScratchFlag6:
         dstBlocks[1] = scratchStack50[3];
         dstBlocks[2] = scratchStack50[2];
         dstBlocks[3] = scratchStack50[1];
-        dstBlocks[4] = scratchStack50[0];
-        dstBlocks[5] = scratchStack4ff;
-        dstBlocks[6] = scratchStack4fe;
-        dstBlocks[7] = scratchStack4fd;
+        dstBlocks[4] = blockIndexBytes[0];
+        dstBlocks[5] = blockIndexBytes[1];
+        dstBlocks[6] = blockIndexBytes[2];
+        dstBlocks[7] = blockIndexBytes[3];
         dstBlocks = dstBlocks + 8;
       } while (scratchStack74 < width);
     }

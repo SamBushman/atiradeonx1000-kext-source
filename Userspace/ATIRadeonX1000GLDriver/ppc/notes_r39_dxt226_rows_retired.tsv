@@ -1,0 +1,4 @@
+names_q01_28.tsv:135	local	FUN_0001c380	local_68	scratchStack68	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
+names_q01_28.tsv:98	local	FUN_0001c380	local_4fd	scratchStack4fd	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
+names_q01_28.tsv:97	local	FUN_0001c380	local_4fe	scratchStack4fe	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
+names_q01_28.tsv:96	local	FUN_0001c380	local_4ff	scratchStack4ff	INFERRED	register-allocation scratch: Ghidra kept several unrelated temporaries in one variable, so it has no single role (see notes_unsplittable_q01.md)
