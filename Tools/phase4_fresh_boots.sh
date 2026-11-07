@@ -1,5 +1,5 @@
 #!/bin/sh
-# phase4_fresh_boots.sh OUTROOT (dev machine): runbook Phase 4 in one go, each side from a FRESH BOOT: sides boot (boot-time stock kext + stock userspace), K (rebuilt kext hot-swapped + unstick, stock userspace), KU (K + the rebuilt userspace:
+# phase4_fresh_boots.sh OUTROOT (dev machine): runbook Phase 4 in one go, each side from a FRESH BOOT: sides boot (boot-time stock kext + stock userspace), S (CONTROL: stock kext hot-swapped over the boot-time one + unstick, stock userspace: separates hot-swap artifacts from rebuilt-kext differences), K (rebuilt kext hot-swapped + unstick, stock userspace), KU (K + the rebuilt userspace:
 # WindowServer relaunched by hand with the rebuilt GA / GLDriver / VADriver redirect (Tools/userspace/ku_env.sh), every consumer started with the same environment through $HOME/rung3/side_env).
 # Per boot, in this order: installed-application sweep, video (QuickTime, VLC), display sleep, DVD Player on the generated disc LAST (one side per boot, #190). Ends with a reboot to the stock boot state.
 # env: SHA IMG (G5 tree src_<SHA>, images us_<IMG>/gld_<IMG>) REBUILT_DIR (kext_build_<sha>) SIDES (default "boot K KU") SECS_DVD (60). Evidence: OUTROOT/<side>/{sweep,video,dsleep,dvd,proof}.
@@ -14,8 +14,9 @@ for side in ${SIDES:-boot K KU}; do
   ssh G5 "chmod +x $R/side_launch.command $R/app_sweep.command; : > $R/side_env; rm -f $R/side_launch_app $R/side_launch_done; kextstat | grep ATIRadeonX1000" > "$D/proof/boot_kext.txt" 2>&1
   SIDE_LAUNCH=0
   if [ $side = KU ]; then ssh G5 "sh $R/ku_env.sh on $IMG $SHA" > "$D/proof/ku_env.txt" 2>&1 < /dev/null; fi
+  SWAPDIR=$RB; [ $side = S ] && SWAPDIR=${STOCK_DIR:-stockkext}
   if [ $side != boot ]; then
-    timeout 100 ssh G5 "sh $R/swap.sh $RB 2>&1 | tail -1; sh $R/src_$SHA/Tools/issue157_unstick_hotswap/unstick_hotswap_vram.sh 2>&1 | tail -1; killall Dock; md5 -r $R/$RB/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000; kextstat | grep ATIRadeonX1000" > "$D/proof/swap.txt" 2>&1 || { echo "$side: swap FAILED $(date)" >> "$O/sides.log"; exit 1; }
+    timeout 100 ssh G5 "sh $R/swap.sh $SWAPDIR 2>&1 | tail -1; sh $R/src_$SHA/Tools/issue157_unstick_hotswap/unstick_hotswap_vram.sh 2>&1 | tail -1; killall Dock; md5 -r $R/$SWAPDIR/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000; kextstat | grep ATIRadeonX1000" > "$D/proof/swap.txt" 2>&1 || { echo "$side: swap FAILED $(date)" >> "$O/sides.log"; exit 1; }
     sleep 30
   fi
   if [ $side = KU ]; then
@@ -37,7 +38,7 @@ EOE
   echo "$APPS" | sed 's/ \([0-9][0-9]*|\/\)/\n\1/g' | { set --; while IFS= read -r l; do set -- "$@" "$l"; done; SEQ=boot sh "$T/app_sweep.sh" "$D/sweep" "$@"; }
   SEQ=boot JOBS="quicktime|\$HOME/rung3/va_cap/streams/test_ntsc_720x480.mpg|20 vlc|\$HOME/rung3/va_cap/streams/test_ntsc_dvd.vob|30" sh "$T/video_consumer_compare.sh" "$D/video"
   sh "$T/display_sleep_test.sh" "$D/dsleep" boot 3
-  SEQ=boot SIDE_LAUNCH=$SIDE_LAUNCH sh "$T/dvd_disc_compare.sh" "$D/dvd" $SECS_DVD
+  CLICK_X=$([ $SIDE_LAUNCH = 1 ] && echo 125 || echo 759) CLICK_Y2=$([ $SIDE_LAUNCH = 1 ] && echo 148 || echo 102) SEQ=boot SIDE_LAUNCH=$SIDE_LAUNCH sh "$T/dvd_disc_compare.sh" "$D/dvd" $SECS_DVD
   for f in side_launch_redirect.log side_launch_dyld.txt; do scp -q G5:rung3/$f "$D/proof/" 2>/dev/null; done
   ssh G5 "cp /Users/Shared/ws_ku_redirect.log $R/final_eval/ws_ku_redirect_$side.log 2>/dev/null; true" >/dev/null 2>&1; scp -q G5:/Users/Shared/ws_ku_redirect.log "$D/proof/ws_redirect_after.log" 2>/dev/null
   echo "$side: done $(date)" >> "$O/sides.log"

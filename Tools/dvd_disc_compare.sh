@@ -1,5 +1,6 @@
 #!/bin/sh
 # dvd_disc_compare.sh OUTDIR [SECS=60] (dev machine): play the GENERATED DVD (~/rung3/dvdgen/test.iso, built by Tools/userspace/va_capture/author_video_ts.sh + hdiutil makehybrid) on stock then rebuilt (hot-swap, swap + unstick + settle each).
+# env CLICK_X CLICK_Y CLICK_Y2: where the "previously viewed disc" dialog is (default 759 148/102 = the window position of a LaunchServices launch; a DVD Player started directly by side_launch.command opens top-left: CLICK_X=125 CLICK_Y2=148).
 # Mounting the image makes DVD Player auto-launch and play it (the unstick step unmounts it, so it is attached AFTER each swap). Evidence: 3 screenshots, max DVD contexts seen (watch_hw_path.sh), panic.log/kextstat health, DVD Player exit status.
 O=${1:?outdir}; SECS=${2:-60}; SEQ=${SEQ:-"stock rebuilt"}; RB=${REBUILT_DIR:-kext_build_fix}; ST=${STOCK_DIR:-stockkext}; SETTLE=${SETTLE:-45}; mkdir -p "$O"
 for tag in $SEQ; do
@@ -15,7 +16,7 @@ for tag in $SEQ; do
     timeout 60 ssh G5 "rm -f \$HOME/rung3/side_launch_done; echo 'DVD Player' > \$HOME/rung3/side_launch_app; open -a Terminal \$HOME/rung3/side_launch.command"; sleep 20
   fi
   timeout 60 ssh G5 "hdiutil attach \$HOME/rung3/dvdgen/test.iso | tail -1; open -a \"DVD Player\"; sh \$HOME/rung3/va_cap/watch_hw_path.sh $SECS \$HOME/rung3/dvd_$tag.watch > /dev/null 2>&1 &" >> "$O/driver.log" 2>&1
-  sleep ${PRECLICK:-12}; timeout 30 ssh G5 "screencapture -x \$HOME/rung3/dvd_${tag}_0.png; \$HOME/rung3/gui_input click 759 148; sleep 1; \$HOME/rung3/gui_input click 759 102"   # answer the "previously viewed disc" dialog: click Beginning of Disc (a Return key event does not reach it)
+  sleep ${PRECLICK:-12}; timeout 30 ssh G5 "screencapture -x \$HOME/rung3/dvd_${tag}_0.png; \$HOME/rung3/gui_input click ${CLICK_X:-759} ${CLICK_Y:-148}; sleep 1; \$HOME/rung3/gui_input click ${CLICK_X:-759} ${CLICK_Y2:-102}"   # answer the "previously viewed disc" dialog: click Beginning of Disc (a Return key event does not reach it)
   sleep 5; timeout 30 ssh G5 "screencapture -x \$HOME/rung3/dvd_${tag}_1.png"
   sleep $((SECS/2-20)); timeout 30 ssh G5 "screencapture -x \$HOME/rung3/dvd_${tag}_2.png"
   sleep $((SECS/2+5)); timeout 30 ssh G5 "screencapture -x \$HOME/rung3/dvd_${tag}_3.png; ps auxww | grep -c '[D]VD Player' ; osascript -e 'tell application \"DVD Player\" to quit'; sleep 4; killall 'DVD Player' 2>/dev/null; sleep 2; hdiutil detach /Volumes/TESTDVD > /dev/null 2>&1; echo \"$tag panic=\$(ls -l /Library/Logs/panic.log | awk '{print \$5}') \$(uptime | sed 's/,.*//') kext=\$(kextstat | grep -c com.apple.ATIRadeonX1000)\"" >> "$O/health.txt" 2>&1

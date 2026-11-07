@@ -13,6 +13,7 @@ while [ $c -le $CY ]; do
   timeout 30 ssh G5 "echo alive_during_display_sleep; ioreg -l -w0 | grep -A4 \"+-o IODisplayWrangler\" | grep \"Power Management protected data\" | grep -o -E \"myCurrentState = [0-9]+\" | head -3" >> "$O/log.txt" 2>&1 || echo "G5 UNREACHABLE during display sleep" >> "$O/log.txt"
   timeout 30 ssh G5 "\$HOME/rung3/gui_input click 960 540; sleep 1; \$HOME/rung3/gui_input click 962 542" >> "$O/log.txt" 2>&1; sleep 6
   timeout 200 ssh G5 "sudo pmset displaysleep 0; screencapture -x \$HOME/rung3/ds_post.png; kextstat | grep ATIRadeonX1000; ls -l /Library/Logs/panic.log; cd \$HOME/rung3/srchead/Tests && ./parity_test_harness > \$HOME/rung3/ds_post.txt 2>&1; echo post_harness_rc=\$?; diff \$HOME/rung3/ds_pre.txt \$HOME/rung3/ds_post.txt | wc -l" >> "$O/log.txt" 2>&1
+  scp -q G5:rung3/ds_pre.txt "$O/cycle${c}_pre.txt"; scp -q G5:rung3/ds_post.txt "$O/cycle${c}_post.txt"
   scp -q G5:rung3/ds_pre.png "$O/cycle${c}_pre.png"; scp -q G5:rung3/ds_post.png "$O/cycle${c}_post.png"
   c=$((c+1))
 done
