@@ -2573,6 +2573,7 @@ int ava_reserve_list_words(ctx, wordsNeeded, listSelect)
   int listSelect;
 {
   uint newCursor;
+  int oldCursor;
   int *entryCursor;
   int chunkCount;
   int entriesLeft;
@@ -2587,7 +2588,8 @@ int ava_reserve_list_words(ctx, wordsNeeded, listSelect)
   else {
     bufferState = ctx + 0x1511c;
   }
-  newCursor = *(int *)(bufferState + 8) + wordsNeeded * 4;
+  oldCursor = *(int *)(bufferState + 8);
+  newCursor = oldCursor + wordsNeeded * 4;
   if (*(uint *)(bufferState + 4) < newCursor) {
     if (listSelect != 0) {
       chunkCount = 0;
@@ -2621,10 +2623,11 @@ int ava_reserve_list_words(ctx, wordsNeeded, listSelect)
     else {
       ((int (*)())ava_submit_idct_list_and_remap)(ctx,0);
     }
-    newCursor = wordsNeeded * 4 + *(int *)(bufferState + 8);
+    oldCursor = *(int *)(bufferState + 8);   /* r3 returned to the caller = the cursor reloaded after the flush (stock 0x84e8) */
+    newCursor = wordsNeeded * 4 + oldCursor;
   }
   *(uint *)(bufferState + 8) = newCursor;
-  return;
+  return oldCursor;   /* issue #233: stock returns the reserved write pointer in r3 (the caller writes the macroblock there) */
 }
 
 /* ava_emit_macroblock @ 0x8510 (372 bytes) */
