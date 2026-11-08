@@ -4791,7 +4791,7 @@ extern unsigned char irInstFactoryTable_classIndex_001ea500;
 extern unsigned char regKindInfo_flagsWord;
 extern unsigned char regKindInfo_byte4[];
 extern unsigned char constPoolAnchor_001f3a54;
-extern unsigned char *gldContextListHead_001f65e0;
+extern int *gldContextListHead_001f65e0;   /* #235: a word pointer to the head context list node (stock: lwz). Declared unsigned char * it made *head and head[1] byte accesses and the head context was never unlinked */
 extern unsigned char dxtBlockPixelByte0_001f65e4[];
 extern unsigned char dxtBlockPixelByte1_001f65e5[];
 extern unsigned char dxtBlockPixelByte2_001f65e6[];
@@ -4807,8 +4807,8 @@ extern unsigned char zeroWords4_001fa608;
 extern unsigned char zeroWords4_001fa608_lane1_001fa60c;
 extern unsigned char zeroWords4_001fa608_lane2_001fa610;
 extern unsigned char zeroWords4_001fa608_lane3_001fa614;
-extern unsigned char psnSinkContext_001fa618;
-extern unsigned char *psnSinkCallbacks_001fa61c;
+extern unsigned int psnSinkContext_001fa618;   /* #235: word (stock loads it with lwz), was unsigned char */
+extern unsigned int *psnSinkCallbacks_001fa61c;   /* #235: word pointer to the callback table (stock: lwz r0,0(ptr)), was unsigned char * */
 extern unsigned char ilReaderTokenCount_001fa620;
 extern unsigned char IrImmedConstLoad__opcodeInfo_guard;
 extern unsigned char IrImmedConstBuffer__opcodeInfo_guard;
