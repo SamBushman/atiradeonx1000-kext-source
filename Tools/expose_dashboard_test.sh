@@ -18,5 +18,5 @@ key 103; sleep 3; shot 5_show_desktop; key 103; sleep 3; shot 6_after_show_deskt
 key 111; sleep 5; shot 7_dashboard; key 111; sleep 4; shot 8_after_dashboard
 for i in 1 2 3; do key 101; sleep 1; key 101; sleep 1; key 111; sleep 2; key 111; sleep 2; done
 shot 9_after_cycles
-$G 'osascript -e "tell application \"Finder\" to close every window" >/dev/null 2>&1; kextstat | grep " com.apple.ATIRadeonX1000 "; ls -l /Library/Logs/panic.log; ps ax | grep -c "[W]indowServer"; system_profiler SPDisplaysDataType | grep -i resolution' >> "$L" 2>&1
+$G 'osascript -e "tell application \"Finder\" to close every window" >/dev/null 2>&1; kextstat | grep " com.apple.ATIRadeonX1000 "; ls -l /Library/Logs/panic.log; ps auxww | grep -c "[W]indowServer"; system_profiler SPDisplaysDataType | grep -i resolution' >> "$L" 2>&1
 cat "$L"
