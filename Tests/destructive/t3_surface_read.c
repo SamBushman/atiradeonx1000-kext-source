@@ -5,11 +5,12 @@
  * (-> CannotLock 0xe00002cc, the predicted reject), so the memory is created the proven way: a 2D connection binds the surface and lock_memory/unlock_memory(0) allocates it
  * (t3_2d_lock_unlock passed). The destination is a page-aligned 64 KB user buffer pre-filled with 0xAA: only bytes inside rows 0..3 (row_bytes 64) may change; any change beyond the
  * first 4 * 64 bytes is a DIVERGENCE (the copy wrote outside its rectangle). */
-/* WHY THE "first row:" NOTE IS NOT A CRITERION (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, Nov 7 2026). Only proven facts:
+/* WHY THE "first row:" NOTE IS NOT A CRITERION (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, experiment of Nov 8 2026 = t3_gl_read_buffer_source.c, 10 boots). Only proven facts:
  * - This test never writes the surface: `addr` from 2D lock_memory(0) is never dereferenced; the only writes are the 0xAA pre-fill of the destination buffer. Source unchanged since Oct 1 (862861ca), before the Oct 2 stock reference.
- * - Extent is "16 inside rows 0..3, 0 outside" in every stored run, stock and rebuilt.
- * - The first-row bytes differ between sessions on stock itself (ff ff ff / 83 41 24 / 81 40 24 / 86 a9 cf). Within a session stock and rebuilt matched on Nov 3 and differed on Oct 19; the Oct 21 rebuilt run read ff ff ff (same as the Oct 2 stock value).
- * - NOT ESTABLISHED (experiment t3_gl_read_buffer_source.c queued, not yet run, covers surface_read too; update this block with its results): the source of those bytes (the surface memory is allocated by the 2D lock and never initialised by this test) and why they change between sessions. */
+ * - Extent is "16 inside rows 0..3, 0 outside" in every stored run: the first 4 bytes of each of rows 0..3. The bytes did not change within 2 s after the call returned and repeat exactly within a session.
+ * - surface_read returns the row units in the order of the surface (top to bottom); read_buffer returns them reversed on stock and rebuilt alike (flags 0 vs 2 in copy_buffer_using_DMA), so this test's "first row" is the LAST row of t3_gl_read_buffer's output for the same source.
+ * - Values differ between boots on both arms and recur across arms (86 a9 cf on Nov 3 stock and rebuilt; 86a9cf as row 0 on stock 11:38 and rebuilt 11:26/11:51). In one stock boot the four units equal BGRA screen pixels (820,516..519); in the other 9 boots no screen match.
+ * - NOT ESTABLISHED: what decides the content between boots (the surface memory is allocated by the 2D lock and never initialised by this test). */
 #include "t3common.h"
 #include <stdlib.h>
 static const char *body(dtest_t *t, io_service_t svc) {
