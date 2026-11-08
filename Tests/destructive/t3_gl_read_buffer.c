@@ -22,7 +22,7 @@
 /* WHY THE "first row:" NOTE IS NOT A CRITERION (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, Nov 7 2026). Only proven facts:
  * - PASS = call returns 0 or the predicted CannotLock, and no byte changes outside rows 0..3. In all 13 stored runs of this test and t3_surface_read, on stock and rebuilt, the extent line reads "16 inside, 0 outside".
  * - The first-row bytes change from session to session ON STOCK ITSELF (Oct 2 ff ff ff, Oct 19 4a 4d 41, Oct 21 ff ff ff, Nov 3 b4 88 76). Stock and rebuilt gave the same bytes within the Nov 3 session and different bytes within Oct 19 and Oct 21.
- * - NOT ESTABLISHED: where the bytes come from (what the GPU quad samples). "desktop content" and "leftover memory" were guesses and are not shown. Do not assert byte values here and do not read a difference as a kext defect or as proof of equality.
+ * - NOT ESTABLISHED: where the bytes come from (what the GPU quad samples). QUEUED (written, not yet run): Tests/destructive/t3_gl_read_buffer_source.c answers whether the content changes after return (async copy), is repeatable in a session, equals surface_read's bytes, matches screen pixels, and differs between stock and rebuilt; update this block with its results (EVIDENCE.md, 'Experiment results'). "desktop content" and "leftover memory" were guesses and are not shown. Do not assert byte values here and do not read a difference as a kext defect or as proof of equality.
  * - The normaliser (Tools/t3_phaseR_one.sh) still diffs this NOTE, so a run reports rc 1 when only these bytes differ; classify per the runbook (compare extent + RESULT lines). */
 #include "t3common.h"
 #include <stdlib.h>

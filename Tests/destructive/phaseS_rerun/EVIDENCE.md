@@ -50,7 +50,11 @@ Proven by that table:
 
 **Not established:** where the written bytes come from (what the GPU quad samples). Earlier text called it "desktop content", "leftover memory" or "live"; none of that was shown. Only that the values are session-dependent on stock and that the extent is stable is shown. Because of this the comparison cannot prove the rebuilt kext writes the same pixels as stock, only that no extent difference and no stock-exceeding value spread was seen.
 
-What would establish it (queued, not run): (a) after a stock boot, run `gl_read_buffer` several times in one session and see whether the bytes repeat inside a session; (b) identify the source surface content by reading it back another way (for example a `screencapture` taken at the same moment and compared with the bytes), on stock first; (c) the selector-7 recorder check below.
+**Gap and the queued experiment (written Nov 7, NOT YET RUN).** The two existing tests sample only the first 8 bytes, once, at the moment the call returns, and the #158 comment says the call does not wait for the GPU copy, so even "16 bytes changed" may be a partial copy at that instant. `Tests/destructive/t3_gl_read_buffer_source.c` (experiment, not one of the 27) answers five questions in one session per boot on the same surface: (1) does the content change after the call returns (samples at 0/50/500/2000 ms); (2) is it repeatable inside a session (read_buffer three times, two different prefills); (3) do `read_buffer` and `surface_read` return the same bytes; (4) are the bytes pixels of the screen (before/after screenshots taken on the G5, searched in four channel orders); (5) does any of this depend on the kext (stock and rebuilt, 2 boots each). Run with `sh Tools/t3_experiment_one.sh t3_gl_read_buffer_source stock reboot` (twice), then `... rebuilt reboot` (twice); read with `python3 Tools/t3_read_buffer_source_analyze.py ~/g5logs/t3_experiments/<dirs>`. The test has only been written, not compiled or run: build it first on the G5 (`make destructive-t3_gl_read_buffer_source`) and fix any compile error before the first run. Results go into the table below and into the comment blocks of `t3_gl_read_buffer.c` / `t3_surface_read.c`; until then every byte-source statement stays "not established".
+
+**Experiment results:** none yet.
+
+Remaining gaps that this experiment does NOT close (also not established): the content of the surface memory as the CPU sees it (the address returned by 2D `lock_memory` is not shown to be a dereferenceable user pointer, so the test does not read it), and why only 16 bytes change.
 
 ## surface_locks: returned address
 
@@ -78,6 +82,6 @@ Proven: the stock set varies between 14 and 16 registers and contains 0x34 0xa8 
 
 **Not established:** whether 0x000c is a volatile stock register that was simply never sampled (the test samples one run per boot, so six stock runs is a small sample of an intermittent register), or something the rebuilt kext touches. Do not call it clean and do not call it a defect from this run. Open: re-run on stock 2-3 times and on rebuilt 2 times after the main T3 run, one test per boot; if 0x000c appears on stock, record it here; if it appears on rebuilt only in several runs, trace what touches register 0x0c in the rebuilt kext against stock.
 
-## Open check: does any real workload use selector 7?
+## Open check: does any real workload use selector 7? (queued, not run)
 
 `read_buffer` (GL selector 7) is exercised by no test except `t3_gl_read_buffer`. Whether any real application calls it with data is not established. Planned: record IOConnect calls (the passive recorder from `Tools/userspace/`) while the Phase 6/9 workloads and games run and count selector-7 calls. If the count is zero, the byte-level content of `read_buffer` has no consumer in the evaluated workloads and the extent check is proportionate; if non-zero, the byte content needs a real check.

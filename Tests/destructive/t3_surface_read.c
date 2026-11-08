@@ -9,7 +9,7 @@
  * - This test never writes the surface: `addr` from 2D lock_memory(0) is never dereferenced; the only writes are the 0xAA pre-fill of the destination buffer. Source unchanged since Oct 1 (862861ca), before the Oct 2 stock reference.
  * - Extent is "16 inside rows 0..3, 0 outside" in every stored run, stock and rebuilt.
  * - The first-row bytes differ between sessions on stock itself (ff ff ff / 83 41 24 / 81 40 24 / 86 a9 cf). Within a session stock and rebuilt matched on Nov 3 and differed on Oct 19; the Oct 21 rebuilt run read ff ff ff (same as the Oct 2 stock value).
- * - NOT ESTABLISHED: the source of those bytes (the surface memory is allocated by the 2D lock and never initialised by this test) and why they change between sessions. */
+ * - NOT ESTABLISHED (experiment t3_gl_read_buffer_source.c queued, not yet run, covers surface_read too; update this block with its results): the source of those bytes (the surface memory is allocated by the 2D lock and never initialised by this test) and why they change between sessions. */
 #include "t3common.h"
 #include <stdlib.h>
 static const char *body(dtest_t *t, io_service_t svc) {
