@@ -8,6 +8,9 @@
  * (verified via a plain read_regs(0x15f4) after each), confirming the high bits above 0x1ffc and the low 2 bits are both dropped as documented, not validated/rejected.
  * Full-range snapshot (added 2026-10-05, same day): the Measurements this issue asks for include "ALL registers in 0x0-0x1ffc... before the test and after the reset step, diffed: only the
  * chosen register may differ, and not after restoration" - a full 2048-dword read_regs scan before any write and after every restore, confirming nothing else moved. */
+/* WHY THIS TEST FAILS ITS OWN "0 registers differ" CHECK ON STOCK TOO (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, Nov 7 2026).
+ * - Stock runs show 14-16 changed registers (six recorded runs): 0x34 0xa8 0xac 0x340 0x7d4 0x7e0 0x1fc0..0x1fdc every time, 0x3b8 0x3d8 0x594 intermittently. Rebuilt runs show 14, 15, 15 and (Nov 7) 17.
+ * - The Nov 7 rebuilt run is the only one containing 0x000c (pre 0x10bfac8f, post 0x103fac8f). OPEN / NOT ESTABLISHED: whether 0x000c is an intermittent stock register never sampled or something the rebuilt kext touches. Needs several one-test-per-boot re-runs on stock and rebuilt; do not call it clean or a defect from one run. */
 #include "t3common.h"
 #define NREGS (0x2000 / 4)
 static kern_return_t rd_quiet(io_connect_t d, UInt32 off, UInt32 *val) {

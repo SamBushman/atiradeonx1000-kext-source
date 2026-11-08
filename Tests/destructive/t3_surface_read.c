@@ -5,6 +5,11 @@
  * (-> CannotLock 0xe00002cc, the predicted reject), so the memory is created the proven way: a 2D connection binds the surface and lock_memory/unlock_memory(0) allocates it
  * (t3_2d_lock_unlock passed). The destination is a page-aligned 64 KB user buffer pre-filled with 0xAA: only bytes inside rows 0..3 (row_bytes 64) may change; any change beyond the
  * first 4 * 64 bytes is a DIVERGENCE (the copy wrote outside its rectangle). */
+/* WHY THE "first row:" NOTE IS NOT A CRITERION (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, Nov 7 2026). Only proven facts:
+ * - This test never writes the surface: `addr` from 2D lock_memory(0) is never dereferenced; the only writes are the 0xAA pre-fill of the destination buffer. Source unchanged since Oct 1 (862861ca), before the Oct 2 stock reference.
+ * - Extent is "16 inside rows 0..3, 0 outside" in every stored run, stock and rebuilt.
+ * - The first-row bytes differ between sessions on stock itself (ff ff ff / 83 41 24 / 81 40 24 / 86 a9 cf). Within a session stock and rebuilt matched on Nov 3 and differed on Oct 19; the Oct 21 rebuilt run read ff ff ff (same as the Oct 2 stock value).
+ * - NOT ESTABLISHED: the source of those bytes (the surface memory is allocated by the 2D lock and never initialised by this test) and why they change between sessions. */
 #include "t3common.h"
 #include <stdlib.h>
 static const char *body(dtest_t *t, io_service_t svc) {

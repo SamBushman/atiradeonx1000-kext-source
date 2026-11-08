@@ -16,6 +16,7 @@
  * *** CORRECTION (same day, found running #120's sibling test): `ioreg -w0 -c CLASS` does NOT filter on this machine's ioreg build (confirmed: returns the identical full-tree dump
  * even for a nonsense class name) - a leak check built on it silently always reads 0/0. Switched to the mechanism Tests/test_deep_t2.c already uses, verified this session to show real
  * nonzero counts: `ioreg -l -w0 | grep IOKitDiagnostics`'s own `"ClassName"=N` properties. */
+/* WHY A PHASE S DIFF FOR THIS TEST IS NOT A KEXT DIFFERENCE (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md). Real-allocation setup and leak checks were changed Oct 5 (9cfc8934, 2122612e), after the Oct 2 stock log. Compare against the stock RE-RUN of the current binary (phaseS_rerun/dvd_lock_buffers.stockhs.norm): stock and rebuilt were byte-identical in the Oct 19, Oct 21 and Nov 3 sets, and the Nov 7 rebuilt run equals the Nov 3 stock re-run. */
 #include "t3common.h"
 #include <unistd.h>
 #include <stdlib.h>

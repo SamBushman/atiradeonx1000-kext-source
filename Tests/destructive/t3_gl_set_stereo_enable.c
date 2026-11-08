@@ -7,6 +7,7 @@
  * IOATIR500Accelerator::setup_stereo (issue #88, 2026-10-06 comment) confirmed this exact value is a hard-coded sentinel on one specific real branch (both of the function's own
  * allocation sub-steps reporting success), not a generic error - so matching it exactly is itself evidence about which vendor code path ran, worth distinguishing from any other
  * nonzero return. */
+/* WHY A PHASE S DIFF FOR THIS TEST IS NOT A KEXT DIFFERENCE (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md). The test gained GPU-liveness checks and EXPECTED-REJECT classification on Oct 6 (227cd8a2), after the Oct 2 stock log, so the Oct 2 log lacks those lines. Compare against the stock RE-RUN of the current binary (phaseS_rerun/gl_set_stereo_enable.stockhs.norm): stock and rebuilt were byte-identical in the Oct 19, Oct 21 and Nov 3 sets. */
 #include "t3common.h"
 static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t g = IO_OBJECT_NULL; kern_return_t r, r2; int bad = 0; const char *outcome = "PASS";

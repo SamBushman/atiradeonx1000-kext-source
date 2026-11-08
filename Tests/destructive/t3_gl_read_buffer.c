@@ -19,6 +19,11 @@
  * (-> CannotLock 0xe00002cc, the predicted reject), so the memory is created the proven way: a 2D connection binds the surface and lock_memory/unlock_memory(0) allocates it
  * (t3_2d_lock_unlock passed). The destination is a page-aligned 64 KB user buffer pre-filled with 0xAA: only bytes inside rows 0..3 (row_bytes 64) may change; any change beyond the
  * first 4 * 64 bytes is a DIVERGENCE (the copy wrote outside its rectangle). */
+/* WHY THE "first row:" NOTE IS NOT A CRITERION (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, Nov 7 2026). Only proven facts:
+ * - PASS = call returns 0 or the predicted CannotLock, and no byte changes outside rows 0..3. In all 13 stored runs of this test and t3_surface_read, on stock and rebuilt, the extent line reads "16 inside, 0 outside".
+ * - The first-row bytes change from session to session ON STOCK ITSELF (Oct 2 ff ff ff, Oct 19 4a 4d 41, Oct 21 ff ff ff, Nov 3 b4 88 76). Stock and rebuilt gave the same bytes within the Nov 3 session and different bytes within Oct 19 and Oct 21.
+ * - NOT ESTABLISHED: where the bytes come from (what the GPU quad samples). "desktop content" and "leftover memory" were guesses and are not shown. Do not assert byte values here and do not read a difference as a kext defect or as proof of equality.
+ * - The normaliser (Tools/t3_phaseR_one.sh) still diffs this NOTE, so a run reports rc 1 when only these bytes differ; classify per the runbook (compare extent + RESULT lines). */
 #include "t3common.h"
 #include <stdlib.h>
 static const char *body(dtest_t *t, io_service_t svc) {

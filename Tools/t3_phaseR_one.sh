@@ -26,6 +26,7 @@ while kill -0 $SP 2>/dev/null; do
 done
 kill $LP 2>/dev/null
 NEW=$(ssh $H "cd $D && ls -t results/t3_${N}_rebuilt_*.log | head -1"); OLD=$(ssh $H "cd $D && ls -t phaseS/t3_${N}_stock_*.log | tail -1")
+# Normaliser: strip the "timestamp [method/kext/phase]" prefix, keep RESULT and NOTE lines, drop "NOTE start:" (dtest.c prints phase, kext name and mirror IP in it, so it differs between any two runs by construction). NOTE lines that carry DATA (returned addresses, register values, pixel bytes) are still compared, so a data NOTE that varies between sessions on stock itself gives rc 1: see Tests/destructive/phaseS_rerun/EVIDENCE.md for which ones and what is and is not established.
 norm() { ssh $H "cd $D && cat $1" | sed 's/^[^ ]* \[[^]]*\] //' | grep -E "^(RESULT|NOTE)" | grep -v "^NOTE start:"; }
 norm "$NEW" > "$OUT/$N.rebuilt.norm"; norm "$OLD" > "$OUT/$N.stock.norm"
 if diff "$OUT/$N.stock.norm" "$OUT/$N.rebuilt.norm" > "$OUT/$N.diff"; then echo "T3 $N: SAME AS STOCK ($(ssh $H "cd $D && tail -1 $NEW | cut -c1-120"))"; rc=0; else echo "T3 $N: DIVERGENCE vs stock:"; head -20 "$OUT/$N.diff"; rc=1; fi

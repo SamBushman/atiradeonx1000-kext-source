@@ -8,6 +8,7 @@
  * first version of this check using `-c` silently always read 0/0 (not "nothing leaked", just "the check never worked"). Switched to the mechanism Tests/test_deep_t2.c already uses and
  * verified this session: `ioreg -l -w0 | grep IOKitDiagnostics`, which publishes a real `"ClassName"=N` property per loaded kext class and DOES reflect real live counts (confirmed
  * nonzero: ATIR500Memory=2, IOATIR500Shared=1, baseline). */
+/* WHY A PHASE S DIFF FOR THIS TEST IS NOT A KEXT DIFFERENCE (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md). Leak checks were added Oct 5 (9cfc8934, 2122612e), after the Oct 2 stock log. Compare against the stock RE-RUN of the current binary (phaseS_rerun/dvd_images.stockhs.norm): stock and rebuilt were byte-identical in the Oct 19, Oct 21 and Nov 3 sets, and the Nov 7 rebuilt run equals the Nov 3 stock re-run. */
 #include "t3common.h"
 #include <stdlib.h>
 #include <unistd.h>
