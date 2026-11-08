@@ -5,7 +5,7 @@
 #   env: SRC (staged tree dir on the G5, default newest ~/rung3/src_*), KEXT (staged kext dir name, default kext_build_<sha of SRC>), H (host, default G5)
 # Output: ~/g5logs/t3_phaseR/NAME.{out,diff,mirror}; exit 0 = same as stock, 1 = differs (a DIVERGENCE: file an issue), 3 = G5 stopped answering (HANG: do not touch it; check panic.log after power-cycle).
 # NOT yet exercised end to end on the G5 (written Oct 18): run the first test by hand-watching it.
-N=${1:?usage: t3_phaseR_one.sh NAME [reboot]}; REBOOT=$2; H=${H:-G5}; OUT=$HOME/g5logs/t3_phaseR; mkdir -p "$OUT"
+N=${1:?usage: t3_phaseR_one.sh NAME [reboot]}; REBOOT=$2; H=${H:-G5}; OUT=${OUT:-$HOME/g5logs/t3_phaseR}; mkdir -p "$OUT"
 SRC=${SRC:-$(ssh $H 'ls -dt $HOME/rung3/src_* | grep -v tgz | head -1' | sed 's|.*/||')}; SHA=${SRC#src_}; KEXT=${KEXT:-kext_build_$SHA}
 D="rung3/$SRC/Tests/destructive"; ME=$(ssh $H 'echo $SSH_CLIENT' | cut -d' ' -f1)
 echo "T3 $N: tree $SRC kext $KEXT"
