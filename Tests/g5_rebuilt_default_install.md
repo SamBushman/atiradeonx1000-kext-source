@@ -36,3 +36,14 @@ If the GUI does not come up: ssh in (sshd does not depend on GL) and run the rev
 - `lsof` on WindowServer shows the rebuilt images mapped by size: GLDriver 2716736 bytes (stock 4361232), GA 127768 (stock 138776), libGLProgrammability 1074188 (stock 979416).
 - Desktop screenshot normal (Quartz Extreme compositing running on the rebuilt GLDriver).
 - `gld_ctxlist_test` PASS 20/20, `perf_dvd_idct 2000 12` PASS (medians 4.44 / 5.07 / 12.06 us, stock 4.33 / 5.05 / 12.03).
+
+## Verification after the second reboot (10:14) and Halo on the installed stack (10:14-10:25)
+- Nothing else changed between the reboots. After the second boot kextd's regenerated prelinked kernelcache (`kernelcache.86C01707`, md5 `64682561b06272c4027c9831e06a8c80`, 4917589 bytes; stock cache was 4909061) contains the rebuilt kext: it now loads at `0x541000`, size `0x4f000`. **The load address no longer tells stock from rebuilt; use the installed kext md5 (`378d12e3...`) and the GLDriver md5.** Installed md5s unchanged, `panic.log` 229725 bytes unchanged, Test HD mounted, WindowServer/Dock/Finder up.
+- Halo timedemo, installed images, no `DYLD_*` / `GLD_*` environment, no redirect (`Tools/gamefps/halo_side.sh rebuilt_default ""`; evidence `~/g5logs/final_eval/gamefps/halo_rebuilt_default/`, `side_rebuilt_default.log`, `~/g5logs/final_eval/default_install/`): the running Halo process maps the rebuilt libGL (160528 bytes), libGLProgrammability (1074188) and GLDriver (2716736) from the system paths (`halo_loaded_images.txt`).
+
+| config | rebuilt (installed) fps, runs 1/2/3 | stock fps, runs 1/2/3 | delta |
+|---|---|---|---|
+| 800x600 high | 84.17 / 92.87 / 92.89 | 85.49 / 93.28 / 93.32 | -1.5 % / -0.4 % / -0.5 % (run 1 of each side is the cold start) |
+| 640x480 low | 122.76 / 122.86 / 123.15 | 123.77 / 123.64 / 123.91 | -0.8 % / -0.6 % / -0.6 % |
+
+All within the 5 % rule (stock noise including the cold start 5.0 %). No `NO Timedemo.txt`, no new entry in `Halo.crash.log` (last entry 07:01, from the ku233 run before #235 was fixed); no launcher-dialog stall this time. The same ~0.5-1 % gap to stock as the U/KU arms.
