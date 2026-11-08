@@ -9,8 +9,8 @@
  * Full-range snapshot (added 2026-10-05, same day): the Measurements this issue asks for include "ALL registers in 0x0-0x1ffc... before the test and after the reset step, diffed: only the
  * chosen register may differ, and not after restoration" - a full 2048-dword read_regs scan before any write and after every restore, confirming nothing else moved. */
 /* WHY THIS TEST FAILS ITS OWN "0 registers differ" CHECK ON STOCK TOO (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, Nov 7 2026).
- * - Stock runs show 14-16 changed registers (six recorded runs): 0x34 0xa8 0xac 0x340 0x7d4 0x7e0 0x1fc0..0x1fdc every time, 0x3b8 0x3d8 0x594 intermittently. Rebuilt runs show 14, 15, 15 and (Nov 7) 17.
- * - The Nov 7 rebuilt run is the only one containing 0x000c (pre 0x10bfac8f, post 0x103fac8f). OPEN / NOT ESTABLISHED: whether 0x000c is an intermittent stock register never sampled or something the rebuilt kext touches. Needs several one-test-per-boot re-runs on stock and rebuilt; do not call it clean or a defect from one run. */
+ * - Stock runs show 14-16 changed registers, rebuilt runs 14-17: 0x34 0xa8 0xac 0x340 0x7d4 0x7e0 0x1fc0..0x1fdc every time on both arms; 0x3b8 0x3d8 0x594 and 0x000c (pre/post 0x10bfac8f/0x103fac8f, bit 0x00800000 toggling either way) intermittently on BOTH arms (0x000c: stock Nov 8 re-run 3; rebuilt Nov 7 and Nov 8 re-run 2).
+ * - NOT ESTABLISHED: what register 0x000c is / why the set varies. Consequence: "0 registers differ" is not a usable criterion for this test; compare the changed set against the stock-observed union instead (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md). */
 #include "t3common.h"
 #define NREGS (0x2000 / 4)
 static kern_return_t rd_quiet(io_connect_t d, UInt32 off, UInt32 *val) {

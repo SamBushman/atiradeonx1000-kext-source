@@ -88,10 +88,15 @@ The test's own check, "full-range diff: N register(s) differ (expected 0)", fail
 | Oct 21 rebuilt | 15 | + 0x594 |
 | Nov 3 rebuilt | 14 | the Nov 3 stock set |
 | **Nov 7 rebuilt** | **17** | **0x000c** + 0x34 0xa8 0xac 0x340 0x3b8 0x594 0x7d4 0x7e0 + 0x1fc0..0x1fdc |
+| Nov 8 stock re-run 2 (`~/g5logs/final_eval/t3_nov7/followups/dvd_write_regs_scratch/stock2`) | 16 | 0x34 0xa8 0xac 0x340 0x3b8 0x3d8 0x7d4 0x7e0 + 0x1fc0..0x1fdc |
+| **Nov 8 stock re-run 3 (`.../stock3`)** | **15** | **0x000c (pre 0x10bfac8f, post 0x103fac8f)** + 0x34 0xa8 0xac 0x340 0x7d4 0x7e0 + 0x1fc0..0x1fdc |
+| Nov 8 rebuilt re-run 1 (`.../rebuilt1`) | 15 | 0x34 0xa8 0xac 0x340 0x3d8 0x7d4 0x7e0 + 0x1fc0..0x1fdc |
+| Nov 8 rebuilt re-run 2 (`.../rebuilt2`) | 16 | **0x000c (pre 0x103fac8f, post 0x10bfac8f)** + 0x34 0xa8 0xac 0x340 0x594 0x7d4 0x7e0 + 0x1fc0..0x1fdc |
+| Nov 8 stock re-run 1 (`.../stock1`) | - | INVALID: the preflight state capture failed (`screencapture FAILED`, `regsnap FAILED`), the test did not run (TEST_EXIT=4); repeated as `stock4` |
 
-Proven: the stock set varies between 14 and 16 registers and contains 0x34 0xa8 0xac 0x340 0x7d4 0x7e0 0x1fc0..0x1fdc in every run on both arms, plus 0x3b8 0x3d8 0x594 intermittently. 0x000c (pre `0x10bfac8f`, post `0x103fac8f`, bit 0x00800000 differs) appears in **no** recorded stock or rebuilt run except Nov 7 rebuilt, and the Nov 7 rebuilt set is the only one with a register outside the union of the six recorded stock runs (that union has 17 registers; the Nov 7 set has 17 too but lacks 0x3d8 and adds 0x000c).
+Proven: register 0x000c changed during the test on a **stock** run (Nov 8 stock re-run 3) with the same values as on the Nov 7 rebuilt run, and on a second rebuilt run (Nov 8 rebuilt 2, with the two values in the opposite direction: bit 0x00800000 toggled each way). So 0x000c is an intermittent volatile register on stock as well, and its appearance in the Nov 7 rebuilt run is **not** a difference caused by the rebuilt kext. Across all valid runs, stock shows 14-16 changed registers and rebuilt 14-17; both arms always contain 0x34 0xa8 0xac 0x340 0x7d4 0x7e0 0x1fc0..0x1fdc, and each of 0x3b8 0x3d8 0x594 0x000c appears intermittently on both arms (0x594 and 0x3b8 on stock in the Oct sets, 0x3d8 on rebuilt Nov 8 run 1, 0x3b8 on rebuilt Oct 19).
 
-**Not established:** whether 0x000c is a volatile stock register that was simply never sampled (the test samples one run per boot, so six stock runs is a small sample of an intermittent register), or something the rebuilt kext touches. Do not call it clean and do not call it a defect from this run. Open: re-run on stock 2-3 times and on rebuilt 2 times after the main T3 run, one test per boot; if 0x000c appears on stock, record it here; if it appears on rebuilt only in several runs, trace what touches register 0x0c in the rebuilt kext against stock.
+**Not established:** what register 0x000c is and what toggles bit 0x00800000; why the set varies run to run. The test's own "0 registers differ" criterion therefore fails on both arms in every run and is not a usable pass/fail criterion for this test; the comparison that holds is "changed set within the stock-observed union, no register outside it" (stock-observed union so far: the list above plus 0x000c).
 
 ## Open check: does any real workload use selector 7? (queued, not run)
 
