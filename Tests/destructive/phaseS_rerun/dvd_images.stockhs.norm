@@ -1,0 +1,16 @@
+NOTE class counts BEFORE (no connection open): IOATIR500Shared=0 ATIR500Memory=2
+RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+RESULT -> 0xe00002be (kIOReturnNoResources) DVD delete_image(0) before any declare
+NOTE delete before declare: got 0xe00002be want 0xe00002be -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD declare_image(sel8, 0, addr = 64 KB user buffer, 0x1000)
+NOTE declare_image -> r=0x00000000 out=0x1a000
+NOTE declare_image: got 0x00000000 want 0x00000000 -> MATCH
+NOTE class counts AFTER declare_image: IOATIR500Shared=1 ATIR500Memory=2
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD delete_image(0) probe
+NOTE declared image id (deleted by the probe): 0
+RESULT -> 0xe00002c2 (kIOReturnBadArgument) DVD delete_image(id) again
+NOTE delete twice: got 0xe00002c2 want 0xe00002c2 -> MATCH
+NOTE user buffer bytes changed: 0 (expected 0)
+NOTE class counts AFTER connection close: IOATIR500Shared=0 ATIR500Memory=2
+NOTE leak check (close vs before): MATCH, nothing leaked
+NOTE finish: outcome=PASS calls=5

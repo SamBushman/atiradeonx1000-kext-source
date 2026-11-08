@@ -1,0 +1,48 @@
+RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x0770 -> 0x000000ff
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x00000000
+NOTE pre-write snapshot done
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15e0 -> 0x00000001
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x00000000)
+NOTE write identity: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x5a5a5a5a)
+NOTE write pattern: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x5a5a5a5a
+NOTE read-back pattern code: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x00000000)
+NOTE restore 0: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x00000000
+NOTE read-back restored code: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x115f4, 0x5a5a5a5a)
+NOTE Phase C write via high-bit alias (0x115f4): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x5a5a5a5a
+NOTE Phase C read-back via real offset after high-bit alias: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x00000000)
+NOTE Phase C restore 0: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f7, 0x5a5a5a5a)
+NOTE Phase C write via low-bit alias (0x15f7): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x5a5a5a5a
+NOTE Phase C read-back via real offset after low-bit alias: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD write_regs(sel14, 0x15f4, 0x00000000)
+NOTE Phase C final restore 0: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15f4 -> 0x00000000
+NOTE Phase C final read-back: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x15e0 -> 0x00000001
+NOTE SCRATCH_REG0 before 0x00000001 after 0x00000001 (stamp register, must not go backwards)
+NOTE FULL-RANGE DIFF at 0x0034: pre=0x00000004 post=0x00400004
+NOTE FULL-RANGE DIFF at 0x00a8: pre=0x00000000 post=0x00000001
+NOTE FULL-RANGE DIFF at 0x00ac: pre=0x00000055 post=0x00000000
+NOTE FULL-RANGE DIFF at 0x0340: pre=0x00000000 post=0x00000002
+NOTE FULL-RANGE DIFF at 0x0594: pre=0x00000000 post=0x00000002
+NOTE FULL-RANGE DIFF at 0x07d4: pre=0x00000000 post=0x00000001
+NOTE FULL-RANGE DIFF at 0x07e0: pre=0x4200e000 post=0x4000e000
+NOTE FULL-RANGE DIFF at 0x1fc0: pre=0x00000008 post=0x00000000
+NOTE FULL-RANGE DIFF at 0x1fc4: pre=0xc548cf29 post=0x0cf76958
+NOTE FULL-RANGE DIFF at 0x1fc8: pre=0x00000008 post=0x00000000
+NOTE FULL-RANGE DIFF at 0x1fcc: pre=0xc362106c post=0xf4c2a455
+NOTE FULL-RANGE DIFF at 0x1fd0: pre=0x00000008 post=0x00000000
+NOTE FULL-RANGE DIFF at 0x1fd4: pre=0x6bcdba4b post=0x4b1a3ffa
+NOTE FULL-RANGE DIFF at 0x1fd8: pre=0x00000008 post=0x00000000
+NOTE FULL-RANGE DIFF at 0x1fdc: pre=0xdaa104dd post=0xbc03d57a
+NOTE full-range diff (excluding the live stamp 0x15e0): 15 register(s) differ (expected 0)
+NOTE finish: outcome=DIVERGENCE calls=19

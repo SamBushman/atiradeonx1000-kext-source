@@ -1,0 +1,37 @@
+NOTE class counts BEFORE: ATIR500DVDContext=0 ATIR500Surface=0
+RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+RESULT -> 0xe00002cc (kIOReturnCannotLock) DVD lock_all_buffers(0) UNBOUND
+NOTE lock unbound: got 0xe00002cc want 0xe00002cc -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(1,0,0) binds
+NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD setup_buffers(0,64,48,0,0x27c00)
+NOTE setup_buffers #1: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD setup_buffers(0,64,48,0,0x37c00)
+NOTE setup_buffers #2: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD lock_all_buffers(0) bound + set up
+NOTE lock_all_buffers #1 -> r=0x00000000 outSize=256
+NOTE buffer[10] address=0x0 pitch=0x0
+NOTE buffer[11] address=0x0 pitch=0x0
+NOTE buffer[12] address=0x0 pitch=0x0
+NOTE buffer[13] address=0x0 pitch=0x0
+NOTE buffer[14] address=0x0 pitch=0x0
+NOTE buffer[15] address=0x0 pitch=0x0
+NOTE buffer[16] address=0x0 pitch=0x0
+NOTE buffer[17] address=0x0 pitch=0x0
+NOTE buffer[18] address=0x0 pitch=0x0
+NOTE buffer[19] address=0x0 pitch=0x0
+NOTE buffer[20] address=0x0 pitch=0x0
+NOTE buffer[21] address=0x0 pitch=0x0
+NOTE buffer[22] address=0x0 pitch=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD lock_all_buffers(0) REPEAT, already locked
+NOTE lock_all_buffers #2 (repeat) -> r=0x00000000 outSize=256; same descriptors as #1: YES
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD unlock_memory(0)
+NOTE unlock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(0) detaches
+NOTE class counts AFTER (connection closed): ATIR500DVDContext=0 ATIR500Surface=0
+NOTE leak check (after vs before): MATCH, nothing leaked
+NOTE finish: outcome=PASS calls=13

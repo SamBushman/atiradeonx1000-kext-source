@@ -1,0 +1,13 @@
+RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+RESULT -> 0x00000000 (kIOReturnSuccess) GL wait_for_stamp(sel9, stamp=0) baseline liveness
+NOTE baseline liveness: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0xe00002bd (kIOReturnNoMemory) GL set_stereo(sel19, mode 1, panel 0) enable
+NOTE enable -> 0xe00002bd
+RESULT -> 0x00000000 (kIOReturnSuccess) GL wait_for_stamp(sel9, stamp=0) post-enable liveness
+NOTE post-enable liveness: got 0x00000000 want 0x00000000 -> MATCH
+NOTE NoMemory matches setup_stereo's confirmed force-return sentinel on the double-allocation-success branch (issue #88, 2026-10-06 comment) - not a generic failure
+RESULT -> 0x00000000 (kIOReturnSuccess) GL set_stereo(sel19, mode 0, panel 0) restore
+NOTE restore: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) GL wait_for_stamp(sel9, stamp=0) post-restore liveness
+NOTE post-restore liveness: got 0x00000000 want 0x00000000 -> MATCH
+NOTE finish: outcome=EXPECTED-REJECT calls=6

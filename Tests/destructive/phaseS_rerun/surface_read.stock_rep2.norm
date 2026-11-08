@@ -1,0 +1,16 @@
+RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(id 1, mode 0x800) binds
+NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D lock_memory(0) allocates the surface memory
+NOTE lock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D unlock_memory(0)
+NOTE unlock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_read(sel5, rect {0,0,4,4}, client_addr = 64 KB user buffer, row_bytes 64)
+NOTE surface_read -> r=0x00000000 (0 = copied; CannotLock 0xe00002cc = surface memory not usable: predicted reject)
+NOTE bytes changed inside rows 0..3: 16, outside: 0; first row: 83 41 24 ff aa aa aa aa
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(0) detaches
+NOTE finish: outcome=PASS calls=10

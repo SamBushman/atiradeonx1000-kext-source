@@ -1,0 +1,76 @@
+RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection A
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(0, 0x4) [harness baseline state A]
+NOTE state A: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel3 write_lock_options(3)
+NOTE [A] Surface sel3 write_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=780,438,4 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel3 write_lock_options(3)
+NOTE [A] unlock for sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel3 write_lock_options(3)
+NOTE [A] query_lock after sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel3 write_lock_options(1)
+NOTE [A] Surface sel3 write_lock_options(1) -> 0x00000000 data[0]=0x3018000 data[4]=0x1e00 data[5..7]=780,438,4 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel3 write_lock_options(1)
+NOTE [A] unlock for sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel3 write_lock_options(1)
+NOTE [A] query_lock after sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel14 write_lock
+NOTE [A] Surface sel14 write_lock -> 0x00000000 data[0]=0x3018000 data[4]=0x1e00 data[5..7]=780,438,4 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel14 write_lock
+NOTE [A] unlock for sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel14 write_lock
+NOTE [A] query_lock after sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel0 read_lock_options(3)
+NOTE [A] Surface sel0 read_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=780,438,4 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel0 read_lock_options(3)
+NOTE [A] unlock for sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel0 read_lock_options(3)
+NOTE [A] query_lock after sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel0 read_lock_options(1)
+NOTE [A] Surface sel0 read_lock_options(1) -> 0x00000000 data[0]=0x3018000 data[4]=0x1e00 data[5..7]=780,438,4 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel0 read_lock_options(1)
+NOTE [A] unlock for sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel0 read_lock_options(1)
+NOTE [A] query_lock after sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(id 1, mode 0x800) binds
+NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D lock_memory(0) allocates the surface memory
+NOTE 2D lock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D unlock_memory(0)
+NOTE 2D unlock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel3 write_lock_options(3)
+NOTE [B] Surface sel3 write_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=4,4,0 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel3 write_lock_options(3)
+NOTE [B] unlock for sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel3 write_lock_options(3)
+NOTE [B] query_lock after sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel3 write_lock_options(1)
+NOTE [B] Surface sel3 write_lock_options(1) -> 0x00000000 data[0]=0x3810000 data[4]=0x100 data[5..7]=4,4,0 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel3 write_lock_options(1)
+NOTE [B] unlock for sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel3 write_lock_options(1)
+NOTE [B] query_lock after sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel14 write_lock
+NOTE [B] Surface sel14 write_lock -> 0x00000000 data[0]=0x3810000 data[4]=0x100 data[5..7]=4,4,0 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel14 write_lock
+NOTE [B] unlock for sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel14 write_lock
+NOTE [B] query_lock after sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel0 read_lock_options(3)
+NOTE [B] Surface sel0 read_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=4,4,0 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel0 read_lock_options(3)
+NOTE [B] unlock for sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel0 read_lock_options(3)
+NOTE [B] query_lock after sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel0 read_lock_options(1)
+NOTE [B] Surface sel0 read_lock_options(1) -> 0x00000000 data[0]=0x3810000 data[4]=0x100 data[5..7]=4,4,0 data[8]=0x0
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel0 read_lock_options(1)
+NOTE [B] unlock for sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel0 read_lock_options(1)
+NOTE [B] query_lock after sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(0) detaches
+NOTE finish: outcome=PASS calls=41

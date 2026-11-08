@@ -16,7 +16,7 @@ W=${RES%x*}; H=${RES#*x}
 OUT=$HOME/rung3/gamefps/halo/$L; mkdir -p "$OUT"
 PROF=$HOME/Documents/Halo/ppc/savegames/Sam       # the profile Halo reads (lastprof.txt): blam.sav; saved/player_profiles/default_profile is NOT used
 PL=com.macsoft.halo
-GI=$HOME/rung3/src_575ad528/Tools/gui_input
+GI=${GI:-$HOME/rung3/src_575ad528/Tools/gui_input}
 ORIG=$HOME/rung3/gamefps/halo/orig; mkdir -p $ORIG
 [ -f $ORIG/blam.sav ] || { cp $PROF/blam.sav $ORIG/; defaults read $PL > $ORIG/plist.txt; cp $HOME/Library/Preferences/$PL.plist $ORIG/; }
 
