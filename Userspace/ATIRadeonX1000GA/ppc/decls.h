@@ -120,12 +120,14 @@ extern unsigned char offscreenBufferPixelFormat_0000e6c0;
 extern unsigned char offscreenBufferAlignedWidth_0000e6cc;
 extern unsigned char offscreenBufferAlignedHeight_0000e6d0;
 extern unsigned char offscreenBufferRowBytes_0000e6d4;
-extern unsigned char *offscreenBufferSurfaceInfo_0000e6e4;
+/* #235: word array pointer (stock: lwz 0(ptr), lwz 0x1c(ptr) = [7], descriptor = ptr+3 words); as unsigned char * every *ptr / ptr[n] / ptr+n was a byte access or byte arithmetic */
+extern unsigned int *offscreenBufferSurfaceInfo_0000e6e4;
 extern unsigned char textureBufferPixelFormat_0000e724;
 extern unsigned char textureBufferAlignedWidth_0000e730;
 extern unsigned char textureBufferAlignedHeight_0000e734;
 extern unsigned char textureBufferRowBytes_0000e738;
-extern unsigned char *textureBufferSurfaceInfo_0000e748;
+/* #235: word array pointer (stock: lwz 0(ptr), lwz 0x1c(ptr) = [7], descriptor = ptr+3 words); as unsigned char * every *ptr / ptr[n] / ptr+n was a byte access or byte arithmetic */
+extern unsigned int *textureBufferSurfaceInfo_0000e748;
 extern unsigned char ptrTo_keymgrGlobal_0000e68c;
 extern unsigned char atexitDsoHandle_0000e690;
 extern unsigned char ptrTo_machTaskSelf_0000e694;
