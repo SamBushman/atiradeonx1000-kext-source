@@ -95,6 +95,43 @@ def report(d):
                 hits, total = search(img, pat)
                 res.append("%s: %d (%s)" % (sn, total, ",".join("%d/%d" % h for h in hits[:3])))
             print("  call %d unit@%#x %s as %-4s %s | %s" % (c, start, " ".join("%02x" % x for x in unit), name, res[0], res[1]))
+    print("Q4b structure: the changed bytes grouped by row (row stride = the call's row_bytes 64) and 4-byte unit, then searched in the screenshots as a COLUMN of units (same x, rows y..y+3) and as a ROW of units (x..x+3 at one y), in the four channel orders:")
+    for c in calls:
+        o = fin.get(c)
+        if not o:
+            continue
+        units = {}
+        for off, v in o["bytes"].items():
+            units.setdefault((off // 64, (off % 64) // 4), {})[off % 4] = v
+        keys = sorted(units)
+        print("  call %d units (row,unit): %s" % (c, " ".join("%d.%d=%s" % (r_, u_, "".join("%02x" % units[(r_, u_)].get(k, 0) for k in range(4))) for r_, u_ in keys)))
+        if c != calls[0]:
+            continue  # the searches are identical for calls that agree (Q2/Q3 above); search the first call only
+        vals = [tuple(units[k].get(i) for i in range(4)) for k in keys]
+        if None in [x for v in vals for x in v] or len(vals) < 2:
+            print("  incomplete units: not searched")
+            continue
+        for name in ("ARGB", "RGBA", "BGRA", "ABGR"):
+            trip = [pixel_variants(v)[name] for v in vals]
+            for sn, img in shots.items():
+                w, h, data = img
+                for shape in ("column", "row"):
+                    hits, total = [], 0
+                    if shape == "row":
+                        pat = b"".join(trip); i = data.find(pat)
+                        while i != -1 and total < 100000:
+                            if i % 3 == 0:
+                                total += 1; hits.append(((i // 3) % w, (i // 3) // w))
+                            i = data.find(pat, i + 1)
+                    else:
+                        i = data.find(trip[0])
+                        while i != -1 and total < 100000:
+                            if i % 3 == 0:
+                                x, y = (i // 3) % w, (i // 3) // w
+                                if y + len(trip) <= h and all(data[((y + j) * w + x) * 3:((y + j) * w + x) * 3 + 3] == trip[j] for j in range(len(trip))):
+                                    total += 1; hits.append((x, y))
+                            i = data.find(trip[0], i + 1)
+                    print("  %-4s %-6s in %-6s: %d hit(s) %s" % (name, shape, sn, total, hits[:3]))
     print("  A hit count in the thousands (a flat desktop colour) proves nothing; a small count at a screen position that matches the surface's expected place, found in both channel/position checks, would.")
 
 for d in sys.argv[1:]:
