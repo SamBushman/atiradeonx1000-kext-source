@@ -7,6 +7,8 @@
 4. **Differences from stock are classified, not failed:** every difference the comparison scripts print is either an intended fix (named issue / README row) or unexplained; an unexplained one is investigated as a possible defect, and it becomes an issue only if a test's own criterion or a regression check shows harm.
 Where this runbook says "IDENTICAL to stock" below, read it as "report the differences and classify them" unless the line says the check proves the machine state (the stock-boot baselines).
 
+**Machine state (changed 2026-11-08): the G5 now boots the REBUILT stack by default** (kext + GLDriver + GA + VADriver + libGL + libGLProgrammability installed on Tiger HD, `Tests/g5_rebuilt_default_install.md`). A stock reference, arm S/U/K or any stock baseline therefore starts with `sudo sh /Library/ATIRadeonX1000-Rebuilt/swap.sh stock` + reboot (and `swap.sh rebuilt` + reboot to return); check the installed md5s before trusting any run.
+
 ## Phase overview (what runs, how it passes, where the evidence goes)
 Run the phases in this order. `<arm>` = stock reference, K, U, KU (see Arms). Durations are what the Nov 6-7 run measured; "see text" = depends on the build.
 
