@@ -9,7 +9,7 @@
  * (t3_2d_lock_unlock passed), the 2D connection still bound. Every lock that returns 0 is unlocked with the matching unlock selector and query_lock must then report available. Codes are
  * recorded (they are the observation); DIVERGENCE only for: an unlock that fails after a granted lock, or a lock state that does not clear. */
 /* WHY THE RETURNED ADDRESS IS NOT A CRITERION (evidence: Tests/destructive/phaseS_rerun/EVIDENCE.md, Nov 7 2026). This test's code is unchanged since the Oct 2 stock reference (last code change eb19cb42; e96e0279 is comment-only).
- * - The second write_lock NOTE data[0] was 0x3812000 on stock on Oct 2 and 0x3810000 on hot-swapped stock re-runs (Oct 19, Oct 21, Nov 3) and on all three rebuilt runs. All other lines identical.
+ * - The three [B] NOTEs that print data[0] (sel3 write_lock_options(1), sel14 write_lock, sel0 read_lock_options(1)) were 0x3812000 on stock on Oct 2 and 0x3810000 on hot-swapped stock re-runs (Oct 19, Oct 21, Nov 3) and on all four rebuilt runs (Oct 19, Oct 21, Nov 3, Nov 7). All other lines identical.
  * - NOT ESTABLISHED: why the Oct 2 run placed the buffer 0x2000 higher (the Oct 2 load procedure vs the hot-swapped re-runs was not tested) or what decides the placement. Only the criteria (lock results and RESULT lines) are compared. */
 #include "t3common.h"
 static int battery(dtest_t *t, io_connect_t s, const char *tag) {

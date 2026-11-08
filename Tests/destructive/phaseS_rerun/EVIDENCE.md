@@ -60,9 +60,9 @@ Remaining gaps that this experiment does NOT close (also not established): the c
 
 `t3_surface_locks.c` code is unchanged since the Phase S run (last code change eb19cb42, Oct 1 22:30 PDT; Phase S log is `...20261002T053315Z` = Oct 1 22:33 PDT; the later e96e0279 changed only a comment).
 
-Second `write_lock` NOTE (`data[0]`): Phase S (Oct 2) stock `0x3812000`. Hot-swapped stock re-runs (Oct 19, Oct 21, Nov 3) and rebuilt runs (Oct 19, Oct 21, Nov 3) all `0x3810000`. Every other line is identical.
+The three `[B]` battery NOTEs that print `data[0]` (sel3 `write_lock_options(1)`, sel14 `write_lock`, sel0 `read_lock_options(1)`): Phase S (Oct 2) stock `0x3812000` on all three. Hot-swapped stock re-runs (Oct 19, Oct 21, Nov 3) and rebuilt runs (Oct 19, Oct 21, Nov 3, Nov 7) all `0x3810000`. Every other line is identical (the Nov 7 rebuilt diff against the Phase S log is exactly those three lines; the Nov 7 rebuilt norm is byte-identical to the Oct 19, Oct 21 and Nov 3 stock re-runs).
 
-Proven: the same test code produced two different values on stock (Oct 2 vs the re-runs); the three re-runs match the three rebuilt runs. **Not established:** why the Oct 2 run placed the buffer 0x2000 higher (the Oct 2 boot/load procedure versus the hot-swapped re-runs is the obvious difference, but it was not tested), and what decides the placement. The Oct 19 findings text "allocation placement" is a description of the symptom, not a diagnosis.
+Proven: the same test code produced two different values on stock (Oct 2 vs the re-runs); the three re-runs match the four rebuilt runs. **Not established:** why the Oct 2 run placed the buffer 0x2000 higher (the Oct 2 boot/load procedure versus the hot-swapped re-runs is the obvious difference, but it was not tested), and what decides the placement. The Oct 19 findings text "allocation placement" is a description of the symptom, not a diagnosis.
 
 ## dvd_write_regs_scratch: volatile registers
 
