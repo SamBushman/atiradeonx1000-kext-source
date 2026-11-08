@@ -40,12 +40,12 @@ Every stored first-row value (first four of eight bytes shown; the last four of 
 | Oct 21 | rebuilt | `ac 84 74 ff` | `ff ff ff ff` |
 | Nov 3 | stock | `b4 88 76 ff` | `86 a9 cf ff` |
 | Nov 3 | rebuilt | `b4 88 76 ff` | `86 a9 cf ff` |
-| Nov 7 | rebuilt | `4a 4d 41 ff` | not yet run |
+| Nov 7 | rebuilt | `4a 4d 41 ff` | `80 3f 23 ff` |
 
 Proven by that table:
 1. The value changes from session to session **on stock itself** (`gl_read_buffer`: three different values in four stock sessions; `surface_read`: at least four).
 2. Stock and rebuilt gave the **same** bytes within the Nov 3 session for both tests, and **different** bytes within the Oct 19 session (both tests) and the Oct 21 `gl_read_buffer` session. So "identical under matched conditions" is NOT a proven statement; the table does not support it.
-3. Two rebuilt values also occur on stock at another time (`4a 4d 41`: Oct 19 stock, Nov 7 rebuilt; `b4 88 76`: Nov 3 both). `ff ff ff ff` occurs on stock (Oct 2, Oct 21) and, for `surface_read`, on rebuilt (Oct 21). Two rebuilt values (`b8 53 22`, `ac 84 74`) were not seen on stock; the sample is too small to say whether stock can produce them.
+3. Two rebuilt values also occur on stock at another time (`4a 4d 41`: Oct 19 stock, Nov 7 rebuilt; `b4 88 76`: Nov 3 both). `ff ff ff ff` occurs on stock (Oct 2, Oct 21) and, for `surface_read`, on rebuilt (Oct 21). Two rebuilt `gl_read_buffer` values (`b8 53 22`, `ac 84 74`) were not seen on stock, and the rebuilt `surface_read` value `80 3f 23` (Oct 19 and again Nov 7) was not seen on stock either (stock: `ff ff ff`, `83 41 24`, `81 40 24`, `86 a9 cf`); the sample is too small to say whether stock can produce them, and the recurrence of `80 3f 23` on rebuilt in two sessions three weeks apart is not explained (not established whether it means anything: the stock `83 41 24` and `4a 4d 41` also recurred across weeks).
 4. The extent is identical in all 13 stored runs of both tests on both arms (Phase S, Oct 19, Oct 21, Nov 3, Nov 7): `bytes changed inside rows 0..3: 16, outside: 0`. Why 16 and not the whole 4x4 rectangle is not established.
 
 **Not established:** where the written bytes come from (what the GPU quad samples). Earlier text called it "desktop content", "leftover memory" or "live"; none of that was shown. Only that the values are session-dependent on stock and that the extent is stable is shown. Because of this the comparison cannot prove the rebuilt kext writes the same pixels as stock, only that no extent difference and no stock-exceeding value spread was seen.
