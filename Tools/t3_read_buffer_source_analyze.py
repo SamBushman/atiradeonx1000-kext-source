@@ -95,6 +95,7 @@ def report(d):
                 hits, total = search(img, pat)
                 res.append("%s: %d (%s)" % (sn, total, ",".join("%d/%d" % h for h in hits[:3])))
             print("  call %d unit@%#x %s as %-4s %s | %s" % (c, start, " ".join("%02x" % x for x in unit), name, res[0], res[1]))
+    searched = set()
     print("Q4b structure: the changed bytes grouped by row (row stride = the call's row_bytes 64) and 4-byte unit, then searched in the screenshots as a COLUMN of units (same x, rows y..y+3) and as a ROW of units (x..x+3 at one y), in the four channel orders:")
     for c in calls:
         o = fin.get(c)
@@ -105,8 +106,10 @@ def report(d):
             units.setdefault((off // 64, (off % 64) // 4), {})[off % 4] = v
         keys = sorted(units)
         print("  call %d units (row,unit): %s" % (c, " ".join("%d.%d=%s" % (r_, u_, "".join("%02x" % units[(r_, u_)].get(k, 0) for k in range(4))) for r_, u_ in keys)))
-        if c != calls[0]:
-            continue  # the searches are identical for calls that agree (Q2/Q3 above); search the first call only
+        seq = tuple(sorted((k, tuple(sorted(v.items()))) for k, v in units.items()))
+        if seq in searched:
+            continue  # same unit sequence as an earlier call: identical search, skip
+        searched.add(seq)
         vals = [tuple(units[k].get(i) for i in range(4)) for k in keys]
         if None in [x for v in vals for x in v] or len(vals) < 2:
             print("  incomplete units: not searched")
