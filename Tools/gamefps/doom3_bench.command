@@ -4,6 +4,8 @@ read TAG SECS ARGS < $HOME/gamefps/d3_tag
 R="${D3ROOT:-/Applications/Doom 3}"; O=$HOME/gamefps/doom3/$TAG; mkdir -p $O "$R/save" "$R/run"; rm -rf $O/*
 true  # engine files already in $R/run
 rm -f "$R/save"/*.log "$R/save"/*/*.log 2>/dev/null
+# userspace arm: see ut2004_bench.command (same $HOME/rung3/game_env hook; the file lives in rung3 for all three titles)
+[ -f $HOME/rung3/game_env ] && . $HOME/rung3/game_env
 cd "$R/run"
 ./dhewm3 +set fs_basepath "$R" +set fs_savepath "$R/save" +set fs_gameDllPath "$R/run" +set logFile 1 +set s_noSound 1 $ARGS > $O/out.txt 2>&1 < /dev/null &
 pid=$!; echo $pid > $O/pid; i=0

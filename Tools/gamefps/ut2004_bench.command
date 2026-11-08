@@ -8,6 +8,8 @@ R3=$HOME/rung3/gamefps/ut2004; O=$R3/$TAG; mkdir -p $O; rm -rf $O/*
 AS="$HOME/Library/Application Support/Unreal Tournament 2004"; A="/Applications/Unreal Tournament 2004.app"
 cp "$R3/ini/$PRESET.ini" "$AS/System/UT2004.ini"
 rm -f "$AS"/Benchmark/Results/avgfps-*.log "$AS"/Benchmark/CSVs/stats-*.csv "$AS"/Benchmark/Logs/ut2004-*.log
+# userspace arm: $HOME/rung3/game_env (written by ut2004_run_side.sh from GAME_ENV=name = a copy of ~/rung3/ut_env_<name>); absent = stock userspace. It must NOT set GLD_REDIRECT_LOG (the log allocation shifts the heap and slows timed runs, #232).
+[ -f $HOME/rung3/game_env ] && . $HOME/rung3/game_env
 cd "$A/System"
 case $MAP in
   ONS-Torlan) URL="ONS-Torlan?spectatingonly=true?numbots=8?quickstart=true?attractcam=true";;

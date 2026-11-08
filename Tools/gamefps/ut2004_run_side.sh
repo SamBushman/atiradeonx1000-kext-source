@@ -10,6 +10,8 @@ runpass() { # tag map preset secs
   n=0; until timeout 20 ssh G5 "grep -q DONE \$HOME/rung3/gamefps/ut2004/$1/summary.txt" 2>/dev/null; do sleep 10; n=$((n+1)); [ $n -gt $(($4/10+30)) ] && { echo "timeout $1" >> "$O/driver.log"; return 1; }; done
 }
 timeout 60 ssh G5 "uptime; kextstat | grep -i ATIRadeonX1000; md5 -r /System/Library/Extensions/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000; ls -l /Library/Logs/panic.log" > "$O/$SIDE.driver" 2>&1
+# GAME_ENV=name: run the userspace image of ~/rung3/ut_env_<name> (rebuilt GLDriver/GA/VA via gld_redirect, no redirect log); unset = stock userspace. Recorded in OUTDIR/SIDE.driver.
+timeout 30 ssh G5 "if [ -n \"$GAME_ENV\" ]; then cp \$HOME/rung3/ut_env_$GAME_ENV \$HOME/rung3/game_env; else rm -f \$HOME/rung3/game_env; fi; echo GAME_ENV=\"$GAME_ENV\"; cat \$HOME/rung3/game_env 2>/dev/null" >> "$O/$SIDE.driver" 2>&1
 sleep 30
 runpass warm_$SIDE DM-Antalus low 30   # discarded
 timeout 30 ssh G5 "killall ut2004-bin 2>/dev/null; true" >/dev/null 2>&1
