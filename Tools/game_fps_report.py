@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""game_fps_report.py OUTDIR - stock-vs-rebuilt report for Tools/gamefps/ut2004_compare.sh results.
+"""game_fps_report.py OUTDIR [ARM] - ARM = the side label compared against 'stock' (default 'rebuilt'; the final eval uses U, K, KU). stock-vs-rebuilt report for Tools/gamefps/ut2004_compare.sh results.
 
 OUTDIR/<side>_v<visit>/<map>_<preset>/{avgfps.log,stats.csv}. Per map x preset and side it computes, over visits:
 avg FPS (game's own "min / avg / max fps" line, cross-checked against frames/time from stats.csv), min FPS, p10/p90 frame time and max stall (from the
@@ -28,7 +28,7 @@ def load(d):
         pass
     return r
 
-def main(o):
+def main(o, arm='rebuilt'):
     res = {}
     for d in sorted(glob.glob(os.path.join(o, '*_v*', '*'))):
         side, v = os.path.basename(os.path.dirname(d)).rsplit('_v', 1)
@@ -38,8 +38,8 @@ def main(o):
     M = [('avg', True), ('min', True), ('p90', False), ('stall', False)]
     bad = 0
     for k in sorted(res):
-        s, b = res[k].get('stock', []), res[k].get('rebuilt', [])
-        print('== %s  (stock n=%d, rebuilt n=%d)' % (k, len(s), len(b)))
+        s, b = res[k].get('stock', []), res[k].get(arm, [])
+        print('== %s  (stock n=%d, %s n=%d)' % (k, len(s), arm, len(b)))
         if not s or not b: print('   incomplete'); continue
         for key, hib in M:
             sv = [x[key] for x in s if key in x]; bv = [x[key] for x in b if key in x]
@@ -51,11 +51,11 @@ def main(o):
             if delta < -tol: v = 'REGRESSION'; bad += 1
             elif noise > 0.05: v = 'NOISY'
             else: v = 'OK'
-            print('   %-6s stock %9.2f  rebuilt %9.2f  delta %+6.1f%%  tol %4.1f%%  noise %4.1f%%  %s' % (key, sm, bm, delta * 100, tol * 100, noise * 100, v))
+            print('   %-6s stock %9.2f  %s %9.2f  delta %+6.1f%%  tol %4.1f%%  noise %4.1f%%  %s' % (key, sm, arm, bm, delta * 100, tol * 100, noise * 100, v))
         ck = [abs(x['csv_avg'] - x['avg']) / x['avg'] for x in s + b if 'csv_avg' in x]
         if ck: print('   avg-fps cross-check (csv vs game line): worst %.1f%%' % (max(ck) * 100))
     print('REGRESSIONS: %d' % bad)
     return 1 if bad else 0
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1]))
+    sys.exit(main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else 'rebuilt'))
