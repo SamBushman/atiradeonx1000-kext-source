@@ -1,15 +1,15 @@
 #include "decls.h"
 
 /* _glDeleteObjectARB_Exec @ 0x8719c (320 bytes) */
-int _glDeleteObjectARB_Exec(param_1)
+int _glDeleteObjectARB_Exec(param_1, param_2)
   int param_1;
+  int param_2;
 {
   undefined4 uVar1;
   int iVar2;
   int iVar3;
-  int in_r4;
   
-  if (in_r4 == 0) {
+  if (param_2 == 0) {
     return;
   }
   if (*(short *)(param_1 + 0x4a10) < 0) {
@@ -18,7 +18,7 @@ int _glDeleteObjectARB_Exec(param_1)
       _pthread_mutex_lock(iVar3 + 0x8028);
       iVar3 = *(int *)(param_1 + 0x5148);
     }
-    iVar3 = _gleLookupHashObject(iVar3 + 0x6018,in_r4);
+    iVar3 = _gleLookupHashObject(iVar3 + 0x6018,param_2);
     if (iVar3 == 0) {
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
@@ -33,7 +33,7 @@ int _glDeleteObjectARB_Exec(param_1)
       iVar2 = *(int *)(iVar3 + 8) + -1;
       *(int *)(iVar3 + 8) = iVar2;
       if (iVar2 == 1) {
-        _gleDeleteHashNameAndObject(param_1,*(int *)(param_1 + 0x5148) + 0x6018,in_r4);
+        _gleDeleteHashNameAndObject(param_1,*(int *)(param_1 + 0x5148) + 0x6018,param_2);
       }
       else {
         *(undefined1 *)(iVar3 + 0x14) = 1;

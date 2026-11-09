@@ -35,7 +35,7 @@ void _glCopyPixels_NoopExec(int param_1,undefined4 param_2,undefined4 param_3,un
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000623a4:
@@ -1643,7 +1643,7 @@ void _glDrawPixels_NoopExec(int param_1,undefined4 param_2,undefined4 param_3,un
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,uVar5,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000644fc:

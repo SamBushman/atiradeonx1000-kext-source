@@ -1168,7 +1168,7 @@ int FUN_00104c10(param_1)
               iVar8 = ((undefined4 (*)())_gleCullTriangle)(param_1,uVar16,uVar16 + 0x100,uVar16 + 0x200,0,&local_50,
                                        dVar17,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                        in_stack_ffffff78,in_stack_ffffff80);
-              dVar17 = extraout_f1_00;
+              dVar17 = dVar17;
               if (iVar8 == 0) {
                 if (iVar11 != local_50) {
                   bVar4 = true;
@@ -1705,7 +1705,7 @@ int FUN_00105710(param_1)
               iVar8 = ((undefined4 (*)())_gleCullQuad)(param_1,uVar16,uVar16 + 0x100,uVar16 + 0x200,uVar16 + 0x300,
                                    &local_50,dVar17,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                    in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
-              dVar17 = extraout_f1_00;
+              dVar17 = dVar17;
               if (iVar8 == 0) {
                 if (iVar11 != local_50) {
                   bVar4 = true;

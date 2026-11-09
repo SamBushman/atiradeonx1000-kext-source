@@ -20,12 +20,13 @@ public class ExtendParams extends GhidraScript {
         int n = 0;
         // every function of that name: the PIC stubs carry a copy of the signature and callers through a stub print with it
         Map<String, Integer> byName = new HashMap<>();
-        Set<String> noFp = new HashSet<>();
+        Set<String> noFp = new HashSet<>(), fix = new HashSet<>();
         for (String arg : getScriptArgs()) {
             String[] p = arg.split(":");
             Function f0 = getFunctionAt(toAddr(Long.parseLong(p[0].replace("0x", ""), 16)));
             if (f0 != null) byName.put(f0.getName(), Integer.parseInt(p[1]));
             if (f0 != null && p.length > 2 && p[2].equals("nofp")) noFp.add(f0.getName());
+            if (f0 != null && p.length > 2 && p[2].equals("fix")) fix.add(f0.getName());     // :fix = keep the parameters, only (re)assign Darwin storage
         }
         for (Function f : currentProgram.getFunctionManager().getFunctions(true)) {
             Integer wantI = byName.get(f.getName());
@@ -39,7 +40,8 @@ public class ExtendParams extends GhidraScript {
             }
             boolean hasFp = false;
             for (Parameter q : ps) if (q.getDataType() instanceof ghidra.program.model.data.AbstractFloatDataType) hasFp = true;
-            if (!hasFp && ps.size() >= want && ps.size() == f.getParameterCount()) continue;
+            boolean fixOnly = fix.contains(f.getName());
+            if (!fixOnly && !hasFp && ps.size() >= want && ps.size() == f.getParameterCount()) continue;
             // with float parameters, <count> counts the GPR parameters and new ones go in front of the floats: Darwin gives an int after a double
             // the GPR the double shadows (FUN_00002ae0 = the driver's glAccum(ctx, op, value) reads r3, r4, f1 - Ghidra had (param_1, double))
             int nInt = 0, firstFp = -1;
@@ -48,20 +50,25 @@ public class ExtendParams extends GhidraScript {
                 else nInt++;
             }
             if (firstFp >= 0) {
-                if (nInt >= want) continue;
+                if (nInt >= want && !fixOnly) continue;
                 for (int i = nInt; i < want; i++) ps.add(firstFp++, new ParameterImpl("param_" + (i + 1), Undefined4DataType.dataType, currentProgram, SourceType.USER_DEFINED));
             } else
             for (int i = ps.size(); i < want; i++) ps.add(new ParameterImpl("param_" + (i + 1), Undefined4DataType.dataType, currentProgram, SourceType.USER_DEFINED));
-            boolean allInt = true;
-            for (Parameter q : ps) if (q.getDataType() instanceof ghidra.program.model.data.AbstractFloatDataType || q.getLength() > 4) allInt = false;
-            if (want > 8 && allInt) {
+            // storage by Darwin's rules: integer words r3-r10 then 0x38 + 4k, floats f1..f13 (a double shadows GPR words but travels in its FPR; the GPR parameters keep their positional
+            // registers). Anything else (a 64-bit integer, more than 13 floats) keeps the dynamic SysV storage.
+            boolean custom = true; int nI = 0, nF = 0;
+            for (Parameter q : ps) {
+                boolean isF = q.getDataType() instanceof ghidra.program.model.data.AbstractFloatDataType;
+                if (isF) { if (nF++ >= 13) custom = false; } else { nI++; if (q.getLength() > 4) custom = false; }
+            }
+            if (want > 8 && custom) {
                 // Ghidra's PowerPC cspec is SysV: its 9th argument word is Stack[0x8] (the saved-LR slot). Darwin passes it at 0x38(r1) - after the
                 // 24-byte linkage area and the 32-byte home area of r3-r10 - so the storage is given explicitly: r3-r10, then 0x38 + 4k.
-                List<Parameter> cs = new ArrayList<>();
+                List<Parameter> cs = new ArrayList<>(); int ni = 0, nf = 0;
                 for (int i = 0; i < ps.size(); i++) {
-                    Parameter q = ps.get(i);
-                    VariableStorage vs = i < 8 ? new VariableStorage(currentProgram, currentProgram.getRegister("r" + (3 + i)))
-                                               : new VariableStorage(currentProgram, 0x38 + 4 * (i - 8), 4);
+                    Parameter q = ps.get(i); VariableStorage vs;
+                    if (q.getDataType() instanceof ghidra.program.model.data.AbstractFloatDataType) vs = new VariableStorage(currentProgram, currentProgram.getRegister("f" + (1 + nf++)));
+                    else { vs = ni < 8 ? new VariableStorage(currentProgram, currentProgram.getRegister("r" + (3 + ni))) : new VariableStorage(currentProgram, 0x38 + 4 * (ni - 8), 4); ni++; }
                     cs.add(new ParameterImpl(q.getName(), q.getDataType(), vs, currentProgram, SourceType.USER_DEFINED));
                 }
                 Parameter ret = f.getReturn();

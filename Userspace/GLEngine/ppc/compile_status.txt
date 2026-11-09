@@ -18,7 +18,7 @@ part_015 _glFogf_ListExec 3 parse error before '{' token |
 part_016 _glMinmax_Comp 3 parse error before '{' token | 
 part_017 _glLightModelfv_ListExec 3 parse error before '{' token | 
 part_018 _glMap2f_CompExec 3 parse error before '{' token | 
-part_019 _glMaterialiv_Exec 3 parse error before '{' token | uVar5 = 1;
+part_019 _glMaterialiv_Exec 3 parse error before '{' token | );
 part_020 _glGetQueryObjectuiv_Exec 3 parse error before '{' token | 
 part_021 _glPixelTransferi_ListExec 3 parse error before '{' token | int _glPixelTransferi_ListExec(param_1, param_2)
 part_022 _glRasterPos2sv_Comp 3 parse error before '{' token | 
@@ -30,7 +30,7 @@ part_027 _glTexCoord2dv_CompExec 3 parse error before '{' token |
 part_028 _glTexCoord1sv_Exec 3 parse error before '{' token | 
 part_029 _glMultiTexCoord3f_Exec 3 parse error before '{' token | 
 part_030 _glCopyTexSubImage1D_Comp 3 parse error before '{' token | 
-part_031 _glCopyTexImage1D_CompExec 3 parse error before '{' token | double fparam_1;
+part_031 _glCopyTexImage1D_CompExec 3 parse error before '{' token | double in_f4;
 part_032 _glVertex4f_Comp 3 parse error before '{' token | 
 part_033 _gleDrawArraysOrElements_Exec 3 parse error before '{' token | psVar15 = (short *)(param_6 + 0xea);
 part_034 _glWeightubvARB_Exec 3 parse error before '{' token | 
@@ -38,9 +38,9 @@ part_035 _glVertexAttrib1svARB_Comp 3 parse error before '{' token |
 part_036 _glVertexAttrib4fvARB_Comp 3 parse error before '{' token | 
 part_037 _glWindowPos3dv_Exec 3 parse error before '{' token | 
 part_038 _glCombinerOutputNV_Comp 3 parse error before '{' token | 
-part_039 FUN_000b8010 3 parse error before '{' token | param_4[8] = (float)(fparam_4 *
-part_040 _gleInterpolClipNO1110 3 parse error before '{' token | fVar13 = (fVar8 - fVar7) / ((fVar8 - fVar7) - (fVar12 - fVar11));
-part_041 _gleDrawPixelsSaveState 3 parse error before '{' token | }
+part_039 _gleInterpolEyeNO1111 3 parse error before '{' token | double dVar18;
+part_040 _gleInterpolClipNO1110 3 parse error before '{' token | uVar14 = 0;
+part_041 _gleDrawPixelsSaveState 3 parse error before '{' token | uVar1 = *(uint *)(param_1 + 0x471c);
 part_042 FUN_000cc204 3 parse error before '{' token | 
 part_043 _LFSParserBuildErrorString 3 parse error before '{' token | break;
 part_044 _gleVtxLightRGBAFrontPtr 3 parse error before '{' token | local_d0 = *(float *)(iVar13 + 0x4a70) - *pfVar7;

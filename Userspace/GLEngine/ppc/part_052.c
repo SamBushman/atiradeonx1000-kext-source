@@ -725,7 +725,7 @@ int FUN_000ec310(param_1)
                 iVar10 = ((undefined4 (*)())_gleCullTriangle)(param_1,uVar19,uVar19 + 0x100,uVar19 + 0x200,0,&local_50,
                                           dVar22,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                           in_stack_ffffff78,in_stack_ffffff80);
-                dVar22 = extraout_f1;
+                dVar22 = dVar22;
                 if (iVar10 == 0) {
                   if (iVar12 != local_50) {
                     bVar4 = true;
@@ -2046,7 +2046,7 @@ LAB_000ee23c:
             iVar18 = ((undefined4 (*)())_gleCullTriangle)(param_1,uVar16,uVar16 + 0x100,uVar16 + 0x200,0,&local_40,
                                       dVar19,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                       in_stack_ffffff88,in_stack_ffffff90);
-            dVar19 = extraout_f1_00;
+            dVar19 = dVar19;
             if (iVar18 == 0) {
               if (iVar11 != local_40) {
                 bVar1 = true;
@@ -2255,7 +2255,7 @@ int FUN_000ee57c(param_1)
               iVar17 = ((undefined4 (*)())_gleCullTriangle)(param_1,uVar18,uVar18 + 0x100,uVar18 + 0x200,0,&local_50,
                                         dVar20,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                         in_stack_ffffff78,in_stack_ffffff80);
-              dVar20 = extraout_f1_00;
+              dVar20 = dVar20;
               if (iVar17 == 0) {
                 if (iVar10 != local_50) {
                   bVar2 = true;
@@ -3437,7 +3437,7 @@ LAB_000f0124:
             iVar16 = ((undefined4 (*)())_gleCullQuad)(param_1,uVar17,uVar17 + 0x100,uVar17 + 0x200,uVar17 + 0x300,
                                   &local_40,dVar19,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                   in_stack_ffffff88,in_stack_ffffff90,in_stack_ffffff98);
-            dVar19 = extraout_f1_00;
+            dVar19 = dVar19;
             if (iVar16 == 0) {
               if (iVar11 != local_40) {
                 bVar1 = true;
@@ -3648,7 +3648,7 @@ int FUN_000f046c(param_1)
               iVar17 = ((undefined4 (*)())_gleCullQuad)(param_1,uVar18,uVar18 + 0x100,uVar18 + 0x200,uVar18 + 0x300,
                                     &local_50,dVar20,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                     in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
-              dVar20 = extraout_f1_00;
+              dVar20 = dVar20;
               if (iVar17 == 0) {
                 if (iVar10 != local_50) {
                   bVar2 = true;
@@ -4411,7 +4411,7 @@ int FUN_000f1684(param_1)
               iVar8 = ((undefined4 (*)())_gleCullTriangle)(param_1,uVar16,uVar16 + 0x100,uVar16 + 0x200,0,&local_50,
                                        dVar18,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                        in_stack_ffffff78,in_stack_ffffff80);
-              dVar18 = extraout_f1_00;
+              dVar18 = dVar18;
               if (iVar8 == 0) {
                 if (iVar9 != local_50) {
                   bVar3 = true;
@@ -4937,7 +4937,7 @@ int FUN_000f2120(param_1)
               iVar8 = ((undefined4 (*)())_gleCullQuad)(param_1,uVar15,uVar15 + 0x100,uVar15 + 0x200,uVar15 + 0x300,
                                    &local_50,dVar17,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                    in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
-              dVar17 = extraout_f1_00;
+              dVar17 = dVar17;
               if (iVar8 == 0) {
                 if (iVar9 != local_50) {
                   bVar3 = true;

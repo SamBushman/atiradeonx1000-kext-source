@@ -4864,7 +4864,7 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,piVar8,in_r6,in_r7,in_r8,iVar9,fparam_1,in_f2,in_f3,in_f4,
                  in_f5,in_f6,in_f7,in_f8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000443dc:
@@ -5723,7 +5723,7 @@ int _gleDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar8,fparam_1,in_f2,in_f3,in_f4,in_f5
                  ,in_f6,in_f7,in_f8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_00045508:

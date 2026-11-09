@@ -2037,7 +2037,7 @@ LAB_000a5758:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar6,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a5644:
@@ -3192,7 +3192,7 @@ LAB_000a6fd8:
         ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar10 + 0x10,piVar6,piVar7,piVar8,uVar9,iVar13,fparam_1,fparam_2,
                    fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-        fparam_1 = extraout_f1_00;
+        fparam_1 = fparam_1;
       }
       if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a7208:
@@ -3454,7 +3454,7 @@ LAB_000a7678:
     ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar10 + 0x10,piVar6,piVar7,piVar8,uVar9,iVar13,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-    fparam_1 = extraout_f1_05;
+    fparam_1 = fparam_1;
   }
   if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a7544:
@@ -3649,7 +3649,7 @@ LAB_000a7d5c:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar10 + 0x10,piVar6,piVar7,piVar8,iVar9,iVar13,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a7c38:
@@ -3924,7 +3924,7 @@ LAB_000a815c:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar7 + 0x10,uVar3,iVar10,uVar8,iVar4,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a828c:

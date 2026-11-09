@@ -965,14 +965,14 @@ int _gleFeedbackBitmap(param_1, param_2)
 }
 
 /* _gleFeedbackPoints @ 0xcc118 (112 bytes) */
-int _gleFeedbackPoints(param_1, param_2)
+int _gleFeedbackPoints(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
+  int param_3;
 {
-  int in_r5;
   uint uVar1;
   
-  uVar1 = param_2 + in_r5 * 0x100;
+  uVar1 = param_2 + param_3 * 0x100;
   for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
     ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f28);
     _gleFeedbackHitRecord(param_1,param_2);
@@ -981,14 +981,14 @@ int _gleFeedbackPoints(param_1, param_2)
 }
 
 /* _gleFeedbackPointsPtr @ 0xcc188 (112 bytes) */
-int _gleFeedbackPointsPtr(param_1, param_2)
+int _gleFeedbackPointsPtr(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 *param_2;
+  int param_3;
 {
-  int in_r5;
   undefined4 *puVar1;
   
-  puVar1 = param_2 + in_r5;
+  puVar1 = param_2 + param_3;
   for (; param_2 < puVar1; param_2 = param_2 + 1) {
     ((void (*)())_gleFeedbackToken)(param_1,(double)FLOAT_00108f28);
     _gleFeedbackHitRecord(param_1,*param_2);

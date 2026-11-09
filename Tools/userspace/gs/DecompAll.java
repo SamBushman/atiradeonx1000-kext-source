@@ -191,6 +191,64 @@ public class DecompAll extends GhidraScript {
         }
         return done;
     }
+    // DECOMP_PRESERVED=1: a call's register output Ghidra prints as `extraout_rN` is an INDIRECT of the register's value before the call (its killed-by-call model). When the callee (and everything
+    // it calls) provably never writes that register, the register still holds the pre-call value, so `v = extraout_r3;` (stock: a leaf that keeps r3 = the context, GLEngine _gleMaterialShinePow) is the
+    // identity `v = v;` where v is the variable that value lives in; as printed it reads an uninitialised local and the C compiler may pick any value. Substitute the pre-call variable, but ONLY when
+    // every use is a plain copy into that same variable (nothing can have rewritten it in between), else keep Ghidra's text and report the site (PRESERVEDKEPT).
+    java.util.Map<String, Boolean> preserveCache = new java.util.HashMap<>();
+    boolean preserves(Function f, String reg, Set<Function> path) {
+        String key = f.getEntryPoint() + ":" + reg; Boolean c = preserveCache.get(key); if (c != null) return c;
+        if (!path.add(f)) return true;                                      // a cycle: decided by the rest of the members
+        ghidra.program.model.lang.Register r = currentProgram.getLanguage().getRegister(reg);
+        long lo = r.getOffset(), hi = lo + r.getMinimumByteSize();
+        boolean ok = !f.isExternal() && !f.isThunk();
+        if (ok) {
+            ghidra.program.model.address.AddressSetView body = f.getBody();
+            ghidra.program.model.listing.InstructionIterator ii = currentProgram.getListing().getInstructions(body, true);
+            while (ii.hasNext() && ok) {
+                ghidra.program.model.listing.Instruction in = ii.next();
+                for (PcodeOp op : in.getPcode()) {
+                    Varnode o = op.getOutput();
+                    if (o != null && o.getAddress().isRegisterAddress() && o.getOffset() < hi && o.getOffset() + o.getSize() > lo) { ok = false; break; }
+                    int oc = op.getOpcode(); ghidra.program.model.address.Address tg = null;
+                    if (oc == PcodeOp.CALL) tg = op.getInput(0).getAddress();
+                    else if (oc == PcodeOp.CALLIND || oc == PcodeOp.BRANCHIND) { ok = false; break; }
+                    else if ((oc == PcodeOp.BRANCH || oc == PcodeOp.CBRANCH) && op.getInput(0).getAddress().isMemoryAddress() && !body.contains(op.getInput(0).getAddress())) tg = op.getInput(0).getAddress();
+                    if (tg != null) { Function g = currentProgram.getFunctionManager().getFunctionAt(tg); if (g == null || !preserves(g, reg, path)) { ok = false; break; } }
+                }
+            }
+        }
+        path.remove(f); preserveCache.put(key, ok); return ok;
+    }
+    int preservedExtraout(List<ClangToken> toks, String[] txt) {
+        if (curHF == null) return 0;
+        int done = 0;
+        for (int i = 0; i < toks.size(); i++) {
+            ClangToken t = toks.get(i);
+            if (!(t instanceof ghidra.app.decompiler.ClangVariableToken)) continue;
+            Varnode v = t.getVarnode(); if (v == null || !t.getText().startsWith("extraout_")) continue;
+            PcodeOp def = v.getDef(); if (def == null || def.getOpcode() != PcodeOp.INDIRECT) continue;
+            String reg = regName(v); if (reg == null) continue;
+            PcodeOp call = curHF.getOpRef((int) def.getInput(1).getOffset());
+            if (call == null || call.getOpcode() != PcodeOp.CALL) continue;
+            Function callee = currentProgram.getFunctionManager().getFunctionAt(call.getInput(0).getAddress());
+            if (callee == null || !preserves(callee, reg, new HashSet<>())) continue;
+            // the INDIRECT's own input is Ghidra's "undefined after a call" constant; the value before the call is what the call was handed in that register
+            Varnode in0 = null; for (int k = 1; k < call.getNumInputs(); k++) { Varnode ci = call.getInput(k); if (ci.getAddress().equals(v.getAddress()) && ci.getSize() == v.getSize()) in0 = ci; }
+            if (in0 == null) { if (System.getenv("DECOMP_PRESERVED_DEBUG") != null) System.out.println("PRESERVEDNOINPUT " + currentFunctionName + " " + t.getText() + " reg=" + reg + " callee=" + callee.getName()); continue; }
+            ghidra.program.model.pcode.HighVariable h0 = in0.getHigh();
+            boolean ok = h0 != null && h0.getName() != null && !h0.getName().startsWith("extraout_") && v.getDescendants().hasNext();
+            StringBuilder uses = new StringBuilder();
+            Iterator<PcodeOp> ds = v.getDescendants();
+            while (ds.hasNext()) { PcodeOp u = ds.next(); Varnode uo = u.getOutput(); uses.append(PcodeOp.getMnemonic(u.getOpcode())).append("->").append(uo == null || uo.getHigh() == null ? "none" : uo.getHigh().getName()).append(' ');
+                if (u.getOpcode() != PcodeOp.COPY || uo == null || uo.getHigh() != h0) ok = false; }
+            if (ok) { txt[i] = h0.getName(); done++; }
+            else if (System.getenv("DECOMP_PRESERVED_DEBUG") != null) { StringBuilder dd = new StringBuilder(); dd.append("PRESERVEDDBG in0=").append(vn(in0)).append(" def=").append(in0.getDef() == null ? "none" : PcodeOp.getMnemonic(in0.getDef().getOpcode()) + " " + in0.getDef()).append(" isInput=").append(in0.isInput()).append(" call="); for (int k = 0; k < call.getNumInputs(); k++) dd.append(vn(call.getInput(k))).append(call.getInput(k).getHigh() == null ? "(nohigh)" : "(" + call.getInput(k).getHigh().getName() + ")").append(" "); System.out.println(dd); }
+            if (!ok) System.out.println("PRESERVEDKEPT " + currentFunctionName + " " + t.getText() + " reg=" + reg + " callee=" + callee.getName() + " in0=" + (h0 == null ? "none" : h0.getName()) + " uses=" + uses);
+        }
+        return done;
+    }
+    String currentFunctionName = "";
     String parenthesised(ClangNode root, int[] count) {
         List<ClangToken> toks = new ArrayList<>(); flatten(root, toks);
         int n = toks.size(); int[] open = new int[n]; int[] close = new int[n];
@@ -236,6 +294,7 @@ public class DecompAll extends GhidraScript {
         for (int i = 0; i < n; i++) { ClangToken t = toks.get(i); if (t instanceof ClangBreak) { StringBuilder w = new StringBuilder("\n"); for (int k = 0; k < ((ClangBreak) t).getIndent(); k++) w.append(' '); txt[i] = w.toString(); } else txt[i] = t.getText(); }
         int typed = 0;
         if (System.getenv("DECOMP_TYPED_CALLS") != null) { int[] sk = new int[1]; typed = typedCalls(toks, txt, gone, open, close, sk); count[1] = typed; count[2] = sk[0]; }
+        if (System.getenv("DECOMP_PRESERVED") != null) count[3] = preservedExtraout(toks, txt);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
             if (gone[i]) continue;
@@ -252,7 +311,7 @@ public class DecompAll extends GhidraScript {
             else if (ch == ';') { if (db != 0 || !(stk.isEmpty() || (stk.size() == 1 && stk.peek()))) ok = false; }
             else if (ch == '{' || ch == '}') { if (db != 0 || !stk.isEmpty()) ok = false; }
             if (!ok) { System.out.println("PARENFLOAT unbalanced near: " + sb.substring(Math.max(0, i - 260), Math.min(sb.length(), i + 40)).replace("\n", " | ")); } }
-        if (!ok) { System.out.println("PARENFLOAT unbalanced, function left as the decompiler printed it"); count[0] = 0; count[1] = 0; return null; }
+        if (!ok) { System.out.println("PARENFLOAT unbalanced, function left as the decompiler printed it"); count[0] = 0; count[1] = 0; count[3] = 0; return null; }
         return sb.toString();
     }
     @Override
@@ -267,7 +326,7 @@ public class DecompAll extends GhidraScript {
         decomp.setSimplificationStyle("decompile");
         FileWriter idx = new FileWriter(new File(outDir, "INDEX.tsv"), true);
         FunctionIterator it = currentProgram.getFunctionManager().getFunctions(true);
-        int n = 0, fail = 0, parenFuncs = 0, parenSites = 0, typedFuncs = 0, typedSites = 0, callSkipped = 0;
+        int preservedSites = 0; int n = 0, fail = 0, parenFuncs = 0, parenSites = 0, typedFuncs = 0, typedSites = 0, callSkipped = 0;
         while (it.hasNext()) {
             Function fn = it.next();
             if (fn.isExternal() || fn.isThunk()) continue;
@@ -292,12 +351,12 @@ public class DecompAll extends GhidraScript {
                 }
                 if (res != null && res.decompileCompleted()) {
                     String c = res.getDecompiledFunction().getC();
-                    if ((System.getenv("DECOMP_PAREN_FLOAT") != null || System.getenv("DECOMP_TYPED_CALLS") != null) && res.getCCodeMarkup() != null) {
+                    if ((System.getenv("DECOMP_PAREN_FLOAT") != null || System.getenv("DECOMP_TYPED_CALLS") != null || System.getenv("DECOMP_PRESERVED") != null) && res.getCCodeMarkup() != null) {
                         if (System.getenv("DECOMP_CALL_DEBUG") != null) callDebug(res.getCCodeMarkup());
                         if (System.getenv("DECOMP_EXTRA_DEBUG") != null) extraDebug(res, fn.getName());
                         curHF = res.getHighFunction();
-                        int[] cnt = new int[3]; String c2 = parenthesised(res.getCCodeMarkup(), cnt);
-                        if (c2 != null && (cnt[0] > 0 || cnt[1] > 0)) { c = c2; if (cnt[0] > 0) { parenFuncs++; parenSites += cnt[0]; } if (cnt[1] > 0) { typedFuncs++; typedSites += cnt[1]; } }
+                        currentFunctionName = fn.getName(); int[] cnt = new int[4]; String c2 = parenthesised(res.getCCodeMarkup(), cnt);
+                        if (c2 != null && (cnt[0] > 0 || cnt[1] > 0 || cnt[3] > 0)) { c = c2; preservedSites += cnt[3]; if (cnt[0] > 0) { parenFuncs++; parenSites += cnt[0]; } if (cnt[1] > 0) { typedFuncs++; typedSites += cnt[1]; } }
                         callSkipped += cnt[2];
                     }
                     fw.write(c);
@@ -308,6 +367,6 @@ public class DecompAll extends GhidraScript {
             n++;
         }
         idx.close();
-        println("DECOMPALL done " + n + " failed " + fail + (System.getenv("DECOMP_PAREN_FLOAT") != null ? " paren-float functions " + parenFuncs + " sites " + parenSites : "") + (System.getenv("DECOMP_TYPED_CALLS") != null ? " typed-call functions " + typedFuncs + " sites " + typedSites + " skipped " + callSkipped : ""));
+        println("DECOMPALL done " + n + " failed " + fail + (System.getenv("DECOMP_PAREN_FLOAT") != null ? " paren-float functions " + parenFuncs + " sites " + parenSites : "") + (System.getenv("DECOMP_PRESERVED") != null ? " preserved-extraout sites " + preservedSites : "") + (System.getenv("DECOMP_TYPED_CALLS") != null ? " typed-call functions " + typedFuncs + " sites " + typedSites + " skipped " + callSkipped : ""));
     }
 }

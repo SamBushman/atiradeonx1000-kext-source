@@ -1483,7 +1483,7 @@ int _gleCheckFramebufferStatus(int param_1,int param_2,int *param_3,undefined4 p
   if (*(int *)(param_2 + 0xdc) != 0) {
     ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
-    fparam_1 = extraout_f1;
+    fparam_1 = fparam_1;
   }
   if (*(int *)(param_2 + 0xc0) != 0) {
     return *(int *)(param_2 + 0xc0);
@@ -1501,7 +1501,7 @@ int _gleCheckFramebufferStatus(int param_1,int param_2,int *param_3,undefined4 p
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,param_3,param_4,param_5,param_6,iVar5,fparam_1,fparam_2,
                  fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_01;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000ce7a4:
@@ -1913,17 +1913,17 @@ int _LFSParserCreate()
   undefined4 uVar1;
   
   uVar1 = _calloc(0x46c,1);
-  ((int (*)())_LFSParserInit)();
+  ((int (*)())_LFSParserInit)(uVar1);
   return uVar1;
 }
 
 /* _LFSParserInit @ 0xcf088 (12 bytes) */
-int _LFSParserInit()
+int _LFSParserInit(param_1)
+  undefined4 param_1;
 {
-  undefined4 in_r3;
   undefined4 uVar1;
   
-  uVar1 = _memset(in_r3,0,0x46c);
+  uVar1 = _memset(param_1,0,0x46c);
   return uVar1;
 }
 

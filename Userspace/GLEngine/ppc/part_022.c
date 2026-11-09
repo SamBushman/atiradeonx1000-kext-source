@@ -175,13 +175,12 @@ undefined4 * _glPNTrianglesfATIX_Comp(undefined4 param_1,undefined4 param_2,doub
 }
 
 /* _glPNTrianglesfATIX_CompExec @ 0x7e3e4 (216 bytes) */
-void _glPNTrianglesfATIX_CompExec(int param_1,double fparam_1)
+void _glPNTrianglesfATIX_CompExec(int param_1,undefined4 param_2,double fparam_1)
 {
   int iVar1;
   undefined4 uVar2;
-  undefined4 in_r4;
   
-  ((undefined4 * (*)())_glPNTrianglesfATIX_Comp)(param_1,in_r4,fparam_1);
+  ((undefined4 * (*)())_glPNTrianglesfATIX_Comp)(param_1,param_2,fparam_1);
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar1 = (int)fparam_1;
     if (((iVar1 == 0x6093) || (iVar1 < 0x6094)) || (iVar1 != 0x6094)) {

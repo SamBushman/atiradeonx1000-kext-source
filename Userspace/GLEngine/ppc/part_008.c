@@ -427,7 +427,7 @@ LAB_0004f820:
     ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,iVar9,uVar6,iVar7,iVar8,fparam_1,fparam_2,fparam_3,
                fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
     *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-    fparam_1 = extraout_f1_00;
+    fparam_1 = fparam_1;
   }
   if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_0004f9c8:
@@ -1300,7 +1300,7 @@ int FUN_00050900(param_1)
                 iVar10 = ((undefined4 (*)())_gleCullQuad)(param_1,uVar19,uVar19 + 0x100,uVar19 + 0x200,uVar19 + 0x300,
                                       &local_50,dVar22,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                                       in_stack_ffffff78,in_stack_ffffff80,in_stack_ffffff88);
-                dVar22 = extraout_f1;
+                dVar22 = dVar22;
                 if (iVar10 == 0) {
                   if (iVar12 != local_50) {
                     bVar4 = true;
@@ -3357,7 +3357,7 @@ int _gleLightMaterialRGBAChange_FB_AD(param_1, param_2)
 }
 
 /* _glCopyTexImage2D_Exec @ 0x53a48 (1780 bytes) */
-void _glCopyTexImage2D_Exec(int param_1,int param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
+void _glCopyTexImage2D_Exec(int param_1,int param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,undefined4 param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   char cVar2;
@@ -3483,7 +3483,7 @@ LAB_00053d34:
     *(undefined4 *)(param_1 + 0x7574) = uVar4;
     return;
   }
-  iVar13 = ((int (*)())_gleCheckCopyTexImage2DArgs)(param_1,param_2,param_3,param_4,param_7,param_8,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+  iVar13 = ((int (*)())_gleCheckCopyTexImage2DArgs)(param_1,param_2,param_3,param_4,param_7,param_8,param_9);
   if (iVar13 == 0) {
     return;
   }
@@ -3532,8 +3532,7 @@ LAB_00053d90:
     *(byte *)(iVar6 + 0xcf) = *(byte *)(iVar6 + 0xcf) & 0xdf;
   }
   iVar15 = _gleCreateTextureLevel
-                     (param_1,iVar13,iVar17,param_4,iVar10,iVar15,1,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),0x1908,0x1401,
-                      0,0);
+                     (param_1,iVar13,iVar17,param_4,iVar10,iVar15,1,param_9,0x1908,0x1401,0,0);
   if (iVar15 != 0) {
     _gleCreatePluginTextureLevel(param_1,iVar13,iVar17,uVar14,param_3,param_4);
     if ((((int)param_3 < (int)(uint)*(byte *)(iVar13 + 0x8d)) ||

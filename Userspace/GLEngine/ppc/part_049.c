@@ -1787,14 +1787,13 @@ int _gleInsertPixel_RGBA_Ushort(param_1, param_2)
   return;
 }
 
-/* FUN_000e80d8 @ 0xe80d8 (120 bytes) */
-void FUN_000e80d8(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInsertPixel_RGBA_Int @ 0xe80d4 (124 bytes) */
+void _gleInsertPixel_RGBA_Int(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
-  double in_f13;
   
   dVar1 = DOUBLE_00108d90;
-  *param_2 = (int)(in_f13 * DOUBLE_00108d90);
+  *param_2 = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
   param_2[1] = (int)((double)*(float *)(param_1 + 8) * dVar1);
   param_2[2] = (int)((double)*(float *)(param_1 + 0xc) * dVar1);
   param_2[3] = (int)((double)*(float *)(param_1 + 0x10) * dVar1);

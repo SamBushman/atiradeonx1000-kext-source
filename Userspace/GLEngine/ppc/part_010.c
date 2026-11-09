@@ -885,7 +885,7 @@ void _glClear_NoopExec(int param_1,undefined4 param_2,double fparam_1,double fpa
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar4 + 0x10,in_r5,in_r6,in_r7,in_r8,iVar5,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000598fc:

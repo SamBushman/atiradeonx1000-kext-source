@@ -399,7 +399,7 @@ int _glCopyConvolutionFilter1D_Exec(param_1, param_2, param_3, param_4, param_5,
         ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,param_3,uVar3,uVar7,uVar9,iVar8,dVar11,in_f2,in_f3,in_f4,
                    in_f5,in_f6,in_f7,in_f8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-        dVar11 = extraout_f1_01;
+        dVar11 = dVar11;
       }
       if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_00069ab8:
@@ -563,7 +563,7 @@ int _glCopyConvolutionFilter2D_Exec(param_1, param_2, param_3, param_4, param_5,
         ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar6 + 0x10,param_3,uVar3,uVar7,iVar9,iVar8,dVar12,in_f2,in_f3,in_f4,
                    in_f5,in_f6,in_f7,in_f8);
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-        dVar12 = extraout_f1_01;
+        dVar12 = dVar12;
       }
       if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_00069df4:

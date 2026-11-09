@@ -17,7 +17,8 @@ for l in open(tsv):
     np=int(p[7:])
     if np==0: continue            # clipped fragments reading the parent's frame (orphans), not parameters
     want=8+((max(offs)&~3)-0x38)//4+1
-    if want>np: ext[int(a,16)]=(name,want)
+    if want>np: ext[int(a,16)]=(name,want,'')
+    elif fp.endswith('1'): ext[int(a,16)]=(name,np,':fix')      # float parameters present: an earlier extension gave the integer words Ghidra's SysV Stack[0x8..] storage, not Darwin's 0x38+4k
 lab={}; pend=None
 for l in open(dis):
     if l.endswith(':\n') and not l[0].isdigit(): pend=l[:-2]; continue
@@ -36,7 +37,7 @@ for l in open(dis):
         except ValueError: ta=names.get(t)
     if ta in ext: sites.add(int(m.group(1),16))
 with open(outp+'_extend.txt','w') as f:
-    for a,(n,w) in sorted(ext.items()): f.write('0x%x:%d\n'%(a,w))
+    for a,(n,w,fx) in sorted(ext.items()): f.write('0x%x:%d%s\n'%(a,w,fx))
 with open(outp+'_redump.txt','w') as f:
     for a in sorted(set(ext)|sites): f.write('0x%x\n'%a)
 print(len(ext),'functions',len(sites),'call sites')

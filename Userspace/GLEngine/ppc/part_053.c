@@ -2257,12 +2257,11 @@ int _gleVtxTextureCoordGenObjectST(param_1, param_2, param_3)
 }
 
 /* _gleVtxTextureCoordGenSphereST @ 0xf6568 (92 bytes) */
-void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint param_2,double fparam_1)
+void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint param_2,int param_3,double fparam_1)
 {
-  int in_r5;
   uint uVar1;
   
-  uVar1 = param_2 + in_r5 * 0x100;
+  uVar1 = param_2 + param_3 * 0x100;
   for (; param_2 < uVar1; param_2 = param_2 + 0x100) {
     fparam_1 = (double)((double (*)())_gleSphereGenST)(param_1,param_2 + 0x20,param_2 + 0x40,param_2 + 0x80,fparam_1
                                       );
@@ -2271,20 +2270,20 @@ void _gleVtxTextureCoordGenSphereST(undefined4 param_1,uint param_2,double fpara
 }
 
 /* _gleVtxTextureCoordGenReflectST @ 0xf65c4 (168 bytes) */
-int _gleVtxTextureCoordGenReflectST(param_1, param_2)
+int _gleVtxTextureCoordGenReflectST(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
+  int param_3;
 {
   float fVar1;
   undefined *puVar2;
-  int in_r5;
   uint uVar3;
   float fStack_30;
   float fStack_2c;
   float fStack_28;
   
   puVar2 = PTR__gleVectorNormalize_00112064;
-  uVar3 = param_2 + in_r5 * 0x100;
+  uVar3 = param_2 + param_3 * 0x100;
   for (; param_2 < uVar3; param_2 = param_2 + 0x100) {
     (**(code **)puVar2)(param_1,param_2 + 0x20,&fStack_30);
     fVar1 = *(float *)(param_2 + 0x48) * fStack_28 +
@@ -2297,18 +2296,17 @@ int _gleVtxTextureCoordGenReflectST(param_1, param_2)
 }
 
 /* _gleVtxTextureCoordGenReflectSTR @ 0xf666c (188 bytes) */
-void _gleVtxTextureCoordGenReflectSTR(int param_1,uint param_2,double fparam_1)
+void _gleVtxTextureCoordGenReflectSTR(int param_1,uint param_2,int param_3,double fparam_1)
 {
   float fVar1;
   undefined *puVar2;
-  int in_r5;
   uint uVar3;
   float fStack_30;
   float fStack_2c;
   float fStack_28;
   
   puVar2 = PTR__gleVectorNormalize_00112064;
-  uVar3 = param_2 + in_r5 * 0x100;
+  uVar3 = param_2 + param_3 * 0x100;
   for (; param_2 < uVar3; param_2 = param_2 + 0x100) {
     fparam_1 = (double)(**(double ( **)(int,int,int,double))puVar2)(param_1, param_2 + 0x20, &fStack_30, fparam_1);
     fVar1 = *(float *)(param_2 + 0x48) * fStack_28 +

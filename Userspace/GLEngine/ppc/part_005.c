@@ -342,14 +342,14 @@ int _glPopMatrix_Exec(param_1)
 }
 
 /* _glGenLists_Exec @ 0x33944 (188 bytes) */
-int _glGenLists_Exec(param_1)
+int _glGenLists_Exec(param_1, param_2)
   int param_1;
+  int param_2;
 {
   undefined4 uVar1;
   int iVar2;
-  int in_r4;
   
-  if (in_r4 < 0) {
+  if (param_2 < 0) {
     if (*(int *)(param_1 + 0x7574) != 0) {
       return 0;
     }
@@ -362,7 +362,7 @@ int _glGenLists_Exec(param_1)
         _pthread_mutex_lock(iVar2 + 0x8028);
         iVar2 = *(int *)(param_1 + 0x5148);
       }
-      uVar1 = _gleGenHashNames(iVar2 + 0x300c,in_r4);
+      uVar1 = _gleGenHashNames(iVar2 + 0x300c,param_2);
       if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
         _pthread_mutex_unlock(*(int *)(param_1 + 0x5148) + 0x8028);
         return uVar1;

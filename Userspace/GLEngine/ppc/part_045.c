@@ -4196,7 +4196,7 @@ void _gleEvalDomain2Coord(undefined4 param_1,int param_2,int param_3,int param_4
 }
 
 /* _gleEvalDomainDeriv2Coord @ 0xde104 (572 bytes) */
-void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,int param_9,int param_10,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -4269,9 +4269,9 @@ void _gleEvalDomainDeriv2Coord(undefined4 param_1,int param_2,int param_3,int pa
         } while (iVar10 < param_3);
       }
       iVar12 = iVar12 + 1;
-      *(float *)(iVar3 + (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c))) = fVar6;
+      *(float *)(iVar3 + param_10) = fVar6;
       *(float *)(iVar3 + param_8) = fVar7;
-      *(float *)(iVar3 + (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))) = fVar4;
+      *(float *)(iVar3 + param_9) = fVar4;
     } while (iVar12 < param_7);
   }
   return;
@@ -4367,7 +4367,7 @@ int _gleInitMap1Data(param_1)
 }
 
 /* _gleMap1Vertex3dLoad @ 0xde490 (144 bytes) */
-double _gleMap1Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+double _gleMap1Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,int param_7,int param_8,int *param_9,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   int iVar1;
   int iVar2;
@@ -4376,19 +4376,19 @@ double _gleMap1Vertex3dLoad(undefined4 param_1,undefined4 param_2,undefined4 par
   
   iVar2 = 0;
   dVar4 = DOUBLE_00108d68 / (fparam_2 - fparam_1);
-  *(*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) = param_7;
-  (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))[1] = (int)GH_F2U((float)fparam_1);
-  (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))[3] = (int)GH_F2U((float)dVar4);
-  (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))[2] = (int)GH_F2U((float)fparam_2);
+  *param_9 = param_7;
+  param_9[1] = (int)GH_F2U((float)fparam_1);
+  param_9[3] = (int)GH_F2U((float)dVar4);
+  param_9[2] = (int)GH_F2U((float)fparam_2);
   if (0 < param_7) {
     do {
       iVar1 = iVar2 * 8;
       iVar2 = iVar2 + param_6;
       iVar3 = iVar1 + param_8;
-      (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
-      (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
-      (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
-      (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) = (*(int * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + 3;
+      param_9[4] = (int)GH_F2U((float)*(double *)(iVar1 + param_8));
+      param_9[5] = (int)GH_F2U((float)*(double *)(iVar3 + 8));
+      param_9[6] = (int)GH_F2U((float)*(double *)(iVar3 + 0x10));
+      param_9 = param_9 + 3;
       param_7 = param_7 + -1;
     } while (param_7 != 0);
     return;

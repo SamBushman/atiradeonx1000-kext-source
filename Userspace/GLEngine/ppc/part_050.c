@@ -15,14 +15,13 @@ int _gleInsertPixel_ABGR_EXT_Ushort(param_1, param_2)
   return;
 }
 
-/* FUN_000e8a58 @ 0xe8a58 (120 bytes) */
-void FUN_000e8a58(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInsertPixel_ABGR_EXT_Int @ 0xe8a54 (124 bytes) */
+void _gleInsertPixel_ABGR_EXT_Int(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
-  double in_f13;
   
   dVar1 = DOUBLE_00108d90;
-  param_2[3] = (int)(in_f13 * DOUBLE_00108d90);
+  param_2[3] = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
   param_2[2] = (int)((double)*(float *)(param_1 + 8) * dVar1);
   param_2[1] = (int)((double)*(float *)(param_1 + 0xc) * dVar1);
   *param_2 = (int)((double)*(float *)(param_1 + 0x10) * dVar1);
@@ -144,14 +143,13 @@ int _gleInsertPixel_BGRA_EXT_Ushort(param_1, param_2)
   return;
 }
 
-/* FUN_000e8e20 @ 0xe8e20 (120 bytes) */
-void FUN_000e8e20(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInsertPixel_BGRA_EXT_Int @ 0xe8e1c (124 bytes) */
+void _gleInsertPixel_BGRA_EXT_Int(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
-  double in_f13;
   
   dVar1 = DOUBLE_00108d90;
-  param_2[2] = (int)(in_f13 * DOUBLE_00108d90);
+  param_2[2] = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
   param_2[1] = (int)((double)*(float *)(param_1 + 8) * dVar1);
   *param_2 = (int)((double)*(float *)(param_1 + 0xc) * dVar1);
   param_2[3] = (int)((double)*(float *)(param_1 + 0x10) * dVar1);
@@ -433,14 +431,13 @@ int _gleInsertPixel_BGR_EXT_Ushort(param_1, param_2)
   return;
 }
 
-/* FUN_000e9740 @ 0xe9740 (96 bytes) */
-void FUN_000e9740(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInsertPixel_BGR_EXT_Int @ 0xe973c (100 bytes) */
+void _gleInsertPixel_BGR_EXT_Int(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
-  double in_f13;
   
   dVar1 = DOUBLE_00108d90;
-  param_2[2] = (int)(in_f13 * DOUBLE_00108d90);
+  param_2[2] = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
   param_2[1] = (int)((double)*(float *)(param_1 + 8) * dVar1);
   *param_2 = (int)((double)*(float *)(param_1 + 0xc) * dVar1);
   return;
@@ -548,14 +545,13 @@ int _gleInsertPixel_RGB_Ushort(param_1, param_2)
   return;
 }
 
-/* FUN_000e9a40 @ 0xe9a40 (96 bytes) */
-void FUN_000e9a40(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+/* _gleInsertPixel_RGB_Int @ 0xe9a3c (100 bytes) */
+void _gleInsertPixel_RGB_Int(int param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
-  double in_f13;
   
   dVar1 = DOUBLE_00108d90;
-  *param_2 = (int)(in_f13 * DOUBLE_00108d90);
+  *param_2 = (int)((double)*(float *)(param_1 + 4) * DOUBLE_00108d90);
   param_2[1] = (int)((double)*(float *)(param_1 + 8) * dVar1);
   param_2[2] = (int)((double)*(float *)(param_1 + 0xc) * dVar1);
   return;

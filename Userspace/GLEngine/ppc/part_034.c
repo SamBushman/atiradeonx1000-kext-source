@@ -70,7 +70,7 @@ LAB_000a88bc:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,in_r7,in_r8,iVar7,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a87a8:
@@ -485,7 +485,7 @@ LAB_000a8f70:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a8e5c:
@@ -897,7 +897,7 @@ LAB_000a9604:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a94f0:
@@ -1087,7 +1087,7 @@ LAB_000a9974:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a9860:
@@ -1279,7 +1279,7 @@ LAB_000a9cf4:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a9be0:
@@ -1477,7 +1477,7 @@ LAB_000aa09c:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,in_r7,in_r8,iVar7,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000a9f88:
@@ -1641,14 +1641,14 @@ void _glMultiDrawElementArrayAPPLE_Exec(int param_1,undefined4 param_2,int param
 }
 
 /* _glMultiDrawElementArrayAPPLE_CompExec @ 0xaa29c (152 bytes) */
-int _glMultiDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4)
+int _glMultiDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   int param_3;
   int param_4;
+  int param_5;
 {
   int iVar1;
-  int in_r7;
   int iVar2;
   double fparam_1;
   double in_f2;
@@ -1659,14 +1659,14 @@ int _glMultiDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4)
   double in_f7;
   double in_f8;
   
-  if (in_r7 < 0) {
+  if (param_5 < 0) {
     if (*(int *)(param_1 + 0x7574) == 0) {
       *(undefined4 *)(param_1 + 0x7574) = 0x501;
     }
   }
   else {
     iVar2 = 0;
-    if (0 < in_r7) {
+    if (0 < param_5) {
       do {
         iVar1 = iVar2 * 4;
         ((int (*)())_glDrawElementArrayAPPLE_Comp)(param_1,param_2,*(undefined4 *)(iVar1 + param_3),*(undefined4 *)(iVar1 + param_4)
@@ -1674,7 +1674,7 @@ int _glMultiDrawElementArrayAPPLE_CompExec(param_1, param_2, param_3, param_4)
         iVar2 = iVar2 + 1;
         ((void (*)())_glDrawElementArrayAPPLE_Exec)(param_1,param_2,*(undefined4 *)(iVar1 + param_3),*(undefined4 *)(iVar1 + param_4)
                    ,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
-      } while (iVar2 < in_r7);
+      } while (iVar2 < param_5);
     }
   }
   return;
@@ -1729,7 +1729,7 @@ LAB_000aa588:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000aa474:
@@ -1937,7 +1937,7 @@ LAB_000aa994:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,in_r8,iVar8,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000aa880:
@@ -2144,7 +2144,7 @@ LAB_000aadb8:
       ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar5 + 0x10,uVar3,uVar6,uVar7,uVar8,iVar9,fparam_1,fparam_2,fparam_3,
                  fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
       *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
-      fparam_1 = extraout_f1_00;
+      fparam_1 = fparam_1;
     }
     if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000aaca4:
