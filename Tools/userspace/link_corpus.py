@@ -1506,7 +1506,7 @@ for pdir_, f in _part_files:
                 if pt_['func'] == mm.group(1) and pt_['old'] in txt:
                     txt = txt.replace(pt_['old'], pt_['new'])
                     patches_applied.append(pt_['func'])
-            txt, ndi = rewrites.rewrite_di3_calls(txt)
+            txt, ndi = rewrites.rewrite_di3_calls(txt, '\n'.join(decls))
             di3_total[0] += ndi
             txt, ncmp = rewrites.rewrite_narrow_compares(txt)
             cmp_total[0] += ncmp

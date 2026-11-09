@@ -663,14 +663,20 @@ def rewrite_narrow_compares(text):
     return text, n
 
 
-def rewrite_di3_calls(text):
+def rewrite_di3_calls(text, decl_text=''):
     """libgcc's 64-bit shift helpers return their result in r3:r4. The corpus calls them through `int (*)()`, so the high word is all a caller sees and
-    Ghidra's `extraout_r4` (the low word) is never assigned. Call them as returning a 64-bit value and assign extraout_r4 from it."""
+    Ghidra's `extraout_r4` (the low word) is never assigned. Call them as returning a 64-bit value and assign extraout_r4 from it.
+    The cast's return type must be the one the helper is DECLARED with (decl_text = the corpus declarations): gcc 4.0.1 compiles a call through a
+    function type that differs from the declaration (`unsigned long long` cast of `longlong ___ashldi3()`) to an unconditional trap - GLEngine's
+    _gleSetFuncOutputDesc aborted on its first `___ashldi3` call (libGLProgrammability declares `undefined8`, GLEngine `longlong`)."""
     n = 0
+    def rt(fn):
+        m = re.search(r'(?m)^(?:extern\s+)?(\w+(?: \w+)*?)\s+\**%s\s*\(' % re.escape(fn), decl_text)
+        return 'long long' if m and m.group(1) in ('longlong', 'long long') else 'unsigned long long'
     if 'extraout_r4' in text:
-        text, k = re.subn(r'(?m)^(\s*)\(\(int \(\*\)\(\)\)(___(?:lshr|ashl|ashr)di3)\)\((.*)\);', r'\1extraout_r4 = (unsigned int)((unsigned long long (*)())\2)(\3);', text)
+        text, k = re.subn(r'(?m)^(\s*)\(\(int \(\*\)\(\)\)(___(?:lshr|ashl|ashr)di3)\)\((.*)\);', lambda m: '%sextraout_r4 = (unsigned int)((%s (*)())%s)(%s);' % (m.group(1), rt(m.group(2)), m.group(2), m.group(3)), text)
         n += k
-    text, k = re.subn(r'\(\(int \(\*\)\(\)\)(___(?:lshr|ashl|ashr)di3)\)', r'((unsigned long long (*)())\1)', text)
+    text, k = re.subn(r'\(\(int \(\*\)\(\)\)(___(?:lshr|ashl|ashr)di3)\)', lambda m: '((%s (*)())%s)' % (rt(m.group(1)), m.group(1)), text)
     return text, n + k
 
 
