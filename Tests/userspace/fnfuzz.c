@@ -85,6 +85,11 @@ static void report(int status, unsigned r3, unsigned r4, unsigned long long f1) 
 }
 static void on_sig(int s) { report(s, 0, 0, 0); }
 
+/* FNFUZZ_STACKFILL=<hex word>: write that word over the 32 KB of stack below the harness's frame right before the call. A function that reads a stack slot it never wrote
+   (a descriptor struct with fields it leaves alone, a callee that reads more than its caller sets) sees residue of the harness's earlier calls, which differs between the images' frame
+   layouts; filling makes the residue a known value in both, so only a difference in what the function itself writes or reads is left. */
+static int stackfill_set; static unsigned stackfill_word;
+static void __attribute__((noinline)) fill_stack(void) { volatile unsigned buf[8192]; for (int i = 0; i < 8192; i++) buf[i] = stackfill_word; }
 static unsigned alarm_us = 300000;
 static int nohandlers;
 static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
@@ -113,6 +118,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     /* the 9th..12th integer words of the call are the caller-stack words at SP+0x38..0x44 (Darwin PPC); a function with more than 8 integer parameters (or reading its caller's frame) must see defined values, not the harness's stack residue, which differs between the images */
     unsigned sa[4]; for (int q = 0; q < 4; q++) { unsigned k4 = rnd32() % 4; sa[q] = k4 == 0 ? 0 : k4 < 3 ? arena_ptr() : gen_int(); }
     memcpy(cur_args, ia, sizeof cur_args); memcpy(cur_dargs, da, sizeof cur_dargs);
+    { const char *sf = getenv("FNFUZZ_STACKFILL"); if (sf) { stackfill_word = (unsigned)strtoul(sf, NULL, 16); fill_stack(); } }
     if (mode == 0) { unsigned long long r = ((fi_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); report(0, (unsigned)(r >> 32), (unsigned)r, 0); }
     else { double r = ((fd_t)fn)(ia[0], ia[1], ia[2], ia[3], ia[4], ia[5], ia[6], ia[7], sa[0], sa[1], sa[2], sa[3], da[0], da[1], da[2], da[3], da[4], da[5], da[6], da[7], da[8], da[9], da[10], da[11], da[12]); unsigned long long b; memcpy(&b, &r, 8); report(0, 0, 0, b); }
 }
