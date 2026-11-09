@@ -315,7 +315,7 @@ extern int _gle_enable_hash_table;
 extern int _gle_io_data;
 extern int _gle_processor;
 extern int _glep_gld_names;
-extern unsigned char *_glep_plugin_head;
+extern int *_glep_plugin_head;
 extern int _new_rend_str_0;
 extern int _out_codes;
 extern int _tex0_divide_array;

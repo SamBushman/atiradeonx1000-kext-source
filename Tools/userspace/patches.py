@@ -484,6 +484,11 @@ PROTO_OVERRIDES = {
 }
 
 EXTRA_DECL_FIXES = {
+    'gleng': {
+        # head of the renderer-plugin list (Ghidra data table: 0x113f74 __bss `undefined4` 4 bytes): _glepDeletePlugin does `piVar4 = (int *)*_glep_plugin_head` =
+        # stock `lwz`; the heuristic `unsigned char *` compiled it as `lbz` (found by width_audit.py: stock w7 vs ours b2 w6).
+        '_glep_plugin_head': 'extern int *_glep_plugin_head;',
+    },
     'glprog': {
         # pointer to an 8-byte record of two words (InitializeGlobalPools, stock 0x97b9fe54: stw at +0 and +4)
         '_gPollAllocThreadData': 'extern unsigned int *_gPollAllocThreadData;',
