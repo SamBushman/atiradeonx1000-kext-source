@@ -4723,7 +4723,8 @@ int _glVertex3_ListExec(param_1, param_2)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)*param_2, (double)param_2[1], (double)param_2[2], (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,(double)*param_2,(double)param_2[1],(double)param_2[2],
+            (double)*(float *)(param_1 + 0x24));
   return 0xc;
 }
 
@@ -5447,11 +5448,13 @@ int _gleExecuteVertexArrayRange(param_1, param_2, param_3, param_4, param_5, par
   undefined4 param_6;
   undefined4 param_7;
 {
-  double dVar1;
+  double f0;
   
-  dVar1 = (double)FLOAT_00108e50;
+  f0 = (double)FLOAT_00108e50;
   *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
-  (**(int ( **)(double,double,double,double))(param_1 + 0x4888))(dVar1, dVar1, dVar1, dVar1);
+  (**(code **)(param_1 + 0x4888))
+            (param_1,param_2,param_3,param_4,param_5,*(undefined4 *)(param_1 + 0x4854),param_7,f0,f0
+             ,f0,f0);
   (**(code **)(param_1 + 0x4708))
             (*(undefined4 *)(param_1 + 0x4688),param_2,param_3,param_4,param_5,param_6,param_7,
              *(undefined4 *)(param_1 + 0x4854));

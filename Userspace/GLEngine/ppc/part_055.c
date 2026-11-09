@@ -386,6 +386,7 @@ undefined4 _gleForceToSoftwareTCL(int param_1,double fparam_1,double fparam_2,do
   int iVar15;
   undefined4 uVar16;
   double extraout_f1;
+  double extraout_f1_00;
   char local_30 [16];
   
   local_30[0] = '\0';
@@ -406,14 +407,15 @@ undefined4 _gleForceToSoftwareTCL(int param_1,double fparam_1,double fparam_2,do
     }
     in_r6 = 0;
     in_r5 = (int)*(short *)(param_1 + 0x4a12);
-    fparam_1 = (double)(**(double ( **)(int,int))(param_1 + 0x46ec))(*(undefined4 *)(param_1 + 0x4688), 2);
+    (**(code **)(param_1 + 0x46ec))(*(undefined4 *)(param_1 + 0x4688),2,in_r5,0);
+    fparam_1 = extraout_f1;
   }
   iVar12 = iVar11 + -1;
   iVar8 = *(int *)(param_1 + 0x50ac);
   *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x10000000;
   if (iVar8 != 0 || (*(uint *)(param_1 + 0x505c) & *(uint *)(param_1 + 0x50b0)) != 0) {
     _gleUpdateMatrixFunc(param_1);
-    fparam_1 = extraout_f1;
+    fparam_1 = extraout_f1_00;
   }
   if (*(char *)(param_1 + 0x4691) == '\0') goto LAB_00103dec;
   iVar6 = *(int *)(param_1 + 0x744c);
@@ -2108,7 +2110,7 @@ int _gleVPRenderPolygon(param_1)
 int _gleVPFlushAtomic(param_1)
   int param_1;
 {
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
   return;
 }
@@ -2117,7 +2119,7 @@ int _gleVPFlushAtomic(param_1)
 int _gleVPFlushAtomicTCL(param_1)
   int param_1;
 {
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
   return;
 }
@@ -2187,7 +2189,7 @@ int _gleVPFlushLineLoopTCL(param_1)
   int iVar6;
   int iVar7;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   iVar6 = *(int *)(param_1 + 0x4854);
   iVar3 = (int)*(short *)(param_1 + 0x487c) >> 3;
   if (*(char *)(param_1 + 0x4a18) == '\0') {
@@ -2296,7 +2298,7 @@ int _gleVPFlushLineStripTCL(param_1)
   int iVar6;
   int iVar7;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   iVar5 = 0;
   iVar4 = *(int *)(param_1 + 0x4858);
   iVar6 = (int)*(short *)(param_1 + 0x487c) >> 3;
@@ -2388,7 +2390,7 @@ int _gleVPFlushTriQuadStripTCL(param_1)
   int iVar6;
   int iVar7;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   iVar5 = 0;
   iVar7 = *(int *)(param_1 + 0x4854);
   iVar6 = (int)*(short *)(param_1 + 0x487c) >> 2;
@@ -2505,7 +2507,7 @@ int _gleVPFlushTriangleFanTCL(param_1)
   int iVar6;
   int iVar7;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   iVar6 = 0;
   iVar7 = (int)*(short *)(param_1 + 0x487c) >> 3;
   iVar4 = *(int *)(param_1 + 0x4858);
@@ -2559,6 +2561,11 @@ int _gleVPFlushPolygon(param_1)
 {
   uint uVar1;
   undefined8 *puVar2;
+  undefined4 in_r4;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   uint uVar3;
   undefined8 *puVar4;
   undefined8 *puVar5;
@@ -2598,7 +2605,7 @@ int _gleVPFlushPolygon(param_1)
   uVar3 = uVar3 & 0x1f;
   uVar8 = *(uint *)(uVar1 + (int)puVar7);
   *(uint *)(uVar1 + (int)puVar7) = uVar8 & ~(1 << uVar3);
-  (**(code **)(param_1 + 0x4a08))(param_1);
+  (**(code **)(param_1 + 0x4a08))(param_1,in_r4,in_r5,in_r6,in_r7,in_r8,uVar3);
   *(undefined1 *)(param_1 + 0x4a18) = 1;
   *puVar7 = *puVar7 & 0xfffffffc | (uVar8 >> uVar3 & 1) << 1;
   iVar10 = 0;
@@ -2630,6 +2637,11 @@ int _gleVPFlushPolygonTCL(param_1)
   uint uVar1;
   int iVar2;
   uint uVar3;
+  undefined4 in_r4;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   uint uVar4;
   int iVar5;
   int iVar6;
@@ -2648,7 +2660,7 @@ int _gleVPFlushPolygonTCL(param_1)
   uVar4 = uVar4 & 0x1f;
   uVar9 = *(uint *)(uVar3 + (int)puVar8);
   *(uint *)(uVar3 + (int)puVar8) = uVar9 & ~(1 << uVar4);
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1,in_r4,in_r5,in_r6,in_r7,in_r8,uVar4);
   *(undefined1 *)(param_1 + 0x4a18) = 1;
   iVar5 = 0;
   *puVar8 = *puVar8 & 0xfffffffc | (uVar9 >> uVar4 & 1) << 1;
@@ -2667,6 +2679,12 @@ void _gleVPFlushPolygonTCLRDirty(int param_1,double fparam_1,double fparam_2,dou
   uint uVar1;
   int iVar2;
   uint uVar3;
+  undefined4 in_r4;
+  undefined4 extraout_r4;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   uint uVar4;
   int iVar5;
   int iVar6;
@@ -2679,6 +2697,7 @@ void _gleVPFlushPolygonTCLRDirty(int param_1,double fparam_1,double fparam_2,dou
       (*(char *)(*(int *)(param_1 + 0x468c) + 0x7a) == '\0')) &&
      ((*(char *)(param_1 + 0x4664) == '\0' && (*(int *)(param_1 + 0x5434) == 0)))) {
     ((undefined4 (*)())_gleForceToSoftwareTCL)(param_1,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+    in_r4 = extraout_r4;
   }
   iVar6 = (int)*(short *)(param_1 + 0x487c) >> 3;
   uVar1 = iVar6 * 8;
@@ -2690,7 +2709,7 @@ void _gleVPFlushPolygonTCLRDirty(int param_1,double fparam_1,double fparam_2,dou
   uVar4 = uVar4 & 0x1f;
   uVar9 = *(uint *)(uVar3 + (int)puVar8);
   *(uint *)(uVar3 + (int)puVar8) = uVar9 & ~(1 << uVar4);
-  (**(code **)(param_1 + 0x4a08))(param_1);
+  (**(code **)(param_1 + 0x4a08))(param_1,in_r4,in_r5,in_r6,in_r7,in_r8,uVar4);
   *(undefined1 *)(param_1 + 0x4a18) = 1;
   iVar5 = 0;
   *puVar8 = *puVar8 & 0xfffffffc | (uVar9 >> uVar4 & 1) << 1;

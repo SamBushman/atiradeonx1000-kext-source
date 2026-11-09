@@ -13,7 +13,7 @@ import java.util.*;
 // IN.txt: `<callAddr>:<argCount>` lines from Tools/userspace/indirect_args.py (the GPR arguments the stock code gives each `bctrl`). Every indirect
 // call the decompiler prints with FEWER arguments gets a call-site override with that many (OverrideIndirectCalls.java only widened calls printed
 // with none: glprog changeAggrToTempConst's `getType(local_60)` lost the object in r4). A call with a float argument or result (an f register) is
-// left alone and listed: an all-GPR override would move them. OUT.txt: the entries of the functions changed, for RedumpContaining.java.
+// widened with the missing integer arguments only (the doubles are kept as double parameters); a float RESULT is left alone and listed. OUT.txt: the entries of the functions changed, for RedumpContaining.java.
 public class ExtendIndirectCalls extends GhidraScript {
     FunctionDefinitionDataType sig(String name, int n, DataType ret) {
         FunctionDefinitionDataType s = new FunctionDefinitionDataType(name);
@@ -54,17 +54,28 @@ public class ExtendIndirectCalls extends GhidraScript {
             for (PcodeOpAST op : calls) {
                 Address ca = op.getSeqnum().getTarget();
                 Integer n = e.getValue().get(ca);
-                int have = op.getNumInputs() - 1;
-                if (n == null || have >= n) continue;
-                boolean flt = isFloatReg(op.getOutput());
+                // the GPR arguments the call has: floating-point ones (an f register / float-typed value) travel in f1..f13 and do not count against the wanted GPR words;
+                // a call that already has three doubles but not the object in r3 (`(*fn)(double,double,double)` for the stock's `bctrl` with r3 = ctx, f1..f3) is widened
+                // with the missing integer arguments and keeps its floating-point ones (the override's integer parameters go to r3.., its doubles to f1..)
+                int ng = 0; List<Integer> fsz = new ArrayList<>();
                 for (int i = 1; i < op.getNumInputs(); i++) {
                     Varnode v = op.getInput(i);
                     HighVariable hv = v.getHigh();
-                    if (isFloatReg(v) || (hv != null && hv.getDataType() instanceof AbstractFloatDataType)) flt = true;
+                    if (isFloatReg(v) || (hv != null && hv.getDataType() instanceof AbstractFloatDataType)) fsz.add(v.getSize()); else ng++;
                 }
-                if (flt) { println("EXTENDIND skip (float) " + f.getName() + " " + ca + " " + have + "->" + n); skipped++; continue; }
+                if (n == null || ng >= n) continue;
+                boolean fret = isFloatReg(op.getOutput());
+                if (fret) { println("EXTENDIND skip (float result) " + f.getName() + " " + ca + " " + ng + "->" + n); skipped++; continue; }
                 DataType ret = op.getOutput() == null ? VoidDataType.dataType : Undefined4DataType.dataType;
-                HighFunctionDBUtil.writeOverride(f, ca, sig("ind_" + ca, n, ret));
+                FunctionDefinitionDataType s = sig("ind_" + ca, n, ret);
+                if (!fsz.isEmpty()) {
+                    ParameterDefinition[] ps = new ParameterDefinition[n + fsz.size()];
+                    ParameterDefinition[] gp = s.getArguments();
+                    for (int i = 0; i < n; i++) ps[i] = gp[i];
+                    for (int i = 0; i < fsz.size(); i++) ps[n + i] = new ParameterDefinitionImpl("f" + i, DoubleDataType.dataType, null);
+                    s.setArguments(ps);
+                }
+                HighFunctionDBUtil.writeOverride(f, ca, s);
                 widened++; changed = true;
             }
             if (changed) { out.println("0x" + f.getEntryPoint()); funcs++; }

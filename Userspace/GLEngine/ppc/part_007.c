@@ -6725,7 +6725,7 @@ int _gleDrawArraysOrElements_Core(param_1, param_2, param_3, param_4, param_5, p
   pcVar4 = *(code **)(param_2 * 4 + param_1 + 0x49e0);
   *(short *)(param_1 + 0x4a10) = (short)param_2;
   iVar5 = param_4 + param_3;
-  (*pcVar4)();
+  (*pcVar4)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
   *(undefined4 *)(param_1 + 0x486c) = param_5;
   if ((((*(char *)(param_1 + 0x7580) == '\0') && (param_6 != 0)) &&
       (*(char *)(param_1 + 0x4664) == '\0')) &&
@@ -6797,7 +6797,7 @@ int _gleDrawArraysOrElements_Core(param_1, param_2, param_3, param_4, param_5, p
 int _gleFlushAtomicTCLFunc(param_1)
   int param_1;
 {
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
   return;
 }
@@ -6805,7 +6805,7 @@ int _gleFlushAtomicTCLFunc(param_1)
 /* _gleFlushAndSubmit @ 0x4eec8 (116 bytes) */
 void _gleFlushAndSubmit(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
-  (**(code **)(param_1 + 0x4a0c))();
+  (**(code **)(param_1 + 0x4a0c))(param_1);
                     
                     
   (**(int ( **)(int,double,double,double,double))(param_1 + 0x4884))(param_1, fparam_1, fparam_2, fparam_3, fparam_4);

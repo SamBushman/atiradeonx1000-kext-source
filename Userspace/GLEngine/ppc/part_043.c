@@ -1668,6 +1668,8 @@ int _gleSynchronizePluginFramebuffer(param_1)
   int param_1;
 {
   int iVar1;
+  undefined4 in_r7;
+  undefined4 in_r8;
   int iVar2;
   int *piVar3;
   
@@ -1683,12 +1685,11 @@ int _gleSynchronizePluginFramebuffer(param_1)
       }
       iVar2 = iVar2 + -1;
     } while (-1 < iVar2);
+    iVar1 = (uint)*(byte *)(param_1 + 0x85a6) * 4 + *(int *)(param_1 + 0x744c);
     iVar2 = (uint)*(byte *)(param_1 + 0x85a6) * 0x2e0 + param_1;
     iVar2 = (**(code **)(*(int *)(iVar2 + 0x8884) + 0x138))
-                      (*(undefined4 *)(iVar2 + 0x85ac),0x5b,
-                       *(undefined4 *)
-                        ((uint)*(byte *)(param_1 + 0x85a6) * 4 + *(int *)(param_1 + 0x744c) + 0x10),
-                       0);
+                      (*(undefined4 *)(iVar2 + 0x85ac),0x5b,*(undefined4 *)(iVar1 + 0x10),0,in_r7,
+                       in_r8,iVar1);
   }
   *(undefined1 *)(param_1 + 0x7582) = *(undefined1 *)(*(int *)(param_1 + 0x468c) + 0x25);
   return iVar2;

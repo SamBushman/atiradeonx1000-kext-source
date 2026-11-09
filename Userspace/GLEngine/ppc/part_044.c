@@ -481,12 +481,19 @@ int _gleGetHashMachineObjectNameTargetPairs(param_1, param_2, param_3, param_4)
   undefined *puVar1;
   int *piVar2;
   undefined4 uVar3;
+  int a2;
+  int *a3;
+  undefined4 in_r7;
+  undefined4 in_r8;
   int *piVar4;
+  int a6;
   code *pcVar5;
   int iVar6;
   
   puVar1 = PTR__zeroTargetExtractor_00110e30;
   iVar6 = 0;
+  a2 = param_3;
+  a3 = param_4;
   if (*(char *)(*(int *)(param_1 + 0x5148) + 0x8024) != '\0') {
     _pthread_mutex_lock(*(int *)(param_1 + 0x5148) + 0x8028);
   }
@@ -518,9 +525,10 @@ int _gleGetHashMachineObjectNameTargetPairs(param_1, param_2, param_3, param_4)
     do {
       piVar4 = piVar2 + 1;
       for (piVar2 = (int *)*piVar2; piVar2 != (int *)0x0; piVar2 = (int *)*piVar2) {
-        *(int *)((iVar6 + 1) * 4 + *param_4) = piVar2[1];
+        a6 = *param_4;
+        *(int *)((iVar6 + 1) * 4 + a6) = piVar2[1];
         iVar6 = iVar6 + 2;
-        uVar3 = (*pcVar5)(param_1,piVar2);
+        uVar3 = (*pcVar5)(param_1,piVar2,a2,a3,in_r7,in_r8,a6);
         *(undefined4 *)(iVar6 * 4 + *param_4) = uVar3;
       }
       piVar2 = piVar4;

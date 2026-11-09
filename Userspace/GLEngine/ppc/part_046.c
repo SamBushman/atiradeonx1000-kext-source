@@ -2445,7 +2445,7 @@ void _gleEvalMap2(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   }
   iVar9 = *(int *)(param_1 + 0x4858);
   if (iVar9 == *(int *)(param_1 + 0x485c)) {
-    (**(code **)(param_1 + 0x4a0c))();
+    (**(code **)(param_1 + 0x4a0c))(param_1);
     iVar9 = *(int *)(param_1 + 0x4858);
   }
   pfVar10 = *(float **)(param_1 + 0x4860);

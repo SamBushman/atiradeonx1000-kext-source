@@ -557,8 +557,11 @@ double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
   int iVar8;
   undefined4 uVar9;
   int iVar10;
+  undefined4 in_r6;
+  undefined4 in_r7;
   int iVar11;
-  undefined4 uVar12;
+  undefined4 in_r8;
+  undefined4 a6;
   
   iVar7 = param_1 + param_2 * 0x80;
   fVar2 = *(float *)(iVar7 + 0x2850);
@@ -584,13 +587,13 @@ double _gleUpdateLightPosition(int param_1,int param_2,double fparam_1)
   puVar6 = PTR__gleVectorNormalize_00112064;
   (**(code **)PTR__gleVectorNormalize_00112064)(param_1,iVar8 + 0x4a70,iVar8 + 0x4a7c);
   uVar9 = *(undefined4 *)(iVar8 + 0x4a7c);
-  uVar12 = *(undefined4 *)(iVar8 + 0x4a80);
+  a6 = *(undefined4 *)(iVar8 + 0x4a80);
   *(undefined4 *)(iVar7 + 0x2888) = *(undefined4 *)(iVar8 + 0x4a84);
   fVar2 = FLOAT_00108e54;
   *(undefined4 *)(iVar7 + 0x2880) = uVar9;
-  *(undefined4 *)(iVar7 + 0x2884) = uVar12;
+  *(undefined4 *)(iVar7 + 0x2884) = a6;
   *(float *)(iVar7 + 0x2888) = *(float *)(iVar7 + 0x2888) + fVar2;
-  (**(code **)puVar6)(param_1,iVar7 + 0x2880,iVar7 + 0x2880);
+  (**(code **)puVar6)(param_1,iVar7 + 0x2880,iVar7 + 0x2880,in_r6,in_r7,in_r8,a6);
   ((int (*)())_gleUpdateLightFast)(param_1,param_2);
   ((int (*)())_gleUpdateLightModelFunc)(param_1);
   iVar7 = *(int *)(param_1 + 0x5434);
@@ -730,10 +733,11 @@ void _gleUpdateLightDirection(int param_1,int param_2,double fparam_1)
 {
   byte bVar1;
   int iVar2;
+  undefined4 in_r6;
   int iVar3;
   
   (**(code **)PTR__gleVectorNormalize_00112064)
-            (param_1,param_1 + param_2 * 0x80 + 0x2860,param_1 + param_2 * 0x6c + 0x4a88);
+            (param_1,param_1 + param_2 * 0x80 + 0x2860,param_1 + param_2 * 0x6c + 0x4a88,in_r6);
   if (*(int *)(param_1 + 0x5434) == 0) {
     bVar1 = *(byte *)(param_2 * 7 + *(int *)(param_1 + 0x5420) + 0x25c);
   }

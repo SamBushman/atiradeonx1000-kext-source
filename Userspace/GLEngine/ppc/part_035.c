@@ -464,7 +464,8 @@ int _glVertexAttrib1sARB_Exec(param_1, param_2, param_3)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*((int (*)(double,double,double))pcVar3))((double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)fVar1, (double)fVar1);
+      (*pcVar3)(param_1,(double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) -
+                                       DOUBLE_00108d58),(double)fVar1,(double)fVar1);
     }
     else {
       iVar2 = param_1 + param_2 * 0x10;
@@ -642,7 +643,10 @@ int _glVertexAttrib2sARB_Exec(param_1, param_2, param_3, param_4)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar5 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*((int (*)(double,double))pcVar5))((double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58 ));
+      (*pcVar5)(param_1,(double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) -
+                                       DOUBLE_00108d58),
+                (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58)
+               );
     }
     else {
       iVar4 = param_1 + param_2 * 0x10;
@@ -835,7 +839,12 @@ int _glVertexAttrib3sARB_Exec(param_1, param_2, param_3, param_4, param_5)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar4 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*((int (*)(double,double,double))pcVar4))((double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58 ), (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58));
+      (*pcVar4)(param_1,0,param_3,param_4,param_5,*(int *)(param_1 + 0x4858),param_5 ^ 0x80000000,
+                (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58)
+                ,(double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58
+                                ),
+                (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58)
+               );
     }
     else {
       iVar3 = param_1 + param_2 * 0x10;
@@ -1029,7 +1038,13 @@ int _glVertexAttrib4sARB_Exec(param_1, param_2, param_3, param_4, param_5, param
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*((int (*)(double,double,double,double))pcVar3))((double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58 ), (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_6 ^ 0x80000000) - DOUBLE_00108d58 ));
+      (*pcVar3)(param_1,0,param_3,param_4,param_5,*(int *)(param_1 + 0x4858),param_5 ^ 0x80000000,
+                (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58)
+                ,(double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58
+                                ),
+                (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58)
+                ,(double)(float)((double)CONCAT44(0x43300000,param_6 ^ 0x80000000) - DOUBLE_00108d58
+                                ));
     }
     else {
       iVar2 = param_1 + param_2 * 0x10;
@@ -1206,7 +1221,7 @@ void _glVertexAttrib4dARB_CompExec(undefined4 param_1,undefined4 param_2,double 
 }
 
 /* _glVertexAttrib4NubARB_Exec @ 0xad2d0 (400 bytes) */
-double _glVertexAttrib4NubARB_Exec(int param_1,uint param_2,uint param_3,uint param_4,uint param_5,uint param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glVertexAttrib4NubARB_Exec(int param_1,uint param_2,uint param_3,uint param_4,uint param_5,uint param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   float fVar1;
   int iVar2;
@@ -1219,7 +1234,11 @@ double _glVertexAttrib4NubARB_Exec(int param_1,uint param_2,uint param_3,uint pa
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      fparam_1 = (double)(*((double (*)(double,double,double,double))pcVar3))((double)((GH_U2F((unsigned int)((param_3 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78), (double)((GH_U2F((unsigned int)((param_4 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78), (double)((GH_U2F((unsigned int)((param_5 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78), (double)((GH_U2F((unsigned int)((param_6 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78));
+      (*pcVar3)(param_1,0,param_3,param_4,param_5,*(int *)(param_1 + 0x4858),param_5 | 0x4b000000,
+                (double)((GH_U2F((unsigned int)((param_3 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
+                (double)((GH_U2F((unsigned int)((param_4 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
+                (double)((GH_U2F((unsigned int)((param_5 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78),
+                (double)((GH_U2F((unsigned int)((param_6 | 0x4b000000))) - 8388608.0) * FLOAT_00108e78));
     }
     else {
       iVar2 = param_1 + param_2 * 0x10;
@@ -1232,7 +1251,7 @@ double _glVertexAttrib4NubARB_Exec(int param_1,uint param_2,uint param_3,uint pa
   else if (*(int *)(param_1 + 0x7574) == 0) {
     *(undefined4 *)(param_1 + 0x7574) = 0x501;
   }
-  return fparam_1;
+  return;
 }
 
 /* _glVertexAttrib4NubARB_Comp @ 0xad460 (112 bytes) */
@@ -1272,7 +1291,7 @@ int _glVertexAttrib4NubARB_CompExec(param_1, param_2, param_3, param_4, param_5,
   double in_f4;
   
   ((int (*)())_glVertexAttrib4NubARB_Comp)(param_1,param_2,param_3,param_4,param_5,param_6);
-  ((double (*)())_glVertexAttrib4NubARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,fparam_1,in_f2,in_f3,in_f4);
+  ((void (*)())_glVertexAttrib4NubARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,fparam_1,in_f2,in_f3,in_f4);
   return;
 }
 
@@ -1294,7 +1313,8 @@ int _glVertexAttrib1svARB_Exec(param_1, param_2, param_3)
       if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
         pcVar3 = (code *)PTR__gleFlushAndSubmit_00112050;
       }
-      (*((int (*)(double,double,double))pcVar3))((double)(float)((double)CONCAT44(0x43300000,(int)*param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)fVar1, (double)fVar1);
+      (*pcVar3)(param_1,(double)(float)((double)CONCAT44(0x43300000,(int)*param_3 ^ 0x80000000) -
+                                       DOUBLE_00108d58),(double)fVar1,(double)fVar1);
     }
     else {
       iVar2 = param_1 + param_2 * 0x10;

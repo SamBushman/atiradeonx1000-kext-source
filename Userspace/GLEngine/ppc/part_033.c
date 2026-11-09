@@ -69,13 +69,19 @@ int _glVertex2iv_Exec(param_1, param_2)
   int param_1;
   uint *param_2;
 {
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,param_2,in_r5,in_r6,in_r7,*(int *)(param_1 + 0x4858),0x43300000,
+            (double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58),
+            (double)*(float *)(param_1 + 0x20),(double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -113,13 +119,18 @@ int _glVertex3i_Exec(param_1, param_2, param_3, param_4)
   uint param_3;
   uint param_4;
 {
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,int,int,double,double,double,double))pcVar1))(param_1, param_2, param_3, param_4, (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,param_2,param_3,param_4,in_r7,*(int *)(param_1 + 0x4858),param_4 ^ 0x80000000,
+            (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -160,13 +171,20 @@ int _glVertex3iv_Exec(param_1, param_2)
   int param_1;
   uint *param_2;
 {
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,param_2,in_r5,in_r6,in_r7,*(int *)(param_1 + 0x4858),param_2[1] ^ 0x80000000,
+            (double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - DOUBLE_00108d58),
+            (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -212,7 +230,11 @@ int _glVertex4i_Exec(param_1, param_2, param_3, param_4, param_5)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,int,int,int,double,double,double,double))pcVar1))(param_1, param_2, param_3, param_4, param_5, (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58));
+  (*pcVar1)(param_1,param_2,param_3,param_4,param_5,*(int *)(param_1 + 0x4858),param_4 ^ 0x80000000,
+            (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58));
   return;
 }
 
@@ -256,13 +278,20 @@ int _glVertex4iv_Exec(param_1, param_2)
   int param_1;
   uint *param_2;
 {
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_2[3] ^ 0x80000000) - DOUBLE_00108d58))
+  (*pcVar1)(param_1,param_2,in_r5,in_r6,in_r7,*(int *)(param_1 + 0x4858),param_2[2] ^ 0x80000000,
+            (double)(float)((double)CONCAT44(0x43300000,*param_2 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_2[1] ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_2[2] ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_2[3] ^ 0x80000000) - DOUBLE_00108d58))
   ;
   return;
 }
@@ -308,7 +337,10 @@ int _glVertex2s_Exec(param_1, param_2, param_3)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,int,double,double,double,double))pcVar1))(param_1, param_2, param_3, (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,(double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) -
+                                   DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)*(float *)(param_1 + 0x20),(double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -346,13 +378,21 @@ int _glVertex2sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)(float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,param_2,in_r5,in_r6,in_r7,*(int *)(param_1 + 0x4858),0x43300000,
+            (double)(float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) -
+                           DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) -
+                           DOUBLE_00108d58),(double)*(float *)(param_1 + 0x20),
+            (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -390,13 +430,18 @@ int _glVertex3s_Exec(param_1, param_2, param_3, param_4)
   uint param_3;
   uint param_4;
 {
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,int,int,double,double,double,double))pcVar1))(param_1, param_2, param_3, param_4, (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,param_2,param_3,param_4,in_r7,*(int *)(param_1 + 0x4858),param_4 ^ 0x80000000,
+            (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -437,13 +482,23 @@ int _glVertex3sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)(float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,param_2,in_r5,in_r6,in_r7,*(int *)(param_1 + 0x4858),
+            (int)param_2[1] ^ 0x80000000U,
+            (double)(float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) -
+                           DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000U) -
+                           DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) -
+                           DOUBLE_00108d58),(double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -489,7 +544,11 @@ int _glVertex4s_Exec(param_1, param_2, param_3, param_4, param_5)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,int,int,int,double,double,double,double))pcVar1))(param_1, param_2, param_3, param_4, param_5, (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58));
+  (*pcVar1)(param_1,param_2,param_3,param_4,param_5,*(int *)(param_1 + 0x4858),param_4 ^ 0x80000000,
+            (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_4 ^ 0x80000000) - DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,param_5 ^ 0x80000000) - DOUBLE_00108d58));
   return;
 }
 
@@ -533,13 +592,25 @@ int _glVertex4sv_Exec(param_1, param_2)
   int param_1;
   short *param_2;
 {
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
   code *pcVar1;
   
   pcVar1 = *(code **)(param_1 + 0x4884);
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)(float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) - DOUBLE_00108d58));
+  (*pcVar1)(param_1,param_2,in_r5,in_r6,in_r7,*(int *)(param_1 + 0x4858),
+            (int)param_2[2] ^ 0x80000000U,
+            (double)(float)((double)CONCAT44(0x43300000,(int)*param_2 ^ 0x80000000) -
+                           DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,(int)param_2[1] ^ 0x80000000) -
+                           DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,(int)param_2[2] ^ 0x80000000U) -
+                           DOUBLE_00108d58),
+            (double)(float)((double)CONCAT44(0x43300000,(int)param_2[3] ^ 0x80000000) -
+                           DOUBLE_00108d58));
   return;
 }
 

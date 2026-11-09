@@ -199,12 +199,12 @@ int _glepPluginDisconnect(param_1)
   int param_1;
 {
   int iVar1;
-  code *pcVar2;
+  code *a0;
   
   if (*(int *)(param_1 + 0x108) != 0) {
     iVar1 = _NSLookupSymbolInModule(*(undefined4 *)(param_1 + 0x10c),"_gldTerminateLibrary");
-    if ((iVar1 != 0) && (pcVar2 = (code *)_NSAddressOfSymbol(iVar1), pcVar2 != (code *)0x0)) {
-      (*pcVar2)();
+    if ((iVar1 != 0) && (a0 = (code *)_NSAddressOfSymbol(iVar1), a0 != (code *)0x0)) {
+      (*a0)(a0);
     }
     _NSUnLinkModule(*(undefined4 *)(param_1 + 0x10c),0);
     *(undefined4 *)(param_1 + 0x10c) = 0;
@@ -500,23 +500,23 @@ int _gleUploadPluginTextureLevel(param_1, param_2, param_3, param_4, param_5, pa
   undefined4 uVar5;
   undefined4 uVar6;
   undefined4 uVar7;
-  undefined4 uVar8;
-  int iVar9;
-  undefined4 uVar10;
+  undefined4 a5;
+  int iVar8;
+  undefined4 a7;
   
   if ((*(byte *)(param_3 + 0xb) & 1) == 0) {
-    iVar9 = *(int *)(param_3 + 0x14);
-    if (iVar9 == 0) {
-      iVar9 = _gleAllocateTextureLevel(param_1,param_2,param_3);
-      if (iVar9 == 0) {
+    iVar8 = *(int *)(param_3 + 0x14);
+    if (iVar8 == 0) {
+      iVar8 = _gleAllocateTextureLevel(param_1,param_2,param_3);
+      if (iVar8 == 0) {
         return;
       }
-      iVar9 = *(int *)(param_3 + 0x14);
+      iVar8 = *(int *)(param_3 + 0x14);
     }
     iVar2 = param_6 * 0x2e0 + param_1;
     (**(code **)(*(int *)(iVar2 + 0x8884) + 0x160))
               (*(undefined4 *)(iVar2 + 0x85ac),*(undefined4 *)(param_2 + param_6 * 4),param_4,
-               param_5,iVar9);
+               param_5,iVar8);
     if ((*(byte *)(param_3 + 0xb) & 0x80) == 0) {
       *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 0x10;
       *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) & 0xbf;
@@ -526,29 +526,29 @@ int _gleUploadPluginTextureLevel(param_1, param_2, param_3, param_4, param_5, pa
     uVar3 = *(undefined4 *)(param_1 + 0x31b0);
     *(uint *)(param_1 + 0x31b0) = (uint)*(ushort *)(param_3 + 0xc);
     uVar1 = *(ushort *)(param_3 + 0xe);
-    iVar9 = param_6 * 0x2e0 + param_1;
+    iVar8 = param_6 * 0x2e0 + param_1;
     uVar7 = *(undefined4 *)(param_1 + 0x31bc);
     uVar6 = *(undefined4 *)(param_1 + 0x31c0);
     uVar5 = *(undefined4 *)(param_1 + 0x31c4);
-    uVar10 = *(undefined4 *)(0x31b4 + param_1);
-    uVar8 = *(undefined4 *)(param_1 + 0x31b8);
+    a7 = *(undefined4 *)(0x31b4 + param_1);
+    a5 = *(undefined4 *)(param_1 + 0x31b8);
     uVar4 = *(undefined4 *)(param_1 + 0x31c8);
     *(undefined4 *)(param_1 + 0x31c4) = 1;
     *(uint *)(0x31b4 + param_1) = (uint)uVar1;
     *(undefined4 *)(param_1 + 0x31c0) = 0;
     *(undefined4 *)(param_1 + 0x31b8) = 0;
     *(undefined4 *)(param_1 + 0x31bc) = 0;
-    (**(code **)(*(int *)(iVar9 + 0x8884) + 0x160))
-              (*(undefined4 *)(iVar9 + 0x85ac),*(undefined4 *)(param_2 + param_6 * 4),param_4,
-               param_5,*(undefined4 *)(param_3 + 0x14));
+    (**(code **)(*(int *)(iVar8 + 0x8884) + 0x160))
+              (*(undefined4 *)(iVar8 + 0x85ac),*(undefined4 *)(param_2 + param_6 * 4),param_4,
+               param_5,*(undefined4 *)(param_3 + 0x14),a5,iVar8 + 0x10000,a7);
     if ((*(byte *)(param_3 + 0xb) & 0x80) == 0) {
       *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 0x10;
       *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) & 0xbf;
     }
     *(undefined4 *)(param_1 + 0x31c8) = uVar4;
     *(undefined4 *)(param_1 + 0x31b0) = uVar3;
-    *(undefined4 *)(0x31b4 + param_1) = uVar10;
-    *(undefined4 *)(param_1 + 0x31b8) = uVar8;
+    *(undefined4 *)(0x31b4 + param_1) = a7;
+    *(undefined4 *)(param_1 + 0x31b8) = a5;
     *(undefined4 *)(param_1 + 0x31bc) = uVar7;
     *(undefined4 *)(param_1 + 0x31c0) = uVar6;
     *(undefined4 *)(param_1 + 0x31c4) = uVar5;
@@ -1381,11 +1381,11 @@ int _glBitmap_ListExec(int param_1,uint *param_2,double fparam_1,double fparam_2
   uint uVar10;
   int *piVar11;
   int iVar12;
-  float *pfVar13;
+  float *a1;
   double extraout_f1;
   
   iVar8 = *(int *)(param_1 + 0x4854);
-  pfVar13 = (float *)(iVar8 + -0x200);
+  a1 = (float *)(iVar8 + -0x200);
   iVar12 = param_2[6] + 0x1c;
   if (-1 < *(short *)(param_1 + 0x4a10)) {
     if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1412,7 +1412,7 @@ int _glBitmap_ListExec(int param_1,uint *param_2,double fparam_1,double fparam_2
       *(undefined4 *)(iVar8 + -0x200) = *(undefined4 *)(param_1 + 0x2e0);
       *(undefined4 *)(iVar8 + -0x1fc) = *(undefined4 *)(param_1 + 0x2e4);
       *(undefined4 *)(iVar8 + -0x1f8) = *(undefined4 *)(param_1 + 0x2e8);
-      _gleFeedbackBitmap(param_1,pfVar13);
+      _gleFeedbackBitmap(param_1,a1);
     }
     goto LAB_000578e8;
   }
@@ -1508,13 +1508,13 @@ LAB_0005782c:
       } while (iVar9 != 0);
     }
   }
-  *pfVar13 = *(float *)(param_1 + 0x4a44) * *(float *)(param_1 + 0x2e0) +
-             *(float *)(param_1 + 0x4a48);
+  *a1 = *(float *)(param_1 + 0x4a44) * *(float *)(param_1 + 0x2e0) + *(float *)(param_1 + 0x4a48);
   *(float *)(iVar8 + -0x1fc) =
        *(float *)(param_1 + 0x4a4c) * *(float *)(param_1 + 0x2e4) + *(float *)(param_1 + 0x4a50);
   *(float *)(iVar8 + -0x1f8) = *(float *)(param_1 + 0x4a54) * *(float *)(param_1 + 0x2e8);
-  (**(int ( **)(int,int,int,int,double,double))(param_1 + 0x46ac))
-            (*(undefined4 *)(param_1 + 0x4688), pfVar13, *param_2, param_2[1], (double)GH_U2F((unsigned int)(param_2[2])), (double)GH_U2F((unsigned int)(param_2[3])));
+  (**(code **)(param_1 + 0x46ac))
+            (*(undefined4 *)(param_1 + 0x4688),a1,*param_2,param_2[1],in_r7,in_r8,param_2 + 7,1,
+             (double)GH_U2F((unsigned int)(param_2[2])),(double)GH_U2F((unsigned int)(param_2[3])));
 LAB_000578e8:
   *(float *)(param_1 + 0x2e0) = *(float *)(param_1 + 0x2e0) + GH_U2F((unsigned int)(param_2[4]));
   *(float *)(param_1 + 0x2e4) = *(float *)(param_1 + 0x2e4) + GH_U2F((unsigned int)(param_2[5]));

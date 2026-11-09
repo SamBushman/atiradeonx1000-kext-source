@@ -5193,7 +5193,7 @@ LAB_000f27ac:
 int _gleFlushAtomicFunc(param_1)
   int param_1;
 {
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   *(undefined4 *)(param_1 + 0x4858) = *(undefined4 *)(param_1 + 0x4854);
   _glePopMaterials(param_1);
   return;
@@ -5272,7 +5272,7 @@ int _gleFlushLineLoopTCLFunc(param_1)
   int iVar4;
   uint uVar5;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   iVar3 = (int)*(short *)(param_1 + 0x487c);
   iVar4 = *(int *)(param_1 + 0x4854);
   if (*(char *)(param_1 + 0x4a18) == '\0') {
@@ -5389,7 +5389,7 @@ int _gleFlushLineStripTCLFunc(param_1)
   int iVar4;
   uint uVar5;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   iVar3 = (int)*(short *)(param_1 + 0x487c);
   iVar1 = 0;
   iVar2 = *(int *)(param_1 + 0x4858);
@@ -5500,7 +5500,7 @@ int _gleFlushTriQuadStripTCLFunc(param_1)
   int iVar5;
   uint uVar6;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   sVar1 = *(short *)(param_1 + 0x487c);
   iVar3 = 0;
   iVar4 = *(int *)(param_1 + 0x4858);
@@ -5611,7 +5611,7 @@ int _gleFlushTriangleFanTCLFunc(param_1)
   int iVar4;
   uint uVar5;
   
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   iVar3 = (int)*(short *)(param_1 + 0x487c);
   iVar1 = 0;
   iVar4 = *(int *)(param_1 + 0x4858);

@@ -36,7 +36,7 @@ int _gleSetNormalFunc(param_1, param_2, param_3)
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildNormalTransformFunc)();
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildNormalTransformFunc)(param_1,param_2,param_3);
   *(code **)(param_1 + 0x5068) = UNRECOVERED_JUMPTABLE;
                     
                     
@@ -515,7 +515,7 @@ int _gleSetProjectionFuncW1(param_1, param_2, param_3)
 {
   code *pcVar1;
   
-  pcVar1 = (code *)(*_gleBuildProjectionTransformFunc)(param_1,1);
+  pcVar1 = (code *)(*_gleBuildProjectionTransformFunc)(param_1,1,param_3);
   *(code **)(param_1 + 0x5060) = pcVar1;
   (*pcVar1)(param_1,param_2,param_3);
   return;
@@ -529,7 +529,7 @@ int _gleSetProjectionFuncZ0W1(param_1, param_2, param_3)
 {
   code *pcVar1;
   
-  pcVar1 = (code *)(*_gleBuildProjectionTransformFunc)(param_1,3);
+  pcVar1 = (code *)(*_gleBuildProjectionTransformFunc)(param_1,3,param_3);
   *(code **)(param_1 + 0x5060) = pcVar1;
   (*pcVar1)(param_1,param_2,param_3);
   return;
@@ -1990,29 +1990,33 @@ int _gleSwitchToRenderer(param_1, param_2)
   uint uVar2;
   int iVar3;
   undefined *puVar4;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   uint uVar5;
   uint uVar6;
-  undefined4 *puVar7;
+  undefined4 *a2;
   
   iVar3 = param_2 * 0x2e0 + param_1;
   uVar1 = *(undefined4 *)(iVar3 + 0x85ac);
   *(int *)(param_1 + 0x468c) = iVar3 + 0x85b0;
   *(undefined4 *)(param_1 + 0x4688) = uVar1;
-  puVar7 = (undefined4 *)(param_1 + 0x310);
+  a2 = (undefined4 *)(param_1 + 0x310);
   _memcpy(param_1 + 0x4754,*(int *)(iVar3 + 0x8884) + 0x114,0xf4);
   (**(code **)(param_1 + 0x4784))
             (*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,param_1 + 0x471c);
+  uVar5 = *(uint *)(param_1 + 0x31c) | 0x7ffffff;
   *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x3ffffff;
   *(uint *)(param_1 + 0x318) = *(uint *)(param_1 + 0x318) | 0xfffffffd;
-  *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x7ffffff;
+  *(uint *)(param_1 + 0x31c) = uVar5;
   *(undefined4 *)(param_1 + 800) = 0xffffffff;
   *(undefined4 *)(param_1 + 0x310) = 0xffffffff;
-  uVar5 = (**(code **)(param_1 + 0x4788))(*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,puVar7)
-  ;
+  uVar5 = (**(code **)(param_1 + 0x4788))
+                    (*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,a2,in_r6,in_r7,in_r8,uVar5);
   iVar3 = 0x13;
   do {
-    *puVar7 = 0;
-    puVar7 = puVar7 + 1;
+    *a2 = 0;
+    a2 = a2 + 1;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
   uVar2 = (uVar5 ^ 8) >> 3 & 1;
@@ -2544,11 +2548,13 @@ int _gleUpdateDispatchCodeChange(param_1, param_2)
   uint param_2;
 {
   byte bVar1;
+  undefined *a6;
   undefined *puVar2;
-  undefined *puVar3;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
+  uint uVar3;
+  int iVar4;
+  undefined4 a3;
+  undefined4 in_r7;
+  uint uVar5;
   double fparam_1;
   double fparam_1_00;
   double in_f2;
@@ -2571,22 +2577,23 @@ int _gleUpdateDispatchCodeChange(param_1, param_2)
   
   if ((param_2 & 4) != (uint)*(byte *)(param_1 + 0x7581)) {
     *(char *)(param_1 + 0x7581) = (char)(param_2 & 4);
-    uVar4 = (uint)*(byte *)(param_1 + 0x7581);
-    if (uVar4 == 0) {
+    uVar3 = (uint)*(byte *)(param_1 + 0x7581);
+    if (uVar3 == 0) {
       bVar1 = *(byte *)(param_1 + 0x85a5);
-      uVar6 = (uint)bVar1;
-      if (uVar6 != 0xff) {
-        local_40 = uVar4;
-        local_3c = uVar4;
-        local_38 = uVar4;
-        local_34 = uVar4;
-        local_30 = uVar4;
+      uVar5 = (uint)bVar1;
+      if (uVar5 != 0xff) {
+        local_40 = uVar3;
+        local_3c = uVar3;
+        local_38 = uVar3;
+        local_34 = uVar3;
+        local_30 = uVar3;
         ((int (*)())_gleSwitchRenderersReadBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a6),&local_40);
-        iVar5 = uVar6 * 0x2e0 + param_1;
-        uVar4 = (**(code **)(*(int *)(iVar5 + 0x8884) + 0x138))
-                          (*(undefined4 *)(iVar5 + 0x85ac),*(undefined4 *)(param_1 + 0x484c),
-                           *(undefined4 *)(param_1 + 0x4848),0);
-        if ((uVar4 < 5) && (uVar6 != *(byte *)(param_1 + 0x85a8))) {
+        a3 = 0;
+        iVar4 = uVar5 * 0x2e0 + param_1;
+        uVar3 = (**(code **)(*(int *)(iVar4 + 0x8884) + 0x138))
+                          (*(undefined4 *)(iVar4 + 0x85ac),*(undefined4 *)(param_1 + 0x484c),
+                           *(undefined4 *)(param_1 + 0x4848));
+        if ((uVar3 < 5) && (uVar5 != *(byte *)(param_1 + 0x85a8))) {
           _gleSynchronizePluginTextures(param_1);
           ((int (*)())_gleSynchronizePluginBuffers)(param_1);
           *(byte *)(param_1 + 0x85a8) = bVar1;
@@ -2596,18 +2603,20 @@ int _gleUpdateDispatchCodeChange(param_1, param_2)
           _gleUpdatePolyMode(param_1);
           ((void (*)())_gleUpdateViewScissorData)(param_1,fparam_1_00,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8);
           _gleUpdateTextureTransform(param_1);
-          puVar3 = PTR__gleSetEyeInterpFunc_0011203c;
-          puVar2 = PTR__gleSetClipInterpFunc_00112038;
+          puVar2 = PTR__gleSetEyeInterpFunc_0011203c;
+          a6 = PTR__gleSetClipInterpFunc_00112038;
+          uVar3 = *(uint *)(param_1 + 0x31c) | 0x7ffffff;
           *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x3ffffff;
-          *(undefined **)(param_1 + 0x49c8) = puVar3;
-          *(undefined **)(param_1 + 0x49cc) = puVar2;
+          *(undefined **)(param_1 + 0x49c8) = puVar2;
+          *(undefined **)(param_1 + 0x49cc) = a6;
           *(uint *)(param_1 + 0x318) = *(uint *)(param_1 + 0x318) | 0xfffffffd;
-          *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x7ffffff;
+          *(uint *)(param_1 + 0x31c) = uVar3;
           *(undefined4 *)(param_1 + 800) = 0xffffffff;
           *(undefined4 *)(param_1 + 0x310) = 0xffffffff;
-          uVar4 = (**(code **)(param_1 + 0x4788))
-                            (*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,param_1 + 0x310);
-          if ((uVar4 & 8) == 0) {
+          uVar3 = (**(code **)(param_1 + 0x4788))
+                            (*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,param_1 + 0x310,a3,
+                             in_r7,0xffffffff,a6,uVar3);
+          if ((uVar3 & 8) == 0) {
             ((int (*)())_gleSwitchRenderersWriteBuffers)(param_1,(uint)*(byte *)(param_1 + 0x85a5),&local_40);
           }
           param_2 = 0;
@@ -2628,9 +2637,9 @@ int _gleUpdateDispatchCodeChange(param_1, param_2)
     *(undefined4 *)(param_1 + 0x4890) = 0;
     *(undefined4 *)(param_1 + 0x4894) = 0;
   }
-  uVar4 = (param_2 ^ 8) >> 3 & 1;
-  if (uVar4 != *(byte *)(param_1 + 0x759d)) {
-    *(char *)(param_1 + 0x759d) = (char)uVar4;
+  uVar3 = (param_2 ^ 8) >> 3 & 1;
+  if (uVar3 != *(byte *)(param_1 + 0x759d)) {
+    *(char *)(param_1 + 0x759d) = (char)uVar3;
     ((int (*)())_gleUpdateFramebufferOperationFuncs)(param_1);
   }
   return;
@@ -3540,45 +3549,50 @@ int _gleDrawPixelsFast(param_1, param_2, param_3, param_4, param_5, param_6)
   float fVar7;
   char cVar8;
   float fVar9;
-  double dVar10;
-  double dVar11;
-  uint uVar12;
-  int iVar13;
+  int iVar10;
+  int iVar11;
+  double dVar12;
+  double dVar13;
   int *piVar14;
-  int iVar15;
-  int *piVar16;
-  int iVar17;
-  int iVar18;
-  undefined4 uVar19;
+  uint uVar15;
+  int iVar16;
+  int *piVar17;
+  int *piVar18;
+  int iVar19;
+  undefined4 a1;
+  undefined4 a1_00;
+  undefined4 a1_01;
+  undefined4 a1_02;
   undefined4 uVar20;
-  undefined4 uVar21;
+  int iVar21;
   int iVar22;
   undefined2 uVar24;
   undefined4 *puVar23;
-  uint uVar25;
+  int iVar25;
   uint uVar26;
-  uint *puVar27;
-  int iVar28;
-  uint uVar29;
-  uint uVar30;
-  int iVar31;
-  double dVar32;
+  int iVar27;
+  uint uVar28;
+  uint *puVar29;
+  int iVar30;
+  uint uVar31;
+  uint uVar32;
+  double dVar33;
   double fparam_1;
   double extraout_f1;
   double extraout_f1_00;
   double extraout_f1_01;
-  double dVar33;
+  double dVar34;
   double in_f5;
   double in_f6;
   double in_f7;
   double in_f8;
-  double dVar34;
   double dVar35;
+  double dVar36;
   double fparam_3;
   double fparam_1_00;
-  double dVar36;
-  double fparam_3_00;
   double dVar37;
+  double fparam_3_00;
+  double f2;
   double fparam_4;
   double fparam_3_01;
   double dVar38;
@@ -3619,16 +3633,16 @@ int _gleDrawPixelsFast(param_1, param_2, param_3, param_4, param_5, param_6)
   dVar39 = (double)local_234;
   fVar9 = *(float *)(param_1 + 0x2e4);
   fparam_1_00 = (double)fVar9;
-  dVar37 = (double)*(float *)(param_1 + 0x2e8);
-  dVar36 = fparam_3_01;
+  f2 = (double)*(float *)(param_1 + 0x2e8);
+  dVar37 = fparam_3_01;
   if (fparam_3_01 < (double)FLOAT_00108e50) {
-    dVar36 = -fparam_3_01;
+    dVar37 = -fparam_3_01;
   }
   fVar2 = FLOAT_00108e54;
-  dVar10 = fparam_3_00;
+  dVar12 = fparam_3_00;
   if (fparam_3_00 < (double)FLOAT_00108e50) {
     fVar2 = FLOAT_00108e58;
-    dVar10 = -fparam_3_00;
+    dVar12 = -fparam_3_00;
   }
   fparam_3 = (double)fVar2;
   fVar2 = FLOAT_00108e54;
@@ -3650,67 +3664,73 @@ int _gleDrawPixelsFast(param_1, param_2, param_3, param_4, param_5, param_6)
        (*(char *)(param_1 + 0x466c) == '\0')))))) {
     return 0;
   }
-  uVar29 = 0;
-  uVar12 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xb4);
-  if (uVar12 != 0) {
-    piVar14 = (int *)(param_1 + 0x3534);
+  uVar31 = 0;
+  uVar15 = (uint)*(ushort *)(*(int *)(param_1 + 0x468c) + 0xb4);
+  if (uVar15 != 0) {
+    piVar17 = (int *)(param_1 + 0x3534);
     do {
-      iVar13 = *piVar14;
-      piVar14 = piVar14 + 0x1f;
-      if (iVar13 != 0) {
+      iVar16 = *piVar17;
+      piVar17 = piVar17 + 0x1f;
+      if (iVar16 != 0) {
         return 0;
       }
-      uVar29 = uVar29 + 1;
-    } while (uVar29 < uVar12);
+      uVar31 = uVar31 + 1;
+    } while (uVar31 < uVar15);
   }
   if (param_4 - 0x1901U < 2) {
     return 0;
   }
+  iVar16 = param_4;
+  iVar21 = param_5;
+  iVar22 = param_6;
   local_e8 = param_6;
-  iVar13 = ((int (*)())_gleDrawPixelsFastPickTextureType)(param_5);
-  uVar29 = param_2;
-  uVar12 = param_3;
+  iVar19 = ((int (*)())_gleDrawPixelsFastPickTextureType)(param_5);
+  uVar31 = param_2;
+  uVar15 = param_3;
   if (((*(uint *)(param_1 + 0x3410) & 0x1ff) == 0) &&
-     (iVar15 = param_1 + 0x31cc, iVar22 = param_4, (*(uint *)(param_1 + 0x3414) & 0xff0000) == 0))
+     (iVar25 = param_1 + 0x31cc, iVar27 = param_4, (*(uint *)(param_1 + 0x3414) & 0xff0000) == 0))
   goto LAB_000ca704;
   if (((*(uint *)(param_1 + 0x3410) & 2) == 0) || (*(short *)(param_1 + 0x3308) != -0x7fea)) {
     if (((*(uint *)(param_1 + 0x3410) & 4) != 0) && (*(short *)(param_1 + 0x3348) == -0x7fea)) {
-      iVar22 = *(int *)(param_1 + 0x3354);
-      iVar15 = *(int *)(param_1 + 0x3350);
+      iVar21 = *(int *)(param_1 + 0x3354);
+      iVar16 = *(int *)(param_1 + 0x3350);
       goto LAB_000ca634;
     }
   }
   else {
-    iVar22 = *(int *)(param_1 + 0x3314);
-    iVar15 = *(int *)(param_1 + 0x3310);
+    iVar21 = *(int *)(param_1 + 0x3314);
+    iVar16 = *(int *)(param_1 + 0x3310);
 LAB_000ca634:
-    uVar12 = (param_3 - iVar22) + 1;
-    uVar29 = (param_2 - iVar15) + 1;
+    uVar15 = (param_3 - iVar21) + 1;
+    uVar31 = (param_2 - iVar16) + 1;
   }
-  iVar15 = _glePixelBytes(0x80e1,iVar13);
-  local_ec = _gleVecAlloc(iVar15 * uVar29 * uVar12);
-  iVar17 = _glePixelBytes(0x80e1,iVar13);
-  iVar22 = 0x80e1;
-  iVar15 = 0;
-  ((void (*)())_CopySourceSubImageToTexture)(param_1,param_2,param_3,param_4,param_5,param_6,param_2,param_3,uVar29 * iVar17,0x80e1,
-             iVar13,local_ec,0,0,in_stack_fffffd90,in_stack_fffffd94,in_stack_fffffd98,
+  iVar16 = _glePixelBytes(0x80e1,iVar19);
+  local_ec = _gleVecAlloc(iVar16 * uVar31 * uVar15);
+  iVar16 = _glePixelBytes(0x80e1,iVar19);
+  iVar27 = 0x80e1;
+  iVar25 = 0;
+  ((void (*)())_CopySourceSubImageToTexture)(param_1,param_2,param_3,param_4,param_5,param_6,param_2,param_3,uVar31 * iVar16,0x80e1,
+             iVar19,local_ec,0,0,in_stack_fffffd90,in_stack_fffffd94,in_stack_fffffd98,
              in_stack_fffffd9c,param_1 + 0x31cc,1,(double)FLOAT_00108e50,(double)FLOAT_00108e50,
              fparam_3,fparam_4);
   local_e8 = local_ec;
-  param_5 = iVar13;
+  iVar16 = param_4;
+  iVar21 = param_5;
+  iVar22 = param_6;
+  param_5 = iVar19;
 LAB_000ca704:
-  puVar27 = (uint *)(param_1 + 0x7488);
+  puVar29 = (uint *)(param_1 + 0x7488);
   if (*(int *)(param_1 + 0x74a0) == 0) {
-    ((int (*)())_gleInitDrawPixelsShareObject)(param_1,puVar27);
+    ((int (*)())_gleInitDrawPixelsShareObject)(param_1,puVar29);
   }
-  uVar30 = 0;
-  *(int *)(param_1 + 0x7498) = iVar13;
+  uVar32 = 0;
+  *(int *)(param_1 + 0x7498) = iVar19;
   if (*(int *)(param_1 + 0x7490) != 0) {
     do {
-      iVar17 = uVar30 * 4;
-      uVar30 = uVar30 + 1;
-      *(short *)(*(int *)(iVar17 + *(int *)(param_1 + 0x74a0)) + 0xd6) = (short)iVar13;
-    } while (uVar30 < *(uint *)(param_1 + 0x7490));
+      iVar10 = uVar32 * 4;
+      uVar32 = uVar32 + 1;
+      *(short *)(*(int *)(iVar10 + *(int *)(param_1 + 0x74a0)) + 0xd6) = (short)iVar19;
+    } while (uVar32 < *(uint *)(param_1 + 0x7490));
   }
   local_f0 = ((int (*)())_gleDrawPixelsSaveState)(param_1,auStack_210);
   local_224 = 0;
@@ -3719,35 +3739,35 @@ LAB_000ca704:
     uStack_11c = ((uint (*)())_pixelBoundaryTopRight)(dVar39);
     uStack_11c = uStack_11c ^ 0x80000000;
     local_120 = 0x43300000;
-    uVar30 = uStack_11c;
+    uVar32 = uStack_11c;
   }
   else {
     uStack_114 = ((uint (*)())_pixelBoundaryBottomLeft)(dVar39);
     uStack_114 = uStack_114 ^ 0x80000000;
     local_118 = 0x43300000;
-    uVar30 = uStack_114;
+    uVar32 = uStack_114;
   }
   dVar39 = DOUBLE_00108d58;
-  uVar25 = 0;
-  if (0 < (int)uVar29) {
+  uVar26 = 0;
+  if (0 < (int)uVar31) {
     local_dc = param_1 + 0x10000;
     local_d8 = (int *)(param_1 + 0x310);
-    local_244 = (float)((double)CONCAT44(0x43300000,uVar30) - DOUBLE_00108d58);
+    local_244 = (float)((double)CONCAT44(0x43300000,uVar32) - DOUBLE_00108d58);
     do {
-      uStack_11c = uVar29 ^ 0x80000000;
+      uStack_11c = uVar31 ^ 0x80000000;
       local_118 = 0x43300000;
       uStack_114 = local_224 ^ 0x80000000;
       local_120 = 0x43300000;
-      dVar34 = (double)(float)((double)CONCAT44(0x43300000,uStack_114) - dVar39);
-      fVar2 = (float)(dVar34 + dVar38);
+      dVar35 = (double)(float)((double)CONCAT44(0x43300000,uStack_114) - dVar39);
+      fVar2 = (float)(dVar35 + dVar38);
       if ((float)((double)CONCAT44(0x43300000,uStack_11c) - dVar39) < fVar2) {
         local_110 = 0x43300000;
-        uStack_10c = uVar29 - local_224 ^ 0x80000000;
+        uStack_10c = uVar31 - local_224 ^ 0x80000000;
         dVar38 = (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar39);
-        fVar2 = (float)(dVar34 + dVar38);
+        fVar2 = (float)(dVar35 + dVar38);
       }
-      dVar34 = (double)FLOAT_00108f18;
-      fVar4 = (float)((double)(float)(dVar38 * dVar10) * fparam_3 + (double)local_234);
+      dVar35 = (double)FLOAT_00108f18;
+      fVar4 = (float)((double)(float)(dVar38 * dVar12) * fparam_3 + (double)local_234);
       uStack_10c = ((int (*)())_pixelCenters)((double)local_234,(double)fVar4,fparam_3_00);
       local_110 = 0x43300000;
       uStack_10c = uStack_10c ^ 0x80000000;
@@ -3756,171 +3776,174 @@ LAB_000ca704:
       fVar5 = (float)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar39) * fparam_3 +
                      (double)local_244);
       if (fparam_4 == (double)FLOAT_00108e54) {
-        uVar30 = ((uint (*)())_pixelBoundaryTopRight)(fparam_1_00);
-        uVar30 = uVar30 ^ 0x80000000;
+        uVar32 = ((uint (*)())_pixelBoundaryTopRight)(fparam_1_00);
+        uVar32 = uVar32 ^ 0x80000000;
       }
       else {
         uStack_114 = ((uint (*)())_pixelBoundaryBottomLeft)(fparam_1_00);
         local_118 = 0x43300000;
         uStack_114 = uStack_114 ^ 0x80000000;
-        uVar30 = uStack_114;
+        uVar32 = uStack_114;
       }
-      dVar11 = DOUBLE_00108d58;
-      uVar26 = 0;
-      if (0 < (int)uVar12) {
+      dVar13 = DOUBLE_00108d58;
+      uVar28 = 0;
+      if (0 < (int)uVar15) {
         local_e4 = local_dc;
         local_e0 = local_d8;
-        local_24c = (float)((double)CONCAT44(0x43300000,uVar30) - dVar39);
+        local_24c = (float)((double)CONCAT44(0x43300000,uVar32) - dVar39);
         local_23c = fVar9;
         do {
-          uStack_114 = uVar12 ^ 0x80000000;
+          uStack_114 = uVar15 ^ 0x80000000;
           local_110 = 0x43300000;
           uStack_10c = local_22c ^ 0x80000000;
           local_118 = 0x43300000;
-          dVar35 = (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar11);
-          fVar3 = (float)(dVar35 + dVar34);
-          if ((float)((double)CONCAT44(0x43300000,uStack_114) - dVar11) < fVar3) {
+          dVar36 = (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13);
+          fVar3 = (float)(dVar36 + dVar35);
+          if ((float)((double)CONCAT44(0x43300000,uStack_114) - dVar13) < fVar3) {
             local_120 = 0x43300000;
-            uStack_11c = uVar12 - local_22c ^ 0x80000000;
-            dVar34 = (double)(float)((double)CONCAT44(0x43300000,uStack_11c) - dVar11);
-            fVar3 = (float)(dVar35 + dVar34);
+            uStack_11c = uVar15 - local_22c ^ 0x80000000;
+            dVar35 = (double)(float)((double)CONCAT44(0x43300000,uStack_11c) - dVar13);
+            fVar3 = (float)(dVar36 + dVar35);
           }
-          dVar35 = (double)(float)(dVar34 * dVar36);
-          fVar6 = (float)(dVar35 * fparam_4 + (double)local_23c);
+          dVar36 = (double)(float)(dVar35 * dVar37);
+          fVar6 = (float)(dVar36 * fparam_4 + (double)local_23c);
           uStack_10c = ((int (*)())_pixelCenters)((double)local_23c,(double)fVar6,fparam_3_01);
-          iVar17 = local_e4;
+          iVar10 = local_e4;
           local_110 = 0x43300000;
           uStack_10c = uStack_10c ^ 0x80000000;
           local_108 = (longlong)(int)fVar3;
-          fVar7 = (float)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar11) *
+          fVar7 = (float)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13) *
                           fparam_4 + (double)local_24c);
           if ((double)FLOAT_00108e54 <= dVar38) {
-            dVar33 = dVar35;
-            if (dVar34 < dVar35) {
-              dVar33 = dVar34;
+            dVar34 = dVar36;
+            if (dVar35 < dVar36) {
+              dVar34 = dVar35;
             }
-            if ((double)FLOAT_00108e54 <= dVar33) {
-              uVar30 = 0;
+            if ((double)FLOAT_00108e54 <= dVar34) {
+              uVar32 = 0;
               if (*(char *)(local_e4 + -0x7a5c) != '\0') {
-                iVar28 = param_1 + 0x10000;
+                iVar30 = param_1 + 0x10000;
                 do {
-                  iVar18 = uVar30 * 4;
-                  piVar14 = (int *)(iVar28 + -0x777c);
-                  uVar30 = uVar30 + 1;
-                  puVar23 = (undefined4 *)(iVar28 + -0x7a54);
-                  iVar28 = iVar28 + 0x2e0;
-                  (**(code **)(*piVar14 + 0x1c4))
+                  iVar11 = uVar32 * 4;
+                  piVar17 = (int *)(iVar30 + -0x777c);
+                  uVar32 = uVar32 + 1;
+                  puVar23 = (undefined4 *)(iVar30 + -0x7a54);
+                  iVar30 = iVar30 + 0x2e0;
+                  (**(code **)(*piVar17 + 0x1c4))
                             (*puVar23,1,
                              *(undefined4 *)
-                              (*(int *)(*puVar27 * 4 + *(int *)(param_1 + 0x74a0)) + iVar18));
-                } while (uVar30 < *(byte *)(iVar17 + -0x7a5c));
+                              (*(int *)(*puVar29 * 4 + *(int *)(param_1 + 0x74a0)) + iVar11),iVar16,
+                             iVar21,iVar22,*(int *)(param_1 + 0x74a0));
+                } while (uVar32 < *(byte *)(iVar10 + -0x7a5c));
               }
               local_110 = 0x43300000;
               local_108 = (longlong)(int)local_23c;
               uStack_10c = (int)local_23c ^ 0x80000000;
               fparam_2 = (double)(local_23c -
-                                 (float)((double)CONCAT44(0x43300000,uStack_10c) - dVar11));
-              uStack_10c = _glePixelBytes(0x80e1,iVar13);
+                                 (float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13));
+              uStack_10c = _glePixelBytes(0x80e1,iVar19);
               uStack_10c = uStack_10c ^ 0x80000000;
               local_110 = 0x43300000;
-              dVar33 = dVar38 * (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar11);
-              dVar32 = (double)(float)dVar33;
-              if (DOUBLE_00108d80 <= dVar32) {
-                uVar30 = (uint)(int)(dVar32 - DOUBLE_00108d80);
-                local_100 = (longlong)(int)uVar30;
-                uVar30 = uVar30 ^ 0x80000000;
+              dVar34 = dVar38 * (double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar13);
+              dVar33 = (double)(float)dVar34;
+              if (DOUBLE_00108d80 <= dVar33) {
+                uVar32 = (uint)(int)(dVar33 - DOUBLE_00108d80);
+                local_100 = (longlong)(int)uVar32;
+                uVar32 = uVar32 ^ 0x80000000;
               }
               else {
-                uVar30 = (uint)(int)dVar33;
-                local_108 = (longlong)(int)uVar30;
+                uVar32 = (uint)(int)dVar34;
+                local_108 = (longlong)(int)uVar32;
               }
-              iVar28 = (int)dVar34;
-              local_f8 = (longlong)iVar28;
-              dVar33 = fparam_3;
-              dVar32 = fparam_4;
-              ((void (*)())_CopySourceSubImageToTexture)(param_1,uVar29,uVar12,iVar22,param_5,local_e8,(int)dVar38,iVar28,uVar30,
-                         0x80e1,iVar13,
+              iVar16 = (int)dVar35;
+              local_f8 = (longlong)iVar16;
+              dVar34 = fparam_3;
+              dVar33 = fparam_4;
+              ((void (*)())_CopySourceSubImageToTexture)(param_1,uVar31,uVar15,iVar27,param_5,local_e8,(int)dVar38,iVar16,uVar32,
+                         0x80e1,iVar19,
                          *(int *)(0x74a4 + param_1) +
-                         *puVar27 * *(int *)(param_1 + 0x748c),local_224,local_22c,in_stack_fffffd90
-                         ,in_stack_fffffd94,in_stack_fffffd98,in_stack_fffffd9c,iVar15,0,
+                         *puVar29 * *(int *)(param_1 + 0x748c),local_224,local_22c,in_stack_fffffd90
+                         ,in_stack_fffffd94,in_stack_fffffd98,in_stack_fffffd9c,iVar25,0,
                          (double)(local_234 -
                                  (float)((double)CONCAT44(0x43300000,(int)local_234 ^ 0x80000000) -
-                                        dVar11)),fparam_2,fparam_3,fparam_4);
-              iVar18 = *(int *)(*puVar27 * 4 + *(int *)(param_1 + 0x74a0));
-              iVar31 = iVar18 + 0xc4;
-              _gleDeletePluginTextureLevel(param_1,iVar18,iVar31,0,0);
-              *(short *)(iVar18 + 0xd0) = (short)(int)dVar38;
-              if (dVar35 <= dVar34) {
-                iVar28 = (int)(dVar34 * dVar36);
-                (*(unsigned short *)((unsigned char *)&(local_100) + 6)) = (undefined2)iVar28;
+                                        dVar13)),fparam_2,fparam_3,fparam_4);
+              iVar21 = *(int *)(*puVar29 * 4 + *(int *)(param_1 + 0x74a0));
+              piVar17 = (int *)(iVar21 + 0xc4);
+              _gleDeletePluginTextureLevel(param_1,iVar21,piVar17,0,0);
+              *(short *)(iVar21 + 0xd0) = (short)(int)dVar38;
+              if (dVar36 <= dVar35) {
+                iVar16 = (int)(dVar35 * dVar37);
+                (*(unsigned short *)((unsigned char *)&(local_100) + 6)) = (undefined2)iVar16;
                 uVar24 = (*(unsigned short *)((unsigned char *)&(local_100) + 6));
-                local_100 = (longlong)iVar28;
+                local_100 = (longlong)iVar16;
               }
               else {
-                uVar24 = (short)iVar28;
+                uVar24 = (short)iVar16;
               }
-              *(undefined2 *)(iVar18 + 0xd2) = uVar24;
-              *(undefined2 *)(iVar18 + 200) = *(undefined2 *)(iVar18 + 0xd0);
-              *(undefined2 *)(iVar18 + 0xca) = *(undefined2 *)(iVar18 + 0xd2);
-              uVar21 = 0x8058;
-              if (iVar13 != 0x8367) {
-                uVar21 = 0x8057;
+              *(undefined2 *)(iVar21 + 0xd2) = uVar24;
+              *(undefined2 *)(iVar21 + 200) = *(undefined2 *)(iVar21 + 0xd0);
+              *(undefined2 *)(iVar21 + 0xca) = *(undefined2 *)(iVar21 + 0xd2);
+              uVar20 = 0x8058;
+              if (iVar19 != 0x8367) {
+                uVar20 = 0x8057;
               }
-              uVar19 = 0;
-              uVar20 = 0;
+              iVar16 = 0;
+              iVar21 = 0;
               fparam_1 = (double)_gleCreatePluginTextureLevel
                                            (param_1,*(undefined4 *)
-                                                     (*puVar27 * 4 + *(int *)(param_1 + 0x74a0)),
-                                            iVar31,0,0,uVar21);
-              uVar30 = 0;
-              if (*(char *)(iVar17 + -0x7a5c) != '\0') {
+                                                     (*puVar29 * 4 + *(int *)(param_1 + 0x74a0)),
+                                            piVar17,0,0,uVar20);
+              uVar32 = 0;
+              if (*(char *)(iVar10 + -0x7a5c) != '\0') {
                 puVar23 = (undefined4 *)(param_1 + 0x86e8);
                 do {
-                  iVar28 = uVar30 * 4;
-                  uVar30 = uVar30 + 1;
+                  iVar22 = uVar32 * 4;
+                  uVar32 = uVar32 + 1;
                   *puVar23 = *(undefined4 *)
-                              (*(int *)(*puVar27 * 4 + *(int *)(param_1 + 0x74a0)) + iVar28);
+                              (*(int *)(*puVar29 * 4 + *(int *)(param_1 + 0x74a0)) + iVar22);
                   puVar23 = puVar23 + 0xb8;
-                } while (uVar30 < *(byte *)(iVar17 + -0x7a5c));
+                } while (uVar32 < *(byte *)(iVar10 + -0x7a5c));
               }
-              iVar28 = *(int *)(param_1 + 0x50ac);
+              iVar22 = *(int *)(param_1 + 0x50ac);
               *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 1;
-              if (iVar28 != 0 || (*(uint *)(param_1 + 0x505c) & *(uint *)(param_1 + 0x50b0)) != 0) {
+              if (iVar22 != 0 || (*(uint *)(param_1 + 0x505c) & *(uint *)(param_1 + 0x50b0)) != 0) {
                 _gleUpdateMatrixFunc(param_1);
                 fparam_1 = extraout_f1;
               }
               piVar14 = local_e0;
               if (*(char *)(param_1 + 0x4691) != '\0') {
-                iVar18 = *(int *)(param_1 + 0x744c);
+                iVar30 = *(int *)(param_1 + 0x744c);
                 cVar8 = *(char *)(*(int *)(param_1 + 0x468c) + 0x79);
-                if ((iVar18 != 0) && (*(int *)(iVar18 + 0xec) != 0)) {
-                  ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar18 + 0x10,iVar31,uVar19,uVar20,uVar21,iVar28,fparam_1,
-                             fparam_2,dVar33,dVar32,in_f5,in_f6,in_f7,in_f8);
+                if ((iVar30 != 0) && (*(int *)(iVar30 + 0xec) != 0)) {
+                  ((int (*)())_gleUpdateFramebufferCompleteness)(param_1,iVar30 + 0x10,piVar17,iVar16,iVar21,uVar20,iVar22,fparam_1,
+                             fparam_2,dVar34,dVar33,in_f5,in_f6,in_f7,in_f8);
                   *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
                   fparam_1 = fparam_1;
                 }
                 if ((*(char *)(param_1 + 0x4664) == '\0') && (*(int *)(param_1 + 0x5430) == 0)) {
 LAB_000cae0c:
-                  uVar30 = piVar14[3];
+                  uVar32 = piVar14[3];
                 }
                 else {
-                  iVar28 = 0;
-                  piVar16 = piVar14 + 5;
+                  iVar22 = 0;
+                  piVar18 = piVar14 + 5;
                   do {
-                    iVar18 = *piVar16;
-                    piVar16 = piVar16 + 1;
-                    if (iVar18 != 0) {
+                    iVar30 = *piVar18;
+                    piVar18 = piVar18 + 1;
+                    if (iVar30 != 0) {
                       piVar14[3] = piVar14[3] | 0x800000;
                       break;
                     }
-                    iVar28 = iVar28 + 1;
-                  } while (iVar28 < 9);
-                  uVar30 = piVar14[3];
-                  if ((uVar30 & 0x15555) != 0) {
+                    iVar22 = iVar22 + 1;
+                  } while (iVar22 < 9);
+                  uVar32 = piVar14[3];
+                  if ((uVar32 & 0x15555) != 0) {
                     if (*(char *)(param_1 + 0x2e54) != '\0') {
+                      piVar17 = (int *)0x0;
                       fparam_1 = (double)_gleUpdateLightRGBASums(param_1,param_1 + 0x2c20,0);
                     }
                     if (*(char *)(param_1 + 0x3094) != '\0') {
+                      piVar17 = (int *)((int)((unsigned char *)0x0) + 1);
                       fparam_1 = (double)_gleUpdateLightRGBASums(param_1,param_1 + 0x2e60,1);
                     }
                     goto LAB_000cae0c;
@@ -3928,31 +3951,31 @@ LAB_000cae0c:
                 }
                 bVar1 = cVar8 == '\0';
                 if (bVar1) {
-                  uVar30 = uVar30 & 0x17000000;
+                  uVar32 = uVar32 & 0x17000000;
                 }
                 else {
-                  uVar30 = uVar30 & 0x17ffffff;
+                  uVar32 = uVar32 & 0x17ffffff;
                 }
                 if (bVar1) {
-                  bVar1 = ((*piVar14 == 0 && piVar14[1] == 0) && uVar30 == 0) && piVar14[4] == 0;
+                  bVar1 = ((*piVar14 == 0 && piVar14[1] == 0) && uVar32 == 0) && piVar14[4] == 0;
                 }
                 else {
                   bVar1 = (((*piVar14 == 0 && piVar14[1] == 0) && (piVar14[2] & 0xfffffffdU) == 0)
-                          && uVar30 == 0) && piVar14[4] == 0;
+                          && uVar32 == 0) && piVar14[4] == 0;
                 }
                 if (!bVar1) {
-                  if (*(char *)(iVar17 + -0x7a58) == *(char *)(iVar17 + -0x7a5a)) {
-                    uVar30 = (**(code **)(param_1 + 0x4788))
+                  if (*(char *)(iVar10 + -0x7a58) == *(char *)(iVar10 + -0x7a5a)) {
+                    uVar32 = (**(code **)(param_1 + 0x4788))
                                        (*(undefined4 *)(param_1 + 0x4688),param_1 + 0x4698,piVar14);
-                    if ((((uVar30 & 3) != (uint)*(byte *)(param_1 + 0x7580)) ||
-                        ((uVar30 & 4) != (uint)*(byte *)(param_1 + 0x7581))) ||
+                    if ((((uVar32 & 3) != (uint)*(byte *)(param_1 + 0x7580)) ||
+                        ((uVar32 & 4) != (uint)*(byte *)(param_1 + 0x7581))) ||
                        (fparam_1 = extraout_f1_01,
-                       (uVar30 & 8) != (uint)(*(char *)(param_1 + 0x759d) == '\0'))) {
-                      if ((uVar30 & 4) == 0) {
-                        uVar30 = uVar30 & 0xfffffffe;
+                       (uVar32 & 8) != (uint)(*(char *)(param_1 + 0x759d) == '\0'))) {
+                      if ((uVar32 & 4) == 0) {
+                        uVar32 = uVar32 & 0xfffffffe;
                         piVar14[3] = piVar14[3] | 0x10000000;
                       }
-                      fparam_1 = (double)((int (*)())_gleUpdateDispatchCodeChange)(param_1,uVar30);
+                      fparam_1 = (double)((int (*)())_gleUpdateDispatchCodeChange)(param_1,uVar32);
                       if (*(char *)(param_1 + 0x759d) == '\0') {
                         if (*(int *)(param_1 + 0x7574) != 0) {
                           return 1;
@@ -3965,68 +3988,76 @@ LAB_000cae0c:
                   else {
                     fparam_1 = (double)((int (*)())_gleSwitchToNonRevertRenderer)(param_1);
                   }
-                  iVar17 = 0x13;
+                  iVar22 = 0x13;
+                  piVar17 = piVar14;
                   do {
-                    *piVar14 = 0;
-                    piVar14 = piVar14 + 1;
-                    iVar17 = iVar17 + -1;
-                  } while (iVar17 != 0);
+                    *piVar17 = 0;
+                    piVar17 = piVar17 + 1;
+                    iVar22 = iVar22 + -1;
+                  } while (iVar22 != 0);
                 }
               }
-              ((void (*)())_glBegin_Exec)(param_1,7,fparam_1,fparam_2,dVar33,dVar32,in_f5,in_f6,in_f7,in_f8);
+              ((void (*)())_glBegin_Exec)(param_1,7,fparam_1,fparam_2,dVar34,dVar33,in_f5,in_f6,in_f7,in_f8);
               *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
               *(float *)(param_1 + 300) = *(float *)(param_1 + 0x24);
               *(undefined4 *)(param_1 + 0x120) = 0;
               *(undefined4 *)(param_1 + 0x124) = 0;
-              (**(int ( **)(int,double,double,double,double))(param_1 + 0x4884))
-                        (param_1, (double)local_244, (double)local_24c, dVar37, (double)*(float *)(param_1 + 0x24));
+              (**(code **)(param_1 + 0x4884))
+                        (param_1,a1,piVar17,iVar16,iVar21,*(undefined4 *)(param_1 + 0x4858),
+                         (double)local_244,(double)local_24c,f2,(double)*(float *)(param_1 + 0x24));
               *(float *)(param_1 + 0x120) = (float)dVar38;
               *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
               *(undefined4 *)(param_1 + 0x124) = 0;
               *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-              (**(int ( **)(int,double,double,double))(param_1 + 0x4884))(param_1, (double)fVar5, (double)local_24c, dVar37);
+              (**(code **)(param_1 + 0x4884))
+                        (param_1,a1_00,piVar17,iVar16,iVar21,*(undefined4 *)(param_1 + 0x4858),
+                         (double)fVar5,(double)local_24c,f2);
               *(float *)(param_1 + 0x120) = (float)dVar38;
-              dVar33 = dVar35;
-              if (dVar34 < dVar35) {
-                dVar33 = dVar34;
+              dVar34 = dVar36;
+              if (dVar35 < dVar36) {
+                dVar34 = dVar35;
               }
-              *(float *)(param_1 + 0x124) = (float)dVar33;
+              *(float *)(param_1 + 0x124) = (float)dVar34;
               *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
               *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
-              (**(int ( **)(int,double,double,double))(param_1 + 0x4884))(param_1, (double)fVar5, (double)fVar7, dVar37);
+              (**(code **)(param_1 + 0x4884))
+                        (param_1,a1_01,piVar17,iVar16,iVar21,*(undefined4 *)(param_1 + 0x4858),
+                         (double)fVar5,(double)fVar7,f2);
               *(undefined4 *)(param_1 + 0x120) = 0;
-              if (dVar34 < dVar35) {
-                dVar35 = dVar34;
+              if (dVar35 < dVar36) {
+                dVar36 = dVar35;
               }
-              *(float *)(param_1 + 0x124) = (float)dVar35;
+              *(float *)(param_1 + 0x124) = (float)dVar36;
               *(undefined4 *)(param_1 + 0x128) = *(undefined4 *)(param_1 + 0x20);
               *(float *)(param_1 + 300) = *(float *)(param_1 + 0x24);
-              (**(int ( **)(int,double,double,double,double))(param_1 + 0x4884))
-                        (param_1, (double)local_244, (double)fVar7, dVar37, (double)*(float *)(param_1 + 0x24));
+              iVar22 = *(int *)(param_1 + 0x4858);
+              (**(code **)(param_1 + 0x4884))
+                        (param_1,a1_02,piVar17,iVar16,iVar21,iVar22,(double)local_244,(double)fVar7,
+                         f2,(double)*(float *)(param_1 + 0x24));
               _glEnd_Exec(param_1);
-              uVar30 = *puVar27;
-              *puVar27 = uVar30 + 1;
-              if (*(uint *)(param_1 + 0x7490) <= uVar30 + 1) {
-                *puVar27 = 0;
+              uVar32 = *puVar29;
+              *puVar29 = uVar32 + 1;
+              if (*(uint *)(param_1 + 0x7490) <= uVar32 + 1) {
+                *puVar29 = 0;
               }
             }
           }
-          uVar26 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uVar26 ^ 0x80000000) - dVar11)
-                         + dVar34);
-          local_f8 = (longlong)(int)uVar26;
+          uVar28 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uVar28 ^ 0x80000000) - dVar13)
+                         + dVar35);
+          local_f8 = (longlong)(int)uVar28;
           local_24c = fVar7;
           local_23c = fVar6;
           local_22c = (int)fVar3;
-        } while ((int)uVar26 < (int)uVar12);
+        } while ((int)uVar28 < (int)uVar15);
       }
-      uStack_10c = uVar25 ^ 0x80000000;
+      uStack_10c = uVar26 ^ 0x80000000;
       local_110 = 0x43300000;
-      uVar25 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar39) + dVar38);
-      local_f8 = (longlong)(int)uVar25;
+      uVar26 = (uint)(int)((double)(float)((double)CONCAT44(0x43300000,uStack_10c) - dVar39) + dVar38);
+      local_f8 = (longlong)(int)uVar26;
       local_244 = fVar5;
       local_234 = fVar4;
       local_224 = (int)fVar2;
-    } while ((int)uVar25 < (int)uVar29);
+    } while ((int)uVar26 < (int)uVar31);
   }
   ((int (*)())_gleDrawPixelsRestoreState)(param_1,auStack_210,local_f0);
   if (local_ec != 0) {

@@ -753,7 +753,7 @@ int _gleSetVertexEval1Func(param_1, param_2, param_3)
   undefined4 *puVar1;
   code *UNRECOVERED_JUMPTABLE;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(param_1,2);
+  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(param_1,2,param_3);
   UNRECOVERED_JUMPTABLE = (code *)*puVar1;
   *(code **)(param_1 + 0x4898) = UNRECOVERED_JUMPTABLE;
                     
@@ -771,7 +771,7 @@ int _gleSetVertexEval2Func(param_1, param_2, param_3)
   undefined4 *puVar1;
   code *UNRECOVERED_JUMPTABLE;
   
-  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(param_1,2);
+  puVar1 = (undefined4 *)(*_gleBuildVertexFunc)(param_1,2,param_3);
   UNRECOVERED_JUMPTABLE = (code *)*puVar1;
   *(code **)(param_1 + 0x489c) = UNRECOVERED_JUMPTABLE;
                     

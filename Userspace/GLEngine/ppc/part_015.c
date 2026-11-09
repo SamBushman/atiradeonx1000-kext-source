@@ -1261,10 +1261,10 @@ switchD_00066504_caseD_8d45:
     local_20 = (uint)*(ushort *)(iVar4 + 0xda);
     break;
   case 0x8d44:
+    iVar4 = (uint)*(byte *)(param_1 + 0x85a8) * 4 + iVar4;
     (**(code **)(param_1 + 0x479c))
-              (*(undefined4 *)(param_1 + 0x4688),
-               *(undefined4 *)((uint)*(byte *)(param_1 + 0x85a8) * 4 + iVar4 + 0x10),0,0,
-               ((unsigned char *)0x00001003U),&local_20);
+              (*(undefined4 *)(param_1 + 0x4688),*(undefined4 *)(iVar4 + 0x10),0,0,((unsigned char *)0x00001003U),
+               &local_20,iVar4);
     if (local_20 == 0) {
       local_20 = 0x1908;
     }
@@ -1287,10 +1287,10 @@ LAB_000665d0:
                ,iVar3,param_4);
     return;
   case 0x8d55:
+    iVar4 = (uint)*(byte *)(param_1 + 0x85a8) * 4 + iVar4;
     (**(code **)(param_1 + 0x479c))
-              (*(undefined4 *)(param_1 + 0x4688),
-               *(undefined4 *)((uint)*(byte *)(param_1 + 0x85a8) * 4 + iVar4 + 0x10),0,0,
-               ((unsigned char *)0x00001003U),local_1c);
+              (*(undefined4 *)(param_1 + 0x4688),*(undefined4 *)(iVar4 + 0x10),0,0,((unsigned char *)0x00001003U),
+               local_1c,iVar4);
     if (local_1c[0] == 0x8d47) {
       local_20 = 4;
     }

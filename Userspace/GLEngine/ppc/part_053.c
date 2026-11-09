@@ -1845,6 +1845,8 @@ int _gleCheckCopyColorSubTableArgs(param_1, param_2, param_3, param_4)
 double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,float *param_4,double fparam_1)
 {
   float fVar1;
+  undefined4 in_r7;
+  undefined4 in_r8;
   double dVar2;
   double dVar3;
   double dVar4;
@@ -1854,7 +1856,7 @@ double _gleSphereGenST(undefined4 param_1,undefined4 param_2,float *param_3,floa
   float local_2c;
   float local_28;
   
-  (**(code **)PTR__gleVectorNormalize_00112064)(param_1,param_2,&local_30);
+  (**(code **)PTR__gleVectorNormalize_00112064)(param_1,param_2,&local_30,param_4,in_r7,in_r8);
   fVar1 = param_3[2] * local_28 + (*param_3 * local_30 + param_3[1] * local_2c);
   fVar1 = fVar1 + fVar1;
   dVar4 = -(double)(param_3[1] * fVar1 - local_2c);

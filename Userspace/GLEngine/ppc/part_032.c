@@ -2427,7 +2427,8 @@ int _glVertex2_ListExec(param_1, param_2)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)*param_2, (double)param_2[1], (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*pcVar1)(param_1,(double)*param_2,(double)param_2[1],(double)*(float *)(param_1 + 0x20),
+            (double)*(float *)(param_1 + 0x24));
   return 8;
 }
 
@@ -2442,7 +2443,7 @@ int _glVertex4_ListExec(param_1, param_2)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)*param_2, (double)param_2[1], (double)param_2[2], (double)param_2[3]);
+  (*pcVar1)(param_1,(double)*param_2,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
   return 0x10;
 }
 

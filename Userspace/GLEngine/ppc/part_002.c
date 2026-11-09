@@ -5234,8 +5234,9 @@ LAB_0001dcd0:
   }
   piVar22 = (int *)_gleShrinkFuncCacheElem(iVar23,iVar26);
   puVar5 = PTR__glePushInstructions_00112054;
-  piVar22[2] = (int)piVar22 + piVar22[2] + (0x20 - (iVar23 + 0x20));
-  (**(code **)puVar5)(iVar26,piVar22 + 8);
+  iVar23 = (int)piVar22 + (0x20 - (iVar23 + 0x20));
+  piVar22[2] = piVar22[2] + iVar23;
+  (**(code **)puVar5)(iVar26,piVar22 + 8,iVar23);
 LAB_0001de08:
   *piVar17 = (int)piVar22;
 LAB_0001de0c:

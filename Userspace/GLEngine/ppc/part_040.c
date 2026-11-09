@@ -7990,7 +7990,7 @@ int _gleSetModelviewFuncAll(param_1, param_2, param_3)
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,0);
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,0,param_3);
   *(code **)(param_1 + 0x5064) = UNRECOVERED_JUMPTABLE;
                     
                     
@@ -8006,7 +8006,7 @@ int _gleSetModelviewFuncW1(param_1, param_2, param_3)
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,1);
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,1,param_3);
   *(code **)(param_1 + 0x5064) = UNRECOVERED_JUMPTABLE;
                     
                     
@@ -8022,7 +8022,7 @@ int _gleSetModelviewFuncZ0W1(param_1, param_2, param_3)
 {
   code *UNRECOVERED_JUMPTABLE;
   
-  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,3);
+  UNRECOVERED_JUMPTABLE = (code *)(*_gleBuildModelviewTransformFunc)(param_1,3,param_3);
   *(code **)(param_1 + 0x5064) = UNRECOVERED_JUMPTABLE;
                     
                     

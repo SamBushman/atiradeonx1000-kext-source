@@ -3165,7 +3165,7 @@ int _glEnd_Exec(param_1)
   }
   *(undefined2 *)(param_1 + 0x4a10) = 0xffff;
   *(undefined4 *)(param_1 + 0x4884) = *(undefined4 *)(param_1 + 0xd8);
-  (**(code **)(param_1 + 0x4a08))();
+  (**(code **)(param_1 + 0x4a08))(param_1);
   ((int (*)())_glePopAndCopyMaterials)(param_1);
   return;
 }
