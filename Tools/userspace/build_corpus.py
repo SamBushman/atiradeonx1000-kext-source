@@ -25,6 +25,27 @@ import patches
 _env = dict(os.environ, CORPUS_SCOPE=patches.scope_of_slice(slice_f) or '', CORPUS_SLICE=os.path.abspath(slice_f))   # CORPUS_SLICE: ghidra2c reads the stock code (fctiw per function)
 subprocess.run(['python3', here + '/ghidra2c.py', dd, out, '60'] + rng, check=True, env=_env)
 shutil.copy(here + '/ghidra_c.h', out)
+# float parameters (float_params.py): Ghidra types every floating-point argument register `double`; where the stock reads the argument with single-precision instructions only
+# it is a `float` parameter, and a `double fparam_k` costs an extra frsp in front of every use. float_params.tsv (ENTRY NAME k,k..) is kept beside the corpus.
+_fpf = os.path.join(out, 'float_params.tsv')
+if os.path.exists(_fpf):
+    _fp = {}
+    for _l in open(_fpf):
+        _p = _l.rstrip('\n').split('\t')
+        if len(_p) == 3: _fp[_p[1]] = set(_p[2].split(','))
+    _nf = 0
+    def _retype(m):
+        global _nf
+        ks = _fp.get(m.group(2))
+        if not ks: return m.group(0)
+        sig, n = re.subn(r'\bdouble fparam_(\d+)\b', lambda q: ('float fparam_' + q.group(1)) if q.group(1) in ks else q.group(0), m.group(3))
+        _nf += sig.count('float fparam_')
+        return m.group(1) + sig
+    for _f in glob.glob(out + '/part_*.c') + [out + '/decls.h']:
+        _t = open(_f).read()
+        _t2 = re.sub(r'(?m)^((?:extern )?\w[\w \*]*?\b(\w+)\()([^)\n]*\bfparam_[^)\n]*)', _retype, _t)
+        if _t2 != _t: open(_f, 'w').write(_t2)
+    print('float parameters retyped: %d (%d functions)' % (_nf, len(_fp)))
 name = os.path.basename(out.rstrip('/'))
 tmp = '/tmp/bc_%s_%s' % (name, arch)
 subprocess.run('rm -rf %s && mkdir -p %s && cp -r %s %s/corpus' % (tmp, tmp, out, tmp), shell=True, check=True)

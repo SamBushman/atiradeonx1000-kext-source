@@ -774,7 +774,7 @@ int _glSamplePass_Comp(param_1, param_2)
 }
 
 /* _glSampleCoverage_Exec @ 0x85ef0 (32 bytes) */
-void _glSampleCoverage_Exec(int param_1,undefined4 param_2,int param_3,double fparam_1)
+void _glSampleCoverage_Exec(int param_1,undefined4 param_2,int param_3,float fparam_1)
 {
   *(float *)(param_1 + 0x41ec) = (float)fparam_1;
   *(byte *)(param_1 + 0x41f4) = (byte)((uint)-param_3 >> 0x1f);

@@ -2447,7 +2447,7 @@ int _glStencilMask_Exec(param_1, param_2)
 }
 
 /* _glClearColor_Exec @ 0x22490 (228 bytes) */
-void _glClearColor_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glClearColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float fVar1;
   float fVar2;

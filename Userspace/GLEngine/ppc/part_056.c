@@ -235,7 +235,7 @@ int _gleVPEmulate(param_1, param_2)
 }
 
 /* _gleSetWindowPos @ 0x107590 (424 bytes) */
-double _gleSetWindowPos(int param_1,double fparam_1,double fparam_2,double fparam_3)
+double _gleSetWindowPos(int param_1,float fparam_1,float fparam_2,double fparam_3)
 {
   undefined4 *puVar1;
   undefined4 uVar2;

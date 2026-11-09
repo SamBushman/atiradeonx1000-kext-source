@@ -2777,7 +2777,7 @@ void _glColor4f_Comp(undefined4 param_1,double fparam_1,double fparam_2,double f
 }
 
 /* _glColor4f_NoColorMat_Exec @ 0x398ec (20 bytes) */
-void _glColor4f_NoColorMat_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glColor4f_NoColorMat_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   *(float *)(param_1 + 0x2ac) = (float)fparam_4;
   *(float *)(param_1 + 0x2a0) = (float)fparam_1;
@@ -3227,7 +3227,7 @@ float * _glLineWidth_Comp(undefined4 param_1,double fparam_1)
 }
 
 /* _glLineWidth_Exec @ 0x3a2dc (112 bytes) */
-void _glLineWidth_Exec(int param_1,double fparam_1)
+void _glLineWidth_Exec(int param_1,float fparam_1)
 {
   undefined4 uVar1;
   

@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glSecondaryColor3f_Exec @ 0x5e9bc (16 bytes) */
-void _glSecondaryColor3f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glSecondaryColor3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   *(float *)(param_1 + 0x2c8) = (float)fparam_3;
   *(float *)(param_1 + 0x2c0) = (float)fparam_1;
@@ -114,7 +114,7 @@ int _glSecondaryColor3dv_Exec(param_1, param_2)
   
   dVar1 = *param_2;
   dVar2 = param_2[1];
-  *(float *)(param_1 + 0x2c8) = GH_U2F((unsigned int)(param_2[2]));
+  *(float *)(param_1 + 0x2c8) = (float)param_2[2];
   *(float *)(param_1 + 0x2c0) = (float)dVar1;
   *(float *)(param_1 + 0x2c4) = (float)dVar2;
   return;
@@ -129,9 +129,9 @@ int _glSecondaryColor3dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glSecondaryColor3_ListExec_00110064,0xc);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
   }
   return pfVar1;
 }

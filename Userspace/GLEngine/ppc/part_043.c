@@ -1781,7 +1781,7 @@ int _gleGenerateMipmap(param_1, param_2)
 }
 
 /* _gleFogExp2 @ 0xced90 (56 bytes) */
-double _gleFogExp2(int param_1,double fparam_1)
+double _gleFogExp2(int param_1,float fparam_1)
 {
   float fVar1;
   float fVar2;

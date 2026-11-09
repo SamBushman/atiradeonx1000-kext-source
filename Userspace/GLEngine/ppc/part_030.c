@@ -76,7 +76,7 @@ int _glMultiTexCoord3fv_CompExec(param_1, param_2, param_3)
 }
 
 /* _glMultiTexCoord4f_Exec @ 0x96374 (44 bytes) */
-void _glMultiTexCoord4f_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMultiTexCoord4f_Exec(int param_1,uint param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   int iVar1;
   

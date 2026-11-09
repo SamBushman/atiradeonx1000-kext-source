@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _glAlphaFunc_Exec @ 0x16484 (120 bytes) */
-void _glAlphaFunc_Exec(int param_1,int param_2,double fparam_1)
+void _glAlphaFunc_Exec(int param_1,int param_2,float fparam_1)
 {
   undefined4 uVar1;
   double dVar2;
@@ -3298,7 +3298,7 @@ LAB_0001abf0:
 }
 
 /* _glTexParameterf_Exec @ 0x1ac34 (40 bytes) */
-void _glTexParameterf_Exec(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+void _glTexParameterf_Exec(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   float fStack00000024;
   
@@ -4718,7 +4718,7 @@ int _gleBeginPrimitiveTCLFunc(param_1)
 }
 
 /* _glTexCoord2f_Exec @ 0x1d1c8 (28 bytes) */
-void _glTexCoord2f_Exec(int param_1,double fparam_1,double fparam_2)
+void _glTexCoord2f_Exec(int param_1,float fparam_1,float fparam_2)
 {
   *(float *)(param_1 + 0x120) = (float)fparam_1;
   *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
@@ -4728,7 +4728,7 @@ void _glTexCoord2f_Exec(int param_1,double fparam_1,double fparam_2)
 }
 
 /* _glMultiTexCoord2f_Exec @ 0x1d1e4 (40 bytes) */
-void _glMultiTexCoord2f_Exec(int param_1,uint param_2,double fparam_1,double fparam_2)
+void _glMultiTexCoord2f_Exec(int param_1,uint param_2,float fparam_1,float fparam_2)
 {
   undefined4 uVar1;
   undefined4 uVar2;

@@ -298,7 +298,7 @@ int _glRasterPos3dv_Comp(param_1, param_2)
   undefined4 param_1;
   double *param_2;
 {
-  ((void (*)())_glSetRasterPos_Comp)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),(double)GH_U2F((unsigned int)(param_2[2])),
+  ((void (*)())_glSetRasterPos_Comp)(param_1,(double)(float)*param_2,(double)(float)param_2[1],(double)(float)param_2[2],
              (double)FLOAT_00108e54);
   return;
 }
@@ -1536,8 +1536,8 @@ int _glRasterPos4dv_Comp(param_1, param_2)
   undefined4 param_1;
   double *param_2;
 {
-  ((void (*)())_glSetRasterPos_Comp)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),(double)GH_U2F((unsigned int)(param_2[2])),
-             (double)GH_U2F((unsigned int)(param_2[3])));
+  ((void (*)())_glSetRasterPos_Comp)(param_1,(double)(float)*param_2,(double)(float)param_2[1],(double)(float)param_2[2],
+             (double)(float)param_2[3]);
   return;
 }
 

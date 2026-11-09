@@ -996,7 +996,7 @@ void _glClearAccum_Comp(undefined4 param_1,double fparam_1,double fparam_2,doubl
 }
 
 /* _glClearAccum_Exec @ 0x59af4 (280 bytes) */
-void _glClearAccum_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glClearAccum_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float fVar1;
   double dVar2;
@@ -1149,7 +1149,7 @@ float * _glClearIndex_Comp(undefined4 param_1,double fparam_1)
 }
 
 /* _glClearIndex_Exec @ 0x59e94 (84 bytes) */
-void _glClearIndex_Exec(int param_1,double fparam_1)
+void _glClearIndex_Exec(int param_1,float fparam_1)
 {
   double dVar1;
   
@@ -1272,10 +1272,10 @@ int _glClipPlane_Exec(param_1, param_2, param_3)
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (uVar8 < 6) {
       iVar9 = param_1 + uVar8 * 0x10;
-      *(float *)(iVar9 + 0x418c) = GH_U2F((unsigned int)(*param_3));
-      *(float *)(iVar9 + 0x4190) = GH_U2F((unsigned int)(param_3[1]));
-      *(float *)(iVar9 + 0x4194) = GH_U2F((unsigned int)(param_3[2]));
-      *(float *)(iVar9 + 0x4198) = GH_U2F((unsigned int)(param_3[3]));
+      *(float *)(iVar9 + 0x418c) = (float)*param_3;
+      *(float *)(iVar9 + 0x4190) = (float)param_3[1];
+      *(float *)(iVar9 + 0x4194) = (float)param_3[2];
+      *(float *)(iVar9 + 0x4198) = (float)param_3[3];
       if ((*(uint *)(param_1 + 0x50b0) & 0x10) != 0) {
         ((double (*)())_gleModelMatInvert)(param_1);
       }
@@ -1561,9 +1561,9 @@ int _glColor3dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glColor3_ListExec_0011005c,0xc);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
   }
   return pfVar1;
 }
@@ -1578,7 +1578,7 @@ int _glColor3dv_Exec(param_1, param_2)
   
   dVar1 = *param_2;
   dVar2 = param_2[1];
-  *(float *)(param_1 + 0x2a8) = GH_U2F((unsigned int)(param_2[2]));
+  *(float *)(param_1 + 0x2a8) = (float)param_2[2];
   *(float *)(param_1 + 0x2a0) = (float)dVar1;
   *(float *)(param_1 + 0x2a4) = (float)dVar2;
   *(undefined4 *)(param_1 + 0x2ac) = *(undefined4 *)(param_1 + 0x24);

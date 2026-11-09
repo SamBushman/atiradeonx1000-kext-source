@@ -2246,7 +2246,7 @@ double _glTexGen_Comp(undefined4 param_1,undefined4 param_2,uint param_3,double 
 }
 
 /* _glTexGen_Exec @ 0x9b804 (2380 bytes) */
-void _glTexGen_Exec(int param_1,uint param_2,uint param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glTexGen_Exec(int param_1,uint param_2,uint param_3,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   byte bVar1;
   float fVar2;
@@ -2600,8 +2600,8 @@ int _glTexGendv_Comp(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   double *param_4;
 {
-  ((double (*)())_glTexGen_Comp)(param_1,param_2,param_3,(double)GH_U2F((unsigned int)(*param_4)),(double)GH_U2F((unsigned int)(param_4[1])),
-                 (double)GH_U2F((unsigned int)(param_4[2])),(double)GH_U2F((unsigned int)(param_4[3])));
+  ((double (*)())_glTexGen_Comp)(param_1,param_2,param_3,(double)(float)*param_4,(double)(float)param_4[1],
+                 (double)(float)param_4[2],(double)(float)param_4[3]);
   return;
 }
 
@@ -2613,8 +2613,8 @@ int _glTexGendv_CompExec(param_1, param_2, param_3, param_4)
   double *param_4;
 {
   ((int (*)())_glTexGendv_Comp)(param_1,param_2,param_3,param_4);
-  ((void (*)())_glTexGen_Exec)(param_1,param_2,param_3,(double)GH_U2F((unsigned int)(*param_4)),(double)GH_U2F((unsigned int)(param_4[1])),
-                 (double)GH_U2F((unsigned int)(param_4[2])),(double)GH_U2F((unsigned int)(param_4[3])));
+  ((void (*)())_glTexGen_Exec)(param_1,param_2,param_3,(double)(float)*param_4,(double)(float)param_4[1],
+                 (double)(float)param_4[2],(double)(float)param_4[3]);
   return;
 }
 

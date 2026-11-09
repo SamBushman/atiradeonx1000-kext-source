@@ -242,7 +242,7 @@ int _glepUnloadRenderers()
 }
 
 /* _glTexCoord3f_Exec @ 0x55adc (36 bytes) */
-void _glTexCoord3f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glTexCoord3f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3)
 {
   *(float *)(param_1 + 0x120) = (float)fparam_1;
   *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
@@ -1771,7 +1771,7 @@ void _glBlendColor_Comp(undefined4 param_1,double fparam_1,double fparam_2,doubl
 }
 
 /* _glBlendColor_Exec @ 0x57f5c (228 bytes) */
-void _glBlendColor_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glBlendColor_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   float fVar1;
   float fVar2;

@@ -702,7 +702,7 @@ int _gleCreatePluginFence(param_1, param_2)
 }
 
 /* _glPointSize_Exec @ 0x4ff44 (216 bytes) */
-void _glPointSize_Exec(int param_1,double fparam_1)
+void _glPointSize_Exec(int param_1,float fparam_1)
 {
   byte bVar1;
   undefined4 uVar2;
@@ -743,7 +743,7 @@ void _glPointSize_Exec(int param_1,double fparam_1)
 }
 
 /* _glProgramLocalParameter4fARB_Exec @ 0x5001c (328 bytes) */
-void _glProgramLocalParameter4fARB_Exec(int param_1,uint param_2,uint param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glProgramLocalParameter4fARB_Exec(int param_1,uint param_2,uint param_3,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   byte bVar1;
   uint uVar2;
@@ -1163,7 +1163,7 @@ LAB_000507ac:
 }
 
 /* _gleFeedbackToken @ 0x5086c (68 bytes) */
-void _gleFeedbackToken(int param_1,double fparam_1)
+void _gleFeedbackToken(int param_1,float fparam_1)
 {
   float *pfVar1;
   
@@ -2289,22 +2289,22 @@ int _gleLoadMatrixd(param_1, param_2)
   double *param_1;
   float *param_2;
 {
-  *param_2 = GH_U2F((unsigned int)(*param_1));
-  param_2[1] = GH_U2F((unsigned int)(param_1[1]));
-  param_2[2] = GH_U2F((unsigned int)(param_1[2]));
-  param_2[3] = GH_U2F((unsigned int)(param_1[3]));
-  param_2[4] = GH_U2F((unsigned int)(param_1[4]));
-  param_2[5] = GH_U2F((unsigned int)(param_1[5]));
-  param_2[6] = GH_U2F((unsigned int)(param_1[6]));
-  param_2[7] = GH_U2F((unsigned int)(param_1[7]));
-  param_2[8] = GH_U2F((unsigned int)(param_1[8]));
-  param_2[9] = GH_U2F((unsigned int)(param_1[9]));
-  param_2[10] = GH_U2F((unsigned int)(param_1[10]));
-  param_2[0xb] = GH_U2F((unsigned int)(param_1[0xb]));
-  param_2[0xc] = GH_U2F((unsigned int)(param_1[0xc]));
-  param_2[0xd] = GH_U2F((unsigned int)(param_1[0xd]));
-  param_2[0xe] = GH_U2F((unsigned int)(param_1[0xe]));
-  param_2[0xf] = GH_U2F((unsigned int)(param_1[0xf]));
+  *param_2 = (float)*param_1;
+  param_2[1] = (float)param_1[1];
+  param_2[2] = (float)param_1[2];
+  param_2[3] = (float)param_1[3];
+  param_2[4] = (float)param_1[4];
+  param_2[5] = (float)param_1[5];
+  param_2[6] = (float)param_1[6];
+  param_2[7] = (float)param_1[7];
+  param_2[8] = (float)param_1[8];
+  param_2[9] = (float)param_1[9];
+  param_2[10] = (float)param_1[10];
+  param_2[0xb] = (float)param_1[0xb];
+  param_2[0xc] = (float)param_1[0xc];
+  param_2[0xd] = (float)param_1[0xd];
+  param_2[0xe] = (float)param_1[0xe];
+  param_2[0xf] = (float)param_1[0xf];
   return;
 }
 
@@ -2969,7 +2969,7 @@ LAB_00053168:
 }
 
 /* _gleFogLinear @ 0x53190 (92 bytes) */
-double _gleFogLinear(int param_1,double fparam_1)
+double _gleFogLinear(int param_1,float fparam_1)
 {
   double dVar1;
   

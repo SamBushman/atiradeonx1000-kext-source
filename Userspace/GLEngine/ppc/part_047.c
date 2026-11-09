@@ -84,7 +84,7 @@ int _gleElementOffset(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gleGetFrac @ 0xe1eb4 (208 bytes) */
-int _gleGetFrac(double fparam_1)
+int _gleGetFrac(float fparam_1)
 {
   if ((double)FLOAT_00108e50 <= fparam_1) {
     return (int)((float)(fparam_1 -

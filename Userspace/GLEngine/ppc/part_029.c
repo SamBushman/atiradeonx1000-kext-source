@@ -731,7 +731,7 @@ int _glMultiTexCoord4dv_Exec(param_1, param_2, param_3)
   iVar1 = param_1 + (param_2 & 7) * 0x10;
   dVar4 = param_3[1];
   dVar3 = param_3[2];
-  *(float *)(iVar1 + 300) = GH_U2F((unsigned int)(param_3[3]));
+  *(float *)(iVar1 + 300) = (float)param_3[3];
   *(float *)(iVar1 + 0x120) = (float)dVar2;
   *(float *)(iVar1 + 0x124) = (float)dVar4;
   *(float *)(iVar1 + 0x128) = (float)dVar3;
@@ -770,7 +770,7 @@ int _glMultiTexCoord4dv_CompExec(param_1, param_2, param_3)
 }
 
 /* _glMultiTexCoord1f_Exec @ 0x95e40 (40 bytes) */
-void _glMultiTexCoord1f_Exec(int param_1,uint param_2,double fparam_1)
+void _glMultiTexCoord1f_Exec(int param_1,uint param_2,float fparam_1)
 {
   undefined4 uVar1;
   undefined4 uVar2;
@@ -927,7 +927,7 @@ int _glMultiTexCoord2fv_CompExec(param_1, param_2, param_3)
 }
 
 /* _glMultiTexCoord3f_Exec @ 0x96174 (48 bytes) */
-void _glMultiTexCoord3f_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,double fparam_3)
+void _glMultiTexCoord3f_Exec(int param_1,uint param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   undefined4 uVar1;
   int iVar2;

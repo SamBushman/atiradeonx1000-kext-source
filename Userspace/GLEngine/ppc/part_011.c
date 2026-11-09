@@ -638,10 +638,10 @@ int _glColor4dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glColor4_ListExec_00110058,0x10);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
-    pfVar1[3] = GH_U2F((unsigned int)(param_2[3]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
+    pfVar1[3] = (float)param_2[3];
   }
   return pfVar1;
 }
@@ -658,7 +658,7 @@ int _glColor4dv_Exec(param_1, param_2)
   dVar1 = *param_2;
   dVar3 = param_2[1];
   dVar2 = param_2[2];
-  *(float *)(param_1 + 0x2ac) = GH_U2F((unsigned int)(param_2[3]));
+  *(float *)(param_1 + 0x2ac) = (float)param_2[3];
   *(float *)(param_1 + 0x2a0) = (float)dVar1;
   *(float *)(param_1 + 0x2a4) = (float)dVar3;
   *(float *)(param_1 + 0x2a8) = (float)dVar2;
@@ -682,7 +682,7 @@ int _glColor4dv_CompExec(param_1, param_2)
 }
 
 /* _glColor4f_ColorMat_Exec @ 0x5c238 (32 bytes) */
-void _glColor4f_ColorMat_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glColor4f_ColorMat_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   *(float *)(param_1 + 0x2a0) = (float)fparam_1;
   *(float *)(param_1 + 0x2a4) = (float)fparam_2;

@@ -3473,7 +3473,7 @@ int _gleDrawPixelsRestoreState(param_1, param_2, param_3)
 }
 
 /* _pixelBoundaryBottomLeft @ 0xca274 (100 bytes) */
-uint _pixelBoundaryBottomLeft(double fparam_1)
+uint _pixelBoundaryBottomLeft(float fparam_1)
 {
   uint uVar1;
   
@@ -3487,7 +3487,7 @@ uint _pixelBoundaryBottomLeft(double fparam_1)
 }
 
 /* _pixelBoundaryTopRight @ 0xca2d8 (92 bytes) */
-uint _pixelBoundaryTopRight(double fparam_1)
+uint _pixelBoundaryTopRight(float fparam_1)
 {
   uint uVar1;
   

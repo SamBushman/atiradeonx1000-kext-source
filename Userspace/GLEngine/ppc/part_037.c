@@ -32,10 +32,10 @@ int _glVertexAttrib4dvARB_Exec(param_1, param_2, param_3)
   if (param_2 < 0x10) {
     if (param_2 != 0) {
       iVar1 = param_1 + param_2 * 0x10;
-      *(float *)(iVar1 + 0x1a0) = GH_U2F((unsigned int)(*param_3));
-      *(float *)(iVar1 + 0x1a4) = GH_U2F((unsigned int)(param_3[1]));
-      *(float *)(iVar1 + 0x1a8) = GH_U2F((unsigned int)(param_3[2]));
-      *(float *)(iVar1 + 0x1ac) = GH_U2F((unsigned int)(param_3[3]));
+      *(float *)(iVar1 + 0x1a0) = (float)*param_3;
+      *(float *)(iVar1 + 0x1a4) = (float)param_3[1];
+      *(float *)(iVar1 + 0x1a8) = (float)param_3[2];
+      *(float *)(iVar1 + 0x1ac) = (float)param_3[3];
       return;
     }
     UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x4884);
@@ -45,7 +45,7 @@ int _glVertexAttrib4dvARB_Exec(param_1, param_2, param_3)
                     
                     
     (*((int (*)(int,int,int,double,double,double,double))UNRECOVERED_JUMPTABLE))
-              (param_1, param_2, param_3, (double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])), (double)GH_U2F((unsigned int)(param_3[2])), (double)GH_U2F((unsigned int)(param_3[3])));
+              (param_1, param_2, param_3, (double)(float)*param_3, (double)(float)param_3[1], (double)(float)param_3[2], (double)(float)param_3[3]);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1545,7 +1545,7 @@ int _glWindowPos2dv_Exec(param_1, param_2)
   double *param_2;
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
-    ((double (*)())_gleSetWindowPos)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),
+    ((double (*)())_gleSetWindowPos)(param_1,(double)(float)*param_2,(double)(float)param_2[1],
                      (double)FLOAT_00108e50);
     return;
   }
@@ -1565,8 +1565,8 @@ int _glWindowPos2dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glWindowPos2_ListExec_001104d0,8);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
   }
   return pfVar1;
 }
@@ -1624,8 +1624,8 @@ int _glWindowPos3dv_Exec(param_1, param_2)
   double *param_2;
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
-    ((double (*)())_gleSetWindowPos)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),
-                     (double)GH_U2F((unsigned int)(param_2[2])));
+    ((double (*)())_gleSetWindowPos)(param_1,(double)(float)*param_2,(double)(float)param_2[1],
+                     (double)(float)param_2[2]);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {

@@ -1838,7 +1838,7 @@ int _glTexCoord1dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord1_ListExec_001103c0,4);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
+    *pfVar1 = (float)*param_2;
   }
   return pfVar1;
 }
@@ -1910,8 +1910,8 @@ int _glTexCoord2dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord2_ListExec_001103bc,8);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
   }
   return pfVar1;
 }

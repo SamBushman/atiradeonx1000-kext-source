@@ -509,7 +509,7 @@ int _glVertexAttrib1sARB_CompExec(param_1, param_2, param_3)
 }
 
 /* _glVertexAttrib1fARB_Exec @ 0xac254 (136 bytes) */
-void _glVertexAttrib1fARB_Exec(int param_1,uint param_2,double fparam_1)
+void _glVertexAttrib1fARB_Exec(int param_1,uint param_2,float fparam_1)
 {
   float fVar1;
   undefined4 uVar2;
@@ -691,7 +691,7 @@ int _glVertexAttrib2sARB_CompExec(param_1, param_2, param_3, param_4)
 }
 
 /* _glVertexAttrib2fARB_Exec @ 0xac66c (132 bytes) */
-void _glVertexAttrib2fARB_Exec(int param_1,uint param_2,double fparam_1,double fparam_2)
+void _glVertexAttrib2fARB_Exec(int param_1,uint param_2,float fparam_1,float fparam_2)
 {
   undefined4 uVar1;
   undefined4 uVar2;
@@ -888,7 +888,7 @@ int _glVertexAttrib3sARB_CompExec(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glVertexAttrib3fARB_Exec @ 0xacb00 (128 bytes) */
-void _glVertexAttrib3fARB_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,double fparam_3)
+void _glVertexAttrib3fARB_Exec(int param_1,uint param_2,float fparam_1,float fparam_2,float fparam_3)
 {
   undefined4 uVar1;
   int iVar2;
@@ -1086,7 +1086,7 @@ int _glVertexAttrib4sARB_CompExec(param_1, param_2, param_3, param_4, param_5, p
 }
 
 /* _glVertexAttrib4fARB_Exec @ 0xad018 (124 bytes) */
-void _glVertexAttrib4fARB_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glVertexAttrib4fARB_Exec(int param_1,uint param_2,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   int iVar1;
   code *UNRECOVERED_JUMPTABLE;

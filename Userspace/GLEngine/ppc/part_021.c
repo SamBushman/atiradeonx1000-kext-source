@@ -280,11 +280,11 @@ LAB_00079a7c:
       iVar4 = (bVar1 >> 3 & 0x1c) + param_1;
       *(uint *)(iVar4 + 0x348) = *(uint *)(iVar4 + 0x348) | 1 << (bVar1 & 0x1f);
       iVar5 = *(int *)(iVar5 * 8 + param_1 + 0x4668);
-      *(float *)(iVar5 + param_3 * 0x10) = GH_U2F((unsigned int)(*param_4));
+      *(float *)(iVar5 + param_3 * 0x10) = (float)*param_4;
       iVar5 = iVar5 + param_3 * 0x10;
-      *(float *)(iVar5 + 4) = GH_U2F((unsigned int)(param_4[1]));
-      *(float *)(iVar5 + 8) = GH_U2F((unsigned int)(param_4[2]));
-      *(float *)(iVar5 + 0xc) = GH_U2F((unsigned int)(param_4[3]));
+      *(float *)(iVar5 + 4) = (float)param_4[1];
+      *(float *)(iVar5 + 8) = (float)param_4[2];
+      *(float *)(iVar5 + 0xc) = (float)param_4[3];
       return;
     }
   }
@@ -318,7 +318,7 @@ LAB_00079a74:
 }
 
 /* _glProgramEnvParameter4fARB_Exec @ 0x79b3c (308 bytes) */
-void _glProgramEnvParameter4fARB_Exec(int param_1,uint param_2,uint param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glProgramEnvParameter4fARB_Exec(int param_1,uint param_2,uint param_3,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   byte bVar1;
   uint uVar2;
@@ -416,10 +416,10 @@ int _glProgramEnvParameter4dvARB_Comp(param_1, param_2, param_3, param_4)
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = param_2;
     puVar1[1] = param_3;
-    puVar1[2] = GH_U2F((unsigned int)(*param_4));
-    puVar1[3] = GH_U2F((unsigned int)(param_4[1]));
-    puVar1[4] = GH_U2F((unsigned int)(param_4[2]));
-    puVar1[5] = GH_U2F((unsigned int)(param_4[3]));
+    puVar1[2] = (float)*param_4;
+    puVar1[3] = (float)param_4[1];
+    puVar1[4] = (float)param_4[2];
+    puVar1[5] = (float)param_4[3];
   }
   return puVar1;
 }
@@ -625,11 +625,11 @@ LAB_0007a1e8:
       iVar5 = (bVar1 >> 3 & 0x1c) + param_1;
       *(uint *)(iVar5 + 0x348) = *(uint *)(iVar5 + 0x348) | 1 << (bVar1 & 0x1f);
       iVar5 = *(int *)(*(int *)(iVar6 + 0x5420) + 0x4e0);
-      *(float *)(iVar5 + param_3 * 0x10) = GH_U2F((unsigned int)(*param_4));
+      *(float *)(iVar5 + param_3 * 0x10) = (float)*param_4;
       iVar5 = iVar5 + param_3 * 0x10;
-      *(float *)(iVar5 + 4) = GH_U2F((unsigned int)(param_4[1]));
-      *(float *)(iVar5 + 8) = GH_U2F((unsigned int)(param_4[2]));
-      *(float *)(iVar5 + 0xc) = GH_U2F((unsigned int)(param_4[3]));
+      *(float *)(iVar5 + 4) = (float)param_4[1];
+      *(float *)(iVar5 + 8) = (float)param_4[2];
+      *(float *)(iVar5 + 0xc) = (float)param_4[3];
       _gleModifyPluginPipelineProgram(param_1,*(int *)(iVar6 + 0x5420) + 0x10,2);
       return;
     }
@@ -696,10 +696,10 @@ int _glProgramLocalParameter4dvARB_Comp(param_1, param_2, param_3, param_4)
   if (puVar1 != (undefined4 *)0x0) {
     *puVar1 = param_2;
     puVar1[1] = param_3;
-    puVar1[2] = GH_U2F((unsigned int)(*param_4));
-    puVar1[3] = GH_U2F((unsigned int)(param_4[1]));
-    puVar1[4] = GH_U2F((unsigned int)(param_4[2]));
-    puVar1[5] = GH_U2F((unsigned int)(param_4[3]));
+    puVar1[2] = (float)*param_4;
+    puVar1[3] = (float)param_4[1];
+    puVar1[4] = (float)param_4[2];
+    puVar1[5] = (float)param_4[3];
   }
   return puVar1;
 }
@@ -2918,7 +2918,7 @@ LAB_0007d2f0:
 }
 
 /* _glPixelStoref_Exec @ 0x7d308 (1156 bytes) */
-void _glPixelStoref_Exec(int param_1,uint param_2,double fparam_1)
+void _glPixelStoref_Exec(int param_1,uint param_2,float fparam_1)
 {
   undefined4 uVar1;
   
@@ -3081,7 +3081,7 @@ undefined4 * _glPixelTransferf_Comp(undefined4 param_1,undefined4 param_2,double
 }
 
 /* _glPixelTransferf_Exec @ 0x7d814 (1740 bytes) */
-void _glPixelTransferf_Exec(int param_1,uint param_2,double fparam_1)
+void _glPixelTransferf_Exec(int param_1,uint param_2,float fparam_1)
 {
   undefined4 uVar1;
   uint uVar2;

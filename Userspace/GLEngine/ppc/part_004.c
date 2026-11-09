@@ -2362,7 +2362,7 @@ void _glRotatef_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
 }
 
 /* _glRotateZ_Exec @ 0x324c4 (372 bytes) */
-void _glRotateZ_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glRotateZ_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2415,7 +2415,7 @@ void _glRotateZ_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
 }
 
 /* _glRotateY_Exec @ 0x32638 (372 bytes) */
-void _glRotateY_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glRotateY_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   float fVar2;
@@ -2472,7 +2472,7 @@ void _glRotateY_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3
 }
 
 /* _glScale_Exec @ 0x327b0 (684 bytes) */
-void _glScale_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3)
+void _glScale_Exec(int param_1,float fparam_1,float fparam_2,double fparam_3)
 {
   float fVar1;
   float fVar2;

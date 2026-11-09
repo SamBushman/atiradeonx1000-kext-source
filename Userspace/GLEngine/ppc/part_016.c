@@ -341,13 +341,13 @@ int _glFogCoorddv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glFogCoord_ListExec_001100fc,4);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
+    *pfVar1 = (float)*param_2;
   }
   return pfVar1;
 }
 
 /* _glFogCoordf_Exec @ 0x67e64 (8 bytes) */
-void _glFogCoordf_Exec(int param_1,double fparam_1)
+void _glFogCoordf_Exec(int param_1,float fparam_1)
 {
   *(float *)(param_1 + 0x2cc) = (float)fparam_1;
   return;
@@ -374,7 +374,7 @@ int _glFogCoorddv_Exec(param_1, param_2)
   int param_1;
   double *param_2;
 {
-  *(float *)(param_1 + 0x2cc) = GH_U2F((unsigned int)(*param_2));
+  *(float *)(param_1 + 0x2cc) = (float)*param_2;
   return;
 }
 
@@ -1044,7 +1044,7 @@ int _glConvolutionParameterF_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glConvolutionParameterf_Comp @ 0x68e48 (40 bytes) */
-undefined4 _glConvolutionParameterf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+undefined4 _glConvolutionParameterf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   undefined4 uVar1;
   float fStack00000024;

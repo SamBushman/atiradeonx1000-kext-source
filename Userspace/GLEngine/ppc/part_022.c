@@ -34,7 +34,7 @@ float * _glPixelZoom_Comp(undefined4 param_1,double fparam_1,double fparam_2)
 }
 
 /* _glPixelZoom_Exec @ 0x7e078 (156 bytes) */
-void _glPixelZoom_Exec(int param_1,double fparam_1,double fparam_2)
+void _glPixelZoom_Exec(int param_1,float fparam_1,float fparam_2)
 {
   uint uVar1;
   double dVar2;
@@ -841,7 +841,7 @@ float * _glPolygonOffset_Comp(undefined4 param_1,double fparam_1,double fparam_2
 }
 
 /* _glPolygonOffset_Exec @ 0x7f2fc (60 bytes) */
-void _glPolygonOffset_Exec(int param_1,double fparam_1,double fparam_2)
+void _glPolygonOffset_Exec(int param_1,float fparam_1,float fparam_2)
 {
   if (*(short *)(param_1 + 0x4a10) < 0) {
     *(float *)(param_1 + 0x34c8) = (float)fparam_1;
@@ -1048,7 +1048,7 @@ int _glRasterPos2dv_Comp(param_1, param_2)
   undefined4 param_1;
   double *param_2;
 {
-  ((void (*)())_glSetRasterPos_Comp)(param_1,(double)GH_U2F((unsigned int)(*param_2)),(double)GH_U2F((unsigned int)(param_2[1])),(double)FLOAT_00108e50,
+  ((void (*)())_glSetRasterPos_Comp)(param_1,(double)(float)*param_2,(double)(float)param_2[1],(double)FLOAT_00108e50,
              (double)FLOAT_00108e54);
   return;
 }

@@ -2504,7 +2504,7 @@ int _glMapGrid1f_Comp(int param_1,uint param_2,double fparam_1,double fparam_2)
 }
 
 /* _glMapGrid1f_Exec @ 0x75750 (144 bytes) */
-void _glMapGrid1f_Exec(int param_1,uint param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _glMapGrid1f_Exec(int param_1,uint param_2,float fparam_1,float fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   double dVar1;
   undefined4 uVar2;
@@ -2697,7 +2697,7 @@ LAB_00075b4c:
 }
 
 /* _glMapGrid2f_Exec @ 0x75b58 (196 bytes) */
-void _glMapGrid2f_Exec(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,uint param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
+void _glMapGrid2f_Exec(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,uint param_5,float fparam_1,float fparam_2,float fparam_3,float fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
   double dVar1;
   undefined4 uVar2;

@@ -43,7 +43,7 @@ int _glTexCoord3dv_Exec(param_1, param_2)
   
   dVar1 = *param_2;
   dVar2 = param_2[1];
-  *(float *)(param_1 + 0x128) = GH_U2F((unsigned int)(param_2[2]));
+  *(float *)(param_1 + 0x128) = (float)param_2[2];
   *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 1;
   *(float *)(param_1 + 0x120) = (float)dVar1;
   *(float *)(param_1 + 0x124) = (float)dVar2;
@@ -60,9 +60,9 @@ int _glTexCoord3dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord3_ListExec_001103b8,0xc);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
   }
   return pfVar1;
 }
@@ -124,7 +124,7 @@ int _glTexCoord4dv_Exec(param_1, param_2)
   dVar1 = *param_2;
   dVar3 = param_2[1];
   dVar2 = param_2[2];
-  *(float *)(param_1 + 300) = GH_U2F((unsigned int)(param_2[3]));
+  *(float *)(param_1 + 300) = (float)param_2[3];
   *(float *)(param_1 + 0x120) = (float)dVar1;
   *(uint *)(param_1 + 0x486c) = *(uint *)(param_1 + 0x486c) | 3;
   *(float *)(param_1 + 0x124) = (float)dVar3;
@@ -141,10 +141,10 @@ int _glTexCoord4dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glTexCoord4_ListExec_001103b4,0x10);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
-    pfVar1[3] = GH_U2F((unsigned int)(param_2[3]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
+    pfVar1[3] = (float)param_2[3];
   }
   return pfVar1;
 }
@@ -160,7 +160,7 @@ int _glTexCoord4dv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord1f_Exec @ 0x93a7c (28 bytes) */
-void _glTexCoord1f_Exec(int param_1,double fparam_1)
+void _glTexCoord1f_Exec(int param_1,float fparam_1)
 {
   *(float *)(param_1 + 0x120) = (float)fparam_1;
   *(undefined4 *)(param_1 + 300) = *(undefined4 *)(param_1 + 0x24);
@@ -327,7 +327,7 @@ int _glTexCoord3fv_CompExec(param_1, param_2)
 }
 
 /* _glTexCoord4f_Exec @ 0x93e50 (32 bytes) */
-void _glTexCoord4f_Exec(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glTexCoord4f_Exec(int param_1,float fparam_1,float fparam_2,float fparam_3,float fparam_4)
 {
   *(float *)(param_1 + 0x120) = (float)fparam_1;
   *(float *)(param_1 + 0x124) = (float)fparam_2;

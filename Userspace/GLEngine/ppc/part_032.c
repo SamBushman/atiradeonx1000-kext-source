@@ -281,7 +281,7 @@ LAB_0009e1a0:
 }
 
 /* _glTexParameterf_Comp @ 0x9e1e0 (40 bytes) */
-undefined4 _glTexParameterf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1)
+undefined4 _glTexParameterf_Comp(undefined4 param_1,undefined4 param_2,undefined4 param_3,float fparam_1)
 {
   undefined4 uVar1;
   float fStack00000024;
@@ -2481,7 +2481,7 @@ int _glVertex2dv_Exec(param_1, param_2)
                     
                     
   (*((int (*)(int,int,double,double,double,double))UNRECOVERED_JUMPTABLE))
-            (param_1, param_2, (double)GH_U2F((unsigned int)(*param_2)), (double)GH_U2F((unsigned int)(param_2[1])), (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+            (param_1, param_2, (double)(float)*param_2, (double)(float)param_2[1], (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -2494,8 +2494,8 @@ int _glVertex2dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glVertex2_ListExec_00110418,8);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
   }
   return pfVar1;
 }
@@ -2524,7 +2524,7 @@ int _glVertex3dv_Exec(param_1, param_2)
                     
                     
   (*((int (*)(int,int,double,double,double,double))UNRECOVERED_JUMPTABLE))
-            (param_1, param_2, (double)GH_U2F((unsigned int)(*param_2)), (double)GH_U2F((unsigned int)(param_2[1])), (double)GH_U2F((unsigned int)(param_2[2])), (double)*(float *)(param_1 + 0x24));
+            (param_1, param_2, (double)(float)*param_2, (double)(float)param_2[1], (double)(float)param_2[2], (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -2537,9 +2537,9 @@ int _glVertex3dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glVertex3_ListExec_00110414,0xc);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
   }
   return pfVar1;
 }
@@ -2608,7 +2608,7 @@ int _glVertex4dv_Exec(param_1, param_2)
                     
                     
   (*((int (*)(int,int,double,double,double,double))UNRECOVERED_JUMPTABLE))
-            (param_1, param_2, (double)GH_U2F((unsigned int)(*param_2)), (double)GH_U2F((unsigned int)(param_2[1])), (double)GH_U2F((unsigned int)(param_2[2])), (double)GH_U2F((unsigned int)(param_2[3])));
+            (param_1, param_2, (double)(float)*param_2, (double)(float)param_2[1], (double)(float)param_2[2], (double)(float)param_2[3]);
   return;
 }
 
@@ -2621,10 +2621,10 @@ int _glVertex4dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glVertex4_ListExec_00110410,0x10);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
-    pfVar1[3] = GH_U2F((unsigned int)(param_2[3]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
+    pfVar1[3] = (float)param_2[3];
   }
   return pfVar1;
 }

@@ -1848,7 +1848,7 @@ int _glEvalCoord1dv_Exec(param_1, param_2)
   undefined4 param_1;
   double *param_2;
 {
-  ((void (*)())_gleEvalMap1)(param_1,(double)GH_U2F((unsigned int)(*param_2)));
+  ((void (*)())_gleEvalMap1)(param_1,(double)(float)*param_2);
   return;
 }
 
@@ -1972,8 +1972,8 @@ int _glEvalCoord2dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glEvalCoord2d_ListExec_001100c8,8);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
   }
   return pfVar1;
 }

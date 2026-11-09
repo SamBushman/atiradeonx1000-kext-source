@@ -3587,22 +3587,22 @@ int _gleLoadTransposeMatrixd(param_1, param_2)
   double *param_1;
   float *param_2;
 {
-  *param_2 = GH_U2F((unsigned int)(*param_1));
-  param_2[1] = GH_U2F((unsigned int)(param_1[4]));
-  param_2[2] = GH_U2F((unsigned int)(param_1[8]));
-  param_2[3] = GH_U2F((unsigned int)(param_1[0xc]));
-  param_2[4] = GH_U2F((unsigned int)(param_1[1]));
-  param_2[5] = GH_U2F((unsigned int)(param_1[5]));
-  param_2[6] = GH_U2F((unsigned int)(param_1[9]));
-  param_2[7] = GH_U2F((unsigned int)(param_1[0xd]));
-  param_2[8] = GH_U2F((unsigned int)(param_1[2]));
-  param_2[9] = GH_U2F((unsigned int)(param_1[6]));
-  param_2[10] = GH_U2F((unsigned int)(param_1[10]));
-  param_2[0xb] = GH_U2F((unsigned int)(param_1[0xe]));
-  param_2[0xc] = GH_U2F((unsigned int)(param_1[3]));
-  param_2[0xd] = GH_U2F((unsigned int)(param_1[7]));
-  param_2[0xe] = GH_U2F((unsigned int)(param_1[0xb]));
-  param_2[0xf] = GH_U2F((unsigned int)(param_1[0xf]));
+  *param_2 = (float)*param_1;
+  param_2[1] = (float)param_1[4];
+  param_2[2] = (float)param_1[8];
+  param_2[3] = (float)param_1[0xc];
+  param_2[4] = (float)param_1[1];
+  param_2[5] = (float)param_1[5];
+  param_2[6] = (float)param_1[9];
+  param_2[7] = (float)param_1[0xd];
+  param_2[8] = (float)param_1[2];
+  param_2[9] = (float)param_1[6];
+  param_2[10] = (float)param_1[10];
+  param_2[0xb] = (float)param_1[0xe];
+  param_2[0xc] = (float)param_1[3];
+  param_2[0xd] = (float)param_1[7];
+  param_2[0xe] = (float)param_1[0xb];
+  param_2[0xf] = (float)param_1[0xf];
   return;
 }
 
@@ -3818,7 +3818,7 @@ int _gleMultTransposeMatrix(param_1, param_2, param_3)
 }
 
 /* _glePreEvaluate @ 0xdd9cc (164 bytes) */
-void _glePreEvaluate(undefined4 param_1,int param_2,undefined4 param_3,float *param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glePreEvaluate(undefined4 param_1,int param_2,undefined4 param_3,float *param_4,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
   int iVar2;
@@ -3866,7 +3866,7 @@ void _glePreEvaluate(undefined4 param_1,int param_2,undefined4 param_3,float *pa
 }
 
 /* _glePreEvaluateWithDeriv @ 0xdda70 (356 bytes) */
-void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _glePreEvaluateWithDeriv(undefined4 param_1,int param_2,undefined4 param_3,float *param_4,float *param_5,float fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
   float fVar2;

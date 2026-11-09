@@ -9,9 +9,9 @@ int _glWindowPos3dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glWindowPos3_ListExec_001104cc,0xc);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
   }
   return pfVar1;
 }
@@ -707,7 +707,7 @@ int _glCombinerStageParameterfvNV_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glCombinerParameterfNV_Exec @ 0xb3054 (80 bytes) */
-void _glCombinerParameterfNV_Exec(int param_1,int param_2,double fparam_1)
+void _glCombinerParameterfNV_Exec(int param_1,int param_2,float fparam_1)
 {
   float fStack00000020;
   

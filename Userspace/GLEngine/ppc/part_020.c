@@ -428,9 +428,9 @@ int _glNormal3dv_Comp(param_1, param_2)
   
   pfVar1 = (float *)_gleAddListItem(param_1,PTR__glNormal_ListExec_00110224,0xc);
   if (pfVar1 != (float *)0x0) {
-    *pfVar1 = GH_U2F((unsigned int)(*param_2));
-    pfVar1[1] = GH_U2F((unsigned int)(param_2[1]));
-    pfVar1[2] = GH_U2F((unsigned int)(param_2[2]));
+    *pfVar1 = (float)*param_2;
+    pfVar1[1] = (float)param_2[1];
+    pfVar1[2] = (float)param_2[2];
   }
   return pfVar1;
 }
@@ -445,7 +445,7 @@ int _glNormal3dv_Exec(param_1, param_2)
   
   dVar1 = param_2[1];
   dVar2 = param_2[2];
-  *(float *)(param_1 + 0x2b0) = GH_U2F((unsigned int)(*param_2));
+  *(float *)(param_1 + 0x2b0) = (float)*param_2;
   *(float *)(param_1 + 0x2b4) = (float)dVar1;
   *(float *)(param_1 + 0x2b8) = (float)dVar2;
   return;
