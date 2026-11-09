@@ -2780,7 +2780,7 @@ LAB_000db024:
         bVar15 = *(byte *)(iVar12 + uVar3);
         uVar2 = uVar3;
         if (((bVar16 | bVar14 | bVar15) & 0xc3) == 0) {
-          pdVar6 = (dword *)((int)&__mh_bundle_header.magic + 3);
+          pdVar6 = (dword *)((int)((unsigned char *)0x0) + 3);
           bVar1 = iVar20 < iStack00000024;
           if (bVar1) {
             puVar22 = local_84;
@@ -2982,7 +2982,7 @@ LAB_000dbe1c:
         bVar15 = *(byte *)(iVar12 + uVar3);
         uVar2 = uVar3;
         if (((bVar16 | bVar14 | bVar15) & 0xc3) == 0) {
-          pdVar6 = (dword *)((int)&__mh_bundle_header.magic + 3);
+          pdVar6 = (dword *)((int)((unsigned char *)0x0) + 3);
           bVar1 = iVar20 < iStack00000024;
           if (bVar1) {
             puVar22 = local_84;

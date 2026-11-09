@@ -6674,7 +6674,7 @@ int _gleArrayIncAndStoreVertexLoop(param_1, param_2, param_3, param_4)
   puVar1 = param_1 + 1;
   switch(param_4) {
   default:
-    __mh_bundle_header.magic = 0;
+    (*(volatile unsigned int *)0x0) = 0;
     goto LAB_0004ec20;
   case 1:
   case 3:

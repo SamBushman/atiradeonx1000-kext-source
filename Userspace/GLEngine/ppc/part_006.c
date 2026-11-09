@@ -4839,7 +4839,7 @@ int _gleSetupAndDrawArraysOrElementsOutOfLine_ListExec(param_1, param_2)
   uVar6 = _gleGetEnabled(param_1,0x851d);
   *(char *)(param_1 + 0x5411) = (char)uVar6;
   ((int (*)())_gleSetCurrentVertexObject)(param_1,puVar15[1]);
-  piVar8 = (int *)((int)&__mh_bundle_header.magic + 1);
+  piVar8 = (int *)((int)((unsigned char *)0x0) + 1);
   ((int (*)())_gleSetClientEnableFlag)(param_1,0x851d,1);
   if ((-1 < *(short *)(param_1 + 0x4a10)) ||
      (((*(char *)(param_1 + 0x4664) != '\0' && (*(int *)(*(int *)(param_1 + 0x5420) + 0x4cc) == 0))
@@ -4889,7 +4889,7 @@ LAB_000443dc:
           fparam_1 = (double)_gleUpdateLightRGBASums(param_1,param_1 + 0x2c20,0);
         }
         if (*(char *)(param_1 + 0x3094) != '\0') {
-          piVar8 = (int *)((int)&__mh_bundle_header.magic + 1);
+          piVar8 = (int *)((int)((unsigned char *)0x0) + 1);
           fparam_1 = (double)_gleUpdateLightRGBASums(param_1,param_1 + 0x2e60,1);
         }
         goto LAB_000443dc;
@@ -5748,7 +5748,7 @@ LAB_00045508:
           fparam_1 = (double)_gleUpdateLightRGBASums(param_1,param_1 + 0x2c20,0);
         }
         if (*(char *)(param_1 + 0x3094) != '\0') {
-          in_r5 = (int *)((int)&__mh_bundle_header.magic + 1);
+          in_r5 = (int *)((int)((unsigned char *)0x0) + 1);
           fparam_1 = (double)_gleUpdateLightRGBASums(param_1,param_1 + 0x2e60,1);
         }
         goto LAB_00045508;

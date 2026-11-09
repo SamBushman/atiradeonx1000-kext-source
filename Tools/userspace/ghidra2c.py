@@ -1027,7 +1027,13 @@ for pi in range(0, len(funcs), part):
             # address 0 (GLDriver: ~190 uses in 30 functions, a NULL / 1 / 2 / 3 / 0x10 in a pointer-typed variable or a device-id range test - FUN_000c6ff0 compared
             # the chip id against `&MACH_HEADER.ncmds`). The link tree resolved it to the real header's address; it is the number.
             _mhf = {'magic': 0, 'cputype': 4, 'cpusubtype': 8, 'filetype': 0xc, 'ncmds': 0x10, 'sizeofcmds': 0x14, 'flags': 0x18, 'reserved': 0x1c}
-            b = re.sub(r'&\s*MACH_HEADER\.(magic|cputype|cpusubtype|filetype|ncmds|sizeofcmds|flags|reserved)\b', lambda m: '((unsigned char *)0x%x)' % _mhf[m.group(1)], b)
+            # the header's name is MACH_HEADER (dylib), `__mh_bundle_header` (bundle: GLEngine), `__mh_execute_header` ...; GLEngine `_gleDrawArraysOrElements_Exec` tested the draw mode
+            # against `&__mh_bundle_header.cpusubtype + 2` (= 10) and so against the real header's address: every mode passed the range check
+            _mhn = r'(?:MACH_HEADER|__mh_\w+_header)'
+            _mhfl = r'(magic|cputype|cpusubtype|filetype|ncmds|sizeofcmds|flags|reserved)\b'
+            b = re.sub(r'&\s*' + _mhn + r'\.' + _mhfl, lambda m: '((unsigned char *)0x%x)' % _mhf[m.group(1)], b)
+            # a field of the header used as a value / assigned (`__mh_bundle_header.magic = 0;`: stock `li r2,0; stw r2,0(r2)`, a store through the NULL base register of a `default:` case)
+            b = re.sub(r'\b' + _mhn + r'\.' + _mhfl, lambda m: '(*(volatile unsigned int *)0x%x)' % _mhf[m.group(1)], b)
             b = re.sub(r'\b\w+_command_([0-9a-f]{8})\b', lambda m: '(*(GhidraMachOCommand *)0x%s)' % m.group(1), b)   # a constant that lands in the Mach-O header area (e.g. 0x1c = first load command), not an object
             b = re.sub(r'\bsection_([0-9a-f]{8})\b', lambda m: '(*(GhidraMachOSection *)0x%s)' % m.group(1), b)
             b = re.sub(r'\(float\)\(\(unsigned char \*\)(0x[0-9a-f]+)\)', r'(float)\1', b)

@@ -4251,7 +4251,7 @@ LAB_0001c3c8:
         goto switchD_0001c1ec_caseD_86da;
       }
       if (param_3 == 0x8588) {
-        if (((((param_4 == (code *)0x1702) || (param_4 + -0x84c0 < &__mh_bundle_header.ncmds)) ||
+        if (((((param_4 == (code *)0x1702) || (param_4 + -0x84c0 < ((unsigned char *)0x10))) ||
              (param_4 == (code *)0x8576)) ||
             ((param_4 == (code *)0x8577 || (param_4 == (code *)0x8578)))) ||
            ((param_4 == (code *)0x0 || (param_4 == (code *)0x1)))) {
@@ -4404,7 +4404,7 @@ LAB_0001c594:
           }
           goto switchD_0001c1ec_caseD_86da;
         }
-        if ((code *)((int)&__mh_bundle_header.magic + 3) < param_4 + -0x300)
+        if ((code *)((int)((unsigned char *)0x0) + 3) < param_4 + -0x300)
         goto switchD_0001c1ec_caseD_86da;
         *(undefined2 *)(uVar7 * 0x7c + param_1 + 0x354e) = uVar6;
       }
@@ -4963,7 +4963,7 @@ LAB_0001d42c:
   puVar15 = puVar8;
   switch(uStack_d0 >> 0x10 & 0xf) {
   default:
-    __mh_bundle_header.magic = 0;
+    (*(volatile unsigned int *)0x0) = 0;
     break;
   case 1:
     *puVar8 = 0x90c348cc;
