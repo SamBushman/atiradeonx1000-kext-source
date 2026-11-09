@@ -302,7 +302,7 @@ LAB_0001f388:
                 (param_1,iVar3,iVar10,uVar1,param_3,(uint)*(byte *)(param_1 + 0x85a8));
     }
   }
-  ((int (*)())_gleModifyPluginTextureLevel)(param_1,iVar3,iVar10,uVar1,param_3,param_4,param_5,0,param_6);
+  ((int (*)())_gleModifyPluginTextureLevel)(param_1,iVar3,iVar10,uVar1,param_3,param_4,param_5,0,param_6,param_7,1);
   uVar5 = _gleTextureImagePut(param_1,iVar10,param_4 + (uint)*(byte *)(iVar2 + 0xce),
                               param_5 + (uint)*(byte *)(iVar2 + 0xce),0,param_6,param_7,1,param_8,
                               param_9,1,param_1 + 0x31cc,param_10);
@@ -489,7 +489,7 @@ int _checkFastPath(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 }
 
 /* _gleModifyPluginTextureLevel @ 0x1f9dc (376 bytes) */
-int _gleModifyPluginTextureLevel(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+int _gleModifyPluginTextureLevel(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   int param_1;
   undefined4 *param_2;
   int *param_3;
@@ -499,6 +499,8 @@ int _gleModifyPluginTextureLevel(param_1, param_2, param_3, param_4, param_5, pa
   undefined4 param_7;
   undefined4 param_8;
   undefined4 param_9;
+  undefined4 param_10;
+  undefined4 param_11;
 {
   int *piVar1;
   undefined4 *puVar2;

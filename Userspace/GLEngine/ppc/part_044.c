@@ -672,7 +672,7 @@ int _gleImagingTexFormatToInternal(param_1)
 }
 
 /* _gleImagingUnpackData @ 0xd2724 (316 bytes) */
-int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -681,6 +681,7 @@ int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, 
   undefined4 param_6;
   undefined4 param_7;
   int param_8;
+  undefined4 param_9;
 {
   undefined1 *puVar1;
   undefined1 *puVar2;
@@ -691,7 +692,8 @@ int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, 
   int local_c0;
   undefined4 local_bc;
   undefined1 auStack_b8 [4];
-  undefined1 auStack_b4 [8];
+  undefined1 auStack_b4 [4];
+  undefined4 local_b0;
   int local_ac;
   undefined1 auStack_a8 [4];
   undefined1 auStack_a4 [4];
@@ -723,6 +725,7 @@ int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, 
   local_98 = 5;
   local_bc = local_50;
   local_a0 = 2;
+  local_b0 = param_9;
   local_9c = 0;
   local_94 = param_2;
   local_90 = param_3;
@@ -1565,7 +1568,7 @@ int _gleConvolutionFilter1D(param_1, param_2, param_3, param_4, param_5, param_6
   uVar2 = _malloc(param_4 * iVar1);
   *(undefined4 *)(param_1 + 0x32cc) = uVar2;
   *(short *)(param_1 + 0x32ca) = (short)param_3;
-  ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,param_3,0x1406,param_7);
+  ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,param_3,0x1406,param_7,uVar2);
   ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32a8,*(undefined4 *)(param_1 + 0x32cc),
              (uint)*(ushort *)(param_1 + 0x32ca),0,param_4,0);
   return;
@@ -1595,7 +1598,7 @@ int _gleConvolutionFilter2D(param_1, param_2, param_3, param_4, param_5, param_6
     uVar2 = _malloc(param_4 * param_5 * iVar1);
     *(undefined4 *)(param_1 + 0x330c) = uVar2;
     *(short *)(param_1 + 0x330a) = (short)param_3;
-    ((int (*)())_gleImagingUnpackData)(param_1,param_4,param_5,param_6,param_7,param_3,0x1406,param_8);
+    ((int (*)())_gleImagingUnpackData)(param_1,param_4,param_5,param_6,param_7,param_3,0x1406,param_8,uVar2);
     ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x32e8,*(undefined4 *)(param_1 + 0x330c),
                (uint)*(ushort *)(param_1 + 0x330a),0,param_4 * param_5,0);
     return;
@@ -1653,12 +1656,12 @@ int _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, 
     *(short *)(param_1 + 0x334a) = (short)param_3;
     *(int *)(param_1 + 0x3350) = param_4;
     *(int *)(param_1 + 0x3354) = param_5;
-    ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_6,param_7,param_3,0x1406,param_8);
-    ((int (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,param_3,0x1406,param_9);
+    iVar1 = iVar2 + param_4 * iVar1;
+    ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_6,param_7,param_3,0x1406,param_8,iVar2);
+    ((int (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,param_3,0x1406,param_9,iVar1);
     ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,*(undefined4 *)(param_1 + 0x334c),
                (uint)*(ushort *)(param_1 + 0x334a),0,param_4,0);
-    ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,iVar2 + param_4 * iVar1,(uint)*(ushort *)(param_1 + 0x334a),
-               0,param_5,0);
+    ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,iVar1,(uint)*(ushort *)(param_1 + 0x334a),0,param_5,0);
     return;
   }
   *(undefined4 *)(param_1 + 0x334c) = 0;
@@ -1700,7 +1703,7 @@ int _gleColorTable(param_1, param_2, param_3, param_4, param_5, param_6, param_7
   undefined4 param_7;
 {
   ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_5,param_6,(uint)*(ushort *)(param_3 + 0x10),
-             (uint)*(ushort *)(param_3 + 0x12),param_7);
+             (uint)*(ushort *)(param_3 + 0x12),param_7,*(undefined4 *)(param_3 + 0x14));
   ((int (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),0,
              param_4,1);
   return;
@@ -1711,15 +1714,17 @@ int _gleColorSubTable(param_1, param_2, param_3, param_4, param_5, param_6, para
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
-  undefined4 param_4;
+  int param_4;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
 {
-  _glePixelBytes((uint)*(ushort *)(param_3 + 0x10),(uint)*(ushort *)(param_3 + 0x12));
+  int iVar1;
+  
+  iVar1 = _glePixelBytes((uint)*(ushort *)(param_3 + 0x10),(uint)*(ushort *)(param_3 + 0x12));
   ((int (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,(uint)*(ushort *)(param_3 + 0x10),
-             (uint)*(ushort *)(param_3 + 0x12),param_8);
+             (uint)*(ushort *)(param_3 + 0x12),param_8,*(int *)(param_3 + 0x14) + iVar1 * param_4);
   ((int (*)())_gleImagingScaleAndBias)(param_1,param_2,*(undefined4 *)(param_3 + 0x14),(uint)*(ushort *)(param_3 + 0x10),
              param_4,param_5,1);
   return;

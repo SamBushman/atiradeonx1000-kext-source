@@ -144,7 +144,7 @@ LAB_00097e7c:
                     (param_1,iVar9,iVar12,0,param_3,(uint)*(byte *)(param_1 + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(param_1,iVar9,iVar12,0,param_3,param_4,0,0,param_7);
+      _gleModifyPluginTextureLevel(param_1,iVar9,iVar12,0,param_3,param_4,0,0,param_7,1,1);
       _gleTextureSubImageCopy(param_1,iVar12,param_4,0,0,param_5,param_6,param_7,1);
       if ((((*(uint *)(iVar9 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar9 + 0x60) == param_3))
          && (iVar9 = _gleGenMipmapsToLevel(param_1,iVar9,0,param_3,0xf,1), iVar9 != 0)) {
@@ -580,7 +580,8 @@ LAB_000987f0:
                   (param_1,iVar10,iVar15,uVar11,param_3,(uint)*(byte *)(param_1 + 0x85a8));
       }
     }
-    _gleModifyPluginTextureLevel(param_1,iVar10,iVar15,uVar11,param_3,param_4,param_5,0,param_8);
+    _gleModifyPluginTextureLevel
+              (param_1,iVar10,iVar15,uVar11,param_3,param_4,param_5,0,param_8,param_9,1);
     _gleTextureSubImageCopy(param_1,iVar15,param_4,param_5,0,param_6,param_7,param_8,param_9);
     if ((((*(uint *)(iVar10 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar10 + 0x60) == param_3))
        && (iVar10 = _gleGenMipmapsToLevel(param_1,iVar10,uVar11,param_3,0xf,1), iVar10 != 0)) {
@@ -974,7 +975,8 @@ LAB_000991dc:
                   (param_1,iVar9,iVar13,0,param_3,(uint)*(byte *)(param_1 + 0x85a8));
       }
     }
-    _gleModifyPluginTextureLevel(param_1,iVar9,iVar13,0,param_3,param_4,param_5,param_6,param_9);
+    _gleModifyPluginTextureLevel
+              (param_1,iVar9,iVar13,0,param_3,param_4,param_5,param_6,param_9,param_10,1);
     _gleTextureSubImageCopy(param_1,iVar13,param_4,param_5,param_6,param_7,param_8,param_9,param_10)
     ;
     if ((((*(uint *)(iVar9 + 0x6c) & 0x8000) != 0) && ((int)*(short *)(iVar9 + 0x60) == param_3)) &&
@@ -3340,7 +3342,7 @@ LAB_0009d190:
                       (param_1,iVar11,iVar14,0,param_3,(uint)*(byte *)(param_1 + 0x85a8));
           }
         }
-        _gleModifyPluginTextureLevel(param_1,iVar11,iVar14,0,param_3,0,0,0,param_7);
+        _gleModifyPluginTextureLevel(param_1,iVar11,iVar14,0,param_3,0,0,0,param_7,1,1);
         _gleTextureImageCopy(param_1,iVar14,param_4,param_5,param_6,param_7,1);
         if ((((*(uint *)(iVar11 + 0x6c) & 0x8000) != 0) &&
             ((int)*(short *)(iVar11 + 0x60) == param_3)) &&

@@ -3249,7 +3249,8 @@ LAB_0001aa44:
               _gleUploadPluginTextureLevel
                         (param_1,param_2,iVar18,iVar19,uVar20,(uint)*(byte *)(param_1 + 0x85a8));
               _gleModifyPluginTextureLevel
-                        (param_1,param_2,iVar18,iVar19,uVar20,0,0,0,(uint)*(ushort *)(iVar18 + 4));
+                        (param_1,param_2,iVar18,iVar19,uVar20,0,0,0,(uint)*(ushort *)(iVar18 + 4),
+                         (uint)*(ushort *)(iVar18 + 6),(uint)*(ushort *)(iVar18 + 8));
               uVar17 = (uint)*(byte *)(param_2 + 0x8f);
             }
             uVar20 = uVar20 + 1;

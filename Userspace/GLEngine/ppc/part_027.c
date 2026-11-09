@@ -1233,7 +1233,8 @@ int _glCompressedTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5,
             }
           }
           iVar3 = _gleModifyPluginTextureLevel
-                            (param_1,iVar2,iVar5,0,param_3,param_4,param_5,param_6,param_7);
+                            (param_1,iVar2,iVar5,0,param_3,param_4,param_5,param_6,param_7,param_8,
+                             param_9);
           if (param_12 != 0) {
             iVar3 = _gleCompressedTextureImagePut
                               (param_1,iVar5,param_4,param_5,param_6,param_7,param_8,param_9,
@@ -1409,7 +1410,8 @@ int _glCompressedTexSubImage2D_Exec(param_1, param_2, param_3, param_4, param_5,
                       (param_1,iVar3,iVar8,uVar1,param_3,(uint)*(byte *)(param_1 + 0x85a8));
           }
         }
-        _gleModifyPluginTextureLevel(param_1,iVar3,iVar8,uVar1,param_3,param_4,param_5,0,param_6);
+        _gleModifyPluginTextureLevel
+                  (param_1,iVar3,iVar8,uVar1,param_3,param_4,param_5,0,param_6,param_7,1);
         if (param_10 != 0) {
           _gleCompressedTextureImagePut
                     (param_1,iVar8,param_4,param_5,0,param_6,param_7,1,param_8,param_9,param_10);

@@ -855,7 +855,7 @@ int _glColorSubTable_ListExec(param_1, param_2)
                     (param_1,iVar5,iVar6,0,0xffffffff,(uint)*(byte *)(param_1 + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(param_1,iVar5,iVar6,0,0xffffffff,param_2[1],0,0,param_2[2]);
+      _gleModifyPluginTextureLevel(param_1,iVar5,iVar6,0,0xffffffff,param_2[1],0,0,param_2[2],1,1);
       uVar3 = *param_2;
       iVar5 = param_1 + 0x33d0;
       if (uVar3 != 0x80d1) {
@@ -1070,7 +1070,7 @@ LAB_000604f4:
                     (param_1,iVar5,iVar4,0,0xffffffff,(uint)*(byte *)(param_1 + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(param_1,iVar5,iVar4,0,0xffffffff,param_3,0,0,param_4);
+      _gleModifyPluginTextureLevel(param_1,iVar5,iVar4,0,0xffffffff,param_3,0,0,param_4,1,1);
       iVar5 = param_1 + 0x33d0;
       if (param_2 != 0x80d1) {
         if (param_2 < 0x80d2) {
@@ -1545,7 +1545,7 @@ LAB_00060eb8:
       }
     }
     iVar6 = param_1 + 0x33d0;
-    _gleModifyPluginTextureLevel(param_1,iVar10,iVar9,0,0xffffffff,param_3,0,0,param_6);
+    _gleModifyPluginTextureLevel(param_1,iVar10,iVar9,0,0xffffffff,param_3,0,0,param_6,1,1);
     if (param_2 != 0x80d1) {
       if (param_2 < 0x80d2) {
         iVar6 = param_1 + 0x33b0;

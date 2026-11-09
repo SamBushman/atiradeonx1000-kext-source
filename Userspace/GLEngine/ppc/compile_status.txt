@@ -1,13 +1,13 @@
 57 failing functions
 part_000 _gleInitializeGLTexture 3 parse error before '{' token | if (((*(unsigned short *)((unsigned char *)&(param_1) + 2)) & 0xf) == 2) {
 part_001 _gliExecDispatchTable 3 parse error before '{' token | uVar3 = -(uint)(*(int *)(*(uint *)(param_1 + 0x4684) + 0x21c) == 0);
-part_002 _glTexParameterF_Exec 3 parse error before '{' token | else {
-part_003 _glePPParse 3 parse error before '{' token | local_b8 = 0xd8000;
+part_002 _glTexParameterF_Exec 3 parse error before '{' token | }
+part_003 _glePPParse 3 parse error before '{' token | local_c8 = 0x68000;
 part_004 _glMaterialfv_Exec 3 parse error before '{' token | 
 part_005 _glStencilOp_CompExec 3 parse error before '{' token | undefined4 param_1;
 part_006 _gliCompDispatchTable 3 parse error before '{' token | PTR__glWindowPos3i_Comp_00112df4;
 part_007 _gleGetAttrib 3 parse error before '{' token | iVar19 = iVar19 + 0x214;
-part_008 _glCopyTexImage2D_Exec 3 parse error before '{' token | uVar4 = param_4;
+part_008 _glCopyTexImage2D_Exec 3 parse error before '{' token | uVar15 = param_3;
 part_009 _glBlendEquationSeparateEXT_CompExec 3 parse error before '{' token | 
 part_010 _glColor3iv_CompExec 3 parse error before '{' token | 
 part_011 _glColor4uiv_Exec 3 parse error before '{' token | 
@@ -30,7 +30,7 @@ part_027 _glTexCoord2dv_CompExec 3 parse error before '{' token |
 part_028 _glTexCoord1sv_Exec 3 parse error before '{' token | 
 part_029 _glMultiTexCoord3f_Exec 3 parse error before '{' token | 
 part_030 _glCopyTexSubImage1D_Comp 3 parse error before '{' token | 
-part_031 _glCopyTexImage1D_CompExec 3 parse error before '{' token | double in_f4;
+part_031 _glCopyTexImage1D_CompExec 3 parse error before '{' token | double in_f2;
 part_032 _glVertex4f_Comp 3 parse error before '{' token | 
 part_033 _gleDrawArraysOrElements_Exec 3 parse error before '{' token | iVar13 = iVar13 + 1;
 part_034 _glWeightubvARB_Exec 3 parse error before '{' token | 
@@ -43,7 +43,7 @@ part_040 _gleInterpolClipNO1110 3 parse error before '{' token | uVar14 = 0;
 part_041 _gleDrawPixelsSaveState 3 parse error before '{' token | *(uint *)(param_1 + 0x1bac) = uVar1;
 part_042 FUN_000cc204 3 parse error before '{' token | 
 part_043 _LFSParserBuildErrorString 3 parse error before '{' token | pcVar2 = "invalid register";
-part_044 _gleVtxLightRGBAFrontPtr 3 parse error before '{' token | iVar12 = iVar10;
+part_044 _gleVtxLightRGBAFrontPtr 3 parse error before '{' token | uVar2 = *(undefined4 *)(iVar10 + 0x1dc);
 part_045 FUN_000dc7b8 3 parse error before '{' token | float local_3c;
 part_046 _gle_dtostr 3 parse error before '{' token | 
 part_047 _gleExtractPixel_R_Byte 3 parse error before '{' token | 
@@ -53,6 +53,6 @@ part_050 _gleInsertPixel_A_Ubyte 3 parse error before '{' token |
 part_051 _gleBeginQuadsRenderSmooth 3 parse error before '{' token | 
 part_052 FUN_000effec 3 parse error before '{' token | }
 part_053 _gleMultiVtxTextureCoordGenNormalST 3 parse error before '{' token | 
-part_054 _gleTextureImagePut_FastByte 3 parse error before '{' token | }
+part_054 _gleTextureImagePut_FastByte 3 parse error before '{' token | param_5[2] = *param_5;
 part_055 _gleVPBeginQuadsTCL 3 parse error before '{' token | 
 part_056 _gliSwapBuffers 3 parse error before '{' token | 
