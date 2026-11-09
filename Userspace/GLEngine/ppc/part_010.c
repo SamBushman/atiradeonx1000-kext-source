@@ -249,7 +249,7 @@ int FUN_00058a1c(param_1, param_2, param_3, param_4, param_5)
   int iVar4;
   uint uVar5;
   int iVar6;
-  unsigned char avStack_40 [7];
+  vm_address_t avStack_40 [7];
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 == 0x8893) {
@@ -306,7 +306,7 @@ code_r0x00058cb0:
           *(int *)(iVar6 + 0x38) = param_3;
           *(short *)(iVar6 + 0x3c) = (short)param_5;
           *(uint *)(iVar6 + 0x34) = size;
-          *(unsigned char *)(iVar6 + 0x30) = avStack_40[0];
+          *(vm_address_t *)(iVar6 + 0x30) = avStack_40[0];
           if ((param_2 - 0x8892 < 2) && (1 < *(int *)(iVar6 + 8))) {
             _gleResetVACachePointers(param_1);
             iVar4 = *(int *)(param_1 + 0x4a60);
@@ -328,7 +328,7 @@ code_r0x00058cb0:
           } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
           return;
         }
-        _vm_allocate(*(unsigned char *)PTR_00112034,avStack_40,size,1);
+        _vm_allocate(*(vm_map_t *)PTR_00112034,avStack_40,size,1);
         if (avStack_40[0] != 0) {
           uVar5 = 3;
           if (param_4 != 0) {
@@ -392,8 +392,8 @@ int _glBufferSubData_Exec(param_1, param_2, param_3, param_4, param_5)
   int iVar5;
   int iVar6;
   int iVar7;
-  unsigned char size;
-  unsigned char local_40 [5];
+  vm_size_t size;
+  vm_address_t local_40 [5];
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 == 0x8893) {
@@ -418,11 +418,11 @@ LAB_00058e24:
       iVar7 = *(int *)(param_1 + 0x4a6c);
     }
     if ((iVar7 != 0) && (*(char *)(iVar7 + 0x44) == '\0')) {
-      size = *(unsigned char *)(iVar7 + 0x34);
+      size = *(vm_size_t *)(iVar7 + 0x34);
       if (size == 0) {
         return;
       }
-      local_40[0] = *(unsigned char *)(iVar7 + 0x30);
+      local_40[0] = *(vm_address_t *)(iVar7 + 0x30);
       if (local_40[0] != 0) {
         iVar5 = param_1 + 0x10000;
         iVar4 = (**(code **)(param_1 + 0x4718))
@@ -468,10 +468,10 @@ LAB_00058e24:
         *(uint *)(param_1 + 0x31c) = *(uint *)(param_1 + 0x31c) | 0x100000;
         return;
       }
-      _vm_allocate(*(unsigned char *)PTR_00112034,local_40,size,1);
+      _vm_allocate(*(vm_map_t *)PTR_00112034,local_40,size,1);
       if (local_40[0] != 0) {
-        *(unsigned char *)(iVar7 + 0x30) = local_40[0];
-        *(unsigned char *)(iVar7 + 0x34) = size;
+        *(vm_address_t *)(iVar7 + 0x30) = local_40[0];
+        *(vm_size_t *)(iVar7 + 0x34) = size;
         if ((param_2 - 0x8892 < 2) && (1 < *(int *)(iVar7 + 8))) {
           _gleResetVACachePointers(param_1);
           iVar4 = *(int *)(param_1 + 0x4a60);
@@ -568,11 +568,11 @@ int _glMapBuffer_Exec(param_1, param_2, param_3)
   int *piVar1;
   undefined4 *puVar2;
   undefined4 uVar3;
-  unsigned char size;
+  vm_size_t size;
   int iVar4;
   int iVar5;
   int iVar6;
-  unsigned char local_30 [7];
+  vm_address_t local_30 [7];
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
     if (param_2 != 0x8893) {
@@ -602,10 +602,10 @@ LAB_00059290:
     if (iVar6 != 0) {
       if (2 < param_3 - 35000U) goto LAB_000592a8;
       if (*(char *)(iVar6 + 0x44) == '\0') {
-        local_30[0] = *(unsigned char *)(iVar6 + 0x30);
+        local_30[0] = *(vm_address_t *)(iVar6 + 0x30);
         *(undefined1 *)(iVar6 + 0x44) = 1;
         *(short *)(iVar6 + 0x3e) = (short)param_3;
-        size = *(unsigned char *)(iVar6 + 0x34);
+        size = *(vm_size_t *)(iVar6 + 0x34);
         if ((local_30[0] != 0) || (size == 0)) {
           if (*(int *)(iVar6 + 0x40) != 0) {
             _gleSynchronizePluginBuffer(param_1,iVar6 + 0x10);
@@ -626,10 +626,10 @@ LAB_00059290:
           }
           return local_30[0];
         }
-        _vm_allocate(*(unsigned char *)PTR_00112034,local_30,size,1);
+        _vm_allocate(*(vm_map_t *)PTR_00112034,local_30,size,1);
         if (local_30[0] != 0) {
-          *(unsigned char *)(iVar6 + 0x30) = local_30[0];
-          *(unsigned char *)(iVar6 + 0x34) = size;
+          *(vm_address_t *)(iVar6 + 0x30) = local_30[0];
+          *(vm_size_t *)(iVar6 + 0x34) = size;
           if (1 < *(int *)(iVar6 + 8)) {
             _gleResetVACachePointers(param_1);
           }

@@ -688,7 +688,7 @@ LAB_0003b3b0:
                   local_74 = 0x100000;
                   uVar30 = 0x100000;
                 }
-                _vm_allocate(*(unsigned char *)PTR_00112034,(unsigned char *)&local_78,uVar30,1);
+                _vm_allocate(*(vm_map_t *)PTR_00112034,(vm_address_t *)&local_78,uVar30,1);
                 *piVar15 = (int)local_78;
                 local_78[3] = uVar30;
                 *(undefined4 *)*piVar15 = 4;
@@ -1805,7 +1805,7 @@ switchD_0003b6b4_caseD_0:
               else {
                 uVar13 = (uint)(((unsigned char *)0x0000103f) + iVar14) & 0xfffff000;
               }
-              _vm_allocate(*(unsigned char *)PTR_00112034,(unsigned char *)&local_78,uVar13,1);
+              _vm_allocate(*(vm_map_t *)PTR_00112034,(vm_address_t *)&local_78,uVar13,1);
               *piVar15 = (int)local_78;
               local_78[3] = uVar13;
               *(undefined4 *)*piVar15 = 4;
@@ -4566,23 +4566,23 @@ int _CloseCurrentVAR(param_1, param_2, param_3, param_4, param_5)
   undefined4 *puVar1;
   uint size_00;
   int iVar2;
-  unsigned char source_address;
-  unsigned char target_task;
+  vm_address_t source_address;
+  vm_map_t target_task;
   undefined4 uVar3;
-  unsigned char local_40 [6];
+  vm_address_t local_40 [6];
   
   iVar2 = *(int *)(param_1 + 0x53e8);
-  source_address = *(unsigned char *)(iVar2 + param_2);
+  source_address = *(vm_address_t *)(iVar2 + param_2);
   size_00 = *(uint *)(source_address + 0xc);
   size = (param_3 - *param_4) + 0xfffU & 0xfffff000;
   *(int *)(source_address + 8) = (param_3 - *param_4) + -0x40;
   if (size < size_00) {
-    target_task = *(unsigned char *)PTR_00112034;
+    target_task = *(vm_map_t *)PTR_00112034;
     *(uint *)(*(int *)(iVar2 + param_2) + 0xc) = size;
     _vm_allocate(target_task,local_40,size,1);
     _vm_copy(target_task,source_address,size,local_40[0]);
     _vm_deallocate(target_task,source_address,size_00);
-    *(unsigned char *)(iVar2 + param_2) = local_40[0];
+    *(vm_address_t *)(iVar2 + param_2) = local_40[0];
   }
   uVar3 = *(undefined4 *)(iVar2 + param_2);
   puVar1 = (undefined4 *)

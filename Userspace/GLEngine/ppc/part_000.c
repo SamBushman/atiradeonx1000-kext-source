@@ -22,13 +22,13 @@ int _gliGetVersion(param_1, param_2, param_3)
   undefined4 *param_2;
   undefined4 *param_3;
 {
-  unsigned char host;
-  unsigned char kVar1;
+  mach_port_t host;
+  kern_return_t kVar1;
   int iVar2;
-  unsigned char aiStack_70 [3];
+  integer_t aiStack_70 [3];
   int local_64;
   int local_60;
-  unsigned char local_40 [2];
+  mach_msg_type_number_t local_40 [2];
   int local_38 [3];
   size_t local_2c [5];
   

@@ -10,6 +10,12 @@ typedef unsigned int undefined4;
 typedef unsigned long long undefined8;
 typedef unsigned int uint;
 typedef unsigned long ulong;
+typedef unsigned int vm_size_t;
+typedef unsigned int vm_map_t;
+typedef unsigned int mach_port_t;
+typedef unsigned int mach_msg_type_number_t;
+typedef int kern_return_t;
+typedef int integer_t;
 typedef unsigned int vm_address_t;   /* Mach VM address (GLEngine _gleOptimizedListFreeFunc casts to it for vm_deallocate); same width as a PPC32 pointer */
 typedef unsigned short ushort;
 typedef unsigned char uchar;

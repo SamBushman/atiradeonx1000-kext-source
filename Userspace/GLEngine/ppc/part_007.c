@@ -33,7 +33,7 @@ int _gleOptimizedListFreeFunc(param_1, param_2)
     *puVar1 = 0;
     address = (uint *)*param_2;
   }
-  _vm_deallocate(*(unsigned char *)PTR_00112034,(vm_address_t)address,puVar1[3]);
+  _vm_deallocate(*(vm_map_t *)PTR_00112034,(vm_address_t)address,puVar1[3]);
   return;
 }
 
@@ -1095,8 +1095,8 @@ int _gleAllocateTextureLevel(param_1, param_2, param_3)
 {
   undefined *puVar1;
   undefined4 uVar2;
-  unsigned char size;
-  unsigned char local_20 [4];
+  vm_size_t size;
+  vm_address_t local_20 [4];
   
   size = ((int (*)())_gleTextureLevelBytes)(param_1,param_3);
   puVar1 = PTR_00112034;
@@ -1107,7 +1107,7 @@ int _gleAllocateTextureLevel(param_1, param_2, param_3)
     }
     else {
       *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) | 8;
-      _vm_allocate(*(unsigned char *)puVar1,local_20,size,1);
+      _vm_allocate(*(vm_map_t *)puVar1,local_20,size,1);
     }
     if (local_20[0] == 0) {
       if (*(int *)(param_1 + 0x7574) == 0) {
@@ -1116,7 +1116,7 @@ int _gleAllocateTextureLevel(param_1, param_2, param_3)
       uVar2 = 0;
     }
     else {
-      *(unsigned char *)(param_3 + 0x14) = local_20[0];
+      *(vm_address_t *)(param_3 + 0x14) = local_20[0];
       uVar2 = 1;
     }
   }
@@ -5047,7 +5047,7 @@ int _gleFreeTextureLevel(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  unsigned char size;
+  vm_size_t size;
   
   if ((*(byte *)(param_3 + 0xb) & 8) == 0) {
     _free(*(undefined4 *)(param_3 + 0x14));
@@ -5056,7 +5056,7 @@ int _gleFreeTextureLevel(param_1, param_2, param_3)
     size = ((int (*)())_gleTextureLevelBytes)(param_1,param_3);
     *(byte *)(param_3 + 0xb) = *(byte *)(param_3 + 0xb) & 0xf7;
     if (size != 0) {
-      _vm_deallocate(*(unsigned char *)PTR_00112034,*(unsigned char *)(param_3 + 0x14),size);
+      _vm_deallocate(*(vm_map_t *)PTR_00112034,*(vm_address_t *)(param_3 + 0x14),size);
     }
   }
   *(undefined4 *)(param_3 + 0x14) = 0;

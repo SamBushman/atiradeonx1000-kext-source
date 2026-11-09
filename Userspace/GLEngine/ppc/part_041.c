@@ -1381,9 +1381,9 @@ int _gleFreeBufferObject(param_1, param_2)
       iVar5 = iVar5 + 4;
     } while (iVar4 < (int)(uint)*(byte *)(param_1 + 0x85a4));
   }
-  if (*(unsigned char *)(param_2 + 0x30) != 0) {
-    _vm_deallocate(*(unsigned char *)PTR_00112034,*(unsigned char *)(param_2 + 0x30),
-                   *(unsigned char *)(param_2 + 0x38));
+  if (*(vm_address_t *)(param_2 + 0x30) != 0) {
+    _vm_deallocate(*(vm_map_t *)PTR_00112034,*(vm_address_t *)(param_2 + 0x30),
+                   *(vm_size_t *)(param_2 + 0x38));
   }
   _gleVecFree(param_2);
   return extraout_r3;
@@ -2752,13 +2752,13 @@ int _gleQuickOptimizeDisplayList(param_1, param_2, param_3)
   int param_3;
 {
   undefined *puVar1;
-  unsigned char * pvVar2;
+  vm_address_t *pvVar2;
   int *piVar3;
   undefined *puVar4;
   int iVar5;
   int iVar6;
-  unsigned char vVar7;
-  unsigned char vVar8;
+  vm_address_t vVar7;
+  vm_address_t vVar8;
   int *piVar9;
   int iVar10;
   int iVar11;
@@ -2768,7 +2768,7 @@ int _gleQuickOptimizeDisplayList(param_1, param_2, param_3)
   uint uVar15;
   undefined4 *puVar16;
   undefined4 *puVar17;
-  unsigned char local_60;
+  vm_address_t local_60;
   int local_5c [4];
   
   uVar13 = *(uint *)(param_3 + 0x10);
@@ -2827,7 +2827,7 @@ int _gleQuickOptimizeDisplayList(param_1, param_2, param_3)
           if (local_60 != 0) {
             _CloseCurrentVAR(param_1,iVar5,vVar7,&local_60,local_5c);
           }
-          pvVar2 = (unsigned char *)
+          pvVar2 = (vm_address_t *)
                    _gleAddListItemWithFree
                              (param_1,
                               PTR__gleSetupAndDrawArraysOrElementsOutOfLine_ListExec_00112140,0x10,
@@ -2841,7 +2841,7 @@ int _gleQuickOptimizeDisplayList(param_1, param_2, param_3)
           else {
             uVar14 = (uint)(((unsigned char *)0x0000103f) + iVar10) & 0xfffff000;
           }
-          _vm_allocate(*(unsigned char *)PTR_00112034,&local_60,uVar14,1);
+          _vm_allocate(*(vm_map_t *)PTR_00112034,&local_60,uVar14,1);
           *pvVar2 = local_60;
           *(uint *)(local_60 + 0xc) = uVar14;
           *(undefined4 *)*pvVar2 = 4;
