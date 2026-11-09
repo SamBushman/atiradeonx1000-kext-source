@@ -10,7 +10,7 @@ Rules every patch follows:
   * it is SCOPED to the binary whose function it is (`CORPUS_SCOPE`, set by build_corpus.py / verify_corpus.sh from the slice file name):
     `FUN_<addr>` names exist in several binaries, and an unscoped patch would fire (or fail) in the wrong one.
 
-Scopes: glprog = libGLProgrammability.dylib (ppc), gld = ATIRadeonX1000GLDriver.bundle (ppc), gld-i386 = its i386 slice (dump not archived,
+Scopes: gleng = GLEngine.bundle (ppc, the 6th corpus), glprog = libGLProgrammability.dylib (ppc), gld = ATIRadeonX1000GLDriver.bundle (ppc), gld-i386 = its i386 slice (dump not archived,
 patch not exercised by the current pipeline), ga / va / libgl = the other ppc images.
 """
 import re
@@ -24,7 +24,7 @@ def scope_of_slice(path):
     """Corpus scope of a Mach-O slice file name (`ATIRadeonX1000GLDriver.bundle.bin.ppc`, `libGL.dylib`, ...)."""
     n = path.rsplit('/', 1)[-1]
     arch = 'i386' if n.endswith('.i386') else 'ppc'
-    for key, sc in (('libGLProgrammability', 'glprog'), ('GLDriver', 'gld'), ('VADriver', 'va'), ('GA.plugin', 'ga'), ('libGL.dylib', 'libgl')):
+    for key, sc in (('GLEngine', 'gleng'), ('libGLProgrammability', 'glprog'), ('GLDriver', 'gld'), ('VADriver', 'va'), ('GA.plugin', 'ga'), ('libGL.dylib', 'libgl')):
         if key in n:
             return sc + ('-i386' if arch == 'i386' else '')
     return None
@@ -197,6 +197,11 @@ def _fix_242f0(conv):
 
 
 PATCHES = {
+    # _gleDrawArraysOrElements_Comp (gleng, stock 0xa6dc0, 392 bytes): the 32-byte copy loop `lbz r0,0(r4); addi r4,r4,4; stb r0,0(r7); addi r7,r7,1` copies the low byte
+    # (offset +3) of the eight stride words in the local table into the display-list item. Ghidra typed both cursors `code *` (a function type), so the
+    # byte load/store through them is `*pcVar4` / `*pcVar7` on a function designator; C: access them as bytes. (Pointer arithmetic on `code *` is a GNU
+    # extension that steps by 1, which is the stock's +1 / +4 steps as printed.)
+    '_gleDrawArraysOrElements_Comp': _scoped('gleng', _conv_with('_gleDrawArraysOrElements_Comp', [('cVar1 = *pcVar4;', 'cVar1 = *(char *)pcVar4;'), ('*pcVar7 = cVar1;', '*(char *)pcVar7 = cVar1;')])),
     # RETIRED 2026-09-25 (issue #71): yyparse (both TTypeLine _M_insert_aux sites), removeChildNode#1 (erase), removeChildNode#2 (_M_insert_aux) and the
     # two C2 -> C4 constructor aliases. Each dropped/misplaced argument was a symptom of the callee's by-value iterator / tag parameters (a
     # `__normal_iterator` struct, a 1-byte `forward_iterator_tag` with UNASSIGNED storage), which make the decompiler lose the argument registers.

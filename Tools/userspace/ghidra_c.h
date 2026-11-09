@@ -10,6 +10,7 @@ typedef unsigned int undefined4;
 typedef unsigned long long undefined8;
 typedef unsigned int uint;
 typedef unsigned long ulong;
+typedef unsigned int vm_address_t;   /* Mach VM address (GLEngine _gleOptimizedListFreeFunc casts to it for vm_deallocate); same width as a PPC32 pointer */
 typedef unsigned short ushort;
 typedef unsigned char uchar;
 typedef unsigned char byte;
@@ -87,7 +88,8 @@ typedef unsigned long long uint64_t_g;
 #define GBITS(x) __builtin_choose_expr(__builtin_types_compatible_p(__typeof__(x), float), ({ __typeof__(x) _gv = (x); *(unsigned int *)&_gv; }), (x))
 #define SUB41(x, n) ((unsigned char)(((unsigned long)GBITS(x)) >> (8 * (n))))
 #define SUB42(x, n) ((unsigned short)(((unsigned long)GBITS(x)) >> (8 * (n))))
-#define SUB84(x, n) ((unsigned int)((x) >> (8 * (n))))
+#define GBITS8(x) __builtin_choose_expr(__builtin_types_compatible_p(__typeof__(x), double), ({ __typeof__(x) _gd = (x); *(unsigned long long *)&_gd; }), (x))
+#define SUB84(x, n) ((unsigned int)((GBITS8(x)) >> (8 * (n))))   /* a double operand is taken by its bit pattern (GLEngine _glClearDepth_Exec stores its parameter with stfd) */
 #define SUB81(x, n) ((unsigned char)((x) >> (8 * (n))))
 #define SUB21(x, n) ((unsigned char)((x) >> (8 * (n))))
 #define ZEXT48(x) ((ulonglong)(unsigned int)(x))
