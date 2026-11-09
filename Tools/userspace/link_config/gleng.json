@@ -1,0 +1,17 @@
+{
+ "link_opt": "-O2 -mtune=970",
+ "data_label_overrides": {
+  "MACH_HEADER": "__mh_bundle_header"
+ },
+ "mirror_frames": true,
+ "mirror_stackaddr": false,
+ "drop_decls": [
+  "LZCOUNT"
+ ],
+ "label_overrides": {
+  "_glTexParameteriv_Comp": "_raw_entry_9e4cc"
+ },
+ "extra_raw_entries": [
+  "9e4cc"
+ ]
+}

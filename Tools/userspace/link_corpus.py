@@ -47,11 +47,14 @@ m = mo.load(stock)
 
 # ---------------------------------------------------------------------------------------------- function ledger
 ledger = []   # (addr, size, name, part)
+failed_fns = []   # (addr, size, name) of ledger rows the decompiler failed on (GLEngine _gleInvertMatrix_AltiVec: AltiVec): linked from the stock's own words until transcribed
 EXTRA_DIRS = [d for d in cfg.get('extra_corpora', []) if os.path.isdir(os.path.join(corpus, d))]
 for l in open(os.path.join(corpus, 'ledger.tsv')):
     f = l.rstrip('\n').split('\t')
     if len(f) >= 4:
         ledger.append((int(f[0], 16), int(f[1]), f[2], f[3]))
+        if len(f) >= 5 and f[4].startswith('DECOMPILE-FAILED'):
+            failed_fns.append((int(f[0], 16), int(f[1]), f[2]))
 for d_ in EXTRA_DIRS:      # companion corpora (unowned_code/: code only reached through data or exported entry points no analysis found)
     for l in open(os.path.join(corpus, d_, 'ledger.tsv')):
         f = l.rstrip('\n').split('\t')
@@ -319,7 +322,7 @@ def c_type_for(name, kind):
     dt, ln = g['dtype'], g['len']
     if dt in ('TerminatedCString', 'string', 'unicode', 'TerminatedUnicode'):
         return 'char %s[]'
-    if dt == 'pointer' and ln == 4:
+    if (dt == 'pointer' or re.match(r'^[\w ]+ \*$', dt)) and ln == 4:      # `undefined *` etc.: a 4-byte pointer (GLEngine _tex1_func_array: a table of function pointers)
         return 'unsigned char *%s' if kind != 'array' else 'unsigned char *%s[]'
     if dt == 'float':
         return 'float %s' if kind != 'array' else 'float %s[]'
@@ -343,11 +346,13 @@ def c_type_for(name, kind):
 # `unsigned char X[]` (it is also used for byte arithmetic), so the rebuilt index scaled by 1 and read one byte (GLDriver FUN_001771b0 / FUN_0017729c filled the texture-unit
 # state from the wrong table entries; found by the pure-function fuzz `graph` profile). Index through a pointer of the Ghidra type's width.
 sized_index_tables = {}
+_decl_text = ''.join(open(os.path.join(corpus, _h)).read() for _h in ('decls.h', 'extra_decls.h') if os.path.exists(os.path.join(corpus, _h)))   # a table the corpus declares in extra_decls.h too (GLEngine _tex1_func_array)
 for _nm, _v in data_decls.items():
     _t = c_type_for(_nm, _v[0])
     _mw = re.match(r'^(unsigned (?:short|int|long long))\b', _t or '')
-    if _mw and re.search(r'extern (?:const )?unsigned char %s\[\];' % re.escape(_nm), open(os.path.join(corpus, 'decls.h')).read() if os.path.exists(os.path.join(corpus, 'decls.h')) else ''):
-        sized_index_tables[_nm] = _mw.group(1)
+    _elem = _mw.group(1) if _mw else ('unsigned int' if (_t or '').startswith('unsigned char *%s') and _v[0] != 'array' else None)   # a 4-byte pointer-typed table is indexed by words
+    if _elem and re.search(r'extern (?:const )?unsigned char %s\[\];' % re.escape(_nm), _decl_text):
+        sized_index_tables[_nm] = _elem
 label_of = {}        # C identifier -> assembler symbol
 signed_kept = []     # data names whose signed corpus type was kept over Ghidra's unsigned-by-default one
 typed = 0
@@ -890,6 +895,12 @@ def code_target_name(t):
             n_ = indirect_name(s_, (t - s_['addr']) // s_['r2'])
             if n_:
                 return n_
+    ext_ = next(((lo, hi) for lo, hi in extents if lo == t), None) if 'raw_entries' in globals() else None
+    if ext_ is not None:
+        # a raw code extent starts there (code no function owns and nothing names, reached only by a branch from another raw block: GLEngine
+        # 0x22590 `b 0x262cc`, the target of `beq` in the _gleSetEnable_* extent at 0x22574): it is emitted as its own _raw_entry_<addr>
+        raw_entries[t] = ext_
+        return '_raw_entry_%x' % t
     return None
 clip_stubs = []   # (label, symbol) of the stubs the clipped entries being emitted need
 def clip_stub(addr, n_):
@@ -905,7 +916,7 @@ def clip_stub_asm():
                 for l_, n_ in clip_stubs)
     del clip_stubs[:]
     return t
-def clipped_word(addr, w):
+def clipped_word(addr, w, loc=None):
     """one machine word of a clipped entry as assembler: position-dependent instructions (relative branches) are rewritten symbolically, a PIC-base
     sequence (`bcl 20,31`) is refused - its addis/lwz offsets are relative to the stock layout"""
     op = w >> 26
@@ -914,6 +925,8 @@ def clipped_word(addr, w):
     if op == 18 and not w & 2:
         d = w & 0x03fffffc
         t = (addr + (d - 0x04000000 if d & 0x02000000 else d)) & 0xffffffff
+        if loc and loc[0] <= t < loc[1]:
+            return '%s Lre_%x_%x' % ('bl' if w & 1 else 'b', loc[0], t)     # a branch inside the same raw extent stays a plain relative branch to a local label
         n_ = code_target_name(t)
         if n_ is None:
             raise SystemExit('clipped entry at 0x%x branches to 0x%x, which has no symbol' % (addr, t))
@@ -921,11 +934,81 @@ def clipped_word(addr, w):
     if op == 16 and not w & 2:
         d = w & 0xfffc
         t = (addr + (d - 0x10000 if d & 0x8000 else d)) & 0xffffffff
+        if loc and loc[0] <= t < loc[1]:
+            return 'bc%s %d,%d,Lre_%x_%x' % ('l' if w & 1 else '', (w >> 21) & 31, (w >> 16) & 31, loc[0], t)
         n_ = code_target_name(t)
         if n_ is None:
             raise SystemExit('clipped entry at 0x%x branches to 0x%x, which has no symbol' % (addr, t))
         return 'bc%s %d,%d,%s' % ('l' if w & 1 else '', (w >> 21) & 31, (w >> 16) & 31, clip_stub(addr, n_))
     return '.long 0x%08x' % w
+PIC_DFORM = {14: 'addi', 32: 'lwz', 33: 'lwzu', 34: 'lbz', 35: 'lbzu', 36: 'stw', 37: 'stwu', 38: 'stb', 39: 'stbu', 40: 'lhz', 41: 'lhzu', 42: 'lha', 43: 'lhau',
+             44: 'sth', 45: 'sthu', 48: 'lfs', 49: 'lfsu', 50: 'lfd', 51: 'lfdu', 52: 'stfs', 53: 'stfsu', 54: 'stfd', 55: 'stfdu'}
+def pic_fixups(lo_, ws_):
+    """a raw extent's PIC-base data accesses (`bcl 20,31,+4; mflr rX; ... addis rD,rX,H; lfd f,d(rD)`: the stock reaches a constant by its offset from the
+    sequence's own address, which the rebuilt layout changes). Returns {word index: ('hi'|'lo', target address)}: straight-line register tracking from the
+    bcl; the rebuilt code addresses the object absolutely (lis/ha16 + lo16(label)(reg)), like the rest of the image (-mdynamic-no-pic)"""
+    fx_, regs_, lr_ = {}, {}, None
+    for i_, w_ in enumerate(ws_):
+        a_ = lo_ + 4 * i_; op_ = w_ >> 26
+        if w_ == 0x429f0005:
+            lr_ = a_ + 4
+        elif (w_ & 0xfc1fffff) == 0x7c0802a6 and lr_ is not None:                # mflr rX
+            regs_[(w_ >> 21) & 31] = (lr_, None)
+        elif op_ == 15 and ((w_ >> 16) & 31) in regs_:                           # addis rD,rX,H
+            rd_, ra_ = (w_ >> 21) & 31, (w_ >> 16) & 31
+            base_ = (regs_[ra_][0] + ((w_ & 0xffff) << 16)) & 0xffffffff
+            regs_[rd_] = (base_, i_)
+            fx_[i_] = ('hi', None, rd_)
+        elif op_ in PIC_DFORM and ((w_ >> 16) & 31) in regs_:
+            ra_ = (w_ >> 16) & 31; base_, hi_i_ = regs_[ra_]
+            if hi_i_ is None:
+                raise SystemExit('raw code at 0x%x uses the PIC base register directly (word 0x%08x)' % (a_, w_))
+            d_ = w_ & 0xffff
+            t_ = (base_ + (d_ - 0x10000 if d_ & 0x8000 else d_)) & 0xffffffff
+            if fx_[hi_i_][1] not in (None, t_):
+                raise SystemExit('raw code at 0x%x: one PIC addis reaches two objects (0x%x, 0x%x); ha16/lo16 would need distinct pairs' % (a_, fx_[hi_i_][1], t_))
+            fx_[i_] = ('lo', t_, ra_)
+            fx_[hi_i_] = ('hi', t_, fx_[hi_i_][2])
+            if (op_ not in (36, 37, 38, 39, 44, 45, 52, 53, 54, 55)) and ((w_ >> 21) & 31) == ra_ and op_ < 48:
+                regs_.pop(ra_, None)                                            # the load overwrote the base register
+    return {i_: v_ for i_, v_ in fx_.items() if v_[1] is not None}
+def pic_word(addr, w, kind, t):
+    op_ = w >> 26
+    if kind == 'hi':
+        return 'lis r%d,ha16(%s)' % ((w >> 21) & 31, first_name_of(t))
+    rt_ = (w >> 21) & 31; ra_ = (w >> 16) & 31
+    rt_s = ('f%d' if 48 <= op_ <= 55 else 'r%d') % rt_
+    if op_ == 14:
+        return 'addi %s,r%d,lo16(%s)' % (rt_s, ra_, first_name_of(t))
+    return '%s %s,lo16(%s)(r%d)' % (PIC_DFORM[op_], rt_s, first_name_of(t), ra_)
+def clipped_lines(lo_, ws_):
+    """the words of a raw code extent starting at stock address lo_ as assembler lines: relative branches are symbolic (clipped_word), and a branch to
+    another word of the SAME extent stays a relative branch to a local label (GLEngine: the extent 0x1ed50 has `bne 0x1ed80` / `b 0x1ed84` inside itself)"""
+    hi_ = lo_ + 4 * len(ws_)
+    tg_ = set()
+    for i_, w_ in enumerate(ws_):
+        a_ = lo_ + 4 * i_
+        if (w_ >> 26) == 18 and not w_ & 2:
+            d_ = w_ & 0x03fffffc; t2_ = (a_ + (d_ - 0x04000000 if d_ & 0x02000000 else d_)) & 0xffffffff
+        elif (w_ >> 26) == 16 and not w_ & 2:
+            d_ = w_ & 0xfffc; t2_ = (a_ + (d_ - 0x10000 if d_ & 0x8000 else d_)) & 0xffffffff
+        else:
+            continue
+        if lo_ <= t2_ < hi_:
+            tg_.add(t2_)
+    out_ = []
+    fx_ = pic_fixups(lo_, ws_)
+    for i_, w_ in enumerate(ws_):
+        a_ = lo_ + 4 * i_
+        if a_ in tg_:
+            out_.append('Lre_%x_%x:' % (lo_, a_))
+        if i_ in fx_:
+            out_.append(pic_word(a_, w_, fx_[i_][0], fx_[i_][1]))
+        elif w_ == 0x429f0005 and fx_:
+            out_ += ['bcl 20,31,Lpic_%x' % a_, 'Lpic_%x:' % a_]               # the PIC sequence stays (its base register is dead once the data accesses are absolute)
+        else:
+            out_.append(clipped_word(a_, w_, (lo_, hi_)))
+    return out_
 for _n in sorted({n_ for n_ in re.findall(r'\bthunk_(FUN_[0-9a-f]+)\b', _all_body)}):
     # the thunk targets the function at the address in its name; once that function has been renamed (FUN_00134de8 -> RegAlloc__registerOfInst) `FUN_<addr>` no longer exists
     code_alias.append('#define thunk_%s %s' % (_n, fn_by_addr.get(int(_n[4:], 16), _n)))
@@ -976,13 +1059,33 @@ ghidra_ptr_words = []
 prebound_import_words, ext_addend_fixed = [], []   # external-reloc words: prebound import values dropped / addends corrected
 unresolved_ptr_words = []   # (address, value) of relocated data words whose target has no symbol in the link
 raw_entries = {}            # stock address -> (lo, hi) raw code extent that data points at and no function owns
+raw_extra_labels = collections.defaultdict(list)   # raw entry address -> further assembler labels (a failed function's own name)
+def register_raw(t, ext):
+    raw_entries[t] = ext
+    for _i, (_k, _t, _r) in pic_fixups(ext[0], [struct.unpack('>I', m.read(_a, 4))[0] for _a in range(ext[0], ext[1], 4)]).items():
+        if m.sec_at(_t) is not None:
+            targets.add(_t)           # the constant a PIC-base access of the entry reaches needs its label
+for _a in cfg.get('extra_raw_entries', []):      # code a name used by the decompile (`label_overrides`) stands for, with no function and no data word reaching it (a Ghidra thunk, `b <fn>`)
+    _a = int(_a, 16)
+    register_raw(_a, next((e_ for e_ in extents if e_[0] == _a), None) or (_a, _a + 4))
+for _a, _sz, _nm in failed_fns:
+    register_raw(_a, (_a, _a + _sz))
+    raw_extra_labels[_a].append(fn_label.get(_nm, _nm))
 def raw_entry_asm():
     """the raw entries as assembler: the stock words, relative branches symbolic (via stubs), and a branch to whatever follows the block when its
     last instruction is not an unconditional transfer (b / blr / bctr), since the next stock block is not laid out after it here"""
     out_ = []
-    for t_, (lo_, hi_) in sorted(raw_entries.items()):
+    done_ = set()
+    while True:             # emitting a block can add entries (a branch to another raw extent, code_target_name): work until none is new
+        todo_ = sorted(t_ for t_ in raw_entries if t_ not in done_)
+        if not todo_:
+            break
+        t_ = todo_[0]; done_.add(t_); lo_, hi_ = raw_entries[t_]
         ws_ = [struct.unpack('>I', m.read(a_, 4))[0] for a_ in range(lo_, hi_, 4)]
-        out_ += ['.globl _raw_entry_%x' % t_, '_raw_entry_%x:' % t_] + [clipped_word(lo_ + 4 * i_, w_) for i_, w_ in enumerate(ws_)]
+        out_ += ['.globl _raw_entry_%x' % t_, '_raw_entry_%x:' % t_]
+        for _l in raw_extra_labels.get(t_, []):
+            out_ += ['.globl %s' % _l, '%s:' % _l]
+        out_ += clipped_lines(lo_, ws_)
         last_ = ws_[-1]
         if not ((last_ >> 26) == 18 and not last_ & 3) and last_ not in (0x4e800020, 0x4e800420):
             n_ = code_target_name(hi_)
@@ -1002,9 +1105,13 @@ def classify_target(t):
         e = fn_symbol_for(t)
         if e is None and t in clipped_at:
             e = clipped_at[t]          # a clipped entry (emitted as asm next to the function it falls into): `_noop` in a glprog InputSrc record
+        if e is None and any(lo == t for lo, hi in extents):
+            pass                       # a raw extent starts here (code no ledger function owns): it is emitted as _raw_entry_<addr> below, whatever name the stock's nlist gives it (GLEngine: the _gle*Filter{1,2,3} pixel-conversion routines, reached only through data pointers and not defined by any corpus function)
+        elif e is None and not any(sc_['name'] == '__text' and sc_['addr'] <= t < sc_['addr'] + sc_['size'] for sc_ in code_secs):
+            e = next((ss['name'] for ss in nlist_by_addr.get(t, [])), None)   # (stub sections etc.: the symbol the stock's table gives it)
         if e is None:
-            e = next((ss['name'] for ss in nlist_by_addr.get(t, [])), None)
-        if e is None:
+            # the stock names t, but no corpus function starts there (code Ghidra folded into the function that follows it: GLEngine `_glNormal3d_Exec`
+            # 0x78060, 7 instructions inside _glNormal3d_CompExec's ranges): a raw entry with the stock's words, the data pointer reaches it by label
             ext_ = next(((lo, hi) for lo, hi in extents if lo == t), None)
             if ext_ is None:
                 # no raw extent starts there: code Ghidra filed as a detached range of some other function (GLDriver 0x19a468, a 7-instruction
@@ -1014,10 +1121,26 @@ def classify_target(t):
                     if ((w_ >> 26) == 18 and not w_ & 3) or w_ in (0x4e800020, 0x4e800420):
                         ext_ = (t, t + 4 * k_ + 4)
                         break
+                if ext_:
+                    # the block may branch on to more of the same unowned code: a stock-named routine Ghidra filed as a detached range of the NEXT function
+                    # (GLEngine _glPNTrianglesfATIX_Exec 0x7e354, 144 bytes below _glPNTrianglesfATIX_CompExec: `blt 0x7e374` leaves its first block).
+                    # Then the entry is the whole gap, up to the next function's entry.
+                    gend_ = min((a_ for a_ in fn_by_addr if a_ > t), default=None)
+                    if gend_ is not None and gend_ > ext_[1]:
+                        for a_ in range(ext_[0], ext_[1], 4):
+                            w_ = struct.unpack('>I', m.read(a_, 4))[0]
+                            d_ = None
+                            if (w_ >> 26) == 18 and not w_ & 2:
+                                d_ = w_ & 0x03fffffc; d_ = d_ - 0x04000000 if d_ & 0x02000000 else d_
+                            elif (w_ >> 26) == 16 and not w_ & 2:
+                                d_ = w_ & 0xfffc; d_ = d_ - 0x10000 if d_ & 0x8000 else d_
+                            if d_ is not None and ext_[1] <= a_ + d_ < gend_:
+                                ext_ = (t, gend_)
+                                break
             if ext_:
                 # code only a data word reaches (a vtable slot pointing at an empty `blr` method, an entry thunk `b FUN_..`): a raw block no ledger
                 # function owns; emitted into code.s as its own entry (see raw_entry_asm)
-                raw_entries[t] = ext_
+                register_raw(t, ext_)
                 e = '_raw_entry_%x' % t
         return e
     s = m.sec_at(t)
@@ -1499,7 +1622,7 @@ for pdir_, f in _part_files:
             # a few instructions that fall through into the next function (a clipped entry): emitted next to that function so the branch stays inside one object.
             # The words are the stock machine code, so a PC-relative branch among them is re-emitted against its target's symbol (copied verbatim it would jump
             # to wherever the same displacement lands in the rebuilt image: `_AddAtom` = `b _LookUpAddString` went into the middle of a float routine)
-            src += '\n__asm__(".text\\n' + ''.join('.globl %s\\n%s:\\n' % (n_, n_) for n_ in names_) + ''.join(clipped_word(start_ + 4 * i_, w_) + '\\n' for i_, w_ in enumerate(words_)) + 'b %s\\n' % fn_label.get(target_, target_) + clip_stub_asm() + '.text\\n");\n'
+            src += '\n__asm__(".text\\n' + ''.join('.globl %s\\n%s:\\n' % (n_, n_) for n_ in names_) + ''.join(l_ + '\\n' for l_ in clipped_lines(start_, words_)) + 'b %s\\n' % fn_label.get(target_, target_) + clip_stub_asm() + '.text\\n");\n'
             placed_clipped.append(names_[0])
     if uses_link:
         src = src.replace('#include "decls.h"', '#include "decls.h"\n#include "ghidra_link.h"', 1)
