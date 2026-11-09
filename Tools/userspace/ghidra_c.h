@@ -66,6 +66,7 @@ typedef struct { lc_str name; unsigned int timestamp, current_version, compatibi
 #define FLOAT2FLOAT(x) ((double)(x))
 #define TRUNC(x) ((int)(x))
 #define POPCOUNT(x) __builtin_popcount(x)
+#define LZCOUNT(x) ({ unsigned int lz_in__ = (unsigned int)(x), lz_out__; __asm__("cntlzw %0,%1" : "=r"(lz_out__) : "r"(lz_in__)); lz_out__; })   /* cntlzw: 32 for 0 (GLEngine: 17 sites; undefined, the call became an unresolved external) */
 #define BREAK() __builtin_trap()
 #define STACKARG(off) (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + (off)))
 typedef unsigned long long uint64_t_g;

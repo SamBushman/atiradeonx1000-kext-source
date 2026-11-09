@@ -1,0 +1,44 @@
+SWITCH-GAPS: 0 jump-table functions with a callee in their unowned case blocks that the recompile never calls
+LOWCOUNT: 35 functions where stock calls some callee more often than the recompile (info)
+3362 functions compared, 41 with functions whose callee SETS differ (20 skipped; 1 more differ only through shared tail code)
+4 _gleBuildProjectionTransformFuncNO STOCK-ONLY {'gleRTCAddAChunk_51324': 7, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c5ddc': 7, 'gleRTCBuildABranch_c5dd0': 1}
+4 _gleBuildProjectionTransformFuncAV STOCK-ONLY {'gleRTCAddAChunk_51324': 15, 'gleRTCBuildABranch_51354': 7} OURS-ONLY {'gleRTCAddAChunk_c5ddc': 15, 'gleRTCBuildABranch_c5dd0': 7}
+4 _gleBuildModelviewTransformFuncNO STOCK-ONLY {'gleRTCAddAChunk_51324': 6, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c44b8': 6, 'gleRTCBuildABranch_c44ac': 1}
+4 _gleBuildCompileFuncTCLNO STOCK-ONLY {'gleRTCAddAChunk_51324': 24, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c2458': 24, 'gleRTCBuildABranch_c244c': 1}
+4 _gleBuildCompileFuncTCLAV STOCK-ONLY {'gleRTCAddAChunk_51324': 31, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c3074': 31, 'gleRTCBuildABranch_c3068': 1}
+4 _gleBuildCompileFuncNO STOCK-ONLY {'gleRTCAddAChunk_51324': 27, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c2458': 27, 'gleRTCBuildABranch_c244c': 1}
+4 _gleBuildCompileFuncAV STOCK-ONLY {'gleRTCAddAChunk_51324': 36, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c3074': 36, 'gleRTCBuildABranch_c3068': 1}
+4 FUN_000eab28 STOCK-ONLY {'gleFeedbackPoints': 1, 'gleFeedbackPointsPtr': 1} OURS-ONLY {'gleFeedbackToken': 2, 'gleFeedbackHitRecord': 2}
+4 FUN_000d845c STOCK-ONLY {'gleFeedbackLineStrip': 1, 'gleFeedbackLinesPtr': 1} OURS-ONLY {'gleFeedbackToken': 4, 'gleFeedbackHitRecord': 8}
+4 FUN_000d811c STOCK-ONLY {'gleFeedbackLineStrip': 1, 'gleFeedbackLinesPtr': 1} OURS-ONLY {'gleFeedbackToken': 4, 'gleFeedbackHitRecord': 8}
+4 FUN_000d7e1c STOCK-ONLY {'gleFeedbackLines': 1, 'gleFeedbackLinesPtr': 1} OURS-ONLY {'gleFeedbackToken': 3, 'gleFeedbackHitRecord': 6}
+4 FUN_000c5840 STOCK-ONLY {'gleRTCAddAChunk_51324': 5, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c5280': 5, 'gleRTCBuildABranch_c5274': 1}
+4 FUN_000c54e8 STOCK-ONLY {'gleRTCAddAChunk_51324': 11, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c5280': 11, 'gleRTCBuildABranch_c5274': 1}
+4 FUN_000c4664 STOCK-ONLY {'gleRTCAddAChunk_51324': 14, 'gleRTCBuildABranch_51354': 1} OURS-ONLY {'gleRTCAddAChunk_c44b8': 14, 'gleRTCBuildABranch_c44ac': 1}
+3 FUN_0001d2dc STOCK-ONLY {'gleRTCAddAChunk_51324': 1} OURS-ONLY {'ZCOUNT': 1, 'gleRTCAddAChunk_b50a8': 1}
+2 _gleLoadDataElementNO STOCK-ONLY {'gleRTCAddAChunk_51324': 2} OURS-ONLY {'gleRTCAddAChunk_b50a8': 2}
+2 _gleBuildInterpFunc STOCK-ONLY {'gleRTCAddAChunk_51324': 11} OURS-ONLY {'gleRTCAddAChunk_c20b0': 11}
+2 _glColor3f_CompExec STOCK-ONLY {'glColor3f_ColorMat_Exec': 1, 'glColor3f_NoColorMat_Exec': 1} OURS-ONLY {}
+1 _gleSetArrayLoadAddressNO STOCK-ONLY {} OURS-ONLY {'ZCOUNT': 1}
+1 _glePPUpdateProgram STOCK-ONLY {'glePPSetParamRemap': 1} OURS-ONLY {}
+1 _gleNewList STOCK-ONLY {'gliCompExecDispatchTable': 1} OURS-ONLY {}
+1 _gleDetachShaderObjects STOCK-ONLY {'gleIterateHashMachineObjects': 1} OURS-ONLY {}
+1 _gleCreatePluginTextureLevel STOCK-ONLY {} OURS-ONLY {'ZCOUNT': 11}
+1 _gleCreateFuncCacheElem STOCK-ONLY {} OURS-ONLY {'gleBlockClear': 1}
+1 _glTexGenfv_CompExec STOCK-ONLY {'glTexGenfv_Exec': 1} OURS-ONLY {}
+1 _glTexGendv_CompExec STOCK-ONLY {'glTexGendv_Exec': 1} OURS-ONLY {}
+1 _glSetFenceAPPLE_Exec STOCK-ONLY {'gleSetFence': 1} OURS-ONLY {}
+1 _glPNTrianglesfATIX_CompExec STOCK-ONLY {'glPNTrianglesfATIX_Exec': 1} OURS-ONLY {}
+1 _glNormal3d_CompExec STOCK-ONLY {'glNormal3d_Exec': 1} OURS-ONLY {}
+1 _glIndexsv_CompExec STOCK-ONLY {'glIndexsv_Exec': 1} OURS-ONLY {}
+1 _glIndexiv_CompExec STOCK-ONLY {'glIndexiv_Exec': 1} OURS-ONLY {}
+1 _glFramebufferTexture3DEXT_Exec STOCK-ONLY {} OURS-ONLY {'ZCOUNT': 1}
+1 _glFramebufferTexture2DEXT_Exec STOCK-ONLY {} OURS-ONLY {'ZCOUNT': 2}
+1 _glFramebufferTexture1DEXT_Exec STOCK-ONLY {} OURS-ONLY {'ZCOUNT': 1}
+1 _glFinishObjectAPPLE_Exec STOCK-ONLY {'gleFinishObject': 1} OURS-ONLY {}
+1 _glEvalCoord2f_CompExec STOCK-ONLY {'glEvalCoord2f_Exec': 1} OURS-ONLY {}
+1 _glEvalCoord2d_CompExec STOCK-ONLY {'glEvalCoord2d_Exec': 1} OURS-ONLY {}
+1 _glEvalCoord1f_CompExec STOCK-ONLY {'glEvalCoord1f_Exec': 1} OURS-ONLY {}
+1 _glEvalCoord1d_CompExec STOCK-ONLY {'glEvalCoord1d_Exec': 1} OURS-ONLY {}
+1 _glColor3ub_CompExec STOCK-ONLY {'glColor3ub_Exec': 1} OURS-ONLY {}
+1 _glColor3d_CompExec STOCK-ONLY {'glColor3d_Exec': 1} OURS-ONLY {}
