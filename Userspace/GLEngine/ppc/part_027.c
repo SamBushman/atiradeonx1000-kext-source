@@ -587,7 +587,8 @@ int _glCompressedTexImage3D_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glCompressedTexImage3D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6]);
+  ((int (*)())_glCompressedTexImage3D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
+             param_2[7],param_2 + 8);
   return param_2[7] + 0x20;
 }
 
@@ -596,7 +597,8 @@ int _glCompressedTexImage2D_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glCompressedTexImage2D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6]);
+  ((int (*)())_glCompressedTexImage2D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
+             param_2 + 7);
   return param_2[6] + 0x1c;
 }
 
@@ -605,7 +607,8 @@ int _glCompressedTexSubImage3D_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6]);
+  ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
+             param_2[7],param_2[8],param_2[9],param_2 + 10);
   return param_2[9] + 0x28;
 }
 
@@ -614,12 +617,13 @@ int _glCompressedTexSubImage2D_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6]);
+  ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
+             param_2[7],param_2 + 8);
   return param_2[7] + 0x20;
 }
 
 /* _glCompressedTexImage3D_Comp @ 0x9153c (344 bytes) */
-int _glCompressedTexImage3D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexImage3D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   int *param_1;
   int param_2;
   int param_3;
@@ -628,17 +632,19 @@ int _glCompressedTexImage3D_Comp(param_1, param_2, param_3, param_4, param_5, pa
   int param_6;
   int param_7;
   int param_8;
+  size_t param_9;
+  void *param_10;
 {
   undefined4 uVar1;
   void *pvVar2;
   int iVar3;
   
   if (param_2 == 0x8070) {
-    uVar1 = ((int (*)())_glCompressedTexImage3D_Exec)(param_1,0x8070,param_3,param_4,param_5,param_6,param_7,param_8);
+    uVar1 = ((int (*)())_glCompressedTexImage3D_Exec)(param_1,0x8070,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
+                       param_10);
     return uVar1;
   }
-  if ((param_4 < 0x83f0) ||
-     (((0x83f3 < param_4 && (param_4 != 0x8837)) || ((int)(*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) < 1)))) {
+  if ((param_4 < 0x83f0) || (((0x83f3 < param_4 && (param_4 != 0x8837)) || ((int)param_9 < 1)))) {
 LAB_000915e4:
     if (param_1[0x1d5d] == 0) {
       param_1[0x1d5d] = 0x502;
@@ -647,15 +653,14 @@ LAB_000915e4:
   else {
     iVar3 = param_1[0x129b];
     if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < (int)((*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + (int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c))))
-      goto LAB_000915e4;
+      if (*(int *)(iVar3 + 0x38) < (int)(param_9 + (int)param_10)) goto LAB_000915e4;
       if (*(int *)(iVar3 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(param_1,iVar3 + 0x10);
       }
-      (*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) = (void *)((int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) + *(int *)(iVar3 + 0x30));
+      param_10 = (void *)((int)param_10 + *(int *)(iVar3 + 0x30));
     }
     param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexImage3D_ListExec_001103a0,
-                                     (*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + 0x20);
+                                     param_9 + 0x20);
     if (param_1 != (int *)0x0) {
       *param_1 = param_2;
       param_1[1] = param_3;
@@ -664,9 +669,9 @@ LAB_000915e4:
       param_1[3] = param_5;
       param_1[4] = param_6;
       param_1[5] = param_7;
-      param_1[7] = (*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38));
-      if ((*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) != (void *)0x0) {
-        pvVar2 = _memcpy(param_1 + 8,(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)),(*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+      param_1[7] = param_9;
+      if (param_10 != (void *)0x0) {
+        pvVar2 = _memcpy(param_1 + 8,param_10,param_9);
         return pvVar2;
       }
     }
@@ -675,7 +680,7 @@ LAB_000915e4:
 }
 
 /* _glCompressedTexImage2D_Comp @ 0x91694 (404 bytes) */
-int _glCompressedTexImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int *param_1;
   int param_2;
   int param_3;
@@ -684,13 +689,14 @@ int _glCompressedTexImage2D_Comp(param_1, param_2, param_3, param_4, param_5, pa
   int param_6;
   int param_7;
   size_t param_8;
+  void *param_9;
 {
   undefined4 uVar1;
   void *pvVar2;
   int iVar3;
   
   if (((param_2 == 0x8064) || (param_2 == 0x851b)) || (param_2 == 0x84f7)) {
-    uVar1 = ((int (*)())_glCompressedTexImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+    uVar1 = ((int (*)())_glCompressedTexImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
     return uVar1;
   }
   if (((param_4 < 0x83f0) || ((0x83f3 < param_4 && (param_4 != 0x8837)))) || ((int)param_8 < 1)) {
@@ -702,11 +708,11 @@ LAB_0009177c:
   else {
     iVar3 = param_1[0x129b];
     if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < (int)(param_8 + (int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)))) goto LAB_0009177c;
+      if (*(int *)(iVar3 + 0x38) < (int)(param_8 + (int)param_9)) goto LAB_0009177c;
       if (*(int *)(iVar3 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(param_1,iVar3 + 0x10);
       }
-      (*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) = (void *)((int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + *(int *)(iVar3 + 0x30));
+      param_9 = (void *)((int)param_9 + *(int *)(iVar3 + 0x30));
     }
     param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexImage2D_ListExec_0011039c,
                                      param_8 + 0x1c);
@@ -718,8 +724,8 @@ LAB_0009177c:
       param_1[3] = param_5;
       param_1[4] = param_6;
       param_1[6] = param_8;
-      if ((*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) != (void *)0x0) {
-        pvVar2 = _memcpy(param_1 + 7,(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),param_8);
+      if (param_9 != (void *)0x0) {
+        pvVar2 = _memcpy(param_1 + 7,param_9,param_8);
         return pvVar2;
       }
     }
@@ -753,7 +759,7 @@ int _glCompressedTexImage1D_Comp(param_1, param_2, param_3, param_4)
 }
 
 /* _glCompressedTexSubImage3D_Comp @ 0x91874 (360 bytes) */
-int _glCompressedTexSubImage3D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexSubImage3D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int *param_1;
   int param_2;
   int param_3;
@@ -762,18 +768,22 @@ int _glCompressedTexSubImage3D_Comp(param_1, param_2, param_3, param_4, param_5,
   int param_6;
   int param_7;
   int param_8;
+  int param_9;
+  uint param_10;
+  size_t param_11;
+  void *param_12;
 {
   undefined4 uVar1;
   void *pvVar2;
   int iVar3;
   
   if (param_2 == 0x8070) {
-    uVar1 = ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,0x8070,param_3,param_4,param_5,param_6,param_7,param_8);
+    uVar1 = ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,0x8070,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
+                       param_10,param_11,param_12);
     return uVar1;
   }
-  if (((*(uint *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) < 0x83f0) ||
-     (((0x83f3 < (*(uint *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) && ((*(uint *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) != 0x8837)) || ((int)(*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) < 1)
-      ))) {
+  if ((param_10 < 0x83f0) || (((0x83f3 < param_10 && (param_10 != 0x8837)) || ((int)param_11 < 1))))
+  {
 LAB_00091924:
     if (param_1[0x1d5d] == 0) {
       param_1[0x1d5d] = 0x502;
@@ -782,28 +792,27 @@ LAB_00091924:
   else {
     iVar3 = param_1[0x129b];
     if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < (int)((*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + (int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x44))))
-      goto LAB_00091924;
+      if (*(int *)(iVar3 + 0x38) < (int)(param_11 + (int)param_12)) goto LAB_00091924;
       if (*(int *)(iVar3 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(param_1,iVar3 + 0x10);
       }
-      (*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x44)) = (void *)((int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x44)) + *(int *)(iVar3 + 0x30));
+      param_12 = (void *)((int)param_12 + *(int *)(iVar3 + 0x30));
     }
     param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexSubImage3D_ListExec_00110398,
-                                     (*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + 0x28);
+                                     param_11 + 0x28);
     if (param_1 != (int *)0x0) {
       *param_1 = param_2;
       param_1[1] = param_3;
-      param_1[8] = (*(uint *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c));
+      param_1[8] = param_10;
       param_1[2] = param_4;
       param_1[3] = param_5;
       param_1[4] = param_6;
       param_1[5] = param_7;
       param_1[6] = param_8;
-      param_1[7] = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38));
-      param_1[9] = (*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x40));
-      if ((*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x44)) != (void *)0x0) {
-        pvVar2 = _memcpy(param_1 + 10,(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x44)),(*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
+      param_1[7] = param_9;
+      param_1[9] = param_11;
+      if (param_12 != (void *)0x0) {
+        pvVar2 = _memcpy(param_1 + 10,param_12,param_11);
         return pvVar2;
       }
     }
@@ -812,7 +821,7 @@ LAB_00091924:
 }
 
 /* _glCompressedTexSubImage2D_Comp @ 0x919dc (416 bytes) */
-int _glCompressedTexSubImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexSubImage2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   int *param_1;
   int param_2;
   int param_3;
@@ -821,17 +830,19 @@ int _glCompressedTexSubImage2D_Comp(param_1, param_2, param_3, param_4, param_5,
   int param_6;
   int param_7;
   uint param_8;
+  size_t param_9;
+  void *param_10;
 {
   undefined4 uVar1;
   void *pvVar2;
   int iVar3;
   
   if (((param_2 == 0x8064) || (param_2 == 0x851b)) || (param_2 == 0x84f7)) {
-    uVar1 = ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+    uVar1 = ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
+                       param_10);
     return uVar1;
   }
-  if (((param_8 < 0x83f0) || ((0x83f3 < param_8 && (param_8 != 0x8837)))) ||
-     ((int)(*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) < 1)) {
+  if (((param_8 < 0x83f0) || ((0x83f3 < param_8 && (param_8 != 0x8837)))) || ((int)param_9 < 1)) {
 LAB_00091acc:
     if (param_1[0x1d5d] == 0) {
       param_1[0x1d5d] = 0x502;
@@ -840,15 +851,14 @@ LAB_00091acc:
   else {
     iVar3 = param_1[0x129b];
     if (iVar3 != 0) {
-      if (*(int *)(iVar3 + 0x38) < (int)((*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + (int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c))))
-      goto LAB_00091acc;
+      if (*(int *)(iVar3 + 0x38) < (int)(param_9 + (int)param_10)) goto LAB_00091acc;
       if (*(int *)(iVar3 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(param_1,iVar3 + 0x10);
       }
-      (*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) = (void *)((int)(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) + *(int *)(iVar3 + 0x30));
+      param_10 = (void *)((int)param_10 + *(int *)(iVar3 + 0x30));
     }
     param_1 = (int *)_gleAddListItem(param_1,PTR__glCompressedTexSubImage2D_ListExec_00110394,
-                                     (*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + 0x20);
+                                     param_9 + 0x20);
     if (param_1 != (int *)0x0) {
       *param_1 = param_2;
       param_1[1] = param_3;
@@ -857,9 +867,9 @@ LAB_00091acc:
       param_1[3] = param_5;
       param_1[4] = param_6;
       param_1[5] = param_7;
-      param_1[7] = (*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38));
-      if ((*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) != (void *)0x0) {
-        pvVar2 = _memcpy(param_1 + 8,(*(void * *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)),(*(size_t *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+      param_1[7] = param_9;
+      if (param_10 != (void *)0x0) {
+        pvVar2 = _memcpy(param_1 + 8,param_10,param_9);
         return pvVar2;
       }
     }
@@ -895,7 +905,7 @@ int _glCompressedTexSubImage1D_Comp(param_1, param_2, param_3, param_4, param_5,
 }
 
 /* _glCompressedTexImage3D_Exec @ 0x91bc8 (700 bytes) */
-int _glCompressedTexImage3D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexImage3D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   int param_1;
   int param_2;
   int param_3;
@@ -904,6 +914,8 @@ int _glCompressedTexImage3D_Exec(param_1, param_2, param_3, param_4, param_5, pa
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  int param_9;
+  int param_10;
 {
   byte bVar1;
   ushort uVar2;
@@ -915,7 +927,7 @@ int _glCompressedTexImage3D_Exec(param_1, param_2, param_3, param_4, param_5, pa
   
   iVar5 = param_1;
   if (*(short *)(param_1 + 0x4a10) < 0) {
-    if (((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) == 0) && (*(char *)(param_1 + 0x31e6) != '\0')) {
+    if ((param_10 == 0) && (*(char *)(param_1 + 0x31e6) != '\0')) {
       if (*(int *)(param_1 + 0x7574) != 0) {
         return param_1;
       }
@@ -924,14 +936,14 @@ int _glCompressedTexImage3D_Exec(param_1, param_2, param_3, param_4, param_5, pa
     }
     iVar6 = *(int *)(param_1 + 0x4a6c);
     if (iVar6 != 0) {
-      if (*(int *)(iVar6 + 0x38) < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c))) goto LAB_00091cd0;
+      if (*(int *)(iVar6 + 0x38) < param_9 + param_10) goto LAB_00091cd0;
       if (*(int *)(iVar6 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(param_1,iVar6 + 0x10);
       }
-      (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) + *(int *)(iVar6 + 0x30);
+      param_10 = param_10 + *(int *)(iVar6 + 0x30);
     }
     iVar5 = _gleCheckCompressedTexImage3DArgs
-                      (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+                      (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
     if (iVar5 == 0) {
       return 0;
     }
@@ -959,9 +971,12 @@ LAB_00091ce8:
         }
         *(byte *)(iVar6 + 0xcf) = *(byte *)(iVar6 + 0xcf) & 0xdf;
       }
-      iVar6 = _gleCreateTextureLevel(param_1,iVar5,iVar7,param_4,param_5,param_6,param_7,param_8);
-      if ((iVar6 != 0) && ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) != 0)) {
-        _gleCompressedTextureImagePut(param_1,iVar7,0,0,0,param_5,param_6,param_7);
+      iVar6 = _gleCreateTextureLevel
+                        (param_1,iVar5,iVar7,param_4,param_5,param_6,param_7,param_8,param_4,0,1,
+                         param_10);
+      if ((iVar6 != 0) && (param_10 != 0)) {
+        _gleCompressedTextureImagePut
+                  (param_1,iVar7,0,0,0,param_5,param_6,param_7,param_4,param_9,param_10);
       }
       uVar3 = _gleCreatePluginTextureLevel(param_1,iVar5,iVar7,uVar4,param_3,param_4);
       if ((((*(uint *)(iVar5 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar5 + 0x60) == param_3)) &&
@@ -989,7 +1004,7 @@ LAB_00091ce0:
 }
 
 /* _glCompressedTexImage2D_Exec @ 0x91e84 (692 bytes) */
-int _glCompressedTexImage2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexImage2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   int param_3;
@@ -998,6 +1013,7 @@ int _glCompressedTexImage2D_Exec(param_1, param_2, param_3, param_4, param_5, pa
   undefined4 param_6;
   undefined4 param_7;
   int param_8;
+  int param_9;
 {
   byte bVar1;
   ushort uVar2;
@@ -1008,7 +1024,7 @@ int _glCompressedTexImage2D_Exec(param_1, param_2, param_3, param_4, param_5, pa
   int iVar7;
   
   if (*(short *)(param_1 + 0x4a10) < 0) {
-    if (((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) == 0) && (*(char *)(param_1 + 0x31e6) != '\0')) {
+    if ((param_9 == 0) && (*(char *)(param_1 + 0x31e6) != '\0')) {
       if (*(int *)(param_1 + 0x7574) != 0) {
         return;
       }
@@ -1017,11 +1033,11 @@ int _glCompressedTexImage2D_Exec(param_1, param_2, param_3, param_4, param_5, pa
     }
     iVar6 = *(int *)(param_1 + 0x4a6c);
     if (iVar6 != 0) {
-      if (*(int *)(iVar6 + 0x38) < param_8 + (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38))) goto LAB_00091f84;
+      if (*(int *)(iVar6 + 0x38) < param_8 + param_9) goto LAB_00091f84;
       if (*(int *)(iVar6 + 0x40) != 0) {
         _gleSynchronizePluginBuffer(param_1,iVar6 + 0x10);
       }
-      (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + *(int *)(iVar6 + 0x30);
+      param_9 = param_9 + *(int *)(iVar6 + 0x30);
     }
     iVar6 = _gleCheckCompressedTexImage2DArgs
                       (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
@@ -1052,9 +1068,11 @@ LAB_00091f9c:
         }
         *(byte *)(iVar5 + 0xcf) = *(byte *)(iVar5 + 0xcf) & 0xdf;
       }
-      iVar5 = _gleCreateTextureLevel(param_1,iVar6,iVar7,param_4,param_5,param_6,1,param_7);
-      if ((iVar5 != 0) && ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) != 0)) {
-        _gleCompressedTextureImagePut(param_1,iVar7,0,0,0,param_5,param_6,1);
+      iVar5 = _gleCreateTextureLevel
+                        (param_1,iVar6,iVar7,param_4,param_5,param_6,1,param_7,param_4,0,1,param_9);
+      if ((iVar5 != 0) && (param_9 != 0)) {
+        _gleCompressedTextureImagePut(param_1,iVar7,0,0,0,param_5,param_6,1,param_4,param_8,param_9)
+        ;
       }
       _gleCreatePluginTextureLevel(param_1,iVar6,iVar7,uVar4,param_3,param_4);
       if ((((*(uint *)(iVar6 + 0x6c) & 0x8000) != 0) && (*(short *)(iVar6 + 0x60) == param_3)) &&
@@ -1107,7 +1125,7 @@ int _glCompressedTexImage1D_Exec(param_1, param_2, param_3, param_4)
 }
 
 /* _glCompressedTexSubImage3D_Exec @ 0x92184 (1464 bytes) */
-int _glCompressedTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1116,6 +1134,10 @@ int _glCompressedTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5,
   undefined4 param_6;
   int param_7;
   int param_8;
+  undefined4 param_9;
+  undefined4 param_10;
+  int param_11;
+  int param_12;
 {
   int iVar1;
   int iVar2;
@@ -1129,12 +1151,13 @@ int _glCompressedTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5,
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar7 = *(int *)(param_1 + 0x4a6c);
     if (iVar7 != 0) {
-      if (*(int *)(iVar7 + 0x38) < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x44))) goto LAB_000921f0;
-      (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x44)) = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x44)) + *(int *)(iVar7 + 0x30);
+      if (*(int *)(iVar7 + 0x38) < param_11 + param_12) goto LAB_000921f0;
+      param_12 = param_12 + *(int *)(iVar7 + 0x30);
     }
     if ((param_7 != 0) && (param_8 != 0)) {
       iVar2 = _gleCheckCompressedTexSubImage3DArgs
-                        (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+                        (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
+                         param_10,param_11);
       iVar3 = 0;
       if (iVar2 != 0) {
         iVar1 = iVar2 + param_3 * 0x18;
@@ -1215,11 +1238,11 @@ int _glCompressedTexSubImage3D_Exec(param_1, param_2, param_3, param_4, param_5,
             }
           }
           iVar3 = _gleModifyPluginTextureLevel
-                            (param_1,iVar2,iVar5,0,param_3,param_4,param_5,param_6);
-          if ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x44)) != 0) {
+                            (param_1,iVar2,iVar5,0,param_3,param_4,param_5,param_6,param_7);
+          if (param_12 != 0) {
             iVar3 = _gleCompressedTextureImagePut
-                              (param_1,iVar5,param_4,param_5,param_6,param_7,param_8,
-                               (*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+                              (param_1,iVar5,param_4,param_5,param_6,param_7,param_8,param_9,
+                               param_10,param_11,param_12);
           }
           if ((((*(uint *)(iVar2 + 0x6c) & 0x8000) == 0) ||
               ((int)*(short *)(iVar2 + 0x60) != param_3)) ||
@@ -1277,7 +1300,7 @@ LAB_000921f0:
 }
 
 /* _glCompressedTexSubImage2D_Exec @ 0x9273c (1552 bytes) */
-int _glCompressedTexSubImage2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexSubImage2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   int param_1;
   int param_2;
   uint param_3;
@@ -1286,6 +1309,8 @@ int _glCompressedTexSubImage2D_Exec(param_1, param_2, param_3, param_4, param_5,
   int param_6;
   int param_7;
   undefined4 param_8;
+  int param_9;
+  int param_10;
 {
   uint uVar1;
   int iVar2;
@@ -1300,12 +1325,12 @@ int _glCompressedTexSubImage2D_Exec(param_1, param_2, param_3, param_4, param_5,
   if (*(short *)(param_1 + 0x4a10) < 0) {
     iVar9 = *(int *)(param_1 + 0x4a6c);
     if (iVar9 != 0) {
-      if (*(int *)(iVar9 + 0x38) < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c))) goto LAB_000927a4;
-      (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) + *(int *)(iVar9 + 0x30);
+      if (*(int *)(iVar9 + 0x38) < param_9 + param_10) goto LAB_000927a4;
+      param_10 = param_10 + *(int *)(iVar9 + 0x30);
     }
     if (((param_6 != 0) && (param_7 != 0)) &&
        (iVar3 = _gleCheckCompressedTexSubImage2DArgs
-                          (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8),
+                          (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9),
        iVar3 != 0)) {
       uVar1 = param_2 - 0x8515;
       if (5 < uVar1) {
@@ -1389,9 +1414,10 @@ int _glCompressedTexSubImage2D_Exec(param_1, param_2, param_3, param_4, param_5,
                       (param_1,iVar3,iVar8,uVar1,param_3,(uint)*(byte *)(param_1 + 0x85a8));
           }
         }
-        _gleModifyPluginTextureLevel(param_1,iVar3,iVar8,uVar1,param_3,param_4,param_5,0);
-        if ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) != 0) {
-          _gleCompressedTextureImagePut(param_1,iVar8,param_4,param_5,0,param_6,param_7,1);
+        _gleModifyPluginTextureLevel(param_1,iVar3,iVar8,uVar1,param_3,param_4,param_5,0,param_6);
+        if (param_10 != 0) {
+          _gleCompressedTextureImagePut
+                    (param_1,iVar8,param_4,param_5,0,param_6,param_7,1,param_8,param_9,param_10);
         }
         if ((((*(uint *)(iVar3 + 0x6c) & 0x8000) == 0) || ((int)*(short *)(iVar3 + 0x60) != param_3)
             ) || (iVar9 = _gleGenMipmapsToLevel(param_1,iVar3,uVar1,param_3,0xf,1), iVar9 == 0)) {
@@ -1499,7 +1525,9 @@ int _glGetCompressedTexImage_Exec(param_1, param_2, param_3, param_4)
   uint local_90;
   undefined1 local_54;
   undefined4 local_50;
+  undefined1 auStack_4c [4];
   int local_48;
+  undefined1 auStack_44 [4];
   undefined1 auStack_40 [4];
   int local_3c;
   undefined4 local_38;
@@ -1544,7 +1572,8 @@ int _glGetCompressedTexImage_Exec(param_1, param_2, param_3, param_4)
     }
     _glePixelPackSettings
               (param_1,(uint)*(ushort *)(iVar5 + 0x78),0,(uint)*(ushort *)(iVar4 + 200),
-               (uint)*(ushort *)(iVar4 + 0xca),param_1 + 0x31b0,auStack_40,&local_3c);
+               (uint)*(ushort *)(iVar4 + 0xca),param_1 + 0x31b0,auStack_40,&local_3c,&local_50,
+               auStack_4c,&local_48,auStack_44);
     iVar6 = *(int *)(param_1 + 0x4a68);
     if (iVar6 == 0) {
 LAB_00092f24:
@@ -1592,7 +1621,7 @@ LAB_00092efc:
 }
 
 /* _glCompressedTexImage3D_CompExec @ 0x9302c (128 bytes) */
-int _glCompressedTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1601,14 +1630,16 @@ int _glCompressedTexImage3D_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
+  undefined4 param_10;
 {
-  ((int (*)())_glCompressedTexImage3D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())_glCompressedTexImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())_glCompressedTexImage3D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
+  ((int (*)())_glCompressedTexImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
   return;
 }
 
 /* _glCompressedTexImage2D_CompExec @ 0x930ac (116 bytes) */
-int _glCompressedTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1617,9 +1648,10 @@ int _glCompressedTexImage2D_CompExec(param_1, param_2, param_3, param_4, param_5
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
 {
-  ((int (*)())_glCompressedTexImage2D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())_glCompressedTexImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())_glCompressedTexImage2D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
+  ((int (*)())_glCompressedTexImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9);
   return;
 }
 
@@ -1640,7 +1672,7 @@ int _glCompressedTexImage1D_CompExec(param_1, param_2, param_3, param_4, param_5
 }
 
 /* _glCompressedTexSubImage3D_CompExec @ 0x93188 (152 bytes) */
-int _glCompressedTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1649,14 +1681,20 @@ int _glCompressedTexSubImage3D_CompExec(param_1, param_2, param_3, param_4, para
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
+  undefined4 param_10;
+  undefined4 param_11;
+  undefined4 param_12;
 {
-  ((int (*)())_glCompressedTexSubImage3D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())_glCompressedTexSubImage3D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
+             param_11,param_12);
+  ((int (*)())_glCompressedTexSubImage3D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10,
+             param_11,param_12);
   return;
 }
 
 /* _glCompressedTexSubImage2D_CompExec @ 0x93220 (128 bytes) */
-int _glCompressedTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCompressedTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1665,9 +1703,11 @@ int _glCompressedTexSubImage2D_CompExec(param_1, param_2, param_3, param_4, para
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
+  undefined4 param_10;
 {
-  ((int (*)())_glCompressedTexSubImage2D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())_glCompressedTexSubImage2D_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
+  ((int (*)())_glCompressedTexSubImage2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,param_10);
   return;
 }
 

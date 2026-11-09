@@ -2986,7 +2986,7 @@ int _gleDrawPixelsFastLoadColorTables(param_1, param_2)
 }
 
 /* _CopySourceSubImageToTexture @ 0xc97a4 (568 bytes) */
-void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,int param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14,undefined4 param_15,undefined4 param_16,undefined4 param_17,undefined4 param_18,undefined4 param_19,undefined4 param_20,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined4 uVar1;
   double dVar2;
@@ -3006,12 +3006,16 @@ void _CopySourceSubImageToTexture(int param_1,undefined4 param_2,undefined4 para
   float local_a8;
   undefined1 local_74;
   int local_70;
+  undefined1 auStack_6c [4];
+  undefined1 auStack_68 [4];
+  undefined1 auStack_64 [4];
   int local_60;
   int local_5c [3];
   undefined4 local_50;
   
   _glePixelPackSettings
-            (param_1,param_4,param_5,param_2,param_3,(*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x60)),&local_60,local_5c);
+            (param_1,param_4,param_5,param_2,param_3,(*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x60)),&local_60,local_5c,&local_70,
+             auStack_6c,auStack_68,auStack_64);
   local_dc = local_70;
   local_e0 = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)) * local_60 + (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x4c)) * local_70 + param_6 + local_5c[0];
   _glgConvertType(param_4,param_5,auStack_d8,auStack_d4);
@@ -3561,6 +3565,18 @@ int _gleDrawPixelsFast(param_1, param_2, param_3, param_4, param_5, param_6)
   double dVar35;
   double fparam_2;
   double dVar36;
+  undefined4 in_stack_fffffd48;
+  undefined4 in_stack_fffffd4c;
+  undefined4 in_stack_fffffd50;
+  undefined4 in_stack_fffffd54;
+  undefined4 in_stack_fffffd58;
+  undefined4 in_stack_fffffd5c;
+  undefined4 in_stack_fffffd60;
+  undefined4 in_stack_fffffd64;
+  undefined4 in_stack_fffffd68;
+  undefined4 in_stack_fffffd6c;
+  undefined4 in_stack_fffffd70;
+  undefined4 in_stack_fffffd74;
   float local_24c;
   float local_244;
   float local_23c;
@@ -3663,7 +3679,10 @@ LAB_000ca634:
   local_ec = (void *)_gleVecAlloc(iVar13 * uVar26 * uVar10);
   _glePixelBytes(0x80e1,iVar11);
   iVar13 = 0x80e1;
-  ((void (*)())_CopySourceSubImageToTexture)(param_1,param_2,param_3,param_4,param_5,param_6,param_2,param_3,(double)FLOAT_00108e50,
+  ((void (*)())_CopySourceSubImageToTexture)(param_1,param_2,param_3,param_4,param_5,param_6,param_2,param_3,in_stack_fffffd48,
+             in_stack_fffffd4c,in_stack_fffffd50,in_stack_fffffd54,in_stack_fffffd58,
+             in_stack_fffffd5c,in_stack_fffffd60,in_stack_fffffd64,in_stack_fffffd68,
+             in_stack_fffffd6c,in_stack_fffffd70,in_stack_fffffd74,(double)FLOAT_00108e50,
              (double)FLOAT_00108e50,fparam_3,fparam_4);
   local_e8 = local_ec;
   param_5 = iVar11;
@@ -3807,6 +3826,9 @@ LAB_000ca704:
               dVar30 = fparam_3;
               dVar29 = fparam_4;
               ((void (*)())_CopySourceSubImageToTexture)(param_1,uVar26,uVar10,iVar13,param_5,local_e8,(int)dVar35,iVar25,
+                         in_stack_fffffd48,in_stack_fffffd4c,in_stack_fffffd50,in_stack_fffffd54,
+                         in_stack_fffffd58,in_stack_fffffd5c,in_stack_fffffd60,in_stack_fffffd64,
+                         in_stack_fffffd68,in_stack_fffffd6c,in_stack_fffffd70,in_stack_fffffd74,
                          (double)(local_234 -
                                  (float)((double)CONCAT44(0x43300000,(int)local_234 ^ 0x80000000) -
                                         dVar9)),fparam_2,fparam_3,fparam_4);

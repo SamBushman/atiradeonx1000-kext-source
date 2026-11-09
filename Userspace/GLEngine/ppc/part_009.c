@@ -292,7 +292,9 @@ int FUN_00055b08(param_1, param_2, param_3, param_4, param_5, param_6)
   uint local_a0;
   undefined1 local_64;
   uint local_60;
+  undefined1 auStack_5c [4];
   uint local_58;
+  undefined1 auStack_54 [4];
   uint local_50;
   int local_4c;
   undefined4 local_48;
@@ -386,7 +388,8 @@ LAB_00055d78:
         }
         _glePixelPackSettings
                   (param_1,param_4,param_5,(uint)*(ushort *)(iVar7 + 200),
-                   (uint)*(ushort *)(iVar7 + 0xca),param_1 + 0x31b0,&local_50,&local_4c);
+                   (uint)*(ushort *)(iVar7 + 0xca),param_1 + 0x31b0,&local_50,&local_4c,&local_60,
+                   auStack_5c,&local_58,auStack_54);
         if (((((*(byte *)(iVar7 + 0xcf) & 1) == 0) || (param_6 + local_4c != *(int *)(iVar7 + 0xd8))
              ) || ((param_4 != *(ushort *)(iVar7 + 0xd4) ||
                    ((param_5 != *(ushort *)(iVar7 + 0xd6) ||

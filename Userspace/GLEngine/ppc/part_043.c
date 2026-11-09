@@ -740,71 +740,88 @@ int _gleRenderbufferStorage(param_1, param_2, param_3, param_4, param_5)
 {
   byte bVar1;
   int iVar2;
-  undefined4 uVar3;
-  int *piVar4;
-  int iVar5;
+  int *piVar3;
+  int iVar4;
+  undefined4 *puVar5;
   undefined4 *puVar6;
-  undefined4 *puVar7;
-  int iVar8;
+  undefined4 uVar7;
+  undefined4 uVar8;
   int iVar9;
   int iVar10;
+  int iVar11;
   
-  iVar9 = *(int *)(param_1 + 0x7448);
-  if (iVar9 != 0) {
-    iVar8 = iVar9 + 0x10;
-    iVar10 = iVar9 + 0xd4;
-    if ((*(byte *)(iVar9 + 0xdf) & 0x20) != 0) {
-      _gleDeletePluginTextureLevel(param_1,iVar8,iVar10,0,0);
-      if (*(int *)(iVar9 + 0xe8) != 0) {
-        bVar1 = *(byte *)(iVar9 + 0xdf);
-        if ((bVar1 & 1) == 0) {
-          _gleFreeTextureLevel(param_1,iVar8,iVar10);
-          bVar1 = *(byte *)(iVar9 + 0xdf);
-        }
-        else {
-          *(undefined4 *)(iVar9 + 0xe8) = 0;
-        }
-        *(byte *)(iVar9 + 0xdf) = bVar1 & 0xef;
+  iVar10 = *(int *)(param_1 + 0x7448);
+  if (iVar10 == 0) {
+    return;
+  }
+  iVar9 = iVar10 + 0x10;
+  if ((((param_3 == 0x1902) || (param_3 == 0x81a5)) || (param_3 == 0x81a6)) || (param_3 == 0x81a7))
+  {
+    uVar8 = 0x1902;
+  }
+  else {
+    if (((param_3 != 0x1901) && (param_3 != 0x8d46)) &&
+       ((param_3 != 0x8d47 && ((param_3 != 0x8d48 && (param_3 != 0x8d49)))))) {
+      uVar8 = 0x80e1;
+      uVar7 = 0x8367;
+      goto LAB_000cd6a0;
+    }
+    uVar8 = 0x1901;
+  }
+  uVar7 = 0x1405;
+LAB_000cd6a0:
+  iVar11 = iVar10 + 0xd4;
+  if ((*(byte *)(iVar10 + 0xdf) & 0x20) != 0) {
+    _gleDeletePluginTextureLevel(param_1,iVar9,iVar11,0,0);
+    if (*(int *)(iVar10 + 0xe8) != 0) {
+      bVar1 = *(byte *)(iVar10 + 0xdf);
+      if ((bVar1 & 1) == 0) {
+        _gleFreeTextureLevel(param_1,iVar9,iVar11);
+        bVar1 = *(byte *)(iVar10 + 0xdf);
       }
-      *(byte *)(iVar9 + 0xdf) = *(byte *)(iVar9 + 0xdf) & 0xdf;
+      else {
+        *(undefined4 *)(iVar10 + 0xe8) = 0;
+      }
+      *(byte *)(iVar10 + 0xdf) = bVar1 & 0xef;
     }
-    _gleCreateTextureLevel(param_1,iVar8,iVar10,param_3 & 0xffff,param_4,param_5,1,0);
-    if ((param_4 != 0) && (param_5 != 0)) {
-      _gleCreatePluginTextureLevel(param_1,iVar8,iVar10,0,0,param_3 & 0xffff);
-    }
-    iVar8 = *(int *)(param_1 + 0x744c);
-    if (iVar8 != 0) {
-      iVar5 = iVar8 + 0x10;
-      piVar4 = (int *)(iVar8 + 0xd4);
-      iVar10 = 0;
-      iVar8 = iVar5;
-      do {
-        iVar2 = *piVar4;
-        piVar4 = piVar4 + 1;
-        if (iVar2 == iVar9) {
-          *(undefined4 *)(iVar8 + 0x20) = param_2;
-          iVar2 = 0;
-          *(undefined4 *)(iVar8 + 0x28) = 0;
-          *(undefined4 *)(iVar8 + 0x24) = 0;
-          *(undefined4 *)(iVar8 + 0x2c) = 0;
-          if (*(char *)(param_1 + 0x85a4) != '\0') {
-            puVar7 = (undefined4 *)(iVar5 + 0xe0);
-            puVar6 = (undefined4 *)(iVar9 + 0x10);
-            do {
-              uVar3 = *puVar6;
-              iVar2 = iVar2 + 1;
-              puVar6 = puVar6 + 1;
-              *puVar7 = uVar3;
-              puVar7 = puVar7 + 8;
-            } while (iVar2 < (int)(uint)*(byte *)(param_1 + 0x85a4));
-          }
-          *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
+    *(byte *)(iVar10 + 0xdf) = *(byte *)(iVar10 + 0xdf) & 0xdf;
+  }
+  _gleCreateTextureLevel(param_1,iVar9,iVar11,param_3 & 0xffff,param_4,param_5,1,0,uVar8,uVar7,0,0);
+  if ((param_4 != 0) && (param_5 != 0)) {
+    _gleCreatePluginTextureLevel(param_1,iVar9,iVar11,0,0,param_3 & 0xffff);
+  }
+  iVar9 = *(int *)(param_1 + 0x744c);
+  if (iVar9 != 0) {
+    iVar4 = iVar9 + 0x10;
+    piVar3 = (int *)(iVar9 + 0xd4);
+    iVar11 = 0;
+    iVar9 = iVar4;
+    do {
+      iVar2 = *piVar3;
+      piVar3 = piVar3 + 1;
+      if (iVar2 == iVar10) {
+        *(undefined4 *)(iVar9 + 0x20) = param_2;
+        iVar2 = 0;
+        *(undefined4 *)(iVar9 + 0x28) = 0;
+        *(undefined4 *)(iVar9 + 0x24) = 0;
+        *(undefined4 *)(iVar9 + 0x2c) = 0;
+        if (*(char *)(param_1 + 0x85a4) != '\0') {
+          puVar6 = (undefined4 *)(iVar4 + 0xe0);
+          puVar5 = (undefined4 *)(iVar10 + 0x10);
+          do {
+            uVar8 = *puVar5;
+            iVar2 = iVar2 + 1;
+            puVar5 = puVar5 + 1;
+            *puVar6 = uVar8;
+            puVar6 = puVar6 + 8;
+          } while (iVar2 < (int)(uint)*(byte *)(param_1 + 0x85a4));
         }
-        iVar10 = iVar10 + 1;
-        iVar5 = iVar5 + 4;
-        iVar8 = iVar8 + 0x18;
-      } while (iVar10 < 6);
-    }
+        *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x80000000;
+      }
+      iVar11 = iVar11 + 1;
+      iVar4 = iVar4 + 4;
+      iVar9 = iVar9 + 0x18;
+    } while (iVar11 < 6);
   }
   return;
 }

@@ -1238,6 +1238,9 @@ int _glDrawPixels_Comp(param_1, param_2, param_3, param_4, param_5, param_6)
   int local_90;
   undefined1 local_54;
   undefined4 local_50;
+  undefined1 auStack_4c [4];
+  undefined1 auStack_48 [4];
+  undefined1 auStack_44 [4];
   undefined1 auStack_40 [4];
   int local_3c;
   undefined4 local_38;
@@ -1247,7 +1250,8 @@ int _glDrawPixels_Comp(param_1, param_2, param_3, param_4, param_5, param_6)
   if (iVar6 == 0) {
 LAB_00063c10:
     _glePixelPackSettings
-              (param_1,param_4,param_5,param_2,param_3,param_1 + 0x31cc,auStack_40,&local_3c);
+              (param_1,param_4,param_5,param_2,param_3,param_1 + 0x31cc,auStack_40,&local_3c,
+               &local_50,auStack_4c,auStack_48,auStack_44);
     iVar6 = _gleRowBytes(param_4,param_5,param_2);
     uVar1 = iVar6 * param_3 + 3U & 0xfffffffc;
     puVar4 = (undefined4 *)_gleAddListItem(param_1,PTR__glDrawPixels_ListExec_001100a8,uVar1 + 0x14)

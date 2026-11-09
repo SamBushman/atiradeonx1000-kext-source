@@ -2502,7 +2502,7 @@ int _glMap2VertexAttrib4ARB_ListExec(param_1, param_2)
 }
 
 /* _glMap2d_Comp @ 0x70364 (1420 bytes) */
-double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined4 uVar1;
   undefined4 extraout_r4;
@@ -2534,9 +2534,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2ColordLoad)(param_1,extraout_r4_01,iVar2,param_4,param_5,param_7,
                                                param_8,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,
-                                               in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10))
-                                               ,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
-                                               (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                               in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                                               (double)CONCAT44(param_11,param_12),
+                                               (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20))
+                                               ,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2549,9 +2550,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2IndexdLoad)(param_1,extraout_r4_02,iVar2,param_4,param_5,param_7,
                                                param_8,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,
-                                               in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10))
-                                               ,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
-                                               (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                               in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                                               (double)CONCAT44(param_11,param_12),
+                                               (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20))
+                                               ,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2564,8 +2566,9 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2NormaldLoad)(param_1,extraout_r4_03,iVar2,param_4,param_5,param_7
                                                 ,param_8,fparam_1,fparam_2,fparam_3,fparam_4,in_f5,
-                                                in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),
-                                                (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
+                                                in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10)
+                                                ,(double)CONCAT44(param_11,param_12),
+                                                (double)CONCAT44(param_13,param_14),
                                                 (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
@@ -2579,8 +2582,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2Texture1dLoad)(param_1,extraout_r4_04,iVar2,param_4,param_5,param_7,param_8,
                                        fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                       (double)CONCAT44(param_9,param_10),
+                                       (double)CONCAT44(param_11,param_12),
+                                       (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
+                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2593,8 +2598,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2Texture2dLoad)(param_1,extraout_r4_05,iVar2,param_4,param_5,param_7,param_8,
                                        fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                       (double)CONCAT44(param_9,param_10),
+                                       (double)CONCAT44(param_11,param_12),
+                                       (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
+                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2607,8 +2614,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2Texture3dLoad)(param_1,extraout_r4_06,iVar2,param_4,param_5,param_7,param_8,
                                        fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                       (double)CONCAT44(param_9,param_10),
+                                       (double)CONCAT44(param_11,param_12),
+                                       (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
+                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2621,8 +2630,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2Texture4dLoad)(param_1,extraout_r4_07,iVar2,param_4,param_5,param_7,param_8,
                                        fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                       (double)CONCAT44(param_9,param_10),
+                                       (double)CONCAT44(param_11,param_12),
+                                       (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
+                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2635,8 +2646,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2Vertex3dLoad)(param_1,extraout_r4,iVar2,param_4,param_5,param_7,param_8,
                                        fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                       (double)CONCAT44(param_9,param_10),
+                                       (double)CONCAT44(param_11,param_12),
+                                       (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
+                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2649,8 +2662,10 @@ double _glMap2d_Comp(int param_1,undefined4 param_2,undefined4 param_3,undefined
           if (iStack00000050 != 0) {
             dVar3 = (double)((double (*)())_gleMap2Vertex4dLoad)(param_1,extraout_r4_00,iVar2,param_4,param_5,param_7,param_8,
                                        fparam_1,fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
-                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                                       (double)CONCAT44(param_9,param_10),
+                                       (double)CONCAT44(param_11,param_12),
+                                       (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
+                                       (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
             return dVar3;
           }
           goto LAB_00070908;
@@ -2677,7 +2692,7 @@ LAB_00070908:
 }
 
 /* _glMap2d_Exec @ 0x70914 (1140 bytes) */
-void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined4 uVar1;
   int iVar2;
@@ -2697,8 +2712,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((3 < param_7) && (3 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x1478;
           ((double (*)())_gleMap2ColordLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2
-                             ,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),
-                             (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28))
+                             ,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+                             (double)CONCAT44(param_9,param_10),(double)CONCAT44(param_11,param_12),
+                             (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28))
                             );
           return;
         }
@@ -2707,8 +2723,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((0 < param_7) && (0 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x1ad8;
           ((double (*)())_gleMap2IndexdLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2
-                             ,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),
-                             (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28))
+                             ,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+                             (double)CONCAT44(param_9,param_10),(double)CONCAT44(param_11,param_12),
+                             (double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28))
                             );
           return;
         }
@@ -2717,8 +2734,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((2 < param_7) && (2 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0xfa8;
           ((double (*)())_gleMap2NormaldLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,
-                              fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),
-                              (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
+                              fparam_2,fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,
+                              (double)CONCAT44(param_9,param_10),(double)CONCAT44(param_11,param_12)
+                              ,(double)CONCAT44(param_13,param_14),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),
                               (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
@@ -2727,8 +2745,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((0 < param_7) && (0 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x1c88;
           ((double (*)())_gleMap2Texture1dLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2,
-                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
-                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                     (double)CONCAT44(param_11,param_12),(double)CONCAT44(param_13,param_14),
+                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
@@ -2736,8 +2755,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((1 < param_7) && (1 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x1e38;
           ((double (*)())_gleMap2Texture2dLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2,
-                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
-                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                     (double)CONCAT44(param_11,param_12),(double)CONCAT44(param_13,param_14),
+                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
@@ -2745,8 +2765,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((2 < param_7) && (2 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x2178;
           ((double (*)())_gleMap2Texture3dLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2,
-                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
-                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                     (double)CONCAT44(param_11,param_12),(double)CONCAT44(param_13,param_14),
+                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
@@ -2754,8 +2775,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((3 < param_7) && (3 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x2648;
           ((double (*)())_gleMap2Texture4dLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2,
-                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
-                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                     (double)CONCAT44(param_11,param_12),(double)CONCAT44(param_13,param_14),
+                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
@@ -2763,8 +2785,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((2 < param_7) && (2 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x478;
           ((double (*)())_gleMap2Vertex3dLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2,
-                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
-                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                     (double)CONCAT44(param_11,param_12),(double)CONCAT44(param_13,param_14),
+                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
@@ -2772,8 +2795,9 @@ void _glMap2d_Exec(int param_1,int param_2,undefined4 param_3,undefined4 param_4
         if ((3 < param_7) && (3 < (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x48)))) {
           iStack00000050 = iStack00000050 + 0x948;
           ((double (*)())_gleMap2Vertex4dLoad)(param_1,iVar2,param_3,param_4,param_5,param_7,param_8,fparam_1,fparam_2,
-                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),
-                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
+                     fparam_3,fparam_4,in_f5,in_f6,in_f7,in_f8,(double)CONCAT44(param_9,param_10),
+                     (double)CONCAT44(param_11,param_12),(double)CONCAT44(param_13,param_14),
+                     (*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),(*(double *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)));
           return;
         }
         break;
@@ -2800,10 +2824,19 @@ LAB_00070da0:
 /* _glMap2d_CompExec @ 0x70dac (156 bytes) */
 void _glMap2d_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
-  ((double (*)())_glMap2d_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,fparam_2,
-                fparam_3,fparam_4);
-  ((void (*)())_glMap2d_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,fparam_2,
-                fparam_3,fparam_4);
+  undefined4 in_stack_ffffff58;
+  undefined4 in_stack_ffffff5c;
+  undefined4 in_stack_ffffff60;
+  undefined4 in_stack_ffffff64;
+  undefined4 in_stack_ffffff68;
+  undefined4 in_stack_ffffff6c;
+  
+  ((double (*)())_glMap2d_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,in_stack_ffffff58,
+                in_stack_ffffff5c,in_stack_ffffff60,in_stack_ffffff64,in_stack_ffffff68,
+                in_stack_ffffff6c,fparam_1,fparam_2,fparam_3,fparam_4);
+  ((void (*)())_glMap2d_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),
+                (*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x14)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
+                (*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)),fparam_1,fparam_2,fparam_3,fparam_4);
   return;
 }
 

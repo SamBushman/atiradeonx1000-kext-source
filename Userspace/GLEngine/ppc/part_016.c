@@ -700,9 +700,12 @@ int _glSeparableFilter2D_ListExec(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  _gleRowBytes(param_2[4],param_2[5],param_2[2]);
+  int iVar1;
+  
+  iVar1 = _gleRowBytes(param_2[4],param_2[5],param_2[2]);
   _glSeparableFilter2D_Exec
-            (param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2 + 7);
+            (param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2 + 7,
+             (int)(param_2 + 7) + (iVar1 + 3U & 0xfffffffc));
   return param_2[6];
 }
 
@@ -928,7 +931,7 @@ LAB_00068af8:
 }
 
 /* _glSeparableFilter2D_Comp @ 0x68b74 (536 bytes) */
-int _glSeparableFilter2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glSeparableFilter2D_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -937,6 +940,7 @@ int _glSeparableFilter2D_Comp(param_1, param_2, param_3, param_4, param_5, param
   undefined4 param_6;
   undefined4 param_7;
   int param_8;
+  int param_9;
 {
   uint uVar1;
   int iVar2;
@@ -970,17 +974,17 @@ LAB_00068cdc:
       puVar5[3] = param_5;
       puVar5[4] = param_6;
       puVar5[5] = param_7;
-      if ((param_8 != 0) && ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) != 0)) {
+      if ((param_8 != 0) && (param_9 != 0)) {
         _gleFillImage(param_1,param_4,1,1,param_6,param_7,param_8,puVar5 + 7);
         puVar5 = (undefined4 *)
-                 _gleFillImage(param_1,param_5,1,1,param_6,param_7,(*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),
-                               (int)(puVar5 + 7) + uVar1);
+                 _gleFillImage(param_1,param_5,1,1,param_6,param_7,param_9,(int)(puVar5 + 7) + uVar1
+                              );
       }
     }
   }
   else {
     iVar2 = _gleOffsetLimitImage(param_1 + 0x31cc,param_4,1,param_6,param_7,param_8);
-    iVar4 = _gleOffsetLimitImage(param_1 + 0x31cc,param_5,1,param_6,param_7,(*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+    iVar4 = _gleOffsetLimitImage(param_1 + 0x31cc,param_5,1,param_6,param_7,param_9);
     iVar7 = *(int *)(iVar6 + 0x38);
     dVar8 = (double)((double (*)())_gleBytesPerElement)(param_7);
     puVar5 = (undefined4 *)(int)dVar8;
@@ -989,11 +993,11 @@ LAB_00068cdc:
         puVar5 = (undefined4 *)_glePixelBytes(param_6,param_7);
       }
       if ((param_8 == (param_8 / (int)puVar5) * (int)puVar5) &&
-         ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) == ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) / (int)puVar5) * (int)puVar5)) {
+         (param_9 == (param_9 / (int)puVar5) * (int)puVar5)) {
         if (*(int *)(iVar6 + 0x40) != 0) {
           _gleSynchronizePluginBuffer(param_1,iVar6 + 0x10);
         }
-        (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + *(int *)(iVar6 + 0x30);
+        param_9 = param_9 + *(int *)(iVar6 + 0x30);
         param_8 = param_8 + *(int *)(iVar6 + 0x30);
         goto LAB_00068cdc;
       }

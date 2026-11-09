@@ -56,7 +56,8 @@ int _gleSynchronizePluginTextureLevels(param_1, param_2)
         do {
           if ((*(byte *)(iVar7 + 0xb) & 0x50) == 0x40) {
             _gleUploadPluginTextureLevel(param_1,param_2,iVar7,iVar2,iVar6,iVar4);
-            _gleModifyPluginTextureLevel(param_1,param_2,iVar7,iVar2,iVar6,0,0,0);
+            _gleModifyPluginTextureLevel
+                      (param_1,param_2,iVar7,iVar2,iVar6,0,0,0,(uint)*(ushort *)(iVar7 + 4));
           }
           iVar6 = iVar6 + 1;
           iVar7 = iVar7 + 0x18;

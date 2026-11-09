@@ -1274,7 +1274,7 @@ LAB_000f4f94:
 }
 
 /* _gleCheckCompressedTexImage3DArgs @ 0xf4fe8 (296 bytes) */
-int _gleCheckCompressedTexImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleCheckCompressedTexImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1283,6 +1283,7 @@ int _gleCheckCompressedTexImage3DArgs(param_1, param_2, param_3, param_4, param_
   int param_6;
   uint param_7;
   int param_8;
+  undefined4 param_9;
 {
   undefined4 uVar1;
   uint uVar2;
@@ -1307,7 +1308,7 @@ int _gleCheckCompressedTexImage3DArgs(param_1, param_2, param_3, param_4, param_
           && ((-1 < (int)uVar5 && ((uVar5 & uVar5 - 1) == 0)))) &&
          (((int)uVar5 <= (int)uVar2 && ((-1 < (int)param_7 && ((param_7 & param_7 - 1) == 0)))))) &&
         ((int)param_7 <= (int)uVar2)))) {
-      iVar4 = ((int (*)())_gleCheckCompressedTexImageArgs)(param_1,param_3,param_4,param_8,uVar6,uVar5,param_7,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+      iVar4 = ((int (*)())_gleCheckCompressedTexImageArgs)(param_1,param_3,param_4,param_8,uVar6,uVar5,param_7,param_9);
       if (iVar4 != 0) {
         return iVar3;
       }
@@ -1524,7 +1525,7 @@ LAB_000f550c:
 }
 
 /* _gleCheckTexSubImage3DArgs @ 0xf556c (316 bytes) */
-int _gleCheckTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleCheckTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -1533,6 +1534,9 @@ int _gleCheckTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, para
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
+  int param_10;
+  undefined4 param_11;
 {
   undefined4 uVar1;
   int iVar2;
@@ -1548,8 +1552,8 @@ int _gleCheckTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, para
     uVar1 = 0x500;
   }
   else {
-    if (((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) != 0x1902) || (*(short *)(iVar2 + 0x26) == 0x1902)) {
-      iVar3 = _gleCheckTexSubImageArgs(param_1,param_3,(*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
+    if ((param_10 != 0x1902) || (*(short *)(iVar2 + 0x26) == 0x1902)) {
+      iVar3 = _gleCheckTexSubImageArgs(param_1,param_3,param_10,param_11);
       if (iVar3 == 0) {
         return 0;
       }
@@ -1565,8 +1569,7 @@ int _gleCheckTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, para
                           (param_1,iVar5,param_5,param_8,(uint)*(ushort *)(iVar3 + 0xca));
         if (iVar4 != 0) {
           iVar3 = _gleCheckTexSubImageRange
-                            (param_1,iVar5,param_6,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),(uint)*(ushort *)(iVar3 + 0xcc)
-                            );
+                            (param_1,iVar5,param_6,param_9,(uint)*(ushort *)(iVar3 + 0xcc));
           if (iVar3 != 0) {
             return iVar2;
           }
@@ -1585,7 +1588,7 @@ int _gleCheckTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, para
 }
 
 /* _gleCheckCopyTexSubImage3DArgs @ 0xf56a8 (308 bytes) */
-int _gleCheckCopyTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleCheckCopyTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   undefined4 param_2;
   uint param_3;
@@ -1594,6 +1597,7 @@ int _gleCheckCopyTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, 
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
 {
   bool bVar1;
   undefined4 uVar2;
@@ -1632,7 +1636,7 @@ int _gleCheckCopyTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, 
                         (param_1,iVar6,param_5,param_8,(uint)*(ushort *)(iVar3 + 0xca));
       if (iVar5 != 0) {
         iVar3 = _gleCheckTexSubImageRange
-                          (param_1,iVar6,param_6,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),(uint)*(ushort *)(iVar3 + 0xcc));
+                          (param_1,iVar6,param_6,param_9,(uint)*(ushort *)(iVar3 + 0xcc));
         if (iVar3 != 0) {
           return iVar4;
         }
@@ -1650,7 +1654,7 @@ int _gleCheckCopyTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, 
 }
 
 /* _gleCheckCompressedTexSubImage2DArgs @ 0xf57dc (320 bytes) */
-int _gleCheckCompressedTexSubImage2DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleCheckCompressedTexSubImage2DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   int param_3;
@@ -1659,6 +1663,7 @@ int _gleCheckCompressedTexSubImage2DArgs(param_1, param_2, param_3, param_4, par
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
 {
   undefined4 uVar1;
   int iVar2;
@@ -1673,7 +1678,7 @@ int _gleCheckCompressedTexSubImage2DArgs(param_1, param_2, param_3, param_4, par
     uVar1 = 0x500;
   }
   else {
-    iVar3 = ((int (*)())_gleCheckCompressedTexImageArgs)(param_1,param_3,param_8,0,param_6,param_7,1,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+    iVar3 = ((int (*)())_gleCheckCompressedTexImageArgs)(param_1,param_3,param_8,0,param_6,param_7,1,param_9);
     if (iVar3 == 0) {
       return 0;
     }
@@ -1702,7 +1707,7 @@ int _gleCheckCompressedTexSubImage2DArgs(param_1, param_2, param_3, param_4, par
 }
 
 /* _gleCheckCompressedTexSubImage3DArgs @ 0xf591c (364 bytes) */
-int _gleCheckCompressedTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleCheckCompressedTexSubImage3DArgs(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   int param_1;
   int param_2;
   int param_3;
@@ -1711,6 +1716,9 @@ int _gleCheckCompressedTexSubImage3DArgs(param_1, param_2, param_3, param_4, par
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
+  undefined4 param_10;
+  undefined4 param_11;
 {
   undefined4 uVar1;
   int iVar2;
@@ -1725,8 +1733,7 @@ int _gleCheckCompressedTexSubImage3DArgs(param_1, param_2, param_3, param_4, par
     uVar1 = 0x500;
   }
   else {
-    iVar3 = ((int (*)())_gleCheckCompressedTexImageArgs)(param_1,param_3,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)),0,param_7,param_8,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),
-                       (*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
+    iVar3 = ((int (*)())_gleCheckCompressedTexImageArgs)(param_1,param_3,param_10,0,param_7,param_8,param_9,param_11);
     if (iVar3 == 0) {
       return 0;
     }
@@ -1741,7 +1748,7 @@ int _gleCheckCompressedTexSubImage3DArgs(param_1, param_2, param_3, param_4, par
       }
       iVar4 = ((int (*)())_gleCheckCompressedTexSubImageRange)(param_1,iVar3,param_5,param_8,(uint)*(ushort *)(iVar3 + 6),3);
       if (iVar4 != 0) {
-        iVar3 = ((int (*)())_gleCheckCompressedTexSubImageRange)(param_1,iVar3,param_6,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),(uint)*(ushort *)(iVar3 + 8),0);
+        iVar3 = ((int (*)())_gleCheckCompressedTexSubImageRange)(param_1,iVar3,param_6,param_9,(uint)*(ushort *)(iVar3 + 8),0);
         if (iVar3 != 0) {
           return iVar2;
         }

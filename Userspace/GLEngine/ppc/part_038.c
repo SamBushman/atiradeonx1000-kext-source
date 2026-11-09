@@ -896,7 +896,7 @@ LAB_000b3448:
 }
 
 /* _glCombinerOutputNV_Exec @ 0xb3494 (504 bytes) */
-int _glCombinerOutputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCombinerOutputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   int param_1;
   int param_2;
   int param_3;
@@ -905,6 +905,9 @@ int _glCombinerOutputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_
   uint param_6;
   uint param_7;
   int param_8;
+  undefined4 param_9;
+  undefined4 param_10;
+  undefined4 param_11;
 {
   undefined4 uVar1;
   int iVar2;
@@ -916,7 +919,7 @@ int _glCombinerOutputNV_Exec(param_1, param_2, param_3, param_4, param_5, param_
     if ((-1 < iVar2) && (iVar4 = *(int *)(param_1 + 0x468c), iVar2 < *(int *)(iVar4 + 0x98))) {
       if (param_3 == 0x1906) {
         iVar3 = 0;
-        if (((*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x3b)) != '\0') || ((*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x3f)) != '\0')) goto LAB_000b362c;
+        if (((char)param_9 != '\0') || ((char)param_10 != '\0')) goto LAB_000b362c;
       }
       else {
         iVar3 = 1;
@@ -935,14 +938,14 @@ LAB_000b354c:
                (((param_6 != param_5 || (param_6 == 0x8530)) &&
                 ((param_4 != param_5 || (param_5 == 0x8530)))))) {
               iVar2 = iVar2 * 0x80 + iVar3 * 0x30 + param_1;
-              *(undefined1 *)(iVar2 + 0x4242) = (*(undefined1 *)(*(unsigned int *)__builtin_frame_address(0) + 0x43));
+              *(undefined1 *)(iVar2 + 0x4242) = (undefined1)param_11;
               *(short *)(iVar2 + 0x4248) = (short)param_4;
               *(short *)(iVar2 + 0x424a) = (short)param_5;
               *(short *)(iVar2 + 0x424c) = (short)param_6;
               *(short *)(iVar2 + 0x4244) = (short)param_7;
               *(short *)(iVar2 + 0x4246) = (short)param_8;
-              *(char *)(iVar2 + 0x4240) = (*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x3b));
-              *(char *)(iVar2 + 0x4241) = (*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x3f));
+              *(char *)(iVar2 + 0x4240) = (char)param_9;
+              *(char *)(iVar2 + 0x4241) = (char)param_10;
               *(uint *)(param_1 + 0x314) = *(uint *)(param_1 + 0x314) | 0x1000000;
               return;
             }
@@ -1470,7 +1473,7 @@ int _glCombinerInputNV_Comp(param_1, param_2, param_3, param_4, param_5, param_6
 }
 
 /* _glCombinerOutputNV_Comp @ 0xb41a8 (148 bytes) */
-int _glCombinerOutputNV_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCombinerOutputNV_Comp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1479,12 +1482,15 @@ int _glCombinerOutputNV_Comp(param_1, param_2, param_3, param_4, param_5, param_
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  uint param_9;
+  uint param_10;
+  uint param_11;
 {
   undefined4 *puVar1;
   
   puVar1 = (undefined4 *)_gleAddListItem(param_1,PTR__glCombinerOutputNV_ListExec_001104d8,0x28);
   if (puVar1 != (undefined4 *)0x0) {
-    puVar1[9] = (uint)(*(byte *)(*(unsigned int *)__builtin_frame_address(0) + 0x43));
+    puVar1[9] = param_11 & 0xff;
     *puVar1 = param_2;
     puVar1[1] = param_3;
     puVar1[2] = param_4;
@@ -1492,8 +1498,8 @@ int _glCombinerOutputNV_Comp(param_1, param_2, param_3, param_4, param_5, param_
     puVar1[4] = param_6;
     puVar1[5] = param_7;
     puVar1[6] = param_8;
-    puVar1[7] = (uint)(*(byte *)(*(unsigned int *)__builtin_frame_address(0) + 0x3b));
-    puVar1[8] = (uint)(*(byte *)(*(unsigned int *)__builtin_frame_address(0) + 0x3f));
+    puVar1[7] = param_9 & 0xff;
+    puVar1[8] = param_10 & 0xff;
   }
   return puVar1;
 }

@@ -163,7 +163,7 @@ void _glMapVertexAttrib2fARB_CompExec(undefined4 param_1,undefined4 param_2,unde
 }
 
 /* _glMapVertexAttrib2dARB_Comp @ 0x71e14 (520 bytes) */
-void _glMapVertexAttrib2dARB_Comp(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMapVertexAttrib2dARB_Comp(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14,undefined4 param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined4 *puVar1;
   undefined4 extraout_r4;
@@ -232,7 +232,7 @@ LAB_00072010:
 }
 
 /* _glMapVertexAttrib2dARB_Exec @ 0x7201c (572 bytes) */
-void _glMapVertexAttrib2dARB_Exec(int param_1,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,int param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void _glMapVertexAttrib2dARB_Exec(int param_1,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,int param_8,undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14,undefined4 param_15,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined4 uVar1;
   int iVar2;
@@ -303,10 +303,20 @@ LAB_0007224c:
 /* _glMapVertexAttrib2dARB_CompExec @ 0x72258 (168 bytes) */
 void _glMapVertexAttrib2dARB_CompExec(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
-  ((void (*)())_glMapVertexAttrib2dARB_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,fparam_2,
-             fparam_3,fparam_4);
-  ((void (*)())_glMapVertexAttrib2dARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,fparam_2,
-             fparam_3,fparam_4);
+  undefined4 in_stack_ffffff58;
+  undefined4 in_stack_ffffff5c;
+  undefined4 in_stack_ffffff60;
+  undefined4 in_stack_ffffff64;
+  undefined4 in_stack_ffffff68;
+  undefined4 in_stack_ffffff6c;
+  undefined4 in_stack_ffffff70;
+  
+  ((void (*)())_glMapVertexAttrib2dARB_Comp)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,in_stack_ffffff58,
+             in_stack_ffffff5c,in_stack_ffffff60,in_stack_ffffff64,in_stack_ffffff68,
+             in_stack_ffffff6c,in_stack_ffffff70,fparam_1,fparam_2,fparam_3,fparam_4);
+  ((void (*)())_glMapVertexAttrib2dARB_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x8)),
+             (*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0xc)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x10)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x14)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x18)),
+             (*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)),(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)),fparam_1,fparam_2,fparam_3,fparam_4);
   return;
 }
 

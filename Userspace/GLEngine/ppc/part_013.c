@@ -499,9 +499,11 @@ int _glColorTable_ListExec(param_1, param_2)
     }
     puVar8 = param_2 + 6;
     if (iVar9 == 0) {
-      iVar9 = _gleCreateTextureLevel(param_1,iVar5,iVar10,param_2[1],param_2[2],1,1,0);
+      iVar9 = _gleCreateTextureLevel
+                        (param_1,iVar5,iVar10,param_2[1],param_2[2],1,1,0,param_2[3],param_2[4],0,
+                         puVar8);
       if (iVar9 != 0) {
-        _gleTextureImagePut(param_1,iVar10,0,0,0,param_2[2],1,1);
+        _gleTextureImagePut(param_1,iVar10,0,0,0,param_2[2],1,1,param_2[3],param_2[4],0,0,puVar8);
       }
       *(uint *)(param_1 + 0x314) =
            *(uint *)(param_1 + 0x314) | 1 << (*(uint *)(param_1 + 0x53d4) & 0x3f);
@@ -749,9 +751,11 @@ LAB_0005fd34:
           }
         }
         if (iVar6 == 0) {
-          iVar6 = _gleCreateTextureLevel(param_1,iVar9,iVar7,param_3,param_4,1,1,0);
+          iVar6 = _gleCreateTextureLevel
+                            (param_1,iVar9,iVar7,param_3,param_4,1,1,0,param_5,param_6,1,param_7);
           if ((iVar6 != 0) && (bVar1)) {
-            _gleTextureImagePut(param_1,iVar7,0,0,0,param_4,1,1);
+            _gleTextureImagePut(param_1,iVar7,0,0,0,param_4,1,1,param_5,param_6,0,param_1 + 0x31cc,
+                                param_7);
           }
           *(uint *)(param_1 + 0x314) =
                *(uint *)(param_1 + 0x314) | 1 << (*(uint *)(param_1 + 0x53d4) & 0x3f);
@@ -851,7 +855,7 @@ int _glColorSubTable_ListExec(param_1, param_2)
                     (param_1,iVar5,iVar6,0,0xffffffff,(uint)*(byte *)(param_1 + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(param_1,iVar5,iVar6,0,0xffffffff,param_2[1],0,0);
+      _gleModifyPluginTextureLevel(param_1,iVar5,iVar6,0,0xffffffff,param_2[1],0,0,param_2[2]);
       uVar3 = *param_2;
       iVar5 = param_1 + 0x33d0;
       if (uVar3 != 0x80d1) {
@@ -868,7 +872,8 @@ int _glColorSubTable_ListExec(param_1, param_2)
         }
       }
       if (iVar5 == 0) {
-        _gleTextureImagePut(param_1,iVar6,param_2[1],0,0,param_2[2],1,1);
+        _gleTextureImagePut(param_1,iVar6,param_2[1],0,0,param_2[2],1,1,param_2[3],param_2[4],0,0,
+                            param_2 + 6);
         *(uint *)(param_1 + 0x314) =
              *(uint *)(param_1 + 0x314) | 1 << (*(uint *)(param_1 + 0x53d4) & 0x3f);
       }
@@ -1065,7 +1070,7 @@ LAB_000604f4:
                     (param_1,iVar5,iVar4,0,0xffffffff,(uint)*(byte *)(param_1 + 0x85a8));
         }
       }
-      _gleModifyPluginTextureLevel(param_1,iVar5,iVar4,0,0xffffffff,param_3,0,0);
+      _gleModifyPluginTextureLevel(param_1,iVar5,iVar4,0,0xffffffff,param_3,0,0,param_4);
       iVar5 = param_1 + 0x33d0;
       if (param_2 != 0x80d1) {
         if (param_2 < 0x80d2) {
@@ -1085,7 +1090,8 @@ LAB_000604f4:
         *(uint *)(param_1 + 0x310) = *(uint *)(param_1 + 0x310) | 0x40000000;
         return;
       }
-      _gleTextureImagePut(param_1,iVar4,param_3,0,0,param_4,1,1);
+      _gleTextureImagePut(param_1,iVar4,param_3,0,0,param_4,1,1,param_5,param_6,0,param_1 + 0x31cc,
+                          param_7);
       *(uint *)(param_1 + 0x314) =
            *(uint *)(param_1 + 0x314) | 1 << (*(uint *)(param_1 + 0x53d4) & 0x3f);
       return;
@@ -1312,7 +1318,8 @@ LAB_00060a7c:
         }
       }
       if (iVar14 == 0) {
-        iVar14 = _gleCreateTextureLevel(param_1,iVar12,iVar8,param_3,param_6,1,1,0);
+        iVar14 = _gleCreateTextureLevel
+                           (param_1,iVar12,iVar8,param_3,param_6,1,1,0,0x1908,0x1401,0,0x1000);
         if (iVar14 != 0) {
           _gleTextureImageCopy(param_1,iVar8,param_3,param_4,param_5,param_6,1);
         }
@@ -1538,7 +1545,7 @@ LAB_00060eb8:
       }
     }
     iVar6 = param_1 + 0x33d0;
-    _gleModifyPluginTextureLevel(param_1,iVar10,iVar9,0,0xffffffff,param_3,0,0);
+    _gleModifyPluginTextureLevel(param_1,iVar10,iVar9,0,0xffffffff,param_3,0,0,param_6);
     if (param_2 != 0x80d1) {
       if (param_2 < 0x80d2) {
         iVar6 = param_1 + 0x33b0;
@@ -1552,7 +1559,7 @@ LAB_00060eb8:
         iVar6 = 0;
       }
     }
-    _gleTextureSubImageCopy(param_1,iVar9,param_3,0,0,param_4,param_5,param_6);
+    _gleTextureSubImageCopy(param_1,iVar9,param_3,0,0,param_4,param_5,param_6,1);
     if (iVar6 != 0) {
       _gleImagingScaleAndBias
                 (param_1,iVar6,*(undefined4 *)(iVar10 + 0xc0),(uint)*(ushort *)(iVar10 + 0xbc),
@@ -1630,6 +1637,9 @@ int _glGetColorTable_Exec(param_1, param_2, param_3, param_4, param_5)
   uint local_a0;
   undefined1 local_64;
   undefined4 local_60;
+  undefined1 auStack_5c [4];
+  undefined1 auStack_58 [4];
+  undefined1 auStack_54 [4];
   undefined1 auStack_50 [4];
   int local_4c;
   undefined4 local_48;
@@ -1667,7 +1677,8 @@ LAB_0006138c:
             }
             _glePixelPackSettings
                       (param_1,param_3,param_4,(uint)*(ushort *)(iVar4 + 0xb0),
-                       (uint)*(ushort *)(iVar4 + 0xb2),param_1 + 0x31b0,auStack_50,&local_4c);
+                       (uint)*(ushort *)(iVar4 + 0xb2),param_1 + 0x31b0,auStack_50,&local_4c,
+                       &local_60,auStack_5c,auStack_58,auStack_54);
             if (((((*(byte *)(iVar4 + 0xb7) & 1) == 0) ||
                  (param_5 + local_4c != *(int *)(iVar4 + 0xc0))) ||
                 (param_3 != *(ushort *)(iVar4 + 0xbc))) || (param_4 != *(ushort *)(iVar4 + 0xbe))) {

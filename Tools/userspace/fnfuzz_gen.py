@@ -87,7 +87,7 @@ def sig_of(entry):
     rc = 'd' if re.match(r'^(double|float)', ret.strip()) else ('v' if ret.strip() in ('void', 'undefined') else 'i')   # `undefined`: Ghidra saw no use of a result (r3 is whatever the function leaves there)
     pc = ''.join(cls(x) for x in ps)
     slots = sum(2 if c in 'dL' else 1 for c in pc)
-    if slots > 8: return None     # parameters beyond r10 travel on the caller's stack; the harness only sets registers
+    if slots > 12: return None    # parameters beyond r10 travel on the caller's stack: the harness defines the four words 0x38..0x44(r1) (9th..12th), nothing beyond
     return pc, rc
 # functions whose result some stock caller reads (r3 read right after the `bl`, before being overwritten): their return value is real
 def _reads(arg, r):

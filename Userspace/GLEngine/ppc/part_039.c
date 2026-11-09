@@ -112,7 +112,7 @@ int _glCombinerInputNV_CompExec(param_1, param_2, param_3, param_4, param_5, par
 }
 
 /* _glCombinerOutputNV_CompExec @ 0xb4450 (140 bytes) */
-int _glCombinerOutputNV_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glCombinerOutputNV_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -121,9 +121,16 @@ int _glCombinerOutputNV_CompExec(param_1, param_2, param_3, param_4, param_5, pa
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  uint param_9;
+  uint param_10;
+  uint param_11;
 {
-  _glCombinerOutputNV_Comp(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  _glCombinerOutputNV_Exec(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  _glCombinerOutputNV_Comp
+            (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9 & 0xff,
+             param_10 & 0xff,param_11 & 0xff);
+  _glCombinerOutputNV_Exec
+            (param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9 & 0xff,
+             param_10 & 0xff,param_11 & 0xff);
   return;
 }
 
@@ -204,7 +211,9 @@ int _glCombinerOutputNV_ListExec(param_1, param_2)
   undefined4 *param_2;
 {
   _glCombinerOutputNV_Exec
-            (param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6]);
+            (param_1,*param_2,param_2[1],param_2[2],param_2[3],param_2[4],param_2[5],param_2[6],
+             (uint)*(byte *)((int)param_2 + 0x1f),(uint)*(byte *)((int)param_2 + 0x23),
+             (uint)*(byte *)((int)param_2 + 0x27));
   return 0x28;
 }
 

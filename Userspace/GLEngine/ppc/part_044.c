@@ -688,11 +688,15 @@ int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, 
   undefined4 local_90;
   undefined1 local_54;
   undefined4 local_50;
+  undefined1 auStack_4c [4];
+  undefined1 auStack_48 [4];
+  undefined1 auStack_44 [4];
   undefined1 auStack_40 [4];
   int local_3c [6];
   
   _glePixelPackSettings
-            (param_1,param_6,param_7,param_2,param_3,param_1 + 0x31cc,auStack_40,local_3c);
+            (param_1,param_6,param_7,param_2,param_3,param_1 + 0x31cc,auStack_40,local_3c,&local_50,
+             auStack_4c,auStack_48,auStack_44);
   _glgConvertType(param_4,param_5,auStack_b8,auStack_b4);
   _glgConvertType(param_6,param_7,auStack_a8,auStack_a4);
   local_c0 = param_8 + local_3c[0];
@@ -716,7 +720,7 @@ int _gleImagingUnpackData(param_1, param_2, param_3, param_4, param_5, param_6, 
 }
 
 /* _gleImagingPackData @ 0xd2860 (312 bytes) */
-int _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -725,6 +729,7 @@ int _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, pa
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  int param_9;
 {
   undefined4 local_c0;
   int local_bc;
@@ -741,17 +746,21 @@ int _gleImagingPackData(param_1, param_2, param_3, param_4, param_5, param_6, pa
   undefined4 local_90;
   undefined1 local_54;
   undefined4 local_50;
+  undefined1 auStack_4c [4];
+  undefined1 auStack_48 [4];
+  undefined1 auStack_44 [4];
   undefined1 auStack_40 [4];
   int local_3c [6];
   
   _glePixelPackSettings
-            (param_1,param_4,param_5,param_2,param_3,param_1 + 0x31b0,auStack_40,local_3c);
+            (param_1,param_4,param_5,param_2,param_3,param_1 + 0x31b0,auStack_40,local_3c,&local_50,
+             auStack_4c,auStack_48,auStack_44);
   _glgConvertType(param_4,param_5,auStack_b8,auStack_b4);
   _glgConvertType(param_6,param_7,auStack_a8,auStack_a4);
   local_c0 = param_8;
   local_bc = _glePixelBytes(param_4,param_5);
   local_bc = param_2 * local_bc;
-  local_b0 = (*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + local_3c[0];
+  local_b0 = param_9 + local_3c[0];
   local_98 = 5;
   local_a0 = 2;
   local_ac = local_50;
@@ -1580,13 +1589,13 @@ int _gleGetConvolutionFilter(param_1, param_2, param_3, param_4, param_5)
   if (*(int *)(iVar1 + 0x34) != 0) {
     ((int (*)())_gleImagingPackData)(param_1,*(undefined4 *)(iVar1 + 0x38),*(undefined4 *)(iVar1 + 0x3c),
                         (uint)*(ushort *)(iVar1 + 0x32),0x1406,param_3,param_4,
-                        *(int *)(iVar1 + 0x34));
+                        *(int *)(iVar1 + 0x34),param_5);
   }
   return;
 }
 
 /* _gleSeparableFilter2D @ 0xd3e1c (340 bytes) */
-int _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1595,6 +1604,7 @@ int _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, 
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
 {
   int iVar1;
   void *pvVar2;
@@ -1612,7 +1622,7 @@ int _gleSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, 
     *(int *)(param_1 + 0x3350) = param_4;
     *(int *)(param_1 + 0x3354) = param_5;
     ((int (*)())_gleImagingUnpackData)(param_1,param_4,1,param_6,param_7,param_3,0x1406,param_8);
-    ((int (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,param_3,0x1406,(*(undefined4 *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+    ((int (*)())_gleImagingUnpackData)(param_1,param_5,1,param_6,param_7,param_3,0x1406,param_9);
     ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,*(undefined4 *)(param_1 + 0x334c),
                (uint)*(ushort *)(param_1 + 0x334a),0,param_4,0);
     ((int (*)())_gleImagingScaleAndBias)(param_1,param_1 + 0x3328,(void *)((int)pvVar2 + param_4 * iVar1),
@@ -1640,10 +1650,10 @@ int _gleGetSeparableFilter(param_1, param_2, param_3, param_4, param_5, param_6)
   iVar2 = *(int *)(param_1 + 0x3350);
   iVar3 = *(int *)(param_1 + 0x334c);
   ((int (*)())_gleImagingPackData)(param_1,iVar2,1,(uint)*(ushort *)(param_1 + 0x334a),0x1406,param_3,param_4,
-                      iVar3);
+                      iVar3,param_5);
   ((int (*)())_gleImagingPackData)(param_1,*(undefined4 *)(param_1 + 0x3354),1,
                       (uint)*(ushort *)(param_1 + 0x334a),0x1406,param_3,param_4,
-                      iVar3 + iVar2 * iVar1);
+                      iVar3 + iVar2 * iVar1,param_6);
   return;
 }
 

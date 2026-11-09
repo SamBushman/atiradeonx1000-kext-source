@@ -969,7 +969,7 @@ LAB_0006a64c:
 }
 
 /* _glSeparableFilter2D_Exec @ 0x6a6ac (480 bytes) */
-int _glSeparableFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glSeparableFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -978,6 +978,7 @@ int _glSeparableFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param
   undefined4 param_6;
   undefined4 param_7;
   int param_8;
+  int param_9;
 {
   undefined4 uVar1;
   int iVar2;
@@ -1009,11 +1010,11 @@ int _glSeparableFilter2D_Exec(param_1, param_2, param_3, param_4, param_5, param
       iVar3 = *(int *)(param_1 + 0x4a6c);
       if (iVar3 == 0) {
 LAB_0006a850:
-        _gleSeparableFilter2D(param_1,0x8012,iVar2,param_4,param_5,param_6,param_7,param_8);
+        _gleSeparableFilter2D(param_1,0x8012,iVar2,param_4,param_5,param_6,param_7,param_8,param_9);
         return;
       }
       iVar4 = _gleOffsetLimitImage(param_1 + 0x31cc,param_4,1,param_6,param_7,param_8);
-      iVar5 = _gleOffsetLimitImage(param_1 + 0x31cc,param_5,1,param_6,param_7,(*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)));
+      iVar5 = _gleOffsetLimitImage(param_1 + 0x31cc,param_5,1,param_6,param_7,param_9);
       iVar7 = *(int *)(iVar3 + 0x38);
       dVar8 = (double)((double (*)())_gleBytesPerElement)(param_7);
       iVar6 = (int)dVar8;
@@ -1021,11 +1022,11 @@ LAB_0006a850:
         if (iVar6 == 0) {
           iVar6 = _glePixelBytes(param_6,param_7);
         }
-        if ((param_8 == (param_8 / iVar6) * iVar6) &&
-           ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) == ((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) / iVar6) * iVar6)) {
+        if ((param_8 == (param_8 / iVar6) * iVar6) && (param_9 == (param_9 / iVar6) * iVar6)) {
           if (*(int *)(iVar3 + 0x40) != 0) {
             _gleSynchronizePluginBuffer(param_1,iVar3 + 0x10);
           }
+          param_9 = param_9 + *(int *)(iVar3 + 0x30);
           param_8 = param_8 + *(int *)(iVar3 + 0x30);
           goto LAB_0006a850;
         }
@@ -1536,7 +1537,7 @@ int _glCopyConvolutionFilter2D_CompExec(param_1, param_2, param_3, param_4, para
 }
 
 /* _glSeparableFilter2D_CompExec @ 0x6b29c (116 bytes) */
-int _glSeparableFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glSeparableFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1545,9 +1546,12 @@ int _glSeparableFilter2D_CompExec(param_1, param_2, param_3, param_4, param_5, p
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
 {
-  _glSeparableFilter2D_Comp(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())_glSeparableFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  _glSeparableFilter2D_Comp(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9)
+  ;
+  ((int (*)())_glSeparableFilter2D_Exec)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9)
+  ;
   return;
 }
 
