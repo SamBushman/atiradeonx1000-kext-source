@@ -68,15 +68,16 @@ BYADDR = {}
 for _pf in sorted(glob.glob(os.path.join(link, 'part_*.c'))) + sorted(glob.glob(os.path.join(link, 'x_*_part_*.c'))):
     for _m in re.finditer(r'(?m)^/\* (\S+) @ 0x([0-9a-f]+) \(\d+ bytes\) \*/', open(_pf).read()):
         BYADDR.setdefault(int(_m.group(2), 16), _m.group(1))
+SIGWHY = {}
 def sig_of(entry):
     p = os.path.join(dump, '0x%x.txt' % entry)
-    if not os.path.exists(p): return None
+    if not os.path.exists(p): SIGWHY[entry] = 'no dump file'; return None
     with open(p, errors='replace') as fh: fh.readline(); s = fh.readline()
     m = re.match(r'// Signature: (.*?)\s*__(?:stdcall|cdecl|thiscall)\s*(\S+)\((.*)\)\s*$', s) or re.match(r'// Signature: (.*?)\s+(\S+)\((.*)\)\s*$', s)
-    if not m: return None
+    if not m: SIGWHY[entry] = 'signature line not parsed'; return None
     ret, params = m.group(1), m.group(3)
     ps = [x.strip() for x in params.split(',') if x.strip() and x.strip() != 'void']
-    if any('...' in x for x in ps): return None
+    if any('...' in x for x in ps): SIGWHY[entry] = 'variadic'; return None
     def cls(x):
         if '*' in x: return 'p'
         if re.match(r'^(double)\b', x): return 'd'
@@ -86,8 +87,18 @@ def sig_of(entry):
         return 'i'
     rc = 'd' if re.match(r'^(double|float)', ret.strip()) else ('v' if ret.strip() in ('void', 'undefined') else 'i')   # `undefined`: Ghidra saw no use of a result (r3 is whatever the function leaves there)
     pc = ''.join(cls(x) for x in ps)
-    slots = sum(2 if c in 'dL' else 1 for c in pc)
-    if slots > 12: return None    # parameters beyond r10 travel on the caller's stack: the harness defines the four words 0x38..0x44(r1) (9th..12th), nothing beyond
+    # Darwin PPC: every argument has a slot in the GPR/stack word sequence (a double or a 64-bit integer takes two, a float one); doubles and floats travel in f1..f13
+    # (their slots are only shadows), integers in r3..r10 and then in the caller's stack words 0x38(r1).. - the harness defines the four words 9..12 and f1..f13
+    k_, nfp_ = 0, 0
+    for c_ in pc:
+        if c_ in 'dL': 
+            if c_ == 'L' and k_ + 2 > 12: SIGWHY[entry] = 'integer parameter beyond slot 12'; return None
+            k_ += 2; nfp_ += (c_ == 'd')
+        elif c_ == 'f': k_ += 1; nfp_ += 1
+        else:
+            if k_ + 1 > 12: SIGWHY[entry] = 'integer parameter beyond slot 12'; return None
+            k_ += 1
+    if nfp_ > 13: SIGWHY[entry] = '%d floating parameters (>13)' % nfp_; return None
     return pc, rc
 # functions whose result some stock caller reads (r3 read right after the `bl`, before being overwritten): their return value is real
 def _reads(arg, r):
@@ -210,14 +221,15 @@ for ent, (nm, rs) in sorted(fns.items()):
             WHY.append((ent, nm, 'unsafe-import-reachable' if (badc or ent in UNS) else 'plain-candidate')); continue         # what the plain ledger cannot run (indirect calls, imports): unless it can reach an unsafe import, that is left for the live test
         bad = None
     first = seq[idx[ent]][1:] if ent in idx else ('', '')
-    if first[0] in ('stfd', 'lfd') and re.match(r'f(1[4-9]|2\d|3[01])\b', first[1]): continue      # saveFP / restFP millicode entry points (a register-save chain, not a function)
-    if re.search(r'_frag_[0-9a-f]+$', nm): continue                                              # `_frag_` = a clipped piece of a function (a switch case body that reads the parent's registers), not a function
+    if first[0] in ('stfd', 'lfd') and re.match(r'f(1[4-9]|2\d|3[01])\b', first[1]): WHY.append((ent, nm, 'millicode (register save/restore chain)')); continue      # saveFP / restFP millicode entry points (a register-save chain, not a function)
+    if re.search(r'_frag_[0-9a-f]+$', nm): WHY.append((ent, nm, 'fragment (clipped piece of a function)')); continue                                              # `_frag_` = a clipped piece of a function (a switch case body that reads the parent's registers), not a function
     if key == 'glprog' and ent in (0x97b89f04, 0x97b88a90): continue                                # clipped fragments patched in patches.py (they read the parent's registers)
-    if bad or size < 16 or re.match(r'^(eh_|__Unwind|orph_|save_world|rest_world|dyld_stub|_glp?Unwind|_*(lshr|ashl|ashr|mul|div|mod|udiv|umod|cmp|ucmp|fix|float|neg|ffs|clz|ctz|popcount|parity)[a-z]*[ds]i[0-9]?$)', nm): continue
+    if bad or size < 16 or re.match(r'^(eh_|__Unwind|orph_|save_world|rest_world|dyld_stub|_glp?Unwind|_*(lshr|ashl|ashr|mul|div|mod|udiv|umod|cmp|ucmp|fix|float|neg|ffs|clz|ctz|popcount|parity)[a-z]*[ds]i[0-9]?$)', nm):
+        WHY.append((ent, nm, ('unsafe: ' + str(bad)[:120]) if bad else ('tiny (<16 bytes)' if size < 16 else 'runtime/helper name'))); continue
     if ONLY_ALLOWED and not used_allowed: continue
     sg = sig_of(ent)
     if sg is None:
-        WHY.append((ent, nm, 'no-signature (variadic / >8 arg slots / none)')); continue
+        WHY.append((ent, nm, 'no-signature: ' + SIGWHY.get(ent, '?'))); continue
     ct = CTYPES.get(nm)
     if ct and len(ct) == len(sg[0]):     # the decompile's own types refine the header's class letters
         sg = (''.join(('p' if '*' in t else 'n' if re.match(r'^(u?int|u?short|u?char|byte|bool|u?long)$', t) and c == 'i' else c) for t, c in zip(ct, sg[0])), sg[1])
@@ -235,6 +247,6 @@ with open(out, 'w') as f:
         if CTX: f.write('\t' + (','.join('%d:' % p_ + ':'.join('%x' % o_ for o_ in offs_) for p_, offs_ in ind[:24]) or '-'))
         f.write('\n')
 print('%s: %d candidates, anchor %s' % (key, len(rows), anchor))
-if CTX:
+if True:
     with open(out + '.why', 'w') as f:
         for e_, n_, w_ in WHY: f.write('%x\t%s\t%s\n' % (e_, n_, w_))

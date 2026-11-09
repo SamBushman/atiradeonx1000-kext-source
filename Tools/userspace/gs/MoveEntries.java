@@ -33,7 +33,23 @@ public class MoveEntries extends GhidraScript {
             ghidra.program.model.address.AddressSet body = new ghidra.program.model.address.AddressSet(f.getBody());
             body.addRange(newE, oldE.subtract(1));   // the old body plus the instructions before the old entry
             fm.removeFunction(oldE);
-            Function g = fm.createFunction(dflt ? null : name, newE, body, SourceType.USER_DEFINED);
+            Function g = null;
+            try { g = fm.createFunction(dflt ? null : name, newE, body, SourceType.USER_DEFINED); }
+            catch (Exception ex) {   // e.g. OverlappingFunctionException: say what already occupies the new entry, restore the old function, go on with the next move
+                Function at = fm.getFunctionContaining(newE);
+                println("MOVE FAILED " + oldE + " -> " + newE + ": " + ex.getMessage() + " (function containing the new entry: " + (at == null ? "none" : at.getName(true) + " @ " + at.getEntryPoint() + " body " + at.getBody().getMinAddress() + ".." + at.getBody().getMaxAddress()) + ")");
+                // another function's body (a sparse range) has absorbed the run before the old entry: take the run out of that body and create the function at the true entry
+                if (at != null && !at.getEntryPoint().equals(newE) && at.getBody().contains(newE)) {
+                    ghidra.program.model.address.AddressSet nb = new ghidra.program.model.address.AddressSet(at.getBody());
+                    nb.deleteRange(newE, oldE.subtract(1));
+                    try { at.setBody(nb); g = fm.createFunction(dflt ? null : name, newE, body, SourceType.USER_DEFINED); println("MOVE (run taken out of " + at.getName() + ") " + oldE + " -> " + newE); }
+                    catch (Exception ex3) { println("MOVE retry FAILED " + oldE + " -> " + newE + ": " + ex3.getMessage()); }
+                }
+                if (g == null) {
+                    try { fm.createFunction(name, oldE, new ghidra.program.model.address.AddressSet(f.getBody()), SourceType.USER_DEFINED); } catch (Exception ex2) { println("MOVE could not restore " + oldE + ": " + ex2.getMessage()); }
+                    continue;
+                }
+            }
             if (g == null) { println("MOVE could not create at " + newE); continue; }
             if (!dflt && ns != null) g.setParentNamespace(ns);
             g.updateFunction(cc, ret, ps, custom ? FunctionUpdateType.CUSTOM_STORAGE : FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS, true, SourceType.USER_DEFINED);

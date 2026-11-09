@@ -56,7 +56,7 @@ __asm__(".text\n.align 2\n.globl _ctxstub_common\n_ctxstub_common:\n"
  "lis r11,0x4ffe\n lwz r12,0(r11)\n andis. r11,r12,1\n bne- 1f\n"
  "stw r0,0(r12)\n stw r3,4(r12)\n stw r4,8(r12)\n stw r5,12(r12)\n stw r6,16(r12)\n stw r7,20(r12)\n stw r8,24(r12)\n stw r9,28(r12)\n stw r10,32(r12)\n"
  "stfd f1,40(r12)\n stfd f2,48(r12)\n stfd f3,56(r12)\n stfd f4,64(r12)\n addi r12,r12,72\n lis r11,0x4ffe\n stw r12,0(r11)\n"
- "1: lis r11,0x4ffe\n lwz r3,4(r11)\n li r4,0\n lfd f1,8(r11)\n blr\n");
+ "1: lis r11,0x4ffe\n lwz r3,4(r11)\n lis r12,0x4fff\n lwz r4,0(r12)\n lfd f1,8(r12)\n blr\n");   /* r3 = log word 1, r4 / f1 from the unused tail of the log region (LOG_BASE + 0x10000: word 0 = r4, double at +8 = f1) */
 extern void ctxstub_common(void);
 static void setup_stubs(void) {
     unsigned char *lg = mmap((void *)LOG_BASE, 0x12000, PROT_READ | PROT_WRITE, MAP_FIXED | MAP_ANON | MAP_PRIVATE, -1, 0);
@@ -168,7 +168,10 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     for (int q = (k < 8 ? k : 8); q < 8; q++) ia[q] = gen_int();
     for (int q = (j < 13 ? j : 13); q < 13; q++) da[q] = gen_double(0);
     {   /* hand-built context: the slots */
-        unsigned *lg = (unsigned *)LOG_BASE; lg[0] = LOG_BASE + 16; { unsigned rv[4] = { 0, 1, 0xffffffffu, ARENA_BASE + 0x3000 }; lg[1] = rv[(rnd32() >> 3) & 3]; }
+        unsigned *lg = (unsigned *)LOG_BASE; lg[0] = LOG_BASE + 16; { unsigned rv[4] = { 0, 1, 0xffffffffu, ARENA_BASE + 0x3000 }; unsigned rr = rnd32(); lg[1] = rv[(rr >> 3) & 3];
+          /* what a callee leaves in r4 and f1 besides r3 (a 64-bit result, a float result, or a register the caller reads after the call): seeded, distinctive values, so that a rebuilt function reading a call's r4 / f1 from an uninitialised local differs from the stock (CTXFUZZ_PLAINRET=1: the old constants 0 / 0.0) */
+          unsigned rv4[4] = { 0, 1, 0xffffffffu, ARENA_BASE + 0x2000 }; double fv[4] = { 0.0, 1.0, -2.5, 123456.75 }; int plain = getenv("CTXFUZZ_PLAINRET") != NULL;
+          unsigned *xr = (unsigned *)(LOG_BASE + 0x10000); xr[0] = plain ? 0 : rv4[(rr >> 7) & 3]; { double dv = plain ? 0.0 : fv[(rr >> 11) & 3]; memcpy(xr + 2, &dv, 8); } }
         int nblk = 0; unsigned blk_of[64][2]; int nblkmap = 0;
         for (int i = 0; i < c->nind; i++) {
             int p = c->ind[i].p; if (p < 0 || p > 1) continue;

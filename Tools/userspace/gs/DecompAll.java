@@ -93,7 +93,8 @@ public class DecompAll extends GhidraScript {
             String hv = o.getHigh() == null ? "nohigh" : String.valueOf(o.getHigh().getName());
             boolean used = o.getDescendants().hasNext();
             Varnode co = call == null ? null : call.getOutput();
-            System.out.println("EXTRADBG " + fname + " " + vn(o) + " name=" + hv + " used=" + used + " call=" + cn + " callout=" + (co == null ? "none" : vn(co) + (co.getDescendants().hasNext() ? " USED" : " unused")));
+            String callee = "-"; if (call != null && call.getOpcode() == PcodeOp.CALL) callee = call.getInput(0).getAddress().toString();
+            System.out.println("EXTRADBG " + fname + " " + vn(o) + " name=" + hv + " used=" + used + " call=" + cn + " callout=" + (co == null ? "none" : vn(co) + (co.getDescendants().hasNext() ? " USED" : " unused")) + " callee=" + callee);
         }
     }
     String regsOf(PcodeOp op) { StringBuilder s = new StringBuilder("["); for (int k = 1; k < op.getNumInputs(); k++) { Varnode v = op.getInput(k); String rn = regName(v); s.append(rn != null ? rn : (v.getAddress().getAddressSpace().getName() + ":" + Long.toHexString(v.getOffset()))).append("/").append(v.getSize()).append(' '); } Varnode o = op.getOutput(); s.append("-> ").append(o == null ? "none" : o.getSize() + ""); return s.append("]").toString(); }
