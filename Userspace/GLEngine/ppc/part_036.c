@@ -48,7 +48,7 @@ int _glVertexAttrib1fvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double,double))UNRECOVERED_JUMPTABLE))((double)*param_3, (double)fVar1, (double)fVar1);
+    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)*param_3, (double)fVar1, (double)fVar1);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -122,7 +122,7 @@ int _glVertexAttrib1dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double,double))UNRECOVERED_JUMPTABLE))((double)GH_U2F((unsigned int)(*param_3)), (double)fVar1, (double)fVar1);
+    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)GH_U2F((unsigned int)(*param_3)), (double)fVar1, (double)fVar1);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -276,7 +276,7 @@ int _glVertexAttrib2fvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double))UNRECOVERED_JUMPTABLE))((double)*param_3, (double)param_3[1]);
+    (*((int (*)(int,int,int,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)*param_3, (double)param_3[1]);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -353,7 +353,7 @@ int _glVertexAttrib2dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double))UNRECOVERED_JUMPTABLE))((double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])));
+    (*((int (*)(int,int,int,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])));
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -506,7 +506,7 @@ int _glVertexAttrib3fvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double,double))UNRECOVERED_JUMPTABLE))((double)*param_3, (double)param_3[1], (double)param_3[2]);
+    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))(param_1, param_2, param_3, (double)*param_3, (double)param_3[1], (double)param_3[2]);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -582,8 +582,8 @@ int _glVertexAttrib3dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double,double))UNRECOVERED_JUMPTABLE))
-              ((double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])), (double)GH_U2F((unsigned int)(param_3[2])));
+    (*((int (*)(int,int,int,double,double,double))UNRECOVERED_JUMPTABLE))
+              (param_1, param_2, param_3, (double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])), (double)GH_U2F((unsigned int)(param_3[2])));
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {
@@ -1095,8 +1095,8 @@ int _glVertexAttrib4fvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
-              ((double)*param_3, (double)param_3[1], (double)param_3[2], (double)param_3[3]);
+    (*((int (*)(int,int,int,double,double,double,double))UNRECOVERED_JUMPTABLE))
+              (param_1, param_2, param_3, (double)*param_3, (double)param_3[1], (double)param_3[2], (double)param_3[3]);
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {

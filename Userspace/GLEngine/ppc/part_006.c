@@ -57,7 +57,7 @@ int _glVertex3f_Exec(param_1)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)();
+  (*((int (*)(int))UNRECOVERED_JUMPTABLE))(param_1);
   return;
 }
 
@@ -4726,7 +4726,7 @@ int _glVertex3_ListExec(param_1, param_2)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(double,double,double,double))pcVar1))((double)*param_2, (double)param_2[1], (double)param_2[2], (double)*(float *)(param_1 + 0x24));
+  (*((int (*)(int,int,double,double,double,double))pcVar1))(param_1, param_2, (double)*param_2, (double)param_2[1], (double)param_2[2], (double)*(float *)(param_1 + 0x24));
   return 0xc;
 }
 

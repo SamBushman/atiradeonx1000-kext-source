@@ -1297,7 +1297,7 @@ int _glVertex2i_Exec(param_1, param_2, param_3)
   if (*(int *)(param_1 + 0x4858) == *(int *)(param_1 + 0x485c)) {
     pcVar1 = *(code **)(param_1 + 0x28);
   }
-  (*((int (*)(double,double,double,double))pcVar1))((double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*((int (*)(int,int,int,double,double,double,double))pcVar1))(param_1, param_2, param_3, (double)(float)((double)CONCAT44(0x43300000,param_2 ^ 0x80000000) - DOUBLE_00108d58), (double)(float)((double)CONCAT44(0x43300000,param_3 ^ 0x80000000) - DOUBLE_00108d58), (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
   return;
 }
 
@@ -1599,7 +1599,7 @@ int _glVertex4f_Exec(param_1)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)();
+  (*((int (*)(int))UNRECOVERED_JUMPTABLE))(param_1);
   return;
 }
 

@@ -5196,8 +5196,8 @@ void _glVertex2d_Exec(int param_1,double fparam_1,double fparam_2)
   }
                     
                     
-  (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
-            ((double)(float)fparam_1, (double)(float)fparam_2, (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*((int (*)(int,double,double,double,double))UNRECOVERED_JUMPTABLE))
+            (param_1, (double)(float)fparam_1, (double)(float)fparam_2, (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
   return;
 }
 

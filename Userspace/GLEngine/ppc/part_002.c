@@ -4728,8 +4728,8 @@ int _glVertex2f_Exec(param_1)
   }
                     
                     
-  (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
-            (in_f1, in_f2, (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
+  (*((int (*)(int,double,double,double,double))UNRECOVERED_JUMPTABLE))
+            (param_1, in_f1, in_f2, (double)*(float *)(param_1 + 0x20), (double)*(float *)(param_1 + 0x24));
   return;
 }
 

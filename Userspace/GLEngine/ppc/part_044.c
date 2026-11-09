@@ -1847,7 +1847,7 @@ LAB_000d43fc:
   *(undefined **)(param_1 + 0x4de4) = puVar2;
                     
                     
-  (**(code **)(param_1 + 0x4de4))();
+  (**(int ( **)(int))(param_1 + 0x4de4))(param_1);
   return;
 }
 

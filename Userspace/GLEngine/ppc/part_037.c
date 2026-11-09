@@ -44,8 +44,8 @@ int _glVertexAttrib4dvARB_Exec(param_1, param_2, param_3)
     }
                     
                     
-    (*((int (*)(double,double,double,double))UNRECOVERED_JUMPTABLE))
-              ((double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])), (double)GH_U2F((unsigned int)(param_3[2])), (double)GH_U2F((unsigned int)(param_3[3])));
+    (*((int (*)(int,int,int,double,double,double,double))UNRECOVERED_JUMPTABLE))
+              (param_1, param_2, param_3, (double)GH_U2F((unsigned int)(*param_3)), (double)GH_U2F((unsigned int)(param_3[1])), (double)GH_U2F((unsigned int)(param_3[2])), (double)GH_U2F((unsigned int)(param_3[3])));
     return;
   }
   if (*(int *)(param_1 + 0x7574) != 0) {

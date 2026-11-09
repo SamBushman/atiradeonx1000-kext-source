@@ -55,7 +55,7 @@ public class DecompAll extends GhidraScript {
         Set<PcodeOp> seen = new HashSet<>();
         for (int i = 0; i < toks.size(); i++) {
             ClangToken t = toks.get(i); PcodeOp op = t.getPcodeOp();
-            if (op == null || (op.getOpcode() != PcodeOp.CALLIND && op.getOpcode() != PcodeOp.CALL) || !seen.add(op)) continue;
+            if (op == null || (op.getOpcode() != PcodeOp.CALLIND && op.getOpcode() != PcodeOp.CALL && op.getOpcode() != PcodeOp.BRANCHIND && op.getOpcode() != PcodeOp.RETURN) || !seen.add(op)) continue;
             StringBuilder sb = new StringBuilder("CALLDBG " + PcodeOp.getMnemonic(op.getOpcode()) + " first-token[" + t.getText().replace("\n", "NL") + "] ");
             for (int k = 0; k < op.getNumInputs(); k++) { sb.append(" in").append(k).append("=").append(vn(op.getInput(k))); }
             sb.append(" out=").append(vn(op.getOutput()));
@@ -68,6 +68,7 @@ public class DecompAll extends GhidraScript {
     // _gleUpdateFogData: the rebuilt called the fog function with r3 = the float's bits, ctx in r5, and stored (float)r3). Ghidra's call op knows the REGISTERS (inputs r3..r10 / f1..f13, an 8-byte output =
     // a double result in f1): rebuild the call from them: cast the function pointer to a prototype whose positional ABI assignment gives exactly those registers (integers in ascending register order, doubles in
     // FPR order, a double consuming two GPR slots, filler 0 / 0.0 for registers the stock leaves alone) and a double return when the output is 8 bytes.
+    ghidra.program.model.pcode.HighFunction curHF;
     String regName(Varnode v) {
         if (v == null || !v.getAddress().isRegisterAddress()) return null;
         ghidra.program.model.lang.Register r = currentProgram.getLanguage().getRegister(v.getAddress(), v.getSize());
@@ -98,7 +99,7 @@ public class DecompAll extends GhidraScript {
     String regsOf(PcodeOp op) { StringBuilder s = new StringBuilder("["); for (int k = 1; k < op.getNumInputs(); k++) { Varnode v = op.getInput(k); String rn = regName(v); s.append(rn != null ? rn : (v.getAddress().getAddressSpace().getName() + ":" + Long.toHexString(v.getOffset()))).append("/").append(v.getSize()).append(' '); } Varnode o = op.getOutput(); s.append("-> ").append(o == null ? "none" : o.getSize() + ""); return s.append("]").toString(); }
     static String ctxOf(List<ClangToken> toks, int i) { StringBuilder s = new StringBuilder(); for (int k = Math.max(0, i - 2); k < Math.min(toks.size(), i + 40); k++) { String x = toks.get(k).getText(); if (!x.trim().isEmpty()) s.append(x); } return s.toString(); }
     int typedCalls(List<ClangToken> toks, String[] txt, boolean[] gone, int[] open, int[] close, int[] skipped) {
-        int n = toks.size(), done = 0;
+        int n = toks.size(), done = 0, passThrough = 0;
         List<Integer> starts = new ArrayList<>(); Set<PcodeOp> seen = new HashSet<>();
         for (int i = 0; i < n; i++) { ClangToken t = toks.get(i); PcodeOp op = t.getPcodeOp(); if (op != null && op.getOpcode() == PcodeOp.CALLIND && seen.add(op) && t instanceof ClangOpToken && t.getText().trim().equals("*")) starts.add(i); }
         for (int si = starts.size() - 1; si >= 0; si--) {            // the later in the stream first: an inner call is rewritten before the arguments of the outer one are rendered
@@ -118,9 +119,9 @@ public class DecompAll extends GhidraScript {
             Varnode out = op.getOutput(); boolean fret = out != null && out.getSize() == 8;
             for (int k = 1; k <= nin; k++) if (op.getInput(k).getSize() == 8) hasFReg = true;
             boolean ev = hasFReg || fret;      // only calls with float evidence matter (an int-only call is compiled right by the K&R rules)
-            if (nin == 0) { if (!fret) continue; ok = true; }
+            if (nin == 0) ok = true;
             if (!ok) { if (ev) { skipped[0]++; System.out.println("TYPEDSKIP bad-input-regs " + regsOf(op) + " " + ctxOf(toks, i)); } continue; }
-            if (!anyF && !fret) continue;
+            boolean needTyped = anyF || fret, passAdded = false;
             // the callee's closing paren
             int depth = 1, pc = -1; for (int p = i + 1; p < n; p++) { String x = toks.get(p).getText().trim(); if (x.equals("(")) depth++; else if (x.equals(")")) { depth--; if (depth == 0) { pc = p; break; } } }
             if (pc < 0) { skipped[0]++; System.out.println("TYPEDSKIP no-callee-close " + regsOf(op) + " " + ctxOf(toks, i)); continue; }
@@ -136,9 +137,34 @@ public class DecompAll extends GhidraScript {
             for (int r = ao + 1; r < n; r++) { ClangToken t = toks.get(r); String x = t.getText().trim();
                 if (x.equals("(")) depth++; else if (x.equals(")")) { depth--; if (depth == 0) { ac = r; break; } }
                 else if (x.equals(",") && depth == 1 && t.getPcodeOp() == op) seps.add(r); }
-            if (ac < 0 || seps.size() + 1 != nin) { if (nin == 0 && ac == ao + 1 + 0) { } else { skipped[0]++; System.out.println("TYPEDSKIP arg-count " + ctxOf(toks, i)); continue; } }
+            boolean emptyArgs = ac > ao; for (int e = ao + 1; e < ac && emptyArgs; e++) if (!toks.get(e).getText().trim().isEmpty()) emptyArgs = false;
+            if (ac < 0 || (nin == 0 ? !emptyArgs : seps.size() + 1 != nin)) { if (false) { } else { skipped[0]++; System.out.println("TYPEDSKIP arg-count " + ctxOf(toks, i)); continue; } }
             String[] at = new String[nin];
             for (int k = 0; k < nin; k++) { int a0 = k == 0 ? ao + 1 : seps.get(k - 1) + 1; int a1 = k == nin - 1 ? ac - 1 : seps.get(k) - 1; at[k] = render(txt, gone, open, close, a0, a1); }
+            // a TAIL call (`(*fp)(...); return;` / `return (*fp)(...)`): the integer registers that pass through from function entry (the context in r3...) are not call inputs in Ghidra's
+            // model, but the callee reads them: forward the function's own register parameters r3..r10 when Ghidra listed no integer input
+            boolean tail = false;
+            { int q = ac + 1; while (q < n && (toks.get(q).getText().trim().isEmpty())) q++;
+              if (q < n && toks.get(q).getText().trim().equals(";")) { q++; while (q < n && toks.get(q).getText().trim().isEmpty()) q++; if (q < n && toks.get(q).getText().trim().equals("return")) tail = true; }
+              int b0 = i - 1; while (b0 >= 0 && (toks.get(b0).getText().trim().isEmpty() || toks.get(b0).getText().trim().equals("("))) b0--;
+              if (b0 >= 0 && toks.get(b0).getText().trim().equals("return")) tail = true; }
+            int ints0 = 0; for (int k = 0; k < nin; k++) if (!isF[k]) ints0++;
+            if (tail && ints0 == 0 && curHF != null) {
+                ghidra.program.model.pcode.LocalSymbolMap lsm = curHF.getLocalSymbolMap();
+                List<int[]> xn = new ArrayList<>(); List<String> xt = new ArrayList<>();
+                for (int pi = 0; pi < lsm.getNumParams(); pi++) {
+                    ghidra.program.model.pcode.HighSymbol hs = lsm.getParamSymbol(pi); if (hs == null || hs.getStorage() == null || hs.getStorage().getRegister() == null) continue;
+                    String rn = hs.getStorage().getRegister().getName(); if (!rn.matches("r([3-9]|10)") || hs.getStorage().size() != 4) continue;
+                    xn.add(new int[]{Integer.parseInt(rn.substring(1))}); xt.add(hs.getName());
+                }
+                if (!xn.isEmpty()) {
+                    int nn = nin + xn.size(); int[] num2 = new int[nn]; boolean[] isF2 = new boolean[nn]; String[] at2 = new String[nn];
+                    for (int k = 0; k < nin; k++) { num2[k] = num[k]; isF2[k] = isF[k]; at2[k] = at[k]; }
+                    for (int k = 0; k < xn.size(); k++) { num2[nin + k] = xn.get(k)[0]; isF2[nin + k] = false; at2[nin + k] = xt.get(k); }
+                    num = num2; isF = isF2; at = at2; nin = nn; passThrough++; passAdded = true;
+                }
+            }
+            if (!needTyped && !passAdded) continue;
             // the prototype: positional parameters whose ABI registers are the stock's
             List<int[]> ints = new ArrayList<>(), flts = new ArrayList<>();
             for (int k = 0; k < nin; k++) (isF[k] ? flts : ints).add(new int[]{num[k], k});
@@ -268,6 +294,7 @@ public class DecompAll extends GhidraScript {
                     if ((System.getenv("DECOMP_PAREN_FLOAT") != null || System.getenv("DECOMP_TYPED_CALLS") != null) && res.getCCodeMarkup() != null) {
                         if (System.getenv("DECOMP_CALL_DEBUG") != null) callDebug(res.getCCodeMarkup());
                         if (System.getenv("DECOMP_EXTRA_DEBUG") != null) extraDebug(res, fn.getName());
+                        curHF = res.getHighFunction();
                         int[] cnt = new int[3]; String c2 = parenthesised(res.getCCodeMarkup(), cnt);
                         if (c2 != null && (cnt[0] > 0 || cnt[1] > 0)) { c = c2; if (cnt[0] > 0) { parenFuncs++; parenSites += cnt[0]; } if (cnt[1] > 0) { typedFuncs++; typedSites += cnt[1]; } }
                         callSkipped += cnt[2];
